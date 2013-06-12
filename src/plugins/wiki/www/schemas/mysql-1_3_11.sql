@@ -1,4 +1,3 @@
--- $Id: mysql-1_3_11.sql 6203 2008-08-26 13:23:56Z vargenau $
 -- phpwiki 1.3.11 upgrade from 1.3.10
 
 -- if ACCESS_LOG_SQL > 0

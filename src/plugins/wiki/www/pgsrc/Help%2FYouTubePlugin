@@ -1,6 +1,5 @@
-Date: Thu,  9 Dec 2010 14:49:00 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FYouTubePlugin 7756 2010-12-09 13:49:21Z vargenau $
+Date: Fri,  7 Dec 2012 14:58:45 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FYouTubePlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -119,7 +118,7 @@ Content-Transfer-Encoding: binary
 * [[Help:VideoPlugin]]
 
 == Author ==
-* [[PhpWiki:ReiniUrban|Reini Urban]]
+* [[Help:Reini Urban|Reini Urban]]
 
 <noinclude>
 ----

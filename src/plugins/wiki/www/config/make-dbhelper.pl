@@ -1,6 +1,5 @@
 #!/usr/bin/perl -sn
 # makefile helper to extract various settings from config/config.ini
-# $Id: make-dbhelper.pl 6200 2008-08-26 12:57:28Z vargenau $
 
 #if ($v eq 'DATABASE_TYPE' and /^\s*DATABASE_TYPE\s*=\s*(\w+)/) {
 #    print "$1\n";

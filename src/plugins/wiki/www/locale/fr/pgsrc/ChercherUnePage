@@ -1,10 +1,9 @@
 Date: Wed, 26 Jan 2011 15:38:21 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: ChercherUnePage 7904 2011-01-26 14:39:55Z vargenau $
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=ChercherUnePage;
   flags=PAGE_LOCKED;
-  charset=utf-8
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 Voici quelques bons points de départ pour la navigation.

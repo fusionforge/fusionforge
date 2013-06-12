@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: HelloWorld.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  *
@@ -38,35 +38,31 @@ if (!defined('THE_END'))
     define('THE_END', "!");
 
 class WikiPlugin_HelloWorld
-extends WikiPlugin
+    extends WikiPlugin
 {
-    // Four required functions in a WikiPlugin.
-
-    function getName () {
-        return _("HelloWorld");
-    }
-
-    function getDescription () {
-        return _("Simple Sample Plugin");
-
+    function getDescription()
+    {
+        return _("Simple Sample Plugin.");
     }
 
     // Establish default values for each of this plugin's arguments.
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array('salutation' => "Hello,",
-                     'name'       => "World");
+            'name' => "World");
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         extract($this->getArgs($argstr, $request));
 
         // Any text that is returned will not be further transformed,
         // so use html where necessary.
         $html = HTML::tt(fmt('%s: %s', $salutation, WikiLink($name, 'auto')),
-                         THE_END);
+            THE_END);
         return $html;
     }
-};
+}
 
 // Local Variables:
 // mode: php

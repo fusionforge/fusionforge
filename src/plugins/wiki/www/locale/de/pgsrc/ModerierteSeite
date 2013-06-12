@@ -1,11 +1,10 @@
-Date: Fri, 10 Sep 2010 13:48:42 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: ModerierteSeite 7682 2010-09-10 12:03:36Z vargenau $
+Date: Fri, 11 Jan 2013 11:17:06 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=ModerierteSeite;
   flags="LOCKED";
   markup=2;
-  charset=utf-8
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 <<ModeratedPage >>
@@ -42,7 +41,7 @@ In case of multiple moderators: first comes, first serves.
 
 == Plugin Arguments
 
-* moderators: comma seperated list of registered usernames or groups.
+* moderators: comma separated list of registered usernames or groups.
   Each user should have his email defined in his prefs. Default: "Administrators" or 
   <<SystemInfo ADMIN_USER >>
 * requirelevel: one of 0, 1, 2 or 10 on which moderation is used. Default: false (use requireaccess instead)

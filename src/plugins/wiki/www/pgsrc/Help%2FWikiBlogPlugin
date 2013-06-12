@@ -1,6 +1,5 @@
-Date: Fri, 10 Sep 2010 13:46:13 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FWikiBlogPlugin 7682 2010-09-10 12:03:36Z vargenau $
+Date: Tue,  2 Apr 2013 10:23:48 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWikiBlogPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -10,7 +9,71 @@ Content-Transfer-Encoding: binary
 
 This simple [[Help:WikiPlugin|plugin]] allows blog-style entries on a page. Try making a few entries, and then look at [[RecentChanges]] to get an idea of how things work.
 
+This plugin shows 'blogs' (comments/news) associated with a
+particular page and provides an input form for adding a new blog.
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **page**
+| page which is blogged to 
+| Current page
+|- 
+| **order**
+|
+* 'normal' - place in chronological order
+* 'reverse' - place in reverse chronological order
+| normal
+|-
+| **mode**
+|
+* 'show' - only show old blogs
+* 'add' - only show entry box for new blog
+* 'show,add' - show old blogs then entry box
+* 'add,show' - show entry box followed by old blogs
+| show,add
+|}
+
+== Usage ==
+
+Add {{{<<WikiBlog>>}}} at your ~PersonalPage and BlogArchives and
+BlogJournal will find the Blog entries automatically.
+
+Now it is also the base class for all attachable pagetypes:
+"wikiblog", "comment" and "wikiforum"
+
+== Hints/comments ==
+
+To have the blog show up on a separate page:
+
+On ~TopPage, use {{{<<WikiBlog mode=add>>}}}
+Create ~TopPage/Blog with this page as actionpage:
+{{{<<WikiBlog pagename=TopPage mode=show>>}}}
+
+To have the main ADMIN_USER Blog appear under Blog and not under WikiBlog/Blog
+or ~UserName/Blog as for other users blogs,
+define BLOG_DEFAULT_EMPTY_PREFIX=true
+use the page Blog as basepage
+and user="" (as default for ADMIN or current user) and pagename="Blog"
+in the various blog plugins (BlogArchives, BlogJournal)
+
+== Example ==
+
 <<WikiBlog>>
+
+== Author ==
+* Michael Van Dam, major refactor by [[Help:Jeff Dairiki|Jeff Dairiki]] (as ~AddComment)
+* Changed as baseclass to ~AddComment and ~WikiForum and ~EditToolbar integration by [[Help:Reini Urban|Reini Urban]].
+
+
+== See Also ==
+* [[Help:BlogJournalPlugin]]
+* [[Help:BlogArchivesPlugin]]
 
 <noinclude>
 ----

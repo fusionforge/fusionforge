@@ -1,4 +1,4 @@
-<?php // -*-php-*-
+<?php
 /* 
 PrettyWiki startup script.
 Sample to override the default wiki (Theme, Language, DB, ...).
@@ -34,4 +34,3 @@ include "index.php";
 
 // Start the wiki
 include "lib/main.php";
-?>

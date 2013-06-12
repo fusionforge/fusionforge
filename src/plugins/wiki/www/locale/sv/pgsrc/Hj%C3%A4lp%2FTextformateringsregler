@@ -1,10 +1,9 @@
-Date: Fri, 10 Sep 2010 13:48:48 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Hj%C3%A4lp%2FTextformateringsregler 7873 2011-01-25 14:31:48Z vargenau $
+Date: Wed, 19 Dec 2012 13:19:42 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Hj%C3%A4lp%2FTextformateringsregler;
   flags=PAGE_LOCKED;
-  charset=utf-8
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 ! Översikt
@@ -74,7 +73,7 @@ kommer inte att fungera''
 * Du kan undvika att länkar skapas genom att sätta "!" framför ordet som du inte vill vara en länk, t.ex. !InteEnWikilänk, !http://inte.heller.en.länk/
 * You can create footnotes by using [[1], [[2], [[3], ... like this here [1]. See footnote for counterpart.  (If the [[ is in the first column, it is a footnote ''definition'' rather than a footnote ''reference'' [1].)
 * Det gamla sättet att skapa länkar av URL:er stöds fortfarande: Föregå varje URL med "http:", "ftp:" eller "mailto:" för att skapa länkar automatiskt, så här: http://c2.com/
-* Bilder med URL:er som slutar med .png, .gif eller .jpg innanför hakparenteser läggs in i dokumentet av sig själv: [http://phpwiki.sourceforge.net/demo/themes/default/images/png.png]
+* Bilder med URL:er som slutar med .png, .gif eller .jpg innanför hakparenteser läggs in i dokumentet av sig själv: [http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/png.png]
 
 ! Tables
 

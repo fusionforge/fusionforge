@@ -1,11 +1,10 @@
 Date: Thu, 27 Jan 2011 18:00:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FD%C3%A9tailsTechniques 7919 2011-01-27 17:02:14Z vargenau $
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FD%C3%A9tailsTechniques;
   flags="";
   markup=2;
-  charset=utf-8
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 ~PhpWiki est écrit en PHP, langage de scripting côté serveur, disponible 

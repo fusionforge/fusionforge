@@ -1,5 +1,4 @@
-<?php // -*-php-*-
-// $Id: ADODB_mssql.php 7956 2011-03-03 17:08:31Z vargenau $
+<?php
 
 /**
  * MS SQL extensions for the ADODB DB backend.
@@ -8,14 +7,15 @@
 require_once 'lib/WikiDB/backend/ADODB.php';
 
 class WikiDB_backend_ADODB_mssql
-extends WikiDB_backend_ADODB
+    extends WikiDB_backend_ADODB
 {
     /**
      * Constructor.
      */
-    function WikiDB_backend_ADODB_mssql($dbparams) {
+    function WikiDB_backend_ADODB_mssql($dbparams)
+    {
         // Lowercase Assoc arrays
-        define('ADODB_ASSOC_CASE',0);
+        define('ADODB_ASSOC_CASE', 0);
 
         // Backend constructor
         $this->WikiDB_backend_ADODB($dbparams);
@@ -27,11 +27,12 @@ extends WikiDB_backend_ADODB
 
         $this->_prefix = isset($dbparams['prefix']) ? $dbparams['prefix'] : '';
     }
-  
+
     /**
      * Pack tables.
      */
-    function optimize() {
+    function optimize()
+    {
         // Do nothing here -- Leave that for the DB
         // Cost Based Optimizer tuning vary from version to version
         return 1;
@@ -44,11 +45,12 @@ extends WikiDB_backend_ADODB
      * understand phpWiki locking ;-)
      *
      */
-    function _lock_tables($tables, $write_lock = true) {
+    function _lock_tables($tables, $write_lock = true)
+    {
         if (!$tables) return;
 
         $dbh = &$this->_dbh;
-        if($write_lock) {
+        if ($write_lock) {
             // Next line is default behaviour, so just skip it
             // $dbh->Execute("SET TRANSACTION READ WRITE");
             foreach ($tables as $table) {
@@ -66,31 +68,35 @@ extends WikiDB_backend_ADODB
     /**
      * Release the locks.
      */
-    function _unlock_tables($tables) {
+    function _unlock_tables($tables)
+    {
         $dbh = &$this->_dbh;
         $dbh->Execute("COMMIT WORK");
     }
 
     // Search callabcks
     // Page name
-    function _sql_match_clause($word) {
+    function _sql_match_clause($word)
+    {
         $word = preg_replace('/(?=[%_\\\\])/', "\\", $word);
         $word = $this->_dbh->qstr("%$word%");
         return "LOWER(pagename) LIKE $word";
     }
 
     // Fulltext -- case sensitive :-\
-    function _fullsearch_sql_match_clause($word) {
+    function _fullsearch_sql_match_clause($word)
+    {
         $word = preg_replace('/(?=[%_\\\\])/', "\\", $word);
         $wordq = $this->_dbh->qstr("%$word%");
         return "LOWER(pagename) LIKE $wordq "
-               . "OR CHARINDEX(content, '$word') > 0";
+            . "OR CHARINDEX(content, '$word') > 0";
     }
 
     /**
      * Serialize data
      */
-    function _serialize($data) {
+    function _serialize($data)
+    {
         if (empty($data))
             return '';
         assert(is_array($data));
@@ -100,11 +106,12 @@ extends WikiDB_backend_ADODB
     /**
      * Unserialize data
      */
-    function _unserialize($data) {
+    function _unserialize($data)
+    {
         return empty($data) ? array() : unserialize(stripslashes($data));
     }
 
-};
+}
 
 // Local Variables:
 // mode: php

@@ -1,10 +1,9 @@
 Date: Wed,  9 Mar 2011 18:04:46 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Framsida 7997 2011-03-15 17:26:17Z vargenau $
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Framsida;
   flags="";
-  charset=utf-8
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 * Vad är [[Hjälp:WikiWikiWeb|WikiWikiWeb]]? En beskrivning av dess användning.

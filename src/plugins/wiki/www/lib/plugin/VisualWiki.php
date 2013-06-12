@@ -1,7 +1,7 @@
-<?php // -*-php-*-
-// $Id: VisualWiki.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
- * Copyright (C) 2002 Johannes Große (Johannes Gro&szlig;e)
+ * Copyright (C) 2002 Johannes Große
  *
  * This file is part of PhpWiki.
  *
@@ -22,9 +22,6 @@
 
 /**
  * Produces graphical site map of PhpWiki
- * Example for an image map creating plugin. It produces a graphical
- * sitemap of PhpWiki by calling the <code>dot</code> commandline tool
- * from graphviz (http://www.graphviz.org).
  * @author Johannes Große
  * @version 0.9
  */
@@ -35,55 +32,41 @@ if (!defined('VISUALWIKI_ALLOWOPTIONS'))
 require_once 'lib/plugin/GraphViz.php';
 
 class WikiPlugin_VisualWiki
-extends WikiPlugin_GraphViz
+    extends WikiPlugin_GraphViz
 {
     /**
      * Sets plugin type to map production
      */
-    function getPluginType() {
+    function getPluginType()
+    {
         return ($GLOBALS['request']->getArg('debug')) ? PLUGIN_CACHED_IMG_ONDEMAND
-                                                          : PLUGIN_CACHED_MAP;
+            : PLUGIN_CACHED_MAP;
     }
 
-    /**
-     * Sets the plugin's name to VisualWiki. It can be called by
-     * <code>&lt;?plugin VisualWiki?&gt;</code>, now. This
-     * name must correspond to the filename and the class name.
-     */
-    function getName() {
-        return "VisualWiki";
-    }
-
-    /**
-     * Sets textual description.
-     */
-    function getDescription() {
+    function getDescription()
+    {
         return _("Visualizes the Wiki structure in a graph using the 'dot' commandline tool from graphviz.");
     }
 
-    /**
-     * Returns default arguments. This is put into a separate
-     * function to allow its usage by both <code>getDefaultArguments</code>
-     * and <code>checkArguments</code>
-     */
-    function defaultarguments() {
-        return array('imgtype'        => 'png',
-                     'width'          => false, // was 5, scale it automatically
-                     'height'         => false, // was 7, scale it automatically
-                     'colorby'        => 'age', // sort by 'age' or 'revtime'
-                     'fillnodes'      => 'off',
-                     'label'          => 'name',
-                     'shape'          => 'ellipse',
-                     'large_nb'       => 5,
-                     'recent_nb'      => 5,
-                     'refined_nb'     => 15,
-                     'backlink_nb'    => 5,
-                     'neighbour_list' => '',
-                     'exclude_list'   => '',
-                     'include_list'   => '',
-                     'fontsize'       => 9,
-                     'debug'          => false,
-                     'help'           => false );
+    function defaultArguments()
+    {
+        return array('imgtype' => 'png',
+            'width' => false, // was 5, scale it automatically
+            'height' => false, // was 7, scale it automatically
+            'colorby' => 'age', // sort by 'age' or 'revtime'
+            'fillnodes' => 'off',
+            'label' => 'name',
+            'shape' => 'ellipse',
+            'large_nb' => 5,
+            'recent_nb' => 5,
+            'refined_nb' => 15,
+            'backlink_nb' => 5,
+            'neighbour_list' => '',
+            'exclude_list' => '',
+            'include_list' => '',
+            'fontsize' => 9,
+            'debug' => false,
+            'help' => false);
     }
 
     /**
@@ -95,7 +78,8 @@ extends WikiPlugin_GraphViz
      * to allow no options to be set and use only the default parameters.
      * This will need an disk space of about 20 Kbyte all the time.
      */
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         if (VISUALWIKI_ALLOWOPTIONS)
             return $this->defaultarguments();
         else
@@ -106,7 +90,8 @@ extends WikiPlugin_GraphViz
      * Substitutes each forbidden parameter value by the default value
      * defined in <code>defaultarguments</code>.
      */
-    function checkArguments(&$arg) {
+    function checkArguments(&$arg)
+    {
         extract($arg);
         $def = $this->defaultarguments();
         if (($width < 3) || ($width > 15))
@@ -119,7 +104,8 @@ extends WikiPlugin_GraphViz
             $arg['label'] = $def['label'];
 
         if (!in_array($shape, array('ellipse', 'box', 'point', 'circle',
-                                    'plaintext')))
+            'plaintext'))
+        )
             $arg['shape'] = $def['shape'];
         if (!in_array($colorby, array('age', 'revtime')))
             $arg['colorby'] = $def['colorby'];
@@ -127,9 +113,9 @@ extends WikiPlugin_GraphViz
             $arg['fillnodes'] = $def['fillnodes'];
         if (($large_nb < 0) || ($large_nb > 50))
             $arg['large_nb'] = $def['large_nb'];
-        if (($recent_nb < 0)  || ($recent_nb > 50))
+        if (($recent_nb < 0) || ($recent_nb > 50))
             $arg['recent_nb'] = $def['recent_nb'];
-        if (($refined_nb < 0 ) || ( $refined_nb > 50))
+        if (($refined_nb < 0) || ($refined_nb > 50))
             $arg['refined_nb'] = $def['refined_nb'];
         if (($backlink_nb < 0) || ($backlink_nb > 50))
             $arg['backlink_nb'] = $def['backlink_nb'];
@@ -143,13 +129,17 @@ extends WikiPlugin_GraphViz
     /**
      * Checks options, creates help page if necessary, calls both
      * database access and image map production functions.
+     * @param WikiDB $dbi
+     * @param array $argarray
+     * @param Request $request
      * @return array($map,$html)
      */
-    function getMap($dbi, $argarray, $request) {
+    function getMap($dbi, $argarray, $request)
+    {
         if (!VISUALWIKI_ALLOWOPTIONS)
             $argarray = $this->defaultarguments();
         $this->checkArguments($argarray);
-        $request->setArg('debug',$argarray['debug']);
+        $request->setArg('debug', $argarray['debug']);
         //extract($argarray);
         if ($argarray['help'])
             return array($this->helpImage(), ' '); // FIXME
@@ -157,7 +147,7 @@ extends WikiPlugin_GraphViz
         $this->extract_wikipages($dbi, $argarray);
         /* ($dbi,  $large, $recent, $refined, $backlink,
             $neighbour, $excludelist, $includelist, $color); */
-            $result = $this->invokeDot($argarray);
+        $result = $this->invokeDot($argarray);
         if (isa($result, 'HtmlElement'))
             return array(false, $result);
         else
@@ -165,68 +155,70 @@ extends WikiPlugin_GraphViz
         /* => ($width, $height, $color, $shape, $text); */
     }
 
-    // ------------------------------------------------------------------------------------------
-
     /**
      * Returns an image containing a usage description of the plugin.
      * @return string image handle
      */
-    function helpImage() {
+    function helpImage()
+    {
         $def = $this->defaultarguments();
         $other_imgtypes = $GLOBALS['PLUGIN_CACHED_IMGTYPES'];
         unset ($other_imgtypes[$def['imgtype']]);
         $helparr = array(
-            '<<'.$this->getName() .
-            ' img'             => ' = "' . $def['imgtype'] . "(default)|" . join('|',$GLOBALS['PLUGIN_CACHED_IMGTYPES']).'"',
-            'width'            => ' = "width in inches"',
-            'height'           => ' = "height in inches"',
-            'fontname'         => ' = "font family"',
-            'fontsize'         => ' = "fontsize in points"',
-            'colorby'          => ' = "age|revtime|none"',
-            'fillnodes'        => ' = "on|off"',
-            'shape'            => ' = "ellipse(default)|box|circle|point"',
-            'label'            => ' = "name|number"',
-            'large_nb'         => ' = "number of largest pages to be selected"',
-            'recent_nb'        => ' = "number of youngest pages"',
-            'refined_nb'       => ' = "#pages with smallest time between revisions"',
-            'backlink_nb'      => ' = "number of pages with most backlinks"',
-            'neighbour_list'   => ' = "find pages linked from and to these pages"',
-            'exclude_list'     => ' = "colon separated list of pages to be excluded"',
-            'include_list'     => ' = "colon separated list"     >>'
-            );
+            '<<' . $this->getName() .
+                ' img' => ' = "' . $def['imgtype'] . "(default)|" . join('|', $GLOBALS['PLUGIN_CACHED_IMGTYPES']) . '"',
+            'width' => ' = "width in inches"',
+            'height' => ' = "height in inches"',
+            'fontname' => ' = "font family"',
+            'fontsize' => ' = "fontsize in points"',
+            'colorby' => ' = "age|revtime|none"',
+            'fillnodes' => ' = "on|off"',
+            'shape' => ' = "ellipse(default)|box|circle|point"',
+            'label' => ' = "name|number"',
+            'large_nb' => ' = "number of largest pages to be selected"',
+            'recent_nb' => ' = "number of youngest pages"',
+            'refined_nb' => ' = "#pages with smallest time between revisions"',
+            'backlink_nb' => ' = "number of pages with most backlinks"',
+            'neighbour_list' => ' = "find pages linked from and to these pages"',
+            'exclude_list' => ' = "colon separated list of pages to be excluded"',
+            'include_list' => ' = "colon separated list"     >>'
+        );
         $length = 0;
-        foreach($helparr as $alignright => $alignleft) {
+        foreach ($helparr as $alignright => $alignleft) {
             $length = max($length, strlen($alignright));
         }
-        $helptext ='';
-        foreach($helparr as $alignright => $alignleft) {
+        $helptext = '';
+        foreach ($helparr as $alignright => $alignleft) {
             $helptext .= substr('                                                        '
-                                . $alignright, -$length).$alignleft."\n";
+                . $alignright, -$length) . $alignleft . "\n";
         }
         return $this->text2img($helptext, 4, array(1, 0, 0),
-                               array(255, 255, 255));
+            array(255, 255, 255));
     }
-
 
     /**
      * Selects the first (smallest or biggest) WikiPages in
      * a given category.
      *
-     * @param  number   integer  number of page names to be found
-     * @param  category string   attribute of the pages which is used
+     * @param int $number
+     * @param string $category
+     * @param bool $minimum
+     * @internal param int $number number of page names to be found
+     * @internal param string $category attribute of the pages which is used
      *                           to compare them
-     * @param  minimum  boolean  true finds smallest, false finds biggest
+     * @internal param bool $minimum true finds smallest, false finds biggest
      * @return array list of page names found to be the best
      */
-    function findbest($number, $category, $minimum ) {
+    function findbest($number, $category, $minimum)
+    {
         // select the $number best in the category '$category'
         $pages = &$this->pages;
         $names = &$this->names;
 
         $selected = array();
         $i = 0;
-        foreach($names as $name) {
-            if ($i++>=$number)
+        foreach ($names as $name) {
+            if ($i++ >= $number)
                 break;
             $selected[$name] = $pages[$name][$category];
         }
@@ -235,7 +227,7 @@ extends WikiPlugin_GraphViz
 
         $i = 0;
         foreach ($names as $name) {
-            if ($i++<$number)
+            if ($i++ < $number)
                 continue;
             if ($minimum) {
                 if (($crit = $pages[$name][$category]) < $compareto) {
@@ -244,7 +236,7 @@ extends WikiPlugin_GraphViz
                     array_pop($selected);
                     $compareto = end($selected);
                 }
-            } elseif (($crit = $pages[$name][$category]) > $compareto)  {
+            } elseif (($crit = $pages[$name][$category]) > $compareto) {
                 $selected[$name] = $crit;
                 arsort($selected, SORT_NUMERIC);
                 array_pop($selected);
@@ -256,47 +248,49 @@ extends WikiPlugin_GraphViz
         return array_keys($selected);
     }
 
-
     /**
-    * Extracts a subset of all pages from the wiki and find their
-    * connections to other pages. Also collects some page features
-    * like size, age, revision number which are used to find the
-    * most attractive pages.
-    *
-    * @param  dbi         WikiDB   database handle to access all Wiki pages
-    * @param  LARGE       integer  number of largest pages which should
-    *                              be included
-    * @param  RECENT      integer  number of the youngest pages to be included
-    * @param  REFINED     integer  number of the pages with shortes revision
-    *                              interval
-    * @param  BACKLINK    integer  number of the pages with most backlinks
-    * @param  EXCLUDELIST string   colon ':' separated list of page names which
-    *                              should not be displayed (like PhpWiki, for
-    *                              example)
-    * @param  INCLUDELIST string   colon separated list of pages which are
-    *                              always included (for example your own
-    *                              page :)
-    * @param  COLOR       string   'age', 'revtime' or 'none'; Selects which
-    *                              page feature is used to determine the
-    *                              filling color of the nodes in the graph.
-    * @return void
-    */
-    function extract_wikipages($dbi, $argarray) {
+     * Extracts a subset of all pages from the wiki and find their
+     * connections to other pages. Also collects some page features
+     * like size, age, revision number which are used to find the
+     * most attractive pages.
+     *
+     * @param WikiDB $dbi
+     * @param $argarray
+     * @internal param \WikiDB $dbi database handle to access all Wiki pages
+     * @internal param int $LARGE number of largest pages which should
+     *                              be included
+     * @internal param int $RECENT number of the youngest pages to be included
+     * @internal param int $REFINED number of the pages with shortes revision
+     *                              interval
+     * @internal param int $BACKLINK number of the pages with most backlinks
+     * @internal param string $EXCLUDELIST colon ':' separated list of page names which
+     *                              should not be displayed (like PhpWiki, for
+     *                              example)
+     * @internal param string $INCLUDELIST colon separated list of pages which are
+     *                              always included (for example your own
+     *                              page :)
+     * @internal param string $COLOR 'age', 'revtime' or 'none'; Selects which
+     *                              page feature is used to determine the
+     *                              filling color of the nodes in the graph.
+     * @return void
+     */
+    function extract_wikipages($dbi, $argarray)
+    {
         // $LARGE, $RECENT, $REFINED, $BACKLINK, $NEIGHBOUR,
         // $EXCLUDELIST, $INCLUDELIST,$COLOR
         $now = time();
 
         extract($argarray);
         // FIXME: gettextify?
-        $exclude_list   = $exclude_list ? explode(':', $exclude_list) : array();
-        $include_list   = $include_list ? explode(':', $include_list) : array();
+        $exclude_list = $exclude_list ? explode(':', $exclude_list) : array();
+        $include_list = $include_list ? explode(':', $include_list) : array();
         $neighbour_list = $neighbour_list ? explode(':', $neighbour_list) : array();
 
         // remove INCLUDED from EXCLUDED, includes override excludes.
         if ($exclude_list and $include_list) {
-                $diff = array_diff($exclude_list, $include_list);
-                if ($diff)
-                    $exclude_list = $diff;
+            $diff = array_diff($exclude_list, $include_list);
+            if ($diff)
+                $exclude_list = $diff;
         }
 
         // collect all pages
@@ -308,7 +302,7 @@ extends WikiPlugin_GraphViz
 
             // skip excluded pages
             if (in_array($name, $exclude_list)) {
-                    $page->free();
+                $page->free();
                 continue;
             }
 
@@ -340,13 +334,13 @@ extends WikiPlugin_GraphViz
             $rev = $page->getCurrentRevision();
 
             $pages[$name] = array(
-                'age'         => $now - $rev->get('mtime'),
-                'revnr'       => $rev->getVersion(),
-                'links'       => array(),
+                'age' => $now - $rev->get('mtime'),
+                'revnr' => $rev->getVersion(),
+                'links' => array(),
                 'backlink_nb' => count($bconnection),
-                'backlinks'   => $bconnection,
-                'size'        => 1000 // FIXME
-                );
+                'backlinks' => $bconnection,
+                'size' => 1000 // FIXME
+            );
             $pages[$name]['revtime'] = $pages[$name]['age'] / ($pages[$name]['revnr']);
 
             unset($page);
@@ -355,17 +349,15 @@ extends WikiPlugin_GraphViz
         unset($allpages);
         $this->names = array_keys($pages);
 
-        $countpages = count($pages);
-
         // now select each page matching to given parameters
         $all_selected = array_unique(array_merge(
-            $this->findbest($recent_nb,   'age',         true),
-            $this->findbest($refined_nb,  'revtime',     true),
+            $this->findbest($recent_nb, 'age', true),
+            $this->findbest($refined_nb, 'revtime', true),
             $x = $this->findbest($backlink_nb, 'backlink_nb', false),
 //          $this->findbest($large_nb,    'size',        false),
             $include_list));
 
-        foreach($all_selected as $name)
+        foreach ($all_selected as $name)
             if (isset($pages[$name]))
                 $newpages[$name] = $pages[$name];
         unset($this->names);
@@ -376,18 +368,16 @@ extends WikiPlugin_GraphViz
         unset($newpages);
         unset($all_selected);
 
-        $countpages = count($pages);
-
         // remove dead links and collect links
         reset($pages);
-        while( list($name, $page) = each($pages) ) {
+        while (list($name, $page) = each($pages)) {
             if (is_array($page['backlinks'])) {
                 reset($page['backlinks']);
-                while ( list($index, $link) = each( $page['backlinks'] ) ) {
-                    if ( !isset($pages[$link]) || $link == $name ) {
+                while (list($index, $link) = each($page['backlinks'])) {
+                    if (!isset($pages[$link]) || $link == $name) {
                         unset($pages[$name]['backlinks'][$index]);
                     } else {
-                        array_push($pages[$link]['links'],$name);
+                        array_push($pages[$link]['links'], $name);
                         //array_push($this->everylink, array($link,$name));
                     }
                 }
@@ -398,7 +388,7 @@ extends WikiPlugin_GraphViz
             return;
         list($oldestname) = $this->findbest(1, $colorby, false);
         $this->oldest = $pages[$oldestname][$colorby];
-        foreach($this->names as $name)
+        foreach ($this->names as $name)
             $pages[$name]['color'] = $this->getColor($pages[$name][$colorby] / $this->oldest);
     }
 
@@ -406,24 +396,26 @@ extends WikiPlugin_GraphViz
      * Creates the text file description of the graph needed to invoke
      * <code>dot</code>.
      *
-     * @param filename  string  name of the dot file to be created
-     * @param width     float   width of the output graph in inches
-     * @param height    float   height of the graph in inches
-     * @param colorby   string  color sceme beeing used ('age', 'revtime',
+     * @param string $filename
+     * @param bool $argarray
+     * @internal param string $filename name of the dot file to be created
+     * @internal param float $width width of the output graph in inches
+     * @internal param float $height height of the graph in inches
+     * @internal param string $colorby color sceme beeing used ('age', 'revtime',
      *                                                   'none')
-     * @param shape     string  node shape; 'ellipse', 'box', 'circle', 'point'
-     * @param label     string  'name': label by name,
+     * @internal param string $shape node shape; 'ellipse', 'box', 'circle', 'point'
+     * @internal param string $label 'name': label by name,
      *                          'number': label by unique number
      * @return boolean error status; true=ok; false=error
      */
-    function createDotFile($filename, $argarray) {
+    function createDotFile($filename, $argarray)
+    {
         extract($argarray);
         if (!$fp = fopen($filename, 'w'))
             return false;
 
         $fillstring = ($fillnodes == 'on') ? 'style=filled,' : '';
 
-        $ok = true;
         $names = &$this->names;
         $pages = &$this->pages;
         if ($names)
@@ -434,22 +426,20 @@ extends WikiPlugin_GraphViz
         if ($width and $height)
             $dot .= "    size=\"$width,$height\";\n    ";
 
-
         switch ($shape) {
-        case 'point':
-            $dot .= "edge [arrowhead=none];\nnode [shape=$shape,fontname=$fontname,width=0.15,height=0.15,fontsize=$fontsize];\n";
-            break;
-        case 'box':
-            $dot .= "node [shape=$shape,fontname=$fontname,width=0.4,height=0.4,fontsize=$fontsize];\n";
-            break;
-        case 'circle':
-            $dot .= "node [shape=$shape,fontname=$fontname,width=0.25,height=0.25,fontsize=$fontsize];\n";
-            break;
-        default :
-            $dot .= "node [fontname=$fontname,shape=$shape,fontsize=$fontsize];\n" ;
+            case 'point':
+                $dot .= "edge [arrowhead=none];\nnode [shape=$shape,fontname=$fontname,width=0.15,height=0.15,fontsize=$fontsize];\n";
+                break;
+            case 'box':
+                $dot .= "node [shape=$shape,fontname=$fontname,width=0.4,height=0.4,fontsize=$fontsize];\n";
+                break;
+            case 'circle':
+                $dot .= "node [shape=$shape,fontname=$fontname,width=0.25,height=0.25,fontsize=$fontsize];\n";
+                break;
+            default :
+                $dot .= "node [fontname=$fontname,shape=$shape,fontsize=$fontsize];\n";
         }
         $dot .= "\n";
-        $i = 0;
         foreach ($names as $name) {
 
             $url = rawurlencode($name);
@@ -461,48 +451,48 @@ extends WikiPlugin_GraphViz
             if ($colorby != 'none') {
                 $col = $pages[$name]['color'];
                 $dot .= sprintf(',%scolor="#%02X%02X%02X"', $fillstring,
-                                $col[0], $col[1], $col[2]);
+                    $col[0], $col[1], $col[2]);
             }
             $dot .= "];\n";
 
             if (!empty($pages[$name]['links'])) {
                 unset($linkarray);
                 if ($label != 'name')
-                    foreach($pages[$name]['links'] as $linkname)
+                    foreach ($pages[$name]['links'] as $linkname)
                         $linkarray[] = $nametonumber[$linkname] + 1;
                 else
                     $linkarray = $pages[$name]['links'];
-                $linkstring = join('"; "', $linkarray );
+                $linkstring = join('"; "', $linkarray);
 
                 $c = count($pages[$name]['links']);
                 $dot .= "        \"$nodename\" -> "
-                     . ($c>1?'{':'')
-                     . "\"$linkstring\";"
-                     . ($c>1?'}':'')
-                     . "\n";
+                    . ($c > 1 ? '{' : '')
+                    . "\"$linkstring\";"
+                    . ($c > 1 ? '}' : '')
+                    . "\n";
             }
         }
         if ($colorby != 'none') {
             $dot .= "\n    subgraph cluster_legend {\n"
-                 . "         node[fontname=$fontname,shape=box,width=0.4,height=0.4,fontsize=$fontsize];\n"
-                 . "         fillcolor=lightgrey;\n"
-                 . "         style=filled;\n"
-                 . "         fontname=$fontname;\n"
-                 . "         fontsize=$fontsize;\n"
-                 . "         label=\"".gettext("Legend")."\";\n";
-            $oldest= ceil($this->oldest / (24 * 3600));
+                . "         node[fontname=$fontname,shape=box,width=0.4,height=0.4,fontsize=$fontsize];\n"
+                . "         fillcolor=lightgrey;\n"
+                . "         style=filled;\n"
+                . "         fontname=$fontname;\n"
+                . "         fontsize=$fontsize;\n"
+                . "         label=\"" . gettext("Legend") . "\";\n";
+            $oldest = ceil($this->oldest / (24 * 3600));
             $max = 5;
             $legend = array();
-            for($i = 0; $i < $max; $i++) {
+            for ($i = 0; $i < $max; $i++) {
                 $time = floor($i / $max * $oldest);
-                $name = '"' . $time .' '. _("days") .'"';
-                $col = $this->getColor($i/$max);
+                $name = '"' . $time . ' ' . _("days") . '"';
+                $col = $this->getColor($i / $max);
                 $dot .= sprintf('       %s [%scolor="#%02X%02X%02X"];',
-                                $name, $fillstring, $col[0], $col[1], $col[2])
+                    $name, $fillstring, $col[0], $col[1], $col[2])
                     . "\n";
                 $legend[] = $name;
             }
-            $dot .= '        '. join(' -> ', $legend)
+            $dot .= '        ' . join(' -> ', $legend)
                 . ";\n    }\n";
         }
 
@@ -511,28 +501,31 @@ extends WikiPlugin_GraphViz
         $this->source = $dot;
         // write a temp file
         $ok = fwrite($fp, $dot);
-        $ok = fclose($fp) && $ok;  // close anyway
+        $ok = fclose($fp) && $ok; // close anyway
 
         return $ok;
     }
-
 
     /**
      * static workaround on broken Cache or broken dot executable,
      * called only if debug=static.
      *
      * @access private
-     * @param  url      string  url pointing to the image part of the map
-     * @param  map      string  &lt;area&gt; tags defining active
+     * @param string $url
+     * @param WikiDB $dbi
+     * @param array $argarray
+     * @param  request  Request ???
+     * @internal param string $url url pointing to the image part of the map
+     * @internal param string $map &lt;area&gt; tags defining active
      *                          regions in the map
-     * @param  dbi      WikiDB  database abstraction class
-     * @param  argarray array   complete (!) arguments to produce
+     * @internal param \WikiDB $dbi database abstraction class
+     * @internal param array $argarray complete (!) arguments to produce
      *                          image. It is not necessary to call
      *                          WikiPlugin->getArgs anymore.
-     * @param  request  Request ???
      * @return string html output
      */
-    function embedImg($url,&$dbi,$argarray,&$request) {
+    function embedImg($url, &$dbi, $argarray, &$request)
+    {
         if (!VISUALWIKI_ALLOWOPTIONS)
             $argarray = $this->defaultarguments();
         $this->checkArguments($argarray);
@@ -545,11 +538,11 @@ extends WikiPlugin_GraphViz
         // write to uploads and produce static url
         $file_dir = getUploadFilePath();
         $upload_dir = getUploadDataPath();
-        $tmpfile = tempnam($file_dir,"VisualWiki").".".$argarray['imgtype'];
+        $tmpfile = tempnam($file_dir, "VisualWiki") . "." . $argarray['imgtype'];
         WikiPluginCached::writeImage($argarray['imgtype'], $imagehandle, $tmpfile);
         ImageDestroy($imagehandle);
-        return WikiPluginCached::embedMap(1,$upload_dir.basename($tmpfile),$content['html'],
-                                          $dbi,$argarray,$request);
+        return WikiPluginCached::embedMap(1, $upload_dir . basename($tmpfile), $content['html'],
+            $dbi, $argarray, $request);
     }
 
     /**
@@ -557,21 +550,22 @@ extends WikiPlugin_GraphViz
      * and stores them in an array which may be accessed with
      * <code>getColor</code>.
      */
-    function createColors() {
+    function createColors()
+    {
         $predefcolors = array(
-             array('red' => 255, 'green' =>   0, 'blue' =>   0),
-             array('red' => 255, 'green' => 255, 'blue' =>   0),
-             array('red' =>   0, 'green' => 255, 'blue' =>   0),
-             array('red' =>   0, 'green' => 255, 'blue' => 255),
-             array('red' =>   0, 'green' =>   0, 'blue' => 255),
-             array('red' => 100, 'green' => 100, 'blue' => 100)
-             );
+            array('red' => 255, 'green' => 0, 'blue' => 0),
+            array('red' => 255, 'green' => 255, 'blue' => 0),
+            array('red' => 0, 'green' => 255, 'blue' => 0),
+            array('red' => 0, 'green' => 255, 'blue' => 255),
+            array('red' => 0, 'green' => 0, 'blue' => 255),
+            array('red' => 100, 'green' => 100, 'blue' => 100)
+        );
 
         $steps = 2;
         $numberofcolors = count($predefcolors) * $steps;
 
         $promille = -1;
-        foreach($predefcolors as $color) {
+        foreach ($predefcolors as $color) {
             if ($promille < 0) {
                 $oldcolor = $color;
                 $promille = 0;
@@ -579,9 +573,9 @@ extends WikiPlugin_GraphViz
             }
             for ($i = 0; $i < $steps; $i++)
                 $this->ColorTab[++$promille / $numberofcolors * 1000] = array(
-                    floor(interpolate( $oldcolor['red'],   $color['red'],   $i/$steps )),
-                    floor(interpolate( $oldcolor['green'], $color['green'], $i/$steps )),
-                    floor(interpolate( $oldcolor['blue'],  $color['blue'],  $i/$steps ))
+                    floor(interpolate($oldcolor['red'], $color['red'], $i / $steps)),
+                    floor(interpolate($oldcolor['green'], $color['green'], $i / $steps)),
+                    floor(interpolate($oldcolor['blue'], $color['blue'], $i / $steps))
                 );
             $oldcolor = $color;
         }
@@ -592,12 +586,14 @@ extends WikiPlugin_GraphViz
      * Translates a value from 0.0 to 1.0 into rainbow color.
      * red -&gt; orange -&gt; green -&gt; blue -&gt; gray
      *
-     * @param promille float value between 0.0 and 1.0
+     * @param float $promille
+     * @internal param float $promille value between 0.0 and 1.0
      * @return array(red,green,blue)
      */
-    function getColor($promille) {
-        foreach( $this->ColorTab as $pro => $col ) {
-            if ($promille*1000 < $pro)
+    function getColor($promille)
+    {
+        foreach ($this->ColorTab as $pro => $col) {
+            if ($promille * 1000 < $pro)
                 return $col;
         }
         $lastcol = end($this->ColorTab);
@@ -608,9 +604,13 @@ extends WikiPlugin_GraphViz
 /**
  * Linear interpolates a value between two point a and b
  * at a value pos.
+ * @param $a
+ * @param $b
+ * @param $pos
  * @return float  interpolated value
  */
-function interpolate($a, $b, $pos) {
+function interpolate($a, $b, $pos)
+{
     return $a + ($b - $a) * $pos;
 }
 

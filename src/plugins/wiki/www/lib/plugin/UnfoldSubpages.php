@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: UnfoldSubpages.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 2002,2004,2005 $ThePhpWikiProgrammingTeam
  *
@@ -34,43 +34,42 @@ require_once 'lib/TextSearchQuery.php';
 require_once 'lib/plugin/IncludePage.php';
 
 class WikiPlugin_UnfoldSubpages
-extends WikiPlugin_IncludePage
+    extends WikiPlugin_IncludePage
 {
-    function getName() {
-        return _("UnfoldSubpages");
+    function getDescription()
+    {
+        return _("Include the content of all SubPages of the current page.");
     }
 
-    function getDescription () {
-        return _("Includes the content of all SubPages of the current page.");
-    }
-
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array_merge
-            (
-             PageList::supportedArgs(),
-             array(
-                   'pagename' => '[pagename]', // default: current page
-                   //'header'  => '',  // expandable string
-                   'quiet'   => false, // print no header
-                   'sortby'   => '',    // [+|-]pagename, [+|-]mtime, [+|-]hits
-                   'maxpages' => false, // maximum number of pages to include (== limit)
-                   'smalltitle' => false, // if set, hide transclusion-title,
-                                           //  just have a small link at the start of
-                                            //  the page.
-                   'words'   => false,         // maximum number of words
-                                        //  per page to include
-                   'lines'   => false,         // maximum number of lines
-                                        //  per page to include
-                   'bytes'   => false,         // maximum number of bytes
-                                        //  per page to include
-                   'sections' => false, // maximum number of sections per page to include
-                   'section' => false,         // this named section per page only
-                   'sectionhead' => false // when including a named
-                                           //  section show the heading
-                   ));
+        (
+            PageList::supportedArgs(),
+            array(
+                'pagename' => '[pagename]', // default: current page
+                //'header'  => '',  // expandable string
+                'quiet' => false, // print no header
+                'sortby' => '', // [+|-]pagename, [+|-]mtime, [+|-]hits
+                'maxpages' => false, // maximum number of pages to include (== limit)
+                'smalltitle' => false, // if set, hide transclusion-title,
+                //  just have a small link at the start of
+                //  the page.
+                'words' => false, // maximum number of words
+                //  per page to include
+                'lines' => false, // maximum number of lines
+                //  per page to include
+                'bytes' => false, // maximum number of bytes
+                //  per page to include
+                'sections' => false, // maximum number of sections per page to include
+                'section' => false, // this named section per page only
+                'sectionhead' => false // when including a named
+                //  section show the heading
+            ));
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         static $included_pages = false;
         if (!$included_pages) $included_pages = array($basepage);
 
@@ -90,92 +89,91 @@ extends WikiPlugin_IncludePage
         $i = 0;
         while ($page = $subpages->next()) {
             $cpagename = $page->getName();
-                 if ($maxpages and ($i++ > $maxpages)) {
+            if ($maxpages and ($i++ > $maxpages)) {
                 return $content;
             }
             if (in_array($cpagename, $exclude))
-                    continue;
+                continue;
             // A page cannot include itself. Avoid doublettes.
             if (in_array($cpagename, $included_pages)) {
                 $content->pushContent(HTML::p(sprintf(_("Recursive inclusion of page %s ignored"),
-                                                      $cpagename)));
+                    $cpagename)));
                 continue;
             }
 
             // Check if user is allowed to get the Page.
-            if (!mayAccessPage ('view', $cpagename)) {
-                    return $this->error(sprintf(_("Illegal inclusion of page %s: no read access"),
+            if (!mayAccessPage('view', $cpagename)) {
+                return $this->error(sprintf(_("Illegal inclusion of page %s: no read access."),
                     $cpagename));
             }
 
             // trap any remaining nonexistant subpages
             if ($page->exists()) {
                 $r = $page->getCurrentRevision();
-                $c = $r->getContent();   // array of lines
+                $c = $r->getContent(); // array of lines
                 // follow redirects
-                if ((preg_match('/<'.'\?plugin\s+RedirectTo\s+page=(\S+)\s*\?'.'>/', implode("\n", $c), $m))
-                  or (preg_match('/<'.'\?plugin\s+RedirectTo\s+page=(.*?)\s*\?'.'>/', implode("\n", $c), $m))
-                  or (preg_match('/<<\s*RedirectTo\s+page=(\S+)\s*>>/', implode("\n", $c), $m))
-                  or (preg_match('/<<\s*RedirectTo\s+page="(.*?)"\s*>>/', implode("\n", $c), $m)))
-                {
+                if ((preg_match('/<' . '\?plugin\s+RedirectTo\s+page=(\S+)\s*\?' . '>/', implode("\n", $c), $m))
+                    or (preg_match('/<' . '\?plugin\s+RedirectTo\s+page=(.*?)\s*\?' . '>/', implode("\n", $c), $m))
+                    or (preg_match('/<<\s*RedirectTo\s+page=(\S+)\s*>>/', implode("\n", $c), $m))
+                    or (preg_match('/<<\s*RedirectTo\s+page="(.*?)"\s*>>/', implode("\n", $c), $m))
+                ) {
                     // Strip quotes (simple or double) from page name if any
                     if ((string_starts_with($m[1], "'"))
-                      or (string_starts_with($m[1], "\""))) {
+                        or (string_starts_with($m[1], "\""))
+                    ) {
                         $m[1] = substr($m[1], 1, -1);
                     }
                     // trap recursive redirects
                     if (in_array($m[1], $included_pages)) {
-                            if (!$quiet)
+                        if (!$quiet)
                             $content->pushContent(
                                 HTML::p(sprintf(_("Recursive inclusion of page %s ignored"),
-                                                $cpagename.' => '.$m[1])));
+                                    $cpagename . ' => ' . $m[1])));
                         continue;
                     }
-                        $cpagename = $m[1];
+                    $cpagename = $m[1];
 
-                            // Check if user is allowed to get the Page.
-                            if (!mayAccessPage ('view', $cpagename)) {
-                                    return $this->error(sprintf(_("Illegal inclusion of page %s: no read access"),
-                                    $cpagename));
-                            }
+                    // Check if user is allowed to get the Page.
+                    if (!mayAccessPage('view', $cpagename)) {
+                        return $this->error(sprintf(_("Illegal inclusion of page %s: no read access."),
+                            $cpagename));
+                    }
 
-                        $page = $dbi->getPage($cpagename);
+                    $page = $dbi->getPage($cpagename);
                     $r = $page->getCurrentRevision();
-                    $c = $r->getContent();   // array of lines
+                    $c = $r->getContent(); // array of lines
                 }
 
                 // moved to IncludePage
-                $ct = $this->extractParts ($c, $cpagename, $args);
+                $ct = $this->extractParts($c, $cpagename, $args);
 
                 array_push($included_pages, $cpagename);
                 if ($smalltitle) {
                     $pname = array_pop(explode(SUBPAGE_SEPARATOR, $cpagename)); // get last subpage name
                     // Use _("%s: %s") instead of .": ". for French punctuation
                     $ct = TransformText(sprintf(_("%s: %s"), "[$pname|$cpagename]",
-                                                $ct),
-                                        $r->get('markup'), $cpagename);
-                }
-                else {
+                            $ct),
+                        $r->get('markup'), $cpagename);
+                } else {
                     $ct = TransformText($ct, $r->get('markup'), $cpagename);
                 }
                 array_pop($included_pages);
-                if (! $smalltitle) {
+                if (!$smalltitle) {
                     $content->pushContent(HTML::p(array('class' => $quiet ?
-                                                        '' : 'transclusion-title'),
-                                                  fmt("Included from %s:",
-                                                      WikiLink($cpagename))));
+                            '' : 'transclusion-title'),
+                        fmt("Included from %s", WikiLink($cpagename))));
                 }
                 $content->pushContent(HTML(HTML::div(array('class' => $quiet ?
-                                                           '' : 'transclusion'),
-                                                     false, $ct)));
+                        '' : 'transclusion'),
+                    false, $ct)));
             }
         }
-        if (! isset($cpagename)) {
+        if (!isset($cpagename)) {
             return $this->error(sprintf(_("%s has no subpages defined."), $pagename));
         }
         return $content;
     }
-};
+}
 
 // Local Variables:
 // mode: php

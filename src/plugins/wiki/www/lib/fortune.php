@@ -1,6 +1,6 @@
 <?php
 // PHP Fortune - Made by henrik@aasted.org. HP: http://www.aasted.org
-// $Id: fortune.php 7964 2011-03-05 17:05:30Z vargenau $
+
 /*
 Main methods to use:
  quoteFromDir($dir):
@@ -11,20 +11,22 @@ Main methods to use:
  Written by Henrik Aasted Sorensen, henrik@aasted.org
  Read more at http://www.aasted.org/quote
 */
-class Fortune {
+class Fortune
+{
 
-    function quoteFromDir($dir) {
+    function quoteFromDir($dir)
+    {
         $amount = 0;
         $index = 0;
-    $quotes = array();
-    $files = array();
+        $quotes = array();
+        $files = array();
 
-        if ( $handle = opendir($dir) ) {
+        if ($handle = opendir($dir)) {
             while (false !== ($file = readdir($handle))) {
 
-                if ( strpos($file, ".dat") != false) {
+                if (strpos($file, ".dat") != false) {
                     $len = strlen($file);
-                    if (substr($file, $len - 4) == ".dat"){
+                    if (substr($file, $len - 4) == ".dat") {
                         $number = $this->getNumberOfQuotes($dir . "/" . $file);
                         $amount += $number;
                         $quotes[$index] = $amount;
@@ -34,16 +36,16 @@ class Fortune {
                 }
             }
 
-            srand((double)microtime()*1000000);
+            srand((double)microtime() * 1000000);
             $index = rand(0, $amount);
             $i = 0;
 
-        if ($amount)
-        while ($quotes[$i] < $index)  {
-            $i++;
-        }
-        if (!empty($files))
-        return $this->getRandomQuote($dir . "/" .$files[$i]);
+            if ($amount)
+                while ($quotes[$i] < $index) {
+                    $i++;
+                }
+            if (!empty($files))
+                return $this->getRandomQuote($dir . "/" . $files[$i]);
         }
         return -1;
     }
@@ -51,23 +53,26 @@ class Fortune {
     /*
      Reads the number of quotes in the file.
     */
-    function getNumberOfQuotes($file) {
+    function getNumberOfQuotes($file)
+    {
         $fd = fopen($file, "rb");
         $this->readLong($fd); // Just move over the first long. Might as well be fseek.
-        $len =  $this->readLong($fd);
+        $len = $this->readLong($fd);
         fclose($fd);
         return $len;
     }
+
     /*
      Picks quote number $index from the dat-file in $file.
     */
-    function getExactQuote($file, $index) {
+    function getExactQuote($file, $index)
+    {
         if (is_file($file) == false) {
             echo "Input must be a file!<br/>";
             return;
         }
 
-        if ( ($fd = fopen($file, "rb")) == false ) {
+        if (($fd = fopen($file, "rb")) == false) {
             echo "Cannot open $file<br/>";
             return;
         }
@@ -79,7 +84,7 @@ class Fortune {
 
         $quotefile = substr($file, 0, strlen($file) - 4);
 
-        if ( ($fd = fopen($quotefile, "rb")) == false ) {
+        if (($fd = fopen($quotefile, "rb")) == false) {
             echo "Cannot find file $quotefile!<br/>";
         }
 
@@ -92,7 +97,8 @@ class Fortune {
     /*
      Returns a random quote from $file.
     */
-    function getRandomQuote($file) {
+    function getRandomQuote($file)
+    {
         $number = $this->getNumberOfQuotes($file);
 
         $index = rand(0, $number - 1);
@@ -103,13 +109,15 @@ class Fortune {
     /*
      Reads a quote from the specified index.
     */
-    function getQuote($fd, $index) {
+    function getQuote($fd, $index)
+    {
         fseek($fd, $index);
-        $line=""; $res = "";
+        $line = "";
+        $res = "";
         do {
             $res = $res . $line;
             $line = fgets($fd, 1024) . "<br>";
-        } while ( ($line[0] != "%") && (!feof($fd)) );
+        } while (($line[0] != "%") && (!feof($fd)));
 
         return $res;
     }
@@ -117,18 +125,20 @@ class Fortune {
     /*
      Gets indexes from the file pointed to by the filedescriptor $fd.
     */
-    function getIndices($fd) {
+    function getIndices($fd)
+    {
         fseek($fd, 24, SEEK_SET);
         $i = 0;
 
-        while ( feof($fd) == FALSE ) {
+        while (feof($fd) == FALSE) {
             $res[$i] = readLong($fd);
             $i++;
         }
         return $res;
     }
 
-    function readLong($fd) {
+    function readLong($fd)
+    {
         $res = fread($fd, 4);
         $l = ord($res[3]);
         $l += ord($res[2]) << 8;
@@ -137,8 +147,8 @@ class Fortune {
         return $l;
     }
 
-
-    function createIndexFile($file) {
+    function createIndexFile($file)
+    {
         $fd = @fopen($file, "r");
         if ($fd == false) {
             echo "File error!";
@@ -184,17 +194,18 @@ class Fortune {
         $this->writeLong($fd, 0);
         $this->writeLong($fd, 37 << 24);
 
-        for ($i = 0 ; $i < count($indices) ; $i++) {
+        for ($i = 0; $i < count($indices); $i++) {
             $this->writeLong($fd, $indices[$i]);
         }
 
         fclose($fd);
     }
 
-    function writeLong($fd, $l) {
-        fwrite($fd, chr ( ($l >> 24) & 255));
-        fwrite($fd, chr ( ($l >> 16) & 255));
-        fwrite($fd, chr ( ($l >> 8) & 255));
-        fwrite($fd, chr ( $l & 255));
+    function writeLong($fd, $l)
+    {
+        fwrite($fd, chr(($l >> 24) & 255));
+        fwrite($fd, chr(($l >> 16) & 255));
+        fwrite($fd, chr(($l >> 8) & 255));
+        fwrite($fd, chr($l & 255));
     }
 } // End of class

@@ -18,6 +18,7 @@
     margin: 0 0 .6em -12.2em;
     padding: 0;
 }
+
 #content {
     margin: 61px 0 0 12.2em;
     padding: 1em 1em 1.5em 1em;
@@ -28,7 +29,11 @@
     position: relative;
     z-index: 2;
 }
-#column-one { padding-top: 50px; }
+
+#column-one {
+    padding-top: 50px;
+}
+
 /* the left column width is specified in class .portlet */
 
 /* Font size:
@@ -47,12 +52,15 @@ body {
 
 /* scale back up to a sane default */
 #globalWrapper {
-    font-size:127%;
+    font-size: 127%;
     width: 100%;
     margin: 0;
     padding: 0;
 }
-.visualClear { clear: both; }
+
+.visualClear {
+    clear: both;
+}
 
 /* general styles */
 
@@ -60,32 +68,40 @@ table {
     font-size: 100%;
     color: black;
 }
+
 a {
     text-decoration: none;
-    color: #004ba6;
-    background-image: none;
 }
-a:visited { color: #5a3696; }
-a:active { color: #faa700; }
-a:hover { text-decoration: underline; }
-a.stub { color: #772233; }
-a.new, #p-personal a.new {
-    color: #ba0000;
+
+a:visited {
+    color: #5a3696;
 }
-a.new:visited, #p-personal a.new:visited {
-    color: #a55858;
+
+a:active {
+    color: #faa700;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a.stub {
+    color: #772233;
 }
 
 img {
     border: 0;
 }
+
 p {
     margin: .4em 0 .5em 0;
     line-height: 1.5em;
 }
+
 p img {
     margin: 0;
 }
+
 img.inlineimage {
     border: none;
     display: inline;
@@ -109,46 +125,73 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 0.17em;
     border-bottom: 1px solid #aaa;
 }
-h1 { font-size: 188%; }
-h2 { font-size: 150%; }
+
+h1 {
+    font-size: 188%;
+}
+
+h2 {
+    font-size: 150%;
+}
+
 h3, h4, h5, h6 {
     border-bottom: none;
     font-weight: bold;
 }
-h3 { font-size: 132%; }
-h4 { font-size: 116%; }
-h5 { font-size: 100%; }
-h6 { font-size: 80%;  }
+
+h3 {
+    font-size: 132%;
+}
+
+h4 {
+    font-size: 116%;
+}
+
+h5 {
+    font-size: 100%;
+}
+
+h6 {
+    font-size: 80%;
+}
 
 ul {
     line-height: 1.5em;
     list-style-type: square;
     margin: 0.3em 0 0 1.5em;
-    padding:0;
+    padding: 0;
     list-style-image: url("images/bullet.png");
 }
+
 ul.clicked {
     line-height: 1.5em;
     list-style-type: square;
     margin: 0.3em 0 0 1.5em;
-    padding:0;
+    padding: 0;
     list-style-image: url("images/bulletLoading.gif");
 }
+
 ol {
     line-height: 1.5em;
     margin: 0.3em 0 0 3.2em;
-    padding:0;
+    padding: 0;
     list-style-image: none;
 }
-li {    margin-bottom: 0.1em; }
+
+li {
+    margin-bottom: 0.1em;
+}
+
 dt {
     font-size: 115%;
     margin-bottom: .5em;
 }
+
 dl {
     margin-top: .2em;
     margin-bottom: .5em;
 }
+
 dd {
     line-height: 1.5em;
     margin-left: 2em;
@@ -161,10 +204,12 @@ fieldset {
     padding: 0 1em 1em 1em;
     line-height: 1.5em;
 }
+
 legend {
     padding: 0.5em;
     font-size: 95%;
 }
+
 form {
     border: none;
     margin: 0;
@@ -182,19 +227,23 @@ input.historysubmit {
     height: 1.7em !important;
     margin-left: 1.6em;
 }
+
 select {
     vertical-align: top;
 }
+
 abbr, acronym, .explain {
     border-bottom: 1px dotted black;
     color: black;
     background-image: none;
     cursor: help;
 }
+
 q {
     font-family: Times, "Times New Roman", serif;
     font-style: italic;
 }
+
 /* disabled for now
 blockquote {
     font-family: Times, "Times New Roman", serif;
@@ -203,6 +252,7 @@ blockquote {
 code {
     background-color: #f9f9f9;
 }
+
 pre {
     padding: 1em;
     border: 1px dashed #2f6fab;
@@ -213,15 +263,37 @@ pre {
 
 /* generic classes ----------------------------------------------- */
 
-.align-left {text-align: left;}
-.align-right {text-align: right;}
-.align-center {text-align: center;}
-  
-.top {vertical-align: top;}
+.tt {
+    font-family: monospace;
+}
 
-.nowrap {white-space: nowrap;}
+.strike {
+    text-decoration: line-through;
+}
 
-.fullwidth { width: 100%; }
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.top {
+    vertical-align: top;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.fullwidth {
+    width: 100%;
+}
 
 /* --------------------------------------------------------------- */
 
@@ -229,10 +301,14 @@ pre {
 ** the main content area
 */
 
-#siteSub { display: none; }
+#siteSub {
+    display: none;
+}
+
 #jump-to-nav {
     display: none;
 }
+
 #contentSub {
     font-size: 84%;
     line-height: 1.2em;
@@ -240,30 +316,40 @@ pre {
     color: #7d7d7d;
     width: auto;
 }
-span.subpages { display: block; }
+
+span.subpages {
+    display: block;
+}
 
 /* Space for the right logo with rating */
 h1.firstHeading-rating {
     margin-right: 220px;
     line-height: 1.2em;
 }
+
 /* Space for the right logo without rating */
 h1.firstHeading {
     margin-right: 40px;
     line-height: 1.2em;
 }
+
 #edit-public, h1.firstHeading-public, h1.firstHeading-rating-public {
     background-color: #ffce7b;
     border: 1px solid #ffa500;
 }
+
 /* Some space under the headers in the content area */
 #bodyContent h1, #bodyContent h2 {
     margin-bottom: .6em;
 }
+
 #bodyContent h3, #bodyContent h4, #bodyContent h5 {
     margin-bottom: .3em;
 }
-.firstHeading { margin-bottom: 0.1em; }
+
+.firstHeading {
+    margin-bottom: 0.1em;
+}
 
 /* user notification thing */
 .usermessage {
@@ -275,15 +361,18 @@ h1.firstHeading {
     padding: .5em 1em;
     vertical-align: middle;
 }
+
 #siteNotice {
     text-align: center;
     font-size: 95%;
     padding: 0 .9em;
 }
+
 #siteNotice p {
     margin: 0;
     padding: 0;
 }
+
 .errorbox, .successbox {
     font-size: larger;
     border: 2px solid;
@@ -292,14 +381,17 @@ h1.firstHeading {
     margin-bottom: 2em;
     color: #000;
 }
+
 .errorbox {
     border-color: red;
     background-color: #fff2f2;
 }
+
 .successbox {
     border-color: green;
     background-color: #dfd;
 }
+
 .errorbox h2, .successbox h2 {
     font-size: 1em;
     font-weight: bold;
@@ -315,6 +407,7 @@ h1.firstHeading {
     margin-top: 1em;
     clear: both;
 }
+
 /* currently unused, intended to be used by a metadata box
 in the bottom-right corner of the content area */
 .documentDescription {
@@ -324,6 +417,7 @@ in the bottom-right corner of the content area */
     margin: 1em 0;
     line-height: 1.5em;
 }
+
 .documentByLine {
     text-align: right;
     font-size: 90%;
@@ -337,14 +431,17 @@ in the bottom-right corner of the content area */
     width: 100%;
     text-align: center;
 }
+
 *.center * {
     margin-left: auto;
     margin-right: auto;
 }
+
 /* small for tables and similar */
 .small, .small * {
     font-size: 94%;
 }
+
 table.small {
     font-size: 100%;
 }
@@ -355,6 +452,7 @@ table.small {
 .pageinfo-majoredit {
     font-weight: normal; /*bold;*/
 }
+
 .wiki-summary {
     font-size: 94%;
     font-style: italic;
@@ -370,6 +468,7 @@ table.small {
     margin-bottom: 8px;
     font-size: 95%;
 }
+
 #toc,
 .toc {
     width: 200px;
@@ -380,6 +479,7 @@ table.small {
     float: right;
     clear: right;
 }
+
 #toc h2,
 .toc h2 {
     display: inline;
@@ -388,16 +488,19 @@ table.small {
     font-size: 100%;
     font-weight: bold;
 }
+
 .toc #toclist {
     width: auto;
     border: none;
 }
+
 #toc #toctitle,
 .toc #toctitle,
 #toc .toctitle,
 .toc .toctitle {
     text-align: center;
 }
+
 #toc ul,
 .toc ul {
     list-style-type: none;
@@ -406,10 +509,12 @@ table.small {
     padding-left: 0;
     text-align: left;
 }
+
 #toc ul ul,
 .toc ul ul {
     margin: 0 0 0 2em;
 }
+
 #toc .toctoggle,
 .toc .toctoggle {
     font-size: 94%;
@@ -428,19 +533,27 @@ div.floatright, table.floatright {
     position: relative;
     margin: 0 0 .5em .5em;
     border: 0;
-/*
-    border: .5em solid white;
-    border-width: .5em 0 .8em 1.4em;
-*/
+    /*
+        border: .5em solid white;
+        border-width: .5em 0 .8em 1.4em;
+    */
 }
-div.floatright p { font-style: italic; }
+
+div.floatright p {
+    font-style: italic;
+}
+
 div.floatleft, table.floatleft {
     float: left;
     position: relative;
     margin: 0 .5em .5em 0;
     border: 0;
 }
-div.floatleft p { font-style: italic; }
+
+div.floatleft p {
+    font-style: italic;
+}
+
 /* thumbnails */
 div.thumb {
     margin-bottom: .5em;
@@ -448,6 +561,7 @@ div.thumb {
     border-color: white;
     width: auto;
 }
+
 div.thumb div {
     border: 1px solid #ccc;
     padding: 3px !important;
@@ -456,30 +570,36 @@ div.thumb div {
     text-align: center;
     overflow: hidden;
 }
+
 div.thumb div a img {
     border: 1px solid #ccc;
 }
+
 div.thumb div div.thumbcaption {
     border: none;
     text-align: left;
     line-height: 1.4em;
     padding: .3em 0 .1em 0;
 }
+
 div.magnify {
     float: right;
     border-style: none !important;
     background-image: none !important;
 }
+
 div.magnify a, div.magnify img {
     display: block;
     border-style: none !important;
     background-image: none !important;
 }
+
 div.tright {
     clear: right;
     float: right;
     border-width: .5em 0 .8em 1.4em;
 }
+
 div.tleft {
     float: left;
     margin-right: .5em;
@@ -490,9 +610,11 @@ div.tleft {
     display: none;
     speak: none;
 }
+
 img.tex {
     vertical-align: middle;
 }
+
 span.texhtml {
     font-family: serif;
 }
@@ -513,12 +635,14 @@ table.rimage {
     margin-bottom: 1em;
     text-align: center;
 }
+
 .toccolours {
     border: 1px solid #aaa;
     background-color: #f9f9f9;
     padding: 5px;
     font-size: 95%;
 }
+
 div.townBox {
     position: relative;
     float: right;
@@ -530,15 +654,18 @@ div.townBox {
     overflow: hidden;
     clear: right;
 }
+
 div.townBox dl {
     padding: 0;
     margin: 0 0 .3em;
     font-size: 96%;
 }
+
 div.townBox dl dt {
     background-image: none;
     margin: .4em 0 0;
 }
+
 div.townBox dl dd {
     margin: .1em 0 0 1.1em;
     background-color: #f3f3f3;
@@ -558,16 +685,20 @@ div.townBox dl dd {
 .autocomment {
     color: gray;
 }
+
 #pagehistory span.user {
     margin-left: 1.4em;
     margin-right: .4em;
 }
+
 #pagehistory span.minor {
     font-weight: bold;
 }
+
 #pagehistory li {
     border: 1px solid white;
 }
+
 #pagehistory li.selected {
     background-color: #f9f9f9;
     border: 1px dashed #aaa;
@@ -579,18 +710,22 @@ div.townBox dl dd {
 table.diff, td.diff-otitle, td.diff-ntitle {
     background-color: white;
 }
+
 td.diff-addedline {
     background-color: #cfc;
     font-size: smaller;
 }
+
 td.diff-deletedline {
     background-color: #ffa;
     font-size: smaller;
 }
+
 td.diff-context {
     background-color: #eee;
     font-size: smaller;
 }
+
 span.diffchange {
     color: red;
     font-weight: bold;
@@ -601,21 +736,18 @@ span.diffchange {
  */
 /* main box */
 .diff {
-    margin-top:    1ex;
+    margin-top: 1ex;
     margin-bottom: 0.5ex;
     background-color: white;
     color: black;
     border-top: 1px solid #494f5d;
-    border-left:  1px solid #494f5d;
-    border-bottom:  1px solid #c6d2de;
+    border-left: 1px solid #494f5d;
+    border-bottom: 1px solid #c6d2de;
     border-right: 1px solid #c6d2de;
-    padding-top:    1px;
-    padding-bottom: 1px;
-    padding-left:  .125em;
-    padding-right: .125em;
     padding: 0;
     clear: both;
 }
+
 .diff .block {
     background-color: #ddd;
     padding-left: 1em;
@@ -626,22 +758,24 @@ span.diffchange {
     background-color: white;
     border: none;
 }
+
 /* entire difftextblock */
 .difftext {
-    margin-top:    0;
+    margin-top: 0;
     margin-bottom: 0;
     background-color: white;
     /* "paper" borders */
-    border-top:  1px #e8e6df solid;
+    border-top: 1px #e8e6df solid;
     border-left: 1px #e8e6df solid;
     border-bottom: 1px #d2d2d2 solid;
-    border-right:  1px #b2b2b2 solid;
-    padding-left:  0em;
-    padding-right: 0em;
-    padding-top:    0ex;
-    padding-bottom: 0ex;
+    border-right: 1px #b2b2b2 solid;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
     clear: both;
 }
+
 /* + - line prefix */
 .diff .block tt {
     font-weight: normal;
@@ -650,6 +784,7 @@ span.diffchange {
     margin-left: 0;
     border: none;
 }
+
 /* changed words */
 .diff del, .diff ins {
     font-weight: bold;
@@ -661,11 +796,13 @@ span.diffchange {
 .diff .final, .diff .added {
     background-color: white;
 }
+
 /* blocks containing deleted words */
 .diff .original, .diff .deleted {
     background-color: #fcc;
     border: none;
 }
+
 /* blocks containing added words */
 .diff .final, .diff .added {
     background-color: #cfc;
@@ -673,14 +810,22 @@ span.diffchange {
 }
 
 /* deleted words */
-.diff del { background-color: #f99; }
+.diff del {
+    background-color: #f99;
+}
+
 /* added words */
-.diff ins { background-color: #9f9; }
+.diff ins {
+    background-color: #9f9;
+}
 
 /**
  * PageHistory, Info
  */
-td.pageinfo { font-weight: bold; }
+td.pageinfo {
+    font-weight: bold;
+}
+
 .pageinfo-minoredit, .pageinfo-authorid {
     font-size: smaller;
     font-style: oblique;
@@ -705,15 +850,23 @@ table.cal td {
 }
 
 /* Month-name header */
-table.cal-header { font-size: larger; }
-table.cal-header tr, table.cal-header td { text-align: center; }
+table.cal-header {
+    font-size: larger;
+}
+
+table.cal-header tr, table.cal-header td {
+    text-align: center;
+}
+
 .cal-arrow {
     font-weight: bold;
     text-decoration: none;
 }
 
 /* Day-names header */
-table.cal tbody tr .cal-dayname {  }
+table.cal tbody tr .cal-dayname {
+}
+
 .cal-dayname td {
     text-align: center;
     font-size: smaller;
@@ -721,16 +874,20 @@ table.cal tbody tr .cal-dayname {  }
 }
 
 /* Individual days */
-a.cal-hide { text-decoration: none; }
+a.cal-hide {
+    text-decoration: none;
+}
 
 /* Today */
- /* cell */
+/* cell */
 table.cal td.cal-today {
     margin: 1px;
     border: 1px solid gray;
 }
- /* text */
-table.cal td.cal-today a.cal-hide {  }
+
+/* text */
+table.cal td.cal-today a.cal-hide {
+}
 
 /*
 ** keep the whitespace in front of the ^=, hides rule from konqueror
@@ -743,6 +900,7 @@ table.cal td.cal-today a.cal-hide {  }
     background-repeat: no-repeat;
     padding-right: 13px;
 }
+
 #bodyContent a[href ^="https://"],
 .link-https {
     background-image: url("images/lock_icon.png");
@@ -750,6 +908,7 @@ table.cal td.cal-today a.cal-hide {  }
     background-repeat: no-repeat;
     padding-right: 16px;
 }
+
 #bodyContent a[href ^="mailto:"],
 .link-mailto {
     background-image: url("images/mail_icon.png");
@@ -757,12 +916,14 @@ table.cal td.cal-today a.cal-hide {  }
     background-repeat: no-repeat;
     padding-right: 18px;
 }
+
 #bodyContent a[href ^="news://"] {
     background-image: url("images/news_icon.png");
     background-position: center right;
     background-repeat: no-repeat;
     padding-right: 18px;
 }
+
 #bodyContent a[href ^="ftp://"],
 .link-ftp {
     background-image: url("images/file_icon.png");
@@ -770,6 +931,7 @@ table.cal td.cal-today a.cal-hide {  }
     background-repeat: no-repeat;
     padding-right: 18px;
 }
+
 #bodyContent a[href ^="irc://"],
 .link-irc {
     background-image: url("images/discussionitem_icon.png");
@@ -777,6 +939,7 @@ table.cal td.cal-today a.cal-hide {  }
     background-repeat: no-repeat;
     padding-right: 18px;
 }
+
 /* disable interwiki styling */
 #bodyContent a.extiw,
 #bodyContent a.extiw:active {
@@ -784,15 +947,18 @@ table.cal td.cal-today a.cal-hide {  }
     background-image: none;
     padding: 0;
 }
+
 #bodyContent a.external {
     color: #36b;
 }
+
 /* this can be used in the content area to switch off
 special external link styling */
 #bodyContent .plainlinks a {
     background-image: none !important;
     padding: 0 !important;
 }
+
 /*
 ** Structural Elements
 */
@@ -808,14 +974,16 @@ special external link styling */
     width: 11.6em;
     overflow: hidden;
 }
+
 .portlet h4 {
     font-size: 95%;
     font-weight: normal;
     white-space: nowrap;
 }
+
 .portlet h5 {
     background-color: transparent;
-    padding: 0em 1em 0em 0.5em;
+    padding: 0 1em 0 0.5em;
     /*text-transform: lowercase;*/
     display: inline;
     font-size: 91%;
@@ -824,20 +992,22 @@ special external link styling */
     font-weight: bold;
     white-space: nowrap;
 }
+
 .portlet h5 img {
     padding: 0;
     margin: 0;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
     height: 15px;
     width: 15px;
     border: 0;
 }
+
 .portlet h6 {
     background-color: #ffae2e;
     border: 1px solid #2f6fab;
     border-style: solid solid none solid;
-    padding: 0em 1em 0em 1em;
+    padding: 0 1em 0 1em;
     /*text-transform: lowercase;*/
     display: block;
     font-size: 1em;
@@ -845,14 +1015,14 @@ special external link styling */
     font-weight: normal;
     white-space: nowrap;
 }
+
 .pBody {
     font-size: 95%;
-    background-color: white;
-    color: black;
     border-collapse: collapse;
     border: 1px solid #aaa;
     padding: 0 .8em .3em .5em;
 }
+
 .portlet h1,
 .portlet h2,
 .portlet h3,
@@ -860,14 +1030,16 @@ special external link styling */
     margin: 0;
     padding: 0;
 }
+
 .portlet ul {
     line-height: 1.5em;
     list-style-type: square;
     list-style-image: url("images/bullet.png");
-    font-size:95%;
+    font-size: 95%;
 }
+
 .portlet li {
-    padding:0;
+    padding: 0;
     margin: 0 0 0 0;
     margin-bottom: 0;
 }
@@ -879,22 +1051,26 @@ special external link styling */
 #p-logo {
     z-index: 1;
     position: absolute; /*needed to use z-index */
-    top:  0;
+    top: 0;
     left: 0;
     height: 42px;
     width: 100%;
     overflow: visible;
     background-color: #005A99;
 }
-#p-logo h5 { display: none; }
+
+#p-logo h5 {
+    display: none;
+}
+
 #p-logo a,
 #p-logo a:hover {
     display: block;
     height: 42px;
-    /*width: 12.2em;*/
     background-repeat: no-repeat;
     background-position: 35% 50% !important;
 }
+
 span.logo {
     z-index: 1;
     position: absolute; /*needed to use z-index */
@@ -913,13 +1089,14 @@ span.logo {
 #img-logo-right {
     position: absolute;
     z-index: 3;
-    top:  0;
+    top: 0;
     right: 40px;
 }
+
 #img-logo-band {
     position: absolute;
     z-index: 3;
-    top:  0;
+    top: 0;
     right: 40px;
     height: 45px;
 }
@@ -932,12 +1109,14 @@ span.logo {
     position: relative;
     z-index: 3;
 }
+
 #p-navigation .pBody {
     padding-right: 0;
 }
+
 #p-nav1 {
-    position:relative;
-    z-index:3;
+    position: relative;
+    z-index: 3;
 }
 
 #p-navigation a {
@@ -947,43 +1126,47 @@ span.logo {
 #p-navigation li.active a, #p-navigation li.active a:hover {
     text-decoration: none;
     display: inline;
-    font-weight: bold;
 }
-
 
 /*
 ** Search portlet
 *  Search in the top row (not yet), see p-personal how to do that
 */
 #logo-search {
-    position:absolute;
+    position: absolute;
     z-index: 4;
-    top:  5px;
+    top: 5px;
     left: 340px;
     height: 25px;
     overflow: visible;
 }
+
 #p-search {
-    position:relative;
-    z-index:3;
+    position: relative;
+    z-index: 3;
 }
+
 #p-search .pBody {
     /*text-align: center;*/
 }
+
 div.pBody > button, #searchButton {
     margin: 0;
     padding: 0;
 }
+
 #p-search .pBody {
     margin: 0;
     padding: .5em 0 .4em .4em;
     /*text-align: center;*/
 }
+
 #searchholder form.searchform {
     margin: 0;
     padding: 0;
     display: inline;
 }
+
 button.searchButton {
     margin: 0;
     padding: 0;
@@ -992,16 +1175,18 @@ button.searchButton {
     height: 18px;
     border: 1px solid ButtonShadow;
 }
+
 input.searchButton {
     margin-top: 1px;
     font-size: 8pt;
     cursor: pointer;
     width: 64px;
     padding-left: 1px;
-    background-color: White;
+    background-color: white;
     border: 1px solid #2f6fab;
     text-transform: capitalize;
 }
+
 #searchInput {
     width: 120px;
     height: 18px;
@@ -1018,8 +1203,8 @@ input.searchButton {
 */
 
 #p-personal {
-    width:100%;
-    white-space:nowrap;
+    width: 100%;
+    white-space: nowrap;
     padding: 0 0 0 0;
     margin: 0;
     position: absolute;
@@ -1028,56 +1213,58 @@ input.searchButton {
     z-index: 4;
     border: none;
     overflow: visible;
-    color: black;
     line-height: 1.2em;
 }
 
 #p-personal h5 {
-    display:none;
+    display: none;
 }
+
 #p-personal .portlet,
 #p-personal .pBody {
-    padding:0;
-    margin:0;
+    padding: 0;
+    margin: 0;
     border: none;
-    z-index:0;
+    z-index: 0;
     overflow: visible;
     background-image: none;
 }
+
 /* this is the ul contained in the portlet */
 #p-personal ul {
     border: none;
     line-height: 1.5em;
-    color: #2f6fab;
-    padding: 0em 1.5em 0 2em;
+    padding: 0 1.5em 0 2em;
     margin: 0;
     text-align: right;
     list-style: none;
-    z-index:0;
+    z-index: 0;
     background-image: none;
     cursor: default;
 }
+
 #p-personal li {
-    z-index:0;
-    border:none;
-    padding:0;
+    z-index: 0;
+    border: none;
+    padding: 0;
     display: inline;
-    color: #2f6fab;
+    color: white;
     margin-left: 0.8em;
     line-height: 1.2em;
     background-image: none;
 }
+
 #p-personal li a {
     text-decoration: none;
     color: white;
     padding-left: 0.5em;
     padding-bottom: 0.2em;
 }
+
 #p-personal li a:hover {
     color: white;
     background-color: #005A99;
     padding-bottom: 0.2em;
-    font-weight: bold;
     text-decoration: none;
 }
 
@@ -1094,7 +1281,6 @@ li#pt-login {
     padding-left: 10px;
     text-transform: none;
 }
-#p-personal a.new { color:#ba0000; }
 
 /*
 ** the page-related actions- page/talk, edit etc
@@ -1104,7 +1290,7 @@ li#pt-login {
     top: 40px; /*1.3em;*/
     left: /*11.5em;*/ 13.2em;
     margin: 0;
-    white-space:nowrap;
+    white-space: nowrap;
     width: 76%;
     line-height: 1.1em;
     overflow: visible;
@@ -1114,10 +1300,15 @@ li#pt-login {
     list-style: none;
     font-size: 95%;
 }
-#p-cactions .hiddenStructure { display: none; }
+
+#p-cactions .hiddenStructure {
+    display: none;
+}
+
 #p-cactions ul {
     list-style: none;
 }
+
 #p-cactions li {
     display: inline;
     border: 1px solid #aaa;
@@ -1127,10 +1318,12 @@ li#pt-login {
     overflow: visible;
     background-color: white;
 }
+
 #p-cactions li.selected {
     border-color: #fabd23;
     padding: 0 0 0.2em 0;
 }
+
 #p-cactions li a {
     background-color: #fbfbfb;
     color: #002bb8;
@@ -1141,20 +1334,20 @@ li#pt-login {
     z-index: 0;
     margin: 0;
 }
+
 #p-cactions li.selected a {
     z-index: 3;
     background-color: #fff;
     padding: 0 1em .2em;
 }
-#p-cactions .new a {
-    color: #ba0000;
-}
+
 #p-cactions li a:hover {
     z-index: 3;
     text-decoration: none;
     background-color: #fff;
     padding-bottom: 0.3em;
 }
+
 /* http://universaleditbutton.org */
 #p-cactions li a#btn-edit {
     background-image: url('images/UEB16.png');
@@ -1163,28 +1356,35 @@ li#pt-login {
     padding-left: 20px !important;
     text-transform: none;
 }
+
 #p-cactions li a#btn-edit:hover {
     z-index: 3;
     text-decoration: none;
     background-color: #fff;
 }
+
 #p-cactions h5 {
     display: none;
 }
+
 #p-cactions li.istalk {
     margin-right: 0;
 }
+
 #p-cactions li.istalk a {
     padding-right: .5em;
 }
+
 #p-cactions #ca-addsection a {
     padding-left: .4em;
     padding-right: .4em;
 }
+
 /* offsets to distinguish the tab groups */
 li#ca-talk {
     margin-right: 1.6em;
 }
+
 li#ca-watch, li#ca-unwatch, li#ca-varlang-0, li#ca-print {
     margin-left: 1.6em;
 }
@@ -1209,28 +1409,32 @@ li#ca-watch, li#ca-unwatch, li#ca-varlang-0, li#ca-print {
     text-align: center;
     font-size: 90%;
 }
+
+#footer ul {
+    display: table-cell;
+}
+
 #footer li {
     display: inline;
     margin: 0 1.3em;
 }
+
 #bottom {
     border: none;
     text-align: left;
 }
+
 /* hide from incapable browsers */
-head:first-child+body #footer li { white-space: nowrap; }
+head:first-child+body #footer li {
+    white-space: nowrap;
+}
+
 #f-poweredbyico, #f-copyrightico {
+    display: table-cell;
     margin: 0 8px;
-    /*vertical-align: middle;*/
-    height: 31px;
-    position: relative;
-    top: -31px; /* Bump it up just a tad */
-}
-#f-poweredbyico {
-    float: right;
-}
-#f-copyrightico {
-    float: left;
+    padding-left: 1em;
+    padding-right: 1em;
+    vertical-align: middle;
 }
 
 /* js pref toc */
@@ -1239,36 +1443,55 @@ head:first-child+body #footer li { white-space: nowrap; }
     margin: 1em 1em 1em 1em;
     width: 13em;
 }
-#preftoc li { border: 1px solid White; }
-#preftoc li.selected {
-    background-color:#f9f9f9;
-    border:1px dashed #aaaaaa;
+
+#preftoc li {
+    border: 1px solid White;
 }
+
+#preftoc li.selected {
+    background-color: #f9f9f9;
+    border: 1px dashed #aaaaaa;
+}
+
 #preftoc a,
 #preftoc a:active {
     display: block;
     color: #0014a6;
 }
+
 #prefcontrol {
     clear: both;
     float: left;
     margin-top: 1em;
 }
+
 div.prefsectiontip {
     font-size: 95%;
     margin-top: 1em;
 }
-fieldset.operaprefsection { margin-left: 15em }
+
+fieldset.operaprefsection {
+    margin-left: 15em
+}
 
 /* more IE fixes */
 /* float/negative margin brokenness */
-* html #footer {margin-top: 0;}
+* html #footer {
+    margin-top: 0;
+}
+
 * html #column-content {
     display: inline;
     margin-bottom: 0;
 }
-* html div.editsection { font-size: smaller; }
-#pagehistory li.selected { position: relative; }
+
+* html div.editsection {
+    font-size: smaller;
+}
+
+#pagehistory li.selected {
+    position: relative;
+}
 
 .redirectText {
     font-size: 150%;
@@ -1282,13 +1505,16 @@ fieldset.operaprefsection { margin-left: 15em }
 .not-patrolled {
     background-color: #ffa;
 }
+
 div.patrollink {
     font-size: 75%;
     text-align: right;
 }
+
 span.newpage, span.minor, span.searchmatch, span.bot {
     font-weight: bold;
 }
+
 span.unpatrolled {
     font-weight: bold;
     color: red;
@@ -1297,6 +1523,7 @@ span.unpatrolled {
 span.searchmatch {
     color: red;
 }
+
 .sharedUploadNotice {
     font-style: italic;
 }
@@ -1305,11 +1532,13 @@ span.updatedmarker {
     color: black;
     background-color: #0f0;
 }
+
 span.newpageletter {
     font-weight: bold;
     color: black;
     background-color: yellow;
 }
+
 span.minoreditletter {
     color: black;
     background-color: #c5ffe6;
@@ -1339,7 +1568,7 @@ table.gallery td.galleryheader {
 
 div.gallerybox {
     margin: 2px;
-    width:  150px;
+    width: 150px;
 }
 
 div.gallerybox div.thumb {
@@ -1383,6 +1612,7 @@ span.changedby {
     font-size: small;
     text-align: center;
 }
+
 .editExternallyHelp {
     font-style: italic;
     color: gray;
@@ -1443,7 +1673,6 @@ table.collapsed tr.collapsable {
     display: none;
 }
 
-
 /* filetoc */
 ul#filetoc {
     text-align: center;
@@ -1483,20 +1712,20 @@ table.revisionform_default {
 
 table.revisionform_focus {
     border: 1px solid #000000;
-    background-color:#00BBFF;
+    background-color: #00BBFF;
 }
 
 tr.revision_tr_default {
-    background-color:#EEEEEE;
+    background-color: #EEEEEE;
 }
 
 tr.revision_tr_first {
-    background-color:#DDDDDD;
+    background-color: #DDDDDD;
 }
 
 p.revision_saved {
     color: green;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 #mw_trackbacks {
@@ -1504,7 +1733,6 @@ p.revision_saved {
     background-color: #eeeeff;
     padding: 0.2em;
 }
-
 
 /* Allmessages table */
 
@@ -1524,7 +1752,6 @@ p.revision_saved {
     background-color: #f0f0ff;
 }
 
-
 /* noarticletext */
 div.noarticletext {
     border: 1px solid #ccc;
@@ -1534,17 +1761,17 @@ div.noarticletext {
 }
 
 div#searchTargetContainer {
-    left:       10px;
-    top:        10px;
-    width:      90%;
+    left: 10px;
+    top: 10px;
+    width: 90%;
     background-color: white;
 }
 
 div#searchTarget {
-    padding:    3px;
-    margin:     5px;
+    padding: 3px;
+    margin: 5px;
     background-color: #F0F0F0;
-    border:     solid 1px blue;
+    border: solid 1px blue;
 }
 
 div#searchTarget ul li {
@@ -1557,25 +1784,25 @@ div#searchTarget ul li:before {
 }
 
 div.multipageimagenavbox {
-     border: solid 1px silver;
-     padding: 4px;
-     margin: 1em;
-     -moz-border-radius: 6px;
-     background-color: #f0f0f0;
+    border: solid 1px silver;
+    padding: 4px;
+    margin: 1em;
+    -moz-border-radius: 6px;
+    background-color: #f0f0f0;
 }
 
 div.multipageimagenavbox div.thumb {
-     border: none;
-     margin-left: 2em;
-     margin-right: 2em;
+    border: none;
+    margin-left: 2em;
+    margin-right: 2em;
 }
 
 div.multipageimagenavbox hr {
-     margin: 6px;
+    margin: 6px;
 }
 
 table.multipageimage td {
-     text-align: center;
+    text-align: center;
 }
 
 /*
@@ -1586,34 +1813,72 @@ table.multipageimage td {
     - remove line wrapping for all td and th, set background color
     - restore line wrapping for the last two table cells (description and size)
 */
-.TablePager_nav a { text-decoration: none; }
-.TablePager { border-collapse: collapse; }
+.TablePager_nav a {
+    text-decoration: none;
+}
+
+.TablePager {
+    border-collapse: collapse;
+}
+
 .TablePager, .TablePager td, .TablePager th {
     border: 0.15em solid #777777;
     padding: 0 0.15em 0 0.15em;
 }
-.TablePager th { background-color: #eeeeff }
-.TablePager td { background-color: #ffffff }
-.TablePager tr:hover td { background-color: #eeeeff }
 
-.imagelist td, .imagelist th { white-space: nowrap }
-.imagelist .TablePager_col_links { background-color: #eeeeff }
-.imagelist .TablePager_col_img_description { white-space: normal }
-.imagelist th.TablePager_sort { background-color: #ccccff }
+.TablePager th {
+    background-color: #eeeeff
+}
+
+.TablePager td {
+    background-color: #ffffff
+}
+
+.TablePager tr:hover td {
+    background-color: #eeeeff
+}
+
+.imagelist td, .imagelist th {
+    white-space: nowrap
+}
+
+.imagelist .TablePager_col_links {
+    background-color: #eeeeff
+}
+
+.imagelist .TablePager_col_img_description {
+    white-space: normal
+}
+
+.imagelist th.TablePager_sort {
+    background-color: #ccccff
+}
 
 /**
  * PhpWiki Tables
  */
-.pagelist { }
+.pagelist {
+}
+
 .pagelist thead td {
     background-color: #e8e8e8;
     text-decoration: none;
     font-weight: bold;
     font-size: smaller;
 }
-.pagelist thead td u { text-decoration: none; }
-.pagelist tr.evenrow { background-color: #eee; }
-.pagelist tr.oddrow  { background-color: white; }
+
+.pagelist thead td u {
+    text-decoration: none;
+}
+
+.pagelist tr.evenrow {
+    background-color: #eee;
+}
+
+.pagelist tr.oddrow {
+    background-color: white;
+}
+
 th.gridbutton {
     background-color: ThreeDLightShadow;
     color: black;
@@ -1622,13 +1887,14 @@ th.gridbutton {
     font-weight: normal;
     /*font-style: menu;*/
     white-space: nowrap;
-    margin: 5px 0px;
+    margin: 5px 0;
     max-height: 24px;
-    padding: 5px 0px 5px 0px;
+    padding: 5px 0 5px 0;
     border-width: 1px;
     border-style: solid;
     border-color: ThreeDHighlight ThreeDDarkShadow ThreeDDarkShadow ThreeDHighlight;
 }
+
 input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
     text-decoration: none;
     font-size: small;
@@ -1638,8 +1904,13 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
     color: black;
 }
 
-.wikipaging { font-size: 80% }
-.wikipaging-disabled { color: #999 }
+.wikipaging {
+    font-size: 80%
+}
+
+.wikipaging-disabled {
+    color: #999
+}
 
 /* <?plugin RawHtml <div class="boxright"> </div> */
 
@@ -1660,11 +1931,11 @@ div.boxright > blockquote {
 .error {
     color: black;
     background-color: #FF9999;
-    margin-top:    1em;
+    margin-top: 1em;
     margin-bottom: 1em;
-    padding-left:  0.8em;
+    padding-left: 0.8em;
     padding-right: 0.8em;
-    padding-top:    0.8ex;
+    padding-top: 0.8ex;
     padding-bottom: 0;
     border: medium solid red;
     clear: both;
@@ -1673,11 +1944,11 @@ div.boxright > blockquote {
 .warning {
     color: black;
     background-color: #FFCCCC;
-    margin-top:    1em;
+    margin-top: 1em;
     margin-bottom: 1em;
-    padding-left:  0.8em;
+    padding-left: 0.8em;
     padding-right: 0.8em;
-    padding-top:    0.8ex;
+    padding-top: 0.8ex;
     padding-bottom: 0;
     border: 1px solid #aaa;
     clear: both;
@@ -1692,6 +1963,7 @@ div.boxright > blockquote {
     padding: 0.5ex 0.5em;
     border: medium solid #fff8dc; /* darker ivory */
 }
+
 /* Hints */
 .hint {
     color: black;
@@ -1701,16 +1973,18 @@ div.boxright > blockquote {
     padding: 0.5ex 0.5em;
     border: thin solid #aaaaaa;
 }
+
 span.hint {
     padding: 0;
 }
+
 /* Disabled Plugins */
-.disabled-plugin
-{
+.disabled-plugin {
     clear: both;
     margin: 1ex 0;
     padding: 0;
 }
+
 .disabled-plugin .title {
     color: #400;
     background-color: inherit;
@@ -1718,6 +1992,7 @@ span.hint {
     text-align: right;
     padding: 0 0.5em;
 }
+
 .disabled-plugin pre {
     color: black;
     background-color: #ddd;
@@ -1732,20 +2007,25 @@ span.redirectfrom {
     font-weight: normal;
     padding-left: 1em;
 }
-.search-context { background-color: white; font-style: oblique; }
+
+.search-context {
+    background-color: white;
+    font-style: oblique;
+}
+
 .search-term {
     background-color: yellow;
     font-weight: normal;
 }
 
 a.spell-wrong {
-    color:#ba0000;
+    color: #ba0000;
     background-color: yellow;
 }
-span.spell-wrong {
-    color:#ba0000;
-}
 
+span.spell-wrong {
+    color: #ba0000;
+}
 
 /**
  * Wiki Forms
@@ -1764,18 +2044,6 @@ span.spell-wrong {
 .wiki, .named-wiki {
     text-decoration: none;
     font-weight: normal;
-    /* font-weight: bold; */
-}
-.wiki relation, .named-wiki relation, .wiki attribute, .named-wiki attribute {
-    font-style: oblique;
-    /* font-weight: normal; */
-    font-weight: bold;
-}
-
-span.relation-symbol {
-    font-weight: bold;
-    font-family: monospace;
-    letter-spacing: 0.1em;
 }
 
 /* Action buttons */
@@ -1787,17 +2055,18 @@ input.wikiaction, input.button, input.wikiadmin {
     white-space: nowrap;
 }
 
-.wikiunsafe { background-color: #fcc; }
+.wikiunsafe {
+    background-color: #fcc;
+}
 
 /* Unknown links */
 .wikiunknown, .named-wikiunknown {
     font-weight: normal;
     font-size: 100%;
 }
- /* QuestionMark #600 */
+
+/* QuestionMark #600 */
 .wikiunknown a, .named-wikiunknown a {
-    color: #447;
-    background-color: #eee;
     text-decoration: none;
     font-weight: normal;
     font-size: smaller;
@@ -1808,99 +2077,144 @@ input.wikiaction, input.button, input.wikiadmin {
     text-decoration: underline;
     color: #006;
 }
+
 h1 .backlinks {
     text-decoration: underline;
 }
 
 /* Interwiki links */
-/* .wikipage  { font-weight: bold; } */
-.wikipage  { font-weight: normal; }
-.interwiki { text-decoration: none; }
-.interwiki, i.interwiki .wikipage, em .interwiki .wikipage { font-style: oblique; }
-.interwiki .wikipage, i .interwiki, em .interwiki { font-style: normal; }
+.wikipage {
+    font-weight: normal;
+}
 
-#p-rc-body div div.box-title {  display: none; }
+.interwiki {
+    text-decoration: none;
+}
+
+.interwiki, i.interwiki .wikipage, em .interwiki .wikipage {
+    font-style: oblique;
+}
+
+.interwiki .wikipage, i .interwiki, em .interwiki {
+    font-style: normal;
+}
+
+#p-rc-body div div.box-title {
+    display: none;
+}
 
 /* RssFeed */
-div.rss { margin: 1em; padding: 1em; font-size: 0.9em; background-color: #eeeeee; border: thin dashed #aaa; }
-div.feed { color: #333; margin: -0.5em; margin-bottom: 0em; padding: 0.3em; font-weight: bold; background-color: #f2f2f2; font-size: 1.2em; }
-div.itemdesc {  padding-left: 1em; }
-div.rssitem { border-top: thin dashed #aaa; }
-a.rssicon { font-weight: normal; font-size: small; vertical-align: middle; }
+div.rss {
+    margin: 1em;
+    padding: 1em;
+    font-size: 0.9em;
+    background-color: #eeeeee;
+    border: thin dashed #aaa;
+}
+
+div.feed {
+    color: #333;
+    margin: -0.5em;
+    margin-bottom: 0;
+    padding: 0.3em;
+    font-weight: bold;
+    background-color: #f2f2f2;
+    font-size: 1.2em;
+}
+
+div.itemdesc {
+    padding-left: 1em;
+}
+
+div.rssitem {
+    border-top: thin dashed #aaa;
+}
+
+a.rssicon {
+    font-weight: normal;
+    font-size: small;
+    vertical-align: middle;
+}
 
 /* Top-page - RateIt */
 div#rateit-widget-top-1 {
-  width: 120px;
-  height: 29px;
-  top:   5px;
-  right: 75px;
-  z-index: 1;
-  position: absolute; /*needed to use z-index */
+    width: 120px;
+    height: 29px;
+    top: 5px;
+    right: 75px;
+    z-index: 1;
+    position: absolute; /*needed to use z-index */
 }
+
 div#rateit-widget-top {
-  padding-top: 0px;
-  position: absolute;
-  z-index: 1;
-  width: 120px;
-  height: 29px;
-  top:    0px; /* 34 */
-  right: 110px;
+    padding-top: 0;
+    position: absolute;
+    z-index: 1;
+    width: 120px;
+    height: 29px;
+    top: 0; /* 34 */
+    right: 110px;
 }
 
 /* Top-page - RateIt */
 span.rateit {
-  text-decoration: none;
-  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
-  font-size: 10px;
+    text-decoration: none;
+    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10px;
 }
 
 div.public, span.public {
-  background-color: #ffce7b;
+    background-color: #ffce7b;
 }
 
 /* IncludePage plugin ================================================= */
 
 .transclusion-title {
-  font-weight: bold;
-  text-decoration: underline;
-  margin-bottom: 0.25ex;
-  margin-right:  0.25em;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 0.25ex;
+    margin-right: 0.25em;
 }
+
 .transclusion, .wiki-edithelp {
-  font-size: 97%;
+    font-size: 97%;
 }
+
 .transclusion {
-  border: 1px solid gray;
-  padding-left:  0.8em;
-  padding-right: 0.8em;
-  padding-top:     0px;
-  padding-bottom:  0px;
-  margin-left:   0.25em;
-  margin-right:  0.25em;
-  margin-bottom: 0.1ex;
+    border: 1px solid gray;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-left: 0.25em;
+    margin-right: 0.25em;
+    margin-bottom: 0.1ex;
 }
+
 .wiki-edithelp {
-  background-color: white;
-  border: medium solid #fff8dc; /* darker ivory */
-  padding-left:  0.5em;
-  padding-right: 0.5em;
-  padding-top:    0.75ex;
-  padding-bottom: 0.75ex;
-  margin-left:  0;
-  margin-right: 0;
-  margin-top: 1ex;
-  margin-bottom: 1ex;
+    background-color: white;
+    border: medium solid #fff8dc; /* darker ivory */
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.75ex;
+    padding-bottom: 0.75ex;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 1ex;
+    margin-bottom: 1ex;
 }
+
 .wiki-edithelp .wiki {
-  /* color: #5454ff;*/
+    /* color: #5454ff;*/
 }
+
 .wiki-edithelp p {
-  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
-  padding-left:  0.5em;
-  padding-right: 0.5em;
-  padding-top:    0.5ex;
-  padding-bottom: 0.5ex;
-  margin: 0;
+    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.5ex;
+    padding-bottom: 0.5ex;
+    margin: 0;
 }
 
 /* WikicreoleTable, MediawikiTable and RichTable plugins ============== */
@@ -1928,8 +2242,8 @@ table.boxed td, table.bordered td,
 table.boxed th, table.bordered th {
     padding-left: 5px;
     padding-right: 5px;
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 table.boxed caption, table.bordered caption {
@@ -1946,20 +2260,20 @@ table.boxed th, table.bordered th {
 
 /* For RecentChanges plugin */
 td.tdselected, td.tdunselected {
-   text-align: center;
-   font-weight: bold;
-   padding-left: 5px;
-   padding-right: 5px;
+    text-align: center;
+    font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 td.tdselected {
-   color: white;
-   background-color: #554295;
+    color: white;
+    background-color: #554295;
 }
 
 td.tdunselected {
-   color: black;
-   background-color: #e9e8de;
+    color: black;
+    background-color: #e9e8de;
 }
 
 /* Style for feedback
@@ -1968,10 +2282,10 @@ td.tdunselected {
  * User was successfully registered
 */
 .feedback {
-     font-weight: bold;
-     border-width: 2px;
-     border-style: solid;
-     background-color: #DFD;
-     border-color: green;
-     padding: 0.5em;
+    font-weight: bold;
+    border-width: 2px;
+    border-style: solid;
+    background-color: #DFD;
+    border-color: green;
+    padding: 0.5em;
 }

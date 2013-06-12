@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: _PreferencesInfo.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  *
@@ -24,28 +24,27 @@
  * Plugin to display the current preferences without auth check.
  */
 class WikiPlugin__PreferencesInfo
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return _("PreferencesInfo");
-    }
-
-    function getDescription () {
+    function getDescription()
+    {
         return sprintf(_("Get preferences information for current user %s."),
-                       '[userid]');
+            '[userid]');
     }
 
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array('page' => '[pagename]',
-                     'userid' => '[userid]');
+            'userid' => '[userid]');
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $this->getArgs($argstr, $request);
         // $user = &$request->getUser();
         return Template('userprefs', $args);
     }
-};
+}
 
 // Local Variables:
 // mode: php

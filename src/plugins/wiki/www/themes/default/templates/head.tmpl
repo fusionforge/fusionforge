@@ -1,11 +1,8 @@
-<?php  // -*-php-*-
-// $Id: head.tmpl 7956 2011-03-03 17:08:31Z vargenau $
-?>
 <head>
 <?php if (ENABLE_XHTML_XML and strstr($request->get('HTTP_ACCEPT'),'application/xhtml+xml')) { ?>
-<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=<?php echo $charset?>" />
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <?php } else { ?>
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset?>" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <?php } ?>
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="Content-Language" content="<?php echo $GLOBALS['LANG']?>" />

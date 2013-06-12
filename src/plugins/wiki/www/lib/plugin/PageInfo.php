@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: PageInfo.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  *
@@ -26,23 +26,22 @@
  * 'info.tmpl', which does all the real work.
  */
 class WikiPlugin_PageInfo
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return _("PageInfo");
-    }
-
-    function getDescription () {
+    function getDescription()
+    {
         return sprintf(_("Show extra page Info and statistics for %s."),
-                       '[pagename]');
+            '[pagename]');
     }
 
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array('page' => '[pagename]',
-                     'version' => '[version]');
+            'version' => '[version]');
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $this->getArgs($argstr, $request);
         extract($args);
 
@@ -51,22 +50,20 @@ extends WikiPlugin
         $current = $page->getCurrentRevision();
 
         if ($current->getVersion() < 1)
-            return fmt("I'm sorry, there is no such page as %s.",
-                       WikiLink($pagename, 'unknown'));
+            return fmt("Page “%s” does not exist.", WikiLink($pagename, 'unknown'));
 
         if (!empty($version)) {
             if (!($revision = $page->getRevision($version)))
                 NoSuchRevision($request, $page, $version);
-        }
-        else {
+        } else {
             $revision = $current;
         }
 
         $template = new Template('info', $request,
-                                 array('revision' => $revision));
+            array('revision' => $revision));
         return $template;
     }
-};
+}
 
 // Local Variables:
 // mode: php

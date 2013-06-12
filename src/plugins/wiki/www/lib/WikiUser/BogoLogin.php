@@ -1,5 +1,5 @@
-<?php //-*-php-*-
-// $Id: BogoLogin.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright (C) 2004 ReiniUrban
  *
@@ -23,11 +23,13 @@
 /** Without stored password. A _BogoLoginPassUser with password
  *  is automatically upgraded to a PersonalPagePassUser.
  */
-class _BogoLoginPassUser extends _PassUser {
+class _BogoLoginPassUser extends _PassUser
+{
 
-    var $_authmethod = 'BogoLogin';
+    public $_authmethod = 'BogoLogin';
 
-    function userExists() {
+    function userExists()
+    {
         if (isWikiWord($this->_userid)) {
             $this->_level = WIKIAUTH_BOGO;
             return true;
@@ -40,15 +42,13 @@ class _BogoLoginPassUser extends _PassUser {
     /** A BogoLoginUser requires no password at all
      *  But if there's one stored, we override it with the PersonalPagePassUser instead
      */
-    function checkPass($submitted_password) {
+    function checkPass($submitted_password)
+    {
         if ($this->_prefs->get('passwd')) {
             if (isset($this->_prefs->_method) and $this->_prefs->_method == 'HomePage') {
                 $user = new _PersonalPagePassUser($this->_userid, $this->_prefs);
                 if ($user->checkPass($submitted_password)) {
-                    if (!check_php_version(5))
-                        eval("\$this = \$user;");
-                    // /*PHP5 patch*/$this = $user;
-                    $user = UpgradeUser($this, $user);
+                    UpgradeUser($this, $user);
                     $this->_level = WIKIAUTH_USER;
                     return $this->_level;
                 } else {

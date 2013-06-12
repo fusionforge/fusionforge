@@ -1,5 +1,4 @@
-<?php // -*-php-*-
-// $Id: signin.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+<?php
 // signin only implicitly by clicking "Edit"
 if (empty($FORMNAME))
     $FORMNAME = 'signin';
@@ -7,7 +6,7 @@ else
     $NOFORM = true;
 ?>
 <?php if (empty($NOFORM)) { ?>
-  <form method="post" action="<?php echo $request->getPostURL() ?>" accept-charset="<?php echo $charset?>" name="<?php echo $FORMNAME?>">
+  <form method="post" action="<?php echo $request->getPostURL() ?>" accept-charset="UTF-8" name="<?php echo $FORMNAME?>">
   <?php echo HiddenInputs($request->getArgs(), false, array('auth')) ?>
 <?php }
 if ($user->isAuthenticated()) {

@@ -1,7 +1,7 @@
 !FoaF
 !Technology
 * RAP - RDF API for PHP
-* XML_FOAF, Pear
+* XML_FOAF, PEAR
 
 !Why not bare bones RAP?
 RAP is too hard to work with, it provides all of the needed power and functionality, but this means that it tends to get a bit complex to deal with.
@@ -140,7 +140,7 @@ Parsing isn't so hard either:
  		<meta name="Author" content="" />
  		<meta name="Keywords" content="" />
  		<meta name="Description" content="" />
- 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+ 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  		<style type="text/css">
 			table,th,td { border: 1px solid black; }
 		</style>
@@ -205,8 +205,8 @@ echo "</pre>";
 # FoafMakePlugin will get some kind of user id from the database, and retrieve any stored information about the user - outputting as FOAF.
 
 !Installing PEAR / XML_FOAF
-The XML_FOAF pear library will not be included with phpwiki, so you have to install the pear 
-library by your own and be sure that the pear path is in the include_path.
+The XML_FOAF PEAR library will not be included with phpwiki, so you have to install the PEAR 
+library by your own and be sure that the PEAR path is in the include_path.
 
 Reason: XML_FOAF is based on XML_Parser and XML_Tree, but phpwiki uses its own XML parser and XML 
 tree representation, so it would be unneccesary and incompatible duplication of the same thing.
@@ -216,7 +216,7 @@ PHP Version: PHP 4.3.0 or newer
 PEAR Package: XML_Tree 1.1 or newer
 PEAR Package: XML_Beautifier 0.2.2 or newer
 
-Pear is dead simple to install.
+PEAR is dead simple to install.
 !! Win32
 <verbatim>
 Start > Run > Command.com
@@ -234,7 +234,7 @@ pear install XML_Tree
 pear install XML_Beautifier
 pear install XML_FOAF
 </verbatim>
-Now, chances are, you won't get away with it all this easy, but if you can't get pear to install XML_FOAF (no ''stable'' package available), then follow these steps next
+Now, chances are, you won't get away with it all this easy, but if you can't get PEAR to install XML_FOAF (no ''stable'' package available), then follow these steps next
 # Download [XML_FOAF 0.2|http://pear.php.net/get/XML_FOAF-0.2.tgz]
 # Extract XML_FOAF-0.2.tgz/XML_FOAF-0.2/FOAF/ to C:\php\pear\XML\FOAF
 # Extract documentation to c:\php\pear\docs\

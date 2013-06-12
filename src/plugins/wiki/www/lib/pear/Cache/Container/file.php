@@ -16,7 +16,7 @@
 // |          Sebastian Bergmann <sb@sebastian-bergmann.de>               |
 // +----------------------------------------------------------------------+
 //
-// $Id: file.php 6209 2008-08-26 15:30:39Z vargenau $
+// $Id: file.php 293864 2010-01-23 03:49:21Z clockwerx $
 
 require_once 'Cache/Container.php';
 
@@ -24,9 +24,10 @@ require_once 'Cache/Container.php';
 * Stores cache contents in a file.
 *
 * @author   Ulf Wendel  <ulf.wendel@phpdoc.de>
-* @version  $Id: file.php 6209 2008-08-26 15:30:39Z vargenau $
+* @version  $Id: file.php 293864 2010-01-23 03:49:21Z clockwerx $
 */
-class Cache_Container_file extends Cache_Container {
+class Cache_Container_file extends Cache_Container
+{
 
     /**
     * File locking
@@ -99,13 +100,13 @@ class Cache_Container_file extends Cache_Container {
     *
     * @param    array   Config options: ["cache_dir" => ..., "filename_prefix" => ...]
     */
-     function Cache_Container_file($options = '') {
-        if (is_array($options))
+     function Cache_Container_file($options = '')
+     {
+        if (is_array($options)) {
             $this->setOptions($options, array_merge($this->allowed_options, array('cache_dir', 'filename_prefix', 'max_userdata_linelength')));
-        
+        }
         clearstatcache();
-        if ($this->cache_dir)
-        {
+        if ($this->cache_dir) {
             // make relative paths absolute for use in deconstructor.
             // it looks like the deconstructor has problems with relative paths
             if (OS_UNIX && '/' != $this->cache_dir{0}  )
@@ -123,19 +124,24 @@ class Cache_Container_file extends Cache_Container {
                     
     } // end func contructor
 
-    function fetch($id, $group) {
+    function fetch($id, $group)
+    {
         $file = $this->getFilename($id, $group);
-        if (!file_exists($file))
-            return array(NULL, NULL, NULL);
+        if (PEAR::isError($file)) {
+            return $file;
+        }
 
+        if (!file_exists($file)) {
+            return array(null, null, null);
+        }
         // retrive the content
-        if (!($fh = @fopen($file, 'rb')))
+        if (!($fh = @fopen($file, 'rb'))) {
             return new Cache_Error("Can't access cache file '$file'. Check access rights and path.", __FILE__, __LINE__);
-
+        }
         // File locking (shared lock)
-        if ($this->fileLocking)
+        if ($this->fileLocking) {
             flock($fh, LOCK_SH);
-
+        }
         // file format:
         // 1st line: expiration date
         // 2nd line: user data
@@ -146,12 +152,16 @@ class Cache_Container_file extends Cache_Container {
         } else {
             $userdata = trim(fgets($fh, $this->max_userdata_linelength));
         }
-        $cachedata = $this->decode(fread($fh, filesize($file)));
+        $buffer = '';
+        while (!feof($fh)) {
+        	$buffer .= fread($fh, 8192);
+        }
+        $cachedata = $this->decode($buffer);
 
         // Unlocking
-        if ($this->fileLocking)
+        if ($this->fileLocking) {
             flock($fh, LOCK_UN);
-
+        }
         fclose($fh);
 
         // last usage date used by the gc - maxlifetime
@@ -168,17 +178,19 @@ class Cache_Container_file extends Cache_Container {
     * WARNING: If you supply userdata it must not contain any linebreaks,
     * otherwise it will break the filestructure.
     */
-    function save($id, $cachedata, $expires, $group, $userdata) {
+    function save($id, $cachedata, $expires, $group, $userdata)
+    {
         $this->flushPreload($id, $group);
 
         $file = $this->getFilename($id, $group);
-        if (!($fh = @fopen($file, 'wb')))
+        if (!($fh = @fopen($file, 'wb'))) {
             return new Cache_Error("Can't access '$file' to store cache data. Check access rights and path.", __FILE__, __LINE__);
+        }
 
         // File locking (exclusive lock)
-        if ($this->fileLocking)
+        if ($this->fileLocking) {
             flock($fh, LOCK_EX);
-
+        }
         // file format:
         // 1st line: expiration date
         // 2nd line: user data
@@ -189,9 +201,9 @@ class Cache_Container_file extends Cache_Container {
         fwrite($fh, $this->encode($cachedata));
 
         // File unlocking
-        if ($this->fileLocking)
+        if ($this->fileLocking) {
             flock($fh, LOCK_UN);
-
+        }
         fclose($fh);
 
         // I'm not sure if we need this
@@ -201,12 +213,16 @@ class Cache_Container_file extends Cache_Container {
         return true;
     } // end func save
 
-    function remove($id, $group) {
+    function remove($id, $group)
+    {
         $this->flushPreload($id, $group);
 
         $file = $this->getFilename($id, $group);
-        if (file_exists($file)) {
+        if (PEAR::isError($file)) {
+            return $file;
+        }
 
+        if (file_exists($file)) {
             $ok = unlink($file);
             clearstatcache();
 
@@ -216,7 +232,8 @@ class Cache_Container_file extends Cache_Container {
         return false;
     } // end func remove
 
-    function flush($group) {
+    function flush($group)
+    {
         $this->flushPreload();
         $dir = ($group) ? $this->cache_dir . $group . '/' : $this->cache_dir;
 
@@ -227,8 +244,8 @@ class Cache_Container_file extends Cache_Container {
         return $num_removed;
     } // end func flush
 
-    function idExists($id, $group) {
-
+    function idExists($id, $group)
+    {
         return file_exists($this->getFilename($id, $group));
     } // end func idExists
 
@@ -245,8 +262,8 @@ class Cache_Container_file extends Cache_Container {
     * @param    integer Maximum lifetime in seconds of an no longer used/touched entry
     * @throws   Cache_Error
     */
-    function garbageCollection($maxlifetime) {
-
+    function garbageCollection($maxlifetime)
+    {
         $this->flushPreload();
         clearstatcache();
 
@@ -259,10 +276,11 @@ class Cache_Container_file extends Cache_Container {
             reset($this->entries);
             
             while ($this->total_size > $this->lowwater && list($lastmod, $entry) = each($this->entries)) {
-                if (@unlink($entry['file']))
+                if (@unlink($entry['file'])) {
                     $this->total_size -= $entry['size'];
-                else
-                    new CacheError("Can't delete {$entry["file"]}. Check the permissions.");
+                } else {
+                    new CacheError("Can't delete {$entry['file']}. Check the permissions.");
+                }
             }
             
         }
@@ -281,10 +299,11 @@ class Cache_Container_file extends Cache_Container {
     *                   recursive function call!
     * @throws   Cache_Error
     */
-    function doGarbageCollection($maxlifetime, $dir) {
-           
-        if (!($dh = opendir($dir)))
-            return new Cache_Error("Can't access cache directory '$dir'. Check permissions and path.", __FILE__, __LINE__);
+    function doGarbageCollection($maxlifetime, $dir)
+    {
+        if (!is_writable($dir) || !is_readable($dir) || !($dh = opendir($dir))) {
+            return new Cache_Error("Can't remove directory '$dir'. Check permissions and path.", __FILE__, __LINE__);
+        }
 
         while ($file = readdir($dh)) {
             if ('.' == $file || '..' == $file)
@@ -310,8 +329,9 @@ class Cache_Container_file extends Cache_Container {
             $this->total_size += filesize($file);
             
             // remove if expired
-            if (( ($expire && $expire <= time()) || ($lastused <= (time() - $maxlifetime)) ) && !unlink($file))
+            if (( ($expire && $expire <= time()) || ($lastused <= (time() - $maxlifetime)) ) && !unlink($file)) {
                 new Cache_Error("Can't unlink cache file '$file', skipping. Check permissions and path.", __FILE__, __LINE__);
+            }
         }
 
         closedir($dh);
@@ -329,17 +349,21 @@ class Cache_Container_file extends Cache_Container {
     * @return   string  full filename with the path
     * @access   public
     */
-    function getFilename($id, $group) {
-
-        if (isset($this->group_dirs[$group]))
+    function getFilename($id, $group)
+    {
+        if (isset($this->group_dirs[$group])) {
             return $this->group_dirs[$group] . $this->filename_prefix . $id;
-
-        $dir = $this->cache_dir . $group . '/';
-        if (!file_exists($dir)) {
-            mkdir($dir, 0755);
-            clearstatcache();
         }
 
+        $dir = $this->cache_dir . $group . '/';
+        if (is_writeable($this->cache_dir)) {
+            if (!file_exists($dir)) {
+                mkdir($dir, 0755, true);
+                clearstatcache();
+            }
+        } else {
+            return new Cache_Error("Can't make directory '$dir'. Check permissions and path.", __FILE__, __LINE__);
+        }
         $this->group_dirs[$group] = $dir;
 
         return $dir . $this->filename_prefix . $id;
@@ -352,9 +376,11 @@ class Cache_Container_file extends Cache_Container {
     * @return   integer number of removed files
     * @throws   Cache_Error
     */
-    function deleteDir($dir) {
-        if (!($dh = opendir($dir)))
+    function deleteDir($dir)
+    {
+        if (!is_writable($dir) || !is_readable($dir) || !($dh = opendir($dir))) {
             return new Cache_Error("Can't remove directory '$dir'. Check permissions and path.", __FILE__, __LINE__);
+        }
 
         $num_removed = 0;
 
@@ -385,3 +411,4 @@ class Cache_Container_file extends Cache_Container {
     } // end func deleteDir
     
 } // end class file
+?>

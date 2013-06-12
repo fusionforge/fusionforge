@@ -1,6 +1,5 @@
-Date: Thu,  9 Dec 2010 14:51:45 +0000
-X-Rcs-Id: $Id: Help%2FWikiPlugin 7757 2010-12-09 13:53:00Z vargenau $
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
+Date: Fri, 11 Jan 2013 11:16:51 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWikiPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -18,9 +17,6 @@ in the ##lib/plugin## directory or see the [[PluginManager]] list or see all the
 
 To write your own, look at the [[Help:HelloWorldPlugin]] (~HelloWorld.php
 in that directory), which is a minimal example of a plugin.
-Publish your self-written plugin at a new ~PhpWiki page with
-~PluginName + **Plugin** appended
-and add a link to [[PhpWiki:CategoryContributedPlugin|CategoryContributedPlugin]].
 
 A ~WikiPlugin allows one to easily add new types of dynamic
 content (as well as other functionality) to wiki pages within ~PhpWiki.
@@ -94,7 +90,7 @@ library. ~PageList provides automatic support for those arguments.
 
   For details see the [[Help:PageList|PageList]] library documentation.
 
-*exclude* and *pages* accept a list of pages. Either as comma-seperated list,
+*exclude* and *pages* accept a list of pages. Either as comma-separated list,
 supporting glob-style wildcards, or via the ##<!plugin-list pluginname ~[args~] !>##
 invocation syntax, where pluginname might be any plugin returning a [[Help:PageList|PageList]].
 See PhpWiki:PluginList.
@@ -199,13 +195,5 @@ See [[PluginManager]] for a detailed list. Most plugins should have their
 own description page as subpage of **Help/** with the name **Plugin**
 appended.
 
-<<BackLinks noheader=1 >>
-
-== Contributed Plugins ==
-
-See [[PhpWiki:CategoryContributedPlugin]].
-
-<<BackLinks page=CategoryContributedPlugin >>
-
------
+----
 [[PhpWikiDocumentation]]

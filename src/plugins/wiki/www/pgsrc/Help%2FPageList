@@ -1,6 +1,5 @@
-Date: Thu,  9 Dec 2010 14:51:45 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FPageList 7757 2010-12-09 13:53:00Z vargenau $
+Date: Fri, 11 Jan 2013 11:16:51 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPageList;
   flags="";
@@ -33,7 +32,7 @@ It also allows dynamic expansion of those plugins to include more columns in the
 | pagename
 |-
 | **exclude**
-| which pages to exclude. Wildcards, comma-seperated lists and <!plugin-list !> arrays allowed.
+| which pages to exclude. Wildcards, comma-separated lists and <!plugin-list !> arrays allowed.
 | //none//
 |-
 | **author**
@@ -69,7 +68,7 @@ It also allows dynamic expansion of those plugins to include more columns in the
 | 0
 |-
 | **comma**
-| condensed comma-seperated list, 1 if without links, 2 if with
+| condensed comma-separated list, 1 if without links, 2 if with
 | 0
 |-
 | **commasep**

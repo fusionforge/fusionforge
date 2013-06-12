@@ -1,5 +1,4 @@
-<?php // -*-php-*-
-// $Id: ADODB.php 7956 2011-03-03 17:08:31Z vargenau $
+<?php
 
 require_once 'lib/WikiDB.php';
 
@@ -13,7 +12,8 @@ require_once 'lib/WikiDB.php';
  */
 class WikiDB_ADODB extends WikiDB
 {
-    function WikiDB_ADODB ($dbparams) {
+    function WikiDB_ADODB($dbparams)
+    {
         $backend = 'ADODB';
         if (is_array($dbparams['dsn']))
             $backend = $dbparams['dsn']['phptype'];
@@ -21,29 +21,30 @@ class WikiDB_ADODB extends WikiDB
             $backend = $m[1];
         // Do we have a override? (currently: mysql, sqlite, oracle, mssql, oci8po, postgres7)
         // TODO: mysqlt (innodb or bdb)
-	if ($backend == 'pgsql') { // PearDB DSN cross-compatiblity hack (for unit testing)
-	    $backend = 'postgres7';
-	    if (is_string($dbparams['dsn']))
-		$dbparams['dsn'] = $backend . ':' . substr($dbparams['dsn'], 6);
-	}
-        if (FindFile("lib/WikiDB/backend/ADODB_".$backend.".php",true)) {
+        if ($backend == 'pgsql') { // PearDB DSN cross-compatiblity hack (for unit testing)
+            $backend = 'postgres7';
+            if (is_string($dbparams['dsn']))
+                $dbparams['dsn'] = $backend . ':' . substr($dbparams['dsn'], 6);
+        }
+        if (FindFile("lib/WikiDB/backend/ADODB_" . $backend . ".php", true)) {
             $backend = 'ADODB_' . $backend;
         } else {
             $backend = 'ADODB';
         }
-        include_once 'lib/WikiDB/backend/'.$backend.'.php';
-        $backend_class = "WikiDB_backend_".$backend;
+        include_once 'lib/WikiDB/backend/' . $backend . '.php';
+        $backend_class = "WikiDB_backend_" . $backend;
         $backend = new $backend_class($dbparams);
-	if (!$backend->_dbh->_connectionID) return false;
+        if (!$backend->_dbh->_connectionID) return false;
         $this->WikiDB($backend, $dbparams);
     }
-  
+
     /**
      * Determine whether page exists (in non-default form).
      * @see WikiDB::isWikiPage
      */
-    function isWikiPage ($pagename) {
-        $pagename = (string) $pagename;
+    function isWikiPage($pagename)
+    {
+        $pagename = (string)$pagename;
         if ($pagename === '') return false;
         if (!array_key_exists($pagename, $this->_cache->_id_cache)) {
             $this->_cache->_id_cache[$pagename] = $this->_backend->is_wiki_page($pagename);
@@ -52,7 +53,8 @@ class WikiDB_ADODB extends WikiDB
     }
 
     // add surrounding quotes '' if string
-    function quote ($in) {
+    function quote($in)
+    {
         if (is_int($in) || is_double($in)) {
             return $in;
         } elseif (is_bool($in)) {
@@ -63,13 +65,16 @@ class WikiDB_ADODB extends WikiDB
             return $this->_backend->_dbh->qstr($in);
         }
     }
+
     // ADODB handles everything as string
     // Don't add surrounding quotes '', same as in PearDB
-    function qstr ($in) {
+    function qstr($in)
+    {
         return $this->_backend->_dbh->addq($in);
     }
 
-    function isOpen () {
+    function isOpen()
+    {
         global $request;
         if (!$request->_dbi) return false;
         return is_resource($this->_backend->connection());
@@ -77,13 +82,14 @@ class WikiDB_ADODB extends WikiDB
 
     // SQL result: for simple select or create/update queries
     // returns the database specific resource type
-    function genericSqlQuery($sql, $args=false) {
+    function genericSqlQuery($sql, $args = false)
+    {
         if ($args)
             $result = $this->_backend->_dbh->Execute($sql, $args);
         else
             $result = $this->_backend->_dbh->Execute($sql);
         if (!$result) {
-            trigger_error("SQL Error: ".$this->_backend->_dbh->ErrorMsg(), E_USER_WARNING);
+            trigger_error("SQL Error: " . $this->_backend->_dbh->ErrorMsg(), E_USER_WARNING);
             return false;
         } else {
             return $result;
@@ -92,12 +98,13 @@ class WikiDB_ADODB extends WikiDB
 
     // SQL iter: for simple select or create/update queries
     // returns the generic iterator object (count,next)
-    function genericSqlIter($sql, $field_list = NULL) {
+    function genericSqlIter($sql, $field_list = NULL)
+    {
         $result = $this->genericSqlQuery($sql);
         return new WikiDB_backend_ADODB_generic_iter($this->_backend, $result, $field_list);
     }
 
-};
+}
 
 // Local Variables:
 // mode: php

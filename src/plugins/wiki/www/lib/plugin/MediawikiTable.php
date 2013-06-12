@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: MediawikiTable.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright (C) 2003 Sameer D. Sahasrabuddhe
  * Copyright (C) 2005 $ThePhpWikiProgrammingTeam
@@ -48,23 +48,22 @@
  * MediawikiTablePlugin
  * A PhpWiki plugin that allows insertion of tables using a Mediawiki-like
  * syntax.
-*/
+ */
 class WikiPlugin_MediawikiTable
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName() {
-        return _("MediawikiTable");
+    function getDescription()
+    {
+        return _("Layout tables using a Mediawiki-like markup style.");
     }
 
-    function getDescription() {
-      return _("Layout tables using a Mediawiki-like markup style.");
-    }
-
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array();
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         include_once 'lib/BlockParser.php';
         // MediawikiTablePlugin markup is new.
         $markup = 2.0;
@@ -94,18 +93,19 @@ extends WikiPlugin
         // If user provides an Id, the generated Id will be overwritten below.
         $table->setAttr("id", GenerateId("MediawikiTable"));
 
-        if (substr($lines[0],0,2) == "{|") {
+        if (substr($lines[0], 0, 2) == "{|") {
             // Start of table
-            $lines[0] = substr($lines[0],2);
+            $lines[0] = substr($lines[0], 2);
         }
         if (($lines[0][0] != '|') and ($lines[0][0] != '!')) {
             $line = array_shift($lines);
             $attrs = parse_attributes($line);
             foreach ($attrs as $key => $value) {
-                if (in_array ($key, array("id", "class", "title", "style",
-                                          "bgcolor", "frame", "rules", "border",
-                                          "cellspacing", "cellpadding",
-                                          "summary", "align", "width"))) {
+                if (in_array($key, array("id", "class", "title", "style",
+                    "bgcolor", "frame", "rules", "border",
+                    "cellspacing", "cellpadding",
+                    "summary", "align", "width"))
+                ) {
                     $table->setAttr($key, $value);
                 }
             }
@@ -116,11 +116,11 @@ extends WikiPlugin
         }
 
         foreach ($lines as $line) {
-            if (substr($line,0,2) == "|}") {
+            if (substr($line, 0, 2) == "|}") {
                 // End of table
                 continue;
             }
-            if (substr($line,0,2) == "|-") {
+            if (substr($line, 0, 2) == "|-") {
                 if (isset($row)) {
                     if (isset($cell)) {
                         if (isset($content)) {
@@ -144,10 +144,11 @@ extends WikiPlugin
                     }
                 }
                 $row = HTML::tr();
-                $attrs = parse_attributes(substr($line,2));
+                $attrs = parse_attributes(substr($line, 2));
                 foreach ($attrs as $key => $value) {
-                    if (in_array ($key, array("id", "class", "title", "style",
-                                              "bgcolor", "align", "valign"))) {
+                    if (in_array($key, array("id", "class", "title", "style",
+                        "bgcolor", "align", "valign"))
+                    ) {
                         $row->setAttr($key, $value);
                     }
                 }
@@ -155,32 +156,33 @@ extends WikiPlugin
             }
 
             // Table summary
-            if (substr($line,0,2) == "|=") {
-                $line = substr($line,2);
+            if (substr($line, 0, 2) == "|=") {
+                $line = substr($line, 2);
                 $table->setAttr("summary", trim($line));
             }
 
             // Table caption
-            if (substr($line,0,2) == "|+") {
+            if (substr($line, 0, 2) == "|+") {
 
-                $line = substr($line,2);
+                $line = substr($line, 2);
                 $pospipe = strpos($line, "|");
                 $posbracket = strpos($line, "[");
                 if (($pospipe !== false) && (($posbracket === false) || ($posbracket > $pospipe))) {
                     $attrs = parse_attributes(substr($line, 0, $pospipe));
                     foreach ($attrs as $key => $value) {
-                        if (in_array ($key, array("id", "class", "title", "style",
-                                                  "align", "lang"))) {
+                        if (in_array($key, array("id", "class", "title", "style",
+                            "align", "lang"))
+                        ) {
                             $caption->setAttr($key, $value);
                         }
                     }
-                    $line=substr($line, $pospipe+1);
+                    $line = substr($line, $pospipe + 1);
                 }
 
                 $caption->setContent(TransformInline(trim($line)));
             }
 
-            if (((substr($line,0,1) == "|") or (substr($line,0,1) == "!")) and isset($row)) {
+            if (((substr($line, 0, 1) == "|") or (substr($line, 0, 1) == "!")) and isset($row)) {
                 if (isset($cell)) {
                     if (isset ($content)) {
                         if (is_numeric(trim($content))) {
@@ -192,11 +194,11 @@ extends WikiPlugin
                     }
                     $row->pushContent($cell);
                 }
-                if (substr($line,0,1) == "!") {
+                if (substr($line, 0, 1) == "!") {
                     if ($theadstatus == 0) { // unknown
                         $theadstatus = 1; // inside
                     }
-                    $cell = HTML::th();   // Header
+                    $cell = HTML::th(); // Header
                 } else {
                     if ($theadstatus == 1) { // inside
                         $theadstatus = 2; // false
@@ -224,13 +226,14 @@ extends WikiPlugin
                 if (($pospipe !== false) && (($posbracket === false) || ($posbracket > $pospipe)) && (($poscurly === false) || ($poscurly > $pospipe))) {
                     $attrs = parse_attributes(substr($line, 0, $pospipe));
                     foreach ($attrs as $key => $value) {
-                        if (in_array ($key, array("id", "class", "title", "style", "scope",
-                                                  "colspan", "rowspan", "width", "height",
-                                                  "bgcolor", "align", "valign"))) {
+                        if (in_array($key, array("id", "class", "title", "style", "scope",
+                            "colspan", "rowspan", "width", "height",
+                            "bgcolor", "align", "valign"))
+                        ) {
                             $cell->setAttr($key, $value);
                         }
                     }
-                    $line=substr($line, $pospipe+1);
+                    $line = substr($line, $pospipe + 1);
                     if (is_numeric(trim($line))) {
                         $cell->pushContent(HTML::p(array('style' => "text-align:right"), trim($line)));
                     } else {

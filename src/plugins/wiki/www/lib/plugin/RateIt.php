@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: RateIt.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 2004,2007,2009 $ThePhpWikiProgrammingTeam
  *
@@ -82,36 +82,38 @@ require_once 'lib/WikiPlugin.php';
 require_once 'lib/wikilens/RatingsDb.php';
 
 class WikiPlugin_RateIt
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName() {
-        return _("RateIt");
-    }
-    function getDescription() {
-        return _("Rating system. Store user ratings per page");
+    static $toBeUniq = 1;
+    public $idTop = '';
+
+    function getDescription()
+    {
+        return _("Rating system. Store user ratings per page.");
     }
 
-    function RatingWidgetJavascript() {
+    function RatingWidgetJavascript()
+    {
         global $WikiTheme;
         if (!empty($this->imgPrefix))
             $imgPrefix = $this->imgPrefix;
         elseif (defined("RATEIT_IMGPREFIX"))
-            $imgPrefix = RATEIT_IMGPREFIX;
-        else $imgPrefix = '';
-        if ($imgPrefix and !$WikiTheme->_findData("images/RateIt".$imgPrefix."Nk0.png",1))
+            $imgPrefix = RATEIT_IMGPREFIX; else $imgPrefix = '';
+        if ($imgPrefix and !$WikiTheme->_findData("images/RateIt" . $imgPrefix . "Nk0.png", 1))
             $imgPrefix = '';
-        $img   = substr($WikiTheme->_findData("images/RateIt".$imgPrefix."Nk0.png"),0,-7);
-        $urlprefix = WikiURL("",0,1); // TODO: check actions USE_PATH_INFO=false
-        $js_globals = "var rateit_imgsrc = '".$img."';
-var rateit_action = '".urlencode("RateIt")."';
+        $img = substr($WikiTheme->_findData("images/RateIt" . $imgPrefix . "Nk0.png"), 0, -7);
+        $urlprefix = WikiURL("", 0, 1); // TODO: check actions USE_PATH_INFO=false
+        $js_globals = "var rateit_imgsrc = '" . $img . "';
+var rateit_action = '" . urlencode("RateIt") . "';
 ";
         $WikiTheme->addMoreHeaders
-                (JavaScript('',
-                            array('src' => $WikiTheme->_findData('themes/wikilens/wikilens.js'))));
+        (JavaScript('',
+            array('src' => $WikiTheme->_findData('themes/wikilens/wikilens.js'))));
         return JavaScript($js_globals);
     }
 
-    function actionImgPath() {
+    function actionImgPath()
+    {
         global $WikiTheme;
         return $WikiTheme->_findFile("images/RateItAction.png", 1);
     }
@@ -120,46 +122,49 @@ var rateit_action = '".urlencode("RateIt")."';
      * Take a string and quote it sufficiently to be passed as a Javascript
      * string between ''s
      */
-    function _javascript_quote_string($s) {
+    private function _javascript_quote_string($s)
+    {
         return str_replace("'", "\'", $s);
     }
 
-    function getDefaultArguments() {
-        return array( 'pagename'  => '[pagename]',
-                      'version'   => false,
-                      'id'        => 'rateit',
-                      'imgPrefix' => '',      // '' or BStar or Star
-                      'dimension' => false,
-                      'small'     => false,
-                      'show'      => false,
-                      'mode'      => false,
-                      );
+    function getDefaultArguments()
+    {
+        return array('pagename' => '[pagename]',
+            'version' => false,
+            'id' => 'rateit',
+            'imgPrefix' => '', // '' or BStar or Star
+            'dimension' => false,
+            'small' => false,
+            'show' => false,
+            'mode' => false,
+        );
     }
 
-    function head() { // early side-effects (before body)
+    function head()
+    { // early side-effects (before body)
         global $WikiTheme;
         static $_already;
-        if (!empty($_already)) return;
-        $_already = 1;
         $WikiTheme->addMoreHeaders(JavaScript(
-"var prediction = new Array; var rating = new Array;
+            "var prediction = new Array; var rating = new Array;
 var avg = new Array; var numusers = new Array;
-var msg_rating_votes = '"._("Rating: %.1f (%d votes)")."';
-var msg_curr_rating = '"._("Your current rating: ")."';
-var msg_curr_prediction = '"._("Your current prediction: ")."';
-var msg_chg_rating = '"._("Change your rating from ")."';
-var msg_to = '"._(" to ")."';
-var msg_add_rating = '"._("Add your rating: ")."';
-var msg_thanks = '"._("Thanks!")."';
-var msg_rating_deleted = '"._("Rating deleted!")."';
+var canRate = new Array;
+var msg_rating_votes = '" . _("Rating: %.1f (%d votes)") . "';
+var msg_curr_rating = '" . _("Your current rating: ") . "';
+var msg_curr_prediction = '" . _("Your current prediction: ") . "';
+var msg_chg_rating = '" . _("Change your rating from ") . "';
+var msg_to = '" . _(" to ") . "';
+var msg_add_rating = '" . _("Add your rating: ") . "';
+var msg_thanks = '" . _("Thanks!") . "';
+var msg_rating_deleted = '" . _("Rating deleted!") . "';
 "));
         $WikiTheme->addMoreHeaders($this->RatingWidgetJavascript());
     }
 
-    function displayActionImg ($mode) {
+    function displayActionImg($mode)
+    {
         global $WikiTheme, $request;
         if (!empty($request->_is_buffering_output))
-            ob_end_clean();  // discard any previous output
+            ob_end_clean(); // discard any previous output
         // delete the cache
         $page = $request->getPage();
         //$page->set('_cached_html', false);
@@ -168,7 +173,7 @@ var msg_rating_deleted = '"._("Rating deleted!")."';
         $dbi->touch();
         //fake validators without args
         $request->appendValidators(array('wikiname' => WIKI_NAME,
-                                         'args'     => wikihash('')));
+            'args' => wikihash('')));
         $request->discardOutput();
         $actionImg = $WikiTheme->_path . $this->actionImgPath();
         if (file_exists($actionImg)) {
@@ -177,25 +182,24 @@ var msg_rating_deleted = '"._("Rating deleted!")."';
         } else {
             header('Content-type: image/png');
             echo base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAIAAAACAQMAAABIeJ9nAAAAA1BMVEX///'
-                     .'+nxBvIAAAAAXRSTlMAQObYZgAAABNJREFUeF4NwAEBAAAAgJD+r5YGAAQAAXHhfPAAAAAASUVORK5CYII=');
+                . '+nxBvIAAAAAXRSTlMAQObYZgAAABNJREFUeF4NwAEBAAAAgJD+r5YGAAQAAXHhfPAAAAAASUVORK5CYII=');
         }
         exit;
     }
 
     // Only for signed users done in template only yet.
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         global $WikiTheme;
         //$this->_request = & $request;
         //$this->_dbi = & $dbi;
         $user = $request->getUser();
-        //FIXME: fails on test with DumpHtml:RateIt
-        if (!is_object($user)) {
-            return HTML::raw('');
-        }
-        $this->userid = $user->getId();
-        if (!$this->userid) {
-            return HTML::raw('');
-        }
+        if ($user && is_object($user) && $user->isAuthenticated()) {
+            //FIXME: fails on test with DumpHtml:RateIt
+            $this->userid = $user->getId();
+            $isAuth = 1;
+        } else
+            $isAuth = 0;
         $args = $this->getArgs($argstr, $request);
         $this->dimension = $args['dimension'];
         $this->imgPrefix = $args['imgPrefix'];
@@ -216,82 +220,87 @@ var msg_rating_deleted = '"._("Rating deleted!")."';
         $rdbi = RatingsDb::getTheRatingsDb();
         $this->_rdbi =& $rdbi;
 
-        if ($args['mode'] === 'add') {
+        if ($isAuth && $args['mode'] === 'add') {
             //if (!$user->isSignedIn()) return $this->error(_("You must sign in"));
             $this->rating = $request->getArg('rating');
             $rdbi->addRating($this->rating, $this->userid, $this->pagename, $this->dimension);
             $this->displayActionImg('add');
 
-        } elseif ($args['mode'] === 'delete') {
+        } elseif ($isAuth && $args['mode'] === 'delete') {
             //if (!$user->isSignedIn()) return $this->error(_("You must sign in"));
             $rdbi->deleteRating($this->userid, $this->pagename, $this->dimension);
             unset($this->rating);
             $this->displayActionImg('delete');
-        } elseif (! $args['show'] ) {
+        } elseif (!$args['show']) {
             return $this->RatingWidgetHtml($args['pagename'], $args['version'], $args['imgPrefix'],
-                                           $args['dimension'], $args['small']);
+                $args['dimension'], $args['small']);
         } else {
             //if (!$user->isSignedIn()) return $this->error(_("You must sign in"));
             //extract($args);
-            $this->rating   = $rdbi->getRating($this->userid, $this->pagename, $this->dimension);
-            $this->avg      = $rdbi->getAvg($this->pagename, $this->dimension);
+            if ($isAuth)
+                $this->rating = $rdbi->getRating($this->userid, $this->pagename, $this->dimension);
+            else
+                $this->rating = 0;
+            $this->avg = $rdbi->getAvg($this->pagename, $this->dimension);
             $this->numusers = $rdbi->getNumUsers($this->pagename, $this->dimension);
             // Update this text on rateit in javascript. needed: NumUsers, Avg
-            $html = HTML::div
-                (
-                 HTML::span(array('class' => 'rateit'),
-                            sprintf(_("Rating: %.1f (%d votes)"),
-                                    $this->avg, $this->numusers)));
+            if (defined('FUSIONFORGE') and FUSIONFORGE) {
+                $html = HTML::span();
+            } else {
+                $html = HTML::div();
+            }
+            $html->pushContent(
+                HTML::span(array('class' => 'rateit'),
+                    sprintf(_("Rating: %s (%d vote" . ($this->numusers > 1 ? 's' : '') . ")"),
+                        round($this->avg, 1), round($this->numusers, 1))));
+            $this->pred = '';
             if ($args['show'] == 'top') {
                 if (ENABLE_PAGE_PUBLIC) {
                     $page = $dbi->getPage($this->pagename);
                     if ($page->get('public'))
                         $html->setAttr('class', "public");
                 }
-                $html->setAttr('id', "rateit-widget-top");
-                $html->pushContent(HTML::br(),
-                                   $this->RatingWidgetHtml($args['pagename'], $args['version'],
-                                                           $args['imgPrefix'],
-                                                           $args['dimension'], $args['small']));
+                $this->idTop = sprintf("%u", crc32($this->pagename));
+                $html->setAttr('id', 'rateit-widget-top');
+                if (defined('FUSIONFORGE') and FUSIONFORGE) {
+                    $html->pushContent(HTML::raw('&#160;'));
+                } else {
+                    $html->pushContent(HTML::br());
+                }
+                $html->pushContent($this->RatingWidgetHtml($args['pagename'], $args['version'],
+                    $args['imgPrefix'],
+                    $args['dimension'], $args['small']));
             } elseif ($args['show'] == 'text') {
                 if (!$WikiTheme->DUMP_MODE)
                     $html->pushContent(HTML::br(),
-                                       sprintf(_("Your rating was %.1f"),
-                                               $this->rating));
+                        sprintf(_("Your rating was %.1f"),
+                            $this->rating));
             } elseif ($this->rating) {
                 $html->pushContent(HTML::br(),
-                                   sprintf(_("Your rating was %.1f"),
-                                           $this->rating));
-            } else {
-                    $this->pred = $rdbi->getPrediction($this->userid, $this->pagename, $this->dimension);
-                    if (is_string($this->pred))
-                    $html->pushContent(HTML::br(),
-                                       sprintf(_("Prediction: %s"),
-                                               $this->pred));
-                elseif ($this->pred)
-                    $html->pushContent(HTML::br(),
-                                       sprintf(_("Prediction: %.1f"),
-                                               $this->pred));
+                    sprintf(_("Your rating was %.1f"),
+                        $this->rating));
             }
-            //$html->pushContent(HTML::p());
-            //$html->pushContent(HTML::em("(Experimental: This might be entirely bogus data)"));
             return $html;
         }
+        return HTML::raw();
     }
 
     // box is used to display a fixed-width, narrow version with common header
-    function box($args=false, $request=false, $basepage=false) {
+    function box($args = false, $request = false, $basepage = false)
+    {
         if (!$request) $request =& $GLOBALS['request'];
-        if (!$request->_user->isSignedIn()) return;
+        if (!$request->_user->isSignedIn()) {
+            return HTML::raw();
+        }
         if (!isset($args)) $args = array();
         $args['small'] = 1;
         $argstr = '';
         foreach ($args as $key => $value)
-            $argstr .= $key."=".$value;
+            $argstr .= $key . "=" . $value;
         $widget = $this->run($request->_dbi, $argstr, $request, $basepage);
 
-        return $this->makeBox(WikiLink(_("RateIt"),'',_("Rate It")),
-                              $widget);
+        return $this->makeBox(WikiLink(_("RateIt"), '', _("Rate It")),
+            $widget);
     }
 
     /**
@@ -310,66 +319,93 @@ var msg_rating_deleted = '"._("Rating deleted!")."';
      * Limitations: Currently this can only print the current users ratings.
      *              And only the widget, but no value (for buddies) also.
      */
-    function RatingWidgetHtml($pagename, $version, $imgPrefix, $dimension, $small = false) {
+    function RatingWidgetHtml($pagename, $version, $imgPrefix, $dimension, $small = false)
+    {
         global $WikiTheme, $request;
 
         $dbi =& $request->_dbi;
         $version = $dbi->_backend->get_latest_version($pagename);
-        $pageid = sprintf("%u",crc32($pagename)); // MangleXmlIdentifier($pagename)
+        $pageid = sprintf("%u", crc32($pagename)); // MangleXmlIdentifier($pagename)
+        if ($pageid == $this->idTop) {
+            $pageid .= '0';
+            $jsIdTop = "idTop = '" . 'RateIt' . $pageid . "';\n";
+            $canRate = 1;
+        } else {
+            $pageid .= self::$toBeUniq;
+            self::$toBeUniq++;
+            $jsIdTop = '';
+            $canRate = 0;
+        }
         $imgId = 'RateIt' . $pageid;
-        $actionImgName = 'RateIt'.$pageid.'Action';
+        $actionImgName = 'RateIt' . $pageid . 'Action';
 
         //$rdbi =& $this->_rdbi;
         $rdbi = RatingsDb::getTheRatingsDb();
 
         // check if the imgPrefix icons exist.
-        if (! $WikiTheme->_findData("images/RateIt".$imgPrefix."Nk0.png", true))
+        if (!$WikiTheme->_findData("images/RateIt" . $imgPrefix . "Nk0.png", true))
             $imgPrefix = '';
 
         // Protect against \'s, though not \r or \n
         $reImgPrefix = $this->_javascript_quote_string($imgPrefix);
-        $reImgId     = $this->_javascript_quote_string($imgId);
+        $reImgId = $this->_javascript_quote_string($imgId);
         $reActionImgName = $this->_javascript_quote_string($actionImgName);
-        $rePagename      = $this->_javascript_quote_string($pagename);
+        $rePagename = $this->_javascript_quote_string($pagename);
         //$dimension = $args['pagename'] . "rat";
 
         $html = HTML::span(array("class" => "rateit-widget", "id" => $imgId));
-        for ($i=0; $i < 2; $i++) {
-            $ok[$i] = $WikiTheme->_findData("images/RateIt".$imgPrefix."Ok".$i.".png"); // empty
-            $nk[$i] = $WikiTheme->_findData("images/RateIt".$imgPrefix."Nk".$i.".png"); // rated
-            $rk[$i] = $WikiTheme->_findData("images/RateIt".$imgPrefix."Rk".$i.".png"); // pred
+        for ($i = 0; $i < 2; $i++) {
+            $ok[$i] = $WikiTheme->_findData("images/RateIt" . $imgPrefix . "Ok" . $i . ".png"); // empty
+            $nk[$i] = $WikiTheme->_findData("images/RateIt" . $imgPrefix . "Nk" . $i . ".png"); // rated
+            $rk[$i] = $WikiTheme->_findData("images/RateIt" . $imgPrefix . "Rk" . $i . ".png"); // pred
         }
 
-        if (empty($this->userid)) {
-            $user = $request->getUser();
-            $this->userid = $user->getId();
-        }
-        if (empty($this->rating)) {
-            $this->rating = $rdbi->getRating($this->userid, $pagename, $dimension);
-            if (!$this->rating and empty($this->pred)) {
-                $this->pred = $rdbi->getPrediction($this->userid, $pagename, $dimension);
+        $user = $request->getUser();
+        if ($user && is_object($user) && $user->isAuthenticated()) {
+            $canRate = 1 & $canRate;
+            if (empty($this->userid)) {
+                $this->userid = $user->getId();
             }
-        }
+            if (empty($this->rating)) {
+                $this->rating = $rdbi->getRating($this->userid, $pagename, $dimension);
+                if (!$this->rating and empty($this->pred)) {
+                    $this->pred = $rdbi->getPrediction($this->userid, $pagename, $dimension);
+                }
+            }
+        } else $canRate = 0 & $canRate;
+
+        if (empty($this->avg)) $this->avg = $rdbi->getAvg($pagename, $dimension);
+        if (!$this->avg) $this->avg = 0;
+        if (empty($this->numusers)) $this->numusers = $rdbi->getNumUsers($pagename, $dimension);
 
         for ($i = 1; $i <= 10; $i++) {
-            $j = $i / 2;
-            $a1 = HTML::a(array('href' => "javascript:clickRating('$reImgPrefix','$rePagename','$version',"
-                                ."'$reImgId','$dimension',$j)"));
             $img_attr = array();
-            $img_attr['src'] = $nk[$i%2];
-            if ($this->rating) {
-                $img_attr['src'] = $ok[$i%2];
-                $img_attr['onmouseover'] = "displayRating('$reImgId','$reImgPrefix',$j,0,1)";
-                $img_attr['onmouseout']  = "displayRating('$reImgId','$reImgPrefix',$this->rating,0,1)";
-            }
-            else if (!$this->rating and $this->pred) {
-                $img_attr['src'] = $rk[$i%2];
-                $img_attr['onmouseover'] = "displayRating('$reImgId','$reImgPrefix',$j,1,1)";
-                $img_attr['onmouseout']  = "displayRating('$reImgId','$reImgPrefix',$this->pred,1,1)";
-            }
-            else {
-                $img_attr['onmouseover'] = "displayRating('$reImgId','$reImgPrefix',$j,0,1)";
-                $img_attr['onmouseout']  = "displayRating('$reImgId','$reImgPrefix',0,0,1)";
+            $img_attr['src'] = $nk[$i % 2];
+            if ($canRate) {
+                $jsCanRate = "canRate['$reImgId'] = 1;\n";
+                $a1 = HTML::a(array('href' => "javascript:clickRating('$reImgPrefix','$rePagename','$version',"
+                    . "'$reImgId','$dimension',$i / 2)",
+                    'style' => 'outline: 0'));
+                if ($this->avg) {
+                    $img_attr['src'] = $ok[$i % 2];
+                    $img_attr['onmouseover'] = "displayRating2('$reImgId','$reImgPrefix',$i / 2,0,1)";
+                    $img_attr['onmouseout'] = "displayRating('$reImgId','$reImgPrefix',$this->avg,0,1)";
+                } elseif (!$this->rating and $this->pred) {
+                    $img_attr['src'] = $rk[$i % 2];
+                    $img_attr['onmouseover'] = "displayRating('$reImgId','$reImgPrefix',$i / 2,1,1)";
+                    $img_attr['onmouseout'] = "displayRating('$reImgId','$reImgPrefix',$this->pred,1,1)";
+                } else {
+                    $img_attr['onmouseover'] = "displayRating2('$reImgId','$reImgPrefix',$i / 2,0,1)";
+                    $img_attr['onmouseout'] = "displayRating('$reImgId','$reImgPrefix',0,0,1)";
+                }
+            } else {
+                $jsCanRate = "canRate['$reImgId'] = 0;\n";
+                if ($this->avg) {
+                    $img_attr['src'] = $ok[$i % 2];
+                } elseif (!$this->rating and $this->pred) {
+                    $img_attr['src'] = $rk[$i % 2];
+                }
+                $a1 = HTML::span();
             }
             //$imgName = 'RateIt'.$reImgId.$i;
             $img_attr['id'] = $imgId . $i;
@@ -381,20 +417,25 @@ var msg_rating_deleted = '"._("Rating deleted!")."';
             //This adds a space between the rating smilies:
             //if (($i%2) == 0) $html->pushContent("\n");
         }
-        $html->pushContent(HTML::Raw("&nbsp;"));
+        $html->pushContent(HTML::raw("&nbsp;"));
 
-        $a0 = HTML::a(array('href' => "javascript:clickRating('$reImgPrefix','$rePagename','$version',"
-                            ."'$reImgId','$dimension','X')"));
-        $msg = _("Cancel your rating");
-        $imgprops = array('src'   => $WikiTheme->getImageUrl("RateIt".$imgPrefix."Cancel"),
-                          'id'    => $imgId.$imgPrefix.'Cancel',
-                          'alt'   => $msg,
-                          'title' => $msg);
-        if (!$this->rating)
-            $imgprops['style'] = 'display:none';
-        $a0->pushContent(HTML::img($imgprops));
-        $a0->addToolTip($msg);
-        $html->pushContent($a0);
+        if ($canRate) {
+            $a0 = HTML::a(array('href' => "javascript:clickRating('$reImgPrefix','$rePagename','$version',"
+                . "'$reImgId','$dimension','X')",
+                'style' => 'outline: 0'));
+            $msg = _("Cancel your rating");
+            $imgprops = array('src' => $WikiTheme->getImageUrl("RateIt" . $imgPrefix . "Cancel"),
+                'id' => $imgId . $imgPrefix . 'Cancel',
+                'alt' => $msg,
+                'title' => $msg,
+                'onmouseover' => "displayRating2('$reImgId','$reImgPrefix',0,0,1)",
+                'onmouseout' => "displayRating('$reImgId','$reImgPrefix',$this->avg,0,1)");
+            if (!$this->rating)
+                $imgprops['style'] = 'display:none';
+            $a0->pushContent(HTML::img($imgprops));
+            //$a0->addToolTip($msg);
+            $html->pushContent($a0);
+        }
 
         /*} elseif ($pred) {
             $msg = _("No opinion");
@@ -410,31 +451,33 @@ var msg_rating_deleted = '"._("Rating deleted!")."';
         $img_attr['alt'] = $img_attr['id'];
         $img_attr['height'] = 15;
         $img_attr['width'] = 20;
+        $img_attr['style'] = 'display: none;';
         $html->pushContent(HTML::img($img_attr));
 
         // Display your current rating if there is one, or the current prediction
         // or the empty widget.
         $pred = empty($this->pred) ? 0 : $this->pred;
-        $js = '';
+        $js = $jsIdTop . $jsCanRate;
         if (!empty($this->avg))
             $js .= "avg['$reImgId']=$this->avg; numusers['$reImgId']=$this->numusers;\n";
         if ($this->rating) {
             $js .= "rating['$reImgId']=$this->rating; prediction['$reImgId']=$pred;\n";
+            $js .= "var msg_chg_rating = 'Change your rating from ';\n";
             $html->pushContent(JavaScript($js
-                    ."displayRating('$reImgId','$reImgPrefix',$this->rating,0,1);"));
+                . "displayRating('$reImgId','$reImgPrefix',$this->avg,0,1);"));
         } elseif (!empty($this->pred)) {
             $js .= "rating['$reImgId']=0; prediction['$reImgId']=$this->pred;\n";
             $html->pushContent(JavaScript($js
-                    ."displayRating('$reImgId','$reImgPrefix',$this->pred,1,1);"));
+                . "displayRating('$reImgId','$reImgPrefix',$this->pred,1,1);"));
         } else {
             $js .= "rating['$reImgId']=0; prediction['$reImgId']=0;\n";
             $html->pushContent(JavaScript($js
-                    ."displayRating('$reImgId','$reImgPrefix',0,0,1);"));
+                . "displayRating('$reImgId','$reImgPrefix',$this->avg,0,1);"));
         }
         return $html;
     }
 
-};
+}
 
 // Local Variables:
 // mode: php

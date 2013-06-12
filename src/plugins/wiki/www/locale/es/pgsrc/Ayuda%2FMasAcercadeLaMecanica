@@ -1,10 +1,9 @@
 Date: Fri, 10 Sep 2010 13:48:44 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Ayuda%2FMasAcercadeLaMecanica 7862 2011-01-22 18:00:33Z vargenau $
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Ayuda%2FMasAcercadeLaMecanica;
   flags="";
-  charset=utf-8
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 PhpWiki está escrito con el lenguaje de servidor PHP, disponible en http://www.php.net/. El PHP se asemeja a C y Perl en su sintaxis, y funciona muy parecido a ASP, EmbPerl o JSP.

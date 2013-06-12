@@ -1,5 +1,4 @@
-<?php // -*-php-*-
-// $Id: userprefs.tmpl 8154 2011-10-03 12:28:51Z vargenau $
+<?php
 // Todo: Move the logic and code to the plugin
 // This is very experimental and the read-only part an ugly hack so far.
 foreach (explode(',','errmsg,isForm') as $var) {
@@ -130,8 +129,8 @@ if ( $isForm ) {
           sprintf("%12s: [% 10s]\n",_("HomePage"),$user->hasHomePage() ? (ENABLE_USER_NEW ? $user->_HomePagehandle->_pagename : $user->_homepage->_pagename ) : ''),
           sprintf("%12s: [% 10s]\n",_("E-mail"),$pref->get('email')),
           //sprintf("%12s: [% 10s]\n",_("Notify"),$pref->get('notifyPages')),
-          sprintf("%12s: [% 10s] %16s: [% 10s] \n",_("Theme"), $pref->get('theme'), _("Current Theme"),$WikiTheme->_name),
-          sprintf("%12s: [% 10s] %16s: [% 10s] \n",_("Language"),$pref->get('lang'),_("Current Language"),$GLOBALS['LANG'])
+          sprintf("%12s: [% 10s] %16s: [% 10s] \n",_("Theme"), $pref->get('theme'), _("Current theme"),$WikiTheme->_name),
+          sprintf("%12s: [% 10s] %16s: [% 10s] \n",_("Language"),$pref->get('lang'),_("Current language"),$GLOBALS['LANG'])
           ) ?>
 <?php } ?>
 
@@ -152,7 +151,7 @@ if ( $isForm ) {
 
   <tr><td>
   <p>
-  <?php echo _("Your E-Mail"). _(":")?>
+  <?php echo _("Your e-mail"). _(": ")?>
   <?php if ($isForm) { ?>
      <input type="text" name="pref[email]" size="30" maxlength="60"
         value="<?php echo $pref->get('email')?>" />
@@ -161,22 +160,22 @@ if ( $isForm ) {
   <?php } ?>
   </p>
   <p>
-  <?php echo _("Status") . _(":") ?>
+  <?php echo _("Status") . _(": ") ?>
   <?php if ($pref->get('emailVerified')) { ?>
-    <?php echo _("Email verified.") ?>
+    <?php echo _("e-mail verified.") ?>
   <?php } else { ?>
-    <?php echo _("Email not yet verified.") ?>
+    <?php echo _("e-mail not yet verified.") ?>
   <?php } ?>
   </p>
-  </td><td><p class="hint"><?php echo _("Note, that user accounts with bouncing emails will be disabled.")?></p></td></tr>
+  </td><td><p class="hint"><?php echo _("Note, that user accounts with bouncing e-mails will be disabled.")?></p></td></tr>
 
   <tr><td colspan="2">
-    <?php echo _("Get an email notification at changes of the following pages:")?>
+    <?php echo _("Get an e-mail notification at changes of the following pages:")?>
   </td></tr>
   <tr>
     <?php if ($isForm) { ?>
       <td><textarea name="pref[notifyPages]" cols="40" rows="6"><?php echo $pref->get('notifyPages')?></textarea></td>
-    <td><p class="hint"><?php echo _("Enter pages seperated by space or comma. Wildcards (fileglobbing) allowed.")?></p></td>
+    <td><p class="hint"><?php echo _("Enter pages separated by space or comma. Wildcards (fileglobbing) allowed.")?></p></td>
     <?php } else { ?>
      <td><?php echo $pref->get('notifyPages')?></td>
     <?php } ?>

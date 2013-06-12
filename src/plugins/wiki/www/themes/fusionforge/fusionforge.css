@@ -1,6 +1,4 @@
 /**
- * $Id: fusionforge.css 8112 2011-09-13 07:22:20Z vargenau $
- *
  * Copyright (C) 2002-2007 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2008-2010 Alcatel-Lucent
  *
@@ -53,28 +51,46 @@ body {
     color: #565c5e; /* Alcatel-Lucent grey */
 }
 
-form { margin: 0; }
+form {
+    margin: 0;
+}
 
-img { border: 0; vertical-align: baseline; }
+img {
+    border: 0;
+    vertical-align: baseline;
+}
 
-h1 { font-size: 1.8em; }
-h2 { font-size: 1.6em; line-height:1.1em;}
-h3 { font-size: 1.2em; line-height:1.3em;}
-h4 { font-size: 1.0em; line-height:1.3em;}
-h5 { font-size: 0.8em; }
-h6 { font-size: 0.6em; }
+h1 {
+    font-size: 1.8em;
+}
+
+h2 {
+    font-size: 1.6em;
+    line-height: 1.1em;
+}
+
+h3 {
+    font-size: 1.2em;
+    line-height: 1.3em;
+}
+
+h4 {
+    font-size: 1.0em;
+    line-height: 1.3em;
+}
+
+h5 {
+    font-size: 0.8em;
+}
+
+h6 {
+    font-size: 0.6em;
+}
 
 /* Titles in the page. */
 h1, .titlebar, .widget_titlebar {
-    background: url(/themes/gforge/images/bgrd_hpage_header.gif) white;
-    background-position: bottom;
-    background-repeat: repeat-x;
-    padding-left: 10px;
-    padding-right: 10px;
     padding-top: 4px;
     padding-bottom: 6px;
-    border-top:1px solid #dddddd;
-    border-bottom:1px solid #dddddd;
     vertical-align: middle;
     font-family: 'trebuchet MS', Arial, Helvetica, sans-serif;
     color: #554295; /* Alcatel-Lucent violet */
@@ -99,12 +115,22 @@ h1, .titlebar, .widget_titlebar {
 }
 
 /* Because in some cases there is a <p> in nested lists */
-li p { margin:0; }
+li p {
+    margin: 0;
+}
 
-div.wikitext table p { margin-top: 0.3em;  margin-bottom: 0.3em;}
+div.wikitext table p {
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+}
 
-input { margin: 0.1em; }
-input.numeric { text-align: right; }
+input {
+    margin: 0.1em;
+}
+
+input.numeric {
+    text-align: right;
+}
 
 fieldset {
     background-color: #e0f3f7;
@@ -124,6 +150,7 @@ caption {
     caption-side: top;
     text-align: left;
     margin-bottom: .5ex;
+    white-space: nowrap;
 }
 
 /**
@@ -134,50 +161,50 @@ caption {
  */
 /* div.wikiaction, div.wikiadmin { */
 div.wikiaction, form.wikiadmin div {
-  border-bottom: 1px solid #d8d8e7;
-  border-right:  1px solid #d8d8e7;
-  border-top:  1px solid #96a2ae;
-  border-left: 1px solid #96a2ae;
+    border: 1px solid #96a2ae;
+    border-right-color: #d8d8e7;
+    border-bottom-color: #d8d8e7;
 
-  margin-top: 0.5ex;
-  margin-bottom: 0.5ex;
-  padding: 0.5ex 0.5em;
-  /* Emulate the display behaviour of a table, to shrink it's width. */
-  display: table;
+    margin-top: 0.5ex;
+    margin-bottom: 0.5ex;
+    padding: 0.5ex 0.5em;
+    /* Emulate the display behaviour of a table, to shrink it's width. */
+    display: table;
 }
 
 /* Add space between the input field and following buttons, but not after the last button. */
-div.wikiaction input[type=text], div.wikiadmin input[type=text], form.wikiadmin input[type=file] { margin-right: 0.5em; }
-
-div#actionbuttons { line-height: 3.0ex; }
+div.wikiaction input[type=text], div.wikiadmin input[type=text], form.wikiadmin input[type=file] {
+    margin-right: 0.5em;
+}
 
 /* QuestionMark */
 .wikiunknown a, .named-wikiunknown a {
-  border-top:  1px solid #c6d2de;
-  border-left: 1px solid #c6d2de;
-  border-bottom: 1px solid #a2a2a2;
-  border-right:  1px solid #a2a2a2;
-  padding-left:  1px;
-  padding-right: 1px;
-  padding-top: 1px;
-  margin-right: .15em;
+    border: 1px solid #c6d2de;
+    border-right-color: #a2a2a2;
+    border-bottom-color: #a2a2a2;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-top: 1px;
+    margin-right: .15em;
 }
 
 /* Link icons */
-img.linkicon { vertical-align: middle; }
+img.linkicon {
+    vertical-align: middle;
+}
 
-img.inlineimage { vertical-align: middle; }
+img.inlineimage {
+    vertical-align: middle;
+}
 
 /**
  * Wiki
  */
 
 div.wikitext pre {
-  font-family: monospace;
-  border-width: 1px;
-  border-color: navy;
-  border-style: dashed;
-  padding: 0.5em;
+    font-family: monospace;
+    border: 1px dashed navy;
+    padding: 0.5em;
 }
 
 /**
@@ -185,74 +212,94 @@ div.wikitext pre {
  */
 /* Main wiki text box */
 div.wikitext {
-  margin-top:    1ex;
-  margin-bottom: 0.5ex;
-  padding-bottom: 1em;
-  clear: both;
+    margin-top: 1ex;
+    margin-bottom: 0.5ex;
+    padding-bottom: 1em;
+    clear: both;
 }
 
 /* Mozilla RecentChanges Sidebar */
 body.sidebar {
-  margin: 0.5em;
+    margin: 0.5em;
 }
+
 body.sidebar div.wikitext {
-  padding: 0.5em;
+    padding: 0.5em;
 }
-body.sidebar div.wikitext ul { padding-left: 1em; }
-body.sidebar h2 { margin-top: 0; }
+
+body.sidebar div.wikitext ul {
+    padding-left: 1em;
+}
+
+body.sidebar h2 {
+    margin-top: 0;
+}
 
 /**
  * Link styles
  */
 .wiki, .named-wiki {
-  /* text-decoration: none; */
-  font-weight: bold;
+    /* text-decoration: none; */
+    font-weight: bold;
 }
 
 /* Action buttons */
 a.wikiaction, a.wiki-rc-action, a.wikiunsafe,
 input.wikiaction, input.button, input.wikiadmin {
-  text-decoration: none;
-  /* don't wrap text buttons */
-  white-space: nowrap;
+    text-decoration: none;
+    /* don't wrap text buttons */
+    white-space: nowrap;
 }
 
 input.wikiaction, input.button, input.wikiadmin {
-  margin-right: 1em;
-  margin-left: 1em;
+    margin-right: 1em;
+    margin-left: 1em;
 }
 
-.wikiunsafe { background-color: #fcc; }
+.wikiunsafe {
+    background-color: #fcc;
+}
 
 /* Unknown links */
 .wikiunknown, .named-wikiunknown {
-  font-weight: normal;
-  font-size: 100%;
+    font-weight: normal;
+    font-size: 100%;
 }
- /* QuestionMark #600 */
+
+/* QuestionMark #600 */
 .wikiunknown a, .named-wikiunknown a {
-  color: #447;
-  background-color: #eee;
-  text-decoration: none;
-  font-weight: normal;
-  font-size: smaller;
+    color: #447;
+    background-color: #eee;
+    text-decoration: none;
+    font-weight: normal;
+    font-size: smaller;
 }
 
 /* Backlinks */
 .backlinks {
-  text-decoration: underline;
+    text-decoration: underline;
 }
-h1 .backlinks { text-decoration: none; color: inherit; }
+
+h1 .backlinks {
+    text-decoration: none;
+    color: inherit;
+}
 
 /* Interwiki links */
-.wikipage  { font-weight: normal; }
-.interwiki, i.interwiki .wikipage, em .interwiki .wikipage { font-style: oblique; }
-.interwiki .wikipage, i .interwiki, em .interwiki { font-style: normal; }
+.wikipage {
+    font-weight: normal;
+}
+
+.interwiki, i.interwiki .wikipage, em .interwiki .wikipage {
+    font-style: oblique;
+}
+
+.interwiki .wikipage, i .interwiki, em .interwiki {
+    font-style: normal;
+}
 
 table.wikipaging {
-    border-width: 1px;
-    border-style: solid;
-    border-color: black;
+    border: 1px solid black;
     font-weight: bold;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -266,12 +313,23 @@ div.toc {
     padding: 5px;
 }
 
-div.toc ul { list-style: none }
+div.toc ul {
+    list-style: none
+}
 
-div.toc p.toctitle { font-weight: bold; font-size: 1.6em; margin-bottom: 1ex; }
-div.toc p { margin: 0; }
+div.toc p.toctitle {
+    font-weight: bold;
+    font-size: 1.6em;
+    margin-bottom: 1ex;
+}
 
-.toclist a { text-decoration: none; }
+div.toc p {
+    margin: 0;
+}
+
+.toclist a {
+    text-decoration: none;
+}
 
 /**
  * headings
@@ -291,115 +349,126 @@ h1, h1 .backlinks, h2, .wikitext h2 a, h3, .wikitext h3 a, h4, .wikitext h4 a, h
  * Tables
  */
 .pagelist thead th {
-  background: #d8d8d8;
-  text-decoration: none;
-  font-weight: bold;
+    background: #d8d8d8;
+    text-decoration: none;
+    font-weight: bold;
 }
-.pagelist thead td u { text-decoration: none; }
-.pagelist tr { vertical-align: top; }
-.pagelist tr.evenrow { background: #eee; }
-.pagelist tr.oddrow  { background: white; }
+
+.pagelist thead td u {
+    text-decoration: none;
+}
+
+.pagelist tr {
+    vertical-align: top;
+}
+
+.pagelist tr.evenrow {
+    background: #eee;
+}
+
+.pagelist tr.oddrow {
+    background: white;
+}
+
 th.gridbutton {
-  background-color: #d8d8d8;
-  color: #565c5e;
-  font-weight: bold;
-  white-space: nowrap;
-  margin: 5px 0px;
-  max-height: 24px;
-  padding: 5px 0px 5px 0px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: black;
+    background-color: #d8d8d8;
+    color: #565c5e;
+    font-weight: bold;
+    white-space: nowrap;
+    margin: 5px 0;
+    max-height: 24px;
+    padding: 5px 0 5px 0;
+    border: 1px solid black;
 }
+
 input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
-  text-decoration: none;
-  color: #565c5e;
+    text-decoration: none;
+    color: #565c5e;
 }
 
 /**
  * Toolbar
  */
-.toolbar, input.button {
+input.button {
     font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
-.toolbar {
-  padding: 0;
-  margin:  0;
-}
-.toolbar li {
-  margin-left: -20px; /* Because there is no list symbol */
-  list-style-type: none;
-  font-weight: bold;
-}
-.toolbar a {
-  text-decoration: none;
+.edit-toolbar {
+    padding: 0;
+    margin: 0;
 }
 
-.edit-toolbar {
-  padding: 0;
-  margin:  0;
-}
 .edit-toolbar img, .edit-toolbar input {
-  background-color: #fff;
-  border: 1px solid ButtonFace;
+    background-color: #fff;
+    border: 1px solid ButtonFace;
 }
 
 .tooltitle {
-    font-weight: bold ;
+    font-weight: bold;
+}
+
+menu, menu ul {
+    padding: 0;
+}
+
+menu ul {
+    display: inline;
+    margin-right: 10px;
 }
 
 #actionbuttons {
-  white-space: nowrap;
+    white-space: nowrap;
+    margin-left: 0;
+    margin-bottom: 0;
 }
 
 #actionbuttons .named-wiki,
 #actionbuttons .wikiaction,
 #actionbuttons .wikiadmin {
-  font-weight: normal;
-  color: #565c5e; /* Alcatel-Lucent grey */
+    font-weight: normal;
+    color: #565c5e; /* Alcatel-Lucent grey */
 }
 
 #actionbuttons .named-wiki:hover,
 #actionbuttons .wikiaction:hover,
 #actionbuttons .wikiadmin:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
-#actionbuttons td {
+#actionbuttons li {
+    display: inline;
     border: 1px solid #aaaaaa;
     border-bottom: none;
     border-collapse: collapse;
-    padding-left:0.8em;
-    padding-right:0.8em;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    margin-right: 10px;
 }
 
-#actionbuttons td.spacer {
-    width:10px;
-    border:none;
-    padding-left:0;
-    padding-right:0;
+/* Smaller for IE6 and IE7: else moves the area down */
+.ie67 #actionbuttons li {
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+    margin-right: 5px;
 }
 
-#actionbuttons td.bold a {
+#actionbuttons li.bold a {
     font-weight: bold;
 }
 
 .editdate {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  margin: 0;
-  padding: 0;
-  padding-top: 0.5ex;
-  border-top: 1px #aaaaaa solid;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    border-top: 1px #aaaaaa solid;
 }
 
 #logo img {
-  float: right;
-  /* "paper" borders */
-  border-top:  1px #e8e6df solid;
-  border-left: 1px #e8e6df solid;
-  border-bottom: 1px #d2d2d2 solid;
-  border-right:  1px #b2b2b2 solid;
+    float: right;
+    /* "paper" borders */
+    border: 1px solid #e8e6df;
+    border-right-color: #b2b2b2;
+    border-bottom-color: #d2d2d2;
 }
 
 /**
@@ -408,266 +477,290 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
 
 /* Make the textarea the full page width */
 textarea.wikiedit {
-  width: 100%;
-  margin-bottom: 0.5ex;
-  margin-top:    0.5ex;
-  padding: 2px;
+    width: 100%;
+    margin-bottom: 0.5ex;
+    margin-top: 0.5ex;
+    padding: 2px;
+}
+
+/* Not for IE6 and IE7: moves the area down */
+.ie67 textarea.wikiedit {
+    width: auto;
 }
 
 #editarea-size {
-  margin-top: 1ex;
-  text-align: right;
-  font-size: smaller;
+    margin-top: 1ex;
+    text-align: right;
+    font-size: smaller;
 }
+
 #search-replace {
-  margin-top: 1ex;
-  text-align: left;
-  font-size: smaller;
+    margin-top: 1ex;
+    text-align: left;
+    font-size: smaller;
 }
-#toolbar { padding:0px; }
 
 /**
  * Search Results
  */
-.search-context { background: white; }
+.search-context {
+    background: white;
+}
+
 .search-term {
-  background: yellow;
-  font-weight: normal;
+    background: yellow;
+    font-weight: normal;
 }
+
 #LSResult {
-  position: absolute;
-  text-align: left;
-  display: none;
-  z-index: 100;
-  background-color: white;
-  border: 1px solid #d0d0d0;
-  font-size: 9px;
-  overflow: hidden;
+    position: absolute;
+    text-align: left;
+    display: none;
+    z-index: 100;
+    background-color: white;
+    border: 1px solid #d0d0d0;
+    font-size: 9px;
+    overflow: hidden;
 }
+
 #LSResult .evenrow {
-  background-color: #f0f0f0;
+    background-color: #f0f0f0;
 }
 
 /* PageTrail plugin =================================================== */
 
 .pagetrail {
-     background-color: #FFFF99;
-     padding: 0.2em;
+    background-color: #FFFF99;
+    padding: 0.2em;
 }
 
 /* IncludePage plugin ================================================= */
 
 .transclusion-title {
-  text-align: right;
-  font-style: oblique;
-  font-size:  smaller;
-  text-decoration: underline;
-  margin-bottom: 0.25ex;
-  margin-right:  0.25em;
+    text-align: right;
+    font-style: oblique;
+    font-size: smaller;
+    text-decoration: underline;
+    margin-bottom: 0.25ex;
+    margin-right: 0.25em;
 }
+
 .transclusion, .wiki-edithelp {
-  font-size: smaller;
+    font-size: smaller;
 }
+
 .transclusion {
-  border: 1px solid gray;
-  padding-left:  0.8em;
-  padding-right: 0.8em;
-  padding-top:     0px;
-  padding-bottom:  0px;
-  margin-left:   0.25em;
-  margin-right:  0.25em;
-  margin-bottom: 0.1ex;
+    border: 1px solid gray;
+    padding: 0 0.8em;
+    margin-left: 0.25em;
+    margin-right: 0.25em;
+    margin-bottom: 0.1ex;
 }
+
 .wiki-edithelp {
-  background: white;
-  border: medium solid #fff8dc; /* darker ivory */
-  padding-left:  0.5em;
-  padding-right: 0.5em;
-  padding-top:    0.75ex;
-  padding-bottom: 0.75ex;
-  margin-left:  0;
-  margin-right: 0;
-  margin-top: 1ex;
-  margin-bottom: 1ex;
+    background: white;
+    border: medium solid #fff8dc; /* darker ivory */
+    padding: 0.75ex 0.5em;
+    margin: 1ex 0;
 }
+
 .wiki-edithelp p {
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  padding-left:  0.5em;
-  padding-right: 0.5em;
-  padding-top:    0.5ex;
-  padding-bottom: 0.5ex;
-  margin: 0;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    padding: 0.5ex 0.5em;
+    margin: 0;
 }
 
 /* Calendar plugin ==================================================== */
 
 table.cal {
-  border: 1px outset gray;
-  background: white;
-  margin: 0.5ex 0.5em;
-  padding: 1px;
-  /* For Mozilla */
-  empty-cells: hide;
+    border: 1px outset gray;
+    background: white;
+    margin: 0.5ex 0.5em;
+    padding: 1px;
+    /* For Mozilla */
+    empty-cells: hide;
 }
 
 /* cells */
 table.cal td {
-  background: white;
-  text-align: right;
+    background: white;
+    text-align: right;
 }
 
 /* Month-name header */
-table.cal-header { font-size: larger; }
-table.cal-header tr, table.cal-header td { text-align: center; }
+table.cal-header {
+    font-size: larger;
+}
+
+table.cal-header tr, table.cal-header td {
+    text-align: center;
+}
+
 .cal-arrow {
-  font-weight: bold;
-  text-decoration: none;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 /* Day-names header */
-table.cal tbody tr .cal-dayname {  }
+table.cal tbody tr .cal-dayname {
+}
+
 .cal-dayname td {
-  text-align: center;
-  font-size: smaller;
-  text-decoration: underline;
+    text-align: center;
+    font-size: smaller;
+    text-decoration: underline;
 }
 
 /* Individual days */
-a.cal-hide { text-decoration: none; }
+a.cal-hide {
+    text-decoration: none;
+}
 
 /* Today */
- /* cell */
+/* cell */
 table.cal td.cal-today {
-  margin: 1px;
-  border: 1px solid gray;
+    margin: 1px;
+    border: 1px solid gray;
 }
- /* text */
-table.cal td.cal-today a.cal-hide {  }
+
+/* text */
+table.cal td.cal-today a.cal-hide {
+}
 
 /* Diff plugin ======================================================== */
 
 .diff .prefix {
-  position: relative;
-  left: -1em;
+    position: relative;
+    left: -1em;
 }
+
 /* deleted & added words */
 .diff del, .diff ins {
-  padding-left: 1px;
-  padding-right: 1px;
+    padding-left: 1px;
+    padding-right: 1px;
 }
 
 /* main box */
 .diff {
-  margin-top:    1ex;
-  margin-bottom: 0.5ex;
-  background: white;
-  color: black;
-  border-top: 1px solid #494f5d;
-  border-left:  1px solid #494f5d;
-  border-bottom:  1px solid #c6d2de;
-  border-right: 1px solid #c6d2de;
-  padding-top:    1px;
-  padding-bottom: 1px;
-  padding-left:  .125em;
-  padding-right: .125em;
-  padding: 0;
-  clear: both;
+    margin-top: 1ex;
+    margin-bottom: 0.5ex;
+    background: white;
+    color: black;
+    border: 1px solid #494f5d;
+    border-right-color: #c6d2de;
+    border-bottom-color: #c6d2de;
+
+    padding: 0;
+    clear: both;
 }
+
 .diff .block {
-  background: #ddd;
-  padding-left: 1em;
+    background: #ddd;
+    padding-left: 1em;
 }
 
 /* individual blocks */
 .diff .context {
-  background: white;
-  border: none;
+    background: white;
+    border: none;
 }
+
 /* entire difftextblock */
 .difftext {
-  margin-top:    0;
-  margin-bottom: 0;
-  background: white;
-  border-top:  1px #e8e6df solid;
-  border-left: 1px #e8e6df solid;
-  border-bottom: 1px #d2d2d2 solid;
-  border-right:  1px #b2b2b2 solid;
-  padding-left:  0em;
-  padding-right: 0em;
-  padding-top:    0ex;
-  padding-bottom: 0ex;
-  clear: both;
+    margin-top: 0;
+    margin-bottom: 0;
+    background: white;
+    border: 1px solid #e8e6df;
+    border-right-color: #b2b2b2;
+    border-bottom-color: #d2d2d2;
+    padding: 0;
+    clear: both;
 }
+
 /* + - line prefix */
 .diff .block tt {
-  font-weight: normal;
-  font-family: monospace;
-  color: black;
-  margin-left: 0;
-  border: none;
+    font-weight: normal;
+    font-family: monospace;
+    color: black;
+    margin-left: 0;
+    border: none;
 }
+
 /* changed words */
 .diff del, .diff ins {
-  font-weight: bold;
-  text-decoration: none;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 /* blocks containing deleted or added words */
 .diff .original, .diff .deleted,
 .diff .final, .diff .added {
-  background: white;
+    background: white;
 }
+
 /* blocks containing deleted words */
 .diff .original, .diff .deleted {
-  background: #fcc;
-  border: none;
+    background: #fcc;
+    border: none;
 }
+
 /* blocks containing added words */
 .diff .final, .diff .added {
-  background: #cfc;
-  border: none;
+    background: #cfc;
+    border: none;
 }
 
 /* deleted words */
-.diff del { background: #f99; }
+.diff del {
+    background: #f99;
+}
+
 /* added words */
-.diff ins { background: #9f9; }
+.diff ins {
+    background: #9f9;
+}
 
 /* PageInfo plugin ==================================================== */
 
-td.pageinfo { font-weight: bold; }
+td.pageinfo {
+    font-weight: bold;
+}
+
 .pageinfo-minoredit, .pageinfo-authorid {
-  font-size: smaller;
-  font-style: oblique;
+    font-size: smaller;
+    font-style: oblique;
 }
 
 /* Banners ============================================================ */
 
 p.success, p.feedback, p.warning, p.warning_msg, p.error, p.information,
 div.success, div.feedback, div.warning, div.warning_msg, div.error, div.information {
-   font-weight: bold;
-   font-size: 12px;
-   text-align: center;
-   border: 1px solid;
-   margin: 15px 0px;
-   padding: 10px 10px 10px 10px;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    border: 1px solid;
+    margin: 15px 0;
+    padding: 10px 10px 10px 10px;
 }
 
 .success, .feedback {
-   border-color: green;
-   background-color: #DFF2BF;
+    border-color: green;
+    background-color: #DFF2BF;
 }
+
 .warning_msg, .warning {
-   border-color: orange;
-   background-color: #FEEFB3;
+    border-color: orange;
+    background-color: #FEEFB3;
 }
+
 .error {
-   border-color: red;
-   background-color: #FFBABA;
+    border-color: red;
+    background-color: #FFBABA;
 }
+
 .information {
-   border-color: blue;
-   background-color: #BDE5F8;
+    border-color: blue;
+    background-color: #BDE5F8;
 }
 
 p.success, p.feedback,
@@ -678,57 +771,59 @@ div.success, div.feedback,
 div.warning, div.warning_msg,
 div.error,
 div.information {
-   text-align: left;
-   background-repeat: no-repeat;
-   background-position: 10px;
-   -moz-border-radius: 1em;
-   -webkit-border-radius: 1em;
-   border-radius: 1em;
-   padding: 10px 10px 10px 50px;
+    text-align: left;
+    background-repeat: no-repeat;
+    background-position: 10px;
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
+    border-radius: 1em;
+    padding: 10px 10px 10px 50px;
 }
 
 div.success, div.feedback,
 p.success, p.feedback {
-   color: #4F8A10;
-   background-image:url('/themes/gforge/images/success.png');
+    color: #4F8A10;
+    background-image: url('/themes/base-alcatel-lucent/images/success.png');
 }
+
 div.feedback p, div.feedback li,
 div.success p, div.success li {
-   color: #4F8A10;
+    color: #4F8A10;
 }
 
 div.warning, div.warning_msg,
 p.warning, p.warning_msg {
-   color: #9F6000;
-   background-image: url('/themes/gforge/images/warning.png');
+    color: #9F6000;
+    background-image: url('/themes/base-alcatel-lucent/images/warning.png');
 }
+
 div.warning p, div.warning_msg p,
 div.warning li, div.warning_msg li {
-   color: #9F6000;
+    color: #9F6000;
 }
 
 div.error,
 p.error {
-   color: #D8000C;
-   background-image: url('/themes/gforge/images/error.png');
+    color: #D8000C;
+    background-image: url('/themes/base-alcatel-lucent/images/error.png');
 }
+
 div.error p,
 div.error li {
-   color: #D8000C;
+    color: #D8000C;
 }
 
 div.information,
 p.information {
-   color: #00529B;
-   background-image: url('/themes/gforge/images/info.png');
+    color: #00529B;
+    background-image: url('/themes/base-alcatel-lucent/images/info.png');
 }
 
 .error, .warning, .debug, .hint {
     font-weight: bold;
     font-size: 11px;
     text-align: left;
-    border-width: 1px;
-    border-style: solid;
+    border: 1px solid;
     padding: 0.5em;
 }
 
@@ -743,249 +838,366 @@ p.information {
 }
 
 span.error, span.warning, span.debug, span.hint {
-  padding: 0;
+    padding: 0;
 }
 
 /* Disabled Plugins  ================================================== */
 
 .disabled-plugin {
-  clear: both;
-  margin: 1ex 0;
-  padding: 0;
+    clear: both;
+    margin: 1ex 0;
+    padding: 0;
 }
+
 .disabled-plugin .title {
-  color: #400;
-  background-color: inherit;
-  font-size: x-small;
-  text-align: right;
-  padding: 0 0.5em;
+    color: #400;
+    background-color: inherit;
+    font-size: x-small;
+    text-align: right;
+    padding: 0 0.5em;
 }
+
 .disabled-plugin pre {
-  color: black;
-  background: #ddd;
-  margin: 0;
-  padding: 0.3ex 0.5em;
+    color: black;
+    background: #ddd;
+    margin: 0;
+    padding: 0.3ex 0.5em;
 }
 
 /* RedirectTo plugin ================================================== */
 
 /* "(Redirected from ...)" message. */
 span.redirectfrom {
-  font-size: small;
-  font-style: oblique;
-  font-weight: normal;
-  padding-left: 1em;
+    font-size: small;
+    font-style: oblique;
+    font-weight: normal;
+    padding-left: 1em;
 }
 
 /*
  * "DL tables"
  */
 .wiki-dl-table {
-  border-collapse: collapse;
-  border: 2px #444 solid;
+    border-collapse: collapse;
+    border: 2px #444 solid;
 }
+
 .wiki-dl-table tr {
-  border-top: 2px #444 solid;
-  border-bottom: 2px #444 solid;
-  border-left: none;
-  border-right: none;
+    border-top: 2px #444 solid;
+    border-bottom: 2px #444 solid;
+    border-left: none;
+    border-right: none;
 }
+
 .wiki-dl-table th,
 .wiki-dl-table td {
-  padding: 0.25em 0.5em;
+    padding: 0.25em 0.5em;
 }
+
 .wiki-dl-table th {
-  vertical-align: top;
-  text-align: right;
-  border-right: 1px #444 solid;
-  border-left: none;
-  border-top: none;
-  border-bottom: none;
+    vertical-align: top;
+    text-align: right;
+    border-style: none;
+    border-right: 1px solid #444;
 }
+
 .wiki-dl-table td {
-  border: none;
+    border: none;
 }
 
 /*
  * "E-mail" style blockquote
  */
 blockquote.mail-style-quote {
-    margin: 0em;
-    margin-bottom: 1em;
+    margin: 0;
     border: 1px solid #284;
     padding: 0.5em;
 }
+
 .mail-style-quote blockquote.mail-style-quote {
     margin-left: 0.3em;
-    margin-bottom : 0em;
+    margin-bottom: 0;
     background-color: transparent;
     border-style: none;
     border-left: medium solid #284;
-    padding: 0em;
-    padding-left: 0.5em;
+    padding: 0;
 }
 
 /*
  * wikiblog
  */
-.floatleft { float: left; }
-.floatright { float: right; }
+.floatleft {
+    float: left;
+}
+
+.floatright {
+    float: right;
+}
 
 div.wikiblog {
-  margin: 1ex 2em;
-  padding: 0 0;
+    margin: 1ex 2em;
+    padding: 0 0;
 }
+
 div.wikiblog > div {
-  margin: 0 0;
-  padding: 0.5ex 0.5em;
+    margin: 0 0;
+    padding: 0.5ex 0.5em;
 }
+
 div.wikiblog-header {
-  /* background-color: #ccf; */
+    /* background-color: #ccf; */
 }
+
 div.wikiblog > div.wikiblog-footer {
-  /* background-color: #eee; */
-  padding: 0.2ex 0.5em;
+    /* background-color: #eee; */
+    padding: 0.2ex 0.5em;
 }
+
 h3.wikiblog-summary {
-  font-size: medium;
-  font-weight: bold;
-  margin: 0 0 1ex 0;
+    font-size: medium;
+    font-weight: bold;
+    margin: 0 0 1ex 0;
 }
 
 table.wikiblog-form {
-  width: auto;
-  border-collapse: collapse;
-  margin: 0.25em 0;
+    width: auto;
+    border-collapse: collapse;
+    margin: 0.25em 0;
 }
+
 .wikiblog-form caption {
-  caption-side: top;
-  font-weight: bold;
-  text-align: left;
-  padding: 0.5ex 0.5em;
+    caption-side: top;
+    font-weight: bold;
+    text-align: left;
+    padding: 0.5ex 0.5em;
 }
+
 .wikiblog-form th {
-  vertical-align: top;
-  text-align: right;
-  padding: 0 0 0.3em 0.5em;
+    vertical-align: top;
+    text-align: right;
+    padding: 0 0 0.3em 0.5em;
 }
+
 .wikiblog-form td {
-  padding: 0.25em 0.5em;
+    padding: 0.25em 0.5em;
 }
+
 .wikiblog-form td.submit-button {
-  padding: 0;
+    padding: 0;
 }
+
 .wikiblog-form input[type=text],
 .wikiblog-form textarea {
-  margin: 0 0;
-  width: 100%;
+    margin: 0 0;
+    width: 100%;
 }
+
 div.wikicomment div.wikicomment-footer {
-  padding: 0.2ex 0.5em;
+    padding: 0.2ex 0.5em;
 }
+
 div.wikicomment div.wikicomment-footer named-wiki {
-  font-size: small;
+    font-size: small;
 }
+
 table.interwiki-map {
-  margin: 1em 2em;
+    margin: 1em 2em;
 }
+
 .interwiki-map th {
-  text-decoration: underline;
-  text-align: left;
-  padding-left: 1em;
+    text-decoration: underline;
+    text-align: left;
+    padding-left: 1em;
 }
+
 .interwiki-map td.interwiki-url {
-  padding-left: 2em;
+    padding-left: 2em;
 }
+
 .interwiki-map th.interwiki-url {
-  padding-left: 3em;
+    padding-left: 3em;
 }
 
 .dialog {
-  background-color: #cdf;
-  color: black;
-  margin: 2em auto 2em auto;
-  border: thin black solid;
-  width: 50%;
+    background-color: #cdf;
+    color: black;
+    margin: 2em auto 2em auto;
+    border: thin black solid;
+    width: 50%;
 }
+
 .dialog h1, .dialog p, .dialog div {
-  text-align: center;
+    text-align: center;
 }
+
 .dialog h1 {
-  font-size: large;
-  margin: 0.5em 0 1em 0;
+    font-size: large;
+    margin: 0.5em 0 1em 0;
 }
+
 .dialog div.message {
-  background-color: white;
-  color: black;
-  color: black;
-  margin: 0 1em;
-  padding: 0.5em 0.5em;
+    background-color: white;
+    color: black;
+    color: black;
+    margin: 0 1em;
+    padding: 0.5em 0.5em;
 }
+
 .dialog p.buttons {
-  margin: 1em 0 0.5em 0;
+    margin: 1em 0 0.5em 0;
 }
 
 .clear-floats {
-  clear: both;
+    clear: both;
 }
 
 /* postnuke css:*/
-.gensmall{font-size:10px}
-.genmed{font-size:11px}
-td.cat{font-weight:bold;letter-spacing:1px;color:#000000;background: url(./images/cellpic1.png);height:27px}
+.gensmall {
+    font-size: 10px
+}
+
+.genmed {
+    font-size: 11px
+}
+
+td.cat {
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #000000;
+    background: url(./images/cellpic1.png);
+    height: 27px
+}
+
 /* Main table cell colours and backgrounds */
-td.row1{background:#eaedf4;color:#000000}
-td.row2{background:#d9e2ec;color:#000000}
-td.row3{background:#cad9ea;color:#000000}
-td.spacerow{background:#cad9ea;color:#000000}
+td.row1 {
+    background: #eaedf4;
+    color: #000000
+}
+
+td.row2 {
+    background: #d9e2ec;
+    color: #000000
+}
+
+td.row3 {
+    background: #cad9ea;
+    color: #000000
+}
+
+td.spacerow {
+    background: #cad9ea;
+    color: #000000
+}
 
 /* This is the outline round the main forum tables */
-.forumline{background:#ffffff;color:#000000;border:1px solid #006699}
+.forumline {
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid #006699
+}
 
 /* Sidebar */
-.box { background:#ffffff; border: 1px solid #888888 }
-.box-title { font-weight: normal; background-color: #ccc; color: black; text-align: center; }
-.box-data { width: 160px; font-size: 9pt; font-weight: normal; }
-.box-data .wiki { font-weight: normal; }
-td.sidebar { border-spacing: 0px; margin: 0ex;}
+.box {
+    background: #ffffff;
+    border: 1px solid #888888
+}
+
+.box-title {
+    font-weight: normal;
+    background-color: #ccc;
+    color: black;
+    text-align: center;
+}
+
+.box-data {
+    width: 160px;
+    font-size: 9pt;
+    font-weight: normal;
+}
+
+.box-data .wiki {
+    font-weight: normal;
+}
+
+td.sidebar {
+    border-spacing: 0;
+    margin: 0;
+}
 
 /* RssFeed */
-div.rss { margin: 1em; padding: 1em; }
-div.feed { margin: -0.5em; margin-bottom: 0em; padding: 0.3em;
-           font-weight: bold; font-size: 1.2em; }
-.chandesc { font-weight: bold; }
-div.rssitem { padding-top:1em; padding-bottom: 1em;
-              border-top: 2px solid #565c5e; /* Alcatel-Lucent grey */ }
-div.itemname { padding-bottom: 1em; font-weight: bold; }
-div.itemdesc { padding-left: 1em; }
-div.authordate { font-style: italic; }
-a.rssicon { font-weight:normal; font-size:small; vertical-align:middle; }
+div.rss {
+    margin: 1em;
+    padding: 1em;
+}
+
+div.feed {
+    margin: -0.5em;
+    padding: 0.3em;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.chandesc {
+    font-weight: bold;
+}
+
+div.rssitem {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-top: 2px solid #565c5e; /* Alcatel-Lucent grey */
+}
+
+div.itemname {
+    padding-bottom: 1em;
+    font-weight: bold;
+}
+
+div.itemdesc {
+    padding-left: 1em;
+}
+
+div.authordate {
+    font-style: italic;
+}
+
+a.rssicon {
+    font-weight: normal;
+    font-size: small;
+    vertical-align: middle;
+}
 
 /* SqlResult */
 table.sqlresult {
-  border: 1px outset gray;
-  background: white;
-  margin: 0.5ex 0.5em;
-  padding: 1px;
+    border: 1px outset gray;
+    background: white;
+    margin: 0.5ex 0.5em;
+    padding: 1px;
 }
-.sqlresult tr.evenrow { background: #eee; }
-.sqlresult tr.oddrow  { background: white; }
+
+.sqlresult tr.evenrow {
+    background: #eee;
+}
+
+.sqlresult tr.oddrow {
+    background: white;
+}
+
 table.sqlresult td {
-  margin: 1px;
-  border: 1px solid gray;
+    margin: 1px;
+    border: 1px solid gray;
 }
 
 /* TeX2png plugin ===================================================== */
 
 img.tex {
-  vertical-align: middle;
+    vertical-align: middle;
 }
 
 /* PhotoAlbum plugin ================================================== */
 
 .boldsmall {
-  font-weight: bold;
-  font-size: 11px;
+    font-weight: bold;
+    font-size: 11px;
 }
 
 #content {
@@ -1020,18 +1232,14 @@ img.tex {
  */
 
 table.boxed, table.bordered, table.bordered th, table.bordered td {
-    border-width: 1px;
-    border-style: solid;
+    border: 1px solid;
     border-collapse: collapse;
     vertical-align: top;
 }
 
 table.boxed td, table.bordered td,
 table.boxed th, table.bordered th {
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding: 0 5px;
 }
 
 table.boxed caption, table.bordered caption {
@@ -1049,58 +1257,55 @@ table.boxed th, table.bordered th {
 /* BoxRight plugin ==================================================== */
 
 div.boxright {
-  background-color: #e9fbff;
-  width: 200px;
-  right: 10px;
-  padding: 0.5em;
-  float: right;
-  border: thin solid;
-  padding: 0.5em;
+    background-color: #e9fbff;
+    width: 200px;
+    right: 10px;
+    float: right;
+    border: thin solid;
+    padding: 0.5em;
 }
 
 td.tdselected, td.tdunselected {
-   text-align: center;
-   font-weight: bold;
-   padding-left: 5px;
-   padding-right: 5px;
+    text-align: center;
+    font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 td.tdselected {
-   color: white;
-   background-color: #554295;
+    color: white;
+    background-color: #554295;
 }
 
 td.tdunselected {
-   color: black;
-   background-color: #e9e8de;
+    color: black;
+    background-color: #e9e8de;
 }
 
 /* Main wiki browse banner */
 
 .browsebanner {
-   clear: both;
+    clear: both;
 }
 
 .browsebanner table {
-   width: 100%;
-   background-color: #e9fbff;
-   border-style: solid;
-   border-color: blue;
-   border-width: 2px;
+    width: 100%;
+    background-color: #e9fbff;
+    border: 2px solid blue;
 }
 
 .browsebanner table td {
-   text-align: center;
-   font-weight: bold;
-   font-style: oblique;
+    text-align: center;
+    font-weight: bold;
+    font-style: oblique;
 }
 
 /* RateIt plugin ====================================================== */
 
 .rateit {
-   font-size: 60%;
-   font-weight: bold;
-   vertical-align: middle;
+    font-size: 60%;
+    font-weight: bold;
+    vertical-align: middle;
 }
 
 /* For emacs users

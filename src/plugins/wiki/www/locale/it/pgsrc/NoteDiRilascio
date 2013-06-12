@@ -1,11 +1,10 @@
 Date: Fri, 10 Sep 2010 13:48:47 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: NoteDiRilascio 7682 2010-09-10 12:03:36Z vargenau $
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=NoteDiRilascio;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=utf-8
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 PhpWiki 1.2 è avanzato di molto rispetto alla versione 1.0:
@@ -82,6 +81,6 @@ Barksdale.
 Guarda il file HISTORY per una descrizione di tutto il processo di
 sviluppo se tutta la storia ti interessa! :-)
 
---SteveWainstead
+-- [[Steve Wainstead]]
 
 

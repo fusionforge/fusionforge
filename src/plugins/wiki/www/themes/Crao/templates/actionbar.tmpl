@@ -1,5 +1,4 @@
-<?php // -*-php-*-
-// $Id: actionbar.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+<?php
   if (!$page->get('locked') || $user->isAdmin() and $revision)
       $EditB = Button("edit",
                       $revision->isCurrent() ? _("Edit") : _("Edit Old Revision"));

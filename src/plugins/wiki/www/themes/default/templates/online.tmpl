@@ -1,12 +1,9 @@
-<?php // -*-php-*-
-// $Id: online.tmpl 7956 2011-03-03 17:08:31Z vargenau $
-?>
 <?php
 // Formatting and idea borrowed from postnuke.
 
 // We have two modes: 1. a simple "summary" block, and
 // 2. "detail" with a table of online users, date and current actions
-$header = _("Who Is Online");
+$header = _("Who is Online");
 if ($MAX_ONLINE_TIME and $MAX_ONLINE_NUM)
   $MAX_ONLINE_TIME = $WikiTheme->formatDateTime($MAX_ONLINE_TIME);
 ?>
@@ -14,7 +11,7 @@ if ($MAX_ONLINE_TIME and $MAX_ONLINE_NUM)
 <?php if ($mode == 'summary') {
     if ($allow_detail) {
       $url = WikiUrl($pagename,array("mode"=>"detail"));
-      $header = HTML::a(array('href'=>$url,'title'=>_("Switch to detailed list")),_("Who Is Online"));
+      $header = HTML::a(array('href'=>$url,'title'=>_("Switch to detailed list")),_("Who is Online"));
     }
 ?>
 <table width="100%" cellpadding="2" cellspacing="1" border="0" class="forumline">
@@ -36,7 +33,7 @@ if ($MAX_ONLINE_TIME and $MAX_ONLINE_NUM)
       $link = WikiLink($user['name']);
       $s .= $link->asXML() . ", ";
     }
-    if (!count($REGISTERED)) echo(htmlentities(_("<none>")));
+    if (!count($REGISTERED)) echo(htmlentities(_("None")));
     else echo(substr($s,0,-2));
 ?>
 <?php if (!empty($ADMINS) and $dispose_admin) { ?> 
@@ -57,7 +54,7 @@ if ($MAX_ONLINE_TIME and $MAX_ONLINE_NUM)
 
 <?php if ($mode == 'detail') {
     $url = WikiUrl($pagename,array("mode"=>"summary"));
-    $header = HTML::a(array('href'=>$url,'title'=>_("Switch to summary")),_("Who Is Online"));
+    $header = HTML::a(array('href'=>$url,'title'=>_("Switch to summary")),_("Who is Online"));
 ?>
 <table width="100%" cellpadding="2" cellspacing="1" border="0" class="forumline">
   <tr><td class="cat" colspan="3"><?php echo $header ?></td></tr>

@@ -1,5 +1,5 @@
-<?php //-*-php-*-
-// $Id: IMAP.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
  *
@@ -21,57 +21,60 @@
  */
 
 class _IMAPPassUser
-extends _PassUser
-/**
- * Define the var IMAP_AUTH_HOST in config/config.ini (with port probably)
- *
- * Preferences are handled in _PassUser
- */
+    extends _PassUser
+    /**
+     * Define the var IMAP_AUTH_HOST in config/config.ini (with port probably)
+     *
+     * Preferences are handled in _PassUser
+     */
 {
-    function checkPass($submitted_password) {
+    function checkPass($submitted_password)
+    {
         if (!$this->isValidName()) {
-            if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => failed isValidName", E_USER_WARNING);
-            trigger_error(_("Invalid username."),E_USER_WARNING);
+            if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this) . "::checkPass => failed isValidName", E_USER_WARNING);
+            trigger_error(_("Invalid username."), E_USER_WARNING);
             return $this->_tryNextPass($submitted_password);
         }
         if (!$this->_checkPassLength($submitted_password)) {
-            if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => failed checkPassLength", E_USER_WARNING);
+            if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this) . "::checkPass => failed checkPassLength", E_USER_WARNING);
             return WIKIAUTH_FORBIDDEN;
         }
         $userid = $this->_userid;
-        $mbox = @imap_open( "{" . IMAP_AUTH_HOST . "}",
-                            $userid, $submitted_password, OP_HALFOPEN );
+        $mbox = @imap_open("{" . IMAP_AUTH_HOST . "}",
+            $userid, $submitted_password, OP_HALFOPEN);
         if ($mbox) {
             imap_close($mbox);
             $this->_authmethod = 'IMAP';
-            if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => ok", E_USER_WARNING);
+            if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this) . "::checkPass => ok", E_USER_WARNING);
             $this->_level = WIKIAUTH_USER;
             return $this->_level;
         } else {
             if ($submitted_password != "") { // if LENGTH 0 is allowed
-                trigger_error(_("Unable to connect to IMAP server "). IMAP_AUTH_HOST,
-                              E_USER_WARNING);
+                trigger_error(_("Unable to connect to IMAP server ") . IMAP_AUTH_HOST,
+                    E_USER_WARNING);
             }
         }
-        if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => wrong", E_USER_WARNING);
+        if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this) . "::checkPass => wrong", E_USER_WARNING);
 
         return $this->_tryNextPass($submitted_password);
     }
 
     //CHECKME: this will not be okay for the auth policy strict
-    function userExists() {
+    function userExists()
+    {
         return true;
 
         if ($this->checkPass($this->_prefs->get('passwd'))) {
-            if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::userExists => true (pass ok)", E_USER_WARNING);
+            if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this) . "::userExists => true (pass ok)", E_USER_WARNING);
             return true;
         }
-        if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::userExists => false (pass wrong)", E_USER_WARNING);
+        if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this) . "::userExists => false (pass wrong)", E_USER_WARNING);
         return $this->_tryNextUser();
     }
 
-    function mayChangePass() {
-        if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::mayChangePass => false", E_USER_WARNING);
+    function mayChangePass()
+    {
+        if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this) . "::mayChangePass => false", E_USER_WARNING);
         return false;
     }
 }

@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: BoxRight.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * Copyright 2006 $ThePhpWikiProgrammingTeam
  *
@@ -24,34 +24,34 @@
  * A simple plugin for <div class="boxright"> with wikimarkup
  */
 class WikiPlugin_BoxRight
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return "BoxRight";
+    function getDescription()
+    {
+        return _("A simple plugin for <div class=boxright> with wikimarkup.");
     }
 
-    function getDescription () {
-        return _("A simple plugin for <div class=boxright> with wikimarkup");
-    }
-
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array();
     }
 
-    function managesValidators() {
+    function managesValidators()
+    {
         // The plugin output will only change if the plugin
         // invocation (page text) changes --- so the necessary
         // validators have already been handled by displayPage.
         return true;
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         if (!$basepage) {
             return $this->error("$basepage unset?");
         }
         include_once 'lib/BlockParser.php';
         $page = $request->getPage($basepage);
-        return HTML::div(array('class'=>'boxright'), TransformText($argstr));
+        return HTML::div(array('class' => 'boxright'), TransformText($argstr));
     }
 
 }

@@ -1,6 +1,3 @@
-<?php // -*-php-*-
-// $Id: navbar.tmpl 8166 2011-10-03 14:49:15Z vargenau $
-?>
 <?php
 // With MonoBook it is similar to Sidebar, named boxes at the left.
 // actionbuttons, navigation, search, toolbox
@@ -13,7 +10,7 @@ $p = $WikiTheme->tooltipAccessKeyPrefix();
   <div class="pBody">
     <ul>
       <li id="n-mainpage"><?php echo WikiLink(HOME_PAGE, "",_("Home Page")) ?></li>
-      <li><? $link = WikiLink(_("RecentChanges"), "",_("Recent changes")); $link->setAttr("accesskey","r"); $link->addTooltip(_("The list of recent changes in the wiki.")." [$p-r]"); ?><?php echo $link ?></li>
+      <li><?php $link = WikiLink(_("RecentChanges"), "",_("Recent changes")); $link->setAttr("accesskey","r"); $link->addTooltip(_("The list of recent changes in the wiki.")." [$p-r]"); ?><?php echo $link ?></li>
       <li id="n-recentcomments"><?php echo WikiLink(_("RecentComments"), "",_("Recent comments")) ?></li>
       <li id="n-recentnewpages"><?php echo WikiLink(_("RecentNewPages"), "",_("Recent new pages")) ?></li>
       <li id="n-likepages"><?php echo Button(array('action'=>_("LikePages")),_("Like pages"), $page->getName()) ?></li>
@@ -32,7 +29,7 @@ $p = $WikiTheme->tooltipAccessKeyPrefix();
 						       'type'=>'submit',
 						       'value'=>_("Go"))))) ?>
 <!-- <form action="<?php echo WikiURL(_("TitleSearch"))?>"
-      method="get" accept-charset="<?php echo $charset?>">
+      method="get" accept-charset="UTF-8">
       <?php echo WikiLink(_("FindPage"), "searchButton",_("Search:")) ?>
       <input type="hidden" name="auto_redirect" value="1" />
       <input type="text"  name="s" size="12" maxlength="256"
@@ -58,17 +55,12 @@ $p = $WikiTheme->tooltipAccessKeyPrefix();
       <li><?php echo WikiLink(_("PhpWikiAdministration"), "", _("Administration")) ?></li>
     <?php } ?>
     <?php if ($user->isSignedIn()) { ?>
-      <li><? $link = WikiLink(_("UpLoad"),"",_("Upload File")); $link->setAttr("accesskey","u"); $link->addTooltip(_("Upload images or media files")." [$p-u]"); ?><?php echo $link ?></li>
+      <li><?php $link = WikiLink(_("UpLoad"),"",_("Upload File")); $link->setAttr("accesskey","u"); $link->addTooltip(_("Upload images or media files")." [$p-u]"); ?><?php echo $link ?></li>
     <?php } ?>
-    <li>
       <?php $PrintableLink = $WikiTheme->makeButton(_("Printable version"), "javascript:PrinterStylesheet();", 'wikiaction'); ?>
 <script type="text/javascript"><!--
-document.write('<?php echo $PrintableLink ?>'); // -->
+document.write('<li><?php echo $PrintableLink ?></li>'); // -->
 </script>
-<noscript>
-  <?php echo $WikiTheme->makeButton(_("Printable version"), "?format=printable", 'wikiaction') ?>
-</noscript>
-</li>
     <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { 
       // Do not display the pdf icon
       $btn = new Button(_("Display as Pdf"), WikiURL($page->getName(), array('action' => 'pdf')), 'wikiaction');
@@ -80,4 +72,3 @@ document.write('<?php echo $PrintableLink ?>'); // -->
   </div>
 </div>
 <!-- end of the left (by default at least) column -->
-

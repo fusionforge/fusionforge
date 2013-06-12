@@ -1,5 +1,4 @@
-<?php // -*- php -*-
-// $Id: wikiforum.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+<?php
 /* 
 navigation headline: "MainForum / SubPage / ThisTopic" comes for free
 
@@ -13,7 +12,7 @@ $CDATE = $WikiTheme->formatDateTime($FORUM_CTIME);
 ?>
 <div class="wikiforum wikiforum-form">
 <form action="<?php echo $request->getPostURL()?>" method="post" class="wikiaction"
-      accept-charset="<?php echo CHARSET?>">
+      accept-charset="UTF-8">
   <input type="hidden" name="forum[title]" value="<?php echo $FORUM_PARENT ?>" />
   <?php echo HiddenInputs($request->getArgs()) ?>
   <table class="wikiforum wikiforum-list">

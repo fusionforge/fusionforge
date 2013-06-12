@@ -1,10 +1,9 @@
 <?php
-// $Id: forumadd.tmpl 7956 2011-03-03 17:08:31Z vargenau $
   // This template is used for the WikiForum plugin.
 ?>
 <div class="wikiforum wikiforum-reply">
 <form action="<?php echo $request->getPostURL()?>" method="post" class="wikiaction"
-      accept-charset="<?php echo CHARSET?>">
+      accept-charset="UTF-8">
   <input type="hidden" name="forum[pagename]" value="<?php echo $PAGENAME?>" />
   <?php echo HiddenInputs($request->getArgs()) ?>
   <table class="wikiforum-reply">

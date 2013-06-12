@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: CacheTest.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright (C) 2002 Johannes Große
  *
@@ -52,26 +52,25 @@
 require_once 'lib/WikiPluginCached.php';
 
 class WikiPlugin_CacheTest
-extends WikiPluginCached
+    extends WikiPluginCached
 {
     /* --------- overwrite virtual or abstract methods ---------------- */
 
-    function getPluginType() {
+    function getPluginType()
+    {
         return PLUGIN_CACHED_IMG_ONDEMAND;
     }
 
-    function getName() {
-        return "CacheTest";
+    function getDescription()
+    {
+        return _('This is a simple example using WikiPluginCached.');
     }
 
-    function getDescription() {
-        return 'This is a simple example using WikiPluginCached.';
-    }
-
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array('text' => $this->getDescription(),
-                     'font' => '3',
-                     'type' => 'png' );
+            'font' => '3',
+            'type' => 'png');
     }
 
     // should return image handle
@@ -81,16 +80,17 @@ extends WikiPluginCached
     // image handle to an error image if you do not,
     // WikiPluginImageCache will do so.
 
-    function getImage($dbi, $argarray, $request) {
+    function getImage($dbi, $argarray, $request)
+    {
         extract($argarray);
-        return $this->produceGraphics($text,$font);
+        return $this->produceGraphics($text, $font);
 
         // This should also work
         // return $this->lazy_produceGraphics($text,$font);
     } // getImage
 
-
-    function getImageType($dbi, $argarray, $request) {
+    function getImageType($dbi, $argarray, $request)
+    {
         extract($argarray);
         if (in_array($type, array('png', 'gif', 'jpg'))) {
             return $type;
@@ -98,33 +98,34 @@ extends WikiPluginCached
         return 'png';
     }
 
-    function getAlt($dbi, $argarray, $request) {
+    function getAlt($dbi, $argarray, $request)
+    {
         // ALT-text for <img> tag
         extract($argarray);
         return $text;
     }
 
-    function getExpire($dbi, $argarray, $request) {
+    function getExpire($dbi, $argarray, $request)
+    {
         return '+600'; // 600 seconds life time
     }
 
-
     /* -------------------- extremely simple converter -------------------- */
 
-
-    function produceGraphics($text, $font ) {
+    function produceGraphics($text, $font)
+    {
         // The idea (and some code) is stolen from the text2png plugin
         // but I did not want to use TTF. ImageString is quite ugly
         // and quite compatible. It's only a usage example.
 
-        if ($font<1 || $font>5) {
+        if ($font < 1 || $font > 5) {
             $text = "Fontnr. (font=\"$font\") should be in range 1-5";
             $this->complain($text);
             $font = 3;
         }
 
         $ok = ($im = @ImageCreate(400, 40));
-        $bg_color    = ImageColorAllocate($im, 240, 240, 240);
+        $bg_color = ImageColorAllocate($im, 240, 240, 240);
         $text_color1 = ImageColorAllocate($im, 120, 120, 120);
         $text_color2 = ImageColorAllocate($im, 0, 0, 0);
 
@@ -150,8 +151,9 @@ extends WikiPluginCached
     // we could have used the simple built-in text2img function
     // instead of writing our own:
 
-    function lazy_produceGraphics( $text, $font ) {
-        if ($font<1 || $font>5) {
+    function lazy_produceGraphics($text, $font)
+    {
+        if ($font < 1 || $font > 5) {
             $text = "Fontnr. (font=\"$font\") should be in range 1-5";
             $this->complain($text);
             $font = 3;
@@ -159,7 +161,7 @@ extends WikiPluginCached
         }
 
         return $this->text2img($text, $font, array(0, 0, 0),
-                               array(255, 255, 255));
+            array(255, 255, 255));
     } // lazy_produceGraphics
 
 }

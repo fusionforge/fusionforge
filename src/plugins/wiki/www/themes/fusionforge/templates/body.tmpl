@@ -1,21 +1,11 @@
-<?php // -*-php-*-
-// $Id: body.tmpl 8028 2011-04-08 13:57:12Z vargenau $
-?>
 <?php if ($WikiTheme->DUMP_MODE) { ?>
 <body>
 <?php } ?>
-<table width="100%" cellpadding="0" cellspacing="0">
-<tr>
-<td valign="top">
 <?php
 global $HIDE_TOOLBARS;
 if (!$HIDE_TOOLBARS) {
 ?>
-<div class="toolpalettes">
-<div class="toolbar">
 <?php echo Template('actionbar') ?>
-</div>
-</div>
 <?php } ?>
 <div id="content">
 <?php
@@ -43,9 +33,6 @@ else
 </h1>
 <?php echo $CONTENT ?>
 </div>
-</td>
-</tr>
-</table>
 <?php echo Template('bottom') ?>
 <?php if ($WikiTheme->DUMP_MODE) { ?>
 </body>

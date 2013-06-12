@@ -6,8 +6,6 @@ if (!defined('PHPWIKI_VERSION')) {
     exit;
 }
 
-// $Id: themeinfo.php 8150 2011-10-03 10:15:16Z vargenau $
-
 /**
  * This file defines a blog theme for PhpWiki,
  * based on Rui Carmo's excellent http://the.taoofmac.com/space/
@@ -45,48 +43,60 @@ liveSearchReq.open("GET", liveSearchURI + "?format=livesearch&paging=none&limit=
 
 require_once 'lib/WikiTheme.php';
 
-class WikiTheme_blog extends WikiTheme {
+class WikiTheme_blog extends WikiTheme
+{
 
-    function WikiTheme_blog ($theme_name='blog') {
+    function WikiTheme_blog($theme_name = 'blog')
+    {
         $this->WikiTheme($theme_name);
         $this->calendarInit(true);
     }
 
     /* overload to load from Sidebar */
-    function _findFile ($file, $missing_okay=false) {
-        if (file_exists($this->_path . "themes/".$this->_name."/$file"))
-            return "themes/".$this->_name."/$file";
+    function _findFile($file, $missing_okay = false)
+    {
+        if (file_exists($this->_path . "themes/" . $this->_name . "/$file"))
+            return "themes/" . $this->_name . "/$file";
         if (file_exists($this->_path . "themes/Sidebar/$file"))
             return "themes/Sidebar/$file";
         return parent::_findFile($file, $missing_okay);
     }
 
-    function _labelForAction ($action) {
+    function _labelForAction($action)
+    {
         switch ($action) {
-            case 'edit':   return _("Edit");
-            case 'diff':   return _("Diff");
-            case 'logout': return _("Sign Out");
-            case 'login':  return _("Sign In");
-            case 'lock':   return _("Lock");
-            case 'unlock': return _("Unlock");
-            case 'remove': return _("Remove");
+            case 'edit':
+                return _("Edit");
+            case 'diff':
+                return _("Diff");
+            case 'logout':
+                return _("Sign Out");
+            case 'login':
+                return _("Sign In");
+            case 'lock':
+                return _("Lock");
+            case 'unlock':
+                return _("Unlock");
+            case 'remove':
+                return _("Remove");
             default:
                 return gettext(ucfirst($action));
         }
     }
 
-    function getRecentChangesFormatter ($format) {
+    function getRecentChangesFormatter($format)
+    {
         include_once($this->file('lib/RecentChanges.php'));
         if (preg_match('/^rss|^sidebar/', $format))
-            return false;       // use default
+            return false; // use default
         if ($format == 'box')
             return '_blog_RecentChanges_BoxFormatter';
         return '_blog_RecentChanges_Formatter';
     }
 
     /* TODO: use the blog summary as label instead of the pagename */
-    function linkExistingWikiWord($wikiword, $linktext = '', $version = false) {
-        global $request;
+    function linkExistingWikiWord($wikiword, $linktext = '', $version = false)
+    {
         if ($version !== false and !$this->HTML_DUMP_SUFFIX)
             $url = WikiURL($wikiword, array('version' => $version));
         else
@@ -100,16 +110,15 @@ class WikiTheme_blog extends WikiTheme {
         $link = HTML::a(array('href' => $url));
 
         if (isa($wikiword, 'WikiPageName'))
-             $default_text = $wikiword->shortName;
-         else
-             $default_text = $wikiword;
+            $default_text = $wikiword->shortName;
+        else
+            $default_text = $wikiword;
 
         if (!empty($linktext)) {
             $link->pushContent($linktext);
             $link->setAttr('class', 'named-wiki');
             $link->setAttr('title', $this->maybeSplitWikiWord($default_text));
-        }
-        else {
+        } else {
             //TODO: check if wikiblog
             $link->pushContent($this->maybeSplitWikiWord($default_text));
             $link->setAttr('class', 'wiki');
@@ -117,45 +126,46 @@ class WikiTheme_blog extends WikiTheme {
         return $link;
     }
 
-    function load() {
-    // CSS file defines fonts, colors and background images for this
-    // style.
+    function load()
+    {
+        // CSS file defines fonts, colors and background images for this
+        // style.
 
-    // override sidebar definitions:
-    $this->setDefaultCSS(_("blog"), 'Kubrick.css');
-    if (isBrowserIE()) {
-        $this->addMoreHeaders($this->_CSSlink(0, $this->_findFile('IEFixes.css'),'all'));
-    }
-    $this->addButtonAlias(_("(diff)"), "[diff]" );
-    $this->addButtonAlias("...", "alltime");
+        // override sidebar definitions:
+        $this->setDefaultCSS(_("blog"), 'Kubrick.css');
+        if (isBrowserIE()) {
+            $this->addMoreHeaders($this->_CSSlink(0, $this->_findFile('IEFixes.css'), 'all'));
+        }
+        $this->addButtonAlias(_("(diff)"), "[diff]");
+        $this->addButtonAlias("...", "alltime");
 
-    $this->setButtonSeparator("");
+        $this->setButtonSeparator("");
 
-    /**
-     * WikiWords can automatically be split by inserting spaces between
-     * the words. The default is to leave WordsSmashedTogetherLikeSo.
-     */
-    $this->setAutosplitWikiWords(false);
+        /**
+         * WikiWords can automatically be split by inserting spaces between
+         * the words. The default is to leave WordsSmashedTogetherLikeSo.
+         */
+        $this->setAutosplitWikiWords(false);
 
-    /**
-     * If true (default) show create '?' buttons on not existing pages, even if the
-     * user is not signed in.
-     * If false, anon users get no links and it looks cleaner, but then they
-     * cannot easily fix missing pages.
-     */
-    $this->setAnonEditUnknownLinks(false);
+        /**
+         * If true (default) show create '?' buttons on not existing pages, even if the
+         * user is not signed in.
+         * If false, anon users get no links and it looks cleaner, but then they
+         * cannot easily fix missing pages.
+         */
+        $this->setAnonEditUnknownLinks(false);
 
-    /*
-     * You may adjust the formats used for formatting dates and times
-     * below.  (These examples give the default formats.)
-     * Formats are given as format strings to PHP strftime() function See
-     * http://www.php.net/manual/en/function.strftime.php for details.
-     * Do not include the server's zone (%Z), times are converted to the
-     * user's time zone.
-     */
-    //$this->setDateFormat("%B %d, %Y");
-    $this->setDateFormat("%A, %B %e, %Y"); // must not contain time
-    $this->setTimeFormat("%H:%M:%S");
+        /*
+         * You may adjust the formats used for formatting dates and times
+         * below.  (These examples give the default formats.)
+         * Formats are given as format strings to PHP strftime() function See
+         * http://www.php.net/manual/en/function.strftime.php for details.
+         * Do not include the server's zone (%Z), times are converted to the
+         * user's time zone.
+         */
+        //$this->setDateFormat("%B %d, %Y");
+        $this->setDateFormat("%A, %B %e, %Y"); // must not contain time
+        $this->setTimeFormat("%H:%M:%S");
     }
 }
 

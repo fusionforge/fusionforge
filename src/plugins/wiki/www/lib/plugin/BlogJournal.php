@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: BlogJournal.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright (C) 2005 $ThePhpWikiProgrammingTeam
  *
@@ -32,26 +32,25 @@ require_once 'lib/plugin/WikiBlog.php';
  * @author: Reini Urban
  */
 class WikiPlugin_BlogJournal
-extends WikiPlugin_WikiBlog
+    extends WikiPlugin_WikiBlog
 {
-    function getName() {
-        return _("BlogJournal");
+    function getDescription()
+    {
+        return _("Include latest blog entries for the current or ADMIN user.");
     }
 
-    function getDescription() {
-        return _("Include latest blog entries for the current or ADMIN user");
+    function getDefaultArguments()
+    {
+        return array('count' => 7,
+            'user' => '',
+            'order' => 'reverse', // latest first
+            'month' => false,
+            'noheader' => 0
+        );
     }
 
-    function getDefaultArguments() {
-        return array('count'    => 7,
-                     'user'     => '',
-                     'order'    => 'reverse',        // latest first
-                     'month'    => false,
-                     'noheader' => 0
-                     );
-    }
-
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         if (is_array($argstr)) { // can do with array also.
             $args =& $argstr;
             if (!isset($args['order'])) $args['order'] = 'reverse';
@@ -68,19 +67,19 @@ extends WikiPlugin_WikiBlog
         }
         if (!$args['user'] or $args['user'] == ADMIN_USER) {
             if (BLOG_DEFAULT_EMPTY_PREFIX) {
-                $args['user'] = '';             // "Blogs/day" pages
+                $args['user'] = ''; // "Blogs/day" pages
             } else {
                 $args['user'] = ADMIN_USER; // "Admin/Blogs/day" pages
             }
         }
         $parent = (empty($args['user']) ? '' : $args['user'] . SUBPAGE_SEPARATOR);
 
-        $sp = HTML::Raw('&middot; ');
-        $prefix = $base = $parent . $this->_blogPrefix('wikiblog');
+        $prefix = $base = $parent . $this->blogPrefix('wikiblog');
         if ($args['month'])
             $prefix .= (SUBPAGE_SEPARATOR . $args['month']);
-        $pages = $dbi->titleSearch(new TextSearchQuery("^".$prefix.SUBPAGE_SEPARATOR, true, 'posix'));
-        $html = HTML(); $i = 0;
+        $pages = $dbi->titleSearch(new TextSearchQuery("^" . $prefix . SUBPAGE_SEPARATOR, true, 'posix'));
+        $html = HTML();
+        $i = 0;
         while (($page = $pages->next()) and $i < $args['count']) {
             $rev = $page->getCurrentRevision(false);
             if ($rev->get('pagetype') != 'wikiblog') continue;
@@ -90,18 +89,18 @@ extends WikiPlugin_WikiBlog
             $html->pushContent($rev->getTransformedContent('wikiblog'));
         }
         if ($args['user'] == $user->UserName() or $args['user'] == '')
-            $html->pushContent(Button(array('action'=>'WikiBlog',
-                                            'mode'=>'add'),
-                                      _("New entry"), $base));
+            $html->pushContent(Button(array('action' => 'WikiBlog',
+                    'mode' => 'add'),
+                _("New entry"), $base));
         if (!$i)
             return HTML(HTML::h3(_("No Blog Entries")), $html);
         if (!$args['noheader'])
-            return HTML(HTML::h3(sprintf(_("Blog Entries for %s:"), $this->_monthTitle($args['month']))),
-                        $html);
+            return HTML(HTML::h3(sprintf(_("Blog Entries for %s:"), $this->monthTitle($args['month']))),
+                $html);
         else
             return $html;
     }
-};
+}
 
 // Local Variables:
 // mode: php

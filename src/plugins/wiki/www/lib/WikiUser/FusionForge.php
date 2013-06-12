@@ -1,5 +1,5 @@
-<?php //-*-php-*-
-// $Id: FusionForge.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright (C) 2006 Alain Peyrat
  *
@@ -23,14 +23,16 @@
 /** Call the FusionForge functions to get the username
  *
  */
-class _FusionForgePassUser extends _PassUser {
+class _FusionForgePassUser extends _PassUser
+{
 
-    var $_is_external = 0;
+    public $_is_external = 0;
 
-    function _FusionForgePassUser($UserName='',$prefs=false) {
+    function _FusionForgePassUser($UserName = '', $prefs = false)
+    {
         if ($prefs) $this->_prefs = $prefs;
         if (!isset($this->_prefs->_method))
-           _PassUser::_PassUser($UserName);
+            _PassUser::_PassUser($UserName);
         if ($UserName) $this->_userid = $UserName;
         $this->_authmethod = 'FusionForge';
 
@@ -42,7 +44,8 @@ class _FusionForgePassUser extends _PassUser {
             return $GLOBALS['ForbiddenUser'];
     }
 
-    function userExists() {
+    function userExists()
+    {
         global $group_id;
 
         // Mapping (PhpWiki vs FusionForge) performed is:
@@ -62,9 +65,9 @@ class _FusionForgePassUser extends _PassUser {
                 return false;
             }
 
-            $member = false ;
+            $member = false;
             $user = session_get_user();
-            $perm =& $project->getPermission($user);
+            $perm =& $project->getPermission();
             if (!$perm || !is_object($perm)) {
                 $this->_level = WIKIAUTH_ANON;
                 return false;
@@ -87,13 +90,15 @@ class _FusionForgePassUser extends _PassUser {
         return false;
     }
 
-    function checkPass($submitted_password) {
+    function checkPass($submitted_password)
+    {
         return $this->userExists()
             ? ($this->isAdmin() ? WIKIAUTH_ADMIN : WIKIAUTH_USER)
             : WIKIAUTH_ANON;
     }
 
-    function mayChangePass() {
+    function mayChangePass()
+    {
         return false;
     }
 }

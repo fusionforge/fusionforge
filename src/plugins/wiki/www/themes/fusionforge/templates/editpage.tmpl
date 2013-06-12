@@ -1,10 +1,6 @@
-<?php // -*-php-*-
-// $Id: editpage.tmpl 7720 2010-10-22 18:38:33Z vargenau $
-?>
 <?php if (isset($PREVIEW_CONTENT)) { ?>
-  <p><strong><?php echo _("Preview only!  Changes not saved.")?></strong>
-     <?php echo fmt("Please continue editing.  (You'll find your %s at the bottom of the page.)",
-          /* HTML::a(array("href" => "#editarea"), */ _("edit area") /*)  */) ?>
+  <p class="information">
+      <?php echo _("Preview only! Changes not saved. Please continue editing. (You'll find your edit area at the bottom of the page.)") ?>
   </p>
   <?php echo $PREVIEW_CONTENT ?>
 <?php } ?>
@@ -13,23 +9,62 @@
 <?php echo $CONCURRENT_UPDATE_MESSAGE ?>
 
 <?php if (! $IS_CURRENT) { ?>
-  <p class="warning_msg"><strong><?php echo _("Warning: You are editing an old revision.")?>
-        <?php echo _("Saving this page will overwrite the current version.")?></strong></p>
+  <p class="warning_msg">
+      <?php echo _("Warning: You are editing an old revision. Saving this page will overwrite the current version.")?>
+  </p>
 <?php } ?>
-<?php /*
- * FIXME: Hack!
- * The funky URL used for the form action parameter is bogus.
- * This is needed, otherwise the redirect to the real browser
- * page won't work with some browsers. (NS4 and Mozilla 0.97 won't accept
- * a redirect from a page to itself.)
- */ ?>
+<?php if (forge_get_config('use_jquery_form_navigate')) { ?>
+<script type="text/javascript">
+<!--//
+    function supports_local_storage() {
+        try {
+          return 'localStorage' in window && window['localStorage'] !== null;
+        }
+        catch(e) {
+            return false;
+        }
+    }
+    $(document).ready(function() {
+        $("#editpage").FormNavigate('<?php echo _('Warning: leaving the page will lose all your modifications!') ?>');
+        jQuery(this).find(":submit").unbind('click');
+        jQuery(this).on('click', "input[name='edit[save]']", function () {
+            global_formNavigate = true;
+        });
+        jQuery(this).on('click', "input[type='image'], input[name='edit[preview]'], input[name='edit[diff]']", function () {
+            if (supports_local_storage()) {
+                if (global_formNavigate == false) {
+                    window.sessionStorage.setItem('wiki_modified', 1);
+                }
+                else {
+                    window.sessionStorage.setItem('wiki_modified', 0);
+                }
+            }
+            global_formNavigate = true;
+        });
+        $("#toolbar a").click(function() {
+            global_formNavigate = false;
+        });
+<?php if (isset($PREVIEW_CONTENT)) { ?>
+        if (supports_local_storage()) {
+            if (window.sessionStorage.getItem('wiki_modified') == 1) {
+                global_formNavigate = false;
+            }
+            else {
+                global_formNavigate = true;
+            }
+        }
+<?php } ?>
+    });
+// --></script> 
+<?php } ?>
+
 <form method="post" id="editpage" name="editpage"
       action="<?php echo $request->getPostURL() ?>"
-      accept-charset="<?php echo CHARSET?>">
+      accept-charset="UTF-8">
   <?php if (!empty($_GET['start_debug'])) echo '<input type="hidden" name="start_debug" value="1" >'; ?>
   <?php /* To clear beyond a larger logo, such as in the Hawaiian theme */ ?>
   <br class="clear-floats" />
-  <table width="100%">
+  <table class="fullwidth">
     <tr><td><?php echo $EDIT_TOOLBAR ?></td>
         <td align="right"><div id="editarea-size">
     <?php echo _("Size").':'?>
@@ -38,11 +73,10 @@
     <noscript><?php echo Button("submit:", _("Adjust"), 'wikiaction')?></noscript>
   </div></td></tr></table>
   <a id="editarea"></a><?php echo $EDIT_TEXTAREA?>
-<div class="toolbar" style="text-align: center;">
+<div style="text-align: center;">
   <label for="edit-summary"><?php echo _("Summary").':'?></label> <?php echo $SUMMARY_INPUT?>
 </div>
-<table summary="Toolbar: Page editing options." class="toolbar" width="100%"
-       cellpadding="0" cellspacing="0" border="0">
+<table class="fullwidth">
 <tr valign="middle">
   <td>
     <?php echo $MINOR_EDIT_CB ?> <label for="edit-minor_edit"><?php echo _("This is a minor change.")?></label><br />
@@ -54,18 +88,19 @@
     <?php } ?>
     <?php echo $SEP?><?php echo $CHANGES_B ?>
   </td>
-  <td>&nbsp; <?php echo $AUTHOR_MESSAGE?></td>
+  <td><?php echo $AUTHOR_MESSAGE?></td>
 </tr>
 <tr>
   <td>
     <?php if ($user->isAdmin()) { ?>
-    <?php echo $LOCKED_CB ?> <label for="edit-locked" title="<?php echo _("Make the page read-only?")?>"><?php echo _("Locked")?></label>
-    <?php if (ENABLE_PAGE_PUBLIC) { ?>
-    &nbsp;&nbsp;<?php echo $PUBLIC_CB ?> <label for="edit-public" title="<?php echo _("Make the page public?")?>"><?php echo _("Public")?></label>
+      <?php echo $LOCKED_CB ?> <label for="edit-locked" title="<?php echo _("Make the page read-only?")?>"><?php echo _("Locked")?></label>
+      <?php if (ENABLE_PAGE_PUBLIC) { ?>
+        <?php echo $PUBLIC_CB ?> <label for="edit-public" title="<?php echo _("Make the page public?")?>"><?php echo _("Public")?></label>
+      <?php } ?>
+      <?php if (ENABLE_EXTERNAL_PAGES) { ?>
+        <?php echo $EXTERNAL_CB ?> <label for="edit-external" title="<?php echo _("Make the page external?")?>"><?php echo _("External")?></label>
+      <?php } ?>
     <?php } ?>
-    <?php if (ENABLE_EXTERNAL_PAGES) { ?>
-    &nbsp;&nbsp;<?php echo $EXTERNAL_CB ?> <label for="edit-external" title="<?php echo _("Make the page external?")?>"><?php echo _("External")?></label>
-    <?php }} ?>
   </td>
 </tr>
 </table>
@@ -76,8 +111,8 @@
 
 <div class="wiki-edithelp">
 <?php if (WIKI_NAME == "help") { ?>
-<?plugin IncludePage page=_("Help/TextFormattingRules") section=_("Synopsis") quiet=1?>
+<?plugin IncludePage page="Help/TextFormattingRules" section="Synopsis" quiet=1?>
 <?php } else { ?>
-<?plugin IncludePage page=_("TextFormattingRules") section=_("Synopsis") quiet=1?>
+<?plugin IncludePage page="TextFormattingRules" section="Synopsis" quiet=1?>
 <?php } ?>
 </div>

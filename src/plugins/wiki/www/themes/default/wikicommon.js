@@ -1,5 +1,4 @@
 // Common Javascript support functions.
-// $Id: wikicommon.js 7686 2010-09-13 12:41:32Z vargenau $
 
 /* Globals:
 var data_path = '/phpwiki';

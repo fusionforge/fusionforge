@@ -664,7 +664,7 @@ cAutocomplete.prototype.loadXMLRPCListArray = function()
 {
 	// encoding: "xmlrpc:wiki.titleSearch [S] 4"
 	// or "xmlrpc:http://localhost/wiki/?wiki.titleSearch [S] 4"
-	//    encode the methodname as optional query_arg and the args space seperated
+	//    encode the methodname as optional query_arg and the args space separated
 	var sURL = this.sListURL
         var xmlrpc_url = data_path + '/RPC2.php'
 	var aMethodArgs = sURL.split( ' ' )

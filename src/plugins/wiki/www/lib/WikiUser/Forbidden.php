@@ -1,5 +1,5 @@
-<?php //-*-php-*-
-// $Id: Forbidden.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright (C) 2004 ReiniUrban
  *
@@ -25,9 +25,10 @@
  * That's why this class is empty, but must exist.
  */
 class _ForbiddenPassUser
-extends _ForbiddenUser
+    extends _ForbiddenUser
 {
-    function dummy() {
+    function dummy()
+    {
         return;
     }
 }

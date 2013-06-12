@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: LikePages.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  *
@@ -24,32 +24,32 @@ require_once 'lib/TextSearchQuery.php';
 require_once 'lib/PageList.php';
 
 class WikiPlugin_LikePages
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName() {
-        return _("LikePages");
+    function getDescription()
+    {
+        return sprintf(_("List page names which share an initial or final title word with “%s”."),
+            '[pagename]');
     }
 
-    function getDescription() {
-        return sprintf(_("List page names which share an initial or final title word with '%s'."),
-                       '[pagename]');
-    }
-
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array_merge
-            (
-             PageList::supportedArgs(),
-             array('page'     => '[pagename]',
-                   'prefix'   => false,
-                   'suffix'   => false,
-                   'noheader' => false,
-                   ));
+        (
+            PageList::supportedArgs(),
+            array('page' => '[pagename]',
+                'prefix' => false,
+                'suffix' => false,
+                'noheader' => false,
+            ));
     }
+
     // info arg allows multiple columns
     // info=mtime,hits,summary,version,author,locked,minor
     // exclude arg allows multiple pagenames exclude=HomePage,RecentChanges
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $this->getArgs($argstr, $request);
 
         extract($args);
@@ -58,32 +58,30 @@ extends WikiPlugin
 
         if ($prefix) {
             $suffix = false;
-            $descrip = fmt("Page names with prefix '%s'", $prefix);
-        }
-        elseif ($suffix) {
-            $descrip = fmt("Page names with suffix '%s'", $suffix);
-        }
-        elseif ($page) {
+            $descrip = fmt("Page names with prefix “%s”", $prefix);
+        } elseif ($suffix) {
+            $descrip = fmt("Page names with suffix “%s”", $suffix);
+        } elseif ($page) {
             $words = preg_split('/[\s:-;.,]+/',
-                                SplitPagename($page));
+                SplitPagename($page));
             $words = preg_grep('/\S/', $words);
 
             $prefix = reset($words);
             $suffix = end($words);
 
-            $descrip = fmt("These pages share an initial or final title word with '%s'",
-                           WikiLink($page, 'auto'));
+            $descrip = fmt("These pages share an initial or final title word with “%s”",
+                WikiLink($page, 'auto'));
         }
 
         // Search for pages containing either the suffix or the prefix.
         $search = $match = array();
         if (!empty($prefix)) {
             $search[] = $this->_quote($prefix);
-            $match[]  = '^' . preg_quote($prefix, '/');
+            $match[] = '^' . preg_quote($prefix, '/');
         }
         if (!empty($suffix)) {
             $search[] = $this->_quote($suffix);
-            $match[]  = preg_quote($suffix, '/') . '$';
+            $match[] = preg_quote($suffix, '/') . '$';
         }
 
         if ($search)
@@ -107,10 +105,11 @@ extends WikiPlugin
         return $pagelist;
     }
 
-    function _quote($str) {
+    private function _quote($str)
+    {
         return "'" . str_replace("'", "''", $str) . "'";
     }
-};
+}
 
 // Local Variables:
 // mode: php

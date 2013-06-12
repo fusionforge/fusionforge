@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: Request.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright (C) 2002,2004,2005,2006,2009 $ThePhpWikiProgrammingTeam
  *
@@ -20,23 +20,26 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-class Request {
+class Request
+{
+	public $args = array();
 
-    function Request() {
+    function Request()
+    {
         $this->_fix_magic_quotes_gpc();
         $this->_fix_multipart_form_data();
 
-        switch($this->get('REQUEST_METHOD')) {
-        case 'GET':
-        case 'HEAD':
-            $this->args = &$GLOBALS['HTTP_GET_VARS'];
-            break;
-        case 'POST':
-            $this->args = &$GLOBALS['HTTP_POST_VARS'];
-            break;
-        default:
-            $this->args = array();
-            break;
+        switch ($this->get('REQUEST_METHOD')) {
+            case 'GET':
+            case 'HEAD':
+                $this->args = &$GLOBALS['HTTP_GET_VARS'];
+                break;
+            case 'POST':
+                $this->args = &$GLOBALS['HTTP_POST_VARS'];
+                break;
+            default:
+                $this->args = array();
+                break;
         }
 
         $this->session = new Request_SessionVars;
@@ -49,43 +52,47 @@ class Request {
         $GLOBALS['request'] = $this;
     }
 
-    function get($key) {
+    function get($key)
+    {
         if (!empty($GLOBALS['HTTP_SERVER_VARS']))
             $vars = &$GLOBALS['HTTP_SERVER_VARS'];
         elseif (!empty($GLOBALS['HTTP_ENV_VARS']))
             $vars = &$GLOBALS['HTTP_ENV_VARS']; // cgi or other servers than Apache
         else
             trigger_error("Serious php configuration error!"
-                          ." No HTTP_SERVER_VARS and HTTP_ENV_VARS vars available."
-                          ." These should get defined in lib/prepend.php",
-                          E_USER_WARNING);
+                    . " No HTTP_SERVER_VARS and HTTP_ENV_VARS vars available."
+                    . " These should get defined in lib/prepend.php",
+                E_USER_WARNING);
 
         if (isset($vars[$key]))
             return $vars[$key];
 
         switch ($key) {
-        case 'REMOTE_HOST':
-            $addr = $vars['REMOTE_ADDR'];
-            if (defined('ENABLE_REVERSE_DNS') && ENABLE_REVERSE_DNS)
-                return $vars[$key] = gethostbyaddr($addr);
-            else
-                return $addr;
-        default:
-            return false;
+            case 'REMOTE_HOST':
+                $addr = $vars['REMOTE_ADDR'];
+                if (defined('ENABLE_REVERSE_DNS') && ENABLE_REVERSE_DNS)
+                    return $vars[$key] = gethostbyaddr($addr);
+                else
+                    return $addr;
+            default:
+                return false;
         }
     }
 
-    function getArg($key) {
+    function getArg($key)
+    {
         if (isset($this->args[$key]))
             return $this->args[$key];
         return false;
     }
 
-    function getArgs () {
+    function getArgs()
+    {
         return $this->args;
     }
 
-    function setArg($key, $val) {
+    function setArg($key, $val)
+    {
         if ($val === false)
             unset($this->args[$key]);
         else
@@ -93,7 +100,8 @@ class Request {
     }
 
     // Well oh well. Do we really want to pass POST params back as GET?
-    function getURLtoSelf($args = false, $exclude = array()) {
+    function getURLtoSelf($args = false, $exclude = array())
+    {
         $get_args = $this->args;
         if ($args)
             $get_args = array_merge($get_args, $args);
@@ -106,7 +114,7 @@ class Request {
         // Err... good point...
         // sortby buttons
         if ($this->isPost()) {
-            $exclude = array_merge($exclude, array('action','auth'));
+            $exclude = array_merge($exclude, array('action', 'auth'));
             //$get_args = $args; // or only the provided
             /*
             trigger_error("Request::getURLtoSelf() should probably not be from POST",
@@ -126,25 +134,29 @@ class Request {
         return WikiURL($pagename, $get_args);
     }
 
-    function isPost () {
+    function isPost()
+    {
         return $this->get("REQUEST_METHOD") == "POST";
     }
 
-    function isGetOrHead () {
+    function isGetOrHead()
+    {
         return in_array($this->get('REQUEST_METHOD'),
-                        array('GET', 'HEAD'));
+            array('GET', 'HEAD'));
     }
 
-    function httpVersion() {
+    function httpVersion()
+    {
         if (!preg_match('@HTTP\s*/\s*(\d+.\d+)@', $this->get('SERVER_PROTOCOL'), $m))
             return false;
-        return (float) $m[1];
+        return (float)$m[1];
     }
 
     /* Redirects after edit may fail if no theme signature image is defined.
      * Set DISABLE_HTTP_REDIRECT = true then.
      */
-    function redirect($url, $noreturn = true) {
+    function redirect($url, $noreturn = true)
+    {
         $bogus = defined('DISABLE_HTTP_REDIRECT') && DISABLE_HTTP_REDIRECT;
 
         if (!$bogus) {
@@ -180,8 +192,7 @@ class Request {
             $tmpl = new Template('redirect', $this, array('REDIRECT_URL' => $url));
             $tmpl->printXML();
             $this->finish();
-        }
-        elseif ($bogus) {
+        } elseif ($bogus) {
             // Safari needs window.location.href = targeturl
             return JavaScript("
               function redirect(url) {
@@ -221,7 +232,8 @@ class Request {
      *  // After all validators have been set:
      *  $request->checkValidators();
      */
-    function setValidators($validator_set) {
+    function setValidators($validator_set)
+    {
         if (is_array($validator_set))
             $validator_set = new HTTP_ValidatorSet($validator_set);
         $this->_validators = $validator_set;
@@ -231,7 +243,8 @@ class Request {
      *  i.e dependencies on other pages mtimes
      *  now it may be called in init also to simplify client code.
      */
-    function appendValidators($validator_set) {
+    function appendValidators($validator_set)
+    {
         if (!isset($this->_validators)) {
             $this->setValidators($validator_set);
             return;
@@ -249,7 +262,8 @@ class Request {
      * instead will send "304 Not Modified" or "412 Precondition
      * Failed" (as appropriate) back to the client.
      */
-    function checkValidators() {
+    function checkValidators()
+    {
         $validators = &$this->_validators;
 
         // Set validator headers
@@ -264,7 +278,7 @@ class Request {
         }
 
         if (CACHE_CONTROL == 'NO_CACHE')
-            return;             // don't check conditionals...
+            return; // don't check conditionals...
 
         // Check conditional headers in request
         $status = $validators->checkConditionalRequest($this);
@@ -280,15 +294,14 @@ class Request {
 
     /** Set the cache control headers in the HTTP response.
      */
-    function cacheControl($strategy=CACHE_CONTROL, $max_age=CACHE_CONTROL_MAX_AGE) {
+    function cacheControl($strategy = CACHE_CONTROL, $max_age = CACHE_CONTROL_MAX_AGE)
+    {
         if ($strategy == 'NO_CACHE') {
             $cache_control = "no-cache"; // better set private. See Pear HTTP_Header
             $max_age = -20;
-        }
-        elseif ($strategy == 'ALLOW_STALE' && $max_age > 0) {
+        } elseif ($strategy == 'ALLOW_STALE' && $max_age > 0) {
             $cache_control = sprintf("max-age=%d", $max_age);
-        }
-        else {
+        } else {
             $cache_control = "must-revalidate";
             $max_age = -20;
         }
@@ -297,22 +310,22 @@ class Request {
         header("Vary: Cookie"); // FIXME: add more here?
     }
 
-    function setStatus($status) {
+    function setStatus($status)
+    {
         if (preg_match('|^HTTP/.*?\s(\d+)|i', $status, $m)) {
             header($status);
             $status = $m[1];
-        }
-        else {
-            $status = (integer) $status;
+        } else {
+            $status = (integer)$status;
             $reason = array('200' => 'OK',
-                            '302' => 'Found',
-                            '303' => 'See Other',
-                            '304' => 'Not Modified',
-                            '400' => 'Bad Request',
-                            '401' => 'Unauthorized',
-                            '403' => 'Forbidden',
-                            '404' => 'Not Found',
-                            '412' => 'Precondition Failed');
+                '302' => 'Found',
+                '303' => 'See Other',
+                '304' => 'Not Modified',
+                '400' => 'Bad Request',
+                '401' => 'Unauthorized',
+                '403' => 'Forbidden',
+                '404' => 'Not Found',
+                '412' => 'Precondition Failed');
             // FIXME: is it always okay to send HTTP/1.1 here, even for older clients?
             header(sprintf("HTTP/1.1 %d %s", $status, $reason[$status]));
         }
@@ -321,7 +334,8 @@ class Request {
             $this->_log_entry->setStatus($status);
     }
 
-    function buffer_output($compress = true) {
+    function buffer_output($compress = true)
+    {
         // FIXME: disables sessions (some byte before all headers_sent())
         /*if (defined('USECACHE') and !USECACHE) {
             $this->_is_buffering_output = false;
@@ -330,8 +344,7 @@ class Request {
         if (defined('COMPRESS_OUTPUT')) {
             if (!COMPRESS_OUTPUT)
                 $compress = false;
-        }
-        elseif (isCGI()) // necessary?
+        } elseif (isCGI()) // necessary?
             $compress = false;
 
         if ($this->getArg('start_debug')) $compress = false;
@@ -343,7 +356,8 @@ class Request {
         // This effectively eliminates CGI, but all other servers also. hmm.
         if ($compress
             and (!function_exists('ob_gzhandler')
-                 or !function_exists('apache_note')))
+                or !function_exists('apache_note'))
+        )
             $compress = false;
 
         // "output handler 'ob_gzhandler' cannot be used twice"
@@ -355,7 +369,8 @@ class Request {
         // This should eliminate a lot or reported problems.
         if ($compress
             and (!$this->get("HTTP_ACCEPT_ENCODING")
-                 or !strstr($this->get("HTTP_ACCEPT_ENCODING"), "gzip")))
+                or !strstr($this->get("HTTP_ACCEPT_ENCODING"), "gzip"))
+        )
             $compress = false;
 
         // Most RSS clients are NOT(!) application/xml gzip compatible yet.
@@ -365,7 +380,8 @@ class Request {
         // See also http://phpwiki.sourceforge.net/phpwiki/KnownBugs
         if ($compress
             and $this->getArg('format')
-            and strstr($this->getArg('format'), 'rss'))
+                and strstr($this->getArg('format'), 'rss')
+        )
             $compress = false;
 
         if ($compress) {
@@ -383,8 +399,7 @@ class Request {
              */
             if (function_exists('apache_note'))
                 @apache_note('no-gzip', 1);
-        }
-        else {
+        } else {
             // Now we alway buffer output.
             // This is so we can set HTTP headers (e.g. for redirect)
             // at any point.
@@ -396,7 +411,8 @@ class Request {
         $this->_ob_get_length = 0;
     }
 
-    function discardOutput() {
+    function discardOutput()
+    {
         if (!empty($this->_is_buffering_output)) {
             if (ob_get_length()) ob_clean();
             $this->_is_buffering_output = false;
@@ -412,21 +428,27 @@ class Request {
      * Note that this must not be called inside Template expansion or other
      * sections with ob_buffering.
      */
-    function chunkOutput() {
-        if (!empty($this->_is_buffering_output)
-        or
-            (function_exists('ob_get_level') and @ob_get_level()))
+    function chunkOutput()
     {
+        if (!empty($this->_is_buffering_output)
+            or
+            (function_exists('ob_get_level') and @ob_get_level())
+        ) {
             $this->_do_chunked_output = true;
             if (empty($this->_ob_get_length)) $this->_ob_get_length = 0;
             $this->_ob_get_length += ob_get_length();
-            while (@ob_end_flush());
-            @ob_end_clean();
+            while (ob_get_level() > 0) {
+                ob_end_flush();
+            }
+            if (ob_get_level() > 0) {
+                ob_end_clean();
+            }
             ob_start();
         }
     }
 
-    function finish() {
+    function finish()
+    {
         $this->_finishing = true;
         if (!empty($this->_accesslog)) {
             $this->_accesslog->push($this);
@@ -443,7 +465,7 @@ class Request {
         if (!empty($this->_is_buffering_output)) {
             // if _is_compressing_output then ob_get_length() returns
             // the uncompressed length, not the gzip'ed as required.
-        if (!headers_sent() and !$this->_is_compressing_output) {
+            if (!headers_sent() and !$this->_is_compressing_output) {
                 // php url-rewriting miscalculates the ob length. fixes bug #1376007
                 if (ini_get('use_trans_sid') == 'off') {
                     if (empty($this->_do_chunked_output)) {
@@ -454,7 +476,7 @@ class Request {
             }
             $this->_is_buffering_output = false;
             ob_end_flush();
-    } elseif (function_exists('ob_get_level') and @ob_get_level()) {
+        } elseif (function_exists('ob_get_level') and @ob_get_level()) {
             ob_end_flush();
         }
         session_write_close();
@@ -466,10 +488,13 @@ class Request {
         exit;
     }
 
-    function getSessionVar($key) {
+    function getSessionVar($key)
+    {
         return $this->session->get($key);
     }
-    function setSessionVar($key, $val) {
+
+    function setSessionVar($key, $val)
+    {
         if ($key == 'wiki_user') {
             if (empty($val->page))
                 $val->page = $this->getArg('pagename');
@@ -493,31 +518,39 @@ class Request {
         }
         return $this->session->set($key, $val);
     }
-    function deleteSessionVar($key) {
+
+    function deleteSessionVar($key)
+    {
         return $this->session->delete($key);
     }
 
-    function getCookieVar($key) {
+    function getCookieVar($key)
+    {
         return $this->cookies->get($key);
     }
-    function setCookieVar($key, $val, $lifetime_in_days = false, $path = false) {
+
+    function setCookieVar($key, $val, $lifetime_in_days = false, $path = false)
+    {
         return $this->cookies->set($key, $val, $lifetime_in_days, $path);
     }
-    function deleteCookieVar($key) {
+
+    function deleteCookieVar($key)
+    {
         return $this->cookies->delete($key);
     }
 
-    function getUploadedFile($key) {
+    function getUploadedFile($key)
+    {
         return Request_UploadedFile::getUploadedFile($key);
     }
 
-
-    function _fix_magic_quotes_gpc() {
+    function _fix_magic_quotes_gpc()
+    {
         $needs_fix = array('HTTP_POST_VARS',
-                           'HTTP_GET_VARS',
-                           'HTTP_COOKIE_VARS',
-                           'HTTP_SERVER_VARS',
-                           'HTTP_POST_FILES');
+            'HTTP_GET_VARS',
+            'HTTP_COOKIE_VARS',
+            'HTTP_SERVER_VARS',
+            'HTTP_POST_FILES');
 
         // Fix magic quotes.
         if (get_magic_quotes_gpc()) {
@@ -526,32 +559,35 @@ class Request {
         }
     }
 
-    function _stripslashes(&$var) {
+    function _stripslashes(&$var)
+    {
         if (is_array($var)) {
             foreach ($var as $key => $val)
                 $this->_stripslashes($var[$key]);
-        }
-        elseif (is_string($var))
+        } elseif (is_string($var))
             $var = stripslashes($var);
     }
 
-    function _fix_multipart_form_data () {
+    function _fix_multipart_form_data()
+    {
         if (preg_match('|^multipart/form-data|', $this->get('CONTENT_TYPE')))
             $this->_strip_leading_nl($GLOBALS['HTTP_POST_VARS']);
     }
 
-    function _strip_leading_nl(&$var) {
+    function _strip_leading_nl(&$var)
+    {
         if (is_array($var)) {
             foreach ($var as $key => $val)
                 $this->_strip_leading_nl($var[$key]);
-        }
-        elseif (is_string($var))
+        } elseif (is_string($var))
             $var = preg_replace('|^\r?\n?|', '', $var);
     }
 }
 
-class Request_SessionVars {
-    function Request_SessionVars() {
+class Request_SessionVars
+{
+    function Request_SessionVars()
+    {
         // Prevent cacheing problems with IE 5
         session_cache_limiter('none');
 
@@ -561,7 +597,8 @@ class Request_SessionVars {
             session_start();
     }
 
-    function get($key) {
+    function get($key)
+    {
         $vars = &$GLOBALS['HTTP_SESSION_VARS'];
         if (isset($vars[$key]))
             return $vars[$key];
@@ -570,7 +607,8 @@ class Request_SessionVars {
         return false;
     }
 
-    function set($key, $val) {
+    function set($key, $val)
+    {
         $vars = &$GLOBALS['HTTP_SESSION_VARS'];
         if (!function_usable('get_cfg_var') or get_cfg_var('register_globals')) {
             // This is funky but necessary, at least in some PHP's
@@ -579,11 +617,12 @@ class Request_SessionVars {
         $vars[$key] = $val;
         if (isset($_SESSION)) // php-5.2
             $_SESSION[$key] = $val;
-        if (!check_php_version(5,3))
+        if (!check_php_version(5, 3))
             session_register($key);
     }
 
-    function delete($key) {
+    function delete($key)
+    {
         $vars = &$GLOBALS['HTTP_SESSION_VARS'];
         if (!function_usable('ini_get') or ini_get('register_globals'))
             unset($GLOBALS[$key]);
@@ -591,21 +630,23 @@ class Request_SessionVars {
         unset($vars[$key]);
         if (isset($_SESSION)) // php-5.2
             unset($_SESSION[$key]);
-        if (!check_php_version(5,3))
+        if (!check_php_version(5, 3))
             session_unregister($key);
     }
 }
 
-class Request_CookieVars {
+class Request_CookieVars
+{
 
-    function get($key) {
+    function get($key)
+    {
         $vars = &$GLOBALS['HTTP_COOKIE_VARS'];
         if (isset($vars[$key])) {
             @$decode = base64_decode($vars[$key]);
-            if (strlen($decode) > 3 and substr($decode,1,1) == ':') {
-              @$val = unserialize($decode);
-              if (!empty($val))
-                  return $val;
+            if (strlen($decode) > 3 and substr($decode, 1, 1) == ':') {
+                @$val = unserialize($decode);
+                if (!empty($val))
+                    return $val;
             }
             @$val = urldecode($vars[$key]);
             if (!empty($val))
@@ -614,14 +655,18 @@ class Request_CookieVars {
         return false;
     }
 
-    function get_old($key) {
+    function get_old($key)
+    {
+        if (defined('FUSIONFORGE') and FUSIONFORGE) {
+            return false;
+        }
         $vars = &$GLOBALS['HTTP_COOKIE_VARS'];
         if (isset($vars[$key])) {
             @$decode = base64_decode($vars[$key]);
-            if (strlen($decode) > 3 and substr($decode,1,1) == ':') {
-              @$val = unserialize($decode);
-              if (!empty($val))
-                return $val;
+            if (strlen($decode) > 3 and substr($decode, 1, 1) == ':') {
+                @$val = unserialize($decode);
+                if (!empty($val))
+                    return $val;
             }
             @$val = unserialize($vars[$key]);
             if (!empty($val))
@@ -633,7 +678,8 @@ class Request_CookieVars {
         return false;
     }
 
-    function set($key, $val, $persist_days = false, $path = false) {
+    function set($key, $val, $persist_days = false, $path = false)
+    {
         // if already defined, ignore
         if (defined('MAIN_setUser') and $key = getCookieName()) return;
         if (defined('WIKI_XMLRPC') and WIKI_XMLRPC) return;
@@ -641,8 +687,7 @@ class Request_CookieVars {
         $vars = &$GLOBALS['HTTP_COOKIE_VARS'];
         if (is_numeric($persist_days)) {
             $expires = time() + (24 * 3600) * $persist_days;
-        }
-        else {
+        } else {
             $expires = 0;
         }
         if (is_array($val) or is_object($val))
@@ -657,7 +702,8 @@ class Request_CookieVars {
             @setcookie($key, $packedval, $expires);
     }
 
-    function delete($key) {
+    function delete($key)
+    {
         static $deleted = array();
         if (isset($deleted[$key])) return;
         if (defined('WIKI_XMLRPC') and WIKI_XMLRPC) return;
@@ -680,8 +726,10 @@ class Request_CookieVars {
    and with ending slash!
    Otherwise "\\" => "" and the uploaded file will not be found.
 */
-class Request_UploadedFile {
-    function getUploadedFile($postname) {
+class Request_UploadedFile
+{
+    function getUploadedFile($postname)
+    {
         global $HTTP_POST_FILES;
 
         // Against php5 with !ini_get('register-long-arrays'). See Bug #1180115
@@ -693,23 +741,23 @@ class Request_UploadedFile {
         $fileinfo =& $HTTP_POST_FILES[$postname];
         if ($fileinfo['error']) {
             // See https://sourceforge.net/forum/message.php?msg_id=3093651
-            $err = (int) $fileinfo['error'];
+            $err = (int)$fileinfo['error'];
             // errmsgs by Shilad Sen
             switch ($err) {
-            case 1:
-                trigger_error(_("Upload error: file too big"), E_USER_WARNING);
-                break;
-            case 2:
-                trigger_error(_("Upload error: file too big"), E_USER_WARNING);
-                break;
-            case 3:
-                trigger_error(_("Upload error: file only partially received"), E_USER_WARNING);
-                break;
-            case 4:
-                trigger_error(_("Upload error: no file selected"), E_USER_WARNING);
-                break;
-            default:
-                trigger_error(_("Upload error: unknown error #") . $err, E_USER_WARNING);
+                case 1:
+                    trigger_error(_("Upload error: file too big"), E_USER_WARNING);
+                    break;
+                case 2:
+                    trigger_error(_("Upload error: file too big"), E_USER_WARNING);
+                    break;
+                case 3:
+                    trigger_error(_("Upload error: file only partially received"), E_USER_WARNING);
+                    break;
+                case 4:
+                    trigger_error(_("Upload error: no file selected"), E_USER_WARNING);
+                    break;
+                default:
+                    trigger_error(_("Upload error: unknown error #") . $err, E_USER_WARNING);
             }
             return false;
         }
@@ -724,12 +772,12 @@ class Request_UploadedFile {
                 $tmp_file .= '/' . basename($fileinfo['tmp_name']);
                 /* ending slash in php.ini upload_tmp_dir is required. */
                 if (realpath(ereg_replace('/+', '/', $tmp_file)) != realpath($fileinfo['tmp_name'])) {
-                    trigger_error(sprintf("Uploaded tmpfile illegal: %s != %s.",$tmp_file, $fileinfo['tmp_name']).
-                                  "\n".
-                                  "Probably illegal TEMP environment or upload_tmp_dir setting. ".
-                                  "Esp. on WINDOWS be sure to set upload_tmp_dir in php.ini to use forward slashes and ".
-                                  "end with a slash. upload_tmp_dir = \"C:/WINDOWS/TEMP/\" is good suggestion.",
-                                  E_USER_ERROR);
+                    trigger_error(sprintf("Uploaded tmpfile illegal: %s != %s.", $tmp_file, $fileinfo['tmp_name']) .
+                            "\n" .
+                            "Probably illegal TEMP environment or upload_tmp_dir setting. " .
+                            "Esp. on WINDOWS be sure to set upload_tmp_dir in php.ini to use forward slashes and " .
+                            "end with a slash. upload_tmp_dir = \"C:/WINDOWS/TEMP/\" is good suggestion.",
+                        E_USER_ERROR);
                     return false;
                 } else {
                     /*
@@ -741,36 +789,42 @@ class Request_UploadedFile {
                     ;
                 }
             } else {
-              trigger_error(sprintf("Uploaded tmpfile %s not found.", $fileinfo['tmp_name'])."\n".
-                           " Probably illegal TEMP environment or upload_tmp_dir setting.",
-                          E_USER_WARNING);
+                trigger_error(sprintf("Uploaded tmpfile %s not found.", $fileinfo['tmp_name']) . "\n" .
+                        " Probably illegal TEMP environment or upload_tmp_dir setting.",
+                    E_USER_WARNING);
             }
         }
         return new Request_UploadedFile($fileinfo);
     }
 
-    function Request_UploadedFile($fileinfo) {
+    function Request_UploadedFile($fileinfo)
+    {
         $this->_info = $fileinfo;
     }
 
-    function getSize() {
+    function getSize()
+    {
         return $this->_info['size'];
     }
 
-    function getName() {
+    function getName()
+    {
         return $this->_info['name'];
     }
 
-    function getType() {
+    function getType()
+    {
         return $this->_info['type'];
     }
 
-    function getTmpName() {
+    function getTmpName()
+    {
         return $this->_info['tmp_name'];
     }
 
-    function open() {
-        if ( ($fd = fopen($this->_info['tmp_name'], "rb")) ) {
+    function open()
+    {
+        if (($fd = fopen($this->_info['tmp_name'], "rb"))) {
             if ($this->getSize() < filesize($this->_info['tmp_name'])) {
                 // FIXME: Some PHP's (or is it some browsers?) put
                 //    HTTP/MIME headers in the file body, some don't.
@@ -781,11 +835,10 @@ class Request_UploadedFile {
                 // This code is more-or-less untested currently.
                 //
                 // Dump HTTP headers.
-                while ( ($header = fgets($fd, 4096)) ) {
+                while (($header = fgets($fd, 4096))) {
                     if (trim($header) == '') {
                         break;
-                    }
-                    else if (!preg_match('/^content-(length|type):/i', $header)) {
+                    } elseif (!preg_match('/^content-(length|type):/i', $header)) {
                         rewind($fd);
                         break;
                     }
@@ -795,7 +848,8 @@ class Request_UploadedFile {
         return $fd;
     }
 
-    function getContents() {
+    function getContents()
+    {
         $fd = $this->open();
         $data = fread($fd, $this->getSize());
         fclose($fd);
@@ -808,22 +862,24 @@ class Request_UploadedFile {
  * Also needed for advanced spam prevention.
  * global object holding global state (sql or file, entries, to dump)
  */
-class Request_AccessLog {
+class Request_AccessLog
+{
     /**
      * @param $logfile string  Log file name.
      */
-    function Request_AccessLog ($logfile, $do_sql = false) {
+    function Request_AccessLog($logfile, $do_sql = false)
+    {
         //global $request; // request not yet initialized!
 
         $this->logfile = $logfile;
         if ($logfile and !is_writeable($logfile)) {
             trigger_error
-                (sprintf(_("%s is not writable."), _("The PhpWiki access log file"))
-                 . "\n"
-                 . sprintf(_("Please ensure that %s is writable, or redefine %s in config/config.ini."),
-                           sprintf(_("the file '%s'"), ACCESS_LOG),
-                           'ACCESS_LOG')
-                 , E_USER_NOTICE);
+            (sprintf(_("%s is not writable."), _("The PhpWiki access log file"))
+                    . "\n"
+                    . sprintf(_("Please ensure that %s is writable, or redefine %s in config/config.ini."),
+                        sprintf(_("the file “%s”"), ACCESS_LOG),
+                        'ACCESS_LOG')
+                , E_USER_NOTICE);
         }
         //$request->_accesslog =& $this;
         //if (empty($request->_accesslog->entries))
@@ -831,92 +887,85 @@ class Request_AccessLog {
 
         if ($do_sql) {
             global $DBParams;
-            if (!in_array($DBParams['dbtype'], array('SQL','ADODB'))) {
+            if (!in_array($DBParams['dbtype'], array('SQL', 'ADODB'))) {
                 trigger_error("Unsupported database backend for ACCESS_LOG_SQL.\nNeed DATABASE_TYPE=SQL or ADODB");
             } else {
                 //$this->_dbi =& $request->_dbi;
-                $this->logtable = (!empty($DBParams['prefix']) ? $DBParams['prefix'] : '')."accesslog";
+                $this->logtable = (!empty($DBParams['prefix']) ? $DBParams['prefix'] : '') . "accesslog";
             }
         }
         $this->entries = array();
         $this->entries[] = new Request_AccessLogEntry($this);
     }
 
-    function _do($cmd, &$arg) {
+    function _do($cmd, &$arg)
+    {
         if ($this->entries)
-            for ($i=0; $i < count($this->entries);$i++)
+            for ($i = 0; $i < count($this->entries); $i++)
                 $this->entries[$i]->$cmd($arg);
     }
-    function push(&$request)   { $this->_do('push',$request); }
-    function setSize($arg)     { $this->_do('setSize',$arg); }
-    function setStatus($arg)   { $this->_do('setStatus',$arg); }
-    function setDuration($arg) { $this->_do('setDuration',$arg); }
+
+    function push(&$request)
+    {
+        $this->_do('push', $request);
+    }
+
+    function setSize($arg)
+    {
+        $this->_do('setSize', $arg);
+    }
+
+    function setStatus($arg)
+    {
+        $this->_do('setStatus', $arg);
+    }
+
+    function setDuration($arg)
+    {
+        $this->_do('setDuration', $arg);
+    }
 
     /**
      * Read sequentially all previous entries from the beginning.
      * while ($logentry = Request_AccessLogEntry::read()) ;
      * For internal log analyzers: RecentReferrers, WikiAccessRestrictions
      */
-    function read() {
+    function read()
+    {
         return $this->logtable ? $this->read_sql() : $this->read_file();
     }
 
     /**
      * Return iterator of referer items reverse sorted (latest first).
      */
-    function get_referer($limit=15, $external_only=false) {
+    function get_referer($limit = 15, $external_only = false)
+    {
         if ($external_only) { // see stdlin.php:isExternalReferrer()
             $base = SERVER_URL;
             $blen = strlen($base);
         }
         if (!empty($this->_dbi)) {
             // check same hosts in referer and request and remove them
-            $ext_where = " AND LEFT(referer,$blen) <> ".$this->_dbi->quote($base)
-                ." AND LEFT(referer,$blen) <> LEFT(CONCAT(".$this->_dbi->quote(SERVER_URL).",request_uri),$blen)";
+            $ext_where = " AND LEFT(referer,$blen) <> " . $this->_dbi->quote($base)
+                . " AND LEFT(referer,$blen) <> LEFT(CONCAT(" . $this->_dbi->quote(SERVER_URL) . ",request_uri),$blen)";
             return $this->_read_sql_query("(referer <>'' AND NOT(ISNULL(referer)))"
-                                          .($external_only ? $ext_where : '')
-                                          ." ORDER BY time_stamp DESC"
-                                          .($limit ? " LIMIT $limit" : ""));
+                . ($external_only ? $ext_where : '')
+                . " ORDER BY time_stamp DESC"
+                . ($limit ? " LIMIT $limit" : ""));
         } else {
             $iter = new WikiDB_Array_generic_iter(0);
             $logs =& $iter->_array;
             while ($logentry = $this->read_file()) {
                 if (!empty($logentry->referer)
-                    and (!$external_only or (substr($logentry->referer,0,$blen) != $base)))
-                {
+                    and (!$external_only or (substr($logentry->referer, 0, $blen) != $base))
+                ) {
                     $iter->_array[] = $logentry;
                     if ($limit and count($logs) > $limit)
                         array_shift($logs);
                 }
             }
             $logs = array_reverse($logs);
-            $logs = array_slice($logs,0,min($limit,count($logs)));
-            return $iter;
-        }
-    }
-
-    /**
-     * Return iterator of matching host items reverse sorted (latest first).
-     */
-    function get_host($host, $since_minutes=20) {
-        if ($this->logtable) {
-            // mysql specific only:
-            return $this->read_sql("request_host=".$this->_dbi->quote($host)." AND time_stamp > ". (time()-$since_minutes*60)
-                            ." ORDER BY time_stamp DESC");
-        } else {
-            $iter = new WikiDB_Array_generic_iter();
-            $logs =& $iter->_array;
-            $logentry = new Request_AccessLogEntry($this);
-            while ($logentry->read_file()) {
-                if (!empty($logentry->referer)) {
-                    $iter->_array[] = $logentry;
-                    if ($limit and count($logs) > $limit)
-                        array_shift($logs);
-                    $logentry = new Request_AccessLogEntry($this);
-                }
-            }
-            $logs = array_reverse($logs);
-            $logs = array_slice($logs,0,min($limit,count($logs)));
+            $logs = array_slice($logs, 0, min($limit, count($logs)));
             return $iter;
         }
     }
@@ -924,18 +973,19 @@ class Request_AccessLog {
     /**
      * Read sequentially all previous entries from log file.
      */
-    function read_file() {
+    function read_file()
+    {
         global $request;
         if ($this->logfile) $this->logfile = ACCESS_LOG; // support Request_AccessLog::read
 
-        if (empty($this->reader))       // start at the beginning
+        if (empty($this->reader)) // start at the beginning
             $this->reader = fopen($this->logfile, "r");
         if ($s = fgets($this->reader)) {
             $entry = new Request_AccessLogEntry($this);
-            if (preg_match('/^(\S+)\s(\S+)\s(\S+)\s\[(.+?)\] "([^"]+)" (\d+) (\d+) "([^"]*)" "([^"]*)"$/',$s,$m)) {
-                list(,$entry->host, $entry->ident, $entry->user, $entry->time,
-                     $entry->request, $entry->status, $entry->size,
-                     $entry->referer, $entry->user_agent) = $m;
+            if (preg_match('/^(\S+)\s(\S+)\s(\S+)\s\[(.+?)\] "([^"]+)" (\d+) (\d+) "([^"]*)" "([^"]*)"$/', $s, $m)) {
+                list(, $entry->host, $entry->ident, $entry->user, $entry->time,
+                    $entry->request, $entry->status, $entry->size,
+                    $entry->referer, $entry->user_agent) = $m;
             }
             return $entry;
         } else { // until the end
@@ -943,38 +993,47 @@ class Request_AccessLog {
             return false;
         }
     }
-    function _read_sql_query($where='') {
+
+    function _read_sql_query($where = '')
+    {
         $dbh =& $GLOBALS['request']->_dbi;
         $log_tbl =& $this->logtable;
         return $dbh->genericSqlIter("SELECT *,request_uri as request,request_time as time,remote_user as user,"
-                                    ."remote_host as host,agent as user_agent"
-                                    ." FROM $log_tbl"
-                                    . ($where ? " WHERE $where" : ""));
+            . "remote_host as host,agent as user_agent"
+            . " FROM $log_tbl"
+            . ($where ? " WHERE $where" : ""));
     }
-    function read_sql($where='') {
+
+    function read_sql($where = '')
+    {
         if (empty($this->sqliter))
             $this->sqliter = $this->_read_sql_query($where);
         return $this->sqliter->next();
     }
 
     /* done in request->finish() before the db is closed */
-    function write_sql() {
+    function write_sql()
+    {
         $dbh =& $GLOBALS['request']->_dbi;
         if (isset($this->entries) and $dbh and $dbh->isOpen())
             foreach ($this->entries as $entry) {
                 $entry->write_sql();
             }
     }
+
     /* done in the shutdown callback */
-    function write_file() {
+    function write_file()
+    {
         if (isset($this->entries) and $this->logfile)
             foreach ($this->entries as $entry) {
                 $entry->write_file();
             }
         unset($this->entries);
     }
+
     /* in an ideal world... */
-    function write() {
+    function write()
+    {
         if ($this->logfile) $this->write_file();
         if ($this->logtable) $this->write_sql();
         unset($this->entries);
@@ -1002,19 +1061,21 @@ class Request_AccessLogEntry
      *
      *
      */
-    function Request_AccessLogEntry (&$accesslog) {
+    function Request_AccessLogEntry(&$accesslog)
+    {
         $this->_accesslog = $accesslog;
         $this->logfile = $accesslog->logfile;
         $this->time = time();
-        $this->status = 200;    // see setStatus()
-        $this->size = 0;    // see setSize()
+        $this->status = 200; // see setStatus()
+        $this->size = 0; // see setSize()
     }
 
     /**
      * @param $request object  Request object for current request.
      */
-    function push(&$request) {
-        $this->host  = $request->get('REMOTE_HOST');
+    function push(&$request)
+    {
+        $this->host = $request->get('REMOTE_HOST');
         $this->ident = $request->get('REMOTE_IDENT');
         if (!$this->ident)
             $this->ident = '-';
@@ -1024,10 +1085,10 @@ class Request_AccessLogEntry
         else
             $this->user = '-';
         $this->request = join(' ', array($request->get('REQUEST_METHOD'),
-                                         $request->get('REQUEST_URI'),
-                                         $request->get('SERVER_PROTOCOL')));
-        $this->referer = (string) $request->get('HTTP_REFERER');
-        $this->user_agent = (string) $request->get('HTTP_USER_AGENT');
+            $request->get('REQUEST_URI'),
+            $request->get('SERVER_PROTOCOL')));
+        $this->referer = (string)$request->get('HTTP_REFERER');
+        $this->user_agent = (string)$request->get('HTTP_USER_AGENT');
     }
 
     /**
@@ -1035,7 +1096,8 @@ class Request_AccessLogEntry
      *
      * @param $status integer  HTTP status code.
      */
-    function setStatus ($status) {
+    function setStatus($status)
+    {
         $this->status = $status;
     }
 
@@ -1044,13 +1106,16 @@ class Request_AccessLogEntry
      *
      * @param $size integer
      */
-    function setSize ($size=0) {
+    function setSize($size = 0)
+    {
         $this->size = (int)$size;
     }
-    function setDuration ($seconds) {
+
+    function setDuration($seconds)
+    {
         // Pear DB does not correctly quote , in floats using ?. e.g. in european locales.
         // Workaround:
-        $this->duration = strtr(sprintf("%f", $seconds),",",".");
+        $this->duration = strtr(sprintf("%f", $seconds), ",", ".");
     }
 
     /**
@@ -1061,7 +1126,8 @@ class Request_AccessLogEntry
      * @param $time integer Unix timestamp (defaults to current time).
      * @return string Zone offset, e.g. "-0800" for PST.
      */
-    function _zone_offset ($time = false) {
+    function _zone_offset($time = false)
+    {
         if (!$time)
             $time = time();
         $offset = date("Z", $time);
@@ -1071,7 +1137,7 @@ class Request_AccessLogEntry
             $offset = -$offset;
         }
         $offhours = floor($offset / 3600);
-        $offmins  = $offset / 60 - $offhours * 60;
+        $offmins = $offset / 60 - $offhours * 60;
         return sprintf("%s%02d%02d", $negoffset, $offhours, $offmins);
     }
 
@@ -1083,14 +1149,16 @@ class Request_AccessLogEntry
      * @param $time integer Unix timestamp (defaults to current time).
      * @return string Formatted date & time.
      */
-    function _ncsa_time($time = false) {
+    function _ncsa_time($time = false)
+    {
         if (!$time)
             $time = time();
         return date("d/M/Y:H:i:s", $time) .
             " " . $this->_zone_offset();
     }
 
-    function write() {
+    function write()
+    {
         if ($this->_accesslog->logfile) $this->write_file();
         if ($this->_accesslog->logtable) $this->write_sql();
     }
@@ -1098,12 +1166,13 @@ class Request_AccessLogEntry
     /**
      * Write entry to log file.
      */
-    function write_file() {
+    function write_file()
+    {
         $entry = sprintf('%s %s %s [%s] "%s" %d %d "%s" "%s"',
-                         $this->host, $this->ident, $this->user,
-                         $this->_ncsa_time($this->time),
-                         $this->request, $this->status, $this->size,
-                         $this->referer, $this->user_agent);
+            $this->host, $this->ident, $this->user,
+            $this->_ncsa_time($this->time),
+            $this->request, $this->status, $this->size,
+            $this->referer, $this->user_agent);
         if (!empty($this->_accesslog->reader)) {
             fclose($this->_accesslog->reader);
             unset($this->_accesslog->reader);
@@ -1120,7 +1189,8 @@ class Request_AccessLogEntry
 
     /* This is better been done by apache mod_log_sql */
     /* If ACCESS_LOG_SQL & 2 we do write it by our own */
-    function write_sql() {
+    function write_sql()
+    {
         global $request;
 
         $dbh =& $request->_dbi;
@@ -1130,13 +1200,13 @@ class Request_AccessLogEntry
                 // strangely HTTP_POST_VARS doesn't contain all posted vars.
                 $args = $_POST; // copy not ref. clone not needed on hashes
                 // garble passwords
-                if (!empty($args['auth']['passwd']))    $args['auth']['passwd'] = '<not displayed>';
+                if (!empty($args['auth']['passwd'])) $args['auth']['passwd'] = '<not displayed>';
                 if (!empty($args['dbadmin']['passwd'])) $args['dbadmin']['passwd'] = '<not displayed>';
-                if (!empty($args['pref']['passwd']))    $args['pref']['passwd'] = '<not displayed>';
-                if (!empty($args['pref']['passwd2']))   $args['pref']['passwd2'] = '<not displayed>';
-                $this->request_args = substr(serialize($args),0,254); // if VARCHAR(255) is used.
+                if (!empty($args['pref']['passwd'])) $args['pref']['passwd'] = '<not displayed>';
+                if (!empty($args['pref']['passwd2'])) $args['pref']['passwd2'] = '<not displayed>';
+                $this->request_args = substr(serialize($args), 0, 254); // if VARCHAR(255) is used.
             } else {
-              $this->request_args = $request->get('QUERY_STRING');
+                $this->request_args = $request->get('QUERY_STRING');
             }
             $this->request_method = $request->get('REQUEST_METHOD');
             $this->request_uri = $request->get('REQUEST_URI');
@@ -1152,7 +1222,8 @@ class Request_AccessLogEntry
  * @access private
  * @see Request_AccessLogEntry
  */
-function Request_AccessLogEntry_shutdown_function () {
+function Request_AccessLogEntry_shutdown_function()
+{
     global $request;
 
     if (isset($request->_accesslog->entries) and $request->_accesslog->logfile)
@@ -1162,9 +1233,10 @@ function Request_AccessLogEntry_shutdown_function () {
     unset($request->_accesslog->entries);
 }
 
-
-class HTTP_ETag {
-    function HTTP_ETag($val, $is_weak=false) {
+class HTTP_ETag
+{
+    function HTTP_ETag($val, $is_weak = false)
+    {
         $this->_val = wikihash($val);
         $this->_weak = $is_weak;
     }
@@ -1174,7 +1246,8 @@ class HTTP_ETag {
      * Strong comparison: If either (or both) tag is weak, they
      *  are not equal.
      */
-    function equals($that, $strong_match=false) {
+    function equals($that, $strong_match = false)
+    {
         if ($this->_val != $that->_val)
             return false;
         if ($strong_match and ($this->_weak or $that->_weak))
@@ -1182,8 +1255,8 @@ class HTTP_ETag {
         return true;
     }
 
-
-    function asString() {
+    function asString()
+    {
         $quoted = '"' . addslashes($this->_val) . '"';
         return $this->_weak ? "W/$quoted" : $quoted;
     }
@@ -1192,25 +1265,27 @@ class HTTP_ETag {
      *
      * This is a static member function.
      */
-    function parse($strval) {
+    function parse($strval)
+    {
         if (!preg_match(':^(W/)?"(.+)"$:i', trim($strval), $m))
-            return false;       // parse failed
-        list(,$weak,$str) = $m;
+            return false; // parse failed
+        list(, $weak, $str) = $m;
         return new HTTP_ETag(stripslashes($str), $weak);
     }
 
-    function matches($taglist, $strong_match=false) {
+    function matches($taglist, $strong_match = false)
+    {
         $taglist = trim($taglist);
 
         if ($taglist == '*') {
             if ($strong_match)
-                return ! $this->_weak;
+                return !$this->_weak;
             else
                 return true;
         }
 
         while (preg_match('@^(W/)?"((?:\\\\.|[^"])*)"\s*,?\s*@i',
-                          $taglist, $m)) {
+            $taglist, $m)) {
             list($match, $weak, $str) = $m;
             $taglist = substr($taglist, strlen($match));
             $tag = new HTTP_ETag(stripslashes($str), $weak);
@@ -1224,31 +1299,32 @@ class HTTP_ETag {
 
 // Possible results from the HTTP_ValidatorSet::_check*() methods.
 // (Higher numerical values take precedence.)
-define ('_HTTP_VAL_PASS', 0);             // Test is irrelevant
-define ('_HTTP_VAL_NOT_MODIFIED', 1);     // Test passed, content not changed
-define ('_HTTP_VAL_MODIFIED', 2);     // Test failed, content changed
-define ('_HTTP_VAL_FAILED', 3);       // Precondition failed.
+define ('_HTTP_VAL_PASS', 0); // Test is irrelevant
+define ('_HTTP_VAL_NOT_MODIFIED', 1); // Test passed, content not changed
+define ('_HTTP_VAL_MODIFIED', 2); // Test failed, content changed
+define ('_HTTP_VAL_FAILED', 3); // Precondition failed.
 
-class HTTP_ValidatorSet {
-    function HTTP_ValidatorSet($validators) {
+class HTTP_ValidatorSet
+{
+    function HTTP_ValidatorSet($validators)
+    {
         $this->_mtime = $this->_weak = false;
         $this->_tag = array();
 
         foreach ($validators as $key => $val) {
             if ($key == '%mtime') {
                 $this->_mtime = $val;
-            }
-            elseif ($key == '%weak') {
+            } elseif ($key == '%weak') {
                 if ($val)
                     $this->_weak = true;
-            }
-            else {
+            } else {
                 $this->_tag[$key] = $val;
             }
         }
     }
 
-    function append($that) {
+    function append($that)
+    {
         if (is_array($that))
             $that = new HTTP_ValidatorSet($that);
 
@@ -1266,34 +1342,38 @@ class HTTP_ValidatorSet {
             $this->_tag = $that->_tag;
     }
 
-    function getETag() {
-        if (! $this->_tag)
+    function getETag()
+    {
+        if (!$this->_tag)
             return false;
         return new HTTP_ETag($this->_tag, $this->_weak);
     }
 
-    function getModificationTime() {
+    function getModificationTime()
+    {
         return $this->_mtime;
     }
 
-    function checkConditionalRequest (&$request) {
+    function checkConditionalRequest(&$request)
+    {
         $result = max($this->_checkIfUnmodifiedSince($request),
-                      $this->_checkIfModifiedSince($request),
-                      $this->_checkIfMatch($request),
-                      $this->_checkIfNoneMatch($request));
+            $this->_checkIfModifiedSince($request),
+            $this->_checkIfMatch($request),
+            $this->_checkIfNoneMatch($request));
 
         if ($result == _HTTP_VAL_PASS || $result == _HTTP_VAL_MODIFIED)
-            return false;       // "please proceed with normal processing"
+            return false; // "please proceed with normal processing"
         elseif ($result == _HTTP_VAL_FAILED)
-            return 412;         // "412 Precondition Failed"
+            return 412; // "412 Precondition Failed"
         elseif ($result == _HTTP_VAL_NOT_MODIFIED)
-            return 304;         // "304 Not Modified"
+            return 304; // "304 Not Modified"
 
         trigger_error("Ack, shouldn't get here", E_USER_ERROR);
         return false;
     }
 
-    function _checkIfUnmodifiedSince(&$request) {
+    function _checkIfUnmodifiedSince(&$request)
+    {
         if ($this->_mtime !== false) {
             $since = ParseRfc1123DateTime($request->get("HTTP_IF_UNMODIFIED_SINCE"));
             if ($since !== false && $this->_mtime > $since)
@@ -1302,7 +1382,8 @@ class HTTP_ValidatorSet {
         return _HTTP_VAL_PASS;
     }
 
-    function _checkIfModifiedSince(&$request) {
+    function _checkIfModifiedSince(&$request)
+    {
         if ($this->_mtime !== false and $request->isGetOrHead()) {
             $since = ParseRfc1123DateTime($request->get("HTTP_IF_MODIFIED_SINCE"));
             if ($since !== false) {
@@ -1314,7 +1395,8 @@ class HTTP_ValidatorSet {
         return _HTTP_VAL_PASS;
     }
 
-    function _checkIfMatch(&$request) {
+    function _checkIfMatch(&$request)
+    {
         if ($this->_tag && ($taglist = $request->get("HTTP_IF_MATCH"))) {
             $tag = $this->getETag();
             if (!$tag->matches($taglist, 'strong'))
@@ -1323,10 +1405,11 @@ class HTTP_ValidatorSet {
         return _HTTP_VAL_PASS;
     }
 
-    function _checkIfNoneMatch(&$request) {
+    function _checkIfNoneMatch(&$request)
+    {
         if ($this->_tag && ($taglist = $request->get("HTTP_IF_NONE_MATCH"))) {
             $tag = $this->getETag();
-            $strong_compare = ! $request->isGetOrHead();
+            $strong_compare = !$request->isGetOrHead();
             if ($taglist) {
                 if ($tag->matches($taglist, $strong_compare)) {
                     if ($request->isGetOrHead())

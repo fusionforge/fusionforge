@@ -1926,7 +1926,6 @@ src/plugins/wiki/www/.htaccess -text
 src/plugins/wiki/www/GoogleSearch.wsdl -text
 src/plugins/wiki/www/INSTALL -text
 src/plugins/wiki/www/LICENSE -text
-src/plugins/wiki/www/Makefile -text
 src/plugins/wiki/www/PhpWiki.wsdl -text
 src/plugins/wiki/www/README -text
 src/plugins/wiki/www/TODO -text
@@ -1972,20 +1971,224 @@ src/plugins/wiki/www/doc/phpwiki.doxygen -text
 src/plugins/wiki/www/doc/phpwiki_architecture.png -text svneol=unset#image/png
 src/plugins/wiki/www/favicon.ico -text
 src/plugins/wiki/www/g -text
+src/plugins/wiki/www/highlight.js/LICENSE -text
+src/plugins/wiki/www/highlight.js/README.md -text
+src/plugins/wiki/www/highlight.js/README.ru.md -text
+src/plugins/wiki/www/highlight.js/classref.txt -text
+src/plugins/wiki/www/highlight.js/highlight.pack.js -text
+src/plugins/wiki/www/highlight.js/styles/arta.css -text
+src/plugins/wiki/www/highlight.js/styles/ascetic.css -text
+src/plugins/wiki/www/highlight.js/styles/brown_paper.css -text
+src/plugins/wiki/www/highlight.js/styles/brown_papersq.png -text svneol=unset#image/png
+src/plugins/wiki/www/highlight.js/styles/dark.css -text
+src/plugins/wiki/www/highlight.js/styles/default.css -text
+src/plugins/wiki/www/highlight.js/styles/far.css -text
+src/plugins/wiki/www/highlight.js/styles/github.css -text
+src/plugins/wiki/www/highlight.js/styles/googlecode.css -text
+src/plugins/wiki/www/highlight.js/styles/idea.css -text
+src/plugins/wiki/www/highlight.js/styles/ir_black.css -text
+src/plugins/wiki/www/highlight.js/styles/magula.css -text
+src/plugins/wiki/www/highlight.js/styles/monokai.css -text
+src/plugins/wiki/www/highlight.js/styles/pojoaque.css -text
+src/plugins/wiki/www/highlight.js/styles/pojoaque.jpg -text svneol=unset#image/jpeg
+src/plugins/wiki/www/highlight.js/styles/rainbow.css -text
+src/plugins/wiki/www/highlight.js/styles/school_book.css -text
+src/plugins/wiki/www/highlight.js/styles/school_book.png -text svneol=unset#image/png
+src/plugins/wiki/www/highlight.js/styles/solarized_dark.css -text
+src/plugins/wiki/www/highlight.js/styles/solarized_light.css -text
+src/plugins/wiki/www/highlight.js/styles/sunburst.css -text
+src/plugins/wiki/www/highlight.js/styles/tomorrow-night-blue.css -text
+src/plugins/wiki/www/highlight.js/styles/tomorrow-night-bright.css -text
+src/plugins/wiki/www/highlight.js/styles/tomorrow-night-eighties.css -text
+src/plugins/wiki/www/highlight.js/styles/tomorrow-night.css -text
+src/plugins/wiki/www/highlight.js/styles/tomorrow.css -text
+src/plugins/wiki/www/highlight.js/styles/vs.css -text
+src/plugins/wiki/www/highlight.js/styles/xcode.css -text
+src/plugins/wiki/www/highlight.js/styles/zenburn.css -text
 src/plugins/wiki/www/lib/.htaccess -text
+src/plugins/wiki/www/lib/WikiDB/adodb/adodb-active-record.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/adodb-active-recordx.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/adodb-datadict.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/adodb-memcache.lib.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/adodb-pager.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/adodb-perf.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/adodb-xmlschema.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/adodb-xmlschema03.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/contrib/toxmlrpc.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/cute_icons_for_site/adodb.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/lib/WikiDB/adodb/cute_icons_for_site/adodb2.gif -text svneol=unset#image/gif
+src/plugins/wiki/www/lib/WikiDB/adodb/datadict/datadict-access.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/datadict/datadict-db2.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/datadict/datadict-firebird.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/datadict/datadict-generic.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/datadict/datadict-ibase.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/datadict/datadict-informix.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/datadict/datadict-mssql.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/datadict/datadict-mssqlnative.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/datadict/datadict-mysql.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/datadict/datadict-oci8.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/datadict/datadict-postgres.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/datadict/datadict-sapdb.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/datadict/datadict-sqlite.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/datadict/datadict-sybase.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/docs/docs-active-record.htm -text
+src/plugins/wiki/www/lib/WikiDB/adodb/docs/docs-adodb.htm -text
+src/plugins/wiki/www/lib/WikiDB/adodb/docs/docs-datadict.htm -text
+src/plugins/wiki/www/lib/WikiDB/adodb/docs/docs-oracle.htm -text
+src/plugins/wiki/www/lib/WikiDB/adodb/docs/docs-perf.htm -text
+src/plugins/wiki/www/lib/WikiDB/adodb/docs/docs-session.htm -text
+src/plugins/wiki/www/lib/WikiDB/adodb/docs/docs-session.old.htm -text
+src/plugins/wiki/www/lib/WikiDB/adodb/docs/old-changelog.htm -text
+src/plugins/wiki/www/lib/WikiDB/adodb/docs/readme.htm -text
+src/plugins/wiki/www/lib/WikiDB/adodb/docs/tips_portable_sql.htm -text
+src/plugins/wiki/www/lib/WikiDB/adodb/docs/tute.htm -text
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-ado5.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-ads.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-db2oci.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-db2ora.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-mssql_n.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-mysqlpo.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-odbc_db2.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-pdo.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-pdo_mssql.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-pdo_mysql.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-pdo_oci.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-pdo_pgsql.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-pdo_sqlite.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-postgres8.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-postgres9.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-sqlite3.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-sqlitepo.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/drivers/adodb-sybase_ase.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/lang/adodb-da.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/lang/adodb-de.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/lang/adodb-en.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/lang/adodb-es.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/lang/adodb-esperanto.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/lang/adodb-fa.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/lang/adodb-fr.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/lang/adodb-it.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/lang/adodb-nl.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/lang/adodb-ro.inc.php -text !eol
 src/plugins/wiki/www/lib/WikiDB/adodb/license.txt -text
+src/plugins/wiki/www/lib/WikiDB/adodb/pear/Auth/Container/ADOdb.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/pear/readme.Auth.txt -text
+src/plugins/wiki/www/lib/WikiDB/adodb/perf/perf-db2.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/perf/perf-informix.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/perf/perf-mssql.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/perf/perf-mssqlnative.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/perf/perf-mysql.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/perf/perf-oci8.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/perf/perf-postgres.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/pivottable.inc.php -text !eol
 src/plugins/wiki/www/lib/WikiDB/adodb/readme.htm -text
 src/plugins/wiki/www/lib/WikiDB/adodb/readme.txt -text
+src/plugins/wiki/www/lib/WikiDB/adodb/rsfilter.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/server.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/session/adodb-compress-bzip2.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/session/adodb-compress-gzip.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/session/adodb-cryptsession.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/session/adodb-cryptsession2.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/session/adodb-encrypt-mcrypt.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/session/adodb-encrypt-md5.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/session/adodb-encrypt-secret.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/session/adodb-encrypt-sha1.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/session/adodb-sess.txt -text
+src/plugins/wiki/www/lib/WikiDB/adodb/session/adodb-session-clob.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/session/adodb-session-clob2.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/session/adodb-session.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/session/adodb-session2.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/session/adodb-sessions.mysql.sql -text
+src/plugins/wiki/www/lib/WikiDB/adodb/session/adodb-sessions.oracle.clob.sql -text
+src/plugins/wiki/www/lib/WikiDB/adodb/session/adodb-sessions.oracle.sql -text
+src/plugins/wiki/www/lib/WikiDB/adodb/session/crypt.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/session/old/adodb-cryptsession.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/session/old/adodb-session-clob.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/session/old/adodb-session.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/session/old/crypt.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/session/session_schema.xml -text
+src/plugins/wiki/www/lib/WikiDB/adodb/session/session_schema2.xml -text
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/benchmark.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/client.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/pdo.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/test-active-record.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/test-active-recs2.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/test-active-relations.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/test-active-relationsx.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/test-datadict.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/test-perf.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/test-pgblob.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/test-php5.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/test-xmlschema.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/test.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/test2.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/test3.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/test4.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/test5.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/test_rs_array.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/testcache.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/testdatabases.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/testgenid.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/testmssql.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/testoci8.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/testoci8cursor.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/testpaging.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/testpear.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/testsessions.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/time.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/tmssql.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/xmlschema-mssql.xml -text
+src/plugins/wiki/www/lib/WikiDB/adodb/tests/xmlschema.xml -text
+src/plugins/wiki/www/lib/WikiDB/adodb/toexport.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/tohtml.inc.php -text !eol
+src/plugins/wiki/www/lib/WikiDB/adodb/xmlschema.dtd -text
+src/plugins/wiki/www/lib/WikiDB/adodb/xmlschema03.dtd -text
+src/plugins/wiki/www/lib/WikiDB/adodb/xsl/convert-0.1-0.2.xsl -text
+src/plugins/wiki/www/lib/WikiDB/adodb/xsl/convert-0.1-0.3.xsl -text
+src/plugins/wiki/www/lib/WikiDB/adodb/xsl/convert-0.2-0.1.xsl -text
+src/plugins/wiki/www/lib/WikiDB/adodb/xsl/convert-0.2-0.3.xsl -text
+src/plugins/wiki/www/lib/WikiDB/adodb/xsl/remove-0.2.xsl -text
+src/plugins/wiki/www/lib/WikiDB/adodb/xsl/remove-0.3.xsl -text
+src/plugins/wiki/www/lib/WikiDB/backend/dbaBase.php -text !eol
 src/plugins/wiki/www/lib/XMLRPC/xmlrpc.inc -text
 src/plugins/wiki/www/lib/XMLRPC/xmlrpc_emu.inc -text
 src/plugins/wiki/www/lib/XMLRPC/xmlrpcs.inc -text
 src/plugins/wiki/www/lib/XMLRPC/xmlrpcs_emu.inc -text
 src/plugins/wiki/www/lib/captcha/Vera.ttf -text
 src/plugins/wiki/www/lib/captcha/dictionary -text
+src/plugins/wiki/www/lib/font/chinese.php -text !eol
+src/plugins/wiki/www/lib/font/courier.php -text !eol
+src/plugins/wiki/www/lib/font/courierb.php -text !eol
+src/plugins/wiki/www/lib/font/courierbi.php -text !eol
+src/plugins/wiki/www/lib/font/courieri.php -text !eol
+src/plugins/wiki/www/lib/font/helvetica.php -text !eol
+src/plugins/wiki/www/lib/font/helveticab.php -text !eol
+src/plugins/wiki/www/lib/font/helveticabi.php -text !eol
+src/plugins/wiki/www/lib/font/helveticai.php -text !eol
+src/plugins/wiki/www/lib/font/japanese.php -text !eol
+src/plugins/wiki/www/lib/font/symbol.php -text !eol
+src/plugins/wiki/www/lib/font/times.php -text !eol
+src/plugins/wiki/www/lib/font/timesb.php -text !eol
+src/plugins/wiki/www/lib/font/timesbi.php -text !eol
+src/plugins/wiki/www/lib/font/timesi.php -text !eol
+src/plugins/wiki/www/lib/font/zapfdingbats.php -text !eol
 src/plugins/wiki/www/lib/interwiki.map -text
 src/plugins/wiki/www/lib/nusoap/README.txt -text
 src/plugins/wiki/www/lib/nusoap/lgpl.txt -text
+src/plugins/wiki/www/lib/pear/Cache/Application.php -text !eol
+src/plugins/wiki/www/lib/pear/Cache/Cache.php -text !eol
+src/plugins/wiki/www/lib/pear/Cache/Container/dbx.php -text !eol
+src/plugins/wiki/www/lib/pear/Cache/Container/mdb.php -text !eol
+src/plugins/wiki/www/lib/pear/Cache/Container/msession.php -text !eol
+src/plugins/wiki/www/lib/pear/Cache/Container/phplib.php -text !eol
+src/plugins/wiki/www/lib/pear/Cache/Container/shm.php -text !eol
+src/plugins/wiki/www/lib/pear/Cache/Function.php -text !eol
+src/plugins/wiki/www/lib/pear/Cache/HTTP_Request.php -text !eol
+src/plugins/wiki/www/lib/pear/Cache/Output.php -text !eol
+src/plugins/wiki/www/lib/pear/Cache/OutputCompression.php -text !eol
 src/plugins/wiki/www/lib/pear/LICENSE -text
+src/plugins/wiki/www/lib/pear/PEAR5.php -text !eol
+src/plugins/wiki/www/lib/plugin/WikiAdminDeleteAcl.php -text !eol
 src/plugins/wiki/www/locale/.exclude -text
 src/plugins/wiki/www/locale/.htaccess -text
 src/plugins/wiki/www/locale/Makefile -text
@@ -2145,6 +2348,7 @@ src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPluginTestDeCache -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPluginWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FPluginWikiBlog -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FR%C3%A8glesDeFormatageDesTextes -text
+src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FSteve%20Wainstead -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FStyleCorrect -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FURLMagiquesPhpWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FWabiSabi -text
@@ -2193,7 +2397,6 @@ src/plugins/wiki/www/locale/fr/pgsrc/RechercheInterWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/RechercheParTitre -text
 src/plugins/wiki/www/locale/fr/pgsrc/SommaireDuProjet -text
 src/plugins/wiki/www/locale/fr/pgsrc/SondagePhpWiki -text
-src/plugins/wiki/www/locale/fr/pgsrc/SteveWainstead -text
 src/plugins/wiki/www/locale/fr/pgsrc/Suivre -text
 src/plugins/wiki/www/locale/fr/pgsrc/TousLesUtilisateurs -text
 src/plugins/wiki/www/locale/fr/pgsrc/ToutesLesPages -text
@@ -2417,6 +2620,7 @@ src/plugins/wiki/www/pgsrc/Help%2FIncludeTreePlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FInterWiki -text
 src/plugins/wiki/www/pgsrc/Help%2FInterWikiSearchPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FJabberPresencePlugin -text
+src/plugins/wiki/www/pgsrc/Help%2FJeff%002520Dairiki -text
 src/plugins/wiki/www/pgsrc/Help%2FLdapSearchPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FLikePagesPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FLinkDatabasePlugin -text
@@ -2462,6 +2666,7 @@ src/plugins/wiki/www/pgsrc/Help%2FRecentCommentsPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FRecentEditsPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FRecentReferrersPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FRedirectToPlugin -text
+src/plugins/wiki/www/pgsrc/Help%2FReini%20Urban -text
 src/plugins/wiki/www/pgsrc/Help%2FRelatedChangesPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FRichTablePlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FRssFeedPlugin -text
@@ -2472,6 +2677,7 @@ src/plugins/wiki/www/pgsrc/Help%2FSemanticSearchPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FSiteMapPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FSpreadsheet -text
 src/plugins/wiki/www/pgsrc/Help%2FSqlResultPlugin -text
+src/plugins/wiki/www/pgsrc/Help%2FSteve%20Wainstead -text
 src/plugins/wiki/www/pgsrc/Help%2FSyncWikiPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FSyntaxHighlighterPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FSystemInfoPlugin -text
@@ -2544,6 +2750,7 @@ src/plugins/wiki/www/pgsrc/PasswordReset -text
 src/plugins/wiki/www/pgsrc/PhpWikiAdministration -text
 src/plugins/wiki/www/pgsrc/PhpWikiAdministration%2FChmod -text
 src/plugins/wiki/www/pgsrc/PhpWikiAdministration%2FChown -text
+src/plugins/wiki/www/pgsrc/PhpWikiAdministration%00252FDeleteAcl -text
 src/plugins/wiki/www/pgsrc/PhpWikiAdministration%2FMarkup -text
 src/plugins/wiki/www/pgsrc/PhpWikiAdministration%2FPurge -text
 src/plugins/wiki/www/pgsrc/PhpWikiAdministration%2FRemove -text
@@ -2578,7 +2785,6 @@ src/plugins/wiki/www/pgsrc/SetGlobalAccessRights -text
 src/plugins/wiki/www/pgsrc/SetGlobalAccessRightsSimple -text
 src/plugins/wiki/www/pgsrc/SpecialPages -text
 src/plugins/wiki/www/pgsrc/SpellCheck -text
-src/plugins/wiki/www/pgsrc/SteveWainstead -text
 src/plugins/wiki/www/pgsrc/SystemInfo -text
 src/plugins/wiki/www/pgsrc/Template%2FAttribute -text
 src/plugins/wiki/www/pgsrc/Template%00252FCategory -text
@@ -2588,6 +2794,7 @@ src/plugins/wiki/www/pgsrc/Template%2FNewPlugin -text
 src/plugins/wiki/www/pgsrc/Template%2FRelation -text
 src/plugins/wiki/www/pgsrc/Template%2FTalk -text
 src/plugins/wiki/www/pgsrc/Template%2FUserPage -text
+src/plugins/wiki/www/pgsrc/The%20PhpWiki%20programming%20team -text
 src/plugins/wiki/www/pgsrc/TitleSearch -text
 src/plugins/wiki/www/pgsrc/TranslateText -text
 src/plugins/wiki/www/pgsrc/UpLoad -text
@@ -2621,31 +2828,6 @@ src/plugins/wiki/www/schemas/sqlite-destroy.sql -text
 src/plugins/wiki/www/schemas/sqlite-initialize.sql -text
 src/plugins/wiki/www/schemas/sqlsrv-destroy.sql -text
 src/plugins/wiki/www/schemas/sqlsrv-initialize.sql -text
-src/plugins/wiki/www/tests/.htaccess -text
-src/plugins/wiki/www/tests/AAA_GetHomePage.inputs -text
-src/plugins/wiki/www/tests/AAB_EditSandBox.inputs -text
-src/plugins/wiki/www/tests/AAC_MakeAutoTestPage.inputs -text
-src/plugins/wiki/www/tests/AAD_FindText.inputs -text
-src/plugins/wiki/www/tests/README -text
-src/plugins/wiki/www/tests/makemakebuild.pl -text svneol=unset#text/x-perl
-src/plugins/wiki/www/tests/maketest.pl -text svneol=unset#text/x-perl
-src/plugins/wiki/www/tests/unit/_mem_pl.ploticus -text
-src/plugins/wiki/www/tests/unit/combine_define.pl -text svneol=unset#text/x-perl
-src/plugins/wiki/www/tests/unit/lib/plugin/atom-example.xml -text svneol=unset#text/xml
-src/plugins/wiki/www/tests/unit/mysql-test-destroy.sql -text
-src/plugins/wiki/www/tests/unit/mysql-test-initialize.sql -text
-src/plugins/wiki/www/tests/unit/prepare_pl -text
-src/plugins/wiki/www/tests/unit/psql-test-initialize.sql -text
-src/plugins/wiki/www/tests/unit/readme.html -text
-src/plugins/wiki/www/tests/unit/runme_all -text
-src/plugins/wiki/www/tests/unit/runme_basic -text
-src/plugins/wiki/www/tests/unit/runme_mem -text
-src/plugins/wiki/www/tests/unit/testbox/latest_ver/latest_versions -text
-src/plugins/wiki/www/tests/unit/testbox/page_data/InterWikiMap -text
-src/plugins/wiki/www/tests/unit/testbox/page_data/WikiWord -text
-src/plugins/wiki/www/tests/unit/testbox/page_data/global_data -text
-src/plugins/wiki/www/tests/xmlrpc/curl-test -text
-src/plugins/wiki/www/themes/Crao/Makefile -text
 src/plugins/wiki/www/themes/Crao/buttons/%28diff%29.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Crao/buttons/Admin.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Crao/buttons/BackLinks.png -text svneol=unset#image/png
@@ -2686,11 +2868,9 @@ src/plugins/wiki/www/themes/Crao/buttons/fr/R%C3%A9troLiens.png -text svneol=uns
 src/plugins/wiki/www/themes/Crao/buttons/uww.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Crao/buttons/valid-xhtml10.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Crao/buttons/vcss.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/Crao/crao-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/Crao/crao.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/Crao/images/BG.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Crao/images/fond.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/Crao/sticky-min.js -text
 src/plugins/wiki/www/themes/Crao/sticky.js -text
 src/plugins/wiki/www/themes/Crao/templates/actionbar.tmpl -text
 src/plugins/wiki/www/themes/Crao/templates/body.tmpl -text
@@ -2703,9 +2883,7 @@ src/plugins/wiki/www/themes/Crao/templates/navbar.tmpl -text
 src/plugins/wiki/www/themes/Crao/templates/signin.tmpl -text
 src/plugins/wiki/www/themes/Crao/templates/top.tmpl -text
 src/plugins/wiki/www/themes/Crao/templates/wikiblog.tmpl -text
-src/plugins/wiki/www/themes/Hawaiian/Hawaiian-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/Hawaiian/Hawaiian.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/Hawaiian/Makefile -text
 src/plugins/wiki/www/themes/Hawaiian/images/PalmBeach.jpg -text svneol=unset#image/jpeg
 src/plugins/wiki/www/themes/Hawaiian/images/Submersible.jpg -text svneol=unset#image/jpeg
 src/plugins/wiki/www/themes/Hawaiian/images/WaterFall.jpg -text svneol=unset#image/jpeg
@@ -2726,11 +2904,8 @@ src/plugins/wiki/www/themes/Hawaiian/images/tchecker-sand.png -text svneol=unset
 src/plugins/wiki/www/themes/Hawaiian/images/tchecker-white.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Hawaiian/images/uhhbackground.jpg -text svneol=unset#image/jpeg
 src/plugins/wiki/www/themes/Hawaiian/preview.jpg -text svneol=unset#image/jpeg
-src/plugins/wiki/www/themes/MacOSX/MacOSX-min.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/MacOSX/MacOSX-topbottombars-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MacOSX/MacOSX-topbottombars.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MacOSX/MacOSX.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/MacOSX/Makefile -text
 src/plugins/wiki/www/themes/MacOSX/buttons/Lock+Page.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/buttons/Page+Locked.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/buttons/README -text
@@ -2866,18 +3041,11 @@ src/plugins/wiki/www/themes/MacOSX/images/mailto.png -text svneol=unset#image/pn
 src/plugins/wiki/www/themes/MacOSX/images/signature.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/images/wikiuser.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MacOSX/preview.jpg -text svneol=unset#image/jpeg
-src/plugins/wiki/www/themes/Makefile -text
 src/plugins/wiki/www/themes/Makefile.global -text
-src/plugins/wiki/www/themes/MonoBook/IE60Fixes-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/IE60Fixes.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/MonoBook/IE70Fixes-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/IE70Fixes.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/MonoBook/IEFixes-min.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/MonoBook/IEFixes-min.js -text
 src/plugins/wiki/www/themes/MonoBook/IEFixes.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/IEFixes.js -text
-src/plugins/wiki/www/themes/MonoBook/Makefile -text
-src/plugins/wiki/www/themes/MonoBook/commonPrint-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/commonPrint.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/images/Edit-chalk-10bo12.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MonoBook/images/Edit-chalk-10gs.png -text svneol=unset#image/png
@@ -2897,12 +3065,9 @@ src/plugins/wiki/www/themes/MonoBook/images/required.png -text svneol=unset#imag
 src/plugins/wiki/www/themes/MonoBook/images/url.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MonoBook/images/wiki_stamp.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/MonoBook/images/wikiuser.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/MonoBook/main-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/main.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/MonoBook/monobook-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/monobook.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/preview.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/MonoBook/rtl-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/rtl.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/sticky.js -text
 src/plugins/wiki/www/themes/MonoBook/templates/actionbar.tmpl -text
@@ -2917,14 +3082,9 @@ src/plugins/wiki/www/themes/MonoBook/templates/signin.tmpl -text
 src/plugins/wiki/www/themes/MonoBook/templates/tags.tmpl -text
 src/plugins/wiki/www/themes/MonoBook/templates/top.tmpl -text
 src/plugins/wiki/www/themes/MonoBook/templates/viewsource.tmpl -text
-src/plugins/wiki/www/themes/MonoBook/wikibits-min.js -text
 src/plugins/wiki/www/themes/MonoBook/wikibits.js -text
-src/plugins/wiki/www/themes/MonoBook/wikiprintable-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/wikiprintable.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/MonoBook/wikistandard-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/MonoBook/wikistandard.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/Portland/Makefile -text
-src/plugins/wiki/www/themes/Portland/portland-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/Portland/portland.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/Portland/templates/actionbar.tmpl -text
 src/plugins/wiki/www/themes/Portland/templates/body.tmpl -text
@@ -2934,7 +3094,6 @@ src/plugins/wiki/www/themes/Portland/templates/editpage.tmpl -text
 src/plugins/wiki/www/themes/Portland/templates/navbar.tmpl -text
 src/plugins/wiki/www/themes/Portland/templates/viewsource.tmpl -text
 src/plugins/wiki/www/themes/README -text
-src/plugins/wiki/www/themes/Sidebar/Makefile -text
 src/plugins/wiki/www/themes/Sidebar/buttons/TitleSearch.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Sidebar/hwiki.prop -text
 src/plugins/wiki/www/themes/Sidebar/hyperwiki.jar -text
@@ -2987,7 +3146,6 @@ src/plugins/wiki/www/themes/Sidebar/jscalendar/lang/calendar-tr.js -text
 src/plugins/wiki/www/themes/Sidebar/jscalendar/lang/calendar-zh.js -text
 src/plugins/wiki/www/themes/Sidebar/jscalendar/menuarrow.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Sidebar/ora.swf -text svneol=unset#application/x-shockwave-flash
-src/plugins/wiki/www/themes/Sidebar/sidebar-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/Sidebar/sidebar.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/Sidebar/templates/actionbar.tmpl -text
 src/plugins/wiki/www/themes/Sidebar/templates/body.tmpl -text
@@ -3007,8 +3165,6 @@ src/plugins/wiki/www/themes/Sidebar/templates/search.tmpl -text
 src/plugins/wiki/www/themes/Sidebar/templates/signin.tmpl -text
 src/plugins/wiki/www/themes/Sidebar/templates/tags.tmpl -text
 src/plugins/wiki/www/themes/Sidebar/templates/top.tmpl -text
-src/plugins/wiki/www/themes/SpaceWiki/Makefile -text
-src/plugins/wiki/www/themes/SpaceWiki/SpaceWiki-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/SpaceWiki/SpaceWiki.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/SpaceWiki/images/Ufp-logo.jpg -text svneol=unset#image/jpeg
 src/plugins/wiki/www/themes/SpaceWiki/images/hr.png -text svneol=unset#image/png
@@ -3017,8 +3173,6 @@ src/plugins/wiki/www/themes/SpaceWiki/images/starfield.png -text svneol=unset#im
 src/plugins/wiki/www/themes/SpaceWiki/images/tchecker-black.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/SpaceWiki/images/tchecker-grey.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/SpaceWiki/preview.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/Wordpress/Makefile -text
-src/plugins/wiki/www/themes/Wordpress/Wordpress-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/Wordpress/Wordpress.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/Wordpress/images/content-background.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/Wordpress/images/header-background.png -text svneol=unset#image/png
@@ -3030,11 +3184,8 @@ src/plugins/wiki/www/themes/Wordpress/templates/editpage.tmpl -text
 src/plugins/wiki/www/themes/Wordpress/templates/navbar.tmpl -text
 src/plugins/wiki/www/themes/Wordpress/templates/signin.tmpl -text
 src/plugins/wiki/www/themes/Wordpress/templates/viewsource.tmpl -text
-src/plugins/wiki/www/themes/blog/IEFixes-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/blog/IEFixes.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/blog/Kubrick-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/blog/Kubrick.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/blog/Makefile -text
 src/plugins/wiki/www/themes/blog/images/Edit-chalk-10bo12.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/blog/images/UEB16.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/blog/images/actionbarbg.png -text svneol=unset#image/png
@@ -3070,11 +3221,8 @@ src/plugins/wiki/www/themes/blog/templates/sidebar.tmpl -text
 src/plugins/wiki/www/themes/blog/templates/top.tmpl -text
 src/plugins/wiki/www/themes/blog/templates/viewsource.tmpl -text
 src/plugins/wiki/www/themes/blog/templates/wikiblog.tmpl -text
-src/plugins/wiki/www/themes/default/ASCIIsvg-min.js -text
 src/plugins/wiki/www/themes/default/ASCIIsvg.js -text
-src/plugins/wiki/www/themes/default/IEFixes-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/default/IEFixes.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/default/Makefile -text
 src/plugins/wiki/www/themes/default/Wikiwyg/Selection.htc -text
 src/plugins/wiki/www/themes/default/Wikiwyg/Wikiwyg.js -text
 src/plugins/wiki/www/themes/default/Wikiwyg/Wikiwyg/Debug.js -text
@@ -3114,7 +3262,6 @@ src/plugins/wiki/www/themes/default/Wikiwyg/images/unlink.gif -text svneol=unset
 src/plugins/wiki/www/themes/default/Wikiwyg/images/unordered.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/Wikiwyg/images/wikitext.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/Wikiwyg/images/www.gif -text svneol=unset#image/gif
-src/plugins/wiki/www/themes/default/ajax-min.js -text
 src/plugins/wiki/www/themes/default/ajax.js -text
 src/plugins/wiki/www/themes/default/buttons/asc_order.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/default/buttons/atom.png -text svneol=unset#image/png
@@ -3141,7 +3288,6 @@ src/plugins/wiki/www/themes/default/buttons/vcss.png -text svneol=unset#image/pn
 src/plugins/wiki/www/themes/default/buttons/xml.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/default/flowplayer-3.2.4.swf -text svneol=unset#application/x-shockwave-flash
 src/plugins/wiki/www/themes/default/flowplayer.controls-3.2.2.swf -text svneol=unset#application/x-shockwave-flash
-src/plugins/wiki/www/themes/default/highlight-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/default/highlight.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/default/images/Edit-chalk-10g.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/default/images/UEB16.png -text svneol=unset#image/png
@@ -3223,9 +3369,7 @@ src/plugins/wiki/www/themes/default/images/signature.png -text svneol=unset#imag
 src/plugins/wiki/www/themes/default/images/url.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/default/images/whosonline.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/default/images/wikiuser.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/default/moacdropdown-min.js -text
 src/plugins/wiki/www/themes/default/moacdropdown.js -text
-src/plugins/wiki/www/themes/default/moacdropdown/css/dropdown-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/default/moacdropdown/css/dropdown.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/default/moacdropdown/examples.html -text
 src/plugins/wiki/www/themes/default/moacdropdown/i/al.png -text svneol=unset#image/png
@@ -3235,7 +3379,6 @@ src/plugins/wiki/www/themes/default/moacdropdown/i/code.png -text svneol=unset#i
 src/plugins/wiki/www/themes/default/moacdropdown/i/conf.gif -text svneol=unset#image/gif
 src/plugins/wiki/www/themes/default/moacdropdown/i/ial.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/default/moacdropdown/i/iar.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/default/moacdropdown/js/Makefile -text
 src/plugins/wiki/www/themes/default/moacdropdown/js/acdropdown.js -text
 src/plugins/wiki/www/themes/default/moacdropdown/js/getobject2.js -text
 src/plugins/wiki/www/themes/default/moacdropdown/js/mobrowser.js -text
@@ -3246,15 +3389,10 @@ src/plugins/wiki/www/themes/default/moacdropdown/js/modomt.js -text
 src/plugins/wiki/www/themes/default/moacdropdown/js/xmlextras.js -text
 src/plugins/wiki/www/themes/default/moacdropdown/license.txt -text
 src/plugins/wiki/www/themes/default/moacdropdown/xmlrpc.txt -text
-src/plugins/wiki/www/themes/default/phpwiki-min.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/default/phpwiki-modern-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/default/phpwiki-modern.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/default/phpwiki-printer-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/default/phpwiki-printer.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/default/phpwiki-topbottombars-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/default/phpwiki-topbottombars.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/default/phpwiki.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/default/sortable-min.js -text
 src/plugins/wiki/www/themes/default/sortable.js -text
 src/plugins/wiki/www/themes/default/templates/MAP.pdf -text svneol=unset#application/pdf
 src/plugins/wiki/www/themes/default/templates/README -text
@@ -3292,25 +3430,15 @@ src/plugins/wiki/www/themes/default/templates/userprefs.tmpl -text
 src/plugins/wiki/www/themes/default/templates/viewsource.tmpl -text
 src/plugins/wiki/www/themes/default/templates/wikiblog.tmpl -text
 src/plugins/wiki/www/themes/default/templates/wikiforum.tmpl -text
-src/plugins/wiki/www/themes/default/toolbar-min.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/default/toolbar-min.js -text
 src/plugins/wiki/www/themes/default/toolbar.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/default/toolbar.js -text
-src/plugins/wiki/www/themes/default/wikicommon-min.js -text
 src/plugins/wiki/www/themes/default/wikicommon.js -text
-src/plugins/wiki/www/themes/default/yuicompressor-2.4.7.jar -text
-src/plugins/wiki/www/themes/fusionforge/Makefile -text
 src/plugins/wiki/www/themes/fusionforge/buttons/asc_order.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/fusionforge/buttons/desc_order.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/fusionforge/buttons/no_order.png -text svneol=unset#image/png
-src/plugins/wiki/www/themes/fusionforge/fusionforge-autonumbering-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/fusionforge/fusionforge-autonumbering.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/fusionforge/fusionforge-fullscreen-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/fusionforge/fusionforge-fullscreen.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/fusionforge/fusionforge-min.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/fusionforge/fusionforge-print-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/fusionforge/fusionforge-print.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/fusionforge/fusionforge-rereading-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/fusionforge/fusionforge-rereading.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/fusionforge/fusionforge.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/fusionforge/images/RateItAction.png -text svneol=unset#image/png
@@ -3343,6 +3471,7 @@ src/plugins/wiki/www/themes/fusionforge/pgsrc/HomePage -text
 src/plugins/wiki/www/themes/fusionforge/pgsrc/InterWikiMap -text
 src/plugins/wiki/www/themes/fusionforge/pgsrc/PhpWikiAdministration -text
 src/plugins/wiki/www/themes/fusionforge/pgsrc/PhpWikiAdministration%2FSetAclSimple -text
+src/plugins/wiki/www/themes/fusionforge/pgsrc/PhpWikiAdministration%2FSetExternal -text
 src/plugins/wiki/www/themes/fusionforge/pgsrc/SetGlobalAccessRightsSimple -text
 src/plugins/wiki/www/themes/fusionforge/pgsrc/SpecialPages -text
 src/plugins/wiki/www/themes/fusionforge/pgsrc/TextFormattingRules -text
@@ -3363,10 +3492,7 @@ src/plugins/wiki/www/themes/fusionforge/templates/navbar.tmpl -text
 src/plugins/wiki/www/themes/fusionforge/templates/ratings.tmpl -text
 src/plugins/wiki/www/themes/fusionforge/templates/savepage.tmpl -text
 src/plugins/wiki/www/themes/fusionforge/templates/userprefs.tmpl -text
-src/plugins/wiki/www/themes/fusionforge/wikilens-min.js -text
 src/plugins/wiki/www/themes/fusionforge/wikilens.js -text
-src/plugins/wiki/www/themes/shamino_com/Makefile -text
-src/plugins/wiki/www/themes/shamino_com/shamino_com-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/shamino_com/shamino_com.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/shamino_com/templates/actionbar.tmpl -text
 src/plugins/wiki/www/themes/shamino_com/templates/browse-footer.tmpl -text
@@ -3375,14 +3501,11 @@ src/plugins/wiki/www/themes/shamino_com/templates/info.tmpl -text
 src/plugins/wiki/www/themes/shamino_com/templates/signin.tmpl -text
 src/plugins/wiki/www/themes/shamino_com/templates/top.tmpl -text
 src/plugins/wiki/www/themes/smaller/IEFixes.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/smaller/Makefile -text
-src/plugins/wiki/www/themes/smaller/phpwiki-min.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/smaller/phpwiki.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/smaller/templates/actionbar.tmpl -text
 src/plugins/wiki/www/themes/smaller/templates/info.tmpl -text
 src/plugins/wiki/www/themes/smaller/templates/navbar.tmpl -text
 src/plugins/wiki/www/themes/smaller/templates/signin.tmpl -text
-src/plugins/wiki/www/themes/wikilens/Makefile -text
 src/plugins/wiki/www/themes/wikilens/images/README -text
 src/plugins/wiki/www/themes/wikilens/images/RateItAction.png -text svneol=unset#image/png
 src/plugins/wiki/www/themes/wikilens/images/RateItBStarCancel.png -text svneol=unset#image/png
@@ -3429,10 +3552,9 @@ src/plugins/wiki/www/themes/wikilens/templates/navbar.tmpl -text
 src/plugins/wiki/www/themes/wikilens/templates/newuserwelcomepage.tmpl -text
 src/plugins/wiki/www/themes/wikilens/templates/ratings.tmpl -text
 src/plugins/wiki/www/themes/wikilens/templates/top.tmpl -text
-src/plugins/wiki/www/themes/wikilens/wikilens-min.css -text svneol=unset#text/css
-src/plugins/wiki/www/themes/wikilens/wikilens-min.js -text
 src/plugins/wiki/www/themes/wikilens/wikilens.css -text svneol=unset#text/css
 src/plugins/wiki/www/themes/wikilens/wikilens.js -text
+src/plugins/wiki/www/view.php -text !eol
 src/plugins/wiki/www/wiki -text
 src/rpm-specific/Makefile -text
 src/rpm-specific/dag-rpmforge.repo -text

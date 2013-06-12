@@ -1,9 +1,7 @@
--- $Id: oci8-initialize.sql 6203 2008-08-26 13:23:56Z vargenau $
-
 set verify off
 set feedback off
 
---================================================================
+-- ================================================================
 -- Prefix for table names.
 --
 -- You should set this to the same value you specify for
@@ -14,13 +12,13 @@ set feedback off
 
 define prefix=phpwiki_
 
---================================================================
+-- ================================================================
 --
 -- Don't modify below this point unless you know what you are doing.
 --
---================================================================
+-- ================================================================
 
---================================================================
+-- ================================================================
 -- Note on Oracle datatypes...
 -- 
 -- Most of the 'NOT NULL' constraints on the character columns have been 
@@ -63,8 +61,8 @@ define sess_ip=&prefix.sess_ip
 define pref_tbl=&prefix.pref
 define pref_id=&prefix.pref_id
 
---define user_tbl=&prefix.user
---define user_id=&prefix.user_id
+-- define user_tbl=&prefix.user
+-- define user_id=&prefix.user_id
 
 define member_tbl=&prefix.member
 define member_userid=&prefix.member_userid
@@ -157,14 +155,14 @@ CREATE TABLE &pref_tbl (
 
 -- better use the extra pref table where such users can be created easily 
 -- without password.
---prompt Creating &user_tbl
---CREATE TABLE &user_tbl (
+-- prompt Creating &user_tbl
+-- CREATE TABLE &user_tbl (
 --  	userid 	CHAR(48) NOT NULL,
 --  	passwd 	CHAR(48) DEFAULT '',
 --	prefs  	CLOB DEFAULT '',
 --	groupname CHAR(48) DEFAULT 'users',
 --  	CONSTRAINT &user_id PRIMARY KEY (userid)
---);
+-- );
 
 prompt Creating &member_tbl
 CREATE TABLE &member_tbl (

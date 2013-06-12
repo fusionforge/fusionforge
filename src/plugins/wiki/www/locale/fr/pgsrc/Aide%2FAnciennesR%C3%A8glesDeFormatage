@@ -1,10 +1,9 @@
-Date: Tue,  4 Jan 2011 11:58:32 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Aide%2FAnciennesR%C3%A8glesDeFormatage 7799 2011-01-04 11:05:56Z vargenau $
+Date: Wed, 19 Dec 2012 13:19:42 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FAnciennesR%C3%A8glesDeFormatage;
   flags=PAGE_LOCKED;
-  charset=utf-8
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 ! Description
@@ -75,7 +74,7 @@ ne fonctionnera pas''
 * Vous pouvez supprimer les liens dans l'ancien style et les URI en précédant le mot d'un '!', i. e. !NePasLierCommeUnWikiMot, !http://ne.pas.lier/
 * Vous pouvez créer des notes de bas de page avec [[1], [[2], [[3], ... comme ici [1] (voir le bas de la page). Si le [[ est dans la première colonne, c'est une ''définition'' plutôt qu'une ''référence'' [1].
 * L'ancien moyen de lier les URLs est encore accepté : précéder l'URL de "http:", "ftp:" oo "mailto:" pour créer un lien automatique comme pour : http://c2.com/
-* Les URLs finissant par .png, .gif, ou .jpg sont remplacées par leur contenu si elles sont entre crochets : [http://phpwiki.sourceforge.net/demo/themes/default/images/png.png]
+* Les URLs finissant par .png, .gif, ou .jpg sont remplacées par leur contenu si elles sont entre crochets : [http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/png.png]
 
 ! Tableaux
 

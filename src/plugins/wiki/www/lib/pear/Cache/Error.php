@@ -15,7 +15,7 @@
 // | Authors: Ulf Wendel <ulf.wendel@phpdoc.de>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: Error.php 6184 2008-08-22 10:33:41Z vargenau $
+// $Id: Error.php 174777 2004-12-15 09:09:33Z dufuz $
 
 require_once 'PEAR.php';
 
@@ -24,7 +24,8 @@ require_once 'PEAR.php';
 * 
 * @package Cache
 */
-class Cache_Error extends PEAR_Error {
+class Cache_Error extends PEAR_Error
+{
 
 
   /**
@@ -48,3 +49,4 @@ class Cache_Error extends PEAR_Error {
   } // end func Cache_Error
   
 } // end class Cache_Error
+?>

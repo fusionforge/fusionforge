@@ -1,5 +1,5 @@
 <?php
-// $Id: WysiwygEdit.php 7964 2011-03-05 17:05:30Z vargenau $
+
 /**
  * Baseclass for WysiwygEdit/*
  *
@@ -23,18 +23,22 @@
 
 require_once 'lib/InlineParser.php';
 
-class WysiwygEdit {
+class WysiwygEdit
+{
 
-    function WysiwygEdit() {
+    function WysiwygEdit()
+    {
         $this->_transformer_tags = false;
     }
 
-    function Head($name='edit[content]') {
+    function Head($name = 'edit[content]')
+    {
         trigger_error("virtual", E_USER_ERROR);
     }
 
     // to be called after </textarea>
-    function Textarea($textarea,$wikitext,$name='edit[content]') {
+    function Textarea($textarea, $wikitext, $name = 'edit[content]')
+    {
         trigger_error("virtual", E_USER_ERROR);
     }
 
@@ -43,7 +47,8 @@ class WysiwygEdit {
      * This will be converted back by WysiwygEdit_ConvertAfter if required.
      *  *text* => '<b>text<b>'
      */
-    function ConvertBefore($text) {
+    function ConvertBefore($text)
+    {
         require_once 'lib/BlockParser.php';
         $xml = TransformText($text, 2.0, $GLOBALS['request']->getArg('pagename'));
         return $xml->AsXML();
@@ -56,7 +61,8 @@ class WysiwygEdit {
      *
      * TODO: Switch over to HtmlParser
      */
-    function ConvertAfter($text) {
+    function ConvertAfter($text)
+    {
         static $trfm;
         if (empty($trfm)) {
             $trfm = new HtmlTransformer($this->_transformer_tags);
@@ -68,60 +74,71 @@ class WysiwygEdit {
 
 // re-use these classes for the regexp's.
 // just output strings instead of XmlObjects
-class Markup_html_br extends Markup_linebreak {
-    function markup ($match) {
+class Markup_html_br extends Markup_linebreak
+{
+    function markup($match)
+    {
         return $match;
     }
 }
 
-class Markup_html_simple_tag extends Markup_html_emphasis {
-    function markup ($match, $body) {
+class Markup_html_simple_tag extends Markup_html_emphasis
+{
+    function markup($match, $body)
+    {
         $tag = substr($match, 1, -1);
         switch ($tag) {
-        case 'b':
-        case 'strong':
-            return "*".$body."*";
-        case 'big':
-            return "<big>".$body."</big>";
-        case 'i':
-        case 'em':
-            return "_".$body."_";
+            case 'b':
+            case 'strong':
+                return "*" . $body . "*";
+            case 'big':
+                return "<big>" . $body . "</big>";
+            case 'i':
+            case 'em':
+                return "_" . $body . "_";
         }
     }
 }
 
 class Markup_html_p extends BalancedMarkup
 {
-    var $_start_regexp = "<(?:p|P)( class=\".*\")?>";
+    public $_start_regexp = "<(?:p|P)( class=\".*\")?>";
 
-    function getEndRegexp ($match) {
+    function getEndRegexp($match)
+    {
         return "<\\/" . substr($match, 1);
     }
-    function markup ($match, $body) {
-        return $body."\n";
+
+    function markup($match, $body)
+    {
+        return $body . "\n";
     }
 }
 
 //'<SPAN style="FONT-WEIGHT: bold">text</SPAN>' => '*text*'
 class Markup_html_spanbold extends BalancedMarkup
 {
-    var $_start_regexp = "<(?:span|SPAN) style=\"FONT-WEIGHT: bold\">";
+    public $_start_regexp = "<(?:span|SPAN) style=\"FONT-WEIGHT: bold\">";
 
-    function getEndRegexp ($match) {
+    function getEndRegexp($match)
+    {
         return "<\\/" . substr($match, 1);
     }
-    function markup ($match, $body) {
+
+    function markup($match, $body)
+    {
         //Todo: convert style formatting to simplier nested <b><i> tags
-        return "*".$body."*";
+        return "*" . $body . "*";
     }
 }
 
 class HtmlTransformer extends InlineTransformer
 {
-    function HtmlTransformer ($tags = false) {
+    function HtmlTransformer($tags = false)
+    {
         if (!$tags) $tags =
-            array('escape','html_br','html_spanbold','html_simple_tag',
-                  'html_p',);
+            array('escape', 'html_br', 'html_spanbold', 'html_simple_tag',
+                'html_p',);
         /*
          'html_a','html_span','html_div',
          'html_table','html_hr','html_pre',

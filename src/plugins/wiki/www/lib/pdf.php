@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: pdf.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright (C) 2003 Olivier PLATHEY
  * Copyright (C) 200? Don Sebà
@@ -28,15 +28,16 @@
  * http://phpwiki.sourceforge.net/phpwiki/PhpWikiToDocBookAndPDF
  * htmldoc or ghostscript + html2ps or docbook (dbdoclet, xsltproc, fop)
  * http://www.easysw.com/htmldoc
-*/
-function ConvertAndDisplayPdfPageList (&$request, $pagelist, $args = array()) {
+ */
+function ConvertAndDisplayPdfPageList(&$request, $pagelist, $args = array())
+{
     global $WikiTheme;
     if (empty($request->_is_buffering_output))
-        $request->buffer_output(false/*'nocompress'*/);
+        $request->buffer_output(false /*'nocompress'*/);
     $pagename = $request->getArg('pagename');
     $dest = $request->getArg('dest');
-    $request->setArg('dest',false);
-    $request->setArg('format',false);
+    $request->setArg('dest', false);
+    $request->setArg('format', false);
     include_once 'lib/display.php';
     include_once 'lib/loadsave.php';
 
@@ -46,12 +47,12 @@ function ConvertAndDisplayPdfPageList (&$request, $pagelist, $args = array()) {
     $cache->newCache();
     $tmpfile = $cache->tempnam();
     $tmpdir = dirname($tmpfile);
-    unlink ($tmpfile);
+    unlink($tmpfile);
 
     $WikiTheme->DUMP_MODE = 'PDFHTML';
     _DumpHtmlToDir($tmpdir,
-               new WikiDB_Array_generic_iter($pagelist->_pages),
-               $request->getArg('exclude'));
+        new WikiDB_Array_generic_iter($pagelist->_pages),
+        $request->getArg('exclude'));
     $WikiTheme->DUMP_MODE = false;
     return;
 }
@@ -61,10 +62,11 @@ function ConvertAndDisplayPdfPageList (&$request, $pagelist, $args = array()) {
  * TODO: inline cached content: /getimg.php? => image.png
  * Just use an external exe.
  */
-function ConvertAndDisplayPdf (&$request) {
+function ConvertAndDisplayPdf(&$request)
+{
     global $WikiTheme;
     if (empty($request->_is_buffering_output))
-        $request->buffer_output(false/*'nocompress'*/);
+        $request->buffer_output(false /*'nocompress'*/);
     $pagename = $request->getArg('pagename');
     $dest = $request->getArg('dest');
     // Disable CACHE
@@ -78,12 +80,12 @@ function ConvertAndDisplayPdf (&$request) {
 
     // check hook for external converters
     if (defined('USE_EXTERNAL_HTML2PDF')
-        and USE_EXTERNAL_HTML2PDF)
-    {   // See http://phpwiki.sourceforge.net/phpwiki/PhpWikiToDocBookAndPDF
+        and USE_EXTERNAL_HTML2PDF
+    ) { // See http://phpwiki.sourceforge.net/phpwiki/PhpWikiToDocBookAndPDF
         // htmldoc or ghostscript + html2ps or docbook (dbdoclet, xsltproc, fop)
         Header('Content-Type: application/pdf');
         $request->discardOutput();
-        $request->buffer_output(false/*'nocompress'*/);
+        $request->buffer_output(false /*'nocompress'*/);
         require_once 'lib/WikiPluginCached.php';
         $cache = new WikiPluginCached;
         $cache->newCache();

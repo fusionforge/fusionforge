@@ -1,5 +1,4 @@
-<?php // -*-php-*-
-// $Id: userprefs.tmpl 8134 2011-09-27 08:05:54Z vargenau $
+<?php
 // Todo: Move the logic and code to the plugin
 // This is very experimental and the read-only part an ugly hack so far.
 foreach (explode(',','errmsg,isForm') as $var) {
@@ -192,13 +191,13 @@ if ( $isForm ) {
    <tr><td colspan="2"><h3><?php echo _("E-mail Notification")?></h3></td></tr>
 
    <tr><td colspan="2">
-    <?php echo _("Get an email notification at changes of the following pages:")?>
+    <?php echo _("Get an e-mail notification at changes of the following pages:")?>
    </td></tr>
 
    <tr>
     <?php if ($isForm) { ?>
       <td><textarea name="pref[notifyPages]" cols="40" rows="6"><?php echo $pref->get('notifyPages')?></textarea></td>
-      <td><p class="hint"><?php echo _("Enter pages seperated by space or comma. Wildcards (fileglobbing) allowed.")?></p></td>
+      <td><p class="hint"><?php echo _("Enter pages separated by space or comma. Wildcards (fileglobbing) allowed.")?></p></td>
     <?php } else { ?>
      <td colspan="2"><?php echo $pref->get('notifyPages')?></td>
     <?php } ?>

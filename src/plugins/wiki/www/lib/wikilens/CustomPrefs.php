@@ -1,5 +1,4 @@
-<?php // -*-php-*-
-// $Id: CustomPrefs.php 7967 2011-03-07 13:08:01Z vargenau $
+<?php
 
 /**
  * Custom UserPreferences:
@@ -12,46 +11,50 @@
  */
 
 class _UserPreference_recengine // recommendation engine method
-extends _UserPreference
+    extends _UserPreference
 {
-    var $valid_values = array('php','mysuggest','mymovielens','mycluto');
-    var $default_value = 'php';
+    public $valid_values = array('php', 'mysuggest', 'mymovielens', 'mycluto');
+    public $default_value = 'php';
 
-    function sanify ($value) {
+    function sanify($value)
+    {
         if (!in_array($value, $this->valid_values)) return $this->default_value;
         else return $value;
     }
-};
+}
 
 class _UserPreference_recalgo // recommendation engine algorithm
-extends _UserPreference
+    extends _UserPreference
 {
-    var $valid_values = array
-        (
-         'itemCos',  // Item-based Top-N recommendation algorithm with cosine-based similarity function
-         'itemProb', // Item-based Top-N recommendation algorithm with probability-based similarity function.
-                     // This algorithms tends to outperform the rest.
-         'userCos',  // User-based Top-N recommendation algorithm with cosine-based similarity function.
-         'bayes');   // Naïve Bayesian Classifier
-    var $default_value = 'itemProb';
+    public $valid_values = array
+    (
+        'itemCos', // Item-based Top-N recommendation algorithm with cosine-based similarity function
+        'itemProb', // Item-based Top-N recommendation algorithm with probability-based similarity function.
+        // This algorithms tends to outperform the rest.
+        'userCos', // User-based Top-N recommendation algorithm with cosine-based similarity function.
+        'bayes'); // Naïve Bayesian Classifier
+    public $default_value = 'itemProb';
 
-    function sanify ($value) {
+    function sanify($value)
+    {
         if (!in_array($value, $this->valid_values)) return $this->default_value;
         else return $value;
     }
-};
+}
 
 class _UserPreference_recnnbr // recommendation engine key clustering, neighborhood size
-extends _UserPreference_numeric{};
+    extends _UserPreference_numeric
+{
+}
 
 $WikiTheme->customUserPreferences
-    (array
-         (
-          'recengine' => new _UserPreference_recengine('php'),
-          'recalgo'   => new _UserPreference_recalgo('itemProb'),
-          //recnnbr: typically 15-30 for item-based, 40-80 for user-based algos
-          'recnnbr'   => new _UserPreference_recnnbr(10,14,80),
-          ));
+(array
+(
+    'recengine' => new _UserPreference_recengine('php'),
+    'recalgo' => new _UserPreference_recalgo('itemProb'),
+    //recnnbr: typically 15-30 for item-based, 40-80 for user-based algos
+    'recnnbr' => new _UserPreference_recnnbr(10, 14, 80),
+));
 
 // Local Variables:
 // mode: php

@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: TexToPng.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  * Copyright (C) 2002 Johannes Große
@@ -43,7 +43,7 @@ $pstoimgbin = '/usr/bin/pstoimg';
 
 // output mere debug messages (should be set to false in a stable
 // version)
-   define('TexToPng_debug', false);
+define('TexToPng_debug', false);
 
 /*-----------------------------------------------------------------------
  | OPTION DEFAULTS
@@ -52,7 +52,7 @@ $pstoimgbin = '/usr/bin/pstoimg';
  | use antialias for rendering;
  | anitalias: blurs, _looks better_, needs twice space, renders slowlier
  |                                                                      */
-   define('TexToPng_antialias', true);
+define('TexToPng_antialias', true);
 
 /*----
  | Use transparent background; dont combine with antialias on a dark
@@ -60,14 +60,13 @@ $pstoimgbin = '/usr/bin/pstoimg';
  | ps-files (almost non readable,blurred output) even when directly
  | invoked from shell. So its probably a pstoimg bug.
  |                                                                      */
-   define('TexToPng_transparent', false);
+define('TexToPng_transparent', false);
 
 /*----
  | default value for rescaling
  | allowed range: 0 - 5 (integer)
  |                                                                      */
-   define('TexToPng_magstep', 3);
-
+define('TexToPng_magstep', 3);
 
 /*-----------------------------------------------------------------------
  |
@@ -77,9 +76,15 @@ $pstoimgbin = '/usr/bin/pstoimg';
 
 // check boolean constants
 
-   if (!defined('TexToPng_debug'))       { define('TexToPng_debug', false); }
-   if (!defined('TexToPng_antialias'))   { define('TexToPng_antialias', false); }
-   if (!defined('TexToPng_transparent')) { define('TexToPng_transparent', false); }
+if (!defined('TexToPng_debug')) {
+    define('TexToPng_debug', false);
+}
+if (!defined('TexToPng_antialias')) {
+    define('TexToPng_antialias', false);
+}
+if (!defined('TexToPng_transparent')) {
+    define('TexToPng_transparent', false);
+}
 
 /*-----------------------------------------------------------------------
  | WikiPlugin_TexToPng
@@ -89,64 +94,69 @@ require_once 'lib/WikiPluginCached.php';
 
 class WikiPlugin_TexToPng extends WikiPluginCached
 {
-    function getPluginType() {
+    function getPluginType()
+    {
         return PLUGIN_CACHED_IMG_ONDEMAND;
     }
 
-    function getName() {
-        return "TexToPng";
-    }
-
-    function getDescription() {
+    function getDescription()
+    {
         return _("Converts TeX to an image. May be used to embed formulas in PhpWiki.");
     }
 
-    function getDefaultArguments() {
-        return array('tex'          => "",
-                     'magstep'      => TexToPng_magstep,
-                     'img'          => 'png',
-                     'subslash'     => 'off',
-                     'antialias'    => TexToPng_antialias   ? 'on' : 'off',
-                     'transparent'  => TexToPng_transparent ? 'on' : 'off',
-                     'center'       => 'off');
+    function getDefaultArguments()
+    {
+        return array('tex' => "",
+            'magstep' => TexToPng_magstep,
+            'img' => 'png',
+            'subslash' => 'off',
+            'antialias' => TexToPng_antialias ? 'on' : 'off',
+            'transparent' => TexToPng_transparent ? 'on' : 'off',
+            'center' => 'off');
     }
 
-    function getImage($dbi, $argarray, $request) {
+    function getImage($dbi, $argarray, $request)
+    {
         extract($argarray);
         $this->checkParams($tex, $magstep, $subslash, $antialias, $transparent);
         return $this->TexToImg($tex, $magstep, $antialias, $transparent);
     } // run
 
-    function getExpire($dbi, $argarray, $request) {
+    function getExpire($dbi, $argarray, $request)
+    {
         return '0';
     }
 
-    function getImageType($dbi, $argarray, $request) {
+    function getImageType($dbi, $argarray, $request)
+    {
         extract($argarray);
         return $img;
     }
 
-    function getAlt($dbi, $argarray, $request) {
+    function getAlt($dbi, $argarray, $request)
+    {
         extract($argarray);
         return $tex;
     }
 
-    function embedImg($url,$dbi,$argarray,$request) {
-        $html = HTML::img( array(
-            'src'   => $url,
-            'alt'   => htmlspecialchars($this->getAlt($dbi,$argarray,$request))
-            ));
-        if ($argarray['center']=='on')
-            return HTML::div( array('style' => 'text-align:center;'), $html);
+    function embedImg($url, $dbi, $argarray, $request)
+    {
+        $html = HTML::img(array(
+            'src' => $url,
+            'alt' => htmlspecialchars($this->getAlt($dbi, $argarray, $request))
+        ));
+        if ($argarray['center'] == 'on')
+            return HTML::div(array('style' => 'text-align:center;'), $html);
         return $html;
     }
 
     /* -------------------- error handling ---------------------------- */
 
-    function dbg( $out ) {
+    function dbg($out)
+    {
         // test if verbose debug info is selected
         if (TexToPng_debug) {
-            $this->complain( $out."\n" );
+            $this->complain($out . "\n");
         } else {
             if (!$this->_errortext) {
                 // yeah, I've been told to be quiet, but obviously
@@ -159,38 +169,43 @@ class WikiPlugin_TexToPng extends WikiPluginCached
 
     /* -------------------- parameter handling ------------------------ */
 
-    function helptext() {
-        $aa= TexToPng_antialias  ?'on(default)$|$off':'on$|$off(default)';
-        $tp= TexToPng_transparent?'on(default)$|$off':'on$|$off(default)';
+    function helptext()
+    {
+        $aa = TexToPng_antialias ? 'on(default)$|$off' : 'on$|$off(default)';
+        $tp = TexToPng_transparent ? 'on(default)$|$off' : 'on$|$off(default)';
         $help =
-          '/settabs/+/indent&$<$?plugin /bf{Tex} & [{/tt transparent}] & = "png(default)$|$jpeg$|$gif"& /cr'."\n".
-          '/+&$<$?plugin /bf{TexToPng} & /hfill {/tt tex}           & = "/TeX/  commands"& /cr'."\n".
-          '/+&                         & /hfill [{/tt img}]         & = "png(default)$|$jpeg$|$gif"& /cr'."\n".
-          '/+&                         & /hfill [{/tt magstep}]     & = "0 to 5 ('.TexToPng_magstep.' default)"& /cr'."\n".
-          '/+&                         & /hfill [{/tt center}]      & = "on$|$off(default)"& /cr'."\n".
-          '/+&                         & /hfill [{/tt subslash}]    & = "on$|$off(default)"& /cr'."\n".
-          '/+&                         & /hfill [{/tt antialias}]   & = "'.$aa.'"& /cr'."\n".
-          '/+&                         & /hfill [{/tt transparent}] & = "'.$tp.'"&?$>$ /cr'."\n";
+            '/settabs/+/indent&$<$?plugin /bf{Tex} & [{/tt transparent}] & = "png(default)$|$jpeg$|$gif"& /cr' . "\n" .
+                '/+&$<$?plugin /bf{TexToPng} & /hfill {/tt tex}           & = "/TeX/  commands"& /cr' . "\n" .
+                '/+&                         & /hfill [{/tt img}]         & = "png(default)$|$jpeg$|$gif"& /cr' . "\n" .
+                '/+&                         & /hfill [{/tt magstep}]     & = "0 to 5 (' . TexToPng_magstep . ' default)"& /cr' . "\n" .
+                '/+&                         & /hfill [{/tt center}]      & = "on$|$off(default)"& /cr' . "\n" .
+                '/+&                         & /hfill [{/tt subslash}]    & = "on$|$off(default)"& /cr' . "\n" .
+                '/+&                         & /hfill [{/tt antialias}]   & = "' . $aa . '"& /cr' . "\n" .
+                '/+&                         & /hfill [{/tt transparent}] & = "' . $tp . '"&?$>$ /cr' . "\n";
 
-        return strtr($help, '/', '\\' );
+        return strtr($help, '/', '\\');
     } // helptext
 
+    function checkParams(&$tex, &$magstep, $subslash, &$aalias, &$transp)
+    {
 
-    function checkParams( &$tex, &$magstep, $subslash, &$aalias, &$transp ) {
-
-        if ($subslash=='on') {
+        if ($subslash == 'on') {
             // WORKAROUND for backslashes
-            $tex = strtr($tex,'/','\\');
+            $tex = strtr($tex, '/', '\\');
         }
 
         // ------- check parameters
         $def = $this->getDefaultArguments();
 
-        if ($tex=='') { $tex = $this->helptext(); }
+        if ($tex == '') {
+            $tex = $this->helptext();
+        }
 
-        if ($magstep < 0 || $magstep > 5 ) { $magstep = $def["magstep"]; }
+        if ($magstep < 0 || $magstep > 5) {
+            $magstep = $def["magstep"];
+        }
         // calculate magnification factor
-        $magstep = floor(10*pow(1.2,$magstep))/10;
+        $magstep = floor(10 * pow(1.2, $magstep)) / 10;
 
         $aalias = $aalias != 'off';
         $transp = $transp != 'off';
@@ -199,19 +214,21 @@ class WikiPlugin_TexToPng extends WikiPluginCached
 
     /* ------------------ image creation ------------------------------ */
 
-    function execute($cmd,$complainvisibly=false) {
+    function execute($cmd, $complainvisibly = false)
+    {
         exec($cmd, $errortxt, $returnval);
         $ok = $returnval == 0;
 
         if (!$ok) {
             if (!$complainvisibly) {
-                 $this->dbg('Error during execution of '.$cmd );
-            };
-            while (list($key,$value)=each($errortxt)) {
+                $this->dbg('Error during execution of ' . $cmd);
+            }
+            ;
+            while (list($key, $value) = each($errortxt)) {
                 if ($complainvisibly) {
-                    $this->complain( $value."\n" );
+                    $this->complain($value . "\n");
                 } else {
-                    $this->dbg( $value );
+                    $this->dbg($value);
                 }
             }
         }
@@ -220,21 +237,22 @@ class WikiPlugin_TexToPng extends WikiPluginCached
 
     /* ---------------------------------------------------------------- */
 
-    function createTexFile($texfile,$texstr) {
-        if ($ok=($fp=fopen($texfile, 'w'))!=0 ) {
+    function createTexFile($texfile, $texstr)
+    {
+        if ($ok = ($fp = fopen($texfile, 'w')) != 0) {
             // prepare .tex file
             $texcommands =
-                '\nopagenumbers'   . "\n" .
-                '\hoffset=0cm'     . "\n" .
-                '\voffset=0cm'     . "\n" .
-            //    '\hsize=20cm'    . "\n" .
-            //    '\vsize=10ex'    . "\n" .
-                $texstr            . "\n" .
-                '\vfill\eject'     . "\n" .
-                '\end'             . "\n\n";
+                '\nopagenumbers' . "\n" .
+                    '\hoffset=0cm' . "\n" .
+                    '\voffset=0cm' . "\n" .
+                    //    '\hsize=20cm'    . "\n" .
+                    //    '\vsize=10ex'    . "\n" .
+                    $texstr . "\n" .
+                    '\vfill\eject' . "\n" .
+                    '\end' . "\n\n";
 
             $ok = fwrite($fp, $texcommands);
-            $ok = fclose($fp) && $ok;  // close anyway
+            $ok = fclose($fp) && $ok; // close anyway
         }
         if (!$ok) {
             $this->dbg('could not write .tex file: ' . $texstr);
@@ -244,31 +262,32 @@ class WikiPlugin_TexToPng extends WikiPluginCached
 
     /* ---------------------------------------------------------------- */
 
-    function TexToImg($texstr, $scale, $aalias, $transp) {
+    function TexToImg($texstr, $scale, $aalias, $transp)
+    {
         //$cacheparams = $GLOBALS['CacheParams'];
         $tempfiles = $this->tempnam('TexToPng');
         $img = 0; // $size = 0;
 
         // procuce options for pstoimg
         $options =
-           ($aalias ? '-aaliastext -color 8 ' : '-color 1 ') .
-           ($transp ? '-transparent ' : '') .
-           '-scale ' . $scale . ' ' .
-           '-type png -crop btlr -geometry 600x150 -margins 0,0';
+            ($aalias ? '-aaliastext -color 8 ' : '-color 1 ') .
+                ($transp ? '-transparent ' : '') .
+                '-scale ' . $scale . ' ' .
+                '-type png -crop btlr -geometry 600x150 -margins 0,0';
 
         // rely on intelligent bool interpretation
-        $ok= $tempfiles &&
-             $this->createTexFile($tempfiles.'.tex',$texstr) &&
-             $this->execute('cd '.$cacheparams['cache_dir'].'; '.
-                            "$texbin ".$tempfiles.'.tex',true) &&
-             $this->execute("$dvipsbin -o".$tempfiles.'.ps '.$tempfiles.'.dvi') &&
-             $this->execute("$pstoimgbin $options"
-                            .' -out '.$tempfiles.'.png '.
-                            $tempfiles.'.ps'               ) &&
-             file_exists( $tempfiles.'.png' );
+        $ok = $tempfiles &&
+            $this->createTexFile($tempfiles . '.tex', $texstr) &&
+            $this->execute('cd ' . $cacheparams['cache_dir'] . '; ' .
+                "$texbin " . $tempfiles . '.tex', true) &&
+            $this->execute("$dvipsbin -o" . $tempfiles . '.ps ' . $tempfiles . '.dvi') &&
+            $this->execute("$pstoimgbin $options"
+                . ' -out ' . $tempfiles . '.png ' .
+                $tempfiles . '.ps') &&
+            file_exists($tempfiles . '.png');
 
         if ($ok) {
-            if (!($img = ImageCreateFromPNG( $tempfiles.'.png' ))) {
+            if (!($img = ImageCreateFromPNG($tempfiles . '.png'))) {
                 $this->dbg("Could not open just created image file: $tempfiles");
                 $ok = false;
             }
@@ -276,7 +295,7 @@ class WikiPlugin_TexToPng extends WikiPluginCached
 
         // clean up tmpdir; in debug mode only if no error occured
 
-        if ( !TexToPng_debug || (TexToPng_debug && $ok))  {
+        if (!TexToPng_debug || (TexToPng_debug && $ok)) {
             if ($tempfiles) {
                 unlink($tempfiles);
                 unlink($tempfiles . '.ps');

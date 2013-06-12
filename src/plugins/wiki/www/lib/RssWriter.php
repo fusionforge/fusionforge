@@ -1,11 +1,7 @@
-<?php // $Id: RssWriter.php 7964 2011-03-05 17:05:30Z vargenau $
+<?php
 /*
  * Code for creating RSS 1.0.
  */
-
-// Encoding for RSS output.
-if (!defined('RSS_ENCODING'))
-  define('RSS_ENCODING', $GLOBALS['charset']);
 
 /**
  * A class for writing RSS 1.0.
@@ -15,42 +11,45 @@ if (!defined('RSS_ENCODING'))
  */
 class RssWriter extends XmlElement
 {
-    function RssWriter () {
+    function RssWriter()
+    {
         $this->XmlElement('rdf:RDF',
-                          array('xmlns' => "http://purl.org/rss/1.0/",
-                                'xmlns:rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'));
+            array('xmlns' => "http://purl.org/rss/1.0/",
+                'xmlns:rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'));
 
-    $this->_modules = array(
+        $this->_modules = array(
             //Standards
-        'content'    => "http://purl.org/rss/1.0/modules/content/",
-        'dc'    => "http://purl.org/dc/elements/1.1/",
-        'sy'    => "http://purl.org/rss/1.0/modules/syndication/",
+            'content' => "http://purl.org/rss/1.0/modules/content/",
+            'dc' => "http://purl.org/dc/elements/1.1/",
+            'sy' => "http://purl.org/rss/1.0/modules/syndication/",
             //Proposed
-            'wiki'      => "http://purl.org/rss/1.0/modules/wiki/",
-        'ag'    => "http://purl.org/rss/1.0/modules/aggregation/",
-        'annotate'    => "http://purl.org/rss/1.0/modules/annotate/",
-        'audio'    => "http://media.tangent.org/rss/1.0/",
-        'cp'    => "http://my.theinfo.org/changed/1.0/rss/",
-        'rss091'    => "http://purl.org/rss/1.0/modules/rss091/",
-        'slash'    => "http://purl.org/rss/1.0/modules/slash/",
-        'taxo'    => "http://purl.org/rss/1.0/modules/taxonomy/",
-        'thr'    => "http://purl.org/rss/1.0/modules/threading/"
+            'wiki' => "http://purl.org/rss/1.0/modules/wiki/",
+            'ag' => "http://purl.org/rss/1.0/modules/aggregation/",
+            'annotate' => "http://purl.org/rss/1.0/modules/annotate/",
+            'audio' => "http://media.tangent.org/rss/1.0/",
+            'cp' => "http://my.theinfo.org/changed/1.0/rss/",
+            'rss091' => "http://purl.org/rss/1.0/modules/rss091/",
+            'slash' => "http://purl.org/rss/1.0/modules/slash/",
+            'taxo' => "http://purl.org/rss/1.0/modules/taxonomy/",
+            'thr' => "http://purl.org/rss/1.0/modules/threading/"
         );
 
-    $this->_uris_seen = array();
+        $this->_uris_seen = array();
         $this->_items = array();
     }
 
-    function registerModule($alias, $uri) {
-    assert(!isset($this->_modules[$alias]));
-    $this->_modules[$alias] = $uri;
+    function registerModule($alias, $uri)
+    {
+        assert(!isset($this->_modules[$alias]));
+        $this->_modules[$alias] = $uri;
     }
 
     // Args should include:
     //  'title', 'link', 'description'
     // and can include:
     //  'URI'
-    function channel($properties, $uri = false) {
+    function channel($properties, $uri = false)
+    {
         $this->_channel = $this->__node('channel', $properties, $uri);
     }
 
@@ -58,7 +57,8 @@ class RssWriter extends XmlElement
     //  'title', 'link'
     // and can include:
     //  'description', 'URI'
-    function addItem($properties, $uri = false) {
+    function addItem($properties, $uri = false)
+    {
         $this->_items[] = $this->__node('item', $properties, $uri);
     }
 
@@ -66,7 +66,8 @@ class RssWriter extends XmlElement
     //  'url', 'title', 'link'
     // and can include:
     //  'URI'
-    function image($properties, $uri = false) {
+    function image($properties, $uri = false)
+    {
         $this->_image = $this->__node('image', $properties, $uri);
     }
 
@@ -74,14 +75,16 @@ class RssWriter extends XmlElement
     //  'title', 'description', 'name', and 'link'
     // and can include:
     //  'URI'
-    function textinput($properties, $uri = false) {
+    function textinput($properties, $uri = false)
+    {
         $this->_textinput = $this->__node('textinput', $properties, $uri);
     }
 
     /**
      * Finish construction of RSS.
      */
-    function finish() {
+    function finish()
+    {
         if (isset($this->_finished))
             return;
 
@@ -95,18 +98,18 @@ class RssWriter extends XmlElement
         }
         $channel->pushContent(new XmlElement('items', false, $seq));
 
-    if (isset($this->_image)) {
+        if (isset($this->_image)) {
             $channel->pushContent($this->__ref('image', $this->_image));
-        $items[] = $this->_image;
-    }
-    if (isset($this->_textinput)) {
+            $items[] = $this->_image;
+        }
+        if (isset($this->_textinput)) {
             $channel->pushContent($this->__ref('textinput', $this->_textinput));
-        $items[] = $this->_textinput;
-    }
+            $items[] = $this->_textinput;
+        }
 
-    $this->pushContent($channel);
-    if ($items)
-        $this->pushContent($items);
+        $this->pushContent($channel);
+        if ($items)
+            $this->pushContent($items);
 
         $this->__spew();
         $this->_finished = true;
@@ -115,101 +118,108 @@ class RssWriter extends XmlElement
     /**
      * Write output to HTTP client.
      */
-    function __spew() {
+    function __spew()
+    {
         header("Content-Type: application/xml; charset=" . RSS_ENCODING);
-        echo('<'.'?xml version="1.0" encoding="'.RSS_ENCODING.'"?'.">\n");
+        echo('<' . '?xml version="1.0" encoding="' . RSS_ENCODING . '"?' . ">\n");
         //printf("<!-- generator=\"PhpWiki-%s\" -->\n", PHPWIKI_VERSION);
         $this->printXML();
     }
 
-
     /**
      * Create a new RDF <em>typedNode</em>.
      */
-    function __node($type, $properties, $uri = false) {
-    if (! $uri)
-        $uri = $properties['link'];
-    $attr['rdf:about'] = $this->__uniquify_uri($uri);
-    return new XmlElement($type, $attr,
-                              $this->__elementize($properties));
+    function __node($type, $properties, $uri = false)
+    {
+        if (!$uri)
+            $uri = $properties['link'];
+        $attr['rdf:about'] = $this->__uniquify_uri($uri);
+        return new XmlElement($type, $attr,
+            $this->__elementize($properties));
     }
 
     /**
      * Check object URI for uniqueness, create a unique URI if needed.
      */
-    function __uniquify_uri ($uri) {
-    if (!$uri || isset($this->_uris_seen[$uri])) {
-        $n = count($this->_uris_seen);
-        $uri = $this->_channel->getAttr('rdf:about') . "#uri$n";
-        assert(!isset($this->_uris_seen[$uri]));
-    }
-    $this->_uris_seen[$uri] = true;
-    return $uri;
+    function __uniquify_uri($uri)
+    {
+        if (!$uri || isset($this->_uris_seen[$uri])) {
+            $n = count($this->_uris_seen);
+            $uri = $this->_channel->getAttr('rdf:about') . "#uri$n";
+            assert(!isset($this->_uris_seen[$uri]));
+        }
+        $this->_uris_seen[$uri] = true;
+        return $uri;
     }
 
     /**
      * Convert hash of RDF properties to <em>propertyElt</em>s.
      */
-    function __elementize ($elements) {
-    $out = array();
+    function __elementize($elements)
+    {
+        $out = array();
         foreach ($elements as $prop => $val) {
-        $this->__check_predicate($prop);
-        if (is_array($val))
-            $out[] = new XmlElement($prop, $val);
-        elseif (is_object($val))
-            $out[] = $val;
-        else
-            $out[] = new XmlElement($prop, false, $val);
-    }
-    return $out;
+            $this->__check_predicate($prop);
+            if (is_array($val))
+                $out[] = new XmlElement($prop, $val);
+            elseif (is_object($val))
+                $out[] = $val; else
+                $out[] = new XmlElement($prop, false, $val);
+        }
+        return $out;
     }
 
     /**
      * Check property predicates for XMLNS sanity.
      */
-    function __check_predicate ($name) {
-    if (preg_match('/^([^:]+):[^:]/', $name, $m)) {
-        $ns = $m[1];
-        if (! $this->getAttr("xmlns:$ns")) {
-        if (!isset($this->_modules[$ns]))
-            die("$name: unknown namespace ($ns)");
-        $this->setAttr("xmlns:$ns", $this->_modules[$ns]);
+    function __check_predicate($name)
+    {
+        if (preg_match('/^([^:]+):[^:]/', $name, $m)) {
+            $ns = $m[1];
+            if (!$this->getAttr("xmlns:$ns")) {
+                if (!isset($this->_modules[$ns]))
+                    die("$name: unknown namespace ($ns)");
+                $this->setAttr("xmlns:$ns", $this->_modules[$ns]);
+            }
         }
-    }
     }
 
     /**
      * Create a <em>propertyElt</em> which references another node in the RSS.
      */
-    function __ref($predicate, $reference) {
+    function __ref($predicate, $reference)
+    {
         $attr['rdf:resource'] = $reference->getAttr('rdf:about');
         return new XmlElement($predicate, $attr);
     }
-};
+}
 
 /* Taken from mediawiki.
  * See http://www.atomenabled.org/developers/syndication/
  */
-class AtomFeed extends RssWriter {
+class AtomFeed extends RssWriter
+{
 
     // Args should include:
     //  'title', 'link', 'description'
     // and can include:
     //  'URI'
-    function feed($properties, $uri = false) {
+    function feed($properties, $uri = false)
+    {
         global $LANG;
         $attr = array('xmlns' => 'http://www.w3.org/2005/Atom',
-                  'version' => '0.3', // or 1.0
-                  'lang' => $LANG);
+            'version' => '0.3', // or 1.0
+            'lang' => $LANG);
         $this->_channel = $this->__node('feed', $attr, $properties, $uri);
     }
 
     /**
      * Write output to HTTP client.
      */
-    function __spew() {
+    function __spew()
+    {
         header("Content-Type: application/atom+xml; charset=" . RSS_ENCODING);
-        echo('<'.'?xml version="1.0" encoding="'.RSS_ENCODING.'"?'.">\n");
+        echo('<' . '?xml version="1.0" encoding="' . RSS_ENCODING . '"?' . ">\n");
         //printf("<!-- generator=\"PhpWiki-%s\" -->\n", PHPWIKI_VERSION);
         $this->printXML();
     }
@@ -217,34 +227,37 @@ class AtomFeed extends RssWriter {
     /**
      * Create a new entry
      */
-    function __node($type, $attr, $properties, $uri = false) {
-    if (! $uri)
-        $uri = $properties['link'];
-    //$attr['rdf:about'] = $this->__uniquify_uri($uri);
-    return new XmlElement($type, $attr,
-                              $this->__elementize($properties));
+    function __node($type, $attr, $properties, $uri = false)
+    {
+        if (!$uri)
+            $uri = $properties['link'];
+        //$attr['rdf:about'] = $this->__uniquify_uri($uri);
+        return new XmlElement($type, $attr,
+            $this->__elementize($properties));
     }
 
     // Args should include:
     //  'title', 'link', author, modified, issued, created, summary,
     // and can include:
     //  comment
-    function addItem($properties, $attr=false, $uri = false) {
+    function addItem($properties, $attr = false, $uri = false)
+    {
         $this->_items[] = $this->__node('entry', $attr, $properties, $uri);
     }
 
     /**
      * Print it.
      */
-    function finish() {
+    function finish()
+    {
         if (isset($this->_finished))
             return;
 
         $channel = &$this->_channel;
         $items = &$this->_items;
-    if ($items)
-        $channel->pushContent($items);
-    $this->pushContent($channel);
+        if ($items)
+            $channel->pushContent($items);
+        $this->pushContent($channel);
 
         $this->__spew();
         $this->_finished = true;

@@ -1,5 +1,5 @@
 <?php
-// $Id: ArchiveCleaner.php 8071 2011-05-18 14:56:14Z vargenau $
+
 /* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
  *
  * This file is part of PhpWiki.
@@ -21,12 +21,14 @@
 
 class ArchiveCleaner
 {
-    function ArchiveCleaner ($expire_params) {
+    function ArchiveCleaner($expire_params)
+    {
         $this->expire_params = $expire_params;
     }
 
-    function isMergeable($revision) {
-        if ( ! $revision->get('is_minor_edit') )
+    function isMergeable($revision)
+    {
+        if (!$revision->get('is_minor_edit'))
             return false;
 
         $page = $revision->getPage();
@@ -38,13 +40,15 @@ class ArchiveCleaner
             && $author_id == $previous->get('author_id');
     }
 
-    function cleanDatabase($dbi) {
+    function cleanDatabase($dbi)
+    {
         $iter = $dbi->getAllPages();
         while ($page = $iter->next())
             $this->cleanPageRevisions($page);
     }
 
-    function cleanPageRevisions($page) {
+    function cleanPageRevisions($page)
+    {
         $INFINITY = 0x7fffffff;
 
         $expire = &$this->expire_params;
@@ -52,16 +56,17 @@ class ArchiveCleaner
             $counter[$class] = new ArchiveCleaner_Counter($expire[$class]);
         // shortcut to keep all
         if (($counter['minor']->min_keep == $INFINITY)
-            and ($counter['major']->min_keep == $INFINITY))
+            and ($counter['major']->min_keep == $INFINITY)
+        )
             return;
 
         $authors_seen = array();
 
         $current = $page->getCurrentRevision(false);
 
-        for ( $revision = $page->getRevisionBefore($current,false);
-              $revision->getVersion() > 0;
-              $revision = $page->getRevisionBefore($revision,false) ) {
+        for ($revision = $page->getRevisionBefore($current, false);
+             $revision->getVersion() > 0;
+             $revision = $page->getRevisionBefore($revision, false)) {
 
             if ($revision->get('is_minor_edit'))
                 $keep = $counter['minor']->keep($revision);
@@ -72,8 +77,7 @@ class ArchiveCleaner
                 if (!$keep) {
                     $page->mergeRevision($revision);
                 }
-            }
-            else {
+            } else {
                 $author_id = $revision->get('author_id');
                 if (empty($authors_seen[$author_id])) {
                     if ($counter['author']->keep($revision))
@@ -93,7 +97,8 @@ class ArchiveCleaner
  */
 class ArchiveCleaner_Counter
 {
-    function ArchiveCleaner_Counter($params) {
+    function ArchiveCleaner_Counter($params)
+    {
 
         if (!empty($params))
             extract($params);
@@ -101,11 +106,11 @@ class ArchiveCleaner_Counter
 
         $this->max_keep = isset($max_keep) ? $max_keep : $INFINITY;
 
-        $this->min_age  = isset($min_age)  ? $min_age  : 0;
+        $this->min_age = isset($min_age) ? $min_age : 0;
         $this->min_keep = isset($min_keep) ? $min_keep : 0;
 
-        $this->max_age  = isset($max_age)  ? $max_age  : $INFINITY;
-        $this->keep     = isset($keep)     ? $keep     : $INFINITY;
+        $this->max_age = isset($max_age) ? $max_age : $INFINITY;
+        $this->keep = isset($keep) ? $keep : $INFINITY;
 
         if ($this->keep > $this->max_keep)
             $this->keep = $this->max_keep;
@@ -124,16 +129,17 @@ class ArchiveCleaner_Counter
 
     }
 
-    function computeAge($revision) {
+    function computeAge($revision)
+    {
         $supplanted = $revision->get('_supplanted');
 
         if (!$supplanted) {
             // Every revision but the most recent should have a supplanted time.
             // However, if it doesn't...
-            trigger_error(sprintf("Warning: Page '%s', version '%d' has no '_supplanted' timestamp",
-                                  $revision->getPageName(),
-                                  $revision->getVersion()),
-                          E_USER_NOTICE);
+            trigger_error(sprintf("Warning: Page “%s”, version '%d' has no '_supplanted' timestamp",
+                    $revision->getPageName(),
+                    $revision->getVersion()),
+                E_USER_NOTICE);
             // Assuming revisions are chronologically ordered, the previous
             // supplanted time is a good value to use...
             if ($this->previous_supplanted > 0)
@@ -149,7 +155,8 @@ class ArchiveCleaner_Counter
         return ($this->now - $supplanted) / (24 * 3600);
     }
 
-    function keep($revision) {
+    function keep($revision)
+    {
         $INFINITY = 0x7fffffff;
         if ($this->min_keep == $INFINITY)
             return true;

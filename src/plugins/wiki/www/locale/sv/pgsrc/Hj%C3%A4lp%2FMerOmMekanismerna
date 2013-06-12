@@ -1,10 +1,9 @@
 Date: Tue, 15 Mar 2011 18:44:45 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Hj%C3%A4lp%2FMerOmMekanismerna 7999 2011-03-15 17:45:29Z vargenau $
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Hj%C3%A4lp%2FMerOmMekanismerna;
   flags="";
-  charset=utf-8
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 [[Hjälp:PhpWiki|PhpWiki]] är skriven i skriptspråket PHP, tillgängligt på

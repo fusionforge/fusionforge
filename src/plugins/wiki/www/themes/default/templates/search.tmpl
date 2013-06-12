@@ -1,7 +1,7 @@
 <!--{{{ LiveSearch --> <?php // -*- php -*- ?>
 <div id="searchholder">
 <form id="searchform" action="<?php echo WikiURL(_("TitleSearch"))?>"
-      method="get" accept-charset="<?php echo $charset?>" style="display:inline" class="searchform">
+      method="get" accept-charset="UTF-8" style="display:inline" class="searchform">
 <?php 
 $s = $request->getArg('s') ? $request->getArg('s') : _("Search");
 $p = $WikiTheme->tooltipAccessKeyPrefix();

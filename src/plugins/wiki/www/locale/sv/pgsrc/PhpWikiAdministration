@@ -1,10 +1,9 @@
 Date: Tue, 15 Mar 2011 18:42:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: PhpWikiAdministration 7998 2011-03-15 17:43:49Z vargenau $
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiAdministration;
   flags=PAGE_LOCKED;
-  charset=utf-8
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 == Detta fungerar bara om du är inloggad som ADMIN

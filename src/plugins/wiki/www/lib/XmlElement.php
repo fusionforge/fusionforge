@@ -1,4 +1,4 @@
-<?php // $Id: XmlElement.php 7964 2011-03-05 17:05:30Z vargenau $
+<?php
 /**
  * Code for writing XML.
  * @package Markup
@@ -16,21 +16,23 @@
  */
 class XmlContent
 {
-    function XmlContent (/* ... */) {
+    function XmlContent( /* ... */)
+    {
         $this->_content = array();
         $this->_pushContent_array(func_get_args());
     }
 
-    function pushContent ($arg /*, ...*/) {
+    function pushContent($arg /*, ...*/)
+    {
         if (func_num_args() > 1)
             $this->_pushContent_array(func_get_args());
         elseif (is_array($arg))
-            $this->_pushContent_array($arg);
-        else
+            $this->_pushContent_array($arg); else
             $this->_pushContent($arg);
     }
 
-    function _pushContent_array ($array) {
+    function _pushContent_array($array)
+    {
         foreach ($array as $item) {
             if (is_array($item))
                 $this->_pushContent_array($item);
@@ -39,24 +41,26 @@ class XmlContent
         }
     }
 
-    function _pushContent ($item) {
+    function _pushContent($item)
+    {
         if (is_object($item) && strtolower(get_class($item)) == 'xmlcontent')
             array_splice($this->_content, count($this->_content), 0,
-                         $item->_content);
+                $item->_content);
         else
             $this->_content[] = $item;
     }
 
-    function unshiftContent ($arg /*, ...*/) {
+    function unshiftContent($arg /*, ...*/)
+    {
         if (func_num_args() > 1)
             $this->_unshiftContent_array(func_get_args());
         elseif (is_array($arg))
-            $this->_unshiftContent_array($arg);
-        else
+            $this->_unshiftContent_array($arg); else
             $this->_unshiftContent($arg);
     }
 
-    function _unshiftContent_array ($array) {
+    function _unshiftContent_array($array)
+    {
         foreach (array_reverse($array) as $item) {
             if (is_array($item))
                 $this->_unshiftContent_array($item);
@@ -65,113 +69,111 @@ class XmlContent
         }
     }
 
-    function _unshiftContent ($item) {
+    function _unshiftContent($item)
+    {
         if (strtolower(get_class($item)) == 'xmlcontent')
             array_splice($this->_content, 0, 0, $item->_content);
         else
             array_unshift($this->_content, $item);
     }
 
-    function getContent () {
+    function getContent()
+    {
         return $this->_content;
     }
 
-    function setContent ($arg /* , ... */) {
+    function setContent($arg /* , ... */)
+    {
         $this->_content = array();
         $this->_pushContent_array(func_get_args());
     }
 
-    function printXML () {
+    function printXML()
+    {
         foreach ($this->_content as $item) {
             if (is_object($item)) {
                 if (method_exists($item, 'printXML'))
                     $item->printXML();
                 elseif (method_exists($item, 'asXML'))
-                    echo $item->asXML();
-                elseif (method_exists($item, 'asString'))
-                    echo $this->_quote($item->asString());
-                else
+                    echo $item->asXML(); elseif (method_exists($item, 'asString'))
+                    echo $this->_quote($item->asString()); else
                     printf("==Object(%s)==", get_class($item));
-            }
-            elseif (is_array($item)) {
-            // DEPRECATED:
-            // Use XmlContent objects instead of arrays for collections of XmlElements.
-            trigger_error("Passing arrays to printXML() is deprecated: (" . AsXML($item, true) . ")",
-                      E_USER_NOTICE);
-            foreach ($item as $x)
+            } elseif (is_array($item)) {
+                // DEPRECATED:
+                // Use XmlContent objects instead of arrays for collections of XmlElements.
+                trigger_error("Passing arrays to printXML() is deprecated: (" . AsXML($item, true) . ")",
+                    E_USER_NOTICE);
+                foreach ($item as $x)
                     $this->printXML($x);
             } else {
-                echo $this->_quote((string) $item);
+                echo $this->_quote((string)$item);
             }
         }
     }
 
-    function asXML () {
+    function asXML()
+    {
         $xml = '';
         foreach ($this->_content as $item) {
             if (is_object($item)) {
                 if (method_exists($item, 'asXML'))
                     $xml .= $item->asXML();
                 elseif (method_exists($item, 'asString'))
-                    $xml .= $this->_quote($item->asString());
-                else
+                    $xml .= $this->_quote($item->asString()); else
                     $xml .= sprintf("==Object(%s)==", get_class($item));
-            }
-            elseif (is_array($item)) {
-            trigger_error("Passing arrays to ->asXML() is deprecated: (" . AsXML($item, true) . ")",
-                      E_USER_NOTICE);
-            foreach ($item as $x)
+            } elseif (is_array($item)) {
+                trigger_error("Passing arrays to ->asXML() is deprecated: (" . AsXML($item, true) . ")",
+                    E_USER_NOTICE);
+                foreach ($item as $x)
                     $xml .= $this->asXML($x);
-            }
-            else
-                $xml .= $this->_quote((string) $item);
+            } else
+                $xml .= $this->_quote((string)$item);
         }
         return $xml;
     }
 
-    function asPDF () {
+    function asPDF()
+    {
         $pdf = '';
         foreach ($this->_content as $item) {
             if (is_object($item)) {
                 if (method_exists($item, 'asPDF'))
                     $pdf .= $item->asPDF();
                 elseif (method_exists($item, 'asString'))
-                    $pdf .= $this->_quote($item->asString());
-                else
+                    $pdf .= $this->_quote($item->asString()); else
                     $pdf .= sprintf("==Object(%s)==", get_class($item));
-            }
-            else
-                $pdf .= $this->_quote((string) $item);
+            } else
+                $pdf .= $this->_quote((string)$item);
         }
         return $pdf;
     }
 
     /* php-5.2 magic */
-    function __toString () {
+    function __toString()
+    {
         return $this->asString();
     }
 
-    function asString () {
+    function asString()
+    {
         $val = '';
         foreach ($this->_content as $item) {
             if (is_object($item)) {
                 if (method_exists($item, 'asString')) {
                     $string = $item->asString();
-                if (is_object($string)) {
-                    ; // ignore error so far: ImageLink labels
-                } else {
+                    if (is_object($string)) {
+                        ; // ignore error so far: ImageLink labels
+                    } else {
                         $val .= $this->_quote($item->asString());
-                }
+                    }
                 } else {
                     $val .= sprintf("==Object(%s)==", get_class($item));
                 }
-            }
-            else
-                $val .= (string) $item;
+            } else
+                $val .= (string)$item;
         }
         return trim($val);
     }
-
 
     /**
      * See if element is empty.
@@ -179,7 +181,8 @@ class XmlContent
      * Empty means it has no content.
      * @return bool True if empty.
      */
-    function isEmpty () {
+    function isEmpty()
+    {
         if (empty($this->_content))
             return true;
         foreach ($this->_content as $x) {
@@ -189,11 +192,12 @@ class XmlContent
         return true;
     }
 
-    function _quote ($string) {
+    function _quote($string)
+    {
         if (!$string) return $string;
-    return htmlspecialchars($string, ENT_COMPAT, $GLOBALS['charset']);
+        return htmlspecialchars($string, ENT_COMPAT, 'UTF-8');
     }
-};
+}
 
 /**
  * An XML element.
@@ -202,13 +206,15 @@ class XmlContent
  */
 class XmlElement extends XmlContent
 {
-    function XmlElement ($tagname /* , $attr_or_content , ...*/) {
+    function XmlElement($tagname /* , $attr_or_content , ...*/)
+    {
         //FIXME: php5 incompatible
         $this->XmlContent();
         $this->_init(func_get_args());
     }
 
-    function _init ($args) {
+    function _init($args)
+    {
         if (!is_array($args))
             $args = func_get_args();
 
@@ -231,7 +237,8 @@ class XmlElement extends XmlContent
      *  to be fully compatible to perl Html::Element
      */
     // doesn't yet work with php5 as __destruct()
-    function _destruct () {
+    function _destruct()
+    {
         if ($this->hasChildren()) {
             foreach ($this->getChildren() as $node) {
                 $node->_destruct();
@@ -242,77 +249,84 @@ class XmlElement extends XmlContent
         unset($this->_content);
     }
 
-    function getChildren () {
+    function getChildren()
+    {
         return $this->_children;
     }
 
-    function hasChildren () {
+    function hasChildren()
+    {
         return !empty($this->_children);
     }
+
     /* End XmlParser Methods
      */
 
-    function getTag () {
+    function getTag()
+    {
         return $this->_tag;
     }
 
-    function setAttr ($attr, $value = false) {
-    if (is_array($attr)) {
+    function setAttr($attr, $value = false)
+    {
+        if (is_array($attr)) {
             assert($value === false);
             foreach ($attr as $a => $v) {
                 $this->_attr[strtolower($a)] = $v;
-        //$this->set($a, $v);
+                //$this->set($a, $v);
             }
             return;
-    }
+        }
 
         assert(is_string($attr));
 
         if ($value === false) {
             unset($this->_attr[$attr]);
-        }
-        else {
+        } else {
             if (is_bool($value))
                 $value = $attr;
-            $this->_attr[$attr] = (string) $value;
+            $this->_attr[$attr] = (string)$value;
         }
 
-    if ($attr == 'class')
-        unset($this->_classes);
+        if ($attr == 'class')
+            unset($this->_classes);
     }
 
-    function getAttr ($attr) {
-    if ($attr == 'class')
-        $this->_setClasses();
+    function getAttr($attr)
+    {
+        if ($attr == 'class')
+            $this->_setClasses();
 
-    if (isset($this->_attr[strtolower($attr)]))
-        return $this->_attr[strtolower($attr)];
-    else
-        return false;
-    }
-
-    function _getClasses() {
-    if (!isset($this->_classes)) {
-        $this->_classes = array();
-        if (isset($this->_attr['class'])) {
-        $classes = explode(' ', (string) $this->_attr['class']);
-        foreach ($classes as $class) {
-            $class = trim($class);
-            if ($class)
-            $this->_classes[$class] = $class;
-        }
-        }
-    }
-    return $this->_classes;
-    }
-
-    function _setClasses() {
-    if (isset($this->_classes)) {
-        if ($this->_classes)
-        $this->_attr['class'] = join(' ', $this->_classes);
+        if (isset($this->_attr[strtolower($attr)]))
+            return $this->_attr[strtolower($attr)];
         else
-        unset($this->_attr['class']);
+            return false;
     }
+
+    function _getClasses()
+    {
+        if (!isset($this->_classes)) {
+            $this->_classes = array();
+            if (isset($this->_attr['class'])) {
+                $classes = explode(' ', (string)$this->_attr['class']);
+                foreach ($classes as $class) {
+                    $class = trim($class);
+                    if ($class)
+                        $this->_classes[$class] = $class;
+                }
+            }
+        }
+        return $this->_classes;
+    }
+
+    function _setClasses()
+    {
+        if (isset($this->_classes)) {
+            if ($this->_classes)
+                $this->_attr['class'] = join(' ', $this->_classes);
+            else
+                unset($this->_attr['class']);
+        }
     }
 
     /**
@@ -327,13 +341,14 @@ class XmlElement extends XmlContent
      *   If true (the default) the element is added to class $class.
      *   If false, the element is removed from the class.
      */
-    function setInClass($class, $in_class=true) {
-    $this->_getClasses();
-    $class = trim($class);
-    if ($in_class)
-        $this->_classes[$class] = $class;
-    else
-        unset($this->_classes[$class]);
+    function setInClass($class, $in_class = true)
+    {
+        $this->_getClasses();
+        $class = trim($class);
+        if ($in_class)
+            $this->_classes[$class] = $class;
+        else
+            unset($this->_classes[$class]);
     }
 
     /**
@@ -345,14 +360,16 @@ class XmlElement extends XmlContent
      * @param $class string  The class to check for.
      * @return bool True if the element is a member of $class.
      */
-    function inClass($class) {
-    $this->_parseClasses();
-    return isset($this->_classes[trim($class)]);
+    function inClass($class)
+    {
+        $this->_parseClasses();
+        return isset($this->_classes[trim($class)]);
     }
 
-    function startTag() {
+    function startTag()
+    {
         $start = "<" . $this->_tag;
-    $this->_setClasses();
+        $this->_setClasses();
         foreach ($this->_attr as $attr => $val) {
             if (is_bool($val)) {
                 if (!$val)
@@ -366,17 +383,18 @@ class XmlElement extends XmlContent
         return $start;
     }
 
-    function emptyTag() {
+    function emptyTag()
+    {
         return substr($this->startTag(), 0, -1) . "/>";
     }
 
-
-    function endTag() {
+    function endTag()
+    {
         return "</$this->_tag>";
     }
 
-
-    function printXML () {
+    function printXML()
+    {
         if ($this->isEmpty())
             echo $this->emptyTag();
         else {
@@ -391,11 +409,11 @@ class XmlElement extends XmlContent
             echo "\n";
     }
 
-    function asXML () {
+    function asXML()
+    {
         if ($this->isEmpty()) {
             $xml = $this->emptyTag();
-        }
-        else {
+        } else {
             $xml = $this->startTag();
             // FIXME: The next two lines could be removed for efficiency
             if (!$this->hasInlineContent())
@@ -414,7 +432,8 @@ class XmlElement extends XmlContent
      * This is a hack, but is probably the best one can do without
      * knowledge of the DTD...
      */
-    function hasInlineContent () {
+    function hasInlineContent()
+    {
         // This is a hack.
         if (empty($this->_content))
             return true;
@@ -429,77 +448,88 @@ class XmlElement extends XmlContent
      * This is a hack, but is probably the best one can do without
      * knowledge of the DTD...
      */
-    function isInlineElement () {
+    function isInlineElement()
+    {
         return false;
     }
 
-};
+}
 
-class RawXml {
-    function RawXml ($xml_text) {
+class RawXml
+{
+    function RawXml($xml_text)
+    {
         $this->_xml = $xml_text;
     }
 
-    function printXML () {
+    function printXML()
+    {
         echo $this->_xml;
     }
 
     /* php-5.2 magic */
-    function __toString () {
+    function __toString()
+    {
         return $this->_xml;
     }
 
-    function asXML () {
+    function asXML()
+    {
         return $this->_xml;
     }
 
-    function asString () {
+    function asString()
+    {
         return $this->_xml;
     }
 
-    function isEmpty () {
+    function isEmpty()
+    {
         return empty($this->_xml);
     }
 }
 
-class FormattedText {
-    function FormattedText ($fs /* , ... */) {
+class FormattedText
+{
+    function FormattedText($fs /* , ... */)
+    {
         if ($fs !== false) {
             $this->_init(func_get_args());
         }
     }
 
-    function _init ($args) {
+    function _init($args)
+    {
         $this->_fs = array_shift($args);
 
         // PHP's sprintf doesn't support variable width specifiers,
         // like sprintf("%*s", 10, "x"); --- so we won't either.
         $m = array();
-        if (! preg_match_all('/(?<!%)%(\d+)\$/x', $this->_fs, $m)) {
-            $this->_args  = $args;
-        }
-        else {
+        if (!preg_match_all('/(?<!%)%(\d+)\$/x', $this->_fs, $m)) {
+            $this->_args = $args;
+        } else {
             // Format string has '%2$s' style argument reordering.
             // PHP doesn't support this.
             if (preg_match('/(?<!%)%[- ]?\d*[^- \d$]/x', $this->_fs)) // $fmt
                 // literal variable name substitution only to keep locale
                 // strings uncluttered
-                trigger_error(sprintf(_("Can't mix '%s' with '%s' type format strings"),
-                                      '%1\$s','%s'), E_USER_WARNING);
+                trigger_error(sprintf(_("Can't mix “%s” with “%s” type format strings"),
+                    '%1\$s', '%s'), E_USER_WARNING);
 
             $this->_fs = preg_replace('/(?<!%)%\d+\$/x', '%', $this->_fs);
 
             $this->_args = array();
-            foreach($m[1] as $argnum) {
+            foreach ($m[1] as $argnum) {
                 if ($argnum < 1 || $argnum > count($args))
                     trigger_error(sprintf("%s: argument index out of range",
-                                          $argnum), E_USER_WARNING);
+                        $argnum), E_USER_WARNING);
                 $this->_args[] = $args[$argnum - 1];
             }
         }
     }
 
-    function asXML () {
+    function asXML()
+    {
         // Not all PHP's have vsprintf, so...
         $args[] = XmlElement::_quote((string)$this->_fs);
         foreach ($this->_args as $arg)
@@ -507,7 +537,8 @@ class FormattedText {
         return call_user_func_array('sprintf', $args);
     }
 
-    function printXML () {
+    function printXML()
+    {
         // Not all PHP's have vsprintf, so...
         $args[] = XmlElement::_quote((string)$this->_fs);
         foreach ($this->_args as $arg)
@@ -515,7 +546,8 @@ class FormattedText {
         call_user_func_array('printf', $args);
     }
 
-    function asString() {
+    function asString()
+    {
         $args[] = $this->_fs;
         foreach ($this->_args as $arg)
             $args[] = AsString($arg);
@@ -523,7 +555,8 @@ class FormattedText {
     }
 
     /* php-5.2 magic */
-    function __toString () {
+    function __toString()
+    {
         return $this->asString();
     }
 }
@@ -534,46 +567,38 @@ class FormattedText {
  * Note: There's lot of room for performance increase if the right charset variant can
  * be created on load-time.
  */
-function XmlContent_quote ($string) {
+function XmlContent_quote($string)
+{
     if (!$string) return $string;
-    if (isset($GLOBALS['charset'])
-        and (!defined('IGNORE_CHARSET_NOT_SUPPORTED_WARNING') or !IGNORE_CHARSET_NOT_SUPPORTED_WARNING))
-    {
-        return htmlspecialchars($string, ENT_COMPAT, $GLOBALS['charset']);
-    } else {
-        return htmlspecialchars($string);
-    }
+    return htmlspecialchars($string, ENT_COMPAT, 'UTF-8');
 }
 
-function PrintXML ($val /* , ... */ ) {
+function PrintXML($val /* , ... */)
+{
     if (func_num_args() > 1) {
         foreach (func_get_args() as $arg)
             PrintXML($arg);
-    }
-    elseif (is_object($val)) {
+    } elseif (is_object($val)) {
         if (method_exists($val, 'printXML'))
             $val->printXML();
         elseif (method_exists($val, 'asXML')) {
             echo $val->asXML();
-        }
-        elseif (method_exists($val, 'asString'))
-            echo XmlContent_quote($val->asString());
-        else
+        } elseif (method_exists($val, 'asString'))
+            echo XmlContent_quote($val->asString()); else
             printf("==Object(%s)==", get_class($val));
-    }
-    elseif (is_array($val)) {
+    } elseif (is_array($val)) {
         // DEPRECATED:
         // Use XmlContent objects instead of arrays for collections of XmlElements.
         trigger_error("Passing arrays to PrintXML() is deprecated: (" . AsXML($val, true) . ")",
-                      E_USER_NOTICE);
+            E_USER_NOTICE);
         foreach ($val as $x)
             PrintXML($x);
-    }
-    else
+    } else
         echo (string)XmlContent_quote((string)$val);
 }
 
-function AsXML ($val /* , ... */) {
+function AsXML($val /* , ... */)
+{
     static $nowarn;
 
     if (func_num_args() > 1) {
@@ -581,47 +606,42 @@ function AsXML ($val /* , ... */) {
         foreach (func_get_args() as $arg)
             $xml .= AsXML($arg);
         return $xml;
-    }
-    elseif (is_object($val)) {
+    } elseif (is_object($val)) {
         if (method_exists($val, 'asXML'))
             return $val->asXML();
         elseif (method_exists($val, 'asString'))
-            return XmlContent_quote($val->asString());
-        else
+            return XmlContent_quote($val->asString()); else
             return sprintf("==Object(%s)==", get_class($val));
-    }
-    elseif (is_array($val)) {
+    } elseif (is_array($val)) {
         // DEPRECATED:
         // Use XmlContent objects instead of arrays for collections of XmlElements.
         if (empty($nowarn)) {
             $nowarn = true;
             trigger_error("Passing arrays to AsXML() is deprecated: (" . AsXML($val) . ")",
-                          E_USER_NOTICE);
+                E_USER_NOTICE);
             unset($nowarn);
         }
         $xml = '';
         foreach ($val as $x)
             $xml .= AsXML($x);
         return $xml;
-    }
-    else
+    } else
         return XmlContent_quote((string)$val);
 }
 
-function AsString ($val) {
+function AsString($val)
+{
     if (func_num_args() > 1) {
         $str = '';
         foreach (func_get_args() as $arg)
             $str .= AsString($arg);
         return $str;
-    }
-    elseif (is_object($val)) {
+    } elseif (is_object($val)) {
         if (method_exists($val, 'asString'))
             return $val->asString();
         else
             return sprintf("==Object(%s)==", get_class($val));
-    }
-    elseif (is_array($val)) {
+    } elseif (is_array($val)) {
         // DEPRECATED:
         // Use XmlContent objects instead of arrays for collections of XmlElements.
         trigger_error("Passing arrays to AsString() is deprecated", E_USER_NOTICE);
@@ -631,10 +651,11 @@ function AsString ($val) {
         return $str;
     }
 
-    return (string) $val;
+    return (string)$val;
 }
 
-function fmt ($fs /* , ... */) {
+function fmt($fs /* , ... */)
+{
     $s = new FormattedText(false);
 
     $args = func_get_args();

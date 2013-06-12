@@ -1,5 +1,4 @@
-<?php // -*-php-*-
-// $Id: ADODB.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
 
 /*
  * Copyright 2002,2004,2005,2006 $ThePhpWikiProgrammingTeam
@@ -47,7 +46,6 @@
  * unneeded features included: paging, monitoring and sessions, and much more drivers.
  * No locking (which PearDB supports in some backends), and sequences are very
  * bad compared to PearDB.
-
  * Old Comments, by Lawrence Akka:
  * 1)  ADODB's GetRow() is slightly different from that in PEAR.  It does not
  *     accept a fetchmode parameter
@@ -70,10 +68,11 @@ include_once 'lib/WikiDB/adodb/adodb-errorhandler.inc.php';
 require_once 'lib/WikiDB/adodb/adodb.inc.php';
 
 class WikiDB_backend_ADODB
-extends WikiDB_backend
+    extends WikiDB_backend
 {
 
-    function WikiDB_backend_ADODB ($dbparams) {
+    function WikiDB_backend_ADODB($dbparams)
+    {
         $parsed = parseDSN($dbparams['dsn']);
         $this->_dbparams = $dbparams;
         $this->_parsedDSN =& $parsed;
@@ -86,14 +85,14 @@ extends WikiDB_backend
         // persistent is defined as DSN option, or with a config value.
         //   phptype://username:password@hostspec/database?persistent=false
 
-	//FIXME: how to catch connection errors for dbamin_user?
+        //FIXME: how to catch connection errors for dbamin_user?
         if (!empty($parsed['persistent']) or DATABASE_PERSISTENT)
-            $conn = $this->_dbh->PConnect($parsed['hostspec'],$parsed['username'],
-                                          $parsed['password'], $parsed['database']);
+            $conn = $this->_dbh->PConnect($parsed['hostspec'], $parsed['username'],
+                $parsed['password'], $parsed['database']);
         else
-            $conn = $this->_dbh->Connect($parsed['hostspec'],$parsed['username'],
-                                         $parsed['password'], $parsed['database']);
-	if (!$conn) return;
+            $conn = $this->_dbh->Connect($parsed['hostspec'], $parsed['username'],
+                $parsed['password'], $parsed['database']);
+        if (!$conn) return;
 
         // Since 1.3.10 we use the faster ADODB_FETCH_NUM,
         // with some ASSOC based recordsets.
@@ -103,11 +102,11 @@ extends WikiDB_backend
 
         $prefix = isset($dbparams['prefix']) ? $dbparams['prefix'] : '';
         $this->_table_names
-            = array('page_tbl'     => $prefix . 'page',
-                    'version_tbl'  => $prefix . 'version',
-                    'link_tbl'     => $prefix . 'link',
-                    'recent_tbl'   => $prefix . 'recent',
-                    'nonempty_tbl' => $prefix . 'nonempty');
+            = array('page_tbl' => $prefix . 'page',
+            'version_tbl' => $prefix . 'version',
+            'link_tbl' => $prefix . 'link',
+            'recent_tbl' => $prefix . 'recent',
+            'nonempty_tbl' => $prefix . 'nonempty');
         $page_tbl = $this->_table_names['page_tbl'];
         $version_tbl = $this->_table_names['version_tbl'];
         $this->page_tbl_fields = "$page_tbl.id AS id, $page_tbl.pagename AS pagename, "
@@ -122,27 +121,28 @@ extends WikiDB_backend
             'versiondata');
 
         $this->_expressions
-            = array('maxmajor'     => "MAX(CASE WHEN minor_edit=0 THEN version END)",
-                    'maxminor'     => "MAX(CASE WHEN minor_edit<>0 THEN version END)",
-                    'maxversion'   => "MAX(version)",
-                    'notempty'     => "<>''",
-                    'iscontent'    => "$version_tbl.content<>''");
+            = array('maxmajor' => "MAX(CASE WHEN minor_edit=0 THEN version END)",
+            'maxminor' => "MAX(CASE WHEN minor_edit<>0 THEN version END)",
+            'maxversion' => "MAX(version)",
+            'notempty' => "<>''",
+            'iscontent' => "$version_tbl.content<>''");
         $this->_lock_count = 0;
     }
 
     /**
      * Close database connection.
      */
-    function close () {
+    function close()
+    {
         if (!$this->_dbh)
             return;
         if ($this->_lock_count) {
             trigger_error("WARNING: database still locked " .
-                          '(lock_count = $this->_lock_count)' . "\n<br />",
-                          E_USER_WARNING);
+                    '(lock_count = $this->_lock_count)' . "\n<br />",
+                E_USER_WARNING);
         }
 //      $this->_dbh->setErrorHandling(PEAR_ERROR_PRINT);        // prevent recursive loops.
-        $this->unlock(false,'force');
+        $this->unlock(false, 'force');
 
         $this->_dbh->close();
         $this->_dbh = false;
@@ -151,69 +151,76 @@ extends WikiDB_backend
     /*
      * Fast test for wikipage.
      */
-    function is_wiki_page($pagename) {
+    function is_wiki_page($pagename)
+    {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
         $row = $dbh->GetRow(sprintf("SELECT $page_tbl.id AS id"
-                                    . " FROM $nonempty_tbl, $page_tbl"
-                                    . " WHERE $nonempty_tbl.id=$page_tbl.id"
-                                    . "   AND pagename=%s",
-                                    $dbh->qstr($pagename)));
+                . " FROM $nonempty_tbl, $page_tbl"
+                . " WHERE $nonempty_tbl.id=$page_tbl.id"
+                . "   AND pagename=%s",
+            $dbh->qstr($pagename)));
         return $row ? $row[0] : false;
     }
 
-    function get_all_pagenames() {
+    function get_all_pagenames()
+    {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
         $result = $dbh->Execute("SELECT pagename"
-                                . " FROM $nonempty_tbl, $page_tbl"
-                                . " WHERE $nonempty_tbl.id=$page_tbl.id");
+            . " FROM $nonempty_tbl, $page_tbl"
+            . " WHERE $nonempty_tbl.id=$page_tbl.id");
         return $result->GetArray();
     }
 
     /*
      * filter (nonempty pages) currently ignored
      */
-    function numPages($filter=false, $exclude='') {
+    function numPages($filter = false, $exclude = '')
+    {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
         $result = $dbh->getRow("SELECT count(*)"
-                            . " FROM $nonempty_tbl, $page_tbl"
-                            . " WHERE $nonempty_tbl.id=$page_tbl.id");
+            . " FROM $nonempty_tbl, $page_tbl"
+            . " WHERE $nonempty_tbl.id=$page_tbl.id");
         return $result[0];
     }
 
-    function increaseHitCount($pagename) {
+    function increaseHitCount($pagename)
+    {
         $dbh = &$this->_dbh;
         // Hits is the only thing we can update in a fast manner.
         // Note that this will fail silently if the page does not
         // have a record in the page table.  Since it's just the
         // hit count, who cares?
         $dbh->Execute(sprintf("UPDATE %s SET hits=hits+1 WHERE pagename=%s",
-                              $this->_table_names['page_tbl'],
-                              $dbh->qstr($pagename)));
+            $this->_table_names['page_tbl'],
+            $dbh->qstr($pagename)));
         return;
     }
 
     /**
      * Read page information from database.
      */
-    function get_pagedata($pagename) {
+    function get_pagedata($pagename)
+    {
         $dbh = &$this->_dbh;
         $row = $dbh->GetRow(sprintf("SELECT id,pagename,hits,pagedata FROM %s WHERE pagename=%s",
-                                    $this->_table_names['page_tbl'],
-                                    $dbh->qstr($pagename)));
+            $this->_table_names['page_tbl'],
+            $dbh->qstr($pagename)));
         return $row ? $this->_extract_page_data($row[3], $row[2]) : false;
     }
 
-    function  _extract_page_data($data, $hits) {
+    function  _extract_page_data($data, $hits)
+    {
         if (empty($data))
             return array('hits' => $hits);
         else
             return array_merge(array('hits' => $hits), $this->_unserialize($data));
     }
 
-    function update_pagedata($pagename, $newdata) {
+    function update_pagedata($pagename, $newdata)
+    {
         $dbh = &$this->_dbh;
         $page_tbl = $this->_table_names['page_tbl'];
 
@@ -223,12 +230,12 @@ extends WikiDB_backend
             // have a record in the page table.  Since it's just the
             // hit count, who cares?
             $dbh->Execute(sprintf("UPDATE $page_tbl SET hits=%d WHERE pagename=%s",
-                                  $newdata['hits'], $dbh->qstr($pagename)));
+                $newdata['hits'], $dbh->qstr($pagename)));
             return;
         }
         $where = sprintf("pagename=%s", $dbh->qstr($pagename));
-        $dbh->BeginTrans( );
-        $dbh->RowLock($page_tbl,$where);
+        $dbh->BeginTrans();
+        $dbh->RowLock($page_tbl, $where);
 
         $data = $this->get_pagedata($pagename);
         if (!$data) {
@@ -248,36 +255,40 @@ extends WikiDB_backend
                 $data[$key] = $val;
         }
         if ($dbh->Execute("UPDATE $page_tbl"
-                          . " SET hits=?, pagedata=?"
-                          . " WHERE pagename=?",
-                          array($hits, $this->_serialize($data), $pagename))) {
-            $dbh->CommitTrans( );
+                . " SET hits=?, pagedata=?"
+                . " WHERE pagename=?",
+            array($hits, $this->_serialize($data), $pagename))
+        ) {
+            $dbh->CommitTrans();
             return true;
         } else {
-            $dbh->RollbackTrans( );
+            $dbh->RollbackTrans();
             return false;
         }
     }
 
-    function get_cached_html($pagename) {
+    function get_cached_html($pagename)
+    {
         $dbh = &$this->_dbh;
         $page_tbl = $this->_table_names['page_tbl'];
         $row = $dbh->GetRow(sprintf("SELECT cached_html FROM $page_tbl WHERE pagename=%s",
-                                    $dbh->qstr($pagename)));
+            $dbh->qstr($pagename)));
         return $row ? $row[0] : false;
     }
 
-    function set_cached_html($pagename, $data) {
+    function set_cached_html($pagename, $data)
+    {
         $dbh = &$this->_dbh;
         $page_tbl = $this->_table_names['page_tbl'];
         if (empty($data)) $data = '';
         $rs = $dbh->Execute("UPDATE $page_tbl"
-                            . " SET cached_html=?"
-                            . " WHERE pagename=?",
-                            array($data, $pagename));
+                . " SET cached_html=?"
+                . " WHERE pagename=?",
+            array($data, $pagename));
     }
 
-    function _get_pageid($pagename, $create_if_missing = false) {
+    function _get_pageid($pagename, $create_if_missing = false)
+    {
 
         // check id_cache
         global $request;
@@ -287,38 +298,38 @@ extends WikiDB_backend
                 return $cache[$pagename];
             }
         }
-	// attributes play this game.
+        // attributes play this game.
         if ($pagename === '') return 0;
 
         $dbh = &$this->_dbh;
         $page_tbl = $this->_table_names['page_tbl'];
         $query = sprintf("SELECT id FROM $page_tbl WHERE pagename=%s",
-                         $dbh->qstr($pagename));
-        if (! $create_if_missing ) {
+            $dbh->qstr($pagename));
+        if (!$create_if_missing) {
             $row = $dbh->GetRow($query);
             return $row ? $row[0] : false;
         }
         $row = $dbh->GetRow($query);
-        if (! $row ) {
-	    //TODO: Does the DBM has subselects? Then we can do it with select max(id)+1
-	    // $this->lock(array('page'));
-	    $dbh->BeginTrans( );
-	    $dbh->CommitLock($page_tbl);
+        if (!$row) {
+            //TODO: Does the DBM has subselects? Then we can do it with select max(id)+1
+            // $this->lock(array('page'));
+            $dbh->BeginTrans();
+            $dbh->CommitLock($page_tbl);
             if (0 and $dbh->hasGenID) {
-            	// requires create permissions
-                $id = $dbh->GenID($page_tbl."_id");
+                // requires create permissions
+                $id = $dbh->GenID($page_tbl . "_id");
             } else {
                 // Better generic version than with adodb::genID
                 $row = $dbh->GetRow("SELECT MAX(id) FROM $page_tbl");
                 $id = $row[0] + 1;
             }
-	    $rs = $dbh->Execute(sprintf("INSERT INTO $page_tbl"
-					. " (id,pagename,hits)"
-					. " VALUES (%d,%s,0)",
-					$id, $dbh->qstr($pagename)));
-	    if ($rs) $dbh->CommitTrans( );
-	    else $dbh->RollbackTrans( );
-	    // $this->unlock(array('page'));
+            $rs = $dbh->Execute(sprintf("INSERT INTO $page_tbl"
+                    . " (id,pagename,hits)"
+                    . " VALUES (%d,%s,0)",
+                $id, $dbh->qstr($pagename)));
+            if ($rs) $dbh->CommitTrans();
+            else $dbh->RollbackTrans();
+            // $this->unlock(array('page'));
         } else {
             $id = $row[0];
         }
@@ -326,30 +337,32 @@ extends WikiDB_backend
         return $id;
     }
 
-    function get_latest_version($pagename) {
+    function get_latest_version($pagename)
+    {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
         $row = $dbh->GetRow(sprintf("SELECT latestversion"
-                                    . " FROM $page_tbl, $recent_tbl"
-                                    . " WHERE $page_tbl.id=$recent_tbl.id"
-                                    . "  AND pagename=%s",
-                                    $dbh->qstr($pagename)));
+                . " FROM $page_tbl, $recent_tbl"
+                . " WHERE $page_tbl.id=$recent_tbl.id"
+                . "  AND pagename=%s",
+            $dbh->qstr($pagename)));
         return $row ? (int)$row[0] : false;
     }
 
-    function get_previous_version($pagename, $version) {
+    function get_previous_version($pagename, $version)
+    {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
         // Use SELECTLIMIT for maximum portability
         $rs = $dbh->SelectLimit(sprintf("SELECT version"
-                                        . " FROM $version_tbl, $page_tbl"
-                                        . " WHERE $version_tbl.id=$page_tbl.id"
-                                        . "  AND pagename=%s"
-                                        . "  AND version < %d"
-                                        . " ORDER BY version DESC",
-                                        $dbh->qstr($pagename),
-                                        $version),
-                                1);
+                    . " FROM $version_tbl, $page_tbl"
+                    . " WHERE $version_tbl.id=$page_tbl.id"
+                    . "  AND pagename=%s"
+                    . "  AND version < %d"
+                    . " ORDER BY version DESC",
+                $dbh->qstr($pagename),
+                $version),
+            1);
         return $rs->fields ? (int)$rs->fields[0] : false;
     }
 
@@ -361,7 +374,8 @@ extends WikiDB_backend
      * @return hash The version data, or false if specified version does not
      *              exist.
      */
-    function get_versiondata($pagename, $version, $want_content = false) {
+    function get_versiondata($pagename, $version, $want_content = false)
+    {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
         extract($this->_expressions);
@@ -380,22 +394,23 @@ extends WikiDB_backend
                 . "$version_tbl.versiondata as versiondata";
         }
         $row = $dbh->GetRow(sprintf("SELECT $fields"
-                                    . " FROM $page_tbl, $version_tbl"
-                                    . " WHERE $page_tbl.id=$version_tbl.id"
-                                    . "  AND pagename=%s"
-                                    . "  AND version=%d",
-                                    $dbh->qstr($pagename), $version));
+                . " FROM $page_tbl, $version_tbl"
+                . " WHERE $page_tbl.id=$version_tbl.id"
+                . "  AND pagename=%s"
+                . "  AND version=%d",
+            $dbh->qstr($pagename), $version));
         return $row ? $this->_extract_version_data_num($row, $want_content) : false;
     }
 
-    function _extract_version_data_num($row, $want_content) {
+    function _extract_version_data_num($row, $want_content)
+    {
         if (!$row)
             return false;
 
         //$id       &= $row[0];
         //$pagename &= $row[1];
         $data = empty($row[8]) ? array() : $this->_unserialize($row[8]);
-        $data['mtime']         = $row[5];
+        $data['mtime'] = $row[5];
         $data['is_minor_edit'] = !empty($row[6]);
         if ($want_content) {
             $data['%content'] = $row[7];
@@ -408,7 +423,8 @@ extends WikiDB_backend
         return $data;
     }
 
-    function _extract_version_data_assoc($row) {
+    function _extract_version_data_assoc($row)
+    {
         if (!$row)
             return false;
 
@@ -419,8 +435,7 @@ extends WikiDB_backend
         if (isset($content))
             $data['%content'] = $content;
         elseif ($have_content)
-            $data['%content'] = true;
-        else
+            $data['%content'] = true; else
             $data['%content'] = '';
         if (!empty($pagedata)) {
             // hmm, $pagedata = is already extracted by WikiDB_backend_ADODB_iter
@@ -433,52 +448,54 @@ extends WikiDB_backend
     /**
      * Create a new revision of a page.
      */
-    function set_versiondata($pagename, $version, $data) {
+    function set_versiondata($pagename, $version, $data)
+    {
         $dbh = &$this->_dbh;
         $version_tbl = $this->_table_names['version_tbl'];
 
-        $minor_edit = (int) !empty($data['is_minor_edit']);
+        $minor_edit = (int)!empty($data['is_minor_edit']);
         unset($data['is_minor_edit']);
 
         $mtime = (int)$data['mtime'];
         unset($data['mtime']);
         assert(!empty($mtime));
 
-        @$content = (string) $data['%content'];
+        @$content = (string)$data['%content'];
         unset($data['%content']);
         unset($data['%pagedata']);
 
-        $this->lock(array('page','recent','version','nonempty'));
-        $dbh->BeginTrans( );
+        $this->lock(array('page', 'recent', 'version', 'nonempty'));
+        $dbh->BeginTrans();
         $dbh->CommitLock($version_tbl);
         $id = $this->_get_pageid($pagename, true);
         $backend_type = $this->backendType();
-	$dbh->Execute(sprintf("DELETE FROM $version_tbl"
-			      . " WHERE id=%d AND version=%d",
-			      $id, $version));
-	$rs = $dbh->Execute("INSERT INTO $version_tbl"
-			    . " (id,version,mtime,minor_edit,content,versiondata)"
-			    . " VALUES(?,?,?,?,?,?)",
-			    array($id, $version, $mtime, $minor_edit,
-                                  $content, $this->_serialize($data)));
+        $dbh->Execute(sprintf("DELETE FROM $version_tbl"
+                . " WHERE id=%d AND version=%d",
+            $id, $version));
+        $rs = $dbh->Execute("INSERT INTO $version_tbl"
+                . " (id,version,mtime,minor_edit,content,versiondata)"
+                . " VALUES(?,?,?,?,?,?)",
+            array($id, $version, $mtime, $minor_edit,
+                $content, $this->_serialize($data)));
         $this->_update_recent_table($id);
         $this->_update_nonempty_table($id);
-        if ($rs) $dbh->CommitTrans( );
-        else $dbh->RollbackTrans( );
-        $this->unlock(array('page','recent','version','nonempty'));
+        if ($rs) $dbh->CommitTrans();
+        else $dbh->RollbackTrans();
+        $this->unlock(array('page', 'recent', 'version', 'nonempty'));
     }
 
     /**
      * Delete an old revision of a page.
      */
-    function delete_versiondata($pagename, $version) {
+    function delete_versiondata($pagename, $version)
+    {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
 
         $this->lock(array('version'));
-        if ( ($id = $this->_get_pageid($pagename)) ) {
+        if (($id = $this->_get_pageid($pagename))) {
             $dbh->Execute("DELETE FROM $version_tbl"
-                        . " WHERE id=$id AND version=$version");
+                . " WHERE id=$id AND version=$version");
             $this->_update_recent_table($id);
             // This shouldn't be needed (as long as the latestversion
             // never gets deleted.)  But, let's be safe.
@@ -496,54 +513,55 @@ extends WikiDB_backend
      * so that get_latest_version returns id+1 and get_previous_version returns prev id
      * and page->exists returns false.
      */
-    function delete_page($pagename) {
+    function delete_page($pagename)
+    {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
 
         $dbh->BeginTrans();
         $dbh->CommitLock($recent_tbl);
         if (($id = $this->_get_pageid($pagename, false)) === false) {
-            $dbh->RollbackTrans( );
+            $dbh->RollbackTrans();
             return false;
         }
         $mtime = time();
         $user =& $GLOBALS['request']->_user;
         $meta = array('author' => $user->getId(),
-                      'author_id' => $user->getAuthenticatedId(),
-                      'mtime' => $mtime);
-        $this->lock(array('version','recent','nonempty','page','link'));
+            'author_id' => $user->getAuthenticatedId(),
+            'mtime' => $mtime);
+        $this->lock(array('version', 'recent', 'nonempty', 'page', 'link'));
         $version = $this->get_latest_version($pagename);
         if ($dbh->Execute("UPDATE $recent_tbl SET latestversion=latestversion+1,"
-                          . "latestmajor=latestversion+1,latestminor=NULL WHERE id=$id")
+            . "latestmajor=latestversion+1,latestminor=NULL WHERE id=$id")
             and $dbh->Execute("INSERT INTO $version_tbl"
-                                . " (id,version,mtime,minor_edit,content,versiondata)"
-                                . " VALUES(?,?,?,?,?,?)",
-                                  array($id, $version+1, $mtime, 0,
-                                        '', $this->_serialize($meta)))
-            and $dbh->Execute("DELETE FROM $nonempty_tbl WHERE id=$id")
-            and $this->set_links($pagename, false)
+                    . " (id,version,mtime,minor_edit,content,versiondata)"
+                    . " VALUES(?,?,?,?,?,?)",
+                array($id, $version + 1, $mtime, 0,
+                    '', $this->_serialize($meta)))
+                and $dbh->Execute("DELETE FROM $nonempty_tbl WHERE id=$id")
+                    and $this->set_links($pagename, false)
             // need to keep perms and LOCKED, otherwise you can reset the perm
             // by action=remove and re-create it with default perms
             // keep hits but delete meta-data
             //and $dbh->Execute("UPDATE $page_tbl SET pagedata='' WHERE id=$id")
-           )
-        {
-            $this->unlock(array('version','recent','nonempty','page','link'));
-            $dbh->CommitTrans( );
+        ) {
+            $this->unlock(array('version', 'recent', 'nonempty', 'page', 'link'));
+            $dbh->CommitTrans();
             return true;
         } else {
-            $this->unlock(array('version','recent','nonempty','page','link'));
-            $dbh->RollbackTrans( );
+            $this->unlock(array('version', 'recent', 'nonempty', 'page', 'link'));
+            $dbh->RollbackTrans();
             return false;
         }
     }
 
-    function purge_page($pagename) {
+    function purge_page($pagename)
+    {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
 
-        $this->lock(array('version','recent','nonempty','page','link'));
-        if ( ($id = $this->_get_pageid($pagename, false)) ) {
+        $this->lock(array('version', 'recent', 'nonempty', 'page', 'link'));
+        if (($id = $this->_get_pageid($pagename, false))) {
             $dbh->Execute("DELETE FROM $nonempty_tbl WHERE id=$id");
             $dbh->Execute("DELETE FROM $recent_tbl   WHERE id=$id");
             $dbh->Execute("DELETE FROM $version_tbl  WHERE id=$id");
@@ -554,18 +572,16 @@ extends WikiDB_backend
                 // altogether.
                 $dbh->Execute("UPDATE $page_tbl SET hits=0, pagedata='' WHERE id=$id");
                 $result = 0;
-            }
-            else {
+            } else {
                 $dbh->Execute("DELETE FROM $page_tbl WHERE id=$id");
                 $result = 1;
             }
         } else {
             $result = -1; // already purged or not existing
         }
-        $this->unlock(array('version','recent','nonempty','page','link'));
+        $this->unlock(array('version', 'recent', 'nonempty', 'page', 'link'));
         return $result;
     }
-
 
     // The only thing we might be interested in updating which we can
     // do fast in the flags (minor_edit).   I think the default
@@ -577,7 +593,8 @@ extends WikiDB_backend
      * Update link table.
      * on DEBUG: delete old, deleted links from page
      */
-    function set_links($pagename, $links) {
+    function set_links($pagename, $links)
+    {
         // FIXME: optimize: mysql can do this all in one big INSERT/REPLACE.
 
         $dbh = &$this->_dbh;
@@ -587,8 +604,8 @@ extends WikiDB_backend
         $pageid = $this->_get_pageid($pagename, true);
 
         $oldlinks = $dbh->getAssoc("SELECT $link_tbl.linkto as id, page.pagename FROM $link_tbl"
-                                  ." JOIN page ON ($link_tbl.linkto = page.id)"
-                                  ." WHERE linkfrom=$pageid");
+            . " JOIN page ON ($link_tbl.linkto = page.id)"
+            . " WHERE linkfrom=$pageid");
         // Delete current links,
         $dbh->Execute("DELETE FROM $link_tbl WHERE linkfrom=$pageid");
         // and insert new links. Faster than checking for all single links
@@ -613,10 +630,10 @@ extends WikiDB_backend
                 assert($linkid);
                 if ($relation) {
                     $dbh->Execute("INSERT INTO $link_tbl (linkfrom, linkto, relation)"
-                                  . " VALUES ($pageid, $linkid, $relation)");
+                        . " VALUES ($pageid, $linkid, $relation)");
                 } else {
                     $dbh->Execute("INSERT INTO $link_tbl (linkfrom, linkto)"
-                                  . " VALUES ($pageid, $linkid)");
+                        . " VALUES ($pageid, $linkid)");
                 }
                 if ($oldlinks and array_key_exists($linkid, $oldlinks)) {
                     // This was also in the previous page
@@ -631,18 +648,17 @@ extends WikiDB_backend
             foreach ($oldlinks as $id => $name) {
                 // ...check if the page is empty and has no version
                 $result = $dbh->getRow("SELECT $page_tbl.id FROM $page_tbl"
-                                     . " LEFT JOIN $nonempty_tbl USING (id) "
-                                     . " LEFT JOIN $version_tbl USING (id)"
-                                     . " WHERE $nonempty_tbl.id is NULL"
-                                     . " AND $version_tbl.id is NULL"
-                                     . " AND $page_tbl.id=$id");
+                    . " LEFT JOIN $nonempty_tbl USING (id) "
+                    . " LEFT JOIN $version_tbl USING (id)"
+                    . " WHERE $nonempty_tbl.id is NULL"
+                    . " AND $version_tbl.id is NULL"
+                    . " AND $page_tbl.id=$id");
                 $linkto = $dbh->getRow("SELECT linkfrom FROM $link_tbl WHERE linkto=$id");
-                if ($result and empty($linkto))
-                {
+                if ($result and empty($linkto)) {
                     trigger_error("delete empty and non-referenced link $name ($id)", E_USER_NOTICE);
                     $dbh->Execute("DELETE FROM $recent_tbl WHERE id=$id"); // may fail
-        	    $dbh->Execute("DELETE FROM $link_tbl WHERE linkto=$id");
-                    $dbh->Execute("DELETE FROM $page_tbl WHERE id=$id");   // this purges the link
+                    $dbh->Execute("DELETE FROM $link_tbl WHERE linkto=$id");
+                    $dbh->Execute("DELETE FROM $page_tbl WHERE id=$id"); // this purges the link
                 }
             }
         }
@@ -653,7 +669,8 @@ extends WikiDB_backend
     /* get all oldlinks in hash => id, relation
        check for all new links
      */
-    function set_links1($pagename, $links) {
+    function set_links1($pagename, $links)
+    {
 
         $dbh = &$this->_dbh;
         extract($this->_table_names);
@@ -662,9 +679,9 @@ extends WikiDB_backend
         $pageid = $this->_get_pageid($pagename, true);
 
         $oldlinks = $dbh->getAssoc("SELECT $link_tbl.linkto as linkto, $link_tbl.relation, page.pagename"
-                                  ." FROM $link_tbl"
-                                  ." JOIN page ON ($link_tbl.linkto = page.id)"
-                                  ." WHERE linkfrom=$pageid");
+            . " FROM $link_tbl"
+            . " JOIN page ON ($link_tbl.linkto = page.id)"
+            . " WHERE linkfrom=$pageid");
         /*      old                  new
          *      X => [1,0 2,0 1,1]   X => [1,1 3,0]
          * => delete 1,0 2,0 + insert 3,0
@@ -695,15 +712,15 @@ extends WikiDB_backend
                         }
                     }
                 }
-                if (! $skip ) {
+                if (!$skip) {
                     if ($update) {
                     }
                     if ($relation) {
                         $dbh->Execute("INSERT INTO $link_tbl (linkfrom, linkto, relation)"
-                                      . " VALUES ($pageid, $linkid, $relation)");
+                            . " VALUES ($pageid, $linkid, $relation)");
                     } else {
                         $dbh->Execute("INSERT INTO $link_tbl (linkfrom, linkto)"
-                                      . " VALUES ($pageid, $linkid)");
+                            . " VALUES ($pageid, $linkid)");
                     }
                 }
 
@@ -720,15 +737,15 @@ extends WikiDB_backend
             foreach ($oldlinks as $id => $name) {
                 // ...check if the page is empty and has no version
                 if ($dbh->getRow("SELECT $page_tbl.id FROM $page_tbl"
-                                     . " LEFT JOIN $nonempty_tbl USING (id) "
-                                     . " LEFT JOIN $version_tbl USING (id)"
-                                     . " WHERE $nonempty_tbl.id is NULL"
-                                     . " AND $version_tbl.id is NULL"
-                                     . " AND $page_tbl.id=$id"))
-                {
-                        trigger_error("delete empty and non-referenced link $name ($id)", E_USER_NOTICE);
-                        $dbh->Execute("DELETE FROM $page_tbl WHERE id=$id");   // this purges the link
-                        $dbh->Execute("DELETE FROM $recent_tbl WHERE id=$id"); // may fail
+                    . " LEFT JOIN $nonempty_tbl USING (id) "
+                    . " LEFT JOIN $version_tbl USING (id)"
+                    . " WHERE $nonempty_tbl.id is NULL"
+                    . " AND $version_tbl.id is NULL"
+                    . " AND $page_tbl.id=$id")
+                ) {
+                    trigger_error("delete empty and non-referenced link $name ($id)", E_USER_NOTICE);
+                    $dbh->Execute("DELETE FROM $page_tbl WHERE id=$id"); // this purges the link
+                    $dbh->Execute("DELETE FROM $recent_tbl WHERE id=$id"); // may fail
                 }
             }
         }
@@ -748,23 +765,23 @@ extends WikiDB_backend
      * as 'linkrelation' key as pagename. See WikiDB_PageIterator::next
      *   if (isset($next['linkrelation']))
      */
-    function get_links($pagename, $reversed=true,   $include_empty=false,
-                       $sortby='', $limit='', $exclude='',
+    function get_links($pagename, $reversed = true, $include_empty = false,
+                       $sortby = '', $limit = '', $exclude = '',
                        $want_relations = false)
     {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
 
         if ($reversed)
-            list($have,$want) = array('linkee', 'linker');
+            list($have, $want) = array('linkee', 'linker');
         else
-            list($have,$want) = array('linker', 'linkee');
+            list($have, $want) = array('linker', 'linkee');
         $orderby = $this->sortby($sortby, 'db', array('pagename'));
         if ($orderby) $orderby = " ORDER BY $want." . $orderby;
         if ($exclude) // array of pagenames
-            $exclude = " AND $want.pagename NOT IN ".$this->_sql_set($exclude);
+            $exclude = " AND $want.pagename NOT IN " . $this->_sql_set($exclude);
         else
-            $exclude='';
+            $exclude = '';
 
         $qpagename = $dbh->qstr($pagename);
         // removed ref to FETCH_MODE in next line
@@ -780,14 +797,14 @@ extends WikiDB_backend
             //. " GROUP BY $want.id"
             . $exclude
             . $orderby;
-/*
-  echo "SELECT linkee.id AS id, linkee.pagename AS pagename, related.pagename as linkrelation FROM link, page linkee, page linker JOIN page related ON (link.relation=related.id) WHERE linkfrom=linker.id AND linkto=linkee.id AND linker.pagename='SanDiego'" | mysql phpwiki
-id      pagename        linkrelation
-2268    California      located_in
-*/
+        /*
+          echo "SELECT linkee.id AS id, linkee.pagename AS pagename, related.pagename as linkrelation FROM link, page linkee, page linker JOIN page related ON (link.relation=related.id) WHERE linkfrom=linker.id AND linkto=linkee.id AND linker.pagename='SanDiego'" | mysql phpwiki
+        id      pagename        linkrelation
+        2268    California      located_in
+        */
         if ($limit) {
             // extract from,count from limit
-            list($offset,$count) = $this->limit($limit);
+            list($offset, $count) = $this->limit($limit);
             $result = $dbh->SelectLimit($sql, $count, $offset);
         } else {
             $result = $dbh->Execute($sql);
@@ -801,7 +818,8 @@ id      pagename        linkrelation
     /**
      * Find if a page links to another page
      */
-    function exists_link($pagename, $link, $reversed=false) {
+    function exists_link($pagename, $link, $reversed = false)
+    {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
 
@@ -812,27 +830,28 @@ id      pagename        linkrelation
         $qpagename = $dbh->qstr($pagename);
         $qlink = $dbh->qstr($link);
         $row = $dbh->GetRow("SELECT CASE WHEN $want.pagename=$qlink THEN 1 ELSE 0 END"
-                            . " FROM $link_tbl, $page_tbl linker, $page_tbl linkee, $nonempty_tbl"
-                            . " WHERE linkfrom=linker.id AND linkto=linkee.id"
-                            . " AND $have.pagename=$qpagename"
-                            . " AND $want.pagename=$qlink");
+            . " FROM $link_tbl, $page_tbl linker, $page_tbl linkee, $nonempty_tbl"
+            . " WHERE linkfrom=linker.id AND linkto=linkee.id"
+            . " AND $have.pagename=$qpagename"
+            . " AND $want.pagename=$qlink");
         return $row[0];
     }
 
     /*
      *
      */
-    function get_all_pages($include_empty=false, $sortby='', $limit='', $exclude='') {
+    function get_all_pages($include_empty = false, $sortby = '', $limit = '', $exclude = '')
+    {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
         $orderby = $this->sortby($sortby, 'db');
         if ($orderby) $orderby = ' ORDER BY ' . $orderby;
         $and = '';
-        if ($exclude) {// array of pagenames
+        if ($exclude) { // array of pagenames
             $and = ' AND ';
-            $exclude = " $page_tbl.pagename NOT IN ".$this->_sql_set($exclude);
+            $exclude = " $page_tbl.pagename NOT IN " . $this->_sql_set($exclude);
         } else {
-            $exclude='';
+            $exclude = '';
         }
 
         //$dbh->SetFetchMode(ADODB_FETCH_ASSOC);
@@ -840,13 +859,12 @@ id      pagename        linkrelation
             if ($include_empty) {
                 $sql = "SELECT "
                     . $this->page_tbl_fields
-                    ." FROM $page_tbl, $recent_tbl, $version_tbl"
+                    . " FROM $page_tbl, $recent_tbl, $version_tbl"
                     . " WHERE $page_tbl.id=$recent_tbl.id"
                     . " AND $page_tbl.id=$version_tbl.id AND latestversion=version"
                     . " $and$exclude"
                     . $orderby;
-            }
-            else {
+            } else {
                 $sql = "SELECT "
                     . $this->page_tbl_fields
                     . " FROM $nonempty_tbl, $page_tbl, $recent_tbl, $version_tbl"
@@ -874,7 +892,7 @@ id      pagename        linkrelation
         }
         if ($limit) {
             // extract from,count from limit
-            list($offset,$count) = $this->limit($limit);
+            list($offset, $count) = $this->limit($limit);
             $result = $dbh->SelectLimit($sql, $count, $offset);
         } else {
             $result = $dbh->Execute($sql);
@@ -886,8 +904,8 @@ id      pagename        linkrelation
     /**
      * Title and fulltext search.
      */
-    function text_search($search, $fullsearch=false,
-                         $sortby='', $limit='', $exclude='')
+    function text_search($search, $fullsearch = false,
+                         $sortby = '', $limit = '', $exclude = '')
     {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
@@ -909,7 +927,7 @@ id      pagename        linkrelation
 
             $fields .= ",$page_tbl.pagedata as pagedata," . $this->version_tbl_fields;
             $field_list = array_merge($field_list, array('pagedata'),
-                                      $this->version_tbl_field_list);
+                $this->version_tbl_field_list);
             $callback = new WikiMethodCb($searchobj, "_fulltext_match_clause");
         } else {
             $callback = new WikiMethodCb($searchobj, "_pagename_match_clause");
@@ -922,7 +940,7 @@ id      pagename        linkrelation
             . $orderby;
         if ($limit) {
             // extract from,count from limit
-            list($offset,$count) = $this->limit($limit);
+            list($offset, $count) = $this->limit($limit);
             $result = $dbh->SelectLimit($sql, $count, $offset);
         } else {
             $result = $dbh->Execute($sql);
@@ -939,22 +957,24 @@ id      pagename        linkrelation
      * This is only for already resolved wildcards:
      * " WHERE $page_tbl.pagename NOT IN ".$this->_sql_set(array('page1','page2'));
      */
-    function _sql_set(&$pagenames) {
+    function _sql_set(&$pagenames)
+    {
         $s = '(';
         foreach ($pagenames as $p) {
-            $s .= ($this->_dbh->qstr($p).",");
+            $s .= ($this->_dbh->qstr($p) . ",");
         }
-        return substr($s,0,-1).")";
+        return substr($s, 0, -1) . ")";
     }
 
     /**
      * Find highest or lowest hit counts.
      */
-    function most_popular($limit=20, $sortby='-hits') {
+    function most_popular($limit = 20, $sortby = '-hits')
+    {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
         $order = "DESC";
-        if ($limit < 0){
+        if ($limit < 0) {
             $order = "ASC";
             $limit = -$limit;
             $where = "";
@@ -962,7 +982,7 @@ id      pagename        linkrelation
             $where = " AND hits > 0";
         }
         if ($sortby != '-hits') {
-            if ($order = $this->sortby($sortby, 'db'))  $orderby = " ORDER BY " . $order;
+            if ($order = $this->sortby($sortby, 'db')) $orderby = " ORDER BY " . $order;
             else $orderby = "";
         } else
             $orderby = " ORDER BY hits $order";
@@ -974,7 +994,7 @@ id      pagename        linkrelation
             . $orderby;
         if ($limit) {
             // extract from,count from limit
-            list($offset,$count) = $this->limit($limit);
+            list($offset, $count) = $this->limit($limit);
             $result = $dbh->SelectLimit($sql, $count, $offset);
         } else {
             $result = $dbh->Execute($sql);
@@ -985,7 +1005,8 @@ id      pagename        linkrelation
     /**
      * Find recent changes.
      */
-    function most_recent($params) {
+    function most_recent($params)
+    {
         $limit = 0;
         $since = 0;
         $include_minor_revisions = false;
@@ -1008,13 +1029,11 @@ id      pagename        linkrelation
             if ($exclude_major_revisions) {
                 // Include only minor revisions
                 $pick[] = "minor_edit <> 0";
-            }
-            elseif (!$include_minor_revisions) {
+            } elseif (!$include_minor_revisions) {
                 // Include only major revisions
                 $pick[] = "minor_edit = 0";
             }
-        }
-        else {
+        } else {
             $table = "$page_tbl, $recent_tbl";
             $join_clause = "$page_tbl.id=$recent_tbl.id";
             $table .= ", $version_tbl";
@@ -1023,18 +1042,16 @@ id      pagename        linkrelation
             if ($exclude_major_revisions) {
                 // Include only most recent minor revision
                 $pick[] = 'version=latestminor';
-            }
-            elseif (!$include_minor_revisions) {
+            } elseif (!$include_minor_revisions) {
                 // Include only most recent major revision
                 $pick[] = 'version=latestmajor';
-            }
-            else {
+            } else {
                 // Include only the latest revision (whether major or minor).
-                $pick[] ='version=latestversion';
+                $pick[] = 'version=latestversion';
             }
         }
         $order = "DESC";
-        if($limit < 0){
+        if ($limit < 0) {
             $order = "ASC";
             $limit = -$limit;
         }
@@ -1049,7 +1066,7 @@ id      pagename        linkrelation
         // FIXME: use SQL_BUFFER_RESULT for mysql?
         if ($limit) {
             // extract from,count from limit
-            list($offset,$count) = $this->limit($limit);
+            list($offset, $count) = $this->limit($limit);
             $result = $dbh->SelectLimit($sql, $count, $offset);
         } else {
             $result = $dbh->Execute($sql);
@@ -1062,16 +1079,17 @@ id      pagename        linkrelation
     /**
      * Find referenced empty pages.
      */
-    function wanted_pages($exclude_from='', $exclude='', $sortby='', $limit='') {
+    function wanted_pages($exclude_from = '', $exclude = '', $sortby = '', $limit = '')
+    {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
-        if ($orderby = $this->sortby($sortby, 'db', array('pagename','wantedfrom')))
+        if ($orderby = $this->sortby($sortby, 'db', array('pagename', 'wantedfrom')))
             $orderby = 'ORDER BY ' . $orderby;
 
         if ($exclude_from) // array of pagenames
-            $exclude_from = " AND pp.pagename NOT IN ".$this->_sql_set($exclude_from);
+            $exclude_from = " AND pp.pagename NOT IN " . $this->_sql_set($exclude_from);
         if ($exclude) // array of pagenames
-            $exclude = " AND p.pagename NOT IN ".$this->_sql_set($exclude);
+            $exclude = " AND p.pagename NOT IN " . $this->_sql_set($exclude);
 
         /*
          all empty pages, independent of linkstatus:
@@ -1083,32 +1101,33 @@ id      pagename        linkrelation
         */
         $sql = "SELECT p.pagename, pp.pagename as wantedfrom"
             . " FROM $page_tbl p, $link_tbl linked"
-            .   " LEFT JOIN $page_tbl pp ON (linked.linkto = pp.id)"
-            .   " LEFT JOIN $nonempty_tbl ne ON (linked.linkto = ne.id)"
+            . " LEFT JOIN $page_tbl pp ON (linked.linkto = pp.id)"
+            . " LEFT JOIN $nonempty_tbl ne ON (linked.linkto = ne.id)"
             . " WHERE ne.id is NULL"
-            .       " AND (p.id = linked.linkfrom)"
+            . " AND (p.id = linked.linkfrom)"
             . $exclude_from
             . $exclude
             . $orderby;
         if ($limit) {
             // extract from,count from limit
-            list($offset,$count) = $this->limit($limit);
+            list($offset, $count) = $this->limit($limit);
             $result = $dbh->SelectLimit($sql, $count, $offset);
         } else {
             $result = $dbh->Execute($sql);
         }
-        return new WikiDB_backend_ADODB_iter($this, $result, array('pagename','wantedfrom'));
+        return new WikiDB_backend_ADODB_iter($this, $result, array('pagename', 'wantedfrom'));
     }
 
     /**
      * Rename page in the database.
      */
-    function rename_page($pagename, $to) {
+    function rename_page($pagename, $to)
+    {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
 
-        $this->lock(array('page','version','recent','nonempty','link'));
-        if ( ($id = $this->_get_pageid($pagename, false)) ) {
+        $this->lock(array('page', 'version', 'recent', 'nonempty', 'link'));
+        if (($id = $this->_get_pageid($pagename, false))) {
             if ($new = $this->_get_pageid($to, false)) {
                 // Cludge Alert!
                 // This page does not exist (already verified before), but exists in the page table.
@@ -1122,13 +1141,14 @@ id      pagename        linkrelation
                 $dbh->query("UPDATE $link_tbl SET linkto=$id WHERE linkto=$new");
             }
             $dbh->query(sprintf("UPDATE $page_tbl SET pagename=%s WHERE id=$id",
-                                $dbh->qstr($to)));
+                $dbh->qstr($to)));
         }
         $this->unlock(array('page'));
         return $id;
     }
 
-    function _update_recent_table($pageid = false) {
+    function _update_recent_table($pageid = false)
+    {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
         extract($this->_expressions);
@@ -1137,28 +1157,29 @@ id      pagename        linkrelation
 
         // optimize: mysql can do this with one REPLACE INTO.
         $backend_type = $this->backendType();
-        if (substr($backend_type,0,5) == 'mysql') {
+        if (substr($backend_type, 0, 5) == 'mysql') {
             $dbh->Execute("REPLACE INTO $recent_tbl"
-                          . " (id, latestversion, latestmajor, latestminor)"
-                          . " SELECT id, $maxversion, $maxmajor, $maxminor"
-                          . " FROM $version_tbl"
-                          . ( $pageid ? " WHERE id=$pageid" : "")
-                          . " GROUP BY id" );
+                . " (id, latestversion, latestmajor, latestminor)"
+                . " SELECT id, $maxversion, $maxmajor, $maxminor"
+                . " FROM $version_tbl"
+                . ($pageid ? " WHERE id=$pageid" : "")
+                . " GROUP BY id");
         } else {
             $this->lock(array('recent'));
             $dbh->Execute("DELETE FROM $recent_tbl"
-                      . ( $pageid ? " WHERE id=$pageid" : ""));
-            $dbh->Execute( "INSERT INTO $recent_tbl"
-                           . " (id, latestversion, latestmajor, latestminor)"
-                           . " SELECT id, $maxversion, $maxmajor, $maxminor"
-                           . " FROM $version_tbl"
-                           . ( $pageid ? " WHERE id=$pageid" : "")
-                           . " GROUP BY id" );
+                . ($pageid ? " WHERE id=$pageid" : ""));
+            $dbh->Execute("INSERT INTO $recent_tbl"
+                . " (id, latestversion, latestmajor, latestminor)"
+                . " SELECT id, $maxversion, $maxmajor, $maxminor"
+                . " FROM $version_tbl"
+                . ($pageid ? " WHERE id=$pageid" : "")
+                . " GROUP BY id");
             $this->unlock(array('recent'));
         }
     }
 
-    function _update_nonempty_table($pageid = false) {
+    function _update_nonempty_table($pageid = false)
+    {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
         extract($this->_expressions);
@@ -1168,16 +1189,16 @@ id      pagename        linkrelation
         extract($this->_expressions);
         $this->lock(array('nonempty'));
         $dbh->Execute("DELETE FROM $nonempty_tbl"
-                      . ( $pageid ? " WHERE id=$pageid" : ""));
+            . ($pageid ? " WHERE id=$pageid" : ""));
         $dbh->Execute("INSERT INTO $nonempty_tbl (id)"
-                      . " SELECT $recent_tbl.id"
-                      . " FROM $recent_tbl, $version_tbl"
-                      . " WHERE $recent_tbl.id=$version_tbl.id"
-                      .       " AND version=latestversion"
-                      // We have some specifics here (Oracle)
-                      //. "  AND content<>''"
-                      . "  AND content $notempty" // On Oracle not just "<>''"
-                      . ( $pageid ? " AND $recent_tbl.id=$pageid" : ""));
+            . " SELECT $recent_tbl.id"
+            . " FROM $recent_tbl, $version_tbl"
+            . " WHERE $recent_tbl.id=$version_tbl.id"
+            . " AND version=latestversion"
+            // We have some specifics here (Oracle)
+            //. "  AND content<>''"
+            . "  AND content $notempty" // On Oracle not just "<>''"
+            . ($pageid ? " AND $recent_tbl.id=$pageid" : ""));
         $this->unlock(array('nonempty'));
     }
 
@@ -1189,8 +1210,9 @@ id      pagename        linkrelation
      *
      * @access protected
      */
-    function lock($tables, $write_lock = true) {
-	$this->_dbh->StartTrans();
+    function lock($tables, $write_lock = true)
+    {
+        $this->_dbh->StartTrans();
         if ($this->_lock_count++ == 0) {
             $this->_current_lock = $tables;
             $this->_lock_tables($tables, $write_lock);
@@ -1200,7 +1222,8 @@ id      pagename        linkrelation
     /**
      * Overridden by non-transaction safe backends.
      */
-    function _lock_tables($tables, $write_lock) {
+    function _lock_tables($tables, $write_lock)
+    {
         return $this->_current_lock;
     }
 
@@ -1214,7 +1237,8 @@ id      pagename        linkrelation
      *
      * @see _lock_database
      */
-    function unlock($tables = false, $force = false) {
+    function unlock($tables = false, $force = false)
+    {
         if ($this->_lock_count == 0) {
             $this->_current_lock = false;
             return;
@@ -1224,20 +1248,22 @@ id      pagename        linkrelation
             $this->_current_lock = false;
             $this->_lock_count = 0;
         }
-            $this->_dbh->CompleteTrans(! $force);
+        $this->_dbh->CompleteTrans(!$force);
     }
 
     /**
      * overridden by non-transaction safe backends
      */
-    function _unlock_tables($tables, $write_lock=false) {
+    function _unlock_tables($tables, $write_lock = false)
+    {
         return;
     }
 
     /**
      * Serialize data
      */
-    function _serialize($data) {
+    function _serialize($data)
+    {
         if (empty($data))
             return '';
         assert(is_array($data));
@@ -1247,37 +1273,47 @@ id      pagename        linkrelation
     /**
      * Unserialize data
      */
-    function _unserialize($data) {
+    function _unserialize($data)
+    {
         return empty($data) ? array() : unserialize($data);
     }
 
     /* some variables and functions for DB backend abstraction (action=upgrade) */
-    function database () {
+    function database()
+    {
         return $this->_dbh->database;
     }
-    function backendType() {
+
+    function backendType()
+    {
         return $this->_dbh->databaseType;
     }
-    function connection() {
+
+    function connection()
+    {
         return $this->_dbh->_connectionID;
     }
-    function getRow($query) {
+
+    function getRow($query)
+    {
         return $this->_dbh->getRow($query);
     }
 
-    function listOfTables() {
+    function listOfTables()
+    {
         return $this->_dbh->MetaTables();
     }
 
     // other database needs another connection and other privileges.
-    function listOfFields($database, $table) {
+    function listOfFields($database, $table)
+    {
         $field_list = array();
         $old_db = $this->database();
         if ($database != $old_db) {
             $conn = $this->_dbh->Connect($this->_parsedDSN['hostspec'],
-            				 DBADMIN_USER ? DBADMIN_USER : $this->_parsedDSN['username'],
-                                         DBADMIN_PASSWD ? DBADMIN_PASSWD : $this->_parsedDSN['password'],
-                                         $database);
+                DBADMIN_USER ? DBADMIN_USER : $this->_parsedDSN['username'],
+                DBADMIN_PASSWD ? DBADMIN_PASSWD : $this->_parsedDSN['password'],
+                $database);
         }
         foreach ($this->_dbh->MetaColumns($table, false) as $field) {
             $field_list[] = $field->name;
@@ -1285,19 +1321,20 @@ id      pagename        linkrelation
         if ($database != $old_db) {
             $this->_dbh->close();
             $conn = $this->_dbh->Connect($this->_parsedDSN['hostspec'],
-            				 $this->_parsedDSN['username'],
-                                         $this->_parsedDSN['password'],
-                                         $old_db);
+                $this->_parsedDSN['username'],
+                $this->_parsedDSN['password'],
+                $old_db);
         }
         return $field_list;
     }
 
-};
+}
 
 class WikiDB_backend_ADODB_generic_iter
-extends WikiDB_backend_iterator
+    extends WikiDB_backend_iterator
 {
-    function WikiDB_backend_ADODB_generic_iter($backend, $query_result, $field_list = NULL) {
+    function WikiDB_backend_ADODB_generic_iter($backend, $query_result, $field_list = NULL)
+    {
         $this->_backend = &$backend;
         $this->_result = $query_result;
 
@@ -1306,7 +1343,7 @@ extends WikiDB_backend_iterator
             // WikiLens is using the iterator behind the scene
             $field_list = array();
             $fields = $query_result->FieldCount();
-            for ($i = 0; $i < $fields ; $i++) {
+            for ($i = 0; $i < $fields; $i++) {
                 $field_info = $query_result->FetchField($i);
                 array_push($field_list, $field_info->name);
             }
@@ -1315,7 +1352,8 @@ extends WikiDB_backend_iterator
         $this->_fields = $field_list;
     }
 
-    function count() {
+    function count()
+    {
         if (!$this->_result) {
             return false;
         }
@@ -1324,7 +1362,8 @@ extends WikiDB_backend_iterator
         return $count;
     }
 
-    function next() {
+    function next()
+    {
         $result = &$this->_result;
         $backend = &$this->_backend;
         if (!$result || $result->EOF) {
@@ -1344,19 +1383,23 @@ extends WikiDB_backend_iterator
         return $rec_assoc;
     }
 
-    function reset () {
+    function reset()
+    {
         if ($this->_result) {
             $this->_result->MoveFirst();
         }
     }
-    function asArray () {
-    	$result = array();
-    	while ($page = $this->next())
-    	    $result[] = $page;
+
+    function asArray()
+    {
+        $result = array();
+        while ($page = $this->next())
+            $result[] = $page;
         return $result;
     }
 
-    function free () {
+    function free()
+    {
         if ($this->_result) {
             /* call mysql_free_result($this->_queryID) */
             $this->_result->Close();
@@ -1366,9 +1409,10 @@ extends WikiDB_backend_iterator
 }
 
 class WikiDB_backend_ADODB_iter
-extends WikiDB_backend_ADODB_generic_iter
+    extends WikiDB_backend_ADODB_generic_iter
 {
-    function next() {
+    function next()
+    {
         $result = &$this->_result;
         $backend = &$this->_backend;
         if (!$result || $result->EOF) {
@@ -1405,161 +1449,161 @@ class WikiDB_backend_ADODB_search extends WikiDB_backend_search_sql
 // Following function taken from Pear::DB (prev. from adodb-pear.inc.php).
 // Eventually, change index.php to provide the relevant information
 // directly?
-    /**
-     * Parse a data source name.
-     *
-     * Additional keys can be added by appending a URI query string to the
-     * end of the DSN.
-     *
-     * The format of the supplied DSN is in its fullest form:
-     * <code>
-     *  phptype(dbsyntax)://username:password@protocol+hostspec/database?option=8&another=true
-     * </code>
-     *
-     * Most variations are allowed:
-     * <code>
-     *  phptype://username:password@protocol+hostspec:110//usr/db_file.db?mode=0644
-     *  phptype://username:password@hostspec/database_name
-     *  phptype://username:password@hostspec
-     *  phptype://username@hostspec
-     *  phptype://hostspec/database
-     *  phptype://hostspec
-     *  phptype(dbsyntax)
-     *  phptype
-     * </code>
-     *
-     * @param string $dsn Data Source Name to be parsed
-     *
-     * @return array an associative array with the following keys:
-     *  + phptype:  Database backend used in PHP (mysql, odbc etc.)
-     *  + dbsyntax: Database used with regards to SQL syntax etc.
-     *  + protocol: Communication protocol to use (tcp, unix etc.)
-     *  + hostspec: Host specification (hostname[:port])
-     *  + database: Database to use on the DBMS server
-     *  + username: User name for login
-     *  + password: Password for login
-     *
-     * @author Tomas V.V.Cox <cox@idecnet.com>
-     */
-    function parseDSN($dsn)
-    {
-        $parsed = array(
-            'phptype'  => false,
-            'dbsyntax' => false,
-            'username' => false,
-            'password' => false,
-            'protocol' => false,
-            'hostspec' => false,
-            'port'     => false,
-            'socket'   => false,
-            'database' => false,
-        );
+/**
+ * Parse a data source name.
+ *
+ * Additional keys can be added by appending a URI query string to the
+ * end of the DSN.
+ *
+ * The format of the supplied DSN is in its fullest form:
+ * <code>
+ *  phptype(dbsyntax)://username:password@protocol+hostspec/database?option=8&another=true
+ * </code>
+ *
+ * Most variations are allowed:
+ * <code>
+ *  phptype://username:password@protocol+hostspec:110//usr/db_file.db?mode=0644
+ *  phptype://username:password@hostspec/database_name
+ *  phptype://username:password@hostspec
+ *  phptype://username@hostspec
+ *  phptype://hostspec/database
+ *  phptype://hostspec
+ *  phptype(dbsyntax)
+ *  phptype
+ * </code>
+ *
+ * @param string $dsn Data Source Name to be parsed
+ *
+ * @return array an associative array with the following keys:
+ *  + phptype:  Database backend used in PHP (mysql, odbc etc.)
+ *  + dbsyntax: Database used with regards to SQL syntax etc.
+ *  + protocol: Communication protocol to use (tcp, unix etc.)
+ *  + hostspec: Host specification (hostname[:port])
+ *  + database: Database to use on the DBMS server
+ *  + username: User name for login
+ *  + password: Password for login
+ *
+ * @author Tomas V.V.Cox <cox@idecnet.com>
+ */
+function parseDSN($dsn)
+{
+    $parsed = array(
+        'phptype' => false,
+        'dbsyntax' => false,
+        'username' => false,
+        'password' => false,
+        'protocol' => false,
+        'hostspec' => false,
+        'port' => false,
+        'socket' => false,
+        'database' => false,
+    );
 
-        if (is_array($dsn)) {
-            $dsn = array_merge($parsed, $dsn);
-            if (!$dsn['dbsyntax']) {
-                $dsn['dbsyntax'] = $dsn['phptype'];
-            }
-            return $dsn;
+    if (is_array($dsn)) {
+        $dsn = array_merge($parsed, $dsn);
+        if (!$dsn['dbsyntax']) {
+            $dsn['dbsyntax'] = $dsn['phptype'];
         }
+        return $dsn;
+    }
 
-        // Find phptype and dbsyntax
-        if (($pos = strpos($dsn, '://')) !== false) {
-            $str = substr($dsn, 0, $pos);
-            $dsn = substr($dsn, $pos + 3);
-        } else {
-            $str = $dsn;
-            $dsn = null;
-        }
+    // Find phptype and dbsyntax
+    if (($pos = strpos($dsn, '://')) !== false) {
+        $str = substr($dsn, 0, $pos);
+        $dsn = substr($dsn, $pos + 3);
+    } else {
+        $str = $dsn;
+        $dsn = null;
+    }
 
-        // Get phptype and dbsyntax
-        // $str => phptype(dbsyntax)
-        if (preg_match('|^(.+?)\((.*?)\)$|', $str, $arr)) {
-            $parsed['phptype']  = $arr[1];
-            $parsed['dbsyntax'] = !$arr[2] ? $arr[1] : $arr[2];
-        } else {
-            $parsed['phptype']  = $str;
-            $parsed['dbsyntax'] = $str;
-        }
+    // Get phptype and dbsyntax
+    // $str => phptype(dbsyntax)
+    if (preg_match('|^(.+?)\((.*?)\)$|', $str, $arr)) {
+        $parsed['phptype'] = $arr[1];
+        $parsed['dbsyntax'] = !$arr[2] ? $arr[1] : $arr[2];
+    } else {
+        $parsed['phptype'] = $str;
+        $parsed['dbsyntax'] = $str;
+    }
 
-        if (!count($dsn)) {
-            return $parsed;
-        }
-
-        // Get (if found): username and password
-        // $dsn => username:password@protocol+hostspec/database
-        if (($at = strrpos($dsn,'@')) !== false) {
-            $str = substr($dsn, 0, $at);
-            $dsn = substr($dsn, $at + 1);
-            if (($pos = strpos($str, ':')) !== false) {
-                $parsed['username'] = rawurldecode(substr($str, 0, $pos));
-                $parsed['password'] = rawurldecode(substr($str, $pos + 1));
-            } else {
-                $parsed['username'] = rawurldecode($str);
-            }
-        }
-
-        // Find protocol and hostspec
-
-        // $dsn => proto(proto_opts)/database
-        if (preg_match('|^([^(]+)\((.*?)\)/?(.*?)$|', $dsn, $match)) {
-            $proto       = $match[1];
-            $proto_opts  = $match[2] ? $match[2] : false;
-            $dsn         = $match[3];
-
-        // $dsn => protocol+hostspec/database (old format)
-        } else {
-            if (strpos($dsn, '+') !== false) {
-                list($proto, $dsn) = explode('+', $dsn, 2);
-            }
-            if (strpos($dsn, '/') !== false) {
-                list($proto_opts, $dsn) = explode('/', $dsn, 2);
-            } else {
-                $proto_opts = $dsn;
-                $dsn = null;
-            }
-        }
-
-        // process the different protocol options
-        $parsed['protocol'] = (!empty($proto)) ? $proto : 'tcp';
-        $proto_opts = rawurldecode($proto_opts);
-        if ($parsed['protocol'] == 'tcp') {
-            if (strpos($proto_opts, ':') !== false) {
-                list($parsed['hostspec'], $parsed['port']) = explode(':', $proto_opts);
-            } else {
-                $parsed['hostspec'] = $proto_opts;
-            }
-        } elseif ($parsed['protocol'] == 'unix') {
-            $parsed['socket'] = $proto_opts;
-        }
-
-        // Get dabase if any
-        // $dsn => database
-        if ($dsn) {
-            // /database
-            if (($pos = strpos($dsn, '?')) === false) {
-                $parsed['database'] = $dsn;
-            // /database?param1=value1&param2=value2
-            } else {
-                $parsed['database'] = substr($dsn, 0, $pos);
-                $dsn = substr($dsn, $pos + 1);
-                if (strpos($dsn, '&') !== false) {
-                    $opts = explode('&', $dsn);
-                } else { // database?param1=value1
-                    $opts = array($dsn);
-                }
-                foreach ($opts as $opt) {
-                    list($key, $value) = explode('=', $opt);
-                    if (!isset($parsed[$key])) {
-                        // don't allow params overwrite
-                        $parsed[$key] = rawurldecode($value);
-                    }
-                }
-            }
-        }
-
+    if (!count($dsn)) {
         return $parsed;
     }
+
+    // Get (if found): username and password
+    // $dsn => username:password@protocol+hostspec/database
+    if (($at = strrpos($dsn, '@')) !== false) {
+        $str = substr($dsn, 0, $at);
+        $dsn = substr($dsn, $at + 1);
+        if (($pos = strpos($str, ':')) !== false) {
+            $parsed['username'] = rawurldecode(substr($str, 0, $pos));
+            $parsed['password'] = rawurldecode(substr($str, $pos + 1));
+        } else {
+            $parsed['username'] = rawurldecode($str);
+        }
+    }
+
+    // Find protocol and hostspec
+
+    // $dsn => proto(proto_opts)/database
+    if (preg_match('|^([^(]+)\((.*?)\)/?(.*?)$|', $dsn, $match)) {
+        $proto = $match[1];
+        $proto_opts = $match[2] ? $match[2] : false;
+        $dsn = $match[3];
+
+        // $dsn => protocol+hostspec/database (old format)
+    } else {
+        if (strpos($dsn, '+') !== false) {
+            list($proto, $dsn) = explode('+', $dsn, 2);
+        }
+        if (strpos($dsn, '/') !== false) {
+            list($proto_opts, $dsn) = explode('/', $dsn, 2);
+        } else {
+            $proto_opts = $dsn;
+            $dsn = null;
+        }
+    }
+
+    // process the different protocol options
+    $parsed['protocol'] = (!empty($proto)) ? $proto : 'tcp';
+    $proto_opts = rawurldecode($proto_opts);
+    if ($parsed['protocol'] == 'tcp') {
+        if (strpos($proto_opts, ':') !== false) {
+            list($parsed['hostspec'], $parsed['port']) = explode(':', $proto_opts);
+        } else {
+            $parsed['hostspec'] = $proto_opts;
+        }
+    } elseif ($parsed['protocol'] == 'unix') {
+        $parsed['socket'] = $proto_opts;
+    }
+
+    // Get dabase if any
+    // $dsn => database
+    if ($dsn) {
+        // /database
+        if (($pos = strpos($dsn, '?')) === false) {
+            $parsed['database'] = $dsn;
+            // /database?param1=value1&param2=value2
+        } else {
+            $parsed['database'] = substr($dsn, 0, $pos);
+            $dsn = substr($dsn, $pos + 1);
+            if (strpos($dsn, '&') !== false) {
+                $opts = explode('&', $dsn);
+            } else { // database?param1=value1
+                $opts = array($dsn);
+            }
+            foreach ($opts as $opt) {
+                list($key, $value) = explode('=', $opt);
+                if (!isset($parsed[$key])) {
+                    // don't allow params overwrite
+                    $parsed[$key] = rawurldecode($value);
+                }
+            }
+        }
+    }
+
+    return $parsed;
+}
 
 // Local Variables:
 // mode: php

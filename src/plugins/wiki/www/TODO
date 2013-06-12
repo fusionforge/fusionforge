@@ -32,7 +32,7 @@ architecture:
   <BackLink include_self=false />
 4  And/or fix PLUGIN_MARKUP_MAP aliases which break the InlineParser.
 * Fix postgresql stored procedures.
-* Move serialized data from page_data / version_data to seperate SQL columns.
+* Move serialized data from page_data / version_data to separate SQL columns.
 * WikiDB hooks. (?)
 * Content expansion hooks in transformer. (SearchHighlight)
 * Convert RecentChanges to PageList as source for format options. 
@@ -68,7 +68,6 @@ fixes:
 * SQL textsearch with multiple words: AND 
   (the two new failing unit tests)
 * fix textsearch optimize with "word -word -word"
-* format=printable (?) for non js/dom
 
 OLDER TODO's:
 Maybe (probably defer):
@@ -89,7 +88,6 @@ Maybe (probably defer):
 * plugin\SearchHighlight
 * logfile stuff:
 *   plugin\RecentReferrers
-*   WikiAccessRestrictions
 * SpamAssassinIntegration
 
 already done lately:

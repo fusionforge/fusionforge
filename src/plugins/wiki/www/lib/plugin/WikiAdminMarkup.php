@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: WikiAdminMarkup.php 8184 2011-11-28 14:04:37Z vargenau $
+<?php
+
 /*
  * Copyright 2005 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -30,28 +30,27 @@ require_once 'lib/PageList.php';
 require_once 'lib/plugin/WikiAdminSelect.php';
 
 class WikiPlugin_WikiAdminMarkup
-extends WikiPlugin_WikiAdminSelect
+    extends WikiPlugin_WikiAdminSelect
 {
-    function getName() {
-        return _("WikiAdminMarkup");
-    }
-
-    function getDescription() {
+    function getDescription()
+    {
         return _("Change the markup type of selected pages.");
     }
 
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array_merge
-            (
-             WikiPlugin_WikiAdminSelect::getDefaultArguments(),
-             array(
-                   'markup'         => 2,
-                   /* Columns to include in listing */
-                   'info'     => 'pagename,markup,mtime',
-                   ));
+        (
+            WikiPlugin_WikiAdminSelect::getDefaultArguments(),
+            array(
+                'markup' => 2,
+                /* Columns to include in listing */
+                'info' => 'pagename,markup,mtime',
+            ));
     }
 
-    function chmarkupPages(&$dbi, &$request, $pages, $newmarkup) {
+    function chmarkupPages(&$dbi, &$request, $pages, $newmarkup)
+    {
         $result = HTML::div();
         $ul = HTML::ul();
         $count = 0;
@@ -59,11 +58,11 @@ extends WikiPlugin_WikiAdminSelect
             $page = $dbi->getPage($name);
             $current = $page->getCurrentRevision();
             $markup = $current->get('markup');
-            if ( !$markup or $newmarkup != $markup ) {
+            if (!$markup or $newmarkup != $markup) {
                 if (!mayAccessPage('change', $name)) {
                     $result->setAttr('class', 'error');
-                    $result->pushContent(HTML::p(fmt("Access denied to change page '%s'.",
-                                                  WikiLink($name))));
+                    $result->pushContent(HTML::p(fmt("Access denied to change page “%s”.",
+                        WikiLink($name))));
                 } else {
                     $version = $current->getVersion();
                     $meta = $current->_data;
@@ -72,17 +71,17 @@ extends WikiPlugin_WikiAdminSelect
                     $text = $current->getPackedContent();
                     $meta['summary'] = sprintf(_("Change markup type from %s to %s"), $markup, $newmarkup);
                     $meta['is_minor_edit'] = 1;
-                    $meta['author'] =  $request->_user->UserName();
+                    $meta['author'] = $request->_user->UserName();
                     unset($meta['mtime']); // force new date
                     $page->save($text, $version + 1, $meta);
                     $current = $page->getCurrentRevision();
                     if ($current->get('markup') === $newmarkup) {
-                        $ul->pushContent(HTML::li(fmt("change page '%s' to markup type '%s'.",
-                                                      WikiLink($name), $newmarkup)));
+                        $ul->pushContent(HTML::li(fmt("change page “%s” to markup type “%s”.",
+                            WikiLink($name), $newmarkup)));
                         $count++;
                     } else {
-                        $ul->pushContent(HTML::li(fmt("Couldn't change page '%s' to markup type '%s'.",
-                                                      WikiLink($name), $newmarkup)));
+                        $ul->pushContent(HTML::li(fmt("Couldn't change page “%s” to markup type “%s”.",
+                            WikiLink($name), $newmarkup)));
                     }
                 }
             }
@@ -104,7 +103,8 @@ extends WikiPlugin_WikiAdminSelect
         }
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         if ($request->getArg('action') != 'browse') {
             if (!$request->getArg('action') == _("PhpWikiAdministration/Markup")) {
                 return $this->disabled(_("Plugin not run: not in browse mode"));
@@ -125,7 +125,8 @@ extends WikiPlugin_WikiAdminSelect
         if ($p && !$request->isPost())
             $pages = $p;
         if ($p && $request->isPost() &&
-            !empty($post_args['button']) && empty($post_args['cancel'])) {
+            !empty($post_args['button']) && empty($post_args['cancel'])
+        ) {
             // without individual PagePermissions:
             if (!ENABLE_PAGEPERM and !$request->_user->isAdmin()) {
                 $request->_notAuthorized(WIKIAUTH_ADMIN);
@@ -135,7 +136,7 @@ extends WikiPlugin_WikiAdminSelect
             if ($post_args['action'] == 'verify') {
                 // Real action
                 return $this->chmarkupPages($dbi, $request, array_keys($p),
-                                            $post_args['markup']);
+                    $post_args['markup']);
             }
             if ($post_args['action'] == 'select') {
                 if (!empty($post_args['markup']))
@@ -147,7 +148,7 @@ extends WikiPlugin_WikiAdminSelect
         }
         if ($next_action == 'select' and empty($pages)) {
             $pages = $this->collectPages($pages, $dbi, $args['sortby'], $args['limit'],
-                                         $args['exclude']);
+                $args['exclude']);
         }
 
         if ($next_action == 'select') {
@@ -162,37 +163,37 @@ extends WikiPlugin_WikiAdminSelect
             $button_label = _("Yes");
             $header->pushContent(HTML::legend(_("Confirm markup change")));
             $header->pushContent(
-              HTML::p(HTML::strong(
-                _("Are you sure you want to change the markup type of the selected files?"))));
+                HTML::p(HTML::strong(
+                    _("Are you sure you want to change the markup type of the selected files?"))));
             $header = $this->chmarkupForm($header, $post_args);
-        }
-        else {
+        } else {
             $button_label = _("Change markup type");
             $header->pushContent(HTML::legend(_("Select the pages to change the markup type")));
             $header = $this->chmarkupForm($header, $post_args);
         }
 
         $buttons = HTML::p(Button('submit:admin_markup[button]', $button_label, 'wikiadmin'),
-                           Button('submit:admin_markup[cancel]', _("Cancel"), 'button'));
+            Button('submit:admin_markup[cancel]', _("Cancel"), 'button'));
         $header->pushContent($buttons);
 
         return HTML::form(array('action' => $request->getPostURL(),
-                                'method' => 'post'),
-                          $header,
-                          $pagelist->getContent(),
-                          HiddenInputs($request->getArgs(),
-                                        false,
-                                        array('admin_markup')),
-                          HiddenInputs(array('admin_markup[action]' => $next_action)),
-                          ENABLE_PAGEPERM
-                          ? ''
-                          : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)));
+                'method' => 'post'),
+            $header,
+            $pagelist->getContent(),
+            HiddenInputs($request->getArgs(),
+                false,
+                array('admin_markup')),
+            HiddenInputs(array('admin_markup[action]' => $next_action)),
+            ENABLE_PAGEPERM
+                ? ''
+                : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)));
     }
 
-    function chmarkupForm(&$header, $post_args) {
+    function chmarkupForm(&$header, $post_args)
+    {
         $header->pushContent(_("Change markup to: "));
         $header->pushContent(HTML::input(array('name' => 'admin_markup[markup]',
-                                               'value' => $post_args['markup'])));
+            'value' => $post_args['markup'])));
         return $header;
     }
 }

@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: RssFeed.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 2003 Arnaud Fontaine
  *
@@ -25,104 +25,98 @@
 include 'lib/RssParser.php';
 
 class WikiPlugin_RssFeed
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return _("RssFeed");
-    }
-
-    function getDescription () {
-        return _("Simple RSS Feed aggregator Plugin");
-
+    function getDescription()
+    {
+        return _("Simple RSS Feed aggregator.");
     }
 
     // Establish default values for each of this plugin's arguments.
-    function getDefaultArguments() {
-        return array('feed'        => "",
-                     'description' => "",
-                     'url'         => "", //"http://phpwiki.org/RecentChanges?format=rss",
-                     'maxitem'     => 0,
-                     'titleonly'   => false,
-                     'debug'       => false,
-                     );
-   }
+    function getDefaultArguments()
+    {
+        return array('feed' => "",
+            'description' => "",
+            'url' => "", //"http://phpwiki.org/RecentChanges?format=rss",
+            'maxitem' => 0,
+            'titleonly' => false,
+            'debug' => false,
+        );
+    }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         extract($this->getArgs($argstr, $request));
 
-        if (defined('CHARSET'))
-                $rss_parser = new RSSParser(CHARSET);
-        else
-                $rss_parser = new RSSParser();
+        $rss_parser = new RSSParser();
 
         if (!empty($url))
-            $rss_parser->parse_url( $url, $debug );
+            $rss_parser->parse_url($url, $debug);
 
         if (!empty($rss_parser->channel['title'])) $feed = $rss_parser->channel['title'];
-        if (!empty($rss_parser->channel['link']))  $url  = $rss_parser->channel['link'];
+        if (!empty($rss_parser->channel['link'])) $url = $rss_parser->channel['link'];
         if (!empty($rss_parser->channel['description']))
             $description = $rss_parser->channel['description'];
 
         if (!empty($feed)) {
             if (!empty($url)) {
-                $titre = HTML::span(HTML::a(array('href'=>$rss_parser->channel['link']),
-                                            $rss_parser->channel['title']));
+                $titre = HTML::span(HTML::a(array('href' => $rss_parser->channel['link']),
+                    $rss_parser->channel['title']));
             } else {
                 $titre = HTML::span($rss_parser->channel['title']);
             }
-            $th = HTML::div(array('class'=> 'feed'), $titre);
+            $th = HTML::div(array('class' => 'feed'), $titre);
             if (!empty($description))
                 $th->pushContent(HTML::p(array('class' => 'chandesc'),
-                                         HTML::raw($description)));
+                    HTML::raw($description)));
         } else {
             $th = HTML();
         }
 
         if (!empty($rss_parser->channel['date']))
-            $th->pushContent(HTML::raw("<!--".$rss_parser->channel['date']."-->"));
-        $html = HTML::div(array('class'=> 'rss'), $th);
+            $th->pushContent(HTML::raw("<!--" . $rss_parser->channel['date'] . "-->"));
+        $html = HTML::div(array('class' => 'rss'), $th);
         if ($rss_parser->items) {
             // only maxitem's
-            if ( $maxitem > 0 )
+            if ($maxitem > 0)
                 $rss_parser->items = array_slice($rss_parser->items, 0, $maxitem);
             foreach ($rss_parser->items as $item) {
-                $cell = HTML::div(array('class'=> 'rssitem'));
+                $cell = HTML::div(array('class' => 'rssitem'));
                 if ($item['link'] and empty($item['title']))
                     $item['title'] = $item['link'];
-                $cell_title = HTML::div(array('class'=> 'itemname'),
-                                        HTML::a(array('href'=>$item['link']),
-                                                HTML::raw($item['title'])));
+                $cell_title = HTML::div(array('class' => 'itemname'),
+                    HTML::a(array('href' => $item['link']),
+                        HTML::raw($item['title'])));
                 $cell->pushContent($cell_title);
                 $cell_author = HTML::raw($item['author']);
                 $cell_pubDate = HTML::raw($item['pubDate']);
-                $cell_authordate = HTML::div(array('class'=> 'authordate'),
-                                             $cell_author, HTML::raw(" - "), $cell_pubDate);
+                $cell_authordate = HTML::div(array('class' => 'authordate'),
+                    $cell_author, HTML::raw(" - "), $cell_pubDate);
                 $cell->pushContent($cell_authordate);
                 if ((!$titleonly) && (!empty($item['description'])))
-                    $cell->pushContent(HTML::div(array('class'=> 'itemdesc'),
-                                                 HTML::raw($item['description'])));
+                    $cell->pushContent(HTML::div(array('class' => 'itemdesc'),
+                        HTML::raw($item['description'])));
                 $html->pushContent($cell);
             }
         } else {
-            $html = HTML::div(array('class'=> 'rss'), HTML::em(_("no RSS items")));
+            $html = HTML::div(array('class' => 'rss'), HTML::em(_("no RSS items")));
         }
-        if (!check_php_version(5))
-            $rss_parser->__destruct();
         return $html;
     }
 
-    function box($args=false, $request=false, $basepage=false) {
+    function box($args = false, $request = false, $basepage = false)
+    {
         if (!$request) $request =& $GLOBALS['request'];
         extract($args);
         if (empty($title)) $title = _("RssFeed");
-        if (empty($url))   $url = 'http://phpwiki.sourceforge.net/phpwiki/RecentChanges?format=rss';
+        if (empty($url)) $url = 'http://phpwiki.sourceforge.net/phpwiki/RecentChanges?format=rss';
         $argstr = "url=$url";
-        if (isset($maxitem) and is_numeric($maxitem)) $argstr .=  " maxitem=$maxitem";
+        if (isset($maxitem) and is_numeric($maxitem)) $argstr .= " maxitem=$maxitem";
         return $this->makeBox($title,
-                              $this->run($request->_dbi, $argstr, $request, $basepage));
+            $this->run($request->_dbi, $argstr, $request, $basepage));
     }
 
-};
+}
 
 // Local Variables:
 // mode: php

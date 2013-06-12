@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: Imdb.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  *
@@ -49,29 +49,28 @@
 include_once 'lib/plugin/SqlResult.php';
 
 class WikiPlugin_Imdb
-extends WikiPlugin_SqlResult
+    extends WikiPlugin_SqlResult
 {
-    function getName () {
-        return _("Imdb");
+    function getDescription()
+    {
+        return _("Query a local imdb database.");
     }
 
-    function getDescription () {
-        return _("Query a local imdb database");
-    }
-
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array(
-                     'query'       => false, // what
-                     'template'    => false, // TODO: use a custom <theme>/template.tmpl for the result
-                     'where'       => false, // custom filter for the query
-                     'title'       => false, // custom filter for the query
-                     'name'        => false, // custom filter for the query
-                     'sortby'      => false, // for paging, default none
-                     'limit'       => false, // for paging, default: only the first 50
-                    );
+            'query' => false, // what
+            'template' => false, // TODO: use a custom <theme>/template.tmpl for the result
+            'where' => false, // custom filter for the query
+            'title' => false, // custom filter for the query
+            'name' => false, // custom filter for the query
+            'sortby' => false, // for paging, default none
+            'limit' => false, // for paging, default: only the first 50
+        );
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $this->getArgs($argstr, $request);
         extract($args);
         include_once 'lib/imdb.php';
@@ -85,15 +84,15 @@ extends WikiPlugin_SqlResult
 
         // if ($limit) ; // TODO: fill paging vars (see PageList)
         if ($ordered) {
-            $html = HTML::ol(array('class'=>'sqlresult'));
+            $html = HTML::ol(array('class' => 'sqlresult'));
             foreach ($SqlResult as $row) {
-                $html->pushContent(HTML::li(array('class'=> $i++ % 2 ? 'evenrow' : 'oddrow'), $row[0]));
+                $html->pushContent(HTML::li(array('class' => $i++ % 2 ? 'evenrow' : 'oddrow'), $row[0]));
             }
         } else {
-            $html = HTML::table(array('class'=>'sqlresult'));
+            $html = HTML::table(array('class' => 'sqlresult'));
             $i = 0;
             foreach ($SqlResult as $row) {
-                $tr = HTML::tr(array('class'=> $i++ % 2 ? 'evenrow' : 'oddrow'));
+                $tr = HTML::tr(array('class' => $i++ % 2 ? 'evenrow' : 'oddrow'));
                 foreach ($row as $col) {
                     $tr->pushContent(HTML::td($col));
                 }
@@ -103,7 +102,7 @@ extends WikiPlugin_SqlResult
         // if ($limit) ; // do paging via pagelink template
         return $html;
     }
-};
+}
 
 // Local Variables:
 // mode: php

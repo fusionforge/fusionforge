@@ -1,6 +1,3 @@
-<?php // -*-php-*-
-// $Id: info.tmpl 8166 2011-10-03 14:49:15Z vargenau $
-?>
 <?php
 if (empty($revision)) $revision = $page->getCurrentRevision(false);
 $modifed = $WikiTheme->formatDateTime($revision->get('mtime'));
@@ -64,7 +61,6 @@ if ($is_current = $revision->isCurrent()) {
     $label['summary'] = _("Summary") . _(":");
 }
 
-$tableSummary = fmt("Statistics about %s.", $page->getName());
 $Sep = $WikiTheme->getButtonSeparator();
 
 $perm_tree = pagePermissions($page->getName());
@@ -78,7 +74,7 @@ if ($type == 'inherited') {
 }
 ?>
 
-<table summary="<?php echo $tableSummary ?>" class="pageinfo">
+<table class="pageinfo">
 
 <?php if (!$is_current) { ?>
   <tr>
@@ -155,7 +151,7 @@ if (isActionPage($page->getName())) {
 if ($page->get('pagetype') == 'wikiblog') {
     $pagetype []= _("Blog page");
 }
-if ($page->getName() == _("InterWikiMap")) {
+if ($page->getName() == __("InterWikiMap")) {
     $pagetype []= _("InterWikiMap");
 }
 if (isSubPage($page->getName())) {

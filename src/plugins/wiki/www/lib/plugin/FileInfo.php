@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: FileInfo.php 8212 2011-12-16 13:26:15Z vargenau $
+<?php
+
 /*
  * Copyright 2005,2007 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -34,37 +34,36 @@
  */
 
 class WikiPlugin_FileInfo
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return _("FileInfo");
-    }
-
-    function getDescription () {
+    function getDescription()
+    {
         return _("Display file information like version, size, date... of uploaded files.");
     }
 
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array(
-                     'file'      => false, // relative path from PHPWIKI_DIR. (required)
-                     'display'   => false, // version,phonysize,size,date,mtime,owner,name,path,dirname,link.  (required)
-                     'format'    => false, // printf format string with %s only, all display modes
-                     'quiet'     => false  // print no error if file not found
-                                           // from above vars return strings (optional)
-                    );
+            'file' => false, // relative path from PHPWIKI_DIR. (required)
+            'display' => false, // version,phonysize,size,date,mtime,owner,name,path,dirname,link.  (required)
+            'format' => false, // printf format string with %s only, all display modes
+            'quiet' => false // print no error if file not found
+            // from above vars return strings (optional)
+        );
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $this->getArgs($argstr, $request);
         extract($args);
         if (!$file) {
-            return $this->error(sprintf(_("A required argument '%s' is missing."), 'file'));
+            return $this->error(sprintf(_("A required argument “%s” is missing."), 'file'));
         }
         if (!$display) {
-            return $this->error(sprintf(_("A required argument '%s' is missing."), 'display'));
+            return $this->error(sprintf(_("A required argument “%s” is missing."), 'display'));
         }
         if (string_starts_with($file, "Upload:")) {
-            $file = preg_replace("/^Upload:(.*)$/", getUploadFilePath()."\\1", $file);
+            $file = preg_replace("/^Upload:(.*)$/", getUploadFilePath() . "\\1", $file);
             $is_Upload = 1;
         }
         $dir = getcwd();
@@ -75,7 +74,7 @@ extends WikiPlugin
             if ($quiet) {
                 return HTML::raw('');
             } else {
-                return $this->error(sprintf(_("File '%s' not found."), $file));
+                return $this->error(sprintf(_("File “%s” not found."), $file));
             }
         }
         // sanify $file name
@@ -90,7 +89,7 @@ extends WikiPlugin
                 // For convenience we warn the admin
                 if ($quiet and $user->isAdmin())
                     return HTML::span(array('title' => _("Output suppressed. FileInfoPlugin with local files require a locked page.")),
-                                      HTML::em(_("page not locked")));
+                        HTML::em(_("page not locked")));
                 else
                     return $this->error("Invalid path \"$file\". Only ADMIN can allow local paths, and the page must be locked.");
             }
@@ -99,41 +98,69 @@ extends WikiPlugin
         $modes = explode(",", $display);
         foreach ($modes as $mode) {
             switch ($mode) {
-            case 'version':  $s[] = $this->exeversion($file); break;
-            case 'size':     $s[] = filesize($file); break;
-            case 'phonysize':$s[] = $this->phonysize(filesize($file)); break;
-            case 'date':     $s[] = strftime("%x %X", filemtime($file)); break;
-            case 'mtime':    $s[] = filemtime($file); break;
-            case 'owner':    $o = posix_getpwuid(fileowner($file)); $s[] = $o['name']; break;
-            case 'group':    $o = posix_getgrgid(filegroup($file)); $s[] = $o['name']; break;
-            case 'name':     $s[] = basename($file); break;
-            case 'path':     $s[] = $file; break;
-            case 'dirname':  $s[] = dirname($file); break;
-            case 'magic':    $s[] = $this->magic($file); break;
-            case 'mime-typ': $s[] = $this->mime_type($file); break;
-            case 'link':
-                if ($is_Upload) {
-                    $s[] = " [".$args['file'] . "]";
-                } elseif ($isuploaded) {
-                    // will fail with user uploads
-                    $s[] = " [Upload:".basename($file)."]";
-                } else {
-                    $s[] = " [".basename($file)."] ";
-                }
-                break;
-            default:
-                if (!$quiet) {
-                    return $this->error(sprintf(_("Unsupported argument: %s=%s"), 'display', $mode));
-                } else {
-                    return HTML::raw('');
-                }
-                break;
+                case 'version':
+                    $s[] = $this->exeversion($file);
+                    break;
+                case 'size':
+                    $s[] = filesize($file);
+                    break;
+                case 'phonysize':
+                    $s[] = $this->phonysize(filesize($file));
+                    break;
+                case 'date':
+                    $s[] = strftime("%x %X", filemtime($file));
+                    break;
+                case 'mtime':
+                    $s[] = filemtime($file);
+                    break;
+                case 'owner':
+                    $o = posix_getpwuid(fileowner($file));
+                    $s[] = $o['name'];
+                    break;
+                case 'group':
+                    $o = posix_getgrgid(filegroup($file));
+                    $s[] = $o['name'];
+                    break;
+                case 'name':
+                    $s[] = basename($file);
+                    break;
+                case 'path':
+                    $s[] = $file;
+                    break;
+                case 'dirname':
+                    $s[] = dirname($file);
+                    break;
+                case 'magic':
+                    $s[] = $this->magic($file);
+                    break;
+                case 'mime-typ':
+                    $s[] = $this->mime_type($file);
+                    break;
+                case 'link':
+                    if ($is_Upload) {
+                        $s[] = " [" . $args['file'] . "]";
+                    } elseif ($isuploaded) {
+                        // will fail with user uploads
+                        $s[] = " [Upload:" . basename($file) . "]";
+                    } else {
+                        $s[] = " [" . basename($file) . "] ";
+                    }
+                    break;
+                default:
+                    if (!$quiet) {
+                        return $this->error(sprintf(_("Unsupported argument: %s=%s"), 'display', $mode));
+                    } else {
+                        return HTML::raw('');
+                    }
+                    break;
             }
         }
         chdir($dir);
         if (!$format) {
             $format = '';
-            foreach ($s as $x) { $format .= " %s"; }
+            foreach ($s as $x) {
+                $format .= " %s";
+            }
         }
         array_unshift($s, $format);
         // $x, array($i,$j) => sprintf($x, $i, $j)
@@ -146,12 +173,13 @@ extends WikiPlugin
         }
     }
 
-    function magic($file) {
+    function magic($file)
+    {
         if (function_exists('finfo_file') or loadPhpExtension('fileinfo')) {
             // Valid finfo_open (i.e. libmagic) options:
             // FILEINFO_NONE | FILEINFO_SYMLINK | FILEINFO_MIME | FILEINFO_COMPRESS | FILEINFO_DEVICES |
             // FILEINFO_CONTINUE | FILEINFO_PRESERVE_ATIME | FILEINFO_RAW
-            $f = finfo_open(/*FILEINFO_MIME*/);
+            $f = finfo_open( /*FILEINFO_MIME*/);
             $result = finfo_file(realpath($file));
             finfo_close($res);
             return $result;
@@ -159,18 +187,23 @@ extends WikiPlugin
         return '';
     }
 
-    function mime_type($file) {
+    function mime_type($file)
+    {
         return '';
     }
 
-    function _formatsize ($n, $factor, $suffix = '') {
+    private function _formatsize($n, $factor, $suffix = '')
+    {
         if ($n > $factor) {
             $b = $n / $factor;
             $n -= floor($factor * $b);
-            return number_format($b, $n ? 3 : 0). $suffix;
+            return number_format($b, $n ? 3 : 0) . $suffix;
         }
+        return '';
     }
-    function phonysize ($a) {
+
+    function phonysize($a)
+    {
         $factor = 1024 * 1024 * 1000;
         if ($a > $factor)
             return $this->_formatsize($a, $factor, ' GB');
@@ -186,24 +219,26 @@ extends WikiPlugin
             return $a;
     }
 
-    function exeversion($file) {
-            if (!isWindows()) return "?";
+    function exeversion($file)
+    {
+        if (!isWindows()) return "?";
         if (class_exists('ffi') or loadPhpExtension('ffi'))
             return $this->exeversion_ffi($file);
         if (function_exists('res_list_type') or loadPhpExtension('win32std'))
             return $this->exeversion_resopen($file);
         return exeversion_showver($file);
-        return '';
     }
 
     // http://www.codeproject.com/dll/showver.asp
-    function exeversion_showver($file) {
+    function exeversion_showver($file)
+    {
         $path = realpath($file);
         $result = `showver $path`;
-            return "?";
+        return "?";
     }
 
-    function exeversion_ffi($file) {
+    function exeversion_ffi($file)
+    {
         if (!DEBUG)
             return "?"; // not yet stable
 
@@ -239,35 +274,37 @@ struct VS_VERSIONINFO { struct VS_VERSIONINFO
 ";
             $ffi = new ffi($win32_idl);
             $dummy = 0; // &DWORD
-             $size = $ffi->GetFileVersionInfoSizeA($file, $dummy);
+            $size = $ffi->GetFileVersionInfoSizeA($file, $dummy);
             //$pVer = str_repeat($size+1);
             $pVer = new ffi_struct($ffi, "VS_VERSIONINFO");
             if ($ffi->GetFileVersionInfoA($file, 0, $size, $pVer)
-                and $pVer->wValueLength) {
+                and $pVer->wValueLength
+            ) {
                 // analyze the VS_FIXEDFILEINFO(Value);
                 // $pValue = new ffi_struct($ffi, "VS_FIXEDFILEINFO");
                 $pValue =& $pVer->Value;
                 return sprintf("%d.%d.%d.%d",
-                               $pValue->dwFileVersionMS >> 16,
-                               $pValue->dwFileVersionMS & 0xFFFF,
-                               $pValue->dwFileVersionLS >> 16,
-                               $pValue->dwFileVersionLS & 0xFFFF);
+                    $pValue->dwFileVersionMS >> 16,
+                    $pValue->dwFileVersionMS & 0xFFFF,
+                    $pValue->dwFileVersionLS >> 16,
+                    $pValue->dwFileVersionLS & 0xFFFF);
             }
         }
+        return '';
     }
 
     // Read "RT_VERSION/VERSIONINFO" exe/dll resource info for MSWin32 binaries
     // The "win32std" extension is not ready yet to pass back a VERSIONINFO struct
-    function exeversion_resopen($file) {
+    function exeversion_resopen($file)
+    {
         if (function_exists('res_list_type') or loadPhpExtension('win32std')) {
             // See http://msdn.microsoft.com/workshop/networking/predefined/res.asp
-            $v = file_get_contents('res://'.realpath($file).urlencode('/RT_VERSION/#1'));
+            $v = file_get_contents('res://' . realpath($file) . urlencode('/RT_VERSION/#1'));
             if ($v) {
-                    // This is really a binary VERSIONINFO block, with lots of
-                    // nul bytes (widechar) which cannot be transported as string.
-                    return "$v";
-            }
-            else {
+                // This is really a binary VERSIONINFO block, with lots of
+                // nul bytes (widechar) which cannot be transported as string.
+                return "$v";
+            } else {
                 $h = res_open(realpath($file));
                 $v = res_get($h, 'RT_VERSION', 'FileVersion');
                 res_close($h);
@@ -282,23 +319,23 @@ struct VS_VERSIONINFO { struct VS_VERSIONINFO
             /* The version consists of two 32-bit integers, defined by four 16-bit integers.
                For example, "FILEVERSION 3,10,0,61" is translated into two doublewords:
                0x0003000a and 0x0000003d, in that order. */
-/*
-        $h = res_open(realpath($file));
+            /*
+                    $h = res_open(realpath($file));
 
-        echo "Res list of '$file': \n";
-        $list= res_list_type($h, true);
-        if( $list===FALSE ) err( "Can't list type" );
+                    echo "Res list of '$file': \n";
+                    $list= res_list_type($h, true);
+                    if( $list===FALSE ) err( "Can't list type" );
 
-        for( $i= 0; $i<count($list); $i++ ) {
-                echo $list[$i]."\n";
-                $res= res_list($h, $list[$i]);
-                for( $j= 0; $j<count($res); $j++ ) {
-                        echo "\t".$res[$j]."\n";
-                }
-        }
-        echo "Res get: ".res_get( $h, 'A_TYPE', 'A_RC_NAME' )."\n\n";
-        res_close( $h );
-*/
+                    for( $i= 0; $i<count($list); $i++ ) {
+                            echo $list[$i]."\n";
+                            $res= res_list($h, $list[$i]);
+                            for( $j= 0; $j<count($res); $j++ ) {
+                                    echo "\t".$res[$j]."\n";
+                            }
+                    }
+                    echo "Res get: ".res_get( $h, 'A_TYPE', 'A_RC_NAME' )."\n\n";
+                    res_close( $h );
+            */
             if ($v)
                 return "$v";
             else
@@ -308,7 +345,7 @@ struct VS_VERSIONINFO { struct VS_VERSIONINFO
         }
 
     }
-};
+}
 
 // Local Variables:
 // mode: php

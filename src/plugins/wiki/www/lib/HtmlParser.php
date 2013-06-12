@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: HtmlParser.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * HtmlParser Class: Conversion HTML => wikimarkup
  * Requires XmlParser, XmlElement and the expat (or now the libxml) library. This is all in core.
@@ -41,25 +41,26 @@
 require_once 'lib/XmlParser.php';
 
 class HtmlParser
-extends XmlParser
+    extends XmlParser
 {
-    var $dialect, $_handlers, $root;
+    public $dialect, $_handlers, $root;
 
     /**
      *  dialect: "PhpWiki2", "PhpWiki"
      *  possible more dialects: MediaWiki, kwiki, c2
      */
-    function HtmlParser($dialect = "PhpWiki2", $encoding = '') {
-        $classname = "HtmlParser_".$dialect;
+    function HtmlParser($dialect = "PhpWiki2", $encoding = '')
+    {
+        $classname = "HtmlParser_" . $dialect;
         if (class_exists($classname))
             $this->dialect = new $classname;
         else {
-            trigger_error(sprintf("unknown HtmlParser dialect %s",$dialect),E_USER_ERROR);
+            trigger_error(sprintf("unknown HtmlParser dialect %s", $dialect), E_USER_ERROR);
         }
         $this->_handlers =& $this->dialect->_handlers;
         $this->XmlParser($encoding);
-    xml_parser_set_option($this->_parser, XML_OPTION_CASE_FOLDING, 0);
-    xml_parser_set_option($this->_parser, XML_OPTION_SKIP_WHITE, 1);
+        xml_parser_set_option($this->_parser, XML_OPTION_CASE_FOLDING, 0);
+        xml_parser_set_option($this->_parser, XML_OPTION_SKIP_WHITE, 1);
     }
 
     // The three callbacks, called on walking through the HTML tree.
@@ -74,26 +75,28 @@ extends XmlParser
     function parse_url($file, $debug=false)
     */
 
-    function output () {
+    function output()
+    {
         if (is_null($this->root))
             $this->root = $GLOBALS['xml_parser_root'];
-        $output = $this->wikify( $this->root );
+        $output = $this->wikify($this->root);
         return $output;
     }
 
-    function wikify ($node, $parent = null) {
+    function wikify($node, $parent = null)
+    {
         $output = '';
-        if( isa($node, 'XmlElement')) {
+        if (isa($node, 'XmlElement')) {
             $dialect =& $this->dialect;
             $conv = $dialect->_handlers[$node->_tag];
-            if( is_string($conv) and method_exists($dialect, $conv)) {
+            if (is_string($conv) and method_exists($dialect, $conv)) {
                 $output = $dialect->$conv($node);
-            } elseif( is_array($conv) ) {
+            } elseif (is_array($conv)) {
                 foreach ($node->getContent() as $n) {
                     $output .= $this->wikify($n, $node);
                 }
-                $output = $conv[0] . $output . $conv[count($conv)-1];
-            } elseif( !empty($conv) ) {
+                $output = $conv[0] . $output . $conv[count($conv) - 1];
+            } elseif (!empty($conv)) {
                 $output = $conv;
                 foreach ($node->getContent() as $n) {
                     $output .= $this->wikify($n, $node);
@@ -106,7 +109,7 @@ extends XmlParser
         } else {
             $output = $node;
             if ($parent and $parent->_tag != 'pre')
-                preg_replace("/ {2,}/"," ",$output);
+                preg_replace("/ {2,}/", " ", $output);
             if (trim($output) == '')
                 $output = '';
         }
@@ -115,15 +118,15 @@ extends XmlParser
 
     /** elem_contents()
      *  $output = $parser->elem_contents( $elem );
-
      * Returns a wikified version of the contents of the specified
      * HTML element. This is done by passing each element of this
      * element's content list through the C<wikify()> method, and
      * returning the concatenated result.
      */
-    function elem_contents($node) {
+    function elem_contents($node)
+    {
         $output = '';
-        if (isa($node,'XmlElement')) {
+        if (isa($node, 'XmlElement')) {
             foreach ($node->getContent() as $child) {
                 $output .= $this->wikify($child, isset($node->parent) ? $node->parent : null);
             }
@@ -144,11 +147,12 @@ extends XmlParser
     // attribute name/value pairs are specified in attr="value"
     // format.
     //
-    function _elem_attr_str($node, $attrs) {
+    function _elem_attr_str($node, $attrs)
+    {
         $s = '';
         foreach ($node->_attr as $attr => $val) {
             $attr = strtolower($attr);
-            if (in_array($attr,$attrs))
+            if (in_array($attr, $attrs))
                 $s .= " $attr=\"$val\"";
         }
         return $s;
@@ -161,7 +165,8 @@ extends XmlParser
     // whose element tag equals $tag. This is useful for determining if
     // an element belongs to the specified tag.
     //
-    function _elem_has_ancestor($node, $tag) {
+    function _elem_has_ancestor($node, $tag)
+    {
         if (isset($node->parent)) {
             if ($node->parent->_tag == $tag) return true;
             return $this->_elem_has_ancestor($node->parent, $tag);
@@ -180,9 +185,10 @@ extends XmlParser
     // contained within a sole A tag (not counting child elements with
     // whitespace text only).
     //
-    function _elem_is_image_div( $node ) {
+    function _elem_is_image_div($node)
+    {
         // Return false if node is undefined or isn't a DIV at all
-        if (!$node or !in_array($node->_tag,array("div","p")))
+        if (!$node or !in_array($node->_tag, array("div", "p")))
             return false;
         $contents = $node->getContent();
         // Returns true if sole child is an IMG tag
@@ -199,108 +205,119 @@ extends XmlParser
 
     /** preserves tags and content
      */
-    function wikify_default($node) {
+    function wikify_default($node)
+    {
         return $this->wikify_preserve($node);
     }
 
     /** preserves tags and content
-    */
-    function wikify_preserve($node) {
+     */
+    function wikify_preserve($node)
+    {
         return $node->asXML();
     }
 
-    function log($dummy) {}
+    function log($dummy)
+    {
+    }
 }
 
-
 class HtmlParser_PhpWiki2
-extends HtmlParser
+    extends HtmlParser
 {
-    function HtmlParser_PhpWiki2() {
+    function HtmlParser_PhpWiki2()
+    {
         $this->_handlers =
-            array('html'   => '',
-                  'head'   => '',
-                  'title'  => '',
-                  'meta'   => '',
-                  'link'   => '',
-                  'script' => '',
-                  'body'   => '',
+            array('html' => '',
+                'head' => '',
+                'title' => '',
+                'meta' => '',
+                'link' => '',
+                'script' => '',
+                'body' => '',
 
-                  'br'     => "<br>",
-                  'b'      => array( "*" ),
-                  'strong' => array( "*" ),
-                  'i'      => array( "_" ),
-                  'em'     => array( "_" ),
-                  'hr'     => "----\n\n",
+                'br' => "<br>",
+                'b' => array("*"),
+                'strong' => array("*"),
+                'i' => array("_"),
+                'em' => array("_"),
+                'hr' => "----\n\n",
 
-                  // PRE blocks are handled specially (see tidy_whitespace and
-                  // wikify methods)
-                  'pre'    => array( "<pre>", "</pre>" ),
+                // PRE blocks are handled specially (see tidy_whitespace and
+                // wikify methods)
+                'pre' => array("<pre>", "</pre>"),
 
-                  'dl'     => array( '', "\n\n" ),
-                  'dt'     => array( ';', '' ),
-                  'dd'     => array( ':', '' ),
+                'dl' => array('', "\n\n"),
+                'dt' => array(';', ''),
+                'dd' => array(':', ''),
 
-                  'p'      => array( "\n\n", "\n\n" ),
-                  'ul'     => array( '', "\n" ),
-                  'ol'     => array( '', "\n" ),
+                'p' => array("\n\n", "\n\n"),
+                'ul' => array('', "\n"),
+                'ol' => array('', "\n"),
 
-                  'li'     => "wikify_list_item",
-                  'table'  => "wikify_table",
-                  'tr'     => "wikify_tr",
-                  'td'     => "wikify_td",
-                  'th'     => "wikify_td",
-                  'div'    => array( '', "\n\n" ),
-                  'img'    => "wikify_img",
-                  'a'      => "wikify_link",
-                  'span'   => array( '', '' ),
+                'li' => "wikify_list_item",
+                'table' => "wikify_table",
+                'tr' => "wikify_tr",
+                'td' => "wikify_td",
+                'th' => "wikify_td",
+                'div' => array('', "\n\n"),
+                'img' => "wikify_img",
+                'a' => "wikify_link",
+                'span' => array('', ''),
 
-                  'h1'     => "wikify_h",
-                  'h2'     => "wikify_h",
-                  'h3'     => "wikify_h",
-                  'h4'     => "wikify_h",
-                  'h5'     => "wikify_h",
-                  'h6'     => "wikify_h",
+                'h1' => "wikify_h",
+                'h2' => "wikify_h",
+                'h3' => "wikify_h",
+                'h4' => "wikify_h",
+                'h5' => "wikify_h",
+                'h6' => "wikify_h",
 
-                  'font'   => array( '', '' ),
-                  'sup'    => "wikify_default",
-                  'sub'    => "wikify_default",
-                  'nowiki' => "wikify_verbatim",
-                  'verbatim' => "wikify_default",
-                  'noinclude' => "wikify_noinclude",
-                  );
+                'font' => array('', ''),
+                'sup' => "wikify_default",
+                'sub' => "wikify_default",
+                'nowiki' => "wikify_verbatim",
+                'verbatim' => "wikify_default",
+                'noinclude' => "wikify_noinclude",
+            );
     }
 
-    function wikify_table( $node ) {
+    function wikify_table($node)
+    {
         $this->ident = '';
         return "| \n" . $this->elem_contents($node) . "|\n\n";
     }
-    function wikify_tr( $node ) {
+
+    function wikify_tr($node)
+    {
         return "\n| " . $this->elem_contents($node);
     }
-    function wikify_th( $node ) {
+
+    function wikify_th($node)
+    {
         $ident = empty($this->ident) ? '' : $this->ident;
         $output = "$ident| ";
         $content = $this->elem_contents($node);
-        preg_replace("s/^\s+/","",$content);
+        preg_replace("s/^\s+/", "", $content);
         $output .= $content;
         $this->ident .= '  ';
         return "$output |\n";
     }
 
-    function wikify_list_item( $node ) {
-        return ($this->_elem_has_ancestor($node, 'ol') ? '*' : '#') . " " . trim($this->elem_contents($node)). "\n";
+    function wikify_list_item($node)
+    {
+        return ($this->_elem_has_ancestor($node, 'ol') ? '*' : '#') . " " . trim($this->elem_contents($node)) . "\n";
     }
 
-    function wikify_link( $node ) {
-        $url = $this->absolute_url( $node->getAttr('href') );
+    function wikify_link($node)
+    {
+        $url = $this->absolute_url($node->getAttr('href'));
         $title = $this->elem_contents($node);
         if (empty($url))
             $title = trim($title);
 
         // Just return the link title if this tag is contained
         // within an header tag
-        if (isset($node->parent) and preg_match('/^h\d$/',$node->parent->_tag))
+        if (isset($node->parent) and preg_match('/^h\d$/', $node->parent->_tag))
             return $title;
 
         // Return if this is a link to an image contained within
@@ -314,58 +331,62 @@ extends HtmlParser
         return "[ $url | $title ]";
     }
 
-    function wikify_h( $node ) {
-        $level = substr($node->_tag,1);
+    function wikify_h($node)
+    {
+        $level = substr($node->_tag, 1);
         if ($level < 4) {
-            $markup = str_repeat('!',4 - $level);
+            $markup = str_repeat('!', 4 - $level);
         } else {
             $markup = '!';
         }
-        return $markup.' '.trim($this->elem_contents($node))."\n\n";
+        return $markup . ' ' . trim($this->elem_contents($node)) . "\n\n";
     }
 
-    function wikify_verbatim( $node ) {
-        $contents = $this->elem_contents( $node );
+    function wikify_verbatim($node)
+    {
+        $contents = $this->elem_contents($node);
         return "\n<verbatim>\n$contents\n</verbatim>";
     }
 
-    function wikify_noinclude( $node ) {
-        return $this->elem_contents( $node );
+    function wikify_noinclude($node)
+    {
+        return $this->elem_contents($node);
     }
 
-    function wikify_img( $node ) {
-        $image_url = $this->absolute_url( $node->getAttr('src') );
-        $file = basename( $image_url );
+    function wikify_img($node)
+    {
+        $image_url = $this->absolute_url($node->getAttr('src'));
+        $file = basename($image_url);
         $alignment = $node->getAttr('align');
-        $this->log( "Processing IMG tag for SRC: ".$image_url."..." );
+        $this->log("Processing IMG tag for SRC: " . $image_url . "...");
         //
         // Grab attributes to be added to the [ Image ] markup (since 1.3.10)
         //
         if (!$alignment) {
-            if ($this->_elem_is_image_div( $node->parent ))
+            if ($this->_elem_is_image_div($node->parent))
                 $image_div = $node->parent;
-            elseif (isset($node->parent) and $this->_elem_is_image_div( $node->parent->parent ))
+            elseif (isset($node->parent) and $this->_elem_is_image_div($node->parent->parent))
                 $image_div = $node->parent->parent;
         }
-        if ( !$alignment and $image_div ) {
+        if (!$alignment and $image_div) {
             $css_style = $image_div->getAttr('style');
             $css_class = $image_div->getAttr('class');
 
             // float => align: Check for float attribute; if it's there,
             //                 then we'll add it to the [Image] syntax
-            if (!$alignment and preg_match("/float\:\s*(right|left)/i",$css_style,$m))
+            if (!$alignment and preg_match("/float\:\s*(right|left)/i", $css_style, $m))
                 $alignment = $m[1];
-            if (!$alignment and preg_match("/float(right|left)/i",$css_class,$m));
-                $alignment = $m[1];
-            if( $alignment ) {
+            if (!$alignment and preg_match("/float(right|left)/i", $css_class, $m)) ;
+            $alignment = $m[1];
+            if ($alignment) {
                 $attrs[] = "align=$alignment";
-                $this->log( "  Image is contained within a DIV that specifies $alignment alignment" );
-                $this->log( "  Adding '$alignment' to [Image] markup attributes" );
+                $this->log("  Image is contained within a DIV that specifies $alignment alignment");
+                $this->log("  Adding '$alignment' to [Image] markup attributes");
             } else {
-                $this->log( "  Image is not contained within a DIV for alignment" );
+                $this->log("  Image is not contained within a DIV for alignment");
             }
         } else {
-            $this->log( "  Image is not contained within a DIV" );
+            $this->log("  Image is not contained within a DIV");
         }
         if ($alignment)
             $attrs[] = "align=$alignment";
@@ -374,42 +395,42 @@ extends HtmlParser
         // image; it's needed if the specified width attribute
         // differs from the default size of the image
         //
-        if( $width = $node->getAttr('width') ) {
-            $this->log( "  Image has WIDTH attribute of $width" );
-            $this->log( "  Checking whether resulting [Image] markup should specify a thumbnail..." );
+        if ($width = $node->getAttr('width')) {
+            $this->log("  Image has WIDTH attribute of $width");
+            $this->log("  Checking whether resulting [Image] markup should specify a thumbnail...");
 
             // Download the image from the network and store
-            $abs_url = $this->absolute_url( $node->getAttr('src') );
-            $this->log( "    Fetching image '$abs_url' from the network" );
-            list( $actual_w, $actual_h, $flag, $attr_str) = getimagesize( $abs_url );
+            $abs_url = $this->absolute_url($node->getAttr('src'));
+            $this->log("    Fetching image '$abs_url' from the network");
+            list($actual_w, $actual_h, $flag, $attr_str) = getimagesize($abs_url);
 
             // If the WIDTH attribute of the IMG tag is not equal
             // to the actual width of the image, then we need to
             // create a thumbnail
-            if( preg_match("/^\d+$/",$width) and $width != $actual_w ) {
-                $this->log( "    IMG tag's WIDTH attribute ($width) differs from actual width of image ($actual_w)" );
-                $this->log( "      -- that means we're going to need a thumbnail" );
-                $this->log( "    Adding 'width' to list of attributes for [Image] markup" );
+            if (preg_match("/^\d+$/", $width) and $width != $actual_w) {
+                $this->log("    IMG tag's WIDTH attribute ($width) differs from actual width of image ($actual_w)");
+                $this->log("      -- that means we're going to need a thumbnail");
+                $this->log("    Adding 'width' to list of attributes for [Image] markup");
                 $attrs[] = "width=$width";
                 $width_added = true;
             }
             $height = $node->getAttr('height');
-            if( preg_match("/^\d+$/",$height) and $height != $height_h ) {
-                $this->log( "    IMG tag's HEIGHT attribute ($height) differs from actual height of image ($actual_h)" );
-                $this->log( "      -- that means we're going to need a thumbnail" );
-                $this->log( "    Adding 'height' to list of attributes for [Image] markup" );
+            if (preg_match("/^\d+$/", $height) and $height != $height_h) {
+                $this->log("    IMG tag's HEIGHT attribute ($height) differs from actual height of image ($actual_h)");
+                $this->log("      -- that means we're going to need a thumbnail");
+                $this->log("    Adding 'height' to list of attributes for [Image] markup");
                 if (isset($width_added))
-                    $attrs[count($attr)-1] = "size=".$width."x".$height;
+                    $attrs[count($attr) - 1] = "size=" . $width . "x" . $height;
                 else
                     $attrs[] = "height=$height";
             }
         }
         if ($alt = $node->getAttr('alt')) {
-            $this->log( "  Adding alternate text '$alt' to [Image] markup" );
+            $this->log("  Adding alternate text '$alt' to [Image] markup");
             $attrs[] = "alt=$alt";
         }
         $attr_str = join(' ', $attrs);
-        $this->log( "...done processing IMG tag\n" );
+        $this->log("...done processing IMG tag\n");
         return "[ $file $attr_str ]";
     }
 }

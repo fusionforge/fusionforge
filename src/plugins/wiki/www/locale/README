@@ -201,12 +201,11 @@ before you can edit them.
 
    Date: Sat,  4 Jul 2009 19:09:38 +0000
    Mime-Version: 1.0 (Produced by PhpWiki 1.3.11pre)
-   X-Rcs-Id: $Id: README 7001 2009-07-06 14:23:30Z vargenau $
    Content-Type: application/x-phpwiki;
      pagename=G%C3%A4steBuch;
      flags="";
      markup=2;
-     charset=utf-8
+     charset=UTF-8
    Content-Transfer-Encoding: binary
 
  - Make sure to rename files with accents in the page name converted

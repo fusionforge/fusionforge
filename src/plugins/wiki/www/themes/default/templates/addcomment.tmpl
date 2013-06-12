@@ -1,11 +1,10 @@
-<?php // -*- php -*-
-// $Id: addcomment.tmpl 7956 2011-03-03 17:08:31Z vargenau $
+<?php
   $request->setArg('action',false);
 ?>
 <div class="wikicomment wikicomment-form">
 <?php if (!$WikiTheme->DUMP_MODE) { ?>
 <form action="<?php echo $request->getPostURL()?>" method="post" class="wikiaction"
-      accept-charset="<?php echo CHARSET?>">
+      accept-charset="UTF-8">
   <input type="hidden" name="comment[pagename]" value="<?php echo $PAGENAME?>" />
   <?php echo HiddenInputs($request->getArgs()) ?>
   <table class="wikicomment-form">

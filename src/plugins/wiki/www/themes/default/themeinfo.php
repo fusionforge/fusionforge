@@ -6,8 +6,6 @@ if (!defined('PHPWIKI_VERSION')) {
     exit;
 }
 
-// $Id: themeinfo.php 7968 2011-03-07 13:39:47Z vargenau $
-
 /*
  * This file defines the default appearance ("theme") of PhpWiki.
  */

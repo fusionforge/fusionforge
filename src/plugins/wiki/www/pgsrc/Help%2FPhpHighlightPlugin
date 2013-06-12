@@ -1,6 +1,5 @@
-Date: Thu,  9 Dec 2010 17:30:39 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FPhpHighlightPlugin 7764 2010-12-09 16:36:20Z vargenau $
+Date: Tue,  5 Feb 2013 15:49:31 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPhpHighlightPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -32,28 +31,26 @@ presenting it.
 
 == Options ==
 
-Automatic Wrapping:
+=== Automatic Wrapping ===
 
-  If you don't want the plugin to automatically wrap the source code
-  in ##<?php## and ##?>##, then set ##wrap## to ##0##. The default value is ##1##
-  which means that the plugin takes care of adding and removing
-  ##<?php## and ##?>## automatically.
+If you don't want the plugin to automatically wrap the source code
+in ##<?php## and ##?>##, then set ##wrap## to ##0##. The default value is ##1##
+which means that the plugin takes care of adding and removing ##<?php## and ##?>## automatically.
 
-  If you set ##wrap## to ##0##, then you'll be able to mix PHP code with
-  HTML. The plugin will then translate '##< ?php##' into '##<?php##' and
-  '##? >##' into '##?>##' to allow you to start and stop PHP mode in your
-  code.
+If you set ##wrap## to ##0##, then you'll be able to mix PHP code with
+HTML. The plugin will then translate '##< ?php##' into '##<?php##' and
+'##? >##' into '##?>##' to allow you to start and stop PHP mode in your code.
 
-Color Options:
+=== Color Options ===
 
-  The plugin accepts optional color arguments which correspond to the
-  highlight settings in *php.ini*. Specified colors must be a valid
-  hexadecimal color or
-  [[http://www.w3.org/TR/REC-html40/types.html#h-6.5|HTML 4 color name]]
-  in lowercase, such as ##'#0f0344'## or ##blue##. You can set the
-  following options:
+The plugin accepts optional color arguments which correspond to the
+highlight settings in **php.ini**. Specified colors must be a valid
+hexadecimal color or
+[[http://www.w3.org/TR/REC-html40/types.html#h-6.5|HTML 4 color name]]
+in lowercase, such as ##'#0f0344'## or ##blue##. You can set the
+following options: ##string##, ##comment##, ##keyword##, ##bg##, ##default##, and ##html##.
 
-  ##string##, ##comment##, ##keyword##, ##bg##, ##default##, and ##html##
+**Note:** ##bg## no longer exists in PHP 5.4.
 
 == Examples ==
 
@@ -102,9 +99,18 @@ getload(void)
 }
 >>
 
+== Known Problems ==
+{{{
+<<PhpHighlight
+    testing[somearray];
+    testing~[badworkaround~];
+>>
+}}}
+will swallow "~[somearray~]"
+
 == Authors ==
 * [[mailto:gimpster@gimpster.com|Martin Geisler]]
-* [[mailto:carstenklapp@users.sourceforge.net|Carsten Klapp]]
+* [[mailto:carstenklapp@users.sourceforge.net|Carsten Klapp]] (added ability to override colors defined in ##php.ini##)
 
 == See Also ==
 * [[Help:SyntaxHighlighterPlugin|SyntaxHighlighter]] plugin for highlighting other languages.

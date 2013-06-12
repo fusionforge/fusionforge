@@ -21,8 +21,6 @@
 // for outputting RecentChanges in RSS 0.91 format
 // ----------------------------------------------------------------------
 
-// $Id: RSSWriter091.php 7964 2011-03-05 17:05:30Z vargenau $
-
 include_once 'lib/RssWriter.php';
 class RSSWriter091 extends RSSWriter
 {
@@ -31,9 +29,10 @@ class RSSWriter091 extends RSSWriter
         $this->XmlElement('rss', array('version' => "0.91"));
         $this->_items = array();
     }
-  /**
-   * Finish construction of RSS.
-   */
+
+    /**
+     * Finish construction of RSS.
+     */
     function finish()
     {
         if (isset($this->_finished))
@@ -42,11 +41,10 @@ class RSSWriter091 extends RSSWriter
         $channel = &$this->_channel;
         $items = &$this->_items;
 
-        if ($items)
-            {
-        foreach ($items as $i)
-                    $channel->pushContent($i);
-            }
+        if ($items) {
+            foreach ($items as $i)
+                $channel->pushContent($i);
+        }
         $this->pushContent($channel);
         $this->__spew();
         $this->_finished = true;
@@ -55,15 +53,17 @@ class RSSWriter091 extends RSSWriter
     /**
      * Create a new RDF <em>typedNode</em>.
      */
-    function __node($type, $properties, $uri = false) {
-    return new XmlElement($type, '',
-                              $this->__elementize($properties));
+    function __node($type, $properties, $uri = false)
+    {
+        return new XmlElement($type, '',
+            $this->__elementize($properties));
     }
 
     /**
      * Write output to HTTP client.
      */
-    function __spew() {
+    function __spew()
+    {
         header("Content-Type: application/xml; charset=" . RSS_ENCODING);
         printf("<?xml version=\"1.0\" encoding=\"%s\"?>\n", RSS_ENCODING);
         print("<!DOCTYPE rss PUBLIC \"-//Netscape Communications//DTD RSS 0.91//EN\"\n");
@@ -71,14 +71,13 @@ class RSSWriter091 extends RSSWriter
         $this->printXML();
     }
 
-
 }
 
 class _RecentChanges_RssFormatter091
-extends _RecentChanges_RSSFormatter
+    extends _RecentChanges_RSSFormatter
 // This class should probably go at then of RecentChanges.php
 {
-    function format ($changes)
+    function format($changes)
     {
         //    include_once('lib/RssWriter.php');
         $rss = new RssWriter091;
@@ -92,26 +91,25 @@ extends _RecentChanges_RSSFormatter
 
         while ($rev = $changes->next()) {
             $rss->addItem($this->item_properties($rev),
-                          $this->pageURI($rev));
+                $this->pageURI($rev));
         }
 
         global $request;
         $request->discardOutput();
         $rss->finish();
-        $request->finish();             // NORETURN!!!!
+        $request->finish(); // NORETURN!!!!
     }
 
-
-    function channel_properties ()
+    function channel_properties()
     {
         global $request;
 
         $rc_url = WikiURL($request->getArg('pagename'), false, 'absurl');
 
         return array('title' => WIKI_NAME,
-                     'description' => _("RecentChanges"),
-                     'link' => $rc_url,
-                     'language' => 'en-US');
+            'description' => _("RecentChanges"),
+            'link' => $rc_url,
+            'language' => 'en-US');
 
         /* FIXME: language should come from $LANG (or other config variable). */
 
@@ -123,16 +121,15 @@ extends _RecentChanges_RSSFormatter
          */
     }
 
-
-    function item_properties ($rev)
+    function item_properties($rev)
     {
         $page = $rev->getPage();
         $pagename = $page->getName();
 
-        return array( 'title'        => SplitPagename($pagename),
-                      'description'    => $this->summary($rev),
-                      'link'        => $this->pageURL($rev)
-                      );
+        return array('title' => SplitPagename($pagename),
+            'description' => $this->summary($rev),
+            'link' => $this->pageURL($rev)
+        );
     }
 }
 

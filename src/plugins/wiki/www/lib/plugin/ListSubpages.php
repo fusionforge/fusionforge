@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: ListSubpages.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 2002 $ThePhpWikiProgrammingTeam
  *
@@ -28,33 +28,33 @@
 require_once 'lib/PageList.php';
 
 class WikiPlugin_ListSubpages
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName() {
-        return _("ListSubpages");
-    }
-
-    function getDescription () {
+    function getDescription()
+    {
         return _("Lists the names of all SubPages of the current page.");
     }
 
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array_merge
-            (
-             PageList::supportedArgs(),
-               array('noheader' => false, // no header
-                     'basepage' => false, // subpages of which page, default: current
-                     'maxpages' => '',    // maximum number of pages to include, change that to limit
-                     //'exclude'  => '',
-                     /*'relative' => false, */
-                     'info'     => ''
-                     ));
+        (
+            PageList::supportedArgs(),
+            array('noheader' => false, // no header
+                'basepage' => false, // subpages of which page, default: current
+                'maxpages' => '', // maximum number of pages to include, change that to limit
+                //'exclude'  => '',
+                /*'relative' => false, */
+                'info' => ''
+            ));
     }
+
     // info arg allows multiple columns
     // info=mtime,hits,summary,version,author,locked,minor,count
     // exclude arg allows multiple pagenames exclude=HomePage,RecentChanges
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $this->getArgs($argstr, $request);
         if ($args['basepage'])
             $pagename = $args['basepage'];
@@ -65,7 +65,7 @@ extends WikiPlugin
         // expected when there are no subpages. (see also
         // UnfoldSubPages plugin)
         $subpages = explodePageList($pagename . SUBPAGE_SEPARATOR . '*');
-        if (! $subpages) {
+        if (!$subpages) {
             return $this->error(_("The current page has no subpages defined."));
         }
         extract($args);
@@ -73,14 +73,14 @@ extends WikiPlugin
         $content = HTML();
         //$subpages = array_reverse($subpages); // TODO: why?
         if ($maxpages) {
-            $subpages = array_slice ($subpages, 0, $maxpages);
+            $subpages = array_slice($subpages, 0, $maxpages);
         }
 
         $descrip = fmt("SubPages of %s:",
-                       WikiLink($pagename, 'auto'));
+            WikiLink($pagename, 'auto'));
         if ($info) {
             $info = explode(",", $info);
-            if (in_array('count',$info))
+            if (in_array('count', $info))
                 $args['types']['count'] = new _PageList_Column_ListSubpages_count('count', _("#"), 'center');
         }
         $pagelist = new PageList($info, $exclude, $args);
@@ -92,7 +92,7 @@ extends WikiPlugin
             static $included_pages = array();
             if (in_array($page, $included_pages)) {
                 $content->pushContent(HTML::p(sprintf(_("Recursive inclusion of page %s ignored"),
-                                                      $page)));
+                    $page)));
                 continue;
             }
             array_push($included_pages, $page);
@@ -106,11 +106,13 @@ extends WikiPlugin
         $content->pushContent($pagelist);
         return $content;
     }
-};
+}
 
 // how many backlinks for this subpage
-class _PageList_Column_ListSubpages_count extends _PageList_Column {
-    function _getValue($page, &$revision_handle) {
+class _PageList_Column_ListSubpages_count extends _PageList_Column
+{
+    function _getValue($page, &$revision_handle)
+    {
         $iter = $page->getBackLinks();
         $count = $iter->count();
         return $count;

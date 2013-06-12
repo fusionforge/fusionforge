@@ -1,5 +1,4 @@
-<?php // -*-php-*-
-// $Id: PearDB_oci8.php 7956 2011-03-03 17:08:31Z vargenau $
+<?php
 
 /**
  * Oracle extensions for the Pear DB backend.
@@ -9,12 +8,13 @@
 require_once 'lib/WikiDB/backend/PearDB_pgsql.php';
 
 class WikiDB_backend_PearDB_oci8
-extends WikiDB_backend_PearDB_pgsql
+    extends WikiDB_backend_PearDB_pgsql
 {
     /**
      * Constructor
      */
-    function WikiDB_backend_PearDB_oci8($dbparams) {
+    function WikiDB_backend_PearDB_oci8($dbparams)
+    {
         // Backend constructor
         $this->WikiDB_backend_PearDB($dbparams);
         if (DB::isError($this->_dbh)) return;
@@ -37,7 +37,8 @@ extends WikiDB_backend_PearDB_pgsql
     /**
      * Pack tables.
      */
-    function optimize() {
+    function optimize()
+    {
         // Do nothing here -- Leave that for the DBA
         // Cost Based Optimizer tuning vary from version to version
         return 1;
@@ -46,9 +47,10 @@ extends WikiDB_backend_PearDB_pgsql
     /**
      * Lock all tables we might use.
      */
-    function _lock_tables($write_lock=true) {
+    function _lock_tables($write_lock = true)
+    {
         $dbh = &$this->_dbh;
-      
+
         // Not sure if we really need to lock tables here, the Oracle row
         // locking mechanism should be more than enough
         // For the time being, lets stay on the safe side and lock...
@@ -64,58 +66,62 @@ extends WikiDB_backend_PearDB_pgsql
         }
     }
 
-    function _quote($s) {
+    function _quote($s)
+    {
         return base64_encode($s);
     }
 
-    function _unquote($s) {
+    function _unquote($s)
+    {
         return base64_decode($s);
     }
 
-    function write_accesslog(&$entry) {
+    function write_accesslog(&$entry)
+    {
         global $request;
         $dbh = &$this->_dbh;
         $log_tbl = $entry->_accesslog->logtable;
         // duration problem: sprintf "%f" might use comma e.g. "100,201" in european locales
         $dbh->query("INSERT INTO $log_tbl"
-                    . " (time_stamp,remote_host,remote_user,request_method,request_line,request_uri,"
-                    .   "request_args,request_time,status,bytes_sent,referer,agent,request_duration)"
-                    . " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                    array(
-                          // Problem: date formats are backend specific. Either use unixtime as %d (long),
-                          // or the native timestamp format.
-                          date('d-M-Y H:i:s', $entry->time),
-                          $entry->host,
-                          $entry->user,
-                          $entry->request_method,
-                          $entry->request,
-                          $entry->request_uri,  
-                          $entry->request_args,
-                          $entry->_ncsa_time($entry->time),
-                          $entry->status,
-                          $entry->size,
-                          $entry->referer,
-                          $entry->user_agent,
-                          $entry->duration));
+                . " (time_stamp,remote_host,remote_user,request_method,request_line,request_uri,"
+                . "request_args,request_time,status,bytes_sent,referer,agent,request_duration)"
+                . " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            array(
+                // Problem: date formats are backend specific. Either use unixtime as %d (long),
+                // or the native timestamp format.
+                date('d-M-Y H:i:s', $entry->time),
+                $entry->host,
+                $entry->user,
+                $entry->request_method,
+                $entry->request,
+                $entry->request_uri,
+                $entry->request_args,
+                $entry->_ncsa_time($entry->time),
+                $entry->status,
+                $entry->size,
+                $entry->referer,
+                $entry->user_agent,
+                $entry->duration));
     }
 
-};
+}
 
 class WikiDB_backend_PearDB_oci8_search
-extends WikiDB_backend_PearDB_search
+    extends WikiDB_backend_PearDB_search
 {
     // If we want case insensitive search, one need to create a Context
     // Index on the CLOB. While it is very efficient, it requires the
     // Intermedia Text option, so let's stick to the 'simple' thing
     // Note that this does only an exact fulltext search, not using MATCH or LIKE.
-    function _fulltext_match_clause($node) {
+    function _fulltext_match_clause($node)
+    {
         if ($this->isStoplisted($node))
             return "1=1";
         $page = $node->sql();
         $exactword = $node->_sql_quote($node->word);
         return ($this->_case_exact
-                ? "pagename LIKE '$page' OR DBMS_LOB.INSTR(content, '$exactword') > 0"
-                : "LOWER(pagename) LIKE '$page' OR DBMS_LOB.INSTR(content, '$exactword') > 0");
+            ? "pagename LIKE '$page' OR DBMS_LOB.INSTR(content, '$exactword') > 0"
+            : "LOWER(pagename) LIKE '$page' OR DBMS_LOB.INSTR(content, '$exactword') > 0");
     }
 }
 

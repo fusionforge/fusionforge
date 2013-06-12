@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: OldStyleTable.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -26,7 +26,7 @@
  *
  * Usage:
  * <pre>
- *  <<OldStyleTable border||=0 summary=""
+ *  <<OldStyleTable border||=0
  *  ||  __Name__               |v __Cost__   |v __Notes__
  *  | __First__   | __Last__
  *  |> Jeff       |< Dairiki   |^  Cheap     |< Not worth it
@@ -44,37 +44,36 @@
  */
 
 class WikiPlugin_OldStyleTable
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName() {
-        return _("OldStyleTable");
+    function getDescription()
+    {
+        return _("Layout tables using the old markup style.");
     }
 
-    function getDescription() {
-      return _("Layout tables using the old markup style.");
-    }
-
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array(
-                     'caption'     => '',
-                     'cellpadding' => '1',
-                     'cellspacing' => '1',
-                     'border'      => '1',
-                     'summary'     => '',
-                     );
+            'caption' => '',
+            'cellpadding' => '1',
+            'cellspacing' => '1',
+            'border' => '1',
+            'summary' => '',
+        );
     }
 
-    function handle_plugin_args_cruft($argstr, $args) {
+    function handle_plugin_args_cruft($argstr, $args)
+    {
         return;
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
-        global $WikiTheme;
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         include_once 'lib/InlineParser.php';
 
         $args = $this->getArgs($argstr, $request);
         $default = $this->getDefaultArguments();
-        foreach (array('cellpadding','cellspacing','border') as $arg) {
+        foreach (array('cellpadding', 'cellspacing', 'border') as $arg) {
             if (!is_numeric($args[$arg])) {
                 $args[$arg] = $default[$arg];
             }
@@ -84,7 +83,7 @@ extends WikiPlugin
         $default_args = array_keys($default);
         foreach ($default_args as $arg) {
             if ($args[$arg] == '' and $default[$arg] == '')
-                continue;                        // ignore '' arguments
+                continue; // ignore '' arguments
             if ($arg == 'caption')
                 $caption = $args[$arg];
             else
@@ -98,28 +97,29 @@ extends WikiPlugin
         foreach ($lines as $line) {
             if (!$line)
                 continue;
-            if (strstr($line,"=")) {
-                    $tmp = explode("=",$line);
-                    if (in_array(trim($tmp[0]),$default_args))
+            if (strstr($line, "=")) {
+                $tmp = explode("=", $line);
+                if (in_array(trim($tmp[0]), $default_args))
                     continue;
             }
             if ($line[0] != '|') {
-                    // bogus error if argument
+                // bogus error if argument
                 trigger_error(sprintf(_("Line %s does not begin with a '|'."), $line), E_USER_WARNING);
             } else {
-                $table->pushContent($this->_parse_row($line, $basepage));
+                $table->pushContent($this->parse_row($line, $basepage));
             }
         }
 
         return $table;
     }
 
-    function _parse_row ($line, $basepage) {
-        $brkt_link = "\\[ .*? [^]\s] .*? \\]";
-        $cell_content  = "(?: [^[] | ".ESCAPE_CHAR."\\[ | $brkt_link )*?";
+    private function parse_row($line, $basepage)
+    {
+        $bracket_link = "\\[ .*? [^]\s] .*? \\]";
+        $cell_content = "(?: [^[] | " . ESCAPE_CHAR . "\\[ | $bracket_link )*?";
 
         preg_match_all("/(\\|+) (v*) ([<>^]?) \s* ($cell_content) \s* (?=\\||\$)/x",
-                       $line, $matches, PREG_SET_ORDER);
+            $line, $matches, PREG_SET_ORDER);
 
         $row = HTML::tr();
 
@@ -142,11 +142,11 @@ extends WikiPlugin
             $content = TransformInline($m[4], 2.0, $basepage);
 
             $row->pushContent(HTML::td($attr, HTML::raw('&nbsp;'),
-                                       $content, HTML::raw('&nbsp;')));
+                $content, HTML::raw('&nbsp;')));
         }
         return $row;
     }
-};
+}
 
 // Local Variables:
 // mode: php

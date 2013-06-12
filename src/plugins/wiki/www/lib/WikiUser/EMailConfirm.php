@@ -1,5 +1,5 @@
-<?php //-*-php-*-
-// $Id: EMailConfirm.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright (C) 2006 ReiniUrban
  *
@@ -21,30 +21,32 @@
  */
 
 class _EMailConfirmPassUser
-extends _PassUser
-/**
- * Unconfirmed users have ANON access,
- * confirmed users are equal to passusers WIKIAUTH_USER.
- *
- * Users give their email at registration, phpwiki sends a link per email,
- * user clicks on url link to verify, user is confirmed.
- *
- * Preferences are handled in _PassUser
- */
+    extends _PassUser
+    /**
+     * Unconfirmed users have ANON access,
+     * confirmed users are equal to passusers WIKIAUTH_USER.
+     *
+     * Users give their email at registration, phpwiki sends a link per email,
+     * user clicks on url link to verify, user is confirmed.
+     *
+     * Preferences are handled in _PassUser
+     */
 {
     // This can only be called from _PassUser, because the parent class
     // sets the pref methods, before this class is initialized.
-    function _EMailConfirmPassUser($UserName='', $prefs=false, $file='') {
+    function _EMailConfirmPassUser($UserName = '', $prefs = false, $file = '')
+    {
         if (!$this->_prefs and isa($this, "_EMailPassUser")) {
             if ($prefs) $this->_prefs = $prefs;
             if (!isset($this->_prefs->_method))
-              _PassUser::_PassUser($UserName);
+                _PassUser::_PassUser($UserName);
         }
         $this->_userid = $UserName;
         return $this;
     }
 
-    function userExists() {
+    function userExists()
+    {
         if (!$this->isValidName($this->_userid)) {
             return $this->_tryNextUser();
         }

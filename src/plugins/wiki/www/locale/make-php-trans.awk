@@ -1,5 +1,3 @@
-# $Id: make-php-trans.awk 8000 2011-03-16 16:56:03Z vargenau $
-
 BEGIN {
   msgid=""; msgstr="";
   print ("<?php\n");
@@ -30,6 +28,4 @@ END {
     gsub(/\$/, "\\$", str);
     print ("$locale[\"" msgid "\"] =\n   \"" str "\";");
   }
-  print ("\n?>");
 }
-

@@ -1,6 +1,5 @@
 // Ajax Javascript support functions, based on moacdropdown XmlHttp
 // Written from scratch by Reini Urban
-// $Id: ajax.js 7142 2009-09-17 10:50:20Z rurban $
 
 function showHide( id ) {
     this.init( id )

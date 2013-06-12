@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: PopUp.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * Copyright 2004 Nicolas Noble <pixels@users.sf.net>
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -44,55 +44,56 @@
  */
 
 class WikiPlugin_PopUp
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return _("PopUp");
-    }
-    function getDescription () {
-        return _("Used to create a clickable popup link.");
-    }
-    function getDefaultArguments() {
-        return array('link'        => "HomePage",
-                     'title'       => "",
-                     'text'        => "",
-                     'width'       => "500",
-                     'height'      => "400",
-                     'resizable'   => "no",
-                     'scrollbars'  => "no",
-                     'toolbar'     => "no",
-                     'location'    => "no",
-                     'directories' => "no",
-                     'status'      => "no",
-                     'menubar'     => "no",
-                     'copyhistory' => "no",
-                     'close'       => "no",
-                    );
+    function getDescription()
+    {
+        return _("Create a clickable popup link.");
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function getDefaultArguments()
+    {
+        return array('link' => "HomePage",
+            'title' => "",
+            'text' => "",
+            'width' => "500",
+            'height' => "400",
+            'resizable' => "no",
+            'scrollbars' => "no",
+            'toolbar' => "no",
+            'location' => "no",
+            'directories' => "no",
+            'status' => "no",
+            'menubar' => "no",
+            'copyhistory' => "no",
+            'close' => "no",
+        );
+    }
+
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         extract($this->getArgs($argstr, $request));
         return HTML::a(array('href' => WikiURL($link),
-                              'target' => "_blank",
-                              'onclick' => ($close == "yes" ? "window.close()" : ("window.open('" .
-                                  WikiURL($link) . "', '" .
-                                  ($title == "" ? ($text == "" ? $link : $text) : $title) . "', '" .
-                                  "width=$width," .
-                                  "height=$height," .
-                                  "resizable=$resizable," .
-                                  "scrollbars=$scrollbars," .
-                                  "toolbar=$toolbar," .
-                                  "location=$location," .
-                                  "directories=$directories," .
-                                  "status=$status," .
-                                  "menubar=$menubar," .
-                                  "copyhistory=$copyhistory')"
-                                  )) . ";return false;"
-                             ),
-                        ($text == "" ? ($close == "yes" ? "Close window" : $link) : $text)
-                       );
+                'target' => "_blank",
+                'onclick' => ($close == "yes" ? "window.close()" : ("window.open('" .
+                    WikiURL($link) . "', '" .
+                    ($title == "" ? ($text == "" ? $link : $text) : $title) . "', '" .
+                    "width=$width," .
+                    "height=$height," .
+                    "resizable=$resizable," .
+                    "scrollbars=$scrollbars," .
+                    "toolbar=$toolbar," .
+                    "location=$location," .
+                    "directories=$directories," .
+                    "status=$status," .
+                    "menubar=$menubar," .
+                    "copyhistory=$copyhistory')"
+                )) . ";return false;"
+            ),
+            ($text == "" ? ($close == "yes" ? "Close window" : $link) : $text)
+        );
     }
-};
+}
 
 // Local Variables:
 // mode: php

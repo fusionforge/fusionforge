@@ -1,6 +1,4 @@
 /**
- * $Id: fusionforge-print.css 8071 2011-05-18 14:56:14Z vargenau $
- *
  * Copyright (C) 2008 Alcatel-Lucent
  *
  * This file is part of PhpWiki.
@@ -42,31 +40,66 @@
  * ALONE BASIS."
  */
 
-/* Do not print the wiki navigation and edition bars */
-.toolpalettes { display: none; }
+/* Do not display the header and the navigation */
+header {
+    display: none;
+}
+
+nav {
+    display: none;
+}
+
+menu {
+    display: none;
+}
+
+/* Do not print debug */
+.debug {
+    display: none;
+}
 
 /* Do not print Page Trail line */
-.pagetrail { display: none; }
+.pagetrail {
+    display: none;
+}
 
 /* Do not print main wiki browse banner */
-.browsebanner { display: none; }
+.browsebanner {
+    display: none;
+}
 
 /* Do not print rateit widget */
-#rateit-widget-top { display: none; }
+#rateit-widget-top {
+    display: none;
+}
 
 /* Do not print date of last edition */
-.editdate { display: none; }
+.editdate {
+    display: none;
+}
 
 /* Print links in black */
-a { color: black; }
+a {
+    color: black;
+}
 
 /* Do not print icons in front of hyperlinks */
-a.interwiki img { display: none; }
-a.named-interwiki img { display: none; }
-a.namedurl img { display: none; }
+a.interwiki img {
+    display: none;
+}
+
+a.named-interwiki img {
+    display: none;
+}
+
+a.namedurl img {
+    display: none;
+}
 
 /* Do not print "none" sorting icon */
-img[src="/wiki/themes/fusionforge/buttons/no_order.png"] { display: none; }
+img[src="/wiki/themes/fusionforge/buttons/no_order.png"] {
+    display: none;
+}
 
 /**
  * Table of content
@@ -76,13 +109,19 @@ div.toc {
 }
 
 /* Do not print TOC toggle image */
-#toctoggle { display: none; }
+#toctoggle {
+    display: none;
+}
 
 div.toc p.toctitle, h1, h2, h3, h4, h5, h6 {
     border-bottom: 1px solid black;
 }
 
-h1 { font-weight: bold; }
+h1 {
+    font-weight: bold;
+    background: white;
+    color: black;
+}
 
 /*
 div.toclist a::after {

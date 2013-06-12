@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: PageHistory.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * Copyright 1999, 2000, 2001, 2002, 2007 $ThePhpWikiProgrammingTeam
  *
@@ -23,9 +23,10 @@
 require_once 'lib/plugin/RecentChanges.php';
 
 class _PageHistory_PageRevisionIter
-extends WikiDB_PageRevisionIterator
+    extends WikiDB_PageRevisionIterator
 {
-    function _PageHistory_PageRevisionIter($rev_iter, $params) {
+    function _PageHistory_PageRevisionIter($rev_iter, $params)
+    {
 
         $this->_iter = $rev_iter;
 
@@ -35,7 +36,7 @@ extends WikiDB_PageRevisionIterator
             $this->_since = $since;
 
         $this->_include_major = empty($exclude_major_revisions);
-        if (! $this->_include_major)
+        if (!$this->_include_major)
             $this->_include_minor = true;
         else
             $this->_include_minor = !empty($include_minor_revisions);
@@ -46,7 +47,8 @@ extends WikiDB_PageRevisionIterator
             $this->_limit = $limit;
     }
 
-    function next() {
+    function next()
+    {
         if (!$this->_iter)
             return false;
 
@@ -58,7 +60,7 @@ extends WikiDB_PageRevisionIterator
             $this->_limit--;
         }
 
-        while ( ($rev = $this->_iter->next()) ) {
+        while (($rev = $this->_iter->next())) {
             if (isset($this->_since) && $rev->get('mtime') < $this->_since) {
                 $this->free();
                 return false;
@@ -69,44 +71,48 @@ extends WikiDB_PageRevisionIterator
         return false;
     }
 
-
-    function free() {
+    function free()
+    {
         if ($this->_iter)
             $this->_iter->free();
         $this->_iter = false;
     }
 }
 
-
 class _PageHistory_HtmlFormatter
-extends _RecentChanges_HtmlFormatter
+    extends _RecentChanges_HtmlFormatter
 {
-    function include_versions_in_URLs() {
+    function include_versions_in_URLs()
+    {
         return true;
     }
 
-    function headline() {
+    function headline()
+    {
         return HTML(fmt("PageHistory for %s",
-                         WikiLink($this->_args['page'])),
-                     "\n",
-                     $this->rss_icon(),
-                     $this->rss2_icon(),
-                     $this->atom_icon(),
-                     $this->rdf_icon());
+                WikiLink($this->_args['page'])),
+            "\n",
+            $this->rss_icon(),
+            $this->rss2_icon(),
+            $this->atom_icon(),
+            $this->rdf_icon());
     }
 
-    function title() {
-        return "PageHistory:".$this->_args['page'];
+    function title()
+    {
+        return "PageHistory:" . $this->_args['page'];
     }
 
-    function empty_message () {
+    function empty_message()
+    {
         return _("No revisions found");
     }
 
-    function description() {
-        $button = HTML::input(array('type'  => 'submit',
-                                    'value' => _("compare revisions"),
-                                    'class' => 'wikiaction'));
+    function description()
+    {
+        $button = HTML::input(array('type' => 'submit',
+            'value' => _("compare revisions"),
+            'class' => 'wikiaction'));
 
         $js_desc = $no_js_desc = _RecentChanges_HtmlFormatter::description();
 
@@ -116,8 +122,8 @@ extends _RecentChanges_HtmlFormatter
         return IfJavaScript($js_desc, $no_js_desc);
     }
 
-
-    function format ($changes) {
+    function format($changes)
+    {
         $this->_itemcount = 0;
 
         $pagename = $this->_args['page'];
@@ -126,25 +132,24 @@ extends _RecentChanges_HtmlFormatter
         $fmt->action = _("PageHistory");
         $html[] = $fmt;
 
-        $html[] = HTML::input(array('type'  => 'hidden',
-                                    'name'  => 'action',
-                                    'value' => 'diff'));
+        $html[] = HTML::input(array('type' => 'hidden',
+            'name' => 'action',
+            'value' => 'diff'));
         if (USE_PATH_INFO) {
             $action = WikiURL($pagename);
-        }
-        else {
+        } else {
             $action = SCRIPT_NAME;
-            $html[] = HTML::input(array('type'  => 'hidden',
-                                        'name'  => 'pagename',
-                                        'value' => $pagename));
+            $html[] = HTML::input(array('type' => 'hidden',
+                'name' => 'pagename',
+                'value' => $pagename));
         }
 
         return HTML(HTML::form(array('method' => 'get',
-                                     'action' => $action,
-                                     'id'     => 'diff-select'),
-                               $html),
-                    "\n",
-                    JavaScript('
+                    'action' => $action,
+                    'id' => 'diff-select'),
+                $html),
+            "\n",
+            JavaScript('
         var diffCkBoxes = document.forms["diff-select"].elements["versions[]"];
 
         function diffCkBox_onclick() {
@@ -163,136 +168,142 @@ extends _RecentChanges_HtmlFormatter
             diffCkBoxes[i].onclick = diffCkBox_onclick;'));
     }
 
-    function diffLink ($rev) {
-        return HTML::input(array('type'  => 'checkbox',
-                                 'name'  => 'versions[]',
-                                 'value' => $rev->getVersion()));
+    function diffLink($rev)
+    {
+        return HTML::input(array('type' => 'checkbox',
+            'name' => 'versions[]',
+            'value' => $rev->getVersion()));
     }
 
-    function pageLink ($rev) {
+    function pageLink($rev, $link_text = false)
+    {
         $text = fmt("Version %d", $rev->getVersion());
         return _RecentChanges_HtmlFormatter::pageLink($rev, $text);
     }
 
-    function format_revision ($rev) {
+    function format_revision($rev)
+    {
         global $WikiTheme;
         $class = 'rc-' . $this->importance($rev);
 
         $time = $this->time($rev);
         if ($rev->get('is_minor_edit')) {
             $minor_flag = HTML(" ",
-                               HTML::span(array('class' => 'pageinfo-minoredit'),
-                                          "(" . _("minor edit") . ")"));
-        }
-        else {
+                HTML::span(array('class' => 'pageinfo-minoredit'),
+                    "(" . _("minor edit") . ")"));
+        } else {
             $time = HTML::span(array('class' => 'pageinfo-majoredit'), $time);
             $minor_flag = '';
         }
         $line = HTML::li(array('class' => $class));
-        if (isa($WikiTheme,'WikiTheme_MonoBook')) {
+        if (isa($WikiTheme, 'WikiTheme_MonoBook')) {
             $line->pushContent(
-                               $this->diffLink($rev), ' ',
-                               $this->pageLink($rev), ' ',
-                               $time,' ',$this->date($rev), ' . . ',
-                               $this->authorLink($rev),' ',
-                               $this->authorContribs($rev),' ',
-                               $this->summaryAsHTML($rev),' ',
-                               $minor_flag);
+                $this->diffLink($rev), ' ',
+                $this->pageLink($rev), ' ',
+                $time, ' ', $this->date($rev), ' . . ',
+                $this->authorLink($rev), ' ',
+                $this->authorContribs($rev), ' ',
+                $this->summaryAsHTML($rev), ' ',
+                $minor_flag);
         } else {
             $line->pushContent(
-                               $this->diffLink($rev), ' ',
-                               $this->pageLink($rev), ' ',
-                               $time, ' ',
-                               $this->summaryAsHTML($rev),
-                               ' ... ',
-                               $this->authorLink($rev),
-                               $minor_flag);
+                $this->diffLink($rev), ' ',
+                $this->pageLink($rev), ' ',
+                $time, ' ',
+                $this->summaryAsHTML($rev),
+                ' ... ',
+                $this->authorLink($rev),
+                $minor_flag);
         }
         return $line;
     }
 }
 
-
 class _PageHistory_RssFormatter
-extends _RecentChanges_RssFormatter
+    extends _RecentChanges_RssFormatter
 {
-    function include_versions_in_URLs() {
+    function include_versions_in_URLs()
+    {
         return true;
     }
 
-    function image_properties () {
+    function image_properties()
+    {
         return false;
     }
 
-    function textinput_properties () {
+    function textinput_properties()
+    {
         return false;
     }
 
-    function channel_properties () {
+    function channel_properties()
+    {
         global $request;
 
         $rc_url = WikiURL($request->getArg('pagename'), false, 'absurl');
 
         $title = sprintf(_("%s: %s"),
-                         WIKI_NAME,
-                         SplitPagename($this->_args['page']));
+            WIKI_NAME,
+            SplitPagename($this->_args['page']));
 
-        return array('title'          => $title,
-                     'dc:description' => _("History of changes."),
-                     'link'           => $rc_url,
-                     'dc:date'        => Iso8601DateTime(time()));
+        return array('title' => $title,
+            'dc:description' => _("History of changes."),
+            'link' => $rc_url,
+            'dc:date' => Iso8601DateTime(time()));
     }
 
-
-    function item_properties ($rev) {
+    function item_properties($rev)
+    {
         if (!($title = $this->summary($rev)))
             $title = sprintf(_("Version %d"), $rev->getVersion());
 
-        return array( 'title'           => $title,
-                      'link'            => $this->pageURL($rev),
-                      'dc:date'         => $this->time($rev),
-                      'dc:contributor'  => $rev->get('author'),
-                      'wiki:version'    => $rev->getVersion(),
-                      'wiki:importance' => $this->importance($rev),
-                      'wiki:status'     => $this->status($rev),
-                      'wiki:diff'       => $this->diffURL($rev),
-                      );
+        return array('title' => $title,
+            'link' => $this->pageURL($rev),
+            'dc:date' => $this->time($rev),
+            'dc:contributor' => $rev->get('author'),
+            'wiki:version' => $rev->getVersion(),
+            'wiki:importance' => $this->importance($rev),
+            'wiki:status' => $this->status($rev),
+            'wiki:diff' => $this->diffURL($rev),
+        );
     }
 }
 
 class WikiPlugin_PageHistory
-extends WikiPlugin_RecentChanges
+    extends WikiPlugin_RecentChanges
 {
-    function getName () {
-        return _("PageHistory");
+    function getDescription()
+    {
+        return sprintf(_("List PageHistory for %s."), '[pagename]');
     }
 
-    function getDescription () {
-        return sprintf(_("List PageHistory for %s"),'[pagename]');
+    function getDefaultArguments()
+    {
+        return array('days' => false,
+            'show_minor' => true,
+            'show_major' => true,
+            'limit' => false,
+            'page' => '[pagename]',
+            'format' => false);
     }
 
-    function getDefaultArguments() {
-        return array('days'         => false,
-                     'show_minor'   => true,
-                     'show_major'   => true,
-                     'limit'        => false,
-                     'page'         => '[pagename]',
-                     'format'       => false);
-    }
-
-    function getDefaultFormArguments() {
+    function getDefaultFormArguments()
+    {
         $dflts = WikiPlugin_RecentChanges::getDefaultFormArguments();
         $dflts['textinput'] = 'page';
         return $dflts;
     }
 
-    function getMostRecentParams ($args) {
+    function getMostRecentParams($args)
+    {
         $params = WikiPlugin_RecentChanges::getMostRecentParams($args);
         $params['include_all_revisions'] = true;
         return $params;
     }
 
-    function getChanges ($dbi, $args) {
+    function getChanges($dbi, $args)
+    {
         $page = $dbi->getPage($args['page']);
         $iter = $page->getAllRevisions();
         $params = $this->getMostRecentParams($args);
@@ -300,7 +311,8 @@ extends WikiPlugin_RecentChanges
         return new _PageHistory_PageRevisionIter($iter, $params);
     }
 
-    function format ($changes, $args) {
+    function format($changes, $args)
+    {
         global $WikiTheme;
         $format = $args['format'];
 
@@ -317,7 +329,8 @@ extends WikiPlugin_RecentChanges
         return $fmt->format($changes);
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $this->getArgs($argstr, $request);
         $pagename = $args['page'];
         if (empty($pagename))
@@ -326,14 +339,13 @@ extends WikiPlugin_RecentChanges
         $page = $dbi->getPage($pagename);
         $current = $page->getCurrentRevision();
         if ($current->getVersion() < 1) {
-            return HTML(HTML::p(fmt("I'm sorry, there is no such page as %s.",
-                                    WikiLink($pagename, 'unknown'))),
-                        $this->makeForm("", $request));
+            return HTML(HTML::p(fmt("Page “%s” does not exist.", WikiLink($pagename, 'unknown'))),
+                $this->makeForm("", $request));
         }
         // Hack alert: format() is a NORETURN for rss formatters.
         return $this->format($this->getChanges($dbi, $args), $args);
     }
-};
+}
 
 // Local Variables:
 // mode: php

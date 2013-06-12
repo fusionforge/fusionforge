@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: SqlResult.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  *
@@ -59,44 +59,45 @@
 require_once 'lib/PageList.php';
 
 class WikiPlugin_SqlResult
-extends WikiPlugin
+    extends WikiPlugin
 {
-    var $_args;
+    public $_args;
 
-    function getName () {
-        return _("SqlResult");
+    function getDescription()
+    {
+        return _("Display arbitrary SQL result tables.");
     }
 
-    function getDescription () {
-        return _("Display arbitrary SQL result tables");
-    }
-
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array(
-                     'alias'       => false, // DSN database specification
-                     'ordered'     => false, // if to display as <ol> list: single col only without template
-                     'template'    => false, // use a custom <theme>/template.tmpl
-                     'where'       => false, // custom filter for the query
-                     'sortby'      => false, // for paging, default none
-                     'limit'       => "0,50", // for paging, default: only the first 50
-                    );
+            'alias' => false, // DSN database specification
+            'ordered' => false, // if to display as <ol> list: single col only without template
+            'template' => false, // use a custom <theme>/template.tmpl
+            'where' => false, // custom filter for the query
+            'sortby' => false, // for paging, default none
+            'limit' => "0,50", // for paging, default: only the first 50
+        );
     }
 
-    function getDsn($alias) {
+    function getDsn($alias)
+    {
         $ini = parse_ini_file(FindFile("config/SqlResult.ini"));
         return $ini[$alias];
     }
 
     /** Get the SQL statement from the rest of the lines
      */
-    function handle_plugin_args_cruft($argstr, $args) {
-            $this->_sql = str_replace("\n"," ",$argstr);
+    function handle_plugin_args_cruft($argstr, $args)
+    {
+        $this->_sql = str_replace("\n", " ", $argstr);
         return;
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         global $DBParams;
-            //$request->setArg('nocache','1');
+        //$request->setArg('nocache','1');
         extract($this->getArgs($argstr, $request));
         if (!$alias)
             return $this->error(_("No DSN alias for SqlResult.ini specified"));
@@ -113,7 +114,7 @@ extends WikiPlugin
                 $sql = str_replace("%%limit%%", $limit, $sql);
             else {
                 if (strstr($sql, "LIMIT"))
-                    $sql = preg_replace("/LIMIT\s+[\d,]+\s+/m", "LIMIT ".$limit." ", $sql);
+                    $sql = preg_replace("/LIMIT\s+[\d,]+\s+/m", "LIMIT " . $limit . " ", $sql);
             }
         }
         if (strstr($sql, "%%sortby%%")) {
@@ -121,17 +122,17 @@ extends WikiPlugin
                 $sql = preg_replace("/ORDER BY .*%%sortby%%\s/m", "", $sql);
             else
                 $sql = str_replace("%%sortby%%", $sortby, $sql);
-        } elseif (PageList::sortby($sortby,'db')) { // add sorting: support paging sortby links
-            if (preg_match("/\sORDER\s/",$sql))
-                $sql = preg_replace("/ORDER BY\s\S+\s/m", "ORDER BY " . PageList::sortby($sortby,'db'), $sql);
+        } elseif (PageList::sortby($sortby, 'db')) { // add sorting: support paging sortby links
+            if (preg_match("/\sORDER\s/", $sql))
+                $sql = preg_replace("/ORDER BY\s\S+\s/m", "ORDER BY " . PageList::sortby($sortby, 'db'), $sql);
             else
-                $sql .= " ORDER BY " . PageList::sortby($sortby,'db');
+                $sql .= " ORDER BY " . PageList::sortby($sortby, 'db');
         }
 
         $inidsn = $this->getDsn($alias);
         if (!$inidsn)
             return $this->error(sprintf(_("No DSN for alias %s in SqlResult.ini found"),
-                                        $alias));
+                $alias));
         // adodb or pear? adodb as default, since we distribute per default it.
         // for pear there may be overrides.
         // TODO: native PDO support (for now we use ADODB)
@@ -139,7 +140,7 @@ extends WikiPlugin
             $dbh = DB::connect($inidsn);
             $all = $dbh->getAll($sql);
             if (DB::isError($all)) {
-                    return $this->error($all->getMessage(). ' ' . $all->userinfo);
+                return $this->error($all->getMessage() . ' ' . $all->userinfo);
             }
         } else { // unless PearDB use the included ADODB, regardless if dba, file or PDO, ...
             if ($DBParams['dbtype'] != 'ADODB') {
@@ -147,8 +148,8 @@ extends WikiPlugin
             }
             $parsed = parseDSN($inidsn);
             $dbh = &ADONewConnection($parsed['phptype']);
-            $conn = $dbh->Connect($parsed['hostspec'],$parsed['username'],
-                                  $parsed['password'], $parsed['database']);
+            $conn = $dbh->Connect($parsed['hostspec'], $parsed['username'],
+                $parsed['password'], $parsed['database']);
             if (!$conn)
                 return $this->error($dbh->errorMsg());
             $GLOBALS['ADODB_FETCH_MODE'] = ADODB_FETCH_ASSOC;
@@ -169,50 +170,50 @@ extends WikiPlugin
 
         if ($template) {
             $args = array_merge(
-                      array('SqlResult' => $all,   // the resulting array of rows
-                            'ordered' => $ordered, // whether to display as <ul>/<dt> or <ol>
-                            'where'   => $where,
-                            'sortby'  => $sortby,
-                            'limit'   => $limit),
-                      $args);                // paging params override given params
+                array('SqlResult' => $all, // the resulting array of rows
+                    'ordered' => $ordered, // whether to display as <ul>/<dt> or <ol>
+                    'where' => $where,
+                    'sortby' => $sortby,
+                    'limit' => $limit),
+                $args); // paging params override given params
             return Template($template, $args);
         } else {
             if ($ordered) {
-                $html = HTML::ol(array('class'=>'sqlresult'));
+                $html = HTML::ol(array('class' => 'sqlresult'));
                 if ($all)
-                  foreach ($all as $row) {
-                    $html->pushContent(HTML::li(array('class'=> $i++ % 2 ? 'evenrow' : 'oddrow'), $row[0]));
-                  }
+                    foreach ($all as $row) {
+                        $html->pushContent(HTML::li(array('class' => $i++ % 2 ? 'evenrow' : 'oddrow'), $row[0]));
+                    }
             } else {
-                $html = HTML::table(array('class'=>'sqlresult'));
+                $html = HTML::table(array('class' => 'sqlresult'));
                 $i = 0;
                 if ($all)
-                foreach ($all as $row) {
-                    $tr = HTML::tr(array('class'=> $i++ % 2 ? 'evenrow' : 'oddrow'));
-                    if ($row)
-                        foreach ($row as $col) {
-                            $tr->pushContent(HTML::td($col));
-                        }
-                    $html->pushContent($tr);
-                }
+                    foreach ($all as $row) {
+                        $tr = HTML::tr(array('class' => $i++ % 2 ? 'evenrow' : 'oddrow'));
+                        if ($row)
+                            foreach ($row as $col) {
+                                $tr->pushContent(HTML::td($col));
+                            }
+                        $html->pushContent($tr);
+                    }
             }
         }
         // do paging via pagelink template
         if (!empty($args['NUMPAGES'])) {
             $paging = Template("pagelink", $args);
             $html = $table->pushContent(HTML::thead($paging),
-                                        HTML::tbody($html),
-                                        HTML::tfoot($paging));
+                HTML::tbody($html),
+                HTML::tfoot($paging));
         }
         if (0 and DEBUG) { // test deferred error/warning/notice collapsing
-            trigger_error("test notice",  E_USER_NOTICE);
+            trigger_error("test notice", E_USER_NOTICE);
             trigger_error("test warning", E_USER_WARNING);
         }
 
         return $html;
     }
 
-};
+}
 
 // Local Variables:
 // mode: php

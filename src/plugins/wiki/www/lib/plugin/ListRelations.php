@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: ListRelations.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 2006 Reini Urban
  *
@@ -28,23 +28,25 @@ require_once 'lib/PageList.php';
  * @author: Reini Urban
  */
 class WikiPlugin_ListRelations
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName() {
-        return _("ListRelations");
+    function getDescription()
+    {
+        return _("Display the list of all defined relations and optionnally attributes in this entire wiki.");
     }
-    function getDescription() {
-        return _("Display the list of all defined relations and optionnally attributes in this entire wiki");
-    }
-    function getDefaultArguments() {
+
+    function getDefaultArguments()
+    {
         return array_merge
-            (
-             PageList::supportedArgs(), // paging and more.
-             array(
-                   'mode' => "relations" // or "attributes" or "all"
-                   ));
+        (
+            PageList::supportedArgs(), // paging and more.
+            array(
+                'mode' => "relations" // or "attributes" or "all"
+            ));
     }
-    function run ($dbi, $argstr, &$request, $basepage) {
+
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $this->getArgs($argstr, $request);
         extract($args);
         $pagelist = new PageList($info, $exclude, $args);
@@ -53,7 +55,7 @@ extends WikiPlugin
         return $pagelist;
     }
 
-};
+}
 
 // Local Variables:
 // mode: php

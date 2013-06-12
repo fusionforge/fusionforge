@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: TitleSearch.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * Copyright 1999,2000,2001,2002,2004,2005,2010 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -38,35 +38,35 @@ require_once 'lib/PageList.php';
  * like xx*, *xx, ^xx, xx$, ^word$.
  */
 class WikiPlugin_TitleSearch
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return _("TitleSearch");
-    }
-
-    function getDescription () {
+    function getDescription()
+    {
         return _("Search the titles of all pages in this wiki.");
     }
 
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array_merge
-            (
-             PageList::supportedArgs(), // paging and more.
-             array('s'             => false,
-                   'auto_redirect' => false,
-                   'noheader'      => false,
-                   'exclude'       => false,
-                   'info'          => false,
-                   'case_exact'    => false,
-                   'regex'         => 'auto',
-                   'format'        => false,
-                   ));
+        (
+            PageList::supportedArgs(), // paging and more.
+            array('s' => false,
+                'auto_redirect' => false,
+                'noheader' => false,
+                'exclude' => false,
+                'info' => false,
+                'case_exact' => false,
+                'regex' => 'auto',
+                'format' => false,
+            ));
     }
+
     // info arg allows multiple columns
     // info=mtime,hits,summary,version,author,locked,minor
     // exclude arg allows multiple pagenames exclude=Php*,RecentChanges
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $this->getArgs($argstr, $request);
         if (empty($args['s'])) {
             return HTML();
@@ -75,7 +75,7 @@ extends WikiPlugin
         // ^S != S*   ^  matches only beginning of phrase, not of word.
         //            x* matches any word beginning with x
         $query = new TextSearchQuery($args['s'], $args['case_exact'], $args['regex']);
-        $pages = $dbi->titleSearch($query,$args['sortby'],$args['limit'],$args['exclude']);
+        $pages = $dbi->titleSearch($query, $args['sortby'], $args['limit'], $args['exclude']);
 
         $pagelist = new PageList($args['info'], $args['exclude'], $args);
         $pagelist->addPages($pages);
@@ -89,9 +89,9 @@ extends WikiPlugin
                 $s = WikiLink($args['s'], 'auto');
             }
             if ($total) {
-                $pagelist->setCaption(fmt("Title search results for '%s' (%d total)", $s, $total));
+                $pagelist->setCaption(fmt("Title search results for “%s” (%d total)", $s, $total));
             } else {
-                $pagelist->setCaption(fmt("Title search results for '%s'", $s));
+                $pagelist->setCaption(fmt("Title search results for “%s”", $s));
             }
         }
 
@@ -102,7 +102,7 @@ extends WikiPlugin
 
         return $pagelist;
     }
-};
+}
 
 // Local Variables:
 // mode: php

@@ -1,4 +1,4 @@
-<?php // -*-php-*- // $Id: LdapSearch.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
 /**
  * Copyright 2004 John Lines
  * Copyright 2007 $ThePhpWikiProgrammingTeam
@@ -28,49 +28,49 @@
  * TODO: Return a pagelist on certain attributes
  *
  * Usage Samples:
-  <<LdapSearch>>
-  <<LdapSearch
-           host="localhost"
-           port=389
-           basedn=""
-            filter="(cn=*)"
-           attributes=""
-  >>
-  <<LdapSearch host=ldap.example.com filter="(ou=web-team)"
-                      attributes="sn cn telephonenumber" >>
-  <<LdapSearch host="ldap.itd.umich.edu" basedn="" filter="(sn=jensen)" attributes="cn drink" >>
-  <<LdapSearch host=ldap.example.com attributes="cn sn telephonenumber" >>
-  <<LdapSearch host=bugs.debian.org port=10101 basedn="dc=current,dc=bugs,dc=debian,dc=org"
-                      filter="(debbugsPackage=phpwiki)"
-                      attributes="debbugsSeverity debbugsState debbugsTitle" >>
-
+<<LdapSearch>>
+<<LdapSearch
+host="localhost"
+port=389
+basedn=""
+filter="(cn=*)"
+attributes=""
+>>
+<<LdapSearch host=ldap.example.com filter="(ou=web-team)"
+attributes="sn cn telephonenumber" >>
+<<LdapSearch host="ldap.itd.umich.edu" basedn="" filter="(sn=jensen)" attributes="cn drink" >>
+<<LdapSearch host=ldap.example.com attributes="cn sn telephonenumber" >>
+<<LdapSearch host=bugs.debian.org port=10101 basedn="dc=current,dc=bugs,dc=debian,dc=org"
+filter="(debbugsPackage=phpwiki)"
+attributes="debbugsSeverity debbugsState debbugsTitle" >>
  * @author John Lines
  */
 
 class WikiPlugin_LdapSearch
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return _("LdapSearch");
+    function getDescription()
+    {
+        return _("Search an LDAP directory.");
     }
-    function getDescription () {
-        return _("Search an LDAP directory");
-    }
-    function getDefaultArguments() {
-        return array('host'         => "",                 // default: LDAP_AUTH_HOST
-                     'port'         => 389,                // ignored if host = full uri
-                     'basedn'         => "",                // LDAP_BASE_DN
-                     'filter'   => "(cn=*)",
-                     'attributes' => "",
-                     'user'     => '',
-                     'password' => '',
-                     'options'   => "",
-                     );
+
+    function getDefaultArguments()
+    {
+        return array('host' => "", // default: LDAP_AUTH_HOST
+            'port' => 389, // ignored if host = full uri
+            'basedn' => "", // LDAP_BASE_DN
+            'filter' => "(cn=*)",
+            'attributes' => "",
+            'user' => '',
+            'password' => '',
+            'options' => "",
+        );
     }
 
     // I ought to require the ldap extension, but fail sanely, if I cant get it.
     // - however at the moment this seems to work as is
-    function run($dbi, $argstr, $request) {
+    function run($dbi, $argstr, $request)
+    {
         if (!function_exists('ldap_connect')) {
             if (!loadPhpExtension('ldap'))
                 return $this->error(_("Missing ldap extension"));
@@ -142,25 +142,27 @@ extends WikiPlugin
 
         // If we were given attributes then we return them in the order given
         // else take all
-        if ( !$attributes ) {
+        if (!$attributes) {
             $attr_array = array();
-            for ($ii=0; $ii < $entries[0]["count"]; $ii++) {
-                    $data = $entries[0][$ii];
-                    $attr_array[] = $data;
+            for ($ii = 0; $ii < $entries[0]["count"]; $ii++) {
+                $data = $entries[0][$ii];
+                $attr_array[] = $data;
             }
         }
-        for ($i=0; $i < count($attr_array) ; $i++) { $attrcols[$i] = 0; }
+        for ($i = 0; $i < count($attr_array); $i++) {
+            $attrcols[$i] = 0;
+        }
         // Work out how many columns we need for each attribute. objectclass has more
-        for ($i=0; $i<$entries[0]["count"]; $i++) {
-                $data = $entries[0][$i];
-                $datalen = $entries[0][$data]["count"];
-                if ($attrcols[$i] < $datalen) {
-                    $attrcols[$i] = $datalen;
-                }
+        for ($i = 0; $i < $entries[0]["count"]; $i++) {
+            $data = $entries[0][$i];
+            $datalen = $entries[0][$data]["count"];
+            if ($attrcols[$i] < $datalen) {
+                $attrcols[$i] = $datalen;
+            }
         }
         // Print the headers
         $row = HTML::tr();
-        for ($i=0; $i < count($attr_array) ; $i++) {
+        for ($i = 0; $i < count($attr_array); $i++) {
             // span subcolumns, like objectclass
             if ($attrcols[$i] > 1)
                 $row->pushContent(HTML::th(array('colspan' => $attrcols[$i]), $attr_array[$i]));
@@ -171,18 +173,21 @@ extends WikiPlugin
 
         // Print the data rows
         for ($currow = 0; $currow < $entries["count"]; $currow++) {
-            $row = HTML::tr(); $nc=0;
+            $row = HTML::tr();
+            $nc = 0;
             // columns
-            for ($i=0; $i < count($attr_array); $i++){
-                    $colname = $attr_array[$i];
+            for ($i = 0; $i < count($attr_array); $i++) {
+                $colname = $attr_array[$i];
                 $data = @$entries[$currow][$colname];
                 if ($data and $data["count"] > 0) {
                     // subcolumns, e.g. for objectclass
-                    for ($iii=0; $iii < $data["count"]; $iii++) {
-                      $row->pushContent(HTML::td($data[$iii])); $nc++;
+                    for ($iii = 0; $iii < $data["count"]; $iii++) {
+                        $row->pushContent(HTML::td($data[$iii]));
+                        $nc++;
                     }
                 } else {
-                    $row->pushContent(HTML::td("")); $nc++;
+                    $row->pushContent(HTML::td(""));
+                    $nc++;
                 }
                 // Make up some blank cells if required to pad this row
                 /*for ( $j=0 ; $j < ($attrcols[$ii] - $nc); $j++ ) {
@@ -191,9 +196,9 @@ extends WikiPlugin
             }
             $html->pushContent($row);
         }
-        return HTML::table(array('cellpadding' => 1,'cellspacing' => 1, 'border' => 1), $html);
+        return HTML::table(array('cellpadding' => 1, 'cellspacing' => 1, 'border' => 1), $html);
     }
-};
+}
 
 // Local Variables:
 // mode: php

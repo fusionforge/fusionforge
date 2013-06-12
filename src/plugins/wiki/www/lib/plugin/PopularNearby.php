@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: PopularNearby.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  *
@@ -34,59 +34,57 @@
 
 */
 
-
 require_once 'lib/PageList.php';
 
 class WikiPlugin_PopularNearby
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return _("PopularNearby");
-    }
-
-    function getDescription () {
+    function getDescription()
+    {
         return _("List the most popular pages nearby.");
     }
 
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array('pagename' => '[pagename]',
-                     'mode'     => 'nearby', // or 'incoming' or 'outgoing'
-                     //'exclude'  => false,  // not yet
-                     'limit'    => 5,
-                     'noheader' => 0,
-                    );
+            'mode' => 'nearby', // or 'incoming' or 'outgoing'
+            //'exclude'  => false,  // not yet
+            'limit' => 5,
+            'noheader' => 0,
+        );
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
-            $args = $this->getArgs($argstr, $request);
+    function run($dbi, $argstr, &$request, $basepage)
+    {
+        $args = $this->getArgs($argstr, $request);
         extract($args);
         $header = '';
         $page = $dbi->getPage($pagename);
         switch ($mode) {
-        case 'incoming': // not the hits, but the number of links
-            if (! $noheader )
-                $header = sprintf(_("%d best incoming links: "),$limit);
-            $links = $this->sortedLinks($page->getLinks("reversed"),"reversed",$limit);
-            break;
-        case 'outgoing': // not the hits, but the number of links
-            if (! $noheader )
-                $header = sprintf(_("%d best outgoing links: "),$limit);
-            $links = $this->sortedLinks($page->getLinks(),false,$limit);
-            break;
-        case 'nearby':  // all linksfrom and linksto, sorted by hits
-            if (! $noheader )
-                $header = sprintf(_("%d most popular nearby: "),$limit);
-            $inlinks = $page->getLinks();
-            $outlinks = $page->getLinks('reversed');
-            // array_merge doesn't sort out duplicate page objects here.
-            $links = $this->sortedLinks(array_merge($inlinks->asArray(),
-                                                    $outlinks->asArray()),
-                                        false, $limit);
-            break;
+            case 'incoming': // not the hits, but the number of links
+                if (!$noheader)
+                    $header = sprintf(_("%d best incoming links: "), $limit);
+                $links = $this->sortedLinks($page->getLinks("reversed"), "reversed", $limit);
+                break;
+            case 'outgoing': // not the hits, but the number of links
+                if (!$noheader)
+                    $header = sprintf(_("%d best outgoing links: "), $limit);
+                $links = $this->sortedLinks($page->getLinks(), false, $limit);
+                break;
+            case 'nearby': // all linksfrom and linksto, sorted by hits
+                if (!$noheader)
+                    $header = sprintf(_("%d most popular nearby: "), $limit);
+                $inlinks = $page->getLinks();
+                $outlinks = $page->getLinks('reversed');
+                // array_merge doesn't sort out duplicate page objects here.
+                $links = $this->sortedLinks(array_merge($inlinks->asArray(),
+                        $outlinks->asArray()),
+                    false, $limit);
+                break;
         }
         $html = HTML($header);
-        for ($i=0; $i<count($links); $i++) {
-            $html->pushContent($links[$i]['format'],$i<count($links)-1?', ':'');
+        for ($i = 0; $i < count($links); $i++) {
+            $html->pushContent($links[$i]['format'], $i < count($links) - 1 ? ', ' : '');
         }
         return $html;
     }
@@ -102,10 +100,12 @@ extends WikiPlugin
      * @param $pages array of WikiDB_Page's or a Page_iterator
      * @param $direction boolean: true if incoming links
      *
+     * @param int $limit
      * @return Array of sorted links
      */
-    function sortedLinks($pages, $direction=false, $limit=5) {
-            $links = array();
+    function sortedLinks($pages, $direction = false, $limit = 5)
+    {
+        $links = array();
         if (is_array($pages)) {
             $already = array(); // need special duplicate check
             foreach ($pages as $page) {
@@ -115,8 +115,8 @@ extends WikiPlugin
                 $hits = $page->get('hits');
                 if (!$hits) continue;
                 $links[] = array('hits' => $hits,
-                                 'pagename' => $page->_pagename,
-                                 'format' => HTML(WikiLink($page->_pagename),' (' . $hits . ')'));
+                    'pagename' => $page->_pagename,
+                    'format' => HTML(WikiLink($page->_pagename), ' (' . $hits . ')'));
             }
         } else {
             while ($page = $pages->next()) {
@@ -127,8 +127,8 @@ extends WikiPlugin
                 if (!$score) continue;
                 $name = $page->_pagename;
                 $links[] = array('hits' => $score,
-                                 'pagename' => $name,
-                                 'format' => HTML(WikiLink($name),' (' . $score . ')'));
+                    'pagename' => $name,
+                    'format' => HTML(WikiLink($name), ' (' . $score . ')'));
             }
             $pages->free();
         }
@@ -137,19 +137,20 @@ extends WikiPlugin
         return $this->sortByHits($links);
     }
 
-    function sortByHits($links) {
+    function sortByHits($links)
+    {
         if (!$links) return array();
-        usort($links,'cmp_by_hits'); // php-4.0.6 cannot use methods
+        usort($links, 'cmp_by_hits'); // php-4.0.6 cannot use methods
         reset($links);
         return $links;
     }
-};
-
-function cmp_by_hits($a, $b) {
-     if ($a['hits'] == $b['hits']) return 0;
-     return $a['hits'] < $b['hits'] ? 1 : -1;
 }
 
+function cmp_by_hits($a, $b)
+{
+    if ($a['hits'] == $b['hits']) return 0;
+    return $a['hits'] < $b['hits'] ? 1 : -1;
+}
 
 // Local Variables:
 // mode: php

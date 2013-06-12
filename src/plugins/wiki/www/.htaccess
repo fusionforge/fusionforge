@@ -1,5 +1,3 @@
-# $Id: .htaccess 6201 2008-08-26 13:02:33Z vargenau $
-
 <IfModule mod_php4.c>
 
 # For added security (and PhpWiki debugging purposes) you may want to 

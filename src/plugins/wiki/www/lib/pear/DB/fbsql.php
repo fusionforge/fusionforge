@@ -1,144 +1,194 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker: */
-// +----------------------------------------------------------------------+
-// | PHP Version 4                                                        |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2004 The PHP Group                                |
-// +----------------------------------------------------------------------+
-// | This source file is subject to version 2.02 of the PHP license,      |
-// | that is bundled with this package in the file LICENSE, and is        |
-// | available at through the world-wide-web at                           |
-// | http://www.php.net/license/2_02.txt.                                 |
-// | If you did not receive a copy of the PHP license and are unable to   |
-// | obtain it through the world-wide-web, please send a note to          |
-// | license@php.net so we can mail you a copy immediately.               |
-// +----------------------------------------------------------------------+
-// | Author: Frank M. Kromann <frank@frontbase.com>                       |
-// | Maintainer: Daniel Convissor <danielc@php.net>                       |
-// +----------------------------------------------------------------------+
-//
-// $Id: fbsql.php 7703 2010-09-21 06:28:07Z rurban $
 
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
-// XXX legend:
-//
-// XXX ERRORMSG: The error message from the fbsql function should
-//               be registered here.
-//
-// TODO/wishlist:
-// longReadlen
-// binmode
+/**
+ * The PEAR DB driver for PHP's fbsql extension
+ * for interacting with FrontBase databases
+ *
+ * PHP versions 4 and 5
+ *
+ * LICENSE: This source file is subject to version 3.0 of the PHP license
+ * that is available through the world-wide-web at the following URI:
+ * http://www.php.net/license/3_0.txt.  If you did not receive a copy of
+ * the PHP License and are unable to obtain it through the web, please
+ * send a note to license@php.net so we can mail you a copy immediately.
+ *
+ * @category   Database
+ * @package    DB
+ * @author     Frank M. Kromann <frank@frontbase.com>
+ * @author     Daniel Convissor <danielc@php.net>
+ * @copyright  1997-2007 The PHP Group
+ * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
+ * @version    CVS: $Id: fbsql.php 239211 2007-07-06 05:19:21Z aharvey $
+ * @link       http://pear.php.net/package/DB
+ */
 
-
+/**
+ * Obtain the DB_common class so it can be extended from
+ */
 require_once 'DB/common.php';
 
 /**
- * Database independent query interface definition for PHP's FrontBase
- * extension.
+ * The methods PEAR DB uses to interact with PHP's fbsql extension
+ * for interacting with FrontBase databases
  *
- * @package  DB
- * @version  $Id: fbsql.php 7703 2010-09-21 06:28:07Z rurban $
- * @category Database
- * @author   Frank M. Kromann <frank@frontbase.com>
+ * These methods overload the ones declared in DB_common.
+ *
+ * @category   Database
+ * @package    DB
+ * @author     Frank M. Kromann <frank@frontbase.com>
+ * @author     Daniel Convissor <danielc@php.net>
+ * @copyright  1997-2007 The PHP Group
+ * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
+ * @version    Release: 1.7.14
+ * @link       http://pear.php.net/package/DB
+ * @since      Class functional since Release 1.7.0
  */
 class DB_fbsql extends DB_common
 {
     // {{{ properties
 
+    /**
+     * The DB driver type (mysql, oci8, odbc, etc.)
+     * @var string
+     */
+    var $phptype = 'fbsql';
+
+    /**
+     * The database syntax variant to be used (db2, access, etc.), if any
+     * @var string
+     */
+    var $dbsyntax = 'fbsql';
+
+    /**
+     * The capabilities of this DB implementation
+     *
+     * The 'new_link' element contains the PHP version that first provided
+     * new_link support for this DBMS.  Contains false if it's unsupported.
+     *
+     * Meaning of the 'limit' element:
+     *   + 'emulate' = emulate with fetch row by number
+     *   + 'alter'   = alter the query
+     *   + false     = skip rows
+     *
+     * @var array
+     */
+    var $features = array(
+        'limit'         => 'alter',
+        'new_link'      => false,
+        'numrows'       => true,
+        'pconnect'      => true,
+        'prepare'       => false,
+        'ssl'           => false,
+        'transactions'  => true,
+    );
+
+    /**
+     * A mapping of native error codes to DB error codes
+     * @var array
+     */
+    var $errorcode_map = array(
+         22 => DB_ERROR_SYNTAX,
+         85 => DB_ERROR_ALREADY_EXISTS,
+        108 => DB_ERROR_SYNTAX,
+        116 => DB_ERROR_NOSUCHTABLE,
+        124 => DB_ERROR_VALUE_COUNT_ON_ROW,
+        215 => DB_ERROR_NOSUCHFIELD,
+        217 => DB_ERROR_INVALID_NUMBER,
+        226 => DB_ERROR_NOSUCHFIELD,
+        231 => DB_ERROR_INVALID,
+        239 => DB_ERROR_TRUNCATED,
+        251 => DB_ERROR_SYNTAX,
+        266 => DB_ERROR_NOT_FOUND,
+        357 => DB_ERROR_CONSTRAINT_NOT_NULL,
+        358 => DB_ERROR_CONSTRAINT,
+        360 => DB_ERROR_CONSTRAINT,
+        361 => DB_ERROR_CONSTRAINT,
+    );
+
+    /**
+     * The raw database connection created by PHP
+     * @var resource
+     */
     var $connection;
-    var $phptype, $dbsyntax;
-    var $prepare_tokens = array();
-    var $prepare_types = array();
-    var $num_rows = array();
-    var $fetchmode = DB_FETCHMODE_ORDERED; /* Default fetch mode */
+
+    /**
+     * The DSN information for connecting to a database
+     * @var array
+     */
+    var $dsn = array();
+
 
     // }}}
     // {{{ constructor
 
     /**
-     * DB_fbsql constructor.
+     * This constructor calls <kbd>$this->DB_common()</kbd>
      *
-     * @access public
+     * @return void
      */
     function DB_fbsql()
     {
         $this->DB_common();
-        $this->phptype = 'fbsql';
-        $this->dbsyntax = 'fbsql';
-        $this->features = array(
-            'prepare' => false,
-            'pconnect' => true,
-            'transactions' => true,
-            'limit' => 'emulate'
-        );
-        $this->errorcode_map = array(
-            1004 => DB_ERROR_CANNOT_CREATE,
-            1005 => DB_ERROR_CANNOT_CREATE,
-            1006 => DB_ERROR_CANNOT_CREATE,
-            1007 => DB_ERROR_ALREADY_EXISTS,
-            1008 => DB_ERROR_CANNOT_DROP,
-            1046 => DB_ERROR_NODBSELECTED,
-            1050 => DB_ERROR_ALREADY_EXISTS,
-            1051 => DB_ERROR_NOSUCHTABLE,
-            1054 => DB_ERROR_NOSUCHFIELD,
-            1062 => DB_ERROR_ALREADY_EXISTS,
-            1064 => DB_ERROR_SYNTAX,
-            1100 => DB_ERROR_NOT_LOCKED,
-            1136 => DB_ERROR_VALUE_COUNT_ON_ROW,
-            1146 => DB_ERROR_NOSUCHTABLE,
-        );
     }
 
     // }}}
     // {{{ connect()
 
     /**
-     * Connect to a database and log in as the specified user.
+     * Connect to the database server, log in and open the database
      *
-     * @param $dsn the data source name (see DB::parseDSN for syntax)
-     * @param $persistent (optional) whether the connection should
-     *        be persistent
-     * @access public
-     * @return int DB_OK on success, a DB error on failure
+     * Don't call this method directly.  Use DB::connect() instead.
+     *
+     * @param array $dsn         the data source name
+     * @param bool  $persistent  should the connection be persistent?
+     *
+     * @return int  DB_OK on success. A DB_Error object on failure.
      */
-    function connect($dsninfo, $persistent = false)
+    function connect($dsn, $persistent = false)
     {
-        if (!DB::assertExtension('fbsql')) {
+        if (!PEAR::loadExtension('fbsql')) {
             return $this->raiseError(DB_ERROR_EXTENSION_NOT_FOUND);
         }
 
-        $this->dsn = $dsninfo;
-        $dbhost = $dsninfo['hostspec'] ? $dsninfo['hostspec'] : 'localhost';
+        $this->dsn = $dsn;
+        if ($dsn['dbsyntax']) {
+            $this->dbsyntax = $dsn['dbsyntax'];
+        }
 
-        $php_errormsg = '';
+        $params = array(
+            $dsn['hostspec'] ? $dsn['hostspec'] : 'localhost',
+            $dsn['username'] ? $dsn['username'] : null,
+            $dsn['password'] ? $dsn['password'] : null,
+        );
+
         $connect_function = $persistent ? 'fbsql_pconnect' : 'fbsql_connect';
 
-        if ($dbhost && $dsninfo['username'] && $dsninfo['password']) {
-            $conn = @$connect_function($dbhost, $dsninfo['username'],
-                                       $dsninfo['password']);
-        } elseif ($dbhost && $dsninfo['username']) {
-            $conn = @$connect_function($dbhost, $dsninfo['username']);
-        } elseif ($dbhost) {
-            $conn = @$connect_function($dbhost);
+        $ini = ini_get('track_errors');
+        $php_errormsg = '';
+        if ($ini) {
+            $this->connection = @call_user_func_array($connect_function,
+                                                      $params);
         } else {
-            $conn = false;
-        }
-        if (!$conn) {
-            if (empty($php_errormsg)) {
-                return $this->raiseError(DB_ERROR_CONNECT_FAILED);
-            } else {
-                return $this->raiseError(DB_ERROR_CONNECT_FAILED, null, null,
-                                         null, $php_errormsg);
-            }
+            @ini_set('track_errors', 1);
+            $this->connection = @call_user_func_array($connect_function,
+                                                      $params);
+            @ini_set('track_errors', $ini);
         }
 
-        if ($dsninfo['database']) {
-            if (!fbsql_select_db($dsninfo['database'], $conn)) {
+        if (!$this->connection) {
+            return $this->raiseError(DB_ERROR_CONNECT_FAILED,
+                                     null, null, null,
+                                     $php_errormsg);
+        }
+
+        if ($dsn['database']) {
+            if (!@fbsql_select_db($dsn['database'], $this->connection)) {
                 return $this->fbsqlRaiseError();
             }
         }
 
-        $this->connection = $conn;
         return DB_OK;
     }
 
@@ -146,11 +196,9 @@ class DB_fbsql extends DB_common
     // {{{ disconnect()
 
     /**
-     * Log out and disconnect from the database.
+     * Disconnects from the database server
      *
-     * @access public
-     *
-     * @return bool true on success, false if not connected.
+     * @return bool  TRUE on success, FALSE on failure
      */
     function disconnect()
     {
@@ -163,16 +211,13 @@ class DB_fbsql extends DB_common
     // {{{ simpleQuery()
 
     /**
-     * Send a query to fbsql and return the results as a fbsql resource
-     * identifier.
+     * Sends a query to the database server
      *
-     * @param the SQL query
+     * @param string  the SQL query string
      *
-     * @access public
-     *
-     * @return mixed returns a valid fbsql result for successful SELECT
-     * queries, DB_OK for other successful queries.  A DB error is
-     * returned on failure.
+     * @return mixed  + a PHP result resrouce for successful SELECT queries
+     *                + the DB_OK constant for other successful queries
+     *                + a DB_Error object on failure
      */
     function simpleQuery($query)
     {
@@ -184,14 +229,9 @@ class DB_fbsql extends DB_common
         }
         // Determine which queries that should return data, and which
         // should return an error code only.
-        if (DB::isManip($query)) {
+        if ($this->_checkManip($query)) {
             return DB_OK;
         }
-        $numrows = $this->numrows($result);
-        if (is_object($numrows)) {
-            return $numrows;
-        }
-        $this->num_rows[$result] = $numrows;
         return $result;
     }
 
@@ -216,24 +256,26 @@ class DB_fbsql extends DB_common
     // {{{ fetchInto()
 
     /**
-     * Fetch a row and insert the data into an existing array.
+     * Places a row from the result set into the given array
      *
      * Formating of the array and the data therein are configurable.
      * See DB_result::fetchInto() for more information.
      *
-     * @param resource $result query result identifier
-     * @param array    $arr    (reference) array where data from the row
-     *                            should be placed
-     * @param int $fetchmode how the resulting array should be indexed
-     * @param int $rownum    the row number to fetch
+     * This method is not meant to be called directly.  Use
+     * DB_result::fetchInto() instead.  It can't be declared "protected"
+     * because DB_result is a separate object.
      *
-     * @return mixed DB_OK on success, null when end of result set is
-     *               reached or on failure
+     * @param resource $result    the query result resource
+     * @param array    $arr       the referenced array to put the data in
+     * @param int      $fetchmode how the resulting array should be indexed
+     * @param int      $rownum    the row number to fetch (0 = first row)
+     *
+     * @return mixed  DB_OK on success, NULL when the end of a result set is
+     *                 reached or on failure
      *
      * @see DB_result::fetchInto()
-     * @access private
      */
-    function fetchInto($result, &$arr, $fetchmode, $rownum=null)
+    function fetchInto($result, &$arr, $fetchmode, $rownum = null)
     {
         if ($rownum !== null) {
             if (!@fbsql_data_seek($result, $rownum)) {
@@ -249,11 +291,7 @@ class DB_fbsql extends DB_common
             $arr = @fbsql_fetch_row($result);
         }
         if (!$arr) {
-            $errno = @fbsql_errno($this->connection);
-            if (!$errno) {
-                return null;
-            }
-            return $this->fbsqlRaiseError($errno);
+            return null;
         }
         if ($this->options['portability'] & DB_PORTABILITY_RTRIM) {
             $this->_rtrimArrayValues($arr);
@@ -268,22 +306,34 @@ class DB_fbsql extends DB_common
     // {{{ freeResult()
 
     /**
-     * Free the internal resources associated with $result.
+     * Deletes the result set and frees the memory occupied by the result set
      *
-     * @param $result fbsql result identifier
+     * This method is not meant to be called directly.  Use
+     * DB_result::free() instead.  It can't be declared "protected"
+     * because DB_result is a separate object.
      *
-     * @access public
+     * @param resource $result  PHP's query result resource
      *
-     * @return bool true on success, false if $result is invalid
+     * @return bool  TRUE on success, FALSE if $result is invalid
+     *
+     * @see DB_result::free()
      */
     function freeResult($result)
     {
-        return @fbsql_free_result($result);
+        return is_resource($result) ? fbsql_free_result($result) : false;
     }
 
     // }}}
     // {{{ autoCommit()
 
+    /**
+     * Enables or disables automatic commits
+     *
+     * @param bool $onoff  true turns it on, false turns it off
+     *
+     * @return int  DB_OK on success.  A DB_Error object if the driver
+     *               doesn't support auto-committing transactions.
+     */
     function autoCommit($onoff=false)
     {
         if ($onoff) {
@@ -296,39 +346,51 @@ class DB_fbsql extends DB_common
     // }}}
     // {{{ commit()
 
+    /**
+     * Commits the current transaction
+     *
+     * @return int  DB_OK on success.  A DB_Error object on failure.
+     */
     function commit()
     {
-        @fbsql_commit();
+        @fbsql_commit($this->connection);
     }
 
     // }}}
     // {{{ rollback()
 
+    /**
+     * Reverts the current transaction
+     *
+     * @return int  DB_OK on success.  A DB_Error object on failure.
+     */
     function rollback()
     {
-        @fbsql_rollback();
+        @fbsql_rollback($this->connection);
     }
 
     // }}}
     // {{{ numCols()
 
     /**
-     * Get the number of columns in a result set.
+     * Gets the number of columns in a result set
      *
-     * @param $result fbsql result identifier
+     * This method is not meant to be called directly.  Use
+     * DB_result::numCols() instead.  It can't be declared "protected"
+     * because DB_result is a separate object.
      *
-     * @access public
+     * @param resource $result  PHP's query result resource
      *
-     * @return int the number of columns per row in $result
+     * @return int  the number of columns.  A DB_Error object on failure.
+     *
+     * @see DB_result::numCols()
      */
     function numCols($result)
     {
         $cols = @fbsql_num_fields($result);
-
         if (!$cols) {
             return $this->fbsqlRaiseError();
         }
-
         return $cols;
     }
 
@@ -336,13 +398,17 @@ class DB_fbsql extends DB_common
     // {{{ numRows()
 
     /**
-     * Get the number of rows in a result set.
+     * Gets the number of rows in a result set
      *
-     * @param $result fbsql result identifier
+     * This method is not meant to be called directly.  Use
+     * DB_result::numRows() instead.  It can't be declared "protected"
+     * because DB_result is a separate object.
      *
-     * @access public
+     * @param resource $result  PHP's query result resource
      *
-     * @return int the number of rows in $result
+     * @return int  the number of rows.  A DB_Error object on failure.
+     *
+     * @see DB_result::numRows()
      */
     function numRows($result)
     {
@@ -357,14 +423,15 @@ class DB_fbsql extends DB_common
     // {{{ affectedRows()
 
     /**
-     * Gets the number of rows affected by the data manipulation
-     * query.  For other queries, this function returns 0.
+     * Determines the number of rows affected by a data maniuplation query
      *
-     * @return number of rows affected by the last query
+     * 0 is returned for queries that don't manipulate data.
+     *
+     * @return int  the number of rows.  A DB_Error object on failure.
      */
     function affectedRows()
     {
-        if (DB::isManip($this->last_query)) {
+        if ($this->_last_query_manip) {
             $result = @fbsql_affected_rows($this->connection);
         } else {
             $result = 0;
@@ -373,43 +440,29 @@ class DB_fbsql extends DB_common
      }
 
     // }}}
-    // {{{ errorNative()
-
-    /**
-     * Get the native error code of the last error (if any) that
-     * occured on the current connection.
-     *
-     * @access public
-     *
-     * @return int native fbsql error code
-     */
-    function errorNative()
-    {
-        return @fbsql_errno($this->connection);
-    }
-
-    // }}}
     // {{{ nextId()
 
     /**
      * Returns the next free id in a sequence
      *
-     * @param string  $seq_name name of the sequence
-     * @param boolean $ondemand when true, the seqence is automatically
-     *                           created if it does not exist
+     * @param string  $seq_name  name of the sequence
+     * @param boolean $ondemand  when true, the seqence is automatically
+     *                            created if it does not exist
      *
-     * @return int the next id number in the sequence.  DB_Error if problem.
+     * @return int  the next id number in the sequence.
+     *               A DB_Error object on failure.
      *
-     * @internal
-     * @see DB_common::nextID()
-     * @access public
+     * @see DB_common::nextID(), DB_common::getSequenceName(),
+     *      DB_fbsql::createSequence(), DB_fbsql::dropSequence()
      */
     function nextId($seq_name, $ondemand = true)
     {
         $seqname = $this->getSequenceName($seq_name);
-        $repeat = 0;
         do {
-            $result = $this->query("INSERT INTO ${seqname} VALUES(NULL)");
+            $repeat = 0;
+            $this->pushErrorHandling(PEAR_ERROR_RETURN);
+            $result = $this->query('SELECT UNIQUE FROM ' . $seqname);
+            $this->popErrorHandling();
             if ($ondemand && DB::isError($result) &&
                 $result->getCode() == DB_ERROR_NOSUCHTABLE) {
                 $repeat = 1;
@@ -422,29 +475,32 @@ class DB_fbsql extends DB_common
             }
         } while ($repeat);
         if (DB::isError($result)) {
-            return $result;
+            return $this->fbsqlRaiseError();
         }
-        return @fbsql_insert_id($this->connection);
+        $result->fetchInto($tmp, DB_FETCHMODE_ORDERED);
+        return $tmp[0];
     }
 
     /**
      * Creates a new sequence
      *
-     * @param string $seq_name name of the new sequence
+     * @param string $seq_name  name of the new sequence
      *
-     * @return int DB_OK on success.  A DB_Error object is returned if
-     *              problems arise.
+     * @return int  DB_OK on success.  A DB_Error object on failure.
      *
-     * @internal
-     * @see DB_common::createSequence()
-     * @access public
+     * @see DB_common::createSequence(), DB_common::getSequenceName(),
+     *      DB_fbsql::nextID(), DB_fbsql::dropSequence()
      */
     function createSequence($seq_name)
     {
         $seqname = $this->getSequenceName($seq_name);
-        return $this->query("CREATE TABLE ${seqname} ".
-                            '(id INTEGER UNSIGNED AUTO_INCREMENT NOT NULL,'.
-                            ' PRIMARY KEY(id))');
+        $res = $this->query('CREATE TABLE ' . $seqname
+                            . ' (id INTEGER NOT NULL,'
+                            . ' PRIMARY KEY(id))');
+        if ($res) {
+            $res = $this->query('SET UNIQUE = 0 FOR ' . $seqname);
+        }
+        return $res;
     }
 
     // }}}
@@ -453,79 +509,95 @@ class DB_fbsql extends DB_common
     /**
      * Deletes a sequence
      *
-     * @param string $seq_name name of the sequence to be deleted
+     * @param string $seq_name  name of the sequence to be deleted
      *
-     * @return int DB_OK on success.  DB_Error if problems.
+     * @return int  DB_OK on success.  A DB_Error object on failure.
      *
-     * @internal
-     * @see DB_common::dropSequence()
-     * @access public
+     * @see DB_common::dropSequence(), DB_common::getSequenceName(),
+     *      DB_fbsql::nextID(), DB_fbsql::createSequence()
      */
     function dropSequence($seq_name)
     {
-        $seqname = $this->getSequenceName($seq_name);
-        return $this->query("DROP TABLE ${seqname} RESTRICT");
+        return $this->query('DROP TABLE ' . $this->getSequenceName($seq_name)
+                            . ' RESTRICT');
     }
 
     // }}}
-    // {{{ modifyQuery()
-
-    function modifyQuery($query)
-    {
-        if ($this->options['portability'] & DB_PORTABILITY_DELETE_COUNT) {
-            // "DELETE FROM table" gives 0 affected rows in fbsql.
-            // This little hack lets you know how many rows were deleted.
-            if (preg_match('/^\s*DELETE\s+FROM\s+(\S+)\s*$/i', $query)) {
-                $query = preg_replace('/^\s*DELETE\s+FROM\s+(\S+)\s*$/',
-                                      'DELETE FROM \1 WHERE 1=1', $query);
-            }
-        }
-        return $query;
-    }
-
-    // }}}
-    // {{{ quoteSmart()
+    // {{{ modifyLimitQuery()
 
     /**
-     * Format input so it can be safely used in a query
+     * Adds LIMIT clauses to a query string according to current DBMS standards
      *
-     * @param mixed $in data to be quoted
+     * @param string $query   the query to modify
+     * @param int    $from    the row to start to fetching (0 = the first row)
+     * @param int    $count   the numbers of rows to fetch
+     * @param mixed  $params  array, string or numeric data to be used in
+     *                         execution of the statement.  Quantity of items
+     *                         passed must match quantity of placeholders in
+     *                         query:  meaning 1 placeholder for non-array
+     *                         parameters or 1 placeholder per array element.
      *
-     * @return mixed Submitted variable's type = returned value:
-     *               + null = the string <samp>NULL</samp>
-     *               + boolean = string <samp>TRUE</samp> or <samp>FALSE</samp>
-     *               + integer or double = the unquoted number
-     *               + other (including strings and numeric strings) =
-     *                 the data escaped according to MySQL's settings
-     *                 then encapsulated between single quotes
+     * @return string  the query string with LIMIT clauses added
      *
-     * @internal
+     * @access protected
      */
-    function quoteSmart($in)
+    function modifyLimitQuery($query, $from, $count, $params = array())
     {
-        if (is_int($in) || is_double($in)) {
-            return $in;
-        } elseif (is_bool($in)) {
-            return $in ? 'TRUE' : 'FALSE';
-        } elseif (is_null($in)) {
-            return 'NULL';
+        if (DB::isManip($query) || $this->_next_query_manip) {
+            return preg_replace('/^([\s(])*SELECT/i',
+                                "\\1SELECT TOP($count)", $query);
         } else {
-            return "'" . $this->escapeSimple($in) . "'";
+            return preg_replace('/([\s(])*SELECT/i',
+                                "\\1SELECT TOP($from, $count)", $query);
         }
     }
 
+    // }}}
+    // {{{ quoteBoolean()
+
+    /**
+     * Formats a boolean value for use within a query in a locale-independent
+     * manner.
+     *
+     * @param boolean the boolean value to be quoted.
+     * @return string the quoted string.
+     * @see DB_common::quoteSmart()
+     * @since Method available since release 1.7.8.
+     */
+    function quoteBoolean($boolean) {
+        return $boolean ? 'TRUE' : 'FALSE';
+    }
+     
+    // }}}
+    // {{{ quoteFloat()
+
+    /**
+     * Formats a float value for use within a query in a locale-independent
+     * manner.
+     *
+     * @param float the float value to be quoted.
+     * @return string the quoted string.
+     * @see DB_common::quoteSmart()
+     * @since Method available since release 1.7.8.
+     */
+    function quoteFloat($float) {
+        return $this->escapeSimple(str_replace(',', '.', strval(floatval($float))));
+    }
+     
     // }}}
     // {{{ fbsqlRaiseError()
 
     /**
-     * Gather information about an error, then use that info to create a
-     * DB error object and finally return that object.
+     * Produces a DB_Error object regarding the current problem
      *
-     * @param integer $errno PEAR error number (usually a DB constant) if
-     *                          manually raising an error
-     * @return object DB error object
-     * @see DB_common::errorCode()
-     * @see DB_common::raiseError()
+     * @param int $errno  if the error is being manually raised pass a
+     *                     DB_ERROR* constant here.  If this isn't passed
+     *                     the error information gathered from the DBMS.
+     *
+     * @return object  the DB_Error object
+     *
+     * @see DB_common::raiseError(),
+     *      DB_fbsql::errorNative(), DB_common::errorCode()
      */
     function fbsqlRaiseError($errno = null)
     {
@@ -533,33 +605,43 @@ class DB_fbsql extends DB_common
             $errno = $this->errorCode(fbsql_errno($this->connection));
         }
         return $this->raiseError($errno, null, null, null,
-                        @fbsql_error($this->connection));
+                                 @fbsql_error($this->connection));
+    }
+
+    // }}}
+    // {{{ errorNative()
+
+    /**
+     * Gets the DBMS' native error code produced by the last query
+     *
+     * @return int  the DBMS' error code
+     */
+    function errorNative()
+    {
+        return @fbsql_errno($this->connection);
     }
 
     // }}}
     // {{{ tableInfo()
 
     /**
-     * Returns information about a table or a result set.
+     * Returns information about a table or a result set
      *
-     * @param object|string $result DB_result object from a query or a
-     *                                string containing the name of a table
-     * @param  int   $mode a valid tableInfo mode
-     * @return array an associative array with the information requested
-     *                or an error object if something is wrong
-     * @access public
-     * @internal
+     * @param object|string  $result  DB_result object from a query or a
+     *                                 string containing the name of a table.
+     *                                 While this also accepts a query result
+     *                                 resource identifier, this behavior is
+     *                                 deprecated.
+     * @param int            $mode    a valid tableInfo mode
+     *
+     * @return array  an associative array with the information requested.
+     *                 A DB_Error object on failure.
+     *
      * @see DB_common::tableInfo()
      */
-    function tableInfo($result, $mode = null) {
-        if (isset($result->result)) {
-            /*
-             * Probably received a result object.
-             * Extract the result resource identifier.
-             */
-            $id = $result->result;
-            $got_string = false;
-        } elseif (is_string($result)) {
+    function tableInfo($result, $mode = null)
+    {
+        if (is_string($result)) {
             /*
              * Probably received a table name.
              * Create a result resource identifier.
@@ -567,11 +649,18 @@ class DB_fbsql extends DB_common
             $id = @fbsql_list_fields($this->dsn['database'],
                                      $result, $this->connection);
             $got_string = true;
+        } elseif (isset($result->result)) {
+            /*
+             * Probably received a result object.
+             * Extract the result resource identifier.
+             */
+            $id = $result->result;
+            $got_string = false;
         } else {
             /*
              * Probably received a result resource identifier.
              * Copy it.
-             * Depricated.  Here for compatibility only.
+             * Deprecated.  Here for compatibility only.
              */
             $id = $result;
             $got_string = false;
@@ -588,32 +677,25 @@ class DB_fbsql extends DB_common
         }
 
         $count = @fbsql_num_fields($id);
+        $res   = array();
 
-        // made this IF due to performance (one if is faster than $count if's)
-        if (!$mode) {
-            for ($i=0; $i<$count; $i++) {
-                $res[$i]['table'] = $case_func(@fbsql_field_table($id, $i));
-                $res[$i]['name']  = $case_func(@fbsql_field_name($id, $i));
-                $res[$i]['type']  = @fbsql_field_type($id, $i);
-                $res[$i]['len']   = @fbsql_field_len($id, $i);
-                $res[$i]['flags'] = @fbsql_field_flags($id, $i);
+        if ($mode) {
+            $res['num_fields'] = $count;
+        }
+
+        for ($i = 0; $i < $count; $i++) {
+            $res[$i] = array(
+                'table' => $case_func(@fbsql_field_table($id, $i)),
+                'name'  => $case_func(@fbsql_field_name($id, $i)),
+                'type'  => @fbsql_field_type($id, $i),
+                'len'   => @fbsql_field_len($id, $i),
+                'flags' => @fbsql_field_flags($id, $i),
+            );
+            if ($mode & DB_TABLEINFO_ORDER) {
+                $res['order'][$res[$i]['name']] = $i;
             }
-        } else { // full
-            $res["num_fields"]= $count;
-
-            for ($i=0; $i<$count; $i++) {
-                $res[$i]['table'] = $case_func(@fbsql_field_table($id, $i));
-                $res[$i]['name']  = $case_func(@fbsql_field_name($id, $i));
-                $res[$i]['type']  = @fbsql_field_type($id, $i);
-                $res[$i]['len']   = @fbsql_field_len($id, $i);
-                $res[$i]['flags'] = @fbsql_field_flags($id, $i);
-
-                if ($mode & DB_TABLEINFO_ORDER) {
-                    $res['order'][$res[$i]['name']] = $i;
-                }
-                if ($mode & DB_TABLEINFO_ORDERTABLE) {
-                    $res['ordertable'][$res[$i]['table']][$res[$i]['name']] = $i;
-                }
+            if ($mode & DB_TABLEINFO_ORDERTABLE) {
+                $res['ordertable'][$res[$i]['table']][$res[$i]['name']] = $i;
             }
         }
 
@@ -628,15 +710,47 @@ class DB_fbsql extends DB_common
     // {{{ getSpecialQuery()
 
     /**
-     * Returns the query needed to get some backend info
-     * @param  string $type What kind of info you want to retrieve
-     * @return string The SQL query string
+     * Obtains the query string needed for listing a given type of objects
+     *
+     * @param string $type  the kind of objects you want to retrieve
+     *
+     * @return string  the SQL query string or null if the driver doesn't
+     *                  support the object type requested
+     *
+     * @access protected
+     * @see DB_common::getListOf()
      */
     function getSpecialQuery($type)
     {
         switch ($type) {
             case 'tables':
-                return 'select "table_name" from information_schema.tables';
+                return 'SELECT "table_name" FROM information_schema.tables'
+                       . ' t0, information_schema.schemata t1'
+                       . ' WHERE t0.schema_pk=t1.schema_pk AND'
+                       . ' "table_type" = \'BASE TABLE\''
+                       . ' AND "schema_name" = current_schema';
+            case 'views':
+                return 'SELECT "table_name" FROM information_schema.tables'
+                       . ' t0, information_schema.schemata t1'
+                       . ' WHERE t0.schema_pk=t1.schema_pk AND'
+                       . ' "table_type" = \'VIEW\''
+                       . ' AND "schema_name" = current_schema';
+            case 'users':
+                return 'SELECT "user_name" from information_schema.users'; 
+            case 'functions':
+                return 'SELECT "routine_name" FROM'
+                       . ' information_schema.psm_routines'
+                       . ' t0, information_schema.schemata t1'
+                       . ' WHERE t0.schema_pk=t1.schema_pk'
+                       . ' AND "routine_kind"=\'FUNCTION\''
+                       . ' AND "schema_name" = current_schema';
+            case 'procedures':
+                return 'SELECT "routine_name" FROM'
+                       . ' information_schema.psm_routines'
+                       . ' t0, information_schema.schemata t1'
+                       . ' WHERE t0.schema_pk=t1.schema_pk'
+                       . ' AND "routine_kind"=\'PROCEDURE\''
+                       . ' AND "schema_name" = current_schema';
             default:
                 return null;
         }
@@ -651,3 +765,5 @@ class DB_fbsql extends DB_common
  * c-basic-offset: 4
  * End:
  */
+
+?>

@@ -1,5 +1,5 @@
-<?php //-*-php-*-
-// $Id: LDAP.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright (C) 2004,2007 $ThePhpWikiProgrammingTeam
  *
@@ -21,18 +21,19 @@
  */
 
 class _LDAPPassUser
-extends _PassUser
-/**
- * Define the vars LDAP_AUTH_HOST and LDAP_BASE_DN in config/config.ini
- *
- * Preferences are handled in _PassUser
- */
+    extends _PassUser
+    /**
+     * Define the vars LDAP_AUTH_HOST and LDAP_BASE_DN in config/config.ini
+     *
+     * Preferences are handled in _PassUser
+     */
 {
     /**
      * ->_init()
      * connect and bind to the LDAP host
      */
-    function _init() {
+    function _init()
+    {
         if ($this->_ldap = ldap_connect(LDAP_AUTH_HOST)) { // must be a valid LDAP server!
             global $LDAP_SET_OPTION;
             if (!empty($LDAP_SET_OPTION)) {
@@ -53,8 +54,8 @@ extends _PassUser
             if (!$r) {
                 $this->_free();
                 trigger_error(sprintf(_("Unable to bind LDAP server %s using %s %s"),
-                                      LDAP_AUTH_HOST, LDAP_AUTH_USER, LDAP_AUTH_PASSWORD),
-                              E_USER_WARNING);
+                        LDAP_AUTH_HOST, LDAP_AUTH_USER, LDAP_AUTH_PASSWORD),
+                    E_USER_WARNING);
                 return false;
             }
             return $this->_ldap;
@@ -66,8 +67,9 @@ extends _PassUser
     /**
      * free and close the bound ressources
      */
-    function _free() {
-        if (isset($this->_sr)   and is_resource($this->_sr))   ldap_free_result($this->_sr);
+    function _free()
+    {
+        if (isset($this->_sr)   and is_resource($this->_sr)) ldap_free_result($this->_sr);
         if (isset($this->_ldap) and is_resource($this->_ldap)) ldap_close($this->_ldap);
         unset($this->_sr);
         unset($this->_ldap);
@@ -82,15 +84,16 @@ extends _PassUser
      *
      * @see http://www.faqs.org/rfcs/rfc4514.html LDAP String Representation of Distinguished Names
      */
-    function _stringEscape($name) {
+    function _stringEscape($name)
+    {
         $name = strtr(utf8_encode($name),
-                      array("*" => "\\2a",
-                            "?" => "\\3f",
-                            "(" => "\\28",
-                            ")" => "\\29",
-                            "\\" => "\\5c",
-                            '"'  => '\"',
-                            "\0" => "\\00"));
+            array("*" => "\\2a",
+                "?" => "\\3f",
+                "(" => "\\28",
+                ")" => "\\29",
+                "\\" => "\\5c",
+                '"' => '\"',
+                "\0" => "\\00"));
         return $name;
     }
 
@@ -98,7 +101,8 @@ extends _PassUser
      * LDAP names may contain every utf-8 character. However we restrict them a bit for convenience.
      * @see _stringEscape()
      */
-    function isValidName ($userid = false) {
+    function isValidName($userid = false)
+    {
         if (!$userid) $userid = $this->_userid;
         // We are more restrictive here, but must allow explitly utf-8
         return preg_match("/^[\-\w_\.@ ]+$/u", $userid) and strlen($userid) < 64;
@@ -113,14 +117,15 @@ extends _PassUser
      * @return string The 3rd argument to ldap_search()
      * @see http://www.faqs.org/rfcs/rfc4514.html LDAP String Representation of Distinguished Names
      */
-    function _searchparam($userid) {
+    function _searchparam($userid)
+    {
         $euserid = $this->_stringEscape($userid);
         // Need to set the right root search information. See config/config.ini
         if (LDAP_SEARCH_FILTER) {
             $st_search = str_replace("\$userid", $euserid, LDAP_SEARCH_FILTER);
         } else {
             $st_search = LDAP_SEARCH_FIELD
-                ? LDAP_SEARCH_FIELD."=$euserid"
+                ? LDAP_SEARCH_FIELD . "=$euserid"
                 : "uid=$euserid";
         }
         return $st_search;
@@ -132,7 +137,8 @@ extends _PassUser
      * @see http://www.faqs.org/rfcs/rfc4514.html LDAP String Representation of Distinguished Names
      * @see http://www.faqs.org/rfcs/rfc3454.html stringprep
      */
-    function checkPass($submitted_password) {
+    function checkPass($submitted_password)
+    {
 
         $this->_authmethod = 'LDAP';
         $this->_userid = trim($this->_userid);
@@ -155,7 +161,7 @@ extends _PassUser
             //return WIKIAUTH_FORBIDDEN;
         }
         /*if (strstr($userid,'*')) { // should be safely escaped now
-            trigger_error(fmt("Invalid username '%s' for LDAP Auth", $userid),
+            trigger_error(fmt("Invalid username “%s” for LDAP Auth", $userid),
                           E_USER_WARNING);
             return WIKIAUTH_FORBIDDEN;
         }*/
@@ -164,14 +170,14 @@ extends _PassUser
             $st_search = $this->_searchparam($userid);
             if (!$this->_sr = ldap_search($ldap, LDAP_BASE_DN, $st_search)) {
                 trigger_error(_("Could not search in LDAP"), E_USER_WARNING);
-                 $this->_free();
+                $this->_free();
                 return $this->_tryNextPass($submitted_password);
             }
             $info = ldap_get_entries($ldap, $this->_sr);
             if (empty($info["count"])) {
                 if (DEBUG)
                     trigger_error(_("User not found in LDAP"), E_USER_WARNING);
-                    $this->_free();
+                $this->_free();
                 return $this->_tryNextPass($submitted_password);
             }
             // There may be more hits with this userid.
@@ -182,14 +188,13 @@ extends _PassUser
                 // On wrong password the ldap server will return:
                 // "Unable to bind to server: Server is unwilling to perform"
                 // The @ catches this error message.
-                // If CHARSET=utf-8 the form should have already converted it to utf-8.
                 if ($r = @ldap_bind($ldap, $dn, $submitted_password)) {
                     // ldap_bind will return TRUE if everything matches
                     // Optionally get the mail from LDAP
                     if (!empty($info[$i]["mail"][0])) {
                         $this->_prefs->_prefs['email']->default_value = $info[$i]["mail"][0];
                     }
-                        $this->_free();
+                    $this->_free();
                     $this->_level = WIKIAUTH_USER;
                     return $this->_level;
                 } else {
@@ -206,8 +211,8 @@ extends _PassUser
             }
             if (DEBUG)
                 trigger_error(_("Wrong password: ") .
-                              str_repeat("*", strlen($submitted_password)),
-                              E_USER_WARNING);
+                        str_repeat("*", strlen($submitted_password)),
+                    E_USER_WARNING);
             $this->_free();
         } else {
             $this->_free();
@@ -218,34 +223,36 @@ extends _PassUser
     }
 
 
-    function userExists() {
+    function userExists()
+    {
         $this->_userid = trim($this->_userid);
         $userid = $this->_userid;
         if (strstr($userid, '*')) {
-            trigger_error(fmt("Invalid username '%s' for LDAP Auth", $userid),
-                          E_USER_WARNING);
+            trigger_error(fmt("Invalid username “%s” for LDAP Auth", $userid),
+                E_USER_WARNING);
             return false;
         }
         if ($ldap = $this->_init()) {
             // Need to set the right root search information. see ../index.php
             $st_search = $this->_searchparam($userid);
             if (!$this->_sr = ldap_search($ldap, LDAP_BASE_DN, $st_search)) {
-                 $this->_free();
+                $this->_free();
                 return $this->_tryNextUser();
             }
             $info = ldap_get_entries($ldap, $this->_sr);
 
             if ($info["count"] > 0) {
-                 $this->_free();
+                $this->_free();
                 UpgradeUser($GLOBALS['ForbiddenUser'], $this);
                 return true;
             }
         }
-         $this->_free();
+        $this->_free();
         return $this->_tryNextUser();
     }
 
-    function mayChangePass() {
+    function mayChangePass()
+    {
         return false;
     }
 

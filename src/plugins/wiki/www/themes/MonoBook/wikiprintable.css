@@ -1,11 +1,8 @@
-/**
- *  $Id: wikiprintable.css 7965 2011-03-07 09:47:31Z vargenau $
- */
-
 /* MediaWiki print stylesheet */
 
 body {
-    color: #000000; background: #ffffff;
+    color: #000000;
+    background: #ffffff;
 }
 
 /* MSIE/Win doesn't understand 'inherit' */
@@ -13,6 +10,7 @@ a, a.external, a.new, a.stub {
     color: black ! important;
     text-decoration: none ! important;
 }
+
 #article {
     margin: 0 ! important;
 }

@@ -1,4 +1,4 @@
-<?php // -*-php-*- $Id: SOAP.php 7960 2011-03-04 13:58:21Z vargenau $
+<?php
 /**
  * SOAP server
  * Taken from http://www.wlug.org.nz/archive/
@@ -37,11 +37,12 @@ require_once 'lib/WikiUserNew.php';
 require_once 'lib/WikiGroup.php';
 */
 
-function checkCredentials(&$server, &$credentials, $access, $pagename) {
+function checkCredentials(&$server, &$credentials, $access, $pagename)
+{
     // check the "Authorization: Basic '.base64_encode("$this->username:$this->password").'\r\n'" header
     if (isset($server->header['Authorization'])) {
-        $line = base64_decode(str_replace("Basic ","",trim($server->header['Authorization'])));
-        list($credentials['username'],$credentials['password']) = explode(':',$line);
+        $line = base64_decode(str_replace("Basic ", "", trim($server->header['Authorization'])));
+        list($credentials['username'], $credentials['password']) = explode(':', $line);
     } else {
         if (!isset($_SERVER))
             $_SERVER =& $GLOBALS['HTTP_SERVER_VARS'];
@@ -50,8 +51,7 @@ function checkCredentials(&$server, &$credentials, $access, $pagename) {
             if (isset($_SERVER['REMOTE_ADDR']))
                 $credentials['username'] = $_SERVER['REMOTE_ADDR'];
             elseif (isset($GLOBALS['REMOTE_ADDR']))
-                $credentials['username'] = $GLOBALS['REMOTE_ADDR'];
-            else
+                $credentials['username'] = $GLOBALS['REMOTE_ADDR']; else
                 $credentials['username'] = $server->host;
         }
     }
@@ -64,9 +64,9 @@ function checkCredentials(&$server, &$credentials, $access, $pagename) {
         $request->_user = new WikiUser($request, $credentials['username']);
     }
     $request->_user->AuthCheck(array('userid' => $credentials['username'],
-                                     'passwd' => $credentials['password']));
-    if (! mayAccessPage ($access, $pagename))
-        $server->fault(401,'',"no permission");
+        'passwd' => $credentials['password']));
+    if (!mayAccessPage($access, $pagename))
+        $server->fault(401, '', "no permission");
 }
 
 $GLOBALS['SERVER_NAME'] = SERVER_URL;
@@ -76,22 +76,22 @@ $url = SERVER_URL . DATA_PATH . "/SOAP.php";
 // Local or external wdsl support is experimental.
 // It works without also. Just the client has to
 // know the wdsl definitions.
-$server = new soap_server(/* 'PhpWiki.wdsl' */);
+$server = new soap_server( /* 'PhpWiki.wdsl' */);
 // Now change the server url to ours, because in the wdsl is the original PhpWiki address
 //   <soap:address location="http://phpwiki.sourceforge.net/phpwiki/SOAP.php" />
 //   <soap:operation soapAction="http://phpwiki.sourceforge.net/phpwiki/SOAP.php" />
 
 $server->ports[$server->currentPort]['location'] = $url;
-$server->bindings[ $server->ports[$server->currentPort]['binding'] ]['endpoint'] = $url;
+$server->bindings[$server->ports[$server->currentPort]['binding']]['endpoint'] = $url;
 $server->soapaction = $url; // soap_transport_http
 
-$actions = array('getPageContent','getPageRevision','getCurrentRevision',
-                 'getPageMeta','doSavePage','getAllPagenames',
-                 'getBackLinks','doTitleSearch','doFullTextSearch',
-                 'getRecentChanges','listLinks','listPlugins',
-                 'getPluginSynopsis','callPlugin','listRelations',
-                 'linkSearch'
-                 );
+$actions = array('getPageContent', 'getPageRevision', 'getCurrentRevision',
+    'getPageMeta', 'doSavePage', 'getAllPagenames',
+    'getBackLinks', 'doTitleSearch', 'doFullTextSearch',
+    'getRecentChanges', 'listLinks', 'listPlugins',
+    'getPluginSynopsis', 'callPlugin', 'listRelations',
+    'linkSearch'
+);
 foreach ($actions as $action) {
     $server->register($actions);
     $server->operations[$actions]['soapaction'] = $url;
@@ -100,9 +100,10 @@ foreach ($actions as $action) {
 //todo: check and set credentials
 // requiredAuthorityForPage($action);
 // require 'edit' access
-function doSavePage($pagename,$content,$credentials=false) {
+function doSavePage($pagename, $content, $credentials = false)
+{
     global $server;
-    checkCredentials($server, $credentials,'edit',$pagename);
+    checkCredentials($server, $credentials, 'edit', $pagename);
     $dbi = WikiDB::open($GLOBALS['DBParams']);
     $page = $dbi->getPage($pagename);
     $current = $page->getCurrentRevision();
@@ -113,41 +114,48 @@ function doSavePage($pagename,$content,$credentials=false) {
 }
 
 // require 'view' access
-function getPageContent($pagename,$credentials=false) {
+function getPageContent($pagename, $credentials = false)
+{
     global $server;
-    checkCredentials($server,$credentials,'view',$pagename);
+    checkCredentials($server, $credentials, 'view', $pagename);
     $dbi = WikiDB::open($GLOBALS['DBParams']);
     $page = $dbi->getPage($pagename);
     $rev = $page->getCurrentRevision();
     $text = $rev->getPackedContent();
     return $text;
 }
+
 // require 'view' access
-function getPageRevision($pagename,$revision,$credentials=false) {
+function getPageRevision($pagename, $revision, $credentials = false)
+{
     global $server;
-    checkCredentials($server,$credentials,'view',$pagename);
+    checkCredentials($server, $credentials, 'view', $pagename);
     $dbi = WikiDB::open($GLOBALS['DBParams']);
     $page = $dbi->getPage($pagename);
     $rev = $page->getCurrentRevision();
     $text = $rev->getPackedContent();
     return $text;
 }
+
 // require 'view' access
-function getCurrentRevision($pagename,$credentials=false) {
+function getCurrentRevision($pagename, $credentials = false)
+{
     global $server;
-    checkCredentials($server,$credentials,'view',$pagename);
-    if (!mayAccessPage ('view',$pagename))
-        $server->fault(401,'',"no permission");
+    checkCredentials($server, $credentials, 'view', $pagename);
+    if (!mayAccessPage('view', $pagename))
+        $server->fault(401, '', "no permission");
     $dbi = WikiDB::open($GLOBALS['DBParams']);
     $page = $dbi->getPage($pagename);
     $rev = $page->getCurrentRevision();
     $version = $current->getVersion();
     return (double)$version;
 }
+
 // require 'change' or 'view' access ?
-function getPageMeta($pagename,$credentials=false) {
+function getPageMeta($pagename, $credentials = false)
+{
     global $server;
-    checkCredentials($server,$credentials,'view',$pagename);
+    checkCredentials($server, $credentials, 'view', $pagename);
     $dbi = WikiDB::open($GLOBALS['DBParams']);
     $page = $dbi->getPage($pagename);
     $rev = $page->getCurrentRevision();
@@ -155,10 +163,12 @@ function getPageMeta($pagename,$credentials=false) {
     //todo: reformat the meta hash
     return $meta;
 }
+
 // require 'view' access to AllPages
-function getAllPagenames($credentials=false) {
+function getAllPagenames($credentials = false)
+{
     global $server;
-    checkCredentials($server,$credentials,'view',_("AllPages"));
+    checkCredentials($server, $credentials, 'view', _("AllPages"));
     $dbi = WikiDB::open($GLOBALS['DBParams']);
     $page_iter = $dbi->getAllPages();
     $pages = array();
@@ -167,13 +177,15 @@ function getAllPagenames($credentials=false) {
     }
     return $pages;
 }
+
 // require 'view' access
-function getBacklinks($pagename,$credentials=false) {
+function getBacklinks($pagename, $credentials = false)
+{
     global $server;
-    checkCredentials($server,$credentials,'view',$pagename);
+    checkCredentials($server, $credentials, 'view', $pagename);
     $dbi = WikiDB::open($GLOBALS['DBParams']);
     $backend = &$dbi->_backend;
-    $result =  $backend->get_links($pagename);
+    $result = $backend->get_links($pagename);
     $page_iter = new WikiDB_PageIterator($dbi, $result);
     $pages = array();
     while ($page = $page_iter->next()) {
@@ -181,10 +193,12 @@ function getBacklinks($pagename,$credentials=false) {
     }
     return $pages;
 }
+
 // require 'view' access to TitleSearch
-function doTitleSearch($s, $credentials=false) {
+function doTitleSearch($s, $credentials = false)
+{
     global $server;
-    checkCredentials($server,$credentials,'view',_("TitleSearch"));
+    checkCredentials($server, $credentials, 'view', _("TitleSearch"));
     $dbi = WikiDB::open($GLOBALS['DBParams']);
     $query = new TextSearchQuery($s);
     $page_iter = $dbi->titleSearch($query);
@@ -194,10 +208,12 @@ function doTitleSearch($s, $credentials=false) {
     }
     return $pages;
 }
+
 // require 'view' access to FullTextSearch
-function doFullTextSearch($s, $credentials=false) {
+function doFullTextSearch($s, $credentials = false)
+{
     global $server;
-    checkCredentials($server,$credentials,'view',_("FullTextSearch"));
+    checkCredentials($server, $credentials, 'view', _("FullTextSearch"));
     $dbi = WikiDB::open($GLOBALS['DBParams']);
     $query = new TextSearchQuery($s);
     $page_iter = $dbi->fullSearch($query);
@@ -209,28 +225,31 @@ function doFullTextSearch($s, $credentials=false) {
 }
 
 // require 'view' access to RecentChanges
-function getRecentChanges($limit=false, $since=false, $include_minor=false, $credentials=false) {
+function getRecentChanges($limit = false, $since = false, $include_minor = false, $credentials = false)
+{
     global $server;
-    checkCredentials($server,$credentials,'view',_("RecentChanges"));
+    checkCredentials($server, $credentials, 'view', _("RecentChanges"));
     $dbi = WikiDB::open($GLOBALS['DBParams']);
     $params = array('limit' => $limit, 'since' => $since,
-                    'include_minor_revisions' => $include_minor);
+        'include_minor_revisions' => $include_minor);
     $page_iter = $dbi->mostRecent($params);
     $pages = array();
     while ($page = $page_iter->next()) {
         $pages[] = array('pagename' => $page->getName(),
-                         'lastModified' => $page->get('mtime'),
-                         'author'  => $page->get('author'),
-                         'summary' => $page->get('summary'), // added with 1.3.13
-                         'version' => $page->getVersion()
-                         );
+            'lastModified' => $page->get('mtime'),
+            'author' => $page->get('author'),
+            'summary' => $page->get('summary'), // added with 1.3.13
+            'version' => $page->getVersion()
+        );
     }
     return $pages;
 }
+
 // require 'view' access
-function listLinks($pagename, $credentials=false) {
+function listLinks($pagename, $credentials = false)
+{
     global $server;
-    checkCredentials($server,$credentials,'view',$pagename);
+    checkCredentials($server, $credentials, 'view', $pagename);
     $dbi = WikiDB::open($GLOBALS['DBParams']);
     $page = $dbi->getPage($pagename);
     $linkiterator = $page->getPageLinks();
@@ -241,9 +260,11 @@ function listLinks($pagename, $credentials=false) {
     }
     return $links;
 }
-function listPlugins($credentials=false) {
+
+function listPlugins($credentials = false)
+{
     global $server;
-    checkCredentials($server,$credentials,'change',_("HomePage"));
+    checkCredentials($server, $credentials, 'change', _("HomePage"));
     $plugin_dir = 'lib/plugin';
     if (defined('PHPWIKI_DIR'))
         $plugin_dir = PHPWIKI_DIR . "/$plugin_dir";
@@ -254,7 +275,7 @@ function listPlugins($credentials=false) {
     $RetArray = array();
     if (!empty($plugins)) {
         require_once 'lib/WikiPlugin.php';
-        $w = new WikiPluginLoader;
+        $w = new WikiPluginLoader();
         foreach ($plugins as $plugin) {
             $pluginName = str_replace(".php", "", $plugin);
             $p = $w->getPlugin($pluginName, false); // second arg?
@@ -266,34 +287,39 @@ function listPlugins($credentials=false) {
     }
     return $RetArray;
 }
-function getPluginSynopsis($pluginname, $credentials=false) {
+
+function getPluginSynopsis($pluginname, $credentials = false)
+{
     global $server;
-    checkCredentials($server,$credentials,'change',"Help/".$pluginname."Plugin");
+    checkCredentials($server, $credentials, 'change', "Help/" . $pluginname . "Plugin");
     require_once 'lib/WikiPlugin.php';
-    $w = new WikiPluginLoader;
+    $w = new WikiPluginLoader();
     $synopsis = '';
     $p = $w->getPlugin($pluginName, false); // second arg?
     // trap php files which aren't WikiPlugin~s: wikiplugin + wikiplugin_cached only
     if (strtolower(substr(get_parent_class($p), 0, 10)) == 'wikiplugin') {
         $plugin_args = '';
         $desc = $p->getArgumentsDescription();
-        $src = array("\n",'"',"'",'|','[',']','\\');
-        $replace = array('%0A','%22','%27','%7C','%5B','%5D','%5C');
-        $desc = str_replace("<br />",' ',$desc->asXML());
+        $src = array("\n", '"', "'", '|', '[', ']', '\\');
+        $replace = array('%0A', '%22', '%27', '%7C', '%5B', '%5D', '%5C');
+        $desc = str_replace("<br />", ' ', $desc->asXML());
         if ($desc)
-            $plugin_args = '\n'.str_replace($src, $replace, $desc);
-        $synopsis = "<?plugin ".$pluginName.$plugin_args."?>"; // args?
+            $plugin_args = '\n' . str_replace($src, $replace, $desc);
+        $synopsis = "<?plugin " . $pluginName . $plugin_args . "?>"; // args?
     }
     return $synopsis;
 }
-// only plugins returning pagelists will return something useful. so omit the html output
-function callPlugin($pluginname, $pluginargs, $credentials=false) {
-    global $server;
-    checkCredentials($server,$credentials,'change',"Help/".$pluginname."Plugin");
 
-    $basepage = '';;
+// only plugins returning pagelists will return something useful. so omit the html output
+function callPlugin($pluginname, $pluginargs, $credentials = false)
+{
+    global $server;
+    checkCredentials($server, $credentials, 'change', "Help/" . $pluginname . "Plugin");
+
+    $basepage = '';
+    ;
     require_once 'lib/WikiPlugin.php';
-    $w = new WikiPluginLoader;
+    $w = new WikiPluginLoader();
     $p = $w->getPlugin($pluginName, false); // second arg?
     $pagelist = $p->run($dbi, $pluginargs, $request, $basepage);
     $pages = array();
@@ -303,6 +329,7 @@ function callPlugin($pluginname, $pluginargs, $credentials=false) {
     }
     return $pages;
 }
+
 /**
  * array listRelations([ Integer option = 1 ])
  *
@@ -315,20 +342,23 @@ function callPlugin($pluginname, $pluginargs, $credentials=false) {
  *
  * @author: Reini Urban
  */
-function listRelations($option = 1, $credentials=false) {
+function listRelations($option = 1, $credentials = false)
+{
     global $server;
-    checkCredentials($server,$credentials,'view',_("HomePage"));
+    checkCredentials($server, $credentials, 'view', _("HomePage"));
     $also_attributes = $option & 2;
     $only_attributes = $option & 2 and !($option & 1);
     $sorted = !($option & 4);
     return $dbh->listRelations($also_attributes,
-                               $only_attributes,
-                               $sorted);
+        $only_attributes,
+        $sorted);
 }
+
 // some basic semantic search
-function linkSearch($linktype, $search, $pages="*", $relation="*", $credentials=false) {
+function linkSearch($linktype, $search, $pages = "*", $relation = "*", $credentials = false)
+{
     global $server;
-    checkCredentials($server,$credentials,'view',_("HomePage"));
+    checkCredentials($server, $credentials, 'view', _("HomePage"));
     $dbi = WikiDB::open($GLOBALS['DBParams']);
     require_once 'lib/TextSearchQuery.php';
     $pagequery = new TextSearchQuery($pages);

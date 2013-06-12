@@ -1,8 +1,6 @@
-<?php //-*-php-*-
-// $Id: Template.php 7964 2011-03-05 17:05:30Z vargenau $
+<?php
 
 require_once 'lib/ErrorManager.php';
-
 
 /** An HTML template.
  */
@@ -11,7 +9,8 @@ class Template
     /**
      * name optionally of form "theme/template" to include parent templates in children
      */
-    function Template ($name, &$request, $args = false) {
+    function Template($name, &$request, $args = false)
+    {
         global $WikiTheme;
 
         $this->_request =& $request;
@@ -46,12 +45,12 @@ class Template
         if (is_array($args))
             $this->_locals = $args;
         elseif ($args)
-            $this->_locals = array('CONTENT' => $args);
-        else
+            $this->_locals = array('CONTENT' => $args); else
             $this->_locals = array();
     }
 
-    function _munge_input($template) {
+    function _munge_input($template)
+    {
 
         // Convert < ?plugin expr ? > to < ?php $this->_printPluginPI("expr"); ? >
         $orig[] = '/<\?plugin.*?\?>/se';
@@ -68,27 +67,30 @@ class Template
         return preg_replace($orig, $repl, $template);
     }
 
-    function _mungePlugin($pi) {
+    function _mungePlugin($pi)
+    {
         // HACK ALERT: PHP's preg_replace, with the /e option seems to
         // escape both single and double quotes with backslashes.
         // So we need to unescape the double quotes here...
 
         $pi = preg_replace('/(?!<\\\\)\\\\"/x', '"', $pi);
         return sprintf('<?php $this->_printPlugin(%s); ?>',
-                       "'" . str_replace("'", "\'", $pi) . "'");
+            "'" . str_replace("'", "\'", $pi) . "'");
     }
 
-    function _printPlugin ($pi) {
-    include_once 'lib/WikiPlugin.php';
-    static $loader;
+    function _printPlugin($pi)
+    {
+        include_once 'lib/WikiPlugin.php';
+        static $loader;
 
         if (empty($loader))
-            $loader = new WikiPluginLoader;
+            $loader = new WikiPluginLoader();
 
         $this->_print($loader->expandPI($pi, $this->_request, $this, $this->_basepage));
     }
 
-    function _print ($val) {
+    function _print($val)
+    {
         if (isa($val, 'Template')) {
             $this->_expandSubtemplate($val);
         } else {
@@ -96,7 +98,8 @@ class Template
         }
     }
 
-    function _expandSubtemplate (&$template) {
+    function _expandSubtemplate(&$template)
+    {
         // FIXME: big hack!
         //if (!$template->_request)
         //    $template->_request = &$this->_request;
@@ -121,12 +124,13 @@ class Template
      *
      * @param $replacement string Replacement HTML text.
      */
-    function replace($varname, $value) {
+    function replace($varname, $value)
+    {
         $this->_locals[$varname] = $value;
     }
 
-
-    function printExpansion ($defaults = false) {
+    function printExpansion($defaults = false)
+    {
         if (!is_array($defaults)) // HTML object or template object
             $defaults = array('CONTENT' => $defaults);
         $this->_vars = array_merge($defaults, $this->_locals);
@@ -137,11 +141,11 @@ class Template
             $user = $request->getUser();
         if (!isset($page))
             $page = $request->getPage();
-    // Speedup. I checked all templates
+        // Speedup. I checked all templates
         if (!isset($revision))
-        $revision = false;
+            $revision = false;
 
-        global $WikiTheme, $charset;
+        global $WikiTheme;
         //$this->_dump_template();
         $SEP = $WikiTheme->getButtonSeparator();
 
@@ -157,25 +161,28 @@ class Template
     // Find a way to do template expansion less memory intensive and faster.
     // 1.3.4 needed no memory at all for dumphtml, now it needs +15MB.
     // Smarty? As before?
-    function getExpansion ($defaults = false) {
+    function getExpansion($defaults = false)
+    {
         ob_start();
         $this->printExpansion($defaults);
         $xml = ob_get_contents();
-        ob_end_clean();     // PHP problem: Doesn't release its memory?
+        ob_end_clean(); // PHP problem: Doesn't release its memory?
         return $xml;
     }
 
-    function printXML () {
+    function printXML()
+    {
         $this->printExpansion();
     }
 
-    function asXML () {
+    function asXML()
+    {
         return $this->getExpansion();
     }
 
-
     // Debugging:
-    function _dump_template () {
+    function _dump_template()
+    {
         $lines = explode("\n", $this->_munge_input($this->_tmpl));
         $pre = HTML::pre();
         $n = 1;
@@ -184,9 +191,10 @@ class Template
         $pre->printXML();
     }
 
-    function _errorHandler($error) {
+    function _errorHandler($error)
+    {
         //if (!preg_match('/: eval\(\)\'d code$/', $error->errfile))
-    //    return false;
+        //    return false;
 
         if (preg_match('/: eval\(\)\'d code$/', $error->errfile)) {
             $error->errfile = "In template '$this->_name'";
@@ -194,17 +202,14 @@ class Template
             //  whose names are ALL_CAPS.
             if (preg_match('/Undefined variable:\s*[_A-Z]+\s*$/', $error->errstr))
                 return true;
-        }
-        // ignore recursively nested htmldump loop: browse -> body -> htmldump -> browse -> body ...
+        } // ignore recursively nested htmldump loop: browse -> body -> htmldump -> browse -> body ...
         // FIXME for other possible loops also
         elseif (strstr($error->errfile, "In template 'htmldump'")) {
             ; //return $error;
-        }
-        elseif (strstr($error->errfile, "In template '")) { // merge
+        } elseif (strstr($error->errfile, "In template '")) { // merge
             $error->errfile = preg_replace("/'(\w+)'\)$/", "'\\1' < '$this->_name')",
-                                           $error->errfile);
-        }
-        else {
+                $error->errfile);
+        } else {
             $error->errfile .= " (In template '$this->_name')";
         }
 
@@ -213,9 +218,9 @@ class Template
             if (isset($lines[$error->errline - 1]))
                 $error->errstr .= ":\n\t" . $lines[$error->errline - 1];
         }
-    return $error;
+        return $error;
     }
-};
+}
 
 /**
  * Get a templates
@@ -225,15 +230,18 @@ class Template
  *   new Template(...)
  * </pre>
  */
-function Template($name, $args = false) {
+function Template($name, $args = false)
+{
     global $request;
     return new Template($name, $request, $args);
 }
 
-function alreadyTemplateProcessed($name) {
+function alreadyTemplateProcessed($name)
+{
     global $request;
     return !empty($request->_TemplatesProcessed[$name]) ? true : false;
 }
+
 /**
  * Make and expand the top-level template.
  *
@@ -245,7 +253,8 @@ function alreadyTemplateProcessed($name) {
  *
  * @return string HTML expansion of template.
  */
-function GeneratePage($content, $title, $page_revision = false, $args = false) {
+function GeneratePage($content, $title, $page_revision = false, $args = false)
+{
     global $request;
 
     if (!is_array($args))
@@ -261,12 +270,12 @@ function GeneratePage($content, $title, $page_revision = false, $args = false) {
     printXML(new Template('html', $request, $args));
 }
 
-
 /**
  * For dumping pages as html to a file.
  * Used for action=dumphtml,action=ziphtml,format=pdf,format=xml
  */
-function GeneratePageasXML($content, $title, $page_revision = false, $args = false) {
+function GeneratePageasXML($content, $title, $page_revision = false, $args = false)
+{
     global $request;
 
     if (!is_array($args))
@@ -283,7 +292,7 @@ function GeneratePageasXML($content, $title, $page_revision = false, $args = fal
     global $HIDE_TOOLBARS, $NO_BASEHREF, $WikiTheme;
     $HIDE_TOOLBARS = true;
     if (!$WikiTheme->DUMP_MODE)
-    $WikiTheme->DUMP_MODE = 'HTML';
+        $WikiTheme->DUMP_MODE = 'HTML';
 
     // FIXME: unfatal errors and login requirements
     $html = asXML(new Template('htmldump', $request, $args));

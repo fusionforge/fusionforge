@@ -1,7 +1,6 @@
-<?php // -*-php-*- $Id: g 8196 2011-11-29 11:13:40Z vargenau $
-
+<?php
 /*
- * Copyright (C) 2008-2010 Alcatel-Lucent
+ * Copyright (C) 2008-2012 Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -18,7 +17,7 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-*/
+ */
 
 /*
  * Standard Alcatel-Lucent disclaimer for contributing to open source
@@ -42,7 +41,8 @@
  * ALONE BASIS."
  */
 
-ini_set("memory_limit", "64M");
+ini_set("memory_limit", "256M");
+ini_set('pcre.backtrack_limit', 100000000);
 
 // Disable compression, seems needed to get all the messages.
 $no_gz_buffer=true;
@@ -53,13 +53,28 @@ require_once $gfplugins.'wiki/common/wikiconfig.class.php';
 
 html_use_jquery();
 if (forge_get_config('use_jquery_form_navigate')) {
-	use_javascript('/scripts/jquery-formnavigate/jquery.FormNavigate-min.js');
+    use_javascript('/scripts/jquery-formnavigate/jquery.FormNavigate-min.js');
+    define('ENABLE_EDIT_TOOLBAR', true);
+} else {
+    // Disable Toolbar for tests
+    define('ENABLE_EDIT_TOOLBAR', false);
 }
 
-if (!$group_id || !$project) {
+if (isset($group_id) && $group_id) {
+    if (! isset($project) || ! $project) {
+        $project = group_get_object($group_id);
+    }
+} elseif(isset($project) && is_object($project)) {
+    $group_id = $project->getID();
+}
+
+if (! isset($group_id) || ! isset($project)) {
     exit_no_group();
 } else if (!($project->usesPlugin("wiki"))) {
-    exit_disabled('home');
+    // We should test whether the wiki plugin is disabled globally
+    // in the Forge or by the current project.
+    // exit_disabled('home');
+    exit_project_disabled('home');
 } else {
 
     global $robots;
@@ -82,8 +97,8 @@ if (!$group_id || !$project) {
     define('THEME', 'fusionforge');
 
     // For FusionForge, we create some specific pages, located in the theme
-    // except for project "help"
-    if ($group_name == "help") {
+    // except for given project
+    if ($group_name == forge_get_config('wiki_help_project', 'wiki')) {
         define('WIKI_PGSRC', 'pgsrc');
     } else {
         define('WIKI_PGSRC', 'themes/fusionforge/pgsrc');
@@ -104,7 +119,11 @@ if (!$group_id || !$project) {
 
     define('UPLOAD_FILE_PATH', '/opt/groups/'.WIKI_NAME.'/www/uploads/');
     // define('UPLOAD_DATA_PATH', SERVER_URL . '/www/'.WIKI_NAME.'/uploads/');
-    define('UPLOAD_DATA_PATH', '/www/'.WIKI_NAME.'/uploads/');
+    if ($project->isPublic()) {
+        define('UPLOAD_DATA_PATH', '/www/'.WIKI_NAME.'/uploads/');
+    } else {
+        define('UPLOAD_DATA_PATH', '/wiki/view.php/'.WIKI_NAME.'/uploads/');
+    }
 
     // Do not use a directory per user but only one (per project)
     define('UPLOAD_USERDIR', false);
@@ -226,7 +245,6 @@ if (!$group_id || !$project) {
             $user_name = $user->getRealName();
             $_SESSION['user_id'] = $user_name;
             $_SERVER['PHP_AUTH_USER'] = $user_name;
-            $HTTP_SERVER_VARS['PHP_AUTH_USER'] = $user_name;
         }
     } else {
         // clear out the globals, just in case...
@@ -266,4 +284,3 @@ function octets($val) {
     }
     return $val;
 }
-?>

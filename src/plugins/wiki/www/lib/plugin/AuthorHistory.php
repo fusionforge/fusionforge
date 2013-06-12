@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: AuthorHistory.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -32,13 +32,11 @@
 ----
 <?plugin AuthorHistory page=all ?>
 
-
  try this in a subpage of your UserName: (UserName/AuthorHistory)
 
 <?plugin AuthorHistory page=all includeminor=true ?>
 
-
-* Displays a list of revision edits by one particular user, for the
+* Display a list of revision edits by one particular user, for the
 * current page, a specified page, or all pages.
 
 * This is a big hack to create a PageList like table. (PageList
@@ -59,32 +57,32 @@
 require_once 'lib/PageList.php';
 
 class WikiPlugin_AuthorHistory
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName() {
-        return _("AuthorHistory");
-    }
-
-    function getDescription() {
+    function getDescription()
+    {
         return sprintf(_("List all page revisions edited by one user with diff links, or show a PageHistory-like list of a single page for only one user."));
     }
 
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         global $request;
-        return array('exclude'      => '',
-                     'noheader'     => false,
-                     'includeminor' => false,
-                     'includedeleted' => false,
-                     'author'       => $request->_user->UserName(),
-                     'page'         => '[pagename]',
-                     'info'         => 'version,minor,author,summary,mtime'
-                     );
+        return array('exclude' => '',
+            'noheader' => false,
+            'includeminor' => false,
+            'includedeleted' => false,
+            'author' => $request->_user->UserName(),
+            'page' => '[pagename]',
+            'info' => 'version,minor,author,summary,mtime'
+        );
     }
+
     // info arg allows multiple columns
     // info=mtime,hits,summary,version,author,locked,minor
     // exclude arg allows multiple pagenames exclude=HomePage,RecentChanges
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $this->_args = $this->getArgs($argstr, $request);
         extract($this->_args);
         //trigger_error("1 p= $page a= $author");
@@ -100,20 +98,20 @@ extends WikiPlugin
 
         global $WikiTheme; // date & time formatting
 
-        $table = HTML::table(array('class'=> 'pagelist'));
+        $table = HTML::table(array('class' => 'pagelist'));
         $thead = HTML::thead();
         $tbody = HTML::tbody();
 
-        if (! ($page == 'all')) {
+        if (!($page == 'all')) {
             $p = $dbi->getPage($page);
 
-            $thead->pushContent(HTML::tr(HTML::th(array('align'=> 'right'),
-                                               _("Version")),
-                                      $includeminor ? HTML::th(_("Minor")) : "",
-                                      HTML::th(_("Author")),
-                                      HTML::th(_("Summary")),
-                                      HTML::th(_("Modified"))
-                                      ));
+            $thead->pushContent(HTML::tr(HTML::th(array('align' => 'right'),
+                    _("Version")),
+                $includeminor ? HTML::th(_("Minor")) : "",
+                HTML::th(_("Author")),
+                HTML::th(_("Summary")),
+                HTML::th(_("Modified"))
+            ));
 
             $allrevisions_iter = $p->getAllRevisions();
             while ($rev = $allrevisions_iter->next()) {
@@ -123,17 +121,17 @@ extends WikiPlugin
 
                 if ($authordoesmatch && (!$isminor || ($includeminor && $isminor))) {
                     $difflink = Button(array('action' => 'diff',
-                                             'previous' => 'minor'),
-                                       $rev->getversion(), $rev);
-                    $tr = HTML::tr(HTML::td(array('align'=> 'right'),
-                                            $difflink, $nbsp),
-                                   $includeminor ? (HTML::td($nbsp, ($isminor ? "minor" : "major"), $nbsp)) : "",
-                                   HTML::td($nbsp, WikiLink($rev->get('author'),
-                                                            'if_known'), $nbsp),
-                                   HTML::td($nbsp, $rev->get('summary')),
-                                   HTML::td(array('align'=> 'right'),
-                                            $WikiTheme->formatdatetime($rev->get('mtime')))
-                                   );
+                            'previous' => 'minor'),
+                        $rev->getversion(), $rev);
+                    $tr = HTML::tr(HTML::td(array('align' => 'right'),
+                            $difflink, $nbsp),
+                        $includeminor ? (HTML::td($nbsp, ($isminor ? "minor" : "major"), $nbsp)) : "",
+                        HTML::td($nbsp, WikiLink($rev->get('author'),
+                            'if_known'), $nbsp),
+                        HTML::td($nbsp, $rev->get('summary')),
+                        HTML::td(array('align' => 'right'),
+                            $WikiTheme->formatdatetime($rev->get('mtime')))
+                    );
 
                     $class = $isminor ? 'evenrow' : 'oddrow';
                     $tr->setAttr('class', $class);
@@ -141,21 +139,20 @@ extends WikiPlugin
                     //$pagelist->addPage($rev->getPage());
                 }
             }
-            $captext = fmt($includeminor ? "History of all major and minor edits by %s to page %s."  : "History of all major edits by %s to page %s." ,
-                           WikiLink($author, 'auto'),
-                           WikiLink($page, 'auto'));
-        }
-        else {
+            $captext = fmt($includeminor ? "History of all major and minor edits by %s to page %s." : "History of all major edits by %s to page %s.",
+                WikiLink($author, 'auto'),
+                WikiLink($page, 'auto'));
+        } else {
 
             //search all pages for all edits by this author
 
             $thead->pushContent(HTML::tr(HTML::th(_("Page Name")),
-                                      HTML::th(array('align'=> 'right'),
-                                               _("Version")),
-                                      $includeminor ? HTML::th(_("Minor")) : "",
-                                      HTML::th(_("Summary")),
-                                      HTML::th(_("Modified"))
-                                      ));
+                HTML::th(array('align' => 'right'),
+                    _("Version")),
+                $includeminor ? HTML::th(_("Minor")) : "",
+                HTML::th(_("Summary")),
+                HTML::th(_("Modified"))
+            ));
 
             $allpages_iter = $dbi->getAllPages($includedeleted);
             while ($p = $allpages_iter->next()) {
@@ -166,19 +163,19 @@ extends WikiPlugin
                     $authordoesmatch = $author == $rev->get('author');
                     if ($authordoesmatch && (!$isminor || ($includeminor && $isminor))) {
                         $difflink = Button(array('action' => 'diff',
-                                                 'previous' => 'minor'),
-                                           $rev->getversion(), $rev);
+                                'previous' => 'minor'),
+                            $rev->getversion(), $rev);
                         $tr = HTML::tr(
-                                       HTML::td($nbsp,
-                                                ($isminor ? $rev->_pagename : WikiLink($rev->_pagename, 'auto'))
-                                                ),
-                                       HTML::td(array('align'=> 'right'),
-                                                $difflink, $nbsp),
-                                       $includeminor ? (HTML::td($nbsp, ($isminor ? "minor" : "major"), $nbsp)) : "",
-                                       HTML::td($nbsp, $rev->get('summary')),
-                                       HTML::td(array('align'=> 'right'),
-                                                $WikiTheme->formatdatetime($rev->get('mtime')), $nbsp)
-                                       );
+                            HTML::td($nbsp,
+                                ($isminor ? $rev->_pagename : WikiLink($rev->_pagename, 'auto'))
+                            ),
+                            HTML::td(array('align' => 'right'),
+                                $difflink, $nbsp),
+                            $includeminor ? (HTML::td($nbsp, ($isminor ? "minor" : "major"), $nbsp)) : "",
+                            HTML::td($nbsp, $rev->get('summary')),
+                            HTML::td(array('align' => 'right'),
+                                $WikiTheme->formatdatetime($rev->get('mtime')), $nbsp)
+                        );
 
                         $class = $isminor ? 'evenrow' : 'oddrow';
                         $tr->setAttr('class', $class);
@@ -188,8 +185,8 @@ extends WikiPlugin
                 }
             }
 
-            $captext = fmt($includeminor ? "History of all major and minor modifications for any page edited by %s."  : "History of major modifications for any page edited by %s." ,
-                           WikiLink($author, 'auto'));
+            $captext = fmt($includeminor ? "History of all major and minor modifications for any page edited by %s." : "History of major modifications for any page edited by %s.",
+                WikiLink($author, 'auto'));
         }
 
         $table->pushContent(HTML::caption($captext));
@@ -217,7 +214,7 @@ extends WikiPlugin
         //        return $pagelist;
     }
 
-};
+}
 
 // Local Variables:
 // mode: php

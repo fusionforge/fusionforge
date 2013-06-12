@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: PhpWeather.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  *
@@ -57,26 +57,24 @@ if (!defined('PHPWEATHER_BASE_DIR')) {
 }
 
 class WikiPlugin_PhpWeather
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return _("PhpWeather");
+    function getDescription()
+    {
+        return _("Provide weather reports from the Internet.");
     }
 
-    function getDescription () {
-        return _("The PhpWeather plugin provides weather reports from the Internet.");
+    function getDefaultArguments()
+    {
+        return array('icao' => 'EKAH',
+            'cc' => 'DK',
+            'language' => 'en',
+            'menu' => false,
+            'units' => 'both_metric');
     }
 
-    function getDefaultArguments() {
-        global $LANG;
-        return array('icao'  => 'EKAH',
-                     'cc'    => 'DK',
-                     'language'  => 'en',
-                     'menu'  => false,
-                     'units' => 'both_metric');
-    }
-
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         // When 'phpweather/phpweather.php' is not installed then
         // PHPWEATHER_BASE_DIR will be undefined.
         if (!defined('PHPWEATHER_BASE_DIR'))
@@ -96,8 +94,8 @@ extends WikiPlugin
             if (!$w->get_country_code()) {
                 /* The country code couldn't be resolved, so we
                  * shouldn't use the ICAO: */
-                trigger_error(sprintf(_("The ICAO '%s' wasn't recognized."),
-                                      $icao), E_USER_NOTICE);
+                trigger_error(sprintf(_("The ICAO “%s” wasn't recognized."),
+                    $icao), E_USER_NOTICE);
                 $icao = '';
             }
         }
@@ -107,9 +105,9 @@ extends WikiPlugin
             /* We check and correct the language if necessary: */
             //if (!in_array($language, array_keys($w->get_languages('text')))) {
             if (!in_array($language, array_keys(get_languages('text')))) {
-                trigger_error(sprintf(_("%s does not know about the language '%s', using 'en' instead."),
-                                      $this->getName(), $language),
-                              E_USER_NOTICE);
+                trigger_error(sprintf(_("%s does not know about the language “%s”, using “en” instead."),
+                        $this->getName(), $language),
+                    E_USER_NOTICE);
                 $language = 'en';
             }
 
@@ -122,7 +120,7 @@ extends WikiPlugin
 
             $i_temp = HTML::img(array('src' => $i->get_temp_image()));
             $i_wind = HTML::img(array('src' => $i->get_winddir_image()));
-            $i_sky  = HTML::img(array('src' => $i->get_sky_image()));
+            $i_sky = HTML::img(array('src' => $i->get_sky_image()));
 
             $m = $t->print_pretty();
 
@@ -134,7 +132,7 @@ extends WikiPlugin
 
             $i_table = HTML::table($i_tr);
             $i_table->pushContent(HTML::tr(HTML::td(array('colspan' => '2'),
-                                                    $i_sky)));
+                $i_sky)));
 
             $tr = HTML::tr();
             $tr->pushContent($m_td);
@@ -148,23 +146,23 @@ extends WikiPlugin
         if ($menu || empty($icao)) {
 
             $form_arg = array('action' => $request->getURLtoSelf(),
-                              'method' => 'get');
+                'method' => 'get');
 
             /* The country box is always part of the menu: */
             $p1 = HTML::p(new RawXml(get_countries_select($w, $cc)));
 
             /* We want to save the language: */
-            $p1->pushContent(HTML::input(array('type'  => 'hidden',
-                                               'name'  => 'language',
-                                               'value' => $language)));
+            $p1->pushContent(HTML::input(array('type' => 'hidden',
+                'name' => 'language',
+                'value' => $language)));
             /* And also the ICAO: */
-            $p1->pushContent(HTML::input(array('type'  => 'hidden',
-                                               'name'  => 'icao',
-                                               'value' => $icao)));
+            $p1->pushContent(HTML::input(array('type' => 'hidden',
+                'name' => 'icao',
+                'value' => $icao)));
 
             $caption = (empty($cc) ? _("Submit country") : _("Change country"));
-            $p1->pushContent(HTML::input(array('type'  => 'submit',
-                                               'value' => $caption)));
+            $p1->pushContent(HTML::input(array('type' => 'submit',
+                'value' => $caption)));
 
             $html->pushContent(HTML::form($form_arg, $p1));
 
@@ -174,14 +172,14 @@ extends WikiPlugin
                 $p2 = HTML::p();
 
                 /* We need the country code after the form is submitted: */
-                $p2->pushContent(HTML::input(array('type'  => 'hidden',
-                                                   'name'  => 'cc',
-                                                   'value' => $cc)));
+                $p2->pushContent(HTML::input(array('type' => 'hidden',
+                    'name' => 'cc',
+                    'value' => $cc)));
 
                 $p2->pushContent(new RawXml(get_stations_select($w, $cc, $icao)));
                 $p2->pushContent(new RawXml(get_languages_select($language)));
-                $p2->pushContent(HTML::input(array('type'  => 'submit',
-                                                   'value' => _("Submit location"))));
+                $p2->pushContent(HTML::input(array('type' => 'submit',
+                    'value' => _("Submit location"))));
 
                 $html->pushContent(HTML::form($form_arg, $p2));
 
@@ -191,7 +189,7 @@ extends WikiPlugin
 
         return $html;
     }
-};
+}
 
 // Local Variables:
 // mode: php

@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: MostPopular.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -24,28 +24,26 @@
 require_once 'lib/PageList.php';
 
 class WikiPlugin_MostPopular
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return _("MostPopular");
-    }
-
-    function getDescription () {
+    function getDescription()
+    {
         return _("List the most popular pages.");
     }
 
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array_merge
-            (
-             PageList::supportedArgs(),
-             array('pagename' => '[pagename]', // hackish
-                   //'exclude'  => '',
-                   'limit'    => 20, // limit <0 returns least popular pages
-                   'noheader' => 0,
-                   'sortby'   => '-hits',
-                   'info'     => false,
-                   //'paging'   => 'auto'
-                   ));
+        (
+            PageList::supportedArgs(),
+            array('pagename' => '[pagename]', // hackish
+                //'exclude'  => '',
+                'limit' => 20, // limit <0 returns least popular pages
+                'noheader' => 0,
+                'sortby' => '-hits',
+                'info' => false,
+                //'paging'   => 'auto'
+            ));
     }
 
     // info arg allows multiple columns
@@ -53,18 +51,19 @@ extends WikiPlugin
     // exclude arg allows multiple pagenames exclude=HomePage,RecentChanges
     // sortby: only pagename or hits. mtime not!
 
-    function run($dbi, $argstr, &$request, $basepage) {
-            $args = $this->getArgs($argstr, $request);
+    function run($dbi, $argstr, &$request, $basepage)
+    {
+        $args = $this->getArgs($argstr, $request);
         extract($args);
-        if (strstr($sortby,'mtime')) {
+        if (strstr($sortby, 'mtime')) {
             trigger_error(_("sortby=mtime not supported with MostPopular"),
-                          E_USER_WARNING);
+                E_USER_WARNING);
             $sortby = '';
         }
         $columns = $info ? explode(",", $info) : array();
         array_unshift($columns, 'hits');
 
-        if (! $request->getArg('count')) {
+        if (!$request->getArg('count')) {
             //$args['count'] = $dbi->numPages(false,$exclude);
             $allpages = $dbi->mostPopular(0, $sortby);
             $args['count'] = $allpages->count();
@@ -84,7 +83,7 @@ extends WikiPlugin
         }
         $pages->free();
 
-        if (! $noheader) {
+        if (!$noheader) {
             if ($limit > 0) {
                 $pagelist->setCaption(fmt("The %d most popular pages of this wiki:", $limit));
             } elseif ($limit < 0) {
@@ -96,7 +95,7 @@ extends WikiPlugin
 
         return $pagelist;
     }
-};
+}
 
 // Local Variables:
 // mode: php

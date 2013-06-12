@@ -1,8 +1,6 @@
--- $Id: psql-initialize.sql 6481 2009-02-05 14:48:07Z vargenau $
-
 \set QUIET
 
---================================================================
+-- ================================================================
 -- Prefix for table names.
 --
 -- You should set this to the same value you specify for
@@ -10,7 +8,7 @@
 
 \set prefix 	''
 
---================================================================
+-- ================================================================
 -- Which postgres user gets access to the tables?
 --
 -- You should set this to the name of the postgres
@@ -27,11 +25,11 @@
 
 \set httpd_user	'wikiuser'
 
---================================================================
+-- ================================================================
 --
 -- Don't modify below this point unless you know what you are doing.
 --
---================================================================
+-- ================================================================
 
 \set qprefix '\'' :prefix '\''
 \set qhttp_user '\'' :httpd_user '\''
@@ -85,8 +83,8 @@
 
 \set pref_tbl 	 	:prefix 'pref'
 \set pref_id_idx 	:prefix 'pref_id_idx'
---\set user_tbl 	 	:prefix 'users'
---\set user_id_idx  	:prefix 'users_id_idx'
+-- \set user_tbl 	 	:prefix 'users'
+-- \set user_id_idx  	:prefix 'users_id_idx'
 \set member_tbl  	:prefix 'member'
 \set member_id_idx  	:prefix 'member_id_idx'
 \set member_group_idx 	:prefix 'member_group_idx'
@@ -107,7 +105,7 @@ CREATE TABLE :page_tbl (
         pagename 	VARCHAR(100) NOT NULL UNIQUE CHECK (pagename <> ''),
 	hits 		INT4 NOT NULL DEFAULT 0,
         pagedata 	TEXT NOT NULL DEFAULT '',
-	--cached_html  	bytea DEFAULT ''
+	-- cached_html  	bytea DEFAULT ''
 	cached_html  	TEXT DEFAULT ''
 );
 -- CREATE UNIQUE INDEX :page_id_idx ON :page_tbl (id);
@@ -218,9 +216,9 @@ CREATE TABLE :rating_tbl (
 );
 CREATE UNIQUE INDEX :rating_id_idx ON :rating_tbl (dimension, raterpage, rateepage);
 
---================================================================
+-- ================================================================
 -- end of page relations
---================================================================
+-- ================================================================
 
 \echo Creating :session_tbl
 CREATE TABLE :session_tbl (
@@ -280,7 +278,7 @@ CREATE INDEX :accesslog_time_idx ON :accesslog_tbl (time_stamp);
 CREATE INDEX :accesslog_host_idx ON :accesslog_tbl (remote_host);
 -- create extra indices on demand (usually referer. see plugin/AccessLogSql)
 
---================================================================
+-- ================================================================
 
 -- Use the tsearch2 fulltextsearch extension: (recommended) 7.4, 8.0, 8.1
 -- at first init it for the database:
@@ -305,7 +303,7 @@ CREATE TRIGGER tsvectorupdate BEFORE UPDATE OR INSERT ON :version_tbl
 -- see http://www.sai.msu.su/~megera/oddmuse/index.cgi/Tsearch_V2_Notes
 -- update pg_ts_cfg set locale='en_US.UTF-8' where ts_name='default';
 
---================================================================
+-- ================================================================
 
 \echo You might want to ignore the following errors or run 
 \echo /usr/sbin/createuser -S -R -d  :httpd_user
@@ -325,7 +323,7 @@ GRANT SELECT ON :member_tbl				TO :httpd_user;
 GRANT SELECT,INSERT,UPDATE,DELETE ON :rating_tbl	TO :httpd_user;
 GRANT SELECT,INSERT,UPDATE,DELETE ON :accesslog_tbl	TO :httpd_user;
 
---================================================================
+-- ================================================================
 -- some stored procedures to put unneccesary syntax into the server
 
 \echo Initializing stored procedures

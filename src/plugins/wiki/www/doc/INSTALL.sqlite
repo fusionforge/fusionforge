@@ -37,5 +37,3 @@ sqlite /tmp/phpwiki-sqlite.db < dump.sql
 
 Authors: 
 ReiniUrban (phpwiki developer) and Matthew Palmer (phpwiki debian maintainer)
-
-$Id: INSTALL.sqlite 6202 2008-08-26 13:14:32Z vargenau $

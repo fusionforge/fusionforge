@@ -6,7 +6,6 @@ if (!defined('PHPWIKI_VERSION')) {
     exit;
 }
 
-// $Id: themeinfo.php 7968 2011-03-07 13:39:47Z vargenau $
 /**
  * tiny actionbar, only Edit (if signed in) and Info => PageInfo,
  *   all other Actionbars buttons in info.tmpl
@@ -16,16 +15,17 @@ if (!defined('PHPWIKI_VERSION')) {
 
 require_once 'lib/WikiTheme.php';
 
-class WikiTheme_smaller extends WikiTheme {
+class WikiTheme_smaller extends WikiTheme
+{
 
-    function makeActionButton ($action, $label = false, $page_or_rev = false) {
+    function makeActionButton($action, $label = false, $page_or_rev = false)
+    {
         extract($this->_get_name_and_rev($page_or_rev));
 
         if (is_array($action)) {
             $attr = $action;
             $action = isset($attr['action']) ? $attr['action'] : 'browse';
-        }
-        else
+        } else
             $attr['action'] = $action;
 
         $class = is_safe_action($action) ? 'named-wiki' : 'wikiadmin';

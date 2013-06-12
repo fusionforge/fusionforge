@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: WikiAdminChown.php 8184 2011-11-28 14:04:37Z vargenau $
+<?php
+
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -30,56 +30,56 @@ require_once 'lib/PageList.php';
 require_once 'lib/plugin/WikiAdminSelect.php';
 
 class WikiPlugin_WikiAdminChown
-extends WikiPlugin_WikiAdminSelect
+    extends WikiPlugin_WikiAdminSelect
 {
-    function getName() {
-        return _("WikiAdminChown");
-    }
-
-    function getDescription() {
+    function getDescription()
+    {
         return _("Change owner of selected pages.");
     }
 
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array_merge
-            (
-             WikiPlugin_WikiAdminSelect::getDefaultArguments(),
-             array(
-                   'user'         => false,
-                   /* Columns to include in listing */
-                   'info'     => 'pagename,owner,mtime',
-                   ));
+        (
+            WikiPlugin_WikiAdminSelect::getDefaultArguments(),
+            array(
+                'user' => false,
+                /* Columns to include in listing */
+                'info' => 'pagename,owner,mtime',
+            ));
     }
 
-    function chownPages(&$dbi, &$request, $pages, $newowner) {
+    function chownPages(&$dbi, &$request, $pages, $newowner)
+    {
         $result = HTML::div();
         $ul = HTML::ul();
         $count = 0;
         foreach ($pages as $name) {
             $page = $dbi->getPage($name);
             $current = $page->getCurrentRevision();
-            if ( ($owner = $page->getOwner()) and
-                 $newowner != $owner ) {
+            if (($owner = $page->getOwner()) and
+                $newowner != $owner
+            ) {
                 if (!mayAccessPage('change', $name)) {
-                    $ul->pushContent(HTML::li(fmt("Access denied to change page '%s'.",
-                                                  WikiLink($name))));
+                    $ul->pushContent(HTML::li(fmt("Access denied to change page “%s”.",
+                        WikiLink($name))));
                 } else {
                     $version = $current->getVersion();
                     $meta = $current->_data;
                     $text = $current->getPackedContent();
-                    $meta['summary'] = "Change page owner from '".$owner."' to '".$newowner."'";
+                    $meta['summary'] = "Change page owner from '" . $owner . "' to '" . $newowner . "'";
                     $meta['is_minor_edit'] = 1;
-                    $meta['author'] =  $request->_user->UserName();
+                    $meta['author'] = $request->_user->UserName();
                     unset($meta['mtime']); // force new date
                     $page->set('owner', $newowner);
                     $page->save($text, $version + 1, $meta);
                     if ($page->get('owner') === $newowner) {
-                        $ul->pushContent(HTML::li(fmt("Change owner of page '%s' to '%s'.",
-                                                      WikiLink($name), WikiLink($newowner))));
+                        $ul->pushContent(HTML::li(fmt("Change owner of page “%s” to “%s”.",
+                            WikiLink($name), WikiLink($newowner))));
                         $count++;
                     } else {
-                        $ul->pushContent(HTML::li(fmt("Could not change owner of page '%s' to '%s'.",
-                                                      WikiLink($name), $newowner)));
+                        $ul->pushContent(HTML::li(fmt("Could not change owner of page “%s” to “%s”.",
+                            WikiLink($name), $newowner)));
                     }
                 }
             }
@@ -101,7 +101,8 @@ extends WikiPlugin_WikiAdminSelect
         }
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         if ($request->getArg('action') != 'browse') {
             if (!$request->getArg('action') == _("PhpWikiAdministration/Chown")) {
                 return $this->disabled(_("Plugin not run: not in browse mode"));
@@ -128,7 +129,8 @@ extends WikiPlugin_WikiAdminSelect
         if ($p && !$request->isPost())
             $pages = $p;
         if ($p && $request->isPost() &&
-            !empty($post_args['chown']) && empty($post_args['cancel'])) {
+            !empty($post_args['chown']) && empty($post_args['cancel'])
+        ) {
             // without individual PagePermissions:
             if (!ENABLE_PAGEPERM and !$request->_user->isAdmin()) {
                 $request->_notAuthorized(WIKIAUTH_ADMIN);
@@ -138,7 +140,7 @@ extends WikiPlugin_WikiAdminSelect
             if ($post_args['action'] == 'verify') {
                 // Real action
                 return $this->chownPages($dbi, $request, array_keys($p),
-                                          trim($post_args['user']));
+                    trim($post_args['user']));
             }
             if ($post_args['action'] == 'select') {
                 if (!empty($post_args['user']))
@@ -151,7 +153,7 @@ extends WikiPlugin_WikiAdminSelect
         if ($next_action == 'select' and empty($pages)) {
             // List all pages to select from.
             $pages = $this->collectPages($pages, $dbi, $args['sortby'], $args['limit'],
-                                         $args['exclude']);
+                $args['exclude']);
         }
         /* // let the user decide which info
          if ($next_action == 'verify') {
@@ -170,38 +172,38 @@ extends WikiPlugin_WikiAdminSelect
             $button_label = _("Yes");
             $header->pushContent(HTML::legend(_("Confirm ownership change")));
             $header->pushContent(
-              HTML::p(HTML::strong(
-                _("Are you sure you want to change the owner of the selected pages?"))));
+                HTML::p(HTML::strong(
+                    _("Are you sure you want to change the owner of the selected pages?"))));
             $header = $this->chownForm($header, $post_args);
-        }
-        else {
-            $button_label = _("Change owner of selected pages");
+        } else {
+            $button_label = _("Change owner of selected pages.");
             $header->pushContent(HTML::legend(_("Select the pages to change the owner")));
             $header = $this->chownForm($header, $post_args);
         }
 
         $buttons = HTML::p(Button('submit:admin_chown[chown]', $button_label, 'wikiadmin'),
-                           Button('submit:admin_chown[cancel]', _("Cancel"), 'button'));
+            Button('submit:admin_chown[cancel]', _("Cancel"), 'button'));
         $header->pushContent($buttons);
 
         return HTML::form(array('action' => $request->getPostURL(),
-                                'method' => 'post'),
-                          $header,
-                          $pagelist->getContent(),
-                          HiddenInputs($request->getArgs(),
-                                        false,
-                                        array('admin_chown')),
-                          HiddenInputs(array('admin_chown[action]' => $next_action)),
-                          ENABLE_PAGEPERM
-                          ? ''
-                          : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)));
+                'method' => 'post'),
+            $header,
+            $pagelist->getContent(),
+            HiddenInputs($request->getArgs(),
+                false,
+                array('admin_chown')),
+            HiddenInputs(array('admin_chown[action]' => $next_action)),
+            ENABLE_PAGEPERM
+                ? ''
+                : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)));
     }
 
-    function chownForm(&$header, $post_args) {
+    function chownForm(&$header, $post_args)
+    {
         $header->pushContent(_("Change owner to: "));
         $header->pushContent(HTML::input(array('name' => 'admin_chown[user]',
-                                               'value' => $post_args['user'],
-                                               'size' => 40)));
+            'value' => $post_args['user'],
+            'size' => 40)));
         return $header;
     }
 }

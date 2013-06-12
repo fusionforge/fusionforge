@@ -1,7 +1,3 @@
-/**
- *  $Id: IE70Fixes.css 7965 2011-03-07 09:47:31Z vargenau $
- */
-
 /* 7.0 - only fixes */
 /* content area */
 /* workaround for various ie float bugs */
@@ -19,6 +15,7 @@
      */
     padding-top: 0;
 }
+
 .rtl #column-one #p-navigation {
     margin-top: 160px;
 }
@@ -44,23 +41,29 @@
     border: solid #aaa;
     border-width: 1px 1px 0;
 }
+
 #p-cactions li.selected a {
     border-color: #fabd23;
     padding-bottom: 0.17em !important;
 }
+
 #p-cactions li a:hover {
     padding-bottom: 0.17em !important;
 }
+
 #p-navigation a {
     display: inline-block;
     width: 100%;
 }
+
 #portal-personaltools {
     padding-bottom: 0.1em;
 }
+
 textarea {
     width: 96%;
 }
+
 tt {
     font-size: 110%;
 }

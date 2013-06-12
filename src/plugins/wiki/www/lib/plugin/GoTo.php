@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: GoTo.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
  *
@@ -27,26 +27,25 @@
  *  Note: pagenames are absolute, not relative to the actual subpage.
  *
  *  Usage: <<GoTo >>
- *  @author: Michael van Dam
+ * @author: Michael van Dam
  */
 
 class WikiPlugin_GoTo
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return _("GoTo");
-    }
-
-    function getDescription () {
+    function getDescription()
+    {
         return _("Go to or create page.");
     }
 
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array('size' => 32);
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
-        $request->setArg('action',false);
+    function run($dbi, $argstr, &$request, $basepage)
+    {
+        $request->setArg('action', false);
         $args = $this->getArgs($argstr, $request);
         extract($args);
 
@@ -55,9 +54,9 @@ extends WikiPlugin
             $request->setArg('goto', false);
             $target = $goto['target'];
             if ($dbi->isWikiPage($target))
-                $url = WikiURL($target,0,1);
+                $url = WikiURL($target, 0, 1);
             else
-                $url = WikiURL($target, array('action'=>'edit'),1);
+                $url = WikiURL($target, array('action' => 'edit'), 1);
 
             $request->redirect($url);
             // User should see nothing after redirect
@@ -65,15 +64,15 @@ extends WikiPlugin
         }
 
         $action = $request->getURLtoSelf();
-        $form = HTML::form(array('action'=>$action,
-                                 'method'=>'post'
-                          ));
+        $form = HTML::form(array('action' => $action,
+            'method' => 'post'
+        ));
 
         $form->pushContent(HiddenInputs($request->getArgs()));
 
         $textfield = HTML::input(array('type' => 'text',
-                                       'size' => $size,
-                                       'name' => 'goto[target]'));
+            'size' => $size,
+            'name' => 'goto[target]'));
 
         $button = Button('submit:goto[go]', _("Go"), false);
 
@@ -82,7 +81,7 @@ extends WikiPlugin
         return $form;
 
     }
-};
+}
 
 // Local Variables:
 // mode: php

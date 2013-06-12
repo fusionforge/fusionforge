@@ -1,11 +1,10 @@
 Date: Tue,  4 Jan 2011 11:59:41 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: SeiteFinden 7799 2011-01-04 11:05:56Z vargenau $
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=SeiteFinden;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=utf-8
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 Als Startpunkt zum Herumstöbern im Wiki eignen sich am besten die

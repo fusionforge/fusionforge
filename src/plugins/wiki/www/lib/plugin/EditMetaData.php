@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: EditMetaData.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * Copyright 1999,2000,2001,2002,2007 $ThePhpWikiProgrammingTeam
  *
@@ -33,38 +33,36 @@
  *
  * Access by restricted to ADMIN_USER
  *
- * Written by MichaelVanDam, to test out some ideas about
+ * Written by Michael Van Dam, to test out some ideas about
  * PagePermissions and PageTypes.
  *
- * Rewritten for recursive array support by ReiniUrban.
+ * Rewritten for recursive array support by Reini Urban.
  */
 
 require_once 'lib/plugin/_BackendInfo.php';
 
 class WikiPlugin_EditMetaData
-extends WikiPlugin__BackendInfo
+    extends WikiPlugin__BackendInfo
 {
-    function getName () {
-        return _("EditMetaData");
+    function getDescription()
+    {
+        return sprintf(_("Edit metadata for %s."), '[pagename]');
     }
 
-    function getDescription () {
-        return sprintf(_("Edit metadata for %s"), '[pagename]');
+    function getDefaultArguments()
+    {
+        return array('page' => '[pagename]');
     }
 
-    function getDefaultArguments() {
-        return array('page'       => '[pagename]'
-                    );
-    }
-
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $this->_args = $this->getArgs($argstr, $request);
         extract($this->_args);
         if (!$page)
             return '';
 
-        $this->hidden_pagemeta = array ('_cached_html');
-        $this->readonly_pagemeta = array ('hits', 'passwd');
+        $this->hidden_pagemeta = array('_cached_html');
+        $this->readonly_pagemeta = array('hits', 'passwd');
         $dbi = $request->getDbh();
         $p = $dbi->getPage($page);
         $pagemeta = $p->getMetaData();
@@ -75,30 +73,30 @@ extends WikiPlugin__BackendInfo
         //
         if ($request->isPost()
             and $request->_user->isAdmin()
-            and $request->getArg('metaedit'))
-        {
+                and $request->getArg('metaedit')
+        ) {
             $metafield = trim($request->getArg('metafield'));
             $metavalue = trim($request->getArg('metavalue'));
             $meta = $request->getArg('meta');
             $changed = 0;
             // meta[__global[_upgrade][name]] => 1030.13
             foreach ($meta as $key => $val) {
-                    if ($val != $pagemeta[$key]
-                    and !in_array($key, $this->readonly_pagemeta))
-                {
-                        $changed++;
+                if ($val != $pagemeta[$key]
+                    and !in_array($key, $this->readonly_pagemeta)
+                ) {
+                    $changed++;
                     $p->set($key, $val);
                 }
             }
             if ($metafield and !in_array($metafield, $this->readonly_pagemeta)) {
-                    // __global[_upgrade][name] => 1030.13
+                // __global[_upgrade][name] => 1030.13
                 if (preg_match('/^(.*?)\[(.*?)\]$/', $metafield, $matches)) {
                     list(, $array_field, $array_key) = $matches;
                     $array_value = $pagemeta[$array_field];
                     $array_value[$array_key] = $metavalue;
                     if ($pagemeta[$array_field] != $array_value) {
-                            $changed++;
-                            $p->set($array_field, $array_value);
+                        $changed++;
+                        $p->set($array_field, $array_value);
                     }
                 } elseif ($pagemeta[$metafield] != $metavalue) {
                     $changed++;
@@ -108,7 +106,7 @@ extends WikiPlugin__BackendInfo
             if ($changed) {
                 $dbi->touch();
                 $url = $request->getURLtoSelf(false,
-                                          array('meta','metaedit','metafield','metavalue'));
+                    array('meta', 'metaedit', 'metafield', 'metavalue'));
                 $request->redirect($url);
                 // The rest of the output will not be seen due to the
                 // redirect.
@@ -126,11 +124,10 @@ extends WikiPlugin__BackendInfo
             // FIXME: invalid HTML
             $html->pushContent(HTML::p(fmt("No metadata for %s", $page)));
             $table = HTML();
-        }
-        else {
+        } else {
             $table = HTML::table(array('border' => 1,
-                                       'cellpadding' => 2,
-                                       'cellspacing' => 0));
+                'cellpadding' => 2,
+                'cellspacing' => 0));
             $this->_fixupData($pagemeta);
             $table->pushContent($this->_showhash("MetaData('$page')", $pagemeta));
         }
@@ -143,16 +140,16 @@ extends WikiPlugin__BackendInfo
             $valfield = HTML::input(array('name' => 'metavalue'), '');
             $button = Button('submit:metaedit', _("Submit"), false);
             $form = HTML::form(array('action' => $action,
-                                     'method' => 'post',
-                                     'accept-charset' => $GLOBALS['charset']),
-                               $hiddenfield,
-                               // edit existing fields
-                               $table,
-                               // add new ones
-                               $instructions, HTML::br(),
-                               $keyfield, ' => ', $valfield,
-                               HTML::raw('&nbsp;'), $button
-                               );
+                    'method' => 'post',
+                    'accept-charset' => 'UTF-8'),
+                $hiddenfield,
+                // edit existing fields
+                $table,
+                // add new ones
+                $instructions, HTML::br(),
+                $keyfield, ' => ', $valfield,
+                HTML::raw('&nbsp;'), $button
+            );
 
             $html->pushContent($form);
         } else {
@@ -161,20 +158,21 @@ extends WikiPlugin__BackendInfo
         return $html;
     }
 
-    function _showvalue ($key, $val, $prefix='') {
-            if (is_array($val) or is_object($val)) return $val;
+    private function _showvalue($key, $val, $prefix = '')
+    {
+        if (is_array($val) or is_object($val)) return $val;
         if (in_array($key, $this->hidden_pagemeta)) return '';
         if ($prefix) {
             $fullkey = $prefix . '[' . $key . ']';
-            if (substr($fullkey,0,1) == '[') {
-                    $meta = "meta".$fullkey;
-                    $fullkey = preg_replace("/\]\[/", "[", substr($fullkey, 1), 1);
+            if (substr($fullkey, 0, 1) == '[') {
+                $meta = "meta" . $fullkey;
+                $fullkey = preg_replace("/\]\[/", "[", substr($fullkey, 1), 1);
             } else {
                 $meta = preg_replace("/^([^\[]+)\[/", "meta[$1][", $fullkey, 1);
             }
         } else {
             $fullkey = $key;
-            $meta = "meta[".$key."]";
+            $meta = "meta[" . $key . "]";
         }
         //$meta = "meta[".$fullkey."]";
         $arr = array('name' => $meta, 'value' => $val);
@@ -185,10 +183,10 @@ extends WikiPlugin__BackendInfo
             return HTML::input($arr);
         } else {
             return HTML(HTML::em($fullkey), HTML::br(),
-                            HTML::input($arr));
+                HTML::input($arr));
         }
     }
-};
+}
 
 // Local Variables:
 // mode: php

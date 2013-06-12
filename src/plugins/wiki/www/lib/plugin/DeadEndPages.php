@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: DeadEndPages.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * This file is part of PhpWiki.
  *
@@ -25,12 +25,9 @@
 require_once 'lib/plugin/OrphanedPages.php';
 
 class WikiPlugin_DeadEndPages
-extends WikiPlugin_OrphanedPages
+    extends WikiPlugin_OrphanedPages
 {
-    function getName () {
-        return _("DeadEndPages");
-    }
-};
+}
 
 // Local Variables:
 // mode: php

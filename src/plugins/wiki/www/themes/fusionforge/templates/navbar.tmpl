@@ -1,28 +1,28 @@
-<?php // -*-php-*-
-// $Id: navbar.tmpl 8166 2011-10-03 14:49:15Z vargenau $
-
+<?php
 $curuserprefs = $user->getPreferences();
 $dbh = $request->getDbh();
 $username = $user->UserName();
 ?>
 
-   <tr><td class="submenu"><?php echo WikiLink(_("HomePage"), "", _("Home Page")) ?></td></tr>
-   <tr><td class="submenu"><?php echo WikiLink(_("RecentChanges"), "", _("Recent Changes")) ?></td></tr>
-   <tr><td class="submenu"><?php echo WikiLink(_("SpecialPages"), "", _("Special Pages")) ?></td></tr>
-   <tr><td class="submenu"><?php echo WikiLink(_("FindPage"), "", _("Search")) ?></td></tr>
+   <li class="submenu"><?php echo Button(array(), _("Home Page"), __("HomePage")) ?></li>
+   <li class="submenu"><?php echo Button(array(), _("Recent Changes"), __("RecentChanges")) ?></li>
+   <li class="submenu"><?php echo Button(array(), _("Special Pages"), __("SpecialPages")) ?></li>
+   <li class="submenu"><?php echo Button(array(), _("Search"), __("FindPage")) ?></li>
    <?php if ($curuserprefs->get('randomPageMenuItem')) { ?>
-     <tr><td class="submenu"><?php echo WikiLink(_("RandomPage"), "", _("Random Page")) ?></td></tr>
+     <li class="submenu"><?php echo Button(array(), _("Random Page"), __("RandomPage")) ?></li>
    <?php } ?>
    <?php if ($curuserprefs->get('likePagesMenuItem')) { ?>
-     <tr><td class="submenu"><?php echo Button(array('action'=>_("LikePages")), _("Like Pages"),$page->getName()) ?></td></tr>
+     <li class="submenu"><?php echo Button(array('action'=>__("LikePages")), _("Like Pages"), $page->getName()) ?></li>
    <?php } ?>
-   <tr><td class="submenu"><?php echo WikiLink(_("UpLoad"), "", _("Upload File")) ?></td></tr>
+   <?php if (!empty($user) && $user->isSignedIn()) { ?>
+     <li class="submenu"><?php echo Button(array(), _("Upload File"), __("UpLoad")) ?></li>
+   <?php } ?>
    <?php if (!empty($user) && $user->isAdmin()) { ?>
-     <tr><td class="submenu"><?php echo WikiLink(_("PhpWikiAdministration"), "", _("Wiki Admin")) ?></td></tr>
+     <li class="submenu"><?php echo Button(array(), _("Wiki Admin"), __("PhpWikiAdministration")) ?></li>
    <?php } ?>
    <?php if (!empty($user) && $user->isSignedIn()) { ?>
      <?php if ($dbh->isWikiPage($username)) { ?>
-       <tr><td class="submenu"><?php echo WikiLink($username, "", _("My User Page")) ?></td></tr>
+       <li class="submenu"><?php echo Button(array(), _("My User Page"), $username) ?></li>
      <?php } ?>
-     <tr><td class="submenu"><?php echo WikiLink(_("UserPreferences"), "", _("My Preferences")) ?></td></tr>
+     <li class="submenu"><?php echo Button(array(), _("User Preferences"), __("UserPreferences")) ?></li>
    <?php } ?>

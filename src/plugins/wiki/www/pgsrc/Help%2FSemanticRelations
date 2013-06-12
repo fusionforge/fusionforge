@@ -1,6 +1,5 @@
-Date: Thu,  9 Dec 2010 14:51:45 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FSemanticRelations 7757 2010-12-09 13:53:00Z vargenau $
+Date: Fri,  7 Dec 2012 18:48:35 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FSemanticRelations;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -8,14 +7,11 @@ Content-Type: application/x-phpwiki;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The PhpWiki:SemanticWeb implementation follows closely the
-implementation of the semantic mediawiki extension. It features:
-
+The ~PhpWiki ~SemanticWeb implementation follows closely the
+implementation of the semantic Mediawiki extension. It features:
 * Annotation of article-article-links by means of configurable relations (link-types).
-* Annotation of articles with simple data-values that are assigned to numeric
-  attributes.
-* Support for using physical units of measurement in all numerical attributes,
-  without need for prior configuration.
+* Annotation of articles with simple data-values that are assigned to numeric attributes.
+* Support for using physical units of measurement in all numerical attributes, without need for prior configuration.
 
 Relations can be searched for with regular expressions, attributes can be
 searched for with full mathematical expressions.
@@ -75,11 +71,8 @@ Chargers.
 }}}
 
 == See Also ==
-* [[PhpWiki:SemanticWeb]]
 * [[SemanticRelations]], [[ListRelations]], [[SemanticSearch]]
 * [[Help:SemanticRelationsPlugin|SemanticRelationsPlugin]], [[Help:SemanticSearchPlugin|SemanticSearchPlugin]]
-* [[PhpWiki:ImportRdf]], [[PhpWiki:ImportRdfs]], [[PhpWiki:ImportOwl]]
-* [[PhpWiki:ExportRdf]], [[PhpWiki:ExportRdfs]], [[PhpWiki:ExportOwl]]
 
 <noinclude>
 ----

@@ -1,6 +1,5 @@
-Date: Thu,  9 Dec 2010 14:51:45 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FLdapSearchPlugin 7757 2010-12-09 13:53:00Z vargenau $
+Date: Fri, 11 Jan 2013 11:16:51 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FLdapSearchPlugin;
   flags=PAGE_LOCKED;
@@ -31,30 +30,44 @@ The **~LdapSearch** [[Help:WikiPlugin|plugin]] displays a LDAP query as table.
 
 == Arguments ==
 
-host _(default: from LDAP_AUTH_HOST or localhost)_:
-        hostname or ip or ldap:// uri to connect to.
-
-port _(default: from LDAP_AUTH_HOST or 389)_:
-        portnumber to connect to.
-
-basedn _(default: LDAP_BASE_DN)_:
-        connect string: "ou=Users,o=Development,dc=mycompany.com"
-
-filter _(default: "(cn=*)")_:
-        Optional ldap_search() filter argument
-
-attributes _(default: empty)_ :
-        space seperated fields to return as table columns: "cn sn"
-
-options:
-        ldap_set_option(). Default: LDAP_SET_OPTION if host == LDAP_AUTH_HOST
-        Column seperated name=value pairs. Esp. needed for Windows Active directory:
-        "LDAP_OPT_PROTOCOL_VERSION=3:LDAP_OPT_REFERRALS=0"
-user:
-        Default: LDAP_AUTH_USER if host == LDAP_AUTH_HOST
-password:
-        Default: LDAP_AUTH_PASSWORD if host == LDAP_AUTH_HOST
-        user and password are required for Windows Active directory.
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **host**
+| hostname or ip or ldap:// uri to connect to.
+| from LDAP_AUTH_HOST or localhost
+|-
+| **port**
+| portnumber to connect to.
+| from LDAP_AUTH_HOST or 389
+|-
+| **basedn**
+| connect string: "ou=Users,o=Development,dc=mycompany.com"
+| LDAP_BASE_DN
+|-
+| **filter**
+| Optional ldap_search() filter argument
+| "(cn=*)"
+|-
+| **attributes**
+| space separated fields to return as table columns: "cn sn"
+| empty
+|-
+| **options**
+| ldap_set_option(). Column separated name=value pairs. Esp. needed for Windows Active directory: "LDAP_OPT_PROTOCOL_VERSION=3:LDAP_OPT_REFERRALS=0"
+| LDAP_SET_OPTION if host == LDAP_AUTH_HOST
+|-
+| **user**
+| user and password are required for Windows Active directory.
+| Default: LDAP_AUTH_USER if host == LDAP_AUTH_HOST
+|-
+| **password**
+| user and password are required for Windows Active directory.
+| Default: LDAP_AUTH_PASSWORD if host == LDAP_AUTH_HOST
+|}
 
 == Examples ==
 
@@ -68,7 +81,7 @@ password:
 >>
 
 == Author ==
-* [[PhpWiki:JohnLines|John Lines]]
+* John Lines
 
 == See Also ==
 

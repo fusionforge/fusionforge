@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: AddComment.php 8212 2011-12-16 13:26:15Z vargenau $
+<?php
+
 /*
  * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
  *
@@ -33,14 +33,11 @@
 include_once 'lib/plugin/WikiBlog.php';
 
 class WikiPlugin_AddComment
-extends WikiPlugin_WikiBlog
+    extends WikiPlugin_WikiBlog
 {
-    function getName () {
-        return _("AddComment");
-    }
-
-    function getDescription () {
-        return sprintf(_("Show and add comments for %s"),'[pagename]');
+    function getDescription()
+    {
+        return sprintf(_("Show and add comments for %s."), '[pagename]');
     }
 
     // Arguments:
@@ -57,20 +54,22 @@ extends WikiPlugin_WikiBlog
     //  jshide - boolean  - quick javascript expansion of the comments
     //                      and addcomment box
 
-    function getDefaultArguments() {
-        return array('pagename'   => '[pagename]',
-                     'order'      => 'normal',
-                     'mode'       => 'add,show',
-                     'jshide'     => '0',
-                     'noheader'   => false,
-                     //'sortby'     => '-pagename' // oldest first. reverse by order=reverse
-                    );
+    function getDefaultArguments()
+    {
+        return array('pagename' => '[pagename]',
+            'order' => 'normal',
+            'mode' => 'add,show',
+            'jshide' => '0',
+            'noheader' => false,
+            //'sortby'     => '-pagename' // oldest first. reverse by order=reverse
+        );
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $this->getArgs($argstr, $request);
         if (!$args['pagename']) {
-            return $this->error(sprintf(_("A required argument '%s' is missing."), 'pagename'));
+            return $this->error(sprintf(_("A required argument “%s” is missing."), 'pagename'));
         }
 
         // Get our form args.
@@ -80,63 +79,59 @@ extends WikiPlugin_WikiBlog
         if ($request->isPost() and !empty($comment['addcomment'])) {
             $this->add($request, $comment, 'comment'); // noreturn
         }
-        if ($args['jshide'] and isBrowserIE() and browserDetect("Mac")) {
-            //trigger_error(_("jshide set to 0 on Mac IE"), E_USER_NOTICE);
-            $args['jshide'] = 0;
-        }
 
         // Now we display previous comments and/or provide entry box
         // for new comments
         $html = HTML();
         if ($args['jshide']) {
-            $div = HTML::div(array('id'=>'comments','style'=>'display:none;'));
+            $div = HTML::div(array('id' => 'comments', 'style' => 'display:none;'));
             //$list->setAttr('style','display:none;');
             $div->pushContent(Javascript("
 function togglecomments(a) {
   comments=document.getElementById('comments');
   if (comments.style.display=='none') {
     comments.style.display='block';
-    a.title='"._("Click to hide the comments")."';
+    a.title='" . _("Click to hide the comments") . "';
   } else {
     comments.style.display='none';
-    a.title='"._("Click to display all comments")."';
+    a.title='" . _("Click to display all comments") . "';
   }
 }"));
-            $html->pushContent(HTML::h4(HTML::a(array('name'=>'comment-header',
-                                                      'class'=>'wikiaction',
-                                                      'title'=>_("Click to display"),
-                                                      'onclick'=>"togglecomments(this)"),
-                                                _("Comments"))));
+            $html->pushContent(HTML::h4(HTML::a(array('name' => 'comment-header',
+                    'class' => 'wikiaction',
+                    'title' => _("Click to display"),
+                    'onclick' => "togglecomments(this)"),
+                _("Comments"))));
         } else {
-            $div = HTML::div(array('id'=>'comments'));
+            $div = HTML::div(array('id' => 'comments'));
         }
         foreach (explode(',', $args['mode']) as $show) {
             if (!empty($seen[$show]))
                 continue;
             $seen[$show] = 1;
             switch ($show) {
-            case 'show':
-                $show = $this->showAll($request, $args, 'comment');
-                //if ($args['jshide']) $show->setAttr('style','display:none;');
-                $div->pushContent($show);
-                break;
-            case 'add':
-                global $WikiTheme;
-                if (!$WikiTheme->DUMP_MODE) {
-                    $add = $this->showForm($request, $args, 'addcomment');
-                    //if ($args['jshide']) $add->setAttr('style','display:none;');
-                    $div->pushContent($add);
-                }
-                break;
-            default:
-                return $this->error(sprintf("Bad mode ('%s')", $show));
+                case 'show':
+                    $show = $this->showAll($request, $args, 'comment');
+                    //if ($args['jshide']) $show->setAttr('style','display:none;');
+                    $div->pushContent($show);
+                    break;
+                case 'add':
+                    global $WikiTheme;
+                    if (!$WikiTheme->DUMP_MODE) {
+                        $add = $this->showForm($request, $args, 'addcomment');
+                        //if ($args['jshide']) $add->setAttr('style','display:none;');
+                        $div->pushContent($add);
+                    }
+                    break;
+                default:
+                    return $this->error(sprintf("Bad mode (“%s”)", $show));
             }
         }
         $html->pushContent($div);
         return $html;
     }
 
-};
+}
 
 // Local Variables:
 // mode: php

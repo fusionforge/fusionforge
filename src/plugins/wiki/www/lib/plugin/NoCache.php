@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: NoCache.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -34,28 +34,27 @@
  *
  */
 class WikiPlugin_NoCache
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName() {
-        return _("NoCache");
-    }
-
-    function getDescription() {
+    function getDescription()
+    {
         return _("Don't cache this page.");
     }
 
-    function getDefaultArguments() {
-        return array( 'nocache' => 1 );
+    function getDefaultArguments()
+    {
+        return array('nocache' => 1);
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $this->getArgs($argstr, $request);
         // works regardless of WIKIDB_NOCACHE_MARKUP
         // if WIKIDB_NOCACHE_MARKUP is false it doesn't hurt
         $request->setArg('nocache', $args['nocache']);
         return HTML::raw('');
     }
-};
+}
 
 // Local Variables:
 // mode: php

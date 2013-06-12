@@ -1,5 +1,3 @@
-# $Id: Makefile.global 8202 2011-11-29 13:08:05Z vargenau $
-#
 # themes/Makefile.global
 #
 # minify themes, for gnu make only

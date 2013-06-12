@@ -1,6 +1,3 @@
-<?php // -*-php-*-
-// $Id: editpage.tmpl 8103 2011-09-09 15:03:15Z vargenau $
-?>
 <?php if (isset($PREVIEW_CONTENT)) { ?>
   <p><strong><?php echo _("Preview only!  Changes not saved.")?></strong>
 <!-- FIXME: it would be nice to put a link to the #editarea anchor below,
@@ -30,7 +27,7 @@
  */ ?>
 <form method="post" id="editpage" name="editpage"
       action="<?php echo $request->getPostURL() ?>"
-      accept-charset="<?php echo CHARSET?>">
+      accept-charset="UTF-8">
   <?php if (!empty($_GET['start_debug'])) echo '<input type="hidden" name="start_debug" value="1" >'; ?>
   <?php /* To clear beyond a larger logo, such as in the Hawaiian theme */ ?>
   <br class="clear-floats" />
@@ -56,7 +53,7 @@
   <?php echo $CAPTCHA_LABEL ?><?php echo $CAPTCHA_INPUT ?>
 </div> 
 <?php } ?>
-<table summary="Toolbar: Page editing options." class="toolbar" width="100%"
+<table class="toolbar" width="100%"
        cellpadding="0" cellspacing="0" border="0">
 <tr valign="middle">
   <td> 
@@ -80,7 +77,7 @@
     <?php if ($user->isAdmin()) { ?> 
     <?php echo $LOCKED_CB ?> <label for="edit-locked" title="<?php echo _("Make the page read-only?")?>"><?php echo _("Locked")?></label>
     <?php if (ENABLE_PAGE_PUBLIC) { ?>
-    &nbsp;&nbsp;<?php echo $PUBLIC_CB ?> <label for="edit-public" title="<?php echo _("Export to a seperate public area?")?>"><?php echo _("Public")?></label>
+    &nbsp;&nbsp;<?php echo $PUBLIC_CB ?> <label for="edit-public" title="<?php echo _("Export to a separate public area?")?>"><?php echo _("Public")?></label>
     <?php }} ?>
   </td>
   <td colspan="2" align="right">

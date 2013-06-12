@@ -1,97 +1,106 @@
-<?php // -*-php-*-
-// $Id: HttpClient.php 7964 2011-03-05 17:05:30Z vargenau $
+<?php
 
 /**
-   Version 0.9, 6th April 2003 - Simon Willison ( http://simon.incutio.com/ )
-   Manual: http://scripts.incutio.com/httpclient/
+Version 0.9, 6th April 2003 - Simon Willison ( http://simon.incutio.com/ )
+Manual: http://scripts.incutio.com/httpclient/
 
-   Copyright © 2003 Incutio Limited
-   License: http://www.opensource.org/licenses/artistic-license.php
+Copyright © 2003 Incutio Limited
+License: http://www.opensource.org/licenses/artistic-license.php
 
-   File upload and xmlrpc support by Reini Urban for PhpWiki, 2006-12-28 18:12:47
-   Todo: proxy support
-*/
+File upload and xmlrpc support by Reini Urban for PhpWiki, 2006-12-28 18:12:47
+Todo: proxy support
+ */
 
-class HttpClient {
+class HttpClient
+{
     // Request vars
-    var $host;
-    var $port;
-    var $path;
-    var $method;
-    var $postdata = '';
-    var $cookies = array();
-    var $referer;
-    var $accept = 'text/xml,application/xml,application/xhtml+xml,text/html,text/plain,image/png,image/jpeg,image/gif,*/*';
-    var $accept_encoding = 'gzip';
-    var $accept_language = 'en-us';
-    var $user_agent = 'Incutio HttpClient v1.0';
-    var $boundary = "xYzZY"; // FIXME: check if this string doesn't occur in the data
+    public $host;
+    public $port;
+    public $path;
+    public $method;
+    public $postdata = '';
+    public $cookies = array();
+    public $referer;
+    public $accept = 'text/xml,application/xml,application/xhtml+xml,text/html,text/plain,image/png,image/jpeg,image/gif,*/*';
+    public $accept_encoding = 'gzip';
+    public $accept_language = 'en-us';
+    public $user_agent = 'Incutio HttpClient v1.0';
+    public $boundary = "xYzZY"; // FIXME: check if this string doesn't occur in the data
     // Options
-    var $timeout = 10;
-    var $use_gzip = true;
-    var $persist_cookies = true;  // If true, received cookies are placed in the $this->cookies array ready for the next request
-                                  // Note: This currently ignores the cookie path (and time) completely. Time is not important,
-                                  //       but path could possibly lead to security problems.
-    var $persist_referers = true; // For each request, sends path of last request as referer
-    var $debug = false;
-    var $handle_redirects = true; // Auaomtically redirect if Location or URI header is found
-    var $max_redirects = 5;
-    var $headers_only = false;    // If true, stops receiving once headers have been read.
+    public $timeout = 10;
+    public $use_gzip = true;
+    public $persist_cookies = true; // If true, received cookies are placed in the $this->cookies array ready for the next request
+    // Note: This currently ignores the cookie path (and time) completely. Time is not important,
+    //       but path could possibly lead to security problems.
+    public $persist_referers = true; // For each request, sends path of last request as referer
+    public $debug = false;
+    public $handle_redirects = true; // Auaomtically redirect if Location or URI header is found
+    public $max_redirects = 5;
+    public $headers_only = false; // If true, stops receiving once headers have been read.
     // Basic authorization variables
-    var $username;
-    var $password;
+    public $username;
+    public $password;
     // Response vars
-    var $status;
-    var $headers = array();
-    var $content = '';
-    var $errormsg;
+    public $status;
+    public $headers = array();
+    public $content = '';
+    public $errormsg;
     // Tracker variables
-    var $redirect_count = 0;
-    var $cookie_host = '';
+    public $redirect_count = 0;
+    public $cookie_host = '';
 
-    function HttpClient($host='localhost', $port=80) {
+    function HttpClient($host = 'localhost', $port = 80)
+    {
         $this->host = $host;
         $this->port = $port;
     }
-    function get($path, $data = false) {
+
+    function get($path, $data = false)
+    {
         $this->path = $path;
         $this->method = 'GET';
         if ($data) {
-            $this->path .= '?'.$this->buildQueryString($data);
+            $this->path .= '?' . $this->buildQueryString($data);
         }
         return $this->doRequest();
     }
-    function post($path, $data) {
+
+    function post($path, $data)
+    {
         $this->path = $path;
         $this->method = 'POST';
         $this->postdata = $this->buildQueryString($data);
         return $this->doRequest();
     }
-    function postfile($path, $filename) {
+
+    function postfile($path, $filename)
+    {
         $this->path = $path;
         $this->method = 'POST';
-    $boundary = $this->boundary; //"httpclient_boundary";
-    $headers[] = "Content-Type: multipart/form-data; boundary=\"$boundary\"";
-    $basename = basename($filename);
-    $this->postdata =
-        "\r\n--$boundary\r\n"
-        ."Content-Disposition: form-data; filename=\"$basename\"\r\n"
-        ."Content-Type: application/octet-stream\r\n\r\n";
-    $this->postdata .= join("",file($filename));
-    $this->postdata .= "\r\n\r\n--$boundary--\r\n";
+        $boundary = $this->boundary; //"httpclient_boundary";
+        $headers[] = "Content-Type: multipart/form-data; boundary=\"$boundary\"";
+        $basename = basename($filename);
+        $this->postdata =
+            "\r\n--$boundary\r\n"
+                . "Content-Disposition: form-data; filename=\"$basename\"\r\n"
+                . "Content-Type: application/octet-stream\r\n\r\n";
+        $this->postdata .= join("", file($filename));
+        $this->postdata .= "\r\n\r\n--$boundary--\r\n";
         return $this->doRequest();
     }
-    function buildQueryString($data) {
+
+    function buildQueryString($data)
+    {
         $querystring = '';
         if (is_array($data)) {
             // Change data in to postable data
             foreach ($data as $key => $val) {
                 if (is_array($val)) {
                     foreach ($val as $val2) {
-                        $querystring .= urlencode($key).'='.urlencode($val2).'&';
+                        $querystring .= urlencode($key) . '=' . urlencode($val2) . '&';
                     }
                 } else {
-                    $querystring .= urlencode($key).'='.urlencode($val).'&';
+                    $querystring .= urlencode($key) . '=' . urlencode($val) . '&';
                 }
             }
             $querystring = substr($querystring, 0, -1); // Eliminate unnecessary &
@@ -101,37 +110,38 @@ class HttpClient {
         return $querystring;
     }
 
-    function doRequest() {
+    function doRequest()
+    {
         // Performs the actual HTTP request, returning true or false depending on outcome
         // Ensure that the PHP timeout is longer than the socket timeout
         longer_timeout($this->timeout);
         if (!$fp = @fsockopen($this->host, $this->port, $errno, $errstr, $this->timeout)) {
             // Set error message
-            switch($errno) {
-            case -3:
-                $this->errormsg = 'Socket creation failed (-3)';
-            case -4:
-                $this->errormsg = 'DNS lookup failure (-4)';
-            case -5:
-                $this->errormsg = 'Connection refused or timed out (-5)';
-            default:
-                $this->errormsg = 'Connection failed ('.$errno.')';
-                $this->errormsg .= ' '.$errstr;
-                $this->debug($this->errormsg);
+            switch ($errno) {
+                case -3:
+                    $this->errormsg = 'Socket creation failed (-3)';
+                case -4:
+                    $this->errormsg = 'DNS lookup failure (-4)';
+                case -5:
+                    $this->errormsg = 'Connection refused or timed out (-5)';
+                default:
+                    $this->errormsg = 'Connection failed (' . $errno . ')';
+                    $this->errormsg .= ' ' . $errstr;
+                    $this->debug($this->errormsg);
             }
             return false;
         }
         socket_set_timeout($fp, $this->timeout);
-    if ( $this->method == 'POST' and preg_match("/\<methodCall\>/", $this->postdata))
-        $request = $this->buildRequest("text/xml"); //xmlrpc
-    else if ( $this->method == 'POST' and strstr("\r\nContent-Disposition: form-data; filename=",
-                             $this->postdata))
-    {
-        //file upload
-        $boundary = $this->boundary;
-        $request = $this->buildRequest("multipart/form-data; boundary=\"$boundary\"");
-    } else
-        $request = $this->buildRequest();
+        if ($this->method == 'POST' and preg_match("/\<methodCall\>/", $this->postdata))
+            $request = $this->buildRequest("text/xml"); //xmlrpc
+        else if ($this->method == 'POST' and strstr("\r\nContent-Disposition: form-data; filename=",
+            $this->postdata)
+        ) {
+            //file upload
+            $boundary = $this->boundary;
+            $request = $this->buildRequest("multipart/form-data; boundary=\"$boundary\"");
+        } else
+            $request = $this->buildRequest();
         $this->debug('Request', $request);
         fwrite($fp, $request);
         // Reset all the variables that should not persist between requests
@@ -148,11 +158,11 @@ class HttpClient {
                 // Deal with first line of returned data
                 $atStart = false;
                 if ($line === false) {
-                    $this->errormsg = "Empty ". $this->method. " response";
+                    $this->errormsg = "Empty " . $this->method . " response";
                     return false;
                 }
                 if (!preg_match('/HTTP\/(\\d\\.\\d)\\s*(\\d+)\\s*(.*)/', $line, $m)) {
-                    $this->errormsg = "Status code line invalid: ".htmlentities($line);
+                    $this->errormsg = "Status code line invalid: " . htmlentities($line);
                     $this->debug($this->errormsg);
                     return false;
                 }
@@ -219,13 +229,13 @@ class HttpClient {
         }
         // If $persist_referers, set the referer ready for the next request
         if (isset($this->persist_referers)) {
-            $this->debug('Persisting referer: '.$this->getRequestURL());
+            $this->debug('Persisting referer: ' . $this->getRequestURL());
             $this->referer = $this->getRequestURL();
         }
         // Finally, if handle_redirects and a redirect is sent, do that
         if (isset($this->handle_redirects)) {
             if (++$this->redirect_count >= $this->max_redirects) {
-                $this->errormsg = 'Number of redirects exceeded maximum ('.$this->max_redirects.')';
+                $this->errormsg = 'Number of redirects exceeded maximum (' . $this->max_redirects . ')';
                 $this->debug($this->errormsg);
                 $this->redirect_count = 0;
                 return false;
@@ -233,7 +243,7 @@ class HttpClient {
             $location = isset($this->headers['location']) ? $this->headers['location'] : '';
             $uri = isset($this->headers['uri']) ? $this->headers['uri'] : '';
             if ($location || $uri) {
-                $url = parse_url($location.$uri);
+                $url = parse_url($location . $uri);
                 if ($this->method == 'POST')
                     return $this->doRequest();
                 else
@@ -244,9 +254,10 @@ class HttpClient {
         return true;
     }
 
-    function buildRequest($ContentType = 'application/x-www-form-urlencoded') {
+    function buildRequest($ContentType = 'application/x-www-form-urlencoded')
+    {
         $headers = array();
-    // Using 1.1 leads to all manner of problems, such as "chunked" encoding
+        // Using 1.1 leads to all manner of problems, such as "chunked" encoding
         $headers[] = "{$this->method} {$this->path} HTTP/1.0";
         $headers[] = "Host: {$this->host}";
         $headers[] = "User-Agent: {$this->user_agent}";
@@ -268,26 +279,34 @@ class HttpClient {
         }
         // Basic authentication
         if (!empty($this->username) && !empty($this->password)) {
-            $headers[] = 'Authorization: BASIC '.base64_encode($this->username.':'.$this->password);
+            $headers[] = 'Authorization: BASIC ' . base64_encode($this->username . ':' . $this->password);
         }
         // If this is a POST, set the content type and length
         if ($this->postdata) {
-        $headers[] = 'Content-Type: ' . $ContentType;
-            $headers[] = 'Content-Length: '.strlen($this->postdata);
+            $headers[] = 'Content-Type: ' . $ContentType;
+            $headers[] = 'Content-Length: ' . strlen($this->postdata);
         }
-        $request = implode("\r\n", $headers)."\r\n\r\n".$this->postdata;
+        $request = implode("\r\n", $headers) . "\r\n\r\n" . $this->postdata;
         return $request;
     }
-    function getStatus() {
+
+    function getStatus()
+    {
         return $this->status;
     }
-    function getContent() {
+
+    function getContent()
+    {
         return $this->content;
     }
-    function getHeaders() {
+
+    function getHeaders()
+    {
         return $this->headers;
     }
-    function getHeader($header) {
+
+    function getHeader($header)
+    {
         $header = strtolower($header);
         if (isset($this->headers[$header])) {
             return $this->headers[$header];
@@ -295,62 +314,90 @@ class HttpClient {
             return false;
         }
     }
-    function getError() {
+
+    function getError()
+    {
         return $this->errormsg;
     }
-    function getCookies() {
+
+    function getCookies()
+    {
         return $this->cookies;
     }
-    function getRequestURL() {
-        $url = 'http://'.$this->host;
+
+    function getRequestURL()
+    {
+        $url = 'http://' . $this->host;
         if ($this->port != 80) {
-            $url = 'https://'.$this->host;
-            $url .= ':'.$this->port;
+            $url = 'https://' . $this->host;
+            $url .= ':' . $this->port;
         }
         $url .= $this->path;
         return $url;
     }
+
     // Setter methods
-    function setUserAgent($string) {
+    function setUserAgent($string)
+    {
         $this->user_agent = $string;
     }
-    function setAuthorization($username, $password) {
+
+    function setAuthorization($username, $password)
+    {
         $this->username = $username;
         $this->password = $password;
     }
-    function setCookies($array) {
+
+    function setCookies($array)
+    {
         $this->cookies = $array;
     }
+
     // Option setting methods
-    function useGzip($boolean) {
+    function useGzip($boolean)
+    {
         $this->use_gzip = $boolean;
     }
-    function setPersistCookies($boolean) {
+
+    function setPersistCookies($boolean)
+    {
         $this->persist_cookies = $boolean;
     }
-    function setPersistReferers($boolean) {
+
+    function setPersistReferers($boolean)
+    {
         $this->persist_referers = $boolean;
     }
-    function setHandleRedirects($boolean) {
+
+    function setHandleRedirects($boolean)
+    {
         $this->handle_redirects = $boolean;
     }
-    function setMaxRedirects($num) {
+
+    function setMaxRedirects($num)
+    {
         $this->max_redirects = $num;
     }
-    function setHeadersOnly($boolean) {
+
+    function setHeadersOnly($boolean)
+    {
         $this->headers_only = $boolean;
     }
-    function setDebug($boolean) {
+
+    function setDebug($boolean)
+    {
         $this->debug = $boolean;
     }
+
     // "Quick" static methods
-    function quickGet($url) {
+    function quickGet($url)
+    {
         $bits = parse_url($url);
         $host = $bits['host'];
         $port = isset($bits['port']) ? $bits['port'] : 80;
         $path = isset($bits['path']) ? $bits['path'] : '/';
         if (isset($bits['query'])) {
-            $path .= '?'.$bits['query'];
+            $path .= '?' . $bits['query'];
         }
         $client = new HttpClient($host, $port);
         if (!$client->get($path)) {
@@ -359,7 +406,9 @@ class HttpClient {
             return $client->getContent();
         }
     }
-    function quickPost($url, $data) {
+
+    function quickPost($url, $data)
+    {
         $bits = parse_url($url);
         $host = $bits['host'];
         $port = isset($bits['port']) ? $bits['port'] : 80;
@@ -371,15 +420,17 @@ class HttpClient {
             return $client->getContent();
         }
     }
-    function debug($msg, $object = false) {
+
+    function debug($msg, $object = false)
+    {
         if ($this->debug) {
-            print '<div style="border: 1px solid red; padding: 0.5em; margin: 0.5em;"><strong>HttpClient Debug:</strong> '.$msg;
+            print '<div style="border: 1px solid red; padding: 0.5em; margin: 0.5em;"><strong>HttpClient Debug:</strong> ' . $msg;
             if ($object) {
                 ob_start();
                 print_r($object);
                 $content = htmlentities(ob_get_contents());
                 ob_end_clean();
-                print '<pre>'.$content.'</pre>';
+                print '<pre>' . $content . '</pre>';
             }
             print '</div>';
         }

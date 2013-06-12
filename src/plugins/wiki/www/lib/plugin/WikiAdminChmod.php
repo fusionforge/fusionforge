@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: WikiAdminChmod.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  * Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -33,46 +33,46 @@ require_once 'lib/PageList.php';
 require_once 'lib/plugin/WikiAdminSelect.php';
 
 class WikiPlugin_WikiAdminChmod
-extends WikiPlugin_WikiAdminSelect
+    extends WikiPlugin_WikiAdminSelect
 {
-    function getName() {
-        return _("WikiAdminChmod");
-    }
-
-    function getDescription() {
+    function getDescription()
+    {
         return _("Set individual page permissions.");
     }
 
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array_merge
-            (
-             PageList::supportedArgs(),
-             array(
-                   's'                 => false,
-                   'perm'         => false,
-                   /* Columns to include in listing */
-                   'info'     => 'pagename,perm,mtime,author',
-                   ));
+        (
+            PageList::supportedArgs(),
+            array(
+                's' => false,
+                'perm' => false,
+                /* Columns to include in listing */
+                'info' => 'pagename,perm,mtime,author',
+            ));
     }
 
     // todo: change permstring to some kind of default ACL hash.
     // See PagePermission class
-    function chmodHelper($permstring) {
+    function chmodHelper($permstring)
+    {
         $perm = array();
         return $perm;
     }
 
-    function chmodPages(&$dbi, &$request, $pages, $permstring) {
+    function chmodPages(&$dbi, &$request, $pages, $permstring)
+    {
         $ul = HTML::ul();
         $count = 0;
         $acl = chmodHelper($permstring);
         if ($perm = new PagePermission($acl)) {
             foreach ($pages as $name) {
-                if ( $perm->store($dbi->getPage($name)) ) {
-                    $ul->pushContent(HTML::li(fmt("chmod page '%s' to '%s'.",$name, $permstring)));
+                if ($perm->store($dbi->getPage($name))) {
+                    $ul->pushContent(HTML::li(fmt("chmod page “%s” to “%s”.", $name, $permstring)));
                     $count++;
                 } else {
-                    $ul->pushContent(HTML::li(fmt("Couldn't chmod page '%s' to '%s'.", $name, $permstring)));
+                    $ul->pushContent(HTML::li(fmt("Couldn't chmod page “%s” to “%s”.", $name, $permstring)));
                 }
             }
         } else {
@@ -81,14 +81,15 @@ extends WikiPlugin_WikiAdminSelect
         if ($count) {
             $dbi->touch();
             return HTML($ul,
-                        HTML::p(fmt("%d pages have been changed.", $count)));
+                HTML::p(fmt("%d pages have been changed.", $count)));
         } else {
             return HTML($ul,
-                        HTML::p(_("No pages changed.")));
+                HTML::p(_("No pages changed.")));
         }
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         if (!DEBUG) {
             return $this->disabled("WikiAdminChmod not yet enabled. Set DEBUG to try it.");
         }
@@ -105,7 +106,8 @@ extends WikiPlugin_WikiAdminSelect
         if ($p && !$request->isPost())
             $pages = $p;
         if ($p && $request->isPost() &&
-            !empty($post_args['chmod']) && empty($post_args['cancel'])) {
+            !empty($post_args['chmod']) && empty($post_args['cancel'])
+        ) {
             // without individual PagePermissions:
             if (!ENABLE_PAGEPERM and !$request->_user->isAdmin()) {
                 $request->_notAuthorized(WIKIAUTH_ADMIN);
@@ -115,7 +117,7 @@ extends WikiPlugin_WikiAdminSelect
             if ($post_args['action'] == 'verify') {
                 // Real action
                 return $this->chmodPages($dbi, $request, array_keys($p),
-                                          $post_args['perm']);
+                    $post_args['perm']);
             }
             if ($post_args['action'] == 'select') {
                 if (!empty($post_args['perm']))
@@ -141,50 +143,50 @@ extends WikiPlugin_WikiAdminSelect
             $button_label = _("Yes");
             $header = $this->chmodForm($header, $post_args);
             $header->pushContent(
-              HTML::p(HTML::strong(
-                _("Are you sure you want to permanently change the selected files?"))));
-        }
-        else {
+                HTML::p(HTML::strong(
+                    _("Are you sure you want to permanently change the selected files?"))));
+        } else {
             $button_label = _("Chmod");
             $header = $this->chmodForm($header, $post_args);
             $header->pushContent(HTML::p(_("Select the pages to change:")));
         }
 
         $buttons = HTML::p(Button('submit:admin_chmod[chmod]', $button_label, 'wikiadmin'),
-                           Button('submit:admin_chmod[cancel]', _("Cancel"), 'button'));
+            Button('submit:admin_chmod[cancel]', _("Cancel"), 'button'));
 
         return HTML::form(array('action' => $request->getPostURL(),
-                                'method' => 'post'),
-                          $header,
-                          $buttons,
-                          $pagelist->getContent(),
-                          HiddenInputs($request->getArgs(),
-                                        false,
-                                        array('admin_chmod')),
-                          HiddenInputs(array('admin_chmod[action]' => $next_action)),
-                          ENABLE_PAGEPERM
-                          ? ''
-                          : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)));
+                'method' => 'post'),
+            $header,
+            $buttons,
+            $pagelist->getContent(),
+            HiddenInputs($request->getArgs(),
+                false,
+                array('admin_chmod')),
+            HiddenInputs(array('admin_chmod[action]' => $next_action)),
+            ENABLE_PAGEPERM
+                ? ''
+                : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)));
     }
 
-    function chmodForm(&$header, $post_args) {
+    function chmodForm(&$header, $post_args)
+    {
         $header->pushContent(
             HTML::p(HTML::em(
-               _("This plugin is currently under development and does not work!"))));
+                _("This plugin is currently under development and does not work!"))));
         $header->pushContent(_("Chmod to permission:"));
         $header->pushContent(HTML::input(array('name' => 'admin_chmod[perm]',
-                                               'value' => $post_args['perm'])));
-        $header->pushContent(' '._("(ugo : rwx)"));
+            'value' => $post_args['perm'])));
+        $header->pushContent(' ' . _("(ugo : rwx)"));
         $header->pushContent(HTML::p());
         $checkbox = HTML::input(array('type' => 'checkbox',
-                                      'name' => 'admin_chmod[updatechildren]',
-                                      'value' => 1));
-        if (!empty($post_args['updatechildren']))  $checkbox->setAttr('checked','checked');
+            'name' => 'admin_chmod[updatechildren]',
+            'value' => 1));
+        if (!empty($post_args['updatechildren'])) $checkbox->setAttr('checked', 'checked');
         $header->pushContent($checkbox, HTML::raw("&nbsp;"),
-                _("Propagate new permissions to all subpages?"),
-                HTML::raw("&nbsp;&nbsp;"),
-                HTML::em(_("(disable individual page permissions, enable inheritance)?")));
-        $header->pushContent(HTML::hr(),HTML::p());
+            _("Propagate new permissions to all subpages?"),
+            HTML::raw("&nbsp;&nbsp;"),
+            HTML::em(_("(disable individual page permissions, enable inheritance)?")));
+        $header->pushContent(HTML::hr(), HTML::p());
         return $header;
     }
 }

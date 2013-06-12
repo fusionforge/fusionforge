@@ -1,6 +1,5 @@
-Date: Fri, 16 Dec 2011 12:42:36 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FIncludePagePlugin 8210 2011-12-16 11:43:27Z vargenau $
+Date: Fri,  7 Dec 2012 14:58:45 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FIncludePagePlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -90,7 +89,7 @@ Does not work in Wikicreole syntax
 == Authors ==
 
 * Joe Edelman
-* bug fixes by [[PhpWiki:ReiniUrban|Reini Urban]]
+* bug fixes by [[Help:Reini Urban|Reini Urban]]
 * "sections" parameter implemented by Marc-Etienne Vargenau, Alcatel-Lucent
 
 == See Also ==

@@ -2,4 +2,6 @@
 ** Stylesheet filter for some b0rked browser
 */
 
-div.actionbuttons a { font-size:75%; }
+div.actionbuttons a {
+    font-size: 75%;
+}

@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: JabberPresence.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
  *
@@ -33,42 +33,41 @@
  */
 
 if (!defined('MY_JABBER_ID'))
-    define('MY_JABBER_ID', $GLOBALS['request']->_user->UserName()."@jabber.com"); // or "@netflint.net"
+    define('MY_JABBER_ID', $GLOBALS['request']->_user->UserName() . "@jabber.com"); // or "@netflint.net"
 
 class WikiPlugin_JabberPresence
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return _("JabberPresence");
-    }
-
-    function getDescription () {
-        return _("Simple jabber presence plugin");
+    function getDescription()
+    {
+        return _("Display Jabber presence.");
     }
 
     // Establish default values for each of this plugin's arguments.
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array('scripturl' => "http://edgar.netflint.net/status.php",
-                     'jid'       => MY_JABBER_ID,
-                     'type'      => 'image',
-                     'iconset'   => "gabber");
+            'jid' => MY_JABBER_ID,
+            'type' => 'image',
+            'iconset' => "gabber");
     }
 
-    function run($dbi, $argstr, $request) {
+    function run($dbi, $argstr, $request)
+    {
         extract($this->getArgs($argstr, $request));
         // Any text that is returned will not be further transformed,
         // so use html where necessary.
         if (empty($jid))
             $html = HTML();
         else
-          $html = HTML::img(array('src' => urlencode($scripturl).
-                                  '&jid='.urlencode($jid).
-                                  '&type='.urlencode($type).
-                                  '&iconset='.($iconset),
-                                  'alt' =>""));
+            $html = HTML::img(array('src' => urlencode($scripturl) .
+                '&jid=' . urlencode($jid) .
+                '&type=' . urlencode($type) .
+                '&iconset=' . ($iconset),
+                'alt' => ""));
         return $html;
     }
-};
+}
 
 // Local Variables:
 // mode: php

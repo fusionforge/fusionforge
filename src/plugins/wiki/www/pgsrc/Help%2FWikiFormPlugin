@@ -1,6 +1,5 @@
-Date: Fri, 10 Sep 2010 13:46:13 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FWikiFormPlugin 7682 2010-09-10 12:03:36Z vargenau $
+Date: Fri,  7 Dec 2012 14:58:45 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWikiFormPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -24,23 +23,26 @@ The **~WikiForm** [[Help:WikiPlugin|plugin]] provides generic input buttons.
 ! Default value
 |-
 | **action**
-| upload, loadfile or dumpserial
+| upload, loadfile, dumphtml or dumpserial
 | upload
 |-
 | **default**
-|
-| false
+| Default value in the input box
+| //empty//
 |-
 | **buttontext**
-|
-| false
+| Text displayed on the button
+| if action=upload, Upload \\
+if action=loadfile, Load File \\
+if action=dumphtml, Dump Pages as XHTML \\
+if action=dumpserial, Dump Pages
 |-
 | **overwrite**
-|
+| When loading pages, force overwrite or not
 | false
 |-
 | **size**
-|
+| Size of the input box
 | 50
 |}
 
@@ -53,9 +55,10 @@ The **~WikiForm** [[Help:WikiPlugin|plugin]] provides generic input buttons.
 <<WikiForm action="loadfile" buttontext="Load File">>
 
 == Author ==
-* [[PhpWiki:ReiniUrban|Reini Urban]]
+* [[Help:Reini Urban|Reini Urban]]
 
 == See Also ==
+* [[Help:WikiFormRichPlugin]]
 
 <noinclude>
 ----

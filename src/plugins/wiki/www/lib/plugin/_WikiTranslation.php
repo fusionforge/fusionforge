@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: _WikiTranslation.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 2004,2005 $ThePhpWikiProgrammingTeam
  *
@@ -44,128 +44,266 @@
 
 /* Container for untranslated pagenames. Needed to show up in locale/po/phpwiki.pot */
 $pgsrc_container =
-    _("AllPagesCreatedByMe")  .','.
-    _("AllPagesLastEditedByMe")  .','.
-    _("AllPagesOwnedByMe")  .','.
-    _("BackLinks") .','.
-    _("CategoryCategory")  .','.
-    _("CategoryHomePages")  .','.
-    _("DebugInfo") .','.
-    _("EditMetaData") .','.
-    _("FindPage") .','.
-    _("FullRecentChanges") .','.
-    _("Help/AddingPages")  .','.
-    _("Help/AddCommentPlugin")  .','.
-    _("Help/AuthorHistoryPlugin") .','.
-    _("Help/CalendarListPlugin") .','.
-    _("Help/CalendarPlugin") .','.
-    _("Help/CommentPlugin")  .','.
-    _("Help/CreateTocPlugin")  .','.
-    _("Help/EditMetaDataPlugin") .','.
-    _("Help/ExternalSearchPlugin") .','.
-    _("Help/FoafViewerPlugin") .','.
-    _("Help/FrameIncludePlugin") .','.
-    _("Help/HelloWorldPlugin") .','.
-    _("Help/IncludePagePlugin") .','.
-    _("Help/LinkIcons") .','.
-    _("Help/MagicPhpWikiURLs") .','.
-    _("Help/MoreAboutMechanics") .','.
-    _("Help/OldStyleTablePlugin") .','.
-    _("Help/PhotoAlbumPlugin") .','.
-    _("Help/PhpHighlightPlugin") .','.
-    _("Help/PhpWeatherPlugin") .','.
-    _("Help/PhpWiki") .','.
-    _("Help/PloticusPlugin") .','.
-    _("Help/RawHtmlPlugin") .','.
-    _("Help/RedirectToPlugin") .','.
-    _("Help/RichTablePlugin") .','.
-    _("Help/SystemInfoPlugin") .','.
-    _("Help/TranscludePlugin") .','.
-    _("Help/UnfoldSubpagesPlugin") .','.
-    _("Help/UpLoadPlugin") .','.
-    _("Help/WabiSabi") .','.
-    _("Help/WikiBlogPlugin") .','.
-    _("Help/WikiPlugin") .','.
-    _("Help/WikiWikiWeb");
-    _("HomePageAlias") .','.
-    _("InterWiki") .','.
-//  _("PageDump") .','.
-    _("PhpWikiAdministration/Chmod") .','.
-    _("PhpWikiAdministration/Chown") .','.
-    _("PhpWikiAdministration/Remove") .','.
-    _("PhpWikiAdministration/Rename") .','.
-    _("PhpWikiAdministration/Replace") .','.
-    _("PhpWikiAdministration/SetAcl") .','.
-    _("PhpWikiDocumentation") .','.
-    _("PhpWikiPoll") .','.
-    _("RecentVisitors") .','.
-    _("ReleaseNotes") .','.
-//    _("SpellCheck") .','.
-    _("SteveWainstead") .','.
-    _("TranslateText") .','.
-    _("UpLoad") .','.
+    _("AddComment") . ',' .
+    _("AllPages") . ',' .
+    _("AllPagesCreatedByMe") . ',' .
+    _("AllPagesLastEditedByMe") . ',' .
+    _("AllPagesOwnedByMe") . ',' .
+    _("AllUsers") . ',' .
+    _("AnalyseAccessLogSql") . ',' .
+    _("AppendText") . ',' .
+    _("AsciiMath") . ',' .
+    _("AsciiSVG") . ',' .
+    _("AtomFeed") . ',' .
+    _("_AuthInfo") . ',' .
+    _("AuthorHistory") . ',' .
+    _("_BackendInfo") . ',' .
+    _("BackLinks") . ',' .
+    _("BlogArchives") . ',' .
+    _("BlogJournal") . ',' .
+    _("BoxRight") . ',' .
+    _("CacheTest") . ',' .
+    _("Calendar") . ',' .
+    _("CalendarList") . ',' .
+    _("CategoryCategory") . ',' .
+    _("CategoryHomePages") . ',' .
+    _("CategoryPage") . ',' .
+    _("Chart") . ',' .
+    _("Comment") . ',' .
+    _("CreateBib") . ',' .
+    _("CreatePage") . ',' .
+    _("CreateToc") . ',' .
+    _("CurrentTime") . ',' .
+    _("DeadEndPages") . ',' .
+    _("DebugInfo") . ',' .
+    _("Diff") . ',' .
+    _("DynamicIncludePage") . ',' .
+    _("EditMetaData") . ',' .
+    _("ExternalSearch") . ',' .
+    _("FacebookLike") . ',' .
+    _("FileInfo") . ',' .
+    _("FindPage") . ',' .
+    _("FoafViewer") . ',' .
+    _("FrameInclude") . ',' .
+    _("FullRecentChanges") . ',' .
+    _("FullTextSearch") . ',' .
+    _("FuzzyPages") . ',' .
+    _("GoogleMaps") . ',' .
+    _("GooglePlugin") . ',' .
+    _("GoTo") . ',' .
+    _("GraphViz") . ',' .
+    _("_GroupInfo") . ',' .
+    _("HelloWorld") . ',' .
+    _("Help/AddCommentPlugin") . ',' .
+    _("Help/AddingPages") . ',' .
+    _("Help/AuthorHistoryPlugin") . ',' .
+    _("Help/CalendarListPlugin") . ',' .
+    _("Help/CalendarPlugin") . ',' .
+    _("Help/CommentPlugin") . ',' .
+    _("Help/CreateTocPlugin") . ',' .
+    _("Help/EditMetaDataPlugin") . ',' .
+    _("Help/ExternalSearchPlugin") . ',' .
+    _("Help/FoafViewerPlugin") . ',' .
+    _("Help/FrameIncludePlugin") . ',' .
+    _("Help/HelloWorldPlugin") . ',' .
+    _("Help/IncludePagePlugin") . ',' .
+    _("Help/LinkIcons") . ',' .
+    _("Help/MagicPhpWikiURLs") . ',' .
+    _("Help/MoreAboutMechanics") . ',' .
+    _("Help/OldStyleTablePlugin") . ',' .
+    _("Help/PhotoAlbumPlugin") . ',' .
+    _("Help/PhpHighlightPlugin") . ',' .
+    _("Help/PhpWeatherPlugin") . ',' .
+    _("Help/PhpWiki") . ',' .
+    _("Help/PloticusPlugin") . ',' .
+    _("Help/RawHtmlPlugin") . ',' .
+    _("Help/RedirectToPlugin") . ',' .
+    _("Help/RichTablePlugin") . ',' .
+    _("Help/SystemInfoPlugin") . ',' .
+    _("Help/TranscludePlugin") . ',' .
+    _("Help/UnfoldSubpagesPlugin") . ',' .
+    _("Help/UpLoadPlugin") . ',' .
+    _("Help/WabiSabi") . ',' .
+    _("Help/WikiBlogPlugin") . ',' .
+    _("Help/WikiPlugin") . ',' .
+    _("Help/WikiWikiWeb") . ',' .
+    _("HomePageAlias") . ',' .
+    _("HtmlConverter") . ',' .
+    _("Imdb") . ',' .
+    _("IncludePage") . ',' .
+    _("IncludePages") . ',' .
+    _("IncludeSiteMap") . ',' .
+    _("IncludeTree") . ',' .
+    _("InterWiki") . ',' .
+    _("InterWikiSearch") . ',' .
+    _("JabberPresence") . ',' .
+    _("LdapSearch") . ',' .
+    _("LikePages") . ',' .
+    _("LinkDatabase") . ',' .
+    _("LinkSearch") . ',' .
+    _("ListPages") . ',' .
+    _("ListRelations") . ',' .
+    _("ListSubpages") . ',' .
+    _("MediawikiTable") . ',' .
+    _("ModeratedPage") . ',' .
+    _("MostPopular") . ',' .
+    _("NewPagesPerUser") . ',' .
+    _("NoCache") . ',' .
+    _("OldStyleTable") . ',' .
+    _("OrphanedPages") . ',' .
+    _("PageDump") . ',' .
+    _("PageGroup") . ',' .
+    _("PageHistory") . ',' .
+    _("PageInfo") . ',' .
+    _("PageTrail") . ',' .
+    _("PasswordReset") . ',' .
+    _("PhotoAlbum") . ',' .
+    _("PhpHighlight") . ',' .
+    _("PhpWeather") . ',' .
+    _("PhpWikiAdministration/Chmod") . ',' .
+    _("PhpWikiAdministration/Chown") . ',' .
+    _("PhpWikiAdministration/Remove") . ',' .
+    _("PhpWikiAdministration/Rename") . ',' .
+    _("PhpWikiAdministration/Replace") . ',' .
+    _("PhpWikiAdministration/SetAcl") . ',' .
+    _("PhpWikiDocumentation") . ',' .
+    _("PhpWikiPoll") . ',' .
+    _("Ploticus") . ',' .
+    _("PluginManager") . ',' .
+    _("PopularNearby") . ',' .
+    _("PopularTags") . ',' .
+    _("PopUp") . ',' .
+    _("PreferenceApp") . ',' .
+    _("_PreferencesInfo") . ',' .
+    _("PrevNext") . ',' .
+    _("Processing") . ',' .
+    _("RandomPage") . ',' .
+    _("RateIt") . ',' .
+    _("RawHtml") . ',' .
+    _("RecentChanges") . ',' .
+    _("RecentChangesCached") . ',' .
+    _("RecentComments") . ',' .
+    _("RecentEdits") . ',' .
+    _("RecentReferrers") . ',' .
+    _("RecentVisitors") . ',' .
+    _("RedirectTo") . ',' .
+    _("RelatedChanges") . ',' .
+    _("ReleaseNotes") . ',' .
+    _("_Retransform") . ',' .
+    _("RichTable") . ',' .
+    _("RssFeed") . ',' .
+    _("SearchHighlight") . ',' .
+    _("SemanticRelations") . ',' .
+    _("SemanticSearch") . ',' .
+    _("SemanticSearchAdvanced") . ',' .
+    _("SiteMap") . ',' .
+    _("SpellCheck") . ',' .
+    _("SqlResult") . ',' .
+    _("SyncWiki") . ',' .
+    _("SyntaxHighlighter") . ',' .
+    _("SystemInfo") . ',' .
+    _("Template") . ',' .
+    _("TeX2png") . ',' .
+    _("text2png") . ',' .
+    _("TextFormattingRules") . ',' .
+    _("TexToPng") . ',' .
+    _("TitleSearch") . ',' .
+    _("Transclude") . ',' .
+    _("TranslateText") . ',' .
+    _("UnfoldSubpages") . ',' .
+    _("UpLoad") . ',' .
+    _("UriResolver") . ',' .
+    _("UserPreferences") . ',' .
+    _("UserRatings") . ',' .
+    _("Video") . ',' .
+    _("VisualWiki") . ',' .
+    _("WantedPages") . ',' .
+    _("WantedPagesOld") . ',' .
+    _("WatchPage") . ',' .
+    _("WhoIsOnline") . ',' .
+    _("WikiAdminChmod") . ',' .
+    _("WikiAdminChown") . ',' .
+    _("WikiAdminDeleteAcl") . ',' .
+    _("WikiAdminMarkup") . ',' .
+    _("WikiAdminPurge") . ',' .
+    _("WikiAdminRemove") . ',' .
+    _("WikiAdminRename") . ',' .
+    _("WikiAdminSearchReplace") . ',' .
+    _("WikiAdminSelect") . ',' .
+    _("WikiAdminSetAcl") . ',' .
+    _("WikiAdminSetAclSimple") . ',' .
+    _("WikiAdminSetExternal") . ',' .
+    _("WikiAdminUtils") . ',' .
+    _("WikiBlog") . ',' .
+    _("WikicreoleTable") . ',' .
+    _("WikiForm") . ',' .
+    _("WikiFormRich") . ',' .
+    _("WikiForum") . ',' .
+    _("WikiPoll") . ',' .
+    _("_WikiTranslation") . ',' .
+    _("YouTube");
 
 require_once 'lib/PageList.php';
 
 class WikiPlugin__WikiTranslation
-extends WikiPlugin
+    extends WikiPlugin
 {
 
-    function getName() {
-        return _("_WikiTranslation");
+    function getDescription()
+    {
+        return _("Show translations of various words or pages.");
     }
 
-    function getDescription() {
-        return _("Show translations of various words or pages");
-    }
-
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array_merge
-            (
-             PageList::supportedArgs(),
-             array( 'languages'  => '',  // comma delimited string of de,en,sv,...
-                    'string'     => '',
-                    'page'       => '',  // use a translation service
-                    'what'       => 'pages', // or 'buttons', 'plugins' or 'wikiwords'
+        (
+            PageList::supportedArgs(),
+            array('languages' => '', // comma delimited string of de,en,sv,...
+                'string' => '',
+                'page' => '', // use a translation service
+                'what' => 'pages', // or 'buttons', 'plugins' or 'wikiwords'
 
-                    'match'         => '*',
-                    'from_lang'     => false,
-                    'include_empty' => false,
-                    //'exclude'       => '',
-                    //'sortby'        => '',
-                    //'limit'         => 0,
-                    'nolinks'       => false,  // don't display any links
-                                                   // (for development only)
-                    'noT'           => false   // don't display the T link
-                                                  // (for development only)
-                    ));
+                'match' => '*',
+                'from_lang' => false,
+                'include_empty' => false,
+                //'exclude'       => '',
+                //'sortby'        => '',
+                //'limit'         => 0,
+                'nolinks' => false, // don't display any links
+                // (for development only)
+                'noT' => false // don't display the T link
+                // (for development only)
+            ));
     }
 
-    function init_locale($lang) {
+    function init_locale($lang)
+    {
         if ($lang != $this->lang)
             update_locale($lang);
         if ($lang == 'en') {
             // Hack alert! we need hash for stepping through it, even if it's
             // in the wrong language
-            include (FindFile("locale/de/LC_MESSAGES/phpwiki.php", 0,'reinit'));
+            include (FindFile("locale/de/LC_MESSAGES/phpwiki.php", 0, 'reinit'));
             foreach ($locale as $en => $de) {
-                    $locale[$en] = $en;
+                $locale[$en] = $en;
             }
-        // gettext module loaded: must load the LC_MESSAGES php hash
-        } elseif (function_exists ('bindtextdomain')) {
-            include (FindFile("locale/$lang/LC_MESSAGES/phpwiki.php", 0,'reinit'));
+            // gettext module loaded: must load the LC_MESSAGES php hash
+        } elseif (function_exists('bindtextdomain')) {
+            include (FindFile("locale/$lang/LC_MESSAGES/phpwiki.php", 0, 'reinit'));
             //include (FindLocalizedFile("LC_MESSAGES/phpwiki.php", 0,'reinit'));
-        // we already have a $locale, but maybe it's in the wrong language
+            // we already have a $locale, but maybe it's in the wrong language
         } elseif ($lang != $this->lang or empty($GLOBALS['locale'])) {
-            include (FindFile("locale/$lang/LC_MESSAGES/phpwiki.php", 0,'reinit'));
+            include (FindFile("locale/$lang/LC_MESSAGES/phpwiki.php", 0, 'reinit'));
         } else {
-           $locale = & $GLOBALS['locale'];
+            $locale = & $GLOBALS['locale'];
         }
         $this->_locales[$lang] = $locale;
     }
 
     // reverse translation:
-    function translate_to_en($text, $lang=false) {
+    function translate_to_en($text, $lang = false)
+    {
         if (!$lang) $lang = $this->lang; // current locale
         if ($lang == 'en') return $text;
 
@@ -191,7 +329,8 @@ extends WikiPlugin
      * setlocale() switching with the gettext extension is by far too slow.
      * So use the hash regardless if gettext is loaded or not.
      */
-    function fast_translate($text, $to_lang, $from_lang=false) {
+    function fast_translate($text, $to_lang, $from_lang = false)
+    {
         if (!$from_lang) $from_lang = $this->lang; // current locale
         if ($from_lang == $to_lang) return $text;
         // setup hash from en => to_lang
@@ -202,12 +341,13 @@ extends WikiPlugin
             $text = $this->translate_to_en($text, $from_lang);
         }
         return !empty($this->_locales[$to_lang][$text])
-                 ? $this->_locales[$to_lang][$text]
-                 : $text;
+            ? $this->_locales[$to_lang][$text]
+            : $text;
     }
 
     //FIXME! There's something wrong.
-    function translate($text, $to_lang, $from_lang=false) {
+    function translate($text, $to_lang, $from_lang = false)
+    {
         if (!$from_lang) $from_lang = $this->lang; // current locale
         if ($from_lang == $to_lang) return $text;
         // Speed up hash lookup. Not needed for gettext module
@@ -235,7 +375,8 @@ extends WikiPlugin
         return $result;
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $this->args = $this->getArgs($argstr, $request);
         extract($this->args);
         $this->request = &$request;
@@ -253,47 +394,35 @@ extends WikiPlugin
             if (in_array($from_lang, $available_languages))
                 $languages = $available_languages;
             else
-                    $languages = array_merge($available_languages, array($from_lang));
-        } elseif (strstr($languages,',')) {
+                $languages = array_merge($available_languages, array($from_lang));
+        } elseif (strstr($languages, ',')) {
             $languages = explode(',', $languages);
         } else {
             $languages = array($languages);
         }
-        if (in_array('zh', $languages) or in_array('ja', $languages)) {
-
-            // If the current charset != utf-8 the text will not be displayed correctly.
-            // But here we cannot change the header anymore. So we can decide to ignore them,
-            // or display them with all the errors.
-            //FIXME: do iconv the ob
-            if ($GLOBALS['charset'] != 'utf-8' and !defined('NEED_ICONV_TO')) {
-                    define('NEED_ICONV_TO', 'utf-8');
-                    //either the extension or external
-                //$GLOBALS['charset'] = 'utf-8';
-            }
-        }
         $to_lang = $languages[0];
-        if (!empty($string) and count($languages)==1) {
+        if (!empty($string) and count($languages) == 1) {
             return $this->translate($string, $to_lang, $from_lang);
         }
         if (!empty($page)) {
             $pagename = $page;
             if ($dbi->isWikiPage($pagename)) {
-                    $url = '';
-                    // google can only translate from english and french
-                    if (in_array($from_lang, array('en', 'fr'))) {
+                $url = '';
+                // google can only translate from english and french
+                if (in_array($from_lang, array('en', 'fr'))) {
                     $url = "http://translate.google.com/translate";
-                    $url .= "?langpair=" . urlencode($from_lang."|".$to_lang);
+                    $url .= "?langpair=" . urlencode($from_lang . "|" . $to_lang);
                     $url .= "&u=" . urlencode(WikiURL($pagename, false, true));
-                    }
-                    // redirect or transclude?
+                }
+                // redirect or transclude?
                 if ($url) {
                     return $request->redirect($url);
                 }
-                    return HTML(fmt("TODO: Google can only translate from english and french. Find a translation service for %s to language %s",
-                                    WikiURL($pagename, false, true),
-                                    $to_lang));
+                return HTML(fmt("TODO: Google can only translate from english and french. Find a translation service for %s to language %s",
+                    WikiURL($pagename, false, true),
+                    $to_lang));
             } else {
-                return $this->error(fmt("%s is empty",$pagename));
+                return $this->error(fmt("%s is empty.", $pagename));
             }
         }
 
@@ -302,80 +431,82 @@ extends WikiPlugin
         foreach ($languages as $lang) {
             if ($lang == $from_lang) continue;
             $field = "custom:$lang";
-            $pagelist->addColumnObject (
-              new _PageList_Column_customlang($field, $from_lang, $this));
+            $pagelist->addColumnObject(
+                new _PageList_Column_customlang($field, $from_lang, $this));
         }
         if (!empty($string)) {
-            $pagelist->addPage( $string );
+            $pagelist->addPage($string);
             return $pagelist;
         }
         switch ($what) {
-        case 'allpages':
-            $pagelist->addPages( $dbi->getAllPages($include_empty, $sortby,
-                                                   $limit, $exclude) );
-            break;
-        case 'pages':
-            // not all pages, only the pgsrc pages
-            if (!is_array($exclude))
-                $exclude = $pagelist->explodePageList($exclude, false, $sortby,
-                                                      $limit, $exclude);
-            $path = FindLocalizedFile(WIKI_PGSRC);
-            $pgsrc = new fileSet($path);
-            foreach ($pgsrc->getFiles($exclude, $sortby, $limit) as $pagename) {
-                $pagename = urldecode($pagename);
-                if (substr($pagename,-1,1) == '~') continue;
-                if (in_array($pagename, $exclude))
-                    continue;             // exclude page.
-                if ($match != '*' and !glob_match($match, $pagename))
-                    continue;
-                $page_handle = $dbi->getPage($pagename);
-                $pagelist->addPage( $page_handle );
-            }
-            break;
-        case 'wikiwords':
-            if (!isset($this->_locales[$from_lang])) {
-                $this->init_locale($from_lang);
-            }
-            $locale = & $this->_locales[$from_lang];
-            if (is_array($locale)) {
-                $count = 0;
-                foreach ($locale as $from => $to) {
-                    if ($match != '*' and !glob_match($match, $from))
+            case 'allpages':
+                $pagelist->addPages($dbi->getAllPages($include_empty, $sortby,
+                    $limit, $exclude));
+                break;
+            case 'pages':
+                // not all pages, only the pgsrc pages
+                if (!is_array($exclude))
+                    $exclude = $pagelist->explodePageList($exclude, false, $sortby,
+                        $limit, $exclude);
+                $path = FindLocalizedFile(WIKI_PGSRC);
+                $pgsrc = new fileSet($path);
+                foreach ($pgsrc->getFiles($exclude, $sortby, $limit) as $pagename) {
+                    $pagename = urldecode($pagename);
+                    if (substr($pagename, -1, 1) == '~') continue;
+                    if (in_array($pagename, $exclude))
+                        continue; // exclude page.
+                    if ($match != '*' and !glob_match($match, $pagename))
                         continue;
-                    if (isWikiWord($from)) {
-                        $count++;
-                        $pagelist->addPage( $from );
-                        if ($limit and $count > $limit) break;
+                    $page_handle = $dbi->getPage($pagename);
+                    $pagelist->addPage($page_handle);
+                }
+                break;
+            case 'wikiwords':
+                if (!isset($this->_locales[$from_lang])) {
+                    $this->init_locale($from_lang);
+                }
+                $locale = & $this->_locales[$from_lang];
+                if (is_array($locale)) {
+                    $count = 0;
+                    foreach ($locale as $from => $to) {
+                        if ($match != '*' and !glob_match($match, $from))
+                            continue;
+                        if (isWikiWord($from)) {
+                            $count++;
+                            $pagelist->addPage($from);
+                            if ($limit and $count > $limit) break;
+                        }
                     }
                 }
-            }
-            break;
-        // all Button texts, which need a localized .png
-        // where to get them from? templates/*.tmpl: Button()
-        // and WikiLink(?,'button')
-        // navbar links, actionpages, and admin requests
-        case 'buttons':
-            $buttons = $GLOBALS['AllActionPages'];
-            $fileset = new FileSet(FindFile("themes/MacOSX/buttons/en"),
-                                   "*.png");
-            foreach ($fileset->getFiles() as $file) {
-                $b = urldecode(substr($file, 0, -4));
-                if (!in_array($b,$buttons))
-                    $buttons[] = $b;
-            }
-            $count = 0;
-            foreach ($buttons as $button) {
-                $pagelist->addPage( $button );
-                if ($limit and ++$count > $limit) break;
-            }
-            break;
+                break;
+            // all Button texts, which need a localized .png
+            // where to get them from? templates/*.tmpl: Button()
+            // and WikiLink(?,'button')
+            // navbar links, actionpages, and admin requests
+            case 'buttons':
+                $buttons = $GLOBALS['AllActionPages'];
+                $fileset = new FileSet(FindFile("themes/MacOSX/buttons/en"),
+                    "*.png");
+                foreach ($fileset->getFiles() as $file) {
+                    $b = urldecode(substr($file, 0, -4));
+                    if (!in_array($b, $buttons))
+                        $buttons[] = $b;
+                }
+                $count = 0;
+                foreach ($buttons as $button) {
+                    $pagelist->addPage($button);
+                    if ($limit and ++$count > $limit) break;
+                }
+                break;
         }
         return $pagelist;
     }
-};
+}
 
-class _PageList_Column_customlang extends _PageList_Column {
-    function _PageList_Column_customlang($field, $from_lang, $plugin) {
+class _PageList_Column_customlang extends _PageList_Column
+{
+    function _PageList_Column_customlang($field, $from_lang, $plugin)
+    {
         $this->_field = $field;
         $this->_from_lang = $from_lang;
         $this->_plugin =& $plugin;
@@ -390,30 +521,31 @@ class _PageList_Column_customlang extends _PageList_Column {
         $this->_PageList_Column_base($this->_field);
     }
 
-    function _getValue($page, &$revision_handle) {
-            if (is_object($page)) $text = $page->getName();
+    function _getValue($page, &$revision_handle)
+    {
+        if (is_object($page)) $text = $page->getName();
         else $text = $page;
-            $trans = $this->_plugin->fast_translate($text, $this->_field,
-                                                $this->_from_lang);
+        $trans = $this->_plugin->fast_translate($text, $this->_field,
+            $this->_from_lang);
         // how to markup untranslated words and not existing pages?
         // untranslated: (TODO) link to translation editor
         if ($trans == $text or // untranslated
             (($this->_from_lang != 'en') and
-             ($this->_field != 'en') and
-             ($trans == $this->_plugin->fast_translate($text, 'en',
-                                                       $this->_from_lang))
-             ))
-        {
+                ($this->_field != 'en') and
+                    ($trans == $this->_plugin->fast_translate($text, 'en',
+                        $this->_from_lang))
+            )
+        ) {
             global $WikiTheme;
             $link = $WikiTheme->linkUnknownWikiWord($trans);
             if (!($this->_noT or $this->_nolinks)
-                and $this->dbi->isWikiPage($trans))
-            {
+                and $this->dbi->isWikiPage($trans)
+            ) {
                 $url = WikiURL($trans, array('action' => 'TranslateText',
-                                             'lang' => $this->_field));
+                    'lang' => $this->_field));
                 $button = $WikiTheme->makeButton('T', $url);
                 $button->addTooltip(sprintf(_("Define the translation for %s in %s"),
-                                            $trans, $this->_field));
+                    $trans, $this->_field));
                 $link = HTML::span($button);
                 $link->setAttr('class', 'wikiunknown');
                 $text = HTML::span($WikiTheme->maybeSplitWikiWord($trans));
@@ -421,8 +553,7 @@ class _PageList_Column_customlang extends _PageList_Column {
                 $link->pushContent($text);
                 return $link;
             } elseif (is_object($page))
-                return '';
-            else                        // not existing: empty
+                return ''; else // not existing: empty
                 return '';
         } elseif (is_object($page)) {
             if (!$this->_nolinks)

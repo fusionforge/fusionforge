@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: Chart.php 8212 2011-12-16 13:26:15Z vargenau $
+<?php
+
 /*
  * Copyright 2007 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -44,42 +44,43 @@
  */
 
 class WikiPlugin_Chart
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName() {
-        return _("Chart");
+    function getDescription()
+    {
+        return _("Render SVG charts.");
     }
 
-    function getDescription() {
-        return _("Render SVG charts");
+    function getDefaultArguments()
+    {
+        return array('width' => 200,
+            'height' => 200,
+            'type' => 'line', // or 'area', 'bar', 'pie'
+            // 'xlabel' => 'x', // TODO
+            // 'ylabel' => 'y', // TODO
+            'color' => 'green',
+            // 'legend' => false, // TODO
+            'data' => false // required
+        );
     }
 
-    function getDefaultArguments() {
-        return array('width'  => 200,
-                     'height' => 200,
-                     'type' => 'line', // or 'area', 'bar', 'pie'
-                     // 'xlabel' => 'x', // TODO
-                     // 'ylabel' => 'y', // TODO
-                     'color' => 'green',
-                     // 'legend' => false, // TODO
-                     'data' => false // required
-                     );
-    }
-    function handle_plugin_args_cruft(&$argstr, &$args) {
+    function handle_plugin_args_cruft(&$argstr, &$args)
+    {
         $this->source = $argstr;
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
 
         global $WikiTheme;
         $args = $this->getArgs($argstr, $request);
         if (!$args['data']) {
-            return $this->error(sprintf(_("A required argument '%s' is missing."), 'data'));
+            return $this->error(sprintf(_("A required argument “%s” is missing."), 'data'));
         }
         extract($args);
 
         $html = HTML();
-        $js = JavaScript('', array ('src' => $WikiTheme->_findData('ASCIIsvg.js')));
+        $js = JavaScript('', array('src' => $WikiTheme->_findData('ASCIIsvg.js')));
         $html->pushContent($js);
 
         $values = explode(",", $data);
@@ -103,15 +104,15 @@ extends WikiPlugin
             }
         }
 
-        $source = 'initPicture(0,'.$x_max.','.$y_min.','.$y_max.'); axes(); stroke = "'.$color.'"; strokewidth = 5;';
+        $source = 'initPicture(0,' . $x_max . ',' . $y_min . ',' . $y_max . '); axes(); stroke = "' . $color . '"; strokewidth = 5;';
 
         if ($type == "bar") {
             $abscisse = 1;
             $source .= 'strokewidth = 10; ';
             foreach ($values as $value) {
-                $source .= 'point1 = ['.$abscisse.', 0];'
-                        .  'point2 = ['.$abscisse.','.$value.'];'
-                        .  'line(point1, point2);';
+                $source .= 'point1 = [' . $abscisse . ', 0];'
+                    . 'point2 = [' . $abscisse . ',' . $value . '];'
+                    . 'line(point1, point2);';
                 $abscisse += 1;
             }
         } elseif ($type == "line") {
@@ -119,37 +120,39 @@ extends WikiPlugin
             $source .= 'strokewidth = 3; p = []; ';
             foreach ($values as $value) {
                 $source .= 'for (t = 1; t < 1.01; t += 1) p[p.length] = ['
-                        .  $abscisse
-                        .  ', t*'
-                        .  trim($value)
-                        .  '];';
+                    . $abscisse
+                    . ', t*'
+                    . trim($value)
+                    . '];';
                 $abscisse += 1;
             }
             $source .= 'path(p);';
         } elseif ($type == "pie") {
-            $source = 'initPicture(-1.1,1.1,-1.1,1.1); stroke = "'.$color.'"; strokewidth = 1;'
-                    . 'center = [0, 0]; circle(center, 1);'
-                    . 'point = [1, 0]; line(center, point);';
+            $source = 'initPicture(-1.1,1.1,-1.1,1.1); stroke = "' . $color . '"; strokewidth = 1;'
+                . 'center = [0, 0]; circle(center, 1);'
+                . 'point = [1, 0]; line(center, point);';
             $angle = 0;
             foreach ($values as $value) {
                 if ($value > 0) {
-                    $angle += $value/$sum;
-                    $source .= 'point = [cos(2*pi*'.$angle.'), sin(2*pi*'.$angle.')]; line(center, point);';
+                    $angle += $value / $sum;
+                    $source .= 'point = [cos(2*pi*' . $angle . '), sin(2*pi*' . $angle . ')]; line(center, point);';
                 }
             }
         }
 
-        $embedargs = array('width'  => $args['width'],
-                           'height' => $args['height'],
-                           'script' => $source);
+        $embedargs = array('width' => $args['width'],
+            'height' => $args['height'],
+            'script' => $source);
         $embed = new SVG_HTML("embed", $embedargs);
         $html->pushContent($embed);
         return $html;
     }
-};
+}
 
-class SVG_HTML extends HtmlElement {
-    function startTag() {
+class SVG_HTML extends HtmlElement
+{
+    function startTag()
+    {
         $start = "<" . $this->_tag;
         $this->_setClasses();
         foreach ($this->_attr as $attr => $val) {

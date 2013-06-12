@@ -1,15 +1,27 @@
 <?php
 /*
-  V4.22 15 Apr 2004  (c) 2000-2004 John Lim (jlim#natsoft.com.my). All rights reserved.
+  V5.18 3 Sep 2012  (c) 2000-2012 John Lim (jlim#natsoft.com). All rights reserved.
    Released under both BSD license and Lesser GPL library license. 
   Whenever there is any discrepancy between the two licenses, 
   the BSD license will take precedence.
   Set tabs to 8.
   
+  Revision 1: (02/25/2005) Updated codebase to include the _inject_bind_options function. This allows
+  users to access the options in the ldap_set_option function appropriately. Most importantly
+  LDAP Version 3 is now supported. See the examples for more information. Also fixed some minor
+  bugs that surfaced when PHP error levels were set high.
   
   Joshua Eldridge (joshuae74#hotmail.com)
 */ 
 
+// security - hide paths
+if (!defined('ADODB_DIR')) die();
+
+if (!defined('LDAP_ASSOC')) {
+	 define('LDAP_ASSOC',ADODB_FETCH_ASSOC);
+	 define('LDAP_NUM',ADODB_FETCH_NUM);
+	 define('LDAP_BOTH',ADODB_FETCH_BOTH);
+}
 
 class ADODB_ldap extends ADOConnection {
     var $databaseType = 'ldap';
@@ -22,47 +34,143 @@ class ADODB_ldap extends ADOConnection {
     # Used during searches
     var $filter;
     var $dn;
+	var $version;
+	var $port = 389;
 
+	# Options configuration information
+	var $LDAP_CONNECT_OPTIONS;
 
+	# error on binding, eg. "Binding: invalid credentials"
+	var $_bind_errmsg = "Binding: %s";
+	
 	function ADODB_ldap() 
 	{		
-
 	}
   		
 	// returns true or false
 	
-	function _connect( $host, $username, $password, $ldapbase )
+	function _connect( $host, $username, $password, $ldapbase)
 	{
-
-	   if ( !function_exists( 'ldap_connect' ) ) return false;
-	   
-	   $conn_info = array( $host );
-	   
-	   if ( strstr( $host, ':' ) ) {
-	       $conn_info = explode(':', $host);
-	   } 
-
-	   $this->_connectionID = ldap_connect( $conn_info[0], $conn_info[1] ) 
-	       or die( 'Could not connect to ' . $this->_connectionID );
-	   if ($username && $password) {
-	       $bind = ldap_bind( $this->_connectionID, $username, $password ) 
-	           or die( 'Could not bind to ' . $this->_connectionID . ' with $username & $password');
-	   } else {
-	       $bind = ldap_bind( $this->_connectionID ) 
-	           or die( 'Could not bind anonymously to ' . $this->_connectionID );
-	   }
-	   return $this->_connectionID;
-    }
+	global $LDAP_CONNECT_OPTIONS;
+		
+		if ( !function_exists( 'ldap_connect' ) ) return null;
+		
+		if (strpos($host,'ldap://') === 0 || strpos($host,'ldaps://') === 0) {
+			$this->_connectionID = @ldap_connect($host);
+		} else {
+			$conn_info = array( $host,$this->port);
+		
+			if ( strstr( $host, ':' ) ) {
+			    $conn_info = explode( ':', $host );
+			} 
+		
+			$this->_connectionID = @ldap_connect( $conn_info[0], $conn_info[1] );
+		}
+		if (!$this->_connectionID) {
+			$e = 'Could not connect to ' . $conn_info[0];
+			$this->_errorMsg = $e;
+			if ($this->debug) ADOConnection::outp($e);
+			return false;
+		}
+		if( count( $LDAP_CONNECT_OPTIONS ) > 0 ) {
+			$this->_inject_bind_options( $LDAP_CONNECT_OPTIONS );
+		}
+		
+		if ($username) {
+		    $bind = @ldap_bind( $this->_connectionID, $username, $password );
+		} else {
+			$username = 'anonymous';
+		    $bind = @ldap_bind( $this->_connectionID );		
+		}
+		
+		if (!$bind) {
+			$e = sprintf($this->_bind_errmsg,ldap_error($this->_connectionID));
+			$this->_errorMsg = $e;
+			if ($this->debug) ADOConnection::outp($e);
+			return false;
+		}
+		$this->_errorMsg = '';
+		$this->database = $ldapbase;
+		return $this->_connectionID;
+	}
     
+/*
+	Valid Domain Values for LDAP Options:
+
+	LDAP_OPT_DEREF (integer)
+	LDAP_OPT_SIZELIMIT (integer)
+	LDAP_OPT_TIMELIMIT (integer)
+	LDAP_OPT_PROTOCOL_VERSION (integer)
+	LDAP_OPT_ERROR_NUMBER (integer)
+	LDAP_OPT_REFERRALS (boolean)
+	LDAP_OPT_RESTART (boolean)
+	LDAP_OPT_HOST_NAME (string)
+	LDAP_OPT_ERROR_STRING (string)
+	LDAP_OPT_MATCHED_DN (string)
+	LDAP_OPT_SERVER_CONTROLS (array)
+	LDAP_OPT_CLIENT_CONTROLS (array)
+
+	Make sure to set this BEFORE calling Connect()
+
+	Example:
+
+	$LDAP_CONNECT_OPTIONS = Array(
+		Array (
+			"OPTION_NAME"=>LDAP_OPT_DEREF,
+			"OPTION_VALUE"=>2
+		),
+		Array (
+			"OPTION_NAME"=>LDAP_OPT_SIZELIMIT,
+			"OPTION_VALUE"=>100
+		),
+		Array (
+			"OPTION_NAME"=>LDAP_OPT_TIMELIMIT,
+			"OPTION_VALUE"=>30
+		),
+		Array (
+			"OPTION_NAME"=>LDAP_OPT_PROTOCOL_VERSION,
+			"OPTION_VALUE"=>3
+		),
+		Array (
+			"OPTION_NAME"=>LDAP_OPT_ERROR_NUMBER,
+			"OPTION_VALUE"=>13
+		),
+		Array (
+			"OPTION_NAME"=>LDAP_OPT_REFERRALS,
+			"OPTION_VALUE"=>FALSE
+		),
+		Array (
+			"OPTION_NAME"=>LDAP_OPT_RESTART,
+			"OPTION_VALUE"=>FALSE
+		)
+	);
+*/
+
+	function _inject_bind_options( $options ) {
+		foreach( $options as $option ) {
+			ldap_set_option( $this->_connectionID, $option["OPTION_NAME"], $option["OPTION_VALUE"] )
+				or die( "Unable to set server option: " . $option["OPTION_NAME"] );
+		}
+	}
 	
 	/* returns _queryID or false */
-	function _query($sql,$inputarr)
+	function _query($sql,$inputarr=false)
 	{
-	   $rs = ldap_search( $this->_connectionID, $this->database, $sql );
-       return $rs; 
-		
+		$rs = @ldap_search( $this->_connectionID, $this->database, $sql );
+		$this->_errorMsg = ($rs) ? '' : 'Search error on '.$sql.': '.ldap_error($this->_connectionID);
+		return $rs; 
 	}
 
+	function ErrorMsg()
+	{
+		return $this->_errorMsg;
+	}
+	
+	function ErrorNo()
+	{
+		return @ldap_errno($this->_connectionID);
+	}
+	
     /* closes the LDAP connection */
 	function _close()
 	{
@@ -70,9 +178,14 @@ class ADODB_ldap extends ADOConnection {
 		$this->_connectionID = false;
 	}
     
+	function SelectDB($db) {
+		$this->database = $db;
+		return true;
+	} // SelectDB
+
     function ServerInfo()
     {
-        if( is_array( $this->version ) ) return $this->version;
+        if( !empty( $this->version ) ) return $this->version;
         $version = array();
         /*
         Determines how aliases are handled during search. 
@@ -158,8 +271,8 @@ class ADODB_ldap extends ADOConnection {
         }
         /* The host name (or list of hosts) for the primary LDAP server. */
         ldap_get_option( $this->_connectionID, LDAP_OPT_HOST_NAME, $version['LDAP_OPT_HOST_NAME'] ); 
-        ldap_get_option( $this->_connectionID, OPT_ERROR_NUMBER, $version['OPT_ERROR_NUMBER'] ); 
-        ldap_get_option( $this->_connectionID, OPT_ERROR_STRING, $version['OPT_ERROR_STRING'] ); 
+        ldap_get_option( $this->_connectionID, LDAP_OPT_ERROR_NUMBER, $version['LDAP_OPT_ERROR_NUMBER'] ); 
+        ldap_get_option( $this->_connectionID, LDAP_OPT_ERROR_STRING, $version['LDAP_OPT_ERROR_STRING'] ); 
         ldap_get_option( $this->_connectionID, LDAP_OPT_MATCHED_DN, $version['LDAP_OPT_MATCHED_DN'] ); 
         
         return $this->version = $version;
@@ -191,9 +304,9 @@ class ADORecordSet_ldap extends ADORecordSet{
 		case ADODB_FETCH_ASSOC: 
 		  $this->fetchMode = LDAP_ASSOC; 
 		break;
-		default:
 		case ADODB_FETCH_DEFAULT:
 		case ADODB_FETCH_BOTH: 
+		default:
 		  $this->fetchMode = LDAP_BOTH; 
 		break;
 		}
@@ -215,7 +328,7 @@ class ADORecordSet_ldap extends ADORecordSet{
     /*
     Return whole recordset as a multi-dimensional associative array
 	*/
-	function &GetAssoc($force_array = false, $first2cols = false) 
+	function GetAssoc($force_array = false, $first2cols = false) 
 	{
 		$records = $this->_numOfRows;
         $results = array();
@@ -235,7 +348,7 @@ class ADORecordSet_ldap extends ADORecordSet{
 		return $results; 
 	}
     
-    function &GetRowAssoc()
+    function GetRowAssoc()
 	{
         $results = array();
         foreach ( $this->fields as $k=>$v ) {
@@ -290,11 +403,12 @@ class ADORecordSet_ldap extends ADORecordSet{
             break;
             
             case LDAP_NUM:
-            $this->fields = $this->GetRowNums();
+			$this->fields = array_merge($this->GetRowNums(),$this->GetRowAssoc());
             break;
             
             case LDAP_BOTH:
             default:
+			$this->fields = $this->GetRowNums();
             break;
         }
         return ( is_array( $this->fields ) );        
@@ -306,3 +420,4 @@ class ADORecordSet_ldap extends ADORecordSet{
 	}
 	
 }
+?>

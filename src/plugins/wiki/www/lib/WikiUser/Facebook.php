@@ -1,5 +1,5 @@
-<?php //-*-php-*-
-// $Id: Facebook.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright (C) 2009 Reini Urban
  *
@@ -28,17 +28,19 @@
 require_once 'lib/HttpClient.php';
 
 class _FacebookPassUser
-extends _PassUser {
+    extends _PassUser
+{
     /**
      * Preferences are handled in _PassUser
      */
-    function checkPass($password) {
+    function checkPass($password)
+    {
         $userid = $this->_userid;
         if (!loadPhpExtension('openssl')) {
             trigger_error(
                 sprintf(_("The PECL %s extension cannot be loaded."), "openssl")
-                 . sprintf(_(" %s AUTH ignored."), 'Facebook'),
-                 E_USER_WARNING);
+                    . sprintf(_(" %s AUTH ignored."), 'Facebook'),
+                E_USER_WARNING);
             return $this->_tryNextUser();
         }
         $web = new HttpClient("www.facebook.com", 80);
@@ -50,21 +52,21 @@ extends _PassUser {
         if (!$firstlogin) {
             if (DEBUG & (_DEBUG_LOGIN | _DEBUG_VERBOSE))
                 trigger_error(sprintf(_("Facebook connect failed with %d %s"),
-                                      $web->status, $web->errormsg),
-                              E_USER_WARNING);
+                        $web->status, $web->errormsg),
+                    E_USER_WARNING);
         }
         // Switch from http to https://login.facebook.com/login.php
         $web->port = 443;
         $web->host = 'login.facebook.com';
-        if (!($retval = $web->post("/login.php", array('user'=>$userid, 'pass'=>$password)))) {
+        if (!($retval = $web->post("/login.php", array('user' => $userid, 'pass' => $password)))) {
             if (DEBUG & (_DEBUG_LOGIN | _DEBUG_VERBOSE))
                 trigger_error(sprintf(_("Facebook login failed with %d %s"),
-                                      $web->status, $web->errormsg),
-                              E_USER_WARNING);
+                        $web->status, $web->errormsg),
+                    E_USER_WARNING);
         }
         $this->_authmethod = 'Facebook';
-        if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => $retval",
-                                                E_USER_WARNING);
+        if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this) . "::checkPass => $retval",
+            E_USER_WARNING);
         if ($retval) {
             $this->_level = WIKIAUTH_USER;
         } else {
@@ -74,16 +76,17 @@ extends _PassUser {
     }
 
     // TODO: msearch facebook for the username
-    function userExists() {
+    function userExists()
+    {
         if (!loadPhpExtension('openssl')) {
             trigger_error(
                 sprintf(_("The PECL %s extension cannot be loaded."), "openssl")
-                 . sprintf(_(" %s AUTH ignored."), 'Facebook'),
-                 E_USER_WARNING);
+                    . sprintf(_(" %s AUTH ignored."), 'Facebook'),
+                E_USER_WARNING);
             return $this->_tryNextUser();
         }
         if (DEBUG & _DEBUG_LOGIN)
-            trigger_error(get_class($this)."::userExists => true (dummy)", E_USER_WARNING);
+            trigger_error(get_class($this) . "::userExists => true (dummy)", E_USER_WARNING);
         return true;
     }
 }

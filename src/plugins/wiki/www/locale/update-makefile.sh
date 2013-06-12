@@ -1,7 +1,5 @@
 #!/bin/sh
 #
-# $Id: update-makefile.sh 6207 2008-08-26 15:22:07Z vargenau $
-#
 # This shell script is used to update the list of .po files and the
 # dependencies for phpwiki.pot in the Makefile.
 #

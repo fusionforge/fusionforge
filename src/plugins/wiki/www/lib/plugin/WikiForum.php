@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: WikiForum.php 8212 2011-12-16 13:26:15Z vargenau $
+<?php
+
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  *
@@ -46,29 +46,28 @@
 include_once 'lib/plugin/WikiBlog.php';
 
 class WikiPlugin_WikiForum
-extends WikiPlugin_WikiBlog
+    extends WikiPlugin_WikiBlog
 {
-    function getName () {
-        return _("WikiForum");
+    function getDescription()
+    {
+        return _("Handles threaded topics with comments/news and provide a input form.");
     }
 
-    function getDescription () {
-        return _("Handles threaded topics with comments/news and provide a input form");
+    function getDefaultArguments()
+    {
+        return array('pagename' => '[pagename]',
+            'order' => 'normal', // oldest first
+            'mode' => 'show,add', // 'summary',
+            'info' => '',
+            'noheader' => false
+        );
     }
 
-    function getDefaultArguments() {
-        return array('pagename'   => '[pagename]',
-                     'order'      => 'normal',   // oldest first
-                     'mode'       => 'show,add', // 'summary',
-                     'info'       => '',
-                     'noheader'   => false
-                    );
-    }
-
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $this->getArgs($argstr, $request);
         if (!$args['pagename']) {
-            return $this->error(sprintf(_("A required argument '%s' is missing."), 'pagename'));
+            return $this->error(sprintf(_("A required argument “%s” is missing."), 'pagename'));
         }
 
         // Get our form args.
@@ -88,17 +87,17 @@ extends WikiPlugin_WikiBlog
             $seen[$show] = 1;
 
             switch ($show) {
-            case 'summary': // main page: list of all titles
-                $html->pushContent($this->showTopics($request, $args));
-                break;
-            case 'show':    // list of all contents
-                $html->pushContent($this->showAll($request, $args, 'wikiforum'));
-                break;
-            case 'add':     // add to or create a new thread
-                $html->pushContent($this->showForm($request, $args, 'forumadd'));
-                break;
-            default:
-                return $this->error(sprintf("Bad mode ('%s')", $show));
+                case 'summary': // main page: list of all titles
+                    $html->pushContent($this->showTopics($request, $args));
+                    break;
+                case 'show': // list of all contents
+                    $html->pushContent($this->showAll($request, $args, 'wikiforum'));
+                    break;
+                case 'add': // add to or create a new thread
+                    $html->pushContent($this->showForm($request, $args, 'forumadd'));
+                    break;
+                default:
+                    return $this->error(sprintf("Bad mode (“%s”)", $show));
             }
         }
         // FIXME: on empty showTopics() and mode!=add and mode!=summary provide a showForm() here.
@@ -107,29 +106,30 @@ extends WikiPlugin_WikiBlog
 
     // Table of titles(subpages) without content
     // TODO: use $args['info']
-    function showTopics($request, $args) {
+    function showTopics($request, $args)
+    {
         global $WikiTheme;
 
         $dbi = $request->getDbh();
         $topics = $this->findBlogs($dbi, $args['pagename'], 'wikiforum');
-        $html = HTML::table(array('border'=>0));
+        $html = HTML::table(array('border' => 0));
         $row = HTML::tr(HTML::th('title'),
-                        HTML::th('last post'),
-                        HTML::th('author'));
+            HTML::th('last post'),
+            HTML::th('author'));
         $html->pushContent($row);
         foreach ($topics as $rev) {
             //TODO: get numposts, number of replies
             $meta = $rev->get('wikiforum');
             // format as list, not as wikiforum content
-            $page = new WikiPageName($rev,$args['pagename']);
-            $row = HTML::tr(HTML::td(WikiLink($page,'if_known',$rev->get('summary'))),
-                            HTML::td($WikiTheme->formatDateTime($meta['ctime'])),
-                            HTML::td(WikiLink($meta['creator'],'if_known')));
+            $page = new WikiPageName($rev, $args['pagename']);
+            $row = HTML::tr(HTML::td(WikiLink($page, 'if_known', $rev->get('summary'))),
+                HTML::td($WikiTheme->formatDateTime($meta['ctime'])),
+                HTML::td(WikiLink($meta['creator'], 'if_known')));
             $html->pushContent($row);
         }
         return $html;
     }
-};
+}
 
 // Local Variables:
 // mode: php

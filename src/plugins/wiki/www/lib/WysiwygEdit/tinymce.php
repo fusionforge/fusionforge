@@ -1,7 +1,7 @@
 <?php
-// $Id: tinymce.php 7956 2011-03-03 17:08:31Z vargenau $
+
 /**
- * Multiple browser support, currently Mozilla (PC, Mac and Linux), 
+ * Multiple browser support, currently Mozilla (PC, Mac and Linux),
  * MSIE (PC) and FireFox (PC, Mac and Linux) and some limited Safari support.
  *
  * Download: http://tinymce.moxiecode.com/
@@ -16,48 +16,52 @@
 
 require_once 'lib/WysiwygEdit.php';
 
-class WysiwygEdit_tinymce extends WysiwygEdit {
+class WysiwygEdit_tinymce extends WysiwygEdit
+{
 
-    function WysiwygEdit_tinymce() {
+    function WysiwygEdit_tinymce()
+    {
         $this->_transformer_tags = false;
-	$this->BasePath = DATA_PATH.'/themes/default/tiny_mce/';
-	$this->_htmltextid = "edit-content";
+        $this->BasePath = DATA_PATH . '/themes/default/tiny_mce/';
+        $this->_htmltextid = "edit-content";
         $this->_wikitextid = "editareawiki";
     }
 
-    function Head($name='edit[content]') {
+    function Head($name = 'edit[content]')
+    {
         global $LANG, $WikiTheme;
         $WikiTheme->addMoreHeaders
-            (Javascript('', array('src' => $this->BasePath . 'tiny_mce.js',
-                                  'language' => 'JavaScript')));
+        (Javascript('', array('src' => $this->BasePath . 'tiny_mce.js',
+            'language' => 'JavaScript')));
         return Javascript("
 tinyMCE.init({
-	mode    : 'exact',
-	elements: '$name',
+    mode    : 'exact',
+    elements: '$name',
         theme   : 'advanced',
         language: \"$LANG\",
         ask     : false,
-	theme_advanced_toolbar_location : \"top\",
-	theme_advanced_toolbar_align : \"left\",
-	theme_advanced_path_location : \"bottom\",
-	theme_advanced_buttons1 : \"bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright,justifyfull,bullist,numlist,undo,redo,link,unlink\",
-	theme_advanced_buttons2 : \"\",
-	theme_advanced_buttons3 : \"\",
+    theme_advanced_toolbar_location : \"top\",
+    theme_advanced_toolbar_align : \"left\",
+    theme_advanced_path_location : \"bottom\",
+    theme_advanced_buttons1 : \"bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright,justifyfull,bullist,numlist,undo,redo,link,unlink\",
+    theme_advanced_buttons2 : \"\",
+    theme_advanced_buttons3 : \"\",
 });");
         /*
         plugins : \"table,contextmenu,paste,searchreplace,iespell,insertdatetime\",
-	extended_valid_elements : \"a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]\"
+    extended_valid_elements : \"a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]\"
 });
         */
     }
 
     // to be called after </textarea>
     // name ignored
-    function Textarea($textarea, $wikitext, $name='edit[content]') {
+    function Textarea($textarea, $wikitext, $name = 'edit[content]')
+    {
         $out = HTML($textarea,
-                    HTML::div(array("id" => $this->_wikitextid, 
-                                    'style'=>'display:none'),
-                                         $wikitext),"\n");
+            HTML::div(array("id" => $this->_wikitextid,
+                    'style' => 'display:none'),
+                $wikitext), "\n");
         //TODO: maybe some more custom links
         return $out;
     }

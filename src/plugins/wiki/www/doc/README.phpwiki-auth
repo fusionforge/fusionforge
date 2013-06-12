@@ -22,7 +22,7 @@ the configuration settings for the planned (and already written) DbAuth code
 was in index.php, but it was never enabled (which probably lead to some confusion).
 Since version 1.3.8 UserAuthentificationNew is enabled.
 
-We have to seperate various storage methods for UserPreferences
+We have to separate various storage methods for UserPreferences
 (cookie, PersonalPage and database), various retrieval methods for 
 username-password pairs (AuthMethods) and various AuthPolicies.
 
@@ -62,7 +62,7 @@ any/no password) using any userid which:
   2) is a valid WikiWord (matches $WikiNameRegexp.)
 
 If true, users may be created by themselves. Otherwise we need
-seperate ALLOW_USER_PASSWORDS auth. If such a user will create a so
+separate ALLOW_USER_PASSWORDS auth. If such a user will create a so
 called HomePage named after his WikiWord userid, he will be able to
 store his preferences and password there.
 If ALLOW_ANON_EDIT = true, one may still sign in to be able to store 
@@ -165,7 +165,7 @@ password pairs.
 
 ! $DBAuthParams~[~]
 
-Statements for seperate DB User Authentication.
+Statements for separate DB User Authentication.
 
 This array defines the database prepare statements to select and
 update the password and preferences.  This is typically used to

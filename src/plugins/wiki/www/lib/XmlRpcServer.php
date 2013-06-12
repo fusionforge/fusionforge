@@ -1,5 +1,5 @@
 <?php
-// $Id: XmlRpcServer.php 8071 2011-05-18 14:56:14Z vargenau $
+
 /* Copyright (C) 2002, Lawrence Akka <lakka@users.sourceforge.net>
  * Copyright (C) 2004,2005,2006,2007 $ThePhpWikiProgrammingTeam
  *
@@ -70,9 +70,8 @@ Done:
 
 // Intercept GET requests from confused users.  Only POST is allowed here!
 if (empty($GLOBALS['HTTP_SERVER_VARS']))
-    $GLOBALS['HTTP_SERVER_VARS']  =& $_SERVER;
-if ($GLOBALS['HTTP_SERVER_VARS']['REQUEST_METHOD'] != "POST")
-{
+    $GLOBALS['HTTP_SERVER_VARS'] =& $_SERVER;
+if ($GLOBALS['HTTP_SERVER_VARS']['REQUEST_METHOD'] != "POST") {
     die('This is the address of the XML-RPC interface.' .
         '  You must use XML-RPC calls to access information here.');
 }
@@ -85,7 +84,6 @@ if (loadPhpExtension('xmlrpc')) { // fast c lib
     require_once 'lib/XMLRPC/xmlrpcs.inc';
 }
 
-
 /**
  * Helper function:  Looks up a page revision (most recent by default) in the wiki database
  *
@@ -93,13 +91,13 @@ if (loadPhpExtension('xmlrpc')) { // fast c lib
  * @return WikiDB _PageRevision object, or false if no such page
  */
 
-function _getPageRevision ($params)
+function _getPageRevision($params)
 {
     global $request;
     $ParamPageName = $params->getParam(0);
     $ParamVersion = $params->getParam(1);
     $pagename = short_string_decode($ParamPageName->scalarval());
-    $version =  ($ParamVersion) ? ($ParamVersion->scalarval()):(0);
+    $version = ($ParamVersion) ? ($ParamVersion->scalarval()) : (0);
     // FIXME:  test for version <=0 ??
     $dbh = $request->getDbh();
     if ($dbh->isWikiPage($pagename)) {
@@ -117,12 +115,11 @@ function _getPageRevision ($params)
 /**
  * Get an xmlrpc "No such page" error message
  */
-function NoSuchPage ($pagename='')
+function NoSuchPage($pagename = '')
 {
     global $xmlrpcerruser;
-    return new xmlrpcresp(0, $xmlrpcerruser + 1, "No such page ".$pagename);
+    return new xmlrpcresp(0, $xmlrpcerruser + 1, "No such page " . $pagename);
 }
-
 
 // ****************************************************************************
 // Main API functions follow
@@ -133,9 +130,9 @@ global $wiki_dmap;
  * int getRPCVersionSupported(): Returns 1 for this version of the API
  */
 $wiki_dmap['getRPCVersionSupported']
-= array('signature'    => array(array($xmlrpcInt)),
-        'documentation' => 'Get the version of the wiki API',
-        'function'    => 'getRPCVersionSupported');
+    = array('signature' => array(array($xmlrpcInt)),
+    'documentation' => 'Get the version of the wiki API',
+    'function' => 'getRPCVersionSupported');
 
 // The function must be a function in the global scope which services the XML-RPC
 // method.
@@ -158,9 +155,9 @@ function getRPCVersionSupported($params)
  * Additionally to API version 1 and 2 we added the summary field.
  */
 $wiki_dmap['getRecentChanges']
-= array('signature'    => array(array($xmlrpcArray, $xmlrpcDateTime)),
-        'documentation' => 'Get a list of changed pages since [timestamp]',
-        'function'    => 'getRecentChanges');
+    = array('signature' => array(array($xmlrpcArray, $xmlrpcDateTime)),
+    'documentation' => 'Get a list of changed pages since [timestamp]',
+    'function' => 'getRecentChanges');
 
 function getRecentChanges($params)
 {
@@ -181,15 +178,14 @@ function getRecentChanges($params)
 
         // Build an array of xmlrpc structs
         $pages[] = new xmlrpcval(array('name' => $name,
-                                       'lastModified' => $lastmodified,
-                                       'author' => $author,
-                       'summary' => short_string($page->get('summary')),
-                                       'version' => $version),
-                                 'struct');
+                'lastModified' => $lastmodified,
+                'author' => $author,
+                'summary' => short_string($page->get('summary')),
+                'version' => $version),
+            'struct');
     }
     return new xmlrpcresp(new xmlrpcval($pages, "array"));
 }
-
 
 /**
  * base64 getPage( String pagename ): Get the raw Wiki text of page, latest version.
@@ -197,15 +193,15 @@ function getRecentChanges($params)
  * with UTF-8 encoded page data.
  */
 $wiki_dmap['getPage']
-= array('signature'    => array(array($xmlrpcBase64, $xmlrpcString)),
-        'documentation' => 'Get the raw Wiki text of the current version of a page',
-        'function'    => 'getPage');
+    = array('signature' => array(array($xmlrpcBase64, $xmlrpcString)),
+    'documentation' => 'Get the raw Wiki text of the current version of a page',
+    'function' => 'getPage');
 
 function getPage($params)
 {
     $revision = _getPageRevision($params);
 
-    if (! $revision ) {
+    if (!$revision) {
         $ParamPageName = $params->getParam(0);
         $pagename = short_string_decode($ParamPageName->scalarval());
         return NoSuchPage($pagename);
@@ -214,15 +210,14 @@ function getPage($params)
     return new xmlrpcresp(long_string($revision->getPackedContent()));
 }
 
-
 /**
  * base64 getPageVersion( String pagename, int version ): Get the raw Wiki text of page.
  * Returns UTF-8, expects UTF-8 with URL encoding.
  */
 $wiki_dmap['getPageVersion']
-= array('signature'    => array(array($xmlrpcBase64, $xmlrpcString, $xmlrpcInt)),
-        'documentation' => 'Get the raw Wiki text of a page version',
-        'function'    => 'getPageVersion');
+    = array('signature' => array(array($xmlrpcBase64, $xmlrpcString, $xmlrpcInt)),
+    'documentation' => 'Get the raw Wiki text of a page version',
+    'function' => 'getPageVersion');
 
 function getPageVersion($params)
 {
@@ -236,9 +231,9 @@ function getPageVersion($params)
  */
 
 $wiki_dmap['getPageHTML']
-= array('signature'    => array(array($xmlrpcBase64, $xmlrpcString)),
-        'documentation' => 'Get the current version of a page rendered in HTML',
-        'function'    => 'getPageHTML');
+    = array('signature' => array(array($xmlrpcBase64, $xmlrpcString)),
+    'documentation' => 'Get the current version of a page rendered in HTML',
+    'function' => 'getPageHTML');
 
 function getPageHTML($params)
 {
@@ -250,8 +245,9 @@ function getPageHTML($params)
     $html = $content->asXML();
     // HACK: Get rid of outer <div class="wikitext">
     if (preg_match('/^\s*<div class="wikitext">/', $html, $m1)
-    && preg_match('@</div>\s*$@', $html, $m2)) {
-    $html = substr($html, strlen($m1[0]), -strlen($m2[0]));
+        && preg_match('@</div>\s*$@', $html, $m2)
+    ) {
+        $html = substr($html, strlen($m1[0]), -strlen($m2[0]));
     }
 
     return new xmlrpcresp(long_string($html));
@@ -261,9 +257,9 @@ function getPageHTML($params)
  * base64 getPageHTMLVersion( String pagename, int version ): Return page in rendered HTML, UTF-8.
  */
 $wiki_dmap['getPageHTMLVersion']
-= array('signature'    => array(array($xmlrpcBase64, $xmlrpcString, $xmlrpcInt)),
-        'documentation' => 'Get a version of a page rendered in HTML',
-        'function'    => 'getPageHTMLVersion');
+    = array('signature' => array(array($xmlrpcBase64, $xmlrpcString, $xmlrpcInt)),
+    'documentation' => 'Get a version of a page rendered in HTML',
+    'function' => 'getPageHTMLVersion');
 
 function getPageHTMLVersion($params)
 {
@@ -274,9 +270,9 @@ function getPageHTMLVersion($params)
  * getAllPages(): Returns a list of all pages. The result is an array of strings.
  */
 $wiki_dmap['getAllPages']
-= array('signature'    => array(array($xmlrpcArray)),
-        'documentation' => 'Returns a list of all pages as an array of strings',
-        'function'    => 'getAllPages');
+    = array('signature' => array(array($xmlrpcArray)),
+    'documentation' => 'Returns a list of all pages as an array of strings',
+    'function' => 'getAllPages');
 
 function getAllPages($params)
 {
@@ -298,9 +294,9 @@ function getAllPages($params)
  *   author (string): author name
  */
 $wiki_dmap['getPageInfo']
-= array('signature'    => array(array($xmlrpcStruct, $xmlrpcString)),
-        'documentation' => 'Gets info about the current version of a page',
-        'function'    => 'getPageInfo');
+    = array('signature' => array(array($xmlrpcStruct, $xmlrpcString)),
+    'documentation' => 'Gets info about the current version of a page',
+    'function' => 'getPageInfo');
 
 function getPageInfo($params)
 {
@@ -311,14 +307,14 @@ function getPageInfo($params)
     $name = short_string($revision->getPageName());
     $version = new xmlrpcval ($revision->getVersion(), "int");
     $lastmodified = new xmlrpcval(iso8601_encode($revision->get('mtime'), 0),
-                                  "dateTime.iso8601");
+        "dateTime.iso8601");
     $author = short_string($revision->get('author'));
 
     return new xmlrpcresp(new xmlrpcval(array('name' => $name,
-                                              'lastModified' => $lastmodified,
-                                              'version' => $version,
-                                              'author' => $author),
-                                        "struct"));
+            'lastModified' => $lastmodified,
+            'version' => $version,
+            'author' => $author),
+        "struct"));
 }
 
 /**
@@ -327,15 +323,14 @@ function getPageInfo($params)
  * specific version.
  */
 $wiki_dmap['getPageInfoVersion']
-= array('signature'    => array(array($xmlrpcStruct, $xmlrpcString, $xmlrpcInt)),
-        'documentation' => 'Gets info about a page version',
-        'function'    => 'getPageInfoVersion');
+    = array('signature' => array(array($xmlrpcStruct, $xmlrpcString, $xmlrpcInt)),
+    'documentation' => 'Gets info about a page version',
+    'function' => 'getPageInfoVersion');
 
 function getPageInfoVersion($params)
 {
     return getPageInfo($params);
 }
-
 
 /*  array listLinks( string pagename ): Lists all links for a given page. The
  *  returned array contains structs, with the following elements:
@@ -344,9 +339,9 @@ function getPageInfoVersion($params)
  *                        one (1) for external link (URL - image link, whatever).
  */
 $wiki_dmap['listLinks']
-= array('signature'    => array(array($xmlrpcArray, $xmlrpcString)),
-        'documentation' => 'Lists all links for a given page',
-        'function'    => 'listLinks');
+    = array('signature' => array(array($xmlrpcArray, $xmlrpcString)),
+    'documentation' => 'Lists all links for a given page',
+    'function' => 'listLinks');
 
 function listLinks($params)
 {
@@ -355,7 +350,7 @@ function listLinks($params)
     $ParamPageName = $params->getParam(0);
     $pagename = short_string_decode($ParamPageName->scalarval());
     $dbh = $request->getDbh();
-    if (! $dbh->isWikiPage($pagename))
+    if (!$dbh->isWikiPage($pagename))
         return NoSuchPage($pagename);
 
     $page = $dbh->getPage($pagename);
@@ -384,14 +379,14 @@ function listLinks($params)
         if (USE_PATH_INFO and !$args) {
             $url = preg_replace('/%2f/i', '/', rawurlencode($currentname));
         } elseif (!USE_PATH_INFO) {
-            $url = str_replace("/RPC2.php","/index.php", WikiURL($currentname, $args, true));
+            $url = str_replace("/RPC2.php", "/index.php", WikiURL($currentname, $args, true));
         } else {
             $url = WikiURL($currentname, $args);
         }
-        $linkstruct[] = new xmlrpcval(array('page'=> short_string($currentname),
-                                            'type'=> new xmlrpcval('local', 'string'),
-                                            'href' => short_string($url)),
-                                      "struct");
+        $linkstruct[] = new xmlrpcval(array('page' => short_string($currentname),
+                'type' => new xmlrpcval('local', 'string'),
+                'href' => short_string($url)),
+            "struct");
     }
 
     /*
@@ -429,14 +424,15 @@ function listLinks($params)
  * API notes: Contrary to the API v2 specs we dropped attributes and added author + password
  */
 $wiki_dmap['putPage']
-= array('signature'     => array(array($xmlrpcStruct, $xmlrpcString, $xmlrpcString, $xmlrpcString, $xmlrpcString)),
-        'documentation' => 'put the raw Wiki text into a page as new version',
-        'function'      => 'putPage');
+    = array('signature' => array(array($xmlrpcStruct, $xmlrpcString, $xmlrpcString, $xmlrpcString, $xmlrpcString)),
+    'documentation' => 'put the raw Wiki text into a page as new version',
+    'function' => 'putPage');
 
-function _getUser($userid='') {
+function _getUser($userid = '')
+{
     global $request;
 
-    if (! $userid ) {
+    if (!$userid) {
         if (!isset($_SERVER))
             $_SERVER =& $GLOBALS['HTTP_SERVER_VARS'];
         if (!isset($_ENV))
@@ -444,12 +440,9 @@ function _getUser($userid='') {
         if (isset($_SERVER['REMOTE_USER']))
             $userid = $_SERVER['REMOTE_USER'];
         elseif (isset($_ENV['REMOTE_USER']))
-            $userid = $_ENV['REMOTE_USER'];
-        elseif (isset($_SERVER['REMOTE_ADDR']))
-            $userid = $_SERVER['REMOTE_ADDR'];
-        elseif (isset($_ENV['REMOTE_ADDR']))
-            $userid = $_ENV['REMOTE_ADDR'];
-        elseif (isset($GLOBALS['REMOTE_ADDR']))
+            $userid = $_ENV['REMOTE_USER']; elseif (isset($_SERVER['REMOTE_ADDR']))
+            $userid = $_SERVER['REMOTE_ADDR']; elseif (isset($_ENV['REMOTE_ADDR']))
+            $userid = $_ENV['REMOTE_ADDR']; elseif (isset($GLOBALS['REMOTE_ADDR']))
             $userid = $GLOBALS['REMOTE_ADDR'];
     }
 
@@ -460,7 +453,8 @@ function _getUser($userid='') {
     }
 }
 
-function putPage($params) {
+function putPage($params)
+{
     global $request;
 
     $ParamPageName = $params->getParam(0);
@@ -482,15 +476,15 @@ function putPage($params) {
     $request->_user->_group = $request->getGroup();
     $request->_user->AuthCheck($userid, $passwd);
 
-    if (! mayAccessPage ('edit', $pagename)) {
+    if (!mayAccessPage('edit', $pagename)) {
         return new xmlrpcresp(
-                              new xmlrpcval(
-                                            array('code' => new xmlrpcval(401, "int"),
-                                                  'version' => new xmlrpcval(0, "int"),
-                                                  'message' =>
-                                                  short_string("no permission for "
-                                                               .$request->_user->UserName())),
-                                            "struct"));
+            new xmlrpcval(
+                array('code' => new xmlrpcval(401, "int"),
+                    'version' => new xmlrpcval(0, "int"),
+                    'message' =>
+                    short_string("no permission for "
+                        . $request->_user->UserName())),
+                "struct"));
     }
 
     $now = time();
@@ -502,17 +496,17 @@ function putPage($params) {
     // $version = -1 will force create a new version
     if ($current->getPackedContent() != $content) {
         $init_meta = array('ctime' => $now,
-                           'creator' => $userid,
-                           'creator_id' => $userid,
-                           );
+            'creator' => $userid,
+            'creator_id' => $userid,
+        );
         $version_meta = array('author' => $userid,
-                              'author_id' => $userid,
-                              'markup' => 2.0,
-                              'summary' => isset($summary) ? $summary : _("xml-rpc change"),
-                              'mtime' => $now,
-                              'pagetype' => 'wikitext',
-                              'wikitext' => $init_meta,
-                              );
+            'author_id' => $userid,
+            'markup' => 2.0,
+            'summary' => isset($summary) ? $summary : _("xml-rpc change"),
+            'mtime' => $now,
+            'pagetype' => 'wikitext',
+            'wikitext' => $init_meta,
+        );
         $version++;
         $res = $page->save($content, $version, $version_meta);
         if ($res)
@@ -523,10 +517,10 @@ function putPage($params) {
         $res = 0;
         $message = $message = "Page $pagename unchanged";
     }
-    return new xmlrpcresp(new xmlrpcval(array('code'    => new xmlrpcval($res ? 200 : 400, "int"),
-                                              'version' => new xmlrpcval($version, "int"),
-                                              'message' => short_string($message)),
-                                        "struct"));
+    return new xmlrpcresp(new xmlrpcval(array('code' => new xmlrpcval($res ? 200 : 400, "int"),
+            'version' => new xmlrpcval($version, "int"),
+            'message' => short_string($message)),
+        "struct"));
 }
 
 /* End of WikiXMLRpc API v2 */
@@ -544,9 +538,9 @@ function putPage($params) {
  * base64 getAttachment( utf8 attachmentName ), putAttachment( utf8 attachmentName, base64 content )
  */
 $wiki_dmap['getUploadedFileInfo']
-= array('signature'    => array(array($xmlrpcStruct, $xmlrpcString)),
-        'documentation' => 'Gets date and size about an uploaded local file',
-        'function'    => 'getUploadedFileInfo');
+    = array('signature' => array(array($xmlrpcStruct, $xmlrpcString)),
+    'documentation' => 'Gets date and size about an uploaded local file',
+    'function' => 'getUploadedFileInfo');
 
 function getUploadedFileInfo($params)
 {
@@ -563,9 +557,9 @@ function getUploadedFileInfo($params)
         $lastmodified = 0;
     }
     return new xmlrpcresp(new xmlrpcval
-        (array('lastModified' => new xmlrpcval(iso8601_encode($lastmodified, 1),
-                                               "dateTime.iso8601"),
-               'size' => new xmlrpcval($size, "int")),
+    (array('lastModified' => new xmlrpcval(iso8601_encode($lastmodified, 1),
+            "dateTime.iso8601"),
+            'size' => new xmlrpcval($size, "int")),
         "struct"));
 }
 
@@ -589,9 +583,9 @@ function getUploadedFileInfo($params)
  * http://www.thetwowayweb.com/soapmeetsrss#rsscloudInterface
  */
 $wiki_dmap['rssPleaseNotify']
-= array('signature'    => array(array($xmlrpcBoolean, $xmlrpcStruct)),
-        'documentation' => 'RSS2 change notification subscriber channel',
-        'function'    => 'rssPleaseNotify');
+    = array('signature' => array(array($xmlrpcBoolean, $xmlrpcStruct)),
+    'documentation' => 'RSS2 change notification subscriber channel',
+    'function' => 'rssPleaseNotify');
 
 function rssPleaseNotify($params)
 {
@@ -605,9 +599,9 @@ function rssPleaseNotify($params)
 
  */
 $wiki_dmap['mailPasswordToUser']
-= array('signature'    => array(array($xmlrpcBoolean, $xmlrpcString)),
-        'documentation' => 'RSS2 user management helper',
-        'function'    => 'mailPasswordToUser');
+    = array('signature' => array(array($xmlrpcBoolean, $xmlrpcString)),
+    'documentation' => 'RSS2 user management helper',
+    'function' => 'mailPasswordToUser');
 
 function mailPasswordToUser($params)
 {
@@ -620,8 +614,8 @@ function mailPasswordToUser($params)
     $success = 0;
     if ($email) {
         $body = WikiURL('') . "\nPassword: " . $request->getPref('passwd');
-        $success = mail($email, "[".WIKI_NAME."} Password Request",
-                        $body);
+        $success = mail($email, "[" . WIKI_NAME . "} Password Request",
+            $body);
     }
     return new xmlrpcresp(new xmlrpcval ($success, "boolean"));
 }
@@ -634,10 +628,10 @@ function mailPasswordToUser($params)
  * @author: Reini Urban
  */
 $wiki_dmap['titleSearch']
-= array('signature'     => array(array($xmlrpcArray, $xmlrpcString, $xmlrpcString)),
-        'documentation' => "Return matching pagenames.
+    = array('signature' => array(array($xmlrpcArray, $xmlrpcString, $xmlrpcString)),
+    'documentation' => "Return matching pagenames.
 Option 1: caseexact, 2: regex, 4: starts_with, 8: exact, 16: fallback",
-        'function'      => 'titleSearch');
+    'function' => 'titleSearch');
 
 function titleSearch($params)
 {
@@ -646,26 +640,26 @@ function titleSearch($params)
     $searchstring = short_string_decode($ParamPageName->scalarval());
     if (count($params->params) > 1) {
         $ParamOption = $params->getParam(1);
-        $option = (int) $ParamOption->scalarval();
+        $option = (int)$ParamOption->scalarval();
     } else
-    $option = 0;
-        // default option: substring, case-inexact
+        $option = 0;
+    // default option: substring, case-inexact
 
     $case_exact = $option & 1;
-    $regex      = $option & 2;
-    $fallback   = $option & 16;
+    $regex = $option & 2;
+    $fallback = $option & 16;
     if (!$regex) {
         if ($option & 4) { // STARTS_WITH
             $regex = true;
-            $searchstring = "^".$searchstring;
+            $searchstring = "^" . $searchstring;
         }
         if ($option & 8) { // EXACT
             $regex = true;
-            $searchstring = "^".$searchstring."$";
+            $searchstring = "^" . $searchstring . "$";
         }
     } else {
         if ($option & 4 or $option & 8) {
-        global $xmlrpcerruser;
+            global $xmlrpcerruser;
             return new xmlrpcresp(0, $xmlrpcerruser + 1, "Invalid option");
         }
     }
@@ -680,7 +674,7 @@ function titleSearch($params)
     // On failure try again broader (substring + case inexact)
     if ($fallback and empty($pages)) {
         $query = new TextSearchQuery(short_string_decode($ParamPageName->scalarval()), false,
-                                     $regex ? 'auto' : 'none');
+            $regex ? 'auto' : 'none');
         $dbh = $request->getDbh();
         $iterator = $dbh->titleSearch($query);
         while ($page = $iterator->next()) {
@@ -699,9 +693,9 @@ function titleSearch($params)
  * @author: Reini Urban
  */
 $wiki_dmap['listPlugins']
-= array('signature'     => array(array($xmlrpcArray)),
-        'documentation' => "Return names of all plugins",
-        'function'      => 'listPlugins');
+    = array('signature' => array(array($xmlrpcArray)),
+    'documentation' => "Return names of all plugins",
+    'function' => 'listPlugins');
 
 function listPlugins($params)
 {
@@ -715,7 +709,7 @@ function listPlugins($params)
     $RetArray = array();
     if (!empty($plugins)) {
         require_once 'lib/WikiPlugin.php';
-        $w = new WikiPluginLoader;
+        $w = new WikiPluginLoader();
         foreach ($plugins as $plugin) {
             $pluginName = str_replace(".php", "", $plugin);
             $p = $w->getPlugin($pluginName, false); // second arg?
@@ -737,9 +731,9 @@ function listPlugins($params)
  * @author: Reini Urban
  */
 $wiki_dmap['getPluginSynopsis']
-= array('signature'     => array(array($xmlrpcArray, $xmlrpcString)),
-        'documentation' => "Return plugin synopsis",
-        'function'      => 'getPluginSynopsis');
+    = array('signature' => array(array($xmlrpcArray, $xmlrpcString)),
+    'documentation' => "Return plugin synopsis",
+    'function' => 'getPluginSynopsis');
 
 function getPluginSynopsis($params)
 {
@@ -747,19 +741,19 @@ function getPluginSynopsis($params)
     $pluginName = short_string_decode($ParamPlugin->scalarval());
 
     require_once 'lib/WikiPlugin.php';
-    $w = new WikiPluginLoader;
+    $w = new WikiPluginLoader();
     $synopsis = '';
     $p = $w->getPlugin($pluginName, false); // second arg?
     // trap php files which aren't WikiPlugin~s: wikiplugin + wikiplugin_cached only
     if (strtolower(substr(get_parent_class($p), 0, 10)) == 'wikiplugin') {
         $plugin_args = '';
         $desc = $p->getArgumentsDescription();
-        $src = array("\n",'"',"'",'|','[',']','\\');
-        $replace = array('%0A','%22','%27','%7C','%5B','%5D','%5C');
-        $desc = str_replace("<br />",' ',$desc->asXML());
+        $src = array("\n", '"', "'", '|', '[', ']', '\\');
+        $replace = array('%0A', '%22', '%27', '%7C', '%5B', '%5D', '%5C');
+        $desc = str_replace("<br />", ' ', $desc->asXML());
         if ($desc)
-            $plugin_args = '\n'.str_replace($src, $replace, $desc);
-        $synopsis = "<?plugin ".$pluginName.$plugin_args."?>"; // args?
+            $plugin_args = '\n' . str_replace($src, $replace, $desc);
+        $synopsis = "<?plugin " . $pluginName . $plugin_args . "?>"; // args?
     }
 
     return new xmlrpcresp(short_string($synopsis));
@@ -775,9 +769,9 @@ function getPluginSynopsis($params)
  * @author: Reini Urban
  */
 $wiki_dmap['callPlugin']
-= array('signature'     => array(array($xmlrpcArray, $xmlrpcString, $xmlrpcString)),
-        'documentation' => "Returns an array of pages as returned by the plugins PageList call",
-        'function'      => 'callPlugin');
+    = array('signature' => array(array($xmlrpcArray, $xmlrpcString, $xmlrpcString)),
+    'documentation' => "Returns an array of pages as returned by the plugins PageList call",
+    'function' => 'callPlugin');
 
 function callPlugin($params)
 {
@@ -790,14 +784,14 @@ function callPlugin($params)
 
     $basepage = ''; //$pluginName;
     require_once 'lib/WikiPlugin.php';
-    $w = new WikiPluginLoader;
+    $w = new WikiPluginLoader();
     $p = $w->getPlugin($pluginName, false); // second arg?
     $pagelist = $p->run($dbi, $plugin_args, $request, $basepage);
     $list = array();
     if (is_object($pagelist) and isa($pagelist, 'PageList')) {
-    foreach ($pagelist->_pages as $page) {
-        $list[] = $page->getName();
-    }
+        foreach ($pagelist->_pages as $page) {
+            $list[] = $page->getName();
+        }
     }
     return new xmlrpcresp(new xmlrpcval($list, "array"));
 }
@@ -815,9 +809,9 @@ function callPlugin($params)
  * @author: Reini Urban
  */
 $wiki_dmap['listRelations']
-= array('signature'     => array(array($xmlrpcArray, $xmlrpcInt)),
-        'documentation' => "Return names of all relations",
-        'function'      => 'listRelations');
+    = array('signature' => array(array($xmlrpcArray, $xmlrpcInt)),
+    'documentation' => "Return names of all relations",
+    'function' => 'listRelations');
 
 function listRelations($params)
 {
@@ -825,16 +819,16 @@ function listRelations($params)
     $dbh = $request->getDbh();
     if (count($params->params) > 0) {
         $ParamOption = $params->getParam(0);
-        $option = (int) $ParamOption->scalarval();
+        $option = (int)$ParamOption->scalarval();
     } else
-    $option = 1;
+        $option = 1;
     $also_attributes = $option & 2;
     $only_attributes = $option & 2 and !($option & 1);
     $sorted = !($option & 4);
     return new xmlrpcresp(new xmlrpcval($dbh->listRelations($also_attributes,
-                                $only_attributes,
-                                $sorted),
-                    "array"));
+            $only_attributes,
+            $sorted),
+        "array"));
 }
 
 /**
@@ -843,54 +837,54 @@ function listRelations($params)
 Spec: http://www.hixie.ch/specs/pingback/pingback
 
 Parameters
-    sourceURI of type string
-        The absolute URI of the post on the source page containing the
-        link to the target site.
-    targetURI of type string
-        The absolute URI of the target of the link, as given on the source page.
+sourceURI of type string
+The absolute URI of the post on the source page containing the
+link to the target site.
+targetURI of type string
+The absolute URI of the target of the link, as given on the source page.
 Return Value
-    A string, as described below.
+A string, as described below.
 Faults
-    If an error condition occurs, then the appropriate fault code from
-    the following list should be used. Clients can quickly determine
-    the kind of error from bits 5-8. 0x001x fault codes are used for
-    problems with the source URI, 0x002x codes are for problems with
-    the target URI, and 0x003x codes are used when the URIs are fine
-    but the pingback cannot be acknowledged for some other reaon.
+If an error condition occurs, then the appropriate fault code from
+the following list should be used. Clients can quickly determine
+the kind of error from bits 5-8. 0x001x fault codes are used for
+problems with the source URI, 0x002x codes are for problems with
+the target URI, and 0x003x codes are used when the URIs are fine
+but the pingback cannot be acknowledged for some other reaon.
 
-    0
-        A generic fault code. Servers MAY use this error code instead
-        of any of the others if they do not have a way of determining
-        the correct fault code.
-    0x0010 (16)
-        The source URI does not exist.
-    0x0011 (17)
-        The source URI does not contain a link to the target URI, and
-        so cannot be used as a source.
-    0x0020 (32)
-        The specified target URI does not exist. This MUST only be
-        used when the target definitely does not exist, rather than
-        when the target may exist but is not recognised. See the next
-        error.
-    0x0021 (33)
-        The specified target URI cannot be used as a target. It either
-        doesn't exist, or it is not a pingback-enabled resource. For
-        example, on a blog, typically only permalinks are
-        pingback-enabled, and trying to pingback the home page, or a
-        set of posts, will fail with this error.
-    0x0030 (48)
-        The pingback has already been registered.
-    0x0031 (49)
-        Access denied.
-    0x0032 (50)
-        The server could not communicate with an upstream server, or
-        received an error from an upstream server, and therefore could
-        not complete the request. This is similar to HTTP's 402 Bad
-        Gateway error. This error SHOULD be used by pingback proxies
-        when propagating errors.
+0
+A generic fault code. Servers MAY use this error code instead
+of any of the others if they do not have a way of determining
+the correct fault code.
+0x0010 (16)
+The source URI does not exist.
+0x0011 (17)
+The source URI does not contain a link to the target URI, and
+so cannot be used as a source.
+0x0020 (32)
+The specified target URI does not exist. This MUST only be
+used when the target definitely does not exist, rather than
+when the target may exist but is not recognised. See the next
+error.
+0x0021 (33)
+The specified target URI cannot be used as a target. It either
+doesn't exist, or it is not a pingback-enabled resource. For
+example, on a blog, typically only permalinks are
+pingback-enabled, and trying to pingback the home page, or a
+set of posts, will fail with this error.
+0x0030 (48)
+The pingback has already been registered.
+0x0031 (49)
+Access denied.
+0x0032 (50)
+The server could not communicate with an upstream server, or
+received an error from an upstream server, and therefore could
+not complete the request. This is similar to HTTP's 402 Bad
+Gateway error. This error SHOULD be used by pingback proxies
+when propagating errors.
 
-    In addition, [FaultCodes] defines some standard fault codes that
-    servers MAY use to report higher level errors.
+In addition, [FaultCodes] defines some standard fault codes that
+servers MAY use to report higher level errors.
 
 Servers MUST respond to this function call either with a single string
 or with a fault code.
@@ -912,20 +906,19 @@ result of successful requests to the user.
 Upon receiving a request, servers MAY do what they like. However, the
 following steps are RECOMMENDED:
 
-   1. The server MAY attempt to fetch the source URI to verify that
-   the source does indeed link to the target.
-   2. The server MAY check its own data to ensure that the target
-   exists and is a valid entry.
-   3. The server MAY check that the pingback has not already been registered.
-   4. The server MAY record the pingback.
-   5. The server MAY regenerate the site's pages (if the pages are static).
-
+1. The server MAY attempt to fetch the source URI to verify that
+the source does indeed link to the target.
+2. The server MAY check its own data to ensure that the target
+exists and is a valid entry.
+3. The server MAY check that the pingback has not already been registered.
+4. The server MAY record the pingback.
+5. The server MAY regenerate the site's pages (if the pages are static).
  * @author: Reini Urban
  */
 $wiki_dmap['pingback.ping']
-= array('signature'     => array(array($xmlrpcString, $xmlrpcString, $xmlrpcString)),
-        'documentation' => "",
-        'function'      => 'pingBack');
+    = array('signature' => array(array($xmlrpcString, $xmlrpcString, $xmlrpcString)),
+    'documentation' => "",
+    'function' => 'pingBack');
 function pingBack($params)
 {
     global $request;
@@ -943,11 +936,12 @@ function pingBack($params)
  * Construct the server instance, and set up the dispatch map,
  * which maps the XML-RPC methods on to the wiki functions.
  * Provide the "wiki." prefix to each function. Besides
- * the blog - pingback, ... - functions with a seperate namespace.
+ * the blog - pingback, ... - functions with a separate namespace.
  */
 class XmlRpcServer extends xmlrpc_server
 {
-    function XmlRpcServer ($request = false) {
+    function XmlRpcServer($request = false)
+    {
         global $wiki_dmap;
         foreach ($wiki_dmap as $name => $val) {
             if ($name == 'pingback.ping') // non-wiki methods
@@ -959,7 +953,8 @@ class XmlRpcServer extends xmlrpc_server
         $this->xmlrpc_server($dmap, 0 /* delay service*/);
     }
 
-    function service () {
+    function service()
+    {
         global $ErrorManager;
 
         $ErrorManager->pushErrorHandler(new WikiMethodCb($this, '_errorHandler'));
@@ -967,7 +962,8 @@ class XmlRpcServer extends xmlrpc_server
         $ErrorManager->popErrorHandler();
     }
 
-    function _errorHandler ($e) {
+    function _errorHandler($e)
+    {
         $msg = htmlspecialchars($e->asString());
         // '--' not allowed within xml comment
         $msg = str_replace('--', '&#45;&#45;', $msg);

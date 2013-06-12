@@ -1,5 +1,5 @@
 <?php
-// $Id: display.php 8173 2011-11-04 09:23:48Z vargenau $
+
 /* Copyright (C) 2004-2011 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
@@ -26,7 +26,8 @@ require_once 'lib/Template.php';
 /**
  * Extract keywords from Category* links on page.
  */
-function GleanKeywords ($page) {
+function GleanKeywords($page)
+{
     if (!defined('KEYWORDS')) return '';
     require_once 'lib/TextSearchQuery.php';
     $search = new TextSearchQuery(KEYWORDS, true);
@@ -49,15 +50,17 @@ function GleanKeywords ($page) {
  * @param $pagename string  Name of redirecting page.
  * @return XmlContent Link to the redirecting page.
  */
-function RedirectorLink($pagename) {
+function RedirectorLink($pagename)
+{
     $url = WikiURL($pagename, array('redirectfrom' => ''));
     return HTML::a(array('class' => 'redirectfrom wiki',
-                         'href' => $url),
-                   $pagename);
+            'href' => $url),
+        $pagename);
 }
 
 /* only on ?action= */
-function actionPage(&$request, $action) {
+function actionPage(&$request, $action)
+{
     global $WikiTheme;
     global $robots;
 
@@ -72,15 +75,15 @@ function actionPage(&$request, $action) {
     $actionrev = $actionpage->getCurrentRevision();
 
     $pagetitle = HTML(fmt("%s: %s",
-                          $actionpage->getName(),
-                          $WikiTheme->linkExistingWikiWord($pagename, false, $version)));
+        $actionpage->getName(),
+        $WikiTheme->linkExistingWikiWord($pagename, false, $version)));
 
     $request->setValidators(array('pageversion' => $revision->getVersion(),
-                                  '%mtime' => $revision->get('mtime')));
+        '%mtime' => $revision->get('mtime')));
     $request->appendValidators(array('pagerev' => $revision->getVersion(),
-                                     '%mtime' => $revision->get('mtime')));
+        '%mtime' => $revision->get('mtime')));
     $request->appendValidators(array('actionpagerev' => $actionrev->getVersion(),
-                                     '%mtime' => $actionrev->get('mtime')));
+        '%mtime' => $actionrev->get('mtime')));
 
     $transformedContent = $actionrev->getTransformedContent();
 
@@ -109,14 +112,14 @@ function actionPage(&$request, $action) {
         $template = Template('browse', array('CONTENT' => $transformedContent));
         GeneratePage($template, $pagetitle, $revision, $args);
     } elseif ($format == 'xml') {
-        $request->setArg('format','');
+        $request->setArg('format', '');
         $template = new Template('browse', $request,
-                                 array('revision' => $revision,
-                                       'CONTENT'  => $transformedContent,
-                       ));
+            array('revision' => $revision,
+                'CONTENT' => $transformedContent,
+            ));
         $html = GeneratePageAsXML($template, $pagename, $revision /*,
                   array('VALID_LINKS' => $args['VALID_LINKS'])*/);
-        header("Content-Type: application/xhtml+xml; charset=" . $GLOBALS['charset']);
+        header("Content-Type: application/xhtml+xml; charset=UTF-8");
         echo $html;
     } else {
         $pagelist = null;
@@ -124,22 +127,22 @@ function actionPage(&$request, $action) {
         // Then the multi-page formats
         // rss (if not already handled by RecentChanges)
         // Need the pagelist from the first plugin
-        foreach($transformedContent->_content as $cached_element) {
+        foreach ($transformedContent->_content as $cached_element) {
             if (is_a($cached_element, "Cached_PluginInvocation")) {
-                $loader = new WikiPluginLoader;
+                $loader = new WikiPluginLoader();
                 $markup = null;
                 // return the first found pagelist
                 $pagelist = $loader->expandPI($cached_element->_pi, $request,
-                                              $markup, $pagename);
+                    $markup, $pagename);
                 if (is_a($pagelist, 'PageList'))
                     break;
             }
         }
         if (!$pagelist or !is_a($pagelist, 'PageList')) {
-            if (!in_array($format, array("rss91","rss2","rss","atom","rdf")))
-            trigger_error(sprintf("Format %s requires an actionpage returning a pagelist.",
-                      $format)
-                  ."\n".("Fall back to single page mode"), E_USER_WARNING);
+            if (!in_array($format, array("rss91", "rss2", "rss", "atom", "rdf")))
+                trigger_error(sprintf("Format %s requires an actionpage returning a pagelist.",
+                    $format)
+                    . "\n" . ("Fall back to single page mode"), E_USER_WARNING);
             require_once 'lib/PageList.php';
             $pagelist = new PageList();
             if ($format == 'pdf')
@@ -155,16 +158,15 @@ function actionPage(&$request, $action) {
             require_once 'lib/pdf.php';
             array_unshift($args['VALID_LINKS'], $pagename);
             ConvertAndDisplayPdfPageList($request, $pagelist, $args);
-        }
-        elseif ($format == 'ziphtml') { // need to fix links
+        } elseif ($format == 'ziphtml') { // need to fix links
             require_once 'lib/loadsave.php';
             array_unshift($args['VALID_LINKS'], $pagename);
-            $request->setArg('zipname', FilenameForPage($pagename).".zip");
+            $request->setArg('zipname', FilenameForPage($pagename) . ".zip");
             $request->setArg('pages', $args['VALID_LINKS']);
-            $request->setArg('format','');
+            $request->setArg('format', '');
             MakeWikiZipHtml($request);
         } // time-sorted RDF à la RecentChanges
-        elseif (in_array($format, array("rss91","rss2","rss","atom"))) {
+        elseif (in_array($format, array("rss91", "rss2", "rss", "atom"))) {
             $args = $request->getArgs();
             //$request->setArg('format','');
             if ($pagename == _("RecentChanges")) {
@@ -178,9 +180,9 @@ function actionPage(&$request, $action) {
             $req_args =& $request->args;
             unset($req_args['format']);
             $json = array('count' => count($pagelist->_pages),
-                          'list'  => $args['VALID_LINKS'],
-                          'args'  => $req_args,
-                          'phpwiki-version' => PHPWIKI_VERSION);
+                'list' => $args['VALID_LINKS'],
+                'args' => $req_args,
+                'phpwiki-version' => PHPWIKI_VERSION);
             if (loadPhpExtension('json')) {
                 $json_enc = json_encode($json);
             } else {
@@ -204,8 +206,8 @@ function actionPage(&$request, $action) {
             $rdf->format();
         } else {
             if (!in_array($pagename, array(_("LinkDatabase"))))
-            trigger_error(sprintf(_("Unsupported argument: %s=%s"),"format",$format),
-                          E_USER_WARNING);
+                trigger_error(sprintf(_("Unsupported argument: %s=%s"), "format", $format),
+                    E_USER_WARNING);
             $template = Template('browse', array('CONTENT' => $transformedContent));
             GeneratePage($template, $pagetitle, $revision, $args);
         }
@@ -215,7 +217,8 @@ function actionPage(&$request, $action) {
     return '';
 }
 
-function displayPage(&$request, $template=false) {
+function displayPage(&$request, $template = false)
+{
     global $WikiTheme;
     global $robots;
     $pagename = $request->getArg('pagename');
@@ -233,17 +236,16 @@ function displayPage(&$request, $template=false) {
         $revision = $page->getCurrentRevision();
     }
     $format = $request->getArg('format');
-    if ($format == 'xml') {  // fast ajax: include page content asynchronously
-        global $charset;
+    if ($format == 'xml') { // fast ajax: include page content asynchronously
         header("Content-Type: text/xml");
-        echo "<","?xml version=\"1.0\" encoding=\"$charset\"?", ">\n";
+        echo "<", "?xml version=\"1.0\" encoding=\"UTF-8\"?", ">\n";
         // DOCTYPE html needed to allow unencoded entities like &nbsp; without !CDATA[]
         echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">',"\n";
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">', "\n";
         if ($page->exists()) {
             header("Last-Modified: " . Rfc1123DateTime($revision->get('mtime')));
             $request->cacheControl();
-            $request->setArg('format','');
+            $request->setArg('format', '');
             $page_content = $revision->getTransformedContent();
             $page_content->printXML();
             $request->_is_buffering_output = false; // avoid wrong Content-Length with errors
@@ -261,28 +263,28 @@ function displayPage(&$request, $template=false) {
         $pages = explode(SUBPAGE_SEPARATOR, $pagename);
         $last_page = array_pop($pages); // deletes last element from array as side-effect
         $pageheader = HTML::span(HTML::a(array('href' => WikiURL($pages[0]),
-                                               'class' => 'pagetitle'
-                                              ),
-                                        $WikiTheme->maybeSplitWikiWord($pages[0] . SUBPAGE_SEPARATOR)));
+                'class' => 'pagetitle'
+            ),
+            $WikiTheme->maybeSplitWikiWord($pages[0] . SUBPAGE_SEPARATOR)));
         $first_pages = $pages[0] . SUBPAGE_SEPARATOR;
         array_shift($pages);
-        foreach ($pages as $p)  {
+        foreach ($pages as $p) {
             $pageheader->pushContent(HTML::a(array('href' => WikiURL($first_pages . $p),
-                                                  'class' => 'backlinks'),
-                                            $WikiTheme->maybeSplitWikiWord($p . SUBPAGE_SEPARATOR)));
+                    'class' => 'backlinks'),
+                $WikiTheme->maybeSplitWikiWord($p . SUBPAGE_SEPARATOR)));
             $first_pages .= $p . SUBPAGE_SEPARATOR;
         }
         $backlink = HTML::a(array('href' => WikiURL($pagename,
-                                                    array('action' => _("BackLinks"))),
-                                  'class' => 'backlinks'),
-                            $WikiTheme->maybeSplitWikiWord($last_page));
+                array('action' => __("BackLinks"))),
+                'class' => 'backlinks'),
+            $WikiTheme->maybeSplitWikiWord($last_page));
         $backlink->addTooltip(sprintf(_("BackLinks for %s"), $pagename));
         $pageheader->pushContent($backlink);
     } else {
         $pageheader = HTML::a(array('href' => WikiURL($pagename,
-                                                     array('action' => _("BackLinks"))),
-                                   'class' => 'backlinks'),
-                             $WikiTheme->maybeSplitWikiWord($pagename));
+                array('action' => __("BackLinks"))),
+                'class' => 'backlinks'),
+            $WikiTheme->maybeSplitWikiWord($pagename));
         $pageheader->addTooltip(sprintf(_("BackLinks for %s"), $pagename));
         if ($request->getArg('frame'))
             $pageheader->setAttr('target', '_top');
@@ -291,35 +293,23 @@ function displayPage(&$request, $template=false) {
     $pagetitle = SplitPagename($pagename);
     if (($redirect_from = $request->getArg('redirectfrom'))) {
         $redirect_message = HTML::span(array('class' => 'redirectfrom'),
-                                       fmt("(Redirected from %s)",
-                                           RedirectorLink($redirect_from)));
-    // abuse the $redirected template var for some status update notice
+            fmt("(Redirected from %s)",
+                RedirectorLink($redirect_from)));
+        // abuse the $redirected template var for some status update notice
     } elseif ($request->getArg('errormsg')) {
         $redirect_message = HTML::p(array('class' => 'error'),
-                                          $request->getArg('errormsg'));
+            $request->getArg('errormsg'));
         $request->setArg('errormsg', false);
     } elseif ($request->getArg('warningmsg')) {
         $redirect_message = HTML::p(array('class' => 'warning_msg'),
-                                          $request->getArg('warningmsg'));
+            $request->getArg('warningmsg'));
         $request->setArg('errormsg', false);
     }
 
     $request->appendValidators(array('pagerev' => $revision->getVersion(),
-                                     '%mtime' => $revision->get('mtime')));
-/*
-    // FIXME: This is also in the template...
-    if ($request->getArg('action') != 'pdf' and !headers_sent()) {
-      // FIXME: enable MathML/SVG/... support
-      if (ENABLE_XHTML_XML
-             and (!isBrowserIE()
-                  and strstr($request->get('HTTP_ACCEPT'),'application/xhtml+xml')))
-            header("Content-Type: application/xhtml+xml; charset=" . $GLOBALS['charset']);
-        else
-            header("Content-Type: text/html; charset=" . $GLOBALS['charset']);
-    }
-*/
+        '%mtime' => $revision->get('mtime')));
 
-    $toks['TITLE'] = $pagetitle;   // <title> tag
+    $toks['TITLE'] = $pagetitle; // <title> tag
     $toks['HEADER'] = $pageheader; // h1 with backlink
     $toks['revision'] = $revision;
 
@@ -333,26 +323,26 @@ function displayPage(&$request, $template=false) {
                 // Should be changed to check the engine and search term only
                 // $request->setArg('nocache', 1);
                 $page_content = new TransformedText($revision->getPage(),
-                                                    $revision->getPackedContent(),
-                                                    $revision->getMetaData());
-        /* Now add the SearchHighlight plugin to the top of the page, in memory only.
-           You can parametrize this by changing the SearchHighlight action page.
-        */
+                    $revision->getPackedContent(),
+                    $revision->getMetaData());
+                /* Now add the SearchHighlight plugin to the top of the page, in memory only.
+                   You can parametrize this by changing the SearchHighlight action page.
+                */
                 if ($actionpage = $request->findActionPage('SearchHighlight')) {
                     $actionpage = $request->getPage($actionpage);
                     $actionrev = $actionpage->getCurrentRevision();
                     $pagetitle = HTML(fmt("%s: %s",
-                                          $actionpage->getName(),
-                                          $WikiTheme->linkExistingWikiWord($pagename, false, $version)));
+                        $actionpage->getName(),
+                        $WikiTheme->linkExistingWikiWord($pagename, false, $version)));
                     $request->appendValidators(array('actionpagerev' => $actionrev->getVersion(),
-                                                     '%mtime' => $actionrev->get('mtime')));
+                        '%mtime' => $actionrev->get('mtime')));
                     $toks['SEARCH_ENGINE'] = $result['engine'];
                     $toks['SEARCH_ENGINE_URL'] = $result['engine_url'];
                     $toks['SEARCH_TERM'] = $result['query'];
                     //$toks['HEADER'] = HTML($actionpage->getName(),": ",$pageheader); // h1 with backlink
                     $actioncontent = new TransformedText($actionrev->getPage(),
-                                                         $actionrev->getPackedContent(),
-                                                         $actionrev->getMetaData());
+                        $actionrev->getPackedContent(),
+                        $actionrev->getMetaData());
                     // prepend the actionpage in front of the hightlighted content
                     $toks['CONTENT'] = HTML($actioncontent, $page_content);
                 }
@@ -402,16 +392,16 @@ function displayPage(&$request, $template=false) {
         $pagelist->addPage($page);
         if ($format == 'pdf') {
             require_once 'lib/pdf.php';
-            $request->setArg('format','');
+            $request->setArg('format', '');
             ConvertAndDisplayPdfPageList($request, $pagelist);
             // time-sorted rdf a la RecentChanges
-        } elseif (in_array($format, array("rss91","rss2","rss","atom"))) {
+        } elseif (in_array($format, array("rss91", "rss2", "rss", "atom"))) {
             //$request->setArg('format','');
             if ($pagename == _("RecentChanges"))
                 $template->printExpansion($toks);
             else {
                 require_once 'lib/plugin/RecentChanges.php';
-            $plugin = new WikiPlugin_RecentChanges();
+                $plugin = new WikiPlugin_RecentChanges();
                 $args = $request->getArgs();
                 return $plugin->format($plugin->getChanges($request->_dbi, $args), $args);
             }
@@ -424,7 +414,7 @@ function displayPage(&$request, $template=false) {
             $rdf = new OwlWriter($request, $pagelist);
             $rdf->format();
         } elseif ($format == 'json') { // include page content asynchronously
-            $request->setArg('format','');
+            $request->setArg('format', '');
             if ($page->exists())
                 $content = $page_content->asXML();
             else
@@ -433,8 +423,8 @@ function displayPage(&$request, $template=false) {
             unset($req_args['format']);
             // no meta-data so far, just the content
             $json = array('content' => $content,
-                          'args'    => $req_args,
-                          'phpwiki-version' => PHPWIKI_VERSION);
+                'args' => $req_args,
+                'phpwiki-version' => PHPWIKI_VERSION);
             if (loadPhpExtension('json')) {
                 $json_enc = json_encode($json);
             } else {
@@ -446,8 +436,8 @@ function displayPage(&$request, $template=false) {
             die($json_enc);
         } else {
             if (!in_array($pagename, array(_("LinkDatabase"))))
-            trigger_error(sprintf(_("Unsupported argument: %s=%s"),"format",$format),
-                          E_USER_WARNING);
+                trigger_error(sprintf(_("Unsupported argument: %s=%s"), "format", $format),
+                    E_USER_WARNING);
             $template->printExpansion($toks);
         }
     }

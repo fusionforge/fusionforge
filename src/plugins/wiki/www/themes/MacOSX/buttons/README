@@ -1,4 +1,3 @@
-
 Known Problems:
 
 Most of the images you will see a white area around the outside. Once
@@ -11,8 +10,8 @@ Button Localization:
 English  "C"  English    - all present, only some with alpha shadows
 German   "de" Deutsch    - all
 Dutch    "nl" Nederlands - some
-Spanish  "es" Español    - some
-French   "fr" Français   - RecentChanges only
+Spanish  "es" EspaÃ±ol    - some
+French   "fr" FranÃ§ais   - RecentChanges only
 Italian  "it" Italiano   - RecentChanges only
 Swedish  "sv" Svenska    - none
 Japanese "ja" ???        - some
@@ -40,8 +39,8 @@ authenticity to the Mac OS X user experience is worth the effort.
 Filename Urlencode Chart
 
  space .... +
-     á .... %E1
-     ö .... %F6
+     Ã¡ .... %E1
+     Ã¶ .... %F6
 
 
 Here's What You Get:
@@ -99,7 +98,7 @@ Alte+Version+Editieren.png
 Anmelden.png
 Editieren.png
 Einstellungen.png
-NeuesteÄnderungen.png
+NeuesteÃ„nderungen.png
 GleicheSeiten.png
 GuterStil.png
 PhpWikiSystemverwalten.png
@@ -150,5 +149,3 @@ RecenteVeranderingen.png
 Verander.png
 Verwijder+Pagina.png
 ZoekPagina.png
-
-$Id: README 6204 2008-08-26 15:12:03Z vargenau $

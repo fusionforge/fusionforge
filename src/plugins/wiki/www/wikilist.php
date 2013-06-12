@@ -21,22 +21,22 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once dirname(__FILE__)."/../../env.inc.php";
-require_once $gfcommon.'include/pre.php';
-require_once $gfwww.'admin/admin_utils.php';
+require_once dirname(__FILE__) . "/../../env.inc.php";
+require_once $gfcommon . 'include/pre.php';
+require_once $gfwww . 'admin/admin_utils.php';
 
 $title = _('List of active wikis in Forge');
-site_admin_header(array('title'=>$title));
+site_admin_header(array('title' => $title));
 
 $sortorder = getStringFromRequest('sortorder', 'group_name');
-$sortorder = util_ensure_value_in_set ($sortorder, array ('group_name','register_time','unix_group_name','is_public','is_external','members')) ;
+$sortorder = util_ensure_value_in_set($sortorder, array('group_name', 'register_time', 'unix_group_name', 'is_public', 'is_external', 'members'));
 
 $res = db_query_params('SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,is_external,status, COUNT(user_group.group_id) AS members
-			FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id
+            FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id
             WHERE status=$1
             GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,is_external,status
-            ORDER BY '.$sortorder,
-			array('A'));
+            ORDER BY ' . $sortorder,
+    array('A'));
 
 $headers = array(
     _('Project Name'),
@@ -44,7 +44,7 @@ $headers = array(
     _('Unix name'),
     _('Public?')
 );
-if (isset($sys_intranet) & $sys_intranet) {
+if (forge_get_config('allow_external')) {
     $headers[] = _("External?");
 }
 $headers[] = _('Members');
@@ -55,7 +55,7 @@ $headerLinks = array(
     '/wiki/wikilist.php?sortorder=register_time',
     '/wiki/wikilist.php?sortorder=unix_group_name',
     '/wiki/wikilist.php?sortorder=is_public');
-if (isset($sys_intranet) & $sys_intranet) {
+if (forge_get_config('allow_external')) {
     $headerLinks[] = '?sortorder=is_external';
 }
 $headerLinks[] = '/wiki/wikilist.php?sortorder=members';
@@ -70,18 +70,18 @@ while ($grp = db_fetch_array($res)) {
     if ($project->usesPlugin("wiki")) {
         $time_display = "";
         if ($grp['register_time'] != 0) {
-            $time_display = date(_('Y-m-d H:i'),$grp['register_time']);
+            $time_display = date(_('Y-m-d H:i'), $grp['register_time']);
         }
-        echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
-        echo '<td><a href="/wiki/g/'.$grp['unix_group_name'].'/">'.$grp['group_name'].'</a></td>';
-        echo '<td>'.$time_display.'</td>';
-        echo '<td>'.$grp['unix_group_name']. '</td>';
-        echo '<td>'.$grp['is_public'].'</td>';
-        if (isset($sys_intranet) & $sys_intranet) {
-            echo '<td>'.$grp['is_external'].'</td>';
+        echo '<tr ' . $HTML->boxGetAltRowStyle($i) . '>';
+        echo '<td><a href="/wiki/g/' . $grp['unix_group_name'] . '/">' . $grp['group_name'] . '</a></td>';
+        echo '<td>' . $time_display . '</td>';
+        echo '<td>' . $grp['unix_group_name'] . '</td>';
+        echo '<td>' . $grp['is_public'] . '</td>';
+        if (forge_get_config('allow_external')) {
+            echo '<td>' . $grp['is_external'] . '</td>';
         }
-        echo '<td>'.$grp['members'].'</td>';
-        echo '<td><a href="/wiki/g/'.$grp['unix_group_name'].'/?action=upgrade">'._("Upgrade").'</a></td>';
+        echo '<td>' . $grp['members'] . '</td>';
+        echo '<td><a href="/wiki/g/' . $grp['unix_group_name'] . '/?action=upgrade">' . _("Upgrade") . '</a></td>';
         echo '</tr>';
         $i++;
     }

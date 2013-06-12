@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: WikiAdminSetAcl.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -35,28 +35,27 @@ require_once 'lib/PageList.php';
 require_once 'lib/plugin/WikiAdminSelect.php';
 
 class WikiPlugin_WikiAdminSetAcl
-extends WikiPlugin_WikiAdminSelect
+    extends WikiPlugin_WikiAdminSelect
 {
-    function getName() {
-        return _("WikiAdminSetAcl");
-    }
-
-    function getDescription() {
+    function getDescription()
+    {
         return _("Set individual page permissions.");
     }
 
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array_merge
-            (
-             WikiPlugin_WikiAdminSelect::getDefaultArguments(),
-             array(
-                     'p'        => "[]",  // list of pages
-                     /* Columns to include in listing */
-                     'info'     => 'pagename,perm,mtime,owner,author',
-                     ));
+        (
+            WikiPlugin_WikiAdminSelect::getDefaultArguments(),
+            array(
+                'p' => "[]", // list of pages
+                /* Columns to include in listing */
+                'info' => 'pagename,perm,mtime,owner,author',
+            ));
     }
 
-    function setaclPages(&$request, $pages, $acl) {
+    function setaclPages(&$request, $pages, $acl)
+    {
         $result = HTML::div();
         $count = 0;
         $dbi =& $request->_dbi;
@@ -69,11 +68,12 @@ extends WikiPlugin_WikiAdminSelect
             }
             unset($acl['_add_group']);
         }
-        unset($acl['_new_group']); unset($acl['_new_perm']);
+        unset($acl['_new_group']);
+        unset($acl['_new_perm']);
         if (isset($acl['_del_group'])) {
             //del groups with perm
             foreach ($acl['_del_group'] as $access => $del) {
-                while (list($group,$dummy) = each($del))
+                while (list($group, $dummy) = each($del))
                     unset($acl[$access][$group]);
             }
             unset($acl['_del_group']);
@@ -81,42 +81,42 @@ extends WikiPlugin_WikiAdminSelect
         if ($perm = new PagePermission($acl)) {
             $perm->sanify();
             foreach ($pages as $pagename) {
-                    // check if unchanged? we need a deep array_equal
-                    $page = $dbi->getPage($pagename);
-                    $oldperm = getPagePermissions($page);
+                // check if unchanged? we need a deep array_equal
+                $page = $dbi->getPage($pagename);
+                $oldperm = getPagePermissions($page);
                 if ($oldperm)
                     $oldperm->sanify();
-                    if ($oldperm and $perm->equal($oldperm->perm)) {
+                if ($oldperm and $perm->equal($oldperm->perm)) {
                     $result->setAttr('class', 'error');
-                    $result->pushContent(HTML::p(fmt("ACL not changed for page '%s'.",$pagename)));
+                    $result->pushContent(HTML::p(fmt("ACL not changed for page “%s”.", $pagename)));
                 } elseif (mayAccessPage('change', $pagename)) {
-                    setPagePermissions ($page, $perm);
+                    setPagePermissions($page, $perm);
                     $result->setAttr('class', 'feedback');
-                    $result->pushContent(HTML::p(fmt("ACL changed for page '%s'",
-                                                     $pagename)));
-                    $result->pushContent(HTML::p(fmt("from '%s'",
-                                                     $oldperm ? $oldperm->asAclLines() : "None")));
-                    $result->pushContent(HTML::p(fmt("to '%s'.",
-                                                     $perm->asAclLines())));
+                    $result->pushContent(HTML::p(fmt("ACL changed for page “%s”",
+                        $pagename)));
+                    $result->pushContent(HTML::p(fmt("from “%s”",
+                        $oldperm ? $oldperm->asAclLines() : "None")));
+                    $result->pushContent(HTML::p(fmt("to “%s”.",
+                        $perm->asAclLines())));
 
                     // Create new revision so that ACL change appears in history.
                     $current = $page->getCurrentRevision();
                     $version = $current->getVersion();
                     $meta = $current->_data;
                     $text = $current->getPackedContent();
-                    $meta['summary'] = sprintf(_("ACL changed for page '%s' from '%s' to '%s'."),
-                                               $pagename,
-                                               $oldperm ? $oldperm->asAclLines() : "None",
-                                               $perm->asAclLines());
+                    $meta['summary'] = sprintf(_("ACL changed for page “%s” from “%s” to “%s”."),
+                        $pagename,
+                        $oldperm ? $oldperm->asAclLines() : "None",
+                        $perm->asAclLines());
                     $meta['is_minor_edit'] = 1;
-                    $meta['author'] =  $request->_user->UserName();
+                    $meta['author'] = $request->_user->UserName();
                     unset($meta['mtime']); // force new date
                     $page->save($text, $version + 1, $meta);
 
                     $count++;
                 } else {
                     $result->setAttr('class', 'error');
-                    $result->pushContent(HTML::p(fmt("Access denied to change page '%s'.",$pagename)));
+                    $result->pushContent(HTML::p(fmt("Access denied to change page “%s”.", $pagename)));
                 }
             }
         } else {
@@ -135,7 +135,8 @@ extends WikiPlugin_WikiAdminSelect
         return $result;
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         if ($request->getArg('action') != 'browse') {
             if ($request->getArg('action') != _("PhpWikiAdministration/SetAcl")) {
                 return $this->disabled(_("Plugin not run: not in browse mode"));
@@ -159,7 +160,8 @@ extends WikiPlugin_WikiAdminSelect
             $pages = $this->_list;
         $header = HTML::fieldset();
         if ($p && $request->isPost() &&
-            !empty($post_args['acl']) && empty($post_args['cancel'])) {
+            !empty($post_args['acl']) && empty($post_args['cancel'])
+        ) {
             // without individual PagePermissions:
             if (!ENABLE_PAGEPERM and !$request->_user->isAdmin()) {
                 $request->_notAuthorized(WIKIAUTH_ADMIN);
@@ -185,55 +187,55 @@ extends WikiPlugin_WikiAdminSelect
             $args['info'] = "checkbox,pagename,perm,mtime,owner,author";
         }
         $pagelist = new PageList_Selectable($args['info'],
-                                            $args['exclude'],
-                                            array('types' => array(
-                                                  'perm'
-                                                  => new _PageList_Column_perm('perm', _("Permission")),
-                                                  'acl'
-                                                  => new _PageList_Column_acl('acl', _("ACL")))));
+            $args['exclude'],
+            array('types' => array(
+                'perm'
+                => new _PageList_Column_perm('perm', _("Permission")),
+                'acl'
+                => new _PageList_Column_acl('acl', _("ACL")))));
 
         $pagelist->addPageList($pages);
         if ($next_action == 'verify') {
             $button_label = _("Yes");
             $header = $this->setaclForm($header, $post_args, $pages);
             $header->pushContent(
-              HTML::p(HTML::strong(
-                  _("Are you sure you want to permanently change access rights to the selected files?"))));
-        }
-        else {
+                HTML::p(HTML::strong(
+                    _("Are you sure you want to permanently change access rights to the selected files?"))));
+        } else {
             $button_label = _("Change Access Rights");
             $header = $this->setaclForm($header, $post_args, $pages);
             $header->pushContent(HTML::legend(_("Select the pages where to change access rights")));
         }
 
         $buttons = HTML::p(Button('submit:admin_setacl[acl]', $button_label, 'wikiadmin'),
-                           Button('submit:admin_setacl[cancel]', _("Cancel"), 'button'));
+            Button('submit:admin_setacl[cancel]', _("Cancel"), 'button'));
         $header->pushContent($buttons);
 
         return HTML::form(array('action' => $request->getPostURL(),
-                                'method' => 'post'),
-                          $header,
-                          $pagelist->getContent(),
-                          HiddenInputs($request->getArgs(),
-                                        false,
-                                        array('admin_setacl')),
-                          HiddenInputs(array('admin_setacl[action]' => $next_action)),
-                          ENABLE_PAGEPERM
-                          ? ''
-                          : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)));
+                'method' => 'post'),
+            $header,
+            $pagelist->getContent(),
+            HiddenInputs($request->getArgs(),
+                false,
+                array('admin_setacl')),
+            HiddenInputs(array('admin_setacl[action]' => $next_action)),
+            ENABLE_PAGEPERM
+                ? ''
+                : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)));
     }
 
-    function setaclForm(&$header, $post_args, $pagehash) {
+    function setaclForm(&$header, $post_args, $pagehash)
+    {
         $acl = $post_args['acl'];
 
         //FIXME: find intersection of all pages perms, not just from the last pagename
         $pages = array();
         foreach ($pagehash as $name => $checked) {
-           if ($checked) $pages[] = $name;
+            if ($checked) $pages[] = $name;
         }
         $perm_tree = pagePermissions($name);
         $table = pagePermissionsAclFormat($perm_tree, !empty($pages));
-        $header->pushContent(HTML::strong(_("Selected Pages: ")), HTML::tt(join(', ',$pages)), HTML::br());
+        $header->pushContent(HTML::strong(_("Selected Pages: ")), HTML::tt(join(', ', $pages)), HTML::br());
         $first_page = $GLOBALS['request']->_dbi->getPage($name);
         $owner = $first_page->getOwner();
         list($type, $perm) = pagePermissionsAcl($perm_tree[0], $perm_tree);
@@ -241,17 +243,16 @@ extends WikiPlugin_WikiAdminSelect
         if ($type == 'inherited')
             $type = sprintf(_("page permission inherited from %s"), $perm_tree[1][0]);
         elseif ($type == 'page')
-            $type = _("individual page permission");
-        elseif ($type == 'default')
+            $type = _("individual page permission"); elseif ($type == 'default')
             $type = _("default page permission");
-        $header->pushContent(HTML::strong(_("Type")._(": ")), HTML::tt($type),HTML::br());
-        $header->pushContent(HTML::strong(_("ACL")._(": ")), HTML::tt($perm->asAclLines()),HTML::br());
+        $header->pushContent(HTML::strong(_("Type") . _(": ")), HTML::tt($type), HTML::br());
+        $header->pushContent(HTML::strong(_("ACL") . _(": ")), HTML::tt($perm->asAclLines()), HTML::br());
 
-        $header->pushContent(HTML::p(HTML::strong(_("Description")._(": ")),
-                                     _("Selected Grant checkboxes allow access, unselected checkboxes deny access."),
-                                     _("To ignore delete the line."),
-                                     _("To add check 'Add' near the dropdown list.")
-                                     ));
+        $header->pushContent(HTML::p(HTML::strong(_("Description") . _(": ")),
+            _("Selected Grant checkboxes allow access, unselected checkboxes deny access."),
+            _("To ignore delete the line."),
+            _("To add check 'Add' near the dropdown list.")
+        ));
         $header->pushContent($table);
         //
         // display array of checkboxes for existing perms
@@ -265,16 +266,16 @@ extends WikiPlugin_WikiAdminSelect
         //                                       'value' => $post_args['acl'])));
         $header->pushContent(HTML::br());
         if (!empty($pages) and defined('EXPERIMENTAL') and EXPERIMENTAL) {
-          $checkbox = HTML::input(array('type' => 'checkbox',
-                                        'name' => 'admin_setacl[updatechildren]',
-                                        'value' => 1));
-          if (!empty($post_args['updatechildren']))  $checkbox->setAttr('checked','checked');
-          $header->pushContent($checkbox,
-                    _("Propagate new permissions to all subpages?"),
-                  HTML::raw("&nbsp;&nbsp;"),
-                  HTML::em(_("(disable individual page permissions, enable inheritance)?")),
-                  HTML::br(),HTML::em(_("(Currently not working)"))
-                               );
+            $checkbox = HTML::input(array('type' => 'checkbox',
+                'name' => 'admin_setacl[updatechildren]',
+                'value' => 1));
+            if (!empty($post_args['updatechildren'])) $checkbox->setAttr('checked', 'checked');
+            $header->pushContent($checkbox,
+                _("Propagate new permissions to all subpages?"),
+                HTML::raw("&nbsp;&nbsp;"),
+                HTML::em(_("(disable individual page permissions, enable inheritance)?")),
+                HTML::br(), HTML::em(_("(Currently not working)"))
+            );
         }
         $header->pushContent(HTML::hr());
         return $header;

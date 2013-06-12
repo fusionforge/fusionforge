@@ -1,6 +1,3 @@
-<?php // -*-php-*-
-// $Id: login.tmpl 8011 2011-04-04 15:20:14Z vargenau $
-?>
 <?php if ($fail_message) { ?>
   <p><strong><?php echo $fail_message?></strong></p>
   <hr />
@@ -39,14 +36,14 @@ if (DEBUG & _DEBUG_LOGIN) {
 }
 if (ALLOW_BOGO_LOGIN && $require_level <= WIKIAUTH_BOGO) {
   require_once("lib/BlockParser.php");
-  // This iso-8859-1 sample covers French, Spanish, Italian, German, and probably others
+  // This sample covers French, Spanish, Italian, German, and probably others
   $examplechars = htmlentities("ÀñíçéàÖãæôßøü", ENT_QUOTES, $charset);
   // Japanese login requires utf-8 and ALLOW_NONWIKIWORD_LOGINS
   if (($charset == 'utf-8') && defined('ALLOW_NONWIKIWORD_LOGINS') && ALLOW_NONWIKIWORD_LOGINS) {
-    //sample Japanese login name in unicode
-    $examplechars = $examplechars . "&#22825;&#36947;&#12354;&#12363;&#12397;";
+    // sample Japanese login name
+    $examplechars = $examplechars . "天道あかね";
   }
-  $t = asXML(TransformText(_("You may sign in using any [WikiWord|AddingPages] as a user id. (Any characters in %s etc. may be used too). The user id will be used as a link in RecentChanges to your home page."), 2.0, true));
+  $t = asXML(TransformText(_("You may sign in using any [[Help:AddingPages|WikiWord]] as a user id. (Any characters in %s etc. may be used too). The user id will be used as a link in RecentChanges to your home page."), 2.0, true));
   if (substr_count($t,"%s") == 1) {
       $s = @sprintf($t, $examplechars);
       // FIXME: Workaround gettext or sprintf problem
@@ -63,7 +60,7 @@ if (ALLOW_BOGO_LOGIN && $require_level <= WIKIAUTH_BOGO) {
   if (empty($pass_required)) ?>
   <p><?php echo _("New users may use an empty password.") ?></p>
 <?php } ?>
-<form method="post" action="<?php echo $request->getPostURL() ?>" accept-charset="<?php echo CHARSET?>" name="login">
+<form method="post" action="<?php echo $request->getPostURL() ?>" accept-charset="UTF-8" name="login">
 <table>
 <tr>
 <td>

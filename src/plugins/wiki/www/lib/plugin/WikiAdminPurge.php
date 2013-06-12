@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: WikiAdminPurge.php 8184 2011-11-28 14:04:37Z vargenau $
+<?php
+
 /*
  * Copyright 2002,2004 $ThePhpWikiProgrammingTeam
  * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -28,26 +28,24 @@ require_once 'lib/PageList.php';
 require_once 'lib/plugin/WikiAdminSelect.php';
 
 class WikiPlugin_WikiAdminPurge
-extends WikiPlugin_WikiAdminSelect
+    extends WikiPlugin_WikiAdminSelect
 {
-    function getName() {
-        return _("WikiAdminPurge");
-    }
-
-    function getDescription() {
+    function getDescription()
+    {
         return _("Permanently purge all selected pages.");
     }
 
     /* getDefaultArguments() is inherited from WikiAdminSelect class */
 
-    function collectPages(&$list, &$dbi, $sortby, $limit=0) {
+    function collectPages(&$list, &$dbi, $sortby, $limit = 0)
+    {
 
-        $allPages = $dbi->getAllPages('include_empty',$sortby,$limit);
+        $allPages = $dbi->getAllPages('include_empty', $sortby, $limit);
         while ($pagehandle = $allPages->next()) {
             $pagename = $pagehandle->getName();
             $current = $pagehandle->getCurrentRevision();
             if ($current->getVersion() < 1) {
-                continue;       // No versions in database
+                continue; // No versions in database
             }
             if (empty($list[$pagename])) {
                 $list[$pagename] = false;
@@ -56,18 +54,20 @@ extends WikiPlugin_WikiAdminSelect
         return $list;
     }
 
-    function purgePages(&$request, $pages) {
+    function purgePages(&$request, $pages)
+    {
         $result = HTML::div();
         $ul = HTML::ul();
-        $dbi = $request->getDbh(); $count = 0;
+        $dbi = $request->getDbh();
+        $count = 0;
         foreach ($pages as $name) {
-            $name = str_replace(array('%5B','%5D'),array('[',']'),$name);
-            if (mayAccessPage('purge',$name)) {
+            $name = str_replace(array('%5B', '%5D'), array('[', ']'), $name);
+            if (mayAccessPage('purge', $name)) {
                 $dbi->purgePage($name);
-                $ul->pushContent(HTML::li(fmt("Purged page '%s' successfully.", $name)));
+                $ul->pushContent(HTML::li(fmt("Purged page “%s” successfully.", $name)));
                 $count++;
             } else {
-                    $ul->pushContent(HTML::li(fmt("Didn't purge page '%s'. Access denied.", $name)));
+                $ul->pushContent(HTML::li(fmt("Didn't purge page “%s”. Access denied.", $name)));
             }
         }
         if ($count) {
@@ -87,7 +87,8 @@ extends WikiPlugin_WikiAdminSelect
         }
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         if ($request->getArg('action') != 'browse') {
             if ($request->getArg('action') != _("PhpWikiAdministration/Purge")) {
                 return $this->disabled(_("Plugin not run: not in browse mode"));
@@ -105,7 +106,8 @@ extends WikiPlugin_WikiAdminSelect
         $next_action = 'select';
         $pages = array();
         if ($p && $request->isPost() &&
-            !empty($post_args['purge']) && empty($post_args['cancel'])) {
+            !empty($post_args['purge']) && empty($post_args['cancel'])
+        ) {
 
             // check individual PagePermissions
             if (!ENABLE_PAGEPERM and !$request->_user->isAdmin()) {
@@ -120,17 +122,17 @@ extends WikiPlugin_WikiAdminSelect
             if ($post_args['action'] == 'select') {
                 $next_action = 'verify';
                 foreach ($p as $name => $c) {
-                    $name = str_replace(array('%5B','%5D'),array('[',']'),$name);
+                    $name = str_replace(array('%5B', '%5D'), array('[', ']'), $name);
                     $pages[$name] = $c;
                 }
             }
         } elseif ($p && is_array($p) && !$request->isPost()) { // from WikiAdminSelect
             $next_action = 'verify';
             foreach ($p as $name => $c) {
-                $name = str_replace(array('%5B','%5D'),array('[',']'),$name);
+                $name = str_replace(array('%5B', '%5D'), array('[', ']'), $name);
                 $pages[$name] = $c;
             }
-            $request->setArg('p',false);
+            $request->setArg('p', false);
         }
         if ($next_action == 'select') {
             // List all pages to select from.
@@ -145,26 +147,25 @@ extends WikiPlugin_WikiAdminSelect
             $header->pushContent(HTML::legend(_("Confirm purge")));
             $header->pushContent(HTML::p(HTML::strong(
                 _("Are you sure you want to permanently purge the following files?"))));
-        }
-        else {
+        } else {
             $button_label = _("Permanently purge selected pages");
             $header->pushContent(HTML::legend(_("Select the files to purge")));
         }
 
         $buttons = HTML::p(Button('submit:admin_purge[purge]', $button_label, 'wikiadmin'),
-                           Button('submit:admin_purge[cancel]', _("Cancel"), 'button'));
+            Button('submit:admin_purge[cancel]', _("Cancel"), 'button'));
         $header->pushContent($buttons);
 
         // TODO: quick select by regex javascript?
         return HTML::form(array('action' => $request->getPostURL(),
-                                'method' => 'post'),
-                          $header,
-                          $pagelist->getContent(),
-                          HiddenInputs($request->getArgs(),
-                                        false,
-                                        array('admin_purge')),
-                          HiddenInputs(array('admin_purge[action]' => $next_action,
-                                             'require_authority_for_post' => WIKIAUTH_ADMIN)));
+                'method' => 'post'),
+            $header,
+            $pagelist->getContent(),
+            HiddenInputs($request->getArgs(),
+                false,
+                array('admin_purge')),
+            HiddenInputs(array('admin_purge[action]' => $next_action,
+                'require_authority_for_post' => WIKIAUTH_ADMIN)));
     }
 }
 

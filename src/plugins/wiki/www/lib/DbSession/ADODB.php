@@ -1,4 +1,4 @@
-<?php // $Id: ADODB.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
 /*
  * Copyright 2005 $ThePhpWikiProgrammingTeam
  *
@@ -25,49 +25,54 @@
  * @author: Reini Urban
  */
 class DbSession_ADODB
-extends DbSession
+    extends DbSession
 {
-    var $_backend_type = "ADODB";
+    public $_backend_type = "ADODB";
 
-    function DbSession_ADODB ($dbh, $table) {
+    function DbSession_ADODB($dbh, $table)
+    {
 
         $this->_dbh = $dbh;
         $this->_table = $table;
 
-        ini_set('session.save_handler','user');
+        ini_set('session.save_handler', 'user');
         session_module_name('user'); // new style
         session_set_save_handler(array(&$this, 'open'),
-                                 array(&$this, 'close'),
-                                 array(&$this, 'read'),
-                                 array(&$this, 'write'),
-                                 array(&$this, 'destroy'),
-                                 array(&$this, 'gc'));
+            array(&$this, 'close'),
+            array(&$this, 'read'),
+            array(&$this, 'write'),
+            array(&$this, 'destroy'),
+            array(&$this, 'gc'));
         return $this;
     }
 
-    function & _connect() {
+    function & _connect()
+    {
         global $request;
         static $parsed = false;
         $dbh = &$this->_dbh;
         if (!$dbh or !is_resource($dbh->_connectionID)) {
             if (!$parsed) $parsed = parseDSN($request->_dbi->getParam('dsn'));
             $this->_dbh =& ADONewConnection($parsed['phptype']); // Probably only MySql works just now
-            $this->_dbh->Connect($parsed['hostspec'],$parsed['username'],
-                                 $parsed['password'], $parsed['database']);
+            $this->_dbh->Connect($parsed['hostspec'], $parsed['username'],
+                $parsed['password'], $parsed['database']);
             $dbh = &$this->_dbh;
         }
         return $dbh;
     }
 
-    function query($sql) {
+    function query($sql)
+    {
         return $this->_dbh->Execute($sql);
     }
 
-    function quote($string) {
+    function quote($string)
+    {
         return $this->_dbh->qstr($string);
     }
 
-    function _disconnect() {
+    function _disconnect()
+    {
         if (0 and $this->_dbh)
             $this->_dbh->close();
     }
@@ -82,7 +87,8 @@ extends DbSession
      * is good.
      * @access private
      */
-    function open ($save_path, $session_name) {
+    function open($save_path, $session_name)
+    {
         //$this->log("_open($save_path, $session_name)");
         return true;
     }
@@ -96,7 +102,8 @@ extends DbSession
      * is good.
      * @access private
      */
-    function close() {
+    function close()
+    {
         //$this->log("_close()");
         return true;
     }
@@ -108,7 +115,8 @@ extends DbSession
      * @return string
      * @access private
      */
-    function read ($id) {
+    function read($id)
+    {
         //$this->log("_read($id)");
         $dbh = $this->_connect();
         $table = $this->_table;
@@ -121,10 +129,10 @@ extends DbSession
         if (!empty($res) and preg_match('|^[a-zA-Z0-9/+=]+$|', $res))
             $res = base64_decode($res);
         if (strlen($res) > 4000) {
-            trigger_error("Overlarge session data! ".strlen($res).
-                        " gt. 4000", E_USER_WARNING);
-            $res = preg_replace('/s:6:"_cache";O:12:"WikiDB_cache".+}$/',"",$res);
-            $res = preg_replace('/s:12:"_cached_html";s:.+",s:4:"hits"/','s:4:"hits"',$res);
+            trigger_error("Overlarge session data! " . strlen($res) .
+                " gt. 4000", E_USER_WARNING);
+            $res = preg_replace('/s:6:"_cache";O:12:"WikiDB_cache".+}$/', "", $res);
+            $res = preg_replace('/s:12:"_cached_html";s:.+",s:4:"hits"/', 's:4:"hits"', $res);
             if (strlen($res) > 4000) $res = '';
         }
         return $res;
@@ -146,7 +154,8 @@ extends DbSession
      * otherwise.
      * @access private
      */
-    function write ($id, $sess_data) {
+    function write($id, $sess_data)
+    {
         if (defined("WIKI_XMLRPC") or defined("WIKI_SOAP")) return;
 
         $dbh = $this->_connect();
@@ -165,22 +174,22 @@ extends DbSession
          */
         if (USE_SAFE_DBSESSION) {
             $dbh->Execute("DELETE FROM $table"
-                          . " WHERE sess_id=$qid");
+                . " WHERE sess_id=$qid");
             $rs = $dbh->Execute("INSERT INTO $table"
-                                . " (sess_id, sess_data, sess_date, sess_ip)"
-                                . " VALUES ($qid, $qdata, $time, $qip)");
+                . " (sess_id, sess_data, sess_date, sess_ip)"
+                . " VALUES ($qid, $qdata, $time, $qip)");
         } else {
             $rs = $dbh->Execute("UPDATE $table"
-                                . " SET sess_data=$qdata, sess_date=$time, sess_ip=$qip"
-                                . " WHERE sess_id=$qid");
+                . " SET sess_data=$qdata, sess_date=$time, sess_ip=$qip"
+                . " WHERE sess_id=$qid");
             $result = $dbh->Affected_Rows();
-            if ( $result === false or $result < 1 ) { // false or int > 0
+            if ($result === false or $result < 1) { // false or int > 0
                 $rs = $dbh->Execute("INSERT INTO $table"
-                                    . " (sess_id, sess_data, sess_date, sess_ip)"
-                                    . " VALUES ($qid, $qdata, $time, $qip)");
+                    . " (sess_id, sess_data, sess_date, sess_ip)"
+                    . " VALUES ($qid, $qdata, $time, $qip)");
             }
         }
-        $result = ! $rs->EOF;
+        $result = !$rs->EOF;
         if ($result) $rs->free();
         $this->_disconnect();
         return $result;
@@ -195,7 +204,8 @@ extends DbSession
      * @return boolean true
      * @access private
      */
-    function destroy ($id) {
+    function destroy($id)
+    {
         $dbh = $this->_connect();
         $table = $this->_table;
         $qid = $dbh->qstr($id);
@@ -213,7 +223,8 @@ extends DbSession
      * @return boolean true
      * @access private
      */
-    function gc ($maxlifetime) {
+    function gc($maxlifetime)
+    {
         $dbh = $this->_connect();
         $table = $this->_table;
         $threshold = time() - $maxlifetime;
@@ -226,7 +237,8 @@ extends DbSession
 
     // WhoIsOnline support.
     // TODO: ip-accesstime dynamic blocking API
-    function currentSessions() {
+    function currentSessions()
+    {
         $sessions = array();
         $dbh = $this->_connect();
         $table = $this->_table;
@@ -239,17 +251,17 @@ extends DbSession
             $row = $rs->fetchRow();
             $data = $row[0];
             $date = $row[1];
-            $ip   = $row[2];
+            $ip = $row[2];
             if (preg_match('|^[a-zA-Z0-9/+=]+$|', $data))
                 $data = base64_decode($data);
             if ($date < 908437560 or $date > 1588437560)
                 $date = 0;
             // session_data contains the <variable name> + "|" + <packed string>
             // we need just the wiki_user object (might be array as well)
-            $user = strstr($data,"wiki_user|");
-            $sessions[] = array('wiki_user' => substr($user,10), // from "O:" onwards
-                                'date' => $date,
-                                'ip' => $ip);
+            $user = strstr($data, "wiki_user|");
+            $sessions[] = array('wiki_user' => substr($user, 10), // from "O:" onwards
+                'date' => $date,
+                'ip' => $ip);
             $rs->MoveNext();
         }
         $rs->free();

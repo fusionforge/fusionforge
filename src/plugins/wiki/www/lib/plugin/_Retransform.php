@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: _Retransform.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * Copyright 2007 $ThePhpWikiProgrammingTeam
  *
@@ -24,29 +24,26 @@
  * Only useful for link and parser debugging purposes.
  */
 class WikiPlugin__Retransform
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return _("Retransform CachedMarkup");
-    }
-
-    function getDescription () {
+    function getDescription()
+    {
         return sprintf(_("Show a markup retransformation of page %s."), '[pagename]');
     }
 
-    function getDefaultArguments() {
-        return array('page' => '[pagename]',
-                     );
+    function getDefaultArguments()
+    {
+        return array('page' => '[pagename]');
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $this->getArgs($argstr, $request);
         extract($args);
         if (empty($page))
             return '';
 
-        $html = HTML(HTML::h3(fmt("Retransform page '%s'",
-                                  $page)));
+        $html = HTML(HTML::h3(fmt("Retransform page “%s”", $page)));
 
         // bypass WikiDB and cache, go directly through the backend.
         $backend = &$dbi->_backend;
@@ -57,28 +54,28 @@ extends WikiPlugin
         include_once 'lib/PageType.php';
         $formatted = new TransformedText($dbi->getPage($page), $vdata['%content'], $vdata);
         $content =& $formatted->_content;
-        $html->pushContent($this->_DebugPrintArray($content));
+        $html->pushContent($this->DebugPrintArray($content));
         $links = $formatted->getWikiPageLinks();
         if (count($links) > 0) {
-          $html->pushContent(HTML::h3("Links"));
-          $html->pushContent($this->_DebugPrintArray($links));
+            $html->pushContent(HTML::h3("Links"));
+            $html->pushContent($this->DebugPrintArray($links));
         }
         return $html;
     }
 
-    function _DebugPrintArray(&$array) {
-            $html = HTML();
-            foreach ($array as $line) {
+    private function DebugPrintArray(&$array)
+    {
+        $html = HTML();
+        foreach ($array as $line) {
             ob_start();
-          print_r($line);
-          $s = HTML::pre(ob_get_contents());
-          ob_end_clean();
-          $html->pushContent($s);
+            print_r($line);
+            $s = HTML::pre(ob_get_contents());
+            ob_end_clean();
+            $html->pushContent($s);
         }
         return $html;
     }
-
-};
+}
 
 // Local Variables:
 // mode: php

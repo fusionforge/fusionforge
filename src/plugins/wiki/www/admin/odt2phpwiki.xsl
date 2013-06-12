@@ -2,7 +2,6 @@
 
 <!-- 
     odt2phpwiki: OpenDocument to Phpwiki transformation
-    $Id: odt2phpwiki.xsl 7010 2009-07-08 09:46:35Z vargenau $
     Copyright (C) 2007  Bernhard Haumacher (haui at haumacher dot de)
     Copyright (C) 2008-2009  Marc-Etienne Vargenau, Alcatel-Lucent
 

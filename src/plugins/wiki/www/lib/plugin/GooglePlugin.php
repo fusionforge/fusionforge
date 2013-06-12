@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: GooglePlugin.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  *
@@ -37,28 +37,27 @@ require_once 'lib/Google.php';
  *   Add Google's spell-checking to an application
  */
 class WikiPlugin_GooglePlugin
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return _("GooglePlugin");
+    function getDescription()
+    {
+        return _("Make use of the Google API.");
     }
 
-    function getDescription () {
-        return _("Make use of the Google API");
+    function getDefaultArguments()
+    {
+        return array('q' => '',
+            'mode' => 'search', // or 'cache' or 'spell'
+            'startIndex' => 1,
+            'maxResults' => 10, // fixed to 10 for now by google
+            'formsize' => 30,
+            // 'language' => `??
+            //'license_key'  => false,
+        );
     }
 
-    function getDefaultArguments() {
-        return array('q'          => '',
-                     'mode'       => 'search', // or 'cache' or 'spell'
-                     'startIndex' => 1,
-                     'maxResults' => 10, // fixed to 10 for now by google
-                     'formsize'   => 30,
-                     // 'language' => `??
-                     //'license_key'  => false,
-                     );
-    }
-
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $this->getArgs($argstr, $request);
         //        if (empty($args['s']))
         //    return '';
@@ -70,26 +69,31 @@ extends WikiPlugin
             $google = new Google();
             if (!$google) return '';
             switch ($mode) {
-                case 'search': $result = $google->doGoogleSearch($q); break;
-                case 'cache':  $result = $google->doGetCachedPage($q); break;
-                case 'spell':  $result = $google->doSpellingSuggestion($q); break;
+                case 'search':
+                    $result = $google->doGoogleSearch($q);
+                    break;
+                case 'cache':
+                    $result = $google->doGetCachedPage($q);
+                    break;
+                case 'spell':
+                    $result = $google->doSpellingSuggestion($q);
+                    break;
                 default:
-                        trigger_error("Invalid mode");
+                    trigger_error("Invalid mode");
             }
-            if (isa($result,'HTML'))
+            if (isa($result, 'HTML'))
                 $html->pushContent($result);
-            if (isa($result,'GoogleSearchResults')) {
+            if (isa($result, 'GoogleSearchResults')) {
                 //TODO: result template
                 if (!empty($result->resultElements)) {
                     $list = HTML::ol();
                     foreach ($result->resultElements as $res) {
-                            $li = HTML::li(LinkURL($res['URL'],$res['directoryTitle']),HTML::br(),
-                                           $res['directoryTitle'] ? HTML(HTML::raw('&nbsp;&nbsp;'),HTML::em($res['summary']),' -- ',LinkURL($res['URL'])) : '');
+                        $li = HTML::li(LinkURL($res['URL'], $res['directoryTitle']), HTML::br(),
+                            $res['directoryTitle'] ? HTML(HTML::raw('&nbsp;&nbsp;'), HTML::em($res['summary']), ' -- ', LinkURL($res['URL'])) : '');
                         $list->pushContent($li);
                     }
                     $html->pushContent($list);
-                }
-                else
+                } else
                     return _("Nothing found");
             }
             if (is_string($result)) {
@@ -97,25 +101,25 @@ extends WikiPlugin
                 $html->pushContent(HTML::blockquote(HTML::raw($result)));
             }
         }
-        if ($formsize < 1)  $formsize = 30;
+        if ($formsize < 1) $formsize = 30;
         // todo: template
         $form = HTML::form(array('action' => $request->getPostURL(),
-                                 'method' => 'post',
-                                 //'class'  => 'class', //fixme
-                                 'accept-charset' => $GLOBALS['charset']),
-                           HiddenInputs(array('pagename' => $basepage,
-                                              'mode' => $mode)));
+                'method' => 'post',
+                //'class'  => 'class', //fixme
+                'accept-charset' => 'UTF-8'),
+            HiddenInputs(array('pagename' => $basepage,
+                'mode' => $mode)));
         $form->pushContent(HTML::input(array('type' => 'text',
-                                             'value' => $q,
-                                             'name'  => 'q',
-                                             'size'  => $formsize)));
+            'value' => $q,
+            'name' => 'q',
+            'size' => $formsize)));
         $form->pushContent(HTML::input(array('type' => 'submit',
-                                             'class' => 'button',
-                                             'value' => gettext($mode)
-                                             )));
-        return HTML($html,$form);
+            'class' => 'button',
+            'value' => gettext($mode)
+        )));
+        return HTML($html, $form);
     }
-};
+}
 
 // Local Variables:
 // mode: php

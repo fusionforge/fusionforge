@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: WikiAdminSetAclSimple.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  * Copyright 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -32,17 +32,15 @@
 require_once 'lib/plugin/WikiAdminSetAcl.php';
 
 class WikiPlugin_WikiAdminSetAclSimple
-extends WikiPlugin_WikiAdminSetAcl
+    extends WikiPlugin_WikiAdminSetAcl
 {
-    function getName() {
-        return _("WikiAdminSetAclSimple");
-    }
-
-    function getDescription() {
+    function getDescription()
+    {
         return _("Set simple individual page permissions.");
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         if ($request->getArg('action') != 'browse') {
             if ($request->getArg('action') != _("PhpWikiAdministration/SetAclSimple")) {
                 return $this->disabled(_("Plugin not run: not in browse mode"));
@@ -65,7 +63,8 @@ extends WikiPlugin_WikiAdminSetAcl
             $pages = $this->_list;
         $header = HTML::fieldset();
         if ($p && $request->isPost() &&
-            (!empty($post_args['aclliberal']) || !empty($post_args['aclrestricted']))) {
+            (!empty($post_args['aclliberal']) || !empty($post_args['aclrestricted']))
+        ) {
             // without individual PagePermissions:
             if (!ENABLE_PAGEPERM and !$request->_user->isAdmin()) {
                 $request->_notAuthorized(WIKIAUTH_ADMIN);
@@ -82,10 +81,10 @@ extends WikiPlugin_WikiAdminSetAcl
             $pages = $this->collectPages($pages, $dbi, $args['sortby'], $args['limit'], $args['exclude']);
         }
         $pagelist = new PageList_Selectable($args['info'],
-                                            $args['exclude'],
-                                            array('types' => array(
-                                                  'acl'
-                                                  => new _PageList_Column_acl('acl', _("ACL")))));
+            $args['exclude'],
+            array('types' => array(
+                'acl'
+                => new _PageList_Column_acl('acl', _("ACL")))));
 
         $pagelist->addPageList($pages);
         $button_label_liberal = _("Set Liberal Access Rights");
@@ -94,19 +93,19 @@ extends WikiPlugin_WikiAdminSetAcl
         $header->pushContent(HTML::legend(_("Select the pages where to change access rights")));
 
         $buttons = HTML::p(Button('submit:admin_setacl[aclliberal]', $button_label_liberal, 'wikiadmin'),
-                           Button('submit:admin_setacl[aclrestricted]', $button_label_restrictive, 'wikiadmin'));
+            Button('submit:admin_setacl[aclrestricted]', $button_label_restrictive, 'wikiadmin'));
         $header->pushContent($buttons);
 
         return HTML::form(array('action' => $request->getPostURL(),
-                                'method' => 'post'),
-                          $header,
-                          $pagelist->getContent(),
-                          HiddenInputs($request->getArgs(),
-                                        false,
-                                        array('admin_setacl')),
-                          ENABLE_PAGEPERM
-                          ? ''
-                          : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)));
+                'method' => 'post'),
+            $header,
+            $pagelist->getContent(),
+            HiddenInputs($request->getArgs(),
+                false,
+                array('admin_setacl')),
+            ENABLE_PAGEPERM
+                ? ''
+                : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)));
     }
 
     /*
@@ -116,20 +115,21 @@ extends WikiPlugin_WikiAdminSetAcl
      * _OWNER: remove purge dump change;
      */
 
-    function liberalPerms() {
+    function liberalPerms()
+    {
 
-        $perm = array('view'   => array(ACL_EVERY => true),
-                      'edit'   => array(ACL_EVERY => true),
-                      'create' => array(ACL_EVERY => true),
-                      'list'   => array(ACL_EVERY => true),
-                      'remove' => array(ACL_ADMIN => true,
-                                        ACL_OWNER => true),
-                      'purge'  => array(ACL_ADMIN => true,
-                                        ACL_OWNER => true),
-                      'dump'   => array(ACL_ADMIN => true,
-                                        ACL_OWNER => true),
-                      'change' => array(ACL_ADMIN => true,
-                                        ACL_OWNER => true));
+        $perm = array('view' => array(ACL_EVERY => true),
+            'edit' => array(ACL_EVERY => true),
+            'create' => array(ACL_EVERY => true),
+            'list' => array(ACL_EVERY => true),
+            'remove' => array(ACL_ADMIN => true,
+                ACL_OWNER => true),
+            'purge' => array(ACL_ADMIN => true,
+                ACL_OWNER => true),
+            'dump' => array(ACL_ADMIN => true,
+                ACL_OWNER => true),
+            'change' => array(ACL_ADMIN => true,
+                ACL_OWNER => true));
         return $perm;
     }
 
@@ -141,38 +141,40 @@ extends WikiPlugin_WikiAdminSetAcl
      * _EVERY: -view -edit -list -create;
      */
 
-    function restrictedPerms() {
+    function restrictedPerms()
+    {
 
-        $perm = array('view'   => array(ACL_AUTHENTICATED => true,
-                                        ACL_EVERY => false),
-                      'edit'   => array(ACL_AUTHENTICATED => true,
-                                        ACL_EVERY => false),
-                      'create' => array(ACL_AUTHENTICATED => true,
-                                        ACL_EVERY => false),
-                      'list'   => array(ACL_AUTHENTICATED => true,
-                                        ACL_EVERY => false),
-                      'remove' => array(ACL_ADMIN => true,
-                                        ACL_OWNER => true),
-                      'purge'  => array(ACL_ADMIN => true,
-                                        ACL_OWNER => true),
-                      'dump'   => array(ACL_ADMIN => true,
-                                        ACL_OWNER => true),
-                      'change' => array(ACL_ADMIN => true,
-                                        ACL_OWNER => true));
+        $perm = array('view' => array(ACL_AUTHENTICATED => true,
+            ACL_EVERY => false),
+            'edit' => array(ACL_AUTHENTICATED => true,
+                ACL_EVERY => false),
+            'create' => array(ACL_AUTHENTICATED => true,
+                ACL_EVERY => false),
+            'list' => array(ACL_AUTHENTICATED => true,
+                ACL_EVERY => false),
+            'remove' => array(ACL_ADMIN => true,
+                ACL_OWNER => true),
+            'purge' => array(ACL_ADMIN => true,
+                ACL_OWNER => true),
+            'dump' => array(ACL_ADMIN => true,
+                ACL_OWNER => true),
+            'change' => array(ACL_ADMIN => true,
+                ACL_OWNER => true));
         return $perm;
     }
 
-    function setaclForm(&$header, $pagehash) {
+    function setaclForm(&$header, $pagehash)
+    {
 
         $pages = array();
         foreach ($pagehash as $name => $checked) {
-           if ($checked) $pages[] = $name;
+            if ($checked) $pages[] = $name;
         }
 
-        $header->pushContent(HTML::strong(_("Selected Pages: ")), HTML::tt(join(', ',$pages)), HTML::br());
+        $header->pushContent(HTML::strong(_("Selected Pages: ")), HTML::tt(join(', ', $pages)), HTML::br());
         return $header;
     }
-};
+}
 
 // Local Variables:
 // mode: php

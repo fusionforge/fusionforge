@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: PopularTags.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 2007 Reini Urban
  *
@@ -21,32 +21,38 @@
  */
 
 /* Usage:
- *   <<PopularTags >>
+ *   <<PopularTags>>
  */
 
 require_once 'lib/PageList.php';
 
 class WikiPlugin_PopularTags
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return _("PopularTags");
+    // get list of categories sorted by number of backlinks
+    private function cmp_by_count($a, $b)
+    {
+        if ($a['count'] == $b['count']) return 0;
+        return $a['count'] < $b['count'] ? 1 : -1;
     }
 
-    function getDescription () {
+    function getDescription()
+    {
         return _("List the most popular tags.");
     }
 
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array('pagename' => '[pagename]',
-                     'limit'    => 10,
-                     'mincount' => 5,
-                     'noheader' => 0,
-                    );
+            'limit' => 10,
+            'mincount' => 5,
+            'noheader' => 0,
+        );
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
-            $args = $this->getArgs($argstr, $request);
+    function run($dbi, $argstr, &$request, $basepage)
+    {
+        $args = $this->getArgs($argstr, $request);
         extract($args);
 
         $maincat = $dbi->getPage(_("CategoryCategory"));
@@ -54,34 +60,29 @@ extends WikiPlugin
         $bl = array();
         while ($b = $bi->next()) {
             $name = $b->getName();
-            if (preg_match("/^"._("Template")."/", $name)) continue;
+            if (preg_match("/^" . _("Template") . "/", $name)) continue;
             $pages = $b->getBackLinks(false);
             $bl[] = array('name' => $name,
-                          'count' => $pages->count());
+                'count' => $pages->count());
         }
 
-        usort($bl, 'cmp_by_count');
-        $html = HTML::ul(); $i = 0;
+        usort($bl, array($this, 'cmp_by_count'));
+        $html = HTML::ul();
+        $i = 0;
         foreach ($bl as $b) {
             $i++;
-            $name  = $b['name'];
+            $name = $b['name'];
             $count = $b['count'];
             if ($count < $mincount) break;
             if ($i > $limit) break;
-            $wo = preg_replace("/^("._("Category")."|"
-                               ._("Topic").")/", "", $name);
-            $wo = HTML(HTML::span($wo),HTML::raw("&nbsp;"),HTML::small("(".$count.")"));
+            $wo = preg_replace("/^(" . _("Category") . "|"
+                . _("Topic") . ")/", "", $name);
+            $wo = HTML(HTML::span($wo), HTML::raw("&nbsp;"), HTML::small("(" . $count . ")"));
             $link = WikiLink($name, 'auto', $wo);
             $html->pushContent(HTML::li($link));
         }
         return $html;
     }
-}
-
-// get list of categories sorted by number of backlinks
-function cmp_by_count($a, $b) {
-     if ($a['count'] == $b['count']) return 0;
-     return $a['count'] < $b['count'] ? 1 : -1;
 }
 
 // Local Variables:

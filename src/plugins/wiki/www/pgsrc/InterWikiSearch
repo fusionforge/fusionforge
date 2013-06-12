@@ -1,6 +1,5 @@
 Date: Tue, 25 Jan 2011 18:13:01 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: InterWikiSearch 7882 2011-01-25 17:13:36Z vargenau $
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=InterWikiSearch;
   flags=PAGE_LOCKED;

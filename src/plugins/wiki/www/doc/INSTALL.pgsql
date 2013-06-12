@@ -100,5 +100,3 @@ If you find something I missed, please let us know.
 Reini Urban, Steve Wainstead <swain@panix.com>
 
 Report bugs to phpwiki-talk@lists.sourceforge.net
-
-$Id: INSTALL.pgsql 6202 2008-08-26 13:14:32Z vargenau $

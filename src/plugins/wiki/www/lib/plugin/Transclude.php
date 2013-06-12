@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: Transclude.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * Copyright 1999,2000,2001,2002,2006 $ThePhpWikiProgrammingTeam
  *
@@ -45,26 +45,24 @@
  *  quite big enough --- the scroll bars remain.  Not sure why.
  */
 class WikiPlugin_Transclude
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName() {
-        return _("Transclude");
+    function getDescription()
+    {
+        return _("Include an external web page within the body of a wiki page.");
     }
 
-    function getDescription() {
-      return _("Include an external web page within the body of a wiki page.");
+    function getDefaultArguments()
+    {
+        return array('src' => false, // the src url to include
+            'title' => _("Transcluded page"), // title of the iframe
+            'height' => 450, // height of the iframe
+            'quiet' => false // if set, iframe appears as normal content
+        );
     }
 
-    function getDefaultArguments() {
-        return array( 'src'     => false, // the src url to include
-                      'title'   =>  _("Transcluded page"), // title of the iframe
-                      'height'  => 450, // height of the iframe
-                      'quiet'   => false // if set, iframe appears as normal content
-                    );
-    }
-
-    function run($dbi, $argstr, &$request, $basepage) {
-        global $WikiTheme;
+    function run($dbi, $argstr, &$request, $basepage)
+    {
 
         $args = ($this->getArgs($argstr, $request));
         extract($args);
@@ -73,37 +71,37 @@ extends WikiPlugin
             return $this->error(fmt("%s parameter missing", "'src'"));
         }
         // Expand possible interwiki link for src
-        if (strstr($src,':')
-            and (!strstr($src,'://'))
-            and ($intermap = getInterwikiMap())
-            and preg_match("/^" . $intermap->getRegexp() . ":/", $src))
-        {
+        if (strstr($src, ':')
+            and (!strstr($src, '://'))
+                and ($intermap = getInterwikiMap())
+                    and preg_match("/^" . $intermap->getRegexp() . ":/", $src)
+        ) {
             $link = $intermap->link($src);
             $src = $link->getAttr('href');
         }
 
         // FIXME: Better recursion detection.
         // FIXME: Currently this doesnt work at all.
-        if ($src == $request->getURLtoSelf() ) {
+        if ($src == $request->getURLtoSelf()) {
             return $this->error(fmt("Recursive inclusion of url %s", $src));
         }
-        if (! IsSafeURL($src)) {
+        if (!IsSafeURL($src)) {
             return $this->error(_("Bad url in src: remove all of <, >, \""));
         }
 
         $params = array('title' => $title,
-                        'src' => $src,
-                        'width' => "100%",
-                        'height' => $height,
-                        'marginwidth' => 0,
-                        'marginheight' => 0,
-                        'class' => 'transclude',
-                        "onload" => "adjust_iframe_height(this);");
+            'src' => $src,
+            'width' => "100%",
+            'height' => $height,
+            'marginwidth' => 0,
+            'marginheight' => 0,
+            'class' => 'transclude',
+            "onload" => "adjust_iframe_height(this);");
 
         $noframe_msg[] = fmt("See: %s", HTML::a(array('href' => $src), $src));
 
         $noframe_msg = HTML::div(array('class' => 'transclusion'),
-                                 HTML::p(array(), $noframe_msg));
+            HTML::p(array(), $noframe_msg));
 
         $iframe = HTML::iframe($params, $noframe_msg);
 
@@ -115,8 +113,8 @@ extends WikiPlugin
             return HTML($this->_js(), $iframe);
         } else {
             return HTML(HTML::p(array('class' => 'transclusion-title'),
-                                fmt("Transcluded from %s", LinkURL($src))),
-                        $this->_js(), $iframe);
+                    fmt("Transcluded from %s", LinkURL($src))),
+                $this->_js(), $iframe);
         }
     }
 
@@ -129,7 +127,8 @@ extends WikiPlugin
      *
      * @access private
      */
-    function _js() {
+    private function _js()
+    {
         static $seen = false;
 
         if ($seen)
@@ -156,7 +155,7 @@ extends WikiPlugin
           }, false);
           ');
     }
-};
+}
 
 // Local Variables:
 // mode: php

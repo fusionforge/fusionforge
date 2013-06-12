@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: IncludePages.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  *
@@ -29,24 +29,23 @@
 include_once 'lib/plugin/IncludePage.php';
 
 class WikiPlugin_IncludePages
-extends WikiPlugin_IncludePage
+    extends WikiPlugin_IncludePage
 {
-    function getName() {
-        return _("IncludePages");
-    }
-
-    function getDescription() {
+    function getDescription()
+    {
         return _("Include multiple pages.");
     }
 
-    function getDefaultArguments() {
-        return array_merge(array( 'pages'   => false,  // the pages to include
-                                  'exclude' => false), // the pages to exclude
-                           WikiPlugin_IncludePage::getDefaultArguments()
-                          );
+    function getDefaultArguments()
+    {
+        return array_merge(array('pages' => false, // the pages to include
+                'exclude' => false), // the pages to exclude
+            WikiPlugin_IncludePage::getDefaultArguments()
+        );
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $this->getArgs($argstr, $request);
         $html = HTML();
         if (empty($args['pages'])) {
@@ -75,12 +74,12 @@ extends WikiPlugin_IncludePage
 
         foreach ($args['pages'] as $page) {
             if (empty($args['exclude']) or !in_array($page, $args['exclude'])) {
-                $html = HTML($html, $include->run($dbi, "page='$page' ".$argstr, $request, $basepage));
+                $html = HTML($html, $include->run($dbi, "page='$page' " . $argstr, $request, $basepage));
             }
         }
         return $html;
     }
-};
+}
 
 // Local Variables:
 // mode: php

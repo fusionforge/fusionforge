@@ -1,6 +1,5 @@
 Date: Fri,  4 Feb 2011 16:58:00 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FWikiWikiWeb 7932 2011-02-04 16:03:52Z vargenau $
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWikiWikiWeb;
   flags="";
@@ -24,7 +23,7 @@ ephemeral. When it comes down to it, that's all you need.''
 你可以在 RecentVisitors 說聲 hello, 或是閱讀 HowToUseWiki 和 AddingPages.
 目前這個 Wiki 並沒有討論任何主題, 所以就用力的去玩並享受他吧!!
 
---SteveWainstead.
+-- [[Steve Wainstead]]
 
 <noinclude>
 ----

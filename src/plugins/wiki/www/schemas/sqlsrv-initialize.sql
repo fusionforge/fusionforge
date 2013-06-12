@@ -1,7 +1,6 @@
--- $Id: sqlsrv-initialize.sql,v 1.5 2006/12/08 08:04:10 rurban Exp $
 -- UNTESTED!
 
--- the CREATE FUNCTION section must be run as a seperate query. cut/paste run before executing the remainder
+-- the CREATE FUNCTION section must be run as a separate query. cut/paste run before executing the remainder
 -- of the contents of this file
 CREATE FUNCTION hasContent
 	(@ContentField varchar(max))
@@ -14,7 +13,7 @@ IF @ContentField NOT LIKE ''
 RETURN 0
 
 END
--- end seperate section
+-- end separate section
 
 
 CREATE TABLE page (
@@ -26,14 +25,14 @@ CREATE TABLE page (
         PRIMARY KEY (id),
 	UNIQUE (pagename)
 );
---SET IDENTITY_INSERT page ON;
+-- SET IDENTITY_INSERT page ON;
 
 CREATE TABLE version (
 	id              INT NOT NULL,
         version         INT NOT NULL,
 	mtime           INT NOT NULL,
 	minor_edit      TINYINT DEFAULT 0,
-        content         varchar(max) NOT NULL DEFAULT '',--can't be text
+        content         varchar(max) NOT NULL DEFAULT '', -- can't be text
         versiondata     TEXT NOT NULL DEFAULT '',
         PRIMARY KEY (id,version)
 );
@@ -86,15 +85,15 @@ CREATE TABLE pref (
 -- ALTER TABLE pref ADD passwd 	CHAR(48) BINARY DEFAULT '';
 -- ALTER TABLE pref ADD groupname CHAR(48) BINARY DEFAULT 'users';
 
--- deprecated since 1.3.12. only useful for seperate databases.
+-- deprecated since 1.3.12. only useful for separate databases.
 -- better use the extra pref table where such users can be created easily 
 -- without password.
---CREATE TABLE user (
+-- CREATE TABLE user (
 --  	userid 	CHAR(48) NOT NULL,
 --  	passwd 	CHAR(48) DEFAULT '',
 --	prefs  	TEXT NULL DEFAULT '',
 --	groupname CHAR(48) DEFAULT 'users'
---);
+-- );
 
 -- Use the member table, if you need it for n:m user-group relations,
 -- and adjust your DBAUTH_AUTH_ SQL statements.

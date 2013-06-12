@@ -1,5 +1,5 @@
 <?php
-// $Id: _GroupInfo.php 8071 2011-05-18 14:56:14Z vargenau $
+
 /*
  * Copyright 2004 $ThePhpWikiProgrammingTeam
  *
@@ -24,21 +24,20 @@
  * @author: Charles Corrigan
  */
 class WikiPlugin__GroupInfo
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return _("DebugGroupInfo");
+    function getDescription()
+    {
+        return sprintf(_("Show Group Information."));
     }
 
-    function getDescription () {
-        return sprintf(_("Show Group Information"));
-    }
-
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array();
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $this->getArgs($argstr, $request);
         extract($args);
 
@@ -48,17 +47,17 @@ extends WikiPlugin
         $allGroups = $group->getAllGroupsIn();
 
         foreach ($allGroups as $g) {
-          $members = $group->getMembersOf($g);
-          $output->pushContent(HTML::h3($g . " - members: " .
-sizeof($members) . " - isMember: " . ($group->isMember($g) ? "yes" : "no")
-));
-          foreach($members as $m) {
-            $output->pushContent($m);
-            $output->pushContent(HTML::br());
-          }
+            $members = $group->getMembersOf($g);
+            $output->pushContent(HTML::h3($g . " - members: " .
+                    sizeof($members) . " - isMember: " . ($group->isMember($g) ? "yes" : "no")
+            ));
+            foreach ($members as $m) {
+                $output->pushContent($m);
+                $output->pushContent(HTML::br());
+            }
         }
         $output->pushContent(HTML::p("--- the end ---"));
 
         return $output;
     }
-};
+}

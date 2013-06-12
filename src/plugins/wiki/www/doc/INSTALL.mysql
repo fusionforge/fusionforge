@@ -77,5 +77,3 @@ You might want to set DBADMIN_USER temporarly in your config.ini.
 ?action=upgrade also brings all changed pgsrc files up-to-date.
 
 /Reini Urban and Arno ahollosi@mail.com
-
-$Id: INSTALL.mysql 6202 2008-08-26 13:14:32Z vargenau $

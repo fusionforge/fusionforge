@@ -1,9 +1,7 @@
--- $Id: oci8-destroy.sql 6203 2008-08-26 13:23:56Z vargenau $
-
 set verify off
 set feedback off
 
---================================================================
+-- ================================================================
 -- Prefix for table names.
 --
 -- You should set this to the same value you specify for
@@ -14,13 +12,13 @@ set feedback off
 
 define prefix=phpwiki_
 
---================================================================
+-- ================================================================
 --
 -- Don't modify below this point unless you know what you are doing.
 --
---================================================================
+-- ================================================================
 
---================================================================
+-- ================================================================
 -- Note on Oracle datatypes...
 -- 
 -- Most of the 'NOT NULL' constraints on the character columns have been 

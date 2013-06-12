@@ -1,8 +1,6 @@
-<?php // -*-php-*-
-// $Id: browse-footer.tmpl 7956 2011-03-03 17:08:31Z vargenau $
-?>
 <?php // <hr class="printer" noshade="noshade" /> ?>
     <div class="visualClear"></div>
+    <div id="f-poweredbyico"><a href="http://www.phpwiki.org/"><img src="<?php echo $WikiTheme->getImageURL("poweredby_phpwiki_51x31.png") ?>" alt="Powered by PhpWiki" /></a></div>
     <ul id="f-list">
       <li id="f-lastmod"> <?php echo $WikiTheme->getOwnerMessage($page) ?>  <?php echo $WikiTheme->getLastModifiedMessage($revision) ?> <?php echo $WikiTheme->getAuthorMessage($revision) ?> </li>
 	  
@@ -26,5 +24,4 @@
 <?php } ?>
 </li>
     </ul>
-    <div id="f-poweredbyico"><a href="http://www.phpwiki.org/"><img src="<?php echo $WikiTheme->getImageURL("poweredby_phpwiki_51x31.png") ?>" alt="Powered by PhpWiki" /></a></div>
     <div id="f-copyrightico"><a href="http://www.gnu.org/copyleft/fdl.html"><img src="<?php echo $WikiTheme->getImageURL("gnu-fdl.png") ?>" alt="GNU Free Documentation License" /></a></div>

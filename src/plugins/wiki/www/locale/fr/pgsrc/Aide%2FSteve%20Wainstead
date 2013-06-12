@@ -1,0 +1,18 @@
+Date: Thu, 27 Jan 2011 10:22:55 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FSteve%20Wainstead;
+  flags="";
+  markup=2;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Salut. J'ai démarré la construction de ce [[Aide:WikiWikiWeb|WikiWikiWeb]] mais beaucoup
+d'autres m'aident maintenant. Je suis à [[http://www.panix.com/~swain/]].
+
+S'il vous plait, rapportez les bugs à [[mailto:phpwiki-talk@lists.sourceforge.net]].
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]]
+</noinclude>

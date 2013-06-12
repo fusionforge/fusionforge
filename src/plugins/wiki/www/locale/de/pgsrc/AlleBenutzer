@@ -1,11 +1,10 @@
 Date: Fri,  4 Feb 2011 17:33:12 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: AlleBenutzer 7938 2011-02-04 16:35:28Z vargenau $
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=AlleBenutzer;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=utf-8
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 Liste aller eingetragenen Benutzer, die ihre 

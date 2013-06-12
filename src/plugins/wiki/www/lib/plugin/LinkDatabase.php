@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: LinkDatabase.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /**
  * Copyright 2004,2007 $ThePhpWikiProgrammingTeam
  *
@@ -36,72 +36,77 @@ require_once 'lib/WikiPluginCached.php';
  * DONE: Convert " " to %20
  */
 class WikiPlugin_LinkDatabase
-extends WikiPluginCached
+    extends WikiPluginCached
 {
-    function getName () {
-        return _("LinkDatabase");
-    }
-    function getPluginType() {
+    function getPluginType()
+    {
         return PLUGIN_CACHED_HTML;
     }
-    function getDescription () {
-        return _("List all pages with all links in various formats for some Java Visualization tools");
+
+    function getDescription()
+    {
+        return _("List all pages with all links in various formats for some Java Visualization tools.");
     }
-    function getExpire($dbi, $argarray, $request) {
+
+    function getExpire($dbi, $argarray, $request)
+    {
         return '+900'; // 15 minutes
     }
 
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array_merge
-            (
-             PageList::supportedArgs(),
-             array(
-                   'format'        => 'html', // 'html', 'text', 'xml'
-                   'noheader'      => false,
-                   'include_empty' => false,
-                   'exclude_from'  => false,
-                   'info'          => '',
-                   ));
+        (
+            PageList::supportedArgs(),
+            array(
+                'format' => 'html', // 'html', 'text', 'xml'
+                'noheader' => false,
+                'include_empty' => false,
+                'exclude_from' => false,
+                'info' => '',
+            ));
     }
 
-    function getHtml($dbi, $argarray, $request, $basepage) {
+    function getHtml($dbi, $argarray, $request, $basepage)
+    {
         $this->run($dbi, WikiPluginCached::glueArgs($argarray), $request, $basepage);
     }
 
-    function run($dbi, $argstr, $request, $basepage) {
+    function run($dbi, $argstr, $request, $basepage)
+    {
         global $WikiTheme;
         $args = $this->getArgs($argstr, $request);
 
         $caption = _("All pages with all links in this wiki (%d total):");
 
-        if ( !empty($args['owner']) ) {
-            $pages = PageList::allPagesByOwner($args['owner'],$args['include_empty'],
-                                               $args['sortby'],$args['limit']);
+        if (!empty($args['owner'])) {
+            $pages = PageList::allPagesByOwner($args['owner'], $args['include_empty'],
+                $args['sortby'], $args['limit']);
             if ($args['owner'])
                 $caption = fmt("List of pages owned by [%s] (%d total):",
-                               WikiLink($args['owner'], 'if_known'),
-                               count($pages));
-        } elseif ( !empty($args['author']) ) {
-            $pages = PageList::allPagesByAuthor($args['author'],$args['include_empty'],
-                                                $args['sortby'],$args['limit']);
+                    WikiLink($args['owner'], 'if_known'),
+                    count($pages));
+        } elseif (!empty($args['author'])) {
+            $pages = PageList::allPagesByAuthor($args['author'], $args['include_empty'],
+                $args['sortby'], $args['limit']);
             if ($args['author'])
                 $caption = fmt("List of pages last edited by [%s] (%d total):",
-                               WikiLink($args['author'], 'if_known'),
-                               count($pages));
-        } elseif ( !empty($args['creator']) ) {
-            $pages = PageList::allPagesByCreator($args['creator'],$args['include_empty'],
-                                                 $args['sortby'],$args['limit']);
+                    WikiLink($args['author'], 'if_known'),
+                    count($pages));
+        } elseif (!empty($args['creator'])) {
+            $pages = PageList::allPagesByCreator($args['creator'], $args['include_empty'],
+                $args['sortby'], $args['limit']);
             if ($args['creator'])
                 $caption = fmt("List of pages created by [%s] (%d total):",
-                               WikiLink($args['creator'], 'if_known'),
-                               count($pages));
+                    WikiLink($args['creator'], 'if_known'),
+                    count($pages));
         } else {
-            if (! $request->getArg('count'))
+            if (!$request->getArg('count'))
                 $args['count'] = $dbi->numPages($args['include_empty'], $args['exclude_from']);
             else
                 $args['count'] = $request->getArg('count');
             $pages = $dbi->getAllPages($args['include_empty'], $args['sortby'],
-                                       $args['limit'], $args['exclude_from']);
+                $args['limit'], $args['exclude_from']);
         }
         if ($args['format'] == 'html') {
             $args['types']['links'] =
@@ -118,11 +123,11 @@ extends WikiPluginCached
                 header("Content-Type: text/plain");
             $request->checkValidators();
             while ($page = $pages->next()) {
-                echo preg_replace("/ /","%20",$page->getName());
+                echo preg_replace("/ /", "%20", $page->getName());
                 $links = $page->getPageLinks(false, $args['sortby'], $args['limit'],
-                                             $args['exclude']);
+                    $args['exclude']);
                 while ($link = $links->next()) {
-                    echo " ", preg_replace("/ /","%20",$link->getName());
+                    echo " ", preg_replace("/ /", "%20", $link->getName());
                 }
                 echo "\n";
             }
@@ -132,27 +137,31 @@ extends WikiPluginCached
 
         } elseif ($args['format'] == 'xml') {
             // For hypergraph.jar. Best dump it to a local sitemap.xml periodically
-            global $WikiTheme, $charset;
+            global $WikiTheme;
             $currpage = $request->getArg('pagename');
             $request->discardOutput();
             $request->buffer_output(false);
             if (!headers_sent())
                 header("Content-Type: text/xml");
             $request->checkValidators();
-            echo "<?xml version=\"1.0\" encoding=\"$charset\"?>";
+            echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
             // As applet it prefers only "GraphXML.dtd", but then we must copy it to the webroot.
             $dtd = $WikiTheme->_findData("GraphXML.dtd");
             echo "<!DOCTYPE GraphXML SYSTEM \"$dtd\">\n";
             echo "<GraphXML xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n";
-            echo "<graph id=\"",MangleXmlIdentifier(WIKI_NAME),"\">\n";
-            echo '<style><line tag="node" class="main" colour="#ffffff"/><line tag="node" class="child" colour="blue"/><line tag="node" class="relation" colour="green"/></style>',"\n\n";
+            echo "<graph id=\"", MangleXmlIdentifier(WIKI_NAME), "\">\n";
+            echo '<style>';
+            echo '<line tag="node" class="main" colour="#ffffff"/>';
+            echo '<line tag="node" class="child" colour="blue"/>';
+            echo '<line tag="node" class="relation" colour="green"/>';
+            echo "</style>\n\n";
             while ($page = $pages->next()) {
-                    $pageid = MangleXmlIdentifier($page->getName());
-                    $pagename = $page->getName();
+                $pageid = MangleXmlIdentifier($page->getName());
+                $pagename = $page->getName();
                 echo "<node name=\"$pageid\"";
                 if ($pagename == $currpage) echo " class=\"main\"";
                 echo "><label>$pagename</label>";
-                echo "<dataref><ref xlink:href=\"",WikiURL($pagename,'',true),"\"/></dataref></node>\n";
+                echo "<dataref><ref xlink:href=\"", WikiURL($pagename, '', true), "\"/></dataref></node>\n";
                 $links = $page->getPageLinks(false, $args['sortby'], $args['limit'], $args['exclude']);
                 while ($link = $links->next()) {
                     $edge = MangleXmlIdentifier($link->getName());
@@ -169,11 +178,14 @@ extends WikiPluginCached
         } else {
             return $this->error(fmt("Unsupported format argument %s", $args['format']));
         }
+        return '';
     }
-};
+}
 
-class _PageList_Column_LinkDatabase_links extends _PageList_Column {
-    function _getValue($page, &$revision_handle) {
+class _PageList_Column_LinkDatabase_links extends _PageList_Column
+{
+    function _getValue($page, &$revision_handle)
+    {
         $out = HTML();
         $links = $page->getPageLinks();
         while ($link = $links->next()) {

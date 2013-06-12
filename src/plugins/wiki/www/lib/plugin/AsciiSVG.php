@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: AsciiSVG.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 2007 $ThePhpWikiProgrammingTeam
  *
@@ -26,36 +26,39 @@
  * Syntax: http://www1.chapman.edu/~jipsen/svg/asciisvgcommands.html
  */
 class WikiPlugin_AsciiSVG
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName() {
-        return _("AsciiSVG");
+    function getDescription()
+    {
+        return _("Render inline ASCII SVG.");
     }
 
-    function getDescription() {
-        return _("Render inline ASCII SVG");
+    function getDefaultArguments()
+    {
+        return array('width' => 200,
+            'height' => 200,
+            'script' => false, // one line script. not very likely
+            'onmousemove' => false
+        );
     }
 
-    function getDefaultArguments() {
-        return array('width'  => 200,
-                     'height' => 200,
-                     'script' => false, // one line script. not very likely
-                     'onmousemove' => false
-                     );
-    }
-    function handle_plugin_args_cruft(&$argstr, &$args) {
+    function handle_plugin_args_cruft(&$argstr, &$args)
+    {
         $this->source = $argstr;
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         global $WikiTheme;
         $args = $this->getArgs($argstr, $request);
-        if (empty($this->source))
-            return '';
+        if (empty($this->source)) {
+            return HTML::div(array('class' => "error"), 
+                   "Please provide SVG code to AsciiSVG plugin");
+        }
         $html = HTML();
         if (empty($WikiTheme->_asciiSVG)) {
             $js = JavaScript('', array
-                             ('src' => $WikiTheme->_findData('ASCIIsvg.js')));
+            ('src' => $WikiTheme->_findData('ASCIIsvg.js')));
             if (empty($WikiTheme->_headers_printed))
                 $WikiTheme->addMoreHeaders($js);
             else
@@ -67,10 +70,10 @@ extends WikiPlugin
             $this->source = $m[1];
             $args['script'] = $m[2];
         }
-        $embedargs = array('width'  => $args['width'],
-                           'height' => $args['height'],
-                           //'src'    => "d.svg",
-                           'script' => $this->source);
+        $embedargs = array('width' => $args['width'],
+            'height' => $args['height'],
+            //'src'    => "d.svg",
+            'script' => $this->source);
         // additional onmousemove argument
         if ($args['onmousemove']) $embedargs['onmousemove'] = $args['onmousemove'];
         // we need script='data' and not script="data"
@@ -79,10 +82,12 @@ extends WikiPlugin
         if ($args['script']) $html->pushContent(JavaScript($args['script']));
         return $html;
     }
-};
+}
 
-class AsciiSVG_HTML extends HtmlElement {
-    function startTag() {
+class AsciiSVG_HTML extends HtmlElement
+{
+    function startTag()
+    {
         $start = "<" . $this->_tag;
         $this->_setClasses();
         foreach ($this->_attr as $attr => $val) {

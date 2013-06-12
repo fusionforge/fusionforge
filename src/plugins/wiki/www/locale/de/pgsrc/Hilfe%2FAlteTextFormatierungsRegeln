@@ -1,10 +1,9 @@
-Date: Fri, 10 Sep 2010 13:48:42 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Hilfe%2FAlteTextFormatierungsRegeln 7858 2011-01-22 09:33:54Z vargenau $
+Date: Wed, 19 Dec 2012 13:19:42 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Hilfe%2FAlteTextFormatierungsRegeln;
   flags=PAGE_LOCKED;
-  charset=utf-8;
+  charset=UTF-8;
   markup=2
 Content-Transfer-Encoding: binary
 
@@ -73,7 +72,7 @@ funktioniert nicht''
 * Du kannst das Erstellen eines Links verhindern, indem du vor das Wort ein Ausrufungszeichen setzt, zum Beispiel ~DasIstKeinLink.
 * You can create footnotes by using ~[1], ~[2], ~[3], ... like this here #[|ftnt_ref_1]<sup>~[[1|#ftnt_1]~]</sup>. See footnote for counterpart.  (If the ~[ is in the first column, it is a footnote <em>definition</em> rather than a footnote <em>reference</em> #[|ftnt_ref_1]<sup>~[[1|#ftnt_1]~]</sup>.)
 * Wenn du im Text Adressen eingibst, die mit <strong>http:</strong>, <strong>ftp:</strong> oder <strong>mailto:</strong> beginnen, werden diese auch automatisch in Links umgewandelt, zum Beispiel http://c2.com/
-* Adressen, die mit <strong>.png</strong> oder <strong>.jpg</strong> enden (d.h. Bilder) werden in die Seite eingefügt, wenn sie in eckige Klammern gesetzt werden, z. B.: [http://phpwiki.sourceforge.net/demo/themes/default/images/png.png]
+* Adressen, die mit <strong>.png</strong> oder <strong>.jpg</strong> enden (d.h. Bilder) werden in die Seite eingefügt, wenn sie in eckige Klammern gesetzt werden, z. B.: [http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/png.png]
 
 ! Tables
 * Einfache Tabellen werden unterstützt.  A table row is introduced by a <strong>|</strong> in the first column.  It is best described by example:

@@ -1,5 +1,5 @@
-<?php //-*-php-*-
-// $Id: OpenID.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright (C) 2010 ReiniUrban
  * Zend_OpenId_Consumer parts from Zend licensed under
@@ -30,10 +30,10 @@
 require_once 'lib/HttpClient.php';
 
 class _OpenIDPassUser
-extends _PassUser
-/**
- * Preferences are handled in _PassUser
- */
+    extends _PassUser
+    /**
+     * Preferences are handled in _PassUser
+     */
 {
     /**
      * Verifies authentication response from OpenID server.
@@ -48,16 +48,18 @@ extends _PassUser
      * @param  mixed $extensions extension object or array of extensions objects
      * @return bool
      */
-    function verify($params, &$identity = "", $extensions = null) {
+    function verify($params, &$identity = "", $extensions = null)
+    {
         $version = 1.1;
         $this->_setError("");
         if (isset($params['openid_ns']) &&
-            $params['openid_ns'] == $NS_2_0) { // global session var
+            $params['openid_ns'] == $NS_2_0
+        ) { // global session var
             $version = 2.0;
         }
         if (isset($params["openid_claimed_id"])) {
             $identity = $params["openid_claimed_id"];
-        } elseif (isset($params["openid_identity"])){
+        } elseif (isset($params["openid_identity"])) {
             $identity = $params["openid_identity"];
         } else {
             $identity = "";
@@ -90,7 +92,7 @@ extends _PassUser
             return false;
         }
         if ($params['openid_mode'] != 'id_res') {
-            $this->_setError("Wrong openid.mode '".$params['openid_mode']."' != 'id_res'");
+            $this->_setError("Wrong openid.mode '" . $params['openid_mode'] . "' != 'id_res'");
             return false;
         }
         if (empty($params['openid_assoc_handle'])) {
@@ -115,8 +117,9 @@ extends _PassUser
      *  object to perform HTTP or HTML form redirection
      * @return bool
      */
-    function _checkId($immediate, $id, $returnTo=null, $root=null,
-                      $extensions=null, $response = null) {
+    function _checkId($immediate, $id, $returnTo = null, $root = null,
+                      $extensions = null, $response = null)
+    {
         $this->_setError('');
 
         /*if (!Zend_OpenId::normalize($id)) {
@@ -134,11 +137,12 @@ extends _PassUser
             return false;
         }
         if (!$this->_getAssociation(
-                $server,
-                $handle,
-                $macFunc,
-                $secret,
-                $expires)) {
+            $server,
+            $handle,
+            $macFunc,
+            $secret,
+            $expires)
+        ) {
             /* Use dumb mode */
             unset($handle);
             unset($macFunc);
@@ -177,7 +181,7 @@ extends _PassUser
 
         if (empty($root)) {
             //$root = Zend_OpenId::selfUrl();
-            if ($root[strlen($root)-1] != '/') {
+            if ($root[strlen($root) - 1] != '/') {
                 $root = dirname($root);
             }
         }
@@ -197,24 +201,25 @@ extends _PassUser
         return true;
     }
 
-    function _setError($message) {
+    function _setError($message)
+    {
         $this->_error = $message;
     }
 
-    function checkPass($password) {
-        $userid = $this->_userid;
+    function checkPass($password)
+    {
         if (!loadPhpExtension('openssl')) {
             trigger_error(
                 sprintf(_("The PECL %s extension cannot be loaded."), "openssl")
-                 . sprintf(_(" %s AUTH ignored."), 'OpenID'),
-                 E_USER_WARNING);
+                    . sprintf(_(" %s AUTH ignored."), 'OpenID'),
+                E_USER_WARNING);
             return $this->_tryNextUser();
         }
 
         $retval = $this->_checkId(false, $id, $returnTo, $root, $extensions, $response);
         $this->_authmethod = 'OpenID';
-        if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this)."::checkPass => $retval",
-                                                E_USER_WARNING);
+        if (DEBUG & _DEBUG_LOGIN) trigger_error(get_class($this) . "::checkPass => $retval",
+            E_USER_WARNING);
         if ($retval) {
             $this->_level = WIKIAUTH_USER;
         } else {
@@ -224,24 +229,26 @@ extends _PassUser
     }
 
     /* do nothing. the login/redirect is done in checkPass */
-    function userExists() {
+    function userExists()
+    {
         if (!$this->isValidName($this->_userid)) {
             return $this->_tryNextUser();
         }
         if (!loadPhpExtension('openssl')) {
             trigger_error
-                (sprintf(_("The PECL %s extension cannot be loaded."), "openssl")
-                 . sprintf(_(" %s AUTH ignored."), 'OpenID'),
-                 E_USER_WARNING);
+            (sprintf(_("The PECL %s extension cannot be loaded."), "openssl")
+                    . sprintf(_(" %s AUTH ignored."), 'OpenID'),
+                E_USER_WARNING);
             return $this->_tryNextUser();
         }
         if (DEBUG & _DEBUG_LOGIN)
-            trigger_error(get_class($this)."::userExists => true (dummy)", E_USER_WARNING);
+            trigger_error(get_class($this) . "::userExists => true (dummy)", E_USER_WARNING);
         return true;
     }
 
     // no quotes and shorter than 128
-    function isValidName() {
+    function isValidName()
+    {
         if (!$this->_userid) return false;
         return !preg_match('/[\"\']/', $this->_userid) and strlen($this->_userid) < 128;
     }

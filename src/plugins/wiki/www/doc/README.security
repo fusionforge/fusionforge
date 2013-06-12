@@ -162,7 +162,7 @@ Content-Type: application/x-phpwiki;
   created=1104916186;
   author_id=The%20PhpWiki%20programming%20team;
   markup=2;
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 ~<?plugin ~AppendText ?>
@@ -190,7 +190,7 @@ edit:_ADMIN,_OWNER,Writers,-_SIGNED-_BOGOUSER,-_AUTHENTICATED;
 create:_ADMIN,_OWNER,Writers,-_SIGNED,-_BOGOUSER,-_AUTHENTICATED;
 list:_EVERY; remove:_ADMIN,_OWNER,-_SIGNED,-_BOGOUSER,-_AUTHENTICATED;
 change:_ADMIN,_OWNER,-_SIGNED,-_BOGOUSER,-_AUTHENTICATED; dump:_EVERY";
-  charset=iso-8859-1
+  charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 This page holds the default permissions for all pages

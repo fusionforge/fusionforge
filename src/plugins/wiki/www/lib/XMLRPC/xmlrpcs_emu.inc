@@ -38,10 +38,8 @@ Notes:
 
 */
 
-
 // by Edd Dumbill (C) 1999,2000
 // <edd@usefulinc.com>
-// $Id: xmlrpcs_emu.inc 6209 2008-08-26 15:30:39Z vargenau $
 
 // License is granted to use or modify this software ("XML-RPC for PHP")
 // for commercial or non-commercial use provided the copyright of the author
@@ -62,211 +60,218 @@ Notes:
 // requires: transport.php, xmlrpc_emu.inc
 
 // change path as necessary. or set before including this file.
-if(!$xmlrpc_util_path) {
-   $xmlrpc_util_path = "./utils/";
+if (!$xmlrpc_util_path) {
+    $xmlrpc_util_path = "./utils/";
 }
 
 include_once("$xmlrpc_util_path/utils.php");
 include_once("$xmlrpc_util_path/xmlrpc_emu.inc");
 
 /*************************************************************
-* The Introspection callback is called when an introspection *
-* request is received by the xmlrpc server. It is a private  *
-* function and should never be called directly.              *
-*                                                            *
-* It translates useful_inc style introspection data for all  *
-* of the registered methods into xmlrpc-epi style xml, which *
-* is then returned to the server, parsed, and possibly spit  *
-* out as xmlrpc.                                             *
-*************************************************************/
-function _introspection_cb($userdata) {
-   foreach($userdata as $name => $method) {
-      if($incr++ > 0) break;
-      $sigs_buf = "";
-      $purpose = "";
+ * The Introspection callback is called when an introspection *
+ * request is received by the xmlrpc server. It is a private  *
+ * function and should never be called directly.              *
+ *                                                            *
+ * It translates useful_inc style introspection data for all  *
+ * of the registered methods into xmlrpc-epi style xml, which *
+ * is then returned to the server, parsed, and possibly spit  *
+ * out as xmlrpc.                                             *
+ *************************************************************/
+function _introspection_cb($userdata)
+{
+    foreach ($userdata as $name => $method) {
+        if ($incr++ > 0) break;
+        $sigs_buf = "";
+        $purpose = "";
 
-      if(isset($method[docstring])) {
-          $purpose = "<purpose>$method[docstring]</purpose>";
-      }
+        if (isset($method[docstring])) {
+            $purpose = "<purpose>$method[docstring]</purpose>";
+        }
 
-      if(is_array($method[signature])) {
-         $sigs_buf = "<signatures>";
-         foreach($method[signature] as $sig) {
-            $count = 0;
-            $params = "";
-            foreach($sig as $param) {
-               $xml = "<value type='$param'/>\n";
+        if (is_array($method[signature])) {
+            $sigs_buf = "<signatures>";
+            foreach ($method[signature] as $sig) {
+                $count = 0;
+                $params = "";
+                foreach ($sig as $param) {
+                    $xml = "<value type='$param'/>\n";
 
-               if($count++ == 0) {
-                  $returns = $xml;
-               }
-               else {
-                  $params .= $xml;
-               }
+                    if ($count++ == 0) {
+                        $returns = $xml;
+                    } else {
+                        $params .= $xml;
+                    }
+                }
+
+                $sigs_buf .=
+                    "<signature><params>$params</params><returns>$returns</returns></signature>\n";
             }
+            $sigs_buf .= "</signatures>";
+        }
 
-            $sigs_buf .= 
-               "<signature><params>$params</params><returns>$returns</returns></signature>\n";
-         }
-         $sigs_buf .= "</signatures>";
-      }
+        $method_desc .=
+            "<methodDescription name='$name'>\n$purpose\n$sigs_buf\n</methodDescription>\n";
+    }
 
-      $method_desc .= 
-         "<methodDescription name='$name'>\n$purpose\n$sigs_buf\n</methodDescription>\n";
-   }
-
-   $xml = "<?xml version='1.0'?>\n\n<introspection version='1.0'>\n<methodList>$method_desc</methodList></introspection>\n";
-   return $xml;
+    $xml = "<?xml version='1.0'?>\n\n<introspection version='1.0'>\n<methodList>$method_desc</methodList></introspection>\n";
+    return $xml;
 }
 
 /********************************************************************
-* xmlrpc_server class.  Wrappers around the xmlrpc-epi server APIs. *
-********************************************************************/
-class xmlrpc_server {
-   var $dmap = array();
-   var $xmlrpc_server;
+ * xmlrpc_server class.  Wrappers around the xmlrpc-epi server APIs. *
+ ********************************************************************/
+class xmlrpc_server
+{
+    var $dmap = array();
+    var $xmlrpc_server;
 
-   // constructor. creates server and optionally services request.
-   function xmlrpc_server($dispMap, $serviceNow=1) {
-      global $HTTP_RAW_POST_DATA;
-      // dispMap is a despatch array of methods
-      // mapped to function names and signatures
-      // if a method
-      // doesn't appear in the map then an unknown
-      // method error is generated
-      $this->dmap = $dispMap;
+    // constructor. creates server and optionally services request.
+    function xmlrpc_server($dispMap, $serviceNow = 1)
+    {
+        global $HTTP_RAW_POST_DATA;
+        // dispMap is a despatch array of methods
+        // mapped to function names and signatures
+        // if a method
+        // doesn't appear in the map then an unknown
+        // method error is generated
+        $this->dmap = $dispMap;
 
-      // create server.
-      // php has no destructor support currently, so we can't call xmlrpc_server_destroy()
-      // at the end like we should. Fortunately, the C code takes care of this at the
-      // end of the request.  Feels unclean though.
-      $this->xmlrpc_server = xmlrpc_server_create();
+        // create server.
+        // php has no destructor support currently, so we can't call xmlrpc_server_destroy()
+        // at the end like we should. Fortunately, the C code takes care of this at the
+        // end of the request.  Feels unclean though.
+        $this->xmlrpc_server = xmlrpc_server_create();
 
-      // register methods
-      foreach($this->dmap as $name => $method) {
-         xmlrpc_server_register_method($this->xmlrpc_server, $name, "xmlrpc_user_func_wrapper_cb");
-      }
+        // register methods
+        foreach ($this->dmap as $name => $method) {
+            xmlrpc_server_register_method($this->xmlrpc_server, $name, "xmlrpc_user_func_wrapper_cb");
+        }
 
-      // register a callback in case of introspection queries.
-      xmlrpc_server_register_introspection_callback($this->xmlrpc_server, "_introspection_cb");
+        // register a callback in case of introspection queries.
+        xmlrpc_server_register_introspection_callback($this->xmlrpc_server, "_introspection_cb");
 
-      // possibly go to work handling request
-      if ($serviceNow) {
-         $this->service();
-      }
-   }
+        // possibly go to work handling request
+        if ($serviceNow) {
+            $this->service();
+        }
+    }
 
-   // private. not really useful anymore since this is all handled by the xmlrpc-epi stuff.
-   function serializeDebug() {
-      global $_xmlrpc_debuginfo;
-      if ($_xmlrpc_debuginfo!="")
-         return "<!-- DEBUG INFO:\n\n" .
-         $_xmlrpc_debuginfo . "\n-->\n";
-      else
-         return "";
-   }
-   
-   // public. service the xmlrpc request
-   function service() {
-      global $HTTP_RAW_POST_DATA;
-      $data = $HTTP_RAW_POST_DATA;
-      if (is_null($data))
-      	  trigger_error("empty \$HTTP_RAW_POST_DATA", E_USER_WARNING);
+    // private. not really useful anymore since this is all handled by the xmlrpc-epi stuff.
+    function serializeDebug()
+    {
+        global $_xmlrpc_debuginfo;
+        if ($_xmlrpc_debuginfo != "")
+            return "<!-- DEBUG INFO:\n\n" .
+                $_xmlrpc_debuginfo . "\n-->\n";
+        else
+            return "";
+    }
 
-      // call server
-      $payload = xmlrpc_server_call_method($this->xmlrpc_server, $data, $this->dmap, 
-                                           array('output_type' => "xml", 'version' => "xmlrpc"));
-      Header("Content-type: text/xml\nContent-length: " . strlen($payload));
-      echo $payload;
-   }
+    // public. service the xmlrpc request
+    function service()
+    {
+        global $HTTP_RAW_POST_DATA;
+        $data = $HTTP_RAW_POST_DATA;
+        if (is_null($data))
+            trigger_error("empty \$HTTP_RAW_POST_DATA", E_USER_WARNING);
 
-   // private. no equivalent in C library (yet)
-   function verifySignature($in, $sig) {
-      return "verifySignature not supported";
-   }
+        // call server
+        $payload = xmlrpc_server_call_method($this->xmlrpc_server, $data, $this->dmap,
+            array('output_type' => "xml", 'version' => "xmlrpc"));
+        Header("Content-type: text/xml\nContent-length: " . strlen($payload));
+        echo $payload;
+    }
 
-   // public. this used to be called by service(). 
-   // it's no longer necessary, but we keep it around in case 
-   // people are calling it directly from applications.
-   function parseRequest($data="") {
-      global $_xh, $HTTP_RAW_POST_DATA;
+    // private. no equivalent in C library (yet)
+    function verifySignature($in, $sig)
+    {
+        return "verifySignature not supported";
+    }
 
-      global $xmlrpcerr, $xmlrpcstr, $xmlrpcerrxml, $xmlrpc_defencoding;
+    // public. this used to be called by service().
+    // it's no longer necessary, but we keep it around in case
+    // people are calling it directly from applications.
+    function parseRequest($data = "")
+    {
+        global $_xh, $HTTP_RAW_POST_DATA;
 
-      if ($data == "") {
-         $data = $HTTP_RAW_POST_DATA;
-      }
+        global $xmlrpcerr, $xmlrpcstr, $xmlrpcerrxml, $xmlrpc_defencoding;
 
-      // call server
-      $php_val = xmlrpc_server_call_method($this->xmlrpc_server, $data, $this->dmap, 
-                                           array('output_type' => "php", 'version' => "xmlrpc"));
+        if ($data == "") {
+            $data = $HTTP_RAW_POST_DATA;
+        }
 
-      /* check for fault */
-      if (is_array($php_val) && isset($php_val['faultCode'])) {
-         $fc = $php_val['faultCode'];
-         $fs = $php_val['faultString'];
-      } else {
-         $rpc_val = php_to_val($php_val);
-      }
-      $response = new xmlrpcresp($rpc_val, $fc, $fs);
+        // call server
+        $php_val = xmlrpc_server_call_method($this->xmlrpc_server, $data, $this->dmap,
+            array('output_type' => "php", 'version' => "xmlrpc"));
 
-      return $response;
-   }
+        /* check for fault */
+        if (is_array($php_val) && isset($php_val['faultCode'])) {
+            $fc = $php_val['faultCode'];
+            $fs = $php_val['faultString'];
+        } else {
+            $rpc_val = php_to_val($php_val);
+        }
+        $response = new xmlrpcresp($rpc_val, $fc, $fs);
 
-   // public.  test routine.
-   function echoInput() {
-      global $HTTP_RAW_POST_DATA;
+        return $response;
+    }
 
-      // a debugging routine: just echos back the input
-      // packet as a string value
+    // public.  test routine.
+    function echoInput()
+    {
+        global $HTTP_RAW_POST_DATA;
 
-      $r = new xmlrpcresp;
-      $r->xv = new xmlrpcval( "'Aha said I: '" . $HTTP_RAW_POST_DATA, "string");
-      print $r->serialize();
-   }
+        // a debugging routine: just echos back the input
+        // packet as a string value
+
+        $r = new xmlrpcresp;
+        $r->xv = new xmlrpcval("'Aha said I: '" . $HTTP_RAW_POST_DATA, "string");
+        print $r->serialize();
+    }
 }
 
 
 /**********************************************************************
-*  This is the callback function that is called by C engine for *all* *
-*  php methods. This then calls the user callback funcs which require *
-*  xmlrpcmsg for input and return xmlrpcresp.                         *
-*                                                                     *
-*  This function converts between native php types which are          *
-*  sent/expected by C engine, and the objects which are used          *
-*  by user funcs.  kind of ugly/slow, but necessary.                  *
-**********************************************************************/
-function xmlrpc_user_func_wrapper_cb($methodname, $params, $method_map) {
-   global $xmlrpcerr;
-   $user_func = $method_map[$methodname]['function'];
+ *  This is the callback function that is called by C engine for *all* *
+ *  php methods. This then calls the user callback funcs which require *
+ *  xmlrpcmsg for input and return xmlrpcresp.                         *
+ *                                                                     *
+ *  This function converts between native php types which are          *
+ *  sent/expected by C engine, and the objects which are used          *
+ *  by user funcs.  kind of ugly/slow, but necessary.                  *
+ **********************************************************************/
+function xmlrpc_user_func_wrapper_cb($methodname, $params, $method_map)
+{
+    global $xmlrpcerr;
+    $user_func = $method_map[$methodname]['function'];
 
-   if ($user_func) {
-      // create msg from methodname and params.
-      $msg = new xmlrpcmsg($methodname);
-      foreach($params as $param) {
-         $msg->addParam(php_to_val($param));
-      }
-      
-      // call user func.
-      $rpc_resp = $user_func($msg);
+    if ($user_func) {
+        // create msg from methodname and params.
+        $msg = new xmlrpcmsg($methodname);
+        foreach ($params as $param) {
+            $msg->addParam(php_to_val($param));
+        }
 
-      // translate user func response into php values.
-      if (is_object($rpc_resp)) {
-         if ($rpc_resp->faultCode()) {
-            return xu_fault_code($rpc_resp->faultCode(), $rpc_resp->faultString());
-         }
-         return val_to_php($rpc_resp->value());
-      } else {
-         return xu_fault_code( $xmlrpcerr["invalid_return"], $xmlrpcstr["invalid_return"]);
-      }
-   }
-   return xu_fault_code( $xmlrpcerr["unknown_method"], $xmlrpcstr["unknown_method"]);
+        // call user func.
+        $rpc_resp = $user_func($msg);
+
+        // translate user func response into php values.
+        if (is_object($rpc_resp)) {
+            if ($rpc_resp->faultCode()) {
+                return xu_fault_code($rpc_resp->faultCode(), $rpc_resp->faultString());
+            }
+            return val_to_php($rpc_resp->value());
+        } else {
+            return xu_fault_code($xmlrpcerr["invalid_return"], $xmlrpcstr["invalid_return"]);
+        }
+    }
+    return xu_fault_code($xmlrpcerr["unknown_method"], $xmlrpcstr["unknown_method"]);
 }
 
-$_xmlrpc_debuginfo='';
+$_xmlrpc_debuginfo = '';
 function xmlrpc_debugmsg($m)
 {
     global $_xmlrpc_debuginfo;
-    $_xmlrpc_debuginfo=$_xmlrpc_debuginfo . $m . "\n";
+    $_xmlrpc_debuginfo = $_xmlrpc_debuginfo . $m . "\n";
 } 
-?>

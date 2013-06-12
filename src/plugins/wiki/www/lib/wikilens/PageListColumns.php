@@ -1,5 +1,4 @@
-<?php // -*-php-*-
-// $Id: PageListColumns.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
 
 /*
  * Copyright 2004 Mike Cassano
@@ -44,25 +43,28 @@ require_once 'lib/plugin/RateIt.php';
  */
 class _PageList_Column_numbacklinks extends _PageList_Column_custom
 {
-    function _getValue ($page_handle, &$revision_handle) {
+    function _getValue($page_handle, &$revision_handle)
+    {
         $theIter = $page_handle->getBackLinks();
         return $theIter->count();
     }
 
-    function _getSortableValue ($page_handle, &$revision_handle) {
+    function _getSortableValue($page_handle, &$revision_handle)
+    {
         return $this->_getValue($page_handle, $revision_handle);
     }
-};
+}
 
 class _PageList_Column_coagreement extends _PageList_Column_custom
 {
-    function _PageList_Column_coagreement ($params) {
+    function _PageList_Column_coagreement($params)
+    {
         $this->_pagelist =& $params[3];
         $this->_PageList_Column($params[0], $params[1], $params[2]);
         $this->_selectedBuddies = $this->_pagelist->getOption('selectedBuddies');
     }
 
-    function _getValue ($page_handle, &$revision_handle)
+    function _getValue($page_handle, &$revision_handle)
     {
         global $request;
 
@@ -72,11 +74,11 @@ class _PageList_Column_coagreement extends _PageList_Column_custom
         $active_userId = $active_user->getId();
         $dbi = $request->getDbh();
         $p = CoAgreement($dbi, $pagename, $this->_selectedBuddies, $active_userId);
-        if($p == 1){
+        if ($p == 1) {
             $p = "yes";
-        } elseif($p == 0){
+        } elseif ($p == 0) {
             $p = "unsure";
-        } elseif($p == -1){
+        } elseif ($p == -1) {
             $p = "no";
         } else {
             $p = "error";
@@ -88,13 +90,14 @@ class _PageList_Column_coagreement extends _PageList_Column_custom
 
 class _PageList_Column_minmisery extends _PageList_Column_custom
 {
-    function _PageList_Column_minmisery ($params) {
+    function _PageList_Column_minmisery($params)
+    {
         $this->_pagelist =& $params[3];
         $this->_PageList_Column($params[0], $params[1], $params[2]);
         $this->_selectedBuddies = $this->_pagelist->getOption('selectedBuddies');
     }
 
-    function _getValue ($page_handle, &$revision_handle)
+    function _getValue($page_handle, &$revision_handle)
     {
         global $request, $WikiTheme;
 
@@ -104,21 +107,21 @@ class _PageList_Column_minmisery extends _PageList_Column_custom
         $active_userId = $active_user->getId();
         $dbi = $request->getDbh();
         $p = MinMisery($dbi, $pagename, $this->_selectedBuddies, $active_userId);
-           $imgFix = floor($p * 2) / 2;
+        $imgFix = floor($p * 2) / 2;
         return HTML::img(array('src' => $WikiTheme->getImageURL("Rateit" . $imgFix)));
     }
 }
 
 class _PageList_Column_averagerating extends _PageList_Column_custom
 {
-    function _PageList_Column_averagerating ($params)
+    function _PageList_Column_averagerating($params)
     {
         $this->_pagelist =& $params[3];
         $this->_PageList_Column($params[0], $params[1], $params[2]);
         $this->_selectedBuddies = $this->_pagelist->getOption('selectedBuddies');
     }
 
-    function _getValue ($page_handle, &$revision_handle)
+    function _getValue($page_handle, &$revision_handle)
     {
         global $request, $WikiTheme;
 
@@ -135,36 +138,38 @@ class _PageList_Column_averagerating extends _PageList_Column_custom
         $html->pushContent($p);
         return $html;
     }
-};
+}
 
 /**
  * Show the value of a rating as a digit (or "-" if no value), given the
  * user who is the rater.
  * This requires the RatingsUser as 5th paramater.
  */
-class _PageList_Column_ratingvalue extends _PageList_Column {
-    var $_user;
-    var $_dimension;
+class _PageList_Column_ratingvalue extends _PageList_Column
+{
+    public $_user;
+    public $_dimension;
 
-    function _PageList_Column_ratingvalue ($params) {
+    function _PageList_Column_ratingvalue($params)
+    {
         $this->_pagelist =& $params[3];
-        $this->_user =& $params[4];//$this->_pagelist->getOption('user');
+        $this->_user =& $params[4]; //$this->_pagelist->getOption('user');
+        if (empty($this->_user))
+            $this->_user =& RatingsUserFactory::getUser($GLOBALS['request']->_user->_userid);
         $this->_PageList_Column($params[0], $params[1], $params[2]);
-        $this->_dimension   = $this->_pagelist->getOption('dimension');
+        $this->_dimension = $this->_pagelist->getOption('dimension');
         if (!$this->_dimension) $this->_dimension = 0;
     }
 
-    function format ($pagelist, $page_handle, &$revision_handle)
+    function format($pagelist, $page_handle, &$revision_handle)
     {
-        if (empty($this->_user))
-            $this->_user =& RatingsUserFactory::getUser($GLOBALS['request']->_user->_userid);
         assert(!empty($this->_user));
         $rating = $this->_getValue($page_handle, $revision_handle);
         $mean = $this->_user->mean_rating($this->_dimension);
         $td = HTML::td($this->_tdattr);
 
         $div = HTML::div();
-        if($rating != '-' && abs($rating - $mean) >= 0.75)
+        if ($rating != '-' && abs($rating - $mean) >= 0.75)
             $div->setAttr('style', 'color: #' . ($rating > $mean ? '009900' : 'ff3333'));
         $div->pushContent($rating);
 
@@ -173,7 +178,7 @@ class _PageList_Column_ratingvalue extends _PageList_Column {
         return $td;
     }
 
-    function _getValue ($page_handle, &$revision_handle)
+    function _getValue($page_handle, &$revision_handle)
     {
         $pagename = $page_handle->getName();
 
@@ -200,10 +205,11 @@ class _PageList_Column_ratingvalue extends _PageList_Column {
 
     }
 
-    function _getSortableValue ($page_handle, &$revision_handle) {
+    function _getSortableValue($page_handle, &$revision_handle)
+    {
         return $this->_getValue($page_handle, $revision_handle);
     }
-};
+}
 
 /**
  * Ratings widget for the logged-in user and the given page
@@ -211,45 +217,44 @@ class _PageList_Column_ratingvalue extends _PageList_Column {
  */
 class _PageList_Column_ratingwidget extends _PageList_Column_custom
 {
-    function _PageList_Column_ratingwidget ($params) {
+    function _PageList_Column_ratingwidget($params)
+    {
         $this->_pagelist =& $params[3];
         $this->_PageList_Column($params[0], $params[1], $params[2]);
         $this->_dimension = $this->_pagelist->getOption('dimension');
         if (!$this->_dimension) $this->_dimension = 0;
     }
 
-    function format ($pagelist, $page_handle, &$revision_handle) {
+    function format($pagelist, $page_handle, &$revision_handle)
+    {
         $plugin = new WikiPlugin_RateIt();
         $widget = $plugin->RatingWidgetHtml($page_handle->getName(), "",
-                                            "Star", $this->_dimension, "small");
+            "BStar", $this->_dimension, "small");
         $td = HTML::td($widget);
         $td->setAttr('nowrap', 'nowrap');
         return $td;
     }
 
-    function _getValue ($page_handle, &$revision_handle)
+    function _getValue($page_handle, &$revision_handle)
     {
-        global $request;
-
+        // Returns average rating of a page
         $pagename = $page_handle->getName();
-        $active_user   = $request->getUser();
-        $active_userid = $active_user->_userid;
-
-        $tu = & RatingsUserFactory::getUser($active_userid);
-        return $tu->get_rating($pagename, $this->_dimension);
+        $rdbi = RatingsDb::getTheRatingsDb();
+        return $rdbi->getAvg($pagename, $this->_dimension);
     }
 
-    function _getSortableValue ($page_handle, &$revision_handle) {
+    function _getSortableValue($page_handle, &$revision_handle)
+    {
         return $this->_getValue($page_handle, $revision_handle);
     }
-};
+}
 
 class _PageList_Column_prediction extends _PageList_Column
 {
-    var $_active_ratings_user;
-    var $_users;
+    public $_active_ratings_user;
+    public $_users;
 
-    function _PageList_Column_prediction ($params)
+    function _PageList_Column_prediction($params)
     {
         global $request;
         $active_user = $request->getUser();
@@ -258,18 +263,20 @@ class _PageList_Column_prediction extends _PageList_Column
 
         $this->_pagelist =& $params[3];
         $this->_PageList_Column($params[0], $params[1], $params[2]);
-        $this->_dimension = $this->_pagelist->getOption('dimension');;
+        $this->_dimension = $this->_pagelist->getOption('dimension');
+        ;
         if (!$this->_dimension) $this->_dimension = 0;
         $this->_users = $this->_pagelist->getOption('users');
     }
 
-    function format ($pagelist, $page_handle, &$revision_handle) {
+    function format($pagelist, $page_handle, &$revision_handle)
+    {
         $pred = $this->_getValue($page_handle, $revision_handle);
         $mean = $this->_active_ratings_user->mean_rating($this->_dimension);
         $td = HTML::td($this->_tdattr);
 
         $div = HTML::div();
-        if($pred > 0 && abs($pred - $mean) >= 0.75)
+        if ($pred > 0 && abs($pred - $mean) >= 0.75)
             $div->setAttr('style', 'color: #' . ($pred > $mean ? '009900' : 'ff3333'));
         $div->pushContent($pred);
 
@@ -278,7 +285,7 @@ class _PageList_Column_prediction extends _PageList_Column
         return $td;
     }
 
-    function _getValue ($page_handle, &$revision_handle)
+    function _getValue($page_handle, &$revision_handle)
     {
         $pagename = $page_handle->getName();
 
@@ -287,24 +294,26 @@ class _PageList_Column_prediction extends _PageList_Column
         return sprintf("%.1f", min(5, max(0, $pred)));
     }
 
-    function _getSortableValue ($page_handle, &$revision_handle) {
+    function _getSortableValue($page_handle, &$revision_handle)
+    {
         return $this->_getValue($page_handle, $revision_handle);
     }
-};
+}
 
 class _PageList_Column_top3recs extends _PageList_Column_custom
 {
 
-    var $_active_ratings_user;
-    var $_users;
+    public $_active_ratings_user;
+    public $_users;
 
-    function _PageList_Column_top3recs ($params) {
+    function _PageList_Column_top3recs($params)
+    {
         global $request;
         $active_user = $request->getUser();
         if (is_string($active_user)) {
-        //FIXME: try to find the bug at test.php which sets request->_user and ->_group
-        trigger_error("request->getUser => string: $active_user", E_USER_WARNING);
-        $active_user = new MockUser($active_user,true);
+            //FIXME: try to find the bug at test.php which sets request->_user and ->_group
+            trigger_error("request->getUser => string: $active_user", E_USER_WARNING);
+            $active_user = new MockUser($active_user, true);
         }
         // No, I don't know exactly why, but this needs to be a reference for
         // the memoization in pearson_similarity and mean_rating to work
@@ -319,79 +328,78 @@ class _PageList_Column_top3recs extends _PageList_Column_custom
         }
     }
 
-    function _getValue ($page_handle, &$revision_handle)
+    function _getValue($page_handle, &$revision_handle)
     {
         $ratings = $this->_active_ratings_user->get_ratings();
         $iter = $page_handle->getLinks();
         $recs = array();
-        while($current = $iter->next()) {
+        while ($current = $iter->next()) {
             //filter out already rated
             if (!$this->_active_ratings_user->get_rating($current->getName(), $this->_dimension)) {
                 $recs[$current->getName()] =
                     $this->_active_ratings_user->knn_uu_predict($current->getName(),
-                                                                $this->_users, $this->_dimension);
+                        $this->_users, $this->_dimension);
             }
         }
         arsort($recs);
         $counter = 0;
-        if (count($recs) >= 3){
+        if (count($recs) >= 3) {
             $numToShow = 3;
-        }
-        else {
+        } else {
             // if <3 just show as many as there are
             $numToShow = count($recs);
         }
         $html = HTML();
         while ((list($key, $val) = each($recs)) && $counter < $numToShow) {
-            if ($val < 3){
+            if ($val < 3) {
                 break;
             }
-            if ($counter > 0){
+            if ($counter > 0) {
                 $html->pushContent(" , ");
             }
             $html->pushContent(WikiLink($key));
 
             $counter++;
         }
-        if (count($recs) == 0 || $counter == 0){
+        if (count($recs) == 0 || $counter == 0) {
             $html->pushContent(_("None"));
         }
 
         //return $top3list;
         return $html;
     }
-};
+}
 
 // register custom PageList type
 global $WikiTheme;
 $WikiTheme->addPageListColumn
-  (array
-   (
+(array
+(
     'numbacklinks'
-      => array('_PageList_Column_numbacklinks','custom:numbacklinks',
-           _("# things"), 'center'),
+    => array('_PageList_Column_numbacklinks', 'custom:numbacklinks',
+        _("# things"), 'center'),
     'rating'
-      => array('_PageList_Column_ratingwidget','custom:rating',
-           _("Rate"), false),
+    => array('_PageList_Column_ratingwidget', 'custom:rating',
+        _("Rate"), false),
     'ratingvalue'
-      => array('_PageList_Column_ratingvalue','custom:ratingvalue',
-           _("Rating"), 'center'),
+    => array('_PageList_Column_ratingvalue', 'custom:ratingvalue',
+        _("Rating"), 'center'),
     'coagreement'
-      => array('_PageList_Column_coagreement','custom:coagreement',
-           _("Go?"), 'center'),
+    => array('_PageList_Column_coagreement', 'custom:coagreement',
+        _("Go?"), 'center'),
     'minmisery'
-      => array('_PageList_Column_minmisery','custom:minmisery',
-           _("MinMisery"), 'center'),
+    => array('_PageList_Column_minmisery', 'custom:minmisery',
+        _("MinMisery"), 'center'),
     'averagerating'
-      => array('_PageList_Column_averagerating','custom:averagerating',
-           _("Avg. Rating"), 'left'),
+    => array('_PageList_Column_averagerating', 'custom:averagerating',
+        _("Avg. Rating"), 'left'),
     'top3recs'
-      => array('_PageList_Column_top3recs','custom:top3recs',
-           _("Top Recommendations"), 'left'),
+    => array('_PageList_Column_top3recs', 'custom:top3recs',
+        _("Top Recommendations"), 'left'),
     /*'prediction'
       => array('_PageList_Column_prediction','custom:prediction',
                 _("Prediction"), false),*/
-    ));
+));
 
 // Local Variables:
 // mode: php

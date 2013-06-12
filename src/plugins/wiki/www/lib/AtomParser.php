@@ -1,5 +1,4 @@
-<?php // -*-php-*-
-// $Id: AtomParser.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
 /*
  * Copyright 2010 Sébastien Le Callonnec
  *
@@ -29,46 +28,47 @@
 require_once 'lib/XmlParser.php';
 
 class AtomParser
-extends XmlParser
+    extends XmlParser
 {
     // Feed
-    var $feed = array();
-    var $feed_title = '';
-    var $feed_links = array();
-    var $feed_subtitle = '';
-    var $feed_id = '';
-    var $feed_updated = '';
-    var $feed_authors = array();
-    var $feed_contributors = array();
-    var $generator = '';
-    var $icon = '';
-    var $rights = '';
-    var $logo = '';
+    public $feed = array();
+    public $feed_title = '';
+    public $feed_links = array();
+    public $feed_subtitle = '';
+    public $feed_id = '';
+    public $feed_updated = '';
+    public $feed_authors = array();
+    public $feed_contributors = array();
+    public $generator = '';
+    public $icon = '';
+    public $rights = '';
+    public $logo = '';
 
-    var $categories = array();
+    public $categories = array();
 
-    var $authors = array();
-    var $contributors = array();
+    public $authors = array();
+    public $contributors = array();
 
     // Author, Contributor
-    var $name = '';
-    var $email = '';
-    var $uri = '';
+    public $name = '';
+    public $email = '';
+    public $uri = '';
 
     // Entries
-    var $entries = array();
-    var $inside_entry = false;
-    var $title = '';
-    var $updated = '';
-    var $published = '';
-    var $id = '';
-    var $links = array();
-    var $summary = '';
+    public $entries = array();
+    public $inside_entry = false;
+    public $title = '';
+    public $updated = '';
+    public $published = '';
+    public $id = '';
+    public $links = array();
+    public $summary = '';
 
-    var $inside_content = false;
-    var $content = '';
+    public $inside_content = false;
+    public $content = '';
 
-    function tag_open($parser, $name, $attrs='') {
+    function tag_open($parser, $name, $attrs = '')
+    {
         global $current_tag, $current_attrs;
 
         $current_tag = $name;
@@ -83,7 +83,8 @@ extends XmlParser
         }
     }
 
-    function tag_close($parser, $name, $attrs='') {
+    function tag_close($parser, $name, $attrs = '')
+    {
         if ($name == "AUTHOR") {
             $an_author = $this->trim_data(array(
                 "name" => $this->name,
@@ -163,7 +164,8 @@ extends XmlParser
         }
     }
 
-    function cdata($parser, $data) {
+    function cdata($parser, $data)
+    {
         global $current_tag, $current_attrs;
 
         if ($this->inside_content) {
@@ -233,11 +235,13 @@ extends XmlParser
         }
     }
 
-    function trim_data($array) {
+    function trim_data($array)
+    {
         return array_map(array("self", "trim_element"), $array);
     }
 
-    function trim_element($element) {
+    function trim_element($element)
+    {
         if (is_array($element)) {
             return $this->trim_data($element);
         } elseif (is_string($element)) {
@@ -245,10 +249,11 @@ extends XmlParser
         }
     }
 
-    function serialize_tag($tag_name, $attributes) {
+    function serialize_tag($tag_name, $attributes)
+    {
         $tag = "<" . $tag_name;
         foreach ($attributes as $k => $v) {
-            $tag .= " " . strtolower($k). "=\"$v\"";
+            $tag .= " " . strtolower($k) . "=\"$v\"";
         }
         $tag .= ">";
         return $tag;

@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: WantedPages.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright (C) 2002, 2004 $ThePhpWikiProgrammingTeam
  *
@@ -33,30 +33,31 @@
 include_once 'lib/PageList.php';
 
 class WikiPlugin_WantedPages
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return _("WantedPages");
+    function getDescription()
+    {
+        return _("List referenced page names which do not exist yet.");
     }
-    function getDescription () {
-        return _("Lists referenced page names which do not exist yet.");
-    }
-    function getDefaultArguments() {
+
+    function getDefaultArguments()
+    {
         return array_merge
-            (
-             PageList::supportedArgs(),
-             array('page'     => '[pagename]', // just for a single page.
-                   'withlinks' => 0,
-                   'noheader' => false,
-                   'exclude_from'  => _("PgsrcTranslation").','._("InterWikiMap"),
-                   'limit'    => '100',
-                   'paging'   => 'auto'));
+        (
+            PageList::supportedArgs(),
+            array('page' => '[pagename]', // just for a single page.
+                'withlinks' => 0,
+                'noheader' => false,
+                'exclude_from' => __("PgsrcTranslation") . ',' . __("InterWikiMap"),
+                'limit' => '100',
+                'paging' => 'auto'));
     }
 
     // info arg allows multiple columns
     // info=mtime,hits,summary,version,author,locked,minor,markup or all
     // exclude arg allows multiple pagenames exclude=HomePage,RecentChanges
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $this->getArgs($argstr, $request);
         if (!empty($args['exclude_from']))
             $args['exclude_from'] = is_string($args['exclude_from'])
@@ -90,15 +91,15 @@ extends WikiPlugin
             list($offset, $maxcount) = $pagelist->limit($limit);
             $wanted_iter = $dbi->wantedPages($exclude_from, $exclude, $sortby, $limit);
             while ($row = $wanted_iter->next()) {
-                    $wantedfrom = $row['pagename'];
-                    $wanted = $row['wantedfrom'];
-                    // ignore duplicates:
-                    if (empty($pagelist->_wpagelist[$wanted]))
-                        $pagelist->addPage($wanted);
-                    if (!isset($pagelist->_wpagelist[$wanted]))
-                        $pagelist->_wpagelist[$wanted][] = $wantedfrom;
-                    elseif (!in_array($wantedfrom, $pagelist->_wpagelist[$wanted]))
-                        $pagelist->_wpagelist[$wanted][] = $wantedfrom;
+                $wantedfrom = $row['pagename'];
+                $wanted = $row['wantedfrom'];
+                // ignore duplicates:
+                if (empty($pagelist->_wpagelist[$wanted]))
+                    $pagelist->addPage($wanted);
+                if (!isset($pagelist->_wpagelist[$wanted]))
+                    $pagelist->_wpagelist[$wanted][] = $wantedfrom;
+                elseif (!in_array($wantedfrom, $pagelist->_wpagelist[$wanted]))
+                    $pagelist->_wpagelist[$wanted][] = $wantedfrom;
             }
             $wanted_iter->free();
             unset($wanted_iter);
@@ -110,7 +111,7 @@ extends WikiPlugin
             $links = $page_handle->getPageLinks(true); // include_empty
             while ($link_handle = $links->next()) {
                 $linkname = $link_handle->getName();
-                if (! $dbi->isWikiPage($linkname)) {
+                if (!$dbi->isWikiPage($linkname)) {
                     $pagelist->addPage($linkname);
                     //if (!array_key_exists($linkname, $this->_wpagelist))
                     $pagelist->_wpagelist[$linkname][] = 1;
@@ -123,27 +124,33 @@ extends WikiPlugin
             arsort($this->_wpagelist);
         }*/
         if (!$noheader) {
-            if ($page)
+            if ($page) {
                 $pagelist->setCaption(sprintf(_("Wanted Pages for %s:"), $page));
-            else
-                $pagelist->setCaption(sprintf(_("Wanted Pages in this wiki:")));
+            } else {
+                $pagelist->setCaption(_("Wanted Pages in this wiki:"));
+            }
         }
         // reference obviously doesn't work, so force an update to add _wpagelist to parentobj
         if (isset($pagelist->_columns[1])
-            and in_array($pagelist->_columns[1]->_field, array('wanted','links')))
+            and in_array($pagelist->_columns[1]->_field, array('wanted', 'links'))
+        )
             $pagelist->_columns[1]->parentobj =& $pagelist;
         return $pagelist;
     }
-};
+}
 
 // which links to the missing page
-class _PageList_Column_WantedPages_wanted extends _PageList_Column {
-    function _PageList_Column_WantedPages_wanted (&$params) {
+class _PageList_Column_WantedPages_wanted extends _PageList_Column
+{
+    function _PageList_Column_WantedPages_wanted(&$params)
+    {
         $this->parentobj =& $params[3];
-        $this->_PageList_Column($params[0],$params[1],$params[2]);
+        $this->_PageList_Column($params[0], $params[1], $params[2]);
     }
-    function _getValue(&$page, $revision_handle) {
-            $html = false;
+
+    function _getValue(&$page, $revision_handle)
+    {
+        $html = false;
         $pagename = $page->getName();
         foreach ($this->parentobj->_wpagelist[$pagename] as $page) {
             if ($html)
@@ -158,17 +165,20 @@ class _PageList_Column_WantedPages_wanted extends _PageList_Column {
 /*
  * List of Links and link to ListLinks
  */
-class _PageList_Column_WantedPages_links extends _PageList_Column {
-    function _PageList_Column_WantedPages_links (&$params) {
+class _PageList_Column_WantedPages_links extends _PageList_Column
+{
+    function _PageList_Column_WantedPages_links(&$params)
+    {
         $this->parentobj =& $params[3];
-        $this->_PageList_Column($params[0],$params[1],$params[2]);
+        $this->_PageList_Column($params[0], $params[1], $params[2]);
     }
-    function _getValue(&$page, $revision_handle) {
-            $html = false;
+
+    function _getValue(&$page, $revision_handle)
+    {
         $pagename = $page->getName();
         $count = count($this->parentobj->_wpagelist[$pagename]);
         return LinkURL(WikiURL($page, array('action' => 'BackLinks'), false),
-                        fmt("(%d Links)", $count));
+            fmt("(%d Links)", $count));
     }
 }
 

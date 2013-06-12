@@ -1,9 +1,6 @@
-<?php // -*-php-*-
-// $Id: navbar.tmpl 7956 2011-03-03 17:08:31Z vargenau $
-?>
 <!-- The top navigation/search bar -->
 <form action="<?php echo WikiURL(_("TitleSearch"))?>"
-      method="get" accept-charset="<?php echo $charset?>" id="searchform">
+      method="get" accept-charset="UTF-8" id="searchform">
 <input type="hidden" name="auto_redirect" value="1" />
 <?php if (! USE_PATH_INFO) { ?>
   <input type="hidden" name="pagename" value="<?php echo _("TitleSearch")?>" />

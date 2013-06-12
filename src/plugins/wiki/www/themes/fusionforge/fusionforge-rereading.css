@@ -1,6 +1,4 @@
 /**
- * $Id: fusionforge-rereading.css 8071 2011-05-18 14:56:14Z vargenau $
- *
  * Copyright (C) 2008 Alcatel-Lucent
  *
  * This file is part of PhpWiki.
@@ -45,8 +43,9 @@
 @import url(fusionforge-autonumbering.css);
 
 #content {
-    counter-reset: paragraph;    /* Create a paragraph counter scope */
+    counter-reset: paragraph; /* Create a paragraph counter scope */
 }
+
 div.wikitext p:before {
     content: "{" counter(paragraph) "} ";
     counter-increment: paragraph;

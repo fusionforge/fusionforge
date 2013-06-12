@@ -1,6 +1,5 @@
-Date: Fri, 10 Sep 2010 13:46:13 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FCalendarPlugin 7682 2010-09-10 12:03:36Z vargenau $
+Date: Fri,  7 Dec 2012 15:16:29 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FCalendarPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -101,8 +100,8 @@ Often used together like this:
 == Authors ==
 
 This feature was inspired by [[http://manila.userland.com/|Calendar]],
-and first implemented by [[PhpWiki:GaryBenson|Gary Benson]]. It was later implemented as a
-[[Help:WikiPlugin|plugin]] by [[PhpWiki:JeffDairiki|Jeff Dairiki]].
+and first implemented by Gary Benson. It was later implemented as a
+[[Help:WikiPlugin|plugin]] by [[Help:Jeff Dairiki|Jeff Dairiki]].
 
 <noinclude>
 ----

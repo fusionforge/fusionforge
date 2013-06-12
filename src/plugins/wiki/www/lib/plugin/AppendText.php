@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: AppendText.php 8162 2011-10-03 12:52:28Z vargenau $
+<?php
+
 /*
  * Copyright 2004,2007 $ThePhpWikiProgrammingTeam
  *
@@ -31,55 +31,56 @@
  * Todo: multiple pages. e.g. AppendText s=~[CategoryINtime~] page=<!plugin TitleSearch intime !>
  */
 class WikiPlugin_AppendText
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName() {
-        return _("AppendText");
-    }
-
-    function getDescription() {
+    function getDescription()
+    {
         return _("Append text to any page in this wiki.");
     }
 
-    function getDefaultArguments() {
-        return array('page'     => '[pagename]',
-                     'pages'    => false,
-                     's'        => '',  // Text to append.
-                     'before'   => '',  // Add before (ignores after if defined)
-                     'after'    => '',  // Add after line beginning with this
-                     'redirect' => false // Redirect to modified page
-                     );
+    function getDefaultArguments()
+    {
+        return array('page' => '[pagename]',
+            'pages' => false,
+            's' => '', // Text to append.
+            'before' => '', // Add before (ignores after if defined)
+            'after' => '', // Add after line beginning with this
+            'redirect' => false // Redirect to modified page
+        );
     }
 
-    function _fallback($addtext, $oldtext, $notfound, &$message) {
-        $message->pushContent(sprintf(_("%s not found"), $notfound).". ".
-                              _("Appending at the end.")."\n");
+    private function fallback($addtext, $oldtext, $notfound, &$message)
+    {
+        $message->pushContent(sprintf(_("%s not found"), $notfound) . ". " .
+            _("Appending at the end.") . "\n");
         return $oldtext . "\n" . $addtext;
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
 
         $args = $this->getArgs($argstr, $request);
         if (!$args['pages'] or !$request->isPost()) {
-            return $this->_work($args['page'], $args, $dbi, $request);
+            return $this->work($args['page'], $args, $dbi, $request);
         } else {
             $html = HTML();
             if ($args['page'] != $basepage)
-                $html->pushContent("pages argument overrides page argument. ignored.",HTML::br());
+                $html->pushContent("pages argument overrides page argument. ignored.", HTML::br());
             foreach ($args['pages'] as $pagename) {
-                $html->pushContent($this->_work($pagename, $args, $dbi, $request));
+                $html->pushContent($this->work($pagename, $args, $dbi, $request));
             }
             return $html;
         }
     }
 
-    function _work($pagename, $args, $dbi, &$request) {
+    private function work($pagename, $args, $dbi, &$request)
+    {
         if (empty($args['s'])) {
             if ($request->isPost()) {
                 if ($pagename != _("AppendText"))
                     return HTML($request->redirect(WikiURL($pagename, false, 'absurl'), false));
             }
-            return '';
+            return HTML();
         }
 
         $page = $dbi->getPage($pagename);
@@ -87,7 +88,7 @@ extends WikiPlugin
 
         if (!$page->exists()) { // We might want to create it?
             $message->pushContent(sprintf(_("Page could not be updated. %s doesn't exist!"),
-                                            $pagename));
+                $pagename));
             return $message;
         }
 
@@ -101,17 +102,17 @@ extends WikiPlugin
             // Insert before
             $newtext = preg_match("/\n${before}/", $oldtext)
                 ? preg_replace("/(\n${before})/",
-                               "\n" .  preg_quote($text, "/") . "\\1",
-                               $oldtext)
-                : $this->_fallback($text, $oldtext, $args['before'], $message);
+                    "\n" . preg_quote($text, "/") . "\\1",
+                    $oldtext)
+                : $this->fallback($text, $oldtext, $args['before'], $message);
         } elseif (!empty($args['after'])) {
             // Insert after
             $after = preg_quote($args['after'], "/");
             $newtext = preg_match("/\n${after}/", $oldtext)
                 ? preg_replace("/(\n${after})/",
-                               "\\1\n" .  preg_quote($text, "/"),
-                               $oldtext)
-                : $this->_fallback($text, $oldtext, $args['after'], $message);
+                    "\\1\n" . preg_quote($text, "/"),
+                    $oldtext)
+                : $this->fallback($text, $oldtext, $args['after'], $message);
         } else {
             // Append at the end
             $newtext = $oldtext .
@@ -123,29 +124,29 @@ extends WikiPlugin
         $meta['summary'] = sprintf(_("AppendText to %s"), $pagename);
         if ($page->save($newtext, $current->getVersion() + 1, $meta)) {
             $message->pushContent(HTML::p(array('class' => 'feedback'),
-                                          _("Page successfully updated.")));
+                _("Page successfully updated.")));
         }
 
         // AppendText has been called from the same page that got modified
         // so we directly show the page.
-        if ( $request->getArg($pagename) == $pagename ) {
+        if ($request->getArg($pagename) == $pagename) {
             // TODO: Just invalidate the cache, if AppendText didn't
             // change anything before.
             //
             return $request->redirect(WikiURL($pagename, false, 'absurl'), false);
 
-        // The user asked to be redirected to the modified page
+            // The user asked to be redirected to the modified page
         } elseif ($args['redirect']) {
             return $request->redirect(WikiURL($pagename, false, 'absurl'), false);
 
         } else {
             $link = HTML::em(WikiLink($pagename));
-            $message->pushContent(HTML::Raw(sprintf(_("Go to %s."), $link->asXml())));
+            $message->pushContent(HTML::raw(sprintf(_("Go to %s."), $link->asXml())));
         }
 
         return $message;
     }
-};
+}
 
 // Local Variables:
 // mode: php

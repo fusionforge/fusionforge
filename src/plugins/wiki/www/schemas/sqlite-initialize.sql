@@ -1,7 +1,5 @@
 -- http://www.hezmatt.org/~mpalmer/sqlite-phpwiki/sqlite.sql
 
--- $Id: sqlite-initialize.sql 6203 2008-08-26 13:23:56Z vargenau $
-
 CREATE TABLE page (
 	id              INTEGER PRIMARY KEY,
 	pagename        VARCHAR(100) NOT NULL,

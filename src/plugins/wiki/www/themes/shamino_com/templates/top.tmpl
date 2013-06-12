@@ -1,6 +1,3 @@
-<?php // -*-php-*-
-// $Id: top.tmpl 7956 2011-03-03 17:08:31Z vargenau $
-?>
 <!-- The logo -->
 <div id="logo"><a class="wikilink" 
     href="<?php echo WikiURL(HOME_PAGE)?>"
@@ -16,7 +13,7 @@
 <?php echo $HEADER ?>
 <?php if (empty($GLOBALS['HIDE_TOOLBARS'])) { ?>
  - <form action="<?php echo WikiURL(_("TitleSearch"))?>"
-      method="get" accept-charset="<?php echo $charset?>" style="display: inline">
+      method="get" accept-charset="UTF-8" style="display: inline">
    <a class="wikilink" href="<?php echo WikiURL(_("RecentChanges"))?>"><?php echo _("RecentChanges")?></a>
    - <a class="wikilink" href="<?php echo WikiURL(_("FindPage"))?>"><?php echo _("FindPage")?>:</a>
    <input type="hidden" name="auto_redirect" value="1" />

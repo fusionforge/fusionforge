@@ -1,6 +1,5 @@
-Date: Thu,  9 Dec 2010 14:51:45 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FTextFormattingRules 7757 2010-12-09 13:53:00Z vargenau $
+Date: Tue,  2 Apr 2013 15:43:51 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FTextFormattingRules;
   flags=PAGE_LOCKED;
@@ -148,16 +147,6 @@ The tilde '~~' is the //Escape Character//:
 
 All special non-whitespace HTML characters are displayed as-is. Exceptions below.
 
-Special non-ASCII or non-latin characters are printed as-is only if supported
-by the native wiki CHARSET. Add such characters on a non-supported CHARSET with the [[Help:RawHtmlPlugin]] if it is enabled by the Admin and e.g. the ##&#num;## syntax.
-
-E.g. These Japanese chars '&#12363;&#12425; &#26032;&#35215;&#12506;&#12540;&#12472;'
-on this <<SystemInfo CHARSET>> wiki.
-
-And with the plugin: <<RawHtml &#12363;&#12425; &#26032;&#35215;&#12506;&#12540;&#12472;>>
-
-And this is how it should look: [[http://phpwiki.sourceforge.net/demo/images/chars-releasenotes-japanese.png]]
-
 == Paragraphs ==
 
 * Don't indent paragraphs
@@ -279,7 +268,7 @@ renders as
   with "##~http:##", "##~ftp:##" or "##~mailto:##" to
   create links automatically as in: http://c2.com/
 * URLs ending with ##.png##, ##.gif##, or ##.jpg## are inlined if in square brackets, by themselves:
-  [[http://phpwiki.sourceforge.net/demo/themes/default/images/png.png]]
+  [[http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/png.png]]
 * In-page #[[hyperlinks]] are made by placing a named anchor and referring to the anchor in a hyperlink:
 ** Named anchors:
 *** ##~#~[~[foo]]##: An anchor around the text "foo" with id "foo".

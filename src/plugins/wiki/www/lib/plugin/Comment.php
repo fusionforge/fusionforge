@@ -1,5 +1,4 @@
-<?php // -*-php-*-
-// $Id: Comment.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
 
 /*
  * Copyright (C) 2003 Martin Geisler
@@ -37,25 +36,24 @@
  */
 
 class WikiPlugin_Comment
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName() {
-        return _("Comment");
-    }
-
-    function getDescription() {
+    function getDescription()
+    {
         return _("Embed hidden comments in WikiPages.");
     }
 
     // No arguments here.
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array();
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         return HTML::raw('');
     }
-};
+}
 
 // Local Variables:
 // mode: php

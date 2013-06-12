@@ -1,4 +1,3 @@
-
 Using PhpWiki 1.3 with Mac OS X / Darwin
 
 PhpWiki works quite well and retains almost complete functionality
@@ -356,5 +355,3 @@ If you have problems after all of this, try contacting the
 phpwiki-talk list at phpwiki-talk@lists.sourceforge.net.
 
 Carsten Klapp <carstenklapp@users.sourceforge.net>
-
-$Id: INSTALL.MacOSX 6202 2008-08-26 13:14:32Z vargenau $

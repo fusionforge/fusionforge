@@ -1,5 +1,4 @@
-<?php // -*-php-*-
-// $Id: file.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
 
 /**
  * Copyright 1999, 2000, 2001, 2002, 2003 $ThePhpWikiProgrammingTeam
@@ -45,33 +44,33 @@ require_once 'lib/WikiDB/backend.php';
 require_once 'lib/ErrorManager.php';
 
 class WikiDB_backend_file
-extends WikiDB_backend
+    extends WikiDB_backend
 {
-    var $data_dir;
-    var $_dir_names;
+    public $data_dir;
+    public $_dir_names;
 
-    var $_page_data;          // temporarily stores the pagedata (via _loadPageData)
-    var $_page_version_data;  // temporarily stores the versiondata (via _loadVersionData)
-    var $_latest_versions;    // temporarily stores the latest version-numbers (for every pagename)
+    public $_page_data; // temporarily stores the pagedata (via _loadPageData)
+    public $_page_version_data; // temporarily stores the versiondata (via _loadVersionData)
+    public $_latest_versions; // temporarily stores the latest version-numbers (for every pagename)
 
-    function WikiDB_backend_file( $dbparam )
+    function WikiDB_backend_file($dbparam)
     {
         $this->data_dir = $dbparam['directory'];
         if (file_exists($this->data_dir) and is_file($this->data_dir))
-        	unlink($this->data_dir);
+            unlink($this->data_dir);
         if (is_dir($this->data_dir) == false) {
             mkdir($this->data_dir, 0755);
         }
 
         $this->_dir_names
-            = array('ver_data'     => $this->data_dir.'/'.'ver_data',
-                    'page_data'    => $this->data_dir.'/'.'page_data',
-                    'latest_ver'   => $this->data_dir.'/'.'latest_ver',
-                    'links'        => $this->data_dir.'/'.'links' );
+            = array('ver_data' => $this->data_dir . '/' . 'ver_data',
+            'page_data' => $this->data_dir . '/' . 'page_data',
+            'latest_ver' => $this->data_dir . '/' . 'latest_ver',
+            'links' => $this->data_dir . '/' . 'links');
 
         foreach ($this->_dir_names as $key => $val) {
-        	if (file_exists($val) and is_file($val))
-        	    unlink($val);
+            if (file_exists($val) and is_file($val))
+                unlink($val);
             if (is_dir($val) == false)
                 mkdir($val, 0755);
         }
@@ -80,95 +79,102 @@ extends WikiDB_backend
         $this->_page_version_data = NULL;
         $this->_latest_versions = NULL;
 
-
     }
 
     // *********************************************************************
     // common file load / save functions:
-    function _pagename2filename($type, $pagename, $version) {
-         if ($version == 0)
-             return $this->_dir_names[$type].'/'.urlencode($pagename);
-         else
-             return $this->_dir_names[$type].'/'.urlencode($pagename).'--'.$version;
+    function _pagename2filename($type, $pagename, $version)
+    {
+        if ($version == 0)
+            return $this->_dir_names[$type] . '/' . urlencode($pagename);
+        else
+            return $this->_dir_names[$type] . '/' . urlencode($pagename) . '--' . $version;
     }
 
-    function _loadPage($type, $pagename, $version, $set_pagename = true) {
-      $filename = $this->_pagename2filename($type, $pagename, $version);
-      if (!file_exists($filename)) return NULL;
-      if (!filesize($filename)) return array();
-      if ($fd = @fopen($filename, "rb")) {
-         $locked = flock($fd, 1); # Read lock
-         if (!$locked) {
-            ExitWiki("Timeout while obtaining lock. Please try again");
-         }
-         if ($data = fread($fd, filesize($filename))) {
-            $pd = unserialize($data);
-            if ($set_pagename == true)
-                $pd['pagename'] = $pagename;
-            if ($version != 0)
-                $pd['version'] = $version;
-	    if (!is_array($pd))
-		ExitWiki(sprintf(gettext("'%s': corrupt file"),
-				 htmlspecialchars($filename)));
-            else
-              return $pd;
-	 }
-	 fclose($fd);
-      }
-      return NULL;
-    }
-
-    function _savePage($type, $pagename, $version, $data) {
+    function _loadPage($type, $pagename, $version, $set_pagename = true)
+    {
         $filename = $this->_pagename2filename($type, $pagename, $version);
-        if($fd = fopen($filename, 'a+b')) {
-            $locked = flock($fd,2); // Exclusive blocking lock
-           if (!$locked) {
-              ExitWiki("Timeout while obtaining lock. Please try again");
-           }
+        if (!file_exists($filename)) return NULL;
+        if (!filesize($filename)) return array();
+        if ($fd = @fopen($filename, "rb")) {
+            $locked = flock($fd, 1); # Read lock
+            if (!$locked) {
+                ExitWiki("Timeout while obtaining lock. Please try again");
+            }
+            if ($data = fread($fd, filesize($filename))) {
+                $pd = unserialize($data);
+                if ($set_pagename == true)
+                    $pd['pagename'] = $pagename;
+                if ($version != 0)
+                    $pd['version'] = $version;
+                if (!is_array($pd))
+                    ExitWiki(sprintf(gettext("“%s”: corrupt file"),
+                        htmlspecialchars($filename)));
+                else
+                    return $pd;
+            }
+            fclose($fd);
+        }
+        return NULL;
+    }
 
-           rewind($fd);
-           ftruncate($fd, 0);
-           $pagedata = serialize($data);
-           $len = strlen($pagedata);
-           $num = fwrite($fd, $pagedata, $len);
-           assert($num == $len);
-           fclose($fd);
+    function _savePage($type, $pagename, $version, $data)
+    {
+        $filename = $this->_pagename2filename($type, $pagename, $version);
+        if ($fd = fopen($filename, 'a+b')) {
+            $locked = flock($fd, 2); // Exclusive blocking lock
+            if (!$locked) {
+                ExitWiki("Timeout while obtaining lock. Please try again");
+            }
+
+            rewind($fd);
+            ftruncate($fd, 0);
+            $pagedata = serialize($data);
+            $len = strlen($pagedata);
+            $num = fwrite($fd, $pagedata, $len);
+            assert($num == $len);
+            fclose($fd);
         } else {
-           ExitWiki("Error while writing page '$pagename'");
+            ExitWiki("Error while writing page '$pagename'");
         }
     }
 
-    function _removePage($type, $pagename, $version) {
+    function _removePage($type, $pagename, $version)
+    {
         $filename = $this->_pagename2filename($type, $pagename, $version);
         if (!file_exists($filename)) return NULL;
         $f = @unlink($filename);
         if ($f == false)
-            trigger_error("delete file failed: ".$filename." ver: ".$version, E_USER_WARNING);
+            trigger_error("delete file failed: " . $filename . " ver: " . $version, E_USER_WARNING);
     }
 
     // *********************************************************************
 
     // *********************************************************************
     // Load/Save Version-Data
-    function _loadVersionData($pagename, $version) {
+    function _loadVersionData($pagename, $version)
+    {
         if ($this->_page_version_data != NULL) {
-            if ( ($this->_page_version_data['pagename'] == $pagename) &&
-                ($this->_page_version_data['version'] == $version) ) {
+            if (($this->_page_version_data['pagename'] == $pagename) &&
+                ($this->_page_version_data['version'] == $version)
+            ) {
                 return $this->_page_version_data;
-             }
+            }
         }
         $vd = $this->_loadPage('ver_data', $pagename, $version);
         if ($vd != NULL) {
             $this->_page_version_data = $vd;
-            if ( ($this->_page_version_data['pagename'] == $pagename) &&
-                ($this->_page_version_data['version'] == $version) ) {
+            if (($this->_page_version_data['pagename'] == $pagename) &&
+                ($this->_page_version_data['version'] == $version)
+            ) {
                 return $this->_page_version_data;
-             }
+            }
         }
         return NULL;
     }
 
-    function _saveVersionData($pagename, $version, $data) {
+    function _saveVersionData($pagename, $version, $data)
+    {
         $this->_savePage('ver_data', $pagename, $version, $data);
 
         // check if this is a newer version:
@@ -178,14 +184,14 @@ extends WikiDB_backend
         }
     }
 
-
     // *********************************************************************
     // Load/Save Page-Data
-    function _loadPageData($pagename) {
+    function _loadPageData($pagename)
+    {
         if ($this->_page_data != NULL) {
             if ($this->_page_data['pagename'] == $pagename) {
                 return $this->_page_data;
-             }
+            }
         }
         $pd = $this->_loadPage('page_data', $pagename, 0);
         if ($pd != NULL)
@@ -193,39 +199,42 @@ extends WikiDB_backend
         if ($this->_page_data != NULL) {
             if ($this->_page_data['pagename'] == $pagename) {
                 return $this->_page_data;
-             }
+            }
         }
-        return array();  // no values found
+        return array(); // no values found
     }
 
-    function _savePageData($pagename, $data) {
+    function _savePageData($pagename, $data)
+    {
         $this->_savePage('page_data', $pagename, 0, $data);
     }
 
     // *********************************************************************
     // Load/Save Latest-Version
-    function _saveLatestVersions() {
+    function _saveLatestVersions()
+    {
         $data = $this->_latest_versions;
         if ($data == NULL)
             $data = array();
         $this->_savePage('latest_ver', 'latest_versions', 0, $data);
     }
 
-    function _setLatestVersion($pagename, $version) {
+    function _setLatestVersion($pagename, $version)
+    {
         // make sure the page version list is loaded:
         $this->_getLatestVersion($pagename);
         if ($version > 0) {
             $this->_getLatestVersion($pagename);
             $this->_latest_versions[$pagename] = $version;
-        }
-        else {
+        } else {
             // Remove this page from the Latest-Version-List:
             unset($this->_latest_versions[$pagename]);
         }
         $this->_saveLatestVersions();
     }
 
-    function _loadLatestVersions() {
+    function _loadLatestVersions()
+    {
         if ($this->_latest_versions != NULL)
             return;
 
@@ -236,28 +245,29 @@ extends WikiDB_backend
             $this->_latest_versions = array(); // empty array
     }
 
-    function _getLatestVersion($pagename) {
-       $this->_loadLatestVersions();
-       if (array_key_exists($pagename, $this->_latest_versions) == false)
-           return 0; // do version exists
-       return $this->_latest_versions[$pagename];
+    function _getLatestVersion($pagename)
+    {
+        $this->_loadLatestVersions();
+        if (array_key_exists($pagename, $this->_latest_versions) == false)
+            return 0; // do version exists
+        return $this->_latest_versions[$pagename];
     }
-
 
     // *********************************************************************
     // Load/Save Page-Links
-    function _loadPageLinks($pagename) {
+    function _loadPageLinks($pagename)
+    {
         $pd = $this->_loadPage('links', $pagename, 0, false);
         if ($pd != NULL)
-            return $pd;;
-        return array();  // no values found
+            return $pd;
+        ;
+        return array(); // no values found
     }
 
-    function _savePageLinks($pagename, $links) {
+    function _savePageLinks($pagename, $links)
+    {
         $this->_savePage('links', $pagename, 0, $links);
     }
-
-
 
     /**
      * Get page meta-data from database.
@@ -274,7 +284,8 @@ extends WikiDB_backend
      *                    don't think we need this...)
      * </dl>
      */
-    function get_pagedata($pagename) {
+    function get_pagedata($pagename)
+    {
         return $this->_loadPageData($pagename);
     }
 
@@ -305,10 +316,11 @@ extends WikiDB_backend
      * This will create a new page if page being requested does not
      * exist.
      */
-    function update_pagedata($pagename, $newdata) {
+    function update_pagedata($pagename, $newdata)
+    {
         $data = $this->get_pagedata($pagename);
         if (count($data) == 0) {
-            $this->_savePageData($pagename, $newdata);  // create a new pagedata-file
+            $this->_savePageData($pagename, $newdata); // create a new pagedata-file
             return;
         }
 
@@ -318,9 +330,8 @@ extends WikiDB_backend
             else
                 $data[$key] = $val;
         }
-        $this->_savePageData($pagename, $data);  // write new pagedata-file
+        $this->_savePageData($pagename, $data); // write new pagedata-file
     }
-
 
     /**
      * Get the current version number for a page.
@@ -329,7 +340,8 @@ extends WikiDB_backend
      * @return int The latest version number for the page.  Returns zero if
      *  no versions of a page exist.
      */
-    function get_latest_version($pagename) {
+    function get_latest_version($pagename)
+    {
         return $this->_getLatestVersion($pagename);
     }
 
@@ -343,12 +355,13 @@ extends WikiDB_backend
      *
      * FIXED: Check if this version really exists!
      */
-    function get_previous_version($pagename, $version) {
+    function get_previous_version($pagename, $version)
+    {
         $prev = ($version > 0 ? $version - 1 : 0);
-    	while ($prev and !file_exists($this->_pagename2filename('ver_data', $pagename, $prev))) {
+        while ($prev and !file_exists($this->_pagename2filename('ver_data', $pagename, $prev))) {
             $prev--;
-    	}
-    	return $prev;
+        }
+        return $prev;
     }
 
     /**
@@ -376,8 +389,9 @@ extends WikiDB_backend
      * For description of other version meta-data see WikiDB_PageRevision::get().
      * @see WikiDB_PageRevision::get
      */
-    function get_versiondata($pagename, $version, $want_content = false) {
-	$vd = $this->_loadVersionData($pagename, $version);
+    function get_versiondata($pagename, $version, $want_content = false)
+    {
+        $vd = $this->_loadVersionData($pagename, $version);
         if ($vd == NULL)
             return false;
         return $vd;
@@ -388,13 +402,14 @@ extends WikiDB_backend
      *
      * @access protected   Via WikiDB
      */
-    function rename_page($pagename, $to) {
+    function rename_page($pagename, $to)
+    {
         $version = _getLatestVersion($pagename);
         foreach ($this->_dir_names as $type => $path) {
             if (is_dir($path)) {
                 $filename = $this->_pagename2filename($type, $pagename, $version);
                 $new = $this->_pagename2filename($type, $to, $version);
-                @rename($filename,$new);
+                @rename($filename, $new);
             }
         }
         $this->update_pagedata($pagename, array('pagename' => $to));
@@ -404,7 +419,8 @@ extends WikiDB_backend
     /**
      * See ADODB for a better delete_page(), which can be undone and is seen in RecentChanges.
      */
-    function delete_page($pagename) {
+    function delete_page($pagename)
+    {
         $this->purge_page($pagename);
     }
 
@@ -415,7 +431,8 @@ extends WikiDB_backend
      *
      * @param $pagename string Page name.
      */
-    function purge_page($pagename) {
+    function purge_page($pagename)
+    {
         $ver = $this->get_latest_version($pagename);
         while ($ver > 0) {
             $this->_removePage('ver_data', $pagename, $ver);
@@ -439,17 +456,19 @@ extends WikiDB_backend
      * @param $pagename string Page name.
      * @param $version integer Version to delete.
      */
-    function delete_versiondata($pagename, $version) {
+    function delete_versiondata($pagename, $version)
+    {
         if ($this->get_latest_version($pagename) == $version) {
             // try to delete the latest version!
             // so check if an older version exist:
             if ($this->get_versiondata($pagename,
-                                       $this->get_previous_version($pagename, $version),
-                                       false) == false) {
-              // there is no older version....
-              // so the completely page will be removed:
-              $this->delete_page($pagename);
-              return;
+                $this->get_previous_version($pagename, $version),
+                false) == false
+            ) {
+                // there is no older version....
+                // so the completely page will be removed:
+                $this->delete_page($pagename);
+                return;
             }
         }
         $this->_removePage('ver_data', $pagename, $version);
@@ -467,7 +486,8 @@ extends WikiDB_backend
      *
      * @see get_versiondata
      */
-    function set_versiondata($pagename, $version, $data) {
+    function set_versiondata($pagename, $version, $data)
+    {
         $this->_saveVersionData($pagename, $version, $data);
     }
 
@@ -483,7 +503,8 @@ extends WikiDB_backend
      * @param $newdata hash New revision metadata.
      * @see set_versiondata, get_versiondata
      */
-    function update_versiondata($pagename, $version, $newdata) {
+    function update_versiondata($pagename, $version, $newdata)
+    {
         $data = $this->get_versiondata($pagename, $version, true);
         if (!$data) {
             assert($data);
@@ -505,7 +526,8 @@ extends WikiDB_backend
      *
      * @param $links array List of page(names) which page links to.
      */
-    function set_links($pagename, $links) {
+    function set_links($pagename, $links)
+    {
         $this->_savePageLinks($pagename, $links);
     }
 
@@ -518,21 +540,21 @@ extends WikiDB_backend
      * FIXME: array or iterator?
      * @return object A WikiDB_backend_iterator.
      */
-    function get_links($pagename, $reversed=true, $include_empty=false,
-                       $sortby='', $limit='', $exclude='',
-                       $want_relations=false)
+    function get_links($pagename, $reversed = true, $include_empty = false,
+                       $sortby = '', $limit = '', $exclude = '',
+                       $want_relations = false)
     {
         if ($reversed == false)
             return new WikiDB_backend_file_iter($this, $this->_loadPageLinks($pagename));
 
         $this->_loadLatestVersions();
-        $pagenames = $this->_latest_versions;  // now we have an array with the key is the pagename of all pages
+        $pagenames = $this->_latest_versions; // now we have an array with the key is the pagename of all pages
 
-        $out = array();  // create empty out array
+        $out = array(); // create empty out array
 
         foreach ($pagenames as $key => $val) {
             $links = $this->_loadPageLinks($key);
-	    foreach ($links as $key2 => $val2) {
+            foreach ($links as $key2 => $val2) {
                 if ($val2['linkto'] == $pagename)
                     array_push($out, $key);
             }
@@ -572,26 +594,34 @@ extends WikiDB_backend
      *
      * @return object A WikiDB_backend_iterator.
      */
-    function get_all_pages($include_empty=false, $sortby='', $limit='', $exclude='') {
-    	require_once 'lib/PageList.php';
+    function get_all_pages($include_empty = false, $sortby = '', $limit = '', $exclude = '')
+    {
+        require_once 'lib/PageList.php';
         $this->_loadLatestVersions();
         $a = array_keys($this->_latest_versions);
         if (empty($a))
             return new WikiDB_backend_file_iter($this, $a);
         $sortby = $this->sortby($sortby, 'db', $this->sortable_columns());
         switch ($sortby) {
-        case '': break;
-        case 'pagename ASC':  sort($a); break;
-        case 'pagename DESC': rsort($a); break;
+            case '':
+                break;
+            case 'pagename ASC':
+                sort($a);
+                break;
+            case 'pagename DESC':
+                rsort($a);
+                break;
         }
         return new WikiDB_backend_file_iter($this, $a);
     }
 
-    function sortable_columns() {
+    function sortable_columns()
+    {
         return array('pagename');
     }
 
-    function numPages($filter=false, $exclude='') {
+    function numPages($filter = false, $exclude = '')
+    {
         $this->_loadLatestVersions();
         return count($this->_latest_versions);
     }
@@ -608,7 +638,8 @@ extends WikiDB_backend
      *
      *     All backends <em>should</em> support write locking.
      */
-    function lock($write_lock = true) {
+    function lock($write_lock = true)
+    {
         //trigger_error("lock: Not Implemented", E_USER_WARNING);
     }
 
@@ -619,15 +650,16 @@ extends WikiDB_backend
      *  unlock() is called as many times as lock() has been.  If $force is
      *  set to true, the the database is unconditionally unlocked.
      */
-    function unlock($force = false) {
+    function unlock($force = false)
+    {
         //trigger_error("unlock: Not Implemented", E_USER_WARNING);
     }
-
 
     /**
      * Close database.
      */
-    function close () {
+    function close()
+    {
         //trigger_error("close: Not Implemented", E_USER_WARNING);
     }
 
@@ -636,15 +668,17 @@ extends WikiDB_backend
      *
      * This should flush all unwritten data to the filesystem.
      */
-    function sync() {
+    function sync()
+    {
         //trigger_error("sync: Not Implemented", E_USER_WARNING);
     }
 
     /**
      * Optimize the database.
      */
-    function optimize() {
-        return 0;//trigger_error("optimize: Not Implemented", E_USER_WARNING);
+    function optimize()
+    {
+        return 0; //trigger_error("optimize: Not Implemented", E_USER_WARNING);
     }
 
     /**
@@ -658,7 +692,8 @@ extends WikiDB_backend
      *
      * @return boolean True iff database is in a consistent state.
      */
-    function check() {
+    function check()
+    {
         //trigger_error("check: Not Implemented", E_USER_WARNING);
     }
 
@@ -670,14 +705,16 @@ extends WikiDB_backend
      *
      * @return boolean True iff successful.
      */
-    function rebuild() {
+    function rebuild()
+    {
         //trigger_error("rebuild: Not Implemented", E_USER_WARNING);
     }
 
-    function _parse_searchwords($search) {
+    function _parse_searchwords($search)
+    {
         $search = strtolower(trim($search));
         if (!$search)
-            return array(array(),array());
+            return array(array(), array());
 
         $words = preg_split('/\s+/', $search);
         $exclude = array();
@@ -691,11 +728,12 @@ extends WikiDB_backend
         return array($words, $exclude);
     }
 
-};
+}
 
 class WikiDB_backend_file_iter extends WikiDB_backend_iterator
 {
-    function WikiDB_backend_file_iter(&$backend, &$query_result, $options=array()) {
+    function WikiDB_backend_file_iter(&$backend, &$query_result, $options = array())
+    {
         $this->_backend = &$backend;
         $this->_result = $query_result;
         $this->_options = $options;
@@ -704,7 +742,8 @@ class WikiDB_backend_file_iter extends WikiDB_backend_iterator
             reset($this->_result);
     }
 
-    function next() {
+    function next()
+    {
         if (!$this->_result)
             return false;
         if (count($this->_result) <= 0)
@@ -725,7 +764,7 @@ class WikiDB_backend_file_iter extends WikiDB_backend_iterator
             unset($pagedata['_cached_html']);
         unset($pagedata['pagename']);
         $rec = array('pagename' => $pn,
-                     'pagedata' => $pagedata);
+            'pagedata' => $pagedata);
         if (is_array($e[1])) {
             $rec['linkrelation'] = $e[1]['relation'];
         }
@@ -733,14 +772,20 @@ class WikiDB_backend_file_iter extends WikiDB_backend_iterator
         //$rec['versiondata'] = $backend->get_versiondata($pn, $rec['version'], true);
         return $rec;
     }
-    function asArray() {
+
+    function asArray()
+    {
         reset($this->_result);
         return $this->_result;
     }
-    function count() {
-    	return count($this->_result);
+
+    function count()
+    {
+        return count($this->_result);
     }
-    function free () {
+
+    function free()
+    {
         $this->_result = array();
     }
 }

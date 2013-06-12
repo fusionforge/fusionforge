@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: YouTube.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 2007 Reini Urban
  * Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
@@ -35,78 +35,77 @@
  */
 
 class WikiPlugin_YouTube
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName () {
-        return _("YouTube");
+    function getDescription()
+    {
+        return _("Embed YouTube videos.");
     }
 
-    function getDescription () {
-        return _("Embed YouTube videos");
-    }
-
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array('v' => "",
-                     'browse' => '',      // see above
-                     'time'   => '',      // only if browse
-                     'category' => '',    // only if browse
-                     'language' => '',    // only if browse
-                     'index'    => 0,     // only if browse
-                     'style' => 'inline', // or link. link links to youtube.
-                     'size'  => 'medium', // or large, medium or small
-                     'autoplay' => 0,
-                     'width' => "425",
-                     'height' => "350");
+            'browse' => '', // see above
+            'time' => '', // only if browse
+            'category' => '', // only if browse
+            'language' => '', // only if browse
+            'index' => 0, // only if browse
+            'style' => 'inline', // or link. link links to youtube.
+            'size' => 'medium', // or large, medium or small
+            'autoplay' => 0,
+            'width' => "425",
+            'height' => "350");
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $this->getArgs($argstr, $request);
         extract($args);
         if (empty($args['v'])) {
             if (empty($args['browse']))
                 return $this->error(fmt("Required argument %s missing", "v"));
-            $this->_browse = array("Most Recent"   => "mr",
-                                       "Most Viewed"   => "mp",
-                                       "Top Rated"     => "tr",
-                                       "Most Discussed"=> "md",
-                                   "Top Favorites" => "mf",
-                                   "Most Linked"   => "mrd",
-                                   "Recently Featured"=> "rf",
-                                   "Most Responded"   => "ms",
-                                   "Watch on Mobile"  => "mv");
-            $this->browse   = array_keys($this->_browse);
+            $this->_browse = array("Most Recent" => "mr",
+                "Most Viewed" => "mp",
+                "Top Rated" => "tr",
+                "Most Discussed" => "md",
+                "Top Favorites" => "mf",
+                "Most Linked" => "mrd",
+                "Recently Featured" => "rf",
+                "Most Responded" => "ms",
+                "Watch on Mobile" => "mv");
+            $this->browse = array_keys($this->_browse);
             array_unshift($this->browse, "Daily Pick");
-            $this->_time    = array("Today" => "t",
-                                    "This Week" => "w",
-                                    "This Month" => "m",
-                                    "All Time" => "a");
-            $this->_category = array("All"                 => "0",
-                                     "Autos & Vehicles" => "2",
-                                     "Comedy"                 => "23",
-                                     "Entertainment"         => "24",
-                                     "Film & Animation" => "1",
-                                     "Gadgets & Games"         => "20",
-                                     "Howto & DIY"         => "26",
-                                     "Music"                 => "10",
-                                     "News & Politics"         => "25",
-                                     "People & Blogs"         => "22",
-                                     "Pets & Animals"         => "15",
-                                     "Sports"                 => "17",
-                                     "Travel & Places"         => "19");
-            $this->_language = array("All"     => "",
-                                     "English" => "EN",
-                                     "Spanish" => "ES",
-                                     "Japanese"=> "JA",
-                                     "German"  => "DE",
-                                     "Chinese" => "CN",
-                                     "French"  => "FR");
-            if (!in_array($browse,$this->browse))
+            $this->_time = array("Today" => "t",
+                "This Week" => "w",
+                "This Month" => "m",
+                "All Time" => "a");
+            $this->_category = array("All" => "0",
+                "Autos & Vehicles" => "2",
+                "Comedy" => "23",
+                "Entertainment" => "24",
+                "Film & Animation" => "1",
+                "Gadgets & Games" => "20",
+                "Howto & DIY" => "26",
+                "Music" => "10",
+                "News & Politics" => "25",
+                "People & Blogs" => "22",
+                "Pets & Animals" => "15",
+                "Sports" => "17",
+                "Travel & Places" => "19");
+            $this->_language = array("All" => "",
+                "English" => "EN",
+                "Spanish" => "ES",
+                "Japanese" => "JA",
+                "German" => "DE",
+                "Chinese" => "CN",
+                "French" => "FR");
+            if (!in_array($browse, $this->browse))
                 return $this->error(fmt("Invalid argument %s", "browse"));
-            if ($time and !in_array($time,array_keys($this->_time)))
+            if ($time and !in_array($time, array_keys($this->_time)))
                 return $this->error(fmt("Invalid argument %s", "time"));
-            if ($category and !in_array($category,$this->category))
+            if ($category and !in_array($category, $this->category))
                 return $this->error(fmt("Invalid argument %s", "category"));
-            if ($language and !in_array($language,$this->language))
+            if ($language and !in_array($language, $this->language))
                 return $this->error(fmt("Invalid argument %s", "language"));
             if ($browse == "Daily Pick")
                 $v = $this->Daily_pick();
@@ -115,14 +114,13 @@ extends WikiPlugin
                 $t = $time ? $this->_time[$time] : 't';
                 $c = $category ? $this->_category[$category] : '0';
                 $l = $language ? $this->_language[$language] : '';
-                    $url = "http://www.youtube.com/browse?s=$s&t=$t&c=$c&l=$l";
-                $m = array('','');
+                $url = "http://www.youtube.com/browse?s=$s&t=$t&c=$c&l=$l";
+                $m = array('', '');
                 if ($xml = url_get_contents($url)) {
                     if ($index) {
                         if (preg_match_all('/<div class="vtitle">.*?\n.*?<a href="\/watch\?v=(\w+)" onclick=/s', $xml, $m))
                             $v = $m[1][$index];
-                    }
-                    else {
+                    } else {
                         if (preg_match('/<div class="vtitle">.*?\n.*?<a href="\/watch\?v=(\w+)" onclick=/s', $xml, $m))
                             $v = $m[1];
                     }
@@ -132,40 +130,52 @@ extends WikiPlugin
         // sanify check
         if (strlen($v) < 10 or strlen($v) > 12)
             return $this->error(fmt("Invalid argument %s", "v"));
-        if (strcspn($v,"-_0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"))
+        if (strcspn($v, "-_0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"))
             return $this->error(fmt("Invalid argument %s", "v"));
         $url = "http://www.youtube.com/v/" . $v;
         if ($autoplay)
             $url .= "?autoplay=1";
         if ($size != 'medium') {
-            if ($size == 'large') { $width = 640; $height = 526; }
-            elseif ($size == 'small') { $width = 240; $height = 200; }
+            if ($size == 'large') {
+                $width = 640;
+                $height = 526;
+            } elseif ($size == 'small') {
+                $width = 240;
+                $height = 200;
+            }
         }
         unset($args['size']);
         unset($args['style']);
         $args['src'] = $v;
         unset($args['v']);
         if ($style == 'link') {
-            if ($size == 'medium') { $width = 130; $height = 97; }
-            elseif ($size == 'large') { $width = 320; $height = 240; }
-            elseif ($size == 'small') { $width = 90; $height = 60; }
+            if ($size == 'medium') {
+                $width = 130;
+                $height = 97;
+            } elseif ($size == 'large') {
+                $width = 320;
+                $height = 240;
+            } elseif ($size == 'small') {
+                $width = 90;
+                $height = 60;
+            }
             // img: http://img.youtube.com/vi/KKTDRqQtPO8/2.jpg or 0.jpg
             $link = HTML::a(array('href' => $url),
-                            HTML::img(array('src' => "http://img.youtube.com/vi/".
-                                            $v."/".(($size == 'large')?"0":"2").".jpg",
-                                            'width' => $width,
-                                            'height' => $height,
-                                            'alt' => "YouTube video $v")));
+                HTML::img(array('src' => "http://img.youtube.com/vi/" .
+                    $v . "/" . (($size == 'large') ? "0" : "2") . ".jpg",
+                    'width' => $width,
+                    'height' => $height,
+                    'alt' => "YouTube video $v")));
             return $link;
         }
         $object = HTML::object(array('class' => 'inlineobject',
-                                     'width' => $width,
-                                     'height' => $height,
-                                     ));
+            'width' => $width,
+            'height' => $height,
+        ));
         $attrs = array('data' => $url,
-                       'type' => 'application/x-shockwave-flash',
-                       'width' => $width,
-                       'height' => $height);
+            'type' => 'application/x-shockwave-flash',
+            'width' => $width,
+            'height' => $height);
         if (isBrowserSafari()) {
             return HTML::object($attrs);
         }
@@ -175,14 +185,15 @@ extends WikiPlugin
         return $object;
     }
 
-    function Daily_pick() {
+    private function Daily_pick()
+    {
         if ($xml = url_get_contents("http://www.youtube.com/categories")) {
             if (preg_match('/<div class="heading"><b>Pick of The Day<\/b><\/div>.*?<a href="\/watch\?v=(\w+)">/s', $xml, $m))
                 return $m[1];
         }
         return '';
     }
-};
+}
 
 // Local Variables:
 // mode: php

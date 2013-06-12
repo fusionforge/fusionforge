@@ -1,11 +1,10 @@
-Date: Tue,  4 Jan 2011 11:57:15 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FOudTekstFormatteringsRegels 7864 2011-01-22 20:11:13Z vargenau $
+Date: Wed, 19 Dec 2012 13:19:42 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FOudTekstFormatteringsRegels;
   flags=PAGE_LOCKED;
   markup=2;
-  charset=utf-8
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
 ! Synopsis
@@ -80,7 +79,7 @@ regelbreuken niet oversteken.
 * Je kunt koppelen naar oude stijl verwijzingen onderdrukken door een '~!' voor de woorden te tiepen: ~NietGekoppeldAlsWikiNaam.
 * You can create footnotes by using ~[1], ~[2], ~[3], ... like this here #[|ftnt_ref_1]<sup>~[[1|#ftnt_1]~]</sup>. See footnote for counterpart.  (If the ~[ is in the first column, it is a footnote <em>definition</em> rather than a footnote <em>reference</em> #[|ftnt_ref_1]<sup>~[[1|#ftnt_1]~]</sup>.)
 * De oude manier van URL koppeling wordt nog steeds ondersteund: tiep voor de URLs "http:", "ftp:" of "mailto:" ome een automatiese koppeling te maken, als in: http://c2.com/.
-* URLs die eindigen op .png, .gif of .jpg worden ingebed <em>wanneer ingevoerd als een externe verwijzing</em>: [http://phpwiki.sourceforge.net/demo/themes/default/images/png.png]
+* URLs die eindigen op .png, .gif of .jpg worden ingebed <em>wanneer ingevoerd als een externe verwijzing</em>: [http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/png.png]
 
 
 ! Tables

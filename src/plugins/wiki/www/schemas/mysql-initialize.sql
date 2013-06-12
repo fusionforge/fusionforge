@@ -1,5 +1,3 @@
--- $Id: mysql-initialize.sql 7117 2009-09-15 08:02:20Z rurban $
-
 CREATE TABLE page (
 	id              INT NOT NULL AUTO_INCREMENT,
 -- for mysql => 4.1 define the charset here
@@ -84,7 +82,7 @@ CREATE TABLE pref (
 -- ALTER TABLE pref ADD passwd 	CHAR(48) BINARY DEFAULT '';
 -- ALTER TABLE pref ADD groupname CHAR(48) BINARY DEFAULT 'users';
 
--- deprecated since 1.3.12. only useful for seperate databases.
+-- deprecated since 1.3.12. only useful for separate databases.
 -- better use the extra pref table where such users can be created easily 
 -- without password.
 

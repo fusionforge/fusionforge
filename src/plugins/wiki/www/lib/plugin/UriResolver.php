@@ -1,5 +1,5 @@
-<?php // -*-php-*-
-// $Id: UriResolver.php 8071 2011-05-18 14:56:14Z vargenau $
+<?php
+
 /*
  * Copyright 2007 $ThePhpWikiProgrammingTeam
  *
@@ -30,35 +30,35 @@
 require_once 'lib/SemanticWeb.php';
 
 class WikiPlugin_UriResolver
-extends WikiPlugin
+    extends WikiPlugin
 {
-    function getName() {
-        return _("UriResolver");
+    function getDescription()
+    {
+        return _("Converts an URI-escaped identifier back to an unique XML-ID.");
     }
 
-    function getDescription () {
-        return _("Converts an uri-escaped identifier back to an unique XML-ID");
-    }
-
-    function getDefaultArguments() {
+    function getDefaultArguments()
+    {
         return array();
     }
 
-    function allow_undeclared_arg() {
+    function allow_undeclared_arg()
+    {
         return true;
     }
 
-    function run($dbi, $argstr, &$request, $basepage) {
+    function run($dbi, $argstr, &$request, $basepage)
+    {
         $args = $request->getArgs();
         unset($args['pagename']);
         unset($args['action']);
         unset($args['start_debug']);
         // FIXME: ?Test=1 => Test
-        $arg = join("/",array_keys($args));
+        $arg = join("/", array_keys($args));
         $xmlid = RdfWriter::makeXMLExportId($arg);
         return $xmlid;
     }
-};
+}
 
 // Local Variables:
 // mode: php

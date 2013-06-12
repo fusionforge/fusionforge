@@ -1,6 +1,5 @@
-Date: Tue,  4 Jan 2011 12:22:49 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.4.0RC1)
-X-Rcs-Id: $Id: Help%2FPloticusPlugin 7800 2011-01-04 11:25:32Z vargenau $
+Date: Fri,  7 Dec 2012 14:58:45 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPloticusPlugin;
   flags=PAGE_LOCKED;
@@ -82,7 +81,7 @@ build so far.
 == Optional Configuration ==
 
 config.ini:
-  PLOTICUS_EXE = pl.exe (on windows)
+  PLOTICUS_EXE = pl.exe (on Windows)
   PLOTICUS_EXE = /usr/local/bin/pl (elsewhere)
 
 prefabs need the environment variable PLOTICUS_PREFABS. Default: /usr/share/ploticus.
@@ -162,7 +161,7 @@ labelfarout: 1.05
 }}}
 
 == Author ==
-* [[PhpWiki:ReiniUrban|Reini Urban]]
+* [[Help:Reini Urban|Reini Urban]]
 
 == See Also ==
 * [[Help:GraphVizPlugin]]

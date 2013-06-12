@@ -1,7 +1,3 @@
-/**
- *  $Id: IE60Fixes.css 7965 2011-03-07 09:47:31Z vargenau $
- */
-
 /* 6.0 - only fixes */
 /* content area */
 /* workaround for various ie float bugs */
@@ -10,24 +6,32 @@
     margin-left: 0;
     height: 1%;
 }
+
 #column-content #content {
     margin-left: 12.2em;
     margin-top: 3em;
     height: 1%;
 }
+
 #column-one {
     position: absolute;
     z-index: 4;
     top: 0;
     left: 0;
 }
+
 #footer {
     margin-left: 13.6em;
     border-left: 1px solid #fabd23;
 }
 
-body { font-size: 80%;}
-tt { font-size: 110%; }
+body {
+    font-size: 80%;
+}
+
+tt {
+    font-size: 110%;
+}
 
 /* the tabs */
 
@@ -42,6 +46,7 @@ tt { font-size: 110%; }
     cursor: default;
     float: none !important;
 }
+
 #p-cactions li a {
     display: inline-block !important;
     vertical-align: top;
@@ -49,20 +54,25 @@ tt { font-size: 110%; }
     border: solid #aaa;
     border-width: 1px 1px 0;
 }
+
 #p-cactions li.selected a {
     border-color: #fabd23;
     padding-bottom: 0.17em !important;
 }
+
 #p-cactions li a:hover {
     padding-bottom: 0.17em;
 }
+
 #p-navigation a {
     display: inline-block;
     width: 100%;
 }
+
 #portal-personaltools {
     padding-bottom: 0.1em;
 }
+
 #bodyContent a.external {
     background: url(images/external.png) center right no-repeat;
     padding-right: 13px;
@@ -73,10 +83,12 @@ tt { font-size: 110%; }
 #p-logo a:hover {
     cursor: pointer;
 }
+
 div.visualClear {
-    width:100%;
+    width: 100%;
     line-height: 0;
 }
+
 textarea {
     width: 96%;
 }
@@ -89,10 +101,11 @@ div.tleft {
 }
 
 span.rateit {
-  text-decoration: none;
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1em;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1em;
 }
+
 div#rateit-widget-top {
-  top:   38px;
+    top: 38px;
 }
