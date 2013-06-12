@@ -3444,7 +3444,6 @@ src/rpm-specific/fusionforge.repo -text
 src/translations/bg.po -text
 src/translations/ca.po -text
 src/translations/de.po -text
-src/translations/el.po -text
 src/translations/en.po -text
 src/translations/es.po -text
 src/translations/eu.po -text
