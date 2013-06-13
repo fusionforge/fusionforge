@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-12 19:18+0200\n"
+"POT-Creation-Date: 2013-06-13 17:38+0200\n"
 "PO-Revision-Date: 2005-02-12 16:23+0100\n"
 "Last-Translator: Antonio Bonifati ant[(at)]monitor.deis.unical.it\n"
 "Language-Team: \n"
@@ -1781,8 +1781,7 @@ msgstr ""
 msgid "Include multiple pages."
 msgstr ""
 
-#, php-format
-msgid "Include recursively all linked pages starting at %s."
+msgid "Include recursively all linked pages starting at [pagename]."
 msgstr ""
 
 msgid "Display Dynamic Category Tree."

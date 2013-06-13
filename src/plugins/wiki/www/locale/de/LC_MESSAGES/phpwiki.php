@@ -498,7 +498,7 @@ $locale["In the time since you started editing this page, another user has saved
 $locale["In total there are %d user sessions online. :: Unique %d Registered and %d Guests"] = "Insgesamt sind %d Benutzersessions online. :: %d verschiedene Registrierte und %d Gäste";
 $locale["Include an external web page within the body of a wiki page."] = "Einbetten einer externen Webseite im Body dieser Wiki Seite.";
 $locale["Include multiple pages."] = "Füge mehrere Seiten ein.";
-$locale["Include recursively all linked pages starting at %s."] = "Bette rekursiv alle verlinkten Seiten ein, angefangen mit %s.";
+$locale["Include recursively all linked pages starting at [pagename]."] = "Bette rekursiv alle verlinkten Seiten ein, angefangen mit [pagename].";
 $locale["Include text from another wiki page."] = "Text von einer andere Seite einfügen.";
 $locale["Include the content of all SubPages of the current page."] = "Enthält den Inhalt alle UnterSeiten der aktuellen Seite.";
 $locale["IncludePage"] = "SeiteEinfügen";

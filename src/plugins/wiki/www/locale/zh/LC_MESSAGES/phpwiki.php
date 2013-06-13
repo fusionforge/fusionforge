@@ -235,6 +235,7 @@ $locale["Image loaded from cache file: %s"] = "影像已從快取檔案: %s 載�
 $locale["Image saved to cache file: %s"] = "影像存於快取檔案: %s";
 $locale["In the time since you started editing this page, another user has saved a new version of it."] = "從你上次修改這個頁面到現在的這段時間,已經有使用者儲存了較新的版本.";
 $locale["Include an external web page within the body of a wiki page."] = "含括外部網頁到 wiki 頁面的內容中.";
+$locale["Include recursively all linked pages starting at [pagename]."] = "遞迴地含括所有從 [pagename] 開始有連結到的網頁.";
 $locale["Include text from another wiki page."] = "從其他 wiki 頁面含括文字.";
 $locale["Include the content of all SubPages of the current page."] = "含括目前頁面所有子頁面的內容.";
 $locale["IncludePage"] = "含括頁面";
