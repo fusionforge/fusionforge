@@ -146,6 +146,8 @@ class WidgetLayoutManager {
 	 */
 	function createDefaultLayoutForUser($owner_id) {
 		$owner_type = self::OWNER_TYPE_USER;
+		db_begin();
+		$success = true;
 		$sql = "INSERT INTO owner_layouts(layout_id, is_default, owner_id, owner_type) VALUES (1, 1, $1, $2)";
 		if (db_query_params($sql, array($owner_id, $owner_type))) {
 
@@ -159,7 +161,10 @@ class WidgetLayoutManager {
 			$args[] = "($1, $2, 1, 2, 'mymonitoredfp', 1)";
 
 			foreach($args as $a) {
-				db_query_params($sql.$a,array($owner_id,$owner_type));
+				if (!db_query_params($sql.$a,array($owner_id,$owner_type))) {
+					$success = false;
+					break;
+				}
 			}
 
 			/*  $em =& EventManager::instance();
@@ -168,8 +173,14 @@ class WidgetLayoutManager {
 			    foreach($widgets as $widget) {
 			    $sql .= ",($13, $14, 1, $15, $16, $17)";
 			    }*/
+		} else
+			$success = false;
+		if (!$success) {
+			$success = db_error();
+			db_rollback();
+			exit_error(sprintf(_('DB Error: %s'), $success), 'widgets');
 		}
-		echo db_error();
+		db_commit();
 	}
 
 	/**
