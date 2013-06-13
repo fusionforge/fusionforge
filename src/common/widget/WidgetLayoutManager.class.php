@@ -49,7 +49,7 @@ class WidgetLayoutManager {
 		$sql = "SELECT * from owner_layouts where owner_id=$1 and owner_type=$2";
 		$res = db_query_params($sql, array($owner_id, $owner_type));
 		if($res && db_numrows($res)<1) {
-			if($owner_type = self::OWNER_TYPE_USER) {
+			if ($owner_type == self::OWNER_TYPE_USER) {
 				$this->createDefaultLayoutForUser($owner_id);
 				$this->displayLayout($owner_id,$owner_type);
 			} else {
