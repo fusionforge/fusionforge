@@ -218,7 +218,7 @@ class CVSPlugin extends SCMPlugin {
 		}
 
 		if (!$repo_exists) {
-			if (!mkdir($repo, 0700)) {
+			if (!@mkdir($repo, 0700)) {
 				return false;
 			}
 			$ret = 0;
