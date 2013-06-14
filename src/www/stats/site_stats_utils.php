@@ -491,15 +491,17 @@ function stats_site_aggregate( ) {
 }
 
 function views_graph($monthly = 0) {
-	$year = gmstrftime("%Y", time() );
+	global $gfcommon;
+	require_once $gfcommon.'reporting/Report.class.php';
+	$report = new Report();
 	if ($monthly) {
 		$res = db_query_params('SELECT month,site_page_views AS site_views,subdomain_views
 					FROM stats_site_months ORDER BY month ASC',
 					array());
 	} else {
-		$beg_year=date('Y',mktime(0,0,0,(date('m')-1),date('d'),date('Y')));
-		$beg_month=date('m',mktime(0,0,0,(date('m')-1),date('d'),date('Y')));
-		$beg_day=date('d',mktime(0,0,0,(date('m')-1),date('d'),date('Y')));
+		$beg_year = date('Y',mktime(0,0,0,(date('m')-1),date('d'),date('Y')));
+		$beg_month = date('m',mktime(0,0,0,(date('m')-1),date('d'),date('Y')));
+		$beg_day = date('d',mktime(0,0,0,(date('m')-1),date('d'),date('Y')));
 		$res = db_query_params ('SELECT month,day,site_page_views AS site_views,subdomain_views
 			FROM stats_site_vw
 			( month = $1 AND day >= $2 ) OR ( month > $3 )
@@ -514,34 +516,49 @@ function views_graph($monthly = 0) {
 	$ydata = array();
 	while ( $row = db_fetch_array($res) ) {
 		$xlabel[$i] = $row['month'] . ((isset($row['day'])) ? "/" . $row['day'] : '');
-		$ydata[$i] = $row["site_views"] + $row["subdomain_views"];
+		$ydata[$i] = $row['site_views'] + $row['subdomain_views'];
 		++$i;
 	}
+	$monthStartArr = $report->getMonthStartArr();
+	$monthStartArrFormat = $report->getMonthStartArrFormat();
 	if (count($ydata)) {
 		$chartid = '_views_graph';
 		echo '<script type="text/javascript">//<![CDATA['."\n";
-		echo 'var values = new Array();';
+		echo 'var '.$chartid.'values = new Array();';
+		echo 'var '.$chartid.'ticks = new Array();';
 		echo 'var plot'.$chartid.';';
 		$yMax = 0;
-		for ($j = 0; $j < count($ydata); $j++) {
-			$timeStamp = mktime(0, 0, 0, substr($xlabel[$j], 4, 2) , 1, substr($xlabel[$j], 0, 4));
-			echo 'var date = new Date(0);';
-			echo 'date.setUTCSeconds('.$timeStamp.');';
-			echo 'date = '.$xlabel[$j].';';
-			echo 'var datevalues = '.$ydata[$j].';';
-			echo 'values.push([date, datevalues]);';
-			if ($ydata[$j] > $yMax) {
-				$yMax = $ydata[$j];
+		for ($j = 0; $j < count($monthStartArrFormat); $j++) {
+			$key = array_search($monthStartArrFormat[$j], $xlabel);
+			if ($key !== FALSE) {
+				echo 'var '.$chartid.'datevalues = '.$ydata[$key].';';
+				if ($ydata[$key] > $yMax) {
+					$yMax = $ydata[$key];
+				}
+			} else {
+				echo 'var '.$chartid.'datevalues = 0;';
 			}
+			echo 'var '.$chartid.'date = '.$monthStartArrFormat[$j].';';
+			echo $chartid.'values.push(['.$chartid.'date, '.$chartid.'datevalues]);';
 		}
 		echo 'jQuery(document).ready(function(){
-				plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [values], {
+				plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', ['.$chartid.'values], {
+					axesDefaults: {
+						tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
+						tickOptions: {
+							angle: 30,
+						}
+					},
 					axes: {
 						xaxis: {
-							label: \''.('Month').'\',
+							renderer: jQuery.jqplot.CategoryAxisRenderer,
+							label: \''.('Pages view per month').'\',
 						},
 						yaxis: {
-							label: \''._('Pages view').'\',
+							min: 0,
+							tickOptions: {
+								angle: 0,
+							}
 						}
 					},
 					highlighter: {
@@ -561,7 +578,95 @@ function views_graph($monthly = 0) {
 }
 
 function users_graph() {
-	echo 'autre joli graph';
+	global $gfcommon;
+	require_once $gfcommon.'reporting/Report.class.php';
+	$report = new Report();
+	$res = db_query_params ('SELECT month,day,new_users,new_projects FROM stats_site ORDER BY month ASC, day ASC',
+			array ());
+
+	$i = 0;
+	$xlabel = array();
+	$ydata = array();
+	$ydata[0] = array();
+	$ydata[1] = array();
+	$label[0] = _('New users');
+	$label[1] = _('New projects');
+	$monthStartArr = $report->getMonthStartArr();
+	$monthStartArrFormat = $report->getMonthStartArrFormat();
+	while ( $row = db_fetch_array($res) ) {
+		$xlabel[$i] = $row['month'] . ((isset($row['day'])) ? "/" . $row['day'] : '');
+		$ydata[0][$i] = $row['new_users'];
+		$ydata[1][$i] = $row['new_projects'];
+		++$i;
+	}
+	if (count($ydata[0])) {
+		$chartid = '_newprojectuser';
+		echo '<script type="text/javascript">//<![CDATA['."\n";
+		echo 'var '.$chartid.'values = new Array();';
+		echo 'var '.$chartid.'ticks = new Array();';
+		echo 'var '.$chartid.'labels = new Array();';
+		echo 'var '.$chartid.'series = new Array();';
+		echo 'var plot'.$chartid.';';
+		for ($z = 0; $z < count($ydata); $z++) {
+			echo $chartid.'values['.$z.'] = new Array();';
+			echo $chartid.'labels.push({label:\''.$label[$z].'\'});';
+			for ($j = 0; $j < count($monthStartArrFormat); $j++) {
+				$key = array_search($monthStartArrFormat[$j], $xlabel);
+				if ($key !== FALSE) {
+					echo 'var '.$chartid.'datevalues = '.$ydata[$z][$key].';';
+					if ($ydata[$z][$key] > $yMax) {
+						$yMax = $ydata[$z][$key];
+					}
+				} else {
+					echo 'var '.$chartid.'datevalues = 0;';
+				}
+				echo 'var '.$chartid.'date = '.$monthStartArrFormat[$j].';';
+				echo $chartid.'values['.$z.'].push(['.$chartid.'date, '.$chartid.'datevalues]);';
+			}
+		}
+		for ($z = 0; $z < count($ydata); $z++) {
+			echo $chartid.'series.push('.$chartid.'values['.$z.']);';
+		}
+		echo 'jQuery(document).ready(function(){
+				plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', '.$chartid.'series, {
+					axesDefaults: {
+						tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
+						tickOptions: {
+							angle: 30,
+						}
+					},
+					legend: {
+						show:true, location: \'ne\',
+					},
+					series:
+						'.$chartid.'labels
+					,
+					axes: {
+						xaxis: {
+							renderer: jQuery.jqplot.CategoryAxisRenderer,
+							label: \''.('New Users and new projects per month').'\',
+						},
+						yaxis: {
+							min: 0,
+							tickOptions: {
+								angle: 0,
+							}
+						}
+					},
+					highlighter: {
+						show: true,
+						sizeAdjust: 2.5,
+					},
+				});
+			});';
+		echo 'jQuery(window).resize(function() {
+			plot'.$chartid.'.replot();
+			});'."\n";
+		echo '//]]></script>';
+		echo '<div id="chart'.$chartid.'"></div>';
+	} else {
+		echo '<p class="information">'._('New users, new projects: no graph to display.').'</p>';
+	}
 }
 
 // Local Variables:

@@ -36,6 +36,7 @@ class Report extends Error {
 //var $adjust_days=array('Sun'=>0, 'Sat'=>6, 'Fri'=>5, 'Thu'=>4, 'Wed'=>3, 'Tue'=>2, 'Mon'=>1);
 var $adjust_days=array('Sun'=>'0.0', 'Sat'=>1, 'Fri'=>2, 'Thu'=>3, 'Wed'=>4, 'Tue'=>5, 'Mon'=>6);
 var $month_start_arr=array();
+var $month_start_arr_format = array();
 var $week_start_arr=array();
 var $site_start_date;
 var $data;
@@ -47,7 +48,7 @@ var $span_name=array(1=>'Daily',2=>'Weekly',3=>'Monthly',4=>'OverAll');
 var $graph_interval=array(1=>7,2=>1,3=>1,4=>1);
 var $max_weeks = 104;
 var $max_month = 24;
-var $rawdates;
+var $rawdates = array();
 
 function Report() {
 	$this->Error();
@@ -73,12 +74,14 @@ function &getMonthStartArr() {
 	if (count($this->month_start_arr) < 1) {
 		$min_date=$this->getMinDate();
 		for ($i=0; $i<$this->max_month; $i++) {
-			$this->month_start_arr[]=mktime(0,0,0,date('m')+1-$i,1,date('Y'));
+			$this->month_start_arr[] = mktime(0,0,0,date('m')+1-$i,1,date('Y'));
+			$this->month_start_arr_format[] = date('Ym', $this->month_start_arr[$i]);
 			if ($this->month_start_arr[$i] < $min_date) {
 				break;
 			}
 		}
 		sort($this->month_start_arr);
+		sort($this->month_start_arr_format);
 	}
 	return $this->month_start_arr;
 }
@@ -151,6 +154,10 @@ function getStartDate() {
 
 function getEndDate() {
 	return $this->end_date;
+}
+
+function getMonthStartArrFormat() {
+	return $this->month_start_arr_format;
 }
 
 }
