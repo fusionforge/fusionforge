@@ -47,7 +47,7 @@ $HTML->header(array('title'=>sprintf(_('%1$s Sitewide Statistics Graphs'), forge
 </table>
 
 <hr />
-
+<p class="information" ><?php echo _('Displayed data: only last 24 months.'); ?></p>
 <p class="align-center">
 <?php 
 views_graph(1);
