@@ -115,6 +115,9 @@ class FusionForgeConfig {
 			$sections = parse_ini_file ($filename, true) ;
 			if (is_array($sections)) {
 				foreach ($sections as $section => $options) {
+					if (!is_array($options)) {
+						continue;
+					}
 					foreach ($options as $var => $value) {
 						if ($fallback_only) {
 							$this->set_value($section,$var,$value);
