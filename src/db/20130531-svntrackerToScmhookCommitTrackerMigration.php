@@ -55,14 +55,20 @@ if ($used) {
 		if (!$projectObject->usesTracker()) {
 			$projectObject->setUseTracker(true);
 		}
-		$projectObject->setPluginUse('scmhook');
 		$projectId = $projectObject->getID();
+		if (!$projectObject->usesPlugin('scmhook')) {
+			$projectObject->setPluginUse('scmhook');
+			$pluginScmHook->add($projectId);
+		}
 		$group = $projectObject; // need to be set due to use of global vars in commitEmail class
-		$pluginScmHook->add($projectId);
+		$enabledHooks = $pluginScmHook->getEnabledHooks($projectId);
 		// -> add committracker hook
 		$params = array();
 		$params['group_id'] = $projectId;
 		$params['scmsvn_commitTracker'] = 1;
+		foreach ($enabledHooks as $enableHook) {
+			$params[$enableHook] = 1;
+		}
 		$pluginScmHook->update($params);
 		$hooksArray = $pluginScmHook->getEnabledHooks($projectId);
 		unset($pluginScmHook);
