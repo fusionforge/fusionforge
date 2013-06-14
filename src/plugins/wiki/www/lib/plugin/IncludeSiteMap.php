@@ -50,8 +50,7 @@ class WikiPlugin_IncludeSiteMap
 {
     function getDescription()
     {
-        return sprintf(_("Include recursively all linked pages starting at %s."),
-            $this->_pagename);
+        return _("Include recursively all linked pages starting at [pagename].");
     }
 
     function getDefaultArguments()
