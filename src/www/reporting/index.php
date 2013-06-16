@@ -37,6 +37,7 @@ report_header('Main Page');
 <p>
 <a href="useradded.php?SPAN=1"><?php echo _('Users Added (graph)'); ?></a><br />
 <a href="usercum.php?SPAN=1"><?php echo _('Cumulative Users (graph)'); ?></a><br />
+<?php echo _('User-specific reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads'); ?><br />
 <a href="useract.php"><?php echo _('Activity (graph)'); ?></a></p>
 <h2><?php echo _('Projects'); ?></h2>
 <p>
