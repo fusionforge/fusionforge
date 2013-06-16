@@ -246,6 +246,10 @@ function report_package_box($group_id, $name='dev_id', $selected='') {
 }
 
 function trackeract_graph($group_id, $area, $SPAN, $start, $end, $atid) {
+	$now = time();
+	if ($now < $end) {
+		$end = $now;
+	}
 	if (!strlen($area)) {
 		echo '<p class="information">'._('No selected area.').'</p>';
 		return true;
@@ -364,6 +368,10 @@ function trackeract_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 }
 
 function trackerpie_graph($group_id, $area, $SPAN, $start, $end, $atid) {
+	$now = time();
+	if ($now < $end) {
+		$end = $now;
+	}
 	if (!strlen($area)) {
 		echo '<p class="information">'._('No selected area.').'</p>';
 		return true;
@@ -407,6 +415,163 @@ function trackerpie_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 			}
 			);
 		});';
+	echo 'jQuery(window).resize(function() {
+			plot'.$chartid.'.replot( { resetAxes: true } );
+		});'."\n";
+	echo '//]]></script>';
+	echo '<div id="chart'.$chartid.'"></div>';
+	return true;
+}
+
+function userreport_graph($type, $SPAN, $start, $end) {
+	$now = time();
+	if ($now < $end) {
+		$end = $now;
+	}
+	switch ($type) {
+		case 'cumul': {
+			$report = new ReportUserCum($SPAN, $start, $end);
+			$label[0] = _('Cumulative users.');
+			break;
+		}
+		case 'added': {
+			$report = new ReportUserAdded($SPAN, $start, $end);
+			$label[0] = _('Users added.');
+			break;
+		}
+	}
+	
+	if ($report->isError()) {
+		echo '<p class="error">'.$report->getErrorMessage().'</p>';
+		return false;
+	}
+	$rdates = $report->getRawDates();
+	if (!$rdates) {
+		echo '<p class="error">'._('No data to display').'</p>';
+		return false;
+	}
+	$ydata[0]  = $report->getData();
+	
+	if ($SPAN == REPORT_TYPE_DAILY) {
+		$i = 0;
+		$formatDate = 'Y/m/d';
+		$looptime = $start;
+		while ($looptime < $end) {
+			$timeStampArr[$i] = $looptime;
+			$timeStampArrFormat[$i] = date($formatDate, $looptime);
+			$looptime += REPORT_DAY_SPAN;
+			$i++;
+		}
+	} elseif ($SPAN == REPORT_TYPE_WEEKLY) {
+		$timeStampArr = $report->getWeekStartArr();
+		$timeStampArrFormat = $report->getWeekStartArrFormat();
+		$formatDate = 'Y/W';
+	} elseif ($SPAN == REPORT_TYPE_MONTHLY) {
+		$timeStampArr = $report->getMonthStartArr();
+		$timeStampArrFormat = $report->getMonthStartArrFormat();
+		$formatDate = 'Y/m';
+	}
+
+	$chartid = '_useradded';
+	$yMax = 0;
+	echo '<script type="text/javascript">//<![CDATA['."\n";
+	echo 'var plot'.$chartid.';';
+	echo 'var '.$chartid.'values = new Array();';
+	echo 'var '.$chartid.'labels = new Array();';
+	echo 'var '.$chartid.'series = new Array();';
+	for ($z = 0; $z < count($ydata); $z++) {
+		echo $chartid.'values['.$z.'] = new Array();';
+		echo $chartid.'labels.push({label:\''.$label[$z].'\'});';
+		switch ($SPAN) {
+			case REPORT_TYPE_DAILY :
+			case REPORT_TYPE_MONTHLY : {
+				for ($j = 0; $j < count($timeStampArr); $j++) {
+					if (in_array($timeStampArr[$j], $rdates)) {
+						$thekey = array_search($timeStampArr[$j], $rdates);
+						if (isset($ydata[$z][$thekey])) {
+							if ($ydata[$z][$thekey] === false) {
+								$ydata[$z][$thekey] = 0;
+							}
+							if ($ydata[$z][$thekey] > $yMax) {
+								$yMax = $ydata[$z][$thekey];
+							}
+							echo 'var '.$chartid.'datevalues = '.$ydata[$z][$thekey].';';
+						} else {
+							echo 'var '.$chartid.'datevalues = 0;';
+						}
+					} else {
+						echo 'var '.$chartid.'datevalues = 0;';
+					}
+					echo 'var '.$chartid.'date = \''.$timeStampArrFormat[$j].'\';';
+					echo $chartid.'values['.$z.'].push(['.$chartid.'date, '.$chartid.'datevalues]);';
+				}
+				break;
+			}
+			case REPORT_TYPE_WEEKLY : {
+				for ($j = 0; $j < count($rdates); $j++) {
+					$wrdates[$j] = date($formatDate, $rdates[$j]);
+				}
+				for ($j = 0; $j < count($timeStampArr); $j++) {
+					if (in_array($timeStampArrFormat[$j], $wrdates)) {
+						$thekey = array_search($timeStampArr[$j], $wrdates);
+						if (isset($ydata[$z][$thekey])) {
+							if ($ydata[$z][$thekey] === false) {
+								$ydata[$z][$thekey] = 0;
+							}
+							if ($ydata[$z][$thekey] > $yMax) {
+								$yMax = $ydata[$z][$thekey];
+							}
+							echo 'var '.$chartid.'datevalues = '.$ydata[$z][$thekey].';';
+						} else {
+							echo 'var '.$chartid.'datevalues = 0;';
+						}
+					} else {
+						echo 'var '.$chartid.'datevalues = 0;';
+					}
+					echo 'var '.$chartid.'date = \''.$timeStampArrFormat[$j].'\';';
+					echo $chartid.'values['.$z.'].push(['.$chartid.'date, '.$chartid.'datevalues]);';
+				}
+				break;
+			}
+		}
+	}
+	for ($z = 0; $z < count($ydata); $z++) {
+		echo $chartid.'series.push('.$chartid.'values['.$z.']);';
+	}
+	echo 'jQuery(document).ready(function(){
+		plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', '.$chartid.'series, {
+			axesDefaults: {
+				tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
+				tickOptions: {
+					angle: 60,
+					showGridline: false,
+				}
+			},
+			legend: {
+				show:true, location: \'ne\',
+			},
+			series:
+				'.$chartid.'labels
+			,
+			axes: {
+				xaxis: {
+					renderer: jQuery.jqplot.CategoryAxisRenderer,
+					label: \''.$label[0].'\',
+				},
+				yaxis: {
+					max: '.++$yMax.',
+					min: 0,
+					tickOptions: {
+						angle: 0,
+					},
+				}
+			},
+			highlighter: {
+				show: true,
+				sizeAdjust: 2.5,
+			},
+		});
+	});';
 	echo 'jQuery(window).resize(function() {
 			plot'.$chartid.'.replot( { resetAxes: true } );
 		});'."\n";

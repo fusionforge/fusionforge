@@ -3,6 +3,7 @@
  * Reporting System
  *
  * Copyright 2003-2004 (c) GForge LLC
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -24,6 +25,7 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
+require_once $gfcommon.'reporting/ReportUserAdded.class.php';
 
 session_require_global_perm ('forge_stats', 'read') ;
 
@@ -50,6 +52,9 @@ if ($start == $end) {
 	$error_msg .= _('Start and end dates must be different');
 }
 
+html_use_jqueryjqplotpluginCanvas();
+html_use_jqueryjqplotpluginhighlighter();
+
 report_header(_('Users Added'));
 
 ?>
@@ -62,7 +67,14 @@ report_header(_('Users Added'));
 </tr></table>
 </form>
 <?php if ($start != $end) { ?>
-	<p><img src="useradded_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end"; ?>" alt="" /></p>
+	<p>
+	<?php
+		userreport_graph('added', $SPAN, $start, $end);
+	?>
+	<noscript>
+	<img src="useradded_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end"; ?>" alt="" />
+	</noscript>
+	</p>
 <?php }
 
 report_footer();

@@ -34,18 +34,19 @@ DEFINE('REPORT_TYPE_OA',4);
 class Report extends Error {
 
 //var $adjust_days=array('Sun'=>0, 'Sat'=>6, 'Fri'=>5, 'Thu'=>4, 'Wed'=>3, 'Tue'=>2, 'Mon'=>1);
-var $adjust_days=array('Sun'=>'0.0', 'Sat'=>1, 'Fri'=>2, 'Thu'=>3, 'Wed'=>4, 'Tue'=>5, 'Mon'=>6);
-var $month_start_arr=array();
+var $adjust_days = array('Sun'=>'0.0', 'Sat'=>1, 'Fri'=>2, 'Thu'=>3, 'Wed'=>4, 'Tue'=>5, 'Mon'=>6);
+var $month_start_arr = array();
 var $month_start_arr_format = array();
-var $week_start_arr=array();
+var $week_start_arr = array();
+var $week_start_arr_format = array();
 var $site_start_date;
 var $data;
 var $labels;
 var $span;
 var $start_date;
 var $end_date;
-var $span_name=array(1=>'Daily',2=>'Weekly',3=>'Monthly',4=>'OverAll');
-var $graph_interval=array(1=>7,2=>1,3=>1,4=>1);
+var $span_name = array(1=>'Daily',2=>'Weekly',3=>'Monthly',4=>'OverAll');
+var $graph_interval = array(1=>7,2=>1,3=>1,4=>1);
 var $max_weeks = 104;
 var $max_month = 24;
 var $rawdates = array();
@@ -92,11 +93,13 @@ function &getWeekStartArr() {
 		$start=mktime(0,0,0,date('m'),(date('d')+$this->adjust_days[date('D')]),date('Y'));
 		for ($i=0; $i<$this->max_weeks; $i++) {
 			$this->week_start_arr[]=($start-REPORT_WEEK_SPAN*$i);
+			$this->week_start_arr_format[] = date('Y/W', $this->week_start_arr[$i]);
 			if ($this->week_start_arr[$i] < $min_date) {
 				break;
 			}
 		}
 		sort($this->week_start_arr);
+		sort($this->week_start_arr_format);
 	}
 	return $this->week_start_arr;
 }
@@ -160,6 +163,9 @@ function getMonthStartArrFormat() {
 	return $this->month_start_arr_format;
 }
 
+function getWeekStartArrFormat() {
+	return $this->week_start_arr_format;
+}
 }
 
 // Local Variables:
