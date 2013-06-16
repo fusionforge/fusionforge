@@ -258,21 +258,18 @@ function projectact_graph($group_id, $area, $SPAN, $start, $end) {
 		return false;
 	}
 	if ($SPAN == REPORT_TYPE_DAILY) {
-		$interval = REPORT_DAY_SPAN;
 		$i = 0;
 		$looptime = $start;
 		while ($looptime < $end) {
 			$timeStampArr[$i] = $looptime;
-			$looptime += $interval;
+			$looptime += REPORT_DAY_SPAN;
 			$i++;
 		}
 		$formatDate = 'Y/m/d';
 	} elseif ($SPAN == REPORT_TYPE_WEEKLY) {
-		$interval = REPORT_WEEK_SPAN;
 		$timeStampArr = $report->getWeekStartArr();
 		$formatDate = 'Y/W';
 	} elseif ($SPAN == REPORT_TYPE_MONTHLY) {
-		$interval = REPORT_MONTH_SPAN;
 		$timeStampArr = $report->getMonthStartArr();
 		$formatDate = 'Y/m';
 	}
