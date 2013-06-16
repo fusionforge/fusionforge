@@ -525,16 +525,11 @@ function views_graph($monthly = 0) {
 		$chartid = '_views_graph';
 		echo '<script type="text/javascript">//<![CDATA['."\n";
 		echo 'var '.$chartid.'values = new Array();';
-		echo 'var '.$chartid.'ticks = new Array();';
 		echo 'var plot'.$chartid.';';
-		$yMax = 0;
 		for ($j = 0; $j < count($monthStartArrFormat); $j++) {
 			$key = array_search($monthStartArrFormat[$j], $xlabel);
 			if ($key !== FALSE) {
 				echo 'var '.$chartid.'datevalues = '.$ydata[$key].';';
-				if ($ydata[$key] > $yMax) {
-					$yMax = $ydata[$key];
-				}
 			} else {
 				echo 'var '.$chartid.'datevalues = 0;';
 			}
@@ -547,7 +542,9 @@ function views_graph($monthly = 0) {
 						tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
 						tickOptions: {
 							angle: 30,
-						}
+							showGridline: false,
+						},
+						pad: 0,
 					},
 					axes: {
 						xaxis: {
@@ -585,6 +582,7 @@ function users_graph() {
 			array ());
 
 	$i = 0;
+	$yMax = 0;
 	$xlabel = array();
 	$ydata = array();
 	$ydata[0] = array();
@@ -603,7 +601,6 @@ function users_graph() {
 		$chartid = '_newprojectuser';
 		echo '<script type="text/javascript">//<![CDATA['."\n";
 		echo 'var '.$chartid.'values = new Array();';
-		echo 'var '.$chartid.'ticks = new Array();';
 		echo 'var '.$chartid.'labels = new Array();';
 		echo 'var '.$chartid.'series = new Array();';
 		echo 'var plot'.$chartid.';';
@@ -614,8 +611,8 @@ function users_graph() {
 				$key = array_search($monthStartArrFormat[$j], $xlabel);
 				if ($key !== FALSE) {
 					echo 'var '.$chartid.'datevalues = '.$ydata[$z][$key].';';
-					if ($ydata[$z][$key] > $yMax) {
-						$yMax = $ydata[$z][$key];
+					if ($ydata[$z][$thekey] > $yMax) {
+						$yMax = $ydata[$z][$thekey];
 					}
 				} else {
 					echo 'var '.$chartid.'datevalues = 0;';
@@ -633,7 +630,9 @@ function users_graph() {
 						tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
 						tickOptions: {
 							angle: 30,
-						}
+							showGridline: false,
+						},
+						pad: 0,
 					},
 					legend: {
 						show:true, location: \'ne\',
@@ -647,6 +646,7 @@ function users_graph() {
 							label: \''.('New Users and new projects per month').'\',
 						},
 						yaxis: {
+							max: '.++$yMax.',
 							min: 0,
 							tickOptions: {
 								angle: 0,
