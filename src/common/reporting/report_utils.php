@@ -423,20 +423,30 @@ function trackerpie_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 	return true;
 }
 
-function userreport_graph($type, $SPAN, $start, $end) {
-	$now = time();
+function report_graph($type, $SPAN, $start, $end) {
+	$now = time() - 60*24*24;
 	if ($now < $end) {
 		$end = $now;
 	}
 	switch ($type) {
-		case 'cumul': {
+		case 'usercumul': {
 			$report = new ReportUserCum($SPAN, $start, $end);
 			$label[0] = _('Cumulative users.');
 			break;
 		}
-		case 'added': {
+		case 'useradded': {
 			$report = new ReportUserAdded($SPAN, $start, $end);
 			$label[0] = _('Users added.');
+			break;
+		}
+		case 'groupadded': {
+			$report = new ReportGroupAdded($SPAN, $start, $end);
+			$label[0] = _('Projects added.');
+			break;
+		}
+		case 'groupcumul': {
+			$report = new ReportGroupCum($SPAN, $start, $end);
+			$label[0] = _('Cumulative Projects.');
 			break;
 		}
 	}
