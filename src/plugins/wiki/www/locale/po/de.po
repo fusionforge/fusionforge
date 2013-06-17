@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-13 17:38+0200\n"
+"POT-Creation-Date: 2013-06-17 14:31+0200\n"
 "PO-Revision-Date: 2000-10-31 02:23+0200\n"
 "Last-Translator: Reini Urban <rurban@x-ray.at>, Carsten Klapp "
 "<carstenklapp@users.sourceforge.net>, Helmer Pardun <pardunpress@t-online."
@@ -1360,19 +1360,6 @@ msgstr ""
 msgid "Atom Aggregator Plugin."
 msgstr ""
 
-msgid "Display general and user specific auth information."
-msgstr ""
-
-msgid "General Auth Settings"
-msgstr "Allgemeine Authentifizierungs-Einstellungen"
-
-#, php-format
-msgid "Personal Auth Settings for “%s”"
-msgstr "Spezielle Authentifizierungs-Einstellungen %s"
-
-msgid "No userid"
-msgstr ""
-
 #, php-format
 msgid ""
 "List all page revisions edited by one user with diff links, or show a "
@@ -1576,6 +1563,19 @@ msgid "Click to display to TOC"
 msgstr "Klicken um TOC anzuzeigen"
 
 msgid "Display current time and date."
+msgstr ""
+
+msgid "Display general and user specific auth information."
+msgstr ""
+
+msgid "General Auth Settings"
+msgstr "Allgemeine Authentifizierungs-Einstellungen"
+
+#, php-format
+msgid "Personal Auth Settings for “%s”"
+msgstr "Spezielle Authentifizierungs-Einstellungen %s"
+
+msgid "No userid"
 msgstr ""
 
 msgid "Display differences between revisions."
@@ -4038,7 +4038,7 @@ msgstr ""
 msgid "AtomFeed"
 msgstr ""
 
-msgid "_AuthInfo"
+msgid "DebugAuthInfo"
 msgstr ""
 
 msgid "AuthorHistory"
@@ -4778,7 +4778,7 @@ msgstr ""
 msgid "ActionPage"
 msgstr "Aktion Seite"
 
-msgid "DebugAuthInfo"
+msgid "_AuthInfo"
 msgstr ""
 
 msgid "GroupAuthInfo"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-13 17:38+0200\n"
+"POT-Creation-Date: 2013-06-17 14:31+0200\n"
 "PO-Revision-Date: 2004-06-22 21:10+0200\n"
 "Last-Translator: Pierrick Meignen <meignen.pierrick@wanadoo.fr>, Roland "
 "Trique <roland.trique@free.fr>, Stéphane Gourichon <stephane.gourichon@lip6."
@@ -1332,19 +1332,6 @@ msgstr ""
 msgid "Atom Aggregator Plugin."
 msgstr "Greffon Atom."
 
-msgid "Display general and user specific auth information."
-msgstr "Afficher les informations générales de l'utilisateur."
-
-msgid "General Auth Settings"
-msgstr "Préférences générales d'auteur"
-
-#, php-format
-msgid "Personal Auth Settings for “%s”"
-msgstr "Préférences personnelles pour « %s »"
-
-msgid "No userid"
-msgstr "Pas d'identifiant utilisateur"
-
 #, php-format
 msgid ""
 "List all page revisions edited by one user with diff links, or show a "
@@ -1548,6 +1535,19 @@ msgstr "Cliquez pour afficher la table des matières"
 
 msgid "Display current time and date."
 msgstr ""
+
+msgid "Display general and user specific auth information."
+msgstr "Afficher les informations générales de l'utilisateur."
+
+msgid "General Auth Settings"
+msgstr "Préférences générales d'auteur"
+
+#, php-format
+msgid "Personal Auth Settings for “%s”"
+msgstr "Préférences personnelles pour « %s »"
+
+msgid "No userid"
+msgstr "Pas d'identifiant utilisateur"
 
 msgid "Display differences between revisions."
 msgstr "Affiche les différences entre versions."
@@ -3960,7 +3960,7 @@ msgstr ""
 msgid "AtomFeed"
 msgstr ""
 
-msgid "_AuthInfo"
+msgid "DebugAuthInfo"
 msgstr ""
 
 msgid "AuthorHistory"
@@ -4692,7 +4692,7 @@ msgstr ""
 msgid "ActionPage"
 msgstr ""
 
-msgid "DebugAuthInfo"
+msgid "_AuthInfo"
 msgstr ""
 
 msgid "GroupAuthInfo"

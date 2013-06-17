@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-13 17:38+0200\n"
+"POT-Creation-Date: 2013-06-17 14:31+0200\n"
 "PO-Revision-Date: 2003-06-07 09:01+0900\n"
 "Last-Translator: Tadashi Jokagi <webmaster@elf.no-ip.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1329,19 +1329,6 @@ msgstr ""
 msgid "Atom Aggregator Plugin."
 msgstr ""
 
-msgid "Display general and user specific auth information."
-msgstr ""
-
-msgid "General Auth Settings"
-msgstr ""
-
-#, php-format
-msgid "Personal Auth Settings for “%s”"
-msgstr ""
-
-msgid "No userid"
-msgstr ""
-
 #, php-format
 msgid ""
 "List all page revisions edited by one user with diff links, or show a "
@@ -1547,6 +1534,19 @@ msgid "Click to display to TOC"
 msgstr ""
 
 msgid "Display current time and date."
+msgstr ""
+
+msgid "Display general and user specific auth information."
+msgstr ""
+
+msgid "General Auth Settings"
+msgstr ""
+
+#, php-format
+msgid "Personal Auth Settings for “%s”"
+msgstr ""
+
+msgid "No userid"
 msgstr ""
 
 msgid "Display differences between revisions."
@@ -3975,8 +3975,8 @@ msgid "AtomFeed"
 msgstr ""
 
 #, fuzzy
-msgid "_AuthInfo"
-msgstr "編集者:"
+msgid "DebugAuthInfo"
+msgstr "デバグ情報"
 
 msgid "AuthorHistory"
 msgstr ""
@@ -4732,8 +4732,8 @@ msgid "ActionPage"
 msgstr "操作ページ"
 
 #, fuzzy
-msgid "DebugAuthInfo"
-msgstr "デバグ情報"
+msgid "_AuthInfo"
+msgstr "編集者:"
 
 #, fuzzy
 msgid "GroupAuthInfo"
