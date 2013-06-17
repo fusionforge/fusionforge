@@ -75,6 +75,9 @@ $(LXC_DATA)/templates/lxc-centos5: lxc-centos5 $(LXC_DATA) Makefile
 $(LXC_DATA)/templates/lxc-centos6: lxc-centos6 $(LXC_DATA) Makefile
 	cp lxc-centos6 $(LXC_DATA)/templates/
 
+/usr/share/lxc/templates/lxc-centos5: lxc-centos5 /usr/share/lxc
+	cp lxc-centos5 /usr/share/lxc/templates/
+
 createdeb:
 	sudo /usr/bin/lxc-create -n dhdebian6.local -f config.debian6 -t debian6
 	sudo /usr/bin/lxc-create -n dhdebian7.local -f config.debian7 -t debian7
