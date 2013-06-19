@@ -74,7 +74,7 @@ echo '</div>';
 if (forge_check_perm('docman', $group_id, 'approve')) {
 	echo '<div class="docman_div_include" id="zipinject" style="display:none">';
 	echo '<h4 class="docman_h4">'. _('Inject a Tree') .'</h4>';
-	echo '<form id="injectzip" name="injectzip" method="post" action="?group_id='.$group_id.'&action=injectzip&dirid='.$dirid.'" enctype="multipart/form-data">';
+	echo '<form id="injectzip" name="injectzip" method="post" action="?group_id='.$group_id.'&amp;action=injectzip&amp;dirid='.$dirid.'" enctype="multipart/form-data">';
 	echo '<p>';
 	echo '<label>' . _('Upload archive:') . ' </label><input type="file" name="uploaded_zip" size="30" />'.sprintf(_('(max upload size: %1$s)'),human_readable_bytes(util_get_maxuploadfilesize()));
 	echo '<input id="submitinjectzip" type="button" value="'. _('Inject') .'" onclick="javascript:doItInject()" />';
