@@ -128,9 +128,9 @@ msgid "Documents folder %s updated successfully"
 msgstr "Le répertoire de documents %s a été mise à jour avec succès."
 
 #: common/docman/actions/editdocgroup.php:88
-#, fuzzy, php-format
+#, php-format
 msgid "on project %s"
-msgstr "%s (dans le projet %s)"
+msgstr "dans le projet %s"
 
 #: common/docman/actions/editfile.php:69
 msgid "No document found to update"
@@ -166,20 +166,18 @@ msgstr ""
 "résultats seront disponibles sous 24 h."
 
 #: common/docman/actions/injectzip.php:49
-#, fuzzy
 msgid "Archive injected successfully."
-msgstr "Ensemble des documents et répertoires correctement inséré."
+msgstr "Archive correctement insérée."
 
 #: common/docman/actions/monitordirectory.php:38 www/activity/index.php:322
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:60
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:52
-#, fuzzy
 msgid "Directory"
-msgstr "Répertoire :"
+msgstr "Dossier"
 
 #: common/docman/actions/monitordirectory.php:54
 msgid "monitoring started"
-msgstr "Suirveillance démarrée"
+msgstr "Surveillance démarrée"
 
 #: common/docman/actions/monitordirectory.php:72
 msgid "monitoring stopped."
@@ -811,7 +809,7 @@ msgstr "Vous devez vous identifier"
 #: common/docman/views/addfile.php:165 www/frs/admin/editrelease.php:290
 #: www/frs/admin/qrs.php:191
 msgid "File Name"
-msgstr "Nom du fichier&nbsp;"
+msgstr "Nom du fichier"
 
 #: common/docman/views/addfile.php:193
 #, fuzzy
@@ -944,7 +942,7 @@ msgstr "Nom du répertoire"
 
 #: common/docman/views/editdocgroup.php:61
 msgid "belongs to"
-msgstr "Appartient à"
+msgstr "appartient à"
 
 #: common/docman/views/editdocgroup.php:67
 msgid "Restore"
@@ -1003,7 +1001,7 @@ msgstr "Répertoire auquel le document appartient :"
 
 #: common/docman/views/editfile.php:70
 msgid "State:"
-msgstr "État"
+msgstr "État :"
 
 #: common/docman/views/editfile.php:75
 msgid "Specify an new outside URL where the file will be referenced:"
@@ -1328,7 +1326,7 @@ msgstr "Répertoire non valide"
 #: common/docman/views/listtrashfile.php:108
 msgid "Delete permanently all documents and folders with deleted status."
 msgstr ""
-"Détruire de manière irrémédiable tous les documents au statut\n"
+"Détruire de manière irrémédiable tous les documents au statut "
 "« supprimé »."
 
 #: common/docman/views/listtrashfile.php:117
@@ -1379,9 +1377,8 @@ msgid "Search documents in this project using keywords."
 msgstr ""
 
 #: common/docman/views/menu.php:61
-#, fuzzy
 msgid "Trash"
-msgstr "Vérifier la corbeille"
+msgstr "Corbeille"
 
 #: common/docman/views/menu.php:63
 msgid "Recover or delete permanently files with deleted status."
@@ -1402,9 +1399,8 @@ msgid "Docman module administration."
 msgstr "Administration du gestionnaire de documents"
 
 #: common/docman/views/menu.php:70
-#, fuzzy
 msgid "Reports"
-msgstr "Rapport"
+msgstr "Rapports"
 
 #: common/docman/views/menu.php:72
 #, fuzzy
@@ -2510,9 +2506,8 @@ msgid "The Site Administrator has turned off this feature."
 msgstr "L'administrateur du site a désactivé cette fonctionnalité."
 
 #: common/include/exit.php:113
-#, fuzzy
 msgid "The Project Administrator has turned off this feature."
-msgstr "L'administrateur du site a désactivé cette fonctionnalité."
+msgstr "L'administrateur du projet a désactivé cette fonctionnalité."
 
 #: common/include/exit.php:122
 msgid "You Attempted To Double-submit this item. Please avoid double-clicking."
