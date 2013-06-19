@@ -139,7 +139,7 @@ if ($d_pending_arr != NULL ) {
 
 ?>
 
-<script language="JavaScript" type="text/javascript">//<![CDATA[
+<script type="text/javascript">//<![CDATA[
 var controllerListFile;
 
 jQuery(document).ready(function() {

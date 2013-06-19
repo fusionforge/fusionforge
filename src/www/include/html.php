@@ -46,7 +46,7 @@ function html_generic_fileheader($title) {
 	echo "<head>\n";
 	echo '<meta http-equiv="Content-Type" ' .
 	    'content="text/html; charset=utf-8" />' . "\n";
-	echo '<script language="JavaScript" type="text/javascript">//<![CDATA[' .
+	echo '<script type="text/javascript">//<![CDATA[' .
 	    "\n\tvar sys_url_base = " . minijson_encode(util_make_url("/"),
 	    false) . ";\n" .
 	    "//]]></script>\n";

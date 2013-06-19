@@ -85,7 +85,7 @@ if ($d_arr != NULL ) {
 	}
 }
 ?>
-<script language="JavaScript" type="text/javascript">//<![CDATA[
+<script type="text/javascript">//<![CDATA[
 var controllerListTrash;
 
 jQuery(document).ready(function() {

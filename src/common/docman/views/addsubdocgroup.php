@@ -43,7 +43,7 @@ if (isset($childgroup_id) && $childgroup_id) {
 }
 
 ?>
-<script language="JavaScript" type="text/javascript">//<![CDATA[
+<script type="text/javascript">//<![CDATA[
 function doItAddSubGroup() {
 	document.getElementById('addsubgroup').submit();
 	document.getElementById('submitaddsubgroup').disabled = true;

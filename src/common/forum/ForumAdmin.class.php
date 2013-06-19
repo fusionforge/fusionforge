@@ -291,7 +291,7 @@ class ForumAdmin extends Error {
 			}
 
 			echo '
-			<script language="JavaScript" type="text/javascript">/* <![CDATA[ */
+			<script type="text/javascript">/* <![CDATA[ */
 
 			function confirmDel() {
 				var agree=confirm("' . _('Proceed? Actions are permanent!') . '");

@@ -42,7 +42,7 @@ echo '<ul id="'.$g->getUnixname().'-tree">';
 $dm->getTree($dirid, $linkmenu);
 echo '</ul>';
 echo '
-<script language="JavaScript" type="text/javascript">//<![CDATA[
+<script type="text/javascript">//<![CDATA[
 	jQuery(document).ready(function() {
 		if (typeof(jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu) != "undefined") {
 			jQuery(\'#'.$g->getUnixname().'-tree\').simpleTreeMenu();

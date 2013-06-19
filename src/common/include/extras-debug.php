@@ -147,7 +147,7 @@ function ffOutputHandler($buffer) {
 	// this is, sadly, necessary (especially in ff-plugin-mediawiki)
 	$pre_tag = "<pre style=\"margin:0; padding:0; border:0; line-height:125%;\">";
 
-	$divstring = "\n\n" . '<script language="JavaScript" type="text/javascript">//<![CDATA[
+	$divstring = "\n\n" . '<script type="text/javascript">//<![CDATA[
 		function toggle_ffErrors() {
 			var errorsblock = document.getElementById("ffErrorsBlock");
 			var errorsgroup = document.getElementById("ffErrors");

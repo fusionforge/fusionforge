@@ -36,7 +36,7 @@ if ( !forge_check_perm('docman', $group_id, 'admin')) {
 ?>
 
 <div id="principalAdminDiv" class="docmanDivIncluded">
-<script language="JavaScript" type="text/javascript">//<![CDATA[
+<script type="text/javascript">//<![CDATA[
 function doIt(formid) {
 	document.getElementById(formid).submit();
 	document.getElementById('submit'+formid).disabled = true;

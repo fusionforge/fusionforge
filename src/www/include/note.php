@@ -51,7 +51,7 @@ function notepad_anchor($str, $form) {
 
 function notepad_func() {
       $js = "\n" .
-'<script language="JavaScript" type="text/javascript">/* <![CDATA[ */'.
+'<script type="text/javascript">/* <![CDATA[ */'.
 "\n".
 'function notepad_window_param(form, wrap, rows, cols) {'.
 '   notepad_php = "'.util_make_url("/notepad.php").'";'.

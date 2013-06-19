@@ -118,7 +118,7 @@ class Widget_ProjectDocumentsActivity extends Widget {
 		$activitysArray[] = $dm->getActivity($sections, $begin3, $end3);
 		$activitysArray[] = $dm->getActivity($sections, $begin2, $end2);
 		$activitysArray[] = $dm->getActivity($sections, $begin1, $end1);
-		echo '<script language="JavaScript" type="text/javascript">//<![CDATA['."\n";
+		echo '<script type="text/javascript">//<![CDATA['."\n";
 		switch($this->_statistic_show) {
 			case 'F':
 				echo 'var s1 = ['.$activitysArray[0]['docmannew'].', '.$activitysArray[1]['docmannew'].', '.$activitysArray[2]['docmannew'].', '.$activitysArray[3]['docmannew'].'];';

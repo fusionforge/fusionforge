@@ -43,7 +43,7 @@ if (!isset($nested_pending_docs)) {
 } else {
 
 ?>
-<script language="JavaScript" type="text/javascript">//<![CDATA[
+<script type="text/javascript">//<![CDATA[
 var controllerListPending;
 
 jQuery(document).ready(function() {
