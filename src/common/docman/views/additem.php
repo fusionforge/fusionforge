@@ -34,7 +34,7 @@ if (!forge_check_perm('docman', $group_id, 'submit')) {
 }
 ?>
 
-<script language="Javascript" type="text/javascript">//<![CDATA[
+<script type="text/javascript">//<![CDATA[
 var controllerAddItem;
 
 jQuery(document).ready(function() {

@@ -55,7 +55,7 @@ if (!forge_check_perm('docman', $group_id, 'submit')) {
 }
 ?>
 
-<script language="Javascript" type="text/javascript">//<![CDATA[
+<script type="text/javascript">//<![CDATA[
 var controllerAddFile;
 
 jQuery(document).ready(function() {
