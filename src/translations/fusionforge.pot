@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-12 17:36+0200\n"
+"POT-Creation-Date: 2013-06-19 15:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1600,8 +1600,8 @@ msgstr ""
 
 #: common/forum/AttachManager.class.php:164
 #: common/tracker/views/form-customizelist.php:127
-#: common/widget/WidgetLayoutManager.class.php:502
-#: common/widget/WidgetLayoutManager.class.php:529
+#: common/widget/WidgetLayoutManager.class.php:513
+#: common/widget/WidgetLayoutManager.class.php:540
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:61
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:165
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:123
@@ -4218,7 +4218,7 @@ msgstr ""
 #: common/tracker/views/form-workflow.php:123
 #: common/tracker/views/form-workflow_roles.php:78
 #: common/widget/Widget.class.php:104
-#: common/widget/WidgetLayoutManager.class.php:320
+#: common/widget/WidgetLayoutManager.class.php:331
 #: plugins/contribtracker/www/global_admin.php:383
 #: plugins/contribtracker/www/global_admin.php:411
 #: plugins/contribtracker/www/global_admin.php:452
@@ -6230,33 +6230,38 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: common/widget/WidgetLayoutManager.class.php:247
-#: common/widget/WidgetLayoutManager.class.php:252
+#: common/widget/WidgetLayoutManager.class.php:181
+#, php-format
+msgid "DB Error: %s"
+msgstr ""
+
+#: common/widget/WidgetLayoutManager.class.php:258
+#: common/widget/WidgetLayoutManager.class.php:263
 #: www/include/project_home.php:73 www/my/index.php:55
 #: www/widgets/widgets.php:72
 msgid "Add widgets"
 msgstr ""
 
-#: common/widget/WidgetLayoutManager.class.php:248
-#: common/widget/WidgetLayoutManager.class.php:253
+#: common/widget/WidgetLayoutManager.class.php:259
+#: common/widget/WidgetLayoutManager.class.php:264
 #: www/include/project_home.php:74 www/my/index.php:56
 #: www/widgets/widgets.php:70
 msgid "Customize layout"
 msgstr ""
 
-#: common/widget/WidgetLayoutManager.class.php:330
+#: common/widget/WidgetLayoutManager.class.php:341
 #, php-format
 msgid "%s Widgets"
 msgstr ""
 
-#: common/widget/WidgetLayoutManager.class.php:500
-#: common/widget/WidgetLayoutManager.class.php:527
+#: common/widget/WidgetLayoutManager.class.php:511
+#: common/widget/WidgetLayoutManager.class.php:538
 #: plugins/hudson/include/HudsonJobWidget.class.php:65
 #: plugins/hudson/include/HudsonJobWidget.class.php:87
 msgid "Already used"
 msgstr ""
 
-#: common/widget/WidgetLayoutManager.class.php:671
+#: common/widget/WidgetLayoutManager.class.php:682
 #, php-format
 msgid "Your <a href=\"%s\">dashboard</a> has been updated."
 msgstr ""
@@ -7046,14 +7051,14 @@ msgid ""
 msgstr ""
 
 #: db/20130127-extratabToHeadermenuMigration.php:81
-#: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:90
-#: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:85
+#: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:95
+#: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:91
 msgid "Soft link wasn't removed in www/plugins folder, please do so manually."
 msgstr ""
 
 #: db/20130127-extratabToHeadermenuMigration.php:90
-#: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:99
-#: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:94
+#: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:104
+#: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:100
 msgid "Soft link wasn't removed in config folder, please do so manually."
 msgstr ""
 
