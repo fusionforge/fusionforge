@@ -64,7 +64,7 @@ if (forge_check_perm('docman', $group_id, 'approve')) {
 }
 
 if (forge_check_perm('docman', $group_id, 'admin')) {
-	$menu_text[] = _('Admin');
+	$menu_text[] = _('Administration');
 	$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=admin';
 	$menu_attr[] = array('title' => _('Docman module administration.'), 'id' => 'adminDocmanMenu', 'class' => 'tabtitle');
 	$menu_text[] = _('Reports');
