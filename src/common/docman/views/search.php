@@ -158,7 +158,7 @@ if ($searchString) {
 		}
 		echo '</table>';
 	}
-} else {
+} elseif (getStringFromServer('REQUEST_METHOD') === 'POST') {
 	echo '<p class="warning_msg">'._('Your search is empty.').'</p>';
 }
 echo '</div>';
