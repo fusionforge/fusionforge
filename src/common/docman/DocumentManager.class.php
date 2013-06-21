@@ -183,7 +183,10 @@ class DocumentManager extends Error {
 				}
 				if ($localDg->getName() != '.trash') {
 					$user = user_get_object($localDg->getCreated_by());
-					$lititle = _('Created_by:').$user->getRealName()._('; Last modified:').date(_('Y-m-d H:i'), $localDg->getLastModifyDate());
+					$lititle = _('Created by')._(': ').$user->getRealName();
+					if ($localDg->getLastModifyDate()) {
+						$lititle .= _('; ')._('Last modified')._(': ').relative_date($localDg->getLastModifyDate());
+					}
 					echo '<li id="leaf-'.$subGroupIdValue.'" class="'.$liclass.'">'.util_make_link($link, $localDg->getName(), array('class'=>'tabtitle-nw', 'title'=>$lititle)).$nbDocsLabel;
 				} else {
 					echo '<li id="leaf-'.$subGroupIdValue.'" class="'.$liclass.'">'.util_make_link($link, $localDg->getName()).$nbDocsLabel;
