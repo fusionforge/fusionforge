@@ -56,8 +56,8 @@ if ($insideDocuments)
 	$insideDocumentsCheckbox = 'checked="checked"';
 
 echo '<div class="docmanDivIncluded">';
-echo '<form method="post" action="?group_id='.$group_id.'&view=search" >';
-echo '<table width="98%" cellpadding="2" cellspacing="0" border="0">';
+echo '<form method="post" action="?group_id='.$group_id.'&amp;view=search">';
+echo '<table>';
 echo '<tr><td><b>'._('Query: ').'</b>';
 echo '<input type="text" name="textsearch" id="textsearch" size="48" value="'.$searchString.'" required="required" />';
 echo '<input type="submit" value="'._('Search').'" />';

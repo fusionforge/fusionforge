@@ -155,7 +155,7 @@ jQuery(document).ready(function() {
 		divRight:		jQuery('#right'),
 		childGroupId:		<?php echo util_ifsetor($childgroup_id, 0) ?>,
 		divEditFile:		jQuery('#editFile'),
-		divEditTitle:		'<?php echo _("Edit document dialog box") ?>',
+		divEditTitle:		'<?php echo _("Edit document dialog box") ?>'
 	});
 });
 
@@ -349,10 +349,10 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	}
 	echo $HTML->listTableBottom();
 	echo '<p>';
+	echo '<span id="massactionactive" style="display: none;" >';
 	echo '<span class="tabtitle" id="docman-massactionmessage" title="'. _('Actions availables for selected documents, you need to check at least one document to get actions') . '" >';
 	echo _('Mass actions for selected documents:');
 	echo '</span>';
-	echo '<span id="massactionactive" style="display: none;" >';
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 		echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Move to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash'))). '</a>';
 		if (session_loggedin()) {
@@ -375,7 +375,14 @@ if (forge_check_perm('docman', $group_id, 'approve') && $DocGroupName) {
 	include ($gfcommon.'docman/views/pendingfiles.php');
 }
 echo '</div>';
-echo '<div style="clear: both;" />';
+echo '<div style="clear: both;"></div>';
 if (forge_check_perm('docman', $g->getID(), 'approve')) {
 	include ($gfcommon.'docman/views/editfile.php');
 }
+
+echo '<div class="docmanDivIncluded">';
+plugin_hook ("blocks", "doc help");
+if (forge_get_config('use_webdav') && $g->useWebdav()) {
+    echo '<p><i>'. util_make_link('/docman/view.php/'.$group_id.'/webdav',_('Documents are also available thru webdav access')) .'</i></p>';
+}
+echo '</div>';

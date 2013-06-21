@@ -41,8 +41,8 @@ $menu_text = array();
 $menu_links = array();
 $menu_attr = array();
 
-$menu_text[] = _('List files & Directories');
-$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=listfile&amp;dirid=0';
+$menu_text[] = _('View Documents');
+$menu_links[] = '/docman/?group_id='.$group_id;
 $menu_attr[] = array('title' => _('View files and folders in 2 panels. Left a folder tree, right a list of files of selected folder.'), 'id' => 'listFileDocmanMenu', 'class' => 'tabtitle-nw');
 
 if (forge_check_perm('docman', $group_id, 'submit')) {

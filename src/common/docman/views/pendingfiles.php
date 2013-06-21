@@ -52,7 +52,7 @@ jQuery(document).ready(function() {
 		docManURL:		'<?php util_make_uri("docman") ?>',
 		lockIntervalDelay:	60000, //in microsecond and if you change this value, please update the check value 600
 		divEditFile:		jQuery('#editFile'),
-		divEditTitle:		'<?php echo _("Edit document dialog box") ?>',
+		divEditTitle:		'<?php echo _("Edit document dialog box") ?>'
 	});
 });
 //]]></script>
