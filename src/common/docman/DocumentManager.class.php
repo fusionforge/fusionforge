@@ -96,7 +96,6 @@ class DocumentManager extends Error {
 			$dg->setStateID('2');
 			return $dg->getID();
 		}
-		return false;
 	}
 
 	/**
