@@ -796,7 +796,8 @@ class DocumentGroup extends Error {
 									$subGroupArrID = $this->getSubgroup(0);
 									$this->data_array['doc_group'] = $subGroupArrID[0];
 							}
-							if (!$d->create($dir_arr[$i], $dir_arr_type, $directory.'/'.$dir_arr[$i], $this->getID(), $dir_arr[$i].' '._('injected by Zip:').date(DATE_ATOM), _('no description'))) {
+							if (!$d->create($dir_arr[$i], $dir_arr_type, $directory.'/'.$dir_arr[$i], $this->getID(),
+								$dir_arr[$i], _('Injected by Zip:').date(DATE_ATOM))) {
 								$this->setError($dir_arr[$i].': '.$d->getErrorMessage());
 								return false;
 							}
