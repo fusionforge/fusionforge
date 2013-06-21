@@ -3,6 +3,7 @@
  * Reporting System
  *
  * Copyright 2003-2004 (c) GForge LLC
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,6 +26,7 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
+require_once $gfcommon.'reporting/ReportSiteAct.class.php';
 
 session_require_global_perm ('forge_stats', 'read') ;
 
@@ -54,6 +56,11 @@ if ($start == $end) {
 
 $area = util_ensure_value_in_set ($area, array ('tracker','forum','docman','taskman','downloads', 'pageviews')) ;
 
+html_use_jqueryjqplotpluginCanvas();
+html_use_jqueryjqplotpluginhighlighter();
+html_use_jqueryjqplotplugindateAxisRenderer();
+html_use_jqueryjqplotpluginBar();
+
 report_header(_('Site-Wide Activity'));
 
 ?>
@@ -69,7 +76,12 @@ report_header(_('Site-Wide Activity'));
 </form>
 <?php if ($area && $start != $end) { ?>
 	<p>
+	<?php
+		report_actgraph('sitewide', $SPAN, $start, $end, 0, $area);
+	?>
+	<noscript>
 	<img src="siteact_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;area=$area"; ?>" alt="" />
+	</noscript>
 	</p>
 	<?php
 

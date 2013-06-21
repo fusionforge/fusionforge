@@ -614,12 +614,19 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 			}
 			break;
 		}
+		case 'sitewide': {
+			$report = new ReportSiteAct($SPAN, $start, $end);
+			break;
+		}
 	}
 	
 	$rdates = $report->getRawDates();
 	if (!$rdates) {
 		return false;
 	}
+	if (!$SPAN)
+		$SPAN = 1;
+
 	if ($SPAN == REPORT_TYPE_DAILY) {
 		$i = 0;
 		$looptime = $start;
