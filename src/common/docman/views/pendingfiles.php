@@ -130,10 +130,10 @@ jQuery(document).ready(function() {
 		}
 		echo $HTML->listTableBottom();
 		echo '<p>';
+		echo '<span id="massactionpending" class="docman-massaction-hide" style="display:none;" >';
 		echo '<span id="docman-massactionpendingmessage" class="tabtitle-nw" title="'. _('Actions availables for checked files, you need to check at least one file to get actions') . '">';
 		echo _('Mass actions for selected pending files:');
 		echo '</span>';
-		echo '<span id="massactionpending" class="docman-massaction-hide" style="display:none;" >';
 		echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$g->getID().'/zip/selected/'.$dirid.'/\'+controllerListPending.buildUrlByCheckbox(\'pending\')" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png', 22, 22, array('alt'=>'Download as Zip')). '</a>';
 		echo '<a class="tabtitle" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&action=validatefile&fileid=\'+controllerListPending.buildUrlByCheckbox(\'pending\')" title="'. _('Activate in this directory') . '" >' . html_image('docman/validate.png', 22, 22, array('alt'=>'Activate in this directory')). '</a>';
 		echo '</span>';
