@@ -25,12 +25,12 @@
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
 global $group_id; // id of the group
-global $dirid; //id of the doc_group
+global $dirid; // id of the doc_group
 
 
 if (!forge_check_perm('docman', $group_id, 'submit')) {
 	$return_msg= _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id.'&amp;warning_msg='.urlencode($return_msg));
+	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 }
 ?>
 

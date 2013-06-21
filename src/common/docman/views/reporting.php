@@ -85,15 +85,17 @@ if ($report->isError()) {
 ?>
 
 <form action="<?php echo util_make_url('/docman/') ?>" method="get">
-<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
-<input type="hidden" name="view" value="reporting" />
-<table><tr>
-<td><strong><?php echo _('Start'); ?>:</strong><br />
-<?php echo report_months_box($report, 'start', $start); ?></td>
-<td><strong><?php echo _('End'); ?>:</strong><br />
-<?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
-</tr></table>
+	<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
+	<input type="hidden" name="view" value="reporting" />
+    <table class="centered">
+		<tr>
+			<td><strong><?php echo _('Start Date')._(':'); ?></strong><br />
+				<?php echo report_months_box($report, 'start', $start); ?></td>
+			<td><strong><?php echo _('End Date')._(':'); ?></strong><br />
+				<?php echo report_months_box($report, 'end', $end); ?></td>
+			<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
+		</tr>
+	</table>
 </form>
 
 <?php
@@ -121,9 +123,9 @@ if (count($data) == 0) {
 		echo 'ticks.push("'.$key.'");';
 	}
 	for ($i=0; $i < count($data); $i++) {
-		$thisdate = date(_('Y-m'), mktime(0, 0, 0, substr($data[$i][2], 4, 2), 0, substr($data[$i][2], 0, 4)));
-		$indexkey = array_search($thisdate, $arr2);
-		$valuesArr[$indexkey]++;
+		$this_date = date(_('Y-m'), mktime(0, 0, 0, substr($data[$i][2], 4, 2), 0, substr($data[$i][2], 0, 4)));
+		$index_key = array_search($this_date, $arr2);
+		$valuesArr[$index_key+1]++;
 	}
 	foreach ($valuesArr as $key) {
 		echo 'values.push('.$key.');';

@@ -52,24 +52,27 @@ if (forge_check_perm('docman', $group_id, 'submit')) {
 }
 
 if ($g->useDocmanSearch()) {
-	$menu_text[] = _('Search in documents');
+	$menu_text[] = _('Search');
 	$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=search';
 	$menu_attr[] = array('title' => _('Search documents in this project using keywords.'), 'id' => 'searchDocmanMenu', 'class' => 'tabtitle');
 }
 
 if (forge_check_perm('docman', $group_id, 'approve')) {
-	$menu_text[] = _('Trash');
-	$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=listtrashfile';
-	$menu_attr[] = array('title' => _('Recover or delete permanently files with deleted status.'), 'id' => 'trashDocmanMenu', 'class' => 'tabtitle');
+    $df = new DocumentFactory($g);
+    if (!$df->isTrashEmpty()) {
+        $menu_text[] = _('Trash');
+        $menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=listtrashfile';
+        $menu_attr[] = array('title' => _('Recover or delete permanently files with deleted status.'), 'id' => 'trashDocmanMenu', 'class' => 'tabtitle');
+    }
 }
 
 if (forge_check_perm('docman', $group_id, 'admin')) {
+	$menu_text[] = _('Reporting');
+	$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=reporting';
+	$menu_attr[] = array('title' => _('Docman module reporting.'), 'id' => 'reportDocmanMenu', 'class' => 'tabtitle');
 	$menu_text[] = _('Administration');
 	$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=admin';
 	$menu_attr[] = array('title' => _('Docman module administration.'), 'id' => 'adminDocmanMenu', 'class' => 'tabtitle');
-	$menu_text[] = _('Reports');
-	$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=reporting';
-	$menu_attr[] = array('title' => _('Docman module reporting.'), 'id' => 'reportDocmanMenu', 'class' => 'tabtitle');
 }
 
 if (count($menu_text)) {

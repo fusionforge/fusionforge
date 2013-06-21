@@ -28,7 +28,7 @@
 /* please do not add require here : use www/docman/index.php to add require */
 /* global variables used */
 global $group_id; // id of the group
-global $dirid; //id of the doc_group
+global $dirid; // id of the doc_group
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$return_msg= _('Document Manager Access Denied');
@@ -50,12 +50,12 @@ function doItAddSubGroup() {
 }
 //]]></script>
 <?php
-echo '<div class="docmanDivIncluded" >';
+echo '<div class="docmanDivIncluded">';
 echo '<form id="addsubgroup" name="addsubgroup" method="post" action="'.$actionurl.'">';
 if ($dirid) {
-	echo _('Name of the document subfolder to create:'). ' ';
+	echo _('Name of the document subfolder to create')._(': ');
 } else {
-	echo _('Name of the document folder to create:'). ' ';
+	echo _('Name of the document folder to create')._(': ');
 }
 echo '<input type="text" name="groupname" size="40" maxlength="255" />';
 echo '<input id="submitaddsubgroup" type="button" value="'. _('Create') .'" onclick="javascript:doItAddSubGroup()" />';

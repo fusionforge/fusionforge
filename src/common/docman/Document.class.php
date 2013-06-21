@@ -155,8 +155,8 @@ class Document extends Error {
 			$data = mb_convert_encoding($data, 'UTF-8', mb_detect_encoding($data));
 		}
 
-                $filesize = filesize($data);
-                if (!$filesize) { $filesize = 0; }
+		$filesize = filesize($data);
+		if (!$filesize) { $filesize = 0; }
 
 		// key words for in-document search
 		if ($this->Group->useDocmanSearch() && $filesize) {
@@ -229,6 +229,7 @@ class Document extends Error {
 			}
 		}
 		$this->sendNotice(true);
+		$this->SendApprovalNotice();
 		db_commit();
 		if ($filesize) {
 			DocumentStorage::instance()->commit();
@@ -932,9 +933,9 @@ class Document extends Error {
 			$subject = '['.$this->Group->getPublicName().'] '.$status.' - '.$this->getName();
 			$body = _('Project:').' '.$this->Group->getPublicName()."\n";
 			$body .= _('Directory:').' '.$this->getDocGroupName()."\n";
-			$body .= _('Document title:').' '.$this->getName()."\n";
+			$body .= _('Document Title')._(': ').$this->getName()."\n";
 			$body .= _('Document description:').' '.util_unconvert_htmlspecialchars($this->getDescription())."\n";
-			$body .= _('Submitter:').' '.$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
+			$body .= _('Submitter')._(': ').$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
 			$body .= "\n\n-------------------------------------------------------\n".
 				_('For more info, visit:').
 				"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getDocGroupID());
@@ -943,6 +944,50 @@ class Document extends Error {
 			foreach ($BCCarray as $dest_email) {
 				util_send_message($dest_email, $subject, $body, 'noreply@'.forge_get_config('web_host'), '', _('Docman'));
 			}
+		}
+		return true;
+	}
+
+	/**
+	 *	SendApprovalNotice - send email to project admin for pending documents.
+	 *
+	 *	@return boolean success.
+	 */
+	function SendApprovalNotice() {
+		if ($this->getStateID() != 3)
+			return true;
+
+		$doc_name = $this->getName();
+		$desc     = util_unconvert_htmlspecialchars( $this->getDescription() );
+		$group_id = $this->Group->getID();
+		$name     = $this->getCreatorRealName()." (".$this->getCreatorUserName().")";
+
+		$subject="[" . forge_get_config('forge_name') ."] ".util_unconvert_htmlspecialchars($doc_name);
+		$body = "\nA new document has been uploaded and waiting to be approved by you:".
+		"\n".util_make_url('/docman/?group_id='.$group_id.'&view=admin').
+		"\nBy: " . $name . "\n";
+
+		$sanitizer = new TextSanitizer();
+		$text = $desc;
+		if (strstr($text,'<br/>') || strstr($text,'<br />')) {
+			$text = preg_replace('/[\n\r]/', '', $text);
+		}
+		$text = $sanitizer->convertNeededTagsForEmail($text);
+		$text =  preg_replace('/\[.+\](.+)\[\/.+\]/','$1',$text);
+		$text = $sanitizer->convertExtendedCharsForEmail($text);
+		$body .= $text;
+
+		$extra_headers = "Return-Path: <noreply@".forge_get_config('web_host').">\n";
+		$extra_headers .= "Errors-To: <noreply@".forge_get_config('web_host').">\n";
+		$extra_headers .= "Sender: <noreply@".forge_get_config('web_host').">";
+
+		$sql = 'SELECT u.email FROM user_group ug INNER JOIN users u ON u.user_id=ug.user_id
+			WHERE ug.admin_flags = $1 AND ug.group_id = $2';
+		$res = db_query_params($sql, array('A', $group_id));
+		$bcc = implode(util_result_column_to_array($res),',');
+		if (strlen($bcc) > 0) {
+			util_send_message('',$subject,$body,"noreply@".forge_get_config('web_host'),
+				$bcc,'Docman',$extra_headers);
 		}
 		return true;
 	}

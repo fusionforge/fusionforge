@@ -99,7 +99,7 @@ jQuery(document).ready(function() {
 		divHandle:		jQuery('#handle'),
 		divRight:		jQuery('#right'),
 		divEditFile:		jQuery('#editFile'),
-		divEditTitle:		'<?php echo _("Edit document dialog box") ?>',
+		divEditTitle:		'<?php echo _("Edit document dialog box") ?>'
 	});
 });
 //]]></script>
@@ -196,10 +196,10 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	}
 	echo $HTML->listTableBottom();
 	echo '<p>';
-	echo '<span class="tabtitle" id="docman-massactionmessage" title="'. _('Actions availables for selected documents, you need to check at least one document to get actions') . '" >';
-	echo _('Mass actions for selected documents:');
-	echo '</span>';
 	echo '<span id="massactionactive" style="display: none;" >';
+    echo '<span class="tabtitle" id="docman-massactionmessage" title="'. _('Actions availables for selected documents, you need to check at least one document to get actions') . '" >';
+    echo _('Mass actions for selected documents:');
+    echo '</span>';
 	echo '<a class="tabtitle" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&amp;action=delfile&amp;view=listtrashfile&amp;dirid='.$dirid.'&amp;fileid=\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Delete permanently.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently.'))). '</a>';
 	echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'Download as Zip')). '</a>';
 	echo '</span>';
@@ -212,7 +212,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 }
 
 echo '</div>';
-echo '<div style="clear: both;" />';
+echo '<div style="clear: both;"></div>';
 if (forge_check_perm('docman', $g->getID(), 'approve')) {
 	include ($gfcommon.'docman/views/editfile.php');
 }
