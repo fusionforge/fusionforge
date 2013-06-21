@@ -3,6 +3,7 @@
  * Reporting System
  *
  * Copyright 2003-2004 (c) GForge LLC
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -51,10 +52,15 @@ if ($start == $end) {
 	$error_msg .= _('Start and end dates must be different');
 }
 
+html_use_jqueryjqplotpluginCanvas();
+html_use_jqueryjqplotpluginPie();
+html_use_jqueryjqplotpluginhighlighter();
+html_use_jqueryjqplotplugindateAxisRenderer();
+
 report_header(_('Tool Pie Graphs'));
 
-if (!$datatype) {
-	$datatype=1;
+if (!isset($datatype)) {
+	$datatype = 1;
 }
 
 ?>
@@ -68,7 +74,12 @@ if (!$datatype) {
 </form>
 <?php if ($start != $end) { ?>
 <p>
+<?php
+	report_toolspiegraph($datatype, $start, $end);
+?>
+<noscript>
 <img src="toolspie_graph.php?<?php echo "datatype=$datatype&amp;start=$start&amp;end=$end"; ?>" alt="" />
+</noscript>
 </p>
 <?php }
 

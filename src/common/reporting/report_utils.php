@@ -867,6 +867,111 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 	echo 'joli graph';
 }
 
+function report_toolspiegraph($datatype = 1, $start, $end) {
+	$now = time() - 60*24*24;
+	if ($now < $end) {
+		$end = $now;
+	}
+	if ($datatype < 5) {
+		$res = db_query_params ('SELECT g.group_name,count(*) AS count
+		FROM groups g, artifact_group_list agl, artifact a
+		WHERE g.group_id=agl.group_id
+		AND agl.group_artifact_id=a.group_artifact_id
+		AND a.open_date BETWEEN $1 AND $2
+		AND agl.datatype=$3
+		GROUP BY group_name
+		ORDER BY count DESC',
+					array ($start,
+					$end,
+					$datatype));
+	} elseif ($datatype == 5) {
+		$res = db_query_params ('SELECT g.group_name,count(*) AS count
+		FROM groups g, forum_group_list fgl, forum f
+		WHERE g.group_id=fgl.group_id
+		AND fgl.group_forum_id=f.group_forum_id
+		AND f.post_date BETWEEN $1 AND $2
+		GROUP BY group_name
+		ORDER BY count DESC',
+					array ($start,
+					$end));
+	} elseif ($datatype == 6) {
+		$res = db_query_params ('SELECT g.group_name,count(*) AS count
+		FROM groups g, project_group_list pgl, project_task pt
+		WHERE g.group_id=pgl.group_id
+		AND pgl.group_project_id=pt.group_project_id
+		AND pt.start_date BETWEEN $1 AND $2
+		GROUP BY group_name
+		ORDER BY count DESC',
+					array ($start,
+					$end));
+	} else {
+		$res = db_query_params ('SELECT g.group_name,count(*) AS count
+		FROM groups g, frs_package fp, frs_release fr, frs_file ff, frs_dlstats_file fdf
+		WHERE g.group_id=fp.group_id
+		AND fp.package_id=fr.package_id
+		AND fr.release_id=ff.release_id
+		AND ff.file_id=fdf.file_id
+		AND (((fdf.month > $1) OR (fdf.month = $1 AND fdf.day >= $2))
+		AND ((fdf.month < $3) OR (fdf.month = $3 AND fdf.day < $4)))
+		GROUP BY group_name
+		ORDER BY count DESC',
+					array (date('Ym',$start),
+					date('d',$start),
+					date('Ym',$end),
+					date('d',$end)));
+	}
+
+	if (db_error()) {
+		exit_error(db_error(), '');
+	}
+	
+	$arr[1] = 'Bugs';
+	$arr[2] = 'Support Requests';
+	$arr[3] = 'Patches';
+	$arr[4] = 'Feature Requests';
+	$arr[0] = 'Other Trackers';
+	$arr[5] = 'Forum Messages';
+	$arr[6] = 'Tasks';
+	$arr[7] = 'Downloads';
+	
+	$chartid = 'toolspie';
+	if (db_numrows($res)) {
+		echo '<script type="text/javascript">//<![CDATA['."\n";
+		echo 'var data'.$chartid.' = new Array();';
+		while ($row = db_fetch_array($res)) {
+			echo 'data'.$chartid.'.push([\''.htmlentities($row[0]).'\',\''.$row[1].'\']);';
+		}
+		echo 'var plot'.$chartid.';';
+		echo 'jQuery(document).ready(function(){
+			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [data'.$chartid.'],
+				{
+					title : \''.$arr[$datatype].' ('.strftime('%x',$start) .' - '. strftime('%x',$end) .')\',
+					seriesDefaults: {
+						// Make this a pie chart.
+						renderer: jQuery.jqplot.PieRenderer,
+						rendererOptions: {
+							// Put data labels on the pie slices.
+							// By default, labels show the percentage of the slice.
+							showDataLabels: true,
+							dataLabels: \'percent\',
+						}
+					},
+					legend: {
+						show:true, location: \'e\',
+					},
+				}
+				);
+			});';
+		echo 'jQuery(window).resize(function() {
+				plot'.$chartid.'.replot( { resetAxes: true } );
+			});'."\n";
+		echo '//]]></script>';
+		echo '<div id="chart'.$chartid.'"></div>';
+	} else {
+		echo '<p class="information" >'._('No data to display.').'</p>';
+	}
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
