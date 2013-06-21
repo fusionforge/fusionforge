@@ -110,14 +110,14 @@ if (is_numeric($docid)) {
 			$file = '/tmp/'.$filename;
 			$zip = new ZipArchive;
 			if ( !$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE)) {
-				exit_error(_('Unable to open zip archive for backup'), 'docman');
+				exit_error(_('Unable to open ZIP archive for backup'), 'docman');
 			}
 
 			if ( !docman_fill_zip($zip, $nested_groups, $df))
-				exit_error(_('Unable to fill zip archive for backup'), 'docman');
+				exit_error(_('Unable to fill ZIP archive for backup'), 'docman');
 
 			if ( !$zip->close())
-				exit_error(_('Unable to close zip archive for backup'), 'docman');
+				exit_error(_('Unable to close ZIP archive for backup'), 'docman');
 
 			header('Content-disposition: attachment; filename="'.$filename.'"');
 			header('Content-type: application/zip');
@@ -135,7 +135,7 @@ if (is_numeric($docid)) {
 			session_redirect('/docman/?group_id='.$group_id.'&view=admin&warning_msg='.urlencode($warning_msg));
 		}
 	} else {
-		$warning_msg = _('Zip extension is missing: no backup function');
+		$warning_msg = _('ZIP extension is missing: no backup function');
 		session_redirect('/docman/?group_id='.$group_id.'&view=admin&warning_msg='.urlencode($warning_msg));
 	}
 } elseif ($docid === 'webdav') {
@@ -153,7 +153,7 @@ if (is_numeric($docid)) {
 		$server = new HTTP_WebDAV_Server_Docman;
 		$server->ServeRequest();
 	} else {
-		$warning_msg = _('No webdav interface enabled.');
+		$warning_msg = _('No Webdav interface enabled.');
 		session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($warning_msg));
 	}
 } elseif ($docid === 'zip') {
@@ -181,7 +181,7 @@ if (is_numeric($docid)) {
 				$file = forge_get_config('data_path').'/'.$filename;
 				$zip = new ZipArchive;
 				if ( !$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE))
-					exit_error(_('Unable to open zip archive for download as zip'), 'docman');
+					exit_error(_('Unable to open ZIP archive for download as ZIP'), 'docman');
 
 				// ugly workaround to get the files at doc_group_id level
 				$df->setDocGroupID($dg->getID());
@@ -189,14 +189,14 @@ if (is_numeric($docid)) {
 				if (is_array($docs) && count($docs) > 0) {	// this group has documents
 					foreach ($docs as $doc) {
 						if (!$zip->addFromString(iconv("UTF-8", "ASCII//TRANSLIT", $doc->getFileName()), $doc->getFileData()))
-							exit_error(_('Unable to fill zipfile.'), 'docman');
+							exit_error(_('Unable to fill ZIP file.'), 'docman');
 					}
 				}
 				if ( !docman_fill_zip($zip, $nested_groups, $df, $dg->getID()))
-					exit_error(_('Unable to fill zip archive for download as zip'), 'docman');
+					exit_error(_('Unable to fill ZIP archive for download as ZIP'), 'docman');
 
 				if ( !$zip->close())
-					exit_error(_('Unable to close zip archive for download as zip'), 'docman');
+					exit_error(_('Unable to close ZIP archive for download as ZIP'), 'docman');
 
 				header('Content-disposition: attachment; filename="'.$filename.'"');
 				header('Content-type: application/zip');
@@ -205,7 +205,7 @@ if (is_numeric($docid)) {
 
 				if(!readfile_chunked($file)) {
 					unlink($file);
-					$error_msg = _('Unable to download zip archive');
+					$error_msg = _('Unable to download ZIP archive');
 					session_redirect('/docman/?group_id='.$group_id.'&view=admin&error_msg='.urlencode($error_msg));
 				}
 				unlink($file);
@@ -220,7 +220,7 @@ if (is_numeric($docid)) {
 			$file = forge_get_config('data_path').'/'.$filename;
 			$zip = new ZipArchive;
 			if (!$zip->open($file, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE))
-				exit_error(_('Unable to open zip archive for download as zip'), 'docman');
+				exit_error(_('Unable to open ZIP archive for download as ZIP'), 'docman');
 
 			foreach($arr_fileid as $docid) {
 				if (!empty($docid)) {
@@ -232,7 +232,7 @@ if (is_numeric($docid)) {
 					}
 
 					if (!$zip->addFromString(iconv("UTF-8", "ASCII//TRANSLIT", $d->getFileName()), $d->getFileData()))
-						exit_error(_('Unable to fill zipfile.'), 'docman');
+						exit_error(_('Unable to fill ZIP file.'), 'docman');
 				} else {
 					$zip->close();
 					unlink($file);
@@ -241,7 +241,7 @@ if (is_numeric($docid)) {
 				}
 			}
 			if ( !$zip->close())
-				exit_error(_('Unable to close zip archive for download as zip'), 'docman');
+				exit_error(_('Unable to close ZIP archive for download as ZIP'), 'docman');
 
 			header('Content-disposition: attachment; filename="'.$filename.'"');
 			header('Content-type: application/zip');
@@ -250,7 +250,7 @@ if (is_numeric($docid)) {
 
 			if(!readfile_chunked($file)) {
 				unlink($file);
-				$error_msg = _('Unable to download zip archive');
+				$error_msg = _('Unable to download ZIP archive');
 				session_redirect('/docman/?group_id='.$group_id.'&view=admin&error_msg='.urlencode($error_msg));
 			}
 			unlink($file);
