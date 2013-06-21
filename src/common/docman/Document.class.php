@@ -6,9 +6,8 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011-2012, Franck Villaume - TrivialDev
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2011-2013, Franck Villaume - TrivialDev
+ * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -212,11 +211,13 @@ class Document extends Error {
 			return false;
 		}
 
-		$localDg = new DocumentGroup($this->Group, $doc_group);
-		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
-			$this->setError(_('Error updating document group:').$localDg->getErrorMessage());
-			db_rollback();
-			return false;
+		if ($perm->isDocEditor()) {
+			$localDg = new DocumentGroup($this->Group, $doc_group);
+			if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
+				$this->setError(_('Error updating document group:').$localDg->getErrorMessage());
+				db_rollback();
+				return false;
+			}
 		}
 		$this->sendNotice(true);
 		db_commit();
@@ -808,6 +809,7 @@ class Document extends Error {
 			}
 		}
 
+		db_begin();
 		$res = db_query_params('UPDATE doc_data SET
 					title=$1,
 					description=$2,
@@ -835,6 +837,14 @@ class Document extends Error {
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setOnUpdateError(db_error());
+			db_rollback();
+			return false;
+		}
+		
+		$localDg = new DocumentGroup($this->Group, $doc_group);
+		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
+			$this->setOnUpdateError(_('Error updating document group:').$localDg->getErrorMessage());
+			db_rollback();
 			return false;
 		}
 
@@ -858,6 +868,7 @@ class Document extends Error {
 
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setOnUpdateError(db_error());
+				db_rollback();
 				return false;
 			}
 
@@ -881,6 +892,7 @@ class Document extends Error {
 				}
 			}
 		}
+		db_commit();
 		$this->fetchData($this->getID());
 		$this->sendNotice(false);
 		return true;
@@ -1011,6 +1023,11 @@ class Document extends Error {
 			default:
 				$this->setOnUpdateError(_('wrong column name'));
 				return false;
+		}
+		$localDg = new DocumentGroup($this->Group, $this->getDocGroupID);
+		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
+			$this->setError(_('Error updating document group:').$localDg->getErrorMessage());
+			return false;
 		}
 		$this->sendNotice(false);
 		return true;
