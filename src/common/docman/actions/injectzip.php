@@ -51,6 +51,6 @@ if (!$dg->injectArchive($uploaded_zip)) {
 }
 
 if ($doc_group)
-	$return_url .= '&dirir='.$doc_group;
+	$return_url .= '&dirid='.$doc_group;
 
 session_redirect($return_url);
