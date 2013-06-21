@@ -46,7 +46,7 @@ DocManAddFileController = function(params)
 {
 	this.params	= params;
 	this.bindControls();
-}
+};
 
 DocManListFileController.prototype =
 {
@@ -270,7 +270,7 @@ DocManListFileController.prototype =
 			}
 		}
 	}
-}
+};
 
 DocManAddItemController.prototype =
 {
@@ -284,7 +284,7 @@ DocManAddItemController.prototype =
 		this.params.injectZip.submit();
 		this.params.submitZip.attr('disabled', true);
 	}
-}
+};
 
 DocManAddFileController.prototype =
 {
@@ -360,4 +360,4 @@ DocManAddFileController.prototype =
 			}
 		}
 	}
-}
+};
