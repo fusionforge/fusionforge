@@ -737,6 +737,7 @@ class DocumentGroup extends Error {
 					rmdir($extractDir);
 					return true;
 				} else {
+					rmdir($extractDir);
 					return false;
 				}
 			} else {
@@ -776,6 +777,7 @@ class DocumentGroup extends Error {
 						$ndg = new DocumentGroup($this->getGroup());
 						if ($ndg->create($dir_arr[$i], $this->getID())) {
 							if (!$ndg->injectContent($directory.'/'.$dir_arr[$i])) {
+								$this->setError($ndg->getErrorMessage());
 								return false;
 							}
 						}
