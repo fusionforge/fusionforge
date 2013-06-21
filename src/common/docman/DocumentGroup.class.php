@@ -109,7 +109,7 @@ class DocumentGroup extends Error {
 			$res = db_query_params('SELECT * FROM doc_groups WHERE doc_group=$1 AND group_id=$2',
 						array($parent_doc_group, $this->Group->getID()));
 			if (!$res || db_numrows($res) < 1) {
-				$this->setError(_('Invalid Documents folder parent ID'));
+				$this->setError(_('Invalid Documents Folder parent ID'));
 				return false;
 			}
 		} else {
@@ -740,8 +740,6 @@ class DocumentGroup extends Error {
 				$zip->close();
 				if ($this->injectContent($extractDir)) {
 					rmdir($extractDir);
-					die();
-					exit();
 					return true;
 				} else {
 					return false;
