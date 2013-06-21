@@ -237,21 +237,20 @@ function &addDocument($session_ser,$group_id,$doc_group,$title,$description,$bas
 	}
 
 	if ($base64_contents) {
-		$data = base64_decode($base64_contents);
-		$file_url='';
+		$file = tempnam(forge_get_config('data_path'), 'tmp');
+		file_put_contents($file, base64_decode($base64_contents));
 		$uploaded_data_name=$filename;
 	} elseif ($file_url) {
-		$data = '';
+		$file = '';
 		$uploaded_data_name=$file_url;
 		$uploaded_data_type='URL';
 	}
 
-	if (!$d->create($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$description)) {
+	if (!$d->create($uploaded_data_name,$uploaded_data_type,$file,$doc_group,$title,$description)) {
 		return new soap_fault ('','addDocument',$d->getErrorMessage(),$d->getErrorMessage());
 	} else {
 		return $d->getID();
 	}
-
 }
 
 //
@@ -327,17 +326,17 @@ function &updateDocument($session_ser,$group_id,$doc_group,$doc_id,$title,$descr
 			}
 		}
 	}elseif($file_url){
-		$data='';
+		$file='';
 		$uploaded_data_name=$file_url;
 		$uploaded_data_type='URL';
 	}elseif($base64_contents){
-		$data = base64_decode($base64_contents);
-		$file_url='';
+		$file = tempnam(forge_get_config('data_path'), 'tmp');
+		file_put_contents($file, base64_decode($base64_contents));
 		$uploaded_data_name=$filename;
 	}
 
 
-	if (!$d->update($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$description,$state_id)) {
+	if (!$d->update($uploaded_data_name,$uploaded_data_type,$file,$doc_group,$title,$description,$state_id)) {
 		return new soap_fault ('','updateDocument',$d->getErrorMessage(),$d->getErrorMessage());
 	} else {
 		return true;
