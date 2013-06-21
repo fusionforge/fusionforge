@@ -590,6 +590,276 @@ function report_graph($type, $SPAN, $start, $end) {
 	return true;
 }
 
+function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
+	$now = time() - 60*24*24;
+	if ($now < $end) {
+		$end = $now;
+	}
+	switch ($type) {
+		case 'user': {
+			$report = new ReportUserAct($SPAN, $id, $start, $end);
+			$u =& user_get_object($id);
+			if (!$u || $u->isError()) {
+				exit_error(_("Could Not Get User"));
+			}
+			break;
+		}
+		case 'project': {
+			$report = new ReportProjectAct($SPAN, $id, $start, $end);
+			$g = group_get_object($id);
+			if (!$g || !is_object($g)) {
+				exit_no_group();
+			} elseif ($g->isError()) {
+				exit_error($g->getErrorMessage(), '');
+			}
+			break;
+		}
+	}
+	
+	$rdates = $report->getRawDates();
+	if (!$rdates) {
+		return false;
+	}
+	if ($SPAN == REPORT_TYPE_DAILY) {
+		$i = 0;
+		$looptime = $start;
+		while ($looptime < $end) {
+			$timeStampArr[$i] = $looptime;
+			$looptime += REPORT_DAY_SPAN;
+			$i++;
+		}
+		$formatDate = 'Y/m/d';
+	} elseif ($SPAN == REPORT_TYPE_WEEKLY) {
+		$timeStampArr = $report->getWeekStartArr();
+		$formatDate = 'Y/W';
+	} elseif ($SPAN == REPORT_TYPE_MONTHLY) {
+		$timeStampArr = $report->getMonthStartArr();
+		$formatDate = 'Y/m';
+	}
+	
+	for ($j = 0; $j < count($timeStampArr); $j++) {
+		if ($timeStampArr[$j] < $start || $timeStampArr[$j] >= $end) {
+			unset($timeStampArr[$j]);
+		}
+	}
+	$timeStampArr = array_values($timeStampArr);
+	for ($j = 0; $j < count($timeStampArr); $j++) {
+		$tickArr[] = date($formatDate, $timeStampArr[$j]);
+	}
+	
+	switch ($area) {
+		case 'docman': {
+			$ydata[] =& $report->getDocs();
+			$areaname = _('Docs');
+			$label[] = _('Documents');
+			break;
+		}
+		case 'downloads': {
+			$ydata[] =& $report->getDownloads();
+			$areaname = _('Downloads');
+			$label[] = _('Downloads');
+			break;
+		}
+		case 'forum' : {
+			$ydata[] =& $report->getForum();
+			$areaname = _('Forums');
+			$label[] = _('Forums');
+			break;
+		}
+		case 'pageviews': {
+			$ydata[] =& $report->getPageViews();
+			$areaname = _('Page views');
+			$label[] = _('Page views');
+			break;
+		}
+		case 'taskman': {
+			$ydata[] =& $report->getTaskOpened();
+			$ydata[] =& $report->getTaskClosed();
+			$areaname = _('Tasks');
+			$label[] = _('Task open');
+			$label[] = _('Task close');
+			break;
+		}
+		case 'tracker': {
+			$ydata[] =& $report->getTrackerOpened();
+			$ydata[] =& $report->getTrackerClosed();
+			$areaname = _('Trackers');
+			$label[] = _('Tracker items opened');
+			$label[] = _('Tracker items closed');
+			break;
+		}
+		default: {
+			$results = array();
+			$ids = array();
+			$texts = array();
+			$show[] = $area;
+
+			$hookParams['group'] = $id;
+			$hookParams['results'] = &$results;
+			$hookParams['show'] = &$show;
+			$hookParams['begin'] = $start;
+			$hookParams['end'] = $end;
+			$hookParams['ids'] = &$ids;
+			$hookParams['texts'] = &$texts;
+			plugin_hook("activity", $hookParams);
+
+			$areaname = $texts[0];
+			$label[] = $texts[0];
+			$sum = array();
+			foreach ($results as $arr) {
+				$dd = date($formatDate, $arr['activity_date']);
+				switch ($SPAN) {
+					case REPORT_TYPE_MONTHLY : {
+						$d = mktime(0, 0, 0, substr($dd, 5, 2) , 1, substr($dd, 0, 4));
+						break;
+					}
+					case REPORT_TYPE_WEEKLY: {
+						$d = strtotime(substr($dd, 0, 4).'-W'.substr($dd, 5, 2));
+						break;
+					}
+					case REPORT_TYPE_DAILY: {
+						$d = mktime(0, 0, 0, substr($dd, 5, 2) , substr($dd, 8, 2), substr($dd, 0, 4));
+						break;
+					}
+				}
+				@$sum[$d]++;
+			}
+
+			// Now, stores the values in the ydata array for the graph.
+			$ydata[] = array();
+			$i = 0;
+			foreach ($rdates as $d) {
+				$ydata[0][$i++] = isset($sum[$d]) ? $sum[$d] : 0;
+			}
+			break;
+		}
+	}
+
+	$chartid = 'report_actgraph_'.$id;
+	$yMax = 0;
+	echo '<script type="text/javascript">//<![CDATA['."\n";
+	echo 'var plot'.$chartid.';';
+	echo 'var values = new Array();';
+	echo 'var ticks = new Array();';
+	echo 'var labels = new Array();';
+	echo 'var series = new Array();';
+	for ($z = 0; $z < count($ydata); $z++) {
+		echo 'values['.$z.'] = new Array();';
+		echo 'labels.push({label:\''.$label[$z].'\'});';
+	}
+	switch ($SPAN) {
+		case REPORT_TYPE_DAILY :
+		case REPORT_TYPE_MONTHLY : {
+			for ($j = 0; $j < count($timeStampArr); $j++) {
+				for ($z = 0; $z < count($ydata); $z++) {
+					if (in_array($timeStampArr[$j], $rdates)) {
+						$thekey = array_search($timeStampArr[$j], $rdates);
+						if (isset($ydata[$z][$thekey])) {
+							if ($ydata[$z][$thekey] === false) {
+								$ydata[$z][$thekey] = 0;
+							}
+							if ($ydata[$z][$thekey] > $yMax) {
+								$yMax = $ydata[$z][$thekey];
+							}
+							echo 'values['.$z.'].push('.$ydata[$z][$thekey].');';
+						} else {
+							echo 'values['.$z.'].push(0);';
+						}
+					} else {
+						echo 'values['.$z.'].push(0);';
+					}
+				}
+				echo 'ticks.push(\''.$tickArr[$j].'\');';
+			}
+			break;
+		}
+		case REPORT_TYPE_WEEKLY : {
+			for ($j = 0; $j < count($rdates); $j++) {
+				$wrdates[$j] = date($formatDate, $rdates[$j]);
+			}
+			for ($j = 0; $j < count($tickArr); $j++) {
+				for ($z = 0; $z < count($ydata); $z++) {
+					if (in_array($tickArr[$j], $wrdates)) {
+						$thekey = array_search($tickArr[$j], $wrdates);
+						if (isset($ydata[$z][$thekey])) {
+							if ($ydata[$z][$thekey] === false) {
+								$ydata[$z][$thekey] = 0;
+							}
+							if ($ydata[$z][$thekey] > $yMax) {
+								$yMax = $ydata[$z][$thekey];
+							}
+							echo 'values['.$z.'].push('.$ydata[$z][$thekey].');';
+						} else {
+							echo 'values['.$z.'].push(0);';
+						}
+					} else {
+						echo 'values['.$z.'].push(0);';
+					}
+				}
+				echo 'ticks.push(\''.$tickArr[$j].'\');';
+			}
+			break;
+		}
+	}
+	for ($z = 0; $z < count($ydata); $z++) {
+		echo 'series.push(values['.$z.']);';
+	}
+	echo 'jQuery(document).ready(function(){
+			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', series, {
+				title : \''.utf8_decode($areaname).' ( '.strftime('%x',$start).' - '.strftime('%x',$end).') \',
+				axesDefaults: {
+					tickOptions: {
+						angle: -90,
+						fontSize: \'8px\',
+						showGridline: false,
+						showMark: false,
+					},
+					pad: 0,
+				},
+				seriesDefaults: {
+					showMarker: false,
+					lineWidth: 1,
+					fill: true,
+					renderer:jQuery.jqplot.BarRenderer,
+					rendererOptions: {
+						fillToZero: true,
+					},
+				},
+				legend: {
+					show:true, location: \'ne\',
+				},
+				series:
+					labels
+				,
+				axes: {
+					xaxis: {
+						renderer: jQuery.jqplot.CategoryAxisRenderer,
+						ticks: ticks,
+					},
+					yaxis: {
+						max: '.++$yMax.',
+						min: 0,
+						tickOptions: {
+							angle: 0,
+							showMark: true,
+						}
+					},
+				},
+				highlighter: {
+					show: true,
+					sizeAdjust: 2.5,
+				},
+			});
+		});';
+	echo 'jQuery(window).resize(function() {
+		plot'.$chartid.'.replot();
+	});'."\n";
+	echo '//]]></script>';
+	echo '<div id="chart'.$chartid.'"></div>';
+	return true;
+	echo 'joli graph';
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

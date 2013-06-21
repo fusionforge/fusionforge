@@ -110,7 +110,7 @@ project_admin_header(array('title'=>_('Project Statistics').'','group'=>$group_i
 if ($start == $end) {
 	echo '<p class="warning">'._('Cannot proceed the request. Start date is equal to end date.').'</p>';
 } else {
-	if (!projectact_graph($group_id, $area, $SPAN, $start, $end)) {
+	if (!report_actgraph('project', $SPAN, $start, $end, $group_id, $area)) {
 		echo '<p class="error">'._('Error during graphic computation.');
 	}
 }

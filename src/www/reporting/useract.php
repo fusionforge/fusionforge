@@ -3,6 +3,7 @@
  * Reporting System
  *
  * Copyright 2003-2004 (c) GForge LLC
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,6 +26,7 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'reporting/report_utils.php';
 require_once $gfcommon.'reporting/Report.class.php';
+require_once $gfcommon.'reporting/ReportUserAct.class.php';
 
 session_require_global_perm ('forge_stats', 'read') ;
 
@@ -53,6 +55,11 @@ if ($end < $start) list($start, $end) = array($end, $start);
 if ($start == $end) {
 	$error_msg .= _('Start and end dates must be different');
 }
+
+html_use_jqueryjqplotpluginCanvas();
+html_use_jqueryjqplotpluginhighlighter();
+html_use_jqueryjqplotplugindateAxisRenderer();
+html_use_jqueryjqplotpluginBar();
 
 report_header(_('User Activity'));
 
@@ -84,7 +91,12 @@ if ($sw) {
 	</form>
 	<?php if ($dev_id && $start != $end) { ?>
 		<p>
+		<?php
+			report_actgraph('user', $SPAN, $start, $end, $dev_id, $area);
+		?>
+		<noscript>
 		<img src="useract_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;dev_id=$dev_id&amp;area=$area"; ?>" alt="" />
+		</noscript>
 		</p>
 		<?php
 
