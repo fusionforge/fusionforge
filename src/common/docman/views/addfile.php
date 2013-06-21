@@ -94,26 +94,26 @@ if ($dgf->getNested() == NULL) {
 		echo '<p>'._('Both fields are used by the document search engine.').'</p>';
 
 	echo '<form name="adddata" action="'.$actionurl.'" method="post" enctype="multipart/form-data">';
-	echo '<table>
+	echo '<table class="infotable">
 				<tr>
-					<td style="text-align:right;">
-						<strong>'. _('Document Title').'</strong>'.utils_requiredField()
+					<td>
+						'. _('Document Title').utils_requiredField()
 					.'</td><td>'
-					.'&nbsp;<input type="text" name="title" size="40" maxlength="255" required="required" />&nbsp;'
+					.'<input type="text" name="title" size="40" maxlength="255" required="required" />&nbsp;'
 					.sprintf(_('(at least %1$s characters)'), 5)
 					.'</td>
 				</tr>
 				<tr>
-					<td style="text-align:right;">
-						<strong>'. _('Description') .'</strong>'.utils_requiredField()
+					<td>
+						'. _('Description') .utils_requiredField()
 				 	.'</td><td>'
-						.'&nbsp;<input type="text" name="description" size="50" maxlength="255" required="required" />&nbsp;'
+						.'<input type="text" name="description" size="50" maxlength="255" required="required" />&nbsp;'
 						.sprintf(_('(at least %1$s characters)'), 10)
 					.'</td>
 				</tr>
 				<tr>
-					<td style="text-align:right;">
-						<strong>'. _('Type of Document') .'</strong>'.utils_requiredField()
+					<td>
+						'. _('Type of Document') .utils_requiredField()
 					.'</td><td>
 					<input type="radio" id="buttonFile" name="type" value="httpupload" checked="checked" required="required" />'. _('File') .
 					'<input type="radio" id="buttonUrl" name="type" value="pasteurl" />'. _('URL');
@@ -126,22 +126,22 @@ if ($dgf->getNested() == NULL) {
 	echo '				</td>
 				</tr>
 				<tr id="filerow">
-					<td style="text-align:right;">
-						<strong>'. _('Upload File') .'</strong>'. utils_requiredField()
+					<td>
+						'. _('Upload File') .utils_requiredField()
 					.'</td><td>'
-						.'&nbsp;<input type="file" name="uploaded_data" size="30" />'.sprintf(_('(max upload size: %1$s)'),human_readable_bytes(util_get_maxuploadfilesize())).'
+						.'<input type="file" name="uploaded_data" size="30" />'.sprintf(_('(max upload size: %1$s)'),human_readable_bytes(util_get_maxuploadfilesize())).'
 					</td>
 				</tr>
 				<tr id="urlrow" style="display:none">
-					<td style="text-align:right;">
-						<strong>'. _('URL') .'</strong>'. utils_requiredField()
+					<td>
+						'. _('URL') . utils_requiredField()
 					.'</td><td>'
-						.'&nbsp;<input type="text" name="file_url" size="30" />
+						.'<input type="text" name="file_url" size="30" />
 					</td>
 				</tr>
 				<tr id="pathrow" style="display:none">
-					<td style="text-align:right;">
-						<strong>'. _('File') .'</strong>'. utils_requiredField() . '</td><td>';
+					<td>
+						'. _('File') . utils_requiredField() . '</td><td>';
 
 	$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming";
 	$manual_files_arr = ls($incoming, true);
@@ -161,10 +161,10 @@ if ($dgf->getNested() == NULL) {
 				</tr>';
 	}
 	echo '			<tr id="editnamerow" style="display:none">
-					<td style="text-align:right;">
-						<strong>'. _('File Name') .'</strong>'. utils_requiredField()
+					<td>
+						'. _('File Name') . utils_requiredField()
 					.'</td><td>'
-						.'&nbsp;<input type="text" name="name" size="30" />
+						.'<input type="text" name="name" size="30" />
 					</td>
 				</tr>
 				<tr id="editrow" style="display:none">
@@ -190,7 +190,7 @@ if ($dgf->getNested() == NULL) {
 		echo '
 				<tr>
 					<td>
-						<strong>'. _('Documents folder that document belongs in').'</strong>
+						'. _('Documents folder that document belongs in').'
 					</td><td>';
 		$dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $dirid);
 		echo '
@@ -201,7 +201,7 @@ if ($dgf->getNested() == NULL) {
 		echo '
 				<tr>
 					<td>
-						<strong>'. _('Status of that document').'</strong>
+						'. _('Status of that document').'
 					</td><td>';
 		doc_get_state_box('xzxz', 2); /**no direct deleted status */
 		echo '
