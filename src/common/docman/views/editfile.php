@@ -33,7 +33,7 @@ if (!forge_check_perm('docman', $group_id, 'approve')) {
 
 echo '<div id="editFile" >';
 echo '<form id="editdocdata" name="editdocdata" method="post" enctype="multipart/form-data">';
-echo '<table border="0">';
+echo '<table>';
 echo '	<tr>';
 echo '		<td><strong>'. _('Document Title:') .'</strong>'. utils_requiredField() .'<br />';
 echo '		<input id="title" type="text" name="title" size="40" maxlength="255"/></td>';
@@ -49,7 +49,7 @@ if ($g->useDocmanSearch()) {
 }
 echo '	<tr>';
 echo '		<td><strong>'. _('File:') .'</strong>';
-echo '			<a id="filelink" />';
+echo '			<a id="filelink"></a>';
 echo '		</td>';
 echo '	</tr>';
 if ($g->useCreateOnline()) {
@@ -62,13 +62,13 @@ if ($g->useCreateOnline()) {
 	echo '	</tr>';
 }
 echo '	<tr>';
-echo '		<td><strong>'. _('Folder that document belongs in:') .'</strong><br />';
-echo '			<select name="doc_group" id="doc_group" />';
+echo '		<td><strong>'. _('Folder that document belongs to:') .'</strong><br />';
+echo '			<select name="doc_group" id="doc_group"></select>';
 echo '		</td>';
 echo '	</tr>';
 echo '	<tr>';
 echo '		<td><strong>'. _('State:') .'</strong><br />';
-echo '			<select name="stateid" id="stateid" />';
+echo '			<select name="stateid" id="stateid"></select>';
 echo '		</td>';
 echo '	</tr>';
 echo '	<tr id="fileurlroweditfile">';
