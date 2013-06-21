@@ -1,0 +1,3 @@
+This plugin maintains data about users, groups and memberships in an
+LDAP directory that can be used for NSS/PAM system authentication (or
+for other uses).
