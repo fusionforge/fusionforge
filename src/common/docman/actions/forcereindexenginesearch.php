@@ -33,7 +33,7 @@ if ( !forge_check_perm('docman', $group_id, 'admin')) {
 
 if ($_POST['status']) {
 	$status = 1;
-	$return_msg = _('Search Engine Reindex Forced : search results will be available within 24h.');
+	$return_msg = _('Search Engine Reindex Forced: search results will be available within 24 h.');
 }
 
 if (!$g->setDocmanForceReindexSearch($status))

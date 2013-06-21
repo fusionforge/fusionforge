@@ -88,8 +88,7 @@ class DocumentFactory extends Error {
 	function __construct(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('ProjectGroup:: No Valid Group Object'));
-			return false;
+			exit_no_group();
 		}
 
 		if ($Group->isError()) {

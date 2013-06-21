@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-/* please do not add require here : use www/docman/index.php to add require */
+/* please do not add require here: use www/docman/index.php to add require */
 
 if (!forge_check_perm('docman', $group_id, 'admin')) {
 	$return_msg= _('Document Manager Action Denied.');
@@ -30,10 +30,10 @@ if (!forge_check_perm('docman', $group_id, 'admin')) {
 
 if ($_POST['status']) {
 	$status = 1;
-	$return_msg = _('Webdav Interface updated successfully : Active.');
+	$return_msg = _('Webdav Interface updated successfully: Active.');
 } else {
 	$status = 0;
-	$return_msg = _('Webdav Interface updated successfully : Off.');
+	$return_msg = _('Webdav Interface updated successfully: Off.');
 }
 
 if (!$g->setDocmanWebdav($status))
