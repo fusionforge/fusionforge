@@ -127,6 +127,12 @@ function &group_get_active_projects() {
 	return group_get_objects(util_result_column_to_array($res,0));
 }
 
+function &group_get_all_projects() {
+	$res=db_query_params ('SELECT group_id FROM groups',
+			      array ()) ;
+	return group_get_objects (util_result_column_to_array($res,0)) ;
+}
+
 function &group_get_template_projects() {
 	$res=db_query_params ('SELECT group_id FROM groups WHERE is_template=1 AND status != $1',
 			      array ('D')) ;
@@ -619,6 +625,14 @@ class Group extends Error {
 			return false;
 		}
 
+		// Log the audit trail
+		$this->addHistory('Changed Public Info', '');
+		
+		if (!$this->fetchData($this->getID())) {
+			db_rollback();
+			return false;
+		}
+
 		$hook_params = array();
 		$hook_params['group'] = $this;
 		$hook_params['group_id'] = $this->getID();
@@ -634,13 +648,6 @@ class Group extends Error {
 			return false;
 		}
 
-		// Log the audit trail
-		$this->addHistory('Changed Public Info', '');
-
-		if (!$this->fetchData($this->getID())) {
-			db_rollback();
-			return false;
-		}
 		db_commit();
 		return true;
 	}
@@ -1083,6 +1090,14 @@ class Group extends Error {
 		} else {
 			return false;
 		}
+
+		$hook_params = array ();
+		$hook_params['group'] = $this;
+		$hook_params['group_id'] = $this->getID();
+		$hook_params['group_homepage'] = $this->getHomePage();
+		$hook_params['group_name'] = $this->getPublicName();
+		$hook_params['group_description'] = $this->getDescription();
+		plugin_hook ("group_update", $hook_params);
 	}
 
 	/**
@@ -2481,8 +2496,9 @@ class Group extends Error {
 		//
 		//	Plugin can make approve operation there
 		//
-		$params[0] = $idadmin_group;
-		$params[1] = $this->getID();
+		$params = array () ;
+		$params['group'] = $this ;
+		$params['group_id'] = $this->getID();
 		plugin_hook('group_approved', $params);
 
 		return true;

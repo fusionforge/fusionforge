@@ -145,6 +145,12 @@ function &user_get_active_users() {
 	return user_get_objects(util_result_column_to_array($res, 0));
 }
 
+function &user_get_all_users() {
+	$res=db_query_params ('SELECT user_id FROM users',
+			      array()) ;
+	return user_get_objects (util_result_column_to_array($res,0)) ;
+}
+
 class GFUser extends Error {
 	/**
 	 * Associative array of data from db.

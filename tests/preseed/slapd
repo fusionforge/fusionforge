@@ -1,0 +1,2 @@
+slapd slapd/password1 password CHANGEME
+slapd slapd/password2 password CHANGEME

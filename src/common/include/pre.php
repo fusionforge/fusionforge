@@ -267,6 +267,9 @@ if (forge_get_config('database_name') != "") {
 	// SCM-specific plugins subsystem
 	require_once $gfcommon.'include/SCMPlugin.class.php' ;
 
+	// SysAuth-specific plugins subsystem
+	require_once $gfcommon.'include/SysAuthPlugin.class.php' ;
+
 	// Authentication-specific plugins subsystem
 	require_once $gfcommon.'include/AuthPlugin.class.php' ;
 
