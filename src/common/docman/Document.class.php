@@ -1084,7 +1084,7 @@ class Document extends Error {
 				$this->setOnUpdateError(_('wrong column name'));
 				return false;
 		}
-		$localDg = new DocumentGroup($this->Group, $this->getDocGroupID);
+		$localDg = new DocumentGroup($this->Group, $this->getDocGroupID());
 		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
 			$this->setError(_('Error updating document group:').$localDg->getErrorMessage());
 			return false;
