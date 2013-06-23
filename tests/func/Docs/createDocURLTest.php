@@ -52,11 +52,11 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Docs");
 		$this->clickAndWait("addItemDocmanMenu");
-		$this->click("id=tabs-new-folder");
+		$this->click("id=tab-new-folder");
 		$this->type("groupname", "docdirectory");
 		$this->clickAndWait("submitaddsubgroup");
 		$this->clickAndWait("addItemDocmanMenu");
-		$this->click("id=tabs-new-document");
+		$this->click("id=tab-new-document");
 		$this->type("title", "My document");
 		$this->type("//input[@name='description']", "L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
 		$this->click("//input[@name='type' and @value='pasteurl']");

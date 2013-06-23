@@ -54,11 +54,11 @@ jQuery(document).ready(function() {
 
 <div id="tabs">
 <ul>
-<li><a href="#tabs-new-document" class="tabtitle" title="<?php echo _('Submit a new document in this folder.') ?>">
+<li><a id="tab-new-document" href="#tabs-new-document" class="tabtitle" title="<?php echo _('Submit a new document in this folder.') ?>">
     <?php echo _('New Document') ?></a></li>
-<li><a href="#tabs-new-folder" class="tabtitle" title="<?php echo _('Create a folder based on this name.') ?>">
+<li><a id="tab-new-folder" href="#tabs-new-folder" class="tabtitle" title="<?php echo _('Create a folder based on this name.') ?>">
     <?php echo _('New Folder') ?></a></li>
-<li><a href="#tabs-inject-tree" class="tabtitle" title="<?php echo _('Create a full folders tree using an compressed archive. Only zip format support.') ?>">
+<li><a id="tab-inject-tree" href="#tabs-inject-tree" class="tabtitle" title="<?php echo _('Create a full folders tree using an compressed archive. Only zip format support.') ?>">
     <?php echo _('Inject Tree') ?></a></li>
 </ul>
 
