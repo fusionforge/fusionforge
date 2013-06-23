@@ -619,9 +619,14 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 			break;
 		}
 	}
-	
+
+	if ($report->isError()) {
+		echo '<p class="error">'.$report->getErrorMessage().'</p>';
+		return false;
+	}
 	$rdates = $report->getRawDates();
 	if (!$rdates) {
+		echo '<p class="error">'._('No data to display').'</p>';
 		return false;
 	}
 	if (!$SPAN)
@@ -813,7 +818,7 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 	}
 	echo 'jQuery(document).ready(function(){
 			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', series, {
-				title : \''.utf8_decode($areaname).' ( '.strftime('%x',$start).' - '.strftime('%x',$end).') \',
+				title : \''.utf8_decode($areaname).' ( '.strftime('%x', $start).' - '.strftime('%x', $end).') \',
 				axesDefaults: {
 					tickOptions: {
 						angle: -90,
@@ -864,7 +869,6 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 	echo '//]]></script>';
 	echo '<div id="chart'.$chartid.'"></div>';
 	return true;
-	echo 'joli graph';
 }
 
 function report_toolspiegraph($datatype = 1, $start, $end) {
@@ -945,7 +949,7 @@ function report_toolspiegraph($datatype = 1, $start, $end) {
 		echo 'jQuery(document).ready(function(){
 			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [data'.$chartid.'],
 				{
-					title : \''.$arr[$datatype].' ('.strftime('%x',$start) .' - '. strftime('%x',$end) .')\',
+					title : \''.$arr[$datatype].' ('.strftime('%x', $start) .' - '. strftime('%x', $end) .')\',
 					seriesDefaults: {
 						// Make this a pie chart.
 						renderer: jQuery.jqplot.PieRenderer,
@@ -970,6 +974,159 @@ function report_toolspiegraph($datatype = 1, $start, $end) {
 	} else {
 		echo '<p class="information" >'._('No data to display.').'</p>';
 	}
+}
+
+function report_sitetimegraph($type = 'tasks', $start, $end) {
+	global $pie_labels,$pie_vals;
+
+	$now = time() - 60*24*24;
+	if ($now < $end) {
+		$end = $now;
+	}
+	$report = new ReportSiteTime($type, $start, $end);
+	$arr['tasks']='By Task';
+	$arr['category']='By Category';
+	$arr['subproject']='By Subproject';
+	$arr['user']='By User';
+
+	report_pie_arr($report->labels, $report->getData());
+	
+	$chartid = 'sitetimegraph';
+	if (count($pie_vals)) {
+		echo '<script type="text/javascript">//<![CDATA['."\n";
+		echo 'var data'.$chartid.' = new Array();';
+		for ($i = 0; $i < count($pie_vals); $i++) {
+			echo 'data'.$chartid.'.push([\''.htmlentities($pie_labels[0]).'\',\''.$pie_vals[1].'\']);';
+		}
+		echo 'var plot'.$chartid.';';
+		echo 'jQuery(document).ready(function(){
+			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [data'.$chartid.'],
+				{
+					title : \''.$arr[$type].' ('.strftime('%x', $start) .' - '. strftime('%x', $end) .')\',
+					seriesDefaults: {
+						// Make this a pie chart.
+						renderer: jQuery.jqplot.PieRenderer,
+						rendererOptions: {
+							// Put data labels on the pie slices.
+							// By default, labels show the percentage of the slice.
+							showDataLabels: true,
+							dataLabels: \'percent\',
+						}
+					},
+					legend: {
+						show:true, location: \'e\',
+					},
+				}
+				);
+			});';
+		echo 'jQuery(window).resize(function() {
+				plot'.$chartid.'.replot( { resetAxes: true } );
+			});'."\n";
+		echo '//]]></script>';
+		echo '<div id="chart'.$chartid.'"></div>';
+	} else {
+		echo '<p class="information" >'._('No data to display.').'</p>';
+	}
+}
+
+function report_sitetimebargraph($start, $end) {
+	$now = time() - 60*24*24;
+	if ($now < $end) {
+		$end = $now;
+	}
+	
+	$res = db_query_params('SELECT week,sum(hours)
+		FROM rep_time_tracking
+		WHERE week
+		BETWEEN $1 AND $2 GROUP BY week',
+				array($start, $end));
+
+	$report = new Report();
+	if ($report->isError()) {
+		exit_error($report->getErrorMessage());
+	}
+	$report->setDates($res,0);
+	$report->setData($res,1);
+	$chartid = 'sitetimebargraph';
+	$areaname = _('Hours Recorded');
+	$yMax = 0;
+	$dates[0] = $report->getDates();
+	$ydata[0] = $report->getData();
+	$label[0] = _(' Hours');
+	if (count($ydata[0])) {
+		echo '<script type="text/javascript">//<![CDATA['."\n";
+		echo 'var plot'.$chartid.';';
+		echo 'var values = new Array();';
+		echo 'var ticks = new Array();';
+		echo 'var labels = new Array();';
+		echo 'var series = new Array();';
+		for ($z = 0; $z < count($ydata); $z++) {
+			echo 'values['.$z.'] = new Array();';
+			echo 'labels.push({label:\''.$label[$z].'\'});';
+			for ($j = 0; $j < count($ydata[$z]); $j++) {
+				echo 'values['.$z.'].push('.$ydata[$z][$j].')';
+				echo 'ticks.push('.$dates[$z][$j].')';
+			}
+		}
+		for ($z = 0; $z < count($ydata); $z++) {
+			echo 'series.push(values['.$z.']);';
+		}
+		echo 'jQuery(document).ready(function(){
+				plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', series, {
+					title : \''.utf8_decode($areaname).' ( '.strftime('%x', $start).' - '.strftime('%x', $end).') \',
+					axesDefaults: {
+						tickOptions: {
+							angle: -90,
+							fontSize: \'8px\',
+							showGridline: false,
+							showMark: false,
+						},
+						pad: 0,
+					},
+					seriesDefaults: {
+						showMarker: false,
+						lineWidth: 1,
+						fill: true,
+						renderer:jQuery.jqplot.BarRenderer,
+						rendererOptions: {
+							fillToZero: true,
+						},
+					},
+					legend: {
+						show:true, location: \'ne\',
+					},
+					series:
+						labels
+					,
+					axes: {
+						xaxis: {
+							renderer: jQuery.jqplot.CategoryAxisRenderer,
+							ticks: ticks,
+						},
+						yaxis: {
+							max: '.++$yMax.',
+							min: 0,
+							tickOptions: {
+								angle: 0,
+								showMark: true,
+							}
+						},
+					},
+					highlighter: {
+						show: true,
+						sizeAdjust: 2.5,
+					},
+				});
+			});';
+		echo 'jQuery(window).resize(function() {
+			plot'.$chartid.'.replot();
+		});'."\n";
+		echo '//]]></script>';
+		echo '<div id="chart'.$chartid.'"></div>';
+	} else {
+		echo '<p class="information">'._('No data to display').'</p>';
+	}
+	return true;
 }
 
 // Local Variables:

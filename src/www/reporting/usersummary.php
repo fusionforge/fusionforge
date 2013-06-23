@@ -4,6 +4,7 @@
  *
  * Copyright 2003-2004 (c) GForge LLC, Tim Perdue
  * Copyright 2010 (c), FusionForge Team
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -95,7 +96,7 @@ GROUP BY realname, users.user_id, user_name, status_name, pgl.group_id, pt.group
 				       $end,
 				       db_int_array_to_any_clause (explode(',',$tstat))));
 if (!$res || db_numrows($res) < 1) {
-	echo '<p class="feedback">' . _('No matches found').db_error() . '</p>';
+	echo '<p class="information">' . _('No matches found').db_error() . '</p>';
 } else {
 	$tableHeaders = array(
 		_('Name'),

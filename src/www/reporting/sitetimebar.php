@@ -51,6 +51,11 @@ if ($typ != 'r' && $start == $end) {
 	$error_msg .= _('Start and end dates must be different');
 }
 
+html_use_jqueryjqplotpluginCanvas();
+html_use_jqueryjqplotpluginhighlighter();
+html_use_jqueryjqplotplugindateAxisRenderer();
+html_use_jqueryjqplotpluginBar();
+
 report_header(_('Site-Wide Time Tracking'));
 
 ?>
@@ -100,7 +105,12 @@ if ($typ=='r') {
 
 } elseif ($start != $end) { ?>
 	<p>
+	<?php
+		report_sitetimebargraph($start, $end);
+	?>
+	<noscript>
 	<img src="sitetimebar_graph.php?<?php echo "start=$start&amp;end=$end"; ?>"  alt="" />
+	</noscript>
 	</p>
 	<?php
 }

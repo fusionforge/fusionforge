@@ -4,6 +4,7 @@
  *
  * Copyright 2003-2004 (c) GForge LLC
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -53,6 +54,11 @@ if ($typ != 'r' && $start == $end) {
 	$error_msg .= _('Start and end dates must be different');
 }
 
+html_use_jqueryjqplotpluginCanvas();
+html_use_jqueryjqplotpluginPie();
+html_use_jqueryjqplotpluginhighlighter();
+html_use_jqueryjqplotplugindateAxisRenderer();
+
 report_header(_('Site-Wide Time Tracking'));
 
 $a[]=_('By Task');
@@ -95,7 +101,12 @@ if ($typ =='r') {
 	echo $HTML->listTableBottom ();
 } elseif ($start != $end) { ?>
 <p>
+<?php
+	report_sitetimegraph($type, $start, $end);
+?>
+<noscript>
 <img src="sitetime_graph.php?<?php echo "start=$start&amp;end=$end&amp;type=$type"; ?>" alt="" />
+</noscript>
 </p>
 <?php
 }
