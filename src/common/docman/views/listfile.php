@@ -279,6 +279,13 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			$html_image_attr['class'] = 'tabtitle';
 			$html_image_attr['title'] = _('Reserved Document');
 			echo html_image('docman/document-reserved.png', '22', '22', $html_image_attr);
+			$reserved_by = $d->getReservedBy();
+			if ($reserved_by) {
+				$user = user_get_object($reserved_by);
+				if (is_object($user)) {
+					echo ' '._('by').' '.make_user_link($user->getUnixName(), $user->getRealName());
+				}
+			}
 		} else {
 			echo $d->getStateName();
 		}
