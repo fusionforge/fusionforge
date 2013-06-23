@@ -42,6 +42,12 @@ function period2seconds($period_name,$span) {
 	}
 }
 
+function period2timestamp($period_name,$span) {
+	$seconds=period2seconds($period_name,$span);
+	if (!$seconds) return '';
+	return (string)(time()-$seconds);
+}
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
