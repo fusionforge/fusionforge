@@ -102,7 +102,7 @@ if ($typ =='r') {
 } elseif ($start != $end) { ?>
 <p>
 <?php
-	report_sitetimegraph($type, $start, $end);
+	report_timegraph('site', $type, $start, $end);
 ?>
 <noscript>
 <img src="sitetime_graph.php?<?php echo "start=$start&amp;end=$end&amp;type=$type"; ?>" alt="" />

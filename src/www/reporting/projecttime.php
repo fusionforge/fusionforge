@@ -52,6 +52,11 @@ if ($typ != 'r' && $start == $end) {
 	$error_msg .= _('Start and end dates must be different');
 }
 
+html_use_jqueryjqplotpluginCanvas();
+html_use_jqueryjqplotpluginPie();
+html_use_jqueryjqplotpluginhighlighter();
+html_use_jqueryjqplotplugindateAxisRenderer();
+
 report_header(_('Time Tracking By Project'));
 
 $a[]=_('By Task');
@@ -96,7 +101,12 @@ $a2[]='user';
 
 	} elseif ($g_id && $start != $end) { ?>
 	<p>
+	<?php
+		report_timegraph('project', $type, $start, $end, $g_id);
+	?>
+	<noscript>
 	<img src="projecttime_graph.php?<?php echo "start=$start&amp;end=$end&amp;g_id=$g_id&amp;type=$type"; ?>" alt="" />
+	</noscript>
 	</p>
 	<?php
 

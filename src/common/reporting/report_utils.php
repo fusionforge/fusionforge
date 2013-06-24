@@ -976,14 +976,28 @@ function report_toolspiegraph($datatype = 0, $start, $end) {
 	}
 }
 
-function report_sitetimegraph($type = 'tasks', $start, $end) {
-	global $pie_labels,$pie_vals;
+function report_timegraph($type = 'site', $area = 'tasks', $start, $end, $id = 0) {
+	global $pie_labels, $pie_vals;
 
 	$now = time() - 60*24*24;
 	if ($now < $end) {
 		$end = $now;
 	}
-	$report = new ReportSiteTime($type, $start, $end);
+	switch($type) {
+		case 'site': {
+			$report = new ReportSiteTime($area, $start, $end);
+			break;
+		}
+		case 'project': {
+			$report = new ReportProjectTime($id, $area, $start, $end);
+			break;
+		}
+		case 'user': {
+			$report = new ReportUserTime($id, $area, $start, $end);
+			break;
+		}
+	}
+
 	$arr['tasks']='By Task';
 	$arr['category']='By Category';
 	$arr['subproject']='By Subproject';
@@ -991,7 +1005,7 @@ function report_sitetimegraph($type = 'tasks', $start, $end) {
 
 	report_pie_arr($report->labels, $report->getData());
 	
-	$chartid = 'sitetimegraph';
+	$chartid = 'timegraph';
 	if (count($pie_vals)) {
 		echo '<script type="text/javascript">//<![CDATA['."\n";
 		echo 'var data'.$chartid.' = new Array();';
@@ -1002,7 +1016,7 @@ function report_sitetimegraph($type = 'tasks', $start, $end) {
 		echo 'jQuery(document).ready(function(){
 			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [data'.$chartid.'],
 				{
-					title : \''.$arr[$type].' ('.strftime('%x', $start) .' - '. strftime('%x', $end) .')\',
+					title : \''.$arr[$area].' ('.strftime('%x', $start) .' - '. strftime('%x', $end) .')\',
 					seriesDefaults: {
 						// Make this a pie chart.
 						renderer: jQuery.jqplot.PieRenderer,
