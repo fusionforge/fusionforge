@@ -1436,7 +1436,7 @@ msgstr "调整资料夹"
 
 #: common/docman/views/menu.php:46
 msgid ""
-"View files and folders in 2 panels. Left a folder tree, right a list of "
+"View documents and folders in 2 panels. Left a folder tree, right a list of "
 "files of selected folder."
 msgstr ""
 

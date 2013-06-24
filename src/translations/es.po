@@ -1340,7 +1340,7 @@ msgstr "Mostrar ficheros y directorios"
 
 #: common/docman/views/menu.php:46
 msgid ""
-"View files and folders in 2 panels. Left a folder tree, right a list of "
+"View documents and folders in 2 panels. Left a folder tree, right a list of "
 "files of selected folder."
 msgstr ""
 "Visualizar ficheros y directorios en 2 paneles. Dejar un arbol de "
