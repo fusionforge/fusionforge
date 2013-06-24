@@ -176,7 +176,6 @@ class WikiPlugin_WikiBlog
         $perm->perm['edit'] = $perm->perm['remove'];
         $version_meta = array('author' => $blog_meta['creator'],
             'author_id' => $blog_meta['creator_id'],
-            'markup' => 2.0, // assume new markup
             'summary' => $summary ? $summary : _("New comment."),
             'mtime' => $now,
             'pagetype' => $type,

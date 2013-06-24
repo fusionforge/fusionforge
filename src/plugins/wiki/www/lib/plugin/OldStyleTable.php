@@ -138,8 +138,7 @@ class WikiPlugin_OldStyleTable
             else
                 $attr['align'] = 'left';
 
-            // Assume new-style inline markup.
-            $content = TransformInline($m[4], 2.0, $basepage);
+            $content = TransformInline($m[4], $basepage);
 
             $row->pushContent(HTML::td($attr, HTML::raw('&nbsp;'),
                 $content, HTML::raw('&nbsp;')));

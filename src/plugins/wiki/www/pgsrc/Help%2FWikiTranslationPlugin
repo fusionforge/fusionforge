@@ -1,9 +1,8 @@
 Date: Fri,  7 Dec 2012 14:58:45 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
-  pagename=Help%2F_WikiTranslationPlugin;
+  pagename=Help%2FWikiTranslationPlugin;
   flags=PAGE_LOCKED;
-  markup=2;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
@@ -14,7 +13,7 @@ Current favorite: translate.google.com if from_lang = en or fr
 
 == Usage ==
 {{{
-  <<_WikiTranslation languages=de,en,sv string="" page=""
+  <<WikiTranslation languages=de,en,sv string="" page=""
                             what=pages from_lang=0 nolinks=0 noT=0 debug=0
  >>
 }}}
@@ -43,17 +42,17 @@ noT:
 == Example ==
 
 {{{
-  <<_WikiTranslation page=HomePage languages=fr>>
+  <<WikiTranslation page=HomePage languages=fr>>
      Translation service for HomePage into french (redirect to translate.google.com)
-  <<_WikiTranslation what=pages>>
+  <<WikiTranslation what=pages>>
      Translation matrix of all pages with proper translations (all in pgsrc)
-  <<_WikiTranslation what=wikiwords match="W*" limit=20>>
+  <<WikiTranslation what=wikiwords match="W*" limit=20>>
      Translation matrix of the first 20 wikiwords matching "W*"
-  <<_WikiTranslation string=HomePage languages=fr,de,sv>>
+  <<WikiTranslation string=HomePage languages=fr,de,sv>>
      Translation matrix for all given languages
-  <<_WikiTranslation string=HomePage>>
+  <<WikiTranslation string=HomePage>>
      Translation matrix for all supported languages
-  <<_WikiTranslation string=HomePage languages=fr>>
+  <<WikiTranslation string=HomePage languages=fr>>
      Just return the translated string for this language.
 }}}
 

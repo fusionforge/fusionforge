@@ -9,15 +9,15 @@
   <table class="wikiforum-reply">
      <caption><?php echo _("Post new")?></caption>
      <col class="label" width="1*" /><col class="input" width="100*" />
-     <tr><th align="right"><?php echo _("Title:")?></th>
+     <tr><th class="align-right"><?php echo _("Title:")?></th>
          <td><input class="wikitext" type="text" size="60"
                     maxlength="256" name="forum[summary]" value="<?php echo isset($forum['summary']) ? $forum['summary'] : '' ?>" /></td>
      </tr>
-    <tr><th align="right"><?php echo _("Reply")?>:</th>
+    <tr><th class="align-right"><?php echo _("Reply")?>:</th>
          <td><textarea class="forumedit" rows="5" cols="60"
                        name="forum[body]"><?php echo isset($forum['body']) ? $forum['body'] : ''?></textarea></td>
      </tr>
-     <tr><td colspan="2" align="center" class="submit-button"
+     <tr><td colspan="2" class="align-center" class="submit-button"
              ><input type="submit" value="<?php echo _("Add Message")?>"
                      name="forum[add]" class="wikiaction" /></td>
      </tr>

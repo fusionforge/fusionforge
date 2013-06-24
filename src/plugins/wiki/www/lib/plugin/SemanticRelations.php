@@ -131,8 +131,8 @@ class WikiPlugin_SemanticRelations
         if ($nohelp) return $relhtml;
         return HTML($relhtml,
             HTML::hr(),
-            WikiLink(_("Help/SemanticRelations"), false,
-                HTML::em(_("Help/SemanticRelations"))),
+            WikiLink(__("Help").":".__("SemanticRelations"), false,
+                HTML::em(_("Help")."/"._("SemanticRelations"))),
             " - ",
             HTML::em(_("Find out how to add relations and attributes to pages.")));
     }

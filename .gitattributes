@@ -2087,7 +2087,6 @@ src/plugins/wiki/www/lib/WikiDB/adodb/perf/perf-mysql.inc.php -text !eol
 src/plugins/wiki/www/lib/WikiDB/adodb/perf/perf-oci8.inc.php -text !eol
 src/plugins/wiki/www/lib/WikiDB/adodb/perf/perf-postgres.inc.php -text !eol
 src/plugins/wiki/www/lib/WikiDB/adodb/pivottable.inc.php -text !eol
-src/plugins/wiki/www/lib/WikiDB/adodb/readme.htm -text
 src/plugins/wiki/www/lib/WikiDB/adodb/readme.txt -text
 src/plugins/wiki/www/lib/WikiDB/adodb/rsfilter.inc.php -text !eol
 src/plugins/wiki/www/lib/WikiDB/adodb/server.php -text !eol
@@ -2209,7 +2208,6 @@ src/plugins/wiki/www/locale/de/pgsrc/AlleSeitenErzeugtVonMir -text
 src/plugins/wiki/www/locale/de/pgsrc/AlleSeitenImBesitzVonMir -text
 src/plugins/wiki/www/locale/de/pgsrc/BackLinks -text
 src/plugins/wiki/www/locale/de/pgsrc/BenutzerEinstellungen -text
-src/plugins/wiki/www/locale/de/pgsrc/BeobachteSeite -text
 src/plugins/wiki/www/locale/de/pgsrc/DebugAuthInfo -text
 src/plugins/wiki/www/locale/de/pgsrc/DebugGruppenInfo -text
 src/plugins/wiki/www/locale/de/pgsrc/DebugInfo -text
@@ -2222,7 +2220,6 @@ src/plugins/wiki/www/locale/de/pgsrc/Geringf%C3%BCgige%C3%84nderungen -text
 src/plugins/wiki/www/locale/de/pgsrc/GleicheSeiten -text
 src/plugins/wiki/www/locale/de/pgsrc/Hilfe -text
 src/plugins/wiki/www/locale/de/pgsrc/Hilfe%2FAktionsSeite -text
-src/plugins/wiki/www/locale/de/pgsrc/Hilfe%2FAlteTextFormatierungsRegeln -text
 src/plugins/wiki/www/locale/de/pgsrc/Hilfe%2FAutorenProtokollPlugin -text
 src/plugins/wiki/www/locale/de/pgsrc/Hilfe%2FGraphVizPlugin -text
 src/plugins/wiki/www/locale/de/pgsrc/Hilfe%2FGuterStil -text
@@ -2267,6 +2264,7 @@ src/plugins/wiki/www/locale/de/pgsrc/PhpWikiSystemverwalten%2FUmbenennen -text
 src/plugins/wiki/www/locale/de/pgsrc/PhpWikiUmfrage -text
 src/plugins/wiki/www/locale/de/pgsrc/SandKasten -text
 src/plugins/wiki/www/locale/de/pgsrc/SandKiste -text
+src/plugins/wiki/www/locale/de/pgsrc/SeiteBeobarten -text
 src/plugins/wiki/www/locale/de/pgsrc/SeiteFinden -text
 src/plugins/wiki/www/locale/de/pgsrc/SeiteSpeichern -text
 src/plugins/wiki/www/locale/de/pgsrc/SeitenErzeugen -text
@@ -2296,7 +2294,6 @@ src/plugins/wiki/www/locale/es/pgsrc/Ayuda%2FKBrown -text
 src/plugins/wiki/www/locale/es/pgsrc/Ayuda%2FMasAcercadeLaMecanica -text
 src/plugins/wiki/www/locale/es/pgsrc/Ayuda%2FPhpWiki -text
 src/plugins/wiki/www/locale/es/pgsrc/Ayuda%2FReglasDeFormatoDeTexto -text
-src/plugins/wiki/www/locale/es/pgsrc/Ayuda%2FViejoReglasDeFormatoDeTexto -text
 src/plugins/wiki/www/locale/es/pgsrc/Ayuda%2FWabiSabi -text
 src/plugins/wiki/www/locale/es/pgsrc/Ayuda%2FWikiWikiWeb -text
 src/plugins/wiki/www/locale/es/pgsrc/BuscarP%C3%A1gina -text
@@ -2319,7 +2316,6 @@ src/plugins/wiki/www/locale/fr/pgsrc/AdministrationDePhpWiki%2FSupprimer -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2F%C3%89diterLeContenu -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FAjouterDesPages -text
-src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FAnciennesR%C3%A8glesDeFormatage -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FCommentUtiliserUnWiki -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FD%C3%A9tailsTechniques -text
 src/plugins/wiki/www/locale/fr/pgsrc/Aide%2FIc%C3%B4nesDeLien -text
@@ -2448,7 +2444,6 @@ src/plugins/wiki/www/locale/nl/pgsrc/Help%2FGoedeStijl -text
 src/plugins/wiki/www/locale/nl/pgsrc/Help%2FHoeWikiTeGebruiken -text
 src/plugins/wiki/www/locale/nl/pgsrc/Help%2FJanNieuwenhuizen -text
 src/plugins/wiki/www/locale/nl/pgsrc/Help%2FMeerOverTechnieken -text
-src/plugins/wiki/www/locale/nl/pgsrc/Help%2FOudTekstFormatteringsRegels -text
 src/plugins/wiki/www/locale/nl/pgsrc/Help%2FPaginasToevoegen -text
 src/plugins/wiki/www/locale/nl/pgsrc/Help%2FPhpWiki -text
 src/plugins/wiki/www/locale/nl/pgsrc/Help%2FRecenteBezoekers -text
@@ -2598,6 +2593,9 @@ src/plugins/wiki/www/pgsrc/Help%2FCreatePagePlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FCreateTocPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FCurrentTimePlugin -text
 src/plugins/wiki/www/pgsrc/Help%00252FDeadEndPagesPlugin -text
+src/plugins/wiki/www/pgsrc/Help%00252FDebugAuthInfoPlugin -text
+src/plugins/wiki/www/pgsrc/Help%00252FDebugBackendInfoPlugin -text
+src/plugins/wiki/www/pgsrc/Help%00252FDebugGroupInfoPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FDiffPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FDynamicIncludePagePlugin -text
 src/plugins/wiki/www/pgsrc/Help%00252FEditMetaDataPlugin -text
@@ -2641,7 +2639,6 @@ src/plugins/wiki/www/pgsrc/Help%2FMostPopularPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FNewPagesPerUserPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FNoCachePlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FOldStyleTablePlugin -text
-src/plugins/wiki/www/pgsrc/Help%2FOldTextFormattingRules -text
 src/plugins/wiki/www/pgsrc/Help%2FOrphanedPagesPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FPageDumpPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FPageGroupPlugin -text
@@ -2662,6 +2659,7 @@ src/plugins/wiki/www/pgsrc/Help%2FPopUpPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FPopularNearbyPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FPredefinedIcons -text
 src/plugins/wiki/www/pgsrc/Help%2FPreferenceAppPlugin -text
+src/plugins/wiki/www/pgsrc/Help%2FPreferencesInfoPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FPrevNextPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FRandomPagePlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FRateItPlugin -text
@@ -2707,7 +2705,6 @@ src/plugins/wiki/www/pgsrc/Help%2FWatchPagePlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FWhoIsOnlinePlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FWikiAdminChmodPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FWikiAdminChownPlugin -text
-src/plugins/wiki/www/pgsrc/Help%2FWikiAdminMarkupPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FWikiAdminPurgePlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FWikiAdminRemovePlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FWikiAdminRenamePlugin -text
@@ -2722,14 +2719,10 @@ src/plugins/wiki/www/pgsrc/Help%2FWikiFormRichPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FWikiForumPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FWikiPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FWikiPollPlugin -text
+src/plugins/wiki/www/pgsrc/Help%2FWikiTranslationPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2FWikiWikiWeb -text
 src/plugins/wiki/www/pgsrc/Help%2FWikicreole -text
 src/plugins/wiki/www/pgsrc/Help%2FYouTubePlugin -text
-src/plugins/wiki/www/pgsrc/Help%2F_AuthInfoPlugin -text
-src/plugins/wiki/www/pgsrc/Help%2F_BackendInfoPlugin -text
-src/plugins/wiki/www/pgsrc/Help%2F_GroupInfoPlugin -text
-src/plugins/wiki/www/pgsrc/Help%2F_PreferencesInfoPlugin -text
-src/plugins/wiki/www/pgsrc/Help%2F_WikiTranslationPlugin -text
 src/plugins/wiki/www/pgsrc/Help%2Ftext2pngPlugin -text
 src/plugins/wiki/www/pgsrc/HomePage -text
 src/plugins/wiki/www/pgsrc/HomePageAlias -text
@@ -2757,7 +2750,6 @@ src/plugins/wiki/www/pgsrc/PhpWikiAdministration -text
 src/plugins/wiki/www/pgsrc/PhpWikiAdministration%2FChmod -text
 src/plugins/wiki/www/pgsrc/PhpWikiAdministration%2FChown -text
 src/plugins/wiki/www/pgsrc/PhpWikiAdministration%00252FDeleteAcl -text
-src/plugins/wiki/www/pgsrc/PhpWikiAdministration%2FMarkup -text
 src/plugins/wiki/www/pgsrc/PhpWikiAdministration%2FPurge -text
 src/plugins/wiki/www/pgsrc/PhpWikiAdministration%2FRemove -text
 src/plugins/wiki/www/pgsrc/PhpWikiAdministration%2FRename -text

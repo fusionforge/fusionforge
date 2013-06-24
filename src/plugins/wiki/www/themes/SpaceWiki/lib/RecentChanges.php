@@ -50,7 +50,7 @@ class _SpaceWiki_RecentChanges_Formatter
             return '';
         return HTML::strong(array('class' => 'wiki-summary'),
             " ",
-            TransformLinks($summary, $rev->get('markup'), $rev->getPageName()),
+            TransformLinks($summary, $rev->getPageName()),
             " ");
     }
 
@@ -76,7 +76,7 @@ class _SpaceWiki_PageHistory_Formatter
             return '';
         return HTML::strong(array('class' => 'wiki-summary'),
             " ",
-            TransformLinks($summary, $rev->get('markup'), $rev->getPageName()),
+            TransformLinks($summary, $rev->getPageName()),
             " ");
     }
 }

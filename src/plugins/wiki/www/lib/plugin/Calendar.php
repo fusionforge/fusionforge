@@ -101,9 +101,7 @@ class WikiPlugin_Calendar
 
         return HTML::tr(HTML::td(array('colspan' => $args['display_weeknum'] ? 8 : 7,
                 'align' => 'center'),
-            HTML::table(array('width' => '100%',
-                    'class' => 'cal-header'),
-                $row)));
+            HTML::table(array('class' => 'cal-header fullwidth'), $row)));
     }
 
     private function __daynames($start_wday)
@@ -189,9 +187,7 @@ class WikiPlugin_Calendar
             1, // mday (1-31)
             $args['year']);
 
-        $cal = HTML::table(array('cellspacing' => 0,
-                'cellpadding' => 2,
-                'class' => 'cal'),
+        $cal = HTML::table(array('class' => 'cal'),
             HTML::thead(
                 $this->__header($request->getArg('pagename'),
                     $time),

@@ -66,7 +66,7 @@
   <br class="clear-floats" />
   <table class="fullwidth">
     <tr><td><?php echo $EDIT_TOOLBAR ?></td>
-        <td align="right"><div id="editarea-size">
+        <td class="align-right"><div id="editarea-size">
     <?php echo _("Size").':'?>
     <label for="pref-editHeight"><b><?php echo _("H")?></b></label> <?php echo $HEIGHT_PREF?>
     <label for="pref-editWidth"><b><?php echo _("W")?></b></label> <?php echo $WIDTH_PREF?>
@@ -77,11 +77,11 @@
   <label for="edit-summary"><?php echo _("Summary").':'?></label> <?php echo $SUMMARY_INPUT?>
 </div>
 <table class="fullwidth">
-<tr valign="middle">
+<tr class="middle">
   <td>
     <?php echo $MINOR_EDIT_CB ?> <label for="edit-minor_edit"><?php echo _("This is a minor change.")?></label><br />
   </td>
-  <td align="center">
+  <td class="align-center">
     <?php echo $PREVIEW_B ?>
     <?php if ($SAVE_B)  { ?>
       <?php echo $SEP?><?php echo $SAVE_B ?>

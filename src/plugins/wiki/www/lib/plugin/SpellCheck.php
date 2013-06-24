@@ -163,7 +163,7 @@ class WikiPlugin_SpellCheck
         }
         $GLOBALS['request']->setArg('suggestions', $sugg);
         include_once 'lib/BlockParser.php';
-        $ori_html = TransformText($revision, $revision->get('markup'), $page);
+        $ori_html = TransformText($revision, $page);
         $GLOBALS['request']->setArg('suggestions', false);
 
         $html->pushContent($ori_html, HTML::hr(), HTML::h1(_("SpellCheck result")));

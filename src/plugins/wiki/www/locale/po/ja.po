@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-17 14:31+0200\n"
+"POT-Creation-Date: 2013-06-19 15:31+0200\n"
 "PO-Revision-Date: 2003-06-07 09:01+0900\n"
 "Last-Translator: Tadashi Jokagi <webmaster@elf.no-ip.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -271,9 +271,6 @@ msgid ""
 "Your changes can not be saved as they are, since doing so would overwrite "
 "the other author's changes. So, your changes and those of the other author "
 "have been combined. The result is shown below."
-msgstr ""
-
-msgid "Convert"
 msgstr ""
 
 msgid "Preview"
@@ -642,7 +639,7 @@ msgid "Cancel"
 msgstr ""
 
 #, fuzzy, php-format
-msgid "revert to version %d"
+msgid "Revert to version %d"
 msgstr "バージョン %d"
 
 #, php-format
@@ -998,12 +995,12 @@ msgid " ... first %d bytes"
 msgstr ""
 
 #, php-format
-msgid " ... around %s"
+msgid " ... around “%s”"
 msgstr ""
 
-#, php-format
-msgid "%s not found"
-msgstr ""
+#, fuzzy, php-format
+msgid "“%s” not found"
+msgstr "%s: ファイルが見つかりません。"
 
 #, php-format
 msgid "page permission inherited from %s"
@@ -1074,14 +1071,7 @@ msgstr ""
 msgid "minor"
 msgstr ""
 
-msgid "Markup"
-msgstr "マークアップ"
-
 msgid "Illegal 'limit' argument: must be numeric"
-msgstr ""
-
-#, php-format
-msgid "Columns: %s."
 msgstr ""
 
 #, fuzzy
@@ -1357,21 +1347,6 @@ msgid "History of all major and minor modifications for any page edited by %s."
 msgstr ""
 
 #, php-format
-msgid "Get debugging information for %s."
-msgstr ""
-
-#, php-format
-msgid "Querying backend directly for “%s”"
-msgstr ""
-
-#, php-format
-msgid "No pagedata for %s"
-msgstr ""
-
-msgid "<not displayed>"
-msgstr ""
-
-#, php-format
 msgid "List all pages which link to %s."
 msgstr ""
 
@@ -1527,9 +1502,6 @@ msgstr ""
 msgid "%s: no such revision %d."
 msgstr ""
 
-msgid "CreateToc disabled for old markup."
-msgstr ""
-
 msgid "Click to display to TOC"
 msgstr ""
 
@@ -1548,6 +1520,33 @@ msgstr ""
 
 msgid "No userid"
 msgstr ""
+
+#, php-format
+msgid "Get debugging information for %s."
+msgstr ""
+
+#, php-format
+msgid "Querying backend directly for “%s”"
+msgstr ""
+
+#, php-format
+msgid "No pagedata for %s"
+msgstr ""
+
+msgid "<not displayed>"
+msgstr ""
+
+#, php-format
+msgid "Show Group Information."
+msgstr ""
+
+#, php-format
+msgid "Show a markup retransformation of page %s."
+msgstr ""
+
+#, fuzzy, php-format
+msgid "Retransform page “%s”"
+msgstr "全ページ一覧"
 
 msgid "Display differences between revisions."
 msgstr ""
@@ -1570,9 +1569,9 @@ msgstr ""
 msgid "Dynamically include the content from another wiki page."
 msgstr ""
 
-#, fuzzy, php-format
+#, php-format
 msgid " %s :"
-msgstr "%s バイト"
+msgstr ""
 
 msgid "Click to hide/show"
 msgstr ""
@@ -1754,14 +1753,13 @@ msgstr ""
 msgid "%s error: outputfile “%s” not created"
 msgstr ""
 
-#, php-format
-msgid "Show Group Information."
-msgstr ""
-
 msgid "Simple Sample Plugin."
 msgstr ""
 
 msgid "Convert HTML markup into wiki markup."
+msgstr ""
+
+msgid "Convert"
 msgstr ""
 
 msgid "Only files with extension HTML are allowed"
@@ -1914,16 +1912,15 @@ msgstr ""
 msgid "The current page has no subpages defined."
 msgstr ""
 
-#, fuzzy, php-format
+#, php-format
 msgid "SubPages of %s:"
-msgstr "%s のページ履歴"
+msgstr ""
 
 msgid "Layout tables using a Mediawiki-like markup style."
 msgstr ""
 
-#, fuzzy
 msgid "Support moderated pages."
-msgstr "サポート言語一覧"
+msgstr ""
 
 msgid "No e-mails for the moderators defined"
 msgstr ""
@@ -2370,12 +2367,16 @@ msgid "no page specified"
 msgstr ""
 
 #, php-format
-msgid "Rating: %s (%d vote"
-msgstr ""
-
-#, php-format
 msgid "Your rating was %.1f"
 msgstr ""
+
+#, fuzzy, php-format
+msgid "Prediction: %s"
+msgstr "編集: %s"
+
+#, fuzzy, php-format
+msgid "Prediction: %.1f"
+msgstr "編集: %s"
 
 msgid "RateIt"
 msgstr ""
@@ -2619,14 +2620,6 @@ msgstr ""
 msgid "RelatedChanges"
 msgstr ""
 
-#, php-format
-msgid "Show a markup retransformation of page %s."
-msgstr ""
-
-#, fuzzy, php-format
-msgid "Retransform page “%s”"
-msgstr "全ページ一覧"
-
 msgid "Layout tables using a very rich markup style."
 msgstr ""
 
@@ -2660,7 +2653,10 @@ msgstr ""
 msgid "Attributes of %s"
 msgstr ""
 
-msgid "Help/SemanticRelations"
+msgid "Help"
+msgstr ""
+
+msgid "SemanticRelations"
 msgstr ""
 
 msgid "Find out how to add relations and attributes to pages."
@@ -2673,9 +2669,6 @@ msgid "Enter a valid query expression"
 msgstr ""
 
 msgid "Search in all specified pages for the expression."
-msgstr ""
-
-msgid "Help/SemanticSearchAdvancedPlugin"
 msgstr ""
 
 #, php-format
@@ -2728,9 +2721,6 @@ msgid "SemanticSearchAdvanced"
 msgstr ""
 
 msgid "No relations nor attributes in the whole wikidb defined!"
-msgstr ""
-
-msgid "Help:SemanticRelations"
 msgstr ""
 
 #, php-format
@@ -3070,7 +3060,7 @@ msgstr ""
 msgid "This internal action page cannot viewed."
 msgstr ""
 
-msgid "You can only use it via the _WikiTranslation plugin."
+msgid "You can only use it via the WikiTranslation plugin."
 msgstr ""
 
 msgid "Translation Error!"
@@ -3292,6 +3282,10 @@ msgstr ""
 msgid "Count"
 msgstr "カウント"
 
+#, php-format
+msgid "Columns: %s."
+msgstr ""
+
 #, fuzzy
 msgid "Wanted From"
 msgstr "データフォーマット"
@@ -3366,53 +3360,6 @@ msgstr ""
 msgid "%d minutes"
 msgstr ""
 
-msgid "Set individual page permissions."
-msgstr ""
-
-#, php-format
-msgid "chmod page “%s” to “%s”."
-msgstr ""
-
-#, php-format
-msgid "Couldn't chmod page “%s” to “%s”."
-msgstr ""
-
-msgid "Invalid chmod string"
-msgstr ""
-
-#, fuzzy, php-format
-msgid "%d pages have been changed."
-msgstr "変更しませんでした。"
-
-#, fuzzy
-msgid "No pages changed."
-msgstr "変更しませんでした。"
-
-msgid "Are you sure you want to permanently change the selected files?"
-msgstr ""
-
-msgid "Chmod"
-msgstr ""
-
-#, fuzzy
-msgid "Select the pages to change:"
-msgstr "貴方個人の言語を選択"
-
-msgid "This plugin is currently under development and does not work!"
-msgstr ""
-
-msgid "Chmod to permission:"
-msgstr ""
-
-msgid "(ugo : rwx)"
-msgstr ""
-
-msgid "Propagate new permissions to all subpages?"
-msgstr ""
-
-msgid "(disable individual page permissions, enable inheritance)?"
-msgstr ""
-
 #, fuzzy
 msgid "Change owner of selected pages."
 msgstr "選択ページを全て削除"
@@ -3437,8 +3384,9 @@ msgstr "変更しませんでした。"
 msgid "%d pages have been changed:"
 msgstr "変更しませんでした。"
 
-msgid "PhpWikiAdministration/Chown"
-msgstr ""
+#, fuzzy
+msgid "No pages changed."
+msgstr "変更しませんでした。"
 
 msgid "Confirm ownership change"
 msgstr ""
@@ -3462,8 +3410,9 @@ msgstr ""
 msgid "ACL deleted for page “%s”"
 msgstr "全ページ一覧"
 
-msgid "PhpWikiAdministration/AdminAclDelete"
-msgstr ""
+#, fuzzy, php-format
+msgid "%d pages have been changed."
+msgstr "変更しませんでした。"
 
 #, fuzzy
 msgid "Delete ACL"
@@ -3475,44 +3424,6 @@ msgstr "貴方個人の言語を選択"
 
 msgid "Selected Pages: "
 msgstr ""
-
-#, fuzzy
-msgid "Change the markup type of selected pages."
-msgstr "選択ページを全て削除"
-
-#, fuzzy, php-format
-msgid "Change markup type from %s to %s"
-msgstr "国名変更"
-
-#, fuzzy, php-format
-msgid "change page “%s” to markup type “%s”."
-msgstr "“%s” の削除に成功しました。"
-
-#, fuzzy, php-format
-msgid "Couldn't change page “%s” to markup type “%s”."
-msgstr "“%s” の削除に成功しました。"
-
-msgid "PhpWikiAdministration/Markup"
-msgstr ""
-
-msgid "Confirm markup change"
-msgstr ""
-
-#, fuzzy
-msgid "Are you sure you want to change the markup type of the selected files?"
-msgstr "選択ページを全て削除"
-
-#, fuzzy
-msgid "Change markup type"
-msgstr "国名変更"
-
-#, fuzzy
-msgid "Select the pages to change the markup type"
-msgstr "貴方個人の言語を選択"
-
-#, fuzzy
-msgid "Change markup to: "
-msgstr "パスワード変更"
 
 #, fuzzy
 msgid "Permanently purge all selected pages."
@@ -3537,9 +3448,6 @@ msgstr ""
 #, fuzzy
 msgid "No pages purged."
 msgstr "変更しませんでした。"
-
-msgid "PhpWikiAdministration/Purge"
-msgstr ""
 
 msgid "Confirm purge"
 msgstr ""
@@ -3577,9 +3485,6 @@ msgstr ""
 #, fuzzy
 msgid "No pages removed."
 msgstr "変更点が見つかりませんでした。"
-
-msgid "PhpWikiAdministration/Remove"
-msgstr ""
 
 #, fuzzy
 msgid "Remove"
@@ -3685,31 +3590,33 @@ msgstr ""
 msgid "Search and replace text in selected wiki pages."
 msgstr ""
 
-#, fuzzy, php-format
-msgid "Replace “%s” by “%s”"
-msgstr "“%s” の削除に成功しました。"
-
-msgid "Error: Empty search string."
-msgstr ""
-
-#, php-format
-msgid "Replaced “%s” with “%s” in page “%s”."
+msgid "You must be an administrator to use this plugin."
 msgstr ""
 
 msgid "Warning: The search string cannot be empty!"
-msgstr ""
-
-msgid "Are you sure you want to replace text in the selected files?"
 msgstr ""
 
 #, fuzzy
 msgid "Select the pages to search and replace"
 msgstr "貴方個人の言語を選択"
 
-msgid "Replace all occurences of the given string in the content of all pages."
+msgid "Replace"
 msgstr ""
 
-msgid "Replace"
+msgid "Are you sure you want to replace text in the selected files?"
+msgstr ""
+
+#, fuzzy, php-format
+msgid "Replace “%s” by “%s”"
+msgstr "“%s” の削除に成功しました。"
+
+#, php-format
+msgid "Replaced “%s” with “%s” in page “%s”."
+msgstr ""
+
+msgid ""
+"Replace all occurences of the given string in the content of all selected "
+"pages."
 msgstr ""
 
 msgid "by"
@@ -3733,6 +3640,9 @@ msgstr ""
 msgid "Selected page “%s” passed to “%s”."
 msgstr ""
 
+msgid "Set individual page permissions."
+msgstr ""
+
 #, fuzzy, php-format
 msgid "ACL not changed for page “%s”."
 msgstr "全ページ一覧"
@@ -3750,9 +3660,6 @@ msgid "ACL changed for page “%s” from “%s” to “%s”."
 msgstr "全ページ一覧"
 
 msgid "Invalid ACL"
-msgstr ""
-
-msgid "PhpWikiAdministration/SetAcl"
 msgstr ""
 
 msgid ""
@@ -3781,6 +3688,12 @@ msgstr ""
 msgid "To add check 'Add' near the dropdown list."
 msgstr ""
 
+msgid "Propagate new permissions to all subpages?"
+msgstr ""
+
+msgid "(disable individual page permissions, enable inheritance)?"
+msgstr ""
+
 msgid "(Currently not working)"
 msgstr ""
 
@@ -3790,9 +3703,6 @@ msgstr ""
 #, fuzzy, php-format
 msgid "change page “%s” to external."
 msgstr "“%s” の削除に成功しました。"
-
-msgid "PhpWikiAdministration/SetExternal"
-msgstr ""
 
 msgid "Set pages to external"
 msgstr ""
@@ -3805,9 +3715,6 @@ msgstr ""
 
 #, php-format
 msgid "Bad action requested: %s"
-msgstr ""
-
-msgid "You must be an administrator to use this plugin."
 msgstr ""
 
 #, php-format
@@ -3946,6 +3853,14 @@ msgstr ""
 msgid "AddComment"
 msgstr "コメント追加"
 
+#, fuzzy
+msgid "AddCommentPlugin"
+msgstr "コメント"
+
+#, fuzzy
+msgid "AddingPages"
+msgstr "ページを編集しています。"
+
 msgid "AllPages"
 msgstr "全ページ"
 
@@ -3982,7 +3897,11 @@ msgid "AuthorHistory"
 msgstr ""
 
 #, fuzzy
-msgid "_BackendInfo"
+msgid "AuthorHistoryPlugin"
+msgstr "編集者:"
+
+#, fuzzy
+msgid "DebugBackendInfo"
 msgstr "ページ情報"
 
 msgid "BackLinks"
@@ -3997,6 +3916,14 @@ msgstr ""
 msgid "CacheTest"
 msgstr ""
 
+#, fuzzy
+msgid "CalendarListPlugin"
+msgstr "カレンダー"
+
+#, fuzzy
+msgid "CalendarPlugin"
+msgstr "カレンダー"
+
 msgid "CategoryHomePages"
 msgstr ""
 
@@ -4007,7 +3934,15 @@ msgstr "ページを作成しています。"
 msgid "Chart"
 msgstr ""
 
+#, fuzzy
+msgid "Chown"
+msgstr "カウント"
+
 msgid "Comment"
+msgstr "コメント"
+
+#, fuzzy
+msgid "CommentPlugin"
 msgstr "コメント"
 
 #, fuzzy
@@ -4020,6 +3955,10 @@ msgstr "ページを作成しています。"
 
 #, fuzzy
 msgid "CreateToc"
+msgstr "作成: %s"
+
+#, fuzzy
+msgid "CreateTocPlugin"
 msgstr "作成: %s"
 
 #, fuzzy
@@ -4044,7 +3983,15 @@ msgid "EditMetaData"
 msgstr "METAデータの編集"
 
 #, fuzzy
+msgid "EditMetaDataPlugin"
+msgstr "METAデータの編集"
+
+#, fuzzy
 msgid "ExternalSearch"
+msgstr "タイトル検索"
+
+#, fuzzy
+msgid "ExternalSearchPlugin"
 msgstr "タイトル検索"
 
 msgid "FacebookLike"
@@ -4062,7 +4009,15 @@ msgid "FoafViewer"
 msgstr "カレンダー"
 
 #, fuzzy
+msgid "FoafViewerPlugin"
+msgstr "カレンダー"
+
+#, fuzzy
 msgid "FrameInclude"
+msgstr "インライン画像一覧"
+
+#, fuzzy
+msgid "FrameIncludePlugin"
 msgstr "インライン画像一覧"
 
 msgid "FullRecentChanges"
@@ -4084,123 +4039,15 @@ msgid "GraphViz"
 msgstr ""
 
 #, fuzzy
-msgid "_GroupInfo"
+msgid "DebugGroupInfo"
 msgstr "デバグ情報"
 
 msgid "HelloWorld"
 msgstr ""
 
 #, fuzzy
-msgid "Help/AddCommentPlugin"
-msgstr "コメント"
-
-msgid "Help/AddingPages"
-msgstr ""
-
-msgid "Help/AuthorHistoryPlugin"
-msgstr ""
-
-#, fuzzy
-msgid "Help/CalendarListPlugin"
-msgstr "カレンダー"
-
-#, fuzzy
-msgid "Help/CalendarPlugin"
-msgstr "カレンダー"
-
-#, fuzzy
-msgid "Help/CommentPlugin"
-msgstr "コメント"
-
-#, fuzzy
-msgid "Help/CreateTocPlugin"
-msgstr "作成: %s"
-
-#, fuzzy
-msgid "Help/EditMetaDataPlugin"
-msgstr "METAデータの編集"
-
-msgid "Help/ExternalSearchPlugin"
-msgstr ""
-
-#, fuzzy
-msgid "Help/FoafViewerPlugin"
-msgstr "カレンダー"
-
-msgid "Help/FrameIncludePlugin"
-msgstr ""
-
-msgid "Help/HelloWorldPlugin"
-msgstr ""
-
-#, fuzzy
-msgid "Help/IncludePagePlugin"
-msgstr "インライン画像一覧"
-
-msgid "Help/LinkIcons"
-msgstr ""
-
-msgid "Help/MagicPhpWikiURLs"
-msgstr ""
-
-msgid "Help/MoreAboutMechanics"
-msgstr ""
-
-#, fuzzy
-msgid "Help/OldStyleTablePlugin"
-msgstr "旧スタイルのテーブル"
-
-#, fuzzy
-msgid "Help/PhotoAlbumPlugin"
+msgid "HelloWorldPlugin"
 msgstr "フォトアルバム"
-
-#, fuzzy
-msgid "Help/PhpHighlightPlugin"
-msgstr "PHPハイライト"
-
-msgid "Help/PhpWeatherPlugin"
-msgstr ""
-
-msgid "Help/PhpWiki"
-msgstr ""
-
-#, fuzzy
-msgid "Help/PloticusPlugin"
-msgstr "フォトアルバム"
-
-msgid "Help/RawHtmlPlugin"
-msgstr ""
-
-msgid "Help/RedirectToPlugin"
-msgstr ""
-
-msgid "Help/RichTablePlugin"
-msgstr ""
-
-#, fuzzy
-msgid "Help/SystemInfoPlugin"
-msgstr "システム情報"
-
-msgid "Help/TranscludePlugin"
-msgstr ""
-
-msgid "Help/UnfoldSubpagesPlugin"
-msgstr ""
-
-msgid "Help/UpLoadPlugin"
-msgstr ""
-
-msgid "Help/WabiSabi"
-msgstr ""
-
-msgid "Help/WikiBlogPlugin"
-msgstr ""
-
-msgid "Help/WikiPlugin"
-msgstr ""
-
-msgid "Help/WikiWikiWeb"
-msgstr ""
 
 #, fuzzy
 msgid "HomePageAlias"
@@ -4214,6 +4061,10 @@ msgstr ""
 
 #, fuzzy
 msgid "IncludePage"
+msgstr "インライン画像一覧"
+
+#, fuzzy
+msgid "IncludePagePlugin"
 msgstr "インライン画像一覧"
 
 #, fuzzy
@@ -4245,6 +4096,10 @@ msgid "LikePages"
 msgstr ""
 
 #, fuzzy
+msgid "LinkIcons"
+msgstr "ログイン"
+
+#, fuzzy
 msgid "ListPages"
 msgstr "サブページ"
 
@@ -4255,7 +4110,13 @@ msgstr ""
 msgid "ListSubpages"
 msgstr "サブページ"
 
+msgid "MagicPhpWikiURLs"
+msgstr ""
+
 msgid "MediawikiTable"
+msgstr ""
+
+msgid "MoreAboutMechanics"
 msgstr ""
 
 msgid "MostPopular"
@@ -4269,6 +4130,10 @@ msgid "NoCache"
 msgstr ""
 
 msgid "OldStyleTable"
+msgstr "旧スタイルのテーブル"
+
+#, fuzzy
+msgid "OldStyleTablePlugin"
 msgstr "旧スタイルのテーブル"
 
 #, fuzzy
@@ -4292,19 +4157,25 @@ msgstr "パスワード:"
 msgid "PhotoAlbum"
 msgstr "フォトアルバム"
 
+#, fuzzy
+msgid "PhotoAlbumPlugin"
+msgstr "フォトアルバム"
+
 msgid "PhpHighlight"
+msgstr "PHPハイライト"
+
+#, fuzzy
+msgid "PhpHighlightPlugin"
 msgstr "PHPハイライト"
 
 msgid "PhpWeather"
 msgstr ""
 
-msgid "PhpWikiAdministration/Chmod"
-msgstr ""
+#, fuzzy
+msgid "PhpWeatherPlugin"
+msgstr "作成: %s"
 
-msgid "PhpWikiAdministration/Rename"
-msgstr ""
-
-msgid "PhpWikiAdministration/Replace"
+msgid "PhpWiki"
 msgstr ""
 
 msgid "PhpWikiDocumentation"
@@ -4315,6 +4186,10 @@ msgstr ""
 
 msgid "Ploticus"
 msgstr ""
+
+#, fuzzy
+msgid "PloticusPlugin"
+msgstr "フォトアルバム"
 
 msgid "PluginManager"
 msgstr "プラグイン管理"
@@ -4332,9 +4207,8 @@ msgstr ""
 msgid "PreferenceApp"
 msgstr "参照一覧"
 
-#, fuzzy
-msgid "_PreferencesInfo"
-msgstr "参照一覧"
+msgid "PreferencesInfo"
+msgstr ""
 
 msgid "PrevNext"
 msgstr "前後"
@@ -4344,6 +4218,10 @@ msgstr ""
 
 msgid "RawHtml"
 msgstr ""
+
+#, fuzzy
+msgid "RawHtmlPlugin"
+msgstr "プラグイン"
 
 #, fuzzy
 msgid "RecentChangesCached"
@@ -4360,24 +4238,37 @@ msgstr ""
 msgid "RedirectTo"
 msgstr "転送"
 
+#, fuzzy
+msgid "RedirectToPlugin"
+msgstr "転送"
+
 msgid "ReleaseNotes"
 msgstr ""
 
-msgid "_Retransform"
-msgstr ""
+#, fuzzy
+msgid "DebugRetransform"
+msgstr "デバグ情報"
 
 msgid "RichTable"
 msgstr ""
 
 #, fuzzy
+msgid "RichTablePlugin"
+msgstr "有効なプラグイン一覧"
+
+#, fuzzy
 msgid "SearchHighlight"
 msgstr "PHPハイライト"
 
-msgid "SemanticRelations"
+msgid "SetAcl"
 msgstr ""
 
 msgid "SiteMap"
 msgstr "サイトマップ"
+
+#, fuzzy
+msgid "SpecialPages"
+msgstr "シリアライズページを出力しています。"
 
 msgid "SqlResult"
 msgstr ""
@@ -4390,6 +4281,10 @@ msgid "SyntaxHighlighter"
 msgstr "PHP構文ハイライト"
 
 msgid "SystemInfo"
+msgstr "システム情報"
+
+#, fuzzy
+msgid "SystemInfoPlugin"
 msgstr "システム情報"
 
 msgid "TeX2png"
@@ -4407,6 +4302,10 @@ msgstr ""
 msgid "Transclude"
 msgstr ""
 
+#, fuzzy
+msgid "TranscludePlugin"
+msgstr "インライン画像一覧"
+
 msgid "TranslateText"
 msgstr ""
 
@@ -4414,8 +4313,16 @@ msgstr ""
 msgid "UnfoldSubpages"
 msgstr "サブページ"
 
+#, fuzzy
+msgid "UnfoldSubpagesPlugin"
+msgstr "サブページ"
+
 msgid "UpLoad"
 msgstr "アップロード"
+
+#, fuzzy
+msgid "UpLoadPlugin"
+msgstr "プラグイン"
 
 msgid "UriResolver"
 msgstr ""
@@ -4431,6 +4338,9 @@ msgstr "ソースを見る"
 msgid "VisualWiki"
 msgstr ""
 
+msgid "WabiSabi"
+msgstr ""
+
 #, fuzzy
 msgid "WantedPagesOld"
 msgstr "%s のページ履歴一覧"
@@ -4440,20 +4350,12 @@ msgid "WatchPage"
 msgstr "幅"
 
 #, fuzzy
-msgid "WikiAdminChmod"
-msgstr "管理"
-
-#, fuzzy
 msgid "WikiAdminChown"
 msgstr "管理"
 
 #, fuzzy
 msgid "WikiAdminDeleteAcl"
 msgstr "削除しました"
-
-#, fuzzy
-msgid "WikiAdminMarkup"
-msgstr "管理"
 
 #, fuzzy
 msgid "WikiAdminPurge"
@@ -4493,6 +4395,10 @@ msgstr "管理"
 msgid "WikiBlog"
 msgstr "ダイアログ"
 
+#, fuzzy
+msgid "WikiBlogPlugin"
+msgstr "ダイアログ"
+
 msgid "WikicreoleTable"
 msgstr ""
 
@@ -4505,10 +4411,17 @@ msgstr ""
 msgid "WikiForum"
 msgstr ""
 
+#, fuzzy
+msgid "WikiPlugin"
+msgstr "プラグイン"
+
 msgid "WikiPoll"
 msgstr ""
 
-msgid "_WikiTranslation"
+msgid "WikiTranslation"
+msgstr ""
+
+msgid "WikiWikiWeb"
 msgstr ""
 
 msgid "YouTube"
@@ -4644,14 +4557,6 @@ msgstr ""
 msgid "Illegal chars %s removed"
 msgstr "ページ名が正しくありません。"
 
-msgid "The CreateTocPlugin is not yet old markup compatible! "
-msgstr ""
-
-msgid ""
-"Please remove the CreateToc line to be able to reformat this page to old "
-"markup. "
-msgstr ""
-
 msgid "Revision Not Found"
 msgstr "リビジョンが見つかりません"
 
@@ -4736,6 +4641,10 @@ msgid "_AuthInfo"
 msgstr "編集者:"
 
 #, fuzzy
+msgid "_GroupInfo"
+msgstr "デバグ情報"
+
+#, fuzzy
 msgid "GroupAuthInfo"
 msgstr "編集者:"
 
@@ -4749,10 +4658,7 @@ msgstr "選択ページを全て削除"
 
 #, fuzzy, php-format
 msgid "rename %s to %s"
-msgstr "%s から読込まれました。"
-
-msgid "Help"
-msgstr ""
+msgstr "%s から読込まれました"
 
 msgid "MISSING"
 msgstr ""
@@ -5354,14 +5260,11 @@ msgstr ""
 msgid "Add Entry"
 msgstr ""
 
-msgid "Help/GoodStyle"
+msgid "GoodStyle"
 msgstr ""
 
 #, php-format
 msgid "See %s tips for editing."
-msgstr ""
-
-msgid "Help/TextFormattingRules"
 msgstr ""
 
 msgid "Synopsis"
@@ -5475,13 +5378,10 @@ msgstr ""
 msgid "Use old markup"
 msgstr "古いマークアップを使用"
 
-msgid "Help/OldTextFormattingRules"
+msgid "OldTextFormattingRules"
 msgstr ""
 
 msgid "HowToUseWiki"
-msgstr ""
-
-msgid "WikiWikiWeb"
 msgstr ""
 
 msgid "Today"
@@ -5561,13 +5461,6 @@ msgstr ""
 
 #, php-format
 msgid "%s words"
-msgstr ""
-
-#, php-format
-msgid "Version %s"
-msgstr "バージョン %s"
-
-msgid "Original (1.2 or 1.0)"
 msgstr ""
 
 msgid ":"
@@ -5738,9 +5631,6 @@ msgstr "%sでソートします。"
 #, fuzzy
 msgid "Sign in as:"
 msgstr "サインイン"
-
-msgid "PreferencesInfo"
-msgstr ""
 
 msgid "<system theme>"
 msgstr "<システムテーマ>"
@@ -6201,6 +6091,65 @@ msgid "Edit this page"
 msgstr "ページを編集しています。"
 
 #, fuzzy
+#~ msgid "_PreferencesInfo"
+#~ msgstr "参照一覧"
+
+#~ msgid "Markup"
+#~ msgstr "マークアップ"
+
+#, fuzzy
+#~ msgid "Change the markup type of selected pages."
+#~ msgstr "選択ページを全て削除"
+
+#, fuzzy
+#~ msgid "Change markup type from %s to %s"
+#~ msgstr "国名変更"
+
+#, fuzzy
+#~ msgid "change page “%s” to markup type “%s”."
+#~ msgstr "“%s” の削除に成功しました。"
+
+#, fuzzy
+#~ msgid "Couldn't change page “%s” to markup type “%s”."
+#~ msgstr "“%s” の削除に成功しました。"
+
+#, fuzzy
+#~ msgid ""
+#~ "Are you sure you want to change the markup type of the selected files?"
+#~ msgstr "選択ページを全て削除"
+
+#, fuzzy
+#~ msgid "Change markup type"
+#~ msgstr "国名変更"
+
+#, fuzzy
+#~ msgid "Select the pages to change the markup type"
+#~ msgstr "貴方個人の言語を選択"
+
+#, fuzzy
+#~ msgid "Change markup to: "
+#~ msgstr "パスワード変更"
+
+#, fuzzy
+#~ msgid "WikiAdminMarkup"
+#~ msgstr "管理"
+
+#~ msgid "Version %s"
+#~ msgstr "バージョン %s"
+
+#, fuzzy
+#~ msgid "%s not found"
+#~ msgstr "%s: ファイルが見つかりません。"
+
+#, fuzzy
+#~ msgid "Select the pages to change:"
+#~ msgstr "貴方個人の言語を選択"
+
+#, fuzzy
+#~ msgid "WikiAdminChmod"
+#~ msgstr "管理"
+
+#, fuzzy
 #~ msgid "period"
 #~ msgstr "バージョン %d"
 
@@ -6209,12 +6158,12 @@ msgstr "ページを編集しています。"
 #~ msgstr "名称"
 
 #, fuzzy
-#~ msgid "DebugGroupInfo"
-#~ msgstr "デバグ情報"
+#~ msgid "AdminAclDelete"
+#~ msgstr "削除しました"
 
 #, fuzzy
-#~ msgid "Prediction: %s"
-#~ msgstr "編集: %s"
+#~ msgid "SetExternal"
+#~ msgstr "管理"
 
 #, fuzzy
 #~ msgid "Pagename(s): "
@@ -6229,9 +6178,6 @@ msgstr "ページを編集しています。"
 #, fuzzy
 #~ msgid "%s is empty"
 #~ msgstr "%s が空です。"
-
-#~ msgid "file %s not found"
-#~ msgstr "%s: ファイルが見つかりません。"
 
 #~ msgid "View the current version"
 #~ msgstr "現在のバージョンを表示する"
@@ -6260,14 +6206,6 @@ msgstr "ページを編集しています。"
 #, fuzzy
 #~ msgid "No page specified."
 #~ msgstr "変更点が見つかりませんでした。"
-
-#, fuzzy
-#~ msgid "Chown"
-#~ msgstr "カウント"
-
-#, fuzzy
-#~ msgid "SpecialPages"
-#~ msgstr "シリアライズページを出力しています。"
 
 #~ msgid "too long"
 #~ msgstr "長すぎます。"

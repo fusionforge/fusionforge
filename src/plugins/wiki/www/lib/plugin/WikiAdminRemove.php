@@ -134,7 +134,7 @@ class WikiPlugin_WikiAdminRemove
     function run($dbi, $argstr, &$request, $basepage)
     {
         if ($request->getArg('action') != 'browse') {
-            if ($request->getArg('action') != _("PhpWikiAdministration/Remove")) {
+            if ($request->getArg('action') != __("PhpWikiAdministration")."/".__("Remove")) {
                 return $this->disabled(_("Plugin not run: not in browse mode"));
             }
         }

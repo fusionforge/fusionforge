@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 /**
- * This is the code which deals with the inline part of the (new-style)
+ * This is the code which deals with the inline part of the
  * wiki-markup.
  *
  * @package Markup
@@ -1435,16 +1435,12 @@ class NowikiTransformer extends InlineTransformer
     }
 }
 
-function TransformInline($text, $markup = 2.0, $basepage = false)
+function TransformInline($text, $basepage = false)
 {
     static $trfm;
     $action = $GLOBALS['request']->getArg('action');
     if (empty($trfm) or $action == 'SpellCheck') {
         $trfm = new InlineTransformer;
-    }
-
-    if ($markup < 2.0) {
-        $text = ConvertOldMarkup($text, 'inline');
     }
 
     if ($basepage) {
@@ -1453,16 +1449,12 @@ function TransformInline($text, $markup = 2.0, $basepage = false)
     return $trfm->parse($text);
 }
 
-function TransformLinks($text, $markup = 2.0, $basepage = false)
+function TransformLinks($text, $basepage = false)
 {
     static $trfm;
 
     if (empty($trfm)) {
         $trfm = new LinkTransformer;
-    }
-
-    if ($markup < 2.0) {
-        $text = ConvertOldMarkup($text, 'links');
     }
 
     if ($basepage) {
@@ -1474,7 +1466,7 @@ function TransformLinks($text, $markup = 2.0, $basepage = false)
 /**
  * Transform only html markup and entities.
  */
-function TransformInlineNowiki($text, $markup = 2.0, $basepage = false)
+function TransformInlineNowiki($text, $basepage = false)
 {
     static $trfm;
 

@@ -390,10 +390,6 @@ class PageEditor
     function isUnchanged()
     {
         $current = &$this->current;
-
-        if ($this->meta['markup'] != $current->get('markup'))
-            return false;
-
         return $this->_content == $current->getPackedContent();
     }
 
@@ -511,8 +507,6 @@ class PageEditor
     {
         require_once 'lib/PageType.php';
         $this->_content = $this->getContent();
-        $this->meta['markup'] = 2.0;
-        $this->_content = ConvertOldMarkup($this->_content);
         return new TransformedText($this->page, $this->_content, $this->meta);
     }
 
@@ -664,15 +658,6 @@ class PageEditor
             'name' => 'edit[minor_edit]',
             'id' => 'edit-minor_edit',
             'checked' => (bool)$this->meta['is_minor_edit']));
-        $el['OLD_MARKUP_CB']
-            = HTML::input(array('type' => 'checkbox',
-            'name' => 'edit[markup]',
-            'value' => 'old',
-            'checked' => $this->meta['markup'] < 2.0,
-            'id' => 'useOldMarkup',
-            'onclick' => 'showOldMarkupRules(this.checked)'));
-        $el['OLD_MARKUP_CONVERT'] = ($this->meta['markup'] < 2.0)
-            ? Button('submit:edit[edit_convert]', _("Convert"), 'wikiaction') : '';
         $el['LOCKED_CB']
             = HTML::input(array('type' => 'checkbox',
             'name' => 'edit[locked]',
@@ -779,8 +764,6 @@ class PageEditor
         if ($this->_currentVersion > $this->current->getVersion())
             return false; // FIXME: some kind of warning?
 
-        $is_old_markup = !empty($posted['markup']) && $posted['markup'] == 'old';
-        $meta['markup'] = $is_old_markup ? false : 2.0;
         $meta['summary'] = trim(substr($posted['summary'], 0, 256));
         $meta['is_minor_edit'] = !empty($posted['minor_edit']);
         $meta['pagetype'] = !empty($posted['pagetype']) ? $posted['pagetype'] : false;
@@ -827,13 +810,6 @@ class PageEditor
             && $current->get('author') == $user->getId()
         );
 
-        // Default for new pages is new-style markup.
-        if ($selected->hasDefaultContents())
-            $is_new_markup = true;
-        else
-            $is_new_markup = $selected->get('markup') >= 2.0;
-
-        $this->meta['markup'] = $is_new_markup ? 2.0 : false;
         $this->meta['pagetype'] = $selected->get('pagetype');
         if ($this->meta['pagetype'] == 'wikiblog')
             $this->meta['summary'] = $selected->get('summary'); // keep blog title

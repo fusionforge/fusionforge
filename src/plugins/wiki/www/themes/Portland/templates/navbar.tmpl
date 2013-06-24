@@ -14,10 +14,8 @@
      CSSs float:left; and float:right;.  However float:right; seems
      to cause MSIE4.01/NT to hang.
      So, we use tables...  -->
-<table class="toolbar" width="100%"
-       cellpadding="0" cellspacing="0" border="0"
-       id="actionbar">
-<tr valign="baseline">
+<table class="toolbar fullwidth" id="actionbar">
+<tr class="baseline">
   <td>
    <?php echo WikiLink(_("RecentChanges"), "button") ?>
     <?php if ($user->isAdmin()) { ?>

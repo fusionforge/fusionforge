@@ -48,6 +48,104 @@ class WikiPlugin_WikiAdminSearchReplace
             ));
     }
 
+    function run($dbi, $argstr, &$request, $basepage)
+    {
+        // no action=replace support yet
+        if ($request->getArg('action') != 'browse') {
+            return $this->disabled(_("Plugin not run: not in browse mode"));
+        }
+
+        $args = $this->getArgs($argstr, $request);
+        $this->_args = $args;
+
+        //TODO: support p from <!plugin-list !>
+        $this->preSelectS($args, $request);
+
+        $p = $request->getArg('p');
+        if (!$p) {
+            $p = $this->_list;
+        }
+        $post_args = $request->getArg('admin_replace');
+        $next_action = 'select';
+        $pages = array();
+        if ($p && !$request->isPost()) {
+            $pages = $p;
+        }
+        if ($p && $request->isPost() && empty($post_args['cancel'])) {
+            // without individual PagePermissions:
+            if (!ENABLE_PAGEPERM and !$request->_user->isAdmin()) {
+                $request->_notAuthorized(WIKIAUTH_ADMIN);
+                $this->disabled(_("You must be an administrator to use this plugin."));
+            }
+
+            if ($post_args['action'] == 'verify' and !empty($post_args['from'])) {
+                // Real action
+                return $this->searchReplacePages($dbi, $request, array_keys($p),
+                    $post_args['from'], $post_args['to']);
+            }
+            if ($post_args['action'] == 'select') {
+                if (!empty($post_args['from']))
+                    $next_action = 'verify';
+                foreach ($p as $name => $c) {
+                    $pages[$name] = 1;
+                }
+            }
+        }
+        $result = HTML::div();
+        if ($request->isPost() and empty($post_args['from'])) {
+            $result->pushContent(HTML::p(array('class' => 'warning'),
+                                         _("Warning: The search string cannot be empty!")));
+        }
+        if ($next_action == 'select' and empty($pages)) {
+            // List all pages to select from.
+            //TODO: check for permissions and list only the allowed
+            $pages = $this->collectPages($pages, $dbi, $args['sortby'],
+                $args['limit'], $args['exclude']);
+        }
+
+        $args['info'] = "checkbox,pagename,mtime,author";
+        if ($next_action == 'select') {
+            $columns = $args;
+        } else {
+           $columns = array_merge($args,
+                                  // with highlighted search for SearchReplace
+                                  array('types' => array('hi_content' 
+                    => new _PageList_Column_content('rev:hi_content', _("Content")))));
+        }
+        $pagelist = new PageList_Selectable($args['info'], $args['exclude'], $columns);
+        $pagelist->addPageList($pages);
+
+        $header = HTML::fieldset();
+        $header->pushContent(HTML::legend(_("Select the pages to search and replace")));
+        if ($next_action == 'verify') {
+            $button_label = _("Replace");
+            $header->pushContent(
+                HTML::p(HTML::strong(
+                    _("Are you sure you want to replace text in the selected files?"))));
+            $this->replaceForm($header, $post_args);
+        } else {
+            $button_label = _("Search");
+            $this->replaceForm($header, $post_args);
+        }
+
+        $buttons = HTML::p(Button('submit:admin_replace[replace]', $button_label, 'wikiadmin'),
+            Button('submit:admin_replace[cancel]', _("Cancel"), 'button'));
+        $header->pushContent($buttons);
+
+        $result->pushContent(HTML::form(array('action' => $request->getPostURL(),
+                'method' => 'post'),
+            $header,
+            $pagelist->getContent(),
+            HiddenInputs($request->getArgs(),
+                false,
+                array('admin_replace')),
+            HiddenInputs(array('admin_replace[action]' => $next_action)),
+            ENABLE_PAGEPERM
+                ? ''
+                : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN))));
+        return $result;
+    }
+
     private function replaceHelper(&$dbi, &$request, $pagename, $from, $to, $case_exact = true, $regex = false)
     {
         $page = $dbi->getPage($pagename);
@@ -78,7 +176,6 @@ class WikiPlugin_WikiAdminSearchReplace
 
     private function searchReplacePages(&$dbi, &$request, $pages, $from, $to)
     {
-        if (empty($from)) return HTML::p(HTML::strong(fmt("Error: Empty search string.")));
         $result = HTML::div();
         $ul = HTML::ul();
         $count = 0;
@@ -110,107 +207,6 @@ class WikiPlugin_WikiAdminSearchReplace
         return $result;
     }
 
-    function run($dbi, $argstr, &$request, $basepage)
-    {
-        // no action=replace support yet
-        if ($request->getArg('action') != 'browse') {
-            return $this->disabled(_("Plugin not run: not in browse mode"));
-        }
-
-        $args = $this->getArgs($argstr, $request);
-        $this->_args = $args;
-
-        //TODO: support p from <!plugin-list !>
-        $this->preSelectS($args, $request);
-
-        $p = $request->getArg('p');
-        if (!$p) $p = $this->_list;
-        $post_args = $request->getArg('admin_replace');
-        $next_action = 'select';
-        $pages = array();
-        if ($p && !$request->isPost())
-            $pages = $p;
-        if ($p && $request->isPost() &&
-            empty($post_args['cancel'])
-        ) {
-            // without individual PagePermissions:
-            if (!ENABLE_PAGEPERM and !$request->_user->isAdmin()) {
-                $request->_notAuthorized(WIKIAUTH_ADMIN);
-                $this->disabled("! user->isAdmin");
-            }
-
-            if ($post_args['action'] == 'verify' and !empty($post_args['from'])) {
-                // Real action
-                return $this->searchReplacePages($dbi, $request, array_keys($p),
-                    $post_args['from'], $post_args['to']);
-            }
-            if ($post_args['action'] == 'select') {
-                if (!empty($post_args['from']))
-                    $next_action = 'verify';
-                foreach ($p as $name => $c) {
-                    $pages[$name] = 1;
-                }
-            }
-        }
-        if ($next_action == 'select' and empty($pages)) {
-            // List all pages to select from.
-            //TODO: check for permissions and list only the allowed
-            $pages = $this->collectPages($pages, $dbi, $args['sortby'],
-                $args['limit'], $args['exclude']);
-        }
-
-        if ($next_action == 'verify') {
-            $args['info'] = "checkbox,pagename";
-        } else {
-            // Avoid warning about "hi_content"
-            // $args['info'] = "checkbox,pagename,hi_content,mtime,author";
-            $args['info'] = "checkbox,pagename,mtime,author";
-        }
-        $pagelist = new PageList_Selectable
-        ($args['info'], $args['exclude'],
-            array_merge
-            (
-                $args,
-                array('types' => array
-                (
-                    'hi_content' // with highlighted search for SearchReplace
-                    => new _PageList_Column_content('rev:hi_content', _("Content"))))));
-
-        $pagelist->addPageList($pages);
-
-        $header = HTML::fieldset();
-        if (empty($post_args['from']))
-            $header->pushContent(
-                HTML::p(HTML::em(_("Warning: The search string cannot be empty!"))));
-        if ($next_action == 'verify') {
-            $button_label = _("Yes");
-            $header->pushContent(
-                HTML::p(HTML::strong(
-                    _("Are you sure you want to replace text in the selected files?"))));
-            $this->replaceForm($header, $post_args);
-        } else {
-            $button_label = _("Search & Replace");
-            $this->replaceForm($header, $post_args);
-            $header->pushContent(HTML::legend(_("Select the pages to search and replace")));
-        }
-
-        $buttons = HTML::p(Button('submit:admin_replace[replace]', $button_label, 'wikiadmin'),
-            Button('submit:admin_replace[cancel]', _("Cancel"), 'button'));
-        $header->pushContent($buttons);
-
-        return HTML::form(array('action' => $request->getPostURL(),
-                'method' => 'post'),
-            $header,
-            $pagelist->getContent(),
-            HiddenInputs($request->getArgs(),
-                false,
-                array('admin_replace')),
-            HiddenInputs(array('admin_replace[action]' => $next_action)),
-            ENABLE_PAGEPERM
-                ? ''
-                : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)));
-    }
-
     private function checkBox(&$post_args, $name, $msg)
     {
         $id = 'admin_replace-' . $name;
@@ -218,16 +214,16 @@ class WikiPlugin_WikiAdminSearchReplace
             'name' => 'admin_replace[' . $name . ']',
             'id' => $id,
             'value' => 1));
-        if (!empty($post_args[$name]))
+        if (!empty($post_args[$name])) {
             $checkbox->setAttr('checked', 'checked');
+        }
         return HTML::div($checkbox, ' ', HTML::label(array('for' => $id), $msg));
     }
 
     private function replaceForm(&$header, $post_args)
     {
-        $header->pushContent(HTML::div(array('class' => 'hint'),
-                _("Replace all occurences of the given string in the content of all pages.")),
-            HTML::br());
+        $header->pushContent(HTML::p(array('class' => 'hint'),
+                _("Replace all occurences of the given string in the content of all selected pages.")));
         $table = HTML::table();
         $this->tablePush($table, _("Replace") . _(": "),
             HTML::input(array('name' => 'admin_replace[from]',

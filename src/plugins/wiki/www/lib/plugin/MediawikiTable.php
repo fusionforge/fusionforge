@@ -65,8 +65,6 @@ class WikiPlugin_MediawikiTable
     function run($dbi, $argstr, &$request, $basepage)
     {
         include_once 'lib/BlockParser.php';
-        // MediawikiTablePlugin markup is new.
-        $markup = 2.0;
 
         // We allow the compact Mediawiki syntax with:
         // - multiple cells on the same line (separated by "||"),
@@ -127,7 +125,7 @@ class WikiPlugin_MediawikiTable
                             if (is_numeric(trim($content))) {
                                 $cell->pushContent(HTML::p(array('style' => "text-align:right"), trim($content)));
                             } else {
-                                $cell->pushContent(TransformText(trim($content), $markup, $basepage));
+                                $cell->pushContent(TransformText(trim($content), $basepage));
                             }
                             unset($content);
                         }
@@ -188,7 +186,7 @@ class WikiPlugin_MediawikiTable
                         if (is_numeric(trim($content))) {
                             $cell->pushContent(HTML::p(array('style' => "text-align:right"), trim($content)));
                         } else {
-                            $cell->pushContent(TransformText(trim($content), $markup, $basepage));
+                            $cell->pushContent(TransformText(trim($content), $basepage));
                         }
                         unset($content);
                     }
@@ -237,7 +235,7 @@ class WikiPlugin_MediawikiTable
                     if (is_numeric(trim($line))) {
                         $cell->pushContent(HTML::p(array('style' => "text-align:right"), trim($line)));
                     } else {
-                        $cell->pushContent(TransformText(trim($line), $markup, $basepage));
+                        $cell->pushContent(TransformText(trim($line), $basepage));
                     }
                     continue;
                 }
@@ -255,7 +253,7 @@ class WikiPlugin_MediawikiTable
                     if (is_numeric(trim($content))) {
                         $cell->pushContent(HTML::p(array('style' => "text-align:right"), trim($content)));
                     } else {
-                        $cell->pushContent(TransformText(trim($content), $markup, $basepage));
+                        $cell->pushContent(TransformText(trim($content), $basepage));
                     }
 
                 }

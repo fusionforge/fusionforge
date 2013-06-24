@@ -1,9 +1,8 @@
-Date: Wed, 19 Dec 2012 13:19:42 +0000
+Date: Mon, 17 Jun 2013 12:20:41 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FTekstFormatteringsRegels;
   flags=PAGE_LOCKED;
-  markup=2;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
@@ -135,7 +134,7 @@ regelbreuken niet oversteken.
 * De & tekens werken toch niet.
 * Als je nou echt zo nodig HTML moet gebruiken, begin elke regel met een staaf (|).  Merk op dat dit kunstje mogelijk gemaakt moet worden door de systeembeheerder.
 
-!!! Inserting plugins
+== Inserting plugins ==
 
 * Several plugins permit embedding additional functionality to Wiki
   pages. For example,

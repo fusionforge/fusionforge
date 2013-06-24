@@ -50,7 +50,7 @@ class WysiwygEdit
     function ConvertBefore($text)
     {
         require_once 'lib/BlockParser.php';
-        $xml = TransformText($text, 2.0, $GLOBALS['request']->getArg('pagename'));
+        $xml = TransformText($text, $GLOBALS['request']->getArg('pagename'));
         return $xml->AsXML();
     }
 

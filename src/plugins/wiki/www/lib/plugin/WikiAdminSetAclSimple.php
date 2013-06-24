@@ -42,7 +42,7 @@ class WikiPlugin_WikiAdminSetAclSimple
     function run($dbi, $argstr, &$request, $basepage)
     {
         if ($request->getArg('action') != 'browse') {
-            if ($request->getArg('action') != _("PhpWikiAdministration/SetAclSimple")) {
+            if ($request->getArg('action') != __("PhpWikiAdministration")."/".__("SetAclSimple")) {
                 return $this->disabled(_("Plugin not run: not in browse mode"));
             }
         }

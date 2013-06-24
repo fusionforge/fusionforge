@@ -379,7 +379,7 @@ class HtmlParser_PhpWiki2
             if (!$alignment and preg_match("/float(right|left)/i", $css_class, $m)) ;
             $alignment = $m[1];
             if ($alignment) {
-                $attrs[] = "align=$alignment";
+                $attrs[] = "class=align-$alignment";
                 $this->log("  Image is contained within a DIV that specifies $alignment alignment");
                 $this->log("  Adding '$alignment' to [Image] markup attributes");
             } else {
@@ -389,7 +389,7 @@ class HtmlParser_PhpWiki2
             $this->log("  Image is not contained within a DIV");
         }
         if ($alignment)
-            $attrs[] = "align=$alignment";
+            $attrs[] = "class=align-$alignment";
         //
         // Check if we need to request a thumbnail of this
         // image; it's needed if the specified width attribute

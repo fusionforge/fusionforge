@@ -167,7 +167,7 @@ class WikiPlugin_FileInfo
         $result = call_user_func_array("sprintf", $s);
         if (in_array('link', $modes)) {
             require_once 'lib/InlineParser.php';
-            return TransformInline($result, 2, $basepage);
+            return TransformInline($result, $basepage);
         } else {
             return HTML::raw($result);
         }

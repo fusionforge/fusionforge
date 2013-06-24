@@ -1120,7 +1120,7 @@ function RevertPage(&$request)
     $rev = $page->getRevision($version);
     $content = $rev->getPackedContent();
     $versiondata = $rev->_data;
-    $versiondata['summary'] = sprintf(_("revert to version %d"), $version);
+    $versiondata['summary'] = sprintf(_("Revert to version %d"), $version);
     $versiondata['mtime'] = time();
     $versiondata['author'] = $request->getUser()->getId();
     $new = $page->save($content, $currversion + 1, $versiondata);

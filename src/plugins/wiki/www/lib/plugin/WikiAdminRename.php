@@ -65,7 +65,7 @@ class WikiPlugin_WikiAdminRename
     {
         $action = $request->getArg('action');
         if ($action != 'browse' and $action != 'rename'
-            and $action != _("PhpWikiAdministration") . "/" . _("Rename")
+            and $action != __("PhpWikiAdministration"). "/". __("Rename")
         ) {
             return $this->disabled(_("Plugin not run: not in browse mode"));
         }

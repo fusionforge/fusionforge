@@ -77,10 +77,10 @@ class WikiPlugin_PrevNext
         $sep = $WikiTheme->getButtonSeparator();
         if ($align == 'center') {
             $tr = HTML::tr();
-            $links = HTML::table(array('cellpadding' => 0, 'cellspacing' => 0, 'width' => '100%'), $tr);
+            $links = HTML::table(array('class' => 'fullwidth'), $tr);
         } elseif ($align == 'right') {
             $td = HTML::td(array('align' => $align));
-            $links = HTML::table(array('cellpadding' => 0, 'cellspacing' => 0, 'width' => '100%'), HTML::tr($td));
+            $links = HTML::table(array('class' => 'fullwidth'), HTML::tr($td));
         } else {
             $links = HTML();
         }

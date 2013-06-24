@@ -248,7 +248,7 @@ class _RecentChanges_HtmlFormatter
             return '';
         return HTML::span(array('class' => 'wiki-summary'),
             "(",
-            // TransformLinks($summary, $rev->get('markup'), $rev->getPageName()),
+            // TransformLinks($summary, $rev->getPageName()),
             // We do parse the summary:
             // 1) if the summary contains {{foo}}, the template must no be
             //    expanded
@@ -721,7 +721,7 @@ class _RecentChanges_SideBarFormatter
         return HTML::span(array('class' => 'wiki-summary'),
             "[",
             /*TransformLinks(*/
-            $summary, /* $rev->get('markup')),*/
+            $summary,
             "]");
     }
 

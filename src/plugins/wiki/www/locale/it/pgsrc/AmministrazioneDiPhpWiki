@@ -1,9 +1,8 @@
-Date: Tue, 16 Apr 2013 17:14:15 +0000
+Date: Thu, 13 Jun 2013 17:01:53 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=AmministrazioneDiPhpWiki;
   flags=PAGE_LOCKED;
-  markup=2;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
@@ -21,7 +20,7 @@ First select pages and then define the action:
 
 or call the available ~WikiAdmin actions directly:
 
-| [[/Rimuovi]] | [[/Rename]] | [[/Replace]] | [[/SetAcl]] | [[/Chmod]] | [[/Chown]]
+| [[/Rimuovi]] | [[/Rename]] | [[/Replace]] | [[/SetAcl]] | [[/Chown]]
 
 == User Management
 

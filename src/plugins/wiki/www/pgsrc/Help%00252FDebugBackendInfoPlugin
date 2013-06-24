@@ -1,9 +1,8 @@
 Date: Fri,  7 Dec 2012 15:16:29 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
-  pagename=Help%2F_BackendInfoPlugin;
+  pagename=Help%2FDebugBackendInfoPlugin;
   flags=PAGE_LOCKED;
-  markup=2;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
@@ -17,7 +16,7 @@ cleared everything out though.
 
 == Usage ==
 {{{
-<<_BackendInfo>>
+<<DebugBackendInfo>>
 }}}
 
 == Arguments ==
@@ -36,8 +35,8 @@ See [[DebugInfo]]
 * [[DebugInfo]] is the corresponding [[Help:ActionPage]]
 * [[EditMetaData]]
 * [[Help:EditMetaDataPlugin]]
-* [[Help:_AuthInfoPlugin]]
-* [[Help:_GroupInfoPlugin]]
+* [[Help:DebugAuthInfoPlugin]]
+* [[Help:DebugGroupInfo]]
 
 <noinclude>
 ----

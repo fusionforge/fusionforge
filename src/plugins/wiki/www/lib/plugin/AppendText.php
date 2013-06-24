@@ -51,7 +51,7 @@ class WikiPlugin_AppendText
 
     private function fallback($addtext, $oldtext, $notfound, &$message)
     {
-        $message->pushContent(sprintf(_("%s not found"), $notfound) . ". " .
+        $message->pushContent(sprintf(_("“%s” not found"), $notfound) . ". " .
             _("Appending at the end.") . "\n");
         return $oldtext . "\n" . $addtext;
     }

@@ -4,7 +4,6 @@ Content-Type: application/x-phpwiki;
   pagename=Ayuda%2FWikiWikiWeb;
   flags="";
   charset=UTF-8;
-  markup=2
 Content-Transfer-Encoding: binary
 
 Un WikiWikiWeb es un sitio donde todos pueden colaborar con el contenido. El Wiki más conocido y usado es el Portland Pattern Repository en http://c2.com/cgi-bin/wiki?WikiWikiWeb.

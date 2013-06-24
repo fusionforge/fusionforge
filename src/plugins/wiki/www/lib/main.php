@@ -966,8 +966,8 @@ class WikiRequest extends Request
         // Handle untranslated actionpages in non-english
         // (people playing with switching languages)
         if (0 and $GLOBALS['LANG'] != 'en') {
-            require_once 'lib/plugin/_WikiTranslation.php';
-            $trans = new WikiPlugin__WikiTranslation();
+            require_once 'lib/plugin/WikiTranslation.php';
+            $trans = new WikiPlugin_WikiTranslation();
             $en_action = $trans->translate($action, 'en', $GLOBALS['LANG']);
             if (isActionPage($en_action))
                 return $en_action;
@@ -1063,8 +1063,8 @@ class WikiRequest extends Request
         global $LANG;
         if ($LANG != "en") {
             require_once 'lib/WikiPlugin.php';
-            require_once 'lib/plugin/_WikiTranslation.php';
-            $trans = new WikiPlugin__WikiTranslation();
+            require_once 'lib/plugin/WikiTranslation.php';
+            $trans = new WikiPlugin_WikiTranslation();
             $trans->lang = $LANG;
             $default = $trans->translate_to_en($action, $LANG);
             if ($default and isActionPage($default))

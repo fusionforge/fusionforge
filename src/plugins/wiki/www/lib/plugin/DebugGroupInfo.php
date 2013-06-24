@@ -1,7 +1,7 @@
 <?php
 
-/**
- * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+/*
+ * Copyright 2004 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -21,35 +21,43 @@
  */
 
 /**
- * Plugin to display the current preferences without auth check.
+ * @author: Charles Corrigan
  */
-class WikiPlugin__PreferencesInfo
+class WikiPlugin_DebugGroupInfo
     extends WikiPlugin
 {
     function getDescription()
     {
-        return sprintf(_("Get preferences information for current user %s."),
-            '[userid]');
+        return sprintf(_("Show Group Information."));
     }
 
     function getDefaultArguments()
     {
-        return array('page' => '[pagename]',
-            'userid' => '[userid]');
+        return array();
     }
 
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
-        // $user = &$request->getUser();
-        return Template('userprefs', $args);
+        extract($args);
+
+        $output = HTML(HTML::h1("Group Info"));
+
+        $group = WikiGroup::getGroup();
+        $allGroups = $group->getAllGroupsIn();
+
+        foreach ($allGroups as $g) {
+            $members = $group->getMembersOf($g);
+            $output->pushContent(HTML::h3($g . " - members: " .
+                    sizeof($members) . " - isMember: " . ($group->isMember($g) ? "yes" : "no")
+            ));
+            foreach ($members as $m) {
+                $output->pushContent($m);
+                $output->pushContent(HTML::br());
+            }
+        }
+        $output->pushContent(HTML::p("--- the end ---"));
+
+        return $output;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

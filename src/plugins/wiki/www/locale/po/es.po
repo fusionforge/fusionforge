@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-17 14:31+0200\n"
+"POT-Creation-Date: 2013-06-19 15:31+0200\n"
 "PO-Revision-Date: 2000-02-01 00:50-0500\n"
 "Last-Translator: Pablo Roca <proca@clavo.net>\n"
 "Language-Team: \n"
@@ -295,9 +295,6 @@ msgstr ""
 "sobreescribirían los cambios del otro autor. Así pues, se han combinado sus "
 "cambios y los del otro autor. El resultado se demuestra abajo."
 
-msgid "Convert"
-msgstr "Convertido"
-
 msgid "Preview"
 msgstr "Previsualizar"
 
@@ -483,9 +480,9 @@ msgstr ": "
 msgid "Page name too long"
 msgstr "La nombre de página demasiado de largo"
 
-#, fuzzy, php-format
+#, php-format
 msgid "Illegal character “%s” in page name."
-msgstr "Los carbones ilegales “%s” quitaron."
+msgstr "Los carbones ilegales “%s” en el nombre de la página."
 
 #, php-format
 msgid "unknown color %s ignored"
@@ -645,17 +642,14 @@ msgstr "Sobreescriba Todos"
 msgid " Sorry, cannot merge."
 msgstr " Apesadumbrado, no puede combinarse."
 
-#, fuzzy
 msgid "Revert: missing required version argument"
-msgstr "parámetro requerido de la versión que falta"
+msgstr ""
 
-#, fuzzy
 msgid "No revert: no page content"
-msgstr "ningún contenido de la página"
+msgstr "No invierta: ningún contenido de la página"
 
-#, fuzzy
 msgid "No revert: same version page"
-msgstr "la misma página de la versión"
+msgstr "No invierta: la misma página de la versión"
 
 msgid "Revert cancelled"
 msgstr ""
@@ -667,8 +661,8 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #, php-format
-msgid "revert to version %d"
-msgstr "invierta a la versión %d"
+msgid "Revert to version %d"
+msgstr "Invierta a la versión %d"
 
 #, php-format
 msgid "Revert: %s"
@@ -1017,12 +1011,12 @@ msgid " ... first %d bytes"
 msgstr " ... primeros octetos de %d"
 
 #, php-format
-msgid " ... around %s"
-msgstr " ... alrededor de %s"
+msgid " ... around “%s”"
+msgstr " ... alrededor de “%s”"
 
 #, php-format
-msgid "%s not found"
-msgstr "%s: fichero no encontrado"
+msgid "“%s” not found"
+msgstr "“%s” no encontrado"
 
 #, php-format
 msgid "page permission inherited from %s"
@@ -1091,15 +1085,8 @@ msgstr "El Menor de edad Corrige"
 msgid "minor"
 msgstr "de menor importancia"
 
-msgid "Markup"
-msgstr ""
-
 msgid "Illegal 'limit' argument: must be numeric"
 msgstr ""
-
-#, php-format
-msgid "Columns: %s."
-msgstr "Columnas: %s."
 
 msgid "Rename"
 msgstr "Retitule"
@@ -1366,21 +1353,6 @@ msgid "History of all major and minor modifications for any page edited by %s."
 msgstr ""
 
 #, php-format
-msgid "Get debugging information for %s."
-msgstr ""
-
-#, php-format
-msgid "Querying backend directly for “%s”"
-msgstr ""
-
-#, php-format
-msgid "No pagedata for %s"
-msgstr ""
-
-msgid "<not displayed>"
-msgstr ""
-
-#, php-format
 msgid "List all pages which link to %s."
 msgstr "Enumere todas las páginas que se liguen a %s."
 
@@ -1529,9 +1501,6 @@ msgstr ""
 msgid "%s: no such revision %d."
 msgstr "%s: ninguna tal revisión %d."
 
-msgid "CreateToc disabled for old markup."
-msgstr ""
-
 msgid "Click to display to TOC"
 msgstr ""
 
@@ -1549,6 +1518,33 @@ msgid "Personal Auth Settings for “%s”"
 msgstr ""
 
 msgid "No userid"
+msgstr ""
+
+#, php-format
+msgid "Get debugging information for %s."
+msgstr ""
+
+#, php-format
+msgid "Querying backend directly for “%s”"
+msgstr ""
+
+#, php-format
+msgid "No pagedata for %s"
+msgstr ""
+
+msgid "<not displayed>"
+msgstr ""
+
+#, php-format
+msgid "Show Group Information."
+msgstr ""
+
+#, php-format
+msgid "Show a markup retransformation of page %s."
+msgstr ""
+
+#, php-format
+msgid "Retransform page “%s”"
 msgstr ""
 
 msgid "Display differences between revisions."
@@ -1753,15 +1749,14 @@ msgstr ""
 msgid "%s error: outputfile “%s” not created"
 msgstr ""
 
-#, php-format
-msgid "Show Group Information."
-msgstr ""
-
 msgid "Simple Sample Plugin."
 msgstr ""
 
 msgid "Convert HTML markup into wiki markup."
 msgstr ""
+
+msgid "Convert"
+msgstr "Convertido"
 
 msgid "Only files with extension HTML are allowed"
 msgstr ""
@@ -2361,12 +2356,16 @@ msgid "no page specified"
 msgstr ""
 
 #, php-format
-msgid "Rating: %s (%d vote"
-msgstr ""
-
-#, php-format
 msgid "Your rating was %.1f"
 msgstr ""
+
+#, fuzzy, php-format
+msgid "Prediction: %s"
+msgstr "Editar: %s"
+
+#, fuzzy, php-format
+msgid "Prediction: %.1f"
+msgstr "Editar: %s"
 
 msgid "RateIt"
 msgstr ""
@@ -2599,14 +2598,6 @@ msgstr "Cambios Relacionados"
 msgid "RelatedChanges"
 msgstr "CambiosRelacionados"
 
-#, php-format
-msgid "Show a markup retransformation of page %s."
-msgstr ""
-
-#, php-format
-msgid "Retransform page “%s”"
-msgstr ""
-
 msgid "Layout tables using a very rich markup style."
 msgstr ""
 
@@ -2640,8 +2631,12 @@ msgstr ""
 msgid "Attributes of %s"
 msgstr ""
 
-msgid "Help/SemanticRelations"
-msgstr ""
+msgid "Help"
+msgstr "Ayuda"
+
+#, fuzzy
+msgid "SemanticRelations"
+msgstr "Relaciones"
 
 msgid "Find out how to add relations and attributes to pages."
 msgstr ""
@@ -2653,9 +2648,6 @@ msgid "Enter a valid query expression"
 msgstr ""
 
 msgid "Search in all specified pages for the expression."
-msgstr ""
-
-msgid "Help/SemanticSearchAdvancedPlugin"
 msgstr ""
 
 #, php-format
@@ -2708,9 +2700,6 @@ msgid "SemanticSearchAdvanced"
 msgstr ""
 
 msgid "No relations nor attributes in the whole wikidb defined!"
-msgstr ""
-
-msgid "Help:SemanticRelations"
 msgstr ""
 
 #, php-format
@@ -3047,7 +3036,7 @@ msgstr ""
 msgid "This internal action page cannot viewed."
 msgstr ""
 
-msgid "You can only use it via the _WikiTranslation plugin."
+msgid "You can only use it via the WikiTranslation plugin."
 msgstr ""
 
 msgid "Translation Error!"
@@ -3264,6 +3253,10 @@ msgstr ""
 msgid "Count"
 msgstr ""
 
+#, php-format
+msgid "Columns: %s."
+msgstr "Columnas: %s."
+
 msgid "Wanted From"
 msgstr ""
 
@@ -3335,51 +3328,6 @@ msgstr ""
 msgid "%d minutes"
 msgstr "%d minutas"
 
-msgid "Set individual page permissions."
-msgstr ""
-
-#, php-format
-msgid "chmod page “%s” to “%s”."
-msgstr ""
-
-#, php-format
-msgid "Couldn't chmod page “%s” to “%s”."
-msgstr ""
-
-msgid "Invalid chmod string"
-msgstr ""
-
-#, php-format
-msgid "%d pages have been changed."
-msgstr ""
-
-msgid "No pages changed."
-msgstr ""
-
-msgid "Are you sure you want to permanently change the selected files?"
-msgstr ""
-
-msgid "Chmod"
-msgstr ""
-
-msgid "Select the pages to change:"
-msgstr ""
-
-msgid "This plugin is currently under development and does not work!"
-msgstr ""
-
-msgid "Chmod to permission:"
-msgstr ""
-
-msgid "(ugo : rwx)"
-msgstr ""
-
-msgid "Propagate new permissions to all subpages?"
-msgstr ""
-
-msgid "(disable individual page permissions, enable inheritance)?"
-msgstr ""
-
 msgid "Change owner of selected pages."
 msgstr ""
 
@@ -3402,7 +3350,7 @@ msgstr ""
 msgid "%d pages have been changed:"
 msgstr ""
 
-msgid "PhpWikiAdministration/Chown"
+msgid "No pages changed."
 msgstr ""
 
 msgid "Confirm ownership change"
@@ -3425,9 +3373,9 @@ msgstr "Permisos escasos."
 msgid "ACL deleted for page “%s”"
 msgstr ""
 
-#, fuzzy
-msgid "PhpWikiAdministration/AdminAclDelete"
-msgstr "AdministraciónDePhpWiki"
+#, php-format
+msgid "%d pages have been changed."
+msgstr ""
 
 #, fuzzy
 msgid "Delete ACL"
@@ -3437,39 +3385,6 @@ msgid "Select the pages where to delete access rights"
 msgstr ""
 
 msgid "Selected Pages: "
-msgstr ""
-
-msgid "Change the markup type of selected pages."
-msgstr ""
-
-#, php-format
-msgid "Change markup type from %s to %s"
-msgstr ""
-
-#, php-format
-msgid "change page “%s” to markup type “%s”."
-msgstr ""
-
-#, php-format
-msgid "Couldn't change page “%s” to markup type “%s”."
-msgstr ""
-
-msgid "PhpWikiAdministration/Markup"
-msgstr ""
-
-msgid "Confirm markup change"
-msgstr ""
-
-msgid "Are you sure you want to change the markup type of the selected files?"
-msgstr ""
-
-msgid "Change markup type"
-msgstr ""
-
-msgid "Select the pages to change the markup type"
-msgstr ""
-
-msgid "Change markup to: "
 msgstr ""
 
 msgid "Permanently purge all selected pages."
@@ -3491,9 +3406,6 @@ msgid "%d pages have been permanently purged:"
 msgstr ""
 
 msgid "No pages purged."
-msgstr ""
-
-msgid "PhpWikiAdministration/Purge"
 msgstr ""
 
 msgid "Confirm purge"
@@ -3527,9 +3439,6 @@ msgid "%d pages have been removed:"
 msgstr ""
 
 msgid "No pages removed."
-msgstr ""
-
-msgid "PhpWikiAdministration/Remove"
 msgstr ""
 
 msgid "Remove"
@@ -3628,31 +3537,33 @@ msgstr ""
 msgid "Search and replace text in selected wiki pages."
 msgstr ""
 
-#, php-format
-msgid "Replace “%s” by “%s”"
+msgid "You must be an administrator to use this plugin."
 msgstr ""
 
-msgid "Error: Empty search string."
+msgid "Warning: The search string cannot be empty!"
+msgstr ""
+
+msgid "Select the pages to search and replace"
+msgstr ""
+
+msgid "Replace"
+msgstr "Substituya"
+
+msgid "Are you sure you want to replace text in the selected files?"
+msgstr ""
+
+#, php-format
+msgid "Replace “%s” by “%s”"
 msgstr ""
 
 #, php-format
 msgid "Replaced “%s” with “%s” in page “%s”."
 msgstr ""
 
-msgid "Warning: The search string cannot be empty!"
+msgid ""
+"Replace all occurences of the given string in the content of all selected "
+"pages."
 msgstr ""
-
-msgid "Are you sure you want to replace text in the selected files?"
-msgstr ""
-
-msgid "Select the pages to search and replace"
-msgstr ""
-
-msgid "Replace all occurences of the given string in the content of all pages."
-msgstr ""
-
-msgid "Replace"
-msgstr "Substituya"
 
 msgid "by"
 msgstr "por"
@@ -3675,6 +3586,9 @@ msgstr ""
 msgid "Selected page “%s” passed to “%s”."
 msgstr ""
 
+msgid "Set individual page permissions."
+msgstr ""
+
 #, php-format
 msgid "ACL not changed for page “%s”."
 msgstr ""
@@ -3692,9 +3606,6 @@ msgid "ACL changed for page “%s” from “%s” to “%s”."
 msgstr ""
 
 msgid "Invalid ACL"
-msgstr ""
-
-msgid "PhpWikiAdministration/SetAcl"
 msgstr ""
 
 msgid ""
@@ -3721,6 +3632,12 @@ msgstr ""
 msgid "To add check 'Add' near the dropdown list."
 msgstr ""
 
+msgid "Propagate new permissions to all subpages?"
+msgstr ""
+
+msgid "(disable individual page permissions, enable inheritance)?"
+msgstr ""
+
 msgid "(Currently not working)"
 msgstr ""
 
@@ -3729,9 +3646,6 @@ msgstr ""
 
 #, php-format
 msgid "change page “%s” to external."
-msgstr ""
-
-msgid "PhpWikiAdministration/SetExternal"
 msgstr ""
 
 msgid "Set pages to external"
@@ -3745,9 +3659,6 @@ msgstr ""
 
 #, php-format
 msgid "Bad action requested: %s"
-msgstr ""
-
-msgid "You must be an administrator to use this plugin."
 msgstr ""
 
 #, php-format
@@ -3884,6 +3795,14 @@ msgstr "Gracias!"
 msgid "AddComment"
 msgstr "Agregue El Comentario"
 
+#, fuzzy
+msgid "AddCommentPlugin"
+msgstr "Agregue El Comentario"
+
+#, fuzzy
+msgid "AddingPages"
+msgstr "Descargar Las Páginas"
+
 msgid "AllPages"
 msgstr "TodasLasPáginas"
 
@@ -3917,8 +3836,11 @@ msgstr ""
 msgid "AuthorHistory"
 msgstr ""
 
+msgid "AuthorHistoryPlugin"
+msgstr ""
+
 #, fuzzy
-msgid "_BackendInfo"
+msgid "DebugBackendInfo"
 msgstr "InformacionDeLaPagina"
 
 msgid "BackLinks"
@@ -3933,6 +3855,12 @@ msgstr ""
 msgid "CacheTest"
 msgstr ""
 
+msgid "CalendarListPlugin"
+msgstr "CalendarioListaPlugin"
+
+msgid "CalendarPlugin"
+msgstr "CalendarioPlugin"
+
 msgid "CategoryHomePages"
 msgstr ""
 
@@ -3942,12 +3870,17 @@ msgstr "CategoríaPágina"
 msgid "Chart"
 msgstr ""
 
+msgid "Chown"
+msgstr "Cambie a dueño"
+
 msgid "Comment"
 msgstr "Commentario"
 
-#, fuzzy
+msgid "CommentPlugin"
+msgstr "CommentarioPlugin"
+
 msgid "CreateBib"
-msgstr "CreeToc"
+msgstr ""
 
 msgid "CreatePage"
 msgstr "CreeLaPágina"
@@ -3955,12 +3888,14 @@ msgstr "CreeLaPágina"
 msgid "CreateToc"
 msgstr "CreeToc"
 
+msgid "CreateTocPlugin"
+msgstr "CreeToc"
+
 msgid "CurrentTime"
 msgstr ""
 
-#, fuzzy
 msgid "DeadEndPages"
-msgstr "BuscarPágina"
+msgstr ""
 
 msgid "DebugInfo"
 msgstr ""
@@ -3974,16 +3909,20 @@ msgstr ""
 msgid "EditMetaData"
 msgstr ""
 
-#, fuzzy
+msgid "EditMetaDataPlugin"
+msgstr ""
+
 msgid "ExternalSearch"
-msgstr "Externos"
+msgstr ""
+
+msgid "ExternalSearchPlugin"
+msgstr ""
 
 msgid "FacebookLike"
 msgstr ""
 
-#, fuzzy
 msgid "FileInfo"
-msgstr "Informacion"
+msgstr ""
 
 msgid "FindPage"
 msgstr "BuscarPágina"
@@ -3991,7 +3930,13 @@ msgstr "BuscarPágina"
 msgid "FoafViewer"
 msgstr ""
 
+msgid "FoafViewerPlugin"
+msgstr ""
+
 msgid "FrameInclude"
+msgstr ""
+
+msgid "FrameIncludePlugin"
 msgstr ""
 
 msgid "FullRecentChanges"
@@ -4012,128 +3957,32 @@ msgstr ""
 msgid "GraphViz"
 msgstr ""
 
-msgid "_GroupInfo"
+msgid "DebugGroupInfo"
 msgstr ""
 
 msgid "HelloWorld"
 msgstr ""
 
-msgid "Help/AddCommentPlugin"
-msgstr ""
-
-msgid "Help/AddingPages"
-msgstr ""
-
-msgid "Help/AuthorHistoryPlugin"
-msgstr ""
-
-msgid "Help/CalendarListPlugin"
-msgstr "Ayuda/CalendarioListaPlugin"
-
-msgid "Help/CalendarPlugin"
-msgstr "Ayuda/CalendarioPlugin"
-
-msgid "Help/CommentPlugin"
-msgstr ""
-
-msgid "Help/CreateTocPlugin"
-msgstr "Ayuda/CreeToc"
-
-msgid "Help/EditMetaDataPlugin"
-msgstr ""
-
-msgid "Help/ExternalSearchPlugin"
-msgstr ""
-
-msgid "Help/FoafViewerPlugin"
-msgstr ""
-
-msgid "Help/FrameIncludePlugin"
-msgstr ""
-
-msgid "Help/HelloWorldPlugin"
-msgstr ""
-
-msgid "Help/IncludePagePlugin"
-msgstr "Ayuda/BuscarPágina"
-
-msgid "Help/LinkIcons"
-msgstr ""
-
-msgid "Help/MagicPhpWikiURLs"
-msgstr ""
-
-msgid "Help/MoreAboutMechanics"
-msgstr ""
-
-msgid "Help/OldStyleTablePlugin"
-msgstr ""
-
-msgid "Help/PhotoAlbumPlugin"
-msgstr ""
-
-msgid "Help/PhpHighlightPlugin"
-msgstr ""
-
-msgid "Help/PhpWeatherPlugin"
-msgstr ""
-
-msgid "Help/PhpWiki"
-msgstr ""
-
-msgid "Help/PloticusPlugin"
-msgstr ""
-
-msgid "Help/RawHtmlPlugin"
-msgstr ""
-
-msgid "Help/RedirectToPlugin"
-msgstr ""
-
-msgid "Help/RichTablePlugin"
-msgstr ""
-
-msgid "Help/SystemInfoPlugin"
-msgstr ""
-
-msgid "Help/TranscludePlugin"
-msgstr ""
-
-msgid "Help/UnfoldSubpagesPlugin"
-msgstr "Ayuda/IncluyaPáginasSecundariaPlugin"
-
-msgid "Help/UpLoadPlugin"
-msgstr "Ayuda/UpLoadPlugin"
-
-msgid "Help/WabiSabi"
-msgstr ""
-
-msgid "Help/WikiBlogPlugin"
-msgstr ""
-
-msgid "Help/WikiPlugin"
-msgstr ""
-
-msgid "Help/WikiWikiWeb"
+msgid "HelloWorldPlugin"
 msgstr ""
 
 msgid "HomePageAlias"
 msgstr "PáginaPrincipalAlias"
 
-#, fuzzy
 msgid "HtmlConverter"
-msgstr "Convertido"
+msgstr "HtmlConvertido"
 
 msgid "Imdb"
 msgstr ""
 
-#, fuzzy
 msgid "IncludePage"
-msgstr "Ayuda/BuscarPágina"
+msgstr ""
 
-#, fuzzy
+msgid "IncludePagePlugin"
+msgstr ""
+
 msgid "IncludePages"
-msgstr "Ayuda/BuscarPágina"
+msgstr ""
 
 msgid "IncludeSiteMap"
 msgstr ""
@@ -4147,28 +3996,34 @@ msgstr "InterWiki"
 msgid "InterWikiSearch"
 msgstr "InterWikiBúsqueda"
 
-#, fuzzy
 msgid "JabberPresence"
-msgstr "UsuarioPreferencias"
+msgstr ""
 
-#, fuzzy
 msgid "LdapSearch"
-msgstr "Buscar"
+msgstr "LdapBuscar"
 
 msgid "LikePages"
+msgstr ""
+
+msgid "LinkIcons"
 msgstr ""
 
 msgid "ListPages"
 msgstr "ListaPáginas"
 
-#, fuzzy
 msgid "ListRelations"
-msgstr "Relaciones"
+msgstr "ListaRelaciones"
 
 msgid "ListSubpages"
 msgstr "ListaPáginasSecundaria"
 
+msgid "MagicPhpWikiURLs"
+msgstr ""
+
 msgid "MediawikiTable"
+msgstr ""
+
+msgid "MoreAboutMechanics"
 msgstr ""
 
 msgid "MostPopular"
@@ -4183,40 +4038,43 @@ msgstr ""
 msgid "OldStyleTable"
 msgstr ""
 
+msgid "OldStyleTablePlugin"
+msgstr ""
+
 msgid "OrphanedPages"
 msgstr "BuscarPágina"
 
-#, fuzzy
 msgid "PageGroup"
-msgstr "DescargeDeLaPágina"
+msgstr ""
 
 msgid "PageInfo"
 msgstr "InformacionDeLaPagina"
 
-#, fuzzy
 msgid "PageTrail"
-msgstr "Versión de la página"
+msgstr ""
 
-#, fuzzy
 msgid "PasswordReset"
-msgstr "Contraseña:"
+msgstr ""
 
 msgid "PhotoAlbum"
+msgstr ""
+
+msgid "PhotoAlbumPlugin"
 msgstr ""
 
 msgid "PhpHighlight"
 msgstr ""
 
+msgid "PhpHighlightPlugin"
+msgstr ""
+
 msgid "PhpWeather"
 msgstr ""
 
-msgid "PhpWikiAdministration/Chmod"
+msgid "PhpWeatherPlugin"
 msgstr ""
 
-msgid "PhpWikiAdministration/Rename"
-msgstr ""
-
-msgid "PhpWikiAdministration/Replace"
+msgid "PhpWiki"
 msgstr ""
 
 msgid "PhpWikiDocumentation"
@@ -4228,30 +4086,29 @@ msgstr ""
 msgid "Ploticus"
 msgstr ""
 
+msgid "PloticusPlugin"
+msgstr ""
+
 msgid "PluginManager"
 msgstr ""
 
 msgid "PopularNearby"
 msgstr ""
 
-#, fuzzy
 msgid "PopularTags"
-msgstr "MasPopulares"
+msgstr ""
 
 msgid "PopUp"
 msgstr ""
 
-#, fuzzy
 msgid "PreferenceApp"
-msgstr "Preferencias"
+msgstr ""
 
-#, fuzzy
-msgid "_PreferencesInfo"
-msgstr "Preferencias"
+msgid "PreferencesInfo"
+msgstr ""
 
-#, fuzzy
 msgid "PrevNext"
-msgstr "Previsualizar"
+msgstr ""
 
 msgid "Processing"
 msgstr ""
@@ -4259,9 +4116,11 @@ msgstr ""
 msgid "RawHtml"
 msgstr ""
 
-#, fuzzy
+msgid "RawHtmlPlugin"
+msgstr ""
+
 msgid "RecentChangesCached"
-msgstr "CambiosRecientes"
+msgstr ""
 
 msgid "RecentReferrers"
 msgstr ""
@@ -4269,27 +4128,34 @@ msgstr ""
 msgid "RecentVisitors"
 msgstr ""
 
-#, fuzzy
 msgid "RedirectTo"
-msgstr "(vuelto a dirigir de %s)"
+msgstr ""
+
+msgid "RedirectToPlugin"
+msgstr ""
 
 msgid "ReleaseNotes"
 msgstr ""
 
-msgid "_Retransform"
+msgid "DebugRetransform"
 msgstr ""
 
 msgid "RichTable"
 msgstr ""
 
+msgid "RichTablePlugin"
+msgstr ""
+
 msgid "SearchHighlight"
 msgstr ""
 
-#, fuzzy
-msgid "SemanticRelations"
-msgstr "Relaciones"
+msgid "SetAcl"
+msgstr "Fije El Acl"
 
 msgid "SiteMap"
+msgstr ""
+
+msgid "SpecialPages"
 msgstr ""
 
 msgid "SqlResult"
@@ -4302,6 +4168,9 @@ msgid "SyntaxHighlighter"
 msgstr ""
 
 msgid "SystemInfo"
+msgstr ""
+
+msgid "SystemInfoPlugin"
 msgstr ""
 
 msgid "TeX2png"
@@ -4319,14 +4188,23 @@ msgstr ""
 msgid "Transclude"
 msgstr ""
 
+msgid "TranscludePlugin"
+msgstr ""
+
 msgid "TranslateText"
 msgstr ""
 
 msgid "UnfoldSubpages"
 msgstr "IncluyaPáginasSecundaria"
 
+msgid "UnfoldSubpagesPlugin"
+msgstr "IncluyaPáginasSecundariaPlugin"
+
 msgid "UpLoad"
 msgstr "UpLoad"
+
+msgid "UpLoadPlugin"
+msgstr "UpLoadPlugin"
 
 msgid "UriResolver"
 msgstr ""
@@ -4340,65 +4218,52 @@ msgstr ""
 msgid "VisualWiki"
 msgstr ""
 
-#, fuzzy
+msgid "WabiSabi"
+msgstr ""
+
 msgid "WantedPagesOld"
-msgstr "BuscarPágina"
+msgstr ""
 
 msgid "WatchPage"
 msgstr ""
 
-#, fuzzy
-msgid "WikiAdminChmod"
-msgstr "Administración de Wiki"
-
-#, fuzzy
 msgid "WikiAdminChown"
-msgstr "Administración de Wiki"
+msgstr ""
 
-#, fuzzy
 msgid "WikiAdminDeleteAcl"
-msgstr "Borrada"
+msgstr ""
 
-#, fuzzy
-msgid "WikiAdminMarkup"
-msgstr "Administración de Wiki"
-
-#, fuzzy
 msgid "WikiAdminPurge"
-msgstr "Administración de Wiki"
+msgstr ""
 
-#, fuzzy
 msgid "WikiAdminRemove"
-msgstr "Administración de Wiki"
+msgstr ""
 
-#, fuzzy
 msgid "WikiAdminRename"
-msgstr "Administración de Wiki"
+msgstr ""
 
-#, fuzzy
 msgid "WikiAdminSearchReplace"
-msgstr "Busque Y Substituya"
+msgstr ""
 
-#, fuzzy
 msgid "WikiAdminSelect"
-msgstr "Administración de Wiki"
+msgstr ""
 
-#, fuzzy
 msgid "WikiAdminSetAcl"
-msgstr "Administración de Wiki"
+msgstr ""
 
 msgid "WikiAdminSetAclSimple"
 msgstr ""
 
-#, fuzzy
 msgid "WikiAdminSetExternal"
-msgstr "Administración de Wiki"
+msgstr ""
 
-#, fuzzy
 msgid "WikiAdminUtils"
-msgstr "Administración de Wiki"
+msgstr ""
 
 msgid "WikiBlog"
+msgstr ""
+
+msgid "WikiBlogPlugin"
 msgstr ""
 
 msgid "WikicreoleTable"
@@ -4413,10 +4278,17 @@ msgstr ""
 msgid "WikiForum"
 msgstr ""
 
+msgid "WikiPlugin"
+msgstr ""
+
 msgid "WikiPoll"
 msgstr ""
 
-msgid "_WikiTranslation"
+#, fuzzy
+msgid "WikiTranslation"
+msgstr "AdministraciónDePhpWiki"
+
+msgid "WikiWikiWeb"
 msgstr ""
 
 msgid "YouTube"
@@ -4442,9 +4314,8 @@ msgstr ""
 msgid "Required argument %s missing"
 msgstr ""
 
-#, fuzzy
 msgid "Purge cancelled"
-msgstr "Cambio de la página"
+msgstr ""
 
 msgid "Sorry, this page does not exist."
 msgstr "Apesadumbrada, esta página no está en la base de datos."
@@ -4466,9 +4337,8 @@ msgid ""
 "the database."
 msgstr ""
 
-#, fuzzy
 msgid "Remove cancelled"
-msgstr "Borrar Página"
+msgstr ""
 
 msgid "Remove Page"
 msgstr "Borrar Página"
@@ -4549,14 +4419,6 @@ msgstr ""
 #, php-format
 msgid "Illegal chars %s removed"
 msgstr "Los carbones ilegales %s quitaron"
-
-msgid "The CreateTocPlugin is not yet old markup compatible! "
-msgstr ""
-
-msgid ""
-"Please remove the CreateToc line to be able to reformat this page to old "
-"markup. "
-msgstr ""
 
 msgid "Revision Not Found"
 msgstr "Revisión No encontrada"
@@ -4639,6 +4501,9 @@ msgstr ""
 msgid "_AuthInfo"
 msgstr ""
 
+msgid "_GroupInfo"
+msgstr ""
+
 msgid "GroupAuthInfo"
 msgstr ""
 
@@ -4652,9 +4517,6 @@ msgstr ""
 #, php-format
 msgid "rename %s to %s"
 msgstr "retitula %s a %s"
-
-msgid "Help"
-msgstr "Ayuda"
 
 msgid "MISSING"
 msgstr ""
@@ -4788,7 +4650,7 @@ msgstr ""
 msgid "%s: Can't open dba database"
 msgstr "%s: No puede abrir la base de datos del DBA"
 
-#, fuzzy, php-format
+#, php-format
 msgid "“%s”: corrupt file"
 msgstr "“%s”: archivo corrupto"
 
@@ -5022,7 +4884,7 @@ msgstr "Username inválido."
 msgid "%s is missing"
 msgstr "%s falta"
 
-#, fuzzy, php-format
+#, php-format
 msgid "Either %s is missing or DATABASE_TYPE != “%s”"
 msgstr "Cualquier %s es que falta o DATABASE_TYPE != “%s”"
 
@@ -5065,9 +4927,9 @@ msgstr ""
 msgid "Could not connect to LDAP host %s"
 msgstr "No podía conectar con LDAP %s"
 
-#, fuzzy, php-format
+#, php-format
 msgid "Invalid username “%s” for LDAP Auth"
-msgstr "Username inválido ' %s' para LDAP Auth"
+msgstr "Username inválido '%s' para LDAP Auth"
 
 msgid ""
 "Automatically created user homepage to be able to store UserPreferences."
@@ -5142,7 +5004,7 @@ msgstr "La dirección “%s” del email se ajusta a formato correctamente"
 msgid "PersonalPage login method:"
 msgstr "Método de la conexión de PersonalPage:"
 
-#, fuzzy, php-format
+#, php-format
 msgid "You stored an empty password in your “%s” page."
 msgstr "Usted almacenó una contraseña vacía en su página de “%s”."
 
@@ -5271,15 +5133,12 @@ msgstr ""
 msgid "Add Entry"
 msgstr ""
 
-msgid "Help/GoodStyle"
-msgstr "Ayuda/BuenEstilo"
+msgid "GoodStyle"
+msgstr "BuenEstilo"
 
 #, php-format
 msgid "See %s tips for editing."
 msgstr "%s tips para editar."
-
-msgid "Help/TextFormattingRules"
-msgstr "Ayuda/ReglasDeFormatoDeTexto"
 
 msgid "Synopsis"
 msgstr "Sinopsis"
@@ -5384,13 +5243,10 @@ msgstr "Esto es un cambio pequeño."
 msgid "Use old markup"
 msgstr ""
 
-msgid "Help/OldTextFormattingRules"
-msgstr "Ayuda/ViejoReglasDeFormatoDeTexto"
+msgid "OldTextFormattingRules"
+msgstr "ViejoReglasDeFormatoDeTexto"
 
 msgid "HowToUseWiki"
-msgstr ""
-
-msgid "WikiWikiWeb"
 msgstr ""
 
 msgid "Today"
@@ -5467,13 +5323,6 @@ msgstr ""
 
 #, php-format
 msgid "%s words"
-msgstr ""
-
-#, php-format
-msgid "Version %s"
-msgstr "Versión %s"
-
-msgid "Original (1.2 or 1.0)"
 msgstr ""
 
 msgid ":"
@@ -5635,9 +5484,6 @@ msgid "Click to authenticate as %s"
 msgstr ""
 
 msgid "Sign in as:"
-msgstr ""
-
-msgid "PreferencesInfo"
 msgstr ""
 
 msgid "<system theme>"
@@ -5881,9 +5727,8 @@ msgstr "Administración de Wiki"
 msgid "My User Page"
 msgstr ""
 
-#, fuzzy
 msgid "User Preferences"
-msgstr "UsuarioPreferencias"
+msgstr "Usuario Preferencias"
 
 msgid "User preferences for this project"
 msgstr ""
@@ -6064,6 +5909,13 @@ msgstr ""
 msgid "Edit this page"
 msgstr "Corrija esta página"
 
+#~ msgid "Version %s"
+#~ msgstr "Versión %s"
+
+#, fuzzy
+#~ msgid "%s not found"
+#~ msgstr "fichero %s no encontrado"
+
 #, fuzzy
 #~ msgid "period"
 #~ msgstr "versión %d"
@@ -6071,6 +5923,14 @@ msgstr "Corrija esta página"
 #, fuzzy
 #~ msgid "name"
 #~ msgstr "Retitule"
+
+#, fuzzy
+#~ msgid "AdminAclDelete"
+#~ msgstr "Borrada"
+
+#, fuzzy
+#~ msgid "SetExternal"
+#~ msgstr "Externos"
 
 #~ msgid "I'm sorry, there is no such page as %s."
 #~ msgstr "Estoy apesadumbrado, allí no soy ninguna página tal como %s."
@@ -6083,9 +5943,6 @@ msgstr "Corrija esta página"
 
 #~ msgid "Included from %s:"
 #~ msgstr "Inserción de “%s”:"
-
-#~ msgid "file %s not found"
-#~ msgstr "fichero %s no encontrado"
 
 #~ msgid "View the current version"
 #~ msgstr "Vea la versión actual"
@@ -6104,12 +5961,6 @@ msgstr "Corrija esta página"
 
 #~ msgid " Skipped"
 #~ msgstr "Saltado"
-
-#~ msgid "Chown"
-#~ msgstr "Cambie a dueño"
-
-#~ msgid "SetAcl"
-#~ msgstr "Fije El Acl"
 
 #~ msgid "too long"
 #~ msgstr "demasiado de largo"

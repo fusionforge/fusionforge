@@ -151,11 +151,10 @@ class WikiPlugin_UnfoldSubpages
                 if ($smalltitle) {
                     $pname = array_pop(explode(SUBPAGE_SEPARATOR, $cpagename)); // get last subpage name
                     // Use _("%s: %s") instead of .": ". for French punctuation
-                    $ct = TransformText(sprintf(_("%s: %s"), "[$pname|$cpagename]",
-                            $ct),
-                        $r->get('markup'), $cpagename);
+                    $ct = TransformText(sprintf(_("%s: %s"), "[$pname|$cpagename]", $ct),
+                                        $cpagename);
                 } else {
-                    $ct = TransformText($ct, $r->get('markup'), $cpagename);
+                    $ct = TransformText($ct, $cpagename);
                 }
                 array_pop($included_pages);
                 if (!$smalltitle) {

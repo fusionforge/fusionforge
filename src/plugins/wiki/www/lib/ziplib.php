@@ -613,8 +613,6 @@ function MimeifyPageRevision(&$page, &$revision)
         $params['flags'] = ($params['flags'] ? $params['flags'] . ',EXTERNAL_PAGE' : 'EXTERNAL_PAGE');
     if ($revision->get('author_id'))
         $params['author_id'] = $revision->get('author_id');
-    if ($revision->get('markup')) // what is the default? we must use 1
-        $params['markup'] = $revision->get('markup');
     if ($revision->get('summary'))
         $params['summary'] = $revision->get('summary');
     if ($page->get('hits'))
@@ -855,7 +853,6 @@ function ParseMimeifiedPages($data)
             case 'author':
             case 'author_id':
             case 'summary':
-            case 'markup':
             case 'pagetype':
                 $versiondata[$key] = $value;
                 break;

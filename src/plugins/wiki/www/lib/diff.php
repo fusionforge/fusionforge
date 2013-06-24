@@ -353,7 +353,7 @@ function showDiff(&$request)
 
         $html->pushContent(HTML::hr(), HTML::h2($new_version));
         require_once 'lib/BlockParser.php';
-        $html->pushContent(TransformText($new, $new->get('markup'), $pagename));
+        $html->pushContent(TransformText($new, $pagename));
     }
 
     require_once 'lib/Template.php';

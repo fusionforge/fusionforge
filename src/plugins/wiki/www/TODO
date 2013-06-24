@@ -83,7 +83,6 @@ Maybe (probably defer):
   to statically define predicates used by PhpWiki:SemanticWeb
   (semantically enriched links, like interwiki links).
 * SqlResult paging (finished?)
-* plugin\WikiAdminSetAclSimple, Chmod
 * plugin\NewUserWelcomePage.php (some better template solution)
 * plugin\SearchHighlight
 * logfile stuff:

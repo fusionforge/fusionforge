@@ -290,7 +290,7 @@ ws[cfh]");
             fwrite($log_handle,
                 "\n"
                     . "<tr><td><a href=\"$userfile_name\">$userfile_name</a></td>"
-                    . "<td align=\"right\">$file_size kB</td>"
+                    . "<td class=\"align-right\">$file_size kB</td>"
                     . "<td>&nbsp;&nbsp;" . $WikiTheme->formatDate(time()) . "</td>"
                     . "<td>&nbsp;&nbsp;<em>" . $user->getId() . "</em></td></tr>");
             fclose($log_handle);

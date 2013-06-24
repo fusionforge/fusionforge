@@ -7,4 +7,4 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 Detailansicht der Seite. Das ist wahrscheinlich sinnvoller zum Debuggen als alles andere.
-<<_BackendInfo page||='' >>
+<<DebugBackendInfo page||='' >>

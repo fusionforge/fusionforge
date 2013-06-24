@@ -104,7 +104,7 @@ class WikiPlugin_WikiAdminChown
     function run($dbi, $argstr, &$request, $basepage)
     {
         if ($request->getArg('action') != 'browse') {
-            if (!$request->getArg('action') == _("PhpWikiAdministration/Chown")) {
+            if (!$request->getArg('action') == __("PhpWikiAdministration")."/".__("Chown")) {
                 return $this->disabled(_("Plugin not run: not in browse mode"));
             }
         }

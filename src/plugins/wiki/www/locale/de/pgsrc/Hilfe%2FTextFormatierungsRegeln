@@ -1,9 +1,8 @@
-Date: Wed, 19 Dec 2012 13:19:42 +0000
+Date: Mon, 17 Jun 2013 13:19:42 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Hilfe%2FTextFormatierungsRegeln;
   flags=PAGE_LOCKED;
-  markup=2;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
@@ -33,7 +32,7 @@ _Term<b>:</b>~<new-line> definition_ for definition lists.%%%
 ! Tip
 Schau dir am besten auch den »Quelltext« dieser Seite an, indem du unten auf den Link zum Editieren klickst. Dann verstehst du die Beispiele besser.
 
-!!! Absätze
+== Absätze ==
 
 * Rücke Absätze nicht ein
 * Zeilenumbrüche werden automatisch erstellt
@@ -41,8 +40,7 @@ Schau dir am besten auch den »Quelltext« dieser Seite an, indem du unten auf d
 * Vier oder mehr Minuszeichen am Zeilenanfang erzeugen eine horizontale Linie
 * =~%%%= oder =~<br>= erstellt einen Zeilenumbruch (auch in Überschriften und Listen)
 
-
-!!! Listen
+== Listen ==
 
 * Ein Sternchen für die erste Ebene
   * eingerückte Sternchen (mind 2 Zeichen) für die zweite Ebene, usw.
@@ -58,13 +56,13 @@ Schau dir am besten auch den »Quelltext« dieser Seite an, indem du unten auf d
   wie in einer =<DL><DT><DD>= Liste
 * Andere Leerzeichen als Tab am Zeilenanfang erstellen vorformatierten Text mit einer anderen Schriftart
 
-!!! Überschriften
+== Überschriften ==
 
 * '=!=' am Zeilenanfang erstellt eine kleine Überschrift ''H3''
 * '=!!=' eine mittlere ''H2''
 * '=!!!='' eine große ''H1''
 
-!!! Unformatierter Text
+== Unformatierter Text ==
 
 * Setze die Zeilen in =~<pre>=:
   <verbatim>
@@ -87,7 +85,7 @@ Schau dir am besten auch den »Quelltext« dieser Seite an, indem du unten auf d
   Preformatted text. WikiLinks do not work.
   </verbatim>
 
-!!! Eingerückte Absätze
+== Eingerückte Absätze ==
 
 * Zwei oder mehr Leerzeichen am Anfgang erzeugen eingerückte Absätze. Einrückungen dürfen sich steigern.
 
@@ -95,7 +93,7 @@ Schau dir am besten auch den »Quelltext« dieser Seite an, indem du unten auf d
 
       Dieser Absatz ist noch mehr eingerückt.
 
-!!! Hervorhebung
+== Hervorhebung ==
 
 * Verwende einen Unterstrich (<tt>~_</tt>) für _Betonung_ (wird normalerweise _kursiv_ dargestellt)
 * Verwende Sternchen (<tt>~*</tt>) für *starke Betonung* (wird normalerweise *fett* dargestellt)
@@ -106,7 +104,7 @@ Schau dir am besten auch den »Quelltext« dieser Seite an, indem du unten auf d
 
   funktioniert nicht_
 
-!!! Querverweise (Links)
+== Querverweise (Links) ==
 
 * Hyperlinks zu anderen Seiten im Wiki werden erstellt, indem man den Namen in eckige Klammern 
   einschließt [das ist ein Link] oder besser WikiWörterVerwendet.
@@ -119,12 +117,16 @@ Schau dir am besten auch den »Quelltext« dieser Seite an, indem du unten auf d
 * Du kannst das Erstellen eines Links verhindern, indem du vor das Wort eine 
   Tilde '<tt>~~</tt>' setzt, zum Beispiel ~DasIstKeinLink.
   ~http://not.linked.to/
+* You can create footnotes by using ~[1], ~[2], ~[3], ... like this here #[|ftnt
+_ref_1]<sup>~[[1|#ftnt_1]~]</sup>. See footnote for counterpart.  (If the ~[ is 
+in the first column, it is a footnote <em>definition</em> rather than a footnote
+ <em>reference</em> #[|ftnt_ref_1]<sup>~[[1|#ftnt_1]~]</sup>.)
 * Wenn du im Text Adressen eingibst, die mit **http:**, **ftp:** oder **mailto:** beginnen, 
   werden diese auch automatisch in Links umgewandelt, zum Beispiel http://c2.com/
 * Adressen, die mit **.png** oder **.jpg** enden (d.h. Bilder) werden in die Seite 
   eingefügt, wenn sie in eckige Klammern gesetzt werden, z. B.: [http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/png.png]
 
-!!! Tabellen
+== Tabellen ==
 
 * Definition list style tables are written just like definition lists,
   except that you replace the trailing colon on the term with a "pipe"
@@ -154,7 +156,7 @@ Schau dir am besten auch den »Quelltext« dieser Seite an, indem du unten auf d
 
 * Old-style tables are supported through the OldStyleTablePlugin
 
-!!! HTML-Formatierungen
+== HTML-Formatierungen ==
 
 * Some in-line markup is allowed through the use of HTML tags:
   <b>b</b>, <big>big</big>, <i>i</i>, <small>small</small>,
@@ -166,7 +168,7 @@ Schau dir am besten auch den »Quelltext« dieser Seite an, indem du unten auf d
 * Sonderzeichen mit & funktionieren nicht
 * Im Prinzip benötigst du keine HTML-Formatierungen
 
-!!! Inserting plugins
+== Inserting plugins ==
 
 * Several plugins permit embedding additional functionality to Wiki
   pages. For example,

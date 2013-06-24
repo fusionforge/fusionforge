@@ -117,8 +117,7 @@ class WikiPlugin_GoogleMaps
                 include_once 'lib/BlockParser.php';
                 $page = $dbi->getPage($request->getArg('pagename'));
                 $rev = $page->getCurrentRevision(false);
-                $markup = $rev->get('markup');
-                $markertext = TransformText($InfoText, $markup, $basepage);
+                $markertext = TransformText($InfoText, $basepage);
             }
             $markerjs = JavaScript("
 function createMarker(point, text) {

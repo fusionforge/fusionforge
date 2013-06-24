@@ -112,7 +112,7 @@ class WikiPlugin_WikiForum
 
         $dbi = $request->getDbh();
         $topics = $this->findBlogs($dbi, $args['pagename'], 'wikiforum');
-        $html = HTML::table(array('border' => 0));
+        $html = HTML::table();
         $row = HTML::tr(HTML::th('title'),
             HTML::th('last post'),
             HTML::th('author'));

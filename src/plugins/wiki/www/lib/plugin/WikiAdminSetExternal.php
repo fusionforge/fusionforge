@@ -91,7 +91,7 @@ class WikiPlugin_WikiAdminSetExternal
     function run($dbi, $argstr, &$request, $basepage)
     {
         if ($request->getArg('action') != 'browse') {
-            if (!$request->getArg('action') == _("PhpWikiAdministration/SetExternal")) {
+            if (!$request->getArg('action') == __("PhpWikiAdministration")."/".__("SetExternal")) {
                 return $this->disabled(_("Plugin not run: not in browse mode"));
             }
         }

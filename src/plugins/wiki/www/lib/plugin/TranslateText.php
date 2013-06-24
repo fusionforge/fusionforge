@@ -26,7 +26,7 @@
  * One required argument: lang
  * Requires that an action page with the <<TranslateText >> line exists.
  *
- * Usually called from <<_WikiTranslation >>
+ * Usually called from <<WikiTranslation >>
  * Contributed translation are stored in UsersPage/ContributedTranslations
  *
  * Examples:
@@ -35,10 +35,10 @@
  * @author:  Reini Urban
  */
 
-require_once 'lib/plugin/_WikiTranslation.php';
+require_once 'lib/plugin/WikiTranslation.php';
 
 class WikiPlugin_TranslateText
-    extends WikiPlugin__WikiTranslation
+    extends WikiPlugin_WikiTranslation
 {
     function getDescription()
     {
@@ -60,7 +60,7 @@ class WikiPlugin_TranslateText
         if (!$lang)
             return $this->error(
                 _("This internal action page cannot viewed.") . "\n" .
-                    _("You can only use it via the _WikiTranslation plugin."));
+                    _("You can only use it via the WikiTranslation plugin."));
 
         $this->lang = $lang;
         //action=save
@@ -83,8 +83,7 @@ class WikiPlugin_TranslateText
                     $meta = $current->_data;
                 } else {
                     $text = '';
-                    $meta = array('markup' => 2.0,
-                        'author' => $user->getId());
+                    $meta = array('author' => $user->getId());
                 }
                 $text .= $user->getId() . " " . Iso8601DateTime() . "\n" .
                     "* " . sprintf(_("Translate “%s” to “%s” in *%s*"),

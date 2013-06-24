@@ -165,7 +165,7 @@ class WikiPlugin_SiteMap
         if (!$noheader) {
             $out = $this->getDescription() . " " . sprintf(_("(max. recursion level: %d)"),
                 $reclimit) . ":\n\n";
-            $html->pushContent(TransformText($out, 1.0, $page));
+            $html->pushContent(TransformText($out, $page));
         }
         $pagelist = new PageList($info, $exclude);
         $p = $dbi->getPage($page);
@@ -202,14 +202,12 @@ class WikiPlugin_SiteMap
                 $plugin_args = 'page=\'' . $link->getName() . '\' ' . $includepages;
                 $pagehtml = $plugin->run($dbi, $plugin_args, $request, $basepage);
                 $html->pushContent($pagehtml);
-                //$html->pushContent( HTML(TransformText($indenter, 1.0, $page), $pagehtml));
-                //$out .= $indenter . $pagehtml . "\n";
             } else {
                 $out .= $key . "\n";
             }
         }
         if (empty($includepages)) {
-            return TransformText($out, 2.0, $page);
+            return TransformText($out, $page);
         } else {
             return $html;
         }

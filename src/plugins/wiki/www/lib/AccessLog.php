@@ -656,10 +656,8 @@ class Request_AccessLog_SQL
         // otherwise the headers will not be ready
         $tbody = $this->_getQueryResults($query, $dbi);
 
-        return HTML::table(array('border' => 1,
-                'cellspacing' => 1,
-                'cellpadding' => 1),
-            HTML::caption(HTML::h1(HTML::br(), $this->_getCaption($args))),
+        return HTML::table(array('border' => 1),
+            HTML::caption($this->_getCaption($args)),
             HTML::thead($this->_theadrow),
             $tbody);
     }

@@ -128,7 +128,7 @@ class WikiPlugin_CalendarList
             $r = $p->getCurrentRevision();
             $c = $r->getContent();
             include_once 'lib/BlockParser.php';
-            $content = TransformText(implode("\n", $c), $r->get('markup'));
+            $content = TransformText(implode("\n", $c));
             $link = HTML::a(array('class' => 'cal-hide',
                     'href' => WikiURL($page_for_date,
                         array('action' => 'edit')),

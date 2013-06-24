@@ -303,9 +303,8 @@ display_slides();"));
             }
 
             // cell operations
-            $cell = array('align' => "center",
-                'valign' => "top",
-                'class' => 'photoalbum cell',
+            $cell = array(
+                'class' => 'photoalbum cell align-center top',
                 'bgcolor' => "$color");
             if ($cellwidth != 'auto') {
                 if ($cellwidth == 'equal') {
@@ -366,8 +365,8 @@ display_slides();"));
             if ($mode == 'tiles') {
                 $row->pushContent(
                     HTML::td($cell,
-                        HTML::div(array('valign' => 'top'), $url_image),
-                        HTML::div(array('valign' => 'bottom'),
+                        HTML::div(array('class' => 'top'), $url_image),
+                        HTML::div(array('class' => 'bottom'),
                             HTML::div(array('class' => 'boldsmall'),
                                 ($url_text)),
                             HTML::br(),
@@ -380,12 +379,12 @@ display_slides();"));
             } elseif ($mode == 'list') {
                 $desc = ($showdesc != 'none') ? $value["desc"] : '';
                 $row->pushContent(
-                    HTML::td(array("valign" => "top",
+                    HTML::td(array("class" => "top",
                             "nowrap" => 0,
                             "bgcolor" => $color),
                         HTML::div(array('class' => 'boldsmall'), ($url_text))));
                 $row->pushContent(
-                    HTML::td(array("valign" => "top",
+                    HTML::td(array("class" => "top",
                             "nowrap" => 0,
                             "bgcolor" => $color),
                         HTML::div(array('class' => 'gensmall'),
@@ -396,7 +395,7 @@ display_slides();"));
 
                 if ($desc != '')
                     $row->pushContent(
-                        HTML::td(array("valign" => "top",
+                        HTML::td(array("class" => "top",
                                 "nowrap" => 0,
                                 "bgcolor" => $color),
                             HTML::div(array('class' => 'gensmall'), $desc)));
@@ -493,9 +492,7 @@ display_slides();"));
         }
 
         //create main table
-        $table_attributes = array("border" => 0,
-            "cellpadding" => 5,
-            "cellspacing" => 2,
+        $table_attributes = array(
             "class" => "photoalbum",
             "width" => $tablewidth ? $tablewidth : "100%");
 

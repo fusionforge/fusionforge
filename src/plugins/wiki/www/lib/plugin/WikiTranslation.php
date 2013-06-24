@@ -26,17 +26,17 @@
  * Current favorite: translate.google.com if from_lang = en or fr
  *
  * Examples:
- *  <<_WikiTranslation page=HomePage languages=fr >>
+ *  <<WikiTranslation page=HomePage languages=fr >>
  *     Translation service for HomePage into french (redirect to translate.google.com)
- *  <<_WikiTranslation what=pages >>
+ *  <<WikiTranslation what=pages >>
  *     Translation matrix of all pages with proper translations (all in pgsrc)
- *  <<_WikiTranslation what=wikiwords match="W*" limit=20 >>
+ *  <<WikiTranslation what=wikiwords match="W*" limit=20 >>
  *     Translation matrix of the first 20 wikiwords matching "W*"
- *  <<_WikiTranslation string=HomePage languages=fr,de,sv >>
+ *  <<WikiTranslation string=HomePage languages=fr,de,sv >>
  *     Translation matrix for all given languages
- *  <<_WikiTranslation string=HomePage >>
+ *  <<WikiTranslation string=HomePage >>
  *     Translation matrix for all supported languages
- *  <<_WikiTranslation string=HomePage languages=fr >>
+ *  <<WikiTranslation string=HomePage languages=fr >>
  *     Just return the translated string for this language.
  *
  * @author:  Reini Urban
@@ -45,6 +45,8 @@
 /* Container for untranslated pagenames. Needed to show up in locale/po/phpwiki.pot */
 $pgsrc_container =
     _("AddComment") . ',' .
+    _("AddCommentPlugin") . ',' .
+    _("AddingPages") . ',' .
     _("AllPages") . ',' .
     _("AllPagesCreatedByMe") . ',' .
     _("AllPagesLastEditedByMe") . ',' .
@@ -55,9 +57,10 @@ $pgsrc_container =
     _("AsciiMath") . ',' .
     _("AsciiSVG") . ',' .
     _("AtomFeed") . ',' .
-    _("_AuthInfo") . ',' .
+    _("DebugAuthInfo") . ',' .
     _("AuthorHistory") . ',' .
-    _("_BackendInfo") . ',' .
+    _("AuthorHistoryPlugin") . ',' .
+    _("DebugBackendInfo") . ',' .
     _("BackLinks") . ',' .
     _("BlogArchives") . ',' .
     _("BlogJournal") . ',' .
@@ -65,26 +68,35 @@ $pgsrc_container =
     _("CacheTest") . ',' .
     _("Calendar") . ',' .
     _("CalendarList") . ',' .
+    _("CalendarListPlugin") . ',' .
+    _("CalendarPlugin") . ',' .
     _("CategoryCategory") . ',' .
     _("CategoryHomePages") . ',' .
     _("CategoryPage") . ',' .
     _("Chart") . ',' .
+    _("Chown") . ',' .
     _("Comment") . ',' .
+    _("CommentPlugin") . ',' .
     _("CreateBib") . ',' .
     _("CreatePage") . ',' .
     _("CreateToc") . ',' .
+    _("CreateTocPlugin") . ',' .
     _("CurrentTime") . ',' .
     _("DeadEndPages") . ',' .
     _("DebugInfo") . ',' .
     _("Diff") . ',' .
     _("DynamicIncludePage") . ',' .
     _("EditMetaData") . ',' .
+    _("EditMetaDataPlugin") . ',' .
     _("ExternalSearch") . ',' .
+    _("ExternalSearchPlugin") . ',' .
     _("FacebookLike") . ',' .
     _("FileInfo") . ',' .
     _("FindPage") . ',' .
     _("FoafViewer") . ',' .
+    _("FoafViewerPlugin") . ',' .
     _("FrameInclude") . ',' .
+    _("FrameIncludePlugin") . ',' .
     _("FullRecentChanges") . ',' .
     _("FullTextSearch") . ',' .
     _("FuzzyPages") . ',' .
@@ -92,45 +104,14 @@ $pgsrc_container =
     _("GooglePlugin") . ',' .
     _("GoTo") . ',' .
     _("GraphViz") . ',' .
-    _("_GroupInfo") . ',' .
+    _("DebugGroupInfo") . ',' .
     _("HelloWorld") . ',' .
-    _("Help/AddCommentPlugin") . ',' .
-    _("Help/AddingPages") . ',' .
-    _("Help/AuthorHistoryPlugin") . ',' .
-    _("Help/CalendarListPlugin") . ',' .
-    _("Help/CalendarPlugin") . ',' .
-    _("Help/CommentPlugin") . ',' .
-    _("Help/CreateTocPlugin") . ',' .
-    _("Help/EditMetaDataPlugin") . ',' .
-    _("Help/ExternalSearchPlugin") . ',' .
-    _("Help/FoafViewerPlugin") . ',' .
-    _("Help/FrameIncludePlugin") . ',' .
-    _("Help/HelloWorldPlugin") . ',' .
-    _("Help/IncludePagePlugin") . ',' .
-    _("Help/LinkIcons") . ',' .
-    _("Help/MagicPhpWikiURLs") . ',' .
-    _("Help/MoreAboutMechanics") . ',' .
-    _("Help/OldStyleTablePlugin") . ',' .
-    _("Help/PhotoAlbumPlugin") . ',' .
-    _("Help/PhpHighlightPlugin") . ',' .
-    _("Help/PhpWeatherPlugin") . ',' .
-    _("Help/PhpWiki") . ',' .
-    _("Help/PloticusPlugin") . ',' .
-    _("Help/RawHtmlPlugin") . ',' .
-    _("Help/RedirectToPlugin") . ',' .
-    _("Help/RichTablePlugin") . ',' .
-    _("Help/SystemInfoPlugin") . ',' .
-    _("Help/TranscludePlugin") . ',' .
-    _("Help/UnfoldSubpagesPlugin") . ',' .
-    _("Help/UpLoadPlugin") . ',' .
-    _("Help/WabiSabi") . ',' .
-    _("Help/WikiBlogPlugin") . ',' .
-    _("Help/WikiPlugin") . ',' .
-    _("Help/WikiWikiWeb") . ',' .
+    _("HelloWorldPlugin") . ',' .
     _("HomePageAlias") . ',' .
     _("HtmlConverter") . ',' .
     _("Imdb") . ',' .
     _("IncludePage") . ',' .
+    _("IncludePagePlugin") . ',' .
     _("IncludePages") . ',' .
     _("IncludeSiteMap") . ',' .
     _("IncludeTree") . ',' .
@@ -140,16 +121,20 @@ $pgsrc_container =
     _("LdapSearch") . ',' .
     _("LikePages") . ',' .
     _("LinkDatabase") . ',' .
+    _("LinkIcons") . ',' .
     _("LinkSearch") . ',' .
     _("ListPages") . ',' .
     _("ListRelations") . ',' .
     _("ListSubpages") . ',' .
+    _("MagicPhpWikiURLs") . ',' .
     _("MediawikiTable") . ',' .
     _("ModeratedPage") . ',' .
+    _("MoreAboutMechanics") . ',' .
     _("MostPopular") . ',' .
     _("NewPagesPerUser") . ',' .
     _("NoCache") . ',' .
     _("OldStyleTable") . ',' .
+    _("OldStyleTablePlugin") . ',' .
     _("OrphanedPages") . ',' .
     _("PageDump") . ',' .
     _("PageGroup") . ',' .
@@ -158,28 +143,29 @@ $pgsrc_container =
     _("PageTrail") . ',' .
     _("PasswordReset") . ',' .
     _("PhotoAlbum") . ',' .
+    _("PhotoAlbumPlugin") . ',' .
     _("PhpHighlight") . ',' .
+    _("PhpHighlightPlugin") . ',' .
     _("PhpWeather") . ',' .
-    _("PhpWikiAdministration/Chmod") . ',' .
-    _("PhpWikiAdministration/Chown") . ',' .
-    _("PhpWikiAdministration/Remove") . ',' .
-    _("PhpWikiAdministration/Rename") . ',' .
-    _("PhpWikiAdministration/Replace") . ',' .
-    _("PhpWikiAdministration/SetAcl") . ',' .
+    _("PhpWeatherPlugin") . ',' .
+    _("PhpWiki") . ',' .
+    _("PhpWikiAdministration") . ',' .
     _("PhpWikiDocumentation") . ',' .
     _("PhpWikiPoll") . ',' .
     _("Ploticus") . ',' .
+    _("PloticusPlugin") . ',' .
     _("PluginManager") . ',' .
     _("PopularNearby") . ',' .
     _("PopularTags") . ',' .
     _("PopUp") . ',' .
     _("PreferenceApp") . ',' .
-    _("_PreferencesInfo") . ',' .
+    _("PreferencesInfo") . ',' .
     _("PrevNext") . ',' .
     _("Processing") . ',' .
     _("RandomPage") . ',' .
     _("RateIt") . ',' .
     _("RawHtml") . ',' .
+    _("RawHtmlPlugin") . ',' .
     _("RecentChanges") . ',' .
     _("RecentChangesCached") . ',' .
     _("RecentComments") . ',' .
@@ -187,21 +173,29 @@ $pgsrc_container =
     _("RecentReferrers") . ',' .
     _("RecentVisitors") . ',' .
     _("RedirectTo") . ',' .
+    _("RedirectToPlugin") . ',' .
     _("RelatedChanges") . ',' .
     _("ReleaseNotes") . ',' .
-    _("_Retransform") . ',' .
+    _("Remove") . ',' .
+    _("Rename") . ',' .
+    _("Replace") . ',' .
+    _("DebugRetransform") . ',' .
     _("RichTable") . ',' .
+    _("RichTablePlugin") . ',' .
     _("RssFeed") . ',' .
     _("SearchHighlight") . ',' .
     _("SemanticRelations") . ',' .
     _("SemanticSearch") . ',' .
     _("SemanticSearchAdvanced") . ',' .
+    _("SetAcl") . ',' .
     _("SiteMap") . ',' .
     _("SpellCheck") . ',' .
+    _("SpecialPages") . ',' .
     _("SqlResult") . ',' .
     _("SyncWiki") . ',' .
     _("SyntaxHighlighter") . ',' .
     _("SystemInfo") . ',' .
+    _("SystemInfoPlugin") . ',' .
     _("Template") . ',' .
     _("TeX2png") . ',' .
     _("text2png") . ',' .
@@ -209,22 +203,24 @@ $pgsrc_container =
     _("TexToPng") . ',' .
     _("TitleSearch") . ',' .
     _("Transclude") . ',' .
+    _("TranscludePlugin") . ',' .
     _("TranslateText") . ',' .
     _("UnfoldSubpages") . ',' .
+    _("UnfoldSubpagesPlugin") . ',' .
     _("UpLoad") . ',' .
+    _("UpLoadPlugin") . ',' .
     _("UriResolver") . ',' .
     _("UserPreferences") . ',' .
     _("UserRatings") . ',' .
     _("Video") . ',' .
     _("VisualWiki") . ',' .
+    _("WabiSabi") . ',' .
     _("WantedPages") . ',' .
     _("WantedPagesOld") . ',' .
     _("WatchPage") . ',' .
     _("WhoIsOnline") . ',' .
-    _("WikiAdminChmod") . ',' .
     _("WikiAdminChown") . ',' .
     _("WikiAdminDeleteAcl") . ',' .
-    _("WikiAdminMarkup") . ',' .
     _("WikiAdminPurge") . ',' .
     _("WikiAdminRemove") . ',' .
     _("WikiAdminRename") . ',' .
@@ -235,17 +231,20 @@ $pgsrc_container =
     _("WikiAdminSetExternal") . ',' .
     _("WikiAdminUtils") . ',' .
     _("WikiBlog") . ',' .
+    _("WikiBlogPlugin") . ',' .
     _("WikicreoleTable") . ',' .
     _("WikiForm") . ',' .
     _("WikiFormRich") . ',' .
     _("WikiForum") . ',' .
+    _("WikiPlugin") . ',' .
     _("WikiPoll") . ',' .
-    _("_WikiTranslation") . ',' .
+    _("WikiTranslation") . ',' .
+    _("WikiWikiWeb") . ',' .
     _("YouTube");
 
 require_once 'lib/PageList.php';
 
-class WikiPlugin__WikiTranslation
+class WikiPlugin_WikiTranslation
     extends WikiPlugin
 {
 
@@ -281,23 +280,6 @@ class WikiPlugin__WikiTranslation
     {
         if ($lang != $this->lang)
             update_locale($lang);
-        if ($lang == 'en') {
-            // Hack alert! we need hash for stepping through it, even if it's
-            // in the wrong language
-            include (FindFile("locale/de/LC_MESSAGES/phpwiki.php", 0, 'reinit'));
-            foreach ($locale as $en => $de) {
-                $locale[$en] = $en;
-            }
-            // gettext module loaded: must load the LC_MESSAGES php hash
-        } elseif (function_exists('bindtextdomain')) {
-            include (FindFile("locale/$lang/LC_MESSAGES/phpwiki.php", 0, 'reinit'));
-            //include (FindLocalizedFile("LC_MESSAGES/phpwiki.php", 0,'reinit'));
-            // we already have a $locale, but maybe it's in the wrong language
-        } elseif ($lang != $this->lang or empty($GLOBALS['locale'])) {
-            include (FindFile("locale/$lang/LC_MESSAGES/phpwiki.php", 0, 'reinit'));
-        } else {
-            $locale = & $GLOBALS['locale'];
-        }
         $this->_locales[$lang] = $locale;
     }
 

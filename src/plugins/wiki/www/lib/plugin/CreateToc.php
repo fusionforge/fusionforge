@@ -29,7 +29,6 @@
  * @author:  Reini Urban, Marc-Etienne Vargenau
  *
  * Known problems:
- * - it will crash with old markup and Apache2 (?)
  * - Certain corner-edges will not work with TOC_FULL_SYNTAX.
  *   I believe I fixed all of them now, but who knows?
  * - bug #969495 "existing labels not honored" seems to be fixed.
@@ -430,13 +429,6 @@ class WikiPlugin_CreateToc
         }
 
         $current = $page->getCurrentRevision();
-        //FIXME: I suspect this only to crash with Apache2
-        if (!$current->get('markup') or $current->get('markup') < 2) {
-            if (in_array(php_sapi_name(), array('apache2handler', 'apache2filter'))) {
-                return $this->error(_("CreateToc disabled for old markup."));
-            }
-        }
-
         $content = $r->getContent();
 
         $html = HTML::div(array('class' => 'toc', 'id' => GenerateId("toc")));

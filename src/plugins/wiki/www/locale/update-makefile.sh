@@ -29,7 +29,7 @@ po_files () {
     find po -name "*.po" |
 	sort |
 	sed 's/^/po: /p;
-             s|^.*/\(.*\)\.po$|mo: \1/LC_MESSAGES/phpwiki.mo \1/LC_MESSAGES/phpwiki.php|;'
+             s|^.*/\(.*\)\.po$|mo: \1/LC_MESSAGES/phpwiki.mo|;'
 }
 
 # Find all php and html source code which should be scanned

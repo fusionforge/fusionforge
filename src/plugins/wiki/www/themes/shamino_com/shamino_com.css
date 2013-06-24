@@ -175,6 +175,18 @@ a:focus {
     vertical-align: top;
 }
 
+.bottom {
+    vertical-align: bottom;
+}
+
+.middle {
+    vertical-align: middle;
+}
+
+.baseline {
+    vertical-align: baseline;
+}
+
 .nowrap {
     white-space: nowrap;
 }

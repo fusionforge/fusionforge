@@ -23,7 +23,7 @@
 require_once 'lib/Template.php';
 /**
  */
-class WikiPlugin__BackendInfo
+class WikiPlugin_DebugBackendInfo
     extends WikiPlugin
 {
     function getDescription()
@@ -52,9 +52,7 @@ class WikiPlugin__BackendInfo
         $html = HTML(HTML::h3(fmt("Querying backend directly for “%s”",
             $page)));
 
-        $table = HTML::table(array('border' => 1,
-            'cellpadding' => 2,
-            'cellspacing' => 0));
+        $table = HTML::table(array('class' => 'bordered'));
         $pagedata = $backend->get_pagedata($page);
         if (!$pagedata) {
             // FIXME: invalid HTML
@@ -103,7 +101,7 @@ class WikiPlugin__BackendInfo
      * Really should have a _fixupPagedata and _fixupVersiondata, but this works.
      * also used in plugin/EditMetaData
      */
-    private function _fixupData(&$data, $prefix = '')
+    protected function _fixupData(&$data, $prefix = '')
     {
         if (!is_array($data)) return;
 
@@ -129,16 +127,12 @@ class WikiPlugin__BackendInfo
                 // how to indent this table?
                 $val = unserialize($val);
                 $this->_fixupData($val, $fullkey);
-                $data[$key] = HTML::table(array('border' => 1,
-                        'cellpadding' => 2,
-                        'cellspacing' => 0),
+                $data[$key] = HTML::table(array('class' => 'bordered'),
                     $this->_showhash(false, $val, $fullkey));
             } elseif (is_array($val)) {
                 // how to indent this table?
                 $this->_fixupData($val, $fullkey);
-                $data[$key] = HTML::table(array('border' => 1,
-                        'cellpadding' => 2,
-                        'cellspacing' => 0),
+                $data[$key] = HTML::table(array('class' => 'bordered'),
                     $this->_showhash(false, $val, $fullkey));
             } elseif (is_object($val)) {
                 // how to indent this table?
@@ -146,9 +140,7 @@ class WikiPlugin__BackendInfo
                 print_r($val);
                 $val = HTML::pre(ob_get_contents());
                 ob_end_clean();
-                $data[$key] = HTML::table(array('border' => 1,
-                        'cellpadding' => 2,
-                        'cellspacing' => 0),
+                $data[$key] = HTML::table(array('class' => 'bordered'),
                     $this->_showhash(false, $val, $fullkey));
             } elseif ($key and $key == '%content') {
                 if ($val === true)
@@ -162,26 +154,25 @@ class WikiPlugin__BackendInfo
     }
 
     /* also used in plugin/EditMetaData */
-    private function _showhash($heading, $hash, $prefix = '')
+    protected function _showhash($heading, $hash, $prefix = '')
     {
         $rows = array();
         if ($heading)
-            $rows[] = HTML::tr(array('bgcolor' => '#ffcccc',
-                    'style' => 'color:#000000'),
+            $rows[] = HTML::tr(array(
+                    'style' => 'color:#000;background-color:#ffcccc'),
                 HTML::td(array('colspan' => 2,
-                        'style' => 'color:#000000'),
+                        'style' => 'color:#000'),
                     $heading));
         if (!is_array($hash)) return array();
         ksort($hash);
         foreach ($hash as $key => $val) {
             if ($this->chunk_split and is_string($val)) $val = chunk_split($val);
-            $rows[] = HTML::tr(HTML::td(array('align' => 'right',
-                        'bgcolor' => '#cccccc',
-                        'style' => 'color:#000000'),
+            $rows[] = HTML::tr(HTML::td(array('class' => 'align-right',
+                        'style' => 'color:#000;background-color:#ccc'),
                     HTML(HTML::raw('&nbsp;'), $key,
                         HTML::raw('&nbsp;'))),
-                HTML::td(array('bgcolor' => '#ffffff',
-                        'style' => 'color:#000000'),
+                HTML::td(array(
+                        'style' => 'color:#000;background-color:#fff'),
                     $this->_showvalue($key, $val, $prefix))
             );
         }
@@ -189,7 +180,7 @@ class WikiPlugin__BackendInfo
     }
 
     /* also used in plugin/EditMetaData */
-    private function _showvalue($key, $val, $prefix = '')
+    protected function _showvalue($key, $val, $prefix = '')
     {
         return $val ? $val : HTML::raw('&nbsp;');
     }

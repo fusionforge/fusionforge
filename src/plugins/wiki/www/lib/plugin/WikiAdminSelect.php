@@ -23,7 +23,7 @@
 
 /**
  * Allows selection of multiple pages which get passed to other
- * WikiAdmin plugins then. Then do Rename, Remove, Chmod, Chown, ...
+ * WikiAdmin plugins then. Then do Rename, Remove, Chown, ...
  *
  * Usage:   <<WikiAdminSelect>>
  * Author:  Reini Urban <rurban@x-ray.at>
@@ -208,7 +208,7 @@ class WikiPlugin_WikiAdminSelect
                     $args["p[$page]"] = 1;
                 }
                 header("Location: " .
-                    WikiURL(_("PhpWikiAdministration") . "/" . _($plugin_action), $args, 1));
+                    WikiURL(__("PhpWikiAdministration")."/".__($plugin_action), $args, 1));
                 exit();
             }
         } elseif (empty($args['s'])) {

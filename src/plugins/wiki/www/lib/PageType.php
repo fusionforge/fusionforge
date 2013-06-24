@@ -365,18 +365,12 @@ class PageFormatter
     {
         $this->_page = $page;
         $this->_meta = $meta;
-        if (!empty($meta['markup']))
-            $this->_markup = $meta['markup'];
-        else
-            $this->_markup = 2; // dump used old-markup as empty.
-        // FIXME: To be able to restore old plain-backups we should keep markup 1 as default.
-        // New policy: default = new markup (old crashes quite often)
     }
 
     function _transform($text)
     {
         include_once 'lib/BlockParser.php';
-        return TransformText($text, $this->_markup);
+        return TransformText($text);
     }
 
     /** Transform the page text.
@@ -535,7 +529,7 @@ class PageFormatter_pdf extends PageFormatter
     function _transform($text)
     {
         include_once 'lib/BlockParser.php';
-        return TransformText($text, $this->_markup);
+        return TransformText($text);
     }
 
     // one page or set of pages?

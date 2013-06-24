@@ -57,17 +57,14 @@ class _PageList_Column_base
         $this->_heading = $default_heading;
 
         if ($align) {
-            $this->_tdattr['align'] = $align;
+            $this->_tdattr['class'] = "align-".$align;
         }
     }
 
     function format($pagelist, $page_handle, &$revision_handle)
     {
-        $nbsp = HTML::raw('&nbsp;');
         return HTML::td($this->_tdattr,
-            $nbsp,
-            $this->_getValue($page_handle, $revision_handle),
-            $nbsp);
+            $this->_getValue($page_handle, $revision_handle));
     }
 
     function getHeading()
@@ -84,7 +81,6 @@ class _PageList_Column_base
     function heading()
     {
         global $request;
-        $nbsp = HTML::raw('&nbsp;');
         // allow sorting?
         if (1 /* or in_array($this->_field, PageList::sortable_columns())*/) {
             // multiple comma-delimited sortby args: "+hits,+pagename"
@@ -96,11 +92,11 @@ class _PageList_Column_base
                 $request->GetURLtoSelf(array('sortby' => $sortby)),
                     'class' => 'pagetitle',
                     'title' => sprintf(_("Sort by %s"), $this->_field)),
-                $nbsp, HTML::u($this->_heading), $nbsp);
+                HTML::u($this->_heading));
         } else {
-            $s = HTML($nbsp, HTML::u($this->_heading), $nbsp);
+            $s = HTML::u($this->_heading);
         }
-        return HTML::th(array('align' => 'center'), $s);
+        return HTML::th($s);
     }
 
     // new grid-style sortable heading
@@ -109,7 +105,6 @@ class _PageList_Column_base
     {
         global $WikiTheme, $request;
         // allow sorting?
-        $nbsp = HTML::raw('&nbsp;');
         if (!$WikiTheme->DUMP_MODE /* or in_array($this->_field, PageList::sortable_columns()) */) {
             // TODO: add to multiple comma-delimited sortby args: "+hits,+pagename"
             $src = false;
@@ -118,7 +113,7 @@ class _PageList_Column_base
                 $noimg = HTML::img(array('src' => $noimg_src,
                     'alt' => '.'));
             else
-                $noimg = $nbsp;
+                $noimg = HTML::raw('');
             if ($pagelist->sortby($colNum, 'check')) { // show icon? request or plugin arg
                 $sortby = $pagelist->sortby($colNum, 'flip_order');
                 $desc = (substr($sortby, 0, 1) == '-'); // +pagename or -pagename
@@ -142,14 +137,12 @@ class _PageList_Column_base
                     'id' => $pagelist->id)),
                     'class' => 'gridbutton',
                     'title' => sprintf(_("Click to sort by %s"), $reverse . $this->_field)),
-                $nbsp, $this->_heading,
-                $nbsp, $img,
-                $nbsp);
+                $this->_heading,
+                $img);
         } else {
-            $s = HTML($nbsp, $this->_heading, $nbsp);
+            $s = HTML($this->_heading);
         }
-        return HTML::th(array('align' => 'center', 'valign' => 'middle',
-            'class' => 'gridbutton'), $s);
+        return HTML::th(array('class' => 'gridbutton'), $s);
     }
 
     /**
@@ -233,9 +226,7 @@ class _PageList_Column_size extends _PageList_Column
     function format($pagelist, $page_handle, &$revision_handle)
     {
         return HTML::td($this->_tdattr,
-            HTML::raw('&nbsp;'),
-            $this->_getValuePageList($pagelist, $page_handle, $revision_handle),
-            HTML::raw('&nbsp;'));
+            $this->_getValuePageList($pagelist, $page_handle, $revision_handle));
     }
 
     function _getValuePageList($pagelist, $page_handle, &$revision_handle)
@@ -321,17 +312,14 @@ class _PageList_Column_checkbox extends _PageList_Column
     function format($pagelist, $page_handle, &$revision_handle)
     {
         return HTML::td($this->_tdattr,
-            HTML::raw('&nbsp;'),
-            $this->_getValuePageList($pagelist, $page_handle, $revision_handle),
-            HTML::raw('&nbsp;'));
+            $this->_getValuePageList($pagelist, $page_handle, $revision_handle));
     }
 
     // don't sort this javascript button
     function button_heading($pagelist, $colNum)
     {
-        $s = HTML(HTML::raw('&nbsp;'), $this->_heading, HTML::raw('&nbsp;'));
-        return HTML::th(array('align' => 'center', 'valign' => 'middle',
-            'class' => 'gridbutton'), $s);
+        $s = HTML($this->_heading);
+        return HTML::th(array('class' => 'gridbutton'), $s);
     }
 }
 
@@ -386,8 +374,7 @@ class _PageList_Column_content extends _PageList_Column
             if (!$this->search and !empty($HTTP_POST_VARS['admin_replace'])) {
                 $this->search = $HTTP_POST_VARS['admin_replace']['from'];
             }
-            $this->_heading .= sprintf(_(" ... around %s"),
-                '»' . $this->search . '«');
+            $this->_heading .= sprintf(_(" ... around “%s”"), $this->search);
         }
     }
 
@@ -440,11 +427,8 @@ class _PageList_Column_content extends _PageList_Column
                             . "..." . " "
                             . ($score ? sprintf("[%0.1f]", $score) : ""))));
             } else {
-                if (strpos($c, " ") !== false)
-                    $c = "";
-                else
-                    $c = sprintf(_("%s not found"), '»' . $search . '«');
-                return HTML::div(array('style' => 'font-size:x-small', 'align' => 'center'),
+                $c = sprintf(_("“%s” not found"), $search);
+                return HTML::div(array('class' => 'align-center'),
                     $c . " " . ($score ? sprintf("[%0.1f]", $score) : ""));
             }
         } elseif (($len = strlen($c)) > $this->bytes) {
@@ -452,7 +436,7 @@ class _PageList_Column_content extends _PageList_Column
         }
         include_once 'lib/BlockParser.php';
         // false --> don't bother processing hrefs for embedded WikiLinks
-        $ct = TransformText($c, $revision_handle->get('markup'), false);
+        $ct = TransformText($c, false);
         if (empty($pagelist->_sortby[$this->_field]))
             unset($revision_handle->_data['%pagedata']['_cached_html']);
         return HTML::div(array('style' => 'font-size:x-small'),
@@ -768,7 +752,6 @@ class PageList
             'hits' => null,
             'size' => null,
             'version' => null,
-            'markup' => null,
             'external' => null,
         );
     }
@@ -1271,7 +1254,6 @@ class PageList
                 => new _PageList_Column('hits', _("Hits"), 'right'),
                 'size'
                 => new _PageList_Column_size('rev:size', _("Size"), 'right'),
-                /*array('align' => 'char', 'char' => ' ')*/
                 'summary'
                 => new _PageList_Column('rev:summary', _("Last Summary")),
                 'version'
@@ -1296,8 +1278,6 @@ class PageList
                 'minor'
                 => new _PageList_Column_bool('rev:is_minor_edit',
                     _("Minor Edit"), _("minor")),
-                'markup'
-                => new _PageList_Column('rev:markup', _("Markup")),
                 // 'rating' initialised by the wikilens theme hook: addPageListColumn
                 /*
                 'rating'
@@ -1571,17 +1551,12 @@ class PageList
             $one_row = $this->_renderPageRow($page, $i++);
             $rows[] = $one_row;
         }
-        $table = HTML::table(array('cellpadding' => 0,
-            'cellspacing' => 1,
-            'border' => 0,
-            'width' => '100%',
-            'class' => 'pagelist'));
+        $table = HTML::table(array('class' => 'fullwidth pagelist'));
         if ($caption) {
             $table->pushContent(HTML::caption(array('align' => 'top'), $caption));
         }
 
         $row = HTML::tr();
-        $table_summary = array();
         $i = 1; // start with 1!
         foreach ($this->_columns as $col) {
             $heading = $col->button_heading($this, $i);
@@ -1592,13 +1567,8 @@ class PageList
             ) {
             }
             $row->pushContent($heading);
-            if (is_string($col->getHeading()))
-                $table_summary[] = $col->getHeading();
             $i++;
         }
-        // Table summary for non-visual browsers.
-        $table->setAttr('summary', sprintf(_("Columns: %s."),
-            join(", ", $table_summary)));
         $table->pushContent(HTML::colgroup(array('span' => count($this->_columns))));
         if ($do_paging) {
             if ($tokens === false) {
@@ -1680,7 +1650,7 @@ class PageList
                 $this->_options['limit']);
             if ($tokens) {
                 $paging = Template("pagelink", $tokens);
-                $out->pushContent(HTML::table(array('width' => '100%'), $paging));
+                $out->pushContent(HTML::table(array('class' => 'fullwidth'), $paging));
             }
         }
 
@@ -1699,7 +1669,7 @@ class PageList
                 $length += 1;
             }
             $width = sprintf("%d", 100 / $this->_options['cols']) . '%';
-            $cols = HTML::tr(array('valign' => 'top'));
+            $cols = HTML::tr(array('class' => 'top'));
             for ($i = $offset; $i < $offset + $count; $i += $length) {
                 $this->_saveOptions(array('cols' => 0, 'paging' => 'none'));
                 $this->_pages = array_slice($this->_pages, $i, $length);
@@ -1791,7 +1761,7 @@ class PageList
         }
         $out->pushContent($list);
         if ($do_paging and $tokens) {
-            $out->pushContent(HTML::table(array('width' => '100%'), $paging));
+            $out->pushContent(HTML::table(array('class' => 'fullwidth'), $paging));
         }
         return $out;
     }

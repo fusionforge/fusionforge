@@ -156,7 +156,7 @@ class WikiToHtml
     function convert()
     {
         require_once 'lib/BlockParser.php';
-        $xmlcontent = TransformText($this->_wikitext, 2.0, $this->_request->getArg('pagename'));
+        $xmlcontent = TransformText($this->_wikitext, $this->_request->getArg('pagename'));
         $this->_html = $xmlcontent->AsXML();
 
         $this->replace_inside_html();
@@ -298,7 +298,7 @@ function replace_rich_table($matched)
         $plugin = "<?plugin RichTable " . $plugin . " ?>";
 
         require_once 'lib/BlockParser.php';
-        $xmlcontent = TransformText($plugin, 2.0, $GLOBALS['request']->getArg('pagename'));
+        $xmlcontent = TransformText($plugin, $GLOBALS['request']->getArg('pagename'));
         return $xmlcontent->AsXML();
     }
 }

@@ -87,7 +87,7 @@ class CacheableMarkup extends XmlContent
         }
         if (preg_match("/^\w+$/", $packed))
             return $packed;
-        // happened with _BackendInfo problem also.
+        // happened with DebugBackendInfo problem also.
         trigger_error("Can't unpack bad cached markup. Probably php_zlib extension not loaded.",
             E_USER_WARNING);
         return false;
@@ -237,8 +237,13 @@ class CacheableMarkup extends XmlContent
             ) { // give the content the chance to know about itself or even
                 // to change itself
                 $val = $item->expand($basepage, $this);
-                if ($val) $val->printXML();
-                else trigger_error('empty item ' . print_r($item, true));
+                if ($val) {
+                    $val->printXML();
+                } else {
+                    if (DEBUG) {
+                        trigger_error('empty item ' . print_r($item, true));
+                    }
+                }
             } else {
                 $item->printXML();
             }

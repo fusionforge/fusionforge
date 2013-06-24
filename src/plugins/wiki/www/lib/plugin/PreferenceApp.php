@@ -177,14 +177,14 @@ class WikiPlugin_PreferenceApp
             }
         }
 
-        $table = HTML::table(array('cellpadding' => '5', 'cellspacing' => '1', 'border' => '0'));
+        $table = HTML::table();
         $tr = HTML::tr();
-        $td = HTML::td(array('bgcolor' => '#FFFFFF'));
+        $td = HTML::td(array('style' => 'background-color:#fff'));
         $td->pushContent(" ");
         $tr->pushContent($td);
 
         foreach ($people as $person) {
-            $td = HTML::td(array('bgcolor' => '#FFFFFF'));
+            $td = HTML::td(array('style' => 'background-color:#fff'));
             $td->pushContent(HTML::a(array('href' => WikiURL($person),
                     'class' => 'wiki'
                 ),
@@ -192,10 +192,10 @@ class WikiPlugin_PreferenceApp
             //$td->pushContent(WikiLink(" $person "));
             $tr->pushContent($td);
         }
-        $td = HTML::td(array('bgcolor' => '#FFFFFF'));
+        $td = HTML::td(array('style' => 'background-color:#fff'));
         $td->pushContent(_("Total Units"));
         $tr->pushContent($td);
-        $td = HTML::td(array('bgcolor' => '#FFFFFF'));
+        $td = HTML::td(array('style' => 'background-color:#fff'));
         $td->pushContent(_("Total Voters"));
         $tr->pushContent($td);
         $table->pushContent($tr);
@@ -229,7 +229,7 @@ class WikiPlugin_PreferenceApp
         }
         for ($i = 0; $i < count($pageids); $i++) {
             $tr = HTML::tr();
-            $td = HTML::td(array('align' => 'left', 'bgcolor' => '#f7f7f7'));
+            $td = HTML::td(array('style' => 'text-align:left;background-color:#f7f7f7'));
             $td->pushContent(HTML::a(array('href' => WikiURL($pageids[$i]),
                     'class' => 'wiki'
                 ),
@@ -238,7 +238,7 @@ class WikiPlugin_PreferenceApp
             $total_cans = 0;
             $total_voters = 0;
             for ($j = 0; $j < count($people); $j++) {
-                $td = HTML::td(array('align' => 'right', 'bgcolor' => '#f7f7f7'));
+                $td = HTML::td(array('style' => 'text-align:right;background-color:#f7f7f7'));
                 $output = $outputArray[$people[$j]][$pageids[$i]];
                 $total_cans = $total_cans + $output;
                 if ($output == "") {
@@ -286,15 +286,15 @@ class WikiPlugin_PreferenceApp
             $td->pushContent(HTML::strong($cans));
             $tr->pushContent($td);
         }
-        $td = HTML::td(array('align' => 'right'));
+        $td = HTML::td(array('class' => 'align-right'));
         $td->pushContent(HTML::strong($cans_total));
         $tr->pushContent($td);
-        $td = HTML::td(array('align' => 'right'));
+        $td = HTML::td(array('class' => 'align-right'));
         $td->pushContent(HTML::strong($total_voters));
         $tr->pushContent($td);
         $table->pushContent($tr);
 
-        $table2 = HTML::table(array('bgcolor' => '#dedfdf'));
+        $table2 = HTML::table(array('style' => 'background-color:#dedfdf'));
         $table2->pushContent(HTML::tr(HTML::td($table)));
         $html->pushContent($table2);
 

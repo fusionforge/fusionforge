@@ -141,8 +141,7 @@ class WikiPlugin_SemanticSearch
             $reldef,
             $hiddenfield, HiddenInputs(array('attribute' => '')),
             $instructions, HTML::br(),
-            HTML::table
-            (array('border' => 0, 'cellspacing' => 2),
+            HTML::table(
                 HTML::colgroup(array('span' => 6)),
                 HTML::thead
                 (HTML::tr(
@@ -284,7 +283,7 @@ class WikiPlugin_SemanticSearch
                 _("Warning:"), HTML::br(),
                 _("No relations nor attributes in the whole wikidb defined!")
                 , "\n"
-                , fmt("See %s", WikiLink(_("Help:SemanticRelations")))));
+                , fmt("See %s", WikiLink(_("Help").":"._("SemanticRelations")))));
         extract($args);
         // for convenience and harmony we allow GET requests also.
         if (!$request->isPost()) {

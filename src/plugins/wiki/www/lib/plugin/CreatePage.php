@@ -115,13 +115,11 @@ class WikiPlugin_CreatePage
                 return $this->error(fmt("%s already exists", WikiLink($s)));
             } else {
                 $user = $request->getUser();
-                $meta = array('markup' => 2.0,
-                    'author' => $user->getId());
+                $meta = array('author' => $user->getId());
                 if (!empty($param['template']) and !$initial_content) {
                     $tmplpage = $dbi->getPage($template);
                     $currenttmpl = $tmplpage->getCurrentRevision();
                     $initial_content = $currenttmpl->getPackedContent();
-                    $meta['markup'] = $currenttmpl->_data['markup'];
 
                     if (preg_match('/<noinclude>.+<\/noinclude>/s', $initial_content)) {
                         $initial_content = preg_replace("/<noinclude>.+?<\/noinclude>/s", "",

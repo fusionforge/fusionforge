@@ -501,7 +501,6 @@ function putPage($params)
         );
         $version_meta = array('author' => $userid,
             'author_id' => $userid,
-            'markup' => 2.0,
             'summary' => isset($summary) ? $summary : _("xml-rpc change"),
             'mtime' => $now,
             'pagetype' => 'wikitext',

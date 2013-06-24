@@ -154,7 +154,7 @@ class WikiPlugin_IncludePage
         array_push($included_pages, $page);
 
         include_once 'lib/BlockParser.php';
-        $content = TransformText($ct, $r->get('markup'), $page);
+        $content = TransformText($ct, $page);
 
         array_pop($included_pages);
 

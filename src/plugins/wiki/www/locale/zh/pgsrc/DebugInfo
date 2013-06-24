@@ -3,10 +3,9 @@ Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=DebugInfo;
   flags=PAGE_LOCKED;
-  markup=2;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
 頁面的詳細資料,對於除錯非常有用.
 
-<<_BackendInfo page||='' >>
+<<DebugBackendInfo page||='' >>

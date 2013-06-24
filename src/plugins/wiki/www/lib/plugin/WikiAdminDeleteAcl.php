@@ -22,7 +22,7 @@
  */
 
 /**
- * Set simple individual PagePermissions
+ * Delete individual PagePermissions
  *
  * Usage:   <<WikiAdminAclDelete >> or called via WikiAdminSelect
  * Author:  Marc-Etienne Vargenau, Alcatel-Lucent
@@ -80,7 +80,7 @@ class WikiPlugin_WikiAdminDeleteAcl
     function run($dbi, $argstr, &$request, $basepage)
     {
         if ($request->getArg('action') != 'browse') {
-            if ($request->getArg('action') != _("PhpWikiAdministration/AdminAclDelete")) {
+            if ($request->getArg('action') != __("PhpWikiAdministration")."/".__("AdminDeleteAcl")) {
                 return $this->disabled(_("Plugin not run: not in browse mode"));
             }
         }

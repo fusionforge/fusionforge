@@ -30,13 +30,8 @@ po/%.po : ${POT_FILE}
 	mkdir -p $*/LC_MESSAGES
 	msgfmt -o $@ $<
 
-# Generate .php from .mo rather than .po to maximize
-# the probability of agreement between .mo and .php files.
-%/LC_MESSAGES/phpwiki.php : %/LC_MESSAGES/phpwiki.mo
-	msgunfmt $< | awk -f make-php-trans.awk > $@
-
 clean :
-	rm -f ./*/LC_MESSAGES/phpwiki.mo ./*/LC_MESSAGES/phpwiki.php
+	rm -f ./*/LC_MESSAGES/phpwiki.mo
 
 depend :
 	$(SHELL) update-makefile.sh
@@ -58,21 +53,21 @@ check:
 # (Run 'make depend' regenerate this section.)
 #
 po: po/de.po
-mo: de/LC_MESSAGES/phpwiki.mo de/LC_MESSAGES/phpwiki.php
+mo: de/LC_MESSAGES/phpwiki.mo
 po: po/es.po
-mo: es/LC_MESSAGES/phpwiki.mo es/LC_MESSAGES/phpwiki.php
+mo: es/LC_MESSAGES/phpwiki.mo
 po: po/fr.po
-mo: fr/LC_MESSAGES/phpwiki.mo fr/LC_MESSAGES/phpwiki.php
+mo: fr/LC_MESSAGES/phpwiki.mo
 po: po/it.po
-mo: it/LC_MESSAGES/phpwiki.mo it/LC_MESSAGES/phpwiki.php
+mo: it/LC_MESSAGES/phpwiki.mo
 po: po/ja.po
-mo: ja/LC_MESSAGES/phpwiki.mo ja/LC_MESSAGES/phpwiki.php
+mo: ja/LC_MESSAGES/phpwiki.mo
 po: po/nl.po
-mo: nl/LC_MESSAGES/phpwiki.mo nl/LC_MESSAGES/phpwiki.php
+mo: nl/LC_MESSAGES/phpwiki.mo
 po: po/sv.po
-mo: sv/LC_MESSAGES/phpwiki.mo sv/LC_MESSAGES/phpwiki.php
+mo: sv/LC_MESSAGES/phpwiki.mo
 po: po/zh.po
-mo: zh/LC_MESSAGES/phpwiki.mo zh/LC_MESSAGES/phpwiki.php
+mo: zh/LC_MESSAGES/phpwiki.mo
 #
 ${POT_FILE}: ../lib/ArchiveCleaner.php
 ${POT_FILE}: ../lib/AtomParser.php
@@ -140,7 +135,6 @@ ${POT_FILE}: ../lib/plugin/AsciiMath.php
 ${POT_FILE}: ../lib/plugin/AsciiSVG.php
 ${POT_FILE}: ../lib/plugin/AtomFeed.php
 ${POT_FILE}: ../lib/plugin/AuthorHistory.php
-${POT_FILE}: ../lib/plugin/_BackendInfo.php
 ${POT_FILE}: ../lib/plugin/BackLinks.php
 ${POT_FILE}: ../lib/plugin/BlogArchives.php
 ${POT_FILE}: ../lib/plugin/BlogJournal.php
@@ -157,6 +151,9 @@ ${POT_FILE}: ../lib/plugin/CreateToc.php
 ${POT_FILE}: ../lib/plugin/CurrentTime.php
 ${POT_FILE}: ../lib/plugin/DeadEndPages.php
 ${POT_FILE}: ../lib/plugin/DebugAuthInfo.php
+${POT_FILE}: ../lib/plugin/DebugBackendInfo.php
+${POT_FILE}: ../lib/plugin/DebugGroupInfo.php
+${POT_FILE}: ../lib/plugin/DebugRetransform.php
 ${POT_FILE}: ../lib/plugin/Diff.php
 ${POT_FILE}: ../lib/plugin/DynamicIncludePage.php
 ${POT_FILE}: ../lib/plugin/EditMetaData.php
@@ -171,7 +168,6 @@ ${POT_FILE}: ../lib/plugin/GoogleMaps.php
 ${POT_FILE}: ../lib/plugin/GooglePlugin.php
 ${POT_FILE}: ../lib/plugin/GoTo.php
 ${POT_FILE}: ../lib/plugin/GraphViz.php
-${POT_FILE}: ../lib/plugin/_GroupInfo.php
 ${POT_FILE}: ../lib/plugin/HelloWorld.php
 ${POT_FILE}: ../lib/plugin/HtmlConverter.php
 ${POT_FILE}: ../lib/plugin/Imdb.php
@@ -210,7 +206,7 @@ ${POT_FILE}: ../lib/plugin/PopularNearby.php
 ${POT_FILE}: ../lib/plugin/PopularTags.php
 ${POT_FILE}: ../lib/plugin/PopUp.php
 ${POT_FILE}: ../lib/plugin/PreferenceApp.php
-${POT_FILE}: ../lib/plugin/_PreferencesInfo.php
+${POT_FILE}: ../lib/plugin/PreferencesInfo.php
 ${POT_FILE}: ../lib/plugin/PrevNext.php
 ${POT_FILE}: ../lib/plugin/Processing.php
 ${POT_FILE}: ../lib/plugin/RandomPage.php
@@ -223,7 +219,6 @@ ${POT_FILE}: ../lib/plugin/RecentEdits.php
 ${POT_FILE}: ../lib/plugin/RecentReferrers.php
 ${POT_FILE}: ../lib/plugin/RedirectTo.php
 ${POT_FILE}: ../lib/plugin/RelatedChanges.php
-${POT_FILE}: ../lib/plugin/_Retransform.php
 ${POT_FILE}: ../lib/plugin/RichTable.php
 ${POT_FILE}: ../lib/plugin/RssFeed.php
 ${POT_FILE}: ../lib/plugin/SearchHighlight.php
@@ -254,10 +249,8 @@ ${POT_FILE}: ../lib/plugin/WantedPagesOld.php
 ${POT_FILE}: ../lib/plugin/WantedPages.php
 ${POT_FILE}: ../lib/plugin/WatchPage.php
 ${POT_FILE}: ../lib/plugin/WhoIsOnline.php
-${POT_FILE}: ../lib/plugin/WikiAdminChmod.php
 ${POT_FILE}: ../lib/plugin/WikiAdminChown.php
 ${POT_FILE}: ../lib/plugin/WikiAdminDeleteAcl.php
-${POT_FILE}: ../lib/plugin/WikiAdminMarkup.php
 ${POT_FILE}: ../lib/plugin/WikiAdminPurge.php
 ${POT_FILE}: ../lib/plugin/WikiAdminRemove.php
 ${POT_FILE}: ../lib/plugin/WikiAdminRename.php
@@ -272,7 +265,7 @@ ${POT_FILE}: ../lib/plugin/WikiForm.php
 ${POT_FILE}: ../lib/plugin/WikiFormRich.php
 ${POT_FILE}: ../lib/plugin/WikiForum.php
 ${POT_FILE}: ../lib/plugin/WikiPoll.php
-${POT_FILE}: ../lib/plugin/_WikiTranslation.php
+${POT_FILE}: ../lib/plugin/WikiTranslation.php
 ${POT_FILE}: ../lib/plugin/YouTube.php
 ${POT_FILE}: ../lib/prepend.php
 ${POT_FILE}: ../lib/purgepage.php

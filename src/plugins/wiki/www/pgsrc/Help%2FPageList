@@ -3,7 +3,6 @@ Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPageList;
   flags="";
-  markup=2;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
@@ -117,7 +116,7 @@ Special, custom columns, either theme or plugin (~WikiAdmin*) specific:
 |= remove              | Remove
 |= renamed_pagename    | Rename to
 |= ratingwidget        | wikilens theme specific.
-|= custom              | See plugin/_WikiTranslation
+|= custom              | See plugin/WikiTranslation
 
 Symbolic 'info=' arguments:
 |= all  | All columns except the special columns

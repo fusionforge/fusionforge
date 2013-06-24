@@ -73,7 +73,7 @@ The general steps to creating a new language module for PhpWiki:
    Empty strings will be kept in english.
 
 3. Run 'make' to automatically create or update any additional files
-   ('.po' => '.mo' => 'phpwiki.php' files).
+   ('.po' => '.mo' files).
 
 4. Create translations of the content for the default pages ('pgsrc'
    files).
@@ -167,10 +167,6 @@ example. If you are stuck or simply can't make any sense of all this,
 just ask one of the PhpWiki programmers on the mailing list to help
 out.
 
-The 'phpwiki.php' files do not need to be created or edited because
-the Makefile will create and update these files automatically. See the
-'Makefile' section below.
-
 
 Default Pages
 -------------
@@ -242,7 +238,7 @@ important translation tasks:
    changed. This makes it easy for translators to spot which items need
    to be updated. (Emacs' po mode also uses this information).
 
- * The necessary '.mo' files and 'phpwiki.php' text files are
+ * The necessary '.mo' files are
    synchronized and sorted according to the translated contents of the
    '.po' files, for each of the locale subdirectories.
 
@@ -287,8 +283,7 @@ When a new language module is added to PhpWiki, the 'Makefile' in the
 msgid "%s: %s"
 msgstr "%s : %s"
 
- 6. To update the compiled translation files (phpwiki.mo and
-    phpwiki.php):
+ 6. To update the compiled translation files (phpwiki.mo):
 
       make
 
@@ -298,8 +293,8 @@ software installed, then send your '.po' files to one of the PhpWiki
 developers who will run Makefile for you.
 
 
-NOTE: "Fuzzy" translations will NOT be included in the final '.mo' and
-'phpwiki.php' files. If you are not using the emacs editor, make sure
+NOTE: "Fuzzy" translations will NOT be included in the final '.mo'
+files. If you are not using the emacs editor, make sure
 to remove the fuzzy marks from any *completed translations* before you
 run the makefile, like this:
 

@@ -1,9 +1,8 @@
-Date: Wed, 19 Dec 2012 13:19:42 +0000
+Date: Mon, 17 Jun 2013 12:20:18 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FR%C3%A8glesDeFormatageDesTextes;
   flags=PAGE_LOCKED;
-  markup=2;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
@@ -32,7 +31,7 @@ _Terme<b>:</b>~<nouvelle ligne> définition_ pour les listes de définitions.%%%
 
 ----
 
-!!! Paragraphes
+== Paragraphes ==
 
 * N'indentez pas les paragraphes
 * Les mots reviennent à la ligne et remplissent les blancs au besoin
@@ -41,7 +40,7 @@ _Terme<b>:</b>~<nouvelle ligne> définition_ pour les listes de définitions.%%%
 * %%''''% provoque un retour à la ligne (y compris dans les titres et les listes)
 
 
-!!! Listes
+== Listes ==
 
 * Un astérisque pour le premier niveau
   * astérisque décalé pour le deuxième niveau, etc.
@@ -58,14 +57,14 @@ _Terme<b>:</b>~<nouvelle ligne> définition_ pour les listes de définitions.%%%
 * un item peut contenir plusieurs paragraphes et autre contenu multi-lignes, il faut juste décalé les items
 
 
-!!! Titres
+== Titres ==
 
 * '=!=' en début de ligne produit un petit titre
 * '=!!=' en début de ligne produit un titre moyen
 * '=!!!=' en début de ligne produit un gros titre
 
 
-!!! Texte pré-formaté
+== Texte pré-formaté ==
 
 * placer des lignes pré-formatées à l'intérieur de =~<pre>=:
   <verbatim>
@@ -89,7 +88,7 @@ _Terme<b>:</b>~<nouvelle ligne> définition_ pour les listes de définitions.%%%
   </verbatim>
 
 
-!!! Paragraphes indentés
+== Paragraphes indentés ==
 
 * deux (ou plus) espaces pour signaler un paragraphe décalé. Les décalages peuvent s'imbriquer 
 
@@ -106,7 +105,7 @@ _Terme<b>:</b>~<nouvelle ligne> définition_ pour les listes de définitions.%%%
   > texte commenté.
 
 
-!!! Emphase
+== Emphase ==
 
 * Utilisez un underscore (<tt>~_</tt>) pour l'emphase (habituellement en _italique_)
 * Utilisez un astérisque (<tt>~*</tt>) pour l'emphase forte (habituellement en *gras*)
@@ -118,7 +117,7 @@ _Terme<b>:</b>~<nouvelle ligne> définition_ pour les listes de définitions.%%%
 
   ne marche pas_
 
-!!! Liens
+== Liens ==
 
 * Les hyperliens vers d'autres pages au sein du Wiki sont créés en plaçant le nom de la 
   page entre crochets : [ceci est un hyperlien] ou en UtilisantDesMotsWiki (de préférence)
@@ -145,7 +144,7 @@ _Terme<b>:</b>~<nouvelle ligne> définition_ pour les listes de définitions.%%%
     <tt>~[nommé|~AutrePage#foo]</tt>.
 
 
-!!! Tableaux
+== Tableaux ==
 
 * les tableaux sont des listes de définitions utilisant le tuyau (<tt>|</tt>) à la place
   de des deux points (<tt>:</tt>)
@@ -175,7 +174,7 @@ _Terme<b>:</b>~<nouvelle ligne> définition_ pour les listes de définitions.%%%
 * les anciens styles de tableau sont possible avec le plugin OldStyleTablePlugin:
 
 
-!!! Langage HTML
+== Langage HTML ==
 
 * certaines balises sont autorisées :
   <b>b</b>, <big>big</big>, <i>i</i>, <small>small</small>,
@@ -186,12 +185,12 @@ _Terme<b>:</b>~<nouvelle ligne> définition_ pour les listes de définitions.%%%
 * < et > sont eux-mêmes
 * les caractères & ne fonctionneront pas
 
-!!! Créer toute sorte de liens spéciaux
+== Créer toute sorte de liens spéciaux ==
 
 * Voir [[URLMagiquesPhpWiki]] pour obtenir des détails gores sur la façon d'écrire 
   divers types de liens de maintenance du wiki.
 
-!!! Insérer des plugins
+== Insérer des plugins ==
 
 * quelques plugins embarqués dans les pages ajoutent des possibilités au Wiki. Par exemple,
   <verbatim>

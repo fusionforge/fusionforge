@@ -1,9 +1,8 @@
 Date: Fri,  7 Dec 2012 15:16:29 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
-  pagename=Help%2F_AuthInfoPlugin;
+  pagename=Help%2FDebugAuthInfoPlugin;
   flags=PAGE_LOCKED;
-  markup=2;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
@@ -17,7 +16,7 @@ cleared everything out though.
 
 == Usage ==
 {{{
-<<_AuthInfo userid||=AdminUser>>
+<<DebugAuthInfo userid||=AdminUser>>
 }}}
 
 == Arguments ==
@@ -35,8 +34,8 @@ See [[DebugAuthInfo]]
 
 == See Also ==
 * [[DebugAuthInfo]] is the corresponding [[Help:ActionPage]].
-* [[Help:_GroupInfoPlugin]]
-* [[Help:_BackendInfoPlugin]]
+* [[Help:DebugGroupInfoPlugin]]
+* [[Help:DebugBackendInfoPlugin]]
 
 <noinclude>
 ----

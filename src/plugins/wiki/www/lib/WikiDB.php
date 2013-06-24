@@ -1969,7 +1969,7 @@ class WikiDB_PageIterator
      */
     function free()
     {
-        $this->_iter->free();
+        // $this->_iter->free();
     }
 
     function reset()

@@ -1,6 +1,9 @@
+<?php
+$action = $request->getArg('action');
+?>
 <br class="clear-floats" />
 
-<?php if ($revision and !$revision->isCurrent()) { ?>
+<?php if ($revision and !$revision->isCurrent() and ($action!='revert')) { ?>
   <p><strong><?php echo _("Note:")?></strong>
      <?php echo _("You are viewing an old revision of this page.")?>
      <?php echo WikiLink($page, 'existing', _("View the current version."))?>.</p>

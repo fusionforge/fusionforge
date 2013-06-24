@@ -1,9 +1,8 @@
-Date: Tue,  2 Apr 2013 15:43:51 +0000
+Date: Tue, 17 Jun 2013 15:43:51 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FTextFormattingRules;
   flags=PAGE_LOCKED;
-  markup=2;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
@@ -269,6 +268,10 @@ renders as
   create links automatically as in: http://c2.com/
 * URLs ending with ##.png##, ##.gif##, or ##.jpg## are inlined if in square brackets, by themselves:
   [[http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/png.png]]
+* You can create footnotes by using ~[1], ~[2], ~[3], ... like this here #[|ftnt
+_ref_1]<sup>~[[1|#ftnt_1]~]</sup>. See footnote for counterpart.  (If the ~[ is 
+in the first column, it is a footnote <em>definition</em> rather than a footnote
+ <em>reference</em> #[|ftnt_ref_1]<sup>~[[1|#ftnt_1]~]</sup>.)
 * In-page #[[hyperlinks]] are made by placing a named anchor and referring to the anchor in a hyperlink:
 ** Named anchors:
 *** ##~#~[~[foo]]##: An anchor around the text "foo" with id "foo".
@@ -349,6 +352,10 @@ Term 1 |
    This is part of definition 1.
 Term 2 |
    Here's definition 2.
+
+== Old-style tables ==
+
+See: [[Help:OldStyleTablePlugin]]
 
 == HTML Mark-Up Language ==
 

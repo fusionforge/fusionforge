@@ -43,8 +43,6 @@ class WikiPlugin_RichTable
     function run($dbi, $argstr, &$request, $basepage)
     {
         include_once 'lib/BlockParser.php';
-        // RichTablePlugin markup is new.
-        $markup = 2.0;
 
         $lines = preg_split('/\n/', $argstr);
         $table = HTML::table();
@@ -71,7 +69,7 @@ class WikiPlugin_RichTable
                             if (is_numeric(trim($content))) {
                                 $cell->pushContent(HTML::p(array('style' => "text-align:right"), trim($content)));
                             } else {
-                                $cell->pushContent(TransformText($content, $markup, $basepage));
+                                $cell->pushContent(TransformText($content, $basepage));
                             }
                             unset($content);
                         }
@@ -97,7 +95,7 @@ class WikiPlugin_RichTable
                         if (is_numeric(trim($content))) {
                             $cell->pushContent(HTML::p(array('style' => "text-align:right"), trim($content)));
                         } else {
-                            $cell->pushContent(TransformText($content, $markup, $basepage));
+                            $cell->pushContent(TransformText($content, $basepage));
                         }
                         unset($content);
                     }
@@ -131,7 +129,7 @@ class WikiPlugin_RichTable
                     if (is_numeric(trim($content))) {
                         $cell->pushContent(HTML::p(array('style' => "text-align:right"), trim($content)));
                     } else {
-                        $cell->pushContent(TransformText($content, $markup, $basepage));
+                        $cell->pushContent(TransformText($content, $basepage));
                     }
                 }
                 $row->pushContent($cell);

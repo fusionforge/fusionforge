@@ -3,7 +3,6 @@ Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Einstellungen;
   flags=PAGE_LOCKED;
-  markup=2;
   summary=RedirectTo%20Benutzer%20Einstellungen;
   charset=UTF-8
 Content-Transfer-Encoding: binary

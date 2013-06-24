@@ -3,14 +3,13 @@ Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=InfosDeD%C3%A9bogage;
   flags=PAGE_LOCKED;
-  markup=2;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
 Vue détaillée d'une page, ce qui est probablement plus utile que n'importe 
 quoi d'autre pour le débogage.
 
-<<_BackendInfo page||=''>>
+<<DebugBackendInfo page||=''>>
 
 ----
 [[CatégoriePageDAction]]

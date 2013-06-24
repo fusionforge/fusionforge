@@ -116,12 +116,12 @@ class WikiPlugin_WikicreoleTable
             foreach ($row as $cell) {
                 if ($cell && $cell[0] == '=') {
                     $cell = trim(substr($cell, 1));
-                    $html_row->pushContent(HTML::th(TransformInline($cell, 2.0, $basepage)));
+                    $html_row->pushContent(HTML::th(TransformInline($cell, $basepage)));
                 } else {
                     if (is_numeric($cell)) {
                         $html_row->pushContent(HTML::td(array('style' => "text-align:right"), $cell));
                     } else {
-                        $html_row->pushContent(HTML::td(TransformInline($cell, 2.0, $basepage)));
+                        $html_row->pushContent(HTML::td(TransformInline($cell, $basepage)));
                     }
                 }
             }

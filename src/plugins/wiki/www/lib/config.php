@@ -252,15 +252,7 @@ function update_locale($loc)
     }
     // Try to put new locale into environment (so any
     // programs we run will get the right locale.)
-    if (!function_exists('bindtextdomain')) {
-        // Reinitialize translation array.
-        global $locale;
-        $locale = array();
-        // do reinit to purge PHP's static cache [43ms]
-        if (($lcfile = FindLocalizedFile("LC_MESSAGES/phpwiki.php", 'missing_ok', 'reinit'))) {
-            include($lcfile);
-        }
-    } else {
+    if (function_exists('bindtextdomain')) {
         // If PHP is in safe mode, this is not allowed,
         // so hide errors...
         @putenv("LC_ALL=$setlocale");

@@ -138,7 +138,7 @@ class WikiPlugin_WikiAdminSetAcl
     function run($dbi, $argstr, &$request, $basepage)
     {
         if ($request->getArg('action') != 'browse') {
-            if ($request->getArg('action') != _("PhpWikiAdministration/SetAcl")) {
+            if ($request->getArg('action') != __("PhpWikiAdministration")."/".__("SetAcl")) {
                 return $this->disabled(_("Plugin not run: not in browse mode"));
             }
         }

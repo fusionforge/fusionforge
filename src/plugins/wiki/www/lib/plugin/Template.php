@@ -197,10 +197,10 @@ class WikiPlugin_Template
         $initial_content = trim($initial_content, "\n");
         if (preg_match("/\n/", $initial_content)) {
             include_once 'lib/BlockParser.php';
-            $content = TransformText($initial_content, $r->get('markup'), $page);
+            $content = TransformText($initial_content, $page);
         } else {
             include_once 'lib/InlineParser.php';
-            $content = TransformInline($initial_content, $r->get('markup'), $page);
+            $content = TransformInline($initial_content, $page);
         }
 
         array_pop($included_pages);

@@ -39,10 +39,10 @@
  * Rewritten for recursive array support by Reini Urban.
  */
 
-require_once 'lib/plugin/_BackendInfo.php';
+require_once 'lib/plugin/DebugBackendInfo.php';
 
 class WikiPlugin_EditMetaData
-    extends WikiPlugin__BackendInfo
+    extends WikiPlugin_DebugBackendInfo
 {
     function getDescription()
     {
@@ -125,9 +125,7 @@ class WikiPlugin_EditMetaData
             $html->pushContent(HTML::p(fmt("No metadata for %s", $page)));
             $table = HTML();
         } else {
-            $table = HTML::table(array('border' => 1,
-                'cellpadding' => 2,
-                'cellspacing' => 0));
+            $table = HTML::table(array('class' => 'bordered'));
             $this->_fixupData($pagemeta);
             $table->pushContent($this->_showhash("MetaData('$page')", $pagemeta));
         }
@@ -158,7 +156,7 @@ class WikiPlugin_EditMetaData
         return $html;
     }
 
-    private function _showvalue($key, $val, $prefix = '')
+    protected function _showvalue($key, $val, $prefix = '')
     {
         if (is_array($val) or is_object($val)) return $val;
         if (in_array($key, $this->hidden_pagemeta)) return '';

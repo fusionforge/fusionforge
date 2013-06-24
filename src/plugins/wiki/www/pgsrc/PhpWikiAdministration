@@ -3,7 +3,6 @@ Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiAdministration;
   flags=PAGE_LOCKED;
-  markup=2;
   acl="view:_AUTHENTICATED,-_EVERY; list:_AUTHENTICATED,-_EVERY";
   charset=UTF-8
 Content-Transfer-Encoding: binary

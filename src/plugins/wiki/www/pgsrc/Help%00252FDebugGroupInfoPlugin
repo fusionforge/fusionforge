@@ -1,9 +1,8 @@
 Date: Thu,  9 Dec 2010 14:51:45 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
-  pagename=Help%2F_GroupInfoPlugin;
+  pagename=Help%2FDebugGroupInfoPlugin;
   flags=PAGE_LOCKED;
-  markup=2;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
@@ -17,7 +16,7 @@ cleared everything out though.
 
 == Usage ==
 {{{
-<<_GroupInfo>>
+<<DebugGroupInfo>>
 }}}
 
 == Arguments ==
@@ -35,8 +34,8 @@ See [[DebugGroupInfo]]
 == See Also ==
 
 * [[DebugGroupInfo]] is the corresponding [[Help:ActionPage]].
-* [[Help:_AuthInfoPlugin]]
-* [[Help:_BackendInfoPlugin]]
+* [[Help:DebugAuthInfoPlugin]]
+* [[Help:DebugBackendInfoPlugin]]
 
 <noinclude>
 ----

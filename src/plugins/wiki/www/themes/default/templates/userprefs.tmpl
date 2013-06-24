@@ -118,7 +118,7 @@ if ( $isForm ) {
 <form action="<?php echo $request->getPostURL()?>" method="post">
 <?php } else {
   $fill = "&nbsp;";
-  // See also plugin _AuthInfo
+  // See also plugin DebugAuthInfo
   $authmethod = ENABLE_USER_NEW ? @$user->_authmethod : @$user->auth_how;
 ?>
 <?php echo HTML::pre(sprintf("%12s: [% 10s]  %s\n",_("UserId"),$pref->get('userid'), " from " . $authmethod),

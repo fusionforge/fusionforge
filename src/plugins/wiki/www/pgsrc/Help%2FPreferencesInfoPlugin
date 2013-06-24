@@ -1,9 +1,8 @@
 Date: Fri,  7 Dec 2012 14:58:45 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
-  pagename=Help%2F_PreferencesInfoPlugin;
+  pagename=Help%2FPreferencesInfoPlugin;
   flags=PAGE_LOCKED;
-  markup=2;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
@@ -11,7 +10,7 @@ Plugin to display the current preferences without auth check.
 
 == Usage ==
 {{{
-<<_PreferencesInfo>>
+<<PreferencesInfo>>
 }}}
 
 == Arguments ==
@@ -25,17 +24,17 @@ userid _(default: current userid)_:
 == Example ==
 
 {{{
-<<_PreferencesInfo>>
+<<PreferencesInfo>>
 }}}
 
-<<_PreferencesInfo>>
+<<PreferencesInfo>>
 
 == Author ==
 * [[Help:Reini Urban|Reini Urban]]
 
 == See Also ==
 
-UserPreferences
+* [[UserPreferences]]
 
 <noinclude>
 ----

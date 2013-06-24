@@ -704,14 +704,14 @@ function fixup_static_configs($file)
     // The FUSIONFORGE theme omits them
     if (!(defined('FUSIONFORGE') and FUSIONFORGE)) {
         $AllAllowedPlugins[] = 'AnalyseAccessLogSql';
-        $AllAllowedPlugins[] = '_AuthInfo';
-        $AllAllowedPlugins[] = '_BackendInfo';
+        $AllAllowedPlugins[] = 'DebugAuthInfo';
+        $AllAllowedPlugins[] = 'DebugBackendInfo';
         $AllAllowedPlugins[] = 'CacheTest';
         $AllAllowedPlugins[] = 'CategoryPage';
         $AllAllowedPlugins[] = 'FoafViewer';
         $AllAllowedPlugins[] = 'FrameInclude';
         $AllAllowedPlugins[] = 'GraphViz';
-        $AllAllowedPlugins[] = '_GroupInfo';
+        $AllAllowedPlugins[] = 'DebugGroupInfo';
         $AllAllowedPlugins[] = 'HtmlConverter';
         $AllAllowedPlugins[] = 'Imdb';
         $AllAllowedPlugins[] = 'JabberPresence';
@@ -720,7 +720,7 @@ function fixup_static_configs($file)
         $AllAllowedPlugins[] = 'Ploticus';
         $AllAllowedPlugins[] = 'PopularNearby';
         $AllAllowedPlugins[] = 'PreferenceApp';
-        $AllAllowedPlugins[] = '_PreferencesInfo';
+        $AllAllowedPlugins[] = 'PreferencesInfo';
         $AllAllowedPlugins[] = '_Retransform';
         $AllAllowedPlugins[] = 'SqlResult';
         $AllAllowedPlugins[] = 'TeX2png';
@@ -728,14 +728,12 @@ function fixup_static_configs($file)
         $AllAllowedPlugins[] = 'TexToPng';
         $AllAllowedPlugins[] = 'VisualWiki';
         $AllAllowedPlugins[] = 'WantedPagesOld';
-        $AllAllowedPlugins[] = 'WikiAdminChmod';
-        $AllAllowedPlugins[] = 'WikiAdminMarkup';
         $AllAllowedPlugins[] = 'WikiForum';
-        $AllAllowedPlugins[] = '_WikiTranslation';
+        $AllAllowedPlugins[] = 'WikiTranslation';
     }
 
     // Used by SetupWiki to pull in required pages, if not translated, then in English.
-    // Also used by _WikiTranslation. Really important are only those which return pagelists
+    // Also used by WikiTranslation. Really important are only those which return pagelists
     // or contain basic functionality.
     $AllActionPages = $ActionPages;
     $AllActionPages[] = 'AllPagesCreatedByMe';
@@ -764,15 +762,6 @@ function fixup_static_configs($file)
     $AllActionPages[] = 'SetGlobalAccessRights';
     $AllActionPages[] = 'SetGlobalAccessRightsSimple';
     $AllActionPages[] = 'UserContribs';
-
-    // The FUSIONFORGE theme omits them
-    if (!(defined('FUSIONFORGE') and FUSIONFORGE)) {
-        // Add some some action pages depending on configuration
-        if (DEBUG) {
-            $AllActionPages[] = 'PhpWikiAdministration/Chmod';
-        }
-        $AllActionPages[] = 'PhpWikiAdministration/Markup';
-    }
 
     if ((defined('FUSIONFORGE') and FUSIONFORGE)) {
         if (ENABLE_EXTERNAL_PAGES) {

@@ -37,10 +37,6 @@ else
   $wordcount = fmt("%s words", $c);
 
 
-$markupVersion = ($markupVersion = $revision->get('markup'))
-               ? fmt("Version %s", $markupVersion)
-               : _("Original (1.2 or 1.0)");
-
 $summary = HTML::textarea(array('name' => 'summary',
                                 'class' => 'summary',
                                 /* use fixed dimensions? */
@@ -111,10 +107,6 @@ if ($type == 'inherited') {
   <tr>
     <td class="align-right pageinfo"><?php echo _("Page Version") . _(":") ?></td>
     <td><?php echo $version ?></td>
-  </tr>
-  <tr>
-    <td class="align-right pageinfo"><?php echo _("Markup") . _(":") ?></td>
-    <td><?php echo $markupVersion ?></td>
   </tr>
   <tr>
     <td class="align-right pageinfo"><?php echo _("Size") . _(":") ?></td>

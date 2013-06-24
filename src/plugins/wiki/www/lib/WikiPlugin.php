@@ -130,22 +130,20 @@ class WikiPlugin
             }
 
         foreach (array_merge($argstr_args, $argstr_defaults) as $arg => $val) {
-            // TODO: where the heck comes this from? Put the new method over there and peace.
-            /*if ($request and $request->getArg('pagename') == _("PhpWikiAdministration")
-                and $arg == 'overwrite') // silence this warning
-                ;*/
-            if ($this->allow_undeclared_arg($arg, $val))
+            if ($this->allow_undeclared_arg($arg, $val)) {
                 $args[$arg] = $val;
+            }
         }
 
         // Add special handling of pages and exclude args to accept <! plugin-list !>
         // and split explodePageList($args['exclude']) => array()
         // TODO : handle p[] pagehash
         foreach (array('pages', 'exclude') as $key) {
-            if (!empty($args[$key]) and array_key_exists($key, $defaults))
+            if (!empty($args[$key]) and array_key_exists($key, $defaults)) {
                 $args[$key] = is_string($args[$key])
                     ? explodePageList($args[$key])
                     : $args[$key]; // <! plugin-list !>
+            }
         }
 
         return $args;

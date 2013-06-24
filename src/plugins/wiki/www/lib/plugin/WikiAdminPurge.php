@@ -90,7 +90,7 @@ class WikiPlugin_WikiAdminPurge
     function run($dbi, $argstr, &$request, $basepage)
     {
         if ($request->getArg('action') != 'browse') {
-            if ($request->getArg('action') != _("PhpWikiAdministration/Purge")) {
+            if ($request->getArg('action') != __("PhpWikiAdministration")."/".__("Purge")) {
                 return $this->disabled(_("Plugin not run: not in browse mode"));
             }
         }

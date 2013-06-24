@@ -578,7 +578,7 @@ class PagePermission
                 $td->pushContent(HTML::tr(HTML::td(array('align' => 'right'), $group),
                     HTML::td($bool ? '[X]' : '[ ]')));
             }
-            $table->pushContent(HTML::tr(array('valign' => 'top'),
+            $table->pushContent(HTML::tr(array('class' => 'top'),
                 HTML::td($access), HTML::td($td)));
         }
         if ($type == 'default')
@@ -639,7 +639,7 @@ class PagePermission
                 $addbutton->setAttr('checked', 'checked');
                 $newperm->setAttr('checked', 'checked');
                 $table->pushContent(
-                    HTML::tr(array('valign' => 'top'),
+                    HTML::tr(array('class' => 'top'),
                         HTML::td(HTML::strong($access . ":")),
                         HTML::td($newgroup),
                         HTML::td($nbsp, $newperm),
@@ -686,7 +686,7 @@ class PagePermission
             }
             if (!empty($groups))
                 $table->pushContent(
-                    HTML::tr(array('valign' => 'top'),
+                    HTML::tr(array('class' => 'top'),
                         HTML::td(array('align' => 'right'), _("add ")),
                         HTML::td($newgroup),
                         HTML::td(array('align' => 'center'), $nbsp, $newperm),

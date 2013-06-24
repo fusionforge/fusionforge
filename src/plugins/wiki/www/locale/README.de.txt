@@ -14,15 +14,12 @@ PhpWiki-Version auf Ihren Rechner von:
 Nightly CVS snapshot:
 http://phpwiki.sf.net/nightly/phpwiki.nightly.tar.gz
 
-Beachten Sie bei der weiteren Bearbeitung bitte, dass Sie die Datei:
-phpwiki/locale/de/LC_MESSAGES/phpwiki.php direkt nicht editieren
-sollten, sondern vielmehr folgende: phpwiki/locale/po/de.po. Achten
-Sie auch darauf, diese Datei mit UTF-8 abzuspeichern (nicht mit ISO-8859-1,
+Achten Sie auch darauf, diese Datei mit UTF-8 abzuspeichern (nicht mit ISO-8859-1,
 Macintosh-Charset oder Windows-1252), sonst fehlen die Umlaute und das
 nach älterer Schreibweise noch gebräuchliche scharfe S bzw. Sz "ß".
 
 Zunächst wurden die Dateien in LC_MESSAGES automatisch erstellt:
-phpwiki.mo u. phpwiki.php. Das braucht aber GNUmake: (Seite auf
+phpwiki.mo. Das braucht aber GNUmake: (Seite auf
 Englisch) http://www.gnu.org/software/make/make.html
 
 cd phpwiki/locale

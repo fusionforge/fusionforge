@@ -1,9 +1,8 @@
-Date: Tue, 16 Apr 2013 17:14:25 +0000
+Date: Thu, 13 Jun 2013 17:02:10 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiSystemverwalten;
   flags=PAGE_LOCKED;
-  markup=2;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
@@ -21,7 +20,7 @@ Entweder wähle zuerst die Seiten und führe dann die Aktion aus:
 
 oder rufe die möglichen ~WikiAdmin Aktionen direkt auf:
 
-| [[/Löschen]] | [[/Umbenennen]] | [[/SuchenErsetzen]] | [[/AclSetzen]] | [[/Chown]] | [[/Chmod]]
+| [[/Löschen]] | [[/Umbenennen]] | [[/SuchenErsetzen]] | [[/AclSetzen]] | [[/Chown]]
 
 == Benutzerverwaltung ==
 

@@ -14,7 +14,7 @@ if ($MAX_ONLINE_TIME and $MAX_ONLINE_NUM)
       $header = HTML::a(array('href'=>$url,'title'=>_("Switch to detailed list")),_("Who is Online"));
     }
 ?>
-<table width="100%" cellpadding="2" cellspacing="1" border="0" class="forumline">
+<table class="forumline fullwidth">
   <tr><td class="cat" colspan="2"><?php echo $header ?></td></tr>
   <tr><td class="row1" rowspan="3"><?php echo $ONLINE_ICON ?></td>
       <td class="row1 gensmall"><?php echo fmt("Our users created a total of %d pages.",$NUM_PAGES) ?><br />
@@ -56,7 +56,7 @@ if ($MAX_ONLINE_TIME and $MAX_ONLINE_NUM)
     $url = WikiUrl($pagename,array("mode"=>"summary"));
     $header = HTML::a(array('href'=>$url,'title'=>_("Switch to summary")),_("Who is Online"));
 ?>
-<table width="100%" cellpadding="2" cellspacing="1" border="0" class="forumline">
+<table class="forumline fullwidth">
   <tr><td class="cat" colspan="3"><?php echo $header ?></td></tr>
    <tr><td class="cat" colspan="3"><?php echo _("Registered Users") ?></td></tr>
   <?php if (!empty($ADMINS) and $dispose_admin) { ?> 

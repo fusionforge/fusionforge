@@ -15,7 +15,7 @@
     }
     //--></script>
 </head>
-<body bgcolor="#8888aa">
+<body style="background-color:"#8888aa">
 <?php
 $dir = opendir(".");
 while ($fileName = readdir($dir))

@@ -35,8 +35,7 @@ function addPageTextData($user, $dbi, $new_data, $START_DELIM, $DELIM)
         $meta = $current->_data;
     } else {
         $text = '';
-        $meta = array('markup' => 2.0,
-            'author' => $user->getId());
+        $meta = array('author' => $user->getId());
     }
 
     // add new data to the appropriate line

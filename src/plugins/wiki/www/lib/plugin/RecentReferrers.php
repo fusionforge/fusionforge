@@ -51,10 +51,7 @@ class WikiPlugin_RecentReferrers extends WikiPlugin
             return HTML::div(array('class' => "error"), "Error: no ACCESS_LOG");
         }
         $args = $this->getArgs($argstr, $request);
-        $table = HTML::table(array('cellpadding' => 1,
-            'cellspacing' => 2,
-            'border' => 0,
-            'class' => 'pagelist'));
+        $table = HTML::table(array('class' => 'pagelist'));
         if (!$args['noheader'] and !empty($args['caption']))
             $table->pushContent(HTML::caption(array('align' => 'top'), $args['caption']));
         $limit = $args['limit'];

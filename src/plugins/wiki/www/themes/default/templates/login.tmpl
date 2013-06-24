@@ -43,7 +43,7 @@ if (ALLOW_BOGO_LOGIN && $require_level <= WIKIAUTH_BOGO) {
     // sample Japanese login name
     $examplechars = $examplechars . "天道あかね";
   }
-  $t = asXML(TransformText(_("You may sign in using any [[Help:AddingPages|WikiWord]] as a user id. (Any characters in %s etc. may be used too). The user id will be used as a link in RecentChanges to your home page."), 2.0, true));
+  $t = asXML(TransformText(_("You may sign in using any [[Help:AddingPages|WikiWord]] as a user id. (Any characters in %s etc. may be used too). The user id will be used as a link in RecentChanges to your home page."), true));
   if (substr_count($t,"%s") == 1) {
       $s = @sprintf($t, $examplechars);
       // FIXME: Workaround gettext or sprintf problem
@@ -66,9 +66,9 @@ if (ALLOW_BOGO_LOGIN && $require_level <= WIKIAUTH_BOGO) {
 <td>
 <fieldset>
 <legend><?php echo _("Sign In") ?></legend>
-<table cellspacing="4">
+<table>
 <tr>
-  <td align="right"><?php echo _("UserId:") ?></td>
+  <td class="align-right"><?php echo _("UserId:") ?></td>
   <td><input type="text" name="auth[userid]" size="12" maxlength="256" value="<?php echo $userid?>" tabindex="1" />
     <?php if (ENABLE_AUTH_OPENID) { ?>
     &nbsp;&nbsp;<?php echo _("or")?> <a href="http://openid.net/"><?php echo _("OpenID") ?></a>:&nbsp;<input type="text" id="inp-openid" name="openid_url" size="32" maxlength="256" value="" tabindex="3" />
@@ -76,10 +76,10 @@ if (ALLOW_BOGO_LOGIN && $require_level <= WIKIAUTH_BOGO) {
 </td>
 </tr>
 <tr>
-  <td align="right"><?php echo _("Password:") ?></td>
+  <td class="align-right"><?php echo _("Password:") ?></td>
   <td><input type="password" name="auth[passwd]" size="12" maxlength="256" tabindex="2" /></td>
 </tr>
-<tr><td></td><td align="left">
+<tr><td></td><td class="align-left">
   <?php echo Button("submit:", _("Sign In"), 'wikiaction')?>
   <?php if (!$require_level) { ?>
     <?php echo Button("submit:auth[cancel]", _("Cancel"), 'button')?>
