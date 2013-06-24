@@ -35,7 +35,7 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 
 $directoryid = getStringFromRequest('directoryid');
 $option = getStringFromRequest('option');
-$return_msg = _('Directory').' ';
+$return_msg = _('Folder').' ';
 switch ($option) {
 	case "add": {
 		if (!empty($directoryid)) {

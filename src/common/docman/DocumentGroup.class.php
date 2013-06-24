@@ -51,7 +51,7 @@ class DocumentGroup extends Error {
 	 *
 	 * @param	object	Group object.
 	 * @param	array	(all fields from doc_groups) OR doc_group id from database.
-	 * @return	boolean	True on success.
+	 * @return	void
 	 * @access	public
 	 */
 	function __construct(&$Group, $data = false) {
@@ -59,13 +59,12 @@ class DocumentGroup extends Error {
 
 		//was Group legit?
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('Document Directory: No Valid Project'));
-			return false;
+			exit_no_group();
 		}
 		//did Group have an error?
 		if ($Group->isError()) {
-			$this->setError(_('Document Directory:').' '.$Group->getErrorMessage());
-			return false;
+			$this->setError(_('Document Folder')._(': ').$Group->getErrorMessage());
+			return;
 		}
 		$this->Group =& $Group;
 
@@ -73,17 +72,13 @@ class DocumentGroup extends Error {
 			if (is_array($data)) {
 				$this->data_array =& $data;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
-					$this->setError('DocumentGroup:: '. _('Group_id in db result does not match Group Object'));
+					$this->setError('DocumentGroup: '. _('Group_id in db result does not match Group Object'));
 					$this->data_array = null;
-					return false;
+					return;
 				}
-				return true;
+				return;
 			} else {
-				if (!$this->fetchData($data)) {
-					return false;
-				} else {
-					return true;
-				}
+				$this->fetchData($data);
 			}
 		}
 	}
@@ -701,17 +696,17 @@ class DocumentGroup extends Error {
 		if (strlen($BCC) > 0) {
 			$sess = session_get_user();
 			if ($new) {
-				$status = _('New directory');
+				$status = _('New folder');
 			} else {
-				$status = _('Updated directory').' '._('by').' ' . $sess->getRealName();
+				$status = _('Updated folder by').' '.$sess->getRealName();
 			}
 			$subject = '['.$this->Group->getPublicName().'] '.$status.' - '.$this->getName();
 			$body = _('Project')._(': ').$this->Group->getPublicName()."\n";
-			$body .= _('Directory:').' '.$this->getName()."\n";
+			$body .= _('Folder')._(': ').$this->getName()."\n";
 			$user = user_get_object($this->getCreated_by());
-			$body .= _('Submitter:').' '.$user->getRealName()." (".$user->getUnixName().") \n";
+			$body .= _('Submitter')._(': ').$user->getRealName()." (".$user->getUnixName().") \n";
 			if (!$new) {
-				$body .= _('Updated By:').' '. $sess->getRealName();
+				$body .= _('Updated by')._(': ').$sess->getRealName();
 			}
 			$body .= "\n\n-------------------------------------------------------\n".
 				_('For more info, visit:').

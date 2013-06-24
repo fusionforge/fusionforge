@@ -166,12 +166,12 @@ echo '<div id="handle" style="float:left; height:100px; margin:3px; width:3px; b
 echo '<div id="right" style="float:left; width: 80%; overflow: auto; max-width: 90%;">';
 if ($DocGroupName) {
 	$headerPath = '<h4>';
-	if ($childgroup_id)
-		$headerPath .= _('Subproject').' '.':'.' '.util_make_link('/docman/?group_id='.$g->getID(),$g->getPublicName()).' ';
-
-	$headerPath .= _('Path:').'&nbsp;<i>'.$dgpath.'</i></h4>';
+	if ($childgroup_id) {
+		$headerPath .= _('Subproject')._(': ').util_make_link('/docman/?group_id='.$g->getID(),$g->getPublicName()).' ';
+	}
+	$headerPath .= _('Path')._(': ').'<i>'.$dgpath.'</i></h4>';
 	echo $headerPath;
-	echo '<h3 class="docman_h3" >'._('Document Folder:').' <i>'.$DocGroupName.'</i>&nbsp;';
+	echo '<h3 class="docman_h3" >'._('Document Folder')._(': ').'<i>'.$DocGroupName.'</i>&nbsp;';
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
 		echo '<a href="#" class="tabtitle" id="docman-editdirectory" title="'._('Edit this folder').'" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
 		echo '<a href="'.$actionlistfileurl.'&amp;action=trashdir" class="tabtitle" id="docman-trashdirectory" title="'._('Move this folder and his content to trash').'" >'. html_image('docman/trash-empty.png',22,22,array('alt'=>'trashdir')). '</a>';
@@ -193,10 +193,10 @@ if ($DocGroupName) {
 	if (session_loggedin()) {
 		if ($ndg->isMonitoredBy($u->getID())) {
 			$option = 'remove';
-			$titleMonitor = _('Stop monitoring this directory');
+			$titleMonitor = _('Stop monitoring this folder');
 		} else {
 			$option = 'add';
-			$titleMonitor = _('Start monitoring this directory');
+			$titleMonitor = _('Start monitoring this folder');
 		}
 		echo '<a class="tabtitle-ne" href="'.$actionlistfileurl.'&amp;action=monitordirectory&amp;option='.$option.'&amp;directoryid='.$ndg->getID().'" title="'.$titleMonitor.'" >'.html_image('docman/monitor-'.$option.'document.png',22,22,array('alt'=>$titleMonitor)). '</a>';
 	}
@@ -210,7 +210,6 @@ if ($DocGroupName) {
 	}
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'submit')) {
 		echo '<div class="docman_div_include" id="additem" style="display:none">';
-		echo '<h4 class="docman_h4">'. _('Add a new item') .'</h4>';
 		include ($gfcommon.'docman/views/additem.php');
 		echo '</div>';
 	}

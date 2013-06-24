@@ -147,8 +147,8 @@ if ($searchString) {
 			echo '<tr><td colspan="2">'.$item["description"].'</td></tr>';
 			$localProject = group_get_object($item['group_id']);
 			$docGroupObject = new DocumentGroup($localProject, $item['doc_group']);
-			echo '<tr><td colspan="2">'._('Status:').'<b>'.$item["statename"].'</b></td></tr>';
-			echo '<tr><td colspan="2">'._('Path:');
+			echo '<tr><td colspan="2">'._('Status')._(': ').'<b>'.$item["statename"].'</b></td></tr>';
+			echo '<tr><td colspan="2">'._('Path')._(': ');
 			if ($localProject->getUnixName() != $g->getUnixName()) {
 				$browselink = '/docman/?group_id='.$localProject->getID();
 				echo util_make_link($browselink, $localProject->getPublicName(), array('title' => _('Browse document manager for this project.'), 'class' => 'tabtitle-nw')).'::';

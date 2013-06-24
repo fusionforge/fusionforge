@@ -35,11 +35,11 @@ echo '<div id="editFile" >';
 echo '<form id="editdocdata" name="editdocdata" method="post" enctype="multipart/form-data">';
 echo '<table>';
 echo '	<tr>';
-echo '		<td><strong>'. _('Document Title:') .'</strong>'. utils_requiredField() .'<br />';
+echo '		<td><strong>'. _('Document Title')._(': ').'</strong>'. utils_requiredField() .'<br />';
 echo '		<input id="title" type="text" name="title" size="40" maxlength="255"/></td>';
 echo '	</tr>';
 echo '	<tr>';
-echo '		<td><strong>'. _('Description:') .'</strong>'. utils_requiredField() .'<br />';
+echo '		<td><strong>'. _('Description')._(': ').'</strong>'. utils_requiredField() .'<br />';
 echo '		<input id="description" type="text" name="description" size="40" maxlength="255"/></td>';
 echo '	</tr>';
 if ($g->useDocmanSearch()) {
@@ -48,7 +48,7 @@ if ($g->useDocmanSearch()) {
 	echo '	</tr>';
 }
 echo '	<tr>';
-echo '		<td><strong>'. _('File:') .'</strong>';
+echo '		<td><strong>'. _('File')._(': ').'</strong>';
 echo '			<a id="filelink"></a>';
 echo '		</td>';
 echo '	</tr>';
@@ -67,7 +67,7 @@ echo '			<select name="doc_group" id="doc_group"></select>';
 echo '		</td>';
 echo '	</tr>';
 echo '	<tr>';
-echo '		<td><strong>'. _('State:') .'</strong><br />';
+echo '		<td><strong>'. _('State')._(': ').'</strong><br />';
 echo '			<select name="stateid" id="stateid"></select>';
 echo '		</td>';
 echo '	</tr>';

@@ -55,31 +55,30 @@ class Document extends Error {
 	 * @param	object	The Group object to which this document is associated.
 	 * @param	int	The docid.
 	 * @param	array	The associative array of data.
-	 * @return	boolean	success.
+	 * @return	void
 	 */
 	function __construct(&$Group, $docid = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError('Document:: '. _('No Valid Group Object'));
-			return false;
+			exit_no_group();
 		}
 		if ($Group->isError()) {
 			$this->setError('Document:: '. $Group->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
 
 		if ($docid) {
 			if (!$arr || !is_array($arr)) {
 				if (!$this->fetchData($docid)) {
-					return false;
+					return;
 				}
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
 					$this->setError('Document:: '. _('group_id in db result does not match Group Object'));
 					$this->data_array = null;
-					return false;
+					return;
 				}
 			}
 			if (!$this->isPublic()) {
@@ -88,7 +87,7 @@ class Document extends Error {
 				if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
 					$this->setPermissionDeniedError();
 					$this->data_array = null;
-					return false;
+					return;
 				}
 			}
 		}
@@ -136,7 +135,7 @@ class Document extends Error {
 
 		if (!$result || db_numrows($result) > 0) {
 			$dg = new DocumentGroup($this->getGroup(), $doc_group);
-			$this->setError(_('Document already published in this directory').' '.$dg->getPath());
+			$this->setError(_('Document already published in this folder').' '.$dg->getPath());
 			return false;
 		}
 
@@ -144,7 +143,7 @@ class Document extends Error {
 			array($title, $doc_group));
 		if (!$result || db_numrows($result) > 0) {
 			$dg = new DocumentGroup($this->getGroup(), $doc_group);
-			$this->setError(_('Document already published in this directory').' '.$dg->getPath());
+			$this->setError(_('Document already published in this folder').' '.$dg->getPath());
 			return false;
 		}
 

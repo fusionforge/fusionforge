@@ -85,11 +85,11 @@ if ($dgf->getNested() == NULL) {
 		session_redirect('/docman/?group_id='.$group_id.'&view=addfile');
 	}
 
-	echo '<div class="warning">'. _('You MUST first create at least one directory to store your document.') .'</div>';
+	echo '<div class="warning">'. _('You MUST first create at least one folder to store your document.') .'</div>';
 } else {
 	/* display the add new documentation form */
-	echo '<p><strong>'. _('Document Title:') .'</strong> '. _('Refers to the relatively brief title of the document (e.g. How to use the download server).'). '</p>';
-	echo '<p><strong>'. _('Description:') .'</strong> '. _('A brief description to be placed just under the title.') .'</p>';
+	echo '<p><strong>'. _('Document Title')._(': ').'</strong> '. _('Refers to the relatively brief title of the document (e.g. How to use the download server).'). '</p>';
+	echo '<p><strong>'. _('Description')._(': ').'</strong> '. _('A brief description to be placed just under the title.') .'</p>';
 	if ($g->useDocmanSearch())
 		echo '<p>'._('Both fields are used by the document search engine.').'</p>';
 
