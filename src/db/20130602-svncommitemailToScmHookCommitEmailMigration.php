@@ -24,10 +24,9 @@
 
 require_once dirname(__FILE__).'/../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
-require_once $gfplugins.'scmhook/library/scmsvn/cronjobs/updateScmRepo.php';
+
 
 $pm = plugin_manager_get_object();
-
 
 $used = false;
 $groupnames = db_query_params('SELECT g.group_name FROM plugins p, group_plugin gp, groups g WHERE plugin_name = $1 and gp.group_id = g.group_id and p.plugin_id = gp.plugin_id',
@@ -40,6 +39,11 @@ if ($groupnames) {
 }
 
 if ($used) {
+	if (!is_readable($gfplugins.'scmhook/library/scmsvn/cronjobs/updateScmRepo.php')) {
+		echo "FAILED: scmhook plugin is missing. Please install scmhook plugin and rerun the migration script.\n";
+		exit(1);
+	}
+	require_once $gfplugins.'scmhook/library/scmsvn/cronjobs/updateScmRepo.php';
 	// is scmhook activated ?
 	// no ... -> activate the plugin
 	if (!$pm->PluginIsInstalled('scmhook')) {
