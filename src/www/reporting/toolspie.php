@@ -34,7 +34,7 @@ if ($report->isError()) {
 	exit_error($report->getErrorMessage());
 }
 
-$datatype = getStringFromRequest('datatype');
+$datatype = getIntFromRequest('datatype');
 $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 
@@ -58,10 +58,6 @@ html_use_jqueryjqplotpluginhighlighter();
 html_use_jqueryjqplotplugindateAxisRenderer();
 
 report_header(_('Tool Pie Graphs'));
-
-if (!isset($datatype)) {
-	$datatype = 1;
-}
 
 ?>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">

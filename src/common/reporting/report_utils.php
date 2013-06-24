@@ -871,7 +871,7 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 	return true;
 }
 
-function report_toolspiegraph($datatype = 1, $start, $end) {
+function report_toolspiegraph($datatype = 0, $start, $end) {
 	$now = time() - 60*24*24;
 	if ($now < $end) {
 		$end = $now;
