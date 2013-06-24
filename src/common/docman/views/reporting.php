@@ -84,18 +84,16 @@ if ($report->isError()) {
 } else {
 ?>
 
-<form action="<?php echo util_make_url('/docman/') ?>" method="get">
+<form action="<?php echo util_make_url('/docman/') ?>" 
+	  method="get"
+	  class="align-center">
 	<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 	<input type="hidden" name="view" value="reporting" />
-    <table class="centered">
-		<tr>
-			<td><strong><?php echo _('Start Date')._(':'); ?></strong><br />
-				<?php echo report_months_box($report, 'start', $start); ?></td>
-			<td><strong><?php echo _('End Date')._(':'); ?></strong><br />
-				<?php echo report_months_box($report, 'end', $end); ?></td>
-			<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
-		</tr>
-	</table>
+	<strong><?php echo _('Start Date')._(':'); ?></strong>
+	<?php echo report_months_box($report, 'start', $start); ?>
+	<strong><?php echo _('End Date')._(':'); ?></strong>
+	<?php echo report_months_box($report, 'end', $end); ?>
+	<input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" />
 </form>
 
 <?php
@@ -141,7 +139,7 @@ if (count($data) == 0) {
 							pad: 0,
 						},
 						yaxis: {
-							label: "'._('Download').'",
+							label: "'._('Downloads').'",
 							padMin: 0,
 						}
 					}
@@ -169,4 +167,3 @@ if (count($data) == 0) {
 }
 
 }
- 
