@@ -64,7 +64,7 @@ class FRSRelease extends Error {
 	/**
 	 * The FRSPackage.
 	 *
-	 * @var  object  FRSPacakge.
+	 * @var  object  FRSPackage.
 	 */
 	var $FRSPackage;
 	var $release_files;
@@ -140,7 +140,7 @@ class FRSRelease extends Error {
 					array ($this->FRSPackage->getID(),
 					       htmlspecialchars($name))) ;
 		if (db_numrows($res)) {
-			$this->setError('FRSRelease::create() Error Adding Release: Name Already Exists');
+			$this->setError(_('Error Adding Release: Name Already Exists'));
 			return false;
 		}
 
@@ -155,7 +155,7 @@ class FRSRelease extends Error {
 						user_getid(),
 						1)) ;
 		if (!$result) {
-			$this->setError('FRSRelease::create() Error Adding Release: '.db_error());
+			$this->setError('Error Adding Release: '.db_error());
 			db_rollback();
 			return false;
 		}
@@ -286,38 +286,32 @@ class FRSRelease extends Error {
 		$subject = sprintf (_('[%1$s Release] %2$s'),
 				    $this->FRSPackage->Group->getUnixName(),
 				    $this->FRSPackage->getName());
-		$text = stripcslashes(sprintf(_('Project %1$s (%2$s) has released a new version of package "%3$s".
-
-Release note:
-
-%4$s
-
-Change note:
-
-%5$s
-
-
-You can download it by following this link:
-%6$s
-
-You receive this email because you requested to be notified when new
-versions of this package were released. If you don\'t wish to be
-notified in the future, please login to %7$s and click this link:
-%8$s'
-),
-					      $this->FRSPackage->Group->getPublicName(),
-					      $this->FRSPackage->Group->getUnixName(),
-					      $this->FRSPackage->getName(),
-					      $this->getNotes(),
-					      $this->getChanges(),
-					      util_make_url ("/frs/?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID()),
-					      forge_get_config('forge_name'),
-					      util_make_url ("/frs/monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1")));
+		$text = stripcslashes(sprintf(_('Project %1$s (%2$s) has released a new version of package “%3$s”.'),
+										$this->FRSPackage->Group->getPublicName(),
+										$this->FRSPackage->Group->getUnixName(),
+										$this->FRSPackage->getName())
+							. "\n\n"
+							. _('Release Notes')._(':')
+							. "\n\n"
+							. $this->getNotes()
+							. _('Change Log')._(':')
+							. "\n\n"
+							. $this->getChanges()
+							. "\n\n"
+							. _('You can download it by following this link')._(':')
+							. "\n\n"
+							. util_make_url ("/frs/?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID())
+							. "\n\n"
+							. sprintf(_('You receive this email because you requested to be notified when new '
+										. 'versions of this package were released. If you don\'t wish to be '
+										. 'notified in the future, please login to %s and click this link:'),
+										forge_get_config('forge_name'))
+							. "\n\n"
+							. util_make_url ("/frs/monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1"));
 //		$text = util_line_wrap($text);
 		if (count($arr)) {
 			util_handle_message(array_unique($arr),$subject,$text);
 		}
-
 	}
 
 	/**

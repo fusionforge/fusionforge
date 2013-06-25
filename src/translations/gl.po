@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 17:51+0200\n"
+"POT-Creation-Date: 2013-06-25 18:57+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -1544,7 +1544,9 @@ msgid "Start Date"
 msgstr "Data de comezo"
 
 #: common/docman/views/reporting.php:92 common/docman/views/reporting.php:94
-#: common/include/utils.php:539 common/tracker/actions/query.php:403
+#: common/frs/FRSRelease.class.php:294 common/frs/FRSRelease.class.php:297
+#: common/frs/FRSRelease.class.php:301 common/include/utils.php:539
+#: common/tracker/actions/query.php:403
 #: common/tracker/views/form-addcanned.php:68
 #: common/tracker/views/form-addcanned.php:71
 #: common/tracker/views/form-updatecanned.php:43
@@ -2143,7 +2145,7 @@ msgid "Error On Update:"
 msgstr "Hai un erro na actualización:"
 
 #: common/forum/Forum.class.php:613 common/frs/FRSPackage.class.php:451
-#: common/frs/FRSRelease.class.php:349 common/include/Group.class.php:1590
+#: common/frs/FRSRelease.class.php:343 common/include/Group.class.php:1590
 #: common/mail/MailingList.class.php:384 common/pm/ProjectGroup.class.php:360
 #: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:504
 #: common/tracker/ArtifactExtraField.class.php:430
@@ -2476,7 +2478,7 @@ msgid "File cannot be moved to the permanent location"
 msgstr "O ficheiro non pode moverse á posición permanente"
 
 #: common/frs/FRSPackage.class.php:135 common/frs/FRSPackage.class.php:367
-#: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:394
+#: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:388
 msgid "FRSPackage Name Must Be At Least 3 Characters"
 msgstr "O nome do paquete de FRS debe ter, cando menos, 3 caracteres "
 
@@ -2491,43 +2493,46 @@ msgstr "FRSPackage::Actualización: o nome do paquete só pode ser alfanumérico
 msgid "Cannot open the file archive."
 msgstr ""
 
+#: common/frs/FRSRelease.class.php:143
+#, fuzzy
+msgid "Error Adding Release: Name Already Exists"
+msgstr "Ese nome de elemento xa existe"
+
 #: common/frs/FRSRelease.class.php:286
 #, php-format
 msgid "[%1$s Release] %2$s"
 msgstr "[Publicación de %1$s] %2$s"
 
 #: common/frs/FRSRelease.class.php:289
-#, fuzzy, php-format
+#, php-format
+msgid "Project %1$s (%2$s) has released a new version of package “%3$s”."
+msgstr "O proxecto %1$s (%2$s) publicou unha nova versión do paquete “%3$s”."
+
+#: common/frs/FRSRelease.class.php:294
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:130
+#: www/frs/admin/qrs.php:247 www/frs/shownotes.php:78
+msgid "Release Notes"
+msgstr "Notas da publicación"
+
+#: common/frs/FRSRelease.class.php:297 www/frs/admin/qrs.php:255
+#: www/frs/shownotes.php:84
+msgid "Change Log"
+msgstr "Rexistro de cambios "
+
+#: common/frs/FRSRelease.class.php:301
+msgid "You can download it by following this link"
+msgstr "Pode descargalo seguindo esta ligazón"
+
+#: common/frs/FRSRelease.class.php:305
+#, php-format
 msgid ""
-"Project %1$s (%2$s) has released a new version of package \"%3$s\".\n"
-"\n"
-"Release note:\n"
-"\n"
-"%4$s\n"
-"\n"
-"Change note:\n"
-"\n"
-"%5$s\n"
-"\n"
-"\n"
-"You can download it by following this link:\n"
-"%6$s\n"
-"\n"
-"You receive this email because you requested to be notified when new\n"
-"versions of this package were released. If you don't wish to be\n"
-"notified in the future, please login to %7$s and click this link:\n"
-"%8$s"
+"You receive this email because you requested to be notified when new "
+"versions of this package were released. If you don't wish to be notified in "
+"the future, please login to %s and click this link:"
 msgstr ""
-"O proxecto %1$s (%2$s) publicou unha nova versión do paquete \"%3$s\".\n"
-"Pode descargalo seguindo esta ligazón:\n"
-"\n"
-"%4$s\n"
-"\n"
-"Recibe este correo porque pediu que se lle notificaran as novas\n"
-"versións publicades deste paquete. Se non desexa que se lle\n"
-"notifique de aquí en diante, conéctese a %5$s e prema esta ligazón:\n"
-"\n"
-"%6$s"
+"Recibe este correo porque pediu que se lle notificaran as novas versións "
+"publicades deste paquete. Se non desexa que se lle notifique de aquí en "
+"diante, conéctese a %s e prema esta ligazón:"
 
 #: common/frs/include/frs_utils.php:76
 #, fuzzy
@@ -3214,35 +3219,34 @@ msgid "Request to Join Project %1$s from %2$s (%3$s)"
 msgstr "Petición para se unir ao proxecto %1$s"
 
 #: common/include/GroupJoinRequest.class.php:234
-#, fuzzy, php-format
-msgid ""
-"%1$s (%2$s) has requested to join your project. \n"
-"You can approve this request here: %3$s \n"
-"\n"
-"Comments by the user:\n"
-"%4$s"
-msgstr ""
-"%1$s solicitou unirse ao seu proxecto. \n"
-"Pode aprobar esta solicitude aquí: %2$s \n"
-"\n"
-"Comentarios do usuario:\n"
-"%3$s"
+#, php-format
+msgid "%1$s (%2$s) has requested to join your project."
+msgstr "%1$s (%2$s) solicitou unirse ao seu proxecto."
+
+#: common/include/GroupJoinRequest.class.php:237
+#, php-format
+msgid "You can approve this request here: %s"
+msgstr "Pode aprobar esta solicitude aquí: %s"
+
+#: common/include/GroupJoinRequest.class.php:240
+msgid "Comments by the user:"
+msgstr "Comentarios do usuario:"
 
 #: common/include/GroupJoinRequest.class.php:259
 #: common/include/GroupJoinRequest.class.php:273
 #, php-format
-msgid "Request to Join Project %1$s"
+msgid "Request to Join Project %s"
 msgstr "Petición para se unir ao proxecto %1$s"
 
 #: common/include/GroupJoinRequest.class.php:260
 #, php-format
-msgid "Your request to join the %1$s project was denied by an administrator."
+msgid "Your request to join the %s project was denied by an administrator."
 msgstr ""
 "A súa petición de unirse ao proxecto %1$s foi denegada polo administrador."
 
 #: common/include/GroupJoinRequest.class.php:274
 #, php-format
-msgid "Your request to join the %1$s project was granted by an administrator."
+msgid "Your request to join the %s project was granted by an administrator."
 msgstr ""
 "A súa petición de unirse ao proxecto %1$s foi aprobada polo administrador."
 
@@ -7357,11 +7361,6 @@ msgstr "Paquete "
 #: plugins/mantisbt/view/viewNote.php:42
 msgid "Notes"
 msgstr "Notas"
-
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:130
-#: www/frs/admin/qrs.php:247 www/frs/shownotes.php:78
-msgid "Release Notes"
-msgstr "Notas da publicación"
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:138
 #: www/frs/index.php:111
@@ -17372,10 +17371,6 @@ msgstr ""
 msgid "Choose an FTP file instead of uploading:"
 msgstr "Elixa un ficheiro de FTP en lugar do enviar: "
 
-#: www/frs/admin/qrs.php:255 www/frs/shownotes.php:84
-msgid "Change Log"
-msgstr "Rexistro de cambios "
-
 #: www/frs/admin/qrs.php:263
 msgid "Preserve my pre-formatted text"
 msgstr "Conservar o texto co seu formato "
@@ -23407,6 +23402,65 @@ msgstr "Non se puido actualizar"
 msgid "No User Name Provided"
 msgstr "Non se introduciu un nome de usuario"
 
+#, fuzzy
+#~ msgid ""
+#~ "Project %1$s (%2$s) has released a new version of package \"%3$s\".\n"
+#~ "\n"
+#~ "Release note:\n"
+#~ "\n"
+#~ "%4$s\n"
+#~ "\n"
+#~ "Change note:\n"
+#~ "\n"
+#~ "%5$s\n"
+#~ "\n"
+#~ "\n"
+#~ "You can download it by following this link:\n"
+#~ "%6$s\n"
+#~ "\n"
+#~ "You receive this email because you requested to be notified when new\n"
+#~ "versions of this package were released. If you don't wish to be\n"
+#~ "notified in the future, please login to %7$s and click this link:\n"
+#~ "%8$s"
+#~ msgstr ""
+#~ "O proxecto %1$s (%2$s) publicou unha nova versión do paquete \"%3$s\".\n"
+#~ "Pode descargalo seguindo esta ligazón:\n"
+#~ "\n"
+#~ "%4$s\n"
+#~ "\n"
+#~ "Recibe este correo porque pediu que se lle notificaran as novas\n"
+#~ "versións publicades deste paquete. Se non desexa que se lle\n"
+#~ "notifique de aquí en diante, conéctese a %5$s e prema esta ligazón:\n"
+#~ "\n"
+#~ "%6$s"
+
+#, fuzzy
+#~ msgid ""
+#~ "%1$s (%2$s) has requested to join your project. \n"
+#~ "You can approve this request here: %3$s \n"
+#~ "\n"
+#~ "Comments by the user:\n"
+#~ "%4$s"
+#~ msgstr ""
+#~ "%1$s solicitou unirse ao seu proxecto. \n"
+#~ "Pode aprobar esta solicitude aquí: %2$s \n"
+#~ "\n"
+#~ "Comentarios do usuario:\n"
+#~ "%3$s"
+
+#~ msgid "Request to Join Project %1$s"
+#~ msgstr "Petición para se unir ao proxecto %1$s"
+
+#~ msgid ""
+#~ "Your request to join the %1$s project was denied by an administrator."
+#~ msgstr ""
+#~ "A súa petición de unirse ao proxecto %1$s foi denegada polo administrador."
+
+#~ msgid ""
+#~ "Your request to join the %1$s project was granted by an administrator."
+#~ msgstr ""
+#~ "A súa petición de unirse ao proxecto %1$s foi aprobada polo administrador."
+
 #~ msgid "Could not get message id"
 #~ msgstr "Non se puido obter o identificador da mensaxe"
 
@@ -23452,22 +23506,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgstr ""
 #~ "O nome do ficheiro só pode conter caracteres alfanuméricos e “-”, “_”, "
 #~ "“+”, “.”, “~”."
-
-#~ msgid "Project %1$s (%2$s) has released a new version of package “%3$s”."
-#~ msgstr ""
-#~ "O proxecto %1$s (%2$s) publicou unha nova versión do paquete “%3$s”."
-
-#~ msgid "You can download it by following this link"
-#~ msgstr "Pode descargalo seguindo esta ligazón"
-
-#~ msgid ""
-#~ "You receive this email because you requested to be notified when new "
-#~ "versions of this package were released. If you don't wish to be notified "
-#~ "in the future, please login to %s and click this link:"
-#~ msgstr ""
-#~ "Recibe este correo porque pediu que se lle notificaran as novas versións "
-#~ "publicades deste paquete. Se non desexa que se lle notifique de aquí en "
-#~ "diante, conéctese a %s e prema esta ligazón:"
 
 #~ msgid "Missing Required Parameters"
 #~ msgstr "Faltan parámetros obrigados"
@@ -23584,26 +23622,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgstr ""
 #~ "O equipo de administración de %s examinará o seu envío, e notificaráselle "
 #~ "a súa decisión."
-
-#~ msgid "%1$s (%2$s) has requested to join your project."
-#~ msgstr "%1$s (%2$s) solicitou unirse ao seu proxecto."
-
-#~ msgid "You can approve this request here: %s"
-#~ msgstr "Pode aprobar esta solicitude aquí: %s"
-
-#~ msgid "Comments by the user:"
-#~ msgstr "Comentarios do usuario:"
-
-#~ msgid "Request to Join Project %s"
-#~ msgstr "Petición para se unir ao proxecto %1$s"
-
-#~ msgid "Your request to join the %s project was denied by an administrator."
-#~ msgstr ""
-#~ "A súa petición de unirse ao proxecto %1$s foi denegada polo administrador."
-
-#~ msgid "Your request to join the %s project was granted by an administrator."
-#~ msgstr ""
-#~ "A súa petición de unirse ao proxecto %1$s foi aprobada polo administrador."
 
 #~ msgid ""
 #~ "Config file could not be linked to etc/gforge/plugins/%s. Check the write "

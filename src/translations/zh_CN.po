@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 17:51+0200\n"
+"POT-Creation-Date: 2013-06-25 18:57+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1538,7 +1538,9 @@ msgid "Start Date"
 msgstr "开启日期"
 
 #: common/docman/views/reporting.php:92 common/docman/views/reporting.php:94
-#: common/include/utils.php:539 common/tracker/actions/query.php:403
+#: common/frs/FRSRelease.class.php:294 common/frs/FRSRelease.class.php:297
+#: common/frs/FRSRelease.class.php:301 common/include/utils.php:539
+#: common/tracker/actions/query.php:403
 #: common/tracker/views/form-addcanned.php:68
 #: common/tracker/views/form-addcanned.php:71
 #: common/tracker/views/form-updatecanned.php:43
@@ -2143,7 +2145,7 @@ msgid "Error On Update:"
 msgstr "更新时错误："
 
 #: common/forum/Forum.class.php:613 common/frs/FRSPackage.class.php:451
-#: common/frs/FRSRelease.class.php:349 common/include/Group.class.php:1590
+#: common/frs/FRSRelease.class.php:343 common/include/Group.class.php:1590
 #: common/mail/MailingList.class.php:384 common/pm/ProjectGroup.class.php:360
 #: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:504
 #: common/tracker/ArtifactExtraField.class.php:430
@@ -2468,7 +2470,7 @@ msgid "File cannot be moved to the permanent location"
 msgstr "文件无法被移到永久保存位置"
 
 #: common/frs/FRSPackage.class.php:135 common/frs/FRSPackage.class.php:367
-#: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:394
+#: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:388
 msgid "FRSPackage Name Must Be At Least 3 Characters"
 msgstr "FRSPackage 名称必须至少3个字节"
 
@@ -2483,32 +2485,42 @@ msgstr "FRSPackage::Update：软件的名称只能是英文字母"
 msgid "Cannot open the file archive."
 msgstr ""
 
+#: common/frs/FRSRelease.class.php:143
+#, fuzzy
+msgid "Error Adding Release: Name Already Exists"
+msgstr "帐号已存在"
+
 #: common/frs/FRSRelease.class.php:286
 #, php-format
 msgid "[%1$s Release] %2$s"
 msgstr "[%1$s 发布] %2$s"
 
 #: common/frs/FRSRelease.class.php:289
+#, php-format
+msgid "Project %1$s (%2$s) has released a new version of package “%3$s”."
+msgstr "项目 %1$s(%2$s)已发布一个新的版本包 “%3$s”。"
+
+#: common/frs/FRSRelease.class.php:294
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:130
+#: www/frs/admin/qrs.php:247 www/frs/shownotes.php:78
+msgid "Release Notes"
+msgstr "发布记录"
+
+#: common/frs/FRSRelease.class.php:297 www/frs/admin/qrs.php:255
+#: www/frs/shownotes.php:84
+msgid "Change Log"
+msgstr "变动记录"
+
+#: common/frs/FRSRelease.class.php:301
+msgid "You can download it by following this link"
+msgstr "您可以通过下面的链接下载"
+
+#: common/frs/FRSRelease.class.php:305
 #, fuzzy, php-format
 msgid ""
-"Project %1$s (%2$s) has released a new version of package \"%3$s\".\n"
-"\n"
-"Release note:\n"
-"\n"
-"%4$s\n"
-"\n"
-"Change note:\n"
-"\n"
-"%5$s\n"
-"\n"
-"\n"
-"You can download it by following this link:\n"
-"%6$s\n"
-"\n"
-"You receive this email because you requested to be notified when new\n"
-"versions of this package were released. If you don't wish to be\n"
-"notified in the future, please login to %7$s and click this link:\n"
-"%8$s"
+"You receive this email because you requested to be notified when new "
+"versions of this package were released. If you don't wish to be notified in "
+"the future, please login to %s and click this link:"
 msgstr ""
 "项目 %1$s(%2$s)已发布一个新的版本包 \"%3$s\"。\n"
 "您可以通过下面的链接下载:\n"
@@ -3165,31 +3177,34 @@ msgid "Request to Join Project %1$s from %2$s (%3$s)"
 msgstr "请求参与项目 %1$s"
 
 #: common/include/GroupJoinRequest.class.php:234
-#, fuzzy, php-format
-msgid ""
-"%1$s (%2$s) has requested to join your project. \n"
-"You can approve this request here: %3$s \n"
-"\n"
-"Comments by the user:\n"
-"%4$s"
-msgstr ""
-"%1$s 已经请求参与您的项目。\n"
-"你能在这里核准这一个请求：http://%2$s/project/admin/?group_id=%3$s"
+#, php-format
+msgid "%1$s (%2$s) has requested to join your project."
+msgstr "%1$s (%2$s) 已经请求参与您的项目。"
+
+#: common/include/GroupJoinRequest.class.php:237
+#, php-format
+msgid "You can approve this request here: %s"
+msgstr "你能在这里核准这一个请求: %s"
+
+#: common/include/GroupJoinRequest.class.php:240
+#, fuzzy
+msgid "Comments by the user:"
+msgstr "根据用户"
 
 #: common/include/GroupJoinRequest.class.php:259
 #: common/include/GroupJoinRequest.class.php:273
 #, php-format
-msgid "Request to Join Project %1$s"
-msgstr "请求参与项目 %1$s"
+msgid "Request to Join Project %s"
+msgstr "请求参与项目 %s"
 
 #: common/include/GroupJoinRequest.class.php:260
 #, fuzzy, php-format
-msgid "Your request to join the %1$s project was denied by an administrator."
+msgid "Your request to join the %s project was denied by an administrator."
 msgstr "您请求加入 %1$s 项目被管理人员否决。"
 
 #: common/include/GroupJoinRequest.class.php:274
 #, fuzzy, php-format
-msgid "Your request to join the %1$s project was granted by an administrator."
+msgid "Your request to join the %s project was granted by an administrator."
 msgstr "您请求加入 %1$s 项目被管理人员否决。"
 
 #: common/include/group_section_texts.php:29
@@ -7267,11 +7282,6 @@ msgstr "软件包"
 #: plugins/mantisbt/view/viewNote.php:42
 msgid "Notes"
 msgstr "备注"
-
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:130
-#: www/frs/admin/qrs.php:247 www/frs/shownotes.php:78
-msgid "Release Notes"
-msgstr "发布记录"
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:138
 #: www/frs/index.php:111
@@ -17103,10 +17113,6 @@ msgstr ""
 msgid "Choose an FTP file instead of uploading:"
 msgstr "选择一个FTP文件代替上传："
 
-#: www/frs/admin/qrs.php:255 www/frs/shownotes.php:84
-msgid "Change Log"
-msgstr "变动记录"
-
 #: www/frs/admin/qrs.php:263
 msgid "Preserve my pre-formatted text"
 msgstr "保存我的预设格式化文字"
@@ -22992,6 +22998,20 @@ msgstr "大量更新"
 msgid "No User Name Provided"
 msgstr "帐号"
 
+#, fuzzy
+#~ msgid ""
+#~ "%1$s (%2$s) has requested to join your project. \n"
+#~ "You can approve this request here: %3$s \n"
+#~ "\n"
+#~ "Comments by the user:\n"
+#~ "%4$s"
+#~ msgstr ""
+#~ "%1$s 已经请求参与您的项目。\n"
+#~ "你能在这里核准这一个请求：http://%2$s/project/admin/?group_id=%3$s"
+
+#~ msgid "Request to Join Project %1$s"
+#~ msgstr "请求参与项目 %1$s"
+
 #~ msgid "Could not Update Master Thread parent with current time"
 #~ msgstr "目前无法更新 Master Thread parent"
 
@@ -23016,12 +23036,6 @@ msgstr "帐号"
 #~ msgid ""
 #~ "Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
 #~ msgstr "文件名只能是字符和“-”, “_”, “+”, “.”, “~”。"
-
-#~ msgid "Project %1$s (%2$s) has released a new version of package “%3$s”."
-#~ msgstr "项目 %1$s(%2$s)已发布一个新的版本包 “%3$s”。"
-
-#~ msgid "You can download it by following this link"
-#~ msgstr "您可以通过下面的链接下载"
 
 #~ msgid "Group object already exists"
 #~ msgstr "已经存在同名组"
@@ -23084,15 +23098,6 @@ msgstr "帐号"
 #~ "The %s admin team will now examine your project submission. You will be "
 #~ "notified of their decision."
 #~ msgstr "%s 的管理团队会尽快审核您注册的项目，通过审核与否您都会收到通知。"
-
-#~ msgid "%1$s (%2$s) has requested to join your project."
-#~ msgstr "%1$s (%2$s) 已经请求参与您的项目。"
-
-#~ msgid "You can approve this request here: %s"
-#~ msgstr "你能在这里核准这一个请求: %s"
-
-#~ msgid "Request to Join Project %s"
-#~ msgstr "请求参与项目 %s"
 
 #~ msgid ""
 #~ "Config file could not be linked to etc/gforge/plugins/%s. Check the write "

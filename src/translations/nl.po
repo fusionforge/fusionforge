@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 17:51+0200\n"
+"POT-Creation-Date: 2013-06-25 18:57+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1534,7 +1534,9 @@ msgid "Start Date"
 msgstr "Startdatum"
 
 #: common/docman/views/reporting.php:92 common/docman/views/reporting.php:94
-#: common/include/utils.php:539 common/tracker/actions/query.php:403
+#: common/frs/FRSRelease.class.php:294 common/frs/FRSRelease.class.php:297
+#: common/frs/FRSRelease.class.php:301 common/include/utils.php:539
+#: common/tracker/actions/query.php:403
 #: common/tracker/views/form-addcanned.php:68
 #: common/tracker/views/form-addcanned.php:71
 #: common/tracker/views/form-updatecanned.php:43
@@ -2139,7 +2141,7 @@ msgid "Error On Update:"
 msgstr "Fout bij bewerken:"
 
 #: common/forum/Forum.class.php:613 common/frs/FRSPackage.class.php:451
-#: common/frs/FRSRelease.class.php:349 common/include/Group.class.php:1590
+#: common/frs/FRSRelease.class.php:343 common/include/Group.class.php:1590
 #: common/mail/MailingList.class.php:384 common/pm/ProjectGroup.class.php:360
 #: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:504
 #: common/tracker/ArtifactExtraField.class.php:430
@@ -2452,7 +2454,7 @@ msgid "File cannot be moved to the permanent location"
 msgstr "Bestand kan niet verplaatst worden naar de permanente locatie"
 
 #: common/frs/FRSPackage.class.php:135 common/frs/FRSPackage.class.php:367
-#: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:394
+#: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:388
 msgid "FRSPackage Name Must Be At Least 3 Characters"
 msgstr "FRS packagenaam moet tenminste 3 tekens lang zijn"
 
@@ -2467,6 +2469,11 @@ msgstr "FRSPackage::Update: Bundel naam moet volledig alfanumeriek zijn"
 msgid "Cannot open the file archive."
 msgstr ""
 
+#: common/frs/FRSRelease.class.php:143
+#, fuzzy
+msgid "Error Adding Release: Name Already Exists"
+msgstr "De opgegeven gebruikersnaam bestaat al."
+
 #: common/frs/FRSRelease.class.php:286
 #, php-format
 msgid "[%1$s Release] %2$s"
@@ -2474,25 +2481,30 @@ msgstr ""
 
 #: common/frs/FRSRelease.class.php:289
 #, php-format
+msgid "Project %1$s (%2$s) has released a new version of package “%3$s”."
+msgstr ""
+
+#: common/frs/FRSRelease.class.php:294
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:130
+#: www/frs/admin/qrs.php:247 www/frs/shownotes.php:78
+msgid "Release Notes"
+msgstr "Release Notes"
+
+#: common/frs/FRSRelease.class.php:297 www/frs/admin/qrs.php:255
+#: www/frs/shownotes.php:84
+msgid "Change Log"
+msgstr "Change Log"
+
+#: common/frs/FRSRelease.class.php:301
+msgid "You can download it by following this link"
+msgstr ""
+
+#: common/frs/FRSRelease.class.php:305
+#, php-format
 msgid ""
-"Project %1$s (%2$s) has released a new version of package \"%3$s\".\n"
-"\n"
-"Release note:\n"
-"\n"
-"%4$s\n"
-"\n"
-"Change note:\n"
-"\n"
-"%5$s\n"
-"\n"
-"\n"
-"You can download it by following this link:\n"
-"%6$s\n"
-"\n"
-"You receive this email because you requested to be notified when new\n"
-"versions of this package were released. If you don't wish to be\n"
-"notified in the future, please login to %7$s and click this link:\n"
-"%8$s"
+"You receive this email because you requested to be notified when new "
+"versions of this package were released. If you don't wish to be notified in "
+"the future, please login to %s and click this link:"
 msgstr ""
 
 #: common/frs/include/frs_utils.php:76
@@ -3183,34 +3195,37 @@ msgid "Request to Join Project %1$s from %2$s (%3$s)"
 msgstr "Verzoek om deel te mogen nemen aan project %1$s"
 
 #: common/include/GroupJoinRequest.class.php:234
-#, fuzzy, php-format
-msgid ""
-"%1$s (%2$s) has requested to join your project. \n"
-"You can approve this request here: %3$s \n"
-"\n"
-"Comments by the user:\n"
-"%4$s"
+#, php-format
+msgid "%1$s (%2$s) has requested to join your project."
 msgstr ""
-"%1$s heeft een verzoek ingediend om aan je project deel te nemen. Je kunt "
-"dit verzoek afhandelen op de <a href=\"http://%2$s/project/admin/?group_id="
-"%3$s\">project beheer pagina</a>."
+"%1$s (%2$s) heeft een verzoek ingediend om aan je project deel te nemen."
+
+#: common/include/GroupJoinRequest.class.php:237
+#, php-format
+msgid "You can approve this request here: %s"
+msgstr "Je kunt dit verzoek afhandelen op de: %s"
+
+#: common/include/GroupJoinRequest.class.php:240
+#, fuzzy
+msgid "Comments by the user:"
+msgstr "Per gebruiker"
 
 #: common/include/GroupJoinRequest.class.php:259
 #: common/include/GroupJoinRequest.class.php:273
 #, php-format
-msgid "Request to Join Project %1$s"
+msgid "Request to Join Project %s"
 msgstr "Verzoek om deel te mogen nemen aan project %1$s"
 
 #: common/include/GroupJoinRequest.class.php:260
 #, fuzzy, php-format
-msgid "Your request to join the %1$s project was denied by an administrator."
+msgid "Your request to join the %s project was denied by an administrator."
 msgstr ""
 "Je verzoek om aan het %1$s project te worden toegevoegd is door de beheerder "
 "afgewezen."
 
 #: common/include/GroupJoinRequest.class.php:274
 #, fuzzy, php-format
-msgid "Your request to join the %1$s project was granted by an administrator."
+msgid "Your request to join the %s project was granted by an administrator."
 msgstr ""
 "Je verzoek om aan het %1$s project te worden toegevoegd is door de beheerder "
 "afgewezen."
@@ -7308,11 +7323,6 @@ msgstr "Bundel"
 #: plugins/mantisbt/view/viewNote.php:42
 msgid "Notes"
 msgstr "Aantekeningen"
-
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:130
-#: www/frs/admin/qrs.php:247 www/frs/shownotes.php:78
-msgid "Release Notes"
-msgstr "Release Notes"
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:138
 #: www/frs/index.php:111
@@ -17220,10 +17230,6 @@ msgstr ""
 msgid "Choose an FTP file instead of uploading:"
 msgstr "Kies een FTP bestand in plaats van uploaden:"
 
-#: www/frs/admin/qrs.php:255 www/frs/shownotes.php:84
-msgid "Change Log"
-msgstr "Change Log"
-
 #: www/frs/admin/qrs.php:263
 msgid "Preserve my pre-formatted text"
 msgstr "Laat de voorgeformatteerde tekst intact"
@@ -23206,6 +23212,21 @@ msgstr "Alles bijwerken"
 msgid "No User Name Provided"
 msgstr "Gebruikersnaam"
 
+#, fuzzy
+#~ msgid ""
+#~ "%1$s (%2$s) has requested to join your project. \n"
+#~ "You can approve this request here: %3$s \n"
+#~ "\n"
+#~ "Comments by the user:\n"
+#~ "%4$s"
+#~ msgstr ""
+#~ "%1$s heeft een verzoek ingediend om aan je project deel te nemen. Je kunt "
+#~ "dit verzoek afhandelen op de <a href=\"http://%2$s/project/admin/?"
+#~ "group_id=%3$s\">project beheer pagina</a>."
+
+#~ msgid "Request to Join Project %1$s"
+#~ msgstr "Verzoek om deel te mogen nemen aan project %1$s"
+
 #~ msgid "Could not Update Master Thread parent with current time"
 #~ msgstr "Kan master thread parent niet aanpassen met huidige tijd"
 
@@ -23294,16 +23315,6 @@ msgstr "Gebruikersnaam"
 #~ msgstr ""
 #~ "De %s beheerder zal de projectaanvraag nu beoordelen. Je ontvangt bericht "
 #~ "krijgen over de beslissing."
-
-#~ msgid "%1$s (%2$s) has requested to join your project."
-#~ msgstr ""
-#~ "%1$s (%2$s) heeft een verzoek ingediend om aan je project deel te nemen."
-
-#~ msgid "You can approve this request here: %s"
-#~ msgstr "Je kunt dit verzoek afhandelen op de: %s"
-
-#~ msgid "Request to Join Project %s"
-#~ msgstr "Verzoek om deel te mogen nemen aan project %1$s"
 
 #~ msgid "Project Admin"
 #~ msgstr "Project beheer"

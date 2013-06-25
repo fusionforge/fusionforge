@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 17:51+0200\n"
+"POT-Creation-Date: 2013-06-25 18:57+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -1542,7 +1542,9 @@ msgid "Start Date"
 msgstr "Startdatum"
 
 #: common/docman/views/reporting.php:92 common/docman/views/reporting.php:94
-#: common/include/utils.php:539 common/tracker/actions/query.php:403
+#: common/frs/FRSRelease.class.php:294 common/frs/FRSRelease.class.php:297
+#: common/frs/FRSRelease.class.php:301 common/include/utils.php:539
+#: common/tracker/actions/query.php:403
 #: common/tracker/views/form-addcanned.php:68
 #: common/tracker/views/form-addcanned.php:71
 #: common/tracker/views/form-updatecanned.php:43
@@ -2147,7 +2149,7 @@ msgid "Error On Update:"
 msgstr "Fehler bei der Aktualisierung:"
 
 #: common/forum/Forum.class.php:613 common/frs/FRSPackage.class.php:451
-#: common/frs/FRSRelease.class.php:349 common/include/Group.class.php:1590
+#: common/frs/FRSRelease.class.php:343 common/include/Group.class.php:1590
 #: common/mail/MailingList.class.php:384 common/pm/ProjectGroup.class.php:360
 #: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:504
 #: common/tracker/ArtifactExtraField.class.php:430
@@ -2486,7 +2488,7 @@ msgid "File cannot be moved to the permanent location"
 msgstr "Datei kann nicht zum aktuellen Ort verschoben werden"
 
 #: common/frs/FRSPackage.class.php:135 common/frs/FRSPackage.class.php:367
-#: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:394
+#: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:388
 msgid "FRSPackage Name Must Be At Least 3 Characters"
 msgstr "FRSPackage Name muss mindestens 3 Zeichen haben"
 
@@ -2501,45 +2503,49 @@ msgstr "FRSPackage::Aktualisierung: Paketname darf nur alphanumerisch sein"
 msgid "Cannot open the file archive."
 msgstr ""
 
+#: common/frs/FRSRelease.class.php:143
+#, fuzzy
+msgid "Error Adding Release: Name Already Exists"
+msgstr "Ein solches Element existiert bereits"
+
 #: common/frs/FRSRelease.class.php:286
 #, php-format
 msgid "[%1$s Release] %2$s"
 msgstr "[%1$s Release] %2$s"
 
 #: common/frs/FRSRelease.class.php:289
-#, fuzzy, php-format
-msgid ""
-"Project %1$s (%2$s) has released a new version of package \"%3$s\".\n"
-"\n"
-"Release note:\n"
-"\n"
-"%4$s\n"
-"\n"
-"Change note:\n"
-"\n"
-"%5$s\n"
-"\n"
-"\n"
-"You can download it by following this link:\n"
-"%6$s\n"
-"\n"
-"You receive this email because you requested to be notified when new\n"
-"versions of this package were released. If you don't wish to be\n"
-"notified in the future, please login to %7$s and click this link:\n"
-"%8$s"
+#, php-format
+msgid "Project %1$s (%2$s) has released a new version of package “%3$s”."
 msgstr ""
-"Das Projekt %1$s (%2$s) hat eine Neue Version des Pakets \"%3$s\" "
-"veröffentlicht.\n"
-"Sie können es unter dem folgenden Link herunterladen:\n"
-"\n"
-" %4$s\n"
-" \n"
-"Sie erhalten diese E-Mail, da Sie Informationen erbaten, wenn neue\n"
-"Versionen des Pakets veröffentlicht werden. Wenn Sie zukünftig\n"
-"nicht mehr informiert werden möchten, loggen Sie sich bitte unter\n"
-"%5$s ein und klicken Sie auf den folgenden Link:\n"
-"\n"
-"%6$s"
+"Das Projekt %1$s (%2$s) hat eine Neue Version des Pakets “%3$s” "
+"veröffentlicht."
+
+#: common/frs/FRSRelease.class.php:294
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:130
+#: www/frs/admin/qrs.php:247 www/frs/shownotes.php:78
+msgid "Release Notes"
+msgstr "Versionsanmerkungen"
+
+#: common/frs/FRSRelease.class.php:297 www/frs/admin/qrs.php:255
+#: www/frs/shownotes.php:84
+msgid "Change Log"
+msgstr "Änderungsprotokoll"
+
+#: common/frs/FRSRelease.class.php:301
+msgid "You can download it by following this link"
+msgstr "Sie können es unter dem folgenden Link herunterladen"
+
+#: common/frs/FRSRelease.class.php:305
+#, php-format
+msgid ""
+"You receive this email because you requested to be notified when new "
+"versions of this package were released. If you don't wish to be notified in "
+"the future, please login to %s and click this link:"
+msgstr ""
+"Sie erhalten diese E-Mail, da Sie Informationen erbaten, wenn neue Versionen "
+"des Pakets veröffentlicht werden. Wenn Sie zukünftig nicht mehr informiert "
+"werden möchten, loggen Sie sich bitte unter %s ein und klicken Sie auf den "
+"folgenden Link:"
 
 #: common/frs/include/frs_utils.php:76
 #, fuzzy
@@ -3223,33 +3229,35 @@ msgid "Request to Join Project %1$s from %2$s (%3$s)"
 msgstr "Anfrage dem Projekt %1$s beizutreten von %2$s (%3$s)"
 
 #: common/include/GroupJoinRequest.class.php:234
-#, fuzzy, php-format
-msgid ""
-"%1$s (%2$s) has requested to join your project. \n"
-"You can approve this request here: %3$s \n"
-"\n"
-"Comments by the user:\n"
-"%4$s"
-msgstr ""
-"%1$s bittet Ihrem Projekt beitreten zu können. Sie können diese Bitte hier "
-"(%2$s) akzeptieren. Kommentare des Nutzers: %3$s"
+#, php-format
+msgid "%1$s (%2$s) has requested to join your project."
+msgstr "%1$s (%2$s) bittet Ihrem Projekt beitreten zu können."
+
+#: common/include/GroupJoinRequest.class.php:237
+#, php-format
+msgid "You can approve this request here: %s"
+msgstr "Sie können diese Bitte hier akzeptieren: %s"
+
+#: common/include/GroupJoinRequest.class.php:240
+msgid "Comments by the user:"
+msgstr "Kommentare des Nutzers:"
 
 #: common/include/GroupJoinRequest.class.php:259
 #: common/include/GroupJoinRequest.class.php:273
 #, php-format
-msgid "Request to Join Project %1$s"
+msgid "Request to Join Project %s"
 msgstr "Anfrage dem Projekt %1$s beizutreten"
 
 #: common/include/GroupJoinRequest.class.php:260
 #, php-format
-msgid "Your request to join the %1$s project was denied by an administrator."
+msgid "Your request to join the %s project was denied by an administrator."
 msgstr ""
 "Ihre Anfrage dem Projekt %1$s beizutreten wurde von einem Administrator "
 "abgelehnt."
 
 #: common/include/GroupJoinRequest.class.php:274
 #, php-format
-msgid "Your request to join the %1$s project was granted by an administrator."
+msgid "Your request to join the %s project was granted by an administrator."
 msgstr ""
 "Ihrer Anfrage dem Projekt %1$s beizutreten wurde von einem Administrator "
 "stattgegeben."
@@ -7379,11 +7387,6 @@ msgstr "Paket"
 #: plugins/mantisbt/view/viewNote.php:42
 msgid "Notes"
 msgstr "Anmerkungen"
-
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:130
-#: www/frs/admin/qrs.php:247 www/frs/shownotes.php:78
-msgid "Release Notes"
-msgstr "Versionsanmerkungen"
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:138
 #: www/frs/index.php:111
@@ -17383,10 +17386,6 @@ msgstr ""
 msgid "Choose an FTP file instead of uploading:"
 msgstr "Wählen Sie eine FTP Datei, anstatt hochzuladen:"
 
-#: www/frs/admin/qrs.php:255 www/frs/shownotes.php:84
-msgid "Change Log"
-msgstr "Änderungsprotokoll"
-
 #: www/frs/admin/qrs.php:263
 msgid "Preserve my pre-formatted text"
 msgstr "Bewahre meinen vor-formatierten Text auf"
@@ -23481,6 +23480,66 @@ msgstr "Aktualisierung nicht möglich"
 msgid "No User Name Provided"
 msgstr "Kein Benutzername angegeben"
 
+#, fuzzy
+#~ msgid ""
+#~ "Project %1$s (%2$s) has released a new version of package \"%3$s\".\n"
+#~ "\n"
+#~ "Release note:\n"
+#~ "\n"
+#~ "%4$s\n"
+#~ "\n"
+#~ "Change note:\n"
+#~ "\n"
+#~ "%5$s\n"
+#~ "\n"
+#~ "\n"
+#~ "You can download it by following this link:\n"
+#~ "%6$s\n"
+#~ "\n"
+#~ "You receive this email because you requested to be notified when new\n"
+#~ "versions of this package were released. If you don't wish to be\n"
+#~ "notified in the future, please login to %7$s and click this link:\n"
+#~ "%8$s"
+#~ msgstr ""
+#~ "Das Projekt %1$s (%2$s) hat eine Neue Version des Pakets \"%3$s\" "
+#~ "veröffentlicht.\n"
+#~ "Sie können es unter dem folgenden Link herunterladen:\n"
+#~ "\n"
+#~ " %4$s\n"
+#~ " \n"
+#~ "Sie erhalten diese E-Mail, da Sie Informationen erbaten, wenn neue\n"
+#~ "Versionen des Pakets veröffentlicht werden. Wenn Sie zukünftig\n"
+#~ "nicht mehr informiert werden möchten, loggen Sie sich bitte unter\n"
+#~ "%5$s ein und klicken Sie auf den folgenden Link:\n"
+#~ "\n"
+#~ "%6$s"
+
+#, fuzzy
+#~ msgid ""
+#~ "%1$s (%2$s) has requested to join your project. \n"
+#~ "You can approve this request here: %3$s \n"
+#~ "\n"
+#~ "Comments by the user:\n"
+#~ "%4$s"
+#~ msgstr ""
+#~ "%1$s bittet Ihrem Projekt beitreten zu können. Sie können diese Bitte "
+#~ "hier (%2$s) akzeptieren. Kommentare des Nutzers: %3$s"
+
+#~ msgid "Request to Join Project %1$s"
+#~ msgstr "Anfrage dem Projekt %1$s beizutreten"
+
+#~ msgid ""
+#~ "Your request to join the %1$s project was denied by an administrator."
+#~ msgstr ""
+#~ "Ihre Anfrage dem Projekt %1$s beizutreten wurde von einem Administrator "
+#~ "abgelehnt."
+
+#~ msgid ""
+#~ "Your request to join the %1$s project was granted by an administrator."
+#~ msgstr ""
+#~ "Ihrer Anfrage dem Projekt %1$s beizutreten wurde von einem Administrator "
+#~ "stattgegeben."
+
 #~ msgid "Anonymous Git Access"
 #~ msgstr "Anonymer Git Zugang"
 
@@ -23528,24 +23587,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgstr ""
 #~ "Für Dateinamen können ausschließlich alphanumerische und “-”, “_”, “+”, "
 #~ "“.”, “~” Zeichen verwendet werden."
-
-#~ msgid "Project %1$s (%2$s) has released a new version of package “%3$s”."
-#~ msgstr ""
-#~ "Das Projekt %1$s (%2$s) hat eine Neue Version des Pakets “%3$s” "
-#~ "veröffentlicht."
-
-#~ msgid "You can download it by following this link"
-#~ msgstr "Sie können es unter dem folgenden Link herunterladen"
-
-#~ msgid ""
-#~ "You receive this email because you requested to be notified when new "
-#~ "versions of this package were released. If you don't wish to be notified "
-#~ "in the future, please login to %s and click this link:"
-#~ msgstr ""
-#~ "Sie erhalten diese E-Mail, da Sie Informationen erbaten, wenn neue "
-#~ "Versionen des Pakets veröffentlicht werden. Wenn Sie zukünftig nicht mehr "
-#~ "informiert werden möchten, loggen Sie sich bitte unter %s ein und klicken "
-#~ "Sie auf den folgenden Link:"
 
 #~ msgid "Missing Required Parameters"
 #~ msgstr "Es fehlen benötigte Parameter"
@@ -23663,28 +23704,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgstr ""
 #~ "Das %s-Admin-Team wird jetzt Ihre Projekt-Anmeldung überprüfen. Sie "
 #~ "werden über deren Entscheidung benachrichtigt."
-
-#~ msgid "%1$s (%2$s) has requested to join your project."
-#~ msgstr "%1$s (%2$s) bittet Ihrem Projekt beitreten zu können."
-
-#~ msgid "You can approve this request here: %s"
-#~ msgstr "Sie können diese Bitte hier akzeptieren: %s"
-
-#~ msgid "Comments by the user:"
-#~ msgstr "Kommentare des Nutzers:"
-
-#~ msgid "Request to Join Project %s"
-#~ msgstr "Anfrage dem Projekt %1$s beizutreten"
-
-#~ msgid "Your request to join the %s project was denied by an administrator."
-#~ msgstr ""
-#~ "Ihre Anfrage dem Projekt %1$s beizutreten wurde von einem Administrator "
-#~ "abgelehnt."
-
-#~ msgid "Your request to join the %s project was granted by an administrator."
-#~ msgstr ""
-#~ "Ihrer Anfrage dem Projekt %1$s beizutreten wurde von einem Administrator "
-#~ "stattgegeben."
 
 #~ msgid ""
 #~ "Config file could not be linked to etc/gforge/plugins/%s. Check the write "

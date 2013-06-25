@@ -231,15 +231,15 @@ class GroupJoinRequest extends Error {
 				$user->getUnixName()
 			);
 			$comments = util_unconvert_htmlspecialchars($this->data_array["comments"]);
-			$body = sprintf(_('%1$s (%2$s) has requested to join your project. 
-You can approve this request here: %3$s 
-
-Comments by the user:
-%4$s'),
-				$user->getRealName(),
-				$user->getUnixName(),
-				util_make_url('/project/admin/users.php?group_id='.$this->Group->getId()),
-				$comments);
+			$body = sprintf(_('%1$s (%2$s) has requested to join your project.'),
+							 $user->getRealName(), $user->getUnixName()); 
+			$body .= "\n";
+			$body .= sprintf(_('You can approve this request here: %s'),
+							 util_make_url('/project/admin/users.php?group_id='.$this->Group->getId()));
+			$body .= "\n\n";
+			$body .= _('Comments by the user:');
+			$body .= "\n";
+			$body .= $comments;
 			$body = str_replace("\\n", "\n", $body);
 
 			util_send_message($email, $subject, $body);
@@ -256,8 +256,8 @@ Comments by the user:
 	function reject() {
 		$user =& user_get_object($this->getUserId());
 		setup_gettext_for_user($user);
-		$subject = sprintf(_('Request to Join Project %1$s'), $this->Group->getPublicName());
-		$body = sprintf(_('Your request to join the %1$s project was denied by an administrator.'), $this->Group->getPublicName());
+		$subject = sprintf(_('Request to Join Project %s'), $this->Group->getPublicName());
+		$body = sprintf(_('Your request to join the %s project was denied by an administrator.'), $this->Group->getPublicName());
 		util_send_message($user->getEmail(), $subject, $body);
 		setup_gettext_from_context();
 		return $this->delete(1);
@@ -270,8 +270,8 @@ Comments by the user:
 	function send_accept_mail() {
 		$user =& user_get_object($this->getUserId());
 		setup_gettext_for_user($user);
-		$subject = sprintf(_('Request to Join Project %1$s'), $this->Group->getPublicName());
-		$body = sprintf(_('Your request to join the %1$s project was granted by an administrator.'), $this->Group->getPublicName());
+		$subject = sprintf(_('Request to Join Project %s'), $this->Group->getPublicName());
+		$body = sprintf(_('Your request to join the %s project was granted by an administrator.'), $this->Group->getPublicName());
 		util_send_message($user->getEmail(), $subject, $body);
 		setup_gettext_from_context();
 	}
