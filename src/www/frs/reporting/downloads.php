@@ -78,7 +78,7 @@ if (!$start) {
 }
 
 if (!$end) {
-	$end = $z[ count($z)-1];
+	$end = $z[ count($z)-1 ];
 }
 if ($end < $start) list($start, $end) = array($end, $start);
 
@@ -99,16 +99,18 @@ if ($report->isError()) {
 ?>
 
 <form action="<?php echo util_make_url('/frs/reporting/downloads.php') ?>" method="get">
-<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
-<table><tr>
-<td><strong><?php echo _('Package'); ?>:</strong><br />
-<?php echo report_package_box($group_id,'package_id',$package_id); ?></td>
-<td><strong><?php echo _('Start'); ?>:</strong><br />
-<?php echo report_months_box($report, 'start', $start); ?></td>
-<td><strong><?php echo _('End'); ?>:</strong><br />
-<?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
-</tr></table>
+	<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
+	<table>
+		<tr>
+			<td><strong><?php echo _('Package')._(':'); ?></strong><br />
+				<?php echo report_package_box($group_id,'package_id',$package_id); ?></td>
+			<td><strong><?php echo _('Start Date')._(':'); ?></strong><br />
+				<?php echo report_months_box($report, 'start', $start); ?></td>
+			<td><strong><?php echo _('End Date')._(':'); ?></strong><br />
+				<?php echo report_months_box($report, 'end', $end); ?></td>
+			<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
+		</tr>
+	</table>
 </form>
 
 <?php
@@ -163,7 +165,7 @@ if (count($data) == 0) {
 							pad: 0,
 						},
 						yaxis: {
-							label: "'._('Download').'",
+							label: "'._('Downloads').'",
 							padMin: 0,
 						}
 					}
