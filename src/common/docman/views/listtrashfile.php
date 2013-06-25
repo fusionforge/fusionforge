@@ -114,7 +114,7 @@ echo '</div>';
 echo '<div id="handle" style="float:left; height:100px; margin:3px; width:3px; background: #000; cursor:e-resize;"></div>';
 echo '<div id="right" style="float:left; width: 80%; overflow: auto; max-width: 90%;">';
 if ($DocGroupName) {
-	echo '<h3 class="docman_h3" >'._('Documents folder:').' <i>'.$DocGroupName.'</i>&nbsp;';
+	echo '<h3 class="docman_h3" >'._('Document Folder')._(': ').' <i>'.$DocGroupName.'</i>&nbsp;';
 	if ($DocGroupName != '.trash') {
 		echo '<a href="#" id="docman-editdirectory" class="tabtitle" title="'._('Edit this folder').'" >'. html_image('docman/configure-directory.png',22,22,array('alt'=>'edit')). '</a>';
 		echo '<a href="?group_id='.$group_id.'&amp;action=deldir&amp;dirid='.$dirid.'" id="docman-deletedirectory" title="'._('Delete permanently this folder and his content.').'" >'. html_image('docman/delete-directory.png',22,22,array('alt'=>'deldir')). '</a>';
