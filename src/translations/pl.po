@@ -3724,7 +3724,7 @@ msgstr "Podane hasła są różne."
 
 #: common/include/User.class.php:295
 msgid "Invalid Password:"
-msgstr "Niepoprawne hasło"
+msgstr "Niepoprawne hasło:"
 
 #: common/include/User.class.php:300
 msgid "Invalid Unix Name (must not contain uppercase characters)"

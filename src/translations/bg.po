@@ -3807,7 +3807,7 @@ msgstr "Паролата и потвърждението и не съвпада�
 
 #: common/include/User.class.php:295
 msgid "Invalid Password:"
-msgstr "Грешна парола"
+msgstr "Грешна парола:"
 
 #: common/include/User.class.php:300
 #, fuzzy
@@ -16764,7 +16764,7 @@ msgstr ""
 
 #: www/frs/index.php:88
 msgid "To create a new release click here."
-msgstr "Издаване на нов пакет"
+msgstr "Издаване на нов пакет."
 
 #: www/frs/index.php:107
 msgid "Stop monitoring this package"
@@ -20116,12 +20116,13 @@ msgid ""
 msgstr ""
 
 #: www/register/index.php:168
+#, fuzzy
 msgid ""
 "To apply for project registration, you should fill in basic information "
 "about it. Please read descriptions below carefully and provide complete and "
 "comprehensive data. All fields below are mandatory."
 msgstr ""
-"<h4>Регистриране на проект</h4>За да регистрирате проект е нужно да "
+"Регистриране на проект. За да регистрирате проект е нужно да "
 "предоставите следната информация за него (всички полета са задължителни):"
 
 #: www/register/index.php:173

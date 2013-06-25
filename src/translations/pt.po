@@ -14595,7 +14595,7 @@ msgstr "Correio do Site."
 
 #: www/admin/unsubscribe.php:117
 msgid "Comm. Mail."
-msgstr "Postagens Comuns"
+msgstr "Postagens Comuns."
 
 #: www/admin/useredit.php:34
 msgid "No Unix account (N)"
