@@ -82,7 +82,7 @@ class DocumentFactory extends Error {
 	 * Constructor.
 	 *
 	 * @param	object	The Group object to which this DocumentFactory is associated.
-	 * @return	boolean	success.
+	 * @return	void
 	 * @access	public
 	 */
 	function __construct(&$Group) {
@@ -93,7 +93,7 @@ class DocumentFactory extends Error {
 
 		if ($Group->isError()) {
 			$this->setError('ProjectGroup:: '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 
 		$this->Group =& $Group;
