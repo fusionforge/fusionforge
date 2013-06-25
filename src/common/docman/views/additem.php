@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -54,11 +54,11 @@ jQuery(document).ready(function() {
 
 <div id="tabs">
 <ul>
-<li><a href="#tabs-new-document" title="<?php echo _('Submit a new document in this folder.') ?>">
+<li><a href="#tabs-new-document" class="tabtitle" title="<?php echo _('Submit a new document in this folder.') ?>">
     <?php echo _('New Document') ?></a></li>
-<li><a href="#tabs-new-folder" title="<?php echo _('Create a folder based on this name.') ?>">
+<li><a href="#tabs-new-folder" class="tabtitle" title="<?php echo _('Create a folder based on this name.') ?>">
     <?php echo _('New Folder') ?></a></li>
-<li><a href="#tabs-inject-tree" title="<?php echo _('Create a full folders tree using an compressed archive. Only zip format support.') ?>">
+<li><a href="#tabs-inject-tree" class="tabtitle" title="<?php echo _('Create a full folders tree using an compressed archive. Only zip format support.') ?>">
     <?php echo _('Inject Tree') ?></a></li>
 </ul>
 
