@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 14:00+0200\n"
+"POT-Creation-Date: 2013-06-25 17:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -570,8 +570,8 @@ msgstr ""
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/snippet/download.php:45 www/survey/admin/question.php:64
-#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:82
-#: www/survey/admin/show_csv.php:84 www/survey/admin/show_results.php:69
+#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:80
+#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:69
 #: www/survey/admin/show_results.php:73 www/survey/admin/show_results.php:84
 #: www/survey/admin/show_results.php:86 www/survey/admin/show_results.php:133
 #: www/survey/admin/show_results.php:135 www/tracker/admin/index.php:190
@@ -20530,7 +20530,7 @@ msgstr ""
 msgid "Add a Question"
 msgstr ""
 
-#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:61
+#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
 #: www/survey/admin/show_questions.php:35
 #: www/survey/admin/show_results_aggregate.php:35
 #: www/survey/admin/show_results_comments.php:36
@@ -20557,7 +20557,7 @@ msgstr ""
 msgid "No questions found"
 msgstr ""
 
-#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:133
+#: www/survey/admin/show_csv.php:80 www/survey/admin/show_results.php:133
 msgid "Cannot get Survey Response Factory"
 msgstr ""
 
