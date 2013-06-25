@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 12:13+0200\n"
+"POT-Creation-Date: 2013-06-25 12:22+0200\n"
 "PO-Revision-Date: 2013-05-23 16:06+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -392,11 +392,14 @@ msgstr "Projet"
 #: plugins/oauthconsumer/www/get_access_token.php:134
 #: plugins/oauthconsumer/www/get_access_token.php:135
 #: plugins/projects-hierarchy/view/home_project_link.php:37
-#: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
-#: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
-#: www/export/rssAboTask.php:146 www/export/rssAboTask.php:169
-#: www/export/rssAboTask.php:171 www/export/rssAboTask.php:173
-#: www/project/admin/roledelete.php:62 www/register/index.php:178
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:631
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:633
+#: plugins/scmhg/common/HgPlugin.class.php:625 www/export/rssAboTask.php:142
+#: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
+#: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
+#: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
+#: www/export/rssAboTask.php:173 www/project/admin/roledelete.php:62
+#: www/register/index.php:178
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/softwaremap/tag_cloud.php:143 www/survey/survey.php:51
@@ -676,7 +679,7 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer.php:45
 #: plugins/oauthprovider/www/consumer.php:110
 #: plugins/oauthprovider/www/consumer_update_page.php:65
-#: plugins/scmhg/common/HgPlugin.class.php:620
+#: plugins/scmhg/common/HgPlugin.class.php:627
 #: plugins/scmhook/common/scmhookPlugin.class.php:287
 #: plugins/scmhook/common/scmhookPlugin.class.php:330
 #: plugins/scmhook/common/scmhookPlugin.class.php:373
@@ -1547,7 +1550,7 @@ msgstr "Date de début"
 #: plugins/mailman/www/admin/index.php:144
 #: plugins/mailman/www/admin/index.php:150
 #: plugins/mailman/www/admin/index.php:183
-#: plugins/scmhg/common/HgPlugin.class.php:620 www/account/lostpw.php:89
+#: plugins/scmhg/common/HgPlugin.class.php:627 www/account/lostpw.php:89
 #: www/account/pending-resend.php:71 www/account/register.php:159
 #: www/account/verify.php:78 www/account/verify.php:82
 #: www/admin/useredit.php:148 www/admin/useredit.php:157
@@ -1790,8 +1793,8 @@ msgstr "Erreur lors de la création de l'objet Forum"
 #: plugins/oauthprovider/www/request_tokens.php:100
 #: plugins/oauthprovider/www/request_tokens.php:103
 #: plugins/oauthprovider/www/request_tokens.php:108
-#: plugins/scmgit/common/GitPlugin.class.php:1080
-#: plugins/scmgit/common/GitPlugin.class.php:1089
+#: plugins/scmgit/common/GitPlugin.class.php:1084
+#: plugins/scmgit/common/GitPlugin.class.php:1093
 #: www/admin/admin_table.php:162 www/admin/admin_table.php:326
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:152
 #: www/admin/useredit.php:231 www/forum/admin/index.php:174
@@ -2219,8 +2222,8 @@ msgstr "Message :"
 #: plugins/headermenu/view/admin/updateLinkValue.php:103
 #: plugins/oauthconsumer/www/provider_edit.php:30
 #: plugins/oauthprovider/www/consumer_update_page.php:51
-#: plugins/scmgit/common/GitPlugin.class.php:1110
-#: plugins/scmhg/common/HgPlugin.class.php:624
+#: plugins/scmgit/common/GitPlugin.class.php:1114
+#: plugins/scmhg/common/HgPlugin.class.php:631
 #: plugins/webanalytics/view/admin/updateLinkValue.php:42
 #: www/admin/admin_table.php:59 www/admin/admin_table.php:165
 #: www/admin/admin_table.php:224 www/forum/admin/index.php:413
@@ -3724,9 +3727,9 @@ msgid "Not implemented yet"
 msgstr "Pas encore implémenté"
 
 #: common/include/SCMPlugin.class.php:187
-#: plugins/scmcvs/common/CVSPlugin.class.php:150
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:195
-#: plugins/scmsvn/common/SVNPlugin.class.php:197
+#: plugins/scmcvs/common/CVSPlugin.class.php:172
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:207
+#: plugins/scmsvn/common/SVNPlugin.class.php:219
 msgid "Repository Statistics"
 msgstr "Statistiques sur le dépôt"
 
@@ -3752,7 +3755,7 @@ msgid "No repository %s exists"
 msgstr "Statistiques sur le dépôt"
 
 #: common/include/SCMPlugin.class.php:344
-#: plugins/scmhg/common/HgPlugin.class.php:577
+#: plugins/scmhg/common/HgPlugin.class.php:584
 #, fuzzy
 msgid "Add Repository"
 msgstr "Dépôt de sources"
@@ -4532,8 +4535,8 @@ msgstr "Texte libre pour la page de navigation."
 #: plugins/forumml/www/forumml_utils.php:603 plugins/forumml/www/index.php:127
 #: plugins/mantisbt/view/addIssue.php:146
 #: plugins/mantisbt/view/addOrEditNote.php:58
-#: plugins/scmgit/common/GitPlugin.class.php:1111
-#: plugins/scmhg/common/HgPlugin.class.php:625
+#: plugins/scmgit/common/GitPlugin.class.php:1115
+#: plugins/scmhg/common/HgPlugin.class.php:632
 #: www/account/pending-resend.php:75 www/activity/index.php:191
 #: www/admin/admin_table.php:222 www/admin/cronman.php:37
 #: www/admin/globalroleedit.php:247 www/admin/index.php:166
@@ -5129,9 +5132,9 @@ msgstr "Fichiers joints"
 #: common/tracker/actions/detail.php:157
 #: common/tracker/actions/mod-limited.php:198
 #: common/tracker/actions/mod.php:259
-#: plugins/scmcvs/common/CVSPlugin.class.php:155
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:200
-#: plugins/scmsvn/common/SVNPlugin.class.php:202
+#: plugins/scmcvs/common/CVSPlugin.class.php:177
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:212
+#: plugins/scmsvn/common/SVNPlugin.class.php:224
 #: utils/fixscripts/populate_template_project.php:203
 #: www/stats/site_stats_utils.php:286
 msgid "Commits"
@@ -5179,10 +5182,10 @@ msgstr "Ouvert"
 #: plugins/mantisbt/view/admin/StatPerStatus.php:51
 #: plugins/quota_management/www/quota_project.php:185
 #: plugins/quota_management/www/quota_project.php:230
-#: plugins/scmcvs/common/CVSPlugin.class.php:173
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:218
-#: plugins/scmgit/common/GitPlugin.class.php:354
-#: plugins/scmsvn/common/SVNPlugin.class.php:220 www/pm/index.php:102
+#: plugins/scmcvs/common/CVSPlugin.class.php:195
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:230
+#: plugins/scmgit/common/GitPlugin.class.php:358
+#: plugins/scmsvn/common/SVNPlugin.class.php:242 www/pm/index.php:102
 #: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:268
 msgid "Total"
 msgstr "Total"
@@ -5912,10 +5915,10 @@ msgstr "Taux de complétion moyen : %d%%"
 #: plugins/oauthprovider/www/consumer_manage.php:56
 #: plugins/oauthprovider/www/consumer.php:100
 #: plugins/oauthprovider/www/consumer_update_page.php:55
-#: plugins/scmcvs/common/CVSPlugin.class.php:153
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:198
-#: plugins/scmgit/common/GitPlugin.class.php:334
-#: plugins/scmsvn/common/SVNPlugin.class.php:200
+#: plugins/scmcvs/common/CVSPlugin.class.php:175
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:210
+#: plugins/scmgit/common/GitPlugin.class.php:338
+#: plugins/scmsvn/common/SVNPlugin.class.php:222
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
 #: www/account/editsshkeys.php:51 www/account/index.php:317
 #: www/admin/useredit.php:262 www/admin/useredit.php:292
@@ -5936,7 +5939,7 @@ msgstr "Télécharger"
 #: common/tracker/include/ArtifactTypeHtml.class.php:537
 #: common/tracker/include/ArtifactTypeHtml.class.php:582
 #: common/tracker/include/ArtifactTypeHtml.class.php:749
-#: plugins/scmhg/common/HgPlugin.class.php:601 www/admin/pluginman.php:227
+#: plugins/scmhg/common/HgPlugin.class.php:608 www/admin/pluginman.php:227
 #: www/admin/pluginman.php:246 www/admin/pluginman.php:258
 #: www/admin/pluginman.php:259 www/include/html.php:313
 #: www/include/html.php:503 www/include/html.php:589 www/include/html.php:606
@@ -12766,38 +12769,32 @@ msgstr "Limite de blocage"
 msgid "Home, Ftp"
 msgstr "Répertoire personnel et FTP"
 
-#: plugins/scmarch/common/ArchPlugin.class.php:42
-msgid ""
-"<p>Documentation for GNU Arch (sometimes referred to as \"tla\") is "
-"available <a href=\"http://www.gnu.org/software/gnu-arch/\">here</a>.</p>"
-msgstr ""
-"<p>La documentation de GNU Arch (que l'on appelle parfois « tla ») est "
-"disponible <a href=\"http://www.gnu.org/software/gnu-arch/\">ici</a> (en "
-"anglais).</p>"
+#: plugins/scmarch/common/ArchPlugin.class.php:43
+#: plugins/scmbzr/common/BzrPlugin.class.php:76
+#: plugins/scmcvs/common/CVSPlugin.class.php:72
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:90
+#: plugins/scmgit/common/GitPlugin.class.php:83
+#: plugins/scmhg/common/HgPlugin.class.php:56
+#: plugins/scmsvn/common/SVNPlugin.class.php:88
+#, php-format
+msgid "Documentation for %1$s is available at <a href=\"%2$s\">%2$s</a>."
+msgstr "La documentation de %1$s est disponible <a href=\"%2$s\">%2$s</a>."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:70
 #: plugins/scmcvs/common/CVSPlugin.class.php:66
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:84
 #: plugins/scmgit/common/GitPlugin.class.php:77
-#: plugins/scmhg/common/HgPlugin.class.php:166
+#: plugins/scmhg/common/HgPlugin.class.php:173
 #: plugins/scmsvn/common/SVNPlugin.class.php:82
 #, php-format
 msgid "<strong>%1$s</strong> commits, <strong>%2$s</strong> adds"
 msgstr "<strong>%1$s</strong> envois, <strong>%2$s</strong> ajouts"
 
-#: plugins/scmbzr/common/BzrPlugin.class.php:75
-msgid ""
-"Documentation for Bazaar (sometimes referred to as \"bzr\") is available <a "
-"href=\"http://bazaar-vcs.org/Documentation\">here</a>."
-msgstr ""
-"La documentation de Bazaar (que l'on appelle parfois « bzr ») est disponible "
-"<a href=\"http://doc.bazaar-vcs.org/latest/\">ici</a> (en anglais)."
-
-#: plugins/scmbzr/common/BzrPlugin.class.php:80
+#: plugins/scmbzr/common/BzrPlugin.class.php:84
 msgid "Anonymous Bazaar Access"
 msgstr "Accès anonyme au dépôt Bazaar"
 
-#: plugins/scmbzr/common/BzrPlugin.class.php:83
+#: plugins/scmbzr/common/BzrPlugin.class.php:87
 msgid ""
 "This project's Bazaar repository can be checked out through anonymous access "
 "with the following command."
@@ -12805,65 +12802,127 @@ msgstr ""
 "Le dépôt Bazaar de ce projet est accessible de manière anonyme grâce à la "
 "commande suivante."
 
-#: plugins/scmbzr/common/BzrPlugin.class.php:97
-#: plugins/scmbzr/common/BzrPlugin.class.php:105
-msgid "Developer Bazaar Access via SSH"
-msgstr "Accès au dépôt Bazaar pour les développeurs via SSH"
+#: plugins/scmbzr/common/BzrPlugin.class.php:101
+#: plugins/scmbzr/common/BzrPlugin.class.php:113
+#: plugins/scmcpold/common/CpoldPlugin.class.php:75
+#: plugins/scmcpold/common/CpoldPlugin.class.php:87
+#: plugins/scmcvs/common/CVSPlugin.class.php:98
+#: plugins/scmcvs/common/CVSPlugin.class.php:115
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:144
+#: plugins/scmhg/common/HgPlugin.class.php:94
+#: plugins/scmsvn/common/SVNPlugin.class.php:136
+#: plugins/scmsvn/common/SVNPlugin.class.php:161
+#, php-format
+msgid "Developer %s Access via SSH"
+msgstr "Accès à %s par SSH pour les développeurs"
 
-#: plugins/scmbzr/common/BzrPlugin.class.php:100
-msgid ""
-"Only project developers can access the Bazaar branches via this method. SSH "
-"must be installed on your client machine. Enter your site password when "
-"prompted."
+#: plugins/scmbzr/common/BzrPlugin.class.php:104
+#: plugins/scmbzr/common/BzrPlugin.class.php:116
+#: plugins/scmcpold/common/CpoldPlugin.class.php:78
+#: plugins/scmcpold/common/CpoldPlugin.class.php:90
+#: plugins/scmcvs/common/CVSPlugin.class.php:101
+#: plugins/scmcvs/common/CVSPlugin.class.php:118
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:147
+#: plugins/scmsvn/common/SVNPlugin.class.php:139
+#: plugins/scmsvn/common/SVNPlugin.class.php:152
+#: plugins/scmsvn/common/SVNPlugin.class.php:164
+#: plugins/scmsvn/common/SVNPlugin.class.php:179
+#, php-format
+msgid "Only project developers can access the %s tree via this method."
 msgstr ""
-"Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH "
-"doit être installé sur votre poste client. Vous pourrez avoir besoin de "
-"taper votre mot de passe."
+"Seuls les développeurs du projet peuvent accéder à l'arbre %s par cette "
+"méthode."
 
-#: plugins/scmbzr/common/BzrPlugin.class.php:102
+#: plugins/scmbzr/common/BzrPlugin.class.php:106
+#: plugins/scmbzr/common/BzrPlugin.class.php:118
+#: plugins/scmcpold/common/CpoldPlugin.class.php:80
+#: plugins/scmcpold/common/CpoldPlugin.class.php:92
+#: plugins/scmcvs/common/CVSPlugin.class.php:103
+#: plugins/scmcvs/common/CVSPlugin.class.php:120
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:149
+#: plugins/scmsvn/common/SVNPlugin.class.php:141
+#: plugins/scmsvn/common/SVNPlugin.class.php:166
+msgid "SSH must be installed on your client machine."
+msgstr "SSH doit être installé sur votre poste client."
+
+#: plugins/scmbzr/common/BzrPlugin.class.php:108
+#: plugins/scmbzr/common/BzrPlugin.class.php:122
+#: plugins/scmcpold/common/CpoldPlugin.class.php:82
+#: plugins/scmcpold/common/CpoldPlugin.class.php:96
+#: plugins/scmcvs/common/CVSPlugin.class.php:107
+#: plugins/scmcvs/common/CVSPlugin.class.php:124
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:153
+#: plugins/scmsvn/common/SVNPlugin.class.php:143
+#: plugins/scmsvn/common/SVNPlugin.class.php:154
+#: plugins/scmsvn/common/SVNPlugin.class.php:170
+#: plugins/scmsvn/common/SVNPlugin.class.php:183
+msgid "Enter your site password when prompted."
+msgstr "Entrez votre mot de passe quand il vous sera demandé."
+
 #: plugins/scmbzr/common/BzrPlugin.class.php:110
+#: plugins/scmbzr/common/BzrPlugin.class.php:124
 msgid "branchname"
 msgstr "nomdebranche"
 
-#: plugins/scmbzr/common/BzrPlugin.class.php:108
-msgid ""
-"Only project developers can access the Bazaar branches via this method. SSH "
-"must be installed on your client machine. Substitute <i>developername</i> "
-"with the proper value. Enter your site password when prompted."
-msgstr ""
-"Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH "
-"doit être installé sur votre poste client. La valeur <i>nom-du-développeur</"
-"i> devra être remplacée par votre identifiant de connexion. Vous pourrez "
-"avoir besoin de taper votre mot de passe."
+#: plugins/scmbzr/common/BzrPlugin.class.php:120
+#: plugins/scmcpold/common/CpoldPlugin.class.php:94
+#: plugins/scmcvs/common/CVSPlugin.class.php:105
+#: plugins/scmcvs/common/CVSPlugin.class.php:122
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:151
+#: plugins/scmsvn/common/SVNPlugin.class.php:168
+#: plugins/scmsvn/common/SVNPlugin.class.php:181
+msgid "Substitute <i>developername</i> with the proper values."
+msgstr "Remplacez <i>nom-du-développeur</i> par la valeur idoine."
 
-#: plugins/scmbzr/common/BzrPlugin.class.php:110
-#: plugins/scmcpold/common/CpoldPlugin.class.php:73
-#: plugins/scmcvs/common/CVSPlugin.class.php:108
-#: plugins/scmgit/common/GitPlugin.class.php:217
-#: plugins/scmgit/common/GitPlugin.class.php:235
-#: plugins/scmhg/common/HgPlugin.class.php:124
-#: plugins/scmsvn/common/SVNPlugin.class.php:156
-#: plugins/scmsvn/common/SVNPlugin.class.php:165
+#: plugins/scmbzr/common/BzrPlugin.class.php:124
+#: plugins/scmcpold/common/CpoldPlugin.class.php:98
+#: plugins/scmcvs/common/CVSPlugin.class.php:128
+#: plugins/scmgit/common/GitPlugin.class.php:221
+#: plugins/scmgit/common/GitPlugin.class.php:239
+#: plugins/scmhg/common/HgPlugin.class.php:131
+#: plugins/scmsvn/common/SVNPlugin.class.php:172
+#: plugins/scmsvn/common/SVNPlugin.class.php:185
 msgid "developername"
 msgstr "nom-du-développeur"
 
-#: plugins/scmbzr/common/BzrPlugin.class.php:121
-msgid "Bazaar Repository Browser"
-msgstr "Navigateur de dépôt Bazaar"
+#: plugins/scmbzr/common/BzrPlugin.class.php:135
+#: plugins/scmcvs/common/CVSPlugin.class.php:150
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:175
+#: plugins/scmsvn/common/SVNPlugin.class.php:197
+#, php-format
+msgid "%s Repository Browser"
+msgstr "Navigateur de dépôt %s"
 
-#: plugins/scmbzr/common/BzrPlugin.class.php:123
+#: plugins/scmbzr/common/BzrPlugin.class.php:137
+#: plugins/scmccase/common/CCasePlugin.class.php:115
+#: plugins/scmcvs/common/CVSPlugin.class.php:152
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:177
+#: plugins/scmsvn/common/SVNPlugin.class.php:199
+#, php-format
 msgid ""
-"Browsing the Bazaar tree gives you a view into the current status of this "
-"project's code. You may also view the complete histories of any file in the "
-"repository."
+"Browsing the %s tree gives you a view into the current status of this "
+"project's code."
 msgstr ""
-"Parcourir le dépôt Bazaar permet de naviguer dans l'état actuel du code de "
-"ce projet, mais également d'avoir accès à l'historique complet de chaque "
-"fichier présent dans le dépôt."
+"Parcourir le dépôt %s permet de naviguer dans l'état actuel du code de ce "
+"projet."
 
-#: plugins/scmbzr/common/BzrPlugin.class.php:127
-msgid "Browse Bazaar Repository"
-msgstr "Parcourir le dépôt Bazaar"
+#: plugins/scmbzr/common/BzrPlugin.class.php:139
+#: plugins/scmccase/common/CCasePlugin.class.php:117
+#: plugins/scmcvs/common/CVSPlugin.class.php:154
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:179
+#: plugins/scmsvn/common/SVNPlugin.class.php:201
+msgid "You may also view the complete histories of any file in the repository."
+msgstr ""
+"Il permet également d'avoir accès à l'historique complet de chaque fichier "
+"présent dans le dépôt."
+
+#: plugins/scmbzr/common/BzrPlugin.class.php:143
+#: plugins/scmcvs/common/CVSPlugin.class.php:158
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:188
+#: plugins/scmsvn/common/SVNPlugin.class.php:205
+#, php-format
+msgid "Browse %s Repository"
+msgstr "Parcourir le dépôt %s"
 
 #: plugins/scmccase/common/CCasePlugin.class.php:91
 msgid "ClearCase Access"
@@ -12883,36 +12942,22 @@ msgid "History"
 msgstr "Historique"
 
 #: plugins/scmccase/common/CCasePlugin.class.php:113
+#: plugins/scmccase/common/CCasePlugin.class.php:122
 msgid "Browse the ClearCase tree"
 msgstr "Naviguer dans le dépôt ClearCase"
 
-#: plugins/scmccase/common/CCasePlugin.class.php:113
-msgid ""
-"Browsing the ClearCase tree gives you a great view into the current status "
-"of this project's code. You may also view the complete histories of any file "
-"in the repository."
-msgstr ""
-"Parcourir le dépôt ClearCase permet de naviguer dans l'état actuel du code "
-"de ce projet, mais également d'avoir accès à l'historique complet de chaque "
-"fichier présent dans le dépôt."
-
-#: plugins/scmccase/common/CCasePlugin.class.php:118
-#, php-format
-msgid "<a href=\"%1$s\">Browse</a> CCase tree"
-msgstr "<a href=\"%1$s\">Parcourir</a> l'arbre ClearCase"
-
-#: plugins/scmccase/common/CCasePlugin.class.php:143
+#: plugins/scmccase/common/CCasePlugin.class.php:146
 msgid "ClearCase server"
 msgstr "Serveur ClearCase"
 
-#: plugins/scmccase/common/CCasePlugin.class.php:165
+#: plugins/scmccase/common/CCasePlugin.class.php:168
 #, php-format
 msgid "commit"
 msgid_plural "commits"
 msgstr[0] "envoi"
 msgstr[1] "envois"
 
-#: plugins/scmccase/common/CCasePlugin.class.php:167
+#: plugins/scmccase/common/CCasePlugin.class.php:170
 #, php-format
 msgid "add"
 msgid_plural "adds"
@@ -12920,56 +12965,23 @@ msgstr[0] "ajout"
 msgstr[1] "ajouts"
 
 #: plugins/scmcpold/common/CpoldPlugin.class.php:55
-msgid "<p>This CPOLD plugin is only intended as a proof of concept.</p>"
-msgstr ""
-"<p>Ce greffon pour CPOLD n'est pas destiné à une utilisation réelle.</p>"
+msgid "This CPOLD plugin is only intended as a proof of concept."
+msgstr "Ce greffon pour CPOLD n'est pas destiné à une utilisation réelle."
 
-#: plugins/scmcpold/common/CpoldPlugin.class.php:59
-#, fuzzy, php-format
-msgid ""
-"<p><b>Anonymous CPOLD Access</b></p><p>This project's CPOLD repository can "
-"be accessep anonymously at %s.</p>"
-msgstr ""
-"<p><b>Accès anonyme au dépôt CPOLD</b></p><p>Le dépôt CPOLD de ce projet est "
-"accessible de manière anonyme par HTTP.</p>"
+#: plugins/scmcpold/common/CpoldPlugin.class.php:60
+msgid "Anonymous CPOLD Access"
+msgstr "Accès anonyme au dépôt CPOLD"
 
-#: plugins/scmcpold/common/CpoldPlugin.class.php:69
-msgid ""
-"<p><b>Developer CPOLD Access via SSH</b></p><p>Only project developers can "
-"access the CPOLD tree via this method. SSH must be installed on your client "
-"machine. Enter your site password when prompted.</p>"
-msgstr ""
-"<p><b>Accès CPOLD via SSH pour les développeurs</b></p><p>Cette méthode "
-"d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
-"installé sur votre poste client. Vous pourrez avoir besoin de taper votre "
-"mot de passe.</p>"
+#: plugins/scmcpold/common/CpoldPlugin.class.php:63
+#, php-format
+msgid "This project's CPOLD repository can be accessep anonymously at %s."
+msgstr "Le dépôt CPOLD de ce projet est accessible de manière anonyme à %s."
 
-#: plugins/scmcpold/common/CpoldPlugin.class.php:72
-msgid ""
-"<p><b>Developer CPOLD Access via SSH</b></p><p>Only project developers can "
-"access the CPOLD tree via this method. SSH must be installed on your client "
-"machine. Substitute <i>developername</i> with the proper value. Enter your "
-"site password when prompted.</p>"
-msgstr ""
-"<p><b>Accès CPOLD via SSH pour les développeurs</b></p><p>Cette méthode "
-"d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
-"installé sur votre poste client. La valeur <i>nom-du-module</i> devra être "
-"remplacée par la valeur appropriée. Vous pourrez avoir besoin de taper votre "
-"mot de passe.</p>"
-
-#: plugins/scmcvs/common/CVSPlugin.class.php:71
-msgid ""
-"CVS documentation is available <a href=\"http://cvsbook.red-bean.com/"
-"\">here</a>."
-msgstr ""
-"La documentation de CVS est disponible <a href=\"http://cvsbook.red-bean.com/"
-"\">ici</a> (en anglais)."
-
-#: plugins/scmcvs/common/CVSPlugin.class.php:76
+#: plugins/scmcvs/common/CVSPlugin.class.php:80
 msgid "Anonymous CVS Access"
 msgstr "Accès anonyme au dépôt CVS"
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:78
+#: plugins/scmcvs/common/CVSPlugin.class.php:82
 msgid ""
 "This project's CVS repository can be checked out through anonymous (pserver) "
 "CVS with the following instruction set. The module you wish to check out "
@@ -12982,68 +12994,22 @@ msgstr ""
 "vous est demandé pour l'utilisateur <i>anonymous</i>, un mot de passe vide "
 "conviendra."
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:82
-#: plugins/scmcvs/common/CVSPlugin.class.php:99
-#: plugins/scmcvs/common/CVSPlugin.class.php:108
+#: plugins/scmcvs/common/CVSPlugin.class.php:86
+#: plugins/scmcvs/common/CVSPlugin.class.php:111
+#: plugins/scmcvs/common/CVSPlugin.class.php:128
 msgid "modulename"
 msgstr "nom-du-module"
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:93
-#: plugins/scmcvs/common/CVSPlugin.class.php:102
-msgid "Developer CVS Access via SSH"
-msgstr "Accès au dépôt CVS pour les développeurs via SSH"
-
-#: plugins/scmcvs/common/CVSPlugin.class.php:95
-msgid ""
-"Only project developers can access the CVS tree via this method. SSH must be "
-"installed on your client machine. Substitute <i>modulename</i> with the "
-"proper values. Enter your site password when prompted."
-msgstr ""
-"Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH "
-"doit être installé sur votre poste client. La valeur <i>nom-du-module</i> "
-"devra être remplacée par la valeur appropriée. Vous pourrez avoir besoin de "
-"taper votre mot de passe.</p>"
-
-#: plugins/scmcvs/common/CVSPlugin.class.php:104
-msgid ""
-"Only project developers can access the CVS tree via this method. SSH must be "
-"installed on your client machine. Substitute <i>modulename</i> and "
-"<i>developername</i> with the proper values. Enter your site password when "
-"prompted."
-msgstr ""
-"Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH "
-"doit être installé sur votre poste client. Les valeurs <i>nom-du-module</i> "
-"et <i>nom-du-développeur</i> devront être remplacées par les valeurs "
-"appropriées. Vous pourrez avoir besoin de taper votre mot de passe."
-
-#: plugins/scmcvs/common/CVSPlugin.class.php:121
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:156
-#: plugins/scmgit/common/GitPlugin.class.php:285
+#: plugins/scmcvs/common/CVSPlugin.class.php:141
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:166
+#: plugins/scmgit/common/GitPlugin.class.php:289
 msgid "Download the nightly snapshot"
 msgstr "Télécharger une l'archive quotidienne du dépôt"
 
-#: plugins/scmcvs/common/CVSPlugin.class.php:130
-msgid "CVS Repository Browser"
-msgstr "Navigateur du dépôt de sources"
-
-#: plugins/scmcvs/common/CVSPlugin.class.php:132
-msgid ""
-"Browsing the CVS tree gives you a view into the current status of this "
-"project's code. You may also view the complete histories of any file in the "
-"repository."
-msgstr ""
-"Parcourir le dépôt CVS permet de naviguer dans l'état actuel du code de ce "
-"projet, mais également d'avoir accès à l'historique complet de chaque "
-"fichier présent dans le dépôt."
-
-#: plugins/scmcvs/common/CVSPlugin.class.php:136
-msgid "Browse CVS Repository"
-msgstr "Parcourir le dépôt CVS"
-
-#: plugins/scmcvs/common/CVSPlugin.class.php:154
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:199
-#: plugins/scmgit/common/GitPlugin.class.php:335
-#: plugins/scmsvn/common/SVNPlugin.class.php:201
+#: plugins/scmcvs/common/CVSPlugin.class.php:176
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:211
+#: plugins/scmgit/common/GitPlugin.class.php:339
+#: plugins/scmsvn/common/SVNPlugin.class.php:223
 #: www/stats/site_stats_utils.php:287
 msgid "Adds"
 msgstr "Ajouts"
@@ -13070,35 +13036,28 @@ msgstr "Nom d'utilisateur non valide : "
 msgid "User not found %s"
 msgstr "Utilisateur %s non trouvé"
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:89
-msgid ""
-"Documentation for Darcs is available <a href=\"http://darcs.net/\">here</a>."
-msgstr ""
-"La documentation de Darcs est disponible <a href=\"http://darcs.net/\">ici</"
-"a> (en anglais)."
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:116
+msgid "where REPO can be: "
+msgstr "où REPO peut être : "
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:112
-msgid "<p>where REPO can be: "
-msgstr "<p>où REPO peut être : "
-
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:112
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:617
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:116
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:627
 msgid ", "
 msgstr ", "
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:117
-msgid "<p><em>No repositories defined.</em></p>"
-msgstr "<p><em>Aucun dépôt défini.</em></p>"
-
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:121
-msgid "<p><em>Repository not yet created, wait an hour.</em></p>"
-msgstr "<p><em>Dépôt pas encore créé, veuillez patienter.</em></p>"
+msgid "No repositories defined."
+msgstr "Aucun dépôt défini."
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:128
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:125
+msgid "Repository not yet created, wait an hour."
+msgstr "Le dépôt n'est pas créé, patientez une heure."
+
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:132
 msgid "Anonymous Darcs Access"
 msgstr "Accès anonyme au dépôt Darcs"
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:131
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:135
 msgid ""
 "This project's Darcs repository can be checked out through anonymous access "
 "with the following command."
@@ -13106,60 +13065,36 @@ msgstr ""
 "Le dépôt Darcs de ce projet est accessible de manière anonyme grâce aux "
 "commandes suivantes."
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:140
-msgid "Developer Darcs Access via SSH"
-msgstr "Accès au dépôt DARCS pour les développeurs via SSH"
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:194
+msgid "No repositories to browse"
+msgstr "Aucun dépôt à explorer"
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:165
-msgid "Darcs Repository Browser"
-msgstr "Navigateur de dépôt Darcs"
-
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:167
-msgid ""
-"Browsing the Darcs tree gives you a view into the current status of this "
-"project's code. You may also view the complete histories of any file in the "
-"repository."
-msgstr ""
-"Parcourir le dépôt Darcs permet de naviguer dans l'état actuel du code de ce "
-"projet, mais également d'avoir accès à l'historique complet de chaque "
-"fichier présent dans le dépôt."
-
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:176
-msgid "Browse Darcs Repository "
-msgstr "Parcourir le dépôt Darcs"
-
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:182
-msgid "<p>No repositories to browse</p>"
-msgstr "<p>Aucun dépôt disponible pour la navigation.</p>"
-
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:616
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:626
 msgid "Repository to be created: "
 msgstr "Dépôt à créer :"
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:621
-msgid "Repository name: "
-msgstr "Nom de dépôt :"
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:630
+msgid "Create new repository:"
+msgstr "Créer un nouveau dépôt :"
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:623
-msgid "Clone: "
-msgstr "Cloner :"
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:631
+#: plugins/scmgit/common/GitPlugin.class.php:1084
+#: plugins/scmhg/common/HgPlugin.class.php:625
+msgid "Repository name"
+msgstr "Nom du dépôt"
 
-#: plugins/scmgit/common/GitPlugin.class.php:82
-msgid ""
-"Documentation for Git is available at <a href=\"http://git-scm.com/\">http://"
-"git-scm.com/</a>."
-msgstr ""
-"La documentation de Git est disponible <a href=\"http://git-scm.com/\">ici</"
-"a> (en anglais)."
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:633
+msgid "Clone"
+msgstr "Clone"
 
-#: plugins/scmgit/common/GitPlugin.class.php:96
+#: plugins/scmgit/common/GitPlugin.class.php:100
 #, fuzzy
 msgid "Anonymous Access to the Git repository"
 msgid_plural "Anonymous Access to the Git repositories"
 msgstr[0] "Accès à votre dépôt personnel"
 msgstr[1] "Accès à votre dépôt personnel"
 
-#: plugins/scmgit/common/GitPlugin.class.php:101
+#: plugins/scmgit/common/GitPlugin.class.php:105
 #, fuzzy
 msgid ""
 "This project's Git repository can be checked out through anonymous access "
@@ -13174,14 +13109,13 @@ msgstr[1] ""
 "Le dépôt Git de ce projet est accessible de manière anonyme grâce aux "
 "commandes suivantes."
 
-#: plugins/scmgit/common/GitPlugin.class.php:121
-#, fuzzy
+#: plugins/scmgit/common/GitPlugin.class.php:125
 msgid "Developer's repository"
 msgid_plural "Developer's repositories"
-msgstr[0] "Dépôts de développeurs"
+msgstr[0] "Dépôt de développeurs"
 msgstr[1] "Dépôts de développeurs"
 
-#: plugins/scmgit/common/GitPlugin.class.php:126
+#: plugins/scmgit/common/GitPlugin.class.php:130
 msgid ""
 "One of this project's members also has a personal Git repository that can be "
 "checked out anonymously."
@@ -13195,22 +13129,20 @@ msgstr[1] ""
 "Certains des membres de ce projet ont également un dépôt Git personnel, qui "
 "peut être récupéré de manière anonyme."
 
-#: plugins/scmgit/common/GitPlugin.class.php:135
-#: plugins/scmgit/common/GitPlugin.class.php:317
+#: plugins/scmgit/common/GitPlugin.class.php:139
+#: plugins/scmgit/common/GitPlugin.class.php:321
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:52
 msgid "Browse Git Repository"
 msgstr "Parcourir le dépôt Git"
 
-#: plugins/scmgit/common/GitPlugin.class.php:162
-#: plugins/scmgit/common/GitPlugin.class.php:205
-#, fuzzy
+#: plugins/scmgit/common/GitPlugin.class.php:166
+#: plugins/scmgit/common/GitPlugin.class.php:209
 msgid "Developer Access to the Git repository via SSH"
 msgid_plural "Developer Access to the Git repositories via SSH"
 msgstr[0] "Accès au dépôt Git pour les développeurs via SSH"
-msgstr[1] "Accès au dépôt Git pour les développeurs via SSH"
+msgstr[1] "Accès aux dépôts Git pour les développeurs via SSH"
 
-#: plugins/scmgit/common/GitPlugin.class.php:167
-#, fuzzy
+#: plugins/scmgit/common/GitPlugin.class.php:171
 msgid ""
 "Only project developers can access the GIT repository via this method. SSH "
 "must be installed on your client machine. Enter your site password when "
@@ -13228,17 +13160,15 @@ msgstr[1] ""
 "doit être installé sur votre poste client. Vous pourrez avoir besoin de "
 "taper votre mot de passe."
 
-#: plugins/scmgit/common/GitPlugin.class.php:181
-#: plugins/scmgit/common/GitPlugin.class.php:224
-#, fuzzy
+#: plugins/scmgit/common/GitPlugin.class.php:185
+#: plugins/scmgit/common/GitPlugin.class.php:228
 msgid "Developer Access to the Git repository via HTTP"
 msgid_plural "Developer Access to the Git repositories via HTTP"
-msgstr[0] "Accès Git pour les développeurs par HTTP"
-msgstr[1] "Accès Git pour les développeurs par HTTP"
+msgstr[0] "Accès au dépôt Git pour les développeurs par HTTP"
+msgstr[1] "Accès aux dépôts Git pour les développeurs par HTTP"
 
-#: plugins/scmgit/common/GitPlugin.class.php:187
-#: plugins/scmgit/common/GitPlugin.class.php:229
-#, fuzzy
+#: plugins/scmgit/common/GitPlugin.class.php:191
+#: plugins/scmgit/common/GitPlugin.class.php:233
 msgid ""
 "Only project developers can access the GIT repository via this method. Enter "
 "your site password when prompted."
@@ -13246,21 +13176,20 @@ msgid_plural ""
 "Only project developers can access the GIT repositories via this method. "
 "Enter your site password when prompted."
 msgstr[0] ""
-"Cette méthode d'accès au dépôt est réservée aux développeurs du projet. Vous "
+"Cette méthode d'accès au dépôt Git est réservée aux développeurs du projet. Vous "
 "pourrez avoir besoin de taper votre mot de passe."
 msgstr[1] ""
-"Cette méthode d'accès au dépôt est réservée aux développeurs du projet. Vous "
+"Cette méthode d'accès aux dépôts Git est réservée aux développeurs du projet. Vous "
 "pourrez avoir besoin de taper votre mot de passe."
 
-#: plugins/scmgit/common/GitPlugin.class.php:200
+#: plugins/scmgit/common/GitPlugin.class.php:204
 msgid ""
 "Missing configuration for access in scmgit.ini : use_ssh and use_dav disabled"
 msgstr ""
 "La méthode d'accès est manquante dans le fichier de configuration scmgit."
 "ini : use_ssh et use_dav sont tous les deux désactivés."
 
-#: plugins/scmgit/common/GitPlugin.class.php:211
-#, fuzzy
+#: plugins/scmgit/common/GitPlugin.class.php:215
 msgid ""
 "Only project developers can access the GIT repository via this method. SSH "
 "must be installed on your client machine. Substitute <i>developername</i> "
@@ -13270,21 +13199,21 @@ msgid_plural ""
 "must be installed on your client machine. Substitute <i>developername</i> "
 "with the proper value. Enter your site password when prompted."
 msgstr[0] ""
-"Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH "
+"Cette méthode d'accès au dépôt Git est réservée aux développeurs du projet. SSH "
 "doit être installé sur votre poste client. La valeur <i>nom-du-développeur</"
 "i> devra être remplacée par votre identifiant de connexion. Vous pourrez "
 "avoir besoin de taper votre mot de passe."
 msgstr[1] ""
-"Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH "
+"Cette méthode d'accès aux dépôts Git est réservée aux développeurs du projet. SSH "
 "doit être installé sur votre poste client. La valeur <i>nom-du-développeur</"
 "i> devra être remplacée par votre identifiant de connexion. Vous pourrez "
 "avoir besoin de taper votre mot de passe."
 
-#: plugins/scmgit/common/GitPlugin.class.php:250
+#: plugins/scmgit/common/GitPlugin.class.php:254
 msgid "Access to your personal repository"
 msgstr "Accès à votre dépôt personnel"
 
-#: plugins/scmgit/common/GitPlugin.class.php:253
+#: plugins/scmgit/common/GitPlugin.class.php:257
 msgid ""
 "You have a personal repository for this project, accessible through SSH with "
 "the following method. Enter your site password when prompted."
@@ -13293,11 +13222,11 @@ msgstr ""
 "travers SSH de la manière suivante. Vous pourrez avoir besoin de taper votre "
 "mot de passe."
 
-#: plugins/scmgit/common/GitPlugin.class.php:261
+#: plugins/scmgit/common/GitPlugin.class.php:265
 msgid "Request a personal repository"
 msgstr "Créer un dépôt personnel"
 
-#: plugins/scmgit/common/GitPlugin.class.php:264
+#: plugins/scmgit/common/GitPlugin.class.php:268
 msgid ""
 "You can clone the project repository into a personal one into which you "
 "alone will be able to write.  Other members of the project will only have "
@@ -13313,16 +13242,16 @@ msgstr ""
 "immédiatement (mais sa création est généralement effective en moins d'une "
 "heure)."
 
-#: plugins/scmgit/common/GitPlugin.class.php:267
+#: plugins/scmgit/common/GitPlugin.class.php:271
 #, php-format
 msgid "<a href=\"%s\">Request a personal repository</a>."
 msgstr "<a href=\"%s\">Créer un dépôt personnel</a>."
 
-#: plugins/scmgit/common/GitPlugin.class.php:311
+#: plugins/scmgit/common/GitPlugin.class.php:315
 msgid "Git Repository Browser"
 msgstr "Navigateur de dépôt Git"
 
-#: plugins/scmgit/common/GitPlugin.class.php:313
+#: plugins/scmgit/common/GitPlugin.class.php:317
 msgid ""
 "Browsing the Git tree gives you a view into the current status of this "
 "project's code. You may also view the complete histories of any file in the "
@@ -13332,85 +13261,76 @@ msgstr ""
 "projet, mais également d'avoir accès à l'historique complet de chaque "
 "fichier présent dans le dépôt."
 
-#: plugins/scmgit/common/GitPlugin.class.php:336
-#, fuzzy
+#: plugins/scmgit/common/GitPlugin.class.php:340
 msgid "Updates"
-msgstr "Mettre à jour"
+msgstr "Mises à jour"
 
-#: plugins/scmgit/common/GitPlugin.class.php:954
-#, fuzzy
+#: plugins/scmgit/common/GitPlugin.class.php:958
 msgid "Git Commits"
-msgstr "Mes dernières validations Subversion"
+msgstr "Envois Git"
 
-#: plugins/scmgit/common/GitPlugin.class.php:972
+#: plugins/scmgit/common/GitPlugin.class.php:976
 msgid "Cannot create a secondary repository with the same name as the primary"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:977
-#: plugins/scmhg/common/HgPlugin.class.php:527
-#, fuzzy
+#: plugins/scmgit/common/GitPlugin.class.php:981
+#: plugins/scmhg/common/HgPlugin.class.php:534
 msgid "This repository name is not valid"
-msgstr "Utilisateur non valide car inactif"
+msgstr "Ce nom de dépôt est invalide"
 
-#: plugins/scmgit/common/GitPlugin.class.php:990
-#: plugins/scmhg/common/HgPlugin.class.php:522
-#: plugins/scmhg/common/HgPlugin.class.php:538
-#, fuzzy, php-format
+#: plugins/scmgit/common/GitPlugin.class.php:994
+#: plugins/scmhg/common/HgPlugin.class.php:529
+#: plugins/scmhg/common/HgPlugin.class.php:545
+#, php-format
 msgid "A repository %s already exists"
-msgstr "La requête existe déjà"
+msgstr "Le dépôt %s existe déjà"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1015
+#: plugins/scmgit/common/GitPlugin.class.php:1019
 msgid "Invalid URL from which to clone"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1024
+#: plugins/scmgit/common/GitPlugin.class.php:1028
 #, fuzzy, php-format
 msgid "Clone of %s"
 msgstr "Cloner :"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1074
+#: plugins/scmgit/common/GitPlugin.class.php:1078
 #, fuzzy, php-format
 msgid "No extra Git repository for project %1$s"
 msgstr "Gestion des onglets supplémentaires pour le projet %1$s"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1076
+#: plugins/scmgit/common/GitPlugin.class.php:1080
 #, fuzzy, php-format
 msgid "Extra Git repository for project %1$s"
 msgid_plural "Extra Git repositories for project %1$s"
 msgstr[0] "Gestion des onglets supplémentaires pour le projet %1$s"
 msgstr[1] "Gestion des onglets supplémentaires pour le projet %1$s"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1080
-#, fuzzy
-msgid "Repository name"
-msgstr "Nom de dépôt :"
-
-#: plugins/scmgit/common/GitPlugin.class.php:1080
+#: plugins/scmgit/common/GitPlugin.class.php:1084
 #, fuzzy
 msgid "Initial repository description"
 msgstr "Description de la contribution :"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1080
+#: plugins/scmgit/common/GitPlugin.class.php:1084
 msgid "Initial clone URL (if any)"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1097
+#: plugins/scmgit/common/GitPlugin.class.php:1101
 #, fuzzy, php-format
 msgid "Create new Git repository for project %1$s"
 msgstr "Gestion des onglets supplémentaires pour le projet %1$s"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1104
-#: plugins/scmhg/common/HgPlugin.class.php:618
+#: plugins/scmgit/common/GitPlugin.class.php:1108
 #, fuzzy
 msgid "Repository name:"
 msgstr "Nom de dépôt :"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1106 www/mail/admin/index.php:194
+#: plugins/scmgit/common/GitPlugin.class.php:1110 www/mail/admin/index.php:194
 #: www/mail/admin/index.php:227
 msgid "Description:"
 msgstr "Description :"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1108
+#: plugins/scmgit/common/GitPlugin.class.php:1112
 msgid ""
 "Initial clone URL (or name of an existing repository in this project; leave "
 "empty to start with an empty repository):"
@@ -13448,49 +13368,45 @@ msgstr ""
 "prochainement."
 
 #: plugins/scmhg/common/HgPlugin.class.php:47
-msgid "Use Mercuial as Source Code Management tool. Offer DAV or SSH access."
+msgid "Use Mercurial as Source Code Management tool. Offer DAV or SSH access."
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:55
+#: plugins/scmhg/common/HgPlugin.class.php:61
 #, fuzzy
 msgid ""
-"Documentation for Mercurial is available at <a href=\"http://hgbook.red-bean."
-"com/\">http://hgbook.red-bean.com/</a> . "
-msgstr ""
-"La documentation de Git est disponible <a href=\"http://git-scm.com/\">ici</"
-"a> (en anglais)."
-
-#: plugins/scmhg/common/HgPlugin.class.php:55
-#, fuzzy
-msgid ""
-" Another short Introduction can be found at <a href=\"http://hginit.com/"
+"Another short Introduction can be found at <a href=\"http://hginit.com/"
 "\">http://hginit.com/</a>"
 msgstr ""
 "La documentation de Git est disponible <a href=\"http://git-scm.com/\">ici</"
 "a> (en anglais)."
 
-#: plugins/scmhg/common/HgPlugin.class.php:60
+#: plugins/scmhg/common/HgPlugin.class.php:67
 msgid "Anonymous Mercurial Access"
 msgstr "Accès anonyme au dépôt Mercurial"
 
-#: plugins/scmhg/common/HgPlugin.class.php:70
-#: plugins/scmsvn/common/SVNPlugin.class.php:116
+#: plugins/scmhg/common/HgPlugin.class.php:73
+#, fuzzy
+msgid ""
+"This project's Mercurial repository can be checked out through anonymous "
+"access with the following command:"
+msgstr ""
+"Le dépôt Darcs de ce projet est accessible de manière anonyme grâce aux "
+"commandes suivantes."
+
+#: plugins/scmhg/common/HgPlugin.class.php:77
+#: plugins/scmsvn/common/SVNPlugin.class.php:120
 msgid "The password is "
 msgstr "Le mot de passe à fournir est : "
 
-#: plugins/scmhg/common/HgPlugin.class.php:73
+#: plugins/scmhg/common/HgPlugin.class.php:80
 msgid ""
 "Please contact forge administrator, scmhg plugin is not correctly configured"
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:87
-#: plugins/scmhg/common/HgPlugin.class.php:109
-msgid "Developer Mercurial Access via SSH"
-msgstr "Accès Mercurial pour les développeurs via SSH"
-
-#: plugins/scmhg/common/HgPlugin.class.php:90
+#: plugins/scmhg/common/HgPlugin.class.php:97
+#, fuzzy
 msgid ""
-"Only project developers can access the Mercurial tree via this method. SSH "
+"Read/write access to Mercurial tree is allowed for authenticated users. SSH "
 "must be installed on your client machine. Enter your site password when "
 "prompted."
 msgstr ""
@@ -13498,14 +13414,14 @@ msgstr ""
 "doit être installé sur votre poste client. Vous pourrez avoir besoin de "
 "taper votre mot de passe."
 
-#: plugins/scmhg/common/HgPlugin.class.php:98
-#: plugins/scmhg/common/HgPlugin.class.php:119
+#: plugins/scmhg/common/HgPlugin.class.php:105
+#: plugins/scmhg/common/HgPlugin.class.php:126
 #, fuzzy
 msgid "Developer Mercurial Access via HTTP"
 msgstr "Accès Mercurial pour les développeurs via SSH"
 
-#: plugins/scmhg/common/HgPlugin.class.php:101
-#: plugins/scmhg/common/HgPlugin.class.php:122
+#: plugins/scmhg/common/HgPlugin.class.php:108
+#: plugins/scmhg/common/HgPlugin.class.php:129
 #, fuzzy
 msgid ""
 "Only project developers can access the Mercurial tree via this method. Enter "
@@ -13514,7 +13430,11 @@ msgstr ""
 "Cette méthode d'accès au dépôt est réservée aux développeurs du projet. Vous "
 "pourrez avoir besoin de taper votre mot de passe."
 
-#: plugins/scmhg/common/HgPlugin.class.php:112
+#: plugins/scmhg/common/HgPlugin.class.php:116
+msgid "Developer Mercurial Access via SSH"
+msgstr "Accès Mercurial pour les développeurs via SSH"
+
+#: plugins/scmhg/common/HgPlugin.class.php:119
 msgid ""
 "Only project developers can access the Mercurial tree via this method. SSH "
 "must be installed on your client machine. Substitute <i>developername</i> "
@@ -13525,12 +13445,12 @@ msgstr ""
 "i> devra être remplacée par votre identifiant de connexion. Vous pourrez "
 "avoir besoin de taper votre mot de passe."
 
-#: plugins/scmhg/common/HgPlugin.class.php:136
+#: plugins/scmhg/common/HgPlugin.class.php:143
 #, fuzzy
 msgid "Hg Repository Browser"
 msgstr "Navigateur de dépôt"
 
-#: plugins/scmhg/common/HgPlugin.class.php:138
+#: plugins/scmhg/common/HgPlugin.class.php:145
 #, fuzzy
 msgid ""
 "Browsing the Mercurial tree gives you a view into the current status of this "
@@ -13541,22 +13461,22 @@ msgstr ""
 "projet, mais également d'avoir accès à l'historique complet de chaque "
 "fichier présent dans le dépôt."
 
-#: plugins/scmhg/common/HgPlugin.class.php:141
+#: plugins/scmhg/common/HgPlugin.class.php:148
 #, fuzzy
 msgid "Browse Hg Repository"
 msgstr "Parcourir le dépôt CVS"
 
-#: plugins/scmhg/common/HgPlugin.class.php:547
+#: plugins/scmhg/common/HgPlugin.class.php:554
 #, fuzzy, php-format
 msgid "Clone of %s repository"
 msgstr "Dépôts de développeurs"
 
-#: plugins/scmhg/common/HgPlugin.class.php:610
+#: plugins/scmhg/common/HgPlugin.class.php:617
 #, fuzzy, php-format
 msgid "Create SCM repository for project %1$s"
 msgstr "Créer les dépôts de sources"
 
-#: plugins/scmhg/common/HgPlugin.class.php:622
+#: plugins/scmhg/common/HgPlugin.class.php:629
 #, fuzzy
 msgid "Cloned from:"
 msgstr "Cloner :"
@@ -13675,19 +13595,11 @@ msgstr "Impossible d'insérer une base de donnée déjà active"
 msgid "Related SVN commits"
 msgstr "Liens vers les envois SVN pertinents"
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:87
-msgid ""
-"Documentation for Subversion (sometimes referred to as \"SVN\") is available "
-"<a href=\"http://svnbook.red-bean.com/\">here</a>."
-msgstr ""
-"La documentation de Subversion (que l'on appelle parfois « SVN ») est "
-"disponible <a href=\"http://svnbook.red-bean.com/\">ici</a> (en anglais)."
-
-#: plugins/scmsvn/common/SVNPlugin.class.php:104
+#: plugins/scmsvn/common/SVNPlugin.class.php:108
 msgid "Anonymous Subversion Access"
 msgstr "Accès anonyme au dépôt Subversion"
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:106
+#: plugins/scmsvn/common/SVNPlugin.class.php:110
 msgid ""
 "This project's SVN repository can be checked out through anonymous access "
 "with the following command(s)."
@@ -13695,73 +13607,12 @@ msgstr ""
 "Le dépôt Subversion de ce projet est accessible de manière anonyme grâce aux "
 "commandes suivantes."
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:132
-#: plugins/scmsvn/common/SVNPlugin.class.php:151
-msgid "Developer Subversion Access via SSH"
-msgstr "Accès Subversion pour les développeurs via SSH"
-
-#: plugins/scmsvn/common/SVNPlugin.class.php:135
-msgid ""
-"Only project developers can access the SVN tree via this method. SSH must be "
-"installed on your client machine. Enter your site password when prompted."
-msgstr ""
-"Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH "
-"doit être installé sur votre poste client. Vous pourrez avoir besoin de "
-"taper votre mot de passe."
-
-#: plugins/scmsvn/common/SVNPlugin.class.php:141
-#: plugins/scmsvn/common/SVNPlugin.class.php:160
+#: plugins/scmsvn/common/SVNPlugin.class.php:149
+#: plugins/scmsvn/common/SVNPlugin.class.php:176
 msgid "Developer Subversion Access via DAV"
 msgstr "Accès Subversion pour les développeurs via WebDAV"
 
-#: plugins/scmsvn/common/SVNPlugin.class.php:144
-msgid ""
-"Only project developers can access the SVN tree via this method. Enter your "
-"site password when prompted."
-msgstr ""
-"Cette méthode d'accès au dépôt est réservée aux développeurs du projet. Vous "
-"pourrez avoir besoin de taper votre mot de passe."
-
-#: plugins/scmsvn/common/SVNPlugin.class.php:154
-msgid ""
-"Only project developers can access the SVN tree via this method. SSH must be "
-"installed on your client machine. Substitute <i>developername</i> with the "
-"proper values. Enter your site password when prompted."
-msgstr ""
-"Cette méthode d'accès au dépôt est réservée aux développeurs du projet. SSH "
-"doit être installé sur votre poste client. La valeur <i>nom-du-développeur</"
-"i> devra être remplacée par votre identifiant de connexion. Vous pourrez "
-"avoir besoin de taper votre mot de passe."
-
-#: plugins/scmsvn/common/SVNPlugin.class.php:163
-msgid ""
-"Only project developers can access the SVN tree via this method. Substitute "
-"<i>developername</i> with the proper values. Enter your site password when "
-"prompted."
-msgstr ""
-"Cette méthode d'accès au dépôt est réservée aux développeurs du projet. La "
-"valeur <i>nom-du-développeur</i> devra être remplacée par votre identifiant "
-"de connexion. Vous pourrez avoir besoin de taper votre mot de passe."
-
-#: plugins/scmsvn/common/SVNPlugin.class.php:177
-msgid "Subversion Repository Browser"
-msgstr "Navigateur de dépôt Subversion"
-
-#: plugins/scmsvn/common/SVNPlugin.class.php:179
-msgid ""
-"Browsing the Subversion tree gives you a view into the current status of "
-"this project's code. You may also view the complete histories of any file in "
-"the repository."
-msgstr ""
-"Parcourir le dépôt Subversion permet de naviguer dans l'état actuel du code "
-"de ce projet, mais également d'avoir accès à l'historique complet de chaque "
-"fichier présent dans le dépôt."
-
-#: plugins/scmsvn/common/SVNPlugin.class.php:183
-msgid "Browse Subversion Repository"
-msgstr "Parcourir le dépôt Subversion"
-
-#: plugins/scmsvn/common/SVNPlugin.class.php:626
+#: plugins/scmsvn/common/SVNPlugin.class.php:648
 #, fuzzy
 msgid "Subversion Commits"
 msgstr "Navigateur de dépôt Subversion"
@@ -23304,6 +23155,213 @@ msgstr "Erreur de mise à jour"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
+
+#~ msgid ""
+#~ "<p>Documentation for GNU Arch (sometimes referred to as \"tla\") is "
+#~ "available <a href=\"http://www.gnu.org/software/gnu-arch/\">here</a>.</p>"
+#~ msgstr ""
+#~ "<p>La documentation de GNU Arch (que l'on appelle parfois « tla ») est "
+#~ "disponible <a href=\"http://www.gnu.org/software/gnu-arch/\">ici</a> (en "
+#~ "anglais).</p>"
+
+#~ msgid ""
+#~ "Documentation for Bazaar (sometimes referred to as \"bzr\") is available "
+#~ "<a href=\"http://bazaar-vcs.org/Documentation\">here</a>."
+#~ msgstr ""
+#~ "La documentation de Bazaar (que l'on appelle parfois « bzr ») est "
+#~ "disponible <a href=\"http://doc.bazaar-vcs.org/latest/\">ici</a> (en "
+#~ "anglais)."
+
+#~ msgid "Developer Bazaar Access via SSH"
+#~ msgstr "Accès au dépôt Bazaar pour les développeurs via SSH"
+
+#~ msgid ""
+#~ "Only project developers can access the Bazaar branches via this method. "
+#~ "SSH must be installed on your client machine. Enter your site password "
+#~ "when prompted."
+#~ msgstr ""
+#~ "Cette méthode d'accès au dépôt est réservée aux développeurs du projet. "
+#~ "SSH doit être installé sur votre poste client. Vous pourrez avoir besoin "
+#~ "de taper votre mot de passe."
+
+#~ msgid ""
+#~ "Only project developers can access the Bazaar branches via this method. "
+#~ "SSH must be installed on your client machine. Substitute "
+#~ "<i>developername</i> with the proper value. Enter your site password when "
+#~ "prompted."
+#~ msgstr ""
+#~ "Cette méthode d'accès au dépôt est réservée aux développeurs du projet. "
+#~ "SSH doit être installé sur votre poste client. La valeur <i>nom-du-"
+#~ "développeur</i> devra être remplacée par votre identifiant de connexion. "
+#~ "Vous pourrez avoir besoin de taper votre mot de passe."
+
+#~ msgid "Bazaar Repository Browser"
+#~ msgstr "Navigateur de dépôt Bazaar"
+
+#~ msgid ""
+#~ "Browsing the Bazaar tree gives you a view into the current status of this "
+#~ "project's code. You may also view the complete histories of any file in "
+#~ "the repository."
+#~ msgstr ""
+#~ "Parcourir le dépôt Bazaar permet de naviguer dans l'état actuel du code "
+#~ "de ce projet, mais également d'avoir accès à l'historique complet de "
+#~ "chaque fichier présent dans le dépôt."
+
+#~ msgid "Browse Bazaar Repository"
+#~ msgstr "Parcourir le dépôt Bazaar"
+
+#~ msgid ""
+#~ "Browsing the ClearCase tree gives you a great view into the current "
+#~ "status of this project's code. You may also view the complete histories "
+#~ "of any file in the repository."
+#~ msgstr ""
+#~ "Parcourir le dépôt ClearCase permet de naviguer dans l'état actuel du "
+#~ "code de ce projet, mais également d'avoir accès à l'historique complet de "
+#~ "chaque fichier présent dans le dépôt."
+
+#~ msgid "<a href=\"%1$s\">Browse</a> CCase tree"
+#~ msgstr "<a href=\"%1$s\">Parcourir</a> l'arbre ClearCase"
+
+#~ msgid ""
+#~ "<p><b>Developer CPOLD Access via SSH</b></p><p>Only project developers "
+#~ "can access the CPOLD tree via this method. SSH must be installed on your "
+#~ "client machine. Enter your site password when prompted.</p>"
+#~ msgstr ""
+#~ "<p><b>Accès CPOLD via SSH pour les développeurs</b></p><p>Cette méthode "
+#~ "d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
+#~ "installé sur votre poste client. Vous pourrez avoir besoin de taper votre "
+#~ "mot de passe.</p>"
+
+#~ msgid ""
+#~ "<p><b>Developer CPOLD Access via SSH</b></p><p>Only project developers "
+#~ "can access the CPOLD tree via this method. SSH must be installed on your "
+#~ "client machine. Substitute <i>developername</i> with the proper value. "
+#~ "Enter your site password when prompted.</p>"
+#~ msgstr ""
+#~ "<p><b>Accès CPOLD via SSH pour les développeurs</b></p><p>Cette méthode "
+#~ "d'accès au dépôt est réservée aux développeurs du projet. SSH doit être "
+#~ "installé sur votre poste client. La valeur <i>nom-du-module</i> devra "
+#~ "être remplacée par la valeur appropriée. Vous pourrez avoir besoin de "
+#~ "taper votre mot de passe.</p>"
+
+#~ msgid ""
+#~ "CVS documentation is available <a href=\"http://cvsbook.red-bean.com/"
+#~ "\">here</a>."
+#~ msgstr ""
+#~ "La documentation de CVS est disponible <a href=\"http://cvsbook.red-bean."
+#~ "com/\">ici</a> (en anglais)."
+
+#~ msgid "Developer CVS Access via SSH"
+#~ msgstr "Accès au dépôt CVS pour les développeurs via SSH"
+
+#~ msgid ""
+#~ "Only project developers can access the CVS tree via this method. SSH must "
+#~ "be installed on your client machine. Substitute <i>modulename</i> with "
+#~ "the proper values. Enter your site password when prompted."
+#~ msgstr ""
+#~ "Cette méthode d'accès au dépôt est réservée aux développeurs du projet. "
+#~ "SSH doit être installé sur votre poste client. La valeur <i>nom-du-"
+#~ "module</i> devra être remplacée par la valeur appropriée. Vous pourrez "
+#~ "avoir besoin de taper votre mot de passe.</p>"
+
+#~ msgid ""
+#~ "Only project developers can access the CVS tree via this method. SSH must "
+#~ "be installed on your client machine. Substitute <i>modulename</i> and "
+#~ "<i>developername</i> with the proper values. Enter your site password "
+#~ "when prompted."
+#~ msgstr ""
+#~ "Cette méthode d'accès au dépôt est réservée aux développeurs du projet. "
+#~ "SSH doit être installé sur votre poste client. Les valeurs <i>nom-du-"
+#~ "module</i> et <i>nom-du-développeur</i> devront être remplacées par les "
+#~ "valeurs appropriées. Vous pourrez avoir besoin de taper votre mot de "
+#~ "passe."
+
+#~ msgid "CVS Repository Browser"
+#~ msgstr "Navigateur du dépôt de sources"
+
+#~ msgid "Browse CVS Repository"
+#~ msgstr "Parcourir le dépôt CVS"
+
+#~ msgid "<p><em>No repositories defined.</em></p>"
+#~ msgstr "<p><em>Aucun dépôt défini.</em></p>"
+
+#~ msgid "Darcs Repository Browser"
+#~ msgstr "Navigateur de dépôt Darcs"
+
+#~ msgid "Browse Darcs Repository "
+#~ msgstr "Parcourir le dépôt Darcs"
+
+#~ msgid "Repository name: "
+#~ msgstr "Nom de dépôt :"
+
+#~ msgid ""
+#~ "Documentation for Git is available at <a href=\"http://git-scm.com/"
+#~ "\">http://git-scm.com/</a>."
+#~ msgstr ""
+#~ "La documentation de Git est disponible <a href=\"http://git-scm.com/"
+#~ "\">ici</a> (en anglais)."
+
+#, fuzzy
+#~ msgid ""
+#~ "Documentation for Mercurial is available at <a href=\"http://hgbook.red-"
+#~ "bean.com/\">http://hgbook.red-bean.com/</a> . "
+#~ msgstr ""
+#~ "La documentation de Git est disponible <a href=\"http://git-scm.com/"
+#~ "\">ici</a> (en anglais)."
+
+#~ msgid ""
+#~ "Documentation for Subversion (sometimes referred to as \"SVN\") is "
+#~ "available <a href=\"http://svnbook.red-bean.com/\">here</a>."
+#~ msgstr ""
+#~ "La documentation de Subversion (que l'on appelle parfois « SVN ») est "
+#~ "disponible <a href=\"http://svnbook.red-bean.com/\">ici</a> (en anglais)."
+
+#~ msgid "Developer Subversion Access via SSH"
+#~ msgstr "Accès Subversion pour les développeurs via SSH"
+
+#~ msgid ""
+#~ "Only project developers can access the SVN tree via this method. SSH must "
+#~ "be installed on your client machine. Enter your site password when "
+#~ "prompted."
+#~ msgstr ""
+#~ "Cette méthode d'accès au dépôt est réservée aux développeurs du projet. "
+#~ "SSH doit être installé sur votre poste client. Vous pourrez avoir besoin "
+#~ "de taper votre mot de passe."
+
+#~ msgid ""
+#~ "Only project developers can access the SVN tree via this method. SSH must "
+#~ "be installed on your client machine. Substitute <i>developername</i> with "
+#~ "the proper values. Enter your site password when prompted."
+#~ msgstr ""
+#~ "Cette méthode d'accès au dépôt est réservée aux développeurs du projet. "
+#~ "SSH doit être installé sur votre poste client. La valeur <i>nom-du-"
+#~ "développeur</i> devra être remplacée par votre identifiant de connexion. "
+#~ "Vous pourrez avoir besoin de taper votre mot de passe."
+
+#~ msgid ""
+#~ "Only project developers can access the SVN tree via this method. "
+#~ "Substitute <i>developername</i> with the proper values. Enter your site "
+#~ "password when prompted."
+#~ msgstr ""
+#~ "Cette méthode d'accès au dépôt est réservée aux développeurs du projet. "
+#~ "La valeur <i>nom-du-développeur</i> devra être remplacée par votre "
+#~ "identifiant de connexion. Vous pourrez avoir besoin de taper votre mot de "
+#~ "passe."
+
+#~ msgid "Subversion Repository Browser"
+#~ msgstr "Navigateur de dépôt Subversion"
+
+#~ msgid ""
+#~ "Browsing the Subversion tree gives you a view into the current status of "
+#~ "this project's code. You may also view the complete histories of any file "
+#~ "in the repository."
+#~ msgstr ""
+#~ "Parcourir le dépôt Subversion permet de naviguer dans l'état actuel du "
+#~ "code de ce projet, mais également d'avoir accès à l'historique complet de "
+#~ "chaque fichier présent dans le dépôt."
+
+#~ msgid "Browse Subversion Repository"
+#~ msgstr "Parcourir le dépôt Subversion"
 
 #, fuzzy
 #~ msgid "No Valid Group Object"

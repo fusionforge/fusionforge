@@ -67,7 +67,7 @@ class DarcsPlugin extends SCMPlugin {
 	function printShortStats ($params) {
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
-			return false ;
+			return;
 		}
 
 		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
@@ -86,7 +86,11 @@ class DarcsPlugin extends SCMPlugin {
 	}
 
 	function getBlurb () {
-		return '<p>' . _('Documentation for Darcs is available <a href="http://darcs.net/">here</a>.') . '</p>';
+		return '<p>' 
+				. sprintf(_('Documentation for %1$s is available at <a href="%2$s">%2$s</a>.'),
+							'Darcs',
+							'http://darcs.net/')
+				. '</p>';
 	}
 
  	function getInstructionForDarcs ($project, $rw) {
@@ -109,16 +113,16 @@ class DarcsPlugin extends SCMPlugin {
 			$b = '<p><tt>darcs get ' . $url . '</tt></p>';
  			if (count($repo_names) > 1)
  			{
- 				$b .= _('<p>where REPO can be: ') . implode(_(', '), $repo_names) . '</p>';
+ 				$b .= '<p>'._('where REPO can be: ') . implode(_(', '), $repo_names) . '</p>';
  			}
  		}
  		else if (is_dir($this->getRootRepositories($project)))
  		{
- 			$b = _('<p><em>No repositories defined.</em></p>');
+ 			$b = '<p><em>'._('No repositories defined.').'</em></p>';
  		}
  		else
  		{
- 			$b = _('<p><em>Repository not yet created, wait an hour.</em></p>');
+ 			$b = '<p><em>'._('Repository not yet created, wait an hour.').'</em></p>';
  		};
  		return $b ;
  	}
@@ -137,10 +141,16 @@ class DarcsPlugin extends SCMPlugin {
 
 	function getInstructionsForRW ($project) {
 		$b = '<h2>';
-		$b .= _('Developer Darcs Access via SSH');
+		$b .= sprintf(_('Developer %s Access via SSH'), 'Darcs');
 		$b .= '</h2>';
 		$b .= '<p>';
-		$b .= ('Only project developers can access the Darcs tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.');
+		$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'Darcs');
+		$b .= ' ';
+		$b .= _('SSH must be installed on your client machine.');
+		$b .= ' ';
+		$b .= _('Substitute <i>developername</i> with the proper values.');
+		$b .= ' ';
+		$b .= _('Enter your site password when prompted.');
 		$b .= '</p>';
 		$b .= $this->getInstructionForDarcs($project, true);
 		return $b ;
@@ -162,9 +172,11 @@ class DarcsPlugin extends SCMPlugin {
 
 	function getBrowserLinkBlock ($project) {
 		global $HTML ;
-		$b = $HTML->boxMiddle(_('Darcs Repository Browser'));
+		$b = $HTML->boxMiddle(sprintf(_('%s Repository Browser'), 'Darcs'));
 		$b .= '<p>';
-		$b .= _('Browsing the Darcs tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.');
+		$b .= sprintf(_("Browsing the %s tree gives you a view into the current status of this project's code."), 'Darcs');
+		$b .= ' ';
+		$b .= _('You may also view the complete histories of any file in the repository.');
 		$b .= '</p>';
  		$repo_names = $this->getRepositories($project);
  		if (count($repo_names) > 0)
@@ -173,13 +185,13 @@ class DarcsPlugin extends SCMPlugin {
  			{
  				$b .= '<p>[' ;
  				$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID()."&repo_name=".$repo_name,
- 									_('Browse Darcs Repository '. $repo_name));
+ 									sprintf(_('Browse %s Repository'), 'Darcs') .' ' . $repo_name);
  				$b .= ']</p>' ;
  			}
  		}
  		else
  		{
- 			$b .= _('<p>No repositories to browse</p>');
+ 			$b .= '<p>'._('No repositories to browse').'</p>';
  		}
 		return $b ;
 	}
@@ -226,11 +238,9 @@ class DarcsPlugin extends SCMPlugin {
 	}
 
 	function printBrowserPage ($params) {
-		global $HTML;
-
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
-			return false ;
+			return;
 		}
 
 		if ($project->usesPlugin ($this->name)) {
@@ -617,10 +627,10 @@ class DarcsPlugin extends SCMPlugin {
 					implode(_(', '), $nm) . '</p>';
 			}
 
-			print '<p><strong>Create new repository:</strong></p>';
-			print '<p>'._('Repository name: ').
-				'<input type="string" name="scm_create_repo_name" size=16 maxlength=128 /></p>';
-			print '<p>'._('Clone: ').
+			print '<p><strong>'._('Create new repository:') . '</strong></p>';
+			print '<p>'._('Repository name')._(': ');
+			print '<input type="string" name="scm_create_repo_name" size=16 maxlength=128 /></p>';
+			print '<p>'._('Clone')._(': ').
 				'<select name="scm_clone_repo_name">';
 			print '<option value="">&lt;none&gt;</option>';
 			foreach ($this->getRepositories($project) as $repo_name)

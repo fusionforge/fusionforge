@@ -79,7 +79,11 @@ class GitPlugin extends SCMPlugin {
 	}
 
 	function getBlurb() {
-		return '<p>' . _('Documentation for Git is available at <a href="http://git-scm.com/">http://git-scm.com/</a>.') . '</p>';
+		return '<p>' 
+				. sprintf(_('Documentation for %1$s is available at <a href="%2$s">%2$s</a>.'),
+							'Git',
+							'http://git-scm.com/')
+				. '</p>';
 	}
 
 	function getInstructionsForAnon($project) {

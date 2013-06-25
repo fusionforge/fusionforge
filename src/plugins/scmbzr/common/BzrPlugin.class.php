@@ -53,7 +53,7 @@ class BzrPlugin extends SCMPlugin {
 	function printShortStats ($params) {
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
-			return false ;
+			return;
 		}
 
 		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
@@ -72,7 +72,11 @@ class BzrPlugin extends SCMPlugin {
 	}
 
 	function getBlurb () {
-		return '<p>' . _('Documentation for Bazaar (sometimes referred to as "bzr") is available <a href="http://bazaar-vcs.org/Documentation">here</a>.') . '</p>';
+		return '<p>' 
+				. sprintf(_('Documentation for %1$s is available at <a href="%2$s">%2$s</a>.'),
+							'Bazaar (“bzr”)',
+							'http://bazaar-vcs.org/Documentation')
+				. '</p>';
 	}
 
 	function getInstructionsForAnon ($project) {
@@ -94,18 +98,28 @@ class BzrPlugin extends SCMPlugin {
 			$u =& user_get_object(user_getid()) ;
 			$d = $u->getUnixName() ;
 			$b .= '<h2>';
-			$b .= _('Developer Bazaar Access via SSH');
+			$b .= sprintf(_('Developer %s Access via SSH'), 'Bazaar');
 			$b .= '</h2>';
 			$b .= '<p>';
-			$b .= _('Only project developers can access the Bazaar branches via this method. SSH must be installed on your client machine. Enter your site password when prompted.');
+			$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'Bazaar');
+			$b .= ' ';
+			$b .= _('SSH must be installed on your client machine.');
+			$b .= ' ';
+			$b .= _('Enter your site password when prompted.');
 			$b .= '</p>';
 			$b .= '<p><tt>bzr checkout bzr+ssh://'.$d.'@' . $this->getBoxForProject($project) . forge_get_config('repos_path', 'scmbzr') .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
 		} else {
 			$b .= '<h2>';
-			$b .= _('Developer Bazaar Access via SSH');
+			$b .= sprintf(_('Developer %s Access via SSH'), 'Bazaar');
 			$b .= '</h2>';
 			$b .= '<p>';
-			$b .= _('Only project developers can access the Bazaar branches via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.');
+			$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'Bazaar');
+			$b .= ' ';
+			$b .= _('SSH must be installed on your client machine.');
+			$b .= ' ';
+			$b .= _('Substitute <i>developername</i> with the proper values.');
+			$b .= ' ';
+			$b .= _('Enter your site password when prompted.');
 			$b .= '</p>';
 			$b .= '<p><tt>bzr checkout bzr+ssh://<i>'._('developername').'</i>@' . $this->getBoxForProject($project) . forge_get_config('repos_path', 'scmbzr') .'/'. $project->getUnixName().'/'._('branchname').'</tt></p>' ;
 		}
@@ -113,33 +127,33 @@ class BzrPlugin extends SCMPlugin {
 	}
 
 	function getSnapshotPara ($project) {
-		return ;
+		return;
 	}
 
 	function getBrowserLinkBlock ($project) {
 		global $HTML ;
-		$b = $HTML->boxMiddle(_('Bazaar Repository Browser'));
+		$b = $HTML->boxMiddle(sprintf(_('%s Repository Browser'), 'Bazaar'));
 		$b .= '<p>';
-		$b .= _('Browsing the Bazaar tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.');
+		$b .= sprintf(_("Browsing the %s tree gives you a view into the current status of this project's code."), 'Bazaar');
+		$b .= ' ';
+		$b .= _('You may also view the complete histories of any file in the repository.');
 		$b .= '</p>';
 		$b .= '<p>[' ;
 		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID(),
-				      _('Browse Bazaar Repository')
+								sprintf(_('Browse %s Repository'), 'Bazaar')
 			) ;
 		$b .= ']</p>' ;
 		return $b ;
 	}
 
 	function getStatsBlock ($project) {
-		return ;
+		return;
 	}
 
 	function printBrowserPage ($params) {
-		global $HTML;
-
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
-			return false ;
+			return;
 		}
 
 		if ($project->usesPlugin ($this->name)) {

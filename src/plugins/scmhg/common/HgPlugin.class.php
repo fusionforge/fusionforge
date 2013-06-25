@@ -44,7 +44,7 @@ class HgPlugin extends SCMPlugin {
 	 * @return	string	the description
 	 */
 	function getPluginDescription() {
-		return _('Use Mercuial as Source Code Management tool. Offer DAV or SSH access.');
+		return _('Use Mercurial as Source Code Management tool. Offer DAV or SSH access.');
 	}
 
 	function getDefaultServer() {
@@ -52,7 +52,14 @@ class HgPlugin extends SCMPlugin {
 	}
 
 	function getBlurb() {
-		return '<p>' . _('Documentation for Mercurial is available at <a href="http://hgbook.red-bean.com/">http://hgbook.red-bean.com/</a> . ')._(' Another short Introduction can be found at <a href="http://hginit.com/">http://hginit.com/</a>').'</p>';
+		return '<p>'
+				. sprintf(_('Documentation for %1$s is available at <a href="%2$s">%2$s</a>.'),
+							'Mercurial',
+							'http://hgbook.red-bean.com/')
+				. '</p>'
+				. '<p>'
+				. _('Another short Introduction can be found at <a href="http://hginit.com/">http://hginit.com/</a>')
+				. '</p>';
 	}
 
 	function getInstructionsForAnon($project) {
@@ -63,7 +70,7 @@ class HgPlugin extends SCMPlugin {
 		if (forge_get_config('use_dav', 'scmhg')) {
 			$protocol = forge_get_config('use_ssl', 'scmhg')? 'https' : 'http';
 			$b .= '<p>';
-			$b .= 'This project\'s Mercurial repository can be checked out through anonymous access with the following command.';
+			$b .= _("This project's Mercurial repository can be checked out through anonymous access with the following command:");
 			$b .= '</p>';
 			$b .= '<p>';
 			$b .= '<tt>hg clone '.$protocol.'://'.forge_get_config('anonhg_login', 'scmhg').'@' . $this->getBoxForProject($project) . '/'. 'hg' .'/'. $project->getUnixName() .'/'.'</tt><br />';
@@ -84,10 +91,10 @@ class HgPlugin extends SCMPlugin {
 			$b = '';
 			if (forge_get_config('use_ssh', 'scmhg')) {
 				$b .= '<h2>';
-				$b .= _('Developer Mercurial Access via SSH');
+				$b .= sprintf(_('Developer %s Access via SSH'), 'Mercurial');
 				$b .= '</h2>';
 				$b .= '<p>';
-				$b .= _('Only project developers can access the Mercurial tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.');
+				$b .= _('Read/write access to Mercurial tree is allowed for authenticated users. SSH must be installed on your client machine. Enter your site password when prompted.');
 				$b .= '</p>';
 				// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 				//            HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
@@ -615,7 +622,7 @@ class HgPlugin extends SCMPlugin {
 	action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $params['group_id'] ?>" />
 <input type="hidden" name="create_repository" value="1" />
-<p><strong><?php echo _('Repository name:') ?></strong><?php echo utils_requiredField(); ?><br />
+<p><strong><?php echo _('Repository name')._(': ') ?></strong><?php echo utils_requiredField(); ?><br />
 <input type="text" required="required" size="20" name="repo_name" value="" /></p>
 <p><strong><?php echo _('Description')._(':'); ?></strong><br />
 <input type="text" size="60" name="description" value="" /></p>

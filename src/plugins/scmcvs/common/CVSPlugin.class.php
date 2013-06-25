@@ -49,7 +49,7 @@ class CVSPlugin extends SCMPlugin {
 	function printShortStats ($params) {
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
-			return false ;
+			return;
 		}
 
 		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
@@ -68,7 +68,11 @@ class CVSPlugin extends SCMPlugin {
 	}
 
 	function getBlurb () {
-		return '<p>' . _('CVS documentation is available <a href="http://cvsbook.red-bean.com/">here</a>.') . '</p>';
+		return '<p>' 
+				. sprintf(_('Documentation for %1$s is available at <a href="%2$s">%2$s</a>.'),
+							'CVS',
+							'http://cvsbook.red-bean.com/')
+				. '</p>';
 	}
 
 	function getInstructionsForAnon ($project) {
@@ -90,18 +94,34 @@ class CVSPlugin extends SCMPlugin {
 		if (session_loggedin()) {
 			$u =& user_get_object(user_getid()) ;
 			$d = $u->getUnixName() ;
-        	$b = '<h2>' . _('Developer CVS Access via SSH') . '</h2>';
+        	$b = '<h2>';
+			$b .= sprintf(_('Developer %s Access via SSH'), 'CVS');
+        	$b = '</h2>';
         	$b .= '<p>';
-        	$b .= _('Only project developers can access the CVS tree via this method. SSH must be installed on your client machine. Substitute <i>modulename</i> with the proper values. Enter your site password when prompted.');
+			$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'CVS');
+			$b .= ' ';
+			$b .= _('SSH must be installed on your client machine.');
+			$b .= ' ';
+			$b .= _('Substitute <i>developername</i> with the proper values.');
+			$b .= ' ';
+			$b .= _('Enter your site password when prompted.');
         	$b .= '</p>';
 			$b .= '<p>
 			       <tt>export CVS_RSH=ssh</tt><br/>
 			       <tt>cvs -d :ext:'.$d.'@'.$cvsrootend.' checkout <em>'._('modulename').'</em></tt>
 			       </p>';
 		} else {
-        	$b = '<h2>' . _('Developer CVS Access via SSH') . '</h2>';
+        	$b = '<h2>';
+			$b .= sprintf(_('Developer %s Access via SSH'), 'CVS');
+        	$b = '</h2>';
         	$b .= '<p>';
-        	$b .= _('Only project developers can access the CVS tree via this method. SSH must be installed on your client machine. Substitute <i>modulename</i> and <i>developername</i> with the proper values. Enter your site password when prompted.');
+			$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'CVS');
+			$b .= ' ';
+			$b .= _('SSH must be installed on your client machine.');
+			$b .= ' ';
+			$b .= _('Substitute <i>developername</i> with the proper values.');
+			$b .= ' ';
+			$b .= _('Enter your site password when prompted.');
         	$b .= '</p>';
 			$b .= '<p>
 			       <tt>export CVS_RSH=ssh</tt><br/>
@@ -127,13 +147,15 @@ class CVSPlugin extends SCMPlugin {
 
 	function getBrowserLinkBlock ($project) {
 		global $HTML ;
-		$b = $HTML->boxMiddle(_('CVS Repository Browser'));
+		$b = $HTML->boxMiddle(sprintf(_('%s Repository Browser'), 'CVS'));
         $b .= '<p>';
-        $b .= _('Browsing the CVS tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.');
+		$b .= sprintf(_("Browsing the %s tree gives you a view into the current status of this project's code."), 'CVS');
+		$b .= ' ';
+        $b .= _('You may also view the complete histories of any file in the repository.');
         $b .= '</p>';
 		$b .= '<p>[' ;
 		$b .= util_make_link ("/scm/browser.php?group_id=".$project->getID(),
-				      _('Browse CVS Repository')
+								sprintf(_('Browse %s Repository'), 'CVS')
 			) ;
 		$b .= ']</p>' ;
 		return $b ;
@@ -181,11 +203,9 @@ class CVSPlugin extends SCMPlugin {
 	}
 
 	function printBrowserPage ($params) {
-		global $HTML;
-
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
-			return false ;
+			return;
 		}
 
 		if ($project->usesPlugin ($this->name)) {

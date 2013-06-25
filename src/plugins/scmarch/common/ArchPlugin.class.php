@@ -39,7 +39,11 @@ class ArchPlugin extends SCMPlugin {
 	}
 
 	function getBlurb () {
-		return _('<p>Documentation for GNU Arch (sometimes referred to as "tla") is available <a href="http://www.gnu.org/software/gnu-arch/">here</a>.</p>') ;
+		return '<p>' 
+				. sprintf(_('Documentation for %1$s is available at <a href="%2$s">%2$s</a>.'),
+							'GNU Arch (“tla”)',
+							'http://www.gnu.org/software/gnu-arch/')
+				. '</p>';
 	}
 
 	function createOrUpdateRepo ($params) {
@@ -70,9 +74,6 @@ class ArchPlugin extends SCMPlugin {
 	}
 
 	function generateSnapshots ($params) {
-
-
-
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;

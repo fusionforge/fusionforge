@@ -52,13 +52,18 @@ class CpoldPlugin extends SCMPlugin {
 	}
 
 	function getBlurb () {
-		return _('<p>This CPOLD plugin is only intended as a proof of concept.</p>') ;
+		return '<p>'._('This CPOLD plugin is only intended as a proof of concept.').'</p>';
 	}
 
 	function getInstructionsForAnon ($project) {
-		$b =  sprintf (_('<p><b>Anonymous CPOLD Access</b></p><p>This project\'s CPOLD repository can be accessep anonymously at %s.</p>'),
+		$b = '<h2>';
+		$b .=  _('Anonymous CPOLD Access');
+		$b = '</h2>';
+		$b .= '<p>';
+		$b =  sprintf (_('This project\'s CPOLD repository can be accessep anonymously at %s.'),
 			       util_make_link ('/anonscm/cpold/'.$project->getUnixName().'/',
-					       util_make_url ('/anonscm/cpold/'.$project->getUnixName().'/'))) ;
+				   util_make_url ('/anonscm/cpold/'.$project->getUnixName().'/'))) ;
+		$b .= '</p>';
 		return $b ;
 	}
 
@@ -66,10 +71,30 @@ class CpoldPlugin extends SCMPlugin {
 		if (session_loggedin()) {
 			$u =& user_get_object(user_getid()) ;
 			$d = $u->getUnixName() ;
-			$b = _('<p><b>Developer CPOLD Access via SSH</b></p><p>Only project developers can access the CPOLD tree via this method. SSH must be installed on your client machine. Enter your site password when prompted.</p>');
+			$b .= '<h2>';
+			$b .= sprintf(_('Developer %s Access via SSH'), 'CPOLD');
+			$b .= '</h2>';
+			$b .= '<p>';
+			$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'CPOLD');
+			$b .= ' ';
+			$b .= _('SSH must be installed on your client machine.');
+			$b .= ' ';
+			$b .= _('Enter your site password when prompted.');
+			$b .= '</p>';
 			$b .= '<p><tt>scp -r '.$d.'@' . $project->getSCMBox() . ':'. forge_get_config('repos_path', 'scmcpold') .'/'. $project->getUnixName().'/ .</tt></p>' ;
 		} else {
-			$b = _('<p><b>Developer CPOLD Access via SSH</b></p><p>Only project developers can access the CPOLD tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.</p>');
+			$b .= '<h2>';
+			$b .= sprintf(_('Developer %s Access via SSH'), 'CPOLD');
+			$b .= '</h2>';
+			$b .= '<p>';
+			$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'CPOLD');
+			$b .= ' ';
+			$b .= _('SSH must be installed on your client machine.');
+			$b .= ' ';
+			$b .= _('Substitute <i>developername</i> with the proper values.');
+			$b .= ' ';
+			$b .= _('Enter your site password when prompted.');
+			$b .= '</p>';
 			$b .= '<p><tt>scp -r <i>'._('developername').'</i>@' . $project->getSCMBox() . ':'. forge_get_config('repos_path', 'scmcpold') .'/'. $project->getUnixName().'/ .</tt></p>' ;
 		}
 		return $b ;
@@ -149,7 +174,7 @@ class CpoldPlugin extends SCMPlugin {
 		unlink ("$tmp/tarball.tar.gz") ;
 		system ("rm -rf $tmp") ;
 	}
-  }
+}
 
 // Local Variables:
 // mode: php

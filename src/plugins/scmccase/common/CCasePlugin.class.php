@@ -88,7 +88,7 @@ class CCasePlugin extends SCMPlugin {
 
 			// Developer access
 
-			echo "<b>".print(_('ClearCase Access'))."</b>" ;
+			echo "<b>"._('ClearCase Access')."</b>" ;
 
 			print "<p>" ;
 			printf (_('Either mount the VOB with <tt>cleartool mount %1$s</tt> or select the <tt>%1$s</tt> VOB in your ClearCase Explorer.'),
@@ -110,14 +110,17 @@ class CCasePlugin extends SCMPlugin {
 			if ($project->enableAnonCVS() || !$anonymous) {
 				echo $HTML->boxTop(_('History'));
 
-				echo '<b>'._('Browse the ClearCase tree').'</b><p>'._('Browsing the ClearCase tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.').'</p>' ;
-
+				echo '<b>'._('Browse the ClearCase tree').'</b>';
+				echo '<p>';
+				echo sprintf(_("Browsing the %s tree gives you a view into the current status of this project's code."), 'ClearCase');
+				echo ' ';
+				echo _('You may also view the complete histories of any file in the repository.');
+				echo '</p>';
 				$browse_url = "http://" . $this->GetGroupServer($group_id) . "/ccweb" ;
 				// $browse_url = $browse_url . "?vob_tag=".$vob_tag ;
-				echo "<p>" ;
-				printf (_('<a href="%1$s">Browse</a> CCase tree'),
-					$browse_url) ;
-				echo "</p>" ;
+				echo "<p>";
+				printf ('<a href="%1$s">%2$s</a>', $browse_url, _('Browse the ClearCase tree')) ;
+				echo "</p>";
 
 				echo $HTML->boxBottom();
 			}
