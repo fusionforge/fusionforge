@@ -51,18 +51,17 @@ class DocumentGroupFactory extends Error {
 	/**
 	 * Constructor.
 	 *
-	 * @return	boolean	success.
+	 * @return	void
 	 */
 	function __construct(&$Group) {
 		$this->Error();
 
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('DocumentGroupFactory:: Invalid Project'));
-			return false;
+			exit_no_group();
 		}
 		if ($Group->isError()) {
 			$this->setError('DocumentGroupFactory::'.' '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
 	}
