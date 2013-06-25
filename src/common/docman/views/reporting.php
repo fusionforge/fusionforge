@@ -150,7 +150,7 @@ if (count($data) == 0) {
 		});'."\n";
 	echo '//]]></script>';
 	echo '<div id="chart1"></div>';
-	$tabletop = array(_('Path'), _('File'), _('User'), _('Date'));
+	$tabletop = array(_('Folder'), _('Document'), _('User'), _('Date'));
 	$classth = array('', '', '', '');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
 	for ($i=0; $i<count($data); $i++) {
