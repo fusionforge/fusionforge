@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 12:22+0200\n"
+"POT-Creation-Date: 2013-06-25 17:51+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -207,12 +207,10 @@ msgstr ""
 #: common/docman/actions/monitorfile.php:56
 #: common/tracker/actions/tracker.php:434
 #: common/tracker/actions/tracker.php:451
-#, fuzzy
 msgid "Monitoring Started"
 msgstr "Monitorització iniciada"
 
 #: common/docman/actions/monitorfile.php:76
-#, fuzzy
 msgid "Monitoring Stopped"
 msgstr "Monitorització aturada"
 
@@ -629,8 +627,8 @@ msgstr "Llista Afegida"
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/snippet/download.php:45 www/survey/admin/question.php:64
-#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:82
-#: www/survey/admin/show_csv.php:84 www/survey/admin/show_results.php:69
+#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:80
+#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:69
 #: www/survey/admin/show_results.php:73 www/survey/admin/show_results.php:84
 #: www/survey/admin/show_results.php:86 www/survey/admin/show_results.php:133
 #: www/survey/admin/show_results.php:135 www/tracker/admin/index.php:190
@@ -3314,7 +3312,6 @@ msgid "Map of projects, by categories or types."
 msgstr ""
 
 #: common/include/Navigation.class.php:257
-#, fuzzy
 msgid "Code Snippets"
 msgstr "Fragments de codi"
 
@@ -3323,9 +3320,8 @@ msgid "Tooling library. Small coding tips."
 msgstr ""
 
 #: common/include/Navigation.class.php:266
-#, fuzzy
 msgid "Project Openings"
-msgstr "Ofertes&nbsp;de&nbsp;feina"
+msgstr "Ofertes de feina"
 
 #: common/include/Navigation.class.php:268
 msgid "Hiring Market Place."
@@ -3335,7 +3331,6 @@ msgstr ""
 #: plugins/quota_management/www/quota_admin.php:38
 #: plugins/quota_management/www/quota.php:36 www/admin/globalroleedit.php:138
 #: www/admin/index.php:39
-#, fuzzy
 msgid "Site Admin"
 msgstr "Administració del lloc"
 
@@ -4207,9 +4202,9 @@ msgstr ""
 "-- l'equip %1$s\n"
 
 #: common/mail/MailingList.class.php:201
-#, fuzzy, php-format
+#, php-format
 msgid "%s New Mailing List"
-msgstr "Nova llista de correu %1$s"
+msgstr "Nova llista de correu %s"
 
 #: common/mail/MailingList.class.php:221
 #, fuzzy
@@ -4468,9 +4463,8 @@ msgid "Question Added"
 msgstr "Pregunta afegida"
 
 #: common/survey/SurveyQuestion.class.php:149
-#, fuzzy
 msgid "Update failed"
-msgstr "Actualitzat diàriament"
+msgstr "Ha fallat l'actualització"
 
 #: common/survey/SurveyQuestion.class.php:194
 msgid "Error finding question"
@@ -5018,14 +5012,12 @@ msgid ""
 msgstr ""
 
 #: common/tracker/actions/browse.php:539 www/pm/browse_task.php:210
-#, fuzzy
 msgid "Check all"
-msgstr "Marca-ho &nbsp;tot"
+msgstr "Marca-ho tot"
 
 #: common/tracker/actions/browse.php:541 www/pm/browse_task.php:212
-#, fuzzy
 msgid "Clear all"
-msgstr "Suprimeix-ho &nbsp;tot"
+msgstr "Suprimeix-ho tot"
 
 #: common/tracker/actions/browse.php:568 common/tracker/actions/browse.php:747
 #: common/tracker/actions/detail.php:87
@@ -5038,7 +5030,6 @@ msgstr "Suprimeix-ho &nbsp;tot"
 #: www/pm/add_task.php:124 www/pm/browse_task.php:241
 #: www/pm/browse_task.php:381 www/pm/detail_task.php:125
 #: www/pm/mod_task.php:173
-#, fuzzy
 msgid "Assigned to"
 msgstr "Assignat a"
 
@@ -5066,7 +5057,6 @@ msgstr "* Denota requeriments de fa > %1$s dia"
 
 #: common/tracker/actions/browse.php:715 www/pm/browse_task.php:361
 #: www/pm/browse_task.php:390
-#, fuzzy
 msgid "Mass Update"
 msgstr "Actualització en massa"
 
@@ -7246,7 +7236,6 @@ msgstr "Tasca"
 
 #: common/widget/Widget_ProjectInfo.class.php:50
 #: common/widget/Widget_ProjectInfo.class.php:53
-#, fuzzy
 msgid "No tag defined for this project"
 msgstr "No hi ha tal missatge per aquest projecte"
 
@@ -7540,9 +7529,9 @@ msgid "Please replace this file with your own website"
 msgstr ""
 
 #: cronjobs/homedirs.php:155
-#, fuzzy, php-format
+#, php-format
 msgid "Welcome to %s"
-msgstr "Benvingut a %1$s"
+msgstr "Benvingut a %s"
 
 #: cronjobs/homedirs.php:157
 #, php-format
@@ -7659,15 +7648,13 @@ msgstr "Adreça de correu no vàlida"
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
 #: www/account/lostpw.php:89 www/account/pending-resend.php:71
 #: www/account/verify.php:78
-#, fuzzy
 msgid "Login name"
-msgstr "Nom d'inici de sessió:"
+msgstr "Nom d'inici de sessió"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: www/account/verify.php:82
-#, fuzzy
 msgid "Password"
-msgstr "Contrasenya:"
+msgstr "Contrasenya"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:208
@@ -8380,7 +8367,6 @@ msgstr "Registra un nou projecte"
 #: plugins/contribtracker/www/global_admin.php:397
 #: www/project/admin/users.php:381 www/project/admin/users.php:441
 #: www/project/admin/users.php:465
-#, fuzzy
 msgid "Role name"
 msgstr "Nom del rol"
 
@@ -10400,9 +10386,8 @@ msgid "Unable to get the lists"
 msgstr ""
 
 #: plugins/mailman/www/admin/index.php:144
-#, fuzzy
 msgid "Mailing List Name"
-msgstr "Nom de la llista de correu:"
+msgstr "Nom de la llista de correu"
 
 #: plugins/mailman/www/admin/index.php:147
 #: plugins/mailman/www/admin/index.php:179 www/mail/admin/index.php:191
@@ -10466,9 +10451,8 @@ msgid ""
 msgstr ""
 
 #: plugins/mailman/www/index.php:74 www/mail/index.php:74
-#, fuzzy
 msgid "Choose a list to browse, search, and post messages."
-msgstr "<p>Trieu una llista per navegar, cercar i enviar missatges.</p>"
+msgstr "Trieu una llista per navegar, cercar i enviar missatges."
 
 #: plugins/mailman/www/mailman_utils.php:20
 #, fuzzy, php-format
@@ -13977,9 +13961,8 @@ msgid ""
 msgstr ""
 
 #: www/account/change_email.php:78
-#, fuzzy
 msgid "Email change"
-msgstr "Canvi d'adreça de correu completat"
+msgstr "Canvi d'adreça de correu"
 
 #: www/account/change_email.php:80
 msgid ""
@@ -13988,28 +13971,25 @@ msgid ""
 msgstr ""
 
 #: www/account/change_email.php:81
-#, fuzzy
 msgid ""
 "We need to maintain an accurate email address for each user due to the level "
 "of access we grant via this account. If we need to reach a user for issues "
 "arriving from a shell or project account, it is important that we be able to "
 "do so."
 msgstr ""
-"<p>Per a canviar la vostra adreça de correu electrònic cal una confirmació "
-"de la nova adreça. Així ens assegurem que tenim una adreça correcta al "
-"fitxer.</p><p>Necessitem mantenir una adreça de correu acurada per a cada "
-"usuari degut al nivell d'accés que donem a través d'aquest compte. Si ens "
-"cal accedir a un usuari per temes provinents d'un compte de shell o de "
-"projecte, és important que ho poguem fer així.</p>  <p>A l'enviar el "
-"formulari següent, s'enviarà una URL de confirmació a la nova adreça de "
-"correu electrònic. En visitar aquest enllaç, es completarà el canvi de "
-"correu electrònic.</p>"
+"Necessitem mantenir una adreça de correu acurada per a cada usuari degut al "
+"nivell d'accés que donem a través d'aquest compte. Si ens cal accedir a un "
+"usuari per temes provinents d'un compte de shell o de projecte, és important "
+"que ho poguem fer així."
 
 #: www/account/change_email.php:82
 msgid ""
 "Submitting the form below will mail a confirmation URL to the new email "
 "address. Visiting this link will complete the email change."
 msgstr ""
+"A l'enviar el formulari següent, s'enviarà una URL de confirmació a la nova "
+"adreça de correu electrònic. En visitar aquest enllaç, es completarà el "
+"canvi de correu electrònic."
 
 #: www/account/change_email.php:88
 msgid "New Email Address:"
@@ -14141,7 +14121,6 @@ msgstr ""
 "Per a més informació sobre compartir claus, llegiu la documentació ssh.</p>"
 
 #: www/account/editsshkeys.php:75
-#, fuzzy
 msgid ""
 "To generate a public key, run the program 'ssh-keygen' (you can use both "
 "protocol 1 or 2). The public key will be placed at '~/.ssh/identity."
@@ -14149,15 +14128,10 @@ msgid ""
 "pub' (protocol version 2). Read the ssh documentation for further "
 "information on sharing keys."
 msgstr ""
-"<p>Per evitar que hagueu de teclejar cada cop la vostra contrasenya per al "
-"vostre compte CVS/SSH de desenvolupador, podeu pujar aquí les vostres claus "
-"públiques i es posaran al servidor CVS al vostre fitxer ~/.ssh/"
-"authorized_keys. Això es realitza mitjançant una tasca cron, o sigui que pot "
-"ser que no succeeixi immediatament.  Permeteu una hora de retard.</p><p>Per "
-"a generar una clau pública, executeu el programa 'ssh-keygen' (podeu usar el "
-"protocol 1 ó 2). La clau pública es situarà a '~/.ssh/identity."
+"Per a generar una clau pública, executeu el programa 'ssh-keygen' (podeu "
+"usar el protocol 1 ó 2). La clau pública es situarà a '~/.ssh/identity."
 "pub' (protocol 1) i '~/.ssh/id_dsa.pub' o '~/.ssh/id_rsa.pub' (protocol 2). "
-"Per a més informació sobre compartir claus, llegiu la documentació ssh.</p>"
+"Per a més informació sobre compartir claus, llegiu la documentació ssh."
 
 #: www/account/editsshkeys.php:76
 #, fuzzy
@@ -14183,20 +14157,17 @@ msgid ""
 msgstr ""
 
 #: www/account/first.php:33
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "As a registered user, you can participate fully in the activities on the "
 "site. You may now post messages to the project message forums, post bugs for "
 "software in %1$s, sign on as a project developer, or even start your own "
 "project."
 msgstr ""
-"<p>Ara sou un usuari registrat a %1$s, l'entorn de desenvolupament en línia "
-"per a projectes de Codi Obert.</p><p>Com a usuari registrat,podeu participar "
-"plenament en les activitats del lloc. Ara podeu enviar missatges als fòrums "
-"de missatges de projectes, comunicar errors de programa (bugs) a %1$s, "
-"signar com a desenvolupador de projectes, o fins i tot iniciar el vostre "
-"propi projecte.</p><p>Gaudiu d'aquest lloc i indiqueu-nos de quines formes "
-"podem millorar %1$s.</p><p>--l'equip de %1$s.</p>"
+"Com a usuari registrat,podeu participar plenament en les activitats del "
+"lloc. Ara podeu enviar missatges als fòrums de missatges de projectes, "
+"comunicar errors de programa (bugs) a %1$s, signar com a desenvolupador de "
+"projectes, o fins i tot iniciar el vostre propi projecte."
 
 #: www/account/first.php:36
 #, fuzzy, php-format
@@ -14667,13 +14638,12 @@ msgid "Verify"
 msgstr ""
 
 #: www/account/verify.php:68
-#, fuzzy
 msgid ""
 "In order to complete your registration, login now. Your account will then be "
 "activated for normal logins."
 msgstr ""
-"<p>Per a completar el vostre registre, inicieu una sessió ara. Aleshores, el "
-"vostre compte s'activarà per a inicis de sessió normals.</p>"
+"Per a completar el vostre registre, inicieu una sessió ara. Aleshores, el "
+"vostre compte s'activarà per a inicis de sessió normals."
 
 #: www/activity/index.php:102
 msgid "Forum Post"
@@ -15354,9 +15324,8 @@ msgid "Display Projects Beginning with:"
 msgstr "Mostra grups que comencen amb :"
 
 #: www/admin/index.php:148
-#, fuzzy
 msgid "Search <em>(groupid, project Unix name, project full name)</em>"
-msgstr "Cerca <em>(id de grup, nom del grup unix, nom complet)</em>"
+msgstr "Cerca <em>(id de grup, nom del grup Unix, nom complet)</em>"
 
 #: www/admin/index.php:155
 msgid "Register New Project"
@@ -15628,7 +15597,7 @@ msgstr "No facis res"
 #: www/admin/pending-news.php:150 www/export/rssAboTask.php:146
 #: www/my/diary.php:185 www/news/admin/index.php:137 www/news/submit.php:148
 msgid "Details"
-msgstr ""
+msgstr "Detalls"
 
 #: www/admin/pluginman.php:55
 #, php-format
@@ -15845,12 +15814,10 @@ msgid "New category short name (no spaces, unix-like)"
 msgstr "Nou nom abreujat de categoria (sense espais, estil unix)"
 
 #: www/admin/trove/trove_cat_add.php:119
-#, fuzzy
 msgid "New category full name (Maximum length is 80 chars)"
 msgstr "Nou nom complet de categoria (VARCHAR 80)"
 
 #: www/admin/trove/trove_cat_add.php:121
-#, fuzzy
 msgid "New category description (Maximum length is 255 chars)"
 msgstr "Nova descripció de categoria (VARCHAR 255)"
 
@@ -16134,9 +16101,8 @@ msgid "[Change PW]"
 msgstr "Canvia la setmana"
 
 #: www/admin/userlist.php:146
-#, fuzzy
 msgid "User List"
-msgstr ": Llista d'usuaris"
+msgstr "Llista d'usuaris"
 
 #: www/admin/userlist.php:150
 msgid "Users that use plugin"
@@ -16210,9 +16176,8 @@ msgid "Add Virtual Host"
 msgstr "Afegeix ordinador central virtual"
 
 #: www/admin/vhost.php:123 www/register/index.php:204
-#, fuzzy
 msgid "Project Unix Name"
-msgstr "Nom del nou projecte"
+msgstr "Nom Unix del projecte"
 
 #: www/admin/vhost.php:128
 msgid "Virtual Host Name"
@@ -16265,7 +16230,6 @@ msgid "User could not be found."
 msgstr "Enquesta no trobada."
 
 #: www/developer/diary.php:44
-#, fuzzy
 msgid "Diary and Notes for"
 msgstr "Diari i notes per"
 
@@ -16279,7 +16243,6 @@ msgid "Posted on "
 msgstr "Enviat per"
 
 #: www/developer/diary.php:62
-#, fuzzy
 msgid "Existing Diary and Notes Entries"
 msgstr "Entrades existents de Diari i Notes"
 
@@ -16310,17 +16273,15 @@ msgstr "Ara l'usuari està essent monitoritzat"
 
 #: www/developer/monitor.php:68
 msgid "You will now be emailed this user's diary entries."
-msgstr ""
+msgstr "Ara se us enviaràn per aquestes entrades de diari de l'usuari."
 
 #: www/developer/monitor.php:69
-#, fuzzy
 msgid ""
 "To turn off monitoring, simply click the <strong>Monitor user</strong> link "
 "again."
 msgstr ""
-"<p>Ara se us enviaràn per aquestes entrades de diari de l'usuari.</p><p>Per "
-"a desconnectar la monitorització, simplement torneu a fer clic a l'enllaç "
-"<strong>Monitoritza l'usuari</strong>.</p>"
+"Per a desconnectar la monitorització, simplement torneu a fer clic a "
+"l'enllaç <strong>Monitoritza l'usuari</strong>."
 
 #: www/developer/monitor.php:76
 msgid "Monitoring has been turned off"
@@ -18298,9 +18259,8 @@ msgid "Unable to get the list %s : %s"
 msgstr ""
 
 #: www/mail/index.php:78
-#, fuzzy
 msgid "Address"
-msgstr "Adreça:"
+msgstr "Adreça"
 
 #: www/mail/index.php:97
 #, php-format
@@ -18564,11 +18524,10 @@ msgid "These items were approved this past week (total: %1$s)"
 msgstr "Aquests elements es varen aprovar la setmana passada (total: %1$s)"
 
 #: www/news/index.php:38
-#, fuzzy
 msgid "Choose a News item and you can browse, search, and post messages."
 msgstr ""
-"<p>Escolliu un element de les notícies i podreu navegar, cercar, i enviar "
-"missatges.</p>"
+"Escolliu un element de les notícies i podreu navegar, cercar, i enviar "
+"missatges."
 
 #: www/news/index.php:72
 #, fuzzy, php-format
@@ -18776,19 +18735,17 @@ msgid "No such posting for this project"
 msgstr "No hi ha tal missatge per aquest projecte"
 
 #: www/people/editjob.php:157
-#, fuzzy
 msgid ""
 "Now you can edit/change the list of skills attached to this posting. "
 "Developers will be able to match their skills with your requirements."
 msgstr ""
-"<p>Ara podeu editar/canviar la llista d'habilitats adjuntada a aquest "
-"missatge. Els desenvolupadors seran capaços de fer coincidir les seves "
-"habilitats amb els vostres requeriments.</p><p>Tots els missatges es tanquen "
-"automàticament després de dues setmanes.</p>"
+"Ara podeu editar/canviar la llista d'habilitats adjuntada a aquest missatge. "
+"Els desenvolupadors seran capaços de fer coincidir les seves habilitats amb "
+"els vostres requeriments."
 
 #: www/people/editjob.php:159
 msgid "All postings are automatically closed after two weeks."
-msgstr ""
+msgstr "Tots els missatges es tanquen automàticament després de dues setmanes."
 
 #: www/people/editjob.php:175
 msgid "Update Descriptions"
@@ -19073,9 +19030,8 @@ msgid "Added to skill inventory"
 msgstr "Afegit a l'inventari d'habilitats"
 
 #: www/people/people_utils.php:108 www/people/people_utils.php:216
-#, fuzzy
 msgid "Error: skill already in your inventory"
-msgstr "ERROR - Aquesta habilitat ja és al vostre inventari"
+msgstr "Error: Aquesta habilitat ja és al vostre inventari"
 
 #: www/people/people_utils.php:126 www/people/people_utils.php:156
 #: www/people/people_utils.php:234 www/people/people_utils.php:296
@@ -19853,13 +19809,12 @@ msgid "All Tasks By Assignee"
 msgstr "Totes les tasques per tècnic"
 
 #: www/pm/reporting/index.php:238
-#, fuzzy
 msgid ""
 "Note that same task can be assigned to several technicians. Such task will "
 "be counted for each of them."
 msgstr ""
-"<p>Teniu en compte que una mateixa tasca pot ser assignada a diversos "
-"tècnics. Aquesta tasca es comptarà per a cadascun d'ells.</p>"
+"Teniu en compte que una mateixa tasca pot ser assignada a diversos tècnics. "
+"Aquesta tasca es comptarà per a cadascun d'ells."
 
 #: www/pm/task.php:70
 #, fuzzy
@@ -20140,19 +20095,16 @@ msgid "Misc. Project Information"
 msgstr "Diverses informacions del projecte"
 
 #: www/project/admin/index.php:123
-#, fuzzy
 msgid "Group shell (SSH) server:"
-msgstr "Servidor de shell (SSH) del grup:&nbsp;"
+msgstr "Servidor de shell (SSH) del grup:"
 
 #: www/project/admin/index.php:124
-#, fuzzy
 msgid "Group directory on shell server:"
-msgstr "Directori de grup al servidor de shell:&nbsp;"
+msgstr "Directori de grup al servidor de shell:"
 
 #: www/project/admin/index.php:125
-#, fuzzy
 msgid "Project WWW directory on shell server:"
-msgstr "Directori WWW de projecte al servidor de shell:&nbsp;"
+msgstr "Directori WWW de projecte al servidor de shell:"
 
 #: www/project/admin/index.php:134
 #, fuzzy
@@ -20222,18 +20174,16 @@ msgid ""
 msgstr ""
 
 #: www/project/admin/massadd.php:77
-#, fuzzy
 msgid ""
 "Choose the <strong>First Letter</strong> of the name of the person you wish "
 "to add."
 msgstr ""
-"<p>Escolliu la <strong>primera lletra</strong> del nom de la persona que "
-"desitgeu afegir.</p>"
+"Escolliu la <strong>primera lletra</strong> del nom de la persona que "
+"desitgeu afegir."
 
 #: www/project/admin/massadd.php:87 www/project/admin/users.php:98
-#, fuzzy
 msgid "No Matching Users Found"
-msgstr "<p>No s'han trobat usuaris que coincideixin</p>"
+msgstr "No s'han trobat usuaris que coincideixin"
 
 #: www/project/admin/massadd.php:92
 #, fuzzy
@@ -20678,14 +20628,13 @@ msgid "Project Member List"
 msgstr "Llista de membres del projecte"
 
 #: www/project/memberlist.php:37
-#, fuzzy
 msgid ""
 "If you would like to contribute to this project by becoming a member, "
 "contact one of the project admins, designated in bold text below."
 msgstr ""
-"<p>Si us agradaria contribuir a aquest projecte convertint-vos en "
+"Si us agradaria contribuir a aquest projecte convertint-vos en "
 "desenvolupador, contacteu un dels administradors de projecte, designats en "
-"negreta més avall.</p>"
+"negreta més avall."
 
 #: www/project/memberlist.php:49
 #, fuzzy
@@ -20834,7 +20783,7 @@ msgid "Project Purpose And Summarization"
 msgstr "Administració de la base dedades de projectes"
 
 #: www/register/index.php:187
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Please provide detailed, accurate description of your project and what %1$s "
 "resources and in which way you plan to use. This description will be the "
@@ -20843,13 +20792,12 @@ msgid ""
 "description will not be used as a public description of your project. It "
 "must be written in English."
 msgstr ""
-"<h3>2. Objectiu i resum del projecte</h3><p><strong></strong><p><strong> "
 "Proporcioneu una descripció detallada i acurada del vostre projecte i quins "
 "recursos %1$s us plantegeu usar i de quina manera. Aquesta descripció serà "
 "la base per a l'aprovació o el rebuig de l'hostatjament del vostre projecte "
 "a %1$s, i més endavant assegurar-se que esteu usant els serveis de la forma "
 "prevista. Aquesta descripció no serà utilitzada com una descripció pública "
-"del vostre projecte.</strong>"
+"del vostre projecte."
 
 #: www/register/index.php:195
 #, fuzzy
@@ -20857,16 +20805,12 @@ msgid "Project Public Description"
 msgstr "Projecte lifespan"
 
 #: www/register/index.php:197
-#, fuzzy
 msgid ""
 "This is the description of your project which will be shown on the Project "
 "Summary page, in search results, etc."
 msgstr ""
-"<h3>4. Descripció pública del projecte</h3><p>Aquesta és la descripció del "
-"vostre projecte que es mostrarà a la pàgina de sumari del projecte, als "
-"resultats de cerques, etc. No hauria de ser tan comprensiu i formal com la "
-"descripció d'objectius del projecte (pas 2), sentiu-vos lliures per "
-"utilitzar vocabulari concís i enganxós. La longitud màxima és de 255 cars."
+"Aquesta és la descripció del vostre projecte que es mostrarà a la pàgina de "
+"sumari del projecte, als resultats de cerques, etc."
 
 #: www/register/index.php:205
 msgid ""
@@ -20937,7 +20881,6 @@ msgid "search engines throughout the site."
 msgstr ""
 
 #: www/register/index.php:226
-#, fuzzy
 msgid "Unix Name"
 msgstr "Nom Unix"
 
@@ -20947,14 +20890,12 @@ msgid "Source Code"
 msgstr "Font IP"
 
 #: www/register/index.php:236
-#, fuzzy
 msgid ""
 "You can choose among different SCM for your project, but just one (or none "
 "at all). Please select the SCM system you want to use."
 msgstr ""
-"<h3>5. SCM</h3><p>Podeu escollir entre diferents SCM per al vostre projecte, "
-"però només un. Seleccioneu el sistema SCM que voleu usar.</p> <p><strong>Un "
-"cop el projecte està registrat no podreu canviar-lo!</strong></p>"
+"Podeu escollir entre diferents SCM per al vostre projecte, però només un. "
+"Seleccioneu el sistema SCM que voleu usar."
 
 #: www/register/index.php:239 www/register/index.php:241
 #, fuzzy
@@ -21291,13 +21232,12 @@ msgid "User Activity"
 msgstr "Activitat de l'usuari"
 
 #: www/reporting/useract.php:61 www/reporting/usertime.php:61
-#, fuzzy
 msgid ""
 "Choose the <strong>First Letter</strong> of the name of the person you wish "
 "to report on."
 msgstr ""
 "Escolliu la <strong>Primera lletra</strong> del nom de la persona sobre la "
-"qual voleu informar.<p>"
+"qual voleu informar."
 
 #: www/reporting/useradded.php:53
 msgid "Users Added"
@@ -21533,9 +21473,9 @@ msgid "Please enter a term to search for"
 msgstr ""
 
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:173
-#, fuzzy, php-format
+#, php-format
 msgid "%s Search Results"
-msgstr "Resultat de la cerca %1$s"
+msgstr "Resultat de la cerca %s"
 
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:221
 #, fuzzy, php-format
@@ -21588,9 +21528,8 @@ msgid "People"
 msgstr "Persones"
 
 #: www/search/index.php:82
-#, fuzzy
 msgid "Error: Invalid search"
-msgstr "Error - Cerca no vàlida"
+msgstr "Error: Cerca no vàlida"
 
 #: www/sendmessage.php:33
 #, fuzzy
@@ -21664,15 +21603,13 @@ msgid "Submit A New Snippet"
 msgstr "Tramet un nou fragment"
 
 #: www/snippet/add_snippet_to_package.php:56
-#, fuzzy
 msgid "Error: snippet_package_version_id missing"
-msgstr "Error - Falta un ID de versió de fragment de codi vàlid."
+msgstr "Error: Falta un ID de versió de fragment de codi vàlid."
 
 #: www/snippet/add_snippet_to_package.php:72
-#, fuzzy
 msgid "Error: Only the creator of a package version can add snippets to it."
 msgstr ""
-"Error - Només el creador d'una versió del paquet hi pot afegir fragments de "
+"Error: Només el creador d'una versió del paquet hi pot afegir fragments de "
 "codi."
 
 #: www/snippet/add_snippet_to_package.php:82
@@ -21687,15 +21624,13 @@ msgid "Back To Add Page"
 msgstr "Torna a la pàgina d'afegits"
 
 #: www/snippet/add_snippet_to_package.php:96
-#, fuzzy
 msgid "Error: That snippet was already added to this package."
-msgstr "Error - Aquest fragment de codi ja estava afegit a aquest paquet."
+msgstr "Error: Aquest fragment de codi ja estava afegit a aquest paquet."
 
 #: www/snippet/add_snippet_to_package.php:108 www/snippet/addversion.php:71
 #: www/snippet/submit.php:74
-#, fuzzy
 msgid "Error doing snippet version insert"
-msgstr "Error - Aquest fragment de codi no existeix."
+msgstr "ERROR FENT LA INSERCIÓ D'UNA VERSIÓ DE FRAGMENT DE CODI!"
 
 #: www/snippet/add_snippet_to_package.php:110 www/snippet/addversion.php:74
 msgid "Snippet Version Added Successfully."
@@ -21704,9 +21639,8 @@ msgstr "La versió del fragment de codi s'ha afegit amb èxit."
 #: www/snippet/add_snippet_to_package.php:113 www/snippet/addversion.php:77
 #: www/snippet/addversion.php:198 www/snippet/package.php:123
 #: www/snippet/submit.php:81
-#, fuzzy
 msgid "Error: Go back and fill in all the information"
-msgstr "Error - Torneu enrere i ompliu tota la informació"
+msgstr "Error: Torneu enrere i ompliu tota la informació"
 
 #: www/snippet/add_snippet_to_package.php:130
 msgid ""
@@ -21740,9 +21674,8 @@ msgid "Snippets In This Package"
 msgstr "Fragments de codi en aquest paquet"
 
 #: www/snippet/addversion.php:39
-#, fuzzy
 msgid "Error: snippet doesn't exist"
-msgstr "Error - Aquest fragment de codi no existeix."
+msgstr "Error: Aquest fragment de codi no existeix"
 
 #: www/snippet/addversion.php:81 www/snippet/addversion.php:202
 #, fuzzy
@@ -21767,9 +21700,8 @@ msgid "Error: snippet_package doesn't exist"
 msgstr "Error, Error - paquet_fragment_codi no existeix"
 
 #: www/snippet/addversion.php:154 www/snippet/package.php:75
-#, fuzzy
 msgid "Error doing snippet package version insert"
-msgstr "Error - Falta un ID de versió de fragment de codi vàlid."
+msgstr "ERROR FENT LA INSERCIÓ D'UNA VERSIÓ D'UN PAQUET DE FRAGMENT DE CODI!"
 
 #: www/snippet/addversion.php:155
 #, fuzzy
@@ -21876,9 +21808,8 @@ msgid "Error: mangled URL?"
 msgstr "Error, Error - la URL o el formulari eren defectuosos??"
 
 #: www/snippet/detail.php:57 www/snippet/detail.php:147
-#, fuzzy
 msgid "Error: no versions found"
-msgstr "Error - no s'han trobat versions"
+msgstr "Error: no s'han trobat versions"
 
 #: www/snippet/detail.php:60
 msgid "Versions Of This Snippet:"
@@ -22045,9 +21976,8 @@ msgid "Choose One"
 msgstr "Escolliu-ne una"
 
 #: www/snippet/snippet_utils.php:27
-#, fuzzy
 msgid "Unix Admin"
-msgstr "Administració del lloc"
+msgstr "Administrador Unix"
 
 #: www/snippet/snippet_utils.php:28
 msgid "HTML Manipulation"
@@ -22126,9 +22056,8 @@ msgid "Create A Package"
 msgstr "Crea un paquet a"
 
 #: www/snippet/submit.php:59
-#, fuzzy
 msgid "Error doing snippet insert"
-msgstr "Error a l'inserció"
+msgstr "ERROR FENT LA INSERCIÓ D'UN FRAGMENT DE CODI!"
 
 #: www/snippet/submit.php:61 www/snippet/submit.php:76
 msgid "Snippet Added Successfully."
@@ -22515,7 +22444,7 @@ msgstr "Edita una pregunta"
 msgid "Add a Question"
 msgstr "Afegeix una pregunta"
 
-#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:61
+#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
 #: www/survey/admin/show_questions.php:35
 #: www/survey/admin/show_results_aggregate.php:35
 #: www/survey/admin/show_results_comments.php:36
@@ -22547,7 +22476,7 @@ msgstr "Actualitzat amb èxit"
 msgid "No questions found"
 msgstr "S'han trobat %1$s preguntes"
 
-#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:133
+#: www/survey/admin/show_csv.php:80 www/survey/admin/show_results.php:133
 #, fuzzy
 msgid "Cannot get Survey Response Factory"
 msgstr "No s'ha trobat cap resposta d'enquesta"
@@ -22868,9 +22797,8 @@ msgid "Flag"
 msgstr ""
 
 #: www/survey/survey.php:51
-#, fuzzy
 msgid "Vote for Survey"
-msgstr "Nom de l'enquesta:"
+msgstr "Nom de l'enquesta"
 
 #: www/survey/survey.php:55 www/survey/survey_resp.php:49
 #, fuzzy
@@ -23250,6 +23178,540 @@ msgstr "Actualització en massa"
 msgid "No User Name Provided"
 msgstr "Nom d'usuari"
 
+#~ msgid "Could not Update Master Thread parent with current time"
+#~ msgstr ""
+#~ "No s'ha pogut actualitzar el pare del fil principal amb l'hora actual"
+
+#~ msgid "Error: this news item was not found"
+#~ msgstr "Error: no s'ha trobat aquest nou element"
+
+#~ msgid "You could post if you were <a href=\"%s\">logged in</a>."
+#~ msgstr ""
+#~ "Podrieu enviar missatges si fossiu <a href=\"%s\">iniciant sessió</a>."
+
+#~ msgid "No Valid Forum Object"
+#~ msgstr "No és un objecte vàlid del fòrum"
+
+#~ msgid "Posting Failed"
+#~ msgstr "L'enviament ha fallat"
+
+#~ msgid "Unable to get new message id"
+#~ msgstr "Incapaç d'obtenir un nou id de missatge"
+
+#~ msgid "Must Include A Message Body And Subject"
+#~ msgstr "Ha d'incloure un cos i un tema del missatge"
+
+#~ msgid "No Valid ParentMessage Object"
+#~ msgstr "Objecte ParentMessage no vàlid"
+
+#~ msgid "Missing Required Parameters"
+#~ msgstr "Falten parametres"
+
+#~ msgid "Your project registration for %s has been approved."
+#~ msgstr "El vostre registre de projecte per %s ha estat aprovat."
+
+#~ msgid "Project Full Name"
+#~ msgstr "Nom complet del projecte"
+
+#~ msgid ""
+#~ "If you visit your own project page in %s while logged in, you will find "
+#~ "additional menu functions to your left labeled “Project Admin”."
+#~ msgstr ""
+#~ "Si visiteu la vostrapròpia pàgina de projecte a %s mentres esteu dins "
+#~ "d'una sessió, trobareufuncions de menú addicionals a la vostra esquerra "
+#~ "etiquetades 'Administració del projecte'."
+
+#~ msgid ""
+#~ "We highly suggest that you now visit %1$s and create a public description "
+#~ "for your project. This can be done by visiting your project page while "
+#~ "logged in, and selecting “Project Admin” from the menus on the left (or "
+#~ "by visiting %2$s after login)."
+#~ msgstr ""
+#~ "Us suggerim especialment que visiteu ara %1$s i creeu una descripció "
+#~ "pública per al vostre projecte. Això es pot fer visitant la vostra pàgina "
+#~ "de projecte mentres sou dins de la sessió, i seleccionant 'Administració "
+#~ "del projecte' des dels menús al'esquerra (o visitant %2$s després "
+#~ "d'iniciar la sessió)."
+
+#~ msgid ""
+#~ "Your project will also not appear in the Trove Software Map (primary list "
+#~ "of projects hosted on %s which offers great flexibility in browsing and "
+#~ "search) until you categorize it in the project administration screens. So "
+#~ "that people can find your project, you should do this now. Visit your "
+#~ "project while logged in, and select “Project Admin” from the menus on the "
+#~ "left."
+#~ msgstr ""
+#~ "El vostre projecte no apareixerà a l'arbre de projectes (llista primària "
+#~ "de projectes allotjats a %s que ofereix una gran flexibilitat a l'hora de "
+#~ "remenar i cercar) fins que no el categoritzeu a les pantalles "
+#~ "d'administració del projecte. Perquè la gent pugui trobar el vostre "
+#~ "projecte, ara heu de fer el següent."
+
+#~ msgid ""
+#~ "Enjoy the system, and please tell others about %s. Let us know if there "
+#~ "is anything we can do to help you."
+#~ msgstr ""
+#~ "Gaudiu del sistema, i informeu als altres sobre %s. Feu-nos saber si hi "
+#~ "ha alguna cosa que puguem fer per ajudar-vos."
+
+#~ msgid "-- the %s staff"
+#~ msgstr "-- la tripulació %s"
+
+#~ msgid "%s Project Approved"
+#~ msgstr "Projecte %s aprovat"
+
+#~ msgid "Your project registration for %s has been denied."
+#~ msgstr "El vostre registre de projecte per %s ha estat denegat."
+
+#~ msgid "Reasons for negative decision"
+#~ msgstr "Raons de la decisió negativa"
+
+#~ msgid "%s Project Denied"
+#~ msgstr "Projecte %s denegat"
+
+#~ msgid "New %s Project Submitted"
+#~ msgstr "Tramès nou projecte %s"
+
+#~ msgid "Submitted Description"
+#~ msgstr "Descripció tramesa"
+
+#~ msgid ""
+#~ "The %s admin team will now examine your project submission. You will be "
+#~ "notified of their decision."
+#~ msgstr ""
+#~ "L'equip d'admistració %s examinarà ara el vostre enviament de projecte. "
+#~ "Se us notificarà la seva decisió."
+
+#~ msgid "Project Admin"
+#~ msgstr "Administració del projecte"
+
+#~ msgid "Enjoy the site."
+#~ msgstr "Gaudiu del lloc."
+
+#~ msgid "%s Account Registration"
+#~ msgstr "Registre del compte %s"
+
+#~ msgid "%s Reporting"
+#~ msgstr "Informes %s"
+
+#~ msgid "Set up preferences like expiration times, email addresses"
+#~ msgstr "Establiu preferències com temps d'expiració, adreces de correu"
+
+#~ msgid ""
+#~ "Add new boxes like Phases, Quality Metrics, Components, etc.  Once added "
+#~ "they can be used with other selection boxes (for example, Categories or "
+#~ "Groups) to describe and browse bugs or other artifact types"
+#~ msgstr ""
+#~ "Afegeix noves caixes com Fases, Mètrica de qualitat, Components, etc.  Un "
+#~ "cop afegides, poden usar-se amb altres caixes de selecció (per exemple, "
+#~ "Categories o Grups) per a descriure i navegar errors o altres tipus "
+#~ "d'artefactes"
+
+#~ msgid "Last 24 h"
+#~ msgstr "Les últimes 24H"
+
+#~ msgid "Last 7 days"
+#~ msgstr "Els últims 7dies"
+
+#~ msgid "Last 2 weeks"
+#~ msgstr "Les últimes 2setmanes"
+
+#~ msgid "Last month"
+#~ msgstr "L'últim 1mes"
+
+#~ msgid "* Denotes requests > %s Days Old"
+#~ msgstr "* Denota requeriments de fa > %s dia"
+
+#~ msgid "This Tracker Does Not Allow Anonymous Submissions."
+#~ msgstr "Aquest tipus d'artefacte no permet enviaments anònims."
+
+#~ msgid "No Canned Responses set up in this Project"
+#~ msgstr "No hi ha respostes establertes en aquest grup"
+
+#~ msgid "I am Sure"
+#~ msgstr "N'estic segur"
+
+#~ msgid "I am Really Sure"
+#~ msgstr "N'estic ben segur"
+
+#~ msgid "You are not monitoring any files."
+#~ msgstr "No esteu monitoritzant cap fitxer."
+
+#~ msgid "View the %d Member(s)"
+#~ msgstr "Visualitza els %d membre(s)"
+
+#~ msgid "There are no public subprojects available"
+#~ msgstr "No hi ha subprojectes públics disponibles"
+
+#~ msgid "This mail is sent to you to remind you of pending/overdue tasks."
+#~ msgstr ""
+#~ "Aquest correu se us envia per a recordar-vos que teniu tasques pendents/"
+#~ "vençudes."
+
+#~ msgid "The task manager item #%s is pending"
+#~ msgstr "L'element #%s del gestor de tasques està pendent"
+
+#~ msgid "Click here to visit the item %s"
+#~ msgstr "Feu clic aquí per a visitar l'element %s"
+
+#~ msgid ""
+#~ "This mail is sent to you to remind you of pending/overdue tracker items."
+#~ msgstr ""
+#~ "Aquest correu se us envia per a recordar-vos que teniu elements de "
+#~ "rastreig pendents/vençuts."
+
+#~ msgid "The item #%s is pending"
+#~ msgstr "L'element #%s està pendent"
+
+#~ msgid ""
+#~ "Visiting the link sent to you in this email will activate your account."
+#~ msgstr ""
+#~ "Visiteu l'enllaç enviat en aquest correu i s'activarà el vostre compte."
+
+#~ msgid "Thank you"
+#~ msgstr "Gràcies"
+
+#~ msgid "Invalid user name: %s"
+#~ msgstr "Usuari no vàlid: %s"
+
+#~ msgid ""
+#~ "You can administrate lists from here. Please note that private lists can "
+#~ "still be viewed by members of your project, but are not listed on %s."
+#~ msgstr ""
+#~ "Podeu administrar llistes des d'aquí. Tingueu en compte que les llistes "
+#~ "privades encara poden ser vistes per membres del vostre projecte, però no "
+#~ "estan llistades a %1$s."
+
+#~ msgid "No Lists found for %s"
+#~ msgstr "No s'han trobat llistes per %s"
+
+#~ msgid "You have requested a change of email address on %s."
+#~ msgstr "Heu sol·licitat un canvi d'adreça de correu a %s."
+
+#~ msgid "Please visit the following URL to complete the email change:"
+#~ msgstr ""
+#~ "Si us plau, visiteu la següent URL per a completar el canvi d'adreça:"
+
+#~ msgid "New Email Address"
+#~ msgstr "Nova adreça de correu electrònic"
+
+#~ msgid ""
+#~ "To avoid having to type your password every time for your CVS/SSH "
+#~ "developer account, you may upload your public key(s) here and they will "
+#~ "be placed on the CVS server in your ~/.ssh/authorized_keys file. This is "
+#~ "done by a cron job, so it may not happen immediately.  Please allow for a "
+#~ "one hour delay."
+#~ msgstr ""
+#~ "Per evitar que hagueu de teclejar cada cop la vostra contrasenya per al "
+#~ "vostre compte CVS/SSH de desenvolupador, podeu pujar aquí les vostres "
+#~ "claus públiques i es posaran al servidor CVS al vostre fitxer ~/.ssh/"
+#~ "authorized_keys. Això es realitza mitjançant una tasca cron, o sigui que "
+#~ "pot ser que no succeeixi immediatament.  Permeteu una hora de retard."
+
+#~ msgid ""
+#~ "Authorized keys:<br /><em>Important: Make sure there are no line breaks "
+#~ "except between keys. After submitting, verify that the number of keys in "
+#~ "your file is what you expected.</em>"
+#~ msgstr ""
+#~ "Claus autoritzades:<br /><em>Important: Assegureu-vos que no hi ha salts "
+#~ "de línia excepte entre claus. Després de l'enviament, verifiqueu que el "
+#~ "nombre de claus al vostre fitxer és el que esperaveu.</em>"
+
+#~ msgid "Email Address"
+#~ msgstr "Adr. correu"
+
+#~ msgid "Phone"
+#~ msgstr "Telèfon:"
+
+#~ msgid "Fax"
+#~ msgstr "Fax:"
+
+#~ msgid "Login with SSL"
+#~ msgstr "Inici de sessió amb SSL"
+
+#~ msgid ""
+#~ "Someone (presumably you) on the %s site requested a password change "
+#~ "through email verification."
+#~ msgstr ""
+#~ "Algú (segurament vos) al lloc %s ha solicitat un canvi de contrasenya "
+#~ "mitjançant verificació de correu."
+
+#~ msgid "If this was not you, ignore this message and nothing will happen."
+#~ msgstr "Si no heu estat vos, ignoreu aquest missatge i no passarà res."
+
+#~ msgid ""
+#~ "If you requested this verification, visit the following URL to change "
+#~ "your password:"
+#~ msgstr ""
+#~ "Si heu sol·licitat aquesta verificació, visiteu la següent URL per a "
+#~ "canviar la contrasenya:"
+
+#~ msgid ""
+#~ "You are now being sent a confirmation email to verify your email address. "
+#~ "Visiting the link sent to you in this email will activate your account."
+#~ msgstr ""
+#~ "Ara se us està enviant un correu de confirmació per a verificar la vostra "
+#~ "adreça de correu. Visiteu l'enllaç enviat en aquest correu i s'activarà "
+#~ "el vostre compte."
+
+#~ msgid "Create a new %s below:"
+#~ msgstr "Crea un nou %s a sota:"
+
+#~ msgid ""
+#~ "You cannot delete the processor %s since it is currently referenced in a "
+#~ "file release."
+#~ msgstr ""
+#~ "No podeu suprimir el processador %s ja que actualment està referenciat en "
+#~ "una publicació de fitxer."
+
+#~ msgid ""
+#~ "You cannot delete the language %s since it is currently referenced in a "
+#~ "user profile."
+#~ msgstr ""
+#~ "No podeu suprimir l'idioma %s ja que actualment està referenciat en un "
+#~ "perfil d'usuari."
+
+#~ msgid "Are you sure you want to delete this %s?"
+#~ msgstr "Esteu segur que voleu suprimir aquest %s?"
+
+#~ msgid "%s successfully deleted."
+#~ msgstr "%s suprimit(s) amb èxit."
+
+#~ msgid "Modify the %s below:"
+#~ msgstr "Modifica el %s a sota:"
+
+#~ msgid "%s successfully modified."
+#~ msgstr "%1$s modificat(s) amb èxit."
+
+#~ msgid "Edit the %ss Table"
+#~ msgstr "Edita la taula de %1s"
+
+#~ msgid "Approving Project"
+#~ msgstr "S'està aprovant el grup"
+
+#~ msgid "Edit Project Details"
+#~ msgstr "Edita detalls del projecte"
+
+#~ msgid "View/Edit Project Members"
+#~ msgstr "Visualitza/Edita els membres del projecte"
+
+#~ msgid "Other Information"
+#~ msgstr "Altres informacions"
+
+#~ msgid "Active site users: <strong>%1$s</strong>"
+#~ msgstr "Usuaris actius del lloc: <strong>%1$s</strong>"
+
+#~ msgid "If you are not sure then why did you click “Delete”?"
+#~ msgstr "Si no n'esteu segur, aleshores per què heu fet clic a 'Suprimeix'?"
+
+#~ msgid "New category short name (no spaces, Unix-like)"
+#~ msgstr "Nou nom abreujat de categoria (sense espais, estil Unix)"
+
+#~ msgid "Category short name (no spaces, Unix-like)"
+#~ msgstr "Nou nom abreujat de categoria (sense espais, estil Unix)"
+
+#~ msgid ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific project, visit admin "
+#~ "page of that project (below)."
+#~ msgstr ""
+#~ "Aquestes pàgines permeten enviar només propietats directes de l'objecte "
+#~ "usuari. Per editar propietats pertinents a l'usuari dins d'un grup "
+#~ "específic, visiteu la pàgina d'administració d'aquest grup (a baix)."
+
+#~ msgid ""
+#~ "Unix status updated mirroring web status, unless it has value 'No Unix "
+#~ "account (N)'"
+#~ msgstr ""
+#~ "Estat Unix actualitzat replicant l'estat de la web, excepte si té el "
+#~ "valor 'Sense compte Unix (N)'"
+
+#~ msgid "Suspend"
+#~ msgstr "Suspès"
+
+#~ msgid "Error: Choose a User To Monitor First"
+#~ msgstr "Error: Primer heu d'escollir un usuari a monitoritzar"
+
+#~ msgid "No Forums Found for %s"
+#~ msgstr "No s'han trobat fòrums per %s"
+
+#~ msgid "Forum Monitoring Deactivated"
+#~ msgstr "Desactivada la monitorització del fòrum"
+
+#~ msgid "Forum Monitoring Started"
+#~ msgstr "Iniciada la monitorització del fòrum"
+
+#~ msgid ""
+#~ "Edit the Release Notes or Change Log for this release of this package. "
+#~ "These changes will apply to all files attached to this release."
+#~ msgstr ""
+#~ "Edita les notes de publicació o el registre de canvis per aquesta "
+#~ "publicació d'aquest paquet. Aquests canvis s'aplicaran a tots els fitxers "
+#~ "adjuntats en aquesta publicació."
+
+#~ msgid ""
+#~ "You can either upload the release notes and change log individually, or "
+#~ "paste them in together below."
+#~ msgstr ""
+#~ "Podeu pujar les notes de publicació i el registre de canvis "
+#~ "individualment, o enganxar-les juntes a sota."
+
+#~ msgid "Project totals"
+#~ msgstr "Totals de projecte"
+
+#~ msgid "This drop-down box represents the current status of a tracker item."
+#~ msgstr ""
+#~ "Aquesta caixa desplegable representa l'estat actual d'un element de "
+#~ "rastreig."
+
+#~ msgid ""
+#~ "You can set the status to 'Pending' if you are waiting for a response "
+#~ "from the tracker item author.  When the author responds the status is "
+#~ "automatically reset to that of 'Open'. Otherwise, if the author doesn't "
+#~ "respond with an admin-defined amount of time (default is 14 days) then "
+#~ "the item is given a status of 'Deleted'."
+#~ msgstr ""
+#~ "Podeu posar l'estat com 'Pendent' si esteu esperant una resposta de "
+#~ "l'autor del'element de rastreig.  Quan l'autor respon, l'estat es canvia "
+#~ "automàticament a 'Obert'. En canvi, si l'autor no respon en un termini "
+#~ "definit per l'administrador (per defecte és 14 dies) se li assigna a "
+#~ "l'element un estat d''Suprimit'."
+
+#~ msgid ""
+#~ "You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, "
+#~ "or Assignee.  You can also have the results sorted in Ascending or "
+#~ "Descending order."
+#~ msgstr ""
+#~ "Podeu classificar per ID, Prioritat, Resum, Data d'obertura, Data de "
+#~ "tancament, Remitent, o Assignee.  També podeu tenir els resultats "
+#~ "classificats en ordre Ascendent o Descendent."
+
+#~ msgid ""
+#~ "The Data Type option determines the type of tracker item this is.  Since "
+#~ "the tracker rolls into one the bug, patch, support, etc... managers you "
+#~ "need to be able to determine which one of these an item should belong."
+#~ msgstr ""
+#~ "L'opció tipus de dades determina el tipus d'element de rastreig que es "
+#~ "tracta.  Com que el rastrejador passa a un gestor d'errors, pedaços, "
+#~ "suport, etc..., necessiteu ser capaç de determinar a quin d'aquests ha de "
+#~ "correspondre un element."
+
+#~ msgid ""
+#~ "The priority option allows a user to define a tracker item priority "
+#~ "(ranging from 1-Lowest to 5-Highest)."
+#~ msgstr ""
+#~ "L'opció de prioritat permet a un usuari definir una prioritat de "
+#~ "l'element de rastreig (que va de 1-mínim a 5-màxim)."
+
+#~ msgid ""
+#~ "This is especially helpful for bugs and support requests where a user "
+#~ "might find a critical problem with a project."
+#~ msgstr ""
+#~ "Això és especialment útil per errors i peticions de suport en les quals "
+#~ "un usuari pot trobar un problema crític amb un projecte."
+
+#~ msgid ""
+#~ "The canned response drop-down represents a list of project admin-defined "
+#~ "canned responses to common support or bug submission."
+#~ msgstr ""
+#~ "El desplegable de la resposta 'enllaunada' representa una llista de "
+#~ "respostes 'enllaunades' definides per l'administrador de projecte per al "
+#~ "suport comú o l'enviament d'errors."
+
+#~ msgid ""
+#~ "If you are a project admin you can click the 'Manage Canned Responses' "
+#~ "link to define your own canned responses"
+#~ msgstr ""
+#~ "Si sou un administrador de projectes,podeu fer clic a l'enllaç 'Manage "
+#~ "Canned Responses' per a definir les vostres pròpies respostes "
+#~ "'enllaunades'"
+
+#~ msgid "My Diary and Notes"
+#~ msgstr "El meu diari i les meves notes"
+
+#~ msgid "View Diary and Notes"
+#~ msgstr "Visualitza Diari i Notes"
+
+#~ msgid "Notes and Changes"
+#~ msgstr "Notes i Canvis"
+
+#~ msgid "Read More/Comment"
+#~ msgstr "Llegeix-ne més/Comenta"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "Error: calen l'assumpte i el cos"
+
+#~ msgid "Job inserted successfully"
+#~ msgstr "FEINA inserida amb èxit"
+
+#~ msgid "Job updated successfully"
+#~ msgstr "FEINA actualitzada amb èxit"
+
+#~ msgid "Job update failed - wrong project_id"
+#~ msgstr "Ha fallat l'actualització d'una FEINA - project_id incorrecte"
+
+#~ msgid "Job skill updated successfully"
+#~ msgstr "Habilitat de FEINA actualitzada amb èxit"
+
+#~ msgid "Job skill update failed - wrong project_id"
+#~ msgstr ""
+#~ "Ha fallat la supressió d'una habilitat de FEINA - project_id incorrecte"
+
+#~ msgid "Job skill deleted successfully"
+#~ msgstr "Habilitat de FEINA esborrada amb èxit"
+
+#~ msgid "Job skill delete failed - wrong project_id"
+#~ msgstr ""
+#~ "Ha fallat la supressió d'una habilitat de FEINA - project_id incorrecte"
+
+#~ msgid ""
+#~ "The following option determines if others can see your skills. If they "
+#~ "cannot, you can still enter your skills."
+#~ msgstr ""
+#~ "La següent opció determina si altres poden veure les vostres habilitats. "
+#~ "Encara que no puguin, podeu entrar les vostres habilitats."
+
+#~ msgid "Upload data into the tasks"
+#~ msgstr "Pujar dades al gestor de tasques"
+
+#~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
+#~ msgstr "Error: el fitxer ha de tenir un tamany > 20 bytes i < 256000 bytes"
+
+#~ msgid "Choose the role for each user and then press “Add All”."
+#~ msgstr ""
+#~ "Escolliu el rol per a cada usuari i després premeu &quot;Afegeix-los "
+#~ "tots&quot;."
+
+#~ msgid "Role/Position"
+#~ msgstr "Rol/Posició"
+
+#~ msgid "Registration complete"
+#~ msgstr "Registre complet"
+
+#~ msgid ""
+#~ "Your project has been submitted to the %1$s administrators. Within 72 "
+#~ "hours, you will receive notification of their decision and further "
+#~ "instructions."
+#~ msgstr ""
+#~ "El vostre projecte ha estat tramès als administradors de %1$s. Dins d'un "
+#~ "termini de 72 hores, rebreu una notificació de la seva decisió i més "
+#~ "instruccions."
+
+#~ msgid "Thank you for choosing %1$s."
+#~ msgstr "Gràcies per escollir %1$s."
+
+#~ msgid "Site-Wide Task and Hours (report)"
+#~ msgstr "Total de tasques i hores  (informe)"
+
+#~ msgid ""
+#~ "Download a raw-text version of this code by clicking on “Download Version”"
+#~ msgstr ""
+#~ "Baixeu-vos una versió de text pla d'aquest codi fent clic sobre &quot;"
+#~ "Baixa la versió&quot;"
+
+#~ msgid "Area"
+#~ msgstr "Àrees"
+
 #, fuzzy
 #~ msgid "Bazaar Repository Browser"
 #~ msgstr "Repositori SCM"
@@ -23270,9 +23732,8 @@ msgstr "Nom d'usuari"
 #~ msgid "Repository name: "
 #~ msgstr "Repositori SCM"
 
-#, fuzzy
 #~ msgid "No Valid Group Object"
-#~ msgstr "No és un objecte de grup vàlid"
+#~ msgstr "Objecte de grup no vàid"
 
 #, fuzzy
 #~ msgid "Project:"
@@ -24845,3 +25306,65 @@ msgstr "Nom d'usuari"
 #, fuzzy
 #~ msgid "Invalid Group Name"
 #~ msgstr "Nom de grup Unix:"
+
+#~ msgid "Error doing insert"
+#~ msgstr "ERROR a l'inserir"
+
+#~ msgid "Error Getting %s"
+#~ msgstr "Error a l'obtenir %s"
+
+#~ msgid "Error inserting into skill inventory"
+#~ msgstr "ERROR a l'inserir a l'inventari d'habilitats"
+
+#~ msgid "Invalid MessageID"
+#~ msgstr "MessageID no vàlid"
+
+#~ msgid "Activity Percentile:"
+#~ msgstr "Percentil d'activitat:"
+
+#~ msgid "DevProfile"
+#~ msgstr "Perfil de desenvolupament"
+
+#~ msgid "Registered:"
+#~ msgstr "Registrat:"
+
+#~ msgid "Followup"
+#~ msgstr "Followup"
+
+#~ msgid "Check &nbsp;all"
+#~ msgstr "Marca-ho &nbsp;tot"
+
+#~ msgid "Clear &nbsp;all"
+#~ msgstr "Suprimeix-ho &nbsp;tot"
+
+#~ msgid "Project&nbsp;Openings"
+#~ msgstr "Ofertes&nbsp;de&nbsp;feina"
+
+#~ msgid ""
+#~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "
+#~ "the document (e.g. How to use the download server)<br /"
+#~ "><strong>Description:</strong> A brief description to be placed just "
+#~ "under the title."
+#~ msgstr ""
+#~ "<strong>Títol del document</strong>:  Es refereix al títol relativament "
+#~ "breu del document (ex. Com es fa per usar el servidor de baixades)<br /"
+#~ "><strong>Descripció:</strong> Una breu descripció situada justament sota "
+#~ "el títol."
+
+#~ msgid "I am Really Sure."
+#~ msgstr "N'estic ben segur."
+
+#~ msgid "I am Sure."
+#~ msgstr "N'estic segur."
+
+#~ msgid "Document Manager: Display Document"
+#~ msgstr "Gestor de Documents: Mostra el document"
+
+#~ msgid "Error: No group was chosen or you cannot access it"
+#~ msgstr "Error: No s'ha escollit un group_id"
+
+#~ msgid "Error: disabled feature."
+#~ msgstr "Error: característica deshabilitada."
+
+#~ msgid "Error: For some reason group_id and/or survey_id did not make it he"
+#~ msgstr "Error: Per algún motiu id_grup i/o id_enquesta no ho han fet"

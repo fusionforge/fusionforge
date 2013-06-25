@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 12:22+0200\n"
+"POT-Creation-Date: 2013-06-25 17:51+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -623,8 +623,8 @@ msgstr "Дневникът е обновен"
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/snippet/download.php:45 www/survey/admin/question.php:64
-#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:82
-#: www/survey/admin/show_csv.php:84 www/survey/admin/show_results.php:69
+#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:80
+#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:69
 #: www/survey/admin/show_results.php:73 www/survey/admin/show_results.php:84
 #: www/survey/admin/show_results.php:86 www/survey/admin/show_results.php:133
 #: www/survey/admin/show_results.php:135 www/tracker/admin/index.php:190
@@ -1081,7 +1081,7 @@ msgstr "Име на файла"
 #: www/snippet/browse.php:84 www/snippet/package.php:147
 #: www/snippet/snippet_utils.php:156 www/snippet/submit.php:104
 msgid "Title"
-msgstr ""
+msgstr "Име"
 
 #: common/docman/views/listfile.php:219
 #: common/docman/views/listtrashfile.php:130
@@ -10089,9 +10089,8 @@ msgid "Unable to get the lists"
 msgstr ""
 
 #: plugins/mailman/www/admin/index.php:144
-#, fuzzy
 msgid "Mailing List Name"
-msgstr "Име на списъка:"
+msgstr "Име на списъка"
 
 #: plugins/mailman/www/admin/index.php:147
 #: plugins/mailman/www/admin/index.php:179 www/mail/admin/index.php:191
@@ -13582,26 +13581,24 @@ msgid ""
 msgstr ""
 
 #: www/account/change_email.php:81
-#, fuzzy
 msgid ""
 "We need to maintain an accurate email address for each user due to the level "
 "of access we grant via this account. If we need to reach a user for issues "
 "arriving from a shell or project account, it is important that we be able to "
 "do so."
 msgstr ""
-"<p>Променянето на вашия email адрес изисква потвърждение от вашия нов email "
-"адрес, за да се уверим, че той е валиден.</p><p>Необходимо е да разполагаме "
-"с правилния email адрес на всеки потребител, поради нивото на достъп, което "
-"предоставяме, чрез този акаунт. Важно е да можем да ви открием в случай на "
-"публикации от друг потребител.</p>  <p>При изпращането на формуляра по долу "
-"ще бъде изпратен линк за потвърждение на новия email адрес. Смяната на email "
-"адреса ще се осъществи след като посетите този линк.</p>"
+"Необходимо е да разполагаме с правилния email адрес на всеки потребител, "
+"поради нивото на достъп, което предоставяме, чрез този акаунт. Важно е да "
+"можем да ви открием в случай на публикации от друг потребител."
 
 #: www/account/change_email.php:82
 msgid ""
 "Submitting the form below will mail a confirmation URL to the new email "
 "address. Visiting this link will complete the email change."
 msgstr ""
+"При изпращането на формуляра по долу ще бъде изпратен линк за потвърждение "
+"на новия email адрес. Смяната на email адреса ще се осъществи след като "
+"посетите този линк."
 
 #: www/account/change_email.php:88
 msgid "New Email Address:"
@@ -15343,7 +15340,7 @@ msgstr[1] ""
 
 #: www/admin/search.php:150 www/register/index.php:178
 msgid "Full Name"
-msgstr ""
+msgstr "Пълно наименование"
 
 #: www/admin/search.php:151
 msgid "Registered"
@@ -15715,9 +15712,8 @@ msgid "Add Virtual Host"
 msgstr ""
 
 #: www/admin/vhost.php:123 www/register/index.php:204
-#, fuzzy
 msgid "Project Unix Name"
-msgstr "Проекти на потребителя"
+msgstr "Проект Unix идентификатор"
 
 #: www/admin/vhost.php:128
 msgid "Virtual Host Name"
@@ -15769,7 +15765,6 @@ msgid "User could not be found."
 msgstr "Няма намерени."
 
 #: www/developer/diary.php:44
-#, fuzzy
 msgid "Diary and Notes for"
 msgstr "Дневник на"
 
@@ -15783,7 +15778,6 @@ msgid "Posted on "
 msgstr "Публикуване на обяви"
 
 #: www/developer/diary.php:62
-#, fuzzy
 msgid "Existing Diary and Notes Entries"
 msgstr "Списък на бележките"
 
@@ -16862,9 +16856,9 @@ msgid "Tag Cloud"
 msgstr ""
 
 #: www/include/features_boxes.php:41 www/include/features_boxes.php:43
-#, fuzzy, php-format
+#, php-format
 msgid "%1$s Statistics"
-msgstr "GForge статистика"
+msgstr "%1$s статистика"
 
 #: www/include/features_boxes.php:47
 msgid "Top Project Downloads"
@@ -17738,9 +17732,8 @@ msgid "Unable to get the list %s : %s"
 msgstr ""
 
 #: www/mail/index.php:78
-#, fuzzy
 msgid "Address"
-msgstr "Адрес:"
+msgstr "Адрес"
 
 #: www/mail/index.php:97
 #, php-format
@@ -20869,7 +20862,6 @@ msgid "People"
 msgstr "Хора"
 
 #: www/search/index.php:82
-#, fuzzy
 msgid "Error: Invalid search"
 msgstr "Грешка - Невалидно търсене"
 
@@ -21280,7 +21272,7 @@ msgstr ""
 #: www/snippet/package.php:156 www/snippet/submit.php:123
 #: www/stats/i18n.php:33
 msgid "Language"
-msgstr ""
+msgstr "Език"
 
 #: www/snippet/package.php:159 www/snippet/submit.php:125
 msgid "Suggest a Language"
@@ -21377,9 +21369,8 @@ msgid "Create A Package"
 msgstr "Създаване на пакет"
 
 #: www/snippet/submit.php:59
-#, fuzzy
 msgid "Error doing snippet insert"
-msgstr "Информация за проекта"
+msgstr "Грешка при добавянето на фрагмент"
 
 #: www/snippet/submit.php:61 www/snippet/submit.php:76
 msgid "Snippet Added Successfully."
@@ -21760,7 +21751,7 @@ msgstr "Редактиране на въпроси"
 msgid "Add a Question"
 msgstr "Добавяне на въпроси"
 
-#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:61
+#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
 #: www/survey/admin/show_questions.php:35
 #: www/survey/admin/show_results_aggregate.php:35
 #: www/survey/admin/show_results_comments.php:36
@@ -21792,7 +21783,7 @@ msgstr "Обновено успешно"
 msgid "No questions found"
 msgstr "Няма въпроси към това проучване"
 
-#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:133
+#: www/survey/admin/show_csv.php:80 www/survey/admin/show_results.php:133
 msgid "Cannot get Survey Response Factory"
 msgstr ""
 
@@ -22105,7 +22096,6 @@ msgid "Flag"
 msgstr ""
 
 #: www/survey/survey.php:51
-#, fuzzy
 msgid "Vote for Survey"
 msgstr "Редактиране на проучване"
 
@@ -22462,6 +22452,60 @@ msgstr "Дневникът е обновен"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr ""
+
+#~ msgid "Error: this news item was not found"
+#~ msgstr "Грешка - тази новина не е намерена"
+
+#~ msgid "Missing Required Parameters"
+#~ msgstr "Липсващи Параметри"
+
+#~ msgid "Project Full Name"
+#~ msgstr "Проект Пълно наименование"
+
+#~ msgid "%s Account Registration"
+#~ msgstr "%s регистрация"
+
+#~ msgid "You are not monitoring any files."
+#~ msgstr "Не наблюдавате никакви файлове."
+
+#~ msgid "Search results for “%s”"
+#~ msgstr "Резултати от търсенето за <em>%s</em>"
+
+#~ msgid "No Lists found for %s"
+#~ msgstr "Няма създадени пощенски списъци за %s"
+
+#~ msgid "New Email Address"
+#~ msgstr "Нов Email адрес"
+
+#~ msgid "Email Address"
+#~ msgstr "Адрес за електронна поща"
+
+#~ msgid "Phone"
+#~ msgstr "Телефон:"
+
+#~ msgid "Fax"
+#~ msgstr "Факс:"
+
+#~ msgid "Login with SSL"
+#~ msgstr "Вход (SSL режим)"
+
+#~ msgid "No Forums Found for %s"
+#~ msgstr "Няма намерени форуми за %s"
+
+#~ msgid "Project totals"
+#~ msgstr "Общо за целия проект"
+
+#~ msgid "My Diary and Notes"
+#~ msgstr "Моят дневник и бележки"
+
+#~ msgid "View Diary and Notes"
+#~ msgstr "Преглед на дневника"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "Грешка - и двете полета <i>тема</i> и <i>тяло</i> са задължителни"
+
+#~ msgid "Add Role"
+#~ msgstr "Добавяне на роля"
 
 #, fuzzy
 #~ msgid "Browse Bazaar Repository"
@@ -23269,3 +23313,40 @@ msgstr ""
 #, fuzzy
 #~ msgid "Invalid Group Name"
 #~ msgstr "Невалиден UNIX идентификатор."
+
+#~ msgid "Error doing insert"
+#~ msgstr "Грешка при добавянето"
+
+#~ msgid "Error Getting %s"
+#~ msgstr "Грешка при получаването на %s"
+
+#~ msgid "DevProfile"
+#~ msgstr "Профил на Разработчик"
+
+#~ msgid "Registered:"
+#~ msgstr "Регистриране:"
+
+#~ msgid "Project&nbsp;Openings"
+#~ msgstr "Помощ"
+
+#~ msgid "My&nbsp;Page"
+#~ msgstr "Моята&nbsp;страница"
+
+#~ msgid ""
+#~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "
+#~ "the document (e.g. How to use the download server)<br /"
+#~ "><strong>Description:</strong> A brief description to be placed just "
+#~ "under the title."
+#~ msgstr "<strong>Публикуване на нов документ</strong>"
+
+#~ msgid "New Group Name"
+#~ msgstr "Име"
+
+#~ msgid "Error: No group was chosen or you cannot access it"
+#~ msgstr "Не е избрана папка"
+
+#~ msgid "Short Description:"
+#~ msgstr "<b>Кратко описание на проекта:</b>&nbsp;"
+
+#~ msgid "Homepage Link:"
+#~ msgstr "Сайт на проекта:"

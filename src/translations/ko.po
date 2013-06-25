@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 12:22+0200\n"
+"POT-Creation-Date: 2013-06-25 17:51+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -629,8 +629,8 @@ msgstr "대량 갱신"
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/snippet/download.php:45 www/survey/admin/question.php:64
-#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:82
-#: www/survey/admin/show_csv.php:84 www/survey/admin/show_results.php:69
+#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:80
+#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:69
 #: www/survey/admin/show_results.php:73 www/survey/admin/show_results.php:84
 #: www/survey/admin/show_results.php:86 www/survey/admin/show_results.php:133
 #: www/survey/admin/show_results.php:135 www/tracker/admin/index.php:190
@@ -4955,14 +4955,12 @@ msgid ""
 msgstr ""
 
 #: common/tracker/actions/browse.php:539 www/pm/browse_task.php:210
-#, fuzzy
 msgid "Check all"
-msgstr "전부 &nbsp;선택"
+msgstr "전부 선택"
 
 #: common/tracker/actions/browse.php:541 www/pm/browse_task.php:212
-#, fuzzy
 msgid "Clear all"
-msgstr "전부 &nbsp;해제"
+msgstr "전부 해제"
 
 #: common/tracker/actions/browse.php:568 common/tracker/actions/browse.php:747
 #: common/tracker/actions/detail.php:87
@@ -10330,11 +10328,10 @@ msgid ""
 msgstr ""
 
 #: plugins/mailman/www/index.php:74 www/mail/index.php:74
-#, fuzzy
 msgid "Choose a list to browse, search, and post messages."
 msgstr ""
-"<p>원하시는 뉴스를 선택하십시오. 뉴스를 읽거나 검색, 혹은 올라와 있는 뉴스에 "
-"대해 답글을 올리실 수도 있습니다.<p>"
+"원하시는 뉴스를 선택하십시오. 뉴스를 읽거나 검색, 혹은 올라와 있는 뉴스에 대"
+"해 답글을 올리실 수도 있습니다."
 
 #: plugins/mailman/www/mailman_utils.php:20
 #, php-format
@@ -13808,28 +13805,27 @@ msgid ""
 "Changing your email address will require confirmation from your new email "
 "address, so that we can ensure we have a good email address on file."
 msgstr ""
+"이메일 주소를 변경하시려면, 유효한 이메일 주소임을 확인하기 위해 새 주소로부"
+"터 확인하는 절차를 밟아야 합니다."
 
 #: www/account/change_email.php:81
-#, fuzzy
 msgid ""
 "We need to maintain an accurate email address for each user due to the level "
 "of access we grant via this account. If we need to reach a user for issues "
 "arriving from a shell or project account, it is important that we be able to "
 "do so."
 msgstr ""
-"<p>이메일 주소를 변경하시려면, 유효한 이메일 주소임을 확인하기 위해 새 주소로"
-"부터 확인하는 절차를 밟아야 합니다. </p><p>제공되는 서비스의 성격상 정확한 이"
-"메일 주소를 유지할 필요가 있습니다. 쉘 계정 접속이나 프로젝트 관리 등의 중요"
-"한 이슈 사항들에 대해서 항상 사용자 여러분과 연락이 가능하도록 보장하는 것은 "
-"중요한 일입니다. </p><p>아래 양식을 채워 주시면 변경 확인 절차에 사용되는 URL"
-"이 해당 메일 주소로 배달되며, 그 URL을 방문하셔야 이메일 주소 변경이 완료됩니"
-"다.</p>"
+"제공되는 서비스의 성격상 정확한 이메일 주소를 유지할 필요가 있습니다. 쉘 계"
+"정 접속이나 프로젝트 관리 등의 중요한 이슈 사항들에 대해서 항상 사용자 여러분"
+"과 연락이 가능하도록 보장하는 것은 중요한 일입니다."
 
 #: www/account/change_email.php:82
 msgid ""
 "Submitting the form below will mail a confirmation URL to the new email "
 "address. Visiting this link will complete the email change."
 msgstr ""
+"아래 양식을 채워 주시면 변경 확인 절차에 사용되는 URL이 해당 메일 주소로 배달"
+"되며, 그 URL을 방문하셔야 이메일 주소 변경이 완료됩니다."
 
 #: www/account/change_email.php:88
 msgid "New Email Address:"
@@ -13976,25 +13972,20 @@ msgstr ""
 msgid ""
 "You are now a registered user on %1$s, the online development environment "
 "for Open Source projects."
-msgstr ""
+msgstr "여러분은 이제 온라인 오픈소스 개발 환경인 %1$s의 등록 사용자입니다."
 
 #: www/account/first.php:33
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "As a registered user, you can participate fully in the activities on the "
 "site. You may now post messages to the project message forums, post bugs for "
 "software in %1$s, sign on as a project developer, or even start your own "
 "project."
 msgstr ""
-"여러분은 이제 온라인 오픈소스 개발 환경인 %1$s의 등록 사용자입니다.<p>등록 사"
-"용자로서 여러분은 이곳의 모든 활동에 참여하실 수 있습니다. 각 프로젝트의 게시"
-"판에 글을 올릴 수도 있고, %1$s에 있는 소프트웨어들에 대해 버그 리포팅을 할 수"
-"도 있고, 프로젝트의 개발자로 등록하실 수도 있고, 여러분만의 프로젝트를 개설하"
-"시는 것도 가능합니다. <p>%1$s(이)가 제공하는 모든 서비스를 활용하시기 위해서 "
-"여러분은 약간의 시간을 내어 다음 <A href=\"/docs/site/\"><b>사이트 관련 문서"
-"</b></A>를 찬찬히 읽어 보시기 바랍니다.<p>부디 좋은 시간이 되시기를 바라며 저"
-"희가 %1$s(을)를 향상시킬 수 있도록 언제든지 피드백을 보내 주시기 바랍니다."
-"<p>--%1$s"
+"등록 사용자로서 여러분은 이곳의 모든 활동에 참여하실 수 있습니다. 각 프로젝트"
+"의 게시판에 글을 올릴 수도 있고, %1$s에 있는 소프트웨어들에 대해 버그 리포팅"
+"을 할 수도 있고, 프로젝트의 개발자로 등록하실 수도 있고, 여러분만의 프로젝트"
+"를 개설하시는 것도 가능합니다."
 
 #: www/account/first.php:36
 #, fuzzy, php-format
@@ -14458,13 +14449,12 @@ msgid "Verify"
 msgstr ""
 
 #: www/account/verify.php:68
-#, fuzzy
 msgid ""
 "In order to complete your registration, login now. Your account will then be "
 "activated for normal logins."
 msgstr ""
-"<p>사용자 등록 절차를 완료하시려면 지금 로그인하십시오. 일반 로그인 기능은 곧"
-"바로 활성화됩니다.</p>"
+"사용자 등록 절차를 완료하시려면 지금 로그인하십시오. 일반 로그인 기능은 곧바"
+"로 활성화됩니다."
 
 #: www/activity/index.php:102
 msgid "Forum Post"
@@ -16040,7 +16030,6 @@ msgid "User could not be found."
 msgstr "설문 조사를 찾을 수 없습니다."
 
 #: www/developer/diary.php:44
-#, fuzzy
 msgid "Diary and Notes for"
 msgstr "일기와 메모:"
 
@@ -16054,7 +16043,6 @@ msgid "Posted on "
 msgstr "멤버 구함 공지 올리기"
 
 #: www/developer/diary.php:62
-#, fuzzy
 msgid "Existing Diary and Notes Entries"
 msgstr "존재하는 일기와 메모 항목들"
 
@@ -16084,17 +16072,15 @@ msgstr "이 사용자를 모니터링합니다."
 
 #: www/developer/monitor.php:68
 msgid "You will now be emailed this user's diary entries."
-msgstr ""
+msgstr "귀하는 이제부터 이 사용자의 일기 목록을 이메일로 받아보시게 됩니다."
 
 #: www/developer/monitor.php:69
-#, fuzzy
 msgid ""
 "To turn off monitoring, simply click the <strong>Monitor user</strong> link "
 "again."
 msgstr ""
-"<p>귀하는 이제부터 이 사용자의 일기 목록을 이메일로 받아보시게 됩니다.</p><p>"
 "모니터링을 중지하시려면 <strong>이 사용자를 모니터링합니다.</strong> 링크를 "
-"다시 클릭하시면 됩니다.</p>"
+"다시 클릭하시면 됩니다."
 
 #: www/developer/monitor.php:76
 msgid "Monitoring has been turned off"
@@ -18309,11 +18295,10 @@ msgid "These items were approved this past week (total: %1$s)"
 msgstr ""
 
 #: www/news/index.php:38
-#, fuzzy
 msgid "Choose a News item and you can browse, search, and post messages."
 msgstr ""
-"<p>원하시는 뉴스를 선택하십시오. 뉴스를 읽거나 검색, 혹은 올라와 있는 뉴스에 "
-"대해 답글을 올리실 수도 있습니다.<p>"
+"원하시는 뉴스를 선택하십시오. 뉴스를 읽거나 검색, 혹은 올라와 있는 뉴스에 대"
+"해 답글을 올리실 수도 있습니다."
 
 #: www/news/index.php:72
 #, fuzzy, php-format
@@ -19865,19 +19850,16 @@ msgid "Misc. Project Information"
 msgstr "그외 프로젝트 정보"
 
 #: www/project/admin/index.php:123
-#, fuzzy
 msgid "Group shell (SSH) server:"
-msgstr "프로젝트 shell (SSH) 서버:&nbsp;"
+msgstr "프로젝트 shell (SSH) 서버:"
 
 #: www/project/admin/index.php:124
-#, fuzzy
 msgid "Group directory on shell server:"
-msgstr "shell 서버의 프로젝트 디렉토리:&nbsp;"
+msgstr "shell 서버의 프로젝트 디렉토리:"
 
 #: www/project/admin/index.php:125
-#, fuzzy
 msgid "Project WWW directory on shell server:"
-msgstr "shell 서버의 프로젝트 WWW 디렉토리:&nbsp;"
+msgstr "shell 서버의 프로젝트 WWW 디렉토리:"
 
 #: www/project/admin/index.php:134
 #, fuzzy
@@ -20380,13 +20362,12 @@ msgid "Project Member List"
 msgstr "프로젝트 멤버 목록"
 
 #: www/project/memberlist.php:37
-#, fuzzy
 msgid ""
 "If you would like to contribute to this project by becoming a member, "
 "contact one of the project admins, designated in bold text below."
 msgstr ""
-"<p>이 프로젝트에 개발자로서 참여하고 싶으시다면, 아래 굵은 글씨체로 보이는 프"
-"로젝트 관리자들 중 한사람과 연락하시면 됩니다.<br><br>"
+"이 프로젝트에 개발자로서 참여하고 싶으시다면, 아래 굵은 글씨체로 보이는 프로"
+"젝트 관리자들 중 한사람과 연락하시면 됩니다."
 
 #: www/project/memberlist.php:49
 #, fuzzy
@@ -21335,12 +21316,10 @@ msgid "Submit A New Snippet"
 msgstr "Submit A New Snippet"
 
 #: www/snippet/add_snippet_to_package.php:56
-#, fuzzy
 msgid "Error: snippet_package_version_id missing"
 msgstr "오류 - 코드 버전 ID가 없습니다."
 
 #: www/snippet/add_snippet_to_package.php:72
-#, fuzzy
 msgid "Error: Only the creator of a package version can add snippets to it."
 msgstr "오류 - 패키지 버전을 만든 사람만이 거기에 코드를 추가할 수 있습니다."
 
@@ -21356,7 +21335,6 @@ msgid "Back To Add Page"
 msgstr "추가하기 페이지로 되돌아가기"
 
 #: www/snippet/add_snippet_to_package.php:96
-#, fuzzy
 msgid "Error: That snippet was already added to this package."
 msgstr "오류 - 코드가 이미 이 패키지에 추가되었습니다."
 
@@ -21409,9 +21387,8 @@ msgid "Snippets In This Package"
 msgstr "이 패키지에 있는 코드들"
 
 #: www/snippet/addversion.php:39
-#, fuzzy
 msgid "Error: snippet doesn't exist"
-msgstr "오류 - 코드가 존재하지 않습니다."
+msgstr "오류 - 코드가 존재하지 않습니다"
 
 #: www/snippet/addversion.php:81 www/snippet/addversion.php:202
 #, fuzzy
@@ -22181,7 +22158,7 @@ msgstr "Edit A Question"
 msgid "Add a Question"
 msgstr "Add A Question"
 
-#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:61
+#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
 #: www/survey/admin/show_questions.php:35
 #: www/survey/admin/show_results_aggregate.php:35
 #: www/survey/admin/show_results_comments.php:36
@@ -22213,7 +22190,7 @@ msgstr "성공적으로 갱신되었습니다."
 msgid "No questions found"
 msgstr "%1$s questions found"
 
-#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:133
+#: www/survey/admin/show_csv.php:80 www/survey/admin/show_results.php:133
 msgid "Cannot get Survey Response Factory"
 msgstr ""
 
@@ -22901,6 +22878,218 @@ msgstr "대량 갱신"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "사용자ID"
+
+#~ msgid "Error: this news item was not found"
+#~ msgstr "오류 - 이 뉴스 게시물은 없습니다."
+
+#~ msgid "Your project registration for %s has been approved."
+#~ msgstr "%s에 신청하신 프로젝트가 승인되었습니다."
+
+#~ msgid "-- the %s staff"
+#~ msgstr "-- %s 관리자"
+
+#~ msgid "%s Project Approved"
+#~ msgstr "%s 프로젝트가 승인되었습니다."
+
+#~ msgid "Your project registration for %s has been denied."
+#~ msgstr "귀하가 제출하신 %s 프로젝트가 거부되었습니다."
+
+#~ msgid "Reasons for negative decision"
+#~ msgstr "거부 이유"
+
+#~ msgid "%s Project Denied"
+#~ msgstr "%s 프로젝트가 거부되었습니다"
+
+#~ msgid "New %s Project Submitted"
+#~ msgstr "%s 프로젝트가 제출되었습니다"
+
+#~ msgid "Submitted Description"
+#~ msgstr "제출된 설명"
+
+#~ msgid ""
+#~ "The %s admin team will now examine your project submission. You will be "
+#~ "notified of their decision."
+#~ msgstr ""
+#~ "%s의 관리자가 제출 상황을 점검할 것입니다. 결과는 이메일로 통보받으실 수 "
+#~ "있습니다."
+
+#~ msgid "Enjoy the site."
+#~ msgstr "감사합니다."
+
+#~ msgid "%s Account Registration"
+#~ msgstr "%s 사용자 등록"
+
+#~ msgid "* Denotes requests > %s Days Old"
+#~ msgstr "* 요청 표시 > %s일 지났습니다."
+
+#~ msgid "No Canned Responses set up in this Project"
+#~ msgstr "이 그룹에는 의견이 존재하지 않습니다"
+
+#~ msgid "I am Sure"
+#~ msgstr "확인"
+
+#~ msgid "You are not monitoring any files."
+#~ msgstr "모니터링하고 있는 파일이 없습니다."
+
+#~ msgid "There are no public subprojects available"
+#~ msgstr "공개된 하위 프로젝트가 없습니다."
+
+#~ msgid ""
+#~ "Visiting the link sent to you in this email will activate your account."
+#~ msgstr " 메일에 포함되어 있는 URL을 클릭하시면 계정을 사용하실 수 있습니다."
+
+#~ msgid "You have requested a change of email address on %s."
+#~ msgstr "%s의 이메일 주소를 변경하는 과정입니다."
+
+#~ msgid "Please visit the following URL to complete the email change:"
+#~ msgstr "다음 URL을 방문하셔서 이메일 주소를 변경하십시오:"
+
+#~ msgid "New Email Address"
+#~ msgstr "새로운 이메일 주소"
+
+#~ msgid "Email Address"
+#~ msgstr "이메일 주소"
+
+#~ msgid ""
+#~ "Someone (presumably you) on the %s site requested a password change "
+#~ "through email verification."
+#~ msgstr ""
+#~ "%s 사이트의 누군가가 (아마도 본인?) 이메일을 이용한비밀번호 변경을 요청하"
+#~ "였습니다."
+
+#~ msgid "If this was not you, ignore this message and nothing will happen."
+#~ msgstr ""
+#~ "만약 여러분이 직접 하신 것이 아니라면이 메시지는 그냥 무시하십시오.그러면 "
+#~ "아무것도 바뀌지 않습니다."
+
+#~ msgid ""
+#~ "If you requested this verification, visit the following URL to change "
+#~ "your password:"
+#~ msgstr ""
+#~ "만약 본인이 직접 요청하신 것이라면 다음 URL을 방문하여 비밀번호를 변경하십"
+#~ "시오."
+
+#~ msgid ""
+#~ "You are now being sent a confirmation email to verify your email address. "
+#~ "Visiting the link sent to you in this email will activate your account."
+#~ msgstr ""
+#~ "귀하는 이제 곧 메일 주소를 확인하기 위한 확인 메일을 받으시게 됩니다. 메일"
+#~ "에 포함되어 있는 URL을 클릭하시면 계정을 사용하실 수 있습니다."
+
+#~ msgid "Other Information"
+#~ msgstr "다른 정보"
+
+#~ msgid "Error: Choose a User To Monitor First"
+#~ msgstr "오류 - 모니터링할 사용자를 먼저 선택하십시오"
+
+#~ msgid ""
+#~ "Edit the Release Notes or Change Log for this release of this package. "
+#~ "These changes will apply to all files attached to this release."
+#~ msgstr ""
+#~ "이 패키지의 릴리즈에 대한 릴리즈 노트와 변동사항을 편집합니다. 이 변동사항"
+#~ "들은 이 릴리즈에 딸린 모든 파일들에 대해 적용됩니다."
+
+#~ msgid ""
+#~ "You can either upload the release notes and change log individually, or "
+#~ "paste them in together below."
+#~ msgstr ""
+#~ "릴리즈 노트와 변동사항은 따로따로 올리실 수도 있고 아래에 직접 붙여넣기하"
+#~ "실 수도 있습니다."
+
+#~ msgid "Project totals"
+#~ msgstr "전체"
+
+#~ msgid "This drop-down box represents the current status of a tracker item."
+#~ msgstr "이 펼침 상자는 추적 항목의 현재 상태를 표시합니다."
+
+#~ msgid ""
+#~ "You can set the status to 'Pending' if you are waiting for a response "
+#~ "from the tracker item author.  When the author responds the status is "
+#~ "automatically reset to that of 'Open'. Otherwise, if the author doesn't "
+#~ "respond with an admin-defined amount of time (default is 14 days) then "
+#~ "the item is given a status of 'Deleted'."
+#~ msgstr ""
+#~ "추적 항목 작성자의 응답을 기다릴 경우 상태를 'Pending'으로 설정할 수 있습"
+#~ "니다. 이 상태에서 작성자가 응답을 하면 자동적으로 'Open' 상태로 재설정합니"
+#~ "다. 이 상태에서 관리자가 지정한 시간(기본값은 14일)동안 작성자가 응답을 하"
+#~ "지 않으면 그 항목은 'Deleted' 상태가 됩니다."
+
+#~ msgid ""
+#~ "The Sort By option allows you to determine how the browse results are "
+#~ "sorted."
+#~ msgstr "정렬 옵션으로 탐색 결과를 어떻게 정렬할지 결정할 수 있습니다."
+
+#~ msgid ""
+#~ "You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, "
+#~ "or Assignee.  You can also have the results sorted in Ascending or "
+#~ "Descending order."
+#~ msgstr ""
+#~ "ID, 중요도, 요약, 제출한 날, 해결한 날, 제출자, 담당자로 정렬할 수 있습니"
+#~ "다. 오름차순과 내림차순으로 정렬할 수 있습니다."
+
+#~ msgid ""
+#~ "The priority option allows a user to define a tracker item priority "
+#~ "(ranging from 1-Lowest to 5-Highest)."
+#~ msgstr ""
+#~ "중요도 옵션으로 추적 항목의 중요도를 설정할 수 있습니다. (1-가장 낮음에서 "
+#~ "5-가장 높음입니다)."
+
+#~ msgid ""
+#~ "This is especially helpful for bugs and support requests where a user "
+#~ "might find a critical problem with a project."
+#~ msgstr ""
+#~ "이는 사용자가 프로젝트에서 중대한 문제를 발견하였을 경우의 지원 요청 및 버"
+#~ "그 관리에 특히 유용합니다."
+
+#~ msgid ""
+#~ "The canned response drop-down represents a list of project admin-defined "
+#~ "canned responses to common support or bug submission."
+#~ msgstr ""
+#~ "미리 준비한 의견 펼침 상자는 일반적인 지원이나 버그 제출에 대하여 프로젝"
+#~ "트 관리자가 작성한 미리 준비한 의견들의 목록을 표시합니다."
+
+#~ msgid ""
+#~ "If you are a project admin you can click the 'Manage Canned Responses' "
+#~ "link to define your own canned responses"
+#~ msgstr ""
+#~ "프로젝트 관리자는 '(관리)' 링크를 클릭하여 미리 준비한 의견을 작성할 수 있"
+#~ "습니다."
+
+#~ msgid "My Diary and Notes"
+#~ msgstr "일기쓰기 및 메모"
+
+#~ msgid "View Diary and Notes"
+#~ msgstr "일기/메모 보기"
+
+#~ msgid "Notes and Changes"
+#~ msgstr "릴리즈 노트 과 변동사항"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "오류 - 제목과 본문이 모두 필요합니다."
+
+#~ msgid ""
+#~ "The following option determines if others can see your skills. If they "
+#~ "cannot, you can still enter your skills."
+#~ msgstr ""
+#~ "다음 옵션은 다른 사람들이 당신의 스킬을 볼 수 있을지를 결정합니다. 다른 사"
+#~ "람이 볼 수 없더라도, 스킬을 입력할 수 있습니다."
+
+#~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
+#~ msgstr "오류 - 파일은 20byte 이상, 256000byte 미만이어야 합니다."
+
+#~ msgid "Registration complete"
+#~ msgstr "등록 완료"
+
+#~ msgid ""
+#~ "Your project has been submitted to the %1$s administrators. Within 72 "
+#~ "hours, you will receive notification of their decision and further "
+#~ "instructions."
+#~ msgstr ""
+#~ "프로젝트를 %1$s 관리자에게 제출했습니다. 72 시간 이내에 결정 및 자세한 이"
+#~ "용 절차에 대한 내용을 통보받을 것입니다."
+
+#~ msgid "Thank you for choosing %1$s."
+#~ msgstr "%1$s을 선택해 주셔서 감사합니다."
 
 #, fuzzy
 #~ msgid "Bazaar Repository Browser"
@@ -24368,3 +24557,6 @@ msgstr "사용자ID"
 #, fuzzy
 #~ msgid "Invalid Group Name"
 #~ msgstr "Unix Group Name:"
+
+#~ msgid "Error doing insert"
+#~ msgstr "뉴스를 올리는 과정에서 오류가 발생하였습니다."

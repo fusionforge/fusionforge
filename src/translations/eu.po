@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 12:22+0200\n"
+"POT-Creation-Date: 2013-06-25 17:51+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -209,12 +209,10 @@ msgstr ""
 #: common/docman/actions/monitorfile.php:56
 #: common/tracker/actions/tracker.php:434
 #: common/tracker/actions/tracker.php:451
-#, fuzzy
 msgid "Monitoring Started"
 msgstr "Hasitako monitorizazioa"
 
 #: common/docman/actions/monitorfile.php:76
-#, fuzzy
 msgid "Monitoring Stopped"
 msgstr "Monitorizazioa amaitu da"
 
@@ -633,8 +631,8 @@ msgstr "Zerrenda Gehitua"
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/snippet/download.php:45 www/survey/admin/question.php:64
-#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:82
-#: www/survey/admin/show_csv.php:84 www/survey/admin/show_results.php:69
+#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:80
+#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:69
 #: www/survey/admin/show_results.php:73 www/survey/admin/show_results.php:84
 #: www/survey/admin/show_results.php:86 www/survey/admin/show_results.php:133
 #: www/survey/admin/show_results.php:135 www/tracker/admin/index.php:190
@@ -4153,7 +4151,7 @@ msgid "Error Creating mailing list: "
 msgstr "Dauden Posta Zerrendak"
 
 #: common/mail/MailingList.class.php:183
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "A mailing list will be created on %1$s in one hour\n"
 "and you are the list administrator.\n"
@@ -4173,7 +4171,7 @@ msgid ""
 "\n"
 "-- the %1$s staff\n"
 msgstr ""
-"Posta zerrenda bat sortuko da %1$s -en 6-24 ordu barru \n"
+"Posta zerrenda bat sortuko da %1$s -en 1 ordu barru \n"
 "eta zu zara zerrendaren administraria.\n"
 "\n"
 "Zerrenda hau da: %3$s@%2$s .\n"
@@ -4192,9 +4190,9 @@ msgstr ""
 "-- %1$s langileak\n"
 
 #: common/mail/MailingList.class.php:201
-#, fuzzy, php-format
+#, php-format
 msgid "%s New Mailing List"
-msgstr "%1$s Posta Zerrenda Berriat"
+msgstr "%s Posta Zerrenda Berriat"
 
 #: common/mail/MailingList.class.php:221
 #, fuzzy
@@ -4451,9 +4449,8 @@ msgid "Question Added"
 msgstr "Gehitutako galdera"
 
 #: common/survey/SurveyQuestion.class.php:149
-#, fuzzy
 msgid "Update failed"
-msgstr "Egunero gaurkotua"
+msgstr "Akatsa eguneratzean"
 
 #: common/survey/SurveyQuestion.class.php:194
 msgid "Error finding question"
@@ -7601,15 +7598,13 @@ msgstr "Posta elektronikoaren helbidea baliogabea da"
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
 #: www/account/lostpw.php:89 www/account/pending-resend.php:71
 #: www/account/verify.php:78
-#, fuzzy
 msgid "Login name"
-msgstr "Erabiltzailearen izena:"
+msgstr "Erabiltzailearen izena"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: www/account/verify.php:82
-#, fuzzy
 msgid "Password"
-msgstr "Pasahitza:"
+msgstr "Pasahitza"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:208
@@ -10332,9 +10327,8 @@ msgid "Unable to get the lists"
 msgstr ""
 
 #: plugins/mailman/www/admin/index.php:144
-#, fuzzy
 msgid "Mailing List Name"
-msgstr "Posta Zerrendaren Izena:"
+msgstr "Posta Zerrendaren Izena"
 
 #: plugins/mailman/www/admin/index.php:147
 #: plugins/mailman/www/admin/index.php:179 www/mail/admin/index.php:191
@@ -10398,9 +10392,8 @@ msgid ""
 msgstr ""
 
 #: plugins/mailman/www/index.php:74 www/mail/index.php:74
-#, fuzzy
 msgid "Choose a list to browse, search, and post messages."
-msgstr "<p>Aukeratu zerrenda bat, aztertu, biltau eta mezuak bidaltzeko.</p>"
+msgstr "Aukeratu zerrenda bat, aztertu, biltau eta mezuak bidaltzeko."
 
 #: plugins/mailman/www/mailman_utils.php:20
 #, fuzzy, php-format
@@ -13908,23 +13901,20 @@ msgid ""
 "Changing your email address will require confirmation from your new email "
 "address, so that we can ensure we have a good email address on file."
 msgstr ""
+"Zure posta elektronikoaren aldaketa baieztatzeko helbide berritik egin behar "
+"duzu, horrela posta berria zuzena dela ziurtatzen dugu."
 
 #: www/account/change_email.php:81
-#, fuzzy
 msgid ""
 "We need to maintain an accurate email address for each user due to the level "
 "of access we grant via this account. If we need to reach a user for issues "
 "arriving from a shell or project account, it is important that we be able to "
 "do so."
 msgstr ""
-"<p>Zure posta elektronikoaren aldaketa baieztatzeko helbide berritik egin "
-"behar duzu, horrela posta berria zuzena dela ziurtatzen dugu.</"
-"p><p>Erabiltzailearen gunea sortzean eduki garrantzitsuetara atzipena ematen "
+"Erabiltzailearen gunea sortzean eduki garrantzitsuetara atzipena ematen "
 "diogunez posta elektroniko operatiboa beharrezkoa da momentu oro. Garapenean "
 "dagoen proiektu bateko erabiltzailearekin harremanetan jartzeko premia eduki "
-"ez gero posta elektronikoa zuzena izan behar du.</p><p>Formulario hau igorri "
-"ondoren baieztatzeko lotura bidaliko zaizu helbide berrira. Lotura honetara "
-"joatean helbide aldaketa gauzatuko da.</p>"
+"ez gero posta elektronikoa zuzena izan behar du."
 
 #: www/account/change_email.php:82
 msgid ""
@@ -14565,13 +14555,12 @@ msgid "Verify"
 msgstr ""
 
 #: www/account/verify.php:68
-#, fuzzy
 msgid ""
 "In order to complete your registration, login now. Your account will then be "
 "activated for normal logins."
 msgstr ""
-"<p>Zure izenematea bukatzeko autentifikatu zaitez orain. Horrela zure kontua "
-"aktibatuko da.</p>"
+"Zure izenematea bukatzeko autentifikatu zaitez orain. Horrela zure kontua "
+"aktibatuko da."
 
 #: www/activity/index.php:102
 msgid "Forum Post"
@@ -15244,9 +15233,8 @@ msgid "Display Projects Beginning with:"
 msgstr "Erakutsi taldeak hasten direla:"
 
 #: www/admin/index.php:148
-#, fuzzy
 msgid "Search <em>(groupid, project Unix name, project full name)</em>"
-msgstr "Bilatu <em>(groupid, group unix name, full name)</em>"
+msgstr "Bilatu <em>(groupid, group Unix name, full name)</em>"
 
 #: www/admin/index.php:155
 msgid "Register New Project"
@@ -15735,14 +15723,12 @@ msgid "New category short name (no spaces, unix-like)"
 msgstr "Kategoria berriaren izen motza (espaziorik gabe, unix erara)"
 
 #: www/admin/trove/trove_cat_add.php:119
-#, fuzzy
 msgid "New category full name (Maximum length is 80 chars)"
-msgstr "Kategoria berriaren izen osoa (muga 80 karaktere):"
+msgstr "Kategoria berriaren izen osoa (muga 80 karaktere)"
 
 #: www/admin/trove/trove_cat_add.php:121
-#, fuzzy
 msgid "New category description (Maximum length is 255 chars)"
-msgstr "Kategoria berriaren azalpena (muga 255 karaktere):"
+msgstr "Kategoria berriaren azalpena (muga 255 karaktere)"
 
 #: www/admin/trove/trove_cat_edit.php:48
 msgid "Error: a category can't be the same as its own parent: "
@@ -16023,9 +16009,8 @@ msgid "[Change PW]"
 msgstr "Aldatu"
 
 #: www/admin/userlist.php:146
-#, fuzzy
 msgid "User List"
-msgstr ": Erabiltzaile Zerrenda"
+msgstr "Erabiltzaile Zerrenda"
 
 #: www/admin/userlist.php:150
 msgid "Users that use plugin"
@@ -16099,9 +16084,8 @@ msgid "Add Virtual Host"
 msgstr "Virtual Host gehitu"
 
 #: www/admin/vhost.php:123 www/register/index.php:204
-#, fuzzy
 msgid "Project Unix Name"
-msgstr "Azpiproiektuaren izen berria"
+msgstr "Egitasmoaren Unix izena"
 
 #: www/admin/vhost.php:128
 msgid "Virtual Host Name"
@@ -16154,7 +16138,6 @@ msgid "User could not be found."
 msgstr "Foroa ez da ageri"
 
 #: www/developer/diary.php:44
-#, fuzzy
 msgid "Diary and Notes for"
 msgstr "Egunkaria eta Oharrak"
 
@@ -16168,7 +16151,6 @@ msgid "Posted on "
 msgstr "Lanak argitaratu"
 
 #: www/developer/diary.php:62
-#, fuzzy
 msgid "Existing Diary and Notes Entries"
 msgstr "Dauden apunteak"
 
@@ -16198,17 +16180,15 @@ msgstr "Orain sistemak erabiltzailea monitorizatzeko lanetan ari da."
 
 #: www/developer/monitor.php:68
 msgid "You will now be emailed this user's diary entries."
-msgstr ""
+msgstr "Erabiltzaileak egunkaria erabiltzen duenean posta bat bidaliko da."
 
 #: www/developer/monitor.php:69
-#, fuzzy
 msgid ""
 "To turn off monitoring, simply click the <strong>Monitor user</strong> link "
 "again."
 msgstr ""
-"<p>Erabiltzaileak egunkaria erabiltzen duenean posta bat bidaliko da.</"
-"p><p>Monitorizazioa gelditzeko, honen gainean <strong>erabiltzailea "
-"monitorizatu</strong> klik egin berriro.</p>"
+"Monitorizazioa gelditzeko, honen gainean <strong>erabiltzailea monitorizatu</"
+"strong> klik egin berriro."
 
 #: www/developer/monitor.php:76
 msgid "Monitoring has been turned off"
@@ -18177,9 +18157,8 @@ msgid "Unable to get the list %s : %s"
 msgstr ""
 
 #: www/mail/index.php:78
-#, fuzzy
 msgid "Address"
-msgstr "Helbidea:"
+msgstr "Helbidea"
 
 #: www/mail/index.php:97
 #, php-format
@@ -18440,11 +18419,10 @@ msgid "These items were approved this past week (total: %1$s)"
 msgstr ""
 
 #: www/news/index.php:38
-#, fuzzy
 msgid "Choose a News item and you can browse, search, and post messages."
 msgstr ""
-"<p>Aukeratu Berri elementu bat eta aztertu, bilatu eta mezuak bidali "
-"ditzazkezus.<p>"
+"Aukeratu Berri elementu bat eta aztertu, bilatu eta mezuak bidali "
+"ditzazkezus."
 
 #: www/news/index.php:72
 #, fuzzy, php-format
@@ -18647,19 +18625,17 @@ msgid "No such posting for this project"
 msgstr "Proiektu honetan ez dago horrelako argitalpenik"
 
 #: www/people/editjob.php:157
-#, fuzzy
 msgid ""
 "Now you can edit/change the list of skills attached to this posting. "
 "Developers will be able to match their skills with your requirements."
 msgstr ""
-"<p>Orain eskaera honekin zerikusia duten trebezien zerrendak argitaratu/"
-"aldatu ditzakezu. Horrela lankideek beren trebeziak zure beharren arabera "
-"egokitzen diren ikusi ahal izango dute.</p><p>Eskaera guztiak automatikoki "
-"ixten dira bi aste ondoren.</p>"
+"Orain eskaera honekin zerikusia duten trebezien zerrendak argitaratu/aldatu "
+"ditzakezu. Horrela lankideek beren trebeziak zure beharren arabera egokitzen "
+"diren ikusi ahal izango dute."
 
 #: www/people/editjob.php:159
 msgid "All postings are automatically closed after two weeks."
-msgstr ""
+msgstr "Eskaera guztiak automatikoki ixten dira bi aste ondoren."
 
 #: www/people/editjob.php:175
 msgid "Update Descriptions"
@@ -18939,7 +18915,6 @@ msgid "Added to skill inventory"
 msgstr "Trebezien inbentariora gehitu"
 
 #: www/people/people_utils.php:108 www/people/people_utils.php:216
-#, fuzzy
 msgid "Error: skill already in your inventory"
 msgstr "Akatsa - trebezi hori badago inbentarioan"
 
@@ -19193,7 +19168,6 @@ msgid "Change Tasks Status"
 msgstr "Foroaren egoera aldatu."
 
 #: www/pm/admin/index.php:310
-#, fuzzy
 msgid ""
 "You can modify an existing subproject using this form. Please note that "
 "private subprojects can still be viewed by members of your project, but not "
@@ -19201,7 +19175,7 @@ msgid ""
 msgstr ""
 "Formulario hau erabiltzen azpiproiektu bat aldatu dezakezu. Gogoratu "
 "proiektu pribatuak egitasmo horien kideak bakarrik ikusi dezaketela, eta ez "
-"publiko arruntak.<p>"
+"publiko arruntak."
 
 #: www/pm/admin/index.php:319 www/pm/index.php:99
 msgid "Subproject Name"
@@ -20281,9 +20255,8 @@ msgid "Active Tools"
 msgstr "Aktibatua"
 
 #: www/project/admin/tools.php:151
-#, fuzzy
 msgid "Use Project Activity"
-msgstr "Proiektuen administrari guztiak"
+msgstr "Proiektuaren historia erabili"
 
 #: www/project/admin/tools.php:164
 msgid "Use Forums"
@@ -20531,14 +20504,13 @@ msgid "Project Member List"
 msgstr "Proiektu kideen zerrenda"
 
 #: www/project/memberlist.php:37
-#, fuzzy
 msgid ""
 "If you would like to contribute to this project by becoming a member, "
 "contact one of the project admins, designated in bold text below."
 msgstr ""
-"<p>Proiektu honetan lagundu nahi baduzu eta lankidea izan, proiektuaren "
+"Proiektu honetan lagundu nahi baduzu eta lankidea izan, proiektuaren "
 "administrari batekin harremanetan jarri, berako testuan letra lodiz ageri "
-"dira.</p><br /><br />"
+"dira."
 
 #: www/project/memberlist.php:49
 #, fuzzy
@@ -20709,16 +20681,14 @@ msgid "Project Public Description"
 msgstr "Proiektuaren ibilbidea"
 
 #: www/register/index.php:197
-#, fuzzy
 msgid ""
 "This is the description of your project which will be shown on the Project "
 "Summary page, in search results, etc."
 msgstr ""
-"<h3>4. Proiektuaren deskribapen publikoa</h3><p>Laburpen hau proiektuen "
-"orrian, bilaketen erantzunetan, eta abar azalduko da. Deskribapen honek ez "
-"luke izan behar 2º urratsean egiten den deskribapen ulergarri eta formala "
-"bezelakoa. Beraz, erabili nahi dituzun hitz gako eta zehatzak. Gehienez 255 "
-"karakterekoa izango da."
+"Laburpen hau proiektuen orrian, bilaketen erantzunetan, eta abar azalduko "
+"da. Deskribapen honek ez luke izan behar 2º urratsean egiten den deskribapen "
+"ulergarri eta formala bezelakoa. Beraz, erabili nahi dituzun hitz gako eta "
+"zehatzak."
 
 #: www/register/index.php:205
 msgid ""
@@ -21419,7 +21389,6 @@ msgid "People"
 msgstr "Pertsonak"
 
 #: www/search/index.php:82
-#, fuzzy
 msgid "Error: Invalid search"
 msgstr "Akatsa - Bilaketa ez du balio"
 
@@ -21495,20 +21464,17 @@ msgid "Submit A New Snippet"
 msgstr "Adabaki berri bat bidali"
 
 #: www/snippet/add_snippet_to_package.php:56
-#, fuzzy
 msgid "Error: snippet_package_version_id missing"
 msgstr "Akatsa - snippet_package_version_id zehaztu gabea"
 
 #: www/snippet/add_snippet_to_package.php:72
-#, fuzzy
 msgid "Error: Only the creator of a package version can add snippets to it."
 msgstr ""
 "Akatsa - Bertsio pakete baten sortzaileak bakarrik gehitu ditzake ebakinak."
 
 #: www/snippet/add_snippet_to_package.php:82
-#, fuzzy
 msgid "Error: That snippet doesn't exist."
-msgstr "Akatsa - Ebakin hau ez da existitzen"
+msgstr "Akatsa - Ebakin hau ez da existitzen."
 
 #: www/snippet/add_snippet_to_package.php:83
 #: www/snippet/add_snippet_to_package.php:97
@@ -21517,15 +21483,13 @@ msgid "Back To Add Page"
 msgstr "Atzera orri bat gehitzeko"
 
 #: www/snippet/add_snippet_to_package.php:96
-#, fuzzy
 msgid "Error: That snippet was already added to this package."
 msgstr "Akatsa - Ebakin hau gehitua izan da dagoeneko."
 
 #: www/snippet/add_snippet_to_package.php:108 www/snippet/addversion.php:71
 #: www/snippet/submit.php:74
-#, fuzzy
 msgid "Error doing snippet version insert"
-msgstr "Akatsa - Ebakin hau ez da existitzen"
+msgstr "¡Akatsa adabakiaren bertsioa sartzean!"
 
 #: www/snippet/add_snippet_to_package.php:110 www/snippet/addversion.php:74
 msgid "Snippet Version Added Successfully."
@@ -21534,7 +21498,6 @@ msgstr "Adabakiaren bertsioa ongi gehitua izan da."
 #: www/snippet/add_snippet_to_package.php:113 www/snippet/addversion.php:77
 #: www/snippet/addversion.php:198 www/snippet/package.php:123
 #: www/snippet/submit.php:81
-#, fuzzy
 msgid "Error: Go back and fill in all the information"
 msgstr "Akatsa - Atzera itzuli eta informazio guztia bete"
 
@@ -21570,7 +21533,6 @@ msgid "Snippets In This Package"
 msgstr "Ebakinak pakete honetan"
 
 #: www/snippet/addversion.php:39
-#, fuzzy
 msgid "Error: snippet doesn't exist"
 msgstr "Akatsa - Ebakin hau ez da existitzen"
 
@@ -21597,9 +21559,8 @@ msgid "Error: snippet_package doesn't exist"
 msgstr "Akatsa - adabakiaren paketea ez da aurkitzen"
 
 #: www/snippet/addversion.php:154 www/snippet/package.php:75
-#, fuzzy
 msgid "Error doing snippet package version insert"
-msgstr "Akatsa - snippet_package_version_id zehaztu gabea"
+msgstr "¡Akatsa adabaki paketearen bertsioa gehitzean!"
 
 #: www/snippet/addversion.php:155
 #, fuzzy
@@ -21705,7 +21666,6 @@ msgid "Error: mangled URL?"
 msgstr "Akatsa - ¿URL-a edo formularioa manipulatu duzu?"
 
 #: www/snippet/detail.php:57 www/snippet/detail.php:147
-#, fuzzy
 msgid "Error: no versions found"
 msgstr "Akatsa - Ez dira bertsiorik aurkitu"
 
@@ -21874,9 +21834,8 @@ msgid "Choose One"
 msgstr "Bat aukeratu"
 
 #: www/snippet/snippet_utils.php:27
-#, fuzzy
 msgid "Unix Admin"
-msgstr "Administrari gunea"
+msgstr "Unix administrazioa"
 
 #: www/snippet/snippet_utils.php:28
 msgid "HTML Manipulation"
@@ -21955,9 +21914,8 @@ msgid "Create A Package"
 msgstr "Pakete bat sortu"
 
 #: www/snippet/submit.php:59
-#, fuzzy
 msgid "Error doing snippet insert"
-msgstr "Akatsa sartzean"
+msgstr "¡Akatsa adabakiaren sartzean!"
 
 #: www/snippet/submit.php:61 www/snippet/submit.php:76
 msgid "Snippet Added Successfully."
@@ -22349,7 +22307,7 @@ msgstr "Galdera bat argitaratu"
 msgid "Add a Question"
 msgstr "Galdera bat gehitu"
 
-#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:61
+#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
 #: www/survey/admin/show_questions.php:35
 #: www/survey/admin/show_results_aggregate.php:35
 #: www/survey/admin/show_results_comments.php:36
@@ -22380,7 +22338,7 @@ msgstr "Arrakastaz eguneratua"
 msgid "No questions found"
 msgstr "%1$s -en aurktitutako galderak"
 
-#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:133
+#: www/survey/admin/show_csv.php:80 www/survey/admin/show_results.php:133
 #, fuzzy
 msgid "Cannot get Survey Response Factory"
 msgstr "Inkesta erantzunik ez da topatu"
@@ -22701,9 +22659,8 @@ msgid "Flag"
 msgstr ""
 
 #: www/survey/survey.php:51
-#, fuzzy
 msgid "Vote for Survey"
-msgstr "Inkestaren izena:"
+msgstr "Inkestaren izena"
 
 #: www/survey/survey.php:55 www/survey/survey_resp.php:49
 #, fuzzy
@@ -23075,6 +23032,440 @@ msgstr "Ezin da eguneratu"
 msgid "No User Name Provided"
 msgstr "Ez da erabiltzaile-izenik eman"
 
+#~ msgid "Could not Update Master Thread parent with current time"
+#~ msgstr "Ezin dut mezu nagusia momentuko orduarekin eguneratu"
+
+#~ msgid "Error: this news item was not found"
+#~ msgstr "Akatsa - ez da albisteetan elementu hori aurkitu"
+
+#~ msgid "No Valid Forum Object"
+#~ msgstr "Foroaren objektua baliogabea"
+
+#~ msgid "Posting Failed"
+#~ msgstr "Akatsa mezuaren argitalpenean"
+
+#~ msgid "Unable to get new message id"
+#~ msgstr "Ezin izan da mezu berriaren id-a lortu"
+
+#~ msgid "Must Include A Message Body And Subject"
+#~ msgstr "Edukia eta gaia gehitu behar zaizkio mezuari"
+
+#~ msgid "No Valid ParentMessage Object"
+#~ msgstr "ParentMessage objektua baliogabea"
+
+#~ msgid ""
+#~ "Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
+#~ msgstr ""
+#~ "Fitxategi izenek alfanumerikoak eta “-”, “_”, “+”, “.”, “~” karaktereak "
+#~ "bakarrik eduki ditzakete."
+
+#~ msgid "Missing Required Parameters"
+#~ msgstr "Parametroak falta dira"
+
+#~ msgid "Error: Cannot create group: %s"
+#~ msgstr "ERROREA: Ezin da taldea sortu: %s"
+
+#~ msgid "Error: Cannot get group id: %s"
+#~ msgstr "ERROREA: Ezin da talde id-a eskuratu: %s"
+
+#~ msgid "Error: Cannot add admin to newly created group: %s"
+#~ msgstr "ERROREA: Ezin da administratzailea gehitu talde sortu berrira: %s"
+
+#~ msgid "Error: Cannot change group properties: %s"
+#~ msgstr "ERROREA: DB: Ezin dira talde baimenak aldatu: %s"
+
+#~ msgid "Error: Cannot change group status: %s"
+#~ msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
+
+#~ msgid "Could not insert SCM_BOX to database"
+#~ msgstr "Ezin da SCM_BOX txertatu datu-basean"
+
+#~ msgid "SCM Box cannot be empty"
+#~ msgstr "SCM kutxa ezin da hutsik egon"
+
+#~ msgid "Error: User does not exist"
+#~ msgstr "ERROREA: Erabiltzailea ez da existitzen"
+
+#~ msgid "Error: User not removed: %s"
+#~ msgstr "ERROREA: Erabiltzailea ez da ezabatu: %s"
+
+#~ msgid "Your project registration for %s has been approved."
+#~ msgstr "Zure proiektua %s -n onartua izan da."
+
+#~ msgid "Project Full Name"
+#~ msgstr "Egitasmoaren izen osoa"
+
+#~ msgid ""
+#~ "If you visit your own project page in %s while logged in, you will find "
+#~ "additional menu functions to your left labeled “Project Admin”."
+#~ msgstr ""
+#~ "Zure webgunea bisitatzen baduzu izenpetua zauden bitartean %s "
+#~ "funtziogehigarriak bilatuko dituzu menuan izenburu honekin:'Proiektuen "
+#~ "administrazioa'."
+
+#~ msgid ""
+#~ "Enjoy the system, and please tell others about %s. Let us know if there "
+#~ "is anything we can do to help you."
+#~ msgstr ""
+#~ "Goza ezazu sistemaz eta mesedez %s -koei abisatu iezaiezu. Esaiguzu ere "
+#~ "zu laguntzeko zer egin genezake."
+
+#~ msgid "-- the %s staff"
+#~ msgstr "-- %s taldea"
+
+#~ msgid "%s Project Approved"
+#~ msgstr "%s -ek onartutako proiektua"
+
+#~ msgid "Your project registration for %s has been denied."
+#~ msgstr "Zure egitasmoa %s -n erregistratzeko egin duzun eskaera ukatu da."
+
+#~ msgid "Reasons for negative decision"
+#~ msgstr "Ukatzearen arrazoiak hauek dira"
+
+#~ msgid "%s Project Denied"
+#~ msgstr "%s -ek egitasmoa ukatu du"
+
+#~ msgid "New %s Project Submitted"
+#~ msgstr "%s -en egitasmoa onartzeke dago."
+
+#~ msgid "Submitted Description"
+#~ msgstr "Emandako deskribapena"
+
+#~ msgid ""
+#~ "The %s admin team will now examine your project submission. You will be "
+#~ "notified of their decision."
+#~ msgstr ""
+#~ "%s administratzeko taldeak zure proposamena aztertuko du orain. "
+#~ "Erabakiaren berri emango zaizu."
+
+#~ msgid "Project Admin"
+#~ msgstr "Proiektuen administrariaAdminitrador de Projectos"
+
+#~ msgid "%s Account Registration"
+#~ msgstr "Kontu bat erregistratzeko %s -n"
+
+#~ msgid ""
+#~ "A mailing list will be created on %1$s in one hour\n"
+#~ "and you are the list administrator.\n"
+#~ "\n"
+#~ "This list is: %3$s@%2$s .\n"
+#~ "\n"
+#~ "Your mailing list info is at:\n"
+#~ "%4$s .\n"
+#~ "\n"
+#~ "List administration can be found at:\n"
+#~ "%5$s .\n"
+#~ "\n"
+#~ "Your list password is: %6$s .\n"
+#~ "You are encouraged to change this password as soon as possible.\n"
+#~ "\n"
+#~ "Thank you for registering your project with %1$s."
+#~ msgstr ""
+#~ "Posta zerrenda bat sortuko da %1$s -en 6-24 ordu barru \n"
+#~ "eta zu zara zerrendaren administraria.\n"
+#~ "\n"
+#~ "Zerrenda hau da: %3$s@%2$s .\n"
+#~ "\n"
+#~ "Zerrendaren informazioa hemen topa dezakezu:\n"
+#~ "%4$s .\n"
+#~ "\n"
+#~ "Zerrenda kudeaketa hemen topa dezakezu:\n"
+#~ "%5$s .\n"
+#~ "\n"
+#~ "Zure zerrendaren pasahitza: %6$s .\n"
+#~ "Pasahitz hau lehen bait lehen aldatzea gomendatzen dizugu.\n"
+#~ "\n"
+#~ "Eskerrak zure proiektua %1$s -ekin erregistratzeagatik."
+
+#~ msgid "Last 24 h"
+#~ msgstr "Azken 24 orduak"
+
+#~ msgid "Last 7 days"
+#~ msgstr "Azken 7 egunak"
+
+#~ msgid "Last 2 weeks"
+#~ msgstr "Azken 2 asteak"
+
+#~ msgid "Last month"
+#~ msgstr "Azken hilabetea"
+
+#~ msgid "* Denotes requests > %s Days Old"
+#~ msgstr "* Duela %s egun erregistratu zela esan nahi du"
+
+#~ msgid "No Canned Responses set up in this Project"
+#~ msgstr "Talde honen ez daude aurretik prestatutako erantzunik"
+
+#~ msgid "I am Sure"
+#~ msgstr "Ziur nago"
+
+#~ msgid "You are not monitoring any files."
+#~ msgstr "Ez zaude inungo fitxerorik monitorizatzen."
+
+#~ msgid "There are no public subprojects available"
+#~ msgstr "Ez dago azpiproiektu publikorik eskuragarri"
+
+#~ msgid ""
+#~ "Visiting the link sent to you in this email will activate your account."
+#~ msgstr "Visitando el enlace que le hemos enviado le activará la cuenta."
+
+#~ msgid "Search results for “%s”"
+#~ msgstr "Bilaketa emaitzak <em>%s</em> renttzat"
+
+#~ msgid ""
+#~ "You can administrate lists from here. Please note that private lists can "
+#~ "still be viewed by members of your project, but are not listed on %s."
+#~ msgstr ""
+#~ "Zerrendak kudeatu ditzazkezu hemendik. Mesedez, kontutan izan zerrenda "
+#~ "pribatuak zure projektuko kideek ikus ditzazketela baina baina ez dira "
+#~ "%1$s -en ageri."
+
+#~ msgid "No Lists found for %s"
+#~ msgstr "Ez da zerrendarik topatu %s -entzako"
+
+#~ msgid "You have requested a change of email address on %s."
+#~ msgstr "Helbide elektronikoa aldatzeko eskaria egin duzu %s -ean."
+
+#~ msgid "Please visit the following URL to complete the email change:"
+#~ msgstr "Mesedez, posta aldaketa egiteko bisita ezazu ondorengo helbidea:"
+
+#~ msgid "New Email Address"
+#~ msgstr "Posta elektroniko berria"
+
+#~ msgid "Account options"
+#~ msgstr "Kontuaren informazioa"
+
+#~ msgid "Email Address"
+#~ msgstr "E-mail helbidea"
+
+#~ msgid "Change Email Address"
+#~ msgstr "E-mail helbidea aldatu"
+
+#~ msgid "Phone"
+#~ msgstr "Telefonoa:"
+
+#~ msgid "Fax"
+#~ msgstr "FAXa:"
+
+#~ msgid "Login with SSL"
+#~ msgstr "SSL erabiliz sartu"
+
+#~ msgid ""
+#~ "Someone (presumably you) on the %s site requested a password change "
+#~ "through email verification."
+#~ msgstr ""
+#~ "%s webguneko norbaitek (seguraski zuk) pasahitza aldaketa eskatu du."
+
+#~ msgid "If this was not you, ignore this message and nothing will happen."
+#~ msgstr ""
+#~ "Ez bazaude ados, posta hau alde batera utzi eta ez da ezer gertatuko."
+
+#~ msgid ""
+#~ "If you requested this verification, visit the following URL to change "
+#~ "your password:"
+#~ msgstr ""
+#~ "Zuk eskatutako baieztapena bada, ondorengo lotura bisita ezazu pasahitza "
+#~ "aldatzeko:"
+
+#~ msgid ""
+#~ "You are now being sent a confirmation email to verify your email address. "
+#~ "Visiting the link sent to you in this email will activate your account."
+#~ msgstr ""
+#~ "Ahora recibirá un correo de confirmación para verificar su cuenta de "
+#~ "correo. Visitando el enlace que le hemos enviado le activará la cuenta."
+
+#~ msgid "Approving Project"
+#~ msgstr "Taldea onartu"
+
+#~ msgid "Other Information"
+#~ msgstr "Beste informazioa"
+
+#~ msgid "Active site users: <strong>%1$s</strong>"
+#~ msgstr "Tokiaren erabiltzaile aktiboak: <strong>%1$s</strong>"
+
+#~ msgid "If you are not sure then why did you click “Delete”?"
+#~ msgstr "Ziur ez bazenden, zergatik sakatu zenuen ezabatzeko?"
+
+#~ msgid "New category short name (no spaces, Unix-like)"
+#~ msgstr "Kategoria berriaren izen motza (espaziorik gabe, Unix erara)"
+
+#~ msgid "Category short name (no spaces, Unix-like)"
+#~ msgstr "Kategoria berriaren izen motza (espaziorik gabe, Unix erara)"
+
+#~ msgid ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific project, visit admin "
+#~ "page of that project (below)."
+#~ msgstr ""
+#~ "Orri hauek erabiltzailearen ezaugarriak aldatzea ahalbideratzen dute. "
+#~ "Talde bateko erabiltzailearen ezaugarriak editatzeko administrazio, "
+#~ "dagokion taldeko administrariaren atala bisita ezazu (beheran)."
+
+#~ msgid "Suspend"
+#~ msgstr "Suspenditua"
+
+#~ msgid "Error: Choose a User To Monitor First"
+#~ msgstr "Akatsa - ez dago hautatutako erabiltzailerik."
+
+#~ msgid "No Forums Found for %s"
+#~ msgstr "%s -erako ez dira fororik aurkitu"
+
+#~ msgid ""
+#~ "Edit the Release Notes or Change Log for this release of this package. "
+#~ "These changes will apply to all files attached to this release."
+#~ msgstr ""
+#~ "Paketearen bertsio honen oharrak eta aldaketak aldatu. Aldaketa hauek "
+#~ "bertsio honetako fitxero guztietan ezarriko dira."
+
+#~ msgid ""
+#~ "You can either upload the release notes and change log individually, or "
+#~ "paste them in together below."
+#~ msgstr ""
+#~ "Ohar eta aldaketa hauek bidali ditzakezu banan bana edo beran kopiatu."
+
+#~ msgid "Project totals"
+#~ msgstr "Proiektuaren erabatekoak"
+
+#~ msgid "This drop-down box represents the current status of a tracker item."
+#~ msgstr "Lehio honek erregistro baten elementuen egoera erakusten du."
+
+#~ msgid ""
+#~ "You can set the status to 'Pending' if you are waiting for a response "
+#~ "from the tracker item author.  When the author responds the status is "
+#~ "automatically reset to that of 'Open'. Otherwise, if the author doesn't "
+#~ "respond with an admin-defined amount of time (default is 14 days) then "
+#~ "the item is given a status of 'Deleted'."
+#~ msgstr ""
+#~ "Egoera \"zintzilik\" jartzen duzunean erregistroaren egilearen erantzuna "
+#~ "itxaroten zaudela esan nahi du. Egileak egoera erantzuten duenean "
+#~ "automatikoki \"Irekia\" jartzen da. Egileak ez badu definitutako denboran "
+#~ "(14 egun defektuz) erantzuten orduan elementuari \"Ezabatua\" egoera "
+#~ "jartzen zaio."
+
+#~ msgid ""
+#~ "The Sort By option allows you to determine how the browse results are "
+#~ "sorted."
+#~ msgstr ""
+#~ "\"Nola antolatu\" aukerak jasotako erantzunak nola jarri ordenean "
+#~ "erakusten du."
+
+#~ msgid ""
+#~ "You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, "
+#~ "or Assignee.  You can also have the results sorted in Ascending or "
+#~ "Descending order."
+#~ msgstr ""
+#~ "Antolatzeko aukerak hauek dituzu: ID, Lehentasuna, Laburpena, Zabaltze "
+#~ "data, Ixte data, Nork bidalia edo Nori esleitua. Aldi berean, "
+#~ "alfabetikoki goranzka edo beheranzka antolatu dezakezu."
+
+#~ msgid ""
+#~ "The Data Type option determines the type of tracker item this is.  Since "
+#~ "the tracker rolls into one the bug, patch, support, etc... managers you "
+#~ "need to be able to determine which one of these an item should belong."
+#~ msgstr ""
+#~ "Datu mota aukerak erregistro mota zehazten du. Erregistroa akatsen, "
+#~ "adabakien, eskaeren... kudeatzaileetako batetara joango denez zehaztu "
+#~ "egin behar duzu."
+
+#~ msgid ""
+#~ "The priority option allows a user to define a tracker item priority "
+#~ "(ranging from 1-Lowest to 5-Highest)."
+#~ msgstr ""
+#~ "Lehentasun aukerak erabiltzaileari erregistroaren lehentasuna zehaztea "
+#~ "ahalbideratzen du (1-etik 5-ra: garrantzi gutxitik altura)."
+
+#~ msgid ""
+#~ "This is especially helpful for bugs and support requests where a user "
+#~ "might find a critical problem with a project."
+#~ msgstr ""
+#~ "Hau oso erabilgarria da gehienbat akatsentzako eta sostengu "
+#~ "eskaerentzako, non erabiltzaileak arazo larria eduki lezake bere "
+#~ "proiektuan."
+
+#~ msgid ""
+#~ "The canned response drop-down represents a list of project admin-defined "
+#~ "canned responses to common support or bug submission."
+#~ msgstr ""
+#~ "Bildutako edo ohiko erantzunen lehioak administradorak aukeratutako "
+#~ "erantzunen zerrenda erakusten du. Erantzun hauek denon artean bidalitako "
+#~ "sostengu, eskaera eta akatsak bidaltzetik jaso dira."
+
+#~ msgid ""
+#~ "If you are a project admin you can click the 'Manage Canned Responses' "
+#~ "link to define your own canned responses"
+#~ msgstr ""
+#~ "Proiektu administraria bazara (Manage Canned Responses) lotura sakatu "
+#~ "gordetako zure ohiko erantzunak finkatzeko."
+
+#~ msgid "My Diary and Notes"
+#~ msgstr "Egunkaria eta Oharrak"
+
+#~ msgid "View Diary and Notes"
+#~ msgstr "Egunkaria eta oharrak ikusi"
+
+#~ msgid "Notes and Changes"
+#~ msgstr "Oharrak eta Aldaketak"
+
+#~ msgid "Read More/Comment"
+#~ msgstr "Gehiago irakurri/Azalpenak idatzi"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "Akatsa - bai gaia eta bai berriaren gorputza beharrezkoak dira"
+
+#~ msgid "Job inserted successfully"
+#~ msgstr "Arrakastaz sartutako lana"
+
+#~ msgid "Job updated successfully"
+#~ msgstr "Arrakastaz eguneratutako lana"
+
+#~ msgid "Job update failed - wrong project_id"
+#~ msgstr "Akatsa lana eguneratzean - project_id -a baliogabea"
+
+#~ msgid "Job skill updated successfully"
+#~ msgstr "Lanaren trebezia arrakastaz eguneratu da"
+
+#~ msgid "Job skill update failed - wrong project_id"
+#~ msgstr "Akatsa lanaren trebeziaeguneratzean - project_id -a ez da zuzena"
+
+#~ msgid "Job skill deleted successfully"
+#~ msgstr "Lanaren trebezia arrakastaz ezabatu da"
+
+#~ msgid "Job skill delete failed - wrong project_id"
+#~ msgstr "Akatsa lanaren trebezia ezabatzean - project_id -a ez da zuzena"
+
+#~ msgid ""
+#~ "The following option determines if others can see your skills. If they "
+#~ "cannot, you can still enter your skills."
+#~ msgstr ""
+#~ "Ondorengo aukera honek zure trebeziak ikusgai egongo diren ala ez "
+#~ "erabakitzen du. Nahiz eta beraiek ez ikusi zure trebeziak sartu ditzakezu."
+
+#~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
+#~ msgstr ""
+#~ "Akatsa - Fitxero baten tamaina 20 bytes baino handiagoa eta 256000 bytes "
+#~ "baino tamaina txikiagoa izan behar du."
+
+#~ msgid "Choose the role for each user and then press “Add All”."
+#~ msgstr ""
+#~ "Aukeratu erabiltzaile bakoitzaren rola eta gero sakatu &quot;Denak "
+#~ "Gehitu&quot;."
+
+#~ msgid "Registration complete"
+#~ msgstr "Erregistro osoa"
+
+#~ msgid ""
+#~ "Your project has been submitted to the %1$s administrators. Within 72 "
+#~ "hours, you will receive notification of their decision and further "
+#~ "instructions."
+#~ msgstr ""
+#~ "Zure proiektua %1$s administrariei bidali zaie. 72 ordu igaro ostean "
+#~ "oharra jasoko dezu erabakiaren eta argibideen inguruan."
+
+#~ msgid ""
+#~ "Download a raw-text version of this code by clicking on “Download Version”"
+#~ msgstr ""
+#~ "Kode honen testu bertsioa deskargatzeko hemen sakatu &quot;Bertsioa "
+#~ "deskargatu&quot;"
+
 #, fuzzy
 #~ msgid "Bazaar Repository Browser"
 #~ msgstr "SCM errepositorioa"
@@ -23095,9 +23486,8 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #~ msgid "Repository name: "
 #~ msgstr "SCM errepositorioa"
 
-#, fuzzy
 #~ msgid "No Valid Group Object"
-#~ msgstr "Baliodun Talde Objeturik Ez"
+#~ msgstr "taldearen objektua baliogabea"
 
 #, fuzzy
 #~ msgid "Project:"
@@ -24649,3 +25039,63 @@ msgstr "Ez da erabiltzaile-izenik eman"
 
 #~ msgid "Invalid Group Name"
 #~ msgstr "Talde izen baliogabea"
+
+#~ msgid "Error doing insert"
+#~ msgstr "Akatsa sartzean"
+
+#~ msgid "Error Getting %s"
+#~ msgstr "Akatsa %s lortzean"
+
+#~ msgid "Error inserting into skill inventory"
+#~ msgstr "Akatsa trebezien inbentariora sartzean"
+
+#~ msgid "Invalid MessageID"
+#~ msgstr "MessageID baliogabea"
+
+#~ msgid "Activity Percentile:"
+#~ msgstr "Jarduera portzentajea:"
+
+#~ msgid "DevProfile"
+#~ msgstr "Kolaboratzailearen profila"
+
+#~ msgid "Registered:"
+#~ msgstr "Erregistratua:"
+
+#~ msgid "Followup"
+#~ msgstr "Azalpenak"
+
+#~ msgid "Check &nbsp;all"
+#~ msgstr "Denak aukeratu"
+
+#~ msgid "Clear &nbsp;all"
+#~ msgstr "Denak ezabatu"
+
+#~ msgid "Project&nbsp;Openings"
+#~ msgstr "Laguntza eskaerak"
+
+#~ msgid "My&nbsp;Page"
+#~ msgstr "Nere orria"
+
+#~ msgid ""
+#~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "
+#~ "the document (e.g. How to use the download server)<br /"
+#~ "><strong>Description:</strong> A brief description to be placed just "
+#~ "under the title."
+#~ msgstr ""
+#~ "<strong>Dokumentuaren izenburua</strong>: dokumentuaren izenburu laburraz "
+#~ "ari gatzaizu (Adibidez: nola erabili downloads zerbitzaria)<br /"
+#~ "><strong>Deskribapena</strong>: Izenburupean egongo den deskribapena."
+
+#~ msgid "Document Manager: Display Document"
+#~ msgstr "Dokumentu kudeatzailea: dokumentuak erakutsi"
+
+#~ msgid "Error: No group was chosen or you cannot access it"
+#~ msgstr "Akatsa - Ez da group_id aukeratu"
+
+#~ msgid "Error: disabled feature."
+#~ msgstr "Akatsa - baliabide desgaitua."
+
+#~ msgid "Error: For some reason group_id and/or survey_id did not make it he"
+#~ msgstr ""
+#~ "Akatsa - Arrazoi batengatik taldearen ID-a edo inkestaren ID-a ez da "
+#~ "zehaztu orri honetarako"

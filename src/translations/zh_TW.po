@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 12:22+0200\n"
+"POT-Creation-Date: 2013-06-25 17:51+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -629,8 +629,8 @@ msgstr "已經新增通信論壇"
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/snippet/download.php:45 www/survey/admin/question.php:64
-#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:82
-#: www/survey/admin/show_csv.php:84 www/survey/admin/show_results.php:69
+#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:80
+#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:69
 #: www/survey/admin/show_results.php:73 www/survey/admin/show_results.php:84
 #: www/survey/admin/show_results.php:86 www/survey/admin/show_results.php:133
 #: www/survey/admin/show_results.php:135 www/tracker/admin/index.php:190
@@ -4181,9 +4181,9 @@ msgstr ""
 "-- %1$s 工作團隊\n"
 
 #: common/mail/MailingList.class.php:201
-#, fuzzy, php-format
+#, php-format
 msgid "%s New Mailing List"
-msgstr "%1$s 新的通信論壇"
+msgstr "%s 新的通信論壇"
 
 #: common/mail/MailingList.class.php:221
 #, fuzzy
@@ -4442,9 +4442,8 @@ msgid "Question Added"
 msgstr "問題新增了"
 
 #: common/survey/SurveyQuestion.class.php:149
-#, fuzzy
 msgid "Update failed"
-msgstr "每日更新"
+msgstr "更新錯誤"
 
 #: common/survey/SurveyQuestion.class.php:194
 msgid "Error finding question"
@@ -7612,9 +7611,8 @@ msgstr "無效的Email"
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
 #: www/account/lostpw.php:89 www/account/pending-resend.php:71
 #: www/account/verify.php:78
-#, fuzzy
 msgid "Login name"
-msgstr "使用者名稱："
+msgstr "使用者名稱"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: www/account/verify.php:82
@@ -10356,9 +10354,8 @@ msgid "Unable to get the lists"
 msgstr ""
 
 #: plugins/mailman/www/admin/index.php:144
-#, fuzzy
 msgid "Mailing List Name"
-msgstr "通信論壇名稱："
+msgstr "通信論壇名稱"
 
 #: plugins/mailman/www/admin/index.php:147
 #: plugins/mailman/www/admin/index.php:179 www/mail/admin/index.php:191
@@ -13940,6 +13937,8 @@ msgid ""
 "Changing your email address will require confirmation from your new email "
 "address, so that we can ensure we have a good email address on file."
 msgstr ""
+"為了保證我們擁有您正確的email信箱，改變您的email信箱，將會要求新email信箱的確"
+"認。"
 
 #: www/account/change_email.php:81
 #, fuzzy
@@ -13960,6 +13959,8 @@ msgid ""
 "Submitting the form below will mail a confirmation URL to the new email "
 "address. Visiting this link will complete the email change."
 msgstr ""
+"送出這個表單，將會發出一個要求確認的網址到新的email信箱，訪問那個連結就可以完"
+"成email信箱的改變。"
 
 #: www/account/change_email.php:88
 msgid "New Email Address:"
@@ -14089,7 +14090,6 @@ msgstr ""
 "2)。關於共用認證Keys請閱讀SSH說明書來獲取更進一步資訊。</p>"
 
 #: www/account/editsshkeys.php:75
-#, fuzzy
 msgid ""
 "To generate a public key, run the program 'ssh-keygen' (you can use both "
 "protocol 1 or 2). The public key will be placed at '~/.ssh/identity."
@@ -14097,13 +14097,10 @@ msgid ""
 "pub' (protocol version 2). Read the ssh documentation for further "
 "information on sharing keys."
 msgstr ""
-"<p>為了避免必須每次輸入您的 CVS/SSH 開發人員帳號的密碼，您可以在這裏上傳您的 "
-"public key(s)，而它們將被放置在 CVS 伺服器中您的 ~/.ssh/authorized_keys 檔案"
-"中。這將被安排在工作排程，所以它不會立即發生，請在一個小時後才嘗試登入。</"
-"p><p>為了產生這個 public key，執行這個程式 'ssh-keygen' (您可以使用protocol "
-"1 或 2 兩者其中之一)，這個 public key 將被放置在 '~/.ssh/identity."
-"pub' (protocol 1) 與 '~/.ssh/id_dsa.pub' 或 '~/.ssh/id_rsa.pub' (protocol "
-"2)。關於共用認證Keys請閱讀SSH說明書來獲取更進一步資訊。</p>"
+"為了產生這個 public key，執行這個程式 'ssh-keygen' (您可以使用protocol 1 或 "
+"2 兩者其中之一)，這個 public key 將被放置在 '~/.ssh/identity.pub' (protocol "
+"1) 與 '~/.ssh/id_dsa.pub' 或 '~/.ssh/id_rsa.pub' (protocol 2)。關於共用認證"
+"Keys請閱讀SSH說明書來獲取更進一步資訊。"
 
 #: www/account/editsshkeys.php:76
 #, fuzzy
@@ -14600,12 +14597,10 @@ msgid "Verify"
 msgstr ""
 
 #: www/account/verify.php:68
-#, fuzzy
 msgid ""
 "In order to complete your registration, login now. Your account will then be "
 "activated for normal logins."
-msgstr ""
-"<p>為了完成註冊，請現在就登入。然後您的帳號就會啟動成正常的登入模式。</p>"
+msgstr "為了完成註冊，請現在就登入。然後您的帳號就會啟動成正常的登入模式。"
 
 #: www/activity/index.php:102
 msgid "Forum Post"
@@ -15278,9 +15273,8 @@ msgid "Display Projects Beginning with:"
 msgstr "顯示群組開始於："
 
 #: www/admin/index.php:148
-#, fuzzy
 msgid "Search <em>(groupid, project Unix name, project full name)</em>"
-msgstr "搜尋 <em>(群組編號、群組 unix 名稱、完整名稱)</em>"
+msgstr "搜尋 <em>(群組編號、群組 Unix 名稱、完整名稱)</em>"
 
 #: www/admin/index.php:155
 msgid "Register New Project"
@@ -15549,7 +15543,7 @@ msgstr "不採取動作"
 #: www/admin/pending-news.php:150 www/export/rssAboTask.php:146
 #: www/my/diary.php:185 www/news/admin/index.php:137 www/news/submit.php:148
 msgid "Details"
-msgstr ""
+msgstr "細節"
 
 #: www/admin/pluginman.php:55
 #, php-format
@@ -15766,12 +15760,10 @@ msgid "New category short name (no spaces, unix-like)"
 msgstr "新類別縮寫 (沒有空白，像是Unix)"
 
 #: www/admin/trove/trove_cat_add.php:119
-#, fuzzy
 msgid "New category full name (Maximum length is 80 chars)"
 msgstr "新類別完整名稱 (80字元)"
 
 #: www/admin/trove/trove_cat_add.php:121
-#, fuzzy
 msgid "New category description (Maximum length is 255 chars)"
 msgstr "新類別說明 (255字元)"
 
@@ -16124,9 +16116,8 @@ msgid "Add Virtual Host"
 msgstr "新增虛擬主機"
 
 #: www/admin/vhost.php:123 www/register/index.php:204
-#, fuzzy
 msgid "Project Unix Name"
-msgstr "新專案名稱"
+msgstr "專案 Unix 名稱"
 
 #: www/admin/vhost.php:128
 msgid "Virtual Host Name"
@@ -16179,7 +16170,6 @@ msgid "User could not be found."
 msgstr "找不到問卷"
 
 #: www/developer/diary.php:44
-#, fuzzy
 msgid "Diary and Notes for"
 msgstr "日記和筆記"
 
@@ -16193,7 +16183,6 @@ msgid "Posted on "
 msgstr "張貼者"
 
 #: www/developer/diary.php:62
-#, fuzzy
 msgid "Existing Diary and Notes Entries"
 msgstr "已有的日記和筆記"
 
@@ -16224,16 +16213,13 @@ msgstr "會員已被監視"
 
 #: www/developer/monitor.php:68
 msgid "You will now be emailed this user's diary entries."
-msgstr ""
+msgstr "當會員增加日記時，您將收到該日記的內容。"
 
 #: www/developer/monitor.php:69
-#, fuzzy
 msgid ""
 "To turn off monitoring, simply click the <strong>Monitor user</strong> link "
 "again."
-msgstr ""
-"<p>當會員增加日記時，您將收到該日記的內容。</p><p>如果不想監視，只要簡單的點"
-"一下<strong>監視會員</strong> 連結</p>"
+msgstr "如果不想監視，只要簡單的點一下<strong>監視會員</strong> 連結"
 
 #: www/developer/monitor.php:76
 msgid "Monitoring has been turned off"
@@ -18181,9 +18167,8 @@ msgid "Unable to get the list %s : %s"
 msgstr ""
 
 #: www/mail/index.php:78
-#, fuzzy
 msgid "Address"
-msgstr "住址："
+msgstr "住址"
 
 #: www/mail/index.php:97
 #, php-format
@@ -18646,17 +18631,16 @@ msgid "No such posting for this project"
 msgstr "該專案沒有這樣的文章"
 
 #: www/people/editjob.php:157
-#, fuzzy
 msgid ""
 "Now you can edit/change the list of skills attached to this posting. "
 "Developers will be able to match their skills with your requirements."
 msgstr ""
-"<p>現在您可以編輯/改變這個文章的技能列表。開發人員可以根據您的技能要求列表來"
-"判斷他們是否符合您的要求。 </p><p>您的佈告在兩星期後自動關閉。</p>"
+">現在您可以編輯/改變這個文章的技能列表。開發人員可以根據您的技能要求列表來判"
+"斷他們是否符合您的要求。"
 
 #: www/people/editjob.php:159
 msgid "All postings are automatically closed after two weeks."
-msgstr ""
+msgstr "您的佈告在兩星期後自動關閉"
 
 #: www/people/editjob.php:175
 msgid "Update Descriptions"
@@ -18935,7 +18919,6 @@ msgid "Added to skill inventory"
 msgstr "加入到技能目錄"
 
 #: www/people/people_utils.php:108 www/people/people_utils.php:216
-#, fuzzy
 msgid "Error: skill already in your inventory"
 msgstr "錯誤 － 技能已經在您的目錄中"
 
@@ -19187,14 +19170,13 @@ msgid "Change Tasks Status"
 msgstr "任務狀態"
 
 #: www/pm/admin/index.php:310
-#, fuzzy
 msgid ""
 "You can modify an existing subproject using this form. Please note that "
 "private subprojects can still be viewed by members of your project, but not "
 "the general public."
 msgstr ""
 "您可以透過這個表單更改一個現有的任務。請注意隱藏專案仍然能夠被專案成員查看"
-"到，雖然不是被完全公開。<p>"
+"到，雖然不是被完全公開。"
 
 #: www/pm/admin/index.php:319 www/pm/index.php:99
 msgid "Subproject Name"
@@ -21107,11 +21089,10 @@ msgid "User Activity"
 msgstr "使用者活動"
 
 #: www/reporting/useract.php:61 www/reporting/usertime.php:61
-#, fuzzy
 msgid ""
 "Choose the <strong>First Letter</strong> of the name of the person you wish "
 "to report on."
-msgstr "選擇你希望被報告人姓名的<strong>第一個字元</strong>。<p>"
+msgstr "選擇你希望被報告人姓名的<strong>第一個字元</strong>。"
 
 #: www/reporting/useradded.php:53
 msgid "Users Added"
@@ -21396,7 +21377,6 @@ msgid "People"
 msgstr "人"
 
 #: www/search/index.php:82
-#, fuzzy
 msgid "Error: Invalid search"
 msgstr "錯誤 - 無法搜尋"
 
@@ -21472,12 +21452,10 @@ msgid "Submit A New Snippet"
 msgstr "上傳一個新的程式碼"
 
 #: www/snippet/add_snippet_to_package.php:56
-#, fuzzy
 msgid "Error: snippet_package_version_id missing"
 msgstr "錯誤 - snippet_package_version_id 錯誤"
 
 #: www/snippet/add_snippet_to_package.php:72
-#, fuzzy
 msgid "Error: Only the creator of a package version can add snippets to it."
 msgstr "錯誤 - 只有軟體包裝版本的建立者可以新增程式碼到其中"
 
@@ -21493,15 +21471,13 @@ msgid "Back To Add Page"
 msgstr "回到新增頁面"
 
 #: www/snippet/add_snippet_to_package.php:96
-#, fuzzy
 msgid "Error: That snippet was already added to this package."
 msgstr "錯誤 - 那個程式碼已經新增到這個軟體包裝中"
 
 #: www/snippet/add_snippet_to_package.php:108 www/snippet/addversion.php:71
 #: www/snippet/submit.php:74
-#, fuzzy
 msgid "Error doing snippet version insert"
-msgstr "錯誤 - 程式碼不存在"
+msgstr "新增程式碼版本時發生錯誤！"
 
 #: www/snippet/add_snippet_to_package.php:110 www/snippet/addversion.php:74
 msgid "Snippet Version Added Successfully."
@@ -21510,7 +21486,6 @@ msgstr "程式碼版本新增成功"
 #: www/snippet/add_snippet_to_package.php:113 www/snippet/addversion.php:77
 #: www/snippet/addversion.php:198 www/snippet/package.php:123
 #: www/snippet/submit.php:81
-#, fuzzy
 msgid "Error: Go back and fill in all the information"
 msgstr "錯誤 - 回上頁並且填入所有資訊"
 
@@ -21546,7 +21521,6 @@ msgid "Snippets In This Package"
 msgstr "這個軟體包裝的程式碼"
 
 #: www/snippet/addversion.php:39
-#, fuzzy
 msgid "Error: snippet doesn't exist"
 msgstr "錯誤 - 程式碼不存在"
 
@@ -21573,9 +21547,8 @@ msgid "Error: snippet_package doesn't exist"
 msgstr "錯誤, 錯誤 - 程式碼集合不存在"
 
 #: www/snippet/addversion.php:154 www/snippet/package.php:75
-#, fuzzy
 msgid "Error doing snippet package version insert"
-msgstr "錯誤 - snippet_package_version_id 錯誤"
+msgstr "插入程式碼集合版本時發生錯誤！"
 
 #: www/snippet/addversion.php:155
 #, fuzzy
@@ -21680,7 +21653,6 @@ msgid "Error: mangled URL?"
 msgstr "錯誤, 錯誤 - 網址格式有誤"
 
 #: www/snippet/detail.php:57 www/snippet/detail.php:147
-#, fuzzy
 msgid "Error: no versions found"
 msgstr "錯誤 - 未發現版本"
 
@@ -21847,9 +21819,8 @@ msgid "Choose One"
 msgstr "選擇一個"
 
 #: www/snippet/snippet_utils.php:27
-#, fuzzy
 msgid "Unix Admin"
-msgstr "網站管理"
+msgstr "Unix管理"
 
 #: www/snippet/snippet_utils.php:28
 msgid "HTML Manipulation"
@@ -21928,9 +21899,8 @@ msgid "Create A Package"
 msgstr "建立一個集合"
 
 #: www/snippet/submit.php:59
-#, fuzzy
 msgid "Error doing snippet insert"
-msgstr "插入時發生錯誤"
+msgstr "新增程式碼時發生錯誤！"
 
 #: www/snippet/submit.php:61 www/snippet/submit.php:76
 msgid "Snippet Added Successfully."
@@ -22317,7 +22287,7 @@ msgstr "編輯一個問題"
 msgid "Add a Question"
 msgstr "新增一個問題"
 
-#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:61
+#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
 #: www/survey/admin/show_questions.php:35
 #: www/survey/admin/show_results_aggregate.php:35
 #: www/survey/admin/show_results_comments.php:36
@@ -22349,7 +22319,7 @@ msgstr "更新成功"
 msgid "No questions found"
 msgstr "找到 %1$s 個問題"
 
-#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:133
+#: www/survey/admin/show_csv.php:80 www/survey/admin/show_results.php:133
 #, fuzzy
 msgid "Cannot get Survey Response Factory"
 msgstr "沒有發現問卷回應"
@@ -22666,9 +22636,8 @@ msgid "Flag"
 msgstr ""
 
 #: www/survey/survey.php:51
-#, fuzzy
 msgid "Vote for Survey"
-msgstr "問卷名稱："
+msgstr "問卷名稱"
 
 #: www/survey/survey.php:55 www/survey/survey_resp.php:49
 #, fuzzy
@@ -23043,6 +23012,422 @@ msgstr "大量更新"
 msgid "No User Name Provided"
 msgstr "帳號"
 
+#~ msgid "Could not Update Master Thread parent with current time"
+#~ msgstr "目前無法更新 Master Thread parent"
+
+#~ msgid "Error: this news item was not found"
+#~ msgstr "錯誤 - 沒發現新聞"
+
+#~ msgid "No Valid Forum Object"
+#~ msgstr "討論區資訊：無效的討論區物件"
+
+#~ msgid "Posting Failed"
+#~ msgstr "張貼失敗"
+
+#~ msgid "Unable to get new message id"
+#~ msgstr "無法獲得文章編號"
+
+#~ msgid "Must Include A Message Body And Subject"
+#~ msgstr "必須包括文章標題和內容"
+
+#~ msgid "No Valid ParentMessage Object"
+#~ msgstr "無效的 ParentMessage 物件"
+
+#~ msgid "SCM Box cannot be empty"
+#~ msgstr "原始碼版本管理系統區塊不能空白"
+
+#~ msgid "Your project registration for %s has been approved."
+#~ msgstr "您在 %s 註冊的專案通過審核了"
+
+#~ msgid "Project Full Name"
+#~ msgstr "專案全名"
+
+#~ msgid "-- the %s staff"
+#~ msgstr "%s 團隊"
+
+#~ msgid "%s Project Approved"
+#~ msgstr "%s 專案通過審核了"
+
+#~ msgid "Your project registration for %s has been denied."
+#~ msgstr "您在 %s 的專案註冊被取消了"
+
+#~ msgid "%s Project Denied"
+#~ msgstr "%s 專案被取消了"
+
+#~ msgid "Submitted Description"
+#~ msgstr "已送出的說明"
+
+#~ msgid ""
+#~ "The %s admin team will now examine your project submission. You will be "
+#~ "notified of their decision."
+#~ msgstr " %s 的管理團隊會盡快審核您註冊的專案，通過審核與否您都會收到通知。"
+
+#~ msgid "%1$s (%2$s) has requested to join your project."
+#~ msgstr "%1$s (%2$s) 已經請求參與您的專案。"
+
+#~ msgid "You can approve this request here: %s"
+#~ msgstr "你能在這裡核准這一個請求: %s"
+
+#~ msgid "Request to Join Project %s"
+#~ msgstr "請求參與專案 %s"
+
+#~ msgid "Project Admin"
+#~ msgstr "專案管理"
+
+#~ msgid "Enjoy the site."
+#~ msgstr "享用這個網站吧。"
+
+#~ msgid "%s Account Registration"
+#~ msgstr "%s 帳號註冊"
+
+#~ msgid ""
+#~ "A mailing list will be created on %1$s in one hour\n"
+#~ "and you are the list administrator.\n"
+#~ "\n"
+#~ "This list is: %3$s@%2$s .\n"
+#~ "\n"
+#~ "Your mailing list info is at:\n"
+#~ "%4$s .\n"
+#~ "\n"
+#~ "List administration can be found at:\n"
+#~ "%5$s .\n"
+#~ "\n"
+#~ "Your list password is: %6$s .\n"
+#~ "You are encouraged to change this password as soon as possible.\n"
+#~ "\n"
+#~ "Thank you for registering your project with %1$s."
+#~ msgstr ""
+#~ "通信論壇會在6~24小時內建立於 %1$s  \n"
+#~ "您是通信論壇的管理者\n"
+#~ "\n"
+#~ "這個通信論壇是：%3$s@%2$s \n"
+#~ "\n"
+#~ "您的通信論壇資訊在：\n"
+#~ "%4$s \n"
+#~ "\n"
+#~ "通信論壇管理介面：\n"
+#~ "%5$s \n"
+#~ "\n"
+#~ "通信論壇密碼：%6$s \n"
+#~ "建議您盡快修改這個密碼\n"
+#~ "\n"
+#~ "謝謝您將專案建立在 %1$s"
+
+#~ msgid "%s Reporting"
+#~ msgstr "%s 報告"
+
+#~ msgid "Last 24 h"
+#~ msgstr "昨天"
+
+#~ msgid "Last 7 days"
+#~ msgstr "前七天"
+
+#~ msgid "Last 2 weeks"
+#~ msgstr "前兩星期"
+
+#~ msgid "Last month"
+#~ msgstr "上個月"
+
+#~ msgid "* Denotes requests > %s Days Old"
+#~ msgstr "* 指示請求 > %s 天之久"
+
+#~ msgid "No Canned Responses set up in this Project"
+#~ msgstr "在本群組回應未設定"
+
+#~ msgid "I am Sure"
+#~ msgstr "我確定"
+
+#~ msgid "I am Really Sure"
+#~ msgstr "我非常確定"
+
+#~ msgid "You are not monitoring any files."
+#~ msgstr "您沒有監視任何檔案發佈"
+
+#~ msgid "There are no public subprojects available"
+#~ msgstr "目前沒有公開的子專案"
+
+#~ msgid "Click here to visit the item %s"
+#~ msgstr "點擊這裏拜訪這個項目: %s"
+
+#~ msgid ""
+#~ "This mail is sent to you to remind you of pending/overdue tracker items."
+#~ msgstr "這郵件被寄給你使你想起未決定/過期的追蹤者項目。"
+
+#~ msgid "The item #%s is pending"
+#~ msgstr "項目 #%s 是未決定"
+
+#~ msgid ""
+#~ "Visiting the link sent to you in this email will activate your account."
+#~ msgstr "點擊email中的連結就可以啟動您的帳號。"
+
+#~ msgid ""
+#~ "You can administrate lists from here. Please note that private lists can "
+#~ "still be viewed by members of your project, but are not listed on %s."
+#~ msgstr ""
+#~ "您可以從這裡管理通信論壇，請注意，隱藏的通信論壇還是可以從您的專案網頁看"
+#~ "到，但是不會出現在 %1$s。"
+
+#~ msgid "No Lists found for %s"
+#~ msgstr "%s 沒有任何通信論壇"
+
+#~ msgid ""
+#~ "A mailing list will be created on %1$s in few minutes\n"
+#~ "and you are the list administrator.\n"
+#~ "\n"
+#~ "This list is: %3$s@%2$s .\n"
+#~ "\n"
+#~ "Your mailing list info is at:\n"
+#~ "%4$s .\n"
+#~ "\n"
+#~ "List administration can be found at:\n"
+#~ "%5$s .\n"
+#~ "\n"
+#~ "Your list password is: %6$s .\n"
+#~ "You are encouraged to change this password as soon as possible.\n"
+#~ "\n"
+#~ "Thank you for registering your project with %1$s."
+#~ msgstr ""
+#~ "通信論壇會在6~24小時內建立於 %1$s  \n"
+#~ "您是通信論壇的管理者\n"
+#~ "\n"
+#~ "這個通信論壇是：%3$s@%2$s \n"
+#~ "\n"
+#~ "您的通信論壇資訊在：\n"
+#~ "%4$s \n"
+#~ "\n"
+#~ "通信論壇管理介面：\n"
+#~ "%5$s \n"
+#~ "\n"
+#~ "通信論壇密碼：%6$s \n"
+#~ "建議您盡快修改這個密碼\n"
+#~ "\n"
+#~ "謝謝您將專案建立在 %1$s"
+
+#~ msgid "You have requested a change of email address on %s."
+#~ msgstr "您申請在 %s 上更改您的email信箱。"
+
+#~ msgid "Please visit the following URL to complete the email change:"
+#~ msgstr " 請點擊這個網址來完成email信箱的改變："
+
+#~ msgid "New Email Address"
+#~ msgstr "新的Email"
+
+#~ msgid ""
+#~ "To avoid having to type your password every time for your CVS/SSH "
+#~ "developer account, you may upload your public key(s) here and they will "
+#~ "be placed on the CVS server in your ~/.ssh/authorized_keys file. This is "
+#~ "done by a cron job, so it may not happen immediately.  Please allow for a "
+#~ "one hour delay."
+#~ msgstr ""
+#~ "為了避免必須每次輸入您的 CVS/SSH 開發人員帳號的密碼，您可以在這裏上傳您的 "
+#~ "public key(s)，而它們將被放置在 CVS 伺服器中您的 ~/.ssh/authorized_keys 檔"
+#~ "案中。這將被安排在工作排程，所以它不會立即發生，請在一個小時後才嘗試登入。"
+
+#~ msgid ""
+#~ "Authorized keys:<br /><em>Important: Make sure there are no line breaks "
+#~ "except between keys. After submitting, verify that the number of keys in "
+#~ "your file is what you expected.</em>"
+#~ msgstr ""
+#~ "認證Keys：<br /><span class=\"important\">重要：確定除了在Keys之間外沒有斷"
+#~ "行字元，在提交之後，檢驗您檔案中Keys的數值是您所期望的。</span>"
+
+#~ msgid "Phone"
+#~ msgstr "電話："
+
+#~ msgid "Fax"
+#~ msgstr "傳真："
+
+#~ msgid "Login with SSL"
+#~ msgstr "透過SSL登入"
+
+#~ msgid ""
+#~ "Someone (presumably you) on the %s site requested a password change "
+#~ "through email verification."
+#~ msgstr "有人 （大概就是您本人）在 %s 網站上申請通過email確認來更改密碼。"
+
+#~ msgid "If this was not you, ignore this message and nothing will happen."
+#~ msgstr "如果這個人不是您，那麼就忽略這封mail，當做一切都沒有發生。"
+
+#~ msgid ""
+#~ "If you requested this verification, visit the following URL to change "
+#~ "your password:"
+#~ msgstr "如果是您發出找個請求確認，請點擊下面的網址來改變您的密碼："
+
+#~ msgid ""
+#~ "You are now being sent a confirmation email to verify your email address. "
+#~ "Visiting the link sent to you in this email will activate your account."
+#~ msgstr ""
+#~ "一封確認email已經發送到您的email信箱，以確保您email信箱的正確性。點擊email"
+#~ "中的連結就可以啟動您的帳號。"
+
+#~ msgid "Approving Project"
+#~ msgstr "審核中群組"
+
+#~ msgid "Other Information"
+#~ msgstr "其他資訊"
+
+#~ msgid "Active site users: <strong>%1$s</strong>"
+#~ msgstr "啟用中的使用者：<strong>%1$s</strong>"
+
+#~ msgid "If you are not sure then why did you click “Delete”?"
+#~ msgstr "如果您無法確定，為何要點擊 '刪除'？"
+
+#~ msgid "New category short name (no spaces, Unix-like)"
+#~ msgstr "新類別縮寫 (沒有空白，像是Unix)"
+
+#~ msgid ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific project, visit admin "
+#~ "page of that project (below)."
+#~ msgstr ""
+#~ "這個頁面只能修改使用者物件的直接屬性，要在特定的群組中編輯適當的屬性請連到"
+#~ "那個群組的管理頁面 (下面)。"
+
+#~ msgid "Error: Choose a User To Monitor First"
+#~ msgstr "錯誤 － 先選擇某個會員"
+
+#~ msgid "No Forums Found for %s"
+#~ msgstr "%s 沒有討論區"
+
+#~ msgid ""
+#~ "Edit the Release Notes or Change Log for this release of this package. "
+#~ "These changes will apply to all files attached to this release."
+#~ msgstr ""
+#~ "編輯本套裝軟體本次發佈的通知或者更改日誌。這些改動將被更新到本次發佈中的所"
+#~ "有文件中。"
+
+#~ msgid ""
+#~ "You can either upload the release notes and change log individually, or "
+#~ "paste them in together below."
+#~ msgstr "您可以分別上傳發佈通知和更改日誌，也可以在下面貼在一起。"
+
+#~ msgid "Project totals"
+#~ msgstr "專案檔案總數"
+
+#~ msgid "This drop-down box represents the current status of a tracker item."
+#~ msgstr "這下拉式選單代表一個追蹤者項目的現在狀態。"
+
+#~ msgid ""
+#~ "You can set the status to 'Pending' if you are waiting for a response "
+#~ "from the tracker item author.  When the author responds the status is "
+#~ "automatically reset to that of 'Open'. Otherwise, if the author doesn't "
+#~ "respond with an admin-defined amount of time (default is 14 days) then "
+#~ "the item is given a status of 'Deleted'."
+#~ msgstr ""
+#~ "如果你正在等候來自追蹤者項目作者的一個回應，你能將狀態設定為'未決定的'。當"
+#~ "作者回應時，這狀態將自動重新設定為'Open'。否則，如果作者未在管理員定義的時"
+#~ "間點內回應(預設是14天)，然後這個項目將被給予'Deleted'的狀態。"
+
+#~ msgid ""
+#~ "The Sort By option allows you to determine how the browse results are "
+#~ "sorted."
+#~ msgstr "藉由選項排序允許您決定如何瀏覽被排序後的結果。"
+
+#~ msgid ""
+#~ "You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, "
+#~ "or Assignee.  You can also have the results sorted in Ascending or "
+#~ "Descending order."
+#~ msgstr ""
+#~ "在選項中您可以選擇排序ID、優先權、摘要、啟用日期、結束日期、發表人或受託"
+#~ "人，甚至您也可以升冪或降冪排序結果。"
+
+#~ msgid ""
+#~ "The Data Type option determines the type of tracker item this is.  Since "
+#~ "the tracker rolls into one the bug, patch, support, etc... managers you "
+#~ "need to be able to determine which one of these an item should belong."
+#~ msgstr ""
+#~ "資料類型選項決定追蹤者的類型項目，既然追蹤者包含bug、patch、支援等等...管"
+#~ "理者，您需要能夠決定一個項目該屬於這些之中的哪一種？"
+
+#~ msgid ""
+#~ "This has the added benefit of enabling an admin to turn a support request "
+#~ "into a bug."
+#~ msgstr "這有附加利益促成一個管理將一個支援要求變成一個Bug。"
+
+#~ msgid ""
+#~ "The priority option allows a user to define a tracker item priority "
+#~ "(ranging from 1-Lowest to 5-Highest)."
+#~ msgstr ""
+#~ "優先權選項允許一個使用者定義追蹤者項目優先權(排列從 1-最低 到 5-最高)。"
+
+#~ msgid ""
+#~ "This is especially helpful for bugs and support requests where a user "
+#~ "might find a critical problem with a project."
+#~ msgstr ""
+#~ "這對一個使用者可能發現該專案一個重要問題時的Bugs和支援要求是特別有幫助的。"
+
+#~ msgid ""
+#~ "The canned response drop-down represents a list of project admin-defined "
+#~ "canned responses to common support or bug submission."
+#~ msgstr "回應類別會顯示專案管理員定義的支援或是問題類型。"
+
+#~ msgid ""
+#~ "If you are a project admin you can click the 'Manage Canned Responses' "
+#~ "link to define your own canned responses"
+#~ msgstr "如果您是專案管理員，您可以點擊 '(管理)' 來定義回應類別。"
+
+#~ msgid "My Diary and Notes"
+#~ msgstr "我的日記和筆記"
+
+#~ msgid "View Diary and Notes"
+#~ msgstr "瀏覽日記與筆記"
+
+#~ msgid "Notes and Changes"
+#~ msgstr "記事與異動"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "錯誤 - 標題和內容都是必須的"
+
+#~ msgid "Job inserted successfully"
+#~ msgstr "工作新增成功"
+
+#~ msgid "Job updated successfully"
+#~ msgstr "工作更新成功"
+
+#~ msgid "Job update failed - wrong project_id"
+#~ msgstr "工作更新失敗 － 錯誤的專案編號"
+
+#~ msgid "Job skill updated successfully"
+#~ msgstr "工作技能更新成功"
+
+#~ msgid "Job skill update failed - wrong project_id"
+#~ msgstr "工作技能更新失敗 － 錯誤的專案編號"
+
+#~ msgid "Job skill deleted successfully"
+#~ msgstr "工作技能刪除成功"
+
+#~ msgid "Job skill delete failed - wrong project_id"
+#~ msgstr "工作技能刪除失敗 － 錯誤的專案編號"
+
+#~ msgid ""
+#~ "The following option determines if others can see your skills. If they "
+#~ "cannot, you can still enter your skills."
+#~ msgstr ""
+#~ "以下選項決定別人是否可以看見您的技能。就算他們不能看見您的技能，您也可以一"
+#~ "樣的輸入您的技能。"
+
+#~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
+#~ msgstr "錯誤 - 文件必須大於20位元組，小於 256000位元組"
+
+#~ msgid "Choose the role for each user and then press “Add All”."
+#~ msgstr "選擇每個使用者的角色後點擊 \"Add All\"。"
+
+#~ msgid "Registration complete"
+#~ msgstr "註冊完成"
+
+#~ msgid "Thank you for choosing %1$s."
+#~ msgstr "感謝您選擇 %1$s"
+
+#~ msgid "Site-Wide Task and Hours (report)"
+#~ msgstr "網站任務 &amp; 小時 (報告)"
+
+#~ msgid ""
+#~ "Download a raw-text version of this code by clicking on “Download Version”"
+#~ msgstr "下載一個程式碼的純文字版本，藉由點擊\"下載版本\""
+
+#~ msgid "Area"
+#~ msgstr "區域"
+
 #, fuzzy
 #~ msgid "Bazaar Repository Browser"
 #~ msgstr "原始碼版本控制系統資料庫"
@@ -23063,9 +23448,8 @@ msgstr "帳號"
 #~ msgid "Repository name: "
 #~ msgstr "原始碼版本控制系統資料庫"
 
-#, fuzzy
 #~ msgid "No Valid Group Object"
-#~ msgstr "沒有有效的群組物件"
+#~ msgstr "無效的群組物件"
 
 #, fuzzy
 #~ msgid "Project:"
@@ -24630,3 +25014,54 @@ msgstr "帳號"
 #, fuzzy
 #~ msgid "Invalid Group Name"
 #~ msgstr "Unix群組名稱："
+
+#~ msgid "Error doing insert"
+#~ msgstr "新增操作錯誤"
+
+#~ msgid "Error Getting %s"
+#~ msgstr "取得 %s 時錯誤"
+
+#~ msgid "Error inserting into skill inventory"
+#~ msgstr "錯誤 － 無法新增技能目錄"
+
+#~ msgid "Invalid MessageID"
+#~ msgstr "無效的文章編號"
+
+#~ msgid "Followup"
+#~ msgstr "回覆"
+
+#~ msgid "Check &nbsp;all"
+#~ msgstr "全選"
+
+#~ msgid "Clear &nbsp;all"
+#~ msgstr "全部清除"
+
+#~ msgid "Project&nbsp;Openings"
+#~ msgstr "尋求協助"
+
+#~ msgid ""
+#~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "
+#~ "the document (e.g. How to use the download server)<br /"
+#~ "><strong>Description:</strong> A brief description to be placed just "
+#~ "under the title."
+#~ msgstr ""
+#~ "<strong>文件標題</strong>：引用文件中相關的簡單標題（例如：如何使用下載伺"
+#~ "服器）<br /><strong>說明：</strong>放在該標題下的簡單說明。"
+
+#~ msgid "I am Really Sure."
+#~ msgstr "我非常確定"
+
+#~ msgid "I am Sure."
+#~ msgstr "我確定"
+
+#~ msgid "Document Manager: Display Document"
+#~ msgstr "專案管理：顯示文件"
+
+#~ msgid "Error: No group was chosen or you cannot access it"
+#~ msgstr "錯誤 - 沒有選擇分組編號"
+
+#~ msgid "Error: disabled feature."
+#~ msgstr "錯誤 - 停用的功能"
+
+#~ msgid "Error: For some reason group_id and/or survey_id did not make it he"
+#~ msgstr "錯誤 - 基於某些理由，群組編號或問卷編號不能出現在這個頁面"

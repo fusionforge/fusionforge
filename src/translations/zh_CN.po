@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 12:22+0200\n"
+"POT-Creation-Date: 2013-06-25 17:51+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -631,8 +631,8 @@ msgstr "最后修改日期"
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/snippet/download.php:45 www/survey/admin/question.php:64
-#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:82
-#: www/survey/admin/show_csv.php:84 www/survey/admin/show_results.php:69
+#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:80
+#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:69
 #: www/survey/admin/show_results.php:73 www/survey/admin/show_results.php:84
 #: www/survey/admin/show_results.php:86 www/survey/admin/show_results.php:133
 #: www/survey/admin/show_results.php:135 www/tracker/admin/index.php:190
@@ -4174,9 +4174,9 @@ msgstr ""
 "-- %1$s 工作团队\n"
 
 #: common/mail/MailingList.class.php:201
-#, fuzzy, php-format
+#, php-format
 msgid "%s New Mailing List"
-msgstr "%1$s 新的邮件列表"
+msgstr "%s 新的邮件列表"
 
 #: common/mail/MailingList.class.php:221
 #, fuzzy
@@ -4434,9 +4434,8 @@ msgid "Question Added"
 msgstr "问题添加了"
 
 #: common/survey/SurveyQuestion.class.php:149
-#, fuzzy
 msgid "Update failed"
-msgstr "每日更新"
+msgstr "更新错误"
 
 #: common/survey/SurveyQuestion.class.php:194
 msgid "Error finding question"
@@ -4998,7 +4997,6 @@ msgstr "全部清除"
 #: www/pm/add_task.php:124 www/pm/browse_task.php:241
 #: www/pm/browse_task.php:381 www/pm/detail_task.php:125
 #: www/pm/mod_task.php:173
-#, fuzzy
 msgid "Assigned to"
 msgstr "指定给"
 
@@ -6419,12 +6417,11 @@ msgid "Unable to Create Template Group Object"
 msgstr "创建群组对象时发生错误"
 
 #: common/tracker/views/form-clonetracker.php:51
-#, fuzzy
 msgid ""
 "The site administrator must first set up template trackers in the template "
 "projet with default values and set permissions propertly so you can access "
 "them."
-msgstr "选择复制模板。站点管理员需要正确配置默认值和权限令你能够访问。"
+msgstr "站点管理员需要正确配置默认值和权限令你能够访问。"
 
 #: common/tracker/views/form-clonetracker.php:54
 msgid "Choose the template tracker to clone."
@@ -7581,16 +7578,14 @@ msgstr ""
 #: db/20130127-extratabToHeadermenuMigration.php:81
 #: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:99
 #: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:95
-#, fuzzy
 msgid "Soft link wasn't removed in www/plugins folder, please do so manually."
-msgstr "<br>www/plugins目录下的符号链接未删除，请手工删除。"
+msgstr "www/plugins目录下的符号链接未删除，请手工删除。"
 
 #: db/20130127-extratabToHeadermenuMigration.php:90
 #: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:108
 #: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:104
-#, fuzzy
 msgid "Soft link wasn't removed in config folder, please do so manually."
-msgstr "<br>www/plugins目录下的符号链接未删除，请手工删除。"
+msgstr "config目录下的符号链接未删除，请手工删除。"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:66
 #: plugins/authcas/include/AuthCASPlugin.class.php:88
@@ -7609,9 +7604,8 @@ msgstr "无效的Email"
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
 #: www/account/lostpw.php:89 www/account/pending-resend.php:71
 #: www/account/verify.php:78
-#, fuzzy
 msgid "Login name"
-msgstr "用户名称："
+msgstr "用户名称"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: www/account/verify.php:82
@@ -10354,9 +10348,8 @@ msgid "Unable to get the lists"
 msgstr ""
 
 #: plugins/mailman/www/admin/index.php:144
-#, fuzzy
 msgid "Mailing List Name"
-msgstr "邮件列表名称："
+msgstr "邮件列表名称"
 
 #: plugins/mailman/www/admin/index.php:147
 #: plugins/mailman/www/admin/index.php:179 www/mail/admin/index.php:191
@@ -12983,9 +12976,9 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:150
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:175
 #: plugins/scmsvn/common/SVNPlugin.class.php:197
-#, fuzzy, php-format
+#, php-format
 msgid "%s Repository Browser"
-msgstr "存储库浏览"
+msgstr "%s 存储库浏览"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:137
 #: plugins/scmccase/common/CCasePlugin.class.php:115
@@ -13925,20 +13918,18 @@ msgid ""
 "Changing your email address will require confirmation from your new email "
 "address, so that we can ensure we have a good email address on file."
 msgstr ""
+"为了保证我们拥有您正确的email信箱，改变您的email信箱，将会要求新email信箱的确"
+"认。"
 
 #: www/account/change_email.php:81
-#, fuzzy
 msgid ""
 "We need to maintain an accurate email address for each user due to the level "
 "of access we grant via this account. If we need to reach a user for issues "
 "arriving from a shell or project account, it is important that we be able to "
 "do so."
 msgstr ""
-"<p>为了保证我们拥有您正确的email信箱，改变您的email信箱，将会要求新email信箱"
-"的确认。</p><p>我们需要维护每个用户的正确email信箱，是为了通过这个帐号来对用"
-"户进行授权访问。当这个帐号有重要的事件需要通知时，有个确切的email信箱才能使我"
-"们做到这一点。</p>  <p>提交这个表单，将会发出一个要求确认的网址到新的email信"
-"箱，访问那个链接就可以完成email信箱的改变。</p>"
+"我们需要维护每个用户的正确email信箱，是为了通过这个帐号来对用户进行授权访问。"
+"当这个帐号有重要的事件需要通知时，有个确切的email信箱才能使我们做到这一点。"
 
 #: www/account/change_email.php:82
 msgid ""
@@ -14073,7 +14064,6 @@ msgstr ""
 "ssh/id_rsa.pub' (protocol 2)。关于公钥请阅读SSH说明书来获取更进一步信息。</p>"
 
 #: www/account/editsshkeys.php:75
-#, fuzzy
 msgid ""
 "To generate a public key, run the program 'ssh-keygen' (you can use both "
 "protocol 1 or 2). The public key will be placed at '~/.ssh/identity."
@@ -14081,12 +14071,10 @@ msgid ""
 "pub' (protocol version 2). Read the ssh documentation for further "
 "information on sharing keys."
 msgstr ""
-"<p>为了避免必须每次输入您的 CVS/SSH 开发人员帐号的密码，您可以在这里上传您的"
-"公钥，而它们将被放置在 CVS 服务器中您的 ~/.ssh/authorized_keys 文件中。此文件"
-"不会立即更新，请在一个小时后才尝试登录。</p><p>为了产生这个公钥，执行这个程"
-"序 'ssh-keygen' (您可以使用protocol 1 或 2 两者其中之一)，这个 public key 将"
-"被放置在 '~/.ssh/identity.pub' (protocol 1) 与 '~/.ssh/id_dsa.pub' 或 '~/."
-"ssh/id_rsa.pub' (protocol 2)。关于公钥请阅读SSH说明书来获取更进一步信息。</p>"
+"为了产生这个公钥，执行这个程序 'ssh-keygen' (您可以使用protocol 1 或 2 两者其"
+"中之一)，这个 public key 将被放置在 '~/.ssh/identity.pub' (protocol 1) 与 "
+"'~/.ssh/id_dsa.pub' 或 '~/.ssh/id_rsa.pub' (protocol 2)。关于公钥请阅读SSH说"
+"明书来获取更进一步信息。"
 
 #: www/account/editsshkeys.php:76
 #, fuzzy
@@ -14108,7 +14096,7 @@ msgstr ""
 msgid ""
 "You are now a registered user on %1$s, the online development environment "
 "for Open Source projects."
-msgstr ""
+msgstr "您现在是 %1$s 的一个注册用户。 %1$s 是开放源码软件项目的在线开发环境。"
 
 #: www/account/first.php:33
 #, fuzzy, php-format
@@ -15261,9 +15249,8 @@ msgid "Display Projects Beginning with:"
 msgstr "显示群组，首字母："
 
 #: www/admin/index.php:148
-#, fuzzy
 msgid "Search <em>(groupid, project Unix name, project full name)</em>"
-msgstr "搜索 <em>(群组编号、群组 unix 名称、完整名称)</em>"
+msgstr "搜索 <em>(群组编号、群组 Unix 名称、完整名称)</em>"
 
 #: www/admin/index.php:155
 msgid "Register New Project"
@@ -15532,7 +15519,7 @@ msgstr "不采取动作"
 #: www/admin/pending-news.php:150 www/export/rssAboTask.php:146
 #: www/my/diary.php:185 www/news/admin/index.php:137 www/news/submit.php:148
 msgid "Details"
-msgstr ""
+msgstr "细节"
 
 #: www/admin/pluginman.php:55
 #, php-format
@@ -15750,12 +15737,10 @@ msgid "New category short name (no spaces, unix-like)"
 msgstr "新类别缩写 (没有空白，像是Unix)"
 
 #: www/admin/trove/trove_cat_add.php:119
-#, fuzzy
 msgid "New category full name (Maximum length is 80 chars)"
 msgstr "新类别完整名称 (80字节)"
 
 #: www/admin/trove/trove_cat_add.php:121
-#, fuzzy
 msgid "New category description (Maximum length is 255 chars)"
 msgstr "新类别说明 (255字节)"
 
@@ -16163,7 +16148,6 @@ msgid "User could not be found."
 msgstr "找不到论坛"
 
 #: www/developer/diary.php:44
-#, fuzzy
 msgid "Diary and Notes for"
 msgstr "日记和笔记"
 
@@ -16177,7 +16161,6 @@ msgid "Posted on "
 msgstr "张贴者"
 
 #: www/developer/diary.php:62
-#, fuzzy
 msgid "Existing Diary and Notes Entries"
 msgstr "已有的日记和笔记"
 
@@ -16208,16 +16191,13 @@ msgstr "用户已被监视"
 
 #: www/developer/monitor.php:68
 msgid "You will now be emailed this user's diary entries."
-msgstr ""
+msgstr "当用户增加日记时，您将收到该日记的内容。"
 
 #: www/developer/monitor.php:69
-#, fuzzy
 msgid ""
 "To turn off monitoring, simply click the <strong>Monitor user</strong> link "
 "again."
-msgstr ""
-"<p>当用户增加日记时，您将收到该日记的内容。</p><p>如果不想监视，只要简单的点"
-"一下<strong>监视用户</strong> 链接</p>"
+msgstr "如果不想监视，只要简单的点一下<strong>监视用户</strong> 链接"
 
 #: www/developer/monitor.php:76
 msgid "Monitoring has been turned off"
@@ -18161,9 +18141,8 @@ msgid "Unable to get the list %s : %s"
 msgstr ""
 
 #: www/mail/index.php:78
-#, fuzzy
 msgid "Address"
-msgstr "住址："
+msgstr "住址"
 
 #: www/mail/index.php:97
 #, php-format
@@ -18424,9 +18403,8 @@ msgid "These items were approved this past week (total: %1$s)"
 msgstr "这些项目过去的一个星期被核准(总共：%1$s)"
 
 #: www/news/index.php:38
-#, fuzzy
 msgid "Choose a News item and you can browse, search, and post messages."
-msgstr "<p>选择一条新闻进行阅读、查询和发布消息<p>"
+msgstr "选择一条新闻进行阅读、查询和发布消息"
 
 #: www/news/index.php:72
 #, fuzzy, php-format
@@ -18639,7 +18617,7 @@ msgstr ""
 
 #: www/people/editjob.php:159
 msgid "All postings are automatically closed after two weeks."
-msgstr ""
+msgstr "您的布告在两星期后自动关闭。"
 
 #: www/people/editjob.php:175
 msgid "Update Descriptions"
@@ -18918,7 +18896,6 @@ msgid "Added to skill inventory"
 msgstr "加入到技能目录"
 
 #: www/people/people_utils.php:108 www/people/people_utils.php:216
-#, fuzzy
 msgid "Error: skill already in your inventory"
 msgstr "错误 － 技能已经在您的目录中"
 
@@ -21381,7 +21358,6 @@ msgid "People"
 msgstr "人"
 
 #: www/search/index.php:82
-#, fuzzy
 msgid "Error: Invalid search"
 msgstr "错误 - 无法搜索"
 
@@ -21457,12 +21433,10 @@ msgid "Submit A New Snippet"
 msgstr "上传一个新的代码"
 
 #: www/snippet/add_snippet_to_package.php:56
-#, fuzzy
 msgid "Error: snippet_package_version_id missing"
 msgstr "错误 - snippet_package_version_id 错误"
 
 #: www/snippet/add_snippet_to_package.php:72
-#, fuzzy
 msgid "Error: Only the creator of a package version can add snippets to it."
 msgstr "错误 - 只有软件包版本的创建者可以添加代码到其中"
 
@@ -21478,15 +21452,13 @@ msgid "Back To Add Page"
 msgstr "回到添加页面"
 
 #: www/snippet/add_snippet_to_package.php:96
-#, fuzzy
 msgid "Error: That snippet was already added to this package."
 msgstr "错误 - 那个代码已经添加到这个软件包中"
 
 #: www/snippet/add_snippet_to_package.php:108 www/snippet/addversion.php:71
 #: www/snippet/submit.php:74
-#, fuzzy
 msgid "Error doing snippet version insert"
-msgstr "错误 - 代码不存在"
+msgstr "添加代码版本时发生错误！"
 
 #: www/snippet/add_snippet_to_package.php:110 www/snippet/addversion.php:74
 msgid "Snippet Version Added Successfully."
@@ -21495,7 +21467,6 @@ msgstr "代码版本添加成功"
 #: www/snippet/add_snippet_to_package.php:113 www/snippet/addversion.php:77
 #: www/snippet/addversion.php:198 www/snippet/package.php:123
 #: www/snippet/submit.php:81
-#, fuzzy
 msgid "Error: Go back and fill in all the information"
 msgstr "错误 - 回上页并且填入所有信息"
 
@@ -21531,7 +21502,6 @@ msgid "Snippets In This Package"
 msgstr "这个软件包的代码"
 
 #: www/snippet/addversion.php:39
-#, fuzzy
 msgid "Error: snippet doesn't exist"
 msgstr "错误 - 代码不存在"
 
@@ -21558,9 +21528,8 @@ msgid "Error: snippet_package doesn't exist"
 msgstr "错误, 错误 - 代码软件包不存在"
 
 #: www/snippet/addversion.php:154 www/snippet/package.php:75
-#, fuzzy
 msgid "Error doing snippet package version insert"
-msgstr "错误 - snippet_package_version_id 错误"
+msgstr "插入代码软件包版本时发生错误！"
 
 #: www/snippet/addversion.php:155
 #, fuzzy
@@ -21665,7 +21634,6 @@ msgid "Error: mangled URL?"
 msgstr "错误, 错误 - 网址格式有误"
 
 #: www/snippet/detail.php:57 www/snippet/detail.php:147
-#, fuzzy
 msgid "Error: no versions found"
 msgstr "错误 - 未发现版本"
 
@@ -21832,9 +21800,8 @@ msgid "Choose One"
 msgstr "选择一个"
 
 #: www/snippet/snippet_utils.php:27
-#, fuzzy
 msgid "Unix Admin"
-msgstr "网站管理"
+msgstr "Unix管理"
 
 #: www/snippet/snippet_utils.php:28
 msgid "HTML Manipulation"
@@ -21913,9 +21880,8 @@ msgid "Create A Package"
 msgstr "创建一个软件包"
 
 #: www/snippet/submit.php:59
-#, fuzzy
 msgid "Error doing snippet insert"
-msgstr "插入时发生错误"
+msgstr "添加代码时发生错误！"
 
 #: www/snippet/submit.php:61 www/snippet/submit.php:76
 msgid "Snippet Added Successfully."
@@ -22301,7 +22267,7 @@ msgstr "编辑一个问题"
 msgid "Add a Question"
 msgstr "添加一个问题"
 
-#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:61
+#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
 #: www/survey/admin/show_questions.php:35
 #: www/survey/admin/show_results_aggregate.php:35
 #: www/survey/admin/show_results_comments.php:36
@@ -22333,7 +22299,7 @@ msgstr "更新成功"
 msgid "No questions found"
 msgstr "找到 %1$s 个问题"
 
-#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:133
+#: www/survey/admin/show_csv.php:80 www/survey/admin/show_results.php:133
 #, fuzzy
 msgid "Cannot get Survey Response Factory"
 msgstr "没有发现问卷回应"
@@ -22650,9 +22616,8 @@ msgid "Flag"
 msgstr ""
 
 #: www/survey/survey.php:51
-#, fuzzy
 msgid "Vote for Survey"
-msgstr "问卷名称："
+msgstr "问卷名称"
 
 #: www/survey/survey.php:55 www/survey/survey_resp.php:49
 #, fuzzy
@@ -23027,6 +22992,480 @@ msgstr "大量更新"
 msgid "No User Name Provided"
 msgstr "帐号"
 
+#~ msgid "Could not Update Master Thread parent with current time"
+#~ msgstr "目前无法更新 Master Thread parent"
+
+#~ msgid "Error: this news item was not found"
+#~ msgstr "错误 - 没发现新闻"
+
+#~ msgid "No Valid Forum Object"
+#~ msgstr "讨论区信息：无效的讨论区对象"
+
+#~ msgid "Posting Failed"
+#~ msgstr "张贴失败"
+
+#~ msgid "Unable to get new message id"
+#~ msgstr "无法获得文章编号"
+
+#~ msgid "Must Include A Message Body And Subject"
+#~ msgstr "必须包括文章标题和内容"
+
+#~ msgid "No Valid ParentMessage Object"
+#~ msgstr "无效的 ParentMessage 对象"
+
+#~ msgid ""
+#~ "Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
+#~ msgstr "文件名只能是字符和“-”, “_”, “+”, “.”, “~”。"
+
+#~ msgid "Project %1$s (%2$s) has released a new version of package “%3$s”."
+#~ msgstr "项目 %1$s(%2$s)已发布一个新的版本包 “%3$s”。"
+
+#~ msgid "You can download it by following this link"
+#~ msgstr "您可以通过下面的链接下载"
+
+#~ msgid "Group object already exists"
+#~ msgstr "已经存在同名组"
+
+#~ msgid "Error: Cannot create group: %s"
+#~ msgstr "错误：不能创建组:%s"
+
+#~ msgid "Error: Cannot get group id: %s"
+#~ msgstr "错误：不能获取组编号:%s"
+
+#~ msgid "Error: Cannot add admin to newly created group: %s"
+#~ msgstr "错误: 不能将管理员帐号添加到新建组:%s"
+
+#~ msgid "Error: Cannot change group properties: %s"
+#~ msgstr "错误:数据库:不能更改组属性:%s"
+
+#~ msgid "Error: Cannot change group status: %s"
+#~ msgstr "错误: 数据库: 不能更改组状态: %s"
+
+#~ msgid "Could not insert SCM_BOX to database"
+#~ msgstr "不能插入版本控制主机(SCM_BOX)到数据库"
+
+#~ msgid "SCM Box cannot be empty"
+#~ msgstr "必须填写版本控制主机地址(SCM BOX)"
+
+#~ msgid "Error: Could Not Add User To Group: %s"
+#~ msgstr "错误:不能将用户加到组：%s"
+
+#~ msgid "Error: User not removed: %s"
+#~ msgstr "错误：用户没有被删除：%s"
+
+#~ msgid "Error: project_assigned_to %d: %s"
+#~ msgstr "错误：数据库：项目被指定给　%d: %s"
+
+#~ msgid "Your project registration for %s has been approved."
+#~ msgstr "你注册的项目 %s 已经批准.项目"
+
+#~ msgid "-- the %s staff"
+#~ msgstr "%s 团队"
+
+#~ msgid "%s Project Approved"
+#~ msgstr "%s 项目通过审核了"
+
+#~ msgid "Your project registration for %s has been denied."
+#~ msgstr "您在 %s 的项目注册被取消了"
+
+#~ msgid "Reasons for negative decision"
+#~ msgstr "原因"
+
+#~ msgid "%s Project Denied"
+#~ msgstr "%s 项目被取消了"
+
+#~ msgid "New %s Project Submitted"
+#~ msgstr "新项目 %s 已提交"
+
+#~ msgid "Submitted Description"
+#~ msgstr "已提交的说明"
+
+#~ msgid ""
+#~ "The %s admin team will now examine your project submission. You will be "
+#~ "notified of their decision."
+#~ msgstr "%s 的管理团队会尽快审核您注册的项目，通过审核与否您都会收到通知。"
+
+#~ msgid "%1$s (%2$s) has requested to join your project."
+#~ msgstr "%1$s (%2$s) 已经请求参与您的项目。"
+
+#~ msgid "You can approve this request here: %s"
+#~ msgstr "你能在这里核准这一个请求: %s"
+
+#~ msgid "Request to Join Project %s"
+#~ msgstr "请求参与项目 %s"
+
+#~ msgid ""
+#~ "Config file could not be linked to etc/gforge/plugins/%s. Check the write "
+#~ "permissions for apache in /etc/gforge/plugins or create the link manually."
+#~ msgstr ""
+#~ "配置文件无法链接到/etc/gforge/plugins/%s。请检查apache在/etc/gforge/"
+#~ "plugins 的写权限或手工创建。"
+
+#~ msgid "Read"
+#~ msgstr "读"
+
+#~ msgid "Tech & Admin"
+#~ msgstr "技术&管理"
+
+#~ msgid "Project Admin"
+#~ msgstr "项目管理"
+
+#~ msgid "Enjoy the site."
+#~ msgstr "享用这个网站吧。"
+
+#~ msgid "%s Account Registration"
+#~ msgstr "%s 帐号注册"
+
+#~ msgid ""
+#~ "A mailing list will be created on %1$s in one hour\n"
+#~ "and you are the list administrator.\n"
+#~ "\n"
+#~ "This list is: %3$s@%2$s .\n"
+#~ "\n"
+#~ "Your mailing list info is at:\n"
+#~ "%4$s .\n"
+#~ "\n"
+#~ "List administration can be found at:\n"
+#~ "%5$s .\n"
+#~ "\n"
+#~ "Your list password is: %6$s .\n"
+#~ "You are encouraged to change this password as soon as possible.\n"
+#~ "\n"
+#~ "Thank you for registering your project with %1$s."
+#~ msgstr ""
+#~ "邮件列表会在6~24小时内创建于 %1$s  \n"
+#~ "您是邮件列表的管理者\n"
+#~ "\n"
+#~ "这个邮件列表是：%3$s@%2$s \n"
+#~ "\n"
+#~ "您的邮件列表信息在：\n"
+#~ "%4$s \n"
+#~ "\n"
+#~ "邮件列表管理介面：\n"
+#~ "%5$s \n"
+#~ "\n"
+#~ "邮件列表密码：%6$s \n"
+#~ "建议您尽快修改这个密码\n"
+#~ "\n"
+#~ "谢谢您将项目创建在 %1$s"
+
+#~ msgid "%s Reporting"
+#~ msgstr "%s 报告"
+
+#~ msgid "Last 24 h"
+#~ msgstr "昨天"
+
+#~ msgid "Last 7 days"
+#~ msgstr "前七天"
+
+#~ msgid "Last 2 weeks"
+#~ msgstr "前两星期"
+
+#~ msgid "Last month"
+#~ msgstr "上个月"
+
+#~ msgid "* Denotes requests > %s Days Old"
+#~ msgstr "* 指示请求 > %s 天之久"
+
+#~ msgid "No Canned Responses set up in this Project"
+#~ msgstr "在本群组回应未设置"
+
+#~ msgid "Choose the tracker to clone."
+#~ msgstr "选择复制模板。"
+
+#~ msgid "I am Sure"
+#~ msgstr "我确定"
+
+#~ msgid "I am Really Sure"
+#~ msgstr "我非常确定"
+
+#~ msgid "You are not monitoring any files."
+#~ msgstr "您没有监视任何文件发布"
+
+#~ msgid "There are no public subprojects available"
+#~ msgstr "目前没有公开的子项目"
+
+#~ msgid "This mail is sent to you to remind you of pending/overdue tasks."
+#~ msgstr "这邮件被寄给你使你想起未决定/过期的任务。"
+
+#~ msgid "The task manager item #%s is pending"
+#~ msgstr "任务管理员项目 #%s 是未决定"
+
+#~ msgid "Click here to visit the item %s"
+#~ msgstr "点击这里拜访这个项目: %s"
+
+#~ msgid ""
+#~ "This mail is sent to you to remind you of pending/overdue tracker items."
+#~ msgstr "这邮件被寄给你使你想起未决定/过期的跟踪者项目。"
+
+#~ msgid "The item #%s is pending"
+#~ msgstr "项目 #%s 是未决定"
+
+#~ msgid ""
+#~ "Visiting the link sent to you in this email will activate your account."
+#~ msgstr "点击email中的链接就可以启动您的帐号。"
+
+#~ msgid ""
+#~ "You can administrate lists from here. Please note that private lists can "
+#~ "still be viewed by members of your project, but are not listed on %s."
+#~ msgstr ""
+#~ "您可以从这里管理邮件列表，请注意，隐藏的邮件列表还是可以从您的项目网页看"
+#~ "到，但是不会出现在 %1$s。"
+
+#~ msgid "No Lists found for %s"
+#~ msgstr "%s 没有任何邮件列表"
+
+#~ msgid ""
+#~ "A mailing list will be created on %1$s in few minutes\n"
+#~ "and you are the list administrator.\n"
+#~ "\n"
+#~ "This list is: %3$s@%2$s .\n"
+#~ "\n"
+#~ "Your mailing list info is at:\n"
+#~ "%4$s .\n"
+#~ "\n"
+#~ "List administration can be found at:\n"
+#~ "%5$s .\n"
+#~ "\n"
+#~ "Your list password is: %6$s .\n"
+#~ "You are encouraged to change this password as soon as possible.\n"
+#~ "\n"
+#~ "Thank you for registering your project with %1$s."
+#~ msgstr ""
+#~ "邮件列表会在6~24小时内创建于 %1$s  \n"
+#~ "您是邮件列表的管理者\n"
+#~ "\n"
+#~ "这个邮件列表是：%3$s@%2$s \n"
+#~ "\n"
+#~ "您的邮件列表信息在：\n"
+#~ "%4$s \n"
+#~ "\n"
+#~ "邮件列表管理介面：\n"
+#~ "%5$s \n"
+#~ "\n"
+#~ "邮件列表密码：%6$s \n"
+#~ "建议您尽快修改这个密码\n"
+#~ "\n"
+#~ "谢谢您将项目创建在 %1$s"
+
+#~ msgid "You have requested a change of email address on %s."
+#~ msgstr "您申请在 %s 上更改您的email信箱。"
+
+#~ msgid "Please visit the following URL to complete the email change:"
+#~ msgstr " 请点击这个网址来完成email信箱的改变："
+
+#~ msgid "New Email Address"
+#~ msgstr "新的Email"
+
+#~ msgid ""
+#~ "To avoid having to type your password every time for your CVS/SSH "
+#~ "developer account, you may upload your public key(s) here and they will "
+#~ "be placed on the CVS server in your ~/.ssh/authorized_keys file. This is "
+#~ "done by a cron job, so it may not happen immediately.  Please allow for a "
+#~ "one hour delay."
+#~ msgstr ""
+#~ "为了避免必须每次输入您的 CVS/SSH 开发人员帐号的密码，您可以在这里上传您的"
+#~ "公钥，而它们将被放置在 CVS 服务器中您的 ~/.ssh/authorized_keys 文件中。此"
+#~ "文件不会立即更新，请在一个小时后才尝试登录。"
+
+#~ msgid ""
+#~ "Authorized keys:<br /><em>Important: Make sure there are no line breaks "
+#~ "except between keys. After submitting, verify that the number of keys in "
+#~ "your file is what you expected.</em>"
+#~ msgstr ""
+#~ "认证密钥：<br /><span class=\"important\">重要：确定除了在密钥之间外没有换"
+#~ "行符，在提交之后，检验您文件中密钥的数值是您所期望的。</span>"
+
+#~ msgid "Phone"
+#~ msgstr "电话："
+
+#~ msgid "Fax"
+#~ msgstr "传真："
+
+#~ msgid "Login with SSL"
+#~ msgstr "通过SSL登录"
+
+#~ msgid ""
+#~ "Someone (presumably you) on the %s site requested a password change "
+#~ "through email verification."
+#~ msgstr ""
+#~ "有人 （大概就是您本人）在 %s 网站上申请通过email确认来更改密码。如果这个"
+
+#~ msgid "If this was not you, ignore this message and nothing will happen."
+#~ msgstr "人不是您，那么就忽略这封mail，当做一切都没有发生。"
+
+#~ msgid ""
+#~ "If you requested this verification, visit the following URL to change "
+#~ "your password:"
+#~ msgstr "如果是您发出找个请求确认，请点击下面的网址来改变您的密码："
+
+#~ msgid ""
+#~ "You are now being sent a confirmation email to verify your email address. "
+#~ "Visiting the link sent to you in this email will activate your account."
+#~ msgstr ""
+#~ "一封确认email已经发送到您的email信箱，以确保您email信箱的正确性。点击email"
+#~ "中的链接就可以启动您的帐号。"
+
+#~ msgid "Approving Project"
+#~ msgstr "审核中群组"
+
+#~ msgid "Other Information"
+#~ msgstr "其他信息"
+
+#~ msgid "Active site users: <strong>%1$s</strong>"
+#~ msgstr "已激活的用户：<strong>%1$s</strong>"
+
+#~ msgid "If you are not sure then why did you click “Delete”?"
+#~ msgstr "如果您无法确定，为何要点击 '删除'？"
+
+#~ msgid "New category short name (no spaces, Unix-like)"
+#~ msgstr "新类别缩写 (没有空白，像是Unix)"
+
+#~ msgid ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific project, visit admin "
+#~ "page of that project (below)."
+#~ msgstr ""
+#~ "这个页面只能修改用户对象的直接属性，要在特定的群组中编辑适当的属性请连到那"
+#~ "个群组的管理页面 (下面)。"
+
+#~ msgid "Error: Choose a User To Monitor First"
+#~ msgstr "错误 － 先选择某个用户"
+
+#~ msgid "No Forums Found for %s"
+#~ msgstr "%s 没有讨论区"
+
+#~ msgid ""
+#~ "Edit the Release Notes or Change Log for this release of this package. "
+#~ "These changes will apply to all files attached to this release."
+#~ msgstr ""
+#~ "编辑本软件包本次发布的通知或者更改日志。这些改动将被更新到本次发布中的所有"
+#~ "文件中。"
+
+#~ msgid ""
+#~ "You can either upload the release notes and change log individually, or "
+#~ "paste them in together below."
+#~ msgstr "您可以分别上传发布通知和更改日志，也可以在下面贴在一起。"
+
+#~ msgid "Project totals"
+#~ msgstr "项目文件总数"
+
+#~ msgid "This drop-down box represents the current status of a tracker item."
+#~ msgstr "这下拉式选单代表一个跟踪者项目的现在状态。"
+
+#~ msgid ""
+#~ "The Sort By option allows you to determine how the browse results are "
+#~ "sorted."
+#~ msgstr "藉由选项排序允许您决定如何浏览被排序后的结果。"
+
+#~ msgid ""
+#~ "You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, "
+#~ "or Assignee.  You can also have the results sorted in Ascending or "
+#~ "Descending order."
+#~ msgstr ""
+#~ "在选项中您可以选择排序ID、优先权、摘要、启用日期、结束日期、发表人或被指定"
+#~ "人，甚至您也可以升序或降序排序结果。"
+
+#~ msgid ""
+#~ "The Data Type option determines the type of tracker item this is.  Since "
+#~ "the tracker rolls into one the bug, patch, support, etc... managers you "
+#~ "need to be able to determine which one of these an item should belong."
+#~ msgstr ""
+#~ "资料类型选项决定跟踪者的类型项目，既然跟踪者包含bug、patch、支持等等...管"
+#~ "理者，您需要能够决定一个项目该属于这些之中的哪一种？"
+
+#~ msgid ""
+#~ "This has the added benefit of enabling an admin to turn a support request "
+#~ "into a bug."
+#~ msgstr "这有附加利益促成一个管理将一个支持要求变成一个Bug。"
+
+#~ msgid ""
+#~ "The priority option allows a user to define a tracker item priority "
+#~ "(ranging from 1-Lowest to 5-Highest)."
+#~ msgstr ""
+#~ "优先权选项允许一个用户定义跟踪者项目优先权(排列从 1-最低 到 5-最高)。"
+
+#~ msgid ""
+#~ "This is especially helpful for bugs and support requests where a user "
+#~ "might find a critical problem with a project."
+#~ msgstr ""
+#~ "这对一个用户可能发现该项目一个重要问题时的Bugs和支持要求是特别有帮助的。"
+
+#~ msgid ""
+#~ "The canned response drop-down represents a list of project admin-defined "
+#~ "canned responses to common support or bug submission."
+#~ msgstr "回应类别会显示项目管理员定义的支持或是问题类型。"
+
+#~ msgid ""
+#~ "If you are a project admin you can click the 'Manage Canned Responses' "
+#~ "link to define your own canned responses"
+#~ msgstr "如果您是项目管理员，您可以点击 '(管理)' 来定义回应类别。"
+
+#~ msgid "My Diary and Notes"
+#~ msgstr "我的日记和笔记"
+
+#~ msgid "View Diary and Notes"
+#~ msgstr "浏览日记与笔记"
+
+#~ msgid "Notes and Changes"
+#~ msgstr "记事与变动"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "错误 - 标题和内容都是必须的"
+
+#~ msgid "Job inserted successfully"
+#~ msgstr "工作添加成功"
+
+#~ msgid "Job updated successfully"
+#~ msgstr "工作更新成功"
+
+#~ msgid "Job update failed - wrong project_id"
+#~ msgstr "工作更新失败 － 错误的项目编号"
+
+#~ msgid "Job skill updated successfully"
+#~ msgstr "工作技能更新成功"
+
+#~ msgid "Job skill update failed - wrong project_id"
+#~ msgstr "工作技能更新失败 － 错误的项目编号"
+
+#~ msgid "Job skill deleted successfully"
+#~ msgstr "工作技能删除成功"
+
+#~ msgid "Job skill delete failed - wrong project_id"
+#~ msgstr "工作技能删除失败 － 错误的项目编号"
+
+#~ msgid ""
+#~ "The following option determines if others can see your skills. If they "
+#~ "cannot, you can still enter your skills."
+#~ msgstr ""
+#~ "以下选项决定别人是否可以看见您的技能。就算他们不能看见您的技能，您也可以一"
+#~ "样的输入您的技能。"
+
+#~ msgid "Upload data into the tasks"
+#~ msgstr "上传资料给任务管理员"
+
+#~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
+#~ msgstr "错误 - 文件必须大于20字节，小于 256000字节"
+
+#~ msgid "Choose the role for each user and then press “Add All”."
+#~ msgstr "选择每个用户的角色后点击 \"Add All\"。"
+
+#~ msgid "Registration complete"
+#~ msgstr "注册完成"
+
+#~ msgid "Thank you for choosing %1$s."
+#~ msgstr "感谢您选择 %1$s"
+
+#~ msgid "Site-Wide Task and Hours (report)"
+#~ msgstr "网站任务 &amp; 小时 (报告)"
+
+#~ msgid ""
+#~ "Download a raw-text version of this code by clicking on “Download Version”"
+#~ msgstr "下载一个代码的纯文字版本，藉由点击\"下载版本\""
+
+#~ msgid "Area"
+#~ msgstr "区域"
+
 #, fuzzy
 #~ msgid "Bazaar Repository Browser"
 #~ msgstr "SCM Repository"
@@ -23047,9 +23486,8 @@ msgstr "帐号"
 #~ msgid "Repository name: "
 #~ msgstr "存储库浏览"
 
-#, fuzzy
 #~ msgid "No Valid Group Object"
-#~ msgstr "没有有效的群组对象"
+#~ msgstr "无效的群组对象"
 
 #, fuzzy
 #~ msgid "Project:"
@@ -24678,3 +25116,68 @@ msgstr "帐号"
 #, fuzzy
 #~ msgid "Invalid Group Name"
 #~ msgstr "Unix群组名称："
+
+#~ msgid "Error doing insert"
+#~ msgstr "添加操作错误"
+
+#~ msgid "Error Getting %s"
+#~ msgstr "取得 %s 时错误"
+
+#~ msgid "Error inserting into skill inventory"
+#~ msgstr "错误 － 无法添加技能目录"
+
+#~ msgid "Invalid MessageID"
+#~ msgstr "无效的文章编号"
+
+#~ msgid "Followup"
+#~ msgstr "回覆"
+
+#~ msgid "Check &nbsp;all"
+#~ msgstr "全选"
+
+#~ msgid "Clear &nbsp;all"
+#~ msgstr "全部清除"
+
+#~ msgid "Project&nbsp;Openings"
+#~ msgstr "寻求协助"
+
+#~ msgid ""
+#~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "
+#~ "the document (e.g. How to use the download server)<br /"
+#~ "><strong>Description:</strong> A brief description to be placed just "
+#~ "under the title."
+#~ msgstr ""
+#~ "<strong>文件标题</strong>：引用文件中相关的简单标题（例如：如何使用下载服"
+#~ "务器）<br /><strong>说明：</strong>放在该标题下的简单说明。"
+
+#~ msgid "I am Really Sure."
+#~ msgstr "我非常确定"
+
+#~ msgid "I am Sure."
+#~ msgstr "我确定"
+
+#~ msgid ""
+#~ "\n"
+#~ "Or reply to this e-mail entering your response between the following "
+#~ "markers: \n"
+#~ "%1$s\n"
+#~ "(enter your response here)\n"
+#~ "%1$s"
+#~ msgstr ""
+#~ "\n"
+#~ "或者回复本邮件。把您的回复写在下面的标志中间：\n"
+#~ "%1$s\n"
+#~ "(您的回复输入在此)\n"
+#~ "%1$s"
+
+#~ msgid "Document Manager: Display Document"
+#~ msgstr "项目管理：显示文件"
+
+#~ msgid "Error: No group was chosen or you cannot access it"
+#~ msgstr "错误 - 没有选择分组编号"
+
+#~ msgid "Error: disabled feature."
+#~ msgstr "错误 - 停用的功能"
+
+#~ msgid "Error: For some reason group_id and/or survey_id did not make it he"
+#~ msgstr "错误 - 基于某些理由，群组编号或问卷编号不能出现在这个页面"

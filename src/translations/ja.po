@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 12:22+0200\n"
+"POT-Creation-Date: 2013-06-25 17:51+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -625,8 +625,8 @@ msgstr "1週間"
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/snippet/download.php:45 www/survey/admin/question.php:64
-#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:82
-#: www/survey/admin/show_csv.php:84 www/survey/admin/show_results.php:69
+#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:80
+#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:69
 #: www/survey/admin/show_results.php:73 www/survey/admin/show_results.php:84
 #: www/survey/admin/show_results.php:86 www/survey/admin/show_results.php:133
 #: www/survey/admin/show_results.php:135 www/tracker/admin/index.php:190
@@ -7397,9 +7397,8 @@ msgstr "無効なJabberアドレス"
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
 #: www/account/lostpw.php:89 www/account/pending-resend.php:71
 #: www/account/verify.php:78
-#, fuzzy
 msgid "Login name"
-msgstr "ログイン名:"
+msgstr "ログイン名"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: www/account/verify.php:82
@@ -13520,29 +13519,28 @@ msgid ""
 "Changing your email address will require confirmation from your new email "
 "address, so that we can ensure we have a good email address on file."
 msgstr ""
+"メールアドレスを変更するには、使えるアドレスになっているかをチェックするため"
+"に新しいメールアドレスからの確認が必要になります。"
 
 #: www/account/change_email.php:81
-#, fuzzy
 msgid ""
 "We need to maintain an accurate email address for each user due to the level "
 "of access we grant via this account. If we need to reach a user for issues "
 "arriving from a shell or project account, it is important that we be able to "
 "do so."
 msgstr ""
-"<p>メールアドレスを変更するには、使えるアドレスになっているかをチェックするた"
-"めに新しいメールアドレスからの確認が必要になります。\n"
-"<p>使えるメールアドレスを必要としている理由はユーザーに与えてある権限の為で"
-"す。もし、シェルアカウントやプロジェクトアカウントの問題があった場合には、"
-"ちゃんと連絡を取れるのが重要です。\n"
-"<p>以下のフォームを送信すると、新しいメールアドレスに確認するためのURLを含む"
-"メールが送られます。そのURLをクリックすることによってメールアドレスの変更が終"
-"了されます。"
+"使えるメールアドレスを必要としている理由はユーザーに与えてある権限の為です。"
+"もし、シェルアカウントやプロジェクトアカウントの問題があった場合には、ちゃん"
+"と連絡を取れるのが重要です。"
 
 #: www/account/change_email.php:82
 msgid ""
 "Submitting the form below will mail a confirmation URL to the new email "
 "address. Visiting this link will complete the email change."
 msgstr ""
+"以下のフォームを送信すると、新しいメールアドレスに確認するためのURLを含むメー"
+"ルが送られます。そのURLをクリックすることによってメールアドレスの変更が終了さ"
+"れます。"
 
 #: www/account/change_email.php:88
 msgid "New Email Address:"
@@ -13689,6 +13687,8 @@ msgid ""
 "You are now a registered user on %1$s, the online development environment "
 "for Open Source projects."
 msgstr ""
+"おめでとうございます。あなたはオープンソース開発の為のオンライン開発環境 "
+"%1$s の公認ユーザーになりました"
 
 #: www/account/first.php:33
 #, fuzzy, php-format
@@ -14166,13 +14166,12 @@ msgid "Verify"
 msgstr ""
 
 #: www/account/verify.php:68
-#, fuzzy
 msgid ""
 "In order to complete your registration, login now. Your account will then be "
 "activated for normal logins."
 msgstr ""
-"<p>登録を完了するには、今、すぐにログインしてください。そうすることによって、"
-"あなたのアカウントは有効になり、普通のログインもできるようになります。</p>"
+"登録を完了するには、今、すぐにログインしてください。そうすることによって、あ"
+"なたのアカウントは有効になり、普通のログインもできるようになります。"
 
 #: www/activity/index.php:102
 msgid "Forum Post"
@@ -14428,7 +14427,7 @@ msgstr "プロジェクト管理"
 
 #: www/admin/approve-pending.php:196
 msgid "Submitted Description:"
-msgstr ""
+msgstr "提出された記述"
 
 #: www/admin/approve-pending.php:198
 msgid "Purpose of submission:"
@@ -15645,9 +15644,8 @@ msgid "Add Virtual Host"
 msgstr ""
 
 #: www/admin/vhost.php:123 www/register/index.php:204
-#, fuzzy
 msgid "Project Unix Name"
-msgstr "プロジェクト管理"
+msgstr "プロジェクトUnix名"
 
 #: www/admin/vhost.php:128
 msgid "Virtual Host Name"
@@ -17252,7 +17250,7 @@ msgstr "ログイン名:"
 
 #: www/include/user_profile.php:127
 msgid "Jabber Address"
-msgstr ""
+msgstr "Jabberアドレス"
 
 #: www/include/user_profile.php:162
 #, fuzzy
@@ -17887,10 +17885,8 @@ msgid "These items were approved this past week (total: %1$s)"
 msgstr ""
 
 #: www/news/index.php:38
-#, fuzzy
 msgid "Choose a News item and you can browse, search, and post messages."
-msgstr ""
-"<p>ニュースアイテムを選択するとニュースの 閲覧、検索、投稿ができます。<p>"
+msgstr "ニュースアイテムを選択するとニュースの 閲覧、検索、投稿ができます。"
 
 #: www/news/index.php:72
 #, fuzzy, php-format
@@ -19181,7 +19177,7 @@ msgstr ""
 
 #: www/pm/uploadcsv.php:36
 msgid "Warning!"
-msgstr ""
+msgstr "警告!"
 
 #: www/pm/uploadcsv.php:37
 msgid ""
@@ -19880,14 +19876,13 @@ msgid "Project Member List"
 msgstr ""
 
 #: www/project/memberlist.php:37
-#, fuzzy
 msgid ""
 "If you would like to contribute to this project by becoming a member, "
 "contact one of the project admins, designated in bold text below."
 msgstr ""
-"<p>もし、あなたが一人の開発者として、このプロジェクトの力になってくれるのな"
-"ら、下のテキストの中に太字で明示しているプロジェクト管理者の誰かと連絡してく"
-"ださい。<br><br>"
+"もし、あなたが一人の開発者として、このプロジェクトの力になってくれるのなら、"
+"下のテキストの中に太字で明示しているプロジェクト管理者の誰かと連絡してくださ"
+"い。"
 
 #: www/project/memberlist.php:49
 #, fuzzy
@@ -21135,7 +21130,7 @@ msgstr ""
 #: www/snippet/package.php:156 www/snippet/submit.php:123
 #: www/stats/i18n.php:33
 msgid "Language"
-msgstr ""
+msgstr "ランゲージ"
 
 #: www/snippet/package.php:159 www/snippet/submit.php:125
 msgid "Suggest a Language"
@@ -21614,7 +21609,7 @@ msgstr "許可がありません"
 msgid "Add a Question"
 msgstr ""
 
-#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:61
+#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
 #: www/survey/admin/show_questions.php:35
 #: www/survey/admin/show_results_aggregate.php:35
 #: www/survey/admin/show_results_comments.php:36
@@ -21645,7 +21640,7 @@ msgstr "更新に成功しました。"
 msgid "No questions found"
 msgstr "ニュースアイテムは見つかりません"
 
-#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:133
+#: www/survey/admin/show_csv.php:80 www/survey/admin/show_results.php:133
 msgid "Cannot get Survey Response Factory"
 msgstr ""
 
@@ -22300,6 +22295,102 @@ msgstr ""
 msgid "No User Name Provided"
 msgstr ""
 
+#~ msgid "Error: this news item was not found"
+#~ msgstr "エラー - 新規アイテムが見つかりません。"
+
+#~ msgid "Your project registration for %s has been approved."
+#~ msgstr "%s へのプロジェクト登録が承認されました。"
+
+#~ msgid "Project Full Name"
+#~ msgstr "プロジェクト名"
+
+#~ msgid "%s Project Approved"
+#~ msgstr "%s プロジェクト 承認"
+
+#~ msgid "Your project registration for %s has been denied."
+#~ msgstr "%s へのプロジェクトの登録が拒否されました。"
+
+#~ msgid "Reasons for negative decision"
+#~ msgstr "拒否の理由"
+
+#~ msgid "%s Project Denied"
+#~ msgstr "%s プロジェクトの拒否"
+
+#~ msgid "New %s Project Submitted"
+#~ msgstr "新しいプロジェクト %s が提出されました"
+
+#~ msgid "Submitted Description"
+#~ msgstr "提出された記述"
+
+#~ msgid "Please visit the following URL to approve or reject this project"
+#~ msgstr "以下のURLにてこのプロジェクトを許可、もしくは断って下さい。"
+
+#~ msgid "%s Account Registration"
+#~ msgstr "%s アカウント登録"
+
+#~ msgid "Last 24 h"
+#~ msgstr "24時間以内"
+
+#~ msgid "Last 7 days"
+#~ msgstr "1週間"
+
+#~ msgid "Last month"
+#~ msgstr "1ヶ月"
+
+#~ msgid "You are not monitoring any files."
+#~ msgstr "ファイルをモニタリングしていません。"
+
+#~ msgid ""
+#~ "Visiting the link sent to you in this email will activate your account."
+#~ msgstr ""
+#~ "メールに記述されたリンクをたどり、アカウントをアクティブにしてください。"
+
+#~ msgid "You have requested a change of email address on %s."
+#~ msgstr "%1$sにてメールアドレス変更の手続きがありました。"
+
+#~ msgid "Please visit the following URL to complete the email change:"
+#~ msgstr "手続きの覚えのある方は以下のURLにて処理を完了してください:"
+
+#~ msgid "New Email Address"
+#~ msgstr "メールアドレス"
+
+#~ msgid "Email Address"
+#~ msgstr "メールアドレス"
+
+#~ msgid ""
+#~ "Someone (presumably you) on the %s site requested a password change "
+#~ "through email verification."
+#~ msgstr ""
+#~ "誰か(もしくはあなた自身)が %s サイトでパスワードの変更を要求しました。"
+
+#~ msgid "If this was not you, ignore this message and nothing will happen."
+#~ msgstr ""
+#~ "もし、あなたが変更の申し込みを出していなかったら、このメッセージを無視して"
+#~ "ください。"
+
+#~ msgid ""
+#~ "If you requested this verification, visit the following URL to change "
+#~ "your password:"
+#~ msgstr ""
+#~ "もし、このような申し込みをしましたら、以下のサイトへ行き、パスワードの変更"
+#~ "をしてください。"
+
+#~ msgid ""
+#~ "You are now being sent a confirmation email to verify your email address. "
+#~ "Visiting the link sent to you in this email will activate your account."
+#~ msgstr ""
+#~ "メールアドレスの有効性をチェックするために確認のメールを送信しました。メー"
+#~ "ルに記述されたリンクをたどり、アカウントをアクティブにしてください。"
+
+#~ msgid "My Diary and Notes"
+#~ msgstr "日記 &amp; ノート"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "エラー - 件名と本文は必須項目です。"
+
+#~ msgid "Personal Page for %s"
+#~ msgstr "%sのパーソナルページ"
+
 #, fuzzy
 #~ msgid "Repository name: "
 #~ msgstr "ログイン名:"
@@ -22950,3 +23041,71 @@ msgstr ""
 #~ msgstr ""
 #~ "(未訳:top.pageviews) Top Project Pageviews - Measured by impressions of "
 #~ "the %1$s 'button' logo"
+
+#~ msgid "Error doing insert"
+#~ msgstr "インサート中にエラーがありました。"
+
+#~ msgid "Project&nbsp;Openings"
+#~ msgstr "プロジェクト協力者募集"
+
+#~ msgid "My&nbsp;Page"
+#~ msgstr "マイページ"
+
+#~ msgid ""
+#~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "
+#~ "the document (e.g. How to use the download server)<br /"
+#~ "><strong>Description:</strong> A brief description to be placed just "
+#~ "under the title."
+#~ msgstr ""
+#~ "<strong>ドキュメントタイトル</strong>: 簡潔なドキュメントタイトルにしてく"
+#~ "ださい。(例: ダウンロードサーバーの使い方。)<br/><strong>記述: </strong>簡"
+#~ "単な記述はタイトルのすぐ下に置いてください。"
+
+#~ msgid "No Document Groups defined"
+#~ msgstr "ドキュメントグループを定義できません"
+
+#~ msgid "New Group Name"
+#~ msgstr "新規グループ名"
+
+#~ msgid "This project has no visible documents"
+#~ msgstr "このプロジェクトには読めるドキュメントがありません。"
+
+#~ msgid "Using directory “%s”"
+#~ msgstr "ディレクトリ “%s” を使用しています。"
+
+#~ msgid "saved as %s"
+#~ msgstr "%s を保存しました。"
+
+#~ msgid "%s bytes written"
+#~ msgstr "%s  バイト書き込みました。"
+
+#~ msgid "from %s"
+#~ msgstr "%s から"
+
+#~ msgid "Included from %s"
+#~ msgstr "%s から読込まれました。"
+
+#~ msgid "WikiForm: %s: unknown action"
+#~ msgstr "WikiForm: “%s” は未知の操作です。"
+
+#~ msgid ""
+#~ "Please continue editing.  (You'll find your %s at the bottom of the page.)"
+#~ msgstr "編集を続けて下さい。 (%s のページの下部も見てください)"
+
+#~ msgid "db backend:"
+#~ msgstr "データベースバックエンド"
+
+#~ msgid "timeout:"
+#~ msgstr "タイムアウト"
+
+#~ msgid "The PhpWiki Programming Team"
+#~ msgstr "PukiWikiプログラミングチーム"
+
+#~ msgid "Notify"
+#~ msgstr "通知"
+
+#~ msgid "Default system theme:"
+#~ msgstr "デフォルトシステムテーマ"
+
+#~ msgid "Document Manager: Display Document"
+#~ msgstr "ドキュメントマネージャ: ドキュメント表示"

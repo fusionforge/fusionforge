@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 12:22+0200\n"
+"POT-Creation-Date: 2013-06-25 17:51+0200\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -619,8 +619,8 @@ msgstr "Nazwisko:"
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/snippet/download.php:45 www/survey/admin/question.php:64
-#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:82
-#: www/survey/admin/show_csv.php:84 www/survey/admin/show_results.php:69
+#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:80
+#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:69
 #: www/survey/admin/show_results.php:73 www/survey/admin/show_results.php:84
 #: www/survey/admin/show_results.php:86 www/survey/admin/show_results.php:133
 #: www/survey/admin/show_results.php:135 www/tracker/admin/index.php:190
@@ -3587,7 +3587,7 @@ msgstr ""
 #: common/include/SCMPlugin.class.php:164
 #: common/include/SCMPlugin.class.php:178
 msgid "Repository Browser"
-msgstr ""
+msgstr "Przeglądaj Repozytorium"
 
 #: common/include/SCMPlugin.class.php:166
 #: common/include/SCMPlugin.class.php:180
@@ -7205,15 +7205,13 @@ msgstr ""
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
 #: www/account/lostpw.php:89 www/account/pending-resend.php:71
 #: www/account/verify.php:78
-#, fuzzy
 msgid "Login name"
-msgstr "Login:"
+msgstr "Login"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: www/account/verify.php:82
-#, fuzzy
 msgid "Password"
-msgstr "Hasło:"
+msgstr "Hasło"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:208
@@ -12104,11 +12102,9 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:83
 #: plugins/scmhg/common/HgPlugin.class.php:56
 #: plugins/scmsvn/common/SVNPlugin.class.php:88
-#, fuzzy, php-format
+#, php-format
 msgid "Documentation for %1$s is available at <a href=\"%2$s\">%2$s</a>."
-msgstr ""
-"<p>Dokumentacja Subversion (czasem określanego jako \"SVN\") dostępna jest "
-"<a href=\"http://svnbook.red-bean.com/\">tutaj</a>.</p>"
+msgstr "Dokumentacja %1$s dostępna jest <a href=\"%2$s\">%2$s</a>."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:70
 #: plugins/scmcvs/common/CVSPlugin.class.php:66
@@ -12144,9 +12140,9 @@ msgstr ""
 #: plugins/scmhg/common/HgPlugin.class.php:94
 #: plugins/scmsvn/common/SVNPlugin.class.php:136
 #: plugins/scmsvn/common/SVNPlugin.class.php:161
-#, fuzzy, php-format
+#, php-format
 msgid "Developer %s Access via SSH"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr "Dostęp deweloperów do repozytorium %s poprzez SSH"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:104
 #: plugins/scmbzr/common/BzrPlugin.class.php:116
@@ -12159,12 +12155,11 @@ msgstr "Przeglądaj Repozytorium Subversion"
 #: plugins/scmsvn/common/SVNPlugin.class.php:152
 #: plugins/scmsvn/common/SVNPlugin.class.php:164
 #: plugins/scmsvn/common/SVNPlugin.class.php:179
-#, fuzzy, php-format
+#, php-format
 msgid "Only project developers can access the %s tree via this method."
 msgstr ""
-"<p><b>Dostęp deweloperów do repozytorium Subversion poprzez DAV</b></p><p>Ta "
-"metoda dostępu do repozytorium zarezerwowana jest wyłącznie dla członków "
-"projektu. Gdy pojawi się prośba o hasło, to podaj te używane na stronie.</p>"
+"Ta metoda dostępu do repozytorium %s zarezerwowana jest wyłącznie dla "
+"członków projektu."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:106
 #: plugins/scmbzr/common/BzrPlugin.class.php:118
@@ -12190,7 +12185,7 @@ msgstr ""
 #: plugins/scmsvn/common/SVNPlugin.class.php:170
 #: plugins/scmsvn/common/SVNPlugin.class.php:183
 msgid "Enter your site password when prompted."
-msgstr ""
+msgstr "Gdy pojawi się prośba o hasło, to podaj te używane na stronie."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:110
 #: plugins/scmbzr/common/BzrPlugin.class.php:124
@@ -12222,35 +12217,30 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:150
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:175
 #: plugins/scmsvn/common/SVNPlugin.class.php:197
-#, fuzzy, php-format
+#, php-format
 msgid "%s Repository Browser"
-msgstr "Przeglądaj Repozytorium Subversion"
+msgstr "Przeglądaj Repozytorium %s"
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:137
 #: plugins/scmccase/common/CCasePlugin.class.php:115
 #: plugins/scmcvs/common/CVSPlugin.class.php:152
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:177
 #: plugins/scmsvn/common/SVNPlugin.class.php:199
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Browsing the %s tree gives you a view into the current status of this "
 "project's code."
 msgstr ""
-"<b>Przeglądanie zawartości Subversion</b><p>Funkcjonalność przeglądania "
-"zawartości repozytorium SVN zapewnia wgląd w aktualny stan kodu projektu. "
-"Można także wyświetlić pełną historię każdego z pliku w repozytorium.</p>"
+"Funkcjonalność przeglądania zawartości repozytorium %s zapewnia wgląd w "
+"aktualny stan kodu projektu."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:139
 #: plugins/scmccase/common/CCasePlugin.class.php:117
 #: plugins/scmcvs/common/CVSPlugin.class.php:154
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:179
 #: plugins/scmsvn/common/SVNPlugin.class.php:201
-#, fuzzy
 msgid "You may also view the complete histories of any file in the repository."
-msgstr ""
-"<b>Przeglądanie zawartości Subversion</b><p>Funkcjonalność przeglądania "
-"zawartości repozytorium SVN zapewnia wgląd w aktualny stan kodu projektu. "
-"Można także wyświetlić pełną historię każdego z pliku w repozytorium.</p>"
+msgstr "Można także wyświetlić pełną historię każdego z pliku w repozytorium."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:143
 #: plugins/scmcvs/common/CVSPlugin.class.php:158
@@ -12966,14 +12956,12 @@ msgid "Anonymous Subversion Access"
 msgstr ""
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:110
-#, fuzzy
 msgid ""
 "This project's SVN repository can be checked out through anonymous access "
 "with the following command(s)."
 msgstr ""
-"<p><b>Anonimowy dostęp do Subversion</b></p><p>Zawartość repozytorium SVN "
-"tego projektu można pobrać poprzez anonimowy dostęp za pomocą następującego "
-"polecenia.</p>"
+"Zawartość repozytorium SVN tego projektu można pobrać poprzez anonimowy "
+"dostęp za pomocą następującego polecenia."
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:149
 #: plugins/scmsvn/common/SVNPlugin.class.php:176
@@ -16867,7 +16855,7 @@ msgstr "Nazwa wydania:"
 
 #: www/include/user_profile.php:127
 msgid "Jabber Address"
-msgstr ""
+msgstr "Adres Jabber"
 
 #: www/include/user_profile.php:162
 #, fuzzy
@@ -17240,9 +17228,8 @@ msgid "Unable to get the list %s : %s"
 msgstr ""
 
 #: www/mail/index.php:78
-#, fuzzy
 msgid "Address"
-msgstr "Adres:"
+msgstr "Adres"
 
 #: www/mail/index.php:97
 #, php-format
@@ -20657,7 +20644,7 @@ msgstr ""
 #: www/snippet/package.php:156 www/snippet/submit.php:123
 #: www/stats/i18n.php:33
 msgid "Language"
-msgstr ""
+msgstr "Język"
 
 #: www/snippet/package.php:159 www/snippet/submit.php:125
 msgid "Suggest a Language"
@@ -21129,7 +21116,7 @@ msgstr "Edytuj grupę"
 msgid "Add a Question"
 msgstr ""
 
-#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:61
+#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
 #: www/survey/admin/show_questions.php:35
 #: www/survey/admin/show_results_aggregate.php:35
 #: www/survey/admin/show_results_comments.php:36
@@ -21156,7 +21143,7 @@ msgstr ""
 msgid "No questions found"
 msgstr ""
 
-#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:133
+#: www/survey/admin/show_csv.php:80 www/survey/admin/show_results.php:133
 msgid "Cannot get Survey Response Factory"
 msgstr ""
 
@@ -21801,6 +21788,50 @@ msgstr ""
 #: www/users:35
 msgid "No User Name Provided"
 msgstr ""
+
+#~ msgid "%1$s (%2$s) has requested to join your project."
+#~ msgstr "%1$s (%2$s) zgłosił chęć dołączenia do twojego projektu."
+
+#~ msgid "You can approve this request here: %s"
+#~ msgstr "Możesz zatwierdzić kandydaturę tutaj: %s"
+
+#~ msgid "Comments by the user:"
+#~ msgstr "Uzasadnienie prośby przez użytkownika:"
+
+#~ msgid "Request to Join Project %s"
+#~ msgstr "Zgłoś chęć dołączenia do projektu %1$s"
+
+#~ msgid "Your request to join the %s project was denied by an administrator."
+#~ msgstr ""
+#~ "Twoja prośba o dołączenie do projektu %1$s została odrzucona przez "
+#~ "administratora."
+
+#~ msgid "Your request to join the %s project was granted by an administrator."
+#~ msgstr ""
+#~ "Twoja prośba o dołączenie do projektu %1$s została zatwierdzona przez "
+#~ "administratora."
+
+#~ msgid ""
+#~ "This project's Subversion repository can be checked out through anonymous "
+#~ "access with the following command."
+#~ msgstr ""
+#~ "Zawartość repozytorium SVN tego projektu można pobrać poprzez anonimowy "
+#~ "dostęp za pomocą następującego polecenia."
+
+#~ msgid "Email Address"
+#~ msgstr "Adres Email"
+
+#~ msgid "Change Email Address"
+#~ msgstr "Zmień Adres Email"
+
+#~ msgid "Phone"
+#~ msgstr "Telefon:"
+
+#~ msgid "Fax"
+#~ msgstr "Fax"
+
+#~ msgid "Login with SSL"
+#~ msgstr "Zaloguj z SSL"
 
 #, fuzzy
 #~ msgid ""

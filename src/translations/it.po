@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 12:22+0200\n"
+"POT-Creation-Date: 2013-06-25 17:51+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -209,12 +209,10 @@ msgstr ""
 #: common/docman/actions/monitorfile.php:56
 #: common/tracker/actions/tracker.php:434
 #: common/tracker/actions/tracker.php:451
-#, fuzzy
 msgid "Monitoring Started"
 msgstr "Notifica attivata"
 
 #: common/docman/actions/monitorfile.php:76
-#, fuzzy
 msgid "Monitoring Stopped"
 msgstr "Notifica disattivata"
 
@@ -599,7 +597,6 @@ msgid "; "
 msgstr ""
 
 #: common/docman/DocumentManager.class.php:187
-#, fuzzy
 msgid "Last modified"
 msgstr "Ultima modifica"
 
@@ -631,8 +628,8 @@ msgstr "Ultima modifica"
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/snippet/download.php:45 www/survey/admin/question.php:64
-#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:82
-#: www/survey/admin/show_csv.php:84 www/survey/admin/show_results.php:69
+#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:80
+#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:69
 #: www/survey/admin/show_results.php:73 www/survey/admin/show_results.php:84
 #: www/survey/admin/show_results.php:86 www/survey/admin/show_results.php:133
 #: www/survey/admin/show_results.php:135 www/tracker/admin/index.php:190
@@ -3168,9 +3165,8 @@ msgid "Group name is too long"
 msgstr "Nome progetti (selezionare il nome per modificare)"
 
 #: common/include/Group.class.php:2714
-#, fuzzy
 msgid "Group name already taken"
-msgstr "Nome unix già utilizzato."
+msgstr "Nome progetti già utilizzato"
 
 #: common/include/Group.class.php:2796
 #, php-format
@@ -4229,9 +4225,9 @@ msgstr ""
 "cambiare questa password appena possibile.nn-- Lo staff di %1$sn\n"
 
 #: common/mail/MailingList.class.php:201
-#, fuzzy, php-format
+#, php-format
 msgid "%s New Mailing List"
-msgstr "Nuova Mailing List %1$s"
+msgstr "Nuova Mailing List %s"
 
 #: common/mail/MailingList.class.php:221
 #, fuzzy
@@ -4490,9 +4486,8 @@ msgid "Question Added"
 msgstr "Domanda aggiunta"
 
 #: common/survey/SurveyQuestion.class.php:149
-#, fuzzy
 msgid "Update failed"
-msgstr "Aggiornato giornalmente"
+msgstr "Aggiornamento fallito"
 
 #: common/survey/SurveyQuestion.class.php:194
 msgid "Error finding question"
@@ -5037,14 +5032,12 @@ msgid ""
 msgstr ""
 
 #: common/tracker/actions/browse.php:539 www/pm/browse_task.php:210
-#, fuzzy
 msgid "Check all"
-msgstr "Seleziona&nbsp;tutti"
+msgstr "Seleziona tutti"
 
 #: common/tracker/actions/browse.php:541 www/pm/browse_task.php:212
-#, fuzzy
 msgid "Clear all"
-msgstr "Deseleziona&nbsp;tutti"
+msgstr "Deseleziona tutti"
 
 #: common/tracker/actions/browse.php:568 common/tracker/actions/browse.php:747
 #: common/tracker/actions/detail.php:87
@@ -5085,7 +5078,6 @@ msgstr "* indica richieste più vecchie di %1$s giorni"
 
 #: common/tracker/actions/browse.php:715 www/pm/browse_task.php:361
 #: www/pm/browse_task.php:390
-#, fuzzy
 msgid "Mass Update"
 msgstr "Aggiornamento multiplo"
 
@@ -6691,7 +6683,6 @@ msgid "Update settings for %s"
 msgstr "Aggiorna impostazioni"
 
 #: common/tracker/views/form-updatetracker.php:41
-#, fuzzy
 msgid ""
 "<strong>Name:</strong> (examples: meeting minutes, test results, RFP Docs)"
 msgstr ""
@@ -7571,9 +7562,9 @@ msgid "Please replace this file with your own website"
 msgstr ""
 
 #: cronjobs/homedirs.php:155
-#, fuzzy, php-format
+#, php-format
 msgid "Welcome to %s"
-msgstr "Benvenuto su %1$s"
+msgstr "Benvenuto su %s"
 
 #: cronjobs/homedirs.php:157
 #, php-format
@@ -7664,20 +7655,18 @@ msgstr ""
 #: db/20130127-extratabToHeadermenuMigration.php:81
 #: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:99
 #: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:95
-#, fuzzy
 msgid "Soft link wasn't removed in www/plugins folder, please do so manually."
 msgstr ""
-"<br>Il softlink nella cartella www/plugins non è stato rimosso, cancella il "
-"link manualmente."
+"Il softlink nella cartella www/plugins non è stato rimosso, cancella il link "
+"manualmente."
 
 #: db/20130127-extratabToHeadermenuMigration.php:90
 #: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:108
 #: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:104
-#, fuzzy
 msgid "Soft link wasn't removed in config folder, please do so manually."
 msgstr ""
-"<br>Il softlink nella cartella www/plugins non è stato rimosso, cancella il "
-"link manualmente."
+"Il softlink nella cartella config non è stato rimosso, cancella il link "
+"manualmente."
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:66
 #: plugins/authcas/include/AuthCASPlugin.class.php:88
@@ -7696,15 +7685,13 @@ msgstr "Indirizzo email non valido"
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
 #: www/account/lostpw.php:89 www/account/pending-resend.php:71
 #: www/account/verify.php:78
-#, fuzzy
 msgid "Login name"
-msgstr "Nome login:"
+msgstr "Nome login"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: www/account/verify.php:82
-#, fuzzy
 msgid "Password"
-msgstr "Password:"
+msgstr "Password"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:208
@@ -7759,9 +7746,8 @@ msgid ""
 msgstr ""
 
 #: plugins/authcas/include/AuthCASPlugin.class.php:94
-#, fuzzy
 msgid "Login via CAS"
-msgstr "Login con SSL"
+msgstr "Login con CAS"
 
 #: plugins/authcas/www/post-login.php:83
 #, fuzzy
@@ -8417,7 +8403,6 @@ msgstr "Registra un nuovo utente"
 #: plugins/contribtracker/www/global_admin.php:397
 #: www/project/admin/users.php:381 www/project/admin/users.php:441
 #: www/project/admin/users.php:465
-#, fuzzy
 msgid "Role name"
 msgstr "Nome ruolo"
 
@@ -10442,9 +10427,8 @@ msgid "Unable to get the lists"
 msgstr ""
 
 #: plugins/mailman/www/admin/index.php:144
-#, fuzzy
 msgid "Mailing List Name"
-msgstr "Nome Mailing List:"
+msgstr "Nome Mailing List"
 
 #: plugins/mailman/www/admin/index.php:147
 #: plugins/mailman/www/admin/index.php:179 www/mail/admin/index.php:191
@@ -10507,9 +10491,8 @@ msgid ""
 msgstr ""
 
 #: plugins/mailman/www/index.php:74 www/mail/index.php:74
-#, fuzzy
 msgid "Choose a list to browse, search, and post messages."
-msgstr "<p>Seleziona una lista per scorrere, cercare e inserire messaggi.</p>"
+msgstr "Seleziona una lista per scorrere, cercare e inserire messaggi."
 
 #: plugins/mailman/www/mailman_utils.php:20
 #, fuzzy, php-format
@@ -14023,29 +14006,29 @@ msgid ""
 "Changing your email address will require confirmation from your new email "
 "address, so that we can ensure we have a good email address on file."
 msgstr ""
+"Il cambio dell'email richiede la conferma via email dal nuovo indirizzo in "
+"modo tale da verificare che l'indirizzo sia valido."
 
 #: www/account/change_email.php:81
-#, fuzzy
 msgid ""
 "We need to maintain an accurate email address for each user due to the level "
 "of access we grant via this account. If we need to reach a user for issues "
 "arriving from a shell or project account, it is important that we be able to "
 "do so."
 msgstr ""
-"<p>Il cambio dell'email richiede la conferma via email dal nuovo indirizzo "
-"in modo tale da verificare che l'indirizzo sia valido.</p> <p>Visti i "
-"servizi che garantiamo, è necessario assicurarci che l'indirizzo di ciascun "
-"utente sia corretto, dal momento che potrebbe essere necessario contattarlo "
-"per questioni relative all'accesso alla shell o a qualche progetto.</"
-"p><p>Cliccando su Invia nel form invierà un messaggio contenente un URL per "
-"confermare il nuovo indirizzo di posta elettronica. Il cambio sarà "
-"completato quando il link di conferma sarà visitato.</p>"
+"Visti i servizi che garantiamo, è necessario assicurarci che l'indirizzo di "
+"ciascun utente sia corretto, dal momento che potrebbe essere necessario "
+"contattarlo per questioni relative all'accesso alla shell o a qualche "
+"progetto."
 
 #: www/account/change_email.php:82
 msgid ""
 "Submitting the form below will mail a confirmation URL to the new email "
 "address. Visiting this link will complete the email change."
 msgstr ""
+"Cliccando su Invia nel form invierà un messaggio contenente un URL per "
+"confermare il nuovo indirizzo di posta elettronica. Il cambio sarà "
+"completato quando il link di conferma sarà visitato."
 
 #: www/account/change_email.php:88
 msgid "New Email Address:"
@@ -14177,7 +14160,6 @@ msgstr ""
 "pubbliche consultare la documentazione di ssh."
 
 #: www/account/editsshkeys.php:75
-#, fuzzy
 msgid ""
 "To generate a public key, run the program 'ssh-keygen' (you can use both "
 "protocol 1 or 2). The public key will be placed at '~/.ssh/identity."
@@ -14185,15 +14167,11 @@ msgid ""
 "pub' (protocol version 2). Read the ssh documentation for further "
 "information on sharing keys."
 msgstr ""
-"<p>Per evitare di dover digitare la propria passowrd ogni volta che si "
-"accede a CVS/SSH, è possibile inserire le chiavi pubbliche, queste verranno "
-"memorizzate nel file ~/.ssh/authorized_keys sul server. Questa attività è "
-"schedualta ogni ora.</p><p>Per generare una chiave pubblica, esegui 'ssh-"
-"keygen' (si può utilizzare sia il protocollo versione 1 che 2). La chiave "
-"pubblica verrà scritta nel file '~/.ssh/identity.pub' per il protocollo "
-"versione 1 e '~/.ssh/id_dsa.pub' o '~/.ssh/id_rsa.pub' per il protocollo "
-"versione 2. Per maggiori informazioni su come condividere le chiavi "
-"pubbliche consultare la documentazione di ssh."
+"Per generare una chiave pubblica, esegui 'ssh-keygen' (si può utilizzare sia "
+"il protocollo versione 1 che 2). La chiave pubblica verrà scritta nel file "
+"'~/.ssh/identity.pub' per il protocollo versione 1 e '~/.ssh/id_dsa.pub' o "
+"'~/.ssh/id_rsa.pub' per il protocollo versione 2. Per maggiori informazioni "
+"su come condividere le chiavi pubbliche consultare la documentazione di ssh."
 
 #: www/account/editsshkeys.php:76
 #, fuzzy
@@ -14219,20 +14197,17 @@ msgid ""
 msgstr ""
 
 #: www/account/first.php:33
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "As a registered user, you can participate fully in the activities on the "
 "site. You may now post messages to the project message forums, post bugs for "
 "software in %1$s, sign on as a project developer, or even start your own "
 "project."
 msgstr ""
-"<p>Ora sei un utente registrato su %1$s, l'ambiente di sviluppo online per "
-"progetti Open Source.</p><p>Come utente registrato, puoi partecipare "
-"pienamente a tutte le attività del sito. Potrai inserire messaggi nei forum "
-"dei progetti, segnalare dei bug nel software ospitato da %1$s, farti "
-"registrare come sviluppatore oppure aprire un tuo progetto personale.</"
-"p><p>Buon lavoro, e non dimenticare di inviarci le tue impressioni sul come "
-"migliorare %1$s.</p><p>--il team %1$s.</p>"
+"Come utente registrato, puoi partecipare pienamente a tutte le attività del "
+"sito. Potrai inserire messaggi nei forum dei progetti, segnalare dei bug nel "
+"software ospitato da %1$s, farti registrare come sviluppatore oppure aprire "
+"un tuo progetto personale."
 
 #: www/account/first.php:36
 #, fuzzy, php-format
@@ -14705,13 +14680,12 @@ msgid "Verify"
 msgstr ""
 
 #: www/account/verify.php:68
-#, fuzzy
 msgid ""
 "In order to complete your registration, login now. Your account will then be "
 "activated for normal logins."
 msgstr ""
-"<p>Per completare la tua registrazione, fare il login adesso. Il tuo account "
-"sarà attivato.</p>"
+"Per completare la tua registrazione, fare il login adesso. Il tuo account "
+"sarà attivato."
 
 #: www/activity/index.php:102
 msgid "Forum Post"
@@ -15884,12 +15858,10 @@ msgid "New category short name (no spaces, unix-like)"
 msgstr "Nome breve (no spazi, tipo unix)"
 
 #: www/admin/trove/trove_cat_add.php:119
-#, fuzzy
 msgid "New category full name (Maximum length is 80 chars)"
 msgstr "Nome completo (VARCHAR 80)"
 
 #: www/admin/trove/trove_cat_add.php:121
-#, fuzzy
 msgid "New category description (Maximum length is 255 chars)"
 msgstr "Descrizione nuova categoria (VARCHAR 255)"
 
@@ -15898,9 +15870,8 @@ msgid "Error: a category can't be the same as its own parent: "
 msgstr ""
 
 #: www/admin/trove/trove_cat_edit.php:70
-#, fuzzy
 msgid "Error In Trove Operation :"
-msgstr "Errore in una operazione Trove"
+msgstr "Errore in una operazione Trove:"
 
 #: www/admin/trove/trove_cat_edit.php:92
 #, fuzzy
@@ -15930,12 +15901,10 @@ msgid "Category short name (no spaces, unix-like)"
 msgstr "Nome breve (no spazi, tipo unix)"
 
 #: www/admin/trove/trove_cat_edit.php:146
-#, fuzzy
 msgid "Category full name (Maximum length is 80 chars)"
 msgstr "Nome completo (VARCHAR 80)"
 
 #: www/admin/trove/trove_cat_edit.php:149
-#, fuzzy
 msgid "Category description (Maximum length is 255 chars)"
 msgstr "Descrizione nuova categoria (VARCHAR 255)"
 
@@ -16173,9 +16142,8 @@ msgid "[Change PW]"
 msgstr "Cambia settimana"
 
 #: www/admin/userlist.php:146
-#, fuzzy
 msgid "User List"
-msgstr ": Elenco utenti"
+msgstr "Elenco utenti"
 
 #: www/admin/userlist.php:150
 msgid "Users that use plugin"
@@ -16249,9 +16217,8 @@ msgid "Add Virtual Host"
 msgstr "Aggiungi host virtuale"
 
 #: www/admin/vhost.php:123 www/register/index.php:204
-#, fuzzy
 msgid "Project Unix Name"
-msgstr "Nome progetto"
+msgstr "Unix Name del progetto"
 
 #: www/admin/vhost.php:128
 msgid "Virtual Host Name"
@@ -16304,7 +16271,6 @@ msgid "User could not be found."
 msgstr "Forum non trovato"
 
 #: www/developer/diary.php:44
-#, fuzzy
 msgid "Diary and Notes for"
 msgstr "Diario e note per"
 
@@ -16318,7 +16284,6 @@ msgid "Posted on "
 msgstr "Inserito da"
 
 #: www/developer/diary.php:62
-#, fuzzy
 msgid "Existing Diary and Notes Entries"
 msgstr "Note e Diario esistenti"
 
@@ -16349,17 +16314,15 @@ msgstr "Attivata notifica utente"
 
 #: www/developer/monitor.php:68
 msgid "You will now be emailed this user's diary entries."
-msgstr ""
+msgstr "Ti verranno inviate per email gli elementi del diario."
 
 #: www/developer/monitor.php:69
-#, fuzzy
 msgid ""
 "To turn off monitoring, simply click the <strong>Monitor user</strong> link "
 "again."
 msgstr ""
-"<p>Ti verranno inviate per email gli elementi del diario.</p><p>Per "
-"disabilitare la notifica, è sufficiente cliccare di nuovo su "
-"<strong>Notifica utente</strong>"
+"Per disabilitare la notifica, è sufficiente cliccare di nuovo su "
+"<strong>Notifica utente</strong>."
 
 #: www/developer/monitor.php:76
 msgid "Monitoring has been turned off"
@@ -18335,9 +18298,8 @@ msgid "Unable to get the list %s : %s"
 msgstr ""
 
 #: www/mail/index.php:78
-#, fuzzy
 msgid "Address"
-msgstr "Indirizzo completo:"
+msgstr "Indirizzo"
 
 #: www/mail/index.php:97
 #, php-format
@@ -18643,7 +18605,6 @@ msgid "Submit News"
 msgstr "Invia per"
 
 #: www/news/news_utils.php:280
-#, fuzzy
 msgid "Not Found"
 msgstr "Nessuno trovato"
 
@@ -18811,19 +18772,17 @@ msgid "No such posting for this project"
 msgstr "Nessuna posizione disponibile per il progetto"
 
 #: www/people/editjob.php:157
-#, fuzzy
 msgid ""
 "Now you can edit/change the list of skills attached to this posting. "
 "Developers will be able to match their skills with your requirements."
 msgstr ""
-"<p>È possibile cambiare l'elenco delle competenze necessarie per questa "
+"È possibile cambiare l'elenco delle competenze necessarie per questa "
 "posizione. Gli sviluppatori potranno confrontare le loro attitudini con i "
-"tuoi requisiti.</p><p>Tutte le posizioni verranno chiuse automaticamente "
-"dopo due settimane.</p>"
+"tuoi requisiti."
 
 #: www/people/editjob.php:159
 msgid "All postings are automatically closed after two weeks."
-msgstr ""
+msgstr "Tutte le posizioni verranno chiuse automaticamente dopo due settimane."
 
 #: www/people/editjob.php:175
 msgid "Update Descriptions"
@@ -19107,7 +19066,6 @@ msgid "Added to skill inventory"
 msgstr "Aggiungi a elenco competenze"
 
 #: www/people/people_utils.php:108 www/people/people_utils.php:216
-#, fuzzy
 msgid "Error: skill already in your inventory"
 msgstr "ERRORE - competenza già inserita"
 
@@ -19887,13 +19845,12 @@ msgid "All Tasks By Assignee"
 msgstr "Tutte le attivià per tecnico"
 
 #: www/pm/reporting/index.php:238
-#, fuzzy
 msgid ""
 "Note that same task can be assigned to several technicians. Such task will "
 "be counted for each of them."
 msgstr ""
 "Un attività può essere assegnata a più tecnici; queste attività sarà "
-"conteggiata per ognuno degli assegnatari.</p>"
+"conteggiata per ognuno degli assegnatari."
 
 #: www/pm/task.php:70
 #, fuzzy
@@ -19965,7 +19922,7 @@ msgstr ""
 
 #: www/pm/uploadcsv.php:36
 msgid "Warning!"
-msgstr ""
+msgstr "Avvertimento!"
 
 #: www/pm/uploadcsv.php:37
 msgid ""
@@ -20162,7 +20119,6 @@ msgid "Project History of %s"
 msgstr "Cronologia delle modifiche"
 
 #: www/project/admin/index.php:108 www/project/admin/tools.php:103
-#, fuzzy
 msgid "Project information updated"
 msgstr "Informazioni progetto aggiornate"
 
@@ -20176,19 +20132,16 @@ msgid "Misc. Project Information"
 msgstr "Informazioni varie sul progetto"
 
 #: www/project/admin/index.php:123
-#, fuzzy
 msgid "Group shell (SSH) server:"
-msgstr "Server SSH:&nbsp;"
+msgstr "Server SSH:"
 
 #: www/project/admin/index.php:124
-#, fuzzy
 msgid "Group directory on shell server:"
-msgstr "Directory sul server shell:&nbsp;"
+msgstr "Directory sul server shell:"
 
 #: www/project/admin/index.php:125
-#, fuzzy
 msgid "Project WWW directory on shell server:"
-msgstr "Directory WWW sul server shell"
+msgstr "Directory WWW sul server shell:"
 
 #: www/project/admin/index.php:134
 #, fuzzy
@@ -20258,18 +20211,16 @@ msgid ""
 msgstr ""
 
 #: www/project/admin/massadd.php:77
-#, fuzzy
 msgid ""
 "Choose the <strong>First Letter</strong> of the name of the person you wish "
 "to add."
 msgstr ""
-"<p>Seleziona la <strong>prima lettera </strong> del nome della persona da "
-"aggiungere.</p>"
+"Seleziona la <strong>prima lettera </strong> del nome della persona da "
+"aggiungere."
 
 #: www/project/admin/massadd.php:87 www/project/admin/users.php:98
-#, fuzzy
 msgid "No Matching Users Found"
-msgstr "<p>Nessun utente trovato</p>"
+msgstr "Nessun utente trovato"
 
 #: www/project/admin/massadd.php:92
 #, fuzzy
@@ -20461,9 +20412,8 @@ msgid "Active Tools"
 msgstr "Attivo"
 
 #: www/project/admin/tools.php:151
-#, fuzzy
 msgid "Use Project Activity"
-msgstr "Attività del progetto"
+msgstr "Usa Attività del progetto"
 
 #: www/project/admin/tools.php:164
 msgid "Use Forums"
@@ -20712,13 +20662,12 @@ msgid "Project Member List"
 msgstr "Elenco partecipanti al progetto"
 
 #: www/project/memberlist.php:37
-#, fuzzy
 msgid ""
 "If you would like to contribute to this project by becoming a member, "
 "contact one of the project admins, designated in bold text below."
 msgstr ""
-"<p>Se vuoi partecipare a questo progetto, contatta uno degli amministratori, "
-"contrassegnati dal grassetto qui sotto.</p><br><br>"
+"Se vuoi partecipare a questo progetto, contatta uno degli amministratori, "
+"contrassegnati dal grassetto qui sotto."
 
 #: www/project/memberlist.php:49
 #, fuzzy
@@ -20872,7 +20821,7 @@ msgid "Project Purpose And Summarization"
 msgstr "Amministrazione database per i progetti"
 
 #: www/register/index.php:187
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Please provide detailed, accurate description of your project and what %1$s "
 "resources and in which way you plan to use. This description will be the "
@@ -20881,12 +20830,11 @@ msgid ""
 "description will not be used as a public description of your project. It "
 "must be written in English."
 msgstr ""
-"<h3>2. Sommario e obiettivo del progetto</h3><p/><strong> Inserisci una "
-"descrizione dettagliata e accurata del tuo progetto e quali risorse di %1$s "
-"userai. Questa descrizione sarà la base per la scelta di approvare o "
-"rifiutare il tuo progetto su %1$s e, in futuro, per garantire l'utilizzo "
-"delle risorse nel modo dovuto. La descrizione non sarà utilizzata come "
-"descrizione pubblica del progetto. Deve essere scritta in inglese.</strong>"
+"Inserisci una descrizione dettagliata e accurata del tuo progetto e quali "
+"risorse di %1$s userai. Questa descrizione sarà la base per la scelta di "
+"approvare o rifiutare il tuo progetto su %1$s e, in futuro, per garantire "
+"l'utilizzo delle risorse nel modo dovuto. La descrizione non sarà utilizzata "
+"come descrizione pubblica del progetto. Deve essere scritta in inglese."
 
 #: www/register/index.php:195
 #, fuzzy
@@ -20894,16 +20842,12 @@ msgid "Project Public Description"
 msgstr "Durata del progetto"
 
 #: www/register/index.php:197
-#, fuzzy
 msgid ""
 "This is the description of your project which will be shown on the Project "
 "Summary page, in search results, etc."
 msgstr ""
-"<h3>4. Descrizione pubblica del progetto</h3>Questa è la descrizione del tuo "
-"progetto che sarà visualizzata nel sommario, nei risultati della ricerca, "
-"ecc. Non dovrebbe essere lunga e formale quanto la descrizione "
-"dell'obiettivo del progetto (passo 2), sentiti libero di essere breve e "
-"conciso. La lunghezza massima è di 255 caratteri."
+"Questa è la descrizione del tuo progetto che sarà visualizzata nel sommario, "
+"nei risultati della ricerca, ecc."
 
 #: www/register/index.php:205
 msgid ""
@@ -20974,9 +20918,8 @@ msgid "search engines throughout the site."
 msgstr ""
 
 #: www/register/index.php:226
-#, fuzzy
 msgid "Unix Name"
-msgstr "Nome unix"
+msgstr "Nome Unix"
 
 #: www/register/index.php:235
 #, fuzzy
@@ -20984,14 +20927,10 @@ msgid "Source Code"
 msgstr "Indirizzo IP"
 
 #: www/register/index.php:236
-#, fuzzy
 msgid ""
 "You can choose among different SCM for your project, but just one (or none "
 "at all). Please select the SCM system you want to use."
-msgstr ""
-"<h3>5. SCM</h3><p>Puoi selezionare un solo SCM per il tuo progetto. </p> "
-"<p><strong>Non sarà possibile cambiare questa impostazione una volta che il "
-"progetto è registrato!</strong></p>"
+msgstr "Puoi selezionare un solo SCM per il tuo progetto."
 
 #: www/register/index.php:239 www/register/index.php:241
 #, fuzzy
@@ -21330,13 +21269,12 @@ msgid "User Activity"
 msgstr "Attività utente"
 
 #: www/reporting/useract.php:61 www/reporting/usertime.php:61
-#, fuzzy
 msgid ""
 "Choose the <strong>First Letter</strong> of the name of the person you wish "
 "to report on."
 msgstr ""
 "Seleziona la <strong>prima lettera</strong> deel nome della persona per la "
-"quale creare la reportistica.<p>"
+"quale creare la reportistica."
 
 #: www/reporting/useradded.php:53
 msgid "Users Added"
@@ -21572,9 +21510,9 @@ msgid "Please enter a term to search for"
 msgstr ""
 
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:173
-#, fuzzy, php-format
+#, php-format
 msgid "%s Search Results"
-msgstr "Risultati di ricerca %1$s"
+msgstr "Risultati di ricerca %s"
 
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:221
 #, fuzzy, php-format
@@ -21627,7 +21565,6 @@ msgid "People"
 msgstr "Persone"
 
 #: www/search/index.php:82
-#, fuzzy
 msgid "Error: Invalid search"
 msgstr "Errore - ricerca non valida"
 
@@ -21703,12 +21640,10 @@ msgid "Submit A New Snippet"
 msgstr "Inserisci un nuovo frammento"
 
 #: www/snippet/add_snippet_to_package.php:56
-#, fuzzy
 msgid "Error: snippet_package_version_id missing"
 msgstr "Errore - snippet_package_version_id mancante"
 
 #: www/snippet/add_snippet_to_package.php:72
-#, fuzzy
 msgid "Error: Only the creator of a package version can add snippets to it."
 msgstr ""
 "Errore - Solo chi ha creato una versione di un package può aggiungere "
@@ -21726,15 +21661,13 @@ msgid "Back To Add Page"
 msgstr "Torna al modulo di inserimento"
 
 #: www/snippet/add_snippet_to_package.php:96
-#, fuzzy
 msgid "Error: That snippet was already added to this package."
 msgstr "Errore - Questo frammento è già stato aggiunto a questo package."
 
 #: www/snippet/add_snippet_to_package.php:108 www/snippet/addversion.php:71
 #: www/snippet/submit.php:74
-#, fuzzy
 msgid "Error doing snippet version insert"
-msgstr "Errore - Questo frammento non esiste."
+msgstr "ERRORE NELL'INSERMENTO DELLA VERSIONE DEL FRAMMENTO!"
 
 #: www/snippet/add_snippet_to_package.php:110 www/snippet/addversion.php:74
 msgid "Snippet Version Added Successfully."
@@ -21743,7 +21676,6 @@ msgstr "Versione del frammento aggiunta con successo"
 #: www/snippet/add_snippet_to_package.php:113 www/snippet/addversion.php:77
 #: www/snippet/addversion.php:198 www/snippet/package.php:123
 #: www/snippet/submit.php:81
-#, fuzzy
 msgid "Error: Go back and fill in all the information"
 msgstr "Errore - Torna indietro e riempi tutti i campi"
 
@@ -21779,9 +21711,8 @@ msgid "Snippets In This Package"
 msgstr "Frammenti presenti nel pacchetto"
 
 #: www/snippet/addversion.php:39
-#, fuzzy
 msgid "Error: snippet doesn't exist"
-msgstr "Errore - Questo frammento non esiste."
+msgstr "Errore - Questo frammento non esiste"
 
 #: www/snippet/addversion.php:81 www/snippet/addversion.php:202
 #, fuzzy
@@ -21806,9 +21737,8 @@ msgid "Error: snippet_package doesn't exist"
 msgstr "Errore - il package non esiste"
 
 #: www/snippet/addversion.php:154 www/snippet/package.php:75
-#, fuzzy
 msgid "Error doing snippet package version insert"
-msgstr "Errore - snippet_package_version_id mancante"
+msgstr "ERRORE NELL'INSERIMENTO DELLA VERSIONE DEL PACKAGE!"
 
 #: www/snippet/addversion.php:155
 #, fuzzy
@@ -21914,7 +21844,6 @@ msgid "Error: mangled URL?"
 msgstr "Errore - Errore nella URL o nel Form?"
 
 #: www/snippet/detail.php:57 www/snippet/detail.php:147
-#, fuzzy
 msgid "Error: no versions found"
 msgstr "Errore - nessuna versione trovata"
 
@@ -22083,9 +22012,8 @@ msgid "Choose One"
 msgstr "Seleziona uno"
 
 #: www/snippet/snippet_utils.php:27
-#, fuzzy
 msgid "Unix Admin"
-msgstr "Amministrazione sito"
+msgstr "Amministrazione Unix"
 
 #: www/snippet/snippet_utils.php:28
 msgid "HTML Manipulation"
@@ -22555,7 +22483,7 @@ msgstr "Modifica una domanda"
 msgid "Add a Question"
 msgstr "Aggiungi domanda"
 
-#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:61
+#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
 #: www/survey/admin/show_questions.php:35
 #: www/survey/admin/show_results_aggregate.php:35
 #: www/survey/admin/show_results_comments.php:36
@@ -22586,7 +22514,7 @@ msgstr "Aggiornato con successo"
 msgid "No questions found"
 msgstr "%1$s domande trovate"
 
-#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:133
+#: www/survey/admin/show_csv.php:80 www/survey/admin/show_results.php:133
 #, fuzzy
 msgid "Cannot get Survey Response Factory"
 msgstr "Nessuna risposta ai sondaggi trovata"
@@ -22907,7 +22835,6 @@ msgid "Flag"
 msgstr ""
 
 #: www/survey/survey.php:51
-#, fuzzy
 msgid "Vote for Survey"
 msgstr "Nome del sondaggio"
 
@@ -23288,6 +23215,552 @@ msgstr "Aggiornamento multiplo"
 msgid "No User Name Provided"
 msgstr "Non è stato inserito alcun file"
 
+#~ msgid "Could not Update Master Thread parent with current time"
+#~ msgstr "Impossibile aggiornare il thread principale con l'ora corrente"
+
+#~ msgid "Error: this news item was not found"
+#~ msgstr "Errore - questa notizia non è stata trovata"
+
+#~ msgid "No Valid Forum Object"
+#~ msgstr "Nessuno oggetto forum valido"
+
+#~ msgid "Posting Failed"
+#~ msgstr "Posting Failed"
+
+#~ msgid "Unable to get new message id"
+#~ msgstr "Impossibile ottenere un nuovo ID per il messaggio"
+
+#~ msgid "Must Include A Message Body And Subject"
+#~ msgstr "Deve includere un oggetto e il contenuto"
+
+#~ msgid "No Valid ParentMessage Object"
+#~ msgstr "nessun oggetto padre valido"
+
+#~ msgid ""
+#~ "Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
+#~ msgstr ""
+#~ "Il nome del file può contenere solo caratteri alfanumerici e “-”, “_”, "
+#~ "“+”, “.”, “~”."
+
+#~ msgid "Project %1$s (%2$s) has released a new version of package “%3$s”."
+#~ msgstr ""
+#~ "Il progetto %1$s (%2$s) has rilasciato una nuova versione del pacchetto "
+#~ "“%3$s”."
+
+#~ msgid "You can download it by following this link"
+#~ msgstr "Lo puoi scaricare da:"
+
+#~ msgid ""
+#~ "You receive this email because you requested to be notified when new "
+#~ "versions of this package were released. If you don't wish to be notified "
+#~ "in the future, please login to %s and click this link:"
+#~ msgstr ""
+#~ "Stai ricevendo questa email poiché hai richiesto di essere notificato "
+#~ "quando nuove versioni di questo pacchetto vengono rilasciati. Se vuoi "
+#~ "disabilitare la notifica, fai il login a %s e segui questo link:"
+
+#~ msgid "Missing Required Parameters"
+#~ msgstr "Parametri mancanti"
+
+#~ msgid "Group object already exists"
+#~ msgstr "il gruppo esiste gia'"
+
+#~ msgid "Error: Cannot create group: %s"
+#~ msgstr "ERRORE: Impossibile creare il gruppo: %s"
+
+#~ msgid "Error: Cannot get group id: %s"
+#~ msgstr "ERRORE: Impossibile ottenere l'id gruppo: %s"
+
+#~ msgid "Error: Cannot add admin to newly created group: %s"
+#~ msgstr "ERRORE: Impossibile aggiungere l'amministratore al nuovo gruppo: %s"
+
+#~ msgid "Error: Cannot change group properties: %s"
+#~ msgstr "ERRORE: DB: Impossibile cambiare proprieta' gruppo: %s"
+
+#~ msgid "Error: Cannot change group status: %s"
+#~ msgstr "ERRORE: DB: Impossibile cambiare stato del gruppo: %s"
+
+#~ msgid "Could not insert SCM_BOX to database"
+#~ msgstr "Impossibile inserire SCM_BOX nel database"
+
+#~ msgid "SCM Box cannot be empty"
+#~ msgstr "Il parametro Server SCM è obbligatorio"
+
+#~ msgid "Your project registration for %s has been approved."
+#~ msgstr "Il tuo progetto su %s e' stato approvato."
+
+#~ msgid "Project Full Name"
+#~ msgstr "Nome completo del progetto"
+
+#~ msgid ""
+#~ "If you visit your own project page in %s while logged in, you will find "
+#~ "additional menu functions to your left labeled “Project Admin”."
+#~ msgstr ""
+#~ "Quando visiterai %s la pagina del tuo progetto, troverai una "
+#~ "funzionalita' aggiuntiva: 'Amministrazione Progetto'."
+
+#~ msgid ""
+#~ "We highly suggest that you now visit %1$s and create a public description "
+#~ "for your project. This can be done by visiting your project page while "
+#~ "logged in, and selecting “Project Admin” from the menus on the left (or "
+#~ "by visiting %2$s after login)."
+#~ msgstr ""
+#~ "Quando visiterai %1$s la pagina del tuo progetto, troverai una "
+#~ "funzionalita' aggiuntiva: 'Amministrazione Progetto'. Ti suggeriamo di "
+#~ "visitarla e di creare la descrizione pubblica del progetto (una volta "
+#~ "effettuato il login puoi accedervi all' %2$s)."
+
+#~ msgid ""
+#~ "Your project will also not appear in the Trove Software Map (primary list "
+#~ "of projects hosted on %s which offers great flexibility in browsing and "
+#~ "search) until you categorize it in the project administration screens. So "
+#~ "that people can find your project, you should do this now. Visit your "
+#~ "project while logged in, and select “Project Admin” from the menus on the "
+#~ "left."
+#~ msgstr ""
+#~ "Il tuo progetto non sara' visualizzato nella mappa dei progetti %s "
+#~ "fintanto che non verra' categorizzato nella amministrazione progetto. Per "
+#~ "fare in modo che le persone possano trovare il tuo progetto, dovresti "
+#~ "farlo subito. Visita il tuo progetto mentre sei loggato e seleziona "
+#~ "'Amministrazione Progetto' dal menu."
+
+#~ msgid "-- the %s staff"
+#~ msgstr "Il team %s"
+
+#~ msgid "%s Project Approved"
+#~ msgstr "Progetto %s approvato"
+
+#~ msgid "Your project registration for %s has been denied."
+#~ msgstr "Il tuo progetto %s è stato rifiutato."
+
+#~ msgid "Reasons for negative decision"
+#~ msgstr "Ragioni per il rifiuto"
+
+#~ msgid "%s Project Denied"
+#~ msgstr "Progetto %s rifiutato"
+
+#~ msgid "New %s Project Submitted"
+#~ msgstr "Nuovo progetto %s inserito"
+
+#~ msgid "Submitted Description"
+#~ msgstr "Descrizione inserita"
+
+#~ msgid ""
+#~ "The %s admin team will now examine your project submission. You will be "
+#~ "notified of their decision."
+#~ msgstr ""
+#~ "Il team di amministrazione di %s esaminera' la tua proposta di nuovo "
+#~ "progetto; riceverai un messaggio con la decisione presa."
+
+#~ msgid "You can approve this request here: %s"
+#~ msgstr "Per approvare la richiesta: %s"
+
+#~ msgid "Comments by the user:"
+#~ msgstr "Commenti dell'utente:"
+
+#~ msgid "Request to Join Project %s"
+#~ msgstr "Richiedi di partecipare al progetto %1$s"
+
+#~ msgid "Project Admin"
+#~ msgstr "Amministrazione progetto"
+
+#~ msgid "%s Account Registration"
+#~ msgstr "Registrazione account %s"
+
+#~ msgid "%s Reporting"
+#~ msgstr "Reportistica %s"
+
+#~ msgid "Last 24 h"
+#~ msgstr "Ultime 24 ore"
+
+#~ msgid "Last 7 days"
+#~ msgstr "Ultimi 7 giorni"
+
+#~ msgid "Last 2 weeks"
+#~ msgstr "Ultime 2 settimane"
+
+#~ msgid "Last month"
+#~ msgstr "Ultimo mese"
+
+#~ msgid "* Denotes requests > %s Days Old"
+#~ msgstr "* indica richieste più vecchie di %s giorni"
+
+#~ msgid "“%s” is a reserved alias. Please provide another name."
+#~ msgstr "'%s' è un alias riservato. Scegliere un nome diverso."
+
+#~ msgid "No Canned Responses set up in this Project"
+#~ msgstr "Nessuna risposta predefinita per questo progetto"
+
+#~ msgid "Choose the tracker to clone."
+#~ msgstr "Seleziona il tracker da copiare."
+
+#~ msgid "I am Sure"
+#~ msgstr "Sono sicuro"
+
+#~ msgid "I am Really Sure"
+#~ msgstr "Sono veramente sicuro"
+
+#~ msgid " (examples: meeting minutes, test results, RFP Docs)"
+#~ msgstr " (esempio: verbali, risultati di test, documenti, etc.)"
+
+#~ msgid "You are not monitoring any files."
+#~ msgstr "Non hai richiesto la notifica di alcun file."
+
+#~ msgid "Activity Percentile"
+#~ msgstr "Percentuale di attività"
+
+#~ msgid "View the %d Member(s)"
+#~ msgstr "Visualizza i %d membri"
+
+#~ msgid "There are no public subprojects available"
+#~ msgstr "Non ci sono sottoprogetti pubblici"
+
+#~ msgid "This mail is sent to you to remind you of pending/overdue tasks."
+#~ msgstr ""
+#~ "Questa mail viene inviata per ricordare che ci sono attività scadute."
+
+#~ msgid "The task manager item #%s is pending"
+#~ msgstr "L'attività #%s è scaduta"
+
+#~ msgid "Click here to visit the item %s"
+#~ msgstr "Clicca qui per andare all'elemento: %s"
+
+#~ msgid ""
+#~ "This mail is sent to you to remind you of pending/overdue tracker items."
+#~ msgstr ""
+#~ "Questa mail viene inviata per ricordare che ci sono elementi del tracker "
+#~ "scaduti."
+
+#~ msgid "The item #%s is pending"
+#~ msgstr "L'elemento #%s è scaduto"
+
+#~ msgid ""
+#~ "Visiting the link sent to you in this email will activate your account."
+#~ msgstr ""
+#~ "Ti verrà inviata una email di conferma per verificare il tuo indirizzo "
+#~ "email. Visita il link indicato nella email per attivare il tuo account."
+
+#~ msgid "Thank you"
+#~ msgstr "Grazie"
+
+#~ msgid "Invalid user name: %s"
+#~ msgstr "Utente non valido: %s"
+
+#~ msgid "Search results for “%s”"
+#~ msgstr "Risultati per <em>%s</em>"
+
+#~ msgid ""
+#~ "You can administrate lists from here. Please note that private lists can "
+#~ "still be viewed by members of your project, but are not listed on %s."
+#~ msgstr ""
+#~ "Puoi amministrare Mailing List da qui. Considera che liste private "
+#~ "possono essere viste da membri del progetto, non saranno però elencate su "
+#~ "%1$s."
+
+#~ msgid "Mailing Lists for %s"
+#~ msgstr "Mailing List per %s"
+
+#~ msgid "No Lists found for %s"
+#~ msgstr "Nessuna lista trovata per %s"
+
+#~ msgid "You have requested a change of email address on %s."
+#~ msgstr "Hai richiesto il cambio dell'indirizzo email di %s."
+
+#~ msgid "Please visit the following URL to complete the email change:"
+#~ msgstr "Visita il seguente URL per completare il cambio di indirizzo email:"
+
+#~ msgid "New Email Address"
+#~ msgstr "Nuovo indirizzo email"
+
+#~ msgid ""
+#~ "To avoid having to type your password every time for your CVS/SSH "
+#~ "developer account, you may upload your public key(s) here and they will "
+#~ "be placed on the CVS server in your ~/.ssh/authorized_keys file. This is "
+#~ "done by a cron job, so it may not happen immediately.  Please allow for a "
+#~ "one hour delay."
+#~ msgstr ""
+#~ "Per evitare di dover digitare la propria passowrd ogni volta che si "
+#~ "accede a CVS/SSH, è possibile inserire le chiavi pubbliche, queste "
+#~ "verranno memorizzate nel file ~/.ssh/authorized_keys sul server. Questa "
+#~ "attività è schedualta ogni ora."
+
+#~ msgid ""
+#~ "Authorized keys:<br /><em>Important: Make sure there are no line breaks "
+#~ "except between keys. After submitting, verify that the number of keys in "
+#~ "your file is what you expected.</em>"
+#~ msgstr ""
+#~ "Chiavi autorizzate:<br /><em>Importante: Assicurati che non ci siano "
+#~ "linee vuote tra le chiavi. Dopo aver inserito le chiavi, assicurati che "
+#~ "il numero di chiavi del file è quello atteso.</em>"
+
+#~ msgid "Email Address"
+#~ msgstr "Indirizzo e-mail"
+
+#~ msgid "Change Email Address"
+#~ msgstr "Cambia indirizzo e-mail"
+
+#~ msgid "Phone"
+#~ msgstr "Telefono:"
+
+#~ msgid "Fax"
+#~ msgstr "Fax"
+
+#~ msgid "Login with SSL"
+#~ msgstr "Login con SSL"
+
+#~ msgid ""
+#~ "Someone (presumably you) on the %s site requested a password change "
+#~ "through email verification."
+#~ msgstr ""
+#~ "Qualcuno (presumibilmente tu) sul sito %s ha richiesto un cambio di "
+#~ "password tramite verifica email."
+
+#~ msgid "If this was not you, ignore this message and nothing will happen."
+#~ msgstr " Se non sei stato tu, ignora questo messaggio, non succederà nulla."
+
+#~ msgid ""
+#~ "If you requested this verification, visit the following URL to change "
+#~ "your password:"
+#~ msgstr ""
+#~ "Se hai richiesto la verifica, visita il link seguente per cambiare la tua "
+#~ "password:"
+
+#~ msgid ""
+#~ "You are now being sent a confirmation email to verify your email address. "
+#~ "Visiting the link sent to you in this email will activate your account."
+#~ msgstr ""
+#~ "Ti verrà inviata una email di conferma per verificare il tuo indirizzo "
+#~ "email. Visita il link indicato nella email per attivare il tuo account."
+
+#~ msgid "Create a new %s below:"
+#~ msgstr "Crea un nuovo %s:"
+
+#~ msgid ""
+#~ "You cannot delete the processor %s since it is currently referenced in a "
+#~ "file release."
+#~ msgstr ""
+#~ "Non è possibile rimuovere il processore %s poiché è utilizzato in un "
+#~ "rilascio file."
+
+#~ msgid ""
+#~ "You cannot delete the language %s since it is currently referenced in a "
+#~ "user profile."
+#~ msgstr ""
+#~ "Non è possibile rimuovere la lingua %s poiché è utilizzata da un profilo "
+#~ "utente."
+
+#~ msgid "Are you sure you want to delete this %s?"
+#~ msgstr "Sei sicuro di voler rimuovere il %s?"
+
+#~ msgid "Edit the %ss Table"
+#~ msgstr "Modifica la tabella %ss"
+
+#~ msgid "Approving Project"
+#~ msgstr "Approvazione Progetto"
+
+#~ msgid "Other Information"
+#~ msgstr "Altre informazioni"
+
+#~ msgid "Active site users: <strong>%1$s</strong>"
+#~ msgstr "Utenti attivi: <strong>%1$s</strong>"
+
+#~ msgid "If you are not sure then why did you click “Delete”?"
+#~ msgstr "Se non eri sicuro perché hai cliccato su Rimuovi?"
+
+#~ msgid "New category short name (no spaces, Unix-like)"
+#~ msgstr "Nome breve (no spazi, tipo Unix)"
+
+#~ msgid "Category short name (no spaces, Unix-like)"
+#~ msgstr "Nome breve (no spazi, tipo Unix)"
+
+#~ msgid ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific project, visit admin "
+#~ "page of that project (below)."
+#~ msgstr ""
+#~ "Questa pagina permette di cambiare solo attributi diretti di un utente. "
+#~ "Per modificare le informazioni dell'utente relative a un particolare "
+#~ "progetto, visita la pagina di amministrazione del progetto in questione "
+#~ "(vedi sotto)."
+
+#~ msgid "Suspend"
+#~ msgstr "Sospeso"
+
+#~ msgid "Error: Choose a User To Monitor First"
+#~ msgstr "Errore - Prima devi selezionare un utente da monitorare"
+
+#~ msgid "No Forums Found for %s"
+#~ msgstr "Nessun forum trovato per %s"
+
+#~ msgid ""
+#~ "Edit the Release Notes or Change Log for this release of this package. "
+#~ "These changes will apply to all files attached to this release."
+#~ msgstr ""
+#~ "Modifica le note di rilascio o il changelog per questo rilascio del "
+#~ "pacchetto. Queste modifiche verranno applicate a tutti i file coinvolti "
+#~ "da questo rilascio."
+
+#~ msgid ""
+#~ "You can either upload the release notes and change log individually, or "
+#~ "paste them in together below."
+#~ msgstr ""
+#~ "Puoi sia caricare individualmente le note e il changelog, sia incollarle "
+#~ "insieme qui sotto."
+
+#~ msgid "Project totals"
+#~ msgstr "Totali progetto"
+
+#~ msgid "This drop-down box represents the current status of a tracker item."
+#~ msgstr ""
+#~ "In questa casella di selezione viene visualizzato lo stato attuale "
+#~ "dell'elemento."
+
+#~ msgid ""
+#~ "You can set the status to 'Pending' if you are waiting for a response "
+#~ "from the tracker item author.  When the author responds the status is "
+#~ "automatically reset to that of 'Open'. Otherwise, if the author doesn't "
+#~ "respond with an admin-defined amount of time (default is 14 days) then "
+#~ "the item is given a status of 'Deleted'."
+#~ msgstr ""
+#~ "Puoi impostare lo stato a 'Pending' se sei in attesa di una risposta da "
+#~ "chi ha inserito l'elemento. Quando l'autore risponde, lo stato viene "
+#~ "automaticamente impostato a 'Open'. Se l'autore non risponde entro un "
+#~ "tempo determinato (normalmente 14 giorn) viene impostato a 'Deleted'."
+
+#~ msgid ""
+#~ "The Sort By option allows you to determine how the browse results are "
+#~ "sorted."
+#~ msgstr ""
+#~ "L'opzione \"Ordina per\" ti permette di scegliere il tipo di ordinamento."
+
+#~ msgid ""
+#~ "You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, "
+#~ "or Assignee.  You can also have the results sorted in Ascending or "
+#~ "Descending order."
+#~ msgstr ""
+#~ "Puoi scegliere di ordinare per ID, Priorità, Sommario, Data di apertura, "
+#~ "Data di chiusura, inserito da o assegnato a. Puoi anche scegliere se i "
+#~ "risultati devono essere ordinati in ordine crescente o decrescente."
+
+#~ msgid ""
+#~ "The Data Type option determines the type of tracker item this is.  Since "
+#~ "the tracker rolls into one the bug, patch, support, etc... managers you "
+#~ "need to be able to determine which one of these an item should belong."
+#~ msgstr ""
+#~ "L'opzione Data Type determina il tracker. Un elemento inserito può far "
+#~ "parte dei bug, delle patch, delle richieste di supporto, perciò è "
+#~ "necessario individuare a quale Data Type un elemento appartiene."
+
+#~ msgid ""
+#~ "The priority option allows a user to define a tracker item priority "
+#~ "(ranging from 1-Lowest to 5-Highest)."
+#~ msgstr ""
+#~ "L'opzione \"Priorità\" permette all'utente di definire una priorità da 1 "
+#~ "(bassa) a 5 (alta)."
+
+#~ msgid ""
+#~ "This is especially helpful for bugs and support requests where a user "
+#~ "might find a critical problem with a project."
+#~ msgstr ""
+#~ "This is especially helpful for bugs and support requests where a user "
+#~ "might find a critical problem with a project."
+
+#~ msgid ""
+#~ "The canned response drop-down represents a list of project admin-defined "
+#~ "canned responses to common support or bug submission."
+#~ msgstr ""
+#~ "La casella di selezione delle risposte predefinite presenta un elenco "
+#~ "preparato dall'amministratore."
+
+#~ msgid ""
+#~ "If you are a project admin you can click the 'Manage Canned Responses' "
+#~ "link to define your own canned responses"
+#~ msgstr ""
+#~ "Se sei un amministratore di progetto puoi premere il link 'Manage Canned "
+#~ "Responses' per definire le risposte predefinite."
+
+#~ msgid "My Diary and Notes"
+#~ msgstr "Diario personale e Note"
+
+#~ msgid "View Diary and Notes"
+#~ msgstr "Visualizza Diario e Note"
+
+#~ msgid "Monitored Items"
+#~ msgstr "Elementi monitorati"
+
+#~ msgid "Notes and Changes"
+#~ msgstr "Note di rilascio e Changelog"
+
+#~ msgid "Read More/Comment"
+#~ msgstr "Leggi altro/Replica"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "ERRORE - oggetto e messaggio sono obbligatori"
+
+#~ msgid "Job inserted successfully"
+#~ msgstr "Posizione inserita"
+
+#~ msgid "Job updated successfully"
+#~ msgstr "Aggiornamento posizione effettuata"
+
+#~ msgid "Job update failed - wrong project_id"
+#~ msgstr "Aggiornamento posizione fallita - project_id errato"
+
+#~ msgid "Job skill updated successfully"
+#~ msgstr "Aggiornamento competenza posizione eseguito"
+
+#~ msgid "Job skill update failed - wrong project_id"
+#~ msgstr "Aggiornamento competenza posizione fallita - project_id errato"
+
+#~ msgid "Job skill deleted successfully"
+#~ msgstr "Rimozione competenza posizione effettuata"
+
+#~ msgid "Job skill delete failed - wrong project_id"
+#~ msgstr "Rimozione competenza posizione fallita - project_id errato"
+
+#~ msgid ""
+#~ "The following option determines if others can see your skills. If they "
+#~ "cannot, you can still enter your skills."
+#~ msgstr ""
+#~ "Le seguenti opzioni determinano se altri possono vedere le tue "
+#~ "competenze. Anche se non possono vederle, puoi comunque inserirle."
+
+#~ msgid "Upload data into the tasks"
+#~ msgstr "Effettua l'upload dei dati nel Gestore Attività"
+
+#~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
+#~ msgstr ""
+#~ "ERRORE - la dimensione del file deve essere compreso tra 20 e 256000 byte"
+
+#~ msgid "Choose the role for each user and then press “Add All”."
+#~ msgstr "Seleziona un ruolo per ogni utente e poi premi \"Aggiungi tutti\"."
+
+#~ msgid "Registration complete"
+#~ msgstr "Registrazione completata"
+
+#~ msgid ""
+#~ "Your project has been submitted to the %1$s administrators. Within 72 "
+#~ "hours, you will receive notification of their decision and further "
+#~ "instructions."
+#~ msgstr ""
+#~ "Il progetto è stato sottoposto agli amministratori di %1$s. Entro 72 ore "
+#~ "riceverai notifica della loro decisione e ulteriori istruzioni."
+
+#~ msgid "Thank you for choosing %1$s."
+#~ msgstr "Grazie per aver scelto %1$s."
+
+#~ msgid "Site-Wide Task and Hours (report)"
+#~ msgstr "Attività e ore per l'intero sito (grafico)"
+
+#~ msgid ""
+#~ "Download a raw-text version of this code by clicking on “Download Version”"
+#~ msgstr ""
+#~ "Scarica una versione in formato raw-text cliccando su &quot;Scarica "
+#~ "versione&quot;"
+
+#~ msgid "Area"
+#~ msgstr "Aree"
+
 #, fuzzy
 #~ msgid "Bazaar Repository Browser"
 #~ msgstr "Repository SCM"
@@ -23308,9 +23781,8 @@ msgstr "Non è stato inserito alcun file"
 #~ msgid "Repository name: "
 #~ msgstr "Repository SCM"
 
-#, fuzzy
 #~ msgid "No Valid Group Object"
-#~ msgstr "Group Object non valido"
+#~ msgstr "Nessun oggetto Group valido"
 
 #, fuzzy
 #~ msgid "Project:"
@@ -25174,3 +25646,219 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy
 #~ msgid "Invalid Group Name"
 #~ msgstr "Nome unix del progetto:"
+
+#~ msgid "Error doing insert"
+#~ msgstr "ERRORE durante l'inserimento"
+
+#~ msgid "Error Getting %s"
+#~ msgstr "Errore richiedendo %s"
+
+#~ msgid "Error inserting into skill inventory"
+#~ msgstr "ERRORE durante l'inserimento della competenza"
+
+#~ msgid "Invalid MessageID"
+#~ msgstr "MessageID non valido"
+
+#~ msgid "DevProfile"
+#~ msgstr "Profilo sviluppatore"
+
+#~ msgid "Registered: "
+#~ msgstr "Registrato:"
+
+#~ msgid "Check  all"
+#~ msgstr "Seleziona tutti"
+
+#~ msgid "Clear  all"
+#~ msgstr "Deseleziona tutti"
+
+#~ msgid ""
+#~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "
+#~ "the document (e.g. How to use the download server)<br /"
+#~ "><strong>Description:</strong> A brief description to be placed just "
+#~ "under the title."
+#~ msgstr ""
+#~ "<strong>Titolo del documento</strong>: si riferisce al nome breve del "
+#~ "titolo del documento (ad esempio, come usare il server per i file)<br /"
+#~ "><strong>Descrizione:</strong> Una descrizione breve da visualizzare "
+#~ "sotto il titolo."
+
+#~ msgid "Differences between %s and %s of %s."
+#~ msgstr "Differenze tra %s e %s di %s."
+
+#~ msgid ""
+#~ "Some of the changes could not automatically be combined.  Please look for "
+#~ "sections beginning with “%s”, and ending with “%s”.  You will need to "
+#~ "edit those sections by hand before you click Save."
+#~ msgstr ""
+#~ "Alcuni dei cambiamenti non hanno potuto essere uniti automaticamente. "
+#~ "Cerchi prego le sezioni che cominciano con '%s 'e concludentesi con '%s "
+#~ "'. Dovrete pubblicare a mano quelle sezioni prima che vi scattiate "
+#~ "risparmi."
+
+#~ msgid "Author will be logged as %s."
+#~ msgstr "L'autore sarà annotato come %s."
+
+#~ msgid "saved as %s"
+#~ msgstr "salvata a %s"
+
+#~ msgid "from %s"
+#~ msgstr "dalla %s"
+
+#~ msgid "- version %d saved to database as version %d"
+#~ msgstr "- versione %d salvata a base di dati a versione %d"
+
+#~ msgid "Included from %s"
+#~ msgstr "Inserire dalla %s"
+
+#~ msgid "Transcluded from %s"
+#~ msgstr "Inserire dalla %s"
+
+#~ msgid "Included from %s:"
+#~ msgstr "Inserire dalla %s:"
+
+#~ msgid "%s on %s:"
+#~ msgstr "%s a %s:"
+
+#~ msgid "%4d  %s\n"
+#~ msgstr "%4d  %s\n"
+
+#~ msgid "Owner: %s"
+#~ msgstr "Owner: %s"
+
+#~ msgid "See %s tips for editing."
+#~ msgstr "Vedere %s consigli per le modifiche."
+
+#~ msgid "You are signed in as %s"
+#~ msgstr "Utente corrente: %s"
+
+#~ msgid "I am Really Sure."
+#~ msgstr "Sono veramente sicuro."
+
+#~ msgid "I am Sure."
+#~ msgstr "Sono sicuro."
+
+#~ msgid "Not Object: Forum: %d"
+#~ msgstr "Non è un oggetto: Forum: %d"
+
+#~ msgid "Include of “%s” failed."
+#~ msgstr "Inserimento di “%s” fallito."
+
+#~ msgid "GoodStyle"
+#~ msgstr "BuonStile"
+
+#~ msgid ""
+#~ "Copy your changes to the clipboard or to another temporary place (e.g. "
+#~ "text editor)."
+#~ msgstr ""
+#~ "Copia le tue modifiche nella clipboard o temporaneamente in unaltro posto "
+#~ "(es: un editor di testo)"
+
+#~ msgid ""
+#~ "Make changes to the file again. Paste your additions from the clipboard "
+#~ "(or text editor)."
+#~ msgstr ""
+#~ "Cambia ancora il file ed installa le tue modifiche dalla clipboard (o "
+#~ "dall'editor di testo)"
+
+#~ msgid "(last edited %s)"
+#~ msgstr "(ultima modifica %s)"
+
+#~ msgid "version %s, saved %s."
+#~ msgstr "versione %s, salvata %s."
+
+#~ msgid "version %s, saved on %s."
+#~ msgstr "versione %s, salvata su %s."
+
+#~ msgid "(version %s, saved on %s)"
+#~ msgstr "(versione %s, salvata su %s)"
+
+#~ msgid "Use your browser's <b>Back</b> button to go back to the edit page."
+#~ msgstr ""
+#~ "Usa il pulsante <b>Precedente</b> del tuo browser per tornarealla pagina "
+#~ "di modifica"
+
+#~ msgid "Press <b>Save</b> again."
+#~ msgstr "Premi ancora <b>Salva</b>"
+
+#~ msgid ""
+#~ "PhpWiki is unable to save your changes, because another user edited and "
+#~ "saved the page while you were editing the page too. If saving proceeded "
+#~ "now changes from the previous author would be lost."
+#~ msgstr ""
+#~ "PhpWiki non è riuscito a salvare i tuoi cambiamenti perchè un altro "
+#~ "utente ha cambiato la pagina mentre la stavi modificando. Se il "
+#~ "salvataggio viene comunque fatto, i cambiamenti dell'altro utente "
+#~ "verranno persi."
+
+#~ msgid "Problem while updating %s"
+#~ msgstr "Problemi durante l'aggiornamento %s"
+
+#~ msgid "Problem while editing %s"
+#~ msgstr "Si sono verificati problemi durante la modifica %s"
+
+#~ msgid "PHP %s Warnings"
+#~ msgstr "Avvertimenti Di PHP %s"
+
+#~ msgid "Click here to <a href=\"%s\">remove the page now</a>."
+#~ msgstr "Per <a href=\"%s\">rimuovere la pagina</a> clicca qua."
+
+#~ msgid "WikiDiff::apply: line count mismatch: %s != %s"
+#~ msgstr "WikiDiff::applu: il numero delle linee è differente: %s != %s"
+
+#~ msgid "WikiDiff::_check: failed"
+#~ msgstr "WikiDiff::_check: fallito"
+
+#~ msgid "WikiDiff::_check: edit sequence is non-optimal"
+#~ msgstr "WikiDiff::_check: la sequenza di editazione non è ottimale"
+
+#~ msgid "WikiDiff Okay: LCS = %s"
+#~ msgstr "WikiDiff Ok: LCS = %s"
+
+#~ msgid "Searching for \"%s\" ....."
+#~ msgstr "Sto cercando \"%s\" ....."
+
+#~ msgid "MySQL error: %s"
+#~ msgstr "Errore di MySQL: %s"
+
+#~ msgid ""
+#~ "\n"
+#~ "Or reply to this e-mail entering your response between the following "
+#~ "markers: \n"
+#~ "%1$s\n"
+#~ "(enter your response here)\n"
+#~ "%1$s"
+#~ msgstr ""
+#~ "\n"
+#~ "Oppure replica a questa e-mail tra i seguenti marcatori: \n"
+#~ "%1$s\n"
+#~ "(inserisci qui la tua risposta)\n"
+#~ "%1$s"
+
+#~ msgid "Document Manager: Display Document"
+#~ msgstr "Document Manager: Visualizza documenti"
+
+#~ msgid "Step 1:   Edit Release"
+#~ msgstr "Fase 1: Modifica rilascio"
+
+#~ msgid "Trove Categorization: "
+#~ msgstr "Categoria Trove: "
+
+#~ msgid "Error: No group was chosen or you cannot access it"
+#~ msgstr "ERRORE - Non è stato scelto nessun Id gruppo"
+
+#~ msgid "Error: disabled feature."
+#~ msgstr "Errore - funzionalità disabilitata."
+
+#~ msgid "Error: double submit"
+#~ msgstr "Errore - inserimento duplicato"
+
+#~ msgid "Error: For some reason group_id and/or survey_id did not make it he"
+#~ msgstr ""
+#~ "Per qualche ragione, l'ID del progetto o del sondaggio non è arrivato a "
+#~ "questa pagina."
+
+#~ msgid "Short Description: "
+#~ msgstr "Descrizione breve: "
+
+#~ msgid "Homepage Link: "
+#~ msgstr "Homepage: "

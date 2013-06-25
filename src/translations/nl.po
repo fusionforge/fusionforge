@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 12:22+0200\n"
+"POT-Creation-Date: 2013-06-25 17:51+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -207,12 +207,10 @@ msgstr ""
 #: common/docman/actions/monitorfile.php:56
 #: common/tracker/actions/tracker.php:434
 #: common/tracker/actions/tracker.php:451
-#, fuzzy
 msgid "Monitoring Started"
 msgstr "Monitoring gestart"
 
 #: common/docman/actions/monitorfile.php:76
-#, fuzzy
 msgid "Monitoring Stopped"
 msgstr "Monitoring gestopt"
 
@@ -597,9 +595,8 @@ msgid "; "
 msgstr ""
 
 #: common/docman/DocumentManager.class.php:187
-#, fuzzy
 msgid "Last modified"
-msgstr "Lijst toegevoegd"
+msgstr "Meest recente verandering"
 
 #: common/docman/include/DocumentGroupHTML.class.php:42
 #: common/survey/SurveyResponse.class.php:88
@@ -629,8 +626,8 @@ msgstr "Lijst toegevoegd"
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/snippet/download.php:45 www/survey/admin/question.php:64
-#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:82
-#: www/survey/admin/show_csv.php:84 www/survey/admin/show_results.php:69
+#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:80
+#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:69
 #: www/survey/admin/show_results.php:73 www/survey/admin/show_results.php:84
 #: www/survey/admin/show_results.php:86 www/survey/admin/show_results.php:133
 #: www/survey/admin/show_results.php:135 www/tracker/admin/index.php:190
@@ -3311,7 +3308,6 @@ msgid "Map of projects, by categories or types."
 msgstr ""
 
 #: common/include/Navigation.class.php:257
-#, fuzzy
 msgid "Code Snippets"
 msgstr "Codefragmenten"
 
@@ -3320,9 +3316,8 @@ msgid "Tooling library. Small coding tips."
 msgstr ""
 
 #: common/include/Navigation.class.php:266
-#, fuzzy
 msgid "Project Openings"
-msgstr "Project&nbsp;vacatures"
+msgstr "Project vacatures"
 
 #: common/include/Navigation.class.php:268
 msgid "Hiring Market Place."
@@ -4205,9 +4200,9 @@ msgstr ""
 "-- de %1$s beheerders\n"
 
 #: common/mail/MailingList.class.php:201
-#, fuzzy, php-format
+#, php-format
 msgid "%s New Mailing List"
-msgstr "%1$s Nieuwe Mailinglijst"
+msgstr "%s Nieuwe Mailinglijst"
 
 #: common/mail/MailingList.class.php:221
 #, fuzzy
@@ -4466,9 +4461,8 @@ msgid "Question Added"
 msgstr "Vraag toegevoegd"
 
 #: common/survey/SurveyQuestion.class.php:149
-#, fuzzy
 msgid "Update failed"
-msgstr "Dagelijks bijgewerkt"
+msgstr "Wijzigen mislukt"
 
 #: common/survey/SurveyQuestion.class.php:194
 msgid "Error finding question"
@@ -5015,14 +5009,12 @@ msgid ""
 msgstr ""
 
 #: common/tracker/actions/browse.php:539 www/pm/browse_task.php:210
-#, fuzzy
 msgid "Check all"
-msgstr "Alles &nbsp;controleren"
+msgstr "Alles controleren"
 
 #: common/tracker/actions/browse.php:541 www/pm/browse_task.php:212
-#, fuzzy
 msgid "Clear all"
-msgstr "Alles &nbsp;verwijderen"
+msgstr "Alles verwijderen"
 
 #: common/tracker/actions/browse.php:568 common/tracker/actions/browse.php:747
 #: common/tracker/actions/detail.php:87
@@ -5035,7 +5027,6 @@ msgstr "Alles &nbsp;verwijderen"
 #: www/pm/add_task.php:124 www/pm/browse_task.php:241
 #: www/pm/browse_task.php:381 www/pm/detail_task.php:125
 #: www/pm/mod_task.php:173
-#, fuzzy
 msgid "Assigned to"
 msgstr "Toegewezen aan"
 
@@ -7536,9 +7527,9 @@ msgid "Please replace this file with your own website"
 msgstr ""
 
 #: cronjobs/homedirs.php:155
-#, fuzzy, php-format
+#, php-format
 msgid "Welcome to %s"
-msgstr "Welkom bij %1$s"
+msgstr "Welkom bij %s"
 
 #: cronjobs/homedirs.php:157
 #, php-format
@@ -7656,15 +7647,13 @@ msgstr "Ongeldig e-mail adres"
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
 #: www/account/lostpw.php:89 www/account/pending-resend.php:71
 #: www/account/verify.php:78
-#, fuzzy
 msgid "Login name"
-msgstr "Loginnaam:"
+msgstr "Loginnaam"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: www/account/verify.php:82
-#, fuzzy
 msgid "Password"
-msgstr "Wachtwoord:"
+msgstr "Wachtwoord"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:208
@@ -8379,7 +8368,6 @@ msgstr "Nieuw project registreren"
 #: plugins/contribtracker/www/global_admin.php:397
 #: www/project/admin/users.php:381 www/project/admin/users.php:441
 #: www/project/admin/users.php:465
-#, fuzzy
 msgid "Role name"
 msgstr "Rolnaam"
 
@@ -10400,9 +10388,8 @@ msgid "Unable to get the lists"
 msgstr ""
 
 #: plugins/mailman/www/admin/index.php:144
-#, fuzzy
 msgid "Mailing List Name"
-msgstr "Mailinglijst naam:"
+msgstr "Mailinglijst naam"
 
 #: plugins/mailman/www/admin/index.php:147
 #: plugins/mailman/www/admin/index.php:179 www/mail/admin/index.php:191
@@ -10466,9 +10453,8 @@ msgid ""
 msgstr ""
 
 #: plugins/mailman/www/index.php:74 www/mail/index.php:74
-#, fuzzy
 msgid "Choose a list to browse, search, and post messages."
-msgstr "<p>Kies een lijst als je berichten wilt zoeken, lezen of plaatsen.</p>"
+msgstr "Kies een lijst als je berichten wilt zoeken, lezen of plaatsen."
 
 #: plugins/mailman/www/mailman_utils.php:20
 #, fuzzy, php-format
@@ -13989,31 +13975,31 @@ msgid ""
 "Changing your email address will require confirmation from your new email "
 "address, so that we can ensure we have a good email address on file."
 msgstr ""
+"Om je e-mailadres te wijzigen hebben we bevestiging nodig van dit nieuwe "
+"emailadres, zodat we er zeker van zijn dat we een correct emailadres "
+"geregistreerd hebben."
 
 #: www/account/change_email.php:81
-#, fuzzy
 msgid ""
 "We need to maintain an accurate email address for each user due to the level "
 "of access we grant via this account. If we need to reach a user for issues "
 "arriving from a shell or project account, it is important that we be able to "
 "do so."
 msgstr ""
-"<p>Om je e-mailadres te wijzigen hebben we bevestiging nodig van dit nieuwe "
-"emailadres, zodat we er zeker van zijn dat we een correct emailadres "
-"geregistreerd hebben.</p><p>We hebben een correct emailadres nodig voor "
-"iedere gebruiker vanwege het type toegang dat we beschikbaar stellen d.m.v. "
-"dit account. Als we een gebruiker moeten kunnen bereiken vanwege problemen "
-"die te maken hebben met een shell of project account, dan is het belangrijk "
-"dat we daar ook toe in staat zijn.</p>  <p>Door op de submit button te "
-"drukken wordt er een mail met een bevestigings URL verstuurd naar het nieuwe "
-"emailadres. Door het aanklikken van dit bevestigings URL wordt de wijziging "
-"van je emailadres voltooid.</p>"
+"We hebben een correct emailadres nodig voor iedere gebruiker vanwege het "
+"type toegang dat we beschikbaar stellen d.m.v. dit account. Als we een "
+"gebruiker moeten kunnen bereiken vanwege problemen die te maken hebben met "
+"een shell of project account, dan is het belangrijk dat we daar ook toe in "
+"staat zijn."
 
 #: www/account/change_email.php:82
 msgid ""
 "Submitting the form below will mail a confirmation URL to the new email "
 "address. Visiting this link will complete the email change."
 msgstr ""
+"Door op de submit button te drukken wordt er een mail met een bevestigings "
+"URL verstuurd naar het nieuwe emailadres. Door het aanklikken van dit "
+"bevestigings URL wordt de wijziging van je emailadres voltooid."
 
 #: www/account/change_email.php:88
 msgid "New Email Address:"
@@ -14146,7 +14132,6 @@ msgstr ""
 "2). Lees de ssh documentatie voor verdere informatie over key sharing.</p>"
 
 #: www/account/editsshkeys.php:75
-#, fuzzy
 msgid ""
 "To generate a public key, run the program 'ssh-keygen' (you can use both "
 "protocol 1 or 2). The public key will be placed at '~/.ssh/identity."
@@ -14154,15 +14139,11 @@ msgid ""
 "pub' (protocol version 2). Read the ssh documentation for further "
 "information on sharing keys."
 msgstr ""
-"<p>Om te voorkomen dat je iedere keer je wachtwoord moet intypen voor je CVS/"
-"SSH ontwikkelaars account, kun je hier je public key(s) uploaden zodat ze  "
-"op de CVS server in je ~/.ssh/authorized_keys file geplaatst worden. Dit "
-"wordt gedaan door een cron job, dus het gebeurt waarschijnlijk niet meteen.  "
-"Wacht in ieder geval een uur.</p><p>Om een public key te genereren kun je "
-"het programma 'ssh-keygen' gebruiken (je kunt zowel protocol 1 als 2 "
-"gebruiken). De public key zal worden geplaatst in '~/.ssh/identity."
-"pub' (protocol 1) en '~/.ssh/id_dsa.pub' of '~/.ssh/id_rsa.pub' (protocol "
-"2). Lees de ssh documentatie voor verdere informatie over key sharing.</p>"
+"Om een public key te genereren kun je het programma 'ssh-keygen' gebruiken "
+"(je kunt zowel protocol 1 als 2 gebruiken). De public key zal worden "
+"geplaatst in '~/.ssh/identity.pub' (protocol 1) en '~/.ssh/id_dsa.pub' of "
+"'~/.ssh/id_rsa.pub' (protocol 2). Lees de ssh documentatie voor verdere "
+"informatie over key sharing."
 
 #: www/account/editsshkeys.php:76
 #, fuzzy
@@ -14186,25 +14167,21 @@ msgid ""
 "You are now a registered user on %1$s, the online development environment "
 "for Open Source projects."
 msgstr ""
+"Je bent nu een geregistreerde gebruiker van %1$s, de online ontwikkel "
+"omgeving voor Open Source projecten."
 
 #: www/account/first.php:33
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "As a registered user, you can participate fully in the activities on the "
 "site. You may now post messages to the project message forums, post bugs for "
 "software in %1$s, sign on as a project developer, or even start your own "
 "project."
 msgstr ""
-"<p>Je bent nu een geregistreerde gebruiker van %1$s, de online ontwikkel "
-"omgeving voor Open Source projecten.</p><p>Als een geregistreerde gebruiker "
-"kan je volledig deelnemen aan de activiteiten op de site. Je kan nu "
-"boodschappen posten in de project forums, bugs melden voor software in %1$s, "
-"je aanmelden als project ontwikkelaar, of je eigen project starten.</p><p>We "
-"adviseren dat je in iedere geval de <a href=\"/docs/site/\"><b>Site "
-"Documentatie</b></a> doorleest zodat je voldoende informatie hebt om "
-"volledig gebruik te maken van %1$s.</p><p>Veel plezier, en aarzel niet om "
-"commentaar te geven zodat we %1$s kunnen blijven verbeteren.</p><p>--De %1$s "
-"beheerders.</p>"
+"Als een geregistreerde gebruiker kan je volledig deelnemen aan de "
+"activiteiten op de site. Je kan nu boodschappen posten in de project forums, "
+"bugs melden voor software in %1$s, je aanmelden als project ontwikkelaar, of "
+"je eigen project starten."
 
 #: www/account/first.php:36
 #, fuzzy, php-format
@@ -14678,13 +14655,12 @@ msgid "Verify"
 msgstr ""
 
 #: www/account/verify.php:68
-#, fuzzy
 msgid ""
 "In order to complete your registration, login now. Your account will then be "
 "activated for normal logins."
 msgstr ""
-"<p>Om je registratie af te ronden dien je nu in te loggen. Je account wordt "
-"dan geactiveerd voor normaal gebruik.</p>"
+"Om je registratie af te ronden dien je nu in te loggen. Je account wordt dan "
+"geactiveerd voor normaal gebruik."
 
 #: www/activity/index.php:102
 msgid "Forum Post"
@@ -15365,9 +15341,8 @@ msgid "Display Projects Beginning with:"
 msgstr "Toon groepen die beginnen met :"
 
 #: www/admin/index.php:148
-#, fuzzy
 msgid "Search <em>(groupid, project Unix name, project full name)</em>"
-msgstr "Zoeken <em>(groepsID, unix naam groep, volledige naam)</em>"
+msgstr "Zoeken <em>(groepsID, Unix naam groep, volledige naam)</em>"
 
 #: www/admin/index.php:155
 msgid "Register New Project"
@@ -15639,7 +15614,7 @@ msgstr "Niet doen"
 #: www/admin/pending-news.php:150 www/export/rssAboTask.php:146
 #: www/my/diary.php:185 www/news/admin/index.php:137 www/news/submit.php:148
 msgid "Details"
-msgstr ""
+msgstr "Details"
 
 #: www/admin/pluginman.php:55
 #, php-format
@@ -15856,12 +15831,10 @@ msgid "New category short name (no spaces, unix-like)"
 msgstr "Nieuwe categorie - verkorte naam (geen spaties, unix stijl)"
 
 #: www/admin/trove/trove_cat_add.php:119
-#, fuzzy
 msgid "New category full name (Maximum length is 80 chars)"
 msgstr "Nieuwe categorie - volledige naam (VARCHAR 80)"
 
 #: www/admin/trove/trove_cat_add.php:121
-#, fuzzy
 msgid "New category description (Maximum length is 255 chars)"
 msgstr "Nieuwe categorie - beschrijving (VARCHAR 255)"
 
@@ -15870,9 +15843,8 @@ msgid "Error: a category can't be the same as its own parent: "
 msgstr ""
 
 #: www/admin/trove/trove_cat_edit.php:70
-#, fuzzy
 msgid "Error In Trove Operation :"
-msgstr "Fout in Trove bewerking"
+msgstr "Fout in Trove bewerking:"
 
 #: www/admin/trove/trove_cat_edit.php:92
 #, fuzzy
@@ -15884,7 +15856,6 @@ msgstr ""
 "default in local.inc is opgenomen"
 
 #: www/admin/trove/trove_cat_edit.php:108
-#, fuzzy
 msgid "No such category, that trove cat does not exist"
 msgstr "Gevraagde Trove categorie bestaat niet"
 
@@ -15902,12 +15873,10 @@ msgid "Category short name (no spaces, unix-like)"
 msgstr "Nieuwe categorie - verkorte naam (geen spaties, unix stijl)"
 
 #: www/admin/trove/trove_cat_edit.php:146
-#, fuzzy
 msgid "Category full name (Maximum length is 80 chars)"
 msgstr "Nieuwe categorie - volledige naam (VARCHAR 80)"
 
 #: www/admin/trove/trove_cat_edit.php:149
-#, fuzzy
 msgid "Category description (Maximum length is 255 chars)"
 msgstr "Nieuwe categorie - beschrijving (VARCHAR 255)"
 
@@ -16145,9 +16114,8 @@ msgid "[Change PW]"
 msgstr "Andere week"
 
 #: www/admin/userlist.php:146
-#, fuzzy
 msgid "User List"
-msgstr ": Gebruikerslijst"
+msgstr "Gebruikerslijst"
 
 #: www/admin/userlist.php:150
 msgid "Users that use plugin"
@@ -16221,9 +16189,8 @@ msgid "Add Virtual Host"
 msgstr "Voeg Virtuele Host toe"
 
 #: www/admin/vhost.php:123 www/register/index.php:204
-#, fuzzy
 msgid "Project Unix Name"
-msgstr "Nieuwe projectnaam"
+msgstr "Unix project naam"
 
 #: www/admin/vhost.php:128
 msgid "Virtual Host Name"
@@ -16276,7 +16243,6 @@ msgid "User could not be found."
 msgstr "Geen."
 
 #: www/developer/diary.php:44
-#, fuzzy
 msgid "Diary and Notes for"
 msgstr "Logboek en aantekeningen voor"
 
@@ -16290,7 +16256,6 @@ msgid "Posted on "
 msgstr "Gepost door"
 
 #: www/developer/diary.php:62
-#, fuzzy
 msgid "Existing Diary and Notes Entries"
 msgstr "Bestaand logboek en aantekeningen"
 
@@ -16322,16 +16287,15 @@ msgstr "Gebruiker wordt nu gemonitord"
 #: www/developer/monitor.php:68
 msgid "You will now be emailed this user's diary entries."
 msgstr ""
+"De aantekeningen van deze gebruiker worden vanaf nu per e-mail toegestuurd."
 
 #: www/developer/monitor.php:69
-#, fuzzy
 msgid ""
 "To turn off monitoring, simply click the <strong>Monitor user</strong> link "
 "again."
 msgstr ""
-"<p>De aantekeningen van deze gebruiker worden vanaf nu per e-mail "
-"toegestuurd.</p><p>Klik nogmaals op <strong>Monitor gebruiker</strong> om "
-"monitoring weer uit te schakelen.</p>"
+"Klik nogmaals op <strong>Monitor gebruiker</strong> om monitoring weer uit "
+"te schakelen."
 
 #: www/developer/monitor.php:76
 msgid "Monitoring has been turned off"
@@ -18312,9 +18276,8 @@ msgid "Unable to get the list %s : %s"
 msgstr ""
 
 #: www/mail/index.php:78
-#, fuzzy
 msgid "Address"
-msgstr "Adres:"
+msgstr "Adres"
 
 #: www/mail/index.php:97
 #, php-format
@@ -18578,9 +18541,8 @@ msgid "These items were approved this past week (total: %1$s)"
 msgstr "Deze items werden vorige week goedgekeurd (totaal: %1$s)"
 
 #: www/news/index.php:38
-#, fuzzy
 msgid "Choose a News item and you can browse, search, and post messages."
-msgstr "<p>Kies een nieuws item om te kunnen bladeren/zoeken/posten.<p>"
+msgstr "Kies een nieuws item om te kunnen bladeren/zoeken/posten."
 
 #: www/news/index.php:72
 #, fuzzy, php-format
@@ -18786,19 +18748,17 @@ msgid "No such posting for this project"
 msgstr "Een dergelijke vacature komt in dit project niet voor"
 
 #: www/people/editjob.php:157
-#, fuzzy
 msgid ""
 "Now you can edit/change the list of skills attached to this posting. "
 "Developers will be able to match their skills with your requirements."
 msgstr ""
-"<p>Nu kun je de lijst met vaardigheden wijzigen die gekoppeld zijn aan deze "
+"Nu kun je de lijst met vaardigheden wijzigen die gekoppeld zijn aan deze "
 "vacature. Ontwikkelaars kunnen dan hun vaardigheden met jouw vacature-eisen "
-"vergelijken.</p><p>Alle oproepen worden na twee weken automatisch afgesloten."
-"</p>"
+"vergelijken."
 
 #: www/people/editjob.php:159
 msgid "All postings are automatically closed after two weeks."
-msgstr ""
+msgstr "Alle oproepen worden na twee weken automatisch afgesloten."
 
 #: www/people/editjob.php:175
 msgid "Update Descriptions"
@@ -19081,7 +19041,6 @@ msgid "Added to skill inventory"
 msgstr "Toegevoegd aan vaardigheden overzicht"
 
 #: www/people/people_utils.php:108 www/people/people_utils.php:216
-#, fuzzy
 msgid "Error: skill already in your inventory"
 msgstr "Fout - reeds toegevoegd aan vaardigheden overzicht"
 
@@ -19859,13 +19818,12 @@ msgid "All Tasks By Assignee"
 msgstr "Alle taken per technicus"
 
 #: www/pm/reporting/index.php:238
-#, fuzzy
 msgid ""
 "Note that same task can be assigned to several technicians. Such task will "
 "be counted for each of them."
 msgstr ""
-"<p>Let op dat sommige taken aan meer technici kunnen worden toegewezen. "
-"Dergelijke taken zullen voor ieder van hen geteld worden.</p>"
+"Let op dat sommige taken aan meer technici kunnen worden toegewezen. "
+"Dergelijke taken zullen voor ieder van hen geteld worden."
 
 #: www/pm/task.php:70
 #, fuzzy
@@ -20227,18 +20185,16 @@ msgid ""
 msgstr ""
 
 #: www/project/admin/massadd.php:77
-#, fuzzy
 msgid ""
 "Choose the <strong>First Letter</strong> of the name of the person you wish "
 "to add."
 msgstr ""
-"<p>Kies de <strong>eerste letter</strong> van de naam van de persoon die je "
-"wilt toevoegen.</p>"
+"Kies de <strong>eerste letter</strong> van de naam van de persoon die je "
+"wilt toevoegen."
 
 #: www/project/admin/massadd.php:87 www/project/admin/users.php:98
-#, fuzzy
 msgid "No Matching Users Found"
-msgstr "<p>Geen matchende gebruikers gevonden</p>"
+msgstr "Geen matchende gebruikers gevonden"
 
 #: www/project/admin/massadd.php:92
 #, fuzzy
@@ -20432,9 +20388,8 @@ msgid "Active Tools"
 msgstr "Actief"
 
 #: www/project/admin/tools.php:151
-#, fuzzy
 msgid "Use Project Activity"
-msgstr "Project activiteit"
+msgstr "Gebruik project activiteit"
 
 #: www/project/admin/tools.php:164
 msgid "Use Forums"
@@ -20683,13 +20638,12 @@ msgid "Project Member List"
 msgstr "Projectledenlijst"
 
 #: www/project/memberlist.php:37
-#, fuzzy
 msgid ""
 "If you would like to contribute to this project by becoming a member, "
 "contact one of the project admins, designated in bold text below."
 msgstr ""
-"<p>Als je aan dit project wilt bijdragen als ontwikkelaar, neem dan contact "
-"op met de projectbeheerder hieronder (vetgedrukt).<br><br>"
+"Als je aan dit project wilt bijdragen als ontwikkelaar, neem dan contact op "
+"met de projectbeheerder hieronder (vetgedrukt)."
 
 #: www/project/memberlist.php:49
 #, fuzzy
@@ -21300,13 +21254,12 @@ msgid "User Activity"
 msgstr "Gebruikers activiteit"
 
 #: www/reporting/useract.php:61 www/reporting/usertime.php:61
-#, fuzzy
 msgid ""
 "Choose the <strong>First Letter</strong> of the name of the person you wish "
 "to report on."
 msgstr ""
 "Kies de <strong>eerste letter</strong> van de naam van de persoon waarover "
-"je gegevens wilt vastleggen.<p>"
+"je gegevens wilt vastleggen."
 
 #: www/reporting/useradded.php:53
 msgid "Users Added"
@@ -21593,7 +21546,6 @@ msgid "People"
 msgstr "Mensen"
 
 #: www/search/index.php:82
-#, fuzzy
 msgid "Error: Invalid search"
 msgstr "Fout - ongeldige zoekterm"
 
@@ -21669,12 +21621,10 @@ msgid "Submit A New Snippet"
 msgstr "Toevoegen nieuw codefragment"
 
 #: www/snippet/add_snippet_to_package.php:56
-#, fuzzy
 msgid "Error: snippet_package_version_id missing"
 msgstr "Fout - Bundel versie ID van codefragment ontbreekt"
 
 #: www/snippet/add_snippet_to_package.php:72
-#, fuzzy
 msgid "Error: Only the creator of a package version can add snippets to it."
 msgstr ""
 "Fout - Alleen de maker van deze package versie kan er codefragmenten aan "
@@ -21692,15 +21642,13 @@ msgid "Back To Add Page"
 msgstr "Terug naar Pagina toevoegen"
 
 #: www/snippet/add_snippet_to_package.php:96
-#, fuzzy
 msgid "Error: That snippet was already added to this package."
 msgstr "Fout - Dat codefragment was reeds toegevoegd."
 
 #: www/snippet/add_snippet_to_package.php:108 www/snippet/addversion.php:71
 #: www/snippet/submit.php:74
-#, fuzzy
 msgid "Error doing snippet version insert"
-msgstr "Fout - Dat codefragment bestaat niet."
+msgstr "Fout bij invoegen CODEFRAGMENT VERSIE!"
 
 #: www/snippet/add_snippet_to_package.php:110 www/snippet/addversion.php:74
 msgid "Snippet Version Added Successfully."
@@ -21709,7 +21657,6 @@ msgstr "Codefragment versie toegevoegd."
 #: www/snippet/add_snippet_to_package.php:113 www/snippet/addversion.php:77
 #: www/snippet/addversion.php:198 www/snippet/package.php:123
 #: www/snippet/submit.php:81
-#, fuzzy
 msgid "Error: Go back and fill in all the information"
 msgstr "Fout - ga terug en vul alle informatie in"
 
@@ -21745,9 +21692,8 @@ msgid "Snippets In This Package"
 msgstr "Codefragmenten in deze bundel"
 
 #: www/snippet/addversion.php:39
-#, fuzzy
 msgid "Error: snippet doesn't exist"
-msgstr "Fout - Dat codefragment bestaat niet."
+msgstr "Fout - Dat codefragment bestaat niet"
 
 #: www/snippet/addversion.php:81 www/snippet/addversion.php:202
 #, fuzzy
@@ -21772,9 +21718,8 @@ msgid "Error: snippet_package doesn't exist"
 msgstr "Fout: codefragment bundel bestaat niet"
 
 #: www/snippet/addversion.php:154 www/snippet/package.php:75
-#, fuzzy
 msgid "Error doing snippet package version insert"
-msgstr "Fout - Bundel versie ID van codefragment ontbreekt"
+msgstr "Fout bij toevoegen CODEFRAGMENT BUNDEL VERSIE!"
 
 #: www/snippet/addversion.php:155
 #, fuzzy
@@ -21882,7 +21827,6 @@ msgid "Error: mangled URL?"
 msgstr "Fout: was de URL of form ongeldig??"
 
 #: www/snippet/detail.php:57 www/snippet/detail.php:147
-#, fuzzy
 msgid "Error: no versions found"
 msgstr "Fout - geen versies gevonden"
 
@@ -22051,9 +21995,8 @@ msgid "Choose One"
 msgstr "Kies er &eacute;&eacute;n"
 
 #: www/snippet/snippet_utils.php:27
-#, fuzzy
 msgid "Unix Admin"
-msgstr "Site beheer"
+msgstr "Unix beheer"
 
 #: www/snippet/snippet_utils.php:28
 msgid "HTML Manipulation"
@@ -22132,9 +22075,8 @@ msgid "Create A Package"
 msgstr "Cre&euml;er een bundel"
 
 #: www/snippet/submit.php:59
-#, fuzzy
 msgid "Error doing snippet insert"
-msgstr "Fout bij toevoegen"
+msgstr "Fout bij toevoegen CODEFRAGMENT!"
 
 #: www/snippet/submit.php:61 www/snippet/submit.php:76
 msgid "Snippet Added Successfully."
@@ -22523,7 +22465,7 @@ msgstr "Bewerk een vraag"
 msgid "Add a Question"
 msgstr "Voeg een vraag toe"
 
-#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:61
+#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
 #: www/survey/admin/show_questions.php:35
 #: www/survey/admin/show_results_aggregate.php:35
 #: www/survey/admin/show_results_comments.php:36
@@ -22555,7 +22497,7 @@ msgstr "Wijziging doorgevoerd"
 msgid "No questions found"
 msgstr "%1$s vragen gevonden"
 
-#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:133
+#: www/survey/admin/show_csv.php:80 www/survey/admin/show_results.php:133
 #, fuzzy
 msgid "Cannot get Survey Response Factory"
 msgstr "Geen enqu&ecirc;teantwoorden gevonden"
@@ -22880,9 +22822,8 @@ msgid "Flag"
 msgstr ""
 
 #: www/survey/survey.php:51
-#, fuzzy
 msgid "Vote for Survey"
-msgstr "Naam van de enqu&ecirc;te:"
+msgstr "Naam van de enquête"
 
 #: www/survey/survey.php:55 www/survey/survey_resp.php:49
 #, fuzzy
@@ -23265,6 +23206,593 @@ msgstr "Alles bijwerken"
 msgid "No User Name Provided"
 msgstr "Gebruikersnaam"
 
+#~ msgid "Could not Update Master Thread parent with current time"
+#~ msgstr "Kan master thread parent niet aanpassen met huidige tijd"
+
+#~ msgid "Error: this news item was not found"
+#~ msgstr "Fout - nieuws onderwerp niet gevonden"
+
+#~ msgid "No Valid Forum Object"
+#~ msgstr "geen geldig forum object"
+
+#~ msgid "Posting Failed"
+#~ msgstr "Plaatsen van bericht niet gelukt"
+
+#~ msgid "Unable to get new message id"
+#~ msgstr "Kan geen nieuw bericht ID krijgen"
+
+#~ msgid "Must Include A Message Body And Subject"
+#~ msgstr "Berichttekst en -onderwerp verplicht"
+
+#~ msgid "No Valid ParentMessage Object"
+#~ msgstr "Geen geldig ParentMessage object"
+
+#~ msgid "Missing Required Parameters"
+#~ msgstr "Ontbrekende parameters"
+
+#~ msgid "Your project registration for %s has been approved."
+#~ msgstr "Je project aanvraag voor %s is goedgekeurd."
+
+#~ msgid "Project Full Name"
+#~ msgstr "Volledige project naam"
+
+#~ msgid ""
+#~ "We highly suggest that you now visit %1$s and create a public description "
+#~ "for your project. This can be done by visiting your project page while "
+#~ "logged in, and selecting “Project Admin” from the menus on the left (or "
+#~ "by visiting %2$s after login)."
+#~ msgstr ""
+#~ "We adviseren dringend om %1$s te bezoeken en een algemene "
+#~ "projectbeschrijving te geven. Dit kan ofwel door je project pagina te "
+#~ "bezoeken terwijl je ingelogd bent, en 'Project beheer' te keizen in het "
+#~ "menu aan de linkerkant, ofwel door naar %2$s , na login."
+
+#~ msgid ""
+#~ "Your project will also not appear in the Trove Software Map (primary list "
+#~ "of projects hosted on %s which offers great flexibility in browsing and "
+#~ "search) until you categorize it in the project administration screens. So "
+#~ "that people can find your project, you should do this now. Visit your "
+#~ "project while logged in, and select “Project Admin” from the menus on the "
+#~ "left."
+#~ msgstr ""
+#~ "Je project zal niet in het Trove overzicht verschijnen (een lijst van "
+#~ "projecten op %s om makkelijk rond te kijken en te zoeken) zolang je het "
+#~ "niet categorizeert in de project beheer schermen. Doe het meteen zodat de "
+#~ "mensen je project ook kunnen vinden."
+
+#~ msgid ""
+#~ "Enjoy the system, and please tell others about %s. Let us know if there "
+#~ "is anything we can do to help you."
+#~ msgstr ""
+#~ "Veel plezier met dit systeem en vertel ook anderen over %s. Laat het ons "
+#~ "weten als we ergens mee kunnen helpen."
+
+#~ msgid "-- the %s staff"
+#~ msgstr "Het %s team"
+
+#~ msgid "%s Project Approved"
+#~ msgstr "%s project goedgekeurd"
+
+#~ msgid "Your project registration for %s has been denied."
+#~ msgstr "Je project aanvraag voor %s is afgewezen."
+
+#~ msgid "Reasons for negative decision"
+#~ msgstr "Reden van afwijzing"
+
+#~ msgid "%s Project Denied"
+#~ msgstr "%s Project afgewezen"
+
+#~ msgid "New %s Project Submitted"
+#~ msgstr "Nieuw %s project ingediend"
+
+#~ msgid "Submitted Description"
+#~ msgstr "Ingediende beschrijving"
+
+#~ msgid ""
+#~ "The %s admin team will now examine your project submission. You will be "
+#~ "notified of their decision."
+#~ msgstr ""
+#~ "De %s beheerder zal de projectaanvraag nu beoordelen. Je ontvangt bericht "
+#~ "krijgen over de beslissing."
+
+#~ msgid "%1$s (%2$s) has requested to join your project."
+#~ msgstr ""
+#~ "%1$s (%2$s) heeft een verzoek ingediend om aan je project deel te nemen."
+
+#~ msgid "You can approve this request here: %s"
+#~ msgstr "Je kunt dit verzoek afhandelen op de: %s"
+
+#~ msgid "Request to Join Project %s"
+#~ msgstr "Verzoek om deel te mogen nemen aan project %1$s"
+
+#~ msgid "Project Admin"
+#~ msgstr "Project beheer"
+
+#~ msgid "Enjoy the site."
+#~ msgstr "Veel plezier."
+
+#~ msgid "%s Account Registration"
+#~ msgstr "%s Account registratie"
+
+#~ msgid ""
+#~ "A mailing list will be created on %1$s in one hour\n"
+#~ "and you are the list administrator.\n"
+#~ "\n"
+#~ "This list is: %3$s@%2$s .\n"
+#~ "\n"
+#~ "Your mailing list info is at:\n"
+#~ "%4$s .\n"
+#~ "\n"
+#~ "List administration can be found at:\n"
+#~ "%5$s .\n"
+#~ "\n"
+#~ "Your list password is: %6$s .\n"
+#~ "You are encouraged to change this password as soon as possible.\n"
+#~ "\n"
+#~ "Thank you for registering your project with %1$s."
+#~ msgstr ""
+#~ "In 6-24 uur zal er een mailinglijst gecreëerd worden op %1$s \n"
+#~ " en jij bent de lijstbeheerder.\n"
+#~ "\n"
+#~ "Deze lijst is: %3$s@%2$s .\n"
+#~ "\n"
+#~ "Je mailing lijst info staat op:\n"
+#~ "%4$s .\n"
+#~ "\n"
+#~ "Lijstbeheer staat op:\n"
+#~ "%5$s .\n"
+#~ "\n"
+#~ "Het wachtwoord voor je lijst is: %6$s .\n"
+#~ "Verander dit wachtwoord zo snel mogelijk.\n"
+#~ "\n"
+#~ "Bedankt voor het aanmelden van je project bij %1$s."
+
+#~ msgid "%s Reporting"
+#~ msgstr "%s overzicht"
+
+#~ msgid "Last 24 h"
+#~ msgstr "Laatste 24 uur"
+
+#~ msgid "Last 7 days"
+#~ msgstr "Laatste 7 dagen"
+
+#~ msgid "Last month"
+#~ msgstr "Laatste maand"
+
+#~ msgid "* Denotes requests > %s Days Old"
+#~ msgstr "* Geeft aan: verzoeken > %s dagen oud"
+
+#~ msgid "No Canned Responses set up in this Project"
+#~ msgstr "Voor deze groep zijn geen standaard antwoorden beschikbaar"
+
+#~ msgid "I am Sure"
+#~ msgstr "Ja, zeker weten!"
+
+#~ msgid "I am Really Sure"
+#~ msgstr "Ik weet het helemaal zeker"
+
+#~ msgid "You are not monitoring any files."
+#~ msgstr "Je monitort nu geen bestanden."
+
+#~ msgid "Activity Percentile"
+#~ msgstr "Activiteit percentiel"
+
+#~ msgid "There are no public subprojects available"
+#~ msgstr "Er zijn geen openbare subprojecten beschikbaar"
+
+#~ msgid "This mail is sent to you to remind you of pending/overdue tasks."
+#~ msgstr ""
+#~ "Je hebt deze email onvangen om je te wijzen op openstaande of over tijd "
+#~ "zijnde taken."
+
+#~ msgid "The task manager item #%s is pending"
+#~ msgstr "Taakbeheerder item  #%s staat open"
+
+#~ msgid "Click here to visit the item %s"
+#~ msgstr "Klik hier om te springen naar item %s"
+
+#~ msgid ""
+#~ "This mail is sent to you to remind you of pending/overdue tracker items."
+#~ msgstr ""
+#~ "Je hebt deze email onvangen om je te wijzen op openstaande of over tijd "
+#~ "zijnde trackers."
+
+#~ msgid "The item #%s is pending"
+#~ msgstr "Item #%s staat open"
+
+#~ msgid ""
+#~ "Visiting the link sent to you in this email will activate your account."
+#~ msgstr "Klik op de link in de e-mail om je account te activeren."
+
+#~ msgid "Thank you"
+#~ msgstr "Bedankt"
+
+#~ msgid "Invalid user name: %s"
+#~ msgstr "Ongeldige gebruiker: %s"
+
+#~ msgid "Search results for “%s”"
+#~ msgstr "Zoekresulten voor <em>%s</em>"
+
+#~ msgid ""
+#~ "You can administrate lists from here. Please note that private lists can "
+#~ "still be viewed by members of your project, but are not listed on %s."
+#~ msgstr ""
+#~ "Je kunt lijsten hiervandaan beheren. Denk eraan dat privé denk eraan dat "
+#~ "lijsten nog steeds door leden van jouw project zichtbaar zijn, maar niet "
+#~ "zichtbaar zijn in %1$s."
+
+#~ msgid "Mailing Lists for %s"
+#~ msgstr "Mailinglijsten voor %s"
+
+#~ msgid "No Lists found for %s"
+#~ msgstr "Geen lijsten gevonden voor %s"
+
+#~ msgid ""
+#~ "A mailing list will be created on %1$s in few minutes\n"
+#~ "and you are the list administrator.\n"
+#~ "\n"
+#~ "This list is: %3$s@%2$s .\n"
+#~ "\n"
+#~ "Your mailing list info is at:\n"
+#~ "%4$s .\n"
+#~ "\n"
+#~ "List administration can be found at:\n"
+#~ "%5$s .\n"
+#~ "\n"
+#~ "Your list password is: %6$s .\n"
+#~ "You are encouraged to change this password as soon as possible.\n"
+#~ "\n"
+#~ "Thank you for registering your project with %1$s."
+#~ msgstr ""
+#~ "In 6-24 uur zal er een mailinglijst gecreëerd worden op %1$s \n"
+#~ " en jij bent de lijstbeheerder.\n"
+#~ "\n"
+#~ "Deze lijst is: %3$s@%2$s .\n"
+#~ "\n"
+#~ "Je mailing lijst info staat op:\n"
+#~ "%4$s .\n"
+#~ "\n"
+#~ "Lijstbeheer staat op:\n"
+#~ "%5$s .\n"
+#~ "\n"
+#~ "Het wachtwoord voor je lijst is: %6$s .\n"
+#~ "Verander dit wachtwoord zo snel mogelijk.\n"
+#~ "\n"
+#~ "Bedankt voor het aanmelden van je project bij %1$s."
+
+#~ msgid "You have requested a change of email address on %s."
+#~ msgstr "Je hebt om een wijziging van je e-mail adres verzocht op %s."
+
+#~ msgid "Please visit the following URL to complete the email change:"
+#~ msgstr ""
+#~ "Kies het volgende URL om de wijzging van je e-mail adres te voltooien:"
+
+#~ msgid "New Email Address"
+#~ msgstr "Nieuw e-mail adres"
+
+#~ msgid ""
+#~ "To avoid having to type your password every time for your CVS/SSH "
+#~ "developer account, you may upload your public key(s) here and they will "
+#~ "be placed on the CVS server in your ~/.ssh/authorized_keys file. This is "
+#~ "done by a cron job, so it may not happen immediately.  Please allow for a "
+#~ "one hour delay."
+#~ msgstr ""
+#~ "Om te voorkomen dat je iedere keer je wachtwoord moet intypen voor je CVS/"
+#~ "SSH ontwikkelaars account, kun je hier je public key(s) uploaden zodat "
+#~ "ze  op de CVS server in je ~/.ssh/authorized_keys file geplaatst worden. "
+#~ "Dit wordt gedaan door een cron job, dus het gebeurt waarschijnlijk niet "
+#~ "meteen.  Wacht in ieder geval een uur."
+
+#~ msgid ""
+#~ "Authorized keys:<br /><em>Important: Make sure there are no line breaks "
+#~ "except between keys. After submitting, verify that the number of keys in "
+#~ "your file is what you expected.</em>"
+#~ msgstr ""
+#~ "Geauthorizeerde sleutels:<br /><em>Belangrijk: let op dat er alleen "
+#~ "regeleinden tussen sleutels staan. Controleer na submitten of het aantal "
+#~ "sleutels in je bestand correct is.</em>"
+
+#~ msgid "Email Address"
+#~ msgstr "E-mail adres"
+
+#~ msgid "Change Email Address"
+#~ msgstr "Wijzig e-mail adres"
+
+#~ msgid "Phone"
+#~ msgstr "Telefoon:"
+
+#~ msgid "Fax"
+#~ msgstr "Fax"
+
+#~ msgid "Login with SSL"
+#~ msgstr "Login via SSL"
+
+#~ msgid ""
+#~ "Someone (presumably you) on the %s site requested a password change "
+#~ "through email verification."
+#~ msgstr ""
+#~ "Iemand (waarschijnlijk jijzelf) op de %s site heeft een wachtwoord "
+#~ "wijziging via e-mail bevestiging aangevraagd."
+
+#~ msgid "If this was not you, ignore this message and nothing will happen."
+#~ msgstr ""
+#~ "Als dit niet zo is, negeer dan deze melding zodat het wijzigingsverzoek "
+#~ "vervalt."
+
+#~ msgid ""
+#~ "If you requested this verification, visit the following URL to change "
+#~ "your password:"
+#~ msgstr ""
+#~ "Als je deze bevestiging wel hebt aangevraagd, volg dan het volgende URL "
+#~ "om je wachtwoord te wijzigen:"
+
+#~ msgid ""
+#~ "You are now being sent a confirmation email to verify your email address. "
+#~ "Visiting the link sent to you in this email will activate your account."
+#~ msgstr ""
+#~ "Ter verificatie van het e-mail adres wordt er nu een bevestiging per e-"
+#~ "mail opgestuurd. Klik op de link in de e-mail om je account te activeren."
+
+#~ msgid "Create a new %s below:"
+#~ msgstr "Maak een nieuwe %s hieronder:"
+
+#~ msgid "%s successfully added."
+#~ msgstr "%s toegevoegen gelukt."
+
+#~ msgid ""
+#~ "You cannot delete the processor %s since it is currently referenced in a "
+#~ "file release."
+#~ msgstr ""
+#~ "Je kunt de %s processor niet verwijderen omdat er nog een verwijzing "
+#~ "aanhangt in een bestands release."
+
+#~ msgid ""
+#~ "You cannot delete the language %s since it is currently referenced in a "
+#~ "user profile."
+#~ msgstr ""
+#~ "Je kunt de taal %s niet verwijderen omdat er nog een verwijzing aanhangt "
+#~ "in een gebruikersprofiel."
+
+#~ msgid ""
+#~ "You cannot delete the theme %s since it is currently referenced in a user "
+#~ "profile."
+#~ msgstr ""
+#~ "Je kunt de taal %s niet verwijderen omdat er nog een verwijzing aanhangt "
+#~ "in een gebruikersprofiel."
+
+#~ msgid "Are you sure you want to delete this %s?"
+#~ msgstr "Weet je zeker dat je %s wilt verwijderen?"
+
+#~ msgid "%s successfully deleted."
+#~ msgstr "%s verwijderen gelukt."
+
+#~ msgid "Modify the %s below:"
+#~ msgstr "Wijzig de %s hieronder:"
+
+#~ msgid "%s successfully modified."
+#~ msgstr "%s wijzigen gelukt."
+
+#~ msgid "Edit the %ss Table"
+#~ msgstr "Wijzig de %ss tabel"
+
+#~ msgid "Approving Project"
+#~ msgstr "Groep goedgekeurd"
+
+#~ msgid "Other Information"
+#~ msgstr "Overige informatie"
+
+#~ msgid "Active site users: <strong>%1$s</strong>"
+#~ msgstr "Actieve site deelnemers: <strong>%1$s</strong>"
+
+#~ msgid "If you are not sure then why did you click “Delete”?"
+#~ msgstr "Waarom druk je op 'Wissen' als je er niet zeker van bent?"
+
+#~ msgid "Error In Trove Operation"
+#~ msgstr "Fout in Trove bewerking"
+
+#~ msgid "New category short name (no spaces, Unix-like)"
+#~ msgstr "Nieuwe categorie - verkorte naam (geen spaties, Unix stijl)"
+
+#~ msgid "Category short name (no spaces, Unix-like)"
+#~ msgstr "Nieuwe categorie - verkorte naam (geen spaties, Unix stijl)"
+
+#~ msgid ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific project, visit admin "
+#~ "page of that project (below)."
+#~ msgstr ""
+#~ "Via deze pagina kun je alleen de directe eigenschappen van de het "
+#~ "gebruikerobject wijzigen. Om eigenschappen van een gebruiker in een "
+#~ "specifieke groep te wijzigen moet je naar de beheerpagina van die bewuste "
+#~ "groep gaan (hieronder)."
+
+#~ msgid ""
+#~ "Unix status updated mirroring web status, unless it has value 'No Unix "
+#~ "account (N)'"
+#~ msgstr ""
+#~ "Unix status aangepast conform web status, tenzij de status was 'Geen Unix "
+#~ "account (N)'"
+
+#~ msgid "Suspend"
+#~ msgstr "Opgeschort"
+
+#~ msgid "Error: Choose a User To Monitor First"
+#~ msgstr "Fout - kies eerst een gebruiker om te monitoren"
+
+#~ msgid "No Forums Found for %s"
+#~ msgstr "Geen forums gevonden voor %1$s"
+
+#~ msgid ""
+#~ "Edit the Release Notes or Change Log for this release of this package. "
+#~ "These changes will apply to all files attached to this release."
+#~ msgstr ""
+#~ "Pas de Release Notes of het Change Log aan voor deze oplevering of deze "
+#~ "bundel. Deze wijzigingen zullen gelden voor alle bestanden in deze "
+#~ "oplevering."
+
+#~ msgid ""
+#~ "You can either upload the release notes and change log individually, or "
+#~ "paste them in together below."
+#~ msgstr ""
+#~ "Je kunt ofwel de Release Notes of het Change Log ieder afzonderlijk "
+#~ "uploaden, of ze samen hieronder inplakken."
+
+#~ msgid "Project totals"
+#~ msgstr "Project totalen"
+
+#~ msgid "This drop-down box represents the current status of a tracker item."
+#~ msgstr ""
+#~ "Deze drop-down lijst geeft de huidige status van een tracker item aan."
+
+#~ msgid ""
+#~ "You can set the status to 'Pending' if you are waiting for a response "
+#~ "from the tracker item author.  When the author responds the status is "
+#~ "automatically reset to that of 'Open'. Otherwise, if the author doesn't "
+#~ "respond with an admin-defined amount of time (default is 14 days) then "
+#~ "the item is given a status of 'Deleted'."
+#~ msgstr ""
+#~ "Je kunt de status op 'In Behandeling' zetten als je op antwoord wacht van "
+#~ "de opsteller van het tracker item.  Als de opsteller antwoord geeft wordt "
+#~ "de status automatisch op 'Open' gezet. Als de opsteller daarentegen geen "
+#~ "antwoord geeft binnen een door de beheerder gespecificeerde tijd "
+#~ "(standaard 14 dagen) krijgt het item de status  'Verwijderd'."
+
+#~ msgid ""
+#~ "The Sort By option allows you to determine how the browse results are "
+#~ "sorted."
+#~ msgstr "De sorteer-op optie geeft aan hoe de resultaten gesorteerd worden."
+
+#~ msgid ""
+#~ "You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, "
+#~ "or Assignee.  You can also have the results sorted in Ascending or "
+#~ "Descending order."
+#~ msgstr ""
+#~ "Er kan gesorteerd worden op ID, Prioriteit, Samenvatting, Openingsdatum, "
+#~ "Sluitdatum, Opvoerder, or Toegewezen-aan.  Er kan ook aangegeven worden "
+#~ "of oplopend of aflopend gesorteerd moet worden."
+
+#~ msgid ""
+#~ "The Data Type option determines the type of tracker item this is.  Since "
+#~ "the tracker rolls into one the bug, patch, support, etc... managers you "
+#~ "need to be able to determine which one of these an item should belong."
+#~ msgstr ""
+#~ "De gegevenstype optie geeft aan wat voor type tracker item dit is.  Omdat "
+#~ "de tracker de bug, patch, hulp, etc. opties in zich verenigt moeten "
+#~ "beheerders de gelegenheid hebben aan te geven wat voor type een item is."
+
+#~ msgid ""
+#~ "This has the added benefit of enabling an admin to turn a support request "
+#~ "into a bug."
+#~ msgstr ""
+#~ "Dit heeft bovendien het voordeel dat een beheerder een verzoek om hulp "
+#~ "als bug kan opvoeren."
+
+#~ msgid ""
+#~ "The priority option allows a user to define a tracker item priority "
+#~ "(ranging from 1-Lowest to 5-Highest)."
+#~ msgstr ""
+#~ "De prioriteit keuze geeft een gebruiker de mogelijkheid een tracker item "
+#~ "op prioriteit te filteren (van 1-Laagste tot 5-Hoogste)."
+
+#~ msgid ""
+#~ "This is especially helpful for bugs and support requests where a user "
+#~ "might find a critical problem with a project."
+#~ msgstr ""
+#~ "Dit is extra handig bij bugs en hulpverzoeken als er een kritisch "
+#~ "probleem in een project opduikt."
+
+#~ msgid ""
+#~ "The canned response drop-down represents a list of project admin-defined "
+#~ "canned responses to common support or bug submission."
+#~ msgstr ""
+#~ "De standaard antwoorden drop-down lijst geeft een lijst van door de "
+#~ "project beheerder gedefinieerde standaard antwoorden op hulp verzoeken of "
+#~ "bug meldingen."
+
+#~ msgid ""
+#~ "If you are a project admin you can click the 'Manage Canned Responses' "
+#~ "link to define your own canned responses"
+#~ msgstr ""
+#~ "Als je project beheerder bent kun je op de '(Manage Canned Responses)' "
+#~ "link klikken om je eigen standaard antwoorden aan te maken."
+
+#~ msgid "My Diary and Notes"
+#~ msgstr "Mijn logboek en aantekeningen"
+
+#~ msgid "View Diary and Notes"
+#~ msgstr "Bekijk logboek en aantekeningen"
+
+#~ msgid "Notes and Changes"
+#~ msgstr "Notities en Wijzigingen"
+
+#~ msgid "Read More/Comment"
+#~ msgstr "Lees verder/Commentaar"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "Fout - zowel titel als berichttekst zijn verplicht"
+
+#~ msgid "Job inserted successfully"
+#~ msgstr "Vacature toegevoegd"
+
+#~ msgid "Job updated successfully"
+#~ msgstr "Vacature aangepast"
+
+#~ msgid "Job update failed - wrong project_id"
+#~ msgstr "Aanpassen vacature niet gelukt - verkeerd project ID"
+
+#~ msgid "Job skill updated successfully"
+#~ msgstr "Vacature-vaardigheden aangepasd"
+
+#~ msgid "Job skill update failed - wrong project_id"
+#~ msgstr "Aanpassen vacature-vaardigheid niet gelukt - verkeerd project ID"
+
+#~ msgid "Job skill deleted successfully"
+#~ msgstr "Job skill Vacature-vaardigheid verwijderd"
+
+#~ msgid "Job skill delete failed - wrong project_id"
+#~ msgstr "Verwijderen vacature-vaardigheid niet gelukt - verkeerd project ID"
+
+#~ msgid ""
+#~ "The following option determines if others can see your skills. If they "
+#~ "cannot, you can still enter your skills."
+#~ msgstr ""
+#~ "Onderstaande optie bepaalt of anderen je vaardigheden kunnen zien. Ook "
+#~ "als deze optie is uitgeschakeld kan je hieronder vaardigheden toevoegen."
+
+#~ msgid "Upload data into the tasks"
+#~ msgstr "Data uploaden in de taak manager"
+
+#~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
+#~ msgstr "Fout - bestand moet > 20 bytes en < 256000 bytes in lengte zijn"
+
+#~ msgid "Choose the role for each user and then press “Add All”."
+#~ msgstr ""
+#~ "Kies voor iedere gebruiker een rol en klik daarna op &quot;Alle "
+#~ "toevoegen&quot;."
+
+#~ msgid "Registration complete"
+#~ msgstr "Registratie compleet"
+
+#~ msgid ""
+#~ "Your project has been submitted to the %1$s administrators. Within 72 "
+#~ "hours, you will receive notification of their decision and further "
+#~ "instructions."
+#~ msgstr ""
+#~ "Je projectaanvraag is ingediend bij de %1$s beheerder. Binnen 72 uur "
+#~ "ontvang je een beslissing over de aanvraag, en verdere instructies."
+
+#~ msgid "Site-Wide Task and Hours (report)"
+#~ msgstr "Sitebrede taken en uren (overzicht)"
+
+#~ msgid ""
+#~ "Download a raw-text version of this code by clicking on “Download Version”"
+#~ msgstr ""
+#~ "Download een platte tekst versie van deze code door te klikken op &quot;"
+#~ "Download versie&quot;"
+
+#~ msgid "Area"
+#~ msgstr "Gebieden"
+
 #, fuzzy
 #~ msgid "Bazaar Repository Browser"
 #~ msgstr "SCM repository"
@@ -23285,9 +23813,8 @@ msgstr "Gebruikersnaam"
 #~ msgid "Repository name: "
 #~ msgstr "SCM repository"
 
-#, fuzzy
 #~ msgid "No Valid Group Object"
-#~ msgstr "Geen geldig Groep Object"
+#~ msgstr "Geen geldig groep object"
 
 #, fuzzy
 #~ msgid "Project:"
@@ -24899,3 +25426,181 @@ msgstr "Gebruikersnaam"
 #, fuzzy
 #~ msgid "Invalid Group Name"
 #~ msgstr "Unix groepsnaam:"
+
+#~ msgid "Error doing insert"
+#~ msgstr "Fout bij invoegen"
+
+#~ msgid "Error Getting %s"
+#~ msgstr "Fout bij ophalen %s"
+
+#~ msgid "Error inserting into skill inventory"
+#~ msgstr "Fout bij toevoegen aan vaardigheden overzicht"
+
+#~ msgid "Invalid MessageID"
+#~ msgstr "Ongeldig bericht ID"
+
+#~ msgid "DevProfile"
+#~ msgstr "Ontwikkelaarsprofiel"
+
+#~ msgid "Registered: "
+#~ msgstr "Geregistreerd:"
+
+#~ msgid "Followup"
+#~ msgstr "Reacties"
+
+#~ msgid "Check  all"
+#~ msgstr "Alles  controleren"
+
+#~ msgid "Clear  all"
+#~ msgstr "Alles  verwijderen"
+
+#~ msgid ""
+#~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "
+#~ "the document (e.g. How to use the download server)<br /"
+#~ "><strong>Description:</strong> A brief description to be placed just "
+#~ "under the title."
+#~ msgstr ""
+#~ "<strong>Document Titel</strong>:  verwijst naar de verkorte titel van het "
+#~ "document (b.v. Het gebruik van de download server)<br /"
+#~ "><strong>Omschrijving:</strong> Een korte omschrijving die vlak onder de "
+#~ "titel komt."
+
+#~ msgid "saved as %s"
+#~ msgstr "bewaard als %s"
+
+#~ msgid "from %s"
+#~ msgstr "van %s"
+
+#~ msgid "The %d most recent %s are listed below."
+#~ msgstr "De %d meest recent %s staan hieronder."
+
+#~ msgid "%4d  %s\n"
+#~ msgstr "%4d  %s\n"
+
+#~ msgid "See %s tips for editing."
+#~ msgstr "%s tips for veranderen."
+
+#~ msgid "I am Really Sure."
+#~ msgstr "Ik weet het helemaal zeker."
+
+#~ msgid "I am Sure."
+#~ msgstr "Ik weet het zeker."
+
+#~ msgid "Include of “%s” failed."
+#~ msgstr "Insert van “%s” gefaald."
+
+#~ msgid "The PhpWiki programming team"
+#~ msgstr "Het PhpWiki programmeerteam"
+
+#~ msgid "GoodStyle"
+#~ msgstr "GoedeStijl"
+
+#~ msgid "OldTextFormattingRules"
+#~ msgstr "OudTekstFormatteringsRegels"
+
+#~ msgid "The PhpWiki Programming Team"
+#~ msgstr "Het PhpWiki programmeerteam"
+
+#~ msgid "Lists nested too deep in SetHTMLOutputMode"
+#~ msgstr "Lijsten nesten te diep in SetHTMLOutputMode"
+
+#~ msgid ""
+#~ "Copy your changes to the clipboard or to another temporary place (e.g. "
+#~ "text editor)."
+#~ msgstr ""
+#~ "Kopier je veranderingen naar het klipbord of een andere tijdelijke plaats "
+#~ "(bijv. een tekst editor)."
+
+#~ msgid ""
+#~ "%s of the page. You should now see the most current version of the page. "
+#~ "Your changes are no longer there."
+#~ msgstr ""
+#~ "%s op de pagina.  Je zou nu de meest recente versie van de pagina moeten "
+#~ "zien.  Jouw veranderingen staan er nu niet meer."
+
+#~ msgid ""
+#~ "Make changes to the file again. Paste your additions from the clipboard "
+#~ "(or text editor)."
+#~ msgstr ""
+#~ "Breng je veranderingen aan de pagina opnieuw aan.  Plak je toevoeginen "
+#~ "van het klipbord (of tekst editor)."
+
+#~ msgid "In order to recover from this situation, follow these steps:"
+#~ msgstr "Om uit deze benarde situatie te geraken, volg je deze stappen:"
+
+#~ msgid "version %s, saved %s."
+#~ msgstr "versie %s, bewarrd %s."
+
+#~ msgid "version %s, saved on %s."
+#~ msgstr "versie %s, bewarrd op %s."
+
+#~ msgid "(version %s, saved on %s)"
+#~ msgstr "(versie %s, bewaard op %s)"
+
+#~ msgid "Use your browser's <b>Back</b> button to go back to the edit page."
+#~ msgstr ""
+#~ "Gebruik de <b>Terug</b> knop van je bladeraar om terug te gaan naar de "
+#~ "verander tekst pagina."
+
+#~ msgid "Press <b>Save</b> again."
+#~ msgstr "Druk opnieuw op <b>Bewaar</b>."
+
+#~ msgid ""
+#~ "PhpWiki is unable to save your changes, because another user edited and "
+#~ "saved the page while you were editing the page too. If saving proceeded "
+#~ "now changes from the previous author would be lost."
+#~ msgstr ""
+#~ "PhpWiki kan je veranderingen niet bewaren, want een andere gebruiker\n"
+#~ "heeft de pagina veranderd terwijl jij de pagina ook aan het veranderen\n"
+#~ "was.  Als bewaren nu doorgang zou vinden, zouden de veranderingen van\n"
+#~ "de vorige auteur verloren gaan."
+
+#~ msgid "Problem while editing %s"
+#~ msgstr "Probleem tijdens veranderen %s"
+
+#~ msgid "Click here to <a href=\"%s\">remove the page now</a>."
+#~ msgstr "Klik hier om <a href=\"%s\">de pagina nu te verwijderen</a>."
+
+#~ msgid ""
+#~ "You must set the administrator account and password before you can log in."
+#~ msgstr ""
+#~ "Je moet de beheerder gebruiker en het wachtwoord zetten voordat je in kan "
+#~ "loggen."
+
+#~ msgid "Searching for \"%s\" ....."
+#~ msgstr "Zoeken naar \"%s\" ..."
+
+#~ msgid "MySQL error: %s"
+#~ msgstr "MySQL fout: %s"
+
+#~ msgid "%d pages match your query."
+#~ msgstr "%d pagina's voldoen aan je vraag."
+
+#~ msgid "(first day for this Wiki)"
+#~ msgstr "(eerste dag voor deze Wiki)"
+
+#~ msgid "Document Manager: Display Document"
+#~ msgstr "Documentbeheer: Document tonen"
+
+#~ msgid "Step 1:   Edit Release"
+#~ msgstr "Stap 1:   Release bewerken"
+
+#~ msgid "Trove Categorization: "
+#~ msgstr "Trove classificatie:"
+
+#~ msgid "Error: No group was chosen or you cannot access it"
+#~ msgstr "Fout - geen groepsID gekozen"
+
+#~ msgid "Error: disabled feature."
+#~ msgstr "Fout - optie uitgezet."
+
+#~ msgid "Error: For some reason group_id and/or survey_id did not make it he"
+#~ msgstr ""
+#~ "Om een of andere reden is het Groeps ID of Enquête ID niet aan deze "
+#~ "pagina doorgegeven"
+
+#~ msgid "Short Description: "
+#~ msgstr "Korte omschrijving"
+
+#~ msgid "Homepage Link: "
+#~ msgstr "Link naar startpagina"

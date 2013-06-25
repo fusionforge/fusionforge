@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 12:22+0200\n"
+"POT-Creation-Date: 2013-06-25 17:51+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -209,12 +209,10 @@ msgstr ""
 #: common/docman/actions/monitorfile.php:56
 #: common/tracker/actions/tracker.php:434
 #: common/tracker/actions/tracker.php:451
-#, fuzzy
 msgid "Monitoring Started"
 msgstr "Bevakning startad"
 
 #: common/docman/actions/monitorfile.php:76
-#, fuzzy
 msgid "Monitoring Stopped"
 msgstr "Bevakning stoppad"
 
@@ -630,8 +628,8 @@ msgstr "Mass uppdatering"
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/snippet/download.php:45 www/survey/admin/question.php:64
-#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:82
-#: www/survey/admin/show_csv.php:84 www/survey/admin/show_results.php:69
+#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:80
+#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:69
 #: www/survey/admin/show_results.php:73 www/survey/admin/show_results.php:84
 #: www/survey/admin/show_results.php:86 www/survey/admin/show_results.php:133
 #: www/survey/admin/show_results.php:135 www/tracker/admin/index.php:190
@@ -3280,7 +3278,7 @@ msgstr ""
 
 #: common/include/Navigation.class.php:206
 msgid "New Account"
-msgstr ""
+msgstr "Mítt konto"
 
 #: common/include/Navigation.class.php:230 www/account/lostpw.php:74
 #, php-format
@@ -4441,9 +4439,8 @@ msgid "Question Added"
 msgstr "Fråga tillagd"
 
 #: common/survey/SurveyQuestion.class.php:149
-#, fuzzy
 msgid "Update failed"
-msgstr "Uppdaterad dagligen"
+msgstr "Uppdatering misslyckades"
 
 #: common/survey/SurveyQuestion.class.php:194
 msgid "Error finding question"
@@ -4983,14 +4980,12 @@ msgid ""
 msgstr ""
 
 #: common/tracker/actions/browse.php:539 www/pm/browse_task.php:210
-#, fuzzy
 msgid "Check all"
-msgstr "Markera &nbsp;alla"
+msgstr "Markera alla"
 
 #: common/tracker/actions/browse.php:541 www/pm/browse_task.php:212
-#, fuzzy
 msgid "Clear all"
-msgstr "Avmarkera &nbsp;alla"
+msgstr "Avmarkera alla"
 
 #: common/tracker/actions/browse.php:568 common/tracker/actions/browse.php:747
 #: common/tracker/actions/detail.php:87
@@ -7581,15 +7576,13 @@ msgstr "Ogiltig e-postadress"
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
 #: www/account/lostpw.php:89 www/account/pending-resend.php:71
 #: www/account/verify.php:78
-#, fuzzy
 msgid "Login name"
-msgstr "Inloggningsnamn:"
+msgstr "Inloggningsnamn"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: www/account/verify.php:82
-#, fuzzy
 msgid "Password"
-msgstr "Lösenord:"
+msgstr "Lösenord"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:208
@@ -10370,10 +10363,8 @@ msgid ""
 msgstr ""
 
 #: plugins/mailman/www/index.php:74 www/mail/index.php:74
-#, fuzzy
 msgid "Choose a list to browse, search, and post messages."
-msgstr ""
-"<p>Välj en nyhetesnotis så kan du bläddra, söka, och posta meddelande.<p>"
+msgstr "Välj en nyhetesnotis så kan du bläddra, söka, och posta meddelande."
 
 #: plugins/mailman/www/mailman_utils.php:20
 #, php-format
@@ -13860,29 +13851,28 @@ msgid ""
 "Changing your email address will require confirmation from your new email "
 "address, so that we can ensure we have a good email address on file."
 msgstr ""
+"För att ändra din e-postadress krävs en bekräftelse från din nya e-"
+"postadress, så att vi kan säkerställa att vi har en fungerande e-postadress."
 
 #: www/account/change_email.php:81
-#, fuzzy
 msgid ""
 "We need to maintain an accurate email address for each user due to the level "
 "of access we grant via this account. If we need to reach a user for issues "
 "arriving from a shell or project account, it is important that we be able to "
 "do so."
 msgstr ""
-"<p>För att ändra din e-postadress krävs en bekräftelse från din nya e-"
-"postadress, så att vi kan säkerställa att vi har en fungerande e-postadress."
-"</p><p>Vi behöver upprätthålla en korrekt e-postadress för varje användare "
-"pga de tillgångar vi ger vi detta konto. Om vi behöver nå användaren pga "
-"frågor gällande skal eller projektkonton, så är det viktigt att det fungerar."
-"</p>  <p>Inlämning av formuläret nedan kommer att e-posta en bekräftelse-URL "
-"till den nya e-postadressen. Genom att gå till den länken så kommer din e-"
-"postadress att ändras.</p>"
+"Vi behöver upprätthålla en korrekt e-postadress för varje användare pga de "
+"tillgångar vi ger vi detta konto. Om vi behöver nå användaren pga frågor "
+"gällande skal eller projektkonton, så är det viktigt att det fungerar."
 
 #: www/account/change_email.php:82
 msgid ""
 "Submitting the form below will mail a confirmation URL to the new email "
 "address. Visiting this link will complete the email change."
 msgstr ""
+"Inlämning av formuläret nedan kommer att e-posta en bekräftelse-URL till den "
+"nya e-postadressen. Genom att gå till den länken så kommer din e-postadress "
+"att ändras."
 
 #: www/account/change_email.php:88
 msgid "New Email Address:"
@@ -14030,24 +14020,21 @@ msgid ""
 "You are now a registered user on %1$s, the online development environment "
 "for Open Source projects."
 msgstr ""
+"Du är nu en registrerad användare av %1$s, on-lineutvecklingsmiljön för "
+"Öppen Källkod."
 
 #: www/account/first.php:33
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "As a registered user, you can participate fully in the activities on the "
 "site. You may now post messages to the project message forums, post bugs for "
 "software in %1$s, sign on as a project developer, or even start your own "
 "project."
 msgstr ""
-"<p>Du är nu en registrerad användare av %1$s, on-lineutvecklingsmiljön för "
-"Öppen Källkod.</p><p>Som registrerad användare kan du delta i alla "
-"aktiviteter på webbplatsen. Du kan nu posta meddelanden till projektforumen, "
-"posta fel av mjukvara i %1$s, ansluta dig som projektutvecklare eller till "
-"och med starta ditt eget projekt.</p><p>Du bör ta lite tid till att läsa "
-"igenom <a href=\"/docs/site/\"><b>Webbplatsdokumentationen</b></a> så att du "
-"kan utnyttja %1$s fullt ut.</p><p>Ha kul på webbplatsen, och snälla, förse "
-"oss med dina åsikter så att vi kan förbättra %1$s.</p><p>-- %1$s personalen."
-"</p>"
+"Som registrerad användare kan du delta i alla aktiviteter på webbplatsen. Du "
+"kan nu posta meddelanden till projektforumen, posta fel av mjukvara i %1$s, "
+"ansluta dig som projektutvecklare eller till och med starta ditt eget "
+"projekt."
 
 #: www/account/first.php:36
 #, fuzzy, php-format
@@ -14512,13 +14499,12 @@ msgid "Verify"
 msgstr ""
 
 #: www/account/verify.php:68
-#, fuzzy
 msgid ""
 "In order to complete your registration, login now. Your account will then be "
 "activated for normal logins."
 msgstr ""
-"<p>Logga in nu för att göra klart din registrering. Ditt konto kommer "
-"därefter bli aktiverat för normal inloggning.</p>"
+"Logga in nu för att göra klart din registrering. Ditt konto kommer därefter "
+"bli aktiverat för normal inloggning."
 
 #: www/activity/index.php:102
 msgid "Forum Post"
@@ -15679,12 +15665,10 @@ msgid "New category short name (no spaces, unix-like)"
 msgstr "Ny kategoriförkortning (inga mellanslag, unix-liknande)"
 
 #: www/admin/trove/trove_cat_add.php:119
-#, fuzzy
 msgid "New category full name (Maximum length is 80 chars)"
 msgstr "Nytt kategorinamn (VARCHAR 80)"
 
 #: www/admin/trove/trove_cat_add.php:121
-#, fuzzy
 msgid "New category description (Maximum length is 255 chars)"
 msgstr "Ny kategoribeskrivning (VARCHAR 255)"
 
@@ -15725,12 +15709,10 @@ msgid "Category short name (no spaces, unix-like)"
 msgstr "Ny kategoriförkortning (inga mellanslag, unix-liknande)"
 
 #: www/admin/trove/trove_cat_edit.php:146
-#, fuzzy
 msgid "Category full name (Maximum length is 80 chars)"
 msgstr "Nytt kategorinamn (VARCHAR 80)"
 
 #: www/admin/trove/trove_cat_edit.php:149
-#, fuzzy
 msgid "Category description (Maximum length is 255 chars)"
 msgstr "Ny kategoribeskrivning (VARCHAR 255)"
 
@@ -15967,9 +15949,8 @@ msgid "[Change PW]"
 msgstr "Förändring"
 
 #: www/admin/userlist.php:146
-#, fuzzy
 msgid "User List"
-msgstr ": Användarlista"
+msgstr "Användarlista"
 
 #: www/admin/userlist.php:150
 msgid "Users that use plugin"
@@ -16043,9 +16024,8 @@ msgid "Add Virtual Host"
 msgstr "Lägg till virtuel värd"
 
 #: www/admin/vhost.php:123 www/register/index.php:204
-#, fuzzy
 msgid "Project Unix Name"
-msgstr "Nytt projektnamn"
+msgstr "Projekt, Unixnamn"
 
 #: www/admin/vhost.php:128
 msgid "Virtual Host Name"
@@ -16098,7 +16078,6 @@ msgid "User could not be found."
 msgstr "Hittade inte forum"
 
 #: www/developer/diary.php:44
-#, fuzzy
 msgid "Diary and Notes for"
 msgstr "Dagbok och anteckningar för"
 
@@ -16112,7 +16091,6 @@ msgid "Posted on "
 msgstr "Posta jobb"
 
 #: www/developer/diary.php:62
-#, fuzzy
 msgid "Existing Diary and Notes Entries"
 msgstr "Existerande dagbok och anteckningar"
 
@@ -16142,17 +16120,15 @@ msgstr "Användaren blir nu bevakad"
 
 #: www/developer/monitor.php:68
 msgid "You will now be emailed this user's diary entries."
-msgstr ""
+msgstr "Du kommer nu att få e-post med denna användares dagboksanteckningar."
 
 #: www/developer/monitor.php:69
-#, fuzzy
 msgid ""
 "To turn off monitoring, simply click the <strong>Monitor user</strong> link "
 "again."
 msgstr ""
-"<p>Du kommer nu att få e-post med denna användares dagboksanteckningar.</"
-"p><p>För att stänga av bevakning, klicka bara på <strong>Bevaka användare</"
-"strong>-länken igen.</p>"
+"För att stänga av bevakning, klicka bara på <strong>Bevaka användare</"
+"strong>-länken igen."
 
 #: www/developer/monitor.php:76
 msgid "Monitoring has been turned off"
@@ -18113,9 +18089,8 @@ msgid "Unable to get the list %s : %s"
 msgstr ""
 
 #: www/mail/index.php:78
-#, fuzzy
 msgid "Address"
-msgstr "Din e-postadress"
+msgstr "Postadress"
 
 #: www/mail/index.php:97
 #, php-format
@@ -18376,10 +18351,8 @@ msgid "These items were approved this past week (total: %1$s)"
 msgstr ""
 
 #: www/news/index.php:38
-#, fuzzy
 msgid "Choose a News item and you can browse, search, and post messages."
-msgstr ""
-"<p>Välj en nyhetesnotis så kan du bläddra, söka, och posta meddelande.<p>"
+msgstr "Välj en nyhetesnotis så kan du bläddra, söka, och posta meddelande."
 
 #: www/news/index.php:72
 #, fuzzy, php-format
@@ -18583,18 +18556,16 @@ msgid "No such posting for this project"
 msgstr "Inga sådana poster i detta projekt"
 
 #: www/people/editjob.php:157
-#, fuzzy
 msgid ""
 "Now you can edit/change the list of skills attached to this posting. "
 "Developers will be able to match their skills with your requirements."
 msgstr ""
-"<p>Du kan nu redigera/ändra listan av kompetenser bifogade med denna post. "
-"Utvecklare kommer att kunna matcha sina kompetenser med dina krav.</"
-"p><p>Alla poster stängs automatiskt efter två veckor.</p>"
+"Du kan nu redigera/ändra listan av kompetenser bifogade med denna post. "
+"Utvecklare kommer att kunna matcha sina kompetenser med dina krav."
 
 #: www/people/editjob.php:159
 msgid "All postings are automatically closed after two weeks."
-msgstr ""
+msgstr "Alla poster stängs automatiskt efter två veckor."
 
 #: www/people/editjob.php:175
 msgid "Update Descriptions"
@@ -18874,7 +18845,6 @@ msgid "Added to skill inventory"
 msgstr "Till lagt till kompetenslistan"
 
 #: www/people/people_utils.php:108 www/people/people_utils.php:216
-#, fuzzy
 msgid "Error: skill already in your inventory"
 msgstr "FEL - kompetensen finns redan i din lista"
 
@@ -19650,13 +19620,12 @@ msgid "All Tasks By Assignee"
 msgstr "Alla uppgifter efter tekniker"
 
 #: www/pm/reporting/index.php:238
-#, fuzzy
 msgid ""
 "Note that same task can be assigned to several technicians. Such task will "
 "be counted for each of them."
 msgstr ""
-"<p>Notera att samma uppgift kan tilldelas flera tekniker. Sådana uppgifter "
-"kommer att räknas för var och en av dem.</p>"
+"Notera att samma uppgift kan tilldelas flera tekniker. Sådana uppgifter "
+"kommer att räknas för var och en av dem."
 
 #: www/pm/task.php:70
 #, fuzzy
@@ -19728,7 +19697,7 @@ msgstr ""
 
 #: www/pm/uploadcsv.php:36
 msgid "Warning!"
-msgstr ""
+msgstr "Varning!"
 
 #: www/pm/uploadcsv.php:37
 msgid ""
@@ -20460,13 +20429,12 @@ msgid "Project Member List"
 msgstr "Projektmedlemslista"
 
 #: www/project/memberlist.php:37
-#, fuzzy
 msgid ""
 "If you would like to contribute to this project by becoming a member, "
 "contact one of the project admins, designated in bold text below."
 msgstr ""
-"<p>Om du vill bidra till detta projekt genom att bli en utvecklare, kontakta "
-"en av projektadministratörerna, markerade i fet stil nedan.<br><br>"
+"Om du vill bidra till detta projekt genom att bli en utvecklare, kontakta en "
+"av projektadministratörerna, markerade i fet stil nedan."
 
 #: www/project/memberlist.php:49
 #, fuzzy
@@ -21422,12 +21390,10 @@ msgid "Submit A New Snippet"
 msgstr "Lämna in ett nytt kodstycke"
 
 #: www/snippet/add_snippet_to_package.php:56
-#, fuzzy
 msgid "Error: snippet_package_version_id missing"
 msgstr "Fel - snippet_package_version_id missing"
 
 #: www/snippet/add_snippet_to_package.php:72
-#, fuzzy
 msgid "Error: Only the creator of a package version can add snippets to it."
 msgstr ""
 "Fel - Endast skaparen av en paketversion kan lägga till kodstycken till det."
@@ -21444,15 +21410,13 @@ msgid "Back To Add Page"
 msgstr "Tillbaka tillägg till sida"
 
 #: www/snippet/add_snippet_to_package.php:96
-#, fuzzy
 msgid "Error: That snippet was already added to this package."
 msgstr "Fel - Det kodstycket fanns redan i paketet."
 
 #: www/snippet/add_snippet_to_package.php:108 www/snippet/addversion.php:71
 #: www/snippet/submit.php:74
-#, fuzzy
 msgid "Error doing snippet version insert"
-msgstr "Fel - Det kodstycket existerar inte."
+msgstr "FEL UNDER INFÖRANDE AV KODSTYCKEVERSION!"
 
 #: www/snippet/add_snippet_to_package.php:110 www/snippet/addversion.php:74
 msgid "Snippet Version Added Successfully."
@@ -21461,7 +21425,6 @@ msgstr "Tillägg av kodstyckeversion lyckades."
 #: www/snippet/add_snippet_to_package.php:113 www/snippet/addversion.php:77
 #: www/snippet/addversion.php:198 www/snippet/package.php:123
 #: www/snippet/submit.php:81
-#, fuzzy
 msgid "Error: Go back and fill in all the information"
 msgstr "Fel, Gå tillbaka och fyll i all information"
 
@@ -21497,9 +21460,8 @@ msgid "Snippets In This Package"
 msgstr "Kodstycken i detta paket"
 
 #: www/snippet/addversion.php:39
-#, fuzzy
 msgid "Error: snippet doesn't exist"
-msgstr "Fel - Det kodstycket existerar inte."
+msgstr "Fel - Det kodstycket existerar inte"
 
 #: www/snippet/addversion.php:81 www/snippet/addversion.php:202
 #, fuzzy
@@ -21524,9 +21486,8 @@ msgid "Error: snippet_package doesn't exist"
 msgstr "Fel, kodstyckepaket finns inte"
 
 #: www/snippet/addversion.php:154 www/snippet/package.php:75
-#, fuzzy
 msgid "Error doing snippet package version insert"
-msgstr "Fel - snippet_package_version_id missing"
+msgstr "FEL VID INFOGNING AV VERSION KODSTYCKESPAKET!"
 
 #: www/snippet/addversion.php:155
 #, fuzzy
@@ -21633,7 +21594,6 @@ msgid "Error: mangled URL?"
 msgstr "Fel, URL'n eller formuläret skadat??"
 
 #: www/snippet/detail.php:57 www/snippet/detail.php:147
-#, fuzzy
 msgid "Error: no versions found"
 msgstr "Fel - Hittade ingen version"
 
@@ -21802,9 +21762,8 @@ msgid "Choose One"
 msgstr "Välj en"
 
 #: www/snippet/snippet_utils.php:27
-#, fuzzy
 msgid "Unix Admin"
-msgstr "Webbplats admin"
+msgstr "Unix admin"
 
 #: www/snippet/snippet_utils.php:28
 msgid "HTML Manipulation"
@@ -21883,9 +21842,8 @@ msgid "Create A Package"
 msgstr "Skapa ett paket"
 
 #: www/snippet/submit.php:59
-#, fuzzy
 msgid "Error doing snippet insert"
-msgstr "Fel vid infogning"
+msgstr "FEL VID INFOGNING AV KODSTYCKEN!"
 
 #: www/snippet/submit.php:61 www/snippet/submit.php:76
 msgid "Snippet Added Successfully."
@@ -22274,7 +22232,7 @@ msgstr "Redigera en fråga"
 msgid "Add a Question"
 msgstr "Lägg till en fråga"
 
-#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:61
+#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
 #: www/survey/admin/show_questions.php:35
 #: www/survey/admin/show_results_aggregate.php:35
 #: www/survey/admin/show_results_comments.php:36
@@ -22305,7 +22263,7 @@ msgstr "Uppdatering lyckades"
 msgid "No questions found"
 msgstr "%1$s frågor hittade"
 
-#: www/survey/admin/show_csv.php:82 www/survey/admin/show_results.php:133
+#: www/survey/admin/show_csv.php:80 www/survey/admin/show_results.php:133
 msgid "Cannot get Survey Response Factory"
 msgstr ""
 
@@ -22624,9 +22582,8 @@ msgid "Flag"
 msgstr ""
 
 #: www/survey/survey.php:51
-#, fuzzy
 msgid "Vote for Survey"
-msgstr "Namn på undersökning:"
+msgstr "Namn på undersökning"
 
 #: www/survey/survey.php:55 www/survey/survey_resp.php:49
 #, fuzzy
@@ -23005,6 +22962,364 @@ msgstr "Mass uppdatering"
 msgid "No User Name Provided"
 msgstr "Användarenamn"
 
+#~ msgid "Could not Update Master Thread parent with current time"
+#~ msgstr "Kunde inte uppdatera huvudtrådens förälder med gällande tid"
+
+#~ msgid "Error: this news item was not found"
+#~ msgstr "Fel - hittade inte denna nyhetspost"
+
+#~ msgid "No Valid Forum Object"
+#~ msgstr "Forummeddelande:: ogiltigt forumobjekt"
+
+#~ msgid "Posting Failed"
+#~ msgstr "inlägg misslyckades"
+
+#~ msgid "Unable to get new message id"
+#~ msgstr "Kunde inte hämta nytt meddelande-ID"
+
+#~ msgid "Must Include A Message Body And Subject"
+#~ msgstr "Måste innehålla ett meddelande och rubrik"
+
+#~ msgid "No Valid ParentMessage Object"
+#~ msgstr "Ogiltigt föräldermeddelandeobjekt"
+
+#~ msgid ""
+#~ "Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
+#~ msgstr ""
+#~ "Filnamn får bara innehålla alfanumeriska värden samt “-”, “_”, “+”, “.”, "
+#~ "“~”."
+
+#~ msgid "Missing Required Parameters"
+#~ msgstr "Saknade parameterar"
+
+#~ msgid "Group object already exists"
+#~ msgstr "Gruppobjekt finns redan"
+
+#~ msgid "Your project registration for %s has been approved."
+#~ msgstr "Din projektregistrering hos %s har blivit godkänd."
+
+#~ msgid "Project Full Name"
+#~ msgstr "Projekt, fullt namn"
+
+#~ msgid ""
+#~ "We highly suggest that you now visit %1$s and create a public description "
+#~ "for your project. This can be done by visiting your project page while "
+#~ "logged in, and selecting “Project Admin” from the menus on the left (or "
+#~ "by visiting %2$s after login)."
+#~ msgstr ""
+#~ "Vi rekommenderar varmt att du nu besöker %1$s och skapar en offentlig "
+#~ "beskrivning på ditt projekt. Detta kan göras genom att besöka din "
+#~ "projektsida  medan du är inloggad, och välja 'Projekt admin' från menyn "
+#~ "till vänster (eller genom att besöka %2$s efter inloggning)."
+
+#~ msgid ""
+#~ "Your project will also not appear in the Trove Software Map (primary list "
+#~ "of projects hosted on %s which offers great flexibility in browsing and "
+#~ "search) until you categorize it in the project administration screens. So "
+#~ "that people can find your project, you should do this now. Visit your "
+#~ "project while logged in, and select “Project Admin” from the menus on the "
+#~ "left."
+#~ msgstr ""
+#~ "Ditt projekt kommer inte heller att synas i resurskartan (huvud listan "
+#~ "för projekt på värden %s. Det ger stor flexibilitet vid bläddring och "
+#~ "sökning) innan du kategoriserat det i projektadministrations skärmen. För "
+#~ "att folk skall kunna hitta ditt projekt, bör du göra detta nu. Besök ditt "
+#~ "projekt medan du är inloggad, och välj 'Projekt admin' från  menyn till "
+#~ "vänster."
+
+#~ msgid ""
+#~ "Enjoy the system, and please tell others about %s. Let us know if there "
+#~ "is anything we can do to help you."
+#~ msgstr ""
+#~ "Dra nytta av systemet, och snälla berätta för andra om %s. Låt oss få "
+#~ "veta om det finns något vi kan göra för att hjälpa dig."
+
+#~ msgid "-- the %s staff"
+#~ msgstr "%s Personalen"
+
+#~ msgid "%s Project Approved"
+#~ msgstr "%s projekt godkänt"
+
+#~ msgid "Your project registration for %s has been denied."
+#~ msgstr "Din projektregistrering för %s har blivit avslagen."
+
+#~ msgid "Reasons for negative decision"
+#~ msgstr "Skäl för avslag"
+
+#~ msgid "%s Project Denied"
+#~ msgstr "%s projekt avslaget"
+
+#~ msgid "New %s Project Submitted"
+#~ msgstr "Nytt %s projekt inlämnat"
+
+#~ msgid "Submitted Description"
+#~ msgstr "Inlämnad beskrivning"
+
+#~ msgid "Please visit the following URL to approve or reject this project"
+#~ msgstr ""
+#~ "Var vänlig besök följande URL för att godkänna eller avslå detta projekt"
+
+#~ msgid "Project Admin"
+#~ msgstr "Projekt admin"
+
+#~ msgid "Enjoy the site."
+#~ msgstr "Ha trevligt på webbplatsen."
+
+#~ msgid "%s Account Registration"
+#~ msgstr "%s Kontoregistrering"
+
+#~ msgid "* Denotes requests > %s Days Old"
+#~ msgstr "* Avser frågor > %s dagar gamla"
+
+#~ msgid "No Canned Responses set up in this Project"
+#~ msgstr "Inga svar inställda för denna grupp"
+
+#~ msgid "I am Sure"
+#~ msgstr "Jag är säker"
+
+#~ msgid "You are not monitoring any files."
+#~ msgstr "Du bevakar inga filer."
+
+#~ msgid "Activity Percentile"
+#~ msgstr "Aktivitet i procent"
+
+#~ msgid "There are no public subprojects available"
+#~ msgstr "Det finns inga offentliga underprojekt tillgängliga"
+
+#~ msgid "Login Name"
+#~ msgstr "Inloggningsnamn"
+
+#~ msgid ""
+#~ "Visiting the link sent to you in this email will activate your account."
+#~ msgstr "Följ länken i detta e-postbrev för att bekräfta ditt nya konto."
+
+#~ msgid "Search results for “%s”"
+#~ msgstr "Hittade inga forum för %s"
+
+#~ msgid "You have requested a change of email address on %s."
+#~ msgstr "Du har begärt en ändring av e-postadress för %s."
+
+#~ msgid "Please visit the following URL to complete the email change:"
+#~ msgstr ""
+#~ "Var vänlig följ följande URL för att slutföra ändringen av e-postadress:"
+
+#~ msgid "New Email Address"
+#~ msgstr "Ny e-postadress"
+
+#~ msgid "Email Address"
+#~ msgstr "e-postadress"
+
+#~ msgid "Change Email Address"
+#~ msgstr "Byt e-postadress"
+
+#~ msgid ""
+#~ "Someone (presumably you) on the %s site requested a password change "
+#~ "through email verification."
+#~ msgstr ""
+#~ "Någon (förmodligen du) på %s webbplatsen begärde ett lösenords byte genom "
+#~ "e-postbekräftelse."
+
+#~ msgid "If this was not you, ignore this message and nothing will happen."
+#~ msgstr ""
+#~ "Om det inte var du, ignorera i så fall detta meddelande, inget kommer att "
+#~ "hända."
+
+#~ msgid ""
+#~ "If you requested this verification, visit the following URL to change "
+#~ "your password:"
+#~ msgstr ""
+#~ "Om du begärde denna bekräftelse, besök följande URL för att byta ditt "
+#~ "lösenord:"
+
+#~ msgid ""
+#~ "You are now being sent a confirmation email to verify your email address. "
+#~ "Visiting the link sent to you in this email will activate your account."
+#~ msgstr ""
+#~ "Du får nu ett bekräftelsebrev för att säkerställa att din e-postadress är "
+#~ "riktig. Följ länken i detta e-postbrev för att bekräfta ditt nya konto."
+
+#~ msgid "Approving Project"
+#~ msgstr "Godkänner grupp"
+
+#~ msgid "Other Information"
+#~ msgstr "Annan information"
+
+#~ msgid "If you are not sure then why did you click “Delete”?"
+#~ msgstr "Om du inte är säker, varför klickade du då på 'Ta bort'?"
+
+#~ msgid "New category short name (no spaces, Unix-like)"
+#~ msgstr "Ny kategoriförkortning (inga mellanslag, Unix-liknande)"
+
+#~ msgid "Category short name (no spaces, Unix-like)"
+#~ msgstr "Ny kategoriförkortning (inga mellanslag, Unix-liknande)"
+
+#~ msgid ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific project, visit admin "
+#~ "page of that project (below)."
+#~ msgstr ""
+#~ "Denna sida tillåter endast förändringar av direkta egenskaper på "
+#~ "användarobjektet. För att redigera egenskaper hos en användare inom en "
+#~ "viss gruppp, gå till admin sidan för den gruppen (nedan)."
+
+#~ msgid "Suspend"
+#~ msgstr "Suspenderad"
+
+#~ msgid "Error: Choose a User To Monitor First"
+#~ msgstr "Fel - Välj först en användare att bevaka"
+
+#~ msgid "No Forums Found for %s"
+#~ msgstr "Hittade inga forum för %s"
+
+#~ msgid "Forum Monitoring Deactivated"
+#~ msgstr "Forumbevakning avslutad"
+
+#~ msgid "Forum Monitoring Started"
+#~ msgstr "Forumbevakning startad"
+
+#~ msgid ""
+#~ "Edit the Release Notes or Change Log for this release of this package. "
+#~ "These changes will apply to all files attached to this release."
+#~ msgstr ""
+#~ "Redigera utgåvonoteringarna eller ändra loggen för denna utgåva av detta "
+#~ "paket. Dessa ändringar kommer att gälla för alla bifogade filer i denna "
+#~ "utgåva."
+
+#~ msgid ""
+#~ "You can either upload the release notes and change log individually, or "
+#~ "paste them in together below."
+#~ msgstr ""
+#~ "Du kan antingen överföra utgåvonoteringarna och önddingsloggen "
+#~ "individuellt eller klistra in dem tillsammans nedan."
+
+#~ msgid "Project totals"
+#~ msgstr "Projekttotaler"
+
+#~ msgid "This drop-down box represents the current status of a tracker item."
+#~ msgstr "Denna rullgardinslista representerar status på en ordningspost."
+
+#~ msgid ""
+#~ "You can set the status to 'Pending' if you are waiting for a response "
+#~ "from the tracker item author.  When the author responds the status is "
+#~ "automatically reset to that of 'Open'. Otherwise, if the author doesn't "
+#~ "respond with an admin-defined amount of time (default is 14 days) then "
+#~ "the item is given a status of 'Deleted'."
+#~ msgstr ""
+#~ "Du kan sätta status till 'Väntande' om du förväntar dig ett svar från den "
+#~ "som författade posten.  När författaren svarar sätts statusen automatiskt "
+#~ "'Öppen'. Annars, om författaren inte svarar inom en av administratören "
+#~ "angiven tid, (standard är 14 dagar) så får posten statusen 'Raderad'."
+
+#~ msgid ""
+#~ "The Sort By option allows you to determine how the browse results are "
+#~ "sorted."
+#~ msgstr "Sortera efter valmöjligheten låter dig välja hur lista skall visas."
+
+#~ msgid ""
+#~ "You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, "
+#~ "or Assignee.  You can also have the results sorted in Ascending or "
+#~ "Descending order."
+#~ msgstr ""
+#~ "Du kan sortera efter ID, Prioritet, Sammanfattning, Öppningsdatum, "
+#~ "Avslutsdatum, Inlämnare eller Tilldelad.  Du kan också få resultaten "
+#~ "sorterade i stigande eller fallande ordning."
+
+#~ msgid ""
+#~ "The Data Type option determines the type of tracker item this is.  Since "
+#~ "the tracker rolls into one the bug, patch, support, etc... managers you "
+#~ "need to be able to determine which one of these an item should belong."
+#~ msgstr ""
+#~ "Datatyp avgör vilken typ av ordningslista det är.  Eftersom den "
+#~ "övergripande ordningslistan innehåller fel, rättningar, support, etc... "
+#~ "så behöver du kunna avgöra vilken av dessa en post tillhör."
+
+#~ msgid ""
+#~ "This has the added benefit of enabling an admin to turn a support request "
+#~ "into a bug."
+#~ msgstr ""
+#~ "Detta har fördelen att en administratör kan omvandla ett supportärende "
+#~ "till ett felärende."
+
+#~ msgid ""
+#~ "The canned response drop-down represents a list of project admin-defined "
+#~ "canned responses to common support or bug submission."
+#~ msgstr ""
+#~ "Rullgardinslistan innehåller färdiga svar till vanliga supportfrågor och "
+#~ "felanmälningar definierade av projektadministratören."
+
+#~ msgid ""
+#~ "If you are a project admin you can click the 'Manage Canned Responses' "
+#~ "link to define your own canned responses"
+#~ msgstr ""
+#~ "Om du är projektadmin kan du klicka på '(Manage Canned Responses)' länken "
+#~ "för att definiera dina egna färdiga svar"
+
+#~ msgid "My Diary and Notes"
+#~ msgstr "Min dagbok och anteckningar"
+
+#~ msgid "View Diary and Notes"
+#~ msgstr "Se dagbok och anteckningar"
+
+#~ msgid "Notes and Changes"
+#~ msgstr "Noteringar och förändringar"
+
+#~ msgid "Read More/Comment"
+#~ msgstr "Read Mer/Kommentar"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "FEL - både rubrik och meddelandetext krävs"
+
+#~ msgid "Job inserted successfully"
+#~ msgstr "JobB infogning lyckades"
+
+#~ msgid "Job updated successfully"
+#~ msgstr "JobB uppdatering lyckades"
+
+#~ msgid "Job update failed - wrong project_id"
+#~ msgstr "JobB uppdatering misslyckades - fel project_id"
+
+#~ msgid "Job skill updated successfully"
+#~ msgstr "JobB kompetens uppdatering lyckades"
+
+#~ msgid "Job skill update failed - wrong project_id"
+#~ msgstr "JobB kompetens uppdatering misslyckades - fel project_id"
+
+#~ msgid "Job skill deleted successfully"
+#~ msgstr "JobB kompetens borttag lyckades"
+
+#~ msgid "Job skill delete failed - wrong project_id"
+#~ msgstr "JobB kompetens borttag misslyckades - fel project_id"
+
+#~ msgid ""
+#~ "The following option determines if others can see your skills. If they "
+#~ "cannot, you can still enter your skills."
+#~ msgstr ""
+#~ "Följande valmöjlighet bestämmer om andra kan se dina kompetenser. Om "
+#~ "inte, så kan du ändå lägga in dina kompetenser."
+
+#~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
+#~ msgstr "FEL - filen måste vara > 20 byte samt < 256000 byte lång"
+
+#~ msgid "Registration complete"
+#~ msgstr "Registrering färdig"
+
+#~ msgid ""
+#~ "Your project has been submitted to the %1$s administrators. Within 72 "
+#~ "hours, you will receive notification of their decision and further "
+#~ "instructions."
+#~ msgstr ""
+#~ "Ditt projekt har inlämnats till %1$s administratörerna. Inom 72 timmar, "
+#~ "kommer du att få ett besked om deras beslut och ytterligare instruktioner."
+
+#~ msgid "Thank you for choosing %1$s."
+#~ msgstr "Tack för att du valde %1$s."
+
+#~ msgid ""
+#~ "Download a raw-text version of this code by clicking on “Download Version”"
+#~ msgstr ""
+#~ "Hämta en råtextversion av denna kod genom att klicka på &quot;Hämta "
+#~ "Version&quot;"
+
 #, fuzzy
 #~ msgid "Bazaar Repository Browser"
 #~ msgstr "SCM Lager"
@@ -23025,9 +23340,8 @@ msgstr "Användarenamn"
 #~ msgid "Repository name: "
 #~ msgstr "SCM Lager"
 
-#, fuzzy
 #~ msgid "No Valid Group Object"
-#~ msgstr "%1$s:: Ej giltigt gruppobjekt"
+#~ msgstr "Inga giltiga gruppobject"
 
 #, fuzzy
 #~ msgid "Project:"
@@ -24481,3 +24795,173 @@ msgstr "Användarenamn"
 #, fuzzy
 #~ msgid "Invalid Group Name"
 #~ msgstr "Unixgruppnamn:"
+
+#~ msgid "Error doing insert"
+#~ msgstr "FEL vid infogning"
+
+#~ msgid "Error Getting %s"
+#~ msgstr "Fel vid hämtande av %s"
+
+#~ msgid "Error inserting into skill inventory"
+#~ msgstr "FEL vid infogning i kompetenslistan"
+
+#~ msgid "Invalid MessageID"
+#~ msgstr "Ogiltigt meddelande-ID"
+
+#~ msgid "DevProfile"
+#~ msgstr "Utvecklarprofil"
+
+#~ msgid "Followup"
+#~ msgstr "Uppföljning"
+
+#~ msgid "Check &nbsp;all"
+#~ msgstr "Markera &nbsp;alla"
+
+#~ msgid "Clear &nbsp;all"
+#~ msgstr "Avmarkera &nbsp;alla"
+
+#~ msgid "Project&nbsp;Openings"
+#~ msgstr "Hjälp Önskas"
+
+#~ msgid "My&nbsp;Page"
+#~ msgstr "Min&nbsp;sida"
+
+#~ msgid ""
+#~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "
+#~ "the document (e.g. How to use the download server)<br /"
+#~ "><strong>Description:</strong> A brief description to be placed just "
+#~ "under the title."
+#~ msgstr ""
+#~ "<strong>Dokumentrubrik</strong>:  Refererar till den relativt korta "
+#~ "titeln för dokumentet (t.ex. hur man använder nerladdningsservern)<br /"
+#~ "><strong>Beskrivning:</strong> En kort beskrivning som placeras precis "
+#~ "under rubriken."
+
+#~ msgid "New Group Name"
+#~ msgstr "Nytt gruppnamn"
+
+#~ msgid "from %s"
+#~ msgstr "från %s"
+
+#~ msgid "Included from %s"
+#~ msgstr "Insättning från %s"
+
+#~ msgid "The %d most recent %s are listed below."
+#~ msgstr "De %d senaste %s sidorna listas nedan."
+
+#~ msgid "%4d  %s\n"
+#~ msgstr "%4d  %s\n"
+
+#~ msgid "See %s tips for editing."
+#~ msgstr "%s: Redigeringstips."
+
+#~ msgid "GoodStyle"
+#~ msgstr "BraStil"
+
+#~ msgid "Lists nested too deep in SetHTMLOutputMode"
+#~ msgstr "Stackgräns överskriden i SetHTMLOutputMode"
+
+#~ msgid ""
+#~ "Copy your changes to the clipboard or to another temporary place (e.g. "
+#~ "text editor)."
+#~ msgstr ""
+#~ "Kopiera dina ändringar till urklippet eller till ett annat temporärt "
+#~ "ställe (t.ex. en texteditor)."
+
+#~ msgid ""
+#~ "Make changes to the file again. Paste your additions from the clipboard "
+#~ "(or text editor)."
+#~ msgstr ""
+#~ "Ändra filen igen. Klistra in dina ändringar från urklippet (eller "
+#~ "texteditorn)."
+
+#~ msgid "In order to recover from this situation, follow these steps:"
+#~ msgstr "För att lösa situtationen, följ dessa steg:"
+
+#~ msgid "(last edited %s)"
+#~ msgstr "(senast ändrad %s)"
+
+#~ msgid "version %s, saved %s."
+#~ msgstr "version %s, sparade %s."
+
+#~ msgid "version %s, saved on %s."
+#~ msgstr "version %s, sparade %s."
+
+#~ msgid "(version %s, saved on %s)"
+#~ msgstr "(version %s, sparade %s)"
+
+#~ msgid "Use your browser's <b>Back</b> button to go back to the edit page."
+#~ msgstr ""
+#~ "Använd webbläsarens <b>backaknapp</b> för att gå tillbaka till "
+#~ "redigeringssidan."
+
+#~ msgid "Press <b>Save</b> again."
+#~ msgstr "Klicka på <b>Spara</b> igen."
+
+#~ msgid ""
+#~ "PhpWiki is unable to save your changes, because another user edited and "
+#~ "saved the page while you were editing the page too. If saving proceeded "
+#~ "now changes from the previous author would be lost."
+#~ msgstr ""
+#~ "PhpWiki kan inte spara dina ändringar eftersom en annan användare ändrade "
+#~ "och sparade sidan under tiden som du ändrade på sidan. Sparar du nu "
+#~ "försvinner ändringarna gjorda av den förra användaren."
+
+#~ msgid "Problem while updating %s"
+#~ msgstr "Har problem med att uppdatera %s"
+
+#~ msgid "Problem while editing %s"
+#~ msgstr "Har problem med att redigera %s"
+
+#~ msgid "Click here to <a href=\"%s\">remove the page now</a>."
+#~ msgstr "Klicka shär för <a href=\"%s\">att ta bort sidan nu</a>."
+
+#~ msgid "WikiDiff::apply: line count mismatch: %s != %s"
+#~ msgstr "WikiDiff::apply: radantalet stämmer inte: %s != %s"
+
+#~ msgid "WikiDiff::_check: failed"
+#~ msgstr "WikiDiff::_check: misslyckades"
+
+#~ msgid "WikiDiff::_check: edit sequence is non-optimal"
+#~ msgstr "WikiDiff::_check: ändringssekvensen är icke optimal"
+
+#~ msgid "WikiDiff Okay: LCS = %s"
+#~ msgstr "WikiDiff Ok: LCS = %s"
+
+#~ msgid "Searching for \"%s\" ....."
+#~ msgstr "Söker efter \"%s\" ....."
+
+#~ msgid "MySQL error: %s"
+#~ msgstr "MySQL-fel: %s"
+
+#~ msgid "%d pages match your query."
+#~ msgstr "%d sidor matchar din fråga."
+
+#~ msgid "(first day for this Wiki)"
+#~ msgstr "(första dagen för den här Wikin)"
+
+#~ msgid ""
+#~ "\n"
+#~ "Or reply to this e-mail entering your response between the following "
+#~ "markers: \n"
+#~ "%1$s\n"
+#~ "(enter your response here)\n"
+#~ "%1$s"
+#~ msgstr ""
+#~ "\n"
+#~ "Eller svara på detta e-post-meddelande genom att skriva svaret mellan "
+#~ "följande markeringar:\n"
+#~ "%1$s\n"
+#~ "(fyll i ditt svar här)\n"
+#~ "%1$s"
+
+#~ msgid "Document Manager: Display Document"
+#~ msgstr "Dokumentansvarig: Visa dokument"
+
+#~ msgid "Error: No group was chosen or you cannot access it"
+#~ msgstr "FEL - Inget group_id var valt"
+
+#~ msgid "Error: For some reason group_id and/or survey_id did not make it he"
+#~ msgstr ""
+#~ "Fel - Av någon anledning, så följde inte grupp-ID eller undersöknings-ID "
+#~ "med"
