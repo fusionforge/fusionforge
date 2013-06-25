@@ -3,7 +3,7 @@
  *
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011-2012, Franck Villaume - TrivialDev
+ * Copyright 2011-2013, Franck Villaume - TrivialDev
  * Copyright 2011, Alain Peyrat
  * http://fusionforge.org
  *
@@ -128,6 +128,17 @@ DocManListFileController.prototype =
 				}, this)
 			}
 		});
+		jQuery(modalId).bind('dialogclose', jQuery.proxy(function() {
+			var id = jQuery('#docid').attr('value');
+			jQuery.get(this.params.docManURL, {
+				group_id:	this.params.groupId,
+				action:		'lockfile',
+				lock:		0,
+				fileid:		id,
+				childgroup_id:	this.params.childGroupId
+			});
+			clearInterval(this.lockInterval[id]);
+		}, this));
 	},
 
 	dragging: function() {
