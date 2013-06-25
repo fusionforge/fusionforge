@@ -98,19 +98,17 @@ if ($report->isError()) {
 
 ?>
 
-<form action="<?php echo util_make_url('/frs/reporting/downloads.php') ?>" method="get">
+<form action="<?php echo util_make_url('/frs/reporting/downloads.php') ?>" 
+	  method="get"
+	  class="align-center">
 	<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
-	<table>
-		<tr>
-			<td><strong><?php echo _('Package')._(':'); ?></strong><br />
-				<?php echo report_package_box($group_id,'package_id',$package_id); ?></td>
-			<td><strong><?php echo _('Start Date')._(':'); ?></strong><br />
-				<?php echo report_months_box($report, 'start', $start); ?></td>
-			<td><strong><?php echo _('End Date')._(':'); ?></strong><br />
-				<?php echo report_months_box($report, 'end', $end); ?></td>
-			<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
-		</tr>
-	</table>
+	<strong><?php echo _('Package')._(':'); ?></strong>
+	<?php echo report_package_box($group_id,'package_id',$package_id); ?>
+	<strong><?php echo _('Start Date')._(':'); ?></strong>
+	<?php echo report_months_box($report, 'start', $start); ?>
+	<strong><?php echo _('End Date')._(':'); ?></strong>
+	<?php echo report_months_box($report, 'end', $end); ?>
+	<input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" />
 </form>
 
 <?php
