@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-19 15:55+0200\n"
+"POT-Creation-Date: 2013-06-25 12:13+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -26,8 +26,8 @@ msgstr "Ongi gehitutako erabiltzailea"
 
 #: common/account/actions/addsshkey.php:40
 #: common/docman/actions/addfile.php:124 common/docman/actions/addfile.php:151
-#: common/docman/DocumentGroup.class.php:220
-#: common/docman/DocumentGroup.class.php:809
+#: common/docman/DocumentGroup.class.php:215
+#: common/docman/DocumentGroup.class.php:805
 #, fuzzy
 msgid "Invalid file name."
 msgstr "Izen osoa baliogabea"
@@ -65,7 +65,7 @@ msgstr "Dokumentuak irakurri."
 
 #: common/docman/actions/addfile.php:75
 #, fuzzy
-msgid "No valid Directory was selected."
+msgid "No valid folder was selected."
 msgstr "Ez daude dokumentuen talderik."
 
 #: common/docman/actions/addfile.php:93 common/docman/actions/addfile.php:106
@@ -124,7 +124,7 @@ msgstr "Foroak erabili"
 #: common/docman/actions/monitorfile.php:52
 #: common/docman/actions/monitorfile.php:72
 #: common/docman/actions/trashfile.php:62
-#: common/docman/actions/validatefile.php:56 www/docman/view.php:239
+#: common/docman/actions/validatefile.php:56 www/docman/view.php:244
 #, fuzzy
 msgid "No action to perform"
 msgstr "Ez daude daturik txostenean"
@@ -151,7 +151,7 @@ msgstr "Ez dago daturik dokumentu honetan"
 
 #: common/docman/actions/editfile.php:89
 #, fuzzy, php-format
-msgid "Invalid file attack attempt %1$s."
+msgid "Invalid file attack attempt %s."
 msgstr "Izen osoa baliogabea"
 
 #: common/docman/actions/editfile.php:112
@@ -175,7 +175,7 @@ msgstr "Arrakastaz eguneratua"
 
 #: common/docman/actions/forcereindexenginesearch.php:36
 msgid ""
-"Search Engine Reindex Forced : search results will be available within 24h."
+"Search Engine Reindex Forced: search results will be available within 24 h."
 msgstr ""
 
 #: common/docman/actions/injectzip.php:49
@@ -183,12 +183,13 @@ msgstr ""
 msgid "Archive injected successfully."
 msgstr "Arrakastaz sartutako lana"
 
-#: common/docman/actions/monitordirectory.php:38 www/activity/index.php:322
-#: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:60
-#: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:52
+#: common/docman/actions/monitordirectory.php:38
+#: common/docman/Document.class.php:934
+#: common/docman/DocumentGroup.class.php:705
+#: common/docman/views/reporting.php:153
 #, fuzzy
-msgid "Directory"
-msgstr "Azpiproiektuaren izen berria"
+msgid "Folder"
+msgstr "Fitxeroaren izena"
 
 #: common/docman/actions/monitordirectory.php:54
 #, fuzzy
@@ -239,32 +240,32 @@ msgstr "Dokumentua arrakastaz bidali da."
 
 #: common/docman/actions/updatecreateonline.php:33
 #, fuzzy
-msgid "Create Online Documents Status updated successfully : Active."
+msgid "Create Online Documents Status updated successfully: Active."
 msgstr "Erabiltzailea arrakastaz eguneratu da"
 
 #: common/docman/actions/updatecreateonline.php:36
 #, fuzzy
-msgid "Create Online Documents Status updated successfully : Off."
+msgid "Create Online Documents Status updated successfully: Off."
 msgstr "Erabiltzailea arrakastaz eguneratu da"
 
 #: common/docman/actions/updateenginesearch.php:33
 #, fuzzy
-msgid "Search Engine Status updated successfully : Active."
+msgid "Search Engine Status updated successfully: Active."
 msgstr "Erabiltzailea arrakastaz eguneratu da"
 
 #: common/docman/actions/updateenginesearch.php:36
 #, fuzzy
-msgid "Search Engine Status updated successfully : Off."
+msgid "Search Engine Status updated successfully: Off."
 msgstr "Erabiltzailea arrakastaz eguneratu da"
 
 #: common/docman/actions/updatewebdavinterface.php:33
 #, fuzzy
-msgid "Webdav Interface updated successfully : Active."
+msgid "Webdav Interface updated successfully: Active."
 msgstr "Erabiltzailea arrakastaz eguneratu da"
 
 #: common/docman/actions/updatewebdavinterface.php:36
 #, fuzzy
-msgid "Webdav Interface updated successfully : Off."
+msgid "Webdav Interface updated successfully: Off."
 msgstr "Erabiltzailea arrakastaz eguneratu da"
 
 #: common/docman/actions/validatefile.php:60
@@ -272,235 +273,97 @@ msgstr "Erabiltzailea arrakastaz eguneratu da"
 msgid "activated successfully."
 msgstr "Arrakastaz eguneratua"
 
-#: common/docman/Document.class.php:64
-#: common/docman/DocumentManager.class.php:55
-#, fuzzy
-msgid "No Valid Group Object"
-msgstr "Baliodun Talde Objeturik Ez"
-
-#: common/docman/Document.class.php:81
+#: common/docman/Document.class.php:79
 #, fuzzy
 msgid "group_id in db result does not match Group Object"
 msgstr ""
 "Group_id -ko datu basearen erantzunak ez datoz taldearen objektuarekin bat"
 
-#: common/docman/Document.class.php:112 common/docman/Document.class.php:821
+#: common/docman/Document.class.php:110 common/docman/Document.class.php:822
 #: common/pm/ProjectGroup.class.php:142 common/pm/ProjectGroup.class.php:314
 msgid "Title Must Be At Least 5 Characters"
 msgstr "Izenburuak gutxienez 5 karaktere izan behar ditu"
 
-#: common/docman/Document.class.php:116 common/docman/Document.class.php:826
+#: common/docman/Document.class.php:114 common/docman/Document.class.php:827
 msgid "Document Description Must Be At Least 10 Characters"
 msgstr "Dokumentuaren deskribapenak gutxienez 10 karaktere izan behar ditu"
 
-#: common/docman/Document.class.php:140 common/docman/Document.class.php:148
-#: common/docman/Document.class.php:835
-msgid "Document already published in this directory"
-msgstr ""
+#: common/docman/Document.class.php:138 common/docman/Document.class.php:146
+#: common/docman/Document.class.php:836
+#, fuzzy
+msgid "Document already published in this folder"
+msgstr "Dokumentu berria aldatu."
 
-#: common/docman/Document.class.php:197 common/docman/Document.class.php:204
+#: common/docman/Document.class.php:195 common/docman/Document.class.php:202
 #, fuzzy
 msgid "Error Adding Document:"
 msgstr "Foroa sortzean gertatutako akatsa"
 
-#: common/docman/Document.class.php:197
+#: common/docman/Document.class.php:195
 #, fuzzy
 msgid "Not a file"
 msgstr "Estatistikak ez daude eskuragarri"
 
-#: common/docman/Document.class.php:213
+#: common/docman/Document.class.php:211
 #, fuzzy
 msgid "Error fetching Document"
 msgstr "Errorea elementu bat txertatzerakoan"
 
-#: common/docman/Document.class.php:223
+#: common/docman/Document.class.php:222 common/docman/Document.class.php:875
+#: common/docman/Document.class.php:1089
 #, fuzzy
 msgid "Error updating document group:"
 msgstr "Foroa sortzean gertatutako akatsa"
 
-#: common/docman/Document.class.php:248
+#: common/docman/Document.class.php:249
 #, fuzzy
 msgid "Document: Invalid docid"
 msgstr "Dokumentua: docid baliogabea"
 
-#: common/docman/Document.class.php:576
-#: common/docman/DocumentGroup.class.php:408
+#: common/docman/Document.class.php:577
+#: common/docman/DocumentGroup.class.php:403
 #, fuzzy
 msgid "Unable To Remove Monitor"
 msgstr "Akatsa - ezin duzu monitorizatu"
 
-#: common/docman/Document.class.php:597
-#: common/docman/DocumentGroup.class.php:429 common/forum/Forum.class.php:450
+#: common/docman/Document.class.php:598
+#: common/docman/DocumentGroup.class.php:424 common/forum/Forum.class.php:450
 msgid "Unable To Add Monitor"
 msgstr "Akatsa - ezin duzu monitorizatu"
 
-#: common/docman/Document.class.php:613
-#: common/docman/DocumentGroup.class.php:445
+#: common/docman/Document.class.php:614
+#: common/docman/DocumentGroup.class.php:440
 #, fuzzy
 msgid "Unable To Clear Monitor"
 msgstr "Akatsa - ezin duzu monitorizatu"
 
-#: common/docman/Document.class.php:662
+#: common/docman/Document.class.php:663
 #, fuzzy
 msgid "Document lock failed"
 msgstr "Dokumentuaren izenburua"
 
-#: common/docman/Document.class.php:690
+#: common/docman/Document.class.php:691
 #, fuzzy
 msgid "Document reservation failed"
 msgstr "Dokumentuak irakurri."
 
-#: common/docman/Document.class.php:916
+#: common/docman/Document.class.php:928
 #, fuzzy
 msgid "New document"
 msgstr "Azpi proiektu bat gehitu"
 
-#: common/docman/Document.class.php:918
+#: common/docman/Document.class.php:930
 #, fuzzy
 msgid "Updated document"
 msgstr "Azpi proiektu bat gehitu"
 
-#: common/docman/Document.class.php:918
-#: common/docman/DocumentGroup.class.php:706
+#: common/docman/Document.class.php:930
 #: common/widget/Widget_MyLatestSvnCommits.class.php:66
 msgid "by"
 msgstr ""
 
-#: common/docman/Document.class.php:921
-#, fuzzy
-msgid "Project:"
-msgstr "Proiektuak"
-
-#: common/docman/Document.class.php:922
-#: common/docman/DocumentGroup.class.php:710
-#, fuzzy
-msgid "Directory:"
-msgstr "Azpiproiektuaren izen berria"
-
-#: common/docman/Document.class.php:923
-#, fuzzy
-msgid "Document title:"
-msgstr "Dokumentuaren izenburua"
-
-#: common/docman/Document.class.php:924
-#, fuzzy
-msgid "Document description:"
-msgstr "Deskribapena:"
-
-#: common/docman/Document.class.php:925
-#: common/docman/DocumentGroup.class.php:712
-#, fuzzy
-msgid "Submitter:"
-msgstr "Nork bidalia"
-
-#: common/docman/Document.class.php:927
-#: common/docman/DocumentGroup.class.php:717
-msgid "For more info, visit:"
-msgstr ""
-
-#: common/docman/Document.class.php:932
-#: common/docman/DocumentGroup.class.php:722
-msgid "Docman"
-msgstr ""
-
-#: common/docman/Document.class.php:953
-#, fuzzy
-msgid "Error Deleting Document:"
-msgstr "Errorea elementu bat txertatzerakoan"
-
-#: common/docman/Document.class.php:1028
-#: common/docman/DocumentGroup.class.php:854
-msgid "wrong column name"
-msgstr ""
-
-#: common/docman/DocumentFactory.class.php:91
-#, fuzzy
-msgid "ProjectGroup:: No Valid Group Object"
-msgstr "Forum:: taldearen objektua baliogabea"
-
-#: common/docman/DocumentFactory.class.php:314
-msgid "No Documents Found"
-msgstr "Ez dira dokumentuak aurkitu"
-
-#: common/docman/DocumentGroup.class.php:62
-#, fuzzy
-msgid "Document Directory: No Valid Project"
-msgstr "Forum:: taldearen objektua baliogabea"
-
-#: common/docman/DocumentGroup.class.php:67
-#, fuzzy
-msgid "Document Directory:"
-msgstr "Dokumentuaren izenburua"
-
-#: common/docman/DocumentGroup.class.php:76 common/forum/Forum.class.php:130
-#: common/include/Error.class.php:189 common/mail/MailingList.class.php:79
-#: common/survey/Survey.class.php:79 common/survey/SurveyQuestion.class.php:70
-#: plugins/mailman/include/MailmanList.class.php:104
-msgid "Group_id in db result does not match Group Object"
-msgstr ""
-"Group_id -ko datu basearen erantzunak ez datoz taldearen objektuarekin bat"
-
-#: common/docman/DocumentGroup.class.php:103
-#, fuzzy
-msgid "Name is required"
-msgstr "Izen hau CVS-arentzat gordea izan da."
-
-#: common/docman/DocumentGroup.class.php:112
-#, fuzzy
-msgid "Invalid Documents folder parent ID"
-msgstr "DokumentuTaldea: DokumentuTalde gura ID baliogabea"
-
-#: common/docman/DocumentGroup.class.php:133
-#, fuzzy
-msgid "Folder name already exists"
-msgstr "Erabiltzailea dagoeneko existitzen da"
-
-#: common/docman/DocumentGroup.class.php:149
-#, fuzzy
-msgid "Error Adding Folder:"
-msgstr "Foroa sortzean gertatutako akatsa"
-
-#: common/docman/DocumentGroup.class.php:240
-msgid "Unsupported injected file:"
-msgstr ""
-
-#: common/docman/DocumentGroup.class.php:258
-#, fuzzy
-msgid "Invalid Document Folder ID"
-msgstr "Dokumentuaren multzoa: ID dokumentu taldea baliogabea"
-
-#: common/docman/DocumentGroup.class.php:488
-#, fuzzy
-msgid "Invalid Documents Folder parent ID"
-msgstr "DokumentuTaldea: DokumentuTalde gura ID baliogabea"
-
-#: common/docman/DocumentGroup.class.php:500
-#, fuzzy
-msgid "Documents Folder name already exists"
-msgstr "Unix izen hau hartua dago"
-
-#: common/docman/DocumentGroup.class.php:523
-#: common/docman/include/DocumentGroupHTML.class.php:43
-#, fuzzy, php-format
-msgid "Error: %s"
-msgstr "Akatsa"
-
-#: common/docman/DocumentGroup.class.php:658
-#, fuzzy
-msgid "Browse this folder"
-msgstr "Multzoa edituatu"
-
+#: common/docman/Document.class.php:933
 #: common/docman/DocumentGroup.class.php:704
-#, fuzzy
-msgid "New directory"
-msgstr "Azpiproiektuaren izen berria"
-
-#: common/docman/DocumentGroup.class.php:706
-#, fuzzy
-msgid "Updated directory"
-msgstr "Erregistro eguneratu:"
-
-#: common/docman/DocumentGroup.class.php:709
 #: common/forum/ForumHTML.class.php:73 plugins/contribtracker/www/index.php:35
 #: plugins/contribtracker/www/index.php:167
 #: plugins/mantisbt/view/admin/StatPerStatus.php:47
@@ -513,7 +376,26 @@ msgstr "Erregistro eguneratu:"
 msgid "Project"
 msgstr ""
 
+#: common/docman/Document.class.php:933 common/docman/Document.class.php:934
+#: common/docman/Document.class.php:935 common/docman/Document.class.php:936
+#: common/docman/Document.class.php:937
+#: common/docman/DocumentGroup.class.php:66
+#: common/docman/DocumentGroup.class.php:704
+#: common/docman/DocumentGroup.class.php:705
+#: common/docman/DocumentGroup.class.php:707
 #: common/docman/DocumentGroup.class.php:709
+#: common/docman/DocumentManager.class.php:185
+#: common/docman/DocumentManager.class.php:187
+#: common/docman/include/DocumentGroupHTML.class.php:42
+#: common/docman/views/addfile.php:91 common/docman/views/addfile.php:92
+#: common/docman/views/addsubdocgroup.php:56
+#: common/docman/views/addsubdocgroup.php:58
+#: common/docman/views/editfile.php:38 common/docman/views/editfile.php:42
+#: common/docman/views/editfile.php:51 common/docman/views/editfile.php:70
+#: common/docman/views/listfile.php:170 common/docman/views/listfile.php:172
+#: common/docman/views/listfile.php:174
+#: common/docman/views/listtrashfile.php:117
+#: common/docman/views/search.php:150 common/docman/views/search.php:151
 #: common/forum/ForumHTML.class.php:73
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
@@ -549,144 +431,218 @@ msgstr ""
 msgid ": "
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:714
+#: common/docman/Document.class.php:935 common/docman/views/addfile.php:91
+#: common/docman/views/addfile.php:100 common/docman/views/editfile.php:38
+msgid "Document Title"
+msgstr "Dokumentuaren izenburua"
+
+#: common/docman/Document.class.php:936
 #, fuzzy
-msgid "Updated By:"
+msgid "Document description"
+msgstr "Deskribapena:"
+
+#: common/docman/Document.class.php:937
+#: common/docman/DocumentGroup.class.php:707
+#: common/tracker/actions/browse.php:201 common/tracker/actions/query.php:203
+#: common/tracker/actions/query.php:350
+msgid "Submitter"
+msgstr "Nork bidalia"
+
+#: common/docman/Document.class.php:939
+#: common/docman/DocumentGroup.class.php:712
+msgid "For more info, visit:"
+msgstr ""
+
+#: common/docman/Document.class.php:944
+#: common/docman/DocumentGroup.class.php:717
+msgid "Docman"
+msgstr ""
+
+#: common/docman/Document.class.php:1009
+#, fuzzy
+msgid "Error Deleting Document:"
+msgstr "Errorea elementu bat txertatzerakoan"
+
+#: common/docman/Document.class.php:1084
+#: common/docman/DocumentGroup.class.php:850
+msgid "wrong column name"
+msgstr ""
+
+#: common/docman/DocumentFactory.class.php:313
+msgid "No Documents Found"
+msgstr "Ez dira dokumentuak aurkitu"
+
+#: common/docman/DocumentGroup.class.php:66
+#: common/docman/views/listfile.php:174
+#: common/docman/views/listtrashfile.php:117
+#, fuzzy
+msgid "Document Folder"
+msgstr "Dokumentuaren izenburua"
+
+#: common/docman/DocumentGroup.class.php:75 common/forum/Forum.class.php:130
+#: common/include/Error.class.php:189 common/mail/MailingList.class.php:79
+#: common/survey/Survey.class.php:79 common/survey/SurveyQuestion.class.php:70
+#: plugins/mailman/include/MailmanList.class.php:104
+msgid "Group_id in db result does not match Group Object"
+msgstr ""
+"Group_id -ko datu basearen erantzunak ez datoz taldearen objektuarekin bat"
+
+#: common/docman/DocumentGroup.class.php:98
+#, fuzzy
+msgid "Name is required"
+msgstr "Izen hau CVS-arentzat gordea izan da."
+
+#: common/docman/DocumentGroup.class.php:107
+#: common/docman/DocumentGroup.class.php:483
+#, fuzzy
+msgid "Invalid Documents Folder parent ID"
+msgstr "DokumentuTaldea: DokumentuTalde gura ID baliogabea"
+
+#: common/docman/DocumentGroup.class.php:128
+#, fuzzy
+msgid "Folder name already exists"
+msgstr "Erabiltzailea dagoeneko existitzen da"
+
+#: common/docman/DocumentGroup.class.php:144
+#, fuzzy
+msgid "Error Adding Folder:"
+msgstr "Foroa sortzean gertatutako akatsa"
+
+#: common/docman/DocumentGroup.class.php:235
+msgid "Unsupported injected file:"
+msgstr ""
+
+#: common/docman/DocumentGroup.class.php:253
+#, fuzzy
+msgid "Invalid Document Folder ID"
+msgstr "Dokumentuaren multzoa: ID dokumentu taldea baliogabea"
+
+#: common/docman/DocumentGroup.class.php:495
+#, fuzzy
+msgid "Documents Folder name already exists"
+msgstr "Unix izen hau hartua dago"
+
+#: common/docman/DocumentGroup.class.php:518
+#, fuzzy, php-format
+msgid "Error: %s"
+msgstr "Akatsa"
+
+#: common/docman/DocumentGroup.class.php:653
+#, fuzzy
+msgid "Browse this folder"
+msgstr "Multzoa edituatu"
+
+#: common/docman/DocumentGroup.class.php:699
+#, fuzzy
+msgid "New folder"
+msgstr "Rol Berria"
+
+#: common/docman/DocumentGroup.class.php:701
+#, fuzzy
+msgid "Updated folder by"
+msgstr "Erregistro eguneratu:"
+
+#: common/docman/DocumentGroup.class.php:709
+#, fuzzy
+msgid "Updated by"
 msgstr "Eguneratua"
 
-#: common/docman/DocumentGroup.class.php:750
+#: common/docman/DocumentGroup.class.php:744
 msgid "Unable to extract zipfile."
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:755
+#: common/docman/DocumentGroup.class.php:749
 msgid "Unable to open zipfile."
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:804
-msgid "injected by Zip:"
+#: common/docman/DocumentGroup.class.php:800
+msgid "Injected by Zip:"
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:804
-#, fuzzy
-msgid "no description"
-msgstr "Deskribapena:"
-
-#: common/docman/DocumentGroup.class.php:813
+#: common/docman/DocumentGroup.class.php:809
 #, fuzzy
 msgid "Unknown item."
 msgstr "Unix kontuaren egoera"
 
-#: common/docman/DocumentGroup.class.php:820
+#: common/docman/DocumentGroup.class.php:816
 msgid "Unable to open directory for inject into tree"
 msgstr ""
 
-#: common/docman/DocumentGroupFactory.class.php:60
-#, fuzzy
-msgid "DocumentGroupFactory:: Invalid Project"
-msgstr "Dokumentua: docid baliogabea"
-
-#: common/docman/DocumentGroupFactory.class.php:85
-#: common/docman/DocumentGroupFactory.class.php:119
+#: common/docman/DocumentGroupFactory.class.php:84
+#: common/docman/DocumentGroupFactory.class.php:118
 #, fuzzy
 msgid "No Documents Folder Found"
 msgstr "Ez dira dokumentuak aurkitu"
 
-#: common/docman/DocumentManager.class.php:177
+#: common/docman/DocumentManager.class.php:175
 #, fuzzy
 msgid "Number of documents in this folder"
 msgstr "Galdera kopurua"
 
-#: common/docman/DocumentManager.class.php:180
+#: common/docman/DocumentManager.class.php:178
 msgid ""
 "Number of documents in this folder per status. active/pending/hidden/private"
 msgstr ""
 
-#: common/docman/DocumentManager.class.php:183
+#: common/docman/DocumentManager.class.php:181
 msgid "Number of deleted documents in this folder"
+msgstr ""
+
+#: common/docman/DocumentManager.class.php:185
+#, fuzzy
+msgid "Created by"
+msgstr "Sortu"
+
+#: common/docman/DocumentManager.class.php:187
+msgid "; "
 msgstr ""
 
 #: common/docman/DocumentManager.class.php:187
 #, fuzzy
-msgid "Created_by:"
-msgstr "Sortu"
-
-#: common/docman/DocumentManager.class.php:187
-#, fuzzy
-msgid "; Last modified:"
+msgid "Last modified"
 msgstr "Zerrenda Gehitua"
 
-#: common/docman/DocumentManager.class.php:187
-#: common/docman/views/listfile.php:271 common/docman/views/listfile.php:273
-#: common/docman/views/listtrashfile.php:169
-#: common/docman/views/listtrashfile.php:171
-#: common/docman/views/pendingfiles.php:101
-#: common/docman/views/pendingfiles.php:103
-#: common/forum/ForumHTML.class.php:221 common/pm/ProjectTask.class.php:1207
-#: common/tracker/actions/browse.php:608 common/tracker/actions/browse.php:619
-#: common/tracker/actions/browse.php:639 common/tracker/actions/detail.php:68
-#: common/tracker/actions/downloadcsv.php:84
-#: common/tracker/actions/downloadcsv.php:85
-#: common/tracker/actions/downloadcsv.php:86
-#: common/tracker/actions/mod-limited.php:98
-#: common/tracker/actions/mod-limited.php:103
-#: common/tracker/actions/mod.php:99 common/tracker/actions/mod.php:104
-#: common/tracker/Artifact.class.php:1581
-#: common/tracker/Artifact.class.php:1583
-#: common/tracker/Artifact.class.php:1590
-#: common/tracker/Artifact.class.php:1596
-#: common/tracker/Artifact.class.php:1696
-#: common/tracker/include/ArtifactHtml.class.php:112
-#: common/tracker/include/ArtifactHtml.class.php:170
-#: common/tracker/include/ArtifactHtml.class.php:179
-#: common/tracker/include/ArtifactTypeHtml.class.php:336
-#: common/tracker/include/ArtifactTypeHtml.class.php:337
-#: common/tracker/include/ArtifactTypeHtml.class.php:375
-#: common/widget/Widget_MyLatestSvnCommits.class.php:65
-#: common/widget/Widget_MyProjectsLastDocuments.class.php:112
-#: common/widget/Widget_MyProjectsLastDocuments.class.php:114
-#: common/widget/Widget_ProjectInfo.class.php:68
-#: common/widget/Widget_Rss.class.php:76
-#: cronjobs/send_pending_items_mail.php:98
-#: plugins/compactpreview/include/CompactPreviewPlugin.class.php:190
-#: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:54
-#: plugins/hudson/include/HudsonBuild.class.php:110
-#: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:61
-#: www/account/editsshkeys.php:59 www/account/index.php:148
-#: www/account/index.php:325 www/admin/cronman.php:78
-#: www/admin/grouplist.php:118 www/admin/massmail.php:158
-#: www/admin/search.php:88 www/admin/search.php:168 www/admin/userlist.php:115
-#: www/developer/diary.php:56 www/developer/diary.php:87
-#: www/export/rss20_docman.php:136 www/export/rss20_docman.php:138
-#: www/export/tracker.php:108 www/forum/index.php:90 www/forum/message.php:127
-#: www/forum/myforums.php:152 www/frs/index.php:148 www/frs/index.php:207
-#: www/include/html.php:1009 www/include/stats_function.php:77
-#: www/include/stats_function.php:98 www/news/news_utils.php:147
-#: www/news/news_utils.php:267 www/people/people_utils.php:421
-#: www/people/viewjob.php:78 www/pm/browse_task.php:265
-#: www/pm/browse_task.php:275 www/pm/include/ProjectTaskHTML.class.php:122
-#: www/pm/include/ProjectTaskHTML.class.php:175
-#: www/pm/include/ProjectTaskHTML.class.php:236 www/pm/mod_task.php:312
-#: www/project/admin/project_admin_utils.php:180
-#: www/reporting/usersummary.php:127
-#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:98
-#: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:67
-#: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
-#: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:88
-#: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:62
-#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:63
-#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:93
-#: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:89
-#: www/snippet/detail.php:81 www/snippet/detail.php:170
-#: www/soap/tracker/tracker.php:1131 www/softwaremap/full_list.php:138
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:299
-#: www/stats/lastlogins.php:61
-msgid "Y-m-d H:i"
-msgstr "Y-m-d H:i"
-
-#: common/docman/include/DocumentGroupHTML.class.php:39
-#, fuzzy
-msgid "Invalid Project"
-msgstr "Erabiltzaile ez da baliozkoa"
+#: common/docman/include/DocumentGroupHTML.class.php:42
+#: common/survey/SurveyResponse.class.php:88
+#: common/tracker/actions/tracker.php:271
+#: common/tracker/views/form-adminroadmap.php:57
+#: plugins/forumml/www/index.php:55 plugins/forumml/www/index.php:63
+#: plugins/forumml/www/message.php:93 plugins/mailman/www/admin/index.php:50
+#: plugins/mailman/www/admin/index.php:53
+#: plugins/mailman/www/admin/index.php:73
+#: plugins/mailman/www/admin/index.php:75
+#: plugins/mailman/www/admin/index.php:83
+#: plugins/mailman/www/admin/index.php:94
+#: plugins/mailman/www/admin/index.php:96
+#: plugins/mailman/www/admin/index.php:104
+#: plugins/mailman/www/admin/index.php:125
+#: plugins/mailman/www/admin/index.php:131
+#: plugins/mailman/www/admin/index.php:164
+#: plugins/mailman/www/admin/index.php:166
+#: plugins/mailman/www/admin/index.php:196
+#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:27
+#: plugins/mailman/www/index.php:34 plugins/mailman/www/index.php:37
+#: plugins/mailman/www/index.php:49 www/admin/passedit.php:53
+#: www/admin/passedit.php:61 www/admin/passedit.php:69
+#: www/export/rss20_docman.php:152 www/forum/admin/pendingmsgdetail.php:51
+#: www/forum/admin/pendingmsgdetail.php:53 www/mail/admin/index.php:154
+#: www/mail/admin/index.php:251 www/project/admin/roledelete.php:62
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
+#: www/snippet/download.php:45 www/survey/admin/question.php:64
+#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:82
+#: www/survey/admin/show_csv.php:84 www/survey/admin/show_results.php:69
+#: www/survey/admin/show_results.php:73 www/survey/admin/show_results.php:84
+#: www/survey/admin/show_results.php:86 www/survey/admin/show_results.php:133
+#: www/survey/admin/show_results.php:135 www/tracker/admin/index.php:190
+#: www/tracker/reporting/trackeract_graph.php:49
+#: www/tracker/reporting/trackerpie_graph.php:63 www/tracker/roadmap.php:175
+#: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
+#: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
+#: www/trove/TroveCategory.class.php:71 www/trove/TroveCategory.class.php:97
+#: www/trove/TroveCategory.class.php:109
+msgid "Error"
+msgstr "Akatsa"
 
 #: common/docman/include/webdav.php:221 common/docman/include/webdav.php:232
 #: common/docman/include/webdav.php:294
@@ -694,13 +650,8 @@ msgid "webdav db error:"
 msgstr ""
 
 #: common/docman/views/addfile.php:88
-msgid "You MUST first create at least one directory to store your document."
+msgid "You MUST first create at least one folder to store your document."
 msgstr ""
-
-#: common/docman/views/addfile.php:91 common/docman/views/editfile.php:38
-#, fuzzy
-msgid "Document Title:"
-msgstr "Dokumentuaren izenburua"
 
 #: common/docman/views/addfile.php:91
 msgid ""
@@ -708,30 +659,8 @@ msgid ""
 "download server)."
 msgstr ""
 
-#: common/docman/views/addfile.php:92 common/docman/views/editfile.php:42
-#: plugins/scmgit/common/GitPlugin.class.php:1106 www/mail/admin/index.php:194
-#: www/mail/admin/index.php:227
-msgid "Description:"
-msgstr "Deskribapena:"
-
-#: common/docman/views/addfile.php:92
-msgid "A brief description to be placed just under the title."
-msgstr ""
-
-#: common/docman/views/addfile.php:94
-msgid "Both fields are used by the document search engine."
-msgstr ""
-
-#: common/docman/views/addfile.php:100
-msgid "Document Title"
-msgstr "Dokumentuaren izenburua"
-
-#: common/docman/views/addfile.php:103 common/docman/views/addfile.php:111
-#, fuzzy, php-format
-msgid "(at least %1$s characters)"
-msgstr "Pasahitza egokia eman behar duzu (gutxienez 6 karakterekoa)."
-
-#: common/docman/views/addfile.php:108 common/docman/views/listfile.php:220
+#: common/docman/views/addfile.php:92 common/docman/views/addfile.php:108
+#: common/docman/views/editfile.php:42 common/docman/views/listfile.php:219
 #: common/docman/views/listtrashfile.php:130
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/actions/admin-ind.php:100
@@ -787,13 +716,26 @@ msgstr "Pasahitza egokia eman behar duzu (gutxienez 6 karakterekoa)."
 msgid "Description"
 msgstr "Deskribapena"
 
+#: common/docman/views/addfile.php:92
+msgid "A brief description to be placed just under the title."
+msgstr ""
+
+#: common/docman/views/addfile.php:94
+msgid "Both fields are used by the document search engine."
+msgstr ""
+
+#: common/docman/views/addfile.php:103 common/docman/views/addfile.php:111
+#, fuzzy, php-format
+msgid "(at least %1$s characters)"
+msgstr "Pasahitza egokia eman behar duzu (gutxienez 6 karakterekoa)."
+
 #: common/docman/views/addfile.php:116
 #, fuzzy
 msgid "Type of Document"
 msgstr "Foroak erabili"
 
 #: common/docman/views/addfile.php:118 common/docman/views/addfile.php:144
-#: common/docman/views/reporting.php:153
+#: common/docman/views/editfile.php:51
 #: plugins/mantisbt/view/addAttachment.php:32
 #: www/frs/reporting/downloads.php:177
 msgid "File"
@@ -831,7 +773,7 @@ msgstr "Sortu"
 msgid "Upload File"
 msgstr "Fitxategia bidali"
 
-#: common/docman/views/addfile.php:132 common/docman/views/additem.php:79
+#: common/docman/views/addfile.php:132 common/docman/views/additem.php:85
 #: common/docman/views/editfile.php:81
 #, php-format
 msgid "(max upload size: %1$s)"
@@ -890,63 +832,45 @@ msgstr "Dokumentu kudeatzailea: dokumentuak erakutsi"
 msgid "Submit a new document in this folder."
 msgstr "Dokumentu berria aldatu."
 
-#: common/docman/views/additem.php:57
+#: common/docman/views/additem.php:58
 #, fuzzy
-msgid "Submit a new document."
-msgstr "Dokumentu berria aldatu."
+msgid "New Document"
+msgstr "Azpi proiektu bat gehitu"
 
-#: common/docman/views/additem.php:60
+#: common/docman/views/additem.php:59
 msgid "Create a folder based on this name."
 msgstr ""
 
 #: common/docman/views/additem.php:60
 #, fuzzy
-msgid "Add a new folder."
-msgstr "Trebezi berri bat gehitu"
+msgid "New Folder"
+msgstr "Rol Berria"
 
-#: common/docman/views/additem.php:62
+#: common/docman/views/additem.php:61
 msgid ""
 "Create a full folders tree using an compressed archive. Only zip format "
 "support."
 msgstr ""
 
-#: common/docman/views/additem.php:62
+#: common/docman/views/additem.php:62 common/docman/views/additem.php:86
 #, fuzzy
 msgid "Inject Tree"
 msgstr "Azpiproiektuaren izen berria"
 
-#: common/docman/views/additem.php:66
-#, fuzzy
-msgid "Add a new sub folder"
-msgstr "Trebezi berri bat gehitu"
-
-#: common/docman/views/additem.php:71
-#, fuzzy
-msgid "Add a new document"
-msgstr "Azpi proiektu bat gehitu"
-
-#: common/docman/views/additem.php:76
-#, fuzzy
-msgid "Inject a Tree"
-msgstr "Azpiproiektuaren izen berria"
-
-#: common/docman/views/additem.php:79
+#: common/docman/views/additem.php:85
 #, fuzzy
 msgid "Upload archive:"
 msgstr "Fitxategia bidali"
 
-#: common/docman/views/additem.php:80
-#, fuzzy
-msgid "Inject"
-msgstr "Gaia"
-
 #: common/docman/views/addsubdocgroup.php:56
-msgid "Name of the document subfolder to create:"
-msgstr ""
+#, fuzzy
+msgid "Name of the document subfolder to create"
+msgstr "Ez dago daturik dokumentu honetan"
 
 #: common/docman/views/addsubdocgroup.php:58
-msgid "Name of the document folder to create:"
-msgstr ""
+#, fuzzy
+msgid "Name of the document folder to create"
+msgstr "Ez dago daturik dokumentu honetan"
 
 #: common/docman/views/addsubdocgroup.php:61 www/admin/responses_admin.php:132
 #: www/project/admin/database.php:184 www/project/admin/vhost.php:122
@@ -1033,11 +957,6 @@ msgstr ""
 msgid "Both fields are used by document search engine."
 msgstr ""
 
-#: common/docman/views/editfile.php:51
-#, fuzzy
-msgid "File:"
-msgstr "Fitxategia"
-
 #: common/docman/views/editfile.php:57
 msgid ""
 "Edit the contents to your desire or leave them as they are to remain "
@@ -1046,12 +965,18 @@ msgstr ""
 
 #: common/docman/views/editfile.php:65
 #, fuzzy
-msgid "Folder that document belongs in:"
+msgid "Folder that document belongs to:"
 msgstr "Dokumentu honen multzoa:"
 
-#: common/docman/views/editfile.php:70
-#, fuzzy
-msgid "State:"
+#: common/docman/views/editfile.php:70 common/tracker/actions/browse.php:409
+#: common/tracker/actions/browse.php:564 common/tracker/actions/browse.php:751
+#: common/tracker/actions/detail.php:73
+#: common/tracker/actions/mod-limited.php:128
+#: common/tracker/actions/mod.php:155 common/tracker/actions/query.php:344
+#: common/tracker/Artifact.class.php:947
+#: common/tracker/views/form-customizelist.php:37 www/pm/browse_task.php:383
+#: www/project/admin/database.php:208
+msgid "State"
 msgstr "Egoera"
 
 #: common/docman/views/editfile.php:75
@@ -1090,13 +1015,8 @@ msgid "Subproject"
 msgstr "Azpiprojektua"
 
 #: common/docman/views/listfile.php:172 common/docman/views/search.php:151
-msgid "Path:"
+msgid "Path"
 msgstr ""
-
-#: common/docman/views/listfile.php:174
-#, fuzzy
-msgid "Document Folder:"
-msgstr "Dokumentuaren izenburua"
 
 #: common/docman/views/listfile.php:176 common/docman/views/listfile.php:207
 #: common/docman/views/listtrashfile.php:119
@@ -1126,25 +1046,20 @@ msgstr ""
 
 #: common/docman/views/listfile.php:196
 #, fuzzy
-msgid "Stop monitoring this directory"
+msgid "Stop monitoring this folder"
 msgstr "Orri hau monitorizatu"
 
 #: common/docman/views/listfile.php:199
 #, fuzzy
-msgid "Start monitoring this directory"
+msgid "Start monitoring this folder"
 msgstr "Orri hau monitorizatu"
 
-#: common/docman/views/listfile.php:213
-#, fuzzy
-msgid "Add a new item"
-msgstr "Trebezi berri bat gehitu"
-
-#: common/docman/views/listfile.php:220
+#: common/docman/views/listfile.php:219
 #: common/docman/views/listtrashfile.php:130
 msgid "Select / Deselect all documents for massaction"
 msgstr ""
 
-#: common/docman/views/listfile.php:220
+#: common/docman/views/listfile.php:219
 #: common/docman/views/listtrashfile.php:130
 #: common/docman/views/pendingfiles.php:63
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
@@ -1155,7 +1070,7 @@ msgstr ""
 msgid "Filename"
 msgstr "Fitxeroaren izena"
 
-#: common/docman/views/listfile.php:220
+#: common/docman/views/listfile.php:219
 #: common/docman/views/listtrashfile.php:130
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/views/form-addcanned.php:41
@@ -1178,7 +1093,7 @@ msgstr "Fitxeroaren izena"
 msgid "Title"
 msgstr "Izenburua"
 
-#: common/docman/views/listfile.php:220
+#: common/docman/views/listfile.php:219
 #: common/docman/views/listtrashfile.php:130
 #: common/docman/views/pendingfiles.php:63
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
@@ -1196,16 +1111,16 @@ msgstr "Izenburua"
 msgid "Author"
 msgstr "Egilea"
 
-#: common/docman/views/listfile.php:220
+#: common/docman/views/listfile.php:219
 #: common/docman/views/listtrashfile.php:130
 #: common/docman/views/pendingfiles.php:63
 #, fuzzy
 msgid "Last time"
 msgstr "Abizena:"
 
-#: common/docman/views/listfile.php:220
+#: common/docman/views/listfile.php:219
 #: common/docman/views/listtrashfile.php:130
-#: common/docman/views/pendingfiles.php:63
+#: common/docman/views/pendingfiles.php:63 common/docman/views/search.php:150
 #: common/tracker/ArtifactExtraField.class.php:327
 #: common/tracker/include/ArtifactTypeHtml.class.php:325
 #: common/tracker/views/form-addextrafieldoption.php:108
@@ -1232,7 +1147,7 @@ msgstr "Abizena:"
 msgid "Status"
 msgstr ""
 
-#: common/docman/views/listfile.php:220
+#: common/docman/views/listfile.php:219
 #: common/docman/views/listtrashfile.php:130
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/include/ArtifactTypeHtml.class.php:364 www/frs/index.php:179
@@ -1240,12 +1155,12 @@ msgstr ""
 msgid "Size"
 msgstr "Tamaina"
 
-#: common/docman/views/listfile.php:220 www/project/memberlist.php:105
+#: common/docman/views/listfile.php:219 www/project/memberlist.php:105
 #: www/project/report/index.php:171
 msgid "View"
 msgstr "Ikusi"
 
-#: common/docman/views/listfile.php:223
+#: common/docman/views/listfile.php:222
 #: common/docman/views/listtrashfile.php:130
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/views/form-adminroadmap.php:492
@@ -1264,135 +1179,207 @@ msgstr "Ikusi"
 msgid "Actions"
 msgstr "Enkanteak"
 
-#: common/docman/views/listfile.php:233 common/docman/views/listfile.php:238
+#: common/docman/views/listfile.php:232 common/docman/views/listfile.php:237
 #: common/docman/views/listtrashfile.php:138
 msgid "Select / Deselect this document for massaction"
 msgstr ""
 
-#: common/docman/views/listfile.php:245
+#: common/docman/views/listfile.php:244
 #: common/docman/views/listtrashfile.php:143
 #: common/docman/views/pendingfiles.php:75
 msgid "Visit this link"
 msgstr ""
 
-#: common/docman/views/listfile.php:250
+#: common/docman/views/listfile.php:249
 #: common/docman/views/listtrashfile.php:148
 #: common/docman/views/pendingfiles.php:80
 #, fuzzy
 msgid "View this document"
 msgstr "Dokumentuak irakurri."
 
-#: common/docman/views/listfile.php:259
+#: common/docman/views/listfile.php:258
 #: common/docman/views/listtrashfile.php:157
 #: common/docman/views/pendingfiles.php:89
 #, fuzzy
 msgid "new"
 msgstr "Albisteak"
 
-#: common/docman/views/listfile.php:261
+#: common/docman/views/listfile.php:260
 #: common/docman/views/pendingfiles.php:91
 msgid "Created or updated since less than 7 days"
 msgstr ""
 
-#: common/docman/views/listfile.php:279 common/docman/views/listfile.php:281
+#: common/docman/views/listfile.php:270 common/docman/views/listfile.php:272
+#: common/docman/views/listtrashfile.php:169
+#: common/docman/views/listtrashfile.php:171
+#: common/docman/views/pendingfiles.php:101
+#: common/docman/views/pendingfiles.php:103
+#: common/forum/ForumHTML.class.php:221 common/pm/ProjectTask.class.php:1207
+#: common/tracker/actions/browse.php:608 common/tracker/actions/browse.php:619
+#: common/tracker/actions/browse.php:639 common/tracker/actions/detail.php:68
+#: common/tracker/actions/downloadcsv.php:84
+#: common/tracker/actions/downloadcsv.php:85
+#: common/tracker/actions/downloadcsv.php:86
+#: common/tracker/actions/mod-limited.php:98
+#: common/tracker/actions/mod-limited.php:103
+#: common/tracker/actions/mod.php:99 common/tracker/actions/mod.php:104
+#: common/tracker/Artifact.class.php:1581
+#: common/tracker/Artifact.class.php:1583
+#: common/tracker/Artifact.class.php:1590
+#: common/tracker/Artifact.class.php:1596
+#: common/tracker/Artifact.class.php:1696
+#: common/tracker/include/ArtifactHtml.class.php:112
+#: common/tracker/include/ArtifactHtml.class.php:170
+#: common/tracker/include/ArtifactHtml.class.php:179
+#: common/tracker/include/ArtifactTypeHtml.class.php:336
+#: common/tracker/include/ArtifactTypeHtml.class.php:337
+#: common/tracker/include/ArtifactTypeHtml.class.php:375
+#: common/widget/Widget_MyLatestSvnCommits.class.php:65
+#: common/widget/Widget_MyProjectsLastDocuments.class.php:112
+#: common/widget/Widget_MyProjectsLastDocuments.class.php:114
+#: common/widget/Widget_ProjectInfo.class.php:68
+#: common/widget/Widget_Rss.class.php:76
+#: cronjobs/send_pending_items_mail.php:98
+#: plugins/compactpreview/include/CompactPreviewPlugin.class.php:190
+#: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:54
+#: plugins/hudson/include/HudsonBuild.class.php:110
+#: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:61
+#: www/account/editsshkeys.php:59 www/account/index.php:148
+#: www/account/index.php:325 www/admin/cronman.php:78
+#: www/admin/grouplist.php:118 www/admin/massmail.php:158
+#: www/admin/search.php:88 www/admin/search.php:168 www/admin/userlist.php:115
+#: www/developer/diary.php:56 www/developer/diary.php:87
+#: www/export/rss20_docman.php:136 www/export/rss20_docman.php:138
+#: www/export/tracker.php:108 www/forum/index.php:90 www/forum/message.php:127
+#: www/forum/myforums.php:152 www/frs/index.php:148 www/frs/index.php:207
+#: www/include/html.php:1009 www/include/stats_function.php:77
+#: www/include/stats_function.php:98 www/news/news_utils.php:147
+#: www/news/news_utils.php:267 www/people/people_utils.php:421
+#: www/people/viewjob.php:78 www/pm/browse_task.php:265
+#: www/pm/browse_task.php:275 www/pm/include/ProjectTaskHTML.class.php:122
+#: www/pm/include/ProjectTaskHTML.class.php:175
+#: www/pm/include/ProjectTaskHTML.class.php:236 www/pm/mod_task.php:312
+#: www/project/admin/project_admin_utils.php:180
+#: www/reporting/usersummary.php:127
+#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:98
+#: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:67
+#: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
+#: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:88
+#: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:62
+#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:63
+#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:93
+#: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:89
+#: www/snippet/detail.php:81 www/snippet/detail.php:170
+#: www/soap/tracker/tracker.php:1131 www/softwaremap/full_list.php:138
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:299
+#: www/stats/lastlogins.php:61
+msgid "Y-m-d H:i"
+msgstr "Y-m-d H:i"
+
+#: common/docman/views/listfile.php:278 common/docman/views/listfile.php:280
 #, fuzzy
 msgid "Reserved Document"
 msgstr "Foroak erabili"
 
-#: common/docman/views/listfile.php:320 common/docman/views/listfile.php:331
+#: common/docman/views/listfile.php:319 common/docman/views/listfile.php:330
 #, fuzzy
 msgid "Move this document to trash"
 msgstr "Ez dago daturik dokumentu honetan"
 
-#: common/docman/views/listfile.php:320 common/docman/views/listfile.php:331
+#: common/docman/views/listfile.php:319 common/docman/views/listfile.php:330
 #, fuzzy
 msgid "Move to trash this document"
 msgstr "Orri hau monitorizatu"
 
-#: common/docman/views/listfile.php:321 common/docman/views/listfile.php:332
+#: common/docman/views/listfile.php:320 common/docman/views/listfile.php:331
 #: common/docman/views/listtrashfile.php:193
 #: common/docman/views/pendingfiles.php:127
 #, fuzzy
 msgid "Edit this document"
 msgstr "Multzoa edituatu"
 
-#: common/docman/views/listfile.php:323
+#: common/docman/views/listfile.php:322
 msgid "Reserve this document for later edition"
 msgstr ""
 
-#: common/docman/views/listfile.php:323
+#: common/docman/views/listfile.php:322
 #, fuzzy
 msgid "Reserve this document"
 msgstr "Foroak erabili"
 
-#: common/docman/views/listfile.php:328
+#: common/docman/views/listfile.php:327
 msgid "Enforce reservation"
 msgstr ""
 
-#: common/docman/views/listfile.php:333 common/docman/views/listfile.php:360
+#: common/docman/views/listfile.php:332 common/docman/views/listfile.php:359
 #, fuzzy
 msgid "Release reservation"
 msgstr "Release Fitxeroaren bertsio berria"
 
-#: common/docman/views/listfile.php:339
+#: common/docman/views/listfile.php:338
 #, fuzzy
 msgid "Stop monitoring this document"
 msgstr "Orri hau monitorizatu"
 
-#: common/docman/views/listfile.php:342
+#: common/docman/views/listfile.php:341
 #, fuzzy
 msgid "Start monitoring this document"
 msgstr "Orri hau monitorizatu"
 
 #: common/docman/views/listfile.php:352
-#: common/docman/views/listtrashfile.php:199
+#: common/docman/views/listtrashfile.php:200
 msgid ""
 "Actions availables for selected documents, you need to check at least one "
 "document to get actions"
 msgstr ""
 
 #: common/docman/views/listfile.php:353
-#: common/docman/views/listtrashfile.php:200
+#: common/docman/views/listtrashfile.php:201
 msgid "Mass actions for selected documents:"
 msgstr ""
 
-#: common/docman/views/listfile.php:357
+#: common/docman/views/listfile.php:356
 #, fuzzy
 msgid "Move to trash"
 msgstr "Ez dago daturik dokumentu honetan"
 
-#: common/docman/views/listfile.php:359
+#: common/docman/views/listfile.php:358
 msgid "Reserve for later edition"
 msgstr ""
 
-#: common/docman/views/listfile.php:359
+#: common/docman/views/listfile.php:358
 #, fuzzy
 msgid "Reserve"
 msgstr "Behatzailea"
 
-#: common/docman/views/listfile.php:361
+#: common/docman/views/listfile.php:360
 #, fuzzy
 msgid "Start monitoring"
 msgstr "Monitorizatzeaz gelditu"
 
-#: common/docman/views/listfile.php:362
+#: common/docman/views/listfile.php:361
 #: common/widget/Widget_MyMonitoredForums.class.php:125
 #, fuzzy
 msgid "Stop monitoring"
 msgstr "Monitorizatzeaz gelditu"
 
-#: common/docman/views/listfile.php:365
+#: common/docman/views/listfile.php:364
 #: common/docman/views/listtrashfile.php:204
 #: common/docman/views/pendingfiles.php:137
 #, fuzzy
 msgid "Download as a zip"
 msgstr "Deskargak"
 
-#: common/docman/views/listfile.php:371
+#: common/docman/views/listfile.php:370
 #: common/docman/views/listtrashfile.php:210
 #, fuzzy
 msgid "No documents."
 msgstr "Azpi proiektu bat gehitu"
+
+#: common/docman/views/listfile.php:385
+#, fuzzy
+msgid "Documents are also available thru webdav access"
+msgstr "Informazioa ez dago eskuragarri"
 
 #: common/docman/views/listtrashfile.php:73
 #, fuzzy
@@ -1402,11 +1389,6 @@ msgstr "Erabiltzaile ez da baliozkoa"
 #: common/docman/views/listtrashfile.php:108
 msgid "Delete permanently all documents and folders with deleted status."
 msgstr ""
-
-#: common/docman/views/listtrashfile.php:117
-#, fuzzy
-msgid "Documents folder:"
-msgstr "Foroen administrazioa"
 
 #: common/docman/views/listtrashfile.php:120
 msgid "Delete permanently this folder and his content."
@@ -1428,8 +1410,8 @@ msgstr "Ezabatu txantiloia"
 
 #: common/docman/views/menu.php:44
 #, fuzzy
-msgid "List files & Directories"
-msgstr "Tweak direktorioak"
+msgid "View Documents"
+msgstr "Azpi proiektu bat gehitu"
 
 #: common/docman/views/menu.php:46
 msgid ""
@@ -1447,44 +1429,63 @@ msgid ""
 "Add a new item such as file, create directory, inject a zip at root level."
 msgstr ""
 
-#: common/docman/views/menu.php:55
-msgid "Search in documents"
-msgstr ""
+#: common/docman/views/menu.php:55 common/docman/views/search.php:63
+#: common/include/Navigation.class.php:171
+#: plugins/globalsearch/common/globalsearch_stats_boxes.php:48
+#: www/admin/index.php:67 www/admin/index.php:152
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:336
+#: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:57
+msgid "Search"
+msgstr "Bilatu"
 
 #: common/docman/views/menu.php:57
 msgid "Search documents in this project using keywords."
 msgstr ""
 
-#: common/docman/views/menu.php:61
+#: common/docman/views/menu.php:63
 #, fuzzy
 msgid "Trash"
 msgstr "Admin"
 
-#: common/docman/views/menu.php:63
+#: common/docman/views/menu.php:65
 msgid "Recover or delete permanently files with deleted status."
 msgstr ""
 
-#: common/docman/views/menu.php:67 common/include/Navigation.class.php:398
-#: common/tracker/actions/mod.php:144 common/tracker/actions/mod.php:196
-#: common/tracker/include/build_submission_form.php:64
-#: common/widget/Widget_MyProjects.class.php:77
-#: www/include/Layout.class.php:725
-msgid "Admin"
-msgstr "Admin"
-
-#: common/docman/views/menu.php:69
-#, fuzzy
-msgid "Docman module administration."
-msgstr "Dokumentuen arduradunaren administrazioa"
-
-#: common/docman/views/menu.php:70
-#, fuzzy
-msgid "Reports"
+#: common/docman/views/menu.php:70 common/frs/include/frs_utils.php:77
+#: common/include/Navigation.class.php:300
+#: common/tracker/include/ArtifactTypeFactoryHtml.class.php:54
+#: common/tracker/include/ArtifactTypeHtml.class.php:67
+#: www/pm/include/ProjectGroupHTML.class.php:91
+#: www/pm/include/ProjectGroupHTML.class.php:96
+#: www/scm/include/scm_utils.php:50
+msgid "Reporting"
 msgstr "Txostenak"
 
 #: common/docman/views/menu.php:72
 #, fuzzy
 msgid "Docman module reporting."
+msgstr "Dokumentuen arduradunaren administrazioa"
+
+#: common/docman/views/menu.php:73 common/forum/ForumHTML.class.php:115
+#: common/forum/ForumHTML.class.php:121 common/frs/include/frs_utils.php:78
+#: common/tracker/actions/admin-tracker.php:32
+#: common/tracker/include/ArtifactTypeFactoryHtml.class.php:59
+#: common/tracker/include/ArtifactTypeHtml.class.php:81
+#: plugins/mailman/www/mailman_utils.php:208
+#: plugins/mailman/www/mailman_utils.php:211
+#: plugins/mantisbt/common/MantisBTPlugin.class.php:402
+#: plugins/mantisbt/www/user/index.php:41 www/mail/admin/index.php:290
+#: www/mail/mail_utils.php:48 www/news/news_utils.php:48
+#: www/pm/include/ProjectGroupHTML.class.php:93
+#: www/pm/include/ProjectGroupHTML.class.php:98
+#: www/scm/include/scm_utils.php:53 www/survey/include/SurveyHTML.class.php:66
+#: www/survey/include/SurveyHTML.class.php:79
+msgid "Administration"
+msgstr "Administrazioa"
+
+#: common/docman/views/menu.php:75
+#, fuzzy
+msgid "Docman module administration."
 msgstr "Dokumentuen arduradunaren administrazioa"
 
 #: common/docman/views/pendingfiles.php:42
@@ -1497,13 +1498,13 @@ msgstr "Kontu berria"
 msgid "Pending files"
 msgstr "Arrazoia zergatik dagoen zintzilik:"
 
-#: common/docman/views/pendingfiles.php:133
+#: common/docman/views/pendingfiles.php:134
 msgid ""
 "Actions availables for checked files, you need to check at least one file to "
 "get actions"
 msgstr ""
 
-#: common/docman/views/pendingfiles.php:134
+#: common/docman/views/pendingfiles.php:135
 msgid "Mass actions for selected pending files:"
 msgstr ""
 
@@ -1512,17 +1513,145 @@ msgstr ""
 msgid "Activate in this directory"
 msgstr "Multzoa edituatu"
 
-#: common/docman/views/reporting.php:91 www/activity/index.php:180
-#: www/frs/reporting/downloads.php:106 www/project/stats/index.php:96
-msgid "Start"
+#: common/docman/views/reporting.php:92
+#: common/tracker/include/ArtifactTypeHtml.class.php:323
+#: www/frs/reporting/downloads.php:107 www/people/editprofile.php:283
+#: www/people/skills_utils.php:50 www/people/skills_utils.php:157
+#: www/pm/add_task.php:95 www/pm/browse_task.php:127
+#: www/pm/browse_task.php:233 www/pm/detail_task.php:83
+#: www/pm/ganttpage.php:71 www/pm/mod_task.php:146
+#: www/reporting/groupadded.php:61 www/reporting/groupcum.php:60
+#: www/reporting/projectact.php:65 www/reporting/projecttime.php:74
+#: www/reporting/siteact.php:65 www/reporting/sitetimebar.php:60
+#: www/reporting/sitetime.php:73 www/reporting/toolspie.php:64
+#: www/reporting/useract.php:80 www/reporting/useradded.php:59
+#: www/reporting/usercum.php:60 www/reporting/usersummary.php:69
+#: www/reporting/usertime.php:90
+#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:50
+msgid "Start Date"
 msgstr ""
 
-#: common/docman/views/reporting.php:93 www/activity/index.php:181
-#: www/frs/reporting/downloads.php:108 www/project/stats/index.php:97
-msgid "End"
+#: common/docman/views/reporting.php:92 common/docman/views/reporting.php:94
+#: common/include/utils.php:539 common/tracker/actions/query.php:403
+#: common/tracker/views/form-addcanned.php:68
+#: common/tracker/views/form-addcanned.php:71
+#: common/tracker/views/form-updatecanned.php:43
+#: common/tracker/views/form-updatecanned.php:46
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
+#: plugins/contribtracker/www/global_admin.php:380
+#: plugins/contribtracker/www/global_admin.php:381
+#: plugins/contribtracker/www/global_admin.php:397
+#: plugins/contribtracker/www/global_admin.php:398
+#: plugins/contribtracker/www/global_admin.php:410
+#: plugins/contribtracker/www/global_admin.php:425
+#: plugins/contribtracker/www/global_admin.php:436
+#: plugins/contribtracker/www/global_admin.php:437
+#: plugins/contribtracker/www/global_admin.php:438
+#: plugins/contribtracker/www/global_admin.php:439
+#: plugins/contribtracker/www/global_admin.php:441
+#: plugins/contribtracker/www/global_admin.php:443
+#: plugins/contribtracker/www/global_admin.php:466
+#: plugins/contribtracker/www/global_admin.php:467
+#: plugins/contribtracker/www/global_admin.php:468
+#: plugins/contribtracker/www/global_admin.php:469
+#: plugins/contribtracker/www/global_admin.php:471
+#: plugins/contribtracker/www/global_admin.php:477
+#: plugins/contribtracker/www/index.php:35
+#: plugins/contribtracker/www/index.php:42
+#: plugins/contribtracker/www/index.php:46
+#: plugins/contribtracker/www/index.php:134
+#: plugins/contribtracker/www/index.php:135
+#: plugins/contribtracker/www/index.php:140
+#: plugins/contribtracker/www/index.php:141
+#: plugins/contribtracker/www/index.php:142
+#: plugins/contribtracker/www/index.php:167
+#: plugins/contribtracker/www/index.php:171
+#: plugins/contribtracker/www/project_admin.php:189
+#: plugins/contribtracker/www/project_admin.php:190
+#: plugins/contribtracker/www/project_admin.php:191
+#: plugins/contribtracker/www/project_admin.php:210
+#: plugins/contribtracker/www/project_admin.php:211
+#: plugins/contribtracker/www/project_admin.php:212
+#: plugins/contribtracker/www/project_admin.php:289
+#: plugins/contribtracker/www/project_admin.php:293
+#: plugins/headermenu/view/admin/updateLinkValue.php:61
+#: plugins/headermenu/view/admin/updateLinkValue.php:63
+#: plugins/headermenu/view/admin/updateLinkValue.php:66
+#: plugins/headermenu/view/admin/updateLinkValue.php:76
+#: plugins/headermenu/view/admin/updateLinkValue.php:86
+#: plugins/headermenu/view/admin/updateLinkValue.php:97
+#: plugins/headermenu/view/admin/viewGlobalConfiguration.php:130
+#: plugins/headermenu/view/admin/viewGlobalConfiguration.php:132
+#: plugins/headermenu/view/admin/viewGlobalConfiguration.php:134
+#: plugins/headermenu/view/admin/viewGlobalConfiguration.php:141
+#: plugins/headermenu/view/admin/viewGlobalConfiguration.php:148
+#: plugins/headermenu/view/admin/viewGlobalConfiguration.php:162
+#: plugins/headermenu/view/admin/viewProjectConfiguration.php:94
+#: plugins/headermenu/view/admin/viewProjectConfiguration.php:97
+#: plugins/headermenu/view/admin/viewProjectConfiguration.php:99
+#: plugins/headermenu/view/admin/viewProjectConfiguration.php:106
+#: plugins/headermenu/view/admin/viewProjectConfiguration.php:117
+#: plugins/mailman/www/admin/index.php:144
+#: plugins/mailman/www/admin/index.php:150
+#: plugins/mailman/www/admin/index.php:183
+#: plugins/scmhg/common/HgPlugin.class.php:620 www/account/lostpw.php:89
+#: www/account/pending-resend.php:71 www/account/register.php:159
+#: www/account/verify.php:78 www/account/verify.php:82
+#: www/admin/useredit.php:148 www/admin/useredit.php:157
+#: www/admin/useredit.php:211 www/frs/reporting/downloads.php:105
+#: www/frs/reporting/downloads.php:107 www/frs/reporting/downloads.php:109
+#: www/register/index.php:226 www/reporting/groupadded.php:60
+#: www/reporting/groupadded.php:61 www/reporting/groupadded.php:62
+#: www/reporting/groupcum.php:59 www/reporting/groupcum.php:60
+#: www/reporting/groupcum.php:61 www/reporting/projectact.php:62
+#: www/reporting/projectact.php:63 www/reporting/projectact.php:64
+#: www/reporting/projectact.php:65 www/reporting/projectact.php:66
+#: www/reporting/projecttime.php:72 www/reporting/projecttime.php:73
+#: www/reporting/projecttime.php:74 www/reporting/projecttime.php:75
+#: www/reporting/siteact.php:63 www/reporting/siteact.php:64
+#: www/reporting/siteact.php:65 www/reporting/siteact.php:66
+#: www/reporting/sitetimebar.php:60 www/reporting/sitetimebar.php:61
+#: www/reporting/sitetime.php:72 www/reporting/sitetime.php:73
+#: www/reporting/sitetime.php:74 www/reporting/timecategory.php:91
+#: www/reporting/toolspie.php:64 www/reporting/toolspie.php:65
+#: www/reporting/useract.php:77 www/reporting/useract.php:78
+#: www/reporting/useract.php:79 www/reporting/useract.php:80
+#: www/reporting/useract.php:81 www/reporting/useradded.php:58
+#: www/reporting/useradded.php:59 www/reporting/useradded.php:60
+#: www/reporting/usercum.php:59 www/reporting/usercum.php:60
+#: www/reporting/usercum.php:61 www/reporting/usersummary.php:69
+#: www/reporting/usersummary.php:70 www/reporting/usersummary.php:71
+#: www/reporting/usertime.php:88 www/reporting/usertime.php:89
+#: www/reporting/usertime.php:90 www/reporting/usertime.php:91
+#: www/snippet/add_snippet_to_package.php:128 www/snippet/addversion.php:94
+#: www/snippet/addversion.php:98 www/snippet/addversion.php:102
+#: www/snippet/addversion.php:217 www/snippet/addversion.php:221
+#: www/snippet/package.php:147 www/snippet/package.php:151
+#: www/snippet/package.php:156 www/snippet/package.php:169
+#, php-format
+msgid ":"
 msgstr ""
 
-#: common/docman/views/reporting.php:95 www/frs/reporting/downloads.php:110
+#: common/docman/views/reporting.php:94
+#: common/tracker/include/ArtifactTypeHtml.class.php:324
+#: www/frs/reporting/downloads.php:109 www/people/editprofile.php:284
+#: www/people/skills_utils.php:51 www/people/skills_utils.php:158
+#: www/pm/add_task.php:110 www/pm/browse_task.php:128
+#: www/pm/browse_task.php:235 www/pm/detail_task.php:87
+#: www/pm/ganttpage.php:72 www/pm/mod_task.php:160
+#: www/reporting/groupadded.php:62 www/reporting/groupcum.php:61
+#: www/reporting/projectact.php:66 www/reporting/projecttime.php:75
+#: www/reporting/siteact.php:66 www/reporting/sitetimebar.php:61
+#: www/reporting/sitetime.php:74 www/reporting/toolspie.php:65
+#: www/reporting/useract.php:81 www/reporting/useradded.php:60
+#: www/reporting/usercum.php:61 www/reporting/usersummary.php:70
+#: www/reporting/usersummary.php:106 www/reporting/usertime.php:91
+#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:51
+msgid "End Date"
+msgstr ""
+
+#: common/docman/views/reporting.php:96 www/frs/reporting/downloads.php:111
 #: www/project/stats/index.php:98 www/reporting/groupadded.php:63
 #: www/reporting/groupcum.php:62 www/reporting/projectact.php:67
 #: www/reporting/projecttime.php:76 www/reporting/siteact.php:67
@@ -1550,19 +1679,18 @@ msgstr ""
 msgid "Month"
 msgstr "Hilabetea"
 
-#: common/docman/views/reporting.php:142
-#: common/tracker/include/ArtifactTypeHtml.class.php:368
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:97
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:146
-#: plugins/mantisbt/view/viewAttachment.php:56
-#: plugins/mediawiki/www/plugin_admin.php:177
-#: www/frs/reporting/downloads.php:166 www/new/index.php:119
-msgid "Download"
-msgstr "Deskargatu"
+#: common/docman/views/reporting.php:142 common/reporting/report_utils.php:159
+#: common/reporting/report_utils.php:197 www/frs/reporting/downloads.php:166
+#: www/reporting/projectact_graph.php:116 www/stats/site_stats_utils.php:233
+#: www/stats/site_stats_utils.php:363 www/stats/site_stats_utils.php:417
+#: www/stats/site_stats_utils.php:476 www/top/toplist.php:49
+msgid "Downloads"
+msgstr "Deskargak"
 
-#: common/docman/views/reporting.php:153
-msgid "Path"
-msgstr ""
+#: common/docman/views/reporting.php:153 www/activity/index.php:317
+#, fuzzy
+msgid "Document"
+msgstr "Foroak erabili"
 
 #: common/docman/views/reporting.php:153
 #: plugins/oauthprovider/www/access_tokens.php:58
@@ -1612,14 +1740,6 @@ msgstr "Lankidearen profila ikusi"
 msgid "Query: "
 msgstr "Arrakastaz eguneratutako egunkaria"
 
-#: common/docman/views/search.php:63 common/include/Navigation.class.php:171
-#: plugins/globalsearch/common/globalsearch_stats_boxes.php:48
-#: www/admin/index.php:67 www/admin/index.php:152
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:336
-#: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:57
-msgid "Search"
-msgstr "Bilatu"
-
 #: common/docman/views/search.php:65
 msgid "All searched words are mandatory"
 msgstr ""
@@ -1662,12 +1782,6 @@ msgstr ""
 #, fuzzy
 msgid "Your search did not match any documents."
 msgstr "Ez zaude fororik monitorizatzen"
-
-#: common/docman/views/search.php:150
-#: plugins/hudson/include/hudsonPlugin.class.php:236
-#, fuzzy
-msgid "Status:"
-msgstr "Estatistikak"
 
 #: common/docman/views/search.php:154
 #, fuzzy
@@ -2021,7 +2135,7 @@ msgid "Error On Update:"
 msgstr "Akatsa eguneratzean"
 
 #: common/forum/Forum.class.php:613 common/frs/FRSPackage.class.php:451
-#: common/frs/FRSRelease.class.php:349 common/include/Group.class.php:1575
+#: common/frs/FRSRelease.class.php:349 common/include/Group.class.php:1590
 #: common/mail/MailingList.class.php:384 common/pm/ProjectGroup.class.php:360
 #: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:504
 #: common/tracker/ArtifactExtraField.class.php:430
@@ -2104,23 +2218,6 @@ msgstr "Foroak erabili"
 #: common/forum/ForumHTML.class.php:111
 msgid "Discussion Forums:"
 msgstr "Eztabaidatzeko foroak:"
-
-#: common/forum/ForumHTML.class.php:115 common/forum/ForumHTML.class.php:121
-#: common/frs/include/frs_utils.php:78
-#: common/tracker/actions/admin-tracker.php:32
-#: common/tracker/include/ArtifactTypeFactoryHtml.class.php:59
-#: common/tracker/include/ArtifactTypeHtml.class.php:81
-#: plugins/mailman/www/mailman_utils.php:208
-#: plugins/mailman/www/mailman_utils.php:211
-#: plugins/mantisbt/common/MantisBTPlugin.class.php:402
-#: plugins/mantisbt/www/user/index.php:41 www/mail/admin/index.php:290
-#: www/mail/mail_utils.php:48 www/news/news_utils.php:48
-#: www/pm/include/ProjectGroupHTML.class.php:93
-#: www/pm/include/ProjectGroupHTML.class.php:98
-#: www/scm/include/scm_utils.php:53 www/survey/include/SurveyHTML.class.php:66
-#: www/survey/include/SurveyHTML.class.php:79
-msgid "Administration"
-msgstr "Administrazioa"
 
 #: common/forum/ForumHTML.class.php:140 www/forum/monitor.php:59
 msgid "Stop Monitoring"
@@ -2401,15 +2498,6 @@ msgstr ""
 msgid "View File Releases"
 msgstr "Argitalpen berria"
 
-#: common/frs/include/frs_utils.php:77 common/include/Navigation.class.php:300
-#: common/tracker/include/ArtifactTypeFactoryHtml.class.php:54
-#: common/tracker/include/ArtifactTypeHtml.class.php:67
-#: www/pm/include/ProjectGroupHTML.class.php:91
-#: www/pm/include/ProjectGroupHTML.class.php:96
-#: www/scm/include/scm_utils.php:50
-msgid "Reporting"
-msgstr "Txostenak"
-
 #: common/frs/include/frs_utils.php:224
 #: plugins/mediawiki/www/plugin_admin.php:127
 #, fuzzy
@@ -2477,7 +2565,7 @@ msgid "Name is reserved."
 msgstr "Izen hau CVS-arentzat gordea izan da."
 
 #: common/include/account.php:89 common/include/account.php:93
-#: common/include/User.class.php:321
+#: common/include/User.class.php:327
 msgid "That username already exists."
 msgstr "Erabiltzailea dagoeneko existitzen da"
 
@@ -2509,8 +2597,8 @@ msgstr ""
 msgid "Database initialisation error:"
 msgstr "Datu basearen manipulazioa"
 
-#: common/include/Error.class.php:130 common/include/Group.class.php:423
-#: common/include/Group.class.php:490
+#: common/include/Error.class.php:130 common/include/Group.class.php:429
+#: common/include/Group.class.php:496
 msgid "Permission denied."
 msgstr "Baimena ukatu da"
 
@@ -2600,263 +2688,263 @@ msgstr "Proiektuen mapa"
 msgid "Version"
 msgstr "Bertsioa"
 
-#: common/include/Group.class.php:251
+#: common/include/Group.class.php:257
 msgid "Group Not Found"
 msgstr "Taldea ez da aurkitu"
 
-#: common/include/Group.class.php:273
+#: common/include/Group.class.php:279
 #, php-format
 msgid "fetchData():: %s"
 msgstr ""
 
-#: common/include/Group.class.php:301
+#: common/include/Group.class.php:307
 msgid "Group::create: Group object already exists"
 msgstr ""
 
-#: common/include/Group.class.php:306
+#: common/include/Group.class.php:312
 msgid "Invalid Unix name"
 msgstr "Unix izen baliogabea"
 
-#: common/include/Group.class.php:309 common/include/Group.class.php:313
-#: common/include/User.class.php:303
+#: common/include/Group.class.php:315 common/include/Group.class.php:319
+#: common/include/User.class.php:309
 msgid "Unix name already taken"
 msgstr "Unix izen hau hartua dago"
 
-#: common/include/Group.class.php:316
+#: common/include/Group.class.php:322
 msgid ""
 "Please describe your Registration Purpose in a more comprehensive manner"
 msgstr "Mesedez, erregistro proposamena deskriba ezazu modu ulergarriagoan"
 
-#: common/include/Group.class.php:319
+#: common/include/Group.class.php:325
 msgid ""
 "The Registration Purpose text is too long. Please make it smaller than 1500 "
 "bytes."
 msgstr ""
 
-#: common/include/Group.class.php:322 common/include/Group.class.php:560
+#: common/include/Group.class.php:328 common/include/Group.class.php:566
 msgid "Describe in a more comprehensive manner your project."
 msgstr "Zure proiektua deskriba ezazu era ulergarriagoan."
 
-#: common/include/Group.class.php:364
+#: common/include/Group.class.php:370
 #, php-format
 msgid "ERROR: Could not create group: %s"
 msgstr "ERROREA: Ezin da taldea sortu: %s"
 
-#: common/include/Group.class.php:371
+#: common/include/Group.class.php:377
 #, php-format
 msgid "ERROR: Could not get group id: %s"
 msgstr "ERROREA: Ezin da talde id-a eskuratu: %s"
 
-#: common/include/Group.class.php:418 common/include/Group.class.php:485
+#: common/include/Group.class.php:424 common/include/Group.class.php:491
 msgid "Could not get permission."
 msgstr "Ezin duzu baimena lortu"
 
-#: common/include/Group.class.php:439
+#: common/include/Group.class.php:445
 #, php-format
 msgid "ERROR: DB: Could not change group properties: %s"
 msgstr "ERROREA: DB: Ezin dira talde baimenak aldatu: %s"
 
-#: common/include/Group.class.php:504
+#: common/include/Group.class.php:510
 #, php-format
 msgid "New Doc Address Appeared Invalid: %s"
 msgid_plural "New Doc Addresses Appeared Invalid: %s"
 msgstr[0] "Dokumentu berri helbidea baliogabea dirudi: %s"
 msgstr[1] "Dokumentu berri helbideak baliogabeak dirudite: %s"
 
-#: common/include/Group.class.php:606
+#: common/include/Group.class.php:612
 #, php-format
 msgid "Error updating project information: %s"
 msgstr "Errorea proiektu argibideak eguneratzean: %s"
 
-#: common/include/Group.class.php:612
+#: common/include/Group.class.php:618
 #, fuzzy, php-format
 msgid "Error updating project information: use_docman %s"
 msgstr "Errorea proiektu argibideak eguneratzean: %s"
 
-#: common/include/Group.class.php:631
+#: common/include/Group.class.php:645
 #, fuzzy
 msgid "Error updating project information in plugin_hook group_update"
 msgstr "Errorea proiektu argibideak eguneratzean: %s"
 
-#: common/include/Group.class.php:717
+#: common/include/Group.class.php:724
 #, fuzzy
 msgid "Invalid Status Change From: "
 msgstr "Egoera aldaketa baliogabea"
 
-#: common/include/Group.class.php:717
+#: common/include/Group.class.php:724
 msgid " To: "
 msgstr ""
 
-#: common/include/Group.class.php:728
+#: common/include/Group.class.php:735
 #, php-format
 msgid "ERROR: DB: Could not change group status: %s"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:939
+#: common/include/Group.class.php:946
 msgid "Couldn't insert SCM_BOX to database"
 msgstr "Ezin da SCM_BOX txertatu datu-basean"
 
-#: common/include/Group.class.php:943
+#: common/include/Group.class.php:950
 msgid "SCM Box can't be empty"
 msgstr "SCM kutxa ezin da hutsik egon"
 
-#: common/include/Group.class.php:1543
+#: common/include/Group.class.php:1558
 msgid ""
 "Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&'#"
 "+. and space"
 msgstr ""
 
-#: common/include/Group.class.php:1552
+#: common/include/Group.class.php:1567
 #, fuzzy
 msgid "Setting tags:"
 msgstr "Ezaugarriak"
 
-#: common/include/Group.class.php:1582
+#: common/include/Group.class.php:1597
 msgid "Cannot Delete System Group"
 msgstr "Rzin da sistema taldea ezabatu"
 
-#: common/include/Group.class.php:1604
+#: common/include/Group.class.php:1619
 msgid "Could not properly remove member:"
 msgstr ""
 
-#: common/include/Group.class.php:1628
+#: common/include/Group.class.php:1643
 msgid "Could not properly delete the tracker:"
 msgstr ""
 
-#: common/include/Group.class.php:1645
+#: common/include/Group.class.php:1660
 #, fuzzy
 msgid "Could not properly delete the forum:"
 msgstr "Ezin da berri foroa ezabatu: %d"
 
-#: common/include/Group.class.php:1661
+#: common/include/Group.class.php:1676
 #, fuzzy
 msgid "Could not properly delete the ProjectGroup:"
 msgstr "Ezin dut mezu nagusia eguneratu"
 
-#: common/include/Group.class.php:1672
+#: common/include/Group.class.php:1687
 #, fuzzy
 msgid "Error FRS Packages: "
 msgstr "Foroa sortzean gertatutako akatsa"
 
-#: common/include/Group.class.php:1680
+#: common/include/Group.class.php:1695
 #, fuzzy
 msgid "Could not properly delete the FRSPackage:"
 msgstr "Ezin izan da rola eskuratu"
 
-#: common/include/Group.class.php:1691 common/include/Group.class.php:1706
+#: common/include/Group.class.php:1706 common/include/Group.class.php:1721
 #, fuzzy
 msgid "Error Deleting News: "
 msgstr "Foroa sortzean gertatutako akatsa"
 
-#: common/include/Group.class.php:1699
+#: common/include/Group.class.php:1714
 #, php-format
 msgid "Could Not Delete News Forum: %d"
 msgstr "Ezin da berri foroa ezabatu: %d"
 
-#: common/include/Group.class.php:1717 common/include/Group.class.php:1725
+#: common/include/Group.class.php:1732 common/include/Group.class.php:1740
 #, fuzzy
 msgid "Error Deleting Documents: "
 msgstr "Errorea elementu bat txertatzerakoan"
 
-#: common/include/Group.class.php:1735
+#: common/include/Group.class.php:1750
 #, fuzzy
 msgid "Error Deleting Tags: "
 msgstr "Errorea elementu bat txertatzerakoan"
 
-#: common/include/Group.class.php:1746
+#: common/include/Group.class.php:1761
 #, fuzzy
 msgid "Error Deleting Project History: "
 msgstr "Errorea proiektu argibideak eguneratzean: %s"
 
-#: common/include/Group.class.php:1757
+#: common/include/Group.class.php:1772
 #, fuzzy
 msgid "Error Deleting Project Plugins: "
 msgstr "Errorea partaide objektua eskuratzean: %s"
 
-#: common/include/Group.class.php:1768
+#: common/include/Group.class.php:1783
 #, fuzzy
 msgid "Error Deleting SCM Statistics: "
 msgstr "Akatsa %1$s lortzean"
 
-#: common/include/Group.class.php:1784
+#: common/include/Group.class.php:1799
 msgid "Could not properly delete the survey"
 msgstr ""
 
-#: common/include/Group.class.php:1800
+#: common/include/Group.class.php:1815
 msgid "Could not properly delete the survey questions"
 msgstr ""
 
-#: common/include/Group.class.php:1818
+#: common/include/Group.class.php:1833
 #: plugins/mailman/include/mailmanPlugin.class.php:200
 msgid "Could not properly delete the mailing list"
 msgstr ""
 
-#: common/include/Group.class.php:1830 common/include/Group.class.php:1838
+#: common/include/Group.class.php:1845 common/include/Group.class.php:1853
 #, fuzzy
 msgid "Error Deleting Trove: "
 msgstr "Akatsa taldea sortzen"
 
-#: common/include/Group.class.php:1849
+#: common/include/Group.class.php:1864
 #, fuzzy
 msgid "Error Deleting Counters: "
 msgstr "Akatsa taldea sortzen"
 
-#: common/include/Group.class.php:1859 common/include/Group.class.php:1868
+#: common/include/Group.class.php:1874 common/include/Group.class.php:1883
 #, fuzzy
 msgid "Error Deleting Project:"
 msgstr "Errorea partaide objektua eskuratzean: %s"
 
-#: common/include/Group.class.php:1940
+#: common/include/Group.class.php:1955
 msgid "User is not active. Only active users can be added."
 msgstr ""
 
-#: common/include/Group.class.php:1952
+#: common/include/Group.class.php:1967
 msgid "Error Getting Role Object"
 msgstr "Errorea arau objektua eskuratzean"
 
-#: common/include/Group.class.php:1981
+#: common/include/Group.class.php:1996
 msgid "ERROR: User does not exist"
 msgstr "ERROREA: Erabiltzailea ez da existitzen"
 
-#: common/include/Group.class.php:2029 common/include/Group.class.php:2148
+#: common/include/Group.class.php:2044 common/include/Group.class.php:2163
 #, php-format
 msgid "ERROR: User not removed: %s"
 msgstr "ERROREA: Erabiltzailea ez da ezabatu: %s"
 
-#: common/include/Group.class.php:2051
+#: common/include/Group.class.php:2066
 #, fuzzy
 msgid "ERROR: DB: artifact:"
 msgstr "ERROREA: DB: Artefaktua: %s"
 
-#: common/include/Group.class.php:2072 common/include/Group.class.php:2085
+#: common/include/Group.class.php:2087 common/include/Group.class.php:2100
 #, php-format
 msgid "ERROR: DB: project_assigned_to %d: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2128 www/admin/globalroledelete.php:37
+#: common/include/Group.class.php:2143 www/admin/globalroledelete.php:37
 #: www/admin/globalroleedit.php:41 www/project/admin/roledelete.php:46
 #: www/project/admin/roleedit.php:53
 msgid "Could Not Get Role"
 msgstr "Ezin izan da rola eskuratu"
 
-#: common/include/Group.class.php:2131
+#: common/include/Group.class.php:2146
 #, php-format
 msgid "Role: %s"
 msgstr "Rola: %s"
 
-#: common/include/Group.class.php:2135
+#: common/include/Group.class.php:2150
 msgid "Wrong destination role"
 msgstr ""
 
-#: common/include/Group.class.php:2241
+#: common/include/Group.class.php:2256
 msgid "Group already active"
 msgstr "Taldea dagoeneko aktibo dago"
 
-#: common/include/Group.class.php:2503 common/include/Group.class.php:2574
+#: common/include/Group.class.php:2519 common/include/Group.class.php:2590
 msgid "Group does not have any administrators."
 msgstr "Taldeak ez du administratzailerik."
 
-#: common/include/Group.class.php:2511
+#: common/include/Group.class.php:2527
 #, fuzzy, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -2939,12 +3027,12 @@ msgstr ""
 "\n"
 "-- %7$s taldea"
 
-#: common/include/Group.class.php:2547
+#: common/include/Group.class.php:2563
 #, php-format
 msgid "%1$s Project Approved"
 msgstr "%1$s -ek onartutako proiektua"
 
-#: common/include/Group.class.php:2581
+#: common/include/Group.class.php:2597
 #, php-format
 msgid ""
 "Your project registration for %3$s has been denied.\n"
@@ -2963,20 +3051,20 @@ msgstr ""
 "Ukatzearen arrazoiak hauek dira:\n"
 "\n"
 
-#: common/include/Group.class.php:2600
+#: common/include/Group.class.php:2616
 #, php-format
 msgid "%1$s Project Denied"
 msgstr "%1$s -ek egitasmoa ukatu du"
 
-#: common/include/Group.class.php:2624
+#: common/include/Group.class.php:2640
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2631
+#: common/include/Group.class.php:2647
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2639
+#: common/include/Group.class.php:2655
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -2993,12 +3081,12 @@ msgstr ""
 "Mesedez, bisita ezazu helbide hau egitasmoa onartzeko ala baztertzeko:\n"
 "%5$s"
 
-#: common/include/Group.class.php:2649
+#: common/include/Group.class.php:2665
 #, fuzzy, php-format
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "Nork bidalia"
 
-#: common/include/Group.class.php:2655
+#: common/include/Group.class.php:2671
 #, php-format
 msgid ""
 "\n"
@@ -3006,12 +3094,12 @@ msgid ""
 "%1$s"
 msgstr ""
 
-#: common/include/Group.class.php:2659 common/include/Group.class.php:2674
+#: common/include/Group.class.php:2675 common/include/Group.class.php:2690
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "%1$s -en egitasmoa onartzeke dago."
 
-#: common/include/Group.class.php:2667
+#: common/include/Group.class.php:2683
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3031,42 +3119,42 @@ msgstr ""
 "%1$s administratzeko taldeak zure proposamena aztertuko du orain. "
 "Erabakiaren berri emango zaizu."
 
-#: common/include/Group.class.php:2692
+#: common/include/Group.class.php:2708
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Galdera motzegia da"
 
-#: common/include/Group.class.php:2695
+#: common/include/Group.class.php:2711
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Taldearen izena (editatzeko sakatu)"
 
-#: common/include/Group.class.php:2698
+#: common/include/Group.class.php:2714
 #, fuzzy
 msgid "Group name already taken"
 msgstr "Unix izen hau hartua dago"
 
-#: common/include/Group.class.php:2780
+#: common/include/Group.class.php:2796
 #, php-format
 msgid "ERROR - Could Not Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2843
+#: common/include/Group.class.php:2859
 #, fuzzy, php-format
 msgid "ERROR - Could Not Update Group DocmanCreateOnline Status: %s"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:2861
+#: common/include/Group.class.php:2877
 #, fuzzy, php-format
 msgid "ERROR - Could Not Update Group UseWebdab Status: %s"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:2879
+#: common/include/Group.class.php:2895
 #, fuzzy, php-format
 msgid "ERROR - Could Not Update Group UseDocmanSearch Status: %s"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:2897
+#: common/include/Group.class.php:2913
 #, fuzzy, php-format
 msgid "ERROR - Could Not Update Group force_docman_reindex %s"
 msgstr "ERROREA: DB: Ezin dira talde baimenak aldatu: %s"
@@ -3254,6 +3342,14 @@ msgstr ""
 msgid "Project Homepage. Widgets oriented"
 msgstr "Fitxero zerrenda"
 
+#: common/include/Navigation.class.php:398 common/tracker/actions/mod.php:144
+#: common/tracker/actions/mod.php:196
+#: common/tracker/include/build_submission_form.php:64
+#: common/widget/Widget_MyProjects.class.php:77
+#: www/include/Layout.class.php:725
+msgid "Admin"
+msgstr "Admin"
+
 #: common/include/Navigation.class.php:399
 #, fuzzy
 msgid "Project Administration."
@@ -3379,7 +3475,7 @@ msgstr ""
 msgid "More than one value for the plugin + key"
 msgstr ""
 
-#: common/include/pre.php:289
+#: common/include/pre.php:292
 #, php-format
 msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
@@ -3782,59 +3878,59 @@ msgstr "Fitxeroa ezin da mugitu betiko egoerara"
 msgid "Not a File %1$s or not a directory %2$s."
 msgstr "Fitxeroa ezin da mugitu betiko egoerara"
 
-#: common/include/User.class.php:202
+#: common/include/User.class.php:208
 #, fuzzy
 msgid "User Not Found"
 msgstr "Fitxeroa ez da aurkitu"
 
-#: common/include/User.class.php:263
+#: common/include/User.class.php:269
 #, fuzzy
 msgid "You must supply a theme"
 msgstr "Erabiltzaile izen bat eman behar duzu"
 
-#: common/include/User.class.php:268
+#: common/include/User.class.php:274
 msgid "You must supply a username"
 msgstr "Erabiltzaile izen bat eman behar duzu"
 
-#: common/include/User.class.php:273
+#: common/include/User.class.php:279
 msgid "You must supply a first name"
 msgstr "Izena derrigorrezkoa da"
 
-#: common/include/User.class.php:277
+#: common/include/User.class.php:283
 msgid "You must supply a last name"
 msgstr "Abizena derrigorrezkoa da"
 
-#: common/include/User.class.php:281
+#: common/include/User.class.php:287
 msgid "You must supply a password"
 msgstr "Pasahitza eman behar duzu"
 
-#: common/include/User.class.php:285
+#: common/include/User.class.php:291
 msgid "Passwords do not match"
 msgstr "Pasahitzak ez datoz bat"
 
-#: common/include/User.class.php:289
+#: common/include/User.class.php:295
 msgid "Invalid Password:"
 msgstr "Pasahitzak gutxienez sei karaktere izan behar ditu"
 
-#: common/include/User.class.php:294
+#: common/include/User.class.php:300
 #, fuzzy
 msgid "Invalid Unix Name (must not contain uppercase characters)"
 msgstr "Kontuaren izena (ez erabili maiuskularik) *:"
 
-#: common/include/User.class.php:299 common/include/User.class.php:368
+#: common/include/User.class.php:305 common/include/User.class.php:374
 msgid "Invalid Unix Name."
 msgstr "Unix erabiltzailearen izena baliogabea da"
 
-#: common/include/User.class.php:307
+#: common/include/User.class.php:313
 #, fuzzy
 msgid "Invalid Email Address:"
 msgstr "Posta elektronikoaren helbidea baliogabea da"
 
-#: common/include/User.class.php:311 common/include/User.class.php:564
+#: common/include/User.class.php:317 common/include/User.class.php:570
 msgid "Invalid Jabber Address"
 msgstr "Jabber helbide baliogabea"
 
-#: common/include/User.class.php:326
+#: common/include/User.class.php:332
 msgid ""
 "User with this email already exists - use people search to recover your "
 "login."
@@ -3842,12 +3938,12 @@ msgstr ""
 "Badago erabiltzaile bat posta honekin - pertsonen bilatzailea erabili ezazu "
 "use el buscador sarbide berreskuratzeko."
 
-#: common/include/User.class.php:404
+#: common/include/User.class.php:410
 #, fuzzy
 msgid "Insert Failed: "
 msgstr "Datu sartze okerra"
 
-#: common/include/User.class.php:445
+#: common/include/User.class.php:451
 #, fuzzy, php-format
 msgid ""
 "Thank you for registering on the %3$s web site. You have\n"
@@ -3885,82 +3981,82 @@ msgstr ""
 "\n"
 "-- %4$s taldea\n"
 
-#: common/include/User.class.php:467
+#: common/include/User.class.php:473
 #, php-format
 msgid "%1$s Account Registration"
 msgstr "Kontu bat erregistratzeko %1$s -n"
 
-#: common/include/User.class.php:495
+#: common/include/User.class.php:501
 #, fuzzy
 msgid "Could Not Delete From artifact_monitor:"
 msgstr "Ezin izan da eragiketa gauzatu"
 
-#: common/include/User.class.php:502
+#: common/include/User.class.php:508
 #, fuzzy
 msgid "Could Not Delete From artifact_type_monitor:"
 msgstr "Ezin izan da eragiketa gauzatu"
 
-#: common/include/User.class.php:509
+#: common/include/User.class.php:515
 #, fuzzy
 msgid "Could Not Delete From forum_monitored_forums:"
 msgstr "Ezin da berri foroa ezabatu: %d"
 
-#: common/include/User.class.php:516
+#: common/include/User.class.php:522
 #, fuzzy
 msgid "Could Not Delete From filemodule_monitor:"
 msgstr "Ezin da berri foroa ezabatu: %d"
 
-#: common/include/User.class.php:619
+#: common/include/User.class.php:625
 #, fuzzy
 msgid "ERROR - Could Not Update User Object:"
 msgstr "Ezin dut mezu nagusia eguneratu"
 
-#: common/include/User.class.php:713
+#: common/include/User.class.php:719
 #, fuzzy
 msgid "ERROR: Invalid status value"
 msgstr "Parametro baliogabea"
 
-#: common/include/User.class.php:727
+#: common/include/User.class.php:733
 #, fuzzy
 msgid "ERROR - Could Not Update User Status:"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/User.class.php:920 common/include/User.class.php:973
+#: common/include/User.class.php:926 common/include/User.class.php:979
 #, fuzzy
 msgid "User with this email already exists."
 msgstr "Erabiltzailea dagoeneko existitzen da"
 
-#: common/include/User.class.php:1082
+#: common/include/User.class.php:1088
 #, fuzzy, php-format
 msgid "ERROR: Invalid Shell %s"
 msgstr "Parametro baliogabea"
 
-#: common/include/User.class.php:1091
+#: common/include/User.class.php:1097
 #, fuzzy
 msgid "ERROR - Could Not Update User Unix Shell:"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/User.class.php:1256
+#: common/include/User.class.php:1262
 msgid "SSH Key already in use"
 msgstr ""
 
-#: common/include/User.class.php:1264
+#: common/include/User.class.php:1270
 #, fuzzy
 msgid "ERROR - Could Not Add User SSH Key:"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/User.class.php:1281
+#: common/include/User.class.php:1287
 #, fuzzy
 msgid "ERROR - Could Not Delete User SSH Key:"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/User.class.php:1428 common/include/User.class.php:1464
-#: common/include/User.class.php:1489
+#: common/include/User.class.php:1434 common/include/User.class.php:1470
+#: common/include/User.class.php:1495
 #, fuzzy
 msgid "ERROR - Could Not Change User Password:"
 msgstr "Hitz gakoa aldatu"
 
-#: common/include/User.class.php:1745
+#: common/include/User.class.php:1751
 #, php-format
 msgid ""
 "New User %1$s registered and validated\n"
@@ -3968,7 +4064,7 @@ msgid ""
 "Email: %3$s\n"
 msgstr ""
 
-#: common/include/User.class.php:1750
+#: common/include/User.class.php:1756
 #, fuzzy, php-format
 msgid "New %1$s User"
 msgstr "%1$s -en lantaldea"
@@ -3980,106 +4076,6 @@ msgstr ""
 #: common/include/utils.php:539
 msgid "Priority Colors"
 msgstr "Prioritateen koloreak"
-
-#: common/include/utils.php:539 common/tracker/actions/query.php:403
-#: common/tracker/views/form-addcanned.php:68
-#: common/tracker/views/form-addcanned.php:71
-#: common/tracker/views/form-updatecanned.php:43
-#: common/tracker/views/form-updatecanned.php:46
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
-#: plugins/contribtracker/www/global_admin.php:380
-#: plugins/contribtracker/www/global_admin.php:381
-#: plugins/contribtracker/www/global_admin.php:397
-#: plugins/contribtracker/www/global_admin.php:398
-#: plugins/contribtracker/www/global_admin.php:410
-#: plugins/contribtracker/www/global_admin.php:425
-#: plugins/contribtracker/www/global_admin.php:436
-#: plugins/contribtracker/www/global_admin.php:437
-#: plugins/contribtracker/www/global_admin.php:438
-#: plugins/contribtracker/www/global_admin.php:439
-#: plugins/contribtracker/www/global_admin.php:441
-#: plugins/contribtracker/www/global_admin.php:443
-#: plugins/contribtracker/www/global_admin.php:466
-#: plugins/contribtracker/www/global_admin.php:467
-#: plugins/contribtracker/www/global_admin.php:468
-#: plugins/contribtracker/www/global_admin.php:469
-#: plugins/contribtracker/www/global_admin.php:471
-#: plugins/contribtracker/www/global_admin.php:477
-#: plugins/contribtracker/www/index.php:35
-#: plugins/contribtracker/www/index.php:42
-#: plugins/contribtracker/www/index.php:46
-#: plugins/contribtracker/www/index.php:134
-#: plugins/contribtracker/www/index.php:135
-#: plugins/contribtracker/www/index.php:140
-#: plugins/contribtracker/www/index.php:141
-#: plugins/contribtracker/www/index.php:142
-#: plugins/contribtracker/www/index.php:167
-#: plugins/contribtracker/www/index.php:171
-#: plugins/contribtracker/www/project_admin.php:189
-#: plugins/contribtracker/www/project_admin.php:190
-#: plugins/contribtracker/www/project_admin.php:191
-#: plugins/contribtracker/www/project_admin.php:210
-#: plugins/contribtracker/www/project_admin.php:211
-#: plugins/contribtracker/www/project_admin.php:212
-#: plugins/contribtracker/www/project_admin.php:289
-#: plugins/contribtracker/www/project_admin.php:293
-#: plugins/headermenu/view/admin/updateLinkValue.php:61
-#: plugins/headermenu/view/admin/updateLinkValue.php:63
-#: plugins/headermenu/view/admin/updateLinkValue.php:66
-#: plugins/headermenu/view/admin/updateLinkValue.php:76
-#: plugins/headermenu/view/admin/updateLinkValue.php:86
-#: plugins/headermenu/view/admin/updateLinkValue.php:97
-#: plugins/headermenu/view/admin/viewGlobalConfiguration.php:130
-#: plugins/headermenu/view/admin/viewGlobalConfiguration.php:132
-#: plugins/headermenu/view/admin/viewGlobalConfiguration.php:134
-#: plugins/headermenu/view/admin/viewGlobalConfiguration.php:141
-#: plugins/headermenu/view/admin/viewGlobalConfiguration.php:148
-#: plugins/headermenu/view/admin/viewGlobalConfiguration.php:162
-#: plugins/headermenu/view/admin/viewProjectConfiguration.php:94
-#: plugins/headermenu/view/admin/viewProjectConfiguration.php:97
-#: plugins/headermenu/view/admin/viewProjectConfiguration.php:99
-#: plugins/headermenu/view/admin/viewProjectConfiguration.php:106
-#: plugins/headermenu/view/admin/viewProjectConfiguration.php:117
-#: plugins/mailman/www/admin/index.php:144
-#: plugins/mailman/www/admin/index.php:150
-#: plugins/mailman/www/admin/index.php:183
-#: plugins/scmhg/common/HgPlugin.class.php:620 www/account/lostpw.php:89
-#: www/account/pending-resend.php:71 www/account/register.php:159
-#: www/account/verify.php:78 www/account/verify.php:82
-#: www/admin/useredit.php:148 www/admin/useredit.php:157
-#: www/admin/useredit.php:211 www/register/index.php:226
-#: www/reporting/groupadded.php:60 www/reporting/groupadded.php:61
-#: www/reporting/groupadded.php:62 www/reporting/groupcum.php:59
-#: www/reporting/groupcum.php:60 www/reporting/groupcum.php:61
-#: www/reporting/projectact.php:62 www/reporting/projectact.php:63
-#: www/reporting/projectact.php:64 www/reporting/projectact.php:65
-#: www/reporting/projectact.php:66 www/reporting/projecttime.php:72
-#: www/reporting/projecttime.php:73 www/reporting/projecttime.php:74
-#: www/reporting/projecttime.php:75 www/reporting/siteact.php:63
-#: www/reporting/siteact.php:64 www/reporting/siteact.php:65
-#: www/reporting/siteact.php:66 www/reporting/sitetimebar.php:60
-#: www/reporting/sitetimebar.php:61 www/reporting/sitetime.php:72
-#: www/reporting/sitetime.php:73 www/reporting/sitetime.php:74
-#: www/reporting/timecategory.php:91 www/reporting/toolspie.php:64
-#: www/reporting/toolspie.php:65 www/reporting/useract.php:77
-#: www/reporting/useract.php:78 www/reporting/useract.php:79
-#: www/reporting/useract.php:80 www/reporting/useract.php:81
-#: www/reporting/useradded.php:58 www/reporting/useradded.php:59
-#: www/reporting/useradded.php:60 www/reporting/usercum.php:59
-#: www/reporting/usercum.php:60 www/reporting/usercum.php:61
-#: www/reporting/usersummary.php:69 www/reporting/usersummary.php:70
-#: www/reporting/usersummary.php:71 www/reporting/usertime.php:88
-#: www/reporting/usertime.php:89 www/reporting/usertime.php:90
-#: www/reporting/usertime.php:91 www/snippet/add_snippet_to_package.php:128
-#: www/snippet/addversion.php:94 www/snippet/addversion.php:98
-#: www/snippet/addversion.php:102 www/snippet/addversion.php:217
-#: www/snippet/addversion.php:221 www/snippet/package.php:147
-#: www/snippet/package.php:151 www/snippet/package.php:156
-#: www/snippet/package.php:169
-#, php-format
-msgid ":"
-msgstr ""
 
 #: common/include/utils.php:943 common/include/utils.php:947
 #: common/include/utils.php:958
@@ -4345,13 +4341,6 @@ msgstr "ostirala"
 msgid "Saturday"
 msgstr "larunbata"
 
-#: common/reporting/report_utils.php:159 common/reporting/report_utils.php:197
-#: www/reporting/projectact_graph.php:116 www/stats/site_stats_utils.php:233
-#: www/stats/site_stats_utils.php:363 www/stats/site_stats_utils.php:417
-#: www/stats/site_stats_utils.php:476 www/top/toplist.php:49
-msgid "Downloads"
-msgstr "Deskargak"
-
 #: common/reporting/report_utils.php:162
 #, fuzzy
 msgid "Page views"
@@ -4471,47 +4460,6 @@ msgstr "Akatsa galdera bilatzean"
 #: www/survey/admin/show_results.php:115
 msgid "No Survey Question is found"
 msgstr "Ez da inkesta galderarik topatu"
-
-#: common/survey/SurveyResponse.class.php:88
-#: common/tracker/actions/tracker.php:271
-#: common/tracker/views/form-adminroadmap.php:57
-#: plugins/forumml/www/index.php:55 plugins/forumml/www/index.php:63
-#: plugins/forumml/www/message.php:93 plugins/mailman/www/admin/index.php:50
-#: plugins/mailman/www/admin/index.php:53
-#: plugins/mailman/www/admin/index.php:73
-#: plugins/mailman/www/admin/index.php:75
-#: plugins/mailman/www/admin/index.php:83
-#: plugins/mailman/www/admin/index.php:94
-#: plugins/mailman/www/admin/index.php:96
-#: plugins/mailman/www/admin/index.php:104
-#: plugins/mailman/www/admin/index.php:125
-#: plugins/mailman/www/admin/index.php:131
-#: plugins/mailman/www/admin/index.php:164
-#: plugins/mailman/www/admin/index.php:166
-#: plugins/mailman/www/admin/index.php:196
-#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:27
-#: plugins/mailman/www/index.php:34 plugins/mailman/www/index.php:37
-#: plugins/mailman/www/index.php:49 www/admin/passedit.php:53
-#: www/admin/passedit.php:61 www/admin/passedit.php:69
-#: www/export/rss20_docman.php:152 www/forum/admin/pendingmsgdetail.php:51
-#: www/forum/admin/pendingmsgdetail.php:53 www/mail/admin/index.php:154
-#: www/mail/admin/index.php:251 www/project/admin/roledelete.php:62
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
-#: www/snippet/download.php:45 www/survey/admin/question.php:64
-#: www/survey/admin/question.php:66 www/survey/admin/show_csv.php:82
-#: www/survey/admin/show_csv.php:84 www/survey/admin/show_results.php:69
-#: www/survey/admin/show_results.php:73 www/survey/admin/show_results.php:84
-#: www/survey/admin/show_results.php:86 www/survey/admin/show_results.php:133
-#: www/survey/admin/show_results.php:135 www/tracker/admin/index.php:190
-#: www/tracker/reporting/trackeract_graph.php:49
-#: www/tracker/reporting/trackerpie_graph.php:63 www/tracker/roadmap.php:175
-#: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
-#: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
-#: www/trove/TroveCategory.class.php:71 www/trove/TroveCategory.class.php:97
-#: www/trove/TroveCategory.class.php:109
-msgid "Error"
-msgstr "Akatsa"
 
 #: common/survey/SurveyResponseFactory.class.php:76
 msgid "No valid Survey Object"
@@ -4957,11 +4905,6 @@ msgstr "Zerrenda Gehitua"
 msgid "Close Date"
 msgstr "Irtenbidea aurkitu zen data"
 
-#: common/tracker/actions/browse.php:201 common/tracker/actions/query.php:203
-#: common/tracker/actions/query.php:350
-msgid "Submitter"
-msgstr "Nork bidalia"
-
 #: common/tracker/actions/browse.php:202 common/tracker/actions/browse.php:406
 #: common/tracker/actions/query.php:204 common/tracker/actions/query.php:351
 #: www/pm/browse_task.php:159 www/pm/ganttpage.php:156
@@ -5029,16 +4972,6 @@ msgstr ""
 #: common/tracker/actions/browse.php:399
 msgid "Simple Filtering and Sorting"
 msgstr ""
-
-#: common/tracker/actions/browse.php:409 common/tracker/actions/browse.php:564
-#: common/tracker/actions/browse.php:751 common/tracker/actions/detail.php:73
-#: common/tracker/actions/mod-limited.php:128
-#: common/tracker/actions/mod.php:155 common/tracker/actions/query.php:344
-#: common/tracker/Artifact.class.php:947
-#: common/tracker/views/form-customizelist.php:37 www/pm/browse_task.php:383
-#: www/project/admin/database.php:208
-msgid "State"
-msgstr "Egoera"
 
 #: common/tracker/actions/browse.php:427 common/tracker/actions/query.php:395
 msgid "Order by"
@@ -6031,38 +5964,6 @@ msgstr ""
 msgid "Task Id and Summary"
 msgstr "Atazaren deskribapena"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:323
-#: www/people/editprofile.php:283 www/people/skills_utils.php:50
-#: www/people/skills_utils.php:157 www/pm/add_task.php:95
-#: www/pm/browse_task.php:127 www/pm/browse_task.php:233
-#: www/pm/detail_task.php:83 www/pm/ganttpage.php:71 www/pm/mod_task.php:146
-#: www/reporting/groupadded.php:61 www/reporting/groupcum.php:60
-#: www/reporting/projectact.php:65 www/reporting/projecttime.php:74
-#: www/reporting/siteact.php:65 www/reporting/sitetimebar.php:60
-#: www/reporting/sitetime.php:73 www/reporting/toolspie.php:64
-#: www/reporting/useract.php:80 www/reporting/useradded.php:59
-#: www/reporting/usercum.php:60 www/reporting/usersummary.php:69
-#: www/reporting/usertime.php:90
-#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:50
-msgid "Start Date"
-msgstr ""
-
-#: common/tracker/include/ArtifactTypeHtml.class.php:324
-#: www/people/editprofile.php:284 www/people/skills_utils.php:51
-#: www/people/skills_utils.php:158 www/pm/add_task.php:110
-#: www/pm/browse_task.php:128 www/pm/browse_task.php:235
-#: www/pm/detail_task.php:87 www/pm/ganttpage.php:72 www/pm/mod_task.php:160
-#: www/reporting/groupadded.php:62 www/reporting/groupcum.php:61
-#: www/reporting/projectact.php:66 www/reporting/projecttime.php:75
-#: www/reporting/siteact.php:66 www/reporting/sitetimebar.php:61
-#: www/reporting/sitetime.php:74 www/reporting/toolspie.php:65
-#: www/reporting/useract.php:81 www/reporting/useradded.php:60
-#: www/reporting/usercum.php:61 www/reporting/usersummary.php:70
-#: www/reporting/usersummary.php:106 www/reporting/usertime.php:91
-#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:51
-msgid "End Date"
-msgstr ""
-
 #: common/tracker/include/ArtifactTypeHtml.class.php:326
 #: www/pm/include/ProjectTaskHTML.class.php:112
 msgid "Remove Relation"
@@ -6096,6 +5997,14 @@ msgstr ""
 #: www/sendmessage.php:69
 msgid "Name"
 msgstr "Izena"
+
+#: common/tracker/include/ArtifactTypeHtml.class.php:368
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:97
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:146
+#: plugins/mantisbt/view/viewAttachment.php:56
+#: plugins/mediawiki/www/plugin_admin.php:177 www/new/index.php:119
+msgid "Download"
+msgstr "Deskargatu"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:537
 #: common/tracker/include/ArtifactTypeHtml.class.php:582
@@ -7361,7 +7270,7 @@ msgid "This Project Has Not Released Any Files"
 msgstr "Proiektu honek ez du oraindik fitxerorik argitaratu"
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:82
-#: www/frs/reporting/downloads.php:104 www/frs/reporting/downloads.php:177
+#: www/frs/reporting/downloads.php:105 www/frs/reporting/downloads.php:177
 #: www/snippet/add_snippet_to_package.php:128
 msgid "Package"
 msgstr "Pakete"
@@ -7661,14 +7570,14 @@ msgid ""
 msgstr ""
 
 #: db/20130127-extratabToHeadermenuMigration.php:81
-#: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:95
-#: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:91
+#: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:99
+#: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:95
 msgid "Soft link wasn't removed in www/plugins folder, please do so manually."
 msgstr ""
 
 #: db/20130127-extratabToHeadermenuMigration.php:90
-#: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:104
-#: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:100
+#: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:108
+#: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:104
 msgid "Soft link wasn't removed in config folder, please do so manually."
 msgstr ""
 
@@ -9921,6 +9830,11 @@ msgstr ""
 #: plugins/hudson/include/hudsonPlugin.class.php:235
 msgid "Build performed on:"
 msgstr ""
+
+#: plugins/hudson/include/hudsonPlugin.class.php:236
+#, fuzzy
+msgid "Status:"
+msgstr "Estatistikak"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:238
 #: plugins/hudson/include/hudsonPlugin.class.php:279
@@ -13464,6 +13378,11 @@ msgstr "Proiektuen datu baseen estadistikak"
 msgid "Repository name:"
 msgstr "SCM errepositorioa"
 
+#: plugins/scmgit/common/GitPlugin.class.php:1106 www/mail/admin/index.php:194
+#: www/mail/admin/index.php:227
+msgid "Description:"
+msgstr "Deskribapena:"
+
 #: plugins/scmgit/common/GitPlugin.class.php:1108
 msgid ""
 "Initial clone URL (or name of an existing repository in this project; leave "
@@ -14769,6 +14688,14 @@ msgstr "Tweak direktorioak"
 msgid "Invalid Data Passed to query"
 msgstr "Pasahitzak gutxienez sei karaktere izan behar ditu"
 
+#: www/activity/index.php:180 www/project/stats/index.php:96
+msgid "Start"
+msgstr ""
+
+#: www/activity/index.php:181 www/project/stats/index.php:97
+msgid "End"
+msgstr ""
+
 #: www/activity/index.php:198 www/activity/index.php:344
 msgid "No Activity Found"
 msgstr ""
@@ -14800,10 +14727,12 @@ msgstr "Irekitze data"
 msgid "Forum Post "
 msgstr "Foroak"
 
-#: www/activity/index.php:317
+#: www/activity/index.php:322
+#: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:60
+#: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:52
 #, fuzzy
-msgid "Document"
-msgstr "Foroak erabili"
+msgid "Directory"
+msgstr "Azpiproiektuaren izen berria"
 
 #: www/admin/admin_table.php:41
 #, php-format
@@ -16409,21 +16338,21 @@ msgstr ""
 msgid "Documents for "
 msgstr "Foroen administrazioa"
 
-#: www/docman/view.php:60 www/docman/view.php:229
+#: www/docman/view.php:60 www/docman/view.php:232
 #, fuzzy
 msgid "Document is not available."
 msgstr "Informazioa ez dago eskuragarri"
 
 #: www/docman/view.php:113
-msgid "Unable to open zip archive for backup"
+msgid "Unable to open ZIP archive for backup"
 msgstr ""
 
 #: www/docman/view.php:117
-msgid "Unable to fill zip archive for backup"
+msgid "Unable to fill ZIP archive for backup"
 msgstr ""
 
 #: www/docman/view.php:120
-msgid "Unable to close zip archive for backup"
+msgid "Unable to close ZIP archive for backup"
 msgstr ""
 
 #: www/docman/view.php:129
@@ -16436,7 +16365,7 @@ msgid "No documents to backup."
 msgstr "Ez dago daturik dokumentu honetan"
 
 #: www/docman/view.php:138
-msgid "Zip extension is missing: no backup function"
+msgid "ZIP extension is missing: no backup function"
 msgstr ""
 
 #: www/docman/view.php:150
@@ -16444,38 +16373,38 @@ msgid "Webdav Access Canceled by user"
 msgstr ""
 
 #: www/docman/view.php:156
-msgid "No webdav interface enabled."
+msgid "No Webdav interface enabled."
 msgstr ""
 
-#: www/docman/view.php:184 www/docman/view.php:223
-msgid "Unable to open zip archive for download as zip"
+#: www/docman/view.php:184 www/docman/view.php:226
+msgid "Unable to open ZIP archive for download as ZIP"
 msgstr ""
 
-#: www/docman/view.php:192 www/docman/view.php:235
-msgid "Unable to fill zipfile."
+#: www/docman/view.php:195 www/docman/view.php:240
+msgid "Unable to fill ZIP file."
 msgstr ""
 
-#: www/docman/view.php:196
-msgid "Unable to fill zip archive for download as zip"
+#: www/docman/view.php:199
+msgid "Unable to fill ZIP archive for download as ZIP"
 msgstr ""
 
-#: www/docman/view.php:199 www/docman/view.php:244
-msgid "Unable to close zip archive for download as zip"
+#: www/docman/view.php:202 www/docman/view.php:249
+msgid "Unable to close ZIP archive for download as ZIP"
 msgstr ""
 
-#: www/docman/view.php:208 www/docman/view.php:253
-msgid "Unable to download zip archive"
+#: www/docman/view.php:211 www/docman/view.php:258
+msgid "Unable to download ZIP archive"
 msgstr ""
 
-#: www/docman/view.php:213
+#: www/docman/view.php:216
 msgid "This documents folder is empty."
 msgstr ""
 
-#: www/docman/view.php:258 www/docman/view.php:264
+#: www/docman/view.php:263 www/docman/view.php:269
 msgid "No document to display - invalid or inactive document number."
 msgstr ""
 
-#: www/docman/view.php:261
+#: www/docman/view.php:266
 msgid "PHP extension is missing."
 msgstr ""
 
@@ -23224,6 +23153,114 @@ msgstr "Ezin da eguneratu"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Ez da erabiltzaile-izenik eman"
+
+#, fuzzy
+#~ msgid "No Valid Group Object"
+#~ msgstr "Baliodun Talde Objeturik Ez"
+
+#, fuzzy
+#~ msgid "Project:"
+#~ msgstr "Proiektuak"
+
+#, fuzzy
+#~ msgid "Directory:"
+#~ msgstr "Azpiproiektuaren izen berria"
+
+#, fuzzy
+#~ msgid "Document title:"
+#~ msgstr "Dokumentuaren izenburua"
+
+#, fuzzy
+#~ msgid "Submitter:"
+#~ msgstr "Nork bidalia"
+
+#, fuzzy
+#~ msgid "ProjectGroup:: No Valid Group Object"
+#~ msgstr "Forum:: taldearen objektua baliogabea"
+
+#, fuzzy
+#~ msgid "Document Directory: No Valid Project"
+#~ msgstr "Forum:: taldearen objektua baliogabea"
+
+#, fuzzy
+#~ msgid "Document Directory:"
+#~ msgstr "Dokumentuaren izenburua"
+
+#, fuzzy
+#~ msgid "Invalid Documents folder parent ID"
+#~ msgstr "DokumentuTaldea: DokumentuTalde gura ID baliogabea"
+
+#, fuzzy
+#~ msgid "New directory"
+#~ msgstr "Azpiproiektuaren izen berria"
+
+#, fuzzy
+#~ msgid "no description"
+#~ msgstr "Deskribapena:"
+
+#, fuzzy
+#~ msgid "DocumentGroupFactory:: Invalid Project"
+#~ msgstr "Dokumentua: docid baliogabea"
+
+#, fuzzy
+#~ msgid "Invalid Project"
+#~ msgstr "Erabiltzaile ez da baliozkoa"
+
+#, fuzzy
+#~ msgid "Document Title:"
+#~ msgstr "Dokumentuaren izenburua"
+
+#, fuzzy
+#~ msgid "Submit a new document."
+#~ msgstr "Dokumentu berria aldatu."
+
+#, fuzzy
+#~ msgid "Add a new folder."
+#~ msgstr "Trebezi berri bat gehitu"
+
+#, fuzzy
+#~ msgid "Add a new sub folder"
+#~ msgstr "Trebezi berri bat gehitu"
+
+#, fuzzy
+#~ msgid "Add a new document"
+#~ msgstr "Azpi proiektu bat gehitu"
+
+#, fuzzy
+#~ msgid "Inject a Tree"
+#~ msgstr "Azpiproiektuaren izen berria"
+
+#, fuzzy
+#~ msgid "Inject"
+#~ msgstr "Gaia"
+
+#, fuzzy
+#~ msgid "File:"
+#~ msgstr "Fitxategia"
+
+#, fuzzy
+#~ msgid "State:"
+#~ msgstr "Egoera"
+
+#, fuzzy
+#~ msgid "Stop monitoring this directory"
+#~ msgstr "Orri hau monitorizatu"
+
+#, fuzzy
+#~ msgid "Add a new item"
+#~ msgstr "Trebezi berri bat gehitu"
+
+#, fuzzy
+#~ msgid "Documents folder:"
+#~ msgstr "Foroen administrazioa"
+
+#, fuzzy
+#~ msgid "List files & Directories"
+#~ msgstr "Tweak direktorioak"
+
+#, fuzzy
+#~ msgid "Reports"
+#~ msgstr "Txostenak"
 
 #, fuzzy
 #~ msgid "Mailing Lists."
