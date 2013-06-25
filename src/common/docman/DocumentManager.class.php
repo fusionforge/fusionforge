@@ -47,17 +47,16 @@ class DocumentManager extends Error {
 	 * Constructor.
 	 *
 	 * @param	object	The Group object to which this document is associated.
-	 * @return	boolean	success.
+	 * @return	void
 	 */
 	function __construct(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError('DocumentManager:: '. _('No Valid Group Object'));
-			return false;
+			exit_no_group();
 		}
 		if ($Group->isError()) {
 			$this->setError('DocumentManager:: '. $Group->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
 	}
