@@ -135,7 +135,7 @@ if ($searchString) {
 		}
 		db_free_result($result);
 		$count = 0;
-		echo '<table width="98%" cellpadding="0" cellspacing="0" border="0">';
+		echo '<table>';
 		foreach ($resarr as $item) {
 			$count++;
 			if ($item['filetype'] == 'URL') {
