@@ -7,7 +7,7 @@
  * Copyright 2002-2004, GForge Team
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -73,14 +73,19 @@ function docman_fill_zip($zip, $nested_groups, $document_factory, $docgroup = 0,
 }
 
 function docman_recursive_stateid($docgroup, $nested_groups, $nested_docs, $stateid = 2) {
+	$localdocgroup_arr = array();
+	$localdocgroup_arr[] = $docgroup;
 	if (is_array(@$nested_groups[$docgroup])) {
 		foreach ($nested_groups[$docgroup] as $dg) {
 			$dg->setStateID($stateid);
+			$localdocgroup_arr[] = $dg->getID();
 		}
 	}
-	if (isset($nested_docs[$docgroup]) && is_array($nested_docs[$docgroup])) {
-		foreach ($nested_docs[$docgroup] as $d) {
-			$d->setState($stateid);
+	foreach ($localdocgroup_arr as $docgroup_id) {
+		if (isset($nested_docs[$docgroup_id]) && is_array($nested_docs[$docgroup_id])) {
+			foreach ($nested_docs[$docgroup_id] as $d) {
+				$d->setState($stateid);
+			}
 		}
 	}
 }
