@@ -6,8 +6,6 @@
  * The rest Copyright 2002-2004 (c) GForge Team
  * http://fusionforge.org/
  *
- * @version   $Id: show_results.php 4561 2005-08-17 12:34:37Z danper $
- *
  * This file is part of FusionForge.
  *
  * FusionForge is free software; you can redistribute it and/or modify

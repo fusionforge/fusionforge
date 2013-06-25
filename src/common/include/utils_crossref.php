@@ -5,8 +5,6 @@
  * Copyright 1999-2001 (c) Alcatel-Lucent
  * Copyright 2009, Roland Mas
  *
- * @version   $Id: utils.php 5732 2006-09-30 21:04:41Z marcelo $
- *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software
