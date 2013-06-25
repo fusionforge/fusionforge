@@ -833,7 +833,7 @@ class Document extends Error {
 			$result = db_query_params('SELECT filename, doc_group FROM docdata_vw WHERE filename = $1 AND doc_group = $2 AND stateid = $3 AND docid != $4',
 						array($filename, $doc_group, $stateid, $this->getID()));
 			if (!$result || db_numrows($result) > 0) {
-				$this->setError(_('Document already published in this directory'));
+				$this->setError(_('Document already published in this folder'));
 				return false;
 			}
 		}
@@ -930,10 +930,10 @@ class Document extends Error {
 				$status = _('Updated document').' '._('by').' ' . $session->getRealName();
 			}
 			$subject = '['.$this->Group->getPublicName().'] '.$status.' - '.$this->getName();
-			$body = _('Project:').' '.$this->Group->getPublicName()."\n";
-			$body .= _('Directory:').' '.$this->getDocGroupName()."\n";
+			$body = _('Project')._(': ').$this->Group->getPublicName()."\n";
+			$body .= _('Folder')._(': ').$this->getDocGroupName()."\n";
 			$body .= _('Document Title')._(': ').$this->getName()."\n";
-			$body .= _('Document description:').' '.util_unconvert_htmlspecialchars($this->getDescription())."\n";
+			$body .= _('Document description')._(': ').util_unconvert_htmlspecialchars($this->getDescription())."\n";
 			$body .= _('Submitter')._(': ').$this->getCreatorRealName()." (".$this->getCreatorUserName().") \n";
 			$body .= "\n\n-------------------------------------------------------\n".
 				_('For more info, visit:').
