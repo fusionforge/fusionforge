@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:22+0200\n"
+"POT-Creation-Date: 2013-06-26 19:53+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2134,7 +2134,7 @@ msgid "Invalid forum group identifier"
 msgstr ""
 
 #: common/forum/Forum.class.php:431 common/forum/Forum.class.php:465
-#: common/frs/FRSPackage.class.php:270 common/frs/FRSPackage.class.php:302
+#: common/frs/FRSPackage.class.php:269 common/frs/FRSPackage.class.php:301
 #: common/tracker/ArtifactType.class.php:525
 #, fuzzy
 msgid "You can only monitor if you are logged in"
@@ -2151,7 +2151,7 @@ msgstr "Només podeu desar el vostre espai si sou dins d'una sessió"
 msgid "Update failed"
 msgstr "Ha fallat l'actualització"
 
-#: common/forum/Forum.class.php:612 common/frs/FRSPackage.class.php:451
+#: common/forum/Forum.class.php:612 common/frs/FRSPackage.class.php:450
 #: common/frs/FRSRelease.class.php:343 common/include/Group.class.php:1590
 #: common/mail/MailingList.class.php:385 common/pm/ProjectGroup.class.php:360
 #: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:504
@@ -2456,19 +2456,19 @@ msgstr "Aquest nom de fitxer ja existeix en aquest espai de projecte"
 msgid "File cannot be moved to the permanent location"
 msgstr "El fitxer no es pot moure a l'ubicació permanent"
 
-#: common/frs/FRSPackage.class.php:135 common/frs/FRSPackage.class.php:367
+#: common/frs/FRSPackage.class.php:134 common/frs/FRSPackage.class.php:366
 #: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:388
 msgid "FRSPackage Name Must Be At Least 3 Characters"
 msgstr "El nom de FRSPackage ha de tenir 3 caràcters com a mínim"
 
-#: common/frs/FRSPackage.class.php:139
+#: common/frs/FRSPackage.class.php:138
 #, fuzzy
 msgid ""
 "FRSPackage::Update: Package Name can only be alphanumeric or \"-\" \"_\" \"+"
 "\" \".\" \"~\""
 msgstr "FRSPackage::Actualització: El nom del paquet només pot ser alfanumèric"
 
-#: common/frs/FRSPackage.class.php:521
+#: common/frs/FRSPackage.class.php:520
 msgid "Cannot open the file archive."
 msgstr ""
 
@@ -2711,14 +2711,10 @@ msgstr "Versió"
 msgid "Group Not Found"
 msgstr "Fitxer no trobat"
 
-#: common/include/Group.class.php:279
-#, php-format
-msgid "fetchData():: %s"
-msgstr ""
-
 #: common/include/Group.class.php:307
-msgid "Group::create: Group object already exists"
-msgstr ""
+#, fuzzy
+msgid "Group object already exists"
+msgstr "Aquest nom d'usuari ja existeix."
 
 #: common/include/Group.class.php:312
 #, fuzzy
@@ -2748,14 +2744,14 @@ msgid "Describe in a more comprehensive manner your project."
 msgstr "Descriviu el vostre projecte de forma més comprensible."
 
 #: common/include/Group.class.php:370
-#, php-format
-msgid "ERROR: Could not create group: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Error: Cannot create group: %s"
+msgstr "Error al crear un objecte de grup"
 
 #: common/include/Group.class.php:377
-#, php-format
-msgid "ERROR: Could not get group id: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Error: Cannot get group id: %s"
+msgstr "No es pot afegir una entrada de la base de dades"
 
 #: common/include/Group.class.php:424 common/include/Group.class.php:491
 #, fuzzy
@@ -2800,15 +2796,15 @@ msgstr ""
 
 #: common/include/Group.class.php:735
 #, php-format
-msgid "ERROR: DB: Could not change group status: %s"
+msgid "Error: Cannot change group status: %s"
 msgstr ""
 
 #: common/include/Group.class.php:946
-msgid "Couldn't insert SCM_BOX to database"
+msgid "Could not insert SCM_BOX to database"
 msgstr ""
 
 #: common/include/Group.class.php:950
-msgid "SCM Box can't be empty"
+msgid "SCM Box cannot be empty"
 msgstr ""
 
 #: common/include/Group.class.php:1558
@@ -2937,12 +2933,12 @@ msgid "ERROR: User not removed: %s"
 msgstr ""
 
 #: common/include/Group.class.php:2066
-msgid "ERROR: DB: artifact:"
+msgid "Error: artifact:"
 msgstr ""
 
 #: common/include/Group.class.php:2087 common/include/Group.class.php:2100
 #, php-format
-msgid "ERROR: DB: project_assigned_to %d: %s"
+msgid "Error: project_assigned_to %d: %s"
 msgstr ""
 
 #: common/include/Group.class.php:2143 www/admin/globalroledelete.php:37
@@ -3167,27 +3163,27 @@ msgstr "El nom Unix ja està agafat"
 
 #: common/include/Group.class.php:2796
 #, php-format
-msgid "ERROR - Could Not Update Group Unix Status: %s"
+msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
 #: common/include/Group.class.php:2859
 #, php-format
-msgid "ERROR - Could Not Update Group DocmanCreateOnline Status: %s"
+msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
 #: common/include/Group.class.php:2877
 #, php-format
-msgid "ERROR - Could Not Update Group UseWebdab Status: %s"
+msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
 #: common/include/Group.class.php:2895
 #, php-format
-msgid "ERROR - Could Not Update Group UseDocmanSearch Status: %s"
+msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
 #: common/include/Group.class.php:2913
 #, php-format
-msgid "ERROR - Could Not Update Group force_docman_reindex %s"
+msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
 
 #: common/include/GroupJoinRequest.class.php:104
@@ -24047,10 +24043,6 @@ msgstr "Aquesta categoria no existeix"
 #, fuzzy
 #~ msgid "URL successfully changed"
 #~ msgstr "%1$s afegit(s) amb èxit."
-
-#, fuzzy
-#~ msgid "Cannot set type: %s"
-#~ msgstr "No es pot afegir una entrada de la base de dades"
 
 #, fuzzy
 #~ msgid "Type successfully changed"

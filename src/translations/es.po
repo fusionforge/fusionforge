@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:22+0200\n"
+"POT-Creation-Date: 2013-06-26 19:53+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -2056,7 +2056,7 @@ msgid "Invalid forum group identifier"
 msgstr "Identificador de grupo de foro inválido"
 
 #: common/forum/Forum.class.php:431 common/forum/Forum.class.php:465
-#: common/frs/FRSPackage.class.php:270 common/frs/FRSPackage.class.php:302
+#: common/frs/FRSPackage.class.php:269 common/frs/FRSPackage.class.php:301
 #: common/tracker/ArtifactType.class.php:525
 msgid "You can only monitor if you are logged in"
 msgstr "Sólo puede monitorizar si está autenticado."
@@ -2072,7 +2072,7 @@ msgstr "Sólo puede guardar su lugar si ha iniciado su sesión."
 msgid "Update failed"
 msgstr "Actualización fallida"
 
-#: common/forum/Forum.class.php:612 common/frs/FRSPackage.class.php:451
+#: common/forum/Forum.class.php:612 common/frs/FRSPackage.class.php:450
 #: common/frs/FRSRelease.class.php:343 common/include/Group.class.php:1590
 #: common/mail/MailingList.class.php:385 common/pm/ProjectGroup.class.php:360
 #: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:504
@@ -2393,18 +2393,18 @@ msgstr "Ese nombre de fichero ya existe en el espacio de este proyecto"
 msgid "File cannot be moved to the permanent location"
 msgstr "El fichero pudo ser movido a la posición permanete"
 
-#: common/frs/FRSPackage.class.php:135 common/frs/FRSPackage.class.php:367
+#: common/frs/FRSPackage.class.php:134 common/frs/FRSPackage.class.php:366
 #: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:388
 msgid "FRSPackage Name Must Be At Least 3 Characters"
 msgstr "FRSPackage El nombre debe tener al menos 3 caracteres"
 
-#: common/frs/FRSPackage.class.php:139
+#: common/frs/FRSPackage.class.php:138
 msgid ""
 "FRSPackage::Update: Package Name can only be alphanumeric or \"-\" \"_\" \"+"
 "\" \".\" \"~\""
 msgstr "FRSPackage::Update: El nombre del paquete sólo puede ser alfanumérico"
 
-#: common/frs/FRSPackage.class.php:521
+#: common/frs/FRSPackage.class.php:520
 msgid "Cannot open the file archive."
 msgstr "No puedo abrir el archivo."
 
@@ -2644,14 +2644,9 @@ msgstr "Versión"
 msgid "Group Not Found"
 msgstr "Grupo no encontrado"
 
-#: common/include/Group.class.php:279
-#, php-format
-msgid "fetchData():: %s"
-msgstr "fetchData():: %s"
-
 #: common/include/Group.class.php:307
-msgid "Group::create: Group object already exists"
-msgstr "Group::create: el objeto Group ya existe"
+msgid "Group object already exists"
+msgstr "el objeto Group ya existe"
 
 #: common/include/Group.class.php:312
 msgid "Invalid Unix name"
@@ -2682,13 +2677,13 @@ msgstr "Describa su proyecto de modo más comprensible."
 
 #: common/include/Group.class.php:370
 #, php-format
-msgid "ERROR: Could not create group: %s"
-msgstr "ERROR: No se pudo crear el grupo: %s"
+msgid "Error: Cannot create group: %s"
+msgstr "Error: No se pudo crear el grupo: %s"
 
 #: common/include/Group.class.php:377
 #, php-format
-msgid "ERROR: Could not get group id: %s"
-msgstr "ERROR: No se pudo obtener el grupo de id: %s"
+msgid "Error: Cannot get group id: %s"
+msgstr "Error: No se pudo obtener el grupo de id: %s"
 
 #: common/include/Group.class.php:424 common/include/Group.class.php:491
 msgid "Could not get permission."
@@ -2732,15 +2727,15 @@ msgstr ""
 
 #: common/include/Group.class.php:735
 #, php-format
-msgid "ERROR: DB: Could not change group status: %s"
-msgstr "ERROR: DB: No se pudo cambiar el estado del grupo: %s"
+msgid "Error: Cannot change group status: %s"
+msgstr "Error: No se pudo cambiar el estado del grupo: %s"
 
 #: common/include/Group.class.php:946
-msgid "Couldn't insert SCM_BOX to database"
+msgid "Could not insert SCM_BOX to database"
 msgstr "No se pudo insertar SCM_BOX en la base de datos"
 
 #: common/include/Group.class.php:950
-msgid "SCM Box can't be empty"
+msgid "SCM Box cannot be empty"
 msgstr "SCM Box no puede estar vacío"
 
 #: common/include/Group.class.php:1558
@@ -2856,13 +2851,14 @@ msgid "ERROR: User not removed: %s"
 msgstr "ERROR: Usuario no eliminado: %s"
 
 #: common/include/Group.class.php:2066
-msgid "ERROR: DB: artifact:"
-msgstr "ERROR: BD: artefacto:"
+#, fuzzy
+msgid "Error: artifact:"
+msgstr "Error borrando artefacto: "
 
 #: common/include/Group.class.php:2087 common/include/Group.class.php:2100
 #, php-format
-msgid "ERROR: DB: project_assigned_to %d: %s"
-msgstr "ERROR: BD: project_assigned_to %d: %s"
+msgid "Error: project_assigned_to %d: %s"
+msgstr "Error: BD: project_assigned_to %d: %s"
 
 #: common/include/Group.class.php:2143 www/admin/globalroledelete.php:37
 #: www/admin/globalroleedit.php:41 www/project/admin/roledelete.php:46
@@ -3065,28 +3061,28 @@ msgid "Group name already taken"
 msgstr "Nombre de proyecto no disponible"
 
 #: common/include/Group.class.php:2796
-#, php-format
-msgid "ERROR - Could Not Update Group Unix Status: %s"
-msgstr "ERROR - No se pudo actualizar el estado del grupo Unix: %s"
+#, fuzzy, php-format
+msgid "Error: Cannot Update Group Unix Status: %s"
+msgstr "Error: No se pudo cambiar el estado del grupo: %s"
 
 #: common/include/Group.class.php:2859
-#, php-format
-msgid "ERROR - Could Not Update Group DocmanCreateOnline Status: %s"
+#, fuzzy, php-format
+msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr "ERROR - No puedo actualizar el estado del Grupo DocmanCreateOnline: %s"
 
 #: common/include/Group.class.php:2877
-#, php-format
-msgid "ERROR - Could Not Update Group UseWebdab Status: %s"
+#, fuzzy, php-format
+msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "ERROR - No puedo actaulizar Estado de Grupo UseWebdab: %s"
 
 #: common/include/Group.class.php:2895
-#, php-format
-msgid "ERROR - Could Not Update Group UseDocmanSearch Status: %s"
+#, fuzzy, php-format
+msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "ERROR - No puedo actualizar estado grupo UseDocmanSearch: %s"
 
 #: common/include/Group.class.php:2913
-#, php-format
-msgid "ERROR - Could Not Update Group force_docman_reindex %s"
+#, fuzzy, php-format
+msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "ERROR - No puedo actualizar Grupo force_docman_reindex %s"
 
 #: common/include/GroupJoinRequest.class.php:104
@@ -22602,6 +22598,36 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "That user does not exist."
 msgstr "El usuario no existe"
 
+#~ msgid "fetchData():: %s"
+#~ msgstr "fetchData():: %s"
+
+#~ msgid "Group::create: Group object already exists"
+#~ msgstr "Group::create: el objeto Group ya existe"
+
+#~ msgid "ERROR: Could not create group: %s"
+#~ msgstr "ERROR: No se pudo crear el grupo: %s"
+
+#~ msgid "ERROR: Could not get group id: %s"
+#~ msgstr "ERROR: No se pudo obtener el grupo de id: %s"
+
+#~ msgid "ERROR: DB: Could not change group status: %s"
+#~ msgstr "ERROR: DB: No se pudo cambiar el estado del grupo: %s"
+
+#~ msgid "Couldn't insert SCM_BOX to database"
+#~ msgstr "No se pudo insertar SCM_BOX en la base de datos"
+
+#~ msgid "SCM Box can't be empty"
+#~ msgstr "SCM Box no puede estar vacío"
+
+#~ msgid "ERROR: DB: artifact:"
+#~ msgstr "ERROR: BD: artefacto:"
+
+#~ msgid "ERROR: DB: project_assigned_to %d: %s"
+#~ msgstr "ERROR: BD: project_assigned_to %d: %s"
+
+#~ msgid "ERROR - Could Not Update Group Unix Status: %s"
+#~ msgstr "ERROR - No se pudo actualizar el estado del grupo Unix: %s"
+
 #~ msgid "ForumMessage:: No Valid Forum Object"
 #~ msgstr "ForumMessage:: objeto Forum inválido"
 
@@ -22924,26 +22950,8 @@ msgstr "El usuario no existe"
 #~ msgid "Missing Required Parameters"
 #~ msgstr "Faltan parámetros"
 
-#~ msgid "Group object already exists"
-#~ msgstr "el objeto Group ya existe"
-
-#~ msgid "Error: Cannot create group: %s"
-#~ msgstr "Error: No se pudo crear el grupo: %s"
-
-#~ msgid "Error: Cannot get group id: %s"
-#~ msgstr "Error: No se pudo obtener el grupo de id: %s"
-
 #~ msgid "Error: Cannot change group properties: %s"
 #~ msgstr "Error: No se pudo cambiar las propiedades del proyecto: %s"
-
-#~ msgid "Error: Cannot change group status: %s"
-#~ msgstr "Error: No se pudo cambiar el estado del grupo: %s"
-
-#~ msgid "Could not insert SCM_BOX to database"
-#~ msgstr "No se pudo insertar SCM_BOX en la base de datos"
-
-#~ msgid "SCM Box cannot be empty"
-#~ msgstr "SCM Box no puede estar vacío"
 
 #~ msgid "Error: Could Not Add User To Group: %s"
 #~ msgstr "Error: No se pudo añadir el usuario al grupo: %s"
@@ -22953,9 +22961,6 @@ msgstr "El usuario no existe"
 
 #~ msgid "Error: User not removed: %s"
 #~ msgstr "Error: Usuario no eliminado: %s"
-
-#~ msgid "Error: project_assigned_to %d: %s"
-#~ msgstr "Error: BD: project_assigned_to %d: %s"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "El registro de su proyecto en %s ha sido aprobado."

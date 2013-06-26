@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:22+0200\n"
+"POT-Creation-Date: 2013-06-26 19:53+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2137,7 +2137,7 @@ msgid "Invalid forum group identifier"
 msgstr "Недопустимый идентификатор форума"
 
 #: common/forum/Forum.class.php:431 common/forum/Forum.class.php:465
-#: common/frs/FRSPackage.class.php:270 common/frs/FRSPackage.class.php:302
+#: common/frs/FRSPackage.class.php:269 common/frs/FRSPackage.class.php:301
 #: common/tracker/ArtifactType.class.php:525
 msgid "You can only monitor if you are logged in"
 msgstr "Если вы не идентифицированы, Вы можете лишь просматривать"
@@ -2153,7 +2153,7 @@ msgstr "Сохранять позиции Вы можете лишь автор�
 msgid "Update failed"
 msgstr "Ошибка обновления"
 
-#: common/forum/Forum.class.php:612 common/frs/FRSPackage.class.php:451
+#: common/forum/Forum.class.php:612 common/frs/FRSPackage.class.php:450
 #: common/frs/FRSRelease.class.php:343 common/include/Group.class.php:1590
 #: common/mail/MailingList.class.php:385 common/pm/ProjectGroup.class.php:360
 #: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:504
@@ -2461,19 +2461,19 @@ msgstr "Такое имя файла уже существует"
 msgid "File cannot be moved to the permanent location"
 msgstr "Файл неможет быть перемещен"
 
-#: common/frs/FRSPackage.class.php:135 common/frs/FRSPackage.class.php:367
+#: common/frs/FRSPackage.class.php:134 common/frs/FRSPackage.class.php:366
 #: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:388
 msgid "FRSPackage Name Must Be At Least 3 Characters"
 msgstr "FRS Имя пакета минимум из трёх букв"
 
-#: common/frs/FRSPackage.class.php:139
+#: common/frs/FRSPackage.class.php:138
 #, fuzzy
 msgid ""
 "FRSPackage::Update: Package Name can only be alphanumeric or \"-\" \"_\" \"+"
 "\" \".\" \"~\""
 msgstr "FRSPackage::Update: Название пакета только из букв и цифр"
 
-#: common/frs/FRSPackage.class.php:521
+#: common/frs/FRSPackage.class.php:520
 msgid "Cannot open the file archive."
 msgstr ""
 
@@ -2713,14 +2713,9 @@ msgstr "Версия"
 msgid "Group Not Found"
 msgstr "Нет группы"
 
-#: common/include/Group.class.php:279
-#, php-format
-msgid "fetchData():: %s"
-msgstr "Указана Дата ():: %s"
-
 #: common/include/Group.class.php:307
-msgid "Group::create: Group object already exists"
-msgstr "Group::create: Такая группа уже существует"
+msgid "Group object already exists"
+msgstr "Такая группа уже существует"
 
 #: common/include/Group.class.php:312
 msgid "Invalid Unix name"
@@ -2750,12 +2745,12 @@ msgstr "Создайте описание проекта в наиболее к�
 
 #: common/include/Group.class.php:370
 #, php-format
-msgid "ERROR: Could not create group: %s"
+msgid "Error: Cannot create group: %s"
 msgstr "Ошибка при создании группы: %s"
 
 #: common/include/Group.class.php:377
 #, php-format
-msgid "ERROR: Could not get group id: %s"
+msgid "Error: Cannot get group id: %s"
 msgstr "Нет группы: %s"
 
 #: common/include/Group.class.php:424 common/include/Group.class.php:491
@@ -2801,15 +2796,15 @@ msgstr ""
 
 #: common/include/Group.class.php:735
 #, php-format
-msgid "ERROR: DB: Could not change group status: %s"
+msgid "Error: Cannot change group status: %s"
 msgstr "Ошибка при изменении статуса группы: %s"
 
 #: common/include/Group.class.php:946
-msgid "Couldn't insert SCM_BOX to database"
+msgid "Could not insert SCM_BOX to database"
 msgstr "Добавление в SCM базу репозиторя блокировано"
 
 #: common/include/Group.class.php:950
-msgid "SCM Box can't be empty"
+msgid "SCM Box cannot be empty"
 msgstr "Папка репозитория должна содержать хотябы один файл"
 
 #: common/include/Group.class.php:1558
@@ -2941,12 +2936,12 @@ msgstr "Ошибка при удалении пользователя: %s"
 
 #: common/include/Group.class.php:2066
 #, fuzzy
-msgid "ERROR: DB: artifact:"
-msgstr "Ошибка в детали базы данных: %s"
+msgid "Error: artifact:"
+msgstr "Ошибка получения объекта участника: %s"
 
 #: common/include/Group.class.php:2087 common/include/Group.class.php:2100
 #, php-format
-msgid "ERROR: DB: project_assigned_to %d: %s"
+msgid "Error: project_assigned_to %d: %s"
 msgstr "Ошибка базы данных назначения проекта %d: %s"
 
 #: common/include/Group.class.php:2143 www/admin/globalroledelete.php:37
@@ -3150,28 +3145,28 @@ msgid "Group name already taken"
 msgstr "Такое название для проекта уже занято."
 
 #: common/include/Group.class.php:2796
-#, php-format
-msgid "ERROR - Could Not Update Group Unix Status: %s"
-msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
+#, fuzzy, php-format
+msgid "Error: Cannot Update Group Unix Status: %s"
+msgstr "Ошибка при изменении статуса группы: %s"
 
 #: common/include/Group.class.php:2859
 #, fuzzy, php-format
-msgid "ERROR - Could Not Update Group DocmanCreateOnline Status: %s"
+msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
 #: common/include/Group.class.php:2877
 #, fuzzy, php-format
-msgid "ERROR - Could Not Update Group UseWebdab Status: %s"
+msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
 #: common/include/Group.class.php:2895
 #, fuzzy, php-format
-msgid "ERROR - Could Not Update Group UseDocmanSearch Status: %s"
+msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
 #: common/include/Group.class.php:2913
 #, fuzzy, php-format
-msgid "ERROR - Could Not Update Group force_docman_reindex %s"
+msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
 #: common/include/GroupJoinRequest.class.php:104
@@ -23499,6 +23494,37 @@ msgstr "Имя участника обязательно"
 msgid "That user does not exist."
 msgstr "Пользователь с таким именем не существует."
 
+#~ msgid "fetchData():: %s"
+#~ msgstr "Указана Дата ():: %s"
+
+#~ msgid "Group::create: Group object already exists"
+#~ msgstr "Group::create: Такая группа уже существует"
+
+#~ msgid "ERROR: Could not create group: %s"
+#~ msgstr "Ошибка при создании группы: %s"
+
+#~ msgid "ERROR: Could not get group id: %s"
+#~ msgstr "Нет группы: %s"
+
+#~ msgid "ERROR: DB: Could not change group status: %s"
+#~ msgstr "Ошибка при изменении статуса группы: %s"
+
+#~ msgid "Couldn't insert SCM_BOX to database"
+#~ msgstr "Добавление в SCM базу репозиторя блокировано"
+
+#~ msgid "SCM Box can't be empty"
+#~ msgstr "Папка репозитория должна содержать хотябы один файл"
+
+#, fuzzy
+#~ msgid "ERROR: DB: artifact:"
+#~ msgstr "Ошибка в детали базы данных: %s"
+
+#~ msgid "ERROR: DB: project_assigned_to %d: %s"
+#~ msgstr "Ошибка базы данных назначения проекта %d: %s"
+
+#~ msgid "ERROR - Could Not Update Group Unix Status: %s"
+#~ msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
+
 #~ msgid "ForumMessage:: No Valid Forum Object"
 #~ msgstr "ForumMessage:: Неправильный объект форума"
 
@@ -23767,29 +23793,11 @@ msgstr "Пользователь с таким именем не существ�
 #~ msgid "No Valid ParentMessage Object"
 #~ msgstr "неправильное вложение"
 
-#~ msgid "Group object already exists"
-#~ msgstr "Такая группа уже существует"
-
-#~ msgid "Error: Cannot create group: %s"
-#~ msgstr "Ошибка при создании группы: %s"
-
-#~ msgid "Error: Cannot get group id: %s"
-#~ msgstr "Нет группы: %s"
-
 #~ msgid "Error: Cannot add admin to newly created group: %s"
 #~ msgstr "В новую группу админ %s не добавлен"
 
 #~ msgid "Error: Cannot change group properties: %s"
 #~ msgstr "Невозможно изменение свойств группы: %s"
-
-#~ msgid "Error: Cannot change group status: %s"
-#~ msgstr "Ошибка при изменении статуса группы: %s"
-
-#~ msgid "Could not insert SCM_BOX to database"
-#~ msgstr "Добавление в SCM базу репозиторя блокировано"
-
-#~ msgid "SCM Box cannot be empty"
-#~ msgstr "Папка репозитория должна содержать хотябы один файл"
 
 #~ msgid "Error: Could Not Add User To Group: %s"
 #~ msgstr "Участник в группу: %s не добавлен"
@@ -23799,9 +23807,6 @@ msgstr "Пользователь с таким именем не существ�
 
 #~ msgid "Error: User not removed: %s"
 #~ msgstr "Ошибка при удалении пользователя: %s"
-
-#~ msgid "Error: project_assigned_to %d: %s"
-#~ msgstr "Ошибка базы данных назначения проекта %d: %s"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "Регистрация вашего проекта %s одобрена."

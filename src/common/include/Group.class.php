@@ -276,7 +276,7 @@ class Group extends Error {
 		$res = db_query_params ('SELECT * FROM groups WHERE group_id=$1',
 					array ($group_id));
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError(sprintf(_('fetchData():: %s'),db_error()));
+			$this->setError(sprintf('fetchData():: %s', db_error()));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -304,7 +304,7 @@ class Group extends Error {
 
 		global $SYS;
 		if ($this->getID()!=0) {
-			$this->setError(_('Group::create: Group object already exists'));
+			$this->setError(_('Group object already exists'));
 			return false;
 		} elseif (!$this->validateGroupName($group_name)) {
 			return false;
@@ -367,14 +367,14 @@ class Group extends Error {
 						       md5(util_randbytes()),
 						       $built_from_template));
 			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError(sprintf(_('ERROR: Could not create group: %s'),db_error()));
+				$this->setError(sprintf(_('Error: Cannot create group: %s'),db_error()));
 				db_rollback();
 				return false;
 			}
 
 			$id = db_insertid($res, 'groups', 'group_id');
 			if (!$id) {
-				$this->setError(sprintf(_('ERROR: Could not get group id: %s'),db_error()));
+				$this->setError(sprintf(_('Error: Cannot get group id: %s'),db_error()));
 				db_rollback();
 				return false;
 			}
@@ -732,7 +732,7 @@ class Group extends Error {
 			WHERE group_id=$2', array($status, $this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(sprintf(_('ERROR: DB: Could not change group status: %s'),db_error()));
+			$this->setError(sprintf(_('Error: Cannot change group status: %s'),db_error()));
 			db_rollback();
 			return false;
 		}
@@ -943,11 +943,11 @@ class Group extends Error {
 				return true;
 			} else {
 				db_rollback();
-				$this->setError(_("Couldn't insert SCM_BOX to database"));
+				$this->setError(_("Could not insert SCM_BOX to database"));
 				return false;
 			}
 		} else {
-			$this->setError(_("SCM Box can't be empty"));
+			$this->setError(_("SCM Box cannot be empty"));
 			return false;
 		}
 	}
@@ -2063,7 +2063,7 @@ class Group extends Error {
 						array($this->getID(),
 						      $user_id));
 		if (!$res) {
-			$this->setError(_('ERROR: DB: artifact:').' '.db_error());
+			$this->setError(_('Error: artifact:').' '.db_error());
 			db_rollback();
 			return false;
 		}
@@ -2084,7 +2084,7 @@ class Group extends Error {
 						array($this->getID(),
 						      $user_id));
 		if (!$res) {
-			$this->setError(sprintf(_('ERROR: DB: project_assigned_to %d: %s'), 1, db_error()));
+			$this->setError(sprintf(_('Error: project_assigned_to %d: %s'), 1, db_error()));
 			db_rollback();
 			return false;
 		}
@@ -2097,7 +2097,7 @@ class Group extends Error {
 						array($this->getID(),
 						      $user_id));
 		if (!$res) {
-			$this->setError(sprintf(_('ERROR: DB: project_assigned_to %d: %s'), 2, db_error()));
+			$this->setError(sprintf(_('Error: project_assigned_to %d: %s'), 2, db_error()));
 			db_rollback();
 			return false;
 		}
@@ -2777,7 +2777,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 	/**
 	 * setUnixStatus - Sets status of activation of unix account.
 	 *
-	 * @param	string	The unix status.
+	 * @param	string	$status The unix status.
 	 * 	N	no_unix_account
 	 *	A	active
 	 *	S	suspended
@@ -2793,7 +2793,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 					       $this->getID())) ;
 
 		if (!$res) {
-			$this->setError(sprintf(_('ERROR - Could Not Update Group Unix Status: %s'),db_error()));
+			$this->setError(sprintf(_('Error: Cannot Update Group Unix Status: %s'),db_error()));
 			db_rollback();
 			return false;
 		} else {
@@ -2856,7 +2856,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 					array($status, $this->getID()));
 
 		if (!$res) {
-			$this->setError(sprintf(_('ERROR - Could Not Update Group DocmanCreateOnline Status: %s'),db_error()));
+			$this->setError(sprintf(_('Error: Cannot Update Group DocmanCreateOnline Status: %s'),db_error()));
 			db_rollback();
 			return false;
 		} else {
@@ -2874,7 +2874,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 					       $this->getID()));
 
 		if (!$res) {
-			$this->setError(sprintf(_('ERROR - Could Not Update Group UseWebdab Status: %s'),db_error()));
+			$this->setError(sprintf(_('Error: Cannot Update Group UseWebdab Status: %s'),db_error()));
 			db_rollback();
 			return false;
 		} else {
@@ -2892,7 +2892,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 					       $this->getID()));
 
 		if (!$res) {
-			$this->setError(sprintf(_('ERROR - Could Not Update Group UseDocmanSearch Status: %s'),db_error()));
+			$this->setError(sprintf(_('Error: Cannot Update Group UseDocmanSearch Status: %s'),db_error()));
 			db_rollback();
 			return false;
 		} else {
@@ -2910,7 +2910,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 					       $this->getID()));
 
 		if (!$res) {
-			$this->setError(sprintf(_('ERROR - Could Not Update Group force_docman_reindex %s'),db_error()));
+			$this->setError(sprintf(_('Error: Cannot Update Group force_docman_reindex %s'),db_error()));
 			db_rollback();
 			return false;
 		} else {
