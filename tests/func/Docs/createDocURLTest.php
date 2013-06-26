@@ -1,7 +1,6 @@
 <?php
 /*
- * Copyright (C) 2010 Alcatel-Lucent
- * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2010-2013 Alain Peyrat - Alcatel-Lucent
  * Copyright 2010-2011, Franck Villaume - Capgemini
  *
  * This file is part of FusionForge.
@@ -49,24 +48,25 @@ class CreateDocURL extends FForge_SeleniumTestCase
 {
 	function testCreateDocURL()
 	{
-		$this->populateStandardTemplate('docs');
 		$this->init();
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Docs");
 		$this->clickAndWait("addItemDocmanMenu");
-		$this->click("buttonDir");
+		$this->click("id=tabs-new-folder");
 		$this->type("groupname", "docdirectory");
 		$this->clickAndWait("submitaddsubgroup");
 		$this->clickAndWait("addItemDocmanMenu");
-		$this->click("buttonDoc");
+		$this->click("id=tabs-new-document");
 		$this->type("title", "My document");
 		$this->type("//input[@name='description']", "L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
 		$this->click("//input[@name='type' and @value='pasteurl']");
-		$this->type("file_url", "http://buildbot.fusionforge.org/");
+		$this->type("file_url", URL."/terms.php");
 		$this->clickAndWait("submit");
-		$this->assertTextPresent("Document http://buildbot.fusionforge.org/ submitted successfully");
+		$this->assertTextPresent("Document ".URL."/terms.php submitted successfully");
 		$this->assertTextPresent("My document");
 		$this->assertTextPresent("L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
+		$this->clickAndWait("link=My document");
+		$this->assertTextPresent("These are the terms and conditions under");
 
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Docs");
@@ -74,5 +74,29 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=docdirectory");
 		$this->clickAndWait("//img[@alt='trashdir']");
 		$this->assertTextPresent("Documents folder docdirectory moved to trash successfully");
+	}
+
+	function testCreateMultipleDocs()
+	{
+		$this->init();
+		$this->gotoProject('ProjectA');
+		$this->clickAndWait("link=Docs");
+		$this->clickAndWait("addItemDocmanMenu");
+		$this->type("title", "My document");
+		$this->type("//input[@name='description']", "My Description");
+		$this->click("//input[@name='type' and @value='pasteurl']");
+		$this->type("file_url", URL."/terms.php");
+		$this->clickAndWait("//input[@name='submit' and @value='Submit Information']");
+		$this->assertTextPresent("Document ".URL."/terms.php submitted successfully");
+
+		$this->gotoProject('ProjectA');
+		$this->clickAndWait("link=Docs");
+		$this->clickAndWait("addItemDocmanMenu");
+		$this->type("title", " My document ");
+		$this->type("//input[@name='description']", "My Description");
+		$this->click("//input[@name='type' and @value='pasteurl']");
+		$this->type("file_url", URL."/terms.php");
+		$this->clickAndWait("//input[@name='submit' and @value='Submit Information']");
+		$this->assertTextPresent("Document already published in this folder");
 	}
 }
