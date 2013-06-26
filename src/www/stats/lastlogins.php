@@ -38,7 +38,7 @@ $res = db_query_params ('SELECT us.user_id AS user_id,
 			       50);
 
 if (!$res || db_numrows($res) < 1) {
-	exit_error(_('No records found","Database error: "').db_error());
+	exit_error(_('No records found. Database error: ').db_error());
 }
 
 $HTML->header(array('title'=>_('Most Recent Opened Sessions')));

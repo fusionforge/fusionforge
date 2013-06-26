@@ -68,26 +68,26 @@ class SurveyResponseFactory extends Error {
 	 *
 	 *	@param	object	The Survey object
 	 *	@param	object	The Question object to which this survey Response is associated.
-         *      @param  int     The survey_id
+     *  @param  int     The survey_id
 	 */
 	function __construct(&$Survey, &$Question ) {
 		$this->Error();
 
 		if (!$Survey || !is_object($Survey)) {
 			$this->setError(_('No valid Survey Object'));
-			return false;
+			return;
 		}
 		if ($Survey->isError()) {
 			$this->setError(_('Survey').':: '.$Survey->getErrorMessage());
-			return false;
+			return;
 		}
 		if (!$Question || !is_object($Question)) {
 			$this->setError(_('No valid Question Object'));
-			return false;
+			return;
 		}
 		if ($Question->isError()) {
 			$this->setError(_('Survey').':: '.$Question->getErrorMessage());
-			return false;
+			return;
 		}
 
 		$this->Survey = &$Survey;

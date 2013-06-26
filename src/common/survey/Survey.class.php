@@ -64,21 +64,21 @@ class Survey extends Error {
 		}
 		if ($Group->isError()) {
 			$this->setError('Survey:: '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
 
 		if ($survey_id) {
 			if (!$arr || !is_array($arr)) {
 				if (!$this->fetchData($survey_id)) {
-					return false;
+					return;
 				}
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
 					$this->setError(_('Group_id in db result does not match Group Object'));
 					$this->data_array = null;
-					return false;
+					return;
 				}
 			}
 		}
@@ -91,8 +91,8 @@ class Survey extends Error {
 	 * @param	int array         The question numbers to be added
 	 * @param	is_active         1: Active, 0: Inactive
 	 * For future options
-	 * @param	is_public         0: Admins Only, 1: Group Members, 2: Gforge user, 3:Every body
-	 * @param	is_result_public  0: Admins Only, 1: Group Members, 2: Gforge user, 3:voted user 4:Every body
+	 * @param	is_public         0: Admins Only, 1: Group Members, 2: FusionForge user, 3:Every body
+	 * @param	is_result_public  0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
 	 * @param	double_vote       Allow double vote if it is 1
 	 * @return	boolean	success.
 	 */
@@ -136,8 +136,8 @@ class Survey extends Error {
 	 * @param	int array         The question numbers to be added
 	 * @param	int array         The question numbers to be deleted
 	 * @param	is_active         1: Active, 0: Inactive
-	 * @param	is_public         0: Admins Only, 1: Group Members, 2: Gforge user, 3:Every body
-	 * @param	is_result_public  0: Admins Only, 1: Group Members, 2: Gforge user, 3:voted user 4:Every body
+	 * @param	is_public         0: Admins Only, 1: Group Members, 2: FusionForge user, 3:Every body
+	 * @param	is_result_public  0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
 	 * @param	double_vote       Allow double vote if it is 1
 	 * @return	boolean	success.
 	 */
@@ -166,7 +166,7 @@ class Survey extends Error {
 							$group_id)
 					);
 		if (db_affected_rows($result) < 1) {
-			 $this->setError(_('UPDATE FAILED').db_error());
+			 $this->setError(_('Update failed').db_error());
 			 return false;
 		}
 		/* Update internal data */
@@ -204,7 +204,7 @@ class Survey extends Error {
 							$group_id)
 					);
 		if (db_affected_rows($result) < 1) {
-			$this->setError(_('UPDATE FAILED').db_error());
+			$this->setError(_('Update failed').db_error());
 			return false;
 		}
 

@@ -46,7 +46,7 @@ class SurveyQuestion extends Error {
 	 * @param	object	The Group object to which this Survey Question is associated.
 	 * @param	int	The questtion_id.
 	 * @param	array	The associative array of data.
-	 * @return	boolean	success.
+	 * @return	void
 	 */
 	function __construct(&$Group, $question_id = false, $arr = false) {
 		$this->Error();
@@ -55,21 +55,21 @@ class SurveyQuestion extends Error {
 		}
 		if ($Group->isError()) {
 			$this->setError('Survey:: '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
 
 		if ($question_id) {
 			if (!$arr || !is_array($arr)) {
 				if (!$this->fetchData($question_id)) {
-					return false;
+					return;
 				}
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
 					$this->setError(_('Group_id in db result does not match Group Object'));
 					$this->data_array = null;
-					return false;
+					return;
 				}
 			}
 		}

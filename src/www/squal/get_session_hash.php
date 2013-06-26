@@ -17,5 +17,5 @@ $success=session_login_valid($user,$pass);
 if ($success) {
 	echo $session_ser;
 } else {
-	echo 'ERROR - '.$feedback;
+	echo 'Error: '.$feedback;
 }

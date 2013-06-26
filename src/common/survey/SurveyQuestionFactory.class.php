@@ -28,11 +28,11 @@ require_once $gfcommon.'survey/SurveyQuestion.class.php';
 
 class SurveyQuestionFactory extends Error {
 
-       /**
-        * The Group object.
-        *
-        * @var	 object  $Group.
-        */
+	/**
+	 * The Group object.
+	 *
+	 * @var	 object  $Group.
+	 */
 	var $Group;
 
 	/**
@@ -46,7 +46,7 @@ class SurveyQuestionFactory extends Error {
 	 *  Constructor.
 	 *
 	 *	@param	object	The Group object to which this survey question is associated.
-         *      @param  int     The survey_id
+	 *  @param  int     The survey_id
 	 */
 	function __construct(&$Group) {
 		$this->Error();
@@ -55,7 +55,7 @@ class SurveyQuestionFactory extends Error {
 		}
 		if ($Group->isError()) {
 			$this->setError(_('Survey').':: '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 		if (!$Group->usesSurvey()) {
 			$this->setError(sprintf(_('%s does not use the Survey tool'),
@@ -76,7 +76,7 @@ class SurveyQuestionFactory extends Error {
 
 	/**
 	 *	getSurveyQuestion - get an array of Survey Question objects
-         *                          for this Group and Survey id if survey_id is given.
+	 *                      for this Group and Survey id if survey_id is given.
 	 *
  	 *	@return	array	The array of Survey Question objects.
 	 */

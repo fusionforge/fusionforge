@@ -54,7 +54,7 @@ if (!session_loggedin()) {
 						 $response,
 						 time()));
 		if (!$result) {
-			$error_msg .= _('Error in insert').db_error();
+			$error_msg .= _('Insert Error').db_error();
 			session_redirect('/&error_msg='.urlencode($error_msg));
 		} else {
 			$feedback .= _('Vote registered');

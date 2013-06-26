@@ -57,7 +57,7 @@ class SurveyFactory extends Error {
 
 		if ($Group->isError()) {
 			$this->setError(_('Survey').':: '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 		if (!$Group->usesSurvey()) {
 			$this->setError(sprintf(_('%s does not use the Survey tool'),
