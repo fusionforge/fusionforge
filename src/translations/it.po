@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:08+0200\n"
+"POT-Creation-Date: 2013-06-26 19:22+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2090,7 +2090,6 @@ msgid "Pending message released"
 msgstr "Ragioni per l'attesa:"
 
 #: common/forum/ForumAdmin.class.php:458
-#: common/forum/ForumMessage.class.php:183
 #: common/forum/ForumMessage.class.php:276
 msgid "Couldn't Update Master Thread parent with current time"
 msgstr "Impossibile aggiornare il thread principale con l'ora corrente"
@@ -2347,8 +2346,8 @@ msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr ""
 
 #: common/forum/ForumMessage.class.php:60
-msgid "ForumMessage:: No Valid Forum Object"
-msgstr "ForumMessage:: Nessuno oggetto forum valido"
+msgid "No Valid Forum Object"
+msgstr "Nessuno oggetto forum valido"
 
 #: common/forum/ForumMessage.class.php:88
 msgid "Group_forum_id in db result does not match Forum Object"
@@ -2363,15 +2362,18 @@ msgstr "È fallita la richiesta del prossimo thread_id"
 #: common/forum/ForumMessage.class.php:215
 #: common/forum/ForumMessage.class.php:221
 #: common/forum/ForumMessage.class.php:315
-msgid "ForumMessage::create() Posting Failed"
-msgstr "ForumMessage::create() Posting Failed"
+msgid "Posting Failed"
+msgstr "Posting Failed"
 
 #: common/forum/ForumMessage.class.php:141
 #: common/forum/ForumMessage.class.php:226
 #: common/forum/ForumMessage.class.php:327
-msgid "ForumMessage::create() Unable to get new message id"
-msgstr ""
-"ForumMessage::create() Impossibile ottenere un nuovo ID per il messaggio"
+msgid "Unable to get new message id"
+msgstr "Impossibile ottenere un nuovo ID per il messaggio"
+
+#: common/forum/ForumMessage.class.php:183
+msgid "Could not Update Master Thread parent with current time"
+msgstr "Impossibile aggiornare il thread principale con l'ora corrente"
 
 #: common/forum/ForumMessage.class.php:194
 #: common/forum/ForumMessage.class.php:287
@@ -2380,9 +2382,9 @@ msgid "Could Not Update Parent"
 msgstr "Impossibile aggiornare il messaggio padre"
 
 #: common/forum/ForumMessage.class.php:357
-#, fuzzy
-msgid "Error: a forum message must iclude a message body and a subject."
-msgstr "Deve includere un oggetto e il contenuto"
+#: common/forum/ForumMessage.class.php:802
+msgid "Error: a forum message must include a message body and a subject."
+msgstr "Deve includere un oggetto e il contenuto."
 
 #: common/forum/ForumMessage.class.php:373
 msgid "ForumMessage::create() No Valid ParentMessage Object"
@@ -2390,9 +2392,6 @@ msgstr "ForumMessage::create() nessun oggetto padre valido"
 
 #: common/forum/ForumMessage.class.php:407
 #: common/forum/ForumMessage.class.php:426
-msgid "ForumMessage::fetchData() Invalid MessageID"
-msgstr "ForumMessage::fetchData() MessageID non valido"
-
 #: common/forum/ForumMessage.class.php:579
 msgid "Invalid Message ID"
 msgstr "ID messaggio non valido"
@@ -2451,11 +2450,6 @@ msgstr ""
 "Stai ricevendo questa e-mail poiché hai scelto la notifica di questo forum.\n"
 "Per terminare la notifica, fai il login a %s e vai alla pagina: \n"
 "%s\n"
-
-#: common/forum/ForumMessage.class.php:802
-#, fuzzy
-msgid "Error: a forum message must include a message body and a subject."
-msgstr "Deve includere un oggetto e il contenuto"
 
 #: common/frs/FRSFile.class.php:120 common/frs/include/frs_utils.php:249
 msgid "FRSFile Name Must Be At Least 3 Characters"
@@ -23185,6 +23179,23 @@ msgstr "Non è stato inserito alcun file"
 msgid "That user does not exist."
 msgstr "La query non esiste"
 
+#~ msgid "ForumMessage:: No Valid Forum Object"
+#~ msgstr "ForumMessage:: Nessuno oggetto forum valido"
+
+#~ msgid "ForumMessage::create() Posting Failed"
+#~ msgstr "ForumMessage::create() Posting Failed"
+
+#~ msgid "ForumMessage::create() Unable to get new message id"
+#~ msgstr ""
+#~ "ForumMessage::create() Impossibile ottenere un nuovo ID per il messaggio"
+
+#, fuzzy
+#~ msgid "Error: a forum message must iclude a message body and a subject."
+#~ msgstr "Deve includere un oggetto e il contenuto"
+
+#~ msgid "ForumMessage::fetchData() Invalid MessageID"
+#~ msgstr "ForumMessage::fetchData() MessageID non valido"
+
 #~ msgid "%1$s:: No Valid Group Object"
 #~ msgstr "%1$s:: Nessun oggetto Gruppo valido"
 
@@ -23347,20 +23358,8 @@ msgstr "La query non esiste"
 #~ msgid "Request to Join Project %1$s"
 #~ msgstr "Richiedi di partecipare al progetto %1$s"
 
-#~ msgid "Could not Update Master Thread parent with current time"
-#~ msgstr "Impossibile aggiornare il thread principale con l'ora corrente"
-
 #~ msgid "Error: this news item was not found"
 #~ msgstr "Errore - questa notizia non è stata trovata"
-
-#~ msgid "No Valid Forum Object"
-#~ msgstr "Nessuno oggetto forum valido"
-
-#~ msgid "Posting Failed"
-#~ msgstr "Posting Failed"
-
-#~ msgid "Unable to get new message id"
-#~ msgstr "Impossibile ottenere un nuovo ID per il messaggio"
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "Deve includere un oggetto e il contenuto"

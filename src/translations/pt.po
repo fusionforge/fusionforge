@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:08+0200\n"
+"POT-Creation-Date: 2013-06-26 19:22+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1945,7 +1945,6 @@ msgid "Pending message released"
 msgstr ""
 
 #: common/forum/ForumAdmin.class.php:458
-#: common/forum/ForumMessage.class.php:183
 #: common/forum/ForumMessage.class.php:276
 msgid "Couldn't Update Master Thread parent with current time"
 msgstr "Não pude Atualizar o Thread Mestre Principal com a hora atual"
@@ -2193,8 +2192,8 @@ msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr ""
 
 #: common/forum/ForumMessage.class.php:60
-msgid "ForumMessage:: No Valid Forum Object"
-msgstr "ForumMessage:: Nenhum Objeto de Fórum Válido"
+msgid "No Valid Forum Object"
+msgstr "Nenhum Objeto de Fórum Válido"
 
 #: common/forum/ForumMessage.class.php:88
 msgid "Group_forum_id in db result does not match Forum Object"
@@ -2209,14 +2208,18 @@ msgstr "Obtenção do próximo thread_id falhou"
 #: common/forum/ForumMessage.class.php:215
 #: common/forum/ForumMessage.class.php:221
 #: common/forum/ForumMessage.class.php:315
-msgid "ForumMessage::create() Posting Failed"
-msgstr "ForumMessage::create() Postagem Falhou"
+msgid "Posting Failed"
+msgstr "Postagem Falhou"
 
 #: common/forum/ForumMessage.class.php:141
 #: common/forum/ForumMessage.class.php:226
 #: common/forum/ForumMessage.class.php:327
-msgid "ForumMessage::create() Unable to get new message id"
-msgstr "ForumMessage::create() Incapaz de obter nova id de mensagem"
+msgid "Unable to get new message id"
+msgstr "Incapaz de obter nova id de mensagem"
+
+#: common/forum/ForumMessage.class.php:183
+msgid "Could not Update Master Thread parent with current time"
+msgstr "Não pude Atualizar o Thread Mestre Principal com a hora atual"
 
 #: common/forum/ForumMessage.class.php:194
 #: common/forum/ForumMessage.class.php:287
@@ -2225,8 +2228,9 @@ msgid "Could Not Update Parent"
 msgstr "Não Pude Atualizar o Principal"
 
 #: common/forum/ForumMessage.class.php:357
-msgid "Error: a forum message must iclude a message body and a subject."
-msgstr ""
+#: common/forum/ForumMessage.class.php:802
+msgid "Error: a forum message must include a message body and a subject."
+msgstr "Precisa Incluir Um Corpo de Mensagem e um Assunto."
 
 #: common/forum/ForumMessage.class.php:373
 msgid "ForumMessage::create() No Valid ParentMessage Object"
@@ -2234,9 +2238,6 @@ msgstr "ForumMessage::create() Nenhum Objeto ParentMessage válido"
 
 #: common/forum/ForumMessage.class.php:407
 #: common/forum/ForumMessage.class.php:426
-msgid "ForumMessage::fetchData() Invalid MessageID"
-msgstr "ForumMessage::fetchData() MessageID Inválido"
-
 #: common/forum/ForumMessage.class.php:579
 msgid "Invalid Message ID"
 msgstr ""
@@ -2279,10 +2280,6 @@ msgid ""
 "You are receiving this email because you elected to monitor this forum.\n"
 "To stop monitoring this forum, login to %s and visit: \n"
 "%s\n"
-msgstr ""
-
-#: common/forum/ForumMessage.class.php:802
-msgid "Error: a forum message must include a message body and a subject."
 msgstr ""
 
 #: common/frs/FRSFile.class.php:120 common/frs/include/frs_utils.php:249
@@ -21407,6 +21404,18 @@ msgstr ""
 msgid "That user does not exist."
 msgstr ""
 
+#~ msgid "ForumMessage:: No Valid Forum Object"
+#~ msgstr "ForumMessage:: Nenhum Objeto de Fórum Válido"
+
+#~ msgid "ForumMessage::create() Posting Failed"
+#~ msgstr "ForumMessage::create() Postagem Falhou"
+
+#~ msgid "ForumMessage::create() Unable to get new message id"
+#~ msgstr "ForumMessage::create() Incapaz de obter nova id de mensagem"
+
+#~ msgid "ForumMessage::fetchData() Invalid MessageID"
+#~ msgstr "ForumMessage::fetchData() MessageID Inválido"
+
 #~ msgid "%1$s:: No Valid Group Object"
 #~ msgstr "%1$s:: Nenhum Objeto de Grupo Válido"
 
@@ -21422,9 +21431,6 @@ msgstr ""
 #~ msgid "Add Forum"
 #~ msgstr "Adicionar Fórum"
 
-#~ msgid "Could not Update Master Thread parent with current time"
-#~ msgstr "Não pude Atualizar o Thread Mestre Principal com a hora atual"
-
 #~ msgid "Error Adding Forum"
 #~ msgstr "Erro Adicionando Fórum"
 
@@ -21436,15 +21442,6 @@ msgstr ""
 
 #~ msgid "You are posting anonymously because you are not"
 #~ msgstr "Você está postando anonimamente porque você não está"
-
-#~ msgid "No Valid Forum Object"
-#~ msgstr "Nenhum Objeto de Fórum Válido"
-
-#~ msgid "Posting Failed"
-#~ msgstr "Postagem Falhou"
-
-#~ msgid "Unable to get new message id"
-#~ msgstr "Incapaz de obter nova id de mensagem"
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "Precisa Incluir Um Corpo de Mensagem e um Assunto"
@@ -22421,3 +22418,6 @@ msgstr ""
 
 #~ msgid "Invalid DocumentGroup ID"
 #~ msgstr "ID de Grupo de Documentos Inválida"
+
+#~ msgid "Error Creating %1$s"
+#~ msgstr "Erro Criando %1$s"

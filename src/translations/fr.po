@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:08+0200\n"
+"POT-Creation-Date: 2013-06-26 19:22+0200\n"
 "PO-Revision-Date: 2013-05-23 16:06+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1972,7 +1972,6 @@ msgid "Pending message released"
 msgstr "Message en attente validé"
 
 #: common/forum/ForumAdmin.class.php:458
-#: common/forum/ForumMessage.class.php:183
 #: common/forum/ForumMessage.class.php:276
 msgid "Couldn't Update Master Thread parent with current time"
 msgstr ""
@@ -2230,8 +2229,8 @@ msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr "Veuillez vous <a href=\"%1$s\">connecter</a>"
 
 #: common/forum/ForumMessage.class.php:60
-msgid "ForumMessage:: No Valid Forum Object"
-msgstr "ForumMessage:: Pas d'objet Forum valide"
+msgid "No Valid Forum Object"
+msgstr "Pas d'objet Forum valide"
 
 #: common/forum/ForumMessage.class.php:88
 msgid "Group_forum_id in db result does not match Forum Object"
@@ -2248,15 +2247,20 @@ msgstr "Échec lors de la récupération du thread_id suivant"
 #: common/forum/ForumMessage.class.php:215
 #: common/forum/ForumMessage.class.php:221
 #: common/forum/ForumMessage.class.php:315
-msgid "ForumMessage::create() Posting Failed"
-msgstr "ForumMessage::create() L'ajout de message a échoué"
+msgid "Posting Failed"
+msgstr "L'ajout de message a échoué"
 
 #: common/forum/ForumMessage.class.php:141
 #: common/forum/ForumMessage.class.php:226
 #: common/forum/ForumMessage.class.php:327
-msgid "ForumMessage::create() Unable to get new message id"
+msgid "Unable to get new message id"
+msgstr "Impossible d'obtenir un nouvel identifiant de message"
+
+#: common/forum/ForumMessage.class.php:183
+msgid "Could not Update Master Thread parent with current time"
 msgstr ""
-"ForumMessage::create() Impossible d'obtenir un nouvel identifiant de message"
+"Échec lors de la mise à jour du fil de discussion principal avec la date "
+"courante"
 
 #: common/forum/ForumMessage.class.php:194
 #: common/forum/ForumMessage.class.php:287
@@ -2265,9 +2269,10 @@ msgid "Could Not Update Parent"
 msgstr "Échec lors de la mise à jour du parent"
 
 #: common/forum/ForumMessage.class.php:357
-#, fuzzy
-msgid "Error: a forum message must iclude a message body and a subject."
-msgstr "Doit contenir un sujet et un corps de message"
+#: common/forum/ForumMessage.class.php:802
+msgid "Error: a forum message must include a message body and a subject."
+msgstr ""
+"Erreur : un message de forum doit contenir un sujet et un corps de message."
 
 #: common/forum/ForumMessage.class.php:373
 msgid "ForumMessage::create() No Valid ParentMessage Object"
@@ -2275,9 +2280,6 @@ msgstr "ForumMessage::create() Pas d'objet ParentMessage valide"
 
 #: common/forum/ForumMessage.class.php:407
 #: common/forum/ForumMessage.class.php:426
-msgid "ForumMessage::fetchData() Invalid MessageID"
-msgstr "ForumMessage::fetchData() Identifiant de message invalide"
-
 #: common/forum/ForumMessage.class.php:579
 msgid "Invalid Message ID"
 msgstr "Identifiant de message invalide"
@@ -2337,11 +2339,6 @@ msgstr ""
 "Vous recevez ce message suite à votre choix de surveiller ce forum.\n"
 "Pour interrompre la surveillance, connectez-vous à %s et suivez ce lien :\n"
 "%s\n"
-
-#: common/forum/ForumMessage.class.php:802
-#, fuzzy
-msgid "Error: a forum message must include a message body and a subject."
-msgstr "Doit contenir un sujet et un corps de message"
 
 #: common/frs/FRSFile.class.php:120 common/frs/include/frs_utils.php:249
 msgid "FRSFile Name Must Be At Least 3 Characters"
@@ -22771,6 +22768,24 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "That user does not exist."
 msgstr "Cet utilisateur n'existe pas"
 
+#~ msgid "ForumMessage:: No Valid Forum Object"
+#~ msgstr "ForumMessage:: Pas d'objet Forum valide"
+
+#~ msgid "ForumMessage::create() Posting Failed"
+#~ msgstr "ForumMessage::create() L'ajout de message a échoué"
+
+#~ msgid "ForumMessage::create() Unable to get new message id"
+#~ msgstr ""
+#~ "ForumMessage::create() Impossible d'obtenir un nouvel identifiant de "
+#~ "message"
+
+#, fuzzy
+#~ msgid "Error: a forum message must iclude a message body and a subject."
+#~ msgstr "Doit contenir un sujet et un corps de message"
+
+#~ msgid "ForumMessage::fetchData() Invalid MessageID"
+#~ msgstr "ForumMessage::fetchData() Identifiant de message invalide"
+
 #~ msgid "%1$s:: No Valid Group Object"
 #~ msgstr "%1$s : Pas d'objet Groupe valide"
 
@@ -23091,11 +23106,6 @@ msgstr "Cet utilisateur n'existe pas"
 #~ msgid "Pending message deleted"
 #~ msgstr "Message en attente supprimé"
 
-#~ msgid "Could not Update Master Thread parent with current time"
-#~ msgstr ""
-#~ "Échec lors de la mise à jour du fil de discussion principal avec la date "
-#~ "courante"
-
 #~ msgid "Error Adding Forum"
 #~ msgstr "Erreur lors de l'ajout d'un forum"
 
@@ -23186,15 +23196,6 @@ msgstr "Cet utilisateur n'existe pas"
 
 #~ msgid "Anonymous message posted by "
 #~ msgstr "Message anonyme posté par "
-
-#~ msgid "No Valid Forum Object"
-#~ msgstr "Pas d'objet Forum valide"
-
-#~ msgid "Posting Failed"
-#~ msgstr "L'ajout de message a échoué"
-
-#~ msgid "Unable to get new message id"
-#~ msgstr "Impossible d'obtenir un nouvel identifiant de message"
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "Doit contenir un sujet et un corps de message"

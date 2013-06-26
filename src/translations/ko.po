@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:08+0200\n"
+"POT-Creation-Date: 2013-06-26 19:22+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2080,7 +2080,6 @@ msgid "Pending message released"
 msgstr "대기중인 제출이유:"
 
 #: common/forum/ForumAdmin.class.php:458
-#: common/forum/ForumMessage.class.php:183
 #: common/forum/ForumMessage.class.php:276
 msgid "Couldn't Update Master Thread parent with current time"
 msgstr "Couldn't Update Master Thread parent with current time"
@@ -2338,8 +2337,9 @@ msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr ""
 
 #: common/forum/ForumMessage.class.php:60
-msgid "ForumMessage:: No Valid Forum Object"
-msgstr "ForumMessage:: No Valid Forum Object"
+#, fuzzy
+msgid "No Valid Forum Object"
+msgstr "%1$s:: 유효한 그룹 객체가 없습니다."
 
 #: common/forum/ForumMessage.class.php:88
 msgid "Group_forum_id in db result does not match Forum Object"
@@ -2354,14 +2354,20 @@ msgstr "Getting next thread_id failed"
 #: common/forum/ForumMessage.class.php:215
 #: common/forum/ForumMessage.class.php:221
 #: common/forum/ForumMessage.class.php:315
-msgid "ForumMessage::create() Posting Failed"
-msgstr "ForumMessage::create() Posting Failed"
+#, fuzzy
+msgid "Posting Failed"
+msgstr "존재하는 파일"
 
 #: common/forum/ForumMessage.class.php:141
 #: common/forum/ForumMessage.class.php:226
 #: common/forum/ForumMessage.class.php:327
-msgid "ForumMessage::create() Unable to get new message id"
+#, fuzzy
+msgid "Unable to get new message id"
 msgstr "ForumMessage::create() Unable to get new message id"
+
+#: common/forum/ForumMessage.class.php:183
+msgid "Could not Update Master Thread parent with current time"
+msgstr ""
 
 #: common/forum/ForumMessage.class.php:194
 #: common/forum/ForumMessage.class.php:287
@@ -2370,8 +2376,9 @@ msgid "Could Not Update Parent"
 msgstr "Could Not Update Parent"
 
 #: common/forum/ForumMessage.class.php:357
+#: common/forum/ForumMessage.class.php:802
 #, fuzzy
-msgid "Error: a forum message must iclude a message body and a subject."
+msgid "Error: a forum message must include a message body and a subject."
 msgstr "Must Include A Message Body And Subject"
 
 #: common/forum/ForumMessage.class.php:373
@@ -2380,9 +2387,6 @@ msgstr "ForumMessage::create() No Valid ParentMessage Object"
 
 #: common/forum/ForumMessage.class.php:407
 #: common/forum/ForumMessage.class.php:426
-msgid "ForumMessage::fetchData() Invalid MessageID"
-msgstr "ForumMessage::fetchData() Invalid MessageID"
-
 #: common/forum/ForumMessage.class.php:579
 msgid "Invalid Message ID"
 msgstr ""
@@ -2426,11 +2430,6 @@ msgid ""
 "To stop monitoring this forum, login to %s and visit: \n"
 "%s\n"
 msgstr ""
-
-#: common/forum/ForumMessage.class.php:802
-#, fuzzy
-msgid "Error: a forum message must include a message body and a subject."
-msgstr "Must Include A Message Body And Subject"
 
 #: common/frs/FRSFile.class.php:120 common/frs/include/frs_utils.php:249
 msgid "FRSFile Name Must Be At Least 3 Characters"
@@ -22880,6 +22879,19 @@ msgstr "사용자ID"
 msgid "That user does not exist."
 msgstr "분류 기준이 존재하지 않습니다."
 
+#~ msgid "ForumMessage:: No Valid Forum Object"
+#~ msgstr "ForumMessage:: No Valid Forum Object"
+
+#~ msgid "ForumMessage::create() Posting Failed"
+#~ msgstr "ForumMessage::create() Posting Failed"
+
+#, fuzzy
+#~ msgid "Error: a forum message must iclude a message body and a subject."
+#~ msgstr "Must Include A Message Body And Subject"
+
+#~ msgid "ForumMessage::fetchData() Invalid MessageID"
+#~ msgstr "ForumMessage::fetchData() Invalid MessageID"
+
 #~ msgid "%1$s:: No Valid Group Object"
 #~ msgstr "%1$s:: 유효한 그룹 객체가 없습니다."
 
@@ -23143,10 +23155,6 @@ msgstr "분류 기준이 존재하지 않습니다."
 #, fuzzy
 #~ msgid "Repository name: "
 #~ msgstr "SCM 저장소"
-
-#, fuzzy
-#~ msgid "No Valid Group Object"
-#~ msgstr "%1$s:: 유효한 그룹 객체가 없습니다."
 
 #, fuzzy
 #~ msgid "Project:"

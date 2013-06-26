@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:08+0200\n"
+"POT-Creation-Date: 2013-06-26 19:22+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2087,7 +2087,6 @@ msgid "Pending message released"
 msgstr "未審核原因："
 
 #: common/forum/ForumAdmin.class.php:458
-#: common/forum/ForumMessage.class.php:183
 #: common/forum/ForumMessage.class.php:276
 msgid "Couldn't Update Master Thread parent with current time"
 msgstr "目前無法更新 Master Thread parent"
@@ -2345,7 +2344,7 @@ msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr ""
 
 #: common/forum/ForumMessage.class.php:60
-msgid "ForumMessage:: No Valid Forum Object"
+msgid "No Valid Forum Object"
 msgstr "討論區資訊：無效的討論區物件"
 
 #: common/forum/ForumMessage.class.php:88
@@ -2361,14 +2360,18 @@ msgstr "無法獲取下一個 thread_id"
 #: common/forum/ForumMessage.class.php:215
 #: common/forum/ForumMessage.class.php:221
 #: common/forum/ForumMessage.class.php:315
-msgid "ForumMessage::create() Posting Failed"
-msgstr "ForumMessage::create() 張貼失敗"
+msgid "Posting Failed"
+msgstr "張貼失敗"
 
 #: common/forum/ForumMessage.class.php:141
 #: common/forum/ForumMessage.class.php:226
 #: common/forum/ForumMessage.class.php:327
-msgid "ForumMessage::create() Unable to get new message id"
-msgstr "ForumMessage::create() 無法獲得文章編號"
+msgid "Unable to get new message id"
+msgstr "無法獲得文章編號"
+
+#: common/forum/ForumMessage.class.php:183
+msgid "Could not Update Master Thread parent with current time"
+msgstr "目前無法更新 Master Thread parent"
 
 #: common/forum/ForumMessage.class.php:194
 #: common/forum/ForumMessage.class.php:287
@@ -2377,8 +2380,8 @@ msgid "Could Not Update Parent"
 msgstr "無法更新上層文章"
 
 #: common/forum/ForumMessage.class.php:357
-#, fuzzy
-msgid "Error: a forum message must iclude a message body and a subject."
+#: common/forum/ForumMessage.class.php:802
+msgid "Error: a forum message must include a message body and a subject."
 msgstr "必須包括文章標題和內容"
 
 #: common/forum/ForumMessage.class.php:373
@@ -2387,9 +2390,6 @@ msgstr "ForumMessage::create() 無效的 ParentMessage 物件"
 
 #: common/forum/ForumMessage.class.php:407
 #: common/forum/ForumMessage.class.php:426
-msgid "ForumMessage::fetchData() Invalid MessageID"
-msgstr "ForumMessage::fetchData() 無效的文章編號"
-
 #: common/forum/ForumMessage.class.php:579
 msgid "Invalid Message ID"
 msgstr ""
@@ -2433,11 +2433,6 @@ msgid ""
 "To stop monitoring this forum, login to %s and visit: \n"
 "%s\n"
 msgstr ""
-
-#: common/forum/ForumMessage.class.php:802
-#, fuzzy
-msgid "Error: a forum message must include a message body and a subject."
-msgstr "必須包括文章標題和內容"
 
 #: common/frs/FRSFile.class.php:120 common/frs/include/frs_utils.php:249
 msgid "FRSFile Name Must Be At Least 3 Characters"
@@ -22985,6 +22980,22 @@ msgstr "帳號"
 msgid "That user does not exist."
 msgstr "查詢不存在"
 
+#~ msgid "ForumMessage:: No Valid Forum Object"
+#~ msgstr "討論區資訊：無效的討論區物件"
+
+#~ msgid "ForumMessage::create() Posting Failed"
+#~ msgstr "ForumMessage::create() 張貼失敗"
+
+#~ msgid "ForumMessage::create() Unable to get new message id"
+#~ msgstr "ForumMessage::create() 無法獲得文章編號"
+
+#, fuzzy
+#~ msgid "Error: a forum message must iclude a message body and a subject."
+#~ msgstr "必須包括文章標題和內容"
+
+#~ msgid "ForumMessage::fetchData() Invalid MessageID"
+#~ msgstr "ForumMessage::fetchData() 無效的文章編號"
+
 #~ msgid "%1$s:: No Valid Group Object"
 #~ msgstr "%1$s：沒有有效的群組物件"
 
@@ -23184,20 +23195,8 @@ msgstr "查詢不存在"
 #~ msgid "Request to Join Project %1$s"
 #~ msgstr "請求參與專案 %1$s"
 
-#~ msgid "Could not Update Master Thread parent with current time"
-#~ msgstr "目前無法更新 Master Thread parent"
-
 #~ msgid "Error: this news item was not found"
 #~ msgstr "錯誤 - 沒發現新聞"
-
-#~ msgid "No Valid Forum Object"
-#~ msgstr "討論區資訊：無效的討論區物件"
-
-#~ msgid "Posting Failed"
-#~ msgstr "張貼失敗"
-
-#~ msgid "Unable to get new message id"
-#~ msgstr "無法獲得文章編號"
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "必須包括文章標題和內容"

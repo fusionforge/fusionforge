@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:08+0200\n"
+"POT-Creation-Date: 2013-06-26 19:22+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -2092,7 +2092,6 @@ msgid "Pending message released"
 msgstr "Forum aus Warteliste Freigegeben "
 
 #: common/forum/ForumAdmin.class.php:458
-#: common/forum/ForumMessage.class.php:183
 #: common/forum/ForumMessage.class.php:276
 msgid "Couldn't Update Master Thread parent with current time"
 msgstr "Konnte die aktuelle Zeit nicht setzen"
@@ -2354,7 +2353,7 @@ msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr "Bitte <a href=\"%1$s\">loggen Sie ein</a>"
 
 #: common/forum/ForumMessage.class.php:60
-msgid "ForumMessage:: No Valid Forum Object"
+msgid "No Valid Forum Object"
 msgstr "Forennachricht: Kein gültiges Foren-Objekt"
 
 #: common/forum/ForumMessage.class.php:88
@@ -2372,15 +2371,19 @@ msgstr "Das Auslesen der ID des nächsten Diskussionsfadens ist fehlgeschlagen"
 #: common/forum/ForumMessage.class.php:215
 #: common/forum/ForumMessage.class.php:221
 #: common/forum/ForumMessage.class.php:315
-msgid "ForumMessage::create() Posting Failed"
+msgid "Posting Failed"
 msgstr "Forennachricht:\"create()\" Posting fehlgeschlagen"
 
 #: common/forum/ForumMessage.class.php:141
 #: common/forum/ForumMessage.class.php:226
 #: common/forum/ForumMessage.class.php:327
-msgid "ForumMessage::create() Unable to get new message id"
+msgid "Unable to get new message id"
 msgstr ""
 "Forennachricht:\"create()\" Konnte die neue Nachrichten-ID nicht bekommen"
+
+#: common/forum/ForumMessage.class.php:183
+msgid "Could not Update Master Thread parent with current time"
+msgstr "Konnte die aktuelle Zeit nicht setzen"
 
 #: common/forum/ForumMessage.class.php:194
 #: common/forum/ForumMessage.class.php:287
@@ -2389,9 +2392,10 @@ msgid "Could Not Update Parent"
 msgstr "Konnte das Oberforum nicht aktualisieren"
 
 #: common/forum/ForumMessage.class.php:357
-#, fuzzy
-msgid "Error: a forum message must iclude a message body and a subject."
-msgstr "Die Nachricht muss einen Hauptteil (Body) und einen Betreff beinhalten"
+#: common/forum/ForumMessage.class.php:802
+msgid "Error: a forum message must include a message body and a subject."
+msgstr ""
+"Die Nachricht muss einen Hauptteil (Body) und einen Betreff beinhalten."
 
 #: common/forum/ForumMessage.class.php:373
 msgid "ForumMessage::create() No Valid ParentMessage Object"
@@ -2399,9 +2403,6 @@ msgstr "Forennachricht:\"create()\" kein gültiges Vorgänger-Nachrichten-Objekt
 
 #: common/forum/ForumMessage.class.php:407
 #: common/forum/ForumMessage.class.php:426
-msgid "ForumMessage::fetchData() Invalid MessageID"
-msgstr "Forennachricht:\"fetchData()\" Ungültige Nachrichten-ID"
-
 #: common/forum/ForumMessage.class.php:579
 msgid "Invalid Message ID"
 msgstr "Ungültige Mitteilungs - Identität"
@@ -2463,11 +2464,6 @@ msgstr ""
 "Um die Beobachtung des Forums wieder zu beenden, loggen Sie sich auf %s ein "
 "und besuchen Sie:  \n"
 "%s\n"
-
-#: common/forum/ForumMessage.class.php:802
-#, fuzzy
-msgid "Error: a forum message must include a message body and a subject."
-msgstr "Die Nachricht muss einen Hauptteil (Body) und einen Betreff beinhalten"
 
 #: common/frs/FRSFile.class.php:120 common/frs/include/frs_utils.php:249
 msgid "FRSFile Name Must Be At Least 3 Characters"
@@ -23442,6 +23438,24 @@ msgstr "Kein Benutzername angegeben"
 msgid "That user does not exist."
 msgstr "Dieser Nutzer existiert nicht."
 
+#~ msgid "ForumMessage:: No Valid Forum Object"
+#~ msgstr "Forennachricht: Kein gültiges Foren-Objekt"
+
+#~ msgid "ForumMessage::create() Posting Failed"
+#~ msgstr "Forennachricht:\"create()\" Posting fehlgeschlagen"
+
+#~ msgid "ForumMessage::create() Unable to get new message id"
+#~ msgstr ""
+#~ "Forennachricht:\"create()\" Konnte die neue Nachrichten-ID nicht bekommen"
+
+#, fuzzy
+#~ msgid "Error: a forum message must iclude a message body and a subject."
+#~ msgstr ""
+#~ "Die Nachricht muss einen Hauptteil (Body) und einen Betreff beinhalten"
+
+#~ msgid "ForumMessage::fetchData() Invalid MessageID"
+#~ msgstr "Forennachricht:\"fetchData()\" Ungültige Nachrichten-ID"
+
 #~ msgid "%1$s:: No Valid Group Object"
 #~ msgstr "%1$s:: Kein gültiges Gruppen-Objekt"
 
@@ -23713,9 +23727,6 @@ msgstr "Dieser Nutzer existiert nicht."
 #~ msgstr[0] "%s Nachricht gelöscht"
 #~ msgstr[1] "%s Nachrichten gelöscht"
 
-#~ msgid "Could not Update Master Thread parent with current time"
-#~ msgstr "Konnte die aktuelle Zeit nicht setzen"
-
 #~ msgid "Error: this news item was not found"
 #~ msgstr "Fehler - diese Nachricht wurde nicht gefunden"
 
@@ -23728,16 +23739,6 @@ msgstr "Dieser Nutzer existiert nicht."
 #~ msgstr ""
 #~ "Sie könnten einen Beitrag posten, wenn Sie <a href=\"%s\">angemeldet</a> "
 #~ "wären."
-
-#~ msgid "No Valid Forum Object"
-#~ msgstr "Forennachricht: Kein gültiges Foren-Objekt"
-
-#~ msgid "Posting Failed"
-#~ msgstr "Forennachricht:\"create()\" Posting fehlgeschlagen"
-
-#~ msgid "Unable to get new message id"
-#~ msgstr ""
-#~ "Forennachricht:\"create()\" Konnte die neue Nachrichten-ID nicht bekommen"
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr ""

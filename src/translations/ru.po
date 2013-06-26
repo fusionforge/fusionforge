@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:08+0200\n"
+"POT-Creation-Date: 2013-06-26 19:22+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2089,7 +2089,6 @@ msgid "Pending message released"
 msgstr "Ожидание открытия форума"
 
 #: common/forum/ForumAdmin.class.php:458
-#: common/forum/ForumMessage.class.php:183
 #: common/forum/ForumMessage.class.php:276
 msgid "Couldn't Update Master Thread parent with current time"
 msgstr "Временно недоступно создание заглавной темы"
@@ -2347,8 +2346,8 @@ msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr ""
 
 #: common/forum/ForumMessage.class.php:60
-msgid "ForumMessage:: No Valid Forum Object"
-msgstr "ForumMessage:: Неправильный объект форума"
+msgid "No Valid Forum Object"
+msgstr "Неправильный объект форума"
 
 #: common/forum/ForumMessage.class.php:88
 msgid "Group_forum_id in db result does not match Forum Object"
@@ -2363,14 +2362,18 @@ msgstr "Невозможно получить идентификатор"
 #: common/forum/ForumMessage.class.php:215
 #: common/forum/ForumMessage.class.php:221
 #: common/forum/ForumMessage.class.php:315
-msgid "ForumMessage::create() Posting Failed"
+msgid "Posting Failed"
 msgstr "Ошибка при создании сообщения"
 
 #: common/forum/ForumMessage.class.php:141
 #: common/forum/ForumMessage.class.php:226
 #: common/forum/ForumMessage.class.php:327
-msgid "ForumMessage::create() Unable to get new message id"
+msgid "Unable to get new message id"
 msgstr "Ошибка при получении идентификатора"
+
+#: common/forum/ForumMessage.class.php:183
+msgid "Could not Update Master Thread parent with current time"
+msgstr "Временно недоступно создание заглавной темы"
 
 #: common/forum/ForumMessage.class.php:194
 #: common/forum/ForumMessage.class.php:287
@@ -2379,9 +2382,9 @@ msgid "Could Not Update Parent"
 msgstr "Невозможно обновить структуру"
 
 #: common/forum/ForumMessage.class.php:357
-#, fuzzy
-msgid "Error: a forum message must iclude a message body and a subject."
-msgstr "Должен иметь тему и содержать текст сообщения"
+#: common/forum/ForumMessage.class.php:802
+msgid "Error: a forum message must include a message body and a subject."
+msgstr "Должен иметь тему и содержать текст сообщения."
 
 #: common/forum/ForumMessage.class.php:373
 msgid "ForumMessage::create() No Valid ParentMessage Object"
@@ -2389,9 +2392,6 @@ msgstr "ForumMessage::create() неправильное вложение"
 
 #: common/forum/ForumMessage.class.php:407
 #: common/forum/ForumMessage.class.php:426
-msgid "ForumMessage::fetchData() Invalid MessageID"
-msgstr "ForumMessage::fetchData() неправильный указатель в письме"
-
 #: common/forum/ForumMessage.class.php:579
 msgid "Invalid Message ID"
 msgstr "неправильный идентификатор письма"
@@ -2436,11 +2436,6 @@ msgid ""
 "To stop monitoring this forum, login to %s and visit: \n"
 "%s\n"
 msgstr ""
-
-#: common/forum/ForumMessage.class.php:802
-#, fuzzy
-msgid "Error: a forum message must include a message body and a subject."
-msgstr "Должен иметь тему и содержать текст сообщения"
 
 #: common/frs/FRSFile.class.php:120 common/frs/include/frs_utils.php:249
 msgid "FRSFile Name Must Be At Least 3 Characters"
@@ -23503,6 +23498,22 @@ msgstr "Имя участника обязательно"
 msgid "That user does not exist."
 msgstr "Пользователь с таким именем не существует."
 
+#~ msgid "ForumMessage:: No Valid Forum Object"
+#~ msgstr "ForumMessage:: Неправильный объект форума"
+
+#~ msgid "ForumMessage::create() Posting Failed"
+#~ msgstr "Ошибка при создании сообщения"
+
+#~ msgid "ForumMessage::create() Unable to get new message id"
+#~ msgstr "Ошибка при получении идентификатора"
+
+#, fuzzy
+#~ msgid "Error: a forum message must iclude a message body and a subject."
+#~ msgstr "Должен иметь тему и содержать текст сообщения"
+
+#~ msgid "ForumMessage::fetchData() Invalid MessageID"
+#~ msgstr "ForumMessage::fetchData() неправильный указатель в письме"
+
 #~ msgid "%1$s:: No Valid Group Object"
 #~ msgstr "%1$s:: Объект не соответствует группе"
 
@@ -23741,9 +23752,6 @@ msgstr "Пользователь с таким именем не существ�
 #~ msgstr[1] "%s удалено сообщений"
 #~ msgstr[2] "%s удаленных сообщений"
 
-#~ msgid "Could not Update Master Thread parent with current time"
-#~ msgstr "Временно недоступно создание заглавной темы"
-
 #~ msgid "Error: this news item was not found"
 #~ msgstr "Таких новостей не найдено"
 
@@ -23751,15 +23759,6 @@ msgstr "Пользователь с таким именем не существ�
 #~ msgstr ""
 #~ "Воспользуйтесь клавишей \"Обзор\" для указания пути к файлу который вы "
 #~ "желаете прикрепить"
-
-#~ msgid "No Valid Forum Object"
-#~ msgstr "Неправильный объект форума"
-
-#~ msgid "Posting Failed"
-#~ msgstr "Ошибка при создании сообщения"
-
-#~ msgid "Unable to get new message id"
-#~ msgstr "Ошибка при получении идентификатора"
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "Должен иметь тему и содержать текст сообщения"

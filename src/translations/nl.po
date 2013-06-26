@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:08+0200\n"
+"POT-Creation-Date: 2013-06-26 19:22+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2085,7 +2085,6 @@ msgid "Pending message released"
 msgstr "Reden in behandeling:"
 
 #: common/forum/ForumAdmin.class.php:458
-#: common/forum/ForumMessage.class.php:183
 #: common/forum/ForumMessage.class.php:276
 msgid "Couldn't Update Master Thread parent with current time"
 msgstr "Kan master thread parent niet aanpassen met huidige tijd"
@@ -2343,8 +2342,8 @@ msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr ""
 
 #: common/forum/ForumMessage.class.php:60
-msgid "ForumMessage:: No Valid Forum Object"
-msgstr "ForumMessage:: geen geldig forum object"
+msgid "No Valid Forum Object"
+msgstr "geen geldig forum object"
 
 #: common/forum/ForumMessage.class.php:88
 msgid "Group_forum_id in db result does not match Forum Object"
@@ -2360,14 +2359,18 @@ msgstr "Ophalen van volgend thread ID niet gelukt"
 #: common/forum/ForumMessage.class.php:215
 #: common/forum/ForumMessage.class.php:221
 #: common/forum/ForumMessage.class.php:315
-msgid "ForumMessage::create() Posting Failed"
-msgstr "ForumMessage::create() Plaatsen van bericht niet gelukt"
+msgid "Posting Failed"
+msgstr "Plaatsen van bericht niet gelukt"
 
 #: common/forum/ForumMessage.class.php:141
 #: common/forum/ForumMessage.class.php:226
 #: common/forum/ForumMessage.class.php:327
-msgid "ForumMessage::create() Unable to get new message id"
-msgstr "ForumMessage::create() Kan geen nieuw bericht ID krijgen"
+msgid "Unable to get new message id"
+msgstr "Kan geen nieuw bericht ID krijgen"
+
+#: common/forum/ForumMessage.class.php:183
+msgid "Could not Update Master Thread parent with current time"
+msgstr "Kan master thread parent niet aanpassen met huidige tijd"
 
 #: common/forum/ForumMessage.class.php:194
 #: common/forum/ForumMessage.class.php:287
@@ -2376,9 +2379,9 @@ msgid "Could Not Update Parent"
 msgstr "Kan parent niet aanpassen"
 
 #: common/forum/ForumMessage.class.php:357
-#, fuzzy
-msgid "Error: a forum message must iclude a message body and a subject."
-msgstr "Berichttekst en -onderwerp verplicht"
+#: common/forum/ForumMessage.class.php:802
+msgid "Error: a forum message must include a message body and a subject."
+msgstr "Berichttekst en -onderwerp verplicht."
 
 #: common/forum/ForumMessage.class.php:373
 msgid "ForumMessage::create() No Valid ParentMessage Object"
@@ -2386,9 +2389,6 @@ msgstr "ForumMessage::create() Geen geldig ParentMessage object"
 
 #: common/forum/ForumMessage.class.php:407
 #: common/forum/ForumMessage.class.php:426
-msgid "ForumMessage::fetchData() Invalid MessageID"
-msgstr "ForumMessage::fetchData() Ongeldig bericht ID"
-
 #: common/forum/ForumMessage.class.php:579
 msgid "Invalid Message ID"
 msgstr ""
@@ -2432,11 +2432,6 @@ msgid ""
 "To stop monitoring this forum, login to %s and visit: \n"
 "%s\n"
 msgstr ""
-
-#: common/forum/ForumMessage.class.php:802
-#, fuzzy
-msgid "Error: a forum message must include a message body and a subject."
-msgstr "Berichttekst en -onderwerp verplicht"
 
 #: common/frs/FRSFile.class.php:120 common/frs/include/frs_utils.php:249
 msgid "FRSFile Name Must Be At Least 3 Characters"
@@ -23184,6 +23179,22 @@ msgstr "Gebruikersnaam"
 msgid "That user does not exist."
 msgstr "Die Trove categorie bestaat niet"
 
+#~ msgid "ForumMessage:: No Valid Forum Object"
+#~ msgstr "ForumMessage:: geen geldig forum object"
+
+#~ msgid "ForumMessage::create() Posting Failed"
+#~ msgstr "ForumMessage::create() Plaatsen van bericht niet gelukt"
+
+#~ msgid "ForumMessage::create() Unable to get new message id"
+#~ msgstr "ForumMessage::create() Kan geen nieuw bericht ID krijgen"
+
+#, fuzzy
+#~ msgid "Error: a forum message must iclude a message body and a subject."
+#~ msgstr "Berichttekst en -onderwerp verplicht"
+
+#~ msgid "ForumMessage::fetchData() Invalid MessageID"
+#~ msgstr "ForumMessage::fetchData() Ongeldig bericht ID"
+
 #~ msgid "%1$s:: No Valid Group Object"
 #~ msgstr "%1$s:: Geen geldig Group object"
 
@@ -23389,20 +23400,8 @@ msgstr "Die Trove categorie bestaat niet"
 #~ msgid "Request to Join Project %1$s"
 #~ msgstr "Verzoek om deel te mogen nemen aan project %1$s"
 
-#~ msgid "Could not Update Master Thread parent with current time"
-#~ msgstr "Kan master thread parent niet aanpassen met huidige tijd"
-
 #~ msgid "Error: this news item was not found"
 #~ msgstr "Fout - nieuws onderwerp niet gevonden"
-
-#~ msgid "No Valid Forum Object"
-#~ msgstr "geen geldig forum object"
-
-#~ msgid "Posting Failed"
-#~ msgstr "Plaatsen van bericht niet gelukt"
-
-#~ msgid "Unable to get new message id"
-#~ msgstr "Kan geen nieuw bericht ID krijgen"
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "Berichttekst en -onderwerp verplicht"

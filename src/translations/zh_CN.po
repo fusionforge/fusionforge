@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:08+0200\n"
+"POT-Creation-Date: 2013-06-26 19:22+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2089,7 +2089,6 @@ msgid "Pending message released"
 msgstr "未审核原因："
 
 #: common/forum/ForumAdmin.class.php:458
-#: common/forum/ForumMessage.class.php:183
 #: common/forum/ForumMessage.class.php:276
 msgid "Couldn't Update Master Thread parent with current time"
 msgstr "目前无法更新 Master Thread parent"
@@ -2346,7 +2345,7 @@ msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr ""
 
 #: common/forum/ForumMessage.class.php:60
-msgid "ForumMessage:: No Valid Forum Object"
+msgid "No Valid Forum Object"
 msgstr "讨论区信息：无效的讨论区对象"
 
 #: common/forum/ForumMessage.class.php:88
@@ -2362,14 +2361,18 @@ msgstr "无法获取下一个 thread_id"
 #: common/forum/ForumMessage.class.php:215
 #: common/forum/ForumMessage.class.php:221
 #: common/forum/ForumMessage.class.php:315
-msgid "ForumMessage::create() Posting Failed"
-msgstr "ForumMessage::create() 张贴失败"
+msgid "Posting Failed"
+msgstr "张贴失败"
 
 #: common/forum/ForumMessage.class.php:141
 #: common/forum/ForumMessage.class.php:226
 #: common/forum/ForumMessage.class.php:327
-msgid "ForumMessage::create() Unable to get new message id"
-msgstr "ForumMessage::create() 无法获得文章编号"
+msgid "Unable to get new message id"
+msgstr "无法获得文章编号"
+
+#: common/forum/ForumMessage.class.php:183
+msgid "Could not Update Master Thread parent with current time"
+msgstr "目前无法更新 Master Thread parent"
 
 #: common/forum/ForumMessage.class.php:194
 #: common/forum/ForumMessage.class.php:287
@@ -2378,8 +2381,8 @@ msgid "Could Not Update Parent"
 msgstr "无法更新上层文章"
 
 #: common/forum/ForumMessage.class.php:357
-#, fuzzy
-msgid "Error: a forum message must iclude a message body and a subject."
+#: common/forum/ForumMessage.class.php:802
+msgid "Error: a forum message must include a message body and a subject."
 msgstr "必须包括文章标题和内容"
 
 #: common/forum/ForumMessage.class.php:373
@@ -2388,9 +2391,6 @@ msgstr "ForumMessage::create() 无效的 ParentMessage 对象"
 
 #: common/forum/ForumMessage.class.php:407
 #: common/forum/ForumMessage.class.php:426
-msgid "ForumMessage::fetchData() Invalid MessageID"
-msgstr "ForumMessage::fetchData() 无效的文章编号"
-
 #: common/forum/ForumMessage.class.php:579
 msgid "Invalid Message ID"
 msgstr "非法的消息ID"
@@ -2447,11 +2447,6 @@ msgid ""
 msgstr ""
 "你由于被选举出来监控这个论坛而接收到本邮件。如果想要停止监控这个论坛，请登"
 "录%s并访问:%s\n"
-
-#: common/forum/ForumMessage.class.php:802
-#, fuzzy
-msgid "Error: a forum message must include a message body and a subject."
-msgstr "必须包括文章标题和内容"
 
 #: common/frs/FRSFile.class.php:120 common/frs/include/frs_utils.php:249
 msgid "FRSFile Name Must Be At Least 3 Characters"
@@ -22966,6 +22961,22 @@ msgstr "帐号"
 msgid "That user does not exist."
 msgstr "查询不存在"
 
+#~ msgid "ForumMessage:: No Valid Forum Object"
+#~ msgstr "讨论区信息：无效的讨论区对象"
+
+#~ msgid "ForumMessage::create() Posting Failed"
+#~ msgstr "ForumMessage::create() 张贴失败"
+
+#~ msgid "ForumMessage::create() Unable to get new message id"
+#~ msgstr "ForumMessage::create() 无法获得文章编号"
+
+#, fuzzy
+#~ msgid "Error: a forum message must iclude a message body and a subject."
+#~ msgstr "必须包括文章标题和内容"
+
+#~ msgid "ForumMessage::fetchData() Invalid MessageID"
+#~ msgstr "ForumMessage::fetchData() 无效的文章编号"
+
 #~ msgid "%1$s:: No Valid Group Object"
 #~ msgstr "%1$s：没有有效的群组对象"
 
@@ -23165,20 +23176,8 @@ msgstr "查询不存在"
 #~ msgid "Request to Join Project %1$s"
 #~ msgstr "请求参与项目 %1$s"
 
-#~ msgid "Could not Update Master Thread parent with current time"
-#~ msgstr "目前无法更新 Master Thread parent"
-
 #~ msgid "Error: this news item was not found"
 #~ msgstr "错误 - 没发现新闻"
-
-#~ msgid "No Valid Forum Object"
-#~ msgstr "讨论区信息：无效的讨论区对象"
-
-#~ msgid "Posting Failed"
-#~ msgstr "张贴失败"
-
-#~ msgid "Unable to get new message id"
-#~ msgstr "无法获得文章编号"
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "必须包括文章标题和内容"

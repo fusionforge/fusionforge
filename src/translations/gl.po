@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:08+0200\n"
+"POT-Creation-Date: 2013-06-26 19:22+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -2088,7 +2088,6 @@ msgid "Pending message released"
 msgstr "Publicouse o foro pendente"
 
 #: common/forum/ForumAdmin.class.php:458
-#: common/forum/ForumMessage.class.php:183
 #: common/forum/ForumMessage.class.php:276
 msgid "Couldn't Update Master Thread parent with current time"
 msgstr "Non pode actualizar o fío mestre da mensaxe superior coa hora actual "
@@ -2349,8 +2348,8 @@ msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr "Por favor, <a href=\"%1$s\">conéctese</a>"
 
 #: common/forum/ForumMessage.class.php:60
-msgid "ForumMessage:: No Valid Forum Object"
-msgstr "ForumMessage:: non é un obxecto válido de foro "
+msgid "No Valid Forum Object"
+msgstr "non é un obxecto válido de foro "
 
 #: common/forum/ForumMessage.class.php:88
 msgid "Group_forum_id in db result does not match Forum Object"
@@ -2365,14 +2364,18 @@ msgstr "Produciuse un erro ao obter o thread _id seguinte "
 #: common/forum/ForumMessage.class.php:215
 #: common/forum/ForumMessage.class.php:221
 #: common/forum/ForumMessage.class.php:315
-msgid "ForumMessage::create() Posting Failed"
-msgstr "ForumMessage::create() errou a publicación do comentario "
+msgid "Posting Failed"
+msgstr "errou a publicación do comentario "
 
 #: common/forum/ForumMessage.class.php:141
 #: common/forum/ForumMessage.class.php:226
 #: common/forum/ForumMessage.class.php:327
-msgid "ForumMessage::create() Unable to get new message id"
+msgid "Unable to get new message id"
 msgstr "Mensaxe do foro::create() non se puido obter o id da mensaxe nova "
+
+#: common/forum/ForumMessage.class.php:183
+msgid "Could not Update Master Thread parent with current time"
+msgstr "Non pode actualizar o fío mestre da mensaxe superior coa hora actual "
 
 #: common/forum/ForumMessage.class.php:194
 #: common/forum/ForumMessage.class.php:287
@@ -2381,9 +2384,9 @@ msgid "Could Not Update Parent"
 msgstr "Non se pode actualizar a mensaxe superior "
 
 #: common/forum/ForumMessage.class.php:357
-#, fuzzy
-msgid "Error: a forum message must iclude a message body and a subject."
-msgstr "Debe incluír o contido e o asunto da mensaxe "
+#: common/forum/ForumMessage.class.php:802
+msgid "Error: a forum message must include a message body and a subject."
+msgstr "Debe incluír o contido e o asunto da mensaxe."
 
 #: common/forum/ForumMessage.class.php:373
 msgid "ForumMessage::create() No Valid ParentMessage Object"
@@ -2391,9 +2394,6 @@ msgstr "ForumMessage::create() o obxecto ParentMessage non é válido"
 
 #: common/forum/ForumMessage.class.php:407
 #: common/forum/ForumMessage.class.php:426
-msgid "ForumMessage::fetchData() Invalid MessageID"
-msgstr "ForumMessage::fetchData() o MessageID non é válido"
-
 #: common/forum/ForumMessage.class.php:579
 msgid "Invalid Message ID"
 msgstr "O ID da mensaxe non é válido"
@@ -2453,11 +2453,6 @@ msgstr ""
 "Recibe este correo porque escolleu monitorizar este foro.\n"
 "Para deixar de monitorizalo, conéctese a %s e visite: \n"
 "%s\n"
-
-#: common/forum/ForumMessage.class.php:802
-#, fuzzy
-msgid "Error: a forum message must include a message body and a subject."
-msgstr "Debe incluír o contido e o asunto da mensaxe "
 
 #: common/frs/FRSFile.class.php:120 common/frs/include/frs_utils.php:249
 msgid "FRSFile Name Must Be At Least 3 Characters"
@@ -23370,6 +23365,22 @@ msgstr "Non se introduciu un nome de usuario"
 msgid "That user does not exist."
 msgstr "Ese usuario non existe. "
 
+#~ msgid "ForumMessage:: No Valid Forum Object"
+#~ msgstr "ForumMessage:: non é un obxecto válido de foro "
+
+#~ msgid "ForumMessage::create() Posting Failed"
+#~ msgstr "ForumMessage::create() errou a publicación do comentario "
+
+#~ msgid "ForumMessage::create() Unable to get new message id"
+#~ msgstr "Mensaxe do foro::create() non se puido obter o id da mensaxe nova "
+
+#, fuzzy
+#~ msgid "Error: a forum message must iclude a message body and a subject."
+#~ msgstr "Debe incluír o contido e o asunto da mensaxe "
+
+#~ msgid "ForumMessage::fetchData() Invalid MessageID"
+#~ msgstr "ForumMessage::fetchData() o MessageID non é válido"
+
 #~ msgid "%1$s:: No Valid Group Object"
 #~ msgstr "%1$s:: Non hai obxectos de grupo válidos"
 
@@ -23638,10 +23649,6 @@ msgstr "Ese usuario non existe. "
 #~ msgstr[0] "%s mensaxe borrada"
 #~ msgstr[1] "%s mensaxes borradas"
 
-#~ msgid "Could not Update Master Thread parent with current time"
-#~ msgstr ""
-#~ "Non pode actualizar o fío mestre da mensaxe superior coa hora actual "
-
 #~ msgid "Error: this news item was not found"
 #~ msgstr "Produciuse un erro - non se atopou o elemento de novas"
 
@@ -23654,15 +23661,6 @@ msgstr "Ese usuario non existe. "
 
 #~ msgid "Please <a href=\"%s\">log in</a>"
 #~ msgstr "Por favor, <a href=\"%s\">conéctese</a>"
-
-#~ msgid "No Valid Forum Object"
-#~ msgstr "non é un obxecto válido de foro "
-
-#~ msgid "Posting Failed"
-#~ msgstr "errou a publicación do comentario "
-
-#~ msgid "Unable to get new message id"
-#~ msgstr "Mensaxe do foro::create() non se puido obter o id da mensaxe nova "
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "Debe incluír o contido e o asunto da mensaxe "

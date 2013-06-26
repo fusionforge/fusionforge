@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:08+0200\n"
+"POT-Creation-Date: 2013-06-26 19:22+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2081,7 +2081,6 @@ msgid "Pending message released"
 msgstr "Väntande anledning:"
 
 #: common/forum/ForumAdmin.class.php:458
-#: common/forum/ForumMessage.class.php:183
 #: common/forum/ForumMessage.class.php:276
 msgid "Couldn't Update Master Thread parent with current time"
 msgstr "Kunde inte uppdatera huvudtrådens förälder med gällande tid"
@@ -2336,7 +2335,7 @@ msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr ""
 
 #: common/forum/ForumMessage.class.php:60
-msgid "ForumMessage:: No Valid Forum Object"
+msgid "No Valid Forum Object"
 msgstr "Forummeddelande:: ogiltigt forumobjekt"
 
 #: common/forum/ForumMessage.class.php:88
@@ -2352,14 +2351,18 @@ msgstr "Hämtande av nästa thread_id misslyckades"
 #: common/forum/ForumMessage.class.php:215
 #: common/forum/ForumMessage.class.php:221
 #: common/forum/ForumMessage.class.php:315
-msgid "ForumMessage::create() Posting Failed"
-msgstr "ForumMessage::create() inlägg misslyckades"
+msgid "Posting Failed"
+msgstr "inlägg misslyckades"
 
 #: common/forum/ForumMessage.class.php:141
 #: common/forum/ForumMessage.class.php:226
 #: common/forum/ForumMessage.class.php:327
-msgid "ForumMessage::create() Unable to get new message id"
-msgstr "ForumMessage::create() Kunde inte hämta nytt meddelande-ID"
+msgid "Unable to get new message id"
+msgstr "Kunde inte hämta nytt meddelande-ID"
+
+#: common/forum/ForumMessage.class.php:183
+msgid "Could not Update Master Thread parent with current time"
+msgstr "Kunde inte uppdatera huvudtrådens förälder med gällande tid"
 
 #: common/forum/ForumMessage.class.php:194
 #: common/forum/ForumMessage.class.php:287
@@ -2368,9 +2371,9 @@ msgid "Could Not Update Parent"
 msgstr "Kunde inte uppdatera förälder"
 
 #: common/forum/ForumMessage.class.php:357
-#, fuzzy
-msgid "Error: a forum message must iclude a message body and a subject."
-msgstr "Måste innehålla ett meddelande och rubrik"
+#: common/forum/ForumMessage.class.php:802
+msgid "Error: a forum message must include a message body and a subject."
+msgstr "Måste innehålla ett meddelande och rubrik."
 
 #: common/forum/ForumMessage.class.php:373
 msgid "ForumMessage::create() No Valid ParentMessage Object"
@@ -2378,9 +2381,6 @@ msgstr "ForumMessage::create() Ogiltigt föräldermeddelandeobjekt"
 
 #: common/forum/ForumMessage.class.php:407
 #: common/forum/ForumMessage.class.php:426
-msgid "ForumMessage::fetchData() Invalid MessageID"
-msgstr "ForumMessage::fetchData() Ogiltigt meddelande-ID"
-
 #: common/forum/ForumMessage.class.php:579
 msgid "Invalid Message ID"
 msgstr "Ogiltigt meddelande-id"
@@ -2437,11 +2437,6 @@ msgid ""
 "To stop monitoring this forum, login to %s and visit: \n"
 "%s\n"
 msgstr ""
-
-#: common/forum/ForumMessage.class.php:802
-#, fuzzy
-msgid "Error: a forum message must include a message body and a subject."
-msgstr "Måste innehålla ett meddelande och rubrik"
 
 #: common/frs/FRSFile.class.php:120 common/frs/include/frs_utils.php:249
 msgid "FRSFile Name Must Be At Least 3 Characters"
@@ -22963,6 +22958,22 @@ msgstr "Användarenamn"
 msgid "That user does not exist."
 msgstr "Den resurskategorin existerar inte"
 
+#~ msgid "ForumMessage:: No Valid Forum Object"
+#~ msgstr "Forummeddelande:: ogiltigt forumobjekt"
+
+#~ msgid "ForumMessage::create() Posting Failed"
+#~ msgstr "ForumMessage::create() inlägg misslyckades"
+
+#~ msgid "ForumMessage::create() Unable to get new message id"
+#~ msgstr "ForumMessage::create() Kunde inte hämta nytt meddelande-ID"
+
+#, fuzzy
+#~ msgid "Error: a forum message must iclude a message body and a subject."
+#~ msgstr "Måste innehålla ett meddelande och rubrik"
+
+#~ msgid "ForumMessage::fetchData() Invalid MessageID"
+#~ msgstr "ForumMessage::fetchData() Ogiltigt meddelande-ID"
+
 #~ msgid "%1$s:: No Valid Group Object"
 #~ msgstr "%1$s:: Ej giltigt gruppobjekt"
 
@@ -23026,20 +23037,8 @@ msgstr "Den resurskategorin existerar inte"
 #~ "\n"
 #~ " -- %3$s personalen\n"
 
-#~ msgid "Could not Update Master Thread parent with current time"
-#~ msgstr "Kunde inte uppdatera huvudtrådens förälder med gällande tid"
-
 #~ msgid "Error: this news item was not found"
 #~ msgstr "Fel - hittade inte denna nyhetspost"
-
-#~ msgid "No Valid Forum Object"
-#~ msgstr "Forummeddelande:: ogiltigt forumobjekt"
-
-#~ msgid "Posting Failed"
-#~ msgstr "inlägg misslyckades"
-
-#~ msgid "Unable to get new message id"
-#~ msgstr "Kunde inte hämta nytt meddelande-ID"
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "Måste innehålla ett meddelande och rubrik"

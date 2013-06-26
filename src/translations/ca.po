@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:08+0200\n"
+"POT-Creation-Date: 2013-06-26 19:22+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2085,7 +2085,6 @@ msgid "Pending message released"
 msgstr "Raó per la què estan pendents:"
 
 #: common/forum/ForumAdmin.class.php:458
-#: common/forum/ForumMessage.class.php:183
 #: common/forum/ForumMessage.class.php:276
 msgid "Couldn't Update Master Thread parent with current time"
 msgstr "No s'ha pogut actualitzar el pare del fil principal amb l'hora actual"
@@ -2343,8 +2342,8 @@ msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr ""
 
 #: common/forum/ForumMessage.class.php:60
-msgid "ForumMessage:: No Valid Forum Object"
-msgstr "ForumMessage:: No és un objecte vàlid del fòrum"
+msgid "No Valid Forum Object"
+msgstr "No és un objecte vàlid del fòrum"
 
 #: common/forum/ForumMessage.class.php:88
 msgid "Group_forum_id in db result does not match Forum Object"
@@ -2359,14 +2358,18 @@ msgstr "Ha fallat l'obtenció del següent thread_id"
 #: common/forum/ForumMessage.class.php:215
 #: common/forum/ForumMessage.class.php:221
 #: common/forum/ForumMessage.class.php:315
-msgid "ForumMessage::create() Posting Failed"
-msgstr "ForumMessage::create() L'enviament ha fallat"
+msgid "Posting Failed"
+msgstr "L'enviament ha fallat"
 
 #: common/forum/ForumMessage.class.php:141
 #: common/forum/ForumMessage.class.php:226
 #: common/forum/ForumMessage.class.php:327
-msgid "ForumMessage::create() Unable to get new message id"
-msgstr "ForumMessage::create() Incapaç d'obtenir un nou id de missatge"
+msgid "Unable to get new message id"
+msgstr "Incapaç d'obtenir un nou id de missatge"
+
+#: common/forum/ForumMessage.class.php:183
+msgid "Could not Update Master Thread parent with current time"
+msgstr "No s'ha pogut actualitzar el pare del fil principal amb l'hora actual"
 
 #: common/forum/ForumMessage.class.php:194
 #: common/forum/ForumMessage.class.php:287
@@ -2375,9 +2378,9 @@ msgid "Could Not Update Parent"
 msgstr "No s'ha pogut actualitzar elpare"
 
 #: common/forum/ForumMessage.class.php:357
-#, fuzzy
-msgid "Error: a forum message must iclude a message body and a subject."
-msgstr "Ha d'incloure un cos i un tema del missatge"
+#: common/forum/ForumMessage.class.php:802
+msgid "Error: a forum message must include a message body and a subject."
+msgstr "Ha d'incloure un cos i un tema del missatge."
 
 #: common/forum/ForumMessage.class.php:373
 msgid "ForumMessage::create() No Valid ParentMessage Object"
@@ -2385,9 +2388,6 @@ msgstr "ForumMessage::create() Objecte ParentMessage no vàlid"
 
 #: common/forum/ForumMessage.class.php:407
 #: common/forum/ForumMessage.class.php:426
-msgid "ForumMessage::fetchData() Invalid MessageID"
-msgstr "ForumMessage::fetchData() MessageID no vàlid"
-
 #: common/forum/ForumMessage.class.php:579
 msgid "Invalid Message ID"
 msgstr ""
@@ -2431,11 +2431,6 @@ msgid ""
 "To stop monitoring this forum, login to %s and visit: \n"
 "%s\n"
 msgstr ""
-
-#: common/forum/ForumMessage.class.php:802
-#, fuzzy
-msgid "Error: a forum message must include a message body and a subject."
-msgstr "Ha d'incloure un cos i un tema del missatge"
 
 #: common/frs/FRSFile.class.php:120 common/frs/include/frs_utils.php:249
 msgid "FRSFile Name Must Be At Least 3 Characters"
@@ -23162,6 +23157,22 @@ msgstr "Nom d'usuari"
 msgid "That user does not exist."
 msgstr "Aquesta categoria no existeix"
 
+#~ msgid "ForumMessage:: No Valid Forum Object"
+#~ msgstr "ForumMessage:: No és un objecte vàlid del fòrum"
+
+#~ msgid "ForumMessage::create() Posting Failed"
+#~ msgstr "ForumMessage::create() L'enviament ha fallat"
+
+#~ msgid "ForumMessage::create() Unable to get new message id"
+#~ msgstr "ForumMessage::create() Incapaç d'obtenir un nou id de missatge"
+
+#, fuzzy
+#~ msgid "Error: a forum message must iclude a message body and a subject."
+#~ msgstr "Ha d'incloure un cos i un tema del missatge"
+
+#~ msgid "ForumMessage::fetchData() Invalid MessageID"
+#~ msgstr "ForumMessage::fetchData() MessageID no vàlid"
+
 #~ msgid "%1$s:: No Valid Group Object"
 #~ msgstr "%1$s:: Objecte de grup no vàlid"
 
@@ -23275,25 +23286,12 @@ msgstr "Aquesta categoria no existeix"
 #~ "\n"
 #~ " -- l'equip %3$s\n"
 
-#~ msgid "Could not Update Master Thread parent with current time"
-#~ msgstr ""
-#~ "No s'ha pogut actualitzar el pare del fil principal amb l'hora actual"
-
 #~ msgid "Error: this news item was not found"
 #~ msgstr "Error: no s'ha trobat aquest nou element"
 
 #~ msgid "You could post if you were <a href=\"%s\">logged in</a>."
 #~ msgstr ""
 #~ "Podrieu enviar missatges si fossiu <a href=\"%s\">iniciant sessió</a>."
-
-#~ msgid "No Valid Forum Object"
-#~ msgstr "No és un objecte vàlid del fòrum"
-
-#~ msgid "Posting Failed"
-#~ msgstr "L'enviament ha fallat"
-
-#~ msgid "Unable to get new message id"
-#~ msgstr "Incapaç d'obtenir un nou id de missatge"
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "Ha d'incloure un cos i un tema del missatge"

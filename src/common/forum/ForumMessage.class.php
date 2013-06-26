@@ -57,7 +57,7 @@ class ForumMessage extends Error {
 	function ForumMessage(&$Forum, $msg_id=false, $arr=false, $pending=false) {
 		$this->Error();
 		if (!$Forum || !is_object($Forum)) {
-			$this->setError(_('ForumMessage:: No Valid Forum Object'));
+			$this->setError(_('No Valid Forum Object'));
 			return false;
 		}
 		if ($Forum->isError()) {
@@ -127,7 +127,7 @@ class ForumMessage extends Error {
 						  $thread_id,
 						  time ())) ;
 		if (!$result || db_affected_rows($result) < 1) {
-			$this->setError(_('ForumMessage::create() Posting Failed').' '.db_error());
+			$this->setError(_('Posting Failed').' '.db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -138,7 +138,7 @@ class ForumMessage extends Error {
 			}
 			if (!$msg_id) {
 				db_rollback();
-				$this->setError(_('ForumMessage::create() Unable to get new message id'));
+				$this->setError(_('Unable to get new message id'));
 				return false;
 			} else {
 				if (!$this->sendNewModeratedMsgNotice()) {
@@ -180,7 +180,7 @@ class ForumMessage extends Error {
 						 array (time(),
 							$thread_id)) ;
 			if (!$res4 || db_affected_rows($res4) < 1) {
-				$this->setError(_('Couldn\'t Update Master Thread parent with current time'));
+				$this->setError(_('Could not Update Master Thread parent with current time'));
 				db_rollback();
 				return false;
 			} else {
@@ -212,18 +212,18 @@ class ForumMessage extends Error {
 						  $most_recent_date)) ;
 
 		if (!$result || db_affected_rows($result) < 1) {
-			$this->setError(_('ForumMessage::create() Posting Failed').' '.db_error());
+			$this->setError(_('Posting Failed').' '.db_error());
 			db_rollback();
 			return false;
 		} else {
 			$msg_id=db_insertid($result,'forum','msg_id');
 			if (!$this->fetchData($msg_id)) {
-				$this->setError(_('ForumMessage::create() Posting Failed').' '.db_error());
+				$this->setError(_('Posting Failed').' '.db_error());
 				db_rollback();
 				return false;
 			}
 			if (!$msg_id) {
-				$this->setError(_('ForumMessage::create() Unable to get new message id'));
+				$this->setError(_('Unable to get new message id'));
 				db_rollback();
 				return false;
 			} else {
@@ -312,7 +312,7 @@ class ForumMessage extends Error {
 						  $thread_id,
 						  $timestamp)) ;
 		if (!$result || db_affected_rows($result) < 1) {
-			$this->setError(_('ForumMessage::create() Posting Failed').' '.db_error());
+			$this->setError(_('Posting Failed').' '.db_error());
 			db_rollback();
 			return false;
 		}
@@ -324,7 +324,7 @@ class ForumMessage extends Error {
 		}
 
 		if (!$msg_id) {
-			$this->setError(_('ForumMessage::create() Unable to get new message id'));
+			$this->setError(_('Unable to get new message id'));
 			db_rollback();
 			return false;
 		}
@@ -354,7 +354,7 @@ class ForumMessage extends Error {
 	 */
 	function create($subject, $body, $thread_id='', $is_followup_to='',$has_attach=false, $timestamp = 0) {
 		if (!strlen(trim($body)) || !strlen(trim($subject))) {
-			$this->setError(_('Error: a forum message must iclude a message body and a subject.'));
+			$this->setError(_('Error: a forum message must include a message body and a subject.'));
 			return false;
 		}
 		if (!forge_check_perm ('forum', $this->Forum->getID(), 'post')) {
@@ -404,7 +404,7 @@ class ForumMessage extends Error {
 					array ($msg_id,
 					       $this->Forum->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError(_('ForumMessage::fetchData() Invalid MessageID').db_error());
+			$this->setError(_('Invalid Message ID').db_error());
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -423,7 +423,7 @@ class ForumMessage extends Error {
 					array ($msg_id,
 					       $this->Forum->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError(_('ForumMessage::fetchData() Invalid MessageID').db_error());
+			$this->setError(_('Invalid Message ID').db_error());
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
