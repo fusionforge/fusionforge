@@ -80,7 +80,7 @@ class FRSPackage extends Error {
 	 *
 	 * @var	object	$Group.
 	 */
-	var $Group; //group object
+	var $Group;
 
 	/**
 	 * Constructor.
@@ -90,14 +90,13 @@ class FRSPackage extends Error {
 	 * @param	array	The associative array of data.
 	 * @return	boolean	success.
 	 */
-	function FRSPackage(&$Group, $package_id=false, $arr=false) {
+	function FRSPackage(&$Group, $package_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError('FRSPackage:: No Valid Group Object');
-			return false;
+			exit_no_group();
 		}
 		if ($Group->isError()) {
-			$this->setError('FRSPackage:: '.$Group->getErrorMessage());
+			$this->setError('FRSPackage: '.$Group->getErrorMessage());
 			return false;
 		}
 		$this->Group =& $Group;
@@ -147,7 +146,7 @@ class FRSPackage extends Error {
 					array ($this->Group->getID(),
 					       htmlspecialchars($name))) ;
 		if (db_numrows($res)) {
-			$this->setError('FRSPackage::create() Error Adding Package: Name Already Exists');
+			$this->setError('Error Adding Package: Name Already Exists');
 			return false;
 		}
 
@@ -158,7 +157,7 @@ class FRSPackage extends Error {
 						  1,
 						  $is_public)) ;
 		if (!$result) {
-			$this->setError('FRSPackage::create() Error Adding Package: '.db_error());
+			$this->setError('Error Adding Package: '.db_error());
 			db_rollback();
 			return false;
 		}
@@ -198,7 +197,7 @@ class FRSPackage extends Error {
 					array ($package_id,
 					       $this->Group->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('FRSPackage::fetchData()  Invalid package_id'.db_error());
+			$this->setError('Invalid package_id'.db_error());
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -316,7 +315,7 @@ class FRSPackage extends Error {
 		$res = db_result(db_query_params ('select count(*) as count from filemodule_monitor where filemodule_id=$1',
 						  array ($this->getID())), 0, 0);
 		if ($res < 0) {
-			$this->setError('FRSPackage::getMonitorCount() Error On querying monitor count: '.db_error());
+			$this->setError('Error On querying monitor count: '.db_error());
 			return false;
 		}
 		return $res;
@@ -377,7 +376,7 @@ class FRSPackage extends Error {
 						array ($this->Group->getID(),
 						       htmlspecialchars($name))) ;
 			if (db_numrows($res)) {
-				$this->setError('FRSPackage::update() Error Updating Package: Name Already Exists');
+				$this->setError('Error Updating Package: Name Already Exists');
 				return false;
 			}
 		}
@@ -389,14 +388,14 @@ class FRSPackage extends Error {
 					       $this->Group->getID(),
 					       $this->getID())) ;
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('FRSPackage::update() Error On Update: '.db_error());
+			$this->setError('Error On Update: '.db_error());
 			db_rollback();
 			return false;
 		}
 
 		$olddirname = $this->getFileName();
 		if(!$this->fetchData($this->getID())){
-			$this->setError("FRSPackage::update() Error Updating Package: Couldn't fetch data");
+			$this->setError("Error Updating Package: Couldn't fetch data");
 			db_rollback();
 			return false;
 		}
@@ -406,12 +405,12 @@ class FRSPackage extends Error {
 
 		if(($olddirname!=$newdirname)){
 			if(is_dir($newdirlocation)){
-				$this->setError('FRSPackage::update() Error Updating Package: Directory Already Exists');
+				$this->setError('Error Updating Package: Directory Already Exists');
 				db_rollback();
 				return false;
 			} else {
 				if(!@rename($olddirlocation,$newdirlocation)) {
-					$this->setError("FRSPackage::update() Error Updating Package: Couldn't rename dir");
+					$this->setError("Error Updating Package: Couldn't rename dir");
 					db_rollback();
 					return false;
 				}
