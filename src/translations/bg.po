@@ -1,11 +1,11 @@
 # Bulgarian translations for FusionForge package.
-# Copyright (C) 2008-2010 FusionForge Team
+# Copyright © 2008-2013 FusionForge Team
 # This file is distributed under the same license as the FusionForge package.
 # Automatically generated
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: FusionForge 5.1\n"
+"Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-06-26 19:22+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
@@ -14,7 +14,9 @@ msgstr ""
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: common/account/actions/addsshkey.php:35
 #: common/account/actions/addsshkey.php:50

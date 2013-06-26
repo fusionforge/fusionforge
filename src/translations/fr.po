@@ -1,20 +1,23 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# French translations for FusionForge package.
+# Copyright © 2008-2013 FusionForge Team
+# This file is distributed under the same license as the FusionForge package.
+# Automatically generated
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: FusionForge\n"
+"Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:22+0200\n"
-"PO-Revision-Date: 2013-05-23 16:06+0200\n"
-"Last-Translator: Roland Mas <lolando@debian.org>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2013-06-26 19:20+0200\n"
+"PO-Revision-Date: 2013-06-03 17:17+0100\n"
+"Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
+"com>\n"
+"Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: common/account/actions/addsshkey.php:35
 #: common/account/actions/addsshkey.php:50
