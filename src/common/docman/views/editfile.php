@@ -44,7 +44,7 @@ echo '		<input id="description" type="text" name="description" size="40" maxleng
 echo '	</tr>';
 if ($g->useDocmanSearch()) {
 	echo '	<tr>';
-	echo '		<td>'. _('Both fields are used by document search engine.'). '.</td>';
+	echo '		<td>'. _('Both fields are used by document search engine.') .'</td>';
 	echo '	</tr>';
 }
 echo '	<tr>';
@@ -78,7 +78,7 @@ echo '		</td>';
 echo '	</tr>';
 echo '	<tr id="uploadnewroweditfile">';
 echo '		<td><strong>'. _('OPTIONAL: Upload new file:') .'</strong><br />';
-echo '			<input type="file" name="uploaded_data" size="30" />'.sprintf(_('(max upload size: %1$s)'),human_readable_bytes(util_get_maxuploadfilesize()));
+echo '			<input type="file" name="uploaded_data" size="30" /><br />'.sprintf(_('(max upload size: %1$s)'),human_readable_bytes(util_get_maxuploadfilesize()));
 echo '		</td>';
 echo '	</tr>';
 echo '</table>';
