@@ -55,10 +55,12 @@ function session_build_session_token($user_id) {
 }
 
 function session_build_session_cookie($user_id) {
+	$nonce = md5(util_randbytes());
 	$session_cookie_data = array(
 		$user_id,
 		getStringFromServer('REMOTE_ADDR'),
-		getStringFromServer('HTTP_USER_AGENT'),
+		$nonce,
+		getStringFromServer('HTTP_USER_AGENT')
 	    );
 	$session_cookie = "" . time();
 	foreach ($session_cookie_data as $s) {
@@ -125,7 +127,7 @@ function session_check_session_cookie($session_cookie) {
 		return false;
 	}
 
-	list($time, $user_id, $ip, $user_agent) = explode('<', $session_cookie);
+	list($time, $user_id, $ip, $nonce, $user_agent) = explode('<', $session_cookie);
 	$user_id = util_unconvert_htmlspecialchars($user_id);
 	$ip = util_unconvert_htmlspecialchars($ip);
 	$user_agent = util_unconvert_htmlspecialchars($user_agent);
