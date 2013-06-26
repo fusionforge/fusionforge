@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 17:19+0200\n"
+"POT-Creation-Date: 2013-06-26 19:02+0200\n"
 "PO-Revision-Date: 2009-10-06 16:32+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -288,7 +288,7 @@ msgid "Unable To Remove Monitor"
 msgstr ""
 
 #: common/docman/Document.class.php:598
-#: common/docman/DocumentGroup.class.php:424 common/forum/Forum.class.php:450
+#: common/docman/DocumentGroup.class.php:424 common/forum/Forum.class.php:449
 msgid "Unable To Add Monitor"
 msgstr "ไม่สามารถเพิ่มผู้ดูระบบได้"
 
@@ -352,6 +352,7 @@ msgstr ""
 #: common/docman/views/listfile.php:174
 #: common/docman/views/listtrashfile.php:117
 #: common/docman/views/search.php:150 common/docman/views/search.php:151
+#: common/forum/Forum.class.php:516 common/forum/Forum.class.php:597
 #: common/forum/ForumHTML.class.php:73
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
@@ -448,7 +449,7 @@ msgstr "ไม่พบเอกสาร"
 msgid "Document Folder"
 msgstr "ไม่พบเอกสาร"
 
-#: common/docman/DocumentGroup.class.php:75 common/forum/Forum.class.php:130
+#: common/docman/DocumentGroup.class.php:75 common/forum/Forum.class.php:129
 #: common/include/Error.class.php:189 common/mail/MailingList.class.php:79
 #: common/survey/Survey.class.php:79 common/survey/SurveyQuestion.class.php:70
 #: plugins/mailman/include/MailmanList.class.php:104
@@ -1804,7 +1805,7 @@ msgstr ""
 msgid "File Updated Successfully"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:40 common/forum/Forum.class.php:116
+#: common/forum/ForumAdmin.class.php:40 common/forum/Forum.class.php:115
 #: common/forum/ForumFactory.class.php:60 www/forum/admin/index.php:58
 #, php-format
 msgid "%s does not use the Forum tool"
@@ -1952,68 +1953,55 @@ msgid ""
 "delete the message."
 msgstr ""
 
-#: common/forum/Forum.class.php:99
-msgid "Forums: No Valid Group Object"
-msgstr ""
-
-#: common/forum/Forum.class.php:164 common/forum/Forum.class.php:545
+#: common/forum/Forum.class.php:163 common/forum/Forum.class.php:544
 msgid "Forum Name Must Be At Least 3 Characters"
 msgstr ""
 
-#: common/forum/Forum.class.php:168 common/forum/Forum.class.php:549
+#: common/forum/Forum.class.php:167 common/forum/Forum.class.php:548
 msgid "Forum Description Must Be At Least 10 Characters"
 msgstr ""
 
-#: common/forum/Forum.class.php:173 common/forum/Forum.class.php:175
-#: common/forum/Forum.class.php:554 common/forum/Forum.class.php:556
+#: common/forum/Forum.class.php:172 common/forum/Forum.class.php:174
+#: common/forum/Forum.class.php:553 common/forum/Forum.class.php:555
 msgid "Illegal Characters in Forum Name"
 msgstr ""
 
-#: common/forum/Forum.class.php:173 common/forum/Forum.class.php:554
+#: common/forum/Forum.class.php:172 common/forum/Forum.class.php:553
 msgid "No space"
 msgstr ""
 
-#: common/forum/Forum.class.php:195 common/forum/Forum.class.php:581
+#: common/forum/Forum.class.php:194 common/forum/Forum.class.php:580
 msgid "Mailing List Exists with same name"
 msgstr ""
 
-#: common/forum/Forum.class.php:223
+#: common/forum/Forum.class.php:222
 msgid "Error Adding Forum:"
 msgstr ""
 
-#: common/forum/Forum.class.php:234 www/account/first.php:29
+#: common/forum/Forum.class.php:233 www/account/first.php:29
 #, php-format
 msgid "Welcome to %1$s"
 msgstr "ยินดีต้อนรับสู่ %1$s"
 
-#: common/forum/Forum.class.php:258
+#: common/forum/Forum.class.php:257
 msgid "Invalid forum group identifier"
 msgstr "หมายเลขกลุ่มกระทู้ไม่ถูกต้อง"
 
-#: common/forum/Forum.class.php:432 common/forum/Forum.class.php:466
+#: common/forum/Forum.class.php:431 common/forum/Forum.class.php:465
 #: common/frs/FRSPackage.class.php:270 common/frs/FRSPackage.class.php:302
 #: common/tracker/ArtifactType.class.php:525
 msgid "You can only monitor if you are logged in"
 msgstr ""
 
-#: common/forum/Forum.class.php:499
+#: common/forum/Forum.class.php:498
 msgid "You Can Only Save Your Place If You Are Logged In"
 msgstr "จะบันทึกได้ก็ต่อเมื่อได้กรอกข้อมูลเข้าใช้งานแล้วเท่านั้น"
 
-#: common/forum/Forum.class.php:517
-msgid "Forum::savePlace()"
+#: common/forum/Forum.class.php:597 common/survey/SurveyQuestion.class.php:149
+msgid "Update failed"
 msgstr ""
 
-#: common/forum/Forum.class.php:598 common/mail/MailingList.class.php:257
-#: plugins/mailman/include/MailmanList.class.php:250
-#: plugins/mailman/include/MailmanList.class.php:377
-#: plugins/mailman/include/MailmanList.class.php:394
-#: www/admin/pending-news.php:76 www/admin/pending-news.php:86
-#: www/admin/pending-news.php:107 www/news/admin/index.php:90
-msgid "Error On Update:"
-msgstr ""
-
-#: common/forum/Forum.class.php:613 common/frs/FRSPackage.class.php:451
+#: common/forum/Forum.class.php:612 common/frs/FRSPackage.class.php:451
 #: common/frs/FRSRelease.class.php:343 common/include/Group.class.php:1590
 #: common/mail/MailingList.class.php:385 common/pm/ProjectGroup.class.php:360
 #: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:504
@@ -2022,9 +2010,9 @@ msgstr ""
 msgid "Please tick all checkboxes."
 msgstr ""
 
-#: common/forum/Forum.class.php:624 common/forum/Forum.class.php:632
-#: common/forum/Forum.class.php:640 common/forum/Forum.class.php:648
-#: common/forum/Forum.class.php:656 common/forum/Forum.class.php:664
+#: common/forum/Forum.class.php:623 common/forum/Forum.class.php:631
+#: common/forum/Forum.class.php:639 common/forum/Forum.class.php:647
+#: common/forum/Forum.class.php:655 common/forum/Forum.class.php:663
 msgid "Error Deleting Forum:"
 msgstr ""
 
@@ -3867,6 +3855,15 @@ msgstr ""
 msgid "Error Getting mailing list"
 msgstr ""
 
+#: common/mail/MailingList.class.php:257
+#: plugins/mailman/include/MailmanList.class.php:250
+#: plugins/mailman/include/MailmanList.class.php:377
+#: plugins/mailman/include/MailmanList.class.php:394
+#: www/admin/pending-news.php:76 www/admin/pending-news.php:86
+#: www/admin/pending-news.php:107 www/news/admin/index.php:90
+msgid "Error On Update:"
+msgstr ""
+
 #: common/mail/MailingListFactory.class.php:62
 #, php-format
 msgid "%s does not use the Mailing-list tool"
@@ -4101,10 +4098,6 @@ msgstr ""
 
 #: common/survey/SurveyQuestion.class.php:107 www/survey/admin/question.php:92
 msgid "Question Added"
-msgstr ""
-
-#: common/survey/SurveyQuestion.class.php:149
-msgid "Update failed"
 msgstr ""
 
 #: common/survey/SurveyQuestion.class.php:194

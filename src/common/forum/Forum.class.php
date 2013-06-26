@@ -96,8 +96,7 @@ class Forum extends Error {
 	function Forum(&$Group, $group_forum_id=false, $arr=false, $is_news=false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('Forums: No Valid Group Object'));
-			return false;
+			exit_no_group();
 		}
 		if ($Group->isError()) {
 			$this->setError('Forums: '.$Group->getErrorMessage());
@@ -514,7 +513,7 @@ class Forum extends Error {
 							time()));
 
 			if (!$result) {
-				$this->setError(_('Forum::savePlace()').': '.db_error());
+				$this->setError('Forum::savePlace()'._(': ').db_error());
 				return false;
 			}
 
@@ -595,7 +594,7 @@ class Forum extends Error {
 					      $this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(_('Error On Update:').': '.db_error());
+			$this->setError(_('Update failed')._(': ').db_error());
 			return false;
 		}
 		return true;
