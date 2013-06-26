@@ -127,7 +127,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 	protected function populateStandardTemplate($what='all')
 	{
 		if ($what == 'all') {
-			$what = array('trackers','tasks','forums','docs');
+			$what = array('trackers','tasks','forums');
 		} elseif ($what == 'empty') {
 			$what = array();
 		} elseif (!is_array($what)) {
@@ -262,20 +262,6 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->assertTrue($this->isTextPresent("open-discussion"));
 			$this->assertTrue($this->isTextPresent("Get Public Help"));
 			$this->assertTrue($this->isTextPresent("Project Developer Discussion"));
-		}
-
-		if (in_array ('docs', $what)) {
-			$this->click("link=Docs");
-			$this->waitForPageToLoad("30000");
-			$this->click("link=Add new item");
-			$this->waitForPageToLoad("30000");
-			$this->click("link=Add new item");
-			$this->waitForPageToLoad("30000");
-			$this->click("//input[@name='type' and @value='folder']");
-			$this->type("groupname", "Uncategorized Submissions2");
-			$this->click("//input[@id='submitaddsubgroup']");
-			$this->waitForPageToLoad("30000");
-			$this->assertTrue($this->isTextPresent("Uncategorized Submissions2"));
 		}
 	}
 
