@@ -6,6 +6,7 @@
  * The rest Copyright 2002-2005 (c) GForge Team
  * Copyright 2012, Franck Villaume - TrivialDev
  * Copyright © 2013 Thorsten Glaser, tarent solutions GmbH
+ * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -63,8 +64,8 @@ define('USER_DEFAULT_GROUP', 'users');
 $err = '';
 
 /*
- * check whether directory preficēs are set
- * and create the præfix directories unless they exist
+ * check whether directory prefices are set
+ * and create the prefix directories unless they exist
  */
 
 if (!($gpfx = forge_get_config('groupdir_prefix'))) {

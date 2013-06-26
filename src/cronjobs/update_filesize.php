@@ -19,7 +19,7 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * -------------- Gforge team comment ------------
+ * -------------- FusionForge team comment ------------
  * This file was proposed by Brett N DiFrischia
  * with the following description:
  * The GFDL uses many large files that could not be uploaded to our GForge site.

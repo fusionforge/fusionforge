@@ -198,7 +198,7 @@ class Plugin extends Error {
 				$code = symlink($path . '/etc/plugins/' . $name, forge_get_config('config_path'). '/plugins/'.$name);
 				if (!$code) {
 					$this->setError('['.forge_get_config('config_path'). '/plugins/'.$name.'->'.$path . '/etc/plugins/' . $name . ']'.'<br />'.
-					_('Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $name);
+					_('Config file could not be linked to etc/gforge/plugins/%s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $name);
 				}
 			}
 		}
@@ -215,7 +215,7 @@ class Plugin extends Error {
 				$code = symlink($path . '/etc/plugins/' . $name, forge_get_config('config_path'). '/plugins/'.$name);
 				if (!$code) {
 					$this->setError('['.forge_get_config('config_path'). '/plugins/'.$name.'->'.$path . '/etc/plugins/' . $name . ']'.'<br />'.
-					_('Config file could not be linked to etc/gforge/plugins/%1$s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $name);
+					_('Config file could not be linked to etc/gforge/plugins/%s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $name);
 				}
 			}
 		}

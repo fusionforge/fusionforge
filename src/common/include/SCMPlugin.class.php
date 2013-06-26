@@ -135,7 +135,7 @@ abstract class SCMPlugin extends Plugin {
 	function printShortStats($params) {
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false ;
+			return;
 		}
 
 		if ($project->usesPlugin($this->name)) {
@@ -241,7 +241,7 @@ abstract class SCMPlugin extends Plugin {
 
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false ;
+			return;
 		}
 
 		if ($project->usesPlugin ($this->name)) {
@@ -365,7 +365,6 @@ abstract class SCMPlugin extends Plugin {
 			return '';
 		}
 	}
-
 }
 
 // Local Variables:

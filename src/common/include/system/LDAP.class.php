@@ -75,7 +75,7 @@ class LDAP extends UNIX {
 			$this->clearError();
 			$ldap_conn = @ldap_connect(forge_get_config('ldap_host'),forge_get_config('ldap_port'));
 			if (!$ldap_conn) {
-				$this->setError('ERROR: Cannot connect to LDAP server<br />');
+				$this->setError('Error: Cannot connect to LDAP server<br />');
 				return false;
 			}
 			if (forge_get_config('ldap_version')) {
@@ -140,7 +140,7 @@ class LDAP extends UNIX {
                 	} else {
                         	return false ;
                 	}
-        	};
+        	}
 	}
 
 	/**
@@ -327,7 +327,7 @@ class LDAP extends UNIX {
 		$entry['shadowWarning']=7;
 
 		if (!$this->gfLdapAdd($dn,$entry)) {
-			$this->setError("ERROR: cannot add LDAP user entry '".
+			$this->setError("Error: cannot add LDAP user entry '".
 				 $user->getUnixName()."': ".$this->gfLdapError()."<br />");
 			return false;
 		}
@@ -370,7 +370,7 @@ class LDAP extends UNIX {
 		$entry['shadowWarning']=7;
 
 		if (!$this->gfLdapAdd($dn,$entry)) {
-			$this->setError("ERROR: cannot add LDAP user entry '".
+			$this->setError("Error: cannot add LDAP user entry '".
 				 $username."': ".$this->gfLdapError()."<br />");
 			return false;
 		}
@@ -394,7 +394,7 @@ class LDAP extends UNIX {
 		$dn = 'uid='.$user->getUnixName().',ou=People,'.forge_get_config('ldap_base_dn');
 
 		if (!$this->gfLdapDelete($dn)) {
-		    $this->setError("ERROR: cannot delete LDAP user entry '".
+		    $this->setError("Error: cannot delete LDAP user entry '".
 				 $user->getUnixName()."': ".$this->gfLdapError()."<br />");
 		    return false;
 		}
@@ -421,7 +421,7 @@ class LDAP extends UNIX {
 		$entry[$attr]=$value;
 
 		if (!$this->gfLdapModifyIfExists($dn, $entry)) {
-		    $this->setError("ERROR: cannot change LDAP attribute '$attr' for user '".
+		    $this->setError("Error: cannot change LDAP attribute '$attr' for user '".
 				 $user->getUnixName()."': ".$this->gfLdapError()."<br />");
 		    return false;
 		}
@@ -445,7 +445,7 @@ class LDAP extends UNIX {
 
 		$group = &group_get_object($group_id);
 		if (!$group) {
-			$this->setError("ERROR: Cannot find group [$group_id]<br />");
+			$this->setError("Error: Cannot find group [$group_id]<br />");
 			return false;
 		}
 		if (!$this->gfLdapConnect()) {
@@ -486,7 +486,7 @@ class LDAP extends UNIX {
 		$ret_val=true;
 
 		if (!$this->gfLdapAdd($dn,$entry)) {
-		    $this->setError("ERROR: cannot add LDAP group entry '".
+		    $this->setError("Error: cannot add LDAP group entry '".
 				 $group->getUnixName()."': ".$this->gfLdapError()."<br />");
 		    // If there's error, that's bad. But don't stop.
 		    $ret_val=false;
@@ -508,7 +508,7 @@ class LDAP extends UNIX {
 		}
 
 		if (!$this->gfLdapAdd($dn,$entry)) {
-			$this->setError("ERROR: cannot add LDAP CVS group entry '"
+			$this->setError("Error: cannot add LDAP CVS group entry '"
 				 .$group->getUnixName()."': ".$this->gfLdapError()."<br />");
 			$ret_val=false;
 		}
@@ -523,7 +523,7 @@ class LDAP extends UNIX {
 							'/bin/false', '/bin/false',
 							$this->getSCMGID(),
 							$this->getUnixGID(), "/dev/null")) {
-			$this->setError("ERROR: cannot add LDAP AnonCVS user entry '"
+			$this->setError("Error: cannot add LDAP AnonCVS user entry '"
 				 .$group->getUnixName()."': ".$this->gfLdapError()."<br />");
 			$ret_val=false;
 		}
@@ -554,7 +554,7 @@ class LDAP extends UNIX {
 		$dn = 'cn='.$group->getUnixName().',ou=Group,'.forge_get_config('ldap_base_dn');
 
 		if (!$this->gfLdapDelete($dn)) {
-		    $this->setError("ERROR: cannot delete LDAP group entry '".
+		    $this->setError("Error: cannot delete LDAP group entry '".
 				 $group->getUnixName()."': ".$this->gfLdapError()."<br />");
 		    $ret_val = false;
 		}
@@ -566,7 +566,7 @@ class LDAP extends UNIX {
 		$dn = 'cn='.$group->getUnixName().',ou=cvsGroup,'.forge_get_config('ldap_base_dn');
 
 		if (!$this->gfLdapDelete($dn)) {
-		    $this->setError("ERROR: cannot delete LDAP CVS group entry '".
+		    $this->setError("Error: cannot delete LDAP CVS group entry '".
 				 $group->getUnixName()."': ".$this->gfLdapError()."<br />");
 		    $ret_val = false;
 		}
@@ -577,7 +577,7 @@ class LDAP extends UNIX {
 
 		$dn = 'uid=anoncvs_'.$group->getUnixName().',ou=People,'.forge_get_config('ldap_base_dn');
 		if (!$this->gfLdapDelete($dn)) {
-		    $this->setError("ERROR: cannot delete LDAP AnonCVS user entry '".
+		    $this->setError("Error: cannot delete LDAP AnonCVS user entry '".
 				 $group->getUnixName()."': ".$this->gfLdapError()."<br />");
 		    $ret_val = false;
 		}
@@ -646,7 +646,7 @@ class LDAP extends UNIX {
 			//
 
 			if (!$this->gfLdapModAdd($cvs_dn,$entry)) {
-				$this->setError("ERROR: cannot add member to LDAP CVS group entry '".
+				$this->setError("Error: cannot add member to LDAP CVS group entry '".
 				 $group->getUnixName()."': ".$this->gfLdapError()."<br />");
 				return false;
 			}
@@ -671,7 +671,7 @@ class LDAP extends UNIX {
 			//
 
 			if (!$this->gfLdapModAdd($dn,$entry)) {
-				$this->setError("ERROR: cannot add member to LDAP group entry '".
+				$this->setError("Error: cannot add member to LDAP group entry '".
 				 $group->getUnixName()."': ".$this->gfLdapError()."<br />");
 				return false;
 			}
@@ -707,7 +707,7 @@ class LDAP extends UNIX {
 		$ret_val=true;
 
 		if (!$this->gfLdapModDel($cvs_dn,$entry) && !$this->gfLdapDoesNotExist()) {
-			$this->setError("ERROR: cannot remove member from LDAP CVS group entry '".
+			$this->setError("Error: cannot remove member from LDAP CVS group entry '".
 				 $group->getUnixName()."': ".$this->gfLdapError()."(".$this->gfLdapErrno().")"."<br />");
 			$ret_val=false;
 		}
@@ -717,7 +717,7 @@ class LDAP extends UNIX {
 		}
 
 		if (!$this->gfLdapModDel($dn,$entry) && !$this->gfLdapDoesNotExist()) {
-			$this->setError("ERROR: cannot remove member from LDAP group entry '".
+			$this->setError("Error: cannot remove member from LDAP group entry '".
 				 $group->getUnixName()."': ".$this->gfLdapError()."(".$this->gfLdapErrno().")"."<br />");
 			$ret_val=false;
 		}

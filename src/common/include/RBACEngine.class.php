@@ -472,8 +472,8 @@ function forge_check_perm ($section, $reference, $action = NULL) {
 
 /**
  * TODO: Enter description here ...
- * @param unknown_type $section
- * @param unknown_type $action
+ * @param string $section
+ * @param string $action
  */
 function forge_check_global_perm ($section, $action = NULL) {
 	$engine = RBACEngine::getInstance() ;

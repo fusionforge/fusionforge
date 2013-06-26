@@ -214,7 +214,7 @@ class PluginManager extends Error {
 	 */
 	function RegisterPlugin(&$pluginobject) {
 		if (!$pluginobject->GetName()) {
-			exit_error(_("Some plugin did not provide a name. I'd gladly tell you which one, but obviously I can't. Sorry."),'');
+			exit_error(_("Some plugin did not provide a name. I'd gladly tell you which one, but obviously I cannot. Sorry."),'');
 		}
 		$p_name = $pluginobject->GetName() ;
 		$this->plugins_objects[$p_name] =& $pluginobject;

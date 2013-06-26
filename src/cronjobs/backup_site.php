@@ -33,7 +33,7 @@ $num_of_days = forge_get_config('backup_days'); // Number of days to keep if set
 
 $datetime=date('Y-m-d'); //we will use this to concatenate it with the tar filename
 
-if(!(isset($sys_path_to_backup)) ||  (strcmp($sys_path_to_backup,"/") == 0)){
+if(!(isset($sys_path_to_backup)) || (strcmp($sys_path_to_backup,"/") == 0)){
 //	cron_entry(23,'Variable $sys_path_to_backup was not set or it was equal to /.');
 //	exit;
 	// Default value
@@ -47,9 +47,9 @@ if(util_is_root_dir($sys_path_to_backup)){
 if (!is_dir($sys_path_to_backup)) {
 	if (!mkdir($sys_path_to_backup, 0700, true)) {
 		cron_entry(23,'Couldn\'t create directory '.$sys_path_to_backup.' for backups');
-				exit;
-			}
-		}
+		exit;
+	}
+}
 
 // add trailing slash
 if (!preg_match('/\\/$/',$sys_path_to_backup)) {
@@ -122,7 +122,7 @@ if (file_exists(forge_get_config('upload_dir'))) {
 		$err.= implode("\n", $output);
 	}
 } else {
-		$err.= 'Unable to find upload dir. Configured value is:'.forge_get_config('upload_dir');
+	$err.= 'Unable to find upload dir. Configured value is:'.forge_get_config('upload_dir');
 }
 
 /**************************************
@@ -137,7 +137,7 @@ if (file_exists($mailman_data_dir)) {
 		$err.= implode("\n", $output);
 	}
 } else {
-		$err.= 'Unable to find Mailman data dir. Please edit backup_site.php cronjob';
+	$err.= 'Unable to find Mailman data dir. Please edit backup_site.php cronjob';
 }
 
 /**************************************

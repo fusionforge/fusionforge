@@ -116,13 +116,13 @@ class pgsql extends System {
 						       'A',
 						       $user_id)) ;
 	                if (!$res) {
-	                        $this->setError('ERROR - Could Not Update User UID/GID: '.db_error());
+	                        $this->setError('Error: Cannot Update User UID/GID: '.db_error());
 	                        return false;
 			}
 			$res1 = db_query_params ('DELETE FROM nss_usergroups WHERE user_id=$1',
 						 array ($user_id)) ;
 			if (!$res1) {
-				$this->setError('ERROR - Could Not Delete Group Member(s): '.db_error());
+				$this->setError('Error: Cannot Delete Group Member(s): '.db_error());
 				return false;
 			}
 			// This is group used for user, not a real project
@@ -130,7 +130,7 @@ class pgsql extends System {
 					(SELECT user_name FROM users WHERE user_id=$1)',
 						 array ($user_id));
 			if (!$res2) {
-				$this->setError('ERROR - Could Not Delete Group GID: '.db_error());
+				$this->setError('Error: Cannot Delete Group GID: '.db_error());
 				return false;
 			}
 			$res3 = db_query_params ('INSERT INTO nss_groups
@@ -139,7 +139,7 @@ class pgsql extends System {
 					FROM users WHERE user_id=$1',
 						 array ($user_id));
 			if (!$res3) {
-				$this->setError('ERROR - Could Not Update Group GID: '.db_error());
+				$this->setError('Error: Cannot Update Group GID: '.db_error());
 				return false;
 			}
 
@@ -191,17 +191,17 @@ class pgsql extends System {
  	*
  	*/
 	function sysRemoveUser($user_id) {
-		$res = db_query_params ('UPDATE users SET unix_status=$1 WHERE user_id=$2',
+		$res = db_query_params('UPDATE users SET unix_status=$1 WHERE user_id=$2',
 					array ('D',
-					       $user_id)) ;
+					       $user_id));
 		if (!$res) {
-			$this->setError('ERROR - Could Not Update User Unix Status: '.db_error());
+			$this->setError('Error: Cannot Update User Unix Status: '.db_error());
 			return false;
 		} else {
 			$res1 = db_query_params ('DELETE FROM nss_usergroups WHERE user_id=$1',
 						 array ($user_id));
 			if (!$res1) {
-				$this->setError('ERROR - Could Not Delete Group Member(s): '.db_error());
+				$this->setError('Error: Cannot Delete Group Member(s): '.db_error());
 				return false;
 			}
 			// This is group used for user, not a real project
@@ -209,7 +209,7 @@ class pgsql extends System {
 				(SELECT user_name FROM users WHERE user_id=$1)',
 						 array ($user_id)) ;
 			if (!$res2) {
-				$this->setError('ERROR - Could Not Delete Group GID: '.db_error());
+				$this->setError('Error: Cannot Delete Group GID: '.db_error());
 				return false;
 			}
 		}
@@ -271,13 +271,13 @@ class pgsql extends System {
 		$res1 = db_query_params ('DELETE FROM nss_usergroups WHERE group_id=$1',
 					 array ($group_id));
 		if (!$res1) {
-			$this->setError('ERROR - Could Not Delete Group Member(s): '.db_error());
+			$this->setError('Error: Cannot Delete Group Member(s): '.db_error());
 			return false;
 		}
 		$res3 = db_query_params ('DELETE FROM nss_groups WHERE group_id=$1',
 					 array ($group_id)) ;
 		if (!$res3) {
-			$this->setError('ERROR - Could Not Delete Group GID: '.db_error());
+			$this->setError('Error: Cannot Delete Group GID: '.db_error());
 			return false;
 		}
 		$res4 = db_query_params ('INSERT INTO nss_groups
@@ -288,7 +288,7 @@ class pgsql extends System {
 					 array ($this->GID_ADD,
 						$group_id)) ;
 		if (!$res4) {
-			$this->setError('ERROR - Could Not Insert Group GID: '.db_error());
+			$this->setError('Error: Cannot Insert Group GID: '.db_error());
 			return false;
 		}
 		$res5 = db_query_params ('INSERT INTO nss_groups
@@ -301,7 +301,7 @@ class pgsql extends System {
 						$group_id)) ;
 
 		if (!$res5) {
-			$this->setError('ERROR - Could Not Insert SCM Group GID: '.db_error());
+			$this->setError('Error: Cannot Insert SCM Group GID: '.db_error());
 			return false;
 		}
 
@@ -323,13 +323,13 @@ class pgsql extends System {
 		$res1 = db_query_params ('DELETE FROM nss_usergroups WHERE group_id=$1',
 					 array ($group_id)) ;
 		if (!$res1) {
-			$this->setError('ERROR - Could Not Delete Group Member(s): '.db_error());
+			$this->setError('Error: Cannot Delete Group Member(s): '.db_error());
 			return false;
 		}
 		$res3 = db_query_params ('DELETE FROM nss_groups WHERE group_id=$1',
 					 array ($group_id)) ;
 		if (!$res3) {
-			$this->setError('ERROR - Could Not Delete Group GID: '.db_error());
+			$this->setError('Error: Cannot Delete Group GID: '.db_error());
 			return false;
 		}
 		return true;
@@ -384,7 +384,7 @@ WHERE users.user_id=$3
 						      $group_id));
 			if (!$res) {
 				db_rollback();
-				$this->setError('ERROR - Could Not Update Group Member(s): '.db_error());
+				$this->setError('Error: Cannot Update Group Member(s): '.db_error());
 				return false;
 			}
 		}
@@ -408,7 +408,7 @@ WHERE users.user_id=$2
 						       'A', 'A', 'A',
 						       $group_id)) ;
 			if (!$res) {
-				$this->setError('ERROR - Could Not Update Group Member(s): '.db_error());
+				$this->setError('Error: Cannot Update Group Member(s): '.db_error());
 				db_rollback () ;
 				return false;
 			}
@@ -431,7 +431,7 @@ WHERE users.user_id=$2
 					 array ($user_id,
 						$group_id)) ;
 		if (!$res) {
-			$this->setError('ERROR - Could Not Delete Group Member(s): '.db_error());
+			$this->setError('Error: Cannot Delete Group Member(s): '.db_error());
 			return false;
 		}
 		return true;

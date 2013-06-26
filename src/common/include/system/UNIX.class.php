@@ -60,7 +60,7 @@ class UNIX extends System {
 						       'A',
 						       $user_id)) ;
 	                if (!$res) {
-	                        $this->setError('ERROR - Could Not Update User UID/GID: '.db_error());
+	                        $this->setError('Error: Cannot Update User UID/GID: '.db_error());
 	                        return false;
 			}
 			return true;
@@ -79,7 +79,7 @@ class UNIX extends System {
 					array ('N',
 					       $user_id));
 		if (!$res) {
-			$this->setError('ERROR - Could Not Update User Unix Status: '.db_error());
+			$this->setError('Error: Cannot Update User Unix Status: '.db_error());
 			return false;
 		}
 		return true;
