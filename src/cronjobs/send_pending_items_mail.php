@@ -73,20 +73,18 @@ function send_pending_pm_items_mail(){
 			$language=db_result($userres,$usercount,"language");
 			setup_gettext_from_language_id($language);
 			$subject=_('Pending task manager items notification');
-			$messagebody=stripcslashes(sprintf(_('This mail is sent to you to remind you of pending/overdue tasks.
-The task manager item #%1$s is pending:
-Task Summary: %2$s
-Submitted by: %4$s
-Status:%5$s
-Percent Complete: %6$s
-
-Click here to visit the item %3$s'), $project_task_id, $summary, $hyperlink, $user_name, $status_name, db_result($res, $i,'percent_complete')));
+			$messagebody = stripcslashes(_('This mail is sent to you to remind you of pending/overdue tasks.') . ' '
+										. sprintf(_('The task manager item #%s is pending'), $project_task_id)._(': ') . "\n"
+										. _('Task Summary')._(': ') . $summary . "\n"
+										. _('Submitted by')._(': ') . $user_name . "\n"
+										. _('Status')._(': ') . $status_name . "\n"
+										. _('Percent Complete')._(': ') . db_result($res, $i,'percent_complete') . "\n\n"
+										. sprintf(_('Click here to visit the item %s'), $hyperlink));
 			util_send_message($mailto,$subject,$messagebody);
 		}
 	}
 	cron_entry(19,db_error());
 }
-
 
 function send_pending_tracker_items_mail(){
 	/* first, get all the items that are considered overdue */
@@ -113,17 +111,15 @@ function send_pending_tracker_items_mail(){
 			$language=db_result($userres,$usercount,"language");
 			setup_gettext_from_language_id($language);
 			$subject=_('Pending tracker items notification');
-			$messagebody=stripcslashes(sprintf(_('This mail is sent to you to remind you of pending/overdue tracker items. The item #%1$s is pending:
-Summary: %3$s
-Status: %5$s
-Open Date:%6$s
-Assigned To: %7$s
-Submitted by: %8$s
-Details: %9$s
-
-
-Click here to visit the item: %4$s'),  $artifact, $opendate, $summary, $hyperlink, $status_name, $realopendate,
-				db_result($res,$tmp,'assigned_realname'), db_result($res,$tmp,'submitted_realname'),  $detail));
+            $messagebody = stripcslashes(_('This mail is sent to you to remind you of pending/overdue tracker items.') . ' '
+                                        . sprintf(_('The item #%s is pending'), $artifact)._(': ') . "\n"
+                                        . _('Summary')._(': ') . $summary . "\n"
+                                        . _('Status')._(': ') . $status_name . "\n"
+                                        . _('Open Date')._(': ') . $realopendate . "\n"
+                                        . _('Assigned to')._(': ') . db_result($res,$tmp,'submitted_realname') . "\n"
+                                        . _('Submitted by')._(': ') . db_result($res,$tmp,'submitted_realname') . "\n"
+                                        . _('Details')._(': ') . $detail . "\n\n"
+                                        . sprintf(_('Click here to visit the item %s'), $hyperlink));
 			/* and finally send the email */
 			util_send_message($mailto,$subject,$messagebody);
 		}
@@ -135,5 +131,3 @@ Click here to visit the item: %4$s'),  $artifact, $opendate, $summary, $hyperlin
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

@@ -194,10 +194,11 @@ List administration can be found at:
 Your list password is: %6$s .
 You are encouraged to change this password as soon as possible.
 
-Thank you for registering your project with %1$s.
+Thank you for registering your project with %1$s.'), forge_get_config ('forge_name'), forge_get_config('lists_host'), $realListName, $this->getExternalInfoUrl(), $this->getExternalAdminUrl(), $listPassword);
+			$mailBody .= "\n\n";
+			$mailBody .= sprintf(_('-- the %s staff'), forge_get_config ('forge_name'));
+			$mailBody .= "\n";
 
--- the %1$s staff
-'), forge_get_config ('forge_name'), forge_get_config('lists_host'), $realListName, $this->getExternalInfoUrl(), $this->getExternalAdminUrl(), $listPassword);
 			$mailSubject = sprintf(_('%s New Mailing List'), forge_get_config ('forge_name'));
 
 			util_send_message($userEmail, $mailSubject, $mailBody);
@@ -374,8 +375,8 @@ Thank you for registering your project with %1$s.
 	/**
 	 *	delete - permanently delete this mailing list
 	 *
-	 *	@param	boolean	I'm Sure.
-	 *	@param	boolean	I'm Really Sure.
+	 *	@param	boolean	$sure I'm Sure.
+	 *	@param	boolean	$really_sure I'm Really Sure.
 	 *	@return	boolean success;
 	 */
 	function delete($sure,$really_sure) {

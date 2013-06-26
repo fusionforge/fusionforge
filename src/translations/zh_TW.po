@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 16:00+0200\n"
+"POT-Creation-Date: 2013-06-26 17:19+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -396,6 +396,18 @@ msgstr "專案"
 #: common/forum/ForumHTML.class.php:73
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
+#: cronjobs/send_pending_items_mail.php:77
+#: cronjobs/send_pending_items_mail.php:78
+#: cronjobs/send_pending_items_mail.php:79
+#: cronjobs/send_pending_items_mail.php:80
+#: cronjobs/send_pending_items_mail.php:81
+#: cronjobs/send_pending_items_mail.php:115
+#: cronjobs/send_pending_items_mail.php:116
+#: cronjobs/send_pending_items_mail.php:117
+#: cronjobs/send_pending_items_mail.php:118
+#: cronjobs/send_pending_items_mail.php:119
+#: cronjobs/send_pending_items_mail.php:120
+#: cronjobs/send_pending_items_mail.php:121
 #: plugins/mantisbt/action/addAttachment.php:38
 #: plugins/mantisbt/action/addCategory.php:39
 #: plugins/mantisbt/action/addIssue.php:47
@@ -681,8 +693,8 @@ msgstr ""
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:97
 #: plugins/mailman/www/admin/index.php:150
 #: plugins/mailman/www/admin/index.php:183
-#: plugins/mailman/www/mailman_utils.php:57
-#: plugins/mailman/www/mailman_utils.php:73
+#: plugins/mailman/www/mailman_utils.php:52
+#: plugins/mailman/www/mailman_utils.php:67
 #: plugins/mantisbt/view/addIssue.php:137
 #: plugins/mantisbt/view/admin/addVersion.php:44
 #: plugins/mantisbt/view/admin/editVersion.php:62
@@ -1130,6 +1142,8 @@ msgstr "姓氏："
 #: common/tracker/views/form-addextrafield.php:131
 #: common/tracker/views/form-updateextrafieldelement.php:60
 #: common/widget/Widget_ProjectLatestDocuments.class.php:76
+#: cronjobs/send_pending_items_mail.php:80
+#: cronjobs/send_pending_items_mail.php:117
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:218
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:95
@@ -1242,7 +1256,7 @@ msgstr ""
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:114
 #: common/widget/Widget_ProjectInfo.class.php:68
 #: common/widget/Widget_Rss.class.php:76
-#: cronjobs/send_pending_items_mail.php:98
+#: cronjobs/send_pending_items_mail.php:96
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:190
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:54
 #: plugins/hudson/include/HudsonBuild.class.php:110
@@ -1475,8 +1489,8 @@ msgstr "文件管理員管理"
 #: common/tracker/actions/admin-tracker.php:32
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:59
 #: common/tracker/include/ArtifactTypeHtml.class.php:81
-#: plugins/mailman/www/mailman_utils.php:208
-#: plugins/mailman/www/mailman_utils.php:211
+#: plugins/mailman/www/mailman_utils.php:202
+#: plugins/mailman/www/mailman_utils.php:205
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:402
 #: plugins/mantisbt/www/user/index.php:41 www/mail/admin/index.php:290
 #: www/mail/mail_utils.php:48 www/news/news_utils.php:48
@@ -1601,40 +1615,41 @@ msgstr "開啟日期"
 #: plugins/mailman/www/admin/index.php:144
 #: plugins/mailman/www/admin/index.php:150
 #: plugins/mailman/www/admin/index.php:183
-#: plugins/scmhg/common/HgPlugin.class.php:627 www/account/lostpw.php:89
-#: www/account/pending-resend.php:71 www/account/register.php:159
-#: www/account/verify.php:78 www/account/verify.php:82
-#: www/admin/useredit.php:148 www/admin/useredit.php:157
-#: www/admin/useredit.php:211 www/frs/reporting/downloads.php:105
-#: www/frs/reporting/downloads.php:107 www/frs/reporting/downloads.php:109
-#: www/register/index.php:226 www/reporting/groupadded.php:60
-#: www/reporting/groupadded.php:61 www/reporting/groupadded.php:62
-#: www/reporting/groupcum.php:59 www/reporting/groupcum.php:60
-#: www/reporting/groupcum.php:61 www/reporting/projectact.php:62
-#: www/reporting/projectact.php:63 www/reporting/projectact.php:64
-#: www/reporting/projectact.php:65 www/reporting/projectact.php:66
-#: www/reporting/projecttime.php:72 www/reporting/projecttime.php:73
-#: www/reporting/projecttime.php:74 www/reporting/projecttime.php:75
-#: www/reporting/siteact.php:63 www/reporting/siteact.php:64
-#: www/reporting/siteact.php:65 www/reporting/siteact.php:66
-#: www/reporting/sitetimebar.php:60 www/reporting/sitetimebar.php:61
-#: www/reporting/sitetime.php:72 www/reporting/sitetime.php:73
-#: www/reporting/sitetime.php:74 www/reporting/timecategory.php:91
-#: www/reporting/toolspie.php:64 www/reporting/toolspie.php:65
-#: www/reporting/useract.php:77 www/reporting/useract.php:78
-#: www/reporting/useract.php:79 www/reporting/useract.php:80
-#: www/reporting/useract.php:81 www/reporting/useradded.php:58
-#: www/reporting/useradded.php:59 www/reporting/useradded.php:60
-#: www/reporting/usercum.php:59 www/reporting/usercum.php:60
-#: www/reporting/usercum.php:61 www/reporting/usersummary.php:69
-#: www/reporting/usersummary.php:70 www/reporting/usersummary.php:71
-#: www/reporting/usertime.php:88 www/reporting/usertime.php:89
-#: www/reporting/usertime.php:90 www/reporting/usertime.php:91
-#: www/snippet/add_snippet_to_package.php:128 www/snippet/addversion.php:94
-#: www/snippet/addversion.php:98 www/snippet/addversion.php:102
-#: www/snippet/addversion.php:217 www/snippet/addversion.php:221
-#: www/snippet/package.php:147 www/snippet/package.php:151
-#: www/snippet/package.php:156 www/snippet/package.php:169
+#: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
+#: www/account/lostpw.php:90 www/account/pending-resend.php:71
+#: www/account/register.php:159 www/account/verify.php:78
+#: www/account/verify.php:82 www/admin/useredit.php:148
+#: www/admin/useredit.php:157 www/admin/useredit.php:211
+#: www/frs/reporting/downloads.php:105 www/frs/reporting/downloads.php:107
+#: www/frs/reporting/downloads.php:109 www/register/index.php:226
+#: www/reporting/groupadded.php:60 www/reporting/groupadded.php:61
+#: www/reporting/groupadded.php:62 www/reporting/groupcum.php:59
+#: www/reporting/groupcum.php:60 www/reporting/groupcum.php:61
+#: www/reporting/projectact.php:62 www/reporting/projectact.php:63
+#: www/reporting/projectact.php:64 www/reporting/projectact.php:65
+#: www/reporting/projectact.php:66 www/reporting/projecttime.php:72
+#: www/reporting/projecttime.php:73 www/reporting/projecttime.php:74
+#: www/reporting/projecttime.php:75 www/reporting/siteact.php:63
+#: www/reporting/siteact.php:64 www/reporting/siteact.php:65
+#: www/reporting/siteact.php:66 www/reporting/sitetimebar.php:60
+#: www/reporting/sitetimebar.php:61 www/reporting/sitetime.php:72
+#: www/reporting/sitetime.php:73 www/reporting/sitetime.php:74
+#: www/reporting/timecategory.php:91 www/reporting/toolspie.php:64
+#: www/reporting/toolspie.php:65 www/reporting/useract.php:77
+#: www/reporting/useract.php:78 www/reporting/useract.php:79
+#: www/reporting/useract.php:80 www/reporting/useract.php:81
+#: www/reporting/useradded.php:58 www/reporting/useradded.php:59
+#: www/reporting/useradded.php:60 www/reporting/usercum.php:59
+#: www/reporting/usercum.php:60 www/reporting/usercum.php:61
+#: www/reporting/usersummary.php:69 www/reporting/usersummary.php:70
+#: www/reporting/usersummary.php:71 www/reporting/usertime.php:88
+#: www/reporting/usertime.php:89 www/reporting/usertime.php:90
+#: www/reporting/usertime.php:91 www/snippet/add_snippet_to_package.php:128
+#: www/snippet/addversion.php:94 www/snippet/addversion.php:98
+#: www/snippet/addversion.php:102 www/snippet/addversion.php:217
+#: www/snippet/addversion.php:221 www/snippet/package.php:147
+#: www/snippet/package.php:151 www/snippet/package.php:156
+#: www/snippet/package.php:169
 #, php-format
 msgid ":"
 msgstr ""
@@ -1835,8 +1850,8 @@ msgstr "無法更新上層文章"
 #: plugins/contribtracker/www/project_admin.php:324
 #: plugins/globaldashboard/www/admin/manage_accounts.php:94
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:103
-#: plugins/mailman/www/mailman_utils.php:75
-#: plugins/mailman/www/mailman_utils.php:182
+#: plugins/mailman/www/mailman_utils.php:69
+#: plugins/mailman/www/mailman_utils.php:176
 #: plugins/mantisbt/view/admin/editVersion.php:100
 #: plugins/mantisbt/view/admin/viewCategorie.php:67
 #: plugins/mantisbt/view/viewAttachment.php:58
@@ -2011,8 +2026,8 @@ msgstr "發佈"
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
 #: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:68
-#: plugins/mailman/www/mailman_utils.php:74
-#: plugins/mailman/www/mailman_utils.php:181
+#: plugins/mailman/www/mailman_utils.php:68
+#: plugins/mailman/www/mailman_utils.php:175
 #: plugins/mantisbt/view/addOrEditNote.php:54
 #: plugins/mantisbt/view/admin/editVersion.php:94
 #: plugins/mantisbt/view/adminuser.php:43
@@ -2133,7 +2148,7 @@ msgstr "只有登入後才能保存位置"
 msgid "Forum::savePlace()"
 msgstr "討論區：savePlace()"
 
-#: common/forum/Forum.class.php:598 common/mail/MailingList.class.php:256
+#: common/forum/Forum.class.php:598 common/mail/MailingList.class.php:257
 #: plugins/mailman/include/MailmanList.class.php:250
 #: plugins/mailman/include/MailmanList.class.php:377
 #: plugins/mailman/include/MailmanList.class.php:394
@@ -2144,7 +2159,7 @@ msgstr "更新時錯誤："
 
 #: common/forum/Forum.class.php:613 common/frs/FRSPackage.class.php:451
 #: common/frs/FRSRelease.class.php:343 common/include/Group.class.php:1590
-#: common/mail/MailingList.class.php:384 common/pm/ProjectGroup.class.php:360
+#: common/mail/MailingList.class.php:385 common/pm/ProjectGroup.class.php:360
 #: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:504
 #: common/tracker/ArtifactExtraField.class.php:430
 #: common/tracker/ArtifactType.class.php:791
@@ -2195,6 +2210,7 @@ msgstr "張貼者"
 #: common/tracker/actions/query.php:386
 #: common/tracker/include/build_submission_form.php:72
 #: common/tracker/views/form-customizelist.php:35
+#: cronjobs/send_pending_items_mail.php:116
 #: plugins/mantisbt/view/addIssue.php:133
 #: plugins/mantisbt/view/editIssue.php:213
 #: plugins/mantisbt/view/viewIssue.php:108
@@ -2617,6 +2633,7 @@ msgid "Permission denied."
 msgstr "權限不足"
 
 #: common/include/Error.class.php:147 common/tracker/actions/tracker.php:84
+#: www/account/change_email.php:38
 msgid "Invalid Email Address"
 msgstr "無效的Email"
 
@@ -3279,7 +3296,7 @@ msgstr "登入"
 msgid "New Account"
 msgstr "新帳號"
 
-#: common/include/Navigation.class.php:230 www/account/lostpw.php:74
+#: common/include/Navigation.class.php:230 www/account/lostpw.php:75
 #, php-format
 msgid "Home"
 msgstr "首頁"
@@ -4157,7 +4174,7 @@ msgid "Error Creating mailing list: "
 msgstr "已經存在的通信論壇"
 
 #: common/mail/MailingList.class.php:183
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "A mailing list will be created on %1$s in one hour\n"
 "and you are the list administrator.\n"
@@ -4173,9 +4190,7 @@ msgid ""
 "Your list password is: %6$s .\n"
 "You are encouraged to change this password as soon as possible.\n"
 "\n"
-"Thank you for registering your project with %1$s.\n"
-"\n"
-"-- the %1$s staff\n"
+"Thank you for registering your project with %1$s."
 msgstr ""
 "通信論壇會在6~24小時內建立於 %1$s  \n"
 "您是通信論壇的管理者\n"
@@ -4191,16 +4206,22 @@ msgstr ""
 "通信論壇密碼：%6$s \n"
 "建議您盡快修改這個密碼\n"
 "\n"
-"謝謝您將專案建立在 %1$s\n"
-"\n"
-"-- %1$s 工作團隊\n"
+"謝謝您將專案建立在 %1$s"
 
-#: common/mail/MailingList.class.php:201
+#: common/mail/MailingList.class.php:199
+#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
+#: www/account/lostpw.php:68
+#, php-format
+msgid "-- the %s staff"
+msgstr "%s 團隊"
+
+#: common/mail/MailingList.class.php:202
+#: plugins/mailman/www/mailman_utils.php:38
 #, php-format
 msgid "%s New Mailing List"
 msgstr "%s 新的通信論壇"
 
-#: common/mail/MailingList.class.php:221
+#: common/mail/MailingList.class.php:222
 #, fuzzy
 msgid "Error Getting mailing list"
 msgstr "已經存在的通信論壇"
@@ -4892,7 +4913,8 @@ msgstr "優先權"
 
 #: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:560
 #: common/tracker/actions/query.php:200
-#: common/tracker/views/form-customizelist.php:36 www/people/viewjob.php:77
+#: common/tracker/views/form-customizelist.php:36
+#: cronjobs/send_pending_items_mail.php:118 www/people/viewjob.php:77
 #: www/pm/include/ProjectTaskHTML.class.php:111
 #: www/project/report/index.php:137
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:59
@@ -5014,6 +5036,7 @@ msgstr "全部清除"
 #: common/tracker/actions/mod-limited.php:114
 #: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:943
 #: common/tracker/include/build_submission_form.php:62
+#: cronjobs/send_pending_items_mail.php:119
 #: plugins/mantisbt/view/addIssue.php:74
 #: plugins/mantisbt/view/editIssue.php:127
 #: plugins/mantisbt/view/viewIssue.php:84 www/my/dashboard.php:73
@@ -5026,9 +5049,11 @@ msgstr "指定給"
 
 #: common/tracker/actions/browse.php:570 common/tracker/actions/detail.php:78
 #: common/tracker/actions/mod-limited.php:86 common/tracker/actions/mod.php:88
-#: www/admin/approve-pending.php:213 www/admin/pending-news.php:142
-#: www/my/dashboard.php:75 www/news/admin/index.php:127
-#: www/pm/detail_task.php:39 www/pm/mod_task.php:52
+#: cronjobs/send_pending_items_mail.php:79
+#: cronjobs/send_pending_items_mail.php:120 www/admin/approve-pending.php:213
+#: www/admin/pending-news.php:142 www/my/dashboard.php:75
+#: www/news/admin/index.php:127 www/pm/detail_task.php:39
+#: www/pm/mod_task.php:52
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:50
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:50
@@ -6685,8 +6710,8 @@ msgstr "編輯角色"
 msgid "Configuring allowed roles for the transitions from %1$s to %2$s"
 msgstr ""
 
-#: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:61
-#: plugins/mailman/www/mailman_utils.php:132 www/account/index.php:260
+#: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:56
+#: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:260
 #: www/include/Layout.class.php:1343
 msgid "Preferences"
 msgstr "設定"
@@ -7531,56 +7556,53 @@ msgid "Pending task manager items notification"
 msgstr "未決定的任務管理員項目通知"
 
 #: cronjobs/send_pending_items_mail.php:76
-#, fuzzy, php-format
-msgid ""
-"This mail is sent to you to remind you of pending/overdue tasks.\n"
-"The task manager item #%1$s is pending:\n"
-"Task Summary: %2$s\n"
-"Submitted by: %4$s\n"
-"Status:%5$s\n"
-"Percent Complete: %6$s\n"
-"\n"
-"Click here to visit the item %3$s"
+msgid "This mail is sent to you to remind you of pending/overdue tasks."
 msgstr ""
-"這郵件被寄給你使你想起未決定/過期的任務。\n"
-"任務管理員項目 #%1$s 是未決定: \n"
-"任務摘要: %2$s\n"
-"發表人: %4$s\n"
-"狀態: %5$s\n"
-"完成百分比: %6$s\n"
-"\n"
-"點擊這裏拜訪這個項目 %3$s"
 
-#: cronjobs/send_pending_items_mail.php:115
+#: cronjobs/send_pending_items_mail.php:77
+#, fuzzy, php-format
+msgid "The task manager item #%s is pending"
+msgstr "項目 #%s 是未決定"
+
+#: cronjobs/send_pending_items_mail.php:78 www/pm/add_task.php:74
+#: www/pm/browse_task.php:126 www/pm/browse_task.php:231
+#: www/pm/detail_task.php:94 www/pm/ganttpage.php:70
+#: www/pm/include/ProjectTaskHTML.class.php:74 www/pm/mod_task.php:97
+msgid "Task Summary"
+msgstr "任務摘要"
+
+#: cronjobs/send_pending_items_mail.php:81 www/pm/add_task.php:63
+#: www/pm/browse_task.php:129 www/pm/browse_task.php:237
+#: www/pm/detail_task.php:63 www/pm/ganttpage.php:73 www/pm/mod_task.php:78
+msgid "Percent Complete"
+msgstr "完成度百分比"
+
+#: cronjobs/send_pending_items_mail.php:82
+#: cronjobs/send_pending_items_mail.php:122
+#, php-format
+msgid "Click here to visit the item %s"
+msgstr "點擊這裏拜訪這個項目: %s"
+
+#: cronjobs/send_pending_items_mail.php:113
 #, fuzzy
 msgid "Pending tracker items notification"
 msgstr "未決定的追蹤者項目通知"
 
-#: cronjobs/send_pending_items_mail.php:116
-#, fuzzy, php-format
+#: cronjobs/send_pending_items_mail.php:114
 msgid ""
-"This mail is sent to you to remind you of pending/overdue tracker items. The "
-"item #%1$s is pending:\n"
-"Summary: %3$s\n"
-"Status: %5$s\n"
-"Open Date:%6$s\n"
-"Assigned To: %7$s\n"
-"Submitted by: %8$s\n"
-"Details: %9$s\n"
-"\n"
-"\n"
-"Click here to visit the item: %4$s"
-msgstr ""
-"這郵件被寄給你使你想起未決定/過期的追蹤者項目。\n"
-"項目 #%1$s 是未決定: \n"
-"摘要: %3$s\n"
-"狀態: %5$s\n"
-"啟用日期: %6$s\n"
-"指定給: %7$s\n"
-"發表人: %8$s\n"
-"細節: %9$s\n"
-"\n"
-"點擊這裏拜訪這個項目: %4$s"
+"This mail is sent to you to remind you of pending/overdue tracker items."
+msgstr "這郵件被寄給你使你想起未決定/過期的追蹤者項目。"
+
+#: cronjobs/send_pending_items_mail.php:115
+#, php-format
+msgid "The item #%s is pending"
+msgstr "項目 #%s 是未決定"
+
+#: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:150
+#: www/export/rssAboTask.php:146 www/my/diary.php:185
+#: www/news/admin/index.php:137 www/news/submit.php:148
+msgid "Details"
+msgstr "細節"
 
 #: cronjobs/tracker_gateway.php:195
 msgid "This user is not allowed to submit items to this tracker."
@@ -7619,8 +7641,7 @@ msgid "Login name or email address"
 msgstr "無效的Email"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
-#: www/account/lostpw.php:89 www/account/pending-resend.php:71
-#: www/account/verify.php:78
+#: www/account/pending-resend.php:71 www/account/verify.php:78
 msgid "Login name"
 msgstr "使用者名稱"
 
@@ -8709,8 +8730,8 @@ msgstr "新增這個通信論壇"
 
 #: plugins/forumml/include/forummlPlugin.class.php:171
 #: plugins/forumml/www/message.php:159
-#: plugins/mailman/www/mailman_utils.php:58
-#: plugins/mailman/www/mailman_utils.php:123
+#: plugins/mailman/www/mailman_utils.php:53
+#: plugins/mailman/www/mailman_utils.php:117
 #, fuzzy
 msgid "Archives"
 msgstr "%1$s 檔案"
@@ -10430,8 +10451,8 @@ msgstr ""
 msgid "Choose a list to browse, search, and post messages."
 msgstr "<p>選一個清單來瀏覽、搜尋與發表訊息</p>"
 
-#: plugins/mailman/www/mailman_utils.php:20
-#, fuzzy, php-format
+#: plugins/mailman/www/mailman_utils.php:19
+#, php-format
 msgid ""
 "A mailing list will be created on %1$s in few minutes\n"
 "and you are the list administrator.\n"
@@ -10447,9 +10468,7 @@ msgid ""
 "Your list password is: %6$s .\n"
 "You are encouraged to change this password as soon as possible.\n"
 "\n"
-"Thank you for registering your project with %1$s.\n"
-"\n"
-"-- the %1$s staff\n"
+"Thank you for registering your project with %1$s."
 msgstr ""
 "通信論壇會在6~24小時內建立於 %1$s  \n"
 "您是通信論壇的管理者\n"
@@ -10465,59 +10484,52 @@ msgstr ""
 "通信論壇密碼：%6$s \n"
 "建議您盡快修改這個密碼\n"
 "\n"
-"謝謝您將專案建立在 %1$s\n"
-"\n"
-"-- %1$s 工作團隊\n"
+"謝謝您將專案建立在 %1$s"
 
-#: plugins/mailman/www/mailman_utils.php:38
-#, php-format
-msgid "%1$s New Mailing List"
-msgstr "%1$s 新的通信論壇"
-
-#: plugins/mailman/www/mailman_utils.php:56
-#: plugins/mailman/www/mailman_utils.php:72
+#: plugins/mailman/www/mailman_utils.php:51
+#: plugins/mailman/www/mailman_utils.php:66
 #, fuzzy
 msgid "Mailing List"
 msgstr "通信論壇"
 
-#: plugins/mailman/www/mailman_utils.php:60 www/mail/index.php:80
+#: plugins/mailman/www/mailman_utils.php:55 www/mail/index.php:80
 msgid "Subscription"
 msgstr "補充說明"
 
-#: plugins/mailman/www/mailman_utils.php:62
-#: plugins/mailman/www/mailman_utils.php:76
-#: plugins/mailman/www/mailman_utils.php:139
+#: plugins/mailman/www/mailman_utils.php:57
+#: plugins/mailman/www/mailman_utils.php:70
+#: plugins/mailman/www/mailman_utils.php:133
 msgid "Administrate"
 msgstr "管理"
 
-#: plugins/mailman/www/mailman_utils.php:112
-#: plugins/mailman/www/mailman_utils.php:172 www/mail/admin/index.php:288
+#: plugins/mailman/www/mailman_utils.php:106
+#: plugins/mailman/www/mailman_utils.php:166 www/mail/admin/index.php:288
 #: www/mail/index.php:93
 msgid "Not activated yet"
 msgstr "尚未啟動"
 
-#: plugins/mailman/www/mailman_utils.php:115
-#: plugins/mailman/www/mailman_utils.php:175
+#: plugins/mailman/www/mailman_utils.php:109
+#: plugins/mailman/www/mailman_utils.php:169
 #, fuzzy
 msgid "Error during creation"
 msgstr "拒絕群組時發生錯誤"
 
-#: plugins/mailman/www/mailman_utils.php:130 www/admin/unsubscribe.php:60
+#: plugins/mailman/www/mailman_utils.php:124 www/admin/unsubscribe.php:60
 #: www/forum/monitor.php:65
 msgid "Unsubscribe"
 msgstr "取消訂閱"
 
-#: plugins/mailman/www/mailman_utils.php:134
+#: plugins/mailman/www/mailman_utils.php:128
 #, fuzzy
 msgid "Subscribe"
 msgstr "取消訂閱"
 
-#: plugins/mailman/www/mailman_utils.php:175
+#: plugins/mailman/www/mailman_utils.php:169
 #, fuzzy
 msgid "Re-create"
 msgstr "建立"
 
-#: plugins/mailman/www/mailman_utils.php:185
+#: plugins/mailman/www/mailman_utils.php:179
 #, fuzzy
 msgid "Administrate from Mailman"
 msgstr "管理部門"
@@ -13895,54 +13907,41 @@ msgid ""
 msgstr ""
 
 #: www/account/change_email-complete.php:69 www/account/change_email.php:94
-#: www/account/lostpw.php:97 www/account/unsubscribe.php:76
+#: www/account/lostpw.php:100 www/account/unsubscribe.php:76
 #: www/my/bookmark_edit.php:67
 msgid "Return"
 msgstr "返回"
 
-#: www/account/change_email.php:38
-#, fuzzy
-msgid "Invalid email address."
-msgstr "無效的Email"
-
 #: www/account/change_email.php:57
-#, fuzzy, php-format
-msgid ""
-"You have requested a change of email address on %1$s.\n"
-"Please visit the following URL to complete the email change:\n"
-"\n"
-"%2$s\n"
-"\n"
-" -- the %1$s staff"
-msgstr ""
-"您申請在 %1$s 上更改您的email信箱。 \n"
-" 請點擊這個網址來完成email信箱的改變：\n"
-"\n"
-"<http://%1$s/account/change_email-complete.php?ch=_%2$s>\n"
-"\n"
-" -- %1$s 團隊"
+#, php-format
+msgid "You have requested a change of email address on %s."
+msgstr "您申請在 %s 上更改您的email信箱。"
 
-#: www/account/change_email.php:66 www/account/lostpw.php:70
+#: www/account/change_email.php:59
+msgid "Please visit the following URL to complete the email change:"
+msgstr " 請點擊這個網址來完成email信箱的改變："
+
+#: www/account/change_email.php:65 www/account/lostpw.php:71
 #, php-format
 msgid "%1$s Verification"
 msgstr "%1$s 確認"
 
-#: www/account/change_email.php:68
+#: www/account/change_email.php:67
 msgid "Email Change Confirmation"
 msgstr "確認email信箱改變"
 
-#: www/account/change_email.php:70
+#: www/account/change_email.php:69
 msgid ""
 "An email has been sent to the new address. Follow the instructions in the "
 "email to complete the email change."
 msgstr ""
 
-#: www/account/change_email.php:78
+#: www/account/change_email.php:76
 #, fuzzy
 msgid "Email change"
 msgstr "Email改變成功"
 
-#: www/account/change_email.php:80
+#: www/account/change_email.php:78
 msgid ""
 "Changing your email address will require confirmation from your new email "
 "address, so that we can ensure we have a good email address on file."
@@ -13950,7 +13949,7 @@ msgstr ""
 "為了保證我們擁有您正確的email信箱，改變您的email信箱，將會要求新email信箱的確"
 "認。"
 
-#: www/account/change_email.php:81
+#: www/account/change_email.php:79
 #, fuzzy
 msgid ""
 "We need to maintain an accurate email address for each user due to the level "
@@ -13964,7 +13963,7 @@ msgstr ""
 "們做到這一點。</p>  <p>送出這個表單，將會發出一個要求確認的網址到新的email信"
 "箱，訪問那個連結就可以完成email信箱的改變。</p>"
 
-#: www/account/change_email.php:82
+#: www/account/change_email.php:80
 msgid ""
 "Submitting the form below will mail a confirmation URL to the new email "
 "address. Visiting this link will complete the email change."
@@ -13972,9 +13971,9 @@ msgstr ""
 "送出這個表單，將會發出一個要求確認的網址到新的email信箱，訪問那個連結就可以完"
 "成email信箱的改變。"
 
-#: www/account/change_email.php:88
-msgid "New Email Address:"
-msgstr "新的Email："
+#: www/account/change_email.php:86
+msgid "New Email Address"
+msgstr "新的Email"
 
 #: www/account/change_email.php:90
 msgid "Send Confirmation to New Address"
@@ -14359,61 +14358,60 @@ msgstr ""
 msgid "New Password (min. 6 chars)"
 msgstr "新密碼（至少6個字元）"
 
-#: www/account/lostpw.php:45 www/users:74
+#: www/account/lostpw.php:45 www/sendmessage.php:45
 #, fuzzy
-msgid "That user does not exist."
+msgid "That user does not exist"
 msgstr "查詢不存在"
 
 #: www/account/lostpw.php:58
-#, fuzzy, php-format
+#, php-format
 msgid ""
-"Someone (presumably you) on the %1$s site requested a\n"
-"password change through email verification. If this was not you,\n"
-"ignore this message and nothing will happen.\n"
-"\n"
-"If you requested this verification, visit the following URL\n"
-"to change your password:\n"
-"\n"
-"<%2$s>\n"
-"\n"
-" -- the %1$s staff\n"
-msgstr ""
-"有人 （大概就是您本人）在 %3$s 網站上申請通過email確認來更改密碼。如果這個人"
-"不是您，那麼就忽略這封mail，當做一切都沒有發生。\n"
-"\n"
-"如果是您發出找個請求確認，請點擊下面的網址來改變您的密碼：\n"
-"\n"
-"<http://%1$s/account/lostlogin.php?ch=_%2$s>\n"
-"\n"
-" -- %3$s 團隊\n"
+"Someone (presumably you) on the %s site requested a password change through "
+"email verification."
+msgstr "有人 （大概就是您本人）在 %s 網站上申請通過email確認來更改密碼。"
 
-#: www/account/lostpw.php:72
+#: www/account/lostpw.php:60
+msgid "If this was not you, ignore this message and nothing will happen."
+msgstr "如果這個人不是您，那麼就忽略這封mail，當做一切都沒有發生。"
+
+#: www/account/lostpw.php:63
+msgid ""
+"If you requested this verification, visit the following URL to change your "
+"password:"
+msgstr "如果是您發出找個請求確認，請點擊下面的網址來改變您的密碼："
+
+#: www/account/lostpw.php:73
 #, fuzzy
 msgid "Lost Password Confirmation"
 msgstr "確認email信箱改變"
 
-#: www/account/lostpw.php:74
+#: www/account/lostpw.php:75
 #, php-format
 msgid ""
 "An email has been sent to the address you have on file. Follow the "
 "instructions in the email to change your account password."
 msgstr ""
 
-#: www/account/lostpw.php:83
+#: www/account/lostpw.php:84
 msgid ""
 "Hey... losing your password is serious business. It compromises the security "
 "of your account, your projects, and this site."
 msgstr ""
 
-#: www/account/lostpw.php:84
+#: www/account/lostpw.php:85
 msgid ""
-"Clicking \"Send Lost PW Hash\" below will email a URL to the email address "
-"we have on file for you. In this URL is a 128-bit confirmation hash for your "
+"Clicking “Send Lost PW Hash” below will email a URL to the email address we "
+"have on file for you. In this URL is a 128-bit confirmation hash for your "
 "account. Visiting the URL will allow you to change your password online and "
 "login."
 msgstr ""
 
-#: www/account/lostpw.php:93
+#: www/account/lostpw.php:90
+#, fuzzy
+msgid "Login Name"
+msgstr "使用者名稱"
+
+#: www/account/lostpw.php:96
 msgid "Send Lost PW Hash"
 msgstr "發送遺失密碼確認信"
 
@@ -15549,11 +15547,6 @@ msgstr "核准首頁發表"
 #: www/admin/pending-news.php:146
 msgid "Do Nothing"
 msgstr "不採取動作"
-
-#: www/admin/pending-news.php:150 www/export/rssAboTask.php:146
-#: www/my/diary.php:185 www/news/admin/index.php:137 www/news/submit.php:148
-msgid "Details"
-msgstr "細節"
 
 #: www/admin/pluginman.php:55
 #, php-format
@@ -19031,19 +19024,6 @@ msgstr "增加新任務"
 msgid "admin"
 msgstr "管理"
 
-#: www/pm/add_task.php:63 www/pm/browse_task.php:129
-#: www/pm/browse_task.php:237 www/pm/detail_task.php:63
-#: www/pm/ganttpage.php:73 www/pm/mod_task.php:78
-msgid "Percent Complete"
-msgstr "完成度百分比"
-
-#: www/pm/add_task.php:74 www/pm/browse_task.php:126
-#: www/pm/browse_task.php:231 www/pm/detail_task.php:94
-#: www/pm/ganttpage.php:70 www/pm/include/ProjectTaskHTML.class.php:74
-#: www/pm/mod_task.php:97
-msgid "Task Summary"
-msgstr "任務摘要"
-
 #: www/pm/add_task.php:81
 msgid "Task Details"
 msgstr "任務細節"
@@ -21396,11 +21376,6 @@ msgstr "住址："
 msgid "touser"
 msgstr "總共小時"
 
-#: www/sendmessage.php:45
-#, fuzzy
-msgid "That user does not exist"
-msgstr "查詢不存在"
-
 #: www/sendmessage.php:50
 #, fuzzy, php-format
 msgid "You can only send to addresses @<em>%1$s</em>."
@@ -23018,6 +22993,180 @@ msgstr "大量更新"
 msgid "No User Name Provided"
 msgstr "帳號"
 
+#: www/users:74
+#, fuzzy
+msgid "That user does not exist."
+msgstr "查詢不存在"
+
+#, fuzzy
+#~ msgid ""
+#~ "A mailing list will be created on %1$s in one hour\n"
+#~ "and you are the list administrator.\n"
+#~ "\n"
+#~ "This list is: %3$s@%2$s .\n"
+#~ "\n"
+#~ "Your mailing list info is at:\n"
+#~ "%4$s .\n"
+#~ "\n"
+#~ "List administration can be found at:\n"
+#~ "%5$s .\n"
+#~ "\n"
+#~ "Your list password is: %6$s .\n"
+#~ "You are encouraged to change this password as soon as possible.\n"
+#~ "\n"
+#~ "Thank you for registering your project with %1$s.\n"
+#~ "\n"
+#~ "-- the %1$s staff\n"
+#~ msgstr ""
+#~ "通信論壇會在6~24小時內建立於 %1$s  \n"
+#~ "您是通信論壇的管理者\n"
+#~ "\n"
+#~ "這個通信論壇是：%3$s@%2$s \n"
+#~ "\n"
+#~ "您的通信論壇資訊在：\n"
+#~ "%4$s \n"
+#~ "\n"
+#~ "通信論壇管理介面：\n"
+#~ "%5$s \n"
+#~ "\n"
+#~ "通信論壇密碼：%6$s \n"
+#~ "建議您盡快修改這個密碼\n"
+#~ "\n"
+#~ "謝謝您將專案建立在 %1$s\n"
+#~ "\n"
+#~ "-- %1$s 工作團隊\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "This mail is sent to you to remind you of pending/overdue tasks.\n"
+#~ "The task manager item #%1$s is pending:\n"
+#~ "Task Summary: %2$s\n"
+#~ "Submitted by: %4$s\n"
+#~ "Status:%5$s\n"
+#~ "Percent Complete: %6$s\n"
+#~ "\n"
+#~ "Click here to visit the item %3$s"
+#~ msgstr ""
+#~ "這郵件被寄給你使你想起未決定/過期的任務。\n"
+#~ "任務管理員項目 #%1$s 是未決定: \n"
+#~ "任務摘要: %2$s\n"
+#~ "發表人: %4$s\n"
+#~ "狀態: %5$s\n"
+#~ "完成百分比: %6$s\n"
+#~ "\n"
+#~ "點擊這裏拜訪這個項目 %3$s"
+
+#, fuzzy
+#~ msgid ""
+#~ "This mail is sent to you to remind you of pending/overdue tracker items. "
+#~ "The item #%1$s is pending:\n"
+#~ "Summary: %3$s\n"
+#~ "Status: %5$s\n"
+#~ "Open Date:%6$s\n"
+#~ "Assigned To: %7$s\n"
+#~ "Submitted by: %8$s\n"
+#~ "Details: %9$s\n"
+#~ "\n"
+#~ "\n"
+#~ "Click here to visit the item: %4$s"
+#~ msgstr ""
+#~ "這郵件被寄給你使你想起未決定/過期的追蹤者項目。\n"
+#~ "項目 #%1$s 是未決定: \n"
+#~ "摘要: %3$s\n"
+#~ "狀態: %5$s\n"
+#~ "啟用日期: %6$s\n"
+#~ "指定給: %7$s\n"
+#~ "發表人: %8$s\n"
+#~ "細節: %9$s\n"
+#~ "\n"
+#~ "點擊這裏拜訪這個項目: %4$s"
+
+#, fuzzy
+#~ msgid ""
+#~ "A mailing list will be created on %1$s in few minutes\n"
+#~ "and you are the list administrator.\n"
+#~ "\n"
+#~ "This list is: %3$s@%2$s .\n"
+#~ "\n"
+#~ "Your mailing list info is at:\n"
+#~ "%4$s .\n"
+#~ "\n"
+#~ "List administration can be found at:\n"
+#~ "%5$s .\n"
+#~ "\n"
+#~ "Your list password is: %6$s .\n"
+#~ "You are encouraged to change this password as soon as possible.\n"
+#~ "\n"
+#~ "Thank you for registering your project with %1$s.\n"
+#~ "\n"
+#~ "-- the %1$s staff\n"
+#~ msgstr ""
+#~ "通信論壇會在6~24小時內建立於 %1$s  \n"
+#~ "您是通信論壇的管理者\n"
+#~ "\n"
+#~ "這個通信論壇是：%3$s@%2$s \n"
+#~ "\n"
+#~ "您的通信論壇資訊在：\n"
+#~ "%4$s \n"
+#~ "\n"
+#~ "通信論壇管理介面：\n"
+#~ "%5$s \n"
+#~ "\n"
+#~ "通信論壇密碼：%6$s \n"
+#~ "建議您盡快修改這個密碼\n"
+#~ "\n"
+#~ "謝謝您將專案建立在 %1$s\n"
+#~ "\n"
+#~ "-- %1$s 工作團隊\n"
+
+#~ msgid "%1$s New Mailing List"
+#~ msgstr "%1$s 新的通信論壇"
+
+#, fuzzy
+#~ msgid "Invalid email address."
+#~ msgstr "無效的Email"
+
+#, fuzzy
+#~ msgid ""
+#~ "You have requested a change of email address on %1$s.\n"
+#~ "Please visit the following URL to complete the email change:\n"
+#~ "\n"
+#~ "%2$s\n"
+#~ "\n"
+#~ " -- the %1$s staff"
+#~ msgstr ""
+#~ "您申請在 %1$s 上更改您的email信箱。 \n"
+#~ " 請點擊這個網址來完成email信箱的改變：\n"
+#~ "\n"
+#~ "<http://%1$s/account/change_email-complete.php?ch=_%2$s>\n"
+#~ "\n"
+#~ " -- %1$s 團隊"
+
+#~ msgid "New Email Address:"
+#~ msgstr "新的Email："
+
+#, fuzzy
+#~ msgid ""
+#~ "Someone (presumably you) on the %1$s site requested a\n"
+#~ "password change through email verification. If this was not you,\n"
+#~ "ignore this message and nothing will happen.\n"
+#~ "\n"
+#~ "If you requested this verification, visit the following URL\n"
+#~ "to change your password:\n"
+#~ "\n"
+#~ "<%2$s>\n"
+#~ "\n"
+#~ " -- the %1$s staff\n"
+#~ msgstr ""
+#~ "有人 （大概就是您本人）在 %3$s 網站上申請通過email確認來更改密碼。如果這個"
+#~ "人不是您，那麼就忽略這封mail，當做一切都沒有發生。\n"
+#~ "\n"
+#~ "如果是您發出找個請求確認，請點擊下面的網址來改變您的密碼：\n"
+#~ "\n"
+#~ "<http://%1$s/account/lostlogin.php?ch=_%2$s>\n"
+#~ "\n"
+#~ " -- %3$s 團隊\n"
+
 #, fuzzy
 #~ msgid ""
 #~ "%1$s (%2$s) has requested to join your project. \n"
@@ -23062,9 +23211,6 @@ msgstr "帳號"
 #~ msgid "Project Full Name"
 #~ msgstr "專案全名"
 
-#~ msgid "-- the %s staff"
-#~ msgstr "%s 團隊"
-
 #~ msgid "%s Project Approved"
 #~ msgstr "%s 專案通過審核了"
 
@@ -23090,39 +23236,6 @@ msgstr "帳號"
 
 #~ msgid "%s Account Registration"
 #~ msgstr "%s 帳號註冊"
-
-#~ msgid ""
-#~ "A mailing list will be created on %1$s in one hour\n"
-#~ "and you are the list administrator.\n"
-#~ "\n"
-#~ "This list is: %3$s@%2$s .\n"
-#~ "\n"
-#~ "Your mailing list info is at:\n"
-#~ "%4$s .\n"
-#~ "\n"
-#~ "List administration can be found at:\n"
-#~ "%5$s .\n"
-#~ "\n"
-#~ "Your list password is: %6$s .\n"
-#~ "You are encouraged to change this password as soon as possible.\n"
-#~ "\n"
-#~ "Thank you for registering your project with %1$s."
-#~ msgstr ""
-#~ "通信論壇會在6~24小時內建立於 %1$s  \n"
-#~ "您是通信論壇的管理者\n"
-#~ "\n"
-#~ "這個通信論壇是：%3$s@%2$s \n"
-#~ "\n"
-#~ "您的通信論壇資訊在：\n"
-#~ "%4$s \n"
-#~ "\n"
-#~ "通信論壇管理介面：\n"
-#~ "%5$s \n"
-#~ "\n"
-#~ "通信論壇密碼：%6$s \n"
-#~ "建議您盡快修改這個密碼\n"
-#~ "\n"
-#~ "謝謝您將專案建立在 %1$s"
 
 #~ msgid "%s Reporting"
 #~ msgstr "%s 報告"
@@ -23157,16 +23270,6 @@ msgstr "帳號"
 #~ msgid "There are no public subprojects available"
 #~ msgstr "目前沒有公開的子專案"
 
-#~ msgid "Click here to visit the item %s"
-#~ msgstr "點擊這裏拜訪這個項目: %s"
-
-#~ msgid ""
-#~ "This mail is sent to you to remind you of pending/overdue tracker items."
-#~ msgstr "這郵件被寄給你使你想起未決定/過期的追蹤者項目。"
-
-#~ msgid "The item #%s is pending"
-#~ msgstr "項目 #%s 是未決定"
-
 #~ msgid ""
 #~ "Visiting the link sent to you in this email will activate your account."
 #~ msgstr "點擊email中的連結就可以啟動您的帳號。"
@@ -23180,48 +23283,6 @@ msgstr "帳號"
 
 #~ msgid "No Lists found for %s"
 #~ msgstr "%s 沒有任何通信論壇"
-
-#~ msgid ""
-#~ "A mailing list will be created on %1$s in few minutes\n"
-#~ "and you are the list administrator.\n"
-#~ "\n"
-#~ "This list is: %3$s@%2$s .\n"
-#~ "\n"
-#~ "Your mailing list info is at:\n"
-#~ "%4$s .\n"
-#~ "\n"
-#~ "List administration can be found at:\n"
-#~ "%5$s .\n"
-#~ "\n"
-#~ "Your list password is: %6$s .\n"
-#~ "You are encouraged to change this password as soon as possible.\n"
-#~ "\n"
-#~ "Thank you for registering your project with %1$s."
-#~ msgstr ""
-#~ "通信論壇會在6~24小時內建立於 %1$s  \n"
-#~ "您是通信論壇的管理者\n"
-#~ "\n"
-#~ "這個通信論壇是：%3$s@%2$s \n"
-#~ "\n"
-#~ "您的通信論壇資訊在：\n"
-#~ "%4$s \n"
-#~ "\n"
-#~ "通信論壇管理介面：\n"
-#~ "%5$s \n"
-#~ "\n"
-#~ "通信論壇密碼：%6$s \n"
-#~ "建議您盡快修改這個密碼\n"
-#~ "\n"
-#~ "謝謝您將專案建立在 %1$s"
-
-#~ msgid "You have requested a change of email address on %s."
-#~ msgstr "您申請在 %s 上更改您的email信箱。"
-
-#~ msgid "Please visit the following URL to complete the email change:"
-#~ msgstr " 請點擊這個網址來完成email信箱的改變："
-
-#~ msgid "New Email Address"
-#~ msgstr "新的Email"
 
 #~ msgid ""
 #~ "To avoid having to type your password every time for your CVS/SSH "
@@ -23250,19 +23311,6 @@ msgstr "帳號"
 
 #~ msgid "Login with SSL"
 #~ msgstr "透過SSL登入"
-
-#~ msgid ""
-#~ "Someone (presumably you) on the %s site requested a password change "
-#~ "through email verification."
-#~ msgstr "有人 （大概就是您本人）在 %s 網站上申請通過email確認來更改密碼。"
-
-#~ msgid "If this was not you, ignore this message and nothing will happen."
-#~ msgstr "如果這個人不是您，那麼就忽略這封mail，當做一切都沒有發生。"
-
-#~ msgid ""
-#~ "If you requested this verification, visit the following URL to change "
-#~ "your password:"
-#~ msgstr "如果是您發出找個請求確認，請點擊下面的網址來改變您的密碼："
 
 #~ msgid ""
 #~ "You are now being sent a confirmation email to verify your email address. "

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 16:00+0200\n"
+"POT-Creation-Date: 2013-06-26 17:19+0200\n"
 "PO-Revision-Date: 2013-05-23 16:06+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,9 +58,8 @@ msgid "Document Manager Action Denied."
 msgstr "Gestionnaire de documentation : action interdite."
 
 #: common/docman/actions/addfile.php:75
-#, fuzzy
 msgid "No valid folder was selected."
-msgstr "Aucun répertoire de documents selectionné."
+msgstr "Pas de dossier valide de document sélectionné."
 
 #: common/docman/actions/addfile.php:93 common/docman/actions/addfile.php:106
 msgid "Error getting blank document."
@@ -209,8 +208,7 @@ msgstr "Le document a été réservé avec succès."
 #, php-format
 msgid "Documents folder %s moved to trash successfully."
 msgstr ""
-"Le dossier %s et son contenu ont été déplacés vers la corbeille avec "
-"succès."
+"Le dossier %s et son contenu ont été déplacés vers la corbeille avec succès."
 
 #: common/docman/actions/trashfile.php:66
 msgid "moved to trash successfully."
@@ -360,6 +358,18 @@ msgstr "Projet"
 #: common/forum/ForumHTML.class.php:73
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
+#: cronjobs/send_pending_items_mail.php:77
+#: cronjobs/send_pending_items_mail.php:78
+#: cronjobs/send_pending_items_mail.php:79
+#: cronjobs/send_pending_items_mail.php:80
+#: cronjobs/send_pending_items_mail.php:81
+#: cronjobs/send_pending_items_mail.php:115
+#: cronjobs/send_pending_items_mail.php:116
+#: cronjobs/send_pending_items_mail.php:117
+#: cronjobs/send_pending_items_mail.php:118
+#: cronjobs/send_pending_items_mail.php:119
+#: cronjobs/send_pending_items_mail.php:120
+#: cronjobs/send_pending_items_mail.php:121
 #: plugins/mantisbt/action/addAttachment.php:38
 #: plugins/mantisbt/action/addCategory.php:39
 #: plugins/mantisbt/action/addIssue.php:47
@@ -468,7 +478,7 @@ msgstr "Erreur lors de l'ajout d'un dossier :"
 
 #: common/docman/DocumentGroup.class.php:235
 msgid "Unsupported injected file:"
-msgstr ""
+msgstr "Ce type de fichier ne peut être injecté :"
 
 #: common/docman/DocumentGroup.class.php:253
 msgid "Invalid Document Folder ID"
@@ -508,9 +518,8 @@ msgid "Unable to open zipfile."
 msgstr "Erreur lors de l'ouverture de l'archive Zip."
 
 #: common/docman/DocumentGroup.class.php:800
-#, fuzzy
 msgid "Injected by Zip:"
-msgstr "Inseré automatiquement:"
+msgstr "Injecté par Zip :"
 
 #: common/docman/DocumentGroup.class.php:809
 msgid "Unknown item."
@@ -518,7 +527,7 @@ msgstr "Élement inconnu."
 
 #: common/docman/DocumentGroup.class.php:816
 msgid "Unable to open folder for injecting into tree"
-msgstr ""
+msgstr "Impossible d'ouvrir le dossier pour injecter l'arbre"
 
 #: common/docman/DocumentGroupFactory.class.php:84
 #: common/docman/DocumentGroupFactory.class.php:118
@@ -533,8 +542,7 @@ msgstr "Nombre de documents dans ce dossier"
 msgid ""
 "Number of documents in this folder per status. active/pending/hidden/private"
 msgstr ""
-"Nombre de documents dans ce dossier par état. Actif/En attente/Caché/"
-"Privé"
+"Nombre de documents dans ce dossier par état. Actif/En attente/Caché/Privé"
 
 #: common/docman/DocumentManager.class.php:181
 msgid "Number of deleted documents in this folder"
@@ -600,10 +608,9 @@ msgid "webdav db error:"
 msgstr "Erreur WebDAV :"
 
 #: common/docman/views/addfile.php:88
-#, fuzzy
 msgid "You MUST first create at least one folder to store your document."
 msgstr ""
-"Vous devez d'abord créer au moins un dossier pour stocker votre document."
+"Vous DEVEZ d'abord créer au moins un dossier pour stocker votre document."
 
 #: common/docman/views/addfile.php:91
 msgid ""
@@ -636,8 +643,8 @@ msgstr ""
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:97
 #: plugins/mailman/www/admin/index.php:150
 #: plugins/mailman/www/admin/index.php:183
-#: plugins/mailman/www/mailman_utils.php:57
-#: plugins/mailman/www/mailman_utils.php:73
+#: plugins/mailman/www/mailman_utils.php:52
+#: plugins/mailman/www/mailman_utils.php:67
 #: plugins/mantisbt/view/addIssue.php:137
 #: plugins/mantisbt/view/admin/addVersion.php:44
 #: plugins/mantisbt/view/admin/editVersion.php:62
@@ -908,9 +915,8 @@ msgstr ""
 "pas le modifier."
 
 #: common/docman/views/editfile.php:65
-#, fuzzy
 msgid "Folder that document belongs to:"
-msgstr "Répertoire auquel le document appartient :"
+msgstr "Dossier auquel le document appartient :"
 
 #: common/docman/views/editfile.php:70 common/tracker/actions/browse.php:409
 #: common/tracker/actions/browse.php:564 common/tracker/actions/browse.php:751
@@ -946,9 +952,8 @@ msgstr "Répertoire non valide"
 #: common/docman/views/listfile.php:158
 #: common/docman/views/listtrashfile.php:102
 #: common/docman/views/pendingfiles.php:55
-#, fuzzy
 msgid "Edit document dialog box"
-msgstr "Éditer ce document"
+msgstr "Boîte de dialogue de modification du document"
 
 #: common/docman/views/listfile.php:170 www/export/rssAboTask.php:142
 #: www/pm/browse_task.php:387 www/pm/mod_task.php:66
@@ -1062,6 +1067,8 @@ msgstr "Dernière modification"
 #: common/tracker/views/form-addextrafield.php:131
 #: common/tracker/views/form-updateextrafieldelement.php:60
 #: common/widget/Widget_ProjectLatestDocuments.class.php:76
+#: cronjobs/send_pending_items_mail.php:80
+#: cronjobs/send_pending_items_mail.php:117
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:218
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:95
@@ -1171,7 +1178,7 @@ msgstr "Créé ou mis à jour au cours des 7 derniers jours"
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:114
 #: common/widget/Widget_ProjectInfo.class.php:68
 #: common/widget/Widget_Rss.class.php:76
-#: cronjobs/send_pending_items_mail.php:98
+#: cronjobs/send_pending_items_mail.php:96
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:190
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:54
 #: plugins/hudson/include/HudsonBuild.class.php:110
@@ -1388,8 +1395,8 @@ msgstr "Administration du gestionnaire de documents"
 #: common/tracker/actions/admin-tracker.php:32
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:59
 #: common/tracker/include/ArtifactTypeHtml.class.php:81
-#: plugins/mailman/www/mailman_utils.php:208
-#: plugins/mailman/www/mailman_utils.php:211
+#: plugins/mailman/www/mailman_utils.php:202
+#: plugins/mailman/www/mailman_utils.php:205
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:402
 #: plugins/mantisbt/www/user/index.php:41 www/mail/admin/index.php:290
 #: www/mail/mail_utils.php:48 www/news/news_utils.php:48
@@ -1512,40 +1519,41 @@ msgstr "Date de début"
 #: plugins/mailman/www/admin/index.php:144
 #: plugins/mailman/www/admin/index.php:150
 #: plugins/mailman/www/admin/index.php:183
-#: plugins/scmhg/common/HgPlugin.class.php:627 www/account/lostpw.php:89
-#: www/account/pending-resend.php:71 www/account/register.php:159
-#: www/account/verify.php:78 www/account/verify.php:82
-#: www/admin/useredit.php:148 www/admin/useredit.php:157
-#: www/admin/useredit.php:211 www/frs/reporting/downloads.php:105
-#: www/frs/reporting/downloads.php:107 www/frs/reporting/downloads.php:109
-#: www/register/index.php:226 www/reporting/groupadded.php:60
-#: www/reporting/groupadded.php:61 www/reporting/groupadded.php:62
-#: www/reporting/groupcum.php:59 www/reporting/groupcum.php:60
-#: www/reporting/groupcum.php:61 www/reporting/projectact.php:62
-#: www/reporting/projectact.php:63 www/reporting/projectact.php:64
-#: www/reporting/projectact.php:65 www/reporting/projectact.php:66
-#: www/reporting/projecttime.php:72 www/reporting/projecttime.php:73
-#: www/reporting/projecttime.php:74 www/reporting/projecttime.php:75
-#: www/reporting/siteact.php:63 www/reporting/siteact.php:64
-#: www/reporting/siteact.php:65 www/reporting/siteact.php:66
-#: www/reporting/sitetimebar.php:60 www/reporting/sitetimebar.php:61
-#: www/reporting/sitetime.php:72 www/reporting/sitetime.php:73
-#: www/reporting/sitetime.php:74 www/reporting/timecategory.php:91
-#: www/reporting/toolspie.php:64 www/reporting/toolspie.php:65
-#: www/reporting/useract.php:77 www/reporting/useract.php:78
-#: www/reporting/useract.php:79 www/reporting/useract.php:80
-#: www/reporting/useract.php:81 www/reporting/useradded.php:58
-#: www/reporting/useradded.php:59 www/reporting/useradded.php:60
-#: www/reporting/usercum.php:59 www/reporting/usercum.php:60
-#: www/reporting/usercum.php:61 www/reporting/usersummary.php:69
-#: www/reporting/usersummary.php:70 www/reporting/usersummary.php:71
-#: www/reporting/usertime.php:88 www/reporting/usertime.php:89
-#: www/reporting/usertime.php:90 www/reporting/usertime.php:91
-#: www/snippet/add_snippet_to_package.php:128 www/snippet/addversion.php:94
-#: www/snippet/addversion.php:98 www/snippet/addversion.php:102
-#: www/snippet/addversion.php:217 www/snippet/addversion.php:221
-#: www/snippet/package.php:147 www/snippet/package.php:151
-#: www/snippet/package.php:156 www/snippet/package.php:169
+#: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
+#: www/account/lostpw.php:90 www/account/pending-resend.php:71
+#: www/account/register.php:159 www/account/verify.php:78
+#: www/account/verify.php:82 www/admin/useredit.php:148
+#: www/admin/useredit.php:157 www/admin/useredit.php:211
+#: www/frs/reporting/downloads.php:105 www/frs/reporting/downloads.php:107
+#: www/frs/reporting/downloads.php:109 www/register/index.php:226
+#: www/reporting/groupadded.php:60 www/reporting/groupadded.php:61
+#: www/reporting/groupadded.php:62 www/reporting/groupcum.php:59
+#: www/reporting/groupcum.php:60 www/reporting/groupcum.php:61
+#: www/reporting/projectact.php:62 www/reporting/projectact.php:63
+#: www/reporting/projectact.php:64 www/reporting/projectact.php:65
+#: www/reporting/projectact.php:66 www/reporting/projecttime.php:72
+#: www/reporting/projecttime.php:73 www/reporting/projecttime.php:74
+#: www/reporting/projecttime.php:75 www/reporting/siteact.php:63
+#: www/reporting/siteact.php:64 www/reporting/siteact.php:65
+#: www/reporting/siteact.php:66 www/reporting/sitetimebar.php:60
+#: www/reporting/sitetimebar.php:61 www/reporting/sitetime.php:72
+#: www/reporting/sitetime.php:73 www/reporting/sitetime.php:74
+#: www/reporting/timecategory.php:91 www/reporting/toolspie.php:64
+#: www/reporting/toolspie.php:65 www/reporting/useract.php:77
+#: www/reporting/useract.php:78 www/reporting/useract.php:79
+#: www/reporting/useract.php:80 www/reporting/useract.php:81
+#: www/reporting/useradded.php:58 www/reporting/useradded.php:59
+#: www/reporting/useradded.php:60 www/reporting/usercum.php:59
+#: www/reporting/usercum.php:60 www/reporting/usercum.php:61
+#: www/reporting/usersummary.php:69 www/reporting/usersummary.php:70
+#: www/reporting/usersummary.php:71 www/reporting/usertime.php:88
+#: www/reporting/usertime.php:89 www/reporting/usertime.php:90
+#: www/reporting/usertime.php:91 www/snippet/add_snippet_to_package.php:128
+#: www/snippet/addversion.php:94 www/snippet/addversion.php:98
+#: www/snippet/addversion.php:102 www/snippet/addversion.php:217
+#: www/snippet/addversion.php:221 www/snippet/package.php:147
+#: www/snippet/package.php:151 www/snippet/package.php:156
+#: www/snippet/package.php:169
 #, php-format
 msgid ":"
 msgstr " :"
@@ -1738,8 +1746,8 @@ msgstr "Erreur lors de la création de l'objet Forum"
 #: plugins/contribtracker/www/project_admin.php:324
 #: plugins/globaldashboard/www/admin/manage_accounts.php:94
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:103
-#: plugins/mailman/www/mailman_utils.php:75
-#: plugins/mailman/www/mailman_utils.php:182
+#: plugins/mailman/www/mailman_utils.php:69
+#: plugins/mailman/www/mailman_utils.php:176
 #: plugins/mantisbt/view/admin/editVersion.php:100
 #: plugins/mantisbt/view/admin/viewCategorie.php:67
 #: plugins/mantisbt/view/viewAttachment.php:58
@@ -1908,8 +1916,8 @@ msgstr "Accepter"
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
 #: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:68
-#: plugins/mailman/www/mailman_utils.php:74
-#: plugins/mailman/www/mailman_utils.php:181
+#: plugins/mailman/www/mailman_utils.php:68
+#: plugins/mailman/www/mailman_utils.php:175
 #: plugins/mantisbt/view/addOrEditNote.php:54
 #: plugins/mantisbt/view/admin/editVersion.php:94
 #: plugins/mantisbt/view/adminuser.php:43
@@ -2026,7 +2034,7 @@ msgstr "Vous ne pouvez pas sauvegarder cette position sans être identifié"
 msgid "Forum::savePlace()"
 msgstr "Forum::savePlace()"
 
-#: common/forum/Forum.class.php:598 common/mail/MailingList.class.php:256
+#: common/forum/Forum.class.php:598 common/mail/MailingList.class.php:257
 #: plugins/mailman/include/MailmanList.class.php:250
 #: plugins/mailman/include/MailmanList.class.php:377
 #: plugins/mailman/include/MailmanList.class.php:394
@@ -2037,7 +2045,7 @@ msgstr "Erreur lors de la mise à jour :"
 
 #: common/forum/Forum.class.php:613 common/frs/FRSPackage.class.php:451
 #: common/frs/FRSRelease.class.php:343 common/include/Group.class.php:1590
-#: common/mail/MailingList.class.php:384 common/pm/ProjectGroup.class.php:360
+#: common/mail/MailingList.class.php:385 common/pm/ProjectGroup.class.php:360
 #: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:504
 #: common/tracker/ArtifactExtraField.class.php:430
 #: common/tracker/ArtifactType.class.php:791
@@ -2084,6 +2092,7 @@ msgstr "Publié par :"
 #: common/tracker/actions/query.php:386
 #: common/tracker/include/build_submission_form.php:72
 #: common/tracker/views/form-customizelist.php:35
+#: cronjobs/send_pending_items_mail.php:116
 #: plugins/mantisbt/view/addIssue.php:133
 #: plugins/mantisbt/view/editIssue.php:213
 #: plugins/mantisbt/view/viewIssue.php:108
@@ -2532,6 +2541,7 @@ msgid "Permission denied."
 msgstr "Permission refusée."
 
 #: common/include/Error.class.php:147 common/tracker/actions/tracker.php:84
+#: www/account/change_email.php:38
 msgid "Invalid Email Address"
 msgstr "Adresse de messagerie non valide"
 
@@ -3176,7 +3186,7 @@ msgstr "S'identifier"
 msgid "New Account"
 msgstr "Nouveau compte"
 
-#: common/include/Navigation.class.php:230 www/account/lostpw.php:74
+#: common/include/Navigation.class.php:230 www/account/lostpw.php:75
 #, php-format
 msgid "Home"
 msgstr "Accueil"
@@ -4020,7 +4030,7 @@ msgid "Error Creating mailing list: "
 msgstr "Erreur lors de la crétaion d'une liste de diffusion :"
 
 #: common/mail/MailingList.class.php:183
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "A mailing list will be created on %1$s in one hour\n"
 "and you are the list administrator.\n"
@@ -4036,9 +4046,7 @@ msgid ""
 "Your list password is: %6$s .\n"
 "You are encouraged to change this password as soon as possible.\n"
 "\n"
-"Thank you for registering your project with %1$s.\n"
-"\n"
-"-- the %1$s staff\n"
+"Thank you for registering your project with %1$s."
 msgstr ""
 "Une liste de diffusion va être créée sur %1$s dans un \n"
 "délai de 6 à 24 heures et vous en êtes l'administrateur.\n"
@@ -4054,16 +4062,22 @@ msgstr ""
 "Le mot de passe d'administration de la liste est : %6$s\n"
 "Vous êtes invités à le changer dès que possible\n"
 "\n"
-"Merci d'avoir enregistré votre projet sur %1$s\n"
-"\n"
-"-- L'équipe de %1$s\n"
+"Merci d'avoir enregistré votre projet sur %1$s"
 
-#: common/mail/MailingList.class.php:201
+#: common/mail/MailingList.class.php:199
+#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
+#: www/account/lostpw.php:68
+#, php-format
+msgid "-- the %s staff"
+msgstr "L'équipe de %s"
+
+#: common/mail/MailingList.class.php:202
+#: plugins/mailman/www/mailman_utils.php:38
 #, php-format
 msgid "%s New Mailing List"
 msgstr "Nouvelle liste de diffusion sur %s"
 
-#: common/mail/MailingList.class.php:221
+#: common/mail/MailingList.class.php:222
 msgid "Error Getting mailing list"
 msgstr "Erreur lors de la récupération d'une liste de diffusion"
 
@@ -4741,7 +4755,8 @@ msgstr "Priorité"
 
 #: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:560
 #: common/tracker/actions/query.php:200
-#: common/tracker/views/form-customizelist.php:36 www/people/viewjob.php:77
+#: common/tracker/views/form-customizelist.php:36
+#: cronjobs/send_pending_items_mail.php:118 www/people/viewjob.php:77
 #: www/pm/include/ProjectTaskHTML.class.php:111
 #: www/project/report/index.php:137
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:59
@@ -4861,6 +4876,7 @@ msgstr "Décocher tout"
 #: common/tracker/actions/mod-limited.php:114
 #: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:943
 #: common/tracker/include/build_submission_form.php:62
+#: cronjobs/send_pending_items_mail.php:119
 #: plugins/mantisbt/view/addIssue.php:74
 #: plugins/mantisbt/view/editIssue.php:127
 #: plugins/mantisbt/view/viewIssue.php:84 www/my/dashboard.php:73
@@ -4872,9 +4888,11 @@ msgstr "Confié à"
 
 #: common/tracker/actions/browse.php:570 common/tracker/actions/detail.php:78
 #: common/tracker/actions/mod-limited.php:86 common/tracker/actions/mod.php:88
-#: www/admin/approve-pending.php:213 www/admin/pending-news.php:142
-#: www/my/dashboard.php:75 www/news/admin/index.php:127
-#: www/pm/detail_task.php:39 www/pm/mod_task.php:52
+#: cronjobs/send_pending_items_mail.php:79
+#: cronjobs/send_pending_items_mail.php:120 www/admin/approve-pending.php:213
+#: www/admin/pending-news.php:142 www/my/dashboard.php:75
+#: www/news/admin/index.php:127 www/pm/detail_task.php:39
+#: www/pm/mod_task.php:52
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:50
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:50
@@ -6496,8 +6514,8 @@ msgstr "Modifier les rôles"
 msgid "Configuring allowed roles for the transitions from %1$s to %2$s"
 msgstr "Configuration des rôles autorisés pour les transitions de %1$s à %2$s"
 
-#: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:61
-#: plugins/mailman/www/mailman_utils.php:132 www/account/index.php:260
+#: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:56
+#: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:260
 #: www/include/Layout.class.php:1343
 msgid "Preferences"
 msgstr "Préférences"
@@ -7381,58 +7399,56 @@ msgid "Pending task manager items notification"
 msgstr "Notification de tâches en attente"
 
 #: cronjobs/send_pending_items_mail.php:76
-#, fuzzy, php-format
-msgid ""
-"This mail is sent to you to remind you of pending/overdue tasks.\n"
-"The task manager item #%1$s is pending:\n"
-"Task Summary: %2$s\n"
-"Submitted by: %4$s\n"
-"Status:%5$s\n"
-"Percent Complete: %6$s\n"
-"\n"
-"Click here to visit the item %3$s"
+msgid "This mail is sent to you to remind you of pending/overdue tasks."
 msgstr ""
 "Ce courrier électronique vous est envoyé pour vous rappeler des tâches en "
-"attente ou en retard. \n"
-"La tâche #%1$s est en attente : \n"
-"Résumé : %2$s\n"
-"Soumis par : %4$s\n"
-"Etat : %5$s\n"
-"Pourcentage d'avancement : %6$s\n"
-"\n"
-"Cliquez ici pour accéder à la tâche %3$s ."
+"attente ou en retard."
 
-#: cronjobs/send_pending_items_mail.php:115
+#: cronjobs/send_pending_items_mail.php:77
+#, php-format
+msgid "The task manager item #%s is pending"
+msgstr "La tâche #%s est en attente"
+
+#: cronjobs/send_pending_items_mail.php:78 www/pm/add_task.php:74
+#: www/pm/browse_task.php:126 www/pm/browse_task.php:231
+#: www/pm/detail_task.php:94 www/pm/ganttpage.php:70
+#: www/pm/include/ProjectTaskHTML.class.php:74 www/pm/mod_task.php:97
+msgid "Task Summary"
+msgstr "Résumé des tâches"
+
+#: cronjobs/send_pending_items_mail.php:81 www/pm/add_task.php:63
+#: www/pm/browse_task.php:129 www/pm/browse_task.php:237
+#: www/pm/detail_task.php:63 www/pm/ganttpage.php:73 www/pm/mod_task.php:78
+msgid "Percent Complete"
+msgstr "Pourcentage réalisé"
+
+#: cronjobs/send_pending_items_mail.php:82
+#: cronjobs/send_pending_items_mail.php:122
+#, php-format
+msgid "Click here to visit the item %s"
+msgstr "Cliquez ici pour accéder à cet élément : %s"
+
+#: cronjobs/send_pending_items_mail.php:113
 msgid "Pending tracker items notification"
 msgstr "Notifications de suivi en attente"
 
-#: cronjobs/send_pending_items_mail.php:116
-#, php-format
+#: cronjobs/send_pending_items_mail.php:114
 msgid ""
-"This mail is sent to you to remind you of pending/overdue tracker items. The "
-"item #%1$s is pending:\n"
-"Summary: %3$s\n"
-"Status: %5$s\n"
-"Open Date:%6$s\n"
-"Assigned To: %7$s\n"
-"Submitted by: %8$s\n"
-"Details: %9$s\n"
-"\n"
-"\n"
-"Click here to visit the item: %4$s"
+"This mail is sent to you to remind you of pending/overdue tracker items."
 msgstr ""
 "Ce courrier électronique vous est envoyé pour vous rappeler que des éléments "
-"que vous suivez sont en attente ou en retard. L'élément #%1$s est en "
-"attente : \n"
-"Résumé : %3$s\n"
-"Etat : %5$s\n"
-"Date d'ouverture : %6$s\n"
-"Assigné à : %7$s\n"
-"Soumis par : %8$s\n"
-"Détails: %9$s\n"
-"\n"
-"\n"
-"Cliquez ici pour accéder à cet élément : %4$s"
+"que vous suivez sont en attente ou en retard."
+
+#: cronjobs/send_pending_items_mail.php:115
+#, php-format
+msgid "The item #%s is pending"
+msgstr " L'élément #%s est en attente"
+
+#: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:150
+#: www/export/rssAboTask.php:146 www/my/diary.php:185
+#: www/news/admin/index.php:137 www/news/submit.php:148
+msgid "Details"
+msgstr "Détails"
 
 #: cronjobs/tracker_gateway.php:195
 msgid "This user is not allowed to submit items to this tracker."
@@ -7474,8 +7490,7 @@ msgid "Login name or email address"
 msgstr "Identifiant ou adresse de messagerie :"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
-#: www/account/lostpw.php:89 www/account/pending-resend.php:71
-#: www/account/verify.php:78
+#: www/account/pending-resend.php:71 www/account/verify.php:78
 msgid "Login name"
 msgstr "Nom du compte"
 
@@ -8530,8 +8545,8 @@ msgstr "Cette liste"
 
 #: plugins/forumml/include/forummlPlugin.class.php:171
 #: plugins/forumml/www/message.php:159
-#: plugins/mailman/www/mailman_utils.php:58
-#: plugins/mailman/www/mailman_utils.php:123
+#: plugins/mailman/www/mailman_utils.php:53
+#: plugins/mailman/www/mailman_utils.php:117
 msgid "Archives"
 msgstr "Archives"
 
@@ -10169,8 +10184,8 @@ msgstr ""
 msgid "Choose a list to browse, search, and post messages."
 msgstr "Choisissez une liste pour parcourir, chercher ou poster des messages."
 
-#: plugins/mailman/www/mailman_utils.php:20
-#, fuzzy, php-format
+#: plugins/mailman/www/mailman_utils.php:19
+#, php-format
 msgid ""
 "A mailing list will be created on %1$s in few minutes\n"
 "and you are the list administrator.\n"
@@ -10186,9 +10201,7 @@ msgid ""
 "Your list password is: %6$s .\n"
 "You are encouraged to change this password as soon as possible.\n"
 "\n"
-"Thank you for registering your project with %1$s.\n"
-"\n"
-"-- the %1$s staff\n"
+"Thank you for registering your project with %1$s."
 msgstr ""
 "Une liste de diffusion va être créée sur %1$s dans un \n"
 "délai de 6 à 24 heures et vous en êtes l'administrateur.\n"
@@ -10204,56 +10217,49 @@ msgstr ""
 "Le mot de passe d'administration de la liste est : %6$s\n"
 "Vous êtes invités à le changer dès que possible\n"
 "\n"
-"Merci d'avoir enregistré votre projet sur %1$s\n"
-"\n"
-"-- L'équipe de %1$s\n"
+"Merci d'avoir enregistré votre projet sur %1$s"
 
-#: plugins/mailman/www/mailman_utils.php:38
-#, php-format
-msgid "%1$s New Mailing List"
-msgstr "Nouvelle liste de diffusion sur %1$s"
-
-#: plugins/mailman/www/mailman_utils.php:56
-#: plugins/mailman/www/mailman_utils.php:72
+#: plugins/mailman/www/mailman_utils.php:51
+#: plugins/mailman/www/mailman_utils.php:66
 msgid "Mailing List"
 msgstr "Liste de diffusion"
 
-#: plugins/mailman/www/mailman_utils.php:60 www/mail/index.php:80
+#: plugins/mailman/www/mailman_utils.php:55 www/mail/index.php:80
 msgid "Subscription"
 msgstr "Inscription"
 
-#: plugins/mailman/www/mailman_utils.php:62
-#: plugins/mailman/www/mailman_utils.php:76
-#: plugins/mailman/www/mailman_utils.php:139
+#: plugins/mailman/www/mailman_utils.php:57
+#: plugins/mailman/www/mailman_utils.php:70
+#: plugins/mailman/www/mailman_utils.php:133
 msgid "Administrate"
 msgstr "Administrer"
 
-#: plugins/mailman/www/mailman_utils.php:112
-#: plugins/mailman/www/mailman_utils.php:172 www/mail/admin/index.php:288
+#: plugins/mailman/www/mailman_utils.php:106
+#: plugins/mailman/www/mailman_utils.php:166 www/mail/admin/index.php:288
 #: www/mail/index.php:93
 msgid "Not activated yet"
 msgstr "En cours de création"
 
-#: plugins/mailman/www/mailman_utils.php:115
-#: plugins/mailman/www/mailman_utils.php:175
+#: plugins/mailman/www/mailman_utils.php:109
+#: plugins/mailman/www/mailman_utils.php:169
 #, fuzzy
 msgid "Error during creation"
 msgstr "Erreur lors du refus d'un projet : "
 
-#: plugins/mailman/www/mailman_utils.php:130 www/admin/unsubscribe.php:60
+#: plugins/mailman/www/mailman_utils.php:124 www/admin/unsubscribe.php:60
 #: www/forum/monitor.php:65
 msgid "Unsubscribe"
 msgstr "Désabonnement"
 
-#: plugins/mailman/www/mailman_utils.php:134
+#: plugins/mailman/www/mailman_utils.php:128
 msgid "Subscribe"
 msgstr "Abonnement"
 
-#: plugins/mailman/www/mailman_utils.php:175
+#: plugins/mailman/www/mailman_utils.php:169
 msgid "Re-create"
 msgstr "Recréer"
 
-#: plugins/mailman/www/mailman_utils.php:185
+#: plugins/mailman/www/mailman_utils.php:179
 #, fuzzy
 msgid "Administrate from Mailman"
 msgstr "Administration"
@@ -13576,43 +13582,33 @@ msgstr ""
 "dorénavant redirigée vers cette adresse."
 
 #: www/account/change_email-complete.php:69 www/account/change_email.php:94
-#: www/account/lostpw.php:97 www/account/unsubscribe.php:76
+#: www/account/lostpw.php:100 www/account/unsubscribe.php:76
 #: www/my/bookmark_edit.php:67
 msgid "Return"
 msgstr "Retour"
 
-#: www/account/change_email.php:38
-msgid "Invalid email address."
-msgstr "Adresse de messagerie non valide."
-
 #: www/account/change_email.php:57
 #, php-format
-msgid ""
-"You have requested a change of email address on %1$s.\n"
-"Please visit the following URL to complete the email change:\n"
-"\n"
-"%2$s\n"
-"\n"
-" -- the %1$s staff"
+msgid "You have requested a change of email address on %s."
 msgstr ""
-"Vous avez demandé une modification d'adresse e-mail pour votre compte sur "
-"%1$s.\n"
-"Veuillez visiter la page suivante pour que ce changement prenne effet :\n"
-"\n"
-"%2$s\n"
-"\n"
-"-- L'équipe de %1$s"
+"Vous avez demandé une modification d'adresse électronique pour votre compte "
+"sur %s."
 
-#: www/account/change_email.php:66 www/account/lostpw.php:70
+#: www/account/change_email.php:59
+msgid "Please visit the following URL to complete the email change:"
+msgstr ""
+"Veuillez visiter la page suivante pour que ce changement prenne effet :"
+
+#: www/account/change_email.php:65 www/account/lostpw.php:71
 #, php-format
 msgid "%1$s Verification"
 msgstr "%1$s - Vérification"
 
-#: www/account/change_email.php:68
+#: www/account/change_email.php:67
 msgid "Email Change Confirmation"
 msgstr "Confirmation de changement d'adresse e-mail"
 
-#: www/account/change_email.php:70
+#: www/account/change_email.php:69
 msgid ""
 "An email has been sent to the new address. Follow the instructions in the "
 "email to complete the email change."
@@ -13620,11 +13616,11 @@ msgstr ""
 "Un message a été envoyé à la nouvelle adresse.  Suivez les instructions "
 "qu'il contient pour valider le changement d'adresse."
 
-#: www/account/change_email.php:78
+#: www/account/change_email.php:76
 msgid "Email change"
 msgstr "Changement d'adresse e-mail"
 
-#: www/account/change_email.php:80
+#: www/account/change_email.php:78
 msgid ""
 "Changing your email address will require confirmation from your new email "
 "address, so that we can ensure we have a good email address on file."
@@ -13632,7 +13628,7 @@ msgstr ""
 "Le changement d'adresse e-mail requiert une confirmation de votre nouvelle "
 "adresse, de manière à assurer que l'adresse enregistrée est correcte."
 
-#: www/account/change_email.php:81
+#: www/account/change_email.php:79
 msgid ""
 "We need to maintain an accurate email address for each user due to the level "
 "of access we grant via this account. If we need to reach a user for issues "
@@ -13644,7 +13640,7 @@ msgstr ""
 "utilisateur à cause de problèmes en provenance d'un compte shell ou projet, "
 "il est important que nous puissions le faire."
 
-#: www/account/change_email.php:82
+#: www/account/change_email.php:80
 msgid ""
 "Submitting the form below will mail a confirmation URL to the new email "
 "address. Visiting this link will complete the email change."
@@ -13653,9 +13649,9 @@ msgstr ""
 "adresse, avec un lien de confirmation. Il faudra visiter ce lien pour mener "
 "à bien le changement d'adresse."
 
-#: www/account/change_email.php:88
-msgid "New Email Address:"
-msgstr "Nouvelle adresse e-mail :"
+#: www/account/change_email.php:86
+msgid "New Email Address"
+msgstr "Nouvelle adresse électronique"
 
 #: www/account/change_email.php:90
 msgid "Send Confirmation to New Address"
@@ -14050,40 +14046,36 @@ msgstr "Bienvenue, %s.  Vous pouvez maintenant changer votre mot de passe."
 msgid "New Password (min. 6 chars)"
 msgstr "Nouveau mot de passe (6 caractères minimum)"
 
-#: www/account/lostpw.php:45 www/users:74
-msgid "That user does not exist."
+#: www/account/lostpw.php:45 www/sendmessage.php:45
+msgid "That user does not exist"
 msgstr "Cet utilisateur n'existe pas"
 
 #: www/account/lostpw.php:58
 #, php-format
 msgid ""
-"Someone (presumably you) on the %1$s site requested a\n"
-"password change through email verification. If this was not you,\n"
-"ignore this message and nothing will happen.\n"
-"\n"
-"If you requested this verification, visit the following URL\n"
-"to change your password:\n"
-"\n"
-"<%2$s>\n"
-"\n"
-" -- the %1$s staff\n"
+"Someone (presumably you) on the %s site requested a password change through "
+"email verification."
 msgstr ""
-"Quelqu'un (probablement vous) sur le site %1$s, a demandé un\n"
-"changement de mot de passe par l'intermédiaire d'une vérification\n"
-"e-mail. Si ce n'est pas vous ignorez ce message et rien ne se passera.\n"
-"\n"
-"Si vous avez demandé cette vérification, allez à l'URL suivante pour\n"
-"changer votre mot de passe :\n"
-"\n"
-"<%2$s>\n"
-"\n"
-" -- L'équipe de %1$s\n"
+"Quelqu'un (probablement vous) sur le site %s, a demandé un changement de mot "
+"de passe par l'intermédiaire d'une vérification par courriel."
 
-#: www/account/lostpw.php:72
+#: www/account/lostpw.php:60
+msgid "If this was not you, ignore this message and nothing will happen."
+msgstr "Si ce n'est pas vous ignorez ce message et rien ne se passera."
+
+#: www/account/lostpw.php:63
+msgid ""
+"If you requested this verification, visit the following URL to change your "
+"password:"
+msgstr ""
+"Si vous avez demandé cette vérification, allez à l'URL suivante pour changer "
+"votre mot de passe :"
+
+#: www/account/lostpw.php:73
 msgid "Lost Password Confirmation"
 msgstr "Confirmation de mot de passe perdu"
 
-#: www/account/lostpw.php:74
+#: www/account/lostpw.php:75
 #, php-format
 msgid ""
 "An email has been sent to the address you have on file. Follow the "
@@ -14093,7 +14085,7 @@ msgstr ""
 "compte.  Veuillez suivre les instructions qu'il contient pour changer le mot "
 "de passe de votre compte."
 
-#: www/account/lostpw.php:83
+#: www/account/lostpw.php:84
 msgid ""
 "Hey... losing your password is serious business. It compromises the security "
 "of your account, your projects, and this site."
@@ -14102,20 +14094,24 @@ msgstr ""
 "compromet la sécurité de votre compte, de vos projets, et la sécurité "
 "globale du site."
 
-#: www/account/lostpw.php:84
+#: www/account/lostpw.php:85
 msgid ""
-"Clicking \"Send Lost PW Hash\" below will email a URL to the email address "
-"we have on file for you. In this URL is a 128-bit confirmation hash for your "
+"Clicking “Send Lost PW Hash” below will email a URL to the email address we "
+"have on file for you. In this URL is a 128-bit confirmation hash for your "
 "account. Visiting the URL will allow you to change your password online and "
 "login."
 msgstr ""
 "Si vous cliquez sur « Envoyer une clé de hachage pour mot de passe perdu » "
-"ci-dessous, vous recevrez un email (à l'adresse que nous avons enregistrée "
-"pour votre compte).  Ce message contiendra une URL avec une clé de hachage "
-"de 128 bits qui vous permettra de débloquer votre compte et de changer votre "
-"mot de passe."
+"ci-dessous, vous recevrez un courriel (à l'adresse que nous avons "
+"enregistrée pour votre compte).  Ce message contiendra une URL avec une clé "
+"de hachage de 128 bits qui vous permettra de débloquer votre compte et de "
+"changer votre mot de passe."
 
-#: www/account/lostpw.php:93
+#: www/account/lostpw.php:90
+msgid "Login Name"
+msgstr "Nom du compte"
+
+#: www/account/lostpw.php:96
 msgid "Send Lost PW Hash"
 msgstr "Envoyer une clé de hachage pour mot de passe perdu"
 
@@ -15230,11 +15226,6 @@ msgstr "Approuver pour la page d'accueil"
 #: www/admin/pending-news.php:146
 msgid "Do Nothing"
 msgstr "Ne rien faire"
-
-#: www/admin/pending-news.php:150 www/export/rssAboTask.php:146
-#: www/my/diary.php:185 www/news/admin/index.php:137 www/news/submit.php:148
-msgid "Details"
-msgstr "Détails"
 
 #: www/admin/pluginman.php:55
 #, php-format
@@ -18812,19 +18803,6 @@ msgstr "Ajout d'une tâche"
 msgid "admin"
 msgstr "Gérer les catégories"
 
-#: www/pm/add_task.php:63 www/pm/browse_task.php:129
-#: www/pm/browse_task.php:237 www/pm/detail_task.php:63
-#: www/pm/ganttpage.php:73 www/pm/mod_task.php:78
-msgid "Percent Complete"
-msgstr "Pourcentage réalisé"
-
-#: www/pm/add_task.php:74 www/pm/browse_task.php:126
-#: www/pm/browse_task.php:231 www/pm/detail_task.php:94
-#: www/pm/ganttpage.php:70 www/pm/include/ProjectTaskHTML.class.php:74
-#: www/pm/mod_task.php:97
-msgid "Task Summary"
-msgstr "Résumé des tâches"
-
 #: www/pm/add_task.php:81
 msgid "Task Details"
 msgstr "Détails&nbsp;"
@@ -21185,10 +21163,6 @@ msgstr "Adresse de destination"
 msgid "touser"
 msgstr "Utilisateur destinataire"
 
-#: www/sendmessage.php:45
-msgid "That user does not exist"
-msgstr "Cet utilisateur n'existe pas"
-
 #: www/sendmessage.php:50
 #, php-format
 msgid "You can only send to addresses @<em>%1$s</em>."
@@ -22806,6 +22780,195 @@ msgstr "Erreur de mise à jour"
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
 
+#: www/users:74
+msgid "That user does not exist."
+msgstr "Cet utilisateur n'existe pas"
+
+#, fuzzy
+#~ msgid ""
+#~ "A mailing list will be created on %1$s in one hour\n"
+#~ "and you are the list administrator.\n"
+#~ "\n"
+#~ "This list is: %3$s@%2$s .\n"
+#~ "\n"
+#~ "Your mailing list info is at:\n"
+#~ "%4$s .\n"
+#~ "\n"
+#~ "List administration can be found at:\n"
+#~ "%5$s .\n"
+#~ "\n"
+#~ "Your list password is: %6$s .\n"
+#~ "You are encouraged to change this password as soon as possible.\n"
+#~ "\n"
+#~ "Thank you for registering your project with %1$s.\n"
+#~ "\n"
+#~ "-- the %1$s staff\n"
+#~ msgstr ""
+#~ "Une liste de diffusion va être créée sur %1$s dans un \n"
+#~ "délai de 6 à 24 heures et vous en êtes l'administrateur.\n"
+#~ "\n"
+#~ "Cette liste est : %3$s@%2$s\n"
+#~ "\n"
+#~ "Les informations concernant cette liste de diffusion sont disponibles "
+#~ "sur :\n"
+#~ "%4$s .\n"
+#~ "\n"
+#~ "L'administration de la liste se fait sur :\n"
+#~ "%5$s\n"
+#~ "\n"
+#~ "Le mot de passe d'administration de la liste est : %6$s\n"
+#~ "Vous êtes invités à le changer dès que possible\n"
+#~ "\n"
+#~ "Merci d'avoir enregistré votre projet sur %1$s\n"
+#~ "\n"
+#~ "-- L'équipe de %1$s\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "This mail is sent to you to remind you of pending/overdue tasks.\n"
+#~ "The task manager item #%1$s is pending:\n"
+#~ "Task Summary: %2$s\n"
+#~ "Submitted by: %4$s\n"
+#~ "Status:%5$s\n"
+#~ "Percent Complete: %6$s\n"
+#~ "\n"
+#~ "Click here to visit the item %3$s"
+#~ msgstr ""
+#~ "Ce courrier électronique vous est envoyé pour vous rappeler des tâches en "
+#~ "attente ou en retard. \n"
+#~ "La tâche #%1$s est en attente : \n"
+#~ "Résumé : %2$s\n"
+#~ "Soumis par : %4$s\n"
+#~ "Etat : %5$s\n"
+#~ "Pourcentage d'avancement : %6$s\n"
+#~ "\n"
+#~ "Cliquez ici pour accéder à la tâche %3$s ."
+
+#~ msgid ""
+#~ "This mail is sent to you to remind you of pending/overdue tracker items. "
+#~ "The item #%1$s is pending:\n"
+#~ "Summary: %3$s\n"
+#~ "Status: %5$s\n"
+#~ "Open Date:%6$s\n"
+#~ "Assigned To: %7$s\n"
+#~ "Submitted by: %8$s\n"
+#~ "Details: %9$s\n"
+#~ "\n"
+#~ "\n"
+#~ "Click here to visit the item: %4$s"
+#~ msgstr ""
+#~ "Ce courrier électronique vous est envoyé pour vous rappeler que des "
+#~ "éléments que vous suivez sont en attente ou en retard. L'élément #%1$s "
+#~ "est en attente : \n"
+#~ "Résumé : %3$s\n"
+#~ "Etat : %5$s\n"
+#~ "Date d'ouverture : %6$s\n"
+#~ "Assigné à : %7$s\n"
+#~ "Soumis par : %8$s\n"
+#~ "Détails: %9$s\n"
+#~ "\n"
+#~ "\n"
+#~ "Cliquez ici pour accéder à cet élément : %4$s"
+
+#, fuzzy
+#~ msgid ""
+#~ "A mailing list will be created on %1$s in few minutes\n"
+#~ "and you are the list administrator.\n"
+#~ "\n"
+#~ "This list is: %3$s@%2$s .\n"
+#~ "\n"
+#~ "Your mailing list info is at:\n"
+#~ "%4$s .\n"
+#~ "\n"
+#~ "List administration can be found at:\n"
+#~ "%5$s .\n"
+#~ "\n"
+#~ "Your list password is: %6$s .\n"
+#~ "You are encouraged to change this password as soon as possible.\n"
+#~ "\n"
+#~ "Thank you for registering your project with %1$s.\n"
+#~ "\n"
+#~ "-- the %1$s staff\n"
+#~ msgstr ""
+#~ "Une liste de diffusion va être créée sur %1$s dans un \n"
+#~ "délai de 6 à 24 heures et vous en êtes l'administrateur.\n"
+#~ "\n"
+#~ "Cette liste est : %3$s@%2$s\n"
+#~ "\n"
+#~ "Les informations concernant cette liste de diffusion sont disponibles "
+#~ "sur :\n"
+#~ "%4$s .\n"
+#~ "\n"
+#~ "L'administration de la liste se fait sur :\n"
+#~ "%5$s\n"
+#~ "\n"
+#~ "Le mot de passe d'administration de la liste est : %6$s\n"
+#~ "Vous êtes invités à le changer dès que possible\n"
+#~ "\n"
+#~ "Merci d'avoir enregistré votre projet sur %1$s\n"
+#~ "\n"
+#~ "-- L'équipe de %1$s\n"
+
+#~ msgid "%1$s New Mailing List"
+#~ msgstr "Nouvelle liste de diffusion sur %1$s"
+
+#~ msgid "Invalid email address."
+#~ msgstr "Adresse de messagerie non valide."
+
+#~ msgid ""
+#~ "You have requested a change of email address on %1$s.\n"
+#~ "Please visit the following URL to complete the email change:\n"
+#~ "\n"
+#~ "%2$s\n"
+#~ "\n"
+#~ " -- the %1$s staff"
+#~ msgstr ""
+#~ "Vous avez demandé une modification d'adresse e-mail pour votre compte sur "
+#~ "%1$s.\n"
+#~ "Veuillez visiter la page suivante pour que ce changement prenne effet :\n"
+#~ "\n"
+#~ "%2$s\n"
+#~ "\n"
+#~ "-- L'équipe de %1$s"
+
+#~ msgid "New Email Address:"
+#~ msgstr "Nouvelle adresse e-mail :"
+
+#~ msgid ""
+#~ "Someone (presumably you) on the %1$s site requested a\n"
+#~ "password change through email verification. If this was not you,\n"
+#~ "ignore this message and nothing will happen.\n"
+#~ "\n"
+#~ "If you requested this verification, visit the following URL\n"
+#~ "to change your password:\n"
+#~ "\n"
+#~ "<%2$s>\n"
+#~ "\n"
+#~ " -- the %1$s staff\n"
+#~ msgstr ""
+#~ "Quelqu'un (probablement vous) sur le site %1$s, a demandé un\n"
+#~ "changement de mot de passe par l'intermédiaire d'une vérification\n"
+#~ "e-mail. Si ce n'est pas vous ignorez ce message et rien ne se passera.\n"
+#~ "\n"
+#~ "Si vous avez demandé cette vérification, allez à l'URL suivante pour\n"
+#~ "changer votre mot de passe :\n"
+#~ "\n"
+#~ "<%2$s>\n"
+#~ "\n"
+#~ " -- L'équipe de %1$s\n"
+
+#~ msgid ""
+#~ "Clicking \"Send Lost PW Hash\" below will email a URL to the email "
+#~ "address we have on file for you. In this URL is a 128-bit confirmation "
+#~ "hash for your account. Visiting the URL will allow you to change your "
+#~ "password online and login."
+#~ msgstr ""
+#~ "Si vous cliquez sur « Envoyer une clé de hachage pour mot de passe "
+#~ "perdu » ci-dessous, vous recevrez un email (à l'adresse que nous avons "
+#~ "enregistrée pour votre compte).  Ce message contiendra une URL avec une "
+#~ "clé de hachage de 128 bits qui vous permettra de débloquer votre compte "
+#~ "et de changer votre mot de passe."
+
 #, fuzzy
 #~ msgid ""
 #~ "Project %1$s (%2$s) has released a new version of package \"%3$s\".\n"
@@ -23174,9 +23337,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ "N'hésitez pas à nous contacter : nous sommes à votre disposition pour "
 #~ "vous aider."
 
-#~ msgid "-- the %s staff"
-#~ msgstr "L'équipe de %s"
-
 #~ msgid "%s Project Approved"
 #~ msgstr "Projet %s approuvé"
 
@@ -23299,40 +23459,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "Error Creating mailing list"
 #~ msgstr "Erreur lors de la création de la liste de diffusion"
-
-#~ msgid ""
-#~ "A mailing list will be created on %1$s in one hour\n"
-#~ "and you are the list administrator.\n"
-#~ "\n"
-#~ "This list is: %3$s@%2$s .\n"
-#~ "\n"
-#~ "Your mailing list info is at:\n"
-#~ "%4$s .\n"
-#~ "\n"
-#~ "List administration can be found at:\n"
-#~ "%5$s .\n"
-#~ "\n"
-#~ "Your list password is: %6$s .\n"
-#~ "You are encouraged to change this password as soon as possible.\n"
-#~ "\n"
-#~ "Thank you for registering your project with %1$s."
-#~ msgstr ""
-#~ "Une liste de diffusion va être créée sur %1$s dans un \n"
-#~ "délai de 6 à 24 heures et vous en êtes l'administrateur.\n"
-#~ "\n"
-#~ "Cette liste est : %3$s@%2$s\n"
-#~ "\n"
-#~ "Les informations concernant cette liste de diffusion sont disponibles "
-#~ "sur :\n"
-#~ "%4$s .\n"
-#~ "\n"
-#~ "L'administration de la liste se fait sur :\n"
-#~ "%5$s\n"
-#~ "\n"
-#~ "Le mot de passe d'administration de la liste est : %6$s\n"
-#~ "Vous êtes invités à le changer dès que possible\n"
-#~ "\n"
-#~ "Merci d'avoir enregistré votre projet sur %1$s"
 
 #~ msgid "Category name already exists"
 #~ msgstr "Cette catégorie existe déjà"
@@ -23745,29 +23871,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ "Vous pouvez revenir sur cette page plus tard, ou vous diriger vers <a "
 #~ "href=\"%s\">la page du projet</a> en attendant."
 
-#~ msgid "This mail is sent to you to remind you of pending/overdue tasks."
-#~ msgstr ""
-#~ "Ce courrier électronique vous est envoyé pour vous rappeler des tâches en "
-#~ "attente ou en retard."
-
-#~ msgid "The task manager item #%s is pending"
-#~ msgstr "La tâche #%s est en attente"
-
-#~ msgid "Click here to visit the item %s"
-#~ msgstr "Cliquez ici pour accéder à cet élément : %s"
-
-#~ msgid ""
-#~ "This mail is sent to you to remind you of pending/overdue tracker items."
-#~ msgstr ""
-#~ "Ce courrier électronique vous est envoyé pour vous rappeler que des "
-#~ "éléments que vous suivez sont en attente ou en retard."
-
-#~ msgid "The item #%s is pending"
-#~ msgstr " L'élément #%s est en attente"
-
-#~ msgid "Login Name"
-#~ msgstr "Nom du compte"
-
 #~ msgid "Your account is currently pending your email confirmation."
 #~ msgstr ""
 #~ "Votre compte est actuellement en attente d'une confirmation par courriel."
@@ -24064,40 +24167,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgid "No Lists found for %s"
 #~ msgstr "Pas de listes trouvées pour %s"
 
-#~ msgid ""
-#~ "A mailing list will be created on %1$s in few minutes\n"
-#~ "and you are the list administrator.\n"
-#~ "\n"
-#~ "This list is: %3$s@%2$s .\n"
-#~ "\n"
-#~ "Your mailing list info is at:\n"
-#~ "%4$s .\n"
-#~ "\n"
-#~ "List administration can be found at:\n"
-#~ "%5$s .\n"
-#~ "\n"
-#~ "Your list password is: %6$s .\n"
-#~ "You are encouraged to change this password as soon as possible.\n"
-#~ "\n"
-#~ "Thank you for registering your project with %1$s."
-#~ msgstr ""
-#~ "Une liste de diffusion va être créée sur %1$s dans un \n"
-#~ "délai de 6 à 24 heures et vous en êtes l'administrateur.\n"
-#~ "\n"
-#~ "Cette liste est : %3$s@%2$s\n"
-#~ "\n"
-#~ "Les informations concernant cette liste de diffusion sont disponibles "
-#~ "sur :\n"
-#~ "%4$s .\n"
-#~ "\n"
-#~ "L'administration de la liste se fait sur :\n"
-#~ "%5$s\n"
-#~ "\n"
-#~ "Le mot de passe d'administration de la liste est : %6$s\n"
-#~ "Vous êtes invités à le changer dès que possible\n"
-#~ "\n"
-#~ "Merci d'avoir enregistré votre projet sur %1$s"
-
 #~ msgid "Cannot copy file to target directory"
 #~ msgstr "Le fichier ne peut pas être copié vers sa destination"
 
@@ -24234,18 +24303,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ "Merci de vous identifier si vous souhaitez naviguer dans l'arbre "
 #~ "Subversion."
 
-#~ msgid "You have requested a change of email address on %s."
-#~ msgstr ""
-#~ "Vous avez demandé une modification d'adresse électronique pour votre "
-#~ "compte sur %s."
-
-#~ msgid "Please visit the following URL to complete the email change:"
-#~ msgstr ""
-#~ "Veuillez visiter la page suivante pour que ce changement prenne effet :"
-
-#~ msgid "New Email Address"
-#~ msgstr "Nouvelle adresse électronique"
-
 #~ msgid "%s Password Change Confirmation"
 #~ msgstr "Confirmation de changement de mot de passe pour %s"
 
@@ -24315,35 +24372,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgstr ""
 #~ "Bravo, vous venez de changer le mot de passe de votre compte.  Vous "
 #~ "pouvez à présent <a href=\"%1$s\">vous connecter</a> au site."
-
-#~ msgid ""
-#~ "Someone (presumably you) on the %s site requested a password change "
-#~ "through email verification."
-#~ msgstr ""
-#~ "Quelqu'un (probablement vous) sur le site %s, a demandé un changement de "
-#~ "mot de passe par l'intermédiaire d'une vérification par courriel."
-
-#~ msgid "If this was not you, ignore this message and nothing will happen."
-#~ msgstr "Si ce n'est pas vous ignorez ce message et rien ne se passera."
-
-#~ msgid ""
-#~ "If you requested this verification, visit the following URL to change "
-#~ "your password:"
-#~ msgstr ""
-#~ "Si vous avez demandé cette vérification, allez à l'URL suivante pour "
-#~ "changer votre mot de passe :"
-
-#~ msgid ""
-#~ "Clicking “Send Lost PW Hash” below will email a URL to the email address "
-#~ "we have on file for you. In this URL is a 128-bit confirmation hash for "
-#~ "your account. Visiting the URL will allow you to change your password "
-#~ "online and login."
-#~ msgstr ""
-#~ "Si vous cliquez sur « Envoyer une clé de hachage pour mot de passe "
-#~ "perdu » ci-dessous, vous recevrez un courriel (à l'adresse que nous avons "
-#~ "enregistrée pour votre compte).  Ce message contiendra une URL avec une "
-#~ "clé de hachage de 128 bits qui vous permettra de débloquer votre compte "
-#~ "et de changer votre mot de passe."
 
 #~ msgid ""
 #~ "Fill in a user name or email address and click “Submit” to resend the "

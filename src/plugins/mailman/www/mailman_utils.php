@@ -10,14 +10,13 @@
  *
  */
 
-
 require_once 'mailman/include/MailmanList.class.php';
 require_once 'mailman/include/MailmanListFactory.class.php';
 global $class;
 $current_user=UserManager::instance()->getCurrentUser();
 
 function sendCreationMail($userEmail,&$list) {
- $message = sprintf(_('A mailing list will be created on %1$s in few minutes
+	$message = sprintf(_('A mailing list will be created on %1$s in few minutes
 and you are the list administrator.
 
 This list is: %3$s@%2$s .
@@ -31,26 +30,22 @@ List administration can be found at:
 Your list password is: %6$s .
 You are encouraged to change this password as soon as possible.
 
-Thank you for registering your project with %1$s.
+Thank you for registering your project with %1$s.'), forge_get_config ('forge_name'), forge_get_config('lists_host'), $list->getName(), $list->getExternalInfoUrl(), util_make_url('/mailman/admin/'.$list->getName()), $list->getPassword());
+	$message .= "\n\n";
+	$message .= sprintf(_('-- the %s staff'), forge_get_config ('forge_name'));
+	$message .= "\n";
 
--- the %1$s staff
-'), forge_get_config ('forge_name'), forge_get_config('lists_host'), $list->getName(), $list->getExternalInfoUrl(), util_make_url('/mailman/admin/'.$list->getName()), $list->getPassword());
-       $mailSubject = sprintf(_('%1$s New Mailing List'), forge_get_config ('forge_name'));
-
-
-
+	$mailSubject = sprintf(_('%s New Mailing List'), forge_get_config ('forge_name'));
 
 	$hdrs = "From: ".$GLOBALS['sys_email_admin'].$GLOBALS['sys_lf'];
 	$hdrs .='Content-type: text/plain; charset=utf-8'.$GLOBALS['sys_lf'];
 
 	mail ($userEmail,$mailSubject,$message,$hdrs);
-
-
 }
+
 function table_begin()
 {
 
-//	echo "<table WIDTH=\"100%\" border=0>\n"."<TR><TD VALIGN=\"TOP\">\n";
   echo "<table class='border' width='100%' border='0'>
             <tr class='boxtable'>
                 <th class='forumml' width='15%'>"._('Mailing List')."</th>
@@ -66,7 +61,6 @@ function table_begin()
 function table_begin_admin()
 {
 
-//	echo "<table WIDTH=\"100%\" border=0>\n"."<TR><TD VALIGN=\"TOP\">\n";
   echo "<table class='border' width='100%' border='0'>
             <tr class='boxtable'>
                 <th class='forumml' width='15%'>"._('Mailing List')."</th>
@@ -145,8 +139,8 @@ $p =& $plugin_manager->getPluginByName('mailman');
 
 		}
 	}
-
 }
+
 function display_list_admin($currentList)
 {
 	global $class;

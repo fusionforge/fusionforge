@@ -35,7 +35,7 @@ if (getStringFromRequest('submit')) {
 
 	if (!validate_email($newemail)) {
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error(_('Invalid email address.'),'my');
+		exit_error(_('Invalid Email Address'),'my');
 	}
 
 	$confirm_hash = substr(md5($GLOBALS['session_ser'] . time()),0,16);
@@ -54,14 +54,13 @@ if (getStringFromRequest('submit')) {
 		exit_error($u->getErrorMessage(),'my');
 	}
 
-	$message = sprintf(_('You have requested a change of email address on %1$s.
-Please visit the following URL to complete the email change:
-
-%2$s
-
- -- the %1$s staff'),
-					 forge_get_config ('forge_name'),
-					 util_make_url ('/account/change_email-complete.php?ch=_'.$confirm_hash));
+	$message = sprintf(_('You have requested a change of email address on %s.'), forge_get_config('forge_name'))
+			. "\n\n"
+		 	. _('Please visit the following URL to complete the email change:')
+			. "\n\n"
+			.  util_make_url('/account/change_email-complete.php?ch=_'.$confirm_hash)
+			. "\n\n"
+ 			. sprintf(_('-- the %s staff'), forge_get_config('forge_name'));
 
 	util_send_message($newemail,sprintf(_('%1$s Verification'), forge_get_config ('forge_name')),$message);
 
@@ -74,7 +73,6 @@ Please visit the following URL to complete the email change:
 	exit();
 }
 
-
 site_user_header(array('title'=>_('Email change')));
 
 echo '<p>' . _('Changing your email address will require confirmation from your new email address, so that we can ensure we have a good email address on file.') . '</p>';
@@ -85,9 +83,11 @@ echo '<p>' . _('Submitting the form below will mail a confirmation URL to the ne
 <form action="<?php echo util_make_url('/account/change_email.php'); ?>" method="post">
 <p>
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
-<?php echo _('New Email Address:') ?>
-<input type="text" name="newemail" maxlength="255" />
-<input type="submit" name="submit" value="<?php echo _('Send Confirmation to New Address') ?>" />
+<?php echo _('New Email Address')._(':'); ?>
+    <label for="newemail">
+        <input id="newemail" type="text" name="newemail" maxlength="255"/>
+    </label>
+    <input type="submit" name="submit" value="<?php echo _('Send Confirmation to New Address') ?>" />
 </p>
 </form>
 

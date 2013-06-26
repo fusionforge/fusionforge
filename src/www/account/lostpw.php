@@ -42,7 +42,7 @@ if (getStringFromRequest('submit')) {
 
 	if (!$u || !is_object($u)){
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error(_('That user does not exist.'),'my');
+		exit_error(_('That user does not exist'),'my');
 	}
 
 	// First, we need to create new confirm hash
@@ -55,17 +55,18 @@ if (getStringFromRequest('submit')) {
 		exit_error($u->getErrorMessage(),'my');
 	} else {
 
-		$message = sprintf(_('Someone (presumably you) on the %1$s site requested a
-password change through email verification. If this was not you,
-ignore this message and nothing will happen.
+		$message = sprintf(_('Someone (presumably you) on the %s site requested a password change through email verification.'),
+							forge_get_config ('forge_name'));
+		$message .= _('If this was not you, ignore this message and nothing will happen.');
+		$message .= "\n\n";
 
-If you requested this verification, visit the following URL
-to change your password:
+		$message .= _('If you requested this verification, visit the following URL to change your password:');
+		$message .= "\n\n";
 
-<%2$s>
-
- -- the %1$s staff
-'), forge_get_config ('forge_name'), util_make_url ("/account/lostlogin.php?ch=_".$confirm_hash));
+		$message .= util_make_url("/account/lostlogin.php?ch=_".$confirm_hash);
+		$message .= "\n\n";
+		$message .= sprintf(_('-- the %s staff'), forge_get_config ('forge_name'));
+		$message .= "\n";
 
 		util_send_message($u->getEmail(),sprintf(_('%1$s Verification'), forge_get_config ('forge_name')),$message);
 
@@ -81,15 +82,17 @@ to change your password:
 $HTML->header(array('title'=>"Lost Account Password"));
 
 echo '<p>' . _('Hey... losing your password is serious business. It compromises the security of your account, your projects, and this site.') . '</p>';
-echo '<p>' . _('Clicking "Send Lost PW Hash" below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.') . '</p>';
+echo '<p>' . _('Clicking “Send Lost PW Hash” below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.') . '</p>';
 ?>
 
 <form action="<?php echo util_make_url('/account/lostpw.php'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/> <p>
-<?php echo _('Login name')._(':'); ?>
+<?php echo _('Login Name')._(':'); ?>
 <br />
-<input type="text" name="loginname" />
-<br />
+    <label for="loginname">
+        <input id="loginname" type="text" name="loginname"/>
+    </label>
+    <br />
 <input type="submit" name="submit" value="<?php echo _('Send Lost PW Hash'); ?>" />
 </p>
 </form>

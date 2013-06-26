@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 16:00+0200\n"
+"POT-Creation-Date: 2013-06-26 17:19+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -397,6 +397,18 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:73
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
+#: cronjobs/send_pending_items_mail.php:77
+#: cronjobs/send_pending_items_mail.php:78
+#: cronjobs/send_pending_items_mail.php:79
+#: cronjobs/send_pending_items_mail.php:80
+#: cronjobs/send_pending_items_mail.php:81
+#: cronjobs/send_pending_items_mail.php:115
+#: cronjobs/send_pending_items_mail.php:116
+#: cronjobs/send_pending_items_mail.php:117
+#: cronjobs/send_pending_items_mail.php:118
+#: cronjobs/send_pending_items_mail.php:119
+#: cronjobs/send_pending_items_mail.php:120
+#: cronjobs/send_pending_items_mail.php:121
 #: plugins/mantisbt/action/addAttachment.php:38
 #: plugins/mantisbt/action/addCategory.php:39
 #: plugins/mantisbt/action/addIssue.php:47
@@ -681,8 +693,8 @@ msgstr ""
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:97
 #: plugins/mailman/www/admin/index.php:150
 #: plugins/mailman/www/admin/index.php:183
-#: plugins/mailman/www/mailman_utils.php:57
-#: plugins/mailman/www/mailman_utils.php:73
+#: plugins/mailman/www/mailman_utils.php:52
+#: plugins/mailman/www/mailman_utils.php:67
 #: plugins/mantisbt/view/addIssue.php:137
 #: plugins/mantisbt/view/admin/addVersion.php:44
 #: plugins/mantisbt/view/admin/editVersion.php:62
@@ -1125,6 +1137,8 @@ msgstr "Updated"
 #: common/tracker/views/form-addextrafield.php:131
 #: common/tracker/views/form-updateextrafieldelement.php:60
 #: common/widget/Widget_ProjectLatestDocuments.class.php:76
+#: cronjobs/send_pending_items_mail.php:80
+#: cronjobs/send_pending_items_mail.php:117
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:218
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:95
@@ -1237,7 +1251,7 @@ msgstr ""
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:114
 #: common/widget/Widget_ProjectInfo.class.php:68
 #: common/widget/Widget_Rss.class.php:76
-#: cronjobs/send_pending_items_mail.php:98
+#: cronjobs/send_pending_items_mail.php:96
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:190
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:54
 #: plugins/hudson/include/HudsonBuild.class.php:110
@@ -1469,8 +1483,8 @@ msgstr "문서 관리자 설정하기"
 #: common/tracker/actions/admin-tracker.php:32
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:59
 #: common/tracker/include/ArtifactTypeHtml.class.php:81
-#: plugins/mailman/www/mailman_utils.php:208
-#: plugins/mailman/www/mailman_utils.php:211
+#: plugins/mailman/www/mailman_utils.php:202
+#: plugins/mailman/www/mailman_utils.php:205
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:402
 #: plugins/mantisbt/www/user/index.php:41 www/mail/admin/index.php:290
 #: www/mail/mail_utils.php:48 www/news/news_utils.php:48
@@ -1595,40 +1609,41 @@ msgstr ""
 #: plugins/mailman/www/admin/index.php:144
 #: plugins/mailman/www/admin/index.php:150
 #: plugins/mailman/www/admin/index.php:183
-#: plugins/scmhg/common/HgPlugin.class.php:627 www/account/lostpw.php:89
-#: www/account/pending-resend.php:71 www/account/register.php:159
-#: www/account/verify.php:78 www/account/verify.php:82
-#: www/admin/useredit.php:148 www/admin/useredit.php:157
-#: www/admin/useredit.php:211 www/frs/reporting/downloads.php:105
-#: www/frs/reporting/downloads.php:107 www/frs/reporting/downloads.php:109
-#: www/register/index.php:226 www/reporting/groupadded.php:60
-#: www/reporting/groupadded.php:61 www/reporting/groupadded.php:62
-#: www/reporting/groupcum.php:59 www/reporting/groupcum.php:60
-#: www/reporting/groupcum.php:61 www/reporting/projectact.php:62
-#: www/reporting/projectact.php:63 www/reporting/projectact.php:64
-#: www/reporting/projectact.php:65 www/reporting/projectact.php:66
-#: www/reporting/projecttime.php:72 www/reporting/projecttime.php:73
-#: www/reporting/projecttime.php:74 www/reporting/projecttime.php:75
-#: www/reporting/siteact.php:63 www/reporting/siteact.php:64
-#: www/reporting/siteact.php:65 www/reporting/siteact.php:66
-#: www/reporting/sitetimebar.php:60 www/reporting/sitetimebar.php:61
-#: www/reporting/sitetime.php:72 www/reporting/sitetime.php:73
-#: www/reporting/sitetime.php:74 www/reporting/timecategory.php:91
-#: www/reporting/toolspie.php:64 www/reporting/toolspie.php:65
-#: www/reporting/useract.php:77 www/reporting/useract.php:78
-#: www/reporting/useract.php:79 www/reporting/useract.php:80
-#: www/reporting/useract.php:81 www/reporting/useradded.php:58
-#: www/reporting/useradded.php:59 www/reporting/useradded.php:60
-#: www/reporting/usercum.php:59 www/reporting/usercum.php:60
-#: www/reporting/usercum.php:61 www/reporting/usersummary.php:69
-#: www/reporting/usersummary.php:70 www/reporting/usersummary.php:71
-#: www/reporting/usertime.php:88 www/reporting/usertime.php:89
-#: www/reporting/usertime.php:90 www/reporting/usertime.php:91
-#: www/snippet/add_snippet_to_package.php:128 www/snippet/addversion.php:94
-#: www/snippet/addversion.php:98 www/snippet/addversion.php:102
-#: www/snippet/addversion.php:217 www/snippet/addversion.php:221
-#: www/snippet/package.php:147 www/snippet/package.php:151
-#: www/snippet/package.php:156 www/snippet/package.php:169
+#: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
+#: www/account/lostpw.php:90 www/account/pending-resend.php:71
+#: www/account/register.php:159 www/account/verify.php:78
+#: www/account/verify.php:82 www/admin/useredit.php:148
+#: www/admin/useredit.php:157 www/admin/useredit.php:211
+#: www/frs/reporting/downloads.php:105 www/frs/reporting/downloads.php:107
+#: www/frs/reporting/downloads.php:109 www/register/index.php:226
+#: www/reporting/groupadded.php:60 www/reporting/groupadded.php:61
+#: www/reporting/groupadded.php:62 www/reporting/groupcum.php:59
+#: www/reporting/groupcum.php:60 www/reporting/groupcum.php:61
+#: www/reporting/projectact.php:62 www/reporting/projectact.php:63
+#: www/reporting/projectact.php:64 www/reporting/projectact.php:65
+#: www/reporting/projectact.php:66 www/reporting/projecttime.php:72
+#: www/reporting/projecttime.php:73 www/reporting/projecttime.php:74
+#: www/reporting/projecttime.php:75 www/reporting/siteact.php:63
+#: www/reporting/siteact.php:64 www/reporting/siteact.php:65
+#: www/reporting/siteact.php:66 www/reporting/sitetimebar.php:60
+#: www/reporting/sitetimebar.php:61 www/reporting/sitetime.php:72
+#: www/reporting/sitetime.php:73 www/reporting/sitetime.php:74
+#: www/reporting/timecategory.php:91 www/reporting/toolspie.php:64
+#: www/reporting/toolspie.php:65 www/reporting/useract.php:77
+#: www/reporting/useract.php:78 www/reporting/useract.php:79
+#: www/reporting/useract.php:80 www/reporting/useract.php:81
+#: www/reporting/useradded.php:58 www/reporting/useradded.php:59
+#: www/reporting/useradded.php:60 www/reporting/usercum.php:59
+#: www/reporting/usercum.php:60 www/reporting/usercum.php:61
+#: www/reporting/usersummary.php:69 www/reporting/usersummary.php:70
+#: www/reporting/usersummary.php:71 www/reporting/usertime.php:88
+#: www/reporting/usertime.php:89 www/reporting/usertime.php:90
+#: www/reporting/usertime.php:91 www/snippet/add_snippet_to_package.php:128
+#: www/snippet/addversion.php:94 www/snippet/addversion.php:98
+#: www/snippet/addversion.php:102 www/snippet/addversion.php:217
+#: www/snippet/addversion.php:221 www/snippet/package.php:147
+#: www/snippet/package.php:151 www/snippet/package.php:156
+#: www/snippet/package.php:169
 #, php-format
 msgid ":"
 msgstr ""
@@ -1829,8 +1844,8 @@ msgstr "Could Not Update Parent"
 #: plugins/contribtracker/www/project_admin.php:324
 #: plugins/globaldashboard/www/admin/manage_accounts.php:94
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:103
-#: plugins/mailman/www/mailman_utils.php:75
-#: plugins/mailman/www/mailman_utils.php:182
+#: plugins/mailman/www/mailman_utils.php:69
+#: plugins/mailman/www/mailman_utils.php:176
 #: plugins/mantisbt/view/admin/editVersion.php:100
 #: plugins/mantisbt/view/admin/viewCategorie.php:67
 #: plugins/mantisbt/view/viewAttachment.php:58
@@ -2004,8 +2019,8 @@ msgstr "릴리즈"
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
 #: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:68
-#: plugins/mailman/www/mailman_utils.php:74
-#: plugins/mailman/www/mailman_utils.php:181
+#: plugins/mailman/www/mailman_utils.php:68
+#: plugins/mailman/www/mailman_utils.php:175
 #: plugins/mantisbt/view/addOrEditNote.php:54
 #: plugins/mantisbt/view/admin/editVersion.php:94
 #: plugins/mantisbt/view/adminuser.php:43
@@ -2125,7 +2140,7 @@ msgstr "로그인하셔야만 현재 위치를 기록할 수 있습니다."
 msgid "Forum::savePlace()"
 msgstr "게시판::savePlace()"
 
-#: common/forum/Forum.class.php:598 common/mail/MailingList.class.php:256
+#: common/forum/Forum.class.php:598 common/mail/MailingList.class.php:257
 #: plugins/mailman/include/MailmanList.class.php:250
 #: plugins/mailman/include/MailmanList.class.php:377
 #: plugins/mailman/include/MailmanList.class.php:394
@@ -2136,7 +2151,7 @@ msgstr "갱신 오류:"
 
 #: common/forum/Forum.class.php:613 common/frs/FRSPackage.class.php:451
 #: common/frs/FRSRelease.class.php:343 common/include/Group.class.php:1590
-#: common/mail/MailingList.class.php:384 common/pm/ProjectGroup.class.php:360
+#: common/mail/MailingList.class.php:385 common/pm/ProjectGroup.class.php:360
 #: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:504
 #: common/tracker/ArtifactExtraField.class.php:430
 #: common/tracker/ArtifactType.class.php:791
@@ -2187,6 +2202,7 @@ msgstr "멤버 구함 공지 올리기"
 #: common/tracker/actions/query.php:386
 #: common/tracker/include/build_submission_form.php:72
 #: common/tracker/views/form-customizelist.php:35
+#: cronjobs/send_pending_items_mail.php:116
 #: plugins/mantisbt/view/addIssue.php:133
 #: plugins/mantisbt/view/editIssue.php:213
 #: plugins/mantisbt/view/viewIssue.php:108
@@ -2609,6 +2625,7 @@ msgid "Permission denied."
 msgstr "Permission Denied"
 
 #: common/include/Error.class.php:147 common/tracker/actions/tracker.php:84
+#: www/account/change_email.php:38
 msgid "Invalid Email Address"
 msgstr "유효하지 않은 이메일 주소"
 
@@ -3276,7 +3293,7 @@ msgstr "로그인"
 msgid "New Account"
 msgstr "사용자 등록"
 
-#: common/include/Navigation.class.php:230 www/account/lostpw.php:74
+#: common/include/Navigation.class.php:230 www/account/lostpw.php:75
 #, php-format
 msgid "Home"
 msgstr "홈"
@@ -4169,17 +4186,23 @@ msgid ""
 "Your list password is: %6$s .\n"
 "You are encouraged to change this password as soon as possible.\n"
 "\n"
-"Thank you for registering your project with %1$s.\n"
-"\n"
-"-- the %1$s staff\n"
+"Thank you for registering your project with %1$s."
 msgstr ""
 
-#: common/mail/MailingList.class.php:201
+#: common/mail/MailingList.class.php:199
+#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
+#: www/account/lostpw.php:68
+#, php-format
+msgid "-- the %s staff"
+msgstr "-- %s 관리자"
+
+#: common/mail/MailingList.class.php:202
+#: plugins/mailman/www/mailman_utils.php:38
 #, fuzzy, php-format
 msgid "%s New Mailing List"
 msgstr "메일링 리스트 사용"
 
-#: common/mail/MailingList.class.php:221
+#: common/mail/MailingList.class.php:222
 #, fuzzy
 msgid "Error Getting mailing list"
 msgstr "%1$s 가져오기 오류"
@@ -4864,7 +4887,8 @@ msgstr "중요도"
 
 #: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:560
 #: common/tracker/actions/query.php:200
-#: common/tracker/views/form-customizelist.php:36 www/people/viewjob.php:77
+#: common/tracker/views/form-customizelist.php:36
+#: cronjobs/send_pending_items_mail.php:118 www/people/viewjob.php:77
 #: www/pm/include/ProjectTaskHTML.class.php:111
 #: www/project/report/index.php:137
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:59
@@ -4984,6 +5008,7 @@ msgstr "전부 해제"
 #: common/tracker/actions/mod-limited.php:114
 #: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:943
 #: common/tracker/include/build_submission_form.php:62
+#: cronjobs/send_pending_items_mail.php:119
 #: plugins/mantisbt/view/addIssue.php:74
 #: plugins/mantisbt/view/editIssue.php:127
 #: plugins/mantisbt/view/viewIssue.php:84 www/my/dashboard.php:73
@@ -4996,9 +5021,11 @@ msgstr "담당자"
 
 #: common/tracker/actions/browse.php:570 common/tracker/actions/detail.php:78
 #: common/tracker/actions/mod-limited.php:86 common/tracker/actions/mod.php:88
-#: www/admin/approve-pending.php:213 www/admin/pending-news.php:142
-#: www/my/dashboard.php:75 www/news/admin/index.php:127
-#: www/pm/detail_task.php:39 www/pm/mod_task.php:52
+#: cronjobs/send_pending_items_mail.php:79
+#: cronjobs/send_pending_items_mail.php:120 www/admin/approve-pending.php:213
+#: www/admin/pending-news.php:142 www/my/dashboard.php:75
+#: www/news/admin/index.php:127 www/pm/detail_task.php:39
+#: www/pm/mod_task.php:52
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:50
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:50
@@ -6646,8 +6673,8 @@ msgstr ""
 msgid "Configuring allowed roles for the transitions from %1$s to %2$s"
 msgstr ""
 
-#: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:61
-#: plugins/mailman/www/mailman_utils.php:132 www/account/index.php:260
+#: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:56
+#: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:260
 #: www/include/Layout.class.php:1343
 msgid "Preferences"
 msgstr "설정하기"
@@ -7484,37 +7511,52 @@ msgid "Pending task manager items notification"
 msgstr ""
 
 #: cronjobs/send_pending_items_mail.php:76
-#, php-format
-msgid ""
-"This mail is sent to you to remind you of pending/overdue tasks.\n"
-"The task manager item #%1$s is pending:\n"
-"Task Summary: %2$s\n"
-"Submitted by: %4$s\n"
-"Status:%5$s\n"
-"Percent Complete: %6$s\n"
-"\n"
-"Click here to visit the item %3$s"
+msgid "This mail is sent to you to remind you of pending/overdue tasks."
 msgstr ""
 
-#: cronjobs/send_pending_items_mail.php:115
+#: cronjobs/send_pending_items_mail.php:77
+#, php-format
+msgid "The task manager item #%s is pending"
+msgstr ""
+
+#: cronjobs/send_pending_items_mail.php:78 www/pm/add_task.php:74
+#: www/pm/browse_task.php:126 www/pm/browse_task.php:231
+#: www/pm/detail_task.php:94 www/pm/ganttpage.php:70
+#: www/pm/include/ProjectTaskHTML.class.php:74 www/pm/mod_task.php:97
+msgid "Task Summary"
+msgstr "Task Summary"
+
+#: cronjobs/send_pending_items_mail.php:81 www/pm/add_task.php:63
+#: www/pm/browse_task.php:129 www/pm/browse_task.php:237
+#: www/pm/detail_task.php:63 www/pm/ganttpage.php:73 www/pm/mod_task.php:78
+msgid "Percent Complete"
+msgstr "달성도"
+
+#: cronjobs/send_pending_items_mail.php:82
+#: cronjobs/send_pending_items_mail.php:122
+#, php-format
+msgid "Click here to visit the item %s"
+msgstr ""
+
+#: cronjobs/send_pending_items_mail.php:113
 #, fuzzy
 msgid "Pending tracker items notification"
 msgstr "Days till pending tracker items time out"
 
-#: cronjobs/send_pending_items_mail.php:116
-#, php-format
+#: cronjobs/send_pending_items_mail.php:114
 msgid ""
-"This mail is sent to you to remind you of pending/overdue tracker items. The "
-"item #%1$s is pending:\n"
-"Summary: %3$s\n"
-"Status: %5$s\n"
-"Open Date:%6$s\n"
-"Assigned To: %7$s\n"
-"Submitted by: %8$s\n"
-"Details: %9$s\n"
-"\n"
-"\n"
-"Click here to visit the item: %4$s"
+"This mail is sent to you to remind you of pending/overdue tracker items."
+msgstr ""
+
+#: cronjobs/send_pending_items_mail.php:115
+#, php-format
+msgid "The item #%s is pending"
+msgstr ""
+
+#: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:150
+#: www/export/rssAboTask.php:146 www/my/diary.php:185
+#: www/news/admin/index.php:137 www/news/submit.php:148
+msgid "Details"
 msgstr ""
 
 #: cronjobs/tracker_gateway.php:195
@@ -7554,8 +7596,7 @@ msgid "Login name or email address"
 msgstr "유효하지 않은 이메일 주소"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
-#: www/account/lostpw.php:89 www/account/pending-resend.php:71
-#: www/account/verify.php:78
+#: www/account/pending-resend.php:71 www/account/verify.php:78
 #, fuzzy
 msgid "Login name"
 msgstr "사용자 ID:"
@@ -8638,8 +8679,8 @@ msgstr ": User List"
 
 #: plugins/forumml/include/forummlPlugin.class.php:171
 #: plugins/forumml/www/message.php:159
-#: plugins/mailman/www/mailman_utils.php:58
-#: plugins/mailman/www/mailman_utils.php:123
+#: plugins/mailman/www/mailman_utils.php:53
+#: plugins/mailman/www/mailman_utils.php:117
 #, fuzzy
 msgid "Archives"
 msgstr "아키텍처"
@@ -10345,7 +10386,7 @@ msgstr ""
 "원하시는 뉴스를 선택하십시오. 뉴스를 읽거나 검색, 혹은 올라와 있는 뉴스에 대"
 "해 답글을 올리실 수도 있습니다."
 
-#: plugins/mailman/www/mailman_utils.php:20
+#: plugins/mailman/www/mailman_utils.php:19
 #, php-format
 msgid ""
 "A mailing list will be created on %1$s in few minutes\n"
@@ -10362,60 +10403,53 @@ msgid ""
 "Your list password is: %6$s .\n"
 "You are encouraged to change this password as soon as possible.\n"
 "\n"
-"Thank you for registering your project with %1$s.\n"
-"\n"
-"-- the %1$s staff\n"
+"Thank you for registering your project with %1$s."
 msgstr ""
 
-#: plugins/mailman/www/mailman_utils.php:38
-#, php-format
-msgid "%1$s New Mailing List"
-msgstr ""
-
-#: plugins/mailman/www/mailman_utils.php:56
-#: plugins/mailman/www/mailman_utils.php:72
+#: plugins/mailman/www/mailman_utils.php:51
+#: plugins/mailman/www/mailman_utils.php:66
 #, fuzzy
 msgid "Mailing List"
 msgstr "메일링 리스트"
 
-#: plugins/mailman/www/mailman_utils.php:60 www/mail/index.php:80
+#: plugins/mailman/www/mailman_utils.php:55 www/mail/index.php:80
 msgid "Subscription"
 msgstr ""
 
-#: plugins/mailman/www/mailman_utils.php:62
-#: plugins/mailman/www/mailman_utils.php:76
-#: plugins/mailman/www/mailman_utils.php:139
+#: plugins/mailman/www/mailman_utils.php:57
+#: plugins/mailman/www/mailman_utils.php:70
+#: plugins/mailman/www/mailman_utils.php:133
 msgid "Administrate"
 msgstr ""
 
-#: plugins/mailman/www/mailman_utils.php:112
-#: plugins/mailman/www/mailman_utils.php:172 www/mail/admin/index.php:288
+#: plugins/mailman/www/mailman_utils.php:106
+#: plugins/mailman/www/mailman_utils.php:166 www/mail/admin/index.php:288
 #: www/mail/index.php:93
 msgid "Not activated yet"
 msgstr ""
 
-#: plugins/mailman/www/mailman_utils.php:115
-#: plugins/mailman/www/mailman_utils.php:175
+#: plugins/mailman/www/mailman_utils.php:109
+#: plugins/mailman/www/mailman_utils.php:169
 #, fuzzy
 msgid "Error during creation"
 msgstr "그룹 거부 오류"
 
-#: plugins/mailman/www/mailman_utils.php:130 www/admin/unsubscribe.php:60
+#: plugins/mailman/www/mailman_utils.php:124 www/admin/unsubscribe.php:60
 #: www/forum/monitor.php:65
 msgid "Unsubscribe"
 msgstr "Unsubscribe"
 
-#: plugins/mailman/www/mailman_utils.php:134
+#: plugins/mailman/www/mailman_utils.php:128
 #, fuzzy
 msgid "Subscribe"
 msgstr "Unsubscribe"
 
-#: plugins/mailman/www/mailman_utils.php:175
+#: plugins/mailman/www/mailman_utils.php:169
 #, fuzzy
 msgid "Re-create"
 msgstr "생성"
 
-#: plugins/mailman/www/mailman_utils.php:185
+#: plugins/mailman/www/mailman_utils.php:179
 #, fuzzy
 msgid "Administrate from Mailman"
 msgstr "관리"
@@ -13765,54 +13799,41 @@ msgid ""
 msgstr ""
 
 #: www/account/change_email-complete.php:69 www/account/change_email.php:94
-#: www/account/lostpw.php:97 www/account/unsubscribe.php:76
+#: www/account/lostpw.php:100 www/account/unsubscribe.php:76
 #: www/my/bookmark_edit.php:67
 msgid "Return"
 msgstr "되돌아가기"
 
-#: www/account/change_email.php:38
-#, fuzzy
-msgid "Invalid email address."
-msgstr "유효하지 않은 이메일 주소"
-
 #: www/account/change_email.php:57
-#, fuzzy, php-format
-msgid ""
-"You have requested a change of email address on %1$s.\n"
-"Please visit the following URL to complete the email change:\n"
-"\n"
-"%2$s\n"
-"\n"
-" -- the %1$s staff"
-msgstr ""
-"%1$s의 이메일 주소를 변경하는 과정입니다.\n"
-"다음 URL을 방문하셔서 이메일 주소를 변경하십시오.\n"
-"\n"
-"<http://%1$s/account/change_email-complete.php?ch=_%2$s>\n"
-"\n"
-" -- %1$s 관리자"
+#, php-format
+msgid "You have requested a change of email address on %s."
+msgstr "%s의 이메일 주소를 변경하는 과정입니다."
 
-#: www/account/change_email.php:66 www/account/lostpw.php:70
+#: www/account/change_email.php:59
+msgid "Please visit the following URL to complete the email change:"
+msgstr "다음 URL을 방문하셔서 이메일 주소를 변경하십시오:"
+
+#: www/account/change_email.php:65 www/account/lostpw.php:71
 #, php-format
 msgid "%1$s Verification"
 msgstr "%1$s 확인"
 
-#: www/account/change_email.php:68
+#: www/account/change_email.php:67
 msgid "Email Change Confirmation"
 msgstr "이메일 주소 변경 확인"
 
-#: www/account/change_email.php:70
+#: www/account/change_email.php:69
 msgid ""
 "An email has been sent to the new address. Follow the instructions in the "
 "email to complete the email change."
 msgstr ""
 
-#: www/account/change_email.php:78
+#: www/account/change_email.php:76
 #, fuzzy
 msgid "Email change"
 msgstr "이메일 주소 변경 완결"
 
-#: www/account/change_email.php:80
+#: www/account/change_email.php:78
 msgid ""
 "Changing your email address will require confirmation from your new email "
 "address, so that we can ensure we have a good email address on file."
@@ -13820,7 +13841,7 @@ msgstr ""
 "이메일 주소를 변경하시려면, 유효한 이메일 주소임을 확인하기 위해 새 주소로부"
 "터 확인하는 절차를 밟아야 합니다."
 
-#: www/account/change_email.php:81
+#: www/account/change_email.php:79
 msgid ""
 "We need to maintain an accurate email address for each user due to the level "
 "of access we grant via this account. If we need to reach a user for issues "
@@ -13831,7 +13852,7 @@ msgstr ""
 "정 접속이나 프로젝트 관리 등의 중요한 이슈 사항들에 대해서 항상 사용자 여러분"
 "과 연락이 가능하도록 보장하는 것은 중요한 일입니다."
 
-#: www/account/change_email.php:82
+#: www/account/change_email.php:80
 msgid ""
 "Submitting the form below will mail a confirmation URL to the new email "
 "address. Visiting this link will complete the email change."
@@ -13839,9 +13860,9 @@ msgstr ""
 "아래 양식을 채워 주시면 변경 확인 절차에 사용되는 URL이 해당 메일 주소로 배달"
 "되며, 그 URL을 방문하셔야 이메일 주소 변경이 완료됩니다."
 
-#: www/account/change_email.php:88
-msgid "New Email Address:"
-msgstr "새로운 이메일 주소:"
+#: www/account/change_email.php:86
+msgid "New Email Address"
+msgstr "새로운 이메일 주소"
 
 #: www/account/change_email.php:90
 msgid "Send Confirmation to New Address"
@@ -14211,63 +14232,66 @@ msgstr ""
 msgid "New Password (min. 6 chars)"
 msgstr "새로운 비밀번호 (6글자 이상)"
 
-#: www/account/lostpw.php:45 www/users:74
+#: www/account/lostpw.php:45 www/sendmessage.php:45
 #, fuzzy
-msgid "That user does not exist."
+msgid "That user does not exist"
 msgstr "분류 기준이 존재하지 않습니다."
 
 #: www/account/lostpw.php:58
-#, fuzzy, php-format
+#, php-format
 msgid ""
-"Someone (presumably you) on the %1$s site requested a\n"
-"password change through email verification. If this was not you,\n"
-"ignore this message and nothing will happen.\n"
-"\n"
-"If you requested this verification, visit the following URL\n"
-"to change your password:\n"
-"\n"
-"<%2$s>\n"
-"\n"
-" -- the %1$s staff\n"
+"Someone (presumably you) on the %s site requested a password change through "
+"email verification."
 msgstr ""
-"%3$s 사이트의 누군가가 (아마도 본인?) 이메일을 이용한\n"
-"비밀번호 변경을 요청하였습니다. 만약 여러분이 직접 하신 것이 아니라면\n"
-"이 메시지는 그냥 무시하십시오. 그러면 아무것도 바뀌지 않습니다.\n"
-"\n"
-"만약 본인이 직접 요청하신 것이라면 다음 URL을 방문하여 비밀번호를 변경하십시"
-"오.\n"
-"\n"
-"<http://%1$s/account/lostlogin.php?ch=_%2$s>\n"
-"\n"
-" -- %3$s\n"
+"%s 사이트의 누군가가 (아마도 본인?) 이메일을 이용한비밀번호 변경을 요청하였습"
+"니다."
 
-#: www/account/lostpw.php:72
+#: www/account/lostpw.php:60
+msgid "If this was not you, ignore this message and nothing will happen."
+msgstr ""
+"만약 여러분이 직접 하신 것이 아니라면이 메시지는 그냥 무시하십시오.그러면 아"
+"무것도 바뀌지 않습니다."
+
+#: www/account/lostpw.php:63
+msgid ""
+"If you requested this verification, visit the following URL to change your "
+"password:"
+msgstr ""
+"만약 본인이 직접 요청하신 것이라면 다음 URL을 방문하여 비밀번호를 변경하십시"
+"오."
+
+#: www/account/lostpw.php:73
 #, fuzzy
 msgid "Lost Password Confirmation"
 msgstr "이메일 주소 변경 확인"
 
-#: www/account/lostpw.php:74
+#: www/account/lostpw.php:75
 #, php-format
 msgid ""
 "An email has been sent to the address you have on file. Follow the "
 "instructions in the email to change your account password."
 msgstr ""
 
-#: www/account/lostpw.php:83
+#: www/account/lostpw.php:84
 msgid ""
 "Hey... losing your password is serious business. It compromises the security "
 "of your account, your projects, and this site."
 msgstr ""
 
-#: www/account/lostpw.php:84
+#: www/account/lostpw.php:85
 msgid ""
-"Clicking \"Send Lost PW Hash\" below will email a URL to the email address "
-"we have on file for you. In this URL is a 128-bit confirmation hash for your "
+"Clicking “Send Lost PW Hash” below will email a URL to the email address we "
+"have on file for you. In this URL is a 128-bit confirmation hash for your "
 "account. Visiting the URL will allow you to change your password online and "
 "login."
 msgstr ""
 
-#: www/account/lostpw.php:93
+#: www/account/lostpw.php:90
+#, fuzzy
+msgid "Login Name"
+msgstr "사용자 ID:"
+
+#: www/account/lostpw.php:96
 msgid "Send Lost PW Hash"
 msgstr "확인에 사용되는 hash값을 다시 보냅니다."
 
@@ -15406,11 +15430,6 @@ msgstr ""
 
 #: www/admin/pending-news.php:146
 msgid "Do Nothing"
-msgstr ""
-
-#: www/admin/pending-news.php:150 www/export/rssAboTask.php:146
-#: www/my/diary.php:185 www/news/admin/index.php:137 www/news/submit.php:148
-msgid "Details"
 msgstr ""
 
 #: www/admin/pluginman.php:55
@@ -18907,19 +18926,6 @@ msgstr "임무 추가하기"
 msgid "admin"
 msgstr "admin"
 
-#: www/pm/add_task.php:63 www/pm/browse_task.php:129
-#: www/pm/browse_task.php:237 www/pm/detail_task.php:63
-#: www/pm/ganttpage.php:73 www/pm/mod_task.php:78
-msgid "Percent Complete"
-msgstr "달성도"
-
-#: www/pm/add_task.php:74 www/pm/browse_task.php:126
-#: www/pm/browse_task.php:231 www/pm/detail_task.php:94
-#: www/pm/ganttpage.php:70 www/pm/include/ProjectTaskHTML.class.php:74
-#: www/pm/mod_task.php:97
-msgid "Task Summary"
-msgstr "Task Summary"
-
 #: www/pm/add_task.php:81
 msgid "Task Details"
 msgstr "임무 설명"
@@ -21262,11 +21268,6 @@ msgstr "이메일 주소"
 msgid "touser"
 msgstr "user_id"
 
-#: www/sendmessage.php:45
-#, fuzzy
-msgid "That user does not exist"
-msgstr "분류 기준이 존재하지 않습니다."
-
 #: www/sendmessage.php:50
 #, php-format
 msgid "You can only send to addresses @<em>%1$s</em>."
@@ -22887,14 +22888,63 @@ msgstr "대량 갱신"
 msgid "No User Name Provided"
 msgstr "사용자ID"
 
+#: www/users:74
+#, fuzzy
+msgid "That user does not exist."
+msgstr "분류 기준이 존재하지 않습니다."
+
+#, fuzzy
+#~ msgid "Invalid email address."
+#~ msgstr "유효하지 않은 이메일 주소"
+
+#, fuzzy
+#~ msgid ""
+#~ "You have requested a change of email address on %1$s.\n"
+#~ "Please visit the following URL to complete the email change:\n"
+#~ "\n"
+#~ "%2$s\n"
+#~ "\n"
+#~ " -- the %1$s staff"
+#~ msgstr ""
+#~ "%1$s의 이메일 주소를 변경하는 과정입니다.\n"
+#~ "다음 URL을 방문하셔서 이메일 주소를 변경하십시오.\n"
+#~ "\n"
+#~ "<http://%1$s/account/change_email-complete.php?ch=_%2$s>\n"
+#~ "\n"
+#~ " -- %1$s 관리자"
+
+#~ msgid "New Email Address:"
+#~ msgstr "새로운 이메일 주소:"
+
+#, fuzzy
+#~ msgid ""
+#~ "Someone (presumably you) on the %1$s site requested a\n"
+#~ "password change through email verification. If this was not you,\n"
+#~ "ignore this message and nothing will happen.\n"
+#~ "\n"
+#~ "If you requested this verification, visit the following URL\n"
+#~ "to change your password:\n"
+#~ "\n"
+#~ "<%2$s>\n"
+#~ "\n"
+#~ " -- the %1$s staff\n"
+#~ msgstr ""
+#~ "%3$s 사이트의 누군가가 (아마도 본인?) 이메일을 이용한\n"
+#~ "비밀번호 변경을 요청하였습니다. 만약 여러분이 직접 하신 것이 아니라면\n"
+#~ "이 메시지는 그냥 무시하십시오. 그러면 아무것도 바뀌지 않습니다.\n"
+#~ "\n"
+#~ "만약 본인이 직접 요청하신 것이라면 다음 URL을 방문하여 비밀번호를 변경하십"
+#~ "시오.\n"
+#~ "\n"
+#~ "<http://%1$s/account/lostlogin.php?ch=_%2$s>\n"
+#~ "\n"
+#~ " -- %3$s\n"
+
 #~ msgid "Error: this news item was not found"
 #~ msgstr "오류 - 이 뉴스 게시물은 없습니다."
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "%s에 신청하신 프로젝트가 승인되었습니다."
-
-#~ msgid "-- the %s staff"
-#~ msgstr "-- %s 관리자"
 
 #~ msgid "%s Project Approved"
 #~ msgstr "%s 프로젝트가 승인되었습니다."
@@ -22946,36 +22996,8 @@ msgstr "사용자ID"
 #~ "Visiting the link sent to you in this email will activate your account."
 #~ msgstr " 메일에 포함되어 있는 URL을 클릭하시면 계정을 사용하실 수 있습니다."
 
-#~ msgid "You have requested a change of email address on %s."
-#~ msgstr "%s의 이메일 주소를 변경하는 과정입니다."
-
-#~ msgid "Please visit the following URL to complete the email change:"
-#~ msgstr "다음 URL을 방문하셔서 이메일 주소를 변경하십시오:"
-
-#~ msgid "New Email Address"
-#~ msgstr "새로운 이메일 주소"
-
 #~ msgid "Email Address"
 #~ msgstr "이메일 주소"
-
-#~ msgid ""
-#~ "Someone (presumably you) on the %s site requested a password change "
-#~ "through email verification."
-#~ msgstr ""
-#~ "%s 사이트의 누군가가 (아마도 본인?) 이메일을 이용한비밀번호 변경을 요청하"
-#~ "였습니다."
-
-#~ msgid "If this was not you, ignore this message and nothing will happen."
-#~ msgstr ""
-#~ "만약 여러분이 직접 하신 것이 아니라면이 메시지는 그냥 무시하십시오.그러면 "
-#~ "아무것도 바뀌지 않습니다."
-
-#~ msgid ""
-#~ "If you requested this verification, visit the following URL to change "
-#~ "your password:"
-#~ msgstr ""
-#~ "만약 본인이 직접 요청하신 것이라면 다음 URL을 방문하여 비밀번호를 변경하십"
-#~ "시오."
 
 #~ msgid ""
 #~ "You are now being sent a confirmation email to verify your email address. "
