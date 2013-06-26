@@ -813,7 +813,7 @@ class DocumentGroup extends Error {
 			}
 			return true;
 		} else {
-			$this->setError(_('Unable to open directory for inject into tree'));
+			$this->setError(_('Unable to open folder for injecting into tree'));
 			return false;
 		}
 	}

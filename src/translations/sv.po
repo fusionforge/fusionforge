@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 18:57+0200\n"
+"POT-Creation-Date: 2013-06-26 16:00+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -51,7 +51,7 @@ msgstr "JOBB kompetens borttag lyckades"
 #: common/docman/actions/monitorfile.php:32
 #: common/docman/actions/releasefile.php:31
 #: common/docman/actions/reservefile.php:32
-#: common/docman/actions/trashdir.php:34 common/docman/actions/trashdir.php:42
+#: common/docman/actions/trashdir.php:35 common/docman/actions/trashdir.php:43
 #: common/docman/actions/trashfile.php:34
 #: common/docman/actions/trashfile.php:42
 #: common/docman/actions/updatecreateonline.php:27
@@ -226,7 +226,7 @@ msgstr "Skapande lyckades"
 msgid "reserved successfully."
 msgstr "Dokumentinlämning lyckades"
 
-#: common/docman/actions/trashdir.php:85
+#: common/docman/actions/trashdir.php:99
 #, fuzzy, php-format
 msgid "Documents folder %s moved to trash successfully."
 msgstr "Dokumentinlämning lyckades"
@@ -564,7 +564,7 @@ msgid "Unknown item."
 msgstr "Unixkonto status"
 
 #: common/docman/DocumentGroup.class.php:816
-msgid "Unable to open directory for inject into tree"
+msgid "Unable to open folder for injecting into tree"
 msgstr ""
 
 #: common/docman/DocumentGroupFactory.class.php:84
@@ -1508,7 +1508,7 @@ msgstr ""
 
 #: common/docman/views/pendingfiles.php:138
 #, fuzzy
-msgid "Activate in this directory"
+msgid "Activate in this folder"
 msgstr "Redigera en grupp"
 
 #: common/docman/views/reporting.php:92
@@ -3841,50 +3841,50 @@ msgstr "Använd statistik"
 msgid "Add Repository"
 msgstr "SCM Lager"
 
-#: common/include/session.php:185 plugins/authldap/www/post-login.php:88
+#: common/include/session.php:187 plugins/authldap/www/post-login.php:88
 msgid "Missing Password Or Users Name"
 msgstr "Saknat lösenord eller användarnamn"
 
-#: common/include/session.php:197 common/include/session.php:233
-#: common/include/session.php:244 common/include/session.php:275
+#: common/include/session.php:199 common/include/session.php:235
+#: common/include/session.php:246 common/include/session.php:277
 #: plugins/authbuiltin/www/post-login.php:93
 #: plugins/authldap/www/post-login.php:86 www/account/verify.php:47
 msgid "Invalid Password Or User Name"
 msgstr "Ogiltigt lösenord eller användarnamn"
 
-#: common/include/session.php:290
+#: common/include/session.php:292
 msgid "Account Suspended"
 msgstr "Konto avstängt"
 
-#: common/include/session.php:295
+#: common/include/session.php:297
 msgid "Account Pending"
 msgstr "Konto väntande"
 
-#: common/include/session.php:300
+#: common/include/session.php:302
 msgid "Account Deleted"
 msgstr "Konto borttaget"
 
-#: common/include/session.php:305
+#: common/include/session.php:307
 msgid "Account Not Active"
 msgstr "Konto ej aktivt"
 
-#: common/include/session.php:468
+#: common/include/session.php:470
 msgid "Your account is no longer active; you have been disconnected"
 msgstr ""
 
-#: common/include/session.php:521
+#: common/include/session.php:523
 #, fuzzy, php-format
 msgid ""
 "Permission denied. The %s administrators will have to grant you permission "
 "to view this page."
 msgstr "Detta projekts administratör måste ge dig rättighet att se denna sida."
 
-#: common/include/session.php:580
+#: common/include/session.php:582
 #, fuzzy
 msgid "Could not fetch user session data"
 msgstr "Fick ingen rättighet"
 
-#: common/include/session.php:607
+#: common/include/session.php:609
 msgid "No admin users ?"
 msgstr ""
 

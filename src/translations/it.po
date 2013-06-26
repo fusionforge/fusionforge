@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 18:57+0200\n"
+"POT-Creation-Date: 2013-06-26 16:00+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -51,7 +51,7 @@ msgstr "Rimozione competenza posizione effettuata"
 #: common/docman/actions/monitorfile.php:32
 #: common/docman/actions/releasefile.php:31
 #: common/docman/actions/reservefile.php:32
-#: common/docman/actions/trashdir.php:34 common/docman/actions/trashdir.php:42
+#: common/docman/actions/trashdir.php:35 common/docman/actions/trashdir.php:43
 #: common/docman/actions/trashfile.php:34
 #: common/docman/actions/trashfile.php:42
 #: common/docman/actions/updatecreateonline.php:27
@@ -226,7 +226,7 @@ msgstr "Creato con successo"
 msgid "reserved successfully."
 msgstr "Documento inserito"
 
-#: common/docman/actions/trashdir.php:85
+#: common/docman/actions/trashdir.php:99
 #, fuzzy, php-format
 msgid "Documents folder %s moved to trash successfully."
 msgstr "Documento inserito"
@@ -564,7 +564,7 @@ msgid "Unknown item."
 msgstr "Stato account Unix"
 
 #: common/docman/DocumentGroup.class.php:816
-msgid "Unable to open directory for inject into tree"
+msgid "Unable to open folder for injecting into tree"
 msgstr ""
 
 #: common/docman/DocumentGroupFactory.class.php:84
@@ -1517,7 +1517,7 @@ msgstr ""
 
 #: common/docman/views/pendingfiles.php:138
 #, fuzzy
-msgid "Activate in this directory"
+msgid "Activate in this folder"
 msgstr "Modifica un gruppo"
 
 #: common/docman/views/reporting.php:92
@@ -3867,38 +3867,38 @@ msgstr "Usa Statistiche"
 msgid "Add Repository"
 msgstr "Repository SCM"
 
-#: common/include/session.php:185 plugins/authldap/www/post-login.php:88
+#: common/include/session.php:187 plugins/authldap/www/post-login.php:88
 msgid "Missing Password Or Users Name"
 msgstr "Password o nome utente mancante"
 
-#: common/include/session.php:197 common/include/session.php:233
-#: common/include/session.php:244 common/include/session.php:275
+#: common/include/session.php:199 common/include/session.php:235
+#: common/include/session.php:246 common/include/session.php:277
 #: plugins/authbuiltin/www/post-login.php:93
 #: plugins/authldap/www/post-login.php:86 www/account/verify.php:47
 msgid "Invalid Password Or User Name"
 msgstr "Password o nome utente non valido"
 
-#: common/include/session.php:290
+#: common/include/session.php:292
 msgid "Account Suspended"
 msgstr "Utente sospeso"
 
-#: common/include/session.php:295
+#: common/include/session.php:297
 msgid "Account Pending"
 msgstr "Utente in attesa di attivazione"
 
-#: common/include/session.php:300
+#: common/include/session.php:302
 msgid "Account Deleted"
 msgstr "Utente Rimosso"
 
-#: common/include/session.php:305
+#: common/include/session.php:307
 msgid "Account Not Active"
 msgstr "Utente non attivo"
 
-#: common/include/session.php:468
+#: common/include/session.php:470
 msgid "Your account is no longer active; you have been disconnected"
 msgstr ""
 
-#: common/include/session.php:521
+#: common/include/session.php:523
 #, fuzzy, php-format
 msgid ""
 "Permission denied. The %s administrators will have to grant you permission "
@@ -3907,12 +3907,12 @@ msgstr ""
 "L'amministratore del progetto dovrà darti il permesso di accedere a questa "
 "pagina."
 
-#: common/include/session.php:580
+#: common/include/session.php:582
 #, fuzzy
 msgid "Could not fetch user session data"
 msgstr "Impossibile ottenere il permesso."
 
-#: common/include/session.php:607
+#: common/include/session.php:609
 msgid "No admin users ?"
 msgstr ""
 

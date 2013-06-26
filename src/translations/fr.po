@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 18:57+0200\n"
+"POT-Creation-Date: 2013-06-26 16:00+0200\n"
 "PO-Revision-Date: 2013-05-23 16:06+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgstr "Clé SSH correctement supprimée."
 #: common/docman/actions/monitorfile.php:32
 #: common/docman/actions/releasefile.php:31
 #: common/docman/actions/reservefile.php:32
-#: common/docman/actions/trashdir.php:34 common/docman/actions/trashdir.php:42
+#: common/docman/actions/trashdir.php:35 common/docman/actions/trashdir.php:43
 #: common/docman/actions/trashfile.php:34
 #: common/docman/actions/trashfile.php:42
 #: common/docman/actions/updatecreateonline.php:27
@@ -87,11 +87,11 @@ msgstr "Le document %s a été soumis avec succès (en attente de validation)."
 
 #: common/docman/actions/addsubdocgroup.php:63
 msgid "Document subfolder successfully created."
-msgstr "Le sous-répertoire de documents a été créé avec succès."
+msgstr "Le sous-dossier de documents a été créé avec succès."
 
 #: common/docman/actions/addsubdocgroup.php:67
 msgid "Document folder successfully created."
-msgstr "Le répertoire de documents a été soumis avec succès."
+msgstr "Le dossier de documents a été soumis avec succès."
 
 #: common/docman/actions/deldir.php:64
 #, php-format
@@ -125,7 +125,7 @@ msgstr "correctement effacée."
 #: common/docman/actions/editdocgroup.php:86
 #, php-format
 msgid "Documents folder %s updated successfully"
-msgstr "Le répertoire de documents %s a été mise à jour avec succès."
+msgstr "Le dossier de documents %s a été mis à jour avec succès."
 
 #: common/docman/actions/editdocgroup.php:88
 #, php-format
@@ -205,11 +205,11 @@ msgstr "publié avec succès."
 msgid "reserved successfully."
 msgstr "Le document a été réservé avec succès."
 
-#: common/docman/actions/trashdir.php:85
+#: common/docman/actions/trashdir.php:99
 #, php-format
 msgid "Documents folder %s moved to trash successfully."
 msgstr ""
-"Le répertoire %s et son contenu ont été déplacés vers la corbeille avec "
+"Le dossier %s et son contenu ont été déplacés vers la corbeille avec "
 "succès."
 
 #: common/docman/actions/trashfile.php:66
@@ -456,7 +456,7 @@ msgstr "Un nom est requis."
 #: common/docman/DocumentGroup.class.php:107
 #: common/docman/DocumentGroup.class.php:483
 msgid "Invalid Documents Folder parent ID"
-msgstr "Identifiant du répertoire parent invalide."
+msgstr "Identifiant du dossier parent invalide."
 
 #: common/docman/DocumentGroup.class.php:128
 msgid "Folder name already exists"
@@ -464,7 +464,7 @@ msgstr "Ce nom de dossier existe déjà"
 
 #: common/docman/DocumentGroup.class.php:144
 msgid "Error Adding Folder:"
-msgstr "Erreur lors de l'ajout d'un répertoire:"
+msgstr "Erreur lors de l'ajout d'un dossier :"
 
 #: common/docman/DocumentGroup.class.php:235
 msgid "Unsupported injected file:"
@@ -472,21 +472,20 @@ msgstr ""
 
 #: common/docman/DocumentGroup.class.php:253
 msgid "Invalid Document Folder ID"
-msgstr "Identifiant de répertoire de documents invalide."
+msgstr "Identifiant de répertoire de documents invalide"
 
 #: common/docman/DocumentGroup.class.php:495
 msgid "Documents Folder name already exists"
-msgstr "Ce nom de répertoire est déjà pris."
+msgstr "Ce nom de dossier est déjà pris."
 
 #: common/docman/DocumentGroup.class.php:518
-#, fuzzy, php-format
+#, php-format
 msgid "Error: %s"
-msgstr "Erreur"
+msgstr "Erreur : %s"
 
 #: common/docman/DocumentGroup.class.php:653
-#, fuzzy
 msgid "Browse this folder"
-msgstr "Naviguer dans ce répertoire"
+msgstr "Naviguer dans ce dossier"
 
 #: common/docman/DocumentGroup.class.php:699
 msgid "New folder"
@@ -502,12 +501,11 @@ msgstr "Mis à jour par"
 
 #: common/docman/DocumentGroup.class.php:744
 msgid "Unable to extract zipfile."
-msgstr "Erreur lors de l'extraction des documents et répertoires."
+msgstr "Erreur lors de l'extraction du fichier Zip."
 
 #: common/docman/DocumentGroup.class.php:749
-#, fuzzy
 msgid "Unable to open zipfile."
-msgstr "Erreur lors de l'ouverture de l'archive Zip pour sauvegarde."
+msgstr "Erreur lors de l'ouverture de l'archive Zip."
 
 #: common/docman/DocumentGroup.class.php:800
 #, fuzzy
@@ -519,23 +517,23 @@ msgid "Unknown item."
 msgstr "Élement inconnu."
 
 #: common/docman/DocumentGroup.class.php:816
-msgid "Unable to open directory for inject into tree"
+msgid "Unable to open folder for injecting into tree"
 msgstr ""
 
 #: common/docman/DocumentGroupFactory.class.php:84
 #: common/docman/DocumentGroupFactory.class.php:118
 msgid "No Documents Folder Found"
-msgstr "Aucun répertoire trouvé."
+msgstr "Aucun dossier trouvé."
 
 #: common/docman/DocumentManager.class.php:175
 msgid "Number of documents in this folder"
-msgstr "Nombre de documents dans ce répertoire"
+msgstr "Nombre de documents dans ce dossier"
 
 #: common/docman/DocumentManager.class.php:178
 msgid ""
 "Number of documents in this folder per status. active/pending/hidden/private"
 msgstr ""
-"Nombre de documents dans ce répertoire par status. Actif/En attente/Caché/"
+"Nombre de documents dans ce dossier par état. Actif/En attente/Caché/"
 "Privé"
 
 #: common/docman/DocumentManager.class.php:181
@@ -781,7 +779,7 @@ msgstr "Accès refusé au gestionnaire de documents"
 
 #: common/docman/views/additem.php:57
 msgid "Submit a new document in this folder."
-msgstr "Soumettre un nouveau document dans ce répertoire."
+msgstr "Soumettre un nouveau document dans ce dossier."
 
 #: common/docman/views/additem.php:58
 msgid "New Document"
@@ -824,7 +822,7 @@ msgstr "Créer"
 
 #: common/docman/views/admin.php:49
 msgid "Extract documents and directories as an archive"
-msgstr "Extraire les documents et les répertoires sous forme d'une archive."
+msgstr "Extraire les documents et les dossier sous forme d'une archive."
 
 #: common/docman/views/admin.php:57
 msgid "Enable Create Online Documents"
@@ -856,7 +854,7 @@ msgstr "Désactiver l'interface WebDAV"
 
 #: common/docman/views/editdocgroup.php:58
 msgid "Folder Name"
-msgstr "Nom du répertoire"
+msgstr "Nom du dossier"
 
 #: common/docman/views/editdocgroup.php:61
 msgid "belongs to"
@@ -894,7 +892,7 @@ msgid ""
 "Folder name will be used as a title, so it should be formatted "
 "correspondingly."
 msgstr ""
-"Le nom du répertoire sera utilisé comme titre. Il doit donc être formaté en "
+"Le nom du dossier sera utilisé comme titre. Il doit donc être formaté en "
 "conséquence."
 
 #: common/docman/views/editfile.php:47
@@ -965,19 +963,19 @@ msgstr "Chemin"
 #: common/docman/views/listtrashfile.php:119
 #: common/docman/views/listtrashfile.php:124
 msgid "Edit this folder"
-msgstr "Modifier ce répertoire"
+msgstr "Modifier ce dossier"
 
 #: common/docman/views/listfile.php:177
 msgid "Move this folder and his content to trash"
-msgstr "Déplacer ce répertoire et son contenu vers la corbeille"
+msgstr "Déplacer ce dossier et son contenu vers la corbeille"
 
 #: common/docman/views/listfile.php:179
 msgid "Permanently delete this folder"
-msgstr "Supprimer ce répertoire de manière permanente"
+msgstr "Supprimer ce dossier de manière permanente"
 
 #: common/docman/views/listfile.php:184
 msgid "Add a new item in this folder"
-msgstr "Ajouter un nouvel élément dans ce répertoire"
+msgstr "Ajouter un nouvel élément dans ce dossier"
 
 #: common/docman/views/listfile.php:191
 msgid "Download this folder as a zip"
@@ -1427,8 +1425,8 @@ msgid "Mass actions for selected pending files:"
 msgstr "Actions collectives sur les fichiers en attente sélectionnés :"
 
 #: common/docman/views/pendingfiles.php:138
-msgid "Activate in this directory"
-msgstr "Activer dans ce répertoire"
+msgid "Activate in this folder"
+msgstr "Activer dans ce dossier"
 
 #: common/docman/views/reporting.php:92
 #: common/tracker/include/ArtifactTypeHtml.class.php:323
@@ -3699,39 +3697,39 @@ msgstr "Statistiques sur le dépôt"
 msgid "Add Repository"
 msgstr "Ajouter un dépôt"
 
-#: common/include/session.php:185 plugins/authldap/www/post-login.php:88
+#: common/include/session.php:187 plugins/authldap/www/post-login.php:88
 msgid "Missing Password Or Users Name"
 msgstr "Nom du compte ou mot de passe manquant"
 
-#: common/include/session.php:197 common/include/session.php:233
-#: common/include/session.php:244 common/include/session.php:275
+#: common/include/session.php:199 common/include/session.php:235
+#: common/include/session.php:246 common/include/session.php:277
 #: plugins/authbuiltin/www/post-login.php:93
 #: plugins/authldap/www/post-login.php:86 www/account/verify.php:47
 msgid "Invalid Password Or User Name"
 msgstr "Nom du compte ou mot de passe non valide"
 
-#: common/include/session.php:290
+#: common/include/session.php:292
 msgid "Account Suspended"
 msgstr "Compte suspendu"
 
-#: common/include/session.php:295
+#: common/include/session.php:297
 msgid "Account Pending"
 msgstr "Compte en attente"
 
-#: common/include/session.php:300
+#: common/include/session.php:302
 msgid "Account Deleted"
 msgstr "Compte supprimé"
 
-#: common/include/session.php:305
+#: common/include/session.php:307
 msgid "Account Not Active"
 msgstr "Compte non actif"
 
-#: common/include/session.php:468
+#: common/include/session.php:470
 #, fuzzy
 msgid "Your account is no longer active; you have been disconnected"
 msgstr "Votre compte n'est plus actif ; votre session a été déconnectée."
 
-#: common/include/session.php:521
+#: common/include/session.php:523
 #, php-format
 msgid ""
 "Permission denied. The %s administrators will have to grant you permission "
@@ -3740,11 +3738,11 @@ msgstr ""
 "Permission refusée.  Les administrateurs de %s doivent vous affecter la "
 "permission de voir cette page."
 
-#: common/include/session.php:580
+#: common/include/session.php:582
 msgid "Could not fetch user session data"
 msgstr "Erreur lors de la récupération des données de session."
 
-#: common/include/session.php:607
+#: common/include/session.php:609
 msgid "No admin users ?"
 msgstr "Pas d'administrateurs ?"
 
@@ -10625,14 +10623,12 @@ msgid "Add note"
 msgstr "Date d'ajout"
 
 #: plugins/mantisbt/view/admin/addCategory.php:31
-#, fuzzy
 msgid "Add a new category"
-msgstr "Ajouter un sous-répertoire"
+msgstr "Ajouter une nouvelle catégorie"
 
 #: plugins/mantisbt/view/admin/addVersion.php:34
-#, fuzzy
 msgid "Add a new version"
-msgstr "Soummetre une nouvelle version"
+msgstr "Ajouter une nouvelle version"
 
 #: plugins/mantisbt/view/admin/editVersion.php:56
 #, fuzzy
