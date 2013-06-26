@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:02+0200\n"
+"POT-Creation-Date: 2013-06-26 19:08+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -410,6 +410,11 @@ msgstr "Проект"
 #: cronjobs/send_pending_items_mail.php:119
 #: cronjobs/send_pending_items_mail.php:120
 #: cronjobs/send_pending_items_mail.php:121
+#: plugins/mailman/include/MailmanList.class.php:165
+#: plugins/mailman/include/MailmanList.class.php:249
+#: plugins/mailman/include/MailmanList.class.php:376
+#: plugins/mailman/include/MailmanList.class.php:393
+#: plugins/mailman/include/MailmanListFactory.class.php:112
 #: plugins/mantisbt/action/addAttachment.php:38
 #: plugins/mantisbt/action/addCategory.php:39
 #: plugins/mantisbt/action/addIssue.php:47
@@ -496,7 +501,7 @@ msgstr "Название документа"
 #: common/docman/DocumentGroup.class.php:75 common/forum/Forum.class.php:129
 #: common/include/Error.class.php:189 common/mail/MailingList.class.php:79
 #: common/survey/Survey.class.php:79 common/survey/SurveyQuestion.class.php:70
-#: plugins/mailman/include/MailmanList.class.php:104
+#: plugins/mailman/include/MailmanList.class.php:103
 msgid "Group_id in db result does not match Group Object"
 msgstr "Идентификатор группы в базе не соответствует объекту"
 
@@ -1943,7 +1948,7 @@ msgid "File Updated Successfully"
 msgstr "Файл успешно обновлен"
 
 #: common/forum/ForumAdmin.class.php:40 common/forum/Forum.class.php:115
-#: common/forum/ForumFactory.class.php:60 www/forum/admin/index.php:58
+#: common/forum/ForumFactory.class.php:59 www/forum/admin/index.php:58
 #, php-format
 msgid "%s does not use the Forum tool"
 msgstr ""
@@ -2142,6 +2147,9 @@ msgid "You Can Only Save Your Place If You Are Logged In"
 msgstr "Сохранять позиции Вы можете лишь авторизировавшись"
 
 #: common/forum/Forum.class.php:597 common/survey/SurveyQuestion.class.php:149
+#: plugins/mailman/include/MailmanList.class.php:249
+#: plugins/mailman/include/MailmanList.class.php:376
+#: plugins/mailman/include/MailmanList.class.php:393
 msgid "Update failed"
 msgstr "Ошибка обновления"
 
@@ -2161,21 +2169,17 @@ msgstr ""
 msgid "Error Deleting Forum:"
 msgstr "Ошибка доступа к форуму"
 
-#: common/forum/ForumFactory.class.php:52
-msgid "Forum:: No Valid Group Object"
-msgstr "Forum:: Объект не соответствует группе"
-
-#: common/forum/ForumFactory.class.php:56 common/include/rbac_texts.php:158
+#: common/forum/ForumFactory.class.php:55 common/include/rbac_texts.php:158
 #: www/forum/index.php:69 www/forum/myforums.php:69
 msgid "Forum"
 msgstr "Форум"
 
-#: common/forum/ForumFactory.class.php:145
-#: common/forum/ForumFactory.class.php:154
+#: common/forum/ForumFactory.class.php:144
+#: common/forum/ForumFactory.class.php:153
 msgid "You don't have a permission to access this page"
 msgstr "Доступ к странице блокирован"
 
-#: common/forum/ForumFactory.class.php:161
+#: common/forum/ForumFactory.class.php:160
 msgid "Forum not found"
 msgstr "Нет форума"
 
@@ -4151,17 +4155,17 @@ msgid "Error: a forum with the same email address already exists."
 msgstr "Такое имя пользователя уже существует."
 
 #: common/mail/MailingList.class.php:120
-#: plugins/mailman/include/MailmanList.class.php:144
+#: plugins/mailman/include/MailmanList.class.php:143
 msgid "Must Provide List Name That Is 4 or More Characters Long"
 msgstr "В фамилии должно быть минимум 4 буквы"
 
 #: common/mail/MailingList.class.php:126 common/mail/MailingList.class.php:133
-#: plugins/mailman/include/MailmanList.class.php:151
+#: plugins/mailman/include/MailmanList.class.php:150
 msgid "Invalid List Name"
 msgstr "Неверное имя списка"
 
 #: common/mail/MailingList.class.php:142
-#: plugins/mailman/include/MailmanList.class.php:158
+#: plugins/mailman/include/MailmanList.class.php:157
 msgid "List Already Exists"
 msgstr "Список уже существует"
 
@@ -4223,16 +4227,15 @@ msgid "%s New Mailing List"
 msgstr "%s. Новый список рассылки"
 
 #: common/mail/MailingList.class.php:222
+#: plugins/mailman/include/MailmanList.class.php:227
+#: plugins/mailman/include/MailmanListFactory.class.php:112
 #, fuzzy
 msgid "Error Getting mailing list"
 msgstr "Существующие списки рассылки"
 
-#: common/mail/MailingList.class.php:257
-#: plugins/mailman/include/MailmanList.class.php:250
-#: plugins/mailman/include/MailmanList.class.php:377
-#: plugins/mailman/include/MailmanList.class.php:394
-#: www/admin/pending-news.php:76 www/admin/pending-news.php:86
-#: www/admin/pending-news.php:107 www/news/admin/index.php:90
+#: common/mail/MailingList.class.php:257 www/admin/pending-news.php:76
+#: www/admin/pending-news.php:86 www/admin/pending-news.php:107
+#: www/news/admin/index.php:90
 msgid "Error On Update:"
 msgstr "Ошибка при изменении"
 
@@ -4242,8 +4245,6 @@ msgid "%s does not use the Mailing-list tool"
 msgstr ""
 
 #: common/mail/MailingListFactory.class.php:105
-#: plugins/mailman/include/MailmanList.class.php:228
-#: plugins/mailman/include/MailmanListFactory.class.php:113
 #, php-format
 msgid "Error Getting %1$s"
 msgstr "Ошибка получения %1$s"
@@ -10350,18 +10351,12 @@ msgstr ""
 msgid "Skip (%s)"
 msgstr ""
 
-#: plugins/mailman/include/MailmanList.class.php:86
-#: plugins/mailman/include/MailmanListFactory.class.php:71
-#, php-format
-msgid "%1$s:: No Valid Group Object"
-msgstr "%1$s:: Объект не соответствует группе"
+#: plugins/mailman/include/MailmanList.class.php:165
+#, fuzzy
+msgid "Error Creating mailing list"
+msgstr "Существующие списки рассылки"
 
-#: plugins/mailman/include/MailmanList.class.php:166
-#, php-format
-msgid "Error Creating %1$s"
-msgstr "Ошибка создания %1$s"
-
-#: plugins/mailman/include/MailmanList.class.php:412
+#: plugins/mailman/include/MailmanList.class.php:411
 #, fuzzy
 msgid "Error On Query:"
 msgstr "Ошибка при изменении"
@@ -23507,6 +23502,15 @@ msgstr "Имя участника обязательно"
 #: www/users:74
 msgid "That user does not exist."
 msgstr "Пользователь с таким именем не существует."
+
+#~ msgid "%1$s:: No Valid Group Object"
+#~ msgstr "%1$s:: Объект не соответствует группе"
+
+#~ msgid "Error Creating %1$s"
+#~ msgstr "Ошибка создания %1$s"
+
+#~ msgid "Forum:: No Valid Group Object"
+#~ msgstr "Forum:: Объект не соответствует группе"
 
 #, fuzzy
 #~ msgid "Forums: No Valid Group Object"

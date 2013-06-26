@@ -68,8 +68,7 @@ class MailmanListFactory extends Error {
 		$this->Error();
 
 		if (!$Group || !is_object($Group)) {
-			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), 'MailmanListFactory'));
-			return false;
+			exit_no_group();
 		}
 		if ($Group->isError()) {
 			$this->setError('MailmanListFactory:: '.$Group->getErrorMessage());
@@ -110,7 +109,7 @@ class MailmanListFactory extends Error {
 
 
 		if (!$result) {
-			$this->setError(sprintf(_('Error Getting %1$s'), _('Error Getting %1$s')).db_error());
+			$this->setError(_('Error Getting mailing list')._(': ').db_error());
 			return false;
 		} else {
 			$this->mailingLists = array();

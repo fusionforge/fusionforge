@@ -83,8 +83,7 @@ class MailmanList extends Error {
 		$this->_mailingDAO = new MailmanListDao(CodendiDataAccess::instance());
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(sprintf(_('%1$s:: No Valid Group Object'), 'MailmanList'));
-			return false;
+			exit_no_group();
 		}
 		if ($Group->isError()) {
 			$this->setError('MailmanList:: '.$Group->getErrorMessage());
@@ -163,7 +162,7 @@ class MailmanList extends Error {
 		$listPassword = substr(md5($GLOBALS['session_hash'] . time() . rand(0,40000)), 0, 16);
 		$result = $this->_mailingDAO->insertNewList($this->Group->getID(), $realListName,$isPublic,$listPassword,$creator_id,'1',$description);
 		if (!$result) {
-			$this->setError(sprintf(_('Error Creating %1$s'), _('Error Creating %1$s')).db_error());
+			$this->setError(_('Error Creating mailing list')._(': ').db_error());
 			return false;
 		}
 
@@ -225,7 +224,7 @@ class MailmanList extends Error {
 		$res =& $this->_mailingDAO->searchListFromGroup($groupListId, $this->Group->getID());
 
 		if (!$res) {
-			$this->setError(sprintf(_('Error Getting %1$s'), _('Error Getting %1$s')));
+			$this->setError(_('Error Getting mailing list'));
 			return false;
 		}
 		$this->dataArray =& $res->getRow();
@@ -247,7 +246,7 @@ class MailmanList extends Error {
 		}
 		$res = $this->_mailingDAO->updateList($this->groupMailmanListId, $this->Group->getID(),$description , $isPublic,$status);
 		if (!$res) {
-			$this->setError(_('Error On Update:').db_error());
+			$this->setError(_('Update failed')._(': ').db_error());
 			return false;
 		}
 		return true;
@@ -374,7 +373,7 @@ class MailmanList extends Error {
 			$name= $current_user->getRealName();
 			$res = $this->_mailingDAO->newSubscriber($user,$name,$passwd,$this->getName());
 			if (!$res) {
-				$this->setError(_('Error On Update:').db_error());
+				$this->setError(_('Update failed')._(': ').db_error());
 				return false;
 			}
 			htmlRedirect('/plugins/mailman/index.php?group_id='.$this->Group->getId());
@@ -391,7 +390,7 @@ class MailmanList extends Error {
 		$user=$current_user->getEmail();
 		$res = $this->_mailingDAO->deleteSubscriber($user,$this->getName());
 		if (!$res) {
-			$this->setError(_('Error On Update:').db_error());
+			$this->setError(_('Update failed')._(': ').db_error());
 			return false;
 		}
 		htmlRedirect('/plugins/mailman/index.php?group_id='.$this->Group->getId());
