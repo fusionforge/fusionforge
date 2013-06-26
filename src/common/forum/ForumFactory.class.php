@@ -49,8 +49,7 @@ class ForumFactory extends Error {
 	function ForumFactory(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError(_('Forum:: No Valid Group Object'));
-			return false;
+			exit_no_group();
 		}
 		if ($Group->isError()) {
 			$this->setError(_('Forum').':: '.$Group->getErrorMessage());
