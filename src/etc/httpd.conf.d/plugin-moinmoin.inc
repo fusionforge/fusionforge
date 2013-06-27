@@ -15,3 +15,13 @@ AliasMatch "^/moin_static[0-9]*/(.*)" "/usr/share/moin/htdocs/$1"
   WSGIProcessGroup fusionforge-plugin-moinmoin
   WSGIScriptAliasMatch /plugins/moinmoin/[-_a-zA-Z0-9]*/(.*) "/var/lib/gforge/plugins/moinmoin/wikidata/moin.wsgi/$1"
 </IfModule>
+
+<Location {core/url_prefix}plugins/moinmoin>
+  <IfVersion >= 2.3>
+    Require all granted
+  </IfVersion>
+  <IfVersion < 2.3>
+    order allow,deny
+    allow from all
+  </IfVersion>
+</Location>

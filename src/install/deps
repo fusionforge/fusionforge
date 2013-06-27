@@ -68,6 +68,10 @@ deps_debian() {
 	a2enmod ssl
 	a2enmod rewrite
 	a2enmod vhost_alias
+	a2enmod access_compat
+	a2enmod alias
+	a2enmod dir
+	a2enmod authn_core
 	# TODO: automate next
 	msg red "You Must Install Mailman Manually: apt-get install mailman postfix"
 }
