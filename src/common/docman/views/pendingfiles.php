@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -125,6 +125,7 @@ jQuery(document).ready(function() {
 			}
 			$editfileaction .= '&amp;group_id='.$GLOBALS['group_id'];
 			echo '<a class="tabtitle-ne" href="#" onclick="javascript:controllerListPending.toggleEditFileView({action:\''.$editfileaction.'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.htmlspecialchars($d->getName()).'\', filename:\''.$d->getFilename().'\', description:\''.htmlspecialchars($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})" title="'. _('Edit this document') .'" >'.html_image('docman/edit-file.png', 22, 22, array('alt'=>_('Edit this document'))). '</a>';
+			echo '<a class="tabtitle" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&action=validatefile&fileid='.$d->getID().'\'" title="'. _('Activate in this folder') . '" >' . html_image('docman/validate.png', 22, 22, array('alt'=>'Activate in this folder')). '</a>';
 			echo '</td>';
 			echo '</tr>';
 		}
