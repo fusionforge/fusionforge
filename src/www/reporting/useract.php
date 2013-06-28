@@ -91,12 +91,7 @@ if ($sw) {
 	</form>
 	<?php if ($dev_id && $start != $end) { ?>
 		<p>
-		<?php
-			report_actgraph('user', $SPAN, $start, $end, $dev_id, $area);
-		?>
-		<noscript>
-		<img src="useract_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;dev_id=$dev_id&amp;area=$area"; ?>" alt="" />
-		</noscript>
+		<?php report_actgraph('user', $SPAN, $start, $end, $dev_id, $area); ?>
 		</p>
 		<?php
 

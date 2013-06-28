@@ -69,13 +69,8 @@ report_header(_('Cumulative Projects'));
 </tr></table>
 </form>
 <?php if ($start != $end) { ?>
-		<p>
-	<?php
-		report_graph('groupcumul', $SPAN, $start, $end);
-	?>
-	<noscript>
-	<img src="groupcum_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end"; ?>" alt="" />
-	</noscript>
+	<p>
+	<?php report_graph('groupcumul', $SPAN, $start, $end); ?>
 	</p>
 <?php }
 

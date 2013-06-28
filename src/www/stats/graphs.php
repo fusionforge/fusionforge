@@ -49,20 +49,10 @@ $HTML->header(array('title'=>sprintf(_('%1$s Sitewide Statistics Graphs'), forge
 <hr />
 <p class="information" ><?php echo _('Displayed data: only last 24 months.'); ?></p>
 <p class="align-center">
-<?php 
-views_graph(1);
-?>
-<noscript>
-<img src="views_graph.php?monthly=1" alt="" />
-</noscript>
+<?php views_graph(1); ?>
 </p>
 <p class="align-center">
-<?php
-users_graph();
-?>
-<noscript>
-<img src="users_graph.php" alt="" />
-</noscript>
+<?php users_graph(); ?>
 </p>
 
 <?php

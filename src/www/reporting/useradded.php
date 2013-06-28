@@ -69,12 +69,7 @@ report_header(_('Users Added'));
 </form>
 <?php if ($start != $end) { ?>
 	<p>
-	<?php
-		report_graph('useradded', $SPAN, $start, $end);
-	?>
-	<noscript>
-	<img src="useradded_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end"; ?>" alt="" />
-	</noscript>
+	<?php report_graph('useradded', $SPAN, $start, $end); ?>
 	</p>
 <?php }
 

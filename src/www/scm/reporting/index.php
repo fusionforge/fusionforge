@@ -3,7 +3,7 @@
  * SCM Reporting
  *
  * Copyright 2004-2005 (c) Tim Perdue - GForge LLC
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -35,51 +35,22 @@ $group_id = getIntFromRequest("group_id");
 scm_header(array('title'=>_('SCM Repository Reporting'), 'group'=>$group_id));
 
 ?>
-
 <h2>Commits Over Time</h2>
 <p>
-<?php
-commitstime_graph($group_id, 1);
-?>
-<noscript>
-<img src="commitstime_graph.php?group_id=<?php echo $group_id; ?>"
-     alt="Commits Over Time" />
-</noscript>
+<?php commitstime_graph($group_id, 1); ?>
 </p>
-
 <h2>Commits Last 30 Days</h2>
 <p>
-<?php
-commits_graph($group_id, 30, 2);
-?>
-<noscript>
-<img src="commits_graph.php?group_id=<?php echo $group_id; ?>&amp;days=30"
-     alt="Commits Last 30 Days" />
-</noscript>
+<?php commits_graph($group_id, 30, 2); ?>
 </p>
-
 <h2>Commits Last 90 Days</h2>
 <p>
-<?php
-commits_graph($group_id, 90, 3);
-?>
-<noscript>
-<img src="commits_graph.php?group_id=<?php echo $group_id; ?>&amp;days=90"
-     alt="Commits Last 90 Days" />
-</noscript>
+<?php commits_graph($group_id, 90, 3); ?>
 </p>
-
 <h2>Commits Last 365 Days</h2>
 <p>
-<?php
-commits_graph($group_id, 365, 4);
-?>
-<noscript>
-<img src="commits_graph.php?group_id=<?php echo $group_id; ?>&amp;days=365"
-     alt="Commits Last 365 Days" />
-</noscript>
+<?php commits_graph($group_id, 365, 4); ?>
 </p>
-
 <?php
 
 scm_footer();

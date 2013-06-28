@@ -76,12 +76,7 @@ report_header(_('Project Activity'));
 </form>
 <?php if ($g_id && $start != $end) { ?>
 	<p>
-	<?php
-		report_actgraph('project', $SPAN, $start, $end, $g_id, $area);
-	?>
-	<noscript>
-	<img src="projectact_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&g_id=$g_id&amp;area=$area"; ?>" alt="" />
-	</noscript>
+	<?php report_actgraph('project', $SPAN, $start, $end, $g_id, $area); ?>
 	</p>
 	<?php
 

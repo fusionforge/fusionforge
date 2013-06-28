@@ -70,12 +70,7 @@ report_header(_('Tool Pie Graphs'));
 </form>
 <?php if ($start != $end) { ?>
 <p>
-<?php
-	report_toolspiegraph($datatype, $start, $end);
-?>
-<noscript>
-<img src="toolspie_graph.php?<?php echo "datatype=$datatype&amp;start=$start&amp;end=$end"; ?>" alt="" />
-</noscript>
+<?php report_toolspiegraph($datatype, $start, $end); ?>
 </p>
 <?php }
 

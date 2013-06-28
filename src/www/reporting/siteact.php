@@ -76,12 +76,7 @@ report_header(_('Site-Wide Activity'));
 </form>
 <?php if ($area && $start != $end) { ?>
 	<p>
-	<?php
-		report_actgraph('sitewide', $SPAN, $start, $end, 0, $area);
-	?>
-	<noscript>
-	<img src="siteact_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;area=$area"; ?>" alt="" />
-	</noscript>
+	<?php report_actgraph('sitewide', $SPAN, $start, $end, 0, $area); ?>
 	</p>
 	<?php
 

@@ -3,6 +3,8 @@
  * Reporting System
  *
  * Copyright 2003-2004 (c) GForge LLC
+ * Copyright 2013, Franck Villaume - TrivialDev
+ * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -101,12 +103,7 @@ $a2[]='user';
 
 	} elseif ($g_id && $start != $end) { ?>
 	<p>
-	<?php
-		report_timegraph('project', $type, $start, $end, $g_id);
-	?>
-	<noscript>
-	<img src="projecttime_graph.php?<?php echo "start=$start&amp;end=$end&amp;g_id=$g_id&amp;type=$type"; ?>" alt="" />
-	</noscript>
+	<?php report_timegraph('project', $type, $start, $end, $g_id); ?>
 	</p>
 	<?php
 

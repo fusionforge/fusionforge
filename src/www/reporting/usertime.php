@@ -116,12 +116,7 @@ if ($sw) {
 
 		} elseif ($dev_id && $start != $end) { ?>
 		<p>
-		<?php
-			report_timegraph('user', $type, $start, $end, $dev_id);
-		?>
-		<noscript>
-		<img src="usertime_graph.php?<?php echo "start=$start&amp;end=$end&amp;dev_id=$dev_id&amp;type=$type"; ?>" alt="" />
-		</noscript>
+		<?php report_timegraph('user', $type, $start, $end, $dev_id); ?>
 		</p>
 		<?php
 		}

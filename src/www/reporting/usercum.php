@@ -69,12 +69,7 @@ report_header(_('Cumulative Users'));
 </form>
 <?php if ($start != $end) { ?>
 	<p>
-	<?php
-		report_graph('usercumul', $SPAN, $start, $end);
-	?>
-	<noscript>
-	<img src="usercum_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end"; ?>" alt="" />
-	</noscript>
+	<?php report_graph('usercumul', $SPAN, $start, $end); ?>
 	</p>
 <?php }
 

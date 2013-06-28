@@ -70,12 +70,7 @@ report_header(_('Projects Added'));
 </form>
 <?php if ($start != $end) { ?>
 	<p>
-	<?php
-		report_graph('groupadded', $SPAN, $start, $end);
-	?>
-	<noscript>
-	<img src="groupadded_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end"; ?>" alt="" />
-	</noscript>
+	<?php report_graph('groupadded', $SPAN, $start, $end); ?>
 	</p>
 <?php }
 

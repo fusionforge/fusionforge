@@ -101,12 +101,7 @@ if ($typ =='r') {
 	echo $HTML->listTableBottom ();
 } elseif ($start != $end) { ?>
 <p>
-<?php
-	report_timegraph('site', $type, $start, $end);
-?>
-<noscript>
-<img src="sitetime_graph.php?<?php echo "start=$start&amp;end=$end&amp;type=$type"; ?>" alt="" />
-</noscript>
+<?php report_timegraph('site', $type, $start, $end); ?>
 </p>
 <?php
 }
