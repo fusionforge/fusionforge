@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:53+0200\n"
+"POT-Creation-Date: 2013-06-28 16:58+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -27,7 +27,7 @@ msgstr "Nota agregada correctamente."
 #: common/account/actions/addsshkey.php:40
 #: common/docman/actions/addfile.php:124 common/docman/actions/addfile.php:151
 #: common/docman/DocumentGroup.class.php:215
-#: common/docman/DocumentGroup.class.php:805
+#: common/docman/DocumentGroup.class.php:810
 msgid "Invalid file name."
 msgstr "Nombre de fichero inválido"
 
@@ -332,7 +332,7 @@ msgstr "Nuevo documento"
 msgid "Updated document"
 msgstr "Documento actualizado"
 
-#: common/docman/Document.class.php:930
+#: common/docman/Document.class.php:930 common/docman/views/listfile.php:286
 #: common/widget/Widget_MyLatestSvnCommits.class.php:66
 msgid "by"
 msgstr "por"
@@ -460,7 +460,7 @@ msgid "Error Deleting Document:"
 msgstr "Hubo un error eliminando el documento"
 
 #: common/docman/Document.class.php:1084
-#: common/docman/DocumentGroup.class.php:850
+#: common/docman/DocumentGroup.class.php:855
 msgid "wrong column name"
 msgstr "nombre de columna incorrecto"
 
@@ -546,15 +546,20 @@ msgstr "Incapaz de abrir fichero zip."
 
 #: common/docman/DocumentGroup.class.php:800
 #, fuzzy
+msgid "(Title must be at least 5 characters.)"
+msgstr "El título debe tener al menos 5 caracteres"
+
+#: common/docman/DocumentGroup.class.php:805
+#, fuzzy
 msgid "Injected by Zip:"
 msgstr "trabajo subido como Zip:"
 
-#: common/docman/DocumentGroup.class.php:809
+#: common/docman/DocumentGroup.class.php:814
 #, fuzzy
 msgid "Unknown item."
 msgstr "Acción desconocida."
 
-#: common/docman/DocumentGroup.class.php:816
+#: common/docman/DocumentGroup.class.php:821
 msgid "Unable to open folder for injecting into tree"
 msgstr "No es posible abrir un directorio para subir en el arbol"
 
@@ -1257,45 +1262,45 @@ msgstr "Y-m-d H:i"
 msgid "Reserved Document"
 msgstr "Documento Protegido"
 
-#: common/docman/views/listfile.php:319 common/docman/views/listfile.php:330
+#: common/docman/views/listfile.php:326 common/docman/views/listfile.php:337
 msgid "Move this document to trash"
 msgstr "Mover este documento a papelera"
 
-#: common/docman/views/listfile.php:319 common/docman/views/listfile.php:330
+#: common/docman/views/listfile.php:326 common/docman/views/listfile.php:337
 msgid "Move to trash this document"
 msgstr "Mover a papelera este documento"
 
-#: common/docman/views/listfile.php:320 common/docman/views/listfile.php:331
+#: common/docman/views/listfile.php:327 common/docman/views/listfile.php:338
 #: common/docman/views/listtrashfile.php:193
 #: common/docman/views/pendingfiles.php:127
 msgid "Edit this document"
 msgstr "Editar este documento"
 
-#: common/docman/views/listfile.php:322
+#: common/docman/views/listfile.php:329
 msgid "Reserve this document for later edition"
 msgstr "Preservar este documento para una edicion posterior"
 
-#: common/docman/views/listfile.php:322
+#: common/docman/views/listfile.php:329
 msgid "Reserve this document"
 msgstr "Proteger este docuemnto"
 
-#: common/docman/views/listfile.php:327
+#: common/docman/views/listfile.php:334
 msgid "Enforce reservation"
 msgstr "Forzar Nueva Version del Fichero"
 
-#: common/docman/views/listfile.php:332 common/docman/views/listfile.php:359
+#: common/docman/views/listfile.php:339 common/docman/views/listfile.php:366
 msgid "Release reservation"
 msgstr ""
 
-#: common/docman/views/listfile.php:338
+#: common/docman/views/listfile.php:345
 msgid "Stop monitoring this document"
 msgstr "Para monitorizar este documento"
 
-#: common/docman/views/listfile.php:341
+#: common/docman/views/listfile.php:348
 msgid "Start monitoring this document"
 msgstr "Monitorizar este documentoz"
 
-#: common/docman/views/listfile.php:352
+#: common/docman/views/listfile.php:359
 #: common/docman/views/listtrashfile.php:200
 msgid ""
 "Actions availables for selected documents, you need to check at least one "
@@ -1304,44 +1309,44 @@ msgstr ""
 "Acciones disponibles para estos documentos, necesitas seleccinar al menos un "
 "documento para realizar acciones"
 
-#: common/docman/views/listfile.php:353
+#: common/docman/views/listfile.php:360
 #: common/docman/views/listtrashfile.php:201
 msgid "Mass actions for selected documents:"
 msgstr "Acciones masivas para documentos seleccionados:"
 
-#: common/docman/views/listfile.php:356
+#: common/docman/views/listfile.php:363
 msgid "Move to trash"
 msgstr "Mover a papelera"
 
-#: common/docman/views/listfile.php:358
+#: common/docman/views/listfile.php:365
 msgid "Reserve for later edition"
 msgstr "Reservado para acciones posteriores"
 
-#: common/docman/views/listfile.php:358
+#: common/docman/views/listfile.php:365
 msgid "Reserve"
 msgstr "Reservado"
 
-#: common/docman/views/listfile.php:360
+#: common/docman/views/listfile.php:367
 msgid "Start monitoring"
 msgstr "Comenzar monitorización"
 
-#: common/docman/views/listfile.php:361
+#: common/docman/views/listfile.php:368
 #: common/widget/Widget_MyMonitoredForums.class.php:125
 msgid "Stop monitoring"
 msgstr "Parar de monitorizar"
 
-#: common/docman/views/listfile.php:364
+#: common/docman/views/listfile.php:371
 #: common/docman/views/listtrashfile.php:204
-#: common/docman/views/pendingfiles.php:137
+#: common/docman/views/pendingfiles.php:138
 msgid "Download as a zip"
 msgstr "Descargar como zip"
 
-#: common/docman/views/listfile.php:370
+#: common/docman/views/listfile.php:377
 #: common/docman/views/listtrashfile.php:210
 msgid "No documents."
 msgstr "No hay documentos"
 
-#: common/docman/views/listfile.php:385
+#: common/docman/views/listfile.php:392
 #, fuzzy
 msgid "Documents are also available thru webdav access"
 msgstr "Procesado de Documentos también está disponible através de webdav"
@@ -1461,7 +1466,12 @@ msgstr "No hay documento pendientes."
 msgid "Pending files"
 msgstr "Ficheros pendientes"
 
-#: common/docman/views/pendingfiles.php:134
+#: common/docman/views/pendingfiles.php:128
+#: common/docman/views/pendingfiles.php:139
+msgid "Activate in this folder"
+msgstr "Activar en este directorio"
+
+#: common/docman/views/pendingfiles.php:135
 msgid ""
 "Actions availables for checked files, you need to check at least one file to "
 "get actions"
@@ -1469,13 +1479,9 @@ msgstr ""
 "Acciones disponibles para ficheros seleccionados, necesitas seleccionar un "
 "fichero minimo para realizar acciones"
 
-#: common/docman/views/pendingfiles.php:135
+#: common/docman/views/pendingfiles.php:136
 msgid "Mass actions for selected pending files:"
 msgstr "Acciones Masivas para ficheros seleccionados pendientes:"
-
-#: common/docman/views/pendingfiles.php:138
-msgid "Activate in this folder"
-msgstr "Activar en este directorio"
 
 #: common/docman/views/reporting.php:92
 #: common/tracker/include/ArtifactTypeHtml.class.php:323

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-26 19:53+0200\n"
+"POT-Creation-Date: 2013-06-28 16:58+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -27,7 +27,7 @@ msgstr "사용자가 성공적으로 추가되었습니다."
 #: common/account/actions/addsshkey.php:40
 #: common/docman/actions/addfile.php:124 common/docman/actions/addfile.php:151
 #: common/docman/DocumentGroup.class.php:215
-#: common/docman/DocumentGroup.class.php:805
+#: common/docman/DocumentGroup.class.php:810
 #, fuzzy
 msgid "Invalid file name."
 msgstr "유효하지 않은 프로젝트 이름입니다."
@@ -356,7 +356,7 @@ msgstr "프로젝트 더하기"
 msgid "Updated document"
 msgstr "프로젝트 더하기"
 
-#: common/docman/Document.class.php:930
+#: common/docman/Document.class.php:930 common/docman/views/listfile.php:286
 #: common/widget/Widget_MyLatestSvnCommits.class.php:66
 msgid "by"
 msgstr ""
@@ -484,7 +484,7 @@ msgid "Error Deleting Document:"
 msgstr "계정을 활성화하는 도중 오류가 발생하였습니다."
 
 #: common/docman/Document.class.php:1084
-#: common/docman/DocumentGroup.class.php:850
+#: common/docman/DocumentGroup.class.php:855
 msgid "wrong column name"
 msgstr ""
 
@@ -575,15 +575,20 @@ msgid "Unable to open zipfile."
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:800
+#, fuzzy
+msgid "(Title must be at least 5 characters.)"
+msgstr "Title Must Be At Least 5 Characters"
+
+#: common/docman/DocumentGroup.class.php:805
 msgid "Injected by Zip:"
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:809
+#: common/docman/DocumentGroup.class.php:814
 #, fuzzy
 msgid "Unknown item."
 msgstr "Unix Account Status"
 
-#: common/docman/DocumentGroup.class.php:816
+#: common/docman/DocumentGroup.class.php:821
 msgid "Unable to open folder for injecting into tree"
 msgstr ""
 
@@ -1300,102 +1305,102 @@ msgstr "Y-m-d H:i"
 msgid "Reserved Document"
 msgstr "게시판 사용"
 
-#: common/docman/views/listfile.php:319 common/docman/views/listfile.php:330
+#: common/docman/views/listfile.php:326 common/docman/views/listfile.php:337
 #, fuzzy
 msgid "Move this document to trash"
 msgstr "문서에 내용이 없습니다."
 
-#: common/docman/views/listfile.php:319 common/docman/views/listfile.php:330
+#: common/docman/views/listfile.php:326 common/docman/views/listfile.php:337
 #, fuzzy
 msgid "Move to trash this document"
 msgstr "이 패키지를 모니터링하기"
 
-#: common/docman/views/listfile.php:320 common/docman/views/listfile.php:331
+#: common/docman/views/listfile.php:327 common/docman/views/listfile.php:338
 #: common/docman/views/listtrashfile.php:193
 #: common/docman/views/pendingfiles.php:127
 #, fuzzy
 msgid "Edit this document"
 msgstr "그룹 편집하기"
 
-#: common/docman/views/listfile.php:322
+#: common/docman/views/listfile.php:329
 msgid "Reserve this document for later edition"
 msgstr ""
 
-#: common/docman/views/listfile.php:322
+#: common/docman/views/listfile.php:329
 #, fuzzy
 msgid "Reserve this document"
 msgstr "게시판 사용"
 
-#: common/docman/views/listfile.php:327
+#: common/docman/views/listfile.php:334
 msgid "Enforce reservation"
 msgstr ""
 
-#: common/docman/views/listfile.php:332 common/docman/views/listfile.php:359
+#: common/docman/views/listfile.php:339 common/docman/views/listfile.php:366
 #, fuzzy
 msgid "Release reservation"
 msgstr "새 파일 버전 릴리즈"
 
-#: common/docman/views/listfile.php:338
+#: common/docman/views/listfile.php:345
 #, fuzzy
 msgid "Stop monitoring this document"
 msgstr "이 패키지를 모니터링하기"
 
-#: common/docman/views/listfile.php:341
+#: common/docman/views/listfile.php:348
 #, fuzzy
 msgid "Start monitoring this document"
 msgstr "이 패키지를 모니터링하기"
 
-#: common/docman/views/listfile.php:352
+#: common/docman/views/listfile.php:359
 #: common/docman/views/listtrashfile.php:200
 msgid ""
 "Actions availables for selected documents, you need to check at least one "
 "document to get actions"
 msgstr ""
 
-#: common/docman/views/listfile.php:353
+#: common/docman/views/listfile.php:360
 #: common/docman/views/listtrashfile.php:201
 msgid "Mass actions for selected documents:"
 msgstr ""
 
-#: common/docman/views/listfile.php:356
+#: common/docman/views/listfile.php:363
 #, fuzzy
 msgid "Move to trash"
 msgstr "문서에 내용이 없습니다."
 
-#: common/docman/views/listfile.php:358
+#: common/docman/views/listfile.php:365
 msgid "Reserve for later edition"
 msgstr ""
 
-#: common/docman/views/listfile.php:358
+#: common/docman/views/listfile.php:365
 #, fuzzy
 msgid "Reserve"
 msgstr "리셋"
 
-#: common/docman/views/listfile.php:360
+#: common/docman/views/listfile.php:367
 #, fuzzy
 msgid "Start monitoring"
 msgstr "모니터링 중지"
 
-#: common/docman/views/listfile.php:361
+#: common/docman/views/listfile.php:368
 #: common/widget/Widget_MyMonitoredForums.class.php:125
 #, fuzzy
 msgid "Stop monitoring"
 msgstr "모니터링 중지"
 
-#: common/docman/views/listfile.php:364
+#: common/docman/views/listfile.php:371
 #: common/docman/views/listtrashfile.php:204
-#: common/docman/views/pendingfiles.php:137
+#: common/docman/views/pendingfiles.php:138
 #, fuzzy
 msgid "Download as a zip"
 msgstr "다운로드"
 
-#: common/docman/views/listfile.php:370
+#: common/docman/views/listfile.php:377
 #: common/docman/views/listtrashfile.php:210
 #, fuzzy
 msgid "No documents."
 msgstr "프로젝트 더하기"
 
-#: common/docman/views/listfile.php:385
+#: common/docman/views/listfile.php:392
 #, fuzzy
 msgid "Documents are also available thru webdav access"
 msgstr "정보가 없습니다."
@@ -1517,20 +1522,21 @@ msgstr "사용자 등록"
 msgid "Pending files"
 msgstr "대기중인 제출이유:"
 
-#: common/docman/views/pendingfiles.php:134
+#: common/docman/views/pendingfiles.php:128
+#: common/docman/views/pendingfiles.php:139
+#, fuzzy
+msgid "Activate in this folder"
+msgstr "그룹 편집하기"
+
+#: common/docman/views/pendingfiles.php:135
 msgid ""
 "Actions availables for checked files, you need to check at least one file to "
 "get actions"
 msgstr ""
 
-#: common/docman/views/pendingfiles.php:135
+#: common/docman/views/pendingfiles.php:136
 msgid "Mass actions for selected pending files:"
 msgstr ""
-
-#: common/docman/views/pendingfiles.php:138
-#, fuzzy
-msgid "Activate in this folder"
-msgstr "그룹 편집하기"
 
 #: common/docman/views/reporting.php:92
 #: common/tracker/include/ArtifactTypeHtml.class.php:323
