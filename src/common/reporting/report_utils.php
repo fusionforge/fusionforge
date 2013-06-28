@@ -457,7 +457,7 @@ function report_graph($type, $SPAN, $start, $end) {
 	}
 	$rdates = $report->getRawDates();
 	if (!$rdates) {
-		echo '<p class="error">'._('No data to display').'</p>';
+		echo '<p class="error">'._('No data to display.').'</p>';
 		return false;
 	}
 	$ydata[0]  = $report->getData();
@@ -626,7 +626,7 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 	}
 	$rdates = $report->getRawDates();
 	if (!$rdates) {
-		echo '<p class="error">'._('No data to display').'</p>';
+		echo '<p class="error">'._('No data to display.').'</p>';
 		return false;
 	}
 	if (!$SPAN)
