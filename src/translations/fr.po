@@ -3125,7 +3125,7 @@ msgstr "Forums"
 #: common/include/group_section_texts.php:30 plugins/blocks/www/index.php:152
 #: www/reporting/toolspie.php:63
 msgid "Trackers"
-msgstr "Outil de suivi"
+msgstr "Outils de suivi"
 
 #: common/include/group_section_texts.php:31
 #: common/include/Navigation.class.php:474 common/include/rbac_texts.php:157
@@ -4557,7 +4557,7 @@ msgstr ""
 
 #: common/tracker/actions/admin-tracker.php:71
 msgid "Permanently delete this tracker."
-msgstr "Supprimer irrémédiablement cet outil de suivi"
+msgstr "Supprimer irrémédiablement cet outil de suivi."
 
 #: common/tracker/actions/admin-updates.php:46
 #: common/tracker/actions/admin-updates.php:65
@@ -4632,7 +4632,7 @@ msgstr "Erreur lors de la création de l'objet ArtifactType"
 
 #: common/tracker/actions/admin-updates.php:184
 msgid "Copy into Tracker: "
-msgstr "Copier vers l'outil de suivi :"
+msgstr "Copier vers l'outil de suivi : "
 
 #: common/tracker/actions/admin-updates.php:235
 #: common/tracker/actions/admin-updates.php:266
@@ -6638,19 +6638,16 @@ msgid "Browse this tracker for this project"
 msgstr "Vous n'êtes pas membre de ce projet."
 
 #: common/widget/Widget_MyArtifacts.class.php:242
-#, fuzzy
 msgid "Assigned"
 msgstr "Responsable"
 
 #: common/widget/Widget_MyArtifacts.class.php:248
-#, fuzzy
 msgid "Submitted"
-msgstr "Soumis par"
+msgstr "Soumis"
 
 #: common/widget/Widget_MyArtifacts.class.php:254
-#, fuzzy
 msgid "Monitored"
-msgstr "Surveiller"
+msgstr "Surveillé"
 
 #: common/widget/Widget_MyArtifacts.class.php:264
 #, fuzzy
@@ -7131,7 +7128,7 @@ msgstr "Remarques"
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:138
 #: www/frs/index.php:111
 msgid "Monitor this package"
-msgstr "Suivre ce paquet"
+msgstr "Surveiller ce paquet"
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:157
 msgid "View All Project Files"
@@ -16833,7 +16830,7 @@ msgstr "Pour créer une nouvelle version, cliquez ici."
 
 #: www/frs/index.php:107
 msgid "Stop monitoring this package"
-msgstr "Ne plus suivre ce paquet"
+msgstr "Ne plus surveiller ce paquet"
 
 #: www/frs/index.php:129 www/frs/index.php:199
 msgid "No releases"
@@ -16871,15 +16868,15 @@ msgstr "Erreur lors de l'accès à un paquet."
 
 #: www/frs/monitor.php:58
 msgid "Monitoring Has Been Stopped"
-msgstr "Le suivi a été arrété"
+msgstr "La surveillance a été arrêtée"
 
 #: www/frs/monitor.php:59
 msgid "Monitoring stopped"
-msgstr "Suivi arrétè"
+msgstr "Surveillance arrêtée"
 
 #: www/frs/monitor.php:66
 msgid "Monitoring Has Been Started"
-msgstr "Le suivi a démarré"
+msgstr "La surveillance a démarré"
 
 #: www/frs/monitor.php:67
 msgid "Monitoring started"
