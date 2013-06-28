@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -796,8 +796,13 @@ class DocumentGroup extends Error {
 									$subGroupArrID = $this->getSubgroup(0);
 									$this->data_array['doc_group'] = $subGroupArrID[0];
 							}
+							if (strlen($dir_arr[$i]) < 5) {
+								$filename = $dir_arr[$i].' '._('(Title must be at least 5 characters.)');
+							} else {
+								$filename = $dir_arr[$i];
+							}
 							if (!$d->create($dir_arr[$i], $dir_arr_type, $directory.'/'.$dir_arr[$i], $this->getID(),
-								$dir_arr[$i], _('Injected by Zip:').date(DATE_ATOM))) {
+								$filename, _('Injected by Zip:').date(DATE_ATOM))) {
 								$this->setError($dir_arr[$i].': '.$d->getErrorMessage());
 								return false;
 							}
