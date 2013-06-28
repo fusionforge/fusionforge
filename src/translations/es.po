@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-28 16:58+0200\n"
+"POT-Creation-Date: 2013-06-28 17:36+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -537,12 +537,12 @@ msgid "Updated by"
 msgstr "Actualizado Por:"
 
 #: common/docman/DocumentGroup.class.php:744
-msgid "Unable to extract zipfile."
-msgstr "Incapaz de extraer ficheros en un zip."
+msgid "Unable to extract ZIP file."
+msgstr "Incapaz de extraer ficheros en un ZIP."
 
 #: common/docman/DocumentGroup.class.php:749
-msgid "Unable to open zipfile."
-msgstr "Incapaz de abrir fichero zip."
+msgid "Unable to open ZIP file."
+msgstr "Incapaz de abrir fichero ZIP."
 
 #: common/docman/DocumentGroup.class.php:800
 #, fuzzy
@@ -551,8 +551,8 @@ msgstr "El título debe tener al menos 5 caracteres"
 
 #: common/docman/DocumentGroup.class.php:805
 #, fuzzy
-msgid "Injected by Zip:"
-msgstr "trabajo subido como Zip:"
+msgid "Injected by ZIP:"
+msgstr "trabajo subido como ZIP:"
 
 #: common/docman/DocumentGroup.class.php:814
 #, fuzzy
@@ -840,11 +840,11 @@ msgstr "Nuevo rol"
 
 #: common/docman/views/additem.php:61
 msgid ""
-"Create a full folders tree using an compressed archive. Only zip format "
+"Create a full folders tree using an compressed archive. Only ZIP format "
 "support."
 msgstr ""
 "Crear un arbol de directorios completo usando un archivo comprimido. Solo "
-"ficheros zip soportados."
+"ficheros ZIP soportados."
 
 #: common/docman/views/additem.php:62 common/docman/views/additem.php:86
 msgid "Inject Tree"
@@ -1025,8 +1025,8 @@ msgid "Add a new item in this folder"
 msgstr "Agregar un nuevo elemento a esta carpeta"
 
 #: common/docman/views/listfile.php:191
-msgid "Download this folder as a zip"
-msgstr "Descargar esta carpeta como zip"
+msgid "Download this folder as a ZIP"
+msgstr "Descargar esta carpeta como ZIP"
 
 #: common/docman/views/listfile.php:196
 #, fuzzy
@@ -1336,10 +1336,8 @@ msgid "Stop monitoring"
 msgstr "Parar de monitorizar"
 
 #: common/docman/views/listfile.php:371
-#: common/docman/views/listtrashfile.php:204
-#: common/docman/views/pendingfiles.php:138
-msgid "Download as a zip"
-msgstr "Descargar como zip"
+msgid "Download as a ZIP"
+msgstr "Descargar como ZIP"
 
 #: common/docman/views/listfile.php:377
 #: common/docman/views/listtrashfile.php:210
@@ -1377,6 +1375,12 @@ msgstr "Borrado permanentemente este documento."
 msgid "Delete permanently."
 msgstr "Borrado permanentemente."
 
+#: common/docman/views/listtrashfile.php:204
+#: common/docman/views/pendingfiles.php:138
+#, fuzzy
+msgid "Download as a zip"
+msgstr "Descargar como ZIP"
+
 #: common/docman/views/menu.php:44
 #, fuzzy
 msgid "View Documents"
@@ -1396,9 +1400,9 @@ msgstr "Agregar nuevo elemento"
 
 #: common/docman/views/menu.php:51
 msgid ""
-"Add a new item such as file, create directory, inject a zip at root level."
+"Add a new item such as file, create directory, inject a ZIP at root level."
 msgstr ""
-"Agrega un nuevo elemento como un fichero, crea el directorio, sube un zip a "
+"Agrega un nuevo elemento como un fichero, crea el directorio, sube un ZIP a "
 "la carpeta raiz."
 
 #: common/docman/views/menu.php:55 common/docman/views/search.php:63
@@ -15859,19 +15863,16 @@ msgid "Document is not available."
 msgstr "Documento no disponible."
 
 #: www/docman/view.php:113
-#, fuzzy
 msgid "Unable to open ZIP archive for backup"
-msgstr "Incapaz de abrir un archivo zip para backup"
+msgstr "Incapaz de abrir un archivo ZIP para backup"
 
 #: www/docman/view.php:117
-#, fuzzy
 msgid "Unable to fill ZIP archive for backup"
-msgstr "Incapaz de escribir un archivo zip para backup"
+msgstr "Incapaz de escribir un archivo ZIP para backup"
 
 #: www/docman/view.php:120
-#, fuzzy
 msgid "Unable to close ZIP archive for backup"
-msgstr "Incapaz de cerrar un archivo zip para backup"
+msgstr "Incapaz de cerrar un archivo ZIP para backup"
 
 #: www/docman/view.php:129
 msgid "Unable to download backup file"
@@ -15882,43 +15883,36 @@ msgid "No documents to backup."
 msgstr "No hay documentos para backup"
 
 #: www/docman/view.php:138
-#, fuzzy
 msgid "ZIP extension is missing: no backup function"
-msgstr "La extension Zip no existe: no hay funcion de backup"
+msgstr "La extension ZIP no existe: no hay funcion de backup"
 
 #: www/docman/view.php:150
 msgid "Webdav Access Canceled by user"
 msgstr "Acceso Webdav Cancelado por usuario"
 
 #: www/docman/view.php:156
-#, fuzzy
 msgid "No Webdav interface enabled."
 msgstr "Ningún webdav interface activo."
 
 #: www/docman/view.php:184 www/docman/view.php:226
-#, fuzzy
 msgid "Unable to open ZIP archive for download as ZIP"
-msgstr "Incapaz de abrir un archivo zip para descargar como zip"
+msgstr "Incapaz de abrir un archivo ZIP para descargar como ZIP"
 
 #: www/docman/view.php:195 www/docman/view.php:240
-#, fuzzy
 msgid "Unable to fill ZIP file."
-msgstr "Incapaz de llenar el fichero zip."
+msgstr "Incapaz de llenar el fichero ZIP."
 
 #: www/docman/view.php:199
-#, fuzzy
 msgid "Unable to fill ZIP archive for download as ZIP"
-msgstr "Incapaz de escribir un archivo zip para descargar como zip"
+msgstr "Incapaz de escribir un archivo ZIP para descargar como ZIP"
 
 #: www/docman/view.php:202 www/docman/view.php:249
-#, fuzzy
 msgid "Unable to close ZIP archive for download as ZIP"
-msgstr "Incapaz de cerrar el archivo zip para descargar como zip"
+msgstr "Incapaz de cerrar el archivo ZIP para descargar como ZIP"
 
 #: www/docman/view.php:211 www/docman/view.php:258
-#, fuzzy
 msgid "Unable to download ZIP archive"
-msgstr "Incapaz de descargar el archivo zip"
+msgstr "Incapaz de descargar el archivo ZIP"
 
 #: www/docman/view.php:216
 msgid "This documents folder is empty."
@@ -16755,12 +16749,12 @@ msgid "No releases"
 msgstr "Sin Versiones"
 
 #: www/frs/index.php:134
-msgid "Download latest release as zip:"
-msgstr "Descargar ultima release como zip:"
+msgid "Download latest release as ZIP:"
+msgstr "Descargar ultima release como ZIP:"
 
 #: www/frs/index.php:137
-msgid "This link always points to the newest release as a zip file."
-msgstr "Este enlace siempre apunta a una nueva release en formato fichero zip."
+msgid "This link always points to the newest release as a ZIP file."
+msgstr "Este enlace siempre apunta a una nueva release en formato fichero ZIP."
 
 #: www/frs/index.php:180
 msgid "D/L"
@@ -17460,7 +17454,7 @@ msgstr ""
 
 #: www/index_std.php:30
 #, fuzzy
-msgid "Docman: inject zip as a tree (Capgemini)"
+msgid "Docman: inject ZIP as a tree (Capgemini)"
 msgstr "Leer Documentos"
 
 #: www/index_std.php:31
@@ -17539,7 +17533,7 @@ msgstr ""
 
 #: www/index_std.php:54
 msgid ""
-"New UI and features for the document manager (download as zip, locking, "
+"New UI and features for the document manager (download as ZIP, locking, "
 "referencing documents by URL) (Capgemini)."
 msgstr ""
 
@@ -23877,7 +23871,7 @@ msgstr "El usuario no existe"
 #~ msgid "No Storage API Found"
 #~ msgstr "No hay APi Almacenamiento"
 
-#~ msgid "Unable inject zipfile."
+#~ msgid "Unable inject ZIP file."
 #~ msgstr "Incapaz de inserta ficheros en un zip."
 
 #~ msgid "Unable to add document from zip injection."

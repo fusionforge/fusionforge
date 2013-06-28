@@ -188,7 +188,7 @@ if ($DocGroupName) {
 	if (forge_check_perm('docman', $group_id, 'approve'))
 		$numPendingFiles = $ndg->getNumberOfDocuments(3);
 	if ($numFiles || (isset($numPendingFiles) && $numPendingFiles))
-		echo '<a href="/docman/view.php/'.$ndg->Group->getID().'/zip/full/'.$dirid.'" class="tabtitle" title="'. _('Download this folder as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')). '</a>';
+		echo '<a href="/docman/view.php/'.$ndg->Group->getID().'/zip/full/'.$dirid.'" class="tabtitle" title="'. _('Download this folder as a ZIP') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'downloadaszip')). '</a>';
 
 	if (session_loggedin()) {
 		if ($ndg->isMonitoredBy($u->getID())) {
@@ -368,7 +368,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&action=monitorfile&option=remove&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Stop monitoring') .'" >'.html_image('docman/monitor-removedocument.png',22,22,array('alt'=>_('Stop monitoring'))). '</a>';
 		}
 	}
-	echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/'.$dirid.'/\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Download as a zip') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'Download as Zip')). '</a>';
+	echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/'.$dirid.'/\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Download as a ZIP') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'Download as Zip')). '</a>';
 	echo '</span>';
 	echo '</p>';
 	echo '</div>';

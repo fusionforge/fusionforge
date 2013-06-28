@@ -741,12 +741,12 @@ class DocumentGroup extends Error {
 					return false;
 				}
 			} else {
-				$this->setError(_('Unable to extract zipfile.'));
+				$this->setError(_('Unable to extract ZIP file.'));
 				$zip->close();
 				return false;
 			}
 		}
-		$this->setError(_('Unable to open zipfile.'));
+		$this->setError(_('Unable to open ZIP file.'));
 		return false;
 	}
 
@@ -790,7 +790,7 @@ class DocumentGroup extends Error {
 							$dir_arr_type = 'application/binary';
 						}
 						if (util_is_valid_filename($dir_arr[$i])) {
-							// ugly hack in case of ppl injecting zip at / when there is not directory in the zipfile...
+							// ugly hack in case of ppl injecting zip at / when there is not directory in the ZIP file...
 							// force upload in the first directory of the tree ...
 							if (!$this->getID()) {
 									$subGroupArrID = $this->getSubgroup(0);
@@ -802,7 +802,7 @@ class DocumentGroup extends Error {
 								$filename = $dir_arr[$i];
 							}
 							if (!$d->create($dir_arr[$i], $dir_arr_type, $directory.'/'.$dir_arr[$i], $this->getID(),
-								$filename, _('Injected by Zip:').date(DATE_ATOM))) {
+								$filename, _('Injected by ZIP:').date(DATE_ATOM))) {
 								$this->setError($dir_arr[$i].': '.$d->getErrorMessage());
 								return false;
 							}

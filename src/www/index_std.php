@@ -27,7 +27,7 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <h3><?php print _("What's new in FusionForge 5.2"); ?></h3>
 <ul>
 
-<li><?php print _('Docman: inject zip as a tree (Capgemini)') ?></li>
+<li><?php print _('Docman: inject ZIP as a tree (Capgemini)') ?></li>
 <li><?php print _('Widget: New User Widget: Last 5 documents published in my project (Capgemini)') ?></li>
 <li><?php print _('Docman: mass action (Capgemini)') ?></li>
 <li><?php print _('New Message plugin to display global messages like planned upgrade or outage
@@ -51,7 +51,7 @@ require_once $gfcommon.'include/FusionForge.class.php';
 <h3><?php print _("What's new in FusionForge 5.1"); ?></h3>
 <ul>
 <li><?php print _('New Funky Theme (Capgemini).'); ?></li>
-<li><?php print _('New UI and features for the document manager (download as zip, locking, referencing documents by URL) (Capgemini).'); ?></li>
+<li><?php print _('New UI and features for the document manager (download as ZIP, locking, referencing documents by URL) (Capgemini).'); ?></li>
 <li><?php print _('New progress bar displaying completion state of trackers using a custom status field.'); ?></li>
 <li><?php print _('Improved sorting in trackers (Alcatel-Lucent).'); ?></li>
 <li><?php print _('More flexible and more powerful role-based access control system (Coclico).'); ?></li>

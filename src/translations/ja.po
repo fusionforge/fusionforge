@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-28 16:58+0200\n"
+"POT-Creation-Date: 2013-06-28 17:36+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -563,11 +563,11 @@ msgid "Updated by"
 msgstr "無効なパラメータ"
 
 #: common/docman/DocumentGroup.class.php:744
-msgid "Unable to extract zipfile."
+msgid "Unable to extract ZIP file."
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:749
-msgid "Unable to open zipfile."
+msgid "Unable to open ZIP file."
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:800
@@ -576,7 +576,7 @@ msgid "(Title must be at least 5 characters.)"
 msgstr "パスワードは最低 6 文字以上でなければいけません。"
 
 #: common/docman/DocumentGroup.class.php:805
-msgid "Injected by Zip:"
+msgid "Injected by ZIP:"
 msgstr ""
 
 #: common/docman/DocumentGroup.class.php:814
@@ -866,7 +866,7 @@ msgstr "新規グループ名"
 
 #: common/docman/views/additem.php:61
 msgid ""
-"Create a full folders tree using an compressed archive. Only zip format "
+"Create a full folders tree using an compressed archive. Only ZIP format "
 "support."
 msgstr ""
 
@@ -1059,7 +1059,7 @@ msgid "Add a new item in this folder"
 msgstr "タスク追加"
 
 #: common/docman/views/listfile.php:191
-msgid "Download this folder as a zip"
+msgid "Download this folder as a ZIP"
 msgstr ""
 
 #: common/docman/views/listfile.php:196
@@ -1381,9 +1381,7 @@ msgid "Stop monitoring"
 msgstr "ストップモニタリング"
 
 #: common/docman/views/listfile.php:371
-#: common/docman/views/listtrashfile.php:204
-#: common/docman/views/pendingfiles.php:138
-msgid "Download as a zip"
+msgid "Download as a ZIP"
 msgstr ""
 
 #: common/docman/views/listfile.php:377
@@ -1424,6 +1422,11 @@ msgstr "ドキュメント閲覧"
 msgid "Delete permanently."
 msgstr "ファイル"
 
+#: common/docman/views/listtrashfile.php:204
+#: common/docman/views/pendingfiles.php:138
+msgid "Download as a zip"
+msgstr ""
+
 #: common/docman/views/menu.php:44
 #, fuzzy
 msgid "View Documents"
@@ -1442,7 +1445,7 @@ msgstr "タスク追加"
 
 #: common/docman/views/menu.php:51
 msgid ""
-"Add a new item such as file, create directory, inject a zip at root level."
+"Add a new item such as file, create directory, inject a ZIP at root level."
 msgstr ""
 
 #: common/docman/views/menu.php:55 common/docman/views/search.php:63
@@ -16698,11 +16701,11 @@ msgid "No releases"
 msgstr ""
 
 #: www/frs/index.php:134
-msgid "Download latest release as zip:"
+msgid "Download latest release as ZIP:"
 msgstr ""
 
 #: www/frs/index.php:137
-msgid "This link always points to the newest release as a zip file."
+msgid "This link always points to the newest release as a ZIP file."
 msgstr ""
 
 #: www/frs/index.php:180
@@ -17346,7 +17349,7 @@ msgid "What's new in FusionForge 5.2"
 msgstr ""
 
 #: www/index_std.php:30
-msgid "Docman: inject zip as a tree (Capgemini)"
+msgid "Docman: inject ZIP as a tree (Capgemini)"
 msgstr ""
 
 #: www/index_std.php:31
@@ -17425,7 +17428,7 @@ msgstr ""
 
 #: www/index_std.php:54
 msgid ""
-"New UI and features for the document manager (download as zip, locking, "
+"New UI and features for the document manager (download as ZIP, locking, "
 "referencing documents by URL) (Capgemini)."
 msgstr ""
 

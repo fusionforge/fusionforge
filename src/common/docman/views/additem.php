@@ -58,7 +58,7 @@ jQuery(document).ready(function() {
     <?php echo _('New Document') ?></a></li>
 <li><a id="tab-new-folder" href="#tabs-new-folder" class="tabtitle" title="<?php echo _('Create a folder based on this name.') ?>">
     <?php echo _('New Folder') ?></a></li>
-<li><a id="tab-inject-tree" href="#tabs-inject-tree" class="tabtitle" title="<?php echo _('Create a full folders tree using an compressed archive. Only zip format support.') ?>">
+<li><a id="tab-inject-tree" href="#tabs-inject-tree" class="tabtitle" title="<?php echo _('Create a full folders tree using an compressed archive. Only ZIP format support.') ?>">
     <?php echo _('Inject Tree') ?></a></li>
 </ul>
 

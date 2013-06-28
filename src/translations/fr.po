@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-28 16:58+0200\n"
+"POT-Creation-Date: 2013-06-28 17:36+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -519,21 +519,20 @@ msgid "Updated by"
 msgstr "Mis à jour par"
 
 #: common/docman/DocumentGroup.class.php:744
-msgid "Unable to extract zipfile."
-msgstr "Erreur lors de l'extraction du fichier Zip."
+msgid "Unable to extract ZIP file."
+msgstr "Erreur lors de l'extraction du fichier ZIP."
 
 #: common/docman/DocumentGroup.class.php:749
-msgid "Unable to open zipfile."
-msgstr "Erreur lors de l'ouverture de l'archive Zip."
+msgid "Unable to open ZIP file."
+msgstr "Erreur lors de l'ouverture de l'archive ZIP."
 
 #: common/docman/DocumentGroup.class.php:800
-#, fuzzy
 msgid "(Title must be at least 5 characters.)"
-msgstr "Le titre doit avoir au moins 5 caractères."
+msgstr "(Le titre doit avoir au moins 5 caractères.)"
 
 #: common/docman/DocumentGroup.class.php:805
-msgid "Injected by Zip:"
-msgstr "Injecté par Zip :"
+msgid "Injected by ZIP:"
+msgstr "Injecté par ZIP :"
 
 #: common/docman/DocumentGroup.class.php:814
 msgid "Unknown item."
@@ -816,7 +815,7 @@ msgstr "Nouveau dossier"
 
 #: common/docman/views/additem.php:61
 msgid ""
-"Create a full folders tree using an compressed archive. Only zip format "
+"Create a full folders tree using an compressed archive. Only ZIP format "
 "support."
 msgstr ""
 
@@ -997,8 +996,8 @@ msgid "Add a new item in this folder"
 msgstr "Ajouter un nouvel élément dans ce dossier"
 
 #: common/docman/views/listfile.php:191
-msgid "Download this folder as a zip"
-msgstr "Télécharger ce dossier dans un fichier Zip"
+msgid "Download this folder as a ZIP"
+msgstr "Télécharger ce dossier dans un fichier ZIP"
 
 #: common/docman/views/listfile.php:196
 msgid "Stop monitoring this folder"
@@ -1307,10 +1306,8 @@ msgid "Stop monitoring"
 msgstr "Arrêter la surveillance"
 
 #: common/docman/views/listfile.php:371
-#: common/docman/views/listtrashfile.php:204
-#: common/docman/views/pendingfiles.php:138
-msgid "Download as a zip"
-msgstr "Télécharger un fichier Zip"
+msgid "Download as a ZIP"
+msgstr "Télécharger un fichier ZIP"
 
 #: common/docman/views/listfile.php:377
 #: common/docman/views/listtrashfile.php:210
@@ -1346,6 +1343,12 @@ msgstr "Détruire de manière irrémédiable ce document."
 msgid "Delete permanently."
 msgstr "Supprimer de manière permanente."
 
+#: common/docman/views/listtrashfile.php:204
+#: common/docman/views/pendingfiles.php:138
+#, fuzzy
+msgid "Download as a zip"
+msgstr "Télécharger un fichier ZIP"
+
 #: common/docman/views/menu.php:44
 msgid "View Documents"
 msgstr "Voir les docs"
@@ -1364,7 +1367,7 @@ msgstr "Ajouter un nouvel élément"
 
 #: common/docman/views/menu.php:51
 msgid ""
-"Add a new item such as file, create directory, inject a zip at root level."
+"Add a new item such as file, create directory, inject a ZIP at root level."
 msgstr ""
 
 #: common/docman/views/menu.php:55 common/docman/views/search.php:63
@@ -15931,19 +15934,16 @@ msgid "Document is not available."
 msgstr "Document indisponible."
 
 #: www/docman/view.php:113
-#, fuzzy
 msgid "Unable to open ZIP archive for backup"
-msgstr "Erreur lors de l'ouverture de l'archive Zip pour sauvegarde."
+msgstr "Erreur lors de l'ouverture de l'archive ZIP pour sauvegarde"
 
 #: www/docman/view.php:117
-#, fuzzy
 msgid "Unable to fill ZIP archive for backup"
-msgstr "Erreur lors du remplissage de l'archive Zip pour sauvegarde."
+msgstr "Erreur lors du remplissage de l'archive ZIP pour sauvegarde"
 
 #: www/docman/view.php:120
-#, fuzzy
 msgid "Unable to close ZIP archive for backup"
-msgstr "Erreur lors de la fermeture de l'archive Zip pour sauvegarde."
+msgstr "Erreur lors de la fermeture de l'archive ZIP pour sauvegarde"
 
 #: www/docman/view.php:129
 msgid "Unable to download backup file"
@@ -15968,22 +15968,22 @@ msgstr "Pas d'interface Webdav active."
 #: www/docman/view.php:184 www/docman/view.php:226
 #, fuzzy
 msgid "Unable to open ZIP archive for download as ZIP"
-msgstr "Erreur lors de l'ouverture de l'archive Zip pour sauvegarde."
+msgstr "Erreur lors de l'ouverture de l'archive ZIP pour sauvegarde."
 
 #: www/docman/view.php:195 www/docman/view.php:240
 #, fuzzy
 msgid "Unable to fill ZIP file."
-msgstr "Erreur lors de l'ouverture de l'archive Zip pour sauvegarde."
+msgstr "Erreur lors de l'ouverture de l'archive ZIP pour sauvegarde."
 
 #: www/docman/view.php:199
 #, fuzzy
 msgid "Unable to fill ZIP archive for download as ZIP"
-msgstr "Erreur lors du remplissage de l'archive Zip pour sauvegarde."
+msgstr "Erreur lors du remplissage de l'archive ZIP pour sauvegarde."
 
 #: www/docman/view.php:202 www/docman/view.php:249
 #, fuzzy
 msgid "Unable to close ZIP archive for download as ZIP"
-msgstr "Erreur lors de la fermeture de l'archive Zip pour sauvegarde."
+msgstr "Erreur lors de la fermeture de l'archive ZIP pour sauvegarde."
 
 #: www/docman/view.php:211 www/docman/view.php:258
 msgid "Unable to download ZIP archive"
@@ -16837,14 +16837,14 @@ msgid "No releases"
 msgstr "Pas de version"
 
 #: www/frs/index.php:134
-msgid "Download latest release as zip:"
-msgstr "Télécharger la dernière version sous forme d'archive Zip :"
+msgid "Download latest release as ZIP:"
+msgstr "Télécharger la dernière version sous forme d'archive ZIP :"
 
 #: www/frs/index.php:137
-msgid "This link always points to the newest release as a zip file."
+msgid "This link always points to the newest release as a ZIP file."
 msgstr ""
 "Ce lien pointe toujours sur la dernière version, sous forme d'une archive au "
-"format Zip."
+"format ZIP."
 
 #: www/frs/index.php:180
 msgid "D/L"
@@ -17559,7 +17559,7 @@ msgid "What's new in FusionForge 5.2"
 msgstr "Les nouveautés de FusionForge 5.1"
 
 #: www/index_std.php:30
-msgid "Docman: inject zip as a tree (Capgemini)"
+msgid "Docman: inject ZIP as a tree (Capgemini)"
 msgstr ""
 
 #: www/index_std.php:31
@@ -17638,11 +17638,11 @@ msgstr "Un nouveau thème, Funky (Capgemini)."
 
 #: www/index_std.php:54
 msgid ""
-"New UI and features for the document manager (download as zip, locking, "
+"New UI and features for the document manager (download as ZIP, locking, "
 "referencing documents by URL) (Capgemini)."
 msgstr ""
 "Une nouvelle interface et de nouvelles fonctionnalités pour le gestionnaire "
-"de documents (télécharger dans une archive Zip, verrouillage, référencement "
+"de documents (télécharger dans une archive ZIP, verrouillage, référencement "
 "de documents par URL) (Capgemini)."
 
 #: www/index_std.php:55

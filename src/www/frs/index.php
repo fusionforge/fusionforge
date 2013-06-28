@@ -131,10 +131,10 @@ if ( $num_packages < 1) {
 		} else {
 			if (class_exists('ZipArchive')) {
 				// display link to latest-release-as-zip
-				print '<p><em>'._('Download latest release as zip:').' ';
+				print '<p><em>'._('Download latest release as ZIP:').' ';
 				print util_make_link ('/frs/download.php/latestzip/'.$frsPackage->getID().'/'.$frsPackage->getNewestReleaseZipName(),
 						$frsPackage->getNewestReleaseZipName(),
-						array('title' => _('This link always points to the newest release as a zip file.')));
+						array('title' => _('This link always points to the newest release as a ZIP file.')));
 				print '</em></p>';
 			}
 

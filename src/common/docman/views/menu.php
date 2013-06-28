@@ -48,7 +48,7 @@ $menu_attr[] = array('title' => _('View documents and folders in 2 panels. Left 
 if (forge_check_perm('docman', $group_id, 'submit')) {
 	$menu_text[] = _('Add new item');
 	$menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=additem';
-	$menu_attr[] = array('title' => _('Add a new item such as file, create directory, inject a zip at root level.'), 'id' => 'addItemDocmanMenu', 'class' => 'tabtitle');
+	$menu_attr[] = array('title' => _('Add a new item such as file, create directory, inject a ZIP at root level.'), 'id' => 'addItemDocmanMenu', 'class' => 'tabtitle');
 }
 
 if ($g->useDocmanSearch()) {
