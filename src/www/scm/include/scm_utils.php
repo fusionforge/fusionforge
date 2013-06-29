@@ -132,7 +132,7 @@ function commitstime_graph($group_id, $chartid) {
 				axesDefaults: {
 					tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
 					tickOptions: {
-						angle: -90,
+						angle: 90,
 						fontSize: \'8px\',
 						showGridline: false,
 						showMark: false,
@@ -168,6 +168,8 @@ function commitstime_graph($group_id, $chartid) {
 				highlighter: {
 					show: true,
 					sizeAdjust: 2.5,
+					showTooltip: true,
+					tooltipAxes: \'y\',
 				},
 			});
 		});';
@@ -210,11 +212,8 @@ function commits_graph($group_id, $days, $chartid) {
 				{
 					title : \''.utf8_decode(_("Commits By User")." (".strftime('%x',$start) ." - ". strftime('%x',$end) .")").'\',
 					seriesDefaults: {
-						// Make this a pie chart.
 						renderer: jQuery.jqplot.PieRenderer,
 						rendererOptions: {
-							// Put data labels on the pie slices.
-							// By default, labels show the percentage of the slice.
 							showDataLabels: true,
 							dataLabels: \'percent\',
 						}

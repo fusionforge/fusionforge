@@ -350,6 +350,7 @@ function trackeract_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 					tickOptions: {
 						angle: 0,
 						showMark: true,
+						formatString: \'%d\'
 					}
 				},
 			},
@@ -573,12 +574,15 @@ function report_graph($type, $SPAN, $start, $end) {
 					min: 0,
 					tickOptions: {
 						angle: 0,
+						formatString: \'%d\'
 					},
 				}
 			},
 			highlighter: {
 				show: true,
 				sizeAdjust: 2.5,
+				showTooltip: true,
+				tooltipAxes: \'y\',
 			},
 		});
 	});';
@@ -648,12 +652,14 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 		$timeStampArr = $report->getMonthStartArr();
 		$formatDate = 'Y/m';
 	}
-	
-	for ($j = 0; $j < count($timeStampArr); $j++) {
+
+	$initialSizeOfTimeStampArr = count($timeStampArr);
+	for ($j = 0; $j < $initialSizeOfTimeStampArr; $j++) {
 		if ($timeStampArr[$j] < $start || $timeStampArr[$j] >= $end) {
 			unset($timeStampArr[$j]);
 		}
 	}
+
 	$timeStampArr = array_values($timeStampArr);
 	for ($j = 0; $j < count($timeStampArr); $j++) {
 		$tickArr[] = date($formatDate, $timeStampArr[$j]);
@@ -820,8 +826,9 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', series, {
 				title : \''.utf8_decode($areaname).' ( '.strftime('%x', $start).' - '.strftime('%x', $end).') \',
 				axesDefaults: {
+					tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
 					tickOptions: {
-						angle: -90,
+						angle: 90,
 						fontSize: \'8px\',
 						showGridline: false,
 						showMark: false,
@@ -854,12 +861,15 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 						tickOptions: {
 							angle: 0,
 							showMark: true,
+							formatString: \'%d\'
 						}
 					},
 				},
 				highlighter: {
 					show: true,
 					sizeAdjust: 2.5,
+					showTooltip: true,
+					tooltipAxes: \'y\',
 				},
 			});
 		});';
@@ -951,11 +961,8 @@ function report_toolspiegraph($datatype = 0, $start, $end) {
 				{
 					title : \''.$arr[$datatype].' ('.strftime('%x', $start) .' - '. strftime('%x', $end) .')\',
 					seriesDefaults: {
-						// Make this a pie chart.
 						renderer: jQuery.jqplot.PieRenderer,
 						rendererOptions: {
-							// Put data labels on the pie slices.
-							// By default, labels show the percentage of the slice.
 							showDataLabels: true,
 							dataLabels: \'percent\',
 						}
@@ -1018,11 +1025,8 @@ function report_timegraph($type = 'site', $area = 'tasks', $start, $end, $id = 0
 				{
 					title : \''.$arr[$area].' ('.strftime('%x', $start) .' - '. strftime('%x', $end) .')\',
 					seriesDefaults: {
-						// Make this a pie chart.
 						renderer: jQuery.jqplot.PieRenderer,
 						rendererOptions: {
-							// Put data labels on the pie slices.
-							// By default, labels show the percentage of the slice.
 							showDataLabels: true,
 							dataLabels: \'percent\',
 						}
@@ -1089,8 +1093,9 @@ function report_sitetimebargraph($start, $end) {
 				plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', series, {
 					title : \''.utf8_decode($areaname).' ( '.strftime('%x', $start).' - '.strftime('%x', $end).') \',
 					axesDefaults: {
+						tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
 						tickOptions: {
-							angle: -90,
+							angle: 90,
 							fontSize: \'8px\',
 							showGridline: false,
 							showMark: false,
@@ -1123,12 +1128,15 @@ function report_sitetimebargraph($start, $end) {
 							tickOptions: {
 								angle: 0,
 								showMark: true,
+								formatString: \'%d\'
 							}
 						},
 					},
 					highlighter: {
 						show: true,
 						sizeAdjust: 2.5,
+						showTooltip: true,
+						tooltipAxes: \'y\',
 					},
 				});
 			});';
