@@ -162,6 +162,7 @@ function commitstime_graph($group_id, $chartid) {
 						tickOptions: {
 							angle: 0,
 							showMark: true,
+							formatString: \'%d\'
 						}
 					}
 				},
@@ -169,7 +170,7 @@ function commitstime_graph($group_id, $chartid) {
 					show: true,
 					sizeAdjust: 2.5,
 					showTooltip: true,
-					tooltipAxes: \'y\',
+					tooltipAxes: \'y\'
 				},
 			});
 		});';
@@ -204,7 +205,7 @@ function commits_graph($group_id, $days, $chartid) {
 		echo '<script type="text/javascript">//<![CDATA['."\n";
 		echo 'var data'.$chartid.' = new Array();';
 		while ($row = db_fetch_array($res)) {
-			echo 'data'.$chartid.'.push([\''.htmlentities($row[0]).'\',\''.$row[1].'\']);';
+			echo 'data'.$chartid.'.push([\''.htmlentities($row[0]).'\','.$row[1].']);';
 		}
 		echo 'var plot'.$chartid.';';
 		echo 'jQuery(document).ready(function(){
