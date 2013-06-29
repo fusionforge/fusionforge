@@ -519,6 +519,7 @@ function views_graph($monthly = 0) {
 		$ydata[$i] = $row['site_views'] + $row['subdomain_views'];
 		++$i;
 	}
+
 	$monthStartArr = $report->getMonthStartArr();
 	$monthStartArrFormat = $report->getMonthStartArrFormat();
 	if (count($ydata)) {
@@ -561,6 +562,8 @@ function views_graph($monthly = 0) {
 					highlighter: {
 						show: true,
 						sizeAdjust: 2.5,
+						showTooltip: true,
+						tooltipAxes: \'y\',
 					},
 				});
 			});';
