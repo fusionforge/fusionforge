@@ -205,7 +205,7 @@ function commits_graph($group_id, $days, $chartid) {
 		echo '<script type="text/javascript">//<![CDATA['."\n";
 		echo 'var data'.$chartid.' = new Array();';
 		while ($row = db_fetch_array($res)) {
-			echo 'data'.$chartid.'.push([\''.htmlentities($row[0]).'\','.$row[1].']);';
+			echo 'data'.$chartid.'.push([\''.htmlentities($row[0]).' ('.$row[1].')\','.$row[1].']);';
 		}
 		echo 'var plot'.$chartid.';';
 		echo 'jQuery(document).ready(function(){
@@ -217,10 +217,12 @@ function commits_graph($group_id, $days, $chartid) {
 						rendererOptions: {
 							showDataLabels: true,
 							dataLabels: \'percent\',
+							sliceMargin: 5
 						}
 					},
 					legend: {
-						show:true, location: \'e\',
+						show:true,
+						location: \'e\'
 					},
 				}
 				);
