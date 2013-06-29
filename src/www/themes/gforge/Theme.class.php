@@ -5,7 +5,7 @@
  * Copyright 2010 (c) FusionForge Team
  * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011-2012, Franck Villaume - TrivialDev
+ * Copyright 2011-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -304,8 +304,8 @@ class Theme extends Layout {
 			}
 			$return .= '>' . "\n";
 			$return .= '<a ';
-			if ($use_tooltips)
-				$return .= ' title="'.$TABS_TOOLTIPS[$i].'"';
+			if ($use_tooltips && isset($TABS_TOOLTIPS[$i]))
+					$return .= ' title="'.$TABS_TOOLTIPS[$i].'"';
 
 			$return .= ' href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a>' . "\n";
 			$return .= '</div>';
