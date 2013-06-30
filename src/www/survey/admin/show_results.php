@@ -41,12 +41,12 @@ $show_comment = getStringFromRequest('show_comment');
 
 /* We need a group_id */
 if (!$group_id) {
-    exit_no_group();
+	exit_no_group();
 }
 
 $g = group_get_object($group_id);
 if (!$g || !is_object($g) || $g->isError()) {
-    exit_no_group();
+	exit_no_group();
 }
 
 $is_admin_page='y';
@@ -63,32 +63,32 @@ if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
 
 /* Show detailed results of a survey */
 if ($survey_id) {
-    $s = new Survey($g, $survey_id);
+	$s = new Survey($g, $survey_id);
 
-    if (!$s || !is_object($s)) {
+	if (!$s || !is_object($s)) {
 		echo '<p class="error">'._('Error'). ' ' . _('Cannot get Survey') ."</p>";
 		$sh->footer(array());
 		exit;
-    } elseif ( $s->isError()) {
+	} elseif ( $s->isError()) {
 		echo '<p class="error">'._('Error'). $s->getErrorMessage() ."</p>";
 		$sh->footer(array());
 		exit;
-    }
+	}
 
-    /* A specific question */
-    $question_id = getIntFromRequest('question_id');
-    if ($question_id) {
+	/* A specific question */
+	$question_id = getIntFromRequest('question_id');
+	if ($question_id) {
 		/* Create a Survey Question for general purpose */
 		$sq = new SurveyQuestion($g, $question_id);
 		if (!$sq || !is_object($sq)) {
-	    	echo '<p class="error">'._('Error'). ' ' . _('Cannot get Survey Question') ."</p>";
+			echo '<p class="error">'._('Error'). ' ' . _('Cannot get Survey Question') ."</p>";
 		} elseif ($sq->isError()) {
-	    	echo '<p class="error">'._('Error'). $sq->getErrorMessage() ."</p>";
+			echo '<p class="error">'._('Error'). $sq->getErrorMessage() ."</p>";
 		} else {
-	    	showResult($sh, $s, $sq, 1, 0, $graph);
+			showResult($sh, $s, $sq, 1, 0, $graph);
 		}
 
-    } else {
+	} else {
 		echo '<h2>'.$s->getTitle().' ('. $s->getNumberOfVotes() .' ' . _("Votes") . ')'. '</h2>';
 
 		/* Get questions of this survey */
@@ -96,15 +96,15 @@ if ($survey_id) {
 
 		$question_number = 1;
 		for ($i=0; $i<count($questions); $i++) {
-	    	if ($questions[$i]->isError()) {
+			if ($questions[$i]->isError()) {
 				echo $questions[$i]->getErrorMessage();
-	    	} else {
+			} else {
 				if ($questions[$i]->getQuestionType()!='4') {
 		    		showResult($sh, $s, $questions[$i], $show_comment, $question_number++, $graph);
 				}
-	    	}
+			}
 		}
-    }
+	}
 }
 
 /* Show list of Surveys with result link */
@@ -112,9 +112,9 @@ if ($survey_id) {
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {
-    echo '<p class="information">' . _('No Survey Question is found') . '</p>';
+	echo '<p class="information">' . _('No Survey Question is found') . '</p>';
 } else {
-    echo($sh->showSurveys($ss, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1));
+	echo($sh->showSurveys($ss, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1));
 }
 
 $sh->footer(array());
@@ -127,16 +127,16 @@ $sh->footer(array());
  *  @param int    wheather print out export(csv) format
  */
 function showResult(&$SurveyHTML, &$Survey, &$Question, $show_comment=0, $q_num="", $graph=0) {
-    /* Get results */
-    $srf = new SurveyResponseFactory($Survey, $Question);
-    if (!$srf || !is_object($srf)) {
-	echo '<p class="error">'._('Error'). ' ' . _('Cannot get Survey Response Factory') ."</p>";
-    } elseif ( $srf->isError()) {
-	echo '<p class="error">'._('Error'). $srf->getErrorMessage() ."</p>";
-    } else {
-        /* Show result in HTML*/
-	echo ($SurveyHTML->showResult($srf, $show_comment, $q_num, $graph));
-    }
+	/* Get results */
+	$srf = new SurveyResponseFactory($Survey, $Question);
+	if (!$srf || !is_object($srf)) {
+		echo '<p class="error">'._('Error'). ' ' . _('Cannot get Survey Response Factory') ."</p>";
+	} elseif ( $srf->isError()) {
+		echo '<p class="error">'._('Error'). $srf->getErrorMessage() ."</p>";
+	} else {
+		/* Show result in HTML*/
+		echo ($SurveyHTML->showResult($srf, $show_comment, $q_num, $graph));
+	}
 }
 
 // Local Variables:
