@@ -37,6 +37,8 @@ if ( !$group_id ) {
 	exit_no_group();
 }
 
+session_require_perm('project_admin', $group_id);
+
 $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
     exit_no_group();
@@ -57,8 +59,8 @@ $end = getIntFromRequest('end');
 /*
  * Set the start date to birth of the project.
  */
-$res=db_query_params('SELECT register_time FROM groups WHERE group_id=$1', array($group_id));
-$report->site_start_date=db_result($res,0,'register_time');
+$res = db_query_params('SELECT register_time FROM groups WHERE group_id=$1', array($group_id));
+$report->site_start_date = db_result($res,0,'register_time');
 
 if (!$start || !$end) $z =& $report->getMonthStartArr();
 
