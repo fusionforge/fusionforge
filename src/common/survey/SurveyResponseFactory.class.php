@@ -5,6 +5,7 @@
  * Copyright 2004, Sung Kim/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -241,6 +242,10 @@ class SurveyResponseFactory extends Error {
 
 			if($is_radio) {
 				/* We only counts */
+				// ugly hack to avoid php warning, and count correctly 'no answer' response.
+				if (is_string($response) && !strlen($response))
+					$response = 0;
+
 				$this->Result[$response]++;
 			} else {
 				/* Save response */
