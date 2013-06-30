@@ -57,6 +57,7 @@ function Report() {
 	//	All reporting action will be done in GMT timezone
 	//
 	putenv('TZ=GMT');
+	date_default_timezone_set('GMT');
 }
 
 /**
