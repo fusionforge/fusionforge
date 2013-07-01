@@ -35,7 +35,7 @@ class postReceiveEmail extends scmhook {
 		$this->label = "scmgit";
 		$this->unixname = "postreceiveemail";
 		$this->needcopy = 0;
-		$this->command = '';
+		$this->command = '/bin/sh '.forge_get_config('plugins_path').'/scmhook/library/'.$this->label.'/hooks/'.$this->unixname.'/postreceiveemail $*';
 	}
 
 	function isAvailable() {
