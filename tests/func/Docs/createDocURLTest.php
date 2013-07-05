@@ -85,6 +85,9 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Docs");
 		$this->clickAndWait("addItemDocmanMenu");
+		// ugly hack until we fix behavior in docman when no folders exist. We need to click twice on the link
+		$this->clickAndWait("addItemDocmanMenu");
+		$this->click("id=tab-new-document");
 		$this->type("title", "My document");
 		$this->type("//input[@name='description']", "My Description");
 		$this->click("//input[@name='type' and @value='pasteurl']");
