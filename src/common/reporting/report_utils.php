@@ -965,6 +965,7 @@ function report_toolspiegraph($datatype = 0, $start, $end) {
 						rendererOptions: {
 							showDataLabels: true,
 							dataLabels: \'percent\',
+							sliceMargin: 5
 						}
 					},
 					legend: {
