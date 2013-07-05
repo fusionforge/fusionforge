@@ -78,6 +78,7 @@ deps_debian() {
 	a2enmod dir
 	a2enmod authn_core
 	a2enmod wsgi
+	a2enmod cgi
 	# TODO: automate next
 	msg red "You Must Install Mailman Manually: apt-get install mailman postfix"
 }
