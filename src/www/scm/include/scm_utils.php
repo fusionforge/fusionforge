@@ -76,21 +76,6 @@ function scm_footer() {
 function commitstime_graph($group_id, $chartid) {
 	$g = group_get_object($group_id);
 	$end = time();
-	$start = $g->getStartDate();
-	$monthsArr[] = date('Ym', $start);
-	$timeStampArr[] = mktime(0, 0, 0, substr($monthsArr[0], 4, 2) , 1, substr($monthsArr[0], 0, 4));
-	$i = 0;
-	while($start < $end) {
-		$start = strtotime(date('Y-m-d', $start).' +1 month');
-		$i++;
-		$monthsArr[$i] = date('Ym', $start);
-		$timeStampArr[$i] = mktime(0, 0, 0, substr($monthsArr[$i], 4, 2) , 1, substr($monthsArr[$i], 0, 4));
-		if ($monthsArr[$i] == date('Ym', strtotime(date('Y-m-d', $end).' +1 month'))) {
-			array_pop($monthsArr);
-			array_pop($timeStampArr);
-			$i--;
-		}
-	}
 	$res = db_query_params ('SELECT month, sum(commits) AS count
 				FROM stats_cvs_group
 				WHERE group_id = $1
@@ -104,9 +89,32 @@ function commitstime_graph($group_id, $chartid) {
 	echo '<script type="text/javascript">//<![CDATA['."\n";
 	echo 'var values = new Array();';
 
+	$firstDateInDB = 0;
 	$data = array();
 	while ($row = db_fetch_array($res)) {
 		$data[$row[0]] = $row[1];
+		if (!$firstDateInDB)
+			$firstDateInDB = $row[0];
+	}
+	
+	$start = $g->getStartDate();
+	$monthsArr[] = date('Ym', $start);
+	if ( $firstDateInDB < $monthsArr[0] ) {
+		$monthsArr[0] = $firstDateInDB;
+		$start = mktime(0, 0, 0, substr($monthsArr[0], 4, 2) , 1, substr($monthsArr[0], 0, 4));
+	}
+	$timeStampArr[] = mktime(0, 0, 0, substr($monthsArr[0], 4, 2) , 1, substr($monthsArr[0], 0, 4));
+	$i = 0;
+	while($start < $end) {
+		$start = strtotime(date('Y-m-d', $start).' +1 month');
+		$i++;
+		$monthsArr[$i] = date('Ym', $start);
+		$timeStampArr[$i] = mktime(0, 0, 0, substr($monthsArr[$i], 4, 2) , 1, substr($monthsArr[$i], 0, 4));
+		if ($monthsArr[$i] == date('Ym', strtotime(date('Y-m-d', $end).' +1 month'))) {
+			array_pop($monthsArr);
+			array_pop($timeStampArr);
+			$i--;
+		}
 	}
 
 	$yMax = 0;
