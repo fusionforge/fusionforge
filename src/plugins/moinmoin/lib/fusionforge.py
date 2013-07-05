@@ -220,10 +220,10 @@ class FusionForgeSessionAuth(BaseAuth):
             if H.digest() != shash:
                 continue
 
-            m = re.search('(.*)<(.*)<(.*)<(.*)', sdata)
+            m = re.search('(.*)<(.*)<(.*)<(.*)<(.*)', sdata)
             if m is None:
                 continue
-            (time, user_id, ip, user_agent) = m.group(1, 2, 3, 4)
+            (time, user_id, ip, nonce, user_agent) = m.group(1, 2, 3, 4, 5)
 
             conn = self.fflink._conn
             cur = conn.cursor()
