@@ -6,6 +6,7 @@
  * The rest Copyright 2002-2004 (c) GForge Team - Sung Kim
  * Copyright 2008-2010 (c) FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -597,14 +598,12 @@ class SurveyHTML extends Error {
 			$results[0] =  $votes - $results[1] - $results[2] - $results[3] - $results[4] - $results[5];
 
 			if ($show_graph) {
-				$url ='graphs.php?type=vbar';
 				for ($j=5; $j>=0; $j--) {
 					$percent = sprintf("%02.1f%%", (float)$results[$j]*100/$votes);
-
-					$url.='&amp;legend[]='.urlencode($arr_name[$j].' ('. $percent.')');
-					$url.='&amp;value[]='.urlencode($results[$j]);
+					$legendArr[] = $arr_name[$j].' ('. $percent.')';
+					$valuesArr[] = $results[$j];
 				}
-				$ret.= '<img src="'.$url.'" alt="Graph of '.$Question->getQuestion().'"></img>';
+				$ret.= $this->drawGraph($Question->getID(), 'hbar', $legendArr, $valuesArr);
 			} else {
 				$ret.= '<table style="padding-left: 3em" width="100%">';
 
@@ -627,12 +626,11 @@ class SurveyHTML extends Error {
 			$res[3] =  $votes - $res[1] -$res[2];
 
 			if ($show_graph) {
-				$url ='graphs.php?type=pie';
 				for ($j=1; $j<=3; $j++) {
-					$url.='&amp;legend[]='.urlencode($arr_name[$j].'('.$res[$j].')');
-					$url.='&amp;value[]='.urlencode($res[$j]);
+					$legendArr[] = $arr_name[$j].'('.$res[$j].')';
+					$valuesArr[] = $res[$j];
 				}
-				$ret.= '<img src="'.$url.'" alt="Graph of '.$Question->getQuestion().'"></img>';
+				$ret.= $this->drawGraph($Question->getID(), 'pie', $legendArr, $valuesArr);
 			} else {
 				$ret.= '<table style="padding-left: 3em" width="100%">';
 				for ($j=1; $j<=3; $j++) {
@@ -725,6 +723,105 @@ class SurveyHTML extends Error {
 
 		$ret.= '<td>'.sprintf("%.2f", $percent).'%</td></tr></table></td></tr>'."\n";
 
+		return $ret;
+	}
+	
+	function drawGraph($id, $graphType, $legend, $values) {
+		switch($graphType) {
+			case 'pie': {
+				$ret = '<script type="text/javascript">//<![CDATA['."\n";
+				$ret .= 'var data'.$id.' = new Array();';
+				$ret .= 'var plot'.$id.';';
+				for ($i = 0; $i < count($values); $i++) {
+					$ret .= 'data'.$id.'.push([\''.htmlentities($legend[$i]).'\','.$values[$i].']);';
+				}
+				$ret .= 'jQuery(document).ready(function(){
+						plot'.$id.' = jQuery.jqplot (\'chart'.$id.'\', [data'.$id.'],
+						{
+							seriesDefaults: {
+								renderer: jQuery.jqplot.PieRenderer,
+								rendererOptions: {
+									showDataLabels: true,
+									dataLabels: \'percent\',
+								}
+							},
+							legend: {
+								show:true, location: \'e\',
+							},
+						});
+					});';
+				$ret .= 'jQuery(window).resize(function() {
+						plot'.$id.'.replot( { resetAxes: true } );
+					});'."\n";
+				$ret .= '//]]></script>';
+				$ret .= '<div id="chart'.$id.'"></div>';
+				break;
+			}
+			default: {
+				$ret = '<script type="text/javascript">//<![CDATA['."\n";
+				$ret .= 'var data'.$id.' = new Array();';
+				$ret .= 'var ticks'.$id.' = new Array();';
+				$ret .= 'var plot'.$id.';';
+				$yMax = 0;
+				for ($i = 0; $i < count($values); $i++) {
+					$ret .= 'data'.$id.'.push(['.$values[$i].']);';
+					if ($yMax < $values[$i]) {
+						$yMax = $values[$i];
+					}
+					$ret .= 'ticks'.$id.'.push([\''.htmlentities($legend[$i]).'\']);';
+				}
+				$ret .= 'jQuery(document).ready(function(){
+						plot'.$id.' = jQuery.jqplot (\'chart'.$id.'\', data'.$id.', 
+						{
+							axesDefaults: {
+								tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
+								tickOptions: {
+									angle: 90,
+									fontSize: \'8px\',
+									showGridline: false,
+									showMark: false,
+								},
+								pad: 0,
+							},
+							seriesDefaults: {
+								showMarker: false,
+								lineWidth: 1,
+								fill: true,
+								renderer:jQuery.jqplot.BarRenderer,
+								rendererOptions: {
+									fillToZero: true,
+								},
+							},
+							axes: {
+								xaxis: {
+									renderer: jQuery.jqplot.CategoryAxisRenderer,
+									ticks: ticks'.$id.',
+								},
+								yaxis: {
+									max: '.++$yMax.',
+									min: 0,
+									tickOptions: {
+										angle: 0,
+										showMark: true,
+										formatString: \'%d\'
+									}
+								},
+							},
+							highlighter: {
+								show: true,
+								sizeAdjust: 2.5,
+								showTooltip: true,
+								tooltipAxes: \'y\',
+							},
+						});
+					});';
+				$ret .= 'jQuery(window).resize(function() {
+						plot'.$id.'.replot( { resetAxes: true } );
+					});'."\n";
+				$ret .= '//]]></script>';
+				$ret .= '<div id="chart'.$id.'"></div>';
+			}
+		}
 		return $ret;
 	}
 }

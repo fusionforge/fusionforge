@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -51,6 +52,12 @@ if (!$g || !is_object($g) || $g->isError()) {
 
 $is_admin_page='y';
 $sh = new  SurveyHtml();
+
+html_use_jqueryjqplotpluginCanvas();
+html_use_jqueryjqplotpluginPie();
+html_use_jqueryjqplotpluginhighlighter();
+html_use_jqueryjqplotplugindateAxisRenderer();
+html_use_jqueryjqplotpluginBar();
 
 $title = _('Survey Results');
 $sh->header(array('title' => $title, 'modal' => 1));
