@@ -218,7 +218,11 @@ class BzrPlugin extends SCMPlugin {
         function updateRepositoryList ($params) {
                 $groups = $this->getGroups () ;
 
-		$dir = '/var/lib/gforge/plugins/scmbzr/public-repositories' ;
+		$dir = forge_get_config('data_path').'/plugins/scmbzr/public-repositories' ;
+		
+		if (!is_dir($dir)) {
+			mkdir ($dir, 0644, true);
+		}
 
 		$oldlist = array () ;
 		$dh = opendir ($dir) ;
