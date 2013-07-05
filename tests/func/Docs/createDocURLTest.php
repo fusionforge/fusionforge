@@ -68,8 +68,8 @@ class CreateDocURL extends FForge_SeleniumTestCase
 		$this->assertTextPresent("Document ".URL."/terms.php submitted successfully");
 		$this->assertTextPresent("My document");
 		$this->assertTextPresent("L'année dernière à Noël, 3 < 4, 中国 \" <em>, père & fils");
-		$this->clickAndWait("link=My document");
-		$this->assertTextPresent("These are the terms and conditions under");
+		//$this->clickAndWait("link=".URL."/terms.php");
+		//$this->assertTextPresent("These are the terms and conditions under");
 
 		$this->gotoProject('ProjectA');
 		$this->clickAndWait("link=Docs");
