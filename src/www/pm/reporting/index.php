@@ -5,6 +5,7 @@
  * Copyright 1999-2000 (c) Tim Perdue - Sourceforge
  * Copyright 2002 (c) GForge LLC
  * Copyright 2010 (c) FusionForge Team
+ * Copyrgith 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -114,7 +115,9 @@ if ($what) {
 			$start=($time_now-($counter*$sub_duration));
 			$end=($time_now-(($counter-1)*$sub_duration));
 
-
+			if ($end < $g->getStartDate()) {
+				break;
+			}
 
 			$result = db_query_params ('SELECT avg((end_date-start_date)/(24*60*60))
 FROM project_task,project_group_list
@@ -138,6 +141,10 @@ AND project_group_list.group_id=$3 ',
 			$start=($time_now-($counter*$sub_duration));
 			$end=($time_now-(($counter-1)*$sub_duration));
 
+			if ($end < $g->getStartDate()) {
+				break;
+			}
+			
 			$result = db_query_params ('SELECT count(*)
 FROM project_task,project_group_list
 WHERE start_date >= $1
@@ -159,7 +166,9 @@ AND project_group_list.group_id=$3 ',
 			$start=($time_now-($counter*$sub_duration));
 			$end=($time_now-(($counter-1)*$sub_duration));
 
-
+			if ($end < $g->getStartDate()) {
+				break;
+			}
 
 			$result = db_query_params ('SELECT count(*)
 FROM project_task,project_group_list
