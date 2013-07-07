@@ -4,6 +4,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,41 +32,28 @@
  * @param		string	The bar colors
  */
 function reports_quick_graph($title,$qpa1,$qpa2,$bar_colors) {
-	$result1=db_query_qpa($qpa1);
-	$result2=db_query_qpa($qpa2);
+	$result1 = db_query_qpa($qpa1);
+	$result2 = db_query_qpa($qpa2);
 	if ($result1 && $result2 && db_numrows($result2) > 0) {
 
-		$assoc_open=util_result_columns_to_assoc($result1);
-		$assoc_all=util_result_columns_to_assoc($result2);
-		while (list($key,$val)=each($assoc_all)) {
+		$assoc_open = util_result_columns_to_assoc($result1);
+		$assoc_all = util_result_columns_to_assoc($result2);
+		while (list($key, $val) = each($assoc_all)) {
 			$titles[]=$key;
-			$all[]=$val;
-			if ($assoc_open[$key])	$open[]=$assoc_open[$key];
-			else $open[]=0;
+			if ($assoc_open[$key]) {
+				$open[] = $assoc_open[$key];
+				$diff[] = $val - $assoc_open[$key];
+			} else {
+				$open[] = 0;
+				$diff[] = $val;
+			}
 		}
 
-/*	       	for ($i=0; $i<db_numrows($result1); $i++) {
-			echo "$titles[$i]=>$opened[$i]/$all[$i]<br />";
-		}
-*/
-		$scale=graph_calculate_scale(array($open,$all),400);
-		$props["scale"]=$scale;
-		$props["cellspacing"]=5;
-		$props = hv_graph_defaults($props);
-		start_graph($props, $titles);
-
-		horizontal_multisection_graph(
-			$titles,
-			array($open,$all),
-			$bar_colors,
-			$props
-		);
-		end_graph();
-		print '<p /><br />';
-		print '<table><tr class="align-center"><td style="width:15%">'._('Key').':</td><td style="width:5%">(</td><td style="width:35%; background-color:'.$bar_colors[0].'">'._('Open').'</td>'.
-		      '<td style="width:5%">/</td><td style="width:35%; background-color:'.$bar_colors[1].'">'._('All').' </td><td style="width:5%">)</td></tr></table>';
-		print '<p />';
-//      		GraphResult($result,$title);
+		$labels[] = _('Open');
+		$labels[] = _('All');
+		$values[] = $open;
+		$values[] = $diff;
+		report_pm_hbar(1, $values, $titles, $labels, true);
 	} else {
 		echo "<p class='information'>"._('No data found to report')."</p>";
 	}

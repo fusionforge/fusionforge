@@ -1152,7 +1152,7 @@ function report_sitetimebargraph($start, $end) {
 	return true;
 }
 
-function report_pm_hbar($id, $values, $ticks, $labels) {
+function report_pm_hbar($id, $values, $ticks, $labels, $stackSeries = false) {
 	$yMax = 0;
 	echo '<script type="text/javascript">//<![CDATA['."\n";
 	echo 'var plot'.$id.';';
@@ -1176,12 +1176,15 @@ function report_pm_hbar($id, $values, $ticks, $labels) {
 	for ($z = 0; $z < count($values); $z++) {
 		echo 'series'.$id.'.push(values'.$id.'['.$z.']);';
 	}
-	$height = 40+50*count($ticks);
+	$height = 40 + 50 * count($ticks);
 	
 	echo 'jQuery(document).ready(function(){
 			plot'.$id.' = jQuery.jqplot (\'chart'.$id.'\', series'.$id.', {
-				height: '.$height.',
-				axesDefaults: {
+				height: '.$height.',';
+	if ($stackSeries) {
+		echo '		stackSeries: '.$stackSeries.',';
+	}
+	echo '			axesDefaults: {
 					tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
 					tickOptions: {
 						angle: 0,
@@ -1196,6 +1199,10 @@ function report_pm_hbar($id, $values, $ticks, $labels) {
 					lineWidth: 1,
 					fill: true,
 					renderer:jQuery.jqplot.BarRenderer,
+					pointLabels: {
+						show:true,
+						stackedValue: true
+					},
 					rendererOptions: {
 						barDirection: \'horizontal\',
 						fillToZero: true
@@ -1208,9 +1215,11 @@ function report_pm_hbar($id, $values, $ticks, $labels) {
 					labels'.$id.'
 				,
 				axes: {
-					xaxis: {
-						max: '.++$yMax.',
-						min: 0,
+					xaxis: {';
+	if (!$stackSeries) {
+		echo '				max: '.++$yMax.',';
+	}
+	echo '					min: 0,
 						tickOptions: {
 							angle: 0,
 							showMark: true,
@@ -1221,13 +1230,6 @@ function report_pm_hbar($id, $values, $ticks, $labels) {
 						renderer: jQuery.jqplot.CategoryAxisRenderer,
 						ticks: ticks'.$id.'
 					},
-				},
-				highlighter: {
-					show: true,
-					sizeAdjust: 2.5,
-					showTooltip: true,
-					tooltipAxes: \'x\',
-					tooltipLocation: \'ne\'
 				},
 			});
 		});';

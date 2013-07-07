@@ -79,7 +79,6 @@ function pm_quick_report($group_id,$title,$subtitle1,$qpa1,$subtitle2,$qpa2,$com
 }
 
 html_use_jqueryjqplotpluginCanvas();
-html_use_jqueryjqplotpluginhighlighter();
 html_use_jqueryjqplotplugindateAxisRenderer();
 html_use_jqueryjqplotpluginBar();
 
@@ -120,8 +119,8 @@ if ($what) {
 		
 		for ($counter=1; $counter<=$span; $counter++) {
 
-			$start=($time_now-($counter*$sub_duration));
-			$end=($time_now-(($counter-1)*$sub_duration));
+			$start = ($time_now-($counter*$sub_duration));
+			$end = ($time_now-(($counter-1)*$sub_duration));
 
 			if ($end < $g->getStartDate()) {
 				break;
@@ -154,10 +153,10 @@ if ($what) {
 		$values = array();
 		$labels = array();
 		$ticks = array();
-		for ($counter=1; $counter<=$span; $counter++) {
+		for ($counter = 1; $counter <= $span; $counter++) {
 
-			$start=($time_now-($counter*$sub_duration));
-			$end=($time_now-(($counter-1)*$sub_duration));
+			$start = ($time_now - ($counter * $sub_duration));
+			$end = ($time_now - (($counter - 1 ) * $sub_duration));
 
 			if ($end < $g->getStartDate()) {
 				break;
@@ -171,8 +170,8 @@ if ($what) {
 								AND project_group_list.group_id=$3 ',
 								array($end, $end, $group_id));
 
-			$ticks[$counter-1]=date("Y-m-d",($end));
-			$values[0][$counter-1]=db_result($resNotCompleted, 0,0);
+			$ticks[$counter-1] = date("Y-m-d", ($end));
+			$values[0][$counter-1] = db_result($resNotCompleted, 0, 0);
 		}
 
 		$labels[] = _('Number of tasks still not completed');
