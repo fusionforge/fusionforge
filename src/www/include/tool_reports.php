@@ -40,7 +40,7 @@ function reports_quick_graph($title,$qpa1,$qpa2,$bar_colors) {
 		$assoc_all = util_result_columns_to_assoc($result2);
 		while (list($key, $val) = each($assoc_all)) {
 			$titles[]=$key;
-			if ($assoc_open[$key]) {
+			if (isset($assoc_open[$key])) {
 				$open[] = $assoc_open[$key];
 				$diff[] = $val - $assoc_open[$key];
 			} else {
