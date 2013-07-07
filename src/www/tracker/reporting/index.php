@@ -144,25 +144,13 @@ if ($start == $end) {
 	if ($atid) {
 		if (!$area || $area == 'activity') {
 			if (!trackeract_graph($group_id, 'activity', $SPAN, $start, $end, $atid)) {
-				echo '<p class="error">'._('Error during graphic computation.');
+				echo '<p class="error">'._('Error during graphic computation.').'</p>';
 			}
-	?>
-	<noscript>
-	<img src="trackeract_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;group_id=$group_id&amp;atid=$atid"; ?>" width="640" height="480" alt="" />
-	</noscript>
-	<?php
 		} else {
 			if (!trackerpie_graph($group_id, $area, $SPAN, $start, $end, $atid)) {
-				echo '<p class="error">'._('Error during graphic computation.');
+				echo '<p class="error">'._('Error during graphic computation.').'</p>';
 			}
-	?>
-	<noscript>
-	<img src="trackerpie_graph.php?<?php echo "SPAN=$SPAN&amp;start=$start&amp;end=$end&amp;group_id=$group_id&amp;atid=$atid&amp;area=$area"; ?>" width="640" height="480" alt="" />
-	</noscript>
-	<?php
 		}
 	}
 }
-?>
-</p>
-<?php $h->footer(array());
+$h->footer(array());
