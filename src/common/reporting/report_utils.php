@@ -1166,7 +1166,9 @@ function report_pm_hbar($id, $values, $ticks, $labels, $stackSeries = false) {
 	}
 	for ($j = 0; $j < count($ticks); $j++) {
 		for ($z = 0; $z < count($values); $z++) {
-			if ($values[$z][$j] > $yMax) {
+			if ($stackSeries !== false && $stackSeries[$j] > $yMax) {
+				$yMax = $stackSeries[$j];
+			} elseif ($values[$z][$j] > $yMax) {
 				$yMax = $values[$z][$j];
 			}
 			echo 'values'.$id.'['.$z.'].push('.$values[$z][$j].');';
@@ -1182,7 +1184,7 @@ function report_pm_hbar($id, $values, $ticks, $labels, $stackSeries = false) {
 			plot'.$id.' = jQuery.jqplot (\'chart'.$id.'\', series'.$id.', {
 				height: '.$height.',';
 	if ($stackSeries) {
-		echo '		stackSeries: '.$stackSeries.',';
+		echo '		stackSeries: true,';
 	}
 	echo '			axesDefaults: {
 					tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
@@ -1215,11 +1217,9 @@ function report_pm_hbar($id, $values, $ticks, $labels, $stackSeries = false) {
 					labels'.$id.'
 				,
 				axes: {
-					xaxis: {';
-	if (!$stackSeries) {
-		echo '				max: '.++$yMax.',';
-	}
-	echo '					min: 0,
+					xaxis: {
+						max: '.++$yMax.',
+						min: 0,
 						tickOptions: {
 							angle: 0,
 							showMark: true,

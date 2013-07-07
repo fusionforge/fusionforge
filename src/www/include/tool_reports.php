@@ -39,7 +39,8 @@ function reports_quick_graph($title,$qpa1,$qpa2,$bar_colors) {
 		$assoc_open = util_result_columns_to_assoc($result1);
 		$assoc_all = util_result_columns_to_assoc($result2);
 		while (list($key, $val) = each($assoc_all)) {
-			$titles[]=$key;
+			$titles[] = $key;
+			$all[] = $val;
 			if (isset($assoc_open[$key])) {
 				$open[] = $assoc_open[$key];
 				$diff[] = $val - $assoc_open[$key];
@@ -53,7 +54,7 @@ function reports_quick_graph($title,$qpa1,$qpa2,$bar_colors) {
 		$labels[] = _('All');
 		$values[] = $open;
 		$values[] = $diff;
-		report_pm_hbar(1, $values, $titles, $labels, true);
+		report_pm_hbar(1, $values, $titles, $labels, $all);
 	} else {
 		echo "<p class='information'>"._('No data found to report')."</p>";
 	}
