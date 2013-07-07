@@ -953,7 +953,7 @@ function report_toolspiegraph($datatype = 0, $start, $end) {
 		echo '<script type="text/javascript">//<![CDATA['."\n";
 		echo 'var data'.$chartid.' = new Array();';
 		while ($row = db_fetch_array($res)) {
-			echo 'data'.$chartid.'.push([\''.htmlentities($row[0]).'\',\''.$row[1].'\']);';
+			echo 'data'.$chartid.'.push([\''.htmlentities($row[0]).'\','.$row[1].']);';
 		}
 		echo 'var plot'.$chartid.';';
 		echo 'jQuery(document).ready(function(){
@@ -1150,6 +1150,92 @@ function report_sitetimebargraph($start, $end) {
 		echo '<p class="information">'._('No data to display').'</p>';
 	}
 	return true;
+}
+
+function report_pm_hbar($id, $values, $ticks, $labels) {
+	$yMax = 0;
+	echo '<script type="text/javascript">//<![CDATA['."\n";
+	echo 'var plot'.$id.';';
+	echo 'var values'.$id.' = new Array();';
+	echo 'var ticks'.$id.' = new Array();';
+	echo 'var labels'.$id.' = new Array();';
+	echo 'var series'.$id.' = new Array();';
+	for ($z = 0; $z < count($values); $z++) {
+		echo 'values'.$id.'['.$z.'] = new Array();';
+		echo 'labels'.$id.'.push({label:\''.$labels[$z].'\'});';
+	}
+	for ($j = 0; $j < count($ticks); $j++) {
+		for ($z = 0; $z < count($values); $z++) {
+			if ($values[$z][$j] > $yMax) {
+				$yMax = $values[$z][$j];
+			}
+			echo 'values'.$id.'['.$z.'].push('.$values[$z][$j].');';
+		}
+		echo 'ticks'.$id.'.push(\''.$ticks[$j].'\');';
+	}
+	for ($z = 0; $z < count($values); $z++) {
+		echo 'series'.$id.'.push(values'.$id.'['.$z.']);';
+	}
+	$height = 40+50*count($ticks);
+	
+	echo 'jQuery(document).ready(function(){
+			plot'.$id.' = jQuery.jqplot (\'chart'.$id.'\', series'.$id.', {
+				height: '.$height.',
+				axesDefaults: {
+					tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
+					tickOptions: {
+						angle: 0,
+						fontSize: \'8px\',
+						showGridline: false,
+						showMark: false,
+					},
+					pad: 0
+				},
+				seriesDefaults: {
+					showMarker: false,
+					lineWidth: 1,
+					fill: true,
+					renderer:jQuery.jqplot.BarRenderer,
+					rendererOptions: {
+						barDirection: \'horizontal\',
+						fillToZero: true
+					}
+				},
+				legend: {
+					show:true, location: \'ne\'
+				},
+				series:
+					labels'.$id.'
+				,
+				axes: {
+					xaxis: {
+						max: '.++$yMax.',
+						min: 0,
+						tickOptions: {
+							angle: 0,
+							showMark: true,
+							formatString: \'%d\'
+						}
+					},
+					yaxis: {
+						renderer: jQuery.jqplot.CategoryAxisRenderer,
+						ticks: ticks'.$id.'
+					},
+				},
+				highlighter: {
+					show: true,
+					sizeAdjust: 2.5,
+					showTooltip: true,
+					tooltipAxes: \'x\',
+					tooltipLocation: \'ne\'
+				},
+			});
+		});';
+	echo 'jQuery(window).resize(function() {
+		plot'.$id.'.replot();
+	});'."\n";
+	echo '//]]></script>';
+	echo '<div id="chart'.$id.'"></div>';
 }
 
 // Local Variables:

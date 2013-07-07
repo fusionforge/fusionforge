@@ -32,6 +32,7 @@ require_once $gfcommon.'pm/ProjectCategory.class.php';
 require_once $gfwww.'project/stats/project_stats_utils.php';
 require_once $gfwww.'include/tool_reports.php';
 require_once $gfwww.'include/HTML_Graphs.php';
+require_once $gfcommon.'reporting/report_utils.php';
 
 
 if (!session_loggedin()) {
@@ -77,6 +78,10 @@ function pm_quick_report($group_id,$title,$subtitle1,$qpa1,$subtitle2,$qpa2,$com
 	pm_footer(array());
 }
 
+html_use_jqueryjqplotpluginCanvas();
+html_use_jqueryjqplotpluginhighlighter();
+html_use_jqueryjqplotplugindateAxisRenderer();
+html_use_jqueryjqplotpluginBar();
 
 $what = getStringFromRequest('what');
 if ($what) {
@@ -97,7 +102,6 @@ if ($what) {
 		pm_reporting_header($group_id);
 
 		$time_now=time();
-//		echo $time_now."<p>";
 
 		if (!$period || $period=="lifespan") {
 			$period="month";
@@ -108,8 +112,12 @@ if ($what) {
 			$span=1;
 		}
 		$sub_duration=period2seconds($period,1);
-//		echo $sub_duration,"<br />";
 
+		$values = array();
+		$labels = array();
+		$labels[0] = _('Average duration for closed tasks (days)');
+		$labels[1] = _('Number of started tasks');
+		
 		for ($counter=1; $counter<=$span; $counter++) {
 
 			$start=($time_now-($counter*$sub_duration));
@@ -119,48 +127,33 @@ if ($what) {
 				break;
 			}
 
-			$result = db_query_params ('SELECT avg((end_date-start_date)/(24*60*60))
-FROM project_task,project_group_list
-WHERE end_date > 0
-AND (start_date >= $1 AND start_date <= $2)
-AND project_task.status_id=2
-AND project_group_list.group_project_id=project_task.group_project_id
-AND project_group_list.group_id=$3 ',
-			array($start,
-				$end,
-				$group_id));
+			$resAvgClosedTask = db_query_params ('SELECT avg((end_date-start_date)/(24*60*60))
+								FROM project_task,project_group_list
+								WHERE end_date > 0
+								AND (start_date >= $1 AND start_date <= $2)
+								AND project_task.status_id=2
+								AND project_group_list.group_project_id=project_task.group_project_id
+								AND project_group_list.group_id=$3 ',
+								array($start, $end, $group_id));
+				
+			$resStartTasks = db_query_params ('SELECT count(*)
+								FROM project_task,project_group_list
+								WHERE start_date >= $1
+								AND start_date <= $2
+								AND project_group_list.group_project_id=project_task.group_project_id
+								AND project_group_list.group_id=$3 ',
+								array($start, $end, $group_id));
 
-			$names[$counter-1]=date("Y-m-d",($start))." to ".date("Y-m-d",($end));
-			$values[$counter-1]=((int)(db_result($result, 0,0)*1000))/1000;
+			$ticks[$counter-1] = date("Y-m-d", ($start))." to ".date("Y-m-d",($end));
+			$values[0][$counter-1] = ((int)(db_result($resAvgClosedTask, 0, 0)*1000))/1000;
+			$values[1][$counter-1] = (int)db_result($resStartTasks, 0, 0);
 		}
 
-		GraphIt($names, $values, _('Average duration for closed tasks (days)'));
+		report_pm_hbar(1, $values, $ticks, $labels);
 
-		for ($counter=1; $counter<=$span; $counter++) {
-
-			$start=($time_now-($counter*$sub_duration));
-			$end=($time_now-(($counter-1)*$sub_duration));
-
-			if ($end < $g->getStartDate()) {
-				break;
-			}
-			
-			$result = db_query_params ('SELECT count(*)
-FROM project_task,project_group_list
-WHERE start_date >= $1
-AND start_date <= $2
-AND project_group_list.group_project_id=project_task.group_project_id
-AND project_group_list.group_id=$3 ',
-			array($start,
-				$end,
-				$group_id));
-
-			$names[$counter-1]=date("Y-m-d",($start))." to ".date("Y-m-d",($end));
-			$values[$counter-1]=db_result($result, 0,0);
-		}
-
-		GraphIt($names, $values, _('Number of started tasks'));
-
+		$values = array();
+		$labels = array();
+		$ticks = array();
 		for ($counter=1; $counter<=$span; $counter++) {
 
 			$start=($time_now-($counter*$sub_duration));
@@ -170,21 +163,20 @@ AND project_group_list.group_id=$3 ',
 				break;
 			}
 
-			$result = db_query_params ('SELECT count(*)
-FROM project_task,project_group_list
-WHERE start_date <= $1
-AND (end_date >= $2 OR end_date < 1 OR end_date is null)
-AND project_group_list.group_project_id=project_task.group_project_id
-AND project_group_list.group_id=$3 ',
-			array($end,
-				$end,
-				$group_id));
+			$resNotCompleted = db_query_params ('SELECT count(*)
+								FROM project_task,project_group_list
+								WHERE start_date <= $1
+								AND (end_date >= $2 OR end_date < 1 OR end_date is null)
+								AND project_group_list.group_project_id=project_task.group_project_id
+								AND project_group_list.group_id=$3 ',
+								array($end, $end, $group_id));
 
-			$names[$counter-1]=date("Y-m-d",($end));
-			$values[$counter-1]=db_result($result, 0,0);
+			$ticks[$counter-1]=date("Y-m-d",($end));
+			$values[0][$counter-1]=db_result($resNotCompleted, 0,0);
 		}
 
-		GraphIt($names, $values, _('Number of tasks still not completed'));
+		$labels[] = _('Number of tasks still not completed');
+		report_pm_hbar(2, $values, $ticks, $labels);
 
 		pm_footer(array());
 
