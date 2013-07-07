@@ -31,7 +31,6 @@ require_once $gfcommon.'pm/ProjectGroupFactory.class.php';
 require_once $gfcommon.'pm/ProjectCategory.class.php';
 require_once $gfwww.'project/stats/project_stats_utils.php';
 require_once $gfwww.'include/tool_reports.php';
-require_once $gfwww.'include/HTML_Graphs.php';
 require_once $gfcommon.'reporting/report_utils.php';
 
 
