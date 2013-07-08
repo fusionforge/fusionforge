@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-28 17:36+0200\n"
+"POT-Creation-Date: 2013-07-08 18:05+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -4488,8 +4488,8 @@ msgstr "Non se achou ningunha enquisa "
 
 #: common/survey/SurveyFactory.class.php:59
 #: common/survey/SurveyQuestionFactory.class.php:57
-#: common/survey/SurveyResponseFactory.class.php:80
-#: common/survey/SurveyResponseFactory.class.php:88
+#: common/survey/SurveyResponseFactory.class.php:81
+#: common/survey/SurveyResponseFactory.class.php:89
 msgid "Survey"
 msgstr "Enquisa "
 
@@ -4517,16 +4517,16 @@ msgstr "Produciuse un erro ao procurar a pregunta "
 msgid "No Survey Question is found"
 msgstr "Non se achou ningunha pregunta na enquisa"
 
-#: common/survey/SurveyResponseFactory.class.php:76
+#: common/survey/SurveyResponseFactory.class.php:77
 msgid "No valid Survey Object"
 msgstr "A enquisa non é válida"
 
-#: common/survey/SurveyResponseFactory.class.php:84
+#: common/survey/SurveyResponseFactory.class.php:85
 msgid "No valid Question Object"
 msgstr "A pregunta non é válida "
 
-#: common/survey/SurveyResponseFactory.class.php:148
-#: common/survey/SurveyResponseFactory.class.php:179
+#: common/survey/SurveyResponseFactory.class.php:149
+#: common/survey/SurveyResponseFactory.class.php:180
 msgid "No Survey Response is found"
 msgstr "Non se achou ningunha resposta de enquisa "
 

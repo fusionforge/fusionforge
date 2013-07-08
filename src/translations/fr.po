@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-28 17:36+0200\n"
+"POT-Creation-Date: 2013-07-08 18:05+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -4299,8 +4299,8 @@ msgstr "Aucun sondage trouvé"
 
 #: common/survey/SurveyFactory.class.php:59
 #: common/survey/SurveyQuestionFactory.class.php:57
-#: common/survey/SurveyResponseFactory.class.php:80
-#: common/survey/SurveyResponseFactory.class.php:88
+#: common/survey/SurveyResponseFactory.class.php:81
+#: common/survey/SurveyResponseFactory.class.php:89
 msgid "Survey"
 msgstr "sondage"
 
@@ -4328,16 +4328,16 @@ msgstr "Erreur lors de la recherche de la question"
 msgid "No Survey Question is found"
 msgstr "Aucune question trouvée"
 
-#: common/survey/SurveyResponseFactory.class.php:76
+#: common/survey/SurveyResponseFactory.class.php:77
 msgid "No valid Survey Object"
 msgstr "Pas d'objet Survey valide"
 
-#: common/survey/SurveyResponseFactory.class.php:84
+#: common/survey/SurveyResponseFactory.class.php:85
 msgid "No valid Question Object"
 msgstr "Pas d'objet Question valide"
 
-#: common/survey/SurveyResponseFactory.class.php:148
-#: common/survey/SurveyResponseFactory.class.php:179
+#: common/survey/SurveyResponseFactory.class.php:149
+#: common/survey/SurveyResponseFactory.class.php:180
 msgid "No Survey Response is found"
 msgstr "Aucune réponse trouvé"
 
