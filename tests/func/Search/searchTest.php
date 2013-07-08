@@ -357,7 +357,9 @@ class Search extends FForge_SeleniumTestCase
 		$this->gotoProject('projecta');
 		$this->clickAndWait("link=Docs");
 		$this->clickAndWait("addItemDocmanMenu");
-		$this->click("buttonDoc");
+		// ugly hack until we fix behavior in docman when no folders exist. We need to click twice on the link
+		$this->clickAndWait("addItemDocmanMenu");
+		$this->click("id=tab-new-document");
 		$this->type("title", "Doc1 Vladimir");
 		$this->type("//input[@name='description']", "Jenkins buildbot - also, ZONGO");
 		$this->click("//input[@name='type' and @value='pasteurl']");
@@ -365,7 +367,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->clickAndWait("submit");
 
 		$this->clickAndWait("addItemDocmanMenu");
-		$this->click("buttonDoc");
+		$this->click("id=tab-new-document");
 		$this->type("title", "Doc2 Astromir");
 		$this->type("//input[@name='description']", "Main website (the needle) - also, ZONGO");
 		$this->click("//input[@name='type' and @value='pasteurl']");
