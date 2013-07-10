@@ -393,7 +393,7 @@ class DarcsPlugin extends SCMPlugin {
 		}
 
 		if (! $project->enableAnonSCM()) {
-			unlink ($tarball) ;
+			if (file_exists ($tarball)) unlink ($tarball) ;
 			return false;
 		}
 
@@ -402,7 +402,7 @@ class DarcsPlugin extends SCMPlugin {
 		$repo = $this->getRootRepositories($project);
 
 		if (!is_dir ($repo)) {
-			unlink ($tarball) ;
+			if (file_exists ($tarball)) unlink ($tarball) ;
 			return false ;
 		}
 
