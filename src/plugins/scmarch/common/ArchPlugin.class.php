@@ -88,8 +88,8 @@ class ArchPlugin extends SCMPlugin {
 		}
 
 		if (! $project->enableAnonSCM()) {
-			unlink ($snapshot) ;
-			unlink ($tarball) ;
+			if (file_exists ($snapshot)) unlink ($snapshot) ;
+			if (file_exists ($tarball)) unlink ($tarball) ;
 			return false;
 		}
 
@@ -97,8 +97,8 @@ class ArchPlugin extends SCMPlugin {
 		$repo = $toprepo . '/' . $project->getUnixName() ;
 
 		if (!is_dir ($repo) || !is_file ("$repo/format")) {
-			unlink ($snapshot) ;
-			unlink ($tarball) ;
+			if (file_exists ($snapshot)) unlink ($snapshot) ;
+			if (file_exists ($tarball)) unlink ($tarball) ;
 			return false ;
 		}
 

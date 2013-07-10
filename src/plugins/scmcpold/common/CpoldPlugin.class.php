@@ -127,7 +127,7 @@ class CpoldPlugin extends SCMPlugin {
 		}
 
 		if (! $project->enableAnonSCM()) {
-			unlink ($tarball) ;
+			if (file_exists ($tarball)) unlink ($tarball) ;
 			return false;
 		}
 
@@ -135,7 +135,7 @@ class CpoldPlugin extends SCMPlugin {
 		$repo = $toprepo . '/' . $project->getUnixName() ;
 
 		if (!is_dir ($repo)) {
-			unlink ($tarball) ;
+			if (file_exists ($tarball)) unlink ($tarball) ;
 			return false ;
 		}
 
