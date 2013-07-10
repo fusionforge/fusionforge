@@ -326,7 +326,7 @@ class CVSPlugin extends SCMPlugin {
 				return false ;
 			}
 
-			$hist_file =& fopen( $hist_file_path, 'r' );
+			$hist_file = fopen( $hist_file_path, 'r' );
 			if ( ! $hist_file ) {
 				echo "Unreadable history\n" ;
 				db_rollback () ;
