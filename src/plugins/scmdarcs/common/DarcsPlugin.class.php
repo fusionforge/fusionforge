@@ -480,7 +480,7 @@ class DarcsPlugin extends SCMPlugin {
 				}
 				else
 				{
-					echo "$repo\n";
+					// echo "$repo\n";
 				}
 
 				$pipe = popen("darcs changes --repodir='$repo' "
