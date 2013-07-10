@@ -306,7 +306,7 @@ class CVSPlugin extends SCMPlugin {
 
 			$repo = forge_get_config('repos_path', 'scmcvs') . '/' . $project->getUnixName() ;
 			if (!is_dir ($repo) || !is_dir ("$repo/CVSROOT")) {
-				echo "No repository\n" ;
+				echo "No repository $repo\n" ;
 				db_rollback () ;
 				return false ;
 			}

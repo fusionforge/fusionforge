@@ -696,7 +696,7 @@ class GitPlugin extends SCMPlugin {
 
 			$repo = forge_get_config('repos_path', 'scmgit') . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
 			if (!is_dir ($repo) || !is_dir ("$repo/refs")) {
-				// echo "No repository\n" ;
+				// echo "No repository $repo\n" ;
 				return false ;
 			}
 
