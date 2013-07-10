@@ -591,8 +591,8 @@ class GitPlugin extends SCMPlugin {
 					}
 				}
 
-				$uu = $usr_updates[$user] ? $usr_updates[$user] : 0 ;
-				$ua = $usr_adds[$user] ? $usr_adds[$user] : 0 ;
+				$uu = isset ($usr_updates[$user]) ? $usr_updates[$user] : 0 ;
+				$ua = isset ($usr_adds[$user]) ? $usr_adds[$user] : 0 ;
 				if ($uu > 0 || $ua > 0) {
 					if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
 							      array ($month_string,

@@ -578,8 +578,8 @@ class DarcsPlugin extends SCMPlugin {
 							     $day,
 							     $project->getID(),
 							     $user_id,
-							     $usr_updates[$user] ? $usr_updates[$user] : 0,
-							     $usr_adds[$user] ? $usr_adds[$user] : 0))) {
+							     isset ($usr_updates[$user]) ? $usr_updates[$user] : 0,
+							     isset ($usr_adds[$user]) ? $usr_adds[$user] : 0))) {
 					echo "Error while inserting into stats_cvs_user\n" ;
 					db_rollback () ;
 					return false ;

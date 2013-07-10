@@ -387,14 +387,15 @@ class CVSPlugin extends SCMPlugin {
 				} else {
 					continue;
 				}
+				
 
 				if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
 						      array ($month_string,
 							     $day,
 							     $project->getID(),
 							     $user_id,
-							     $usr_commit[$user] ? $usr_commit[$user] : 0,
-							     $usr_add[$user] ? $usr_add[$user] : 0))) {
+							     isset ($usr_commit[$user]) ? $usr_commit[$user] : 0,
+							     isset ($usr_add[$user]) ? $usr_add[$user] : 0))) {
 					echo "Error while inserting into stats_cvs_user\n" ;
 					db_rollback () ;
 					return false ;
