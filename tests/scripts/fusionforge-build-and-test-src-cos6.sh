@@ -66,8 +66,7 @@ EOF
 # Run tests
 retcode=0
 echo "Run phpunit test on $HOST in $FORGE_HOME"
-ssh root@$HOST "$FORGE_HOME/tests/func/vncxstartsuite.sh $FILTER"
-retcode=$?
+ssh root@$HOST "$FORGE_HOME/tests/func/vncxstartsuite.sh $FILTER" || retcode=$?
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 scp root@$HOST:/tmp/gforge-*.log $WORKSPACE/reports/
 
