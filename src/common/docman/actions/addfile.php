@@ -124,9 +124,18 @@ switch ($type) {
 		$return_msg = _('Invalid file name.');
 			session_redirect($baseurl.'&error_msg='.urlencode($return_msg));
 		}
+
 		if (function_exists('finfo_open')) {
 			$finfo = finfo_open(FILEINFO_MIME_TYPE);
 			$uploaded_data_type = finfo_file($finfo, $uploaded_data['tmp_name']);
+			if( $uploaded_data_type === 'application/msword') {
+				$ext = pathinfo($uploaded_data['name'], PATHINFO_EXTENSION);
+				if ( $ext === 'ppt' ) {
+					$uploaded_data_type = 'application/vnd.ms-powerpoint';
+				} elseif ( $ext === 'xls' ) {
+					$uploaded_data_type = 'application/vnd.ms-excel';
+				}
+			}
 		} else {
 			$uploaded_data_type = $uploaded_data['type'];
 		}
