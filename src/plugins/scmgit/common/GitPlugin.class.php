@@ -325,6 +325,7 @@ class GitPlugin extends SCMPlugin {
 		} else {
 			$unix_group = forge_get_config('apache_group');
 		}
+		system ("chgrp $unix_group $root") ;
 
 		$main_repo = $root . '/' .  $project_name . '.git' ;
 		if (!is_dir($main_repo) || (!is_file("$main_repo/HEAD") &&
