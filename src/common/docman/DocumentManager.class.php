@@ -181,10 +181,16 @@ class DocumentManager extends Error {
 					$nbDocsLabel = '<span class="tabtitle-nw" title="'._('Number of deleted documents in this folder').'" >('.$nbDocsTrashed.')</span>';
 				}
 				if ($localDg->getName() != '.trash') {
-					$user = user_get_object($localDg->getCreated_by());
-					$lititle = _('Created by')._(': ').$user->getRealName();
+					$lititle = '';
+					if ($localDg->getCreated_by()) {
+						$user = user_get_object($localDg->getCreated_by());
+						$lititle .= _('Created by')._(': ').$user->getRealName();
+					}
 					if ($localDg->getLastModifyDate()) {
-						$lititle .= _('; ')._('Last modified')._(': ').relative_date($localDg->getLastModifyDate());
+						if ($lititle) {
+							$lititle .= _('; ');
+						}
+						$lititle .= _('Last modified')._(': ').relative_date($localDg->getLastModifyDate());
 					}
 					echo '<li id="leaf-'.$subGroupIdValue.'" class="'.$liclass.'">'.util_make_link($link, $localDg->getName(), array('class'=>'tabtitle-nw', 'title'=>$lititle)).$nbDocsLabel;
 				} else {
