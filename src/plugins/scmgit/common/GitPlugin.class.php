@@ -421,6 +421,7 @@ class GitPlugin extends SCMPlugin {
 		} else {
 			$unix_group = forge_get_config('apache_group');
 		}
+		system ("chgrp $unix_group $root") ;
 
 		// Create main repository
 		$main_repo = $root . '/' .  $project_name . '.git' ;
