@@ -24,17 +24,13 @@ static $NOT_EXTRA_FIELDS = array('assigned_to', 'attachments', 'class', 'comment
  * @param $vocabulary	Vocabulary of a tracker
  */
 function findType($fieldName, $fieldValue, $vocabulary){
-	if(is_array($fieldValue)){
+	if (is_array($fieldValue)){
 		return ARTIFACT_EXTRAFIELDTYPE_MULTISELECT;
-	}
-	elseif(array_key_exists($fieldName, $vocabulary)){
-
+	} elseif(array_key_exists($fieldName, $vocabulary)) {
 		return ARTIFACT_EXTRAFIELDTYPE_SELECT;
-	}
-	else {
+	} else {
 		return ARTIFACT_EXTRAFIELDTYPE_TEXT;
 	}
-	return true;
 }
 
 /**
