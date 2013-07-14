@@ -40,6 +40,7 @@ Alias /scripts/jquery-tipsy/ {core/source_path}/vendor/jquery-tipsy/
 Alias /scripts/jquery-storage/ {core/source_path}/vendor/jquery-storage/
 Alias /scripts/jquery-simpletreemenu/ {core/source_path}/vendor/jquery-simpletreemenu/
 Alias /scripts/jquery-jqplot/ {core/source_path}/vendor/jquery-jqplot/
+Alias /scripts/jquery-teamwork-gantt/ {core/source_path}/vendor/jquery-teamwork-gantt/
 Alias /scripts/prototype/ {core/source_path}/vendor/prototype/
 Alias /scripts/scriptaculous/ {core/source_path}/vendor/scriptaculous/
 Alias /scripts/yui/ {core/source_path}/vendor/yui/build/

@@ -5,6 +5,7 @@
  * Copyright 1999/2000, Sourceforge.net Tim Perdue
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,6 +29,8 @@ if (getStringFromRequest('commentsort') == 'anti') {
 } else {
 	$sort_comments_chronologically = true;
 }
+
+global $pt;
 
 pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id));
 
