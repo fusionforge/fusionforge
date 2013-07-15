@@ -1,4 +1,4 @@
-Date: Tue, 25 Jan 2011 17:50:09 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginTableauAncienStyle;
@@ -7,7 +7,7 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 ===Description
-PluginTableauAncienStyle peut être utilisé pour inclure des 
+PluginTableauAncienStyle peut être utilisé pour inclure des
 tableaux dans une page wiki avec la syntaxe de l'ancien style
 des marques pour les tableaux.
 
@@ -32,9 +32,9 @@ affichera
 >>
 
 Remarquez que de multiple **|** conduisent à des colonnes étendus
-et que des**v** peuvent être utilisé pour étendre des lignes. Un 
-**>** engendre une colonne justifiée à droite, **<** une colonne 
-justifiée à gauche et **^** une colonne centrée (position par 
+et que des**v** peuvent être utilisé pour étendre des lignes. Un
+**>** engendre une colonne justifiée à droite, **<** une colonne
+justifiée à gauche et **^** une colonne centrée (position par
 défaut).
 
 ===Arguments
@@ -62,10 +62,10 @@ défaut).
 ----
 
 Notez que dans chaque cellule du tableau, le _nouveau style_ est utilisé.
-Vous pouvez seulement utiliser les marques en ligne --- des groupes de marques 
+Vous pouvez seulement utiliser les marques en ligne --- des groupes de marques
 par niveau sont autorisés dans les cellules.
 
-Utiliser l'ancien style ne devrait pas avoir beaucoup plus de sens puisqu'on 
+Utiliser l'ancien style ne devrait pas avoir beaucoup plus de sens puisqu'on
 ne peut pas inclure d'appels de plugin sur plusieurs lignes en utilisant
 les anciennes règles.
 

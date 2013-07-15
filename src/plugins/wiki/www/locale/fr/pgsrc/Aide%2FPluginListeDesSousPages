@@ -1,4 +1,4 @@
-Date: Tue, 25 Jan 2011 21:26:14 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginListeDesSousPages;
@@ -8,14 +8,14 @@ Content-Transfer-Encoding: binary
 
 ===Description
 
-PluginListeSousPages est utilisé pour afficher le contenu d'une partie ou 
-de toutes les sous-pages de la page courante ou d'une page donnée. Ceci peut 
+PluginListeSousPages est utilisé pour afficher le contenu d'une partie ou
+de toutes les sous-pages de la page courante ou d'une page donnée. Ceci peut
 être utilisé pour obtenir un aperçu pour PluginWikiBlog, PluginCalendrier
 ou des ensembles de sous-pages similaires.
 
 ===Avertissements
 
-Ne pas l'utiliser avec des sous-pages où PluginRedirection est utilisé 
+Ne pas l'utiliser avec des sous-pages où PluginRedirection est utilisé
 ou avec des sections non-existantes ! L'extracteur de partie est encore
 un peu instable
 
@@ -27,7 +27,7 @@ un peu instable
   ou <<UnfoldSubpages quiet=1 smalltitle=1>>
   ou <<UnfoldSubpages sections=2 words=100>>
   ou <<UnfoldSubpages lines=3>>
-  ou <<UnfoldSubpages pagename="AdministrationDePhpWiki" 
+  ou <<UnfoldSubpages pagename="AdministrationDePhpWiki"
               section="Arguments" sectionhead=1>>
 }}}
 
@@ -38,11 +38,11 @@ un peu instable
 **quiet**:
   N'affiche pas d'en-tête. Par défaut : false
 **sortby**:
-  Trier par + (ASC) ou - (DESC) et sur une colonne. Multiples colonnes comme 
-  sortby="-hits,-mtime" pas encore implémenté. colonnes acceptées : 
+  Trier par + (ASC) ou - (DESC) et sur une colonne. Multiples colonnes comme
+  sortby="-hits,-mtime" pas encore implémenté. colonnes acceptées :
   ~[+|-]pagename, ~[+|-]mtime, ~[+|-]hits. Par défaut : "pagename"
 **maxpages**:
-  Nombre maximum de pages à inclure ou toutes lorsque ce n'est précisé. Par 
+  Nombre maximum de pages à inclure ou toutes lorsque ce n'est précisé. Par
   défaut : false
 **sections**:
   Nombre maximum de parties par pages à inclure toutes lorsque ce n'est précisé.
@@ -65,7 +65,7 @@ un peu instable
 **pages**:
   obsolète, renommé en maxpages
 **sort**:
-  'asc' ou 'desc'. Obsolète : utiliser "+" ou "-" avant le nom de la 
+  'asc' ou 'desc'. Obsolète : utiliser "+" ou "-" avant le nom de la
   colonne avec sortby.
 
 ===Exemple

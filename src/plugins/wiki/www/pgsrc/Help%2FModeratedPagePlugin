@@ -1,4 +1,4 @@
-Date: Fri,  7 Dec 2012 14:58:45 +0000
+Date: Thu,  4 Jul 2013 18:41:29 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FModeratedPagePlugin;
@@ -11,7 +11,7 @@ Content-Transfer-Encoding: binary
 A ModeratedPage is a page-internal setting, which restricts certain actions on certain pages.
 The requested action and page is stored internally and an email is sent to the moderators
 described in the linked and locked ModeratedPage action page.
-Any moderator may approve or reject the action by simply clicking an url.
+Any moderator may approve or reject the action by simply clicking an URL.
 When approving the action, the requested action (edit, rename, ...) is performed.
 
 In both cases the author is notified, so it's recommended for the
@@ -22,7 +22,7 @@ In case of multiple moderators: first comes, first serves.
 
 * Check the status of this action page, esp. the moderators in the
   plugin line, if they had their emails stored in their
-  UserPreferences, and if the action page is locked.
+  [[UserPreferences]], and if the action page is locked.
 * Add a link to this action page in the page(s) in question.
 * Save the page.
 * Lock the page to actually change the moderation status. You may want to unlock it then.

@@ -1,4 +1,4 @@
-Date: Thu, 13 Jun 2013 17:02:10 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiSystemverwalten;
@@ -30,11 +30,11 @@ Setze ein Benutzer Passwort zurück:
 
 Email Verification:
 
-  Die PhpWiki:EmailVerification ist momentan nicht strikt, d.h. einige mögliche falsche Ergebnisse der 
-  automatischen Überprüfung auf gültige E-Mail Addressen kann hier verwaltet werden. Manche Domains oder 
+  Die PhpWiki:EmailVerification ist momentan nicht strikt, d.h. einige mögliche falsche Ergebnisse der
+  automatischen Überprüfung auf gültige E-Mail Addressen kann hier verwaltet werden. Manche Domains oder
   Email server können nicht automatisch überprüft werden.
 
-  Dieser Link zeigt eine Liste aller mit E-Mail registrierten Benutzer, und Checkboxes um die 
+  Dieser Link zeigt eine Liste aller mit E-Mail registrierten Benutzer, und Checkboxes um die
   Verifizierung manuell zu ändern.
 
   <<WikiAdminUtils
@@ -45,7 +45,7 @@ Email Verification:
 == Aufräumen ==
 
 Räume die Wiki SandKiste auf. Hiermit kann man die Seite mit der
-Version von locale/de/pgsrc/SandKiste erneut initialisieren: 
+Version von locale/de/pgsrc/SandKiste erneut initialisieren:
 
 [ SandKiste löschen | phpwiki:?action=loadfile&overwrite=1&source=locale/de/pgsrc/SandKiste ].
 
@@ -147,7 +147,7 @@ einfache Textdatei.)
 
   <<WikiForm action=dumphtml>>
 
-Erzeugt ein Verzeichnis aller Wiki Dateien als statische XHTML Dateien, die 
+Erzeugt ein Verzeichnis aller Wiki Dateien als statische XHTML Dateien, die
 auch ohne Webserver und Datenbank betrachtbar sind.
 
   Das XHTML-Verzeichnis kann auch heruntergeladen werden als eine
@@ -187,7 +187,7 @@ might create one....
   <<WikiAdminUtils
            action=purge-bad-pagenames
            label="WikiDB Bereinigen"
-   >> 
+   >>
 
 
 === Clean WikiDB of empty and unreferenced pages
@@ -202,8 +202,8 @@ might create one....
 
 === Convert cached_html to new SQL column
 
-  This is only needed on SQL or ADODB if you didn't do action=upgrade, but created the 
-  new page.cached_html field separately, and now you want to move this data from 
+  This is only needed on SQL or ADODB if you didn't do action=upgrade, but created the
+  new page.cached_html field separately, and now you want to move this data from
   page.pagedata over to page.cached_html.
 
   <<WikiAdminUtils
@@ -223,7 +223,7 @@ might create one....
 
 === Rebuild WikiDB
 
-  This will retransform all pages and rebuild the Wiki database on consistency errors or parser updates. 
+  This will retransform all pages and rebuild the Wiki database on consistency errors or parser updates.
   This can last several minutes, eat a lot of memory and possibly times out===
 
   <<WikiAdminUtils

@@ -1,4 +1,4 @@
-Date: Thu, 13 Jun 2013 17:01:53 +0000
+Date: Mon,  8 Jul 2013 17:59:06 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=AmministrazioneDiPhpWiki;
@@ -95,7 +95,7 @@ server. You can also use this form to load from an http: or ftp: URL.
 
 === Upgrade
 
-Do some verification checks and upgrade changes automatically, after having installed a 
+Do some verification checks and upgrade changes automatically, after having installed a
 new phpwiki engine update:
 * Upgrade new or changed page revisions from pgsrc,
 * Upgrade the database schema (mysql _page.id auto_increment_, ADD _session.sess_ip_),

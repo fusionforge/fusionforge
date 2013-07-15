@@ -1,4 +1,4 @@
-Date: Fri, 10 Sep 2010 13:48:42 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Hilfe%2FPhotoAlbumPlugin;
@@ -7,9 +7,9 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 == Zusammenfassung
-Zeigt eine Liste von Bilder aus einer Definitionsdatei mit optionaler Beschreibung als Album an. 
+Zeigt eine Liste von Bilder aus einer Definitionsdatei mit optionaler Beschreibung als Album an.
 
-== Benutzung 
+== Benutzung
 {{{
 <<PhotoAlbum
          src=http://server/textfile
@@ -27,14 +27,14 @@ Zeigt eine Liste von Bilder aus einer Definitionsdatei mit optionaler Beschreibu
 _Nur der ='src'= Parameter ist verpflichtend._
 
 *src*:
-  Url or local path to a CSV textfile which separates filename and 
+  Url or local path to a CSV textfile which separates filename and
   description of each photo. Photos listed in the text file have to be in same
   directory as the file. Descriptions are optional.
-  If the the local path points to a directory, is relative from PHPWIKI_DIR, 
-  and the main script is in PHPWIKI_DIR, weblocation must not be given, and 
+  If the the local path points to a directory, is relative from PHPWIKI_DIR,
+  and the main script is in PHPWIKI_DIR, weblocation must not be given, and
   all pictures from this directory are displayed.
 
-*url*: 
+*url*:
   defines the the webpath to the srcdir directory (formerly called weblocation)
 
 *mode*:
@@ -52,9 +52,9 @@ _Nur der ='src'= Parameter ist verpflichtend._
   "desc"   - Only description (from textfile) shown %%%
   "both"   - If no description found, then filename will be used %%%
 
-*link*: 
+*link*:
   true or false
-  If true, each image will be hyperlinked to a page where the single 
+  If true, each image will be hyperlinked to a page where the single
   photo will be shown full-size. Only works when mode != 'normal'
 
 *align*:
@@ -75,7 +75,7 @@ _Nur der ='src'= Parameter ist verpflichtend._
 
 *height*, *width*:
   Height and width are calculated compared to original metrics
-  retrieved by [php-function:getimagesize] and can be absolute (50px) 
+  retrieved by [php-function:getimagesize] and can be absolute (50px)
   or a percentage (e.g. "50%").
 
 *attrib*:

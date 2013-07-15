@@ -1,4 +1,4 @@
-Date: Tue, 25 Jan 2011 21:26:14 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginCalendrier;
@@ -41,7 +41,7 @@ Le calendrier suivant affiche systématiquement le mois suivant le mois courant 
 
 **date_format** |
   [Strftime| php-function:strftime] format de la chaîne utilisée pour générer le nom des pages pour les "pages du jour". La valeur par défaut est =%Y-%m-%d=.
-**prefix** | 
+**prefix** |
   Préfixe pour la date (formatée par ''date_format'') pour générer les noms des "pages du jour". La valeur par défaut est =~[pagename]/=.
 
 === Apparence

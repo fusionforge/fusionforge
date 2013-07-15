@@ -1,4 +1,4 @@
-Date: Tue,  4 Jan 2011 11:58:08 +0000
+Date: Mon,  8 Jul 2013 17:59:06 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aiuto%2FComeUsareWiki;
@@ -14,7 +14,7 @@ Content-Transfer-Encoding: binary
 
 * Puoi ottenere il corsivo circondando le parole con due apici da entrambe le parti come ''questo ad esempio''
 
-* Puoi ottenere testo in **grassetto** usando gli underscore in questo modo sempre circondando il testo 
+* Puoi ottenere testo in **grassetto** usando gli underscore in questo modo sempre circondando il testo
 * E, **''grassetto corsivo''** usandoli entrambi
 * Potrai ottenere liste puntate aggiungendo un
 * all'inizio di una linea
@@ -40,7 +40,7 @@ Anche io sono un paragrafo. Siamo dei piccoli paragrafi.
 
 * Per inserire immagini, basta usare un link tra parentesi quadre come
 * questo [[http://www.iltuohost.iltuodominio/images/picture.png. le
-* immagini non in parentesi quadre saranno trattate come URL normali. 
+* immagini non in parentesi quadre saranno trattate come URL normali.
 * Ora sei pronto per AggiungerePagine
 
 ----

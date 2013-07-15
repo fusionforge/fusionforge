@@ -1,4 +1,4 @@
-Date: Thu, 29 Nov 2012 10:44:57 +0000
+Date: Mon,  8 Jul 2013 17:58:18 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FVisualWikiPlugin;
@@ -32,7 +32,7 @@ Arguments allowed only if VISUALWIKI_ALLOWOPTIONS is true.
 |-
 | **width**
 |
-| false 
+| false
 |-
 | **height**
 |

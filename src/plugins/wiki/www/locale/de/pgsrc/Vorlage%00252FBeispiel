@@ -1,4 +1,4 @@
-Date: Fri, 10 Sep 2010 13:48:42 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Vorlage%2FBeispiel;
@@ -7,13 +7,13 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 <noinclude>
-Die folgenden vordefinierten Variablen werden zwischen zwei %% gesetzt automatisch expandiert, 
+Die folgenden vordefinierten Variablen werden zwischen zwei %% gesetzt automatisch expandiert,
 auf ihren Wert gesetzt:
   pagename
   mtime     - last modified date + time
   ctime     - creation date + time
   author    - last author
-  owner     
+  owner    
   creator   - first author
   SERVER_URL, DATA_PATH, SCRIPT_NAME, PHPWIKI_BASE_URL and BASE_URL
 </noinclude>

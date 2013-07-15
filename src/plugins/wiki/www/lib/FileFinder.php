@@ -195,10 +195,7 @@ class FileFinder
      */
     function _not_found($file)
     {
-        if (function_exists("_"))
-            trigger_error(sprintf(_("%s: file not found"), $file), E_USER_ERROR);
-        else
-            trigger_error(sprintf("%s: file not found", $file), E_USER_ERROR);
+        trigger_error(sprintf(_("%s: file not found"), $file), E_USER_ERROR);
         return false;
     }
 

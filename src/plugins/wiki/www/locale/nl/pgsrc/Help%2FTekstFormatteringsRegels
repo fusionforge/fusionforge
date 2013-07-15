@@ -1,4 +1,4 @@
-Date: Mon, 17 Jun 2013 12:20:41 +0000
+Date: Mon,  8 Jul 2013 17:59:07 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FTekstFormatteringsRegels;
@@ -144,7 +144,7 @@ regelbreuken niet oversteken.
   gives
   <<BackLinks page=HomePage info=hits >>
 
-* For more information on plugins see WikiPlugin, and PluginManager for a list of all 
+* For more information on plugins see WikiPlugin, and PluginManager for a list of all
   plugins.
 
 ----

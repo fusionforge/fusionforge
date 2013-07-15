@@ -1,4 +1,4 @@
-Date: Tue, 25 Jan 2011 21:26:14 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginInclureUnCadre;
@@ -6,10 +6,10 @@ Content-Type: application/x-phpwiki;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Ce plugin créera un cadre HTML qui remplira complètement la surface de la 
-page (c'est-à-dire toute la surface que l'utilisateur peut éditer). Tout 
-autre texte sera rejeté quand la page est affichée (tout ce qui est en 
-dehors de l'appel du plugin). Dans le langage de l'hypertexte, ça s'appelle 
+Ce plugin créera un cadre HTML qui remplira complètement la surface de la
+page (c'est-à-dire toute la surface que l'utilisateur peut éditer). Tout
+autre texte sera rejeté quand la page est affichée (tout ce qui est en
+dehors de l'appel du plugin). Dans le langage de l'hypertexte, ça s'appelle
 la <i>transclusion</i>.
 
 Vous pouvez être intéressé également par PluginInclureUnePage.

@@ -42,8 +42,6 @@
   <?php echo _("Edit Area Size")?>: <b><?php echo _("H")?></b> <?php echo $HEIGHT_PREF?> 
   <b><?php echo _("W")?></b> <?php echo $WIDTH_PREF?>
   <?php echo Button("submit:", _("Adjust"), 'wikiaction')?>
-  <br />
-  <?php echo $OLD_MARKUP_CB?>  <?php echo _("Use old markup")?>
 </p>
 
 <?php if (isset($PREVIEW_CONTENT)) { ?>
@@ -53,41 +51,12 @@
   <hr />
 <?php } ?>
 
-<script type="text/javascript">
-<!--
-function showOldMarkupRules(show) {
-  if (document.getElementById) {
-    if (!show) {
-      document.getElementById('newMarkup').style.display="block";
-      document.getElementById('oldMarkup').style.display="none";
-    } else {
-      document.getElementById('newMarkup').style.display="none";
-      document.getElementById('oldMarkup').style.display="block";
-    }
-  }
-}
-// -->
-</script>
-
-<div id="oldMarkup" class="wiki-edithelp">
-<!-- FIXME: do we need this at all?  If so, it could probably be moved to TextFormattingRules -->
-<p><?php echo fmt("See %s tips for editing.", WikiLink(_("Help")."/"._("GoodStyle"))) ?></p>
-<?plugin IncludePage page=_("Help")."/"._("OldTextFormattingRules") section=_("Synopsis") quiet=1?>
-</div>
-<div id="newMarkup" class="wiki-edithelp">
+<div class="wiki-edithelp">
 <!-- FIXME: do we need this at all?  If so, it could probably be moved to TextFormattingRules -->
 <p><?php echo fmt("See %s tips for editing.", WikiLink(_("Help")."/"._("GoodStyle"))) ?></p>
 <?plugin IncludePage page=_("Help")."/"._("TextFormattingRules") section=_("Synopsis") quiet=1?>
 </div>
 <?php echo $HIDDEN_INPUTS?>
 </form>
-
-<script type="text/javascript">
-<!--
-if (document.getElementById) {
-  showOldMarkupRules(document.getElementById('useOldMarkup').checked);
-}
-// -->
-</script>
 
 <hr />

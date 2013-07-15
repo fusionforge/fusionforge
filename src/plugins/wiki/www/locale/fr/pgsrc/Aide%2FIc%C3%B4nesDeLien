@@ -1,4 +1,4 @@
-Date: Thu, 27 Jan 2011 18:00:26 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FIc%C3%B4nesDeLien;
@@ -8,8 +8,8 @@ Content-Transfer-Encoding: binary
 
 == Description ==
 
-Les **~IcônesDeLien** forment une nouvelle caractéristique optionnelle de ~PhpWiki. 
-Lorsqu'elles sont activées, des icônes seront affichées devant les URL pour 
+Les **~IcônesDeLien** forment une nouvelle caractéristique optionnelle de ~PhpWiki.
+Lorsqu'elles sont activées, des icônes seront affichées devant les URL pour
 indiquer de quel type de lien il s'agit.
 
 | {{/themes/default/images/http.png}}      | lien http
@@ -41,10 +41,10 @@ Les exemples suivants ne s'afficheront avec les icônes de lien ci-dessus que si
 
 //Une icône générique est affichée pour les autres liens d'un type moins commun.//
 * news://nntp.news.com]
-* gopher://gopher.caltech.cmu.edu 
+* gopher://gopher.caltech.cmu.edu
 
-IcônesDeLien s'affichera seulement lorsque le protocole d'URL fait partie de ceux qui 
-sont autorisé dans PhpWiki. Les exemples suivants ne montrent rien et PhpWiki ignorera 
+IcônesDeLien s'affichera seulement lorsque le protocole d'URL fait partie de ceux qui
+sont autorisé dans PhpWiki. Les exemples suivants ne montrent rien et PhpWiki ignorera
 l'activation du double-clique à moins que l'administrateur l'ajoute :
 
 * bogus://oedipus.nostradamus.com %%%

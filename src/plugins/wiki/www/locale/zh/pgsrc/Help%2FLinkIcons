@@ -1,4 +1,4 @@
-Date: Wed, 19 Dec 2012 12:29:17 +0000
+Date: Mon,  8 Jul 2013 17:59:07 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FLinkIcons;
@@ -43,7 +43,7 @@ alpha channel 特色以便能夠平順的在任何有顏色或有背景頁面被
 * gopher://gopher.caltech.cmu.edu
 
 LinkIcons 將在 URL 協定是 PhpWiki 允許並能連結的時候才顯示. 除非管理者加上,
-否則以下的範例無法顯示任何圖示,而 PhpWiki 也不會自動提供雙擊的連結, 
+否則以下的範例無法顯示任何圖示,而 PhpWiki 也不會自動提供雙擊的連結,
 
 * bogus://oedipus.nostradamus.com
 * bolo://lgm.cheshire.org

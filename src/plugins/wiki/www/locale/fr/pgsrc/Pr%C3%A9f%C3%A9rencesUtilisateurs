@@ -1,4 +1,4 @@
-Date: Tue, 25 Jan 2011 21:26:14 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Pr%C3%A9f%C3%A9rencesUtilisateurs;
@@ -6,9 +6,9 @@ Content-Type: application/x-phpwiki;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Vous pouvez désormais définir quelques préférences utilisateur. 
-Les valeurs de ces préférences sont actuellement stockées dans un 
-cookie (vous devez donc avoir validé les cookies pour pouvoir 
+Vous pouvez désormais définir quelques préférences utilisateur.
+Les valeurs de ces préférences sont actuellement stockées dans un
+cookie (vous devez donc avoir validé les cookies pour pouvoir
 utiliser cette fonctionnalité).
 
 <<UserPreferences>>

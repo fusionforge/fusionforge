@@ -1,4 +1,4 @@
-Date: Tue, 25 Jan 2011 17:50:09 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginCr%C3%A9erUnePage;
@@ -8,7 +8,7 @@ Content-Transfer-Encoding: binary
 
 ===Description
 
-PluginCréerUnePage vous permet (depuis v1.3.8) de créer facilement de nouvelles 
+PluginCréerUnePage vous permet (depuis v1.3.8) de créer facilement de nouvelles
 pages, éventuellement avec un contenu par défaut
 
 Il vous permet de créer une page avec un nouveau nom depuis un formulaire et éventuellement
@@ -28,14 +28,14 @@ de la page à créer puis cliquez sur le bouton.
 **s**: |
   Le nom de la page qui sera passé au plugin. Par défaut : ""
 **initial_content**:  |
-  La nouvelle page sera pré-remplie avec ce contenu. Par défaut : "" 
+  La nouvelle page sera pré-remplie avec ce contenu. Par défaut : ""
 **template**:  |
-  La nouvelle page sera pré-remplie avec ce contenu de cette page. Par défaut : "" 
+  La nouvelle page sera pré-remplie avec ce contenu de cette page. Par défaut : ""
 
 
 ===Projets
 
-Le contenu peut avoir des variables qui seront déployées lors de la création. 
+Le contenu peut avoir des variables qui seront déployées lors de la création.
 La syntaxe n'est pas encore claire.
 
 ===Auteur

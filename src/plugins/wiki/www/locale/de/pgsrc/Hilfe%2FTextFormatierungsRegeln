@@ -1,4 +1,4 @@
-Date: Mon, 17 Jun 2013 13:19:42 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Hilfe%2FTextFormatierungsRegeln;
@@ -106,24 +106,24 @@ Schau dir am besten auch den »Quelltext« dieser Seite an, indem du unten auf d
 
 == Querverweise (Links) ==
 
-* Hyperlinks zu anderen Seiten im Wiki werden erstellt, indem man den Namen in eckige Klammern 
+* Hyperlinks zu anderen Seiten im Wiki werden erstellt, indem man den Namen in eckige Klammern
   einschließt [das ist ein Link] oder besser WikiWörterVerwendet.
 * Hyperlinks zu externen Seiten werden so erstellt: [http://www.wcsb.org/]
-* Du kannst Links zu externen Seiten einen Namen geben, indem du in der eckigen Klammer erst 
+* Du kannst Links zu externen Seiten einen Namen geben, indem du in der eckigen Klammer erst
   den Namen und dann, getrennt durch einen senkrechten Strich (|), die Adresse angibst:
   [PhpWiki Homepage | http://phpwiki.sourceforge.net/] ---
   [Die Start Seite | StartSeite]
 
-* Du kannst das Erstellen eines Links verhindern, indem du vor das Wort eine 
+* Du kannst das Erstellen eines Links verhindern, indem du vor das Wort eine
   Tilde '<tt>~~</tt>' setzt, zum Beispiel ~DasIstKeinLink.
   ~http://not.linked.to/
 * You can create footnotes by using ~[1], ~[2], ~[3], ... like this here #[|ftnt
-_ref_1]<sup>~[[1|#ftnt_1]~]</sup>. See footnote for counterpart.  (If the ~[ is 
+_ref_1]<sup>~[[1|#ftnt_1]~]</sup>. See footnote for counterpart.  (If the ~[ is
 in the first column, it is a footnote <em>definition</em> rather than a footnote
  <em>reference</em> #[|ftnt_ref_1]<sup>~[[1|#ftnt_1]~]</sup>.)
-* Wenn du im Text Adressen eingibst, die mit **http:**, **ftp:** oder **mailto:** beginnen, 
+* Wenn du im Text Adressen eingibst, die mit **http:**, **ftp:** oder **mailto:** beginnen,
   werden diese auch automatisch in Links umgewandelt, zum Beispiel http://c2.com/
-* Adressen, die mit **.png** oder **.jpg** enden (d.h. Bilder) werden in die Seite 
+* Adressen, die mit **.png** oder **.jpg** enden (d.h. Bilder) werden in die Seite
   eingefügt, wenn sie in eckige Klammern gesetzt werden, z. B.: [http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/png.png]
 
 == Tabellen ==

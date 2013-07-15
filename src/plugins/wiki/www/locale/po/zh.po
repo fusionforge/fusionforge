@@ -1,4 +1,4 @@
-# Traditional Chinese(UTF-8) PhpWiki locale
+# Traditional Chinese PhpWiki locale
 # This file is part of PhpWiki.
 # Copyright (C) Copyright 1999, 2000, 2001, 2002 ThePhpWikiProgrammingTeam.
 #
@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-19 15:31+0200\n"
+"POT-Creation-Date: 2013-06-28 14:17+0200\n"
 "PO-Revision-Date: 2004-04-21 10:08+0800\n"
 "Last-Translator: DruryL <druryl@user.sourceforge.net>\n"
 "Language-Team: DruryL <druryl@users.sourceforge.net>\n"
@@ -2438,16 +2438,12 @@ msgid "no page specified"
 msgstr "沒有指定頁面"
 
 #, php-format
+msgid "Rating: %s (%d vote"
+msgstr ""
+
+#, php-format
 msgid "Your rating was %.1f"
 msgstr "你的評比是 %.1f"
-
-#, fuzzy, php-format
-msgid "Prediction: %s"
-msgstr "編輯: %s"
-
-#, fuzzy, php-format
-msgid "Prediction: %.1f"
-msgstr "編輯: %s"
 
 msgid "RateIt"
 msgstr ""
@@ -5488,12 +5484,6 @@ msgstr "內容"
 msgid "This is a minor change."
 msgstr "這是次要變更."
 
-msgid "Use old markup"
-msgstr "使用舊標記"
-
-msgid "OldTextFormattingRules"
-msgstr ""
-
 msgid "HowToUseWiki"
 msgstr ""
 
@@ -6207,6 +6197,9 @@ msgstr "搜尋"
 msgid "Edit this page"
 msgstr "編輯此頁面"
 
+#~ msgid "Use old markup"
+#~ msgstr "使用舊標記"
+
 #, fuzzy
 #~ msgid "_PreferencesInfo"
 #~ msgstr "偏好設定"
@@ -6252,6 +6245,14 @@ msgstr "編輯此頁面"
 
 #~ msgid "Original (1.2 or 1.0)"
 #~ msgstr "原始 (1.2 或 1.0)"
+
+#, fuzzy
+#~ msgid "Prediction: %s"
+#~ msgstr "編輯: %s"
+
+#, fuzzy
+#~ msgid "Prediction: %.1f"
+#~ msgstr "編輯: %s"
 
 #, fuzzy
 #~ msgid "%s not found"

@@ -1,4 +1,4 @@
-Date: Tue, 25 Jan 2011 17:50:09 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginAlbumPhotos;
@@ -31,19 +31,19 @@ un fichier de texte avec des descriptions optionnelles.
 ''='src'= est le seul paramètre obligatoire.''
 
 **src**:
-  Url ou chemin local pour un fichier CSV où chaque ligne est un nom de 
-  fichier de photo et une description de la photo. Les photos sont dans le 
+  Url ou chemin local pour un fichier CSV où chaque ligne est un nom de
+  fichier de photo et une description de la photo. Les photos sont dans le
   même répertoire que le fichier. Les descriptions sont facultatives. Si
-  le chemin local est un répertoire relatif à PHPWIKI_DIR et que le script 
-  principal est dans PHPWIKI_DIR, alors la localisation des fichiers ne 
+  le chemin local est un répertoire relatif à PHPWIKI_DIR et que le script
+  principal est dans PHPWIKI_DIR, alors la localisation des fichiers ne
   doit pas être donnée et toutes les images du répertoire sont affichées.
 
 **weblocation**:
-  Chemin optionnel si les sources pointent vers un répertoire local et 
+  Chemin optionnel si les sources pointent vers un répertoire local et
   que les liens vers les photos ne fonctionnent pas.
 
 **mode**:
-  Spécifie comment les images sont rangées : ='column'= signifie 
+  Spécifie comment les images sont rangées : ='column'= signifie
   verticalement, ='row'= signifie horizontalement . Par défaut : ='row'=.
 
 **align**:
@@ -53,7 +53,7 @@ un fichier de texte avec des descriptions optionnelles.
   Affiche les descriptions données dans le fichier. Vrai par défaut.
 
 **sort**:
-  Tri les images par nom de fichier. Par défaut, c'est l'ordre dans le 
+  Tri les images par nom de fichier. Par défaut, c'est l'ordre dans le
   fichier texte qui est suivi.
 
 **height**, **width**:

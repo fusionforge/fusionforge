@@ -1,4 +1,4 @@
-Date: Fri, 11 Jan 2013 11:17:06 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=ModerierteSeite;
@@ -12,15 +12,15 @@ Content-Transfer-Encoding: binary
 
 == Was ist eine ModerierteSeite?
 
-Eine ModerierteSeite ist ein seitenspezifische Einstellung, die gewisse Aktionen auf moderierten 
-Seiten einschränkt. 
+Eine ModerierteSeite ist ein seitenspezifische Einstellung, die gewisse Aktionen auf moderierten
+Seiten einschränkt.
 The requested action and page is stored internally and an email is sent to the moderators
-described in the linked and locked ModeratedPage action page. 
-Any moderator may approve or reject the action by simply clicking an url. 
-When approving the action, the requested action (edit, rename, ...) is performed. 
+described in the linked and locked ModeratedPage action page.
+Any moderator may approve or reject the action by simply clicking an url.
+When approving the action, the requested action (edit, rename, ...) is performed.
 
 In both cases the author is notified, so it's recommended for the
-moderator to click on either the approve or reject links in the moderation email. 
+moderator to click on either the approve or reject links in the moderation email.
 In case of multiple moderators: first comes, first serves.
 
 == How to enable ModerierteSeite on a single page?
@@ -41,7 +41,7 @@ In case of multiple moderators: first comes, first serves.
 == Plugin Arguments
 
 * moderators: comma separated list of registered usernames or groups.
-  Each user should have his email defined in his prefs. Default: "Administrators" or 
+  Each user should have his email defined in his prefs. Default: "Administrators" or
   <<SystemInfo ADMIN_USER >>
 * requirelevel: one of 0, 1, 2 or 10 on which moderation is used. Default: false (use requireaccess instead)
 * requireaccess: comma separated list of access perms, on which the moderation is used
@@ -50,25 +50,25 @@ In case of multiple moderators: first comes, first serves.
 
 == How does it work internally?
 
-You need to lock the page additionally, so that the link parser performs 
-some magic whether the ModerierteSeite link is present or not, for efficiency 
-reasons. It can be unlocked again, and even the ModeratedPage link may be removed. 
-The status will only be changed on the *lock* action, whether the ModeratedPage 
+You need to lock the page additionally, so that the link parser performs
+some magic whether the ModerierteSeite link is present or not, for efficiency
+reasons. It can be unlocked again, and even the ModeratedPage link may be removed.
+The status will only be changed on the *lock* action, whether the ModeratedPage
 link is present or not.
 
-The moderation status is stored in each page in question. 
+The moderation status is stored in each page in question.
 Each moderated action is stored in the page also, together with a randomly
-created permission key to allow Grant by a simple external unauthorized request. 
-There's no timeout on moderated actions, so the actions may stack up. 
-The delayed actions may be performed in any order, there's no strict ordering to 
+created permission key to allow Grant by a simple external unauthorized request.
+There's no timeout on moderated actions, so the actions may stack up.
+The delayed actions may be performed in any order, there's no strict ordering to
 follow for the moderator.
 
 == How to enable ModerierteSeite on multiple/all pages?
 
-If you enable the config option ENABLE_MODERATEDPAGE_ALL, the page moderation status on 
+If you enable the config option ENABLE_MODERATEDPAGE_ALL, the page moderation status on
 every page is automatically set to check this action page ModeratedPage.
 
-There may come another administrative plugin to change the moderation 
+There may come another administrative plugin to change the moderation
 status on selected pages.
 
 ----

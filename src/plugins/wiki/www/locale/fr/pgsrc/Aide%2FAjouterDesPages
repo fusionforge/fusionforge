@@ -1,4 +1,4 @@
-Date: Thu, 27 Jan 2011 10:22:55 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FAjouterDesPages;
@@ -6,25 +6,25 @@ Content-Type: application/x-phpwiki;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Pour ajouter une nouvelle page à Wiki, vous n'avez qu'à trouver un titre 
-parlant, mettre en majuscules toutes les initiales des mots (au moins deux) et les 
-CollerEnsembleCommeCeci. Wiki le reconnaîtra automagiquement comme étant 
+Pour ajouter une nouvelle page à Wiki, vous n'avez qu'à trouver un titre
+parlant, mettre en majuscules toutes les initiales des mots (au moins deux) et les
+CollerEnsembleCommeCeci. Wiki le reconnaîtra automagiquement comme étant
 un hyperlien. Éventullement, vous pouvez mettre n'importe quoi entre [crochets]
 mais c'est conseillé d'utiliser les majuscules.
 
-Vous pouvez alors y aller et CliquerSurLePointdInterrogation au bout de votre 
+Vous pouvez alors y aller et CliquerSurLePointdInterrogation au bout de votre
 nouvel hyperlien, et le Wiki vous donnera une fenêtre pour créer la nouvelle page.
 
-Si vous désirez ajouter au Wiki un document complexe, vous vous en sortirez 
-probablement mieux en fournissant l'URL pointant vers lui plutôt qu'en essayant 
-d'ajouter ici le texte du document. Voici par exemple un lien vers la page 
+Si vous désirez ajouter au Wiki un document complexe, vous vous en sortirez
+probablement mieux en fournissant l'URL pointant vers lui plutôt qu'en essayant
+d'ajouter ici le texte du document. Voici par exemple un lien vers la page
 d'accueil du projet PhpWiki : http://phpwiki.sourceforge.net/
 
-Le Wiki ne gère pas les balises HTML (voir RèglesDeFormatageDesTextes). <tags>Ils 
-sortiront juste sous forme de texte.</tags> Wiki est conçu pour être aussi simple 
+Le Wiki ne gère pas les balises HTML (voir RèglesDeFormatageDesTextes). <tags>Ils
+sortiront juste sous forme de texte.</tags> Wiki est conçu pour être aussi simple
 que possible pour encourager son utilisation.
 
-Notez qu'il existe une fonctionnalité que votre administrateur système peut valider 
+Notez qu'il existe une fonctionnalité que votre administrateur système peut valider
 pour autoriser le HTML incorporé, mais cela implique des risques de sécurité.
 
 <noinclude>

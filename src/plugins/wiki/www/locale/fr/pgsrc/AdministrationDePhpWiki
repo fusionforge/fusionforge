@@ -1,4 +1,4 @@
-Date: Tue, 16 Apr 2013 17:14:34 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=AdministrationDePhpWiki;
@@ -6,9 +6,9 @@ Content-Type: application/x-phpwiki;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-_*Note :*_ _La plupart des actions sur cette page nécessitent des privilèges 
-d'administrateur. Elles ne fonctionneront pas à moins que vous ayez défini un 
-nom d'administrateur et un mot de passe dans le fichier de configuration de 
+_*Note :*_ _La plupart des actions sur cette page nécessitent des privilèges
+d'administrateur. Elles ne fonctionneront pas à moins que vous ayez défini un
+nom d'administrateur et un mot de passe dans le fichier de configuration de
 PhpWiki_
 
 <<CreateToc jshide||=1 with_toclink||=1>>
@@ -36,7 +36,7 @@ Ce bouton affichera la liste de tous les utilisateurs qui ont une adresse reconn
 
 == Nettoyage
 
-Le [BacÀSable] Wiki est très simple à nettoyer. Vous pouvez ici le restaurer 
+Le [BacÀSable] Wiki est très simple à nettoyer. Vous pouvez ici le restaurer
 dans un état virginal en chargeant sa version par défaut depuis pgsrc:
 
 [ Râtisser le BacÀSable | phpwiki:?action=loadfile&source=pgsrc/SandBox ]
@@ -79,7 +79,7 @@ Ici vous pouvez télécharger des archives ZIP, des fichiers individuels ou des 
 
 === Mise à jour
 
-Fait quelques vérifications et mises à jours automatiquement après avoir installé un nouveau moteur phpwiki de mise à jour 
+Fait quelques vérifications et mises à jours automatiquement après avoir installé un nouveau moteur phpwiki de mise à jour
 * Met à jour les nouvelles pages ou les pages révisées depuis pgsrc
 * Met à jour la base de données (mysql _page.id auto_increment_, ADD _session.sess_ip_),
 
@@ -113,7 +113,7 @@ La collection de fichiers XHTML peut aussi être téléchargée comme une **[XHT
 
 Tout ceci surtout pour des débogages (au moins c'est ce que j'espère).
 
-En utilisation normale, vous ne devriez par les utiliser mais ça ne devrait 
+En utilisation normale, vous ne devriez par les utiliser mais ça ne devrait
 pas vous faire de mal.
 
 === Purger le cache
@@ -131,7 +131,7 @@ Une pression sur ce bouton effacera tout le cache. Le contenu de chaque page ser
 
  *Attention!* en appuyant sur ce bouton toutes les pages vides et non référencées seront supprimées sans aucune possiblité de les restaurer.
  Ceci supprimera toute possibilité de retrouver les page ainsi supprimées.
- 
+
  <<WikiAdminUtils
            action=purge-empty-pages
            label="Purge all empty unreferenced pages"

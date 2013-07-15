@@ -1,4 +1,4 @@
-Date: Tue, 25 Jan 2011 21:17:11 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=R%C3%A9cup%C3%A9rationDeLaPage;
@@ -8,7 +8,7 @@ Content-Transfer-Encoding: binary
 
 
 Voir une page wiki dans le format MIME ou la télécharger comme copie
-d'une page unique. _Un vidage complet de toutes les pages est possible 
+d'une page unique. _Un vidage complet de toutes les pages est possible
 avec AdministrationDePhpWiki._
 
 <<PageDump>>

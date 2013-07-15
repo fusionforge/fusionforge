@@ -1,4 +1,4 @@
-Date: Tue, 25 Jan 2011 21:26:14 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginCr%C3%A9erUneTdm;
@@ -10,8 +10,8 @@ Content-Transfer-Encoding: binary
 
 ===Descrition
 
-PluginCréerUneTdm vous permet (depuis v1.3.8) de créer automatiquement 
-une *Table des matières* dynamique de tous les en-têtes (titres et sous-titres). 
+PluginCréerUneTdm vous permet (depuis v1.3.8) de créer automatiquement
+une *Table des matières* dynamique de tous les en-têtes (titres et sous-titres).
 
 ===Usage
 
@@ -39,7 +39,7 @@ une *Table des matières* dynamique de tous les en-têtes (titres et sous-titres
 
 ===Problèmes connus
 
-Si un en-tête contient un lien ou un ~WikiWord ou des caractères d'échappement, ~CreateToc 
+Si un en-tête contient un lien ou un ~WikiWord ou des caractères d'échappement, ~CreateToc
 affichera un message d'avertissement et refusera de lier cet en-tête.
 
 ===Exemples

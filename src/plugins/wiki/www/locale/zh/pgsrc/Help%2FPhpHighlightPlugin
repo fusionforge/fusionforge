@@ -1,4 +1,4 @@
-Date: Fri, 10 Sep 2010 13:48:49 +0000
+Date: Mon,  8 Jul 2013 17:59:07 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPhpHighlightPlugin;
@@ -22,8 +22,8 @@ code to be highlighted
 == Description
 
 plugin 將視 =wrap= 選項決定是否要在傳入 php-function:highlight-string 之前
-適切地加入 =<?php= 與 =?>= . 如果加入了 PHP 分隔子,那麼 plugin 在輸出之前, 
-會從 highlighted 字串再次移除他們. 
+適切地加入 =<?php= 與 =?>= . 如果加入了 PHP 分隔子,那麼 plugin 在輸出之前,
+會從 highlighted 字串再次移除他們.
 
 == Options
 

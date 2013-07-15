@@ -1,4 +1,4 @@
-Date: Wed, 19 Dec 2012 13:19:42 +0000
+Date: Mon,  8 Jul 2013 17:59:06 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aiuto%2FRegoleFormattazioneTesto;
@@ -29,7 +29,7 @@ RegoleFormattazioneTesto%%%
 
 * asterisco per il primo livello.
 ** asterisco-asterisco per il secondo livello etc, etc
-* Usa * per le liste puntate o # per quelle numerate, mischiale come vuoi 
+* Usa * per le liste puntate o # per quelle numerate, mischiale come vuoi
 * semicolon-term-colon-definition for definition lists:
 ;term here:definition here, as in the <DL><DT><DD> list
 * Una linea per ogni elemento
@@ -69,10 +69,10 @@ non funzionerà''
 ! Links (o collegamenti)
 * I collegamenti alle altre pagine all'interno del Wiki sono fatti usando un nome circondato da parentesi quadre: [questo è un link] oppure UsandoLeWikiWords (metodo preferito)
 * I collegamento alle pagine esterne sono fatti in questo modo: [http://www.wcsb.org]
-* Puoi anche dare un nome al collegamento fornendo una barra o pipe (|) all'inizio del link, ad esempio: [La pagina di PhpWiki | http://phpwiki.sourceforge.net/] - [La pagina princiale | PaginaPrincipale] 
+* Puoi anche dare un nome al collegamento fornendo una barra o pipe (|) all'inizio del link, ad esempio: [La pagina di PhpWiki | http://phpwiki.sourceforge.net/] - [La pagina princiale | PaginaPrincipale]
 * Puoi eliminare i link in vecchi stile facendo precedere un URI da un punto esclamativo, come ad esempio !NotEUnWikiName, oppure !http://non.e.linkato
 * [1], [2], [3], [4] refer to remote references. Click EditLinks on the edit form to enter URLs. These differ from the newer linking scheme; references are unique to a page.
-* In ogni caso il vecchio modo di fare collegamenti è ancora supportato, quindi si potranno usare "http:", "ftp:", o "mailto:" per creare automaticamente link, come in http://c2.com 
+* In ogni caso il vecchio modo di fare collegamenti è ancora supportato, quindi si potranno usare "http:", "ftp:", o "mailto:" per creare automaticamente link, come in http://c2.com
 * Gli URL che finiscono in .png, .gif o .jpg sono racchiuse da parentesi quadre e permettono di inserire un'immagine, as esempio: [http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/png.png]
 
 

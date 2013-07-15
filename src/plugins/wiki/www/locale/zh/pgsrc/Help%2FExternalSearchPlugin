@@ -1,4 +1,4 @@
-Date: Fri,  4 Feb 2011 16:44:25 +0000
+Date: Mon,  8 Jul 2013 17:59:07 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FExternalSearchPlugin;
@@ -26,7 +26,7 @@ ExternalSearchPlugin 建立可以查詢 InterWiki 或其他內部站台的表單
   而不是附加了.
 
 **name**:
-  在送出按鈕上的文字. 對 InterWiki 站台來說,預設為 wiki 名稱,對其他 url 
+  在送出按鈕上的文字. 對 InterWiki 站台來說,預設為 wiki 名稱,對其他 url
   來說,預設為 "External Search".
 
 **formsize**:

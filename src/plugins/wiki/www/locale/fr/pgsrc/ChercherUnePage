@@ -1,4 +1,4 @@
-Date: Wed, 26 Jan 2011 15:38:21 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=ChercherUnePage;
@@ -16,12 +16,12 @@ Voici une recherche sur les titres. Essayez quelque chose comme ''wiki'' ou ''sa
 
 <?plugin-form TitleSearch?>
 
-Utilisez ce qui suit pour une recherche en texte intégral. Ceci prend quelques secondes. 
+Utilisez ce qui suit pour une recherche en texte intégral. Ceci prend quelques secondes.
 Les résultats montreront toutes les lignes de chaque page contenant une correspondance.
 
 <?plugin-form FullTextSearch?>
 
-Dans une recherche !PagesFloues les titres de toutes les pages sont examinés pour trouver 
+Dans une recherche !PagesFloues les titres de toutes les pages sont examinés pour trouver
 ceux qui s'épellent ou sonnent de façon similaire (en anglais).
 
 <?plugin-form FuzzyPages?>

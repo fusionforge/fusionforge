@@ -1,4 +1,4 @@
-Date: Tue,  4 Jan 2011 11:59:17 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Ayuda%2FReglasDeFormatoDeTexto;
@@ -12,7 +12,7 @@ ReglasDeFormatoDeTexto%%%
 **Énfasis:** '****' para ''itálicas'', _''''_ para **bold**, '****'_''''_ para ''**ambos**''.%%%
 **Listas:** * para listas de balazos, # para listas numeradas, ''**;** term **:** definición'' para listas de definiciones.%%%
 **Referencias:** !UnirPalabrasEnMayúsculas o usar corchetes para una [[enlace hacia una página] o URL [[!http://cool.wiki.int/].%%%
-**Anotaciones:** Use [[1],[[2],[[3],... %%% 
+**Anotaciones:** Use [[1],[[2],[[3],... %%%
 **Preveción enlazar:** Evite hacer enlaces con "!": !!NoHiperEnlaces. Enlaces con nombres como [[[[text | URL] (doble "["). %%%
 **Varios:** "!", "!!", "!!!" para hacer títulos, "%''''%%" hace un salto de línea, "-''''---" Hace una linea horizontal.
 
@@ -67,7 +67,7 @@ no funcionará''
 
 * Los enlaces a otras páginas dentro de Wiki son realizadas poniendo el nombre entre corchetes: [esto es un vinculo de página] o UsandoPalabarasWiki (preferido)
 * Los enlaces a páginas externas son realizados como este: [http://www.wcsb.org/]
-* Puede nombrar los enlaces a páginas externas poniendo un nombre, una barra (|) y el enlace: [página web de Steve | http://wcsb.org/~swain/]  
+* Puede nombrar los enlaces a páginas externas poniendo un nombre, una barra (|) y el enlace: [página web de Steve | http://wcsb.org/~swain/] 
 * Puede suprimir enlace a viejas referencias, precediendo la palabra con un '!', e.j. !NotLinkedAsWikiName
 * You can create footnotes by using [[1], [[2], [[3], ... like this here [1]. See footnote for counterpart.  (If the [[ is in the first column, it is a footnote ''definition'' rather than a footnote ''reference'' [1].)
 * También, el sistema antiguo de enlazar los URL's sigue siendo soportado: preceda los URLs con "http:", "ftp:" o "mailto:" para crear enlaces automáticamante como en: http://c2.com/

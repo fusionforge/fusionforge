@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-19 15:31+0200\n"
+"POT-Creation-Date: 2013-06-28 14:17+0200\n"
 "PO-Revision-Date: 2005-02-12 16:23+0100\n"
 "Last-Translator: Antonio Bonifati ant[(at)]monitor.deis.unical.it\n"
 "Language-Team: \n"
@@ -2334,16 +2334,12 @@ msgid "no page specified"
 msgstr ""
 
 #, php-format
-msgid "Your rating was %.1f"
+msgid "Rating: %s (%d vote"
 msgstr ""
 
-#, fuzzy, php-format
-msgid "Prediction: %s"
-msgstr "Modifica: %s"
-
-#, fuzzy, php-format
-msgid "Prediction: %.1f"
-msgstr "Modifica: %s"
+#, php-format
+msgid "Your rating was %.1f"
+msgstr ""
 
 msgid "RateIt"
 msgstr ""
@@ -3805,9 +3801,8 @@ msgstr ""
 msgid "AuthorHistoryPlugin"
 msgstr ""
 
-#, fuzzy
 msgid "DebugBackendInfo"
-msgstr "InfoDebug"
+msgstr "DebugBackendInfo"
 
 msgid "BackLinks"
 msgstr ""
@@ -3923,9 +3918,8 @@ msgstr "Vai"
 msgid "GraphViz"
 msgstr ""
 
-#, fuzzy
 msgid "DebugGroupInfo"
-msgstr "InfoDebug"
+msgstr "DebugGroupInfo"
 
 msgid "HelloWorld"
 msgstr ""
@@ -4104,9 +4098,8 @@ msgstr ""
 msgid "ReleaseNotes"
 msgstr ""
 
-#, fuzzy
 msgid "DebugRetransform"
-msgstr "InfoDebug"
+msgstr "DebugRetransform"
 
 msgid "RichTable"
 msgstr ""
@@ -5178,12 +5171,6 @@ msgstr ""
 msgid "This is a minor change."
 msgstr ""
 
-msgid "Use old markup"
-msgstr ""
-
-msgid "OldTextFormattingRules"
-msgstr ""
-
 msgid "HowToUseWiki"
 msgstr ""
 
@@ -5851,6 +5838,10 @@ msgstr ""
 
 #~ msgid "Version %s"
 #~ msgstr "Versione %s"
+
+#, fuzzy
+#~ msgid "Prediction: %s"
+#~ msgstr "Modifica: %s"
 
 #, fuzzy
 #~ msgid "%s not found"

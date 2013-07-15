@@ -1,4 +1,4 @@
-Date: Tue, 25 Jan 2011 18:08:18 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=TousLesUtilisateurs;
@@ -7,7 +7,7 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 Voici la liste de tous les utilisateurs qui se sont déjà connectés,
-ont créé leur page personnelle et ont définis des préférences. 
+ont créé leur page personnelle et ont définis des préférences.
 ----
 <<AllUsers>>
 

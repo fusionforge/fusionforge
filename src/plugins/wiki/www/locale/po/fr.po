@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-19 15:31+0200\n"
+"POT-Creation-Date: 2013-06-28 14:17+0200\n"
 "PO-Revision-Date: 2004-06-22 21:10+0200\n"
 "Last-Translator: Pierrick Meignen <meignen.pierrick@wanadoo.fr>, Roland "
 "Trique <roland.trique@free.fr>, Stéphane Gourichon <stephane.gourichon@lip6."
@@ -2373,16 +2373,12 @@ msgid "no page specified"
 msgstr "aucune page indiquée"
 
 #, php-format
+msgid "Rating: %s (%d vote"
+msgstr ""
+
+#, php-format
 msgid "Your rating was %.1f"
 msgstr "Votre note est %.1f"
-
-#, php-format
-msgid "Prediction: %s"
-msgstr "Prédiction : %s"
-
-#, php-format
-msgid "Prediction: %.1f"
-msgstr "Prédiction : %.1f"
 
 msgid "RateIt"
 msgstr "ClassezLa"
@@ -3067,9 +3063,8 @@ msgstr "Définir la traduction d'un texte spécifique."
 msgid "This internal action page cannot viewed."
 msgstr "Cette page ne peut être vue."
 
-#, fuzzy
 msgid "You can only use it via the WikiTranslation plugin."
-msgstr "Vous pouvez uniquement l'utiliser via le greffon _WikiTranslation."
+msgstr "Vous pouvez uniquement l'utiliser via le greffon WikiTranslation."
 
 msgid "Translation Error!"
 msgstr "Erreur de traduction !"
@@ -3889,9 +3884,8 @@ msgstr "HistoriqueAuteur"
 msgid "AuthorHistoryPlugin"
 msgstr "GreffonHistoriqueAuteur"
 
-#, fuzzy
 msgid "DebugBackendInfo"
-msgstr "InfosDeDébogage"
+msgstr "InfosDeDébogageBackend"
 
 msgid "BackLinks"
 msgstr "RétroLiens"
@@ -5294,12 +5288,6 @@ msgstr "Contenu de la page : "
 msgid "This is a minor change."
 msgstr "Modification mineure."
 
-msgid "Use old markup"
-msgstr "Anciennes règles"
-
-msgid "OldTextFormattingRules"
-msgstr "AnciennesRèglesDeFormatageDesTextes"
-
 msgid "HowToUseWiki"
 msgstr "CommentUtiliserWiki"
 
@@ -5993,26 +5981,14 @@ msgstr ""
 msgid "Edit this page"
 msgstr "Modifier cette page"
 
-#~ msgid "_PreferencesInfo"
-#~ msgstr "_PréférencesInfo"
-
-#~ msgid "Markup"
-#~ msgstr "Syntaxe"
-
-#~ msgid "Change the markup type of selected pages."
-#~ msgstr "Changer la syntaxe des pages sélectionnées."
-
-#~ msgid "Confirm markup change"
-#~ msgstr "Confirmer le changement de type de syntaxe"
-
-#~ msgid "Change markup type"
-#~ msgstr "Changer le type de syntaxe"
-
 #~ msgid "Version %s"
 #~ msgstr "Version %s"
 
-#~ msgid "Original (1.2 or 1.0)"
-#~ msgstr "Original (1.2 ou 1.0)"
+#~ msgid "Prediction: %s"
+#~ msgstr "Prédiction : %s"
+
+#~ msgid "Prediction: %.1f"
+#~ msgstr "Prédiction : %.1f"
 
 #, fuzzy
 #~ msgid "%s not found"
@@ -6021,45 +5997,13 @@ msgstr "Modifier cette page"
 #~ msgid "Error: Empty search string."
 #~ msgstr "Erreur : la chaîne à rechercher est vide."
 
-#~ msgid "chmod page “%s” to “%s”."
-#~ msgstr "Changement de mode %s à %s."
-
-#~ msgid "Couldn't chmod page “%s” to “%s”."
-#~ msgstr "Impossible de changer le mode “%s” à “%s”."
-
-#~ msgid "Invalid chmod string"
-#~ msgstr "Chaîne de caractère invalide pour le changement de mode"
-
 #~ msgid "Are you sure you want to permanently change the selected files?"
 #~ msgstr ""
 #~ "Êtes-vous sûr de vouloir modifier de manière permanente les fichiers "
 #~ "sélectionnés ?"
 
-#~ msgid "Chmod"
-#~ msgstr "Chmod"
-
 #~ msgid "Select the pages to change:"
 #~ msgstr "Sélectionnez les pages à modifier :"
-
-#~ msgid "This plugin is currently under development and does not work!"
-#~ msgstr "Ce greffon est en cours de développement et ne marche pas !"
-
-#~ msgid "Chmod to permission:"
-#~ msgstr "Changer le mode de permission à :"
-
-#~ msgid "(ugo : rwx)"
-#~ msgstr "(ugo : rwx)"
-
-#~ msgid "WikiAdminChmod"
-#~ msgstr "WikiAdminChmod"
-
-#, fuzzy
-#~ msgid "mode"
-#~ msgstr "Chmod"
-
-#, fuzzy
-#~ msgid "period"
-#~ msgstr "version %d"
 
 #, fuzzy
 #~ msgid "History of all major edits by %s to page %s."

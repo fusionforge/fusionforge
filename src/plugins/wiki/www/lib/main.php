@@ -983,7 +983,7 @@ class WikiRequest extends Request
 
         if ($this->getArg('auth')) {
              $auth = $this->getArg('auth');
-             if ($auth['userid']) {
+             if (isset($auth['userid'])) {
                  return $auth['userid'];
              }
         }

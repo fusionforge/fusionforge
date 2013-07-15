@@ -1,4 +1,4 @@
-Date: Fri,  4 Feb 2011 16:58:00 +0000
+Date: Mon,  8 Jul 2013 17:59:07 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiAdministration;
@@ -49,7 +49,7 @@ Wiki SandBox 是很容易被清理的. 你可以藉著直接回存 pgsrc 中的�
 
   <<WikiForm action=dumpserial>>
 
-每個頁面較新的版本將會被寫到目錄中,一個檔案一個頁面. 
+每個頁面較新的版本將會被寫到目錄中,一個檔案一個頁面.
 該目錄必須要有寫的權限方能寫入!
 
 -----------
@@ -80,7 +80,7 @@ Wiki SandBox 是很容易被清理的. 你可以藉著直接回存 pgsrc 中的�
 目前頁面被存為 MIME (RFC:2045) e-mail(RFC:822) 訊息格式,一個頁面一個檔.
 content-type 設為 ''application/x-phpwiki'', 而頁面的 meta-data
 則編到 content-type 參數中. (如果檔案包含了頁面的數個版本,它將會有
-''multipart/mixed'',並包含了數個子部份,每個子部份前面則有 
+''multipart/mixed'',並包含了數個子部份,每個子部份前面則有
 ''application/x-phpwiki''.) 訊息的本文包含了頁面文字.
 
 === Old Formats

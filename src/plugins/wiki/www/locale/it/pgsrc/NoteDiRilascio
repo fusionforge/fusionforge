@@ -1,4 +1,4 @@
-Date: Fri, 10 Sep 2010 13:48:47 +0000
+Date: Mon,  8 Jul 2013 17:59:06 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=NoteDiRilascio;
@@ -9,7 +9,7 @@ Content-Transfer-Encoding: binary
 PhpWiki 1.2 è avanzato di molto rispetto alla versione 1.0:
 
 * Supporto per MySQL, Postgresql, mSQL, flat file e sono incluse le nuove librerie dba_ di PHP4
-* Internazionalizzazione: supporto per differenti linguaggi. Tedesco, Spagnolo, Svedese e Olandese sono inclusi in PhpWiki. È possibile aggiungere facilmente nuovi linguaggi 
+* Internazionalizzazione: supporto per differenti linguaggi. Tedesco, Spagnolo, Svedese e Olandese sono inclusi in PhpWiki. È possibile aggiungere facilmente nuovi linguaggi
 * Nuovo sistema per i link usando le parentesi quadre in aggiunta al !BumpyText  vecchio stile
 * Le caratteristiche di amministrazione includono blocco delle pagina, compattare il Wiki in un file zip e cancellare pagine.
 * La pagina PiuPopolari mostra le pagine più frequentemente viste.
@@ -19,7 +19,7 @@ PhpWiki 1.2 è avanzato di molto rispetto alla versione 1.0:
 * Una pagina informativa per visualizzare metadati
 * Più facilità di personalizzazione da parte dell'amministratore
 * Un sistema di template per separare la pagina HTML generata dal codice stesso
-* Nuovi marcatori per <B>, <I>, <DD>, <BR>  ed altri 
+* Nuovi marcatori per <B>, <I>, <DD>, <BR>  ed altri
 * Il marcaggio senza tab rimpiazza il vecchio stile di markup (in ogni caso entrambi sono supportati
 
 
@@ -71,7 +71,7 @@ la linea è preceduta da una | pipe. è stato molto semplice da
 aggiungere a l'idea è scaturita da un posting sul PPR a proposito dic
 ome la AT&T e il loro clone Wiki interno era usato con la stessa
 tecnica. La abilità di includere l'HTML è disabilitata per default per
-ragioni di sicurezza.                       
+ragioni di sicurezza.                      
 
 La versione 1.01 include una patch che corregge un piccolo errore nel
 rendering delle linee orizzontali <hr>. I ringraziamenti vanno a Gerry

@@ -407,11 +407,11 @@ input.button {
     font-weight: bold;
 }
 
-menu, menu ul {
+nav, nav ul {
     padding: 0;
 }
 
-menu ul {
+nav ul {
     display: inline;
     margin-right: 10px;
 }
@@ -419,6 +419,7 @@ menu ul {
 #actionbuttons {
     white-space: nowrap;
     margin-left: 0;
+    margin-top: 10px;
     margin-bottom: 0;
 }
 

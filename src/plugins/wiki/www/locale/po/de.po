@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-19 15:31+0200\n"
+"POT-Creation-Date: 2013-06-28 14:17+0200\n"
 "PO-Revision-Date: 2000-10-31 02:23+0200\n"
 "Last-Translator: Reini Urban <rurban@x-ray.at>, Carsten Klapp "
 "<carstenklapp@users.sourceforge.net>, Helmer Pardun <pardunpress@t-online."
@@ -2024,7 +2024,6 @@ msgstr "Liste aller neuen Seiten pro Monat und Benutzer."
 msgid "Don't cache this page."
 msgstr "Cache diese Seite nicht."
 
-# OldTextFormattingRules AlteTextFormatierungsRegeln
 msgid "Layout tables using the old markup style."
 msgstr ""
 "Tabellen unter Verwendung traditioneller (alter) Wikitext Formatierung."
@@ -2423,20 +2422,12 @@ msgid "no page specified"
 msgstr "Keine Seite angegeben"
 
 #, php-format
+msgid "Rating: %s (%d vote"
+msgstr ""
+
+#, php-format
 msgid "Your rating was %.1f"
 msgstr "Deine Bewertung war %.1f"
-
-# (Wrong Translation; sorry, but the German term for edit is NOT
-# editieren, but  e d i e r e n).
-#, fuzzy, php-format
-msgid "Prediction: %s"
-msgstr "Bearbeite: %s"
-
-# (Wrong Translation; sorry, but the German term for edit is NOT
-# editieren, but  e d i e r e n).
-#, fuzzy, php-format
-msgid "Prediction: %.1f"
-msgstr "Bearbeite: %s"
 
 msgid "RateIt"
 msgstr "BewerteEs"
@@ -2683,7 +2674,6 @@ msgstr "Verlinkte Änderungen"
 msgid "RelatedChanges"
 msgstr "VerlinkteÄnderungen"
 
-# OldTextFormattingRules AlteTextFormatierungsRegeln
 msgid "Layout tables using a very rich markup style."
 msgstr "Tabellen mit erweiterter HTML Syntax."
 
@@ -3860,7 +3850,6 @@ msgstr "Neuer Kommentar."
 msgid "%s on %s:"
 msgstr "%s um %s:"
 
-# OldTextFormattingRules AlteTextFormatierungsRegeln
 msgid "Layout tables using the Wikicreole syntax."
 msgstr "Tabellen unter Wikicreole Formatierung."
 
@@ -3952,9 +3941,8 @@ msgstr "AutorenProtokoll"
 msgid "AuthorHistoryPlugin"
 msgstr "AutorenProtokollPlugin"
 
-#, fuzzy
 msgid "DebugBackendInfo"
-msgstr "DebugInfo"
+msgstr "DebugBackendInfo"
 
 msgid "BackLinks"
 msgstr "BackLinks"
@@ -4269,9 +4257,8 @@ msgstr "WeiterLeitenPlugin"
 msgid "ReleaseNotes"
 msgstr ""
 
-#, fuzzy
 msgid "DebugRetransform"
-msgstr "DebugInfo"
+msgstr "DebugRetransform"
 
 msgid "RichTable"
 msgstr "ErweiterteTabellen"
@@ -4417,9 +4404,8 @@ msgstr "WikiPlugin"
 msgid "WikiPoll"
 msgstr "WikiUmfrage"
 
-#, fuzzy
 msgid "WikiTranslation"
-msgstr "_WikiÜbersetzung"
+msgstr "WikiÜbersetzung"
 
 msgid "WikiWikiWeb"
 msgstr "WikiWikiWeb"
@@ -5386,12 +5372,6 @@ msgstr "Inhalt: "
 msgid "This is a minor change."
 msgstr "Kleinere Änderung."
 
-msgid "Use old markup"
-msgstr "Alte Formatierungssyntax verwenden"
-
-msgid "OldTextFormattingRules"
-msgstr "AlteTextFormatierungsRegeln"
-
 msgid "HowToUseWiki"
 msgstr "WieManWikiBenutzt"
 
@@ -6106,49 +6086,17 @@ msgstr "Sidebar"
 msgid "Edit this page"
 msgstr "Diese Seite bearbeiten"
 
-#~ msgid "_PreferencesInfo"
-#~ msgstr "_EinstellungenInfo"
-
-#~ msgid "Markup"
-#~ msgstr "Quelltext"
-
-#~ msgid "CreateToc disabled for old markup."
-#~ msgstr "InhaltsVerzeichnis deaktiviert für altes Markup."
-
-#~ msgid "Change the markup type of selected pages."
-#~ msgstr "Ändere den Formatierungstyp aller ausgewählte Seiten."
-
-#~ msgid "Change markup type from %s to %s"
-#~ msgstr "Ändere Formatierungs-Typ von %s zu %s"
-
-#~ msgid "change page “%s” to markup type “%s”."
-#~ msgstr "Formatierung der Seite »%s« auf »%s« geändert."
-
-#~ msgid "Couldn't change page “%s” to markup type “%s”."
-#~ msgstr "Konnte die Formatierung der Seite »%s« nicht auf »%s« ändern."
-
-#~ msgid ""
-#~ "Are you sure you want to change the markup type of the selected files?"
-#~ msgstr ""
-#~ "Sind Sie sicher, dass Sie die ausgewählen Seiten wirklich ändern wollen?"
-
-#~ msgid "Change markup type"
-#~ msgstr "Ändere Formatierungs-Typ"
-
-#~ msgid "Select the pages to change the markup type"
-#~ msgstr "Wählen Sie die Seiten zum Ändern:"
-
-#~ msgid "Change markup to: "
-#~ msgstr "Ändere Formatierung zu: "
-
-#~ msgid "WikiAdminMarkup"
-#~ msgstr "WikiAdminFormatierung"
-
 #~ msgid "Version %s"
 #~ msgstr "Version %s."
 
 #~ msgid "Original (1.2 or 1.0)"
 #~ msgstr "Original (1,2 oder 1,0)"
+
+# (Wrong Translation; sorry, but the German term for edit is NOT
+# editieren, but  e d i e r e n).
+#, fuzzy
+#~ msgid "Prediction: %s"
+#~ msgstr "Bearbeite: %s"
 
 #, fuzzy
 #~ msgid "%s not found"
@@ -6157,38 +6105,15 @@ msgstr "Diese Seite bearbeiten"
 #~ msgid "Error: Empty search string."
 #~ msgstr "Fehler: Leeres Suchwort."
 
-#~ msgid "chmod page “%s” to “%s”."
-#~ msgstr "Berechtigung der Seite »%s« auf »%s« geändert."
-
-#~ msgid "Couldn't chmod page “%s” to “%s”."
-#~ msgstr "Konnte die Berechtigung der Seite »%s« nicht auf »%s« ändern."
-
-#~ msgid "Invalid chmod string"
-#~ msgstr "Ungültiger CHMOD Befehl"
-
 #~ msgid "Are you sure you want to permanently change the selected files?"
 #~ msgstr ""
 #~ "Sind Sie sicher, dass Sie die ausgewählen Seiten wirklich ändern wollen?"
-
-#~ msgid "Chmod"
-#~ msgstr "Chmod"
 
 #~ msgid "Select the pages to change:"
 #~ msgstr "Wählen Sie die Seiten zum Ändern:"
 
 #~ msgid "Chmod to permission:"
 #~ msgstr "Ändere auf Berechtigung:"
-
-#~ msgid "WikiAdminChmod"
-#~ msgstr "WikiAdminChmod"
-
-#, fuzzy
-#~ msgid "mode"
-#~ msgstr "Chmod"
-
-#, fuzzy
-#~ msgid "period"
-#~ msgstr "Version %d."
 
 #, fuzzy
 #~ msgid "History of all major edits by %s to page %s."

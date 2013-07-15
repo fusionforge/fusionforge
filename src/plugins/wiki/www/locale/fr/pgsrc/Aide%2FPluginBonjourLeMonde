@@ -1,4 +1,4 @@
-Date: Tue, 25 Jan 2011 21:26:14 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginBonjourLeMonde;
@@ -18,7 +18,7 @@ Depuis la source de cette page :
 
 -----
 L'architecture d'un plugin vous permet d'ajouter des éléments personnalisé à votre wiki.
-Tout ce que vous avez à faire est d'étendre la classe ~WikiPlugin et créer une sortie via 
+Tout ce que vous avez à faire est d'étendre la classe ~WikiPlugin et créer une sortie via
 la méthode run() dépendant du Wiki- ou des arguments de requête,
 
 * soit avec les classes HTML prédéfinis pour créer du XHTML valide

@@ -1,4 +1,4 @@
-Date: Tue, 25 Jan 2011 21:26:14 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginIns%C3%A9rer;
@@ -23,12 +23,12 @@ des pages (extérieures) dans une page wiki.
 
 === Bugs / Avertissements
 
-o Les pages sont incorporées en utilisant les balises =<iframe>=. Les anciens 
-  navigateurs ne supportent pas les ''iframe''. Dans ce cas l'utilisateur 
+o Les pages sont incorporées en utilisant les balises =<iframe>=. Les anciens
+  navigateurs ne supportent pas les ''iframe''. Dans ce cas l'utilisateur
   sera averti par un lien vers les données à importer.
 
 o Quand c'est possible, du code javascript est utilisé pour ajuster la
-  hauteur du _iframe_ de telle sorte qu'il remplisse entièrement la page 
+  hauteur du _iframe_ de telle sorte qu'il remplisse entièrement la page
   qui l'accueille. Malheureusement, cela semble possible quand la page
   à incorporer vient du même serveur que la page wiki (cette restriction
   est due à des impératifs de sécurité du langage javascript).

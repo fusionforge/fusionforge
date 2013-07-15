@@ -1,4 +1,4 @@
-Date: Tue, 25 Jan 2011 21:26:14 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginRessourcesRss;
@@ -8,8 +8,8 @@ Content-Transfer-Encoding: binary
 
 === Description
 
-RSS (Really Simple Syndication) est un moyen pour extraire d'un site web 
-du contenu régulièrement mis à jour. Un fichier RSS est un simple fichier 
+RSS (Really Simple Syndication) est un moyen pour extraire d'un site web
+du contenu régulièrement mis à jour. Un fichier RSS est un simple fichier
 texte comportant la description synthétique du contenu.
 
 PluginRessourcesRss est un plugin wiki pour afficher des ressources RSS.

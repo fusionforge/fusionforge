@@ -1,4 +1,4 @@
-Date: Thu,  9 Dec 2010 20:12:29 +0000
+Date: Mon,  8 Jul 2013 17:58:18 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FJabberPresencePlugin;
@@ -22,19 +22,19 @@ The **~JabberPresence** [[Help:WikiPlugin|plugin]] shows Jabber presence status.
 ! Default value
 |-
 | **scripturl**
-| 
+|
 | http://edgar.netflint.net/status.php
 |-
 | **jid**
-| 
+|
 |
 |-
 | **type**
-| 
+|
 | image
 |-
 | **iconset**
-| 
+|
 | gabber
 |}
 

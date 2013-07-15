@@ -1,4 +1,4 @@
-Date: Fri, 11 Jan 2013 11:16:51 +0000
+Date: Fri, 28 Jun 2013 15:51:27 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPageList;
@@ -103,7 +103,6 @@ Column 'info=' arguments:
 |= locked    | Locked
 |= external  | External
 |= minor     | Minor Edit
-|= markup    | Markup
 |= size      | Size
 |= creator   | Creator
 |= owner     | Owner

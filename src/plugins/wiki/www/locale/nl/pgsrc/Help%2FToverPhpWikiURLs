@@ -1,4 +1,4 @@
-Date: Tue,  4 Jan 2011 11:57:15 +0000
+Date: Mon,  8 Jul 2013 17:59:07 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FToverPhpWikiURLs;
@@ -79,9 +79,9 @@ achterwege gelaten.
 
 Voorbeelden:
 
-  [[ Volledige Zoektocht | phpwiki:?action=search&searchtype=full&searchterm=() ] 
+  [[ Volledige Zoektocht | phpwiki:?action=search&searchtype=full&searchterm=() ]
 geeft
-[ Volledige Zoektocht | phpwiki:?action=search&searchtype=full&searchterm=() ] 
+[ Volledige Zoektocht | phpwiki:?action=search&searchtype=full&searchterm=() ]
 
 Terwijl
   [[ phpwiki:?action=search&searchterm=12() ]

@@ -1,4 +1,4 @@
-Date: Tue,  4 Jan 2011 11:59:41 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Hilfe%2FNeueSeitePlugin;
@@ -8,10 +8,10 @@ Content-Transfer-Encoding: binary
 
 WikiPlugin um leicht neue Seiten zu erzeugen, optional mit vorgegebenem Inhalt. Seit v1.3.8
 
-Sie können den neuen Seitennamen von einer Eingabebox bekommen, optional mit 
+Sie können den neuen Seitennamen von einer Eingabebox bekommen, optional mit
 neuem Inhalt von einer bestehenden Vorgabe oder Kategorieseite.
 
-Schreibe "<~?plugin-form ~CreatePage ?~>" in eine Seite, zeige diese Seite an, 
+Schreibe "<~?plugin-form ~CreatePage ?~>" in eine Seite, zeige diese Seite an,
 gebe den Namen der neuen Seite an und klicke auf den NeueSeite Knopf.
 
 === Benutzung
@@ -34,7 +34,7 @@ Keine
 
 === Pläne
 
-The content might hold some variables, which will be expanded on creation. 
+The content might hold some variables, which will be expanded on creation.
 The syntax is not clear yet.
 
 === Autor
@@ -45,7 +45,7 @@ Dan Frankowski
 
 <?plugin-form CreatePage s=MyHomePage ?>
 
-Siehe auch PhpWiki:EasilyCreateNewPages 
+Siehe auch PhpWiki:EasilyCreateNewPages
 
 ----
 [[PhpWikiDokumentation]] [[KategorieWikiPlugin]]

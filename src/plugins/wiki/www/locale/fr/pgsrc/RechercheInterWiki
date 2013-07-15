@@ -1,4 +1,4 @@
-Date: Tue, 25 Jan 2011 18:16:42 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=RechercheInterWiki;
@@ -6,10 +6,10 @@ Content-Type: application/x-phpwiki;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Interroge chaque Wiki apparaissant dans la [[CarteInterWiki]] en entrant 
+Interroge chaque Wiki apparaissant dans la [[CarteInterWiki]] en entrant
 un nom de page souhaité ci-dessous.
 
-Pour ajouter une de ces recherches à une autre page, utiliser 
+Pour ajouter une de ces recherches à une autre page, utiliser
 le greffon [[Aide:PluginRechercheExterne|RechercheExterne]].
 
 <<InterWikiSearch>>

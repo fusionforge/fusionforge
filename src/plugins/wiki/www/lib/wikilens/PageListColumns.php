@@ -27,7 +27,7 @@
  *  of pagelist types. E.g. certain plugins, like MostPopular might use
  *  info=pagename,hits,rating
  *  which displays the rating column whenever the wikilens theme is active.
- *  Similarly as in certain plugins, like WikiAdminRename or _WikiTranslation
+ *  Similarly as in certain plugins, like WikiAdminRename or WikiTranslation
  */
 
 require_once 'lib/PageList.php';

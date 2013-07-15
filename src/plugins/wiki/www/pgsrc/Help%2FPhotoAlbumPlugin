@@ -1,4 +1,4 @@
-Date: Fri,  7 Dec 2012 15:12:53 +0000
+Date: Mon,  8 Jul 2013 17:58:18 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPhotoAlbumPlugin;
@@ -156,7 +156,7 @@ or via external URL:
 <<PhotoAlbum src="http://phpwiki.sourceforge.net/demo/themes/Hawaiian/images/pictures/PhotoAlbum.csv" >>
 }}}
 
-[[/Slides]] 
+[[/Slides]]
 
 == Authors ==
 

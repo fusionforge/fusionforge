@@ -1,4 +1,4 @@
-Date: Tue, 25 Jan 2011 17:50:09 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginCommenter;
@@ -21,7 +21,7 @@ Placez simplement le texte à commenter entre {{{<<Comment}}} et {{{>>}}} :
 
 == Une section cachée :
 
-Ce texte ne sera pas visible dans la page HTML générée mais il sera encore 
+Ce texte ne sera pas visible dans la page HTML générée mais il sera encore
 visible en éditant la source.
 
 >>

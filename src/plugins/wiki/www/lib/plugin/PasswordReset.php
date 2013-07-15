@@ -49,7 +49,7 @@ class WikiPlugin_PasswordReset
     }
 
     /* reset password, verified */
-    function doReset($userid)
+    private function doReset($userid)
     {
 
         $user = WikiUser($userid);
@@ -65,7 +65,7 @@ class WikiPlugin_PasswordReset
         $alert->show();
     }
 
-    function doEmail(&$request, $userid)
+    private function doEmail(&$request, $userid)
     {
 
         $thisuser = WikiUser($userid);
@@ -87,7 +87,7 @@ class WikiPlugin_PasswordReset
         $alert->show();
     }
 
-    function doForm(&$request, $userid = '', $header = '', $footer = '')
+    private function doForm(&$request, $userid = '', $header = '', $footer = '')
     {
         if (!$header) {
             $header = HTML::p(_("Reset password of user: "),

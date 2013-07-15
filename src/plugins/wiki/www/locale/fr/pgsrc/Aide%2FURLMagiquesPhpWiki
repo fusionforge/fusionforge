@@ -1,4 +1,4 @@
-Date: Thu, 27 Jan 2011 10:22:55 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FURLMagiquesPhpWiki;
@@ -34,19 +34,19 @@ Certaines actions acceptent d'autres paramètres :
 
   accepte **s**=terme à rechercher, et **size**=taille de l'entrée.
 
-**edit**: 
+**edit**:
 
   accepte **version**.
 
-**remove**: 
+**remove**:
 
   accepte **verify**.
 
-**save**: 
+**save**:
 
   accepte **editversion**, **minor_edit**, et  **content**.
 
-**setprefs**: 
+**setprefs**:
 
   accepte **edit_area_width**, **edit_area_height**.
 
@@ -60,7 +60,7 @@ Un lien magique a cette allure :
 }}}
 
 La partie ''texte'' est optionnelle mais est habituellement recommandée.
-S'il est donné, il fournira le label du lien. L' ''url-phpwiki'' est 
+S'il est donné, il fournira le label du lien. L' ''url-phpwiki'' est
 un URL **phpwiki:** comme décrit plus haut.
 
 ===Exemples
@@ -79,7 +79,7 @@ Autres possibilités :
 
 === Insertion de Formulaires Magiques dans les Pages du Wiki
 
-''**Note**: L'ancienne syntaxe des formulaires magiques n'est plus supportée. 
+''**Note**: L'ancienne syntaxe des formulaires magiques n'est plus supportée.
 Ils ont été remplacés par =<?plugin-form>=.''
 
 Si le plugin est appelé en utilisant *<?plugin-form* au lieu de *<?plugin* et

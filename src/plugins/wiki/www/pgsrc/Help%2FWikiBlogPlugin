@@ -1,4 +1,4 @@
-Date: Tue,  2 Apr 2013 10:23:48 +0000
+Date: Mon,  8 Jul 2013 17:58:18 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWikiBlogPlugin;
@@ -20,9 +20,9 @@ particular page and provides an input form for adding a new blog.
 ! Default value
 |-
 | **page**
-| page which is blogged to 
+| page which is blogged to
 | Current page
-|- 
+|-
 | **order**
 |
 * 'normal' - place in chronological order

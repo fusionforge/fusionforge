@@ -1,4 +1,4 @@
-Date: Fri, 10 Sep 2010 13:48:42 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=WunschZettelSeiten;
@@ -7,8 +7,8 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 Das ist eine Liste von Seiten, die in diesem Wiki zitiert werden, aber
-nicht noch nicht erzeugt wurden. Obwohl sie anscheinend benötigt werden, 
-kann es auch sein, dass sie falsch geschriebene existierende Seiten sind, 
+nicht noch nicht erzeugt wurden. Obwohl sie anscheinend benötigt werden,
+kann es auch sein, dass sie falsch geschriebene existierende Seiten sind,
 oder einfach zu triviale Seiten, um erzeugt zu werden.
 
 Am besten wäre es natürlich, dass solche Seiten nicht erzeugt werden,

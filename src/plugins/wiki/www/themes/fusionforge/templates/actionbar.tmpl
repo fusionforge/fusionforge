@@ -7,8 +7,7 @@ $isActionPage = isActionPage($pagename);
 $isBrowse = $request->getArg('action') == 'browse';
 ?>
 
-  <menu id="actionbuttons">
-  <div>
+  <nav id="actionbuttons">
   <ul>
     <?php if (!string_ends_with($pagename, SUBPAGE_SEPARATOR._("Discussion"))) { ?>
     <?php $talk = new WikiPageName('Talk:'.$pagename); ?>
@@ -112,5 +111,4 @@ $isBrowse = $request->getArg('action') == 'browse';
   <ul>
     <li><?php echo Button(__("WatchPage"), _("Watch Page")) ?></li>
   </ul>
-  </div>
-  </menu>
+  </nav>

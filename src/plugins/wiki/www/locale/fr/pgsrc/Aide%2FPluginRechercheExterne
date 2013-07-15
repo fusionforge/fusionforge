@@ -1,4 +1,4 @@
-Date: Thu, 27 Jan 2011 18:00:26 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FPluginRechercheExterne;
@@ -22,20 +22,20 @@ Le plugin **~RechercheExterne** crée un formulaire pour interroger les
 === Arguments
 **url**:
   Spécifie un wiki depuis la [[CarteInterWiki]] ou une URL. N'importe quel
-  texte saisi par l'utilisateur sera ajouté à l'url de recherche. La 
-  chaîne '**=%s=**' peut être utilisée pour insérer une requête de 
+  texte saisi par l'utilisateur sera ajouté à l'url de recherche. La
+  chaîne '**=%s=**' peut être utilisée pour insérer une requête de
   recherche dans l'url plutôt que de l'ajouter.
 
 **name**:
-  Texte à afficher dans le bouton de validation. Pour les sites 
-  ~InterWiki, c'est le nom wiki par défaut. Pour les autres url, 
+  Texte à afficher dans le bouton de validation. Pour les sites
+  ~InterWiki, c'est le nom wiki par défaut. Pour les autres url,
   c'est le texte "External Search" par défaut.
 
 **formsize**:
   Spécifie la taille de la zone de saisie (30 caractères par défaut)
 
 **debug**:
-  Ne redirige pas réellement vers le site externe mais affiche juste 
+  Ne redirige pas réellement vers le site externe mais affiche juste
   l'url vers lequel il devrait l'être.
 
 === Exemples

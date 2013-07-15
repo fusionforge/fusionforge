@@ -1,4 +1,4 @@
-Date: Tue, 25 Jan 2011 21:26:14 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=R%C3%A9troLiens;
@@ -6,8 +6,8 @@ Content-Type: application/x-phpwiki;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Le contenu de toutes les pages est parcouru pour trouver des liens vers la page courante. 
-La fonction RétroLiens répond aussi à la question : "Quelles pages contiennent le 
+Le contenu de toutes les pages est parcouru pour trouver des liens vers la page courante.
+La fonction RétroLiens répond aussi à la question : "Quelles pages contiennent le
 titre de cette page ?"
 
 ----

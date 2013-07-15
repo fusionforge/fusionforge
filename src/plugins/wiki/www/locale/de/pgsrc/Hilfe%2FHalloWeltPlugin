@@ -1,4 +1,4 @@
-Date: Fri, 10 Sep 2010 13:48:42 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Hilfe%2FHalloWeltPlugin;
@@ -17,16 +17,16 @@ Vom Quellcode dieser Seite:
 }}}
 
 -----
-PhpWiki's Plugin Architektur erlaubt dir benutzerdefinierte HTML Elemente deinem Wiki hinzuzufügen. Du mußt nur eine neue Klasse (Unterklasse) von der ~WikiPlugin Klasse ableiten, wie mit dem Namen unterhalb, und mit der run() Methode ja nach Wiki- oder Request Argumenten die HTML Ausgabe zu erzeugen. 
+PhpWiki's Plugin Architektur erlaubt dir benutzerdefinierte HTML Elemente deinem Wiki hinzuzufügen. Du mußt nur eine neue Klasse (Unterklasse) von der ~WikiPlugin Klasse ableiten, wie mit dem Namen unterhalb, und mit der run() Methode ja nach Wiki- oder Request Argumenten die HTML Ausgabe zu erzeugen.
 
-* Entweder man erzeugt sie über die HTML Klassen, 
-* oder über ein theme Template (Vorlage). Templates sind unübersichtlicher, und Verleiten zum 
+* Entweder man erzeugt sie über die HTML Klassen,
+* oder über ein theme Template (Vorlage). Templates sind unübersichtlicher, und Verleiten zum
   Erzeugen von ungültigem XHTML code, sind aber leichter anpassbar.
 
 <<PhpHighlight
 
 /**
- * Ein einfaches Beispiels-WikiPlugin. 
+ * Ein einfaches Beispiels-WikiPlugin.
  * Name, Argumente und Texte bitte auf englisch, und erst in locale/po/de.po
  * auf Deutsch übersetzen.
  *

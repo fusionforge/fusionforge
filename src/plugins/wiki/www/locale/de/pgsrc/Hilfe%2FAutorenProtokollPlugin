@@ -1,4 +1,4 @@
-Date: Tue,  4 Jan 2011 11:59:41 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Hilfe%2FAutorenProtokollPlugin;
@@ -35,7 +35,7 @@ ergibt:
 **author** |
   Benutzername. Vorgabe: aktueller Benutzername
 **page** |
-  Seitenname.  Vorgabe: aktuelle Seite. 
+  Seitenname.  Vorgabe: aktuelle Seite.
   Besondere Werte: page=username: page=author, page=all: Liste aller Seiten mit Änderungen dieses Benutzers.
 **info**|
   Liste der Spaltentypen. Vorgabe: version,minor,author,summary,mtime

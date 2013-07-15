@@ -1,4 +1,4 @@
-Date: Fri, 10 Sep 2010 13:48:42 +0000
+Date: Mon,  8 Jul 2013 17:59:05 +0000
 Mime-Version: 1.0 (Produced by PhpWiki 1.4.0)
 Content-Type: application/x-phpwiki;
   pagename=Hilfe%2FVorlagePlugin;
@@ -13,7 +13,7 @@ Vorlage = Parametrische Blöcke.
 Include text from a wiki page and replace certain placeholders by parameters.
 Similiar to CreatePage with the template argument, but at run-time.
 
-Similiar to the mediawiki templates but not with the "|" parameter seperator. 
+Similiar to the mediawiki templates but not with the "|" parameter seperator.
 Note: The mediawiki syntax is also supported.
 
 === Usage
@@ -41,7 +41,7 @@ vars|
 ==== Parameter expansion:
   vars="var1=value1&var2=value2"
 
-We only support named parameters, not numbered ones as in mediawiki, and 
+We only support named parameters, not numbered ones as in mediawiki, and
 the placeholder is %%var%% and not {{~{var~}}} as in mediawiki.
 
 The following predefined variables are automatically expanded if existing:
@@ -50,7 +50,7 @@ The following predefined variables are automatically expanded if existing:
   mtime     - last modified date + time
   ctime     - creation date + time
   author    - last author
-  owner     
+  owner
   creator   - first author
   SERVER_URL, DATA_PATH, SCRIPT_NAME, PHPWIKI_BASE_URL and BASE_URL
 }}}
@@ -58,11 +58,11 @@ The following predefined variables are automatically expanded if existing:
 <noinclude> .. </noinclude> is stripped
 
 ==== In work:
-  Support a mediawiki-style syntax extension which maps 
+  Support a mediawiki-style syntax extension which maps
 {{{
     {{Template/Film|title=Some Good Film|year=1999}}
 }}}
-  to 
+  to
 {{{
     <<Template page=Template/Film vars="title=Some Good Film&year=1999" >>
 }}}

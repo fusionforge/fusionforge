@@ -100,7 +100,7 @@ class Upgrade
                     LoadAny($this->request, $path . "/" . $filename);
                     echo "<br />\n";
                 } else {
-                    echo "$path/$pagename" . _(": ") . _("older than the existing page.") 
+                    echo "$path/$pagename" . _(": ") . _("older than the existing page.")
                          . " " . _("Skipped."), "<br />\n";
                 }
             } else {
