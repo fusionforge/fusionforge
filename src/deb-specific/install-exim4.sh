@@ -79,7 +79,7 @@ print "GFORGE_DOMAINS=$sys_users_host:$sys_lists_host\n" unless $seen_gf_domains
 chomp $l;
 $l .= ":GFORGE_DOMAINS" unless ($l =~ /^[^#]*GFORGE_DOMAINS/);
 print "$l\n" ;
-while (<>) { print; };
+while (<>) { print unless m/^hide pgsql_servers/; };
 ' < $cfg_gforge_main > $tmp1
 
       cat $tmp1 > $cfg_gforge_main
