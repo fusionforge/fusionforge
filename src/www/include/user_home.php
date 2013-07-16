@@ -102,14 +102,6 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information')); ?>
 	?></strong>
 	</td>
 </tr>
-<?php if ($user->getJabberAddress()) { ?>
-<tr>
-	<td><?php echo _('Jabber Address') ?></td>
-	<td>
-	<a href="jabber:<?php print $user->getJabberAddress(); ?>"><strong><?php print $user->getJabberAddress(); ?></strong></a>
-	</td>
-</tr>
-<?php } ?>
 
 <?php if ($user->getAddress() || $user->getAddress2()) { ?>
 <tr>

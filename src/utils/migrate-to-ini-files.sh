@@ -95,7 +95,6 @@ add_config core use_fti >> $tmp
 add_config core use_ftp >> $tmp
 add_config core use_ftp_uploads >> $tmp
 add_config core use_gateways >> $tmp
-add_config core use_jabber >> $tmp
 add_config core use_mail >> $tmp
 add_config core use_manual_uploads >> $tmp
 add_config core use_news >> $tmp
@@ -164,10 +163,6 @@ add_config core database_name >> $tmp
 add_config core database_password >> $tmp
 add_config core database_port >> $tmp
 add_config core database_user >> $tmp
-add_config core jabber_host >> $tmp
-add_config core jabber_password >> $tmp
-add_config core jabber_port >> $tmp
-add_config core jabber_user >> $tmp
 add_config core ldap_base_dn >> $tmp
 add_config core ldap_host >> $tmp
 add_config core ldap_password >> $tmp

@@ -2382,10 +2382,6 @@ msgstr "Ogiltigt lösenord:"
 msgid "Invalid Unix Name."
 msgstr "Ogiltigt unixnamn."
 
-#: common/include/User.class.php:283 common/include/User.class.php:529
-msgid "Invalid Jabber Address"
-msgstr "Ogiltig jabberadress"
-
 #: common/include/User.class.php:293 common/include/account.php:80
 #: common/include/account.php:84
 msgid "That username already exists."
@@ -8190,15 +8186,6 @@ msgstr ""
 msgid "Title:"
 msgstr "Rubrik:"
 
-#: www/account/index.php:218 www/account/register.php:195
-msgid "Jabber Address:"
-msgstr "Jabberadress:"
-
-#: www/account/index.php:222 www/account/register.php:199
-msgid "Send auto-generated notices only to my Jabber address"
-msgstr ""
-"Skicka automatiskt genererade meddelanden endast till min Jabber adress"
-
 #: www/account/index.php:238 www/account/register.php:221
 msgid ""
 "Receive Email about Site Updates <i>(Very low traffic and includes security "
@@ -11673,10 +11660,6 @@ msgstr "kompetensprofil"
 #, fuzzy
 msgid "Real Name:"
 msgstr "Verkligt namn"
-
-#: www/include/user_home.php:106
-msgid "Jabber Address"
-msgstr "Jabberadress"
 
 #: www/include/user_home.php:141
 #, fuzzy

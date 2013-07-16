@@ -20,7 +20,6 @@ function plugin_ldapextauth_mapping ($entry) {
 	$result['themeid']=$GLOBALS['sys_default_theme_id'];
 
 
-	//$result['jabber_address'] = '' ;
 	//$result['address'] = '' ;
 	//$result['address2'] = '' ;
 	//$result['phone'] = $entry['telephonenumber'][0]; //AD

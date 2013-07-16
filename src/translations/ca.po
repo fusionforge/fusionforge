@@ -2380,10 +2380,6 @@ msgstr "Contrasenya no vàlida:"
 msgid "Invalid Unix Name."
 msgstr "Nom Unix no vàlid."
 
-#: common/include/User.class.php:283 common/include/User.class.php:529
-msgid "Invalid Jabber Address"
-msgstr "Adreça Jabber no vàlida"
-
 #: common/include/User.class.php:293 common/include/account.php:80
 #: common/include/account.php:84
 msgid "That username already exists."
@@ -8300,14 +8296,6 @@ msgstr "Fax:"
 msgid "Title:"
 msgstr "Títol:"
 
-#: www/account/index.php:218 www/account/register.php:195
-msgid "Jabber Address:"
-msgstr "Adreça Jabber:"
-
-#: www/account/index.php:222 www/account/register.php:199
-msgid "Send auto-generated notices only to my Jabber address"
-msgstr "Envieu notícies auto-generades només a la meva adreça de Jabber"
-
 #: www/account/index.php:238 www/account/register.php:221
 msgid ""
 "Receive Email about Site Updates <i>(Very low traffic and includes security "
@@ -11817,10 +11805,6 @@ msgstr "Perfil d'habilitats"
 #, fuzzy
 msgid "Real Name:"
 msgstr "Nom real"
-
-#: www/include/user_home.php:106
-msgid "Jabber Address"
-msgstr "Adreça de Jabber"
 
 #: www/include/user_home.php:141
 #, fuzzy

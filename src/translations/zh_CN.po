@@ -2357,10 +2357,6 @@ msgstr "无效的密码："
 msgid "Invalid Unix Name."
 msgstr "无效的帐号"
 
-#: common/include/User.class.php:283 common/include/User.class.php:529
-msgid "Invalid Jabber Address"
-msgstr "无效的Jabber信箱"
-
 #: common/include/User.class.php:293 common/include/account.php:80
 #: common/include/account.php:84
 msgid "That username already exists."
@@ -8220,14 +8216,6 @@ msgstr "传真："
 msgid "Title:"
 msgstr "标题"
 
-#: www/account/index.php:218 www/account/register.php:195
-msgid "Jabber Address:"
-msgstr "Jabber 信箱："
-
-#: www/account/index.php:222 www/account/register.php:199
-msgid "Send auto-generated notices only to my Jabber address"
-msgstr "自动产生的通知只发送到我的Jabber信箱"
-
 #: www/account/index.php:238 www/account/register.php:221
 msgid ""
 "Receive Email about Site Updates <i>(Very low traffic and includes security "
@@ -11681,10 +11669,6 @@ msgstr "专长资料"
 #, fuzzy
 msgid "Real Name:"
 msgstr "真实姓名"
-
-#: www/include/user_home.php:106
-msgid "Jabber Address"
-msgstr "Jabber位址"
 
 #: www/include/user_home.php:141
 #, fuzzy

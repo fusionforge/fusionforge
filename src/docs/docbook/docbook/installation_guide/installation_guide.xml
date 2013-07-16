@@ -66,9 +66,6 @@
         <para><ulink url="http://www.gnu.org/software/mailman/">GNU Mailman</ulink> and <ulink url="http://www.python.org/">Python</ulink> (Mailing list support)</para>
       </listitem>
       <listitem>
-        <para><ulink url="http://jabberd.jabberstudio.org/">Jabberd</ulink> (Jabber support)</para>
-      </listitem>
-      <listitem>
         <para><ulink url="http://www.aditus.nu/jpgraph/">JPGraph</ulink> (Gantt Charting and Graphing Support)</para>
       </listitem>
       <listitem>
@@ -322,7 +319,6 @@ cvs             IN      A       <replaceable>1.2.3.4</replaceable>
 svn             IN      A       <replaceable>1.2.3.4</replaceable>
 scm             IN      A       <replaceable>1.2.3.4</replaceable>
 ldap            IN      A       <replaceable>1.2.3.4</replaceable>
-jabber          IN      A       <replaceable>1.2.3.4</replaceable>
 </screen>
       <para>The new zone must be added in main BIND configuration file:</para>
       <screen>
@@ -894,11 +890,6 @@ $sys_dbname = &apos;gforge&apos; ;
 $sys_dbuser = &apos;gforge&apos; ;
 $sys_dbpasswd = &apos;p455w0rd&apos; ;
 </programlisting>
-      </section>
-      <section>
-        <title>Jabber Support</title>
-        <para>FusionForge supports the sending of messages to jabber accounts. To accomplish this, you must have a user account setup on the jabber server that gforge can connect to and send messages.</para>
-        <para>Once you have that user account, server, and password set up, just edit <filename>/etc/gforge/local.inc</filename> and add the information to the jabber section.</para>
       </section>
       <section>
         <title>Peer Ratings</title>

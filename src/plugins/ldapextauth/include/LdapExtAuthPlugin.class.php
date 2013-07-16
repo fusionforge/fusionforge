@@ -254,9 +254,6 @@ class LdapextauthPlugin extends Plugin {
 				if ($mappedinfo['timezone']) {
 					$timezone = $mappedinfo['timezone'] ;
 				}
-				if ($mappedinfo['jabber_address']) {
-					$jabber_address = $mappedinfo['jabber_address'] ;
-				}
 				if ($mappedinfo['address']) {
 					$address = $mappedinfo['address'] ;
 				}

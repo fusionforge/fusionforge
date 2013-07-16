@@ -20,7 +20,6 @@ init_debconf_from_mainconffile
 #DSFHELPER:downloadhost-variables#
 #DSFHELPER:uploadhost-variables#
 #DSFHELPER:ftpuploadhost-variables#
-#DSFHELPER:jabberhost-variables#
 # [Disabled] DSFHELPER:shellhost-variables#
 # [Disabled] DSFHELPER:dbpasswd-variables#
 # [Disabled] DSFHELPER:dbhost-variables#

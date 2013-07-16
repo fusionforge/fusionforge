@@ -2235,10 +2235,6 @@ msgstr "Niepoprawne hasło"
 msgid "Invalid Unix Name."
 msgstr ""
 
-#: common/include/User.class.php:283 common/include/User.class.php:529
-msgid "Invalid Jabber Address"
-msgstr "Niepoprawny adres Jabber"
-
 #: common/include/User.class.php:293 common/include/account.php:80
 #: common/include/account.php:84
 msgid "That username already exists."
@@ -7833,14 +7829,6 @@ msgstr "FAX:"
 msgid "Title:"
 msgstr "Tytuł:"
 
-#: www/account/index.php:218 www/account/register.php:195
-msgid "Jabber Address:"
-msgstr "Adres Jabber:"
-
-#: www/account/index.php:222 www/account/register.php:199
-msgid "Send auto-generated notices only to my Jabber address"
-msgstr ""
-
 #: www/account/index.php:238 www/account/register.php:221
 msgid ""
 "Receive Email about Site Updates <i>(Very low traffic and includes security "
@@ -11084,10 +11072,6 @@ msgstr ""
 #, fuzzy
 msgid "Real Name:"
 msgstr "Nazwa wydania:"
-
-#: www/include/user_home.php:106
-msgid "Jabber Address"
-msgstr ""
 
 #: www/include/user_home.php:141
 #, fuzzy

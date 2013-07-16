@@ -15,5 +15,4 @@ $sys_server='pgsql';
 //
 $sys_dbpasswd='{db_password}';
 $sys_ldap_passwd='{ldap_web_add_password}';
-$sys_jabber_pass='{sys_jabber_pass}';
 

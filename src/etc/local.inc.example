@@ -81,7 +81,6 @@ $sys_server='pgsql';
 //
 $sys_dbpasswd='';
 $sys_ldap_passwd='';
-$sys_jabber_pass='';
 
 //
 // Account Management
@@ -122,19 +121,6 @@ $sys_ldap_bind_dn='cn=SF_robot,dc=gforge,dc=company,dc=com';
 // note that password NOT stored here
 $sys_ldap_admin_dn='cn=admin,dc=gforge,dc=company,dc=com';
 
-//
-// Jabber Configuration
-//
-$sys_use_jabber=0;
-//messages from the system will be sent to this address
-$sys_jabber_server='jabber.gforge.company.com';
-$sys_jabber_port='5222';
-// messages sent to jabber accounts will come from this user
-// It is similar to the "From: noreply@gforge.org" used in emails
-$sys_jabber_user='noreply';
-if (!isset($sys_jabber_pass)) {
-   $sys_jabber_pass='';
-}
 //
 //	FEATURES
 //	You can turn features on/off sitewide

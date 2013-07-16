@@ -92,8 +92,6 @@ setconfigfromoldsources ('core', 'database_password',
 			 'GForgeDbpasswd', 'sys_gfdbpasswd', 'sys_dbpasswd') ;
 setconfigfromoldsources ('core', 'ldap_password',
 			 'GForgeLdapPasswd', 'sys_gfldap_passwd', NULL) ;
-setconfigfromoldsources ('core', 'jabber_password',
-			 'GForgeJabberPasswd', 'sys_gfjabber_pass', NULL) ;
 
 forge_define_config_item ('source_path', 'core', $fusionforge_basedir) ;
 forge_define_config_item ('data_path', 'core', '/var/lib/gforge') ;
@@ -240,11 +238,6 @@ require_once $gfcommon.'include/SCMPlugin.class.php' ;
 
 if (getenv ('FUSIONFORGE_NO_PLUGINS') != 'true') {
 	setup_plugin_manager () ;
-}
-
-// Jabber subsystem
-if (forge_get_config('use_jabber')) {
-	require_once $gfcommon.'include/Jabber.class.php';
 }
 
 ini_set('date.timezone', forge_get_config ('default_timezone'));

@@ -288,28 +288,6 @@ if (isset ($GLOBALS['sys_forum_return_domain'])) {
 } else {
 	forge_define_config_item ('forum_return_domain', 'core', '') ;
 }
-if (isset ($GLOBALS['sys_use_jabber'])) {
-	forge_define_config_item ('use_jabber', 'core', $GLOBALS['sys_use_jabber']) ;
-} else {
-	forge_define_config_item ('use_jabber', 'core', false) ;
-}
-forge_set_config_item_bool ('use_jabber', 'core') ;
-if (isset ($GLOBALS['sys_jabber_server'])) {
-	forge_define_config_item ('jabber_host', 'core', $GLOBALS['sys_jabber_server']) ;
-} else {
-	forge_define_config_item ('jabber_host', 'core', '') ;
-}
-if (isset ($GLOBALS['sys_jabber_port'])) {
-	forge_define_config_item ('jabber_port', 'core', $GLOBALS['sys_jabber_port']) ;
-} else {
-	forge_define_config_item ('jabber_port', 'core', '') ;
-}
-if (isset ($GLOBALS['sys_jabber_user'])) {
-	forge_define_config_item ('jabber_user', 'core', $GLOBALS['sys_jabber_user']) ;
-} else {
-	forge_define_config_item ('jabber_user', 'core', '') ;
-}
-forge_define_config_item ('jabber_password', 'core', isset($GLOBALS['sys_jabber_pass']) ? $GLOBALS['sys_jabber_pass'] : '') ;
 if (isset ($GLOBALS['sys_ldap_host'])) {
 	forge_define_config_item ('ldap_host', 'core', $GLOBALS['sys_ldap_host']) ;
 } else {

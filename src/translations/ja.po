@@ -2303,10 +2303,6 @@ msgstr "無効なパスワード:"
 msgid "Invalid Unix Name."
 msgstr "無効なUnixネーム"
 
-#: common/include/User.class.php:283 common/include/User.class.php:529
-msgid "Invalid Jabber Address"
-msgstr "無効なJabberアドレス"
-
 #: common/include/User.class.php:293 common/include/account.php:80
 #: common/include/account.php:84
 msgid "That username already exists."
@@ -4986,11 +4982,6 @@ msgstr ""
 #: plugins/forumml/www/forumml_utils.php:604 plugins/forumml/www/index.php:127
 msgid "Erase"
 msgstr ""
-
-#: plugins/forumml/www/forumml_utils.php:686
-#, fuzzy
-msgid "Invalid email "
-msgstr "無効なJabberアドレス"
 
 #: plugins/forumml/www/forumml_utils.php:733
 #, fuzzy
@@ -7676,10 +7667,6 @@ msgstr ""
 msgid "Return"
 msgstr ""
 
-#: www/account/change_email.php:38
-msgid "Invalid email address."
-msgstr "無効なJabberアドレス"
-
 #: www/account/change_email.php:57
 #, fuzzy, php-format
 msgid ""
@@ -7972,16 +7959,6 @@ msgstr ""
 msgid "Title:"
 msgstr ""
 
-#: www/account/index.php:218 www/account/register.php:195
-msgid "Jabber Address:"
-msgstr "Jabberアドレス:"
-
-#: www/account/index.php:222 www/account/register.php:199
-msgid "Send auto-generated notices only to my Jabber address"
-msgstr ""
-"(未訳：account_register.jabberonly)Send auto-generated notices only to my "
-"Jabber address"
-
 #: www/account/index.php:238 www/account/register.php:221
 msgid ""
 "Receive Email about Site Updates <i>(Very low traffic and includes security "
@@ -8067,11 +8044,6 @@ msgstr ""
 #: www/account/login.php:128
 msgid "Cookies must be enabled past this point."
 msgstr "ここから先はクッキーを有効にしてください"
-
-#: www/account/login.php:137
-#, fuzzy
-msgid "Login name or email address"
-msgstr "無効なJabberアドレス"
 
 #: www/account/login.php:144 www/account/verify.php:90
 msgid "Password:"
@@ -8212,11 +8184,6 @@ msgstr ""
 msgid ""
 "Fill in a user name and click 'Submit' to resend the confirmation email."
 msgstr ""
-
-#: www/account/pending-resend.php:69 www/account/verify.php:84
-#, fuzzy
-msgid "Login name or email address:"
-msgstr "無効なJabberアドレス"
 
 #: www/account/register.php:75
 msgid "You can't register an account unless you accept the terms of use."
@@ -11324,10 +11291,6 @@ msgstr ""
 #, fuzzy
 msgid "Real Name:"
 msgstr "ログイン名:"
-
-#: www/include/user_home.php:106
-msgid "Jabber Address"
-msgstr ""
 
 #: www/include/user_home.php:141
 #, fuzzy
@@ -14902,11 +14865,6 @@ msgstr ""
 #: www/search/index.php:82
 msgid "Error - Invalid search"
 msgstr ""
-
-#: www/sendmessage.php:33
-#, fuzzy
-msgid "toaddress"
-msgstr "Jabberアドレス:"
 
 #: www/sendmessage.php:33
 msgid "touser"

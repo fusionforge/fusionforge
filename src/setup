@@ -36,7 +36,6 @@ computedefault(){
 	# The following three have to be synced when domain_name changes
 	# and docs_host is supposed not to be used
 	#DEFAULTdocs_host=gfdocs.$DEFAULTdomain_name
-	DEFAULTjabber_host=jabber.$DEFAULTdomain_name
 	DEFAULTupload_host=upload.$DEFAULTdomain_name
 	#
 	DEFAULTdownload_host=download.$DEFAULTdomain_name
@@ -71,7 +70,6 @@ computedefault(){
 	# The place where file uploaded with http are stored for download
 	DEFAULTuploaddir=$GFGDIR/var/lib/gforge/download/
 	DEFAULTsys_urlroot=$SHAREDIR/www/
-	DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=1 bs=8 2> /dev/null | md5sum | cut -b1-8)
 	DEFAULTusr_share_gforge=$SHAREDIR
 	DEFAULTusr_lib_gforge=$LIBDIR
 	DEFAULTvar_lib_gforge=$GFGDIR/var/lib/gforge
@@ -87,7 +85,6 @@ computedefault(){
 	DEFAULTsys_default_timezone=GMT
 	DEFAULTsys_default_country_code=US
 	DEFAULTsys_account_manager_type=$SYSTEM
-	DEFAULTsys_use_jabber=0
 	DEFAULTsys_use_auth_ldap=1
 	# Couldn't find where this is used, maybe some rest of ext auth
 	#DEFAULTsys_ldap_auth_host=localhost
@@ -129,7 +126,6 @@ computedefault(){
 	DEFAULTsys_require_accept_conditions=false
 	DEFAULTsys_require_unique_email=false
 	DEFAULTsys_localinc=$ETCDIR/local.inc
-	DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=1 bs=8 2> /dev/null | md5sum | cut -b1-8)
 	DEFAULTsys_plugins_path=$SHAREDIR/plugins/
 	DEFAULTsys_sslcrt=$(findcrt)
 	DEFAULTsys_sslkey=$(findkey)

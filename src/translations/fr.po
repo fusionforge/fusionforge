@@ -2320,10 +2320,6 @@ msgstr "Mot de passe non valide :"
 msgid "Invalid Unix Name."
 msgstr "Nom unix non valide"
 
-#: common/include/User.class.php:283 common/include/User.class.php:529
-msgid "Invalid Jabber Address"
-msgstr "Adresse Jabber non valide"
-
 #: common/include/User.class.php:293 common/include/account.php:80
 #: common/include/account.php:84
 msgid "That username already exists."
@@ -8178,14 +8174,6 @@ msgstr "Fax :"
 msgid "Title:"
 msgstr "Titre :"
 
-#: www/account/index.php:218 www/account/register.php:195
-msgid "Jabber Address:"
-msgstr "Adresse Jabber :"
-
-#: www/account/index.php:222 www/account/register.php:199
-msgid "Send auto-generated notices only to my Jabber address"
-msgstr "N'envoyer les notifications automatiques qu'à mon adresse Jabber"
-
 #: www/account/index.php:238 www/account/register.php:221
 msgid ""
 "Receive Email about Site Updates <i>(Very low traffic and includes security "
@@ -11639,10 +11627,6 @@ msgstr "Compétences"
 #: www/include/user_home.php:76
 msgid "Real Name:"
 msgstr "Nom complet :"
-
-#: www/include/user_home.php:106
-msgid "Jabber Address"
-msgstr "Addresse Jabber"
 
 #: www/include/user_home.php:141
 msgid "Site Member Since:"
