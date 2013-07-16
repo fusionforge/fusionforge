@@ -651,6 +651,9 @@ class DarcsPlugin extends SCMPlugin {
 			return false;
 		}
 
+		if (!isset($params['scm_create_repo_name'])) {
+			return false;
+		}
 		$new_repo_name = $params['scm_create_repo_name'];
 		$clone_repo_name = $params['scm_clone_repo_name'];
 		if ($new_repo_name != '')
