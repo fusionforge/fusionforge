@@ -351,8 +351,7 @@ class Navigation extends Error {
 		// rebuild menu if it has never been built before, or
 		// if the toptab was set differently
 		if (!isset($this->project_menu_data[$group_id])
-			|| ($toptab != "")
-			|| ($toptab != $this->project_menu_data[$group_id]['last_toptab'])) {
+			|| ($toptab != "")) {
 			// get the group and permission objects
 			$group = group_get_object($group_id);
 			if (!$group || !is_object($group)) {
@@ -594,9 +593,6 @@ class Navigation extends Error {
 
 			// store selected menu item (if any)
 			$menu['selected'] = $selected;
-			if ($toptab != "") {
-				$menu['last_toptab'] = $toptab;
-			}
 		}
 		return $this->project_menu_data[$group_id];
 	}
