@@ -54,6 +54,9 @@ function session_build_session_token($user_id) {
 	return session_build_session_cookie($user_id);
 }
 function session_build_session_cookie($user_id) {
+	if (strlen(forge_get_config('session_key')) < 4) {
+		exit_error('ATTN sysadmin: upgrade your session_key; hint: locate secrets.inc');
+	}
 	$session_cookie_data = array(
 		$user_id,
 		getStringFromServer('REMOTE_ADDR'),
