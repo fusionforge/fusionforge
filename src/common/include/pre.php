@@ -104,6 +104,8 @@ if (isset($gfcgfile) && file_exists ($gfcgfile)) {
 				 'GForgeDbpasswd', 'sys_gfdbpasswd', 'sys_dbpasswd') ;
 	setconfigfromoldsources ('core', 'ldap_password',
 				 'GForgeLdapPasswd', 'sys_gfldap_passwd', NULL) ;
+	setconfigfromoldsources ('core', 'session_key',
+				 'GForgeSessionKey', 'sys_session_key', NULL) ;
 	setconfigfromoldsources ('core', 'jabber_password',
 				 'GForgeJabberPasswd', 'sys_gfjabber_pass', NULL) ;
 
