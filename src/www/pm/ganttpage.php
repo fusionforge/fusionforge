@@ -204,11 +204,32 @@ echo '<div id="workSpace" style="padding:0px; overflow-y:auto; overflow-x:hidden
 ?>
 <script type="text/javascript">
 	var ge;
+	function loadI18n() {
+		GanttMaster.messages = {
+			"CHANGE_OUT_OF_SCOPE":"NO_RIGHTS_FOR_UPDATE_PARENTS_OUT_OF_EDITOR_SCOPE",
+			"START_IS_MILESTONE":"START_IS_MILESTONE",
+			"END_IS_MILESTONE":"END_IS_MILESTONE",
+			"TASK_HAS_CONSTRAINTS":"TASK_HAS_CONSTRAINTS",
+			"GANTT_ERROR_DEPENDS_ON_OPEN_TASK":"GANTT_ERROR_DEPENDS_ON_OPEN_TASK",
+			"GANTT_ERROR_DESCENDANT_OF_CLOSED_TASK":"GANTT_ERROR_DESCENDANT_OF_CLOSED_TASK",
+			"TASK_HAS_EXTERNAL_DEPS":"TASK_HAS_EXTERNAL_DEPS",
+			"GANTT_ERROR_LOADING_DATA_TASK_REMOVED":"GANTT_ERROR_LOADING_DATA_TASK_REMOVED",
+			"ERROR_SETTING_DATES":"ERROR_SETTING_DATES",
+			"CIRCULAR_REFERENCE":"CIRCULAR_REFERENCE",
+			"CANNOT_DEPENDS_ON_ANCESTORS":"CANNOT_DEPENDS_ON_ANCESTORS",
+			"CANNOT_DEPENDS_ON_DESCENDANTS":"CANNOT_DEPENDS_ON_DESCENDANTS",
+			"INVALID_DATE_FORMAT":"INVALID_DATE_FORMAT",
+			"TASK_MOVE_INCONSISTENT_LEVEL":"TASK_MOVE_INCONSISTENT_LEVEL",
+			"GANT_QUARTER_SHORT":"trim.",
+			"GANT_SEMESTER_SHORT":"sem."
+		};
+	}
 	jQuery(function() {
 		ge = new GanttMaster();
 		var workSpace = jQuery("#workSpace");
 		workSpace.css({width:jQuery(window).width() - 20, height:jQuery(window).height() - 100});
 		ge.init(workSpace);
+		loadI18n();
 		ge.loadProject({
 			"tasks":
 				<?php echo json_encode($transformedTasksArr); ?>,
