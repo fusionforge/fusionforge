@@ -117,7 +117,7 @@ if (! isset($group_id) || ! isset($project)) {
 
     define('ENABLE_RATEIT', $wc->getWikiConfig('ENABLE_RATEIT'));
 
-    define('UPLOAD_FILE_PATH', '/opt/groups/'.WIKI_NAME.'/www/uploads/');
+    define('UPLOAD_FILE_PATH', forge_get_config('groupdir_prefix').'/'.WIKI_NAME.'/www/uploads/');
     // define('UPLOAD_DATA_PATH', SERVER_URL . '/www/'.WIKI_NAME.'/uploads/');
     if ($project->isPublic()) {
         define('UPLOAD_DATA_PATH', '/www/'.WIKI_NAME.'/uploads/');
@@ -225,8 +225,8 @@ if (! isset($group_id) || ! isset($project)) {
     define('ENABLE_REVERSE_DNS', false);
 
     // Web DAV location
-    define('DEFAULT_DUMP_DIR', "/opt/groups/".$group_name."/wikidump/");
-    define('HTML_DUMP_DIR', "/opt/groups/".$group_name."/wikidumphtml/");
+    define('DEFAULT_DUMP_DIR', forge_get_config('groupdir_prefix').'/'.$group_name."/wikidump/");
+    define('HTML_DUMP_DIR', forge_get_config('groupdir_prefix').'/'.$group_name."/wikidumphtml/");
 
     define('COMPRESS_OUTPUT', false);
 

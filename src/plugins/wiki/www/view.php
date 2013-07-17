@@ -75,7 +75,7 @@ array_shift($arr);
 array_shift($arr);
 $path = join('/', $arr);
 
-$basepath = realpath('/opt/groups/' . $project->getUnixName() . '/www/uploads/');
+$basepath = realpath(forge_get_config('groupdir_prefix') .'/'. $project->getUnixName() . '/www/uploads/');
 $filepath = realpath($basepath . '/' . $path);
 $filename = basename($filepath);
 
