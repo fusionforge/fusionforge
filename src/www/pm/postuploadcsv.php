@@ -114,7 +114,7 @@ if (isset($input_file) && isset($input_file['tmp_name']) &&
 }
 
 if ($res['success']) {
-	$feedback .= 'Import Was Successful';
+	$feedback .= _('Import was Successful');
 } else {
 	$error_msg .= $res['errormessage'];
 }
