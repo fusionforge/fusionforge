@@ -46,7 +46,7 @@
 //
 
 
-pm_header(array('title'=>_('Upload data into the tasks.'),'group_project_id'=>$group_project_id));
+pm_header(array('title'=>_('Upload data into the tasks'),'group_project_id'=>$group_project_id));
 
 $default = array('headers' => 1, 'full' => 1, 'sep' => ',');
 
@@ -88,58 +88,156 @@ $format .= " using '$sep' as separator.";
 <form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')?>?group_project_id=<?php echo $group_project_id ?>&amp;group_id=<?php echo $group_id ?>&amp;func=postuploadcsv">
 <p><?php echo _('Choose a file in the proper .csv format for uploading.'); ?></p>
 <input type="file" name="userfile"  size="30" />
-<input type="submit" name="submit" value="submit" />
+<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
 </form>
 
-<p><strong>Notes:</strong></p>
-<div>
+<h3><?php echo _('Notes'); ?></h3>
 <ul>
-<li>Be careful, when importing a CSV file, all the tasks will be replaced by the ones present in the file.</li>
-<li>If project_task_id is empty, then a new task will be created.</li>
-<li>If project_task_id is present, then the corresponding task will be updated.</li>
+<li><?php echo _('Be careful, when importing a CSV file, all the tasks will be replaced by the ones present in the file.'); ?></li>
+<li><?php echo _('If project_task_id is empty, then a new task will be created.'); ?></li>
+<li><?php echo _('If project_task_id is present, then the corresponding task will be updated.'); ?></li>
 </ul>
-</div>
 
-<h2>Record Layout</h2>
+<h2><?php echo _('Record Layout'); ?></h2>
 
-<table align="center" border="1" cellpadding="3">
-<tr><td><strong>Field Name</strong></td><td><strong>Description</strong></td></tr>
-<tr><td>project_task_id</td><td>this is the ID in gforge database</td></tr>
-<tr><td>external_task_id</td><td>optional, the equivalent of project_task_id but determined by
-external application, such as MS Project. Primarily preserved for sorting purposes only.</td></tr>
-<tr><td>parent_id</td><td>the project_task_id of the parent task, if any</td></tr>
-<tr><td>external_parent_id</td><td>the equivalent of parent project_task_id but
-        determined by external application, such as MS Project. Primarily preserved for matching purposes only.</td></tr>
-<tr><td>title</td><td>The summary or brief description</td></tr>
-<tr><td>category</td><td>The category name (must be defined, only available in full export)</td></tr>
-<tr><td>duration</td><td>Duration in days</td></tr>
-<tr><td>work</td><td>Number of hours required to complete</td></tr>
-<tr><td>start_date</td><td>The start date in MM-DD-YYYY HH:MM:SS format</td></tr>
-<tr><td>end_date</td><td>The end date in MM-DD-YYYY HH:MM:SS format</td></tr>
-<tr><td>percent_complete</td><td>Percentage of completion</td></tr>
-<tr><td>priority</td><td>integers 1 to 5</td></tr>
-<tr><td>notes</td><td>optional, the details of the task or a comment to add to a task</td></tr>
-<tr><td>resource1_unixname</td><td>optional, the unixname or precisely-matched realname of the assignee </td></tr>
-<tr><td>resource2_unixname</td><td>optional, same as above</td></tr>
-<tr><td>resource3_unixname</td><td>optional, same as above</td></tr>
-<tr><td>resource4_unixname</td><td>optional, same as above</td></tr>
-<tr><td>resource5_unixname</td><td>optional, same as above</td></tr>
-<tr><td>dependenton1_project_task_id</td><td>optional, the GForge task_id of a task to be dependent on</td></tr>
-<tr><td>dependenton1_external_task_id</td><td>optional, the ID used by the external application</td></tr>
-<tr><td>dependenton1_linktype</td><td>SS, SF, FS, FF, - The same types as MS Project</td></tr>
-<tr><td>dependenton2_project_task_id</td><td>repetition of dependenton1</td></tr>
-<tr><td>dependenton2_external_task_id</td><td>repetition of dependenton1</td></tr>
-<tr><td>dependenton2_linktype</td><td>repetition of dependenton1</td></tr>
-<tr><td>dependenton3_project_task_id</td><td>repetition of dependenton1</td></tr>
-<tr><td>dependenton3_external_task_id</td><td>repetition of dependenton1</td></tr>
-<tr><td>dependenton3_linktype</td><td>repetition of dependenton1</td></tr>
-<tr><td>dependenton4_project_task_id</td><td>repetition of dependenton1</td></tr>
-<tr><td>dependenton4_external_task_id</td><td>repetition of dependenton1</td></tr>
-<tr><td>dependenton4_linktype</td><td>repetition of dependenton1</td></tr>
-<tr><td>dependenton5_project_task_id</td><td>repetition of dependenton1</td></tr>
-<tr><td>dependenton5_external_task_id</td><td>repetition of dependenton1</td></tr>
-<tr><td>dependenton5_linktype</td><td>repetition of dependenton1</td></tr>
+<table class="listing full">
+<tr>
+    <th><?php echo _('Field Name'); ?></th>
+    <th><?php echo _('Description'); ?></th>
+</tr>
+<tr>
+    <td>project_task_id</td>
+    <td><?php echo _('this is the ID in database'); ?></td>
+</tr>
+<tr>
+    <td>external_task_id</td>
+    <td><?php echo _('optional, the equivalent of project_task_id but determined by external application, such as Microsoft Project. Primarily preserved for sorting purposes only.'); ?></td>
+</tr>
+<tr>
+    <td>parent_id</td>
+    <td><?php echo _('the project_task_id of the parent task, if any'); ?></td>
+</tr>
+<tr>
+    <td>external_parent_id</td>
+    <td><?php echo _('the equivalent of parent project_task_id but determined by external application, such as Microsoft Project. Primarily preserved for matching purposes only.'); ?></td>
+</tr>
+<tr>
+    <td>title</td>
+    <td><?php echo _('The summary or brief description'); ?></td>
+</tr>
+<tr>
+    <td>category</td>
+    <td><?php echo _('The category name (must be defined, only available in full export)'); ?></td>
+</tr>
+<tr>
+    <td>duration</td>
+    <td><?php echo _('Duration in days'); ?></td>
+</tr>
+<tr>
+    <td>work</td>
+    <td><?php echo _('Number of hours required to complete'); ?></td>
+</tr>
+<tr>
+    <td>start_date</td>
+    <td><?php echo _('The start date in MM-DD-YYYY HH:MM:SS format'); ?></td>
+</tr>
+<tr>
+    <td>end_date</td>
+    <td><?php echo _('The end date in MM-DD-YYYY HH:MM:SS format'); ?></td>
+</tr>
+<tr>
+    <td>percent_complete</td>
+    <td><?php echo _('Percentage of completion'); ?></td>
+</tr>
+<tr>
+    <td>priority</td>
+    <td><?php echo _('integers 1 to 5'); ?></td>
+</tr>
+<tr>
+    <td>notes</td>
+    <td><?php echo _('optional, the details of the task or a comment to add to a task'); ?></td>
+</tr>
+<tr>
+    <td>resource1_unixname</td>
+    <td><?php echo _('optional, the unixname or precisely-matched realname of the assignee'); ?></td>
+</tr>
+<tr>
+    <td>resource2_unixname</td>
+    <td><?php echo _('optional, same as above'); ?></td>
+</tr>
+<tr>
+    <td>resource3_unixname</td>
+    <td><?php echo _('optional, same as above'); ?></td>
+</tr>
+<tr>
+    <td>resource4_unixname</td>
+    <td><?php echo _('optional, same as above'); ?></td>
+</tr>
+<tr>
+    <td>resource5_unixname</td>
+    <td><?php echo _('optional, same as above'); ?></td>
+</tr>
+<tr>
+    <td>dependenton1_project_task_id</td>
+    <td><?php echo _('optional, the task_id of a task to be dependent on'); ?></td>
+</tr>
+<tr>
+    <td>dependenton1_external_task_id</td>
+    <td><?php echo _('optional, the ID used by the external application'); ?></td>
+</tr>
+<tr>
+    <td>dependenton1_linktype</td>
+    <td><?php echo _('SS, SF, FS, FF, - The same types as Microsoft Project'); ?></td>
+</tr>
+<tr>
+    <td>dependenton2_project_task_id</td>
+    <td><?php echo _('repetition of dependenton1'); ?></td>
+</tr>
+<tr>
+    <td>dependenton2_external_task_id</td>
+    <td><?php echo _('repetition of dependenton1'); ?></td>
+</tr>
+<tr>
+    <td>dependenton2_linktype</td>
+    <td><?php echo _('repetition of dependenton1'); ?></td>
+</tr>
+<tr>
+    <td>dependenton3_project_task_id</td>
+    <td><?php echo _('repetition of dependenton1'); ?></td>
+</tr>
+<tr>
+    <td>dependenton3_external_task_id</td>
+    <td><?php echo _('repetition of dependenton1'); ?></td>
+</tr>
+<tr>
+    <td>dependenton3_linktype</td>
+    <td><?php echo _('repetition of dependenton1'); ?></td>
+</tr>
+<tr>
+    <td>dependenton4_project_task_id</td>
+    <td><?php echo _('repetition of dependenton1'); ?></td>
+</tr>
+<tr>
+    <td>dependenton4_external_task_id</td>
+    <td><?php echo _('repetition of dependenton1'); ?></td>
+</tr>
+<tr>
+    <td>dependenton4_linktype</td>
+    <td><?php echo _('repetition of dependenton1'); ?></td>
+</tr>
+<tr>
+    <td>dependenton5_project_task_id</td>
+    <td><?php echo _('repetition of dependenton1'); ?></td>
+</tr>
+<tr>
+    <td>dependenton5_external_task_id</td>
+    <td><?php echo _('repetition of dependenton1'); ?></td>
+</tr>
+<tr>
+    <td>dependenton5_linktype</td>
+    <td><?php echo _('repetition of dependenton1'); ?></td>
+</tr>
 </table>
-<p />
+
 <?php
 pm_footer(array());
