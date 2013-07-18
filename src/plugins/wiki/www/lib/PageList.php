@@ -1099,8 +1099,12 @@ class PageList
     function explodePageList($input, $include_empty = false, $sortby = '',
                              $limit = '', $exclude = '')
     {
-        if (empty($input)) return array();
-        if (is_array($input)) return $input;
+        if (empty($input)) {
+            return array();
+        }
+        if (is_array($input)) {
+            return $input;
+        }
         // expand wildcards from list of all pages
         if (preg_match('/[\?\*]/', $input) or substr($input, 0, 1) == "^") {
             include_once 'lib/TextSearchQuery.php';
