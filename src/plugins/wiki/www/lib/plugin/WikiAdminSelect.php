@@ -62,7 +62,7 @@ class WikiPlugin_WikiAdminSelect
      * Default collector for all WikiAdmin* plugins.
      * preSelectS() is similar, but fills $this->_list
      */
-    function collectPages(&$list, &$dbi, $sortby, $limit = 0, $exclude = '')
+    protected function collectPages(&$list, &$dbi, $sortby, $limit = 0, $exclude = '')
     {
         $allPages = $dbi->getAllPages(0, $sortby, $limit, $exclude);
         while ($pagehandle = $allPages->next()) {
@@ -80,17 +80,20 @@ class WikiPlugin_WikiAdminSelect
      * 'only: forgot what the difference to 's' was.
      * Sets $this->_list, which is picked up by collectPages() and is a default for p[]
      */
-    function preSelectS(&$args, &$request)
+    protected function preSelectS(&$args, &$request)
     {
         // override plugin argument by GET: probably not needed if s||="" is used
         // anyway, we force it for unique interface.
-        if (!empty($request->getArg['s']))
+        if (!empty($request->getArg['s'])) {
             $args['s'] = $request->getArg['s'];
-        if (!empty($args['owner']))
+        }
+        if (!empty($args['owner'])) {
             $sl = PageList::allPagesByOwner($args['owner'], false, $args['sortby'], $args['limit'], $args['exclude']);
-        elseif (!empty($args['author']))
-            $sl = PageList::allPagesByAuthor($args['author'], false, $args['sortby'], $args['limit'], $args['exclude']); elseif (!empty($args['creator']))
-            $sl = PageList::allPagesByCreator($args['creator'], false, $args['sortby'], $args['limit'], $args['exclude']); elseif (!empty($args['s']) or !empty($args['only'])) {
+        } elseif (!empty($args['author'])) {
+            $sl = PageList::allPagesByAuthor($args['author'], false, $args['sortby'], $args['limit'], $args['exclude']);
+        } elseif (!empty($args['creator'])) {
+            $sl = PageList::allPagesByCreator($args['creator'], false, $args['sortby'], $args['limit'], $args['exclude']);
+        } elseif (!empty($args['s']) or !empty($args['only'])) {
             // all pages by name
             $sl = explodePageList(empty($args['only']) ? $args['s'] : $args['only']);
         }
