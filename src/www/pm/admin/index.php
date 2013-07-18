@@ -208,8 +208,8 @@ if ($add_cat && $group_project_id) {
 	<p>
 	<input type="hidden" name="add_cat" value="y" />
 	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
-	<strong><?php echo _('Category Name') ?>:</strong><br />
-	<input type="text" name="name" value="" size="15" maxlength="30" />
+	<strong><?php echo _('Category Name') . _(':'); ?></strong>
+	<input required="required" type="text" name="name" value="" />
 	</p>
 	<p class="important"><?php echo _('Once you add a category, it cannot be deleted') ?></p>
 	<p><input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
