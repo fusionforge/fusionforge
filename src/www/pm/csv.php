@@ -80,7 +80,7 @@ $format .= " using '$sep' as separator.";
 <p><?php echo _('This page allows you to export or import all the tasks using a CSV (<a href="http://en.wikipedia.org/wiki/Comma-separated_values">Comma Separated Values</a>) File. This format can be used to view tasks using MS Excel.'); ?></p>
 <h2><?php echo _('Export tasks as a CSV file'); ?></h2>
 
-<strong><?php echo _('Selected CSV Format :'); ?></strong> <?php echo $format ?> <a href="<?php echo $url_set_format ?>">(Change)</a>
+<strong><?php echo _('Selected CSV Format:'); ?></strong> <?php echo $format ?> <a href="<?php echo $url_set_format ?>">(Change)</a>
 
 <p><a href="<?php echo $url_export ?>"><?php echo _('Export CSV file'); ?></a></p>
 
