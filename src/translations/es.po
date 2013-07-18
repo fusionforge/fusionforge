@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-18 11:36+0200\n"
+"POT-Creation-Date: 2013-07-18 16:09+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -414,8 +414,11 @@ msgstr "Proyecto"
 #: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
 #: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
 #: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
-#: www/export/rssAboTask.php:173 www/project/admin/roledelete.php:62
-#: www/register/index.php:178
+#: www/export/rssAboTask.php:173 www/pm/add_task.php:50 www/pm/add_task.php:63
+#: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
+#: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
+#: www/pm/add_task.php:124 www/pm/add_task.php:130 www/pm/add_task.php:149
+#: www/project/admin/roledelete.php:62 www/register/index.php:178
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/softwaremap/tag_cloud.php:143 www/survey/survey.php:51
@@ -1579,7 +1582,10 @@ msgstr "Fecha Inicial"
 #: www/admin/massmail.php:142 www/admin/useredit.php:148
 #: www/admin/useredit.php:157 www/admin/useredit.php:211
 #: www/frs/reporting/downloads.php:105 www/frs/reporting/downloads.php:107
-#: www/frs/reporting/downloads.php:109 www/register/index.php:226
+#: www/frs/reporting/downloads.php:109 www/pm/admin/index.php:211
+#: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
+#: www/pm/format_csv.php:86 www/pm/format_csv.php:89 www/pm/format_csv.php:93
+#: www/pm/format_csv.php:97 www/register/index.php:226
 #: www/reporting/groupadded.php:60 www/reporting/groupadded.php:61
 #: www/reporting/groupadded.php:62 www/reporting/groupcum.php:59
 #: www/reporting/groupcum.php:60 www/reporting/groupcum.php:61
@@ -3292,7 +3298,7 @@ msgstr "Página Principal de Proyecto orientada a Widgets"
 #: common/tracker/actions/mod.php:196
 #: common/tracker/include/build_submission_form.php:64
 #: common/widget/Widget_MyProjects.class.php:77
-#: www/include/Layout.class.php:725
+#: www/include/Layout.class.php:725 www/pm/add_task.php:53
 msgid "Admin"
 msgstr "Administración"
 
@@ -4988,7 +4994,7 @@ msgstr ""
 msgid "Export as a CSV file"
 msgstr "Exportar como fichero CSV"
 
-#: common/tracker/actions/csv.php:87 www/pm/csv.php:83
+#: common/tracker/actions/csv.php:87
 msgid "Selected CSV Format :"
 msgstr "Seleccionado Formato CSV:"
 
@@ -5870,8 +5876,8 @@ msgstr "Descargar"
 #: www/admin/pluginman.php:246 www/admin/pluginman.php:258
 #: www/admin/pluginman.php:259 www/include/html.php:313
 #: www/include/html.php:503 www/include/html.php:589 www/include/html.php:606
-#: www/include/html.php:640 www/include/html.php:681 www/pm/ganttpage.php:63
-#: www/tracker/roadmap.php:440
+#: www/include/html.php:640 www/include/html.php:681 www/pm/format_csv.php:78
+#: www/pm/ganttpage.php:63 www/tracker/roadmap.php:440
 msgid "None"
 msgstr "Ninguno"
 
@@ -7141,6 +7147,7 @@ msgstr "Paquete"
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:91
 #: plugins/mantisbt/view/viewNote.php:42 www/pm/csv.php:94
+#: www/pm/format_csv.php:86
 msgid "Notes"
 msgstr "Notas"
 
@@ -18655,10 +18662,6 @@ msgstr "User_id no encontrado"
 msgid "Add a new Task"
 msgstr "Crear una Tarea"
 
-#: www/pm/add_task.php:53 www/pm/mod_task.php:62
-msgid "admin"
-msgstr "Admin"
-
 #: www/pm/add_task.php:81
 msgid "Task Details"
 msgstr "Detalles de la Tarea"
@@ -18973,17 +18976,17 @@ msgstr "Error: No pudo obtener ProjectTaskFactory"
 msgid "Calendar"
 msgstr "Calendarios"
 
-#: www/pm/calendar.php:142
+#: www/pm/calendar.php:143
 #, php-format
 msgid "Task summary: %s"
 msgstr "Descripción de la Tarea: %s"
 
-#: www/pm/calendar.php:145
+#: www/pm/calendar.php:146
 #, php-format
 msgid "Task %d begins"
 msgstr "%d comienza Tarea"
 
-#: www/pm/calendar.php:146
+#: www/pm/calendar.php:147
 #, php-format
 msgid "Task %d ends"
 msgstr "%d finaliza Tarea"
@@ -19039,6 +19042,11 @@ msgstr ""
 #: www/pm/csv.php:81
 msgid "Export tasks as a CSV file"
 msgstr "Esportar tareas como un fichero CSV"
+
+#: www/pm/csv.php:83
+#, fuzzy
+msgid "Selected CSV Format:"
+msgstr "Seleccionado Formato CSV:"
 
 #: www/pm/csv.php:85
 msgid "Export CSV file"
@@ -19198,6 +19206,71 @@ msgstr "Horas"
 msgid "Update CSV Format"
 msgstr "Seleccionado Formato CSV:"
 
+#: www/pm/format_csv.php:58
+#, fuzzy
+msgid "CSV Format"
+msgstr "Seleccionado Formato CSV:"
+
+#: www/pm/format_csv.php:66
+#, fuzzy
+msgid "Content"
+msgstr "¿Nuevo Contenido?"
+
+#: www/pm/format_csv.php:67
+#, fuzzy
+msgid "Full"
+msgstr "Nombre completo"
+
+#: www/pm/format_csv.php:68
+msgid "Normal"
+msgstr ""
+
+#: www/pm/format_csv.php:71
+#, fuzzy
+msgid "Separator"
+msgstr "Creador"
+
+#: www/pm/format_csv.php:72
+msgid "Comma (char: “,”)"
+msgstr ""
+
+#: www/pm/format_csv.php:73
+msgid "Semi-colon (char: “;”)"
+msgstr ""
+
+#: www/pm/format_csv.php:76
+msgid "Header"
+msgstr ""
+
+#: www/pm/format_csv.php:77
+msgid "Included"
+msgstr ""
+
+#: www/pm/format_csv.php:89
+#, fuzzy
+msgid "Full/Normal"
+msgstr "Nombre completo"
+
+#: www/pm/format_csv.php:90
+msgid "In Full, the category is also exported."
+msgstr ""
+
+#: www/pm/format_csv.php:93
+msgid "Comma/Semi-colon"
+msgstr ""
+
+#: www/pm/format_csv.php:94
+msgid "Some international versions of Microsoft Excel use “;” instead of “,”."
+msgstr ""
+
+#: www/pm/format_csv.php:97
+msgid "Headers Included or not"
+msgstr ""
+
+#: www/pm/format_csv.php:98
+msgid "Add a line with the name of the fields at the fist line."
+msgstr ""
+
 #: www/pm/ganttofuser.php:33 www/pm/gantt.php:25
 #: www/survey/admin/graphs.php:44
 msgid "Package JPGraph not installed"
@@ -19321,6 +19394,10 @@ msgstr "Elije un Subproyecto y podrás ver/editar/añadir tareas en él."
 #: www/pm/mod_task.php:37
 msgid "Modify Task"
 msgstr "Modificar tarea"
+
+#: www/pm/mod_task.php:62
+msgid "admin"
+msgstr "Admin"
 
 #: www/pm/mod_task.php:101
 msgid "Delete this task"
