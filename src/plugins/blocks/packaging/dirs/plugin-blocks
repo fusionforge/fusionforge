@@ -1,5 +1,4 @@
 etc/gforge/plugins/blocks
-etc/gforge/config.ini.d
-usr/share/gforge/plugins/blocks
-usr/share/gforge/plugins/blocks/common
-usr/share/gforge/plugins/blocks/www
+usr/share/@OLDPACKAGE@/plugins/blocks
+usr/share/@OLDPACKAGE@/plugins/blocks/common
+usr/share/@OLDPACKAGE@/plugins/blocks/www
