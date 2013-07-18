@@ -55,7 +55,7 @@ $sep = getStringFromRequest('sep', ',');
 <table class="centered">
 	<tr>
 		<td>
-		<fieldset><legend><b>CSV Format</b></legend>
+		<fieldset><legend><strong><?php echo _('CSV Format'); ?></strong></legend>
 		<form action="/pm/task.php" method="get"><input type="hidden"
 			name="group_id" value="<?php echo $group_id ?>" /> <input
 			type="hidden" name="group_project_id"
@@ -63,19 +63,19 @@ $sep = getStringFromRequest('sep', ',');
 			name="func" value="csv" />
 		<table>
 			<tr>
-				<td class="top"><b>Content :</b></td>
-				<td><input type="radio" name="full" value="1"<?php if ($full) echo ' checked="checked"' ?>/>Full<br />
-				<input type="radio" name="full" value="0"<?php if (!$full) echo ' checked="checked"' ?> />Normal</td>
+				<td class="top"><strong><?php echo _('Content')._(':'); ?></strong></td>
+				<td><input type="radio" name="full" value="1"<?php if ($full) echo ' checked="checked"' ?>/><?php echo _('Full'); ?><br />
+				<input type="radio" name="full" value="0"<?php if (!$full) echo ' checked="checked"' ?> /><?php echo _('Normal'); ?></td>
 			</tr>
 			<tr>
-				<td class="top"><b>Separator :</b></td>
-				<td><input type="radio" name="sep" value=","<?php if ($sep==',') echo ' checked="checked"' ?>/>Comma (char: ',')<br />
-				<input type="radio" name="sep" value=";"<?php if ($sep==';') echo ' checked="checked"' ?>/>Semi-colon (char: ';')</td>
+				<td class="top"><strong><?php echo _('Separator')._(':'); ?></strong></td>
+				<td><input type="radio" name="sep" value=","<?php if ($sep==',') echo ' checked="checked"' ?>/><?php echo _('Comma (char: “,”)'); ?><br />
+				<input type="radio" name="sep" value=";"<?php if ($sep==';') echo ' checked="checked"' ?>/><?php echo _('Semi-colon (char: “;”)'); ?></td>
 			</tr>
 			<tr>
-				<td class="top"><b>Header :</b></td>
-				<td><input type="radio" name="headers" value="1"<?php if ($headers) echo ' checked="checked"' ?>/>Included<br />
-				<input type="radio" name="headers" value="0"<?php if (!$headers) echo ' checked="checked"' ?>/>None</td>
+				<td class="top"><strong><?php echo _('Header')._(':'); ?></strong></td>
+				<td><input type="radio" name="headers" value="1"<?php if ($headers) echo ' checked="checked"' ?>/><?php echo _('Included'); ?><br />
+				<input type="radio" name="headers" value="0"<?php if (!$headers) echo ' checked="checked"' ?>/><?php echo _('None'); ?></td>
 			</tr>
 		</table>
 		<input type="submit" name="Submit" /></form>
@@ -83,13 +83,21 @@ $sep = getStringFromRequest('sep', ',');
 		</td>
 	</tr>
 </table>
-<p><strong>Notes:</strong></p>
-<div>
+<p><strong><?php echo _('Notes')._(':'); ?></strong></p>
 <ul>
-<li><strong>Full/Normal :</strong> In Full, the category is also exported.</li>
-<li><strong>Comma/Semi-colon :</strong> Some international version of MS Excel uses ';' instead of ','.</li>
-<li><strong>Headers Included or not :</strong> Add a line with the name of the fields at the fist line.</li>
+<li>
+    <strong><?php echo _('Full/Normal')._(':'); ?></strong>
+    <?php echo _('In Full, the category is also exported.'); ?>
+</li>
+<li>
+    <strong><?php echo _('Comma/Semi-colon')._(':'); ?></strong>
+    <?php echo _('Some international versions of Microsoft Excel use “;” instead of “,”.'); ?>
+</li>
+<li>
+    <strong><?php echo _('Headers Included or not')._(':'); ?></strong>
+    <?php echo _('Add a line with the name of the fields at the fist line.'); ?>
+</li>
 </ul>
-</div>
+
 <?php
 pm_footer(array());
