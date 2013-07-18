@@ -288,9 +288,9 @@ class SVNPlugin extends SCMPlugin {
 				$unix_group = 'scm_' . $project->getUnixName() ;
 				system ("find $repo -type d | xargs -I{} chmod g+s {}") ;
 				if ($project->enableAnonSCM()) {
-					system ("chmod -R g+wX,o+rX-w $repo") ;
+					system ("chmod -R g+rwX,o+rX-w $repo") ;
 				} else {
-					system ("chmod -R g+wX,o-rwx $repo") ;
+					system ("chmod -R g+rwX,o-rwx $repo") ;
 				}
 				system ("chgrp -R $unix_group $repo") ;
 			} else {
@@ -311,9 +311,9 @@ class SVNPlugin extends SCMPlugin {
 				system("chgrp $unix_group $repo");
 			}
 			if ($project->enableAnonSCM()) {
-				system("chmod g+wX,o+rX-w $repo") ;
+				system("chmod g+rwX,o+rX-w $repo") ;
 			} else {
-				system("chmod g+wX,o-rwx $repo") ;
+				system("chmod g+rwX,o-rwx $repo") ;
 			}
 		} else {
 			$unix_user = forge_get_config('apache_user');

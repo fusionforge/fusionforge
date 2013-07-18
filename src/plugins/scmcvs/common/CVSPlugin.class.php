@@ -257,11 +257,11 @@ class CVSPlugin extends SCMPlugin {
 				if ($project->enableAnonSCM()) {
 					util_create_file_with_contents ("$repo/CVSROOT/readers", "anonymous\n");
 					util_create_file_with_contents ("$repo/CVSROOT/passwd", "anonymous:\n");
-					system ("chmod -R g+wXs,o+rX-w $repo") ;
+					system ("chmod -R g+rwXs,o+rX-w $repo") ;
 				} else {
 					util_create_file_with_contents ("$repo/CVSROOT/readers", "\n");
 					util_create_file_with_contents ("$repo/CVSROOT/passwd", "\n");
-					system ("chmod -R g+wXs,o-rwx $repo") ;
+					system ("chmod -R g+rwXs,o-rwx $repo") ;
 				}
 				system ("chgrp -R $unix_group $repo") ;
 			} else {
@@ -275,11 +275,11 @@ class CVSPlugin extends SCMPlugin {
 			if ($project->enableAnonSCM()) {
 				util_create_file_with_contents ("$repo/CVSROOT/readers", "anonymous\n");
 				util_create_file_with_contents ("$repo/CVSROOT/passwd", "anonymous:\n");
-				system ("chmod g+wXs,o+rX-w $repo") ;
+				system ("chmod g+rwXs,o+rX-w $repo") ;
 			} else {
 				util_create_file_with_contents ("$repo/CVSROOT/readers", "\n");
 				util_create_file_with_contents ("$repo/CVSROOT/passwd", "\n");
-				system ("chmod g+wXs,o-rwx $repo") ;
+				system ("chmod g+rwXs,o-rwx $repo") ;
 			}
 		}
 	}
