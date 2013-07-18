@@ -1,2 +1,1 @@
 /usr/share/@OLDPACKAGE@/plugins/blocks/www /usr/share/@OLDPACKAGE@/www/plugins/blocks
-/etc/@PACKAGE@/config.ini.d /etc/@OLDPACKAGE@/config.ini.d
