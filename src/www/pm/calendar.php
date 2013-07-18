@@ -134,11 +134,12 @@ pm_header(array('title'=>_('Calendar'),'group'=>$group_id));
  * @param     $task  the task to make a link for.
  * @param     $type  either 'begin' for beginning of a task or 'end' for
  *                   end of a task.
+ * @return string
  * @date      2002-01-04
  *
  */
 function make_task_link($task, $type) {
-	global $HTML, $group_id, $group_project_id;
+	global $group_id, $group_project_id;
 	return '<a title="'. util_html_secure(sprintf(_('Task summary: %s'), $task->getSummary()))
 		. '" href="'.util_make_url ('/pm/task.php?func=detailtask&amp;project_task_id=' . $task->getID() . '&amp;group_id=' . $group_id . '&amp;group_project_id=' .$group_project_id)
 		. '">' . ($type == 'begin' ?
@@ -160,8 +161,7 @@ function make_task_link($task, $type) {
  *
  */
 function display_month($m, $y) {
-	global $months, $today, $month, $day, $year, $HTML,
-		$pt_arr, $group_id, $group_project_id;
+	global $today, $month, $day, $year, $pt_arr;
 	$dow = array(_('Sunday'), _('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'));
 
 	$tstamp = mktime(0, 0, 0, $m + 1, 0, $y) ;
@@ -175,7 +175,7 @@ function display_month($m, $y) {
 	$m = $date['mon'];
 	$y = $date['year'];
 ?>
-	<table align="center" cellpadding="1" cellspacing="1" border="1" width="100%">
+	<table class="centered" cellpadding="1" cellspacing="1" border="1" width="100%">
 		<tr>
 		 <th colspan="7"><?php echo date (_('F Y'), $tstamp); ?></th>
 		</tr>
