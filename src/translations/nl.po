@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-08 18:05+0200\n"
+"POT-Creation-Date: 2013-07-18 11:30+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -25,7 +25,7 @@ msgid "SSH Key added successfully."
 msgstr "Gebruiker toegevoegd"
 
 #: common/account/actions/addsshkey.php:40
-#: common/docman/actions/addfile.php:124 common/docman/actions/addfile.php:151
+#: common/docman/actions/addfile.php:124 common/docman/actions/addfile.php:160
 #: common/docman/DocumentGroup.class.php:215
 #: common/docman/DocumentGroup.class.php:810
 #, fuzzy
@@ -73,20 +73,20 @@ msgstr "Geen documentgroepen gedefinieerd"
 msgid "Error getting blank document."
 msgstr "Fout bij het invoegen van een element"
 
-#: common/docman/actions/addfile.php:143
+#: common/docman/actions/addfile.php:152
 msgid "Manual uploads disabled."
 msgstr ""
 
-#: common/docman/actions/addfile.php:167
+#: common/docman/actions/addfile.php:176
 msgid "Unknown type submission."
 msgstr ""
 
-#: common/docman/actions/addfile.php:184
+#: common/docman/actions/addfile.php:193
 #, fuzzy, php-format
 msgid "Document %s submitted successfully."
 msgstr "Document gesubmit"
 
-#: common/docman/actions/addfile.php:187
+#: common/docman/actions/addfile.php:196
 #, fuzzy, php-format
 msgid ""
 "Document %s has been successfully uploaded and is waiting to be approved."
@@ -381,8 +381,8 @@ msgstr "Project"
 #: common/docman/DocumentGroup.class.php:705
 #: common/docman/DocumentGroup.class.php:707
 #: common/docman/DocumentGroup.class.php:709
-#: common/docman/DocumentManager.class.php:185
 #: common/docman/DocumentManager.class.php:187
+#: common/docman/DocumentManager.class.php:193
 #: common/docman/include/DocumentGroupHTML.class.php:42
 #: common/docman/views/addfile.php:91 common/docman/views/addfile.php:92
 #: common/docman/views/addsubdocgroup.php:56
@@ -430,8 +430,8 @@ msgstr "Project"
 #: plugins/oauthconsumer/www/get_access_token.php:134
 #: plugins/oauthconsumer/www/get_access_token.php:135
 #: plugins/projects-hierarchy/view/home_project_link.php:37
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:631
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:633
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:632
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:634
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/export/rssAboTask.php:142
 #: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
 #: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
@@ -610,16 +610,16 @@ msgstr ""
 msgid "Number of deleted documents in this folder"
 msgstr ""
 
-#: common/docman/DocumentManager.class.php:185
+#: common/docman/DocumentManager.class.php:187
 #, fuzzy
 msgid "Created by"
 msgstr "Aangemaakt door"
 
-#: common/docman/DocumentManager.class.php:187
+#: common/docman/DocumentManager.class.php:191
 msgid "; "
 msgstr ""
 
-#: common/docman/DocumentManager.class.php:187
+#: common/docman/DocumentManager.class.php:193
 msgid "Last modified"
 msgstr "Meest recente verandering"
 
@@ -727,7 +727,7 @@ msgstr ""
 #: www/forum/admin/index.php:117 www/forum/admin/index.php:158
 #: www/forum/index.php:69 www/mail/index.php:79 www/people/editjob.php:52
 #: www/people/editjob.php:74 www/pm/admin/index.php:286
-#: www/pm/admin/index.php:325 www/pm/index.php:100
+#: www/pm/admin/index.php:325 www/pm/csv.php:106 www/pm/index.php:100
 #: www/project/admin/editimages.php:228 www/project/admin/editimages.php:255
 #: www/project/admin/editimages.php:271
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:62
@@ -1881,8 +1881,8 @@ msgstr "Kan parent niet aanpassen"
 #: plugins/oauthprovider/www/request_tokens.php:100
 #: plugins/oauthprovider/www/request_tokens.php:103
 #: plugins/oauthprovider/www/request_tokens.php:108
-#: plugins/scmgit/common/GitPlugin.class.php:1084
 #: plugins/scmgit/common/GitPlugin.class.php:1093
+#: plugins/scmgit/common/GitPlugin.class.php:1102
 #: www/admin/admin_table.php:162 www/admin/admin_table.php:326
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:152
 #: www/admin/useredit.php:231 www/forum/admin/index.php:174
@@ -2154,7 +2154,9 @@ msgstr "Je kunt alleen monitoren als je bent ingelogd"
 msgid "You Can Only Save Your Place If You Are Logged In"
 msgstr "Je kunt je positie alleen opslaan als je bent ingelogd"
 
-#: common/forum/Forum.class.php:597 common/survey/SurveyQuestion.class.php:149
+#: common/forum/Forum.class.php:597 common/survey/Survey.class.php:169
+#: common/survey/Survey.class.php:207
+#: common/survey/SurveyQuestion.class.php:149
 #: plugins/mailman/include/MailmanList.class.php:249
 #: plugins/mailman/include/MailmanList.class.php:376
 #: plugins/mailman/include/MailmanList.class.php:393
@@ -2202,7 +2204,7 @@ msgstr "Forum"
 msgid "Posted by:"
 msgstr "Gepost door"
 
-#: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:380
+#: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:379
 #: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:556
 #: common/tracker/actions/detail.php:96
 #: common/tracker/actions/mod-limited.php:142
@@ -2306,7 +2308,7 @@ msgstr "Bericht:"
 #: plugins/headermenu/view/admin/updateLinkValue.php:103
 #: plugins/oauthconsumer/www/provider_edit.php:30
 #: plugins/oauthprovider/www/consumer_update_page.php:51
-#: plugins/scmgit/common/GitPlugin.class.php:1114
+#: plugins/scmgit/common/GitPlugin.class.php:1123
 #: plugins/scmhg/common/HgPlugin.class.php:631
 #: plugins/webanalytics/view/admin/updateLinkValue.php:42
 #: www/admin/admin_table.php:59 www/admin/admin_table.php:165
@@ -3242,7 +3244,7 @@ msgstr ""
 "afgewezen."
 
 #: common/include/group_section_texts.php:29
-#: common/include/Navigation.class.php:426
+#: common/include/Navigation.class.php:425
 #: common/reporting/report_utils.php:147 plugins/blocks/www/index.php:151
 #: plugins/quota_management/www/quota_project.php:87
 msgid "Forums"
@@ -3254,7 +3256,7 @@ msgid "Trackers"
 msgstr "Trackers"
 
 #: common/include/group_section_texts.php:31
-#: common/include/Navigation.class.php:474 common/include/rbac_texts.php:157
+#: common/include/Navigation.class.php:473 common/include/rbac_texts.php:157
 #: common/reporting/report_utils.php:155 common/reporting/report_utils.php:193
 #: common/widget/Widget_ProjectPublicAreas.class.php:148
 #: plugins/blocks/www/index.php:154 www/my/dashboard.php:77
@@ -3275,7 +3277,7 @@ msgid "File Release System"
 msgstr "Gebruik bestandopleveringssysteem"
 
 #: common/include/group_section_texts.php:34
-#: common/include/Navigation.class.php:519 plugins/blocks/www/index.php:157
+#: common/include/Navigation.class.php:518 plugins/blocks/www/index.php:157
 #: plugins/quota_management/www/quota_project.php:74
 #: www/activity/index.php:114 www/activity/index.php:311
 #: www/admin/index.php:187 www/news/index.php:34
@@ -3370,12 +3372,12 @@ msgstr ""
 msgid "Project home page, widgets selected to follow specific items."
 msgstr ""
 
-#: common/include/Navigation.class.php:381
+#: common/include/Navigation.class.php:380
 #, fuzzy
 msgid "Project Homepage. Widgets oriented"
 msgstr "Project bestandslijst"
 
-#: common/include/Navigation.class.php:398 common/tracker/actions/mod.php:144
+#: common/include/Navigation.class.php:397 common/tracker/actions/mod.php:144
 #: common/tracker/actions/mod.php:196
 #: common/tracker/include/build_submission_form.php:64
 #: common/widget/Widget_MyProjects.class.php:77
@@ -3383,26 +3385,26 @@ msgstr "Project bestandslijst"
 msgid "Admin"
 msgstr "Beheer"
 
-#: common/include/Navigation.class.php:399
+#: common/include/Navigation.class.php:398
 #, fuzzy
 msgid "Project Administration."
 msgstr "Project database beheer"
 
-#: common/include/Navigation.class.php:415 www/activity/index.php:95
+#: common/include/Navigation.class.php:414 www/activity/index.php:95
 #: www/activity/index.php:179 www/activity/index.php:265
 #: www/export/rss_project.php:98
 msgid "Activity"
 msgstr ""
 
-#: common/include/Navigation.class.php:416
+#: common/include/Navigation.class.php:415
 msgid "Last activities per category."
 msgstr ""
 
-#: common/include/Navigation.class.php:427
+#: common/include/Navigation.class.php:426
 msgid "Tech & help forums."
 msgstr ""
 
-#: common/include/Navigation.class.php:441 common/include/rbac_texts.php:156
+#: common/include/Navigation.class.php:440 common/include/rbac_texts.php:156
 #: common/reporting/report_utils.php:143
 #: common/tracker/actions/admin-ind.php:100 common/tracker/actions/ind.php:57
 #: common/widget/Widget_ProjectPublicAreas.class.php:56
@@ -3410,77 +3412,77 @@ msgstr ""
 msgid "Tracker"
 msgstr "Tracker"
 
-#: common/include/Navigation.class.php:442
+#: common/include/Navigation.class.php:441
 msgid "Issues, tickets, bugs."
 msgstr ""
 
-#: common/include/Navigation.class.php:459 plugins/blocks/www/index.php:153
+#: common/include/Navigation.class.php:458 plugins/blocks/www/index.php:153
 msgid "Lists"
 msgstr "Lijsten"
 
-#: common/include/Navigation.class.php:460
+#: common/include/Navigation.class.php:459
 #: common/widget/Widget_ProjectPublicAreas.class.php:136
 msgid "Mailing Lists"
 msgstr "Mailing lijsten"
 
-#: common/include/Navigation.class.php:475
+#: common/include/Navigation.class.php:474
 #, fuzzy
 msgid "Project Management."
 msgstr "Nieuwe projectnaam"
 
-#: common/include/Navigation.class.php:489
+#: common/include/Navigation.class.php:488
 #: common/reporting/report_utils.php:151 plugins/blocks/www/index.php:155
 #: www/reporting/projectact_graph.php:105
 msgid "Docs"
 msgstr "Documentatie"
 
-#: common/include/Navigation.class.php:490 www/index_std.php:18
+#: common/include/Navigation.class.php:489 www/index_std.php:18
 #, fuzzy
 msgid "Document Management."
 msgstr "Bekijk documentatie"
 
-#: common/include/Navigation.class.php:504
+#: common/include/Navigation.class.php:503
 #: common/widget/Widget_ProjectPublicAreas.class.php:172
 #: plugins/blocks/www/index.php:156
 msgid "Surveys"
 msgstr "Enqu&ecirc;tes"
 
-#: common/include/Navigation.class.php:505
+#: common/include/Navigation.class.php:504
 msgid "Online surveys, project needs your point of view."
 msgstr ""
 
-#: common/include/Navigation.class.php:520
+#: common/include/Navigation.class.php:519
 #, fuzzy
 msgid "Flash head line from the project."
 msgstr "Een dergelijke vacature komt in dit project niet voor"
 
-#: common/include/Navigation.class.php:534 common/include/rbac_texts.php:164
+#: common/include/Navigation.class.php:533 common/include/rbac_texts.php:164
 #: plugins/blocks/www/index.php:158 www/stats/site_stats_utils.php:245
 #: www/stats/site_stats_utils.php:368 www/stats/site_stats_utils.php:423
 msgid "SCM"
 msgstr "SCM"
 
-#: common/include/Navigation.class.php:535
+#: common/include/Navigation.class.php:534
 msgid "Source Content Management, peer-review and source discovery."
 msgstr ""
 
-#: common/include/Navigation.class.php:566 common/include/rbac_texts.php:166
+#: common/include/Navigation.class.php:565 common/include/rbac_texts.php:166
 #: plugins/blocks/www/index.php:159
 msgid "Files"
 msgstr "Bestanden"
 
-#: common/include/Navigation.class.php:567
+#: common/include/Navigation.class.php:566
 msgid "All published files organized per version."
 msgstr ""
 
-#: common/include/Navigation.class.php:636
+#: common/include/Navigation.class.php:632
 msgid "Show source"
 msgstr "Toon broncode"
 
 #: common/include/Plugin.class.php:201 common/include/Plugin.class.php:218
 #, php-format
 msgid ""
-"Config file could not be linked to etc/gforge/plugins/%1$s. Check the write "
+"Config file could not be linked to etc/gforge/plugins/%s. Check the write "
 "permissions for apache in /etc/gforge/plugins or create the link manually."
 msgstr ""
 
@@ -3501,7 +3503,7 @@ msgstr "Geen statistieken beschikbaar"
 #: common/include/PluginManager.class.php:217
 msgid ""
 "Some plugin did not provide a name. I'd gladly tell you which one, but "
-"obviously I can't. Sorry."
+"obviously I cannot. Sorry."
 msgstr ""
 
 #: common/include/PluginPersistence.class.php:111
@@ -4450,17 +4452,13 @@ msgstr "WIJZIGEN MISLUKT: Enqu&ecirc;te titel ontbreekt"
 msgid "Update Failed: Survey Questions Required"
 msgstr "WIJZIGEN MISLUKT: Enqu&ecirc;te vragen ontbreken"
 
-#: common/survey/Survey.class.php:121
+#: common/survey/Survey.class.php:121 www/survey/rating_resp.php:57
 msgid "Insert Error"
 msgstr ""
 
 #: common/survey/Survey.class.php:156 common/survey/Survey.class.php:189
 msgid "The Survey data is not filled"
 msgstr "De enqu&ecirc;tegegevens zijn niet ingevuld"
-
-#: common/survey/Survey.class.php:169 common/survey/Survey.class.php:207
-msgid "UPDATE FAILED"
-msgstr "WIJZIGEN MISLUKT"
 
 #: common/survey/Survey.class.php:229
 #: common/survey/SurveyQuestion.class.php:168 www/pm/task.php:355
@@ -4634,7 +4632,7 @@ msgstr ""
 #: plugins/forumml/www/forumml_utils.php:603 plugins/forumml/www/index.php:127
 #: plugins/mantisbt/view/addIssue.php:146
 #: plugins/mantisbt/view/addOrEditNote.php:58
-#: plugins/scmgit/common/GitPlugin.class.php:1115
+#: plugins/scmgit/common/GitPlugin.class.php:1124
 #: plugins/scmhg/common/HgPlugin.class.php:632
 #: www/account/pending-resend.php:75 www/activity/index.php:191
 #: www/admin/admin_table.php:222 www/admin/cronman.php:37
@@ -4645,7 +4643,7 @@ msgstr ""
 #: www/news/admin/index.php:151 www/news/news_utils.php:42
 #: www/news/submit.php:160 www/pm/add_task.php:57 www/pm/add_task.php:140
 #: www/pm/add_task.php:154 www/pm/admin/index.php:215
-#: www/pm/admin/index.php:260 www/pm/admin/index.php:291
+#: www/pm/admin/index.php:260 www/pm/admin/index.php:291 www/pm/csv.php:91
 #: www/pm/deletetask.php:44 www/pm/mod_task.php:54 www/pm/mod_task.php:254
 #: www/project/admin/editimages.php:237 www/project/admin/roledelete.php:85
 #: www/project/admin/roleedit.php:302 www/project/request.php:70
@@ -5284,7 +5282,7 @@ msgstr "Open"
 #: plugins/quota_management/www/quota_project.php:230
 #: plugins/scmcvs/common/CVSPlugin.class.php:195
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:230
-#: plugins/scmgit/common/GitPlugin.class.php:358
+#: plugins/scmgit/common/GitPlugin.class.php:360
 #: plugins/scmsvn/common/SVNPlugin.class.php:242 www/pm/index.php:102
 #: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:268
 msgid "Total"
@@ -6037,7 +6035,7 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer_update_page.php:55
 #: plugins/scmcvs/common/CVSPlugin.class.php:175
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:210
-#: plugins/scmgit/common/GitPlugin.class.php:338
+#: plugins/scmgit/common/GitPlugin.class.php:340
 #: plugins/scmsvn/common/SVNPlugin.class.php:222
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
 #: www/account/editsshkeys.php:51 www/account/index.php:317
@@ -6558,7 +6556,6 @@ msgstr "Element"
 
 #: common/tracker/views/form-deleteextrafieldelement.php:61
 #: common/tracker/views/form-deleteextrafield.php:38
-#: common/tracker/views/form-deletetracker.php:32
 #: www/forum/admin/index.php:183 www/frs/admin/deletepackage.php:67
 #: www/frs/admin/deleterelease.php:75 www/frs/admin/editrelease.php:381
 #: www/pm/admin/index.php:371 www/project/admin/roledelete.php:81
@@ -6582,7 +6579,6 @@ msgid ""
 msgstr ""
 
 #: common/tracker/views/form-deleteextrafield.php:39
-#: common/tracker/views/form-deletetracker.php:33
 #: www/forum/admin/index.php:184 www/frs/admin/deletepackage.php:70
 #: www/frs/admin/deleterelease.php:76 www/pm/admin/index.php:372
 msgid "I'm Really Sure"
@@ -6605,6 +6601,14 @@ msgid ""
 msgstr ""
 "Je staat op het punt om deze tracker and alle bijbehorende onderdelen "
 "onherroepelijk te verwijderen!"
+
+#: common/tracker/views/form-deletetracker.php:32
+msgid "I am Sure"
+msgstr "Ja, zeker weten!"
+
+#: common/tracker/views/form-deletetracker.php:33
+msgid "I am Really Sure"
+msgstr "Ik weet het helemaal zeker"
 
 #: common/tracker/views/form-edittemplate.php:3
 #, fuzzy, php-format
@@ -7341,7 +7345,7 @@ msgid "Package"
 msgstr "Bundel"
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:91
-#: plugins/mantisbt/view/viewNote.php:42
+#: plugins/mantisbt/view/viewNote.php:42 www/pm/csv.php:94
 msgid "Notes"
 msgstr "Aantekeningen"
 
@@ -7468,7 +7472,7 @@ msgid "surveys"
 msgstr "Enqu&ecirc;tes"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:183
-#: plugins/scmgit/www/index.php:27 plugins/scmgit/www/index.php:41
+#: plugins/scmgit/www/index.php:57 plugins/scmgit/www/index.php:71
 #: www/register/index.php:237 www/scm/admin/index.php:128
 #: www/scm/admin/index.php:154 www/scm/browser.php:31 www/scm/viewvc.php:162
 msgid "SCM Repository"
@@ -7549,20 +7553,20 @@ msgstr ""
 msgid "over %s years"
 msgstr ""
 
-#: cronjobs/homedirs.php:151
+#: cronjobs/homedirs.php:152
 msgid "Default Web Page for groups that haven't setup their page yet"
 msgstr ""
 
-#: cronjobs/homedirs.php:153
+#: cronjobs/homedirs.php:154
 msgid "Please replace this file with your own website"
 msgstr ""
 
-#: cronjobs/homedirs.php:155
+#: cronjobs/homedirs.php:156
 #, php-format
 msgid "Welcome to %s"
 msgstr "Welkom bij %s"
 
-#: cronjobs/homedirs.php:157
+#: cronjobs/homedirs.php:158
 #, php-format
 msgid ""
 "We're Sorry but this Project hasn't yet uploaded their personal webpage yet. "
@@ -12919,7 +12923,7 @@ msgstr ""
 #: plugins/scmbzr/common/BzrPlugin.class.php:76
 #: plugins/scmcvs/common/CVSPlugin.class.php:72
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:90
-#: plugins/scmgit/common/GitPlugin.class.php:83
+#: plugins/scmgit/common/GitPlugin.class.php:85
 #: plugins/scmhg/common/HgPlugin.class.php:56
 #: plugins/scmsvn/common/SVNPlugin.class.php:88
 #, php-format
@@ -12929,7 +12933,7 @@ msgstr ""
 #: plugins/scmbzr/common/BzrPlugin.class.php:70
 #: plugins/scmcvs/common/CVSPlugin.class.php:66
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:84
-#: plugins/scmgit/common/GitPlugin.class.php:77
+#: plugins/scmgit/common/GitPlugin.class.php:79
 #: plugins/scmhg/common/HgPlugin.class.php:173
 #: plugins/scmsvn/common/SVNPlugin.class.php:82
 #, php-format
@@ -13020,8 +13024,8 @@ msgstr ""
 #: plugins/scmbzr/common/BzrPlugin.class.php:124
 #: plugins/scmcpold/common/CpoldPlugin.class.php:98
 #: plugins/scmcvs/common/CVSPlugin.class.php:128
-#: plugins/scmgit/common/GitPlugin.class.php:221
-#: plugins/scmgit/common/GitPlugin.class.php:239
+#: plugins/scmgit/common/GitPlugin.class.php:223
+#: plugins/scmgit/common/GitPlugin.class.php:241
 #: plugins/scmhg/common/HgPlugin.class.php:131
 #: plugins/scmsvn/common/SVNPlugin.class.php:172
 #: plugins/scmsvn/common/SVNPlugin.class.php:185
@@ -13137,14 +13141,14 @@ msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:141
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:166
-#: plugins/scmgit/common/GitPlugin.class.php:289
+#: plugins/scmgit/common/GitPlugin.class.php:291
 #, fuzzy
 msgid "Download the nightly snapshot"
 msgstr "Nachtelijke CVS tarball downloaden"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:176
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:211
-#: plugins/scmgit/common/GitPlugin.class.php:339
+#: plugins/scmgit/common/GitPlugin.class.php:341
 #: plugins/scmsvn/common/SVNPlugin.class.php:223
 #: www/stats/site_stats_utils.php:287
 msgid "Adds"
@@ -13178,7 +13182,7 @@ msgid "where REPO can be: "
 msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:116
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:627
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:628
 msgid ", "
 msgstr ""
 
@@ -13208,35 +13212,35 @@ msgstr ""
 msgid "No repositories to browse"
 msgstr "Gebruik statistieken"
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:626
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:627
 #, fuzzy
 msgid "Repository to be created: "
 msgstr "SCM repository"
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:630
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:631
 #, fuzzy
 msgid "Create new repository:"
 msgstr "Cre&euml;er nieuw antwoord:"
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:631
-#: plugins/scmgit/common/GitPlugin.class.php:1084
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:632
+#: plugins/scmgit/common/GitPlugin.class.php:1093
 #: plugins/scmhg/common/HgPlugin.class.php:625
 #, fuzzy
 msgid "Repository name"
 msgstr "SCM repository"
 
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:633
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:634
 #, fuzzy
 msgid "Clone"
 msgstr "Telefoon:"
 
-#: plugins/scmgit/common/GitPlugin.class.php:100
+#: plugins/scmgit/common/GitPlugin.class.php:102
 msgid "Anonymous Access to the Git repository"
 msgid_plural "Anonymous Access to the Git repositories"
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:105
+#: plugins/scmgit/common/GitPlugin.class.php:107
 msgid ""
 "This project's Git repository can be checked out through anonymous access "
 "with the following command."
@@ -13246,14 +13250,14 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:125
+#: plugins/scmgit/common/GitPlugin.class.php:127
 #, fuzzy
 msgid "Developer's repository"
 msgid_plural "Developer's repositories"
 msgstr[0] "Ontwikkelaars (test)"
 msgstr[1] "Ontwikkelaars (test)"
 
-#: plugins/scmgit/common/GitPlugin.class.php:130
+#: plugins/scmgit/common/GitPlugin.class.php:132
 msgid ""
 "One of this project's members also has a personal Git repository that can be "
 "checked out anonymously."
@@ -13263,22 +13267,22 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:139
-#: plugins/scmgit/common/GitPlugin.class.php:321
+#: plugins/scmgit/common/GitPlugin.class.php:141
+#: plugins/scmgit/common/GitPlugin.class.php:323
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:52
 #, fuzzy
 msgid "Browse Git Repository"
 msgstr "SCM repository"
 
-#: plugins/scmgit/common/GitPlugin.class.php:166
-#: plugins/scmgit/common/GitPlugin.class.php:209
+#: plugins/scmgit/common/GitPlugin.class.php:168
+#: plugins/scmgit/common/GitPlugin.class.php:211
 #, fuzzy
 msgid "Developer Access to the Git repository via SSH"
 msgid_plural "Developer Access to the Git repositories via SSH"
 msgstr[0] "Ontwikkelaars (test)"
 msgstr[1] "Ontwikkelaars (test)"
 
-#: plugins/scmgit/common/GitPlugin.class.php:171
+#: plugins/scmgit/common/GitPlugin.class.php:173
 msgid ""
 "Only project developers can access the GIT repository via this method. SSH "
 "must be installed on your client machine. Enter your site password when "
@@ -13290,16 +13294,16 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:185
-#: plugins/scmgit/common/GitPlugin.class.php:228
+#: plugins/scmgit/common/GitPlugin.class.php:187
+#: plugins/scmgit/common/GitPlugin.class.php:230
 #, fuzzy
 msgid "Developer Access to the Git repository via HTTP"
 msgid_plural "Developer Access to the Git repositories via HTTP"
 msgstr[0] "Ontwikkelaars (test)"
 msgstr[1] "Ontwikkelaars (test)"
 
-#: plugins/scmgit/common/GitPlugin.class.php:191
-#: plugins/scmgit/common/GitPlugin.class.php:233
+#: plugins/scmgit/common/GitPlugin.class.php:193
+#: plugins/scmgit/common/GitPlugin.class.php:235
 msgid ""
 "Only project developers can access the GIT repository via this method. Enter "
 "your site password when prompted."
@@ -13309,12 +13313,12 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:204
+#: plugins/scmgit/common/GitPlugin.class.php:206
 msgid ""
 "Missing configuration for access in scmgit.ini : use_ssh and use_dav disabled"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:215
+#: plugins/scmgit/common/GitPlugin.class.php:217
 msgid ""
 "Only project developers can access the GIT repository via this method. SSH "
 "must be installed on your client machine. Substitute <i>developername</i> "
@@ -13326,21 +13330,21 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:254
+#: plugins/scmgit/common/GitPlugin.class.php:256
 msgid "Access to your personal repository"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:257
+#: plugins/scmgit/common/GitPlugin.class.php:259
 msgid ""
 "You have a personal repository for this project, accessible through SSH with "
 "the following method. Enter your site password when prompted."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:265
+#: plugins/scmgit/common/GitPlugin.class.php:267
 msgid "Request a personal repository"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:268
+#: plugins/scmgit/common/GitPlugin.class.php:270
 msgid ""
 "You can clone the project repository into a personal one into which you "
 "alone will be able to write.  Other members of the project will only have "
@@ -13349,96 +13353,96 @@ msgid ""
 "time before it is created (less than an hour in most situations)."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:271
+#: plugins/scmgit/common/GitPlugin.class.php:273
 #, php-format
 msgid "<a href=\"%s\">Request a personal repository</a>."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:315
+#: plugins/scmgit/common/GitPlugin.class.php:317
 #, fuzzy
 msgid "Git Repository Browser"
 msgstr "SCM repository"
 
-#: plugins/scmgit/common/GitPlugin.class.php:317
+#: plugins/scmgit/common/GitPlugin.class.php:319
 msgid ""
 "Browsing the Git tree gives you a view into the current status of this "
 "project's code. You may also view the complete histories of any file in the "
 "repository."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:340
+#: plugins/scmgit/common/GitPlugin.class.php:342
 #, fuzzy
 msgid "Updates"
 msgstr "Aanpassen"
 
-#: plugins/scmgit/common/GitPlugin.class.php:958
+#: plugins/scmgit/common/GitPlugin.class.php:967
 #, fuzzy
 msgid "Git Commits"
 msgstr "Commentaar"
 
-#: plugins/scmgit/common/GitPlugin.class.php:976
+#: plugins/scmgit/common/GitPlugin.class.php:985
 msgid "Cannot create a secondary repository with the same name as the primary"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:981
+#: plugins/scmgit/common/GitPlugin.class.php:990
 #: plugins/scmhg/common/HgPlugin.class.php:534
 #, fuzzy
 msgid "This repository name is not valid"
 msgstr "Ongeldige gebruiker"
 
-#: plugins/scmgit/common/GitPlugin.class.php:994
+#: plugins/scmgit/common/GitPlugin.class.php:1003
 #: plugins/scmhg/common/HgPlugin.class.php:529
 #: plugins/scmhg/common/HgPlugin.class.php:545
 #, fuzzy, php-format
 msgid "A repository %s already exists"
 msgstr "De opgegeven gebruikersnaam bestaat al."
 
-#: plugins/scmgit/common/GitPlugin.class.php:1019
+#: plugins/scmgit/common/GitPlugin.class.php:1028
 msgid "Invalid URL from which to clone"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1028
+#: plugins/scmgit/common/GitPlugin.class.php:1037
 #, fuzzy, php-format
 msgid "Clone of %s"
 msgstr "Telefoon:"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1078
+#: plugins/scmgit/common/GitPlugin.class.php:1087
 #, fuzzy, php-format
 msgid "No extra Git repository for project %1$s"
 msgstr "Statistieken voor project databases"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1080
+#: plugins/scmgit/common/GitPlugin.class.php:1089
 #, fuzzy, php-format
 msgid "Extra Git repository for project %1$s"
 msgid_plural "Extra Git repositories for project %1$s"
 msgstr[0] "Statistieken voor project databases"
 msgstr[1] "Statistieken voor project databases"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1084
+#: plugins/scmgit/common/GitPlugin.class.php:1093
 #, fuzzy
 msgid "Initial repository description"
 msgstr "Korte beschrijving"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1084
+#: plugins/scmgit/common/GitPlugin.class.php:1093
 msgid "Initial clone URL (if any)"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1101
+#: plugins/scmgit/common/GitPlugin.class.php:1110
 #, fuzzy, php-format
 msgid "Create new Git repository for project %1$s"
 msgstr "Statistieken voor project databases"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1108
+#: plugins/scmgit/common/GitPlugin.class.php:1117
 #, fuzzy
 msgid "Repository name:"
 msgstr "SCM repository"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1110 www/mail/admin/index.php:194
+#: plugins/scmgit/common/GitPlugin.class.php:1119 www/mail/admin/index.php:194
 #: www/mail/admin/index.php:227
 msgid "Description:"
 msgstr "Omschrijving:"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1112
+#: plugins/scmgit/common/GitPlugin.class.php:1121
 msgid ""
 "Initial clone URL (or name of an existing repository in this project; leave "
 "empty to start with an empty repository):"
@@ -13459,13 +13463,18 @@ msgstr ""
 msgid "No personal git repository"
 msgstr "Ontwikkelaars (test)"
 
-#: plugins/scmgit/www/index.php:28
+#: plugins/scmgit/www/index.php:44
+#, fuzzy, php-format
+msgid "Cannot locate group for func=%s"
+msgstr "Fout bij aanmaken groep object"
+
+#: plugins/scmgit/www/index.php:58
 msgid ""
 "You have already requested a personal Git repository for this project.  If "
 "it does not exist yet, it will be created shortly."
 msgstr ""
 
-#: plugins/scmgit/www/index.php:42
+#: plugins/scmgit/www/index.php:72
 msgid ""
 "You have now requested a personal Git repository for this project.  If will "
 "be created shortly."
@@ -19531,10 +19540,9 @@ msgstr "Alles bijwerken"
 msgid "selected date"
 msgstr "Release datum"
 
-#: www/pm/csv.php:49 www/pm/uploadcsv.php:31
-#, fuzzy
-msgid "Upload data into the tasks."
-msgstr "Data uploaden in de taak manager."
+#: www/pm/csv.php:49
+msgid "Upload data into the tasks"
+msgstr "Data uploaden in de taak manager"
 
 #: www/pm/csv.php:80
 msgid ""
@@ -19559,6 +19567,119 @@ msgstr ""
 #: www/pm/csv.php:89 www/pm/uploadcsv.php:46
 msgid "Choose a file in the proper .csv format for uploading."
 msgstr "Kies een bestand in het juiste .csv format om te uploaden."
+
+#: www/pm/csv.php:96
+msgid ""
+"Be careful, when importing a CSV file, all the tasks will be replaced by the "
+"ones present in the file."
+msgstr ""
+
+#: www/pm/csv.php:97
+msgid "If project_task_id is empty, then a new task will be created."
+msgstr ""
+
+#: www/pm/csv.php:98
+msgid ""
+"If project_task_id is present, then the corresponding task will be updated."
+msgstr ""
+
+#: www/pm/csv.php:101
+msgid "Record Layout"
+msgstr ""
+
+#: www/pm/csv.php:105
+#, fuzzy
+msgid "Field Name"
+msgstr "Bestandsnaam"
+
+#: www/pm/csv.php:110
+#, fuzzy
+msgid "this is the ID in database"
+msgstr "Kan geen database element toevoegen"
+
+#: www/pm/csv.php:114
+msgid ""
+"optional, the equivalent of project_task_id but determined by external "
+"application, such as Microsoft Project. Primarily preserved for sorting "
+"purposes only."
+msgstr ""
+
+#: www/pm/csv.php:118
+msgid "the project_task_id of the parent task, if any"
+msgstr ""
+
+#: www/pm/csv.php:122
+msgid ""
+"the equivalent of parent project_task_id but determined by external "
+"application, such as Microsoft Project. Primarily preserved for matching "
+"purposes only."
+msgstr ""
+
+#: www/pm/csv.php:126
+#, fuzzy
+msgid "The summary or brief description"
+msgstr "Gedetailleerde beschrijving"
+
+#: www/pm/csv.php:130
+msgid "The category name (must be defined, only available in full export)"
+msgstr ""
+
+#: www/pm/csv.php:134
+msgid "Duration in days"
+msgstr ""
+
+#: www/pm/csv.php:138
+#, fuzzy
+msgid "Number of hours required to complete"
+msgstr "Aantal nog niet voltooide taken"
+
+#: www/pm/csv.php:142
+msgid "The start date in MM-DD-YYYY HH:MM:SS format"
+msgstr ""
+
+#: www/pm/csv.php:146
+msgid "The end date in MM-DD-YYYY HH:MM:SS format"
+msgstr ""
+
+#: www/pm/csv.php:150
+#, fuzzy
+msgid "Percentage of completion"
+msgstr "Percentage compleet"
+
+#: www/pm/csv.php:154
+msgid "integers 1 to 5"
+msgstr ""
+
+#: www/pm/csv.php:158
+msgid "optional, the details of the task or a comment to add to a task"
+msgstr ""
+
+#: www/pm/csv.php:162
+msgid "optional, the unixname or precisely-matched realname of the assignee"
+msgstr ""
+
+#: www/pm/csv.php:166 www/pm/csv.php:170 www/pm/csv.php:174 www/pm/csv.php:178
+#, fuzzy
+msgid "optional, same as above"
+msgstr "Ontbrekende parameter"
+
+#: www/pm/csv.php:182
+msgid "optional, the task_id of a task to be dependent on"
+msgstr ""
+
+#: www/pm/csv.php:186
+msgid "optional, the ID used by the external application"
+msgstr ""
+
+#: www/pm/csv.php:190
+msgid "SS, SF, FS, FF, - The same types as Microsoft Project"
+msgstr ""
+
+#: www/pm/csv.php:194 www/pm/csv.php:198 www/pm/csv.php:202 www/pm/csv.php:206
+#: www/pm/csv.php:210 www/pm/csv.php:214 www/pm/csv.php:218 www/pm/csv.php:222
+#: www/pm/csv.php:226 www/pm/csv.php:230 www/pm/csv.php:234 www/pm/csv.php:238
+msgid "repetition of dependenton1"
+msgstr ""
 
 #: www/pm/deletetask.php:26
 msgid "Delete a Task"
@@ -19746,59 +19867,64 @@ msgstr "Week"
 msgid "Day"
 msgstr "Dag"
 
-#: www/pm/reporting/index.php:55
+#: www/pm/postuploadcsv.php:117
+#, fuzzy
+msgid "Import was Successful"
+msgstr "Wijziging doorgevoerd"
+
+#: www/pm/reporting/index.php:56
 msgid "Task Reporting System"
 msgstr "Taakrapportage systeem"
 
-#: www/pm/reporting/index.php:61 www/pm/reporting/index.php:95
+#: www/pm/reporting/index.php:62 www/pm/reporting/index.php:96
 msgid "Aging Report"
 msgstr "Doorlooptijden rapport"
 
-#: www/pm/reporting/index.php:62
+#: www/pm/reporting/index.php:63
 msgid "Report by Assignee"
 msgstr "Overzicht per technicus"
 
-#: www/pm/reporting/index.php:63
+#: www/pm/reporting/index.php:64
 msgid "Report by Subproject"
 msgstr "Overzicht per subproject"
 
-#: www/pm/reporting/index.php:134
+#: www/pm/reporting/index.php:137
 msgid "Average duration for closed tasks (days)"
 msgstr "Gemiddelde duur voor afgesloten taken (dagen)"
 
-#: www/pm/reporting/index.php:155
+#: www/pm/reporting/index.php:162
 msgid "Number of started tasks"
 msgstr "Aantal gestarte taken"
 
-#: www/pm/reporting/index.php:178
+#: www/pm/reporting/index.php:187
 msgid "Number of tasks still not completed"
 msgstr "Aantal nog niet voltooide taken"
 
-#: www/pm/reporting/index.php:205
+#: www/pm/reporting/index.php:214
 msgid "Tasks By Category"
 msgstr "Taken per categorie"
 
-#: www/pm/reporting/index.php:206
+#: www/pm/reporting/index.php:215
 msgid "Open Tasks By Category"
 msgstr "Open taken per categorie"
 
-#: www/pm/reporting/index.php:207
+#: www/pm/reporting/index.php:216
 msgid "All Tasks By Category"
 msgstr "Alle taken per categorie"
 
-#: www/pm/reporting/index.php:235
+#: www/pm/reporting/index.php:244
 msgid "Tasks By Assignee"
 msgstr "Taken per technicus"
 
-#: www/pm/reporting/index.php:236
+#: www/pm/reporting/index.php:245
 msgid "Open Tasks By Assignee"
 msgstr "Open taken per technicus"
 
-#: www/pm/reporting/index.php:237
+#: www/pm/reporting/index.php:246
 msgid "All Tasks By Assignee"
 msgstr "Alle taken per technicus"
 
-#: www/pm/reporting/index.php:238
+#: www/pm/reporting/index.php:247
 msgid ""
 "Note that same task can be assigned to several technicians. Such task will "
 "be counted for each of them."
@@ -19873,6 +19999,11 @@ msgstr "Taak ID"
 #: www/pm/t_lookup.php:41
 msgid "No Task with ID: "
 msgstr ""
+
+#: www/pm/uploadcsv.php:31
+#, fuzzy
+msgid "Upload data into the tasks."
+msgstr "Data uploaden in de taak manager."
 
 #: www/pm/uploadcsv.php:36
 msgid "Warning!"
@@ -22260,7 +22391,7 @@ msgid "Other statistics"
 msgstr "Gebruik statistieken"
 
 #: www/stats/lastlogins.php:41
-msgid "No records found\",\"Database error: \""
+msgid "No records found. Database error: "
 msgstr ""
 
 #: www/stats/lastlogins.php:52
@@ -22771,10 +22902,6 @@ msgstr ""
 msgid "The %1$s Team"
 msgstr "Het %1$s team"
 
-#: www/survey/rating_resp.php:57
-msgid "Error in insert"
-msgstr "Fout bij toevoegen"
-
 #: www/survey/rating_resp.php:60
 msgid "Vote registered"
 msgstr "Stem geregistreerd"
@@ -23187,6 +23314,12 @@ msgstr "Gebruikersnaam"
 msgid "That user does not exist."
 msgstr "Die Trove categorie bestaat niet"
 
+#~ msgid "UPDATE FAILED"
+#~ msgstr "WIJZIGEN MISLUKT"
+
+#~ msgid "Error in insert"
+#~ msgstr "Fout bij toevoegen"
+
 #~ msgid "ForumMessage:: No Valid Forum Object"
 #~ msgstr "ForumMessage:: geen geldig forum object"
 
@@ -23509,12 +23642,6 @@ msgstr "Die Trove categorie bestaat niet"
 #~ msgid "No Canned Responses set up in this Project"
 #~ msgstr "Voor deze groep zijn geen standaard antwoorden beschikbaar"
 
-#~ msgid "I am Sure"
-#~ msgstr "Ja, zeker weten!"
-
-#~ msgid "I am Really Sure"
-#~ msgstr "Ik weet het helemaal zeker"
-
 #~ msgid "You are not monitoring any files."
 #~ msgstr "Je monitort nu geen bestanden."
 
@@ -23820,9 +23947,6 @@ msgstr "Die Trove categorie bestaat niet"
 #~ msgstr ""
 #~ "Onderstaande optie bepaalt of anderen je vaardigheden kunnen zien. Ook "
 #~ "als deze optie is uitgeschakeld kan je hieronder vaardigheden toevoegen."
-
-#~ msgid "Upload data into the tasks"
-#~ msgstr "Data uploaden in de taak manager"
 
 #~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
 #~ msgstr "Fout - bestand moet > 20 bytes en < 256000 bytes in lengte zijn"
