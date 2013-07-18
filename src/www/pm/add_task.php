@@ -47,10 +47,10 @@ plugin_hook_by_reference("text_editor", $params);
 <tbody>
 	<tr>
 		<td>
-		<strong><?php echo _('Category') ?></strong><br />
+		<strong><?php echo _('Category') . _(': '); ?></strong><br />
 		<?php
 		echo $pg->categoryBox('category_id');
-		echo util_make_link ('/pm/admin/?group_id='.$group_id.'&amp;add_cat=1&amp;group_project_id='.$group_project_id,'('._('admin').')');
+		echo util_make_link ('/pm/admin/?group_id='.$group_id.'&amp;add_cat=1&amp;group_project_id='.$group_project_id,'('._('Admin').')');
 		?>
 		</td>
 		<td>
@@ -60,45 +60,45 @@ plugin_hook_by_reference("text_editor", $params);
 
 	<tr>
 		<td>
-			<strong><?php echo _('Percent Complete') ?>:</strong><br />
-			<?php echo $pg->percentCompleteBox(); ?>
+			<strong><?php echo _('Percent Complete') . _(': '); ?></strong><br />
+			<?php $pg->percentCompleteBox(); ?>
 		</td>
 		<td>
-			<strong><?php echo _('Priority') ?>:</strong><br />
-			<?php echo build_priority_select_box(); ?>
+			<strong><?php echo _('Priority') . _(': '); ?></strong><br />
+			<?php build_priority_select_box(); ?>
 		</td>
 	</tr>
 
   	<tr>
 		<td colspan="2">
-		<strong><?php echo _('Task Summary') ?>:</strong><?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Task Summary') . _(': '); ?></strong><?php echo utils_requiredField(); ?><br />
 		<input required="required" type="text" name="summary" size="65" maxlength="65" value="<?php echo $related_artifact_summary; ?>" />
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-		<strong><?php echo _('Task Details') ?>:</strong><?php echo notepad_button('document.forms.addtaskform.details') ?> <?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Task Details') . _(': '); ?></strong><?php echo notepad_button('document.forms.addtaskform.details') ?> <?php echo utils_requiredField(); ?><br />
 		<?php echo $params['content']; ?>
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-		<strong><?php echo _('Estimated Hours') ?>:</strong><?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Estimated Hours') . _(': '); ?></strong><?php echo utils_requiredField(); ?><br />
 		<input required="required" type="text" name="hours" size="5" value="1" />
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-		<strong><?php echo _('Start Date') ?>:</strong><br />
+		<strong><?php echo _('Start Date') . _(': '); ?></strong><br />
 		<?php
-		echo $pg->showMonthBox ('start_month',date('m', time()));
-		echo $pg->showDayBox ('start_day',date('d', time()));
-		echo $pg->showYearBox ('start_year',date('Y', time()));
-		echo $pg->showHourBox ('start_hour',date('G', time()));
-		echo $pg->showMinuteBox ('start_minute', date('i', 15*(time()%15)));
+		$pg->showDayBox ('start_day',date('d', time()));
+		$pg->showMonthBox ('start_month',date('m', time()));
+		$pg->showYearBox ('start_year',date('Y', time()));
+		$pg->showHourBox ('start_hour',date('G', time()));
+		$pg->showMinuteBox ('start_minute', date('i', 15*(time()%15)));
 		?><br /><?php echo _('The system will modify your start/end dates if you attempt to create a start date earlier than the end date of any tasks you depend on.') ?>
 			<br /><a href="calendar.php?group_id=<?php echo $group_id; ?>&amp;group_project_id=<?php echo $group_project_id; ?>" target="_blank"><?php echo _('View Calendar') ?></a>
 		</td>
@@ -107,13 +107,13 @@ plugin_hook_by_reference("text_editor", $params);
 
 	<tr>
 		<td colspan="2">
-		<strong><?php echo _('End Date') ?>:</strong><br />
+		<strong><?php echo _('End Date') . _(': '); ?></strong><br />
 		<?php
-		echo $pg->showMonthBox ('end_month',date('m', (time()+604800)));
-		echo $pg->showDayBox ('end_day',date('d', (time()+604800)));
-		echo $pg->showYearBox ('end_year',date('Y', (time()+604800)));
-		echo $pg->showHourBox ('end_hour',date('G', (time()+604800)));
-		echo $pg->showMinuteBox ('end_minute', date('i', 15*((time()+604800)%15)));
+		$pg->showDayBox ('end_day',date('d', (time()+604800)));
+		$pg->showMonthBox ('end_month',date('m', (time()+604800)));
+		$pg->showYearBox ('end_year',date('Y', (time()+604800)));
+		$pg->showHourBox ('end_hour',date('G', (time()+604800)));
+		$pg->showMinuteBox ('end_minute', date('i', 15*((time()+604800)%15)));
 		?>
 		</td>
 
@@ -121,13 +121,13 @@ plugin_hook_by_reference("text_editor", $params);
 
 	<tr>
 		<td class="top">
-		<strong><?php echo _('Assigned to') ?>:</strong><br />
+		<strong><?php echo _('Assigned to') . _(': '); ?></strong><br />
 		<?php
 		echo $pt->multipleAssignedBox();
 		?>
 		</td>
 		<td class="top">
-		<strong><?php echo _('Dependent on task') ?>:</strong><br />
+		<strong><?php echo _('Dependent on task') . _(': '); ?></strong><br />
 		<?php
 		echo $pt->multipleDependBox();
 		?><br />
@@ -146,7 +146,7 @@ plugin_hook_by_reference("text_editor", $params);
 will add duration and parent_id choices at some point
 	<tr>
 		<td>
-		<strong><?php echo _('Estimated Hours') ?>:</strong><?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Estimated Hours') . _(': '); ?></strong><?php echo utils_requiredField(); ?><br />
 		<input required="required" type="text" name="hours" size="5" />
 		</td>
 
