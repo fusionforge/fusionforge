@@ -1,4 +1,6 @@
 Package: @OLDPACKAGE@
+Section: oldlibs
+Priority: extra
 Architecture: all
 Depends: @PACKAGE@-standard, ${misc:Depends}
 Description: Dummy upgrade package for FusionForge

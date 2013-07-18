@@ -1,5 +1,7 @@
 Package: @OLDPACKAGE@-plugin-extratabs
 Architecture: all
+Section: oldlibs
+Priority: extra
 Depends: @PACKAGE@-plugin-extratabs, ${misc:Depends}
 Description: Extratabs plugin for FusionForge (transitional package)
  This package is only present for transitional purposes and can be
@@ -7,6 +9,8 @@ Description: Extratabs plugin for FusionForge (transitional package)
 
 Package: @OLDPACKAGE@-plugin-globalsearch
 Architecture: all
+Section: oldlibs
+Priority: extra
 Depends: @PACKAGE@-plugin-globalsearch, ${misc:Depends}
 Description: Globalsearch plugin for FusionForge (transitional package)
  This package is only present for transitional purposes and can be
@@ -14,6 +18,8 @@ Description: Globalsearch plugin for FusionForge (transitional package)
 
 Package: @OLDPACKAGE@-plugin-mediawiki
 Architecture: all
+Section: oldlibs
+Priority: extra
 Depends: @PACKAGE@-plugin-mediawiki, ${misc:Depends}
 Description: Mediawiki plugin for FusionForge (transitional package)
  This package is only present for transitional purposes and can be
@@ -21,6 +27,8 @@ Description: Mediawiki plugin for FusionForge (transitional package)
 
 Package: @OLDPACKAGE@-plugin-projectlabels
 Architecture: all
+Section: oldlibs
+Priority: extra
 Depends: @PACKAGE@-plugin-projectlabels, ${misc:Depends}
 Description: Projectlabels plugin for FusionForge (transitional package)
  This package is only present for transitional purposes and can be
@@ -28,6 +36,8 @@ Description: Projectlabels plugin for FusionForge (transitional package)
 
 Package: @OLDPACKAGE@-plugin-scmgit
 Architecture: all
+Section: oldlibs
+Priority: extra
 Depends: @PACKAGE@-plugin-scmgit, ${misc:Depends}
 Description: Git plugin for FusionForge (transitional package)
  This package is only present for transitional purposes and can be
