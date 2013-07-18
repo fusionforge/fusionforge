@@ -1,7 +1,7 @@
 #! /bin/sh
 
 data_path=$(forge_get_config data_path)
-dataprefix=$data_path/plugins/moinmoin/wikidata
+prefix=$data_path/plugins/moinmoin/wikidata
 
 case "$1" in
     configure)
@@ -18,6 +18,9 @@ case "$1" in
 	fi
 	;;
     purge)
+	for i in data underlay ; do
+	    rm -rf $prefix/$i
+	done
 	;;
     *)
         echo "Usage: $0 {configure|purge}"

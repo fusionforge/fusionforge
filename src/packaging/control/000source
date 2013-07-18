@@ -9,4 +9,4 @@ Standards-Version: 3.9.4
 Homepage: https://fusionforge.org/
 Vcs-Bzr: https://fusionforge.org/anonscm/bzr/deb-packaging/unstable/
 Vcs-Browser: https://fusionforge.org/scm/loggerhead/deb-packaging/unstable/
-XBS-Apport: No
+XB-Apport: No
