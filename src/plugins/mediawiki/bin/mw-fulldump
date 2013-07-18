@@ -25,7 +25,7 @@
 # complete history, plus all images and other files, into a tarball to
 # be imported into another wiki by mw-fullrestore.
 
-if [[ $# != 1 || $1 *[[:space:]]* || -e $1.fulldump || \
+if [[ $# != 1 || $1 = *[[:space:]]* || -e $1.fulldump || \
     ! -d /var/lib/gforge/plugins/mediawiki/wikidata/$1/images/. ]]; then
 	echo 'Syntax: mw-fulldump projectname' 1>&2
 	exit 255
