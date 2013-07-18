@@ -5,7 +5,8 @@
  * Copyright 2009, Roland Mas
  * Copyright 2009, Mehdi Dogguy <mehdi@debian.org>
  * Copyright 2012, Franck Villaume - TrivialDev
- * http://fusionforge.org
+ * Copyright © 2013
+ *	Thorsten Glaser <t.glaser@tarent.de>
  *
  * This file is part of FusionForge.
  *
@@ -446,6 +447,9 @@ class GitPlugin extends SCMPlugin {
 		fwrite($config_f, "\$stylesheet = '". util_make_url('/plugins/scmgit/gitweb.css')."';\n");
 		fwrite($config_f, "\$javascript = '". util_make_url('/plugins/scmgit/gitweb.js')."';\n");
 		fwrite($config_f, "\$prevent_xss = 'true';\n");
+		fwrite($config_f, "\$feature{'actions'}{'default'} = [('project home', '" .
+		    util_make_url('/plugins/scmgit/?func=grouppage/%n') .
+		    "', 'summary')];\n");
 		fclose($config_f);
 		chmod ($fname.'.new', 0644) ;
 		rename ($fname.'.new', $fname) ;
