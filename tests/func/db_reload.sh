@@ -103,7 +103,7 @@ echo "Flushing/restarting nscd"
 rm -f /var/cache/nscd/* || true
 if type invoke-rc.d 2>/dev/null
 then
-    invoke-rc.d nscd restart || true
+    invoke-rc.d unscd restart || invoke-rc.d nscd restart || true
 else
-    service nscd restart || true
+    service unscd restart || service nscd restart || true
 fi
