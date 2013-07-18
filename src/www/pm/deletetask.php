@@ -31,11 +31,11 @@ pm_header(array('title'=>_('Delete a Task'),'group_project_id'=>$group_project_i
 <input type="hidden" name="func" value="postdeletetask" />
 <input type="hidden" name="project_task_id" value="<?php echo $project_task_id; ?>" />
 
-<table align="center">
+<table class="centered">
 
 	<tr>
 		<td ><span class="important"><?php echo _('Are you sure you want to delete this task?'); ?></span>
-			<h3>&quot;<?php echo $pt->getSummary(); ?>&quot;</h3></td>
+			<p><strong><?php echo $pt->getSummary(); ?></strong></p></td>
 	</tr>
 	<tr class="align-center">
 		<td class="align-center"><input type="checkbox" value="1" name="confirm_delete" /> <?php echo _('Yes, I want to delete this task'); ?></td>
