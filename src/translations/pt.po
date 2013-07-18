@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-18 11:30+0200\n"
+"POT-Creation-Date: 2013-07-18 11:31+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1515,7 +1515,9 @@ msgstr ""
 #: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
 #: www/account/lostpw.php:90 www/account/pending-resend.php:71
 #: www/account/register.php:159 www/account/verify.php:78
-#: www/account/verify.php:82 www/admin/useredit.php:148
+#: www/account/verify.php:82 www/admin/massmail.php:94
+#: www/admin/massmail.php:113 www/admin/massmail.php:116
+#: www/admin/massmail.php:142 www/admin/useredit.php:148
 #: www/admin/useredit.php:157 www/admin/useredit.php:211
 #: www/frs/reporting/downloads.php:105 www/frs/reporting/downloads.php:107
 #: www/frs/reporting/downloads.php:109 www/register/index.php:226
@@ -4503,9 +4505,9 @@ msgstr "Não atribuído"
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:554
 #: common/tracker/actions/query.php:197
-#: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:136
-#: www/admin/search.php:72 www/admin/search.php:148 www/my/dashboard.php:63
-#: www/pm/index.php:98 www/project/admin/editimages.php:265
+#: common/tracker/views/form-addcanned.php:40 www/admin/search.php:72
+#: www/admin/search.php:148 www/my/dashboard.php:63 www/pm/index.php:98
+#: www/project/admin/editimages.php:265
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "ID"
 msgstr "ID"
@@ -14170,7 +14172,7 @@ msgstr "Administração do Banco de dados de Projetos"
 msgid "Job / Categories Administration"
 msgstr ""
 
-#: www/admin/massmail.php:45
+#: www/admin/massmail.php:45 www/admin/massmail.php:94
 msgid "Target Audience"
 msgstr ""
 
@@ -14209,11 +14211,11 @@ msgid "(select)"
 msgstr "(selecionar)"
 
 #: www/admin/massmail.php:98
-msgid "Subscribers to \"Site Updates\""
+msgid "Subscribers to “Site Updates”"
 msgstr ""
 
 #: www/admin/massmail.php:99
-msgid "Subscribers to \"Additional Community Mailings\""
+msgid "Subscribers to “Additional Community Mailings”"
 msgstr ""
 
 #: www/admin/massmail.php:100
@@ -14243,6 +14245,10 @@ msgstr ""
 #: www/admin/massmail.php:121
 msgid "Schedule for Mailing"
 msgstr "Agendar para Postagem"
+
+#: www/admin/massmail.php:136 www/pm/admin/index.php:187
+msgid "Id"
+msgstr "Id"
 
 #: www/admin/massmail.php:140
 msgid "Last user_id mailed"
@@ -17734,10 +17740,6 @@ msgstr ""
 #, php-format
 msgid "Add Categories to: %s"
 msgstr ""
-
-#: www/pm/admin/index.php:187
-msgid "Id"
-msgstr "Id"
 
 #: www/pm/admin/index.php:203
 msgid "No categories defined"

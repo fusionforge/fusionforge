@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-18 11:30+0200\n"
+"POT-Creation-Date: 2013-07-18 11:31+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1540,7 +1540,9 @@ msgstr "Date de début"
 #: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
 #: www/account/lostpw.php:90 www/account/pending-resend.php:71
 #: www/account/register.php:159 www/account/verify.php:78
-#: www/account/verify.php:82 www/admin/useredit.php:148
+#: www/account/verify.php:82 www/admin/massmail.php:94
+#: www/admin/massmail.php:113 www/admin/massmail.php:116
+#: www/admin/massmail.php:142 www/admin/useredit.php:148
 #: www/admin/useredit.php:157 www/admin/useredit.php:211
 #: www/frs/reporting/downloads.php:105 www/frs/reporting/downloads.php:107
 #: www/frs/reporting/downloads.php:109 www/register/index.php:226
@@ -4727,9 +4729,9 @@ msgstr "Personne"
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:554
 #: common/tracker/actions/query.php:197
-#: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:136
-#: www/admin/search.php:72 www/admin/search.php:148 www/my/dashboard.php:63
-#: www/pm/index.php:98 www/project/admin/editimages.php:265
+#: common/tracker/views/form-addcanned.php:40 www/admin/search.php:72
+#: www/admin/search.php:148 www/my/dashboard.php:63 www/pm/index.php:98
+#: www/project/admin/editimages.php:265
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "ID"
 msgstr "Identifiant"
@@ -15069,7 +15071,7 @@ msgstr "Administration de la base de données du projet"
 msgid "Job / Categories Administration"
 msgstr "Administration des catégories de postes"
 
-#: www/admin/massmail.php:45
+#: www/admin/massmail.php:45 www/admin/massmail.php:94
 msgid "Target Audience"
 msgstr "Public cible"
 
@@ -15113,11 +15115,11 @@ msgid "(select)"
 msgstr "(choisir)"
 
 #: www/admin/massmail.php:98
-msgid "Subscribers to \"Site Updates\""
+msgid "Subscribers to “Site Updates”"
 msgstr "Abonnés aux « mises à jour du site »"
 
 #: www/admin/massmail.php:99
-msgid "Subscribers to \"Additional Community Mailings\""
+msgid "Subscribers to “Additional Community Mailings”"
 msgstr "Abonnés aux « messages additionnels concernant la communauté »"
 
 #: www/admin/massmail.php:100
@@ -15147,6 +15149,10 @@ msgstr "(une information sur la désinscription sera ajoutée le cas échéant)"
 #: www/admin/massmail.php:121
 msgid "Schedule for Mailing"
 msgstr "Programmation de l'envoi de messages"
+
+#: www/admin/massmail.php:136 www/pm/admin/index.php:187
+msgid "Id"
+msgstr "Numéro d'identifiant"
 
 #: www/admin/massmail.php:140
 msgid "Last user_id mailed"
@@ -18861,10 +18867,6 @@ msgstr "Sous-projet supprimé avec succès"
 #, php-format
 msgid "Add Categories to: %s"
 msgstr "Ajout de catégories : %s"
-
-#: www/pm/admin/index.php:187
-msgid "Id"
-msgstr "Numéro d'identifiant"
 
 #: www/pm/admin/index.php:203
 msgid "No categories defined"
@@ -22896,6 +22898,12 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "That user does not exist."
 msgstr "Cet utilisateur n'existe pas"
 
+#~ msgid "Subscribers to \"Site Updates\""
+#~ msgstr "Abonnés aux « mises à jour du site »"
+
+#~ msgid "Subscribers to \"Additional Community Mailings\""
+#~ msgstr "Abonnés aux « messages additionnels concernant la communauté »"
+
 #, fuzzy
 #~ msgid ""
 #~ "Config file could not be linked to etc/gforge/plugins/%1$s. Check the "
@@ -24614,12 +24622,6 @@ msgstr "Cet utilisateur n'existe pas"
 
 #~ msgid "Active site users: <strong>%1$s</strong>"
 #~ msgstr "Utilisateurs actifs : <strong>%1$s</strong>"
-
-#~ msgid "Subscribers to “Site Updates”"
-#~ msgstr "Abonnés aux « mises à jour du site »"
-
-#~ msgid "Subscribers to “Additional Community Mailings”"
-#~ msgstr "Abonnés aux « messages additionnels concernant la communauté »"
 
 #~ msgid "News Administration"
 #~ msgstr "Administration des annonces"

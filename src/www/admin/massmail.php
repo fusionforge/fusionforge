@@ -91,12 +91,12 @@ print '
 print '
 <form action="'.getStringFromServer('PHP_SELF').'" method="post">'
 .'<input type="hidden" name="form_key" value="'.form_generate_key().'" />'
-.'<strong>Target Audience:</strong>'.utils_requiredField().'<br />'.html_build_select_box_from_arrays(
+.'<strong>'._('Target Audience')._(':').'</strong>'.utils_requiredField().'<br />'.html_build_select_box_from_arrays(
 	array(0,'SITE','COMMNTY','DVLPR','ADMIN','ALL','SFDVLPR'),
 	array(
 		_('(select)'),
-		_('Subscribers to "Site Updates"'),
-		_('Subscribers to "Additional Community Mailings"'),
+		_('Subscribers to “Site Updates”'),
+		_('Subscribers to “Additional Community Mailings”'),
 		_('All Project Developers'),
 		_('All Project Admins'),
 		_('All Users'),
@@ -110,11 +110,11 @@ print '
 print '
 
 <p>
-<strong>' ._('Subject').':</strong>'.utils_requiredField().'
-<br /><input type="text" name="mail_subject" size="50" value="['.forge_get_config ('forge_name').'] " /></p>
+<strong>' ._('Subject')._(':').'</strong>'.utils_requiredField().'
+<br /><input type="text" required="required" name="mail_subject" size="50" value="['.forge_get_config ('forge_name').'] " /></p>
 
-<p><strong>'._('Text of Message'). ':</strong>'.utils_requiredField(). _('(will be appended with unsubscription information, if applicable)').'</p>
-<pre><textarea name="mail_message" cols="70" rows="20">
+<p><strong>'._('Text of Message')._(':').'</strong>'.utils_requiredField(). _('(will be appended with unsubscription information, if applicable)').'</p>
+<pre><textarea required="required" name="mail_message" cols="70" rows="20">
 </textarea>
 </pre>
 
@@ -133,13 +133,13 @@ $res = db_query_params ('
 
 $title=array();
 $title[]='&nbsp;';
-$title[]=_('ID');
+$title[]=_('Id');
 $title[]=_('Type');
 $title[]=_('Subject');
 $title[]=_('Date');
 $title[]=_('Last user_id mailed');
 
-print '<a name="active">'._('Active Deliveries').':</a>';
+print '<a name="active">'._('Active Deliveries')._(':').'</a>';
 
 $seen = false;
 
