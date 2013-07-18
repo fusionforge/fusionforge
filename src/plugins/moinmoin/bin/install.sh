@@ -1,7 +1,7 @@
 #! /bin/sh
 
 data_path=$(/usr/share/gforge/bin/forge_get_config data_path)
-dataprefix=$data_path/plugins/moinmoin/wikidata
+prefix=$data_path/plugins/moinmoin/wikidata
 
 case "$1" in
     configure)
@@ -14,6 +14,9 @@ case "$1" in
 	chown gforge /etc/fusionforge/config.ini.d/debian-install-secrets.ini
 	;;
     purge)
+	for i in data underlay ; do
+	    rm -rf $prefix/$i
+	done
 	;;
     *)
         echo "Usage: $0 {configure|purge}"
