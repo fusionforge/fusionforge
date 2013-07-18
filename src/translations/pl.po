@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-18 11:31+0200\n"
+"POT-Creation-Date: 2013-07-18 11:36+0200\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15228,6 +15228,10 @@ msgstr ""
 msgid "(*)Pending"
 msgstr ""
 
+#: www/admin/userlist.php:74
+msgid "No user found matching selected criteria."
+msgstr ""
+
 #: www/admin/userlist.php:80
 msgid "Add date"
 msgstr ""
@@ -15262,9 +15266,9 @@ msgid "Users that use plugin"
 msgstr ""
 
 #: www/admin/userlist.php:161
-#, php-format
-msgid "User list beginning with \"%s\" for all projects"
-msgstr ""
+#, fuzzy, php-format
+msgid "User list beginning with “%s” for all projects"
+msgstr "Przeglądaj Repozytorium Subversion"
 
 #: www/admin/userlist.php:163
 #, fuzzy

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-18 11:31+0200\n"
+"POT-Creation-Date: 2013-07-18 11:36+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -15705,6 +15705,10 @@ msgstr "Suspendu"
 msgid "(*)Pending"
 msgstr "En attente (*)"
 
+#: www/admin/userlist.php:74
+msgid "No user found matching selected criteria."
+msgstr ""
+
 #: www/admin/userlist.php:80
 msgid "Add date"
 msgstr "Date d'ajout"
@@ -15738,9 +15742,9 @@ msgid "Users that use plugin"
 msgstr "Utilisateurs qui utilisent le greffon"
 
 #: www/admin/userlist.php:161
-#, fuzzy, php-format
-msgid "User list beginning with \"%s\" for all projects"
-msgstr "Liste des membres du projet : "
+#, php-format
+msgid "User list beginning with “%s” for all projects"
+msgstr "Liste des membres commençant par « %s » de tous les projets"
 
 #: www/admin/userlist.php:163
 msgid "User list for all projects"
@@ -22898,6 +22902,10 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "That user does not exist."
 msgstr "Cet utilisateur n'existe pas"
 
+#, fuzzy
+#~ msgid "User list beginning with \"%s\" for all projects"
+#~ msgstr "Liste des membres du projet : "
+
 #~ msgid "Subscribers to \"Site Updates\""
 #~ msgstr "Abonnés aux « mises à jour du site »"
 
@@ -24683,9 +24691,6 @@ msgstr "Cet utilisateur n'existe pas"
 
 #~ msgid "Suspend"
 #~ msgstr "Suspendre"
-
-#~ msgid "User list beginning with “%s” for all projects"
-#~ msgstr "Liste des membres commençant par « %s » de tous les projets"
 
 #~ msgid "Error: Choose a User To Monitor First"
 #~ msgstr "Erreur: choisissez d'abord un utilisateur à suivre"

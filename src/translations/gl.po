@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-18 11:31+0200\n"
+"POT-Creation-Date: 2013-07-18 11:36+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -16241,6 +16241,10 @@ msgstr "Suspendido "
 msgid "(*)Pending"
 msgstr "(*)Pendente "
 
+#: www/admin/userlist.php:74
+msgid "No user found matching selected criteria."
+msgstr ""
+
 #: www/admin/userlist.php:80
 msgid "Add date"
 msgstr "Engadir data "
@@ -16276,7 +16280,7 @@ msgstr ""
 
 #: www/admin/userlist.php:161
 #, fuzzy, php-format
-msgid "User list beginning with \"%s\" for all projects"
+msgid "User list beginning with “%s” for all projects"
 msgstr "Listaxe de usuarios por grupo: "
 
 #: www/admin/userlist.php:163
