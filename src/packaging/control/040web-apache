@@ -1,4 +1,6 @@
 Package: @OLDPACKAGE@-web-apache
 Architecture: all
+Section: oldlibs
+Priority: extra
 Depends: @OLDPACKAGE@-web-apache2, ${misc:Depends}
 Description: transitional package to @OLDPACKAGE@-web-apache2
