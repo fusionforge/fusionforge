@@ -57,9 +57,9 @@ define('ARTIFACT_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');
 	/**
 	*	Factory method which creates an Artifact from an artifact ID
 	*
-	*	@param int	The artifact ID
-	*	@param array	The result array, if it's passed in
-	*	@return	object	Artifact object
+	*	@param int        $artifact_id The artifact ID
+	*	@param array|bool $data        The result array, if it's passed in
+	*	@return	Artifact	Artifact object
 	*/
 	function &artifact_get_object($artifact_id,$data=false) {
 		global $ARTIFACT_OBJ;
@@ -167,13 +167,14 @@ class Artifact extends Error {
 	/**
 	 *	create - construct a new Artifact in the database.
 	 *
-	 *	@param	string	The artifact summary.
-	 *	@param	string	Details of the artifact.
-	 *	@param	int		The ID of the user to which this artifact is to be assigned.
-	 *	@param	int		The artifacts priority.
-	 *	@param	array	Array of extra fields like: array(15=>'foobar',22=>'1');
-	 *	@param	array	Array of data to change submitter and time of submit like: array('user' => 127, 'time' => 1234556789)
-	 *  @return id on success / false on failure.
+	 *	@param	string	$summary      The artifact summary.
+	 *	@param	string	$details      Details of the artifact.
+	 *	@param	int		$assigned_to  The ID of the user to which this artifact is to be assigned.
+	 *	@param	int		$priority     The artifacts priority.
+	 *	@param	array	$extra_fields Array of extra fields like: array(15=>'foobar',22=>'1');
+	 *	@param	array	$importData   Array of data to change submitter and time of submit like:
+	 *                                array('user' => 127, 'time' => 1234556789)
+	 *  @return bool id on success / false on failure.
 	 */
 	function create( $summary, $details, $assigned_to=100, $priority=3, $extra_fields=array(), $importData = array()) {
 		//
@@ -288,7 +289,7 @@ class Artifact extends Error {
 	/**
 	 *	fetchData - re-fetch the data for this Artifact from the database.
 	 *
-	 *	@param	int		The artifact ID.
+	 *	@param	int		$artifact_id The artifact ID.
 	 *	@return	boolean	success.
 	 */
 	function fetchData($artifact_id) {
@@ -496,7 +497,7 @@ class Artifact extends Error {
 	/**
 	 *  delete - delete this tracker and all its related data.
 	 *
-	 *  @param  bool	I'm Sure.
+	 *  @param  bool $sure I'm Sure.
 	 *  @return bool true/false;
 	 */
 	function delete($sure) {
@@ -591,7 +592,7 @@ class Artifact extends Error {
 	/**
 	 *  setMonitor - user can monitor this artifact.
 	 *
-	 *  @return false - always false - always use the getErrorMessage() for feedback
+	 *  @return bool Always false - always use the getErrorMessage() for feedback
 	 */
 	function setMonitor() {
 		if (session_loggedin()) {
@@ -755,7 +756,7 @@ class Artifact extends Error {
 	/**
 	 * getRelatedTasks - get array of related tasks
 	 *
-	 * @return Database result set
+	 * @return resource Database result set
 	 */
 	function getRelatedTasks() {
 		if (!$this->relatedtasks) {
@@ -774,11 +775,10 @@ class Artifact extends Error {
 	/**
 	 *  addMessage - attach a text message to this Artifact.
 	 *
-	 *	@param	string	The message being attached.
-	 *	@param	string	Email address of message creator.
-	 *	@param	bool	Whether to email out a followup.
-	 *	@access private
-	 *  @return	boolean	success.
+	 * @param string $body          The $string message being attached.
+	 * @param bool   $by            Email $string address of message creator.
+	 * @param bool   $send_followup Whether $bool to email out a followup.
+	 * @return bool success.
 	 */
 	function addMessage($body,$by=false,$send_followup=false) {
 		if (!$body) {
@@ -895,15 +895,15 @@ class Artifact extends Error {
 	/**
 	 *	update - update the fields in this artifact.
 	 *
-	 *	@param	int		The artifact priority.
-	 *	@param	int		The artifact status ID.
-	 *	@param	int		The person to which this artifact is to be assigned.
-	 *	@param	string	The artifact summary.
-	 *	@param	int		The canned response.
-	 *	@param	string	Attaching another comment.
-	 *	@param	int		Allows you to move an artifact to another type.
-	 *	@param	array	Array of extra fields like: array(15=>'foobar',22=>'1');
-	 *  @param  string  The description.
+	 *	@param	int		$priority             The artifact priority.
+	 *	@param	int		$status_id            The artifact status ID.
+	 *	@param	int		$assigned_to          The person to which this artifact is to be assigned.
+	 *	@param	string	$summary              The artifact summary.
+	 *	@param	int		$canned_response      The canned response.
+	 *	@param	string	$details              Attaching another comment.
+	 *	@param	int		$new_artifact_type_id Allows you to move an artifact to another type.
+	 *	@param	array	$extra_fields         Array of extra fields like: array(15=>'foobar',22=>'1');
+	 *  @param  string  $description          The description.
 	 *	@return	boolean	success.
 	 */
 	function update($priority,$status_id,
@@ -1213,7 +1213,7 @@ class Artifact extends Error {
 	/**
 	 * 	updateLastModifiedDate - update the last_modified_date attribute of this artifact.
 	 *
-	 *	@return true on success / false on failure
+	 *	@return bool true on success / false on failure
 	 */
 	function updateLastModifiedDate() {
 		$res = db_query_params ('UPDATE artifact SET last_modified_date=EXTRACT(EPOCH FROM now())::integer WHERE artifact_id=$1',
@@ -1224,7 +1224,7 @@ class Artifact extends Error {
 	/**
 	 * 	assignToMe - assigns this artifact to current user
 	 *
-	 *	@return true on success / false on failure
+	 *	@return bool true on success / false on failure
 	 */
 	function assignToMe() {
 		if (!session_loggedin() || !($this->ArtifactType->userIsAdmin() || $this->ArtifactType->userIsTechnician())) {
@@ -1250,7 +1250,7 @@ class Artifact extends Error {
 	 *
 	 *	@param	array	Array of extra fields like: array(15=>'foobar',22=>'1');
 	 *	@param	array	Array where changes to the extra fields should be logged
-	 *	@return true on success / false on failure
+	 *	@return bool true on success / false on failure
 	 */
 	function updateExtraFields($extra_fields,&$changes){
 /*
@@ -1840,9 +1840,9 @@ class ArtifactComparator {
 			return ($a_date < $b_date) ? -1 : 1;
 			break;
 		case 'priority':
-			$a_prority = $a->getPriority() ;
-			$b_prority = $b->getPriority() ;
-			return ($a_prority < $b_prority) ? -1 : 1;
+			$a_priority = $a->getPriority() ;
+			$b_priority = $b->getPriority() ;
+			return ($a_priority < $b_priority) ? -1 : 1;
 			break;
 		default:
 			$aa=$a->getExtraFieldDataText();
