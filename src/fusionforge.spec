@@ -19,7 +19,7 @@
 
 %define fforge_admin    fforgeadmin
 
-%define FORGE_DIR       %{_datadir}/gforge/src
+%define FORGE_DIR       %{_datadir}/gforge
 %define FORGE_CONF_DIR  %{_sysconfdir}/gforge
 %define FORGE_LANG_DIR  %{_datadir}/locale
 %define FORGE_VAR_LIB   %{_var}/lib/gforge
@@ -591,8 +591,8 @@ done
 %{__ln_s} /usr/share/mediawiki/trackback.php $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
 %{__ln_s} /usr/share/mediawiki/skins $RPM_BUILD_ROOT%{FORGE_DIR}/plugins/mediawiki/www/
 %{__ln_s} /usr/share/mediawiki $RPM_BUILD_ROOT/var/lib/gforge/plugins/mediawiki/master
-%{__ln_s} /usr/share/gforge/src/plugins/mediawiki/mediawiki-skin/FusionForge.php $RPM_BUILD_ROOT/usr/share/mediawiki/skins/
-%{__ln_s} /usr/share/gforge/src/plugins/mediawiki/mediawiki-skin/fusionforge $RPM_BUILD_ROOT/usr/share/mediawiki/skins/
+%{__ln_s} /usr/share/gforge/plugins/mediawiki/mediawiki-skin/FusionForge.php $RPM_BUILD_ROOT/usr/share/mediawiki/skins/
+%{__ln_s} /usr/share/gforge/plugins/mediawiki/mediawiki-skin/fusionforge $RPM_BUILD_ROOT/usr/share/mediawiki/skins/
 
 # plugin: moinmoin
 %{__ln_s} ../../plugins/moinmoin/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/moinmoin
