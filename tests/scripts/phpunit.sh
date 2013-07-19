@@ -51,11 +51,14 @@ print "Looking for forge_run_job script...\n";
 if (is_executable ("$FORGE_HOME/bin/forge_run_job")) {
     print "Found in $FORGE_HOME/bin/\n";
     define('RUN_JOB_PATH', "$FORGE_HOME/bin/");
+} elseif (is_executable ("$FORGE_HOME/utils/forge_run_job")) {
+    print "Found in $FORGE_HOME/utils/\n";
+    define('RUN_JOB_PATH', "$FORGE_HOME/utils/");
 } elseif (is_executable ("$FORGE_HOME/src/utils/forge_run_job")) {
     print "Found in $FORGE_HOME/src/utils/\n";
     define('RUN_JOB_PATH', "$FORGE_HOME/src/utils/");
 } else {
-    print "Neither $FORGE_HOME/bin/forge_run_job nor $FORGE_HOME/src/utils/forge_run_job seem to be executable, strange.\n";
+    print "Neither $FORGE_HOME/bin/forge_run_job, nor $FORGE_HOME/utils/forge_run_job, nor $FORGE_HOME/src/utils/forge_run_job seem to be executable, strange.\n";
     exit(1);
 }   
 
