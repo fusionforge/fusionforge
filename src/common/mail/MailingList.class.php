@@ -48,22 +48,26 @@ class MailingList extends Error {
 	 */
 	var $groupMailingListId;
 
-	/**
-	 *  Constructor.
-	 *
-	 * @param	object	The Group object to which this mailing list is associated.
-	 * @param	int		The group_list_id.
-	 * @param	array		The associative array of data.
-	 * @return	boolean	success.
-	 */
+    /**
+     *  Constructor.
+     *
+     * @param $Group
+     * @param bool $groupListId
+     * @param bool $dataArray
+     * @internal param \The $object Group object to which this mailing list is associated.
+     * @internal param \The $int group_list_id.
+     * @internal param \The $array associative array of data.
+     * @return \MailingList
+     */
 	function __construct(&$Group, $groupListId = false, $dataArray = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 		if ($Group->isError()) {
 			$this->setError('MailingList:: '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
 
@@ -71,14 +75,14 @@ class MailingList extends Error {
 			$this->groupMailingListId = $groupListId;
 			if (!$dataArray || !is_array($dataArray)) {
 				if (!$this->fetchData($groupListId)) {
-					return false;
+					return;
 				}
 			} else {
 				$this->dataArray =& $dataArray;
 				if ($this->dataArray['group_id'] != $this->Group->getID()) {
 					$this->setError(_('Group_id in db result does not match Group Object'));
 					$this->dataArray = null;
-					return false;
+					return;
 				}
 			}
 			if (!$this->isPublic()) {
@@ -87,24 +91,26 @@ class MailingList extends Error {
 				if (!$perm || !is_object($perm) || !$perm->isMember()) {
 					$this->setPermissionDeniedError();
 					$this->dataArray = null;
-					return false;
+					return;
 				}
 			}
 		}
-
-		return true;
 	}
 
-	/**
-	 *	create - use this function to create a new entry in the database.
-	 *
-	 *	@param	string	The name of the mailing list
-	 *	@param	string	The description of the mailing list
-	 *	@param	int	Pass (1) if it should be public (0) for private.
-	 *
-	 *	@return	boolean	success.
-	 */
-	function create($listName, $description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC,$creator_id=false) {
+    /**
+     *    create - use this function to create a new entry in the database.
+     *
+     * @param $listName
+     * @param $description
+     * @param string $isPublic
+     * @param bool $creator_id
+     * @param int $is_external Pass (1) if it should be public (0) for private.
+     *
+     * @internal param \The $string name of the mailing list
+     * @internal param \The $string description of the mailing list
+     * @return    boolean    success.
+     */
+	function create($listName, $description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC,$creator_id=false, $is_external=0) {
 		//
 		//	During the group creation, the current user_id will not match the admin's id
 		//
@@ -227,14 +233,16 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 		return true;
 	}
 
-	/**
-	 *	update - use this function to update an entry in the database.
-	 *
-	 *	@param	string	The description of the mailing list
-	 *	@param	int	Pass (1) if it should be public (0) for private
-	 *	@return	boolean	success.
-	 */
-	function update($description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC, $status = 'xyzzy') {
+    /**
+     *    update - use this function to update an entry in the database.
+     *
+     * @param $description
+     * @param string $isPublic
+     * @param string $status The description of the mailing list
+     * @param int $is_external Pass (1) if it should be public (0) for private
+     * @return    boolean    success.
+     */
+	function update($description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC, $status = 'xyzzy', $is_external=0) {
 		if(! forge_check_perm('project_admin', $this->Group->getID())) {
 			$this->setPermissionDeniedError();
 			return false;

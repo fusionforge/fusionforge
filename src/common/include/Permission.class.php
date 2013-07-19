@@ -98,17 +98,17 @@ class Permission extends Error {
 	 *	@param	object	Group Object required.
 	 *
 	 */
-	function Permission (&$_Group) {
+	function __construct (&$_Group) {
 		if (!$_Group || !is_object($_Group)) {
-			$this->setError('No Valid Group Object');
-			return false;
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 		if ($_Group->isError()) {
 			$this->setError('Permission: '.$_Group->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Group =& $_Group;
-		$this->group_id = $this->Group->getID() ;
+		$this->group_id = $this->Group->getID();
 	}
 
 	/**

@@ -46,23 +46,22 @@ class ForumFactory extends Error {
 	 *
 	 * @param	object	The Group object to which this forum is associated.
 	 */
-	function ForumFactory(&$Group) {
+	function __construct(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 		if ($Group->isError()) {
 			$this->setError(_('Forum').':: '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 		if (!$Group->usesForum()) {
 			$this->setError(sprintf(_('%s does not use the Forum tool'),
 			    $Group->getPublicName()));
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
-
-		return true;
 	}
 
 	/**
@@ -167,18 +166,21 @@ ORDER BY group_forum_id',
 		return $this->forums;
 	}
 
-	/**
-	 *	moveThread - move thread in another forum
-	 *
-	 *	@param	string	The forum ID
-	 *	@param	int		The thread_id of the tread to change.
-	 *	@param	string	The old forum ID
-	 *
-	 * 	Note:
-	 *   old forum ID is useless if forum_agg_msg_count table is no longer used
-	 *
-	 *	@return boolean success.
-	 */
+    /**
+     *    moveThread - move thread in another forum
+     *
+     * @param $group_forum_id
+     * @param $thread_id
+     * @param bool $old_forum_id
+     * @internal param \The $string forum ID
+     * @internal param \The $int thread_id of the tread to change.
+     * @internal param \The $string old forum ID
+     *
+     *    Note:
+     *   old forum ID is useless if forum_agg_msg_count table is no longer used
+     *
+     * @return boolean success.
+     */
 	function moveThread($group_forum_id,$thread_id,$old_forum_id = false) {
 		$res = db_query_params('UPDATE forum SET group_forum_id=$1 WHERE thread_id=$2',
 			array($group_forum_id, $thread_id));

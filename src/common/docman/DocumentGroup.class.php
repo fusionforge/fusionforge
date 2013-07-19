@@ -44,24 +44,25 @@ class DocumentGroup extends Error {
 	 */
 	var $data_array;
 
-	/**
-	 * DocumentGroup - constructor.
-	 *
-	 * Use this constructor if you are modifying an existing doc_group.
-	 *
-	 * @param	object	Group object.
-	 * @param	array	(all fields from doc_groups) OR doc_group id from database.
-	 * @return	void
-	 * @access	public
-	 */
+    /**
+     * DocumentGroup - constructor.
+     *
+     * Use this constructor if you are modifying an existing doc_group.
+     *
+     * @param $Group
+     * @param bool $data
+     * @internal param \Group $object object.
+     * @internal param array $OR doc_group id from database.
+     * @return \DocumentGroup
+    @access	public
+     */
 	function __construct(&$Group, $data = false) {
 		$this->Error();
 
-		//was Group legit?
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
-		//did Group have an error?
 		if ($Group->isError()) {
 			$this->setError(_('Document Folder')._(': ').$Group->getErrorMessage());
 			return;
@@ -83,13 +84,15 @@ class DocumentGroup extends Error {
 		}
 	}
 
-	/**
-	 * create - create a new item in the database.
-	 *
-	 * @param	string	Item name.
-	 * @return	boolean	on success / false on failure.
-	 * @access	public
-	 */
+    /**
+     * create - create a new item in the database.
+     *
+     * @param $name
+     * @param int $parent_doc_group
+     * @internal param \Item $string name.
+     * @return    boolean    on success / false on failure.
+     * @access    public
+     */
 	function create($name, $parent_doc_group = 0) {
 		//
 		//	data validation
@@ -161,13 +164,15 @@ class DocumentGroup extends Error {
 		return true;
 	}
 
-	/**
-	 * delete - delete a DocumentGroup.
-	 * WARNING delete is recursive and permanent
-	 * @param	integer	Document Group Id, integer Project Group Id
-	 * @return	boolean	success
-	 * @access	public
-	 */
+    /**
+     * delete - delete a DocumentGroup.
+     * WARNING delete is recursive and permanent
+     * @param $doc_groupid
+     * @param $project_group_id
+     * @internal param \Document $integer Group Id, integer Project Group Id
+     * @return    boolean    success
+     * @access    public
+     */
 	function delete($doc_groupid, $project_group_id) {
 		$perm =& $this->Group->getPermission();
 		if (!$perm || !$perm->isDocEditor()) {
@@ -368,12 +373,13 @@ class DocumentGroup extends Error {
 		return $values;
 	}
 
-	/**
-	 * isMonitoredBy - get the monitored status of this document directory for a specific user id.
-	 *
-	 * @param	int	User ID
-	 * @return	boolean	true if monitored by this user
-	 */
+    /**
+     * isMonitoredBy - get the monitored status of this document directory for a specific user id.
+     *
+     * @param string $userid
+     * @internal param \User $int ID
+     * @return    boolean    true if monitored by this user
+     */
 	function isMonitoredBy($userid = 'ALL') {
 		if ( $userid == 'ALL' ) {
 			$condition = '';
@@ -520,18 +526,21 @@ class DocumentGroup extends Error {
 		}
 	}
 
-	/**
-	 * hasDocuments - Recursive function that checks if this group or any of it childs has documents associated to it
-	 *
-	 * A group has associated documents if and only if there are documents associated to this
-	 * group or to any of its childs
-	 *
-	 * @param	array	Array of nested groups information, fetched from DocumentGroupFactory class
-	 * @param	object	The DocumentFactory object
-	 * @param	int	(optional) State of the documents
-	 * @return	boolean	success
-	 * @access	public
-	 */
+    /**
+     * hasDocuments - Recursive function that checks if this group or any of it childs has documents associated to it
+     *
+     * A group has associated documents if and only if there are documents associated to this
+     * group or to any of its childs
+     *
+     * @param $nested_groups
+     * @param $document_factory
+     * @param int $stateid
+     * @internal param Array $array of nested groups information, fetched from DocumentGroupFactory class
+     * @internal param \The $object DocumentFactory object
+     * @internal param int $State of the documents
+     * @return    boolean    success
+     * @access    public
+     */
 	function hasDocuments(&$nested_groups, &$document_factory, $stateid = 0) {
 		$doc_group_id = $this->getID();
 		static $result = array();	// this function will probably be called several times so we better store results in order to speed things up
@@ -687,7 +696,8 @@ class DocumentGroup extends Error {
 	 * sendNotice - Notifies of directory submissions
 	 *
 	 * @param	boolean	true = new directory (default value)
-	 */
+     * @return bool
+     */
 	function sendNotice($new = true) {
 		$BCC = $this->Group->getDocEmailAddress();
 		if ($this->isMonitoredBy('ALL')) {

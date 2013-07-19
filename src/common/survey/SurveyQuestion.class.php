@@ -40,18 +40,22 @@ class SurveyQuestion extends Error {
 	 */
 	var $Group;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param	object	The Group object to which this Survey Question is associated.
-	 * @param	int	The questtion_id.
-	 * @param	array	The associative array of data.
-	 * @return	void
-	 */
+    /**
+     * Constructor.
+     *
+     * @param $Group
+     * @param bool $question_id
+     * @param bool $arr
+     * @internal param \The $object Group object to which this Survey Question is associated.
+     * @internal param \The $int question_id.
+     * @internal param \The $array associative array of data.
+     * @return \SurveyQuestion
+     */
 	function __construct(&$Group, $question_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 		if ($Group->isError()) {
 			$this->setError('Survey:: '.$Group->getErrorMessage());

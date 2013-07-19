@@ -42,9 +42,9 @@ function get_frs_packages($Group) {
 /**
  * Gets a FRSPackage object from the given package id
  *
- * @param	int	the package id
- * @param	array	the DB handle if passed in (optional)
- * @return	object	the FRSPackage object
+ * @param    array    the DB handle if passed in (optional)
+ * @param bool $data
+ * @return    object    the FRSPackage object
  */
 function frspackage_get_object($package_id, $data=false) {
 	global $FRSPACKAGE_OBJ;
@@ -82,52 +82,57 @@ class FRSPackage extends Error {
 	 */
 	var $Group;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param	object	The Group object to which this FRSPackage is associated.
-	 * @param	int	The package_id.
-	 * @param	array	The associative array of data.
-	 * @return	boolean	success.
-	 */
-	function FRSPackage(&$Group, $package_id = false, $arr = false) {
+    /**
+     * Constructor.
+     *
+     * @param $Group
+     * @param bool $package_id
+     * @param bool $arr
+     * @internal param \The $object Group object to which this FRSPackage is associated.
+     * @internal param \The $int package_id.
+     * @internal param \The $array associative array of data.
+     * @return \FRSPackage
+     */
+	function __construct(&$Group, $package_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 		if ($Group->isError()) {
 			$this->setError('FRSPackage: '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
 
 		if ($package_id) {
 			if (!$arr || !is_array($arr)) {
 				if (!$this->fetchData($package_id)) {
-					return false;
+					return;
 				}
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
-					$this->setError('Group_id in db result does not match Group Object');
-					$this->data_array=null;
-					return false;
+					$this->setError(_('Group_id in db result does not match Group Object'));
+					$this->data_array = null;
+					return;
 				}
 //
 //	Add an is_public check here
 //
 			}
 		}
-		return true;
 	}
 
-	/**
-	 *	create - create a new FRSPackage in the database.
-	 *
-	 *	@param	string	The name of this package.
-	 *	@param	boolean	Whether it's public or not. 1=public 0=private.
-	 *	@return	boolean success.
-	 */
+    /**
+     *    create - create a new FRSPackage in the database.
+     *
+     * @param $name
+     * @param int $is_public
+     * @internal param \The $string name of this package.
+     * @internal param \Whether $boolean it's public or not. 1=public 0=private.
+     * @return    boolean success.
+     */
 	function create($name, $is_public = 1) {
 
 		if (strlen($name) < 3) {
@@ -135,7 +140,7 @@ class FRSPackage extends Error {
 			return false;
 		}
 		if (!util_is_valid_filename($name)) {
-			$this->setError(_('FRSPackage::Update: Package Name can only be alphanumeric or "-" "_" "+" "." "~"'));
+			$this->setError(_('Package Name can only be alphanumeric'));
 		}
 		if (!forge_check_perm ('frs', $this->Group->getID(), 'write')) {
 			$this->setPermissionDeniedError();
@@ -467,7 +472,7 @@ class FRSPackage extends Error {
 
 		// double-check we're not trying to remove root dir
 		if (util_is_root_dir($dir)) {
-			$this->setError('Package::delete error: trying to delete root dir');
+			$this->setError('Package delete error: trying to delete root dir');
 			return false;
 		}
 		$this->deleteNewestReleaseFilesAsZip();
@@ -496,7 +501,7 @@ class FRSPackage extends Error {
 			$row = db_fetch_array($result);
 			return frsrelease_get_object($row['release_id']);
 		} else {
-			$this->setError('FRSRelease:: No valid max release id');
+			$this->setError('No valid max release id');
 			return false;
 		}
 	}

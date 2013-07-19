@@ -42,20 +42,21 @@ class ProjectGroupFactory extends Error {
 	 */
 	var $projectGroups;
 
-	/**
-	 *  Constructor.
-	 *
-	 *	@param	Group $Group The Group object to which this ProjectGroupFactory is associated.
-	 *	@return	boolean	success.
-	 */
-	function ProjectGroupFactory(&$Group) {
+    /**
+     *  Constructor.
+     *
+     * @param    Group $Group The Group object to which this ProjectGroupFactory is associated.
+     * @return \ProjectGroupFactory
+     */
+	function __construct(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 		if ($Group->isError()) {
 			$this->setError('ProjectGroup:: '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 		if (!$Group->usesPM()) {
 			$this->setError(sprintf(_('%s does not use the Project Management tool'),
@@ -63,8 +64,6 @@ class ProjectGroupFactory extends Error {
 			return false;
 		}
 		$this->Group =& $Group;
-
-		return true;
 	}
 
 	/**

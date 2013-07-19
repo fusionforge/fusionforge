@@ -49,18 +49,22 @@ class Survey extends Error {
 	 */
 	var $Group;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param	object	The Group object to which this servey is associated.
-	 * @param	int	The servey_id.
-	 * @param	array	The associative array of data.
-	 * @return	boolean	success.
-	 */
+    /**
+     * Constructor.
+     *
+     * @param $Group
+     * @param bool $survey_id
+     * @param bool $arr
+     * @internal param \The $object Group object to which this servey is associated.
+     * @internal param \The $int servey_id.
+     * @internal param \The $array associative array of data.
+     * @return \Survey
+     */
 	function __construct(&$Group, $survey_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 		if ($Group->isError()) {
 			$this->setError('Survey:: '.$Group->getErrorMessage());
@@ -84,18 +88,22 @@ class Survey extends Error {
 		}
 	}
 
-	/**
-	 * create - use this function to create a survey
-	 *
-	 * @param	string	          The survey title
-	 * @param	int array         The question numbers to be added
-	 * @param	is_active         1: Active, 0: Inactive
-	 * For future options
-	 * @param	is_public         0: Admins Only, 1: Group Members, 2: FusionForge user, 3:Every body
-	 * @param	is_result_public  0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
-	 * @param	double_vote       Allow double vote if it is 1
-	 * @return	boolean	success.
-	 */
+    /**
+     * create - use this function to create a survey
+     *
+     * @param $survey_title
+     * @param $add_questions
+     * @param int $is_active
+     * @param int $is_result_public
+     * @param Allow|int $double_vote
+     * @internal param \The $string survey title
+     * @internal param array $int The question numbers to be added
+     * @internal param $is_active 1: Active, 0: Inactive
+     * For future options
+     * @internal param $is_result_public 0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
+     * @internal param \Allow $double_vote double vote if it is 1
+     * @return    boolean    success.
+     */
 	function create($survey_title, $add_questions, $is_active = 0, $is_public = 1, $is_result_public = 0, $double_vote = 0) {
 		if (!$survey_title) {
 			$this->setError(_('Update Failed: Survey Title Required'));
@@ -128,19 +136,23 @@ class Survey extends Error {
 	}
 
 
-
-	/**
-	 * update - use this function to update a survey
-	 *
-	 * @param	string	          The survey title
-	 * @param	int array         The question numbers to be added
-	 * @param	int array         The question numbers to be deleted
-	 * @param	is_active         1: Active, 0: Inactive
-	 * @param	is_public         0: Admins Only, 1: Group Members, 2: FusionForge user, 3:Every body
-	 * @param	is_result_public  0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
-	 * @param	double_vote       Allow double vote if it is 1
-	 * @return	boolean	success.
-	 */
+    /**
+     * update - use this function to update a survey
+     *
+     * @param $survey_title
+     * @param $add_questions
+     * @param $del_questions
+     * @param int $is_active
+     * @param int $is_result_public
+     * @param Allow|int $double_vote
+     * @internal param \The $string survey title
+     * @internal param array $int The question numbers to be added
+     * @internal param array $int The question numbers to be deleted
+     * @internal param $is_active 1: Active, 0: Inactive
+     * @internal param $is_result_public 0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
+     * @internal param \Allow $double_vote double vote if it is 1
+     * @return    boolean    success.
+     */
 	function update($survey_title, &$add_questions, &$del_questions, $is_active = 0, $is_public = 1, $is_result_public = 0, $double_vote = 0) {
 		if (!$survey_title) {
 			$this->setError(_('Update Failed: Survey Title Required'));

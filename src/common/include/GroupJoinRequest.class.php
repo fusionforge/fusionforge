@@ -50,29 +50,30 @@ class GroupJoinRequest extends Error {
 
 	var $Group;
 
-	/**
-	 *  Constructor.
-	 *
-	 * @param bool|Group  $Group   $Group   The Group object.
-	 * @param bool|int    $user_id The user_id.
-	 * @param array|bool  $arr     The associative array of data.
-	 * @return boolean success.
-	 */
-	function GroupJoinRequest($Group = false, $user_id = false, $arr = false) {
+    /**
+     *  Constructor.
+     *
+     * @param bool|Group $Group   $Group   The Group object.
+     * @param bool|int $user_id The user_id.
+     * @param array|bool $arr     The associative array of data.
+     * @return \GroupJoinRequest
+     */
+	function __construct($Group = false, $user_id = false, $arr = false) {
 		$this->error();
 
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 		if ($Group->isError()) {
 			$this->setError('GroupJoinRequest:: '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
 		if ($user_id) {
 			if (!$arr || !is_array($arr)) {
 				if (!$this->fetchData($Group->getID(), $user_id)) {
-					return false;
+					return;
 				}
 			} else {
 				$this->data_array =& $arr;
@@ -81,11 +82,10 @@ class GroupJoinRequest extends Error {
 				//
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
 					$this->setError('group_id in db result does not match Group Object');
-					return false;
+					return;
 				}
 			}
 		}
-		return true;
 	}
 
 	/**
@@ -296,6 +296,7 @@ class GroupJoinRequest extends Error {
 					$this->getUserId()));
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError('Could Not Delete: '.db_error());
+                return false;
 			} else {
 				return true;
 			}

@@ -48,15 +48,16 @@ class MailingListFactory extends Error {
 	 *
 	 * @param	Group	$Group The Group object to which these mailing lists are associated.
 	 */
-	function MailingListFactory(& $Group) {
+	function __construct(& $Group) {
 		$this->Error();
 
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 		if ($Group->isError()) {
 			$this->setError('MailingListFactory:: '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 		if (!$Group->usesMail()) {
 			$this->setError(sprintf(_('%s does not use the Mailing-list tool'),
@@ -64,8 +65,6 @@ class MailingListFactory extends Error {
 			return false;
 		}
 		$this->Group =& $Group;
-
-		return true;
 	}
 
 	/**
@@ -102,7 +101,7 @@ class MailingListFactory extends Error {
 										     MAIL__MAILING_LIST_IS_PUBLIC)))) ;
 
 		if (!$result) {
-			$this->setError(sprintf(_('Error Getting %1$s'), _('Error Getting %1$s')).db_error());
+			$this->setError(_('Error Getting mailing list')._(': ').db_error());
 			return false;
 		} else {
 			$this->mailingLists = array();

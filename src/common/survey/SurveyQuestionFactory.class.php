@@ -46,12 +46,12 @@ class SurveyQuestionFactory extends Error {
 	 *  Constructor.
 	 *
 	 *	@param	object	The Group object to which this survey question is associated.
-	 *  @param  int     The survey_id
 	 */
 	function __construct(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 		if ($Group->isError()) {
 			$this->setError(_('Survey').':: '.$Group->getErrorMessage());

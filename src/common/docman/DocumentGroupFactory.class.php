@@ -48,16 +48,18 @@ class DocumentGroupFactory extends Error {
 	 */
 	var $Group;
 
-	/**
-	 * Constructor.
-	 *
-	 * @return	void
-	 */
+    /**
+     * Constructor.
+     *
+     * @param $Group
+     * @return \DocumentGroupFactory
+     */
 	function __construct(&$Group) {
 		$this->Error();
 
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 		if ($Group->isError()) {
 			$this->setError('DocumentGroupFactory::'.' '.$Group->getErrorMessage());

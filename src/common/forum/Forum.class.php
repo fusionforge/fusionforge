@@ -76,7 +76,7 @@ class Forum extends Error {
 	 *
 	 * @var	object	$Group.
 	 */
-	var $Group; //group object
+	var $Group;
 
 	/**
 	 * An array of 'types' for this forum - nested, flat, ultimate, etc.
@@ -85,22 +85,26 @@ class Forum extends Error {
 	 */
 	var $view_types;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param	object	The Group object to which this forum is associated.
-	 * @param	int	The group_forum_id.
-	 * @param	array	The associative array of data.
-	 * @return	boolean	success.
-	 */
-	function Forum(&$Group, $group_forum_id=false, $arr=false, $is_news=false) {
+    /**
+     * Constructor.
+     *
+     * @param $Group
+     * @param bool $group_forum_id
+     * @param bool $arr
+     * @internal param \The $object Group object to which this forum is associated.
+     * @internal param \The $int group_forum_id.
+     * @internal param \The $array associative array of data.
+     * @return \Forum success.
+     */
+	function __construct(&$Group, $group_forum_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 		if ($Group->isError()) {
 			$this->setError('Forums: '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 		if (!$is_news && $group_forum_id) {
 			//
@@ -121,14 +125,14 @@ class Forum extends Error {
 		if ($group_forum_id) {
 			if (!$arr || !is_array($arr)) {
 				if (!$this->fetchData($group_forum_id)) {
-					return false;
+					return;
 				}
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
 					$this->setError(_('Group_id in db result does not match Group Object'));
 					$this->data_array = null;
-					return false;
+					return;
 				}
 			}
 			//
@@ -138,7 +142,7 @@ class Forum extends Error {
 			    !forge_check_perm ('forum', $this->getID(), 'read')) {
 				$this->setPermissionDeniedError();
 				$this->data_array = null;
-				return false;
+				return;
 			}
 		}
 		$this->view_types[] = 'ultimate';
@@ -146,7 +150,6 @@ class Forum extends Error {
 		$this->view_types[] = 'nested';
 		$this->view_types[] = 'threaded';
 		$this->is_news = $is_news;
-		return true;
 	}
 
 	/**
@@ -219,7 +222,7 @@ class Forum extends Error {
 						htmlspecialchars($description),
 						$send_all_posts_to));
 		if (!$result) {
-			$this->setError(_('Error Adding Forum:').' '.db_error());
+			$this->setError(_('Error Adding Forum')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -454,11 +457,12 @@ class Forum extends Error {
 		return true;
 	}
 
-	/**
-	 * stopMonitor - Remove the current user from the list of people monitoring the forum.
-	 *
-	 * @return	boolean	success.
-	 */
+    /**
+     * stopMonitor - Remove the current user from the list of people monitoring the forum.
+     *
+     * @param $u
+     * @return    boolean    success.
+     */
 	function stopMonitor($u = -1) {
 		if ($u == -1) {
 			if (!session_loggedin()) {
@@ -620,7 +624,7 @@ class Forum extends Error {
 		$result = db_query_params('DELETE FROM forum_agg_msg_count WHERE group_forum_id=$1',
 				array($this->getID()));
 		if (!$result) {
-			$this->setError(_('Error Deleting Forum:').' '.db_error());
+			$this->setError(_('Error Deleting Forum')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -628,7 +632,7 @@ class Forum extends Error {
 		$result = db_query_params('DELETE FROM forum_monitored_forums WHERE forum_id=$1',
 				array($this->getID()));
 		if (!$result) {
-			$this->setError(_('Error Deleting Forum:').' '.db_error());
+			$this->setError(_('Error Deleting Forum')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -636,7 +640,7 @@ class Forum extends Error {
 		$result = db_query_params('DELETE FROM forum_saved_place WHERE forum_id=$1',
 				array($this->getID()));
 		if (!$result) {
-			$this->setError(_('Error Deleting Forum:').' '.db_error());
+			$this->setError(_('Error Deleting Forum')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -652,7 +656,7 @@ class Forum extends Error {
 		$result = db_query_params('DELETE FROM forum WHERE group_forum_id=$1',
 				array($this->getID()));
 		if (!$result) {
-			$this->setError(_('Error Deleting Forum:').' '.db_error());
+			$this->setError(_('Error Deleting Forum')._(': ').db_error());
 			db_rollback();
 			return false;
 		}

@@ -49,18 +49,22 @@ class Document extends Error {
 	 */
 	var $Group;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param	object	The Group object to which this document is associated.
-	 * @param	int	The docid.
-	 * @param	array	The associative array of data.
-	 * @return	void
-	 */
+    /**
+     * Constructor.
+     *
+     * @param $Group
+     * @param bool $docid
+     * @param bool $arr
+     * @internal param \The $object Group object to which this document is associated.
+     * @internal param \The $int docid.
+     * @internal param \The $array associative array of data.
+     * @return \Document
+     */
 	function __construct(&$Group, $docid = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 		if ($Group->isError()) {
 			$this->setError('Document:: '. $Group->getErrorMessage());
@@ -542,12 +546,13 @@ class Document extends Error {
 		return $values;
 	}
 
-	/**
-	 * isMonitoredBy - get the monitored status of this document for a specific user id.
-	 *
-	 * @param	int	User ID
-	 * @return	boolean	true if monitored by this user
-	 */
+    /**
+     * isMonitoredBy - get the monitored status of this document for a specific user id.
+     *
+     * @param string $userid
+     * @internal param \User $int ID
+     * @return    boolean    true if monitored by this user
+     */
 	function isMonitoredBy($userid = 'ALL') {
 		if ( $userid == 'ALL' ) {
 			$condition = '';
@@ -638,14 +643,16 @@ class Document extends Error {
 		return $this->setValueinDB('doc_group', $newdocgroupid);
 	}
 
-	/**
-	 * setLock - set the locking status of the document.
-	 *
-	 * @param	int	The status of the lock.
-	 * @param	int	The userid who set the lock.
-	 * @param	time	the epoch time.
-	 * @return	boolean	success or not.
-	 */
+    /**
+     * setLock - set the locking status of the document.
+     *
+     * @param $stateLock
+     * @param    time    the epoch time.
+     * @param int $thistime
+     * @internal param \The $int status of the lock.
+     * @internal param \The $int userid who set the lock.
+     * @return    boolean    success or not.
+     */
 	function setLock($stateLock, $userid = NULL, $thistime = 0) {
 		$res = db_query_params('UPDATE doc_data SET
 					locked = $1,
@@ -912,7 +919,8 @@ class Document extends Error {
 	 * sendNotice - Notifies of document submissions
 	 *
 	 * @param	boolean	true = new document (default value)
-	 */
+     * @return bool
+     */
 	function sendNotice($new = true) {
 		$BCC = $this->Group->getDocEmailAddress();
 		if ($this->isMonitoredBy('ALL')) {
@@ -1049,7 +1057,7 @@ class Document extends Error {
 		}
 
 		$ip = getStringFromServer('REMOTE_ADDR');
-		$res = db_query_params("INSERT INTO docman_dlstats_doc (ip_address, docid, month, day, user_id) VALUES ($1, $2, $3, $4, $5)", array($ip, $this->getID(), date('Ym'), date('d'), $us));
+		db_query_params("INSERT INTO docman_dlstats_doc (ip_address, docid, month, day, user_id) VALUES ($1, $2, $3, $4, $5)", array($ip, $this->getID(), date('Ym'), date('d'), $us));
 	}
 
 	/**

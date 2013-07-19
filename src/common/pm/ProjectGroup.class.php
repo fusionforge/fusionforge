@@ -24,13 +24,13 @@
 
 require_once $gfcommon.'include/Error.class.php';
 
-	/**
-	* Fetches a ProjectGroup object from the database
-	*
-	* @param	int	the projectgroup id
-	* @param	array	whether or not the db result handle is passed in
-	* @return	object	the ProjectGroup object
-	*/
+/**
+ * Fetches a ProjectGroup object from the database
+ *
+ * @param    array    whether or not the db result handle is passed in
+ * @param bool $data
+ * @return    object    the ProjectGroup object
+ */
 	function &projectgroup_get_object($group_project_id, $data = false) {
 		global $PROJECTGROUP_OBJ;
 		if (!isset($PROJECTGROUP_OBJ["_".$group_project_id."_"])) {
@@ -85,35 +85,39 @@ class ProjectGroup extends Error {
 	var $categories;
 	var $technicians;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param	object	The Group object to which this forum is associated.
-	 * @param	int	The group_project_id.
-	 * @param	array	The associative array of data.
-	 * @return	boolean	success.
-	 */
-	function ProjectGroup(&$Group, $group_project_id = false, $arr = false) {
+    /**
+     * Constructor.
+     *
+     * @param $Group
+     * @param bool $group_project_id
+     * @param bool $arr
+     * @internal param \The $object Group object to which this forum is associated.
+     * @internal param \The $int group_project_id.
+     * @internal param \The $array associative array of data.
+     * @return \ProjectGroup
+     */
+	function __construct(&$Group, $group_project_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 		if ($Group->isError()) {
 			$this->setError('ProjectGroup:: '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
 
 		if ($group_project_id) {
 			if (!$arr || !is_array($arr)) {
 				if (!$this->fetchData($group_project_id)) {
-					return false;
+					return;
 				}
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
 					$this->setError('Group_id in db result does not match Group Object');
-					return false;
+					return;
 				}
 			}
 			//
@@ -122,10 +126,9 @@ class ProjectGroup extends Error {
 			if (!forge_check_perm ('pm', $this->getID(), 'read')) {
 				$this->setPermissionDeniedError();
 				$this->data_array = null;
-				return false;
+				return;
 			}
 		}
-		return true;
 	}
 
 	/**
@@ -468,7 +471,6 @@ class ProjectGroup extends Error {
 		db_commit();
 
 		$this->Group->normalizeAllRoles();
-
 		return true;
 	}
 }

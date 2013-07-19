@@ -78,17 +78,19 @@ class DocumentFactory extends Error {
 	 */
 	var $limit = 0;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param	object	The Group object to which this DocumentFactory is associated.
-	 * @return	void
-	 * @access	public
-	 */
+    /**
+     * Constructor.
+     *
+     * @param $Group
+     * @internal param \The $object Group object to which this DocumentFactory is associated.
+     * @return \DocumentFactory
+    @access	public
+     */
 	function __construct(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 
 		if ($Group->isError()) {
@@ -257,13 +259,14 @@ class DocumentFactory extends Error {
 		$this->limit = $limit;
 	}
 
-	/**
-	 * getDocuments - returns an array of Document objects.
-	 *
-	 * @param	integer	no cache : force reinit $this->Documents : default: cache is used
-	 * @return	array	Document objects.
-	 * @access	public
-	 */
+    /**
+     * getDocuments - returns an array of Document objects.
+     *
+     * @param int $nocache
+     * @internal param \no $integer cache : force reinit $this->Documents : default: cache is used
+     * @return    array    Document objects.
+     * @access    public
+     */
 	function &getDocuments($nocache = 0) {
 		if (!$this->Documents || $nocache) {
 			$this->getFromStorage();

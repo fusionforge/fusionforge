@@ -95,51 +95,51 @@ class ArtifactType extends Error {
 	/**
 	 * Technicians db resource ID.
 	 *
-	 * @var		int		$technicians_res.
+	 * @var        int        $technicians_res.
 	 */
 	var $technicians_res;
 
 	/**
 	 * Submitters db resource ID.
 	 *
-	 * @var		int		$submitters_res.
+	 * @var        int        $submitters_res.
 	 */
 	var $submitters_res;
 
 	/**
 	 * Status db resource ID.
 	 *
-	 * @var		int		$status_res.
+	 * @var        int        $status_res.
 	 */
 	var $status_res;
 
 	/**
 	 * Canned responses resource ID.
 	 *
-	 * @var		int		$cannecresponses_res.
+	 * @var        int        $canned_responses_res.
 	 */
-	var $cannedresponses_res;
+	var $canned_responses_res;
 
 	/**
 	 * Array of artifact data.
 	 *
-	 * @var		array	$data_array.
+	 * @var        array    $data_array.
 	 */
 	var $data_array;
 
 	/**
 	 * Array of element names so they only have to be fetched once from db.
 	 *
-	 * @var		array	$data_array.
+	 * @var        array    $data_array.
 	 */
-	var	$element_name;
+	var $element_name;
 
 	/**
 	 * Array of element status so they only have to be fetched once from db.
 	 *
-	 * @var		array	$data_array.
+	 * @var        array    $data_array.
 	 */
-	var	$element_status;
+	var $element_status;
 
 	/**
 	 * ArtifactType - constructor.
@@ -151,7 +151,7 @@ class ArtifactType extends Error {
 	function __construct($Group, $artifact_type_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError('No Valid Group Object');
+			$this->setError(_('No Valid Group Object'));
 			return;
 		}
 		if ($Group->isError()) {
@@ -351,9 +351,9 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	  emailAddress - defined email address to send events to.
+	 *      emailAddress - defined email address to send events to.
 	 *
-	 *	  @return	string	email.
+	 * @return    string    email.
 	 */
 	function getEmailAddress() {
 		return $this->data_array['email_address'];
@@ -406,36 +406,36 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	  getDescription - the description of this ArtifactType.
+	 *      getDescription - the description of this ArtifactType.
 	 *
-	 *	  @return	string	description.
+	 * @return    string    description.
 	 */
 	function getDescription() {
 		return $this->data_array['description'];
 	}
 
 	/**
-	 *	  getDuePeriod - how many seconds until it's considered overdue.
+	 *      getDuePeriod - how many seconds until it's considered overdue.
 	 *
-	 *	  @return int seconds.
+	 * @return int seconds.
 	 */
 	function getDuePeriod() {
 		return $this->data_array['due_period'];
 	}
 
 	/**
-	 *	getStatusTimeout - how many seconds until an item is stale.
+	 *    getStatusTimeout - how many seconds until an item is stale.
 	 *
-	 *	@return int seconds.
+	 * @return int seconds.
 	 */
 	function getStatusTimeout() {
 		return $this->data_array['status_timeout'];
 	}
 
 	/**
-	 *	  getCustomStatusField - return the extra_field_id of the field containing the custom status.
+	 *      getCustomStatusField - return the extra_field_id of the field containing the custom status.
 	 *
-	 *	  @return	int	extra_field_id.
+	 * @return    int    extra_field_id.
 	 */
 	function getCustomStatusField() {
 		return $this->data_array['custom_status_field'];
@@ -455,21 +455,22 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	  usesCustomStatuses - boolean
+	 *      usesCustomStatuses - boolean
 	 *
-	 *	  @return	boolean	use_custom_statues.
+	 * @return    boolean    use_custom_statues.
 	 */
 	function usesCustomStatuses() {
 		return $this->getCustomStatusField();
 	}
 
 	/**
-	 *	remap status	- pass the extra_fields array and return the status_id, either open/closed
-	 *	@param	int	The status_id
-	 *	@param	array	Complex array of extra_field_data
-	 *	@return	int	status_id.
+	 *    remapStatus    - pass the extra_fields array and return the status_id, either open/closed
+	 *
+	 * @param    int      $status_id    The status_id
+	 * @param    array    $extra_fields Complex array of extra_field_data
+	 * @return    int    status_id.
 	 */
-	function remapStatus($status_id,$extra_fields) {
+	function remapStatus($status_id, $extra_fields) {
 		if ($this->usesCustomStatuses()) {
 			//get the selected element for the extra_field_status element
 			$csfield = $this->getCustomStatusField();
@@ -506,9 +507,9 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	  getDataType - flag that is generally unused but can mark the difference between bugs, patches, etc.
+	 *      getDataType - flag that is generally unused but can mark the difference between bugs, patches, etc.
 	 *
-	 *	  @return	int	The type (1) bug (2) support (3) patch (4) feature (0) other.
+	 * @return    int    The type (1) bug (2) support (3) patch (4) feature (0) other.
 	 */
 	function getDataType() {
 		return $this->data_array['datatype'];
@@ -517,7 +518,7 @@ class ArtifactType extends Error {
 	/**
 	 *  setMonitor - user can monitor this artifact.
 	 *
-	 *  @return false - always false - always use the getErrorMessage() for feedback
+	 * @return bool false - always false - always use the getErrorMessage() for feedback
 	 */
 	function setMonitor ($user_id = -1) {
 		if ($user_id == -1) {
@@ -528,14 +529,14 @@ class ArtifactType extends Error {
 			$user_id = user_getid() ;
 		}
 
-		$res = db_query_params ('SELECT * FROM artifact_type_monitor WHERE group_artifact_id=$1 AND user_id=$2',
-					array ($this->getID(),
-					       $user_id)) ;
+		$res = db_query_params('SELECT * FROM artifact_type_monitor WHERE group_artifact_id=$1 AND user_id=$2',
+			array($this->getID(),
+				$user_id));
 		if (!$res || db_numrows($res) < 1) {
 			//not yet monitoring
-			$res = db_query_params ('INSERT INTO artifact_type_monitor (group_artifact_id,user_id) VALUES ($1,$2)',
-						array ($this->getID(),
-						       $user_id)) ;
+			$res = db_query_params('INSERT INTO artifact_type_monitor (group_artifact_id,user_id) VALUES ($1,$2)',
+				array($this->getID(),
+					$user_id));
 			if (!$res) {
 				$this->setError(db_error());
 				return false;
@@ -545,11 +546,11 @@ class ArtifactType extends Error {
 			}
 		} else {
 			//already monitoring - remove their monitor
-			db_query_params ('DELETE FROM artifact_type_monitor
+			db_query_params('DELETE FROM artifact_type_monitor
 				WHERE group_artifact_id=$1
 				AND user_id=$2',
-					 array ($this->getID(),
-						$user_id)) ;
+				array($this->getID(),
+					$user_id));
 			$this->setError(_('Tracker Monitoring Deactivated'));
 			return false;
 		}
@@ -674,10 +675,10 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	getExtraFieldName - Get a box name using the box ID
+	 *    getExtraFieldName - Get a box name using the box ID
 	 *
-	 *	@param  int 	id of an extra field.
-	 *	@return string	name of extra field.
+	 * @param  int     $extra_field_id id of an extra field.
+	 * @return string    name of extra field.
 	 */
 	function getExtraFieldName($extra_field_id) {
 		$arr = $this->getExtraFields();
@@ -685,12 +686,12 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	getExtraFieldElements - List of possible admin configured
-	 *	extra field elements. This function is used to
-	 *	present the boxes and choices on the main Add/Update page.
+	 *    getExtraFieldElements - List of possible admin configured
+	 *    extra field elements. This function is used to
+	 *    present the boxes and choices on the main Add/Update page.
 	 *
-	 *	@param	int	id of the extra field
-	 *	@return array of elements for this extra field.
+	 * @param    int    $id id of the extra field
+	 * @return array of elements for this extra field.
 	 */
 	function getExtraFieldElements($id) {
 //TODO validate $id
@@ -699,13 +700,13 @@ class ArtifactType extends Error {
 		}
 		if (!isset($this->extra_field[$id])) {
 			$this->extra_field[$id] = array();
-			$res = db_query_params  ('SELECT element_id,element_name,status_id
+			$res = db_query_params('SELECT element_id, element_name, status_id, hidden
 				FROM artifact_extra_field_elements
 				WHERE extra_field_id = $1
 				ORDER BY element_pos ASC, element_id ASC',
-						 array ($id)) ;
-			$i=0;
-			while($arr = db_fetch_array($res)) {
+				array($id));
+			$i = 0;
+			while ($arr = db_fetch_array($res)) {
 				$this->extra_field[$id][$i++] = $arr;
 			}
 //			if (count($this->extra_field[$id]) == 0) {
@@ -717,9 +718,10 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	getElementName - get the name of a particular element.
+	 * getElementName - get the name of a particular element.
 	 *
-	 *	@return	string	The name.
+	 * @param $choiceid
+	 * @return string    The name.
 	 */
 	function getElementName($choiceid) {
 		if (!$choiceid) {
@@ -749,9 +751,10 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	getElementStatusID - get the status of a particular element.
+	 * getElementStatusID - get the status of a particular element.
 	 *
-	 *	@return	int		The status
+	 * @param int|array $choice_id
+	 * @return int The status
 	 */
 	function getElementStatusID($choiceid) {
 		if (!$choiceid) {
@@ -780,11 +783,11 @@ class ArtifactType extends Error {
 
 
 	/**
-	 *	delete - delete this tracker and all its related data.
+	 * delete - delete this tracker and all its related data.
 	 *
-	 *	@param	bool	I'm Sure.
-	 *	@param	bool	I'm REALLY sure.
-	 *	@return	bool true/false;
+	 * @param bool $sure        I'm Sure.
+	 * @param bool $really_sure I'm REALLY sure.
+	 * @return bool true/false;
 	 */
 	function delete($sure, $really_sure) {
 		if (!$sure || !$really_sure) {

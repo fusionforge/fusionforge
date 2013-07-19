@@ -44,7 +44,7 @@ class ArtifactTypeFactory extends Error {
 	/**
 	 * The data type (DAO)
 	 *
-  	 * @var 	string dataType
+	 * @var 	string dataType
 	 */
 	var $dataType;
 
@@ -56,20 +56,19 @@ class ArtifactTypeFactory extends Error {
 	function __construct(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 		if ($Group->isError()) {
 			$this->setError('ArtifactTypeFactory:: '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 		if (!$Group->usesTracker()) {
 			$this->setError(sprintf(_('%s does not use the Tracker tool'),
 			    $Group->getPublicName()));
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
-
-		return true;
 	}
 
 	/**

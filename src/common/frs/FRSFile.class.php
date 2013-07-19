@@ -28,9 +28,9 @@ require_once $gfcommon.'include/Error.class.php';
 /**
  *	  Factory method which creates a FRSFile from an release id
  *
- *	  @param int	  The file id
- *	  @param array	The result array, if it's passed in
- *	  @return object  FRSFile object
+ *	  @param int	    $file_id The file id
+ *	  @param array|bool $data    The result array, if it's passed in
+ *	  @return object FRSFile object
  */
 function &frsfile_get_object($file_id, $data=false) {
 	global $FRSFILE_OBJ;
@@ -68,52 +68,53 @@ class FRSFile extends Error {
 	 */
 	var $FRSRelease;
 
-	/**
-	 *  Constructor.
-	 *
-	 *  @param  object  The FRSRelease object to which this file is associated.
-	 *  @param  int  The file_id.
-	 *  @param  array   The associative array of data.
-	 *	@return	boolean	success.
-	 */
-	function FRSFile(&$FRSRelease, $file_id=false, $arr=false) {
+    /**
+     *  Constructor.
+     *
+     * @param    object $FRSRelease The FRSRelease object to which this file is associated.
+     * @param    int|bool $file_id    The file_id.
+     * @param    array|bool $arr        The associative array of data.
+     * @return \FRSFile
+     */
+	function __construct(&$FRSRelease, $file_id=false, $arr=false) {
 		$this->Error();
 		if (!$FRSRelease || !is_object($FRSRelease)) {
 			$this->setError('FRSFile:: No Valid FRSRelease Object');
-			return false;
+			return;
 		}
 		if ($FRSRelease->isError()) {
 			$this->setError('FRSFile:: '.$FRSRelease->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->FRSRelease =& $FRSRelease;
 
 		if ($file_id) {
 			if (!$arr || !is_array($arr)) {
 				if (!$this->fetchData($file_id)) {
-					return false;
+					return;
 				}
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['release_id'] != $this->FRSRelease->getID()) {
 					$this->setError('FRSRelease_id in db result does not match FRSRelease Object');
 					$this->data_array=null;
-					return false;
+					return;
 				}
 			}
 		}
-		return true;
 	}
 
 	/**
-	 *	create - create a new file in this FRSFileRelease/FRSPackage.
+	 *    create - create a new file in this FRSFileRelease/FRSPackage.
 	 *
-	 *	@param	string	The name of this file.
-	 *	@param	string	The location of this file in the local file system.
-	 *	@param	int	The type_id of this file from the frs-file-types table.
-	 *	@param	int	The processor_id of this file from the frs-processor-types table.
-	 *	@param	int	The release_date of this file in unix time (seconds).
-	 *	@return	boolean success.
+	 * @param  string     $name          The name of this file.
+	 * @param  string     $file_location The location of this file in the local file system.
+	 * @param  int        $type_id       The type_id of this file from the frs-file-types table.
+	 * @param  int        $processor_id  The processor_id of this file from the frs-processor-types table.
+	 * @param  int|bool   $release_time  The release_date of this file in unix time (seconds).
+	 * @param  string     $mime_type     The mime type of the file (default: application/octet-stream)
+	 * @param  bool       $is_remote     True if file is an URL and not an uploaded file (default: false)
+	 * @return bool success.
 	 */
 	function create($name,$file_location,$type_id,$processor_id,$release_time=false) {
 		if (strlen($name) < 3) {
@@ -222,7 +223,7 @@ class FRSFile extends Error {
 	/**
 	 *  fetchData - re-fetch the data for this FRSFile from the database.
 	 *
-	 *  @param  int  The file_id.
+	 *  @param  int  $file_id The file_id.
 	 *  @return boolean	success.
 	 */
 	function fetchData($file_id) {
@@ -361,9 +362,9 @@ class FRSFile extends Error {
 			$this->setError("frsDeleteFile()::2 ".db_error());
 			return false;
 		} else {
-			$res = db_query_params ('DELETE FROM frs_dlstats_file WHERE file_id=$1',
+			db_query_params ('DELETE FROM frs_dlstats_file WHERE file_id=$1',
 						array ($this->getID())) ;
-			$res = db_query_params ('DELETE FROM frs_dlstats_filetotal_agg WHERE file_id=$1',
+			db_query_params ('DELETE FROM frs_dlstats_filetotal_agg WHERE file_id=$1',
 						array ($this->getID())) ;
 			$this->FRSRelease->FRSPackage->createNewestReleaseFilesAsZip();
 			return true;
@@ -371,13 +372,13 @@ class FRSFile extends Error {
 	}
 
 	/**
-	 *	update - update an existing file in this FRSFileRelease/FRSPackage.
+	 * update - update an existing file in this FRSFileRelease/FRSPackage.
 	 *
-	 *	@param	int	The type_id of this file from the frs-file-types table.
-	 *	@param	int	The processor_id of this file from the frs-processor-types table.
-	 *	@param	int	The release_date of this file in unix time (seconds).
-	 *	@param	int	The release_id of the release this file belongs to (if not set, defaults to the release id of this file).
-	 *	@return	boolean success.
+	 * @param	int	     $type_id      The type_id of this file from the frs-file-types table.
+	 * @param	int	     $processor_id The processor_id of this file from the frs-processor-types table.
+	 * @param	int	     $release_time The release_date of this file in unix time (seconds).
+	 * @param	int|bool $release_id   The release_id of the release this file belongs to (if not set, defaults to the release id of this file).
+	 * @return	boolean success.
 	 */
 	function update($type_id,$processor_id,$release_time,$release_id=false) {
 		if (!forge_check_perm ('frs', $this->FRSRelease->FRSPackage->Group->getID(), 'write')) {
@@ -391,7 +392,7 @@ class FRSFile extends Error {
 			if ($FRSRelease=frsrelease_get_object($release_id)) {
 				// Check that the new FRSRelease id belongs to the group of this FRSFile
 				if ($FRSRelease->FRSPackage->Group->getID()!=$this->FRSRelease->FRSPackage->Group->getID()) {
-					$this->setError('FRSFile:: No Valid Group Object');
+					$this->setError(_('No Valid Group Object'));
 					return false;
 				}
 			} else {

@@ -43,16 +43,18 @@ class DocumentManager extends Error {
 	 */
 	var $Group;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param	object	The Group object to which this document is associated.
-	 * @return	void
-	 */
+    /**
+     * Constructor.
+     *
+     * @param $Group
+     * @internal param \The $object Group object to which this document is associated.
+     * @return \DocumentManager
+     */
 	function __construct(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 		if ($Group->isError()) {
 			$this->setError('DocumentManager:: '. $Group->getErrorMessage());
@@ -211,7 +213,8 @@ class DocumentManager extends Error {
 	 *
 	 * @param	string	format of the return values. json returns : { name: id, }. Default is DB object.
 	 * @param	string	skipped status id
-	 */
+     * @return resource|string
+     */
 	function getStatusNameList($format = '', $removedval = '') {
 		if (!empty($removedval)) {
 			$stateQuery = db_query_params('select * from doc_states where stateid not in ($1) order by stateid', array($removedval));

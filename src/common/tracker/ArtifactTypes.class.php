@@ -29,11 +29,11 @@ require_once $gfcommon.'tracker/ArtifactExtraField.class.php';
 class ArtifactTypes extends Error {
 
 	/**
-	 * The artifact type object.
+	 * The Group object.
 	 *
-	 * @var		object	$ArtifactType.
+	 * @var		object	$Group.
 	 */
-	var $Group; //group object
+	var $Group;
 
 	/**
 	 * Array of artifactTypes data.
@@ -51,14 +51,14 @@ class ArtifactTypes extends Error {
 	function __construct(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 		if ($Group->isError()) {
 			$this->setError('ArtifactType: '.$Group->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
-		return true;
 	}
 
 	/**

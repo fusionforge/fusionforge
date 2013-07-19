@@ -36,7 +36,8 @@ class DocumentGroupHTML extends Error {
 		$this->Error();
 
 		if (!$Group || !is_object($Group)) {
-			exit_no_group();
+			$this->setError(_('No Valid Group Object'));
+			return;
 		}
 		if ($Group->isError()) {
 			$this->setError(_('Error') . _(': ') . $Group->getErrorMessage());
