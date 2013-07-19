@@ -13,11 +13,6 @@ TODO: document how to host all subdomains on the same system domain
 name, for project pages (virtual hosting), mailing lists, etc. (see #568513,
 ...)
 
-Note that the DocumentRoot changed from /usr/share/gforge/www in
-@FORGENAME@ 5.0.x to /usr/share/gforge/src/www in @FORGENAME@ 5.1+
-(TODO: explain the rationale). You may need to adjust some settings in
-case of local customizations.
-
  -- Olivier Berger <obergix@debian.org>, Thu, 16 Aug 2012 14:11:20 +0200
 
 # Local Variables:

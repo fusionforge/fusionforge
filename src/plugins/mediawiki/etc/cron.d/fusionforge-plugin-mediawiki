@@ -1,5 +1,5 @@
 FFDIR=/usr/share/gforge
-MWCRON=/usr/share/gforge/src/plugins/mediawiki/cronjobs
+MWCRON=/usr/share/gforge/plugins/mediawiki/cronjobs
 FFUSER=gforge
 
 # You may need to change the pathname to php CLI (command line interface)
