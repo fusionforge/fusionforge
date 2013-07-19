@@ -52,7 +52,7 @@ class ProjectTaskFactory extends Error {
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	object	The ProjectGroup object to which this ProjectTask is associated.
+	 *	@param	ProjectGroup $ProjectGroup The ProjectGroup object to which this ProjectTask is associated.
 	 *	@return	boolean	success.
 	 */
 	function ProjectTaskFactory(&$ProjectGroup) {
@@ -73,15 +73,16 @@ class ProjectTaskFactory extends Error {
 	}
 
 	/**
-	 *	setup - sets up limits and sorts before you call getTasks().
+	 * setup - sets up limits and sorts before you call getTasks().
 	 *
-	 *	@param	int	The offset - number of rows to skip.
-	 *	@param	string	The way to order - ASC or DESC.
-	 *	@param	int	The max number of rows to return.
-	 *	@param	string	Whether to set these prefs into the user_prefs table - use "custom".
-	 *	@param	int	Include this param if you want to limit to a certain assignee.
-	 *	@param	int	Include this param if you want to limit to a certain category.
-	 *	@param	string	What view mode the screen should be in.
+	 * @param  int       $offset        The offset - number of rows to skip.
+	 * @param  string    $order         The way to order - ASC or DESC.
+	 * @param  int       $max_rows      The max number of rows to return.
+	 * @param  string    $set           Whether to set these prefs into the user_prefs table - use "custom".
+	 * @param  int       $_assigned_to  Include this param if you want to limit to a certain assignee.
+	 * @param  int       $_status       Include this param if you want to limit to a certain category.
+	 * @param            $_category_id
+	 * @param  string    $_view
 	 */
 	function setup($offset,$order,$max_rows,$set,$_assigned_to,$_status,$_category_id,$_view='') {
 //echo "<br />offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status|_category_id: $_category_id +";
@@ -145,9 +146,9 @@ class ProjectTaskFactory extends Error {
 	}
 
 	/**
-	 *	getTasks - get an array of ProjectTask objects.
+	 * getTasks - get an array of ProjectTask objects.
 	 *
-	 *	@return	array	The array of ProjectTask objects.
+	 * @return ProjectTask[] The array of ProjectTask objects.
 	 */
 	function &getTasks() {
 		if ($this->project_tasks) {
@@ -186,7 +187,7 @@ class ProjectTaskFactory extends Error {
 		$rows = db_numrows($result);
 		$this->fetched_rows=$rows;
 		if (db_error()) {
-			$this->setError('Database Error: '.db_error().$sql);
+			$this->setError('Database Error: '.db_error());
 			return false;
 		}
 

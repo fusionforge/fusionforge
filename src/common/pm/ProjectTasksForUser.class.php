@@ -38,21 +38,23 @@ class ProjectTasksForUser extends Error {
 	var $User;
 
 	/**
-	* Creates a new ProjectTasksForUser object
-	*
-	* @param	user	the User object
-	*/
+	 * Creates a new ProjectTasksForUser object
+	 *
+	 * @param GFUser $user	the User object
+	 * @return bool
+	 */
 	function ProjectTasksForUser(&$user) {
 		$this->User =& $user;
 		return true;
 	}
 
 	/**
-	* Gets a list of tasks for this user
-	*
-	* @param the SQL query to use to fetch the tasks
-	*	@return	an array of ProjectTask objects
-	*/
+	 * Gets a list of tasks for this user
+	 *
+	 * @param string $sql The SQL query to use to fetch the tasks
+	 * @param array  $params
+	 * @return ProjectTask[] An array of ProjectTask objects
+	 */
 	function &getTasksFromSQLwithParams ($sql, $params) {
 		$tasks = array();
 		$result = db_query_params ($sql, $params);
@@ -69,7 +71,7 @@ class ProjectTasksForUser extends Error {
 	/**
 	*	Gets a list of tasks by group project name
 	*
-	* @return an array of ProjectTask objects
+	* @return array An array of ProjectTask objects
 	*/
 	function &getTasksByGroupProjectName () {
 		return $this->getTasksFromSQLwithParams ('SELECT ptv.*,g.group_name,pgl.project_name

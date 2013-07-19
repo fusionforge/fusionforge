@@ -45,14 +45,13 @@ class ProjectGroupFactory extends Error {
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	object	The Group object to which this ProjectGroupFactory is associated.
+	 *	@param	Group $Group The Group object to which this ProjectGroupFactory is associated.
 	 *	@return	boolean	success.
 	 */
 	function ProjectGroupFactory(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError('ProjectGroup:: No Valid Group Object');
-			return false;
+			exit_no_group();
 		}
 		if ($Group->isError()) {
 			$this->setError('ProjectGroup:: '.$Group->getErrorMessage());
@@ -71,7 +70,7 @@ class ProjectGroupFactory extends Error {
 	/**
 	 *	getGroup - get the Group object this ProjectGroupFactory is associated with.
 	 *
-	 *	@return	object	The Group object.
+	 *	@return	Group	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
@@ -93,7 +92,7 @@ class ProjectGroupFactory extends Error {
 	/**
 	 *	getProjectGroups - get an array of ProjectGroup objects.
 	 *
-	 *	@return	array	The array of ProjectGroups.
+	 *	@return	ProjectGroups[]	The array of ProjectGroups.
 	 */
 	function getProjectGroups() {
 		if ($this->projectGroups) {

@@ -29,22 +29,22 @@ class ProjectCategory extends Error {
 	/**
 	 * The ProjectGroup object.
 	 *
-	 * @var		object	$ProjectGroup.
+	 * @var	ProjectGroup	$ProjectGroup.
 	 */
 	var $ProjectGroup; //object
 
 	/**
 	 * Array of data.
 	 *
-	 * @var		array	$data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
 	/**
 	 *  ProjectCategory - constructor.
 	 *
-	 *	@param	object	ProjectGroup object.
-	 *  @param	array	(all fields from project_category) OR category_id from database.
+	 *	@param	object	   $ProjectGroup ProjectGroup object.
+	 *  @param	array|bool $data (all fields from project_category) OR category_id from database.
 	 *  @return	boolean	success.
 	 */
 	function ProjectCategory(&$ProjectGroup, $data=false) {
@@ -77,13 +77,14 @@ class ProjectCategory extends Error {
 				}
 			}
 		}
+		return true;
 	}
 
 	/**
-	 *	create - create a new item in the database.
+	 * create - create a new item in the database.
 	 *
-	 *	@param	string	Item name.
-	 *  @return	boolean success.
+	 * @param  string    $name Item name.
+	 * @return boolean success.
 	 */
 	function create($name) {
 		//
@@ -124,7 +125,7 @@ class ProjectCategory extends Error {
 	/**
 	 *	fetchData() - re-fetch the data for this ProjectCategory from the database.
 	 *
-	 *	@param	int		ID of the category.
+	 *	@param	int	$id	ID of the category.
 	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
@@ -169,7 +170,7 @@ class ProjectCategory extends Error {
 	/**
 	 *  update - update a ProjectCategory.
 	 *
-	 *  @param	string	Name of the category.
+	 *  @param	string	$name Name of the category.
 	 *  @return	boolean success.
 	 */
 	function update($name) {

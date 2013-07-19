@@ -78,7 +78,7 @@ class ProjectGroup extends Error {
 	/**
 	 * The Group object.
 	 *
-	 * @var	object	$Group.
+	 * @var	Group $Group.
 	 */
 	var $Group;
 	var $statuses;
@@ -96,8 +96,7 @@ class ProjectGroup extends Error {
 	function ProjectGroup(&$Group, $group_project_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError('ProjectGroup:: No Valid Group Object');
-			return false;
+			exit_no_group();
 		}
 		if ($Group->isError()) {
 			$this->setError('ProjectGroup:: '.$Group->getErrorMessage());
@@ -201,7 +200,7 @@ class ProjectGroup extends Error {
 	/**
 	 * getGroup - get the Group object this ProjectGroup is associated with.
 	 *
-	 * @return	object	The Group object.
+	 * @return	Group	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
@@ -342,7 +341,7 @@ class ProjectGroup extends Error {
 					      $this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('Error On Update: '.db_error().$sql);
+			$this->setError('Error On Update: '.db_error());
 			return false;
 		}
 		return true;
