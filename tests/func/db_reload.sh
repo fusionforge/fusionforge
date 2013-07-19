@@ -4,8 +4,8 @@ then
 	database=$1
 else
 	scriptdir=$(dirname $0)
-	UTILS_PATH=$(cd $scriptdir/../../src ; pwd)
-	export PATH=$PATH:$UTILS_PATH/utils:$UTILS_PATH/bin
+	UTILS_PATH=$(cd $scriptdir/../.. ; pwd)
+	export PATH=$PATH:$UTILS_PATH/utils:$UTILS_PATH/bin:$UTILS_PATH/src/utils:$UTILS_PATH/src/bin
 	if type forge_get_config
 	then
 		database=`FUSIONFORGE_NO_PLUGINS=true forge_get_config database_name`
