@@ -194,7 +194,7 @@ $tech_box=$ath->technicianBox ('_assigned_to[]',$_assigned_to,true,'none','-1',f
 //	custom order by arrays to build a pop-up box
 //
 $order_name_arr=array();
-$order_name_arr[]=_('ID');
+$order_name_arr[]=_('Id');
 $order_name_arr[]=_('Priority');
 $order_name_arr[]=_('Summary');
 $order_name_arr[]=_('Open Date');
@@ -231,10 +231,10 @@ $sort_arr[]='DESC';
 //
 $changed_name_arr=array();
 $changed_name_arr[]=_('Any changes');
-$changed_name_arr[]=_('Last 24H');
-$changed_name_arr[]=_('Last 7days');
-$changed_name_arr[]=_('Last 2weeks');
-$changed_name_arr[]=_('Last 1month');
+$changed_name_arr[]=_('Last 24 h');
+$changed_name_arr[]=_('Last 7 days');
+$changed_name_arr[]=_('Last 2 weeks');
+$changed_name_arr[]=_('Last month');
 
 $changed_arr=array();
 $changed_arr[]= 0;
@@ -326,7 +326,7 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 	echo '
 	<tr>
 		<td colspan="2">
-			<strong>'._('Type of query').':</strong><br />
+			<strong>'._('Type of query')._(': ').'</strong><br />
 			<input name="query_type" value="0" type="radio"'.(($query_type==0) ? ' checked="checked"' : '' ).' />'.
 			_('Private query').'<br />
 			<input name="query_type" value="1" type="radio"'.(($query_type==1) ? ' checked="checked"' : '' ).' />'.
@@ -341,14 +341,14 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 	if (!$ath->usesCustomStatuses()) {
 		echo '<tr>
 				<td class="top">
-				<strong>'._('State').':</strong><br />'. $ath->statusBox('_status',$_status,true,_('Any')).'
+				<strong>'._('State')._(': ').'</strong><br />'. $ath->statusBox('_status',$_status,true,_('Any')).'
 				</td>
 				<td></td>
 			  </tr>';
 	}
 	echo '<tr>
-		<td class="top"><strong>'._('Submitter').':</strong><br />'. $submitter_box .'</td>
-		<td class="top"><strong>'._('Assignee').':</strong><br />'. $tech_box .'</td>
+		<td class="top"><strong>'._('Submitter')._(': ').'</strong><br />'. $submitter_box .'</td>
+		<td class="top"><strong>'._('Assignee')._(': ').'</strong><br />'. $tech_box .'</td>
 	</tr>';
 	$ath->renderExtraFields($extra_fields,true,'None',true,'Any',array(),false,'QUERY');
 
