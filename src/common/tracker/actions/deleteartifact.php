@@ -35,7 +35,7 @@ $ath->header(array ('title'=>_('Delete artifact').': [#'. $ah->getID(). '] ' . $
 
 ?>
 
-<table>
+<table class="centered">
 <tr>
 <td>
 <fieldset>
@@ -44,20 +44,17 @@ $ath->header(array ('title'=>_('Delete artifact').': [#'. $ah->getID(). '] ' . $
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 <input type="hidden" name="func" value="postdeleteartifact" />
 <input type="hidden" name="atid" value="<?php echo $atid; ?>" />
-
-<table align="center">
-
-	<tr>
-		<td class="important"><?php echo _('Are you sure you want to delete this artifact?'); ?></td>
-	</tr>
-	<tr class="align-center">
-		<td class="align-center"><input type="checkbox" value="1" name="confirm_delete" /> <?php echo _('Yes, I want to delete this artifact'); ?></td>
-	</tr>
-	<tr>
-		<td style="text-align:center"><input type="submit" value="<?php echo _('Delete'); ?>" name="submit" /></td>
-	</tr>
-
-</table>
+<p class="important">
+<?php echo _('Are you sure you want to delete this artifact?'); ?>
+</p>
+<p class="align-center">
+<input id="confirm_delete" type="checkbox" value="1" name="confirm_delete" />
+<label for="confirm_delete">
+<?php echo _('Yes, I want to delete this artifact'); ?>
+</label>
+</p>
+<p class="align-center"><input type="submit" value="<?php echo _('Delete'); ?>" name="submit" />
+</p>
 </form>
 </fieldset>
 </td>
