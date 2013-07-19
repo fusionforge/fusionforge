@@ -16,7 +16,7 @@ CHROOTDIR=$(/usr/share/gforge/bin/forge_get_config chroot)
 
 case $1 in
 configure)
-	echo "Installing chroot environnement at $CHROOTDIR"
+	echo "Installing chroot environment at $CHROOTDIR"
 	test -d "$CHROOTDIR" || install -d -m 755 "$CHROOTDIR"
 	test -d "$CHROOTDIR" || exit 1
 	for dir in \
