@@ -192,7 +192,7 @@ $tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'_assig
 //	custom order by arrays to build a pop-up box
 //
 $order_name_arr=array();
-$order_name_arr[]=_('ID');
+$order_name_arr[]=_('Id');
 $order_name_arr[]=_('Priority');
 $order_name_arr[]=_('Summary');
 $order_name_arr[]=_('Open Date');
@@ -228,10 +228,10 @@ $sort_arr[]='DESC';
 //
 $changed_name_arr=array();
 $changed_name_arr[]=_('Any changes');
-$changed_name_arr[]=_('Last 24H');
-$changed_name_arr[]=_('Last 7days');
-$changed_name_arr[]=_('Last 2weeks');
-$changed_name_arr[]=_('Last 1month');
+$changed_name_arr[]=_('Last 24 h');
+$changed_name_arr[]=_('Last 7 days');
+$changed_name_arr[]=_('Last 2 weeks');
+$changed_name_arr[]=_('Last month');
 
 $changed_arr=array();
 $changed_arr[]= 0x7fffffff;	 // Any
@@ -358,14 +358,14 @@ if (db_numrows($res)>0) {
 	$optgroup['values'][1] = 'Project queries';
 	echo '<span style="font-size:smaller">';
 	echo '<select name="query_id" id="query_id">';
-	echo '<option value="100">Select One</option>';
+	echo '<option value="100">' . _('Select One') . '</option>';
 	$current = '';
 	$selected = $af->getDefaultQuery();
 	while ($row = db_fetch_array($res)) {
 		if ($current != $row['type']) {
 			if ($current !== '')
 				echo '</optgroup>';
-			$label = $row['type'] ? 'Project' : 'Private';
+			$label = $row['type'] ? _('Project') : _('Private');
 			echo '<optgroup label="'.$label.'">';
 			$current = $row['type'];
 		}
@@ -403,10 +403,10 @@ echo '
 	<table class="fullwidth">
 	<tr>
 	<td>
-	'._('Assignee').': '. $tech_box .'
+	'._('Assignee')._(': '). $tech_box .'
 	</td>
 	<td class="align-center">
-	'._('State').': '. $status_box .'
+	'._('State')._(': '). $status_box .'
 	</td>
 	<td class="align-right">';
 
@@ -551,7 +551,7 @@ if ($art_arr && $art_cnt > 0) {
 			$title = $ath->getExtraFieldName($f);
 		} else {
 			if ($f == 'id')
-				$title=_('ID');
+				$title=_('Id');
 			if ($f == 'summary')
 				$title=_('Summary');
 			if ($f == 'details')
@@ -569,7 +569,7 @@ if ($art_arr && $art_cnt > 0) {
 			if ($f == 'submitted_by')
 				$title=_('Submitted by');
 			if ($f == 'related_tasks')
-				$title=_('Related tasks');
+				$title=_('Related Tasks');
 			if ($f == 'last_modified_date')
 				$title=_('Last Modified Date');
 		}
