@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-18 16:09+0200\n"
+"POT-Creation-Date: 2013-07-19 10:39+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -277,7 +277,7 @@ msgid "group_id in db result does not match Group Object"
 msgstr "El Group_id al resultat db no coincideix amb l'objecte del grup"
 
 #: common/docman/Document.class.php:110 common/docman/Document.class.php:822
-#: common/pm/ProjectGroup.class.php:142 common/pm/ProjectGroup.class.php:314
+#: common/pm/ProjectGroup.class.php:141 common/pm/ProjectGroup.class.php:313
 msgid "Title Must Be At Least 5 Characters"
 msgstr "El títol ha de tenir 5 caràcters com a mínim"
 
@@ -361,7 +361,8 @@ msgstr ""
 
 #: common/docman/Document.class.php:933
 #: common/docman/DocumentGroup.class.php:704
-#: common/forum/ForumHTML.class.php:73 plugins/contribtracker/www/index.php:35
+#: common/forum/ForumHTML.class.php:73 common/tracker/actions/browse.php:368
+#: plugins/contribtracker/www/index.php:35
 #: plugins/contribtracker/www/index.php:167
 #: plugins/mantisbt/view/admin/StatPerStatus.php:47
 #: plugins/mantisbt/view/viewIssues.php:247 www/admin/database.php:81
@@ -394,7 +395,10 @@ msgstr "Projecte"
 #: common/docman/views/listtrashfile.php:117
 #: common/docman/views/search.php:150 common/docman/views/search.php:151
 #: common/forum/Forum.class.php:516 common/forum/Forum.class.php:597
-#: common/forum/ForumHTML.class.php:73
+#: common/forum/ForumHTML.class.php:73 common/tracker/actions/browse.php:406
+#: common/tracker/actions/browse.php:409 common/tracker/actions/query.php:329
+#: common/tracker/actions/query.php:344 common/tracker/actions/query.php:350
+#: common/tracker/actions/query.php:351
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
 #: cronjobs/send_pending_items_mail.php:77
@@ -1245,7 +1249,7 @@ msgstr ""
 #: common/docman/views/listtrashfile.php:171
 #: common/docman/views/pendingfiles.php:101
 #: common/docman/views/pendingfiles.php:103
-#: common/forum/ForumHTML.class.php:221 common/pm/ProjectTask.class.php:1207
+#: common/forum/ForumHTML.class.php:221 common/pm/ProjectTask.class.php:1210
 #: common/tracker/actions/browse.php:608 common/tracker/actions/browse.php:619
 #: common/tracker/actions/browse.php:639 common/tracker/actions/detail.php:68
 #: common/tracker/actions/downloadcsv.php:84
@@ -1857,7 +1861,7 @@ msgstr "No s'ha pogut actualitzar elpare"
 #: common/forum/AttachManager.class.php:150
 #: common/forum/ForumAdmin.class.php:68 common/forum/ForumAdmin.class.php:331
 #: common/tracker/actions/admin-tracker.php:70
-#: common/tracker/actions/deleteartifact.php:57
+#: common/tracker/actions/deleteartifact.php:56
 #: common/tracker/actions/mod.php:76
 #: common/tracker/include/ArtifactTypeHtml.class.php:130
 #: common/tracker/views/form-addcanned.php:54
@@ -2173,8 +2177,8 @@ msgstr "Ha fallat l'actualització"
 
 #: common/forum/Forum.class.php:612 common/frs/FRSPackage.class.php:450
 #: common/frs/FRSRelease.class.php:343 common/include/Group.class.php:1590
-#: common/mail/MailingList.class.php:385 common/pm/ProjectGroup.class.php:360
-#: common/pm/ProjectTask.class.php:513 common/tracker/Artifact.class.php:504
+#: common/mail/MailingList.class.php:385 common/pm/ProjectGroup.class.php:359
+#: common/pm/ProjectTask.class.php:514 common/tracker/Artifact.class.php:505
 #: common/tracker/ArtifactExtraField.class.php:430
 #: common/tracker/ArtifactType.class.php:791
 msgid "Please tick all checkboxes."
@@ -3207,7 +3211,7 @@ msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
 
 #: common/include/GroupJoinRequest.class.php:104
-#: common/pm/ProjectTask.class.php:150 common/pm/ProjectTask.class.php:945
+#: common/pm/ProjectTask.class.php:151 common/pm/ProjectTask.class.php:948
 msgid "Must include "
 msgstr ""
 
@@ -4273,65 +4277,66 @@ msgstr ""
 msgid "Error Getting %1$s"
 msgstr "Error a l'obtenir %1$s"
 
-#: common/pm/ProjectCategory.class.php:93
+#: common/pm/ProjectCategory.class.php:94
 msgid "ProjectCategory: name and assignee are Required"
 msgstr "Categoria de projecte: es requereixen el nom i el cessionari"
 
-#: common/pm/ProjectGroup.class.php:146 common/pm/ProjectGroup.class.php:318
+#: common/pm/ProjectGroup.class.php:145 common/pm/ProjectGroup.class.php:317
 #, fuzzy
 msgid "Subproject Description Must Be At Least 10 Characters"
 msgstr "La descripció del document ha de ser de 10 caràcters com a mínim"
 
-#: common/pm/ProjectGroupFactory.class.php:62
+#: common/pm/ProjectGroupFactory.class.php:61
 #, php-format
 msgid "%s does not use the Project Management tool"
 msgstr ""
 
-#: common/pm/ProjectTask.class.php:142 common/pm/ProjectTask.class.php:937
+#: common/pm/ProjectTask.class.php:143 common/pm/ProjectTask.class.php:940
 #, fuzzy
 msgid "summary"
 msgstr "Resum"
 
-#: common/pm/ProjectTask.class.php:143
+#: common/pm/ProjectTask.class.php:144
 #, fuzzy
 msgid "details"
 msgstr "Detall"
 
-#: common/pm/ProjectTask.class.php:144 common/pm/ProjectTask.class.php:938
+#: common/pm/ProjectTask.class.php:145 common/pm/ProjectTask.class.php:941
 #, fuzzy
 msgid "priority"
 msgstr "Prioritat"
 
-#: common/pm/ProjectTask.class.php:145 common/pm/ProjectTask.class.php:939
+#: common/pm/ProjectTask.class.php:146 common/pm/ProjectTask.class.php:942
 #, fuzzy
 msgid "hours"
 msgstr "Hores"
 
-#: common/pm/ProjectTask.class.php:146 common/pm/ProjectTask.class.php:940
+#: common/pm/ProjectTask.class.php:147 common/pm/ProjectTask.class.php:943
 #, fuzzy
 msgid "start date"
 msgstr "Data d'inici"
 
-#: common/pm/ProjectTask.class.php:147 common/pm/ProjectTask.class.php:941
+#: common/pm/ProjectTask.class.php:148 common/pm/ProjectTask.class.php:944
 #, fuzzy
 msgid "end date"
 msgstr "Afegeix data"
 
-#: common/pm/ProjectTask.class.php:148 common/pm/ProjectTask.class.php:943
+#: common/pm/ProjectTask.class.php:149 common/pm/ProjectTask.class.php:946
 #, fuzzy
 msgid "category"
 msgstr "Categoria"
 
-#: common/pm/ProjectTask.class.php:720
-msgid "Circular Dependency Detected'"
-msgstr "S'ha detectat una dependència circular"
+#: common/pm/ProjectTask.class.php:234
+#, fuzzy
+msgid "Invalid Task ID"
+msgstr "ID no vàlid"
 
-#: common/pm/ProjectTask.class.php:942
+#: common/pm/ProjectTask.class.php:945
 #, fuzzy
 msgid "status"
 msgstr "Estadístiques"
 
-#: common/pm/ProjectTask.class.php:1219
+#: common/pm/ProjectTask.class.php:1222
 #, php-format
 msgid "[%1$s - %2$s] [Task #%3$d] "
 msgstr ""
@@ -4921,13 +4926,10 @@ msgid "Unassigned"
 msgstr "No assignat"
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:554
-#: common/tracker/actions/query.php:197
-#: common/tracker/views/form-addcanned.php:40 www/admin/search.php:72
-#: www/admin/search.php:148 www/my/dashboard.php:63 www/pm/index.php:98
-#: www/project/admin/editimages.php:265
-#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
-msgid "ID"
-msgstr "ID"
+#: common/tracker/actions/query.php:197 www/admin/massmail.php:136
+#: www/pm/admin/index.php:187
+msgid "Id"
+msgstr "Id"
 
 #: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:566
 #: common/tracker/actions/browse.php:739 common/tracker/actions/detail.php:69
@@ -4987,19 +4989,19 @@ msgid "Any changes"
 msgstr "Canvis"
 
 #: common/tracker/actions/browse.php:231 common/tracker/actions/query.php:234
-msgid "Last 24H"
-msgstr "Les últimes 24H"
+msgid "Last 24 h"
+msgstr "Les últimes 24 h"
 
 #: common/tracker/actions/browse.php:232 common/tracker/actions/query.php:235
-msgid "Last 7days"
+msgid "Last 7 days"
 msgstr "Els últims 7dies"
 
 #: common/tracker/actions/browse.php:233 common/tracker/actions/query.php:236
-msgid "Last 2weeks"
+msgid "Last 2 weeks"
 msgstr "Les últimes 2setmanes"
 
 #: common/tracker/actions/browse.php:234 common/tracker/actions/query.php:237
-msgid "Last 1month"
+msgid "Last month"
 msgstr "L'últim 1mes"
 
 #: common/tracker/actions/browse.php:273
@@ -5021,6 +5023,15 @@ msgstr "Canvi"
 #, fuzzy
 msgid "Advanced queries"
 msgstr "Cerca avançada"
+
+#: common/tracker/actions/browse.php:361
+#, fuzzy
+msgid "Select One"
+msgstr "Suprimeix el fitxer"
+
+#: common/tracker/actions/browse.php:368 www/frs/admin/index.php:209
+msgid "Private"
+msgstr "Privat"
 
 #: common/tracker/actions/browse.php:381
 msgid "Power Query"
@@ -5090,11 +5101,10 @@ msgstr "Assignat a"
 msgid "Submitted by"
 msgstr "Tramès per"
 
-#: common/tracker/actions/browse.php:572
-#: common/tracker/views/form-customizelist.php:43
-#, fuzzy
-msgid "Related tasks"
-msgstr "Elements de rastreig relacionats"
+#: common/tracker/actions/browse.php:572 common/tracker/actions/mod.php:228
+#: common/tracker/include/ArtifactTypeHtml.class.php:320
+msgid "Related Tasks"
+msgstr ""
 
 #: common/tracker/actions/browse.php:692
 #, php-format
@@ -5151,9 +5161,10 @@ msgstr ""
 msgid "Export as a CSV file"
 msgstr "No hi ha estadístiques disponibles"
 
-#: common/tracker/actions/csv.php:87
-msgid "Selected CSV Format :"
-msgstr ""
+#: common/tracker/actions/csv.php:87 www/pm/csv.php:83
+#, fuzzy
+msgid "Selected CSV Format:"
+msgstr "Actualitza"
 
 #: common/tracker/actions/csv.php:89
 #, fuzzy
@@ -5170,11 +5181,11 @@ msgstr "Suprimeix el fitxer"
 msgid "Confirm Deletion"
 msgstr "Confirma la supressió"
 
-#: common/tracker/actions/deleteartifact.php:51
+#: common/tracker/actions/deleteartifact.php:48
 msgid "Are you sure you want to delete this artifact?"
 msgstr ""
 
-#: common/tracker/actions/deleteartifact.php:54
+#: common/tracker/actions/deleteartifact.php:53
 msgid "Yes, I want to delete this artifact"
 msgstr ""
 
@@ -5343,11 +5354,6 @@ msgstr "Descripció detallada"
 #: common/tracker/actions/mod.php:192
 msgid "Use Canned Response"
 msgstr "Usa una resposta 'enllaunada'"
-
-#: common/tracker/actions/mod.php:228
-#: common/tracker/include/ArtifactTypeHtml.class.php:320
-msgid "Related Tasks"
-msgstr ""
 
 #: common/tracker/actions/query.php:73
 #, fuzzy
@@ -5625,76 +5631,76 @@ msgid "Only project members can view private artifact types"
 msgstr ""
 "Artefacte: Només els membres del grup poden veure tipus d'artefacte privats"
 
-#: common/tracker/Artifact.class.php:190 common/tracker/Artifact.class.php:789
+#: common/tracker/Artifact.class.php:191 common/tracker/Artifact.class.php:789
 #, fuzzy
 msgid "You are not currently allowed to submit items to this tracker."
 msgstr "No teniu permís per accedir a aquesta pàgina"
 
-#: common/tracker/Artifact.class.php:205
+#: common/tracker/Artifact.class.php:206
 #, fuzzy
 msgid "Message Summary Is Required"
 msgstr "Artefacte: Es requereix un resum del missatge"
 
-#: common/tracker/Artifact.class.php:209
+#: common/tracker/Artifact.class.php:210
 #, fuzzy
 msgid "Message Body Is Required"
 msgstr "Artefacte: Es requereix el cos del missatge"
 
-#: common/tracker/Artifact.class.php:228
+#: common/tracker/Artifact.class.php:229
 #, fuzzy
 msgid "Error remapping status"
 msgstr "Error al crear %1$s"
 
-#: common/tracker/Artifact.class.php:299
+#: common/tracker/Artifact.class.php:300
 #, fuzzy
 msgid "Invalid Artifact ID"
 msgstr "ID no vàlid"
 
-#: common/tracker/Artifact.class.php:515
+#: common/tracker/Artifact.class.php:516
 #, fuzzy
 msgid "Error deleting extra field data: "
 msgstr "Error a l'inserir un element"
 
-#: common/tracker/Artifact.class.php:526
+#: common/tracker/Artifact.class.php:527
 #, fuzzy
 msgid "Error deleting file from db: "
 msgstr "Error al crear un objecte de grup"
 
-#: common/tracker/Artifact.class.php:534
+#: common/tracker/Artifact.class.php:535
 #, fuzzy
 msgid "Error deleting message: "
 msgstr "Error afegint un fòrum"
 
-#: common/tracker/Artifact.class.php:542
+#: common/tracker/Artifact.class.php:543
 #, fuzzy
 msgid "Error deleting history: "
 msgstr "Agrupa la informació de l'arbre de projectes"
 
-#: common/tracker/Artifact.class.php:550
+#: common/tracker/Artifact.class.php:551
 #, fuzzy
 msgid "Error deleting monitor: "
 msgstr "Error al crear un objecte de grup"
 
-#: common/tracker/Artifact.class.php:558
+#: common/tracker/Artifact.class.php:559
 #, fuzzy
 msgid "Error deleting artifact: "
 msgstr "Error al crear un objecte de grup"
 
-#: common/tracker/Artifact.class.php:569 common/tracker/Artifact.class.php:579
+#: common/tracker/Artifact.class.php:570 common/tracker/Artifact.class.php:580
 #, fuzzy
 msgid "Error updating artifact counts: "
 msgstr "Agrupa la informació de l'arbre de projectes"
 
-#: common/tracker/Artifact.class.php:609
+#: common/tracker/Artifact.class.php:610
 #, fuzzy
 msgid "Valid Email Address Required"
 msgstr "SetMonitor::Es requereix una adreça de correu vàlida"
 
-#: common/tracker/Artifact.class.php:627
+#: common/tracker/Artifact.class.php:628
 msgid "Now Monitoring Artifact"
 msgstr "Ara s'està monitoritzant"
 
-#: common/tracker/Artifact.class.php:637
+#: common/tracker/Artifact.class.php:638
 msgid "Artifact Monitoring Deactivated"
 msgstr "Monitorització desactivada"
 
@@ -5903,7 +5909,7 @@ msgstr ""
 msgid "Tracker name already used"
 msgstr "El nom Unix ja està agafat"
 
-#: common/tracker/ArtifactTypeFactory.class.php:67
+#: common/tracker/ArtifactTypeFactory.class.php:66
 #, php-format
 msgid "%s does not use the Tracker tool"
 msgstr ""
@@ -6130,6 +6136,13 @@ msgstr "Afegeix/actualitza les respostes 'enllaunades'"
 #: common/tracker/views/form-addcanned.php:38
 msgid "Existing Responses"
 msgstr "Respostes existents"
+
+#: common/tracker/views/form-addcanned.php:40 www/admin/search.php:72
+#: www/admin/search.php:148 www/my/dashboard.php:63 www/pm/index.php:98
+#: www/project/admin/editimages.php:265
+#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
+msgid "ID"
+msgstr "ID"
 
 #: common/tracker/views/form-addcanned.php:42 plugins/blocks/www/index.php:205
 #, fuzzy
@@ -6532,6 +6545,11 @@ msgstr "Assignat a"
 #, fuzzy
 msgid "Submitted By"
 msgstr "Tramès per"
+
+#: common/tracker/views/form-customizelist.php:43
+#, fuzzy
+msgid "Related tasks"
+msgstr "Elements de rastreig relacionats"
 
 #: common/tracker/views/form-customizelist.php:88
 msgid ""
@@ -15536,10 +15554,6 @@ msgstr ""
 msgid "Schedule for Mailing"
 msgstr "Preparació per a l'enviament de correu"
 
-#: www/admin/massmail.php:136 www/pm/admin/index.php:187
-msgid "Id"
-msgstr "Id"
-
 #: www/admin/massmail.php:140
 msgid "Last user_id mailed"
 msgstr "Últim identificador d'usuari enviat per correu"
@@ -17175,10 +17189,6 @@ msgstr "Nou nom de pàquet"
 #: www/frs/admin/index.php:208
 msgid "Public"
 msgstr "Públic"
-
-#: www/frs/admin/index.php:209
-msgid "Private"
-msgstr "Privat"
 
 #: www/frs/admin/index.php:210
 msgid "Create This Package"
@@ -19560,11 +19570,6 @@ msgstr ""
 #: www/pm/csv.php:81
 msgid "Export tasks as a CSV file"
 msgstr ""
-
-#: www/pm/csv.php:83
-#, fuzzy
-msgid "Selected CSV Format:"
-msgstr "Actualitza"
 
 #: www/pm/csv.php:85
 #, fuzzy
@@ -23376,6 +23381,21 @@ msgstr "Nom d'usuari"
 msgid "That user does not exist."
 msgstr "Aquesta categoria no existeix"
 
+#~ msgid "Last 24H"
+#~ msgstr "Les últimes 24H"
+
+#~ msgid "Last 7days"
+#~ msgstr "Els últims 7dies"
+
+#~ msgid "Last 2weeks"
+#~ msgstr "Les últimes 2setmanes"
+
+#~ msgid "Last 1month"
+#~ msgstr "L'últim 1mes"
+
+#~ msgid "Circular Dependency Detected'"
+#~ msgstr "S'ha detectat una dependència circular"
+
 #~ msgid "UPDATE FAILED"
 #~ msgstr "HA FALLAT L'ACTUALITZACIÓ"
 
@@ -23623,18 +23643,6 @@ msgstr "Aquesta categoria no existeix"
 #~ "cop afegides, poden usar-se amb altres caixes de selecció (per exemple, "
 #~ "Categories o Grups) per a descriure i navegar errors o altres tipus "
 #~ "d'artefactes"
-
-#~ msgid "Last 24 h"
-#~ msgstr "Les últimes 24H"
-
-#~ msgid "Last 7 days"
-#~ msgstr "Els últims 7dies"
-
-#~ msgid "Last 2 weeks"
-#~ msgstr "Les últimes 2setmanes"
-
-#~ msgid "Last month"
-#~ msgstr "L'últim 1mes"
 
 #~ msgid "* Denotes requests > %s Days Old"
 #~ msgstr "* Denota requeriments de fa > %s dia"
