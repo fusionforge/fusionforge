@@ -700,7 +700,7 @@ class ArtifactType extends Error {
 		}
 		if (!isset($this->extra_field[$id])) {
 			$this->extra_field[$id] = array();
-			$res = db_query_params('SELECT element_id, element_name, status_id, hidden
+			$res = db_query_params('SELECT element_id, element_name, status_id
 				FROM artifact_extra_field_elements
 				WHERE extra_field_id = $1
 				ORDER BY element_pos ASC, element_id ASC',
