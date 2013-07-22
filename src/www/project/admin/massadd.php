@@ -68,7 +68,7 @@ project_admin_header(array('title'=>_('Add Users From List'),'group'=>$group_id)
 
 echo '
 <p>
-'._('Check the box next to the name of the user(s) you want to add. Your choices will be preserved if you click any of the letters below. When done, click "Finish" to choose the roles for the users you are adding.').'
+'._('Check the box next to the name of the user(s) you want to add. Your choices will be preserved if you click any of the letters below. When done, click “Finish” to choose the roles for the users you are adding.').'
 </p>
 <form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'" method="post">
 <input type="hidden" name="accumulated_ids" value="'. implode(',',$accumulated_ids) .'" />';
@@ -87,9 +87,9 @@ if (!$res || db_numrows($res) < 1) {
 	echo '<p>' . _('No Matching Users Found') . '</p>';
 } else {
 
-	$titles[]=_('Real name');
-	$titles[]=_('Unix name');
-	$titles[]=_('Add user');
+	$titles[]=_('Real Name');
+	$titles[]=_('Unix Name');
+	$titles[]=_('Add User');
 
 	echo $HTML->listTableTop($titles);
 

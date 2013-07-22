@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:00+0200\n"
+"POT-Creation-Date: 2013-07-22 11:02+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15198,7 +15198,7 @@ msgstr ""
 msgid "No users currently have this role"
 msgstr "Nessun file inserito"
 
-#: www/admin/globalroleedit.php:189
+#: www/admin/globalroleedit.php:189 www/project/admin/massadd.php:92
 #, fuzzy
 msgid "Add User"
 msgstr "Aggiungi utente"
@@ -15324,7 +15324,7 @@ msgstr "Ora di registrazione"
 
 #: www/admin/grouplist.php:67 www/admin/search.php:149
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
-#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
+#: www/project/admin/massfinish.php:75
 #, fuzzy
 msgid "Unix name"
 msgstr "Nome unix"
@@ -15853,8 +15853,7 @@ msgstr[0] "Ricerca utente con criterio"
 msgstr[1] "Ricerca utente con criterio"
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148 www/project/admin/massadd.php:90
-#: www/project/admin/massfinish.php:74
+#: www/admin/useredit.php:148 www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -20426,7 +20425,7 @@ msgstr "Aggiungi utenti dall'elenco"
 msgid ""
 "Check the box next to the name of the user(s) you want to add. Your choices "
 "will be preserved if you click any of the letters below. When done, click "
-"\"Finish\" to choose the roles for the users you are adding."
+"“Finish” to choose the roles for the users you are adding."
 msgstr ""
 
 #: www/project/admin/massadd.php:77
@@ -20441,10 +20440,14 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr "Nessun utente trovato"
 
-#: www/project/admin/massadd.php:92
+#: www/project/admin/massadd.php:90
 #, fuzzy
-msgid "Add user"
-msgstr "Aggiungi utente"
+msgid "Real Name"
+msgstr "Nome reale"
+
+#: www/project/admin/massadd.php:91 www/register/index.php:226
+msgid "Unix Name"
+msgstr "Nome Unix"
 
 #: www/project/admin/massadd.php:116
 msgid "Finish"
@@ -21131,10 +21134,6 @@ msgstr ""
 #: www/register/index.php:223
 msgid "search engines throughout the site."
 msgstr ""
-
-#: www/register/index.php:226
-msgid "Unix Name"
-msgstr "Nome Unix"
 
 #: www/register/index.php:235
 #, fuzzy
@@ -23415,6 +23414,10 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy
 msgid "That user does not exist."
 msgstr "La query non esiste"
+
+#, fuzzy
+#~ msgid "Add user"
+#~ msgstr "Aggiungi utente"
 
 #~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
 #~ msgstr ""

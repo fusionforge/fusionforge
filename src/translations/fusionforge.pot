@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:00+0200\n"
+"POT-Creation-Date: 2013-07-22 11:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13857,7 +13857,7 @@ msgstr ""
 msgid "No users currently have this role"
 msgstr ""
 
-#: www/admin/globalroleedit.php:189
+#: www/admin/globalroleedit.php:189 www/project/admin/massadd.php:92
 msgid "Add User"
 msgstr ""
 
@@ -13974,7 +13974,7 @@ msgstr ""
 
 #: www/admin/grouplist.php:67 www/admin/search.php:149
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
-#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
+#: www/project/admin/massfinish.php:75
 msgid "Unix name"
 msgstr ""
 
@@ -14463,8 +14463,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148 www/project/admin/massadd.php:90
-#: www/project/admin/massfinish.php:74
+#: www/admin/useredit.php:148 www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -18688,7 +18687,7 @@ msgstr ""
 msgid ""
 "Check the box next to the name of the user(s) you want to add. Your choices "
 "will be preserved if you click any of the letters below. When done, click "
-"\"Finish\" to choose the roles for the users you are adding."
+"“Finish” to choose the roles for the users you are adding."
 msgstr ""
 
 #: www/project/admin/massadd.php:77
@@ -18701,8 +18700,12 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr ""
 
-#: www/project/admin/massadd.php:92
-msgid "Add user"
+#: www/project/admin/massadd.php:90
+msgid "Real Name"
+msgstr ""
+
+#: www/project/admin/massadd.php:91 www/register/index.php:226
+msgid "Unix Name"
 msgstr ""
 
 #: www/project/admin/massadd.php:116
@@ -19295,10 +19298,6 @@ msgstr ""
 
 #: www/register/index.php:223
 msgid "search engines throughout the site."
-msgstr ""
-
-#: www/register/index.php:226
-msgid "Unix Name"
 msgstr ""
 
 #: www/register/index.php:235

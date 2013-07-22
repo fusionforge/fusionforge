@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:00+0200\n"
+"POT-Creation-Date: 2013-07-22 11:02+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -15317,7 +15317,7 @@ msgstr ""
 msgid "No users currently have this role"
 msgstr "Momentan sind keine Rollen definiert."
 
-#: www/admin/globalroleedit.php:189
+#: www/admin/globalroleedit.php:189 www/project/admin/massadd.php:92
 msgid "Add User"
 msgstr "Benutzer hinzufügen"
 
@@ -15440,7 +15440,7 @@ msgstr "Registrierungszeit"
 
 #: www/admin/grouplist.php:67 www/admin/search.php:149
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
-#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
+#: www/project/admin/massfinish.php:75
 msgid "Unix name"
 msgstr "Unix Name"
 
@@ -15965,8 +15965,7 @@ msgstr[0] "Benutzer-Suche mit Merkmalen <em>%1$s</em>: %2$s Übereinstimmung"
 msgstr[1] "Benutzer-Suche mit Merkmalen <em>%1$s</em>: %2$s Übereinstimmungen"
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148 www/project/admin/massadd.php:90
-#: www/project/admin/massfinish.php:74
+#: www/admin/useredit.php:148 www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -20660,16 +20659,15 @@ msgid "Add Users From List"
 msgstr "Benutzer von der Liste hinzufügen"
 
 #: www/project/admin/massadd.php:71
-#, fuzzy
 msgid ""
 "Check the box next to the name of the user(s) you want to add. Your choices "
 "will be preserved if you click any of the letters below. When done, click "
-"\"Finish\" to choose the roles for the users you are adding."
+"“Finish” to choose the roles for the users you are adding."
 msgstr ""
 "Klicken Sie in das Kästchen neben dem Namen des/der Nutzer(s) den/die Sie "
 "hinzufügen möchten. Ihre Auswahl wird gespeichert wenn Sie auf einen der "
 "untenstehenden Buchstaben klicken. Wenn Sie fertig sind, klicken Sie auf "
-"\"Finish\" um den hinzuzufügenden Nutzern ihre Rollen zuzuweisen."
+"“Finish” um den hinzuzufügenden Nutzern ihre Rollen zuzuweisen."
 
 #: www/project/admin/massadd.php:77
 msgid ""
@@ -20684,9 +20682,15 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr "<p>Keine übereinstimmenden Benutzer gefunden</p>"
 
-#: www/project/admin/massadd.php:92
-msgid "Add user"
-msgstr "Nutzer hinzufügen"
+#: www/project/admin/massadd.php:90
+#, fuzzy
+msgid "Real Name"
+msgstr "Richtiger Name"
+
+#: www/project/admin/massadd.php:91 www/register/index.php:226
+#, fuzzy
+msgid "Unix Name"
+msgstr "Unix Name"
 
 #: www/project/admin/massadd.php:116
 msgid "Finish"
@@ -21371,11 +21375,6 @@ msgstr ""
 #: www/register/index.php:223
 msgid "search engines throughout the site."
 msgstr ""
-
-#: www/register/index.php:226
-#, fuzzy
-msgid "Unix Name"
-msgstr "Unix Name"
 
 #: www/register/index.php:235
 msgid "Source Code"
@@ -23673,6 +23672,20 @@ msgstr "Kein Benutzername angegeben"
 msgid "That user does not exist."
 msgstr "Dieser Nutzer existiert nicht."
 
+#, fuzzy
+#~ msgid ""
+#~ "Check the box next to the name of the user(s) you want to add. Your "
+#~ "choices will be preserved if you click any of the letters below. When "
+#~ "done, click \"Finish\" to choose the roles for the users you are adding."
+#~ msgstr ""
+#~ "Klicken Sie in das Kästchen neben dem Namen des/der Nutzer(s) den/die Sie "
+#~ "hinzufügen möchten. Ihre Auswahl wird gespeichert wenn Sie auf einen der "
+#~ "untenstehenden Buchstaben klicken. Wenn Sie fertig sind, klicken Sie auf "
+#~ "\"Finish\" um den hinzuzufügenden Nutzern ihre Rollen zuzuweisen."
+
+#~ msgid "Add user"
+#~ msgstr "Nutzer hinzufügen"
+
 #~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
 #~ msgstr ""
 #~ "FEHLER - Datei muss größer als 20 bytes und kleiner als 256000 Bytes sein"
@@ -24727,16 +24740,6 @@ msgstr "Dieser Nutzer existiert nicht."
 #~ msgstr ""
 #~ "Sie können neue Projekte hinzufügen, indem Sie den \"Projekt hinzufügen\" "
 #~ "Link oben nutzen."
-
-#~ msgid ""
-#~ "Check the box next to the name of the user(s) you want to add. Your "
-#~ "choices will be preserved if you click any of the letters below. When "
-#~ "done, click “Finish” to choose the roles for the users you are adding."
-#~ msgstr ""
-#~ "Klicken Sie in das Kästchen neben dem Namen des/der Nutzer(s) den/die Sie "
-#~ "hinzufügen möchten. Ihre Auswahl wird gespeichert wenn Sie auf einen der "
-#~ "untenstehenden Buchstaben klicken. Wenn Sie fertig sind, klicken Sie auf "
-#~ "“Finish” um den hinzuzufügenden Nutzern ihre Rollen zuzuweisen."
 
 #~ msgid "Choose the role for each user and then press “Add All”."
 #~ msgstr "Wählen Sie die Rolle für jeden Benutzer und drücken Sie “Add All”."

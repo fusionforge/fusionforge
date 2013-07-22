@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:00+0200\n"
+"POT-Creation-Date: 2013-07-22 11:02+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15047,7 +15047,7 @@ msgstr ""
 msgid "No users currently have this role"
 msgstr "Inga filer bifogade förnärvarande"
 
-#: www/admin/globalroleedit.php:189
+#: www/admin/globalroleedit.php:189 www/project/admin/massadd.php:92
 #, fuzzy
 msgid "Add User"
 msgstr "Lägg till användare"
@@ -15173,7 +15173,7 @@ msgstr ""
 
 #: www/admin/grouplist.php:67 www/admin/search.php:149
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
-#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
+#: www/project/admin/massfinish.php:75
 #, fuzzy
 msgid "Unix name"
 msgstr "Unixnamn"
@@ -15696,8 +15696,7 @@ msgstr[0] "Användarsökning med urval"
 msgstr[1] "Användarsökning med urval"
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148 www/project/admin/massadd.php:90
-#: www/project/admin/massfinish.php:74
+#: www/admin/useredit.php:148 www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -20237,7 +20236,7 @@ msgstr ""
 msgid ""
 "Check the box next to the name of the user(s) you want to add. Your choices "
 "will be preserved if you click any of the letters below. When done, click "
-"\"Finish\" to choose the roles for the users you are adding."
+"“Finish” to choose the roles for the users you are adding."
 msgstr ""
 
 #: www/project/admin/massadd.php:77
@@ -20251,10 +20250,15 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr "Hittade inga matchande uppgifter"
 
-#: www/project/admin/massadd.php:92
+#: www/project/admin/massadd.php:90
 #, fuzzy
-msgid "Add user"
-msgstr "Lägg till användare"
+msgid "Real Name"
+msgstr "Verkligt namn"
+
+#: www/project/admin/massadd.php:91 www/register/index.php:226
+#, fuzzy
+msgid "Unix Name"
+msgstr "Unixnamn"
 
 #: www/project/admin/massadd.php:116
 msgid "Finish"
@@ -20934,11 +20938,6 @@ msgstr ""
 #: www/register/index.php:223
 msgid "search engines throughout the site."
 msgstr ""
-
-#: www/register/index.php:226
-#, fuzzy
-msgid "Unix Name"
-msgstr "Unixnamn"
 
 #: www/register/index.php:235
 #, fuzzy
@@ -23198,6 +23197,10 @@ msgstr "Användarenamn"
 #, fuzzy
 msgid "That user does not exist."
 msgstr "Den resurskategorin existerar inte"
+
+#, fuzzy
+#~ msgid "Add user"
+#~ msgstr "Lägg till användare"
 
 #~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
 #~ msgstr "FEL - filen måste vara > 20 byte samt < 256000 byte lång"

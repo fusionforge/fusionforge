@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:00+0200\n"
+"POT-Creation-Date: 2013-07-22 11:02+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15188,7 +15188,7 @@ msgstr ""
 msgid "No users currently have this role"
 msgstr "Momenteel geen bestanden bijgevoegd"
 
-#: www/admin/globalroleedit.php:189
+#: www/admin/globalroleedit.php:189 www/project/admin/massadd.php:92
 #, fuzzy
 msgid "Add User"
 msgstr "Gebruiker toevoegen"
@@ -15314,7 +15314,7 @@ msgstr "Tijdregistratie"
 
 #: www/admin/grouplist.php:67 www/admin/search.php:149
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
-#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
+#: www/project/admin/massfinish.php:75
 #, fuzzy
 msgid "Unix name"
 msgstr "Unixnaam"
@@ -15840,8 +15840,7 @@ msgstr[0] "Gebruiker zoeken met criteria"
 msgstr[1] "Gebruiker zoeken met criteria"
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148 www/project/admin/massadd.php:90
-#: www/project/admin/massfinish.php:74
+#: www/admin/useredit.php:148 www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -20413,7 +20412,7 @@ msgstr "Gebruikers toevoegen uit lijst"
 msgid ""
 "Check the box next to the name of the user(s) you want to add. Your choices "
 "will be preserved if you click any of the letters below. When done, click "
-"\"Finish\" to choose the roles for the users you are adding."
+"“Finish” to choose the roles for the users you are adding."
 msgstr ""
 
 #: www/project/admin/massadd.php:77
@@ -20428,10 +20427,15 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr "Geen matchende gebruikers gevonden"
 
-#: www/project/admin/massadd.php:92
+#: www/project/admin/massadd.php:90
 #, fuzzy
-msgid "Add user"
-msgstr "Gebruiker toevoegen"
+msgid "Real Name"
+msgstr "Echte naam"
+
+#: www/project/admin/massadd.php:91 www/register/index.php:226
+#, fuzzy
+msgid "Unix Name"
+msgstr "Unixnaam"
 
 #: www/project/admin/massadd.php:116
 msgid "Finish"
@@ -21125,11 +21129,6 @@ msgstr ""
 #: www/register/index.php:223
 msgid "search engines throughout the site."
 msgstr ""
-
-#: www/register/index.php:226
-#, fuzzy
-msgid "Unix Name"
-msgstr "Unixnaam"
 
 #: www/register/index.php:235
 #, fuzzy
@@ -23419,6 +23418,10 @@ msgstr "Gebruikersnaam"
 #, fuzzy
 msgid "That user does not exist."
 msgstr "Die Trove categorie bestaat niet"
+
+#, fuzzy
+#~ msgid "Add user"
+#~ msgstr "Gebruiker toevoegen"
 
 #~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
 #~ msgstr "Fout - bestand moet > 20 bytes en < 256000 bytes in lengte zijn"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:00+0200\n"
+"POT-Creation-Date: 2013-07-22 11:02+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -14810,7 +14810,7 @@ msgstr "Réellement supprimer ce rôle pour l'utilisateur ?"
 msgid "No users currently have this role"
 msgstr "Aucun utilisateur n'a actuellement ce rôle."
 
-#: www/admin/globalroleedit.php:189
+#: www/admin/globalroleedit.php:189 www/project/admin/massadd.php:92
 msgid "Add User"
 msgstr "Ajouter un utilisateur"
 
@@ -14928,7 +14928,7 @@ msgstr "Date d'enregistrement"
 
 #: www/admin/grouplist.php:67 www/admin/search.php:149
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
-#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
+#: www/project/admin/massfinish.php:75
 msgid "Unix name"
 msgstr "Nom Unix"
 
@@ -15439,8 +15439,7 @@ msgstr[1] ""
 "Recherche d'utilisateurs selon les critères <em>%1$s</em> : %2$s résultats"
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148 www/project/admin/massadd.php:90
-#: www/project/admin/massfinish.php:74
+#: www/admin/useredit.php:148 www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -20022,9 +20021,9 @@ msgstr "Ajouter des utilisateurs à partir de la liste"
 msgid ""
 "Check the box next to the name of the user(s) you want to add. Your choices "
 "will be preserved if you click any of the letters below. When done, click "
-"\"Finish\" to choose the roles for the users you are adding."
+"“Finish” to choose the roles for the users you are adding."
 msgstr ""
-"Cochez les cases correspondant aux utilisateurs que vous souhaitez ajouter.  "
+"Cochez les cases correspondant aux utilisateurs que vous souhaitez ajouter. "
 "Lorsque vous avez terminé, cliquez sur « Terminer » pour choisir les rôles "
 "des utilisateurs que vous ajoutez."
 
@@ -20040,9 +20039,13 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr "Aucun utilisateur correspondant."
 
-#: www/project/admin/massadd.php:92
-msgid "Add user"
-msgstr "Ajouter un utilisateur"
+#: www/project/admin/massadd.php:90
+msgid "Real Name"
+msgstr "Nom complet"
+
+#: www/project/admin/massadd.php:91 www/register/index.php:226
+msgid "Unix Name"
+msgstr "Nom Unix"
 
 #: www/project/admin/massadd.php:116
 msgid "Finish"
@@ -20717,10 +20720,6 @@ msgstr "pour obtenir un accès shell sur <tt>nom-unix.%1$s</tt>,"
 #: www/register/index.php:223
 msgid "search engines throughout the site."
 msgstr "pour les recherches partout dans le site."
-
-#: www/register/index.php:226
-msgid "Unix Name"
-msgstr "Nom Unix"
 
 #: www/register/index.php:235
 msgid "Source Code"
@@ -22993,6 +22992,18 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "That user does not exist."
 msgstr "Cet utilisateur n'existe pas"
 
+#~ msgid ""
+#~ "Check the box next to the name of the user(s) you want to add. Your "
+#~ "choices will be preserved if you click any of the letters below. When "
+#~ "done, click \"Finish\" to choose the roles for the users you are adding."
+#~ msgstr ""
+#~ "Cochez les cases correspondant aux utilisateurs que vous souhaitez "
+#~ "ajouter.  Lorsque vous avez terminé, cliquez sur « Terminer » pour "
+#~ "choisir les rôles des utilisateurs que vous ajoutez."
+
+#~ msgid "Add user"
+#~ msgstr "Ajouter un utilisateur"
+
 #~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
 #~ msgstr ""
 #~ "Erreur : la taille du fichier doit être comprise entre 20 et 256000 octets"
@@ -24760,9 +24771,6 @@ msgstr "Cet utilisateur n'existe pas"
 #~ msgid "If you are not sure then why did you click “Delete”?"
 #~ msgstr "Si vous n'êtes pas sûr, pourquoi avoir cliqué sur « Supprimer » ?"
 
-#~ msgid "Real Name"
-#~ msgstr "Nom complet"
-
 #~ msgid "Project search with criteria <em>%s</em>: %d match"
 #~ msgid_plural "Project search with criteria <em>%s</em>: %d matches"
 #~ msgstr[0] ""
@@ -25438,15 +25446,6 @@ msgstr "Cet utilisateur n'existe pas"
 
 #~ msgid "Frontpage choice"
 #~ msgstr "Choix de la page d'accueil"
-
-#~ msgid ""
-#~ "Check the box next to the name of the user(s) you want to add. Your "
-#~ "choices will be preserved if you click any of the letters below. When "
-#~ "done, click “Finish” to choose the roles for the users you are adding."
-#~ msgstr ""
-#~ "Cochez les cases correspondant aux utilisateurs que vous souhaitez "
-#~ "ajouter. Lorsque vous avez terminé, cliquez sur « Terminer » pour choisir "
-#~ "les rôles des utilisateurs que vous ajoutez."
 
 #~ msgid "Choose the role for each user and then press “Add All”."
 #~ msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:00+0200\n"
+"POT-Creation-Date: 2013-07-22 11:02+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -14756,7 +14756,7 @@ msgstr "Borrar los usuarios marcados de este rol?"
 msgid "No users currently have this role"
 msgstr "No hay usuarios con ese rol actualmente"
 
-#: www/admin/globalroleedit.php:189
+#: www/admin/globalroleedit.php:189 www/project/admin/massadd.php:92
 msgid "Add User"
 msgstr "Agregar Usuario"
 
@@ -14876,7 +14876,7 @@ msgstr "Fecha de registro"
 
 #: www/admin/grouplist.php:67 www/admin/search.php:149
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
-#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
+#: www/project/admin/massfinish.php:75
 msgid "Unix name"
 msgstr "Nombre Unix"
 
@@ -15380,8 +15380,7 @@ msgstr[0] "Búsqueda de usuario con patrón <em>%1$s</em>: %2$s encontrado"
 msgstr[1] "Búsqueda de usuario con patrón <em>%1$s</em>: %2$s encontrados"
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148 www/project/admin/massadd.php:90
-#: www/project/admin/massfinish.php:74
+#: www/admin/useredit.php:148 www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -19878,10 +19877,11 @@ msgid "Add Users From List"
 msgstr "Añadir usuarios desde lista"
 
 #: www/project/admin/massadd.php:71
+#, fuzzy
 msgid ""
 "Check the box next to the name of the user(s) you want to add. Your choices "
 "will be preserved if you click any of the letters below. When done, click "
-"\"Finish\" to choose the roles for the users you are adding."
+"“Finish” to choose the roles for the users you are adding."
 msgstr ""
 "Marca la casilla junto al usuario(s) que quiera agregar. Tus selecciones se "
 "mantendrán si pulsas alguna de las letras. Cuando hayas acabado , pulsa "
@@ -19899,9 +19899,13 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr "Ningún usuario encontrado"
 
-#: www/project/admin/massadd.php:92
-msgid "Add user"
-msgstr "Añadir usuario"
+#: www/project/admin/massadd.php:90
+msgid "Real Name"
+msgstr "Nombre real"
+
+#: www/project/admin/massadd.php:91 www/register/index.php:226
+msgid "Unix Name"
+msgstr "Nombre Unix"
 
 #: www/project/admin/massadd.php:116
 msgid "Finish"
@@ -20571,10 +20575,6 @@ msgstr "acceso shell a <span class=\"tt\">nombreunix.%1$s</span>,"
 #: www/register/index.php:223
 msgid "search engines throughout the site."
 msgstr "motores de busqueda en todo el sitio."
-
-#: www/register/index.php:226
-msgid "Unix Name"
-msgstr "Nombre Unix"
 
 #: www/register/index.php:235
 msgid "Source Code"
@@ -22836,6 +22836,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "That user does not exist."
 msgstr "El usuario no existe"
 
+#~ msgid "Add user"
+#~ msgstr "Añadir usuario"
+
 #~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
 #~ msgstr ""
 #~ "ERROR - un fichero debe de ser > 20 bytes y < 256000 bytes de tamaño"
@@ -23529,9 +23532,6 @@ msgstr "El usuario no existe"
 
 #~ msgid "If you are not sure then why did you click “Delete”?"
 #~ msgstr "Si no estas seguro ¿porque pulsaste 'borrar'?"
-
-#~ msgid "Real Name"
-#~ msgstr "Nombre real"
 
 #~ msgid "Error In Trove Operation"
 #~ msgstr "Error en una operación ssobre el mapa de proyectos"

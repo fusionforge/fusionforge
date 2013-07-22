@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:00+0200\n"
+"POT-Creation-Date: 2013-07-22 11:02+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -15326,7 +15326,7 @@ msgstr ""
 msgid "No users currently have this role"
 msgstr "Non hai ningún ficheiro anexo actualmente"
 
-#: www/admin/globalroleedit.php:189
+#: www/admin/globalroleedit.php:189 www/project/admin/massadd.php:92
 #, fuzzy
 msgid "Add User"
 msgstr "Engadir usuario"
@@ -15450,7 +15450,7 @@ msgstr "Hora de rexistro "
 
 #: www/admin/grouplist.php:67 www/admin/search.php:149
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
-#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
+#: www/project/admin/massfinish.php:75
 msgid "Unix name"
 msgstr "Nome unix "
 
@@ -15975,8 +15975,7 @@ msgstr[0] "Busca do usuario cos criterios <em>%1$s</em>: %2$s coincidencia"
 msgstr[1] "Busca do usuario cos criterios <em>%1$s</em>: %2$s coincidencias"
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148 www/project/admin/massadd.php:90
-#: www/project/admin/massfinish.php:74
+#: www/admin/useredit.php:148 www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -20614,7 +20613,7 @@ msgstr "Engadir usuarios dende a lista"
 msgid ""
 "Check the box next to the name of the user(s) you want to add. Your choices "
 "will be preserved if you click any of the letters below. When done, click "
-"\"Finish\" to choose the roles for the users you are adding."
+"“Finish” to choose the roles for the users you are adding."
 msgstr ""
 "Marque a caixa do(s) usuario(s) que quere engadir. As súas eleccións "
 "lembraranse se preme calquera das letras inferiores. Cando remate, prema "
@@ -20631,9 +20630,14 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr "Non se atoparon usuarios coincidentes"
 
-#: www/project/admin/massadd.php:92
-msgid "Add user"
-msgstr "Engadir usuario"
+#: www/project/admin/massadd.php:90
+#, fuzzy
+msgid "Real Name"
+msgstr "Nome verdadeiro "
+
+#: www/project/admin/massadd.php:91 www/register/index.php:226
+msgid "Unix Name"
+msgstr "Nome Unix"
 
 #: www/project/admin/massadd.php:116
 msgid "Finish"
@@ -21321,10 +21325,6 @@ msgstr ""
 #: www/register/index.php:223
 msgid "search engines throughout the site."
 msgstr ""
-
-#: www/register/index.php:226
-msgid "Unix Name"
-msgstr "Nome Unix"
 
 #: www/register/index.php:235
 #, fuzzy
@@ -23600,6 +23600,18 @@ msgstr "Non se introduciu un nome de usuario"
 msgid "That user does not exist."
 msgstr "Ese usuario non existe. "
 
+#~ msgid ""
+#~ "Check the box next to the name of the user(s) you want to add. Your "
+#~ "choices will be preserved if you click any of the letters below. When "
+#~ "done, click \"Finish\" to choose the roles for the users you are adding."
+#~ msgstr ""
+#~ "Marque a caixa do(s) usuario(s) que quere engadir. As súas eleccións "
+#~ "lembraranse se preme calquera das letras inferiores. Cando remate, prema "
+#~ "“Rematar” para escoller os roles dos usuarios que está a engadir."
+
+#~ msgid "Add user"
+#~ msgstr "Engadir usuario"
+
 #~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
 #~ msgstr "ERRO - Os ficheiros deben ter entr 20 e 256000 bytes"
 
@@ -24635,15 +24647,6 @@ msgstr "Ese usuario non existe. "
 #~ msgstr ""
 #~ "A seguinte opción determina se os demais poden ver as súas habilidades. "
 #~ "Aínda que non poidan, poderá introducilas igualmente."
-
-#~ msgid ""
-#~ "Check the box next to the name of the user(s) you want to add. Your "
-#~ "choices will be preserved if you click any of the letters below. When "
-#~ "done, click “Finish” to choose the roles for the users you are adding."
-#~ msgstr ""
-#~ "Marque a caixa do(s) usuario(s) que quere engadir. As súas eleccións "
-#~ "lembraranse se preme calquera das letras inferiores. Cando remate, prema "
-#~ "“Rematar” para escoller os roles dos usuarios que está a engadir."
 
 #~ msgid "Choose the role for each user and then press “Add All”."
 #~ msgstr "Escolla o rol de cada usuario e prema &quot;Engadir todos&quot;."
