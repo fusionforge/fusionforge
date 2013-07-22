@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-19 10:39+0200\n"
+"POT-Creation-Date: 2013-07-22 10:30+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -26,8 +26,8 @@ msgstr "Utente aggiunto con successo"
 
 #: common/account/actions/addsshkey.php:40
 #: common/docman/actions/addfile.php:124 common/docman/actions/addfile.php:160
-#: common/docman/DocumentGroup.class.php:215
-#: common/docman/DocumentGroup.class.php:810
+#: common/docman/DocumentGroup.class.php:220
+#: common/docman/DocumentGroup.class.php:820
 #, fuzzy
 msgid "Invalid file name."
 msgstr "Nome non valido"
@@ -184,8 +184,8 @@ msgid "Archive injected successfully."
 msgstr "Posizione inserita"
 
 #: common/docman/actions/monitordirectory.php:38
-#: common/docman/Document.class.php:934
-#: common/docman/DocumentGroup.class.php:705
+#: common/docman/Document.class.php:942
+#: common/docman/DocumentGroup.class.php:715
 #: common/docman/views/reporting.php:153
 #, fuzzy
 msgid "Folder"
@@ -271,96 +271,120 @@ msgstr "Aggiornamento utente eseguito"
 msgid "activated successfully."
 msgstr "Aggiornato con successo"
 
-#: common/docman/Document.class.php:79
+#: common/docman/Document.class.php:66
+#: common/docman/DocumentFactory.class.php:92
+#: common/docman/DocumentGroup.class.php:63
+#: common/docman/DocumentGroupFactory.class.php:61
+#: common/docman/DocumentManager.class.php:56
+#: common/docman/include/DocumentGroupHTML.class.php:39
+#: common/forum/Forum.class.php:102 common/forum/ForumFactory.class.php:52
+#: common/frs/FRSFile.class.php:395 common/frs/FRSPackage.class.php:99
+#: common/include/GroupJoinRequest.class.php:65
+#: common/include/Permission.class.php:103
+#: common/mail/MailingList.class.php:65
+#: common/mail/MailingListFactory.class.php:55
+#: common/pm/ProjectGroup.class.php:102
+#: common/pm/ProjectGroupFactory.class.php:54
+#: common/survey/Survey.class.php:66 common/survey/SurveyFactory.class.php:54
+#: common/survey/SurveyQuestion.class.php:57
+#: common/survey/SurveyQuestionFactory.class.php:53
+#: common/survey/SurveyResponse.class.php:55
+#: common/tracker/ArtifactType.class.php:154
+#: common/tracker/ArtifactTypeFactory.class.php:59
+#: common/tracker/ArtifactTypes.class.php:54
+msgid "No Valid Group Object"
+msgstr "Nessun oggetto Group valido"
+
+#: common/docman/Document.class.php:83
 #, fuzzy
 msgid "group_id in db result does not match Group Object"
 msgstr "Group_id in in risultato db non corrisponde a oggetto gruppo"
 
-#: common/docman/Document.class.php:110 common/docman/Document.class.php:822
-#: common/pm/ProjectGroup.class.php:141 common/pm/ProjectGroup.class.php:313
+#: common/docman/Document.class.php:114 common/docman/Document.class.php:829
+#: common/pm/ProjectGroup.class.php:144 common/pm/ProjectGroup.class.php:316
 msgid "Title Must Be At Least 5 Characters"
 msgstr "Il titolo deve essere almeno di 5 caratteri"
 
-#: common/docman/Document.class.php:114 common/docman/Document.class.php:827
+#: common/docman/Document.class.php:118 common/docman/Document.class.php:834
 msgid "Document Description Must Be At Least 10 Characters"
 msgstr "La descrizione del documento deve essere almeno di 10 caratteri"
 
-#: common/docman/Document.class.php:138 common/docman/Document.class.php:146
-#: common/docman/Document.class.php:836
+#: common/docman/Document.class.php:142 common/docman/Document.class.php:150
+#: common/docman/Document.class.php:843
 #, fuzzy
 msgid "Document already published in this folder"
 msgstr "Inserisci nuova documentazione"
 
-#: common/docman/Document.class.php:195 common/docman/Document.class.php:202
+#: common/docman/Document.class.php:199 common/docman/Document.class.php:206
 #, fuzzy
 msgid "Error Adding Document:"
 msgstr "Errore nella aggiunta del forum"
 
-#: common/docman/Document.class.php:195
+#: common/docman/Document.class.php:199
 #, fuzzy
 msgid "Not a file"
 msgstr "Statistiche non disponibili"
 
-#: common/docman/Document.class.php:211
+#: common/docman/Document.class.php:215
 #, fuzzy
 msgid "Error fetching Document"
 msgstr "Errore durante l'inserimento di un elemento"
 
-#: common/docman/Document.class.php:222 common/docman/Document.class.php:875
-#: common/docman/Document.class.php:1089
+#: common/docman/Document.class.php:226 common/docman/Document.class.php:882
+#: common/docman/Document.class.php:1097
 #, fuzzy
 msgid "Error updating document group:"
 msgstr "Errore nella aggiunta del forum"
 
-#: common/docman/Document.class.php:249
+#: common/docman/Document.class.php:253
 #, fuzzy
 msgid "Document: Invalid docid"
 msgstr "Document: docid non valido"
 
-#: common/docman/Document.class.php:577
-#: common/docman/DocumentGroup.class.php:403
+#: common/docman/Document.class.php:582
+#: common/docman/DocumentGroup.class.php:409
 #, fuzzy
 msgid "Unable To Remove Monitor"
 msgstr "Impossibile aggiungere la notifica"
 
-#: common/docman/Document.class.php:598
-#: common/docman/DocumentGroup.class.php:424 common/forum/Forum.class.php:449
+#: common/docman/Document.class.php:603
+#: common/docman/DocumentGroup.class.php:430 common/forum/Forum.class.php:452
 msgid "Unable To Add Monitor"
 msgstr "Impossibile aggiungere la notifica"
 
-#: common/docman/Document.class.php:614
-#: common/docman/DocumentGroup.class.php:440
+#: common/docman/Document.class.php:619
+#: common/docman/DocumentGroup.class.php:446
 #, fuzzy
 msgid "Unable To Clear Monitor"
 msgstr "Impossibile aggiungere la notifica"
 
-#: common/docman/Document.class.php:663
+#: common/docman/Document.class.php:670
 #, fuzzy
 msgid "Document lock failed"
 msgstr "Titolo del documento"
 
-#: common/docman/Document.class.php:691
+#: common/docman/Document.class.php:698
 #, fuzzy
 msgid "Document reservation failed"
 msgstr "Visualizza documentazione"
 
-#: common/docman/Document.class.php:928
+#: common/docman/Document.class.php:936
 #, fuzzy
 msgid "New document"
 msgstr "Aggiungi un progetto"
 
-#: common/docman/Document.class.php:930
+#: common/docman/Document.class.php:938
 #, fuzzy
 msgid "Updated document"
 msgstr "Aggiungi un progetto"
 
-#: common/docman/Document.class.php:930 common/docman/views/listfile.php:286
+#: common/docman/Document.class.php:938 common/docman/views/listfile.php:286
 #: common/widget/Widget_MyLatestSvnCommits.class.php:66
 msgid "by"
 msgstr ""
 
-#: common/docman/Document.class.php:933
-#: common/docman/DocumentGroup.class.php:704
+#: common/docman/Document.class.php:941
+#: common/docman/DocumentGroup.class.php:714
 #: common/forum/ForumHTML.class.php:73 common/tracker/actions/browse.php:368
 #: plugins/contribtracker/www/index.php:35
 #: plugins/contribtracker/www/index.php:167
@@ -374,17 +398,17 @@ msgstr ""
 msgid "Project"
 msgstr "Progetto"
 
-#: common/docman/Document.class.php:933 common/docman/Document.class.php:934
-#: common/docman/Document.class.php:935 common/docman/Document.class.php:936
-#: common/docman/Document.class.php:937
-#: common/docman/DocumentGroup.class.php:66
-#: common/docman/DocumentGroup.class.php:704
-#: common/docman/DocumentGroup.class.php:705
-#: common/docman/DocumentGroup.class.php:707
-#: common/docman/DocumentGroup.class.php:709
-#: common/docman/DocumentManager.class.php:187
-#: common/docman/DocumentManager.class.php:193
-#: common/docman/include/DocumentGroupHTML.class.php:42
+#: common/docman/Document.class.php:941 common/docman/Document.class.php:942
+#: common/docman/Document.class.php:943 common/docman/Document.class.php:944
+#: common/docman/Document.class.php:945
+#: common/docman/DocumentGroup.class.php:67
+#: common/docman/DocumentGroup.class.php:714
+#: common/docman/DocumentGroup.class.php:715
+#: common/docman/DocumentGroup.class.php:717
+#: common/docman/DocumentGroup.class.php:719
+#: common/docman/DocumentManager.class.php:189
+#: common/docman/DocumentManager.class.php:195
+#: common/docman/include/DocumentGroupHTML.class.php:43
 #: common/docman/views/addfile.php:91 common/docman/views/addfile.php:92
 #: common/docman/views/addsubdocgroup.php:56
 #: common/docman/views/addsubdocgroup.php:58
@@ -394,11 +418,14 @@ msgstr "Progetto"
 #: common/docman/views/listfile.php:174
 #: common/docman/views/listtrashfile.php:117
 #: common/docman/views/search.php:150 common/docman/views/search.php:151
-#: common/forum/Forum.class.php:516 common/forum/Forum.class.php:597
-#: common/forum/ForumHTML.class.php:73 common/tracker/actions/browse.php:406
-#: common/tracker/actions/browse.php:409 common/tracker/actions/query.php:329
-#: common/tracker/actions/query.php:344 common/tracker/actions/query.php:350
-#: common/tracker/actions/query.php:351
+#: common/forum/Forum.class.php:225 common/forum/Forum.class.php:520
+#: common/forum/Forum.class.php:601 common/forum/Forum.class.php:627
+#: common/forum/Forum.class.php:635 common/forum/Forum.class.php:643
+#: common/forum/Forum.class.php:659 common/forum/ForumHTML.class.php:73
+#: common/mail/MailingListFactory.class.php:104
+#: common/tracker/actions/browse.php:406 common/tracker/actions/browse.php:409
+#: common/tracker/actions/query.php:329 common/tracker/actions/query.php:344
+#: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
 #: cronjobs/send_pending_items_mail.php:77
@@ -456,182 +483,183 @@ msgstr "Progetto"
 msgid ": "
 msgstr ""
 
-#: common/docman/Document.class.php:935 common/docman/views/addfile.php:91
+#: common/docman/Document.class.php:943 common/docman/views/addfile.php:91
 #: common/docman/views/addfile.php:100 common/docman/views/editfile.php:38
 msgid "Document Title"
 msgstr "Titolo del documento"
 
-#: common/docman/Document.class.php:936
+#: common/docman/Document.class.php:944
 #, fuzzy
 msgid "Document description"
 msgstr "Descrizione"
 
-#: common/docman/Document.class.php:937
-#: common/docman/DocumentGroup.class.php:707
+#: common/docman/Document.class.php:945
+#: common/docman/DocumentGroup.class.php:717
 #: common/tracker/actions/browse.php:201 common/tracker/actions/query.php:203
 #: common/tracker/actions/query.php:350
 msgid "Submitter"
 msgstr "Inserito da"
 
-#: common/docman/Document.class.php:939
-#: common/docman/DocumentGroup.class.php:712
+#: common/docman/Document.class.php:947
+#: common/docman/DocumentGroup.class.php:722
 msgid "For more info, visit:"
 msgstr ""
 
-#: common/docman/Document.class.php:944
-#: common/docman/DocumentGroup.class.php:717
+#: common/docman/Document.class.php:952
+#: common/docman/DocumentGroup.class.php:727
 msgid "Docman"
 msgstr ""
 
-#: common/docman/Document.class.php:1009
+#: common/docman/Document.class.php:1017
 #, fuzzy
 msgid "Error Deleting Document:"
 msgstr "Errore durante l'inserimento di un elemento"
 
-#: common/docman/Document.class.php:1084
-#: common/docman/DocumentGroup.class.php:855
+#: common/docman/Document.class.php:1092
+#: common/docman/DocumentGroup.class.php:865
 msgid "wrong column name"
 msgstr ""
 
-#: common/docman/DocumentFactory.class.php:313
+#: common/docman/DocumentFactory.class.php:316
 msgid "No Documents Found"
 msgstr "Nessun documento trovato"
 
-#: common/docman/DocumentGroup.class.php:66
+#: common/docman/DocumentGroup.class.php:67
 #: common/docman/views/listfile.php:174
 #: common/docman/views/listtrashfile.php:117
 #, fuzzy
 msgid "Document Folder"
 msgstr "Titolo del documento"
 
-#: common/docman/DocumentGroup.class.php:75 common/forum/Forum.class.php:129
-#: common/include/Error.class.php:189 common/mail/MailingList.class.php:79
-#: common/survey/Survey.class.php:79 common/survey/SurveyQuestion.class.php:70
+#: common/docman/DocumentGroup.class.php:76 common/forum/Forum.class.php:133
+#: common/frs/FRSPackage.class.php:116 common/include/Error.class.php:189
+#: common/mail/MailingList.class.php:83 common/survey/Survey.class.php:83
+#: common/survey/SurveyQuestion.class.php:74
 #: plugins/mailman/include/MailmanList.class.php:103
 msgid "Group_id in db result does not match Group Object"
 msgstr "Group_id in in risultato db non corrisponde a oggetto gruppo"
 
-#: common/docman/DocumentGroup.class.php:98
+#: common/docman/DocumentGroup.class.php:101
 #, fuzzy
 msgid "Name is required"
 msgstr "Il nome è riservato per il CVS."
 
-#: common/docman/DocumentGroup.class.php:107
-#: common/docman/DocumentGroup.class.php:483
+#: common/docman/DocumentGroup.class.php:110
+#: common/docman/DocumentGroup.class.php:489
 #, fuzzy
 msgid "Invalid Documents Folder parent ID"
 msgstr "DocumentGroup: ID parent DocumentGroup non valido"
 
-#: common/docman/DocumentGroup.class.php:128
+#: common/docman/DocumentGroup.class.php:131
 #, fuzzy
 msgid "Folder name already exists"
 msgstr "Il nome è specificato già usato da un altro utente."
 
-#: common/docman/DocumentGroup.class.php:144
+#: common/docman/DocumentGroup.class.php:147
 #, fuzzy
 msgid "Error Adding Folder:"
 msgstr "Errore nella aggiunta del forum"
 
-#: common/docman/DocumentGroup.class.php:235
+#: common/docman/DocumentGroup.class.php:240
 msgid "Unsupported injected file:"
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:253
+#: common/docman/DocumentGroup.class.php:258
 #, fuzzy
 msgid "Invalid Document Folder ID"
 msgstr "DocumentGroup: ID del DocumentGroup non valido"
 
-#: common/docman/DocumentGroup.class.php:495
+#: common/docman/DocumentGroup.class.php:501
 #, fuzzy
 msgid "Documents Folder name already exists"
 msgstr "Il nome gruppo è già stato utilizzato"
 
-#: common/docman/DocumentGroup.class.php:518
+#: common/docman/DocumentGroup.class.php:524
 #, fuzzy, php-format
 msgid "Error: %s"
 msgstr "Errore"
 
-#: common/docman/DocumentGroup.class.php:653
+#: common/docman/DocumentGroup.class.php:662
 #, fuzzy
 msgid "Browse this folder"
 msgstr "Modifica la tabella %1$ss"
 
-#: common/docman/DocumentGroup.class.php:699
+#: common/docman/DocumentGroup.class.php:709
 #, fuzzy
 msgid "New folder"
 msgstr "Nuovo ruolo"
 
-#: common/docman/DocumentGroup.class.php:701
+#: common/docman/DocumentGroup.class.php:711
 #, fuzzy
 msgid "Updated folder by"
 msgstr "Aggiorna record:"
 
-#: common/docman/DocumentGroup.class.php:709
+#: common/docman/DocumentGroup.class.php:719
 #, fuzzy
 msgid "Updated by"
 msgstr "Aggiornato"
 
-#: common/docman/DocumentGroup.class.php:744
+#: common/docman/DocumentGroup.class.php:754
 msgid "Unable to extract ZIP file."
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:749
+#: common/docman/DocumentGroup.class.php:759
 msgid "Unable to open ZIP file."
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:800
+#: common/docman/DocumentGroup.class.php:810
 #, fuzzy
 msgid "(Title must be at least 5 characters.)"
 msgstr "Il titolo deve essere almeno di 5 caratteri"
 
-#: common/docman/DocumentGroup.class.php:805
+#: common/docman/DocumentGroup.class.php:815
 msgid "Injected by ZIP:"
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:814
+#: common/docman/DocumentGroup.class.php:824
 #, fuzzy
 msgid "Unknown item."
 msgstr "Stato account Unix"
 
-#: common/docman/DocumentGroup.class.php:821
+#: common/docman/DocumentGroup.class.php:831
 msgid "Unable to open folder for injecting into tree"
 msgstr ""
 
-#: common/docman/DocumentGroupFactory.class.php:84
-#: common/docman/DocumentGroupFactory.class.php:118
+#: common/docman/DocumentGroupFactory.class.php:86
+#: common/docman/DocumentGroupFactory.class.php:120
 #, fuzzy
 msgid "No Documents Folder Found"
 msgstr "Nessun documento trovato"
 
-#: common/docman/DocumentManager.class.php:175
+#: common/docman/DocumentManager.class.php:177
 #, fuzzy
 msgid "Number of documents in this folder"
 msgstr "Numero di domande"
 
-#: common/docman/DocumentManager.class.php:178
+#: common/docman/DocumentManager.class.php:180
 msgid ""
 "Number of documents in this folder per status. active/pending/hidden/private"
 msgstr ""
 
-#: common/docman/DocumentManager.class.php:181
+#: common/docman/DocumentManager.class.php:183
 msgid "Number of deleted documents in this folder"
 msgstr ""
 
-#: common/docman/DocumentManager.class.php:187
+#: common/docman/DocumentManager.class.php:189
 #, fuzzy
 msgid "Created by"
 msgstr "Creato da"
 
-#: common/docman/DocumentManager.class.php:191
+#: common/docman/DocumentManager.class.php:193
 msgid "; "
 msgstr ""
 
-#: common/docman/DocumentManager.class.php:193
+#: common/docman/DocumentManager.class.php:195
 msgid "Last modified"
 msgstr "Ultima modifica"
 
-#: common/docman/include/DocumentGroupHTML.class.php:42
-#: common/survey/SurveyResponse.class.php:88
+#: common/docman/include/DocumentGroupHTML.class.php:43
+#: common/survey/SurveyResponse.class.php:95
 #: common/tracker/actions/tracker.php:271
 #: common/tracker/views/form-adminroadmap.php:57
 #: plugins/forumml/www/index.php:55 plugins/forumml/www/index.php:63
@@ -1964,8 +1992,8 @@ msgstr "Errore, problema con l'upload del file"
 msgid "File Updated Successfully"
 msgstr "Effettuato l'upload del file"
 
-#: common/forum/ForumAdmin.class.php:40 common/forum/Forum.class.php:115
-#: common/forum/ForumFactory.class.php:59 www/forum/admin/index.php:58
+#: common/forum/ForumAdmin.class.php:40 common/forum/Forum.class.php:119
+#: common/forum/ForumFactory.class.php:60 www/forum/admin/index.php:58
 #, php-format
 msgid "%s does not use the Forum tool"
 msgstr ""
@@ -2122,88 +2150,92 @@ msgid ""
 "delete the message."
 msgstr ""
 
-#: common/forum/Forum.class.php:163 common/forum/Forum.class.php:544
+#: common/forum/Forum.class.php:166 common/forum/Forum.class.php:548
 msgid "Forum Name Must Be At Least 3 Characters"
 msgstr "Il nome del forum deve essere almeno di 3 caratteri"
 
-#: common/forum/Forum.class.php:167 common/forum/Forum.class.php:548
+#: common/forum/Forum.class.php:170 common/forum/Forum.class.php:552
 msgid "Forum Description Must Be At Least 10 Characters"
 msgstr "La descrizione del forum deve essere almeno di 10 caratteri"
 
-#: common/forum/Forum.class.php:172 common/forum/Forum.class.php:174
-#: common/forum/Forum.class.php:553 common/forum/Forum.class.php:555
+#: common/forum/Forum.class.php:175 common/forum/Forum.class.php:177
+#: common/forum/Forum.class.php:557 common/forum/Forum.class.php:559
 msgid "Illegal Characters in Forum Name"
 msgstr "Il nome del forum contiene caratteri non validi"
 
-#: common/forum/Forum.class.php:172 common/forum/Forum.class.php:553
+#: common/forum/Forum.class.php:175 common/forum/Forum.class.php:557
 msgid "No space"
 msgstr ""
 
-#: common/forum/Forum.class.php:194 common/forum/Forum.class.php:580
+#: common/forum/Forum.class.php:197 common/forum/Forum.class.php:584
 msgid "Mailing List Exists with same name"
 msgstr "Nome Mailing List già esistente"
 
-#: common/forum/Forum.class.php:222
+#: common/forum/Forum.class.php:225
 #, fuzzy
-msgid "Error Adding Forum:"
+msgid "Error Adding Forum"
 msgstr "Errore nella aggiunta del forum"
 
-#: common/forum/Forum.class.php:233 www/account/first.php:29
+#: common/forum/Forum.class.php:236 www/account/first.php:29
 #, php-format
 msgid "Welcome to %1$s"
 msgstr "Benvenuto su %1$s"
 
-#: common/forum/Forum.class.php:257
+#: common/forum/Forum.class.php:260
 msgid "Invalid forum group identifier"
 msgstr "Identificatore gruppo forum non valido"
 
-#: common/forum/Forum.class.php:431 common/forum/Forum.class.php:465
-#: common/frs/FRSPackage.class.php:269 common/frs/FRSPackage.class.php:301
-#: common/tracker/ArtifactType.class.php:525
+#: common/forum/Forum.class.php:434 common/forum/Forum.class.php:469
+#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
+#: common/tracker/ArtifactType.class.php:526
 #, fuzzy
 msgid "You can only monitor if you are logged in"
 msgstr "Puoi richiedere la notifica di un forum solo se sei collegato"
 
-#: common/forum/Forum.class.php:498
+#: common/forum/Forum.class.php:502
 msgid "You Can Only Save Your Place If You Are Logged In"
 msgstr "Si può salvare la posizione solo quando si è collegati"
 
-#: common/forum/Forum.class.php:597 common/survey/Survey.class.php:169
-#: common/survey/Survey.class.php:207
-#: common/survey/SurveyQuestion.class.php:149
+#: common/forum/Forum.class.php:601 common/survey/Survey.class.php:181
+#: common/survey/Survey.class.php:219
+#: common/survey/SurveyQuestion.class.php:153
 #: plugins/mailman/include/MailmanList.class.php:249
 #: plugins/mailman/include/MailmanList.class.php:376
 #: plugins/mailman/include/MailmanList.class.php:393
 msgid "Update failed"
 msgstr "Aggiornamento fallito"
 
-#: common/forum/Forum.class.php:612 common/frs/FRSPackage.class.php:450
+#: common/forum/Forum.class.php:616 common/frs/FRSPackage.class.php:455
 #: common/frs/FRSRelease.class.php:343 common/include/Group.class.php:1590
-#: common/mail/MailingList.class.php:385 common/pm/ProjectGroup.class.php:359
+#: common/mail/MailingList.class.php:393 common/pm/ProjectGroup.class.php:362
 #: common/pm/ProjectTask.class.php:514 common/tracker/Artifact.class.php:505
 #: common/tracker/ArtifactExtraField.class.php:430
-#: common/tracker/ArtifactType.class.php:791
+#: common/tracker/ArtifactType.class.php:794
 msgid "Please tick all checkboxes."
 msgstr ""
 
-#: common/forum/Forum.class.php:623 common/forum/Forum.class.php:631
-#: common/forum/Forum.class.php:639 common/forum/Forum.class.php:647
-#: common/forum/Forum.class.php:655 common/forum/Forum.class.php:663
+#: common/forum/Forum.class.php:627 common/forum/Forum.class.php:635
+#: common/forum/Forum.class.php:643 common/forum/Forum.class.php:659
+#, fuzzy
+msgid "Error Deleting Forum"
+msgstr "Errore nella creazione del forum"
+
+#: common/forum/Forum.class.php:651 common/forum/Forum.class.php:667
 #, fuzzy
 msgid "Error Deleting Forum:"
 msgstr "Errore nella creazione del forum"
 
-#: common/forum/ForumFactory.class.php:55 common/include/rbac_texts.php:158
+#: common/forum/ForumFactory.class.php:56 common/include/rbac_texts.php:158
 #: www/forum/index.php:69 www/forum/myforums.php:69
 msgid "Forum"
 msgstr "Forum"
 
-#: common/forum/ForumFactory.class.php:144
-#: common/forum/ForumFactory.class.php:153
+#: common/forum/ForumFactory.class.php:143
+#: common/forum/ForumFactory.class.php:152
 msgid "You don't have a permission to access this page"
 msgstr "Non hai i permessi per accedere a questa pagina"
 
-#: common/forum/ForumFactory.class.php:160
+#: common/forum/ForumFactory.class.php:159
 msgid "Forum not found"
 msgstr "Forum non trovato"
 
@@ -2475,11 +2507,11 @@ msgstr ""
 "Per terminare la notifica, fai il login a %s e vai alla pagina: \n"
 "%s\n"
 
-#: common/frs/FRSFile.class.php:120 common/frs/include/frs_utils.php:249
+#: common/frs/FRSFile.class.php:121 common/frs/include/frs_utils.php:249
 msgid "FRSFile Name Must Be At Least 3 Characters"
 msgstr "La lunghezza minima del nome di un FRSFile è di 3 caratteri"
 
-#: common/frs/FRSFile.class.php:124
+#: common/frs/FRSFile.class.php:125
 #, fuzzy
 msgid ""
 "Filename can only be alphanumeric and \"-\" \"_\" \"+\" \".\" \"~\" "
@@ -2488,31 +2520,29 @@ msgstr ""
 "Il nome del file può contenere solo caratteri alfanumerici e \"-\" \"_\" \"."
 "\"."
 
-#: common/frs/FRSFile.class.php:134
+#: common/frs/FRSFile.class.php:135
 msgid "FRSFile Appears to be invalid"
 msgstr "Il file sembra non essere valido"
 
-#: common/frs/FRSFile.class.php:150 common/frs/FRSFile.class.php:434
+#: common/frs/FRSFile.class.php:151 common/frs/FRSFile.class.php:435
 msgid "That filename already exists in this project space"
 msgstr "Il nome del file esiste già all'interno di questo progetto"
 
-#: common/frs/FRSFile.class.php:187 common/frs/FRSFile.class.php:440
+#: common/frs/FRSFile.class.php:188 common/frs/FRSFile.class.php:441
 msgid "File cannot be moved to the permanent location"
 msgstr "Il file non può essere spostato nella directory finale"
 
-#: common/frs/FRSPackage.class.php:134 common/frs/FRSPackage.class.php:366
+#: common/frs/FRSPackage.class.php:139 common/frs/FRSPackage.class.php:371
 #: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:388
 msgid "FRSPackage Name Must Be At Least 3 Characters"
 msgstr "La lunghezza minima del nome di un FRSPackage è di 3 caratteri"
 
-#: common/frs/FRSPackage.class.php:138
+#: common/frs/FRSPackage.class.php:143
 #, fuzzy
-msgid ""
-"FRSPackage::Update: Package Name can only be alphanumeric or \"-\" \"_\" \"+"
-"\" \".\" \"~\""
+msgid "Package Name can only be alphanumeric"
 msgstr "Il nome di un pacchetto può contenere solo caratteri alfanumerici"
 
-#: common/frs/FRSPackage.class.php:520
+#: common/frs/FRSPackage.class.php:525
 msgid "Cannot open the file archive."
 msgstr ""
 
@@ -3544,7 +3574,7 @@ msgstr ""
 msgid "More than one value for the plugin + key"
 msgstr ""
 
-#: common/include/pre.php:292
+#: common/include/pre.php:294
 #, php-format
 msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
@@ -3888,38 +3918,38 @@ msgstr "Usa Statistiche"
 msgid "Add Repository"
 msgstr "Repository SCM"
 
-#: common/include/session.php:187 plugins/authldap/www/post-login.php:88
+#: common/include/session.php:190 plugins/authldap/www/post-login.php:88
 msgid "Missing Password Or Users Name"
 msgstr "Password o nome utente mancante"
 
-#: common/include/session.php:199 common/include/session.php:235
-#: common/include/session.php:246 common/include/session.php:277
+#: common/include/session.php:202 common/include/session.php:238
+#: common/include/session.php:249 common/include/session.php:280
 #: plugins/authbuiltin/www/post-login.php:93
 #: plugins/authldap/www/post-login.php:86 www/account/verify.php:47
 msgid "Invalid Password Or User Name"
 msgstr "Password o nome utente non valido"
 
-#: common/include/session.php:292
+#: common/include/session.php:295
 msgid "Account Suspended"
 msgstr "Utente sospeso"
 
-#: common/include/session.php:297
+#: common/include/session.php:300
 msgid "Account Pending"
 msgstr "Utente in attesa di attivazione"
 
-#: common/include/session.php:302
+#: common/include/session.php:305
 msgid "Account Deleted"
 msgstr "Utente Rimosso"
 
-#: common/include/session.php:307
+#: common/include/session.php:310
 msgid "Account Not Active"
 msgstr "Utente non attivo"
 
-#: common/include/session.php:470
+#: common/include/session.php:473
 msgid "Your account is no longer active; you have been disconnected"
 msgstr ""
 
-#: common/include/session.php:523
+#: common/include/session.php:526
 #, fuzzy, php-format
 msgid ""
 "Permission denied. The %s administrators will have to grant you permission "
@@ -3928,12 +3958,12 @@ msgstr ""
 "L'amministratore del progetto dovrà darti il permesso di accedere a questa "
 "pagina."
 
-#: common/include/session.php:582
+#: common/include/session.php:585
 #, fuzzy
 msgid "Could not fetch user session data"
 msgstr "Impossibile ottenere il permesso."
 
-#: common/include/session.php:609
+#: common/include/session.php:612
 msgid "No admin users ?"
 msgstr ""
 
@@ -4199,31 +4229,31 @@ msgstr "Il nome è specificato già usato da un altro utente."
 msgid "Error: a forum with the same email address already exists."
 msgstr "Il nome è specificato già usato da un altro utente."
 
-#: common/mail/MailingList.class.php:120
+#: common/mail/MailingList.class.php:126
 #: plugins/mailman/include/MailmanList.class.php:143
 msgid "Must Provide List Name That Is 4 or More Characters Long"
 msgstr "Il nome della Mailing List deve contenere almeno 4 caratteri"
 
-#: common/mail/MailingList.class.php:126 common/mail/MailingList.class.php:133
+#: common/mail/MailingList.class.php:132 common/mail/MailingList.class.php:139
 #: plugins/mailman/include/MailmanList.class.php:150
 msgid "Invalid List Name"
 msgstr "Nome Mailing List non valido"
 
-#: common/mail/MailingList.class.php:142
+#: common/mail/MailingList.class.php:148
 #: plugins/mailman/include/MailmanList.class.php:157
 msgid "List Already Exists"
 msgstr "La Mailing List esiste già"
 
-#: common/mail/MailingList.class.php:151
+#: common/mail/MailingList.class.php:157
 msgid "Forum exists with the same name"
 msgstr ""
 
-#: common/mail/MailingList.class.php:168
+#: common/mail/MailingList.class.php:174
 #, fuzzy
 msgid "Error Creating mailing list: "
 msgstr "Mailing List esistenti"
 
-#: common/mail/MailingList.class.php:183
+#: common/mail/MailingList.class.php:189
 #, fuzzy, php-format
 msgid ""
 "A mailing list will be created on %1$s in one hour\n"
@@ -4248,52 +4278,49 @@ msgstr ""
 "Mailing List:n%5$s .nnPassword Mailing List: %6$s .nTi consigliamo di "
 "cambiare questa password appena possibile.nn-- Lo staff di %1$sn\n"
 
-#: common/mail/MailingList.class.php:199
+#: common/mail/MailingList.class.php:205
 #: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
-#: www/account/lostpw.php:68
+#: www/account/lostpw.php:68 www/survey/privacy.php:58
+#: www/survey/survey_resp.php:61
 #, php-format
 msgid "-- the %s staff"
 msgstr "Il team %s"
 
-#: common/mail/MailingList.class.php:202
+#: common/mail/MailingList.class.php:208
 #: plugins/mailman/www/mailman_utils.php:38
 #, php-format
 msgid "%s New Mailing List"
 msgstr "Nuova Mailing List %s"
 
-#: common/mail/MailingList.class.php:222
+#: common/mail/MailingList.class.php:228
+#: common/mail/MailingListFactory.class.php:104
 #: plugins/mailman/include/MailmanList.class.php:227
 #: plugins/mailman/include/MailmanListFactory.class.php:112
 #, fuzzy
 msgid "Error Getting mailing list"
 msgstr "Mailing List esistenti"
 
-#: common/mail/MailingList.class.php:257 www/admin/pending-news.php:76
+#: common/mail/MailingList.class.php:265 www/admin/pending-news.php:76
 #: www/admin/pending-news.php:86 www/admin/pending-news.php:107
 #: www/news/admin/index.php:90
 msgid "Error On Update:"
 msgstr "Errore nell'aggiornamento:"
 
-#: common/mail/MailingListFactory.class.php:62
+#: common/mail/MailingListFactory.class.php:63
 #, php-format
 msgid "%s does not use the Mailing-list tool"
 msgstr ""
-
-#: common/mail/MailingListFactory.class.php:105
-#, php-format
-msgid "Error Getting %1$s"
-msgstr "Errore richiedendo %1$s"
 
 #: common/pm/ProjectCategory.class.php:94
 msgid "ProjectCategory: name and assignee are Required"
 msgstr "Categorie progetti: nome e assegnatario sono obblitatori"
 
-#: common/pm/ProjectGroup.class.php:145 common/pm/ProjectGroup.class.php:317
+#: common/pm/ProjectGroup.class.php:148 common/pm/ProjectGroup.class.php:320
 #, fuzzy
 msgid "Subproject Description Must Be At Least 10 Characters"
 msgstr "La descrizione del documento deve essere almeno di 10 caratteri"
 
-#: common/pm/ProjectGroupFactory.class.php:61
+#: common/pm/ProjectGroupFactory.class.php:62
 #, php-format
 msgid "%s does not use the Project Management tool"
 msgstr ""
@@ -4468,31 +4495,31 @@ msgstr "Errore durante l'inserimento di un campo personalizzato"
 msgid "Error: search query too short"
 msgstr ""
 
-#: common/survey/Survey.class.php:101 common/survey/Survey.class.php:146
+#: common/survey/Survey.class.php:109 common/survey/Survey.class.php:158
 #, fuzzy
 msgid "Update Failed: Survey Title Required"
 msgstr "AGGIORNAMENTO FALLITO: titolo del sondaggio obbligatorio"
 
-#: common/survey/Survey.class.php:105
+#: common/survey/Survey.class.php:113
 #, fuzzy
 msgid "Update Failed: Survey Questions Required"
 msgstr "AGGIORNAMENTO FALLITO: domande necessarie"
 
-#: common/survey/Survey.class.php:121 www/survey/rating_resp.php:57
+#: common/survey/Survey.class.php:129 www/survey/rating_resp.php:57
 msgid "Insert Error"
 msgstr ""
 
-#: common/survey/Survey.class.php:156 common/survey/Survey.class.php:189
+#: common/survey/Survey.class.php:168 common/survey/Survey.class.php:201
 msgid "The Survey data is not filled"
 msgstr "Nessun dato inserito per il sondaggio"
 
-#: common/survey/Survey.class.php:229
-#: common/survey/SurveyQuestion.class.php:168 www/pm/task.php:355
+#: common/survey/Survey.class.php:241
+#: common/survey/SurveyQuestion.class.php:172 www/pm/task.php:355
 #: www/survey/admin/question.php:75
 msgid "Delete failed"
 msgstr "Rimozione fallita"
 
-#: common/survey/Survey.class.php:251 common/survey/SurveyFactory.class.php:94
+#: common/survey/Survey.class.php:263 common/survey/SurveyFactory.class.php:94
 #: www/survey/admin/survey.php:100 www/survey/include/SurveyHTML.class.php:454
 #: www/survey/index.php:56
 msgid "No Survey is found"
@@ -4511,16 +4538,16 @@ msgstr "Sondaggio"
 msgid "%s does not use the Survey tool"
 msgstr ""
 
-#: common/survey/SurveyQuestion.class.php:93
-#: common/survey/SurveyQuestion.class.php:133
+#: common/survey/SurveyQuestion.class.php:97
+#: common/survey/SurveyQuestion.class.php:137
 msgid "Question is too short"
 msgstr "Domanda troppo corta"
 
-#: common/survey/SurveyQuestion.class.php:107 www/survey/admin/question.php:92
+#: common/survey/SurveyQuestion.class.php:111 www/survey/admin/question.php:92
 msgid "Question Added"
 msgstr "Domanda aggiunta"
 
-#: common/survey/SurveyQuestion.class.php:194
+#: common/survey/SurveyQuestion.class.php:198
 msgid "Error finding question"
 msgstr "Errore nel trovare la domanda"
 
@@ -5890,7 +5917,7 @@ msgid "Query does not exist"
 msgstr "La query non esiste"
 
 #: common/tracker/ArtifactType.class.php:209
-#: common/tracker/ArtifactType.class.php:964
+#: common/tracker/ArtifactType.class.php:967
 msgid ""
 "ArtifactType: Name, Description, Due Period, and Status Timeout are required"
 msgstr ""
@@ -5899,24 +5926,24 @@ msgstr ""
 "attes di conferma scadono sono campi obbligatori"
 
 #: common/tracker/ArtifactType.class.php:216
-#: common/tracker/ArtifactType.class.php:982
+#: common/tracker/ArtifactType.class.php:985
 msgid "E-mail address(es) appeared invalid"
 msgstr "Indirizzi e-mail non validi"
 
-#: common/tracker/ArtifactType.class.php:543
+#: common/tracker/ArtifactType.class.php:544
 msgid "Now Monitoring Tracker"
 msgstr "Notifica attivata"
 
-#: common/tracker/ArtifactType.class.php:553
+#: common/tracker/ArtifactType.class.php:554
 msgid "Tracker Monitoring Deactivated"
 msgstr "Notifica disattivata"
 
-#: common/tracker/ArtifactType.class.php:975
+#: common/tracker/ArtifactType.class.php:978
 #, fuzzy
 msgid "Tracker name already used"
 msgstr "Il nome gruppo è già stato utilizzato"
 
-#: common/tracker/ArtifactTypeFactory.class.php:66
+#: common/tracker/ArtifactTypeFactory.class.php:67
 #, php-format
 msgid "%s does not use the Tracker tool"
 msgstr ""
@@ -22987,11 +23014,6 @@ msgid ""
 "is collected and the user will of course have the ability to 'opt-out'."
 msgstr ""
 
-#: www/survey/privacy.php:58
-#, php-format
-msgid "The %1$s Team"
-msgstr "Il team %1$s"
-
 #: www/survey/rating_resp.php:60
 msgid "Vote registered"
 msgstr "Voto registrato"
@@ -23038,11 +23060,6 @@ msgstr "Grazie per aver partecipato al sondaggio"
 #, fuzzy
 msgid "Regards,"
 msgstr "Saluti"
-
-#: www/survey/survey_resp.php:61
-#, php-format
-msgid "The %1$s Crew"
-msgstr "Il team %1$s"
 
 #: www/terms.php:31
 msgid "Terms of use"
@@ -23399,6 +23416,15 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy
 msgid "That user does not exist."
 msgstr "La query non esiste"
+
+#~ msgid "Error Getting %1$s"
+#~ msgstr "Errore richiedendo %1$s"
+
+#~ msgid "The %1$s Team"
+#~ msgstr "Il team %1$s"
+
+#~ msgid "The %1$s Crew"
+#~ msgstr "Il team %1$s"
 
 #~ msgid "Last 24H"
 #~ msgstr "Ultime 24 ore"
@@ -24061,9 +24087,6 @@ msgstr "La query non esiste"
 #, fuzzy
 #~ msgid "Repository name: "
 #~ msgstr "Repository SCM"
-
-#~ msgid "No Valid Group Object"
-#~ msgstr "Nessun oggetto Group valido"
 
 #, fuzzy
 #~ msgid "Project:"

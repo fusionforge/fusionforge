@@ -55,6 +55,6 @@ echo '</p>';
 
 ?>
 
-<p><strong><?php printf(_('The %1$s Team'), forge_get_config ('forge_name')); ?></strong></p>
+<p><strong><?php printf(_('-- the %s staff'), forge_get_config ('forge_name')); ?></strong></p>
 
 <?php $sh->footer(array());

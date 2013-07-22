@@ -58,7 +58,7 @@ if (!session_loggedin()) {
 echo '<p>' . _('Thank you for taking time to complete this survey.') . '</p>';
 echo '<p>' . _('Regards,') . '</p>';
 echo '<p><strong>';
-printf(_('The %1$s Crew'), forge_get_config ('forge_name'));
+printf(_('-- the %s staff'), forge_get_config ('forge_name'));
 echo '</strong></p>';
 
 /*
