@@ -45,7 +45,7 @@ if ($forum_id && $group_id) {
 
 	$f=new Forum($g,$forum_id);
 	if (!$f || !is_object($f)) {
-		exit_error(_('Error Getting Forum'),'forums');
+		exit_error(_('Error getting Forum'),'forums');
 	} elseif ($f->isError()) {
 		exit_error($f->getErrorMessage(),'forums');
 	}

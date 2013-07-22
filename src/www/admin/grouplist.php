@@ -64,7 +64,7 @@ if ($group_name_search != '') {
 $headers = array(
 	_('Project Name (click to edit)'),
 	_('Register Time'),
-	_('Unix name'),
+	_('Unix Name'),
 	_('Status'),
 	_('Public?'),
 	_('License'),

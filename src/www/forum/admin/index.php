@@ -243,7 +243,7 @@ if (getStringFromRequest('add_forum')) {
 		//actually finish editing the message and save the contents
 		$f = new Forum ($fa->GetGroupObject(),$forum_id);
 		if (!$f || !is_object($f)) {
-			exit_error(_('Error Getting Forum'),'forums');
+			exit_error(_('Error getting forum'),'forums');
 		} elseif ($f->isError()) {
 			exit_error($f->getErrorMessage(),'forums');
 		}
@@ -282,7 +282,7 @@ if (getStringFromRequest('add_forum')) {
 
 		$f = new Forum ($fa->GetGroupObject(),$forum_id);
 		if (!$f || !is_object($f)) {
-			exit_error(_('Error Getting Forum'),'forums');
+			exit_error(_('Error getting forum'),'forums');
 		} elseif ($f->isError()) {
 			exit_error($f->getErrorMessage(),'forums');
 		}

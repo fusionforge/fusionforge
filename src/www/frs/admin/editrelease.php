@@ -53,7 +53,7 @@ session_require_perm ('frs', $group_id, 'write') ;
 //
 $frsp = new FRSPackage($group,$package_id);
 if (!$frsp || !is_object($frsp)) {
-	exit_error(_('Could Not Get FRSPackage'),'frs');
+	exit_error(_('Could Not Get FRS Package'),'frs');
 } elseif ($frsp->isError()) {
 	exit_error($frsp->getErrorMessage(),'frs');
 }
@@ -63,7 +63,7 @@ if (!$frsp || !is_object($frsp)) {
 //
 $frsr = new FRSRelease($frsp,$release_id);
 if (!$frsr || !is_object($frsr)) {
-	exit_error(_('Could Not Get FRSRelease'),'frs');
+	exit_error(_('Could Not Get FRS Release'),'frs');
 } elseif ($frsr->isError()) {
 	exit_error($frsr->getErrorMessage(),'frs');
 }
@@ -190,7 +190,7 @@ if (getStringFromRequest('step3')) {
 				}
 			}
 		} else {
-			$error_msg .= _('File not deleted: you did not check "I\'m Sure"');
+			$error_msg .= _('File not deleted: you did not check “I am Sure”');
 		}
 	// Otherwise update the file information
 	} else {
@@ -224,11 +224,11 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <input type="hidden" name="step1" value="1" />
 <table cellpadding="1" cellspacing="1">
 <tr>
-	<td width="10%"><strong><?php echo _('Release date') ?>:</strong></td>
+	<td width="10%"><strong><?php echo _('Release Date') ?>:</strong></td>
 	<td><input type="text" name="release_date" value="<?php echo date('Y-m-d H:i',$frsr->getReleaseDate()) ?>" size="16" maxlength="16" /></td>
 </tr>
 <tr>
-	<td><strong><?php echo _('Release name') ?>:</strong></td>
+	<td><strong><?php echo _('Release Name') ?>:</strong></td>
 	<td><input type="text" name="release_name" value="<?php echo htmlspecialchars($frsr->getName()); ?>" /></td>
 </tr>
 <tr>
@@ -341,9 +341,9 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 		echo '<hr />';
 		echo '<h2>'._('Edit Files In This Release').'</h2>';
 		print(_('Once you have added files to this release you <strong>must</strong> update each of these files with the correct information or they will not appear on your download summary page.')."\n");
-		$title_arr[]=_('Filename<br />Release').'<br />';
-		$title_arr[]=_('Processor<br />Release Date').'<br />';
-		$title_arr[]=_('File Type<br />Update').'<br />';
+		$title_arr[]=_('File Name').'<br />'._('Release').'<br />';
+		$title_arr[]=_('Processor').'<br />'._('Release Date').'<br />';
+		$title_arr[]=_('File Type').'<br />'._('Update').'<br />';
 
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -378,7 +378,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 					<td>
-							<input type="submit" name="submit" value="<?php echo _('Delete File') ?> " /> <input type="checkbox" name="im_sure" value="1" /> <?php echo _('I\'m Sure') ?>
+							<input type="submit" name="submit" value="<?php echo _('Delete File') ?> " /> <input type="checkbox" name="im_sure" value="1" /> <?php echo _('I am Sure') ?>
 					</td>
 				</tr>
 			</form>

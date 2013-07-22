@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 15:06+0200\n"
+"POT-Creation-Date: 2013-07-22 15:41+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -208,12 +208,14 @@ msgstr ""
 
 #: common/docman/actions/monitorfile.php:56
 #: common/tracker/actions/tracker.php:434
-#: common/tracker/actions/tracker.php:451
+#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
+#: www/frs/monitor.php:67
 #, fuzzy
 msgid "Monitoring Started"
 msgstr "Оповещение на емайл включено"
 
-#: common/docman/actions/monitorfile.php:76
+#: common/docman/actions/monitorfile.php:76 www/frs/monitor.php:58
+#: www/frs/monitor.php:59
 #, fuzzy
 msgid "Monitoring Stopped"
 msgstr "Отключено оповещение на емайл"
@@ -467,14 +469,16 @@ msgstr "Проект"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:634
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/lostlogin.php:84
 #: www/account/register.php:207 www/admin/approve-pending.php:194
-#: www/admin/database.php:162 www/export/rssAboTask.php:142
+#: www/admin/database.php:162 www/admin/responses_admin.php:42
+#: www/admin/trove/trove_cat_edit.php:70 www/export/rssAboTask.php:142
 #: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
 #: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
 #: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
-#: www/export/rssAboTask.php:173 www/pm/add_task.php:50 www/pm/add_task.php:63
-#: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
-#: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
-#: www/pm/add_task.php:124 www/pm/add_task.php:130 www/pm/add_task.php:149
+#: www/export/rssAboTask.php:173 www/frs/admin/deletepackage.php:57
+#: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
+#: www/pm/add_task.php:74 www/pm/add_task.php:81 www/pm/add_task.php:88
+#: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
+#: www/pm/add_task.php:130 www/pm/add_task.php:149
 #: www/project/admin/roledelete.php:62 www/register/index.php:178
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
@@ -858,7 +862,7 @@ msgid "You need first to upload file in %s"
 msgstr "Войдите в Вашу учетную запись"
 
 #: common/docman/views/addfile.php:165 www/frs/admin/editrelease.php:290
-#: www/frs/admin/qrs.php:191
+#: www/frs/admin/editrelease.php:344 www/frs/admin/qrs.php:191
 msgid "File Name"
 msgstr "Имя файла"
 
@@ -1691,41 +1695,47 @@ msgstr "Начальная дата"
 #: www/admin/groupedit.php:108 www/admin/groupedit.php:171
 #: www/admin/massmail.php:94 www/admin/massmail.php:113
 #: www/admin/massmail.php:116 www/admin/massmail.php:142
-#: www/admin/useredit.php:130 www/admin/useredit.php:139
-#: www/admin/useredit.php:148 www/admin/useredit.php:157
-#: www/admin/useredit.php:211 www/frs/reporting/downloads.php:105
-#: www/frs/reporting/downloads.php:107 www/frs/reporting/downloads.php:109
-#: www/pm/admin/index.php:211 www/pm/format_csv.php:66
-#: www/pm/format_csv.php:71 www/pm/format_csv.php:76 www/pm/format_csv.php:86
-#: www/pm/format_csv.php:89 www/pm/format_csv.php:93 www/pm/format_csv.php:97
-#: www/register/index.php:226 www/reporting/groupadded.php:60
-#: www/reporting/groupadded.php:61 www/reporting/groupadded.php:62
-#: www/reporting/groupcum.php:59 www/reporting/groupcum.php:60
-#: www/reporting/groupcum.php:61 www/reporting/projectact.php:62
-#: www/reporting/projectact.php:63 www/reporting/projectact.php:64
-#: www/reporting/projectact.php:65 www/reporting/projectact.php:66
-#: www/reporting/projecttime.php:72 www/reporting/projecttime.php:73
-#: www/reporting/projecttime.php:74 www/reporting/projecttime.php:75
-#: www/reporting/siteact.php:63 www/reporting/siteact.php:64
-#: www/reporting/siteact.php:65 www/reporting/siteact.php:66
-#: www/reporting/sitetimebar.php:60 www/reporting/sitetimebar.php:61
-#: www/reporting/sitetime.php:72 www/reporting/sitetime.php:73
-#: www/reporting/sitetime.php:74 www/reporting/timecategory.php:91
-#: www/reporting/toolspie.php:64 www/reporting/toolspie.php:65
-#: www/reporting/useract.php:77 www/reporting/useract.php:78
-#: www/reporting/useract.php:79 www/reporting/useract.php:80
-#: www/reporting/useract.php:81 www/reporting/useradded.php:58
-#: www/reporting/useradded.php:59 www/reporting/useradded.php:60
-#: www/reporting/usercum.php:59 www/reporting/usercum.php:60
-#: www/reporting/usercum.php:61 www/reporting/usersummary.php:69
-#: www/reporting/usersummary.php:70 www/reporting/usersummary.php:71
-#: www/reporting/usertime.php:88 www/reporting/usertime.php:89
-#: www/reporting/usertime.php:90 www/reporting/usertime.php:91
-#: www/snippet/add_snippet_to_package.php:128 www/snippet/addversion.php:94
-#: www/snippet/addversion.php:98 www/snippet/addversion.php:102
-#: www/snippet/addversion.php:217 www/snippet/addversion.php:221
-#: www/snippet/package.php:147 www/snippet/package.php:151
-#: www/snippet/package.php:156 www/snippet/package.php:169
+#: www/admin/trove/trove_cat_add.php:77 www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:112 www/admin/trove/trove_cat_add.php:114
+#: www/admin/trove/trove_cat_edit.php:117
+#: www/admin/trove/trove_cat_edit.php:143
+#: www/admin/trove/trove_cat_edit.php:146
+#: www/admin/trove/trove_cat_edit.php:149 www/admin/useredit.php:130
+#: www/admin/useredit.php:139 www/admin/useredit.php:148
+#: www/admin/useredit.php:157 www/admin/useredit.php:211
+#: www/frs/reporting/downloads.php:105 www/frs/reporting/downloads.php:107
+#: www/frs/reporting/downloads.php:109 www/pm/admin/index.php:211
+#: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
+#: www/pm/format_csv.php:86 www/pm/format_csv.php:89 www/pm/format_csv.php:93
+#: www/pm/format_csv.php:97 www/register/index.php:226
+#: www/reporting/groupadded.php:60 www/reporting/groupadded.php:61
+#: www/reporting/groupadded.php:62 www/reporting/groupcum.php:59
+#: www/reporting/groupcum.php:60 www/reporting/groupcum.php:61
+#: www/reporting/projectact.php:62 www/reporting/projectact.php:63
+#: www/reporting/projectact.php:64 www/reporting/projectact.php:65
+#: www/reporting/projectact.php:66 www/reporting/projecttime.php:72
+#: www/reporting/projecttime.php:73 www/reporting/projecttime.php:74
+#: www/reporting/projecttime.php:75 www/reporting/siteact.php:63
+#: www/reporting/siteact.php:64 www/reporting/siteact.php:65
+#: www/reporting/siteact.php:66 www/reporting/sitetimebar.php:60
+#: www/reporting/sitetimebar.php:61 www/reporting/sitetime.php:72
+#: www/reporting/sitetime.php:73 www/reporting/sitetime.php:74
+#: www/reporting/timecategory.php:91 www/reporting/toolspie.php:64
+#: www/reporting/toolspie.php:65 www/reporting/useract.php:77
+#: www/reporting/useract.php:78 www/reporting/useract.php:79
+#: www/reporting/useract.php:80 www/reporting/useract.php:81
+#: www/reporting/useradded.php:58 www/reporting/useradded.php:59
+#: www/reporting/useradded.php:60 www/reporting/usercum.php:59
+#: www/reporting/usercum.php:60 www/reporting/usercum.php:61
+#: www/reporting/usersummary.php:69 www/reporting/usersummary.php:70
+#: www/reporting/usersummary.php:71 www/reporting/usertime.php:88
+#: www/reporting/usertime.php:89 www/reporting/usertime.php:90
+#: www/reporting/usertime.php:91 www/snippet/add_snippet_to_package.php:128
+#: www/snippet/addversion.php:94 www/snippet/addversion.php:98
+#: www/snippet/addversion.php:102 www/snippet/addversion.php:217
+#: www/snippet/addversion.php:221 www/snippet/package.php:147
+#: www/snippet/package.php:151 www/snippet/package.php:156
+#: www/snippet/package.php:169
 #, php-format
 msgid ":"
 msgstr ""
@@ -1949,7 +1959,7 @@ msgstr "Невозможно получение группы проекта"
 #: www/admin/admin_table.php:162 www/admin/admin_table.php:326
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:152
 #: www/admin/useredit.php:231 www/forum/admin/index.php:174
-#: www/forum/admin/index.php:185 www/frs/admin/deletepackage.php:73
+#: www/forum/admin/index.php:185 www/frs/admin/deletepackage.php:74
 #: www/frs/admin/deleterelease.php:77 www/frs/admin/index.php:184
 #: www/frs/admin/showreleases.php:114 www/news/admin/index.php:133
 #: www/people/people_utils.php:177 www/people/people_utils.php:321
@@ -1972,7 +1982,7 @@ msgstr "Удалить"
 #: plugins/mantisbt/view/admin/addVersion.php:47
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:64
 #: www/account/editsshkeys.php:85 www/admin/admin_table.php:55
-#: www/admin/database.php:172 www/admin/trove/trove_cat_add.php:123
+#: www/admin/database.php:172 www/admin/trove/trove_cat_add.php:116
 #: www/admin/trove/trove_cat_list.php:51 www/admin/trove/trove_cat_list.php:54
 #: www/pm/mod_task.php:289 www/reporting/timeadd.php:174
 #: www/reporting/timecategory.php:100 www/trove/admin/trove_cat_add.php:101
@@ -2033,7 +2043,8 @@ msgstr "Управление заявками"
 
 #: common/forum/ForumAdmin.class.php:174 common/forum/ForumAdmin.class.php:202
 #: common/forum/ForumAdmin.class.php:220 common/forum/ForumAdmin.class.php:248
-#: www/forum/attachment.php:72
+#: www/forum/attachment.php:72 www/forum/monitor.php:47 www/forum/new.php:48
+#: www/forum/save.php:47
 msgid "Error getting Forum"
 msgstr "Ошибка доступа к форуму"
 
@@ -2093,7 +2104,7 @@ msgstr "Без модерирования"
 #: plugins/mantisbt/view/admin/editVersion.php:76
 #: plugins/mantisbt/view/admin/editVersion.php:79
 #: plugins/mantisbt/view/roadmap.php:98 plugins/mantisbt/view/roadmap.php:147
-#: www/frs/reporting/downloads.php:177
+#: www/frs/admin/editrelease.php:344 www/frs/reporting/downloads.php:177
 #, fuzzy
 msgid "Release"
 msgstr "Релизы"
@@ -2119,12 +2130,13 @@ msgstr "Релизы"
 #: www/admin/groupedit.php:224 www/admin/trove/trove_cat_edit.php:152
 #: www/admin/useredit.php:236 www/admin/useredit.php:315
 #: www/admin/vhost.php:189 www/forum/admin/index.php:162
-#: www/frs/admin/index.php:181 www/mail/admin/index.php:230
-#: www/mail/admin/index.php:283 www/people/people_utils.php:176
-#: www/people/people_utils.php:320 www/pm/admin/index.php:343
-#: www/pm/calendar.php:293 www/project/admin/database.php:234
-#: www/project/admin/index.php:289 www/project/admin/tools.php:304
-#: www/reporting/timecategory.php:98 www/scm/admin/index.php:176
+#: www/frs/admin/editrelease.php:346 www/frs/admin/index.php:181
+#: www/mail/admin/index.php:230 www/mail/admin/index.php:283
+#: www/people/people_utils.php:176 www/people/people_utils.php:320
+#: www/pm/admin/index.php:343 www/pm/calendar.php:293
+#: www/project/admin/database.php:234 www/project/admin/index.php:289
+#: www/project/admin/tools.php:304 www/reporting/timecategory.php:98
+#: www/scm/admin/index.php:176
 msgid "Update"
 msgstr "Обновить"
 
@@ -6175,7 +6187,7 @@ msgstr "Такое имя пользователя уже существует."
 msgid "Manage Canned Responses to %s"
 msgstr "Добавить/изменить Ответы для %s"
 
-#: common/tracker/views/form-addcanned.php:38
+#: common/tracker/views/form-addcanned.php:38 www/admin/responses_admin.php:42
 msgid "Existing Responses"
 msgstr "Плоученые ответы"
 
@@ -6441,9 +6453,9 @@ msgstr "Вы действительно хотите удалить эту за�
 #: plugins/mailman/www/admin/index.php:180
 #: plugins/projects-hierarchy/view/admin_project_link.php:69
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
-#: www/admin/groupedit.php:162 www/forum/admin/index.php:222
-#: www/mail/admin/index.php:192 www/mail/admin/index.php:223
-#: www/people/editprofile.php:247
+#: www/admin/groupedit.php:162 www/admin/responses_admin.php:50
+#: www/forum/admin/index.php:222 www/mail/admin/index.php:192
+#: www/mail/admin/index.php:223 www/people/editprofile.php:247
 #: www/survey/admin/show_results_aggregate.php:193
 #: www/survey/include/SurveyHTML.class.php:194
 #: www/survey/include/SurveyHTML.class.php:417
@@ -6634,8 +6646,7 @@ msgstr "Элемент"
 
 #: common/tracker/views/form-deleteextrafieldelement.php:61
 #: common/tracker/views/form-deleteextrafield.php:38
-#: www/forum/admin/index.php:183 www/frs/admin/deletepackage.php:67
-#: www/frs/admin/deleterelease.php:75 www/frs/admin/editrelease.php:381
+#: www/forum/admin/index.php:183 www/frs/admin/deleterelease.php:75
 #: www/pm/admin/index.php:371 www/project/admin/roledelete.php:81
 msgid "I'm Sure"
 msgstr "Я уверен"
@@ -6657,8 +6668,8 @@ msgid ""
 msgstr "Вы желаете полностью удалить это поле и его содержимое!"
 
 #: common/tracker/views/form-deleteextrafield.php:39
-#: www/forum/admin/index.php:184 www/frs/admin/deletepackage.php:70
-#: www/frs/admin/deleterelease.php:76 www/pm/admin/index.php:372
+#: www/forum/admin/index.php:184 www/frs/admin/deleterelease.php:76
+#: www/pm/admin/index.php:372
 msgid "I'm Really Sure"
 msgstr "Я абсолютно уверен"
 
@@ -6679,10 +6690,13 @@ msgid ""
 msgstr "Вы желаете полностью удалить трекер и его содержимое!"
 
 #: common/tracker/views/form-deletetracker.php:32
+#: www/admin/responses_admin.php:51 www/frs/admin/deletepackage.php:68
+#: www/frs/admin/editrelease.php:381
 msgid "I am Sure"
 msgstr "Я уверен"
 
 #: common/tracker/views/form-deletetracker.php:33
+#: www/frs/admin/deletepackage.php:71
 msgid "I am Really Sure"
 msgstr "Я абсолютно уверен"
 
@@ -11728,7 +11742,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/callback.php:21
 #: plugins/oauthconsumer/www/get_access_token.php:80
 #: plugins/oauthconsumer/www/get_access_token.php:155
-#: plugins/oauthconsumer/www/index.php:67
+#: plugins/oauthconsumer/www/index.php:67 www/admin/responses_admin.php:90
 msgid "Go"
 msgstr "Искать"
 
@@ -15192,7 +15206,7 @@ msgstr "(управление шаблонами ответов)"
 msgid "Custom response title and text"
 msgstr "Заголовок и текст произвольного ответа"
 
-#: www/admin/approve-pending.php:165 www/admin/responses_admin.php:50
+#: www/admin/approve-pending.php:165
 msgid "yes"
 msgstr "да"
 
@@ -15532,9 +15546,11 @@ msgstr "Название группы (щелкните для изменени�
 msgid "Register Time"
 msgstr "Время регистрации"
 
-#: www/admin/grouplist.php:67 www/admin/useredit.php:263
-#: www/admin/useredit.php:293
-msgid "Unix name"
+#: www/admin/grouplist.php:67 www/admin/search.php:149
+#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
+#: www/register/index.php:226
+#, fuzzy
+msgid "Unix Name"
 msgstr "Уникальное имя (Unix)"
 
 #: www/admin/grouplist.php:69
@@ -16009,16 +16025,8 @@ msgstr "Админ сайта: Редактировать удаленные о�
 
 #: www/admin/responses_admin.php:36
 #, php-format
-msgid "You can't %1$s \\\"None\\\"!"
+msgid "You cannot %1$s “None”!"
 msgstr "Вам нельзя %1$s \\\"делать\\\"!"
-
-#: www/admin/responses_admin.php:42
-msgid "Existing Responses:"
-msgstr "Существующие отзывы:"
-
-#: www/admin/responses_admin.php:51
-msgid "Yes, I'm sure"
-msgstr "Да, я уверен"
 
 #: www/admin/responses_admin.php:74
 msgid "Edited Response"
@@ -16036,16 +16044,12 @@ msgstr "Заголовок отзыва:"
 msgid "Response Text:"
 msgstr "Текст отзыва:"
 
-#: www/admin/responses_admin.php:90
-msgid "go"
-msgstr "перейти"
-
 #: www/admin/responses_admin.php:108
 msgid "Deleted Response"
 msgstr "Удалить отзыв"
 
 #: www/admin/responses_admin.php:110
-msgid "If you're aren't sure then why did you click 'Delete'?"
+msgid "If you are not sure then why did you click “Delete”?"
 msgstr "Если Вы не уверены, тогда зачем вы нажимали 'Удалить'?"
 
 #: www/admin/responses_admin.php:111
@@ -16098,12 +16102,6 @@ msgstr[0] "Поиск группы по параметру <em>%1$s</em>: %2$s �
 msgstr[1] "Поиск группы по параметру<em>%1$s</em>: %2$s совпадения"
 msgstr[2] "Поиск группы по параметру <em>%1$s</em>: %2$s совпадений"
 
-#: www/admin/search.php:149 www/project/admin/massadd.php:91
-#: www/project/admin/massfinish.php:75 www/register/index.php:226
-#, fuzzy
-msgid "Unix Name"
-msgstr "Уникальное имя (Unix)"
-
 #: www/admin/search.php:150 www/register/index.php:178
 msgid "Full Name"
 msgstr "Полное имя"
@@ -16117,45 +16115,45 @@ msgstr "Регистрирован"
 msgid "No project found."
 msgstr "Не найдены группы проекта"
 
-#: www/admin/trove/trove_cat_add.php:67
+#: www/admin/trove/trove_cat_add.php:60
 #, fuzzy
 msgid "Error In Trove Operation: "
 msgstr "Ошибка операции в каталоге проектов"
 
-#: www/admin/trove/trove_cat_add.php:79 www/trove/admin/trove_cat_add.php:62
+#: www/admin/trove/trove_cat_add.php:72 www/trove/admin/trove_cat_add.php:62
 msgid "Add New Trove Category"
 msgstr "Добавить категорию в каталог проектов"
 
-#: www/admin/trove/trove_cat_add.php:84
+#: www/admin/trove/trove_cat_add.php:77 www/admin/trove/trove_cat_edit.php:117
 msgid "Parent Category"
 msgstr "Родительская категория"
 
-#: www/admin/trove/trove_cat_add.php:117
-msgid "New category short name (no spaces, unix-like)"
-msgstr "Новая категория (без пробелов, в unix-стиле)"
+#: www/admin/trove/trove_cat_add.php:110
+msgid "New category short name (no spaces, Unix-like)"
+msgstr "Новая категория (без пробелов, в Unix-стиле)"
 
-#: www/admin/trove/trove_cat_add.php:119
+#: www/admin/trove/trove_cat_add.php:112
 msgid "New category full name (Maximum length is 80 chars)"
 msgstr "Название новой категории (не более 80 символов)"
 
-#: www/admin/trove/trove_cat_add.php:121
+#: www/admin/trove/trove_cat_add.php:114
 msgid "New category description (Maximum length is 255 chars)"
 msgstr "Описание новой категории (не более 255 символов)"
 
 #: www/admin/trove/trove_cat_edit.php:48
 #, fuzzy
-msgid "Error: a category can't be the same as its own parent: "
+msgid "Error: a category cannot be the same as its own parent: "
 msgstr "Категория не может быть та-же как и её вложение"
 
 #: www/admin/trove/trove_cat_edit.php:70
 #, fuzzy
-msgid "Error In Trove Operation :"
+msgid "Error In Trove Operation"
 msgstr "Ошибка операции в каталоге проектов"
 
 #: www/admin/trove/trove_cat_edit.php:92
 #, fuzzy
 msgid ""
-"Error in trove operation, can't delete trove category defined as default in "
+"Error in trove operation, cannot delete trove category defined as default in "
 "configuration."
 msgstr ""
 "В удалении категории хранилища отказано, ввиду определения её как по "
@@ -16170,14 +16168,9 @@ msgstr "Такой категории в каталоге проектов не 
 msgid "Edit Trove Category"
 msgstr "Редактировать категорию хранилища"
 
-#: www/admin/trove/trove_cat_edit.php:117
-msgid "Parent Category:"
-msgstr "Родительская категория:"
-
 #: www/admin/trove/trove_cat_edit.php:143
-#, fuzzy
-msgid "Category short name (no spaces, unix-like)"
-msgstr "Новая категория (без пробелов, в unix-стиле)"
+msgid "Category short name (no spaces, Unix-like)"
+msgstr "Новая категория (без пробелов, в Unix-стиле)"
 
 #: www/admin/trove/trove_cat_edit.php:146
 #, fuzzy
@@ -16351,6 +16344,10 @@ msgstr ""
 #, fuzzy
 msgid "Projects Membership"
 msgstr "Список участников проекта"
+
+#: www/admin/useredit.php:263 www/admin/useredit.php:293
+msgid "Unix name"
+msgstr "Уникальное имя (Unix)"
 
 #: www/admin/useredit.php:264 www/admin/useredit.php:294
 #: www/admin/vhost.php:179 www/project/admin/database.php:211
@@ -16626,7 +16623,7 @@ msgid "Invalid rate value"
 msgstr "Неверные пределы"
 
 #: www/developer/rate.php:84
-msgid "You can't rate yourself"
+msgid "You cannot rate yourself"
 msgstr "Вы неможете влиять на свой рейтинг"
 
 #: www/developer/rate.php:87
@@ -16882,9 +16879,8 @@ msgid ""
 msgstr "Внимание! Вы хотите удалить сообщение и все следующие за ним !!"
 
 #: www/forum/admin/index.php:246 www/forum/admin/index.php:285
-#: www/forum/monitor.php:47 www/forum/new.php:48 www/forum/save.php:47
 #, fuzzy
-msgid "Error Getting Forum"
+msgid "Error getting forum"
 msgstr "Ошибка доступа к форуму"
 
 #: www/forum/admin/index.php:252
@@ -17118,11 +17114,13 @@ msgid "Do you really want to unsubscribe ?"
 msgstr "Вы действительно хотите авторизовать этот проект?"
 
 #: www/forum/monitor.php:72
-msgid "Forum monitoring deactivated"
+#, fuzzy
+msgid "Forum Monitoring Deactivated"
 msgstr "Получение с форума новостей отключено"
 
 #: www/forum/monitor.php:78
-msgid "Forum monitoring started"
+#, fuzzy
+msgid "Forum Monitoring Started"
 msgstr "Включено получение новостей с форума"
 
 #: www/forum/myforums.php:58
@@ -17144,25 +17142,27 @@ msgstr ""
 "Позиция записана. Новые сообщения при повторном посещении будут подсвечены"
 
 #: www/frs/admin/deletepackage.php:48 www/frs/admin/deleterelease.php:50
-#: www/frs/admin/index.php:70 www/frs/admin/index.php:85
-#: www/frs/admin/index.php:101 www/frs/admin/showreleases.php:58
+#: www/frs/admin/editrelease.php:56 www/frs/admin/index.php:70
+#: www/frs/admin/index.php:85 www/frs/admin/index.php:101
+#: www/frs/admin/showreleases.php:58
 #, fuzzy
 msgid "Could Not Get FRS Package"
 msgstr "Ошибка, не указана роль"
 
 #: www/frs/admin/deletepackage.php:57
-#, fuzzy, php-format
-msgid "Delete Package: %1$s"
+#, fuzzy
+msgid "Delete Package"
 msgstr "Удалить трекер %s"
 
-#: www/frs/admin/deletepackage.php:64
+#: www/frs/admin/deletepackage.php:65
 msgid ""
 "You are about to permanently and irretrievably delete this package and all "
 "its releases and files!"
 msgstr ""
 "Вы запрашиваете полное удаление пакета и всех сопутствующих файлов релиза!"
 
-#: www/frs/admin/deleterelease.php:57 www/frs/admin/showreleases.php:74
+#: www/frs/admin/deleterelease.php:57 www/frs/admin/editrelease.php:66
+#: www/frs/admin/showreleases.php:74
 #, fuzzy
 msgid "Could Not Get FRS Release"
 msgstr "Ошибка, не указана роль"
@@ -17176,16 +17176,6 @@ msgid ""
 "You are about to permanently and irretrievably delete this release and its "
 "files!"
 msgstr "Вы запрашиваете полное удаление всех сопутствующих файлов релиза!"
-
-#: www/frs/admin/editrelease.php:56 www/frs/admin/qrs.php:86
-#, fuzzy
-msgid "Could Not Get FRSPackage"
-msgstr "Ошибка, не указана роль"
-
-#: www/frs/admin/editrelease.php:66 www/frs/admin/qrs.php:95
-#, fuzzy
-msgid "Could Not Get FRSRelease"
-msgstr "Ошибка, не указана роль"
 
 #: www/frs/admin/editrelease.php:93 www/frs/admin/editrelease.php:112
 #, fuzzy
@@ -17223,7 +17213,7 @@ msgid "File Deleted"
 msgstr "Файл удален"
 
 #: www/frs/admin/editrelease.php:193
-msgid "File not deleted: you did not check \"I'm Sure\""
+msgid "File not deleted: you did not check “I am Sure”"
 msgstr ""
 
 #: www/frs/admin/editrelease.php:209
@@ -17239,14 +17229,13 @@ msgstr "Редактирование"
 msgid "Edit Release"
 msgstr "Редактирование"
 
-#: www/frs/admin/editrelease.php:227 www/frs/admin/qrs.php:183
-msgid "Release date"
+#: www/frs/admin/editrelease.php:227 www/frs/admin/editrelease.php:345
+#, fuzzy
+msgid "Release Date"
 msgstr "Дата релиза"
 
-#: www/frs/admin/editrelease.php:231 www/frs/admin/qrs.php:175
-#: www/frs/admin/showreleases.php:100
-#: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:48
-msgid "Release name"
+#: www/frs/admin/editrelease.php:231
+msgid "Release Name"
 msgstr "Название релиза"
 
 #: www/frs/admin/editrelease.php:245
@@ -17299,7 +17288,8 @@ msgstr ""
 msgid "Alternatively, you can use FTP to upload a new file at %1$s."
 msgstr "Есть возможность указать ftp адрес файла вместо его закачки в %1$s"
 
-#: www/frs/admin/editrelease.php:318 www/frs/admin/qrs.php:227
+#: www/frs/admin/editrelease.php:318 www/frs/admin/editrelease.php:346
+#: www/frs/admin/qrs.php:227
 msgid "File Type"
 msgstr "Тип файла"
 
@@ -17326,17 +17316,10 @@ msgstr ""
 "each of these files with the correct information or they will not appear on "
 "your download summary page."
 
-#: www/frs/admin/editrelease.php:344
-msgid "Filename<br />Release"
-msgstr "Имя файла<br />Выпустить релиз"
-
 #: www/frs/admin/editrelease.php:345
-msgid "Processor<br />Release Date"
-msgstr "Процессор<br />Дата релиза"
-
-#: www/frs/admin/editrelease.php:346
-msgid "File Type<br />Update"
-msgstr "Тип файла<br />Обновить"
+#, fuzzy
+msgid "Processor"
+msgstr "Тип архитектуры процессора (ЦПУ)"
 
 #: www/frs/admin/editrelease.php:367
 msgid "Update/Refresh"
@@ -17463,6 +17446,16 @@ msgstr "Необходимо задать имя релиза."
 msgid "Must select a package."
 msgstr "Необходимо выбрать пакет."
 
+#: www/frs/admin/qrs.php:86
+#, fuzzy
+msgid "Could Not Get FRSPackage"
+msgstr "Ошибка, не указана роль"
+
+#: www/frs/admin/qrs.php:95
+#, fuzzy
+msgid "Could Not Get FRSRelease"
+msgstr "Ошибка, не указана роль"
+
 #: www/frs/admin/qrs.php:114 www/frs/admin/qrs.php:141
 msgid "Quick Release System"
 msgstr "Система быстрого выпуска"
@@ -17492,6 +17485,15 @@ msgstr "Типы файлов не заданы"
 #, php-format
 msgid "Or %1$s create a new package %2$s"
 msgstr "или %1$s создать новый пакет %2$s"
+
+#: www/frs/admin/qrs.php:175 www/frs/admin/showreleases.php:100
+#: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:48
+msgid "Release name"
+msgstr "Название релиза"
+
+#: www/frs/admin/qrs.php:183
+msgid "Release date"
+msgstr "Дата релиза"
 
 #: www/frs/admin/qrs.php:195
 #, fuzzy
@@ -17604,22 +17606,6 @@ msgstr "Новости"
 #, fuzzy
 msgid "Error Getting FRSPackage"
 msgstr "Сообщение форума блокировано"
-
-#: www/frs/monitor.php:58
-msgid "Monitoring Has Been Stopped"
-msgstr "Отключено оповещение на емайл"
-
-#: www/frs/monitor.php:59
-msgid "Monitoring stopped"
-msgstr "Отключено оповещение на емайл"
-
-#: www/frs/monitor.php:66
-msgid "Monitoring Has Been Started"
-msgstr "Включено оповещение на емайл"
-
-#: www/frs/monitor.php:67
-msgid "Monitoring started"
-msgstr "Оповещение на емайл включено"
 
 #: www/frs/monitor.php:72
 msgid "File Module ID"
@@ -23679,6 +23665,63 @@ msgid "No User Name Provided"
 msgstr "Имя участника обязательно"
 
 #, fuzzy
+#~ msgid "Error Getting Forum"
+#~ msgstr "Ошибка доступа к форуму"
+
+#~ msgid "You can't %1$s \\\"None\\\"!"
+#~ msgstr "Вам нельзя %1$s \\\"делать\\\"!"
+
+#~ msgid "Existing Responses:"
+#~ msgstr "Существующие отзывы:"
+
+#~ msgid "Yes, I'm sure"
+#~ msgstr "Да, я уверен"
+
+#~ msgid "go"
+#~ msgstr "перейти"
+
+#~ msgid "If you're aren't sure then why did you click 'Delete'?"
+#~ msgstr "Если Вы не уверены, тогда зачем вы нажимали 'Удалить'?"
+
+#~ msgid "New category short name (no spaces, unix-like)"
+#~ msgstr "Новая категория (без пробелов, в unix-стиле)"
+
+#, fuzzy
+#~ msgid "Error In Trove Operation :"
+#~ msgstr "Ошибка операции в каталоге проектов"
+
+#~ msgid "Parent Category:"
+#~ msgstr "Родительская категория:"
+
+#, fuzzy
+#~ msgid "Category short name (no spaces, unix-like)"
+#~ msgstr "Новая категория (без пробелов, в unix-стиле)"
+
+#~ msgid "You can't rate yourself"
+#~ msgstr "Вы неможете влиять на свой рейтинг"
+
+#~ msgid "Filename<br />Release"
+#~ msgstr "Имя файла<br />Выпустить релиз"
+
+#~ msgid "Processor<br />Release Date"
+#~ msgstr "Процессор<br />Дата релиза"
+
+#~ msgid "File Type<br />Update"
+#~ msgstr "Тип файла<br />Обновить"
+
+#~ msgid "Monitoring Has Been Stopped"
+#~ msgstr "Отключено оповещение на емайл"
+
+#~ msgid "Monitoring stopped"
+#~ msgstr "Отключено оповещение на емайл"
+
+#~ msgid "Monitoring Has Been Started"
+#~ msgstr "Включено оповещение на емайл"
+
+#~ msgid "Monitoring started"
+#~ msgstr "Оповещение на емайл включено"
+
+#, fuzzy
 #~ msgid "Unix Project Name:"
 #~ msgstr "Название проекта"
 
@@ -24343,18 +24386,6 @@ msgstr "Имя участника обязательно"
 #~ msgid "Active site users: <strong>%1$s</strong>"
 #~ msgstr "Активных участников сайта: <strong>%1$s</strong>"
 
-#~ msgid "You cannot %1$s “None”!"
-#~ msgstr "Вам нельзя %1$s \\\"делать\\\"!"
-
-#~ msgid "If you are not sure then why did you click “Delete”?"
-#~ msgstr "Если Вы не уверены, тогда зачем вы нажимали 'Удалить'?"
-
-#~ msgid "New category short name (no spaces, Unix-like)"
-#~ msgstr "Новая категория (без пробелов, в Unix-стиле)"
-
-#~ msgid "Category short name (no spaces, Unix-like)"
-#~ msgstr "Новая категория (без пробелов, в Unix-стиле)"
-
 #~ msgid ""
 #~ "This pages allows to change only direct properties of user object. To "
 #~ "edit properties pertinent to user within specific project, visit admin "
@@ -24370,14 +24401,8 @@ msgstr "Имя участника обязательно"
 #~ msgid "Error: Choose a User To Monitor First"
 #~ msgstr "Выберите сначала пользователя для наблюдения"
 
-#~ msgid "You cannot rate yourself"
-#~ msgstr "Вы неможете влиять на свой рейтинг"
-
 #~ msgid "No Forums Found for %s"
 #~ msgstr "Форум не найден для %s"
-
-#~ msgid "Release Name"
-#~ msgstr "Название релиза"
 
 #~ msgid ""
 #~ "Edit the Release Notes or Change Log for this release of this package. "

@@ -1,6 +1,6 @@
 <?php
 /**
- * Site Admin page to edit canned responces for project rejection
+ * Site Admin page to edit canned responses for project rejection
  *
  * This page is linked from approve-pending.php
  *
@@ -33,13 +33,13 @@ site_admin_header(array('title'=>_('Site Admin: Edit Rejection Responses')));
 
 function check_select_value($value, $type) {
 	if( $value == "100" ) {
-		print("<span class=\"important\">".sprintf(_('You can\'t %1$s \"None\"!'), $GLOBALS['type'])."</span><br />\n");
+		print('<span class="important">'.sprintf(_('You cannot %1$s “None”!'), $GLOBALS['type'])."</span><br />\n");
 	}
 }
 ?>
 
 <form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
-<?php echo _('Existing Responses:'); ?><?php echo get_canned_responses(); ?>
+<?php echo _('Existing Responses')._(': '); ?><?php echo get_canned_responses(); ?>
 <!-- Reinhard Spisser: commenting localization, since otherwise it will not work -->
 <!--
 <input name="action" type="submit" value="<?php echo _('Edit'); ?>" />
@@ -47,8 +47,8 @@ function check_select_value($value, $type) {
 -->
 <input name="action" type="submit" value="Edit" />
 <input name="action" type="submit" value="Delete" />
-<input type="checkbox" name="sure" value="<?php echo _('yes'); ?>" />
-<?php  echo _('Yes, I\'m sure'); ?>
+<input type="checkbox" name="sure" value="<?php echo _('Yes'); ?>" />
+<?php  echo _('I am Sure'); ?>
 </form>
 
 <br />
@@ -87,7 +87,7 @@ if( $action == "Edit" ) {
 <?php echo _('Response Text:'); ?><br />
 <textarea name="response_text" cols="50" rows="10"><?php echo $response_text; ?></textarea>
 <input type="hidden" name="response_id" value="<?php echo $response_id; ?>" />
-<input type="hidden" name="action2" value="<?php echo _('go'); ?>" />
+<input type="hidden" name="action2" value="<?php echo _('Go'); ?>" />
 <input type="hidden" name="action" value="Edit">
 <input type="submit" name="actionsubmit" value="<?php echo _('Edit'); ?>" />
 </form>
@@ -107,7 +107,7 @@ if( $action == "Edit" ) {
 
 		print(" <strong>" ._('Deleted Response')."</strong> ");
 	} else {
-		print( _('If you\'re aren\'t sure then why did you click \'Delete\'?')."<br />");
+		print( _('If you are not sure then why did you click “Delete”?')."<br />");
 		print("<em>" ._('By the way, I didn\'t delete... just in case...')."</em><br />\n");
 	}
 

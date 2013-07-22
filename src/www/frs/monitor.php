@@ -55,16 +55,16 @@ if (session_loggedin()) {
 			if (!$f->stopMonitor()) {
 				exit_error($f->getErrorMessage(),'frs');
 			} else {
-                $feedback = _('Monitoring Has Been Stopped');
-				frs_header(array('title'=>_('Monitoring stopped'),'group'=>$group_id));
+                $feedback = _('Monitoring Stopped');
+				frs_header(array('title'=>_('Monitoring Stopped'),'group'=>$group_id));
 				frs_footer();
 			}
 		} elseif($start) {
 			if (!$f->setMonitor()) {
 				exit_error($f->getErrorMessage(),'frs');
 			} else {
-                $feedback = _('Monitoring Has Been Started');
-				frs_header(array('title'=>_('Monitoring started'),'group'=>$group_id));
+                $feedback = _('Monitoring Started');
+				frs_header(array('title'=>_('Monitoring Started'),'group'=>$group_id));
 				frs_footer();
 			}
 		}

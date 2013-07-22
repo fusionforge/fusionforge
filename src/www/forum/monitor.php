@@ -44,7 +44,7 @@ if ($forum_id && $group_id) {
 
 	$f=new Forum($g,$forum_id);
 	if (!$f || !is_object($f)) {
-		exit_error(_('Error Getting Forum'),'forums');
+		exit_error(_('Error getting Forum'),'forums');
 	} elseif ($f->isError()) {
 		exit_error($f->getErrorMessage(),'forums');
 	}
@@ -69,13 +69,13 @@ if ($forum_id && $group_id) {
 		if (!$f->stopMonitor()) {
 			exit_error($f->getErrorMessage(),'forums');
 		} else {
-			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id.'&feedback='.urlencode(_('Forum monitoring deactivated')));
+			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id.'&feedback='.urlencode(_('Forum Monitoring Deactivated')));
 		}
 	} elseif(getIntFromRequest('start')) {
 		if (!$f->setMonitor()) {
 			exit_error($f->getErrorMessage(),'forums');
 		} else {
-			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id.'&feedback='.urlencode(_('Forum monitoring started')));
+			session_redirect('/forum/forum.php?forum_id='.$forum_id.'&group_id='.$group_id.'&feedback='.urlencode(_('Forum Monitoring Started')));
 		}
 	}
 } else {

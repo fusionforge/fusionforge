@@ -45,7 +45,7 @@ if (getStringFromRequest('submit')) {
 
 	if ($form_shortname) {
 		if ($form_trove_cat_id == $form_parent) {
-			exit_error(_("Error: a category can't be the same as its own parent: ").db_error(),'trove');
+			exit_error(_("Error: a category cannot be the same as its own parent: ").db_error(),'trove');
 		} else {
 			$res = db_query_params ('
 				UPDATE trove_cat
@@ -67,7 +67,7 @@ if (getStringFromRequest('submit')) {
 		}
 
 		if (!$res || db_affected_rows($res)<1) {
-			exit_error(_('Error In Trove Operation :').db_error(),'trove');
+			exit_error(_('Error In Trove Operation')._(': ').db_error(),'trove');
 		}
 	}
 	// update full paths now
@@ -89,7 +89,7 @@ if (getStringFromRequest('submit')) {
 if (getStringFromRequest("delete")) {
 	$form_trove_cat_id = getIntFromRequest('form_trove_cat_id');
 	if ($form_trove_cat_id==forge_get_config('default_trove_cat')){
-		exit_error( _('Error in trove operation, can\'t delete trove category defined as default in configuration.'),'trove');
+		exit_error( _('Error in trove operation, cannot delete trove category defined as default in configuration.'),'trove');
 	}
 	trove_del_cat_id($form_trove_cat_id);
 	session_redirect("/admin/trove/trove_cat_list.php");
@@ -114,11 +114,11 @@ site_admin_header(array('title'=>_('Edit Trove Category')));
 
 <form action="trove_cat_edit.php" method="post">
 
-<p><?php echo _('Parent Category:'); ?>
+<p><?php echo _('Parent Category')._(':'); ?>
 <br /><select name="form_parent">
 
 <?php
-// generate list of possible parents (a category can't be a parent of itself)
+// generate list of possible parents (a category cannot be a parent of itself)
 $res_parent = db_query_params ('SELECT shortname,fullname,trove_cat_id FROM trove_cat WHERE trove_cat_id <> $1',
 			array($trove_cat_id));
 
@@ -140,13 +140,13 @@ while ($row_parent = db_fetch_array($res_parent)) {
 <input type="hidden" name="form_trove_cat_id" value="<?php
   print $GLOBALS['trove_cat_id']; ?>" /></p>
 
-<p><?php echo _('Category short name (no spaces, unix-like)'); ?>:
+<p><?php echo _('Category short name (no spaces, Unix-like)')._(':'); ?>
 <br /><input type="text" name="form_shortname" value="<?php print $row_cat["shortname"]; ?>" /></p>
 
-<p><?php echo _('Category full name (Maximum length is 80 chars)'); ?>:
+<p><?php echo _('Category full name (Maximum length is 80 chars)')._(':'); ?>
 <br /><input type="text" name="form_fullname" value="<?php print $row_cat["fullname"]; ?>" /></p>
 
-<p><?php echo _('Category description (Maximum length is 255 chars)'); ?>:
+<p><?php echo _('Category description (Maximum length is 255 chars)')._(':'); ?>
 <br /><input type="text" name="form_description" size="80" value="<?php print $row_cat["description"]; ?>" /></p>
 
 <br /><input type="submit" name="submit" value="<?php echo _('Update'); ?>" /><input type="submit" name="delete" value="<?php echo _('Delete'); ?>" />
