@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:39+0200\n"
+"POT-Creation-Date: 2013-07-22 10:49+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9081,6 +9081,7 @@ msgstr "Kontuaren informazioa"
 #: plugins/globaldashboard/www/admin/edit_account_page.php:77
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
 #: plugins/globaldashboard/www/admin/manage_accounts.php:117
+#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
 #, fuzzy
 msgid "User Name"
 msgstr "Erabiltzaile izena"
@@ -20758,10 +20759,6 @@ msgstr ""
 msgid "Member"
 msgstr "Kideak"
 
-#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
-msgid "Username"
-msgstr "Erabiltzaile izena"
-
 #: www/project/memberlist.php:51
 #, fuzzy
 msgid "Role(s)/Position(s)"
@@ -21085,7 +21082,7 @@ msgstr ""
 msgid "Cumulative Projects"
 msgstr ""
 
-#: www/reporting/index.php:37 www/stats/i18n.php:33
+#: www/reporting/index.php:37 www/stats/i18n.php:34
 msgid "Users"
 msgstr "Erabiltzaileak"
 
@@ -22052,7 +22049,7 @@ msgid ""
 msgstr ""
 
 #: www/snippet/package.php:156 www/snippet/submit.php:123
-#: www/stats/i18n.php:33
+#: www/stats/i18n.php:34
 msgid "Language"
 msgstr "Hizkuntza"
 
@@ -22336,11 +22333,11 @@ msgstr "Gunearen grafikoak"
 msgid "%1$s I18n Statistics: Languages Distributions"
 msgstr "Distribuzioa hizkuntzaren araberas"
 
-#: www/stats/i18n.php:53
+#: www/stats/i18n.php:54
 msgid "Total Non-English"
 msgstr "Ingelesa ez den erabatekoa"
 
-#: www/stats/i18n.php:58
+#: www/stats/i18n.php:59
 msgid ""
 "This is a list of the preferences that users have chosen in their user "
 "preferences; it does not include languages which are selected via cookies or "
@@ -23258,6 +23255,9 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy
 msgid "That user does not exist."
 msgstr "Ez dago kategoria hau"
+
+#~ msgid "Username"
+#~ msgstr "Erabiltzaile izena"
 
 #~ msgid "Error Getting %1$s"
 #~ msgstr "Akatsa %1$s lortzean"

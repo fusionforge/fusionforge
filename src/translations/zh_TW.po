@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:39+0200\n"
+"POT-Creation-Date: 2013-07-22 10:49+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9080,6 +9080,7 @@ msgstr "帳號資訊"
 #: plugins/globaldashboard/www/admin/edit_account_page.php:77
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
 #: plugins/globaldashboard/www/admin/manage_accounts.php:117
+#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
 #, fuzzy
 msgid "User Name"
 msgstr "帳號"
@@ -20724,10 +20725,6 @@ msgstr ""
 msgid "Member"
 msgstr "會員"
 
-#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
-msgid "Username"
-msgstr "帳號"
-
 #: www/project/memberlist.php:51
 #, fuzzy
 msgid "Role(s)/Position(s)"
@@ -21054,7 +21051,7 @@ msgstr "新增的專案"
 msgid "Cumulative Projects"
 msgstr "累積的專案"
 
-#: www/reporting/index.php:37 www/stats/i18n.php:33
+#: www/reporting/index.php:37 www/stats/i18n.php:34
 msgid "Users"
 msgstr "使用者"
 
@@ -22020,7 +22017,7 @@ msgid ""
 msgstr ""
 
 #: www/snippet/package.php:156 www/snippet/submit.php:123
-#: www/stats/i18n.php:33
+#: www/stats/i18n.php:34
 msgid "Language"
 msgstr "語言"
 
@@ -22301,11 +22298,11 @@ msgstr "網站統計圖片"
 msgid "%1$s I18n Statistics: Languages Distributions"
 msgstr "語言檔案"
 
-#: www/stats/i18n.php:53
+#: www/stats/i18n.php:54
 msgid "Total Non-English"
 msgstr "全部非英語語系"
 
-#: www/stats/i18n.php:58
+#: www/stats/i18n.php:59
 msgid ""
 "This is a list of the preferences that users have chosen in their user "
 "preferences; it does not include languages which are selected via cookies or "
@@ -23221,6 +23218,9 @@ msgstr "帳號"
 #, fuzzy
 msgid "That user does not exist."
 msgstr "查詢不存在"
+
+#~ msgid "Username"
+#~ msgstr "帳號"
 
 #~ msgid "Error Getting %1$s"
 #~ msgstr "取得 %1$s 時錯誤"

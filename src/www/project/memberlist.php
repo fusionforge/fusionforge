@@ -47,7 +47,7 @@ print '</div>';
 
 $title_arr=array();
 $title_arr[]=_('Member');
-$title_arr[]=_('Username');
+$title_arr[]=_('User Name');
 $title_arr[]=_('Role(s)/Position(s)');
 if(forge_get_config('use_people')) {
 	$title_arr[]=_('Skills');

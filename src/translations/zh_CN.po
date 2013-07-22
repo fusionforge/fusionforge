@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:39+0200\n"
+"POT-Creation-Date: 2013-07-22 10:49+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9070,6 +9070,7 @@ msgstr "帐号信息"
 #: plugins/globaldashboard/www/admin/edit_account_page.php:77
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
 #: plugins/globaldashboard/www/admin/manage_accounts.php:117
+#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
 #, fuzzy
 msgid "User Name"
 msgstr "帐号"
@@ -20700,10 +20701,6 @@ msgstr ""
 msgid "Member"
 msgstr "用户"
 
-#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
-msgid "Username"
-msgstr "帐号"
-
 #: www/project/memberlist.php:51
 #, fuzzy
 msgid "Role(s)/Position(s)"
@@ -21031,7 +21028,7 @@ msgstr "添加的项目"
 msgid "Cumulative Projects"
 msgstr "累积的项目"
 
-#: www/reporting/index.php:37 www/stats/i18n.php:33
+#: www/reporting/index.php:37 www/stats/i18n.php:34
 msgid "Users"
 msgstr "用户"
 
@@ -21998,7 +21995,7 @@ msgid ""
 msgstr ""
 
 #: www/snippet/package.php:156 www/snippet/submit.php:123
-#: www/stats/i18n.php:33
+#: www/stats/i18n.php:34
 msgid "Language"
 msgstr "语言"
 
@@ -22279,11 +22276,11 @@ msgstr "网站统计图片"
 msgid "%1$s I18n Statistics: Languages Distributions"
 msgstr "语言文件"
 
-#: www/stats/i18n.php:53
+#: www/stats/i18n.php:54
 msgid "Total Non-English"
 msgstr "全部非英语语系"
 
-#: www/stats/i18n.php:58
+#: www/stats/i18n.php:59
 msgid ""
 "This is a list of the preferences that users have chosen in their user "
 "preferences; it does not include languages which are selected via cookies or "
@@ -23198,6 +23195,9 @@ msgstr "帐号"
 #, fuzzy
 msgid "That user does not exist."
 msgstr "查询不存在"
+
+#~ msgid "Username"
+#~ msgstr "帐号"
 
 #~ msgid "Error Getting %1$s"
 #~ msgstr "取得 %1$s 时错误"

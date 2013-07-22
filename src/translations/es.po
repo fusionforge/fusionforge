@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:39+0200\n"
+"POT-Creation-Date: 2013-07-22 10:49+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -8847,6 +8847,7 @@ msgstr "Propiedades de cuenta principal"
 #: plugins/globaldashboard/www/admin/edit_account_page.php:77
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
 #: plugins/globaldashboard/www/admin/manage_accounts.php:117
+#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
 msgid "User Name"
 msgstr "Nombre de Usuario"
 
@@ -20318,10 +20319,6 @@ msgstr ""
 msgid "Member"
 msgstr "Miembro"
 
-#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
-msgid "Username"
-msgstr "Nombre de usuario"
-
 #: www/project/memberlist.php:51
 msgid "Role(s)/Position(s)"
 msgstr "Cargo(s)/Posición(es)"
@@ -20671,7 +20668,7 @@ msgstr "Proyectos añadidos"
 msgid "Cumulative Projects"
 msgstr "Proyectos acumulados"
 
-#: www/reporting/index.php:37 www/stats/i18n.php:33
+#: www/reporting/index.php:37 www/stats/i18n.php:34
 msgid "Users"
 msgstr "Usuarios"
 
@@ -21658,7 +21655,7 @@ msgstr ""
 "completamente nuevo."
 
 #: www/snippet/package.php:156 www/snippet/submit.php:123
-#: www/stats/i18n.php:33
+#: www/stats/i18n.php:34
 msgid "Language"
 msgstr "Lenguage"
 
@@ -21946,11 +21943,11 @@ msgstr "GRÁFICOS DEL SITIO"
 msgid "%1$s I18n Statistics: Languages Distributions"
 msgstr "%1$s I18n estadísticas: Distribución por lenguages"
 
-#: www/stats/i18n.php:53
+#: www/stats/i18n.php:54
 msgid "Total Non-English"
 msgstr "Total no Inglés"
 
-#: www/stats/i18n.php:58
+#: www/stats/i18n.php:59
 msgid ""
 "This is a list of the preferences that users have chosen in their user "
 "preferences; it does not include languages which are selected via cookies or "
@@ -22834,6 +22831,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #: www/users:74
 msgid "That user does not exist."
 msgstr "El usuario no existe"
+
+#~ msgid "Username"
+#~ msgstr "Nombre de usuario"
 
 #~ msgid "Error - you can't vote for inactive survey"
 #~ msgstr "Error - no puede votar en una encuesta inactiva"

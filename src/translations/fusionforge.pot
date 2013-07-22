@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:41+0200\n"
+"POT-Creation-Date: 2013-07-22 10:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -8360,6 +8360,7 @@ msgstr ""
 #: plugins/globaldashboard/www/admin/edit_account_page.php:77
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
 #: plugins/globaldashboard/www/admin/manage_accounts.php:117
+#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
 msgid "User Name"
 msgstr ""
 
@@ -19092,10 +19093,6 @@ msgstr ""
 msgid "Member"
 msgstr ""
 
-#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
-msgid "Username"
-msgstr ""
-
 #: www/project/memberlist.php:51
 msgid "Role(s)/Position(s)"
 msgstr ""
@@ -19383,7 +19380,7 @@ msgstr ""
 msgid "Cumulative Projects"
 msgstr ""
 
-#: www/reporting/index.php:37 www/stats/i18n.php:33
+#: www/reporting/index.php:37 www/stats/i18n.php:34
 msgid "Users"
 msgstr ""
 
@@ -20295,7 +20292,7 @@ msgid ""
 msgstr ""
 
 #: www/snippet/package.php:156 www/snippet/submit.php:123
-#: www/stats/i18n.php:33
+#: www/stats/i18n.php:34
 msgid "Language"
 msgstr ""
 
@@ -20571,11 +20568,11 @@ msgstr ""
 msgid "%1$s I18n Statistics: Languages Distributions"
 msgstr ""
 
-#: www/stats/i18n.php:53
+#: www/stats/i18n.php:54
 msgid "Total Non-English"
 msgstr ""
 
-#: www/stats/i18n.php:58
+#: www/stats/i18n.php:59
 msgid ""
 "This is a list of the preferences that users have chosen in their user "
 "preferences; it does not include languages which are selected via cookies or "
