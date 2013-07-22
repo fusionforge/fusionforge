@@ -38,14 +38,13 @@ if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
 	exit;
 }
 
-Function  showResultComments($result) {
-	global $survey_id;
+function showResultComments($result) {
 
 	$rows  =  db_numrows($result);
 	$cols  =  db_numfields($result);
 	echo "<h3>$rows Found</h3>";
 
-	echo  "<table border=\"0\">\n";
+	echo  "<table>\n";
 	/*  Create  the  headers  */
 	echo "<tr class=\"tableheading\">\n";
 
@@ -63,13 +62,13 @@ Function  showResultComments($result) {
 
 		echo "</tr>";
 	}
-	echo "</table>"; //</td></tr></table>";
+	echo "</table>";
 }
 
 $result=db_query_params ('SELECT question FROM survey_questions WHERE question_id=$1',
 			 array($question_id));
 echo "<h2>Question: ".db_result($result,0,"question")."</h2>";
-echo "<p>&nbsp;</p>";
+echo "<p></p>";
 
 $result=db_query_params ('SELECT DISTINCT response FROM survey_responses WHERE survey_id=$1 AND question_id=$2 AND group_id=$3',
 			 array($survey_id,
