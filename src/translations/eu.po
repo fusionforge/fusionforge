@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:46+0200\n"
+"POT-Creation-Date: 2013-07-22 15:06+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -465,7 +465,8 @@ msgstr ""
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:632
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:634
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/lostlogin.php:84
-#: www/account/register.php:207 www/export/rssAboTask.php:142
+#: www/account/register.php:207 www/admin/approve-pending.php:194
+#: www/admin/database.php:162 www/export/rssAboTask.php:142
 #: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
 #: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
 #: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
@@ -1676,6 +1677,7 @@ msgstr ""
 #: www/account/verify.php:76 www/account/verify.php:78
 #: www/account/verify.php:86 www/activity/index.php:179
 #: www/activity/index.php:180 www/activity/index.php:181
+#: www/admin/groupedit.php:108 www/admin/groupedit.php:171
 #: www/admin/massmail.php:94 www/admin/massmail.php:113
 #: www/admin/massmail.php:116 www/admin/massmail.php:142
 #: www/admin/useredit.php:130 www/admin/useredit.php:139
@@ -14776,8 +14778,9 @@ msgstr ""
 msgid "Edit the %ss Table"
 msgstr "Multzoa edituatu"
 
-#: www/admin/approve-pending.php:47 www/project/admin/tools.php:34
-msgid "Error creating group object"
+#: www/admin/approve-pending.php:47 www/snapshots.php:39 www/tarballs.php:40
+#, fuzzy
+msgid "Error creating group"
 msgstr "Akatsa taldea sortzen"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:144
@@ -14820,8 +14823,8 @@ msgstr "[Proiektuen xehetasunak aldatu]"
 msgid " or "
 msgstr ""
 
-#: www/admin/approve-pending.php:139 www/admin/groupedit.php:100
-#: www/admin/useredit.php:276 www/admin/useredit.php:307
+#: www/admin/approve-pending.php:139 www/admin/useredit.php:276
+#: www/admin/useredit.php:307
 msgid "[Project Admin]"
 msgstr "[Proiektuaren administraria]"
 
@@ -14877,10 +14880,11 @@ msgstr "Postontzia:"
 msgid "HTTP Domain:"
 msgstr "HTTP domeinua:"
 
-#: www/admin/approve-pending.php:194 www/admin/groupedit.php:171
-#, fuzzy
-msgid "Unix Project Name:"
-msgstr "Azpiproiektuaren izen berria"
+#: www/admin/approve-pending.php:194 www/admin/database.php:162
+#: www/admin/groupedit.php:171 www/admin/vhost.php:123
+#: www/register/index.php:204
+msgid "Project Unix Name"
+msgstr "Egitasmoaren Unix izena"
 
 #: www/admin/approve-pending.php:196
 msgid "Submitted Description:"
@@ -14985,11 +14989,6 @@ msgstr "Mota honetako datu basea erakusten:"
 #: www/admin/database.php:155
 msgid "Add an already active database"
 msgstr "Aktibatutako datu basea gehitu"
-
-#: www/admin/database.php:162
-#, fuzzy
-msgid "Project Unix Name:"
-msgstr "Azpiproiektuaren izen berria"
 
 #: www/admin/globalroledelete.php:43
 msgid "You can only delete a global role from here."
@@ -15121,6 +15120,10 @@ msgstr "Posta elektronikoa bidali zaizu argibideekin"
 #, fuzzy
 msgid "Site Admin: Project Info for "
 msgstr "Webgunearen administrazioa: taldearen informazioa"
+
+#: www/admin/groupedit.php:100
+msgid "Project Admin"
+msgstr "Proiektuen administrariaAdminitrador de Projectos"
 
 #: www/admin/groupedit.php:101
 msgid "Permanently Delete Project"
@@ -16141,10 +16144,6 @@ msgstr "Host birtualaren administrazioa"
 #: www/admin/vhost.php:118 www/admin/vhost.php:133
 msgid "Add Virtual Host"
 msgstr "Virtual Host gehitu"
-
-#: www/admin/vhost.php:123 www/register/index.php:204
-msgid "Project Unix Name"
-msgstr "Egitasmoaren Unix izena"
 
 #: www/admin/vhost.php:128
 msgid "Virtual Host Name"
@@ -20465,6 +20464,10 @@ msgstr ""
 msgid "Shared role (can be referenced by other projects)"
 msgstr ""
 
+#: www/project/admin/tools.php:34
+msgid "Error creating group object"
+msgstr "Akatsa taldea sortzen"
+
 #: www/project/admin/tools.php:97
 msgid "At least one plugin does not initialize correctly"
 msgstr ""
@@ -21660,11 +21663,6 @@ msgstr "Posta elektronikoa"
 #: www/sendmessage.php:158
 msgid "Send Message"
 msgstr "Mezua bidali"
-
-#: www/snapshots.php:39 www/tarballs.php:40
-#, fuzzy
-msgid "Error creating group"
-msgstr "Akatsa taldea sortzen"
 
 #: www/snippet/add_snippet_to_package.php:51 www/snippet/snippet_utils.php:131
 msgid "Submit A New Snippet"
@@ -23203,6 +23201,14 @@ msgid "No User Name Provided"
 msgstr "Ez da erabiltzaile-izenik eman"
 
 #, fuzzy
+#~ msgid "Unix Project Name:"
+#~ msgstr "Azpiproiektuaren izen berria"
+
+#, fuzzy
+#~ msgid "Project Unix Name:"
+#~ msgstr "Azpiproiektuaren izen berria"
+
+#, fuzzy
 #~ msgid "Tracker:"
 #~ msgstr "Erregistroa"
 
@@ -23562,9 +23568,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #~ msgstr ""
 #~ "%s administratzeko taldeak zure proposamena aztertuko du orain. "
 #~ "Erabakiaren berri emango zaizu."
-
-#~ msgid "Project Admin"
-#~ msgstr "Proiektuen administrariaAdminitrador de Projectos"
 
 #~ msgid "%s Account Registration"
 #~ msgstr "Kontu bat erregistratzeko %s -n"

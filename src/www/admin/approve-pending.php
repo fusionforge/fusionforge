@@ -44,7 +44,7 @@ function activate_group($group_id) {
 	$group = group_get_object($group_id);
 
 	if (!$group || !is_object($group)) {
-		$error_msg .= _('Error creating group object');
+		$error_msg .= _('Error creating group');
 		return false;
 	} elseif ($group->isError()) {
 		$error_msg .= $group->getErrorMessage();
@@ -191,7 +191,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	// ########################## OTHER INFO
 
 //	print "<p><strong>" ._('Other Information')."</strong></p>";
-	print "<tr><td>" ._('Unix Project Name:'). "</td><td>".$row_grp['unix_group_name']."</td></tr>";
+	print "<tr><td>" ._('Project Unix Name') . _(': '). "</td><td>".$row_grp['unix_group_name']."</td></tr>";
 
 	print "<tr><td>" ._('Submitted Description:'). "</td><td><blockquote>".$row_grp['short_description']."</blockquote></td></tr>";
 

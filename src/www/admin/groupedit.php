@@ -97,15 +97,15 @@ $title = _('Site Admin: Project Info for ') . $group->getPublicName();
 site_admin_header(array('title'=>$title));
 ?>
 
-<h2><?php echo util_make_link("/project/admin/?group_id=$group_id", _('[Project Admin]')); ?></h2>
+<h2><?php echo util_make_link("/project/admin/?group_id=$group_id", _('Project Admin')); ?></h2>
 <h2><?php echo util_make_link("/admin/groupdelete.php?group_id=$group_id", _('Permanently Delete Project')); ?></h2>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 
-<table>
+<table class="infotable">
 <tr>
 <td>
-<?php echo _('Status') ?>
+<?php echo _('Status')._(':'); ?>
 </td>
 <td>
 <?php	// PLEASE DONT TRANSLATE THIS, THIS IS DATABASE INFO THAT CANT BE DIFFERENT AMONG LANGUAGES
@@ -168,7 +168,7 @@ printf(_('With PFO-RBAC, the “is_public” property is gone. Instead, to make 
 
 <tr>
 <td>
-<?php echo _('Unix Project Name:'); ?>
+<?php echo _('Project Unix Name')._(':'); ?>
 </td>
 <td>
 <?php echo $group->getUnixName(); ?>
@@ -227,7 +227,7 @@ if ($group->usesSCM()) {
 
 <?php
 
-echo show_grouphistory($group->getID());
+show_grouphistory($group->getID());
 
 site_admin_footer(array());
 

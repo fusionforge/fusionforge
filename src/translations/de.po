@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:46+0200\n"
+"POT-Creation-Date: 2013-07-22 15:06+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -464,7 +464,8 @@ msgstr "Projekt"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:632
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:634
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/lostlogin.php:84
-#: www/account/register.php:207 www/export/rssAboTask.php:142
+#: www/account/register.php:207 www/admin/approve-pending.php:194
+#: www/admin/database.php:162 www/export/rssAboTask.php:142
 #: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
 #: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
 #: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
@@ -1686,6 +1687,7 @@ msgstr "Startdatum"
 #: www/account/verify.php:76 www/account/verify.php:78
 #: www/account/verify.php:86 www/activity/index.php:179
 #: www/activity/index.php:180 www/activity/index.php:181
+#: www/admin/groupedit.php:108 www/admin/groupedit.php:171
 #: www/admin/massmail.php:94 www/admin/massmail.php:113
 #: www/admin/massmail.php:116 www/admin/massmail.php:142
 #: www/admin/useredit.php:130 www/admin/useredit.php:139
@@ -15006,9 +15008,9 @@ msgstr "Neuen hinzufügen"
 msgid "Edit the %ss Table"
 msgstr "Editieren Sie die %ss Tabelle"
 
-#: www/admin/approve-pending.php:47 www/project/admin/tools.php:34
-msgid "Error creating group object"
-msgstr "Fehler beim Erstellen des Gruppen-Objektes"
+#: www/admin/approve-pending.php:47 www/snapshots.php:39 www/tarballs.php:40
+msgid "Error creating group"
+msgstr "Fehler beim Erstellen einer Gruppe"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:144
 #, fuzzy, php-format
@@ -15049,8 +15051,8 @@ msgstr "[Bearbeite Projekt-Details]"
 msgid " or "
 msgstr ""
 
-#: www/admin/approve-pending.php:139 www/admin/groupedit.php:100
-#: www/admin/useredit.php:276 www/admin/useredit.php:307
+#: www/admin/approve-pending.php:139 www/admin/useredit.php:276
+#: www/admin/useredit.php:307
 msgid "[Project Admin]"
 msgstr "[Projekt-Admin]"
 
@@ -15106,10 +15108,11 @@ msgstr "Home-Bereich:"
 msgid "HTTP Domain:"
 msgstr "HTTP Domäne:"
 
-#: www/admin/approve-pending.php:194 www/admin/groupedit.php:171
-#, fuzzy
-msgid "Unix Project Name:"
-msgstr "Projektname"
+#: www/admin/approve-pending.php:194 www/admin/database.php:162
+#: www/admin/groupedit.php:171 www/admin/vhost.php:123
+#: www/register/index.php:204
+msgid "Project Unix Name"
+msgstr "Unix-Name des Projektes"
 
 #: www/admin/approve-pending.php:196
 msgid "Submitted Description:"
@@ -15212,11 +15215,6 @@ msgstr "Zeige Datenbanken vom Typ:"
 #: www/admin/database.php:155
 msgid "Add an already active database"
 msgstr "Füge eine bereits aktive Datenbank hinzu"
-
-#: www/admin/database.php:162
-#, fuzzy
-msgid "Project Unix Name:"
-msgstr "Projektname"
 
 #: www/admin/globalroledelete.php:43
 msgid "You can only delete a global role from here."
@@ -15344,6 +15342,10 @@ msgstr "Email mit Anweisungen abgeschickt"
 #, fuzzy
 msgid "Site Admin: Project Info for "
 msgstr "Seite Administrator: Gruppen-Informationen"
+
+#: www/admin/groupedit.php:100
+msgid "Project Admin"
+msgstr "Projekt-Administrator"
 
 #: www/admin/groupedit.php:101
 msgid "Permanently Delete Project"
@@ -16367,10 +16369,6 @@ msgstr "Administration virtueller Hosts"
 #: www/admin/vhost.php:118 www/admin/vhost.php:133
 msgid "Add Virtual Host"
 msgstr "Virtuellen Host hinzufügen"
-
-#: www/admin/vhost.php:123 www/register/index.php:204
-msgid "Project Unix Name"
-msgstr "Unix-Name des Projektes"
 
 #: www/admin/vhost.php:128
 msgid "Virtual Host Name"
@@ -20837,6 +20835,10 @@ msgstr ""
 msgid "Shared role (can be referenced by other projects)"
 msgstr "Das Kennzeichen ist dem Projekt zugeordnet worden."
 
+#: www/project/admin/tools.php:34
+msgid "Error creating group object"
+msgstr "Fehler beim Erstellen des Gruppen-Objektes"
+
 #: www/project/admin/tools.php:97
 msgid "At least one plugin does not initialize correctly"
 msgstr ""
@@ -22064,10 +22066,6 @@ msgstr "E-Mail-Adresse"
 #: www/sendmessage.php:158
 msgid "Send Message"
 msgstr "Sende Nachricht"
-
-#: www/snapshots.php:39 www/tarballs.php:40
-msgid "Error creating group"
-msgstr "Fehler beim Erstellen einer Gruppe"
 
 #: www/snippet/add_snippet_to_package.php:51 www/snippet/snippet_utils.php:131
 msgid "Submit A New Snippet"
@@ -23617,6 +23615,14 @@ msgstr "Aktualisierung nicht möglich"
 msgid "No User Name Provided"
 msgstr "Kein Benutzername angegeben"
 
+#, fuzzy
+#~ msgid "Unix Project Name:"
+#~ msgstr "Projektname"
+
+#, fuzzy
+#~ msgid "Project Unix Name:"
+#~ msgstr "Projektname"
+
 #~ msgid "Create a new %1$s below:"
 #~ msgstr "Erzeuge unten ein(e) neue(s) %1$s:"
 
@@ -24270,9 +24276,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "Read"
 #~ msgstr "Lesen"
-
-#~ msgid "Project Admin"
-#~ msgstr "Projekt-Administrator"
 
 #~ msgid "Error This Project Has Turned Off SCM"
 #~ msgstr "Fehler, Dieses Projekt hat SCM ausgeschaltet"

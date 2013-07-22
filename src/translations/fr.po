@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:46+0200\n"
+"POT-Creation-Date: 2013-07-22 15:06+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -430,7 +430,8 @@ msgstr "Projet"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:632
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:634
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/lostlogin.php:84
-#: www/account/register.php:207 www/export/rssAboTask.php:142
+#: www/account/register.php:207 www/admin/approve-pending.php:194
+#: www/admin/database.php:162 www/export/rssAboTask.php:142
 #: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
 #: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
 #: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
@@ -1586,6 +1587,7 @@ msgstr "Date de début"
 #: www/account/verify.php:76 www/account/verify.php:78
 #: www/account/verify.php:86 www/activity/index.php:179
 #: www/activity/index.php:180 www/activity/index.php:181
+#: www/admin/groupedit.php:108 www/admin/groupedit.php:171
 #: www/admin/massmail.php:94 www/admin/massmail.php:113
 #: www/admin/massmail.php:116 www/admin/massmail.php:142
 #: www/admin/useredit.php:130 www/admin/useredit.php:139
@@ -14517,8 +14519,8 @@ msgstr "ajouter nouveau"
 msgid "Edit the %ss Table"
 msgstr "Modifier la table : %s"
 
-#: www/admin/approve-pending.php:47 www/project/admin/tools.php:34
-msgid "Error creating group object"
+#: www/admin/approve-pending.php:47 www/snapshots.php:39 www/tarballs.php:40
+msgid "Error creating group"
 msgstr "Erreur lors de la création d'un objet groupe"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:144
@@ -14560,8 +14562,8 @@ msgstr "[Éditer les informations du projet]"
 msgid " or "
 msgstr ""
 
-#: www/admin/approve-pending.php:139 www/admin/groupedit.php:100
-#: www/admin/useredit.php:276 www/admin/useredit.php:307
+#: www/admin/approve-pending.php:139 www/admin/useredit.php:276
+#: www/admin/useredit.php:307
 msgid "[Project Admin]"
 msgstr "[Administration du projet]"
 
@@ -14616,9 +14618,11 @@ msgstr "Serveur shell :"
 msgid "HTTP Domain:"
 msgstr "Domaine HTTP :"
 
-#: www/admin/approve-pending.php:194 www/admin/groupedit.php:171
-msgid "Unix Project Name:"
-msgstr "Nom Unix du projet :"
+#: www/admin/approve-pending.php:194 www/admin/database.php:162
+#: www/admin/groupedit.php:171 www/admin/vhost.php:123
+#: www/register/index.php:204
+msgid "Project Unix Name"
+msgstr "Nom Unix du projet"
 
 #: www/admin/approve-pending.php:196
 msgid "Submitted Description:"
@@ -14719,10 +14723,6 @@ msgstr "Voir les base de données du type :"
 #: www/admin/database.php:155
 msgid "Add an already active database"
 msgstr "Ajouter une base de données déjà active"
-
-#: www/admin/database.php:162
-msgid "Project Unix Name:"
-msgstr "Nom Unix du projet :"
 
 #: www/admin/globalroledelete.php:43
 msgid "You can only delete a global role from here."
@@ -14841,6 +14841,10 @@ msgstr "Courrier contenant les instructions envoyé"
 #: www/admin/groupedit.php:96
 msgid "Site Admin: Project Info for "
 msgstr "Administration du site : Informations sur le projet "
+
+#: www/admin/groupedit.php:100
+msgid "Project Admin"
+msgstr "Administration du projet"
 
 #: www/admin/groupedit.php:101
 msgid "Permanently Delete Project"
@@ -15825,10 +15829,6 @@ msgstr "Administration de l'hôte virtuel"
 #: www/admin/vhost.php:118 www/admin/vhost.php:133
 msgid "Add Virtual Host"
 msgstr "Ajouter un hôte virtuel"
-
-#: www/admin/vhost.php:123 www/register/index.php:204
-msgid "Project Unix Name"
-msgstr "Nom Unix du projet"
 
 #: www/admin/vhost.php:128
 msgid "Virtual Host Name"
@@ -20201,6 +20201,10 @@ msgstr ""
 msgid "Shared role (can be referenced by other projects)"
 msgstr "Rôle partagé (peut être référencé par d'autres projets)"
 
+#: www/project/admin/tools.php:34
+msgid "Error creating group object"
+msgstr "Erreur lors de la création d'un objet groupe"
+
 #: www/project/admin/tools.php:97
 msgid "At least one plugin does not initialize correctly"
 msgstr "Au moins un greffon ne s'est pas initialisé correctement"
@@ -21421,10 +21425,6 @@ msgstr "Votre adresse e-mail"
 #: www/sendmessage.php:158
 msgid "Send Message"
 msgstr "Envoyer message"
-
-#: www/snapshots.php:39 www/tarballs.php:40
-msgid "Error creating group"
-msgstr "Erreur lors de la création d'un objet groupe"
 
 #: www/snippet/add_snippet_to_package.php:51 www/snippet/snippet_utils.php:131
 msgid "Submit A New Snippet"
@@ -22947,6 +22947,12 @@ msgstr "Erreur de mise à jour"
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
 
+#~ msgid "Unix Project Name:"
+#~ msgstr "Nom Unix du projet :"
+
+#~ msgid "Project Unix Name:"
+#~ msgstr "Nom Unix du projet :"
+
 #~ msgid "Create a new %1$s below:"
 #~ msgstr "Créer un(e) nouveau(elle) %1$s ci-dessous :"
 
@@ -23831,9 +23837,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "File Release System Privileges"
 #~ msgstr "Fichiers"
-
-#~ msgid "Project Admin"
-#~ msgstr "Administration du projet"
 
 #~ msgid "Web File System Privileges (WebDAV)"
 #~ msgstr "Privilèges des fichiers (WebDAV)"

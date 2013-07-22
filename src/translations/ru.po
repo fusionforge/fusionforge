@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:46+0200\n"
+"POT-Creation-Date: 2013-07-22 15:06+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -466,7 +466,8 @@ msgstr "Проект"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:632
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:634
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/lostlogin.php:84
-#: www/account/register.php:207 www/export/rssAboTask.php:142
+#: www/account/register.php:207 www/admin/approve-pending.php:194
+#: www/admin/database.php:162 www/export/rssAboTask.php:142
 #: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
 #: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
 #: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
@@ -1687,6 +1688,7 @@ msgstr "Начальная дата"
 #: www/account/verify.php:76 www/account/verify.php:78
 #: www/account/verify.php:86 www/activity/index.php:179
 #: www/activity/index.php:180 www/activity/index.php:181
+#: www/admin/groupedit.php:108 www/admin/groupedit.php:171
 #: www/admin/massmail.php:94 www/admin/massmail.php:113
 #: www/admin/massmail.php:116 www/admin/massmail.php:142
 #: www/admin/useredit.php:130 www/admin/useredit.php:139
@@ -15115,8 +15117,8 @@ msgstr "добавить"
 msgid "Edit the %ss Table"
 msgstr "Редактировать таблицу %1$ss"
 
-#: www/admin/approve-pending.php:47 www/project/admin/tools.php:34
-msgid "Error creating group object"
+#: www/admin/approve-pending.php:47 www/snapshots.php:39 www/tarballs.php:40
+msgid "Error creating group"
 msgstr "Ошибка создания группы"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:144
@@ -15159,8 +15161,8 @@ msgstr "[Редактирование деталей проекта]"
 msgid " or "
 msgstr ""
 
-#: www/admin/approve-pending.php:139 www/admin/groupedit.php:100
-#: www/admin/useredit.php:276 www/admin/useredit.php:307
+#: www/admin/approve-pending.php:139 www/admin/useredit.php:276
+#: www/admin/useredit.php:307
 msgid "[Project Admin]"
 msgstr "[Администратор проекта]"
 
@@ -15216,9 +15218,11 @@ msgstr "Домашняя область:"
 msgid "HTTP Domain:"
 msgstr "Домен HTTP:"
 
-#: www/admin/approve-pending.php:194 www/admin/groupedit.php:171
+#: www/admin/approve-pending.php:194 www/admin/database.php:162
+#: www/admin/groupedit.php:171 www/admin/vhost.php:123
+#: www/register/index.php:204
 #, fuzzy
-msgid "Unix Project Name:"
+msgid "Project Unix Name"
 msgstr "Название проекта"
 
 #: www/admin/approve-pending.php:196
@@ -15323,11 +15327,6 @@ msgstr "Отображать типы баз:"
 #: www/admin/database.php:155
 msgid "Add an already active database"
 msgstr "Добавить активную базу данных"
-
-#: www/admin/database.php:162
-#, fuzzy
-msgid "Project Unix Name:"
-msgstr "Название проекта"
 
 #: www/admin/globalroledelete.php:43
 msgid "You can only delete a global role from here."
@@ -15459,6 +15458,10 @@ msgstr "На емайл высланы инструкции"
 #, fuzzy
 msgid "Site Admin: Project Info for "
 msgstr "Администрирование сайта: Информация о группе"
+
+#: www/admin/groupedit.php:100
+msgid "Project Admin"
+msgstr "Администратор проекта"
 
 #: www/admin/groupedit.php:101
 msgid "Permanently Delete Project"
@@ -16494,11 +16497,6 @@ msgstr "Администрирование виртуальных хостов"
 #: www/admin/vhost.php:118 www/admin/vhost.php:133
 msgid "Add Virtual Host"
 msgstr "Добавить виртуальный хост"
-
-#: www/admin/vhost.php:123 www/register/index.php:204
-#, fuzzy
-msgid "Project Unix Name"
-msgstr "Название проекта"
 
 #: www/admin/vhost.php:128
 msgid "Virtual Host Name"
@@ -20905,6 +20903,10 @@ msgstr ""
 msgid "Shared role (can be referenced by other projects)"
 msgstr "Выделенный объект не имеет пакетов"
 
+#: www/project/admin/tools.php:34
+msgid "Error creating group object"
+msgstr "Ошибка создания группы"
+
 #: www/project/admin/tools.php:97
 msgid "At least one plugin does not initialize correctly"
 msgstr ""
@@ -22132,10 +22134,6 @@ msgstr "Ваш Email адрес"
 #: www/sendmessage.php:158
 msgid "Send Message"
 msgstr "Отправить сообщение"
-
-#: www/snapshots.php:39 www/tarballs.php:40
-msgid "Error creating group"
-msgstr "Ошибка создания группы"
 
 #: www/snippet/add_snippet_to_package.php:51 www/snippet/snippet_utils.php:131
 msgid "Submit A New Snippet"
@@ -23679,6 +23677,14 @@ msgstr "Глобальное изменение"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Имя участника обязательно"
+
+#, fuzzy
+#~ msgid "Unix Project Name:"
+#~ msgstr "Название проекта"
+
+#, fuzzy
+#~ msgid "Project Unix Name:"
+#~ msgstr "Название проекта"
 
 #~ msgid "Start"
 #~ msgstr "Начато"
@@ -25316,9 +25322,6 @@ msgstr "Имя участника обязательно"
 #, fuzzy
 #~ msgid "Could not update SSH authorized keys: %s"
 #~ msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
-
-#~ msgid "Project Admin"
-#~ msgstr "Администратор проекта"
 
 #, fuzzy
 #~ msgid "Submitted by: %s"

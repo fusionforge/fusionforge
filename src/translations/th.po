@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:46+0200\n"
+"POT-Creation-Date: 2013-07-22 15:06+0200\n"
 "PO-Revision-Date: 2009-10-06 16:32+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -423,7 +423,8 @@ msgstr ""
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:632
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:634
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/lostlogin.php:84
-#: www/account/register.php:207 www/export/rssAboTask.php:142
+#: www/account/register.php:207 www/admin/approve-pending.php:194
+#: www/admin/database.php:162 www/export/rssAboTask.php:142
 #: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
 #: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
 #: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
@@ -1560,6 +1561,7 @@ msgstr ""
 #: www/account/verify.php:76 www/account/verify.php:78
 #: www/account/verify.php:86 www/activity/index.php:179
 #: www/activity/index.php:180 www/activity/index.php:181
+#: www/admin/groupedit.php:108 www/admin/groupedit.php:171
 #: www/admin/massmail.php:94 www/admin/massmail.php:113
 #: www/admin/massmail.php:116 www/admin/massmail.php:142
 #: www/admin/useredit.php:130 www/admin/useredit.php:139
@@ -13556,8 +13558,8 @@ msgstr ""
 msgid "Edit the %ss Table"
 msgstr ""
 
-#: www/admin/approve-pending.php:47 www/project/admin/tools.php:34
-msgid "Error creating group object"
+#: www/admin/approve-pending.php:47 www/snapshots.php:39 www/tarballs.php:40
+msgid "Error creating group"
 msgstr ""
 
 #: www/admin/approve-pending.php:55 www/register/index.php:144
@@ -13599,8 +13601,8 @@ msgstr ""
 msgid " or "
 msgstr ""
 
-#: www/admin/approve-pending.php:139 www/admin/groupedit.php:100
-#: www/admin/useredit.php:276 www/admin/useredit.php:307
+#: www/admin/approve-pending.php:139 www/admin/useredit.php:276
+#: www/admin/useredit.php:307
 msgid "[Project Admin]"
 msgstr ""
 
@@ -13653,8 +13655,10 @@ msgstr ""
 msgid "HTTP Domain:"
 msgstr ""
 
-#: www/admin/approve-pending.php:194 www/admin/groupedit.php:171
-msgid "Unix Project Name:"
+#: www/admin/approve-pending.php:194 www/admin/database.php:162
+#: www/admin/groupedit.php:171 www/admin/vhost.php:123
+#: www/register/index.php:204
+msgid "Project Unix Name"
 msgstr ""
 
 #: www/admin/approve-pending.php:196
@@ -13754,10 +13758,6 @@ msgstr ""
 
 #: www/admin/database.php:155
 msgid "Add an already active database"
-msgstr ""
-
-#: www/admin/database.php:162
-msgid "Project Unix Name:"
 msgstr ""
 
 #: www/admin/globalroledelete.php:43
@@ -13874,6 +13874,10 @@ msgstr ""
 
 #: www/admin/groupedit.php:96
 msgid "Site Admin: Project Info for "
+msgstr ""
+
+#: www/admin/groupedit.php:100
+msgid "Project Admin"
 msgstr ""
 
 #: www/admin/groupedit.php:101
@@ -14809,10 +14813,6 @@ msgstr ""
 
 #: www/admin/vhost.php:118 www/admin/vhost.php:133
 msgid "Add Virtual Host"
-msgstr ""
-
-#: www/admin/vhost.php:123 www/register/index.php:204
-msgid "Project Unix Name"
 msgstr ""
 
 #: www/admin/vhost.php:128
@@ -18813,6 +18813,10 @@ msgstr ""
 msgid "Shared role (can be referenced by other projects)"
 msgstr ""
 
+#: www/project/admin/tools.php:34
+msgid "Error creating group object"
+msgstr ""
+
 #: www/project/admin/tools.php:97
 msgid "At least one plugin does not initialize correctly"
 msgstr ""
@@ -19918,10 +19922,6 @@ msgstr ""
 
 #: www/sendmessage.php:158
 msgid "Send Message"
-msgstr ""
-
-#: www/snapshots.php:39 www/tarballs.php:40
-msgid "Error creating group"
 msgstr ""
 
 #: www/snippet/add_snippet_to_package.php:51 www/snippet/snippet_utils.php:131

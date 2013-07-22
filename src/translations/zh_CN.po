@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:46+0200\n"
+"POT-Creation-Date: 2013-07-22 15:06+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -466,7 +466,8 @@ msgstr "项目"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:632
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:634
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/lostlogin.php:84
-#: www/account/register.php:207 www/export/rssAboTask.php:142
+#: www/account/register.php:207 www/admin/approve-pending.php:194
+#: www/admin/database.php:162 www/export/rssAboTask.php:142
 #: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
 #: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
 #: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
@@ -1681,6 +1682,7 @@ msgstr "开启日期"
 #: www/account/verify.php:76 www/account/verify.php:78
 #: www/account/verify.php:86 www/activity/index.php:179
 #: www/activity/index.php:180 www/activity/index.php:181
+#: www/admin/groupedit.php:108 www/admin/groupedit.php:171
 #: www/admin/massmail.php:94 www/admin/massmail.php:113
 #: www/admin/massmail.php:116 www/admin/massmail.php:142
 #: www/admin/useredit.php:130 www/admin/useredit.php:139
@@ -14772,8 +14774,9 @@ msgstr "add new"
 msgid "Edit the %ss Table"
 msgstr "编辑 %1$s 表格"
 
-#: www/admin/approve-pending.php:47 www/project/admin/tools.php:34
-msgid "Error creating group object"
+#: www/admin/approve-pending.php:47 www/snapshots.php:39 www/tarballs.php:40
+#, fuzzy
+msgid "Error creating group"
 msgstr "创建群组对象时发生错误"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:144
@@ -14816,8 +14819,8 @@ msgstr "[编辑项目细节]"
 msgid " or "
 msgstr ""
 
-#: www/admin/approve-pending.php:139 www/admin/groupedit.php:100
-#: www/admin/useredit.php:276 www/admin/useredit.php:307
+#: www/admin/approve-pending.php:139 www/admin/useredit.php:276
+#: www/admin/useredit.php:307
 msgid "[Project Admin]"
 msgstr "[项目管理]"
 
@@ -14873,9 +14876,11 @@ msgstr "Home Box:"
 msgid "HTTP Domain:"
 msgstr "HTTP域名："
 
-#: www/admin/approve-pending.php:194 www/admin/groupedit.php:171
+#: www/admin/approve-pending.php:194 www/admin/database.php:162
+#: www/admin/groupedit.php:171 www/admin/vhost.php:123
+#: www/register/index.php:204
 #, fuzzy
-msgid "Unix Project Name:"
+msgid "Project Unix Name"
 msgstr "新项目名称"
 
 #: www/admin/approve-pending.php:196
@@ -14981,11 +14986,6 @@ msgstr "显示数据库类型："
 #: www/admin/database.php:155
 msgid "Add an already active database"
 msgstr "添加一个已经启用中的数据库"
-
-#: www/admin/database.php:162
-#, fuzzy
-msgid "Project Unix Name:"
-msgstr "新项目名称"
 
 #: www/admin/globalroledelete.php:43
 msgid "You can only delete a global role from here."
@@ -15117,6 +15117,10 @@ msgstr "已提交说明 Email"
 #, fuzzy
 msgid "Site Admin: Project Info for "
 msgstr "网站管理：群组信息"
+
+#: www/admin/groupedit.php:100
+msgid "Project Admin"
+msgstr "项目管理"
 
 #: www/admin/groupedit.php:101
 msgid "Permanently Delete Project"
@@ -16131,11 +16135,6 @@ msgstr "虚拟主机管理"
 #: www/admin/vhost.php:118 www/admin/vhost.php:133
 msgid "Add Virtual Host"
 msgstr "添加虚拟主机"
-
-#: www/admin/vhost.php:123 www/register/index.php:204
-#, fuzzy
-msgid "Project Unix Name"
-msgstr "新项目名称"
 
 #: www/admin/vhost.php:128
 msgid "Virtual Host Name"
@@ -20406,6 +20405,10 @@ msgstr ""
 msgid "Shared role (can be referenced by other projects)"
 msgstr "你已经是项目成员。"
 
+#: www/project/admin/tools.php:34
+msgid "Error creating group object"
+msgstr "创建群组对象时发生错误"
+
 #: www/project/admin/tools.php:97
 msgid "At least one plugin does not initialize correctly"
 msgstr ""
@@ -21610,11 +21613,6 @@ msgstr "您的 Email"
 #: www/sendmessage.php:158
 msgid "Send Message"
 msgstr "传送 Email"
-
-#: www/snapshots.php:39 www/tarballs.php:40
-#, fuzzy
-msgid "Error creating group"
-msgstr "创建群组对象时发生错误"
 
 #: www/snippet/add_snippet_to_package.php:51 www/snippet/snippet_utils.php:131
 msgid "Submit A New Snippet"
@@ -23142,6 +23140,14 @@ msgstr "大量更新"
 msgid "No User Name Provided"
 msgstr "帐号"
 
+#, fuzzy
+#~ msgid "Unix Project Name:"
+#~ msgstr "新项目名称"
+
+#, fuzzy
+#~ msgid "Project Unix Name:"
+#~ msgstr "新项目名称"
+
 #~ msgid "Start"
 #~ msgstr "开始"
 
@@ -23567,9 +23573,6 @@ msgstr "帐号"
 
 #~ msgid "Tech & Admin"
 #~ msgstr "技术&管理"
-
-#~ msgid "Project Admin"
-#~ msgstr "项目管理"
 
 #~ msgid "Enjoy the site."
 #~ msgstr "享用这个网站吧。"
