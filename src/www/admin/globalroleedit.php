@@ -26,6 +26,8 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 require_once $gfwww.'include/role_utils.php';
 
+site_admin_header(array('title'=>_('Site Admin')));
+
 $role_id = getIntFromRequest('role_id');
 $data = getStringFromRequest('data');
 
@@ -99,13 +101,13 @@ if (getStringFromRequest('adduser')) {
 		$u = user_get_object_by_name ($user_name) ;
 		if ($u && $u instanceof GFUser && !$u->isError()) {
 			if ($role->addUser ($u)) {
-				$feedback .= _('User added successfully') ;
+				$feedback .= _('User Added Successfully') ;
 			} else {
 				$error_msg .= _("Error while adding user to role") ;
 			}
 		}
 	} else {
-		$error_msg .= _("Can't add user to this type of role") ;
+		$error_msg .= _("Cannot add user to this type of role") ;
 	}
 }
 
@@ -130,12 +132,10 @@ if (getStringFromRequest('dormusers')) {
 			}
 		}
 	} else {
-		$error_msg .= _("Can't remove user from this type of role") ;
+		$error_msg .= _("Cannot remove user from this type of role") ;
 	}
 }
 
-
-site_admin_header(array('title'=>_('Site Admin')));
 
 if ($role instanceof RoleExplicit) {
 	$users = $role->getUsers () ;
@@ -146,7 +146,7 @@ if ($role instanceof RoleExplicit) {
 		<form action="'.util_make_url('/admin/globalroleedit.php').'" method="post">
 		<input type="hidden" name="role_id" value="'.$role_id.'" />
 		<table><thead><tr>
-			<th>'._('User name').'</th>
+			<th>'._('User Name').'</th>
 			<th>'._('Remove').'</th>
 		</tr></thead><tbody>';
 
@@ -194,16 +194,17 @@ if ($role instanceof RoleExplicit) {
 }
 
 echo '
+<p>
 <form action="'.util_make_url('/admin/globalroleedit.php').'" method="post">';
-echo '<input type="hidden" name="role_id" value="'.$role_id.'" />';
-
+echo '<input type="hidden" name="role_id" value="'.$role_id.'" />' ;
+		
 if ($role instanceof RoleExplicit) {
-	echo '<p><strong>'._('Role Name').'</strong><br /><input type="text" name="role_name" value="'.$role->getName().'" /></p>';
+	echo '<p><strong>'._('Role Name').'</strong><br /><input type="text" name="role_name" value="'.$role->getName().'"></p>';
 	echo '<input type="checkbox" name="public" value="1"' ;
 	if ($role->isPublic()) {
 		echo ' checked="checked"' ;
 	}
-	echo '/> '._('Public role (can be referenced by projects)');
+	echo '/> '._('Public role (can be referenced by projects)').'</p>' ;
 } else {
 	echo '<p><strong>'._('Role Name').'</strong><br />'.$role->getName().'</p>';
 }

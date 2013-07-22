@@ -124,10 +124,10 @@ site_admin_header(array('title'=>$title));
 <input type="hidden" name="action" value="update_user" />
 <input type="hidden" name="user_id" value="<?php print $user_id; ?>" />
 
-<table>
+<table class="infotable">
 <tr>
 <td>
-<?php echo _('User Id:'); ?>
+<?php echo _('User Id')._(':'); ?>
 </td>
 <td>
 <?php echo $u->getID(); ?>
@@ -136,7 +136,7 @@ site_admin_header(array('title'=>$title));
 
 <tr>
 <td>
-<?php echo _('User name:'); ?>
+<?php echo _('User Name')._(':'); ?>
 </td>
 <td>
 <?php echo $u->getUnixName(); ?>
@@ -145,7 +145,7 @@ site_admin_header(array('title'=>$title));
 
 <tr>
 <td>
-<?php echo _('Real name') . _(':'); ?>
+<?php echo _('Real Name')._(':'); ?>
 </td>
 <td>
 <?php echo $u->getRealName(); ?>

@@ -41,8 +41,8 @@ class PeopleHtmlSearchRenderer extends HtmlSearchRenderer {
 		$this->HtmlSearchRenderer(SEARCH__TYPE_IS_PEOPLE, $words, $isExact, $searchQuery);
 
 		$this->tableHeaders = array(
-			_('User name'),
-			_('Real name')
+			_('User Name'),
+			_('Real Name')
 		);
 	}
 

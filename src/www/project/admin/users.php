@@ -44,7 +44,7 @@ session_require_perm ('project_admin', $group_id) ;
 // get current information
 $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
-    exit_no_group();
+	exit_no_group();
 } elseif ($group->isError()) {
 	exit_error($group->getErrorMessage(),'admin');
 }
@@ -297,7 +297,7 @@ project_admin_header(array('title'=>sprintf(_('Members of %s'), $group->getPubli
 $members = $group->getUsers() ;
 
 echo '<table width="100%"><thead><tr>';
-echo '<th>'._('User name').'</th>';
+echo '<th>'._('User Name').'</th>';
 echo '<th>'._('Role').'</th>';
 echo '<th style="text-align:right">'._('Action').'</th>';
 echo '</tr></thead><tbody>';

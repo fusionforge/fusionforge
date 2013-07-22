@@ -60,8 +60,8 @@ print '<br /><em>('._('Updated Daily').')</em>
 
 $tableHeaders = array(
 	_('Rank'),
-	_('User name'),
-	_('Real name'),
+	_('User Name'),
+	_('Real Name'),
 	_('Rating'),
 	_('Last Rank'),
 	_('Change')

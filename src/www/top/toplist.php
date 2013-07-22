@@ -35,7 +35,7 @@ $stats = new Stats();
 if ($type == 'pageviews_proj') {
 	$res_top = $stats->getTopPageViews();
 	$title = sprintf(_('Top Weekly Project Pageviews at *.%1$s (from impressions of %2$s logo)'), forge_get_config('web_host'), forge_get_config ('forge_name'));
-	$column1 = _('Pageviews');
+	$column1 = _('Page Views');
 }
 else if ($type == 'forumposts_week') {
 	$res_top = $stats->getTopMessagesPosted();
@@ -50,7 +50,7 @@ else {
 }
 $HTML->header(array('title'=>$title));
 print '<p>'.util_make_link ('/top/','['._('View Other Top Categories').']').'</p>';
-$arr=array(_('Rank'),_('Project name'),"$column1");
+$arr=array(_('Rank'),_('Project Name'),"$column1");
 echo $HTML->listTableTop($arr);
 
 echo db_error();
@@ -74,7 +74,7 @@ while ($row_top = db_fetch_array($res_top)) {
 		continue;
 	}
 	$display_rank++;
-	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>&nbsp;&nbsp;'.$display_rank
+	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td class="align-right">'.$display_rank
 		.'</td><td>'.util_make_link_g (strtolower($row_top['unix_group_name']),@$row_top['group_id'],stripslashes($row_top['group_name']))
 		.'</td><td class="align-right">'.$row_top['items']
 		.'&nbsp;&nbsp;&nbsp;</td>'

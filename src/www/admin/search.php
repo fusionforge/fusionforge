@@ -69,9 +69,9 @@ if ($usersearch) {
 
 	if (db_numrows($result) >= 1) {
 		$title=array();
-		$title[]=_('ID');
-		$title[]=_('User name');
-		$title[]=_('Real name');
+		$title[]=_('Id');
+		$title[]=_('User Name');
+		$title[]=_('Real Name');
 		$title[]=_('Email');
 		$title[]=_('Member since');
 		$title[]=_('Status');
@@ -145,8 +145,8 @@ if (getStringFromRequest('groupsearch')) {
 		print '<p><strong>'.sprintf(ngettext('Group search with criteria <em>%s</em>: %d match', 'Group search with criteria <em>%s</em>: %d matches', count($rows)), $crit_desc, count($rows)).'</strong></p>';
 
 		$title=array();
-		$title[]=_('ID');
-		$title[]=_('Unix name');
+		$title[]=_('Id');
+		$title[]=_('Unix Name');
 		$title[]=_('Full Name');
 		$title[]=_('Registered');
 		$title[]=_('Status');

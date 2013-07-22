@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:57+0200\n"
+"POT-Creation-Date: 2013-07-22 12:14+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1659,7 +1659,8 @@ msgstr ""
 #: www/account/verify.php:76 www/account/verify.php:78
 #: www/account/verify.php:86 www/admin/massmail.php:94
 #: www/admin/massmail.php:113 www/admin/massmail.php:116
-#: www/admin/massmail.php:142 www/admin/useredit.php:148
+#: www/admin/massmail.php:142 www/admin/useredit.php:130
+#: www/admin/useredit.php:139 www/admin/useredit.php:148
 #: www/admin/useredit.php:157 www/admin/useredit.php:211
 #: www/frs/reporting/downloads.php:105 www/frs/reporting/downloads.php:107
 #: www/frs/reporting/downloads.php:109 www/pm/admin/index.php:211
@@ -2591,7 +2592,7 @@ msgstr "Разрешение не беше получено"
 msgid "Failed to find user %s"
 msgstr ""
 
-#: common/import/import_users.php:416
+#: common/import/import_users.php:416 www/admin/globalroleedit.php:104
 #, fuzzy
 msgid "User Added Successfully"
 msgstr "Обновено успешно"
@@ -2968,7 +2969,7 @@ msgid "Error: project_assigned_to %d: %s"
 msgstr ""
 
 #: common/include/Group.class.php:2143 www/admin/globalroledelete.php:37
-#: www/admin/globalroleedit.php:41 www/project/admin/roledelete.php:46
+#: www/admin/globalroleedit.php:43 www/project/admin/roledelete.php:46
 #: www/project/admin/roleedit.php:53
 #, fuzzy
 msgid "Could Not Get Role"
@@ -3298,7 +3299,7 @@ msgstr ""
 
 #: common/include/Navigation.class.php:292
 #: plugins/quota_management/www/quota_admin.php:38
-#: plugins/quota_management/www/quota.php:36 www/admin/globalroleedit.php:138
+#: plugins/quota_management/www/quota.php:36 www/admin/globalroleedit.php:29
 #: www/admin/index.php:39
 #, fuzzy
 msgid "Site Admin"
@@ -4531,7 +4532,7 @@ msgstr ""
 #: plugins/scmhg/common/HgPlugin.class.php:632
 #: www/account/pending-resend.php:79 www/activity/index.php:191
 #: www/admin/admin_table.php:222 www/admin/cronman.php:37
-#: www/admin/globalroleedit.php:247 www/admin/index.php:166
+#: www/admin/globalroleedit.php:248 www/admin/index.php:166
 #: www/admin/pending-news.php:163 www/forum/admin/index.php:412
 #: www/include/vote_function.php:281 www/my/bookmark_add.php:50
 #: www/my/bookmark_edit.php:63 www/my/diary.php:189
@@ -4791,7 +4792,8 @@ msgstr ""
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:554
 #: common/tracker/actions/query.php:197 www/admin/massmail.php:136
-#: www/pm/admin/index.php:187 www/project/admin/editimages.php:265
+#: www/admin/search.php:72 www/admin/search.php:148 www/pm/admin/index.php:187
+#: www/project/admin/editimages.php:265
 msgid "Id"
 msgstr ""
 
@@ -5974,8 +5976,8 @@ msgstr ""
 msgid "Existing Responses"
 msgstr ""
 
-#: common/tracker/views/form-addcanned.php:40 www/admin/search.php:72
-#: www/admin/search.php:148 www/my/dashboard.php:63 www/pm/index.php:98
+#: common/tracker/views/form-addcanned.php:40 www/my/dashboard.php:63
+#: www/pm/index.php:98
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "ID"
 msgstr ""
@@ -8859,8 +8861,12 @@ msgstr "Регистрацията не е активна"
 #: plugins/globaldashboard/www/admin/edit_account_page.php:77
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
 #: plugins/globaldashboard/www/admin/manage_accounts.php:117
-#: www/account/verify.php:38 www/admin/unsubscribe.php:113
-#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
+#: www/account/verify.php:38 www/admin/globalroleedit.php:149
+#: www/admin/search.php:73 www/admin/unsubscribe.php:113
+#: www/admin/useredit.php:139 www/project/admin/users.php:300
+#: www/project/memberlist.php:50
+#: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:44
+#: www/stats/lastlogins.php:51 www/top/topusers.php:63
 #, fuzzy
 msgid "User Name"
 msgstr "Истинско Име"
@@ -9188,7 +9194,7 @@ msgstr "Резултати от търсенето за <em>%1$s</em>"
 
 #: plugins/globalsearch/www/index.php:168
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:44
-#: www/stats/site_stats_utils.php:230
+#: www/stats/site_stats_utils.php:230 www/top/toplist.php:53
 #, fuzzy
 msgid "Project Name"
 msgstr "Проекти на потребителя"
@@ -13902,8 +13908,7 @@ msgstr "Редактиране на Вашия профил"
 msgid "Member since:"
 msgstr "Член от:"
 
-#: www/account/index.php:151 www/admin/useredit.php:130
-#: www/include/user_profile.php:68
+#: www/account/index.php:151 www/include/user_profile.php:68
 #, fuzzy
 msgid "User Id:"
 msgstr "Потребителско ID"
@@ -14675,64 +14680,52 @@ msgstr "Паролата сменена успешно"
 msgid "Error: Please confirm the deletion of the role."
 msgstr ""
 
-#: www/admin/globalroleedit.php:74 www/project/admin/roleedit.php:86
+#: www/admin/globalroleedit.php:76 www/project/admin/roleedit.php:86
 #, fuzzy
 msgid "Missing Role Name"
 msgstr "Липсващи Параметри"
 
-#: www/admin/globalroleedit.php:81 www/project/admin/roleedit.php:93
+#: www/admin/globalroleedit.php:83 www/project/admin/roleedit.php:93
 #, fuzzy
 msgid "Successfully Created New Role"
 msgstr "Паролата сменена успешно"
 
-#: www/admin/globalroleedit.php:90 www/project/admin/roleedit.php:102
+#: www/admin/globalroleedit.php:92 www/project/admin/roleedit.php:102
 #, fuzzy
 msgid "Successfully Updated Role"
 msgstr "Паролата сменена успешно"
 
-#: www/admin/globalroleedit.php:102
-#, fuzzy
-msgid "User added successfully"
-msgstr "Обновено успешно"
-
-#: www/admin/globalroleedit.php:104
+#: www/admin/globalroleedit.php:106
 msgid "Error while adding user to role"
 msgstr ""
 
-#: www/admin/globalroleedit.php:108
-msgid "Can't add user to this type of role"
-msgstr ""
+#: www/admin/globalroleedit.php:110
+#, fuzzy
+msgid "Cannot add user to this type of role"
+msgstr "Версия"
 
-#: www/admin/globalroleedit.php:115
+#: www/admin/globalroleedit.php:117
 msgid "ERROR: You did not tick the “really remove” box!"
 msgstr ""
 
-#: www/admin/globalroleedit.php:123
+#: www/admin/globalroleedit.php:125
 #, fuzzy, php-format
 msgid "User %s removed successfully"
 msgstr "Обновено успешно"
 
-#: www/admin/globalroleedit.php:127
+#: www/admin/globalroleedit.php:129
 #, php-format
 msgid "Error while removing user %s from role"
 msgstr ""
 
-#: www/admin/globalroleedit.php:133
-msgid "Can't remove user from this type of role"
+#: www/admin/globalroleedit.php:135
+msgid "Cannot remove user from this type of role"
 msgstr ""
 
 #: www/admin/globalroleedit.php:143
 #, fuzzy
 msgid "Current users with this role"
 msgstr "Версия"
-
-#: www/admin/globalroleedit.php:149 www/admin/search.php:73
-#: www/project/admin/users.php:300
-#: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:44
-#: www/top/topusers.php:63
-#, fuzzy
-msgid "User name"
-msgstr "Истинско Име"
 
 #: www/admin/globalroleedit.php:172
 msgid "Really remove ticked users from role?"
@@ -14747,34 +14740,34 @@ msgstr ""
 msgid "Add User"
 msgstr "Добавяне"
 
-#: www/admin/globalroleedit.php:201 www/admin/globalroleedit.php:208
+#: www/admin/globalroleedit.php:202 www/admin/globalroleedit.php:209
 #: www/project/admin/roleedit.php:123 www/project/admin/roleedit.php:126
 msgid "Role Name"
 msgstr ""
 
-#: www/admin/globalroleedit.php:206
+#: www/admin/globalroleedit.php:207
 msgid "Public role (can be referenced by projects)"
 msgstr ""
 
-#: www/admin/globalroleedit.php:211 www/project/admin/roleedit.php:134
+#: www/admin/globalroleedit.php:212 www/project/admin/roleedit.php:134
 msgid "Section"
 msgstr ""
 
-#: www/admin/globalroleedit.php:212 www/project/admin/roleedit.php:135
+#: www/admin/globalroleedit.php:213 www/project/admin/roleedit.php:135
 msgid "Subsection"
 msgstr ""
 
-#: www/admin/globalroleedit.php:213 www/project/admin/roleedit.php:136
+#: www/admin/globalroleedit.php:214 www/project/admin/roleedit.php:136
 msgid "Setting"
 msgstr ""
 
-#: www/admin/globalroleedit.php:254 www/admin/globalroleedit.php:256
+#: www/admin/globalroleedit.php:255 www/admin/globalroleedit.php:257
 #: www/project/admin/users.php:412
 #, fuzzy
 msgid "Delete role"
 msgstr "Файл"
 
-#: www/admin/globalroleedit.php:255
+#: www/admin/globalroleedit.php:256
 #, fuzzy
 msgid "Really delete this role?"
 msgstr "Изтриване на съобщение"
@@ -14864,8 +14857,8 @@ msgstr "Проекти на потребителя"
 msgid "Register Time"
 msgstr ""
 
-#: www/admin/grouplist.php:67 www/admin/search.php:149
-#: www/admin/useredit.php:263 www/admin/useredit.php:293
+#: www/admin/grouplist.php:67 www/admin/useredit.php:263
+#: www/admin/useredit.php:293
 #, fuzzy
 msgid "Unix name"
 msgstr "Име"
@@ -15386,11 +15379,14 @@ msgid_plural "User search with criteria <em>%1$s</em>: %2$s matches"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/admin/search.php:74 www/admin/useredit.php:148
+#: www/admin/search.php:74 www/admin/unsubscribe.php:114
+#: www/admin/useredit.php:148 www/project/admin/massadd.php:90
+#: www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
-msgid "Real name"
-msgstr ""
+#, fuzzy
+msgid "Real Name"
+msgstr "Фамилия:"
 
 #: www/admin/search.php:76
 msgid "Member since"
@@ -15407,6 +15403,12 @@ msgid "Group search with criteria <em>%s</em>: %d match"
 msgid_plural "Group search with criteria <em>%s</em>: %d matches"
 msgstr[0] ""
 msgstr[1] ""
+
+#: www/admin/search.php:149 www/project/admin/massadd.php:91
+#: www/project/admin/massfinish.php:75 www/register/index.php:226
+#, fuzzy
+msgid "Unix Name"
+msgstr "Име"
 
 #: www/admin/search.php:150 www/register/index.php:178
 msgid "Full Name"
@@ -15549,12 +15551,6 @@ msgstr ""
 msgid "user_id"
 msgstr ""
 
-#: www/admin/unsubscribe.php:114 www/project/admin/massadd.php:90
-#: www/project/admin/massfinish.php:74
-#, fuzzy
-msgid "Real Name"
-msgstr "Фамилия:"
-
 #: www/admin/unsubscribe.php:116
 msgid "Site Mail."
 msgstr ""
@@ -15600,9 +15596,9 @@ msgstr ""
 msgid "Account Information"
 msgstr ""
 
-#: www/admin/useredit.php:139
-msgid "User name:"
-msgstr ""
+#: www/admin/useredit.php:130
+msgid "User Id"
+msgstr "Потребителско ID"
 
 #: www/admin/useredit.php:157
 msgid "Web account status"
@@ -19826,12 +19822,6 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr "Няма въпроси към това проучване"
 
-#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
-#: www/register/index.php:226
-#, fuzzy
-msgid "Unix Name"
-msgstr "Име"
-
 #: www/project/admin/massadd.php:116
 msgid "Finish"
 msgstr ""
@@ -20657,6 +20647,7 @@ msgid "Task Close"
 msgstr ""
 
 #: www/reporting/projectact_graph.php:145 www/stats/site_stats_utils.php:231
+#: www/top/toplist.php:38
 msgid "Page Views"
 msgstr ""
 
@@ -22387,7 +22378,7 @@ msgstr ""
 msgid "View Other Top Categories"
 msgstr ""
 
-#: www/top/mostactive.php:52 www/top/toplist.php:53
+#: www/top/mostactive.php:52
 #, fuzzy
 msgid "Project name"
 msgstr "Проекти на потребителя"
@@ -22403,10 +22394,6 @@ msgstr "Още"
 #: www/top/toplist.php:37
 #, php-format
 msgid "Top Weekly Project Pageviews at *.%1$s (from impressions of %2$s logo)"
-msgstr ""
-
-#: www/top/toplist.php:38
-msgid "Pageviews"
 msgstr ""
 
 #: www/top/topusers.php:52
@@ -22667,6 +22654,14 @@ msgstr ""
 #, fuzzy
 msgid "That user does not exist."
 msgstr "Това потребителско име вече е заето."
+
+#, fuzzy
+#~ msgid "User added successfully"
+#~ msgstr "Обновено успешно"
+
+#, fuzzy
+#~ msgid "User name"
+#~ msgstr "Истинско Име"
 
 #~ msgid "Invalid confirmation hash"
 #~ msgstr "Невалиден хеш за потвърждение"
@@ -23263,9 +23258,6 @@ msgstr "Това потребителско име вече е заето."
 
 #~ msgid "License:"
 #~ msgstr "Лизенз:"
-
-#~ msgid "User Id"
-#~ msgstr "Потребителско ID"
 
 #~ msgid "No Forums Found For %1$s"
 #~ msgstr "Няма намерени форуми за %1$s"

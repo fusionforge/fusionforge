@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:57+0200\n"
+"POT-Creation-Date: 2013-07-22 12:14+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -1681,7 +1681,8 @@ msgstr "Startdatum"
 #: www/account/verify.php:76 www/account/verify.php:78
 #: www/account/verify.php:86 www/admin/massmail.php:94
 #: www/admin/massmail.php:113 www/admin/massmail.php:116
-#: www/admin/massmail.php:142 www/admin/useredit.php:148
+#: www/admin/massmail.php:142 www/admin/useredit.php:130
+#: www/admin/useredit.php:139 www/admin/useredit.php:148
 #: www/admin/useredit.php:157 www/admin/useredit.php:211
 #: www/frs/reporting/downloads.php:105 www/frs/reporting/downloads.php:107
 #: www/frs/reporting/downloads.php:109 www/pm/admin/index.php:211
@@ -2650,7 +2651,7 @@ msgstr "Konnte die Rolle nicht bekommen"
 msgid "Failed to find user %s"
 msgstr "Nutzer %s finden fehlgeschlagen."
 
-#: common/import/import_users.php:416
+#: common/import/import_users.php:416 www/admin/globalroleedit.php:104
 #, fuzzy
 msgid "User Added Successfully"
 msgstr "Benutzer erfolgreich hinzugefügt"
@@ -3038,7 +3039,7 @@ msgid "Error: project_assigned_to %d: %s"
 msgstr "Fehler: Datenbank: project_assigned_to %d: %s"
 
 #: common/include/Group.class.php:2143 www/admin/globalroledelete.php:37
-#: www/admin/globalroleedit.php:41 www/project/admin/roledelete.php:46
+#: www/admin/globalroleedit.php:43 www/project/admin/roledelete.php:46
 #: www/project/admin/roleedit.php:53
 msgid "Could Not Get Role"
 msgstr "Konnte die Rolle nicht bekommen"
@@ -3426,7 +3427,7 @@ msgstr ""
 
 #: common/include/Navigation.class.php:292
 #: plugins/quota_management/www/quota_admin.php:38
-#: plugins/quota_management/www/quota.php:36 www/admin/globalroleedit.php:138
+#: plugins/quota_management/www/quota.php:36 www/admin/globalroleedit.php:29
 #: www/admin/index.php:39
 #, fuzzy
 msgid "Site Admin"
@@ -4714,7 +4715,7 @@ msgstr "Freitext für die \"Durchsuche Objekte\" Seite"
 #: plugins/scmhg/common/HgPlugin.class.php:632
 #: www/account/pending-resend.php:79 www/activity/index.php:191
 #: www/admin/admin_table.php:222 www/admin/cronman.php:37
-#: www/admin/globalroleedit.php:247 www/admin/index.php:166
+#: www/admin/globalroleedit.php:248 www/admin/index.php:166
 #: www/admin/pending-news.php:163 www/forum/admin/index.php:412
 #: www/include/vote_function.php:281 www/my/bookmark_add.php:50
 #: www/my/bookmark_edit.php:63 www/my/diary.php:189
@@ -4979,7 +4980,8 @@ msgstr "Nicht zugeordnet"
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:554
 #: common/tracker/actions/query.php:197 www/admin/massmail.php:136
-#: www/pm/admin/index.php:187 www/project/admin/editimages.php:265
+#: www/admin/search.php:72 www/admin/search.php:148 www/pm/admin/index.php:187
+#: www/project/admin/editimages.php:265
 msgid "Id"
 msgstr "ID"
 
@@ -6201,8 +6203,8 @@ msgstr "Vorgefertigte Antworten an %s hinzufügen/aktualisieren"
 msgid "Existing Responses"
 msgstr "Existierende Antworten"
 
-#: common/tracker/views/form-addcanned.php:40 www/admin/search.php:72
-#: www/admin/search.php:148 www/my/dashboard.php:63 www/pm/index.php:98
+#: common/tracker/views/form-addcanned.php:40 www/my/dashboard.php:63
+#: www/pm/index.php:98
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "ID"
 msgstr "ID"
@@ -9158,8 +9160,12 @@ msgstr "Account Optionen:"
 #: plugins/globaldashboard/www/admin/edit_account_page.php:77
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
 #: plugins/globaldashboard/www/admin/manage_accounts.php:117
-#: www/account/verify.php:38 www/admin/unsubscribe.php:113
-#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
+#: www/account/verify.php:38 www/admin/globalroleedit.php:149
+#: www/admin/search.php:73 www/admin/unsubscribe.php:113
+#: www/admin/useredit.php:139 www/project/admin/users.php:300
+#: www/project/memberlist.php:50
+#: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:44
+#: www/stats/lastlogins.php:51 www/top/topusers.php:63
 #, fuzzy
 msgid "User Name"
 msgstr "Benutzername"
@@ -9485,7 +9491,7 @@ msgstr "Suchergebnisse für<em>%1$s</em>"
 
 #: plugins/globalsearch/www/index.php:168
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:44
-#: www/stats/site_stats_utils.php:230
+#: www/stats/site_stats_utils.php:230 www/top/toplist.php:53
 msgid "Project Name"
 msgstr "Projektname"
 
@@ -14402,8 +14408,7 @@ msgstr "Bearbeite mein Qualifikationsprofil"
 msgid "Member since:"
 msgstr "Mitglied seit:"
 
-#: www/account/index.php:151 www/admin/useredit.php:130
-#: www/include/user_profile.php:68
+#: www/account/index.php:151 www/include/user_profile.php:68
 #, fuzzy
 msgid "User Id:"
 msgstr "Benutzer-ID"
@@ -15218,62 +15223,52 @@ msgstr "Erfolgreich gelöscht"
 msgid "Error: Please confirm the deletion of the role."
 msgstr ""
 
-#: www/admin/globalroleedit.php:74 www/project/admin/roleedit.php:86
+#: www/admin/globalroleedit.php:76 www/project/admin/roleedit.php:86
 #, fuzzy
 msgid "Missing Role Name"
 msgstr "Fehlende Parameter"
 
-#: www/admin/globalroleedit.php:81 www/project/admin/roleedit.php:93
+#: www/admin/globalroleedit.php:83 www/project/admin/roleedit.php:93
 msgid "Successfully Created New Role"
 msgstr "Erfolgreich neue Rolle angelegt"
 
-#: www/admin/globalroleedit.php:90 www/project/admin/roleedit.php:102
+#: www/admin/globalroleedit.php:92 www/project/admin/roleedit.php:102
 msgid "Successfully Updated Role"
 msgstr "Rolle erfolgreich aktualisiertt"
 
-#: www/admin/globalroleedit.php:102
-#, fuzzy
-msgid "User added successfully"
-msgstr "Benutzer erfolgreich hinzugefügt"
-
-#: www/admin/globalroleedit.php:104
+#: www/admin/globalroleedit.php:106
 #, fuzzy
 msgid "Error while adding user to role"
 msgstr "Fehler während der Account-Aktivierung"
 
-#: www/admin/globalroleedit.php:108
-msgid "Can't add user to this type of role"
-msgstr ""
+#: www/admin/globalroleedit.php:110
+#, fuzzy
+msgid "Cannot add user to this type of role"
+msgstr "Aktuelle Version"
 
-#: www/admin/globalroleedit.php:115
+#: www/admin/globalroleedit.php:117
 msgid "ERROR: You did not tick the “really remove” box!"
 msgstr ""
 
-#: www/admin/globalroleedit.php:123
+#: www/admin/globalroleedit.php:125
 #, fuzzy, php-format
 msgid "User %s removed successfully"
 msgstr "Benutzer erfolgreich gelöscht"
 
-#: www/admin/globalroleedit.php:127
+#: www/admin/globalroleedit.php:129
 #, fuzzy, php-format
 msgid "Error while removing user %s from role"
 msgstr "Fehler während der Account-Aktivierung"
 
-#: www/admin/globalroleedit.php:133
-msgid "Can't remove user from this type of role"
-msgstr ""
+#: www/admin/globalroleedit.php:135
+#, fuzzy
+msgid "Cannot remove user from this type of role"
+msgstr "Kann das Kennzeichen nicht entfernen: %s"
 
 #: www/admin/globalroleedit.php:143
 #, fuzzy
 msgid "Current users with this role"
 msgstr "Aktuelle Version"
-
-#: www/admin/globalroleedit.php:149 www/admin/search.php:73
-#: www/project/admin/users.php:300
-#: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:44
-#: www/top/topusers.php:63
-msgid "User name"
-msgstr "Benutzername"
 
 #: www/admin/globalroleedit.php:172
 msgid "Really remove ticked users from role?"
@@ -15288,34 +15283,34 @@ msgstr "Momentan sind keine Rollen definiert."
 msgid "Add User"
 msgstr "Benutzer hinzufügen"
 
-#: www/admin/globalroleedit.php:201 www/admin/globalroleedit.php:208
+#: www/admin/globalroleedit.php:202 www/admin/globalroleedit.php:209
 #: www/project/admin/roleedit.php:123 www/project/admin/roleedit.php:126
 msgid "Role Name"
 msgstr "Rollenname"
 
-#: www/admin/globalroleedit.php:206
+#: www/admin/globalroleedit.php:207
 msgid "Public role (can be referenced by projects)"
 msgstr ""
 
-#: www/admin/globalroleedit.php:211 www/project/admin/roleedit.php:134
+#: www/admin/globalroleedit.php:212 www/project/admin/roleedit.php:134
 msgid "Section"
 msgstr "Sektion"
 
-#: www/admin/globalroleedit.php:212 www/project/admin/roleedit.php:135
+#: www/admin/globalroleedit.php:213 www/project/admin/roleedit.php:135
 msgid "Subsection"
 msgstr "Unterabschnitt"
 
-#: www/admin/globalroleedit.php:213 www/project/admin/roleedit.php:136
+#: www/admin/globalroleedit.php:214 www/project/admin/roleedit.php:136
 msgid "Setting"
 msgstr "Einstellungen"
 
-#: www/admin/globalroleedit.php:254 www/admin/globalroleedit.php:256
+#: www/admin/globalroleedit.php:255 www/admin/globalroleedit.php:257
 #: www/project/admin/users.php:412
 #, fuzzy
 msgid "Delete role"
 msgstr "Datei löschen"
 
-#: www/admin/globalroleedit.php:255
+#: www/admin/globalroleedit.php:256
 #, fuzzy
 msgid "Really delete this role?"
 msgstr "Diesen Tracker dauerhaft löschen."
@@ -15405,8 +15400,8 @@ msgstr "Gruppen-Name (anklicken zum Bearbeiten)"
 msgid "Register Time"
 msgstr "Registrierungszeit"
 
-#: www/admin/grouplist.php:67 www/admin/search.php:149
-#: www/admin/useredit.php:263 www/admin/useredit.php:293
+#: www/admin/grouplist.php:67 www/admin/useredit.php:263
+#: www/admin/useredit.php:293
 msgid "Unix name"
 msgstr "Unix Name"
 
@@ -15934,10 +15929,13 @@ msgid_plural "User search with criteria <em>%1$s</em>: %2$s matches"
 msgstr[0] "Benutzer-Suche mit Merkmalen <em>%1$s</em>: %2$s Übereinstimmung"
 msgstr[1] "Benutzer-Suche mit Merkmalen <em>%1$s</em>: %2$s Übereinstimmungen"
 
-#: www/admin/search.php:74 www/admin/useredit.php:148
+#: www/admin/search.php:74 www/admin/unsubscribe.php:114
+#: www/admin/useredit.php:148 www/project/admin/massadd.php:90
+#: www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
-msgid "Real name"
+#, fuzzy
+msgid "Real Name"
 msgstr "Richtiger Name"
 
 #: www/admin/search.php:76
@@ -15955,6 +15953,12 @@ msgid "Group search with criteria <em>%s</em>: %d match"
 msgid_plural "Group search with criteria <em>%s</em>: %d matches"
 msgstr[0] "Gruppen-Suche mit Merkmalen <em>%s</em>: %d Übereinstimmung"
 msgstr[1] "Gruppen-Suche mit Merkmalen <em>%s</em>: %d Übereinstimmungen"
+
+#: www/admin/search.php:149 www/project/admin/massadd.php:91
+#: www/project/admin/massfinish.php:75 www/register/index.php:226
+#, fuzzy
+msgid "Unix Name"
+msgstr "Unix Name"
 
 #: www/admin/search.php:150 www/register/index.php:178
 msgid "Full Name"
@@ -16115,12 +16119,6 @@ msgstr "Zeige Benutzer, die mit der Zeichenfolge übereinstimmen"
 msgid "user_id"
 msgstr "Benutzer_ID"
 
-#: www/admin/unsubscribe.php:114 www/project/admin/massadd.php:90
-#: www/project/admin/massfinish.php:74
-#, fuzzy
-msgid "Real Name"
-msgstr "Richtiger Name"
-
 #: www/admin/unsubscribe.php:116
 msgid "Site Mail."
 msgstr "Seiten-Mail."
@@ -16166,9 +16164,9 @@ msgstr "Site \tAdministrator: Benutzer-Info"
 msgid "Account Information"
 msgstr "Account Information"
 
-#: www/admin/useredit.php:139
-msgid "User name:"
-msgstr "Benutzer-Name:"
+#: www/admin/useredit.php:130
+msgid "User Id"
+msgstr "Benutzer-ID"
 
 #: www/admin/useredit.php:157
 msgid "Web account status"
@@ -20653,12 +20651,6 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr "<p>Keine übereinstimmenden Benutzer gefunden</p>"
 
-#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
-#: www/register/index.php:226
-#, fuzzy
-msgid "Unix Name"
-msgstr "Unix Name"
-
 #: www/project/admin/massadd.php:116
 msgid "Finish"
 msgstr "Fertig"
@@ -21536,6 +21528,7 @@ msgid "Task Close"
 msgstr "Tracker Geschlossen"
 
 #: www/reporting/projectact_graph.php:145 www/stats/site_stats_utils.php:231
+#: www/top/toplist.php:38
 msgid "Page Views"
 msgstr "Seitenzugriffe"
 
@@ -23344,7 +23337,7 @@ msgstr "Täglich aktualisiert"
 msgid "View Other Top Categories"
 msgstr "Andere Top-Kategorien ansehen"
 
-#: www/top/mostactive.php:52 www/top/toplist.php:53
+#: www/top/mostactive.php:52
 msgid "Project name"
 msgstr "Projektname"
 
@@ -23363,10 +23356,6 @@ msgid "Top Weekly Project Pageviews at *.%1$s (from impressions of %2$s logo)"
 msgstr ""
 "Top-wöchentliche Projektseitenzugriffe auf *.%1$s (von Impressionen des %2$s "
 "Logos)"
-
-#: www/top/toplist.php:38
-msgid "Pageviews"
-msgstr "Seitenzugriffe"
 
 #: www/top/topusers.php:52
 msgid "Information about highest ranked users is not available."
@@ -23637,6 +23626,22 @@ msgstr "Kein Benutzername angegeben"
 #: www/users:74
 msgid "That user does not exist."
 msgstr "Dieser Nutzer existiert nicht."
+
+#~ msgid "User name:"
+#~ msgstr "Benutzer-Name:"
+
+#~ msgid "Real name"
+#~ msgstr "Richtiger Name"
+
+#, fuzzy
+#~ msgid "User added successfully"
+#~ msgstr "Benutzer erfolgreich hinzugefügt"
+
+#~ msgid "User name"
+#~ msgstr "Benutzername"
+
+#~ msgid "Pageviews"
+#~ msgstr "Seitenzugriffe"
 
 #~ msgid "ALL"
 #~ msgstr "ALLE"
@@ -25989,9 +25994,6 @@ msgstr "Dieser Nutzer existiert nicht."
 
 #~ msgid "The Attachment does not exist"
 #~ msgstr "Der Anhang existiert nicht"
-
-#~ msgid "User Id"
-#~ msgstr "Benutzer-ID"
 
 #~ msgid "Visibility: "
 #~ msgstr "Sichtbarkeit:"
