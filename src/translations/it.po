@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:25+0200\n"
+"POT-Creation-Date: 2013-07-22 14:29+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -476,7 +476,9 @@ msgstr "Progetto"
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/softwaremap/tag_cloud.php:143 www/survey/survey.php:51
-#: www/tracker/admin/index.php:190 www/tracker/roadmap.php:175
+#: www/tracker/admin/index.php:190 www/tracker/reporting/index.php:120
+#: www/tracker/reporting/index.php:122 www/tracker/reporting/index.php:124
+#: www/tracker/reporting/index.php:126 www/tracker/roadmap.php:175
 #: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
 #: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
 #: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
@@ -1602,6 +1604,7 @@ msgstr ""
 #: www/reporting/usercum.php:60 www/reporting/usersummary.php:69
 #: www/reporting/usertime.php:90
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:50
+#: www/tracker/reporting/index.php:124
 msgid "Start Date"
 msgstr "Data inizio"
 
@@ -1732,6 +1735,7 @@ msgstr ""
 #: www/reporting/usercum.php:61 www/reporting/usersummary.php:70
 #: www/reporting/usersummary.php:106 www/reporting/usertime.php:91
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:51
+#: www/tracker/reporting/index.php:126
 msgid "End Date"
 msgstr "Data fine"
 
@@ -1743,7 +1747,7 @@ msgstr "Data fine"
 #: www/reporting/toolspie.php:66 www/reporting/useract.php:82
 #: www/reporting/useradded.php:61 www/reporting/usercum.php:62
 #: www/reporting/usersummary.php:72 www/reporting/usertime.php:92
-#: www/tracker/reporting/index.php:123
+#: www/tracker/reporting/index.php:128
 msgid "Refresh"
 msgstr "Ricarica"
 
@@ -3470,6 +3474,7 @@ msgstr ""
 #: common/tracker/actions/admin-ind.php:100 common/tracker/actions/ind.php:57
 #: common/widget/Widget_ProjectPublicAreas.class.php:56
 #: www/pm/include/ProjectTaskHTML.class.php:109
+#: www/tracker/reporting/index.php:118
 msgid "Tracker"
 msgstr "Tracker"
 
@@ -6276,6 +6281,7 @@ msgstr "Campi personalizzati definiti"
 #: www/reporting/usertime.php:89
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:45
 #: www/survey/include/SurveyHTML.class.php:243
+#: www/tracker/reporting/index.php:122
 msgid "Type"
 msgstr "Tipo"
 
@@ -23191,29 +23197,9 @@ msgstr "Assegnatario"
 msgid "Tracker Activity Reporting"
 msgstr "Reportistica sulle consuntivazioni per utente"
 
-#: www/tracker/reporting/index.php:118
-#, fuzzy
-msgid "Tracker:"
-msgstr "Tracker"
-
-#: www/tracker/reporting/index.php:119
-#, fuzzy
-msgid "Area:"
-msgstr "Aree"
-
 #: www/tracker/reporting/index.php:120
-#, fuzzy
-msgid "Type:"
-msgstr "Tipo"
-
-#: www/tracker/reporting/index.php:121
-#, fuzzy
-msgid "Start:"
-msgstr "Inizio"
-
-#: www/tracker/reporting/index.php:122
-msgid "End:"
-msgstr ""
+msgid "Area"
+msgstr "Aree"
 
 #: www/tracker/roadmap.php:190 www/tracker/roadmap.php:230
 #, fuzzy
@@ -23364,6 +23350,22 @@ msgstr "Aggiornamento multiplo"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Non è stato inserito alcun file"
+
+#, fuzzy
+#~ msgid "Tracker:"
+#~ msgstr "Tracker"
+
+#, fuzzy
+#~ msgid "Area:"
+#~ msgstr "Aree"
+
+#, fuzzy
+#~ msgid "Type:"
+#~ msgstr "Tipo"
+
+#, fuzzy
+#~ msgid "Start:"
+#~ msgstr "Inizio"
 
 #, fuzzy
 #~ msgid "That user does not exist."
@@ -24069,9 +24071,6 @@ msgstr "Non è stato inserito alcun file"
 #~ msgstr ""
 #~ "Scarica una versione in formato raw-text cliccando su &quot;Scarica "
 #~ "versione&quot;"
-
-#~ msgid "Area"
-#~ msgstr "Aree"
 
 #, fuzzy
 #~ msgid "Bazaar Repository Browser"

@@ -111,15 +111,20 @@ $h->header(array('title' => _('Tracker Activity Reporting')));
 
 ?>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
-<table style="margin-left: auto; margin-right: auto;">
+<table class="centered">
 <tr>
 <td>
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
-<strong><?php echo _('Tracker:') ?></strong><br /><?php echo html_build_select_box($restracker,'atid',$atid,false); ?></td>
-<td><strong><?php echo _('Area:') ?></strong><br /><?php echo html_build_select_box_from_arrays($vals, $labels, 'area',$area,false); ?></td>
-<td><strong><?php echo _('Type:') ?></strong><br /><?php echo report_span_box('SPAN',$SPAN,true); ?></td>
-<td><strong><?php echo _('Start:') ?></strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
-<td><strong><?php echo _('End:') ?></strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
+<strong><?php echo _('Tracker').(': '); ?></strong><br />
+<?php echo html_build_select_box($restracker,'atid',$atid,false); ?></td>
+<td><strong><?php echo _('Area')._(': '); ?></strong><br />
+<?php echo html_build_select_box_from_arrays($vals, $labels, 'area',$area,false); ?></td>
+<td><strong><?php echo _('Type')._(': '); ?></strong>
+<br /><?php echo report_span_box('SPAN',$SPAN,true); ?></td>
+<td><strong><?php echo _('Start Date')._(': '); ?></strong><br />
+<?php echo report_months_box($report, 'start', $start); ?></td>
+<td><strong><?php echo _('End Date')._(': '); ?></strong><br />
+<?php echo report_months_box($report, 'end', $end); ?></td>
 <td><input type="submit" name="submit" value="<?php echo _("Refresh") ?>" /></td>
 </tr>
 </table>

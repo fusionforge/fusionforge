@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:25+0200\n"
+"POT-Creation-Date: 2013-07-22 14:29+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -476,7 +476,9 @@ msgstr "Projekt"
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/softwaremap/tag_cloud.php:143 www/survey/survey.php:51
-#: www/tracker/admin/index.php:190 www/tracker/roadmap.php:175
+#: www/tracker/admin/index.php:190 www/tracker/reporting/index.php:120
+#: www/tracker/reporting/index.php:122 www/tracker/reporting/index.php:124
+#: www/tracker/reporting/index.php:126 www/tracker/roadmap.php:175
 #: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
 #: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
 #: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
@@ -1606,6 +1608,7 @@ msgstr ""
 #: www/reporting/usercum.php:60 www/reporting/usersummary.php:69
 #: www/reporting/usertime.php:90
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:50
+#: www/tracker/reporting/index.php:124
 msgid "Start Date"
 msgstr "Startdatum"
 
@@ -1736,6 +1739,7 @@ msgstr ""
 #: www/reporting/usercum.php:61 www/reporting/usersummary.php:70
 #: www/reporting/usersummary.php:106 www/reporting/usertime.php:91
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:51
+#: www/tracker/reporting/index.php:126
 msgid "End Date"
 msgstr "Enddatum"
 
@@ -1747,7 +1751,7 @@ msgstr "Enddatum"
 #: www/reporting/toolspie.php:66 www/reporting/useract.php:82
 #: www/reporting/useradded.php:61 www/reporting/usercum.php:62
 #: www/reporting/usersummary.php:72 www/reporting/usertime.php:92
-#: www/tracker/reporting/index.php:123
+#: www/tracker/reporting/index.php:128
 msgid "Refresh"
 msgstr "Aktualisieren"
 
@@ -3483,6 +3487,7 @@ msgstr ""
 #: common/tracker/actions/admin-ind.php:100 common/tracker/actions/ind.php:57
 #: common/widget/Widget_ProjectPublicAreas.class.php:56
 #: www/pm/include/ProjectTaskHTML.class.php:109
+#: www/tracker/reporting/index.php:118
 msgid "Tracker"
 msgstr "Tracker"
 
@@ -6305,6 +6310,7 @@ msgstr "Extra Felder definiert"
 #: www/reporting/usertime.php:89
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:45
 #: www/survey/include/SurveyHTML.class.php:243
+#: www/tracker/reporting/index.php:122
 msgid "Type"
 msgstr "Typ"
 
@@ -23455,29 +23461,9 @@ msgstr "Bearbeiter"
 msgid "Tracker Activity Reporting"
 msgstr "Benutzerzeitauswertung"
 
-#: www/tracker/reporting/index.php:118
-#, fuzzy
-msgid "Tracker:"
-msgstr "Tracker"
-
-#: www/tracker/reporting/index.php:119
-#, fuzzy
-msgid "Area:"
-msgstr "Gebiete"
-
 #: www/tracker/reporting/index.php:120
-#, fuzzy
-msgid "Type:"
-msgstr "Typ"
-
-#: www/tracker/reporting/index.php:121
-#, fuzzy
-msgid "Start:"
-msgstr "Start"
-
-#: www/tracker/reporting/index.php:122
-msgid "End:"
-msgstr ""
+msgid "Area"
+msgstr "Gebiete"
 
 #: www/tracker/roadmap.php:190 www/tracker/roadmap.php:230
 #, fuzzy
@@ -23622,6 +23608,22 @@ msgstr "Aktualisierung nicht möglich"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Kein Benutzername angegeben"
+
+#, fuzzy
+#~ msgid "Tracker:"
+#~ msgstr "Tracker"
+
+#, fuzzy
+#~ msgid "Area:"
+#~ msgstr "Gebiete"
+
+#, fuzzy
+#~ msgid "Type:"
+#~ msgstr "Typ"
+
+#, fuzzy
+#~ msgid "Start:"
+#~ msgstr "Start"
 
 #~ msgid "That user does not exist."
 #~ msgstr "Dieser Nutzer existiert nicht."
@@ -24804,9 +24806,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "Displaying %1$s per page. Projects sorted by alphabetical order."
 #~ msgstr "Pro Seite werden %1$s angezeigt. Projekte sortiert nach Alphabet."
-
-#~ msgid "Area"
-#~ msgstr "Gebiete"
 
 #~ msgid "Personal Page for %s"
 #~ msgstr "Persönliche Seite für %s"

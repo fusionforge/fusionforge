@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:25+0200\n"
+"POT-Creation-Date: 2013-07-22 14:29+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -478,7 +478,9 @@ msgstr "專案"
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/softwaremap/tag_cloud.php:143 www/survey/survey.php:51
-#: www/tracker/admin/index.php:190 www/tracker/roadmap.php:175
+#: www/tracker/admin/index.php:190 www/tracker/reporting/index.php:120
+#: www/tracker/reporting/index.php:122 www/tracker/reporting/index.php:124
+#: www/tracker/reporting/index.php:126 www/tracker/roadmap.php:175
 #: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
 #: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
 #: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
@@ -1601,6 +1603,7 @@ msgstr ""
 #: www/reporting/usercum.php:60 www/reporting/usersummary.php:69
 #: www/reporting/usertime.php:90
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:50
+#: www/tracker/reporting/index.php:124
 msgid "Start Date"
 msgstr "開啟日期"
 
@@ -1731,6 +1734,7 @@ msgstr ""
 #: www/reporting/usercum.php:61 www/reporting/usersummary.php:70
 #: www/reporting/usersummary.php:106 www/reporting/usertime.php:91
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:51
+#: www/tracker/reporting/index.php:126
 msgid "End Date"
 msgstr "結束日期"
 
@@ -1742,7 +1746,7 @@ msgstr "結束日期"
 #: www/reporting/toolspie.php:66 www/reporting/useract.php:82
 #: www/reporting/useradded.php:61 www/reporting/usercum.php:62
 #: www/reporting/usersummary.php:72 www/reporting/usertime.php:92
-#: www/tracker/reporting/index.php:123
+#: www/tracker/reporting/index.php:128
 msgid "Refresh"
 msgstr "重新整理"
 
@@ -3437,6 +3441,7 @@ msgstr ""
 #: common/tracker/actions/admin-ind.php:100 common/tracker/actions/ind.php:57
 #: common/widget/Widget_ProjectPublicAreas.class.php:56
 #: www/pm/include/ProjectTaskHTML.class.php:109
+#: www/tracker/reporting/index.php:118
 msgid "Tracker"
 msgstr "追蹤"
 
@@ -6235,6 +6240,7 @@ msgstr "訂製欄位定義"
 #: www/reporting/usertime.php:89
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:45
 #: www/survey/include/SurveyHTML.class.php:243
+#: www/tracker/reporting/index.php:122
 msgid "Type"
 msgstr "類型"
 
@@ -22996,29 +23002,9 @@ msgstr "受託人"
 msgid "Tracker Activity Reporting"
 msgstr "使用者時間報告"
 
-#: www/tracker/reporting/index.php:118
-#, fuzzy
-msgid "Tracker:"
-msgstr "追蹤"
-
-#: www/tracker/reporting/index.php:119
-#, fuzzy
-msgid "Area:"
-msgstr "區域"
-
 #: www/tracker/reporting/index.php:120
-#, fuzzy
-msgid "Type:"
-msgstr "類型"
-
-#: www/tracker/reporting/index.php:121
-#, fuzzy
-msgid "Start:"
-msgstr "開始"
-
-#: www/tracker/reporting/index.php:122
-msgid "End:"
-msgstr ""
+msgid "Area"
+msgstr "區域"
 
 #: www/tracker/roadmap.php:190 www/tracker/roadmap.php:230
 #, fuzzy
@@ -23169,6 +23155,22 @@ msgstr "大量更新"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "帳號"
+
+#, fuzzy
+#~ msgid "Tracker:"
+#~ msgstr "追蹤"
+
+#, fuzzy
+#~ msgid "Area:"
+#~ msgstr "區域"
+
+#, fuzzy
+#~ msgid "Type:"
+#~ msgstr "類型"
+
+#, fuzzy
+#~ msgid "Start:"
+#~ msgstr "開始"
 
 #, fuzzy
 #~ msgid "That user does not exist."
@@ -23743,9 +23745,6 @@ msgstr "帳號"
 #~ msgid ""
 #~ "Download a raw-text version of this code by clicking on “Download Version”"
 #~ msgstr "下載一個程式碼的純文字版本，藉由點擊\"下載版本\""
-
-#~ msgid "Area"
-#~ msgstr "區域"
 
 #, fuzzy
 #~ msgid "Bazaar Repository Browser"
