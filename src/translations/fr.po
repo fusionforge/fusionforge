@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:05+0200\n"
+"POT-Creation-Date: 2013-07-22 11:09+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -20431,9 +20431,9 @@ msgstr ""
 "strong>.  %3$s n'héberge pas de messagerie électronique (MX) ni de DNS."
 
 #: www/project/admin/vhost.php:112
-#, php-format
+#, fuzzy, php-format
 msgid ""
-"Clicking on \"create\" will schedule the creation of the Virtual Host.  This "
+"Clicking on “Create” will schedule the creation of the Virtual Host.  This "
 "will be synced to the project webservers - such that <em>yourhost.org</em> "
 "will display the material at <em>%1$s.%2$s</em>."
 msgstr ""

@@ -109,7 +109,7 @@ printf(_('To add a new virtual host - simply point a <strong>CNAME</strong> for 
 print '</p>';
 
 print '<p>';
-printf(_('Clicking on "create" will schedule the creation of the Virtual Host.  This will be synced to the project webservers - such that <em>yourhost.org</em> will display the material at <em>%1$s.%2$s</em>.'), $group->getUnixName(), forge_get_config ('web_host'));
+printf(_('Clicking on “Create” will schedule the creation of the Virtual Host.  This will be synced to the project webservers - such that <em>yourhost.org</em> will display the material at <em>%1$s.%2$s</em>.'), $group->getUnixName(), forge_get_config ('web_host'));
 print '</p>';
 
 ?>
