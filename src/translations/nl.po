@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:02+0200\n"
+"POT-Creation-Date: 2013-07-22 11:05+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15314,7 +15314,6 @@ msgstr "Tijdregistratie"
 
 #: www/admin/grouplist.php:67 www/admin/search.php:149
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
-#: www/project/admin/massfinish.php:75
 #, fuzzy
 msgid "Unix name"
 msgstr "Unixnaam"
@@ -15840,7 +15839,7 @@ msgstr[0] "Gebruiker zoeken met criteria"
 msgstr[1] "Gebruiker zoeken met criteria"
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148 www/project/admin/massfinish.php:74
+#: www/admin/useredit.php:148
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -20427,12 +20426,13 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr "Geen matchende gebruikers gevonden"
 
-#: www/project/admin/massadd.php:90
+#: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
 #, fuzzy
 msgid "Real Name"
 msgstr "Echte naam"
 
-#: www/project/admin/massadd.php:91 www/register/index.php:226
+#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
+#: www/register/index.php:226
 #, fuzzy
 msgid "Unix Name"
 msgstr "Unixnaam"
@@ -20451,7 +20451,7 @@ msgid "No IDs Were Passed"
 msgstr ""
 
 #: www/project/admin/massfinish.php:66
-msgid "Choose the role for each user and then press &quot;Add All&quot;."
+msgid "Choose the role for each user and then press “Add All”."
 msgstr ""
 "Kies voor iedere gebruiker een rol en klik daarna op &quot;Alle "
 "toevoegen&quot;."
@@ -23419,6 +23419,11 @@ msgstr "Gebruikersnaam"
 msgid "That user does not exist."
 msgstr "Die Trove categorie bestaat niet"
 
+#~ msgid "Choose the role for each user and then press &quot;Add All&quot;."
+#~ msgstr ""
+#~ "Kies voor iedere gebruiker een rol en klik daarna op &quot;Alle "
+#~ "toevoegen&quot;."
+
 #, fuzzy
 #~ msgid "Add user"
 #~ msgstr "Gebruiker toevoegen"
@@ -24077,11 +24082,6 @@ msgstr "Die Trove categorie bestaat niet"
 #~ msgstr ""
 #~ "Onderstaande optie bepaalt of anderen je vaardigheden kunnen zien. Ook "
 #~ "als deze optie is uitgeschakeld kan je hieronder vaardigheden toevoegen."
-
-#~ msgid "Choose the role for each user and then press “Add All”."
-#~ msgstr ""
-#~ "Kies voor iedere gebruiker een rol en klik daarna op &quot;Alle "
-#~ "toevoegen&quot;."
 
 #~ msgid "Registration complete"
 #~ msgstr "Registratie compleet"

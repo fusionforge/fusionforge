@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:02+0200\n"
+"POT-Creation-Date: 2013-07-22 11:05+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -15450,7 +15450,6 @@ msgstr "Hora de rexistro "
 
 #: www/admin/grouplist.php:67 www/admin/search.php:149
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
-#: www/project/admin/massfinish.php:75
 msgid "Unix name"
 msgstr "Nome unix "
 
@@ -15975,7 +15974,7 @@ msgstr[0] "Busca do usuario cos criterios <em>%1$s</em>: %2$s coincidencia"
 msgstr[1] "Busca do usuario cos criterios <em>%1$s</em>: %2$s coincidencias"
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148 www/project/admin/massfinish.php:74
+#: www/admin/useredit.php:148
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -20630,12 +20629,13 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr "Non se atoparon usuarios coincidentes"
 
-#: www/project/admin/massadd.php:90
+#: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
 #, fuzzy
 msgid "Real Name"
 msgstr "Nome verdadeiro "
 
-#: www/project/admin/massadd.php:91 www/register/index.php:226
+#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
+#: www/register/index.php:226
 msgid "Unix Name"
 msgstr "Nome Unix"
 
@@ -20653,7 +20653,7 @@ msgid "No IDs Were Passed"
 msgstr ""
 
 #: www/project/admin/massfinish.php:66
-msgid "Choose the role for each user and then press &quot;Add All&quot;."
+msgid "Choose the role for each user and then press “Add All”."
 msgstr "Escolla o rol de cada usuario e prema &quot;Engadir todos&quot;."
 
 #: www/project/admin/massfinish.php:96
@@ -23600,6 +23600,9 @@ msgstr "Non se introduciu un nome de usuario"
 msgid "That user does not exist."
 msgstr "Ese usuario non existe. "
 
+#~ msgid "Choose the role for each user and then press &quot;Add All&quot;."
+#~ msgstr "Escolla o rol de cada usuario e prema &quot;Engadir todos&quot;."
+
 #~ msgid ""
 #~ "Check the box next to the name of the user(s) you want to add. Your "
 #~ "choices will be preserved if you click any of the letters below. When "
@@ -24647,9 +24650,6 @@ msgstr "Ese usuario non existe. "
 #~ msgstr ""
 #~ "A seguinte opción determina se os demais poden ver as súas habilidades. "
 #~ "Aínda que non poidan, poderá introducilas igualmente."
-
-#~ msgid "Choose the role for each user and then press “Add All”."
-#~ msgstr "Escolla o rol de cada usuario e prema &quot;Engadir todos&quot;."
 
 #~ msgid "Registration complete"
 #~ msgstr "Completouse o rexistro"

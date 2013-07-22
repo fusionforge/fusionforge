@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:02+0200\n"
+"POT-Creation-Date: 2013-07-22 11:05+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -15440,7 +15440,6 @@ msgstr "Registrierungszeit"
 
 #: www/admin/grouplist.php:67 www/admin/search.php:149
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
-#: www/project/admin/massfinish.php:75
 msgid "Unix name"
 msgstr "Unix Name"
 
@@ -15965,7 +15964,7 @@ msgstr[0] "Benutzer-Suche mit Merkmalen <em>%1$s</em>: %2$s Übereinstimmung"
 msgstr[1] "Benutzer-Suche mit Merkmalen <em>%1$s</em>: %2$s Übereinstimmungen"
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148 www/project/admin/massfinish.php:74
+#: www/admin/useredit.php:148
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -20682,12 +20681,13 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr "<p>Keine übereinstimmenden Benutzer gefunden</p>"
 
-#: www/project/admin/massadd.php:90
+#: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
 #, fuzzy
 msgid "Real Name"
 msgstr "Richtiger Name"
 
-#: www/project/admin/massadd.php:91 www/register/index.php:226
+#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
+#: www/register/index.php:226
 #, fuzzy
 msgid "Unix Name"
 msgstr "Unix Name"
@@ -20706,9 +20706,8 @@ msgid "No IDs Were Passed"
 msgstr ""
 
 #: www/project/admin/massfinish.php:66
-msgid "Choose the role for each user and then press &quot;Add All&quot;."
-msgstr ""
-"Wählen Sie die Rolle für jeden Benutzer und drücken Sie &quot;Add All&quot;."
+msgid "Choose the role for each user and then press “Add All”."
+msgstr "Wählen Sie die Rolle für jeden Benutzer und drücken Sie “Add All”."
 
 #: www/project/admin/massfinish.php:96
 msgid "Add All"
@@ -23672,6 +23671,11 @@ msgstr "Kein Benutzername angegeben"
 msgid "That user does not exist."
 msgstr "Dieser Nutzer existiert nicht."
 
+#~ msgid "Choose the role for each user and then press &quot;Add All&quot;."
+#~ msgstr ""
+#~ "Wählen Sie die Rolle für jeden Benutzer und drücken Sie &quot;Add "
+#~ "All&quot;."
+
 #, fuzzy
 #~ msgid ""
 #~ "Check the box next to the name of the user(s) you want to add. Your "
@@ -24740,9 +24744,6 @@ msgstr "Dieser Nutzer existiert nicht."
 #~ msgstr ""
 #~ "Sie können neue Projekte hinzufügen, indem Sie den \"Projekt hinzufügen\" "
 #~ "Link oben nutzen."
-
-#~ msgid "Choose the role for each user and then press “Add All”."
-#~ msgstr "Wählen Sie die Rolle für jeden Benutzer und drücken Sie “Add All”."
 
 #~ msgid "Registration complete"
 #~ msgstr "Registrierung abgeschlossen"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:02+0200\n"
+"POT-Creation-Date: 2013-07-22 11:05+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15324,7 +15324,6 @@ msgstr "Ora di registrazione"
 
 #: www/admin/grouplist.php:67 www/admin/search.php:149
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
-#: www/project/admin/massfinish.php:75
 #, fuzzy
 msgid "Unix name"
 msgstr "Nome unix"
@@ -15853,7 +15852,7 @@ msgstr[0] "Ricerca utente con criterio"
 msgstr[1] "Ricerca utente con criterio"
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148 www/project/admin/massfinish.php:74
+#: www/admin/useredit.php:148
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -20440,12 +20439,13 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr "Nessun utente trovato"
 
-#: www/project/admin/massadd.php:90
+#: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
 #, fuzzy
 msgid "Real Name"
 msgstr "Nome reale"
 
-#: www/project/admin/massadd.php:91 www/register/index.php:226
+#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
+#: www/register/index.php:226
 msgid "Unix Name"
 msgstr "Nome Unix"
 
@@ -20463,7 +20463,7 @@ msgid "No IDs Were Passed"
 msgstr ""
 
 #: www/project/admin/massfinish.php:66
-msgid "Choose the role for each user and then press &quot;Add All&quot;."
+msgid "Choose the role for each user and then press “Add All”."
 msgstr "Seleziona un ruolo per ogni utente e poi premi \"Aggiungi tutti\"."
 
 #: www/project/admin/massfinish.php:96
@@ -23415,6 +23415,9 @@ msgstr "Non è stato inserito alcun file"
 msgid "That user does not exist."
 msgstr "La query non esiste"
 
+#~ msgid "Choose the role for each user and then press &quot;Add All&quot;."
+#~ msgstr "Seleziona un ruolo per ogni utente e poi premi \"Aggiungi tutti\"."
+
 #, fuzzy
 #~ msgid "Add user"
 #~ msgstr "Aggiungi utente"
@@ -24043,9 +24046,6 @@ msgstr "La query non esiste"
 #~ msgstr ""
 #~ "Le seguenti opzioni determinano se altri possono vedere le tue "
 #~ "competenze. Anche se non possono vederle, puoi comunque inserirle."
-
-#~ msgid "Choose the role for each user and then press “Add All”."
-#~ msgstr "Seleziona un ruolo per ogni utente e poi premi \"Aggiungi tutti\"."
 
 #~ msgid "Registration complete"
 #~ msgstr "Registrazione completata"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:02+0200\n"
+"POT-Creation-Date: 2013-07-22 11:05+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15129,7 +15129,6 @@ msgstr ""
 
 #: www/admin/grouplist.php:67 www/admin/search.php:149
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
-#: www/project/admin/massfinish.php:75
 #, fuzzy
 msgid "Unix name"
 msgstr "Unix 이름"
@@ -15649,7 +15648,7 @@ msgid_plural "User search with criteria <em>%1$s</em>: %2$s matches"
 msgstr[0] "User search with criteria"
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148 www/project/admin/massfinish.php:74
+#: www/admin/useredit.php:148
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -20194,12 +20193,13 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr "해당하는 임무를 찾을 수 없음"
 
-#: www/project/admin/massadd.php:90
+#: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
 #, fuzzy
 msgid "Real Name"
 msgstr "Real name"
 
-#: www/project/admin/massadd.php:91 www/register/index.php:226
+#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
+#: www/register/index.php:226
 #, fuzzy
 msgid "Unix Name"
 msgstr "Unix 이름"
@@ -20218,7 +20218,7 @@ msgid "No IDs Were Passed"
 msgstr ""
 
 #: www/project/admin/massfinish.php:66
-msgid "Choose the role for each user and then press &quot;Add All&quot;."
+msgid "Choose the role for each user and then press “Add All”."
 msgstr ""
 
 #: www/project/admin/massfinish.php:96

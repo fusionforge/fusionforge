@@ -63,7 +63,7 @@ project_admin_header(array('title'=>_('Add Users From List'),'group'=>$group_id)
 
 echo '
 <p>
-'._('Choose the role for each user and then press &quot;Add All&quot;.').'
+'._('Choose the role for each user and then press “Add All”.').'
 </p>
 <form action="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'" method="post">';
 
@@ -71,8 +71,8 @@ if (!$res || db_numrows($res) < 1) {
 	echo "No Matching Users Found";
 } else {
 
-	$titles[]=_('Real name');
-	$titles[]=_('Unix name');
+	$titles[]=_('Real Name');
+	$titles[]=_('Unix Name');
 	$titles[]=_('Role');
 
 	echo $HTML->listTableTop($titles);

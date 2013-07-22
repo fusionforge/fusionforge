@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:02+0200\n"
+"POT-Creation-Date: 2013-07-22 11:05+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15214,7 +15214,6 @@ msgstr "注册时间"
 
 #: www/admin/grouplist.php:67 www/admin/search.php:149
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
-#: www/project/admin/massfinish.php:75
 #, fuzzy
 msgid "Unix name"
 msgstr "Unix帐号"
@@ -15738,7 +15737,7 @@ msgstr[0] "依照条件搜索用户"
 msgstr[1] "依照条件搜索用户"
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148 www/project/admin/massfinish.php:74
+#: www/admin/useredit.php:148
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -20259,12 +20258,13 @@ msgstr "<p> 选择你想要增加的人拥有Unix帐号的<strong>第一个字�
 msgid "No Matching Users Found"
 msgstr "<p>未发现符合的用户</p>"
 
-#: www/project/admin/massadd.php:90
+#: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
 #, fuzzy
 msgid "Real Name"
 msgstr "真实姓名"
 
-#: www/project/admin/massadd.php:91 www/register/index.php:226
+#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
+#: www/register/index.php:226
 #, fuzzy
 msgid "Unix Name"
 msgstr "Unix帐号"
@@ -20283,7 +20283,7 @@ msgid "No IDs Were Passed"
 msgstr ""
 
 #: www/project/admin/massfinish.php:66
-msgid "Choose the role for each user and then press &quot;Add All&quot;."
+msgid "Choose the role for each user and then press “Add All”."
 msgstr "选择每个用户的角色后点击 \"Add All\"。"
 
 #: www/project/admin/massfinish.php:96
@@ -23197,6 +23197,9 @@ msgstr "帐号"
 msgid "That user does not exist."
 msgstr "查询不存在"
 
+#~ msgid "Choose the role for each user and then press &quot;Add All&quot;."
+#~ msgstr "选择每个用户的角色后点击 \"Add All\"。"
+
 #, fuzzy
 #~ msgid "Add user"
 #~ msgstr "增加用户"
@@ -23759,9 +23762,6 @@ msgstr "查询不存在"
 #~ msgstr ""
 #~ "以下选项决定别人是否可以看见您的技能。就算他们不能看见您的技能，您也可以一"
 #~ "样的输入您的技能。"
-
-#~ msgid "Choose the role for each user and then press “Add All”."
-#~ msgstr "选择每个用户的角色后点击 \"Add All\"。"
 
 #~ msgid "Registration complete"
 #~ msgstr "注册完成"

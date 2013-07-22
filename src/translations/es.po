@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:02+0200\n"
+"POT-Creation-Date: 2013-07-22 11:05+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -14876,7 +14876,6 @@ msgstr "Fecha de registro"
 
 #: www/admin/grouplist.php:67 www/admin/search.php:149
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
-#: www/project/admin/massfinish.php:75
 msgid "Unix name"
 msgstr "Nombre Unix"
 
@@ -15380,7 +15379,7 @@ msgstr[0] "Búsqueda de usuario con patrón <em>%1$s</em>: %2$s encontrado"
 msgstr[1] "Búsqueda de usuario con patrón <em>%1$s</em>: %2$s encontrados"
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148 www/project/admin/massfinish.php:74
+#: www/admin/useredit.php:148
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -19899,11 +19898,12 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr "Ningún usuario encontrado"
 
-#: www/project/admin/massadd.php:90
+#: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
 msgid "Real Name"
 msgstr "Nombre real"
 
-#: www/project/admin/massadd.php:91 www/register/index.php:226
+#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
+#: www/register/index.php:226
 msgid "Unix Name"
 msgstr "Nombre Unix"
 
@@ -19921,7 +19921,7 @@ msgid "No IDs Were Passed"
 msgstr "No se indicaron IDs"
 
 #: www/project/admin/massfinish.php:66
-msgid "Choose the role for each user and then press &quot;Add All&quot;."
+msgid "Choose the role for each user and then press “Add All”."
 msgstr "Elija el rol de cada usuario y presione &quot;Añadir todos&quot;."
 
 #: www/project/admin/massfinish.php:96
@@ -22836,6 +22836,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "That user does not exist."
 msgstr "El usuario no existe"
 
+#~ msgid "Choose the role for each user and then press &quot;Add All&quot;."
+#~ msgstr "Elija el rol de cada usuario y presione &quot;Añadir todos&quot;."
+
 #~ msgid "Add user"
 #~ msgstr "Añadir usuario"
 
@@ -23710,9 +23713,6 @@ msgstr "El usuario no existe"
 #~ msgstr ""
 #~ "Usted puede añadir subproyectos usando el enlace \"Añadir subproyecto\" "
 #~ "de arriba."
-
-#~ msgid "Choose the role for each user and then press “Add All”."
-#~ msgstr "Elija el rol de cada usuario y presione &quot;Añadir todos&quot;."
 
 #~ msgid "Registration complete"
 #~ msgstr "Registro completo"

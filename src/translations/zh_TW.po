@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:02+0200\n"
+"POT-Creation-Date: 2013-07-22 11:05+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15240,7 +15240,6 @@ msgstr "註冊時間"
 
 #: www/admin/grouplist.php:67 www/admin/search.php:149
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
-#: www/project/admin/massfinish.php:75
 #, fuzzy
 msgid "Unix name"
 msgstr "Unix帳號"
@@ -15763,7 +15762,7 @@ msgstr[0] "依照條件搜尋會員"
 msgstr[1] "依照條件搜尋會員"
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148 www/project/admin/massfinish.php:74
+#: www/admin/useredit.php:148
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -20284,12 +20283,13 @@ msgstr "<p> 選擇你想要增加的人擁有Unix帳號的<strong>第一個字�
 msgid "No Matching Users Found"
 msgstr "<p>未發現符合的使用者</p>"
 
-#: www/project/admin/massadd.php:90
+#: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
 #, fuzzy
 msgid "Real Name"
 msgstr "真實姓名"
 
-#: www/project/admin/massadd.php:91 www/register/index.php:226
+#: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
+#: www/register/index.php:226
 #, fuzzy
 msgid "Unix Name"
 msgstr "Unix帳號"
@@ -20308,7 +20308,7 @@ msgid "No IDs Were Passed"
 msgstr ""
 
 #: www/project/admin/massfinish.php:66
-msgid "Choose the role for each user and then press &quot;Add All&quot;."
+msgid "Choose the role for each user and then press “Add All”."
 msgstr "選擇每個使用者的角色後點擊 \"Add All\"。"
 
 #: www/project/admin/massfinish.php:96
@@ -23220,6 +23220,9 @@ msgstr "帳號"
 msgid "That user does not exist."
 msgstr "查詢不存在"
 
+#~ msgid "Choose the role for each user and then press &quot;Add All&quot;."
+#~ msgstr "選擇每個使用者的角色後點擊 \"Add All\"。"
+
 #, fuzzy
 #~ msgid "Add user"
 #~ msgstr "增加會員"
@@ -23728,9 +23731,6 @@ msgstr "查詢不存在"
 #~ msgstr ""
 #~ "以下選項決定別人是否可以看見您的技能。就算他們不能看見您的技能，您也可以一"
 #~ "樣的輸入您的技能。"
-
-#~ msgid "Choose the role for each user and then press “Add All”."
-#~ msgstr "選擇每個使用者的角色後點擊 \"Add All\"。"
 
 #~ msgid "Registration complete"
 #~ msgstr "註冊完成"
