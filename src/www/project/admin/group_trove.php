@@ -76,7 +76,7 @@ html_use_tooltips();
 project_admin_header(array('title'=>_('Edit Trove Categorization'),'group'=>$group_id));
 
 ?>
-<p><?php echo _('Select up to three locations for this project in each of the Trove root categories. If the project does not require any or all of these locations, simply select "None Selected".') ?></p>
+<p><?php echo _('Select up to three locations for this project in each of the Trove root categories. If the project does not require any or all of these locations, simply select “None Selected”.') ?></p>
 <p><?php echo _('IMPORTANT: Projects should be categorized in the most specific locations available in the map. Simultaneous categorization in a specific category AND a parent category will result in only the more specific categorization being accepted.') ?></p>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
@@ -92,7 +92,7 @@ while (list($catroot,$fullname) = each($CATROOTS)) {
 		$title = '';
 	}
 
-	print "\n<hr />\n<p><strong>$fullname</strong></p>\n";
+	print "\n<h2>".$fullname."</h2>\n";
 
 	$res_grpcat = db_query_params ('
 		SELECT trove_cat_id
