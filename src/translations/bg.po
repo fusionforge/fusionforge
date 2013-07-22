@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 12:14+0200\n"
+"POT-Creation-Date: 2013-07-22 14:25+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14057,7 +14057,7 @@ msgstr "[Изгубена парола]"
 msgid "Welcome, %s. You may now change your password."
 msgstr ""
 
-#: www/account/lostpw.php:45 www/sendmessage.php:45
+#: www/account/lostpw.php:45 www/sendmessage.php:45 www/users:74
 #, fuzzy
 msgid "That user does not exist"
 msgstr "Това потребителско име вече е заето."
@@ -22650,10 +22650,9 @@ msgstr "Дневникът е обновен"
 msgid "No User Name Provided"
 msgstr ""
 
-#: www/users:74
 #, fuzzy
-msgid "That user does not exist."
-msgstr "Това потребителско име вече е заето."
+#~ msgid "That user does not exist."
+#~ msgstr "Това потребителско име вече е заето."
 
 #, fuzzy
 #~ msgid "User added successfully"

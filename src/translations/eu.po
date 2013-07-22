@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 12:14+0200\n"
+"POT-Creation-Date: 2013-07-22 14:25+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14362,7 +14362,7 @@ msgstr "[Pasahitza ahaztu al zaizu?]"
 msgid "Welcome, %s. You may now change your password."
 msgstr ""
 
-#: www/account/lostpw.php:45 www/sendmessage.php:45
+#: www/account/lostpw.php:45 www/sendmessage.php:45 www/users:74
 #, fuzzy
 msgid "That user does not exist"
 msgstr "Ez dago kategoria hau"
@@ -23207,10 +23207,9 @@ msgstr "Ezin da eguneratu"
 msgid "No User Name Provided"
 msgstr "Ez da erabiltzaile-izenik eman"
 
-#: www/users:74
 #, fuzzy
-msgid "That user does not exist."
-msgstr "Ez dago kategoria hau"
+#~ msgid "That user does not exist."
+#~ msgstr "Ez dago kategoria hau"
 
 #~ msgid "User name:"
 #~ msgstr "Erabiltzaile izena:"

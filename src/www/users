@@ -71,7 +71,7 @@ $user =& user_get_object_by_name($username);
 
 if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 
-	exit_error(_('That user does not exist.'));
+	exit_error(_('That user does not exist'));
 
 } else {
 	// if a custom content-type is selected, then redirect to plugin's rendering

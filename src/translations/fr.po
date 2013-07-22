@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 12:14+0200\n"
+"POT-Creation-Date: 2013-07-22 14:25+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -14075,7 +14075,7 @@ msgstr "Connexion avec mot de passe perdu"
 msgid "Welcome, %s. You may now change your password."
 msgstr "Bienvenue, %s.  Vous pouvez maintenant changer votre mot de passe."
 
-#: www/account/lostpw.php:45 www/sendmessage.php:45
+#: www/account/lostpw.php:45 www/sendmessage.php:45 www/users:74
 msgid "That user does not exist"
 msgstr "Cet utilisateur n'existe pas"
 
@@ -22950,9 +22950,8 @@ msgstr "Erreur de mise à jour"
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
 
-#: www/users:74
-msgid "That user does not exist."
-msgstr "Cet utilisateur n'existe pas"
+#~ msgid "That user does not exist."
+#~ msgstr "Cet utilisateur n'existe pas"
 
 #~ msgid "User name:"
 #~ msgstr "Nom d'utilisateur :"

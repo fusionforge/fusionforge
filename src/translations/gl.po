@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 12:14+0200\n"
+"POT-Creation-Date: 2013-07-22 14:25+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -14576,7 +14576,7 @@ msgstr "Acceso co contrasinal esquecido"
 msgid "Welcome, %s. You may now change your password."
 msgstr "Benvido/a, %s. Agora pode cambiar o contrasinal."
 
-#: www/account/lostpw.php:45 www/sendmessage.php:45
+#: www/account/lostpw.php:45 www/sendmessage.php:45 www/users:74
 msgid "That user does not exist"
 msgstr "Ese usuario non existe"
 
@@ -23553,9 +23553,8 @@ msgstr "Non se puido actualizar"
 msgid "No User Name Provided"
 msgstr "Non se introduciu un nome de usuario"
 
-#: www/users:74
-msgid "That user does not exist."
-msgstr "Ese usuario non existe. "
+#~ msgid "That user does not exist."
+#~ msgstr "Ese usuario non existe. "
 
 #~ msgid "User name:"
 #~ msgstr "Nome de usuario: "

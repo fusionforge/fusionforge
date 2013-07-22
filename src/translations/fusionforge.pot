@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 12:15+0200\n"
+"POT-Creation-Date: 2013-07-22 14:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13183,7 +13183,7 @@ msgstr ""
 msgid "Welcome, %s. You may now change your password."
 msgstr ""
 
-#: www/account/lostpw.php:45 www/sendmessage.php:45
+#: www/account/lostpw.php:45 www/sendmessage.php:45 www/users:74
 msgid "That user does not exist"
 msgstr ""
 
@@ -21364,8 +21364,4 @@ msgstr ""
 
 #: www/users:35
 msgid "No User Name Provided"
-msgstr ""
-
-#: www/users:74
-msgid "That user does not exist."
 msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 12:14+0200\n"
+"POT-Creation-Date: 2013-07-22 14:25+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14363,7 +14363,7 @@ msgstr "[忘了密码？]"
 msgid "Welcome, %s. You may now change your password."
 msgstr ""
 
-#: www/account/lostpw.php:45 www/sendmessage.php:45
+#: www/account/lostpw.php:45 www/sendmessage.php:45 www/users:74
 #, fuzzy
 msgid "That user does not exist"
 msgstr "查询不存在"
@@ -23147,10 +23147,9 @@ msgstr "大量更新"
 msgid "No User Name Provided"
 msgstr "帐号"
 
-#: www/users:74
 #, fuzzy
-msgid "That user does not exist."
-msgstr "查询不存在"
+#~ msgid "That user does not exist."
+#~ msgstr "查询不存在"
 
 #~ msgid "User name:"
 #~ msgstr "名称："

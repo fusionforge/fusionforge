@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 12:14+0200\n"
+"POT-Creation-Date: 2013-07-22 14:25+0200\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -13193,7 +13193,7 @@ msgstr ""
 msgid "Welcome, %s. You may now change your password."
 msgstr ""
 
-#: www/account/lostpw.php:45 www/sendmessage.php:45
+#: www/account/lostpw.php:45 www/sendmessage.php:45 www/users:74
 msgid "That user does not exist"
 msgstr ""
 
@@ -21384,8 +21384,4 @@ msgstr ""
 
 #: www/users:35
 msgid "No User Name Provided"
-msgstr ""
-
-#: www/users:74
-msgid "That user does not exist."
 msgstr ""

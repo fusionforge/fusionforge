@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 12:14+0200\n"
+"POT-Creation-Date: 2013-07-22 14:25+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14681,7 +14681,7 @@ msgstr "Восстановление паролей"
 msgid "Welcome, %s. You may now change your password."
 msgstr "Добро пожаловать, %s. Теперь вы можете изменить ваш пароль."
 
-#: www/account/lostpw.php:45 www/sendmessage.php:45
+#: www/account/lostpw.php:45 www/sendmessage.php:45 www/users:74
 #, fuzzy
 msgid "That user does not exist"
 msgstr "Пользователь с таким именем не существует."
@@ -23686,9 +23686,8 @@ msgstr "Глобальное изменение"
 msgid "No User Name Provided"
 msgstr "Имя участника обязательно"
 
-#: www/users:74
-msgid "That user does not exist."
-msgstr "Пользователь с таким именем не существует."
+#~ msgid "That user does not exist."
+#~ msgstr "Пользователь с таким именем не существует."
 
 #~ msgid "User name:"
 #~ msgstr "Имя пользователя:"
