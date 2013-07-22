@@ -30,7 +30,8 @@ require_once $gfwww.'stats/site_stats_utils.php';
 session_require_global_perm ('forge_stats', 'read') ;
 
 $HTML->header(array('title' => sprintf(_('%1$s I18n Statistics: Languages Distributions'), forge_get_config ('forge_name'))));
-echo $GLOBALS['HTML']->listTableTop(array(_('Language')."",_('Users')."","%"));
+
+echo $GLOBALS['HTML']->listTableTop(array(_('Language'), _('Users'), '%'));
 
 $total=db_result(db_query_params('SELECT count(user_name) AS total FROM users', array()),0,'total');
 
@@ -43,9 +44,9 @@ $non_english=0;
 $i=0;
 while ($lang_stat = db_fetch_array($res)) {
 	if ($lang_stat['cnt'] > 0) {
-		echo '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'><td>'.$lang_stat['lang'].'</td>'.
-		'<td align="right">'.$lang_stat['cnt'].' </td>'.
-		'<td align="right">'.sprintf("%.2f",$lang_stat['cnt']*100/$total)." </td></tr>\n";
+		echo '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'><th>'.$lang_stat['lang'].'</th>'.
+		'<td class="align-right">'.$lang_stat['cnt'].' </td>'.
+		'<td class="align-right">'.sprintf("%.2f",$lang_stat['cnt']*100/$total)." </td></tr>\n";
 		if ($lang_stat['lang']!='English') $non_english+=$lang_stat['cnt'];
 	}
 }
