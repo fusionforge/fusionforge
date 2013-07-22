@@ -121,16 +121,6 @@ function user_personal_information($user, $compact = false, $title = false) {
 				</td>
 			</tr>';
 
-			if ($user->getJabberAddress()) {
-				$html .= '
-			<tr>
-				<td>'. _('Jabber Address') .'</td>
-				<td>
-					<a href="jabber:'. $user->getJabberAddress() .'"><strong>'. $user->getJabberAddress() .'</strong></a>
-				</td>
-			</tr>';
-			}
-
 			if ($user->getAddress() || $user->getAddress2()) {
 				$html .= '<tr>
 				<td><'. _('Address:') .'</td>

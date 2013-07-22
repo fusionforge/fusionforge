@@ -225,8 +225,8 @@ class GFUser extends Error {
 	 * @param	string	The users preference for receiving community updates by email.
 	 * @param	int	The ID of the language preference.
 	 * @param	string	The users preferred timezone.
-	 * @param	string	The users Jabber address.
-	 * @param	int	The users Jabber preference.
+	 * @param	ignored	(no longer used)
+	 * @param	ignored	(no longer used)
 	 * @param	int	The users theme_id.
 	 * @param	string	The users unix_box.
 	 * @param	string	The users address.
@@ -241,7 +241,7 @@ class GFUser extends Error {
 	 *
 	 */
 	function create($unix_name, $firstname, $lastname, $password1, $password2, $email,
-		$mail_site, $mail_va, $language_id, $timezone, $jabber_address, $jabber_only, $theme_id,
+		$mail_site, $mail_va, $language_id, $timezone, $dummy1, $dummy2, $theme_id,
 		$unix_box = 'shell', $address = '', $address2 = '', $phone = '', $fax = '', $title = '', $ccode = 'US', $send_mail = true, $tooltips = true) {
 		global $SYS;
 		if (!$theme_id) {
@@ -286,15 +286,6 @@ class GFUser extends Error {
 		if (!validate_email($email)) {
 			$this->setError(_('Invalid Email Address:') .' '. $email);
 			return false;
-		}
-		if ($jabber_address && !validate_email($jabber_address)) {
-			$this->setError(_('Invalid Jabber Address'));
-			return false;
-		}
-		if (!$jabber_only) {
-			$jabber_only=0;
-		} else {
-			$jabber_only=1;
 		}
 		if ($unix_name && db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name LIKE $1',
 							     array($unix_name))) > 0) {
@@ -351,8 +342,8 @@ class GFUser extends Error {
 		// if we got this far, it must be good
 		$confirm_hash = substr(md5($password1 . util_randbytes() . microtime()),0,16);
 		db_begin();
-		$result = db_query_params('INSERT INTO users (user_name,user_pw,unix_pw,realname,firstname,lastname,email,add_date,status,confirm_hash,mail_siteupdates,mail_va,language,timezone,jabber_address,jabber_only,unix_box,address,address2,phone,fax,title,ccode,theme_id,tooltips)
-							VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24,$25)',
+		$result = db_query_params('INSERT INTO users (user_name,user_pw,unix_pw,realname,firstname,lastname,email,add_date,status,confirm_hash,mail_siteupdates,mail_va,language,timezone,unix_box,address,address2,phone,fax,title,ccode,theme_id,tooltips)
+							VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23)',
 					   array($unix_name,
 						 md5($password1),
 						 account_genunixpw($password1),
@@ -367,8 +358,6 @@ class GFUser extends Error {
 						 (($mail_va)?"1":"0"),
 						 $language_id,
 						 $timezone,
-						 $jabber_address,
-						 $jabber_only,
 						 $unix_box,
 						 htmlspecialchars($address),
 						 htmlspecialchars($address2),
@@ -520,8 +509,8 @@ Enjoy the site.
 	 * @param	string	The users preference for receiving site updates by email.
 	 * @param	string	The users preference for receiving community updates by email.
 	 * @param	string	The users preference for being participating in "peer ratings".
-	 * @param	string	The users Jabber account address.
-	 * @param	int	The users Jabber preference.
+	 * @param	ignored	(no longer used)
+	 * @param	ignored	(no longer used)
 	 * @param	int	The users theme_id preference.
 	 * @param	string	The users address.
 	 * @param	string	The users address2.
@@ -533,20 +522,10 @@ Enjoy the site.
 	 * @param	string	The users email.
 	 */
 	function update($firstname, $lastname, $language_id, $timezone, $mail_site, $mail_va, $use_ratings,
-			$jabber_address, $jabber_only, $theme_id, $address, $address2, $phone, $fax, $title, $ccode, $tooltips, $email='') {
+			$dummy1, $dummy2, $theme_id, $address, $address2, $phone, $fax, $title, $ccode, $tooltips, $email='') {
 		$mail_site = $mail_site ? 1 : 0;
 		$mail_va   = $mail_va   ? 1 : 0;
 		$block_ratings = $use_ratings ? 0 : 1;
-
-		if ($jabber_address && !validate_email($jabber_address)) {
-			$this->setError(_('Invalid Jabber Address'));
-			return false;
-		}
-		if (!$jabber_only) {
-			$jabber_only = 0;
-		} else {
-			$jabber_only = 1;
-		}
 
 		db_begin();
 
@@ -561,17 +540,15 @@ Enjoy the site.
 				mail_siteupdates=$6,
 				mail_va=$7,
 				block_ratings=$8,
-				jabber_address=$9,
-				jabber_only=$10,
-				address=$11,
-				address2=$12,
-				phone=$13,
-				fax=$14,
-				title=$15,
-				ccode=$16,
-				theme_id=$17,
-				tooltips=$18
-				WHERE user_id=$19',
+				address=$9,
+				address2=$10,
+				phone=$11,
+				fax=$12,
+				title=$13,
+				ccode=$14,
+				theme_id=$15,
+				tooltips=$16
+				WHERE user_id=$17',
 			array (
 				htmlspecialchars($firstname . ' ' .$lastname),
 				htmlspecialchars($firstname),
@@ -581,8 +558,6 @@ Enjoy the site.
 				$mail_site,
 				$mail_va,
 				$block_ratings,
-				$jabber_address,
-				$jabber_only,
 				htmlspecialchars($address),
 				htmlspecialchars($address2),
 				htmlspecialchars($phone),
@@ -1089,24 +1064,6 @@ Enjoy the site.
 	 */
 	function getLanguage() {
 		return $this->data_array['language'];
-	}
-
-	/**
-	 * getJabberAddress - this user's optional jabber address.
-	 *
-	 * @return	string	This user's jabber address.
-	 */
-	function getJabberAddress() {
-		return $this->data_array['jabber_address'];
-	}
-
-	/**
-	 * getJabberOnly - whether this person wants updates sent ONLY to jabber.
-	 *
-	 * @return	boolean	This user's jabber preference.
-	 */
-	function getJabberOnly() {
-		return $this->data_array['jabber_only'];
 	}
 
 	/**

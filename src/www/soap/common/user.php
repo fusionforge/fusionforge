@@ -78,7 +78,7 @@ $server->register(
 );
 
 //addUser (unix_name,firstname,lastname,password1,password2,email,
-	//mail_site,mail_va,language_id,timezone,jabber_address,jabber_only,
+	//mail_site,mail_va,language_id,timezone,dummy1,dummy2,
 	//theme_id,unix_box='shell',address='',address2='',phone='',fax='',
 	//title='',ccode='US',send_mail)
 $server->register(
@@ -98,7 +98,7 @@ $server->register(
     $uri.'#addUser','rpc','encoded'
 );
 
-//updateUser  (session_ser,user_id,firstname,lastname,language_id,timezone,mail_site,mail_va,use_ratings,jabber_address,$jabber_only,theme_id,address,address2,phone,fax,title,ccode)
+//updateUser  (session_ser,user_id,firstname,lastname,language_id,timezone,mail_site,mail_va,use_ratings,dummy1,dummy2,theme_id,address,address2,phone,fax,title,ccode)
 $server->register(
     'updateUser',
     array('session_ser'=>'xsd:string',

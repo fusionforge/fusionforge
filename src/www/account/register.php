@@ -42,8 +42,6 @@ $mail_va = getIntFromRequest('mail_va');
 
 $language_id = getIntFromRequest('language_id');
 $timezone = getStringFromRequest('timezone');
-$jabber_address = getStringFromRequest('jabber_address');
-$jabber_only = getStringFromRequest('jabber_only');
 $theme_id = getIntFromRequest('theme_id');
 $address = getStringFromRequest('address');
 $address2 = getStringFromRequest('address2');
@@ -86,7 +84,7 @@ if (getStringFromRequest('submit')) {
 
 		$new_user = new GFUser();
 		$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,
-					      $email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,'',
+					      $email,$mail_site,$mail_va,$language_id,$timezone,'',0,$theme_id,'',
 					      $address,$address2,$phone,$fax,$title,$ccode,$send_mail);
 		if ($register) {
 			site_header(array('title'=>'Register Confirmation'));
@@ -193,17 +191,6 @@ if($toDisplay != "") {
 	echo _('Email Address:') . utils_requiredField() . "<br />\n<em>";
 	printf(_('This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@%1$s&gt; that will forward to this address.'), forge_get_config('users_host')); ?></em>
 <br /><input size="30" type="text" name="email" value="<?php print(htmlspecialchars($email)); ?>" />
-</p>
-<p>
-<?php
-if (forge_get_config('use_jabber')) {
-	echo _('Jabber Address:').'<br />
-	<input size="30" type="text" name="jabber_address" value="'.
-	htmlspecialchars($jabber_address) .'" /><br />
-	<input type="checkbox" name="jabber_only" value="1" />
-	'._('Send auto-generated notices only to my Jabber address').'.';
-}
-?>
 </p>
 <p>
 <?php echo _('Address:'); ?><br />

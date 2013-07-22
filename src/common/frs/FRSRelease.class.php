@@ -273,7 +273,7 @@ class FRSRelease extends Error {
 	}
 
 	/**
-	 *  sendNotice - the logic to send an email/jabber notice for a release.
+	 *  sendNotice - the logic to send an email notice for a release.
 	 *
 	 *  @return	boolean	success.
 	 */

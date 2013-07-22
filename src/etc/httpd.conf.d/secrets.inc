@@ -19,8 +19,5 @@ RequestHeader append GForgeDbpasswd "{core/database_password}"
 RequestHeader unset GForgeLdapPasswd
 RequestHeader append GForgeLdapPasswd "{core/ldap_password}"
 
-RequestHeader unset GForgeJabberPasswd
-RequestHeader append GForgeJabberPasswd "{core/jabber_password}"
-
 RequestHeader unset GForgeSessionKey
 RequestHeader append GForgeSessionKey "{core/session_key}"

@@ -106,8 +106,6 @@ if (isset($gfcgfile) && file_exists ($gfcgfile)) {
 				 'GForgeLdapPasswd', 'sys_gfldap_passwd', NULL) ;
 	setconfigfromoldsources ('core', 'session_key',
 				 'GForgeSessionKey', 'sys_session_key', NULL) ;
-	setconfigfromoldsources ('core', 'jabber_password',
-				 'GForgeJabberPasswd', 'sys_gfjabber_pass', NULL) ;
 
 	forge_define_config_item ('source_path', 'core', $fusionforge_basedir) ;
 	forge_define_config_item ('data_path', 'core', '/var/lib/gforge') ;
@@ -128,8 +126,6 @@ if (isset($gfcgfile) && file_exists ($gfcgfile)) {
 				 'GForgeDbpasswd', 'sys_gfdbpasswd') ;
 	setconfigfromenv ('core', 'ldap_password',
 				 'GForgeLdapPasswd', 'sys_gfldap_passwd') ;
-	setconfigfromenv ('core', 'jabber_password',
-				 'GForgeJabberPasswd', 'sys_gfjabber_pass') ;
 	setconfigfromenv ('core', 'session_key',
 				 'GForgeSessionKey', 'sys_session_key') ;
 }
@@ -278,11 +274,6 @@ if (forge_get_config('database_name') != "") {
 
 	if (getenv ('FUSIONFORGE_NO_PLUGINS') != 'true') {
 		setup_plugin_manager () ;
-	}
-
-	// Jabber subsystem
-	if (forge_get_config('use_jabber')) {
-		require_once $gfcommon.'include/Jabber.class.php';
 	}
 
 	ini_set('date.timezone', forge_get_config ('default_timezone'));

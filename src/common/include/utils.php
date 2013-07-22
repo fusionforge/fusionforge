@@ -285,59 +285,24 @@ function util_convert_body($str,$charset) {
 	return mb_convert_encoding($str,$charset,"UTF-8");
 }
 
-function util_send_jabber($to,$subject,$body) {
-	if (!forge_get_config('use_jabber')) {
-		return;
-	}
-	$JABBER = new Jabber();
-	if (!$JABBER->Connect()) {
-		echo '<br />Unable to connect';
-		return false;
-	}
-	//$JABBER->SendAuth();
-	//$JABBER->AccountRegistration();
-	if (!$JABBER->SendAuth()) {
-		echo '<br />Auth Failure';
-		$JABBER->Disconnect();
-		return false;
-		//or die("Couldn't authenticate!");
-	}
-	$JABBER->SendPresence(NULL, NULL, "online");
-
-	$body=htmlspecialchars($body);
-	$to_arr=explode(',',$to);
-	for ($i=0; $i<count($to_arr); $i++) {
-		if ($to_arr[$i]) {
-			//echo '<br />Sending Jabbers To: '.$to_arr[$i];
-			if (!$JABBER->SendMessage($to_arr[$i], "normal", NULL, array("body" => $body,"subject"=>$subject))) {
-				echo '<br />Error Sending to '.$to_arr[$i];
-			}
-		}
-	}
-
-	$JABBER->CruiseControl(2);
-	$JABBER->Disconnect();
-}
-
 /**
  *	util_handle_message() - a convenience wrapper which sends messages
- *	to either a jabber account or email account or both, depending on
- *	user preferences
+ *	to an email account
  *
  *	@param	array	array of user_id's from the user table
  *	@param	string	subject of the message
  *	@param	string	the message body
  *	@param	string	a comma-separated list of email address
- *	@param	string	a comma-separated list of jabber address
+ *	@param	ignored	(no longer used)
  *	@param	string	From header
  */
-function util_handle_message($id_arr,$subject,$body,$extra_emails='',$extra_jabbers='',$from='') {
+function util_handle_message($id_arr,$subject,$body,$extra_emails='',$dummy1='',$from='') {
 	$address=array();
 
 	if (count($id_arr) < 1) {
 
 	} else {
-		$res = db_query_params ('SELECT user_id,jabber_address,email,jabber_only FROM users WHERE user_id = ANY ($1)',
+		$res = db_query_params ('SELECT user_id,email FROM users WHERE user_id = ANY ($1)',
 					array (db_int_array_to_any_clause ($id_arr))) ;
 		$rows = db_numrows($res) ;
 
@@ -346,30 +311,14 @@ function util_handle_message($id_arr,$subject,$body,$extra_emails='',$extra_jabb
 				// Do not send messages to "Nobody"
 				continue;
 			}
-			//
-			//  Build arrays of the jabber address
-			//
-			if (db_result($res,$i,'jabber_address')) {
-				$address['jabber_address'][]=db_result($res,$i,'jabber_address');
-				if (db_result($res,$i,'jabber_only') != 1) {
-					$address['email'][]=db_result($res,$i,'email');
-				}
-			} else {
-				$address['email'][]=db_result($res,$i,'email');
-			}
+			$address['email'][]=db_result($res,$i,'email');
 		}
 		if (isset ($address['email']) && count($address['email']) > 0) {
 			$extra_emails=implode($address['email'],',').',' . $extra_emails;
 		}
-		if (isset ($address['jabber_address']) && count($address['jabber_address']) > 0) {
-			$extra_jabbers=implode($address['jabber_address'],',').','.$extra_jabbers;
-		}
 	}
 	if ($extra_emails) {
 		util_send_message('',$subject,$body,$from,$extra_emails);
-	}
-	if ($extra_jabbers) {
-		util_send_jabber($extra_jabbers,$subject,$body);
 	}
 }
 
