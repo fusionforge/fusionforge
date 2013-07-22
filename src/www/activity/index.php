@@ -176,9 +176,9 @@ $multiselect = html_build_multiple_select_box_from_arrays($ids, $texts, 'show[]'
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <table>
 	<tr>
-		<td><strong><?php echo _('Activity') ?></strong></td>
-		<td><strong><?php echo _('Start') ?></strong></td>
-		<td><strong><?php echo _('End') ?></strong></td>
+		<td><strong><?php echo _('Activity')._(':'); ?></strong></td>
+		<td><strong><?php echo _('Start Date')._(':'); ?></strong></td>
+		<td><strong><?php echo _('End Date')._(':'); ?></strong></td>
 		<td></td>
 	</tr>
 	<tr>
@@ -188,7 +188,7 @@ $multiselect = html_build_multiple_select_box_from_arrays($ids, $texts, 'show[]'
 		<td class="top"><input name="end_date"
 			value="<?php echo $rendered_end; ?>" size="10" maxlength="10" /></td>
 		<td class="top">
-			<input type="submit" name="submit" value="<?php echo _('Submit'); ?>" />
+			<input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" />
 		</td>
 	</tr>
 </table>

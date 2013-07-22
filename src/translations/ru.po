@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:37+0200\n"
+"POT-Creation-Date: 2013-07-22 14:43+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1596,18 +1596,18 @@ msgstr ""
 
 #: common/docman/views/reporting.php:92
 #: common/tracker/include/ArtifactTypeHtml.class.php:323
-#: www/frs/reporting/downloads.php:107 www/people/editprofile.php:283
-#: www/people/skills_utils.php:50 www/people/skills_utils.php:157
-#: www/pm/add_task.php:95 www/pm/browse_task.php:127
-#: www/pm/browse_task.php:233 www/pm/detail_task.php:83
-#: www/pm/ganttpage.php:71 www/pm/mod_task.php:146
-#: www/reporting/groupadded.php:61 www/reporting/groupcum.php:60
-#: www/reporting/projectact.php:65 www/reporting/projecttime.php:74
-#: www/reporting/siteact.php:65 www/reporting/sitetimebar.php:60
-#: www/reporting/sitetime.php:73 www/reporting/toolspie.php:64
-#: www/reporting/useract.php:80 www/reporting/useradded.php:59
-#: www/reporting/usercum.php:60 www/reporting/usersummary.php:69
-#: www/reporting/usertime.php:90
+#: www/activity/index.php:180 www/frs/reporting/downloads.php:107
+#: www/people/editprofile.php:283 www/people/skills_utils.php:50
+#: www/people/skills_utils.php:157 www/pm/add_task.php:95
+#: www/pm/browse_task.php:127 www/pm/browse_task.php:233
+#: www/pm/detail_task.php:83 www/pm/ganttpage.php:71 www/pm/mod_task.php:146
+#: www/project/stats/index.php:96 www/reporting/groupadded.php:61
+#: www/reporting/groupcum.php:60 www/reporting/projectact.php:65
+#: www/reporting/projecttime.php:74 www/reporting/siteact.php:65
+#: www/reporting/sitetimebar.php:60 www/reporting/sitetime.php:73
+#: www/reporting/toolspie.php:64 www/reporting/useract.php:80
+#: www/reporting/useradded.php:59 www/reporting/usercum.php:60
+#: www/reporting/usersummary.php:69 www/reporting/usertime.php:90
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:50
 #: www/tracker/reporting/index.php:124
 msgid "Start Date"
@@ -1685,76 +1685,78 @@ msgstr "Начальная дата"
 #: www/account/register.php:225 www/account/register.php:231
 #: www/account/register.php:237 www/account/register.php:243
 #: www/account/verify.php:76 www/account/verify.php:78
-#: www/account/verify.php:86 www/admin/massmail.php:94
-#: www/admin/massmail.php:113 www/admin/massmail.php:116
-#: www/admin/massmail.php:142 www/admin/useredit.php:130
-#: www/admin/useredit.php:139 www/admin/useredit.php:148
-#: www/admin/useredit.php:157 www/admin/useredit.php:211
-#: www/frs/reporting/downloads.php:105 www/frs/reporting/downloads.php:107
-#: www/frs/reporting/downloads.php:109 www/pm/admin/index.php:211
-#: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
-#: www/pm/format_csv.php:86 www/pm/format_csv.php:89 www/pm/format_csv.php:93
-#: www/pm/format_csv.php:97 www/register/index.php:226
-#: www/reporting/groupadded.php:60 www/reporting/groupadded.php:61
-#: www/reporting/groupadded.php:62 www/reporting/groupcum.php:59
-#: www/reporting/groupcum.php:60 www/reporting/groupcum.php:61
-#: www/reporting/projectact.php:62 www/reporting/projectact.php:63
-#: www/reporting/projectact.php:64 www/reporting/projectact.php:65
-#: www/reporting/projectact.php:66 www/reporting/projecttime.php:72
-#: www/reporting/projecttime.php:73 www/reporting/projecttime.php:74
-#: www/reporting/projecttime.php:75 www/reporting/siteact.php:63
-#: www/reporting/siteact.php:64 www/reporting/siteact.php:65
-#: www/reporting/siteact.php:66 www/reporting/sitetimebar.php:60
-#: www/reporting/sitetimebar.php:61 www/reporting/sitetime.php:72
-#: www/reporting/sitetime.php:73 www/reporting/sitetime.php:74
-#: www/reporting/timecategory.php:91 www/reporting/toolspie.php:64
-#: www/reporting/toolspie.php:65 www/reporting/useract.php:77
-#: www/reporting/useract.php:78 www/reporting/useract.php:79
-#: www/reporting/useract.php:80 www/reporting/useract.php:81
-#: www/reporting/useradded.php:58 www/reporting/useradded.php:59
-#: www/reporting/useradded.php:60 www/reporting/usercum.php:59
-#: www/reporting/usercum.php:60 www/reporting/usercum.php:61
-#: www/reporting/usersummary.php:69 www/reporting/usersummary.php:70
-#: www/reporting/usersummary.php:71 www/reporting/usertime.php:88
-#: www/reporting/usertime.php:89 www/reporting/usertime.php:90
-#: www/reporting/usertime.php:91 www/snippet/add_snippet_to_package.php:128
-#: www/snippet/addversion.php:94 www/snippet/addversion.php:98
-#: www/snippet/addversion.php:102 www/snippet/addversion.php:217
-#: www/snippet/addversion.php:221 www/snippet/package.php:147
-#: www/snippet/package.php:151 www/snippet/package.php:156
-#: www/snippet/package.php:169
+#: www/account/verify.php:86 www/activity/index.php:179
+#: www/activity/index.php:180 www/activity/index.php:181
+#: www/admin/massmail.php:94 www/admin/massmail.php:113
+#: www/admin/massmail.php:116 www/admin/massmail.php:142
+#: www/admin/useredit.php:130 www/admin/useredit.php:139
+#: www/admin/useredit.php:148 www/admin/useredit.php:157
+#: www/admin/useredit.php:211 www/frs/reporting/downloads.php:105
+#: www/frs/reporting/downloads.php:107 www/frs/reporting/downloads.php:109
+#: www/pm/admin/index.php:211 www/pm/format_csv.php:66
+#: www/pm/format_csv.php:71 www/pm/format_csv.php:76 www/pm/format_csv.php:86
+#: www/pm/format_csv.php:89 www/pm/format_csv.php:93 www/pm/format_csv.php:97
+#: www/register/index.php:226 www/reporting/groupadded.php:60
+#: www/reporting/groupadded.php:61 www/reporting/groupadded.php:62
+#: www/reporting/groupcum.php:59 www/reporting/groupcum.php:60
+#: www/reporting/groupcum.php:61 www/reporting/projectact.php:62
+#: www/reporting/projectact.php:63 www/reporting/projectact.php:64
+#: www/reporting/projectact.php:65 www/reporting/projectact.php:66
+#: www/reporting/projecttime.php:72 www/reporting/projecttime.php:73
+#: www/reporting/projecttime.php:74 www/reporting/projecttime.php:75
+#: www/reporting/siteact.php:63 www/reporting/siteact.php:64
+#: www/reporting/siteact.php:65 www/reporting/siteact.php:66
+#: www/reporting/sitetimebar.php:60 www/reporting/sitetimebar.php:61
+#: www/reporting/sitetime.php:72 www/reporting/sitetime.php:73
+#: www/reporting/sitetime.php:74 www/reporting/timecategory.php:91
+#: www/reporting/toolspie.php:64 www/reporting/toolspie.php:65
+#: www/reporting/useract.php:77 www/reporting/useract.php:78
+#: www/reporting/useract.php:79 www/reporting/useract.php:80
+#: www/reporting/useract.php:81 www/reporting/useradded.php:58
+#: www/reporting/useradded.php:59 www/reporting/useradded.php:60
+#: www/reporting/usercum.php:59 www/reporting/usercum.php:60
+#: www/reporting/usercum.php:61 www/reporting/usersummary.php:69
+#: www/reporting/usersummary.php:70 www/reporting/usersummary.php:71
+#: www/reporting/usertime.php:88 www/reporting/usertime.php:89
+#: www/reporting/usertime.php:90 www/reporting/usertime.php:91
+#: www/snippet/add_snippet_to_package.php:128 www/snippet/addversion.php:94
+#: www/snippet/addversion.php:98 www/snippet/addversion.php:102
+#: www/snippet/addversion.php:217 www/snippet/addversion.php:221
+#: www/snippet/package.php:147 www/snippet/package.php:151
+#: www/snippet/package.php:156 www/snippet/package.php:169
 #, php-format
 msgid ":"
 msgstr ""
 
 #: common/docman/views/reporting.php:94
 #: common/tracker/include/ArtifactTypeHtml.class.php:324
-#: www/frs/reporting/downloads.php:109 www/people/editprofile.php:284
-#: www/people/skills_utils.php:51 www/people/skills_utils.php:158
-#: www/pm/add_task.php:110 www/pm/browse_task.php:128
-#: www/pm/browse_task.php:235 www/pm/detail_task.php:87
-#: www/pm/ganttpage.php:72 www/pm/mod_task.php:160
-#: www/reporting/groupadded.php:62 www/reporting/groupcum.php:61
-#: www/reporting/projectact.php:66 www/reporting/projecttime.php:75
-#: www/reporting/siteact.php:66 www/reporting/sitetimebar.php:61
-#: www/reporting/sitetime.php:74 www/reporting/toolspie.php:65
-#: www/reporting/useract.php:81 www/reporting/useradded.php:60
-#: www/reporting/usercum.php:61 www/reporting/usersummary.php:70
-#: www/reporting/usersummary.php:106 www/reporting/usertime.php:91
+#: www/activity/index.php:181 www/frs/reporting/downloads.php:109
+#: www/people/editprofile.php:284 www/people/skills_utils.php:51
+#: www/people/skills_utils.php:158 www/pm/add_task.php:110
+#: www/pm/browse_task.php:128 www/pm/browse_task.php:235
+#: www/pm/detail_task.php:87 www/pm/ganttpage.php:72 www/pm/mod_task.php:160
+#: www/project/stats/index.php:97 www/reporting/groupadded.php:62
+#: www/reporting/groupcum.php:61 www/reporting/projectact.php:66
+#: www/reporting/projecttime.php:75 www/reporting/siteact.php:66
+#: www/reporting/sitetimebar.php:61 www/reporting/sitetime.php:74
+#: www/reporting/toolspie.php:65 www/reporting/useract.php:81
+#: www/reporting/useradded.php:60 www/reporting/usercum.php:61
+#: www/reporting/usersummary.php:70 www/reporting/usersummary.php:106
+#: www/reporting/usertime.php:91
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:51
 #: www/tracker/reporting/index.php:126
 msgid "End Date"
 msgstr "Дата окончания"
 
-#: common/docman/views/reporting.php:96 www/frs/reporting/downloads.php:111
-#: www/project/stats/index.php:98 www/reporting/groupadded.php:63
-#: www/reporting/groupcum.php:62 www/reporting/projectact.php:67
-#: www/reporting/projecttime.php:76 www/reporting/siteact.php:67
-#: www/reporting/sitetimebar.php:62 www/reporting/sitetime.php:77
-#: www/reporting/toolspie.php:66 www/reporting/useract.php:82
-#: www/reporting/useradded.php:61 www/reporting/usercum.php:62
-#: www/reporting/usersummary.php:72 www/reporting/usertime.php:92
-#: www/tracker/reporting/index.php:128
+#: common/docman/views/reporting.php:96 www/activity/index.php:191
+#: www/frs/reporting/downloads.php:111 www/project/stats/index.php:98
+#: www/reporting/groupadded.php:63 www/reporting/groupcum.php:62
+#: www/reporting/projectact.php:67 www/reporting/projecttime.php:76
+#: www/reporting/siteact.php:67 www/reporting/sitetimebar.php:62
+#: www/reporting/sitetime.php:77 www/reporting/toolspie.php:66
+#: www/reporting/useract.php:82 www/reporting/useradded.php:61
+#: www/reporting/usercum.php:62 www/reporting/usersummary.php:72
+#: www/reporting/usertime.php:92 www/tracker/reporting/index.php:128
 msgid "Refresh"
 msgstr "Обновить"
 
@@ -4686,12 +4688,11 @@ msgstr ""
 #: plugins/mantisbt/view/addOrEditNote.php:58
 #: plugins/scmgit/common/GitPlugin.class.php:1124
 #: plugins/scmhg/common/HgPlugin.class.php:632
-#: www/account/pending-resend.php:79 www/activity/index.php:191
-#: www/admin/admin_table.php:222 www/admin/cronman.php:37
-#: www/admin/globalroleedit.php:248 www/admin/index.php:166
-#: www/admin/pending-news.php:163 www/forum/admin/index.php:412
-#: www/include/vote_function.php:281 www/my/bookmark_add.php:50
-#: www/my/bookmark_edit.php:63 www/my/diary.php:189
+#: www/account/pending-resend.php:79 www/admin/admin_table.php:222
+#: www/admin/cronman.php:37 www/admin/globalroleedit.php:248
+#: www/admin/index.php:166 www/admin/pending-news.php:163
+#: www/forum/admin/index.php:412 www/include/vote_function.php:281
+#: www/my/bookmark_add.php:50 www/my/bookmark_edit.php:63 www/my/diary.php:189
 #: www/news/admin/index.php:151 www/news/news_utils.php:42
 #: www/news/submit.php:160 www/pm/add_task.php:57 www/pm/add_task.php:140
 #: www/pm/add_task.php:154 www/pm/admin/index.php:215
@@ -15007,14 +15008,6 @@ msgstr "Настроить каталоги"
 msgid "Invalid Data Passed to query"
 msgstr "Неверный пароль:"
 
-#: www/activity/index.php:180 www/project/stats/index.php:96
-msgid "Start"
-msgstr "Начато"
-
-#: www/activity/index.php:181 www/project/stats/index.php:97
-msgid "End"
-msgstr "Закончено"
-
 #: www/activity/index.php:198 www/activity/index.php:344
 msgid "No Activity Found"
 msgstr "Нет активности"
@@ -23686,6 +23679,12 @@ msgstr "Глобальное изменение"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Имя участника обязательно"
+
+#~ msgid "Start"
+#~ msgstr "Начато"
+
+#~ msgid "End"
+#~ msgstr "Закончено"
 
 #, fuzzy
 #~ msgid "Tracker:"

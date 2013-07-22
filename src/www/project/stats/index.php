@@ -93,8 +93,8 @@ project_admin_header(array('title'=>_('Project Statistics').'','group'=>$group_i
 <table><tr>
 <td><strong><?php echo _('Areas'); ?>:</strong><br /><?php echo report_area_box('area',$area,$group); ?></td>
 <td><strong><?php echo _('Type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
-<td><strong><?php echo _('Start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
-<td><strong><?php echo _('End'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
+<td><strong><?php echo _('Start Date'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
+<td><strong><?php echo _('End Date'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
 <td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
 </tr></table>
 </form>
