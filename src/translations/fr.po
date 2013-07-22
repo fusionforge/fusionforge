@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:43+0200\n"
+"POT-Creation-Date: 2013-07-22 14:46+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -14444,27 +14444,27 @@ msgstr "Dossier"
 
 #: www/admin/admin_table.php:41
 #, php-format
-msgid "Create a new %1$s below:"
-msgstr "Créer un(e) nouveau(elle) %1$s ci-dessous :"
+msgid "Create a new %s below:"
+msgstr "Créer un(e) nouveau(elle) %s ci-dessous :"
 
 #: www/admin/admin_table.php:94 www/admin/admin_table.php:282
 #, php-format
-msgid "%1$s successfully added."
-msgstr "%1$s ajouté(e) avec succès."
+msgid "%s successfully added."
+msgstr "%s ajouté(e) avec succès."
 
 #: www/admin/admin_table.php:117
 #, php-format
 msgid ""
-"You can't delete the processor %1$s since it's currently referenced in a "
+"You cannot delete the processor %s since it is currently referenced in a "
 "file release."
 msgstr ""
-"Vous ne pouvez pas supprimer le processeur %1$s car il est actuellement "
+"Vous ne pouvez pas supprimer le processeur %s car il est actuellement "
 "référencé dans une version de fichier."
 
 #: www/admin/admin_table.php:126
-#, php-format
+#, fuzzy, php-format
 msgid ""
-"You can't delete the license %1$s since it's currently referenced in a "
+"You can't delete the license %s since it is currently referenced in a "
 "project."
 msgstr ""
 "Vous ne pouvez pas supprimer la licence %1$s car elle est actuellement "
@@ -14473,40 +14473,40 @@ msgstr ""
 #: www/admin/admin_table.php:134
 #, php-format
 msgid ""
-"You can't delete the language %1$s since it's currently referenced in a user "
+"You cannot delete the language %s since it is currently referenced in a user "
 "profile."
 msgstr ""
-"Vous ne pouvez pas supprimer la langue %1$s car elle est actuellement "
+"Vous ne pouvez pas supprimer la langue %s car elle est actuellement "
 "référencée dans un profil utilisateur."
 
 #: www/admin/admin_table.php:143
-#, fuzzy, php-format
+#, php-format
 msgid ""
-"You can't delete the theme %1$s since it's currently referenced in a user "
+"You cannot delete the theme %s since it is currently referenced in a user "
 "profile."
 msgstr ""
-"Vous ne pouvez pas supprimer la langue %1$s car elle est actuellement "
-"référencée dans un profil utilisateur."
+"Vous ne pouvez pas supprimer le thème %s car il est actuellement référencé "
+"dans un profil utilisateur."
 
 #: www/admin/admin_table.php:154
 #, php-format
-msgid "Are you sure you want to delete this %1$s?"
-msgstr "Etes-vous sûr de vouloir supprimer ce(tte) %1$s ?"
+msgid "Are you sure you want to delete this %s?"
+msgstr "Êtes-vous sûr de vouloir supprimer ce(tte) %s ?"
 
 #: www/admin/admin_table.php:183
 #, php-format
-msgid "%1$s successfully deleted."
-msgstr "%1$s supprimé(e) avec succès."
+msgid "%s successfully deleted."
+msgstr "%s supprimé(e) avec succès."
 
 #: www/admin/admin_table.php:204
 #, php-format
-msgid "Modify the %1$s below:"
-msgstr "Modifier le(la) %1$s ci-dessous :"
+msgid "Modify the %s below:"
+msgstr "Modifier le(la) %s ci-dessous :"
 
 #: www/admin/admin_table.php:259
 #, php-format
-msgid "%1$s successfully modified."
-msgstr "%1$s modifié(e) avec succès."
+msgid "%s successfully modified."
+msgstr "%s modifié(e) avec succès."
 
 #: www/admin/admin_table.php:308
 msgid "add new"
@@ -14514,8 +14514,8 @@ msgstr "ajouter nouveau"
 
 #: www/admin/admin_table.php:353
 #, php-format
-msgid "Edit the %1$ss Table"
-msgstr "Modifier la table : %1$s"
+msgid "Edit the %ss Table"
+msgstr "Modifier la table : %s"
 
 #: www/admin/approve-pending.php:47 www/project/admin/tools.php:34
 msgid "Error creating group object"
@@ -22947,6 +22947,49 @@ msgstr "Erreur de mise à jour"
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
 
+#~ msgid "Create a new %1$s below:"
+#~ msgstr "Créer un(e) nouveau(elle) %1$s ci-dessous :"
+
+#~ msgid "%1$s successfully added."
+#~ msgstr "%1$s ajouté(e) avec succès."
+
+#~ msgid ""
+#~ "You can't delete the processor %1$s since it's currently referenced in a "
+#~ "file release."
+#~ msgstr ""
+#~ "Vous ne pouvez pas supprimer le processeur %1$s car il est actuellement "
+#~ "référencé dans une version de fichier."
+
+#~ msgid ""
+#~ "You can't delete the language %1$s since it's currently referenced in a "
+#~ "user profile."
+#~ msgstr ""
+#~ "Vous ne pouvez pas supprimer la langue %1$s car elle est actuellement "
+#~ "référencée dans un profil utilisateur."
+
+#, fuzzy
+#~ msgid ""
+#~ "You can't delete the theme %1$s since it's currently referenced in a user "
+#~ "profile."
+#~ msgstr ""
+#~ "Vous ne pouvez pas supprimer la langue %1$s car elle est actuellement "
+#~ "référencée dans un profil utilisateur."
+
+#~ msgid "Are you sure you want to delete this %1$s?"
+#~ msgstr "Etes-vous sûr de vouloir supprimer ce(tte) %1$s ?"
+
+#~ msgid "%1$s successfully deleted."
+#~ msgstr "%1$s supprimé(e) avec succès."
+
+#~ msgid "Modify the %1$s below:"
+#~ msgstr "Modifier le(la) %1$s ci-dessous :"
+
+#~ msgid "%1$s successfully modified."
+#~ msgstr "%1$s modifié(e) avec succès."
+
+#~ msgid "Edit the %1$ss Table"
+#~ msgstr "Modifier la table : %1$s"
+
 #~ msgid "Start"
 #~ msgstr "Début"
 
@@ -24703,48 +24746,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "Project Activity for %s"
 #~ msgstr "Activité du projet %s"
-
-#~ msgid "Create a new %s below:"
-#~ msgstr "Créer un(e) nouveau(elle) %s ci-dessous :"
-
-#~ msgid "%s successfully added."
-#~ msgstr "%s ajouté(e) avec succès."
-
-#~ msgid ""
-#~ "You cannot delete the processor %s since it is currently referenced in a "
-#~ "file release."
-#~ msgstr ""
-#~ "Vous ne pouvez pas supprimer le processeur %s car il est actuellement "
-#~ "référencé dans une version de fichier."
-
-#~ msgid ""
-#~ "You cannot delete the language %s since it is currently referenced in a "
-#~ "user profile."
-#~ msgstr ""
-#~ "Vous ne pouvez pas supprimer la langue %s car elle est actuellement "
-#~ "référencée dans un profil utilisateur."
-
-#~ msgid ""
-#~ "You cannot delete the theme %s since it is currently referenced in a user "
-#~ "profile."
-#~ msgstr ""
-#~ "Vous ne pouvez pas supprimer le thème %s car il est actuellement "
-#~ "référencé dans un profil utilisateur."
-
-#~ msgid "Are you sure you want to delete this %s?"
-#~ msgstr "Êtes-vous sûr de vouloir supprimer ce(tte) %s ?"
-
-#~ msgid "%s successfully deleted."
-#~ msgstr "%s supprimé(e) avec succès."
-
-#~ msgid "Modify the %s below:"
-#~ msgstr "Modifier le(la) %s ci-dessous :"
-
-#~ msgid "%s successfully modified."
-#~ msgstr "%s modifié(e) avec succès."
-
-#~ msgid "Edit the %ss Table"
-#~ msgstr "Modifier la table : %s"
 
 #~ msgid "Approving Project"
 #~ msgstr "Approbation du projet"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:43+0200\n"
+"POT-Creation-Date: 2013-07-22 14:46+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14786,27 +14786,27 @@ msgstr "Nom del nou projecte"
 
 #: www/admin/admin_table.php:41
 #, php-format
-msgid "Create a new %1$s below:"
-msgstr "Crea un nou %1$s a sota:"
+msgid "Create a new %s below:"
+msgstr "Crea un nou %s a sota:"
 
 #: www/admin/admin_table.php:94 www/admin/admin_table.php:282
-#, php-format
-msgid "%1$s successfully added."
+#, fuzzy, php-format
+msgid "%s successfully added."
 msgstr "%1$s afegit(s) amb èxit."
 
 #: www/admin/admin_table.php:117
 #, php-format
 msgid ""
-"You can't delete the processor %1$s since it's currently referenced in a "
+"You cannot delete the processor %s since it is currently referenced in a "
 "file release."
 msgstr ""
-"No podeu suprimir el processador %1$s ja que actualment està referenciat en "
+"No podeu suprimir el processador %s ja que actualment està referenciat en "
 "una publicació de fitxer."
 
 #: www/admin/admin_table.php:126
-#, php-format
+#, fuzzy, php-format
 msgid ""
-"You can't delete the license %1$s since it's currently referenced in a "
+"You can't delete the license %s since it is currently referenced in a "
 "project."
 msgstr ""
 "No podeu suprimir la llicència %1$s ja que actualment està referenciada en "
@@ -14815,16 +14815,16 @@ msgstr ""
 #: www/admin/admin_table.php:134
 #, php-format
 msgid ""
-"You can't delete the language %1$s since it's currently referenced in a user "
+"You cannot delete the language %s since it is currently referenced in a user "
 "profile."
 msgstr ""
-"No podeu suprimir l'idioma %1$s ja que actualment està referenciat en un "
+"No podeu suprimir l'idioma %s ja que actualment està referenciat en un "
 "perfil d'usuari."
 
 #: www/admin/admin_table.php:143
 #, fuzzy, php-format
 msgid ""
-"You can't delete the theme %1$s since it's currently referenced in a user "
+"You cannot delete the theme %s since it is currently referenced in a user "
 "profile."
 msgstr ""
 "No podeu suprimir l'idioma %1$s ja que actualment està referenciat en un "
@@ -14832,22 +14832,22 @@ msgstr ""
 
 #: www/admin/admin_table.php:154
 #, php-format
-msgid "Are you sure you want to delete this %1$s?"
-msgstr "Esteu segur que voleu suprimir aquest %1$s?"
+msgid "Are you sure you want to delete this %s?"
+msgstr "Esteu segur que voleu suprimir aquest %s?"
 
 #: www/admin/admin_table.php:183
 #, php-format
-msgid "%1$s successfully deleted."
-msgstr "%1$s suprimit(s) amb èxit."
+msgid "%s successfully deleted."
+msgstr "%s suprimit(s) amb èxit."
 
 #: www/admin/admin_table.php:204
 #, php-format
-msgid "Modify the %1$s below:"
-msgstr "Modifica el %1$s a sota:"
+msgid "Modify the %s below:"
+msgstr "Modifica el %s a sota:"
 
 #: www/admin/admin_table.php:259
 #, php-format
-msgid "%1$s successfully modified."
+msgid "%s successfully modified."
 msgstr "%1$s modificat(s) amb èxit."
 
 #: www/admin/admin_table.php:308
@@ -14856,8 +14856,8 @@ msgstr "afegeix nou"
 
 #: www/admin/admin_table.php:353
 #, php-format
-msgid "Edit the %1$ss Table"
-msgstr "Edita la taula de %1$ss"
+msgid "Edit the %ss Table"
+msgstr "Edita la taula de %1s"
 
 #: www/admin/approve-pending.php:47 www/project/admin/tools.php:34
 msgid "Error creating group object"
@@ -23340,6 +23340,38 @@ msgstr "Actualització en massa"
 msgid "No User Name Provided"
 msgstr "Nom d'usuari"
 
+#~ msgid "Create a new %1$s below:"
+#~ msgstr "Crea un nou %1$s a sota:"
+
+#~ msgid ""
+#~ "You can't delete the processor %1$s since it's currently referenced in a "
+#~ "file release."
+#~ msgstr ""
+#~ "No podeu suprimir el processador %1$s ja que actualment està referenciat "
+#~ "en una publicació de fitxer."
+
+#~ msgid ""
+#~ "You can't delete the language %1$s since it's currently referenced in a "
+#~ "user profile."
+#~ msgstr ""
+#~ "No podeu suprimir l'idioma %1$s ja que actualment està referenciat en un "
+#~ "perfil d'usuari."
+
+#~ msgid "Are you sure you want to delete this %1$s?"
+#~ msgstr "Esteu segur que voleu suprimir aquest %1$s?"
+
+#~ msgid "%1$s successfully deleted."
+#~ msgstr "%1$s suprimit(s) amb èxit."
+
+#~ msgid "Modify the %1$s below:"
+#~ msgstr "Modifica el %1$s a sota:"
+
+#~ msgid "%1$s successfully modified."
+#~ msgstr "%1$s modificat(s) amb èxit."
+
+#~ msgid "Edit the %1$ss Table"
+#~ msgstr "Edita la taula de %1$ss"
+
 #~ msgid "Start"
 #~ msgstr "Inici"
 
@@ -23771,38 +23803,6 @@ msgstr "Nom d'usuari"
 #~ "Ara se us està enviant un correu de confirmació per a verificar la vostra "
 #~ "adreça de correu. Visiteu l'enllaç enviat en aquest correu i s'activarà "
 #~ "el vostre compte."
-
-#~ msgid "Create a new %s below:"
-#~ msgstr "Crea un nou %s a sota:"
-
-#~ msgid ""
-#~ "You cannot delete the processor %s since it is currently referenced in a "
-#~ "file release."
-#~ msgstr ""
-#~ "No podeu suprimir el processador %s ja que actualment està referenciat en "
-#~ "una publicació de fitxer."
-
-#~ msgid ""
-#~ "You cannot delete the language %s since it is currently referenced in a "
-#~ "user profile."
-#~ msgstr ""
-#~ "No podeu suprimir l'idioma %s ja que actualment està referenciat en un "
-#~ "perfil d'usuari."
-
-#~ msgid "Are you sure you want to delete this %s?"
-#~ msgstr "Esteu segur que voleu suprimir aquest %s?"
-
-#~ msgid "%s successfully deleted."
-#~ msgstr "%s suprimit(s) amb èxit."
-
-#~ msgid "Modify the %s below:"
-#~ msgstr "Modifica el %s a sota:"
-
-#~ msgid "%s successfully modified."
-#~ msgstr "%1$s modificat(s) amb èxit."
-
-#~ msgid "Edit the %ss Table"
-#~ msgstr "Edita la taula de %1s"
 
 #~ msgid "Approving Project"
 #~ msgstr "S'està aprovant el grup"

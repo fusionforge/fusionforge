@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:43+0200\n"
+"POT-Creation-Date: 2013-07-22 14:46+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -14388,27 +14388,27 @@ msgstr "Directorio:"
 
 #: www/admin/admin_table.php:41
 #, php-format
-msgid "Create a new %1$s below:"
-msgstr "Crear un nuevo %1$s abajo:"
+msgid "Create a new %s below:"
+msgstr "Crear un nuevo %s abajo:"
 
 #: www/admin/admin_table.php:94 www/admin/admin_table.php:282
 #, php-format
-msgid "%1$s successfully added."
-msgstr "%1$s añadido correctamente."
+msgid "%s successfully added."
+msgstr "%s añadido correctamente."
 
 #: www/admin/admin_table.php:117
 #, php-format
 msgid ""
-"You can't delete the processor %1$s since it's currently referenced in a "
+"You cannot delete the processor %s since it is currently referenced in a "
 "file release."
 msgstr ""
-"No se puede eliminar el procesador %1$s porque está actualmente en uso por "
+"No se puede eliminar el procesador %s porque está actualmente en uso por "
 "alguna liberación de ficheros."
 
 #: www/admin/admin_table.php:126
-#, php-format
+#, fuzzy, php-format
 msgid ""
-"You can't delete the license %1$s since it's currently referenced in a "
+"You can't delete the license %s since it is currently referenced in a "
 "project."
 msgstr ""
 "No se puede eliminar la licencia %1$s porque está actualmente en uso por "
@@ -14417,16 +14417,16 @@ msgstr ""
 #: www/admin/admin_table.php:134
 #, php-format
 msgid ""
-"You can't delete the language %1$s since it's currently referenced in a user "
+"You cannot delete the language %s since it is currently referenced in a user "
 "profile."
 msgstr ""
-"No se puede eliminar el idioma %1$s porque está actualmente en uso por algún "
+"No se puede eliminar el idioma %s porque está actualmente en uso por algún "
 "usuario."
 
 #: www/admin/admin_table.php:143
-#, php-format
+#, fuzzy, php-format
 msgid ""
-"You can't delete the theme %1$s since it's currently referenced in a user "
+"You cannot delete the theme %s since it is currently referenced in a user "
 "profile."
 msgstr ""
 "No se puede eliminar el tema %1$s porque está actualmente en uso por algún "
@@ -14434,23 +14434,23 @@ msgstr ""
 
 #: www/admin/admin_table.php:154
 #, php-format
-msgid "Are you sure you want to delete this %1$s?"
-msgstr "¿Está seguro de que desea eliminar este %1$s?"
+msgid "Are you sure you want to delete this %s?"
+msgstr "¿Está seguro de que desea eliminar este %s?"
 
 #: www/admin/admin_table.php:183
 #, php-format
-msgid "%1$s successfully deleted."
-msgstr "%1$s eliminado correctamente."
+msgid "%s successfully deleted."
+msgstr "%s eliminado correctamente."
 
 #: www/admin/admin_table.php:204
 #, php-format
-msgid "Modify the %1$s below:"
-msgstr "Modificar el %1$s abajo:"
+msgid "Modify the %s below:"
+msgstr "Modificar el %s abajo:"
 
 #: www/admin/admin_table.php:259
 #, php-format
-msgid "%1$s successfully modified."
-msgstr "%1$s modificado correctamente."
+msgid "%s successfully modified."
+msgstr "%s modificado correctamente."
 
 #: www/admin/admin_table.php:308
 msgid "add new"
@@ -14458,8 +14458,8 @@ msgstr "añadir nuevo"
 
 #: www/admin/admin_table.php:353
 #, php-format
-msgid "Edit the %1$ss Table"
-msgstr "Editar la tabla de %1$s"
+msgid "Edit the %ss Table"
+msgstr "Editar la tabla de %s"
 
 #: www/admin/approve-pending.php:47 www/project/admin/tools.php:34
 msgid "Error creating group object"
@@ -22792,6 +22792,41 @@ msgstr "No puedo actualizar"
 msgid "No User Name Provided"
 msgstr "No ha proporcionado el nombre de usuario"
 
+#~ msgid "Create a new %1$s below:"
+#~ msgstr "Crear un nuevo %1$s abajo:"
+
+#~ msgid "%1$s successfully added."
+#~ msgstr "%1$s añadido correctamente."
+
+#~ msgid ""
+#~ "You can't delete the processor %1$s since it's currently referenced in a "
+#~ "file release."
+#~ msgstr ""
+#~ "No se puede eliminar el procesador %1$s porque está actualmente en uso "
+#~ "por alguna liberación de ficheros."
+
+#~ msgid ""
+#~ "You can't delete the language %1$s since it's currently referenced in a "
+#~ "user profile."
+#~ msgstr ""
+#~ "No se puede eliminar el idioma %1$s porque está actualmente en uso por "
+#~ "algún usuario."
+
+#~ msgid "Are you sure you want to delete this %1$s?"
+#~ msgstr "¿Está seguro de que desea eliminar este %1$s?"
+
+#~ msgid "%1$s successfully deleted."
+#~ msgstr "%1$s eliminado correctamente."
+
+#~ msgid "Modify the %1$s below:"
+#~ msgstr "Modificar el %1$s abajo:"
+
+#~ msgid "%1$s successfully modified."
+#~ msgstr "%1$s modificado correctamente."
+
+#~ msgid "Edit the %1$ss Table"
+#~ msgstr "Editar la tabla de %1$s"
+
 #~ msgid "Start"
 #~ msgstr "Comienzo"
 
@@ -23498,41 +23533,6 @@ msgstr "No ha proporcionado el nombre de usuario"
 #~ msgstr ""
 #~ "Ahora recibirá un correo de confirmación para verificar su cuenta de "
 #~ "correo. Visitando el enlace que le hemos enviado le activará la cuenta."
-
-#~ msgid "Create a new %s below:"
-#~ msgstr "Crear un nuevo %s abajo:"
-
-#~ msgid "%s successfully added."
-#~ msgstr "%s añadido correctamente."
-
-#~ msgid ""
-#~ "You cannot delete the processor %s since it is currently referenced in a "
-#~ "file release."
-#~ msgstr ""
-#~ "No se puede eliminar el procesador %s porque está actualmente en uso por "
-#~ "alguna liberación de ficheros."
-
-#~ msgid ""
-#~ "You cannot delete the language %s since it is currently referenced in a "
-#~ "user profile."
-#~ msgstr ""
-#~ "No se puede eliminar el idioma %s porque está actualmente en uso por "
-#~ "algún usuario."
-
-#~ msgid "Are you sure you want to delete this %s?"
-#~ msgstr "¿Está seguro de que desea eliminar este %s?"
-
-#~ msgid "%s successfully deleted."
-#~ msgstr "%s eliminado correctamente."
-
-#~ msgid "Modify the %s below:"
-#~ msgstr "Modificar el %s abajo:"
-
-#~ msgid "%s successfully modified."
-#~ msgstr "%s modificado correctamente."
-
-#~ msgid "Edit the %ss Table"
-#~ msgstr "Editar la tabla de %s"
 
 #~ msgid "Approving Project"
 #~ msgstr "Aprobando Grupo"

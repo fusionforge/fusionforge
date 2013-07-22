@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:43+0200\n"
+"POT-Creation-Date: 2013-07-22 14:46+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14732,61 +14732,61 @@ msgid "Directory"
 msgstr "新專案名稱"
 
 #: www/admin/admin_table.php:41
-#, php-format
-msgid "Create a new %1$s below:"
+#, fuzzy, php-format
+msgid "Create a new %s below:"
 msgstr "創造一個新的 %1$s 如下："
 
 #: www/admin/admin_table.php:94 www/admin/admin_table.php:282
-#, php-format
-msgid "%1$s successfully added."
+#, fuzzy, php-format
+msgid "%s successfully added."
 msgstr "%1$s 新增成功"
 
 #: www/admin/admin_table.php:117
-#, php-format
+#, fuzzy, php-format
 msgid ""
-"You can't delete the processor %1$s since it's currently referenced in a "
+"You cannot delete the processor %s since it is currently referenced in a "
 "file release."
 msgstr "因為它現今在一個檔案發佈中被列入參考，你不能刪除處理器 %1$s。"
 
 #: www/admin/admin_table.php:126
-#, php-format
+#, fuzzy, php-format
 msgid ""
-"You can't delete the license %1$s since it's currently referenced in a "
+"You can't delete the license %s since it is currently referenced in a "
 "project."
 msgstr "因為它現今在一個計畫中被列入參考，你不能刪除授權方式 %1$s。"
 
 #: www/admin/admin_table.php:134
-#, php-format
+#, fuzzy, php-format
 msgid ""
-"You can't delete the language %1$s since it's currently referenced in a user "
+"You cannot delete the language %s since it is currently referenced in a user "
 "profile."
 msgstr "因為它現今在一個使用者描繪中被列入參考，你不能刪除程式語言 %1$s。"
 
 #: www/admin/admin_table.php:143
 #, fuzzy, php-format
 msgid ""
-"You can't delete the theme %1$s since it's currently referenced in a user "
+"You cannot delete the theme %s since it is currently referenced in a user "
 "profile."
 msgstr "因為它現今在一個使用者描繪中被列入參考，你不能刪除程式語言 %1$s。"
 
 #: www/admin/admin_table.php:154
-#, php-format
-msgid "Are you sure you want to delete this %1$s?"
+#, fuzzy, php-format
+msgid "Are you sure you want to delete this %s?"
 msgstr "您確定要刪除這個 %1$s 嗎？"
 
 #: www/admin/admin_table.php:183
-#, php-format
-msgid "%1$s successfully deleted."
+#, fuzzy, php-format
+msgid "%s successfully deleted."
 msgstr "%1$s 刪除成功"
 
 #: www/admin/admin_table.php:204
-#, php-format
-msgid "Modify the %1$s below:"
+#, fuzzy, php-format
+msgid "Modify the %s below:"
 msgstr "修改 %1$s 如下："
 
 #: www/admin/admin_table.php:259
-#, php-format
-msgid "%1$s successfully modified."
+#, fuzzy, php-format
+msgid "%s successfully modified."
 msgstr "%1$s 修改成功"
 
 #: www/admin/admin_table.php:308
@@ -14794,8 +14794,8 @@ msgid "add new"
 msgstr "新增"
 
 #: www/admin/admin_table.php:353
-#, php-format
-msgid "Edit the %1$ss Table"
+#, fuzzy, php-format
+msgid "Edit the %ss Table"
 msgstr "編輯 %1$s 表格"
 
 #: www/admin/approve-pending.php:47 www/project/admin/tools.php:34

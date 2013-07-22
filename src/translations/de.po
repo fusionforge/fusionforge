@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:43+0200\n"
+"POT-Creation-Date: 2013-07-22 14:46+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -14933,27 +14933,27 @@ msgstr "Projektname"
 
 #: www/admin/admin_table.php:41
 #, php-format
-msgid "Create a new %1$s below:"
-msgstr "Erzeuge unten ein(e) neue(s) %1$s:"
+msgid "Create a new %s below:"
+msgstr "Erzeuge unten ein(e) neue(s) %s:"
 
 #: www/admin/admin_table.php:94 www/admin/admin_table.php:282
 #, php-format
-msgid "%1$s successfully added."
-msgstr "%1$s erfolgreich hinzugefügt."
+msgid "%s successfully added."
+msgstr "%s erfolgreich hinzugefügt."
 
 #: www/admin/admin_table.php:117
 #, php-format
 msgid ""
-"You can't delete the processor %1$s since it's currently referenced in a "
+"You cannot delete the processor %s since it is currently referenced in a "
 "file release."
 msgstr ""
-"Sie können den Prozessor %1$s nicht löschen, solange er momentan von einer "
+"Sie können den Prozessor %s nicht löschen, solange er momentan von einer "
 "freigegebenen Datei referenziert wird."
 
 #: www/admin/admin_table.php:126
-#, php-format
+#, fuzzy, php-format
 msgid ""
-"You can't delete the license %1$s since it's currently referenced in a "
+"You can't delete the license %s since it is currently referenced in a "
 "project."
 msgstr ""
 "Sie können die Lizenz %1$s nicht löschen, weil sie zur Zeit in einem Projekt "
@@ -14962,16 +14962,16 @@ msgstr ""
 #: www/admin/admin_table.php:134
 #, php-format
 msgid ""
-"You can't delete the language %1$s since it's currently referenced in a user "
+"You cannot delete the language %s since it is currently referenced in a user "
 "profile."
 msgstr ""
-"Sie können die Sprache %1$s nicht löschen, weil sie zur Zeit in einem "
+"Sie können die Sprache %s nicht löschen, weil sie zur Zeit in einem "
 "Benutzerprofil referenziert wird."
 
 #: www/admin/admin_table.php:143
 #, fuzzy, php-format
 msgid ""
-"You can't delete the theme %1$s since it's currently referenced in a user "
+"You cannot delete the theme %s since it is currently referenced in a user "
 "profile."
 msgstr ""
 "Sie können die Sprache %1$s nicht löschen, weil sie zur Zeit in einem "
@@ -14979,23 +14979,23 @@ msgstr ""
 
 #: www/admin/admin_table.php:154
 #, php-format
-msgid "Are you sure you want to delete this %1$s?"
-msgstr "Sind Sie sicher, dass Sie %1$s löschen wollen?"
+msgid "Are you sure you want to delete this %s?"
+msgstr "Sind Sie sicher, dass Sie %s löschen wollen?"
 
 #: www/admin/admin_table.php:183
 #, php-format
-msgid "%1$s successfully deleted."
-msgstr "%1$s erfolgreich gelöscht."
+msgid "%s successfully deleted."
+msgstr "%s erfolgreich gelöscht."
 
 #: www/admin/admin_table.php:204
 #, php-format
-msgid "Modify the %1$s below:"
-msgstr "Modifizieren Sie %1$s unten:"
+msgid "Modify the %s below:"
+msgstr "Modifizieren Sie %s unten:"
 
 #: www/admin/admin_table.php:259
 #, php-format
-msgid "%1$s successfully modified."
-msgstr "%1$s erfolgreich modifiziert."
+msgid "%s successfully modified."
+msgstr "%s erfolgreich modifiziert."
 
 #: www/admin/admin_table.php:308
 msgid "add new"
@@ -15003,8 +15003,8 @@ msgstr "Neuen hinzufügen"
 
 #: www/admin/admin_table.php:353
 #, php-format
-msgid "Edit the %1$ss Table"
-msgstr "Editieren Sie die %1$ss Tabelle"
+msgid "Edit the %ss Table"
+msgstr "Editieren Sie die %ss Tabelle"
 
 #: www/admin/approve-pending.php:47 www/project/admin/tools.php:34
 msgid "Error creating group object"
@@ -23617,6 +23617,41 @@ msgstr "Aktualisierung nicht möglich"
 msgid "No User Name Provided"
 msgstr "Kein Benutzername angegeben"
 
+#~ msgid "Create a new %1$s below:"
+#~ msgstr "Erzeuge unten ein(e) neue(s) %1$s:"
+
+#~ msgid "%1$s successfully added."
+#~ msgstr "%1$s erfolgreich hinzugefügt."
+
+#~ msgid ""
+#~ "You can't delete the processor %1$s since it's currently referenced in a "
+#~ "file release."
+#~ msgstr ""
+#~ "Sie können den Prozessor %1$s nicht löschen, solange er momentan von "
+#~ "einer freigegebenen Datei referenziert wird."
+
+#~ msgid ""
+#~ "You can't delete the language %1$s since it's currently referenced in a "
+#~ "user profile."
+#~ msgstr ""
+#~ "Sie können die Sprache %1$s nicht löschen, weil sie zur Zeit in einem "
+#~ "Benutzerprofil referenziert wird."
+
+#~ msgid "Are you sure you want to delete this %1$s?"
+#~ msgstr "Sind Sie sicher, dass Sie %1$s löschen wollen?"
+
+#~ msgid "%1$s successfully deleted."
+#~ msgstr "%1$s erfolgreich gelöscht."
+
+#~ msgid "Modify the %1$s below:"
+#~ msgstr "Modifizieren Sie %1$s unten:"
+
+#~ msgid "%1$s successfully modified."
+#~ msgstr "%1$s erfolgreich modifiziert."
+
+#~ msgid "Edit the %1$ss Table"
+#~ msgstr "Editieren Sie die %1$ss Tabelle"
+
 #~ msgid "Start"
 #~ msgstr "Start"
 
@@ -24492,41 +24527,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "Project Activity for %s"
 #~ msgstr "Projekt Aktivität für %s"
-
-#~ msgid "Create a new %s below:"
-#~ msgstr "Erzeuge unten ein(e) neue(s) %s:"
-
-#~ msgid "%s successfully added."
-#~ msgstr "%s erfolgreich hinzugefügt."
-
-#~ msgid ""
-#~ "You cannot delete the processor %s since it is currently referenced in a "
-#~ "file release."
-#~ msgstr ""
-#~ "Sie können den Prozessor %s nicht löschen, solange er momentan von einer "
-#~ "freigegebenen Datei referenziert wird."
-
-#~ msgid ""
-#~ "You cannot delete the language %s since it is currently referenced in a "
-#~ "user profile."
-#~ msgstr ""
-#~ "Sie können die Sprache %s nicht löschen, weil sie zur Zeit in einem "
-#~ "Benutzerprofil referenziert wird."
-
-#~ msgid "Are you sure you want to delete this %s?"
-#~ msgstr "Sind Sie sicher, dass Sie %s löschen wollen?"
-
-#~ msgid "%s successfully deleted."
-#~ msgstr "%s erfolgreich gelöscht."
-
-#~ msgid "Modify the %s below:"
-#~ msgstr "Modifizieren Sie %s unten:"
-
-#~ msgid "%s successfully modified."
-#~ msgstr "%s erfolgreich modifiziert."
-
-#~ msgid "Edit the %ss Table"
-#~ msgstr "Editieren Sie die %ss Tabelle"
 
 #~ msgid "Approving Project"
 #~ msgstr "Genehmige Gruppe"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:43+0200\n"
+"POT-Creation-Date: 2013-07-22 14:46+0200\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14009,71 +14009,71 @@ msgid "Directory"
 msgstr "Imię:"
 
 #: www/admin/admin_table.php:41
-#, php-format
-msgid "Create a new %1$s below:"
-msgstr ""
+#, fuzzy, php-format
+msgid "Create a new %s below:"
+msgstr "Aby utworzyć nowe wydanie kliknij tutaj."
 
 #: www/admin/admin_table.php:94 www/admin/admin_table.php:282
-#, php-format
-msgid "%1$s successfully added."
-msgstr ""
+#, fuzzy, php-format
+msgid "%s successfully added."
+msgstr "Pomyślnie Zmieniono Hasło"
 
 #: www/admin/admin_table.php:117
 #, php-format
 msgid ""
-"You can't delete the processor %1$s since it's currently referenced in a "
+"You cannot delete the processor %s since it is currently referenced in a "
 "file release."
 msgstr ""
 
 #: www/admin/admin_table.php:126
 #, php-format
 msgid ""
-"You can't delete the license %1$s since it's currently referenced in a "
+"You can't delete the license %s since it is currently referenced in a "
 "project."
 msgstr ""
 
 #: www/admin/admin_table.php:134
 #, php-format
 msgid ""
-"You can't delete the language %1$s since it's currently referenced in a user "
+"You cannot delete the language %s since it is currently referenced in a user "
 "profile."
 msgstr ""
 
 #: www/admin/admin_table.php:143
 #, php-format
 msgid ""
-"You can't delete the theme %1$s since it's currently referenced in a user "
+"You cannot delete the theme %s since it is currently referenced in a user "
 "profile."
 msgstr ""
 
 #: www/admin/admin_table.php:154
 #, php-format
-msgid "Are you sure you want to delete this %1$s?"
+msgid "Are you sure you want to delete this %s?"
 msgstr ""
 
 #: www/admin/admin_table.php:183
-#, php-format
-msgid "%1$s successfully deleted."
-msgstr ""
+#, fuzzy, php-format
+msgid "%s successfully deleted."
+msgstr "Pomyślnie Zmieniono Hasło"
 
 #: www/admin/admin_table.php:204
 #, php-format
-msgid "Modify the %1$s below:"
+msgid "Modify the %s below:"
 msgstr ""
 
 #: www/admin/admin_table.php:259
-#, php-format
-msgid "%1$s successfully modified."
-msgstr ""
+#, fuzzy, php-format
+msgid "%s successfully modified."
+msgstr "Pomyślnie Zmieniono Hasło"
 
 #: www/admin/admin_table.php:308
 msgid "add new"
 msgstr ""
 
 #: www/admin/admin_table.php:353
-#, php-format
-msgid "Edit the %1$ss Table"
-msgstr ""
+#, fuzzy, php-format
+msgid "Edit the %ss Table"
+msgstr "Edytuj grupę"
 
 #: www/admin/approve-pending.php:47 www/project/admin/tools.php:34
 msgid "Error creating group object"
@@ -22326,10 +22326,6 @@ msgstr ""
 
 #~ msgid "Notes:"
 #~ msgstr "Uwagi:"
-
-#, fuzzy
-#~ msgid "Tab successfully renamed"
-#~ msgstr "Pomyślnie Zmieniono Hasło"
 
 #, fuzzy
 #~ msgid "URL successfully changed"
