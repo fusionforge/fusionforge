@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:49+0200\n"
+"POT-Creation-Date: 2013-07-22 10:55+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -19774,13 +19774,12 @@ msgid "Add New Database"
 msgstr "Ajouter une nouvelle base de données"
 
 #: www/project/admin/database.php:166
-#, fuzzy
 msgid ""
-"Clicking on \"create\" will schedule the creation of the database, and email "
+"Clicking on “create” will schedule the creation of the database, and email "
 "the details to the project administrators"
 msgstr ""
 "Un clic sur « Créer » déclenchera la procédure de création de la base de "
-"données, et enverra les détails par email aux administrateurs du projet."
+"données, et enverra les détails par courriel aux administrateurs du projet."
 
 #: www/project/admin/database.php:168
 msgid "Database Type"
@@ -22991,6 +22990,14 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "That user does not exist."
 msgstr "Cet utilisateur n'existe pas"
 
+#, fuzzy
+#~ msgid ""
+#~ "Clicking on \"create\" will schedule the creation of the database, and "
+#~ "email the details to the project administrators"
+#~ msgstr ""
+#~ "Un clic sur « Créer » déclenchera la procédure de création de la base de "
+#~ "données, et enverra les détails par email aux administrateurs du projet."
+
 #~ msgid "Username"
 #~ msgstr "utilisateur"
 
@@ -25409,14 +25416,6 @@ msgstr "Cet utilisateur n'existe pas"
 
 #~ msgid "Add/Update members from CSV"
 #~ msgstr "Ajouter/mettre à jour des membres depuis le CSV"
-
-#~ msgid ""
-#~ "Clicking on “create” will schedule the creation of the database, and "
-#~ "email the details to the project administrators"
-#~ msgstr ""
-#~ "Un clic sur « Créer » déclenchera la procédure de création de la base de "
-#~ "données, et enverra les détails par courriel aux administrateurs du "
-#~ "projet."
 
 #~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
 #~ msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:49+0200\n"
+"POT-Creation-Date: 2013-07-22 10:55+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -20169,7 +20169,7 @@ msgstr "Voeg nieuwe database toe"
 
 #: www/project/admin/database.php:166
 msgid ""
-"Clicking on \"create\" will schedule the creation of the database, and email "
+"Clicking on “create” will schedule the creation of the database, and email "
 "the details to the project administrators"
 msgstr ""
 
