@@ -27,10 +27,10 @@ function check_system() {
 		$result[] = 'WARNING: Your php version must not be lower than 5.1.0, please upgrade';
 	}
 	if (get_magic_quotes_gpc()) {
-		$result[] = 'ERROR: Your installation is running with PHP magic_quotes_gpc ON, please change to OFF';
+		$result[] = 'Error: Your installation is running with PHP magic_quotes_gpc ON, please change to OFF';
 	}
 	if (ini_get('register_globals')) {
-		$result[] = 'ERROR: Your installation is running with PHP register_globals ON, this is very unsecure, please change to OFF';
+		$result[] = 'Error: Your installation is running with PHP register_globals ON, this is very unsecure, please change to OFF';
 	}
 	if (util_ini_get_bytes('post_max_size') < 8*1024*1024) {
 		$result[] = 'WARNING: PHP value "post_max_size" is low, recommended is at least 8M';
@@ -39,7 +39,7 @@ function check_system() {
 		$result[] = 'WARNING: PHP value "upload_max_filesize" is low, recommended is at least 8M';
 	}
 	if (!function_exists("pg_pconnect")) {
-		$result[] = 'ERROR: Missing Postgresql support in PHP, please install/compile php-pg.';
+		$result[] = 'Error: Missing Postgresql support in PHP, please install/compile php-pg.';
 	}
 	if (forge_get_config('use_shell')) {
 		// verify the compatibility between the user_default_shell ini var and the contents of .../etc/shells
