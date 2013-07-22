@@ -64,8 +64,6 @@ if (getStringFromRequest('submit')) {
 	$phone = getStringFromRequest('phone');
 	$fax = getStringFromRequest('fax');
 	$title = getStringFromRequest('title');
-	$jabber_address = getStringFromRequest('jabber_address');
-	$jabber_only = getStringFromRequest('jabber_only');
 	$mail_site = getStringFromRequest('mail_site');
 	$mail_va = getStringFromRequest('mail_va');
 	$remember_user = getStringFromRequest('remember_user');
@@ -97,7 +95,7 @@ if (getStringFromRequest('submit')) {
 		$refresh = ($language != $u->getLanguage() || $theme_id != $u->getThemeID());
 
 		if (!$u->update($firstname, $lastname, $language, $timezone, $mail_site, $mail_va, $use_ratings,
-			$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode,$use_tooltips)) {
+				'',0,$theme_id,$address,$address2,$phone,$fax,$title,$ccode,$use_tooltips)) {
 			form_release_key(getStringFromRequest('form_key'));
 			$error_msg = $u->getErrorMessage();
 			$refresh_url = '/account/?error_msg='.urlencode($error_msg);
@@ -238,20 +236,6 @@ echo $HTML->boxTop(_('Account Maintenance'));
 <input type="text" name="title" value="<?php echo $u->getTitle(); ?>" size="10"/>
 </td>
 </tr>
-
-<?php
-if (forge_get_config('use_jabber')) {
-	echo '<tr valign="top">
-<td>'. _('Jabber Address:') .'</td>
-<td>
-	<input size="30" type="text" name="jabber_address" value="'. $u->getJabberAddress() .'" /><p />
-	<input type="checkbox" name="jabber_only" value="1" '.(($u->getJabberOnly()) ? 'checked="CHECKED"' : '' ).' />
-	'._('Send auto-generated notices only to my Jabber address').'.
-</td></tr>';
-
-}
-?>
-
 
 <tr>
 <td colspan="2">

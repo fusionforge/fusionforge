@@ -34,10 +34,6 @@ $config_depends_on = array(
 	'ftp_upload_dir' => 'use_ftp',
 	'https_port' => 'use_ssl',
 	'images_secure_url' => 'use_ssl',
-	'jabber_host' => 'use_jabber',
-	'jabber_port' => 'use_jabber',
-	'jabber_password' => 'use_jabber',
-	'jabber_user' => 'use_jabber',
 	'project_auto_approval_user' => 'project_auto_approval',
 	'shell_host' => 'use_shell',
 );

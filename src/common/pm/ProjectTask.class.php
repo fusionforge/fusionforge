@@ -1145,7 +1145,7 @@ class ProjectTask extends Error {
 	}
 
 	/**
-	 *	sendNotice - contains the logic for sending email/jabber updates.
+	 *	sendNotice - contains the logic for sending email updates.
 	 *
 	 *	@return	boolean	success.
 	 */

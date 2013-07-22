@@ -41,7 +41,6 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information'));
 
 <div about="" typeof="sioc:UserAccount">
 
-
 	<?php
 
 	echo user_personal_information($user);
