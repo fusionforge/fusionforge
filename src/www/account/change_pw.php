@@ -50,7 +50,7 @@ if (getStringFromRequest('submit')) {
 
 	if (strlen($passwd)<6) {
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error(_('You must supply valid password (at least 6 chars)'),'my');
+		exit_error(_('You must supply valid password (at least 6 chars).'),'my');
 	}
 
 	if ($passwd != $passwd2) {
@@ -68,7 +68,7 @@ if (getStringFromRequest('submit')) {
 
 	<?php
 	print '<h2>';
-	printf(_('%1$s Password Change Confirmation'), forge_get_config ('forge_name'));
+	printf(_('%s Password Change Confirmation'), forge_get_config ('forge_name'));
 	print '</h2>';
 
 	print '<p class="feedback">';
@@ -77,7 +77,7 @@ if (getStringFromRequest('submit')) {
 	?>
 
 	<p>
-		 <?php printf(_('You should now <a href="%1$s">Return to User Prefs</a>.'),
+		 <?php printf(_('You should now <a href="%s">Return to User Prefs</a>.'),
 			      util_make_url('/account/')) ?>
 	</p>
 
@@ -90,12 +90,25 @@ if (getStringFromRequest('submit')) {
 	<form action="<?php echo util_make_url('/account/change_pw.php'); ?>" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 	<p><?php echo _('Old Password') ?>:
-	<br /><input type="password" name="old_passwd" /></p>
+	<br />
+	<label for="old_passwd">
+		<input id="old_passwd" type="password" name="old_passwd"/>
+    </label>
+	</p>
 	<p><?php echo _('New Password (at least 6 chars)') ?>:
-	<br /><input type="password" name="passwd" /></p>
+	<br />
+	<label for="passwd">
+		<input id="passwd" type="password" name="passwd" />
+	</label>
+	</p>
 	<p><?php echo _('New Password (repeat)') ?>:
-	<br /><input type="password" name="passwd2" /></p>
-	<p><input type="submit" name="submit" value="<?php echo _('Update password') ?>" /></p>
+	<br />
+	<label for="passwd2">
+		<input id="passwd2" type="password" name="passwd2" /></p>
+	</label>
+	<p>
+		<input type="submit" name="submit" value="<?php echo _('Update password') ?>" />
+	</p>
 	</form>
 	<?php
 }
