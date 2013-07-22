@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:09+0200\n"
+"POT-Creation-Date: 2013-07-22 11:22+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2032,10 +2032,11 @@ msgstr ""
 msgid "Error Adding Forum"
 msgstr "Erro Adicionando Fórum"
 
-#: common/forum/Forum.class.php:236 www/account/first.php:29
+#: common/forum/Forum.class.php:236 cronjobs/homedirs.php:156
+#: www/account/first.php:29
 #, php-format
-msgid "Welcome to %1$s"
-msgstr "Bem-vindo ao %1$s"
+msgid "Welcome to %s"
+msgstr "Bem-vindo ao %s"
 
 #: common/forum/Forum.class.php:260
 msgid "Invalid forum group identifier"
@@ -3903,8 +3904,8 @@ msgstr ""
 
 #: common/mail/MailingList.class.php:205
 #: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
-#: www/account/lostpw.php:68 www/survey/privacy.php:58
-#: www/survey/survey_resp.php:61
+#: www/account/first.php:36 www/account/lostpw.php:68
+#: www/survey/privacy.php:58 www/survey/survey_resp.php:61
 #, php-format
 msgid "-- the %s staff"
 msgstr "A Equipe do %s"
@@ -7029,11 +7030,6 @@ msgstr ""
 #: cronjobs/homedirs.php:154
 msgid "Please replace this file with your own website"
 msgstr ""
-
-#: cronjobs/homedirs.php:156
-#, php-format
-msgid "Welcome to %s"
-msgstr "Bem-vindo ao %s"
 
 #: cronjobs/homedirs.php:158
 #, php-format
@@ -12910,9 +12906,9 @@ msgstr "Enviar Confirmação para o Novo Endereço"
 msgid "Old password is incorrect"
 msgstr "Senha antiga está incorreta"
 
-#: www/account/change_pw.php:53 www/admin/passedit.php:54
-msgid "You must supply valid password (at least 6 chars)"
-msgstr "Você precisa fornecer uma senha válida (pelo menos 6 caracteres)"
+#: www/account/change_pw.php:53 www/account/lostlogin.php:62
+msgid "You must supply valid password (at least 6 chars)."
+msgstr "Você precisa fornecer uma senha válida (pelo menos 6 caracteres)."
 
 #: www/account/change_pw.php:58 www/account/lostlogin.php:66
 #: www/admin/passedit.php:62
@@ -12928,9 +12924,9 @@ msgid "Successfully Changed Password"
 msgstr "Senha Trocada com Sucesso"
 
 #: www/account/change_pw.php:71
-#, php-format
-msgid "%1$s Password Change Confirmation"
-msgstr ""
+#, fuzzy, php-format
+msgid "%s Password Change Confirmation"
+msgstr "Confirmação de Troca de E-mail"
 
 #: www/account/change_pw.php:75
 msgid "Congratulations. You have changed your password."
@@ -12938,7 +12934,7 @@ msgstr ""
 
 #: www/account/change_pw.php:80
 #, php-format
-msgid "You should now <a href=\"%1$s\">Return to User Prefs</a>."
+msgid "You should now <a href=\"%s\">Return to User Prefs</a>."
 msgstr ""
 
 #: www/account/change_pw.php:87 www/account/index.php:158
@@ -12949,16 +12945,16 @@ msgstr "Trocar Senha"
 msgid "Old Password"
 msgstr "Senha Antiga"
 
-#: www/account/change_pw.php:94 www/admin/passedit.php:86
+#: www/account/change_pw.php:98 www/admin/passedit.php:86
 msgid "New Password (at least 6 chars)"
 msgstr "Nova Senha (pelo menos 6 caracteres)"
 
-#: www/account/change_pw.php:96 www/account/lostlogin.php:97
+#: www/account/change_pw.php:104 www/account/lostlogin.php:97
 #: www/admin/passedit.php:88
 msgid "New Password (repeat)"
 msgstr "Nova Senha (repita)"
 
-#: www/account/change_pw.php:98 www/admin/passedit.php:90
+#: www/account/change_pw.php:110 www/admin/passedit.php:90
 msgid "Update password"
 msgstr "Atualizar senha"
 
@@ -13053,11 +13049,6 @@ msgstr ""
 "site. Você pode agora postar mensagens para fóruns de projetos, postar bugs "
 "para softwares em %1$s, inscrever-se como um desenvolvedor de projetos, ou "
 "mesmo começar o seu próprio projeto."
-
-#: www/account/first.php:36
-#, php-format
-msgid "--the %1$s staff."
-msgstr ""
 
 #: www/account/index.php:78
 msgid "You must supply a first name."
@@ -13226,10 +13217,6 @@ msgstr "Redefinir Alterações"
 #: www/account/lostlogin.php:50
 msgid "Invalid confirmation hash"
 msgstr "Hash de confirmação inválido"
-
-#: www/account/lostlogin.php:62
-msgid "You must supply valid password (at least 6 chars)."
-msgstr "Você precisa fornecer uma senha válida (pelo menos 6 caracteres)."
 
 #: www/account/lostlogin.php:75
 msgid "Password changed"
@@ -14306,6 +14293,10 @@ msgstr "Última user_id postada"
 #: www/admin/massmail.php:167
 msgid "No deliveries active."
 msgstr ""
+
+#: www/admin/passedit.php:54
+msgid "You must supply valid password (at least 6 chars)"
+msgstr "Você precisa fornecer uma senha válida (pelo menos 6 caracteres)"
 
 #: www/admin/passedit.php:74
 msgid "Site Admin: Successfully Changed User Password"
@@ -21635,6 +21626,9 @@ msgstr ""
 #: www/users:74
 msgid "That user does not exist."
 msgstr ""
+
+#~ msgid "Welcome to %1$s"
+#~ msgstr "Bem-vindo ao %1$s"
 
 #~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
 #~ msgstr "ERRO - o arquivo precisa ter > 20 bytes e < 256000 bytes de tamanho"

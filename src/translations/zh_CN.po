@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:09+0200\n"
+"POT-Creation-Date: 2013-07-22 11:22+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2176,9 +2176,10 @@ msgstr "邮件列表名称："
 msgid "Error Adding Forum"
 msgstr "添加讨论区错误"
 
-#: common/forum/Forum.class.php:236 www/account/first.php:29
-#, php-format
-msgid "Welcome to %1$s"
+#: common/forum/Forum.class.php:236 cronjobs/homedirs.php:156
+#: www/account/first.php:29
+#, fuzzy, php-format
+msgid "Welcome to %s"
 msgstr "欢迎来到 %1$s"
 
 #: common/forum/Forum.class.php:260
@@ -4238,8 +4239,8 @@ msgstr ""
 
 #: common/mail/MailingList.class.php:205
 #: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
-#: www/account/lostpw.php:68 www/survey/privacy.php:58
-#: www/survey/survey_resp.php:61
+#: www/account/first.php:36 www/account/lostpw.php:68
+#: www/survey/privacy.php:58 www/survey/survey_resp.php:61
 #, php-format
 msgid "-- the %s staff"
 msgstr "%s 团队"
@@ -7569,11 +7570,6 @@ msgstr ""
 #: cronjobs/homedirs.php:154
 msgid "Please replace this file with your own website"
 msgstr ""
-
-#: cronjobs/homedirs.php:156
-#, fuzzy, php-format
-msgid "Welcome to %s"
-msgstr "欢迎来到 %1$s"
 
 #: cronjobs/homedirs.php:158
 #, php-format
@@ -14008,9 +14004,9 @@ msgstr "发送确认信到新的信箱"
 msgid "Old password is incorrect"
 msgstr "旧的密码不正确"
 
-#: www/account/change_pw.php:53 www/admin/passedit.php:54
-msgid "You must supply valid password (at least 6 chars)"
-msgstr "您必须提供有效的密码（至少6个字节）"
+#: www/account/change_pw.php:53 www/account/lostlogin.php:62
+msgid "You must supply valid password (at least 6 chars)."
+msgstr "您必须提供一个有效的密码（至少6个字节）。"
 
 #: www/account/change_pw.php:58 www/account/lostlogin.php:66
 #: www/admin/passedit.php:62
@@ -14028,7 +14024,7 @@ msgstr "更改密码成功"
 
 #: www/account/change_pw.php:71
 #, fuzzy, php-format
-msgid "%1$s Password Change Confirmation"
+msgid "%s Password Change Confirmation"
 msgstr "确认email信箱更改"
 
 #: www/account/change_pw.php:75
@@ -14037,7 +14033,7 @@ msgstr ""
 
 #: www/account/change_pw.php:80
 #, fuzzy, php-format
-msgid "You should now <a href=\"%1$s\">Return to User Prefs</a>."
+msgid "You should now <a href=\"%s\">Return to User Prefs</a>."
 msgstr "您现在可以 %1$s 返回到帐号维护页面 %2$s。"
 
 #: www/account/change_pw.php:87 www/account/index.php:158
@@ -14048,16 +14044,16 @@ msgstr "改变密码"
 msgid "Old Password"
 msgstr "旧密码"
 
-#: www/account/change_pw.php:94 www/admin/passedit.php:86
+#: www/account/change_pw.php:98 www/admin/passedit.php:86
 msgid "New Password (at least 6 chars)"
 msgstr "新密码（至少6个字节）"
 
-#: www/account/change_pw.php:96 www/account/lostlogin.php:97
+#: www/account/change_pw.php:104 www/account/lostlogin.php:97
 #: www/admin/passedit.php:88
 msgid "New Password (repeat)"
 msgstr "新密码（重复）"
 
-#: www/account/change_pw.php:98 www/admin/passedit.php:90
+#: www/account/change_pw.php:110 www/admin/passedit.php:90
 msgid "Update password"
 msgstr "更改密码"
 
@@ -14170,11 +14166,6 @@ msgstr ""
 "新的消息，可以报告在 %1$s 当中软件的Bug，可以申请成为某个项目的开发者，甚至创"
 "建一个您自己的项目。</p><p>享用这个网站，也请给我们一些回馈信息，以便我们能共"
 "同使 %1$s 变得更好。</p><p>--%1$s 团队。</p>"
-
-#: www/account/first.php:36
-#, fuzzy, php-format
-msgid "--the %1$s staff."
-msgstr "%1$s 团队"
 
 #: www/account/index.php:78
 #, fuzzy
@@ -14347,10 +14338,6 @@ msgstr "重设"
 #: www/account/lostlogin.php:50
 msgid "Invalid confirmation hash"
 msgstr "不正确的确认编码"
-
-#: www/account/lostlogin.php:62
-msgid "You must supply valid password (at least 6 chars)."
-msgstr "您必须提供一个有效的密码（至少6个字节）。"
 
 #: www/account/lostlogin.php:75
 #, fuzzy
@@ -15498,6 +15485,10 @@ msgstr "最后提交的用户编号"
 #: www/admin/massmail.php:167
 msgid "No deliveries active."
 msgstr ""
+
+#: www/admin/passedit.php:54
+msgid "You must supply valid password (at least 6 chars)"
+msgstr "您必须提供有效的密码（至少6个字节）"
 
 #: www/admin/passedit.php:74
 #, fuzzy
@@ -23196,6 +23187,13 @@ msgstr "帐号"
 #, fuzzy
 msgid "That user does not exist."
 msgstr "查询不存在"
+
+#~ msgid "Welcome to %1$s"
+#~ msgstr "欢迎来到 %1$s"
+
+#, fuzzy
+#~ msgid "--the %1$s staff."
+#~ msgstr "%1$s 团队"
 
 #~ msgid "Choose the role for each user and then press &quot;Add All&quot;."
 #~ msgstr "选择每个用户的角色后点击 \"Add All\"。"

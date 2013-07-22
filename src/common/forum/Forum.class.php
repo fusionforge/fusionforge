@@ -233,7 +233,7 @@ class Forum extends Error {
 			$fm=new ForumMessage($this);
 			// Use the system side default language
 			setup_gettext_from_sys_lang();
-			$string = sprintf(_('Welcome to %1$s'), $forum_name);
+			$string = sprintf(_('Welcome to %s'), $forum_name);
 			// and switch back to the user preference
 			setup_gettext_from_context();
 			if (!$fm->create($string, $string)) {
