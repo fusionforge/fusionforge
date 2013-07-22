@@ -96,14 +96,14 @@ class ProjectGroup extends Error {
      * @internal param \The $array associative array of data.
      * @return \ProjectGroup
      */
-	function __construct(&$Group, $group_project_id = false, $arr = false) {
+	function ProjectGroup(&$Group, $group_project_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
 			return;
 		}
 		if ($Group->isError()) {
-			$this->setError('ProjectGroup:: '.$Group->getErrorMessage());
+			$this->setError('ProjectGroup: '.$Group->getErrorMessage());
 			return;
 		}
 		$this->Group =& $Group;
