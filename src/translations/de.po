@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:30+0200\n"
+"POT-Creation-Date: 2013-07-22 10:39+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -23213,8 +23213,7 @@ msgid "CSV"
 msgstr "CSV"
 
 #: www/survey/include/SurveyHTML.class.php:467
-#, fuzzy
-msgid "Error - you can't vote for inactive survey"
+msgid "Error: you cannot vote for inactive survey"
 msgstr "Fehler - Sie können in keiner inaktiven Umfrage abstimmen"
 
 #: www/survey/include/SurveyHTML.class.php:474
@@ -23227,7 +23226,7 @@ msgstr ""
 msgid "No Votes"
 msgstr "Keine Stimmen"
 
-#: www/survey/include/SurveyHTML.class.php:686
+#: www/survey/include/SurveyHTML.class.php:685
 #, php-format
 msgid "View All %1$s Comment"
 msgid_plural "View All %1$s Comments"
@@ -23674,6 +23673,10 @@ msgstr "Kein Benutzername angegeben"
 #: www/users:74
 msgid "That user does not exist."
 msgstr "Dieser Nutzer existiert nicht."
+
+#, fuzzy
+#~ msgid "Error - you can't vote for inactive survey"
+#~ msgstr "Fehler - Sie können in keiner inaktiven Umfrage abstimmen"
 
 #~ msgid "Error Getting %1$s"
 #~ msgstr "Fehler %1$s zu bekommen"
@@ -24791,9 +24794,6 @@ msgstr "Dieser Nutzer existiert nicht."
 
 #~ msgid "Displaying %1$s per page. Projects sorted by alphabetical order."
 #~ msgstr "Pro Seite werden %1$s angezeigt. Projekte sortiert nach Alphabet."
-
-#~ msgid "Error: you cannot vote for inactive survey"
-#~ msgstr "Fehler - Sie können in keiner inaktiven Umfrage abstimmen"
 
 #~ msgid "Area"
 #~ msgstr "Gebiete"

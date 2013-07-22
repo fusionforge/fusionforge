@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:30+0200\n"
+"POT-Creation-Date: 2013-07-22 10:39+0200\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -21605,7 +21605,7 @@ msgid "CSV"
 msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:467
-msgid "Error - you can't vote for inactive survey"
+msgid "Error: you cannot vote for inactive survey"
 msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:474
@@ -21616,7 +21616,7 @@ msgstr ""
 msgid "No Votes"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:686
+#: www/survey/include/SurveyHTML.class.php:685
 #, php-format
 msgid "View All %1$s Comment"
 msgid_plural "View All %1$s Comments"

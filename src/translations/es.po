@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:30+0200\n"
+"POT-Creation-Date: 2013-07-22 10:39+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -22392,8 +22392,8 @@ msgid "CSV"
 msgstr "CVS"
 
 #: www/survey/include/SurveyHTML.class.php:467
-msgid "Error - you can't vote for inactive survey"
-msgstr "Error - no puede votar en una encuesta inactiva"
+msgid "Error: you cannot vote for inactive survey"
+msgstr "Error: no puede votar en una encuesta inactiva"
 
 #: www/survey/include/SurveyHTML.class.php:474
 msgid "Warning - you are about to vote a second time on this survey."
@@ -22403,7 +22403,7 @@ msgstr "Aviso - está apunt de votar por segunda vez en esta encuesta."
 msgid "No Votes"
 msgstr "Sin votos"
 
-#: www/survey/include/SurveyHTML.class.php:686
+#: www/survey/include/SurveyHTML.class.php:685
 #, php-format
 msgid "View All %1$s Comment"
 msgid_plural "View All %1$s Comments"
@@ -22834,6 +22834,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #: www/users:74
 msgid "That user does not exist."
 msgstr "El usuario no existe"
+
+#~ msgid "Error - you can't vote for inactive survey"
+#~ msgstr "Error - no puede votar en una encuesta inactiva"
 
 #~ msgid "Error Getting %1$s"
 #~ msgstr "Error Obteniendo %1$s"
@@ -23734,9 +23737,6 @@ msgstr "El usuario no existe"
 
 #~ msgid "Displaying %1$s per page. Projects sorted by alphabetical order."
 #~ msgstr " Mostrando %1$s por paǵina. Proyectos ordenados alfabéticamente."
-
-#~ msgid "Error: you cannot vote for inactive survey"
-#~ msgstr "Error: no puede votar en una encuesta inactiva"
 
 #~ msgid "Area"
 #~ msgstr "Áreas"

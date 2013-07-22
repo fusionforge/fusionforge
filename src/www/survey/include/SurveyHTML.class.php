@@ -95,8 +95,8 @@ class SurveyHTML extends Error {
 	/**
 	 * Show Add/Modify Question Forums
 	 * @param Survey Question Question Object
-	 * Return string
-	 */
+     * @return string
+     */
 	function showAddQuestionForm( &$q ) {
 		global $group_id;
 
@@ -120,7 +120,7 @@ class SurveyHTML extends Error {
 		}
 
 		$ret = $warning_msg;
-		$ret.='<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
+		$ret.='<form action="'.getStringFromServer('PHP_SELF').'" method="post">' . "\n";
 		$ret.='<p><input type="hidden" name="post" value="Y" />';
 		$ret.='<input type="hidden" name="group_id" value="'.$group_id.'" />';
 		$ret.='<input type="hidden" name="question_id" value="'.$question_id.'" />';
@@ -133,8 +133,8 @@ class SurveyHTML extends Error {
 					   array());
 		$ret.= html_build_select_box($result,'question_type',$question_type,false);
 
-		$ret.='</p><p><input type="submit" name="submit" value="'.$question_button.'" /></p>';
-		$ret.='</form>';
+		$ret.='</p><p><input type="submit" name="submit" value="'.$question_button.'" /></p>' . "\n";
+		$ret.='</form>' . "\n";
 
 		return $ret;
 	}
@@ -281,7 +281,7 @@ class SurveyHTML extends Error {
 	/**
 	 * Show list of questions
 	 */
-	function  ShowQuestions(&$questions) {
+	function showQuestions(&$questions) {
 		global $group_id;
 
 		$n = count($questions);
@@ -464,7 +464,7 @@ class SurveyHTML extends Error {
 		global $survey_id;
 
 		if (!$s->isActive()) {
-			return '<div class="error">'. _('Error - you can\'t vote for inactive survey').'</div>';
+			return '<div class="error">'. _('Error: you cannot vote for inactive survey').'</div>';
 		}
 		/* Get questions of this survey */
 		$questions = & $s->getQuestionInstances();
@@ -614,7 +614,7 @@ class SurveyHTML extends Error {
 				}
 				$ret.= '</table>';
 			}
-			$ret.='<p/>';
+			$ret.='<br />';
 			break;
 
 		case 3:	/* This is a Yes/No question. */
@@ -641,7 +641,7 @@ class SurveyHTML extends Error {
 				}
 				$ret.= '</table>';
 			}
-			$ret.='<p/>';
+			$ret.='<br />';
 			break;
 
 		case 4:	/* This is a comment only. */
@@ -655,7 +655,6 @@ class SurveyHTML extends Error {
 						' # '.($j+1).'/'.$totalCount. '</strong><p/>';
 					$ret.='<pre>';
 					$words = explode(" ",$results[$j]);
-					$i = 0;
 					$linelength = 0;
 					//print 100 chars in words per line
 					foreach ($words as $word) {

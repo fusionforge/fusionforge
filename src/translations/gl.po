@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:30+0200\n"
+"POT-Creation-Date: 2013-07-22 10:39+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -23146,7 +23146,7 @@ msgid "CSV"
 msgstr "CVS"
 
 #: www/survey/include/SurveyHTML.class.php:467
-msgid "Error - you can't vote for inactive survey"
+msgid "Error: you cannot vote for inactive survey"
 msgstr "Erro - non pode votar nunha enquisa inactiva"
 
 #: www/survey/include/SurveyHTML.class.php:474
@@ -23157,7 +23157,7 @@ msgstr "Atención – vai votar por segunda vez nesta enquisa."
 msgid "No Votes"
 msgstr "Sen votos"
 
-#: www/survey/include/SurveyHTML.class.php:686
+#: www/survey/include/SurveyHTML.class.php:685
 #, php-format
 msgid "View All %1$s Comment"
 msgid_plural "View All %1$s Comments"
@@ -23600,6 +23600,9 @@ msgstr "Non se introduciu un nome de usuario"
 #: www/users:74
 msgid "That user does not exist."
 msgstr "Ese usuario non existe. "
+
+#~ msgid "Error - you can't vote for inactive survey"
+#~ msgstr "Erro - non pode votar nunha enquisa inactiva"
 
 #~ msgid "Error Getting %1$s"
 #~ msgstr "Produciuse un erro ao obter %1$s"
@@ -24700,9 +24703,6 @@ msgstr "Ese usuario non existe. "
 
 #~ msgid "Displaying %1$s per page. Projects sorted by alphabetical order."
 #~ msgstr "Mostrando %1$s por páxina. Proxectos ordenados alfabeticamente."
-
-#~ msgid "Error: you cannot vote for inactive survey"
-#~ msgstr "Erro - non pode votar nunha enquisa inactiva"
 
 #~ msgid "Area"
 #~ msgstr "Áreas"

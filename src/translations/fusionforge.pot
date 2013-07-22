@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:30+0200\n"
+"POT-Creation-Date: 2013-07-22 10:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21002,7 +21002,7 @@ msgid "CSV"
 msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:467
-msgid "Error - you can't vote for inactive survey"
+msgid "Error: you cannot vote for inactive survey"
 msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:474
@@ -21013,7 +21013,7 @@ msgstr ""
 msgid "No Votes"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:686
+#: www/survey/include/SurveyHTML.class.php:685
 #, php-format
 msgid "View All %1$s Comment"
 msgid_plural "View All %1$s Comments"

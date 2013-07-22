@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:30+0200\n"
+"POT-Creation-Date: 2013-07-22 10:39+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -23276,7 +23276,7 @@ msgid "CSV"
 msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:467
-msgid "Error - you can't vote for inactive survey"
+msgid "Error: you cannot vote for inactive survey"
 msgstr "Опросы были окончены"
 
 #: www/survey/include/SurveyHTML.class.php:474
@@ -23287,7 +23287,7 @@ msgstr "Вторичное голосование недопустимо"
 msgid "No Votes"
 msgstr "Нет голосований"
 
-#: www/survey/include/SurveyHTML.class.php:686
+#: www/survey/include/SurveyHTML.class.php:685
 #, php-format
 msgid "View All %1$s Comment"
 msgid_plural "View All %1$s Comments"
@@ -23736,6 +23736,9 @@ msgstr "Имя участника обязательно"
 #: www/users:74
 msgid "That user does not exist."
 msgstr "Пользователь с таким именем не существует."
+
+#~ msgid "Error - you can't vote for inactive survey"
+#~ msgstr "Опросы были окончены"
 
 #~ msgid "Error Getting %1$s"
 #~ msgstr "Ошибка получения %1$s"
@@ -24596,9 +24599,6 @@ msgstr "Пользователь с таким именем не существ�
 #~ msgstr ""
 #~ "Скачать текстовую версию сырцов, можно нажав на ссылку &quot;Скачать "
 #~ "версию&quot;"
-
-#~ msgid "Error: you cannot vote for inactive survey"
-#~ msgstr "Опросы были окончены"
 
 #~ msgid "Area"
 #~ msgstr "Области"

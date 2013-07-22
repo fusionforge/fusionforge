@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:30+0200\n"
+"POT-Creation-Date: 2013-07-22 10:39+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -22544,8 +22544,8 @@ msgid "CSV"
 msgstr "CSV"
 
 #: www/survey/include/SurveyHTML.class.php:467
-msgid "Error - you can't vote for inactive survey"
-msgstr "Erreur - vous ne pouvez pas participer à un sondage inactif."
+msgid "Error: you cannot vote for inactive survey"
+msgstr "Erreur: vous ne pouvez pas participer à un sondage inactif."
 
 #: www/survey/include/SurveyHTML.class.php:474
 msgid "Warning - you are about to vote a second time on this survey."
@@ -22557,7 +22557,7 @@ msgstr ""
 msgid "No Votes"
 msgstr "Aucun vote"
 
-#: www/survey/include/SurveyHTML.class.php:686
+#: www/survey/include/SurveyHTML.class.php:685
 #, php-format
 msgid "View All %1$s Comment"
 msgid_plural "View All %1$s Comments"
@@ -22993,6 +22993,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #: www/users:74
 msgid "That user does not exist."
 msgstr "Cet utilisateur n'existe pas"
+
+#~ msgid "Error - you can't vote for inactive survey"
+#~ msgstr "Erreur - vous ne pouvez pas participer à un sondage inactif."
 
 #, fuzzy
 #~ msgid "Error Adding Forum:"
@@ -25616,9 +25619,6 @@ msgstr "Cet utilisateur n'existe pas"
 
 #~ msgid "Activity Ranking: "
 #~ msgstr "Rang d'activité : "
-
-#~ msgid "Error: you cannot vote for inactive survey"
-#~ msgstr "Erreur: vous ne pouvez pas participer à un sondage inactif."
 
 #~ msgid "Error creating permission"
 #~ msgstr "Erreur lors de la création des permissions"
