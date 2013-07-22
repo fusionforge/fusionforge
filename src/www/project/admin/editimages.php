@@ -44,7 +44,7 @@ function check_file_size($size) {
 		return true;
 	} else {
 		//too big or small
-		$error_msg .= _('ERROR - file must be > 20 bytes and < 256000 bytes in length').' <br />';
+		$error_msg .= _('Error: file must be > 20 bytes and < 256000 bytes in length').' <br />';
 		return false;
 	}
 }
@@ -98,7 +98,7 @@ function store_file($id, $input_file) {
 
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$error_msg .= _('ERROR: DB: Cannot store multimedia file : ').db_error();
+			$error_msg .= _('Error: Cannot store multimedia file: ').db_error();
 		} else {
 			$feedback .= _('Multimedia File Uploaded');
 		}
@@ -136,7 +136,7 @@ if (getStringFromRequest('submit')) {
 				$group_id));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$error_msg .= _('ERROR: DB: Cannot delete multimedia file: ').db_error();
+			$error_msg .= _('Error: Cannot delete multimedia file: ').db_error();
 		} else {
 			$feedback .= _('Multimedia File Deleted');
 		}
@@ -160,7 +160,7 @@ if (getStringFromRequest('submit')) {
 				$id));
 
 				if (!$res || db_affected_rows($res) < 1) {
-					$error_msg .= _('ERROR: DB: Cannot update multimedia file').db_error();
+					$error_msg .= _('Error: Cannot update multimedia file').db_error();
 				} else {
 					$feedback .= _('Multimedia File Properties Updated');
 				}
@@ -262,7 +262,7 @@ if ($mode == "edit") {
 
 $arr=array();
 $arr[]=_('Edit');
-$arr[]=_('ID');
+$arr[]=_('Id');
 $arr[]=_('Uploaded');
 $arr[]=_('Name');
 $arr[]=_('MIME Type');

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:55+0200\n"
+"POT-Creation-Date: 2013-07-22 10:57+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4912,7 +4912,7 @@ msgstr "不能指定"
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:554
 #: common/tracker/actions/query.php:197 www/admin/massmail.php:136
-#: www/pm/admin/index.php:187
+#: www/pm/admin/index.php:187 www/project/admin/editimages.php:265
 msgid "Id"
 msgstr "编号"
 
@@ -6124,7 +6124,6 @@ msgstr "已存在回应"
 
 #: common/tracker/views/form-addcanned.php:40 www/admin/search.php:72
 #: www/admin/search.php:148 www/my/dashboard.php:63 www/pm/index.php:98
-#: www/project/admin/editimages.php:265
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "ID"
 msgstr "编号"
@@ -20038,12 +20037,13 @@ msgid "There are no databases currently allocated to this group"
 msgstr ""
 
 #: www/project/admin/editimages.php:47
-msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
+msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
 msgstr "错误 - 文件必须大于20字节，小于 256000字节"
 
 #: www/project/admin/editimages.php:101
-msgid "ERROR: DB: Cannot store multimedia file : "
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot store multimedia file: "
+msgstr "错误：不能创建组:%s"
 
 #: www/project/admin/editimages.php:103
 msgid "Multimedia File Uploaded"
@@ -20054,8 +20054,9 @@ msgid "Both file name and description are required"
 msgstr "文件名和说明都是必须的"
 
 #: www/project/admin/editimages.php:139
-msgid "ERROR: DB: Cannot delete multimedia file: "
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot delete multimedia file: "
+msgstr "错误：不能获取组编号:%s"
 
 #: www/project/admin/editimages.php:141
 msgid "Multimedia File Deleted"
@@ -20066,8 +20067,9 @@ msgid "File description is required"
 msgstr "需要文件说明"
 
 #: www/project/admin/editimages.php:163
-msgid "ERROR: DB: Cannot update multimedia file"
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot update multimedia file"
+msgstr "更新错误"
 
 #: www/project/admin/editimages.php:165
 msgid "Multimedia File Properties Updated"
@@ -23196,6 +23198,9 @@ msgstr "帐号"
 msgid "That user does not exist."
 msgstr "查询不存在"
 
+#~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
+#~ msgstr "错误 - 文件必须大于20字节，小于 256000字节"
+
 #~ msgid "Username"
 #~ msgstr "帐号"
 
@@ -23751,9 +23756,6 @@ msgstr "查询不存在"
 #~ msgstr ""
 #~ "以下选项决定别人是否可以看见您的技能。就算他们不能看见您的技能，您也可以一"
 #~ "样的输入您的技能。"
-
-#~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
-#~ msgstr "错误 - 文件必须大于20字节，小于 256000字节"
 
 #~ msgid "Choose the role for each user and then press “Add All”."
 #~ msgstr "选择每个用户的角色后点击 \"Add All\"。"

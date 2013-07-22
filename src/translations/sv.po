@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:55+0200\n"
+"POT-Creation-Date: 2013-07-22 10:57+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4919,7 +4919,7 @@ msgstr "Ej tilldelad"
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:554
 #: common/tracker/actions/query.php:197 www/admin/massmail.php:136
-#: www/pm/admin/index.php:187
+#: www/pm/admin/index.php:187 www/project/admin/editimages.php:265
 msgid "Id"
 msgstr "ID"
 
@@ -6132,7 +6132,6 @@ msgstr "Existerande svar"
 
 #: common/tracker/views/form-addcanned.php:40 www/admin/search.php:72
 #: www/admin/search.php:148 www/my/dashboard.php:63 www/pm/index.php:98
-#: www/project/admin/editimages.php:265
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "ID"
 msgstr "ID"
@@ -20025,12 +20024,13 @@ msgid "There are no databases currently allocated to this group"
 msgstr ""
 
 #: www/project/admin/editimages.php:47
-msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
+msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
 msgstr "FEL - filen måste vara > 20 byte samt < 256000 byte lång"
 
 #: www/project/admin/editimages.php:101
-msgid "ERROR: DB: Cannot store multimedia file : "
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot store multimedia file: "
+msgstr "Fel vid skapande av gruppobjekt"
 
 #: www/project/admin/editimages.php:103
 msgid "Multimedia File Uploaded"
@@ -20041,8 +20041,9 @@ msgid "Both file name and description are required"
 msgstr "Både filnamn och beskrivning krävs"
 
 #: www/project/admin/editimages.php:139
-msgid "ERROR: DB: Cannot delete multimedia file: "
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot delete multimedia file: "
+msgstr "Kan inte lägga till databas post"
 
 #: www/project/admin/editimages.php:141
 msgid "Multimedia File Deleted"
@@ -20053,8 +20054,9 @@ msgid "File description is required"
 msgstr "Filbeskrivning krävs"
 
 #: www/project/admin/editimages.php:163
-msgid "ERROR: DB: Cannot update multimedia file"
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot update multimedia file"
+msgstr "Fel vid uppdatering"
 
 #: www/project/admin/editimages.php:165
 msgid "Multimedia File Properties Updated"
@@ -23197,6 +23199,9 @@ msgstr "Användarenamn"
 msgid "That user does not exist."
 msgstr "Den resurskategorin existerar inte"
 
+#~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
+#~ msgstr "FEL - filen måste vara > 20 byte samt < 256000 byte lång"
+
 #~ msgid "Username"
 #~ msgstr "Användarnamn"
 
@@ -23584,9 +23589,6 @@ msgstr "Den resurskategorin existerar inte"
 #~ msgstr ""
 #~ "Följande valmöjlighet bestämmer om andra kan se dina kompetenser. Om "
 #~ "inte, så kan du ändå lägga in dina kompetenser."
-
-#~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
-#~ msgstr "FEL - filen måste vara > 20 byte samt < 256000 byte lång"
 
 #~ msgid "Registration complete"
 #~ msgstr "Registrering färdig"

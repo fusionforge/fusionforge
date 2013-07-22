@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:55+0200\n"
+"POT-Creation-Date: 2013-07-22 10:57+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4958,7 +4958,7 @@ msgstr "Non assegnato"
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:554
 #: common/tracker/actions/query.php:197 www/admin/massmail.php:136
-#: www/pm/admin/index.php:187
+#: www/pm/admin/index.php:187 www/project/admin/editimages.php:265
 msgid "Id"
 msgstr "Id"
 
@@ -6173,7 +6173,6 @@ msgstr "Risposte esistenti"
 
 #: common/tracker/views/form-addcanned.php:40 www/admin/search.php:72
 #: www/admin/search.php:148 www/my/dashboard.php:63 www/pm/index.php:98
-#: www/project/admin/editimages.php:265
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "ID"
 msgstr "ID"
@@ -20217,13 +20216,14 @@ msgid "There are no databases currently allocated to this group"
 msgstr ""
 
 #: www/project/admin/editimages.php:47
-msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
+msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
 msgstr ""
 "ERRORE - la dimensione del file deve essere compreso tra 20 e 256000 byte"
 
 #: www/project/admin/editimages.php:101
-msgid "ERROR: DB: Cannot store multimedia file : "
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot store multimedia file: "
+msgstr "ERRORE: Impossibile creare il gruppo: %s"
 
 #: www/project/admin/editimages.php:103
 msgid "Multimedia File Uploaded"
@@ -20234,8 +20234,9 @@ msgid "Both file name and description are required"
 msgstr "Nome file e descrizione sono obbligatori"
 
 #: www/project/admin/editimages.php:139
-msgid "ERROR: DB: Cannot delete multimedia file: "
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot delete multimedia file: "
+msgstr "ERRORE: Impossibile ottenere l'id gruppo: %s"
 
 #: www/project/admin/editimages.php:141
 msgid "Multimedia File Deleted"
@@ -20246,8 +20247,9 @@ msgid "File description is required"
 msgstr "La descrizione del file è obbligatoria"
 
 #: www/project/admin/editimages.php:163
-msgid "ERROR: DB: Cannot update multimedia file"
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot update multimedia file"
+msgstr "Errore nell'aggiornamento"
 
 #: www/project/admin/editimages.php:165
 msgid "Multimedia File Properties Updated"
@@ -23414,6 +23416,10 @@ msgstr "Non è stato inserito alcun file"
 msgid "That user does not exist."
 msgstr "La query non esiste"
 
+#~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
+#~ msgstr ""
+#~ "ERRORE - la dimensione del file deve essere compreso tra 20 e 256000 byte"
+
 #~ msgid "Username"
 #~ msgstr "Nome utente"
 
@@ -24034,10 +24040,6 @@ msgstr "La query non esiste"
 #~ msgstr ""
 #~ "Le seguenti opzioni determinano se altri possono vedere le tue "
 #~ "competenze. Anche se non possono vederle, puoi comunque inserirle."
-
-#~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
-#~ msgstr ""
-#~ "ERRORE - la dimensione del file deve essere compreso tra 20 e 256000 byte"
 
 #~ msgid "Choose the role for each user and then press “Add All”."
 #~ msgstr "Seleziona un ruolo per ogni utente e poi premi \"Aggiungi tutti\"."

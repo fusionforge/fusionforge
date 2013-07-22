@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:55+0200\n"
+"POT-Creation-Date: 2013-07-22 10:57+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -4763,7 +4763,7 @@ msgstr "Personne"
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:554
 #: common/tracker/actions/query.php:197 www/admin/massmail.php:136
-#: www/pm/admin/index.php:187
+#: www/pm/admin/index.php:187 www/project/admin/editimages.php:265
 msgid "Id"
 msgstr "Numéro d'identifiant"
 
@@ -5943,7 +5943,6 @@ msgstr "Réponses existantes"
 
 #: common/tracker/views/form-addcanned.php:40 www/admin/search.php:72
 #: www/admin/search.php:148 www/my/dashboard.php:63 www/pm/index.php:98
-#: www/project/admin/editimages.php:265
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "ID"
 msgstr "Identifiant"
@@ -19810,12 +19809,13 @@ msgid "There are no databases currently allocated to this group"
 msgstr "Ce groupe ne dispose pour le moment d'aucune base de données."
 
 #: www/project/admin/editimages.php:47
-msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
+msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
 msgstr ""
-"Erreur : la taille du fichier doit être comprise entre 20 et 256000 octets"
+"Erreur : la taille du fichier doit être comprise entre 20 et 256 000 octets"
 
 #: www/project/admin/editimages.php:101
-msgid "ERROR: DB: Cannot store multimedia file : "
+#, fuzzy
+msgid "Error: Cannot store multimedia file: "
 msgstr "Erreur de base de données lors du stockage d'un fichier multimédia : "
 
 #: www/project/admin/editimages.php:103
@@ -19827,7 +19827,8 @@ msgid "Both file name and description are required"
 msgstr "Le nom de fichier et la description sont requis"
 
 #: www/project/admin/editimages.php:139
-msgid "ERROR: DB: Cannot delete multimedia file: "
+#, fuzzy
+msgid "Error: Cannot delete multimedia file: "
 msgstr ""
 "Erreur de base de données lors de la suppression d'un fichier multimédia : "
 
@@ -19840,7 +19841,8 @@ msgid "File description is required"
 msgstr "Description de fichier requise"
 
 #: www/project/admin/editimages.php:163
-msgid "ERROR: DB: Cannot update multimedia file"
+#, fuzzy
+msgid "Error: Cannot update multimedia file"
 msgstr ""
 "Erreur de base de données lors de la mise à jour d'un fichier multimédia : "
 
@@ -22990,6 +22992,10 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "That user does not exist."
 msgstr "Cet utilisateur n'existe pas"
 
+#~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
+#~ msgstr ""
+#~ "Erreur : la taille du fichier doit être comprise entre 20 et 256000 octets"
+
 #, fuzzy
 #~ msgid ""
 #~ "Clicking on \"create\" will schedule the creation of the database, and "
@@ -25416,11 +25422,6 @@ msgstr "Cet utilisateur n'existe pas"
 
 #~ msgid "Add/Update members from CSV"
 #~ msgstr "Ajouter/mettre à jour des membres depuis le CSV"
-
-#~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
-#~ msgstr ""
-#~ "Erreur : la taille du fichier doit être comprise entre 20 et 256 000 "
-#~ "octets"
 
 #~ msgid " (non %s users)."
 #~ msgstr " (utilisateurs hors %s)."

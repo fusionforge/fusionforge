@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:55+0200\n"
+"POT-Creation-Date: 2013-07-22 10:57+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -4968,7 +4968,7 @@ msgstr "Non asignadas"
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:554
 #: common/tracker/actions/query.php:197 www/admin/massmail.php:136
-#: www/pm/admin/index.php:187
+#: www/pm/admin/index.php:187 www/project/admin/editimages.php:265
 msgid "Id"
 msgstr "Id"
 
@@ -6181,7 +6181,6 @@ msgstr "Respostas existentes"
 
 #: common/tracker/views/form-addcanned.php:40 www/admin/search.php:72
 #: www/admin/search.php:148 www/my/dashboard.php:63 www/pm/index.php:98
-#: www/project/admin/editimages.php:265
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "ID"
 msgstr "ID "
@@ -20401,12 +20400,13 @@ msgid "There are no databases currently allocated to this group"
 msgstr "Non hai ningunha base de datos actualmente asignada a este grupo"
 
 #: www/project/admin/editimages.php:47
-msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
+msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
 msgstr "ERRO - Os ficheiros deben ter entr 20 e 256000 bytes"
 
 #: www/project/admin/editimages.php:101
-msgid "ERROR: DB: Cannot store multimedia file : "
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot store multimedia file: "
+msgstr "ERRO: Non se puido crear o grupo: %s"
 
 #: www/project/admin/editimages.php:103
 msgid "Multimedia File Uploaded"
@@ -20417,8 +20417,9 @@ msgid "Both file name and description are required"
 msgstr "Son requiridos tanto o nome como a descrición do ficheiro"
 
 #: www/project/admin/editimages.php:139
-msgid "ERROR: DB: Cannot delete multimedia file: "
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot delete multimedia file: "
+msgstr "ERRO: non se atopou o id de grupo: %s"
 
 #: www/project/admin/editimages.php:141
 msgid "Multimedia File Deleted"
@@ -20429,8 +20430,9 @@ msgid "File description is required"
 msgstr "A descrición de ficheiro é requirida"
 
 #: www/project/admin/editimages.php:163
-msgid "ERROR: DB: Cannot update multimedia file"
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot update multimedia file"
+msgstr "Produciuse un erro ao actualizar"
 
 #: www/project/admin/editimages.php:165
 msgid "Multimedia File Properties Updated"
@@ -23598,6 +23600,9 @@ msgstr "Non se introduciu un nome de usuario"
 msgid "That user does not exist."
 msgstr "Ese usuario non existe. "
 
+#~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
+#~ msgstr "ERRO - Os ficheiros deben ter entr 20 e 256000 bytes"
+
 #~ msgid "Username"
 #~ msgstr "Nome de usuario "
 
@@ -24630,9 +24635,6 @@ msgstr "Ese usuario non existe. "
 #~ msgstr ""
 #~ "A seguinte opción determina se os demais poden ver as súas habilidades. "
 #~ "Aínda que non poidan, poderá introducilas igualmente."
-
-#~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
-#~ msgstr "ERRO - Os ficheiros deben ter entr 20 e 256000 bytes"
 
 #~ msgid ""
 #~ "Check the box next to the name of the user(s) you want to add. Your "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:55+0200\n"
+"POT-Creation-Date: 2013-07-22 10:57+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -4794,7 +4794,7 @@ msgstr "No asignado"
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:554
 #: common/tracker/actions/query.php:197 www/admin/massmail.php:136
-#: www/pm/admin/index.php:187
+#: www/pm/admin/index.php:187 www/project/admin/editimages.php:265
 msgid "Id"
 msgstr "Id"
 
@@ -5968,7 +5968,6 @@ msgstr "Respuestas existentes"
 
 #: common/tracker/views/form-addcanned.php:40 www/admin/search.php:72
 #: www/admin/search.php:148 www/my/dashboard.php:63 www/pm/index.php:98
-#: www/project/admin/editimages.php:265
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "ID"
 msgstr "ID"
@@ -19674,11 +19673,12 @@ msgid "There are no databases currently allocated to this group"
 msgstr "No existen bases de datos asociadas a este grupo"
 
 #: www/project/admin/editimages.php:47
-msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
-msgstr "ERROR - un fichero debe de ser > 20 bytes y < 256000 bytes de tamaño"
+msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
+msgstr "Error: un fichero debe de ser > 20 bytes y < 256000 bytes de tamaño"
 
 #: www/project/admin/editimages.php:101
-msgid "ERROR: DB: Cannot store multimedia file : "
+#, fuzzy
+msgid "Error: Cannot store multimedia file: "
 msgstr "ERROR: BBDD: No puedo almacenar fichero multimedia"
 
 #: www/project/admin/editimages.php:103
@@ -19690,7 +19690,8 @@ msgid "Both file name and description are required"
 msgstr "Tanto el nombre como la descripción son necesarios"
 
 #: www/project/admin/editimages.php:139
-msgid "ERROR: DB: Cannot delete multimedia file: "
+#, fuzzy
+msgid "Error: Cannot delete multimedia file: "
 msgstr "ERROR: BBDD: No puedo borrar fichero multimedia"
 
 #: www/project/admin/editimages.php:141
@@ -19702,7 +19703,8 @@ msgid "File description is required"
 msgstr "La descripción del fichero es necesaria"
 
 #: www/project/admin/editimages.php:163
-msgid "ERROR: DB: Cannot update multimedia file"
+#, fuzzy
+msgid "Error: Cannot update multimedia file"
 msgstr "ERROR: DB: No puedo actualizar fichero multimedia"
 
 #: www/project/admin/editimages.php:165
@@ -22833,6 +22835,10 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "That user does not exist."
 msgstr "El usuario no existe"
 
+#~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
+#~ msgstr ""
+#~ "ERROR - un fichero debe de ser > 20 bytes y < 256000 bytes de tamaño"
+
 #~ msgid "Username"
 #~ msgstr "Nombre de usuario"
 
@@ -23703,9 +23709,6 @@ msgstr "El usuario no existe"
 #~ msgstr ""
 #~ "Usted puede añadir subproyectos usando el enlace \"Añadir subproyecto\" "
 #~ "de arriba."
-
-#~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
-#~ msgstr "Error: un fichero debe de ser > 20 bytes y < 256000 bytes de tamaño"
 
 #~ msgid "Choose the role for each user and then press “Add All”."
 #~ msgstr "Elija el rol de cada usuario y presione &quot;Añadir todos&quot;."

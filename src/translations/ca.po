@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:55+0200\n"
+"POT-Creation-Date: 2013-07-22 10:57+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4954,7 +4954,7 @@ msgstr "No assignat"
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:554
 #: common/tracker/actions/query.php:197 www/admin/massmail.php:136
-#: www/pm/admin/index.php:187
+#: www/pm/admin/index.php:187 www/project/admin/editimages.php:265
 msgid "Id"
 msgstr "Id"
 
@@ -6166,7 +6166,6 @@ msgstr "Respostes existents"
 
 #: common/tracker/views/form-addcanned.php:40 www/admin/search.php:72
 #: www/admin/search.php:148 www/my/dashboard.php:63 www/pm/index.php:98
-#: www/project/admin/editimages.php:265
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "ID"
 msgstr "ID"
@@ -20198,12 +20197,13 @@ msgid "There are no databases currently allocated to this group"
 msgstr ""
 
 #: www/project/admin/editimages.php:47
-msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
-msgstr "ERROR - el fitxer ha de tenir un tamany > 20 bytes i < 256000 bytes"
+msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
+msgstr "Error: el fitxer ha de tenir un tamany > 20 bytes i < 256000 bytes"
 
 #: www/project/admin/editimages.php:101
-msgid "ERROR: DB: Cannot store multimedia file : "
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot store multimedia file: "
+msgstr "Error al crear un objecte de grup"
 
 #: www/project/admin/editimages.php:103
 msgid "Multimedia File Uploaded"
@@ -20214,8 +20214,9 @@ msgid "Both file name and description are required"
 msgstr "Calen totes dues coses, nom de fitxer i descripció"
 
 #: www/project/admin/editimages.php:139
-msgid "ERROR: DB: Cannot delete multimedia file: "
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot delete multimedia file: "
+msgstr "No es pot afegir una entrada de la base de dades"
 
 #: www/project/admin/editimages.php:141
 msgid "Multimedia File Deleted"
@@ -20226,8 +20227,9 @@ msgid "File description is required"
 msgstr "Es requereix una descripció del fitxer"
 
 #: www/project/admin/editimages.php:163
-msgid "ERROR: DB: Cannot update multimedia file"
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot update multimedia file"
+msgstr "Error a l'actualitzar"
 
 #: www/project/admin/editimages.php:165
 msgid "Multimedia File Properties Updated"
@@ -23395,6 +23397,9 @@ msgstr "Nom d'usuari"
 msgid "That user does not exist."
 msgstr "Aquesta categoria no existeix"
 
+#~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
+#~ msgstr "ERROR - el fitxer ha de tenir un tamany > 20 bytes i < 256000 bytes"
+
 #~ msgid "Username"
 #~ msgstr "Nom d'usuari"
 
@@ -23968,9 +23973,6 @@ msgstr "Aquesta categoria no existeix"
 #~ msgstr ""
 #~ "La següent opció determina si altres poden veure les vostres habilitats. "
 #~ "Encara que no puguin, podeu entrar les vostres habilitats."
-
-#~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
-#~ msgstr "Error: el fitxer ha de tenir un tamany > 20 bytes i < 256000 bytes"
 
 #~ msgid "Choose the role for each user and then press “Add All”."
 #~ msgstr ""

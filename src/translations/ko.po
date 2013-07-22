@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:55+0200\n"
+"POT-Creation-Date: 2013-07-22 10:57+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4902,7 +4902,7 @@ msgstr "없음"
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:554
 #: common/tracker/actions/query.php:197 www/admin/massmail.php:136
-#: www/pm/admin/index.php:187
+#: www/pm/admin/index.php:187 www/project/admin/editimages.php:265
 msgid "Id"
 msgstr "Id"
 
@@ -6113,7 +6113,6 @@ msgstr "존재하는 의견들"
 
 #: common/tracker/views/form-addcanned.php:40 www/admin/search.php:72
 #: www/admin/search.php:148 www/my/dashboard.php:63 www/pm/index.php:98
-#: www/project/admin/editimages.php:265
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "ID"
 msgstr "ID"
@@ -19976,12 +19975,13 @@ msgid "There are no databases currently allocated to this group"
 msgstr ""
 
 #: www/project/admin/editimages.php:47
-msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
+msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
 msgstr "오류 - 파일은 20byte 이상, 256000byte 미만이어야 합니다."
 
 #: www/project/admin/editimages.php:101
-msgid "ERROR: DB: Cannot store multimedia file : "
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot store multimedia file: "
+msgstr "그룹 객체 생성 오류"
 
 #: www/project/admin/editimages.php:103
 msgid "Multimedia File Uploaded"
@@ -19992,8 +19992,9 @@ msgid "Both file name and description are required"
 msgstr "파일명과 설명을 모두 입력해 주셔야 합니다."
 
 #: www/project/admin/editimages.php:139
-msgid "ERROR: DB: Cannot delete multimedia file: "
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot delete multimedia file: "
+msgstr "database 항목을 추가할 수 없습니다."
 
 #: www/project/admin/editimages.php:141
 msgid "Multimedia File Deleted"
@@ -20004,8 +20005,9 @@ msgid "File description is required"
 msgstr "파일 설명을 넣어 주셔야 합니다."
 
 #: www/project/admin/editimages.php:163
-msgid "ERROR: DB: Cannot update multimedia file"
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot update multimedia file"
+msgstr "갱신 에러"
 
 #: www/project/admin/editimages.php:165
 msgid "Multimedia File Properties Updated"
@@ -23119,6 +23121,9 @@ msgstr "사용자ID"
 msgid "That user does not exist."
 msgstr "분류 기준이 존재하지 않습니다."
 
+#~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
+#~ msgstr "오류 - 파일은 20byte 이상, 256000byte 미만이어야 합니다."
+
 #~ msgid "Username"
 #~ msgstr "Username"
 
@@ -23373,9 +23378,6 @@ msgstr "분류 기준이 존재하지 않습니다."
 #~ msgstr ""
 #~ "다음 옵션은 다른 사람들이 당신의 스킬을 볼 수 있을지를 결정합니다. 다른 사"
 #~ "람이 볼 수 없더라도, 스킬을 입력할 수 있습니다."
-
-#~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
-#~ msgstr "오류 - 파일은 20byte 이상, 256000byte 미만이어야 합니다."
 
 #~ msgid "Registration complete"
 #~ msgstr "등록 완료"

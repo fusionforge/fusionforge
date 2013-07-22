@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:55+0200\n"
+"POT-Creation-Date: 2013-07-22 10:57+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4544,7 +4544,7 @@ msgstr "Não atribuído"
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:554
 #: common/tracker/actions/query.php:197 www/admin/massmail.php:136
-#: www/pm/admin/index.php:187
+#: www/pm/admin/index.php:187 www/project/admin/editimages.php:265
 msgid "Id"
 msgstr "Id"
 
@@ -5690,7 +5690,6 @@ msgstr "Respostas Existentes"
 
 #: common/tracker/views/form-addcanned.php:40 www/admin/search.php:72
 #: www/admin/search.php:148 www/my/dashboard.php:63 www/pm/index.php:98
-#: www/project/admin/editimages.php:265
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "ID"
 msgstr "ID"
@@ -18662,11 +18661,11 @@ msgid "There are no databases currently allocated to this group"
 msgstr ""
 
 #: www/project/admin/editimages.php:47
-msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
+msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
 msgstr "ERRO - o arquivo precisa ter > 20 bytes e < 256000 bytes de tamanho"
 
 #: www/project/admin/editimages.php:101
-msgid "ERROR: DB: Cannot store multimedia file : "
+msgid "Error: Cannot store multimedia file: "
 msgstr ""
 
 #: www/project/admin/editimages.php:103
@@ -18678,7 +18677,7 @@ msgid "Both file name and description are required"
 msgstr "Tanto o nome do arquivo quanto a descrição são requeridas"
 
 #: www/project/admin/editimages.php:139
-msgid "ERROR: DB: Cannot delete multimedia file: "
+msgid "Error: Cannot delete multimedia file: "
 msgstr ""
 
 #: www/project/admin/editimages.php:141
@@ -18690,7 +18689,7 @@ msgid "File description is required"
 msgstr "Descrição do arquivo é requerida"
 
 #: www/project/admin/editimages.php:163
-msgid "ERROR: DB: Cannot update multimedia file"
+msgid "Error: Cannot update multimedia file"
 msgstr ""
 
 #: www/project/admin/editimages.php:165
@@ -21638,6 +21637,9 @@ msgstr ""
 msgid "That user does not exist."
 msgstr ""
 
+#~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
+#~ msgstr "ERRO - o arquivo precisa ter > 20 bytes e < 256000 bytes de tamanho"
+
 #~ msgid "Username"
 #~ msgstr "Nome do usuário"
 
@@ -22021,9 +22023,6 @@ msgstr ""
 #~ msgstr ""
 #~ "As opções que seguem determinam se os outros podem ver suas habilidades. "
 #~ "Se eles não podem, você pode continuar informando suas habilidades."
-
-#~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
-#~ msgstr "ERRO - o arquivo precisa ter > 20 bytes e < 256000 bytes de tamanho"
 
 #~ msgid "Registration complete"
 #~ msgstr "Registro completo"

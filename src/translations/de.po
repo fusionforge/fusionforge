@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 10:55+0200\n"
+"POT-Creation-Date: 2013-07-22 10:57+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -4980,7 +4980,7 @@ msgstr "Nicht zugeordnet"
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:554
 #: common/tracker/actions/query.php:197 www/admin/massmail.php:136
-#: www/pm/admin/index.php:187
+#: www/pm/admin/index.php:187 www/project/admin/editimages.php:265
 msgid "Id"
 msgstr "ID"
 
@@ -6204,7 +6204,6 @@ msgstr "Existierende Antworten"
 
 #: common/tracker/views/form-addcanned.php:40 www/admin/search.php:72
 #: www/admin/search.php:148 www/my/dashboard.php:63 www/pm/index.php:98
-#: www/project/admin/editimages.php:265
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "ID"
 msgstr "ID"
@@ -20446,13 +20445,14 @@ msgid "There are no databases currently allocated to this group"
 msgstr "Im Moment sind dieser Gruppe keine Datenbanken zugeordnet."
 
 #: www/project/admin/editimages.php:47
-msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
+msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
 msgstr ""
 "FEHLER - Datei muss größer als 20 bytes und kleiner als 256000 Bytes sein"
 
 #: www/project/admin/editimages.php:101
-msgid "ERROR: DB: Cannot store multimedia file : "
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot store multimedia file: "
+msgstr "Fehler: Konnte Gruppe: %s nicht anlegen"
 
 #: www/project/admin/editimages.php:103
 msgid "Multimedia File Uploaded"
@@ -20463,8 +20463,9 @@ msgid "Both file name and description are required"
 msgstr "Dateiname und Beschreibung erforderlich"
 
 #: www/project/admin/editimages.php:139
-msgid "ERROR: DB: Cannot delete multimedia file: "
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot delete multimedia file: "
+msgstr "Fehler: Konnte Gruppe: %s nicht erreichen"
 
 #: www/project/admin/editimages.php:141
 msgid "Multimedia File Deleted"
@@ -20475,8 +20476,9 @@ msgid "File description is required"
 msgstr "Dateibeschreibung wird benötigt"
 
 #: www/project/admin/editimages.php:163
-msgid "ERROR: DB: Cannot update multimedia file"
-msgstr ""
+#, fuzzy
+msgid "Error: Cannot update multimedia file"
+msgstr "Fehler beim Aktualisieren"
 
 #: www/project/admin/editimages.php:165
 msgid "Multimedia File Properties Updated"
@@ -23671,6 +23673,10 @@ msgstr "Kein Benutzername angegeben"
 msgid "That user does not exist."
 msgstr "Dieser Nutzer existiert nicht."
 
+#~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
+#~ msgstr ""
+#~ "FEHLER - Datei muss größer als 20 bytes und kleiner als 256000 Bytes sein"
+
 #~ msgid "Username"
 #~ msgstr "Benutzername"
 
@@ -24721,10 +24727,6 @@ msgstr "Dieser Nutzer existiert nicht."
 #~ msgstr ""
 #~ "Sie können neue Projekte hinzufügen, indem Sie den \"Projekt hinzufügen\" "
 #~ "Link oben nutzen."
-
-#~ msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
-#~ msgstr ""
-#~ "FEHLER - Datei muss größer als 20 bytes und kleiner als 256000 Bytes sein"
 
 #~ msgid ""
 #~ "Check the box next to the name of the user(s) you want to add. Your "
