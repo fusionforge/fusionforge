@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 15:41+0200\n"
+"POT-Creation-Date: 2013-07-22 16:04+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -24885,3 +24885,15 @@ msgstr "사용자ID"
 
 #~ msgid "ForumMessage::create() Unable to get new message id"
 #~ msgstr "ForumMessage::create() Unable to get new message id"
+
+#~ msgid "%1$s:: No Valid Group Object"
+#~ msgstr "%1$s:: 유효한 그룹 객체가 없습니다."
+
+#~ msgid "If you're aren't sure then why did you click 'Delete'?"
+#~ msgstr "If you're aren't sure then why did you click 'Delete'?"
+
+#~ msgid "Forum monitoring deactivated"
+#~ msgstr "게시판을 모니터링하지 않습니다."
+
+#~ msgid "Forum monitoring started"
+#~ msgstr "게시판을 모니터링합니다."

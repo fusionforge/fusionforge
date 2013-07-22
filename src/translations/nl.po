@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 15:41+0200\n"
+"POT-Creation-Date: 2013-07-22 16:04+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -20415,9 +20415,8 @@ msgstr ""
 "toevoegen&quot;."
 
 #: www/project/admin/massfinish.php:96
-#, fuzzy
 msgid "Add All"
-msgstr "Datum toevoegen"
+msgstr "Alle toevoegen"
 
 #: www/project/admin/project_admin_utils.php:49
 msgid "General information about project. Tag, trove list, description."
@@ -25940,3 +25939,16 @@ msgstr "Gebruikersnaam"
 
 #~ msgid "Homepage Link: "
 #~ msgstr "Link naar startpagina"
+
+#~ msgid ""
+#~ "You can't delete the license %1$s since it's currently referenced in a "
+#~ "project."
+#~ msgstr ""
+#~ "Je kunt de %1$s licentie niet verwijderen omdat er nog een verwijzing "
+#~ "aanhangt in een project."
+
+#~ msgid "Forum monitoring started"
+#~ msgstr "Forum monitoring geactiveerd"
+
+#~ msgid "Forum monitoring deactivated"
+#~ msgstr "Forum monitoring gedeactiveerd"

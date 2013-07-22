@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 15:41+0200\n"
+"POT-Creation-Date: 2013-07-22 16:04+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -22783,6 +22783,28 @@ msgstr "No puedo actualizar"
 msgid "No User Name Provided"
 msgstr "No ha proporcionado el nombre de usuario"
 
+#~ msgid " (examples: meeting minutes, test results, RFP Docs)"
+#~ msgstr " (ejemplos: minutas de reuniones, resultados de test, documentos)"
+
+#~ msgid ""
+#~ "We're Sorry but this Project hasn't uploaded their personal webpage yet."
+#~ msgstr ""
+#~ "Lo sentimos pero este proyecto no ha actualizado su página personal "
+#~ "todavía."
+
+#~ msgid "No matches found for “%s”"
+#~ msgstr "Ninguna coincidencia encontrada para “%s”"
+
+#~ msgid "Sorry, no match for “%s”."
+#~ msgstr "Ninguna coincidencia encontrada para “%s”."
+
+#~ msgid ""
+#~ "Error: Please check “I am Sure” to confirm or return to previous page to "
+#~ "cancel."
+#~ msgstr ""
+#~ "Error: Por favor elige “Estoy seguro” para confirmar or vuelve a la "
+#~ "página anterior para cancelar."
+
 #~ msgid "Error Getting Forum"
 #~ msgstr "Error Obteniendo Foro"
 
@@ -25770,3 +25792,170 @@ msgstr "No ha proporcionado el nombre de usuario"
 
 #~ msgid "Document submitted sucessfully"
 #~ msgstr "Documento enviado con éxito"
+
+#~ msgid "Delete Package: %1$s"
+#~ msgstr "Borrar Paquete: %1$s"
+
+#~ msgid ""
+#~ "Add a new item such as file, create directory, inject a zip at root level."
+#~ msgstr ""
+#~ "Agrega un nuevo elemento como un fichero, crea el directorio, sube un zip "
+#~ "a la carpeta raiz."
+
+#~ msgid "Error Adding Forum:"
+#~ msgstr "Error agregando Foro:"
+
+#~ msgid ""
+#~ "FRSPackage::Update: Package Name can only be alphanumeric or \"-\" \"_\" "
+#~ "\"+\" \".\" \"~\""
+#~ msgstr ""
+#~ "FRSPackage::Update: El nombre del paquete sólo puede ser alfanumérico"
+
+#~ msgid ""
+#~ "Permission denied. No project was chosen, project does not exist or you "
+#~ "can't access it."
+#~ msgstr ""
+#~ "Permiso denegado. Ningún proyecto elegido, el proyecto no existe o no "
+#~ "puede acceder a el."
+
+#~ msgid "ERROR - Could Not Update Group DocmanCreateOnline Status: %s"
+#~ msgstr ""
+#~ "ERROR - No puedo actualizar el estado del Grupo DocmanCreateOnline: %s"
+
+#~ msgid "ERROR - Could Not Update Group UseWebdab Status: %s"
+#~ msgstr "ERROR - No puedo actaulizar Estado de Grupo UseWebdab: %s"
+
+#~ msgid "ERROR - Could Not Update Group UseDocmanSearch Status: %s"
+#~ msgstr "ERROR - No puedo actualizar estado grupo UseDocmanSearch: %s"
+
+#~ msgid "ERROR - Could Not Update Group force_docman_reindex %s"
+#~ msgstr "ERROR - No puedo actualizar Grupo force_docman_reindex %s"
+
+#~ msgid ""
+#~ "Some plugin did not provide a name. I'd gladly tell you which one, but "
+#~ "obviously I can't. Sorry."
+#~ msgstr ""
+#~ "Algun plugin no proporciona un nombre. Me gustaria indicartelo, pero "
+#~ "obviamente no puedo. Lo siento."
+
+#~ msgid "%1$s Password Change Confirmation"
+#~ msgstr "Confirmación %1$s clave cambiada"
+
+#~ msgid ""
+#~ "Congratulations, you have re-set your account password. You may <a href="
+#~ "\"%1$s\">login</a> to the site now."
+#~ msgstr ""
+#~ "Enhorabuenam ha reseteado su contraseña de usuarios. Puede <a href=\"%1$s"
+#~ "\">acceder</a> al sitio ahora."
+
+#~ msgid ""
+#~ "Fill in a user name or email address and click 'Submit' to resend the "
+#~ "confirmation email."
+#~ msgstr ""
+#~ "Rellene el nombre usuario ó la dirección email  y haga click en 'Enviar' "
+#~ "para que se reenvíe el email de confirmación."
+
+#~ msgid ""
+#~ "Fill in a user name and click 'Submit' to resend the confirmation email."
+#~ msgstr ""
+#~ "Rellene el nombre usuario y haga click en 'Enviar' para que se reenvíe el "
+#~ "email de confirmación"
+
+#~ msgid ""
+#~ "You can't delete the license %1$s since it's currently referenced in a "
+#~ "project."
+#~ msgstr ""
+#~ "No se puede eliminar la licencia %1$s porque está actualmente en uso por "
+#~ "algún proyecto."
+
+#~ msgid ""
+#~ "You can't delete the theme %1$s since it's currently referenced in a user "
+#~ "profile."
+#~ msgstr ""
+#~ "No se puede eliminar el tema %1$s porque está actualmente en uso por "
+#~ "algún usuario."
+
+#~ msgid "Can't add user to this type of role"
+#~ msgstr "No puedo agregar al usurio a este tipo de rol"
+
+#~ msgid "Can't remove user from this type of role"
+#~ msgstr "No puedo borrar al usuario de este tipo de rol"
+
+#~ msgid "Subscribers to \"Site Updates\""
+#~ msgstr "Subscriptores de \"Actualizacion de Sitio\""
+
+#~ msgid "Subscribers to \"Additional Community Mailings\""
+#~ msgstr "Subscritores a \"Listas de Correo Adicional Comunidad\""
+
+#~ msgid ""
+#~ "Error in trove operation, can't delete trove category defined as default "
+#~ "in configuration."
+#~ msgstr ""
+#~ "Error en una operación del mapa de proyectos(Trove), no puedo borrar una "
+#~ "categoría definida como por defecto en el fichero local.inc"
+
+#~ msgid "You can't rate yourself"
+#~ msgstr "No puede puntuarse a si mismo"
+
+#~ msgid "Forum monitoring started"
+#~ msgstr "Monitorización del Foro activada"
+
+#~ msgid "File not deleted: you did not check \"I'm Sure\""
+#~ msgstr "Fichero no borrado no ha marcado \"Estoy Seguro\""
+
+#~ msgid "Download latest release as zip:"
+#~ msgstr "Descargar ultima release como zip:"
+
+#~ msgid "This link always points to the newest release as a zip file."
+#~ msgstr ""
+#~ "Este enlace siempre apunta a una nueva release en formato fichero zip."
+
+#~ msgid ""
+#~ "Clicking on \"create\" will schedule the creation of the database, and "
+#~ "email the details to the project administrators"
+#~ msgstr ""
+#~ "Pulsado en \"crear\" programará la creación de la base de datos, y "
+#~ "enviará un correo con los detalles a los admins del proyecto"
+
+#~ msgid "ERROR: DB: Cannot store multimedia file : "
+#~ msgstr "ERROR: BBDD: No puedo almacenar fichero multimedia"
+
+#~ msgid "ERROR: DB: Cannot delete multimedia file: "
+#~ msgstr "ERROR: BBDD: No puedo borrar fichero multimedia"
+
+#~ msgid "ERROR: DB: Cannot update multimedia file"
+#~ msgstr "ERROR: DB: No puedo actualizar fichero multimedia"
+
+#~ msgid ""
+#~ "Select up to three locations for this project in each of the Trove root "
+#~ "categories. If the project does not require any or all of these "
+#~ "locations, simply select \"None Selected\"."
+#~ msgstr ""
+#~ "Selecciona hasta tres localizaciones para este proyecto en el arbol de "
+#~ "categorias Trove. Si el proyecto no necesita ninguna de estas "
+#~ "localizaciones, simplemente seleccione \"Ninguno Seleccionado\"."
+
+#~ msgid ""
+#~ "Check the box next to the name of the user(s) you want to add. Your "
+#~ "choices will be preserved if you click any of the letters below. When "
+#~ "done, click \"Finish\" to choose the roles for the users you are adding."
+#~ msgstr ""
+#~ "Marca la casilla junto al usuario(s) que quiera agregar. Tus selecciones "
+#~ "se mantendrán si pulsas alguna de las letras. Cuando hayas acabado , "
+#~ "pulsa \"Finalizar\" para elegir los roles de los usuarios que estas "
+#~ "agregando."
+
+#~ msgid ""
+#~ "Clicking on \"create\" will schedule the creation of the Virtual Host.  "
+#~ "This will be synced to the project webservers - such that <em>yourhost."
+#~ "org</em> will display the material at <em>%1$s.%2$s</em>."
+#~ msgstr ""
+#~ "Pulsar en \"crear\" programará la creación de un Virtual Host.  Este se "
+#~ "sincronizará con los servidores web - como <em>tudominio.org</em> "
+#~ "mostrará el material en <em>%1$s.%2$s</em>."
+
+#~ msgid "No records found\",\"Database error: \""
+#~ msgstr "No se localizan datos, \"Error Base de Datos: \""
+
+#~ msgid "Forum monitoring deactivated"
+#~ msgstr "Monitorización del Foro desactivada"

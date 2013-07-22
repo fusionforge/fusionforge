@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 15:41+0200\n"
+"POT-Creation-Date: 2013-07-22 16:04+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -21577,6 +21577,9 @@ msgstr ""
 msgid "No User Name Provided"
 msgstr ""
 
+#~ msgid "Create a New Package"
+#~ msgstr "Criar Um Pacote"
+
 #~ msgid "Existing Responses:"
 #~ msgstr "Repostas Existentes:"
 
@@ -22630,3 +22633,9 @@ msgstr ""
 
 #~ msgid "Error Creating %1$s"
 #~ msgstr "Erro Criando %1$s"
+
+#~ msgid "%1$s:: No Valid Group Object"
+#~ msgstr "%1$s:: Nenhum Objeto de Grupo Válido"
+
+#~ msgid "Group Trove Information"
+#~ msgstr "Informações do Repositório do Grupo"

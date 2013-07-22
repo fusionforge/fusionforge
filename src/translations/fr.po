@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 15:41+0200\n"
+"POT-Creation-Date: 2013-07-22 16:04+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -15737,7 +15737,7 @@ msgstr "En attente (*)"
 
 #: www/admin/userlist.php:74
 msgid "No user found matching selected criteria."
-msgstr ""
+msgstr "Pas d'utilisateur correspondant aux critères sélectionnés."
 
 #: www/admin/userlist.php:80
 msgid "Add date"
@@ -19223,12 +19223,11 @@ msgstr ""
 
 #: www/pm/csv.php:101
 msgid "Record Layout"
-msgstr ""
+msgstr "Format des enregistrements"
 
 #: www/pm/csv.php:105
-#, fuzzy
 msgid "Field Name"
-msgstr "Nom du fichier"
+msgstr "Nom du champ"
 
 #: www/pm/csv.php:110
 #, fuzzy
@@ -19254,9 +19253,8 @@ msgid ""
 msgstr ""
 
 #: www/pm/csv.php:126
-#, fuzzy
 msgid "The summary or brief description"
-msgstr "Description détaillée"
+msgstr "Résumé ou brève description"
 
 #: www/pm/csv.php:130
 msgid "The category name (must be defined, only available in full export)"
@@ -19264,12 +19262,11 @@ msgstr ""
 
 #: www/pm/csv.php:134
 msgid "Duration in days"
-msgstr ""
+msgstr "Durée en jours"
 
 #: www/pm/csv.php:138
-#, fuzzy
 msgid "Number of hours required to complete"
-msgstr "Nombre de tâches toujours inachevées"
+msgstr "Nombre d'heures restantes"
 
 #: www/pm/csv.php:142
 msgid "The start date in MM-DD-YYYY HH:MM:SS format"
@@ -19280,9 +19277,8 @@ msgid "The end date in MM-DD-YYYY HH:MM:SS format"
 msgstr ""
 
 #: www/pm/csv.php:150
-#, fuzzy
 msgid "Percentage of completion"
-msgstr "Pourcentage réalisé"
+msgstr "Taux d'avancement"
 
 #: www/pm/csv.php:154
 msgid "integers 1 to 5"
@@ -19297,9 +19293,8 @@ msgid "optional, the unixname or precisely-matched realname of the assignee"
 msgstr ""
 
 #: www/pm/csv.php:166 www/pm/csv.php:170 www/pm/csv.php:174 www/pm/csv.php:178
-#, fuzzy
 msgid "optional, same as above"
-msgstr "en option | PageName"
+msgstr "optionnel, comme ci-dessus"
 
 #: www/pm/csv.php:182
 msgid "optional, the task_id of a task to be dependent on"
@@ -19352,48 +19347,44 @@ msgid "Update CSV Format"
 msgstr "Mettre à jour le format CSV"
 
 #: www/pm/format_csv.php:58
-#, fuzzy
 msgid "CSV Format"
-msgstr "Mettre à jour le format CSV"
+msgstr "Format CSV"
 
 #: www/pm/format_csv.php:66
 msgid "Content"
 msgstr "Contenu"
 
 #: www/pm/format_csv.php:67
-#, fuzzy
 msgid "Full"
-msgstr "Nom complet"
+msgstr "Complet"
 
 #: www/pm/format_csv.php:68
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: www/pm/format_csv.php:71
-#, fuzzy
 msgid "Separator"
-msgstr "Créateur"
+msgstr "Séparateur"
 
 #: www/pm/format_csv.php:72
 msgid "Comma (char: “,”)"
-msgstr ""
+msgstr "Virgule"
 
 #: www/pm/format_csv.php:73
 msgid "Semi-colon (char: “;”)"
-msgstr ""
+msgstr "Point-virgule"
 
 #: www/pm/format_csv.php:76
 msgid "Header"
-msgstr ""
+msgstr "En-tête"
 
 #: www/pm/format_csv.php:77
 msgid "Included"
-msgstr ""
+msgstr "Inclus"
 
 #: www/pm/format_csv.php:89
-#, fuzzy
 msgid "Full/Normal"
-msgstr "Nom complet"
+msgstr "Complet/Normal"
 
 #: www/pm/format_csv.php:90
 msgid "In Full, the category is also exported."
@@ -19571,9 +19562,8 @@ msgid "Day"
 msgstr "Jour"
 
 #: www/pm/postuploadcsv.php:117
-#, fuzzy
 msgid "Import was Successful"
-msgstr "Mis à jour avec succès."
+msgstr "Importé avec succès"
 
 #: www/pm/reporting/index.php:56
 msgid "Task Reporting System"
@@ -22775,9 +22765,9 @@ msgid "ArtifactFile Could Not Be Created"
 msgstr "Erreur lors de la création de l'élément"
 
 #: www/tracker/index.php:52
-#, fuzzy, php-format
+#, php-format
 msgid "Item [#%s] does not exist in this project"
-msgstr "Vous n'êtes pas membre de ce projet."
+msgstr "L'élément [#%s] n'existe pas dans ce projet"
 
 #: www/tracker/reporting/index.php:101
 msgid "Response Time"
@@ -22932,6 +22922,128 @@ msgstr "Erreur de mise à jour"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
+
+#~ msgid "Changed Public Info"
+#~ msgstr "Info publique modifiée"
+
+#~ msgid "Added User"
+#~ msgstr "Utilisateur ajouté"
+
+#~ msgid "Removed user"
+#~ msgstr "Utilisateur supprimé"
+
+#~ msgid "Updated user"
+#~ msgstr "Utilisateur mis à jour"
+
+#~ msgid "Approved"
+#~ msgstr "Approuvé"
+
+#~ msgid "Tip: You can select multiple files at once."
+#~ msgstr "Astuce : vous pouvez sélectionner plusieurs fichiers à la fois."
+
+#~ msgid "Delete following comment"
+#~ msgstr "Supprimer le commentaire suivant"
+
+#~ msgid "People Monitoring %s (%s)"
+#~ msgstr "Personnes surveillant %s (%s)"
+
+#~ msgid "Tracker [#%s] is now monitored by %s"
+#~ msgstr "Le traceur [#%s] est maintenant surveillé par %s"
+
+#~ msgid "Cannot start monitoring [#%s] for %s"
+#~ msgstr "Impossible d'activer la surveillance de [#%s] pour %s"
+
+#~ msgid "Tracker %s is now monitored by %s"
+#~ msgstr "Le traceur %s est maintenant surveillé par %s"
+
+#~ msgid "Cannot start monitoring %s for %s"
+#~ msgstr "Impossible d'activer la surveillance de %s pour %s"
+
+#~ msgid "Cannot find user %s"
+#~ msgstr "Impossible de trouver l'utilisateur %s"
+
+#~ msgid "You must choose a user"
+#~ msgstr "Vous devez choisir un utilisateur"
+
+#~ msgid "Tracker [#%s] is no more monitored by %s"
+#~ msgstr "Le traceur [#%s] n'est plus surveillé par %s"
+
+#~ msgid "Cannot stop monitoring [#%s] for %s"
+#~ msgstr "Impossible d'arrêter la surveillance de [#%s] pour %s"
+
+#~ msgid "Tracker %s is no more monitored by %s"
+#~ msgstr "Le traceur %s n'est plus surveillé par %s"
+
+#~ msgid "People monitoring %s"
+#~ msgstr "Personnes surveillant %s"
+
+#~ msgid "Invalid view"
+#~ msgstr "Vue non valide"
+
+#~ msgid "submitter"
+#~ msgstr "soumis par"
+
+#~ msgid "assignee"
+#~ msgstr "responsable"
+
+#~ msgid "stop"
+#~ msgstr "arrêter"
+
+#~ msgid "Monitoring"
+#~ msgstr "Surveillance"
+
+#~ msgid "are automatically notified"
+#~ msgstr "sont automatiquement notifiés"
+
+#~ msgid "This ticket is not monitored"
+#~ msgstr "Ce ticket n'est pas surveillé"
+
+#~ msgid "This tracker is not monitored"
+#~ msgstr "Ce traceur n'est pas surveillé"
+
+#~ msgid "Add people to the list"
+#~ msgstr "Ajouter des personnes à la liste"
+
+#~ msgid "Select the user to add in the list or search for other users"
+#~ msgstr ""
+#~ "Sélectionnez dans la liste l'utilisateur à ajouter ou recherchez d'autres "
+#~ "utilisateurs"
+
+#~ msgid "Search users (userid, username, realname, email)"
+#~ msgstr ""
+#~ "Rechercher des utilisateurs (identifiant, nom d'utilisateur, nom complet, "
+#~ "adresse électronique)"
+
+#~ msgid "No user found"
+#~ msgstr "Aucun utilisateur trouvé"
+
+#~ msgid ""
+#~ "We're Sorry but this Project hasn't uploaded their personal webpage yet."
+#~ msgstr ""
+#~ "Nous sommes désolés, mais ce projet n'a pas encore publié de site web."
+
+#~ msgid ""
+#~ "You can monitor news by Trove category by clicking on “Monitor News” in "
+#~ "front any category in the Project Tree section."
+#~ msgstr ""
+#~ "Vous pouvez surveiller les annonces par catégorie en cliquant sur « "
+#~ "Surveiller les annonces » dans l'arbre des projets."
+
+#~ msgid ""
+#~ "This page allows you to export or import all the tasks using a CSV (<a "
+#~ "href=\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma "
+#~ "Separated Values</a>) File. This format can be used to view tasks using "
+#~ "Microsoft Excel."
+#~ msgstr ""
+#~ "Cette page permet d'exporter ou d'importer toutes les tâches au format <a "
+#~ "href=\"http://fr.wikipedia.org/wiki/Comma-separated_values\">CSV</a>. Ce "
+#~ "format peut être utilisé pour visualiser les tâches dans un tableur."
+
+#~ msgid "Import/Export"
+#~ msgstr "Importer/Exporter"
+
+#~ msgid "Duration"
+#~ msgstr "Durée"
 
 #~ msgid "Error Getting Forum"
 #~ msgstr "Erreur lors de l'accès à un forum"
@@ -30355,3 +30467,83 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "next 50"
 #~ msgstr "50 suivantes"
+
+#~ msgid "ERROR - Could Not Update Group DocmanCreateOnline Status: %s"
+#~ msgstr ""
+#~ "Erreur lors de la mise à jour du statut du système de création de\n"
+#~ "documents en ligne : %s"
+
+#~ msgid "ERROR - Could Not Update Group force_docman_reindex %s"
+#~ msgstr "Erreur lors de la réindexation du moteur de recherche : %s"
+
+#~ msgid ""
+#~ "Some plugin did not provide a name. I'd gladly tell you which one, but "
+#~ "obviously I can't. Sorry."
+#~ msgstr ""
+#~ "Un greffon a omis de fournir son nom.  Pour des raisons évidentes, il est "
+#~ "difficile de dire lequel, hélas."
+
+#~ msgid ""
+#~ "You can't delete the license %1$s since it's currently referenced in a "
+#~ "project."
+#~ msgstr ""
+#~ "Vous ne pouvez pas supprimer la licence %1$s car elle est actuellement "
+#~ "référencée dans un projet."
+
+#~ msgid "Can't add user to this type of role"
+#~ msgstr "Impossible d'ajouter un utilisateur à un rôle de ce type."
+
+#~ msgid "Can't remove user from this type of role"
+#~ msgstr "Impossible de supprimer un utilisateur de ce type de rôle."
+
+#~ msgid "File not deleted: you did not check \"I'm Sure\""
+#~ msgstr "Fichier non supprimé : veuillez cocher la case « Je suis sûr »."
+
+#~ msgid "Download latest release as zip:"
+#~ msgstr "Télécharger la dernière version sous forme d'archive Zip :"
+
+#~ msgid "This link always points to the newest release as a zip file."
+#~ msgstr ""
+#~ "Ce lien pointe toujours sur la dernière version, sous forme d'une archive "
+#~ "au format Zip."
+
+#~ msgid ""
+#~ "New UI and features for the document manager (download as zip, locking, "
+#~ "referencing documents by URL) (Capgemini)."
+#~ msgstr ""
+#~ "Une nouvelle interface et de nouvelles fonctionnalités pour le "
+#~ "gestionnaire de documents (télécharger dans une archive Zip, "
+#~ "verrouillage, référencement de documents par URL) (Capgemini)."
+
+#~ msgid "ERROR: DB: Cannot store multimedia file : "
+#~ msgstr ""
+#~ "Erreur de base de données lors du stockage d'un fichier multimédia : "
+
+#~ msgid "ERROR: DB: Cannot delete multimedia file: "
+#~ msgstr ""
+#~ "Erreur de base de données lors de la suppression d'un fichier "
+#~ "multimédia : "
+
+#~ msgid "ERROR: DB: Cannot update multimedia file"
+#~ msgstr ""
+#~ "Erreur de base de données lors de la mise à jour d'un fichier "
+#~ "multimédia : "
+
+#~ msgid ""
+#~ "Select up to three locations for this project in each of the Trove root "
+#~ "categories. If the project does not require any or all of these "
+#~ "locations, simply select \"None Selected\"."
+#~ msgstr ""
+#~ "Vous pouvez choisir jusqu'à trois catégorisations pour ce projet dans "
+#~ "chacune des catégories racines.  Si le projet n'a pas de classification "
+#~ "pertinente dans une catégorie racine, vous pouvez n'en choisir aucune."
+
+#~ msgid ""
+#~ "Clicking on \"create\" will schedule the creation of the Virtual Host.  "
+#~ "This will be synced to the project webservers - such that <em>yourhost."
+#~ "org</em> will display the material at <em>%1$s.%2$s</em>."
+#~ msgstr ""
+#~ "Un clic sur « Créer » déclenchera la procédure de création de l'hôte "
+#~ "virtuel.  Cet hôte virtuel sera un alias pour le site web du projet, "
+#~ "c'est-à-dire que <em>votre.domaine.org</em> aura le même contenu que <em>"
+#~ "%1$s.%2$s</ em>."

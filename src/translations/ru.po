@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 15:41+0200\n"
+"POT-Creation-Date: 2013-07-22 16:04+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -20734,9 +20734,8 @@ msgstr ""
 "Назначить всех&quot;."
 
 #: www/project/admin/massfinish.php:96
-#, fuzzy
 msgid "Add All"
-msgstr "Добавить дату"
+msgstr "Назначить всех"
 
 #: www/project/admin/project_admin_utils.php:49
 msgid "General information about project. Tag, trove list, description."
@@ -27167,3 +27166,67 @@ msgstr "Имя участника обязательно"
 #~ msgstr ""
 #~ "Идентификатор группы или задания по определенным причинам временно не "
 #~ "функционирует"
+
+#~ msgid "Create a new %1$s below:"
+#~ msgstr "Создать %1$s ниже:"
+
+#~ msgid "%1$s successfully added."
+#~ msgstr "%1$s добавлена."
+
+#~ msgid ""
+#~ "You can't delete the processor %1$s since it's currently referenced in a "
+#~ "file release."
+#~ msgstr "До окончания релиза, удаление %1$s заблокировано."
+
+#~ msgid ""
+#~ "You can't delete the license %1$s since it's currently referenced in a "
+#~ "project."
+#~ msgstr ""
+#~ "Удаление или изменение лицензии %1$s заблокировано из-за её использования "
+#~ "в проекте."
+
+#~ msgid ""
+#~ "You can't delete the language %1$s since it's currently referenced in a "
+#~ "user profile."
+#~ msgstr "Удаление языка %1$s блокировано связью с аккаунтом участника."
+
+#~ msgid "Are you sure you want to delete this %1$s?"
+#~ msgstr "Подтвердите удаление %1$s?"
+
+#~ msgid "%1$s successfully deleted."
+#~ msgstr "%1$s удалено."
+
+#~ msgid "Modify the %1$s below:"
+#~ msgstr "Изменить %1$s ниже:"
+
+#~ msgid "%1$s successfully modified."
+#~ msgstr "%1$s изменено."
+
+#~ msgid "Edit the %1$ss Table"
+#~ msgstr "Редактировать таблицу %1$ss"
+
+#~ msgid "Forum monitoring started"
+#~ msgstr "Включено получение новостей с форума"
+
+#~ msgid "Forum monitoring deactivated"
+#~ msgstr "Получение с форума новостей отключено"
+
+#~ msgid ""
+#~ "<p>The purpose of this archive is to let you share your code snippets, "
+#~ "scripts,\tand functions with the Open Source Software Community.</"
+#~ "p><p>You can create a \"new snippet\", then post additional versions of "
+#~ "that snippet quickly and easily.</p><p>Once you have snippets posted, you "
+#~ "can then create a \"Package\" of snippets. That package can contain "
+#~ "multiple, specific versions of other snippets.</p><p></p><h3>Browse "
+#~ "Snippets</h3>\t<p>You can browse the snippet library quickly:</p>"
+#~ msgstr ""
+#~ "<p>Назначение данной страницы архивов библиотеки, скриптов, заметок и "
+#~ "отдельных частей открытого исходного кода,\t функций, с другими "
+#~ "участниками и пользователями Сообщества Программного Обеспечения "
+#~ "Открытого Типа.</p><p>Здесь Вы можете создать\"новую страничку к "
+#~ "библиотеке\", которая возможно будет полезна другим пользователям.</"
+#~ "p><p>Как только ваша страничка примечаний оформлена, Вы можете создать "
+#~ "\"буклет\" с примечаниями и вырезками. Такой буклет может содержать "
+#~ "разделы по тематикам, различным версиям вырезок.</p><p></p><h3>Навигация "
+#~ "в буклете</h3>\t<p>Вы можете таким способом быстро находить нужный "
+#~ "участок библиотеки:</p>"

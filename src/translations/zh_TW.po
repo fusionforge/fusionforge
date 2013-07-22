@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 15:41+0200\n"
+"POT-Creation-Date: 2013-07-22 16:04+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -25414,3 +25414,45 @@ msgstr "帳號"
 
 #~ msgid "Error: For some reason group_id and/or survey_id did not make it he"
 #~ msgstr "錯誤 - 基於某些理由，群組編號或問卷編號不能出現在這個頁面"
+
+#~ msgid "Create a new %1$s below:"
+#~ msgstr "創造一個新的 %1$s 如下："
+
+#~ msgid "%1$s successfully added."
+#~ msgstr "%1$s 新增成功"
+
+#~ msgid ""
+#~ "You can't delete the processor %1$s since it's currently referenced in a "
+#~ "file release."
+#~ msgstr "因為它現今在一個檔案發佈中被列入參考，你不能刪除處理器 %1$s。"
+
+#~ msgid ""
+#~ "You can't delete the license %1$s since it's currently referenced in a "
+#~ "project."
+#~ msgstr "因為它現今在一個計畫中被列入參考，你不能刪除授權方式 %1$s。"
+
+#~ msgid ""
+#~ "You can't delete the language %1$s since it's currently referenced in a "
+#~ "user profile."
+#~ msgstr "因為它現今在一個使用者描繪中被列入參考，你不能刪除程式語言 %1$s。"
+
+#~ msgid "Are you sure you want to delete this %1$s?"
+#~ msgstr "您確定要刪除這個 %1$s 嗎？"
+
+#~ msgid "%1$s successfully deleted."
+#~ msgstr "%1$s 刪除成功"
+
+#~ msgid "Modify the %1$s below:"
+#~ msgstr "修改 %1$s 如下："
+
+#~ msgid "%1$s successfully modified."
+#~ msgstr "%1$s 修改成功"
+
+#~ msgid "Edit the %1$ss Table"
+#~ msgstr "編輯 %1$s 表格"
+
+#~ msgid "Forum monitoring started"
+#~ msgstr "討論區監視開始"
+
+#~ msgid "Forum monitoring deactivated"
+#~ msgstr "討論區監視停用"

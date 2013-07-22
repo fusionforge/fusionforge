@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 15:41+0200\n"
+"POT-Creation-Date: 2013-07-22 16:04+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -26198,3 +26198,28 @@ msgstr "Non è stato inserito alcun file"
 
 #~ msgid "Homepage Link: "
 #~ msgstr "Homepage: "
+
+#~ msgid "%1$s successfully added."
+#~ msgstr "%1$s aggiunto."
+
+#~ msgid ""
+#~ "You can't delete the license %1$s since it's currently referenced in a "
+#~ "project."
+#~ msgstr ""
+#~ "Non è possibile rimuovere la licenza %1$s poiché è utilizzata da un "
+#~ "progetto."
+
+#~ msgid "%1$s successfully deleted."
+#~ msgstr "%1$s rimosso."
+
+#~ msgid "Modify the %1$s below:"
+#~ msgstr "Modifica il %1$s:"
+
+#~ msgid "%1$s successfully modified."
+#~ msgstr "%1$s modificato."
+
+#~ msgid "Forum monitoring started"
+#~ msgstr "Notifica forum attivata"
+
+#~ msgid "Forum monitoring deactivated"
+#~ msgstr "Notifica forum disattivata"
