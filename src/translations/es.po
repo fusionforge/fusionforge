@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:22+0200\n"
+"POT-Creation-Date: 2013-07-22 11:41+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -399,7 +399,7 @@ msgstr "Proyecto"
 #: common/forum/Forum.class.php:601 common/forum/Forum.class.php:627
 #: common/forum/Forum.class.php:635 common/forum/Forum.class.php:643
 #: common/forum/Forum.class.php:659 common/forum/ForumHTML.class.php:73
-#: common/mail/MailingListFactory.class.php:104
+#: common/include/exit.php:80 common/mail/MailingListFactory.class.php:104
 #: common/tracker/actions/browse.php:406 common/tracker/actions/browse.php:409
 #: common/tracker/actions/query.php:329 common/tracker/actions/query.php:344
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
@@ -1606,9 +1606,10 @@ msgstr "Fecha Inicial"
 #: plugins/mailman/www/admin/index.php:150
 #: plugins/mailman/www/admin/index.php:183
 #: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
-#: www/account/lostpw.php:90 www/account/pending-resend.php:71
-#: www/account/register.php:159 www/account/verify.php:78
-#: www/account/verify.php:82 www/admin/massmail.php:94
+#: www/account/lostpw.php:90 www/account/pending-resend.php:69
+#: www/account/pending-resend.php:71 www/account/register.php:159
+#: www/account/verify.php:76 www/account/verify.php:78
+#: www/account/verify.php:86 www/admin/massmail.php:94
 #: www/admin/massmail.php:113 www/admin/massmail.php:116
 #: www/admin/massmail.php:142 www/admin/useredit.php:148
 #: www/admin/useredit.php:157 www/admin/useredit.php:211
@@ -2644,21 +2645,18 @@ msgstr ""
 "permisos para ver esta página."
 
 #: common/include/exit.php:68
+#, fuzzy
 msgid ""
 "Permission denied. No project was chosen, project does not exist or you "
-"can't access it."
+"cannot access it."
 msgstr ""
 "Permiso denegado. Ningún proyecto elegido, el proyecto no existe o no puede "
 "acceder a el."
 
-#: common/include/exit.php:80 www/account/verify.php:38
-msgid "Missing required parameters : "
-msgstr "Faltan parametros de la consulta : "
-
-#: common/include/exit.php:85
+#: common/include/exit.php:80 common/include/exit.php:85
 #, php-format
-msgid "Missing required parameters."
-msgstr "Faltan parametros obligatorios."
+msgid "Missing Required Parameters"
+msgstr "Faltan parámetros"
 
 #: common/include/exit.php:104
 msgid "The Site Administrator has turned off this feature."
@@ -4535,7 +4533,7 @@ msgstr "Texto libre para la página \"navega por los elementos\""
 #: plugins/mantisbt/view/addOrEditNote.php:58
 #: plugins/scmgit/common/GitPlugin.class.php:1124
 #: plugins/scmhg/common/HgPlugin.class.php:632
-#: www/account/pending-resend.php:75 www/activity/index.php:191
+#: www/account/pending-resend.php:79 www/activity/index.php:191
 #: www/admin/admin_table.php:222 www/admin/cronman.php:37
 #: www/admin/globalroleedit.php:247 www/admin/index.php:166
 #: www/admin/pending-news.php:163 www/forum/admin/index.php:412
@@ -7538,22 +7536,22 @@ msgid "Cookies must be enabled past this point."
 msgstr "Las \"cookies\" deben de estar habilitados pasado este punto."
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:74
+#: www/account/pending-resend.php:69 www/account/verify.php:76
 msgid "Login name or email address"
 msgstr "Nombre de usuario o dirección email"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
-#: www/account/pending-resend.php:71 www/account/verify.php:78
 msgid "Login name"
 msgstr "Nombre de usuario"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
-#: www/account/verify.php:82
+#: www/account/verify.php:86
 msgid "Password"
 msgstr "Contraseña"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:208
-#: www/account/verify.php:85 www/admin/userlist.php:79
+#: www/account/verify.php:93 www/admin/userlist.php:79
 msgid "Login"
 msgstr "Iniciar sesión"
 
@@ -8842,7 +8840,8 @@ msgstr "Propiedades de cuenta principal"
 #: plugins/globaldashboard/www/admin/edit_account_page.php:77
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
 #: plugins/globaldashboard/www/admin/manage_accounts.php:117
-#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
+#: www/account/verify.php:38 www/project/memberlist.php:50
+#: www/stats/lastlogins.php:51
 msgid "User Name"
 msgstr "Nombre de Usuario"
 
@@ -14086,7 +14085,8 @@ msgid ""
 "login."
 msgstr ""
 
-#: www/account/lostpw.php:90
+#: www/account/lostpw.php:90 www/account/pending-resend.php:71
+#: www/account/verify.php:78
 msgid "Login Name"
 msgstr "Nombre de usuario"
 
@@ -14115,23 +14115,21 @@ msgid "Resend confirmation email to a pending account"
 msgstr "[Reenviar el email de confirmación a una cuenta pendiente de registro]"
 
 #: www/account/pending-resend.php:60
+#, fuzzy
 msgid ""
-"Fill in a user name or email address and click 'Submit' to resend the "
+"Fill in a user name or email address and click “Submit” to resend the "
 "confirmation email."
 msgstr ""
 "Rellene el nombre usuario ó la dirección email  y haga click en 'Enviar' "
 "para que se reenvíe el email de confirmación."
 
 #: www/account/pending-resend.php:62
+#, fuzzy
 msgid ""
-"Fill in a user name and click 'Submit' to resend the confirmation email."
+"Fill in a user name and click “Submit” to resend the confirmation email."
 msgstr ""
 "Rellene el nombre usuario y haga click en 'Enviar' para que se reenvíe el "
 "email de confirmación"
-
-#: www/account/pending-resend.php:69 www/account/verify.php:76
-msgid "Login name or email address:"
-msgstr "Nombre de autenticación ó dirección email:"
 
 #: www/account/register.php:75
 msgid "You can't register an account unless you accept the terms of use."
@@ -14268,10 +14266,6 @@ msgstr ""
 "Ha sido borrado de %1$s lista de correo del sitio. En caso que desee re-"
 "activar su subscripción en el futuro, accede y visite su página de "
 "mantenimiento de la Cuenta."
-
-#: www/account/verify.php:38
-msgid "UserName"
-msgstr "Nombre de Usuario"
 
 #: www/account/verify.php:51
 msgid "Account already active."
@@ -22826,6 +22820,18 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "That user does not exist."
 msgstr "El usuario no existe"
 
+#~ msgid "Missing required parameters : "
+#~ msgstr "Faltan parametros de la consulta : "
+
+#~ msgid "Missing required parameters."
+#~ msgstr "Faltan parametros obligatorios."
+
+#~ msgid "Login name or email address:"
+#~ msgstr "Nombre de autenticación ó dirección email:"
+
+#~ msgid "UserName"
+#~ msgstr "Nombre de Usuario"
+
 #~ msgid "Welcome to %1$s"
 #~ msgstr "Bienvenido a %1$s"
 
@@ -23233,9 +23239,6 @@ msgstr "El usuario no existe"
 #~ msgstr ""
 #~ "El nombre del archivo sólo puede contener caracteres alfanuméricos y los "
 #~ "siguientes caracteres “-”, “_”, “+”, “.”, “~”."
-
-#~ msgid "Missing Required Parameters"
-#~ msgstr "Faltan parámetros"
 
 #~ msgid "Error: Cannot change group properties: %s"
 #~ msgstr "Error: No se pudo cambiar las propiedades del proyecto: %s"

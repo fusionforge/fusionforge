@@ -57,21 +57,25 @@ if (getStringFromRequest('submit')) {
 $HTML->header(array('title'=>_('Resend confirmation email to a pending account')));
 
 if (forge_get_config('require_unique_email')) {
-	echo _('Fill in a user name or email address and click \'Submit\' to resend the confirmation email.');
+	echo _('Fill in a user name or email address and click “Submit” to resend the confirmation email.');
 } else {
-	echo _('Fill in a user name and click \'Submit\' to resend the confirmation email.');
+	echo _('Fill in a user name and click “Submit” to resend the confirmation email.');
 }
 ?>
 
 <form action="<?php echo util_make_url('/account/pending-resend.php'); ?>" method="post">
 <p><?php
 if (forge_get_config('require_unique_email')) {
-	echo _('Login name or email address:');
+	echo _('Login name or email address')._(':');
 } else {
-	echo _('Login name')._(':');
+	echo _('Login Name')._(':');
 }
 ?>
-<br /><input type="text" name="loginname" /></p>
+<br />
+<label for="loginname">
+	<input id="loginname" required="required" type="text" name="loginname"/>
+</label>
+</p>
 <p><input type="submit" name="submit" value="<?php echo _('Submit'); ?>" /></p>
 </form>
 

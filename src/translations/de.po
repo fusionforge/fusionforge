@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:22+0200\n"
+"POT-Creation-Date: 2013-07-22 11:41+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -422,7 +422,7 @@ msgstr "Projekt"
 #: common/forum/Forum.class.php:601 common/forum/Forum.class.php:627
 #: common/forum/Forum.class.php:635 common/forum/Forum.class.php:643
 #: common/forum/Forum.class.php:659 common/forum/ForumHTML.class.php:73
-#: common/mail/MailingListFactory.class.php:104
+#: common/include/exit.php:80 common/mail/MailingListFactory.class.php:104
 #: common/tracker/actions/browse.php:406 common/tracker/actions/browse.php:409
 #: common/tracker/actions/query.php:329 common/tracker/actions/query.php:344
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
@@ -1674,9 +1674,10 @@ msgstr "Startdatum"
 #: plugins/mailman/www/admin/index.php:150
 #: plugins/mailman/www/admin/index.php:183
 #: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
-#: www/account/lostpw.php:90 www/account/pending-resend.php:71
-#: www/account/register.php:159 www/account/verify.php:78
-#: www/account/verify.php:82 www/admin/massmail.php:94
+#: www/account/lostpw.php:90 www/account/pending-resend.php:69
+#: www/account/pending-resend.php:71 www/account/register.php:159
+#: www/account/verify.php:76 www/account/verify.php:78
+#: www/account/verify.php:86 www/admin/massmail.php:94
 #: www/admin/massmail.php:113 www/admin/massmail.php:116
 #: www/admin/massmail.php:142 www/admin/useredit.php:148
 #: www/admin/useredit.php:157 www/admin/useredit.php:211
@@ -2750,18 +2751,13 @@ msgstr ""
 #, fuzzy
 msgid ""
 "Permission denied. No project was chosen, project does not exist or you "
-"can't access it."
+"cannot access it."
 msgstr "Keine Gruppe wurde ausgewählt oder Sie können ihr nicht beitreten."
 
-#: common/include/exit.php:80 www/account/verify.php:38
-#, fuzzy
-msgid "Missing required parameters : "
-msgstr "Fehler - es fehlen benötigte Parameter"
-
-#: common/include/exit.php:85
-#, fuzzy, php-format
-msgid "Missing required parameters."
-msgstr "Fehler - es fehlen benötigte Parameter"
+#: common/include/exit.php:80 common/include/exit.php:85
+#, php-format
+msgid "Missing Required Parameters"
+msgstr "Es fehlen benötigte Parameter"
 
 #: common/include/exit.php:104
 msgid "The Site Administrator has turned off this feature."
@@ -4714,7 +4710,7 @@ msgstr "Freitext für die \"Durchsuche Objekte\" Seite"
 #: plugins/mantisbt/view/addOrEditNote.php:58
 #: plugins/scmgit/common/GitPlugin.class.php:1124
 #: plugins/scmhg/common/HgPlugin.class.php:632
-#: www/account/pending-resend.php:75 www/activity/index.php:191
+#: www/account/pending-resend.php:79 www/activity/index.php:191
 #: www/admin/admin_table.php:222 www/admin/cronman.php:37
 #: www/admin/globalroleedit.php:247 www/admin/index.php:166
 #: www/admin/pending-news.php:163 www/forum/admin/index.php:412
@@ -7796,22 +7792,22 @@ msgid "Cookies must be enabled past this point."
 msgstr "Cookies müssen ab hier eingeschaltet sein."
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:74
+#: www/account/pending-resend.php:69 www/account/verify.php:76
 msgid "Login name or email address"
 msgstr "Login Name oder E-Mail-Adresse"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
-#: www/account/pending-resend.php:71 www/account/verify.php:78
 msgid "Login name"
 msgstr "Anmelde-Name"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
-#: www/account/verify.php:82
+#: www/account/verify.php:86
 msgid "Password"
 msgstr "Passwort"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:208
-#: www/account/verify.php:85 www/admin/userlist.php:79
+#: www/account/verify.php:93 www/admin/userlist.php:79
 msgid "Login"
 msgstr "Einloggen (SSL)"
 
@@ -9160,7 +9156,8 @@ msgstr "Account Optionen:"
 #: plugins/globaldashboard/www/admin/edit_account_page.php:77
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
 #: plugins/globaldashboard/www/admin/manage_accounts.php:117
-#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
+#: www/account/verify.php:38 www/project/memberlist.php:50
+#: www/stats/lastlogins.php:51
 #, fuzzy
 msgid "User Name"
 msgstr "Benutzername"
@@ -14627,7 +14624,8 @@ msgstr ""
 "Bestätigungs-Hash für Ihren Account. Wenn Sie den Link anklicken, erhalten "
 "Sie die Gelegenheit Ihr Passwort Online zu ändern und einzuloggen."
 
-#: www/account/lostpw.php:90
+#: www/account/lostpw.php:90 www/account/pending-resend.php:71
+#: www/account/verify.php:78
 msgid "Login Name"
 msgstr "Anmelde-Name"
 
@@ -14659,7 +14657,7 @@ msgstr "[Sende Bestätigungs-Email zu einem anstehenden Account nochmal]"
 
 #: www/account/pending-resend.php:60
 msgid ""
-"Fill in a user name or email address and click 'Submit' to resend the "
+"Fill in a user name or email address and click “Submit” to resend the "
 "confirmation email."
 msgstr ""
 "Tragen Sie einen Benutzernamen oder eine E-Mail-Adresse ein und klicken sie "
@@ -14667,14 +14665,10 @@ msgstr ""
 
 #: www/account/pending-resend.php:62
 msgid ""
-"Fill in a user name and click 'Submit' to resend the confirmation email."
+"Fill in a user name and click “Submit” to resend the confirmation email."
 msgstr ""
 "Tragen Sie einen Benutzernamen ein und klicken sie auf 'Submit', um die "
 "Bestätigungsemail erneut zu versenden."
-
-#: www/account/pending-resend.php:69 www/account/verify.php:76
-msgid "Login name or email address:"
-msgstr "Login-Name oder E-Mail-Adresse:"
 
 #: www/account/register.php:75
 msgid "You can't register an account unless you accept the terms of use."
@@ -14815,11 +14809,6 @@ msgstr ""
 "Sie wurden von den %1$s Mailings abgemeldet. Für den Fall dass Sie Ihre "
 "Subskription zukünftig wieder reaktivieren möchten, loggen Sie ein und "
 "besuchen Sie Ihre Account Einstellungen Seite."
-
-#: www/account/verify.php:38
-#, fuzzy
-msgid "UserName"
-msgstr "Benutzername"
 
 #: www/account/verify.php:51
 msgid "Account already active."
@@ -23662,6 +23651,34 @@ msgstr "Kein Benutzername angegeben"
 msgid "That user does not exist."
 msgstr "Dieser Nutzer existiert nicht."
 
+#, fuzzy
+#~ msgid "Missing required parameters : "
+#~ msgstr "Fehler - es fehlen benötigte Parameter"
+
+#, fuzzy
+#~ msgid "Missing required parameters."
+#~ msgstr "Fehler - es fehlen benötigte Parameter"
+
+#~ msgid ""
+#~ "Fill in a user name or email address and click 'Submit' to resend the "
+#~ "confirmation email."
+#~ msgstr ""
+#~ "Tragen Sie einen Benutzernamen oder eine E-Mail-Adresse ein und klicken "
+#~ "sie auf 'Submit', um die Bestätigungsemail erneut zu versenden."
+
+#~ msgid ""
+#~ "Fill in a user name and click 'Submit' to resend the confirmation email."
+#~ msgstr ""
+#~ "Tragen Sie einen Benutzernamen ein und klicken sie auf 'Submit', um die "
+#~ "Bestätigungsemail erneut zu versenden."
+
+#~ msgid "Login name or email address:"
+#~ msgstr "Login-Name oder E-Mail-Adresse:"
+
+#, fuzzy
+#~ msgid "UserName"
+#~ msgstr "Benutzername"
+
 #~ msgid "Welcome to %1$s"
 #~ msgstr "Willkommen auf %1$s"
 
@@ -24098,9 +24115,6 @@ msgstr "Dieser Nutzer existiert nicht."
 #~ "Für Dateinamen können ausschließlich alphanumerische und “-”, “_”, “+”, "
 #~ "“.”, “~” Zeichen verwendet werden."
 
-#~ msgid "Missing Required Parameters"
-#~ msgstr "Es fehlen benötigte Parameter"
-
 #~ msgid "Error: Cannot add admin to newly created group: %s"
 #~ msgstr ""
 #~ "Fehler: Konnte keinen Administrator zur neu eingetragenen Gruppe: %s "
@@ -24452,19 +24466,6 @@ msgstr "Dieser Nutzer existiert nicht."
 #~ msgstr ""
 #~ "Glückwunsch, Sie haben Ihr Account Passwort zurückgesetzt. Sie können nun "
 #~ "auf der Seite <a href=\"%s\">einloggen</a>."
-
-#~ msgid ""
-#~ "Fill in a user name or email address and click “Submit” to resend the "
-#~ "confirmation email."
-#~ msgstr ""
-#~ "Tragen Sie einen Benutzernamen oder eine E-Mail-Adresse ein und klicken "
-#~ "sie auf 'Submit', um die Bestätigungsemail erneut zu versenden."
-
-#~ msgid ""
-#~ "Fill in a user name and click “Submit” to resend the confirmation email."
-#~ msgstr ""
-#~ "Tragen Sie einen Benutzernamen ein und klicken sie auf 'Submit', um die "
-#~ "Bestätigungsemail erneut zu versenden."
 
 #~ msgid "Congratulations. You have registered on %1$s."
 #~ msgstr "Gratulation. Sie haben sich auf %1$s registrieren lassen."

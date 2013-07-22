@@ -65,7 +65,7 @@ function exit_not_logged_in() {
  * exit_no_group() - Exit with no group chosen error
  */
 function exit_no_group() {
-	exit_error(_('Permission denied. No project was chosen, project does not exist or you can\'t access it.'), '');
+	exit_error(_('Permission denied. No project was chosen, project does not exist or you cannot access it.'), '');
 }
 
 /**
@@ -77,12 +77,12 @@ function exit_no_group() {
  */
 function exit_missing_param($url = '', $missing_params = array(), $toptab = '') {
 	if (!empty($missing_params)) {
-		$error = _('Missing required parameters : ');
+		$error = _('Missing Required Parameters')._(': ');
 		foreach ($missing_params as $missing_param) {
 			$error .= $missing_param.' ';
 		}
 	} else {
-		$error = sprintf(_('Missing required parameters.'));
+		$error = sprintf(_('Missing Required Parameters'));
 	}
 	$redirect_url = util_find_relative_referer($url);
 	if (!empty($redirect_url)) {

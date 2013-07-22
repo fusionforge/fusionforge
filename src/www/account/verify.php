@@ -35,7 +35,7 @@ if (getStringFromRequest('submit')) {
 	$passwd = getStringFromRequest('passwd');
 
 	if (!$loginname) {
-		$error_msg = _('Missing required parameters : ')._('UserName');
+		exit_missing_param('',array(_('User Name')),'my');
 	}
 
 	$u = user_get_object_by_name($loginname);
@@ -73,18 +73,25 @@ echo '<p>' . _('In order to complete your registration, login now. Your account 
 
 <p><?php
 if (forge_get_config('require_unique_email')) {
-	echo _('Login name or email address:');
+	echo _('Login name or email address')._(':');
 } else {
-	echo _('Login name')._(':');
+	echo _('Login Name')._(':');
 }
 ?>
-<br /><input type="text" name="loginname" /></p>
+<br />
+<label for="loginname">
+	<input id="loginname" type="text" name="loginname"/>
+</label>
+</p>
 <p><?php echo _('Password')._(':'); ?>
-<br /><input type="password" name="passwd" /></p>
+<br />
+<label for="passwd">
+	<input id="passwd" type="password" name="passwd"/>
+</label>
+</p>
 <input type="hidden" name="confirm_hash" value="<?php print htmlentities($confirm_hash); ?>" />
 <p><input type="submit" name="submit" value="<?php echo _('Login'); ?>" /></p>
 </form>
 
 <?php
 $HTML->footer(array());
-?>

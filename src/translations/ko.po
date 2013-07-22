@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:22+0200\n"
+"POT-Creation-Date: 2013-07-22 11:41+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -425,7 +425,7 @@ msgstr ""
 #: common/forum/Forum.class.php:601 common/forum/Forum.class.php:627
 #: common/forum/Forum.class.php:635 common/forum/Forum.class.php:643
 #: common/forum/Forum.class.php:659 common/forum/ForumHTML.class.php:73
-#: common/mail/MailingListFactory.class.php:104
+#: common/include/exit.php:80 common/mail/MailingListFactory.class.php:104
 #: common/tracker/actions/browse.php:406 common/tracker/actions/browse.php:409
 #: common/tracker/actions/query.php:329 common/tracker/actions/query.php:344
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
@@ -1663,9 +1663,10 @@ msgstr ""
 #: plugins/mailman/www/admin/index.php:150
 #: plugins/mailman/www/admin/index.php:183
 #: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
-#: www/account/lostpw.php:90 www/account/pending-resend.php:71
-#: www/account/register.php:159 www/account/verify.php:78
-#: www/account/verify.php:82 www/admin/massmail.php:94
+#: www/account/lostpw.php:90 www/account/pending-resend.php:69
+#: www/account/pending-resend.php:71 www/account/register.php:159
+#: www/account/verify.php:76 www/account/verify.php:78
+#: www/account/verify.php:86 www/admin/massmail.php:94
 #: www/admin/massmail.php:113 www/admin/massmail.php:116
 #: www/admin/massmail.php:142 www/admin/useredit.php:148
 #: www/admin/useredit.php:157 www/admin/useredit.php:211
@@ -2706,17 +2707,12 @@ msgstr ""
 #, fuzzy
 msgid ""
 "Permission denied. No project was chosen, project does not exist or you "
-"can't access it."
+"cannot access it."
 msgstr "오류 - 그룹 id가 선택되지 않았습니다."
 
-#: common/include/exit.php:80 www/account/verify.php:38
-#, fuzzy
-msgid "Missing required parameters : "
-msgstr "오류 - 필요한 인자가 빠졌습니다."
-
-#: common/include/exit.php:85
+#: common/include/exit.php:80 common/include/exit.php:85
 #, fuzzy, php-format
-msgid "Missing required parameters."
+msgid "Missing Required Parameters"
 msgstr "오류 - 필요한 인자가 빠졌습니다."
 
 #: common/include/exit.php:104
@@ -4637,7 +4633,7 @@ msgstr ""
 #: plugins/mantisbt/view/addOrEditNote.php:58
 #: plugins/scmgit/common/GitPlugin.class.php:1124
 #: plugins/scmhg/common/HgPlugin.class.php:632
-#: www/account/pending-resend.php:75 www/activity/index.php:191
+#: www/account/pending-resend.php:79 www/activity/index.php:191
 #: www/admin/admin_table.php:222 www/admin/cronman.php:37
 #: www/admin/globalroleedit.php:247 www/admin/index.php:166
 #: www/admin/pending-news.php:163 www/forum/admin/index.php:412
@@ -7647,25 +7643,25 @@ msgid "Cookies must be enabled past this point."
 msgstr "여기서부터는 쿠키를 사용합니다."
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:74
+#: www/account/pending-resend.php:69 www/account/verify.php:76
 #, fuzzy
 msgid "Login name or email address"
 msgstr "유효하지 않은 이메일 주소"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
-#: www/account/pending-resend.php:71 www/account/verify.php:78
 #, fuzzy
 msgid "Login name"
 msgstr "사용자 ID:"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
-#: www/account/verify.php:82
+#: www/account/verify.php:86
 #, fuzzy
 msgid "Password"
 msgstr "비밀번호:"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:208
-#: www/account/verify.php:85 www/admin/userlist.php:79
+#: www/account/verify.php:93 www/admin/userlist.php:79
 msgid "Login"
 msgstr "로그인"
 
@@ -9030,7 +9026,8 @@ msgstr "Account Information"
 #: plugins/globaldashboard/www/admin/edit_account_page.php:77
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
 #: plugins/globaldashboard/www/admin/manage_accounts.php:117
-#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
+#: www/account/verify.php:38 www/project/memberlist.php:50
+#: www/stats/lastlogins.php:51
 #, fuzzy
 msgid "User Name"
 msgstr "Username"
@@ -14333,7 +14330,8 @@ msgid ""
 "login."
 msgstr ""
 
-#: www/account/lostpw.php:90
+#: www/account/lostpw.php:90 www/account/pending-resend.php:71
+#: www/account/verify.php:78
 #, fuzzy
 msgid "Login Name"
 msgstr "사용자 ID:"
@@ -14364,19 +14362,14 @@ msgstr ""
 
 #: www/account/pending-resend.php:60
 msgid ""
-"Fill in a user name or email address and click 'Submit' to resend the "
+"Fill in a user name or email address and click “Submit” to resend the "
 "confirmation email."
 msgstr ""
 
 #: www/account/pending-resend.php:62
 msgid ""
-"Fill in a user name and click 'Submit' to resend the confirmation email."
+"Fill in a user name and click “Submit” to resend the confirmation email."
 msgstr ""
-
-#: www/account/pending-resend.php:69 www/account/verify.php:76
-#, fuzzy
-msgid "Login name or email address:"
-msgstr "유효하지 않은 이메일 주소"
 
 #: www/account/register.php:75
 msgid "You can't register an account unless you accept the terms of use."
@@ -14502,11 +14495,6 @@ msgid ""
 "re-activate your subscriptions in the future, login and visit your Account "
 "Maintenance page."
 msgstr ""
-
-#: www/account/verify.php:38
-#, fuzzy
-msgid "UserName"
-msgstr "Username"
 
 #: www/account/verify.php:51
 msgid "Account already active."
@@ -23110,6 +23098,18 @@ msgstr "사용자ID"
 #, fuzzy
 msgid "That user does not exist."
 msgstr "분류 기준이 존재하지 않습니다."
+
+#, fuzzy
+#~ msgid "Missing required parameters : "
+#~ msgstr "오류 - 필요한 인자가 빠졌습니다."
+
+#, fuzzy
+#~ msgid "Login name or email address:"
+#~ msgstr "유효하지 않은 이메일 주소"
+
+#, fuzzy
+#~ msgid "UserName"
+#~ msgstr "Username"
 
 #~ msgid "Welcome to %1$s"
 #~ msgstr "환영합니다: %1$s"
