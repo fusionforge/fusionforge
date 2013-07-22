@@ -47,7 +47,7 @@ if (db_numrows($res_user) > 1) {
 	exit_error(_('This confirm hash exists more than once.'),'my');
 }
 if (db_numrows($res_user) < 1) {
-	exit_error(_('Invalid confirmation hash'),'my');
+	exit_error(_('Invalid confirmation hash.'),'my');
 }
 $u =& user_get_object(db_result($res_user, 0, 'user_id'), $res_user);
 if (!$u || !is_object($u)) {
@@ -74,14 +74,14 @@ if (getStringFromRequest("submit")) {
 		$HTML->header(array('title'=>"Password changed"));
 		print '<h2>' . _('Password changed') . '</h2>';
 		print '<p>';
-		printf (_('Congratulations, you have re-set your account password. You may <a href="%1$s">login</a> to the site now.'),
+		printf (_('Congratulations, you have re-set your account password. You may <a href="%s">login</a> to the site now.'),
 			  util_make_url ("/account/login.php"));
 		print '</p>';
 		$HTML->footer(array());
 		exit();
 	}
 
-	$error_msg = _('ERROR').': '.$u->getErrorMessage();
+	$error_msg = _('Error')._(': ').$u->getErrorMessage();
 }
 
 $title = _("Lost Password Login") ;
@@ -92,10 +92,17 @@ echo '</p>';
 ?>
 
 <form action="<?php echo util_make_url('/account/lostlogin.php'); ?>" method="post">
-<p><?php echo _('New Password (min. 6 chars)'); ?>:
-<br /><input type="password" name="passwd" /></p>
+<p><?php echo _('New Password (at least 6 chars)'); ?>:
+<br />
+<label for="passwd">
+	<input id="passwd" type="password" name="passwd"/>
+</label>
+</p>
 <p><?php echo _('New Password (repeat)'); ?>:
-<br /><input type="password" name="passwd2" />
+<br />
+<label for="passwd2">
+	<input id="passwd2" type="password" name="passwd2"/>
+</label>
 <input type="hidden" name="confirm_hash" value="<?php print $confirm_hash; ?>" /></p>
 <p><input type="submit" name="submit" value="<?php echo _('Update'); ?>" /></p>
 </form>

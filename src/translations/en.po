@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:41+0200\n"
+"POT-Creation-Date: 2013-07-22 11:50+0200\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -422,14 +422,15 @@ msgstr ""
 #: plugins/projects-hierarchy/view/home_project_link.php:37
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:632
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:634
-#: plugins/scmhg/common/HgPlugin.class.php:625 www/export/rssAboTask.php:142
-#: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
-#: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
-#: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
-#: www/export/rssAboTask.php:173 www/pm/add_task.php:50 www/pm/add_task.php:63
-#: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
-#: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
-#: www/pm/add_task.php:124 www/pm/add_task.php:130 www/pm/add_task.php:149
+#: plugins/scmhg/common/HgPlugin.class.php:625 www/account/lostlogin.php:84
+#: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
+#: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
+#: www/export/rssAboTask.php:146 www/export/rssAboTask.php:169
+#: www/export/rssAboTask.php:171 www/export/rssAboTask.php:173
+#: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
+#: www/pm/add_task.php:74 www/pm/add_task.php:81 www/pm/add_task.php:88
+#: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
+#: www/pm/add_task.php:130 www/pm/add_task.php:149
 #: www/project/admin/roledelete.php:62 www/register/index.php:178
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
@@ -619,9 +620,10 @@ msgstr ""
 #: plugins/mailman/www/admin/index.php:196
 #: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:27
 #: plugins/mailman/www/index.php:34 plugins/mailman/www/index.php:37
-#: plugins/mailman/www/index.php:49 www/admin/passedit.php:53
-#: www/admin/passedit.php:61 www/admin/passedit.php:69
-#: www/export/rss20_docman.php:152 www/forum/admin/pendingmsgdetail.php:51
+#: plugins/mailman/www/index.php:49 www/account/lostlogin.php:84
+#: www/admin/passedit.php:53 www/admin/passedit.php:61
+#: www/admin/passedit.php:69 www/export/rss20_docman.php:152
+#: www/forum/admin/pendingmsgdetail.php:51
 #: www/forum/admin/pendingmsgdetail.php:53 www/mail/admin/index.php:154
 #: www/mail/admin/index.php:251 www/project/admin/roledelete.php:62
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
@@ -1955,7 +1957,7 @@ msgstr ""
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:53
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:73
 #: plugins/webanalytics/view/admin/updateLinkValue.php:41
-#: www/account/index.php:353 www/account/lostlogin.php:100
+#: www/account/index.php:353 www/account/lostlogin.php:107
 #: www/admin/groupedit.php:224 www/admin/trove/trove_cat_edit.php:152
 #: www/admin/useredit.php:236 www/admin/useredit.php:315
 #: www/admin/vhost.php:189 www/forum/admin/index.php:162
@@ -12783,7 +12785,8 @@ msgstr ""
 msgid "This confirm hash exists more than once."
 msgstr ""
 
-#: www/account/change_email-complete.php:48 www/account/unsubscribe.php:48
+#: www/account/change_email-complete.php:48 www/account/lostlogin.php:50
+#: www/account/unsubscribe.php:48
 msgid "Invalid confirmation hash."
 msgstr ""
 
@@ -12904,11 +12907,12 @@ msgstr ""
 msgid "Old Password"
 msgstr ""
 
-#: www/account/change_pw.php:98 www/admin/passedit.php:86
+#: www/account/change_pw.php:98 www/account/lostlogin.php:95
+#: www/admin/passedit.php:86
 msgid "New Password (at least 6 chars)"
 msgstr ""
 
-#: www/account/change_pw.php:104 www/account/lostlogin.php:97
+#: www/account/change_pw.php:104 www/account/lostlogin.php:101
 #: www/admin/passedit.php:88
 msgid "New Password (repeat)"
 msgstr ""
@@ -13164,10 +13168,6 @@ msgstr ""
 msgid "Reset Changes"
 msgstr ""
 
-#: www/account/lostlogin.php:50
-msgid "Invalid confirmation hash"
-msgstr ""
-
 #: www/account/lostlogin.php:75
 msgid "Password changed"
 msgstr ""
@@ -13175,12 +13175,8 @@ msgstr ""
 #: www/account/lostlogin.php:77
 #, php-format
 msgid ""
-"Congratulations, you have re-set your account password. You may <a href="
-"\"%1$s\">login</a> to the site now."
-msgstr ""
-
-#: www/account/lostlogin.php:84
-msgid "ERROR"
+"Congratulations, you have re-set your account password. You may <a href=\"%s"
+"\">login</a> to the site now."
 msgstr ""
 
 #: www/account/lostlogin.php:87
@@ -13190,10 +13186,6 @@ msgstr ""
 #: www/account/lostlogin.php:90
 #, php-format
 msgid "Welcome, %s. You may now change your password."
-msgstr ""
-
-#: www/account/lostlogin.php:95
-msgid "New Password (min. 6 chars)"
 msgstr ""
 
 #: www/account/lostpw.php:45 www/sendmessage.php:45
