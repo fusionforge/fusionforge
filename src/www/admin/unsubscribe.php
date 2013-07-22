@@ -53,7 +53,7 @@ if (getStringFromRequest('submit') && $user_name) {
 		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 		<input type="hidden" name="user_name" value="<?php echo $user_name?>" />
 		Unsubscription type: <?php echo html_build_select_box_from_arrays(
-			array(_('MAIL'),_('ALL')),
+			array(_('MAIL'),_('All')),
 			array(_('Admin-initiated mailings'),_('All site mailings')),
 			'type',false,false
 		); ?>
@@ -110,8 +110,8 @@ if ($pattern) {
 	$title=array();
 	$title[]='&nbsp;';
 	$title[]=_('user_id');
-	$title[]=_('User name');
-	$title[]=_('Real name');
+	$title[]=_('User Name');
+	$title[]=_('Real Name');
 	$title[]=_('Email');
 	$title[]=_('Site Mail.');
 	$title[]=_('Comm. Mail.');

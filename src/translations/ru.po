@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:50+0200\n"
+"POT-Creation-Date: 2013-07-22 11:57+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9168,8 +9168,8 @@ msgstr "Опции учётной записи:"
 #: plugins/globaldashboard/www/admin/edit_account_page.php:77
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
 #: plugins/globaldashboard/www/admin/manage_accounts.php:117
-#: www/account/verify.php:38 www/project/memberlist.php:50
-#: www/stats/lastlogins.php:51
+#: www/account/verify.php:38 www/admin/unsubscribe.php:113
+#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
 #, fuzzy
 msgid "User Name"
 msgstr "Имя участника"
@@ -15382,7 +15382,7 @@ msgid "Current users with this role"
 msgstr "Текущая версия"
 
 #: www/admin/globalroleedit.php:149 www/admin/search.php:73
-#: www/admin/unsubscribe.php:113 www/project/admin/users.php:300
+#: www/project/admin/users.php:300
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:44
 #: www/top/topusers.php:63
 msgid "User name"
@@ -16061,8 +16061,7 @@ msgstr[0] "Поиск по параметру <em>%1$s</em>: %2$s совпаде
 msgstr[1] "Поиск по параметру <em>%1$s</em>: %2$s совпадения"
 msgstr[2] "Поиск по параметру <em>%1$s</em>: %2$s совпадений"
 
-#: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148
+#: www/admin/search.php:74 www/admin/useredit.php:148
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -16196,9 +16195,11 @@ msgstr ""
 msgid "MAIL"
 msgstr "Почта"
 
-#: www/admin/unsubscribe.php:56
-msgid "ALL"
-msgstr "ВСЕ"
+#: www/admin/unsubscribe.php:56 www/admin/userlist.php:67
+#: www/include/tool_reports.php:66 www/stats/site_stats_utils.php:145
+#: www/tracker/roadmap.php:427 www/tracker/roadmap.php:439
+msgid "All"
+msgstr "Все"
 
 #: www/admin/unsubscribe.php:57
 msgid "Admin-initiated mailings"
@@ -16238,6 +16239,12 @@ msgstr "Отобразить участников соответствующих
 #: www/admin/unsubscribe.php:112
 msgid "user_id"
 msgstr "Идентификатор пользователя"
+
+#: www/admin/unsubscribe.php:114 www/project/admin/massadd.php:90
+#: www/project/admin/massfinish.php:74
+#, fuzzy
+msgid "Real Name"
+msgstr "Реальное имя"
 
 #: www/admin/unsubscribe.php:116
 msgid "Site Mail."
@@ -16356,12 +16363,6 @@ msgstr "Удалить файл"
 #, php-format
 msgid "User updated to %1$s status"
 msgstr "Статус пользователя изменен на %1$s "
-
-#: www/admin/userlist.php:67 www/include/tool_reports.php:66
-#: www/stats/site_stats_utils.php:145 www/tracker/roadmap.php:427
-#: www/tracker/roadmap.php:439
-msgid "All"
-msgstr "Все"
 
 #: www/admin/userlist.php:69 www/frs/admin/index.php:95
 #: www/frs/admin/showreleases.php:81
@@ -20717,11 +20718,6 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr "<p>Соответствий не найдено</p>"
 
-#: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
-#, fuzzy
-msgid "Real Name"
-msgstr "Реальное имя"
-
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:226
 #, fuzzy
@@ -23704,6 +23700,9 @@ msgstr "Имя участника обязательно"
 #: www/users:74
 msgid "That user does not exist."
 msgstr "Пользователь с таким именем не существует."
+
+#~ msgid "ALL"
+#~ msgstr "ВСЕ"
 
 #~ msgid "Invalid confirmation hash"
 #~ msgstr "Ошибочное подтверждение недопустимо"

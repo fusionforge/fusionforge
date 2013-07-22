@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:50+0200\n"
+"POT-Creation-Date: 2013-07-22 11:57+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -8842,8 +8842,8 @@ msgstr "Propiedades de cuenta principal"
 #: plugins/globaldashboard/www/admin/edit_account_page.php:77
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
 #: plugins/globaldashboard/www/admin/manage_accounts.php:117
-#: www/account/verify.php:38 www/project/memberlist.php:50
-#: www/stats/lastlogins.php:51
+#: www/account/verify.php:38 www/admin/unsubscribe.php:113
+#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
 msgid "User Name"
 msgstr "Nombre de Usuario"
 
@@ -14714,7 +14714,7 @@ msgid "Current users with this role"
 msgstr "Usuarios actuales con este rol"
 
 #: www/admin/globalroleedit.php:149 www/admin/search.php:73
-#: www/admin/unsubscribe.php:113 www/project/admin/users.php:300
+#: www/project/admin/users.php:300
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:44
 #: www/top/topusers.php:63
 msgid "User name"
@@ -15354,8 +15354,7 @@ msgid_plural "User search with criteria <em>%1$s</em>: %2$s matches"
 msgstr[0] "Búsqueda de usuario con patrón <em>%1$s</em>: %2$s encontrado"
 msgstr[1] "Búsqueda de usuario con patrón <em>%1$s</em>: %2$s encontrados"
 
-#: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148
+#: www/admin/search.php:74 www/admin/useredit.php:148
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -15480,9 +15479,11 @@ msgstr ""
 msgid "MAIL"
 msgstr "CORREO"
 
-#: www/admin/unsubscribe.php:56
-msgid "ALL"
-msgstr "TODO"
+#: www/admin/unsubscribe.php:56 www/admin/userlist.php:67
+#: www/include/tool_reports.php:66 www/stats/site_stats_utils.php:145
+#: www/tracker/roadmap.php:427 www/tracker/roadmap.php:439
+msgid "All"
+msgstr "Todos"
 
 #: www/admin/unsubscribe.php:57
 msgid "Admin-initiated mailings"
@@ -15522,6 +15523,11 @@ msgstr "Mostrar los usuarios coincidentes"
 #: www/admin/unsubscribe.php:112
 msgid "user_id"
 msgstr "id_del_usuario"
+
+#: www/admin/unsubscribe.php:114 www/project/admin/massadd.php:90
+#: www/project/admin/massfinish.php:74
+msgid "Real Name"
+msgstr "Nombre real"
 
 #: www/admin/unsubscribe.php:116
 msgid "Site Mail."
@@ -15634,12 +15640,6 @@ msgstr "Seleccionar rol"
 #, php-format
 msgid "User updated to %1$s status"
 msgstr "Usuario actualizado a el estado %1$s"
-
-#: www/admin/userlist.php:67 www/include/tool_reports.php:66
-#: www/stats/site_stats_utils.php:145 www/tracker/roadmap.php:427
-#: www/tracker/roadmap.php:439
-msgid "All"
-msgstr "Todos"
 
 #: www/admin/userlist.php:69 www/frs/admin/index.php:95
 #: www/frs/admin/showreleases.php:81
@@ -19874,10 +19874,6 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr "Ningún usuario encontrado"
 
-#: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
-msgid "Real Name"
-msgstr "Nombre real"
-
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:226
 msgid "Unix Name"
@@ -22811,6 +22807,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #: www/users:74
 msgid "That user does not exist."
 msgstr "El usuario no existe"
+
+#~ msgid "ALL"
+#~ msgstr "TODO"
 
 #~ msgid "Invalid confirmation hash"
 #~ msgstr "'Hash' de confirmación invalido"

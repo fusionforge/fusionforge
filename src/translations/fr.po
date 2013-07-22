@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:50+0200\n"
+"POT-Creation-Date: 2013-07-22 11:57+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -8857,8 +8857,8 @@ msgstr "Options du compte"
 #: plugins/globaldashboard/www/admin/edit_account_page.php:77
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
 #: plugins/globaldashboard/www/admin/manage_accounts.php:117
-#: www/account/verify.php:38 www/project/memberlist.php:50
-#: www/stats/lastlogins.php:51
+#: www/account/verify.php:38 www/admin/unsubscribe.php:113
+#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
 msgid "User Name"
 msgstr "Nom de l'utilisateur"
 
@@ -14768,7 +14768,7 @@ msgid "Current users with this role"
 msgstr "Utilisateurs ayant actuellement ce rôle"
 
 #: www/admin/globalroleedit.php:149 www/admin/search.php:73
-#: www/admin/unsubscribe.php:113 www/project/admin/users.php:300
+#: www/project/admin/users.php:300
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:44
 #: www/top/topusers.php:63
 msgid "User name"
@@ -15413,8 +15413,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Recherche d'utilisateurs selon les critères <em>%1$s</em> : %2$s résultats"
 
-#: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148
+#: www/admin/search.php:74 www/admin/useredit.php:148
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -15542,9 +15541,11 @@ msgstr ""
 msgid "MAIL"
 msgstr "E-mail"
 
-#: www/admin/unsubscribe.php:56
-msgid "ALL"
-msgstr "TOUT"
+#: www/admin/unsubscribe.php:56 www/admin/userlist.php:67
+#: www/include/tool_reports.php:66 www/stats/site_stats_utils.php:145
+#: www/tracker/roadmap.php:427 www/tracker/roadmap.php:439
+msgid "All"
+msgstr "Tout"
 
 #: www/admin/unsubscribe.php:57
 msgid "Admin-initiated mailings"
@@ -15585,6 +15586,11 @@ msgstr "Montrer les utilisateurs correspondant au motif"
 #: www/admin/unsubscribe.php:112
 msgid "user_id"
 msgstr "Identifiant utilisateur :"
+
+#: www/admin/unsubscribe.php:114 www/project/admin/massadd.php:90
+#: www/project/admin/massfinish.php:74
+msgid "Real Name"
+msgstr "Nom complet"
 
 #: www/admin/unsubscribe.php:116
 msgid "Site Mail."
@@ -15701,12 +15707,6 @@ msgstr "Supprimer le rôle"
 #, php-format
 msgid "User updated to %1$s status"
 msgstr "Utilisateur mis à jour au statut %1$s"
-
-#: www/admin/userlist.php:67 www/include/tool_reports.php:66
-#: www/stats/site_stats_utils.php:145 www/tracker/roadmap.php:427
-#: www/tracker/roadmap.php:439
-msgid "All"
-msgstr "Tout"
 
 #: www/admin/userlist.php:69 www/frs/admin/index.php:95
 #: www/frs/admin/showreleases.php:81
@@ -20014,10 +20014,6 @@ msgstr ""
 msgid "No Matching Users Found"
 msgstr "Aucun utilisateur correspondant."
 
-#: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
-msgid "Real Name"
-msgstr "Nom complet"
-
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:226
 msgid "Unix Name"
@@ -22967,6 +22963,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #: www/users:74
 msgid "That user does not exist."
 msgstr "Cet utilisateur n'existe pas"
+
+#~ msgid "ALL"
+#~ msgstr "TOUT"
 
 #~ msgid "Invalid confirmation hash"
 #~ msgstr "Hash de confirmation invalide"

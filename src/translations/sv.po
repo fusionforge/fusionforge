@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:50+0200\n"
+"POT-Creation-Date: 2013-07-22 11:57+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9056,8 +9056,8 @@ msgstr "Kontoinformation"
 #: plugins/globaldashboard/www/admin/edit_account_page.php:77
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
 #: plugins/globaldashboard/www/admin/manage_accounts.php:117
-#: www/account/verify.php:38 www/project/memberlist.php:50
-#: www/stats/lastlogins.php:51
+#: www/account/verify.php:38 www/admin/unsubscribe.php:113
+#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
 #, fuzzy
 msgid "User Name"
 msgstr "Användarnamn"
@@ -14998,7 +14998,7 @@ msgid "Current users with this role"
 msgstr "Version"
 
 #: www/admin/globalroleedit.php:149 www/admin/search.php:73
-#: www/admin/unsubscribe.php:113 www/project/admin/users.php:300
+#: www/project/admin/users.php:300
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:44
 #: www/top/topusers.php:63
 #, fuzzy
@@ -15665,8 +15665,7 @@ msgid_plural "User search with criteria <em>%1$s</em>: %2$s matches"
 msgstr[0] "Användarsökning med urval"
 msgstr[1] "Användarsökning med urval"
 
-#: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148
+#: www/admin/search.php:74 www/admin/useredit.php:148
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -15796,9 +15795,11 @@ msgstr ""
 msgid "MAIL"
 msgstr "BREV"
 
-#: www/admin/unsubscribe.php:56
-msgid "ALL"
-msgstr ""
+#: www/admin/unsubscribe.php:56 www/admin/userlist.php:67
+#: www/include/tool_reports.php:66 www/stats/site_stats_utils.php:145
+#: www/tracker/roadmap.php:427 www/tracker/roadmap.php:439
+msgid "All"
+msgstr "Alla"
 
 #: www/admin/unsubscribe.php:57
 msgid "Admin-initiated mailings"
@@ -15835,6 +15836,12 @@ msgstr "Visa användarnas matchande mönster"
 #: www/admin/unsubscribe.php:112
 msgid "user_id"
 msgstr "användar-ID"
+
+#: www/admin/unsubscribe.php:114 www/project/admin/massadd.php:90
+#: www/project/admin/massfinish.php:74
+#, fuzzy
+msgid "Real Name"
+msgstr "Verkligt namn"
 
 #: www/admin/unsubscribe.php:116
 msgid "Site Mail."
@@ -15953,12 +15960,6 @@ msgstr "Ta bort fil"
 #, php-format
 msgid "User updated to %1$s status"
 msgstr "Användare uppdaterad till %1$s status"
-
-#: www/admin/userlist.php:67 www/include/tool_reports.php:66
-#: www/stats/site_stats_utils.php:145 www/tracker/roadmap.php:427
-#: www/tracker/roadmap.php:439
-msgid "All"
-msgstr "Alla"
 
 #: www/admin/userlist.php:69 www/frs/admin/index.php:95
 #: www/frs/admin/showreleases.php:81
@@ -20219,11 +20220,6 @@ msgstr ""
 #, fuzzy
 msgid "No Matching Users Found"
 msgstr "Hittade inga matchande uppgifter"
-
-#: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
-#, fuzzy
-msgid "Real Name"
-msgstr "Verkligt namn"
 
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:226

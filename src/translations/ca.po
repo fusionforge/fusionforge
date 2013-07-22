@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:50+0200\n"
+"POT-Creation-Date: 2013-07-22 11:57+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9113,8 +9113,8 @@ msgstr "Informació del compte"
 #: plugins/globaldashboard/www/admin/edit_account_page.php:77
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
 #: plugins/globaldashboard/www/admin/manage_accounts.php:117
-#: www/account/verify.php:38 www/project/memberlist.php:50
-#: www/stats/lastlogins.php:51
+#: www/account/verify.php:38 www/admin/unsubscribe.php:113
+#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
 #, fuzzy
 msgid "User Name"
 msgstr "Nom d'usuari"
@@ -15127,7 +15127,7 @@ msgid "Current users with this role"
 msgstr "Versió"
 
 #: www/admin/globalroleedit.php:149 www/admin/search.php:73
-#: www/admin/unsubscribe.php:113 www/project/admin/users.php:300
+#: www/project/admin/users.php:300
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:44
 #: www/top/topusers.php:63
 #, fuzzy
@@ -15797,8 +15797,7 @@ msgid_plural "User search with criteria <em>%1$s</em>: %2$s matches"
 msgstr[0] "Cerca d'usuari amb criteris"
 msgstr[1] "Cerca d'usuari amb criteris"
 
-#: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148
+#: www/admin/search.php:74 www/admin/useredit.php:148
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -15931,9 +15930,11 @@ msgstr ""
 msgid "MAIL"
 msgstr "CORREU"
 
-#: www/admin/unsubscribe.php:56
-msgid "ALL"
-msgstr ""
+#: www/admin/unsubscribe.php:56 www/admin/userlist.php:67
+#: www/include/tool_reports.php:66 www/stats/site_stats_utils.php:145
+#: www/tracker/roadmap.php:427 www/tracker/roadmap.php:439
+msgid "All"
+msgstr "Tots"
 
 #: www/admin/unsubscribe.php:57
 msgid "Admin-initiated mailings"
@@ -15970,6 +15971,12 @@ msgstr "Mostra els usuaris coincidents amb el patró"
 #: www/admin/unsubscribe.php:112
 msgid "user_id"
 msgstr "Id d'usuari"
+
+#: www/admin/unsubscribe.php:114 www/project/admin/massadd.php:90
+#: www/project/admin/massfinish.php:74
+#, fuzzy
+msgid "Real Name"
+msgstr "Nom real"
 
 #: www/admin/unsubscribe.php:116
 msgid "Site Mail."
@@ -16088,12 +16095,6 @@ msgstr "Suprimeix el fitxer"
 #, php-format
 msgid "User updated to %1$s status"
 msgstr "Usuari actualitzat a l'estat %1$s"
-
-#: www/admin/userlist.php:67 www/include/tool_reports.php:66
-#: www/stats/site_stats_utils.php:145 www/tracker/roadmap.php:427
-#: www/tracker/roadmap.php:439
-msgid "All"
-msgstr "Tots"
 
 #: www/admin/userlist.php:69 www/frs/admin/index.php:95
 #: www/frs/admin/showreleases.php:81
@@ -20390,11 +20391,6 @@ msgstr ""
 #: www/project/admin/massadd.php:87 www/project/admin/users.php:98
 msgid "No Matching Users Found"
 msgstr "No s'han trobat usuaris que coincideixin"
-
-#: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
-#, fuzzy
-msgid "Real Name"
-msgstr "Nom real"
 
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:226

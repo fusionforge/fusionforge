@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 11:50+0200\n"
+"POT-Creation-Date: 2013-07-22 11:57+0200\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -8612,8 +8612,8 @@ msgstr ""
 #: plugins/globaldashboard/www/admin/edit_account_page.php:77
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
 #: plugins/globaldashboard/www/admin/manage_accounts.php:117
-#: www/account/verify.php:38 www/project/memberlist.php:50
-#: www/stats/lastlogins.php:51
+#: www/account/verify.php:38 www/admin/unsubscribe.php:113
+#: www/project/memberlist.php:50 www/stats/lastlogins.php:51
 #, fuzzy
 msgid "User Name"
 msgstr "Nazwisko:"
@@ -14332,7 +14332,7 @@ msgid "Current users with this role"
 msgstr ""
 
 #: www/admin/globalroleedit.php:149 www/admin/search.php:73
-#: www/admin/unsubscribe.php:113 www/project/admin/users.php:300
+#: www/project/admin/users.php:300
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:44
 #: www/top/topusers.php:63
 msgid "User name"
@@ -14963,8 +14963,7 @@ msgid_plural "User search with criteria <em>%1$s</em>: %2$s matches"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148
+#: www/admin/search.php:74 www/admin/useredit.php:148
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real name"
@@ -15084,8 +15083,10 @@ msgstr ""
 msgid "MAIL"
 msgstr ""
 
-#: www/admin/unsubscribe.php:56
-msgid "ALL"
+#: www/admin/unsubscribe.php:56 www/admin/userlist.php:67
+#: www/include/tool_reports.php:66 www/stats/site_stats_utils.php:145
+#: www/tracker/roadmap.php:427 www/tracker/roadmap.php:439
+msgid "All"
 msgstr ""
 
 #: www/admin/unsubscribe.php:57
@@ -15121,6 +15122,12 @@ msgstr ""
 #: www/admin/unsubscribe.php:112
 msgid "user_id"
 msgstr ""
+
+#: www/admin/unsubscribe.php:114 www/project/admin/massadd.php:90
+#: www/project/admin/massfinish.php:74
+#, fuzzy
+msgid "Real Name"
+msgstr "Nazwa wydania:"
 
 #: www/admin/unsubscribe.php:116
 msgid "Site Mail."
@@ -15230,12 +15237,6 @@ msgstr "Dodaj Grupę Dokumentów"
 #: www/admin/userlist.php:62
 #, php-format
 msgid "User updated to %1$s status"
-msgstr ""
-
-#: www/admin/userlist.php:67 www/include/tool_reports.php:66
-#: www/stats/site_stats_utils.php:145 www/tracker/roadmap.php:427
-#: www/tracker/roadmap.php:439
-msgid "All"
 msgstr ""
 
 #: www/admin/userlist.php:69 www/frs/admin/index.php:95
@@ -19251,11 +19252,6 @@ msgstr ""
 #: www/project/admin/massadd.php:87 www/project/admin/users.php:98
 msgid "No Matching Users Found"
 msgstr ""
-
-#: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
-#, fuzzy
-msgid "Real Name"
-msgstr "Nazwa wydania:"
 
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:226
