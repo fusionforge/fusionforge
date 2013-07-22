@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:29+0200\n"
+"POT-Creation-Date: 2013-07-22 14:37+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -466,14 +466,14 @@ msgstr "專案"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:632
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:634
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/lostlogin.php:84
-#: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
-#: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
-#: www/export/rssAboTask.php:146 www/export/rssAboTask.php:169
-#: www/export/rssAboTask.php:171 www/export/rssAboTask.php:173
-#: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
-#: www/pm/add_task.php:74 www/pm/add_task.php:81 www/pm/add_task.php:88
-#: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
-#: www/pm/add_task.php:130 www/pm/add_task.php:149
+#: www/account/register.php:207 www/export/rssAboTask.php:142
+#: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
+#: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
+#: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
+#: www/export/rssAboTask.php:173 www/pm/add_task.php:50 www/pm/add_task.php:63
+#: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
+#: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
+#: www/pm/add_task.php:124 www/pm/add_task.php:130 www/pm/add_task.php:149
 #: www/project/admin/roledelete.php:62 www/register/index.php:178
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
@@ -1148,7 +1148,7 @@ msgstr "檔案名稱"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:148
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
-#: www/account/register.php:159 www/people/editjob.php:52
+#: www/account/register.php:165 www/people/editjob.php:52
 #: www/people/editjob.php:74 www/people/editprofile.php:107
 #: www/people/people_utils.php:404 www/people/skills_utils.php:49
 #: www/pm/admin/index.php:188
@@ -1675,7 +1675,9 @@ msgstr "開啟日期"
 #: plugins/mailman/www/admin/index.php:183
 #: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
 #: www/account/lostpw.php:90 www/account/pending-resend.php:69
-#: www/account/pending-resend.php:71 www/account/register.php:159
+#: www/account/pending-resend.php:71 www/account/register.php:165
+#: www/account/register.php:225 www/account/register.php:231
+#: www/account/register.php:237 www/account/register.php:243
 #: www/account/verify.php:76 www/account/verify.php:78
 #: www/account/verify.php:86 www/admin/massmail.php:94
 #: www/admin/massmail.php:113 www/admin/massmail.php:116
@@ -14260,11 +14262,11 @@ msgstr "使用者編號"
 msgid "Login name:"
 msgstr "使用者名稱："
 
-#: www/account/index.php:163 www/account/register.php:163
+#: www/account/index.php:163 www/account/register.php:171
 msgid "First Name:"
 msgstr "名字："
 
-#: www/account/index.php:170 www/account/register.php:167
+#: www/account/index.php:170 www/account/register.php:178
 msgid "Last Name:"
 msgstr "姓氏："
 
@@ -14272,7 +14274,7 @@ msgstr "姓氏："
 msgid "Language:"
 msgstr "語言："
 
-#: www/account/index.php:183 www/account/register.php:175
+#: www/account/index.php:183 www/account/register.php:189
 msgid "Timezone:"
 msgstr "時區選擇："
 
@@ -14280,7 +14282,7 @@ msgstr "時區選擇："
 msgid "Theme:"
 msgstr "佈景："
 
-#: www/account/index.php:195 www/account/register.php:188
+#: www/account/index.php:195 www/account/register.php:202
 msgid "Country:"
 msgstr "國家："
 
@@ -14293,18 +14295,15 @@ msgid "Change Email Addr"
 msgstr "改變Email"
 
 #: www/account/index.php:208 www/account/index.php:215
-#: www/account/register.php:209 www/account/register.php:213
 #: www/include/user_profile.php:136
 msgid "Address:"
 msgstr "住址："
 
-#: www/account/index.php:222 www/account/register.php:217
-#: www/include/user_profile.php:143
+#: www/account/index.php:222 www/include/user_profile.php:143
 msgid "Phone:"
 msgstr "電話："
 
-#: www/account/index.php:229 www/account/register.php:221
-#: www/include/user_profile.php:154
+#: www/account/index.php:229 www/include/user_profile.php:154
 msgid "FAX:"
 msgstr "傳真："
 
@@ -14312,22 +14311,22 @@ msgstr "傳真："
 msgid "Title:"
 msgstr "標題"
 
-#: www/account/index.php:245 www/account/register.php:200
+#: www/account/index.php:245 www/account/register.php:216
 msgid "Jabber Address:"
 msgstr "Jabber 信箱："
 
-#: www/account/index.php:249 www/account/register.php:204
+#: www/account/index.php:249 www/account/register.php:220
 msgid "Send auto-generated notices only to my Jabber address"
 msgstr "自動產生的通知只發送到我的Jabber信箱"
 
-#: www/account/index.php:265 www/account/register.php:226
+#: www/account/index.php:265 www/account/register.php:252
 msgid ""
 "Receive Email about Site Updates <i>(Very low traffic and includes security "
 "notices. Highly Recommended.)</i>"
 msgstr ""
 "接受關於本網站更新的Email<i>（量非常小，並且包括安全通告，強烈推薦。）</i>"
 
-#: www/account/index.php:271 www/account/register.php:230
+#: www/account/index.php:271 www/account/register.php:258
 msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
 msgstr "接收附加的公共通信論壇。 <i>(量很小)</i>"
 
@@ -14472,7 +14471,7 @@ msgid ""
 "complete the registration process."
 msgstr ""
 
-#: www/account/pending-resend.php:57 www/account/register.php:251
+#: www/account/pending-resend.php:57 www/account/register.php:279
 #, fuzzy
 msgid "Resend confirmation email to a pending account"
 msgstr "[重新發送確認信函給未通過的帳號]"
@@ -14546,28 +14545,28 @@ msgstr ""
 msgid "Login Name (do not use uppercase letters):"
 msgstr "使用者名稱（請使用小寫英文字母，名稱開頭不得使用數字）："
 
-#: www/account/register.php:151
+#: www/account/register.php:153
 msgid "Password (min. 6 chars):"
 msgstr "密碼（至少6個字元）："
 
-#: www/account/register.php:155
+#: www/account/register.php:159
 msgid "Password (repeat):"
 msgstr "密碼（重複）："
 
-#: www/account/register.php:171
+#: www/account/register.php:185
 msgid "Language Choice:"
 msgstr "語言選擇："
 
-#: www/account/register.php:183
+#: www/account/register.php:197
 msgid "Theme"
 msgstr "佈景："
 
-#: www/account/register.php:193 www/include/user_profile.php:112
+#: www/account/register.php:207
 #, fuzzy
-msgid "Email Address:"
+msgid "Email Address"
 msgstr "Email："
 
-#: www/account/register.php:194
+#: www/account/register.php:208
 #, php-format
 msgid ""
 "This email address will be verified before account activation. You will "
@@ -14575,21 +14574,37 @@ msgid ""
 "to this address."
 msgstr ""
 
-#: www/account/register.php:235
+#: www/account/register.php:225 www/mail/index.php:78
+msgid "Address"
+msgstr "住址"
+
+#: www/account/register.php:231
+msgid "Address (continued)"
+msgstr ""
+
+#: www/account/register.php:237
+msgid "Phone"
+msgstr "電話："
+
+#: www/account/register.php:243
+msgid "Fax"
+msgstr "傳真："
+
+#: www/account/register.php:263
 #, php-format
 msgid "Do you accept the <a href=\"%1$s\">terms of use</a> for this site?"
 msgstr ""
 
-#: www/account/register.php:241
+#: www/account/register.php:269
 msgid "Activate this user immediately"
 msgstr ""
 
-#: www/account/register.php:245
+#: www/account/register.php:273
 #, php-format
 msgid "Fields marked with %s are mandatory."
 msgstr ""
 
-#: www/account/register.php:248
+#: www/account/register.php:276
 msgid "Register"
 msgstr "註冊"
 
@@ -17811,6 +17826,11 @@ msgstr "專長資料"
 msgid "Real Name:"
 msgstr "真實姓名"
 
+#: www/include/user_profile.php:112
+#, fuzzy
+msgid "Email Address:"
+msgstr "Email："
+
 #: www/include/user_profile.php:127
 msgid "Jabber Address"
 msgstr "Jabber位址"
@@ -18191,10 +18211,6 @@ msgstr "%1$s 的通信論壇"
 #, php-format
 msgid "Unable to get the list %s : %s"
 msgstr ""
-
-#: www/mail/index.php:78
-msgid "Address"
-msgstr "住址"
 
 #: www/mail/index.php:97
 #, php-format
@@ -23570,12 +23586,6 @@ msgstr "帳號"
 #~ msgstr ""
 #~ "認證Keys：<br /><span class=\"important\">重要：確定除了在Keys之間外沒有斷"
 #~ "行字元，在提交之後，檢驗您檔案中Keys的數值是您所期望的。</span>"
-
-#~ msgid "Phone"
-#~ msgstr "電話："
-
-#~ msgid "Fax"
-#~ msgstr "傳真："
 
 #~ msgid "Login with SSL"
 #~ msgstr "透過SSL登入"

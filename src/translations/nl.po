@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:29+0200\n"
+"POT-Creation-Date: 2013-07-22 14:37+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -464,14 +464,14 @@ msgstr "Project"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:632
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:634
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/lostlogin.php:84
-#: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
-#: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
-#: www/export/rssAboTask.php:146 www/export/rssAboTask.php:169
-#: www/export/rssAboTask.php:171 www/export/rssAboTask.php:173
-#: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
-#: www/pm/add_task.php:74 www/pm/add_task.php:81 www/pm/add_task.php:88
-#: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
-#: www/pm/add_task.php:130 www/pm/add_task.php:149
+#: www/account/register.php:207 www/export/rssAboTask.php:142
+#: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
+#: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
+#: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
+#: www/export/rssAboTask.php:173 www/pm/add_task.php:50 www/pm/add_task.php:63
+#: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
+#: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
+#: www/pm/add_task.php:124 www/pm/add_task.php:130 www/pm/add_task.php:149
 #: www/project/admin/roledelete.php:62 www/register/index.php:178
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
@@ -1146,7 +1146,7 @@ msgstr "Bestandsnaam"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:148
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
-#: www/account/register.php:159 www/people/editjob.php:52
+#: www/account/register.php:165 www/people/editjob.php:52
 #: www/people/editjob.php:74 www/people/editprofile.php:107
 #: www/people/people_utils.php:404 www/people/skills_utils.php:49
 #: www/pm/admin/index.php:188
@@ -1673,7 +1673,9 @@ msgstr "Startdatum"
 #: plugins/mailman/www/admin/index.php:183
 #: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
 #: www/account/lostpw.php:90 www/account/pending-resend.php:69
-#: www/account/pending-resend.php:71 www/account/register.php:159
+#: www/account/pending-resend.php:71 www/account/register.php:165
+#: www/account/register.php:225 www/account/register.php:231
+#: www/account/register.php:237 www/account/register.php:243
 #: www/account/verify.php:76 www/account/verify.php:78
 #: www/account/verify.php:86 www/admin/massmail.php:94
 #: www/admin/massmail.php:113 www/admin/massmail.php:116
@@ -14309,11 +14311,11 @@ msgstr "Gebruikers ID"
 msgid "Login name:"
 msgstr "Loginnaam:"
 
-#: www/account/index.php:163 www/account/register.php:163
+#: www/account/index.php:163 www/account/register.php:171
 msgid "First Name:"
 msgstr "Voornaam:"
 
-#: www/account/index.php:170 www/account/register.php:167
+#: www/account/index.php:170 www/account/register.php:178
 msgid "Last Name:"
 msgstr "Achternaam:"
 
@@ -14321,7 +14323,7 @@ msgstr "Achternaam:"
 msgid "Language:"
 msgstr "Taal"
 
-#: www/account/index.php:183 www/account/register.php:175
+#: www/account/index.php:183 www/account/register.php:189
 msgid "Timezone:"
 msgstr "Tijdzone:"
 
@@ -14329,7 +14331,7 @@ msgstr "Tijdzone:"
 msgid "Theme:"
 msgstr "Thema:"
 
-#: www/account/index.php:195 www/account/register.php:188
+#: www/account/index.php:195 www/account/register.php:202
 msgid "Country:"
 msgstr "Land:"
 
@@ -14342,18 +14344,15 @@ msgid "Change Email Addr"
 msgstr "Wijzig e-mail adres"
 
 #: www/account/index.php:208 www/account/index.php:215
-#: www/account/register.php:209 www/account/register.php:213
 #: www/include/user_profile.php:136
 msgid "Address:"
 msgstr "Adres:"
 
-#: www/account/index.php:222 www/account/register.php:217
-#: www/include/user_profile.php:143
+#: www/account/index.php:222 www/include/user_profile.php:143
 msgid "Phone:"
 msgstr "Telefoon:"
 
-#: www/account/index.php:229 www/account/register.php:221
-#: www/include/user_profile.php:154
+#: www/account/index.php:229 www/include/user_profile.php:154
 msgid "FAX:"
 msgstr "FAX:"
 
@@ -14361,16 +14360,16 @@ msgstr "FAX:"
 msgid "Title:"
 msgstr "Titel:"
 
-#: www/account/index.php:245 www/account/register.php:200
+#: www/account/index.php:245 www/account/register.php:216
 msgid "Jabber Address:"
 msgstr "Jabber adres:"
 
-#: www/account/index.php:249 www/account/register.php:204
+#: www/account/index.php:249 www/account/register.php:220
 msgid "Send auto-generated notices only to my Jabber address"
 msgstr ""
 "Stuur automatisch gegenereerde mededelingen alleen naar mijn Jabber adres"
 
-#: www/account/index.php:265 www/account/register.php:226
+#: www/account/index.php:265 www/account/register.php:252
 msgid ""
 "Receive Email about Site Updates <i>(Very low traffic and includes security "
 "notices. Highly Recommended.)</i>"
@@ -14378,7 +14377,7 @@ msgstr ""
 "E-mail over site updates ontvangen <i>(Weinig mail, en inclusief "
 "beveiligings aankondigingen. Sterk aanbevolen.)</i>"
 
-#: www/account/index.php:271 www/account/register.php:230
+#: www/account/index.php:271 www/account/register.php:258
 msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
 msgstr "Aanvullende community mailings ontvangen. <i>(Weinig mail.)</i>"
 
@@ -14529,7 +14528,7 @@ msgid ""
 "complete the registration process."
 msgstr ""
 
-#: www/account/pending-resend.php:57 www/account/register.php:251
+#: www/account/pending-resend.php:57 www/account/register.php:279
 #, fuzzy
 msgid "Resend confirmation email to a pending account"
 msgstr "[Bevestigings e-mail opnieuw toesturen]"
@@ -14608,28 +14607,27 @@ msgstr ""
 msgid "Login Name (do not use uppercase letters):"
 msgstr "Loginnaam (gebruik geen hoofdletters):"
 
-#: www/account/register.php:151
+#: www/account/register.php:153
 msgid "Password (min. 6 chars):"
 msgstr "Wachtwoord (min. 6 tekens):"
 
-#: www/account/register.php:155
+#: www/account/register.php:159
 msgid "Password (repeat):"
 msgstr "Wachtwoord (herhaal):"
 
-#: www/account/register.php:171
+#: www/account/register.php:185
 msgid "Language Choice:"
 msgstr "Taal keuze:"
 
-#: www/account/register.php:183
+#: www/account/register.php:197
 msgid "Theme"
 msgstr "Thema"
 
-#: www/account/register.php:193 www/include/user_profile.php:112
-#, fuzzy
-msgid "Email Address:"
-msgstr "E-mail adres:"
+#: www/account/register.php:207
+msgid "Email Address"
+msgstr "E-mail adres"
 
-#: www/account/register.php:194
+#: www/account/register.php:208
 #, php-format
 msgid ""
 "This email address will be verified before account activation. You will "
@@ -14637,21 +14635,37 @@ msgid ""
 "to this address."
 msgstr ""
 
-#: www/account/register.php:235
+#: www/account/register.php:225 www/mail/index.php:78
+msgid "Address"
+msgstr "Adres"
+
+#: www/account/register.php:231
+msgid "Address (continued)"
+msgstr ""
+
+#: www/account/register.php:237
+msgid "Phone"
+msgstr "Telefoon:"
+
+#: www/account/register.php:243
+msgid "Fax"
+msgstr "Fax"
+
+#: www/account/register.php:263
 #, php-format
 msgid "Do you accept the <a href=\"%1$s\">terms of use</a> for this site?"
 msgstr ""
 
-#: www/account/register.php:241
+#: www/account/register.php:269
 msgid "Activate this user immediately"
 msgstr ""
 
-#: www/account/register.php:245
+#: www/account/register.php:273
 #, php-format
 msgid "Fields marked with %s are mandatory."
 msgstr ""
 
-#: www/account/register.php:248
+#: www/account/register.php:276
 msgid "Register"
 msgstr "Registreer"
 
@@ -17926,6 +17940,11 @@ msgstr "Vaardigheden profiel"
 msgid "Real Name:"
 msgstr "Echte naam"
 
+#: www/include/user_profile.php:112
+#, fuzzy
+msgid "Email Address:"
+msgstr "E-mail adres:"
+
 #: www/include/user_profile.php:127
 msgid "Jabber Address"
 msgstr "Je Jabber adres"
@@ -18306,10 +18325,6 @@ msgstr "Mailinglijsten voor %1$s"
 #, php-format
 msgid "Unable to get the list %s : %s"
 msgstr ""
-
-#: www/mail/index.php:78
-msgid "Address"
-msgstr "Adres"
 
 #: www/mail/index.php:97
 #, php-format
@@ -23837,17 +23852,8 @@ msgstr "Gebruikersnaam"
 #~ "regeleinden tussen sleutels staan. Controleer na submitten of het aantal "
 #~ "sleutels in je bestand correct is.</em>"
 
-#~ msgid "Email Address"
-#~ msgstr "E-mail adres"
-
 #~ msgid "Change Email Address"
 #~ msgstr "Wijzig e-mail adres"
-
-#~ msgid "Phone"
-#~ msgstr "Telefoon:"
-
-#~ msgid "Fax"
-#~ msgstr "Fax"
 
 #~ msgid "Login with SSL"
 #~ msgstr "Login via SSL"

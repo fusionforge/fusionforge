@@ -145,27 +145,41 @@ if (forge_get_config('require_unique_email')) {
 } else {
 	echo _('Login Name (do not use uppercase letters):'); echo utils_requiredField();
 } ?><br />
-<input type="text" required="required" name="unix_name" value="<?php print(htmlspecialchars($unix_name)); ?>" />
+    <label for="unix_name">
+        <input id="unix_name" type="text" required="required" name="unix_name" value="<?php print(htmlspecialchars($unix_name)); ?>"/>
+    </label>
 </p>
 <p>
 <?php echo _('Password (min. 6 chars):'); echo utils_requiredField(); ?><br />
-<input type="password" required="required" name="password1" />
+    <label for="password1">
+        <input id="password1" type="password" required="required" name="password1"/>
+    </label>
 </p>
 <p>
 <?php echo _('Password (repeat):'); echo utils_requiredField(); ?><br />
-<input type="password" required="required" name="password2" />
+    <label for="password2">
+        <input id="password2" type="password" required="required" name="password2"/>
+    </label>
 </p
 ><p>
 <?php echo _('Title')._(':'); ?><br />
-<input type="text" name="title" value="<?php echo htmlspecialchars($title); ?>" size="10" />
+    <label for="title">
+        <input id="title" type="text" name="title" value="<?php echo htmlspecialchars($title); ?>" size="10"/>
+    </label>
 </p>
 <p>
 <?php echo _('First Name:'); echo utils_requiredField(); ?><br />
-<input required="required" size="30" type="text" name="firstname" value="<?php print(htmlspecialchars($firstname)); ?>" />
+    <label for="firstname">
+        <input id="firstname" required="required" size="30" type="text" name="firstname"
+               value="<?php print(htmlspecialchars($firstname)); ?>"/>
+    </label>
 </p>
 <p>
 <?php echo _('Last Name:'); echo utils_requiredField(); ?><br />
-<input required="required" size="30" type="text" name="lastname" value="<?php print(htmlspecialchars($lastname)); ?>" />
+    <label for="lastname">
+        <input id="lastname" required="required" size="30" type="text" name="lastname"
+               value="<?php print(htmlspecialchars($lastname)); ?>"/>
+    </label>
 </p>
 <p>
 <?php echo _('Language Choice:'); ?><br />
@@ -190,9 +204,11 @@ if($toDisplay != "") {
 </p>
 <p>
 @<?php
-	echo _('Email Address:') . utils_requiredField() . "<br />\n<em>";
+	echo _('Email Address') . _(': ') . utils_requiredField() . "<br />\n<em>";
 	printf(_('This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@%1$s&gt; that will forward to this address.'), forge_get_config('users_host')); ?></em>
-<br /><input size="40" type="text" name="email" value="<?php print(htmlspecialchars($email)); ?>" />
+<br /><label for="email">
+    <input id="email" size="40" type="text" name="email" value="<?php print(htmlspecialchars($email)); ?>"/>
+</label>
 </p>
 <p>
 <?php
@@ -206,28 +222,40 @@ if (forge_get_config('use_jabber')) {
 ?>
 </p>
 <p>
-<?php echo _('Address:'); ?><br />
-<input type="text" name="address" value="<?php echo htmlspecialchars($address); ?>" size="80" />
+<?php echo _('Address')._(':'); ?><br />
+    <label for="address">
+        <input id="address" type="text" name="address" value="<?php echo htmlspecialchars($address); ?>" size="80"/>
+    </label>
 </p>
 <p>
-<?php echo _('Address:'); ?><br />
-<input type="text" name="address2" value="<?php echo htmlspecialchars($address2); ?>" size="80" />
+<?php echo _('Address (continued)')._(':'); ?><br />
+    <label for="address2">
+        <input id="address2" type="text" name="address2" value="<?php echo htmlspecialchars($address2); ?>" size="80"/>
+    </label>
 </p>
 <p>
-<?php echo _('Phone:'); ?><br />
-<input type="text" name="phone" value="<?php echo htmlspecialchars($phone); ?>" size="20" />
+<?php echo _('Phone')._(':'); ?><br />
+    <label for="phone">
+        <input id="phone" type="text" name="phone" value="<?php echo htmlspecialchars($phone); ?>" size="20"/>
+    </label>
 </p>
 <p>
-<?php echo _('FAX:'); ?><br />
-<input type="text" name="fax" value="<?php echo htmlspecialchars($fax); ?>" size="20" />
+<?php echo _('Fax')._(':'); ?><br />
+    <label for="fax">
+        <input id="fax" type="text" name="fax" value="<?php echo htmlspecialchars($fax); ?>" size="20"/>
+    </label>
 </p>
 <p>
-<input type="checkbox" name="mail_site" value="1" checked="checked" />
-<?php echo _('Receive Email about Site Updates <i>(Very low traffic and includes security notices. Highly Recommended.)</i>'); ?>
+    <label for="mail_site">
+        <input id="mail_site" type="checkbox" name="mail_site" value="1" checked="checked"/>
+    </label>
+    <?php echo _('Receive Email about Site Updates <i>(Very low traffic and includes security notices. Highly Recommended.)</i>'); ?>
 </p>
 <p>
-<input type="checkbox" name="mail_va" value="1" />
-<?php echo _('Receive additional community mailings. <i>(Low traffic.)</i>'); ?>
+    <label for="mail_va">
+        <input id="mail_va" type="checkbox" name="mail_va" value="1"/>
+    </label>
+    <?php echo _('Receive additional community mailings. <i>(Low traffic.)</i>'); ?>
 </p>
 <?php if (forge_get_config('user_registration_accept_conditions')) { ?>
 	<p>

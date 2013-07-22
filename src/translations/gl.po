@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 14:29+0200\n"
+"POT-Creation-Date: 2013-07-22 14:37+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -464,14 +464,14 @@ msgstr "Proxecto "
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:632
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:634
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/lostlogin.php:84
-#: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
-#: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
-#: www/export/rssAboTask.php:146 www/export/rssAboTask.php:169
-#: www/export/rssAboTask.php:171 www/export/rssAboTask.php:173
-#: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
-#: www/pm/add_task.php:74 www/pm/add_task.php:81 www/pm/add_task.php:88
-#: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
-#: www/pm/add_task.php:130 www/pm/add_task.php:149
+#: www/account/register.php:207 www/export/rssAboTask.php:142
+#: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
+#: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
+#: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
+#: www/export/rssAboTask.php:173 www/pm/add_task.php:50 www/pm/add_task.php:63
+#: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
+#: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
+#: www/pm/add_task.php:124 www/pm/add_task.php:130 www/pm/add_task.php:149
 #: www/project/admin/roledelete.php:62 www/register/index.php:178
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
@@ -1154,7 +1154,7 @@ msgstr "Nome de ficheiro "
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:148
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
-#: www/account/register.php:159 www/people/editjob.php:52
+#: www/account/register.php:165 www/people/editjob.php:52
 #: www/people/editjob.php:74 www/people/editprofile.php:107
 #: www/people/people_utils.php:404 www/people/skills_utils.php:49
 #: www/pm/admin/index.php:188
@@ -1680,7 +1680,9 @@ msgstr "Data de comezo"
 #: plugins/mailman/www/admin/index.php:183
 #: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
 #: www/account/lostpw.php:90 www/account/pending-resend.php:69
-#: www/account/pending-resend.php:71 www/account/register.php:159
+#: www/account/pending-resend.php:71 www/account/register.php:165
+#: www/account/register.php:225 www/account/register.php:231
+#: www/account/register.php:237 www/account/register.php:243
 #: www/account/verify.php:76 www/account/verify.php:78
 #: www/account/verify.php:86 www/admin/massmail.php:94
 #: www/admin/massmail.php:113 www/admin/massmail.php:116
@@ -14438,11 +14440,11 @@ msgstr "ID de usuario "
 msgid "Login name:"
 msgstr "Nome de usuario: "
 
-#: www/account/index.php:163 www/account/register.php:163
+#: www/account/index.php:163 www/account/register.php:171
 msgid "First Name:"
 msgstr "Nome: "
 
-#: www/account/index.php:170 www/account/register.php:167
+#: www/account/index.php:170 www/account/register.php:178
 msgid "Last Name:"
 msgstr "Apelidos: "
 
@@ -14450,7 +14452,7 @@ msgstr "Apelidos: "
 msgid "Language:"
 msgstr "Idioma: "
 
-#: www/account/index.php:183 www/account/register.php:175
+#: www/account/index.php:183 www/account/register.php:189
 msgid "Timezone:"
 msgstr "Zona horaria: "
 
@@ -14458,7 +14460,7 @@ msgstr "Zona horaria: "
 msgid "Theme:"
 msgstr "Tema: "
 
-#: www/account/index.php:195 www/account/register.php:188
+#: www/account/index.php:195 www/account/register.php:202
 msgid "Country:"
 msgstr "País: "
 
@@ -14471,18 +14473,15 @@ msgid "Change Email Addr"
 msgstr "Cambiar enderezo de correo electrónico"
 
 #: www/account/index.php:208 www/account/index.php:215
-#: www/account/register.php:209 www/account/register.php:213
 #: www/include/user_profile.php:136
 msgid "Address:"
 msgstr "Enderezo: "
 
-#: www/account/index.php:222 www/account/register.php:217
-#: www/include/user_profile.php:143
+#: www/account/index.php:222 www/include/user_profile.php:143
 msgid "Phone:"
 msgstr "Teléfono: "
 
-#: www/account/index.php:229 www/account/register.php:221
-#: www/include/user_profile.php:154
+#: www/account/index.php:229 www/include/user_profile.php:154
 msgid "FAX:"
 msgstr "Fax: "
 
@@ -14490,15 +14489,15 @@ msgstr "Fax: "
 msgid "Title:"
 msgstr "Título: "
 
-#: www/account/index.php:245 www/account/register.php:200
+#: www/account/index.php:245 www/account/register.php:216
 msgid "Jabber Address:"
 msgstr "Enderezo de Jabber: "
 
-#: www/account/index.php:249 www/account/register.php:204
+#: www/account/index.php:249 www/account/register.php:220
 msgid "Send auto-generated notices only to my Jabber address"
 msgstr "Enviar as novas autoxeradas só á miña conta de Jabber "
 
-#: www/account/index.php:265 www/account/register.php:226
+#: www/account/index.php:265 www/account/register.php:252
 msgid ""
 "Receive Email about Site Updates <i>(Very low traffic and includes security "
 "notices. Highly Recommended.)</i>"
@@ -14506,7 +14505,7 @@ msgstr ""
 "Recibir correos sobre as actualizacións do sitio <i>(Ten pouco tráfico e "
 "inclúe novas sobre seguranza. É unha opción altamente recomendábel.)</i> "
 
-#: www/account/index.php:271 www/account/register.php:230
+#: www/account/index.php:271 www/account/register.php:258
 msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
 msgstr "Recibir correos adicionais da comunidade. <i>(Tráfico baixo.)</i> "
 
@@ -14668,7 +14667,7 @@ msgstr ""
 "envióuselle de novo a confirmación por correo electrónico. visite a ligazón\n"
 "\tque hai neste correo para completar o proceso de rexistro."
 
-#: www/account/pending-resend.php:57 www/account/register.php:251
+#: www/account/pending-resend.php:57 www/account/register.php:279
 #, fuzzy
 msgid "Resend confirmation email to a pending account"
 msgstr "[Reenviar o correo de confirmación a unha conta pendente] "
@@ -14746,28 +14745,27 @@ msgstr "Nome "
 msgid "Login Name (do not use uppercase letters):"
 msgstr "Nome da conta (non use maiúsculas):"
 
-#: www/account/register.php:151
+#: www/account/register.php:153
 msgid "Password (min. 6 chars):"
 msgstr "Contrasinal (cando menos 6 caracteres):"
 
-#: www/account/register.php:155
+#: www/account/register.php:159
 msgid "Password (repeat):"
 msgstr "Contrasinal (repítao):"
 
-#: www/account/register.php:171
+#: www/account/register.php:185
 msgid "Language Choice:"
 msgstr "Selección de idioma: "
 
-#: www/account/register.php:183
+#: www/account/register.php:197
 msgid "Theme"
 msgstr "Tema"
 
-#: www/account/register.php:193 www/include/user_profile.php:112
-#, fuzzy
-msgid "Email Address:"
-msgstr "Enderezo de correo electrónico:"
+#: www/account/register.php:207
+msgid "Email Address"
+msgstr "Enderezo de correo electrónico"
 
-#: www/account/register.php:194
+#: www/account/register.php:208
 #, php-format
 msgid ""
 "This email address will be verified before account activation. You will "
@@ -14777,21 +14775,37 @@ msgstr ""
 "Esta conta de correo verificarase antes de activar a conta. Recibirá un "
 "correo de reenvío en &lt;loginname@%1$s&gt; que se reenviará a este enderezo."
 
-#: www/account/register.php:235
+#: www/account/register.php:225 www/mail/index.php:78
+msgid "Address"
+msgstr "Enderezo"
+
+#: www/account/register.php:231
+msgid "Address (continued)"
+msgstr ""
+
+#: www/account/register.php:237
+msgid "Phone"
+msgstr "Teléfono"
+
+#: www/account/register.php:243
+msgid "Fax"
+msgstr "Fax"
+
+#: www/account/register.php:263
 #, php-format
 msgid "Do you accept the <a href=\"%1$s\">terms of use</a> for this site?"
 msgstr "Acepta os <a href=\"%1$s\">termos de uso</a> para este sitio?"
 
-#: www/account/register.php:241
+#: www/account/register.php:269
 msgid "Activate this user immediately"
 msgstr ""
 
-#: www/account/register.php:245
+#: www/account/register.php:273
 #, php-format
 msgid "Fields marked with %s are mandatory."
 msgstr "Os campos marcados con %s son obrigados."
 
-#: www/account/register.php:248
+#: www/account/register.php:276
 msgid "Register"
 msgstr "Rexistrar"
 
@@ -18080,6 +18094,11 @@ msgstr "Perfil de habelencias "
 msgid "Real Name:"
 msgstr "Nome verdadeiro "
 
+#: www/include/user_profile.php:112
+#, fuzzy
+msgid "Email Address:"
+msgstr "Enderezo de correo electrónico:"
+
 #: www/include/user_profile.php:127
 msgid "Jabber Address"
 msgstr "Enderezo de Jabber "
@@ -18475,10 +18494,6 @@ msgstr "Listas de correo de %1$s"
 #, fuzzy, php-format
 msgid "Unable to get the list %s : %s"
 msgstr "Non se puido obter a lista de correo %s"
-
-#: www/mail/index.php:78
-msgid "Address"
-msgstr "Enderezo"
 
 #: www/mail/index.php:97
 #, php-format
@@ -24351,17 +24366,8 @@ msgstr "Non se introduciu un nome de usuario"
 #~ "de liña salvo aqueles entre dúas chaves. Tras enviar, verifique que o "
 #~ "número de chaves no ficheiro é o esperado.</em>"
 
-#~ msgid "Email Address"
-#~ msgstr "Enderezo de correo electrónico"
-
 #~ msgid "Change Email Address"
 #~ msgstr "Cambiar enderezo de correo electrónico"
-
-#~ msgid "Phone"
-#~ msgstr "Teléfono"
-
-#~ msgid "Fax"
-#~ msgstr "Fax"
 
 #~ msgid "Login with SSL"
 #~ msgstr "Inicio de sesión con SSL "
