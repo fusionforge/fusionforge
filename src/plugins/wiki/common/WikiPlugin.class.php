@@ -25,15 +25,15 @@
 global $gfplugins;
 require_once $gfplugins.'wiki/common/WikiSearchEngine.class.php';
 
-class GforgeWikiPlugin extends Plugin {
-	function GforgeWikiPlugin () {
+class FusionForgeWikiPlugin extends Plugin {
+	function __construct() {
 		$this->Plugin() ;
 		$this->name = "wiki" ;
 		$this->text = "Wiki" ; // To show in the tabs, use...
 		$this->installdir = 'wiki';
 		$this->hooks[] = "groupmenu";
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
-		$this->hooks[] = "groupisactivecheckboxpost" ; //
+		$this->hooks[] = "groupisactivecheckboxpost";
 		$this->hooks[] = "project_admin_plugins"; // to show up in the project admin page
 		$this->hooks[] = 'search_engines';
 		$this->hooks[] = 'full_search_engines';
@@ -44,7 +44,6 @@ class GforgeWikiPlugin extends Plugin {
 	}
 
 	function CallHook ($hookname, & $params) {
-		global $G_SESSION,$HTML;
 		if (is_array($params) && isset($params['group']))
 			$group_id=$params['group'];
 		if ($hookname == "groupmenu") {
@@ -58,7 +57,6 @@ class GforgeWikiPlugin extends Plugin {
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]='/wiki/g/'.$project->getUnixName().'/HomePage';
-                $params['ADMIN'][]='';
 			} else {
 				$this->hooks["groupmenu"] = "";
 				//$params['TITLES'][]=$this->text." [Off]";
@@ -72,7 +70,7 @@ class GforgeWikiPlugin extends Plugin {
 			// this displays the link in the project admin options page to its administration page.
 			$group_id = $params['group_id'];
 			$group = group_get_object($group_id);
-			if ( $group->usesPlugin ( $this->name ) ) {
+			if ($group->usesPlugin($this->name)) {
 				echo '<p><a href="/wiki/wikiadmin.php?group_id=' . $group->getID() . '&amp;type=admin&amp;pluginname=' . $this->name . '">' . _('Wiki Admin') . '</a></p>';
 			}
 		} elseif ($hookname == 'search_engines') {
@@ -100,7 +98,6 @@ class GforgeWikiPlugin extends Plugin {
 			$group_id = $GLOBALS['group_id'];
 			$group = group_get_object($group_id);
 			if ($group->usesPlugin ( $this->name)) {
-				global $gfwww, $gfcommon, $gfplugins;
 				require_once 'plugins/wiki/common/WikiHtmlSearchRenderer.class.php';
 				$wikiRenderer = new WikiHtmlSearchRenderer($params->words, $params->offset, $params->isExact, $params->groupId);
 				$validLength = (strlen($params->words) >= 3);
@@ -113,11 +110,12 @@ class GforgeWikiPlugin extends Plugin {
 			if (defined('PHPWIKI_BASE_URL')) {
 				use_stylesheet('/wiki/themes/fusionforge/fusionforge.css');
 				use_stylesheet('/wiki/themes/fusionforge/fusionforge-print.css', 'print');
-				echo '<link rel="alternate" type="application/x-wiki" title="Edit this page!" href="'.$_SERVER['PHP_SELF'].'?action=edit" />';
-				echo "\n".'<link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-fullscreen.css" media="screen" title="Fullscreen" />';
-				echo "\n".'<link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-autonumbering.css" title="Autonumbering" />';
-				echo "\n".'<link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-rereading.css" title="Rereading Mode" />';
-				echo "\n".'<base href="'.PHPWIKI_BASE_URL.'" />';
+
+				echo '    <link rel="alternate" type="application/x-wiki" title="Edit this page!" href="'.$_SERVER['PHP_SELF'].'?action=edit" />';
+				echo "\n".'    <link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-fullscreen.css" media="screen" title="Fullscreen" />';
+				echo "\n".'    <link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-autonumbering.css" title="Autonumbering" />';
+				echo "\n".'    <link rel="alternate stylesheet" type="text/css" href="/wiki/themes/fusionforge/fusionforge-rereading.css" title="Rereading Mode" />';
+				echo "\n".'    <base href="'.PHPWIKI_BASE_URL.'" />';
 				echo "\n";
 			}
 		} elseif ($hookname == "project_public_area") {
@@ -128,7 +126,7 @@ class GforgeWikiPlugin extends Plugin {
 			if ($project->isError()) {
 				return;
 			}
-			if ( $project->usesPlugin ( $this->name ) ) {
+			if ($project->usesPlugin($this->name)) {
 				echo '<div class="public-area-box">';
 				print '<a href="'. util_make_url ('/wiki/g/'.$project->getUnixName().'/HomePage').'">';
 				print html_image("ic/wiki20g.png","20","20",array("alt"=>"Wiki"));
@@ -144,7 +142,7 @@ class GforgeWikiPlugin extends Plugin {
 			if ($group->isError()) {
 				return;
 			}
-			if ($group->usesPlugin ( $this->name)) {
+			if ($group->usesPlugin($this->name)) {
 				// Add activities from the wiki plugin if active.
 				// Only major edits are included.
 				$params['ids'][] = 'wiki';
@@ -154,6 +152,9 @@ class GforgeWikiPlugin extends Plugin {
 
 					$pat = '_g'.$group_id.'_';
 					$len = strlen($pat)+1;
+                    $encoding = pg_client_encoding();
+					// @ToDo: to remove after wiki tables convert
+					pg_set_client_encoding("iso-8859-1");
 					$wres = db_query_params ("SELECT plugin_wiki_page.id AS id,
 							substring(plugin_wiki_page.pagename from $len) AS pagename,
 							plugin_wiki_version.version AS version,
@@ -169,35 +170,38 @@ class GforgeWikiPlugin extends Plugin {
                                                                  array ($params['begin'],
                                                                         $params['end'],
                                                                         $pat));
+					// To remove after wiki tables convert
+					pg_set_client_encoding($encoding);
 
 					$cache = array();
 					while ($arr = db_fetch_array($wres)) {
 						$group_name = $group->getUnixName();
+						$page_name = preg_replace('/%2f/i', '/', rawurlencode($arr['pagename']));
 						$data = unserialize($arr['versiondata']);
 						if (!isset($cache[$data['author']])) {
 							$r = db_query_params ('SELECT user_name, user_id FROM users WHERE realname = $1',
 										array ($data['author']));
 
 							if ($a = db_fetch_array($r)) {
-								$cache[$data['author']] = $a['user_name'];
-								$cache[$data['author_id']] = $a['user_id'];
+								$cache[$data['author']]['user_name'] = $a['user_name'];
+								$cache[$data['author']]['user_id'] = $a['user_id'];
 							} else {
-								$cache[$data['author']] = '';
-								$cache[$data['author_id']] = '';
+								$cache[$data['author']]['user_name'] = '';
+								$cache[$data['author']]['user_id'] = '';
 							}
 						}
-						$arr['user_name'] = $cache[$data['author']];
-						$arr['user_id'] = $cache[$data['author_id']];
+						$arr['user_name'] = $cache[$data['author']]['user_name'];
+						$arr['user_id'] = $cache[$data['author']]['user_id'];
 						$arr['realname'] = $data['author'];
 						$arr['icon']=html_image("ic/wiki20g.png","20","20",array("alt"=>"Wiki"));
 						$arr['title'] = 'Wiki Page '.$arr['pagename'];
-						$arr['link'] = '/wiki/g/'.$group_name.'/'.rawurlencode($arr['pagename']);
+						$arr['link'] = '/wiki/g/'.$group_name.'/'.$page_name;
 						$arr['description']= $arr['title'];
 						$params['results'][] = $arr;
 					}
 				}
 			}
-		}
+		}		
 	}
 
 	function site_admin_option_hook($params) {

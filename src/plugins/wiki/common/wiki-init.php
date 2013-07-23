@@ -26,7 +26,7 @@ require_once $gfplugins.'wiki/common/WikiPlugin.class.php';
 
 define('SEARCH__TYPE_IS_WIKI', 'wiki');
 
-$WikiPluginObject = new GforgeWikiPlugin ;
+$WikiPluginObject = new FusionForgeWikiPlugin ;
 
 register_plugin ($WikiPluginObject) ;
 
