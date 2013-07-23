@@ -28,17 +28,17 @@ require_once 'WikiSearchQuery.class.php';
 class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 	var $groupId;
-	/**
-	 * Constructor
-	 *
-	 * @param string $words words we are searching for
-	 * @param int $offset offset
-	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
-	 * @param int $groupId group id
-	 * @param array $sections array of all sections to search in (array of strings)
-	 *
-	 */
-	function WikiHtmlSearchRenderer($words, $offset, $isExact, $groupId) {
+
+    /**
+     * Constructor
+     *
+     * @param string $words words we are searching for
+     * @param int $offset offset
+     * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
+     * @param int $groupId group id
+     * @internal param array $sections array of all sections to search in (array of strings)
+     */
+	function __construct($words, $offset, $isExact, $groupId) {
 		$this->groupId = $groupId;
 
 		$searchQuery = new WikiSearchQuery($words, $offset, $isExact, $groupId);
@@ -58,7 +58,6 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getRows() {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
-		$dateFormat = _('Y-m-d H:i');
 
 		$group = group_get_object($this->groupId);
 		$group_name = $group->getUnixName();
@@ -66,12 +65,13 @@ class WikiHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$return = '';
 		for($i = 0; $i < $rowsCount; $i++) {
 			$data = unserialize(db_result($result, $i, 'versiondata'));
+			$page_name = preg_replace('/%2f/i', '/', rawurlencode(db_result($result, $i, 'pagename')));
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
-				. '<td><a href="/wiki/g/'. $group_name.'/'.db_result($result, $i, 'pagename').'">'
+				. '<td><a href="/wiki/g/'. $group_name.'/'. $page_name .'">'
 				. html_image('ic/msg.png', '10', '12')
 				. ' '.db_result($result, $i, 'pagename').'</a></td>
 				<td width="15%">'.$data['author'].'</td>
-				<td width="15%">'.date($dateFormat, db_result($result, $i, 'mtime')).'</td></tr>';
+				<td width="15%">'.relative_date(db_result($result, $i, 'mtime')).'</td></tr>';
 		}
 		return $return;
 	}
