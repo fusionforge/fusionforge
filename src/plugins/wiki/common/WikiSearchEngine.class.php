@@ -46,7 +46,6 @@ class WikiSearchEngine extends GFSearchEngine {
 	}
 
 	function getSearchRenderer($words, $offset, $exact, $parameters) {
-		global $gfwww, $gfcommon, $gfplugins;
 		require_once($this->rendererClassName.'.class.php');
 		$renderer = new $this->rendererClassName($words, $offset, $exact,
 			$this->groupId);
