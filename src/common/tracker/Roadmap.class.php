@@ -101,7 +101,7 @@ class Roadmap extends Error {
 		$result = db_query_params ('SELECT * FROM roadmap WHERE group_id=$1 AND name=$2',
 					array ($this->group_id, $name));
 		if ($result && db_numrows($result)) {
-				$this->setError(sprintf(_('"%s" roadmap already exists'), $name));
+				$this->setError(sprintf(_('“%s” roadmap already exists'), $name));
 				return false;
 		}
 
