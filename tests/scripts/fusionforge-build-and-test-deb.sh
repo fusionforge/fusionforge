@@ -47,9 +47,8 @@ dch -b -v $MAJOR$MINOR -D UNRELEASED "This is $DIST-$ARCH autobuild"
 sed -i -e "1s/UNRELEASED/$DIST/" debian/changelog
 pdebuild --configfile $COWBUILDERCONFIG --buildresult $BUILDRESULT
 
-lintian -i $CHANGEFILE
-
 cd $BUILDRESULT
+lintian -i $CHANGEFILE
 REPOPATH=$WORKSPACE/build/debian
 
 [ ! -d $REPOPATH ] || rm -r $REPOPATH
