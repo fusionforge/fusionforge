@@ -213,6 +213,7 @@ $_$
     LANGUAGE sql;
 
 ALTER TABLE plugin_wiki_version ADD COLUMN idxFTI tsvector;
+
 -- For PostgreSQL < 8.3 (FTI based on tsearch2)
 -- UPDATE plugin_wiki_version SET idxFTI=to_tsvector('default', content);
 -- CREATE INDEX idxFTI_idx ON plugin_wiki_version USING gist(idxFTI);
@@ -257,4 +258,3 @@ CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON plugin_wiki_version
 -- REVOKE ALL ON TABLE plugin_wiki_session FROM PUBLIC;
 -- REVOKE ALL ON TABLE plugin_wiki_session FROM gforge;
 -- GRANT ALL ON TABLE plugin_wiki_session TO gforge;
-
