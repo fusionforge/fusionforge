@@ -56,7 +56,7 @@ if ($day && ($day < 1 || $day > 31)) {
 
 if ($year && isset($month) && isset($day)) {
 	if (!checkdate($month, $day, $year)) {
-		exit_error(_('Invalid date').sprintf(_('Date not valid'), "$year-$month-$day"),'pm');
+		exit_error(_('Invalid date')._(': ')."$year-$month-$day",'pm');
 	}
 }
 
