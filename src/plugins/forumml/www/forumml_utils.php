@@ -683,7 +683,7 @@ function plugin_forumml_process_mail($plug,$reply=false) {
 		}
 		if (!$valid) {
 			$continue=false;
-			$feedback .=_('Invalid email ').$err;
+			$feedback .=_('Invalid Email Address')._(': ').$err;
 		} else {
 			// add list of cc users to mail mime
 			if (count($cc_array) > 0) {

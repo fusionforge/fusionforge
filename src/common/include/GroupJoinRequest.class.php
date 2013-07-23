@@ -66,7 +66,7 @@ class GroupJoinRequest extends Error {
 			return;
 		}
 		if ($Group->isError()) {
-			$this->setError('GroupJoinRequest:: '.$Group->getErrorMessage());
+			$this->setError('GroupJoinRequest: '.$Group->getErrorMessage());
 			return;
 		}
 		$this->Group =& $Group;
@@ -284,7 +284,7 @@ class GroupJoinRequest extends Error {
 	 */
 	function delete($sure) {
 		if (!$sure) {
-			$this->setError('Must be sure before deleting');
+			$this->setError(_('Must be sure before deleting'));
 			return false;
 		}
 		if (!forge_check_perm('project_admin', $this->Group->getID())) {
@@ -295,7 +295,7 @@ class GroupJoinRequest extends Error {
 				array($this->Group->getID(),
 					$this->getUserId()));
 			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError('Could Not Delete: '.db_error());
+				$this->setError(_('Could Not Delete: ').db_error());
                 return false;
 			} else {
 				return true;

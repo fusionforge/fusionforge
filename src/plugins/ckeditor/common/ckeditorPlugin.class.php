@@ -103,7 +103,7 @@ class ckeditorPlugin extends Plugin {
 				$editor = new CKeditor($name) ;
 				$editor->basePath = util_make_uri('/plugins/' . $this->name . '/');
 			} else {
-				$this->setError("Unable to activate ckeditor plugin, package ckeditor not found.");
+				$this->setError(_("Unable to activate ckeditor plugin, package ckeditor not found."));
 				return false;
 			}
 		}

@@ -192,7 +192,7 @@ class ProjectGroup extends Error {
 					array ($group_project_id,
 					       $this->Group->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('ProjectGroup:: Invalid group_project_id');
+			$this->setError(_('Invalid group_project_id'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -344,7 +344,7 @@ class ProjectGroup extends Error {
 					      $this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('Error On Update: '.db_error());
+			$this->setError(_('Error On Update: ').db_error());
 			return false;
 		}
 		return true;

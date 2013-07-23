@@ -56,7 +56,7 @@ function store_file($id, $input_file) {
 	global $error_msg;
 
 	if (!util_check_fileupload($input_file)) {
-		exit_error(_('Invalid filename'),'admin');
+		exit_error(_('Invalid file name.'),'admin');
 	}
 
 	$filename = $input_file['tmp_name'];

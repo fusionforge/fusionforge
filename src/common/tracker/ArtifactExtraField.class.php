@@ -64,7 +64,7 @@ class ArtifactExtraField extends Error {
 
 		//was ArtifactType legit?
 		if (!$ArtifactType || !is_object($ArtifactType)) {
-			$this->setError('ArtifactExtraField: No Valid ArtifactType');
+			$this->setError(_('Invalid Artifact Type'));
 			return;
 		}
 		//did ArtifactType have an error?
@@ -230,7 +230,7 @@ class ArtifactExtraField extends Error {
 					array ($id)) ;
 
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('ArtifactExtraField: Invalid ArtifactExtraField ID');
+			$this->setError(_('Invalid ArtifactExtraField ID'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);

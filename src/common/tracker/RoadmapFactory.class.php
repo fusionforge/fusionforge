@@ -66,7 +66,7 @@ class RoadmapFactory extends Error {
 			$this->group_id = $group->getID();
 		}
 		else {
-			$this->setError('No Valid Group');
+			$this->setError(_('Invalid Group'));
 			return false;
 		}
 

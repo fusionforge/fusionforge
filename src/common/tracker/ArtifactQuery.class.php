@@ -145,7 +145,7 @@ class ArtifactQuery extends Error {
 			return false;
 		}
 		if (!session_loggedin()) {
-			$this->setError('Must Be Logged In');
+			$this->setError(_('Must Be Logged In'));
 			return false;
 		}
 
@@ -713,7 +713,7 @@ class ArtifactQuery extends Error {
 			return false;
 		}
 		if (!session_loggedin()) {
-			$this->setError('Must Be Logged In');
+			$this->setError(_('Must Be Logged In'));
 			return false;
 		}
 		if (!$this->Exist(htmlspecialchars($name))) {
@@ -767,7 +767,7 @@ class ArtifactQuery extends Error {
 	 */
 	function makeDefault() {
 		if (!session_loggedin()) {
-			$this->setError('Must Be Logged In');
+			$this->setError(_('Must Be Logged In'));
 			return false;
 		}
 		$usr =& session_get_user();

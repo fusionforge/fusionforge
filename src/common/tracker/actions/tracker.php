@@ -128,7 +128,7 @@ switch (getStringFromRequest('func')) {
 					$error_msg .= $afh->getErrorMessage();
 				} else {
 					if (!util_check_fileupload($tmp_name)) {
-						$error_msg = _('Invalid filename');
+						$error_msg = _('Invalid file name.');
 					}
 					if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
 						$error_msg = _('Could Not Attach File to Item: '.$afh->getErrorMessage());
@@ -362,7 +362,7 @@ switch (getStringFromRequest('func')) {
 					} else {
 						if (!util_check_fileupload($tmp_name)) {
 							form_release_key(getStringFromRequest('form_key'));
-							exit_error(_('Invalid filename'),'tracker');
+							exit_error(_('Invalid file name.'),'tracker');
 						}
 						if (!$afh->upload($tmp_name,$file_name,$type,' ')) {
 							$error_msg .= ' <br />'._('File Upload: Error').':'.$afh->getErrorMessage();
@@ -385,7 +385,7 @@ switch (getStringFromRequest('func')) {
 						for ($i=0; $i<$count; $i++) {
 							$afh=new ArtifactFileHtml($ah,$delete_file[$i]);
 							if (!$afh || !is_object($afh)) {
-								$error_msg .= _('Could Not Create File Object::').$delete_file[$i];
+								$error_msg .= _('Could Not Create File Object: ').$delete_file[$i];
 							} elseif ($afh->isError()) {
 								$error_msg .= $afh->getErrorMessage().'::'.$delete_file[$i];
 							} else {

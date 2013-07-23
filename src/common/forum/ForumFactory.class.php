@@ -190,7 +190,7 @@ ORDER BY group_forum_id',
 		} else {
 			$msg_count = db_affected_rows($res);
 			if ($msg_count < 1) {
-				$this->setError("Thread not found");
+				$this->setError(_("Thread not found"));
 				return false;
 			}
 		}

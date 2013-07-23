@@ -73,18 +73,18 @@ class FRSRelease extends Error {
 	 *  Constructor.
 	 *
 	 *  @param  object  The FRSPackage object to which this release is associated.
-	 *  @param  int  The release_id.
-	 *  @param  array   The associative array of data.
+	 *  @param  int|bool  The release_id.
+	 *  @param  array|bool   The associative array of data.
 	 *	@return	boolean	success.
 	 */
 	function FRSRelease(&$FRSPackage, $release_id = false, $arr = false) {
 		$this->Error();
 		if (!$FRSPackage || !is_object($FRSPackage)) {
-			$this->setError('FRSRelease:: No Valid FRSPackage Object');
+			$this->setError(_('Invalid FRS Package Object'));
 			return false;
 		}
 		if ($FRSPackage->isError()) {
-			$this->setError('FRSRelease:: '.$FRSPackage->getErrorMessage());
+			$this->setError('FRSRelease: '.$FRSPackage->getErrorMessage());
 			return false;
 		}
 		$this->FRSPackage =& $FRSPackage;
@@ -155,7 +155,7 @@ class FRSRelease extends Error {
 						user_getid(),
 						1)) ;
 		if (!$result) {
-			$this->setError('Error Adding Release: '.db_error());
+			$this->setError(_('Error Adding Release: ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -184,7 +184,7 @@ class FRSRelease extends Error {
 					array ($release_id,
 					       $this->FRSPackage->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('FRSRelease::fetchData()  Invalid release_id');
+			$this->setError(_('Invalid release_id'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -361,7 +361,7 @@ class FRSRelease extends Error {
 
 		// double-check we're not trying to remove root dir
 		if (util_is_root_dir($dir)) {
-			$this->setError('Release::delete error: trying to delete root dir');
+			$this->setError(_('Release delete error: trying to delete root dir'));
 			return false;
 		}
 		rmdir($dir);
@@ -405,7 +405,7 @@ class FRSRelease extends Error {
 						array ($this->FRSPackage->getID(),
 						       htmlspecialchars($name))) ;
 			if (db_numrows($res)) {
-				$this->setError('FRSRelease::update() Error On Update: Name Already Exists');
+				$this->setError(_('Error On Update: Name Already Exists'));
 				return false;
 			}
 		}
@@ -424,14 +424,14 @@ class FRSRelease extends Error {
 					       $this->getID())) ;
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('FRSRelease::update() Error On Update: '.db_error());
+			$this->setError(_('Error On Update: ').db_error());
 			db_rollback();
 			return false;
 		}
 
 		$oldfilename = $this->getFileName();
 		if(!$this->fetchData($this->getID())){
-			$this->setError("FRSRelease::update() Error Updating Release: Couldn't fetch data");
+			$this->setError(_("Error Updating Release: Couldn't fetch data"));
 			db_rollback();
 			return false;
 		}
@@ -441,12 +441,12 @@ class FRSRelease extends Error {
 
 		if (($oldfilename!=$newfilename) && is_dir($olddirlocation)) {
 			if (is_dir($newdirlocation)) {
-				$this->setError('FRSRelease::update() Error Updating Release: Directory Already Exists');
+				$this->setError(_('Error Updating Release: Directory Already Exists'));
 				db_rollback();
 				return false;
 			} else {
-				if(!rename($olddirlocation,$newdirlocation)) {
-					$this->setError("FRSRelease::update() Error Updating Release: Couldn't rename dir");
+				if(!rename($olddirlocation, $newdirlocation)) {
+					$this->setError(_("Error Updating Release: Couldn't rename dir"));
 					db_rollback();
 					return false;
 				}

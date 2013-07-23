@@ -50,7 +50,7 @@ class ArtifactMessage extends Error {
 
 		//was Artifact legit?
 		if (!$Artifact || !is_object($Artifact)) {
-			$this->setError('ArtifactMessage: No Valid Artifact');
+			$this->setError(_('Invalid Artifact'));
 			return;
 		}
 		//did Artifact have an error?
@@ -86,7 +86,7 @@ class ArtifactMessage extends Error {
 			$user_id=user_getid();
 			$user =& user_get_object($user_id);
 			if (!$user || !is_object($user)) {
-				$this->setError('Error: Logged In User Bug Could Not Get User Object');
+				$this->setError(_('Error: Logged In User Bug Could Not Get User Object'));
 				return false;
 			}
 			$body=_('Logged In: YES')." \nuser_id=$user_id\n\n".$body;
@@ -136,7 +136,7 @@ class ArtifactMessage extends Error {
 		$res = db_query_params ('SELECT * FROM artifact_message_user_vw WHERE id=$1',
 					array ($id)) ;
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('ArtifactMessage: Invalid ArtifactMessage ID');
+			$this->setError(_('Invalid ArtifactMessage ID'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);

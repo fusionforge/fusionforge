@@ -57,7 +57,7 @@ class ForumMessage extends Error {
 	function ForumMessage(&$Forum, $msg_id=false, $arr=false, $pending=false) {
 		$this->Error();
 		if (!$Forum || !is_object($Forum)) {
-			$this->setError(_('No Valid Forum Object'));
+			$this->setError(_('Invalid Forum Object'));
 			return false;
 		}
 		if ($Forum->isError()) {
@@ -370,7 +370,7 @@ class ForumMessage extends Error {
 		if ($is_followup_to) {
 			$ParentMessage=new ForumMessage($this->Forum,$is_followup_to);
 			if (!$ParentMessage || !is_object($ParentMessage)) {
-				$this->setError("ForumMessage::create()"._('ForumMessage::create() No Valid ParentMessage Object'));
+				$this->setError(_('Invalid ParentMessage Object'));
 				return false;
 			}
 			if ($ParentMessage->isError()) {
@@ -404,7 +404,7 @@ class ForumMessage extends Error {
 					array ($msg_id,
 					       $this->Forum->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError(_('Invalid Message ID').db_error());
+			$this->setError(_('Invalid Message Id'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -423,7 +423,7 @@ class ForumMessage extends Error {
 					array ($msg_id,
 					       $this->Forum->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError(_('Invalid Message ID').db_error());
+			$this->setError(_('Invalid Message Id'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -576,7 +576,7 @@ class ForumMessage extends Error {
 	function delete() {
 		$msg_id=$this->getID();
 		if (!$msg_id) {
-			$this->setError(_('Invalid Message ID'));
+			$this->setError(_('Invalid Message Id'));
 			return false;
 		}
 
@@ -823,7 +823,7 @@ Or reply to this e-mail entering your response between the following markers:
 			return false;
 		} else {
 			if (db_affected_rows($res)<1) {
-				$this->setError("Message not found");
+				$this->setError(_("Message not found"));
 				return false;
 			}
 			return true;

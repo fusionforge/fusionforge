@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 16:04+0200\n"
+"POT-Creation-Date: 2013-07-23 11:29+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -28,6 +28,8 @@ msgstr "會員新增成功"
 #: common/docman/actions/addfile.php:124 common/docman/actions/addfile.php:160
 #: common/docman/DocumentGroup.class.php:220
 #: common/docman/DocumentGroup.class.php:820
+#: common/tracker/actions/tracker.php:131
+#: common/tracker/actions/tracker.php:365 www/project/admin/editimages.php:59
 #, fuzzy
 msgid "Invalid file name."
 msgstr "全名錯誤"
@@ -426,7 +428,8 @@ msgstr "專案"
 #: common/forum/Forum.class.php:601 common/forum/Forum.class.php:627
 #: common/forum/Forum.class.php:635 common/forum/Forum.class.php:643
 #: common/forum/Forum.class.php:659 common/forum/ForumHTML.class.php:73
-#: common/include/exit.php:80 common/mail/MailingListFactory.class.php:104
+#: common/include/exit.php:80 common/include/User.class.php:313
+#: common/mail/MailingListFactory.class.php:104
 #: common/tracker/actions/browse.php:406 common/tracker/actions/browse.php:409
 #: common/tracker/actions/query.php:329 common/tracker/actions/query.php:344
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
@@ -444,6 +447,8 @@ msgstr "專案"
 #: cronjobs/send_pending_items_mail.php:119
 #: cronjobs/send_pending_items_mail.php:120
 #: cronjobs/send_pending_items_mail.php:121
+#: plugins/forumml/www/forumml_utils.php:686
+#: plugins/mailman/include/MailmanList.class.php:150
 #: plugins/mailman/include/MailmanList.class.php:165
 #: plugins/mailman/include/MailmanList.class.php:249
 #: plugins/mailman/include/MailmanList.class.php:376
@@ -468,7 +473,7 @@ msgstr "專案"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:632
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:634
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/lostlogin.php:84
-#: www/account/register.php:207 www/admin/approve-pending.php:194
+#: www/account/register.php:205 www/admin/approve-pending.php:194
 #: www/admin/database.php:162 www/admin/responses_admin.php:42
 #: www/admin/trove/trove_cat_edit.php:70 www/export/rssAboTask.php:142
 #: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
@@ -478,7 +483,7 @@ msgstr "專案"
 #: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
 #: www/pm/add_task.php:74 www/pm/add_task.php:81 www/pm/add_task.php:88
 #: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
-#: www/pm/add_task.php:130 www/pm/add_task.php:149
+#: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/calendar.php:59
 #: www/project/admin/roledelete.php:62 www/register/index.php:178
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
@@ -1070,6 +1075,7 @@ msgid "Direct Webdav URL"
 msgstr ""
 
 #: common/docman/views/listfile.php:112
+#: common/docman/views/listtrashfile.php:73
 #, fuzzy
 msgid "Invalid folder"
 msgstr "不正確會員"
@@ -1153,7 +1159,7 @@ msgstr "檔案名稱"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:148
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
-#: www/account/register.php:165 www/people/editjob.php:52
+#: www/account/register.php:163 www/people/editjob.php:52
 #: www/people/editjob.php:74 www/people/editprofile.php:107
 #: www/people/people_utils.php:404 www/people/skills_utils.php:49
 #: www/pm/admin/index.php:188
@@ -1318,8 +1324,8 @@ msgstr ""
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:54
 #: plugins/hudson/include/HudsonBuild.class.php:110
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:61
-#: www/account/editsshkeys.php:59 www/account/index.php:148
-#: www/account/index.php:325 www/admin/cronman.php:78
+#: www/account/editsshkeys.php:59 www/account/index.php:146
+#: www/account/index.php:309 www/admin/cronman.php:78
 #: www/admin/grouplist.php:118 www/admin/massmail.php:158
 #: www/admin/search.php:88 www/admin/search.php:168 www/admin/userlist.php:115
 #: www/developer/diary.php:56 www/developer/diary.php:87
@@ -1452,11 +1458,6 @@ msgstr "增加新專案"
 #, fuzzy
 msgid "Documents are also available thru webdav access"
 msgstr "資訊未提供"
-
-#: common/docman/views/listtrashfile.php:73
-#, fuzzy
-msgid "Invalid folder."
-msgstr "不正確會員"
 
 #: common/docman/views/listtrashfile.php:108
 msgid "Delete permanently all documents and folders with deleted status."
@@ -1614,7 +1615,7 @@ msgstr "開啟日期"
 
 #: common/docman/views/reporting.php:92 common/docman/views/reporting.php:94
 #: common/frs/FRSRelease.class.php:294 common/frs/FRSRelease.class.php:297
-#: common/frs/FRSRelease.class.php:301 common/include/utils.php:539
+#: common/frs/FRSRelease.class.php:301 common/include/utils.php:488
 #: common/tracker/actions/query.php:403
 #: common/tracker/views/form-addcanned.php:68
 #: common/tracker/views/form-addcanned.php:71
@@ -1680,9 +1681,9 @@ msgstr "開啟日期"
 #: plugins/mailman/www/admin/index.php:183
 #: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
 #: www/account/lostpw.php:90 www/account/pending-resend.php:69
-#: www/account/pending-resend.php:71 www/account/register.php:165
-#: www/account/register.php:225 www/account/register.php:231
-#: www/account/register.php:237 www/account/register.php:243
+#: www/account/pending-resend.php:71 www/account/register.php:163
+#: www/account/register.php:212 www/account/register.php:218
+#: www/account/register.php:224 www/account/register.php:230
 #: www/account/verify.php:76 www/account/verify.php:78
 #: www/account/verify.php:86 www/activity/index.php:179
 #: www/activity/index.php:180 www/activity/index.php:181
@@ -2121,7 +2122,7 @@ msgstr "發佈"
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:53
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:73
 #: plugins/webanalytics/view/admin/updateLinkValue.php:41
-#: www/account/index.php:353 www/account/lostlogin.php:107
+#: www/account/index.php:337 www/account/lostlogin.php:107
 #: www/admin/groupedit.php:224 www/admin/trove/trove_cat_edit.php:152
 #: www/admin/useredit.php:236 www/admin/useredit.php:315
 #: www/admin/vhost.php:189 www/forum/admin/index.php:162
@@ -2267,6 +2268,11 @@ msgstr "您沒有權限存取這個頁面"
 msgid "Forum not found"
 msgstr "找不到問卷"
 
+#: common/forum/ForumFactory.class.php:193
+#, fuzzy
+msgid "Thread not found"
+msgstr "討論"
+
 #: common/forum/ForumHTML.class.php:58 www/forum/forum.php:157
 #, fuzzy
 msgid "Forum: "
@@ -2334,6 +2340,11 @@ msgstr "保存位置"
 #: common/forum/ForumHTML.class.php:155 common/forum/ForumHTML.class.php:156
 msgid "Start New Thread"
 msgstr "建立新主題"
+
+#: common/forum/ForumHTML.class.php:181 common/forum/ForumMessage.class.php:60
+#, fuzzy
+msgid "Invalid Forum Object"
+msgstr "討論區資訊：無效的討論區物件"
 
 #: common/forum/ForumHTML.class.php:205
 msgid "This is the content of the pending message"
@@ -2428,10 +2439,6 @@ msgstr "您只有 %1$s 登入 %2$s 之後才能發表"
 msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:60
-msgid "No Valid Forum Object"
-msgstr "討論區資訊：無效的討論區物件"
-
 #: common/forum/ForumMessage.class.php:88
 msgid "Group_forum_id in db result does not match Forum Object"
 msgstr "資料庫中的 Group_forum_id 和 Forum 物件不一致"
@@ -2470,14 +2477,16 @@ msgid "Error: a forum message must include a message body and a subject."
 msgstr "必須包括文章標題和內容"
 
 #: common/forum/ForumMessage.class.php:373
-msgid "ForumMessage::create() No Valid ParentMessage Object"
-msgstr "ForumMessage::create() 無效的 ParentMessage 物件"
+#, fuzzy
+msgid "Invalid ParentMessage Object"
+msgstr "無效的 ParentMessage 物件"
 
 #: common/forum/ForumMessage.class.php:407
 #: common/forum/ForumMessage.class.php:426
 #: common/forum/ForumMessage.class.php:579
-msgid "Invalid Message ID"
-msgstr ""
+#, fuzzy
+msgid "Invalid Message Id"
+msgstr "無效的文章編號"
 
 #: common/forum/ForumMessage.class.php:660
 #, php-format
@@ -2519,6 +2528,21 @@ msgid ""
 "%s\n"
 msgstr ""
 
+#: common/forum/ForumMessage.class.php:826
+#, fuzzy
+msgid "Message not found"
+msgstr "沒發現文章"
+
+#: common/forum/ForumMessageFactory.class.php:58
+#, fuzzy
+msgid "Invalid group_form_id"
+msgstr "Unix群組名稱："
+
+#: common/frs/FRSFile.class.php:82 common/frs/FRSFile.class.php:399
+#, fuzzy
+msgid "Invalid FRS Release Object"
+msgstr "沒有有效的問卷物件"
+
 #: common/frs/FRSFile.class.php:121 common/frs/include/frs_utils.php:249
 msgid "FRSFile Name Must Be At Least 3 Characters"
 msgstr "FRSFile 檔案名稱必須至少3個字元"
@@ -2541,6 +2565,28 @@ msgstr "在這個專案空間中，同樣檔案名稱已存在"
 msgid "File cannot be moved to the permanent location"
 msgstr "檔案無法被移到永久保存位置"
 
+#: common/frs/FRSFile.class.php:208 common/frs/FRSRelease.class.php:158
+#, fuzzy
+msgid "Error Adding Release: "
+msgstr "新增資料庫時發生錯誤"
+
+#: common/frs/FRSFile.class.php:234
+#, fuzzy
+msgid "Invalid file_id"
+msgstr "全名錯誤"
+
+#: common/frs/FRSFile.class.php:417 common/frs/FRSPackage.class.php:396
+#: common/frs/FRSRelease.class.php:427 common/pm/ProjectGroup.class.php:347
+#, fuzzy
+msgid "Error On Update: "
+msgstr "更新時錯誤："
+
+#: common/frs/FRSFileProcessorType.class.php:61
+#: common/frs/FRSFileType.class.php:61
+#, fuzzy
+msgid "Invalid type_id"
+msgstr "不正確會員"
+
 #: common/frs/FRSPackage.class.php:139 common/frs/FRSPackage.class.php:371
 #: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:388
 msgid "FRSPackage Name Must Be At Least 3 Characters"
@@ -2551,14 +2597,83 @@ msgstr "FRSPackage 名稱必須至少3個字元"
 msgid "Package Name can only be alphanumeric"
 msgstr "FRSPackage::Update：軟體的名稱只能是英文字母"
 
+#: common/frs/FRSPackage.class.php:154
+#, fuzzy
+msgid "Error Adding Package: Name Already Exists"
+msgstr "帳號已存在"
+
+#: common/frs/FRSPackage.class.php:165
+#, fuzzy
+msgid "Error Adding Package: "
+msgstr "新增資料庫時發生錯誤"
+
+#: common/frs/FRSPackage.class.php:205
+#, fuzzy
+msgid "Invalid package_id"
+msgstr "無效參數"
+
+#: common/frs/FRSPackage.class.php:291
+#, fuzzy
+msgid "Unable to add monitor: "
+msgstr "無法新增監視"
+
+#: common/frs/FRSPackage.class.php:323
+#, fuzzy
+msgid "Error On querying monitor count: "
+msgstr "建立群組物件時發生錯誤"
+
+#: common/frs/FRSPackage.class.php:384
+#, fuzzy
+msgid "Error Updating Package: Name Already Exists"
+msgstr "帳號已存在"
+
+#: common/frs/FRSPackage.class.php:403
+#, fuzzy
+msgid "Error Updating Package: Couldn't fetch data"
+msgstr "更新自訂欄位時發生錯誤"
+
+#: common/frs/FRSPackage.class.php:413
+#, fuzzy
+msgid "Error Updating Package: Directory Already Exists"
+msgstr "帳號已存在"
+
+#: common/frs/FRSPackage.class.php:418
+#, fuzzy
+msgid "Error Updating Package: Couldn't rename dir"
+msgstr "帳號已存在"
+
+#: common/frs/FRSPackage.class.php:465
+#, fuzzy
+msgid "Release Error: "
+msgstr "發佈者："
+
+#: common/frs/FRSPackage.class.php:475
+msgid "Package delete error: trying to delete root dir"
+msgstr ""
+
+#: common/frs/FRSPackage.class.php:504
+#, fuzzy
+msgid "No valid max release id"
+msgstr "全名錯誤"
+
 #: common/frs/FRSPackage.class.php:525
 msgid "Cannot open the file archive."
 msgstr ""
+
+#: common/frs/FRSRelease.class.php:83
+#, fuzzy
+msgid "Invalid FRS Package Object"
+msgstr "不正確會員"
 
 #: common/frs/FRSRelease.class.php:143
 #, fuzzy
 msgid "Error Adding Release: Name Already Exists"
 msgstr "帳號已存在"
+
+#: common/frs/FRSRelease.class.php:187
+#, fuzzy
+msgid "Invalid release_id"
+msgstr "全名錯誤"
 
 #: common/frs/FRSRelease.class.php:286
 #, php-format
@@ -2592,6 +2707,30 @@ msgid ""
 "versions of this package were released. If you don't wish to be notified in "
 "the future, please login to %s and click this link:"
 msgstr ""
+
+#: common/frs/FRSRelease.class.php:364
+msgid "Release delete error: trying to delete root dir"
+msgstr ""
+
+#: common/frs/FRSRelease.class.php:408
+#, fuzzy
+msgid "Error On Update: Name Already Exists"
+msgstr "帳號已存在"
+
+#: common/frs/FRSRelease.class.php:434
+#, fuzzy
+msgid "Error Updating Release: Couldn't fetch data"
+msgstr "更新自訂欄位時發生錯誤"
+
+#: common/frs/FRSRelease.class.php:444
+#, fuzzy
+msgid "Error Updating Release: Directory Already Exists"
+msgstr "帳號已存在"
+
+#: common/frs/FRSRelease.class.php:449
+#, fuzzy
+msgid "Error Updating Release: Couldn't rename dir"
+msgstr "帳號已存在"
 
 #: common/frs/include/frs_utils.php:76
 #, fuzzy
@@ -2663,7 +2802,7 @@ msgid "Name is reserved."
 msgstr "名稱保留給 CVS 使用"
 
 #: common/include/account.php:89 common/include/account.php:93
-#: common/include/User.class.php:327
+#: common/include/User.class.php:318
 msgid "That username already exists."
 msgstr "帳號已存在"
 
@@ -2701,8 +2840,10 @@ msgstr "資料庫管理"
 msgid "Permission denied."
 msgstr "權限不足"
 
-#: common/include/Error.class.php:147 common/tracker/actions/tracker.php:84
-#: www/account/change_email.php:38
+#: common/include/Error.class.php:147 common/include/User.class.php:313
+#: common/include/User.class.php:893 common/include/User.class.php:946
+#: common/tracker/actions/tracker.php:84
+#: plugins/forumml/www/forumml_utils.php:686 www/account/change_email.php:38
 msgid "Invalid Email Address"
 msgstr "無效的Email"
 
@@ -2789,10 +2930,10 @@ msgstr "找不到檔案"
 msgid "Group object already exists"
 msgstr "查詢已經存在"
 
-#: common/include/Group.class.php:312
-#, fuzzy
-msgid "Invalid Unix name"
-msgstr "Unix名稱錯誤"
+#: common/include/Group.class.php:312 common/include/User.class.php:305
+#: common/include/User.class.php:365
+msgid "Invalid Unix Name."
+msgstr "無效的帳號"
 
 #: common/include/Group.class.php:315 common/include/Group.class.php:319
 #: common/include/User.class.php:309
@@ -3291,6 +3432,15 @@ msgstr "您提出希望加入專案 %1$s 的請求被管理者拒絕了。"
 msgid "Your request to join the %s project was granted by an administrator."
 msgstr "您提出希望加入專案 %1$s 的請求被管理者拒絕了。"
 
+#: common/include/GroupJoinRequest.class.php:287
+msgid "Must be sure before deleting"
+msgstr ""
+
+#: common/include/GroupJoinRequest.class.php:298
+#, fuzzy
+msgid "Could Not Delete: "
+msgstr "無法完成執行"
+
 #: common/include/group_section_texts.php:29
 #: common/include/Navigation.class.php:425
 #: common/reporting/report_utils.php:147 plugins/blocks/www/index.php:151
@@ -3331,6 +3481,15 @@ msgstr "使用檔案發佈系統"
 #: www/admin/index.php:187 www/news/index.php:34
 msgid "News"
 msgstr "新聞"
+
+#: common/include/MailParser.class.php:35
+#, fuzzy
+msgid "Error - file too large"
+msgstr "錯誤 - 停用的功能"
+
+#: common/include/MailParser.class.php:87
+msgid "Error - only text/plain supported at this time"
+msgstr ""
 
 #: common/include/Navigation.class.php:175
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:89
@@ -3561,7 +3720,7 @@ msgstr ""
 msgid "More than one value for the plugin + key"
 msgstr ""
 
-#: common/include/pre.php:294
+#: common/include/pre.php:285
 #, php-format
 msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
@@ -3826,6 +3985,17 @@ msgstr ""
 msgid "Documentation manager"
 msgstr "查看文件"
 
+#: common/include/Role.class.php:81
+#, fuzzy
+msgid "Cannot set a role name to empty"
+msgstr "無法增加資料庫分類"
+
+#: common/include/Role.class.php:90 common/include/Role.class.php:98
+#: common/include/Role.class.php:179 common/include/Role.class.php:187
+#, fuzzy
+msgid "Cannot create a role with this name (already used)"
+msgstr "無法增加資料庫分類"
+
 #: common/include/Role.class.php:170
 #, fuzzy
 msgid "Cannot create a role with an empty name"
@@ -3998,7 +4168,8 @@ msgid "Passwords do not match"
 msgstr "密碼不一致"
 
 #: common/include/User.class.php:295
-msgid "Invalid Password:"
+#, fuzzy
+msgid "Invalid Password"
 msgstr "無效的密碼："
 
 #: common/include/User.class.php:300
@@ -4006,31 +4177,23 @@ msgstr "無效的密碼："
 msgid "Invalid Unix Name (must not contain uppercase characters)"
 msgstr "使用者名稱（請使用小寫英文字母，名稱開頭不得使用數字）："
 
-#: common/include/User.class.php:305 common/include/User.class.php:374
-msgid "Invalid Unix Name."
-msgstr "無效的帳號"
-
-#: common/include/User.class.php:313
-#, fuzzy
-msgid "Invalid Email Address:"
-msgstr "無效的Email"
-
-#: common/include/User.class.php:317 common/include/User.class.php:570
-msgid "Invalid Jabber Address"
-msgstr "無效的Jabber信箱"
-
-#: common/include/User.class.php:332
+#: common/include/User.class.php:323
 msgid ""
 "User with this email already exists - use people search to recover your "
 "login."
 msgstr "已存在使用該email信箱的會員 － 使用會員查詢來恢復您的登入。"
 
-#: common/include/User.class.php:410
+#: common/include/User.class.php:399
 #, fuzzy
 msgid "Insert Failed: "
 msgstr "新增失敗"
 
-#: common/include/User.class.php:451
+#: common/include/User.class.php:406
+#, fuzzy
+msgid "Could Not Get User Id: "
+msgstr "無法完成執行"
+
+#: common/include/User.class.php:440
 #, fuzzy, php-format
 msgid ""
 "Thank you for registering on the %3$s web site. You have\n"
@@ -4066,82 +4229,112 @@ msgstr ""
 "\n"
 "-- %4$s 團隊\n"
 
-#: common/include/User.class.php:473
+#: common/include/User.class.php:462
 #, php-format
 msgid "%1$s Account Registration"
 msgstr "%1$s 帳號註冊"
 
-#: common/include/User.class.php:501
+#: common/include/User.class.php:490
 #, fuzzy
 msgid "Could Not Delete From artifact_monitor:"
 msgstr "無法完成執行"
 
-#: common/include/User.class.php:508
+#: common/include/User.class.php:497
 #, fuzzy
 msgid "Could Not Delete From artifact_type_monitor:"
 msgstr "無法完成執行"
 
-#: common/include/User.class.php:515
+#: common/include/User.class.php:504
 #, fuzzy
 msgid "Could Not Delete From forum_monitored_forums:"
 msgstr "無法完成執行"
 
-#: common/include/User.class.php:522
+#: common/include/User.class.php:511
 #, fuzzy
 msgid "Could Not Delete From filemodule_monitor:"
 msgstr "無法完成執行"
 
-#: common/include/User.class.php:625
+#: common/include/User.class.php:600
 #, fuzzy
-msgid "ERROR - Could Not Update User Object:"
+msgid "Error - Could Not Update User Object:"
 msgstr "無法更新上層文章"
 
-#: common/include/User.class.php:719
+#: common/include/User.class.php:694
 #, fuzzy
-msgid "ERROR: Invalid status value"
+msgid "Error: Invalid status value"
 msgstr "無效參數"
 
-#: common/include/User.class.php:733
+#: common/include/User.class.php:698
+msgid "Error: You cannot set pending status if user is suspend or active"
+msgstr ""
+
+#: common/include/User.class.php:708
 #, fuzzy
-msgid "ERROR - Could Not Update User Status:"
+msgid "Error - Could Not Update User Status:"
 msgstr "無法更新上層文章"
 
-#: common/include/User.class.php:926 common/include/User.class.php:979
+#: common/include/User.class.php:774
+#, fuzzy
+msgid "Error - Could Not Update User Unix Status: "
+msgstr "無法更新上層文章"
+
+#: common/include/User.class.php:901 common/include/User.class.php:954
 #, fuzzy
 msgid "User with this email already exists."
 msgstr "帳號已存在"
 
-#: common/include/User.class.php:1088
+#: common/include/User.class.php:912
+#, fuzzy
+msgid "Error - Could Not Update User Email: "
+msgstr "無法更新上層文章"
+
+#: common/include/User.class.php:963
+#, fuzzy
+msgid "Error - Could Not Update User Email And Hash: "
+msgstr "無法更新上層文章"
+
+#: common/include/User.class.php:990
+#, fuzzy
+msgid "Error - Could Not Update real name of user : "
+msgstr "無法更新上層文章"
+
+#: common/include/User.class.php:1063
 #, fuzzy, php-format
-msgid "ERROR: Invalid Shell %s"
+msgid "Error: Invalid Shell %s"
 msgstr "無效參數"
 
-#: common/include/User.class.php:1097
-msgid "ERROR - Could Not Update User Unix Shell:"
-msgstr ""
+#: common/include/User.class.php:1072
+#, fuzzy
+msgid "Error - Could Not Update User Unix Shell:"
+msgstr "無法更新上層文章"
 
-#: common/include/User.class.php:1262
+#: common/include/User.class.php:1219
 #, fuzzy
 msgid "SSH Key already in use"
 msgstr "查詢已經存在"
 
-#: common/include/User.class.php:1270
+#: common/include/User.class.php:1227
 #, fuzzy
-msgid "ERROR - Could Not Add User SSH Key:"
+msgid "Error - Could Not Add User SSH Key:"
 msgstr "無法更新上層文章"
 
-#: common/include/User.class.php:1287
+#: common/include/User.class.php:1244
 #, fuzzy
-msgid "ERROR - Could Not Delete User SSH Key:"
+msgid "Error - Could Not Delete User SSH Key:"
 msgstr "無法更新上層文章"
 
-#: common/include/User.class.php:1434 common/include/User.class.php:1470
-#: common/include/User.class.php:1495
+#: common/include/User.class.php:1377
 #, fuzzy
-msgid "ERROR - Could Not Change User Password:"
+msgid "Error: "
+msgstr "錯誤"
+
+#: common/include/User.class.php:1391 common/include/User.class.php:1427
+#: common/include/User.class.php:1452
+#, fuzzy
+msgid "Error - Could Not Change User Password:"
 msgstr "改變密碼"
 
-#: common/include/User.class.php:1751
+#: common/include/User.class.php:1708
 #, php-format
 msgid ""
 "New User %1$s registered and validated\n"
@@ -4149,7 +4342,7 @@ msgid ""
 "Email: %3$s\n"
 msgstr ""
 
-#: common/include/User.class.php:1756
+#: common/include/User.class.php:1713
 #, fuzzy, php-format
 msgid "New %1$s User"
 msgstr "%1$s 團隊"
@@ -4158,54 +4351,54 @@ msgstr "%1$s 團隊"
 msgid "UTF-8"
 msgstr ""
 
-#: common/include/utils.php:539
+#: common/include/utils.php:488
 msgid "Priority Colors"
 msgstr "優先權顏色"
 
-#: common/include/utils.php:943 common/include/utils.php:947
-#: common/include/utils.php:958
+#: common/include/utils.php:892 common/include/utils.php:896
+#: common/include/utils.php:907
 #, fuzzy
 msgid "bytes"
 msgstr "是"
 
-#: common/include/utils.php:943 common/include/utils.php:958
+#: common/include/utils.php:892 common/include/utils.php:907
 msgid "kB"
 msgstr ""
 
-#: common/include/utils.php:943
+#: common/include/utils.php:892
 msgid "MB"
 msgstr ""
 
-#: common/include/utils.php:943
+#: common/include/utils.php:892
 msgid "GB"
 msgstr ""
 
-#: common/include/utils.php:943
+#: common/include/utils.php:892
 msgid "TB"
 msgstr ""
 
-#: common/include/utils.php:947 common/include/utils.php:958
+#: common/include/utils.php:896 common/include/utils.php:907
 msgid "KiB"
 msgstr ""
 
-#: common/include/utils.php:947
+#: common/include/utils.php:896
 msgid "MiB"
 msgstr ""
 
-#: common/include/utils.php:947
+#: common/include/utils.php:896
 msgid "GiB"
 msgstr ""
 
-#: common/include/utils.php:947
+#: common/include/utils.php:896
 msgid "TiB"
 msgstr ""
 
-#: common/include/utils.php:1316
+#: common/include/utils.php:1265
 #, fuzzy
 msgid "Error: a mailing list with the same email address already exists."
 msgstr "帳號已存在"
 
-#: common/include/utils.php:1334
+#: common/include/utils.php:1283
 #, fuzzy
 msgid "Error: a forum with the same email address already exists."
 msgstr "帳號已存在"
@@ -4310,6 +4503,11 @@ msgstr "專案分類：需要名字和被指定人"
 #, fuzzy
 msgid "Subproject Description Must Be At Least 10 Characters"
 msgstr "文件說明必須至少10個字元"
+
+#: common/pm/ProjectGroup.class.php:195
+#, fuzzy
+msgid "Invalid group_project_id"
+msgstr "Unix群組名稱："
 
 #: common/pm/ProjectGroupFactory.class.php:62
 #, php-format
@@ -5559,12 +5757,6 @@ msgstr ""
 msgid "Could Not Create File Object"
 msgstr "無法更新上層文章"
 
-#: common/tracker/actions/tracker.php:131
-#: common/tracker/actions/tracker.php:365 www/project/admin/editimages.php:59
-#, fuzzy
-msgid "Invalid filename"
-msgstr "全名錯誤"
-
 #: common/tracker/actions/tracker.php:134
 msgid "Could Not Attach File to Item: "
 msgstr ""
@@ -5606,7 +5798,7 @@ msgstr "檔案上傳：成功"
 
 #: common/tracker/actions/tracker.php:388
 #, fuzzy
-msgid "Could Not Create File Object::"
+msgid "Could Not Create File Object: "
 msgstr "無法更新上層文章"
 
 #: common/tracker/actions/tracker.php:393
@@ -5646,8 +5838,10 @@ msgid "Title and Message Body are required"
 msgstr "自訂: 訊息主要部份是必須的"
 
 #: common/tracker/Artifact.class.php:142
-msgid "No Valid Artifact Type"
-msgstr ""
+#: common/tracker/ArtifactExtraField.class.php:67
+#, fuzzy
+msgid "Invalid Artifact Type"
+msgstr "無效的編號"
 
 #: common/tracker/Artifact.class.php:154
 #, fuzzy
@@ -5798,6 +5992,11 @@ msgstr ""
 msgid "This Tracker already uses custom statuses"
 msgstr ""
 
+#: common/tracker/ArtifactExtraField.class.php:233
+#, fuzzy
+msgid "Invalid ArtifactExtraField ID"
+msgstr "無效的編號"
+
 #: common/tracker/ArtifactExtraField.class.php:321
 #: common/tracker/views/form-addextrafield.php:124
 msgid "Select Box"
@@ -5868,6 +6067,22 @@ msgstr "帳號已存在"
 msgid "ArtifactFile: File, name, type, size are required"
 msgstr "自訂檔案: 檔案名稱、類型、容量與資料是必須的"
 
+#: common/tracker/ArtifactHistory.class.php:53
+#: common/tracker/ArtifactMessage.class.php:53
+#, fuzzy
+msgid "Invalid Artifact"
+msgstr "無效的編號"
+
+#: common/tracker/ArtifactHistory.class.php:82
+#, fuzzy
+msgid "Invalid ArtifactHistory ID"
+msgstr "無效的編號"
+
+#: common/tracker/ArtifactMessage.class.php:89
+#, fuzzy
+msgid "Error: Logged In User Bug Could Not Get User Object"
+msgstr "無法更新上層文章"
+
 #: common/tracker/ArtifactMessage.class.php:92
 msgid "Logged In: YES"
 msgstr "登入：是"
@@ -5875,6 +6090,18 @@ msgstr "登入：是"
 #: common/tracker/ArtifactMessage.class.php:98
 msgid "Logged In: NO"
 msgstr "登入：否"
+
+#: common/tracker/ArtifactMessage.class.php:139
+#, fuzzy
+msgid "Invalid ArtifactMessage ID"
+msgstr "無效的編號"
+
+#: common/tracker/ArtifactQuery.class.php:148
+#: common/tracker/ArtifactQuery.class.php:716
+#: common/tracker/ArtifactQuery.class.php:770
+#, fuzzy
+msgid "Must Be Logged In"
+msgstr "請先登入"
 
 #: common/tracker/ArtifactQuery.class.php:153
 msgid "Query already exists"
@@ -6079,7 +6306,7 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:340
 #: plugins/scmsvn/common/SVNPlugin.class.php:222
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
-#: www/account/editsshkeys.php:51 www/account/index.php:317
+#: www/account/editsshkeys.php:51 www/account/index.php:301
 #: www/admin/useredit.php:262 www/admin/useredit.php:292
 #: www/project/admin/editimages.php:267 www/reporting/usersummary.php:101
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:44
@@ -6140,6 +6367,12 @@ msgstr "不要輸入密碼或機密資料在您的訊息中！"
 #, fuzzy
 msgid "Indicates required fields."
 msgstr "所有項都必須填寫！"
+
+#: common/tracker/Roadmap.class.php:75
+#: common/tracker/RoadmapFactory.class.php:69
+#, fuzzy
+msgid "Invalid Group"
+msgstr "不正確會員"
 
 #: common/tracker/Roadmap.class.php:104
 #, fuzzy, php-format
@@ -6789,7 +7022,7 @@ msgid "Configuring allowed roles for the transitions from %1$s to %2$s"
 msgstr ""
 
 #: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:56
-#: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:260
+#: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:244
 #: www/include/Layout.class.php:1343
 msgid "Preferences"
 msgstr "設定"
@@ -7305,7 +7538,7 @@ msgid ""
 "directory ...) during the last 4 weeks."
 msgstr ""
 
-#: common/widget/Widget_ProjectInfo.class.php:32 www/include/user_home.php:90
+#: common/widget/Widget_ProjectInfo.class.php:32 www/include/user_home.php:89
 msgid "Project Info"
 msgstr "專案資訊"
 
@@ -8168,6 +8401,10 @@ msgstr "不正確的確認編碼"
 msgid "HTML editor (ckeditor)"
 msgstr ""
 
+#: plugins/ckeditor/common/ckeditorPlugin.class.php:106
+msgid "Unable to activate ckeditor plugin, package ckeditor not found."
+msgstr ""
+
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:255
 msgid "Compact preview of local user"
 msgstr ""
@@ -8869,11 +9106,6 @@ msgstr "附加檔案"
 #: plugins/forumml/www/forumml_utils.php:604 plugins/forumml/www/index.php:128
 msgid "Erase"
 msgstr ""
-
-#: plugins/forumml/www/forumml_utils.php:686
-#, fuzzy
-msgid "Invalid email "
-msgstr "無效的Email"
 
 #: plugins/forumml/www/forumml_utils.php:733
 #, fuzzy
@@ -10343,6 +10575,16 @@ msgstr "已經存在的通信論壇"
 #, fuzzy
 msgid "Error On Query:"
 msgstr "更新時錯誤："
+
+#: plugins/mailman/include/MailmanList.class.php:441
+#, fuzzy
+msgid "Missing params"
+msgstr "缺少參數"
+
+#: plugins/mailman/include/MailmanList.class.php:451
+#, fuzzy
+msgid "Could Not Delete List: "
+msgstr "無法完成執行"
 
 #: plugins/mailman/include/mailmanPlugin.class.php:137
 #, fuzzy
@@ -14064,6 +14306,7 @@ msgid "Old password is incorrect"
 msgstr "舊的密碼不正確"
 
 #: www/account/change_pw.php:53 www/account/lostlogin.php:62
+#: www/admin/passedit.php:54
 msgid "You must supply valid password (at least 6 chars)."
 msgstr "您必須提供一個有效的密碼（至少6個字元）。"
 
@@ -14095,7 +14338,7 @@ msgstr ""
 msgid "You should now <a href=\"%s\">Return to User Prefs</a>."
 msgstr "您現在可以 %1$s 返回到帳號維護頁面 %2$s。"
 
-#: www/account/change_pw.php:87 www/account/index.php:158
+#: www/account/change_pw.php:87 www/account/index.php:156
 msgid "Change Password"
 msgstr "改變密碼"
 
@@ -14127,29 +14370,29 @@ msgstr "SSH共用認證Keys"
 msgid "Available keys"
 msgstr "未發現可以存取的追蹤者"
 
-#: www/account/editsshkeys.php:51 www/account/index.php:317
+#: www/account/editsshkeys.php:51 www/account/index.php:301
 msgid "Algorithm"
 msgstr ""
 
-#: www/account/editsshkeys.php:51 www/account/index.php:317
+#: www/account/editsshkeys.php:51 www/account/index.php:301
 msgid "Fingerprint"
 msgstr ""
 
-#: www/account/editsshkeys.php:51 www/account/index.php:317
+#: www/account/editsshkeys.php:51 www/account/index.php:301
 #: www/project/admin/editimages.php:266
 msgid "Uploaded"
 msgstr "上傳"
 
-#: www/account/editsshkeys.php:51 www/account/index.php:317
+#: www/account/editsshkeys.php:51 www/account/index.php:301
 #, fuzzy
 msgid "Ready ?"
 msgstr "感謝您"
 
-#: www/account/editsshkeys.php:61 www/account/index.php:327
+#: www/account/editsshkeys.php:61 www/account/index.php:311
 msgid "ssh key is deployed."
 msgstr ""
 
-#: www/account/editsshkeys.php:63 www/account/index.php:329
+#: www/account/editsshkeys.php:63 www/account/index.php:313
 msgid "ssh key is not deployed yet."
 msgstr ""
 
@@ -14228,126 +14471,118 @@ msgstr ""
 "立一個您自己的專案。</p><p>享用這個網站，也請給我們一些回饋資訊，以便我們能共"
 "同使 %1$s 變得更好。</p><p>--%1$s 團隊。</p>"
 
-#: www/account/index.php:78
+#: www/account/index.php:76
 #, fuzzy
 msgid "You must supply a first name."
 msgstr "您必須輸入名字"
 
-#: www/account/index.php:81
+#: www/account/index.php:79
 #, fuzzy
 msgid "You must supply a last name."
 msgstr "您必須輸入姓氏"
 
-#: www/account/index.php:105 www/admin/groupedit.php:74
+#: www/account/index.php:103 www/admin/groupedit.php:74
 #: www/admin/useredit.php:110
 msgid "Updated"
 msgstr "已更新"
 
-#: www/account/index.php:121 www/account/index.php:126
+#: www/account/index.php:119 www/account/index.php:124
 #: www/include/html.php:934
 msgid "Account Maintenance"
 msgstr "帳號維護"
 
-#: www/account/index.php:130 www/index.php:33
+#: www/account/index.php:128 www/index.php:33
 msgid "Welcome"
 msgstr "歡迎"
 
-#: www/account/index.php:133
+#: www/account/index.php:131
 #, fuzzy
 msgid "Account options:"
 msgstr "帳號資訊"
 
-#: www/account/index.php:136
+#: www/account/index.php:134
 #, fuzzy
 msgid "View My Profile"
 msgstr "查看會員個人能力"
 
-#: www/account/index.php:138
+#: www/account/index.php:136
 msgid "Edit My Skills Profile"
 msgstr "編輯我的個人能力"
 
-#: www/account/index.php:147
+#: www/account/index.php:145
 msgid "Member since:"
 msgstr "帳號建立日期"
 
-#: www/account/index.php:151 www/include/user_profile.php:68
+#: www/account/index.php:149 www/include/user_profile.php:68
 #, fuzzy
 msgid "User Id:"
 msgstr "使用者編號"
 
-#: www/account/index.php:156 www/include/user_profile.php:88
+#: www/account/index.php:154 www/include/user_profile.php:88
 msgid "Login name:"
 msgstr "使用者名稱："
 
-#: www/account/index.php:163 www/account/register.php:171
+#: www/account/index.php:161 www/account/register.php:169
 msgid "First Name:"
 msgstr "名字："
 
-#: www/account/index.php:170 www/account/register.php:178
+#: www/account/index.php:168 www/account/register.php:176
 msgid "Last Name:"
 msgstr "姓氏："
 
-#: www/account/index.php:177
+#: www/account/index.php:175
 msgid "Language:"
 msgstr "語言："
 
-#: www/account/index.php:183 www/account/register.php:189
+#: www/account/index.php:181 www/account/register.php:187
 msgid "Timezone:"
 msgstr "時區選擇："
 
-#: www/account/index.php:189
+#: www/account/index.php:187
 msgid "Theme:"
 msgstr "佈景："
 
-#: www/account/index.php:195 www/account/register.php:202
+#: www/account/index.php:193 www/account/register.php:200
 msgid "Country:"
 msgstr "國家："
 
-#: www/account/index.php:201
+#: www/account/index.php:199
 msgid "Email Addr:"
 msgstr "Email："
 
-#: www/account/index.php:203
+#: www/account/index.php:201
 msgid "Change Email Addr"
 msgstr "改變Email"
 
-#: www/account/index.php:208 www/account/index.php:215
-#: www/include/user_profile.php:136
+#: www/account/index.php:206 www/account/index.php:213
+#: www/include/user_profile.php:126
 msgid "Address:"
 msgstr "住址："
 
-#: www/account/index.php:222 www/include/user_profile.php:143
+#: www/account/index.php:220 www/include/user_profile.php:133
 msgid "Phone:"
 msgstr "電話："
 
-#: www/account/index.php:229 www/include/user_profile.php:154
+#: www/account/index.php:227 www/include/user_profile.php:144
 msgid "FAX:"
 msgstr "傳真："
 
-#: www/account/index.php:236
+#: www/account/index.php:234
 msgid "Title:"
 msgstr "標題"
 
-#: www/account/index.php:245 www/account/register.php:216
-msgid "Jabber Address:"
-msgstr "Jabber 信箱："
-
-#: www/account/index.php:249 www/account/register.php:220
-msgid "Send auto-generated notices only to my Jabber address"
-msgstr "自動產生的通知只發送到我的Jabber信箱"
-
-#: www/account/index.php:265 www/account/register.php:252
+#: www/account/index.php:249 www/account/register.php:239
 msgid ""
 "Receive Email about Site Updates <i>(Very low traffic and includes security "
 "notices. Highly Recommended.)</i>"
 msgstr ""
 "接受關於本網站更新的Email<i>（量非常小，並且包括安全通告，強烈推薦。）</i>"
 
-#: www/account/index.php:271 www/account/register.php:258
+#: www/account/index.php:255 www/account/register.php:245
 msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
 msgstr "接收附加的公共通信論壇。 <i>(量很小)</i>"
 
-#: www/account/index.php:286
+#: www/account/index.php:270
 #, php-format
 msgid ""
 "Participate in peer ratings. <i>(Allows you to rate other users using "
@@ -14356,39 +14591,39 @@ msgid ""
 "participate in ratings.)</i>"
 msgstr ""
 
-#: www/account/index.php:292
+#: www/account/index.php:276
 msgid ""
 "Enable tooltips. Small help texts displayed on mouse over links, images."
 msgstr ""
 
-#: www/account/index.php:309
+#: www/account/index.php:293
 msgid "Shell Account Information"
 msgstr "Shell帳號資訊"
 
-#: www/account/index.php:312
+#: www/account/index.php:296
 msgid "Shell box"
 msgstr "指令區"
 
-#: www/account/index.php:313
+#: www/account/index.php:297
 msgid "SSH Shared Authorized Keys"
 msgstr "SSH共用認證Keys"
 
-#: www/account/index.php:339
+#: www/account/index.php:323
 msgid "Edit Keys"
 msgstr "編輯Keys"
 
-#: www/account/index.php:341
+#: www/account/index.php:325
 #, fuzzy
 msgid "Shell Account deactivated"
 msgstr "Shell帳號資訊"
 
-#: www/account/index.php:351 www/forum/admin/index.php:128
+#: www/account/index.php:335 www/forum/admin/index.php:128
 #: www/forum/admin/index.php:167
 #, fuzzy, php-format
 msgid "%s Mandatory fields"
 msgstr "管理訂製欄位"
 
-#: www/account/index.php:354
+#: www/account/index.php:338
 msgid "Reset Changes"
 msgstr "重設"
 
@@ -14488,7 +14723,7 @@ msgid ""
 "complete the registration process."
 msgstr ""
 
-#: www/account/pending-resend.php:57 www/account/register.php:279
+#: www/account/pending-resend.php:57 www/account/register.php:266
 #, fuzzy
 msgid "Resend confirmation email to a pending account"
 msgstr "[重新發送確認信函給未通過的帳號]"
@@ -14506,32 +14741,32 @@ msgid ""
 "Fill in a user name and click “Submit” to resend the confirmation email."
 msgstr "填入會員帳號後點擊'送出'就可以再次送出確認信函"
 
-#: www/account/register.php:75
+#: www/account/register.php:73
 msgid "You can't register an account unless you accept the terms of use."
 msgstr ""
 
-#: www/account/register.php:92
+#: www/account/register.php:90
 #, fuzzy
 msgid "Register Confirmation"
 msgstr "其他資訊"
 
-#: www/account/register.php:99
+#: www/account/register.php:97
 msgid ""
 "Error during user activation but after user registration (user is now in "
 "pending state and will not get a notification eMail!)"
 msgstr ""
 
-#: www/account/register.php:101
+#: www/account/register.php:99
 #, fuzzy, php-format
 msgid "Could not activate newly registered user's forge account: %s"
 msgstr "無法啟動帳號"
 
-#: www/account/register.php:108
+#: www/account/register.php:106
 #, php-format
 msgid "You have registered the %1$s account on %2$s."
 msgstr ""
 
-#: www/account/register.php:112
+#: www/account/register.php:110
 #, fuzzy
 msgid ""
 "A confirmation email is being sent to verify the submitted email address. "
@@ -14540,50 +14775,50 @@ msgstr ""
 "<p>恭喜。您已經在 %1$s 上成功註冊。 <p> 一封確認email已經發送到您的email信"
 "箱，以確保您email信箱的正確性。點擊email中的連結就可以啟動您的帳號。"
 
-#: www/account/register.php:115
+#: www/account/register.php:113
 #, php-format
 msgid ""
 "You have registered and activated user %1$s on %2$s. They will not receive "
 "an eMail about this fact."
 msgstr ""
 
-#: www/account/register.php:136
+#: www/account/register.php:134
 #, fuzzy
 msgid "User Account Registration"
 msgstr "%1$s 帳號註冊"
 
-#: www/account/register.php:144
+#: www/account/register.php:142
 msgid ""
 "Login Name (no uppercase letters; leave empty to have it generated "
 "automatically):"
 msgstr ""
 
-#: www/account/register.php:146
+#: www/account/register.php:144
 msgid "Login Name (do not use uppercase letters):"
 msgstr "使用者名稱（請使用小寫英文字母，名稱開頭不得使用數字）："
 
-#: www/account/register.php:153
+#: www/account/register.php:151
 msgid "Password (min. 6 chars):"
 msgstr "密碼（至少6個字元）："
 
-#: www/account/register.php:159
+#: www/account/register.php:157
 msgid "Password (repeat):"
 msgstr "密碼（重複）："
 
-#: www/account/register.php:185
+#: www/account/register.php:183
 msgid "Language Choice:"
 msgstr "語言選擇："
 
-#: www/account/register.php:197
+#: www/account/register.php:195
 msgid "Theme"
 msgstr "佈景："
 
-#: www/account/register.php:207
+#: www/account/register.php:205
 #, fuzzy
 msgid "Email Address"
 msgstr "Email："
 
-#: www/account/register.php:208
+#: www/account/register.php:206
 #, php-format
 msgid ""
 "This email address will be verified before account activation. You will "
@@ -14591,37 +14826,37 @@ msgid ""
 "to this address."
 msgstr ""
 
-#: www/account/register.php:225 www/mail/index.php:78
+#: www/account/register.php:212 www/mail/index.php:78
 msgid "Address"
 msgstr "住址"
 
-#: www/account/register.php:231
+#: www/account/register.php:218
 msgid "Address (continued)"
 msgstr ""
 
-#: www/account/register.php:237
+#: www/account/register.php:224
 msgid "Phone"
 msgstr "電話："
 
-#: www/account/register.php:243
+#: www/account/register.php:230
 msgid "Fax"
 msgstr "傳真："
 
-#: www/account/register.php:263
+#: www/account/register.php:250
 #, php-format
 msgid "Do you accept the <a href=\"%1$s\">terms of use</a> for this site?"
 msgstr ""
 
-#: www/account/register.php:269
+#: www/account/register.php:256
 msgid "Activate this user immediately"
 msgstr ""
 
-#: www/account/register.php:273
+#: www/account/register.php:260
 #, php-format
 msgid "Fields marked with %s are mandatory."
 msgstr ""
 
-#: www/account/register.php:276
+#: www/account/register.php:263
 msgid "Register"
 msgstr "註冊"
 
@@ -14947,30 +15182,30 @@ msgstr "建立群組物件時發生錯誤"
 msgid "Approve All On This Page"
 msgstr "審核這個頁面的所有項目"
 
-#: www/admin/configman.php:77
+#: www/admin/configman.php:73
 #, fuzzy
 msgid "Configuration Manager"
 msgstr "Cron管理"
 
-#: www/admin/configman.php:79
+#: www/admin/configman.php:75
 #, php-format
 msgid "Configuration from the config API (*.ini files)"
 msgstr ""
 
-#: www/admin/configman.php:81
+#: www/admin/configman.php:77
 msgid "Variable"
 msgstr ""
 
-#: www/admin/configman.php:81
+#: www/admin/configman.php:77
 #, fuzzy
 msgid "Configured value"
 msgstr "確認刪除"
 
-#: www/admin/configman.php:81
+#: www/admin/configman.php:77
 msgid "Result (possibly after interpolation)"
 msgstr ""
 
-#: www/admin/configman.php:97
+#: www/admin/configman.php:93
 #, fuzzy, php-format
 msgid "Section %s"
 msgstr "區域"
@@ -15517,10 +15752,6 @@ msgstr "最後送出的會員編號"
 #: www/admin/massmail.php:167
 msgid "No deliveries active."
 msgstr ""
-
-#: www/admin/passedit.php:54
-msgid "You must supply valid password (at least 6 chars)"
-msgstr "您必須提供有效的密碼（至少6個字元）"
 
 #: www/admin/passedit.php:74
 #, fuzzy
@@ -17722,47 +17953,47 @@ msgstr "查看會員個人能力"
 msgid "Personal Information"
 msgstr "個人資訊"
 
-#: www/include/user_home.php:50
+#: www/include/user_home.php:49
 msgid "Peer Rating"
 msgstr "對等評分"
 
-#: www/include/user_home.php:56
+#: www/include/user_home.php:55
 msgid "User chose not to participate in peer rating"
 msgstr "使用者選擇不要加入對等評分"
 
-#: www/include/user_home.php:63
+#: www/include/user_home.php:62
 msgid "Diary and Notes"
 msgstr "日記與筆記"
 
-#: www/include/user_home.php:71
+#: www/include/user_home.php:70
 msgid "Diary/Note entries:"
 msgstr "日記/筆記資料："
 
-#: www/include/user_home.php:74
+#: www/include/user_home.php:73
 msgid "View Diary & Notes"
 msgstr "瀏覽日記與筆記"
 
-#: www/include/user_home.php:79
+#: www/include/user_home.php:78
 msgid "Monitor this Diary"
 msgstr "監控這個日記"
 
-#: www/include/user_home.php:101
+#: www/include/user_home.php:100
 msgid "This developer is not a member of any projects."
 msgstr "這個研發人員不屬於任何專案"
 
-#: www/include/user_home.php:104
+#: www/include/user_home.php:103
 #, fuzzy
 msgid "This developer is a member of the following projects:"
 msgstr "這個研發人員隸屬於下面群組："
 
-#: www/include/user_home.php:158
+#: www/include/user_home.php:157
 msgid ""
 "If you are familiar with this user, please take a moment to rate him/her on "
 "the following criteria. Keep in mind, that your rating will be visible to "
 "the user and others."
 msgstr ""
 
-#: www/include/user_home.php:162
+#: www/include/user_home.php:161
 #, php-format
 msgid ""
 "The %s Peer Rating system is based on concepts from <a href=\"http://www."
@@ -17770,7 +18001,7 @@ msgid ""
 "expanded in a few ways."
 msgstr ""
 
-#: www/include/user_home.php:170
+#: www/include/user_home.php:169
 #, php-format
 msgid ""
 "<p>The Peer rating box shows all rating averages (and response levels) for "
@@ -17789,7 +18020,7 @@ msgid ""
 "page.</p>"
 msgstr ""
 
-#: www/include/user_home.php:177
+#: www/include/user_home.php:176
 #, php-format
 msgid ""
 "You opted-out from peer rating system, otherwise you would have a chance to "
@@ -17811,16 +18042,12 @@ msgstr "真實姓名"
 msgid "Email Address:"
 msgstr "Email："
 
-#: www/include/user_profile.php:127
-msgid "Jabber Address"
-msgstr "Jabber位址"
-
-#: www/include/user_profile.php:162
+#: www/include/user_profile.php:152
 #, fuzzy
 msgid "Site Member Since:"
 msgstr "註冊會員自"
 
-#: www/include/user_profile.php:169
+#: www/include/user_profile.php:159
 msgid "URI:"
 msgstr ""
 
@@ -19297,11 +19524,6 @@ msgstr ""
 #, fuzzy
 msgid "Invalid date"
 msgstr "無效參數"
-
-#: www/pm/calendar.php:59
-#, fuzzy, php-format
-msgid "Date not valid"
-msgstr "發表日期"
 
 #: www/pm/calendar.php:64
 msgid "Invalid type: Type not in onemonth, threemonth, currentyear, comingyear"
@@ -23152,6 +23374,59 @@ msgid "No User Name Provided"
 msgstr "帳號"
 
 #, fuzzy
+#~ msgid "Invalid email "
+#~ msgstr "無效的Email"
+
+#~ msgid "You must supply valid password (at least 6 chars)"
+#~ msgstr "您必須提供有效的密碼（至少6個字元）"
+
+#, fuzzy
+#~ msgid "Date not valid"
+#~ msgstr "發表日期"
+
+#, fuzzy
+#~ msgid "Invalid ArtifactType"
+#~ msgstr "無效的編號"
+
+#, fuzzy
+#~ msgid "Invalid Group Object"
+#~ msgstr "沒有有效的群組物件"
+
+#~ msgid "No Valid Forum Object"
+#~ msgstr "討論區資訊：無效的討論區物件"
+
+#~ msgid "ForumMessage::create() No Valid ParentMessage Object"
+#~ msgstr "ForumMessage::create() 無效的 ParentMessage 物件"
+
+#, fuzzy
+#~ msgid "Invalid Unix name"
+#~ msgstr "Unix名稱錯誤"
+
+#, fuzzy
+#~ msgid "Invalid folder."
+#~ msgstr "不正確會員"
+
+#, fuzzy
+#~ msgid "Invalid filename"
+#~ msgstr "全名錯誤"
+
+#, fuzzy
+#~ msgid "Invalid Email Address:"
+#~ msgstr "無效的Email"
+
+#~ msgid "Invalid Jabber Address"
+#~ msgstr "無效的Jabber信箱"
+
+#~ msgid "Jabber Address:"
+#~ msgstr "Jabber 信箱："
+
+#~ msgid "Send auto-generated notices only to my Jabber address"
+#~ msgstr "自動產生的通知只發送到我的Jabber信箱"
+
+#~ msgid "Jabber Address"
+#~ msgstr "Jabber位址"
+
+#, fuzzy
 #~ msgid "Error Getting Forum"
 #~ msgstr "新增討論區錯誤"
 
@@ -23544,9 +23819,6 @@ msgstr "帳號"
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "必須包括文章標題和內容"
 
-#~ msgid "No Valid ParentMessage Object"
-#~ msgstr "無效的 ParentMessage 物件"
-
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "您在 %s 註冊的專案通過審核了"
 
@@ -23856,10 +24128,6 @@ msgstr "帳號"
 #~ msgstr "創造者"
 
 #, fuzzy
-#~ msgid "Invalid Project"
-#~ msgstr "不正確會員"
-
-#, fuzzy
 #~ msgid "Document Title:"
 #~ msgstr "文件標題"
 
@@ -23996,9 +24264,6 @@ msgstr "帳號"
 #, fuzzy
 #~ msgid "Diretory"
 #~ msgstr "新專案名稱"
-
-#~ msgid "No valid Group Object"
-#~ msgstr "沒有有效的群組物件"
 
 #, fuzzy
 #~ msgid "Missing Link URL or Html Code."
@@ -24274,10 +24539,6 @@ msgstr "帳號"
 #, fuzzy
 #~ msgid "Task Successed"
 #~ msgstr "更新成功"
-
-#, fuzzy
-#~ msgid "Error:"
-#~ msgstr "錯誤"
 
 #, fuzzy
 #~ msgid "Task succeeded"
@@ -24989,9 +25250,6 @@ msgstr "帳號"
 #~ msgid "Previous Messages"
 #~ msgstr "前一頁"
 
-#~ msgid "Message Not Found"
-#~ msgstr "沒發現文章"
-
 #~ msgid "Must Choose A Message First"
 #~ msgstr "必須先選擇一個文章"
 
@@ -25010,9 +25268,6 @@ msgstr "帳號"
 
 #~ msgid "ERROR - No group was chosen or you can't access it"
 #~ msgstr "錯誤 - 沒有選擇分組編號"
-
-#~ msgid "Error - disabled feature."
-#~ msgstr "錯誤 - 停用的功能"
 
 #~ msgid ""
 #~ "NOTE: This project entry is maintained by the %1$s staff. We are not the "
@@ -25076,10 +25331,6 @@ msgstr "帳號"
 #, fuzzy
 #~ msgid "Invalid day"
 #~ msgstr "無效的編號"
-
-#, fuzzy
-#~ msgid "Invalid type"
-#~ msgstr "不正確會員"
 
 #, fuzzy
 #~ msgid "This Project Has Turned Off The Task Manager"
@@ -25360,10 +25611,6 @@ msgstr "帳號"
 #~ msgid "Invalid full name"
 #~ msgstr "全名錯誤"
 
-#, fuzzy
-#~ msgid "Invalid Group Name"
-#~ msgstr "Unix群組名稱："
-
 #~ msgid "Error doing insert"
 #~ msgstr "新增操作錯誤"
 
@@ -25372,9 +25619,6 @@ msgstr "帳號"
 
 #~ msgid "Error inserting into skill inventory"
 #~ msgstr "錯誤 － 無法新增技能目錄"
-
-#~ msgid "Invalid MessageID"
-#~ msgstr "無效的文章編號"
 
 #~ msgid "Followup"
 #~ msgstr "回覆"

@@ -78,7 +78,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 */
 	function setName($role_name) { // From the PFO spec
 		if ($role_name == '') {
-			$this->setError('Cannot set a role name to empty');
+			$this->setError(_('Cannot set a role name to empty'));
 			return false;
 		}
 		if ($this->getName() != stripslashes($role_name)) {
@@ -87,7 +87,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				$res = db_query_params('SELECT role_name FROM pfo_role WHERE home_group_id IS NULL AND role_name=$1',
 						       array(htmlspecialchars($role_name)));
 				if (db_numrows($res)) {
-					$this->setError('Cannot create a role with this name (already used)');
+					$this->setError(_('Cannot create a role with this name (already used)'));
 					db_rollback();
 					return false;
 				}
@@ -95,7 +95,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 				$res = db_query_params('SELECT role_name FROM pfo_role WHERE home_group_id=$1 AND role_name=$2',
 						       array($this->Group->getID(), htmlspecialchars($role_name)));
 				if (db_numrows($res)) {
-					$this->setError('Cannot create a role with this name (already used)');
+					$this->setError(_('Cannot create a role with this name (already used)'));
 					db_rollback();
 					return false;
 				}
@@ -176,7 +176,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			$res = db_query_params('SELECT role_name FROM pfo_role WHERE home_group_id IS NULL AND LOWER(role_name)=LOWER($1)',
 					       array (htmlspecialchars($role_name)));
 			if (db_numrows($res)) {
-				$this->setError('Cannot create a role with this name (already used)');
+				$this->setError(_('Cannot create a role with this name (already used)'));
 				db_rollback () ;
 				return false;
 			}
@@ -184,7 +184,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			$res = db_query_params('SELECT role_name FROM pfo_role WHERE home_group_id=$1 AND LOWER(role_name)=LOWER($2)',
 					       array ($this->Group->getID(), htmlspecialchars($role_name)));
 			if (db_numrows($res)) {
-				$this->setError('Cannot create a role with this name (already used)');
+				$this->setError(_('Cannot create a role with this name (already used)'));
 				db_rollback () ;
 				return false;
 			}

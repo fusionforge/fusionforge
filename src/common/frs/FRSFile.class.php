@@ -79,11 +79,11 @@ class FRSFile extends Error {
 	function __construct(&$FRSRelease, $file_id=false, $arr=false) {
 		$this->Error();
 		if (!$FRSRelease || !is_object($FRSRelease)) {
-			$this->setError('FRSFile:: No Valid FRSRelease Object');
+			$this->setError(_('Invalid FRS Release Object'));
 			return;
 		}
 		if ($FRSRelease->isError()) {
-			$this->setError('FRSFile:: '.$FRSRelease->getErrorMessage());
+			$this->setError('FRSFile: '.$FRSRelease->getErrorMessage());
 			return;
 		}
 		$this->FRSRelease =& $FRSRelease;
@@ -205,7 +205,7 @@ class FRSFile extends Error {
 						  $file_size,
 						  time ())) ;
 		if (!$result) {
-			$this->setError('FRSFile::create() Error Adding Release: '.db_error());
+			$this->setError(_('Error Adding Release: ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -231,7 +231,7 @@ class FRSFile extends Error {
 					array ($file_id,
 					       $this->FRSRelease->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('FRSFile::fetchData()  Invalid file_id');
+			$this->setError(_('Invalid file_id'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -396,7 +396,7 @@ class FRSFile extends Error {
 					return false;
 				}
 			} else {
-				$this->setError('FRSFile:: No Valid FRSRelease Object');
+				$this->setError(_('Invalid FRS Release Object'));
 				return false;
 			}
 		} else {
@@ -414,7 +414,7 @@ class FRSFile extends Error {
 					       $this->getID())) ;
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('FRSFile::update() Error On Update: '.db_error());
+			$this->setError(_('Error On Update: ').db_error());
 			db_rollback();
 			return false;
 		}

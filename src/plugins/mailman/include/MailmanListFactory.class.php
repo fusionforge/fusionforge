@@ -71,7 +71,7 @@ class MailmanListFactory extends Error {
 			exit_no_group();
 		}
 		if ($Group->isError()) {
-			$this->setError('MailmanListFactory:: '.$Group->getErrorMessage());
+			$this->setError('MailmanListFactory: '.$Group->getErrorMessage());
 			return false;
 		}
 		$this->Group =& $Group;

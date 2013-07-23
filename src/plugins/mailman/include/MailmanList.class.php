@@ -86,7 +86,7 @@ class MailmanList extends Error {
 			exit_no_group();
 		}
 		if ($Group->isError()) {
-			$this->setError('MailmanList:: '.$Group->getErrorMessage());
+			$this->setError('MailmanList: '.$Group->getErrorMessage());
 			return false;
 		}
 		$this->Group =& $Group;
@@ -147,7 +147,7 @@ class MailmanList extends Error {
 		$realListName = strtolower($this->Group->getUnixName().'-'.$listName);
 
 		if(!validate_email($realListName.'@'.forge_get_config('lists_host'))) {
-			$this->setError(_('Invalid List Name') . ': ' .
+			$this->setError(_('Invalid List Name') . _(': ') .
 					$realListName.'@'.forge_get_config('lists_host'));
 			return false;
 		}
@@ -438,7 +438,7 @@ class MailmanList extends Error {
 	function deleteList($sure,$really_sure) {
 		$current_user=UserManager::instance()->getCurrentUser();
 		if (!$sure || !$really_sure) {
-			$this->setError('Missing params');
+			$this->setError(_('Missing params'));
 			return false;
 		}
 
@@ -448,7 +448,7 @@ class MailmanList extends Error {
 		}
 		$res = $this->_mailingDAO->deleteList($this->Group->getID(),$this->getID());
 		if (!$res) {
-			$this->setError('Could Not Delete List: '.db_error());
+			$this->setError(_('Could Not Delete List: ').db_error());
 			return false;
 		}
 		require_once 'mailman/include/events/SystemEvent_MAILMAN_LIST_DELETE.class.php';

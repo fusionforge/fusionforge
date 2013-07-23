@@ -70,7 +70,7 @@ if ($dirid) {
 		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($g->getErrorMessage()));
 	}
 	if ($ndg->getState() != 2) {
-		$error_msg = _('Invalid folder.');
+		$error_msg = _('Invalid folder');
 		session_redirect('/docman/?group_id='.$group_id.'&view=listtrashfile&error_msg='.urlencode($error_msg));
 	}
 }

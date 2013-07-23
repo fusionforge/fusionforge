@@ -178,11 +178,11 @@ class ForumHTML extends Error {
 	function ForumHTML(&$Forum) {
 		$this->Error();
 		if (!$Forum || !is_object($Forum)) {
-			$this->setError('ForumMessage:: No Valid Forum Object');
+			$this->setError(_('Invalid Forum Object'));
 			return false;
 		}
 		if ($Forum->isError()) {
-			$this->setError('ForumMessage:: '.$Forum->getErrorMessage());
+			$this->setError('ForumMessage: '.$Forum->getErrorMessage());
 			return false;
 		}
 		$this->Forum =& $Forum;

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-22 16:04+0200\n"
+"POT-Creation-Date: 2013-07-23 11:29+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -29,6 +29,8 @@ msgstr "Engadiuse o usuario correctamente"
 #: common/docman/actions/addfile.php:124 common/docman/actions/addfile.php:160
 #: common/docman/DocumentGroup.class.php:220
 #: common/docman/DocumentGroup.class.php:820
+#: common/tracker/actions/tracker.php:131
+#: common/tracker/actions/tracker.php:365 www/project/admin/editimages.php:59
 msgid "Invalid file name."
 msgstr "o nome do ficheiro non é válido."
 
@@ -424,7 +426,8 @@ msgstr "Proxecto "
 #: common/forum/Forum.class.php:601 common/forum/Forum.class.php:627
 #: common/forum/Forum.class.php:635 common/forum/Forum.class.php:643
 #: common/forum/Forum.class.php:659 common/forum/ForumHTML.class.php:73
-#: common/include/exit.php:80 common/mail/MailingListFactory.class.php:104
+#: common/include/exit.php:80 common/include/User.class.php:313
+#: common/mail/MailingListFactory.class.php:104
 #: common/tracker/actions/browse.php:406 common/tracker/actions/browse.php:409
 #: common/tracker/actions/query.php:329 common/tracker/actions/query.php:344
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
@@ -442,6 +445,8 @@ msgstr "Proxecto "
 #: cronjobs/send_pending_items_mail.php:119
 #: cronjobs/send_pending_items_mail.php:120
 #: cronjobs/send_pending_items_mail.php:121
+#: plugins/forumml/www/forumml_utils.php:686
+#: plugins/mailman/include/MailmanList.class.php:150
 #: plugins/mailman/include/MailmanList.class.php:165
 #: plugins/mailman/include/MailmanList.class.php:249
 #: plugins/mailman/include/MailmanList.class.php:376
@@ -466,7 +471,7 @@ msgstr "Proxecto "
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:632
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:634
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/lostlogin.php:84
-#: www/account/register.php:207 www/admin/approve-pending.php:194
+#: www/account/register.php:205 www/admin/approve-pending.php:194
 #: www/admin/database.php:162 www/admin/responses_admin.php:42
 #: www/admin/trove/trove_cat_edit.php:70 www/export/rssAboTask.php:142
 #: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
@@ -476,7 +481,7 @@ msgstr "Proxecto "
 #: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
 #: www/pm/add_task.php:74 www/pm/add_task.php:81 www/pm/add_task.php:88
 #: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
-#: www/pm/add_task.php:130 www/pm/add_task.php:149
+#: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/calendar.php:59
 #: www/project/admin/roledelete.php:62 www/register/index.php:178
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
@@ -1076,6 +1081,7 @@ msgid "Direct Webdav URL"
 msgstr ""
 
 #: common/docman/views/listfile.php:112
+#: common/docman/views/listtrashfile.php:73
 #, fuzzy
 msgid "Invalid folder"
 msgstr "Usuario non válido "
@@ -1159,7 +1165,7 @@ msgstr "Nome de ficheiro "
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:148
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
-#: www/account/register.php:165 www/people/editjob.php:52
+#: www/account/register.php:163 www/people/editjob.php:52
 #: www/people/editjob.php:74 www/people/editprofile.php:107
 #: www/people/people_utils.php:404 www/people/skills_utils.php:49
 #: www/pm/admin/index.php:188
@@ -1324,8 +1330,8 @@ msgstr ""
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:54
 #: plugins/hudson/include/HudsonBuild.class.php:110
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:61
-#: www/account/editsshkeys.php:59 www/account/index.php:148
-#: www/account/index.php:325 www/admin/cronman.php:78
+#: www/account/editsshkeys.php:59 www/account/index.php:146
+#: www/account/index.php:309 www/admin/cronman.php:78
 #: www/admin/grouplist.php:118 www/admin/massmail.php:158
 #: www/admin/search.php:88 www/admin/search.php:168 www/admin/userlist.php:115
 #: www/developer/diary.php:56 www/developer/diary.php:87
@@ -1457,11 +1463,6 @@ msgstr "Engadir un proxecto novo"
 #, fuzzy
 msgid "Documents are also available thru webdav access"
 msgstr "Información non dispoñíbel"
-
-#: common/docman/views/listtrashfile.php:73
-#, fuzzy
-msgid "Invalid folder."
-msgstr "Usuario non válido "
 
 #: common/docman/views/listtrashfile.php:108
 msgid "Delete permanently all documents and folders with deleted status."
@@ -1619,7 +1620,7 @@ msgstr "Data de comezo"
 
 #: common/docman/views/reporting.php:92 common/docman/views/reporting.php:94
 #: common/frs/FRSRelease.class.php:294 common/frs/FRSRelease.class.php:297
-#: common/frs/FRSRelease.class.php:301 common/include/utils.php:539
+#: common/frs/FRSRelease.class.php:301 common/include/utils.php:488
 #: common/tracker/actions/query.php:403
 #: common/tracker/views/form-addcanned.php:68
 #: common/tracker/views/form-addcanned.php:71
@@ -1685,9 +1686,9 @@ msgstr "Data de comezo"
 #: plugins/mailman/www/admin/index.php:183
 #: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
 #: www/account/lostpw.php:90 www/account/pending-resend.php:69
-#: www/account/pending-resend.php:71 www/account/register.php:165
-#: www/account/register.php:225 www/account/register.php:231
-#: www/account/register.php:237 www/account/register.php:243
+#: www/account/pending-resend.php:71 www/account/register.php:163
+#: www/account/register.php:212 www/account/register.php:218
+#: www/account/register.php:224 www/account/register.php:230
 #: www/account/verify.php:76 www/account/verify.php:78
 #: www/account/verify.php:86 www/activity/index.php:179
 #: www/activity/index.php:180 www/activity/index.php:181
@@ -2123,7 +2124,7 @@ msgstr "Liberacións"
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:53
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:73
 #: plugins/webanalytics/view/admin/updateLinkValue.php:41
-#: www/account/index.php:353 www/account/lostlogin.php:107
+#: www/account/index.php:337 www/account/lostlogin.php:107
 #: www/admin/groupedit.php:224 www/admin/trove/trove_cat_edit.php:152
 #: www/admin/useredit.php:236 www/admin/useredit.php:315
 #: www/admin/vhost.php:189 www/forum/admin/index.php:162
@@ -2265,6 +2266,11 @@ msgstr "Non ten permiso para acceder a esta páxina"
 msgid "Forum not found"
 msgstr "Non se achou o foro "
 
+#: common/forum/ForumFactory.class.php:193
+#, fuzzy
+msgid "Thread not found"
+msgstr "Seguen un fío"
+
 #: common/forum/ForumHTML.class.php:58 www/forum/forum.php:157
 #, fuzzy
 msgid "Forum: "
@@ -2332,6 +2338,11 @@ msgstr "Gardar lugar "
 #: common/forum/ForumHTML.class.php:155 common/forum/ForumHTML.class.php:156
 msgid "Start New Thread"
 msgstr "Comezar unha nova conversa"
+
+#: common/forum/ForumHTML.class.php:181 common/forum/ForumMessage.class.php:60
+#, fuzzy
+msgid "Invalid Forum Object"
+msgstr "non é un obxecto válido de foro "
 
 #: common/forum/ForumHTML.class.php:205
 msgid "This is the content of the pending message"
@@ -2429,10 +2440,6 @@ msgstr "Podería comentar se estivese <a href=\"%1$s\">conectado</a>."
 msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr "Por favor, <a href=\"%1$s\">conéctese</a>"
 
-#: common/forum/ForumMessage.class.php:60
-msgid "No Valid Forum Object"
-msgstr "non é un obxecto válido de foro "
-
 #: common/forum/ForumMessage.class.php:88
 msgid "Group_forum_id in db result does not match Forum Object"
 msgstr "O Group_forum_id na base de datos non coincide co obxecto do foro "
@@ -2471,13 +2478,15 @@ msgid "Error: a forum message must include a message body and a subject."
 msgstr "Debe incluír o contido e o asunto da mensaxe."
 
 #: common/forum/ForumMessage.class.php:373
-msgid "ForumMessage::create() No Valid ParentMessage Object"
-msgstr "ForumMessage::create() o obxecto ParentMessage non é válido"
+#, fuzzy
+msgid "Invalid ParentMessage Object"
+msgstr "o obxecto ParentMessage non é válido"
 
 #: common/forum/ForumMessage.class.php:407
 #: common/forum/ForumMessage.class.php:426
 #: common/forum/ForumMessage.class.php:579
-msgid "Invalid Message ID"
+#, fuzzy
+msgid "Invalid Message Id"
 msgstr "O ID da mensaxe non é válido"
 
 #: common/forum/ForumMessage.class.php:660
@@ -2536,6 +2545,21 @@ msgstr ""
 "Para deixar de monitorizalo, conéctese a %s e visite: \n"
 "%s\n"
 
+#: common/forum/ForumMessage.class.php:826
+#, fuzzy
+msgid "Message not found"
+msgstr "Non se atopou a mensaxe"
+
+#: common/forum/ForumMessageFactory.class.php:58
+#, fuzzy
+msgid "Invalid group_form_id"
+msgstr "A operación non é válida"
+
+#: common/frs/FRSFile.class.php:82 common/frs/FRSFile.class.php:399
+#, fuzzy
+msgid "Invalid FRS Release Object"
+msgstr "A enquisa non é válida"
+
 #: common/frs/FRSFile.class.php:121 common/frs/include/frs_utils.php:249
 msgid "FRSFile Name Must Be At Least 3 Characters"
 msgstr "O nome de ficheiro de FRSFile debe ter, cando menos, 3 caracteres "
@@ -2561,6 +2585,28 @@ msgstr "Este nome de ficheiro xa existe no espazo do proxecto "
 msgid "File cannot be moved to the permanent location"
 msgstr "O ficheiro non pode moverse á posición permanente"
 
+#: common/frs/FRSFile.class.php:208 common/frs/FRSRelease.class.php:158
+#, fuzzy
+msgid "Error Adding Release: "
+msgstr "Produciuse un erro ao engadir a base datos "
+
+#: common/frs/FRSFile.class.php:234
+#, fuzzy
+msgid "Invalid file_id"
+msgstr "o nome do ficheiro non é válido."
+
+#: common/frs/FRSFile.class.php:417 common/frs/FRSPackage.class.php:396
+#: common/frs/FRSRelease.class.php:427 common/pm/ProjectGroup.class.php:347
+#, fuzzy
+msgid "Error On Update: "
+msgstr "Hai un erro na actualización:"
+
+#: common/frs/FRSFileProcessorType.class.php:61
+#: common/frs/FRSFileType.class.php:61
+#, fuzzy
+msgid "Invalid type_id"
+msgstr "O tipo non é válido"
+
 #: common/frs/FRSPackage.class.php:139 common/frs/FRSPackage.class.php:371
 #: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:388
 msgid "FRSPackage Name Must Be At Least 3 Characters"
@@ -2571,14 +2617,83 @@ msgstr "O nome do paquete de FRS debe ter, cando menos, 3 caracteres "
 msgid "Package Name can only be alphanumeric"
 msgstr "FRSPackage::Actualización: o nome do paquete só pode ser alfanumérico"
 
+#: common/frs/FRSPackage.class.php:154
+#, fuzzy
+msgid "Error Adding Package: Name Already Exists"
+msgstr "Ese nome de elemento xa existe"
+
+#: common/frs/FRSPackage.class.php:165
+#, fuzzy
+msgid "Error Adding Package: "
+msgstr "Produciuse un erro ao engadir a base datos "
+
+#: common/frs/FRSPackage.class.php:205
+#, fuzzy
+msgid "Invalid package_id"
+msgstr "A data non é válida"
+
+#: common/frs/FRSPackage.class.php:291
+#, fuzzy
+msgid "Unable to add monitor: "
+msgstr "Non foi posíbel engadir o seguimento"
+
+#: common/frs/FRSPackage.class.php:323
+#, fuzzy
+msgid "Error On querying monitor count: "
+msgstr "Produciuse un erro ao crear a mensaxe de foro:"
+
+#: common/frs/FRSPackage.class.php:384
+#, fuzzy
+msgid "Error Updating Package: Name Already Exists"
+msgstr "Ese nome de elemento xa existe"
+
+#: common/frs/FRSPackage.class.php:403
+#, fuzzy
+msgid "Error Updating Package: Couldn't fetch data"
+msgstr "Produciuse un erro ao actualizar o campo personalizado"
+
+#: common/frs/FRSPackage.class.php:413
+#, fuzzy
+msgid "Error Updating Package: Directory Already Exists"
+msgstr "Ese nome de elemento xa existe"
+
+#: common/frs/FRSPackage.class.php:418
+#, fuzzy
+msgid "Error Updating Package: Couldn't rename dir"
+msgstr "Ese nome de elemento xa existe"
+
+#: common/frs/FRSPackage.class.php:465
+#, fuzzy
+msgid "Release Error: "
+msgstr "Publicado por:"
+
+#: common/frs/FRSPackage.class.php:475
+msgid "Package delete error: trying to delete root dir"
+msgstr ""
+
+#: common/frs/FRSPackage.class.php:504
+#, fuzzy
+msgid "No valid max release id"
+msgstr "o nome do ficheiro non é válido."
+
 #: common/frs/FRSPackage.class.php:525
 msgid "Cannot open the file archive."
 msgstr ""
+
+#: common/frs/FRSRelease.class.php:83
+#, fuzzy
+msgid "Invalid FRS Package Object"
+msgstr "O ano non é válido"
 
 #: common/frs/FRSRelease.class.php:143
 #, fuzzy
 msgid "Error Adding Release: Name Already Exists"
 msgstr "Ese nome de elemento xa existe"
+
+#: common/frs/FRSRelease.class.php:187
+#, fuzzy
+msgid "Invalid release_id"
+msgstr "o nome do ficheiro non é válido."
 
 #: common/frs/FRSRelease.class.php:286
 #, php-format
@@ -2615,6 +2730,30 @@ msgstr ""
 "Recibe este correo porque pediu que se lle notificaran as novas versións "
 "publicades deste paquete. Se non desexa que se lle notifique de aquí en "
 "diante, conéctese a %s e prema esta ligazón:"
+
+#: common/frs/FRSRelease.class.php:364
+msgid "Release delete error: trying to delete root dir"
+msgstr ""
+
+#: common/frs/FRSRelease.class.php:408
+#, fuzzy
+msgid "Error On Update: Name Already Exists"
+msgstr "Ese nome de elemento xa existe"
+
+#: common/frs/FRSRelease.class.php:434
+#, fuzzy
+msgid "Error Updating Release: Couldn't fetch data"
+msgstr "Produciuse un erro ao actualizar o campo personalizado"
+
+#: common/frs/FRSRelease.class.php:444
+#, fuzzy
+msgid "Error Updating Release: Directory Already Exists"
+msgstr "Ese nome de elemento xa existe"
+
+#: common/frs/FRSRelease.class.php:449
+#, fuzzy
+msgid "Error Updating Release: Couldn't rename dir"
+msgstr "Ese nome de elemento xa existe"
 
 #: common/frs/include/frs_utils.php:76
 #, fuzzy
@@ -2687,7 +2826,7 @@ msgid "Name is reserved."
 msgstr "Este nome está reservado."
 
 #: common/include/account.php:89 common/include/account.php:93
-#: common/include/User.class.php:327
+#: common/include/User.class.php:318
 msgid "That username already exists."
 msgstr "Este nome de usuario xa existe. "
 
@@ -2726,8 +2865,10 @@ msgstr "Manipulación da base de datos"
 msgid "Permission denied."
 msgstr "Permiso denegado. "
 
-#: common/include/Error.class.php:147 common/tracker/actions/tracker.php:84
-#: www/account/change_email.php:38
+#: common/include/Error.class.php:147 common/include/User.class.php:313
+#: common/include/User.class.php:893 common/include/User.class.php:946
+#: common/tracker/actions/tracker.php:84
+#: plugins/forumml/www/forumml_utils.php:686 www/account/change_email.php:38
 msgid "Invalid Email Address"
 msgstr "O enderezo de correo non é válido"
 
@@ -2813,9 +2954,10 @@ msgstr "Non se achou o grupo "
 msgid "Group object already exists"
 msgstr "Grupo::create: O obxecto de grupo xa existe"
 
-#: common/include/Group.class.php:312
-msgid "Invalid Unix name"
-msgstr "O nome unix non é válido"
+#: common/include/Group.class.php:312 common/include/User.class.php:305
+#: common/include/User.class.php:365
+msgid "Invalid Unix Name."
+msgstr "O nome de Unix non é válido."
 
 #: common/include/Group.class.php:315 common/include/Group.class.php:319
 #: common/include/User.class.php:309
@@ -3323,6 +3465,15 @@ msgid "Your request to join the %s project was granted by an administrator."
 msgstr ""
 "A súa petición de unirse ao proxecto %1$s foi aprobada polo administrador."
 
+#: common/include/GroupJoinRequest.class.php:287
+msgid "Must be sure before deleting"
+msgstr ""
+
+#: common/include/GroupJoinRequest.class.php:298
+#, fuzzy
+msgid "Could Not Delete: "
+msgstr "Non se puido eliminar o foro de novas: %d"
+
 #: common/include/group_section_texts.php:29
 #: common/include/Navigation.class.php:425
 #: common/reporting/report_utils.php:147 plugins/blocks/www/index.php:151
@@ -3362,6 +3513,15 @@ msgstr "Sistema de liberación de ficheiros"
 #: www/admin/index.php:187 www/news/index.php:34
 msgid "News"
 msgstr "Novas "
+
+#: common/include/MailParser.class.php:35
+#, fuzzy
+msgid "Error - file too large"
+msgstr "Produciuse un erro - esa característica non está activada."
+
+#: common/include/MailParser.class.php:87
+msgid "Error - only text/plain supported at this time"
+msgstr ""
 
 #: common/include/Navigation.class.php:175
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:89
@@ -3591,7 +3751,7 @@ msgstr ""
 msgid "More than one value for the plugin + key"
 msgstr ""
 
-#: common/include/pre.php:294
+#: common/include/pre.php:285
 #, php-format
 msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
@@ -3857,6 +4017,17 @@ msgstr ""
 msgid "Documentation manager"
 msgstr "Xestión de documentación"
 
+#: common/include/Role.class.php:81
+#, fuzzy
+msgid "Cannot set a role name to empty"
+msgstr "Non se pode eliminar a etiqueta: %s"
+
+#: common/include/Role.class.php:90 common/include/Role.class.php:98
+#: common/include/Role.class.php:179 common/include/Role.class.php:187
+#, fuzzy
+msgid "Cannot create a role with this name (already used)"
+msgstr "Non se pode eliminar a etiqueta: %s"
+
 #: common/include/Role.class.php:170
 #, fuzzy
 msgid "Cannot create a role with an empty name"
@@ -4027,7 +4198,8 @@ msgid "Passwords do not match"
 msgstr "Os contrasinais non coinciden "
 
 #: common/include/User.class.php:295
-msgid "Invalid Password:"
+#, fuzzy
+msgid "Invalid Password"
 msgstr "O contrasinal non é válido:"
 
 #: common/include/User.class.php:300
@@ -4035,20 +4207,7 @@ msgstr "O contrasinal non é válido:"
 msgid "Invalid Unix Name (must not contain uppercase characters)"
 msgstr "Nome da conta (non use maiúsculas):"
 
-#: common/include/User.class.php:305 common/include/User.class.php:374
-msgid "Invalid Unix Name."
-msgstr "O nome de Unix non é válido."
-
-#: common/include/User.class.php:313
-#, fuzzy
-msgid "Invalid Email Address:"
-msgstr "O enderezo de correo non é válido"
-
-#: common/include/User.class.php:317 common/include/User.class.php:570
-msgid "Invalid Jabber Address"
-msgstr "O enderezo de Jabber non é válido"
-
-#: common/include/User.class.php:332
+#: common/include/User.class.php:323
 msgid ""
 "User with this email already exists - use people search to recover your "
 "login."
@@ -4056,12 +4215,17 @@ msgstr ""
 "Xa existe un usuario con este enderezo - empregue o buscador de persoas para "
 "recuperar o seu nome de conta."
 
-#: common/include/User.class.php:410
+#: common/include/User.class.php:399
 #, fuzzy
 msgid "Insert Failed: "
 msgstr "Fallou a inserción"
 
-#: common/include/User.class.php:451
+#: common/include/User.class.php:406
+#, fuzzy
+msgid "Could Not Get User Id: "
+msgstr "Non se puido obter o Rol"
+
+#: common/include/User.class.php:440
 #, fuzzy, php-format
 msgid ""
 "Thank you for registering on the %3$s web site. You have\n"
@@ -4098,82 +4262,111 @@ msgstr ""
 "\n"
 "-- o equipo de %3$s \n"
 
-#: common/include/User.class.php:473
+#: common/include/User.class.php:462
 #, php-format
 msgid "%1$s Account Registration"
 msgstr "Rexistro da conta de %1$s "
 
-#: common/include/User.class.php:501
+#: common/include/User.class.php:490
 #, fuzzy
 msgid "Could Not Delete From artifact_monitor:"
 msgstr "Non se puido obter o Factory"
 
-#: common/include/User.class.php:508
+#: common/include/User.class.php:497
 #, fuzzy
 msgid "Could Not Delete From artifact_type_monitor:"
 msgstr "Non se puido obter o Factory"
 
-#: common/include/User.class.php:515
+#: common/include/User.class.php:504
 #, fuzzy
 msgid "Could Not Delete From forum_monitored_forums:"
 msgstr "Non se puido eliminar o foro de novas: %d"
 
-#: common/include/User.class.php:522
+#: common/include/User.class.php:511
 #, fuzzy
 msgid "Could Not Delete From filemodule_monitor:"
 msgstr "Non se puido eliminar o foro de novas: %d"
 
-#: common/include/User.class.php:625
+#: common/include/User.class.php:600
 #, fuzzy
-msgid "ERROR - Could Not Update User Object:"
+msgid "Error - Could Not Update User Object:"
 msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#: common/include/User.class.php:719
+#: common/include/User.class.php:694
 #, fuzzy
-msgid "ERROR: Invalid status value"
+msgid "Error: Invalid status value"
 msgstr "Ese non é un valor de avaliación válido"
 
-#: common/include/User.class.php:733
+#: common/include/User.class.php:698
+msgid "Error: You cannot set pending status if user is suspend or active"
+msgstr ""
+
+#: common/include/User.class.php:708
 #, fuzzy
-msgid "ERROR - Could Not Update User Status:"
+msgid "Error - Could Not Update User Status:"
 msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#: common/include/User.class.php:926 common/include/User.class.php:979
+#: common/include/User.class.php:774
+#, fuzzy
+msgid "Error - Could Not Update User Unix Status: "
+msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
+
+#: common/include/User.class.php:901 common/include/User.class.php:954
 msgid "User with this email already exists."
 msgstr "Xa existe un usuario con este correo electrónico."
 
-#: common/include/User.class.php:1088
-#, fuzzy, php-format
-msgid "ERROR: Invalid Shell %s"
-msgstr "Ese non é un valor de avaliación válido"
-
-#: common/include/User.class.php:1097
+#: common/include/User.class.php:912
 #, fuzzy
-msgid "ERROR - Could Not Update User Unix Shell:"
+msgid "Error - Could Not Update User Email: "
 msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#: common/include/User.class.php:1262
+#: common/include/User.class.php:963
+#, fuzzy
+msgid "Error - Could Not Update User Email And Hash: "
+msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
+
+#: common/include/User.class.php:990
+#, fuzzy
+msgid "Error - Could Not Update real name of user : "
+msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
+
+#: common/include/User.class.php:1063
+#, fuzzy, php-format
+msgid "Error: Invalid Shell %s"
+msgstr "Ese non é un valor de avaliación válido"
+
+#: common/include/User.class.php:1072
+#, fuzzy
+msgid "Error - Could Not Update User Unix Shell:"
+msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
+
+#: common/include/User.class.php:1219
 #, fuzzy
 msgid "SSH Key already in use"
 msgstr "A consulta xa existe "
 
-#: common/include/User.class.php:1270
+#: common/include/User.class.php:1227
 #, fuzzy
-msgid "ERROR - Could Not Add User SSH Key:"
+msgid "Error - Could Not Add User SSH Key:"
 msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#: common/include/User.class.php:1287
+#: common/include/User.class.php:1244
 #, fuzzy
-msgid "ERROR - Could Not Delete User SSH Key:"
+msgid "Error - Could Not Delete User SSH Key:"
 msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#: common/include/User.class.php:1434 common/include/User.class.php:1470
-#: common/include/User.class.php:1495
+#: common/include/User.class.php:1377
 #, fuzzy
-msgid "ERROR - Could Not Change User Password:"
+msgid "Error: "
+msgstr "Erro "
+
+#: common/include/User.class.php:1391 common/include/User.class.php:1427
+#: common/include/User.class.php:1452
+#, fuzzy
+msgid "Error - Could Not Change User Password:"
 msgstr "Cambiar o contrasinal "
 
-#: common/include/User.class.php:1751
+#: common/include/User.class.php:1708
 #, php-format
 msgid ""
 "New User %1$s registered and validated\n"
@@ -4181,7 +4374,7 @@ msgid ""
 "Email: %3$s\n"
 msgstr ""
 
-#: common/include/User.class.php:1756
+#: common/include/User.class.php:1713
 #, fuzzy, php-format
 msgid "New %1$s User"
 msgstr "O equipo de %1$s"
@@ -4190,53 +4383,53 @@ msgstr "O equipo de %1$s"
 msgid "UTF-8"
 msgstr "UTF-8 "
 
-#: common/include/utils.php:539
+#: common/include/utils.php:488
 msgid "Priority Colors"
 msgstr "Cores das prioridades "
 
-#: common/include/utils.php:943 common/include/utils.php:947
-#: common/include/utils.php:958
+#: common/include/utils.php:892 common/include/utils.php:896
+#: common/include/utils.php:907
 msgid "bytes"
 msgstr "bytes"
 
-#: common/include/utils.php:943 common/include/utils.php:958
+#: common/include/utils.php:892 common/include/utils.php:907
 msgid "kB"
 msgstr ""
 
-#: common/include/utils.php:943
+#: common/include/utils.php:892
 msgid "MB"
 msgstr ""
 
-#: common/include/utils.php:943
+#: common/include/utils.php:892
 msgid "GB"
 msgstr ""
 
-#: common/include/utils.php:943
+#: common/include/utils.php:892
 msgid "TB"
 msgstr ""
 
-#: common/include/utils.php:947 common/include/utils.php:958
+#: common/include/utils.php:896 common/include/utils.php:907
 msgid "KiB"
 msgstr ""
 
-#: common/include/utils.php:947
+#: common/include/utils.php:896
 msgid "MiB"
 msgstr ""
 
-#: common/include/utils.php:947
+#: common/include/utils.php:896
 msgid "GiB"
 msgstr ""
 
-#: common/include/utils.php:947
+#: common/include/utils.php:896
 msgid "TiB"
 msgstr ""
 
-#: common/include/utils.php:1316
+#: common/include/utils.php:1265
 #, fuzzy
 msgid "Error: a mailing list with the same email address already exists."
 msgstr "Xa existe un usuario con este correo electrónico."
 
-#: common/include/utils.php:1334
+#: common/include/utils.php:1283
 #, fuzzy
 msgid "Error: a forum with the same email address already exists."
 msgstr "Xa existe un usuario con este correo electrónico."
@@ -4341,6 +4534,11 @@ msgstr "Categoría do proxecto: o nome e a asignación son campos obrigatorios"
 #, fuzzy
 msgid "Subproject Description Must Be At Least 10 Characters"
 msgstr "A descrición do documento debe ter, cando menos, 10 caracteres"
+
+#: common/pm/ProjectGroup.class.php:195
+#, fuzzy
+msgid "Invalid group_project_id"
+msgstr "A operación non é válida"
 
 #: common/pm/ProjectGroupFactory.class.php:62
 #, php-format
@@ -5600,12 +5798,6 @@ msgstr ""
 msgid "Could Not Create File Object"
 msgstr "Non se puido obter o obxecto de foro"
 
-#: common/tracker/actions/tracker.php:131
-#: common/tracker/actions/tracker.php:365 www/project/admin/editimages.php:59
-#, fuzzy
-msgid "Invalid filename"
-msgstr "o nome do ficheiro non é válido."
-
 #: common/tracker/actions/tracker.php:134
 msgid "Could Not Attach File to Item: "
 msgstr ""
@@ -5645,7 +5837,7 @@ msgstr "O ficheiro enviouse correctamente"
 
 #: common/tracker/actions/tracker.php:388
 #, fuzzy
-msgid "Could Not Create File Object::"
+msgid "Could Not Create File Object: "
 msgstr "Non se puido obter o obxecto de foro"
 
 #: common/tracker/actions/tracker.php:393
@@ -5685,9 +5877,10 @@ msgid "Title and Message Body are required"
 msgstr "Artefacto: é necesario o corpo da mensaxe "
 
 #: common/tracker/Artifact.class.php:142
+#: common/tracker/ArtifactExtraField.class.php:67
 #, fuzzy
-msgid "No Valid Artifact Type"
-msgstr "Non é un obxecto: Tipo de artefacto: %d"
+msgid "Invalid Artifact Type"
+msgstr "ID non válido"
 
 #: common/tracker/Artifact.class.php:154
 #, fuzzy
@@ -5838,6 +6031,11 @@ msgstr ""
 msgid "This Tracker already uses custom statuses"
 msgstr ""
 
+#: common/tracker/ArtifactExtraField.class.php:233
+#, fuzzy
+msgid "Invalid ArtifactExtraField ID"
+msgstr "ID non válido"
+
 #: common/tracker/ArtifactExtraField.class.php:321
 #: common/tracker/views/form-addextrafield.php:124
 msgid "Select Box"
@@ -5911,6 +6109,22 @@ msgstr ""
 "Ficheiro de artefacto: son precisos o nome de ficheiro, tipo, tamaño e os "
 "datos"
 
+#: common/tracker/ArtifactHistory.class.php:53
+#: common/tracker/ArtifactMessage.class.php:53
+#, fuzzy
+msgid "Invalid Artifact"
+msgstr "ID non válido"
+
+#: common/tracker/ArtifactHistory.class.php:82
+#, fuzzy
+msgid "Invalid ArtifactHistory ID"
+msgstr "ID non válido"
+
+#: common/tracker/ArtifactMessage.class.php:89
+#, fuzzy
+msgid "Error: Logged In User Bug Could Not Get User Object"
+msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
+
 #: common/tracker/ArtifactMessage.class.php:92
 msgid "Logged In: YES"
 msgstr "Dentro do sistema: SI "
@@ -5918,6 +6132,18 @@ msgstr "Dentro do sistema: SI "
 #: common/tracker/ArtifactMessage.class.php:98
 msgid "Logged In: NO"
 msgstr "Dentro do sistema: NON "
+
+#: common/tracker/ArtifactMessage.class.php:139
+#, fuzzy
+msgid "Invalid ArtifactMessage ID"
+msgstr "ID non válido"
+
+#: common/tracker/ArtifactQuery.class.php:148
+#: common/tracker/ArtifactQuery.class.php:716
+#: common/tracker/ArtifactQuery.class.php:770
+#, fuzzy
+msgid "Must Be Logged In"
+msgstr "Debe ter iniciado sesión primeiro"
 
 #: common/tracker/ArtifactQuery.class.php:153
 msgid "Query already exists"
@@ -6123,7 +6349,7 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:340
 #: plugins/scmsvn/common/SVNPlugin.class.php:222
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
-#: www/account/editsshkeys.php:51 www/account/index.php:317
+#: www/account/editsshkeys.php:51 www/account/index.php:301
 #: www/admin/useredit.php:262 www/admin/useredit.php:292
 #: www/project/admin/editimages.php:267 www/reporting/usersummary.php:101
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:44
@@ -6187,6 +6413,12 @@ msgstr ""
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:127
 msgid "Indicates required fields."
 msgstr "Indica campos obrigados"
+
+#: common/tracker/Roadmap.class.php:75
+#: common/tracker/RoadmapFactory.class.php:69
+#, fuzzy
+msgid "Invalid Group"
+msgstr "Usuario non válido "
 
 #: common/tracker/Roadmap.class.php:104
 #, fuzzy, php-format
@@ -6850,7 +7082,7 @@ msgid "Configuring allowed roles for the transitions from %1$s to %2$s"
 msgstr "Configurar os roles permitidos para as transicións de %1$s a %2$s"
 
 #: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:56
-#: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:260
+#: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:244
 #: www/include/Layout.class.php:1343
 msgid "Preferences"
 msgstr "Preferencias "
@@ -7368,7 +7600,7 @@ msgid ""
 "directory ...) during the last 4 weeks."
 msgstr ""
 
-#: common/widget/Widget_ProjectInfo.class.php:32 www/include/user_home.php:90
+#: common/widget/Widget_ProjectInfo.class.php:32 www/include/user_home.php:89
 msgid "Project Info"
 msgstr "Información do proxecto"
 
@@ -8271,6 +8503,10 @@ msgstr "O hash de confirmación non é válido "
 msgid "HTML editor (ckeditor)"
 msgstr ""
 
+#: plugins/ckeditor/common/ckeditorPlugin.class.php:106
+msgid "Unable to activate ckeditor plugin, package ckeditor not found."
+msgstr ""
+
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:255
 msgid "Compact preview of local user"
 msgstr ""
@@ -8968,11 +9204,6 @@ msgstr "Anexar ficheiros"
 #: plugins/forumml/www/forumml_utils.php:604 plugins/forumml/www/index.php:128
 msgid "Erase"
 msgstr ""
-
-#: plugins/forumml/www/forumml_utils.php:686
-#, fuzzy
-msgid "Invalid email "
-msgstr "O enderezo de correo electrónico non é válido."
 
 #: plugins/forumml/www/forumml_utils.php:733
 #, fuzzy
@@ -10430,6 +10661,16 @@ msgstr "Listas de correo existentes"
 #, fuzzy
 msgid "Error On Query:"
 msgstr "Hai un erro na actualización:"
+
+#: plugins/mailman/include/MailmanList.class.php:441
+#, fuzzy
+msgid "Missing params"
+msgstr "Faltan algúns parámetros"
+
+#: plugins/mailman/include/MailmanList.class.php:451
+#, fuzzy
+msgid "Could Not Delete List: "
+msgstr "Non se puido eliminar o foro de novas: %d"
 
 #: plugins/mailman/include/mailmanPlugin.class.php:137
 #, fuzzy
@@ -14236,6 +14477,7 @@ msgid "Old password is incorrect"
 msgstr "O contrasinal antigo é incorrecto "
 
 #: www/account/change_pw.php:53 www/account/lostlogin.php:62
+#: www/admin/passedit.php:54
 msgid "You must supply valid password (at least 6 chars)."
 msgstr ""
 "Ten de proporcionar un contrasinal válido (con, cando menos, 6 caracteres). "
@@ -14269,7 +14511,7 @@ msgstr "Benvido/a, %s. Agora pode cambiar o contrasinal."
 msgid "You should now <a href=\"%s\">Return to User Prefs</a>."
 msgstr "Agora debería <a href=\"%s\">volver ás preferencias de usuario</a>."
 
-#: www/account/change_pw.php:87 www/account/index.php:158
+#: www/account/change_pw.php:87 www/account/index.php:156
 msgid "Change Password"
 msgstr "Cambiar o contrasinal "
 
@@ -14301,29 +14543,29 @@ msgstr "Chaves compartidas de SSH autorizadas "
 msgid "Available keys"
 msgstr "Non se atoparon rexistros accesíbeis"
 
-#: www/account/editsshkeys.php:51 www/account/index.php:317
+#: www/account/editsshkeys.php:51 www/account/index.php:301
 msgid "Algorithm"
 msgstr ""
 
-#: www/account/editsshkeys.php:51 www/account/index.php:317
+#: www/account/editsshkeys.php:51 www/account/index.php:301
 msgid "Fingerprint"
 msgstr ""
 
-#: www/account/editsshkeys.php:51 www/account/index.php:317
+#: www/account/editsshkeys.php:51 www/account/index.php:301
 #: www/project/admin/editimages.php:266
 msgid "Uploaded"
 msgstr "Subido"
 
-#: www/account/editsshkeys.php:51 www/account/index.php:317
+#: www/account/editsshkeys.php:51 www/account/index.php:301
 #, fuzzy
 msgid "Ready ?"
 msgstr "Ler "
 
-#: www/account/editsshkeys.php:61 www/account/index.php:327
+#: www/account/editsshkeys.php:61 www/account/index.php:311
 msgid "ssh key is deployed."
 msgstr ""
 
-#: www/account/editsshkeys.php:63 www/account/index.php:329
+#: www/account/editsshkeys.php:63 www/account/index.php:313
 msgid "ssh key is not deployed yet."
 msgstr ""
 
@@ -14408,113 +14650,105 @@ msgstr ""
 "proxectos, enviar erros de programas en %1$s, rexistrarse como un "
 "desenvolvedor de proxectos ou mesmo comezar os seus propios proxectos."
 
-#: www/account/index.php:78
+#: www/account/index.php:76
 #, fuzzy
 msgid "You must supply a first name."
 msgstr "Debe proporcionar o seu nome "
 
-#: www/account/index.php:81
+#: www/account/index.php:79
 #, fuzzy
 msgid "You must supply a last name."
 msgstr "Debe proporcionar os seus apelidos "
 
-#: www/account/index.php:105 www/admin/groupedit.php:74
+#: www/account/index.php:103 www/admin/groupedit.php:74
 #: www/admin/useredit.php:110
 msgid "Updated"
 msgstr "Actualizado "
 
-#: www/account/index.php:121 www/account/index.php:126
+#: www/account/index.php:119 www/account/index.php:124
 #: www/include/html.php:934
 msgid "Account Maintenance"
 msgstr "Mantemento da conta "
 
-#: www/account/index.php:130 www/index.php:33
+#: www/account/index.php:128 www/index.php:33
 msgid "Welcome"
 msgstr "Benvido/a "
 
-#: www/account/index.php:133
+#: www/account/index.php:131
 msgid "Account options:"
 msgstr "Opcións de conta:"
 
-#: www/account/index.php:136
+#: www/account/index.php:134
 msgid "View My Profile"
 msgstr "Ver o meu perfil de desenvolvedor "
 
-#: www/account/index.php:138
+#: www/account/index.php:136
 msgid "Edit My Skills Profile"
 msgstr "Editar o meu perfil de habelencias "
 
-#: www/account/index.php:147
+#: www/account/index.php:145
 msgid "Member since:"
 msgstr "Membro desde: "
 
-#: www/account/index.php:151 www/include/user_profile.php:68
+#: www/account/index.php:149 www/include/user_profile.php:68
 #, fuzzy
 msgid "User Id:"
 msgstr "ID de usuario "
 
-#: www/account/index.php:156 www/include/user_profile.php:88
+#: www/account/index.php:154 www/include/user_profile.php:88
 msgid "Login name:"
 msgstr "Nome de usuario: "
 
-#: www/account/index.php:163 www/account/register.php:171
+#: www/account/index.php:161 www/account/register.php:169
 msgid "First Name:"
 msgstr "Nome: "
 
-#: www/account/index.php:170 www/account/register.php:178
+#: www/account/index.php:168 www/account/register.php:176
 msgid "Last Name:"
 msgstr "Apelidos: "
 
-#: www/account/index.php:177
+#: www/account/index.php:175
 msgid "Language:"
 msgstr "Idioma: "
 
-#: www/account/index.php:183 www/account/register.php:189
+#: www/account/index.php:181 www/account/register.php:187
 msgid "Timezone:"
 msgstr "Zona horaria: "
 
-#: www/account/index.php:189
+#: www/account/index.php:187
 msgid "Theme:"
 msgstr "Tema: "
 
-#: www/account/index.php:195 www/account/register.php:202
+#: www/account/index.php:193 www/account/register.php:200
 msgid "Country:"
 msgstr "País: "
 
-#: www/account/index.php:201
+#: www/account/index.php:199
 msgid "Email Addr:"
 msgstr "Enderezo de correo electrónico:"
 
-#: www/account/index.php:203
+#: www/account/index.php:201
 msgid "Change Email Addr"
 msgstr "Cambiar enderezo de correo electrónico"
 
-#: www/account/index.php:208 www/account/index.php:215
-#: www/include/user_profile.php:136
+#: www/account/index.php:206 www/account/index.php:213
+#: www/include/user_profile.php:126
 msgid "Address:"
 msgstr "Enderezo: "
 
-#: www/account/index.php:222 www/include/user_profile.php:143
+#: www/account/index.php:220 www/include/user_profile.php:133
 msgid "Phone:"
 msgstr "Teléfono: "
 
-#: www/account/index.php:229 www/include/user_profile.php:154
+#: www/account/index.php:227 www/include/user_profile.php:144
 msgid "FAX:"
 msgstr "Fax: "
 
-#: www/account/index.php:236
+#: www/account/index.php:234
 msgid "Title:"
 msgstr "Título: "
 
-#: www/account/index.php:245 www/account/register.php:216
-msgid "Jabber Address:"
-msgstr "Enderezo de Jabber: "
-
-#: www/account/index.php:249 www/account/register.php:220
-msgid "Send auto-generated notices only to my Jabber address"
-msgstr "Enviar as novas autoxeradas só á miña conta de Jabber "
-
-#: www/account/index.php:265 www/account/register.php:252
+#: www/account/index.php:249 www/account/register.php:239
 msgid ""
 "Receive Email about Site Updates <i>(Very low traffic and includes security "
 "notices. Highly Recommended.)</i>"
@@ -14522,11 +14756,11 @@ msgstr ""
 "Recibir correos sobre as actualizacións do sitio <i>(Ten pouco tráfico e "
 "inclúe novas sobre seguranza. É unha opción altamente recomendábel.)</i> "
 
-#: www/account/index.php:271 www/account/register.php:258
+#: www/account/index.php:255 www/account/register.php:245
 msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
 msgstr "Recibir correos adicionais da comunidade. <i>(Tráfico baixo.)</i> "
 
-#: www/account/index.php:286
+#: www/account/index.php:270
 #, php-format
 msgid ""
 "Participate in peer ratings. <i>(Allows you to rate other users using "
@@ -14539,39 +14773,39 @@ msgstr ""
 "usuarios. Pode achar máis información na súa <a href=\"%s\">páxina de "
 "usuario</a> se decidiu participar nas valoracións)</i>. "
 
-#: www/account/index.php:292
+#: www/account/index.php:276
 msgid ""
 "Enable tooltips. Small help texts displayed on mouse over links, images."
 msgstr ""
 
-#: www/account/index.php:309
+#: www/account/index.php:293
 msgid "Shell Account Information"
 msgstr "Información da conta do intérprete de ordes (shell)"
 
-#: www/account/index.php:312
+#: www/account/index.php:296
 msgid "Shell box"
 msgstr "Caixa de intérprete de ordes (shell)"
 
-#: www/account/index.php:313
+#: www/account/index.php:297
 msgid "SSH Shared Authorized Keys"
 msgstr "Chaves compartidas de SSH autorizadas "
 
-#: www/account/index.php:339
+#: www/account/index.php:323
 msgid "Edit Keys"
 msgstr "Editar chaves "
 
-#: www/account/index.php:341
+#: www/account/index.php:325
 #, fuzzy
 msgid "Shell Account deactivated"
 msgstr "Información da conta do intérprete de ordes (shell)"
 
-#: www/account/index.php:351 www/forum/admin/index.php:128
+#: www/account/index.php:335 www/forum/admin/index.php:128
 #: www/forum/admin/index.php:167
 #, fuzzy, php-format
 msgid "%s Mandatory fields"
 msgstr "Xestionar campos personalizados"
 
-#: www/account/index.php:354
+#: www/account/index.php:338
 msgid "Reset Changes"
 msgstr "Restabelecer os cambios "
 
@@ -14684,7 +14918,7 @@ msgstr ""
 "envióuselle de novo a confirmación por correo electrónico. visite a ligazón\n"
 "\tque hai neste correo para completar o proceso de rexistro."
 
-#: www/account/pending-resend.php:57 www/account/register.php:279
+#: www/account/pending-resend.php:57 www/account/register.php:266
 #, fuzzy
 msgid "Resend confirmation email to a pending account"
 msgstr "[Reenviar o correo de confirmación a unha conta pendente] "
@@ -14705,32 +14939,32 @@ msgstr ""
 "Introduza un nome de usuario e prema en \"Enviar\" para que se lle volva "
 "enviar un correo electrónico de confirmación."
 
-#: www/account/register.php:75
+#: www/account/register.php:73
 msgid "You can't register an account unless you accept the terms of use."
 msgstr "non pode rexistrar unha conta a menos que acepte as condicións de uso."
 
-#: www/account/register.php:92
+#: www/account/register.php:90
 #, fuzzy
 msgid "Register Confirmation"
 msgstr "Outra información "
 
-#: www/account/register.php:99
+#: www/account/register.php:97
 msgid ""
 "Error during user activation but after user registration (user is now in "
 "pending state and will not get a notification eMail!)"
 msgstr ""
 
-#: www/account/register.php:101
+#: www/account/register.php:99
 #, fuzzy, php-format
 msgid "Could not activate newly registered user's forge account: %s"
 msgstr "Non se pode activar a conta "
 
-#: www/account/register.php:108
+#: www/account/register.php:106
 #, php-format
 msgid "You have registered the %1$s account on %2$s."
 msgstr ""
 
-#: www/account/register.php:112
+#: www/account/register.php:110
 #, fuzzy
 msgid ""
 "A confirmation email is being sent to verify the submitted email address. "
@@ -14740,49 +14974,49 @@ msgstr ""
 "confirmación para verificar o seu enderezo de correo. Visite a ligazón que "
 "se lle envía no correo para activar a súa conta. "
 
-#: www/account/register.php:115
+#: www/account/register.php:113
 #, php-format
 msgid ""
 "You have registered and activated user %1$s on %2$s. They will not receive "
 "an eMail about this fact."
 msgstr ""
 
-#: www/account/register.php:136
+#: www/account/register.php:134
 #, fuzzy
 msgid "User Account Registration"
 msgstr "Rexistro da conta de %1$s "
 
-#: www/account/register.php:144
+#: www/account/register.php:142
 msgid ""
 "Login Name (no uppercase letters; leave empty to have it generated "
 "automatically):"
 msgstr "Nome "
 
-#: www/account/register.php:146
+#: www/account/register.php:144
 msgid "Login Name (do not use uppercase letters):"
 msgstr "Nome da conta (non use maiúsculas):"
 
-#: www/account/register.php:153
+#: www/account/register.php:151
 msgid "Password (min. 6 chars):"
 msgstr "Contrasinal (cando menos 6 caracteres):"
 
-#: www/account/register.php:159
+#: www/account/register.php:157
 msgid "Password (repeat):"
 msgstr "Contrasinal (repítao):"
 
-#: www/account/register.php:185
+#: www/account/register.php:183
 msgid "Language Choice:"
 msgstr "Selección de idioma: "
 
-#: www/account/register.php:197
+#: www/account/register.php:195
 msgid "Theme"
 msgstr "Tema"
 
-#: www/account/register.php:207
+#: www/account/register.php:205
 msgid "Email Address"
 msgstr "Enderezo de correo electrónico"
 
-#: www/account/register.php:208
+#: www/account/register.php:206
 #, php-format
 msgid ""
 "This email address will be verified before account activation. You will "
@@ -14792,37 +15026,37 @@ msgstr ""
 "Esta conta de correo verificarase antes de activar a conta. Recibirá un "
 "correo de reenvío en &lt;loginname@%1$s&gt; que se reenviará a este enderezo."
 
-#: www/account/register.php:225 www/mail/index.php:78
+#: www/account/register.php:212 www/mail/index.php:78
 msgid "Address"
 msgstr "Enderezo"
 
-#: www/account/register.php:231
+#: www/account/register.php:218
 msgid "Address (continued)"
 msgstr ""
 
-#: www/account/register.php:237
+#: www/account/register.php:224
 msgid "Phone"
 msgstr "Teléfono"
 
-#: www/account/register.php:243
+#: www/account/register.php:230
 msgid "Fax"
 msgstr "Fax"
 
-#: www/account/register.php:263
+#: www/account/register.php:250
 #, php-format
 msgid "Do you accept the <a href=\"%1$s\">terms of use</a> for this site?"
 msgstr "Acepta os <a href=\"%1$s\">termos de uso</a> para este sitio?"
 
-#: www/account/register.php:269
+#: www/account/register.php:256
 msgid "Activate this user immediately"
 msgstr ""
 
-#: www/account/register.php:273
+#: www/account/register.php:260
 #, php-format
 msgid "Fields marked with %s are mandatory."
 msgstr "Os campos marcados con %s son obrigados."
 
-#: www/account/register.php:276
+#: www/account/register.php:263
 msgid "Register"
 msgstr "Rexistrar"
 
@@ -15162,30 +15396,30 @@ msgstr "Non se puido crear o obxecto ArtifactCanned"
 msgid "Approve All On This Page"
 msgstr "Aprobar todo nesta páxina "
 
-#: www/admin/configman.php:77
+#: www/admin/configman.php:73
 #, fuzzy
 msgid "Configuration Manager"
 msgstr "Administrador de configuración "
 
-#: www/admin/configman.php:79
+#: www/admin/configman.php:75
 #, php-format
 msgid "Configuration from the config API (*.ini files)"
 msgstr ""
 
-#: www/admin/configman.php:81
+#: www/admin/configman.php:77
 msgid "Variable"
 msgstr ""
 
-#: www/admin/configman.php:81
+#: www/admin/configman.php:77
 #, fuzzy
 msgid "Configured value"
 msgstr "Configurar os roles permitidos"
 
-#: www/admin/configman.php:81
+#: www/admin/configman.php:77
 msgid "Result (possibly after interpolation)"
 msgstr ""
 
-#: www/admin/configman.php:97
+#: www/admin/configman.php:93
 #, fuzzy, php-format
 msgid "Section %s"
 msgstr "Sección"
@@ -15726,10 +15960,6 @@ msgstr "Último identificador (id) de usuario que se enviou por correo "
 #: www/admin/massmail.php:167
 msgid "No deliveries active."
 msgstr ""
-
-#: www/admin/passedit.php:54
-msgid "You must supply valid password (at least 6 chars)"
-msgstr "Debe proporcionar un contrasinal válido (6 caracteres como mínimo) "
 
 #: www/admin/passedit.php:74
 #, fuzzy
@@ -17962,40 +18192,40 @@ msgstr "Ver o perfil dun usuario"
 msgid "Personal Information"
 msgstr "Información persoal"
 
-#: www/include/user_home.php:50
+#: www/include/user_home.php:49
 msgid "Peer Rating"
 msgstr "Valoración entre pares"
 
-#: www/include/user_home.php:56
+#: www/include/user_home.php:55
 msgid "User chose not to participate in peer rating"
 msgstr "Este usuario elixiu non participar na valoración entre pares"
 
-#: www/include/user_home.php:63
+#: www/include/user_home.php:62
 msgid "Diary and Notes"
 msgstr "Diario e notas"
 
-#: www/include/user_home.php:71
+#: www/include/user_home.php:70
 msgid "Diary/Note entries:"
 msgstr "Entradas do diario/notas: "
 
-#: www/include/user_home.php:74
+#: www/include/user_home.php:73
 msgid "View Diary & Notes"
 msgstr "Ver diario e notas "
 
-#: www/include/user_home.php:79
+#: www/include/user_home.php:78
 msgid "Monitor this Diary"
 msgstr "Monitorizar este diario "
 
-#: www/include/user_home.php:101
+#: www/include/user_home.php:100
 msgid "This developer is not a member of any projects."
 msgstr "Este desenvolvedor non é membro de ningún proxecto."
 
-#: www/include/user_home.php:104
+#: www/include/user_home.php:103
 #, fuzzy
 msgid "This developer is a member of the following projects:"
 msgstr "Este desenvolvedor é membro dos grupos seguintes:"
 
-#: www/include/user_home.php:158
+#: www/include/user_home.php:157
 msgid ""
 "If you are familiar with this user, please take a moment to rate him/her on "
 "the following criteria. Keep in mind, that your rating will be visible to "
@@ -18004,7 +18234,7 @@ msgstr ""
 "Se coñece este usuario, por favor, demore un pouco en avalialo nos criterios "
 "seguintes. Teña en conta que a súa avaliación será visíbel para os demais."
 
-#: www/include/user_home.php:162
+#: www/include/user_home.php:161
 #, php-format
 msgid ""
 "The %s Peer Rating system is based on concepts from <a href=\"http://www."
@@ -18015,7 +18245,7 @@ msgstr ""
 "\"http://www.advogato.com/\">Advogato.</a> O sistema foi substituído e "
 "ampliado de varias maneiras."
 
-#: www/include/user_home.php:170
+#: www/include/user_home.php:169
 #, fuzzy, php-format
 msgid ""
 "<p>The Peer rating box shows all rating averages (and response levels) for "
@@ -18049,7 +18279,7 @@ msgstr ""
 "usuarios, e a caixa de clasificación enre iguais desaparecerá da súa páxina "
 "de usuario.</i></p>"
 
-#: www/include/user_home.php:177
+#: www/include/user_home.php:176
 #, php-format
 msgid ""
 "You opted-out from peer rating system, otherwise you would have a chance to "
@@ -18074,16 +18304,12 @@ msgstr "Nome verdadeiro "
 msgid "Email Address:"
 msgstr "Enderezo de correo electrónico:"
 
-#: www/include/user_profile.php:127
-msgid "Jabber Address"
-msgstr "Enderezo de Jabber "
-
-#: www/include/user_profile.php:162
+#: www/include/user_profile.php:152
 #, fuzzy
 msgid "Site Member Since:"
 msgstr "É membro do sitio desde "
 
-#: www/include/user_profile.php:169
+#: www/include/user_profile.php:159
 msgid "URI:"
 msgstr ""
 
@@ -19625,11 +19851,6 @@ msgstr "Non está entre 1 e 31"
 
 #: www/pm/calendar.php:59
 msgid "Invalid date"
-msgstr "A data non é válida"
-
-#: www/pm/calendar.php:59
-#, php-format
-msgid "Date not valid"
 msgstr "A data non é válida"
 
 #: www/pm/calendar.php:64
@@ -23529,6 +23750,61 @@ msgstr "Non se puido actualizar"
 msgid "No User Name Provided"
 msgstr "Non se introduciu un nome de usuario"
 
+#, fuzzy
+#~ msgid "Invalid email "
+#~ msgstr "O enderezo de correo electrónico non é válido."
+
+#~ msgid "You must supply valid password (at least 6 chars)"
+#~ msgstr "Debe proporcionar un contrasinal válido (6 caracteres como mínimo) "
+
+#~ msgid "Date not valid"
+#~ msgstr "A data non é válida"
+
+#, fuzzy
+#~ msgid "Invalid ArtifactType"
+#~ msgstr "ID non válido"
+
+#, fuzzy
+#~ msgid "Invalid Group Object"
+#~ msgstr "O obxecto de grupo non é válido"
+
+#, fuzzy
+#~ msgid "No Valid Artifact Type"
+#~ msgstr "Non é un obxecto: Tipo de artefacto: %d"
+
+#~ msgid "No Valid Forum Object"
+#~ msgstr "non é un obxecto válido de foro "
+
+#~ msgid "ForumMessage::create() No Valid ParentMessage Object"
+#~ msgstr "ForumMessage::create() o obxecto ParentMessage non é válido"
+
+#~ msgid "Invalid Unix name"
+#~ msgstr "O nome unix non é válido"
+
+#, fuzzy
+#~ msgid "Invalid folder."
+#~ msgstr "Usuario non válido "
+
+#, fuzzy
+#~ msgid "Invalid filename"
+#~ msgstr "o nome do ficheiro non é válido."
+
+#, fuzzy
+#~ msgid "Invalid Email Address:"
+#~ msgstr "O enderezo de correo non é válido"
+
+#~ msgid "Invalid Jabber Address"
+#~ msgstr "O enderezo de Jabber non é válido"
+
+#~ msgid "Jabber Address:"
+#~ msgstr "Enderezo de Jabber: "
+
+#~ msgid "Send auto-generated notices only to my Jabber address"
+#~ msgstr "Enviar as novas autoxeradas só á miña conta de Jabber "
+
+#~ msgid "Jabber Address"
+#~ msgstr "Enderezo de Jabber "
+
 #~ msgid ""
 #~ "We're Sorry but this Project hasn't uploaded their personal webpage yet."
 #~ msgstr "Sentímolo, pero este proxecto aínda non subiu a súa páxina persoal."
@@ -24145,9 +24421,6 @@ msgstr "Non se introduciu un nome de usuario"
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "Debe incluír o contido e o asunto da mensaxe "
-
-#~ msgid "No Valid ParentMessage Object"
-#~ msgstr "o obxecto ParentMessage non é válido"
 
 #~ msgid ""
 #~ "Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
@@ -25029,10 +25302,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgstr "Modificado por última vez"
 
 #, fuzzy
-#~ msgid "Invalid Project"
-#~ msgstr "O ano non é válido"
-
-#, fuzzy
 #~ msgid "Document Title:"
 #~ msgstr "Título do documento "
 
@@ -25179,9 +25448,6 @@ msgstr "Non se introduciu un nome de usuario"
 #, fuzzy
 #~ msgid "Diretory"
 #~ msgstr "Nome do proxecto"
-
-#~ msgid "No valid Group Object"
-#~ msgstr "O obxecto de grupo non é válido"
 
 #, fuzzy
 #~ msgid "Missing Link URL or Html Code."
@@ -25501,10 +25767,6 @@ msgstr "Non se introduciu un nome de usuario"
 #, fuzzy
 #~ msgid "Task Successed"
 #~ msgstr "Actualizouse correctamente "
-
-#, fuzzy
-#~ msgid "Error:"
-#~ msgstr "Erro "
 
 #, fuzzy
 #~ msgid "Task succeeded"
@@ -26401,9 +26663,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "You must enter a user name."
 #~ msgstr "Debe introducir un nome de usuario. "
 
-#~ msgid "Invalid operation"
-#~ msgstr "A operación non é válida"
-
 #~ msgid "Unix Group Name:"
 #~ msgstr "Nome Unix do grupo: "
 
@@ -26564,9 +26823,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "Previous Messages"
 #~ msgstr "Mensaxes anteriores "
 
-#~ msgid "Message Not Found"
-#~ msgstr "Non se atopou a mensaxe"
-
 #~ msgid "Must Choose A Message First"
 #~ msgstr "Primeiro debe elixir unha mensaxe "
 
@@ -26589,9 +26845,6 @@ msgstr "Non se introduciu un nome de usuario"
 
 #~ msgid "ERROR - No group was chosen or you can't access it"
 #~ msgstr "ERRO - Non se seleccionou ningún grupo ou non se pode acceder a el "
-
-#~ msgid "Error - disabled feature."
-#~ msgstr "Produciuse un erro - esa característica non está activada."
 
 #~ msgid "Error - double submit"
 #~ msgstr "Produciuse un erro - envío dobre"
@@ -26671,9 +26924,6 @@ msgstr "Non se introduciu un nome de usuario"
 
 #~ msgid "Invalid day"
 #~ msgstr "O día non é válido"
-
-#~ msgid "Invalid type"
-#~ msgstr "O tipo non é válido"
 
 #~ msgid "This Project Has Turned Off The Task Manager"
 #~ msgstr "Este proxecto desactivou o xestor de tarefas"

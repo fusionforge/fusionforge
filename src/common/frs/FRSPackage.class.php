@@ -151,7 +151,7 @@ class FRSPackage extends Error {
 					array ($this->Group->getID(),
 					       htmlspecialchars($name))) ;
 		if (db_numrows($res)) {
-			$this->setError('Error Adding Package: Name Already Exists');
+			$this->setError(_('Error Adding Package: Name Already Exists'));
 			return false;
 		}
 
@@ -162,7 +162,7 @@ class FRSPackage extends Error {
 						  1,
 						  $is_public)) ;
 		if (!$result) {
-			$this->setError('Error Adding Package: '.db_error());
+			$this->setError(_('Error Adding Package: ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -202,7 +202,7 @@ class FRSPackage extends Error {
 					array ($package_id,
 					       $this->Group->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('Invalid package_id'.db_error());
+			$this->setError(_('Invalid package_id'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -288,7 +288,7 @@ class FRSPackage extends Error {
 							  user_getid()));
 
 			if (!$result) {
-				$this->setError('Unable to add monitor: '.db_error());
+				$this->setError(_('Unable to add monitor: ').db_error());
 				return false;
 			}
 
@@ -320,7 +320,7 @@ class FRSPackage extends Error {
 		$res = db_result(db_query_params ('select count(*) as count from filemodule_monitor where filemodule_id=$1',
 						  array ($this->getID())), 0, 0);
 		if ($res < 0) {
-			$this->setError('Error On querying monitor count: '.db_error());
+			$this->setError(_('Error On querying monitor count: ').db_error());
 			return false;
 		}
 		return $res;
@@ -381,7 +381,7 @@ class FRSPackage extends Error {
 						array ($this->Group->getID(),
 						       htmlspecialchars($name))) ;
 			if (db_numrows($res)) {
-				$this->setError('Error Updating Package: Name Already Exists');
+				$this->setError(_('Error Updating Package: Name Already Exists'));
 				return false;
 			}
 		}
@@ -393,14 +393,14 @@ class FRSPackage extends Error {
 					       $this->Group->getID(),
 					       $this->getID())) ;
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('Error On Update: '.db_error());
+			$this->setError(_('Error On Update: ').db_error());
 			db_rollback();
 			return false;
 		}
 
 		$olddirname = $this->getFileName();
 		if(!$this->fetchData($this->getID())){
-			$this->setError("Error Updating Package: Couldn't fetch data");
+			$this->setError(_("Error Updating Package: Couldn't fetch data"));
 			db_rollback();
 			return false;
 		}
@@ -410,12 +410,12 @@ class FRSPackage extends Error {
 
 		if(($olddirname!=$newdirname)){
 			if(is_dir($newdirlocation)){
-				$this->setError('Error Updating Package: Directory Already Exists');
+				$this->setError(_('Error Updating Package: Directory Already Exists'));
 				db_rollback();
 				return false;
 			} else {
 				if(!@rename($olddirlocation,$newdirlocation)) {
-					$this->setError("Error Updating Package: Couldn't rename dir");
+					$this->setError(_("Error Updating Package: Couldn't rename dir"));
 					db_rollback();
 					return false;
 				}
@@ -462,7 +462,7 @@ class FRSPackage extends Error {
 		$r =& $this->getReleases();
 		for ($i=0; $i<count($r); $i++) {
 			if (!is_object($r[$i]) || $r[$i]->isError() || !$r[$i]->delete($sure, $really_sure)) {
-				$this->setError('Release Error: '.$r[$i]->getName().':'.$r[$i]->getErrorMessage());
+				$this->setError(_('Release Error: ').$r[$i]->getName().':'.$r[$i]->getErrorMessage());
 				return false;
 			}
 		}
@@ -472,7 +472,7 @@ class FRSPackage extends Error {
 
 		// double-check we're not trying to remove root dir
 		if (util_is_root_dir($dir)) {
-			$this->setError('Package delete error: trying to delete root dir');
+			$this->setError(_('Package delete error: trying to delete root dir'));
 			return false;
 		}
 		$this->deleteNewestReleaseFilesAsZip();
@@ -501,7 +501,7 @@ class FRSPackage extends Error {
 			$row = db_fetch_array($result);
 			return frsrelease_get_object($row['release_id']);
 		} else {
-			$this->setError('No valid max release id');
+			$this->setError(_('No valid max release id'));
 			return false;
 		}
 	}

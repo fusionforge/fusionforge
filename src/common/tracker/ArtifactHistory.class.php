@@ -50,7 +50,7 @@ class ArtifactHistory extends Error {
 
 		//was Artifact legit?
 		if (!$Artifact || !is_object($Artifact)) {
-			$this->setError('ArtifactHistory: No Valid Artifact');
+			$this->setError(_('Invalid Artifact'));
 			return;
 		}
 		//did Artifact have an error?
@@ -79,7 +79,7 @@ class ArtifactHistory extends Error {
 		$res = db_query_params ('SELECT * FROM artifact_category WHERE id=$1',
 					array ($id)) ;
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('ArtifactHistory: Invalid ArtifactHistory ID');
+			$this->setError(_('Invalid ArtifactHistory ID'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);

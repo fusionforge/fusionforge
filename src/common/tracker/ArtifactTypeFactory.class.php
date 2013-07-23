@@ -60,7 +60,7 @@ class ArtifactTypeFactory extends Error {
 			return;
 		}
 		if ($Group->isError()) {
-			$this->setError('ArtifactTypeFactory:: '.$Group->getErrorMessage());
+			$this->setError('ArtifactTypeFactory: '.$Group->getErrorMessage());
 			return;
 		}
 		if (!$Group->usesTracker()) {

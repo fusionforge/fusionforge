@@ -292,7 +292,7 @@ class GFUser extends Error {
 			return false;
 		}
 		if (!account_pwvalid($password1)) {
-			$this->setError(_('Invalid Password:'));
+			$this->setError(_('Invalid Password'));
 			return false;
 		}
 		//testing if there is at least one capital letter in the unix name
@@ -310,7 +310,7 @@ class GFUser extends Error {
 			return false;
 		}
 		if (!validate_email($email)) {
-			$this->setError(_('Invalid Email Address:') .' '. $email);
+			$this->setError(_('Invalid Email Address') . _(': '). $email);
 			return false;
 		}
 		if ($unix_name && db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name LIKE $1',
@@ -403,7 +403,7 @@ class GFUser extends Error {
 
 			$id = db_insertid($result, 'users', 'user_id');
 			if (!$id) {
-				$this->setError('Could Not Get USERID: ' .db_error());
+				$this->setError(_('Could Not Get User Id: ') .db_error());
 				db_rollback();
 				return false;
 			}
@@ -487,28 +487,28 @@ Enjoy the site.
 			$res = db_query_params('DELETE FROM artifact_monitor WHERE user_id=$1',
 						array($this->getID()));
 			if (!$res) {
-				$this->setError('ERROR - ' . _('Could Not Delete From artifact_monitor:') . ' '.db_error());
+				$this->setError(_('Could Not Delete From artifact_monitor:') . ' '.db_error());
 				db_rollback();
 				return false;
 			}
 			$res = db_query_params('DELETE FROM artifact_type_monitor WHERE user_id=$1',
 						array($this->getID()));
 			if (!$res) {
-				$this->setError('ERROR - ' . _('Could Not Delete From artifact_type_monitor:') . ' ' .db_error());
+				$this->setError(_('Could Not Delete From artifact_type_monitor:') . ' ' .db_error());
 				db_rollback();
 				return false;
 			}
 			$res = db_query_params('DELETE FROM forum_monitored_forums WHERE user_id=$1',
 						array($this->getID()));
 			if (!$res) {
-				$this->setError('ERROR - ' . _('Could Not Delete From forum_monitored_forums:') . ' '.db_error());
+				$this->setError(_('Could Not Delete From forum_monitored_forums:') . ' '.db_error());
 				db_rollback();
 				return false;
 			}
 			$res = db_query_params('DELETE FROM filemodule_monitor WHERE user_id=$1',
 						array($this->getID()));
 			if (!$res) {
-				$this->setError('ERROR - ' . _('Could Not Delete From filemodule_monitor:') . ' '.db_error());
+				$this->setError(_('Could Not Delete From filemodule_monitor:') . ' '.db_error());
 				db_rollback();
 				return false;
 			}
@@ -597,7 +597,7 @@ Enjoy the site.
 				$this->getID()));
 
 		if (!$res) {
-			$this->setError(_('ERROR - Could Not Update User Object:'). ' ' .db_error());
+			$this->setError(_('Error - Could Not Update User Object:'). ' ' .db_error());
 			db_rollback();
 			return false;
 		}
@@ -691,11 +691,11 @@ Enjoy the site.
 
 		if ($status != 'P' && $status != 'A'
 			&& $status != 'S' && $status != 'D') {
-			$this->setError(_('ERROR: Invalid status value'));
+			$this->setError(_('Error: Invalid status value'));
 			return false;
 		}
 		if ($this->getStatus() != 'P' && $status == 'P') {
-			$this->setError('ERROR: You can\'t set pending status if user is suspend or active');
+			$this->setError(_('Error: You cannot set pending status if user is suspend or active'));
 			return false;
 		}
 
@@ -705,7 +705,7 @@ Enjoy the site.
 					       $this->getID())) ;
 
 		if (!$res) {
-			$this->setError(_('ERROR - Could Not Update User Status:') . ' ' .db_error());
+			$this->setError(_('Error - Could Not Update User Status:') . ' ' .db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -771,7 +771,7 @@ Enjoy the site.
 					       $this->getID())) ;
 
 		if (!$res) {
-			$this->setError('ERROR - Could Not Update User Unix Status: '.db_error());
+			$this->setError(_('Error - Could Not Update User Unix Status: ').db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -890,7 +890,7 @@ Enjoy the site.
 		}
 
 		if (!$email || !validate_email($email)) {
-			$this->setError('ERROR: Invalid Email');
+			$this->setError(_('Invalid Email Address'));
 			return false;
 		}
 
@@ -909,7 +909,7 @@ Enjoy the site.
 					       $this->getID()));
 
 		if (!$res) {
-			$this->setError('ERROR - Could Not Update User Email: '.db_error());
+			$this->setError(_('Error - Could Not Update User Email: ').db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -943,7 +943,7 @@ Enjoy the site.
 		}
 
 		if (!$email || !validate_email($email)) {
-			$this->setError('ERROR - Invalid Email');
+			$this->setError(_('Invalid Email Address'));
 			return false;
 		}
 
@@ -960,7 +960,7 @@ Enjoy the site.
 					       $email,
 					       $this->getID()));
 		if (!$res) {
-			$this->setError('ERROR - Could Not Update User Email And Hash: '.db_error());
+			$this->setError(_('Error - Could Not Update User Email And Hash: ').db_error());
 			return false;
 		} else {
 			$this->data_array['email_new'] = $email;
@@ -987,7 +987,7 @@ Enjoy the site.
 		$res=db_query_params('UPDATE users SET realname=$1 WHERE user_id=$2',
 				array($realname, $this->getID()));
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('ERROR - Could Not Update real name of user : '.db_error());
+			$this->setError(_('Error - Could Not Update real name of user : ').db_error());
 			return false;
 		}
 		$this->data_array['realname'] = $realname;
@@ -1060,7 +1060,7 @@ Enjoy the site.
 		$shells = account_getavailableshells();
 
 		if (!in_array($shell, $shells)) {
-			$this->setError( sprintf(_('ERROR: Invalid Shell %s'), $shell) );
+			$this->setError( sprintf(_('Error: Invalid Shell %s'), $shell) );
 			return false;
 		}
 
@@ -1069,7 +1069,7 @@ Enjoy the site.
 					array ($shell,
 					       $this->getID())) ;
 		if (!$res) {
-			$this->setError(_('ERROR - Could Not Update User Unix Shell:') . ' ' .db_error());
+			$this->setError(_('Error - Could Not Update User Unix Shell:') . ' ' .db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -1224,7 +1224,7 @@ Enjoy the site.
 							values ($1, $2, $3, $4, $5, $6)',
 					array($this->getID(), $fingerprint, $now, $key, $explodedKey[2], $explodedKey[0]));
 		if (!$res) {
-			$this->setError(_('ERROR - Could Not Add User SSH Key:').db_error());
+			$this->setError(_('Error - Could Not Add User SSH Key:').db_error());
 			return false;
 		} else {
 			$keyid = db_insertid($res, 'sshkeys', 'id_sshkeys');
@@ -1241,7 +1241,7 @@ Enjoy the site.
 		$res = db_query_params('update sshkeys set deleted = 1 where id_sshkeys =$1 and userid = $2',
 					array($keyid, $this->getID()));
 		if (!$res) {
-			$this->setError(_('ERROR - Could Not Delete User SSH Key:').db_error());
+			$this->setError(_('Error - Could Not Delete User SSH Key:').db_error());
 			return false;
 		} else {
 			unset($this->data_array['authorized_keys'][$keyid]);
@@ -1374,7 +1374,7 @@ Enjoy the site.
 	function setPasswd($passwd) {
 		global $SYS;
 		if (!account_pwvalid($passwd)) {
-			$this->setError('Error: '.$GLOBALS['register_error']);
+			$this->setError(_('Error: ').$GLOBALS['register_error']);
 			return false;
 		}
 
@@ -1388,7 +1388,7 @@ Enjoy the site.
 					       $this->getID())) ;
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(_('ERROR - Could Not Change User Password:') . ' ' .db_error());
+			$this->setError(_('Error - Could Not Change User Password:') . ' ' .db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -1424,7 +1424,7 @@ Enjoy the site.
 				array($md5, $this->getID()));
 
 			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError(_('ERROR - Could Not Change User Password:') . ' ' .db_error());
+				$this->setError(_('Error - Could Not Change User Password:') . ' ' .db_error());
 				db_rollback();
 				return false;
 			}
@@ -1449,7 +1449,7 @@ Enjoy the site.
 						       $this->getID()));
 
 			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError(_('ERROR - Could Not Change User Password:') . ' ' .db_error());
+				$this->setError(_('Error - Could Not Change User Password:') . ' ' .db_error());
 				db_rollback();
 				return false;
 			}

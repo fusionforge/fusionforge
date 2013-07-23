@@ -32,7 +32,7 @@ class MailParser extends Error {
 		$this->Error();
 		$size = filesize($input_file);
 		if ($size > $this->max_file_size) {
-			$this->setError("Error - file too large");
+			$this->setError(_("Error - file too large"));
 			return false;
 		}
 		$fo = fopen($input_file, 'r');
@@ -84,7 +84,7 @@ class MailParser extends Error {
 			if (strpos($hdr,'text/plain') !== false) {
 
 			} else {
-				$this->setError('Error - only text/plain supported at this time');
+				$this->setError(_('Error - only text/plain supported at this time'));
 				return false;
 			}
 		}

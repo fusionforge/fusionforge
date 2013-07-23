@@ -309,7 +309,7 @@ class Group extends Error {
 		} elseif (!$this->validateGroupName($group_name)) {
 			return false;
 		} elseif (!account_groupnamevalid($unix_name)) {
-			$this->setError(_('Invalid Unix name'));
+			$this->setError(_('Invalid Unix Name.'));
 			return false;
 		} elseif (!$SYS->sysUseUnixName($unix_name)) {
 			$this->setError(_('Unix name already taken'));

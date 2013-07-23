@@ -58,7 +58,7 @@ class FRSFileProcessorType extends Error {
 	function fetchData($processor_id) {
 		$res=db_query_params('SELECT * FROM frs_processor WHERE processor_id=$1', array($processor_id));
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('FRSFileType::fetchData()  Invalid type_id');
+			$this->setError(_('Invalid type_id'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);

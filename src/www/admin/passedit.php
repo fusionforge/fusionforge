@@ -51,7 +51,7 @@ if (getStringFromRequest('submit')) {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
 			_('Error'),
-			_('You must supply valid password (at least 6 chars)')
+			_('You must supply valid password (at least 6 chars).')
 		);
 	}
 

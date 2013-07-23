@@ -55,11 +55,11 @@ class ForumMessageFactory extends Error {
 	function ForumMessageFactory(&$Forum) {
 		$this->Error();
 		if (!$Forum || !is_object($Forum)) {
-			$this->setError("ForumMessage:: Invalid group_form_id");
+			$this->setError(_("Invalid group_form_id"));
 			return false;
 		}
 		if ($Forum->isError()) {
-			$this->setError('ForumMessage:: '.$Forum->getErrorMessage());
+			$this->setError('ForumMessage: '.$Forum->getErrorMessage());
 			return false;
 		}
 		$this->Forum =& $Forum;

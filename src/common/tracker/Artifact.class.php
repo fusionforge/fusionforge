@@ -139,7 +139,7 @@ class Artifact extends Error {
 
 		// Was ArtifactType legit?
 		if (!$ArtifactType || !is_object($ArtifactType)) {
-			$this->setError(_('No Valid Artifact Type'));
+			$this->setError(_('Invalid Artifact Type'));
 			return;
 		}
 
