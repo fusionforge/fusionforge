@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-23 15:15+0200\n"
+"POT-Creation-Date: 2013-07-23 15:36+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -7702,15 +7702,19 @@ msgid "Please replace this file with your own website"
 msgstr "Por favor reemplace este fichero con su propio sitio web"
 
 #: cronjobs/homedirs.php:158
-#, php-format
 msgid ""
-"We're Sorry but this Project hasn't yet uploaded their personal webpage yet. "
-"<br /> Please check back soon for updates or visit <a href=\"%s\">the "
-"project page</a>."
+"We're Sorry but this Project hasn't uploaded their personal webpage yet."
 msgstr ""
 "Lo sentimos pero este proyecto no ha actualizado su página personal todavía."
-"<br /> Por favor vuelva pronto para actualizaciones o visite <a href=\"%s\"> "
-"la página de proyecto </a>."
+
+#: cronjobs/homedirs.php:159
+#, php-format
+msgid ""
+"Please check back soon for updates or visit <a href=\"%s\">the project page</"
+"a>."
+msgstr ""
+"Por favor vuelva pronto para actualizaciones o visite <a href=\"%s\"> la "
+"página de proyecto </a>."
 
 #: cronjobs/massmail.php:146
 #, php-format
@@ -23030,6 +23034,15 @@ msgstr "No puedo actualizar"
 msgid "No User Name Provided"
 msgstr "No ha proporcionado el nombre de usuario"
 
+#~ msgid ""
+#~ "We're Sorry but this Project hasn't yet uploaded their personal webpage "
+#~ "yet. <br /> Please check back soon for updates or visit <a href=\"%s"
+#~ "\">the project page</a>."
+#~ msgstr ""
+#~ "Lo sentimos pero este proyecto no ha actualizado su página personal "
+#~ "todavía.<br /> Por favor vuelva pronto para actualizaciones o visite <a "
+#~ "href=\"%s\"> la página de proyecto </a>."
+
 #~ msgid "ERROR: DB: Could not change group properties: %s"
 #~ msgstr "ERROR: DB: No se pudo cambiar las propiedades del proyecto: %s"
 
@@ -23113,12 +23126,6 @@ msgstr "No ha proporcionado el nombre de usuario"
 
 #~ msgid " (examples: meeting minutes, test results, RFP Docs)"
 #~ msgstr " (ejemplos: minutas de reuniones, resultados de test, documentos)"
-
-#~ msgid ""
-#~ "We're Sorry but this Project hasn't uploaded their personal webpage yet."
-#~ msgstr ""
-#~ "Lo sentimos pero este proyecto no ha actualizado su página personal "
-#~ "todavía."
 
 #~ msgid "No matches found for “%s”"
 #~ msgstr "Ninguna coincidencia encontrada para “%s”"
@@ -23831,13 +23838,6 @@ msgstr "No ha proporcionado el nombre de usuario"
 
 #~ msgid "There are no public subprojects available"
 #~ msgstr "No hay subproyectos públicos disponibles"
-
-#~ msgid ""
-#~ "Please check back soon for updates or visit <a href=\"%s\">the project "
-#~ "page</a>."
-#~ msgstr ""
-#~ "Por favor vuelva pronto para actualizaciones o visite <a href=\"%s\"> la "
-#~ "página de proyecto </a>."
 
 #~ msgid ""
 #~ "Visiting the link sent to you in this email will activate your account."
@@ -26272,3 +26272,6 @@ msgstr "No ha proporcionado el nombre de usuario"
 
 #~ msgid "Error - disabled feature."
 #~ msgstr "Error - característica deshabilitada."
+
+#~ msgid "\"%s\" roadmap already exists"
+#~ msgstr "\"%s\" roadmap ya existe"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-23 15:15+0200\n"
+"POT-Creation-Date: 2013-07-23 15:36+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -7688,14 +7688,17 @@ msgid "Please replace this file with your own website"
 msgstr "Veuillez remplacer ce fichier par votre propre site web."
 
 #: cronjobs/homedirs.php:158
+msgid ""
+"We're Sorry but this Project hasn't uploaded their personal webpage yet."
+msgstr "Nous sommes désolés, mais ce projet n'a pas encore publié de site web."
+
+#: cronjobs/homedirs.php:159
 #, php-format
 msgid ""
-"We're Sorry but this Project hasn't yet uploaded their personal webpage yet. "
-"<br /> Please check back soon for updates or visit <a href=\"%s\">the "
-"project page</a>."
+"Please check back soon for updates or visit <a href=\"%s\">the project page</"
+"a>."
 msgstr ""
-"Nous sommes désolés, mais ce projet n'a pas encore publié de site web.<br /"
-">Vous pouvez revenir sur cette page plus tard, ou vous diriger vers <a href="
+"Vous pouvez revenir sur cette page plus tard, ou vous diriger vers <a href="
 "\"%s\">la page du projet</a> en attendant."
 
 #: cronjobs/massmail.php:146
@@ -23168,6 +23171,15 @@ msgstr "Erreur de mise à jour"
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
 
+#~ msgid ""
+#~ "We're Sorry but this Project hasn't yet uploaded their personal webpage "
+#~ "yet. <br /> Please check back soon for updates or visit <a href=\"%s"
+#~ "\">the project page</a>."
+#~ msgstr ""
+#~ "Nous sommes désolés, mais ce projet n'a pas encore publié de site web."
+#~ "<br />Vous pouvez revenir sur cette page plus tard, ou vous diriger vers "
+#~ "<a href=\"%s\">la page du projet</a> en attendant."
+
 #~ msgid "ERROR: DB: Could not change group properties: %s"
 #~ msgstr "Erreur lors de la mise à jour des propriétés du groupe : %s"
 
@@ -23350,11 +23362,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "No user found"
 #~ msgstr "Aucun utilisateur trouvé"
-
-#~ msgid ""
-#~ "We're Sorry but this Project hasn't uploaded their personal webpage yet."
-#~ msgstr ""
-#~ "Nous sommes désolés, mais ce projet n'a pas encore publié de site web."
 
 #~ msgid ""
 #~ "You can monitor news by Trove category by clicking on “Monitor News” in "
@@ -24725,13 +24732,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ "yet."
 #~ msgstr ""
 #~ "Nous sommes désolés, mais ce projet n'a pas encore publié de site web."
-
-#~ msgid ""
-#~ "Please check back soon for updates or visit <a href=\"%s\">the project "
-#~ "page</a>."
-#~ msgstr ""
-#~ "Vous pouvez revenir sur cette page plus tard, ou vous diriger vers <a "
-#~ "href=\"%s\">la page du projet</a> en attendant."
 
 #~ msgid "Your account is currently pending your email confirmation."
 #~ msgstr ""

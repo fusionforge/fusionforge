@@ -155,7 +155,8 @@ foreach ($active_projects as $project) {
 			    str_replace('##welcome_to##',
 			    sprintf(_('Welcome to %s'), $project->getPublicName()),
 			    str_replace('##body##',
-			    sprintf(_("We're Sorry but this Project hasn't yet uploaded their personal webpage yet. <br /> Please check back soon for updates or visit <a href=\"%s\">the project page</a>."),
+			    _("We're Sorry but this Project hasn't uploaded their personal webpage yet.").'<br />'.
+			    sprintf(_('Please check back soon for updates or visit <a href="%s">the project page</a>.'),
 			    util_make_url('/projects/' . $project->getUnixName())),
 			    $contents)))));
 			fclose($fw);

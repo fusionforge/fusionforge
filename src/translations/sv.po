@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-23 15:15+0200\n"
+"POT-Creation-Date: 2013-07-23 15:36+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7836,11 +7836,15 @@ msgid "Please replace this file with your own website"
 msgstr ""
 
 #: cronjobs/homedirs.php:158
+msgid ""
+"We're Sorry but this Project hasn't uploaded their personal webpage yet."
+msgstr ""
+
+#: cronjobs/homedirs.php:159
 #, php-format
 msgid ""
-"We're Sorry but this Project hasn't yet uploaded their personal webpage yet. "
-"<br /> Please check back soon for updates or visit <a href=\"%s\">the "
-"project page</a>."
+"Please check back soon for updates or visit <a href=\"%s\">the project page</"
+"a>."
 msgstr ""
 
 #: cronjobs/massmail.php:146

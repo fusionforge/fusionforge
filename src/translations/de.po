@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-23 15:15+0200\n"
+"POT-Creation-Date: 2013-07-23 15:36+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -7943,15 +7943,20 @@ msgid "Please replace this file with your own website"
 msgstr "Bitte ersetzen Sie diese Datei mit Ihrer eigenen Website"
 
 #: cronjobs/homedirs.php:158
-#, php-format
 msgid ""
-"We're Sorry but this Project hasn't yet uploaded their personal webpage yet. "
-"<br /> Please check back soon for updates or visit <a href=\"%s\">the "
-"project page</a>."
+"We're Sorry but this Project hasn't uploaded their personal webpage yet."
 msgstr ""
 "Es tut uns Leid, doch dieses Projekt hat bisher keine eigene Website "
-"hochgeladen. <br />Für Updates schauen Sie bitte erneut vorbei oder besuchen "
-"Sie <a href=\"%s\"> die Projektseite</a>."
+"hochgeladen."
+
+#: cronjobs/homedirs.php:159
+#, php-format
+msgid ""
+"Please check back soon for updates or visit <a href=\"%s\">the project page</"
+"a>."
+msgstr ""
+"Für Updates schauen Sie bitte erneut vorbei oder besuchen Sie <a href=\"%s"
+"\"> die Projektseite</a>."
 
 #: cronjobs/massmail.php:146
 #, php-format
@@ -23834,6 +23839,15 @@ msgstr "Aktualisierung nicht möglich"
 msgid "No User Name Provided"
 msgstr "Kein Benutzername angegeben"
 
+#~ msgid ""
+#~ "We're Sorry but this Project hasn't yet uploaded their personal webpage "
+#~ "yet. <br /> Please check back soon for updates or visit <a href=\"%s"
+#~ "\">the project page</a>."
+#~ msgstr ""
+#~ "Es tut uns Leid, doch dieses Projekt hat bisher keine eigene Website "
+#~ "hochgeladen. <br />Für Updates schauen Sie bitte erneut vorbei oder "
+#~ "besuchen Sie <a href=\"%s\"> die Projektseite</a>."
+
 #~ msgid "ERROR: DB: Could not change group properties: %s"
 #~ msgstr ""
 #~ "Fehler: Datenbank: Konnte die Gruppen-Eigenschaften: %s nicht ändern."
@@ -23931,12 +23945,6 @@ msgstr "Kein Benutzername angegeben"
 #~ "Diese Seite erlaubt Ihnen eine CVS-Datei zu nutzen um alle Aufgaben zu "
 #~ "exportieren oder importieren (<a href=\"http://en.wikipedia.org/wiki/"
 #~ "Comma-separated_values\">Comma Separated Values</a>)."
-
-#~ msgid ""
-#~ "We're Sorry but this Project hasn't uploaded their personal webpage yet."
-#~ msgstr ""
-#~ "Es tut uns Leid, doch dieses Projekt hat bisher keine eigene Website "
-#~ "hochgeladen."
 
 #~ msgid "No matches found for “%s”"
 #~ msgstr "Keine Treffer für »%s« gefunden"
@@ -24795,13 +24803,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgstr ""
 #~ "Es tut uns Leid, doch dieses Projekt hat bisher keine eigene Website "
 #~ "hochgeladen."
-
-#~ msgid ""
-#~ "Please check back soon for updates or visit <a href=\"%s\">the project "
-#~ "page</a>."
-#~ msgstr ""
-#~ "Für Updates schauen Sie bitte erneut vorbei oder besuchen Sie <a href=\"%s"
-#~ "\"> die Projektseite</a>."
 
 #~ msgid "Your account is currently pending your email confirmation."
 #~ msgstr "Ihr Account erwartet momentan Ihre E-Mail-Bestätigung."

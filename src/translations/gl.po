@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-23 15:15+0200\n"
+"POT-Creation-Date: 2013-07-23 15:36+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -7917,13 +7917,16 @@ msgid "Please replace this file with your own website"
 msgstr "Substitúa este ficheiro co seu propio sitio web"
 
 #: cronjobs/homedirs.php:158
+msgid ""
+"We're Sorry but this Project hasn't uploaded their personal webpage yet."
+msgstr "Sentímolo, pero este proxecto aínda non subiu a súa páxina persoal."
+
+#: cronjobs/homedirs.php:159
 #, php-format
 msgid ""
-"We're Sorry but this Project hasn't yet uploaded their personal webpage yet. "
-"<br /> Please check back soon for updates or visit <a href=\"%s\">the "
-"project page</a>."
+"Please check back soon for updates or visit <a href=\"%s\">the project page</"
+"a>."
 msgstr ""
-"Sentímolo, pero este proxecto aínda non subiu a súa páxina persoal. <br /> "
 "Compróbeo de novo máis tarde, ou visite <a href=\"%s\">a páxina do proxecto</"
 "a>."
 
@@ -23765,6 +23768,15 @@ msgstr "Non se puido actualizar"
 msgid "No User Name Provided"
 msgstr "Non se introduciu un nome de usuario"
 
+#~ msgid ""
+#~ "We're Sorry but this Project hasn't yet uploaded their personal webpage "
+#~ "yet. <br /> Please check back soon for updates or visit <a href=\"%s"
+#~ "\">the project page</a>."
+#~ msgstr ""
+#~ "Sentímolo, pero este proxecto aínda non subiu a súa páxina persoal. <br /"
+#~ "> Compróbeo de novo máis tarde, ou visite <a href=\"%s\">a páxina do "
+#~ "proxecto</a>."
+
 #~ msgid "ERROR: DB: Could not change group properties: %s"
 #~ msgstr "ERRO: BD: non se puideron cambiar as propiedades de grupo: %s"
 
@@ -23844,10 +23856,6 @@ msgstr "Non se introduciu un nome de usuario"
 
 #~ msgid "Jabber Address"
 #~ msgstr "Enderezo de Jabber "
-
-#~ msgid ""
-#~ "We're Sorry but this Project hasn't uploaded their personal webpage yet."
-#~ msgstr "Sentímolo, pero este proxecto aínda non subiu a súa páxina persoal."
 
 #, fuzzy
 #~ msgid "Error Getting Forum"
@@ -24658,13 +24666,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ "We're Sorry but this Project hasn't yet uploaded their personal webpage "
 #~ "yet."
 #~ msgstr "Sentímolo, pero este proxecto aínda non subiu a súa páxina persoal."
-
-#~ msgid ""
-#~ "Please check back soon for updates or visit <a href=\"%s\">the project "
-#~ "page</a>."
-#~ msgstr ""
-#~ "Compróbeo de novo máis tarde, ou visite <a href=\"%s\">a páxina do "
-#~ "proxecto</a>."
 
 #~ msgid "Your account is currently pending your email confirmation."
 #~ msgstr ""
