@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-23 11:29+0200\n"
+"POT-Creation-Date: 2013-07-23 15:15+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -428,11 +428,14 @@ msgstr "项目"
 #: common/forum/Forum.class.php:601 common/forum/Forum.class.php:627
 #: common/forum/Forum.class.php:635 common/forum/Forum.class.php:643
 #: common/forum/Forum.class.php:659 common/forum/ForumHTML.class.php:73
-#: common/include/exit.php:80 common/include/User.class.php:313
+#: common/forum/ForumHTML.class.php:211 common/include/exit.php:80
+#: common/include/User.class.php:313
 #: common/mail/MailingListFactory.class.php:104
 #: common/tracker/actions/browse.php:406 common/tracker/actions/browse.php:409
 #: common/tracker/actions/query.php:329 common/tracker/actions/query.php:344
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
+#: common/tracker/ArtifactExtraField.class.php:187
+#: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
 #: cronjobs/send_pending_items_mail.php:77
@@ -1049,7 +1052,7 @@ msgstr "文件所属的分组"
 #: common/tracker/actions/detail.php:73
 #: common/tracker/actions/mod-limited.php:128
 #: common/tracker/actions/mod.php:155 common/tracker/actions/query.php:344
-#: common/tracker/Artifact.class.php:947
+#: common/tracker/Artifact.class.php:948
 #: common/tracker/views/form-customizelist.php:37 www/pm/browse_task.php:383
 #: www/project/admin/database.php:208
 msgid "State"
@@ -1199,6 +1202,7 @@ msgstr "姓氏："
 #: common/docman/views/listfile.php:219
 #: common/docman/views/listtrashfile.php:130
 #: common/docman/views/pendingfiles.php:63 common/docman/views/search.php:150
+#: common/include/Group.class.php:774
 #: common/tracker/ArtifactExtraField.class.php:327
 #: common/tracker/include/ArtifactTypeHtml.class.php:325
 #: common/tracker/views/form-addextrafieldoption.php:108
@@ -1303,11 +1307,11 @@ msgstr ""
 #: common/tracker/actions/mod-limited.php:98
 #: common/tracker/actions/mod-limited.php:103
 #: common/tracker/actions/mod.php:99 common/tracker/actions/mod.php:104
-#: common/tracker/Artifact.class.php:1581
-#: common/tracker/Artifact.class.php:1583
-#: common/tracker/Artifact.class.php:1590
-#: common/tracker/Artifact.class.php:1596
-#: common/tracker/Artifact.class.php:1696
+#: common/tracker/Artifact.class.php:1584
+#: common/tracker/Artifact.class.php:1586
+#: common/tracker/Artifact.class.php:1593
+#: common/tracker/Artifact.class.php:1599
+#: common/tracker/Artifact.class.php:1699
 #: common/tracker/include/ArtifactHtml.class.php:112
 #: common/tracker/include/ArtifactHtml.class.php:170
 #: common/tracker/include/ArtifactHtml.class.php:179
@@ -1323,7 +1327,6 @@ msgstr ""
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:190
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:54
 #: plugins/hudson/include/HudsonBuild.class.php:110
-#: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:61
 #: www/account/editsshkeys.php:59 www/account/index.php:146
 #: www/account/index.php:309 www/admin/cronman.php:78
 #: www/admin/grouplist.php:118 www/admin/massmail.php:158
@@ -2227,6 +2230,7 @@ msgstr "只有登录后才能保存你的位置"
 #: common/forum/Forum.class.php:601 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
 #: common/survey/SurveyQuestion.class.php:153
+#: common/tracker/Artifact.class.php:1153
 #: plugins/mailman/include/MailmanList.class.php:249
 #: plugins/mailman/include/MailmanList.class.php:376
 #: plugins/mailman/include/MailmanList.class.php:393
@@ -2349,14 +2353,22 @@ msgstr "讨论区信息：无效的讨论区对象"
 msgid "This is the content of the pending message"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:211 common/forum/ForumHTML.class.php:269
-#: www/forum/message.php:126
-msgid "By:"
-msgstr "作者："
+#: common/forum/ForumHTML.class.php:211
+#: common/tracker/include/ArtifactHtml.class.php:149
+#: common/tracker/include/ArtifactTypeHtml.class.php:367
+#: www/activity/index.php:266 www/pm/include/ProjectTaskHTML.class.php:158
+#: www/pm/include/ProjectTaskHTML.class.php:204
+#: www/project/admin/project_admin_utils.php:162
+msgid "By"
+msgstr "由"
 
 #: common/forum/ForumHTML.class.php:268 www/forum/message.php:123
 msgid "reply"
 msgstr "回覆"
+
+#: common/forum/ForumHTML.class.php:269 www/forum/message.php:126
+msgid "By:"
+msgstr "作者："
 
 #: common/forum/ForumHTML.class.php:313
 msgid "Current File"
@@ -2859,7 +2871,7 @@ msgid "Permission denied."
 msgstr "权限不足."
 
 #: common/include/Error.class.php:147 common/include/User.class.php:313
-#: common/include/User.class.php:893 common/include/User.class.php:946
+#: common/include/User.class.php:894 common/include/User.class.php:947
 #: common/tracker/actions/tracker.php:84
 #: plugins/forumml/www/forumml_utils.php:686 www/account/change_email.php:38
 msgid "Invalid Email Address"
@@ -2987,7 +2999,7 @@ msgstr "无法获得权限"
 
 #: common/include/Group.class.php:445
 #, php-format
-msgid "ERROR: DB: Could not change group properties: %s"
+msgid "Error: Cannot change group properties: %s"
 msgstr "错误:数据库:不能更改组属性:%s"
 
 #: common/include/Group.class.php:510
@@ -3155,7 +3167,7 @@ msgstr "获取角色信息时发生错误"
 
 #: common/include/Group.class.php:1996
 #, fuzzy
-msgid "ERROR: User does not exist"
+msgid "Error: User does not exist"
 msgstr "错误:用户不存在"
 
 #: common/include/Group.class.php:2044 common/include/Group.class.php:2163
@@ -3193,6 +3205,11 @@ msgstr ""
 #, fuzzy
 msgid "Group already active"
 msgstr "组已被激活"
+
+#: common/include/Group.class.php:2494
+#, fuzzy
+msgid "Approved"
+msgstr "批准"
 
 #: common/include/Group.class.php:2519 common/include/Group.class.php:2590
 msgid "Group does not have any administrators."
@@ -4222,8 +4239,8 @@ msgstr ""
 
 #: common/include/User.class.php:462
 #, php-format
-msgid "%1$s Account Registration"
-msgstr "%1$s 帐号注册"
+msgid "%s Account Registration"
+msgstr "%s 帐号注册"
 
 #: common/include/User.class.php:490
 #, fuzzy
@@ -4264,68 +4281,68 @@ msgstr ""
 msgid "Error - Could Not Update User Status:"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/User.class.php:774
+#: common/include/User.class.php:775
 #, fuzzy
 msgid "Error - Could Not Update User Unix Status: "
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/User.class.php:901 common/include/User.class.php:954
+#: common/include/User.class.php:902 common/include/User.class.php:955
 #, fuzzy
 msgid "User with this email already exists."
 msgstr "帐号已存在"
 
-#: common/include/User.class.php:912
+#: common/include/User.class.php:913
 #, fuzzy
 msgid "Error - Could Not Update User Email: "
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/User.class.php:963
+#: common/include/User.class.php:964
 #, fuzzy
 msgid "Error - Could Not Update User Email And Hash: "
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/User.class.php:990
+#: common/include/User.class.php:992
 #, fuzzy
 msgid "Error - Could Not Update real name of user : "
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/User.class.php:1063
+#: common/include/User.class.php:1065
 #, fuzzy, php-format
 msgid "Error: Invalid Shell %s"
 msgstr "无效参数"
 
-#: common/include/User.class.php:1072
+#: common/include/User.class.php:1074
 #, fuzzy
 msgid "Error - Could Not Update User Unix Shell:"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/User.class.php:1219
+#: common/include/User.class.php:1221
 #, fuzzy
 msgid "SSH Key already in use"
 msgstr "查询已存在"
 
-#: common/include/User.class.php:1227
+#: common/include/User.class.php:1229
 #, fuzzy
 msgid "Error - Could Not Add User SSH Key:"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/User.class.php:1244
+#: common/include/User.class.php:1246
 #, fuzzy
 msgid "Error - Could Not Delete User SSH Key:"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/User.class.php:1377
+#: common/include/User.class.php:1379
 #, fuzzy
 msgid "Error: "
 msgstr "错误"
 
-#: common/include/User.class.php:1391 common/include/User.class.php:1427
-#: common/include/User.class.php:1452
+#: common/include/User.class.php:1393 common/include/User.class.php:1429
+#: common/include/User.class.php:1454
 #, fuzzy
 msgid "Error - Could Not Change User Password:"
 msgstr "改变密码"
 
-#: common/include/User.class.php:1708
+#: common/include/User.class.php:1710
 #, php-format
 msgid ""
 "New User %1$s registered and validated\n"
@@ -4333,7 +4350,7 @@ msgid ""
 "Email: %3$s\n"
 msgstr ""
 
-#: common/include/User.class.php:1713
+#: common/include/User.class.php:1715
 #, fuzzy, php-format
 msgid "New %1$s User"
 msgstr "%1$s 团队"
@@ -4682,7 +4699,10 @@ msgstr "更新错误：必须填入问卷标题"
 msgid "Update Failed: Survey Questions Required"
 msgstr "更新错误：必须要有问卷问题"
 
-#: common/survey/Survey.class.php:129 www/survey/rating_resp.php:57
+#: common/survey/Survey.class.php:129
+#: common/tracker/ArtifactExtraField.class.php:187
+#: common/tracker/ArtifactExtraField.class.php:193
+#: www/survey/rating_resp.php:57
 msgid "Insert Error"
 msgstr "插入错误"
 
@@ -4987,8 +5007,6 @@ msgstr "订制栏位已删除"
 
 #: common/tracker/actions/admin-updates.php:107
 #: common/tracker/actions/admin-updates.php:206
-#: common/tracker/ArtifactExtraField.class.php:187
-#: common/tracker/ArtifactExtraField.class.php:193
 msgid "Error inserting an element"
 msgstr "错误插入一个组成元件"
 
@@ -5283,7 +5301,7 @@ msgstr "全部清除"
 #: common/tracker/actions/browse.php:568 common/tracker/actions/browse.php:747
 #: common/tracker/actions/detail.php:87
 #: common/tracker/actions/mod-limited.php:114
-#: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:943
+#: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:944
 #: common/tracker/include/build_submission_form.php:62
 #: cronjobs/send_pending_items_mail.php:119
 #: plugins/mantisbt/view/addIssue.php:74
@@ -5345,7 +5363,7 @@ msgstr "没有变动"
 msgid "Nobody"
 msgstr "Nobody"
 
-#: common/tracker/actions/browse.php:757 common/tracker/Artifact.class.php:951
+#: common/tracker/actions/browse.php:757 common/tracker/Artifact.class.php:952
 msgid "Canned Response"
 msgstr "预设回应"
 
@@ -5539,7 +5557,7 @@ msgstr "关闭日期"
 msgid "Existing Files"
 msgstr "已经存在的文件"
 
-#: common/tracker/actions/mod.php:111 common/tracker/Artifact.class.php:955
+#: common/tracker/actions/mod.php:111 common/tracker/Artifact.class.php:956
 msgid "Data Type"
 msgstr "资料类型"
 
@@ -5908,45 +5926,45 @@ msgstr "正在监视"
 msgid "Artifact Monitoring Deactivated"
 msgstr "监视已取消"
 
-#: common/tracker/Artifact.class.php:962
+#: common/tracker/Artifact.class.php:963
 msgid "Invalid assigned_to (assigned person is not a technician)"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:986
+#: common/tracker/Artifact.class.php:987
 #, fuzzy
 msgid "Could not move to new Artifact Type"
 msgstr "无法完成执行"
 
-#: common/tracker/Artifact.class.php:1070
+#: common/tracker/Artifact.class.php:999
+#, php-format
+msgid "Moved from %1$s to %2$s"
+msgstr ""
+
+#: common/tracker/Artifact.class.php:1073
 msgid "Removal of old artifact_extra_field_data failed: "
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1150
-#, fuzzy
-msgid "Error - update failed!"
-msgstr "更新错误"
-
-#: common/tracker/Artifact.class.php:1178
+#: common/tracker/Artifact.class.php:1181
 #, fuzzy
 msgid "Could Not Create Canned Response Object"
 msgstr "无法更新上层文章"
 
-#: common/tracker/Artifact.class.php:1191
+#: common/tracker/Artifact.class.php:1194
 #, fuzzy
 msgid "Unable to Use Canned Response"
 msgstr "使用预设的回应"
 
-#: common/tracker/Artifact.class.php:1206
+#: common/tracker/Artifact.class.php:1209
 msgid "Nothing Changed - Update Cancelled"
 msgstr "没有变动 - 取消更新"
 
-#: common/tracker/Artifact.class.php:1239
+#: common/tracker/Artifact.class.php:1242
 #, fuzzy
 msgid "Error updating assigned_to in artifact: "
 msgstr " 更新项目信息错误:%s"
 
-#: common/tracker/Artifact.class.php:1314
-#: common/tracker/Artifact.class.php:1324
+#: common/tracker/Artifact.class.php:1317
+#: common/tracker/Artifact.class.php:1327
 #, fuzzy
 msgid "Status Custom Field Must Be Set"
 msgstr "订制栏位已删除"
@@ -6032,8 +6050,8 @@ msgid ""
 msgstr "别名包含无效字符，只允许字母、数字、连字符(-)和下划线(_)。"
 
 #: common/tracker/ArtifactExtraField.class.php:500
-#, php-format
-msgid "'%1$s' is a reserved alias. Please provide another name."
+#, fuzzy, php-format
+msgid "“%s” is a reserved alias. Please provide another name."
 msgstr "'%1$s' 是保留别名，请选用其他别名"
 
 #: common/tracker/ArtifactExtraField.class.php:584
@@ -6168,14 +6186,6 @@ msgstr "栏位"
 #: www/project/admin/project_admin_utils.php:160
 msgid "Old Value"
 msgstr "旧值"
-
-#: common/tracker/include/ArtifactHtml.class.php:149
-#: common/tracker/include/ArtifactTypeHtml.class.php:367
-#: www/activity/index.php:266 www/pm/include/ProjectTaskHTML.class.php:158
-#: www/pm/include/ProjectTaskHTML.class.php:204
-#: www/project/admin/project_admin_utils.php:162
-msgid "By"
-msgstr "由"
 
 #: common/tracker/include/ArtifactHtml.class.php:187
 msgid "No Changes Have Been Made to This Item"
@@ -6364,7 +6374,7 @@ msgstr "不正确用户"
 
 #: common/tracker/Roadmap.class.php:104
 #, fuzzy, php-format
-msgid "\"%s\" roadmap already exists"
+msgid "“%s” roadmap already exists"
 msgstr "帐号已存在"
 
 #: common/tracker/views/form-addcanned.php:27
@@ -9073,7 +9083,7 @@ msgid "Toggle font family (typewriter/normal)"
 msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:442
-msgid "Cc :"
+msgid "Cc:"
 msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:563
@@ -9082,13 +9092,12 @@ msgid "Reply"
 msgstr "回覆"
 
 #: plugins/forumml/www/forumml_utils.php:585
-msgid "Add cc :"
+msgid "Add cc:"
 msgstr ""
 
-#: plugins/forumml/www/forumml_utils.php:586 plugins/forumml/www/index.php:118
-#: plugins/forumml/www/scripts/cc_attach_js.php:50
+#: plugins/forumml/www/forumml_utils.php:586
 #, fuzzy
-msgid "Attach :"
+msgid "Attach:"
 msgstr "附加文件"
 
 #: plugins/forumml/www/forumml_utils.php:604 plugins/forumml/www/index.php:128
@@ -9170,6 +9179,12 @@ msgstr "上传新版本"
 #: www/sendmessage.php:69 www/sendmessage.php:150
 msgid "Subject"
 msgstr "主题"
+
+#: plugins/forumml/www/index.php:118
+#: plugins/forumml/www/scripts/cc_attach_js.php:50
+#, fuzzy
+msgid "Attach :"
+msgstr "附加文件"
 
 #: plugins/forumml/www/index.php:122
 #, fuzzy
@@ -14078,17 +14093,17 @@ msgstr ""
 msgid "Page"
 msgstr "主要页面"
 
-#: plugins/wiki/common/WikiPlugin.class.php:76
+#: plugins/wiki/common/WikiPlugin.class.php:74
 #, fuzzy
 msgid "Wiki Admin"
 msgstr "网站管理"
 
-#: plugins/wiki/common/WikiPlugin.class.php:93
+#: plugins/wiki/common/WikiPlugin.class.php:91
 #, fuzzy
 msgid "This project's wiki"
 msgstr "这个项目的新闻"
 
-#: plugins/wiki/common/WikiPlugin.class.php:204
+#: plugins/wiki/common/WikiPlugin.class.php:208
 msgid "List of active wikis in Forge"
 msgstr ""
 
@@ -23348,6 +23363,25 @@ msgstr "大量更新"
 msgid "No User Name Provided"
 msgstr "帐号"
 
+#~ msgid "ERROR: DB: Could not change group properties: %s"
+#~ msgstr "错误:数据库:不能更改组属性:%s"
+
+#~ msgid "%1$s Account Registration"
+#~ msgstr "%1$s 帐号注册"
+
+#, fuzzy
+#~ msgid "Error - update failed!"
+#~ msgstr "更新错误"
+
+#~ msgid "No Valid ParentMessage Object"
+#~ msgstr "无效的 ParentMessage 对象"
+
+#~ msgid "Invalid Message ID"
+#~ msgstr "非法的消息ID"
+
+#~ msgid "Invalid Password:"
+#~ msgstr "无效的密码："
+
 #, fuzzy
 #~ msgid "Invalid email "
 #~ msgstr "无效的Email"
@@ -23842,9 +23876,6 @@ msgstr "帐号"
 #~ msgid "Error: Cannot add admin to newly created group: %s"
 #~ msgstr "错误: 不能将管理员帐号添加到新建组:%s"
 
-#~ msgid "Error: Cannot change group properties: %s"
-#~ msgstr "错误:数据库:不能更改组属性:%s"
-
 #~ msgid "Error: Could Not Add User To Group: %s"
 #~ msgstr "错误:不能将用户加到组：%s"
 
@@ -23885,9 +23916,6 @@ msgstr "帐号"
 
 #~ msgid "Enjoy the site."
 #~ msgstr "享用这个网站吧。"
-
-#~ msgid "%s Account Registration"
-#~ msgstr "%s 帐号注册"
 
 #~ msgid "%s Reporting"
 #~ msgstr "%s 报告"
@@ -25818,3 +25846,12 @@ msgstr "帐号"
 
 #~ msgid "Forum monitoring deactivated"
 #~ msgstr "讨论区监视停用"
+
+#~ msgid "No valid Group Object"
+#~ msgstr "没有有效的群组对象"
+
+#~ msgid "Message Not Found"
+#~ msgstr "没发现文章"
+
+#~ msgid "Error - disabled feature."
+#~ msgstr "错误 - 停用的功能"

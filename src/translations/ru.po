@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-23 11:29+0200\n"
+"POT-Creation-Date: 2013-07-23 15:15+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -428,11 +428,14 @@ msgstr "Проект"
 #: common/forum/Forum.class.php:601 common/forum/Forum.class.php:627
 #: common/forum/Forum.class.php:635 common/forum/Forum.class.php:643
 #: common/forum/Forum.class.php:659 common/forum/ForumHTML.class.php:73
-#: common/include/exit.php:80 common/include/User.class.php:313
+#: common/forum/ForumHTML.class.php:211 common/include/exit.php:80
+#: common/include/User.class.php:313
 #: common/mail/MailingListFactory.class.php:104
 #: common/tracker/actions/browse.php:406 common/tracker/actions/browse.php:409
 #: common/tracker/actions/query.php:329 common/tracker/actions/query.php:344
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
+#: common/tracker/ArtifactExtraField.class.php:187
+#: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
 #: cronjobs/send_pending_items_mail.php:77
@@ -1055,7 +1058,7 @@ msgstr "Группа документа"
 #: common/tracker/actions/detail.php:73
 #: common/tracker/actions/mod-limited.php:128
 #: common/tracker/actions/mod.php:155 common/tracker/actions/query.php:344
-#: common/tracker/Artifact.class.php:947
+#: common/tracker/Artifact.class.php:948
 #: common/tracker/views/form-customizelist.php:37 www/pm/browse_task.php:383
 #: www/project/admin/database.php:208
 msgid "State"
@@ -1205,6 +1208,7 @@ msgstr "Фамилия:"
 #: common/docman/views/listfile.php:219
 #: common/docman/views/listtrashfile.php:130
 #: common/docman/views/pendingfiles.php:63 common/docman/views/search.php:150
+#: common/include/Group.class.php:774
 #: common/tracker/ArtifactExtraField.class.php:327
 #: common/tracker/include/ArtifactTypeHtml.class.php:325
 #: common/tracker/views/form-addextrafieldoption.php:108
@@ -1309,11 +1313,11 @@ msgstr ""
 #: common/tracker/actions/mod-limited.php:98
 #: common/tracker/actions/mod-limited.php:103
 #: common/tracker/actions/mod.php:99 common/tracker/actions/mod.php:104
-#: common/tracker/Artifact.class.php:1581
-#: common/tracker/Artifact.class.php:1583
-#: common/tracker/Artifact.class.php:1590
-#: common/tracker/Artifact.class.php:1596
-#: common/tracker/Artifact.class.php:1696
+#: common/tracker/Artifact.class.php:1584
+#: common/tracker/Artifact.class.php:1586
+#: common/tracker/Artifact.class.php:1593
+#: common/tracker/Artifact.class.php:1599
+#: common/tracker/Artifact.class.php:1699
 #: common/tracker/include/ArtifactHtml.class.php:112
 #: common/tracker/include/ArtifactHtml.class.php:170
 #: common/tracker/include/ArtifactHtml.class.php:179
@@ -1329,7 +1333,6 @@ msgstr ""
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:190
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:54
 #: plugins/hudson/include/HudsonBuild.class.php:110
-#: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:61
 #: www/account/editsshkeys.php:59 www/account/index.php:146
 #: www/account/index.php:309 www/admin/cronman.php:78
 #: www/admin/grouplist.php:118 www/admin/massmail.php:158
@@ -2227,6 +2230,7 @@ msgstr "Сохранять позиции Вы можете лишь автор�
 #: common/forum/Forum.class.php:601 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
 #: common/survey/SurveyQuestion.class.php:153
+#: common/tracker/Artifact.class.php:1153
 #: plugins/mailman/include/MailmanList.class.php:249
 #: plugins/mailman/include/MailmanList.class.php:376
 #: plugins/mailman/include/MailmanList.class.php:393
@@ -2349,14 +2353,22 @@ msgstr "Неправильный объект форума"
 msgid "This is the content of the pending message"
 msgstr "Содержимое незаконченного сообщения"
 
-#: common/forum/ForumHTML.class.php:211 common/forum/ForumHTML.class.php:269
-#: www/forum/message.php:126
-msgid "By:"
-msgstr "От:"
+#: common/forum/ForumHTML.class.php:211
+#: common/tracker/include/ArtifactHtml.class.php:149
+#: common/tracker/include/ArtifactTypeHtml.class.php:367
+#: www/activity/index.php:266 www/pm/include/ProjectTaskHTML.class.php:158
+#: www/pm/include/ProjectTaskHTML.class.php:204
+#: www/project/admin/project_admin_utils.php:162
+msgid "By"
+msgstr "По"
 
 #: common/forum/ForumHTML.class.php:268 www/forum/message.php:123
 msgid "reply"
 msgstr "Ответить"
+
+#: common/forum/ForumHTML.class.php:269 www/forum/message.php:126
+msgid "By:"
+msgstr "От:"
 
 #: common/forum/ForumHTML.class.php:313
 msgid "Current File"
@@ -2845,7 +2857,7 @@ msgid "Permission denied."
 msgstr "Доступ запрещен"
 
 #: common/include/Error.class.php:147 common/include/User.class.php:313
-#: common/include/User.class.php:893 common/include/User.class.php:946
+#: common/include/User.class.php:894 common/include/User.class.php:947
 #: common/tracker/actions/tracker.php:84
 #: plugins/forumml/www/forumml_utils.php:686 www/account/change_email.php:38
 msgid "Invalid Email Address"
@@ -2977,7 +2989,7 @@ msgstr "Ошибка уровня доступа"
 
 #: common/include/Group.class.php:445
 #, php-format
-msgid "ERROR: DB: Could not change group properties: %s"
+msgid "Error: Cannot change group properties: %s"
 msgstr "Невозможно изменение свойств группы: %s"
 
 #: common/include/Group.class.php:510
@@ -3144,7 +3156,7 @@ msgid "Error Getting Role Object"
 msgstr "Неполучена роль объекта"
 
 #: common/include/Group.class.php:1996
-msgid "ERROR: User does not exist"
+msgid "Error: User does not exist"
 msgstr "Ошибка: Пользователь не существует"
 
 #: common/include/Group.class.php:2044 common/include/Group.class.php:2163
@@ -3180,6 +3192,11 @@ msgstr ""
 #: common/include/Group.class.php:2256
 msgid "Group already active"
 msgstr "Группа уже активна"
+
+#: common/include/Group.class.php:2494
+#, fuzzy
+msgid "Approved"
+msgstr "Утвердить"
 
 #: common/include/Group.class.php:2519 common/include/Group.class.php:2590
 msgid "Group does not have any administrators."
@@ -4244,8 +4261,8 @@ msgstr ""
 
 #: common/include/User.class.php:462
 #, php-format
-msgid "%1$s Account Registration"
-msgstr "%1$s Регистрация учетной записи"
+msgid "%s Account Registration"
+msgstr "%s Регистрация учетной записи"
 
 #: common/include/User.class.php:490
 #, fuzzy
@@ -4286,68 +4303,68 @@ msgstr ""
 msgid "Error - Could Not Update User Status:"
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
-#: common/include/User.class.php:774
+#: common/include/User.class.php:775
 #, fuzzy
 msgid "Error - Could Not Update User Unix Status: "
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
-#: common/include/User.class.php:901 common/include/User.class.php:954
+#: common/include/User.class.php:902 common/include/User.class.php:955
 #, fuzzy
 msgid "User with this email already exists."
 msgstr "Такое имя пользователя уже существует."
 
-#: common/include/User.class.php:912
+#: common/include/User.class.php:913
 #, fuzzy
 msgid "Error - Could Not Update User Email: "
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
-#: common/include/User.class.php:963
+#: common/include/User.class.php:964
 #, fuzzy
 msgid "Error - Could Not Update User Email And Hash: "
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
-#: common/include/User.class.php:990
+#: common/include/User.class.php:992
 #, fuzzy
 msgid "Error - Could Not Update real name of user : "
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
-#: common/include/User.class.php:1063
+#: common/include/User.class.php:1065
 #, fuzzy, php-format
 msgid "Error: Invalid Shell %s"
 msgstr "Неверные пределы"
 
-#: common/include/User.class.php:1072
+#: common/include/User.class.php:1074
 #, fuzzy
 msgid "Error - Could Not Update User Unix Shell:"
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
-#: common/include/User.class.php:1219
+#: common/include/User.class.php:1221
 #, fuzzy
 msgid "SSH Key already in use"
 msgstr "Запрос уже существует"
 
-#: common/include/User.class.php:1227
+#: common/include/User.class.php:1229
 #, fuzzy
 msgid "Error - Could Not Add User SSH Key:"
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
-#: common/include/User.class.php:1244
+#: common/include/User.class.php:1246
 #, fuzzy
 msgid "Error - Could Not Delete User SSH Key:"
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
-#: common/include/User.class.php:1377
+#: common/include/User.class.php:1379
 #, fuzzy
 msgid "Error: "
 msgstr "Ошибка"
 
-#: common/include/User.class.php:1391 common/include/User.class.php:1427
-#: common/include/User.class.php:1452
+#: common/include/User.class.php:1393 common/include/User.class.php:1429
+#: common/include/User.class.php:1454
 #, fuzzy
 msgid "Error - Could Not Change User Password:"
 msgstr "Изменение пароля"
 
-#: common/include/User.class.php:1708
+#: common/include/User.class.php:1710
 #, php-format
 msgid ""
 "New User %1$s registered and validated\n"
@@ -4355,7 +4372,7 @@ msgid ""
 "Email: %3$s\n"
 msgstr ""
 
-#: common/include/User.class.php:1713
+#: common/include/User.class.php:1715
 #, fuzzy, php-format
 msgid "New %1$s User"
 msgstr "Кампания %1$s"
@@ -4705,7 +4722,10 @@ msgstr "Требуется Заголовок опроса"
 msgid "Update Failed: Survey Questions Required"
 msgstr "Требуется указать вопросы"
 
-#: common/survey/Survey.class.php:129 www/survey/rating_resp.php:57
+#: common/survey/Survey.class.php:129
+#: common/tracker/ArtifactExtraField.class.php:187
+#: common/tracker/ArtifactExtraField.class.php:193
+#: www/survey/rating_resp.php:57
 msgid "Insert Error"
 msgstr "Ошибка вставки"
 
@@ -5028,8 +5048,6 @@ msgstr "Выборочное поле удалено"
 
 #: common/tracker/actions/admin-updates.php:107
 #: common/tracker/actions/admin-updates.php:206
-#: common/tracker/ArtifactExtraField.class.php:187
-#: common/tracker/ArtifactExtraField.class.php:193
 msgid "Error inserting an element"
 msgstr "Ошибка вставки элемента"
 
@@ -5320,7 +5338,7 @@ msgstr "Очистить все"
 #: common/tracker/actions/browse.php:568 common/tracker/actions/browse.php:747
 #: common/tracker/actions/detail.php:87
 #: common/tracker/actions/mod-limited.php:114
-#: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:943
+#: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:944
 #: common/tracker/include/build_submission_form.php:62
 #: cronjobs/send_pending_items_mail.php:119
 #: plugins/mantisbt/view/addIssue.php:74
@@ -5384,7 +5402,7 @@ msgstr "Без изменений"
 msgid "Nobody"
 msgstr "Никто"
 
-#: common/tracker/actions/browse.php:757 common/tracker/Artifact.class.php:951
+#: common/tracker/actions/browse.php:757 common/tracker/Artifact.class.php:952
 msgid "Canned Response"
 msgstr "Указанный ответ"
 
@@ -5579,7 +5597,7 @@ msgstr "Дата закрытия"
 msgid "Existing Files"
 msgstr "Существующие файлы"
 
-#: common/tracker/actions/mod.php:111 common/tracker/Artifact.class.php:955
+#: common/tracker/actions/mod.php:111 common/tracker/Artifact.class.php:956
 msgid "Data Type"
 msgstr "Тип данных"
 
@@ -5945,45 +5963,45 @@ msgstr "Оповещение на емайл об измениях в образ
 msgid "Artifact Monitoring Deactivated"
 msgstr "Оповещения о новостях в образцах отключены"
 
-#: common/tracker/Artifact.class.php:962
+#: common/tracker/Artifact.class.php:963
 msgid "Invalid assigned_to (assigned person is not a technician)"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:986
+#: common/tracker/Artifact.class.php:987
 #, fuzzy
 msgid "Could not move to new Artifact Type"
 msgstr "Производство неполучно"
 
-#: common/tracker/Artifact.class.php:1070
+#: common/tracker/Artifact.class.php:999
+#, php-format
+msgid "Moved from %1$s to %2$s"
+msgstr ""
+
+#: common/tracker/Artifact.class.php:1073
 msgid "Removal of old artifact_extra_field_data failed: "
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1150
-#, fuzzy
-msgid "Error - update failed!"
-msgstr "Ошибка обновления"
-
-#: common/tracker/Artifact.class.php:1178
+#: common/tracker/Artifact.class.php:1181
 #, fuzzy
 msgid "Could Not Create Canned Response Object"
 msgstr "Невозможно получение группы проекта"
 
-#: common/tracker/Artifact.class.php:1191
+#: common/tracker/Artifact.class.php:1194
 #, fuzzy
 msgid "Unable to Use Canned Response"
 msgstr "Воспользоватся шаблонным ответом"
 
-#: common/tracker/Artifact.class.php:1206
+#: common/tracker/Artifact.class.php:1209
 msgid "Nothing Changed - Update Cancelled"
 msgstr "Изменения отменены "
 
-#: common/tracker/Artifact.class.php:1239
+#: common/tracker/Artifact.class.php:1242
 #, fuzzy
 msgid "Error updating assigned_to in artifact: "
 msgstr "Нет доступа к изменению информации проекта: %s"
 
-#: common/tracker/Artifact.class.php:1314
-#: common/tracker/Artifact.class.php:1324
+#: common/tracker/Artifact.class.php:1317
+#: common/tracker/Artifact.class.php:1327
 #, fuzzy
 msgid "Status Custom Field Must Be Set"
 msgstr "Выборочное поле удалено"
@@ -6072,8 +6090,8 @@ msgstr ""
 
 #: common/tracker/ArtifactExtraField.class.php:500
 #, php-format
-msgid "'%1$s' is a reserved alias. Please provide another name."
-msgstr "'%1$s' такой псевдоним недопустим, укажите другой."
+msgid "“%s” is a reserved alias. Please provide another name."
+msgstr "'%s' такой псевдоним недопустим, укажите другой."
 
 #: common/tracker/ArtifactExtraField.class.php:584
 msgid "Out of range value"
@@ -6211,14 +6229,6 @@ msgstr "Поле"
 #: www/project/admin/project_admin_utils.php:160
 msgid "Old Value"
 msgstr "Старое значение"
-
-#: common/tracker/include/ArtifactHtml.class.php:149
-#: common/tracker/include/ArtifactTypeHtml.class.php:367
-#: www/activity/index.php:266 www/pm/include/ProjectTaskHTML.class.php:158
-#: www/pm/include/ProjectTaskHTML.class.php:204
-#: www/project/admin/project_admin_utils.php:162
-msgid "By"
-msgstr "По"
 
 #: common/tracker/include/ArtifactHtml.class.php:187
 msgid "No Changes Have Been Made to This Item"
@@ -6411,7 +6421,7 @@ msgstr "Неверное имя участника"
 
 #: common/tracker/Roadmap.class.php:104
 #, fuzzy, php-format
-msgid "\"%s\" roadmap already exists"
+msgid "“%s” roadmap already exists"
 msgstr "Такое имя пользователя уже существует."
 
 #: common/tracker/views/form-addcanned.php:27
@@ -9178,7 +9188,7 @@ msgid "Toggle font family (typewriter/normal)"
 msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:442
-msgid "Cc :"
+msgid "Cc:"
 msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:563
@@ -9187,13 +9197,12 @@ msgid "Reply"
 msgstr "Ответить"
 
 #: plugins/forumml/www/forumml_utils.php:585
-msgid "Add cc :"
+msgid "Add cc:"
 msgstr ""
 
-#: plugins/forumml/www/forumml_utils.php:586 plugins/forumml/www/index.php:118
-#: plugins/forumml/www/scripts/cc_attach_js.php:50
+#: plugins/forumml/www/forumml_utils.php:586
 #, fuzzy
-msgid "Attach :"
+msgid "Attach:"
 msgstr "Прикрепить файлы"
 
 #: plugins/forumml/www/forumml_utils.php:604 plugins/forumml/www/index.php:128
@@ -9275,6 +9284,12 @@ msgstr "Добавить новую версию"
 #: www/sendmessage.php:69 www/sendmessage.php:150
 msgid "Subject"
 msgstr "Тема"
+
+#: plugins/forumml/www/index.php:118
+#: plugins/forumml/www/scripts/cc_attach_js.php:50
+#, fuzzy
+msgid "Attach :"
+msgstr "Прикрепить файлы"
 
 #: plugins/forumml/www/index.php:122
 #, fuzzy
@@ -14362,17 +14377,17 @@ msgstr ""
 msgid "Page"
 msgstr "Главная страница"
 
-#: plugins/wiki/common/WikiPlugin.class.php:76
+#: plugins/wiki/common/WikiPlugin.class.php:74
 #, fuzzy
 msgid "Wiki Admin"
 msgstr "Управление сайтом"
 
-#: plugins/wiki/common/WikiPlugin.class.php:93
+#: plugins/wiki/common/WikiPlugin.class.php:91
 #, fuzzy
 msgid "This project's wiki"
 msgstr "В новостях проекта"
 
-#: plugins/wiki/common/WikiPlugin.class.php:204
+#: plugins/wiki/common/WikiPlugin.class.php:208
 msgid "List of active wikis in Forge"
 msgstr ""
 
@@ -23884,6 +23899,31 @@ msgstr "Глобальное изменение"
 msgid "No User Name Provided"
 msgstr "Имя участника обязательно"
 
+#~ msgid "ERROR: DB: Could not change group properties: %s"
+#~ msgstr "Невозможно изменение свойств группы: %s"
+
+#~ msgid "ERROR: User does not exist"
+#~ msgstr "Ошибка: Пользователь не существует"
+
+#~ msgid "%1$s Account Registration"
+#~ msgstr "%1$s Регистрация учетной записи"
+
+#, fuzzy
+#~ msgid "Error - update failed!"
+#~ msgstr "Ошибка обновления"
+
+#~ msgid "'%1$s' is a reserved alias. Please provide another name."
+#~ msgstr "'%1$s' такой псевдоним недопустим, укажите другой."
+
+#~ msgid "No Valid ParentMessage Object"
+#~ msgstr "неправильное вложение"
+
+#~ msgid "Invalid Message ID"
+#~ msgstr "неправильный идентификатор письма"
+
+#~ msgid "Invalid Password:"
+#~ msgstr "Неверный пароль:"
+
 #, fuzzy
 #~ msgid "Invalid email "
 #~ msgstr "Неверный емайл"
@@ -24449,14 +24489,8 @@ msgstr "Имя участника обязательно"
 #~ msgid "Error: Cannot add admin to newly created group: %s"
 #~ msgstr "В новую группу админ %s не добавлен"
 
-#~ msgid "Error: Cannot change group properties: %s"
-#~ msgstr "Невозможно изменение свойств группы: %s"
-
 #~ msgid "Error: Could Not Add User To Group: %s"
 #~ msgstr "Участник в группу: %s не добавлен"
-
-#~ msgid "Error: User does not exist"
-#~ msgstr "Ошибка: Пользователь не существует"
 
 #~ msgid "Error: User not removed: %s"
 #~ msgstr "Ошибка при удалении пользователя: %s"
@@ -24498,9 +24532,6 @@ msgstr "Имя участника обязательно"
 #~ msgid "Enjoy the site."
 #~ msgstr "Желаем Вам успехов в работе."
 
-#~ msgid "%s Account Registration"
-#~ msgstr "%s Регистрация учетной записи"
-
 #~ msgid "%s Reporting"
 #~ msgstr "Отчет %s"
 
@@ -24513,9 +24544,6 @@ msgstr "Имя участника обязательно"
 #~ msgstr ""
 #~ "Если Вы желаете изменить во всех выделенных частях выше, используйте "
 #~ "управление свойствами нажав \"Измененить все\"."
-
-#~ msgid "“%s” is a reserved alias. Please provide another name."
-#~ msgstr "'%s' такой псевдоним недопустим, укажите другой."
 
 #~ msgid "No Canned Responses set up in this Project"
 #~ msgstr "Ответы для группы не установлены"
@@ -27480,3 +27508,12 @@ msgstr "Имя участника обязательно"
 #~ "разделы по тематикам, различным версиям вырезок.</p><p></p><h3>Навигация "
 #~ "в буклете</h3>\t<p>Вы можете таким способом быстро находить нужный "
 #~ "участок библиотеки:</p>"
+
+#~ msgid "No valid Group Object"
+#~ msgstr "Отсутствует объект группы "
+
+#~ msgid "Message Not Found"
+#~ msgstr "Сообщение не найдено"
+
+#~ msgid "Error - disabled feature."
+#~ msgstr "временно отключено"

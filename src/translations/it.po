@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-23 11:29+0200\n"
+"POT-Creation-Date: 2013-07-23 15:15+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -426,11 +426,14 @@ msgstr "Progetto"
 #: common/forum/Forum.class.php:601 common/forum/Forum.class.php:627
 #: common/forum/Forum.class.php:635 common/forum/Forum.class.php:643
 #: common/forum/Forum.class.php:659 common/forum/ForumHTML.class.php:73
-#: common/include/exit.php:80 common/include/User.class.php:313
+#: common/forum/ForumHTML.class.php:211 common/include/exit.php:80
+#: common/include/User.class.php:313
 #: common/mail/MailingListFactory.class.php:104
 #: common/tracker/actions/browse.php:406 common/tracker/actions/browse.php:409
 #: common/tracker/actions/query.php:329 common/tracker/actions/query.php:344
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
+#: common/tracker/ArtifactExtraField.class.php:187
+#: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
 #: cronjobs/send_pending_items_mail.php:77
@@ -1050,7 +1053,7 @@ msgstr "Gruppo al quale appartiene il documento:"
 #: common/tracker/actions/detail.php:73
 #: common/tracker/actions/mod-limited.php:128
 #: common/tracker/actions/mod.php:155 common/tracker/actions/query.php:344
-#: common/tracker/Artifact.class.php:947
+#: common/tracker/Artifact.class.php:948
 #: common/tracker/views/form-customizelist.php:37 www/pm/browse_task.php:383
 #: www/project/admin/database.php:208
 msgid "State"
@@ -1200,6 +1203,7 @@ msgstr "Cognome:"
 #: common/docman/views/listfile.php:219
 #: common/docman/views/listtrashfile.php:130
 #: common/docman/views/pendingfiles.php:63 common/docman/views/search.php:150
+#: common/include/Group.class.php:774
 #: common/tracker/ArtifactExtraField.class.php:327
 #: common/tracker/include/ArtifactTypeHtml.class.php:325
 #: common/tracker/views/form-addextrafieldoption.php:108
@@ -1304,11 +1308,11 @@ msgstr ""
 #: common/tracker/actions/mod-limited.php:98
 #: common/tracker/actions/mod-limited.php:103
 #: common/tracker/actions/mod.php:99 common/tracker/actions/mod.php:104
-#: common/tracker/Artifact.class.php:1581
-#: common/tracker/Artifact.class.php:1583
-#: common/tracker/Artifact.class.php:1590
-#: common/tracker/Artifact.class.php:1596
-#: common/tracker/Artifact.class.php:1696
+#: common/tracker/Artifact.class.php:1584
+#: common/tracker/Artifact.class.php:1586
+#: common/tracker/Artifact.class.php:1593
+#: common/tracker/Artifact.class.php:1599
+#: common/tracker/Artifact.class.php:1699
 #: common/tracker/include/ArtifactHtml.class.php:112
 #: common/tracker/include/ArtifactHtml.class.php:170
 #: common/tracker/include/ArtifactHtml.class.php:179
@@ -1324,7 +1328,6 @@ msgstr ""
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:190
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:54
 #: plugins/hudson/include/HudsonBuild.class.php:110
-#: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:61
 #: www/account/editsshkeys.php:59 www/account/index.php:146
 #: www/account/index.php:309 www/admin/cronman.php:78
 #: www/admin/grouplist.php:118 www/admin/massmail.php:158
@@ -2227,6 +2230,7 @@ msgstr "Si può salvare la posizione solo quando si è collegati"
 #: common/forum/Forum.class.php:601 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
 #: common/survey/SurveyQuestion.class.php:153
+#: common/tracker/Artifact.class.php:1153
 #: plugins/mailman/include/MailmanList.class.php:249
 #: plugins/mailman/include/MailmanList.class.php:376
 #: plugins/mailman/include/MailmanList.class.php:393
@@ -2349,14 +2353,22 @@ msgstr "Nessuno oggetto forum valido"
 msgid "This is the content of the pending message"
 msgstr "Questo &egrave; il contenuto del messaggio in attesa di approvazione"
 
-#: common/forum/ForumHTML.class.php:211 common/forum/ForumHTML.class.php:269
-#: www/forum/message.php:126
-msgid "By:"
-msgstr "Da:"
+#: common/forum/ForumHTML.class.php:211
+#: common/tracker/include/ArtifactHtml.class.php:149
+#: common/tracker/include/ArtifactTypeHtml.class.php:367
+#: www/activity/index.php:266 www/pm/include/ProjectTaskHTML.class.php:158
+#: www/pm/include/ProjectTaskHTML.class.php:204
+#: www/project/admin/project_admin_utils.php:162
+msgid "By"
+msgstr "Da"
 
 #: common/forum/ForumHTML.class.php:268 www/forum/message.php:123
 msgid "reply"
 msgstr "rispondi"
+
+#: common/forum/ForumHTML.class.php:269 www/forum/message.php:126
+msgid "By:"
+msgstr "Da:"
 
 #: common/forum/ForumHTML.class.php:313
 msgid "Current File"
@@ -2865,7 +2877,7 @@ msgid "Permission denied."
 msgstr "Autorizzazione negata"
 
 #: common/include/Error.class.php:147 common/include/User.class.php:313
-#: common/include/User.class.php:893 common/include/User.class.php:946
+#: common/include/User.class.php:894 common/include/User.class.php:947
 #: common/tracker/actions/tracker.php:84
 #: plugins/forumml/www/forumml_utils.php:686 www/account/change_email.php:38
 msgid "Invalid Email Address"
@@ -2997,7 +3009,7 @@ msgstr "Impossibile ottenere il permesso."
 
 #: common/include/Group.class.php:445
 #, php-format
-msgid "ERROR: DB: Could not change group properties: %s"
+msgid "Error: Cannot change group properties: %s"
 msgstr "ERRORE: DB: Impossibile cambiare proprieta' gruppo: %s"
 
 #: common/include/Group.class.php:510
@@ -3168,7 +3180,7 @@ msgstr "Errore nella creazione  del progetto"
 
 #: common/include/Group.class.php:1996
 #, fuzzy
-msgid "ERROR: User does not exist"
+msgid "Error: User does not exist"
 msgstr "La query non esiste"
 
 #: common/include/Group.class.php:2044 common/include/Group.class.php:2163
@@ -3205,6 +3217,11 @@ msgstr ""
 #, fuzzy
 msgid "Group already active"
 msgstr "Utente già attivo."
+
+#: common/include/Group.class.php:2494
+#, fuzzy
+msgid "Approved"
+msgstr "Approva"
 
 #: common/include/Group.class.php:2519 common/include/Group.class.php:2590
 msgid "Group does not have any administrators."
@@ -4273,8 +4290,8 @@ msgstr ""
 
 #: common/include/User.class.php:462
 #, php-format
-msgid "%1$s Account Registration"
-msgstr "Registrazione account %1$s"
+msgid "%s Account Registration"
+msgstr "Registrazione account %s"
 
 #: common/include/User.class.php:490
 #, fuzzy
@@ -4315,68 +4332,68 @@ msgstr ""
 msgid "Error - Could Not Update User Status:"
 msgstr "ERRORE: DB: Impossibile cambiare stato del gruppo: %s"
 
-#: common/include/User.class.php:774
+#: common/include/User.class.php:775
 #, fuzzy
 msgid "Error - Could Not Update User Unix Status: "
 msgstr "ERRORE: DB: Impossibile cambiare stato del gruppo: %s"
 
-#: common/include/User.class.php:901 common/include/User.class.php:954
+#: common/include/User.class.php:902 common/include/User.class.php:955
 #, fuzzy
 msgid "User with this email already exists."
 msgstr "Il nome è specificato già usato da un altro utente."
 
-#: common/include/User.class.php:912
+#: common/include/User.class.php:913
 #, fuzzy
 msgid "Error - Could Not Update User Email: "
 msgstr "ERRORE: DB: Impossibile cambiare stato del gruppo: %s"
 
-#: common/include/User.class.php:963
+#: common/include/User.class.php:964
 #, fuzzy
 msgid "Error - Could Not Update User Email And Hash: "
 msgstr "ERRORE: DB: Impossibile cambiare stato del gruppo: %s"
 
-#: common/include/User.class.php:990
+#: common/include/User.class.php:992
 #, fuzzy
 msgid "Error - Could Not Update real name of user : "
 msgstr "ERRORE: DB: Impossibile cambiare stato del gruppo: %s"
 
-#: common/include/User.class.php:1063
+#: common/include/User.class.php:1065
 #, fuzzy, php-format
 msgid "Error: Invalid Shell %s"
 msgstr "Parametro non valido"
 
-#: common/include/User.class.php:1072
+#: common/include/User.class.php:1074
 #, fuzzy
 msgid "Error - Could Not Update User Unix Shell:"
 msgstr "ERRORE: DB: Impossibile cambiare stato del gruppo: %s"
 
-#: common/include/User.class.php:1219
+#: common/include/User.class.php:1221
 #, fuzzy
 msgid "SSH Key already in use"
 msgstr "La query esiste già"
 
-#: common/include/User.class.php:1227
+#: common/include/User.class.php:1229
 #, fuzzy
 msgid "Error - Could Not Add User SSH Key:"
 msgstr "ERRORE: DB: Impossibile cambiare stato del gruppo: %s"
 
-#: common/include/User.class.php:1244
+#: common/include/User.class.php:1246
 #, fuzzy
 msgid "Error - Could Not Delete User SSH Key:"
 msgstr "ERRORE: DB: Impossibile cambiare stato del gruppo: %s"
 
-#: common/include/User.class.php:1377
+#: common/include/User.class.php:1379
 #, fuzzy
 msgid "Error: "
 msgstr "Errore"
 
-#: common/include/User.class.php:1391 common/include/User.class.php:1427
-#: common/include/User.class.php:1452
+#: common/include/User.class.php:1393 common/include/User.class.php:1429
+#: common/include/User.class.php:1454
 #, fuzzy
 msgid "Error - Could Not Change User Password:"
 msgstr "Cambia password"
 
-#: common/include/User.class.php:1708
+#: common/include/User.class.php:1710
 #, php-format
 msgid ""
 "New User %1$s registered and validated\n"
@@ -4384,7 +4401,7 @@ msgid ""
 "Email: %3$s\n"
 msgstr ""
 
-#: common/include/User.class.php:1713
+#: common/include/User.class.php:1715
 #, fuzzy, php-format
 msgid "New %1$s User"
 msgstr "Il team %1$s"
@@ -4726,7 +4743,10 @@ msgstr "AGGIORNAMENTO FALLITO: titolo del sondaggio obbligatorio"
 msgid "Update Failed: Survey Questions Required"
 msgstr "AGGIORNAMENTO FALLITO: domande necessarie"
 
-#: common/survey/Survey.class.php:129 www/survey/rating_resp.php:57
+#: common/survey/Survey.class.php:129
+#: common/tracker/ArtifactExtraField.class.php:187
+#: common/tracker/ArtifactExtraField.class.php:193
+#: www/survey/rating_resp.php:57
 msgid "Insert Error"
 msgstr ""
 
@@ -5034,8 +5054,6 @@ msgstr "Campo personalizzato Rimosso"
 
 #: common/tracker/actions/admin-updates.php:107
 #: common/tracker/actions/admin-updates.php:206
-#: common/tracker/ArtifactExtraField.class.php:187
-#: common/tracker/ArtifactExtraField.class.php:193
 msgid "Error inserting an element"
 msgstr "Errore durante l'inserimento di un elemento"
 
@@ -5328,7 +5346,7 @@ msgstr "Deseleziona tutti"
 #: common/tracker/actions/browse.php:568 common/tracker/actions/browse.php:747
 #: common/tracker/actions/detail.php:87
 #: common/tracker/actions/mod-limited.php:114
-#: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:943
+#: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:944
 #: common/tracker/include/build_submission_form.php:62
 #: cronjobs/send_pending_items_mail.php:119
 #: plugins/mantisbt/view/addIssue.php:74
@@ -5390,7 +5408,7 @@ msgstr "Nessuna modifica"
 msgid "Nobody"
 msgstr "Nessuno"
 
-#: common/tracker/actions/browse.php:757 common/tracker/Artifact.class.php:951
+#: common/tracker/actions/browse.php:757 common/tracker/Artifact.class.php:952
 msgid "Canned Response"
 msgstr "Risposta predefinita"
 
@@ -5584,7 +5602,7 @@ msgstr "Data di chiusura"
 msgid "Existing Files"
 msgstr "File esistenti"
 
-#: common/tracker/actions/mod.php:111 common/tracker/Artifact.class.php:955
+#: common/tracker/actions/mod.php:111 common/tracker/Artifact.class.php:956
 msgid "Data Type"
 msgstr "Tipo dato"
 
@@ -5951,45 +5969,45 @@ msgstr "Notifica attivata"
 msgid "Artifact Monitoring Deactivated"
 msgstr "Notifica disattivata"
 
-#: common/tracker/Artifact.class.php:962
+#: common/tracker/Artifact.class.php:963
 msgid "Invalid assigned_to (assigned person is not a technician)"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:986
+#: common/tracker/Artifact.class.php:987
 #, fuzzy
 msgid "Could not move to new Artifact Type"
 msgstr "Impossibile completare l'operazione"
 
-#: common/tracker/Artifact.class.php:1070
+#: common/tracker/Artifact.class.php:999
+#, php-format
+msgid "Moved from %1$s to %2$s"
+msgstr ""
+
+#: common/tracker/Artifact.class.php:1073
 msgid "Removal of old artifact_extra_field_data failed: "
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1150
-#, fuzzy
-msgid "Error - update failed!"
-msgstr "Errore nell'aggiornamento"
-
-#: common/tracker/Artifact.class.php:1178
+#: common/tracker/Artifact.class.php:1181
 #, fuzzy
 msgid "Could Not Create Canned Response Object"
 msgstr "Non ho potuto aggiornare il messaggio superiore"
 
-#: common/tracker/Artifact.class.php:1191
+#: common/tracker/Artifact.class.php:1194
 #, fuzzy
 msgid "Unable to Use Canned Response"
 msgstr "Usa risposta predefinita"
 
-#: common/tracker/Artifact.class.php:1206
+#: common/tracker/Artifact.class.php:1209
 msgid "Nothing Changed - Update Cancelled"
 msgstr "Nessuna modifica inserita - aggiornamento annullato"
 
-#: common/tracker/Artifact.class.php:1239
+#: common/tracker/Artifact.class.php:1242
 #, fuzzy
 msgid "Error updating assigned_to in artifact: "
 msgstr "Errore nell'aggiornamento delle informazioni del progetto: %s"
 
-#: common/tracker/Artifact.class.php:1314
-#: common/tracker/Artifact.class.php:1324
+#: common/tracker/Artifact.class.php:1317
+#: common/tracker/Artifact.class.php:1327
 #, fuzzy
 msgid "Status Custom Field Must Be Set"
 msgstr "Campo personalizzato Rimosso"
@@ -6078,8 +6096,8 @@ msgstr ""
 
 #: common/tracker/ArtifactExtraField.class.php:500
 #, php-format
-msgid "'%1$s' is a reserved alias. Please provide another name."
-msgstr "'%1$s' è un alias riservato. Scegliere un nome diverso."
+msgid "“%s” is a reserved alias. Please provide another name."
+msgstr "'%s' è un alias riservato. Scegliere un nome diverso."
 
 #: common/tracker/ArtifactExtraField.class.php:584
 msgid "Out of range value"
@@ -6216,14 +6234,6 @@ msgstr "Campo"
 #: www/project/admin/project_admin_utils.php:160
 msgid "Old Value"
 msgstr "Valore precedente"
-
-#: common/tracker/include/ArtifactHtml.class.php:149
-#: common/tracker/include/ArtifactTypeHtml.class.php:367
-#: www/activity/index.php:266 www/pm/include/ProjectTaskHTML.class.php:158
-#: www/pm/include/ProjectTaskHTML.class.php:204
-#: www/project/admin/project_admin_utils.php:162
-msgid "By"
-msgstr "Da"
 
 #: common/tracker/include/ArtifactHtml.class.php:187
 msgid "No Changes Have Been Made to This Item"
@@ -6414,7 +6424,7 @@ msgstr "Utente non valido"
 
 #: common/tracker/Roadmap.class.php:104
 #, fuzzy, php-format
-msgid "\"%s\" roadmap already exists"
+msgid "“%s” roadmap already exists"
 msgstr "Il nome è specificato già usato da un altro utente."
 
 #: common/tracker/views/form-addcanned.php:27
@@ -9145,7 +9155,7 @@ msgid "Toggle font family (typewriter/normal)"
 msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:442
-msgid "Cc :"
+msgid "Cc:"
 msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:563
@@ -9154,13 +9164,12 @@ msgid "Reply"
 msgstr "rispondi"
 
 #: plugins/forumml/www/forumml_utils.php:585
-msgid "Add cc :"
+msgid "Add cc:"
 msgstr ""
 
-#: plugins/forumml/www/forumml_utils.php:586 plugins/forumml/www/index.php:118
-#: plugins/forumml/www/scripts/cc_attach_js.php:50
+#: plugins/forumml/www/forumml_utils.php:586
 #, fuzzy
-msgid "Attach :"
+msgid "Attach:"
 msgstr "Allega file"
 
 #: plugins/forumml/www/forumml_utils.php:604 plugins/forumml/www/index.php:128
@@ -9242,6 +9251,12 @@ msgstr "Inserisci una nuova versione"
 #: www/sendmessage.php:69 www/sendmessage.php:150
 msgid "Subject"
 msgstr "Oggetto"
+
+#: plugins/forumml/www/index.php:118
+#: plugins/forumml/www/scripts/cc_attach_js.php:50
+#, fuzzy
+msgid "Attach :"
+msgstr "Allega file"
 
 #: plugins/forumml/www/index.php:122
 #, fuzzy
@@ -14154,17 +14169,17 @@ msgstr ""
 msgid "Page"
 msgstr "Pagina principale"
 
-#: plugins/wiki/common/WikiPlugin.class.php:76
+#: plugins/wiki/common/WikiPlugin.class.php:74
 #, fuzzy
 msgid "Wiki Admin"
 msgstr "Amministrazione sito"
 
-#: plugins/wiki/common/WikiPlugin.class.php:93
+#: plugins/wiki/common/WikiPlugin.class.php:91
 #, fuzzy
 msgid "This project's wiki"
 msgstr "News di questo progetto"
 
-#: plugins/wiki/common/WikiPlugin.class.php:204
+#: plugins/wiki/common/WikiPlugin.class.php:208
 msgid "List of active wikis in Forge"
 msgstr ""
 
@@ -23565,6 +23580,28 @@ msgstr "Aggiornamento multiplo"
 msgid "No User Name Provided"
 msgstr "Non è stato inserito alcun file"
 
+#~ msgid "ERROR: DB: Could not change group properties: %s"
+#~ msgstr "ERRORE: DB: Impossibile cambiare proprieta' gruppo: %s"
+
+#~ msgid "%1$s Account Registration"
+#~ msgstr "Registrazione account %1$s"
+
+#, fuzzy
+#~ msgid "Error - update failed!"
+#~ msgstr "Errore nell'aggiornamento"
+
+#~ msgid "'%1$s' is a reserved alias. Please provide another name."
+#~ msgstr "'%1$s' è un alias riservato. Scegliere un nome diverso."
+
+#~ msgid "No Valid ParentMessage Object"
+#~ msgstr "nessun oggetto padre valido"
+
+#~ msgid "Invalid Message ID"
+#~ msgstr "ID messaggio non valido"
+
+#~ msgid "Invalid Password:"
+#~ msgstr "Password non valida:"
+
 #, fuzzy
 #~ msgid "Invalid email "
 #~ msgstr "Indirizzo email non valido"
@@ -24037,9 +24074,6 @@ msgstr "Non è stato inserito alcun file"
 #~ msgid "Error: Cannot add admin to newly created group: %s"
 #~ msgstr "ERRORE: Impossibile aggiungere l'amministratore al nuovo gruppo: %s"
 
-#~ msgid "Error: Cannot change group properties: %s"
-#~ msgstr "ERRORE: DB: Impossibile cambiare proprieta' gruppo: %s"
-
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "Il tuo progetto su %s e' stato approvato."
 
@@ -24103,17 +24137,11 @@ msgstr "Non è stato inserito alcun file"
 #~ "Il team di amministrazione di %s esaminera' la tua proposta di nuovo "
 #~ "progetto; riceverai un messaggio con la decisione presa."
 
-#~ msgid "%s Account Registration"
-#~ msgstr "Registrazione account %s"
-
 #~ msgid "%s Reporting"
 #~ msgstr "Reportistica %s"
 
 #~ msgid "* Denotes requests > %s Days Old"
 #~ msgstr "* indica richieste più vecchie di %s giorni"
-
-#~ msgid "“%s” is a reserved alias. Please provide another name."
-#~ msgstr "'%s' è un alias riservato. Scegliere un nome diverso."
 
 #~ msgid "No Canned Responses set up in this Project"
 #~ msgstr "Nessuna risposta predefinita per questo progetto"
@@ -26472,3 +26500,12 @@ msgstr "Non è stato inserito alcun file"
 
 #~ msgid "Forum monitoring deactivated"
 #~ msgstr "Notifica forum disattivata"
+
+#~ msgid "No valid Group Object"
+#~ msgstr "Group Object non valido"
+
+#~ msgid "Message Not Found"
+#~ msgstr "Messaggio non trovato"
+
+#~ msgid "Error - disabled feature."
+#~ msgstr "Errore - funzionalità disabilitata."
