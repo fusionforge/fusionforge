@@ -151,7 +151,7 @@ function &group_get_objects_by_name($groupname_arr) {
 	return group_get_objects($arr);
 }
 
-function &group_get_object_by_publicname($groupname) {
+function group_get_object_by_publicname($groupname) {
 	$res = db_query_params('SELECT * FROM groups WHERE lower(group_name) LIKE $1',
 			      array(htmlspecialchars(strtolower($groupname))));
 	return group_get_object(db_result($res, 0, 'group_id'), $res);
@@ -442,7 +442,7 @@ class Group extends Error {
 					      $this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(_('ERROR: DB: Could not change group properties: %s'),db_error());
+			$this->setError(_('Error: Cannot change group properties: %s'),db_error());
 			db_rollback();
 			return false;
 		}
@@ -771,7 +771,7 @@ class Group extends Error {
 
 		// Log the audit trail
 		if ($status != $this->getStatus()) {
-			$this->addHistory('Status', $this->getStatus());
+			$this->addHistory(_('Status'), $this->getStatus());
 		}
 
 		$this->data_array['status'] = $status;
@@ -1993,7 +1993,7 @@ class Group extends Error {
 			//
 			//	user doesn't exist
 			//
-			$this->setError(_('ERROR: User does not exist'));
+			$this->setError(_('Error: User does not exist'));
 			db_rollback();
 			return false;
 		}
@@ -2491,7 +2491,7 @@ class Group extends Error {
 		db_commit();
 
 		$this->sendApprovalEmail();
-		$this->addHistory('Approved', 'x');
+		$this->addHistory(_('Approved'), 'x');
 
 		//
 		//	Plugin can make approve operation there

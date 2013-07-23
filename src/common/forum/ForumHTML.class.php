@@ -193,9 +193,9 @@ class ForumHTML extends Error {
 	/**
 	 * Function showPendingMessage
 	 *
-	 * @param 	object	The message.
+	 * @param 	object	$msg The message.
 	 *
-	 * @return 	returns the html output
+	 * @return 	string return the html output
 	 */
 	function showPendingMessage ( &$msg) {
 		global $HTML,$group_id;
@@ -208,7 +208,7 @@ class ForumHTML extends Error {
 		$ret_val .= '
 		<table>
 			<tr>
-				<td class="tablecontent" style="white-space: nowrap;">'._('By:').
+				<td class="tablecontent" style="white-space: nowrap;">'._('By')._(': ').
 					$msg->getPosterRealName().
 					'<br />
 					';
@@ -241,7 +241,7 @@ class ForumHTML extends Error {
 		global $HTML,$group_id;
 		/*
 			See if this message is new or not
-			If so, highlite it in bold
+			If so, highlight it in bold
 		*/
 		if ($this->Forum->getSavedDate() < $msg->getPostDate()) {
 			$bold_begin='<strong>';
@@ -477,7 +477,7 @@ class ForumHTML extends Error {
 	/**
 	 *  showEditForm - Prints the form to edit a message
 	 *
-	 *	@param 		int		The Message
+	 *	@param 		int		$msg The Message
 	 *	@return		The HTML output echoed
 	 */
 

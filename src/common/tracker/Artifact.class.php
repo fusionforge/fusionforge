@@ -793,7 +793,7 @@ class Artifact extends Error {
 			$user_id=user_getid();
 			$user =& user_get_object($user_id);
 			if (!$user || !is_object($user)) {
-				$this->setError('ERROR - Logged In User But Could Not Get User Object');
+				$this->setError('Error: Logged In User But Could Not Get User Object');
 				return false;
 			}
 			//	we'll store this email even though it will likely never be used -
@@ -826,9 +826,10 @@ class Artifact extends Error {
 	/**
 	 *  addHistory - add an entry to audit trail.
 	 *
-	 *  @param	string	The name of the field in the database being modified.
-	 *  @param	string	The former value of this field.
-	 *  @param      array   Array of data to change submitter and time of submit like: array('user' => 127, 'time' => 1234556789)
+	 *  @param	string	$field_name The name of the field in the database being modified.
+	 *  @param	string	$old_value  The former value of this field.
+	 *  @param  array   $importData Array of data to change submitter and time of submit like:
+	 *                              array('user' => 127, 'time' => 1234556789)
 	 *  @access private
 	 *  @return	boolean	success.
 	 */
@@ -995,7 +996,9 @@ class Artifact extends Error {
 			}
 
 			// Add a message to explain that the tracker was moved.
-			$message = 'Moved from '.$this->ArtifactType->getName().' to '.$newArtifactType->getName();
+			$message = sprintf(_('Moved from %1$s to %2$s'),
+                               $this->ArtifactType->getName(),
+                               $newArtifactType->getName());
 			$this->addHistory('type', $this->ArtifactType->getName());
 			$this->addMessage($message,'',0);
 
@@ -1147,7 +1150,7 @@ class Artifact extends Error {
 		  $result = db_query_qpa($qpa);
 
 			if (!$result || db_affected_rows($result) < 1) {
-				$this->setError(_('Error - update failed!').db_error());
+				$this->setError(_('Update failed').db_error());
 				db_rollback();
 				return false;
 			} else {
