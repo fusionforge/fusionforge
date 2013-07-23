@@ -439,7 +439,7 @@ function plugin_forumml_show_message($p, $hp, $msg, $id_parent, $purgeCache) {
 			}
 			$ccs = implode(', ', $ccs);
 		}
-		print '<div class="plugin_forumml_message_header_cc">'. _('Cc :') .' '. $ccs .'</div>';
+		print '<div class="plugin_forumml_message_header_cc">'. _('Cc:') .' '. $ccs .'</div>';
 	}
 
 	// Message content
@@ -582,8 +582,8 @@ function plugin_forumml_reply($hp,$subject,$in_reply_to,$id_parent,$body,$author
 		<input type='hidden' name='subject' value='".$subject."'/>
 		<input type='hidden' name='list' value='".$request->get('list')."'/>
 		<input type='hidden' name='group_id' value='".$request->get('group_id')."'/>";
-	echo   '<a href="javascript:;" onclick="addHeader(\'\',\'\',1);">['._('Add cc :').']</a>
-		- <a href="javascript:;" onclick="addHeader(\'\',\'\',2);">['._('Attach :').']</a>
+	echo   '<a href="javascript:;" onclick="addHeader(\'\',\'\',1);">['._('Add cc:').']</a>
+		- <a href="javascript:;" onclick="addHeader(\'\',\'\',2);">['._('Attach:').']</a>
 		<input type="hidden" value="0" id="header_val" />
 		<div id="mail_header"></div>';
 	echo "<p><textarea name='message' rows='15' cols='100'>";
