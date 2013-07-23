@@ -42,9 +42,8 @@ pdebuild --configfile $COWBUILDERCONFIG --buildresult $BUILDRESULT
 
 CHANGEFILE=${PKGNAME}_$SMAJOR${MINOR}_$ARCH.changes
 
-lintian -i $CHANGEFILE
-
 cd $BUILDRESULT
+lintian -i $CHANGEFILE
 REPOPATH=$WORKSPACE/build/debian
 
 [ ! -d $REPOPATH ] || rm -r $REPOPATH
