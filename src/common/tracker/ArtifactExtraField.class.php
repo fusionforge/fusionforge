@@ -184,13 +184,13 @@ class ArtifactExtraField extends Error {
 						return false;
 					} else {
 						if (!$ao->create('Open', '1')) {
-							$feedback .= _('Error inserting an element').': '.$ao->getErrorMessage();
+							$feedback .= _('Insert Error')._(': ').$ao->getErrorMessage();
 							$ao->clearError();
 							db_rollback();
 							return false;
 						}
 						if (!$ao->create('Closed', '2')) {
-							$feedback .= _('Error inserting an element').': '.$ao->getErrorMessage();
+							$feedback .= _('Insert Error')._(': ').$ao->getErrorMessage();
 							$ao->clearError();
 							db_rollback();
 							return false;
@@ -497,7 +497,7 @@ class ArtifactExtraField extends Error {
 			$this->setError(_('The alias contains invalid characters. Only letters, numbers, hypens (-), at sign (@) and underscores (_) allowed.'));
 			return false;
 		} elseif (in_array($alias, $reserved_alias)) {	// alias is reserved?
-			$this->setError(sprintf(_('\'%1$s\' is a reserved alias. Please provide another name.'), $alias));
+			$this->setError(sprintf(_('“%s” is a reserved alias. Please provide another name.'), $alias));
 			return false;
 		}
 
