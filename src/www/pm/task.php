@@ -7,6 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -366,14 +367,6 @@ switch (getStringFromRequest('func')) {
 	//
 	case 'ganttpage' : {
 		include $gfwww.'pm/ganttpage.php';
-		break;
-	}
-
-	//
-	//	Show a gantt chart
-	//
-	case 'ganttchart' : {
-		include $gfwww.'pm/gantt.php';
 		break;
 	}
 
