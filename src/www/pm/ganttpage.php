@@ -363,19 +363,5 @@ echo '<div id="workSpace" style="padding:0px; overflow-y:auto; overflow-x:hidden
   --></div>
 
 </div>
-<?php
-echo '<noscript>';
-echo '<img src="'. getStringFromServer('PHP_SELF') .
-		'?func=ganttchart&amp;group_id='.$group_id.
-		'&amp;group_project_id='.$group_project_id.
-		'&amp;_assigned_to='.$_assigned_to.
-		'&amp;_status='.$_status.
-		'&amp;_order='.$_order.
-		'&amp;_resolution='.$_resolution.
-		'&amp;_category_id='.$_category_id.
-		'&amp;rand='.util_randnum().'" alt="'. _('Gantt Chart').'" />';
-echo '</noscript>';
-
-?>
 </body>
 </html>
