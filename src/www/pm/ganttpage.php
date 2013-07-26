@@ -25,38 +25,15 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-echo '<' . '?xml version="1.0" encoding="utf-8" ?' . ">\n" .
-    $sysDTDs['transitional']['doctype']; ?>
-<html <?php echo $sysXMLNSs; ?> xml:lang="en">
-
-  <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title><?php echo _('Gantt Chart');?></title>
-	<link rel=stylesheet href="/scripts/jquery-teamwork-gantt/platform.css" type="text/css">
-	<link rel=stylesheet href="/scripts/jquery-teamwork-gantt/libs/dateField/jquery.dateField.css" type="text/css">
-	<link rel=stylesheet href="/scripts/jquery-teamwork-gantt/gantt.css" type="text/css">
-	
-	<script src="/scripts/jquery/jquery-1.8.3.js"></script>
-	<script src="/scripts/jquery-ui/js/jquery-ui-1.9.2.custom.js"></script>
-	<script src="/scripts/jquery-teamwork-gantt/libs/jquery.livequery.min.js"></script>
-	<script src="/scripts/jquery-teamwork-gantt/libs/jquery.timers.js"></script>
-	<script src="/scripts/jquery-teamwork-gantt/libs/platform.js"></script>
-	<script src="/scripts/jquery-teamwork-gantt/libs/date.js"></script>
-	<script src="/scripts/jquery-teamwork-gantt/libs/i18nJs.js"></script>
-	<script src="/scripts/jquery-teamwork-gantt/libs/dateField/jquery.dateField.js"></script>
-	<script src="/scripts/jquery-teamwork-gantt/libs/JST/jquery.JST.js"></script>
-
-	<script src="/scripts/jquery-teamwork-gantt/ganttUtilities.js"></script>
-	<script src="/scripts/jquery-teamwork-gantt/ganttTask.js"></script>
-	<script src="/scripts/jquery-teamwork-gantt/ganttDrawer.js"></script>
-	<script src="/scripts/jquery-teamwork-gantt/ganttGridEditor.js"></script>
-	<script src="/scripts/jquery-teamwork-gantt/ganttMaster.js"></script>
-  </head>
-  <body style="background-color: #fff" >
-<?php
-
 require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 require_once $gfwww.'include/unicode.php';
+require_once $gfwww.'include/html.php';
+
+html_use_jqueryteamworkgantt();
+html_generic_fileheader(_('Gantt Chart'));
+echo $HTML->getJavascripts();
+echo $HTML->getStylesheets();
+echo '</head><body style="background-color: #fff" >';
 
 /* define global vars */
 global $pg, $g;
@@ -68,7 +45,7 @@ $_order = getIntFromRequest('_order');
 $_resolution = getStringFromRequest('_resolution');
 $_status = getIntFromRequest('_status', 100);
 $_order = getStringFromRequest('_order');
-$max_rows = getIntFromRequest('max_rows',50);
+$max_rows = getIntFromRequest('max_rows', 50);
 
 $engine = RBACEngine::getInstance();
 $techs = $engine->getUsersByAllowedAction('pm', $pg->getID(), 'tech');
@@ -361,7 +338,6 @@ echo '<div id="workSpace" style="padding:0px; overflow-y:auto; overflow-x:hidden
 
   <div class="__template__" type="ASSIGNMENT_ROW"><!--
   --></div>
-
-</div>
-</body>
-</html>
+<?php
+echo $HTML->footer(false);
+?>

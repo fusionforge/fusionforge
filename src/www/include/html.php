@@ -6,7 +6,7 @@
  * Copyright 2010 (c) FusionForge Team
  * Copyright (C) 2010-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011-2012, Franck Villaume - TrivialDev
+ * Copyright 2011-2013, Franck Villaume - TrivialDev
  * Copyright © 2011, 2012
  *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  *
@@ -475,6 +475,26 @@ function html_use_jqueryjqplotpluginhighlighter() {
 function html_use_jqueryjqplotplugindateAxisRenderer() {
 	html_use_jqueryjqplot();
 	use_javascript('/scripts/jquery-jqplot/plugins/jqplot.dateAxisRenderer.js');
+}
+
+function html_use_jqueryteamworkgantt() {
+	html_use_jqueryui();
+	use_javascript('/scripts/jquery-teamwork-gantt/libs/jquery.livequery.min.js');
+	use_javascript('/scripts/jquery-teamwork-gantt/libs/jquery.timers.js');
+	use_javascript('/scripts/jquery-teamwork-gantt/libs/platform.js');
+	use_javascript('/scripts/jquery-teamwork-gantt/libs/date.js');
+	use_javascript('/scripts/jquery-teamwork-gantt/libs/date.js');
+	use_javascript('/scripts/jquery-teamwork-gantt/libs/i18nJs.js');
+	use_javascript('/scripts/jquery-teamwork-gantt/libs/dateField/jquery.dateField.js');
+	use_javascript('/scripts/jquery-teamwork-gantt/libs/JST/jquery.JST.js');
+	use_javascript('/scripts/jquery-teamwork-gantt/ganttUtilities.js');
+	use_javascript('/scripts/jquery-teamwork-gantt/ganttTask.js');
+	use_javascript('/scripts/jquery-teamwork-gantt/ganttDrawer.js');
+	use_javascript('/scripts/jquery-teamwork-gantt/ganttGridEditor.js');
+	use_javascript('/scripts/jquery-teamwork-gantt/ganttMaster.js');
+	use_stylesheet('/scripts/jquery-teamwork-gantt/platform.css');
+	use_stylesheet('/scripts/jquery-teamwork-gantt/libs/dateField/jquery.dateField.css');
+	use_stylesheet('/scripts/jquery-teamwork-gantt/gantt.css');
 }
 
 /**
