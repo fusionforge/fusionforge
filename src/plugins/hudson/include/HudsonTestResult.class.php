@@ -104,7 +104,49 @@ class HudsonTestResult {
 	}
 
 	function getTestResultPieChart() {
-		return '<img class="test_result_pie_chart" src="/plugins/hudson/test_result_pie_chart.php?p='.$this->getPassCount().'&f='.$this->getFailCount().'&s='.$this->getSkipCount().'" alt="Test result: '.$this->getPassCount().'/'.$this->getTotalCount().'" title="Test result: '.$this->getPassCount().'/'.$this->getTotalCount().'" />';
+		global $HTML;
+		html_use_jqueryjqplotpluginPie();
+		html_use_jqueryjqplotpluginhighlighter();
+		html_use_jqueryjqplotpluginCanvas();
+		echo $HTML->getJavascripts();
+		echo $HTML->getStylesheets();
+		$chartid = md5($this->hudson_test_result_url);
+		$pie_labels = array();
+		$pie_vals = array();
+		$pie_labels[0] = vsprintf(_("Pass (%s)"), $this->getPassCount());
+		$pie_vals[0] = $this->getPassCount();
+		$pie_labels[2] = vsprintf(_("Fail (%s)"), $this->getFailCount());
+		$pie_vals[1] = $this->getFailCount();
+		$pie_labels[2] = vsprintf(_("Skip (%s)"), $this->getSkipCount());
+		$pie_vals[2] = $this->getSkipCount();
+		echo '<script type="text/javascript">//<![CDATA['."\n";
+		echo 'var data'.$chartid.' = new Array();';
+		for ($i = 0; $i < count($pie_vals); $i++) {
+			echo 'data'.$chartid.'.push([\''.htmlentities($pie_labels[0]).'\',\''.$pie_vals[1].'\']);';
+		}
+		echo 'var plot'.$chartid.';';
+		echo 'jQuery(document).ready(function(){
+			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [data'.$chartid.'],
+				{
+					title : \'Test result: '.$this->getPassCount().'/'.$this->getTotalCount().'\',
+					seriesDefaults: {
+						renderer: jQuery.jqplot.PieRenderer,
+						rendererOptions: {
+							showDataLabels: true,
+							dataLabels: \'percent\',
+						}
+					},
+					legend: {
+						show:true, location: \'e\',
+					},
+				}
+				);
+			});';
+		echo 'jQuery(window).resize(function() {
+				plot'.$chartid.'.replot( { resetAxes: true } );
+			});'."\n";
+		echo '//]]></script>';
+		echo '<div id="chart'.$chartid.'"></div>';
 	}
 	
 }
