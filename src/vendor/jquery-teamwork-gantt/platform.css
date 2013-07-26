@@ -24,7 +24,8 @@
   body styles
   -------------------------------------------------------
   */
-BODY, TBODY {
+/* Fusionforge : do not override theme */
+/*BODY, TBODY {
   font-family: arial;
   font-size: 14px;
   margin: 0;
@@ -34,7 +35,7 @@ BODY, TBODY {
 
 BODY {
   background-color: #91B4B7; 
-}
+}*/
 
 a {
   text-decoration: none;

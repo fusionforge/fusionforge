@@ -29,11 +29,12 @@ require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 require_once $gfwww.'include/unicode.php';
 require_once $gfwww.'include/html.php';
 
+echo $HTML->Theme();
 html_use_jqueryteamworkgantt();
 html_generic_fileheader(_('Gantt Chart'));
 echo $HTML->getJavascripts();
 echo $HTML->getStylesheets();
-echo '</head><body style="background-color: #fff" >';
+echo '</head><body>';
 
 /* define global vars */
 global $pg, $g;
