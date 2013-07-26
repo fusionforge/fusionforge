@@ -84,6 +84,12 @@ class Forum extends Error {
 	 * @var	array	view_types.
 	 */
 	var $view_types;
+	
+	/**
+	 * flag : forum or news entry
+	 * @var int	is_news
+	 */
+	var $is_news;
 
     /**
      * Constructor.
@@ -106,7 +112,8 @@ class Forum extends Error {
 			$this->setError('Forums: '.$Group->getErrorMessage());
 			return;
 		}
-		if (!$is_news && $group_forum_id) {
+		$is_news = 0;
+		if ($group_forum_id) {
 			//
 			//	Is this a news posting (or a real forum)?
 			//
