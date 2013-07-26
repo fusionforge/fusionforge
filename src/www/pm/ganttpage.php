@@ -205,8 +205,8 @@ echo '<div id="workSpace" style="padding:0px; overflow-y:auto; overflow-x:hidden
 	jQuery(function() {
 		ge = new GanttMaster();
 		var workSpace = jQuery("#workSpace");
-		workSpace.css({width:jQuery(window).width() - 20, height:jQuery(window).height() - 100});
-		ge.init(workSpace);
+		workSpace.css({width:jQuery(window).width() - 40, height:jQuery(window).height() - 100});
+		ge.init(workSpace, 0.5, 0.5, 50);
 		loadI18n();
 		ge.loadProject({
 			"tasks":
@@ -240,14 +240,13 @@ echo '<div id="workSpace" style="padding:0px; overflow-y:auto; overflow-x:hidden
     <tr style="height:40px">
       <th class="gdfColHeader" style="width:15px;"></th>
       <th class="gdfColHeader" style="width:25px;"></th>
-      <th class="gdfColHeader gdfResizable">category</th>
-      <th class="gdfColHeader gdfResizable"></th>
-      <th class="gdfColHeader gdfResizable">task summary</th>
-      <th class="gdfColHeader gdfResizable" style="width:80px;">start</th>
-      <th class="gdfColHeader gdfResizable" style="width:80px;">end</th>
-      <th class="gdfColHeader gdfResizable" style="width:25px;">dur.</th>
-      <th class="gdfColHeader gdfResizable" style="width:25px;">dep.</th>
-      <th class="gdfColHeader gdfResizable">assignees</th>
+      <th class="gdfColHeader gdfResizable"><?php echo _('category'); ?></th>
+      <th class="gdfColHeader gdfResizable"><?php echo _('task summary'); ?></th>
+      <th class="gdfColHeader gdfResizable" style="width:80px;"><?php echo _('start'); ?></th>
+      <th class="gdfColHeader gdfResizable" style="width:80px;"><?php echo _('end'); ?></th>
+      <th class="gdfColHeader gdfResizable" style="width:25px;"><?php echo _('dur.'); ?></th>
+      <th class="gdfColHeader gdfResizable" style="width:25px;"><?php echo _('dep.'); ?></th>
+      <th class="gdfColHeader gdfResizable"><?php echo _('assignees'); ?></th>
     </tr>
     </thead>
   </table>
@@ -255,13 +254,10 @@ echo '<div id="workSpace" style="padding:0px; overflow-y:auto; overflow-x:hidden
 
   <div class="__template__" type="TASKROW"><!--
   <tr taskId="(#=obj.id#)" class="taskEditRow" level="(#=level#)">
-    <th class="gdfCell edit" align="right" style="cursor:pointer;"><span class="taskRowIndex">(#=obj.getRow()+1#)</span></th>
+    <td class="gdfCell edit" align="right" style="cursor:pointer;"><span class="taskRowIndex">(#=obj.getRow()+1#)</span></td>
     <td class="gdfCell" align="center"><div class="taskStatus cvcColorSquare" status="(#=obj.status#)"></div></td>
     <td class="gdfCell"><input type="text" name="code" value="(#=obj.code?obj.code:''#)"></td>
-    <td class="gdfCell"><span>-</span></td>
-
     <td class="gdfCell indentCell" style="padding-left:(#=obj.level*10#)px;"><input type="text" name="name" value="(#=obj.name#)" style="(#=obj.level>0?'border-left:2px dotted orange':''#)"></td>
-
     <td class="gdfCell"><input type="text" name="start"  value="" class="date"></td>
     <td class="gdfCell"><input type="text" name="end" value="" class="date"></td>
     <td class="gdfCell"><input type="text" name="duration" value="(#=obj.duration#)"></td>
