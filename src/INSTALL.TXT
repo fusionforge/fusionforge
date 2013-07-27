@@ -158,16 +158,6 @@ cd gforge-X.X
 #
 ./gforge-install.sh gforge.company.com apacheuser apachegroup
 
-#
-#	jpgraph install - use the 1.9.1 version from gforge.org
-#	as mentioned above
-#
-tar -xzf jpgraph-1.9.1.tar.gz
-mv jpgraph-1.9.1/src/* /opt/jpgraph/
-
-#you will have to edit jpgraph.php to set USE_CACHE=false
-vim /opt/jpgraph/jpgraph.php
-
 Apache will need to have a line added to its httpd.conf:
 
 Include /etc/gforge/httpd.conf
@@ -346,12 +336,6 @@ Q: Reporting or time tracking doesn't work
 
 A: Go to the reporting tab and scroll down so you can choose 
 "Initialize/Rebuild Reporting Tables"
-
-You may also be missing GD support or be missing JPGraph or have it installed 
-improperly. The jpgraph/src/ directory should be specified accurately in your 
-local.inc file, and you should include a / at the end of the path specified.
-In addition, you should modify jpgraph.php to set USE_CACHE=false
-
 
 Q: How do I upgrade my database?
 

@@ -125,7 +125,6 @@ if (file_exists($gfcgfile)) {
 	forge_define_config_item ('template_group', 'core', $GLOBALS['sys_template_group']) ;
 	forge_define_config_item ('sendmail_path', 'core', $GLOBALS['sys_sendmail_path']) ;
 	forge_define_config_item ('mailman_path', 'core', $GLOBALS['sys_path_to_mailman']) ;
-	forge_define_config_item ('jpgraph_path', 'core', $GLOBALS['sys_path_to_jpgraph']) ;
 	forge_define_config_item ('account_manager_type', 'core', $GLOBALS['sys_account_manager_type']) ;
 	forge_define_config_item ('unix_cipher', 'core', $GLOBALS['unix_cipher']) ;
 	forge_define_config_item ('homedir_prefix', 'core', $GLOBALS['homedir_prefix']) ;

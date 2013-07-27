@@ -51,8 +51,6 @@ Requires: postfix, openssh, inetd, which
 Requires: /bin/sh, /bin/bash
 Requires: perl, perl-DBI, perl-HTML-Parser, perl-Text-Autoformat, perl-Mail-Sendmail, perl-Sort-Versions
 Requires: cronolog
-Requires: php-jpgraph
-Requires: /var/www/jpgraph-1.19/jpgraph.php
 #Requires: libnss-pgsql >= 1.4
 Requires: gettext
 Requires: php-htmlpurifier >= 4.0.0
@@ -488,7 +486,6 @@ search_and_replace "/opt/gforge" "%{FORGE_DIR}"
 #%{__sed} -i -e 's|.*php_value[[:space:]]*include_path.*$|\tphp_value\tinclude_path ".:/usr/share/gforge/www/include:/usr/share/gforge:/etc/gforge:/usr/share/gforge/common:/usr/share/gforge/www:/usr/share/gforge/plugins"|' $RPM_BUILD_ROOT%{_sysconfdir}/httpd/conf.d/z-gforge.conf
 
 %{__sed} -i -e 's!www-data!apache!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
-%{__sed} -i -e 's!/usr/share/jpgraph!/var/www/jpgraph-1.19!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
 %{__sed} -i -e 's!lists.$core/web_host!$core/web_host!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
 %{__sed} -i -e 's!scm.$core/web_host!$core/web_host!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini
 %{__sed} -i -e 's!users.$core/web_host!$core/web_host!g' $RPM_BUILD_ROOT%{FORGE_CONF_DIR}/config.ini.d/defaults.ini

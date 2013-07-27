@@ -2,13 +2,10 @@
 /**
  * FusionForge Config File edit page
  *
- * @version
- * @author
- * @copyright
- * Copyright 2005 GForge, LLC
- * http://fusionforge.org/
- *
  * Daniel A. Pérez danielperez.arg@gmail.com
+ * Copyright 2005 GForge, LLC
+ * Copyright 2013, Franck Villaume - TrivialDev
+ * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -50,7 +47,6 @@ class configCheck {
 	static function groupdir_prefix($v) { return is_dir($v); }
 	static function homedir_prefix($v) { return is_dir($v); }
 	static function installation_environment($v) { return in_array($v, array('production', 'integration', 'development')); }
-	static function jpgraph_path($v) { return is_dir($v); }
 	static function log_path($v) { return is_dir($v); }
 	static function mailman_path($v) { return is_dir($v); }
 	static function plugins_path($v) { return is_dir($v); }

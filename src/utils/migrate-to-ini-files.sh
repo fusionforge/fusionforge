@@ -64,7 +64,6 @@ add_config core ftp_upload_host >> $tmp
 add_config core groupdir_prefix >> $tmp
 add_config core homedir_prefix >> $tmp
 add_config core images_url >> $tmp
-add_config core jpgraph_path >> $tmp
 add_config core lists_host >> $tmp
 add_config core mailman_path >> $tmp
 add_config core master_path >> $tmp

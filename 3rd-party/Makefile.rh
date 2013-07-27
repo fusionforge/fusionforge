@@ -1,7 +1,5 @@
 #! /usr/bin/make -f
 #
-# Build 3rd party rpms like php-htmlpurifier, php-jpgraph.
-#
 # Once built, packages are in $BUILDPLACE
 
 BUILDERDIR:=$(shell ../tests/scripts/builder_get_config.sh BUILDERDIR)
@@ -15,15 +13,6 @@ HTMLPURIFIER_VERSION=4.4.0
 HTMLPURIFIER_SPEC=$(HTMLPURIFYER_DIR)/php-htmlpurifier.spec
 HTMLPURIFIER_TBZ=htmlpurifier-$(HTMLPURIFIER_VERSION).tar.gz
 HTMLPURIFIER_RPM=noarch/php-htmlpurifier-$(HTMLPURIFIER_VERSION)-1.noarch.rpm
-
-JPGRAPH_DIR:=$(CURDIR)/php-jpgraph
-JPGRAPH_VERSION=1.5.2
-JPGRAPH_SPEC=$(JPGRAPH_DIR)/php-jpgraph.spec
-JPGRAPH_TBZ=libphp-jpgraph_$(JPGRAPH_VERSION).orig.tar.gz
-JPGRAPH_RPM=noarch/php-jpgraph-$(JPGRAPH_VERSION)-1.noarch.rpm
-JPGRAPH_DIFF=libphp-jpgraph_$(JPGRAPH_VERSION)-12.diff
-JPGRAPH_PATCH1=jpgraph-1.5.2-php5_and_liberation_fonts.patch
-JPGRAPH_PATCH2=jpgraph-rhel-fonts.patch
 
 WEBDAV_SERVER_DIR:=$(CURDIR)/php-pear-HTTP_WebDAV_Server
 WEBDAV_SERVER_VERSION=1.0.0RC5
@@ -46,7 +35,7 @@ SELENIUM_DIR:=$(CURDIR)/selenium
 RPMBUILD=rpmbuild --quiet --define='_topdir $(BUILDPLACE)' --define='_tmppath %{_topdir}' --define='_sysconfdir /etc' --define='_rpmdir $(BUILDRESULT)' --define='_specdir %{_topdir}/SPECS' 
 #--define='_sourcedir %{_topdir}/SOURCES'
 
-default: $(HTMLPURIFYER_DIR) $(JPGRAPH_DIR) $(WEBDAV_SERVER_DIR) $(SELENIUM_DIR) dist 
+default: $(HTMLPURIFYER_DIR) $(WEBDAV_SERVER_DIR) $(SELENIUM_DIR) dist 
 
 all: clean default
 
@@ -69,24 +58,6 @@ $(BUILDRESULT)/$(HTMLPURIFIER_RPM): $(HTMLPURIFIER_SPEC) $(BUILDPLACE)/SOURCES/$
 $(BUILDPLACE)/SOURCES/$(HTMLPURIFIER_TBZ): $(BUILDPLACE)/SOURCES
 	@cd $(BUILDPLACE)/SOURCES; [ -f $@ ] || wget -q -N http://htmlpurifier.org/releases/$(HTMLPURIFIER_TBZ)
 
-# PHP JPGRAPH
-$(JPGRAPH_DIR): $(BUILDRESULT)/$(JPGRAPH_RPM)
-
-$(BUILDRESULT)/$(JPGRAPH_RPM): $(JPGRAPH_SPEC) $(BUILDPLACE)/SOURCES/$(JPGRAPH_DIFF) $(BUILDPLACE)/SOURCES/$(JPGRAPH_TBZ) $(BUILDPLACE)/SOURCES/$(JPGRAPH_PATCH1) $(BUILDPLACE)/SOURCES/$(JPGRAPH_PATCH2)
-	$(RPMBUILD) --quiet --clean -ba $(JPGRAPH_SPEC)
-
-$(BUILDPLACE)/SOURCES/$(JPGRAPH_DIFF): $(BUILDPLACE)/SOURCES
-	zcat $(JPGRAPH_DIR)/$(JPGRAPH_DIFF).gz > $@
-
-$(BUILDPLACE)/SOURCES/$(JPGRAPH_TBZ): $(BUILDPLACE)/SOURCES
-	cp $(JPGRAPH_DIR)/$(JPGRAPH_TBZ) $@
-
-$(BUILDPLACE)/SOURCES/$(JPGRAPH_PATCH1):
-	cp $(JPGRAPH_DIR)/$(JPGRAPH_PATCH1) $@
-	
-$(BUILDPLACE)/SOURCES/$(JPGRAPH_PATCH2):
-	cp $(JPGRAPH_DIR)/$(JPGRAPH_PATCH2) $@
-	
 # WEBDAV SERVER
 $(WEBDAV_SERVER_DIR): $(BUILDRESULT)/$(WEBDAV_SERVER_RPM)
 
