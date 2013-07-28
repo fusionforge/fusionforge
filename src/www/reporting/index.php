@@ -2,8 +2,8 @@
 /**
  * Reporting System
  *
+ * Copyright 2003, Tim Perdue - gforge.org
  * Copyright 2004 (c) GForge LLC
- * Copyright 2006, Tim Perdue - gforge.org
  * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
