@@ -57,7 +57,7 @@ while ( $row = db_fetch_array($project_res) ) {
 		system("cp -r /usr/share/moin/data /usr/share/moin/underlay $project_dir/");
 		system("chown -R gforge:gforge $project_dir");
 		$template = forge_get_config('config_path') . "/plugins/moinmoin/PROJECT_NAME.py.tmpl";
-		system('(echo "# Automatically generated on `date` from '.$template.'";'
+		system('(echo "# Automatically generated on `LANG=C date` from '.$template.'";'
                       . 'echo "# DO NOT EDIT";'
                       . "sed s/@PROJECT_NAME@/$project/ < $template) > $wikidata/$project.py");
 
