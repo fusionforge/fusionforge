@@ -245,6 +245,17 @@ function forge_set_config_item_bool ($var, $section) {
 }
 
 /**
+ * Define a new boolean configuration item with given name/section and default value
+ * @param string $var name
+ * @param string $section
+ * @param any $default
+ */
+function forge_define_config_item_bool ($var, $section, $default) {
+	forge_define_config_item ($var, $section, $default);
+	forge_set_config_item_bool ($var, $section);
+}
+
+/**
  * Read a *.ini file and inject its contents into the configuration database
  * @param string $file
  */
