@@ -2423,6 +2423,8 @@ class Group extends Error {
 		}
 
 		$this->normalizeAllRoles();
+		// empty members cache because the group creator is not yet in cache.
+		unset($this->membersArr);
 		$this->activateUsers();
 
 		// Delete fake join request
