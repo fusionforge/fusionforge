@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-19 15:57+0200\n"
+"POT-Creation-Date: 2013-08-19 16:15+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -3466,7 +3466,7 @@ msgstr "Nueva cuenta"
 msgid "Home"
 msgstr "Página principal"
 
-#: common/include/Navigation.class.php:232
+#: common/include/Navigation.class.php:232 www/reporting/index.php:33
 msgid "Main Page"
 msgstr "Página Principal"
 
@@ -21144,9 +21144,10 @@ msgstr ""
 "reconstruir las tablas de reporte."
 
 #: www/reporting/rebuild.php:53
+#, fuzzy
 msgid ""
-"If you are sure you want to rebuild all the reporting tables, check the \"I "
-"am sure\" box and click the button below."
+"If you are sure you want to rebuild all the reporting tables, check the “I "
+"am sure” box and click the button below."
 msgstr ""
 "Si esta seguro que quiere reconstruir las tablas de reporte, marca 'Estoy "
 "Seguro' y pulsa el botón siguiente."

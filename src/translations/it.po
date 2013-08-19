@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-19 15:57+0200\n"
+"POT-Creation-Date: 2013-08-19 16:15+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3572,7 +3572,7 @@ msgstr "Nuovo account"
 msgid "Home"
 msgstr "Homepage"
 
-#: common/include/Navigation.class.php:232
+#: common/include/Navigation.class.php:232 www/reporting/index.php:33
 msgid "Main Page"
 msgstr "Pagina principale"
 
@@ -21668,8 +21668,8 @@ msgstr ""
 
 #: www/reporting/rebuild.php:53
 msgid ""
-"If you are sure you want to rebuild all the reporting tables, check the \"I "
-"am sure\" box and click the button below."
+"If you are sure you want to rebuild all the reporting tables, check the “I "
+"am sure” box and click the button below."
 msgstr ""
 
 #: www/reporting/rebuild.php:56

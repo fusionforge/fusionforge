@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-19 15:57+0200\n"
+"POT-Creation-Date: 2013-08-19 16:15+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3545,7 +3545,7 @@ msgstr "Kontu berria"
 msgid "Home"
 msgstr "Orri nagusia"
 
-#: common/include/Navigation.class.php:232
+#: common/include/Navigation.class.php:232 www/reporting/index.php:33
 #, fuzzy
 msgid "Main Page"
 msgstr "Evaluación del Erabiltzailea"
@@ -21521,8 +21521,8 @@ msgstr ""
 
 #: www/reporting/rebuild.php:53
 msgid ""
-"If you are sure you want to rebuild all the reporting tables, check the \"I "
-"am sure\" box and click the button below."
+"If you are sure you want to rebuild all the reporting tables, check the “I "
+"am sure” box and click the button below."
 msgstr ""
 
 #: www/reporting/rebuild.php:56

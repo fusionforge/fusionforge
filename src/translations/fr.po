@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-19 15:57+0200\n"
+"POT-Creation-Date: 2013-08-19 16:15+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -3430,7 +3430,7 @@ msgstr "Nouveau compte"
 msgid "Home"
 msgstr "Accueil"
 
-#: common/include/Navigation.class.php:232
+#: common/include/Navigation.class.php:232 www/reporting/index.php:33
 msgid "Main Page"
 msgstr "Page principale"
 
@@ -21272,8 +21272,8 @@ msgstr ""
 
 #: www/reporting/rebuild.php:53
 msgid ""
-"If you are sure you want to rebuild all the reporting tables, check the \"I "
-"am sure\" box and click the button below."
+"If you are sure you want to rebuild all the reporting tables, check the “I "
+"am sure” box and click the button below."
 msgstr ""
 "Si vous êtes sûr de vouloir reconstruire toutes les tables du système de "
 "rapports, cochez la case « J'en suis sûr » et cliquez sur le bouton ci-"
@@ -23244,6 +23244,14 @@ msgstr "Erreur de mise à jour"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
+
+#~ msgid ""
+#~ "If you are sure you want to rebuild all the reporting tables, check the "
+#~ "\"I am sure\" box and click the button below."
+#~ msgstr ""
+#~ "Si vous êtes sûr de vouloir reconstruire toutes les tables du système de "
+#~ "rapports, cochez la case « J'en suis sûr » et cliquez sur le bouton ci-"
+#~ "dessous."
 
 #~ msgid "Package JPGraph not installed"
 #~ msgstr "Le paquet JPGraph n'est pas installé."
@@ -26092,14 +26100,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "Site-Wide Task and Hours (report)"
 #~ msgstr "Liste globale des tâches et des heures (rapport)"
-
-#~ msgid ""
-#~ "If you are sure you want to rebuild all the reporting tables, check the "
-#~ "“I am sure” box and click the button below."
-#~ msgstr ""
-#~ "Si vous êtes sûr de vouloir reconstruire toutes les tables du système de "
-#~ "rapports, cochez la case « J'en suis sûr » et cliquez sur le bouton ci-"
-#~ "dessous."
 
 #~ msgid ""
 #~ "Choose a Project/Subproject in the Tasks. You will then have to choose a "

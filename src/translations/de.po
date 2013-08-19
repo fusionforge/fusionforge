@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-19 15:57+0200\n"
+"POT-Creation-Date: 2013-08-19 16:15+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -3585,7 +3585,7 @@ msgstr "Neuer Account"
 msgid "Home"
 msgstr "Home"
 
-#: common/include/Navigation.class.php:232
+#: common/include/Navigation.class.php:232 www/reporting/index.php:33
 msgid "Main Page"
 msgstr "Startseite"
 
@@ -21908,11 +21908,11 @@ msgstr ""
 
 #: www/reporting/rebuild.php:53
 msgid ""
-"If you are sure you want to rebuild all the reporting tables, check the \"I "
-"am sure\" box and click the button below."
+"If you are sure you want to rebuild all the reporting tables, check the “I "
+"am sure” box and click the button below."
 msgstr ""
 "Wenn Sie sicher sind, dass Sie alle Berichtsverzeichnisse neu erstellen "
-"möchten, wählen Sie das \"Ich bin sicher\" Kästchen aus und klicken Sie auf "
+"möchten, wählen Sie das »Ich bin sicher« Kästchen aus und klicken Sie auf "
 "den Knopf darunter."
 
 #: www/reporting/rebuild.php:56
@@ -23910,6 +23910,14 @@ msgstr "Aktualisierung nicht möglich"
 msgid "No User Name Provided"
 msgstr "Kein Benutzername angegeben"
 
+#~ msgid ""
+#~ "If you are sure you want to rebuild all the reporting tables, check the "
+#~ "\"I am sure\" box and click the button below."
+#~ msgstr ""
+#~ "Wenn Sie sicher sind, dass Sie alle Berichtsverzeichnisse neu erstellen "
+#~ "möchten, wählen Sie das \"Ich bin sicher\" Kästchen aus und klicken Sie "
+#~ "auf den Knopf darunter."
+
 #~ msgid "Months"
 #~ msgstr "Monate"
 
@@ -24097,14 +24105,6 @@ msgstr "Kein Benutzername angegeben"
 #~ "exportieren oder importieren (<a href=\"http://en.wikipedia.org/wiki/"
 #~ "Comma-separated_values\">Comma Separated Values</a>). Dieses Format kann "
 #~ "genutzt werden um Aufgaben in Microsoft Excel zu betrachten."
-
-#~ msgid ""
-#~ "If you are sure you want to rebuild all the reporting tables, check the "
-#~ "“I am sure” box and click the button below."
-#~ msgstr ""
-#~ "Wenn Sie sicher sind, dass Sie alle Berichtsverzeichnisse neu erstellen "
-#~ "möchten, wählen Sie das »Ich bin sicher« Kästchen aus und klicken Sie auf "
-#~ "den Knopf darunter."
 
 #~ msgid ""
 #~ "No matches found for “%s” - No sections available (check your permissions)"
