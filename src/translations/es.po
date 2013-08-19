@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-19 16:15+0200\n"
+"POT-Creation-Date: 2013-08-19 16:33+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -6827,7 +6827,7 @@ msgstr ""
 
 #: common/tracker/views/form-deletetracker.php:32
 #: www/admin/responses_admin.php:51 www/frs/admin/deletepackage.php:68
-#: www/frs/admin/editrelease.php:381
+#: www/frs/admin/editrelease.php:381 www/reporting/rebuild.php:62
 msgid "I am Sure"
 msgstr "Estoy Seguro"
 
@@ -21147,7 +21147,7 @@ msgstr ""
 #, fuzzy
 msgid ""
 "If you are sure you want to rebuild all the reporting tables, check the “I "
-"am sure” box and click the button below."
+"am Sure” box and click the button below."
 msgstr ""
 "Si esta seguro que quiere reconstruir las tablas de reporte, marca 'Estoy "
 "Seguro' y pulsa el botón siguiente."
@@ -21155,10 +21155,6 @@ msgstr ""
 #: www/reporting/rebuild.php:56
 msgid "This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE."
 msgstr "Podría llevar unos minutos así que NO HAGA CLICK MÁS DE UNA VEZ."
-
-#: www/reporting/rebuild.php:62
-msgid "I am sure"
-msgstr "Estoy seguro"
 
 #: www/reporting/rebuild.php:65
 msgid "Press ONLY ONCE"
@@ -23109,6 +23105,9 @@ msgstr "No puedo actualizar"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "No ha proporcionado el nombre de usuario"
+
+#~ msgid "I am sure"
+#~ msgstr "Estoy seguro"
 
 #~ msgid "Package JPGraph not installed"
 #~ msgstr "Paquete JPGraph no esta instalado"

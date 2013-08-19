@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-19 16:15+0200\n"
+"POT-Creation-Date: 2013-08-19 16:33+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -6806,7 +6806,7 @@ msgstr ""
 
 #: common/tracker/views/form-deletetracker.php:32
 #: www/admin/responses_admin.php:51 www/frs/admin/deletepackage.php:68
-#: www/frs/admin/editrelease.php:381
+#: www/frs/admin/editrelease.php:381 www/reporting/rebuild.php:62
 msgid "I am Sure"
 msgstr "Je confirme"
 
@@ -21271,9 +21271,10 @@ msgstr ""
 "du système de rapports."
 
 #: www/reporting/rebuild.php:53
+#, fuzzy
 msgid ""
 "If you are sure you want to rebuild all the reporting tables, check the “I "
-"am sure” box and click the button below."
+"am Sure” box and click the button below."
 msgstr ""
 "Si vous êtes sûr de vouloir reconstruire toutes les tables du système de "
 "rapports, cochez la case « J'en suis sûr » et cliquez sur le bouton ci-"
@@ -21284,10 +21285,6 @@ msgid "This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE."
 msgstr ""
 "Cette opération peut prendre plusieurs minutes ; ne cliquez donc QU'UNE "
 "SEULE FOIS."
-
-#: www/reporting/rebuild.php:62
-msgid "I am sure"
-msgstr "J'en suis sûr"
 
 #: www/reporting/rebuild.php:65
 msgid "Press ONLY ONCE"
@@ -23244,6 +23241,9 @@ msgstr "Erreur de mise à jour"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
+
+#~ msgid "I am sure"
+#~ msgstr "J'en suis sûr"
 
 #~ msgid ""
 #~ "If you are sure you want to rebuild all the reporting tables, check the "

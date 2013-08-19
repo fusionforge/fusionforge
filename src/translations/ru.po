@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-19 16:15+0200\n"
+"POT-Creation-Date: 2013-08-19 16:33+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7037,7 +7037,7 @@ msgstr "Вы желаете полностью удалить трекер и е
 
 #: common/tracker/views/form-deletetracker.php:32
 #: www/admin/responses_admin.php:51 www/frs/admin/deletepackage.php:68
-#: www/frs/admin/editrelease.php:381
+#: www/frs/admin/editrelease.php:381 www/reporting/rebuild.php:62
 msgid "I am Sure"
 msgstr "Я уверен"
 
@@ -21986,16 +21986,12 @@ msgstr ""
 #: www/reporting/rebuild.php:53
 msgid ""
 "If you are sure you want to rebuild all the reporting tables, check the “I "
-"am sure” box and click the button below."
+"am Sure” box and click the button below."
 msgstr ""
 
 #: www/reporting/rebuild.php:56
 msgid "This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE."
 msgstr ""
-
-#: www/reporting/rebuild.php:62
-msgid "I am sure"
-msgstr "я уверен"
 
 #: www/reporting/rebuild.php:65
 msgid "Press ONLY ONCE"
@@ -23971,6 +23967,9 @@ msgstr "Глобальное изменение"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Имя участника обязательно"
+
+#~ msgid "I am sure"
+#~ msgstr "я уверен"
 
 #~ msgid "Months"
 #~ msgstr "Месяцы"

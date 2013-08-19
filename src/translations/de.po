@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-19 16:15+0200\n"
+"POT-Creation-Date: 2013-08-19 16:33+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -7080,7 +7080,7 @@ msgstr ""
 
 #: common/tracker/views/form-deletetracker.php:32
 #: www/admin/responses_admin.php:51 www/frs/admin/deletepackage.php:68
-#: www/frs/admin/editrelease.php:381
+#: www/frs/admin/editrelease.php:381 www/reporting/rebuild.php:62
 msgid "I am Sure"
 msgstr "Ich bin sicher"
 
@@ -21907,9 +21907,10 @@ msgstr ""
 "erstellen."
 
 #: www/reporting/rebuild.php:53
+#, fuzzy
 msgid ""
 "If you are sure you want to rebuild all the reporting tables, check the “I "
-"am sure” box and click the button below."
+"am Sure” box and click the button below."
 msgstr ""
 "Wenn Sie sicher sind, dass Sie alle Berichtsverzeichnisse neu erstellen "
 "möchten, wählen Sie das »Ich bin sicher« Kästchen aus und klicken Sie auf "
@@ -21918,10 +21919,6 @@ msgstr ""
 #: www/reporting/rebuild.php:56
 msgid "This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE."
 msgstr "Dies könnte einige Minuten dauern, bitte KLICKEN SIE NUR EINMAL."
-
-#: www/reporting/rebuild.php:62
-msgid "I am sure"
-msgstr "Ich bin sicher"
 
 #: www/reporting/rebuild.php:65
 msgid "Press ONLY ONCE"
@@ -23909,6 +23906,9 @@ msgstr "Aktualisierung nicht möglich"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Kein Benutzername angegeben"
+
+#~ msgid "I am sure"
+#~ msgstr "Ich bin sicher"
 
 #~ msgid ""
 #~ "If you are sure you want to rebuild all the reporting tables, check the "
