@@ -50,7 +50,7 @@ echo '<p>';
 echo _('Occasionally, if cronjobs failed or the database was damaged, you may have to rebuild the reporting tables.');
 echo '</p>';
 echo '<p>';
-echo _('If you are sure you want to rebuild all the reporting tables, check the "I am sure" box and click the button below.');
+echo _('If you are sure you want to rebuild all the reporting tables, check the “I am sure” box and click the button below.');
 echo '</p>';
 echo '<p>';
 echo _('This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE.');
