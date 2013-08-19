@@ -55,7 +55,6 @@ if (getStringFromRequest('submit')) {
 		$time_code=false;
 		$category_name='';
 	}
-
 }
 
 report_header(_('Manage Time Tracker Categories'));
@@ -65,8 +64,7 @@ if ($time_code) {
 			array($time_code));
 	$category_name=db_result($res1,0,'category_name');
 }
-$res=db_query_params ('SELECT * FROM rep_time_category',
-			array());
+$res=db_query_params ('SELECT * FROM rep_time_category', array());
 
 $arr[]=_('Time Code');
 $arr[]=_('Category Name');
@@ -82,7 +80,7 @@ echo $HTML->listTableBottom();
 
 ?>
 <p>
-<?php echo _('You can create categories for how time might be spent when completing a particular task. Examples of categories include "Meeting", "Coding", "Testing".'); ?>
+<?php echo _('You can create categories for how time might be spent when completing a particular task. Examples of categories include “Meeting”, “Coding”, “Testing”.'); ?>
 </p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <p>
