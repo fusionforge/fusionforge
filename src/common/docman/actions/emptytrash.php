@@ -3,6 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -39,4 +40,4 @@ if (!$dm->cleanTrash()) {
 }
 
 $return_msg = _('Emptied Trash successfully.');
-session_redirect('/docman/?group_id='.$group_id.'&view=listtrashfile&feedback='.urlencode($return_msg));
+session_redirect('/docman/?group_id='.$group_id.'&view=listfile&feedback='.urlencode($return_msg));

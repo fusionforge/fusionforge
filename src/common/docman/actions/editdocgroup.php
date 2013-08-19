@@ -5,6 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -65,8 +66,8 @@ if ($dg->getState() == 2) {
 	if ($dgf->isError())
 		exit_error($dgf->getErrorMessage(), 'docman');
 
-	$trashnested_groups =& $dgf->getNested();
-
+	$trashnested_groups =& $dgf->getNested(2);
+	
 	$df->setDocGroupID($dirid);
 	$d_arr =& $df->getDocuments();
 
@@ -77,6 +78,20 @@ if ($dg->getState() == 2) {
 			$trashnested_docs[$doc->getDocGroupID()][] = $doc;
 		}
 	}
+	
+	if (is_array($trashnested_groups[$dirid])) {
+		foreach ($trashnested_groups[$dirid] as $ndg) {
+			$localdf = new DocumentFactory($g);
+			$localdf->setDocGroupID($ndg->getID());
+			$d_arr =& $localdf->getDocuments();
+			if (is_array($d_arr)) {
+				foreach ($d_arr as $doc) {
+					$trashnested_docs[$doc->getDocGroupID()][] = $doc;
+				}
+			}
+		}
+	}
+
 	docman_recursive_stateid($dirid, $trashnested_groups, $trashnested_docs, 1);
 }
 
