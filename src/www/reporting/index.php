@@ -30,7 +30,7 @@ require_once $gfcommon.'reporting/ReportSetup.class.php';
 
 session_require_global_perm ('forge_stats', 'read') ;
 
-report_header('Main Page');
+report_header(_('Main Page'));
 
 ?>
 <h2><?php echo _('Users'); ?></h2>
