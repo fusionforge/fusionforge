@@ -615,7 +615,10 @@ function html_build_select_box($result, $name, $checked_val = "xzxz", $show_100 
 	if ($text_100 == 'none') {
 		$text_100 = _('None');
 	}
-	return html_build_select_box_from_arrays (util_result_column_to_array($result,0),util_result_column_to_array($result,1),$name,$checked_val,$show_100,$text_100, $show_any, $text_any);
+	if ($text_any == 'Select One') {
+		$text_any = _('Select One');
+	}
+	return html_build_select_box_from_arrays(util_result_column_to_array($result, 0), util_result_column_to_array($result, 1), $name, $checked_val, $show_100, $text_100, $show_any, $text_any);
 }
 
 /**
