@@ -148,5 +148,5 @@ class HudsonTestResult {
 		echo '//]]></script>';
 		echo '<div id="chart'.$chartid.'"></div>';
 	}
-	
+
 }
