@@ -31,9 +31,9 @@ require_once $gfcommon.'include/minijson.php';
 /**
  * html_generic_fileheader() - Output <html><head> and <meta/> inside.
  *
- * @param	string	$title
- *			Mandatory content of <title> attribute,
- *			will be HTML-secured
+ * @param	$title	string
+ *			Mandatory content of <title> attribute, will be HTML-secured
+ * @throws	Exception
  */
 function html_generic_fileheader($title) {
 	global $HTML, $sysDTDs, $sysXMLNSs;
@@ -88,12 +88,13 @@ function html_error_top($msg) {
  * make_user_link() - Make a username reference into a link to that users User page on SF.
  *
  * @param	string	The username of the user to link.
+ * @return	string
  */
 function make_user_link($username, $displayname = '') {
 	if (empty($displayname))
 		$displayname = $username;
 
-	if (!strcasecmp($username,'Nobody') || !strcasecmp($username,'None')) {
+	if (!strcasecmp($username, 'Nobody') || !strcasecmp($username, 'None')) {
 		return $username;
 	} else {
 		return '<a href="/users/'.$username.'">'.$displayname.'</a>';
@@ -115,9 +116,10 @@ function html_feedback_bottom($feedback) {
  *
  * @param	int	The height of the image
  * @param	int	The width of the image
+ * @return	string
  */
-function html_blankimage($height,$width) {
-	return '<img src="/images/blank.png" width="' . $width . '" height="' . $height . '" alt="" />';
+function html_blankimage($height, $width) {
+	return '<img src="/images/blank.png" width="'.$width.'" height="'.$height.'" alt="" />';
 }
 
 /**
@@ -127,11 +129,12 @@ function html_blankimage($height,$width) {
  * @param	int	width of the image
  * @param	int 	height of the image
  * @param	array	Any <img> tag parameters (i.e. 'border', 'alt', etc...)
+ * @return	string
  */
 function html_abs_image($url, $width, $height, $args) {
-	$return = ('<img src="' . $url . '"');
+	$return = ('<img src="'.$url.'"');
 	reset($args);
-	while(list($k,$v) = each($args)) {
+	while (list($k, $v) = each($args)) {
 		$return .= ' '.$k.'="'.$v.'"';
 	}
 
@@ -140,8 +143,8 @@ function html_abs_image($url, $width, $height, $args) {
 	}
 
 	// Add image dimensions (if given)
-	$return .= $width ?" width=\"" . $width . "\"": '';
-	$return .= $height? " height=\"" . $height . "\"": '';
+	$return .= $width ? " width=\"".$width."\"" : '';
+	$return .= $height ? " height=\"".$height."\"" : '';
 
 	$return .= (' />');
 	return $return;
@@ -156,7 +159,7 @@ function html_abs_image($url, $width, $height, $args) {
  * @param	array	Any IMG tag parameters associated with this image (i.e. 'border', 'alt', etc...)
  * @param	bool	DEPRECATED
  */
-function html_image($src, $width='', $height='', $args=array(), $display=1) {
+function html_image($src, $width = '', $height = '', $args = array(), $display = 1) {
 	global $HTML;
 
 	if (method_exists($HTML, 'html_image')) {
@@ -173,9 +176,9 @@ function html_image($src, $width='', $height='', $args=array(), $display=1) {
  * @param	string	Which element of the box is to be selected.
  * @return	string	The html select box.
  */
-function html_get_language_popup($title='language_id', $selected='xzxz') {
+function html_get_language_popup($title = 'language_id', $selected = 'xzxz') {
 	$res = db_query_params('SELECT * FROM supported_languages ORDER BY name ASC',
-			array());
+		array());
 	return html_build_select_box($res, $title, $selected, false);
 }
 
@@ -186,9 +189,9 @@ function html_get_language_popup($title='language_id', $selected='xzxz') {
  * @param	string	Which element of the box is to be selected.
  * @return	string	The html select box.
  */
-function html_get_theme_popup($title='theme_id', $selected='xzxz') {
-	$res=db_query_params('SELECT theme_id, fullname FROM themes WHERE enabled=true',
-			array());
+function html_get_theme_popup($title = 'theme_id', $selected = 'xzxz') {
+	$res = db_query_params('SELECT theme_id, fullname FROM themes WHERE enabled=true',
+		array());
 	$nbTheme = db_numrows($res);
 	if ($nbTheme == 1) {
 		$thetheme = db_result($res, 0, 'fullname');
@@ -198,9 +201,9 @@ function html_get_theme_popup($title='theme_id', $selected='xzxz') {
 			'value' => db_result($res, 0, 'theme_id'),
 		    ));
 	} elseif ($nbTheme < 1) {
-		return("");
+		return ("");
 	} else {
-		return html_build_select_box($res,$title,$selected,false);
+		return html_build_select_box($res, $title, $selected, false);
 	}
 }
 
@@ -211,9 +214,9 @@ function html_get_theme_popup($title='theme_id', $selected='xzxz') {
  * @param	string	Which element of the box is to be selected.
  * @return	string	The html select box.
  */
-function html_get_ccode_popup($title='ccode', $selected='xzxz') {
-	$res=db_query_params('SELECT ccode,country_name FROM country_code ORDER BY country_name',
-			array());
+function html_get_ccode_popup($title = 'ccode', $selected = 'xzxz') {
+	$res = db_query_params('SELECT ccode,country_name FROM country_code ORDER BY country_name',
+		array());
 	return html_build_select_box($res, $title, $selected, false);
 }
 
@@ -225,11 +228,11 @@ function html_get_ccode_popup($title='ccode', $selected='xzxz') {
  * @param	string	Which element of the box is to be selected.
  * @return	string	The html select box.
  */
-function html_get_timezone_popup($title='timezone', $selected='xzxz') {
+function html_get_timezone_popup($title = 'timezone', $selected = 'xzxz') {
 	global $TZs;
 	if ($selected == 'xzxzxzx') {
-	  $r = file('/etc/timezone');
-	  $selected = str_replace("\n", '', $r[0]);
+		$r = file('/etc/timezone');
+		$selected = str_replace("\n", '', $r[0]);
 	}
 	return html_build_select_box_from_arrays($TZs, $TZs, $title, $selected, false);
 }
@@ -244,16 +247,17 @@ function html_get_timezone_popup($title='timezone', $selected='xzxz') {
  * @param	boolean	Whether we should swap the keys / names.
  * @param	bool	Whether or not to show the '100 row'.
  * @param	string	What to call the '100 row' defaults to none.
+ * @return	string
  */
-function html_build_select_box_from_assoc ($arr,$select_name,$checked_val='xzxz',$swap=false,$show_100=false,$text_100='None') {
+function html_build_select_box_from_assoc($arr, $select_name, $checked_val = 'xzxz', $swap = false, $show_100 = false, $text_100 = 'None') {
 	if ($swap) {
-		$keys=array_values($arr);
-		$vals=array_keys($arr);
+		$keys = array_values($arr);
+		$vals = array_keys($arr);
 	} else {
-		$vals=array_values($arr);
-		$keys=array_keys($arr);
+		$vals = array_values($arr);
+		$keys = array_keys($arr);
 	}
-	return html_build_select_box_from_arrays ($keys,$vals,$select_name,$checked_val,$show_100,$text_100);
+	return html_build_select_box_from_arrays($keys, $vals, $select_name, $checked_val, $show_100, $text_100);
 }
 
 /**
@@ -263,21 +267,22 @@ function html_build_select_box_from_assoc ($arr,$select_name,$checked_val='xzxz'
  * @param	array	An array of items to use.
  * @param	string	The name you want assigned to this form element.
  * @param	string	The value of the item that should be checked.
+ * @return	string
  */
-function html_build_select_box_from_array ($vals,$select_name,$checked_val='xzxz',$samevals = 0) {
+function html_build_select_box_from_array($vals, $select_name, $checked_val = 'xzxz', $samevals = 0) {
 	$return = '
 		<select name="'.$select_name.'">';
 
 	$rows = count($vals);
 
 	for ($i = 0; $i < $rows; $i++) {
-		if ( $samevals ) {
-			$return .= "\n\t\t<option value=\"" . $vals[$i] . "\"";
+		if ($samevals) {
+			$return .= "\n\t\t<option value=\"".$vals[$i]."\"";
 			if ($vals[$i] == $checked_val) {
 				$return .= ' selected="selected"';
 			}
 		} else {
-			$return .= "\n\t\t<option value=\"" . $i .'"';
+			$return .= "\n\t\t<option value=\"".$i.'"';
 			if ($i == $checked_val) {
 				$return .= ' selected="selected"';
 			}
@@ -307,39 +312,40 @@ function html_build_select_box_from_array ($vals,$select_name,$checked_val='xzxz
  * @param		string	What to call the '100 row' defaults to none
  * @param		bool	Whether or not to show the 'Any row'
  * @param		string	What to call the 'Any row' defaults to any
+ * @return		string
  */
-function html_build_radio_buttons_from_arrays ($vals,$texts,$select_name,$checked_val='xzxz',$show_100=true,$text_100='none',$show_any=false,$text_any='any') {
-	if ($text_100=='none'){
-		$text_100=_('None');
+function html_build_radio_buttons_from_arrays($vals, $texts, $select_name, $checked_val = 'xzxz', $show_100 = true, $text_100 = 'none', $show_any = false, $text_any = 'any') {
+	if ($text_100 == 'none') {
+		$text_100 = _('None');
 	}
 	$return = '';
 
-	$rows=count($vals);
+	$rows = count($vals);
 	if (count($texts) != $rows) {
-		$return .= 'ERROR - uneven row counts';
+		$return .= 'Error: uneven row counts';
 	}
 
 	//we don't always want the default Any row shown
 	if ($show_any) {
 		$return .= '
-		<input type="radio" name="'.$select_name.'" value=""'.(($checked_val=='') ? ' checked="checked"' : '').' />&nbsp;'. $text_any .'<br />';
+		<input type="radio" name="'.$select_name.'" value=""'.(($checked_val == '')? ' checked="checked"' : '').' />&nbsp;'.$text_any.'<br />';
 	}
 	//we don't always want the default 100 row shown
 	if ($show_100) {
 		$return .= '
-		<input type="radio" name="'.$select_name.'" value="100"'.(($checked_val==100) ? ' checked="checked"' : '').' />&nbsp;'. $text_100 .'<br />';
+		<input type="radio" name="'.$select_name.'" value="100"'.(($checked_val == 100)? ' checked="checked"' : '').' />&nbsp;'.$text_100.'<br />';
 	}
 
-	$checked_found=false;
+	$checked_found = false;
 
-	for ($i=0; $i<$rows; $i++) {
+	for ($i = 0; $i < $rows; $i++) {
 		//  uggh - sorry - don't show the 100 row
 		//  if it was shown above, otherwise do show it
 		if (($vals[$i] != '100') || ($vals[$i] == '100' && !$show_100)) {
 			$return .= '
 				<input type="radio" id="'.$select_name.'_'.$vals[$i].'" name="'.$select_name.'" value="'.$vals[$i].'"';
 			if ((string)$vals[$i] == (string)$checked_val) {
-				$checked_found=true;
+				$checked_found = true;
 				$return .= ' checked="checked"';
 			}
 			$return .= ' />&nbsp;'.htmlspecialchars($texts[$i]).'<br />';
@@ -360,7 +366,7 @@ function html_build_radio_buttons_from_arrays ($vals,$texts,$select_name,$checke
 /**
  * html_get_tooltip_description() - Get the tooltip description of the element
  *
- * @param		string	element name
+ * @param	string	element name
  */
 
 function html_get_tooltip_description($element_name) {
@@ -515,18 +521,19 @@ function html_use_jqueryteamworkgantt() {
  * @param		bool	Whether or not to show the 'Any row'
  * @param		string	What to call the 'Any row' defaults to any
  * @param		array	Array of all allowed values from the full list.
+ * @return		string
  */
 function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked_val = 'xzxz', $show_100 = true, $text_100 = 'none', $show_any = false, $text_any = 'any', $allowed = false) {
 	$have_a_subelement = false;
 
-	if ($text_100=='none'){
+	if ($text_100 == 'none') {
 		$text_100 = _('None');
 	}
 	$return = '';
 
 	$rows = count($vals);
 	if (count($texts) != $rows) {
-		$return .= _('ERROR - uneven row counts');
+		$return .= _('Error: uneven row counts');
 	}
 
 	//TODO: remove this ugly ack to get something more generic...
@@ -555,16 +562,16 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked
 		$have_a_subelement = true;
 	}
 
-	$checked_found=false;
+	$checked_found = false;
 
-	for ($i=0; $i<$rows; $i++) {
+	for ($i = 0; $i < $rows; $i++) {
 		//  uggh - sorry - don't show the 100 row
 		//  if it was shown above, otherwise do show it
 		if (($vals[$i] != '100') || ($vals[$i] == '100' && !$show_100)) {
 			$return .= '
 				<option value="'.util_html_secure($vals[$i]).'"';
 			if ((string)$vals[$i] == (string)$checked_val) {
-				$checked_found=true;
+				$checked_found = true;
 				$return .= ' selected="selected"';
 			}
 			if (is_array($allowed) && !in_array($vals[$i], $allowed)) {
@@ -604,9 +611,9 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked
  * @param		bool	Whether or not to show the '100 row'
  * @param		string	What to call the '100 row'.  Defaults to none.
  */
-function html_build_select_box ($result, $name, $checked_val="xzxz", $show_100=true, $text_100='none', $show_any=false, $text_any='Select One') {
-	if ($text_100=='none'){
-		$text_100=_('None');
+function html_build_select_box($result, $name, $checked_val = "xzxz", $show_100 = true, $text_100 = 'none', $show_any = false, $text_any = 'Select One', $allowed = false) {
+	if ($text_100 == 'none') {
+		$text_100 = _('None');
 	}
 	return html_build_select_box_from_arrays (util_result_column_to_array($result,0),util_result_column_to_array($result,1),$name,$checked_val,$show_100,$text_100, $show_any, $text_any);
 }
@@ -621,9 +628,9 @@ function html_build_select_box ($result, $name, $checked_val="xzxz", $show_100=t
  * @param		bool	Whether or not to show the '100 row'
  * @param		string	What to call the '100 row'.  Defaults to none.
  */
-function html_build_select_box_sorted ($result, $name, $checked_val="xzxz",$show_100=true,$text_100='none') {
-	if ($text_100=='none'){
-		$text_100=_('None');
+function html_build_select_box_sorted($result, $name, $checked_val = "xzxz", $show_100 = true, $text_100 = 'none') {
+	if ($text_100 == 'none') {
+		$text_100 = _('None');
 	}
 	$vals = util_result_column_to_array($result, 0);
 	$texts = util_result_column_to_array($result, 1);
@@ -641,9 +648,10 @@ function html_build_select_box_sorted ($result, $name, $checked_val="xzxz",$show
  * @param		string	The item that should be checked
  * @param		int		The size of this box
  * @param		bool	Whether or not to show the '100 row'
+ * @return		string
  */
-function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',$show_100=true) {
-	$checked_count=count($checked_array);
+function html_build_multiple_select_box($result, $name, $checked_array, $size = '8', $show_100 = true) {
+	$checked_count = count($checked_array);
 	$return = '
 		<select name="'.$name.'" multiple="multiple" size="'.$size.'">';
 	if ($show_100) {
@@ -652,7 +660,7 @@ function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',
 		*/
 		$return .= '
 		<option value="100"';
-		for ($j=0; $j<$checked_count; $j++) {
+		for ($j = 0; $j < $checked_count; $j++) {
 			if ($checked_array[$j] == '100') {
 				$return .= ' selected="selected"';
 			}
@@ -660,21 +668,21 @@ function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',
 		$return .= '>'._('None').'</option>';
 	}
 
-	$rows=db_numrows($result);
-	for ($i=0; $i<$rows; $i++) {
-		if ((db_result($result,$i,0) != '100') || (db_result($result,$i,0) == '100' && !$show_100)) {
+	$rows = db_numrows($result);
+	for ($i = 0; $i < $rows; $i++) {
+		if ((db_result($result, $i, 0) != '100') || (db_result($result, $i, 0) == '100' && !$show_100)) {
 			$return .= '
-				<option value="'.db_result($result,$i,0).'"';
+				<option value="'.db_result($result, $i, 0).'"';
 			/*
 				Determine if it's checked
 			*/
-			$val=db_result($result,$i,0);
-			for ($j=0; $j<$checked_count; $j++) {
+			$val = db_result($result, $i, 0);
+			for ($j = 0; $j < $checked_count; $j++) {
 				if ($val == $checked_array[$j]) {
 					$return .= ' selected="selected"';
 				}
 			}
-			$return .= '>'. substr(db_result($result,$i,1),0,35). '</option>';
+			$return .= '>'.substr(db_result($result, $i, 1), 0, 35).'</option>';
 		}
 	}
 	$return .= '
@@ -691,21 +699,22 @@ function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',
  * @param		string	The item that should be checked
  * @param		int		The size of this box
  * @param		bool	Whether or not to show the '100 row'
+ * @return		string
  */
-function html_build_multiple_select_box_from_arrays($ids,$texts,$name,$checked_array,$size='8',$show_100=true,$text_100='none') {
-	$checked_count=count($checked_array);
-	$return ='
+function html_build_multiple_select_box_from_arrays($ids, $texts, $name, $checked_array, $size = '8', $show_100 = true, $text_100 = 'none') {
+	$checked_count = count($checked_array);
+	$return = '
 		<select name="'.$name.'" multiple="multiple" size="'.$size.'">';
 	if ($show_100) {
-		if ($text_100=='none') {
-			$text_100=_('None');
+		if ($text_100 == 'none') {
+			$text_100 = _('None');
 		}
 		/*
 			Put in the default NONE box
 		*/
 		$return .= '
 		<option value="100"';
-		for ($j=0; $j<$checked_count; $j++) {
+		for ($j = 0; $j < $checked_count; $j++) {
 			if ($checked_array[$j] == '100') {
 				$return .= ' selected="selected"';
 			}
@@ -713,16 +722,16 @@ function html_build_multiple_select_box_from_arrays($ids,$texts,$name,$checked_a
 		$return .= '>'.$text_100.'</option>';
 	}
 
-	$rows=count($ids);
-	for ($i=0; $i<$rows; $i++) {
-		if (( $ids[$i] != '100') || ($ids[$i] == '100' && !$show_100)) {
-			$return .='
+	$rows = count($ids);
+	for ($i = 0; $i < $rows; $i++) {
+		if (($ids[$i] != '100') || ($ids[$i] == '100' && !$show_100)) {
+			$return .= '
 				<option value="'.$ids[$i].'"';
 			/*
 				Determine if it's checked
 			*/
-			$val=$ids[$i];
-			for ($j=0; $j<$checked_count; $j++) {
+			$val = $ids[$i];
+			for ($j = 0; $j < $checked_count; $j++) {
 				if ($val == $checked_array[$j]) {
 					$return .= ' selected="selected"';
 				}
@@ -741,7 +750,7 @@ function html_build_multiple_select_box_from_arrays($ids,$texts,$name,$checked_a
  *	@param name - name of control
  *	@param value - value of control
  *	@param checked - true if control should be checked
- *	@return html code for checkbox control
+ *	@return	html code for checkbox control
  */
 function html_build_checkbox($name, $value, $checked) {
 	return '<input type="checkbox" name="'.$name.'"'
@@ -749,28 +758,27 @@ function html_build_checkbox($name, $value, $checked) {
 		.($checked ? 'checked="checked"' : '').'>';
 }
 
-
 /**
  * build_priority_select_box() - Wrapper for html_build_priority_select_box()
  *
  * @see html_build_priority_select_box()
  */
-function build_priority_select_box ($name='priority', $checked_val='3', $nochange=false) {
-	echo html_build_priority_select_box ($name, $checked_val, $nochange);
+function build_priority_select_box($name = 'priority', $checked_val = '3', $nochange = false) {
+	echo html_build_priority_select_box($name, $checked_val, $nochange);
 }
 
 /**
  * html_build_priority_select_box() - Return a select box of standard priorities.
  * The name of this select box is optional and so is the default checked value.
  *
- * @param		string	Name of the select box
- * @param		string	The value to be checked
- * @param		bool	Whether to make 'No Change' selected.
+ * @param	string	$name			Name of the select box
+ * @param	string	$checked_val	The value to be checked
+ * @param	bool	$nochange		Whether to make 'No Change' selected.
  */
-function html_build_priority_select_box ($name='priority', $checked_val='3', $nochange=false) {
+function html_build_priority_select_box($name = 'priority', $checked_val = '3', $nochange = false) {
 ?>
 	<select id="tracker-<?php echo $name ?>" name="<?php echo $name; ?>" title="<?php echo util_html_secure(html_get_tooltip_description($name)) ?>">
-<?php if($nochange) { ?>
+<?php if ($nochange) { ?>
 	<option value="100"<?php if ($nochange) {echo " selected=\"selected\"";} ?>><?php echo _('No Change') ?></option>
 <?php }  ?>
 	<option value="1"<?php if ($checked_val=="1") {echo " selected=\"selected\"";} ?>>1 - <?php echo _('Lowest') ?></option>
@@ -790,14 +798,14 @@ function html_build_priority_select_box ($name='priority', $checked_val='3', $no
  * @param	name	Checkbox name
  * @param	array	Array of boxes to be pre-checked
  */
-function html_buildcheckboxarray($options,$name,$checked_array) {
-	$option_count=count($options);
-	$checked_count=count($checked_array);
+function html_buildcheckboxarray($options, $name, $checked_array) {
+	$option_count = count($options);
+	$checked_count = count($checked_array);
 
-	for ($i=1; $i<=$option_count; $i++) {
+	for ($i = 1; $i <= $option_count; $i++) {
 		echo '
 			<br /><input type="checkbox" name="'.$name.'" value="'.$i.'"';
-		for ($j=0; $j<$checked_count; $j++) {
+		for ($j = 0; $j < $checked_count; $j++) {
 			if ($i == $checked_array[$j]) {
 				echo ' checked="checked"';
 			}
@@ -846,7 +854,7 @@ function site_project_header($params) {
 		Check to see if private (if private check if user_ismember)
 	*/
 
-	$group_id=$params['group'];
+	$group_id = $params['group'];
 
 	//get the project object
 	$project = group_get_object($group_id);
@@ -869,21 +877,21 @@ function site_project_header($params) {
 	}
 
 	// Check permissions in case of restricted access
-	session_require_perm ('project_read', $group_id);
+	session_require_perm('project_read', $group_id);
 
 	//for dead projects must be member of admin project
 	if (!$project->isActive()) {
-		session_require_global_perm ('forge_admin');
+		session_require_global_perm('forge_admin');
 	}
 
-	if (isset($params['title'])){
-		$h1=$params['title'];
-		$params['title']=$project->getPublicName().': '.$params['title'];
+	if (isset($params['title'])) {
+		$h1 = $params['title'];
+		$params['title'] = $project->getPublicName().': '.$params['title'];
 	} else {
-		$h1=$project->getPublicName();
-		$params['title']=$project->getPublicName();
+		$h1 = $project->getPublicName();
+		$params['title'] = $project->getPublicName();
 	}
-	if (!isset($params['h1'])){
+	if (!isset($params['h1'])) {
 		$params['h1'] = $h1;
 	}
 
@@ -963,7 +971,7 @@ function site_user_header($params) {
 	}
 
 	echo ($HTML->printSubMenu($arr_t, $arr_l, $arr_attr));
-	if ( plugin_hook_listeners("usermenu") > 0 ) {
+	if (plugin_hook_listeners("usermenu") > 0) {
 		echo $HTML->subMenuSeparator();
 	}
 	plugin_hook("usermenu", false);
@@ -994,12 +1002,12 @@ function site_user_footer($params) {
  */
 function html_clean_hash_string($hashstr) {
 
-	if (substr($hashstr,0,1)=="_") {
+	if (substr($hashstr, 0, 1) == "_") {
 		$hashstr = substr($hashstr, 1);
 	}
 
-	if (substr($hashstr, strlen($hashstr)-1, 1)==">") {
-		$hashstr = substr($hashstr, 0, strlen($hashstr)-1);
+	if (substr($hashstr, strlen($hashstr) - 1, 1) == ">") {
+		$hashstr = substr($hashstr, 0, strlen($hashstr) - 1);
 	}
 
 	return $hashstr;
@@ -1043,8 +1051,8 @@ function relative_date ($date) {
  * @return	string
  *		XHTML string suitable for echo'ing
  */
-function html_eo($name, $attrs=array()) {
-	$rv = '<' . $name;
+function html_eo($name, $attrs = array()) {
+	$rv = '<'.$name;
 	foreach ($attrs as $key => $value) {
 		if (is_array($value)) {
 			$value = count($value) ? implode(" ", $value) : false;
@@ -1052,7 +1060,7 @@ function html_eo($name, $attrs=array()) {
 		if ($value === false) {
 			continue;
 		}
-		$rv .= ' ' . $key . '="' . htmlspecialchars($value) . '"';
+		$rv .= ' '.$key.'="'.htmlspecialchars($value).'"';
 	}
 	$rv .= '>';
 	return $rv;
@@ -1075,8 +1083,8 @@ function html_eo($name, $attrs=array()) {
  * @return	string
  *		XHTML string suitable for echo'ing
  */
-function html_e($name, $attrs=array(), $content="", $shortform=true) {
-	$rv = '<' . $name;
+function html_e($name, $attrs = array(), $content = "", $shortform = true) {
+	$rv = '<'.$name;
 	foreach ($attrs as $key => $value) {
 		if (is_array($value)) {
 			$value = count($value) ? implode(" ", $value) : false;
@@ -1084,12 +1092,12 @@ function html_e($name, $attrs=array(), $content="", $shortform=true) {
 		if ($value === false) {
 			continue;
 		}
-		$rv .= ' ' . $key . '="' . htmlspecialchars($value) . '"';
+		$rv .= ' '.$key.'="'.htmlspecialchars($value).'"';
 	}
 	if ($content === "" && $shortform) {
 		$rv .= ' />';
 	} else {
-		$rv .= '>' . $content . '</' . $name . '>';
+		$rv .= '>'.$content.'</'.$name.'>';
 	}
 	return $rv;
 }
@@ -1120,13 +1128,13 @@ function html_ap() {
  * @return	string
  *		XHTML string suitable for echo'ing
  */
-function html_ao($name, $attrs=array()) {
+function html_ao($name, $attrs = array()) {
 	global $html_autoclose_pos, $html_autoclose_stack;
 
 	$html_autoclose_stack[$html_autoclose_pos++] = array(
 		'name' => $name,
 		'attr' => $attrs,
-	    );
+	);
 	return html_eo($name, $attrs);
 }
 
@@ -1144,7 +1152,7 @@ function html_ao($name, $attrs=array()) {
  * @return	string
  *		XHTML string suitable for echo'ing
  */
-function html_aonce(&$sptr, $name, $attrs=array()) {
+function html_aonce(&$sptr, $name, $attrs = array()) {
 	if ($sptr !== false) {
 		/* already run */
 		return "";
@@ -1171,16 +1179,16 @@ function html_ac($spos) {
 	}
 
 	if ($html_autoclose_pos < $spos) {
-		$e = "html_autoclose stack underflow; closing down to " .
-		    $spos . " but we're down to " . $html_autoclose_pos .
-		    " already!";
+		$e = "html_autoclose stack underflow; closing down to ".
+			$spos." but we're down to ".$html_autoclose_pos.
+			" already!";
 		throw new Exception($e);
 	}
 
 	$rv = "";
 	while ($html_autoclose_pos > $spos) {
 		--$html_autoclose_pos;
-		$rv .= '</' . $html_autoclose_stack[$html_autoclose_pos]['name'] . '>';
+		$rv .= '</'.$html_autoclose_stack[$html_autoclose_pos]['name'].'>';
 		unset($html_autoclose_stack[$html_autoclose_pos]);
 	}
 	return $rv;
@@ -1189,10 +1197,11 @@ function html_ac($spos) {
 /**
  * html_a_copy() - Return a copy of part of the autoclose stack
  *
- * @param	integer	$spos
- *			stack position caller will return to
+ * @param	$spos	integer
+ *            stack position caller will return to
+ * @throws	Exception
  * @return	opaque
- *		argument suitable for html_a_apply()
+ *			argument suitable for html_a_apply()
  */
 function html_a_copy($spos) {
 	global $html_autoclose_pos, $html_autoclose_stack;
@@ -1202,9 +1211,9 @@ function html_a_copy($spos) {
 	}
 
 	if ($spos > $html_autoclose_pos) {
-		$e = "html_autoclose stack underflow; closing down to " .
-		    $spos . " but we're down to " . $html_autoclose_pos .
-		    " already!";
+		$e = "html_autoclose stack underflow; closing down to ".
+			$spos." but we're down to ".$html_autoclose_pos.
+			" already!";
 		throw new Exception($e);
 	}
 
