@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-19 16:33+0200\n"
+"POT-Creation-Date: 2013-08-20 12:14+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1664,8 +1664,8 @@ msgid "Month"
 msgstr "Mês"
 
 #: common/docman/views/reporting.php:151 common/reporting/report_utils.php:159
-#: common/reporting/report_utils.php:197 common/reporting/report_utils.php:677
-#: common/reporting/report_utils.php:678 www/frs/reporting/downloads.php:175
+#: common/reporting/report_utils.php:198 common/reporting/report_utils.php:678
+#: common/reporting/report_utils.php:679 www/frs/reporting/downloads.php:175
 #: www/stats/site_stats_utils.php:233 www/stats/site_stats_utils.php:363
 #: www/stats/site_stats_utils.php:417 www/stats/site_stats_utils.php:476
 #: www/top/toplist.php:49
@@ -3210,22 +3210,22 @@ msgstr "Não Posso Completar a Operação: "
 
 #: common/include/group_section_texts.php:29
 #: common/include/Navigation.class.php:425
-#: common/reporting/report_utils.php:147 common/reporting/report_utils.php:683
-#: common/reporting/report_utils.php:684 plugins/blocks/www/index.php:151
+#: common/reporting/report_utils.php:147 common/reporting/report_utils.php:684
+#: common/reporting/report_utils.php:685 plugins/blocks/www/index.php:151
 #: plugins/quota_management/www/quota_project.php:87
 msgid "Forums"
 msgstr "Fóruns"
 
 #: common/include/group_section_texts.php:30
-#: common/reporting/report_utils.php:704 plugins/blocks/www/index.php:152
+#: common/reporting/report_utils.php:705 plugins/blocks/www/index.php:152
 #: www/reporting/toolspie.php:65
 msgid "Trackers"
 msgstr ""
 
 #: common/include/group_section_texts.php:31
 #: common/include/Navigation.class.php:473 common/include/rbac_texts.php:157
-#: common/reporting/report_utils.php:155 common/reporting/report_utils.php:193
-#: common/reporting/report_utils.php:696
+#: common/reporting/report_utils.php:155 common/reporting/report_utils.php:194
+#: common/reporting/report_utils.php:697
 #: common/widget/Widget_ProjectPublicAreas.class.php:148
 #: plugins/blocks/www/index.php:154 www/my/dashboard.php:77
 #: www/stats/site_stats_utils.php:242 www/stats/site_stats_utils.php:367
@@ -3234,7 +3234,7 @@ msgid "Tasks"
 msgstr "Tarefas"
 
 #: common/include/group_section_texts.php:32
-#: common/reporting/report_utils.php:672
+#: common/reporting/report_utils.php:673
 #: plugins/quota_management/www/quota_project.php:56
 #: www/search/include/SearchManager.class.php:153
 msgid "Documents"
@@ -3403,7 +3403,7 @@ msgid "Project Management."
 msgstr ""
 
 #: common/include/Navigation.class.php:488
-#: common/reporting/report_utils.php:151 common/reporting/report_utils.php:671
+#: common/reporting/report_utils.php:151 common/reporting/report_utils.php:672
 #: plugins/blocks/www/index.php:155
 msgid "Docs"
 msgstr "Documentos"
@@ -4230,9 +4230,9 @@ msgid "No group_id set."
 msgstr ""
 
 #: common/reporting/report_utils.php:27
-#, php-format
-msgid "%1$s Reporting"
-msgstr ""
+#, fuzzy, php-format
+msgid "%s Reporting"
+msgstr "Relacionando"
 
 #: common/reporting/report_utils.php:39 common/reporting/report_utils.php:44
 msgid "Weekly"
@@ -4288,97 +4288,95 @@ msgstr "Sexta-feira"
 msgid "Saturday"
 msgstr "Sabado"
 
-#: common/reporting/report_utils.php:162 common/reporting/report_utils.php:689
-#: common/reporting/report_utils.php:690
-msgid "Page views"
-msgstr ""
+#: common/reporting/report_utils.php:162 common/reporting/report_utils.php:690
+#: common/reporting/report_utils.php:691 www/stats/site_stats_utils.php:231
+#: www/top/toplist.php:38
+msgid "Page Views"
+msgstr "Visual. de Pág."
 
-#: common/reporting/report_utils.php:177 www/stats/site_stats_utils.php:236
+#: common/reporting/report_utils.php:178 www/stats/site_stats_utils.php:236
 #: www/stats/site_stats_utils.php:364 www/stats/site_stats_utils.php:418
 msgid "Bugs"
 msgstr "Bugs"
 
-#: common/reporting/report_utils.php:178 www/stats/site_stats_utils.php:237
+#: common/reporting/report_utils.php:179 www/stats/site_stats_utils.php:237
 #: www/stats/site_stats_utils.php:365 www/stats/site_stats_utils.php:419
 msgid "Support"
 msgstr "Suporte"
 
-#: common/reporting/report_utils.php:179 www/stats/site_stats_utils.php:238
+#: common/reporting/report_utils.php:180 www/stats/site_stats_utils.php:238
 #: www/stats/site_stats_utils.php:366 www/stats/site_stats_utils.php:420
 msgid "Patches"
 msgstr "Correções"
 
-#: common/reporting/report_utils.php:180
+#: common/reporting/report_utils.php:181
 msgid "Feature Requests"
 msgstr ""
 
-#: common/reporting/report_utils.php:181
+#: common/reporting/report_utils.php:182
 msgid "Other Trackers"
 msgstr ""
 
-#: common/reporting/report_utils.php:189
+#: common/reporting/report_utils.php:190
 msgid "Forum Messages"
 msgstr ""
 
-#: common/reporting/report_utils.php:235 www/snippet/snippet_utils.php:38
+#: common/reporting/report_utils.php:236 www/snippet/snippet_utils.php:38
 #: www/snippet/snippet_utils.php:64
 msgid "Other"
 msgstr "Outros"
 
-#: common/reporting/report_utils.php:254 common/reporting/report_utils.php:377
+#: common/reporting/report_utils.php:255 common/reporting/report_utils.php:378
 #, fuzzy
 msgid "No selected area."
 msgstr "Nenhuma habilidade selecionada para edição."
 
-#: common/reporting/report_utils.php:267
+#: common/reporting/report_utils.php:268
 msgid "Avg Time Open (in days)"
 msgstr ""
 
-#: common/reporting/report_utils.php:269
+#: common/reporting/report_utils.php:270
 #, fuzzy
 msgid "Total Opened"
 msgstr "Data de Abertura"
 
-#: common/reporting/report_utils.php:271
+#: common/reporting/report_utils.php:272
 msgid "Total Still Open"
 msgstr ""
 
-#: common/reporting/report_utils.php:317
+#: common/reporting/report_utils.php:318
 #, fuzzy
 msgid "Tracker Activity"
 msgstr "Ítem Rastreador"
 
-#: common/reporting/report_utils.php:388
+#: common/reporting/report_utils.php:389
 #, fuzzy
 msgid "Per assignee"
 msgstr "Assinante"
 
-#: common/reporting/report_utils.php:435
-msgid "Cumulative users."
+#: common/reporting/report_utils.php:436 www/reporting/usercum.php:59
+msgid "Cumulative Users"
 msgstr ""
 
-#: common/reporting/report_utils.php:440
-#, fuzzy
-msgid "Users added."
-msgstr "Notícia Adicionada."
+#: common/reporting/report_utils.php:441 www/reporting/useradded.php:59
+msgid "Users Added"
+msgstr ""
 
-#: common/reporting/report_utils.php:445
-#, fuzzy
-msgid "Projects added."
-msgstr "Nome do Projeto"
+#: common/reporting/report_utils.php:446 www/reporting/groupadded.php:59
+msgid "Projects Added"
+msgstr ""
 
-#: common/reporting/report_utils.php:450
-#, fuzzy
-msgid "Cumulative Projects."
-msgstr "Grupos Privados"
+#: common/reporting/report_utils.php:451 www/reporting/groupcum.php:59
+msgid "Cumulative Projects"
+msgstr ""
 
-#: common/reporting/report_utils.php:461 common/reporting/report_utils.php:633
-#: common/reporting/report_utils.php:983
-#: common/reporting/report_utils.php:1047
+#: common/reporting/report_utils.php:462 common/reporting/report_utils.php:634
+#: common/reporting/report_utils.php:984
+#: common/reporting/report_utils.php:1048
 msgid "No data to display."
 msgstr ""
 
-#: common/reporting/report_utils.php:607 plugins/authopenid/www/index.php:38
+#: common/reporting/report_utils.php:608 plugins/authopenid/www/index.php:38
 #: plugins/authwebid/www/index.php:35 www/account/change_email-complete.php:52
 #: www/account/change_email.php:46 www/account/change_pw.php:32
 #: www/account/editsshkeys.php:39 www/account/index.php:36
@@ -4389,36 +4387,36 @@ msgstr ""
 msgid "Could Not Get User"
 msgstr ""
 
-#: common/reporting/report_utils.php:697
+#: common/reporting/report_utils.php:698
 #, fuzzy
 msgid "Task open"
 msgstr "Id da Tarefa"
 
-#: common/reporting/report_utils.php:698
+#: common/reporting/report_utils.php:699
 #, fuzzy
 msgid "Task close"
 msgstr "Tarefas"
 
-#: common/reporting/report_utils.php:705
+#: common/reporting/report_utils.php:706
 #, fuzzy
 msgid "Tracker items opened"
 msgstr "Ítem Rastreador"
 
-#: common/reporting/report_utils.php:706
+#: common/reporting/report_utils.php:707
 #, fuzzy
 msgid "Tracker items closed"
 msgstr "Ítem Rastreador"
 
-#: common/reporting/report_utils.php:1070
+#: common/reporting/report_utils.php:1071
 #, fuzzy
 msgid "Hours Recorded"
 msgstr "Pontuações Gravadas"
 
-#: common/reporting/report_utils.php:1074
+#: common/reporting/report_utils.php:1075
 msgid " Hours"
 msgstr ""
 
-#: common/reporting/report_utils.php:1150
+#: common/reporting/report_utils.php:1151
 msgid "No data to display"
 msgstr ""
 
@@ -19862,14 +19860,6 @@ msgstr ""
 msgid "Start and end dates must be different"
 msgstr ""
 
-#: www/reporting/groupadded.php:59
-msgid "Projects Added"
-msgstr ""
-
-#: www/reporting/groupcum.php:59
-msgid "Cumulative Projects"
-msgstr ""
-
 #: www/reporting/index.php:36 www/stats/i18n.php:34
 msgid "Users"
 msgstr "Usuários"
@@ -20102,14 +20092,6 @@ msgstr ""
 msgid ""
 "Choose the <strong>First Letter</strong> of the name of the person you wish "
 "to report on."
-msgstr ""
-
-#: www/reporting/useradded.php:59
-msgid "Users Added"
-msgstr ""
-
-#: www/reporting/usercum.php:59
-msgid "Cumulative Users"
 msgstr ""
 
 #: www/reporting/usersummary.php:63
@@ -21135,10 +21117,6 @@ msgstr "Visto por:"
 msgid "Generate Report"
 msgstr "Gerar Relatório"
 
-#: www/stats/site_stats_utils.php:231 www/top/toplist.php:38
-msgid "Page Views"
-msgstr "Visual. de Pág."
-
 #: www/stats/site_stats_utils.php:239 www/stats/site_stats_utils.php:421
 msgid "All Trkr"
 msgstr "Todos Rastr."
@@ -21864,6 +21842,18 @@ msgstr ""
 #: www/users:35
 msgid "No User Name Provided"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Users added."
+#~ msgstr "Notícia Adicionada."
+
+#, fuzzy
+#~ msgid "Projects added."
+#~ msgstr "Nome do Projeto"
+
+#, fuzzy
+#~ msgid "Cumulative Projects."
+#~ msgstr "Grupos Privados"
 
 #~ msgid "Months"
 #~ msgstr "Mêses"
