@@ -1014,25 +1014,25 @@ function html_clean_hash_string($hashstr) {
 	return $hashstr;
 }
 
-function relative_date ($date) {
-	$delta = time() - $date;
-	if ($delta<60)
+function relative_date($date) {
+	$delta = max(time() - $date, 0);
+	if ($delta < 60)
 		return sprintf(ngettext('%d second ago', '%d seconds ago', $delta), $delta);
 
-	$delta = round($delta/60);
-	if ($delta<60)
+	$delta = round($delta / 60);
+	if ($delta < 60)
 		return sprintf(ngettext('%d minute ago', '%d minutes ago', $delta), $delta);
 
-	$delta = round($delta/60);
-	if ($delta<24)
+	$delta = round($delta / 60);
+	if ($delta < 24)
 		return sprintf(ngettext('%d hour ago', '%d hours ago', $delta), $delta);
 
-	$delta = round($delta/24);
-	if ($delta<7)
+	$delta = round($delta / 24);
+	if ($delta < 7)
 		return sprintf(ngettext('%d day ago', '%d days ago', $delta), $delta);
 
-	$delta = round($delta/7);
-	if ($delta<4)
+	$delta = round($delta / 7);
+	if ($delta < 4)
 		return sprintf(ngettext('%d week ago', '%d weeks ago', $delta), $delta);
 
 	return date(_('Y-m-d H:i'), $date);
