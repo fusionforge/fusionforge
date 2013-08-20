@@ -824,7 +824,7 @@ function html_buildcheckboxarray($options, $name, $checked_array) {
  * @param	array	Must contain $user_id
  */
 function site_header($params) {
-	GLOBAL $HTML;
+	global $HTML;
 	/*
 		Check to see if active user
 		Check to see if logged in
@@ -849,7 +849,6 @@ function site_footer($params) {
  * @param	params	array() must contain $toptab and $group
  */
 function site_project_header($params) {
-	global $HTML;
 
 	/*
 		Check to see if active
@@ -940,7 +939,7 @@ function site_user_header($params) {
 		Check to see if logged in
 	*/
 	site_header($params);
-	echo ($HTML->beginSubMenu());
+	echo $HTML->beginSubMenu();
 	$arr_t = array();
 	$arr_l = array();
 	$arr_attr = array();
@@ -978,7 +977,7 @@ function site_user_header($params) {
 		echo $HTML->subMenuSeparator();
 	}
 	plugin_hook("usermenu", false);
-	echo ($HTML->endSubMenu());
+	echo $HTML->endSubMenu();
 }
 
 /**
