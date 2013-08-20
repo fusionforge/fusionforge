@@ -24,7 +24,7 @@
  */
 
 function report_header($title) {
-	$t = sprintf(_('%1$s Reporting'), forge_get_config ('forge_name')) . ": " . $title;
+	$t = sprintf(_('%s Reporting'), forge_get_config ('forge_name')) . ": " . $title;
 	site_header(array('title'=>$t));
 }
 
@@ -159,10 +159,11 @@ function report_area_box($name='area', $selected='1', $Group=false) {
 		$arr2[]=_('Downloads');
 	}
 	$arr[]='pageviews';
-	$arr2[]=_('Page views');
+	$arr2[]=_('Page Views');
 
 	if (is_object($Group) && $Group->getID()) {
 		$hookParams['group'] = $Group->getID();
+		$hookParams['group_id'] = $Group->getID();
 		$hookParams['show'] = array('none'); // No display => No compute this time.
 		$hookParams['ids'] = &$arr;
 		$hookParams['texts'] = &$arr2;
@@ -432,22 +433,22 @@ function report_graph($type, $SPAN, $start, $end) {
 	switch ($type) {
 		case 'usercumul': {
 			$report = new ReportUserCum($SPAN, $start, $end);
-			$label[0] = _('Cumulative users.');
+			$label[0] = _('Cumulative Users');
 			break;
 		}
 		case 'useradded': {
 			$report = new ReportUserAdded($SPAN, $start, $end);
-			$label[0] = _('Users added.');
+			$label[0] = _('Users Added');
 			break;
 		}
 		case 'groupadded': {
 			$report = new ReportGroupAdded($SPAN, $start, $end);
-			$label[0] = _('Projects added.');
+			$label[0] = _('Projects Added');
 			break;
 		}
 		case 'groupcumul': {
 			$report = new ReportGroupCum($SPAN, $start, $end);
-			$label[0] = _('Cumulative Projects.');
+			$label[0] = _('Cumulative Projects');
 			break;
 		}
 	}
