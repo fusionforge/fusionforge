@@ -158,6 +158,7 @@ function html_abs_image($url, $width, $height, $args) {
  * @param	int	The height of the image
  * @param	array	Any IMG tag parameters associated with this image (i.e. 'border', 'alt', etc...)
  * @param	bool	DEPRECATED
+ * @return	string
  */
 function html_image($src, $width = '', $height = '', $args = array(), $display = 1) {
 	global $HTML;
@@ -367,6 +368,7 @@ function html_build_radio_buttons_from_arrays($vals, $texts, $select_name, $chec
  * html_get_tooltip_description() - Get the tooltip description of the element
  *
  * @param	string	element name
+ * @return	string
  */
 
 function html_get_tooltip_description($element_name) {
@@ -630,6 +632,7 @@ function html_build_select_box($result, $name, $checked_val = "xzxz", $show_100 
  * @param		string	The item that should be checked
  * @param		bool	Whether or not to show the '100 row'
  * @param		string	What to call the '100 row'.  Defaults to none.
+ * @return		string
  */
 function html_build_select_box_sorted($result, $name, $checked_val = "xzxz", $show_100 = true, $text_100 = 'none') {
 	if ($text_100 == 'none') {
@@ -1165,11 +1168,10 @@ function html_aonce(&$sptr, $name, $attrs = array()) {
 /**
  * html_ac() - Return proper element XHTML end tags, autoclosing
  *
- * @param	integer	$spos
- *			stack position to return to
- *			(nothing is done if === false)
- * @return	string
- *		XHTML string suitable for echo'ing
+ * @param	$spos	integer
+ *			stack position to return to (nothing is done if === false)
+ * @throws	Exception
+ * @return	string	XHTML string suitable for echo'ing
  */
 function html_ac($spos) {
 	global $html_autoclose_pos, $html_autoclose_stack;
