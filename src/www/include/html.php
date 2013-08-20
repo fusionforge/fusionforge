@@ -552,13 +552,13 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked
 	//we don't always want the default Any row shown
 	if ($show_any) {
 		$return .= '
-		<option value=""'.(($checked_val=='') ? ' selected="selected"' : '').'>'. util_html_secure($text_any) .'</option>';
+		<option value=""'.(($checked_val == '') ? ' selected="selected"' : '').'>'. util_html_secure($text_any) .'</option>';
 		$have_a_subelement = true;
 	}
 	//we don't always want the default 100 row shown
 	if ($show_100) {
 		$return .= '
-		<option value="100"'.(($checked_val==100) ? ' selected="selected"' : '').'>'. util_html_secure($text_100) .'</option>';
+		<option value="100"'.(($checked_val == 100) ? ' selected="selected"' : '').'>'. util_html_secure($text_100) .'</option>';
 		$have_a_subelement = true;
 	}
 
@@ -866,16 +866,15 @@ function site_project_header($params) {
 	} elseif ($project->isError()) {
 		if ($project->isPermissionDeniedError()) {
 			if (!session_get_user()) {
- 			$next = '/account/login.php?error_msg='.urlencode($project->getErrorMessage());
- 			if (getStringFromServer('REQUEST_METHOD') != 'POST') {
-				$next .= '&return_to='.urlencode(getStringFromServer('REQUEST_URI'));
- 			}
-			session_redirect($next);
+				$next = '/account/login.php?error_msg='.urlencode($project->getErrorMessage());
+				if (getStringFromServer('REQUEST_METHOD') != 'POST') {
+					$next .= '&return_to='.urlencode(getStringFromServer('REQUEST_URI'));
+				}
+				session_redirect($next);
+			} else
+				exit_error(sprintf(_('Project access problem: %s'), $project->getErrorMessage()), 'home');
 		}
-			else
-				exit_error(sprintf(_('Project access problem: %s'),$project->getErrorMessage()),'home');
-		}
-		exit_error(sprintf(_('Project Problem: %s'), $project->getErrorMessage()),'home');
+		exit_error(sprintf(_('Project Problem: %s'), $project->getErrorMessage()), 'home');
 	}
 
 	// Check permissions in case of restricted access
