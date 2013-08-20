@@ -770,7 +770,7 @@ function html_build_checkbox($name, $value, $checked) {
  * @see html_build_priority_select_box()
  */
 function build_priority_select_box($name = 'priority', $checked_val = '3', $nochange = false) {
-	echo html_build_priority_select_box($name, $checked_val, $nochange);
+	html_build_priority_select_box($name, $checked_val, $nochange);
 }
 
 /**
