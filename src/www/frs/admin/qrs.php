@@ -172,7 +172,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 	</tr>
 	<tr>
 		<td>
-			<strong><?php echo _('Release name') ?>:<?php echo utils_requiredField();?></strong>
+			<strong><?php echo _('Release Name')._(':'); ?><?php echo utils_requiredField();?></strong>
 		</td>
 		<td>
 			<input type="text" required="required" name="release_name" value="<?php echo htmlspecialchars($release_name) ?>" />
@@ -180,7 +180,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 	</tr>
 	<tr>
 		<td>
-			<strong><?php echo _('Release date') ?>:</strong>
+			<strong><?php echo _('Release Date')._(':'); ?></strong>
 		</td>
 		<td>
 			<input type="text" name="release_date" value="<?php echo date('Y-m-d H:i'); ?>" size="16" maxlength="16" />
@@ -188,14 +188,14 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 	</tr>
 	<tr>
 		<td>
-			<h4><?php echo _('File Name') ?>:<?php echo utils_requiredField();?></h4>
+			<h4><?php echo _('File Name')._(': '); ?><?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
 		<div class="important">
 		<?php echo _('NOTE: In some browsers you must select the file in the file-upload dialog and click "OK". Double-clicking doesn\'t register the file.')?>
 		<?php printf(_('You can probably not upload files larger than about %.2f MiB in size.'), util_get_maxuploadfilesize() / 1048576); ?><br />
 		</div>
-		<?php echo _('Upload a new file') ?>: <input type="file" name="userfile"  size="30" />
+		<?php echo _('Upload a new file')._(': '); ?><input type="file" name="userfile"  size="30" />
 		<?php if (forge_get_config('use_ftp_uploads')) {
 
 			echo '<p>';
@@ -224,7 +224,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 	</tr>
 	<tr>
 		<td>
-			<strong><?php echo _('File Type') ?>:</strong>
+			<strong><?php echo _('File Type')._(':'); ?></strong>
 		</td>
 		<td>
 <?php
@@ -234,7 +234,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 	</tr>
 	<tr>
 		<td>
-			<strong><?php echo _('Processor Type') ?>:</strong>
+			<strong><?php echo _('Processor Type')._(':'); ?></strong>
 		</td>
 		<td>
 <?php
@@ -244,7 +244,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 	</tr>
 	<tr>
 		<td class="top">
-			<strong><?php echo _('Release Notes') ?>:</strong>
+			<strong><?php echo _('Release Notes')._(':'); ?></strong>
 		</td>
 		<td>
 			<textarea name="release_notes" rows="7" cols="50"><?php echo htmlspecialchars($release_notes); ?></textarea>
@@ -252,7 +252,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 	</tr>
 	<tr>
 		<td class="top">
-			<strong><?php echo _('Change Log') ?>:</strong>
+			<strong><?php echo _('Change Log')._(':'); ?></strong>
 		</td>
 		<td>
 			<textarea name="release_changes" rows="7" cols="50"><?php echo htmlspecialchars($release_changes); ?></textarea>
