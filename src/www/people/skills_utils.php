@@ -118,8 +118,7 @@ function handle_multi_edit($skill_ids = array()) {
 	} else {
 		$skills=db_query_params("SELECT * FROM skills_data_types WHERE type_id > 0", array());
 		if (!$skills || db_numrows($skills) < 1) {
-			echo db_error();
-			$feedback .= _('User fetch FAILED');
+			$feedback .= _('No Such User')._(': ').db_error();
 			echo '<h2>'._('No Such User').'<h2>';
 		}
 
@@ -184,7 +183,7 @@ function handle_multi_edit($skill_ids = array()) {
 					'</tr>'.
 
 				 '</table>';
-				 '</td></tr>';
+			echo '</td></tr>';
 			echo '</table><br />';
 		}
 	}
