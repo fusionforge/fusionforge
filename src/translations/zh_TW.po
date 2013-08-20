@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-20 12:14+0200\n"
+"POT-Creation-Date: 2013-08-20 19:31+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -483,10 +483,12 @@ msgstr "專案"
 #: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
 #: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
 #: www/export/rssAboTask.php:173 www/frs/admin/deletepackage.php:57
-#: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
-#: www/pm/add_task.php:74 www/pm/add_task.php:81 www/pm/add_task.php:88
-#: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
-#: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/calendar.php:59
+#: www/frs/admin/qrs.php:191 www/frs/admin/qrs.php:198
+#: www/people/skills_utils.php:121 www/pm/add_task.php:50
+#: www/pm/add_task.php:63 www/pm/add_task.php:67 www/pm/add_task.php:74
+#: www/pm/add_task.php:81 www/pm/add_task.php:88 www/pm/add_task.php:95
+#: www/pm/add_task.php:110 www/pm/add_task.php:124 www/pm/add_task.php:130
+#: www/pm/add_task.php:149 www/pm/calendar.php:59
 #: www/project/admin/roledelete.php:62 www/register/index.php:178
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
@@ -1333,7 +1335,7 @@ msgstr ""
 #: www/export/rss20_docman.php:136 www/export/rss20_docman.php:138
 #: www/export/tracker.php:108 www/forum/index.php:90 www/forum/message.php:127
 #: www/forum/myforums.php:152 www/frs/index.php:148 www/frs/index.php:207
-#: www/include/html.php:1029 www/news/news_utils.php:147
+#: www/include/html.php:1039 www/news/news_utils.php:147
 #: www/news/news_utils.php:267 www/people/people_utils.php:421
 #: www/people/viewjob.php:78 www/pm/browse_task.php:265
 #: www/pm/browse_task.php:275 www/pm/include/ProjectTaskHTML.class.php:122
@@ -1598,7 +1600,7 @@ msgstr ""
 #: common/tracker/include/ArtifactTypeHtml.class.php:323
 #: www/activity/index.php:180 www/frs/reporting/downloads.php:108
 #: www/people/editprofile.php:283 www/people/skills_utils.php:50
-#: www/people/skills_utils.php:157 www/pm/add_task.php:95
+#: www/people/skills_utils.php:156 www/pm/add_task.php:95
 #: www/pm/browse_task.php:127 www/pm/browse_task.php:233
 #: www/pm/detail_task.php:86 www/pm/ganttpage.php:160 www/pm/mod_task.php:146
 #: www/project/stats/index.php:105 www/reporting/groupadded.php:66
@@ -1698,6 +1700,9 @@ msgstr "開啟日期"
 #: www/admin/trove/trove_cat_edit.php:149 www/admin/useredit.php:130
 #: www/admin/useredit.php:139 www/admin/useredit.php:148
 #: www/admin/useredit.php:157 www/admin/useredit.php:211
+#: www/frs/admin/qrs.php:175 www/frs/admin/qrs.php:183
+#: www/frs/admin/qrs.php:227 www/frs/admin/qrs.php:237
+#: www/frs/admin/qrs.php:247 www/frs/admin/qrs.php:255
 #: www/frs/reporting/downloads.php:106 www/frs/reporting/downloads.php:108
 #: www/frs/reporting/downloads.php:110 www/pm/admin/index.php:211
 #: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
@@ -1739,7 +1744,7 @@ msgstr ""
 #: common/tracker/include/ArtifactTypeHtml.class.php:324
 #: www/activity/index.php:181 www/frs/reporting/downloads.php:110
 #: www/people/editprofile.php:284 www/people/skills_utils.php:51
-#: www/people/skills_utils.php:158 www/pm/add_task.php:110
+#: www/people/skills_utils.php:157 www/pm/add_task.php:110
 #: www/pm/browse_task.php:128 www/pm/browse_task.php:235
 #: www/pm/detail_task.php:90 www/pm/ganttpage.php:161 www/pm/mod_task.php:160
 #: www/project/stats/index.php:106 www/reporting/groupadded.php:67
@@ -3520,7 +3525,7 @@ msgstr "進階搜尋"
 msgid "Log Out"
 msgstr "登出"
 
-#: common/include/Navigation.class.php:194
+#: common/include/Navigation.class.php:194 www/include/html.php:964
 msgid "My Account"
 msgstr "我的帳號"
 
@@ -5360,7 +5365,7 @@ msgstr "更新"
 msgid "Advanced queries"
 msgstr "進階搜尋"
 
-#: common/tracker/actions/browse.php:361
+#: common/tracker/actions/browse.php:361 www/include/html.php:619
 #, fuzzy
 msgid "Select One"
 msgstr "刪除文件"
@@ -5464,8 +5469,8 @@ msgid ""
 msgstr ""
 
 #: common/tracker/actions/browse.php:737 common/tracker/actions/browse.php:748
-#: common/tracker/actions/browse.php:752 www/include/html.php:354
-#: www/include/html.php:583 www/include/html.php:774
+#: common/tracker/actions/browse.php:752 www/include/html.php:360
+#: www/include/html.php:590 www/include/html.php:785
 #: www/pm/browse_task.php:358 www/pm/browse_task.php:373
 #: www/pm/browse_task.php:384
 msgid "No Change"
@@ -5675,7 +5680,7 @@ msgstr "已經存在的檔案"
 msgid "Data Type"
 msgstr "資料類型"
 
-#: common/tracker/actions/mod.php:168 www/include/html.php:387
+#: common/tracker/actions/mod.php:168 www/include/html.php:393
 msgid ""
 "The summary text-box represents a short tracker item summary. Useful when "
 "browsing through several tracker items."
@@ -6438,9 +6443,9 @@ msgstr "下載"
 #: common/tracker/include/ArtifactTypeHtml.class.php:749
 #: plugins/scmhg/common/HgPlugin.class.php:608 www/admin/pluginman.php:227
 #: www/admin/pluginman.php:246 www/admin/pluginman.php:258
-#: www/admin/pluginman.php:259 www/include/html.php:313
-#: www/include/html.php:523 www/include/html.php:609 www/include/html.php:626
-#: www/include/html.php:660 www/include/html.php:701 www/pm/format_csv.php:78
+#: www/admin/pluginman.php:259 www/include/html.php:319
+#: www/include/html.php:530 www/include/html.php:616 www/include/html.php:636
+#: www/include/html.php:671 www/include/html.php:713 www/pm/format_csv.php:78
 #: www/pm/ganttpage.php:152 www/tracker/roadmap.php:440
 msgid "None"
 msgstr "無"
@@ -6591,7 +6596,7 @@ msgstr "訂製欄位定義"
 #: plugins/mantisbt/view/admin/viewVersion.php:52 www/admin/database.php:104
 #: www/admin/massmail.php:137 www/frs/index.php:182
 #: www/people/editprofile.php:107 www/people/editprofile.php:282
-#: www/people/skills_utils.php:48 www/people/skills_utils.php:156
+#: www/people/skills_utils.php:48 www/people/skills_utils.php:155
 #: www/project/stats/index.php:104 www/reporting/groupadded.php:65
 #: www/reporting/groupcum.php:65 www/reporting/projectact.php:71
 #: www/reporting/projecttime.php:80 www/reporting/projecttime.php:93
@@ -11463,7 +11468,7 @@ msgid "Reporter"
 msgstr "報告"
 
 #: plugins/mantisbt/view/editIssue.php:129
-#: plugins/mantisbt/view/viewIssue.php:86 www/include/html.php:385
+#: plugins/mantisbt/view/viewIssue.php:86 www/include/html.php:391
 msgid "Resolution"
 msgstr "解析度"
 
@@ -14584,7 +14589,6 @@ msgid "Updated"
 msgstr "已更新"
 
 #: www/account/index.php:119 www/account/index.php:124
-#: www/include/html.php:954
 msgid "Account Maintenance"
 msgstr "帳號維護"
 
@@ -17218,11 +17222,12 @@ msgid "Edit Release"
 msgstr "編輯發佈"
 
 #: www/frs/admin/editrelease.php:227 www/frs/admin/editrelease.php:345
+#: www/frs/admin/qrs.php:183
 #, fuzzy
 msgid "Release Date"
 msgstr "發佈日期"
 
-#: www/frs/admin/editrelease.php:231
+#: www/frs/admin/editrelease.php:231 www/frs/admin/qrs.php:175
 #, fuzzy
 msgid "Release Name"
 msgstr "釋出名稱："
@@ -17468,17 +17473,6 @@ msgstr "沒有可用的文件類型"
 msgid "Or %1$s create a new package %2$s"
 msgstr "或者 %1$s 建立新的套裝軟體 %2$s"
 
-#: www/frs/admin/qrs.php:175 www/frs/admin/showreleases.php:100
-#: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:48
-#, fuzzy
-msgid "Release name"
-msgstr "釋出版本名稱"
-
-#: www/frs/admin/qrs.php:183
-#, fuzzy
-msgid "Release date"
-msgstr "發佈日期"
-
 #: www/frs/admin/qrs.php:195
 msgid ""
 "NOTE: In some browsers you must select the file in the file-upload dialog "
@@ -17514,6 +17508,12 @@ msgstr ""
 #: www/frs/admin/showreleases.php:96
 msgid "Release New File Version"
 msgstr "釋出新檔案版本"
+
+#: www/frs/admin/showreleases.php:100
+#: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:48
+#, fuzzy
+msgid "Release name"
+msgstr "釋出版本名稱"
 
 #: www/frs/index.php:64
 msgid "Project Filelist"
@@ -17716,12 +17716,12 @@ msgstr "您必須輸入名字"
 msgid "File does not exist. File %s is not in incoming FTP directory."
 msgstr ""
 
-#: www/include/html.php:371
+#: www/include/html.php:377
 msgid ""
 "This drop-down box represents the person to which a tracker item is assigned."
 msgstr "這下拉式選單代表追蹤者項目指派給哪個專案管理員。"
 
-#: www/include/html.php:373
+#: www/include/html.php:379
 msgid ""
 "This drop-down box represents the current status of a tracker item.<br /"
 "><br />You can set the status to 'Pending' if you are waiting for a response "
@@ -17735,17 +17735,17 @@ msgstr ""
 "重新設定為'Open'。否則，如果作者未在管理員定義的時間點內回應(預設是14天)，然"
 "後這個項目將被給予'Deleted'的狀態。"
 
-#: www/include/html.php:375
+#: www/include/html.php:381
 #, fuzzy
 msgid "Tracker category"
 msgstr "追蹤項目"
 
-#: www/include/html.php:377
+#: www/include/html.php:383
 #, fuzzy
 msgid "Tracker group"
 msgstr "追蹤"
 
-#: www/include/html.php:379
+#: www/include/html.php:385
 msgid ""
 "The Sort By option allows you to determine how the browse results are sorted."
 "<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, "
@@ -17756,7 +17756,7 @@ msgstr ""
 "排序ID、優先權、摘要、啟用日期、結束日期、發表人或受託人，甚至您也可以升冪或"
 "降冪排序結果。"
 
-#: www/include/html.php:381
+#: www/include/html.php:387
 msgid ""
 "The Data Type option determines the type of tracker item this is.  Since the "
 "tracker rolls into one the bug, patch, support, etc... managers you need to "
@@ -17768,7 +17768,7 @@ msgstr ""
 "者，您需要能夠決定一個項目該屬於這些之中的哪一種？<br /><br />這有附加利益促"
 "成一個管理將一個支援要求變成一個Bug。"
 
-#: www/include/html.php:383
+#: www/include/html.php:389
 msgid ""
 "The priority option allows a user to define a tracker item priority (ranging "
 "from 1-Lowest to 5-Highest).<br /><br />This is especially helpful for bugs "
@@ -17779,7 +17779,7 @@ msgstr ""
 "><br />這對一個使用者可能發現該專案一個重要問題時的Bugs和支援要求是特別有幫助"
 "的。"
 
-#: www/include/html.php:389
+#: www/include/html.php:395
 msgid ""
 "The canned response drop-down represents a list of project admin-defined "
 "canned responses to common support or bug submission.<br /><br /> If you are "
@@ -17789,19 +17789,19 @@ msgstr ""
 "回應類別會顯示專案管理員定義的支援或是問題類型。<br /><br />如果您是專案管理"
 "員，您可以點擊 '(管理)' 來定義回應類別。"
 
-#: www/include/html.php:391
+#: www/include/html.php:397
 msgid ""
 "Anyone can add here comments to give additional information, answers and "
 "solutions. Please, be as precise as possible to avoid misunderstanding. If "
 "relevant, screenshots or documents can be added as attached files."
 msgstr ""
 
-#: www/include/html.php:393
+#: www/include/html.php:399
 #, fuzzy
 msgid "Enter the complete description."
 msgstr "細節說明"
 
-#: www/include/html.php:394
+#: www/include/html.php:400
 msgid ""
 "<div align=\"left\"><b>Editing tips:</b><br/><strong>http,https or ftp</"
 "strong>: Hyperlinks.<br/><strong>[#NNN]</strong>: Tracker id NNN.<br/"
@@ -17810,13 +17810,13 @@ msgid ""
 "</div>"
 msgstr ""
 
-#: www/include/html.php:397
+#: www/include/html.php:403
 msgid ""
 "When you wish to attach a file to a tracker item you must check this "
 "checkbox before submitting changes."
 msgstr "如果您希望附加檔案，您必須勾選這個選項，檔案才會順利上傳。"
 
-#: www/include/html.php:399
+#: www/include/html.php:405
 msgid ""
 "You can monitor or un-monitor this item by clicking the \"Monitor\" button. "
 "<br /><br /><strong>Note!</strong> this will send you additional email. If "
@@ -17824,97 +17824,98 @@ msgid ""
 "will also get emails for those reasons as well!"
 msgstr ""
 
-#: www/include/html.php:529
-msgid "ERROR - uneven row counts"
-msgstr ""
+#: www/include/html.php:536
+#, fuzzy
+msgid "Error: uneven row counts"
+msgstr "錯誤 - 未發現版本"
 
-#: www/include/html.php:776
+#: www/include/html.php:787
 msgid "Lowest"
 msgstr "最低"
 
-#: www/include/html.php:780
+#: www/include/html.php:791
 msgid "Highest"
 msgstr "最高"
 
-#: www/include/html.php:866
+#: www/include/html.php:876
 #, fuzzy, php-format
 msgid "Project access problem: %s"
 msgstr "專案管理：%1$s"
 
-#: www/include/html.php:868
+#: www/include/html.php:878
 #, fuzzy, php-format
 msgid "Project Problem: %s"
 msgstr "專案管理：%1$s"
 
-#: www/include/html.php:937 www/my/bookmark_add.php:28
+#: www/include/html.php:947 www/my/bookmark_add.php:28
 msgid "My Personal Page"
 msgstr "我的個人首頁"
 
-#: www/include/html.php:939
+#: www/include/html.php:949
 msgid ""
 "View your personal page, a selection of widgets to follow the informations "
 "from projects."
 msgstr ""
 
-#: www/include/html.php:942
+#: www/include/html.php:952
 #, fuzzy
-msgid "Trackers dashboard"
+msgid "My Trackers Dashboard"
 msgstr "追蹤更新"
 
-#: www/include/html.php:944
+#: www/include/html.php:954
 #, fuzzy
 msgid "View your tasks and artifacts."
 msgstr "您沒有日記或筆記"
 
-#: www/include/html.php:949
-msgid "Diary &amp; Notes"
-msgstr "日記和筆記"
+#: www/include/html.php:959
+msgid "My Diary and Notes"
+msgstr "我的日記和筆記"
 
-#: www/include/html.php:951
+#: www/include/html.php:961
 msgid "Manage your diary. Add, modify or delete your notes."
 msgstr ""
 
-#: www/include/html.php:956
+#: www/include/html.php:966
 msgid "Manage your account. Change your password, select your preferences."
 msgstr ""
 
-#: www/include/html.php:960 www/register/index.php:164
+#: www/include/html.php:970 www/register/index.php:164
 msgid "Register Project"
 msgstr "註冊專案"
 
-#: www/include/html.php:962
+#: www/include/html.php:972
 msgid "Register a new project in forge, following the workflow."
 msgstr ""
 
-#: www/include/html.php:1011
+#: www/include/html.php:1021
 #, fuzzy, php-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "上個月"
 msgstr[1] "上個月"
 
-#: www/include/html.php:1015
+#: www/include/html.php:1025
 #, fuzzy, php-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "上個月"
 msgstr[1] "上個月"
 
-#: www/include/html.php:1019
+#: www/include/html.php:1029
 #, php-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:1023
+#: www/include/html.php:1033
 #, php-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:1027
+#: www/include/html.php:1037
 #, php-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -19137,7 +19138,8 @@ msgstr "編輯您的個人能力"
 msgid "User fetch FAILED: %s"
 msgstr "取得會員失敗"
 
-#: www/people/editprofile.php:236 www/people/skills_utils.php:123
+#: www/people/editprofile.php:236 www/people/skills_utils.php:121
+#: www/people/skills_utils.php:122
 msgid "No Such User"
 msgstr "沒有這個會員"
 
@@ -19180,12 +19182,12 @@ msgstr "您可以輸入在這兒學到的新技能。請輸入儘量正確的開
 msgid "All fields are required!"
 msgstr "所有項都必須填寫！"
 
-#: www/people/editprofile.php:300 www/people/skills_utils.php:173
+#: www/people/editprofile.php:300 www/people/skills_utils.php:172
 #, fuzzy
 msgid "Title (max 100 characters)"
 msgstr "關鍵字（不多於255字元）"
 
-#: www/people/editprofile.php:307 www/people/skills_utils.php:180
+#: www/people/editprofile.php:307 www/people/skills_utils.php:179
 msgid "Keywords (max 255 characters)"
 msgstr "關鍵字（不多於255字元）"
 
@@ -19315,10 +19317,6 @@ msgstr "%1$s 專案"
 #: www/people/people_utils.php:414
 msgid "None Found"
 msgstr "沒有發現"
-
-#: www/people/skills_utils.php:122
-msgid "User fetch FAILED"
-msgstr "取得會員失敗"
 
 #: www/people/viewjob.php:54
 #, fuzzy
@@ -23433,6 +23431,16 @@ msgid "No User Name Provided"
 msgstr "帳號"
 
 #, fuzzy
+#~ msgid "Release date"
+#~ msgstr "發佈日期"
+
+#~ msgid "Diary &amp; Notes"
+#~ msgstr "日記和筆記"
+
+#~ msgid "User fetch FAILED"
+#~ msgstr "取得會員失敗"
+
+#, fuzzy
 #~ msgid "Page views"
 #~ msgstr "頁面瀏覽數"
 
@@ -24132,9 +24140,6 @@ msgstr "帳號"
 #~ "If you are a project admin you can click the 'Manage Canned Responses' "
 #~ "link to define your own canned responses"
 #~ msgstr "如果您是專案管理員，您可以點擊 '(管理)' 來定義回應類別。"
-
-#~ msgid "My Diary and Notes"
-#~ msgstr "我的日記和筆記"
 
 #~ msgid "View Diary and Notes"
 #~ msgstr "瀏覽日記與筆記"
