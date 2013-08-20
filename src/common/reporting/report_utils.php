@@ -687,8 +687,8 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 		}
 		case 'pageviews': {
 			$ydata[] =& $report->getPageViews();
-			$areaname = _('Page views');
-			$label[] = _('Page views');
+			$areaname = _('Page Views');
+			$label[] = _('Page Views');
 			break;
 		}
 		case 'taskman': {
