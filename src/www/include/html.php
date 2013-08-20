@@ -875,7 +875,7 @@ function site_project_header($params) {
 			else
 				exit_error(sprintf(_('Project access problem: %s'),$project->getErrorMessage()),'home');
 		}
-		exit_error(sprintf(_('Project Problem: %s'),$project->getErrorMessage()),'home');
+		exit_error(sprintf(_('Project Problem: %s'), $project->getErrorMessage()),'home');
 	}
 
 	// Check permissions in case of restricted access
@@ -949,19 +949,19 @@ function site_user_header($params) {
 	$arr_attr[] = array('title' => _('View your personal page, a selection of widgets to follow the informations from projects.'), 'class' => 'tabtitle-nw');
 
 	if (forge_get_config('use_tracker')) {
-		$arr_t[] = _('Trackers dashboard');
+		$arr_t[] = _('My Trackers Dashboard');
 		$arr_l[] = '/my/dashboard.php';
 		$arr_attr[] = array('title' => _('View your tasks and artifacts.'), 'class' => 'tabtitle');
 	}
 
 
 	if (forge_get_config('use_diary')) {
-		$arr_t[] = _('Diary &amp; Notes');
+		$arr_t[] = _('My Diary and Notes');
 		$arr_l[] = '/my/diary.php';
 		$arr_attr[] = array('title' => _('Manage your diary. Add, modify or delete your notes.'), 'class' => 'tabtitle');
 	}
 
-	$arr_t[] = _('Account Maintenance');
+	$arr_t[] = _('My Account');
 	$arr_l[] = '/account/';
 	$arr_attr[] = array('title' => _('Manage your account. Change your password, select your preferences.'), 'class' => 'tabtitle');
 
