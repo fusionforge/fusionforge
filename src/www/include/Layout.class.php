@@ -478,11 +478,7 @@ if (isset($params['group']) && $params['group']) {
 			<tr>
 				<td></td>
 				<td>
-				<?php
-
-				echo $this->projectTabs($params['toptab'],$params['group']);
-
-				?>
+				<?php $this->projectTabs($params['toptab'],$params['group']); ?>
 				</td>
 				<td></td>
 			</tr>
