@@ -108,7 +108,7 @@ class TroveCategoryLabel extends Error {
 	function remove() {
 		db_begin();
 		$res = db_query_params("DELETE FROM trove_category_labels WHERE label_id=$1", array($this->labelId));
-		if(!res || db_affected_rows($res) != 1) {
+		if(!$res || db_affected_rows($res) != 1) {
 			// $this->setError();
 			db_rollback();
 			return false;
