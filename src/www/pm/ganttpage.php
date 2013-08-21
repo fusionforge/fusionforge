@@ -29,7 +29,7 @@ require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 require_once $gfwww.'include/unicode.php';
 require_once $gfwww.'include/html.php';
 
-echo $HTML->Theme();
+$HTML->Theme();
 html_use_jqueryteamworkgantt();
 html_generic_fileheader(_('Gantt Chart'));
 echo $HTML->getJavascripts();
@@ -336,5 +336,5 @@ echo '<div id="workSpace" style="padding:0px; overflow-y:auto; overflow-x:hidden
   <div class="__template__" type="ASSIGNMENT_ROW"><!--
   --></div>
 <?php
-echo $HTML->footer(false);
+$HTML->footer(false);
 ?>
