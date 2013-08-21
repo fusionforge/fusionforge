@@ -35,7 +35,7 @@ function people_header($params) {
 		$params['toptab']='my';
 		site_user_header($params);
 	} else {
-		echo $HTML->header($params);
+		$HTML->header($params);
 	}
 
 	if ($group_id && $job_id) {
@@ -100,7 +100,8 @@ function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id)
 			$result = db_query_params("INSERT INTO people_skill_inventory (user_id,skill_id,skill_level_id,skill_year_id)
 VALUES ($1, $2, $3, $4)", array(user_getid() ,$skill_id, $skill_level_id, $skill_year_id));
 			if (!$result || db_affected_rows($result) < 1) {
-				$error_msg .= sprintf(_('ERROR inserting into skill inventory: %s'),db_error());
+				$error_msg .= _('Error inserting into skill inventory: ');
+				$error_msg .= db_error();
 			} else {
 				$feedback .= _('Added to skill inventory');
 			}
@@ -198,22 +199,22 @@ function people_edit_skill_inventory($user_id) {
 
 
 function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_year_id) {
-	global $feedback;
+	global $feedback, $error_msg;
 	if (session_loggedin()) {
-		//check if they've already added this skill
+		// check if they've already added this job
 		$result=db_query_params('SELECT * FROM people_job_inventory WHERE job_id=$1 AND skill_id=$2', array($job_id, $skill_id));
 		if (!$result || db_numrows($result) < 1) {
-			//skill isn't already in this inventory
+			// job is not yet in this inventory
 			$result=db_query_params('INSERT INTO people_job_inventory (job_id,skill_id,skill_level_id,skill_year_id)
 VALUES ($1, $2, $3, $4)', array($job_id, $skill_id, $skill_level_id, $skill_year_id));
 			if (!$result || db_affected_rows($result) < 1) {
-				$feedback .= _('ERROR inserting into skill inventory');
-				echo db_error();
+				$error_msg .= _('Error inserting into job inventory: ');
+				$error_msg .= db_error();
 			} else {
-				$feedback .= _('Added to skill inventory');
+				$feedback .= _('Added to job inventory');
 			}
 		} else {
-			$feedback .= _('Error: skill already in your inventory');
+			$feedback .= _('Error: job already in your inventory');
 		}
 
 	} else {
@@ -277,7 +278,7 @@ function people_get_skill_name($skill_id) {
 function people_get_category_name($category_id) {
 	$result=db_query_params('SELECT name FROM people_job_category WHERE category_id=$1', array($category_id));
 	if (!$result || db_numrows($result) < 1) {
-		return 'Invalid ID';
+		return _('Invalid ID');
 	} else {
 		return db_result($result,0,'name');
 	}
@@ -346,7 +347,7 @@ function people_show_category_table() {
 	//provide links to drill into a detail page that shows these categories
 
 	$title_arr=array();
-	$title_arr[]=_('Category');;
+	$title_arr[]=_('Category');
 
 	$return = $GLOBALS['HTML']->listTableTop ($title_arr);
 
