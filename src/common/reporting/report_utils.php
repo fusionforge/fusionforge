@@ -30,7 +30,7 @@ function report_header($title) {
 
 function report_footer() {
 	global $HTML;
-	echo $HTML->footer(array());
+	$HTML->footer(array());
 }
 
 function report_span_box($name='SPAN', $selected='1', $suppress_daily=false) {
