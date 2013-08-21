@@ -133,7 +133,7 @@ class Layout extends Error {
 		// determine theme{dir,url}
 		$this->themedir = forge_get_config('themes_root') . '/' . forge_get_config('default_theme') . '/';
 		if (!file_exists ($this->themedir)) {
-			html_error_top(_("Can't find theme directory!"));
+			html_error_top(_("Cannot find theme directory!"));
 			return;
 		}
 		$this->themeurl = util_make_url('themes/' . forge_get_config('default_theme') . '/');
@@ -434,22 +434,22 @@ class Layout extends Error {
 		$this->quickNav();
 
 		?></td>
-			<td>&nbsp;&nbsp;</td>
-			</tr>
+		<td></td>
+	</tr>
 
-			</table>
+</table>
 
-			<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<table class="fullwidth">
 
-			<tr>
-			<td>&nbsp;</td>
-			<td colspan="3">
+	<tr>
+		<td></td>
+		<td colspan="3">
 
-			<?php echo $this->outerTabs($params); ?>
+<?php $this->outerTabs($params); ?>
 
-			</td>
-			<td>&nbsp;</td>
-			</tr>
+		</td>
+		<td></td>
+	</tr>
 
 			<tr>
 			<td align="left" class="toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft.png" height="9" width="9" alt="" /></td>
@@ -459,36 +459,38 @@ class Layout extends Error {
 			<td align="right" class="toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright.png" height="9" width="9" alt="" /></td>
 			</tr>
 
-			<tr>
+	<tr>
 
-			<!-- Outer body row -->
+		<!-- Outer body row -->
 
 			<td class="toptab"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="10" height="1" alt="" /></td>
 			<td valign="top" width="99%" class="toptab" colspan="3">
 
 			<!-- Inner Tabs / Shell -->
 
-			<table border="0" width="100%" cellspacing="0" cellpadding="0">
+			<table class="fullwidth">
+<?php
+
+
+if (isset($params['group']) && $params['group']) {
+
+			?>
+			<tr>
+				<td></td>
+				<td>
+				<?php
+
+				echo $this->projectTabs($params['toptab'],$params['group']);
+
+				?>
+				</td>
+				<td></td>
+			</tr>
 			<?php
 
+}
 
-			if (isset($params['group']) && $params['group']) {
-
-				?>
-					<tr>
-					<td>&nbsp;</td>
-					<td>
-					<?php
-
-					echo $this->projectTabs($params['toptab'],$params['group']);
-
-				?>
-					</td>
-					<td>&nbsp;</td>
-					</tr>
-					<?php
-			}
-		?>
+?>
 			<tr>
 			<td align="left" class="projecttab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft-inner.png" height="9" width="9" alt="" /></td>
 			<td class="projecttab" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
@@ -499,13 +501,13 @@ class Layout extends Error {
 			<td class="projecttab" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="10" height="1" alt="" /></td>
 			<td valign="top" width="99%" class="projecttab">
 
-		<?php
+	<?php
 
 	}
 
 	function footer($params) {
 
-		?>
+	?>
 
 			<!-- end main body row -->
 
@@ -1393,7 +1395,7 @@ class Layout extends Error {
 		$subMenuAttr = array();
 
 		if (forge_get_config('use_project_tags')) {
-			$subMenuTitle[] = _('Tag cloud');
+			$subMenuTitle[] = _('Tag Cloud');
 			$subMenuUrl[] = '/softwaremap/tag_cloud.php';
 			$subMenuAttr[] = array('title' => _('Browse per tags defined by the projects.'), 'class' => 'tabtitle-nw');
 		}
@@ -1401,7 +1403,7 @@ class Layout extends Error {
 		if (forge_get_config('use_trove')) {
 			$subMenuTitle[] = _('Project Tree');
 			$subMenuUrl[] = '/softwaremap/trove_list.php';
-			$subMenuAttr[] = array('title' => _('Browse per category.'), 'class' => 'tabtitle');
+			$subMenuAttr[] = array('title' => _('Browse by Category'), 'class' => 'tabtitle');
 		}
 
 		if (forge_get_config('use_project_full_list')) {
