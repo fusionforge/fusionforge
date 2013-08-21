@@ -27,7 +27,7 @@ $language_id=getIntFromRequest('language_id');
 setcookie('cookie_language_id',$language_id,(time()+2592000),'/','',0);
 $cookie_language_id = $language_id;
 
-echo $HTML->header(array('title'=>"Change Language"));
+$HTML->header(array('title'=>"Change Language"));
 
 ?>
 
@@ -39,4 +39,4 @@ remembered next time you visit the site.
 
 <?php
 
-echo $HTML->footer(array());
+$HTML->footer(array());
