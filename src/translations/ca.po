@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-20 19:31+0200\n"
+"POT-Creation-Date: 2013-08-21 17:39+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -42,9 +42,9 @@ msgstr "Habilitat de FEINA esborrada amb èxit"
 #: common/docman/actions/addfile.php:58 common/docman/actions/addfile.php:65
 #: common/docman/actions/addsubdocgroup.php:48
 #: common/docman/actions/deldir.php:43 common/docman/actions/delfile.php:31
-#: common/docman/actions/editdocgroup.php:42
+#: common/docman/actions/editdocgroup.php:43
 #: common/docman/actions/editfile.php:54
-#: common/docman/actions/emptytrash.php:31
+#: common/docman/actions/emptytrash.php:32
 #: common/docman/actions/enforcereserve.php:31
 #: common/docman/actions/forcereindexenginesearch.php:30
 #: common/docman/actions/getfile.php:52 common/docman/actions/injectzip.php:30
@@ -136,12 +136,12 @@ msgstr "No s'han trobat dades per fer l'informe"
 msgid "deleted successfully."
 msgstr "Habilitat de FEINA esborrada amb èxit"
 
-#: common/docman/actions/editdocgroup.php:86
+#: common/docman/actions/editdocgroup.php:101
 #, fuzzy, php-format
 msgid "Documents folder %s updated successfully"
 msgstr "Document tramès amb èxit"
 
-#: common/docman/actions/editdocgroup.php:88
+#: common/docman/actions/editdocgroup.php:103
 #, fuzzy, php-format
 msgid "on project %s"
 msgstr "Projectes"
@@ -161,11 +161,11 @@ msgstr "Nom complet no vàlid"
 msgid "Document %s updated successfully."
 msgstr "Actualitzat amb èxit"
 
-#: common/docman/actions/emptytrash.php:37
+#: common/docman/actions/emptytrash.php:38
 msgid "Unable to clean trash"
 msgstr ""
 
-#: common/docman/actions/emptytrash.php:41
+#: common/docman/actions/emptytrash.php:42
 #, fuzzy
 msgid "Emptied Trash successfully."
 msgstr "Actualitzat amb èxit"
@@ -891,7 +891,7 @@ msgstr "Tramet informació"
 
 #: common/docman/views/additem.php:32
 #: common/docman/views/addsubdocgroup.php:34 common/docman/views/admin.php:33
-#: common/docman/views/editdocgroup.php:37 common/docman/views/editfile.php:30
+#: common/docman/views/editdocgroup.php:38 common/docman/views/editfile.php:30
 #: common/docman/views/help.php:31 common/docman/views/listfile.php:44
 #: common/docman/views/listfile.php:56
 #: common/docman/views/listtrashfile.php:37 common/docman/views/menu.php:35
@@ -986,20 +986,20 @@ msgstr ""
 msgid "Disable Webdav Interface"
 msgstr ""
 
-#: common/docman/views/editdocgroup.php:58
+#: common/docman/views/editdocgroup.php:59
 #, fuzzy
 msgid "Folder Name"
 msgstr "Nom de fitxer"
 
-#: common/docman/views/editdocgroup.php:61
+#: common/docman/views/editdocgroup.php:62
 msgid "belongs to"
 msgstr ""
 
-#: common/docman/views/editdocgroup.php:67
+#: common/docman/views/editdocgroup.php:68
 msgid "Restore"
 msgstr ""
 
-#: common/docman/views/editdocgroup.php:70
+#: common/docman/views/editdocgroup.php:71
 #: common/forum/AttachManager.class.php:149
 #: common/forum/ForumAdmin.class.php:67
 #: common/tracker/views/form-addextrafield.php:54
@@ -1022,7 +1022,7 @@ msgstr ""
 msgid "Edit"
 msgstr "Edita"
 
-#: common/docman/views/editdocgroup.php:78
+#: common/docman/views/editdocgroup.php:79
 #, fuzzy
 msgid ""
 "Folder name will be used as a title, so it should be formatted "
@@ -1333,7 +1333,7 @@ msgstr ""
 #: www/export/rss20_docman.php:136 www/export/rss20_docman.php:138
 #: www/export/tracker.php:108 www/forum/index.php:90 www/forum/message.php:127
 #: www/forum/myforums.php:152 www/frs/index.php:148 www/frs/index.php:207
-#: www/include/html.php:1039 www/news/news_utils.php:147
+#: www/include/html.php:1041 www/news/news_utils.php:147
 #: www/news/news_utils.php:267 www/people/people_utils.php:421
 #: www/people/viewjob.php:78 www/pm/browse_task.php:265
 #: www/pm/browse_task.php:275 www/pm/include/ProjectTaskHTML.class.php:122
@@ -3547,7 +3547,7 @@ msgstr "Cerca avançada"
 msgid "Log Out"
 msgstr "Final de sessió"
 
-#: common/include/Navigation.class.php:194 www/include/html.php:964
+#: common/include/Navigation.class.php:194 www/include/html.php:966
 msgid "My Account"
 msgstr "El meu compte"
 
@@ -3579,7 +3579,7 @@ msgid "Your Page, widgets selected by you to follow your items."
 msgstr ""
 
 #: common/include/Navigation.class.php:248 www/project/admin/index.php:163
-#: www/reporting/index.php:42 www/stats/site_stats_utils.php:478
+#: www/reporting/index.php:46 www/stats/site_stats_utils.php:478
 msgid "Projects"
 msgstr "Projectes"
 
@@ -3632,7 +3632,7 @@ msgstr "Llista de fitxers del projecte"
 #: common/tracker/actions/mod.php:196
 #: common/tracker/include/build_submission_form.php:64
 #: common/widget/Widget_MyProjects.class.php:77
-#: www/include/Layout.class.php:725 www/pm/add_task.php:53
+#: www/include/Layout.class.php:727 www/pm/add_task.php:53
 msgid "Admin"
 msgstr "Administració"
 
@@ -5396,7 +5396,7 @@ msgstr "Canvi"
 msgid "Advanced queries"
 msgstr "Cerca avançada"
 
-#: common/tracker/actions/browse.php:361 www/include/html.php:619
+#: common/tracker/actions/browse.php:361 www/include/html.php:621
 #, fuzzy
 msgid "Select One"
 msgstr "Suprimeix el fitxer"
@@ -5496,8 +5496,8 @@ msgid ""
 msgstr ""
 
 #: common/tracker/actions/browse.php:737 common/tracker/actions/browse.php:748
-#: common/tracker/actions/browse.php:752 www/include/html.php:360
-#: www/include/html.php:590 www/include/html.php:785
+#: common/tracker/actions/browse.php:752 www/include/html.php:361
+#: www/include/html.php:592 www/include/html.php:788
 #: www/pm/browse_task.php:358 www/pm/browse_task.php:373
 #: www/pm/browse_task.php:384
 msgid "No Change"
@@ -5707,7 +5707,7 @@ msgstr "Fitxers existents"
 msgid "Data Type"
 msgstr "Tipus de dades"
 
-#: common/tracker/actions/mod.php:168 www/include/html.php:393
+#: common/tracker/actions/mod.php:168 www/include/html.php:395
 msgid ""
 "The summary text-box represents a short tracker item summary. Useful when "
 "browsing through several tracker items."
@@ -6473,9 +6473,9 @@ msgstr "Baixada"
 #: common/tracker/include/ArtifactTypeHtml.class.php:749
 #: plugins/scmhg/common/HgPlugin.class.php:608 www/admin/pluginman.php:227
 #: www/admin/pluginman.php:246 www/admin/pluginman.php:258
-#: www/admin/pluginman.php:259 www/include/html.php:319
-#: www/include/html.php:530 www/include/html.php:616 www/include/html.php:636
-#: www/include/html.php:671 www/include/html.php:713 www/pm/format_csv.php:78
+#: www/admin/pluginman.php:259 www/include/html.php:320
+#: www/include/html.php:532 www/include/html.php:618 www/include/html.php:639
+#: www/include/html.php:674 www/include/html.php:716 www/pm/format_csv.php:78
 #: www/pm/ganttpage.php:152 www/tracker/roadmap.php:440
 msgid "None"
 msgstr "Cap"
@@ -7179,7 +7179,7 @@ msgstr ""
 
 #: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:56
 #: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:244
-#: www/include/Layout.class.php:1343
+#: www/include/Layout.class.php:1345
 msgid "Preferences"
 msgstr "Preferències"
 
@@ -11511,7 +11511,7 @@ msgid "Reporter"
 msgstr "Informe"
 
 #: plugins/mantisbt/view/editIssue.php:129
-#: plugins/mantisbt/view/viewIssue.php:86 www/include/html.php:391
+#: plugins/mantisbt/view/viewIssue.php:86 www/include/html.php:393
 msgid "Resolution"
 msgstr "Resolució"
 
@@ -15607,7 +15607,7 @@ msgstr "Caixa SCM:"
 msgid "Resend New Project Instruction Email"
 msgstr "Reenvia correu d'instrucció de nou projecte"
 
-#: www/admin/grouplist.php:27 www/include/Layout.class.php:1408
+#: www/admin/grouplist.php:27 www/include/Layout.class.php:1410
 #: www/softwaremap/full_list.php:54
 #, fuzzy
 msgid "Project List"
@@ -17703,7 +17703,8 @@ msgstr "Nom de publicació:"
 msgid "Features Boxes"
 msgstr "Sol·licitud de noves característiques"
 
-#: www/include/features_boxes.php:39 www/softwaremap/tag_cloud.php:52
+#: www/include/features_boxes.php:39 www/include/Layout.class.php:1398
+#: www/softwaremap/tag_cloud.php:52
 #, fuzzy
 msgid "Tag Cloud"
 msgstr "Data tancada"
@@ -17801,14 +17802,14 @@ msgstr "Heu de facilitar un nom"
 msgid "File does not exist. File %s is not in incoming FTP directory."
 msgstr ""
 
-#: www/include/html.php:377
+#: www/include/html.php:379
 msgid ""
 "This drop-down box represents the person to which a tracker item is assigned."
 msgstr ""
 "Aquesta caixa desplegable representa l'administrador de projecte a qui està "
 "assignat un element de rastreig."
 
-#: www/include/html.php:379
+#: www/include/html.php:381
 msgid ""
 "This drop-down box represents the current status of a tracker item.<br /"
 "><br />You can set the status to 'Pending' if you are waiting for a response "
@@ -17824,17 +17825,17 @@ msgstr ""
 "definit per l'administrador (per defecte és 14 dies) se li assigna a "
 "l'element un estat d''Suprimit'."
 
-#: www/include/html.php:381
+#: www/include/html.php:383
 #, fuzzy
 msgid "Tracker category"
 msgstr "Element del rastrejador"
 
-#: www/include/html.php:383
+#: www/include/html.php:385
 #, fuzzy
 msgid "Tracker group"
 msgstr "Rastrejador"
 
-#: www/include/html.php:385
+#: www/include/html.php:387
 msgid ""
 "The Sort By option allows you to determine how the browse results are sorted."
 "<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, "
@@ -17846,7 +17847,7 @@ msgstr ""
 "d'obertura, Data de tancament, Remitent, o Assignee.  També podeu tenir els "
 "resultats classificats en ordre Ascendent o Descendent."
 
-#: www/include/html.php:387
+#: www/include/html.php:389
 msgid ""
 "The Data Type option determines the type of tracker item this is.  Since the "
 "tracker rolls into one the bug, patch, support, etc... managers you need to "
@@ -17860,7 +17861,7 @@ msgstr ""
 "correspondre un element.<br /><br />Aquest és l'avantatge afegit de permetre "
 "a un administrador convertir una petició de suport en un error (bug)."
 
-#: www/include/html.php:389
+#: www/include/html.php:391
 msgid ""
 "The priority option allows a user to define a tracker item priority (ranging "
 "from 1-Lowest to 5-Highest).<br /><br />This is especially helpful for bugs "
@@ -17872,7 +17873,7 @@ msgstr ""
 "útil per errors i peticions de suport en les quals un usuari pot trobar un "
 "problema crític amb un projecte."
 
-#: www/include/html.php:395
+#: www/include/html.php:397
 msgid ""
 "The canned response drop-down represents a list of project admin-defined "
 "canned responses to common support or bug submission.<br /><br /> If you are "
@@ -17885,19 +17886,19 @@ msgstr ""
 "projectes,podeu fer clic a l'enllaç '(admin)' per a definir les vostres "
 "pròpies respostes 'enllaunades'"
 
-#: www/include/html.php:397
+#: www/include/html.php:399
 msgid ""
 "Anyone can add here comments to give additional information, answers and "
 "solutions. Please, be as precise as possible to avoid misunderstanding. If "
 "relevant, screenshots or documents can be added as attached files."
 msgstr ""
 
-#: www/include/html.php:399
+#: www/include/html.php:401
 #, fuzzy
 msgid "Enter the complete description."
 msgstr "Descripció detallada"
 
-#: www/include/html.php:400
+#: www/include/html.php:402
 msgid ""
 "<div align=\"left\"><b>Editing tips:</b><br/><strong>http,https or ftp</"
 "strong>: Hyperlinks.<br/><strong>[#NNN]</strong>: Tracker id NNN.<br/"
@@ -17906,7 +17907,7 @@ msgid ""
 "</div>"
 msgstr ""
 
-#: www/include/html.php:403
+#: www/include/html.php:405
 msgid ""
 "When you wish to attach a file to a tracker item you must check this "
 "checkbox before submitting changes."
@@ -17914,7 +17915,7 @@ msgstr ""
 "Si desitgeu adjuntar un fitxer a un element de rastreig heu de marcar "
 "aquesta casella abans d'enviar els canvis."
 
-#: www/include/html.php:405
+#: www/include/html.php:407
 msgid ""
 "You can monitor or un-monitor this item by clicking the \"Monitor\" button. "
 "<br /><br /><strong>Note!</strong> this will send you additional email. If "
@@ -17922,98 +17923,98 @@ msgid ""
 "will also get emails for those reasons as well!"
 msgstr ""
 
-#: www/include/html.php:536
+#: www/include/html.php:538
 #, fuzzy
 msgid "Error: uneven row counts"
 msgstr "Error: no s'han trobat versions"
 
-#: www/include/html.php:787
+#: www/include/html.php:790
 msgid "Lowest"
 msgstr "Mínima"
 
-#: www/include/html.php:791
+#: www/include/html.php:794
 msgid "Highest"
 msgstr "Màxima"
 
-#: www/include/html.php:876
+#: www/include/html.php:878
 #, fuzzy, php-format
 msgid "Project access problem: %s"
 msgstr "Administració del projecte: %1$s"
 
-#: www/include/html.php:878
+#: www/include/html.php:880
 #, fuzzy, php-format
 msgid "Project Problem: %s"
 msgstr "Administració del projecte: %1$s"
 
-#: www/include/html.php:947 www/my/bookmark_add.php:28
+#: www/include/html.php:949 www/my/bookmark_add.php:28
 msgid "My Personal Page"
 msgstr "La meva pàgina personal"
 
-#: www/include/html.php:949
+#: www/include/html.php:951
 msgid ""
 "View your personal page, a selection of widgets to follow the informations "
 "from projects."
 msgstr ""
 
-#: www/include/html.php:952
+#: www/include/html.php:954
 #, fuzzy
 msgid "My Trackers Dashboard"
 msgstr "Rastrejador actualitzat"
 
-#: www/include/html.php:954
+#: www/include/html.php:956
 #, fuzzy
 msgid "View your tasks and artifacts."
 msgstr "No teniu entrades de diari"
 
-#: www/include/html.php:959
+#: www/include/html.php:961
 msgid "My Diary and Notes"
 msgstr "El meu diari i les meves notes"
 
-#: www/include/html.php:961
+#: www/include/html.php:963
 msgid "Manage your diary. Add, modify or delete your notes."
 msgstr ""
 
-#: www/include/html.php:966
+#: www/include/html.php:968
 msgid "Manage your account. Change your password, select your preferences."
 msgstr ""
 
-#: www/include/html.php:970 www/register/index.php:164
+#: www/include/html.php:972 www/register/index.php:164
 msgid "Register Project"
 msgstr "Registra el projecte"
 
-#: www/include/html.php:972
+#: www/include/html.php:974
 msgid "Register a new project in forge, following the workflow."
 msgstr ""
 
-#: www/include/html.php:1021
+#: www/include/html.php:1023
 #, fuzzy, php-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "Últims mesos"
 msgstr[1] "Últims mesos"
 
-#: www/include/html.php:1025
+#: www/include/html.php:1027
 #, fuzzy, php-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "Últims mesos"
 msgstr[1] "Últims mesos"
 
-#: www/include/html.php:1029
+#: www/include/html.php:1031
 #, php-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:1033
+#: www/include/html.php:1035
 #, php-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:1037
+#: www/include/html.php:1039
 #, php-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -18021,36 +18022,32 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: www/include/Layout.class.php:136
-msgid "Can't find theme directory!"
-msgstr ""
+#, fuzzy
+msgid "Cannot find theme directory!"
+msgstr "El fitxer no es pot moure a l'ubicació permanent"
 
 #: www/include/Layout.class.php:298
 msgid "en"
 msgstr "ca"
 
-#: www/include/Layout.class.php:707
+#: www/include/Layout.class.php:709
 msgid "Quick Jump To..."
 msgstr ""
 
-#: www/include/Layout.class.php:1396
-msgid "Tag cloud"
-msgstr ""
-
-#: www/include/Layout.class.php:1398
+#: www/include/Layout.class.php:1400
 #, fuzzy
 msgid "Browse per tags defined by the projects."
 msgstr "No hi ha tal missatge per aquest projecte"
 
-#: www/include/Layout.class.php:1402
+#: www/include/Layout.class.php:1404
 msgid "Project Tree"
 msgstr ""
 
-#: www/include/Layout.class.php:1404
-#, fuzzy
-msgid "Browse per category."
+#: www/include/Layout.class.php:1406 www/snippet/index.php:81
+msgid "Browse by Category"
 msgstr "Navega per categories"
 
-#: www/include/Layout.class.php:1410
+#: www/include/Layout.class.php:1412
 #, fuzzy
 msgid "Complete listing of available projects."
 msgstr "Aquí hi ha una llista de posicions disponibles per a aquest projecte."
@@ -20260,7 +20257,8 @@ msgstr ""
 "Haurieu d'escollir només tasques que hagin d'estar completades abans que "
 "aquesta tasca es pugui iniciar."
 
-#: www/pm/mod_task.php:261 www/reporting/timeadd.php:99
+#: www/pm/mod_task.php:261 www/reporting/index.php:69
+#: www/reporting/timeadd.php:99
 msgid "Time tracking"
 msgstr ""
 
@@ -21489,103 +21487,88 @@ msgstr ""
 msgid "Start and end dates must be different"
 msgstr ""
 
-#: www/reporting/index.php:36 www/stats/i18n.php:34
+#: www/reporting/index.php:37 www/stats/i18n.php:34
 msgid "Users"
 msgstr "Usuaris"
 
-#: www/reporting/index.php:38
+#: www/reporting/index.php:39
 #, fuzzy
 msgid "Users Added (graph)"
 msgstr "Usuaris afegits setmanalment (gràfic)"
 
-#: www/reporting/index.php:39
+#: www/reporting/index.php:40
 #, fuzzy
 msgid "Cumulative Users (graph)"
 msgstr "Usuaris acumulats setmanalment (gràfic)"
 
-#: www/reporting/index.php:40
-#, fuzzy
-msgid "User-specific reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads"
-msgstr ""
-"Informes específics de projecte: Rastrejador, Gest tasq, Fòrums, Gest Doc, "
-"Baixades"
-
-#: www/reporting/index.php:41 www/reporting/index.php:47
+#: www/reporting/index.php:41 www/reporting/index.php:56
 msgid "Activity (graph)"
 msgstr "Activitat (gràfic)"
 
-#: www/reporting/index.php:44
+#: www/reporting/index.php:48
 #, fuzzy
 msgid "Projects Added (graph)"
 msgstr "Projectes afegits setmanalment (gràfic)"
 
-#: www/reporting/index.php:45
+#: www/reporting/index.php:49
 #, fuzzy
 msgid "Cumulative Projects (graph)"
 msgstr "Projectes acumulats setmanalment (gràfic)"
 
-#: www/reporting/index.php:46
+#: www/reporting/index.php:54
 msgid "Project-specific reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads"
 msgstr ""
 "Informes específics de projecte: Rastrejador, Gest tasq, Fòrums, Gest Doc, "
 "Baixades"
 
-#: www/reporting/index.php:48
-msgid "Site-Wide"
-msgstr "A tot el lloc"
-
-#: www/reporting/index.php:50
+#: www/reporting/index.php:61
 msgid "Site-wide reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads"
 msgstr ""
 "Informes de tot el lloc: Rastrejador, Gest tasq, Fòrums, Gest Doc, Baixades"
 
-#: www/reporting/index.php:51
+#: www/reporting/index.php:63
 msgid "Pie (graph)"
 msgstr "Pastís (gràfic)"
 
-#: www/reporting/index.php:52
+#: www/reporting/index.php:64
 msgid "Line (graph)"
 msgstr "Línia (gràfic)"
 
-#: www/reporting/index.php:53
-msgid "Time-Tracking"
-msgstr "Rastreig de temps"
-
-#: www/reporting/index.php:55
+#: www/reporting/index.php:71
 msgid "Individual User Time Report (graph)"
 msgstr "Informe de temps per individuu (gràfic)"
 
-#: www/reporting/index.php:55 www/reporting/index.php:56
-#: www/reporting/index.php:57 www/reporting/index.php:58
+#: www/reporting/index.php:71 www/reporting/index.php:72
+#: www/reporting/index.php:73 www/reporting/index.php:74
 #, fuzzy
 msgid "report"
 msgstr "Informe"
 
-#: www/reporting/index.php:56
+#: www/reporting/index.php:72
 msgid "Individual Project Time Report (graph)"
 msgstr "Informe de temps per individuu en el Projecte (gràfic)"
 
-#: www/reporting/index.php:57
+#: www/reporting/index.php:73
 msgid "Site-Wide Time Report (graph)"
 msgstr "Informe complet de temps (gràfic)"
 
-#: www/reporting/index.php:58
+#: www/reporting/index.php:74
 msgid "Site-Wide Total Hours Graph (graph)"
 msgstr "Gràfic del total d'hores (gràfic)"
 
-#: www/reporting/index.php:59
-msgid "Site-Wide Task &amp; Hours (report)"
+#: www/reporting/index.php:75
+msgid "Site-Wide Task and Hours (report)"
 msgstr "Total de tasques i hores  (informe)"
 
-#: www/reporting/index.php:62
+#: www/reporting/index.php:82
 msgid "Administrative"
 msgstr "Administratiu"
 
-#: www/reporting/index.php:64
+#: www/reporting/index.php:84
 msgid "Initialize / Rebuild Reporting Tables"
 msgstr "Initialitza / Reelabora taules d'informes"
 
-#: www/reporting/index.php:65 www/reporting/timecategory.php:60
+#: www/reporting/index.php:85 www/reporting/timecategory.php:60
 msgid "Manage Time Tracker Categories"
 msgstr "Gestiona les categories de control de temps"
 
@@ -22405,10 +22388,6 @@ msgstr ""
 #: www/snippet/index.php:64
 msgid "Browse by Language"
 msgstr "Navega per idioma"
-
-#: www/snippet/index.php:81
-msgid "Browse by Category"
-msgstr "Navega per categories"
 
 #: www/snippet/package.php:57
 #, fuzzy
@@ -23605,6 +23584,25 @@ msgid "No User Name Provided"
 msgstr "Nom d'usuari"
 
 #, fuzzy
+#~ msgid "Browse per category."
+#~ msgstr "Navega per categories"
+
+#, fuzzy
+#~ msgid "User-specific reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads"
+#~ msgstr ""
+#~ "Informes específics de projecte: Rastrejador, Gest tasq, Fòrums, Gest "
+#~ "Doc, Baixades"
+
+#~ msgid "Site-Wide"
+#~ msgstr "A tot el lloc"
+
+#~ msgid "Time-Tracking"
+#~ msgstr "Rastreig de temps"
+
+#~ msgid "Site-Wide Task &amp; Hours (report)"
+#~ msgstr "Total de tasques i hores  (informe)"
+
+#, fuzzy
 #~ msgid "Release date"
 #~ msgstr "Data de publicació"
 
@@ -24442,9 +24440,6 @@ msgstr "Nom d'usuari"
 
 #~ msgid "Thank you for choosing %1$s."
 #~ msgstr "Gràcies per escollir %1$s."
-
-#~ msgid "Site-Wide Task and Hours (report)"
-#~ msgstr "Total de tasques i hores  (informe)"
 
 #~ msgid ""
 #~ "Download a raw-text version of this code by clicking on “Download Version”"
