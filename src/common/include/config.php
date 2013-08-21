@@ -229,8 +229,7 @@ function forge_set_vars_from_config () {
  */
 function forge_define_config_item ($var, $section, $default) {
 	$c = FusionForgeConfig::get_instance () ;
-
-	return $c->set_value ($section, $var, $default) ;
+	$c->set_value ($section, $var, $default) ;
 }
 
 /**
@@ -240,8 +239,7 @@ function forge_define_config_item ($var, $section, $default) {
  */
 function forge_set_config_item_bool ($var, $section) {
 	$c = FusionForgeConfig::get_instance () ;
-
-	return $c->mark_as_bool ($section, $var) ;
+	$c->mark_as_bool ($section, $var) ;
 }
 
 /**
@@ -250,8 +248,7 @@ function forge_set_config_item_bool ($var, $section) {
  */
 function forge_read_config_file ($filename) {
 	$c = FusionForgeConfig::get_instance () ;
-
-	return $c->read_config_file ($filename) ;
+	$c->read_config_file ($filename) ;
 }
 
 /**
@@ -285,8 +282,7 @@ function forge_read_config_dir ($path) {
 
 function forge_reset_config_item ($var, $section, $default) {
 	$c = FusionForgeConfig::get_instance () ;
-
-	return $c->reset_value ($section, $var, $default) ;
+	$c->reset_value ($section, $var, $default) ;
 }
 
 // Local Variables:
