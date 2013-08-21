@@ -84,7 +84,7 @@ if (!session_loggedin()) {
 		exit_error(_('You cannot rate yourself'),'my');
 	}
 
-	echo $HTML->header(array('title'=>_('User Ratings Page')));
+	$HTML->header(array('title'=>_('User Ratings Page')));
 
 	echo '
 	<h3>'._('Ratings Recorded').'</h3>
