@@ -151,19 +151,19 @@ echo "</div>\n"; // end of about=""
 
 $me = session_get_user();
 if (forge_get_config('use_ratings')) {
-if ($user->usesRatings() && (!$me || $me->usesRatings())) {
+	if ($user->usesRatings() && (!$me || $me->usesRatings())) {
 
-print "<p>";
-print _('If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.');
-print "</p>";
+		print "<p>";
+		print _('If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.');
+		print "</p>";
 
-print "<p>";
-printf(_('The %s Peer Rating system is based on concepts from <a href="http://www.advogato.com/">Advogato.</a> The system has been re-implemented and expanded in a few ways.'), forge_get_config ('forge_name'));
-print "</p>";
+		print "<p>";
+		printf(_('The %s Peer Rating system is based on concepts from <a href="http://www.advogato.com/">Advogato.</a> The system has been re-implemented and expanded in a few ways.'), forge_get_config ('forge_name'));
+		print "</p>";
 ?>
 
 	<div class="align-center">
-        <?php echo vote_show_user_rate_box ($user_id, $me?$me->getID():0); ?>
+        <?php vote_show_user_rate_box ($user_id, $me?$me->getID():0); ?>
 	</div>
 
 		  <?php printf(_('<p>The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both "trusted" and "non-trusted" users.</p><ul><li>The "Sitewide Rank" field shows the user\'s rank compared to all ranked %1$s users.</li><li>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.</li><li>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user\'s responses are given more weight.</li></ul><p>If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="%2$s">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the \'Peer Rating\' box will disappear from your user page.</p>'),
