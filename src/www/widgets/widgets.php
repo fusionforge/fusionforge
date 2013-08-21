@@ -45,7 +45,7 @@ if (isLogged()) {
 
 		$vOwner = new Valid_Widget_Owner('owner');
 		$vOwner->required();
-        if ($request->valid($vOwner)) {
+		if ($request->valid($vOwner)) {
 		$owner = $request->get('owner');
 		$owner_id   = (int)substr($owner, 1);
 		$owner_type = substr($owner, 0, 1);
@@ -54,7 +54,7 @@ if (isLogged()) {
 				$owner_id = user_getid();
 				$userm=UserManager::instance();
 				$current=$userm->getCurrentUser();
-		    		echo site_user_header(array('title'=>sprintf(_('Personal Page For %s'),user_getname())));
+		    	site_user_header(array('title'=>sprintf(_('Personal Page For %s'),user_getname())));
 				$lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER, $layout_id);
 				site_footer(array());
 				break;
