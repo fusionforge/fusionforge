@@ -36,7 +36,7 @@ require_once $gfcommon.'include/minijson.php';
  * @throws	Exception
  */
 function html_generic_fileheader($title) {
-	global $HTML, $sysDTDs, $sysXMLNSs;
+	global $HTML;
 
 	if (!$title) {
 		throw new Exception('A title is mandatory in XHTML!');
