@@ -42,7 +42,7 @@ if ($diary_user) {
 	}
 
 	$title = _('Diary and Notes for') . ' ' . $user_obj->getRealName();
-	echo $HTML->header(array('title'=>$title));
+	$HTML->header(array('title'=>$title));
 
 	if ($diary_id) {
 		$res = db_query_params ('SELECT * FROM user_diary WHERE user_id=$1 AND id=$2 AND is_public=1',
