@@ -81,7 +81,6 @@ function reports_header($group_id, $vals, $titles, $html='') {
 	print html_build_select_box_from_arrays ($vals,$titles,
 						 'what',$what,false);
 
-	$periods=array('day'=>'Last day','week'=>'Last week');
 	$vals=array('day','week','month','year','lifespan');
 	$texts=array(
 		_('Last day(s)'),
