@@ -17,7 +17,7 @@ class ProjectLabelsPlugin extends Plugin {
 						      _('Project labels'). ' [' . _('Project labels plugin') . ']') . '</li>';
 		} elseif ($hookname == "project_before_widgets") {
 			$group_id=$params['group_id'];
-			$project = &group_get_object($group_id);
+			$project = group_get_object($group_id);
 			if (!$project || !is_object($project))
 				return;
 			if ($project->isError())

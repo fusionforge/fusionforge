@@ -13,7 +13,7 @@ class Tasks{
 
 	function __construct($trackers, $group_id, $users) {
 
-		$this->group =& group_get_object($group_id);
+		$this->group = group_get_object($group_id);
 		if (!$this->group || !is_object($this->group)) {
 			print "error retrieving group from id";
 		} elseif ($this->group->isError()) {

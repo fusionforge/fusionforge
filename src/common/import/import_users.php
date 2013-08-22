@@ -391,7 +391,7 @@ function user_fill($users, $group_id, $check=False){
 	global $feedback;
 	global $message;
 
-	$group =& group_get_object($group_id);
+	$group = group_get_object($group_id);
 	if (!$group || !is_object($group)) {
 		exit_error('Error','Could Not Get Group');
 	} elseif ($group->isError()) {

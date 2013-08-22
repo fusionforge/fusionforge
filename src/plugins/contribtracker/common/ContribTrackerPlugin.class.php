@@ -38,7 +38,7 @@ class ContribTrackerPlugin extends Plugin {
 	function CallHook($hookname, &$params) {
 		if ($hookname == "groupmenu") {
 			$group_id=$params['group'];
-			$project = &group_get_object($group_id);
+			$project = group_get_object($group_id);
 			if (!$project || !is_object($project)) {
 				return;
 			}
@@ -59,7 +59,7 @@ class ContribTrackerPlugin extends Plugin {
 			//Check if the group is active
 			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
 			$group_id=$params['group'];
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			echo "<tr>";
 			echo "<td>";
 			echo ' <input type="CHECKBOX" name="use_contribtrackerplugin" value="1" ';
@@ -78,7 +78,7 @@ class ContribTrackerPlugin extends Plugin {
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
 			$group_id=$params['group'];
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			$use_contribtrackerplugin = getStringFromRequest('use_contribtrackerplugin');
 			if ( $use_contribtrackerplugin == 1 ) {
 				$group->setPluginUse ( $this->name );
@@ -88,7 +88,7 @@ class ContribTrackerPlugin extends Plugin {
 		} elseif ($hookname == "project_admin_plugins") {
 			// this displays the link in the project admin options page to its ContribTracker administration
 			$group_id = $params['group_id'];
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
 				echo util_make_link ("/plugins/".$this->name."/project_admin.php?group_id=".$group->getID(),
 						     _('Contribution Tracker admin')) ;
@@ -98,7 +98,7 @@ class ContribTrackerPlugin extends Plugin {
 
 		elseif ($hookname == "project_before_frs") {
 			$group_id = $params['group_id'];
-			$group = &group_get_object ($group_id);
+			$group = group_get_object ($group_id);
 
 			if ($group->usesPlugin($this->name)) {
 				global $HTML ;

@@ -145,7 +145,7 @@ class CoreApiService {
 			return new SoapFault($e->getCode(),$e->getMessage());
 		}
 
-		$grps =& group_get_objects($group_ids);
+		$grps = group_get_objects($group_ids);
 		if (!$grps) {
 			$this->logger->debug("Could Not Get Groups by Id");
 			return new soap_fault ('2001','group','Could Not Get Groups by Id'.$inputArgs,$feedback);
@@ -472,7 +472,7 @@ class CoreApiService {
 			return new SoapFault($e->getCode(),$e->getMessage());
 		}
 		// Search the group object in the database
-		$grp =& group_get_object($group_id);
+		$grp = group_get_object($group_id);
 		$this->logger->debug("group_get_object : ".var_export($grp, true));
 
 		// Error handle

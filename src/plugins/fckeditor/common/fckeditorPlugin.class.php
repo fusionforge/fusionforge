@@ -61,7 +61,7 @@ class fckeditorPlugin extends Plugin {
 			$display = 0;
 			if (isset($params['group'])) {
 				$group_id=$params['group']; // get the project id
-				$project = &group_get_object($group_id);
+				$project = group_get_object($group_id);
 				if ( (!$project) || (!is_object($project)) || ($project->isError()) || (!$project->isProject()) ) {
 					return false;
 				}

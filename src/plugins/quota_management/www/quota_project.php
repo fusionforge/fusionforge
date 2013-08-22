@@ -35,7 +35,7 @@ $quota_management = plugin_get_object('quota_management');
 
 session_require_perm('project_admin', $id);
 
-$group = &group_get_object($id);
+$group = group_get_object($id);
 
 if (!$group || !is_object($group)) {
 	exit_no_group();

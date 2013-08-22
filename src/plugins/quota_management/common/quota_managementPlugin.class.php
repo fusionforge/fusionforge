@@ -44,7 +44,7 @@ class quota_managementPlugin extends Plugin {
 			case "project_admin_plugins": {
 				// this displays the link in the project admin options page to it's  quota_management administration
 				$group_id = $params['group_id'];
-				$group = &group_get_object($group_id);
+				$group = group_get_object($group_id);
 				if ( $group->usesPlugin($this->name)) {
 					echo util_make_link('/plugins/quota_management/index.php?id='.$group->getID().'&type=admin&pluginname='.$this->name,
 							_('View the quota_management Administration')

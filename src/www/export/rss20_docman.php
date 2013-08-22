@@ -47,7 +47,7 @@ if ($limit > 100) $limit = 100;
 
 if (isset($group_id) && !empty($group_id) && is_numeric($group_id)) {
 	session_require_perm('project_read', $group_id);
-	$group =& group_get_object($group_id);
+	$group = group_get_object($group_id);
 
 	//does group exist? do we get an object?
 	if (!$group || !is_object($group)) {

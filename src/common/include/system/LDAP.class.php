@@ -443,7 +443,7 @@ class LDAP extends UNIX {
 		global $ldap_conn;
 
 
-		$group = &group_get_object($group_id);
+		$group = group_get_object($group_id);
 		if (!$group) {
 			$this->setError("Error: Cannot find group [$group_id]<br />");
 			return false;
@@ -470,7 +470,7 @@ class LDAP extends UNIX {
 	function sysCreateGroup($group_id) {
 
 
-		$group = &group_get_object($group_id);
+		$group = group_get_object($group_id);
 		if (!$this->gfLdapConnect()) {
 			return false;
 		}
@@ -541,7 +541,7 @@ class LDAP extends UNIX {
 	function sysRemoveGroup($group_id) {
 
 
-		$group = &group_get_object($group_id);
+		$group = group_get_object($group_id);
 		if (!$this->gfLdapConnect()) {
 			return false;
 		}
@@ -624,7 +624,7 @@ class LDAP extends UNIX {
 		global $ldap_conn;
 
 
-		$group = &group_get_object($group_id);
+		$group = group_get_object($group_id);
 		$user  = &user_get_object($user_id);
 		if (!$this->gfLdapConnect()) {
 			return false;
@@ -694,7 +694,7 @@ class LDAP extends UNIX {
 	function sysGroupRemoveUser($group_id,$user_id,$cvs_only=0) {
 
 
-		$group = &group_get_object($group_id);
+		$group = group_get_object($group_id);
 		$user  = &user_get_object($user_id);
 		if (!$this->gfLdapConnect()) {
 			return false;

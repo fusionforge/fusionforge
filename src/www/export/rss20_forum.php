@@ -86,7 +86,7 @@ if (isset($_GET['group_ids'])&&!empty($_GET['group_ids'])) {
     //loop through group_ids
     for ($i=0; $i<count($group_ids);$i++){
         if (is_numeric($group_ids[$i])) {
-            $group =& group_get_object($group_ids[$i]);
+            $group = group_get_object($group_ids[$i]);
             //does group exist? do we get an object? is group public? does it use forums?
             if ($group && is_object($group) && !$group->isError()
                         && $group->isPublic() && $group->usesForum()){
@@ -127,7 +127,7 @@ if (isset($_GET['forum_ids']) && !empty($_GET['forum_ids'])) {
             if ($result && db_numrows($result) >= 1) {
                 $forum_group_id=db_result($result,0,'group_id');
 
-                $g =& group_get_object($forum_group_id);
+                $g = group_get_object($forum_group_id);
                 if ($g && is_object($g) && !$g->isError() && $g->isPublic() && $g->usesForum()) {
                     $f=new Forum($g,$fid);
 

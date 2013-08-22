@@ -38,8 +38,7 @@ require_once $gfwww.'export/rss_utils.inc';
 if (isset($_GET['group_id'])&&!empty($_GET['group_id'])&&is_numeric($_GET['group_id'])) {
 	$group_id = $_GET['group_id'];
 
-	$group =& group_get_object($group_id);
-
+	$group = group_get_object($group_id);
 
 	//does group exist? do we get an object?
 	if (!$group || !is_object($group)) {

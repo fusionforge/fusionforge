@@ -319,7 +319,7 @@ function createArtifacts($at, $data, $hashrn, $hashlogin) {
  */
 function tracker_fill($trackers, $group_id, $users){
 
-	$group =& group_get_object($group_id);
+	$group = group_get_object($group_id);
 	if (!$group || !is_object($group)) {
 		print "error retrieving group from id";
 	} elseif ($group->isError()) {

@@ -21,7 +21,7 @@ class FRS {
     function __construct($frs, $group_id) {
         $this->frs = $frs;
         $this->group_id = $group_id;
-    	$group =& group_get_object($group_id);
+    	$group = group_get_object($group_id);
 		if (!$group || !is_object($group)) {
 			print "error retrieving group from id";
 		} elseif ($group->isError()) {

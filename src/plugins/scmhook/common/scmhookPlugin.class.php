@@ -43,7 +43,7 @@ class scmhookPlugin extends Plugin {
 			case 'scm_admin_page': {
 				$group_id = $params['group_id'];
 				$scm_plugin = $params['scm_plugin'];
-				$group = &group_get_object($group_id);
+				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name) && $scm_plugin) {
 					$this->displayScmHook($group_id, $scm_plugin);
 				}
@@ -55,7 +55,7 @@ class scmhookPlugin extends Plugin {
 			}
 			case 'artifact_extra_detail': {
 				$group_id = $params['group_id'];
-				$group = &group_get_object($group_id);
+				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
 					$this->artifact_extra_detail($params);
 				}
@@ -63,7 +63,7 @@ class scmhookPlugin extends Plugin {
 			}
 			case 'task_extra_detail': {
 				$group_id = $params['group_id'];
-				$group = &group_get_object($group_id);
+				$group = group_get_object($group_id);
 				if ($group->usesPlugin($this->name)) {
 					$this->task_extra_detail($params);
 				}
@@ -177,7 +177,7 @@ class scmhookPlugin extends Plugin {
 
 	function getAvailableHooks($group_id) {
 		$listScm = $this->getListLibraryScm();
-		$group = &group_get_object($group_id);
+		$group = group_get_object($group_id);
 		for ($i = 0; $i < count($listScm); $i++) {
 			if ($group->usesPlugin($listScm[$i])) {
 				return $this->getListLibraryHook($listScm[$i]);

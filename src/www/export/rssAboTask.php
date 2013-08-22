@@ -58,7 +58,7 @@ $group_id = $tinfo['group_id'];
 $group_project_id = $tinfo['group_project_id'];
 $project_task_id = $tinfo['project_task_id'];
 
-$objGroup =& group_get_object($group_id);
+$objGroup = group_get_object($group_id);
 if (!$objGroup || !is_object($objGroup)) {
 	exit_no_group();
 } elseif ($objGroup->isError()) {

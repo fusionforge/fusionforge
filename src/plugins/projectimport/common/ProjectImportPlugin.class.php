@@ -53,7 +53,7 @@ class ProjectImportPlugin extends Plugin {
 			}
 		} else */ if ($hookname == "groupmenu") {
 			$group_id=$params['group'];
-			$project = &group_get_object($group_id);
+			$project = group_get_object($group_id);
 			if (!$project || !is_object($project)) {
 				return;
 			}
@@ -75,7 +75,7 @@ class ProjectImportPlugin extends Plugin {
 			//Check if the group is active
 			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
 			$group_id=$params['group'];
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			echo "<tr>";
 			echo "<td>";
 			echo ' <input type="checkbox" name="use_projectimportplugin" value="1" ';
@@ -92,7 +92,7 @@ class ProjectImportPlugin extends Plugin {
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
 			$group_id=$params['group'];
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			$use_projectimportplugin = getStringFromRequest('use_projectimportplugin');
 			if ( $use_projectimportplugin == 1 ) {
 				$group->setPluginUse ( $this->name );
@@ -148,7 +148,7 @@ class ProjectImportPlugin extends Plugin {
 		} elseif ($hookname == "project_admin_plugins") {
 			// this displays the link in the project admin options page to it's  ProjectImport administration
 			$group_id = $params['group_id'];
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
 				echo util_make_link ("/plugins/projectimport/index.php?id=".$group->getID().'&type=admin&pluginname='.$this->name,
 						     _('View the ProjectImport Administration')).'<br />';

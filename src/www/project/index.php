@@ -36,7 +36,7 @@ if (!$group_id) {
 }
 
 if (isset ($sys_noforcetype) && $sys_noforcetype) {
-	$project = &group_get_object($group_id);
+	$project = group_get_object($group_id);
 	include $gfwww.'include/project_home.php';
 } else {
 	session_redirect('/projects/'. group_getunixname($group_id) .'/');

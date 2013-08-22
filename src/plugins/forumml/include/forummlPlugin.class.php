@@ -62,7 +62,7 @@ class ForumMLPlugin extends Plugin {
 			//Check if the group is active
 			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
 			$group_id=$params['group'];
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			echo "<tr>";
 			echo "<td>";
 			echo ' <input type="CHECKBOX" name="use_forummlplugin" value="1" ';
@@ -80,7 +80,7 @@ class ForumMLPlugin extends Plugin {
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
 			$group_id=$params['group'];
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			$use_mailmanplugin = getStringFromRequest('use_forummlplugin');
 			if ( $use_mailmanplugin == 1 ) {
 				$group->setPluginUse ( $this->name );
@@ -94,7 +94,7 @@ class ForumMLPlugin extends Plugin {
 			$request =& HTTPRequest::instance();
 			$group_id = (int) $request->get('group_id');
 			if ($group_id) {
-				$group =& group_get_object($group_id);
+				$group = group_get_object($group_id);
 				if ($group->usesPlugin('forumml')) {
 					if (isset($params['object'])) {
 						$searchManager = $params['object'];

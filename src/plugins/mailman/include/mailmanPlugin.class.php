@@ -81,7 +81,7 @@ class mailmanPlugin extends Plugin {
 			}
 		} elseif ($hookname == "groupmenu") {
 			$group_id=$params['group'];
-			$project = &group_get_object($group_id);
+			$project = group_get_object($group_id);
 			if (!$project || !is_object($project)) {
 				return;
 			}
@@ -101,7 +101,7 @@ class mailmanPlugin extends Plugin {
 			//Check if the group is active
 			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
 			$group_id=$params['group'];
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			echo "<tr>";
 			echo "<td>";
 			echo ' <input type="CHECKBOX" name="use_mailmanplugin" value="1" ';
@@ -119,7 +119,7 @@ class mailmanPlugin extends Plugin {
 		} elseif ($hookname == "groupisactivecheckboxpost") {
 			// this code actually activates/deactivates the plugin after the form was submitted in the project edit public info page
 			$group_id=$params['group'];
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			$use_mailmanplugin = getStringFromRequest('use_mailmanplugin');
 			if ( $use_mailmanplugin == 1 ) {
 				$group->setPluginUse ( $this->name );
@@ -141,7 +141,7 @@ class mailmanPlugin extends Plugin {
 		} elseif ($hookname == "project_admin_plugins") {
 			// this displays the link in the project admin options page to it's  mailman administration
 			$group_id = $params['group_id'];
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			if ( $group->usesPlugin ( $this->name ) ) {
 				echo '<p>'.util_make_link ("/plugins/".$this->name."/index.php?id=".$group->getID().'&amp;type=admin&amp;pluginname='.$this->name,
 									 _('View the mailman Administration')).'</p>';
@@ -188,7 +188,7 @@ class mailmanPlugin extends Plugin {
 		}
 		elseif ($hookname == "group_delete") {
 			$group_id = $params['group_id'];
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			$mlf = new MailmanListFactory($group);
 			$ml_arr =& $mlf->getMailmanLists();
 			for ($i=0; $i<count($ml_arr); $i++) {
@@ -205,7 +205,7 @@ class mailmanPlugin extends Plugin {
 		elseif ($hookname == "group_approve") {
 			$idadmin_group =$params[0];
 			$group_id=$params[1];
-			$group = &group_get_object($group_id);
+			$group = group_get_object($group_id);
 			$mlist = new MailmanList($group);
 			if (!$mlist->create('commits','Commits',1,$idadmin_group)) {
 				$this->setError(sprintf(_('ML: %s'),$mlist->getErrorMessage()));
