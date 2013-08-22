@@ -514,10 +514,19 @@ class admsswPlugin extends Plugin {
 		return $graph;
 	}
 	
+	/*
+	 * Returns the size of the pages for paged documents (project indexes or full projects dump)
+	 */
 	public function getPagingLimit() {
 		return self::$PAGING_LIMIT;
 	}
 	
+	/*
+	 * Process the paging parameters and eventually redirect, ala LDP
+	 * 
+	 * When there are too many projects to be displayed, it will redirect to the first page : ?page=1
+	 * This can be overriden with the ?allatonce parameter
+	 */
 	public function process_paging_params_or_redirect($projectsnum, $pl) { 
 		
 		$p = getIntFromRequest('page', 0);
@@ -549,16 +558,15 @@ class admsswPlugin extends Plugin {
 	
 	
 	/**
-	 * Provides an HTML preview of the ADMS.SW SoftwareRepository meta-data looking like turtle
+	 * Provides either an HTML preview looking like turtle, or plain RDF of the ADMS.SW SoftwareRepository meta-data
 	 * 
-	 * @param int $group_id
+	 * @param	string	URL of the RDF document
+	 * @param	string	expected content type for the document
+	 * @param	int		page number. If null, means no paging but full document
+	 * @param	int		page length : how many projects per page
+	 * @param	bool	if has to provide full details about projects
+	 * @param	string	URL of the HTML script if different than the RDF document   
 	 */
-// 	public function htmlPreviewProjectsAsTurtle($documenturi) {
-// 		$graph = $this->getProjectListResourcesGraph($documenturi);
-		
-// 		return $graph->dump();
-// 	}
-	
 	public function getProjectsListDisplay($documenturi, $content_type, $p, $pl, $detailed=false, $scripturl=false) {
 		
 		$doc = '';
@@ -609,7 +617,6 @@ class admsswPlugin extends Plugin {
 		
 			// We can support only RDF as RDF+XML or Turtle
 			if ($content_type == 'text/turtle' || $content_type == 'application/rdf+xml') {
-				//header('Content-type: '. $content_type);
 				if ($content_type == 'text/turtle') {
 					$doc = $graph->serialize($serializer="Turtle")."\n";
 				}
@@ -624,8 +631,6 @@ class admsswPlugin extends Plugin {
 			}
 		} else {
 			// HTML
-//			$HTML->header(array('title'=>_('Full ADMS.SW export'),'pagename'=>'admssw_full'));
-			//$HTML->printSoftwareMapLinks();
 		
 			$doc = '<p>'. _('The following is a preview of (machine-readable) RDF meta-data, in Turtle format (see at the bottom for more details)') .'<br />';
 		
@@ -657,6 +662,8 @@ class admsswPlugin extends Plugin {
 	 * Outputs the public projects list as ADMS.SW for /projects
 	 * 
 	 * @param unknown_type $params
+	 * 
+	 * This has a counterpart in /plugins/admssw/projectsturtle.php which previews the Turtle as HTML
 	 */
 	public function content_negociated_projects_list (&$params) {
 		
@@ -681,17 +688,6 @@ class admsswPlugin extends Plugin {
  			$doc = $this->getProjectsListDisplay($documenturi, $accept, $p, $pl);
  			
  			$params['content'] = $doc . "\n";
- 			
-// 			$graph = $this->getProjectListResourcesGraph(util_make_url ("/projects"));
-						
-// 			if ($accept == 'text/turtle') {
-// 				$doc = $graph->serialize($serializer="Turtle");
-// 			}
-// 			if ($accept == 'application/rdf+xml') {
-// 				$doc = $graph->serialize();
-// 			}
-			
-// 			$params['content'] = $doc . "\n";
 		
  		}
 	}

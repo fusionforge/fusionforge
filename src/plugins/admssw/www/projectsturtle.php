@@ -22,16 +22,19 @@
 
 require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
-require_once $gfwww.'include/trove.php';
 
-/* FIXME
-* Parameters:
-*   $gwords     = target words to search
-*   $gexact     = 1 for search ing all words (AND), 0 - for any word (OR)
-*   $otherfreeknowledge = 1 for search in Free/Libre Knowledge Gforge Initiatives
-*   $order = "project_title" or "title"    -  criteria for ordering results: if empty or not allowed results are ordered by rank
-*
-*/
+// Dumps an HTML preview of the Turtle RDF document for an index of public projects
+
+// The script will paginate the contents (with the same page size than in the softwaremap/trove)
+// redirecting if necessary to ?page=1
+// This can be overriden with ?allatonce
+
+// The RDF version is available at /projects/.
+
+// This script is the counterpart, with only un index of projects, of an other lists of projects
+// with full details which can be accessed in /plugins/admssw/full.php
+
+
 
 $pluginname = 'admssw';
 
@@ -44,20 +47,15 @@ $documenturi = util_make_url('/projects/');
 $scripturl = util_make_url('/plugins/'. $plugin->name .'/projectsturtle.php');
 
 // page length
-$pl = $TROVE_BROWSELIMIT;
+$pl = $plugin->getPagingLimit();
 
 $projectsnum = $plugin->getProjectListSize();
 
 $p = $plugin->process_paging_params_or_redirect($projectsnum, $pl);
 
-print $plugin->getProjectsListDisplay($documenturi, 'text/html', $p, $pl, false, $scripturl);
-
-// echo '<p>'. sprintf( _('The following is a preview of the (machine-readable) RDF meta-data which can be obtained at <tt>%1$s</tt> as Turtle'), util_make_url('/projects/')) .'</p>';
-
-// echo $plugin->htmlPreviewProjectsAsTurtle(util_make_url ("/projects"));
-
-// echo _('To access this RDF document, you may use, for instance :<br />');
-// echo '<tt>$ curl -H "Accept: text/turtle" '. util_make_url('/projects/') .'</tt><br />';
+// We don't want full details about the projects, just an index
+$detailed = false;
+print $plugin->getProjectsListDisplay($documenturi, 'text/html', $p, $pl, $detailed, $scripturl);
 
 $HTML->footer(array());
 
