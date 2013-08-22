@@ -71,7 +71,7 @@ $html_limit .= sprintf(_('<strong>%1$s</strong> projects in result set.'), $quer
 
 // only display pages stuff if there is more to display
 if ($querytotalcount > $TROVE_BROWSELIMIT) {
-	$html_limit .= trove_html_limit_navigation_box($_SERVER['PHP_SELF'], $querytotalcount, $TROVE_BROWSELIMIT, $page);
+	$html_limit .= html_trove_limit_navigation_box($_SERVER['PHP_SELF'], $querytotalcount, $TROVE_BROWSELIMIT, $page);
 }
 
 $html_limit .= '</span>';
