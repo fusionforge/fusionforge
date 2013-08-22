@@ -132,14 +132,27 @@ if($content_type != $default_content_type) {
 	$HTML->header(array('title'=>_('Full ADMS.SW export'),'pagename'=>'admssw_full'));
 	$HTML->printSoftwareMapLinks();
 	
-	echo '<p>'. _('This script is meant to produce machine-readable RDF meta-data, in Turtle or RDF/XML formats, which can be obtained with, for instance:').'<br />';
+	echo '<p>'. sprintf( _('This script is meant to produce machine-readable RDF meta-data, in Turtle or RDF/XML formats, which can be obtained at <tt>%1$s</tt> as Turtle'), $documenturi).'<br />';
 	
-	$graph = $plugin->getProjectListResourcesGraph(util_make_url('/plugins/'.$pluginname.'/full.php'), true);
+	$html_limit = '<span style="text-align:center;font-size:smaller">';
+	$html_limit .= sprintf(_('<strong>%1$s</strong> projects in result set.'), $projectsnum);
+	// only display pages stuff if there is more to display
+	if ($projectsnum > $pl) {
+		$html_limit .= trove_html_limit_navigation_box($documenturi, $projectsnum, $pl, $p);
+	}
+	$html_limit .= '</span>';
+	
+	print $html_limit;
 	
 	print $graph->dump();
 	
 	echo _('To access this RDF document, you may use, for instance :<br />');
-	echo '<tt>$ curl -H "Accept: text/turtle" '. util_make_url('/plugins/'.$pluginname.'/full.php') .'</tt>';
+	echo '<tt>$ curl -L -H "Accept: text/turtle" '. $documenturi .'</tt><br />';
+	
+	echo _('This may redirect to several pages documents in case of too big number of results (observing the LDP paging specifications).<br /><br />');
+	
+	echo _('Alternatively, if you are sure you want the full dump in one single document, use :<br />');
+	echo '<tt>$ curl -H "Accept: text/turtle" "'. $documenturi .'?allatonce"</tt>';
 	
 	$HTML->footer(array());
 }
