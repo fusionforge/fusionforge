@@ -58,7 +58,8 @@ class admsswPlugin extends Plugin {
 				'adms' => 'http://www.w3.org/ns/adms#',
 				'foaf' => 'http://xmlns.com/foaf/0.1/',
 				'schema' => 'http://schema.org/',
-				'rad' => 'http://www.w3.org/ns/rad#'
+				'rad' => 'http://www.w3.org/ns/rad#',
+				'ldp' => 'http://www.w3.org/ns/ldp#'
 		);
 		
 		//$this->trovecat_id_index = array();
@@ -157,7 +158,7 @@ class admsswPlugin extends Plugin {
 	 * 
 	 * @return array the namespaces associative array
 	 */
-	private function admsswNameSpaces() {
+	public function admsswNameSpaces() {
 		return $this->ns;
 	}
 	
@@ -423,12 +424,23 @@ class admsswPlugin extends Plugin {
 	//
 	
 	/**
+	 * Returns the number of projects in a project index
+	 */
+	public function getProjectListSize() {
+		// same as for trove's full list
+ 		$projects = get_public_active_projects_asc();
+		return count($projects);
+	}
+		
+	/**
 	 * Provides a Graphite graph for resource(s) representing the ADMS.SW SoftwareRepository
 	 * 
 	 * @param string URI of the document to use
 	 * @param bool are projects to be fully described or just a URI of their resource
+	 * @param $chunk number of the chunk to be returned in case of paging
+	 * @param $chunksize size of chunks in case of paging
 	 */
-    public function getProjectListResourcesGraph($documenturi, $detailed=false) {
+    public function getProjectListResourcesGraph($documenturi, $detailed=false, $chunk=null, $chunksize=null) {
 		
     	// Construct an ARC2_Resource containing the project's RDF (DOAP) description
 		$ns = $this->admsswNameSpaces();
@@ -453,6 +465,17 @@ class admsswPlugin extends Plugin {
 			
 		// same as for trove's full list
 		$projects = get_public_active_projects_asc();
+		
+		
+		if ( isset($chunk) && isset($chunksize) ) {
+			// TODO : do some checks on $chunk $chunksize values
+			// 			if ( ($chunk < 1) && ($chunksize >= 1) ) {
+			// 				// error		
+			// 			}
+			$projects_chunks = array_chunk($projects, $chunksize);
+			$projects = $projects_chunks[$chunk-1];
+		}
+		
 		$proj_uris = array();
 		foreach ($projects as $row_grp) {
 			$proj_uri = util_make_url_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id']).'#project';
