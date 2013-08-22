@@ -74,22 +74,7 @@ $html_limit .= ' ';
 
 // only display pages stuff if there is more to display
 if ($querytotalcount > $TROVE_BROWSELIMIT) {
-	$html_limit .= sprintf(_(' Displaying %1$s per page. Projects sorted by alphabetical order.'), $TROVE_BROWSELIMIT).'<br/>';
-
-	// display all the numbers
-	for ($i=1;$i<=ceil($querytotalcount/$TROVE_BROWSELIMIT);$i++) {
-		$html_limit .= ' ';
-		if ($page != $i) {
-			$html_limit .= '<a href="'.$_SERVER['PHP_SELF'];
-			$html_limit .= '?page='.$i;
-			$html_limit .= '">';
-		} else $html_limit .= '<strong>';
-		$html_limit .= '&lt;'.$i.'&gt;';
-		if ($page != $i) {
-			$html_limit .= '</a>';
-		} else $html_limit .= '</strong>';
-		$html_limit .= ' ';
-	}
+	$html_limit .= trove_html_limit_navigation_box($_SERVER['PHP_SELF'], $querytotalcount, $TROVE_BROWSELIMIT, $page);
 }
 
 print $html_limit."<hr />\n";

@@ -432,6 +432,28 @@ function trove_del_cat_id($node) {
         }
 }
 
+function trove_html_limit_navigation_box($php_self, $querytotalcount, $trove_browselimit, $page) {
+	
+	$html_limit = sprintf(_(' Displaying %1$s per page. Projects sorted by alphabetical order.'), $trove_browselimit).'<br/>';
+	
+	// display all the numbers
+	for ($i=1;$i<=ceil($querytotalcount/$trove_browselimit);$i++) {
+		$html_limit .= ' ';
+		if ($page != $i) {
+			$html_limit .= '<a href="'.$php_self;
+			$html_limit .= '?page='.$i;
+			$html_limit .= '">';
+		} else $html_limit .= '<strong>';
+		$html_limit .= '&lt;'.$i.'&gt;';
+		if ($page != $i) {
+			$html_limit .= '</a>';
+		} else $html_limit .= '</strong>';
+		$html_limit .= ' ';
+	}
+	return $html_limit;
+}
+
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"
