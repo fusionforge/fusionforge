@@ -432,6 +432,14 @@ function trove_del_cat_id($node) {
         }
 }
 
+/**
+ * trove_html_limit_navigation_box() - displays the navigation links for paging browsing
+ *
+ * @param		string		URL of the very same script
+ * @param		int			total number of results
+ * @param		int			the maximum number displayed on a single page
+ * @param		int			current page number (starting at 1)
+ */
 function trove_html_limit_navigation_box($php_self, $querytotalcount, $trove_browselimit, $page) {
 	
 	$html_limit = sprintf(_(' Displaying %1$s per page. Projects sorted by alphabetical order.'), $trove_browselimit).'<br/>';
