@@ -168,7 +168,7 @@ class ProjectTask extends Error {
 		} else {
 			$uid = user_getid();
 		}
-		
+
 		db_begin();
 		$res = db_query_params ('SELECT nextval($1) AS id',
 					array ('project_task_pk_seq'));
@@ -438,7 +438,7 @@ class ProjectTask extends Error {
 				db_query_params ('SELECT agl.group_id,agl.name,agl.group_artifact_id,a.artifact_id,a.open_date,a.summary,ast.status_name
 			FROM artifact_group_list agl, artifact a, artifact_status ast
 			WHERE a.group_artifact_id=agl.group_artifact_id
-                        AND ast.id=a.status_id
+				AND ast.id=a.status_id
 			AND EXISTS (SELECT artifact_id FROM project_task_artifact
 				WHERE artifact_id=a.artifact_id
 				AND project_task_id=$1)',
@@ -590,7 +590,7 @@ class ProjectTask extends Error {
 		FROM project_task
 		WHERE group_project_id=$1
 		AND project_task_id <> $2
-                ORDER BY project_task_id DESC',
+				ORDER BY project_task_id DESC',
 						array ($this->ProjectGroup->getID(),
 						       $this->getID())) ;
 		} else {
@@ -719,7 +719,7 @@ class ProjectTask extends Error {
 		//for msproject users - ms project has more complex logic than gforge
 		return true;
 
-        /*
+		/*
 		if ($depend_on_id == $original_id) {
 			$this->setError(_('Circular Dependency Detected\''));
 	 		return false;
@@ -737,7 +737,7 @@ class ProjectTask extends Error {
 			}
 		}
 		return true;
-        */
+		*/
 	}
 
 	/**
@@ -849,7 +849,7 @@ class ProjectTask extends Error {
 	 * setAssignedTo - takes an array of user_id's and builds assignments.
 	 *
 	 * @param	array	The array of user_id's.
-     * @return	boolean	success.
+	 * @return	boolean	success.
 	 */
 	function setAssignedTo(&$arr) {
 		$arr2 = $this->getAssignedTo();
