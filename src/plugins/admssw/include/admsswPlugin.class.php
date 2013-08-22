@@ -512,6 +512,44 @@ class admsswPlugin extends Plugin {
 		return $graph;
 	}
 	
+	public function proces_paging_params_or_redirect($projectsnum, $pl) { 
+		
+		$p = 0;
+		if ( null !== getStringFromRequest('theFirstPage', null)) {
+			$p = 1;
+		}
+		else {
+			$p = getIntFromRequest('page', 0);
+			if ($p > 0) {
+			}
+		}
+		
+		if ( null !== getStringFromRequest('allatonce', null)) {
+			$pl = $projectsnum + 1;
+			$p = 0;
+		}
+		
+		// force paging if too many projects
+		if ( ($projectsnum > $pl) && ! ($p > 0) ) {
+			header("Location: ?theFirstPage");
+			header($_SERVER["SERVER_PROTOCOL"]." 303 See Other",true,303);
+			exit;
+		}
+		
+		// if paging is requested
+		if ($p > 0) {
+			$maxpage = (int) ($projectsnum / $pl);
+			if ($p > $maxpage) {
+				header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found",true,404);
+				printf("Page %d requested is beyond the maximum %d !", $p, $maxpage);
+				exit;
+			}
+		}
+		
+		return $p;
+	}
+	
+	
 	/**
 	 * Provides an HTML preview of the ADMS.SW SoftwareRepository meta-data looking like turtle
 	 * 

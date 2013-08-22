@@ -39,57 +39,27 @@ $pl = $TROVE_BROWSELIMIT;
 
 $uricomplement = '';
 
-$p = 0;
-if ( null !== getStringFromRequest('theFirstPage', null)) {
-	$p = 1;
-	$uricomplement = '?theFirstPage';
-}
-else {
-	$p = getIntFromRequest('page', 0);
-	if ($p > 0) {
-		$uricomplement = '?page=' . $p;
-	}
-}
-
 $projectsnum = $plugin->getProjectListSize();
 
-if ( null !== getStringFromRequest('allatonce', null)) {
-	$pl = $projectsnum + 1;
-	$p = 0;
+$p = $plugin->proces_paging_params_or_redirect($projectsnum, $pl);
+
+$documenturi = util_make_url('/plugins/'.$pluginname.'/full.php');
+$pageuri = '';
+
+$chunksize = null;
+$chunk = null;
+// if paging is requested
+if ($p > 0) {
+	$chunksize = $pl;
+	$chunk = $p;
+	$pageuri = $documenturi . $uricomplement;
 }
 
-// force paging if too many projects
-if ( ($projectsnum > $pl) && ! ($p > 0) ) {
-//	$p = 1;
-	header("Location: ?theFirstPage");
-	header($_SERVER["SERVER_PROTOCOL"]." 303 See Other",true,303);
- 	exit;
-}
+// process as in content_negociated_projects_list but with full details
+$graph = $plugin->getProjectListResourcesGraph($documenturi, true, $chunk, $chunksize);
 
 // if not HTML
 if($content_type != $default_content_type) {
-
-	$chunksize = null;
-	$chunk = null;
-
-	$documenturi = util_make_url('/plugins/'.$pluginname.'/full.php');
-	$pageuri = '';
-	
-	// if paging is requested
-	if ($p > 0) {
-		$maxpage = (int) ($projectsnum / $pl);
-		if ($p > $maxpage) {
-			header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found",true,404);
-			printf("Page %d requested is beyond the maximum %d !", $p, $maxpage);
-			exit;
-		}
-		$chunksize = $pl;
-		$chunk = $p;
-		$pageuri = $documenturi . $uricomplement;
-	}
-	
-	// process as in content_negociated_projects_list but with full details
-	$graph = $plugin->getProjectListResourcesGraph($documenturi, true, $chunk, $chunksize);
 
 	if ($p > 0) {
 		$ns = $plugin->admsswNameSpaces();
