@@ -76,14 +76,14 @@ if (!$group_id || !$group_project_id) {
 	exit_missing_param($redirect_url,$missing_params,'pm');
 }
 
-$g = group_get_object($group_id);
-if (!$g || !is_object($g)) {
+$group = group_get_object($group_id);
+if (!$group || !is_object($group)) {
 	exit_no_group();
-} elseif ($g->isError()) {
-	exit_error($g->getErrorMessage(),'pm');
+} elseif ($group->isError()) {
+	exit_error($group->getErrorMessage(),'pm');
 }
 
-$pg = new ProjectGroupHTML($g,$group_project_id);
+$pg = new ProjectGroupHTML($group,$group_project_id);
 if (!$pg || !is_object($pg)) {
 	exit_error(_('Could Not Get Factory'),'pm');
 } elseif ($pg->isError()) {
