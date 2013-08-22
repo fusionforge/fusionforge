@@ -19,8 +19,11 @@
 
 global $gfplugins;
 require_once $gfplugins.'admssw/include/admsswPlugin.class.php' ;
+require_once $gfwww.'include/trove.php';
 
 $admsswPluginObject = new admsswPlugin ;
+
+admsswPlugin::$PAGING_LIMIT = $TROVE_BROWSELIMIT;
 
 register_plugin ($admsswPluginObject) ;
 

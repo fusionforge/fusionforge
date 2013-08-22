@@ -34,6 +34,8 @@ include_once("Graphite.php");
 
 class admsswPlugin extends Plugin {
 	
+	public static $PAGING_LIMIT = 10;
+		
 	//var $trovecat_id_index; // cat_id to TroveCat instances
 	var $trovecat_id_to_shortname;	// cat_id to shortname
 	var $trovecat_id_to_path; // cat_id to path
@@ -512,17 +514,13 @@ class admsswPlugin extends Plugin {
 		return $graph;
 	}
 	
-	public function proces_paging_params_or_redirect($projectsnum, $pl) { 
+	public function getPagingLimit() {
+		return self::$PAGING_LIMIT;
+	}
+	
+	public function process_paging_params_or_redirect($projectsnum, $pl) { 
 		
-		$p = 0;
-		if ( null !== getStringFromRequest('theFirstPage', null)) {
-			$p = 1;
-		}
-		else {
-			$p = getIntFromRequest('page', 0);
-			if ($p > 0) {
-			}
-		}
+		$p = getIntFromRequest('page', 0);
 		
 		if ( null !== getStringFromRequest('allatonce', null)) {
 			$pl = $projectsnum + 1;
@@ -531,7 +529,7 @@ class admsswPlugin extends Plugin {
 		
 		// force paging if too many projects
 		if ( ($projectsnum > $pl) && ! ($p > 0) ) {
-			header("Location: ?theFirstPage");
+			header("Location: ?page=1");
 			header($_SERVER["SERVER_PROTOCOL"]." 303 See Other",true,303);
 			exit;
 		}
@@ -555,10 +553,104 @@ class admsswPlugin extends Plugin {
 	 * 
 	 * @param int $group_id
 	 */
-	public function htmlPreviewProjectsAsTurtle() {
-		$graph = $this->getProjectListResourcesGraph(util_make_url ("/projects"));
+// 	public function htmlPreviewProjectsAsTurtle($documenturi) {
+// 		$graph = $this->getProjectListResourcesGraph($documenturi);
 		
-		return $graph->dump();
+// 		return $graph->dump();
+// 	}
+	
+	public function getProjectsListDisplay($documenturi, $content_type, $p, $pl, $detailed=false, $scripturl=false) {
+		
+		$doc = '';
+		
+		if(! $scripturl) {
+			$scripturl = $documenturi;
+		}
+		
+		$pageuri = '';
+		$chunksize = null;
+		$chunk = null;
+		// if paging is requested
+		if ($p > 0) {
+			$chunksize = $pl;
+			$chunk = $p;
+			$pageuri = $documenturi . '?page='. (string)$p;
+		}
+		
+		$projectsnum = $this->getProjectListSize();
+		
+		// process as in content_negociated_projects_list but with full details
+		$graph = $this->getProjectListResourcesGraph($documenturi, $detailed, $chunk, $chunksize);
+		
+		// if not HTML
+		if($content_type != 'text/html') {
+		
+			if ($p > 0) {
+				$ns = $this->admsswNameSpaces();
+				$conf = array(
+						'ns' => $ns
+				);
+		
+				$res = ARC2::getResource($conf);
+				$res->setURI( $pageuri );
+				rdfutils_setPropToUri($res, 'rdf:type', 'ldp:Page');
+		
+				if($p < ( (int) ($projectsnum / $pl) ) ) {
+					$nextpageuri = $documenturi . '?page=' . (string) ($p + 1);
+					rdfutils_setPropToUri($res, 'ldp:nextPage', $nextpageuri);
+				}
+				else {
+					rdfutils_setPropToUri($res, 'ldp:nextPage', 'rdf:nil');
+				}
+				rdfutils_setPropToUri($res, 'ldp:pageOf', $documenturi);
+		
+				$count = $graph->addTriples( ARC2::getTriplesFromIndex($res->index) );
+			}
+		
+			// We can support only RDF as RDF+XML or Turtle
+			if ($content_type == 'text/turtle' || $content_type == 'application/rdf+xml') {
+				//header('Content-type: '. $content_type);
+				if ($content_type == 'text/turtle') {
+					$doc = $graph->serialize($serializer="Turtle")."\n";
+				}
+				if ($content_type == 'application/rdf+xml') {
+					$doc = $graph->serialize()."\n";
+				}
+			}
+			else {
+				header('HTTP/1.1 406 Not Acceptable',true,406);
+				print $graph->dumpText();
+				exit(0);
+			}
+		} else {
+			// HTML
+//			$HTML->header(array('title'=>_('Full ADMS.SW export'),'pagename'=>'admssw_full'));
+			//$HTML->printSoftwareMapLinks();
+		
+			$doc = '<p>'. _('The following is a preview of (machine-readable) RDF meta-data, in Turtle format (see at the bottom for more details)') .'<br />';
+		
+			$html_limit = '<span style="text-align:center;font-size:smaller">';
+			$html_limit .= sprintf(_('<strong>%1$s</strong> projects in result set.'), $projectsnum);
+			// only display pages stuff if there is more to display
+			if ($projectsnum > $pl) {
+				$html_limit .= trove_html_limit_navigation_box($scripturl, $projectsnum, $pl, $p);
+			}
+			$html_limit .= '</span>';
+		
+			$doc .= $html_limit;
+		
+			$doc .= $graph->dump();
+		
+			$doc .= _('To access this RDF document, you may use, for instance :<br />');
+			$doc .= '<tt>$ curl -L -H "Accept: text/turtle" '. $documenturi .'</tt><br />';
+		
+			$doc .= _('This may redirect to several pages documents in case of too big number of results (observing the LDP paging specifications).<br /><br />');
+		
+			$doc .= _('Alternatively, if you are sure you want the full dump in one single document, use :<br />');
+			$doc .= '<tt>$ curl -H "Accept: text/turtle" "'. $documenturi .'?allatonce"</tt>';
+		
+		}
+		return $doc;
 	}
 	
 	/**
@@ -568,27 +660,40 @@ class admsswPlugin extends Plugin {
 	 */
 	public function content_negociated_projects_list (&$params) {
 		
+		
 		$accept = $params['accept'];
 		
 		// we are asked for RDF either as RDF+XML or Turtle
 		if($accept == 'application/rdf+xml' || $accept == 'text/turtle') {
-				
-				
-			// We will return RDF
-			$params['content_type'] = $accept;
-	
-			$graph = $this->getProjectListResourcesGraph(util_make_url ("/projects"));
+								
+ 			// We will return RDF
+ 			$params['content_type'] = $accept;
+
+ 			$documenturi = util_make_url ("/projects");
+ 			
+ 			// page length
+ 			$pl = admsswPlugin::$PAGING_LIMIT;
+ 			
+ 			$projectsnum = $this->getProjectListSize();
+ 			
+ 			$p = $this->process_paging_params_or_redirect($projectsnum, $pl);
+ 			
+ 			$doc = $this->getProjectsListDisplay($documenturi, $accept, $p, $pl);
+ 			
+ 			$params['content'] = $doc . "\n";
+ 			
+// 			$graph = $this->getProjectListResourcesGraph(util_make_url ("/projects"));
 						
-			if ($accept == 'text/turtle') {
-				$doc = $graph->serialize($serializer="Turtle");
-			}
-			if ($accept == 'application/rdf+xml') {
-				$doc = $graph->serialize();
-			}
+// 			if ($accept == 'text/turtle') {
+// 				$doc = $graph->serialize($serializer="Turtle");
+// 			}
+// 			if ($accept == 'application/rdf+xml') {
+// 				$doc = $graph->serialize();
+// 			}
 			
-			$params['content'] = $doc . "\n";
+// 			$params['content'] = $doc . "\n";
 		
-		}
+ 		}
 	}
 	
 	
@@ -870,6 +975,7 @@ class admsswPlugin extends Plugin {
 		}
 	}
 }
+
 
 // Local Variables:
 // mode: php

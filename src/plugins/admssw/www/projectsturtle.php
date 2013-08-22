@@ -22,6 +22,7 @@
 
 require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
+require_once $gfwww.'include/trove.php';
 
 /* FIXME
 * Parameters:
@@ -39,12 +40,24 @@ $HTML->printSoftwareMapLinks();
 
 $plugin = plugin_get_object ($pluginname);
 
-echo '<p>'. sprintf( _('The following is a preview of the (machine-readable) RDF meta-data which can be obtained at <tt>%1$s</tt> as Turtle'), util_make_url('/projects/')) .'</p>';
+$documenturi = util_make_url('/projects/');
+$scripturl = util_make_url('/plugins/'. $plugin->name .'/projectsturtle.php');
 
-echo $plugin->htmlPreviewProjectsAsTurtle();
+// page length
+$pl = $TROVE_BROWSELIMIT;
 
-echo _('To access this RDF document, you may use, for instance :<br />');
-echo '<tt>$ curl -H "Accept: text/turtle" '. util_make_url('/projects/') .'</tt><br />';
+$projectsnum = $plugin->getProjectListSize();
+
+$p = $plugin->process_paging_params_or_redirect($projectsnum, $pl);
+
+print $plugin->getProjectsListDisplay($documenturi, 'text/html', $p, $pl, false, $scripturl);
+
+// echo '<p>'. sprintf( _('The following is a preview of the (machine-readable) RDF meta-data which can be obtained at <tt>%1$s</tt> as Turtle'), util_make_url('/projects/')) .'</p>';
+
+// echo $plugin->htmlPreviewProjectsAsTurtle(util_make_url ("/projects"));
+
+// echo _('To access this RDF document, you may use, for instance :<br />');
+// echo '<tt>$ curl -H "Accept: text/turtle" '. util_make_url('/projects/') .'</tt><br />';
 
 $HTML->footer(array());
 
