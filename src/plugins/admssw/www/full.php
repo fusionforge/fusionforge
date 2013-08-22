@@ -22,6 +22,7 @@
 	
 require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
+require_once $gfwww.'include/trove.php';
 
 $pluginname = 'admssw';
 
@@ -34,7 +35,7 @@ $content_type = util_negociate_alternate_content_types($script, $default_content
 $plugin = plugin_get_object($pluginname);
 
 // page length
-$pl = 3;
+$pl = $TROVE_BROWSELIMIT;
 
 $uricomplement = '';
 
@@ -44,13 +45,18 @@ if ( null !== getStringFromRequest('theFirstPage', null)) {
 	$uricomplement = '?theFirstPage';
 }
 else {
-	$p = getIntFromRequest('p', 0);
+	$p = getIntFromRequest('page', 0);
 	if ($p > 0) {
-		$uricomplement = '?p=' . $p;
+		$uricomplement = '?page=' . $p;
 	}
 }
 
 $projectsnum = $plugin->getProjectListSize();
+
+if ( null !== getStringFromRequest('allatonce', null)) {
+	$pl = $projectsnum + 1;
+	$p = 0;
+}
 
 // force paging if too many projects
 if ( ($projectsnum > $pl) && ! ($p > 0) ) {
@@ -96,7 +102,7 @@ if($content_type != $default_content_type) {
 		rdfutils_setPropToUri($res, 'rdf:type', 'ldp:Page');
 		
 		if($p < ( (int) ($projectsnum / $pl) ) ) {
-			$nextpageuri = $documenturi . '?p=' . (string) ($p + 1);
+			$nextpageuri = $documenturi . '?page=' . (string) ($p + 1);
 			rdfutils_setPropToUri($res, 'ldp:nextPage', $nextpageuri);
 		}
 		else {
