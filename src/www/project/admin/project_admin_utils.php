@@ -132,7 +132,7 @@ AND group_id=$1 ORDER BY group_history.adddate DESC", array($group_id));
 }
 
 function group_add_history ($field_name,$old_value,$group_id) {
-	$group=group_get_object($group_id);
+	$group = group_get_object($group_id);
 	$group->addHistory($field_name,$old_value);
 }
 

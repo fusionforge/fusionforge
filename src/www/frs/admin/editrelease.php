@@ -40,7 +40,7 @@ if (!$package_id || !$release_id) {
 	session_redirect('/frs/admin/?group_id='.$group_id);
 }
 
-$group=group_get_object($group_id);
+$group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_no_group();
 } elseif ($group->isError()) {

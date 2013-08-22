@@ -128,15 +128,15 @@ function &group_get_active_projects() {
 }
 
 function &group_get_all_projects() {
-	$res=db_query_params ('SELECT group_id FROM groups',
-			      array ()) ;
-	return group_get_objects (util_result_column_to_array($res,0)) ;
+	$res = db_query_params ('SELECT group_id FROM groups',
+			      array ());
+	return group_get_objects(util_result_column_to_array($res,0)) ;
 }
 
 function &group_get_template_projects() {
-	$res=db_query_params ('SELECT group_id FROM groups WHERE is_template=1 AND status != $1',
-			      array ('D')) ;
-	return group_get_objects (util_result_column_to_array($res,0)) ;
+	$res = db_query_params('SELECT group_id FROM groups WHERE is_template=1 AND status != $1',
+			      array ('D'));
+	return group_get_objects(util_result_column_to_array($res,0)) ;
 }
 
 function &group_get_object_by_name($groupname) {

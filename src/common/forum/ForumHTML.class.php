@@ -116,7 +116,7 @@ function forum_header($params) {
 				$menu_links[]='/forum/admin/?group_id='.$group_id;
 			}
 		} else {
-			$gg=group_get_object($group_id);
+			$gg = group_get_object($group_id);
 			if (forge_check_perm ('forum_admin', $group_id)) {
 				$menu_text[]=_('Administration');
 				$menu_links[]='/forum/admin/?group_id='.$group_id;

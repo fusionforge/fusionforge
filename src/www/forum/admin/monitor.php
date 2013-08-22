@@ -35,7 +35,7 @@ require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML in
 
 $group_id = getIntFromRequest('group_id');
 $group_forum_id = getIntFromRequest('group_forum_id');
-$g=group_get_object($group_id);
+$g = group_get_object($group_id);
 $f = new Forum ($g,$group_forum_id);
 if (!$f || !is_object($f)) {
 	exit_error(_('Could Not Get Forum Object'),'forums');
