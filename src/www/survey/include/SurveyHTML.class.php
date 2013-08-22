@@ -188,7 +188,7 @@ class SurveyHTML extends Error {
 		$ret.='<input type="hidden" name="survey_id" value="'.$survey_id.'" />';
 		$ret.='<input type="hidden" name="survey_questions" value="'.$survey_questions.'" />';
 		$ret.='<input type="hidden" name="form_key" value="' . form_generate_key() . '" />';
-		$ret.='<strong>'. _('Survey Title: ').'</strong>' .utils_requiredField();
+		$ret.='<strong>'._('Survey Title')._(':').'</strong>'.utils_requiredField();
 		$ret.= '<input required="required" type="text" name="survey_title" value="'.$survey_title.'" size="60" maxlength="150" /></p>';
 
 		$ret.='<p><strong>'. _('Is Active?').'</strong>';
