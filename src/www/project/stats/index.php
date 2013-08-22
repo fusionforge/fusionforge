@@ -84,6 +84,10 @@ if ($SPAN && !is_numeric($SPAN)) { $SPAN = 1; }
 if ($start && !is_numeric($start)) { $start = false; }
 if ($end && !is_numeric($end)) { $end = false; }
 
+if (!$group->usesStats()) {
+	exit_disabled('activity');
+}
+
 html_use_jqueryjqplotpluginCanvas();
 html_use_jqueryjqplotpluginhighlighter();
 html_use_jqueryjqplotplugindateAxisRenderer();
@@ -95,17 +99,19 @@ project_admin_header(array('title'=>_('Project Statistics').'','group'=>$group_i
 // BEGIN PAGE CONTENT CODE
 //
 ?>
-<div align="center">
-
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
-<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
-<table><tr>
-<td><strong><?php echo _('Areas'); ?>:</strong><br /><?php echo report_area_box('area',$area,$group); ?></td>
-<td><strong><?php echo _('Type'); ?>:</strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
-<td><strong><?php echo _('Start Date'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
-<td><strong><?php echo _('End Date'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" /></td>
-</tr></table>
+<table class="centered">
+<tr>
+<td><strong><?php echo _('Areas')._(':'); ?></strong><br /><?php echo report_area_box('area',$area,$group); ?></td>
+<td><strong><?php echo _('Type')._(':'); ?></strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
+<td><strong><?php echo _('Start Date')._(':'); ?></strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
+<td><strong><?php echo _('End Date')._(':'); ?></strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
+<td>
+	<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
+	<input type="submit" name="submit" value="<?php echo _('Refresh'); ?>" />
+</td>
+</tr>
+</table>
 </form>
 <p>
 <?php
@@ -118,7 +124,6 @@ if ($start == $end) {
 }
 ?>
 </p>
-</div>
 <?php
 
 site_project_footer( array() );
