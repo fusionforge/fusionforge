@@ -207,7 +207,7 @@ class RBACEngine extends Error implements PFO_RBACEngine {
 		switch ($class_id) {
 		case 'PFO_RoleExplicit':
 			$group_id = db_result ($res, 0, 'home_group_id') ;
-			$group = group_get_object ($group_id) ;
+			$group = group_get_object($group_id) ;
 			$this->_cached_roles[$role_id] = new Role ($group, $role_id) ;
 			return $this->_cached_roles[$role_id] ;
 		case 'PFO_RoleAnonymous':

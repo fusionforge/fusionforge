@@ -30,8 +30,8 @@ $err='';
 require_once 'common/include/Plugin.class.php';
 require_once 'common/include/PluginManager.class.php';
 
-setup_plugin_manager () ;
-session_set_admin () ;
+setup_plugin_manager ();
+session_set_admin ();
 
 function usage($rc=1) {
 	echo "Usage:\n";
@@ -159,41 +159,41 @@ function populateProject($project) {
 		}
 	}
 
-	$ra = RoleAnonymous::getInstance() ;
-	$rl = RoleLoggedIn::getInstance() ;
-	$ra->linkProject ($project) ;
-	$rl->linkProject ($project) ;
+	$ra = RoleAnonymous::getInstance();
+	$rl = RoleLoggedIn::getInstance();
+	$ra->linkProject ($project);
+	$rl->linkProject ($project);
 
-	$ra->setSetting ('project_read', $project->getID(), 1) ;
-	$rl->setSetting ('project_read', $project->getID(), 1) ;
+	$ra->setSetting ('project_read', $project->getID(), 1);
+	$rl->setSetting ('project_read', $project->getID(), 1);
 
-	$ra->setSetting ('frs', $project->getID(), 1) ;
-	$rl->setSetting ('frs', $project->getID(), 1) ;
+	$ra->setSetting ('frs', $project->getID(), 1);
+	$rl->setSetting ('frs', $project->getID(), 1);
 
-	$ra->setSetting ('docman', $project->getID(), 1) ;
-	$rl->setSetting ('docman', $project->getID(), 1) ;
+	$ra->setSetting ('docman', $project->getID(), 1);
+	$rl->setSetting ('docman', $project->getID(), 1);
 
-	$ra->setSetting ('forum', $f1->getID(), 3) ;
-	$rl->setSetting ('forum', $f1->getID(), 3) ;
+	$ra->setSetting ('forum', $f1->getID(), 3);
+	$rl->setSetting ('forum', $f1->getID(), 3);
 
-	$ra->setSetting ('forum', $f2->getID(), 3) ;
-	$rl->setSetting ('forum', $f2->getID(), 3) ;
+	$ra->setSetting ('forum', $f2->getID(), 3);
+	$rl->setSetting ('forum', $f2->getID(), 3);
 
-	$pgf = new ProjectGroupFactory ($project) ;
+	$pgf = new ProjectGroupFactory ($project);
 	foreach ($pgf->getAllProjectGroupIds() as $pgid) {
-		$pg = projectgroup_get_object ($pgid) ;
+		$pg = projectgroup_get_object($pgid);
 		if ($pg->isPublic()) {
-			$ra->setSetting ('pm', $pgid, 1) ;
-			$rl->setSetting ('pm', $pgid, 1) ;
+			$ra->setSetting ('pm', $pgid, 1);
+			$rl->setSetting ('pm', $pgid, 1);
 		}
 	}
 
-	$atf = new ArtifactTypeFactory ($project) ;
+	$atf = new ArtifactTypeFactory ($project);
 	foreach ($atf->getAllArtifactTypeIds() as $atid) {
-		$at = artifactType_get_object ($atid) ;
+		$at = artifactType_get_object ($atid);
 		if ($at->isPublic()) {
-			$ra->setSetting ('tracker', $atid, 1) ;
-			$rl->setSetting ('tracker', $atid, 1) ;
+			$ra->setSetting ('tracker', $atid, 1);
+			$rl->setSetting ('tracker', $atid, 1);
 		}
 	}
 
@@ -207,7 +207,7 @@ function populateProject($project) {
 			return false;
 		}
 	}
-	$project->normalizeAllRoles () ;
+	$project->normalizeAllRoles ();
 
 	db_commit();
 

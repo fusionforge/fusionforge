@@ -1661,7 +1661,7 @@ Enjoy the site.
 	/* Codendi Glue */
 	function isMember($g, $type = 0){
 		if (is_int ($g) || is_string($g)) {
-			$group = group_get_object ($g) ;
+			$group = group_get_object($g) ;
 			$group_id = $g ;
 		} else {
 			$group = $g ;

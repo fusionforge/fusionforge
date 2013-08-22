@@ -29,7 +29,7 @@ header("Content-Type: text/plain");
 $group_id = getIntFromRequest('group_id');
 
 session_require_perm ('project_read', $group_id) ;
-$group = group_get_object ($group_id) ;
+$group = group_get_object($group_id);
 
 
 print '<?xml version="1.0"?>

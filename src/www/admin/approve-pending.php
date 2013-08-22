@@ -206,7 +206,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	}
 
 	$submitter = NULL ;
-	$project = group_get_object ($row_grp['group_id']) ;
+	$project = group_get_object($row_grp['group_id']) ;
 	foreach (get_group_join_requests ($project) as $gjr) {
 		$submitter = user_get_object($gjr->getUserID()) ;
 		echo '<tr><td>'
@@ -215,7 +215,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	}
 
 	if ($row_grp['built_from_template']) {
-		$templateproject = group_get_object ($row_grp['built_from_template']) ;
+		$templateproject = group_get_object($row_grp['built_from_template']) ;
 		print "<tr><td>" . _('Based on template project') . '</td><td>'. $templateproject->getPublicName() .' ('. $templateproject->getUnixName().")</td></tr>";
 	}
 

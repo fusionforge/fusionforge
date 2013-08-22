@@ -9,11 +9,11 @@
 
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-$plugin = plugin_get_object ('contribtracker') ;
+$plugin = plugin_get_object('contribtracker') ;
 
-$group_id = getIntFromRequest ('group_id') ;
-session_require_perm ('project_admin', $group_id) ;
-$group = group_get_object ($group_id) ;
+$group_id = getIntFromRequest('group_id') ;
+session_require_perm('project_admin', $group_id) ;
+$group = group_get_object($group_id) ;
 
 $params = array () ;
 $params['toptab'] = 'contribtracker' ;

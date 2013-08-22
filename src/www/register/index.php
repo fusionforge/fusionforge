@@ -73,7 +73,7 @@ if (getStringFromRequest('submit')) {
 		$scm = 'noscm' ;
 	}
 
-	$template_project = group_get_object ($built_from_template) ;
+	$template_project = group_get_object($built_from_template);
 	if ($template_project
 	    && !$template_project->isError()
 	    && $template_project->isTemplate()) {

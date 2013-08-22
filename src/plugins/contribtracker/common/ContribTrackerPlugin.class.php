@@ -98,7 +98,7 @@ class ContribTrackerPlugin extends Plugin {
 
 		elseif ($hookname == "project_before_frs") {
 			$group_id = $params['group_id'];
-			$group = group_get_object ($group_id);
+			$group = group_get_object($group_id);
 
 			if ($group->usesPlugin($this->name)) {
 				global $HTML ;
@@ -729,7 +729,7 @@ class ContribTrackerContribution extends Error {
 	function getDate () { return $this->data_array['date'] ; }
 	function getDescription () { return $this->data_array['description'] ; }
 	function getGroup () {
-		return group_get_object ($this->data_array['group_id']) ;
+		return group_get_object($this->data_array['group_id']) ;
 	}
 
 	function getParticipations () {

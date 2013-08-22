@@ -26,102 +26,102 @@
 
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-$plugin = plugin_get_object ('contribtracker') ;
+$plugin = plugin_get_object ('contribtracker');
 
 function display_contribution ($c, $show_groups = false) {
-	global $plugin ;
-	print '<h2>'.$c->getName().'</h2>' ;
+	global $plugin;
+	print '<h2>'.$c->getName().'</h2>';
 	if ($show_groups) {
-		print '<strong>'._('Project')._(':').'</strong> ' ;
+		print '<strong>'._('Project')._(':').'</strong> ';
 		print util_make_link_g ($c->getGroup()->getUnixName(),
 					$c->getGroup()->getId(),
-					htmlspecialchars ($c->getGroup()->getPublicName())) ;
-		print '<br />' ;
+					htmlspecialchars ($c->getGroup()->getPublicName()));
+		print '<br />';
 	}
 
-	print '<strong>'._('Date')._(':').'</strong> ' ;
-	print strftime (_('%Y-%m-%d'), $c->getDate ()) ;
-	print '<br />' ;
+	print '<strong>'._('Date')._(':').'</strong> ';
+	print strftime (_('%Y-%m-%d'), $c->getDate ());
+	print '<br />';
 
-	print '<strong>'._('Description')._(':').'</strong> ' ;
-	print htmlspecialchars ($c->getDescription ()) ;
-	print '<br />' ;
+	print '<strong>'._('Description')._(':').'</strong> ';
+	print htmlspecialchars ($c->getDescription ());
+	print '<br />';
 
-	$parts = $c->getParticipations () ;
+	$parts = $c->getParticipations ();
 	print '<strong>'.ngettext('Participant:',
 				  'Participants:',
-				  count ($parts)).'</strong> ' ;
-	print '<br />' ;
-	print '<ul>' ;
+				  count ($parts)).'</strong> ';
+	print '<br />';
+	print '<ul>';
 	foreach ($parts as $p) {
-		print '<li>' ;
+		print '<li>';
 		printf (_('%s: %s (%s)'),
 			htmlspecialchars ($p->getRole()->getName()),
 			util_make_link ('/plugins/'.$plugin->name.'/?actor_id='.$p->getActor()->getId (),
 					htmlspecialchars ($p->getActor()->getName())),
-			htmlspecialchars ($p->getActor()->getLegalStructure()->getName())) ;
+			htmlspecialchars ($p->getActor()->getLegalStructure()->getName()));
 		if ($p->getActor()->getLogo() != '') {
 			print ' ';
 			print util_make_link ('/plugins/'.$plugin->name.'/?actor_id='.$p->getActor()->getId (),
-					      '<img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$p->getActor()->getId ()).'" />') ;
+					      '<img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$p->getActor()->getId ()).'" />');
 		}
-		print '</li>' ;
+		print '</li>';
 	}
-	print '</ul>' ;
+	print '</ul>';
 }
 
-$group_id = getIntFromRequest ('group_id') ;
-$actor_id = getIntFromRequest ('actor_id') ;
+$group_id = getIntFromRequest('group_id');
+$actor_id = getIntFromRequest('actor_id');
 if ($group_id) {
-	$group = group_get_object ($group_id) ;
+	$group = group_get_object($group_id);
 	if(!$group || !is_object ($group)) {
-		exit_no_group () ;
+		exit_no_group ();
 	}
 	session_require_perm ('project_read', $group_id);
 
-	$contrib_id = getIntFromRequest ('contrib_id') ;
+	$contrib_id = getIntFromRequest ('contrib_id');
 	if ($contrib_id) {    // List only one particular contribution
-		$contrib = new ContribTrackerContribution ($contrib_id) ;
+		$contrib = new ContribTrackerContribution ($contrib_id);
 		if (!$contrib || !is_object ($contrib)
 		    || $contrib->getGroup()->getId() != $group_id) {
-			exit_permission_denied ('','home') ;
+			exit_permission_denied ('','home');
 		}
 
-		$params = array () ;
-		$params['toptab'] = 'contribtracker' ;
-		$params['group'] = $group_id ;
-		$params['title'] = _('Contribution details') ;
-		$params['pagename'] = 'contribtracker' ;
+		$params = array ();
+		$params['toptab'] = 'contribtracker';
+		$params['group'] = $group_id;
+		$params['title'] = _('Contribution details');
+		$params['pagename'] = 'contribtracker';
 		$params['sectionvals'] = array($group->getPublicName());
 
-		site_project_header ($params) ;
+		site_project_header ($params);
 
-		display_contribution ($contrib) ;
+		display_contribution ($contrib);
 	} else {	// List all contributions relevant to a group
-		$params = array () ;
-		$params['toptab'] = 'contribtracker' ;
-		$params['group'] = $group_id ;
+		$params = array ();
+		$params['toptab'] = 'contribtracker';
+		$params['group'] = $group_id;
 		$params['title'] = sprintf (_('Contributions for project %s'),
 					    htmlspecialchars ($group->getPublicName()));
-		$params['pagename'] = 'contribtracker' ;
+		$params['pagename'] = 'contribtracker';
 		$params['sectionvals'] = array($group->getPublicName());
 
 		site_project_header($params);
 
-		$contribs = $plugin->getContributionsByGroup ($group) ;
+		$contribs = $plugin->getContributionsByGroup ($group);
 
 		if (count ($contribs) == 0) {
-			print '<h1>'._('No contributions').'</h1>' ;
-			print _('No contributions have been recorded for this project yet.') ;
+			print '<h1>'._('No contributions').'</h1>';
+			print _('No contributions have been recorded for this project yet.');
 		} else {
 			foreach ($contribs as $c) {
-				display_contribution ($c) ;
-				print '<hr />' ;
+				display_contribution ($c);
+				print '<hr />';
 			}
 		}
 	}
 } elseif ($actor_id) {
-	$actor = new ContribTrackerActor ($actor_id) ;
+	$actor = new ContribTrackerActor ($actor_id);
 	if (!is_object ($actor) || $actor->isError()) {
 		exit_error (_('Invalid actor'),'contribtracker');
 	}
@@ -129,68 +129,68 @@ if ($group_id) {
 	$HTML->header(array('title'=>_('Actor details'),'pagename'=>'contribtracker'));
 
 	print '<h1>'.sprintf(_('Actor details for %s'),
-			     htmlspecialchars($actor->getName())).'</h1>' ;
-	print '<ul>' ;
-	print '<li><strong>'._('Name')._(':').'</strong> '.htmlspecialchars($actor->getName()).'</li>' ;
-	print '<li><strong>'._('URL')._(':').'</strong> ' ;
+			     htmlspecialchars($actor->getName())).'</h1>';
+	print '<ul>';
+	print '<li><strong>'._('Name')._(':').'</strong> '.htmlspecialchars($actor->getName()).'</li>';
+	print '<li><strong>'._('URL')._(':').'</strong> ';
 	if ($actor->getUrl() != '') {
 		print '<a href="'.htmlspecialchars($actor->getUrl()).'">'.htmlspecialchars($actor->getUrl()).'</a>';
 	}
-	print '</li>' ;
-	print '<li><strong>'._('Email')._(':').'</strong> '.htmlspecialchars($actor->getEmail()).'</li>' ;
-	print '<li><strong>'._('Legal structure')._(':').'</strong> '.htmlspecialchars($actor->getLegalStructure()->getName()).'</li>' ;
-	print '<li><strong>'._('Description')._(':').'</strong> '.htmlspecialchars($actor->getDescription()).'</li>' ;
-	print '</ul>' ;
+	print '</li>';
+	print '<li><strong>'._('Email')._(':').'</strong> '.htmlspecialchars($actor->getEmail()).'</li>';
+	print '<li><strong>'._('Legal structure')._(':').'</strong> '.htmlspecialchars($actor->getLegalStructure()->getName()).'</li>';
+	print '<li><strong>'._('Description')._(':').'</strong> '.htmlspecialchars($actor->getDescription()).'</li>';
+	print '</ul>';
 	if ($actor->getLogo() != '') {
 		if ($actor->getUrl() != '') {
-			print '<a href="'.htmlspecialchars($actor->getUrl()).'"><img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$actor->getId ()).'" /></a>' ;
+			print '<a href="'.htmlspecialchars($actor->getUrl()).'"><img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$actor->getId ()).'" /></a>';
 		} else {
-			print '<img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$actor->getId ()).'" />' ;
+			print '<img type="image/png" src="'.util_make_url ('/plugins/'.$plugin->name.'/actor_logo.php?actor_id='.$actor->getId ()).'" />';
 		}
 	}
 
-	$participations = $actor->getParticipations () ;
+	$participations = $actor->getParticipations ();
 
 	if (count ($participations) == 0) {
 		printf (_("%s hasn't been involved in any contributions yet"),
-			htmlspecialchars($actor->getName())) ;
+			htmlspecialchars($actor->getName()));
 	} else {
 		print '<h1>'.sprintf(ngettext('Contribution by %s',
 					      'Contributions by %s',
 					      count($participations)),
-				     htmlspecialchars($actor->getName())).'</h1>' ;
+				     htmlspecialchars($actor->getName())).'</h1>';
 
 		foreach ($participations as $p) {
-			$c = $p->getContribution () ;
+			$c = $p->getContribution ();
 			print '<h2>' . util_make_link ('/plugins/'.$plugin->name.'/?group_id='.$c->getGroup()->getId().'&contrib_id='.$c->getId (),
-						       htmlspecialchars ($c->getName())) . '</h2>' ;
-			print '<strong>'._('Project')._(':').'</strong> ' ;
+						       htmlspecialchars ($c->getName())) . '</h2>';
+			print '<strong>'._('Project')._(':').'</strong> ';
 			print util_make_link_g ($c->getGroup()->getUnixName(),
 						$c->getGroup()->getId(),
-						$c->getGroup()->getPublicName()) ;
-			print '<br /><strong>'._('Role')._(':').'</strong> ' ;
-			print htmlspecialchars ($p->getRole()->getName()) ;
-			print '<hr />' ;
+						$c->getGroup()->getPublicName());
+			print '<br /><strong>'._('Role')._(':').'</strong> ';
+			print htmlspecialchars ($p->getRole()->getName());
+			print '<hr />';
 		}
 	}
 } else {			// Latest contributions, globally
 	$HTML->header(array('title'=>_('Contributions'),'pagename'=>'contribtracker'));
 
-	$contribs = $plugin->getContributions () ;
+	$contribs = $plugin->getContributions ();
 
 	if (count ($contribs) == 0) {
-		print '<h1>'._('No contributions').'</h1>' ;
-		print _('No contributions have been recorded yet.') ;
+		print '<h1>'._('No contributions').'</h1>';
+		print _('No contributions have been recorded yet.');
 	} else {
-		print '<h1>'._('Latest contributions').'</h1>' ;
+		print '<h1>'._('Latest contributions').'</h1>';
 
-		$i = 1 ;
+		$i = 1;
 		foreach ($contribs as $c) {
-			display_contribution ($c, true) ;
-			print '<hr />' ;
-			$i++ ;
+			display_contribution ($c, true);
+			print '<hr />';
+			$i++;
 			if ($i > 20) {
-				break ;
+				break;
 			}
 		}
 	}
