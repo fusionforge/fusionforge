@@ -849,7 +849,7 @@ class ProjectTask extends Error {
 	 * setAssignedTo - takes an array of user_id's and builds assignments.
 	 *
 	 * @param	array	The array of user_id's.
-	 * @returns	boolean	success.
+     * @return	boolean	success.
 	 */
 	function setAssignedTo(&$arr) {
 		$arr2 = $this->getAssignedTo();
