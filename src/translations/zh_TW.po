@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-21 17:39+0200\n"
+"POT-Creation-Date: 2013-08-22 11:04+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1164,7 +1164,7 @@ msgstr "檔案名稱"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
 #: www/account/register.php:163 www/people/editjob.php:52
 #: www/people/editjob.php:74 www/people/editprofile.php:107
-#: www/people/people_utils.php:404 www/people/skills_utils.php:49
+#: www/people/people_utils.php:405 www/people/skills_utils.php:49
 #: www/pm/admin/index.php:188
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:61
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:54
@@ -1336,7 +1336,7 @@ msgstr ""
 #: www/export/tracker.php:108 www/forum/index.php:90 www/forum/message.php:127
 #: www/forum/myforums.php:152 www/frs/index.php:148 www/frs/index.php:207
 #: www/include/html.php:1041 www/news/news_utils.php:147
-#: www/news/news_utils.php:267 www/people/people_utils.php:421
+#: www/news/news_utils.php:267 www/people/people_utils.php:422
 #: www/people/viewjob.php:78 www/pm/browse_task.php:265
 #: www/pm/browse_task.php:275 www/pm/include/ProjectTaskHTML.class.php:122
 #: www/pm/include/ProjectTaskHTML.class.php:175
@@ -1961,7 +1961,7 @@ msgstr "無法更新上層文章"
 #: www/forum/admin/index.php:185 www/frs/admin/deletepackage.php:74
 #: www/frs/admin/deleterelease.php:77 www/frs/admin/index.php:184
 #: www/frs/admin/showreleases.php:114 www/news/admin/index.php:133
-#: www/people/people_utils.php:177 www/people/people_utils.php:321
+#: www/people/people_utils.php:178 www/people/people_utils.php:322
 #: www/people/skills_utils.php:46 www/people/skills_utils.php:104
 #: www/pm/admin/index.php:363 www/pm/admin/index.php:374
 #: www/project/admin/vhost.php:145 www/reporting/timeadd.php:157
@@ -2133,7 +2133,7 @@ msgstr "發佈"
 #: www/admin/vhost.php:189 www/forum/admin/index.php:162
 #: www/frs/admin/editrelease.php:346 www/frs/admin/index.php:181
 #: www/mail/admin/index.php:230 www/mail/admin/index.php:283
-#: www/people/people_utils.php:176 www/people/people_utils.php:320
+#: www/people/people_utils.php:177 www/people/people_utils.php:321
 #: www/pm/admin/index.php:343 www/pm/calendar.php:293
 #: www/project/admin/database.php:234 www/project/admin/index.php:289
 #: www/project/admin/tools.php:304 www/reporting/timecategory.php:96
@@ -3613,7 +3613,7 @@ msgstr "專案檔案列表"
 #: common/tracker/actions/mod.php:196
 #: common/tracker/include/build_submission_form.php:64
 #: common/widget/Widget_MyProjects.class.php:77
-#: www/include/Layout.class.php:727 www/pm/add_task.php:53
+#: www/include/Layout.class.php:723 www/pm/add_task.php:53
 msgid "Admin"
 msgstr "管理"
 
@@ -7138,7 +7138,7 @@ msgstr ""
 
 #: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:56
 #: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:244
-#: www/include/Layout.class.php:1345
+#: www/include/Layout.class.php:1341
 msgid "Preferences"
 msgstr "設定"
 
@@ -9543,7 +9543,7 @@ msgstr "%1$s 帳號註冊"
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:81
 #: plugins/mantisbt/view/admin/viewVersion.php:53 www/admin/pluginman.php:135
-#: www/people/people_utils.php:158 www/people/people_utils.php:298
+#: www/people/people_utils.php:159 www/people/people_utils.php:299
 #: www/project/admin/users.php:302 www/project/admin/users.php:382
 #: www/project/admin/users.php:442 www/project/admin/users.php:466
 msgid "Action"
@@ -11276,8 +11276,8 @@ msgstr ""
 #: plugins/mantisbt/view/viewIssue.php:57
 #: plugins/mantisbt/view/viewIssues.php:218 www/people/createjob.php:49
 #: www/people/editjob.php:52 www/people/editjob.php:74
-#: www/people/editjob.php:163 www/people/people_utils.php:349
-#: www/people/people_utils.php:405 www/pm/add_task.php:50
+#: www/people/editjob.php:163 www/people/people_utils.php:350
+#: www/people/people_utils.php:406 www/pm/add_task.php:50
 #: www/pm/browse_task.php:161 www/pm/browse_task.php:239
 #: www/pm/browse_task.php:371 www/pm/detail_task.php:52
 #: www/pm/ganttpage.php:177 www/pm/mod_task.php:61 www/pm/mod_task.php:268
@@ -15546,7 +15546,7 @@ msgstr "原始碼版本管理系統區塊："
 msgid "Resend New Project Instruction Email"
 msgstr "重送新專案通過審核說明 Email"
 
-#: www/admin/grouplist.php:27 www/include/Layout.class.php:1410
+#: www/admin/grouplist.php:27 www/include/Layout.class.php:1406
 #: www/softwaremap/full_list.php:54
 #, fuzzy
 msgid "Project List"
@@ -17618,7 +17618,7 @@ msgstr "釋出名稱："
 msgid "Features Boxes"
 msgstr "特色請求"
 
-#: www/include/features_boxes.php:39 www/include/Layout.class.php:1398
+#: www/include/features_boxes.php:39 www/include/Layout.class.php:1394
 #: www/softwaremap/tag_cloud.php:52
 #, fuzzy
 msgid "Tag Cloud"
@@ -17932,24 +17932,24 @@ msgstr "檔案無法被移到永久保存位置"
 msgid "en"
 msgstr "zh-TW"
 
-#: www/include/Layout.class.php:709
+#: www/include/Layout.class.php:705
 msgid "Quick Jump To..."
 msgstr ""
 
-#: www/include/Layout.class.php:1400
+#: www/include/Layout.class.php:1396
 #, fuzzy
 msgid "Browse per tags defined by the projects."
 msgstr "該專案沒有這樣的文章"
 
-#: www/include/Layout.class.php:1404
+#: www/include/Layout.class.php:1400
 msgid "Project Tree"
 msgstr ""
 
-#: www/include/Layout.class.php:1406 www/snippet/index.php:81
+#: www/include/Layout.class.php:1402 www/snippet/index.php:81
 msgid "Browse by Category"
 msgstr "依類別瀏覽"
 
-#: www/include/Layout.class.php:1412
+#: www/include/Layout.class.php:1408
 #, fuzzy
 msgid "Complete listing of available projects."
 msgstr "以下是這個專案能夠提供的工作列表"
@@ -18905,9 +18905,9 @@ msgstr "工作更新失敗"
 msgid "JOB updated successfully"
 msgstr "工作更新成功"
 
-#: www/people/editjob.php:91 www/people/people_utils.php:125
-#: www/people/people_utils.php:155 www/people/people_utils.php:233
-#: www/people/people_utils.php:295
+#: www/people/editjob.php:91 www/people/people_utils.php:126
+#: www/people/people_utils.php:156 www/people/people_utils.php:234
+#: www/people/people_utils.php:296
 #: www/search/include/SearchManager.class.php:158
 msgid "Skill"
 msgstr "技術"
@@ -19164,8 +19164,8 @@ msgstr "資料庫中沒有技能類型(skills_data_types table)"
 msgid "No skill types in database - inform system administrator"
 msgstr "資料庫中沒有技能類型 - 通知系統管理員"
 
-#: www/people/editprofile.php:276 www/people/people_utils.php:186
-#: www/people/people_utils.php:330
+#: www/people/editprofile.php:276 www/people/people_utils.php:187
+#: www/people/people_utils.php:331
 msgid "Add a new skill"
 msgstr "增加新技能"
 
@@ -19255,63 +19255,74 @@ msgid "Must select a skill ID"
 msgstr "必須選擇一個技能編號"
 
 #: www/people/people_utils.php:103
-#, fuzzy, php-format
-msgid "ERROR inserting into skill inventory: %s"
+#, fuzzy
+msgid "Error inserting into skill inventory: "
 msgstr "錯誤 － 無法新增技能目錄"
 
-#: www/people/people_utils.php:105 www/people/people_utils.php:213
+#: www/people/people_utils.php:106
 msgid "Added to skill inventory"
 msgstr "加入到技能目錄"
 
-#: www/people/people_utils.php:108 www/people/people_utils.php:216
+#: www/people/people_utils.php:109
 msgid "Error: skill already in your inventory"
 msgstr "錯誤 － 技能已經在您的目錄中"
 
-#: www/people/people_utils.php:126 www/people/people_utils.php:156
-#: www/people/people_utils.php:234 www/people/people_utils.php:296
+#: www/people/people_utils.php:127 www/people/people_utils.php:157
+#: www/people/people_utils.php:235 www/people/people_utils.php:297
 msgid "Level"
 msgstr "等級"
 
-#: www/people/people_utils.php:127 www/people/people_utils.php:157
-#: www/people/people_utils.php:235 www/people/people_utils.php:297
+#: www/people/people_utils.php:128 www/people/people_utils.php:158
+#: www/people/people_utils.php:236 www/people/people_utils.php:298
 msgid "Experience"
 msgstr "經驗"
 
-#: www/people/people_utils.php:135 www/people/people_utils.php:242
-#: www/people/people_utils.php:307
+#: www/people/people_utils.php:136 www/people/people_utils.php:243
+#: www/people/people_utils.php:308
 msgid "No Skill Inventory Set Up"
 msgstr "沒有設定技能目錄"
 
-#: www/people/people_utils.php:165
+#: www/people/people_utils.php:166
 msgid "No skill setup"
 msgstr ""
 
-#: www/people/people_utils.php:192 www/people/people_utils.php:338
+#: www/people/people_utils.php:193 www/people/people_utils.php:339
 msgid "Add Skill"
 msgstr "增加技能"
 
-#: www/people/people_utils.php:210
-msgid "ERROR inserting into skill inventory"
+#: www/people/people_utils.php:211
+#, fuzzy
+msgid "Error inserting into job inventory: "
 msgstr "錯誤 － 無法新增技能目錄"
 
-#: www/people/people_utils.php:271
+#: www/people/people_utils.php:214
+#, fuzzy
+msgid "Added to job inventory"
+msgstr "加入到技能目錄"
+
+#: www/people/people_utils.php:217
+#, fuzzy
+msgid "Error: job already in your inventory"
+msgstr "錯誤 － 技能已經在您的目錄中"
+
+#: www/people/people_utils.php:272 www/people/people_utils.php:281
 msgid "Invalid ID"
 msgstr "無效的編號"
 
-#: www/people/people_utils.php:362
+#: www/people/people_utils.php:363
 msgid "No Categories Found"
 msgstr "沒有發現分類"
 
-#: www/people/people_utils.php:406
+#: www/people/people_utils.php:407
 msgid "Date Opened"
 msgstr "送出日期"
 
-#: www/people/people_utils.php:407
+#: www/people/people_utils.php:408
 #, php-format
 msgid "%1$s project"
 msgstr "%1$s 專案"
 
-#: www/people/people_utils.php:414
+#: www/people/people_utils.php:415
 msgid "None Found"
 msgstr "沒有發現"
 
@@ -23412,6 +23423,13 @@ msgid "No User Name Provided"
 msgstr "帳號"
 
 #, fuzzy
+#~ msgid "ERROR inserting into skill inventory: %s"
+#~ msgstr "錯誤 － 無法新增技能目錄"
+
+#~ msgid "ERROR inserting into skill inventory"
+#~ msgstr "錯誤 － 無法新增技能目錄"
+
+#, fuzzy
 #~ msgid "Browse per category."
 #~ msgstr "依類別瀏覽"
 
@@ -25743,9 +25761,6 @@ msgstr "帳號"
 
 #~ msgid "Error Getting %s"
 #~ msgstr "取得 %s 時錯誤"
-
-#~ msgid "Error inserting into skill inventory"
-#~ msgstr "錯誤 － 無法新增技能目錄"
 
 #~ msgid "Followup"
 #~ msgstr "回覆"
