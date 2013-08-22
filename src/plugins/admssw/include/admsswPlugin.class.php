@@ -34,7 +34,7 @@ include_once("Graphite.php");
 
 class admsswPlugin extends Plugin {
 	
-	public static $PAGING_LIMIT = 10;
+	public static $PAGING_LIMIT = 50;
 		
 	//var $trovecat_id_index; // cat_id to TroveCat instances
 	var $trovecat_id_to_shortname;	// cat_id to shortname
@@ -545,7 +545,7 @@ class admsswPlugin extends Plugin {
 		
 		// if paging is requested
 		if ($p > 0) {
-			$maxpage = (int) ($projectsnum / $pl);
+			$maxpage = ceil($projectsnum / $pl);
 			if ($p > $maxpage) {
 				header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found",true,404);
 				printf("Page %d requested is beyond the maximum %d !", $p, $maxpage);
@@ -603,7 +603,7 @@ class admsswPlugin extends Plugin {
 				$res->setURI( $pageuri );
 				rdfutils_setPropToUri($res, 'rdf:type', 'ldp:Page');
 		
-				if($p < ( (int) ($projectsnum / $pl) ) ) {
+				if( $p < ceil($projectsnum / $pl) ) {
 					$nextpageuri = $documenturi . '?page=' . (string) ($p + 1);
 					rdfutils_setPropToUri($res, 'ldp:nextPage', $nextpageuri);
 				}
@@ -638,7 +638,7 @@ class admsswPlugin extends Plugin {
 			$html_limit .= sprintf(_('<strong>%1$s</strong> projects in result set.'), $projectsnum);
 			// only display pages stuff if there is more to display
 			if ($projectsnum > $pl) {
-				$html_limit .= trove_html_limit_navigation_box($scripturl, $projectsnum, $pl, $p);
+				$html_limit .= html_trove_limit_navigation_box($scripturl, $projectsnum, $pl, $p);
 			}
 			$html_limit .= '</span>';
 		
