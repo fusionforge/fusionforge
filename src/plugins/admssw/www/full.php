@@ -33,11 +33,79 @@ $content_type = util_negociate_alternate_content_types($script, $default_content
 
 $plugin = plugin_get_object($pluginname);
 
+// page length
+$pl = 3;
+
+$uricomplement = '';
+
+$p = 0;
+if ( null !== getStringFromRequest('theFirstPage', null)) {
+	$p = 1;
+	$uricomplement = '?theFirstPage';
+}
+else {
+	$p = getIntFromRequest('p', 0);
+	if ($p > 0) {
+		$uricomplement = '?p=' . $p;
+	}
+}
+
+$projectsnum = $plugin->getProjectListSize();
+
+// force paging if too many projects
+if ( ($projectsnum > $pl) && ! ($p > 0) ) {
+//	$p = 1;
+	header("Location: ?theFirstPage");
+	header($_SERVER["SERVER_PROTOCOL"]." 303 See Other",true,303);
+ 	exit;
+}
+
 // if not HTML
 if($content_type != $default_content_type) {
-			
+
+	$chunksize = null;
+	$chunk = null;
+
+	$documenturi = util_make_url('/plugins/'.$pluginname.'/full.php');
+	$pageuri = '';
+	
+	// if paging is requested
+	if ($p > 0) {
+		$maxpage = (int) ($projectsnum / $pl);
+		if ($p > $maxpage) {
+			header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found",true,404);
+			printf("Page %d requested is beyond the maximum %d !", $p, $maxpage);
+			exit;
+		}
+		$chunksize = $pl;
+		$chunk = $p;
+		$pageuri = $documenturi . $uricomplement;
+	}
+	
 	// process as in content_negociated_projects_list but with full details
-	$graph = $plugin->getProjectListResourcesGraph(util_make_url('/plugins/'.$pluginname.'/full.php'), true);
+	$graph = $plugin->getProjectListResourcesGraph($documenturi, true, $chunk, $chunksize);
+
+	if ($p > 0) {
+		$ns = $plugin->admsswNameSpaces();
+		$conf = array(
+				'ns' => $ns
+		);
+		
+		$res = ARC2::getResource($conf);
+		$res->setURI( $pageuri );
+		rdfutils_setPropToUri($res, 'rdf:type', 'ldp:Page');
+		
+		if($p < ( (int) ($projectsnum / $pl) ) ) {
+			$nextpageuri = $documenturi . '?p=' . (string) ($p + 1);
+			rdfutils_setPropToUri($res, 'ldp:nextPage', $nextpageuri);
+		}
+		else {
+			rdfutils_setPropToUri($res, 'ldp:nextPage', 'rdf:nil');
+		}
+		rdfutils_setPropToUri($res, 'ldp:pageOf', $documenturi);
+		
+		$count = $graph->addTriples( ARC2::getTriplesFromIndex($res->index) );
+	}
 
 	// We can support only RDF as RDF+XML or Turtle
 	if ($content_type == 'text/turtle' || $content_type == 'application/rdf+xml') {
