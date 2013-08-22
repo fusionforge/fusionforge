@@ -19,7 +19,17 @@
 * with FusionForge; if not, write to the Free Software Foundation, Inc.,
 * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
-	
+
+// Dumps an HTML preview or a full RDF document for public projects, with full details
+
+// The script will paginate the contents (with the same page size than in the softwaremap/trove)
+// redirecting if necessary to ?page=1
+// This can be overriden with ?allatonce
+
+// This script is the counterpart, with full details, of other lists of projects 
+// which contain only an index of projects, like /projects/ (for RDF harvested by machines)
+// or its HTML Turtle preview in /plugins/admssw/projectsturtle.php
+
 require_once('../../env.inc.php');
 require_once $gfcommon.'include/pre.php';
 
@@ -49,92 +59,14 @@ else {
 	$HTML->header(array('title'=>_('Full ADMS.SW export'),'pagename'=>'admssw_full'));
 	$HTML->printSoftwareMapLinks();
 }
-print $plugin->getProjectsListDisplay($documenturi, $content_type, $p, $pl, true);
+
+// We want full details of the projects
+$detailed = true;
+print $plugin->getProjectsListDisplay($documenturi, $content_type, $p, $pl, $detailed);
 
 if ($content_type == 'text/html') {
 	$HTML->footer(array());
 }
-// $pageuri = '';
-// $chunksize = null;
-// $chunk = null;
-// // if paging is requested
-// if ($p > 0) {
-// 	$chunksize = $pl;
-// 	$chunk = $p;
-// 	$pageuri = $documenturi . '?page='. (string)$p;
-// }
-
-// // process as in content_negociated_projects_list but with full details
-// $graph = $plugin->getProjectListResourcesGraph($documenturi, true, $chunk, $chunksize);
-
-// // if not HTML
-// if($content_type != $default_content_type) {
-
-// 	if ($p > 0) {
-// 		$ns = $plugin->admsswNameSpaces();
-// 		$conf = array(
-// 				'ns' => $ns
-// 		);
-		
-// 		$res = ARC2::getResource($conf);
-// 		$res->setURI( $pageuri );
-// 		rdfutils_setPropToUri($res, 'rdf:type', 'ldp:Page');
-		
-// 		if($p < ( (int) ($projectsnum / $pl) ) ) {
-// 			$nextpageuri = $documenturi . '?page=' . (string) ($p + 1);
-// 			rdfutils_setPropToUri($res, 'ldp:nextPage', $nextpageuri);
-// 		}
-// 		else {
-// 			rdfutils_setPropToUri($res, 'ldp:nextPage', 'rdf:nil');
-// 		}
-// 		rdfutils_setPropToUri($res, 'ldp:pageOf', $documenturi);
-		
-// 		$count = $graph->addTriples( ARC2::getTriplesFromIndex($res->index) );
-// 	}
-
-// 	// We can support only RDF as RDF+XML or Turtle
-// 	if ($content_type == 'text/turtle' || $content_type == 'application/rdf+xml') {
-// 		header('Content-type: '. $content_type);
-// 		if ($content_type == 'text/turtle') {
-// 			print $graph->serialize($serializer="Turtle")."\n";
-// 		}
-// 		if ($content_type == 'application/rdf+xml') {
-// 			print $graph->serialize()."\n";
-// 		}
-// 	}
-// 	else {
-// 		header('HTTP/1.1 406 Not Acceptable',true,406);
-// 		print $graph->dumpText();
-// 		exit(0);
-// 	}
-// } else {
-// 	$HTML->header(array('title'=>_('Full ADMS.SW export'),'pagename'=>'admssw_full'));
-// 	$HTML->printSoftwareMapLinks();
-	
-// 	echo '<p>'. sprintf( _('This script is meant to produce machine-readable RDF meta-data, in Turtle or RDF/XML formats, which can be obtained at <tt>%1$s</tt> as Turtle'), $documenturi).'<br />';
-	
-// 	$html_limit = '<span style="text-align:center;font-size:smaller">';
-// 	$html_limit .= sprintf(_('<strong>%1$s</strong> projects in result set.'), $projectsnum);
-// 	// only display pages stuff if there is more to display
-// 	if ($projectsnum > $pl) {
-// 		$html_limit .= trove_html_limit_navigation_box($documenturi, $projectsnum, $pl, $p);
-// 	}
-// 	$html_limit .= '</span>';
-	
-// 	print $html_limit;
-	
-// 	print $graph->dump();
-	
-// 	echo _('To access this RDF document, you may use, for instance :<br />');
-// 	echo '<tt>$ curl -L -H "Accept: text/turtle" '. $documenturi .'</tt><br />';
-	
-// 	echo _('This may redirect to several pages documents in case of too big number of results (observing the LDP paging specifications).<br /><br />');
-	
-// 	echo _('Alternatively, if you are sure you want the full dump in one single document, use :<br />');
-// 	echo '<tt>$ curl -H "Accept: text/turtle" "'. $documenturi .'?allatonce"</tt>';
-	
-// 	$HTML->footer(array());
-// }
 
 // Local Variables:
 // mode: php
