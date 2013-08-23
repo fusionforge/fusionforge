@@ -5,6 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -68,10 +69,17 @@ if (getStringFromRequest('submit')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit('my');
 	}
-
+	
+	$valide = 1;
 	if (forge_get_config('user_registration_accept_conditions') && ! $accept_conditions) {
-		$warning_msg = _("You can't register an account unless you accept the terms of use.") ;
-	} else {
+		$warning_msg = _("You can't register an account unless you accept the terms of use.");
+		$valide = 0;
+	}
+	$params['valide'] =& $valide;
+	$params['warning_msg'] =& $warning_msg;
+	plugin_hook('captcha_check', $params);
+	
+	if ($valide) {
 		$activate_immediately = getIntFromRequest('activate_immediately');
 		if (($activate_immediately == 1) &&
 		    forge_check_global_perm ('forge_admin')) {
@@ -255,7 +263,10 @@ if($toDisplay != "") {
 	<p><input type="checkbox" name="activate_immediately" value="1" />
 <?php print _('Activate this user immediately') ; ?>
 	</p>
-<?php } ?>
+<?php }
+plugin_hook('captcha_form');
+?>
+
 <p>
 <?php printf(_('Fields marked with %s are mandatory.'), utils_requiredField()); ?>
 </p>
