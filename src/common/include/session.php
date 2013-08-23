@@ -446,7 +446,7 @@ function session_redirect_external($url) {
 function session_redirect404() {
 	global $HTML, $gfwww, $gfcommon;
 
-	header("HTTP/1.0 404 Not Found");
+	header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
 	require_once $gfwww.'404.php';
 	exit;
 }
