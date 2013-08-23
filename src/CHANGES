@@ -28,6 +28,7 @@ Plugins:
 * blocks: improved with a new HTML widget for the project summary page (Alcatel-Lucent)
 * svntracker : this plugin is superseed by scmhook
 * svncommitemail : this plugin is superseed by scmhook
+* new phpcaptcha plugin : enable a captcha in the register page. (TrivialDev)
 
 FusionForge-5.2:
 * Docman: inject zip as a tree (Capgemini)
