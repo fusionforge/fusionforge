@@ -20,7 +20,6 @@
  */
 
 require_once 'Widget.class.php';
-//require_once('common/survey/SurveySingleton.class.php');
 require_once 'common/survey/SurveyFactory.class.php';
 
 /**
@@ -35,25 +34,29 @@ require_once 'common/survey/SurveyFactory.class.php';
 class Widget_MySurveys extends Widget {
 	var $content;
 	var $can_be_displayed;
+	var $_survey_show;
 
 	function __construct() {
 		$this->Widget('mysurveys');
-		$no_survey = true;
-
-		$user = session_get_user () ;
-		$projects = $user->getGroups() ;
-		sortProjectList ($projects) ;
-		$tmp = array () ;
+		$this->_survey_show = UserManager::instance()->getCurrentUser()->getPreference('my_surveys_show');
+		if($this->_survey_show === false) {
+			$this->_survey_show = 'AN';
+			UserManager::instance()->getCurrentUser()->setPreference('my_surveys_show', $this->_survey_show);
+		}
+		$user = session_get_user();
+		$projects = $user->getGroups();
+		sortProjectList($projects);
+		$tmp = array();
 		foreach ($projects as $p) {
 			if ($p->usesSurvey()) {
 				$sf = new SurveyFactory($p);
 				foreach ($sf->getSurveys() as $s) {
-					$tmp[] = $p ;
-					break ;
+					$tmp[] = $p;
+					break;
 				}
 			}
 		}
-		$projects = $tmp ;
+		$projects = $tmp;
 
 		$html_my_surveys = '';
 		if (count ($projects) < 1) {
@@ -63,9 +66,31 @@ class Widget_MySurveys extends Widget {
 			$request =& HTTPRequest::instance();
 			$html_my_surveys .= '<table style="width:100%">';
 			foreach ($projects as $project) {
-				$group_id = $project->getID() ;
+				$group_id = $project->getID();
 				$surveyfacto = new SurveyFactory($project);
 				$surveys = $surveyfacto->getSurveys();
+				for ($i = 0; $i < count($surveys); $i++) {
+					if ($surveys[$i]->isActive()) {
+						switch ($this->_survey_show) {
+							case 'A':
+								if (!$surveys[$i]->isUserVote($user->getID())) {
+									unset($surveys[$i]);
+								}
+								break;
+							case 'N':
+								if ($surveys[$i]->isUserVote($user->getID())) {
+									unset($surveys[$i]);
+								}
+								break;
+							case 'AN':
+							default:
+								break;
+						}
+					} else {
+						unset($surveys[$i]);
+					}
+				}
+				$surveys = array_values($surveys);
 				$vItemId = new Valid_UInt('hide_item_id');
 				$vItemId->required();
 				if($request->valid($vItemId)) {
@@ -94,15 +119,12 @@ class Widget_MySurveys extends Widget {
 				foreach ($surveys as $survey) {
 					$i++ ;
 					if (!$hide_now) {
-						$group_survey_id= $survey->getId();
+						$group_survey_id = $survey->getId();
 						$survey_title = $survey->getTitle();
-						$devsurvey_is_active = $survey->isActive();
-						if($devsurvey_is_active == 1 ) {
-							$html .= '
-								<tr '. $HTML->boxGetAltRowStyle($i) .'><td width="99%">'.
-								'&nbsp;&nbsp;&nbsp;-&nbsp;<a href="/survey/survey.php?group_id='.$group_id.'&amp;survey_id='.$group_survey_id.'">'.
-								$survey_title.'</a></td></tr>';
-						}
+						$html .= '
+							<tr '. $HTML->boxGetAltRowStyle($i) .'><td width="99%">'.
+							'&nbsp;&nbsp;&nbsp;-&nbsp;<a href="/survey/survey.php?group_id='.$group_id.'&amp;survey_id='.$group_survey_id.'">'.
+							$survey_title.'</a></td></tr>';
 					}
 				}
 
@@ -117,10 +139,50 @@ class Widget_MySurveys extends Widget {
 	function getTitle() {
 		return _("Quick Survey");
 	}
+
 	function getContent() {
 		return $this->content;
 	}
+
 	function getDescription() {
-		return _("List the surveys you have not answered.");
+		return _("List the surveys in your projects.");
+	}
+
+	function hasPreferences() {
+		return true;
+	}
+
+	function getPreferences() {
+		$optionsArray = array('A','N','AN');
+		$textsArray = array();
+		$textsArray[] = _('answered [A]');
+		$textsArray[] = _('not yet answered [N]');
+		$textsArray[] = _('any status [AN]');
+		$prefs = _('Display surveys:').html_build_select_box_from_arrays($optionsArray, $textsArray, "show", $this->_survey_show);
+		return $prefs;
+	}
+
+	function updatePreferences(&$request) {
+		$request->valid(new Valid_String('cancel'));
+		$vShow = new Valid_WhiteList('show', array('A', 'N', 'AN'));
+		$vShow->required();
+		if (!$request->exist('cancel')) {
+			if ($request->valid($vShow)) {
+				switch($request->get('show')) {
+					case 'A':
+						$this->_survey_show = 'A';
+						break;
+					case 'N':
+						$this->_survey_show = 'N';
+						break;
+					case 'AN':
+					default:
+						$this->_survey_show = 'AN';
+						break;
+				}
+				UserManager::instance()->getCurrentUser()->setPreference('my_surveys_show', $this->_survey_show);
+			}
+		}
+		return true;
 	}
 }
