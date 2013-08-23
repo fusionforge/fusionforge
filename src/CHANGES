@@ -13,6 +13,7 @@ FusionForge-5.3:
 * Frs: Download statistics are available as graph now (TrivialDev)
 * New SOAP services to handle adding/removing groups, users and tasks (patch by Pasquale Vitale)
 * Docman: add report view as in FRS (TrivialDev)
+* New javascript based graphics (bybe jpgraph) (TrivialDev)
 
 Plugins:
 * headermenu: new plugin to handle links in headermenu, outermenu & groupmenu (TrivialDev)
