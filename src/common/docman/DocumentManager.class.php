@@ -2,7 +2,7 @@
 /**
  * FusionForge document manager
  *
- * Copyright 2011-2012, Franck Villaume - TrivialDev
+ * Copyright 2011-2013, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
@@ -43,13 +43,13 @@ class DocumentManager extends Error {
 	 */
 	var $Group;
 
-    /**
-     * Constructor.
-     *
-     * @param $Group
-     * @internal param \The $object Group object to which this document is associated.
-     * @return \DocumentManager
-     */
+	/**
+	 * Constructor.
+	 *
+	 * @param	$Group
+	 * @internal	param	\The $object Group object to which this document is associated.
+	 * @return	\DocumentManager
+	 */
 	function __construct(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
@@ -213,8 +213,8 @@ class DocumentManager extends Error {
 	 *
 	 * @param	string	format of the return values. json returns : { name: id, }. Default is DB object.
 	 * @param	string	skipped status id
-     * @return resource|string
-     */
+	 * @return resource|string
+	 */
 	function getStatusNameList($format = '', $removedval = '') {
 		if (!empty($removedval)) {
 			$stateQuery = db_query_params('select * from doc_states where stateid not in ($1) order by stateid', array($removedval));
@@ -237,6 +237,16 @@ class DocumentManager extends Error {
 		}
 	}
 
+	/**
+	 * getDocGroupList - Returns as a string used in javascript the list of available folders
+	 *
+	 * @param	$nested_groups
+	 * @param	string		must be json which is wrong, this function does not return any json object
+	 * @param	bool		allow the "None" which is the "/"
+	 * @param	int		the selected folder id
+	 * @param	array		folders id to not display
+	 * @return	string
+	 */
 	function getDocGroupList($nested_groups, $format = '', $allow_none = true, $selected_id = 0, $dont_display = array()) {
 		$id_array = array();
 		$text_array = array();

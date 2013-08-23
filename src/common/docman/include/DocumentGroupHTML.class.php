@@ -5,6 +5,7 @@
  * Copyright 2002 GForge, LLC
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013 Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -32,6 +33,12 @@ require_once $gfwww.'include/note.php';
 class DocumentGroupHTML extends Error {
 	var $Group;
 
+	/**
+	 * Constructor.
+	 *
+	 * @param	$Group
+	 * @return	\DocumentGroupHTML
+	 */
 	function __construct(&$Group) {
 		$this->Error();
 

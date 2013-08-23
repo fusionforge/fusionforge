@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -33,7 +33,7 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 	session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($return_msg));
 }
 
-$arr_fileid = explode(',',getStringFromRequest('fileid'));
+$arr_fileid = explode(',', getStringFromRequest('fileid'));
 $option = getStringFromRequest('option');
 $return_msg = _('Document(s)').' ';
 switch ($option) {
@@ -49,11 +49,11 @@ switch ($option) {
 				if (!$d->addMonitoredBy($LUSER->getID()))
 					session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
 			} else {
-				$warning_msg = _('No action to perform');
+				$warning_msg = _('No action to perform.');
 				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
 			}
 		}
-		$return_msg .= _('Monitoring Started');
+		$return_msg .= _('Monitoring started.');
 		break;
 	}
 	case "remove": {
@@ -73,7 +73,7 @@ switch ($option) {
 				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
 			}
 		}
-		$return_msg .= _('Monitoring Stopped');
+		$return_msg .= _('Monitoring stopped.');
 		break;
 	}
 	default: {

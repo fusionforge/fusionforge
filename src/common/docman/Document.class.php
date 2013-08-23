@@ -49,17 +49,17 @@ class Document extends Error {
 	 */
 	var $Group;
 
-    /**
-     * Constructor.
-     *
-     * @param $Group
-     * @param bool $docid
-     * @param bool $arr
-     * @internal param \The $object Group object to which this document is associated.
-     * @internal param \The $int docid.
-     * @internal param \The $array associative array of data.
-     * @return \Document
-     */
+	/**
+	 * Constructor.
+	 *
+	 * @param	$Group
+	 * @param	bool	$docid
+	 * @param	bool	$arr
+	 * @internal	param	\The $object Group object to which this document is associated.
+	 * @internal	param	\The $int docid.
+	 * @internal	param	\The $array associative array of data.
+	 * @return	\Document
+	 */
 	function __construct(&$Group, $docid = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
@@ -98,16 +98,16 @@ class Document extends Error {
 	}
 
 	/**
-	 *	create - use this function to create a new entry in the database.
+	 * create - use this function to create a new entry in the database.
 	 *
-	 *	@param	string	The filename of this document. Can be a URL.
-	 *	@param	string	The filetype of this document. If filename is URL, this should be 'URL';
-	 *	@param	string	The absolute path file itself.
-	 *	@param	int	The doc_group id of the doc_groups table.
-	 *	@param	string	The title of this document.
-	 *	@param	string	The description of this document.
-	 *	@param	int	The state id of the document. At creation, can not be deleted status.
-	 *	@return	boolean	success.
+	 * @param	string	The filename of this document. Can be a URL.
+	 * @param	string	The filetype of this document. If filename is URL, this should be 'URL';
+	 * @param	string	The absolute path file itself.
+	 * @param	int	The doc_group id of the doc_groups table.
+	 * @param	string	The title of this document.
+	 * @param	string	The description of this document.
+	 * @param	int	The state id of the document. At creation, can not be deleted status.
+	 * @return	boolean	success.
 	 */
 	function create($filename, $filetype, $data, $doc_group, $title, $description, $stateid = 0) {
 		if (strlen($title) < 5) {
@@ -546,13 +546,13 @@ class Document extends Error {
 		return $values;
 	}
 
-    /**
-     * isMonitoredBy - get the monitored status of this document for a specific user id.
-     *
-     * @param string $userid
-     * @internal param \User $int ID
-     * @return    boolean    true if monitored by this user
-     */
+	/**
+	 * isMonitoredBy - get the monitored status of this document for a specific user id.
+	 *
+	 * @param	string $userid
+	 * @internal	param \User $int ID
+	 * @return	boolean    true if monitored by this user
+	 */
 	function isMonitoredBy($userid = 'ALL') {
 		if ( $userid == 'ALL' ) {
 			$condition = '';
@@ -643,16 +643,16 @@ class Document extends Error {
 		return $this->setValueinDB('doc_group', $newdocgroupid);
 	}
 
-    /**
-     * setLock - set the locking status of the document.
-     *
-     * @param $stateLock
-     * @param    time    the epoch time.
-     * @param int $thistime
-     * @internal param \The $int status of the lock.
-     * @internal param \The $int userid who set the lock.
-     * @return    boolean    success or not.
-     */
+	/**
+	 * setLock - set the locking status of the document.
+	 *
+	 * @param	$stateLock
+	 * @param	time		the epoch time.
+	 * @param	int		$thistime
+	 * @internal	param		\The $int status of the lock.
+	 * @internal	param		\The $int userid who set the lock.
+	 * @return	boolean		success or not.
+	 */
 	function setLock($stateLock, $userid = NULL, $thistime = 0) {
 		$res = db_query_params('UPDATE doc_data SET
 					locked = $1,
@@ -919,8 +919,8 @@ class Document extends Error {
 	 * sendNotice - Notifies of document submissions
 	 *
 	 * @param	boolean	true = new document (default value)
-     * @return bool
-     */
+	 * @return	bool
+	 */
 	function sendNotice($new = true) {
 		$BCC = $this->Group->getDocEmailAddress();
 		if ($this->isMonitoredBy('ALL')) {

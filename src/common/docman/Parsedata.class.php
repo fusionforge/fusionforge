@@ -4,9 +4,8 @@
  *
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2009-2010, Franck Villaume - Capgemini
- * Copyright 2011-2012, Franck Villaume - TrivialDev
+ * Copyright 2011-2013, Franck Villaume - TrivialDev
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -35,13 +34,23 @@ class Parsedata {
 	 * Constructor.
 	 *
 	 * @param	string	path to the parser list file
-	 * @return	boolean	true
+	 * @return	\Parsedata
 	 */
 	function __construct() {
 		$this->p_path = dirname(__FILE__).'/engine/';
 		$this->parsers = $this->get_parser_list($this->p_path);
 	}
 
+	/**
+	 * get_parse_data - analyse content and metadata
+	 *
+	 * @param	string	the path of the file to be analysed
+	 * @param	string	the file title
+	 * @param	string	the file description
+	 * @param	string	the file type
+	 * @param	string	the filename
+	 * @return	string	the analysed content
+	 */
 	function get_parse_data($data, $title, $description, $filetype, $filename) {
 		$parser = "";
 		$rep = "";
@@ -68,6 +77,12 @@ class Parsedata {
 		return preg_replace("/\n/", " ", "$rep $rep1");
 	}
 
+	/**
+	 * get_parser_list - get the list of available parsers
+	 *
+	 * @param	string	the path where are located the parsers
+	 * @return	array	available parsers
+	 */
 	function get_parser_list($parser_path) {
 		$file = $parser_path.'parser_list.txt';
 		$rep = array();

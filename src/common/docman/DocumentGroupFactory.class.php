@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -48,12 +48,12 @@ class DocumentGroupFactory extends Error {
 	 */
 	var $Group;
 
-    /**
-     * Constructor.
-     *
-     * @param $Group
-     * @return \DocumentGroupFactory
-     */
+	/**
+	 * Constructor.
+	 *
+	 * @param	$Group
+	 * @return	\DocumentGroupFactory
+	 */
 	function __construct(&$Group) {
 		$this->Error();
 

@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -78,14 +78,14 @@ class DocumentFactory extends Error {
 	 */
 	var $limit = 0;
 
-    /**
-     * Constructor.
-     *
-     * @param $Group
-     * @internal param \The $object Group object to which this DocumentFactory is associated.
-     * @return \DocumentFactory
-    @access	public
-     */
+	/**
+	 * Constructor.
+	 *
+	 * @param	$Group
+	 * @internal	param	\The $object Group object to which this DocumentFactory is associated.
+	 * @return	\DocumentFactory
+	 * @access	public
+	 */
 	function __construct(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
@@ -259,14 +259,14 @@ class DocumentFactory extends Error {
 		$this->limit = $limit;
 	}
 
-    /**
-     * getDocuments - returns an array of Document objects.
-     *
-     * @param int $nocache
-     * @internal param \no $integer cache : force reinit $this->Documents : default: cache is used
-     * @return    array    Document objects.
-     * @access    public
-     */
+	/**
+	 * getDocuments - returns an array of Document objects.
+	 *
+	 * @param	int	$nocache
+	 * @internal	param	\no $integer cache : force reinit $this->Documents : default: cache is used
+	 * @return	array	Document objects.
+	 * @access	public
+	 */
 	function &getDocuments($nocache = 0) {
 		if (!$this->Documents || $nocache) {
 			$this->getFromStorage();
@@ -370,15 +370,18 @@ class DocumentFactory extends Error {
 		return true;
 	}
 
-    function isTrashEmpty() {
-        $res = db_query_params('select count(*) as c from docdata_vw where group_id = $1 and stateid = 2',
-            array($this->Group->getID()));
-        if (!$res) {
-            return false;
-        }
-        return (db_result($res, 0, 'c') == 0);
-    }
-
+	/**
+	 * isTrashEmpty - check if the trash is empty
+	 * @return	boolean	success or not
+	 */
+	function isTrashEmpty() {
+		$res = db_query_params('select count(*) as c from docdata_vw where group_id = $1 and stateid = 2',
+					array($this->Group->getID()));
+		if (!$res) {
+			return false;
+		}
+		return (db_result($res, 0, 'c') == 0);
+	}
 }
 
 // Local Variables:
