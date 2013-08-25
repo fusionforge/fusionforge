@@ -5,6 +5,7 @@
  * Copyright (C) 1999-2001 VA Linux Systems
  * Copyright (C) 2002-2004 GForge Team
  * Copyright (C) 2008-2010 Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * http://fusionforge.org/
  *
@@ -61,7 +62,7 @@ $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
 	exit_no_group();
 } elseif ($group->isError()) {
-	exit_error($group->getErrorMessage(),'news');
+	exit_error($group->getErrorMessage(), 'news');
 }
 
 $summary = getStringFromRequest('summary');
@@ -71,11 +72,11 @@ $details = getHtmlTextFromRequest('details');
 if (session_loggedin()) {
 
 	if (!forge_check_perm('project_admin', $group_id)) {
-		exit_permission_denied(_('You cannot submit news for a project unless you are an admin on that project'),'home');
+		exit_permission_denied(_('You cannot submit news for a project unless you are an admin on that project.'), 'home');
 	}
 
 	if ($group_id == forge_get_config('news_group')) {
-		exit_permission_denied(_('Submitting news from the news group is not allowed.'),'home');
+		exit_permission_denied(_('Submitting news from the news group is not allowed.'), 'home');
 	}
 
 	if (getStringFromRequest('post_changes')) {
@@ -92,27 +93,27 @@ if (session_loggedin()) {
 
 			db_begin();
 			$f = new Forum($group, false, false, true);
-			if (!$f->create(preg_replace('/[^_\.0-9a-z-]/','-', strtolower($summary)),$details,'')) {
+			if (!$f->create(preg_replace('/[^_\.0-9a-z-]/', '-', strtolower($summary)), $details, '')) {
 				db_rollback();
-				exit_error($f->getErrorMessage(),'news');
-			}
-			$group->normalizeAllRoles();
-			$new_id=$f->getID();
-			$sql='INSERT INTO news_bytes (group_id,submitted_by,is_approved,post_date,forum_id,summary,details)
- VALUES ($1, $2, $3, $4, $5, $6, $7)';
-			$result=db_query_params($sql,
-				array($group_id, user_getid(), 0, time(), $new_id, htmlspecialchars($summary), $details));
-			if (!$result) {
-				db_rollback();
-				form_release_key(getStringFromRequest('form_key'));
-				$error_msg = _('ERROR doing insert');
+				$error_msg = $f->getErrorMessage();
 			} else {
-				db_commit();
-				$feedback = _('News Added.');
+				$group->normalizeAllRoles();
+				$new_id = $f->getID();
+				$sql = 'INSERT INTO news_bytes (group_id, submitted_by, is_approved, post_date, forum_id, summary,details)
+						VALUES ($1, $2, $3, $4, $5, $6, $7)';
+				$result = db_query_params($sql, array($group_id, user_getid(), 0, time(), $new_id, htmlspecialchars($summary), $details));
+				if (!$result) {
+					db_rollback();
+					form_release_key(getStringFromRequest('form_key'));
+					$error_msg = _('Error: insert failed.');
+				} else {
+					db_commit();
+					$feedback = _('News Added.');
+				}
 			}
 		} else {
 			form_release_key(getStringFromRequest('form_key'));
-			$error_msg = _('ERROR - both subject and body are required');
+			$error_msg = _('Error: both subject and body are required.');
 		}
 	}
 
@@ -147,13 +148,13 @@ if (session_loggedin()) {
 		<p>
 		<strong>'._('Details').':</strong>'.notepad_button('document.forms.newssubmitform.details').utils_requiredField().'</p>';
 
-	$params = array() ;
+	$params = array();
 	$params['name'] = 'details';
 	$params['width'] = "800";
 	$params['height'] = "500";
 	$params['body'] = $details;
 	$params['group'] = $group_id;
-	$params['content'] = '<textarea name="details" rows="5" cols="50">'.$details.'</textarea>';
+	$params['content'] = '<textarea required="required" name="details" rows="5" cols="50">'.$details.'</textarea>';
 	plugin_hook_by_reference("text_editor",$params);
 
 	echo $params['content'].'<br />';
