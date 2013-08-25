@@ -44,7 +44,7 @@ function &forum_get_object($forum_id) {
 	}
 
 	$data = db_fetch_array($res);
-	$Group = group_get_object($data["group_id"]);
+	$Group = group_get_object($data['group_id']);
 	$f = new Forum($Group, $forum_id);
 
 	$f->fetchData($forum_id);
@@ -91,18 +91,18 @@ class Forum extends Error {
 	 */
 	var $is_news;
 
-    /**
-     * Constructor.
-     *
-     * @param $Group
-     * @param bool $group_forum_id
-     * @param bool $arr
-     * @internal param \The $object Group object to which this forum is associated.
-     * @internal param \The $int group_forum_id.
-     * @internal param \The $array associative array of data.
-     * @return \Forum success.
-     */
-	function __construct(&$Group, $group_forum_id = false, $arr = false) {
+	/**
+	 * Constructor.
+	 *
+	 * @param $Group
+	 * @param bool $group_forum_id
+	 * @param bool $arr
+	 * @internal param \The $object Group object to which this forum is associated.
+	 * @internal param \The $int group_forum_id.
+	 * @internal param \The $array associative array of data.
+	 * @return \Forum success.
+	 */
+	function __construct(&$Group, $group_forum_id = false, $arr = false, $is_news = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
 			$this->setError(_('No Valid Group Object'));
@@ -112,7 +112,7 @@ class Forum extends Error {
 			$this->setError('Forums: '.$Group->getErrorMessage());
 			return;
 		}
-		$is_news = 0;
+
 		if ($group_forum_id) {
 			//
 			//	Is this a news posting (or a real forum)?
@@ -123,8 +123,7 @@ class Forum extends Error {
 			$is_news = $res && db_numrows($res) >= 1;
 		}
 		if (!$is_news && !$Group->usesForum()) {
-			$this->setError(sprintf(_('%s does not use the Forum tool'),
-			    $Group->getPublicName()));
+			$this->setError(sprintf(_('%s does not use the Forum tool.'), $Group->getPublicName()));
 			return false;
 		}
 		$this->Group =& $Group;
@@ -137,7 +136,7 @@ class Forum extends Error {
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
-					$this->setError(_('Group_id in db result does not match Group Object'));
+					$this->setError(_('Group_id in db result does not match Group Object.'));
 					$this->data_array = null;
 					return;
 				}
@@ -168,20 +167,20 @@ class Forum extends Error {
 	 * @param	int	Pass (1) if a welcome message should be created (0) for no welcome message.
 	 * @return	boolean	success.
 	 */
-	function create($forum_name,$description,$send_all_posts_to='',$create_default_message=1) {
+	function create($forum_name, $description, $send_all_posts_to = '', $create_default_message = 1) {
 		if (!$this->is_news && strlen(trim($forum_name)) < 3) {
-			$this->setError(_('Forum Name Must Be At Least 3 Characters'));
+			$this->setError(_('Forum name must be at least 3 characters.'));
 			return false;
 		}
 		if (!$this->is_news && strlen(trim($description)) < 10) {
-			$this->setError(_('Forum Description Must Be At Least 10 Characters'));
+			$this->setError(_('Forum description must be at least 10 characters.'));
 			return false;
 		}
 		if (!preg_match('/^([_\.0-9a-z-])*$/i',$forum_name)) {			
 			if (preg_match('/ /',$forum_name)){
-				$this->setError(_('Illegal Characters in Forum Name').' - '._('No space'));
+				$this->setError(_('Illegal characters in Forum name').' - '._('No space allowed.'));
 			}else{
-				$this->setError(_('Illegal Characters in Forum Name'));
+				$this->setError(_('Illegal characters in Forum name.'));
 			}
 			return false;
 		}
@@ -201,7 +200,7 @@ class Forum extends Error {
 								$this->Group->getID()));
 
 		if (db_numrows($result_list_samename) > 0){
-			$this->setError(_('Mailing List Exists with same name'));
+			$this->setError(_('Mailing List exists with same name.'));
 			return false;
 		}
 
@@ -264,7 +263,7 @@ class Forum extends Error {
 		$res=db_query_params('SELECT * FROM forum_group_list_vw	WHERE group_forum_id=$1 AND group_id=$2',
 			array($group_forum_id, $this->Group->getID()));
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError(_('Invalid forum group identifier'));
+			$this->setError(_('Invalid forum group identifier.'));
 			return false;
 		}
 		$this->data_array = db_fetch_array($res);
@@ -438,7 +437,7 @@ class Forum extends Error {
 	function setMonitor($u = -1) {
 		if ($u == -1) {
 			if (!session_loggedin()) {
-				$this->setError(_('You can only monitor if you are logged in'));
+				$this->setError(_('You can only monitor if you are logged in.'));
 				return false;
 			}
 			$u = user_getid() ;
@@ -464,16 +463,16 @@ class Forum extends Error {
 		return true;
 	}
 
-    /**
-     * stopMonitor - Remove the current user from the list of people monitoring the forum.
-     *
-     * @param $u
-     * @return    boolean    success.
-     */
+	/**
+	 * stopMonitor - Remove the current user from the list of people monitoring the forum.
+	 *
+	 * @param $u
+	 * @return    boolean    success.
+	 */
 	function stopMonitor($u = -1) {
 		if ($u == -1) {
 			if (!session_loggedin()) {
-				$this->setError(_('You can only monitor if you are logged in'));
+				$this->setError(_('You can only monitor if you are logged in.'));
 				return false;
 			}
 			$u = user_getid();
@@ -506,7 +505,7 @@ class Forum extends Error {
 	 */
 	function savePlace() {
 		if (!session_loggedin()) {
-			$this->setError(_('You Can Only Save Your Place If You Are Logged In'));
+			$this->setError(_('You can only save your place if you are logged in.'));
 			return false;
 		}
 		$result = db_query_params('SELECT * FROM forum_saved_place WHERE user_id=$1 AND forum_id=$2',
@@ -552,18 +551,18 @@ class Forum extends Error {
 	 */
 	function update($forum_name, $description, $send_all_posts_to = '') {
 		if (strlen($forum_name) < 3) {
-			$this->setError(_('Forum Name Must Be At Least 3 Characters'));
+			$this->setError(_('Forum name must be at least 3 characters.'));
 			return false;
 		}
 		if (strlen($description) < 10) {
-			$this->setError(_('Forum Description Must Be At Least 10 Characters'));
+			$this->setError(_('Forum Description Must Be At Least 10 Characters.'));
 			return false;
 		}
 		if (!preg_match('/^([_\.0-9a-z-])*$/i',$forum_name)) {
 			if (preg_match('/ /',$forum_name)){
-				$this->setError(_('Illegal Characters in Forum Name').' - '._('No space'));
-			}else{
-				$this->setError(_('Illegal Characters in Forum Name'));
+				$this->setError(_('Illegal characters in Forum name').' - '._('No space allowed.'));
+			} else {
+				$this->setError(_('Illegal characters in Forum name.'));
 			}
 			return false;
 		}
@@ -588,7 +587,7 @@ class Forum extends Error {
 								$this->Group->getID()));
 
 		if (db_numrows($result_list_samename) > 0){
-			$this->setError(_('Mailing List Exists with same name'));
+			$this->setError(_('Mailing List exists with same name.'));
 			return false;
 		}
 		
