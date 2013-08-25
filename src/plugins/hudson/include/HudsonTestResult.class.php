@@ -18,6 +18,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
+
 require_once 'hudson.class.php';
 require_once 'HudsonJobURLMalformedException.class.php';
 require_once 'HudsonJobURLFileException.class.php';
@@ -30,8 +31,8 @@ class HudsonTestResult {
 	private $context;
 
 	/**
-	* Construct an Hudson job from a job URL
-	*/
+	 * Construct an Hudson job from a job URL
+	 */
 	function HudsonTestResult($hudson_job_url) {
 		$parsed_url = parse_url($hudson_job_url);
 

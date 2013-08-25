@@ -4,20 +4,20 @@
  * Copyright (c) 2010 Alcatel-Lucent
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
- * This file is a part of Codendi.
+ * This file is a part of Fusionforge.
  *
- * Codendi is free software; you can redistribute it and/or modify
+ * Fusionforge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * Codendi is distributed in the hope that it will be useful,
+ * Fusionforge is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
+ * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
 require_once 'common/mvc/Views.class.php';
@@ -45,10 +45,12 @@ class hudsonViews extends Views {
 //		echo $this->_getHelp();
 //		echo '<h1>'.$this->_getTitle().'</h1>';
 	}
+
 	function _getTitle() {
 //		return _("Continuous Integration");
 		return _("Hudson");
 	}
+
 	function _getHelp($section = '', $questionmark = false) {
 		if (trim($section) !== '' && $section{0} !== '#') {
 			$section = '#'.$section;
@@ -60,6 +62,7 @@ class hudsonViews extends Views {
 		}
 		return '<b><a href="javascript:help_window(\''.get_server_url().'help/guide/ContinuousIntegrationIntroduction.html'.$section.'\');">'.$help_label.'</a></b>';
 	}
+
 	function footer() {
 		parent::footer();
 	}
@@ -426,6 +429,7 @@ class hudsonViews extends Views {
 		htmlIframe($url, array('id' => 'hudson_iframe', 'class' => 'iframe_service'));
 		echo '</div>';
 	}
+
 	function _hide_iframe() {
 		echo "<script type=\"text/javascript\">Element.toggle('hudson_iframe_div', 'slide');</script>";
 	}

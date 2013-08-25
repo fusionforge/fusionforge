@@ -1,13 +1,25 @@
 <?php
 /**
- * @copyright Copyright (c) Xerox Corporation, Codendi 2007-2008.
+ * hudsonPlugin
+ *
+ * Copyright (c) Xerox Corporation, Codendi 2007-2008.
+ * @author Marc Nazarian <marc.nazarian@xrce.xerox.com>
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
  *
- * This file is licensed under the GNU General Public License version 2. See the file COPYING.
+ * This file is a part of Fusionforge.
  *
- * @author Marc Nazarian <marc.nazarian@xrce.xerox.com>
+ * Fusionforge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
- * HudsonPlugin
+ * Fusionforge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
 require_once 'PluginHudsonJobDao.class.php';
@@ -28,15 +40,13 @@ class hudsonPlugin extends Plugin {
 		$this->_addHook("project_admin_plugins"); // to show up in the admin page fro group
 		$this->_addHook('javascript',  false);
 		$this->_addHook('cssfile', 'cssFile', false);
-
 		$this->_addHook('project_is_deleted', 'projectIsDeleted', false);
-
 		$this->_addHook('widget_instance', 'myPageBox', false);
 		$this->_addHook('widgets', 'widgets', false);
-
 		$this->_addHook('get_available_reference_natures', 'getAvailableReferenceNatures', false);
 		$this->_addHook('ajax_reference_tooltip', 'ajax_reference_tooltip', false);
 	}
+
 	function CallHook ($hookname, &$params) {
 		global $G_SESSION,$HTML;
 		if ($hookname == "usermenu") {
@@ -81,7 +91,6 @@ class hudsonPlugin extends Plugin {
 			$this->getAvailableReferenceNatures($params);
 		} elseif ($hookname == "ajax_reference_tooltip") {
 			$this->ajax_reference_tooltip($params);
-
 		}
 	}
 	
@@ -174,6 +183,7 @@ class hudsonPlugin extends Plugin {
 			$params['instance'] = new hudson_Widget_JobLastArtifacts(WidgetLayoutManager::OWNER_TYPE_GROUP, $GLOBALS['group_id']);
 		}
 	}
+
 	function widgets($params) {
 		$group = group_get_object($GLOBALS['group_id']);
 		if ( !$group || !$group->usesPlugin ( $this->name ) ) {
