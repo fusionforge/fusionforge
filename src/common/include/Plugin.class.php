@@ -315,8 +315,7 @@ class Plugin extends Error {
 		}
 		if ($display) {
 			$flag = strtolower('use_'.$this->name);
-			echo '<tr>';
-			echo '<td>';
+			echo '<div>';
 			echo ' <input type="checkbox" name="'.$flag.'" value="1" ';
 			// checked or unchecked?
 			if ($user->usesPlugin($this->name)) {
@@ -324,8 +323,7 @@ class Plugin extends Error {
 			}
 			echo ' />    '. sprintf(_('Use %s Plugin'), $this->text);
 			echo html_image($imgStatus, '16', '16',array('alt'=>$title, 'title'=>$title));
-			echo '</td>';
-			echo '</tr>';
+			echo '</div';
 		}
 	}
 

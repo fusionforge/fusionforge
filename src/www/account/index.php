@@ -276,12 +276,11 @@ echo "\n</div>";
 		<?php echo _('Enable tooltips. Small help texts displayed on mouse over links, images.');
 ?>
 </div>
-</td></tr>
-
 <?php
 // displays a "Use xxxx Plugin" checkbox
 plugin_hook("userisactivecheckbox", $hookParams);
 ?>
+</td></tr>
 <tr><td colspan="2">
 
 <?php
