@@ -2210,6 +2210,8 @@ class Group extends Error {
 				if ($role->getHomeProject() && $role->getHomeProject()->getID() == $this->getID()) {
 					$roles[] = $role ;
 				}
+			}
+			foreach ($roles as $role) {
 				if (!$this->addUser($member->getUnixName(),$role->getID())) {
 					return false;
 				}
