@@ -3,7 +3,8 @@
  * Resend account activation email with confirmation URL
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright 2010 (c), Franck Villaume
+ * Copyright 2010-2013, Franck Villaume - TrivialDev
+ * Copyright 2013, French Ministry of National Education
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -25,33 +26,28 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
 if (getStringFromRequest('submit')) {
-	$loginname = getStringFromRequest('loginname');
-
-	$u = user_get_object_by_name($loginname);
-	if (!$u && forge_get_config('require_unique_email')) {
-		$u = user_get_object_by_email ($loginname);
+	$loginname = trim(getStringFromRequest('loginname'));
+	if (!strlen($loginname)) {
+		$error_msg = _('Missing Parameter. You must provide a login name or an email address.');
+	} else {
+		$u = user_get_object_by_name($loginname);
+		if (!$u && forge_get_config('require_unique_email')) {
+			$u = user_get_object_by_email($loginname);
+		}
+		if (!$u || !is_object($u)) {
+			$error_msg = _('That user does not exist.');
+		} elseif ($u->isError()) {
+			$error_msg = $u->getErrorMessage();
+		} elseif ($u->getStatus() != 'P') {
+			$warning_msg = _('Your account is already active.');
+		} else{
+			$u->sendRegistrationEmail();
+			$HTML->header(array('title'=>_('Pending Account')));
+			echo '<p>'. _('Your email confirmation has been resent. Visit the link in this email to complete the registration process.'). '</p>';
+			$HTML->footer(array());
+			exit;
+		}
 	}
-	if (!$u || !is_object($u)) {
-		exit_error(_('Could Not Get User'),'home');
-	} elseif ($u->isError()) {
-		exit_error($u->getErrorMessage(),'home');
-	}
-
-	if ($u->getStatus() != 'P') {
-		exit_error(_('Your account is already active.'),'my');
-	}
-	$u->sendRegistrationEmail();
-	$HTML->header(array('title'=>"Account Pending Verification"));
-
-	?>
-
-	<h2><?php echo _('Pending Account')?></h2>
-	<p>
-	<?php echo _('Your email confirmation has been resent. Visit the link in this email to complete the registration process.');?>
-	</p>
-
-<?php
-	exit;
 }
 
 $HTML->header(array('title'=>_('Resend confirmation email to a pending account')));
