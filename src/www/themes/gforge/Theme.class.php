@@ -304,8 +304,9 @@ class Theme extends Layout {
 			}
 			$return .= '>' . "\n";
 			$return .= '<a ';
-			if ($use_tooltips && isset($TABS_TOOLTIPS[$i]))
+			if ($use_tooltips && isset($TABS_TOOLTIPS[$i])) {
 				$return .= ' title="'.$TABS_TOOLTIPS[$i].'"';
+			}
 
 			$return .= ' href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a>' . "\n";
 			$return .= '</div>';
