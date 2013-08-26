@@ -379,18 +379,25 @@ class Layout extends Error {
 	}
 
 	/**
- 	 * headerLinkedDataAutodiscovery() - creates the link+meta links to alternate
+ 	 * headerLinkedDataAutodiscovery() - creates the link+alternate links to alternate
  	 * 		representations for Linked Data autodiscovery
  	 */
 	function headerLinkedDataAutodiscovery() {
-		// Only activated for /projects or /users for the moment
-		$script_name = getStringFromServer('SCRIPT_NAME');
 
-		if ($script_name == '/projects' || $script_name == '/users') {
+		// retrieve the script's prefix
+		$script_name = getStringFromServer('SCRIPT_NAME');
+		$end = strpos($script_name,'/',1);
+		if($end) {
+			$script_name = substr($script_name,0,$end);
+		}
+		
+		// Only activated for /projects, /users or /softwaremap for the moment 
+		if ($script_name == '/projects' || $script_name == '/users' || $script_name == '/softwaremap') {
 
 			$php_self = getStringFromServer('PHP_SELF');
 			
-			// invoke the 'alt_representations' hook
+			// invoke the 'alt_representations' hook to add potential 'alternate' links (useful for Linked Data)
+			// cf. http://www.w3.org/TR/cooluris/#linking
 			$params = array('script_name' => $script_name,
 							'php_self' => $php_self,
 							'return' => array());
@@ -1408,6 +1415,13 @@ if (isset($params['group']) && $params['group']) {
 			$subMenuAttr[] = array('title' => _('Complete listing of available projects.'), 'class' => 'tabtitle');
 		}
 
+		// Allow plugins to add more softwaremap submenu entries
+		$hookParams = array();
+		$hookParams['TITLES'] = & $subMenuTitle;
+		$hookParams['URLS'] = & $subMenuUrl;
+		$hookParams['ATTRS'] = & $subMenuAttr;
+		plugin_hook("softwaremap_links", $hookParams);
+		
 		echo $this->subMenu($subMenuTitle, $subMenuUrl, $subMenuAttr);
 	}
 

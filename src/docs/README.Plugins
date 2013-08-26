@@ -344,7 +344,7 @@ had been written.
   Hook Name  : project_public_area
   Parameters : group_id - The numeric ID of the group
   Locations  : www/include/project_home.php
-  Description: Used to provide plugin specific infos on a group's 
+  Description: Used to provide plugin specific infos on a group's
                public area.
 
   Hook Name  : scm_admin_update
@@ -448,14 +448,8 @@ had been written.
   hook Name  : outermenu
   Parameters : DIRS - A reference to the array of tab URLs
                TITLES - A reference to the array of tab titles
-  Location   : www/include/Layout.class.php
+  Location   : common/include/Navigation.class.php
   Description: Used to provide a plugin specific tab in main menu.
-
-  Hook Name  : project_public_area
-  Parameters : group_id - The numeric ID of the group
-  Locations  : www/include/project_home.php
-  Description: Used to provide plugin specific infos on a group's
-               public area.
 
   Hook Name  : user_logo
   Parameters : user_id, size, content (return value)
@@ -516,8 +510,12 @@ TODO : document Auth plugins :
                in $params['content_type'] the actual content-type to return
 
   Hook Name  : project_rdf_metadata
-  Parameters : $params['prefixes'] : already used RDF prefixes in the form URL => shortname, $params['in_Resource'] : already constructed ARC2_Resource instances (read-only)
-  Description: returns in $params['prefixes'] added prefixes, and in the array $params['out_Resources'] new ARC2_Resources including new triples to be included in the project's DOAP description 
+  Parameters : $params['prefixes'] : already used RDF prefixes in the form URL => shortname, 
+               $hook_params['group'] : group_id of the project,
+			   $hook_params['in_Resource'] : (read-only) ARC2 resource already available,
+			   $hook_params['details'] : 'full' or 'minimal' whether requesting a detailed or minimal description
+			   $hook_params['out_Resources'] : (write) to be returned the new ARC2 resource 
+  Description: returns in $params['prefixes'] and $params['out_Resources'] added prefixes and ARC2 RDF resource to be included in the project's DOAP description 
 
   Hook Name  : role_adduser
   Parameters : $params['user'] : user added to the role, $params['role'] : role added to the user
@@ -537,6 +535,29 @@ TODO : document Auth plugins :
   Parameters : $params['accept'] provides the content-type to be rendered
   Description: returns in $params['content'] an alternate content for /projects page and 
                in $params['content_type'] the actual content-type to return
+
+  Hook Name  : softwaremap_links
+  Parameters : TITLES - A reference to the array of submenu titles
+               URLS - A reference to the array of submenu URLs
+               ATTRS - A reference to the array of submenu attributes
+  Locations  : www/include/Layout.class.php
+  Description: Used to provide plugin specific softwaremap submenu link(s)
+
+  Hook Name  : content_negociated_trove_list
+  Parameters : $params['accept'] provides the content-type to be rendered
+  Description: returns in $params['content'] an alternate content for /softwaremap/trove_list.php page and 
+               in $params['content_type'] the actual content-type to return
+
+  Hook Name  : content_negociated_frs_index
+  Parameters : $params['accept'] provides the content-type to be rendered
+  Description: returns in $params['content'] an alternate content for /frs/
+               in $params['content_type'] the actual content-type to return
+
+  Hook Name  : content_negociated_frs_download_file
+  Parameters : $params['accept'] provides the content-type to be rendered
+  Description: returns in $params['content'] an alternate content for /frs/download.php
+               in $params['content_type'] the actual content-type to return
+
 
 TODO (nerville) : document display_hierarchy
 TODO (lolando ?) : document role_normalize, role_translate_strings, role_has_permission, role_get_setting, list_roles_by_permission 

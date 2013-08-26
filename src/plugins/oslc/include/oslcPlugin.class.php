@@ -158,8 +158,8 @@ class oslcPlugin extends Plugin {
 			# TODO : create another resource
 			$group_id=$params['group'];
 
-			if (! isset($params['prefixes']['http://open-services.net/ns/core#'])) {
-				$params['prefixes']['http://open-services.net/ns/core#'] = 'oslc';
+			if (! isset($params['prefixes']['oslc'])) {
+				$params['prefixes']['oslc'] = 'http://open-services.net/ns/core#';
 			}
 			
 			$serviceprovider = util_make_url ("/plugins/oslc/cm/oslc-cm-services/".$group_id);
