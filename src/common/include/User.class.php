@@ -65,6 +65,29 @@ function user_get_object_by_email($email ,$res = false) {
 }
 
 /**
+ * user_get_object_by_name_or_email() - Get User object by username or email.
+ * user_get_object is useful so you can pool user objects/save database queries
+ * You should always use this instead of instantiating the object directly
+ *
+ * @param	string	The unix username - required
+ * @param	int	The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
+ * @return	a user object or false on failure
+ */
+function &user_get_object_by_name_or_email($user_name, $res = false) {
+	$user = user_get_object_by_name($user_name, $res);
+	if (is_object($user)) {
+		return $user ;
+	}
+
+	$user = user_get_object_by_email($user_name, $res) ;
+	if (is_object($user)) {
+		return $user ;
+	}
+	
+	return false;
+}
+
+/**
  * user_get_object() - Get User object by user ID.
  * user_get_object is useful so you can pool user objects/save database queries
  * You should always use this instead of instantiating the object directly

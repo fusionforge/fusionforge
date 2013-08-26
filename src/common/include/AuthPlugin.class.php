@@ -220,7 +220,7 @@ abstract class ForgeAuthPlugin extends Plugin {
 			$params['username'] = $username;
 			$params['event'] = 'login';
 			plugin_hook('sync_account_info', $params);
-			$user = user_get_object_by_name($username);
+			$user = user_get_object_by_name_or_email($username);
 			$this->saved_user = $user;
 			$this->setSessionCookie();
 			return $user;
