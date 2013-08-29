@@ -315,7 +315,7 @@ function trackeract_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 	}
 	echo 'jQuery(document).ready(function(){
 		plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', series, {
-			title : \''.utf8_decode(_('Tracker Activity')).' ( '.strftime('%x',$start).' - '.strftime('%x',$end).') \',
+			title : \''.utf8_decode(_('Tracker Activity')).' ('.strftime('%x',$start).' - '.strftime('%x',$end).') \',
 			axesDefaults: {
 				tickOptions: {
 					angle: -90,
