@@ -24,9 +24,9 @@ require_once $gfcommon.'include/System.class.php';
 
 class NSSPGSQL extends System {
 	/**
-        * Value to add to unix_uid to get unix uid
+	* Value to add to unix_uid to get unix uid
 	*
-	* @var  constant                $UID_ADD
+	* @var  constant	$UID_ADD
 	*/
 	var $UID_ADD = 20000;
 
@@ -41,8 +41,8 @@ class NSSPGSQL extends System {
 	/**
  	* sysCreateUser() - Create a user
  	*
- 	* @param		int	The user ID of the user to create
- 	* @returns The return status
+ 	* @param		int		The user ID of the user to create
+	* @return		bool	The return status
  	*
  	*/
 	function sysCreateUser($user_id) {
@@ -53,7 +53,7 @@ class NSSPGSQL extends System {
  	* sysRemoveUser() - Remove a user
  	*
  	* @param		int		The user ID of the user to remove
- 	* @returns true on success/false on failure
+	* @return		bool	true on success/false on failure
  	*
  	*/
 	function sysRemoveUser($user_id) {
@@ -68,7 +68,7 @@ class NSSPGSQL extends System {
  	* sysCheckGroup() - Check for the existence of a group
  	*
  	* @param		int		The ID of the group to check
- 	* @returns true on success/false on error
+	* @return		bool	true on success/false on failure
  	*
  	*/
 	function sysCheckGroup($group_id) {
@@ -83,7 +83,7 @@ class NSSPGSQL extends System {
  	* sysCreateGroup() - Create a group
  	*
  	* @param		int		The ID of the group to create
- 	* @returns true on success/false on error
+	* @return		bool	true on success/false on failure
  	*
  	*/
 	function sysCreateGroup($group_id) {

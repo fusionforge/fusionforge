@@ -24,9 +24,9 @@ require_once $gfcommon.'include/System.class.php';
 
 class UNIX extends System {
 	/**
-        * Value to add to unix_uid to get unix uid
+	* Value to add to unix_uid to get unix uid
 	*
-	* @var  constant                $UID_ADD
+	* @var  constant				$UID_ADD
 	*/
 	var $UID_ADD = 20000;
 
@@ -42,7 +42,7 @@ class UNIX extends System {
  	* sysCreateUser() - Create a user
  	*
  	* @param		int	The user ID of the user to create
- 	* @returns The return status
+ 	* @return bool	 The return status
  	*
  	*/
 	function sysCreateUser($user_id) {
@@ -56,12 +56,12 @@ class UNIX extends System {
 			unix_status=$3
 			WHERE user_id=$4',
 						array ($this->UID_ADD,
-						       $this->UID_ADD,
-						       'A',
-						       $user_id)) ;
-	                if (!$res) {
-	                        $this->setError('Error: Cannot Update User UID/GID: '.db_error());
-	                        return false;
+							   $this->UID_ADD,
+							   'A',
+							   $user_id)) ;
+					if (!$res) {
+							$this->setError('Error: Cannot Update User UID/GID: '.db_error());
+							return false;
 			}
 			return true;
 		}
@@ -71,13 +71,13 @@ class UNIX extends System {
  	* sysRemoveUser() - Remove a user
  	*
  	* @param		int		The user ID of the user to remove
- 	* @returns true on success/false on failure
+	* @return bool	true on success/false on failure
  	*
  	*/
 	function sysRemoveUser($user_id) {
 		$res = db_query_params ('UPDATE users SET unix_status=$1 WHERE user_id=$2',
 					array ('N',
-					       $user_id));
+						   $user_id));
 		if (!$res) {
 			$this->setError('Error: Cannot Update User Unix Status: '.db_error());
 			return false;
@@ -93,7 +93,7 @@ class UNIX extends System {
  	* sysCheckGroup() - Check for the existence of a group
  	*
  	* @param		int		The ID of the group to check
- 	* @returns true on success/false on error
+ 	* @return	bool	true on success/false on error
  	*
  	*/
 	function sysCheckGroup($group_id) {
@@ -108,7 +108,7 @@ class UNIX extends System {
  	* sysCreateGroup() - Create a group
  	*
  	* @param		int		The ID of the group to create
- 	* @returns true on success/false on error
+ 	* @return	bool	true on success/false on error
  	*
  	*/
 	function sysCreateGroup($group_id) {

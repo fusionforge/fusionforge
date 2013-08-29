@@ -57,8 +57,8 @@ $GROUP_OBJ=array();
  * IMPORTANT! That db result must contain all fields
  * from groups table or you will have problems
  *
- * @param int      $group_id Required
- * @param int|bool $res      Result set handle ("SELECT * FROM groups WHERE group_id=xx")
+ * @param int	$group_id Required
+ * @param int|bool $res	Result set handle ("SELECT * FROM groups WHERE group_id=xx")
  * @return Group|bool A group object or false on failure
  */
 function &group_get_object($group_id, $res = false) {
@@ -110,7 +110,7 @@ function &group_get_objects($id_arr) {
 	}
 	if (count($fetch) > 0) {
 		$res=db_query_params('SELECT * FROM groups WHERE group_id = ANY ($1)',
-				      array(db_int_array_to_any_clause($fetch)));
+					array(db_int_array_to_any_clause($fetch)));
 		while ($arr = db_fetch_array($res)) {
 			$GROUP_OBJ["_".$arr['group_id']."_"] = new Group($arr['group_id'],$arr);
 		}
@@ -123,19 +123,19 @@ function &group_get_objects($id_arr) {
 
 function &group_get_active_projects() {
 	$res = db_query_params('SELECT group_id FROM groups WHERE status=$1',
-			      array('A'));
+				array('A'));
 	return group_get_objects(util_result_column_to_array($res,0));
 }
 
 function &group_get_all_projects() {
 	$res = db_query_params ('SELECT group_id FROM groups',
-			      array ());
+				array ());
 	return group_get_objects(util_result_column_to_array($res,0)) ;
 }
 
 function &group_get_template_projects() {
 	$res = db_query_params('SELECT group_id FROM groups WHERE is_template=1 AND status != $1',
-			      array ('D'));
+				array ('D'));
 	return group_get_objects(util_result_column_to_array($res,0)) ;
 }
 
@@ -146,14 +146,14 @@ function &group_get_object_by_name($groupname) {
 
 function &group_get_objects_by_name($groupname_arr) {
 	$res = db_query_params('SELECT group_id FROM groups WHERE unix_group_name = ANY ($1)',
-			      array(db_string_array_to_any_clause($groupname_arr)));
+				array(db_string_array_to_any_clause($groupname_arr)));
 	$arr =& util_result_column_to_array($res,0);
 	return group_get_objects($arr);
 }
 
 function group_get_object_by_publicname($groupname) {
 	$res = db_query_params('SELECT * FROM groups WHERE lower(group_name) LIKE $1',
-			      array(htmlspecialchars(strtolower($groupname))));
+				array(htmlspecialchars(strtolower($groupname))));
 	return group_get_object(db_result($res, 0, 'group_id'), $res);
 }
 
@@ -315,7 +315,7 @@ class Group extends Error {
 			$this->setError(_('Unix name already taken'));
 			return false;
 		} elseif (db_numrows(db_query_params('SELECT group_id FROM groups WHERE unix_group_name=$1',
-						      array($unix_name))) > 0) {
+							array($unix_name))) > 0) {
 			$this->setError(_('Unix name already taken'));
 			return false;
 		} elseif (strlen($purpose)<10) {
@@ -355,17 +355,17 @@ class Group extends Error {
 				)
 				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)',
 						array (htmlspecialchars ($group_name),
-						       $unix_name,
-						       htmlspecialchars($description),
-						       $homepage,
-						       $homepage,
-						       'P',
-						       $unix_box,
-						       $scm_box,
-						       htmlspecialchars($purpose),
-						       time(),
-						       md5(util_randbytes()),
-						       $built_from_template));
+							$unix_name,
+							htmlspecialchars($description),
+							$homepage,
+							$homepage,
+							'P',
+							$unix_box,
+							$scm_box,
+							htmlspecialchars($purpose),
+							time(),
+							md5(util_randbytes()),
+							$built_from_template));
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError(sprintf(_('Error: Cannot create group: %s'),db_error()));
 				db_rollback();
@@ -386,8 +386,8 @@ class Group extends Error {
 
 			$gjr = new GroupJoinRequest($this);
 			$gjr->create($user->getID(),
-				     'Fake GroupJoinRequest to store the creator of a project',
-				     false);
+					'Fake GroupJoinRequest to store the creator of a project',
+					false);
 
 			$hook_params = array();
 			$hook_params['group'] = $this;
@@ -437,9 +437,9 @@ class Group extends Error {
 			SET type_id=$1, unix_box=$2, http_domain=$3
 			WHERE group_id=$4',
 					array($type_id,
-					      $unix_box,
-					      $http_domain,
-					      $this->getID()));
+						$unix_box,
+						$http_domain,
+						$this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('Error: Cannot change group properties: %s'),db_error());
@@ -589,24 +589,24 @@ class Group extends Error {
 				use_stats=$16,
 				use_activity=$17
 			WHERE group_id=$18',
-				       array(htmlspecialchars($group_name),
-					     $homepage,
-					     htmlspecialchars($short_description),
-					     $use_mail,
-					     $use_survey,
-					     $use_forum,
-					     $use_pm,
-					     $use_pm_depend_box,
-					     $use_scm,
-					     $use_news,
-					     $new_doc_address,
-					     $send_all_docs,
-					     $use_ftp,
-					     $use_tracker,
-					     $use_frs,
-					     $use_stats,
-						 $use_activity,
-					     $this->getID()));
+					array(htmlspecialchars($group_name),
+						$homepage,
+						htmlspecialchars($short_description),
+						$use_mail,
+						$use_survey,
+						$use_forum,
+						$use_pm,
+						$use_pm_depend_box,
+						$use_scm,
+						$use_news,
+						$new_doc_address,
+						$send_all_docs,
+						$use_ftp,
+						$use_tracker,
+						$use_frs,
+						$use_stats,
+						$use_activity,
+						$this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(sprintf(_('Error updating project information: %s'), db_error()));
@@ -827,6 +827,7 @@ class Group extends Error {
 	 *	setAsTemplate - Set the template status of a project
 	 *
 	 *	@param	boolean	is_template.
+	 * @return bool
 	 */
 	function setAsTemplate($booleanparam) {
 		db_begin();
@@ -927,6 +928,7 @@ class Group extends Error {
 	 * setSCMBox - the hostname of the scm box where this project is located.
 	 *
 	 * @param	string	The name of the new SCM_BOX
+	 * @return bool
 	 */
 	function setSCMBox($scm_box) {
 
@@ -986,7 +988,7 @@ class Group extends Error {
 				continue;
 			}
 			if ($role->getHomeProject() == NULL
-			    || $role->getHomeProject()->getID() != $this->getID()) {
+				|| $role->getHomeProject()->getID() != $this->getID()) {
 				continue;
 			}
 
@@ -1063,6 +1065,7 @@ class Group extends Error {
 	 *	setUseSCM - Set the SCM usage
 	 *
 	 *	@param	boolean	enabled/disabled
+	 * @return bool
 	 */
 	function setUseSCM($booleanparam) {
 		db_begin();
@@ -1104,6 +1107,7 @@ class Group extends Error {
 	 *	setUseMail - Set the mailing-list usage
 	 *
 	 *	@param	boolean	enabled/disabled
+	 * @return bool
 	 */
 	function setUseMail($booleanparam) {
 		db_begin();
@@ -1163,6 +1167,7 @@ class Group extends Error {
 	 *	setUseForum - Set the forum usage
 	 *
 	 *	@param	boolean	enabled/disabled
+	 * @return bool
 	 */
 	function setUseForum($booleanparam) {
 		db_begin();
@@ -1205,6 +1210,7 @@ class Group extends Error {
 	 *	setUseFRS - Set the FRS usage
 	 *
 	 *	@param	boolean	enabled/disabled
+	 * @return bool
 	 */
 	function setUseFRS($booleanparam) {
 		db_begin();
@@ -1238,6 +1244,7 @@ class Group extends Error {
 	 *	setUseTracker - Set the tracker usage
 	 *
 	 *	@param	boolean	enabled/disabled
+	 * @return bool
 	 */
 	function setUseTracker ($booleanparam) {
 		db_begin () ;
@@ -1284,6 +1291,7 @@ class Group extends Error {
 	 *	setUseDocman - Set the docman usage
 	 *
 	 *	@param	boolean	enabled/disabled
+	 * @return bool
 	 */
 	function setUseDocman($booleanparam) {
 		db_begin();
@@ -1380,6 +1388,7 @@ class Group extends Error {
 	 *	setUsePM - Set the PM usage
 	 *
 	 *	@param	boolean	enabled/disabled
+	 * @return bool
 	 */
 	function setUsePM($booleanparam) {
 		db_begin();
@@ -1480,12 +1489,12 @@ class Group extends Error {
 		if ($val) {
 			$res = db_query_params('INSERT INTO group_plugin (group_id, plugin_id) VALUES ($1, $2)',
 						array($this->getID(),
-						      $plugin_id));
+							$plugin_id));
 			return $res;
 		} else {
 			$res = db_query_params('DELETE FROM group_plugin WHERE group_id=$1 AND plugin_id=$2',
 						array($this->getID(),
-						      $plugin_id));
+							$plugin_id));
 			return $res;
 		}
 		$this->normalizeAllRoles () ;
@@ -1517,9 +1526,9 @@ class Group extends Error {
 	 */
 	function getHomePage() {
 		if (!preg_match("/^[a-zA-Z][a-zA-Z0-9+.-]*:/",
-		    $this->data_array['homepage'])) {
+			$this->data_array['homepage'])) {
 			$this->data_array['homepage'] = util_url_prefix() .
-			    $this->data_array['homepage'];
+				$this->data_array['homepage'];
 		}
 		return $this->data_array['homepage'];
 	}
@@ -1565,7 +1574,7 @@ class Group extends Error {
 			$res = db_query_params($sql, array($this->getID(), $tag));
 			if (!$res) {
 				$this->setError(_('Setting tags:') . ' ' .
-				    db_error());
+					db_error());
 				db_rollback();
 				return false;
 			}
@@ -1624,7 +1633,7 @@ class Group extends Error {
 		// unlink roles from this project
 		foreach ($this->getRoles() as $r) {
 			if ($r->getHomeProject() == NULL
-			    || $r->getHomeProject()->getID() != $this->getID()) {
+				|| $r->getHomeProject()->getID() != $this->getID()) {
 				$r->unlinkProject($this);
 			}
 		}
@@ -1868,8 +1877,8 @@ class Group extends Error {
 
 		$res = db_query_params('INSERT INTO deleted_groups (unix_group_name, delete_date, isdeleted) VALUES ($1, $2, $3)',
 					array($this->getUnixName(),
-					      time(),
-					      0));
+						time(),
+						0));
 		if (!$res) {
 			$this->setError(_('Error Deleting Project:').' '.db_error());
 			db_rollback();
@@ -2024,7 +2033,7 @@ class Group extends Error {
 		global $SYS;
 
 		if ($user_id != user_getid()
-		    && !forge_check_perm('project_admin', $this->getID())) {
+			&& !forge_check_perm('project_admin', $this->getID())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -2061,7 +2070,7 @@ class Group extends Error {
 				FROM artifact_group_list
 				WHERE group_id=$1 AND status_id=1 AND assigned_to=$2)',
 						array($this->getID(),
-						      $user_id));
+							$user_id));
 		if (!$res) {
 			$this->setError(_('Error: artifact:').' '.db_error());
 			db_rollback();
@@ -2082,7 +2091,7 @@ class Group extends Error {
 					AND pat.assigned_to_id=$2)
 					AND assigned_to_id=100',
 						array($this->getID(),
-						      $user_id));
+							$user_id));
 		if (!$res) {
 			$this->setError(sprintf(_('Error: project_assigned_to %d: %s'), 1, db_error()));
 			db_rollback();
@@ -2095,7 +2104,7 @@ class Group extends Error {
 					AND pt.status_id=1 AND pgl.group_id=$1)
 					AND assigned_to_id=$2',
 						array($this->getID(),
-						      $user_id));
+							$user_id));
 		if (!$res) {
 			$this->setError(sprintf(_('Error: project_assigned_to %d: %s'), 2, db_error()));
 			db_rollback();
@@ -2183,10 +2192,10 @@ class Group extends Error {
 		return db_query_params ('INSERT INTO group_history(group_id,field_name,old_value,mod_by,adddate)
 			VALUES ($1,$2,$3,$4,$5)',
 					array ($this->getID(),
-					       $field_name,
-					       $old_value,
-					       user_getid(),
-					       time()));
+						$field_name,
+						$old_value,
+						user_getid(),
+						time()));
 	}
 
 	/**
@@ -2247,7 +2256,8 @@ class Group extends Error {
 	/**
 	 *	approve - Approve pending project.
 	 *
-	 *	@param	object	The User object who is doing the updating.
+	 *	@param	User	$user The User object who is doing the updating.
+	 *	@return bool
 	 *	@access public
 	 */
 	function approve(&$user) {
@@ -2418,16 +2428,16 @@ class Group extends Error {
 				$this->setUseSCM($template->usesSCM());
 
 				foreach ($template->getPlugins() as
-				    $plugin_id => $plugin_name) {
+					$plugin_id => $plugin_name) {
 					$this->setPluginUse($plugin_name);
 				}
 			} else {
 				/* use SCM choice from registration page */
 
 				foreach ($template->getPlugins() as
-				    $plugin_id => $plugin_name) {
+					$plugin_id => $plugin_name) {
 					if (substr($plugin_name, 3) == 'scm' &&
-					    $plugin_name != 'scmhook') {
+						$plugin_name != 'scmhook') {
 						/* skip copying scm plugins */
 						continue;
 					}
@@ -2439,7 +2449,7 @@ class Group extends Error {
 			foreach ($template->getRoles() as $oldrole) {
 				$newrole = RBACEngine::getInstance()->getRoleById ($id_mappings['role'][$oldrole->getID()]) ;
 				if ($oldrole->getHomeProject() != NULL
-				    && $oldrole->getHomeProject()->getID() == $template->getID()) {
+					&& $oldrole->getHomeProject()->getID() == $template->getID()) {
 					$newrole->setPublic ($oldrole->isPublic()) ;
 				}
 				$oldsettings = $oldrole->getSettingsForProject ($template) ;
@@ -2456,8 +2466,8 @@ class Group extends Error {
 							// Only copy perms for tools that have been copied
 							if (isset ($id_mappings[$section][$k])) {
 								$newrole->setSetting ($section,
-										      $id_mappings[$section][$k],
-										      $v) ;
+											$id_mappings[$section][$k],
+											$v) ;
 							}
 						}
 					}
@@ -2559,10 +2569,10 @@ Enjoy the system, and please tell others about %4$s. Let us know
 if there is anything we can do to help you.
 
 -- the %4$s crew'),
-						       htmlspecialchars_decode($this->getPublicName()),
-						       $this->getUnixName(),
-						       util_make_url ('/project/admin/?group_id='.$this->getID()),
-						       forge_get_config ('forge_name'));
+							htmlspecialchars_decode($this->getPublicName()),
+							$this->getUnixName(),
+							util_make_url ('/project/admin/?group_id='.$this->getID()),
+							forge_get_config ('forge_name'));
 
 			util_send_message($admin->getEmail(), sprintf(_('%1$s Project Approved'), forge_get_config ('forge_name')), $message);
 
@@ -2668,14 +2678,14 @@ Submitted Description: %3$s
 			foreach ($submitters as $submitter) {
 				$message .= sprintf(_('Submitter: %1$s (%2$s)
 '),
-						    $submitter->getRealName(),
-						    $submitter->getUnixName());
+							$submitter->getRealName(),
+							$submitter->getUnixName());
 			}
 
 			$message .= sprintf (_('
 Please visit the following URL to approve or reject this project:
 %1$s'),
-					    util_make_url ('/admin/approve-pending.php')) ;
+						util_make_url ('/admin/approve-pending.php')) ;
 			util_send_message($admin_email, sprintf(_('New %1$s Project Submitted'), forge_get_config ('forge_name')), $message);
 			setup_gettext_from_context();
 		}
@@ -2697,15 +2707,12 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		return true;
 	}
 
-
-
-
 	/**
 	 * validateGroupName - Validate the group name
 	 *
 	 * @param	string	Group name.
 	 *
-	 * @return	boolean	an error false and set an error is the group name is invalide otherwise return true
+	 * @return	boolean	an error false and set an error is the group name is invalid otherwise return true
 	 */
 	function validateGroupName($group_name) {
 		if (strlen($group_name)<3) {
@@ -2731,12 +2738,12 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		$role_ids = array();
 
 		$res = db_query_params('SELECT role_id FROM pfo_role WHERE home_group_id=$1',
-				       array($this->getID()));
+					array($this->getID()));
 		while ($arr = db_fetch_array($res)) {
 			$role_ids[] = $arr['role_id'];
 		}
 		$res = db_query_params('SELECT role_id FROM role_project_refs WHERE group_id=$1',
-				       array($this->getID()));
+					array($this->getID()));
 		while ($arr = db_fetch_array($res)) {
 			$role_ids[] = $arr['role_id'];
 		}
@@ -2794,7 +2801,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		db_begin();
 		$res = db_query_params ('UPDATE groups SET unix_status=$1 WHERE group_id=$2',
 					array ($status,
-					       $this->getID())) ;
+						$this->getID())) ;
 
 		if (!$res) {
 			$this->setError(sprintf(_('Error: Cannot Update Group Unix Status: %s'),db_error()));
@@ -2835,7 +2842,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 			$ids = array () ;
 			foreach ($this->getRoles() as $role) {
 				if ($onlylocal
-				    && ($role->getHomeProject() == NULL || $role->getHomeProject()->getID() != $this->getID())) {
+					&& ($role->getHomeProject() == NULL || $role->getHomeProject()->getID() != $this->getID())) {
 					continue ;
 				}
 				foreach ($role->getUsers() as $user) {
@@ -2875,7 +2882,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		/* if we activate search engine, we probably want to reindex */
 		$res = db_query_params('UPDATE groups SET use_webdav=$1 WHERE group_id=$2',
 					array($status,
-					       $this->getID()));
+						$this->getID()));
 
 		if (!$res) {
 			$this->setError(sprintf(_('Error: Cannot Update Group UseWebdab Status: %s'),db_error()));
@@ -2893,7 +2900,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		/* if we activate search engine, we probably want to reindex */
 		$res = db_query_params('UPDATE groups SET use_docman_search=$1, force_docman_reindex=$1 WHERE group_id=$2',
 					array($status,
-					       $this->getID()));
+						$this->getID()));
 
 		if (!$res) {
 			$this->setError(sprintf(_('Error: Cannot Update Group UseDocmanSearch Status: %s'),db_error()));
@@ -2911,7 +2918,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		/* if we activate search engine, we probably want to reindex */
 		$res = db_query_params('UPDATE groups SET force_docman_reindex=$1 WHERE group_id=$2',
 					array($status,
-					       $this->getID()));
+						$this->getID()));
 
 		if (!$res) {
 			$this->setError(sprintf(_('Error: Cannot Update Group force_docman_reindex %s'),db_error()));
@@ -2976,7 +2983,7 @@ function &group_get_result($group_id=0) {
 
 function getAllProjectTags($onlyvisible = true) {
 	$res = db_query_params('SELECT project_tags.name, groups.group_id FROM groups, project_tags WHERE groups.group_id = project_tags.group_id AND groups.status = $1 ORDER BY project_tags.name, groups.group_id',
-			       array('A'));
+				array('A'));
 
 	if (!$res || db_numrows($res) == 0) {
 		return false;

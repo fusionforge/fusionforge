@@ -48,10 +48,10 @@ class ForumMessage extends Error {
 		/**
 	 *  Constructor.
 	 *
-	 *	@param	object	The Forum object to which this ForumMessage is associated.
-	 *  @param  int	 The message_id.
-	 *  @param  array   The associative array of data.
-	 *	@param 	boolean	Whether the message is a pending one.
+	 *	@param	$Forum  object	The Forum object to which this ForumMessage is associated.
+	 *  @param  $msg_id int	 The message_id.
+	 *  @param  $arr	array   The associative array of data.
+	 *	@param 	$pending	boolean	Whether the message is a pending one.
 	 *	@return	boolean	success.
 	 */
 	function ForumMessage(&$Forum, $msg_id=false, $arr=false, $pending=false) {
@@ -97,11 +97,11 @@ class ForumMessage extends Error {
 
 /**
 	*	insertmoderated - inserts the message into the table for moderation (forum_pending_messages)
-	 *	@param	string	The subject of the message.
-	 *	@param	string	The body of the message.
-	 *	@param	int	The thread_id of the message, if known.
-	 *	@param	int	The message_id of the parent message, if any.
-	 *	@param 	int	The id of the user that is posting the message
+	 *	@param	$subject		string	The subject of the message.
+	 *	@param	$body			string	The body of the message.
+	 *	@param	$thread_id		int	The thread_id of the message, if known.
+	 *	@param	$is_followup_to int	The message_id of the parent message, if any.
+	 *	@param 	$user_id		int	The id of the user that is posting the message
 	 *	@return	boolean success.
 	*/
 
@@ -402,7 +402,7 @@ class ForumMessage extends Error {
 	function fetchData($msg_id) {
 		$res = db_query_params ('SELECT * FROM forum_user_vw WHERE msg_id=$1 AND group_forum_id=$2',
 					array ($msg_id,
-					       $this->Forum->getID())) ;
+						$this->Forum->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Invalid Message Id'));
 			return false;
@@ -421,7 +421,7 @@ class ForumMessage extends Error {
 	function fetchModeratedData($msg_id) {
 		$res = db_query_params ('SELECT * FROM forum_pending_user_vw WHERE msg_id=$1 AND group_forum_id=$2',
 					array ($msg_id,
-					       $this->Forum->getID())) ;
+						$this->Forum->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Invalid Message Id'));
 			return false;
@@ -686,7 +686,7 @@ Or reply to this e-mail entering your response between the following markers:
 				$text,
 				forge_get_config ('forge_name'),
 				util_make_url('/forum/monitor.php?forum_id='.$this->Forum->getID().
-					      '&group_id='.$this->Forum->Group->getID().'&stop=1')
+						'&group_id='.$this->Forum->Group->getID().'&stop=1')
 				);
 
 			$extra_headers = "Return-Path: <noreply@".forge_get_config('web_host').">\n";
@@ -810,14 +810,14 @@ Or reply to this e-mail entering your response between the following markers:
 			thread_id=$7, most_recent_date=$8
 			WHERE msg_id=$9',
 					array ($group_forum_id,
-					       $posted_by,
-					       $subject,
-					       $body,
-					       $post_date,
-					       $is_followup_to,
-					       $thread_id,
-					       $most_recent_date,
-					       $msg_id)) ;
+						$posted_by,
+						$subject,
+						$body,
+						$post_date,
+						$is_followup_to,
+						$thread_id,
+						$most_recent_date,
+						$msg_id)) ;
 		if (!$res) {
 			$this->setError(db_error());
 			return false;

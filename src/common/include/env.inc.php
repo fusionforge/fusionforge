@@ -38,14 +38,14 @@ if (!getenv('SERVER_SOFTWARE')) {
 // Attempt to set up the include path, to fix problems with relative includes
 $fusionforge_basedir = dirname(dirname(dirname( __FILE__ )));
 
-// By default, the include_path is changed to include path needed by Gforge.
+// By default, the include_path is changed to include path needed by FusionForge.
 // If this does not work, then set defines to real path directly.
 //
 // In case of failure, the following defines are set:
-//    $gfconfig : Directory where are the configuration files (/etc/gforge).
-//    $gfcommon : Directory common of gforge (for common php classes).
-//    $gfwww    : Directory www of gforge (publicly accessible files).
-//    $gfplugins: Directory for plugins.
+//	$gfconfig: Directory where are the configuration files (/etc/gforge).
+//	$gfcommon: Directory common of gforge (for common php classes).
+//	$gfwww: Directory www of gforge (publicly accessible files).
+//	$gfplugins: Directory for plugins.
 //
 
 // Easyforge config, allow several instances of gforge based on server name.

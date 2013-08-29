@@ -72,8 +72,9 @@ class Error {
 	 * Set the error string $error_message to the value of $string
 	 * and enable the $error_state flag.
 	 *
-	 * @param	string  The error string to set.
-	 * @param	int	The error code
+	 * @param	string  $string	The error string to set.
+	 * @param	int	$code	The error code
+	 * @return	bool
 	 */
 	function setError($string, $code=ERROR__UNCLASSIFIED_ERROR) {
 		$this->error_state=true;
@@ -85,7 +86,6 @@ class Error {
 	/**
 	 * clearError() - Clear the current error.
 	 * Clear the current error string and disable the $error_state flag.
-	 *
 	 */
 	function clearError() {
 		$this->error_state=false;
@@ -97,8 +97,7 @@ class Error {
 	 * getErrorMessage() - Retrieve the error message string.
 	 * Returns the value of $error_message.
 	 *
-	 * @return    $error_message The current error message string.
-	 *
+	 * @return string The current error message string.
 	 */
 	function getErrorMessage() {
 		if ($this->error_state)	{
@@ -112,8 +111,7 @@ class Error {
 	 * isError() - Determines the current error state.
 	 * This function returns the current value of $error_state.
 	 *
-	 * @return    $error_state     The boolean error status.
-	 *
+	 * @return bool The boolean error status.
 	 */
 	function isError() {
 		return $this->error_state;
@@ -123,8 +121,6 @@ class Error {
 	/**
 	 * setPermissionDeniedError() - sets a Permission Denied error
 	 *  retrieves the localized error string for Permission Denied and calls exit_error()
-	 *
-	 *
 	 */
 	function setPermissionDeniedError(){
 		$this->setError(_('Permission denied.'), ERROR__PERMISSION_DENIED_ERROR);
@@ -165,7 +161,7 @@ class Error {
 	 * setOnUpdateError() - sets an On Update Error
 	 *  retrieves the localized error string for On Update
 	 *
-	 * @param	string  The db result to be written.
+	 * @param	string  $result	The db result to be written.
 	 *
 	 */
 	function setOnUpdateError($result=""){
@@ -201,16 +197,16 @@ class Error {
 
 	/**
 	 * setMissingParamsError() - sets an Group ID Error
-	 *  retrieves the localized error string for missing pparams
+	 *  retrieves the localized error string for missing params
 	 *
-	 * @param	string  The name of the missing parameter
+	 * @param	string  $param	The name of the missing parameter
 	 *
 	 */
 	function setMissingParamsError($param=''){
 		if ($param) {
-			$param = ': ' . $param;
+			$param = _(': ') . $param;
 		}
-		$this->setError(_('Missing Parameters').$param, ERROR__MISSING_PARAMS_ERROR);
+		$this->setError(_('Missing Required Parameters').$param, ERROR__MISSING_PARAMS_ERROR);
 	}
 
 	/**
