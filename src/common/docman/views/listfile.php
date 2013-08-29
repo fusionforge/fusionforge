@@ -165,11 +165,11 @@ jQuery(document).ready(function() {
 echo '<div id="handle" style="float:left; height:100px; margin:3px; width:3px; background: #000; cursor:e-resize;"></div>';
 echo '<div id="right" style="float:left; width: 80%; overflow: auto; max-width: 90%;">';
 if ($DocGroupName) {
-	$headerPath = '<h4>';
+	$headerPath = '<h2>';
 	if ($childgroup_id) {
 		$headerPath .= _('Subproject')._(': ').util_make_link('/docman/?group_id='.$g->getID(),$g->getPublicName()).' ';
 	}
-	$headerPath .= _('Path')._(': ').'<i>'.$dgpath.'</i></h4>';
+	$headerPath .= _('Path')._(': ').'<i>'.$dgpath.'</i></h2>';
 	echo $headerPath;
 	echo '<h3 class="docman_h3" >'._('Document Folder')._(': ').'<i>'.$DocGroupName.'</i>&nbsp;';
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
@@ -389,6 +389,6 @@ if (forge_check_perm('docman', $g->getID(), 'approve')) {
 echo '<div class="docmanDivIncluded">';
 plugin_hook ("blocks", "doc help");
 if (forge_get_config('use_webdav') && $g->useWebdav()) {
-    echo '<p><i>'. util_make_link('/docman/view.php/'.$group_id.'/webdav',_('Documents are also available thru webdav access')) .'</i></p>';
+	echo '<p><i>'. util_make_link('/docman/view.php/'.$group_id.'/webdav',_('Documents are also available thru webdav access')) .'</i></p>';
 }
 echo '</div>';
