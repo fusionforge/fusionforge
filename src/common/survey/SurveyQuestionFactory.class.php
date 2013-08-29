@@ -89,6 +89,7 @@ class SurveyQuestionFactory extends Error {
 		}
 
 		$group_id = $this->Group->GetID();
+		$this->questions = array();
 		$result = db_query_params ('SELECT survey_questions.*,survey_question_types.type
 			FROM survey_questions,survey_question_types
 			WHERE survey_question_types.id=survey_questions.question_type
@@ -96,10 +97,7 @@ class SurveyQuestionFactory extends Error {
 			ORDER BY survey_questions.question_id ASC',
 					   array ($group_id));
 
-		if (!$result) {
-			$this->setError(_('No Survey Question is found').db_error());
-			return false;
-		} else {
+		if ($result) {
 			while ($arr = db_fetch_array($result)) {
 				$this->questions[] = new SurveyQuestion($this->Group, $arr['question_id'], $arr);
 			}
