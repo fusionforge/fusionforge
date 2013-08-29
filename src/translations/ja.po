@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 12:32+0200\n"
+"POT-Creation-Date: 2013-08-29 13:38+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -194,29 +194,25 @@ msgid "Folder"
 msgstr "プロジェクト管理"
 
 #: common/docman/actions/monitordirectory.php:54
+#: common/docman/actions/monitorfile.php:56
+#: common/tracker/actions/tracker.php:434
+#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
+#: www/frs/monitor.php:67
 #, fuzzy
-msgid "monitoring started"
+msgid "Monitoring Started"
 msgstr "モニタリングフォーラム"
 
 #: common/docman/actions/monitordirectory.php:72
+#: common/docman/actions/monitorfile.php:76 www/frs/monitor.php:58
+#: www/frs/monitor.php:59
 #, fuzzy
-msgid "monitoring stopped."
+msgid "Monitoring Stopped"
 msgstr "モニタリングフォーラム"
 
 #: common/docman/actions/monitordirectory.php:76
 #: common/docman/actions/monitorfile.php:80
 msgid "Docman: monitoring action unknown."
 msgstr ""
-
-#: common/docman/actions/monitorfile.php:56
-#, fuzzy
-msgid "Monitoring started."
-msgstr "モニタリングフォーラム"
-
-#: common/docman/actions/monitorfile.php:76
-#, fuzzy
-msgid "Monitoring stopped."
-msgstr "モニタリングフォーラム"
 
 #: common/docman/actions/releasefile.php:49
 #, fuzzy
@@ -5819,13 +5815,6 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Item %s successfully updated"
 msgstr "作成に成功しました。"
-
-#: common/tracker/actions/tracker.php:434
-#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
-#: www/frs/monitor.php:67
-#, fuzzy
-msgid "Monitoring Started"
-msgstr "モニタリングフォーラム"
 
 #: common/tracker/actions/tracker.php:436
 #: common/tracker/actions/tracker.php:453
@@ -17286,11 +17275,6 @@ msgstr "最新ニュース"
 msgid "Error Getting FRSPackage"
 msgstr "アカウントをアクティブにするときにエラーが発生しました"
 
-#: www/frs/monitor.php:58 www/frs/monitor.php:59
-#, fuzzy
-msgid "Monitoring Stopped"
-msgstr "モニタリングフォーラム"
-
 #: www/frs/monitor.php:72
 msgid "File Module ID"
 msgstr ""
@@ -22897,6 +22881,22 @@ msgstr ""
 #: www/users:35
 msgid "No User Name Provided"
 msgstr ""
+
+#, fuzzy
+#~ msgid "monitoring stopped."
+#~ msgstr "モニタリングフォーラム"
+
+#, fuzzy
+#~ msgid "monitoring started"
+#~ msgstr "モニタリングフォーラム"
+
+#, fuzzy
+#~ msgid "Monitoring stopped."
+#~ msgstr "モニタリングフォーラム"
+
+#, fuzzy
+#~ msgid "Monitoring started."
+#~ msgstr "モニタリングフォーラム"
 
 #, fuzzy
 #~ msgid "No action to perform."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 12:32+0200\n"
+"POT-Creation-Date: 2013-08-29 13:38+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -194,29 +194,23 @@ msgid "Folder"
 msgstr "Filnamn"
 
 #: common/docman/actions/monitordirectory.php:54
-#, fuzzy
-msgid "monitoring started"
+#: common/docman/actions/monitorfile.php:56
+#: common/tracker/actions/tracker.php:434
+#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
+#: www/frs/monitor.php:67
+msgid "Monitoring Started"
 msgstr "Bevakning startad"
 
 #: common/docman/actions/monitordirectory.php:72
-#, fuzzy
-msgid "monitoring stopped."
+#: common/docman/actions/monitorfile.php:76 www/frs/monitor.php:58
+#: www/frs/monitor.php:59
+msgid "Monitoring Stopped"
 msgstr "Bevakning stoppad"
 
 #: common/docman/actions/monitordirectory.php:76
 #: common/docman/actions/monitorfile.php:80
 msgid "Docman: monitoring action unknown."
 msgstr ""
-
-#: common/docman/actions/monitorfile.php:56
-#, fuzzy
-msgid "Monitoring started."
-msgstr "Bevakning startad"
-
-#: common/docman/actions/monitorfile.php:76
-#, fuzzy
-msgid "Monitoring stopped."
-msgstr "Bevakning stoppad"
 
 #: common/docman/actions/releasefile.php:49
 #, fuzzy
@@ -5955,12 +5949,6 @@ msgstr "Filradering: Lyckad"
 #, fuzzy, php-format
 msgid "Item %s successfully updated"
 msgstr "Lyckades skapa post"
-
-#: common/tracker/actions/tracker.php:434
-#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
-#: www/frs/monitor.php:67
-msgid "Monitoring Started"
-msgstr "Bevakning startad"
 
 #: common/tracker/actions/tracker.php:436
 #: common/tracker/actions/tracker.php:453
@@ -17714,10 +17702,6 @@ msgstr "Senaste nyheterna"
 msgid "Error Getting FRSPackage"
 msgstr "Fel vid tillägg i forum"
 
-#: www/frs/monitor.php:58 www/frs/monitor.php:59
-msgid "Monitoring Stopped"
-msgstr "Bevakning stoppad"
-
 #: www/frs/monitor.php:72
 msgid "File Module ID"
 msgstr ""
@@ -23578,6 +23562,22 @@ msgstr "Mass uppdatering"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Användarenamn"
+
+#, fuzzy
+#~ msgid "monitoring stopped."
+#~ msgstr "Bevakning stoppad"
+
+#, fuzzy
+#~ msgid "monitoring started"
+#~ msgstr "Bevakning startad"
+
+#, fuzzy
+#~ msgid "Monitoring stopped."
+#~ msgstr "Bevakning stoppad"
+
+#, fuzzy
+#~ msgid "Monitoring started."
+#~ msgstr "Bevakning startad"
 
 #, fuzzy
 #~ msgid "No action to perform."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 12:32+0200\n"
+"POT-Creation-Date: 2013-08-29 13:38+0200\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -190,29 +190,24 @@ msgid "Folder"
 msgstr "Nazwa Pliku"
 
 #: common/docman/actions/monitordirectory.php:54
-#, fuzzy
-msgid "monitoring started"
-msgstr "Szukaj w dokumentach"
+#: common/docman/actions/monitorfile.php:56
+#: common/tracker/actions/tracker.php:434
+#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
+#: www/frs/monitor.php:67
+msgid "Monitoring Started"
+msgstr ""
 
 #: common/docman/actions/monitordirectory.php:72
+#: common/docman/actions/monitorfile.php:76 www/frs/monitor.php:58
+#: www/frs/monitor.php:59
 #, fuzzy
-msgid "monitoring stopped."
+msgid "Monitoring Stopped"
 msgstr "Szukaj w dokumentach"
 
 #: common/docman/actions/monitordirectory.php:76
 #: common/docman/actions/monitorfile.php:80
 msgid "Docman: monitoring action unknown."
 msgstr ""
-
-#: common/docman/actions/monitorfile.php:56
-#, fuzzy
-msgid "Monitoring started."
-msgstr "Szukaj w dokumentach"
-
-#: common/docman/actions/monitorfile.php:76
-#, fuzzy
-msgid "Monitoring stopped."
-msgstr "Szukaj w dokumentach"
 
 #: common/docman/actions/releasefile.php:49
 #, fuzzy
@@ -5653,12 +5648,6 @@ msgstr ""
 #: common/tracker/actions/tracker.php:407
 #, php-format
 msgid "Item %s successfully updated"
-msgstr ""
-
-#: common/tracker/actions/tracker.php:434
-#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
-#: www/frs/monitor.php:67
-msgid "Monitoring Started"
 msgstr ""
 
 #: common/tracker/actions/tracker.php:436
@@ -16889,11 +16878,6 @@ msgstr ""
 msgid "Error Getting FRSPackage"
 msgstr ""
 
-#: www/frs/monitor.php:58 www/frs/monitor.php:59
-#, fuzzy
-msgid "Monitoring Stopped"
-msgstr "Szukaj w dokumentach"
-
 #: www/frs/monitor.php:72
 msgid "File Module ID"
 msgstr ""
@@ -22392,6 +22376,22 @@ msgstr ""
 #: www/users:35
 msgid "No User Name Provided"
 msgstr ""
+
+#, fuzzy
+#~ msgid "monitoring stopped."
+#~ msgstr "Szukaj w dokumentach"
+
+#, fuzzy
+#~ msgid "monitoring started"
+#~ msgstr "Szukaj w dokumentach"
+
+#, fuzzy
+#~ msgid "Monitoring stopped."
+#~ msgstr "Szukaj w dokumentach"
+
+#, fuzzy
+#~ msgid "Monitoring started."
+#~ msgstr "Szukaj w dokumentach"
 
 #, fuzzy
 #~ msgid "Survey Title: "

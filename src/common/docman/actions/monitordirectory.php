@@ -51,7 +51,7 @@ switch ($option) {
 			$warning_msg = _('No action to perform');
 			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
 		}
-		$return_msg .= _('monitoring started');
+		$return_msg .= _('Monitoring Started');
 		break;
 	}
 	case "remove": {
@@ -69,7 +69,7 @@ switch ($option) {
 			$warning_msg = _('No action to perform');
 			session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
 		}
-		$return_msg .= _('monitoring stopped.');
+		$return_msg .= _('Monitoring Stopped');
 		break;
 	}
 	default: {

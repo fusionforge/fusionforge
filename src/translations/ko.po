@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 12:32+0200\n"
+"POT-Creation-Date: 2013-08-29 13:38+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -194,29 +194,25 @@ msgid "Folder"
 msgstr "파일 이름"
 
 #: common/docman/actions/monitordirectory.php:54
+#: common/docman/actions/monitorfile.php:56
+#: common/tracker/actions/tracker.php:434
+#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
+#: www/frs/monitor.php:67
 #, fuzzy
-msgid "monitoring started"
+msgid "Monitoring Started"
 msgstr "모니터링이 시작되었습니다."
 
 #: common/docman/actions/monitordirectory.php:72
+#: common/docman/actions/monitorfile.php:76 www/frs/monitor.php:58
+#: www/frs/monitor.php:59
 #, fuzzy
-msgid "monitoring stopped."
+msgid "Monitoring Stopped"
 msgstr "모니터링이 중단되었습니다."
 
 #: common/docman/actions/monitordirectory.php:76
 #: common/docman/actions/monitorfile.php:80
 msgid "Docman: monitoring action unknown."
 msgstr ""
-
-#: common/docman/actions/monitorfile.php:56
-#, fuzzy
-msgid "Monitoring started."
-msgstr "모니터링이 시작되었습니다."
-
-#: common/docman/actions/monitorfile.php:76
-#, fuzzy
-msgid "Monitoring stopped."
-msgstr "모니터링이 중단되었습니다."
 
 #: common/docman/actions/releasefile.php:49
 #, fuzzy
@@ -5933,13 +5929,6 @@ msgstr "파일 삭제: 성공"
 #, fuzzy, php-format
 msgid "Item %s successfully updated"
 msgstr "항목을 생성하였습니다."
-
-#: common/tracker/actions/tracker.php:434
-#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
-#: www/frs/monitor.php:67
-#, fuzzy
-msgid "Monitoring Started"
-msgstr "모니터링이 시작되었습니다."
 
 #: common/tracker/actions/tracker.php:436
 #: common/tracker/actions/tracker.php:453
@@ -17674,11 +17663,6 @@ msgstr "뉴스"
 msgid "Error Getting FRSPackage"
 msgstr "게시판을 추가할 때 오류가 발생하였습니다."
 
-#: www/frs/monitor.php:58 www/frs/monitor.php:59
-#, fuzzy
-msgid "Monitoring Stopped"
-msgstr "모니터링이 중단되었습니다."
-
 #: www/frs/monitor.php:72
 msgid "File Module ID"
 msgstr ""
@@ -23504,6 +23488,22 @@ msgstr "대량 갱신"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "사용자ID"
+
+#, fuzzy
+#~ msgid "monitoring stopped."
+#~ msgstr "모니터링이 중단되었습니다."
+
+#, fuzzy
+#~ msgid "monitoring started"
+#~ msgstr "모니터링이 시작되었습니다."
+
+#, fuzzy
+#~ msgid "Monitoring stopped."
+#~ msgstr "모니터링이 중단되었습니다."
+
+#, fuzzy
+#~ msgid "Monitoring started."
+#~ msgstr "모니터링이 시작되었습니다."
 
 #, fuzzy
 #~ msgid "No action to perform."

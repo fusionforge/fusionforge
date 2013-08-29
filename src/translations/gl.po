@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 12:32+0200\n"
+"POT-Creation-Date: 2013-08-29 13:38+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -194,29 +194,23 @@ msgid "Folder"
 msgstr "Nome do ficheiro "
 
 #: common/docman/actions/monitordirectory.php:54
-#, fuzzy
-msgid "monitoring started"
+#: common/docman/actions/monitorfile.php:56
+#: common/tracker/actions/tracker.php:434
+#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
+#: www/frs/monitor.php:67
+msgid "Monitoring Started"
 msgstr "Iniciouse a monitorización"
 
 #: common/docman/actions/monitordirectory.php:72
-#, fuzzy
-msgid "monitoring stopped."
+#: common/docman/actions/monitorfile.php:76 www/frs/monitor.php:58
+#: www/frs/monitor.php:59
+msgid "Monitoring Stopped"
 msgstr "Monitorización detida"
 
 #: common/docman/actions/monitordirectory.php:76
 #: common/docman/actions/monitorfile.php:80
 msgid "Docman: monitoring action unknown."
 msgstr ""
-
-#: common/docman/actions/monitorfile.php:56
-#, fuzzy
-msgid "Monitoring started."
-msgstr "Iniciouse a monitorización"
-
-#: common/docman/actions/monitorfile.php:76
-#, fuzzy
-msgid "Monitoring stopped."
-msgstr "Monitorización detida"
 
 #: common/docman/actions/releasefile.php:49
 #, fuzzy
@@ -6001,12 +5995,6 @@ msgstr "Eliminouse o ficheiro correctamente"
 #, fuzzy, php-format
 msgid "Item %s successfully updated"
 msgstr "Creouse o elemento correctamente"
-
-#: common/tracker/actions/tracker.php:434
-#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
-#: www/frs/monitor.php:67
-msgid "Monitoring Started"
-msgstr "Iniciouse a monitorización"
 
 #: common/tracker/actions/tracker.php:436
 #: common/tracker/actions/tracker.php:453
@@ -18005,10 +17993,6 @@ msgstr "Últimas novas"
 msgid "Error Getting FRSPackage"
 msgstr "Produciuse un erro ao obter a mensaxe do foro "
 
-#: www/frs/monitor.php:58 www/frs/monitor.php:59
-msgid "Monitoring Stopped"
-msgstr "Monitorización detida"
-
 #: www/frs/monitor.php:72
 msgid "File Module ID"
 msgstr ""
@@ -23985,6 +23969,22 @@ msgstr "Non se puido actualizar"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Non se introduciu un nome de usuario"
+
+#, fuzzy
+#~ msgid "monitoring stopped."
+#~ msgstr "Monitorización detida"
+
+#, fuzzy
+#~ msgid "monitoring started"
+#~ msgstr "Iniciouse a monitorización"
+
+#, fuzzy
+#~ msgid "Monitoring stopped."
+#~ msgstr "Monitorización detida"
+
+#, fuzzy
+#~ msgid "Monitoring started."
+#~ msgstr "Iniciouse a monitorización"
 
 #, fuzzy
 #~ msgid "No action to perform."

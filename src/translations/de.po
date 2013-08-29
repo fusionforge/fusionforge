@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 12:32+0200\n"
+"POT-Creation-Date: 2013-08-29 13:38+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -194,29 +194,23 @@ msgid "Folder"
 msgstr "Dateiname"
 
 #: common/docman/actions/monitordirectory.php:54
-#, fuzzy
-msgid "monitoring started"
+#: common/docman/actions/monitorfile.php:56
+#: common/tracker/actions/tracker.php:434
+#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
+#: www/frs/monitor.php:67
+msgid "Monitoring Started"
 msgstr "Überwachung gestartet"
 
 #: common/docman/actions/monitordirectory.php:72
-#, fuzzy
-msgid "monitoring stopped."
+#: common/docman/actions/monitorfile.php:76 www/frs/monitor.php:58
+#: www/frs/monitor.php:59
+msgid "Monitoring Stopped"
 msgstr "Überwachung gestoppt"
 
 #: common/docman/actions/monitordirectory.php:76
 #: common/docman/actions/monitorfile.php:80
 msgid "Docman: monitoring action unknown."
 msgstr ""
-
-#: common/docman/actions/monitorfile.php:56
-#, fuzzy
-msgid "Monitoring started."
-msgstr "Überwachung gestartet"
-
-#: common/docman/actions/monitorfile.php:76
-#, fuzzy
-msgid "Monitoring stopped."
-msgstr "Überwachung gestoppt"
 
 #: common/docman/actions/releasefile.php:49
 #, fuzzy
@@ -6023,12 +6017,6 @@ msgstr "Datei löschen: Erfolgreich"
 #, fuzzy, php-format
 msgid "Item %s successfully updated"
 msgstr "Element erfolgreich angelegt"
-
-#: common/tracker/actions/tracker.php:434
-#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
-#: www/frs/monitor.php:67
-msgid "Monitoring Started"
-msgstr "Überwachung gestartet"
 
 #: common/tracker/actions/tracker.php:436
 #: common/tracker/actions/tracker.php:453
@@ -18018,10 +18006,6 @@ msgstr "Neueste Nachrichten"
 msgid "Error Getting FRSPackage"
 msgstr "Fehler beim Suchen von Foren-Nachrichten"
 
-#: www/frs/monitor.php:58 www/frs/monitor.php:59
-msgid "Monitoring Stopped"
-msgstr "Überwachung gestoppt"
-
 #: www/frs/monitor.php:72
 msgid "File Module ID"
 msgstr ""
@@ -24056,6 +24040,22 @@ msgstr "Aktualisierung nicht möglich"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Kein Benutzername angegeben"
+
+#, fuzzy
+#~ msgid "monitoring stopped."
+#~ msgstr "Überwachung gestoppt"
+
+#, fuzzy
+#~ msgid "monitoring started"
+#~ msgstr "Überwachung gestartet"
+
+#, fuzzy
+#~ msgid "Monitoring stopped."
+#~ msgstr "Überwachung gestoppt"
+
+#, fuzzy
+#~ msgid "Monitoring started."
+#~ msgstr "Überwachung gestartet"
 
 #, fuzzy
 #~ msgid "No action to perform."

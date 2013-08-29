@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 12:32+0200\n"
+"POT-Creation-Date: 2013-08-29 13:38+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -194,29 +194,23 @@ msgid "Folder"
 msgstr "Nome file"
 
 #: common/docman/actions/monitordirectory.php:54
-#, fuzzy
-msgid "monitoring started"
+#: common/docman/actions/monitorfile.php:56
+#: common/tracker/actions/tracker.php:434
+#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
+#: www/frs/monitor.php:67
+msgid "Monitoring Started"
 msgstr "Notifica attivata"
 
 #: common/docman/actions/monitordirectory.php:72
-#, fuzzy
-msgid "monitoring stopped."
+#: common/docman/actions/monitorfile.php:76 www/frs/monitor.php:58
+#: www/frs/monitor.php:59
+msgid "Monitoring Stopped"
 msgstr "Notifica disattivata"
 
 #: common/docman/actions/monitordirectory.php:76
 #: common/docman/actions/monitorfile.php:80
 msgid "Docman: monitoring action unknown."
 msgstr ""
-
-#: common/docman/actions/monitorfile.php:56
-#, fuzzy
-msgid "Monitoring started."
-msgstr "Notifica attivata"
-
-#: common/docman/actions/monitorfile.php:76
-#, fuzzy
-msgid "Monitoring stopped."
-msgstr "Notifica disattivata"
 
 #: common/docman/actions/releasefile.php:49
 #, fuzzy
@@ -5992,12 +5986,6 @@ msgstr "Rimozione file eseguita"
 #, fuzzy, php-format
 msgid "Item %s successfully updated"
 msgstr "Elemento creato con successo"
-
-#: common/tracker/actions/tracker.php:434
-#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
-#: www/frs/monitor.php:67
-msgid "Monitoring Started"
-msgstr "Notifica attivata"
 
 #: common/tracker/actions/tracker.php:436
 #: common/tracker/actions/tracker.php:453
@@ -17889,10 +17877,6 @@ msgstr "Ultime Notizie"
 msgid "Error Getting FRSPackage"
 msgstr "Errore nella creazione del forum"
 
-#: www/frs/monitor.php:58 www/frs/monitor.php:59
-msgid "Monitoring Stopped"
-msgstr "Notifica disattivata"
-
 #: www/frs/monitor.php:72
 msgid "File Module ID"
 msgstr ""
@@ -23798,6 +23782,22 @@ msgstr "Aggiornamento multiplo"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Non è stato inserito alcun file"
+
+#, fuzzy
+#~ msgid "monitoring stopped."
+#~ msgstr "Notifica disattivata"
+
+#, fuzzy
+#~ msgid "monitoring started"
+#~ msgstr "Notifica attivata"
+
+#, fuzzy
+#~ msgid "Monitoring stopped."
+#~ msgstr "Notifica disattivata"
+
+#, fuzzy
+#~ msgid "Monitoring started."
+#~ msgstr "Notifica attivata"
 
 #, fuzzy
 #~ msgid "No action to perform."

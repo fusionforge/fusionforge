@@ -53,7 +53,7 @@ switch ($option) {
 				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
 			}
 		}
-		$return_msg .= _('Monitoring started.');
+		$return_msg .= _('Monitoring Started');
 		break;
 	}
 	case "remove": {
@@ -73,7 +73,7 @@ switch ($option) {
 				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
 			}
 		}
-		$return_msg .= _('Monitoring stopped.');
+		$return_msg .= _('Monitoring Stopped');
 		break;
 	}
 	default: {
