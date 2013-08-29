@@ -105,7 +105,7 @@ function &MSPDownload($session_hash,$group_project_id) {
 		$array['success']=false;
 		$array['errormessage']='Could Not Continue Session';
 	}
-	$pg =& projectgroup_get_object($group_project_id);
+	$pg = projectgroup_get_object($group_project_id);
 	if (!$pg || !is_object($pg)) {
 		$array['success']=false;
 		$array['errormessage']='Could Not Get ProjectGroup';

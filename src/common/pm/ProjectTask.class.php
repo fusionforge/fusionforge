@@ -44,7 +44,7 @@ function projecttask_get_object($project_task_id,$data=false) {
 				$data = db_fetch_array($res);
 
 			}
-			$ProjectGroup =& projectgroup_get_object($data["group_project_id"]);
+			$ProjectGroup = projectgroup_get_object($data["group_project_id"]);
 			$PROJECTTASK_OBJ["_".$project_task_id."_"]= new ProjectTask($ProjectGroup,$project_task_id,$data);
 
 		}

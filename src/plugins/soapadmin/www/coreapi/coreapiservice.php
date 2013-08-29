@@ -265,7 +265,7 @@ class CoreApiService {
 			// Invalid parameters => return a soap fault
 			return new SoapFault($e->getCode(),$e->getMessage());
 		}
-		$grps =& group_get_objects_by_name($group_names);
+		$grps = group_get_objects_by_name($group_names);
 		if (!$grps) {
 			return new SoapFault('2002','Could Not Get Groups by Name');
 		}

@@ -312,7 +312,7 @@ class Navigation extends Error {
 			if (is_int($project) && $project == 0) {
 				if (preg_match('/root=/',$request_uri)) {
 					$project_name = preg_replace('/.*?root=/', '', $request_uri);
-					$project =& group_get_object_by_name($project_name);
+					$project = group_get_object_by_name($project_name);
 				}
 			}
 			if ($project && is_object($project)) {

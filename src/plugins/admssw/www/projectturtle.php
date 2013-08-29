@@ -38,7 +38,7 @@ $group_id = getIntFromRequest ('group_id') ;
 
 session_require_perm ('project_read', $group_id) ;
 
-$group = &group_get_object($group_id);
+$group = group_get_object($group_id);
 $projectname = $group->getUnixName();
 
 site_project_header(array('title'=>_('ADMS.SW project meta-data preview'), 'h1' => '', 'group'=>$group_id, 'toptab' => 'home', 'pagename'=>'projectturtle'));
@@ -58,5 +58,3 @@ $HTML->footer(array());
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

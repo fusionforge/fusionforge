@@ -854,7 +854,7 @@ class admsswPlugin extends Plugin {
 	 */
 	private function addProjectFrsResourcesToGraph(&$graph, $group_id, $release_id = false) {
 		
-		$group = &group_get_object($group_id);
+		$group = group_get_object($group_id);
 		
 		// if we are passed a release ID, then only process that particular release
 		if($release_id) {
@@ -971,7 +971,6 @@ class admsswPlugin extends Plugin {
 		}
 	}
 }
-
 
 // Local Variables:
 // mode: php

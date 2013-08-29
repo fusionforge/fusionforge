@@ -65,7 +65,7 @@ if (!$objGroup || !is_object($objGroup)) {
 	exit_error('Error',$objGroup->getErrorMessage());
 }
 
-$objProjectGroup = &projectgroup_get_object($group_project_id);
+$objProjectGroup = projectgroup_get_object($group_project_id);
 if(!$objProjectGroup || !is_object($objProjectGroup)) {
 	exit_error('Error',_('No project group was found for this task.'));
 }

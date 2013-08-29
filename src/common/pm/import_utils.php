@@ -53,7 +53,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 	printr($tasks,'MSPCheckin::in-array');
 	printr(getenv('TZ'),'MSPCheckin::entry TZ');
 
-	$pg =& projectgroup_get_object($group_project_id);
+	$pg = projectgroup_get_object($group_project_id);
 	if (!$pg || !is_object($pg)) {
 		$array['success']=false;
 		$array['errormessage']='Could Not Get ProjectGroup';
