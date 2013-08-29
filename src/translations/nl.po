@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-22 11:04+0200\n"
+"POT-Creation-Date: 2013-08-29 12:23+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -26,8 +26,8 @@ msgstr "Gebruiker toegevoegd"
 
 #: common/account/actions/addsshkey.php:40
 #: common/docman/actions/addfile.php:124 common/docman/actions/addfile.php:160
-#: common/docman/DocumentGroup.class.php:220
-#: common/docman/DocumentGroup.class.php:820
+#: common/docman/DocumentGroup.class.php:221
+#: common/docman/DocumentGroup.class.php:828
 #: common/tracker/actions/tracker.php:131
 #: common/tracker/actions/tracker.php:365 www/project/admin/editimages.php:59
 #, fuzzy
@@ -51,15 +51,15 @@ msgstr "JOB skill Vacature-vaardigheid verwijderd"
 #: common/docman/actions/lockfile.php:34
 #: common/docman/actions/monitordirectory.php:32
 #: common/docman/actions/monitorfile.php:32
-#: common/docman/actions/releasefile.php:31
-#: common/docman/actions/reservefile.php:32
+#: common/docman/actions/releasefile.php:32
+#: common/docman/actions/reservefile.php:33
 #: common/docman/actions/trashdir.php:35 common/docman/actions/trashdir.php:43
 #: common/docman/actions/trashfile.php:34
 #: common/docman/actions/trashfile.php:42
 #: common/docman/actions/updatecreateonline.php:27
 #: common/docman/actions/updateenginesearch.php:27
 #: common/docman/actions/updatewebdavinterface.php:27
-#: common/docman/actions/validatefile.php:39
+#: common/docman/actions/validatefile.php:40
 #: common/docman/views/addfile.php:53
 #, fuzzy
 msgid "Document Manager Action Denied."
@@ -112,10 +112,10 @@ msgstr "Document gesubmit"
 #: common/docman/actions/delfile.php:36
 #: common/docman/actions/enforcereserve.php:36
 #: common/docman/actions/monitorfile.php:38
-#: common/docman/actions/releasefile.php:36
-#: common/docman/actions/reservefile.php:37
+#: common/docman/actions/releasefile.php:37
+#: common/docman/actions/reservefile.php:38
 #: common/docman/actions/trashfile.php:50
-#: common/docman/actions/validatefile.php:44
+#: common/docman/actions/validatefile.php:45
 #, fuzzy
 msgid "Document(s)"
 msgstr "Gebruik forums"
@@ -123,10 +123,8 @@ msgstr "Gebruik forums"
 #: common/docman/actions/delfile.php:48
 #: common/docman/actions/monitordirectory.php:51
 #: common/docman/actions/monitordirectory.php:69
-#: common/docman/actions/monitorfile.php:52
 #: common/docman/actions/monitorfile.php:72
-#: common/docman/actions/trashfile.php:62
-#: common/docman/actions/validatefile.php:56 www/docman/view.php:244
+#: common/docman/actions/trashfile.php:62 www/docman/view.php:244
 #, fuzzy
 msgid "No action to perform"
 msgstr "Geen rapportagedata gevonden"
@@ -187,7 +185,7 @@ msgstr "Vacature toegevoegd"
 
 #: common/docman/actions/monitordirectory.php:38
 #: common/docman/Document.class.php:942
-#: common/docman/DocumentGroup.class.php:715
+#: common/docman/DocumentGroup.class.php:723
 #: common/docman/views/reporting.php:170
 #, fuzzy
 msgid "Folder"
@@ -208,24 +206,28 @@ msgstr "Monitoring gestopt"
 msgid "Docman: monitoring action unknown."
 msgstr ""
 
+#: common/docman/actions/monitorfile.php:52
+#: common/docman/actions/validatefile.php:57
+#, fuzzy
+msgid "No action to perform."
+msgstr "Geen rapportagedata gevonden"
+
 #: common/docman/actions/monitorfile.php:56
-#: common/tracker/actions/tracker.php:434
-#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
-#: www/frs/monitor.php:67
-msgid "Monitoring Started"
+#, fuzzy
+msgid "Monitoring started."
 msgstr "Monitoring gestart"
 
-#: common/docman/actions/monitorfile.php:76 www/frs/monitor.php:58
-#: www/frs/monitor.php:59
-msgid "Monitoring Stopped"
+#: common/docman/actions/monitorfile.php:76
+#, fuzzy
+msgid "Monitoring stopped."
 msgstr "Monitoring gestopt"
 
-#: common/docman/actions/releasefile.php:48
+#: common/docman/actions/releasefile.php:49
 #, fuzzy
 msgid "released successfully."
 msgstr "Aangemaakt"
 
-#: common/docman/actions/reservefile.php:48
+#: common/docman/actions/reservefile.php:49
 #, fuzzy
 msgid "reserved successfully."
 msgstr "Document gesubmit"
@@ -270,7 +272,7 @@ msgstr "Gebruiker aangepast"
 msgid "Webdav Interface updated successfully: Off."
 msgstr "Gebruiker aangepast"
 
-#: common/docman/actions/validatefile.php:60
+#: common/docman/actions/validatefile.php:61
 #, fuzzy
 msgid "activated successfully."
 msgstr "Wijziging doorgevoerd"
@@ -280,9 +282,9 @@ msgstr "Wijziging doorgevoerd"
 #: common/docman/DocumentGroup.class.php:63
 #: common/docman/DocumentGroupFactory.class.php:61
 #: common/docman/DocumentManager.class.php:56
-#: common/docman/include/DocumentGroupHTML.class.php:39
+#: common/docman/include/DocumentGroupHTML.class.php:46
 #: common/forum/Forum.class.php:108 common/forum/ForumFactory.class.php:52
-#: common/frs/FRSFile.class.php:395 common/frs/FRSPackage.class.php:99
+#: common/frs/FRSFile.class.php:396 common/frs/FRSPackage.class.php:99
 #: common/include/GroupJoinRequest.class.php:65
 #: common/include/Permission.class.php:103
 #: common/mail/MailingList.class.php:65
@@ -346,18 +348,18 @@ msgid "Document: Invalid docid"
 msgstr "Document: Ongeldig document ID"
 
 #: common/docman/Document.class.php:582
-#: common/docman/DocumentGroup.class.php:409
+#: common/docman/DocumentGroup.class.php:410
 #, fuzzy
 msgid "Unable To Remove Monitor"
 msgstr "Kan geen monitor toevoegen"
 
 #: common/docman/Document.class.php:603
-#: common/docman/DocumentGroup.class.php:430 common/forum/Forum.class.php:459
+#: common/docman/DocumentGroup.class.php:431 common/forum/Forum.class.php:458
 msgid "Unable To Add Monitor"
 msgstr "Kan geen monitor toevoegen"
 
 #: common/docman/Document.class.php:619
-#: common/docman/DocumentGroup.class.php:446
+#: common/docman/DocumentGroup.class.php:447
 #, fuzzy
 msgid "Unable To Clear Monitor"
 msgstr "Kan geen monitor toevoegen"
@@ -388,7 +390,7 @@ msgid "by"
 msgstr ""
 
 #: common/docman/Document.class.php:941
-#: common/docman/DocumentGroup.class.php:714
+#: common/docman/DocumentGroup.class.php:722
 #: common/forum/ForumHTML.class.php:73 common/tracker/actions/browse.php:368
 #: plugins/contribtracker/www/index.php:35
 #: plugins/contribtracker/www/index.php:167
@@ -406,13 +408,13 @@ msgstr "Project"
 #: common/docman/Document.class.php:943 common/docman/Document.class.php:944
 #: common/docman/Document.class.php:945
 #: common/docman/DocumentGroup.class.php:67
-#: common/docman/DocumentGroup.class.php:714
-#: common/docman/DocumentGroup.class.php:715
-#: common/docman/DocumentGroup.class.php:717
-#: common/docman/DocumentGroup.class.php:719
+#: common/docman/DocumentGroup.class.php:722
+#: common/docman/DocumentGroup.class.php:723
+#: common/docman/DocumentGroup.class.php:725
+#: common/docman/DocumentGroup.class.php:727
 #: common/docman/DocumentManager.class.php:189
 #: common/docman/DocumentManager.class.php:195
-#: common/docman/include/DocumentGroupHTML.class.php:43
+#: common/docman/include/DocumentGroupHTML.class.php:50
 #: common/docman/views/addfile.php:91 common/docman/views/addfile.php:92
 #: common/docman/views/addsubdocgroup.php:56
 #: common/docman/views/addsubdocgroup.php:58
@@ -422,12 +424,12 @@ msgstr "Project"
 #: common/docman/views/listfile.php:174
 #: common/docman/views/listtrashfile.php:117
 #: common/docman/views/search.php:150 common/docman/views/search.php:151
-#: common/forum/Forum.class.php:232 common/forum/Forum.class.php:527
-#: common/forum/Forum.class.php:608 common/forum/Forum.class.php:634
-#: common/forum/Forum.class.php:642 common/forum/Forum.class.php:650
-#: common/forum/Forum.class.php:666 common/forum/ForumHTML.class.php:73
+#: common/forum/Forum.class.php:231 common/forum/Forum.class.php:526
+#: common/forum/Forum.class.php:607 common/forum/Forum.class.php:633
+#: common/forum/Forum.class.php:641 common/forum/Forum.class.php:649
+#: common/forum/Forum.class.php:665 common/forum/ForumHTML.class.php:73
 #: common/forum/ForumHTML.class.php:211 common/include/exit.php:80
-#: common/include/User.class.php:313
+#: common/include/User.class.php:336
 #: common/mail/MailingListFactory.class.php:104
 #: common/tracker/actions/browse.php:406 common/tracker/actions/browse.php:409
 #: common/tracker/actions/query.php:329 common/tracker/actions/query.php:344
@@ -474,7 +476,7 @@ msgstr "Project"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:632
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:634
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/lostlogin.php:84
-#: www/account/register.php:205 www/admin/approve-pending.php:194
+#: www/account/register.php:213 www/admin/approve-pending.php:194
 #: www/admin/database.php:162 www/admin/responses_admin.php:42
 #: www/admin/trove/trove_cat_edit.php:70 www/export/rssAboTask.php:142
 #: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
@@ -512,19 +514,19 @@ msgid "Document description"
 msgstr "Omschrijving:"
 
 #: common/docman/Document.class.php:945
-#: common/docman/DocumentGroup.class.php:717
+#: common/docman/DocumentGroup.class.php:725
 #: common/tracker/actions/browse.php:201 common/tracker/actions/query.php:203
 #: common/tracker/actions/query.php:350
 msgid "Submitter"
 msgstr "Indiener"
 
 #: common/docman/Document.class.php:947
-#: common/docman/DocumentGroup.class.php:722
+#: common/docman/DocumentGroup.class.php:730
 msgid "For more info, visit:"
 msgstr ""
 
 #: common/docman/Document.class.php:952
-#: common/docman/DocumentGroup.class.php:727
+#: common/docman/DocumentGroup.class.php:735
 msgid "Docman"
 msgstr ""
 
@@ -534,7 +536,7 @@ msgid "Error Deleting Document:"
 msgstr "Fout bij het invoegen van een element"
 
 #: common/docman/Document.class.php:1092
-#: common/docman/DocumentGroup.class.php:865
+#: common/docman/DocumentGroup.class.php:873
 msgid "wrong column name"
 msgstr ""
 
@@ -549,7 +551,7 @@ msgstr "Geen documenten gevonden"
 msgid "Document Folder"
 msgstr "Documenttitel"
 
-#: common/docman/DocumentGroup.class.php:76 common/forum/Forum.class.php:140
+#: common/docman/DocumentGroup.class.php:76
 #: common/frs/FRSPackage.class.php:116 common/include/Error.class.php:189
 #: common/mail/MailingList.class.php:83 common/survey/Survey.class.php:83
 #: common/survey/SurveyQuestion.class.php:74
@@ -563,7 +565,7 @@ msgid "Name is required"
 msgstr "Naam is gereserveerd voor CVS."
 
 #: common/docman/DocumentGroup.class.php:110
-#: common/docman/DocumentGroup.class.php:489
+#: common/docman/DocumentGroup.class.php:490
 #, fuzzy
 msgid "Invalid Documents Folder parent ID"
 msgstr "Documentgroep: Ongeldig documentgroep ID"
@@ -578,68 +580,68 @@ msgstr "De opgegeven gebruikersnaam bestaat al."
 msgid "Error Adding Folder:"
 msgstr "Fout bij het toevoegen van een forum"
 
-#: common/docman/DocumentGroup.class.php:240
+#: common/docman/DocumentGroup.class.php:241
 msgid "Unsupported injected file:"
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:258
+#: common/docman/DocumentGroup.class.php:259
 #, fuzzy
 msgid "Invalid Document Folder ID"
 msgstr "Documentgroep: Ongeldig documentgroep ID"
 
-#: common/docman/DocumentGroup.class.php:501
+#: common/docman/DocumentGroup.class.php:502
 #, fuzzy
 msgid "Documents Folder name already exists"
 msgstr "Unixnaam is al in gebruik"
 
-#: common/docman/DocumentGroup.class.php:524
+#: common/docman/DocumentGroup.class.php:525
 #, fuzzy, php-format
 msgid "Error: %s"
 msgstr "Fout"
 
-#: common/docman/DocumentGroup.class.php:662
+#: common/docman/DocumentGroup.class.php:670
 #, fuzzy
 msgid "Browse this folder"
 msgstr "Wijzig de %1$ss tabel"
 
-#: common/docman/DocumentGroup.class.php:709
+#: common/docman/DocumentGroup.class.php:717
 #, fuzzy
 msgid "New folder"
 msgstr "Nieuwe rol"
 
-#: common/docman/DocumentGroup.class.php:711
+#: common/docman/DocumentGroup.class.php:719
 #, fuzzy
 msgid "Updated folder by"
 msgstr "Record aanpassen:"
 
-#: common/docman/DocumentGroup.class.php:719
+#: common/docman/DocumentGroup.class.php:727
 #, fuzzy
 msgid "Updated by"
 msgstr "Aangepast"
 
-#: common/docman/DocumentGroup.class.php:754
+#: common/docman/DocumentGroup.class.php:762
 msgid "Unable to extract ZIP file."
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:759
+#: common/docman/DocumentGroup.class.php:767
 msgid "Unable to open ZIP file."
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:810
+#: common/docman/DocumentGroup.class.php:818
 #, fuzzy
 msgid "(Title must be at least 5 characters.)"
 msgstr "Titel moet minstens 5 tekens lang zijn"
 
-#: common/docman/DocumentGroup.class.php:815
+#: common/docman/DocumentGroup.class.php:823
 msgid "Injected by ZIP:"
 msgstr ""
 
-#: common/docman/DocumentGroup.class.php:824
+#: common/docman/DocumentGroup.class.php:832
 #, fuzzy
 msgid "Unknown item."
 msgstr "Unix account status"
 
-#: common/docman/DocumentGroup.class.php:831
+#: common/docman/DocumentGroup.class.php:839
 msgid "Unable to open folder for injecting into tree"
 msgstr ""
 
@@ -676,7 +678,7 @@ msgstr ""
 msgid "Last modified"
 msgstr "Meest recente verandering"
 
-#: common/docman/include/DocumentGroupHTML.class.php:43
+#: common/docman/include/DocumentGroupHTML.class.php:50
 #: common/survey/SurveyResponse.class.php:95
 #: common/tracker/actions/tracker.php:271
 #: common/tracker/views/form-adminroadmap.php:57
@@ -1145,7 +1147,7 @@ msgstr ""
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:108
 #: plugins/mantisbt/view/viewAttachment.php:49
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:133
-#: www/frs/index.php:177
+#: www/frs/index.php:207
 msgid "Filename"
 msgstr "Bestandsnaam"
 
@@ -1160,7 +1162,7 @@ msgstr "Bestandsnaam"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:148
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
-#: www/account/register.php:163 www/people/editjob.php:52
+#: www/account/register.php:171 www/people/editjob.php:52
 #: www/people/editjob.php:74 www/people/editprofile.php:107
 #: www/people/people_utils.php:405 www/people/skills_utils.php:49
 #: www/pm/admin/index.php:188
@@ -1232,7 +1234,7 @@ msgstr ""
 #: common/docman/views/listfile.php:219
 #: common/docman/views/listtrashfile.php:130
 #: common/docman/views/pendingfiles.php:63
-#: common/tracker/include/ArtifactTypeHtml.class.php:364 www/frs/index.php:179
+#: common/tracker/include/ArtifactTypeHtml.class.php:364 www/frs/index.php:209
 #: www/project/admin/editimages.php:269
 msgid "Size"
 msgstr "Grootte"
@@ -1252,7 +1254,7 @@ msgstr "View"
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:95
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:56
-#: plugins/hudson/include/hudsonViews.class.php:301
+#: plugins/hudson/include/hudsonViews.class.php:304
 #: plugins/mantisbt/view/admin/viewCategorie.php:50
 #: plugins/mantisbt/view/viewAttachment.php:50
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
@@ -1324,15 +1326,15 @@ msgstr ""
 #: cronjobs/send_pending_items_mail.php:96
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:190
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:54
-#: plugins/hudson/include/HudsonBuild.class.php:110
+#: plugins/hudson/include/HudsonBuild.class.php:115
 #: www/account/editsshkeys.php:59 www/account/index.php:146
-#: www/account/index.php:309 www/admin/cronman.php:78
+#: www/account/index.php:308 www/admin/cronman.php:78
 #: www/admin/grouplist.php:118 www/admin/massmail.php:158
 #: www/admin/search.php:88 www/admin/search.php:168 www/admin/userlist.php:115
 #: www/developer/diary.php:56 www/developer/diary.php:87
 #: www/export/rss20_docman.php:136 www/export/rss20_docman.php:138
 #: www/export/tracker.php:108 www/forum/index.php:90 www/forum/message.php:127
-#: www/forum/myforums.php:152 www/frs/index.php:148 www/frs/index.php:207
+#: www/forum/myforums.php:152 www/frs/index.php:178 www/frs/index.php:237
 #: www/include/html.php:1041 www/news/news_utils.php:147
 #: www/news/news_utils.php:267 www/people/people_utils.php:422
 #: www/people/viewjob.php:78 www/pm/browse_task.php:265
@@ -1350,8 +1352,8 @@ msgstr ""
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:93
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:89
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
-#: www/soap/tracker/tracker.php:1131 www/softwaremap/full_list.php:138
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:299
+#: www/soap/tracker/tracker.php:1131 www/softwaremap/full_list.php:123
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
 msgstr "Y-m-d H:i"
@@ -1601,7 +1603,7 @@ msgstr ""
 #: www/people/skills_utils.php:156 www/pm/add_task.php:95
 #: www/pm/browse_task.php:127 www/pm/browse_task.php:233
 #: www/pm/detail_task.php:86 www/pm/ganttpage.php:160 www/pm/mod_task.php:146
-#: www/project/stats/index.php:105 www/reporting/groupadded.php:66
+#: www/project/stats/index.php:107 www/reporting/groupadded.php:66
 #: www/reporting/groupcum.php:66 www/reporting/projectact.php:72
 #: www/reporting/projecttime.php:81 www/reporting/siteact.php:72
 #: www/reporting/sitetimebar.php:66 www/reporting/sitetime.php:79
@@ -1680,10 +1682,10 @@ msgstr "Startdatum"
 #: plugins/mailman/www/admin/index.php:150
 #: plugins/mailman/www/admin/index.php:183
 #: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
-#: www/account/lostpw.php:90 www/account/pending-resend.php:69
-#: www/account/pending-resend.php:71 www/account/register.php:163
-#: www/account/register.php:212 www/account/register.php:218
-#: www/account/register.php:224 www/account/register.php:230
+#: www/account/lostpw.php:90 www/account/pending-resend.php:65
+#: www/account/pending-resend.php:67 www/account/register.php:171
+#: www/account/register.php:220 www/account/register.php:226
+#: www/account/register.php:232 www/account/register.php:238
 #: www/account/verify.php:76 www/account/verify.php:78
 #: www/account/verify.php:86 www/activity/index.php:179
 #: www/activity/index.php:180 www/activity/index.php:181
@@ -1705,7 +1707,9 @@ msgstr "Startdatum"
 #: www/frs/reporting/downloads.php:110 www/pm/admin/index.php:211
 #: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
 #: www/pm/format_csv.php:86 www/pm/format_csv.php:89 www/pm/format_csv.php:93
-#: www/pm/format_csv.php:97 www/register/index.php:226
+#: www/pm/format_csv.php:97 www/project/stats/index.php:105
+#: www/project/stats/index.php:106 www/project/stats/index.php:107
+#: www/project/stats/index.php:108 www/register/index.php:226
 #: www/reporting/groupadded.php:65 www/reporting/groupadded.php:66
 #: www/reporting/groupadded.php:67 www/reporting/groupcum.php:65
 #: www/reporting/groupcum.php:66 www/reporting/groupcum.php:67
@@ -1733,7 +1737,7 @@ msgstr "Startdatum"
 #: www/snippet/addversion.php:102 www/snippet/addversion.php:217
 #: www/snippet/addversion.php:221 www/snippet/package.php:147
 #: www/snippet/package.php:151 www/snippet/package.php:156
-#: www/snippet/package.php:169
+#: www/snippet/package.php:169 www/survey/include/SurveyHTML.class.php:191
 #, php-format
 msgid ":"
 msgstr ""
@@ -1745,7 +1749,7 @@ msgstr ""
 #: www/people/skills_utils.php:157 www/pm/add_task.php:110
 #: www/pm/browse_task.php:128 www/pm/browse_task.php:235
 #: www/pm/detail_task.php:90 www/pm/ganttpage.php:161 www/pm/mod_task.php:160
-#: www/project/stats/index.php:106 www/reporting/groupadded.php:67
+#: www/project/stats/index.php:108 www/reporting/groupadded.php:67
 #: www/reporting/groupcum.php:67 www/reporting/projectact.php:73
 #: www/reporting/projecttime.php:82 www/reporting/siteact.php:73
 #: www/reporting/sitetimebar.php:67 www/reporting/sitetime.php:80
@@ -1759,7 +1763,7 @@ msgid "End Date"
 msgstr "Einddatum"
 
 #: common/docman/views/reporting.php:97 www/activity/index.php:191
-#: www/frs/reporting/downloads.php:112 www/project/stats/index.php:107
+#: www/frs/reporting/downloads.php:112 www/project/stats/index.php:111
 #: www/reporting/groupadded.php:68 www/reporting/groupcum.php:68
 #: www/reporting/projectact.php:74 www/reporting/projecttime.php:83
 #: www/reporting/siteact.php:74 www/reporting/sitetimebar.php:68
@@ -1825,7 +1829,7 @@ msgstr "Gebruiker"
 #: www/admin/cronman.php:42 www/admin/massmail.php:139
 #: www/developer/diary.php:81 www/forum/forum.php:248
 #: www/forum/message.php:161 www/frs/admin/showreleases.php:101
-#: www/frs/index.php:178 www/frs/reporting/downloads.php:194
+#: www/frs/index.php:208 www/frs/reporting/downloads.php:194
 #: www/news/admin/news_admin_utils.php:57 www/pm/calendar.php:268
 #: www/pm/include/ProjectTaskHTML.class.php:157
 #: www/pm/include/ProjectTaskHTML.class.php:203
@@ -2019,8 +2023,8 @@ msgstr ""
 msgid "File Updated Successfully"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:40 common/forum/Forum.class.php:126
-#: common/forum/ForumFactory.class.php:60 www/forum/admin/index.php:58
+#: common/forum/ForumAdmin.class.php:40 common/forum/ForumFactory.class.php:60
+#: www/forum/admin/index.php:58
 #, php-format
 msgid "%s does not use the Forum tool"
 msgstr ""
@@ -2125,7 +2129,7 @@ msgstr "Release"
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:53
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:73
 #: plugins/webanalytics/view/admin/updateLinkValue.php:41
-#: www/account/index.php:337 www/account/lostlogin.php:107
+#: www/account/index.php:336 www/account/lostlogin.php:107
 #: www/admin/groupedit.php:224 www/admin/trove/trove_cat_edit.php:152
 #: www/admin/useredit.php:236 www/admin/useredit.php:315
 #: www/admin/vhost.php:189 www/forum/admin/index.php:162
@@ -2179,55 +2183,77 @@ msgid ""
 "delete the message."
 msgstr ""
 
-#: common/forum/Forum.class.php:173 common/forum/Forum.class.php:555
-msgid "Forum Name Must Be At Least 3 Characters"
-msgstr "Forum naam moet minstens 3 tekens lang zijn"
-
-#: common/forum/Forum.class.php:177 common/forum/Forum.class.php:559
-msgid "Forum Description Must Be At Least 10 Characters"
-msgstr "Forum omschrijving moet minstens 10 tekens lang zijn"
-
-#: common/forum/Forum.class.php:182 common/forum/Forum.class.php:184
-#: common/forum/Forum.class.php:564 common/forum/Forum.class.php:566
-msgid "Illegal Characters in Forum Name"
-msgstr "Niet-toegestane tekens in de forum naam"
-
-#: common/forum/Forum.class.php:182 common/forum/Forum.class.php:564
-msgid "No space"
+#: common/forum/Forum.class.php:126
+#, php-format
+msgid "%s does not use the Forum tool."
 msgstr ""
 
-#: common/forum/Forum.class.php:204 common/forum/Forum.class.php:591
+#: common/forum/Forum.class.php:139
 #, fuzzy
-msgid "Mailing List Exists with same name"
+msgid "Group_id in db result does not match Group Object."
+msgstr "Groep ID in database resultaat komt niet overeen met groep object"
+
+#: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
+#, fuzzy
+msgid "Forum name must be at least 3 characters."
+msgstr "Forum naam moet minstens 3 tekens lang zijn"
+
+#: common/forum/Forum.class.php:176
+#, fuzzy
+msgid "Forum description must be at least 10 characters."
+msgstr "Forum omschrijving moet minstens 10 tekens lang zijn"
+
+#: common/forum/Forum.class.php:181 common/forum/Forum.class.php:563
+#, fuzzy
+msgid "Illegal characters in Forum name"
+msgstr "Niet-toegestane tekens in de forum naam"
+
+#: common/forum/Forum.class.php:181 common/forum/Forum.class.php:563
+msgid "No space allowed."
+msgstr ""
+
+#: common/forum/Forum.class.php:183 common/forum/Forum.class.php:565
+#, fuzzy
+msgid "Illegal characters in Forum name."
+msgstr "Niet-toegestane tekens in de forum naam"
+
+#: common/forum/Forum.class.php:203 common/forum/Forum.class.php:590
+#, fuzzy
+msgid "Mailing List exists with same name."
 msgstr "Mailinglijst naam:"
 
-#: common/forum/Forum.class.php:232
+#: common/forum/Forum.class.php:231
 #, fuzzy
 msgid "Error Adding Forum"
 msgstr "Fout bij het toevoegen van een forum"
 
-#: common/forum/Forum.class.php:243 cronjobs/homedirs.php:156
+#: common/forum/Forum.class.php:242 cronjobs/homedirs.php:156
 #: www/account/first.php:29
 #, php-format
 msgid "Welcome to %s"
 msgstr "Welkom bij %s"
 
-#: common/forum/Forum.class.php:267
-msgid "Invalid forum group identifier"
-msgstr ""
-
-#: common/forum/Forum.class.php:441 common/forum/Forum.class.php:476
-#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
-#: common/tracker/ArtifactType.class.php:526
+#: common/forum/Forum.class.php:266
 #, fuzzy
-msgid "You can only monitor if you are logged in"
+msgid "Invalid forum group identifier."
+msgstr "Ongeldige gebruiker"
+
+#: common/forum/Forum.class.php:440 common/forum/Forum.class.php:475
+#, fuzzy
+msgid "You can only monitor if you are logged in."
 msgstr "Je kunt alleen monitoren als je bent ingelogd"
 
-#: common/forum/Forum.class.php:509
-msgid "You Can Only Save Your Place If You Are Logged In"
-msgstr "Je kunt je positie alleen opslaan als je bent ingelogd"
+#: common/forum/Forum.class.php:508
+#, fuzzy
+msgid "You can only save your place if you are logged in."
+msgstr "Je kunt alleen monitoren als je bent ingelogd"
 
-#: common/forum/Forum.class.php:608 common/survey/Survey.class.php:181
+#: common/forum/Forum.class.php:558
+#, fuzzy
+msgid "Forum Description Must Be At Least 10 Characters."
+msgstr "Forum omschrijving moet minstens 10 tekens lang zijn"
+
+#: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
 #: common/survey/SurveyQuestion.class.php:153
 #: common/tracker/Artifact.class.php:1153
@@ -2237,8 +2263,8 @@ msgstr "Je kunt je positie alleen opslaan als je bent ingelogd"
 msgid "Update failed"
 msgstr "Wijzigen mislukt"
 
-#: common/forum/Forum.class.php:623 common/frs/FRSPackage.class.php:455
-#: common/frs/FRSRelease.class.php:343 common/include/Group.class.php:1590
+#: common/forum/Forum.class.php:622 common/frs/FRSPackage.class.php:467
+#: common/frs/FRSRelease.class.php:354 common/include/Group.class.php:1590
 #: common/mail/MailingList.class.php:393 common/pm/ProjectGroup.class.php:362
 #: common/pm/ProjectTask.class.php:515 common/tracker/Artifact.class.php:505
 #: common/tracker/ArtifactExtraField.class.php:430
@@ -2246,13 +2272,13 @@ msgstr "Wijzigen mislukt"
 msgid "Please tick all checkboxes."
 msgstr ""
 
-#: common/forum/Forum.class.php:634 common/forum/Forum.class.php:642
-#: common/forum/Forum.class.php:650 common/forum/Forum.class.php:666
+#: common/forum/Forum.class.php:633 common/forum/Forum.class.php:641
+#: common/forum/Forum.class.php:649 common/forum/Forum.class.php:665
 #, fuzzy
 msgid "Error Deleting Forum"
 msgstr "Fout bij het toevoegen van een forum"
 
-#: common/forum/Forum.class.php:658 common/forum/Forum.class.php:674
+#: common/forum/Forum.class.php:657 common/forum/Forum.class.php:673
 #, fuzzy
 msgid "Error Deleting Forum:"
 msgstr "Fout bij het toevoegen van een forum"
@@ -2551,7 +2577,7 @@ msgstr "Bericht niet gevonden"
 msgid "Invalid group_form_id"
 msgstr "Unix groepsnaam:"
 
-#: common/frs/FRSFile.class.php:82 common/frs/FRSFile.class.php:399
+#: common/frs/FRSFile.class.php:82 common/frs/FRSFile.class.php:400
 #, fuzzy
 msgid "Invalid FRS Release Object"
 msgstr "Geen geldig Enqu&ecirc;te Object"
@@ -2570,11 +2596,11 @@ msgstr ""
 msgid "FRSFile Appears to be invalid"
 msgstr "FRS bestand is kennelijk niet geldig"
 
-#: common/frs/FRSFile.class.php:151 common/frs/FRSFile.class.php:435
+#: common/frs/FRSFile.class.php:151 common/frs/FRSFile.class.php:436
 msgid "That filename already exists in this project space"
 msgstr "Deze bestandsnaam komt al in deze projectomgeving voor"
 
-#: common/frs/FRSFile.class.php:188 common/frs/FRSFile.class.php:441
+#: common/frs/FRSFile.class.php:188 common/frs/FRSFile.class.php:442
 msgid "File cannot be moved to the permanent location"
 msgstr "Bestand kan niet verplaatst worden naar de permanente locatie"
 
@@ -2588,20 +2614,20 @@ msgstr "Fout bij toevoegen database"
 msgid "Invalid file_id"
 msgstr "Ongeldige volledige naam"
 
-#: common/frs/FRSFile.class.php:417 common/frs/FRSPackage.class.php:396
-#: common/frs/FRSRelease.class.php:427 common/pm/ProjectGroup.class.php:347
+#: common/frs/FRSFile.class.php:418 common/frs/FRSPackage.class.php:396
+#: common/frs/FRSRelease.class.php:438 common/pm/ProjectGroup.class.php:347
 #, fuzzy
 msgid "Error On Update: "
 msgstr "Fout bij bewerken:"
 
 #: common/frs/FRSFileProcessorType.class.php:61
-#: common/frs/FRSFileType.class.php:61
+#: common/frs/FRSFileType.class.php:68
 #, fuzzy
 msgid "Invalid type_id"
 msgstr "Ongeldige gebruiker"
 
 #: common/frs/FRSPackage.class.php:139 common/frs/FRSPackage.class.php:371
-#: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:388
+#: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:399
 msgid "FRSPackage Name Must Be At Least 3 Characters"
 msgstr "FRS packagenaam moet tenminste 3 tekens lang zijn"
 
@@ -2624,6 +2650,12 @@ msgstr "Fout bij toevoegen database"
 #, fuzzy
 msgid "Invalid package_id"
 msgstr "Ongeldige parameter"
+
+#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
+#: common/tracker/ArtifactType.class.php:526
+#, fuzzy
+msgid "You can only monitor if you are logged in"
+msgstr "Je kunt alleen monitoren als je bent ingelogd"
 
 #: common/frs/FRSPackage.class.php:291
 #, fuzzy
@@ -2655,21 +2687,21 @@ msgstr "De opgegeven gebruikersnaam bestaat al."
 msgid "Error Updating Package: Couldn't rename dir"
 msgstr "De opgegeven gebruikersnaam bestaat al."
 
-#: common/frs/FRSPackage.class.php:465
+#: common/frs/FRSPackage.class.php:477
 #, fuzzy
 msgid "Release Error: "
 msgstr "Opgeleverd door:"
 
-#: common/frs/FRSPackage.class.php:475
+#: common/frs/FRSPackage.class.php:487
 msgid "Package delete error: trying to delete root dir"
 msgstr ""
 
-#: common/frs/FRSPackage.class.php:504
+#: common/frs/FRSPackage.class.php:516
 #, fuzzy
 msgid "No valid max release id"
 msgstr "Ongeldige volledige naam"
 
-#: common/frs/FRSPackage.class.php:525
+#: common/frs/FRSPackage.class.php:537
 msgid "Cannot open the file archive."
 msgstr ""
 
@@ -2721,26 +2753,26 @@ msgid ""
 "the future, please login to %s and click this link:"
 msgstr ""
 
-#: common/frs/FRSRelease.class.php:364
+#: common/frs/FRSRelease.class.php:375
 msgid "Release delete error: trying to delete root dir"
 msgstr ""
 
-#: common/frs/FRSRelease.class.php:408
+#: common/frs/FRSRelease.class.php:419
 #, fuzzy
 msgid "Error On Update: Name Already Exists"
 msgstr "De opgegeven gebruikersnaam bestaat al."
 
-#: common/frs/FRSRelease.class.php:434
+#: common/frs/FRSRelease.class.php:445
 #, fuzzy
 msgid "Error Updating Release: Couldn't fetch data"
 msgstr "Fout bij het invoegen van een extra veld naam"
 
-#: common/frs/FRSRelease.class.php:444
+#: common/frs/FRSRelease.class.php:455
 #, fuzzy
 msgid "Error Updating Release: Directory Already Exists"
 msgstr "De opgegeven gebruikersnaam bestaat al."
 
-#: common/frs/FRSRelease.class.php:449
+#: common/frs/FRSRelease.class.php:460
 #, fuzzy
 msgid "Error Updating Release: Couldn't rename dir"
 msgstr "De opgegeven gebruikersnaam bestaat al."
@@ -2817,7 +2849,7 @@ msgid "Name is reserved."
 msgstr "Naam is gereserveerd voor CVS."
 
 #: common/include/account.php:89 common/include/account.php:93
-#: common/include/User.class.php:318
+#: common/include/User.class.php:341
 msgid "That username already exists."
 msgstr "De opgegeven gebruikersnaam bestaat al."
 
@@ -2855,8 +2887,8 @@ msgstr "Databasebewerking"
 msgid "Permission denied."
 msgstr "Toegang geweigerd"
 
-#: common/include/Error.class.php:147 common/include/User.class.php:313
-#: common/include/User.class.php:894 common/include/User.class.php:947
+#: common/include/Error.class.php:147 common/include/User.class.php:336
+#: common/include/User.class.php:917 common/include/User.class.php:970
 #: common/tracker/actions/tracker.php:84
 #: plugins/forumml/www/forumml_utils.php:686 www/account/change_email.php:38
 msgid "Invalid Email Address"
@@ -2949,13 +2981,13 @@ msgstr "Bestand niet gevonden"
 msgid "Group object already exists"
 msgstr "De opgegeven gebruikersnaam bestaat al."
 
-#: common/include/Group.class.php:312 common/include/User.class.php:305
-#: common/include/User.class.php:365
+#: common/include/Group.class.php:312 common/include/User.class.php:328
+#: common/include/User.class.php:388
 msgid "Invalid Unix Name."
 msgstr "Ongeldige Unix naam."
 
 #: common/include/Group.class.php:315 common/include/Group.class.php:319
-#: common/include/User.class.php:309
+#: common/include/User.class.php:332
 msgid "Unix name already taken"
 msgstr "Unixnaam is al in gebruik"
 
@@ -3189,21 +3221,21 @@ msgstr "Rol"
 msgid "Wrong destination role"
 msgstr ""
 
-#: common/include/Group.class.php:2256
+#: common/include/Group.class.php:2258
 #, fuzzy
 msgid "Group already active"
 msgstr "Account is reeds actief."
 
-#: common/include/Group.class.php:2496
+#: common/include/Group.class.php:2498
 #, fuzzy
 msgid "Approved"
 msgstr "Goedgekeurd"
 
-#: common/include/Group.class.php:2521 common/include/Group.class.php:2592
+#: common/include/Group.class.php:2523 common/include/Group.class.php:2594
 msgid "Group does not have any administrators."
 msgstr ""
 
-#: common/include/Group.class.php:2529
+#: common/include/Group.class.php:2531
 #, fuzzy, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -3279,12 +3311,12 @@ msgstr ""
 "\n"
 "-- het %7$s team"
 
-#: common/include/Group.class.php:2565
+#: common/include/Group.class.php:2567
 #, php-format
 msgid "%1$s Project Approved"
 msgstr "%1$s project goedgekeurd"
 
-#: common/include/Group.class.php:2599
+#: common/include/Group.class.php:2601
 #, php-format
 msgid ""
 "Your project registration for %3$s has been denied.\n"
@@ -3303,20 +3335,20 @@ msgstr ""
 "Reden van afwijzing:\n"
 "\n"
 
-#: common/include/Group.class.php:2618
+#: common/include/Group.class.php:2620
 #, php-format
 msgid "%1$s Project Denied"
 msgstr "%1$s Project afgewezen"
 
-#: common/include/Group.class.php:2642
+#: common/include/Group.class.php:2644
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2649
+#: common/include/Group.class.php:2651
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2657
+#: common/include/Group.class.php:2659
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3333,12 +3365,12 @@ msgstr ""
 "Volg deze URL om de aanvraag goed of af te keuren:\n"
 "%5$s"
 
-#: common/include/Group.class.php:2667
+#: common/include/Group.class.php:2669
 #, fuzzy, php-format
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "Ingediend door"
 
-#: common/include/Group.class.php:2673
+#: common/include/Group.class.php:2675
 #, php-format
 msgid ""
 "\n"
@@ -3346,12 +3378,12 @@ msgid ""
 "%1$s"
 msgstr ""
 
-#: common/include/Group.class.php:2677 common/include/Group.class.php:2692
+#: common/include/Group.class.php:2679 common/include/Group.class.php:2694
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "Nieuw %1$s project ingediend"
 
-#: common/include/Group.class.php:2685
+#: common/include/Group.class.php:2687
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3371,42 +3403,42 @@ msgstr ""
 "De %1$s beheerder zal de projectaanvraag nu beoordelen. Je ontvangt bericht "
 "krijgen over de beslissing."
 
-#: common/include/Group.class.php:2710
+#: common/include/Group.class.php:2712
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Vraag is te kort"
 
-#: common/include/Group.class.php:2713
+#: common/include/Group.class.php:2715
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Groepsnaam (klik om te wijzigen)"
 
-#: common/include/Group.class.php:2716
+#: common/include/Group.class.php:2718
 #, fuzzy
 msgid "Group name already taken"
 msgstr "Unixnaam is al in gebruik"
 
-#: common/include/Group.class.php:2798
+#: common/include/Group.class.php:2800
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2861
+#: common/include/Group.class.php:2863
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2879
+#: common/include/Group.class.php:2881
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2897
+#: common/include/Group.class.php:2899
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2915
+#: common/include/Group.class.php:2917
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
@@ -3627,7 +3659,7 @@ msgstr "Project bestandslijst"
 #: common/tracker/actions/mod.php:196
 #: common/tracker/include/build_submission_form.php:64
 #: common/widget/Widget_MyProjects.class.php:77
-#: www/include/Layout.class.php:723 www/pm/add_task.php:53
+#: www/include/Layout.class.php:730 www/pm/add_task.php:53
 msgid "Admin"
 msgstr "Beheer"
 
@@ -3737,12 +3769,12 @@ msgstr ""
 msgid "current plugin status is:"
 msgstr ""
 
-#: common/include/Plugin.class.php:277 common/include/Plugin.class.php:325
+#: common/include/Plugin.class.php:277 common/include/Plugin.class.php:324
 #, php-format
 msgid "Use %s Plugin"
 msgstr ""
 
-#: common/include/Plugin.class.php:344
+#: common/include/Plugin.class.php:342
 #, fuzzy
 msgid "No description available."
 msgstr "Geen statistieken beschikbaar"
@@ -4175,47 +4207,47 @@ msgstr "Bestand kan niet verplaatst worden naar de permanente locatie"
 msgid "Not a File %1$s or not a directory %2$s."
 msgstr "Bestand kan niet verplaatst worden naar de permanente locatie"
 
-#: common/include/User.class.php:208
+#: common/include/User.class.php:231
 #, fuzzy
 msgid "User Not Found"
 msgstr "Bestand niet gevonden"
 
-#: common/include/User.class.php:269
+#: common/include/User.class.php:292
 #, fuzzy
 msgid "You must supply a theme"
 msgstr "Je moet een gebruikersnaam opgeven"
 
-#: common/include/User.class.php:274
+#: common/include/User.class.php:297
 msgid "You must supply a username"
 msgstr "Je moet een gebruikersnaam opgeven"
 
-#: common/include/User.class.php:279
+#: common/include/User.class.php:302
 msgid "You must supply a first name"
 msgstr "Je moet een voornaam invullen"
 
-#: common/include/User.class.php:283
+#: common/include/User.class.php:306
 msgid "You must supply a last name"
 msgstr "Je moet een achternaam invullen"
 
-#: common/include/User.class.php:287
+#: common/include/User.class.php:310
 msgid "You must supply a password"
 msgstr "Je moet een wachtwoord opgeven"
 
-#: common/include/User.class.php:291
+#: common/include/User.class.php:314
 msgid "Passwords do not match"
 msgstr "Wachtwoorden komen niet overeen."
 
-#: common/include/User.class.php:295
+#: common/include/User.class.php:318
 #, fuzzy
 msgid "Invalid Password"
 msgstr "Ongeldig wachtwoord:"
 
-#: common/include/User.class.php:300
+#: common/include/User.class.php:323
 #, fuzzy
 msgid "Invalid Unix Name (must not contain uppercase characters)"
 msgstr "Loginnaam (gebruik geen hoofdletters):"
 
-#: common/include/User.class.php:323
+#: common/include/User.class.php:346
 msgid ""
 "User with this email already exists - use people search to recover your "
 "login."
@@ -4223,17 +4255,17 @@ msgstr ""
 "Dit e-mail adres is al in gebruik - gebruik de Mensen-zoekoptie om je login "
 "te herstellen."
 
-#: common/include/User.class.php:399
+#: common/include/User.class.php:422
 #, fuzzy
 msgid "Insert Failed: "
 msgstr "Aanmelden mislukt"
 
-#: common/include/User.class.php:406
+#: common/include/User.class.php:429
 #, fuzzy
 msgid "Could Not Get User Id: "
 msgstr "Kon de gevraagde bewerking niet uitvoeren"
 
-#: common/include/User.class.php:440
+#: common/include/User.class.php:463
 #, fuzzy, php-format
 msgid ""
 "Thank you for registering on the %3$s web site. You have\n"
@@ -4272,111 +4304,111 @@ msgstr ""
 "\n"
 "-- de %4$s beheerders\n"
 
-#: common/include/User.class.php:462
+#: common/include/User.class.php:485
 #, php-format
 msgid "%s Account Registration"
 msgstr "%s Account registratie"
 
-#: common/include/User.class.php:490
+#: common/include/User.class.php:513
 #, fuzzy
 msgid "Could Not Delete From artifact_monitor:"
 msgstr "Kon de gevraagde bewerking niet uitvoeren"
 
-#: common/include/User.class.php:497
+#: common/include/User.class.php:520
 #, fuzzy
 msgid "Could Not Delete From artifact_type_monitor:"
 msgstr "Kon de gevraagde bewerking niet uitvoeren"
 
-#: common/include/User.class.php:504
+#: common/include/User.class.php:527
 #, fuzzy
 msgid "Could Not Delete From forum_monitored_forums:"
 msgstr "Kon de gevraagde bewerking niet uitvoeren"
 
-#: common/include/User.class.php:511
+#: common/include/User.class.php:534
 #, fuzzy
 msgid "Could Not Delete From filemodule_monitor:"
 msgstr "Kon de gevraagde bewerking niet uitvoeren"
 
-#: common/include/User.class.php:600
+#: common/include/User.class.php:623
 #, fuzzy
 msgid "Error - Could Not Update User Object:"
 msgstr "Kan parent niet aanpassen"
 
-#: common/include/User.class.php:694
+#: common/include/User.class.php:717
 #, fuzzy
 msgid "Error: Invalid status value"
 msgstr "Ongeldige parameter"
 
-#: common/include/User.class.php:698
+#: common/include/User.class.php:721
 msgid "Error: You cannot set pending status if user is suspend or active"
 msgstr ""
 
-#: common/include/User.class.php:708
+#: common/include/User.class.php:731
 #, fuzzy
 msgid "Error - Could Not Update User Status:"
 msgstr "Kan parent niet aanpassen"
 
-#: common/include/User.class.php:775
+#: common/include/User.class.php:798
 #, fuzzy
 msgid "Error - Could Not Update User Unix Status: "
 msgstr "Kan parent niet aanpassen"
 
-#: common/include/User.class.php:902 common/include/User.class.php:955
+#: common/include/User.class.php:925 common/include/User.class.php:978
 #, fuzzy
 msgid "User with this email already exists."
 msgstr "De opgegeven gebruikersnaam bestaat al."
 
-#: common/include/User.class.php:913
+#: common/include/User.class.php:936
 #, fuzzy
 msgid "Error - Could Not Update User Email: "
 msgstr "Kan parent niet aanpassen"
 
-#: common/include/User.class.php:964
+#: common/include/User.class.php:987
 #, fuzzy
 msgid "Error - Could Not Update User Email And Hash: "
 msgstr "Kan parent niet aanpassen"
 
-#: common/include/User.class.php:992
+#: common/include/User.class.php:1015
 #, fuzzy
 msgid "Error - Could Not Update real name of user : "
 msgstr "Kan parent niet aanpassen"
 
-#: common/include/User.class.php:1065
+#: common/include/User.class.php:1088
 #, fuzzy, php-format
 msgid "Error: Invalid Shell %s"
 msgstr "Ongeldige parameter"
 
-#: common/include/User.class.php:1074
+#: common/include/User.class.php:1097
 #, fuzzy
 msgid "Error - Could Not Update User Unix Shell:"
 msgstr "Kan parent niet aanpassen"
 
-#: common/include/User.class.php:1221
+#: common/include/User.class.php:1244
 msgid "SSH Key already in use"
 msgstr ""
 
-#: common/include/User.class.php:1229
+#: common/include/User.class.php:1252
 #, fuzzy
 msgid "Error - Could Not Add User SSH Key:"
 msgstr "Kan parent niet aanpassen"
 
-#: common/include/User.class.php:1246
+#: common/include/User.class.php:1269
 #, fuzzy
 msgid "Error - Could Not Delete User SSH Key:"
 msgstr "Kan parent niet aanpassen"
 
-#: common/include/User.class.php:1379
+#: common/include/User.class.php:1402
 #, fuzzy
 msgid "Error: "
 msgstr "Fout"
 
-#: common/include/User.class.php:1393 common/include/User.class.php:1429
-#: common/include/User.class.php:1454
+#: common/include/User.class.php:1416 common/include/User.class.php:1452
+#: common/include/User.class.php:1477
 #, fuzzy
 msgid "Error - Could Not Change User Password:"
 msgstr "Wijzig wachtwoord"
 
-#: common/include/User.class.php:1710
+#: common/include/User.class.php:1733
 #, php-format
 msgid ""
 "New User %1$s registered and validated\n"
@@ -4384,7 +4416,7 @@ msgid ""
 "Email: %3$s\n"
 msgstr ""
 
-#: common/include/User.class.php:1715
+#: common/include/User.class.php:1738
 #, fuzzy, php-format
 msgid "New %1$s User"
 msgstr "Het %1$s team"
@@ -4761,6 +4793,7 @@ msgstr "Cumulatief projectoverzicht"
 #: common/reporting/report_utils.php:462 common/reporting/report_utils.php:634
 #: common/reporting/report_utils.php:984
 #: common/reporting/report_utils.php:1048
+#: common/reporting/report_utils.php:1151
 #, fuzzy
 msgid "No data to display."
 msgstr "%1$s vragen gevonden"
@@ -4769,10 +4802,10 @@ msgstr "%1$s vragen gevonden"
 #: plugins/authwebid/www/index.php:35 www/account/change_email-complete.php:52
 #: www/account/change_email.php:46 www/account/change_pw.php:32
 #: www/account/editsshkeys.php:39 www/account/index.php:36
-#: www/account/lostlogin.php:54 www/account/pending-resend.php:35
-#: www/account/unsubscribe.php:54 www/admin/database.php:62
-#: www/admin/unsubscribe.php:74 www/admin/useredit.php:43
-#: www/admin/userlist.php:43 www/docman/index.php:105
+#: www/account/lostlogin.php:54 www/account/unsubscribe.php:54
+#: www/admin/database.php:62 www/admin/unsubscribe.php:74
+#: www/admin/useredit.php:43 www/admin/userlist.php:43
+#: www/docman/index.php:105
 #, fuzzy
 msgid "Could Not Get User"
 msgstr "Kon de gevraagde bewerking niet uitvoeren"
@@ -4806,11 +4839,6 @@ msgstr "Beoordeling geregistreerd"
 #, fuzzy
 msgid " Hours"
 msgstr "Uren"
-
-#: common/reporting/report_utils.php:1151
-#, fuzzy
-msgid "No data to display"
-msgstr "%1$s vragen gevonden"
 
 #: common/reporting/TimeEntry.class.php:92 www/reporting/timeadd.php:88
 msgid "Successfully Added"
@@ -5021,13 +5049,13 @@ msgstr ""
 #: plugins/mantisbt/view/addOrEditNote.php:58
 #: plugins/scmgit/common/GitPlugin.class.php:1124
 #: plugins/scmhg/common/HgPlugin.class.php:632
-#: www/account/pending-resend.php:79 www/admin/admin_table.php:222
+#: www/account/pending-resend.php:75 www/admin/admin_table.php:222
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:248
 #: www/admin/index.php:166 www/admin/pending-news.php:163
 #: www/forum/admin/index.php:412 www/include/vote_function.php:281
 #: www/my/bookmark_add.php:50 www/my/bookmark_edit.php:63 www/my/diary.php:189
 #: www/news/admin/index.php:151 www/news/news_utils.php:42
-#: www/news/submit.php:160 www/pm/add_task.php:57 www/pm/add_task.php:140
+#: www/news/submit.php:161 www/pm/add_task.php:57 www/pm/add_task.php:140
 #: www/pm/add_task.php:154 www/pm/admin/index.php:215
 #: www/pm/admin/index.php:260 www/pm/admin/index.php:291 www/pm/csv.php:91
 #: www/pm/deletetask.php:44 www/pm/mod_task.php:54 www/pm/mod_task.php:254
@@ -5960,6 +5988,12 @@ msgstr "Bestand gewist"
 msgid "Item %s successfully updated"
 msgstr "Item aangemaakt"
 
+#: common/tracker/actions/tracker.php:434
+#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
+#: www/frs/monitor.php:67
+msgid "Monitoring Started"
+msgstr "Monitoring gestart"
+
 #: common/tracker/actions/tracker.php:436
 #: common/tracker/actions/tracker.php:453
 #, fuzzy
@@ -6446,7 +6480,7 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:340
 #: plugins/scmsvn/common/SVNPlugin.class.php:222
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
-#: www/account/editsshkeys.php:51 www/account/index.php:301
+#: www/account/editsshkeys.php:51 www/account/index.php:300
 #: www/admin/useredit.php:262 www/admin/useredit.php:292
 #: www/project/admin/editimages.php:267 www/reporting/usersummary.php:103
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:44
@@ -6492,7 +6526,7 @@ msgid ""
 msgstr ""
 "Als je <strong>niet</strong> kunt inloggen, vul dan hier je e-mail adres in:"
 
-#: common/tracker/include/build_submission_form.php:53 www/news/submit.php:143
+#: common/tracker/include/build_submission_form.php:53 www/news/submit.php:144
 #: www/people/viewjob.php:80
 msgid "For project"
 msgstr "Voor project"
@@ -6622,10 +6656,10 @@ msgstr "Gedefinieerde extra velden"
 #: common/tracker/views/form-addextrafield.php:43
 #: plugins/mantisbt/view/admin/editVersion.php:64
 #: plugins/mantisbt/view/admin/viewVersion.php:52 www/admin/database.php:104
-#: www/admin/massmail.php:137 www/frs/index.php:182
+#: www/admin/massmail.php:137 www/frs/index.php:212
 #: www/people/editprofile.php:107 www/people/editprofile.php:282
 #: www/people/skills_utils.php:48 www/people/skills_utils.php:155
-#: www/project/stats/index.php:104 www/reporting/groupadded.php:65
+#: www/project/stats/index.php:106 www/reporting/groupadded.php:65
 #: www/reporting/groupcum.php:65 www/reporting/projectact.php:71
 #: www/reporting/projecttime.php:80 www/reporting/projecttime.php:93
 #: www/reporting/siteact.php:71 www/reporting/sitetime.php:78
@@ -7173,7 +7207,7 @@ msgstr ""
 
 #: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:56
 #: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:244
-#: www/include/Layout.class.php:1341
+#: www/include/Layout.class.php:1348
 msgid "Preferences"
 msgstr "Voorkeursinstellingen"
 
@@ -7211,7 +7245,7 @@ msgstr ""
 #: common/widget/WidgetLayoutManager.class.php:511
 #: common/widget/WidgetLayoutManager.class.php:538
 #: plugins/hudson/include/HudsonJobWidget.class.php:65
-#: plugins/hudson/include/HudsonJobWidget.class.php:87
+#: plugins/hudson/include/HudsonJobWidget.class.php:89
 #, fuzzy
 msgid "Already used"
 msgstr "Thread"
@@ -7231,17 +7265,12 @@ msgstr "Beheer"
 msgid "Users in <a href=\"%s\"><b>P</b> (pending) Status</a>"
 msgstr ""
 
-#: common/widget/Widget_MyAdmin.class.php:59
-#, php-format
-msgid "Validated users <a href=\"%s\"><b>pending email activation</b></a>"
-msgstr ""
-
-#: common/widget/Widget_MyAdmin.class.php:78
+#: common/widget/Widget_MyAdmin.class.php:69
 #, php-format
 msgid "Groups in <a href=\"%s\"><b>P</b> (pending) Status</a>"
 msgstr ""
 
-#: common/widget/Widget_MyAdmin.class.php:99
+#: common/widget/Widget_MyAdmin.class.php:90
 #, fuzzy
 msgid "Site News Approval"
 msgstr "%1$s project goedgekeurd"
@@ -7552,24 +7581,42 @@ msgid ""
 "Allow you to include public rss (or atom) feeds into your personal page."
 msgstr ""
 
-#: common/widget/Widget_MySurveys.class.php:60
+#: common/widget/Widget_MySurveys.class.php:63
 #, fuzzy
 msgid "There are no surveys in your projects."
 msgstr "Er zijn geen openbare subprojecten beschikbaar"
 
-#: common/widget/Widget_MySurveys.class.php:109
+#: common/widget/Widget_MySurveys.class.php:131
 #, fuzzy, php-format
 msgid "%d new"
 msgstr "nieuwe toevoegen"
 
-#: common/widget/Widget_MySurveys.class.php:118
+#: common/widget/Widget_MySurveys.class.php:140
 #, fuzzy
 msgid "Quick Survey"
 msgstr "Bewerk enqu&ecirc;te"
 
-#: common/widget/Widget_MySurveys.class.php:124
-msgid "List the surveys you have not answered."
+#: common/widget/Widget_MySurveys.class.php:148
+#, fuzzy
+msgid "List the surveys in your projects."
+msgstr "Er zijn geen openbare subprojecten beschikbaar"
+
+#: common/widget/Widget_MySurveys.class.php:158
+msgid "answered [A]"
 msgstr ""
+
+#: common/widget/Widget_MySurveys.class.php:159
+msgid "not yet answered [N]"
+msgstr ""
+
+#: common/widget/Widget_MySurveys.class.php:160
+msgid "any status [AN]"
+msgstr ""
+
+#: common/widget/Widget_MySurveys.class.php:161
+#, fuzzy
+msgid "Display surveys:"
+msgstr "Toon Trove overzicht"
 
 #: common/widget/Widget_MyTasks.class.php:125
 #, fuzzy
@@ -7778,7 +7825,7 @@ msgid "Notes"
 msgstr "Aantekeningen"
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:138
-#: www/frs/index.php:111
+#: www/frs/index.php:139
 msgid "Monitor this package"
 msgstr "Monitor deze bundel"
 
@@ -8065,7 +8112,7 @@ msgstr "Item #%s staat open"
 
 #: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:150
 #: www/export/rssAboTask.php:146 www/my/diary.php:185
-#: www/news/admin/index.php:137 www/news/submit.php:148
+#: www/news/admin/index.php:137 www/news/submit.php:149
 msgid "Details"
 msgstr "Details"
 
@@ -8091,6 +8138,125 @@ msgstr ""
 msgid "Soft link wasn't removed in config folder, please do so manually."
 msgstr ""
 
+#: plugins/admssw/common/RDFedFRSFile.class.php:106
+msgid ", part of "
+msgstr ""
+
+#: plugins/admssw/common/RDFedFRSPackage.class.php:95
+#, fuzzy, php-format
+msgid "%1$s release series of project %2$s"
+msgstr "SCM repository"
+
+#: plugins/admssw/include/admsswPlugin.class.php:138
+msgid "ADMS.SW meta-data"
+msgstr ""
+
+#: plugins/admssw/include/admsswPlugin.class.php:140
+msgid "ADMS.SW RDF meta-data about forge projects."
+msgstr ""
+
+#: plugins/admssw/include/admsswPlugin.class.php:150
+#, fuzzy, php-format
+msgid "Preview <a href=\"%1$s\">ADMS.SW meta-data</a> about the project"
+msgstr "Hier is een lijst met openstaande functies voor dit project."
+
+#: plugins/admssw/include/admsswPlugin.class.php:635
+msgid ""
+"The following is a preview of (machine-readable) RDF meta-data, in Turtle "
+"format (see at the bottom for more details)"
+msgstr ""
+
+#: plugins/admssw/include/admsswPlugin.class.php:638
+#: www/softwaremap/full_list.php:71
+#, fuzzy, php-format
+msgid "<strong>%1$s</strong> projects in result set."
+msgstr "<strong>%1$s</strong> projecten in resultaatset."
+
+#: plugins/admssw/include/admsswPlugin.class.php:649
+#: plugins/admssw/www/projectturtle.php:52 plugins/admssw/www/trove.php:46
+msgid "To access this RDF document, you may use, for instance :<br />"
+msgstr ""
+
+#: plugins/admssw/include/admsswPlugin.class.php:652
+msgid ""
+"This may redirect to several pages documents in case of too big number of "
+"results (observing the LDP paging specifications).<br /><br />"
+msgstr ""
+
+#: plugins/admssw/include/admsswPlugin.class.php:654
+msgid ""
+"Alternatively, if you are sure you want the full dump in one single "
+"document, use :<br />"
+msgstr ""
+
+#: plugins/admssw/www/full.php:59
+msgid "Full ADMS.SW export"
+msgstr ""
+
+#: plugins/admssw/www/index.php:37
+msgid "ADMS.SW"
+msgstr ""
+
+#: plugins/admssw/www/index.php:40
+msgid ""
+"Preview of RDF meta-data about the forge, conforming to the ADMS.SW "
+"specifications"
+msgstr ""
+
+#: plugins/admssw/www/index.php:43
+#, fuzzy
+msgid "Public projects :"
+msgstr "Subproject"
+
+#: plugins/admssw/www/index.php:46
+#, fuzzy
+msgid "short index"
+msgstr "Verkorte naam"
+
+#: plugins/admssw/www/index.php:47
+#, fuzzy
+msgid "or "
+msgstr "voor"
+
+#: plugins/admssw/www/index.php:47
+msgid "full dump"
+msgstr ""
+
+#: plugins/admssw/www/index.php:47
+msgid " (as Turtle)"
+msgstr ""
+
+#: plugins/admssw/www/index.php:53
+#, fuzzy
+msgid "Trove categories :"
+msgstr "Voeg categorie&euml;n toe"
+
+#: plugins/admssw/www/index.php:56
+msgid "as Turtle"
+msgstr ""
+
+#: plugins/admssw/www/projectsturtle.php:41
+msgid "ADMS.SW meta-data index of public projects"
+msgstr ""
+
+#: plugins/admssw/www/projectturtle.php:44
+#, fuzzy
+msgid "ADMS.SW project meta-data preview"
+msgstr ""
+"Hoogste aantal paginabezoeken per project (gemeten als klikken op het  %1$s "
+"'button' logo)"
+
+#: plugins/admssw/www/projectturtle.php:48 plugins/admssw/www/trove.php:42
+#, php-format
+msgid ""
+"The following is a preview of the (machine-readable) RDF meta-data which can "
+"be obtained at <tt>%1$s</tt> as Turtle"
+msgstr ""
+
+#: plugins/admssw/www/trove.php:37
+msgid "SKOS meta-data for trove categories"
+msgstr ""
+
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:66
 #: plugins/authcas/include/AuthCASPlugin.class.php:88
 #: plugins/authhttpd/include/AuthHTTPDPlugin.class.php:61
@@ -8101,7 +8267,7 @@ msgid "Cookies must be enabled past this point."
 msgstr "Om in te loggen moeten cookies zijn toegestaan door je browser."
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:74
-#: www/account/pending-resend.php:69 www/account/verify.php:76
+#: www/account/pending-resend.php:65 www/account/verify.php:76
 #, fuzzy
 msgid "Login name or email address"
 msgstr "Ongeldig e-mail adres"
@@ -9316,7 +9482,7 @@ msgstr "Submit nieuwe versie"
 #: plugins/forumml/www/index.php:111 www/admin/massmail.php:113
 #: www/admin/massmail.php:138 www/admin/pending-news.php:148
 #: www/developer/diary.php:80 www/news/admin/index.php:135
-#: www/news/admin/news_admin_utils.php:58 www/news/submit.php:145
+#: www/news/admin/news_admin_utils.php:58 www/news/submit.php:146
 #: www/sendmessage.php:69 www/sendmessage.php:150
 msgid "Subject"
 msgstr "Onderwerp"
@@ -9408,7 +9574,7 @@ msgid "Manage Remote Accounts"
 msgstr ""
 
 #: plugins/globaldashboard/include/globalDashboard_utils.php:43
-#: plugins/hudson/include/hudsonViews.class.php:59
+#: plugins/hudson/include/hudsonViews.class.php:61
 #: utils/fixscripts/populate_template_project.php:110
 msgid "Help"
 msgstr ""
@@ -10187,30 +10353,30 @@ msgstr ""
 msgid "HelloWorld integration in the forge"
 msgstr ""
 
-#: plugins/hudson/include/hudsonActions.class.php:53
+#: plugins/hudson/include/hudsonActions.class.php:51
 #, fuzzy
 msgid "Unable to add Hudson job."
 msgstr "Kan geen monitor toevoegen"
 
-#: plugins/hudson/include/hudsonActions.class.php:55
+#: plugins/hudson/include/hudsonActions.class.php:53
 msgid "Hudson job added."
 msgstr ""
 
-#: plugins/hudson/include/hudsonActions.class.php:56
-#: plugins/hudson/include/hudsonActions.class.php:85
+#: plugins/hudson/include/hudsonActions.class.php:54
+#: plugins/hudson/include/hudsonActions.class.php:84
 msgid "Please wait 1 hour for triggers to be updated."
 msgstr ""
 
-#: plugins/hudson/include/hudsonActions.class.php:71
+#: plugins/hudson/include/hudsonActions.class.php:70
 msgid "Spaces are not allowed in job name. They were replaced by \"_\"."
 msgstr ""
 
-#: plugins/hudson/include/hudsonActions.class.php:82
+#: plugins/hudson/include/hudsonActions.class.php:81
 #, fuzzy
 msgid "Unable to update Hudson job"
 msgstr "Kan bookmark niet wijzigen."
 
-#: plugins/hudson/include/hudsonActions.class.php:84
+#: plugins/hudson/include/hudsonActions.class.php:83
 #, fuzzy
 msgid "Hudson job updated."
 msgstr "Extra veld aangepast"
@@ -10224,23 +10390,23 @@ msgstr ""
 msgid "Hudson job deleted."
 msgstr "Verwijderd"
 
-#: plugins/hudson/include/HudsonBuild.class.php:39
+#: plugins/hudson/include/HudsonBuild.class.php:40
 #: plugins/hudson/include/HudsonJob.class.php:43
-#: plugins/hudson/include/HudsonTestResult.class.php:39
+#: plugins/hudson/include/HudsonTestResult.class.php:40
 #, php-format
 msgid "Wrong Job URL: %s"
 msgstr ""
 
-#: plugins/hudson/include/HudsonBuild.class.php:61
-#: plugins/hudson/include/HudsonJob.class.php:91
-#: plugins/hudson/include/HudsonTestResult.class.php:67
+#: plugins/hudson/include/HudsonBuild.class.php:59
+#: plugins/hudson/include/HudsonJob.class.php:87
+#: plugins/hudson/include/HudsonTestResult.class.php:68
 #, php-format
 msgid "Unable to read file at URL: %s"
 msgstr ""
 
-#: plugins/hudson/include/HudsonBuild.class.php:64
-#: plugins/hudson/include/HudsonJob.class.php:94
-#: plugins/hudson/include/HudsonTestResult.class.php:70
+#: plugins/hudson/include/HudsonBuild.class.php:62
+#: plugins/hudson/include/HudsonJob.class.php:90
+#: plugins/hudson/include/HudsonTestResult.class.php:71
 #, fuzzy, php-format
 msgid "File not found at URL: %s"
 msgstr "Geen."
@@ -10265,400 +10431,400 @@ msgstr "Toegang geweigerd"
 msgid "Missing Hudson job ID"
 msgstr ""
 
-#: plugins/hudson/include/hudson.class.php:134
+#: plugins/hudson/include/hudson.class.php:133
 #, fuzzy
 msgid "Hudson service is not enabled"
 msgstr "De enqu&ecirc;tegegevens zijn niet ingevuld"
 
-#: plugins/hudson/include/hudson.class.php:137
+#: plugins/hudson/include/hudson.class.php:136
 #, fuzzy
 msgid "Missing group_id parameter."
 msgstr "Fout - ontbrekende parameters"
 
-#: plugins/hudson/include/HudsonJob.class.php:137
-#: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:91
-#: plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php:69
+#: plugins/hudson/include/HudsonJob.class.php:138
+#: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:89
+#: plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php:66
 #, fuzzy
 msgid "Success"
 msgstr "Geslaagd"
 
-#: plugins/hudson/include/HudsonJob.class.php:141
-#: plugins/hudson/include/HudsonJob.class.php:149
-#: plugins/hudson/include/HudsonJob.class.php:157
-#: plugins/hudson/include/HudsonJob.class.php:165
+#: plugins/hudson/include/HudsonJob.class.php:142
+#: plugins/hudson/include/HudsonJob.class.php:150
+#: plugins/hudson/include/HudsonJob.class.php:158
+#: plugins/hudson/include/HudsonJob.class.php:166
 msgid "In progress"
 msgstr ""
 
-#: plugins/hudson/include/HudsonJob.class.php:145
+#: plugins/hudson/include/HudsonJob.class.php:146
 #, fuzzy
 msgid "Unstable"
 msgstr "Eind"
 
-#: plugins/hudson/include/HudsonJob.class.php:153
+#: plugins/hudson/include/HudsonJob.class.php:154
 msgid "Failure"
 msgstr ""
 
-#: plugins/hudson/include/HudsonJob.class.php:161
+#: plugins/hudson/include/HudsonJob.class.php:162
 #: www/admin/approve-pending.php:132
 #, fuzzy
 msgid "Pending"
 msgstr "In behandeling"
 
-#: plugins/hudson/include/HudsonJob.class.php:169
+#: plugins/hudson/include/HudsonJob.class.php:170
 #, fuzzy
 msgid "Unknown status"
 msgstr "Unix account status"
 
 #: plugins/hudson/include/HudsonJobWidget.class.php:58
-#: plugins/hudson/include/HudsonJobWidget.class.php:80
+#: plugins/hudson/include/HudsonJobWidget.class.php:82
 #, fuzzy
 msgid "Monitored job:"
 msgstr "Mijn forums"
 
-#: plugins/hudson/include/HudsonJobWidget.class.php:94
+#: plugins/hudson/include/HudsonJobWidget.class.php:96
 #, fuzzy
 msgid "Current used"
 msgstr "Versie"
 
-#: plugins/hudson/include/hudsonPlugin.class.php:20
+#: plugins/hudson/include/hudsonPlugin.class.php:32
 #, fuzzy
 msgid "Hudson/Jenkins"
 msgstr "Vacatures plaatsen"
 
-#: plugins/hudson/include/hudsonPlugin.class.php:65
+#: plugins/hudson/include/hudsonPlugin.class.php:75
 msgid "Continuus Integration Scheduler"
 msgstr ""
 
-#: plugins/hudson/include/hudsonPlugin.class.php:204
+#: plugins/hudson/include/hudsonPlugin.class.php:214
 msgid "Hudson Build"
 msgstr ""
 
-#: plugins/hudson/include/hudsonPlugin.class.php:205
+#: plugins/hudson/include/hudsonPlugin.class.php:215
 msgid "Hudson Job"
 msgstr ""
 
-#: plugins/hudson/include/hudsonPlugin.class.php:235
+#: plugins/hudson/include/hudsonPlugin.class.php:245
 msgid "Build performed on:"
 msgstr ""
 
-#: plugins/hudson/include/hudsonPlugin.class.php:236
+#: plugins/hudson/include/hudsonPlugin.class.php:246
 #, fuzzy
 msgid "Status:"
 msgstr "Statistieken"
 
-#: plugins/hudson/include/hudsonPlugin.class.php:238
-#: plugins/hudson/include/hudsonPlugin.class.php:279
-#: plugins/hudson/include/hudsonViews.class.php:107
-#: plugins/hudson/include/hudsonViews.class.php:122
-#: plugins/hudson/include/hudsonViews.class.php:161
-#: plugins/hudson/include/hudsonViews.class.php:177
-#: plugins/hudson/include/hudsonViews.class.php:193
+#: plugins/hudson/include/hudsonPlugin.class.php:248
+#: plugins/hudson/include/hudsonPlugin.class.php:289
+#: plugins/hudson/include/hudsonViews.class.php:110
+#: plugins/hudson/include/hudsonViews.class.php:125
+#: plugins/hudson/include/hudsonViews.class.php:164
+#: plugins/hudson/include/hudsonViews.class.php:180
+#: plugins/hudson/include/hudsonViews.class.php:196
 #, fuzzy
 msgid "Error: Hudson object not found."
 msgstr "Fout - geen versies gevonden"
 
-#: plugins/hudson/include/hudsonPlugin.class.php:262
-#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:88
+#: plugins/hudson/include/hudsonPlugin.class.php:272
+#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:83
 #, fuzzy
 msgid "Last Build:"
 msgstr "Laatst gemailde gebruikers id"
 
-#: plugins/hudson/include/hudsonPlugin.class.php:263
-#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:89
+#: plugins/hudson/include/hudsonPlugin.class.php:273
+#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:84
 #, fuzzy
 msgid "Last Success:"
 msgstr "Wijziging doorgevoerd"
 
-#: plugins/hudson/include/hudsonPlugin.class.php:264
-#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:90
+#: plugins/hudson/include/hudsonPlugin.class.php:274
+#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:85
 #, fuzzy
 msgid "Last Failure:"
 msgstr "Achternaam:"
 
-#: plugins/hudson/include/hudsonPlugin.class.php:266
-#: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:104
-#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:92
+#: plugins/hudson/include/hudsonPlugin.class.php:276
+#: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:96
+#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:87
 #, fuzzy
 msgid "No build found for this job."
 msgstr "Geen lijsten gevonden voor %1$s"
 
-#: plugins/hudson/include/hudsonPlugin.class.php:271
-#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:97
+#: plugins/hudson/include/hudsonPlugin.class.php:281
+#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:92
 #, fuzzy
 msgid "Weather Report:"
 msgstr "Genereer een rapport"
 
-#: plugins/hudson/include/hudsonPluginDescriptor.class.php:25
+#: plugins/hudson/include/hudsonPluginDescriptor.class.php:26
 msgid "Continuous Integration"
 msgstr ""
 
-#: plugins/hudson/include/hudsonPluginDescriptor.class.php:25
+#: plugins/hudson/include/hudsonPluginDescriptor.class.php:26
 msgid "Continuous Integration with Hudson"
 msgstr ""
 
-#: plugins/hudson/include/HudsonTestResult.class.php:116
+#: plugins/hudson/include/HudsonTestResult.class.php:117
 #, php-format
 msgid "Pass (%s)"
 msgstr ""
 
-#: plugins/hudson/include/HudsonTestResult.class.php:118
+#: plugins/hudson/include/HudsonTestResult.class.php:119
 #, php-format
 msgid "Fail (%s)"
 msgstr ""
 
-#: plugins/hudson/include/HudsonTestResult.class.php:120
+#: plugins/hudson/include/HudsonTestResult.class.php:121
 #, php-format
 msgid "Skip (%s)"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:50
-#: plugins/hudson/include/HudsonWidget.class.php:27
+#: plugins/hudson/include/hudsonViews.class.php:51
+#: plugins/hudson/include/HudsonWidget.class.php:28
 msgid "Hudson"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:212
+#: plugins/hudson/include/hudsonViews.class.php:215
 msgid "Back to jobs list"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:214
+#: plugins/hudson/include/hudsonViews.class.php:217
 #, fuzzy
 msgid "Edit job"
 msgstr "Wijzig vacature"
 
-#: plugins/hudson/include/hudsonViews.class.php:217
-#: plugins/hudson/include/hudsonViews.class.php:393
+#: plugins/hudson/include/hudsonViews.class.php:220
+#: plugins/hudson/include/hudsonViews.class.php:396
 #, fuzzy
 msgid "Job URL:"
 msgstr "gebruikersnaam:"
 
-#: plugins/hudson/include/hudsonViews.class.php:221
-#: plugins/hudson/include/hudsonViews.class.php:398
+#: plugins/hudson/include/hudsonViews.class.php:224
+#: plugins/hudson/include/hudsonViews.class.php:401
 msgid "eg: http://myCIserver/hudson/job/myJob"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:224
+#: plugins/hudson/include/hudsonViews.class.php:227
 #, fuzzy
 msgid "Job name:"
 msgstr "Rolnaam"
 
-#: plugins/hudson/include/hudsonViews.class.php:228
+#: plugins/hudson/include/hudsonViews.class.php:231
 #, php-format
 msgid "Name (with no space) used to make a reference to this job. Eg: job #%s"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:232
+#: plugins/hudson/include/hudsonViews.class.php:235
 msgid "Trigger a build after SVN commits:"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:243
+#: plugins/hudson/include/hudsonViews.class.php:246
 msgid "Trigger a build after CVS commits:"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:254
-#: plugins/hudson/include/hudsonViews.class.php:413
+#: plugins/hudson/include/hudsonViews.class.php:257
+#: plugins/hudson/include/hudsonViews.class.php:416
 msgid "with (optional) token:"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:262
+#: plugins/hudson/include/hudsonViews.class.php:265
 #, fuzzy
 msgid "Update job"
 msgstr "Aanpassen"
 
-#: plugins/hudson/include/hudsonViews.class.php:290 www/admin/cronman.php:43
+#: plugins/hudson/include/hudsonViews.class.php:293 www/admin/cronman.php:43
 #: www/people/editjob.php:74 www/people/editjob.php:91
 #: www/people/editjob.php:107
 msgid "Job"
 msgstr "Job"
 
-#: plugins/hudson/include/hudsonViews.class.php:291
+#: plugins/hudson/include/hudsonViews.class.php:294
 #, fuzzy
 msgid "Last Success"
 msgstr "Wijziging doorgevoerd"
 
-#: plugins/hudson/include/hudsonViews.class.php:292
+#: plugins/hudson/include/hudsonViews.class.php:295
 #, fuzzy
 msgid "Last Failure"
 msgstr "Aanmelden mislukt"
 
-#: plugins/hudson/include/hudsonViews.class.php:293
+#: plugins/hudson/include/hudsonViews.class.php:296
 #, fuzzy
 msgid "RSS"
 msgstr "QuickRelease"
 
-#: plugins/hudson/include/hudsonViews.class.php:295
+#: plugins/hudson/include/hudsonViews.class.php:298
 msgid "SVN trigger"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:298
+#: plugins/hudson/include/hudsonViews.class.php:301
 msgid "CVS trigger"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:320
+#: plugins/hudson/include/hudsonViews.class.php:323
 #, php-format
 msgid "Show job %s"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:322
-#: plugins/hudson/include/hudsonViews.class.php:327
+#: plugins/hudson/include/hudsonViews.class.php:325
+#: plugins/hudson/include/hudsonViews.class.php:330
 #, php-format
 msgid "Show build #%s of job %s"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:322
-#: plugins/hudson/include/hudsonViews.class.php:327
+#: plugins/hudson/include/hudsonViews.class.php:325
+#: plugins/hudson/include/hudsonViews.class.php:330
 msgid "build"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:331
+#: plugins/hudson/include/hudsonViews.class.php:334
 #, php-format
 msgid "RSS feed of all builds for %s job"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:335
+#: plugins/hudson/include/hudsonViews.class.php:338
 msgid "SVN commit will trigger a build"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:342
+#: plugins/hudson/include/hudsonViews.class.php:345
 msgid "CVS commit will trigger a build"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:360
+#: plugins/hudson/include/hudsonViews.class.php:363
 #, fuzzy
 msgid "Edit this job"
 msgstr "Wijzig de %1$ss tabel"
 
-#: plugins/hudson/include/hudsonViews.class.php:366
+#: plugins/hudson/include/hudsonViews.class.php:369
 #, fuzzy, php-format
 msgid "Are you sure you want to delete Job %s from project %s?"
 msgstr "Weet je zeker dat je %1$s wilt verwijderen?"
 
-#: plugins/hudson/include/hudsonViews.class.php:367
+#: plugins/hudson/include/hudsonViews.class.php:370
 #, fuzzy
 msgid "Delete this job"
 msgstr "Verwijder deze taak"
 
-#: plugins/hudson/include/hudsonViews.class.php:380
+#: plugins/hudson/include/hudsonViews.class.php:383
 msgid ""
 "No Hudson jobs associated with this project. To add a job, select the link "
 "just below."
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:389
+#: plugins/hudson/include/hudsonViews.class.php:392
 #, fuzzy
 msgid "Add job"
 msgstr "Voeg taak toe"
 
-#: plugins/hudson/include/hudsonViews.class.php:402
+#: plugins/hudson/include/hudsonViews.class.php:405
 msgid "Trigger a build after commits:"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:404
+#: plugins/hudson/include/hudsonViews.class.php:407
 msgid "SVN"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:408
+#: plugins/hudson/include/hudsonViews.class.php:411
 msgid "CVS"
 msgstr "CVS"
 
-#: plugins/hudson/include/hudson_Widget_JobBuildHistory.class.php:46
+#: plugins/hudson/include/hudson_Widget_JobBuildHistory.class.php:45
 #, php-format
 msgid "%s Builds History"
 msgstr ""
 
-#: plugins/hudson/include/hudson_Widget_JobBuildHistory.class.php:48
+#: plugins/hudson/include/hudson_Widget_JobBuildHistory.class.php:47
 #, fuzzy
 msgid "Builds History"
 msgstr "Geschiedenis"
 
-#: plugins/hudson/include/hudson_Widget_JobBuildHistory.class.php:54
+#: plugins/hudson/include/hudson_Widget_JobBuildHistory.class.php:53
 msgid ""
 "Show the build history of the selected job, under the form of RSS feed. For "
 "each build of the list, you can see the build number, the status and the "
 "date the build has been scheduled."
 msgstr ""
 
-#: plugins/hudson/include/hudson_Widget_JobBuildHistory.class.php:89
-#: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:106
-#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:102
-#: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:107
-#: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:102
+#: plugins/hudson/include/hudson_Widget_JobBuildHistory.class.php:83
+#: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:98
+#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:97
+#: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:99
+#: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:94
 #, fuzzy
 msgid "Job not found."
 msgstr "Geen."
 
-#: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:49
+#: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:48
 #, fuzzy, php-format
 msgid "%s Last Artifacts"
 msgstr "Verwijder deze taak"
 
-#: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:51
+#: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:50
 #, fuzzy
 msgid "Last Artifacts"
 msgstr "Verwijder deze taak"
 
-#: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:57
+#: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:56
 msgid ""
 "Show the last successfully published artifacts of one job. To display "
 "something, your job needs to publish artifacts."
 msgstr ""
 
-#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:46
+#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:45
 #, php-format
 msgid "%s Last Builds"
 msgstr ""
 
-#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:48
+#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:47
 #, fuzzy
 msgid "Last Builds"
 msgstr "Laatste 7 dagen"
 
-#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:54
+#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:53
 msgid ""
 "Show the last builds for this job (last one, last successfull, last failed) "
 "and the weather report. The trend is represented by a weather report (sun, "
 "thunder, etc.) meaning that the trend is good or not."
 msgstr ""
 
-#: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:49
+#: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:48
 #, php-format
 msgid "%1$s Test Results (%2$s / %3$s)"
 msgstr ""
 
-#: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:52
+#: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:51
 #, fuzzy, php-format
 msgid "%1$s Test Results"
 msgstr "Volgende resulten"
 
-#: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:54
+#: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:53
 #, fuzzy
 msgid "Test Results"
 msgstr "Volgende resulten"
 
-#: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:60
+#: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:59
 msgid ""
 "Show the test results of the latest build for the selected job.To display "
 "something, your job needs to execute tests and publish them. The result is "
 "shown on a pie chart."
 msgstr ""
 
-#: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:105
-#: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:100
+#: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:97
+#: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:92
 #, fuzzy
 msgid "No test found for this job."
 msgstr "Niets passends gevonden voor <em>%1$s</em>"
 
-#: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:47
-#: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:94
+#: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:46
+#: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:87
 #, php-format
 msgid "%s Test Result Trend"
 msgstr ""
 
-#: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:49
+#: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:48
 #, fuzzy
 msgid "Test Result Trend"
 msgstr "Volgende resulten"
 
-#: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:54
+#: plugins/hudson/include/hudson_Widget_JobTestTrend.class.php:53
 msgid ""
 "Show the test result trend for the selected job. To display something, your "
 "job needs to have tests. The graph will show the number of tests (failed and "
@@ -10666,42 +10832,42 @@ msgid ""
 "of build and commits are increasing too."
 msgstr ""
 
-#: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:85
-#: plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php:63
+#: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:83
+#: plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php:60
 msgid "One or more failure or pending job"
 msgstr ""
 
-#: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:88
-#: plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php:66
+#: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:86
+#: plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php:63
 msgid "One or more unstable job"
 msgstr ""
 
-#: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:101
+#: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:99
 msgid "My Hudson Jobs"
 msgstr ""
 
-#: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:106
+#: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:104
 msgid ""
 "Show an overview of all the jobs of all the projects you're member of. You "
 "can of course select the jobs you wish to display by selecting the "
 "preferences link of the widget."
 msgstr ""
 
-#: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:142
+#: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:139
 #, fuzzy
 msgid "Monitored jobs:"
 msgstr "Mijn forums"
 
-#: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:158
+#: plugins/hudson/include/hudson_Widget_MyMonitoredJobs.class.php:155
 msgid "Use global status:"
 msgstr ""
 
-#: plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php:79
+#: plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php:76
 #, fuzzy
 msgid "Hudson Jobs"
 msgstr "Vacatures plaatsen"
 
-#: plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php:84
+#: plugins/hudson/include/hudson_Widget_ProjectJobsOverview.class.php:81
 msgid ""
 "Shows an overview of all the jobs associated with this project. You can "
 "always choose the ones you want to display in the widget (preferences link)."
@@ -12382,6 +12548,24 @@ msgstr "Bekijk leden"
 #, fuzzy
 msgid "oslc Admin"
 msgstr "Hulpmiddelenbeheer"
+
+#: plugins/phpcaptcha/common/phpcaptchaPlugin.class.php:45
+msgid "Wrong captcha code"
+msgstr ""
+
+#: plugins/phpcaptcha/common/phpcaptchaPlugin.class.php:54
+msgid "Reload image."
+msgstr ""
+
+#: plugins/phpcaptcha/common/phpcaptchaPlugin.class.php:56
+msgid "Write captcha here:"
+msgstr ""
+
+#: plugins/phpcaptcha/common/phpcaptchaPlugin.class.php:60
+msgid ""
+"phpcaptcha seems not installed. Contact your administrator for more "
+"informations."
+msgstr ""
 
 #: plugins/projectimport/common/ProjectImportPlugin.class.php:171
 #, fuzzy
@@ -14249,7 +14433,7 @@ msgstr "Site beheer"
 msgid "This project's wiki"
 msgstr "Nieuws over dit project"
 
-#: plugins/wiki/common/WikiPlugin.class.php:208
+#: plugins/wiki/common/WikiPlugin.class.php:209
 msgid "List of active wikis in Forge"
 msgstr ""
 
@@ -14516,29 +14700,29 @@ msgstr "CVS/SSH gedeelde autorisatie sleutels"
 msgid "Available keys"
 msgstr "Geen toegankelijke Trackers gevonden"
 
-#: www/account/editsshkeys.php:51 www/account/index.php:301
+#: www/account/editsshkeys.php:51 www/account/index.php:300
 msgid "Algorithm"
 msgstr ""
 
-#: www/account/editsshkeys.php:51 www/account/index.php:301
+#: www/account/editsshkeys.php:51 www/account/index.php:300
 msgid "Fingerprint"
 msgstr ""
 
-#: www/account/editsshkeys.php:51 www/account/index.php:301
+#: www/account/editsshkeys.php:51 www/account/index.php:300
 #: www/project/admin/editimages.php:266
 msgid "Uploaded"
 msgstr "Toegevoegd"
 
-#: www/account/editsshkeys.php:51 www/account/index.php:301
+#: www/account/editsshkeys.php:51 www/account/index.php:300
 #, fuzzy
 msgid "Ready ?"
 msgstr "Betreft"
 
-#: www/account/editsshkeys.php:61 www/account/index.php:311
+#: www/account/editsshkeys.php:61 www/account/index.php:310
 msgid "ssh key is deployed."
 msgstr ""
 
-#: www/account/editsshkeys.php:63 www/account/index.php:313
+#: www/account/editsshkeys.php:63 www/account/index.php:312
 msgid "ssh key is not deployed yet."
 msgstr ""
 
@@ -14672,11 +14856,11 @@ msgstr "Gebruikers ID"
 msgid "Login name:"
 msgstr "Loginnaam:"
 
-#: www/account/index.php:161 www/account/register.php:169
+#: www/account/index.php:161 www/account/register.php:177
 msgid "First Name:"
 msgstr "Voornaam:"
 
-#: www/account/index.php:168 www/account/register.php:176
+#: www/account/index.php:168 www/account/register.php:184
 msgid "Last Name:"
 msgstr "Achternaam:"
 
@@ -14684,7 +14868,7 @@ msgstr "Achternaam:"
 msgid "Language:"
 msgstr "Taal"
 
-#: www/account/index.php:181 www/account/register.php:187
+#: www/account/index.php:181 www/account/register.php:195
 msgid "Timezone:"
 msgstr "Tijdzone:"
 
@@ -14692,7 +14876,7 @@ msgstr "Tijdzone:"
 msgid "Theme:"
 msgstr "Thema:"
 
-#: www/account/index.php:193 www/account/register.php:200
+#: www/account/index.php:193 www/account/register.php:208
 msgid "Country:"
 msgstr "Land:"
 
@@ -14721,7 +14905,7 @@ msgstr "FAX:"
 msgid "Title:"
 msgstr "Titel:"
 
-#: www/account/index.php:249 www/account/register.php:239
+#: www/account/index.php:249 www/account/register.php:247
 msgid ""
 "Receive Email about Site Updates <i>(Very low traffic and includes security "
 "notices. Highly Recommended.)</i>"
@@ -14729,7 +14913,7 @@ msgstr ""
 "E-mail over site updates ontvangen <i>(Weinig mail, en inclusief "
 "beveiligings aankondigingen. Sterk aanbevolen.)</i>"
 
-#: www/account/index.php:255 www/account/register.php:245
+#: www/account/index.php:255 www/account/register.php:253
 msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
 msgstr "Aanvullende community mailings ontvangen. <i>(Weinig mail.)</i>"
 
@@ -14747,34 +14931,34 @@ msgid ""
 "Enable tooltips. Small help texts displayed on mouse over links, images."
 msgstr ""
 
-#: www/account/index.php:293
+#: www/account/index.php:292
 msgid "Shell Account Information"
 msgstr "Shell account informatie"
 
-#: www/account/index.php:296
+#: www/account/index.php:295
 msgid "Shell box"
 msgstr "Shell Box"
 
-#: www/account/index.php:297
+#: www/account/index.php:296
 msgid "SSH Shared Authorized Keys"
 msgstr "CVS/SSH gedeelde autorisatie sleutels"
 
-#: www/account/index.php:323
+#: www/account/index.php:322
 msgid "Edit Keys"
 msgstr "Bewerk sleutels"
 
-#: www/account/index.php:325
+#: www/account/index.php:324
 #, fuzzy
 msgid "Shell Account deactivated"
 msgstr "Shell account informatie"
 
-#: www/account/index.php:335 www/forum/admin/index.php:128
+#: www/account/index.php:334 www/forum/admin/index.php:128
 #: www/forum/admin/index.php:167
 #, fuzzy, php-format
 msgid "%s Mandatory fields"
 msgstr "Extra velden toevoegen/aanpassen"
 
-#: www/account/index.php:338
+#: www/account/index.php:337
 msgid "Reset Changes"
 msgstr "Wijzigingen ongedaan maken"
 
@@ -14854,7 +15038,7 @@ msgid ""
 "login."
 msgstr ""
 
-#: www/account/lostpw.php:90 www/account/pending-resend.php:71
+#: www/account/lostpw.php:90 www/account/pending-resend.php:67
 #: www/account/verify.php:78
 #, fuzzy
 msgid "Login Name"
@@ -14864,28 +15048,39 @@ msgstr "Loginnaam"
 msgid "Send Lost PW Hash"
 msgstr "Stuur verloren wachtwoord hash"
 
-#: www/account/pending-resend.php:41
+#: www/account/pending-resend.php:31
+#, fuzzy
+msgid "Missing Parameter. You must provide a login name or an email address."
+msgstr ""
+"Ontbrekende parameter, je dient een doelgroep voor de mailing te kiezen"
+
+#: www/account/pending-resend.php:38
+#, fuzzy
+msgid "That user does not exist."
+msgstr "Die Trove categorie bestaat niet"
+
+#: www/account/pending-resend.php:42
 #, fuzzy
 msgid "Your account is already active."
 msgstr "Account is reeds actief."
 
-#: www/account/pending-resend.php:48
+#: www/account/pending-resend.php:45
 #, fuzzy
 msgid "Pending Account"
 msgstr "Nieuw account"
 
-#: www/account/pending-resend.php:50
+#: www/account/pending-resend.php:46
 msgid ""
 "Your email confirmation has been resent. Visit the link in this email to "
 "complete the registration process."
 msgstr ""
 
-#: www/account/pending-resend.php:57 www/account/register.php:266
+#: www/account/pending-resend.php:53 www/account/register.php:277
 #, fuzzy
 msgid "Resend confirmation email to a pending account"
 msgstr "[Bevestigings e-mail opnieuw toesturen]"
 
-#: www/account/pending-resend.php:60
+#: www/account/pending-resend.php:56
 #, fuzzy
 msgid ""
 "Fill in a user name or email address and click “Submit” to resend the "
@@ -14894,7 +15089,7 @@ msgstr ""
 "Vul een gebruikersnaam in en klik op 'Versturen' om de bevestigingsemail te "
 "versturen"
 
-#: www/account/pending-resend.php:62
+#: www/account/pending-resend.php:58
 #, fuzzy
 msgid ""
 "Fill in a user name and click “Submit” to resend the confirmation email."
@@ -14902,32 +15097,32 @@ msgstr ""
 "Vul een gebruikersnaam in en klik op 'Versturen' om de bevestigingsemail te "
 "versturen"
 
-#: www/account/register.php:73
+#: www/account/register.php:75
 msgid "You can't register an account unless you accept the terms of use."
 msgstr ""
 
-#: www/account/register.php:90
+#: www/account/register.php:98
 #, fuzzy
 msgid "Register Confirmation"
 msgstr "Overige informatie"
 
-#: www/account/register.php:97
+#: www/account/register.php:105
 msgid ""
 "Error during user activation but after user registration (user is now in "
 "pending state and will not get a notification eMail!)"
 msgstr ""
 
-#: www/account/register.php:99
+#: www/account/register.php:107
 #, fuzzy, php-format
 msgid "Could not activate newly registered user's forge account: %s"
 msgstr "Kan account niet activeren."
 
-#: www/account/register.php:106
+#: www/account/register.php:114
 #, php-format
 msgid "You have registered the %1$s account on %2$s."
 msgstr ""
 
-#: www/account/register.php:110
+#: www/account/register.php:118
 #, fuzzy
 msgid ""
 "A confirmation email is being sent to verify the submitted email address. "
@@ -14937,49 +15132,49 @@ msgstr ""
 "verificatie van het e-mail adres wordt er nu een bevestiging per e-mail "
 "opgestuurd. Klik op de link in de e-mail om je account te activeren."
 
-#: www/account/register.php:113
+#: www/account/register.php:121
 #, php-format
 msgid ""
 "You have registered and activated user %1$s on %2$s. They will not receive "
 "an eMail about this fact."
 msgstr ""
 
-#: www/account/register.php:134
+#: www/account/register.php:142
 #, fuzzy
 msgid "User Account Registration"
 msgstr "%1$s Account registratie"
 
-#: www/account/register.php:142
+#: www/account/register.php:150
 msgid ""
 "Login Name (no uppercase letters; leave empty to have it generated "
 "automatically):"
 msgstr ""
 
-#: www/account/register.php:144
+#: www/account/register.php:152
 msgid "Login Name (do not use uppercase letters):"
 msgstr "Loginnaam (gebruik geen hoofdletters):"
 
-#: www/account/register.php:151
+#: www/account/register.php:159
 msgid "Password (min. 6 chars):"
 msgstr "Wachtwoord (min. 6 tekens):"
 
-#: www/account/register.php:157
+#: www/account/register.php:165
 msgid "Password (repeat):"
 msgstr "Wachtwoord (herhaal):"
 
-#: www/account/register.php:183
+#: www/account/register.php:191
 msgid "Language Choice:"
 msgstr "Taal keuze:"
 
-#: www/account/register.php:195
+#: www/account/register.php:203
 msgid "Theme"
 msgstr "Thema"
 
-#: www/account/register.php:205
+#: www/account/register.php:213
 msgid "Email Address"
 msgstr "E-mail adres"
 
-#: www/account/register.php:206
+#: www/account/register.php:214
 #, php-format
 msgid ""
 "This email address will be verified before account activation. You will "
@@ -14987,37 +15182,37 @@ msgid ""
 "to this address."
 msgstr ""
 
-#: www/account/register.php:212 www/mail/index.php:78
+#: www/account/register.php:220 www/mail/index.php:78
 msgid "Address"
 msgstr "Adres"
 
-#: www/account/register.php:218
+#: www/account/register.php:226
 msgid "Address (continued)"
 msgstr ""
 
-#: www/account/register.php:224
+#: www/account/register.php:232
 msgid "Phone"
 msgstr "Telefoon:"
 
-#: www/account/register.php:230
+#: www/account/register.php:238
 msgid "Fax"
 msgstr "Fax"
 
-#: www/account/register.php:250
+#: www/account/register.php:258
 #, php-format
 msgid "Do you accept the <a href=\"%1$s\">terms of use</a> for this site?"
 msgstr ""
 
-#: www/account/register.php:256
+#: www/account/register.php:264
 msgid "Activate this user immediately"
 msgstr ""
 
-#: www/account/register.php:260
+#: www/account/register.php:271
 #, php-format
 msgid "Fields marked with %s are mandatory."
 msgstr ""
 
-#: www/account/register.php:263
+#: www/account/register.php:274
 msgid "Register"
 msgstr "Registreer"
 
@@ -15618,7 +15813,7 @@ msgstr "SCM box:"
 msgid "Resend New Project Instruction Email"
 msgstr "Opnieuw verzenden instructie e-mail voor nieuw project"
 
-#: www/admin/grouplist.php:27 www/include/Layout.class.php:1406
+#: www/admin/grouplist.php:27 www/include/Layout.class.php:1413
 #: www/softwaremap/full_list.php:54
 #, fuzzy
 msgid "Project List"
@@ -16810,7 +17005,7 @@ msgstr "Geen."
 msgid "Forum RSS: Forum not found: "
 msgstr "Fout - geen versies gevonden"
 
-#: www/export/rss20_tracker.php:111
+#: www/export/rss20_tracker.php:110
 #, fuzzy
 msgid "Tracker RSS: No trackers found"
 msgstr "Niets gevonden"
@@ -17110,7 +17305,7 @@ msgstr "Thread"
 msgid "Ultimate"
 msgstr "Activeer"
 
-#: www/forum/forum.php:179 www/include/tool_reports.php:103
+#: www/forum/forum.php:179 www/include/tool_reports.php:102
 msgid "Show"
 msgstr "Toon"
 
@@ -17613,28 +17808,28 @@ msgstr "Opleveren nieuwe bestandsversie"
 msgid "Release name"
 msgstr "Releasenaam"
 
-#: www/frs/index.php:64
+#: www/frs/index.php:90
 msgid "Project Filelist"
 msgstr "Project bestandslijst"
 
-#: www/frs/index.php:70
+#: www/frs/index.php:96
 msgid "No File Packages"
 msgstr "Geen bestandsbundels"
 
-#: www/frs/index.php:71
+#: www/frs/index.php:97
 msgid "There are no file packages defined for this project."
 msgstr ""
 
-#: www/frs/index.php:75
+#: www/frs/index.php:101
 msgid "Below is a list of all files of the project."
 msgstr "Hieronder staat een lijst met alle bestanden van het project."
 
-#: www/frs/index.php:77
+#: www/frs/index.php:103
 msgid ""
 "The release you have chosen is <span class=\"selected\">highlighted</span>."
 msgstr ""
 
-#: www/frs/index.php:79
+#: www/frs/index.php:105
 msgid ""
 "Before downloading, you may want to read Release Notes and ChangeLog "
 "(accessible by clicking on release version)."
@@ -17642,41 +17837,41 @@ msgstr ""
 "Kijk voor het downloaden de Release Notes en Change Log even door "
 "(toegankelijk door op de release versie te klikken)."
 
-#: www/frs/index.php:88
+#: www/frs/index.php:114
 msgid "To create a new release click here."
 msgstr "Klik hier om een nieuwe release aan te maken."
 
-#: www/frs/index.php:107
+#: www/frs/index.php:135
 #, fuzzy
 msgid "Stop monitoring this package"
 msgstr "Monitor deze bundel"
 
-#: www/frs/index.php:129 www/frs/index.php:199
+#: www/frs/index.php:157 www/frs/index.php:229
 msgid "No releases"
 msgstr "Geen releases"
 
-#: www/frs/index.php:134
+#: www/frs/index.php:162
 msgid "Download latest release as ZIP:"
 msgstr ""
 
-#: www/frs/index.php:137
+#: www/frs/index.php:165
 msgid "This link always points to the newest release as a ZIP file."
 msgstr ""
 
-#: www/frs/index.php:180
+#: www/frs/index.php:210
 msgid "D/L"
 msgstr "D/L"
 
-#: www/frs/index.php:181
+#: www/frs/index.php:211
 msgid "Arch"
 msgstr "Architectuur"
 
-#: www/frs/index.php:183
+#: www/frs/index.php:213
 #, fuzzy
 msgid "Latest"
 msgstr "Laatste Nieuws"
 
-#: www/frs/index.php:212
+#: www/frs/index.php:242
 #, fuzzy
 msgid "Latest version"
 msgstr "Laatste Nieuws"
@@ -17685,6 +17880,10 @@ msgstr "Laatste Nieuws"
 #, fuzzy
 msgid "Error Getting FRSPackage"
 msgstr "Fout bij het toevoegen van een forum"
+
+#: www/frs/monitor.php:58 www/frs/monitor.php:59
+msgid "Monitoring Stopped"
+msgstr "Monitoring gestopt"
 
 #: www/frs/monitor.php:72
 msgid "File Module ID"
@@ -17718,7 +17917,7 @@ msgstr "Opleveringsnaam:"
 msgid "Features Boxes"
 msgstr "Feature verzoeken"
 
-#: www/include/features_boxes.php:39 www/include/Layout.class.php:1394
+#: www/include/features_boxes.php:39 www/include/Layout.class.php:1401
 #: www/softwaremap/tag_cloud.php:52
 #, fuzzy
 msgid "Tag Cloud"
@@ -18035,6 +18234,11 @@ msgid_plural "%d weeks ago"
 msgstr[0] ""
 msgstr[1] ""
 
+#: www/include/html.php:1257
+#, php-format
+msgid " Displaying %1$s per page. Projects sorted by alphabetical order."
+msgstr ""
+
 #: www/include/Layout.class.php:136
 #, fuzzy
 msgid "Cannot find theme directory!"
@@ -18044,24 +18248,24 @@ msgstr "Bestand kan niet verplaatst worden naar de permanente locatie"
 msgid "en"
 msgstr "nl"
 
-#: www/include/Layout.class.php:705
+#: www/include/Layout.class.php:712
 msgid "Quick Jump To..."
 msgstr ""
 
-#: www/include/Layout.class.php:1396
+#: www/include/Layout.class.php:1403
 #, fuzzy
 msgid "Browse per tags defined by the projects."
 msgstr "Een dergelijke vacature komt in dit project niet voor"
 
-#: www/include/Layout.class.php:1400
+#: www/include/Layout.class.php:1407
 msgid "Project Tree"
 msgstr ""
 
-#: www/include/Layout.class.php:1402 www/snippet/index.php:81
+#: www/include/Layout.class.php:1409 www/snippet/index.php:81
 msgid "Browse by Category"
 msgstr "Bladeren per categorie"
 
-#: www/include/Layout.class.php:1408
+#: www/include/Layout.class.php:1415
 #, fuzzy
 msgid "Complete listing of available projects."
 msgstr "Hier is een lijst met openstaande functies voor dit project."
@@ -18098,27 +18302,27 @@ msgstr "Er zijn geen openbare trackers beschikbaar"
 msgid "No data found to report"
 msgstr "Geen rapportagedata gevonden"
 
-#: www/include/tool_reports.php:87
+#: www/include/tool_reports.php:86
 msgid "Last day(s)"
 msgstr "Laatste dag(en)"
 
-#: www/include/tool_reports.php:88
+#: www/include/tool_reports.php:87
 msgid "Last week(s)"
 msgstr "Laatste week(en)"
 
-#: www/include/tool_reports.php:89
+#: www/include/tool_reports.php:88
 msgid "Last month(s)"
 msgstr "Laatste maand(en)"
 
-#: www/include/tool_reports.php:90
+#: www/include/tool_reports.php:89
 msgid "Last year(s)"
 msgstr "Laatste jaar(en)"
 
-#: www/include/tool_reports.php:91
+#: www/include/tool_reports.php:90
 msgid "Project lifespan"
 msgstr "Project levensduur"
 
-#: www/include/tool_reports.php:95
+#: www/include/tool_reports.php:94
 msgid "for"
 msgstr "voor"
 
@@ -18930,35 +19134,38 @@ msgstr "Toevoegen nieuws"
 msgid "Not Found"
 msgstr "Niets gevonden"
 
-#: www/news/submit.php:74
+#: www/news/submit.php:75
+#, fuzzy
 msgid ""
-"You cannot submit news for a project unless you are an admin on that project"
+"You cannot submit news for a project unless you are an admin on that project."
 msgstr ""
 "Je kunt alleen nieuws aan een project toevoegen als je beheerder van dat "
 "project bent"
 
-#: www/news/submit.php:78
+#: www/news/submit.php:79
 msgid "Submitting news from the news group is not allowed."
 msgstr "Nieuws toevoegen vanuit de nieuws groep is niet toegestaan."
 
 #: www/news/submit.php:108
-msgid "ERROR doing insert"
-msgstr "Fout bij invoegen"
+#, fuzzy
+msgid "Error: insert failed."
+msgstr "Fout bij het invoegen"
 
 #: www/news/submit.php:111
 msgid "News Added."
 msgstr "Nieuws toegevoegd."
 
-#: www/news/submit.php:115
-msgid "ERROR - both subject and body are required"
+#: www/news/submit.php:116
+#, fuzzy
+msgid "Error: both subject and body are required."
 msgstr "Fout - zowel titel als berichttekst zijn verplicht"
 
-#: www/news/submit.php:131
+#: www/news/submit.php:132
 #, fuzzy
 msgid "Submit News for Project: "
 msgstr "Deze nieuws items staan klaar voor project"
 
-#: www/news/submit.php:137
+#: www/news/submit.php:138
 #, php-format
 msgid ""
 "You can post news about your project if you are an admin on your project. "
@@ -21245,21 +21452,21 @@ msgid_plural "You must send a comment to the administrators:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/project/stats/index.php:92
+#: www/project/stats/index.php:96
 #, fuzzy
 msgid "Project Statistics"
 msgstr "Gebruik statistieken"
 
-#: www/project/stats/index.php:103 www/reporting/projectact.php:70
+#: www/project/stats/index.php:105 www/reporting/projectact.php:70
 #: www/reporting/siteact.php:70 www/reporting/useract.php:85
 msgid "Areas"
 msgstr "Gebieden"
 
-#: www/project/stats/index.php:113 www/tracker/reporting/index.php:142
+#: www/project/stats/index.php:119 www/tracker/reporting/index.php:142
 msgid "Cannot proceed the request. Start date is equal to end date."
 msgstr ""
 
-#: www/project/stats/index.php:116 www/tracker/reporting/index.php:147
+#: www/project/stats/index.php:122 www/tracker/reporting/index.php:147
 #: www/tracker/reporting/index.php:151
 #, fuzzy
 msgid "Error during graphic computation."
@@ -22583,22 +22790,12 @@ msgstr "Scripttype"
 msgid "en_US"
 msgstr "en_US"
 
-#: www/softwaremap/full_list.php:69 www/softwaremap/trove_list.php:242
+#: www/softwaremap/full_list.php:69 www/softwaremap/trove_list.php:267
 #, php-format
 msgid "More than <strong>%1$s</strong> projects in result set."
 msgstr "Meer dan <strong>%1$s</strong> projecten in resultaatset."
 
-#: www/softwaremap/full_list.php:71
-#, fuzzy, php-format
-msgid "<strong>%1$s</strong> projects in result set."
-msgstr "<strong>%1$s</strong> projecten in resultaatset."
-
-#: www/softwaremap/full_list.php:77
-#, php-format
-msgid " Displaying %1$s per page. Projects sorted by alphabetical order."
-msgstr ""
-
-#: www/softwaremap/full_list.php:138
+#: www/softwaremap/full_list.php:123
 #, fuzzy
 msgid "Register Date:"
 msgstr "Geregistreerd"
@@ -22640,56 +22837,56 @@ msgstr "Actieve site deelnemers: <strong>%1$s</strong>"
 msgid "Registered: <strong>%s</strong>"
 msgstr "Geregistreerde projecten: <strong>%1$s</strong>"
 
-#: www/softwaremap/trove_list.php:33
+#: www/softwaremap/trove_list.php:56
 msgid "Software Map"
 msgstr "Software overzicht"
 
-#: www/softwaremap/trove_list.php:56 www/trove/TroveCategory.class.php:64
+#: www/softwaremap/trove_list.php:81 www/trove/TroveCategory.class.php:64
 #: www/trove/TroveCategory.class.php:71
 msgid "That Trove category does not exist"
 msgstr "Die Trove categorie bestaat niet"
 
-#: www/softwaremap/trove_list.php:60
+#: www/softwaremap/trove_list.php:85
 #, fuzzy
 msgid "Project tree"
 msgstr "Nieuwe projectnaam"
 
-#: www/softwaremap/trove_list.php:112
+#: www/softwaremap/trove_list.php:137
 #, fuzzy
 msgid "Now limiting view to projects in the following categories:"
 msgstr ""
 "De weergave van projecten wordt nu ingeperkt op de volgende categorie&euml;n:"
 
-#: www/softwaremap/trove_list.php:117
+#: www/softwaremap/trove_list.php:142
 msgid "Remove This Filter"
 msgstr "Verwijder dit filter"
 
-#: www/softwaremap/trove_list.php:175 www/trove/index.php:152
+#: www/softwaremap/trove_list.php:200 www/trove/index.php:152
 #, php-format
 msgid "%1$s projects"
 msgstr "%1$s projecten"
 
-#: www/softwaremap/trove_list.php:194 www/trove/index.php:95
+#: www/softwaremap/trove_list.php:219 www/trove/index.php:95
 msgid "Browse By"
 msgstr "Bladeren op basis van:"
 
-#: www/softwaremap/trove_list.php:245
+#: www/softwaremap/trove_list.php:270
 #, fuzzy, php-format
 msgid "<strong>%1$s</strong> project in result set."
 msgid_plural "<strong>%1$s</strong> projects in result set."
 msgstr[0] "<strong>%1$s</strong> projecten in resultaatset."
 msgstr[1] "<strong>%1$s</strong> projecten in resultaatset."
 
-#: www/softwaremap/trove_list.php:296
+#: www/softwaremap/trove_list.php:321
 msgid "Activity Percentile:&nbsp;"
 msgstr "Activiteit percentiel:"
 
-#: www/softwaremap/trove_list.php:297
+#: www/softwaremap/trove_list.php:322
 #, fuzzy
 msgid "Activity Ranking:&nbsp;"
 msgstr "Activiteit percentiel:"
 
-#: www/softwaremap/trove_list.php:299
+#: www/softwaremap/trove_list.php:324
 msgid "Registered:&nbsp;"
 msgstr "Geregistreerd:"
 
@@ -23091,8 +23288,8 @@ msgstr ""
 "antwoorden zijn ingediend"
 
 #: www/survey/include/SurveyHTML.class.php:191
-#, fuzzy
-msgid "Survey Title: "
+#: www/survey/include/SurveyHTML.class.php:344
+msgid "Survey Title"
 msgstr "Enqu&ecirc;te titel"
 
 #: www/survey/include/SurveyHTML.class.php:194
@@ -23136,10 +23333,6 @@ msgstr[1] "%1$s vragen gevonden"
 #: www/survey/include/SurveyHTML.class.php:341
 msgid "Survey ID"
 msgstr "Enqu&ecirc;te ID"
-
-#: www/survey/include/SurveyHTML.class.php:344
-msgid "Survey Title"
-msgstr "Enqu&ecirc;te titel"
 
 #: www/survey/include/SurveyHTML.class.php:350
 msgid "Number of Questions"
@@ -23614,6 +23807,23 @@ msgstr "Alles bijwerken"
 msgid "No User Name Provided"
 msgstr "Gebruikersnaam"
 
+#~ msgid "You Can Only Save Your Place If You Are Logged In"
+#~ msgstr "Je kunt je positie alleen opslaan als je bent ingelogd"
+
+#, fuzzy
+#~ msgid "No data to display"
+#~ msgstr "%1$s vragen gevonden"
+
+#~ msgid "ERROR doing insert"
+#~ msgstr "Fout bij invoegen"
+
+#~ msgid "ERROR - both subject and body are required"
+#~ msgstr "Fout - zowel titel als berichttekst zijn verplicht"
+
+#, fuzzy
+#~ msgid "Survey Title: "
+#~ msgstr "Enqu&ecirc;te titel"
+
 #, fuzzy
 #~ msgid "ERROR inserting into skill inventory: %s"
 #~ msgstr "Fout bij toevoegen aan vaardigheden overzicht"
@@ -23756,10 +23966,6 @@ msgstr "Gebruikersnaam"
 #~ msgstr "Ongeldige unix naam"
 
 #, fuzzy
-#~ msgid "Invalid folder."
-#~ msgstr "Ongeldige gebruiker"
-
-#, fuzzy
 #~ msgid "Invalid filename"
 #~ msgstr "Ongeldige volledige naam"
 
@@ -23819,9 +24025,6 @@ msgstr "Gebruikersnaam"
 #~ msgstr "Bestandstype<br />aanpassen"
 
 #~ msgid "Monitoring Has Been Stopped"
-#~ msgstr "Monitoring gestopt"
-
-#~ msgid "Monitoring stopped"
 #~ msgstr "Monitoring gestopt"
 
 #~ msgid "Monitoring Has Been Started"
@@ -23899,10 +24102,6 @@ msgstr "Gebruikersnaam"
 #, fuzzy
 #~ msgid "Start:"
 #~ msgstr "Start"
-
-#, fuzzy
-#~ msgid "That user does not exist."
-#~ msgstr "Die Trove categorie bestaat niet"
 
 #~ msgid "User name:"
 #~ msgstr "gebruikersnaam:"
@@ -24505,9 +24704,6 @@ msgstr "Gebruikersnaam"
 #~ msgid "Read More/Comment"
 #~ msgstr "Lees verder/Commentaar"
 
-#~ msgid "Error: both subject and body are required"
-#~ msgstr "Fout - zowel titel als berichttekst zijn verplicht"
-
 #~ msgid "Job inserted successfully"
 #~ msgstr "Vacature toegevoegd"
 
@@ -25105,10 +25301,6 @@ msgstr "Gebruikersnaam"
 #~ msgstr "Document gesubmit"
 
 #, fuzzy
-#~ msgid "Monitoring started."
-#~ msgstr "Monitoring gestart"
-
-#, fuzzy
 #~ msgid "Document released successfully."
 #~ msgstr "Document gesubmit"
 
@@ -25682,10 +25874,6 @@ msgstr "Gebruikersnaam"
 
 #~ msgid "Recent logins"
 #~ msgstr "Recente logins"
-
-#~ msgid "Missing parameter, You must select target audience for mailing"
-#~ msgstr ""
-#~ "Ontbrekende parameter, je dient een doelgroep voor de mailing te kiezen"
 
 #~ msgid "Missing parameter, You are trying to send empty message"
 #~ msgstr "Ontbrekende parameter, je probeert een lege boodschap te verzenden"
