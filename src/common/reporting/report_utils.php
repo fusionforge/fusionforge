@@ -825,7 +825,7 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 	}
 	echo 'jQuery(document).ready(function(){
 			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', series, {
-				title : \''.utf8_decode($areaname).' ( '.strftime('%x', $start).' - '.strftime('%x', $end).') \',
+				title : \''.utf8_decode($areaname).' ('.strftime('%x', $start).' - '.strftime('%x', $end).') \',
 				axesDefaults: {
 					tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
 					tickOptions: {
@@ -1093,7 +1093,7 @@ function report_sitetimebargraph($start, $end) {
 		}
 		echo 'jQuery(document).ready(function(){
 				plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', series, {
-					title : \''.utf8_decode($areaname).' ( '.strftime('%x', $start).' - '.strftime('%x', $end).') \',
+					title : \''.utf8_decode($areaname).' ('.strftime('%x', $start).' - '.strftime('%x', $end).') \',
 					axesDefaults: {
 						tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
 						tickOptions: {
