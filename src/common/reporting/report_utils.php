@@ -1148,7 +1148,7 @@ function report_sitetimebargraph($start, $end) {
 		echo '//]]></script>';
 		echo '<div id="chart'.$chartid.'"></div>';
 	} else {
-		echo '<p class="information">'._('No data to display').'</p>';
+		echo '<p class="information">'._('No data to display.').'</p>';
 	}
 	return true;
 }
