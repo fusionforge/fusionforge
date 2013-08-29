@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 12:23+0200\n"
+"POT-Creation-Date: 2013-08-29 12:32+0200\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -121,8 +121,10 @@ msgstr "Nie znaleziono żadnych dokumentów"
 #: common/docman/actions/delfile.php:48
 #: common/docman/actions/monitordirectory.php:51
 #: common/docman/actions/monitordirectory.php:69
+#: common/docman/actions/monitorfile.php:52
 #: common/docman/actions/monitorfile.php:72
-#: common/docman/actions/trashfile.php:62 www/docman/view.php:244
+#: common/docman/actions/trashfile.php:62
+#: common/docman/actions/validatefile.php:57 www/docman/view.php:244
 msgid "No action to perform"
 msgstr ""
 
@@ -200,11 +202,6 @@ msgstr "Szukaj w dokumentach"
 #: common/docman/actions/monitordirectory.php:76
 #: common/docman/actions/monitorfile.php:80
 msgid "Docman: monitoring action unknown."
-msgstr ""
-
-#: common/docman/actions/monitorfile.php:52
-#: common/docman/actions/validatefile.php:57
-msgid "No action to perform."
 msgstr ""
 
 #: common/docman/actions/monitorfile.php:56

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 12:23+0200\n"
+"POT-Creation-Date: 2013-08-29 12:32+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -122,8 +122,10 @@ msgstr "Документация"
 #: common/docman/actions/delfile.php:48
 #: common/docman/actions/monitordirectory.php:51
 #: common/docman/actions/monitordirectory.php:69
+#: common/docman/actions/monitorfile.php:52
 #: common/docman/actions/monitorfile.php:72
-#: common/docman/actions/trashfile.php:62 www/docman/view.php:244
+#: common/docman/actions/trashfile.php:62
+#: common/docman/actions/validatefile.php:57 www/docman/view.php:244
 #, fuzzy
 msgid "No action to perform"
 msgstr "Нет данных для отчета"
@@ -205,12 +207,6 @@ msgstr "Отключено оповещение на емайл"
 #: common/docman/actions/monitorfile.php:80
 msgid "Docman: monitoring action unknown."
 msgstr ""
-
-#: common/docman/actions/monitorfile.php:52
-#: common/docman/actions/validatefile.php:57
-#, fuzzy
-msgid "No action to perform."
-msgstr "Нет данных для отчета"
 
 #: common/docman/actions/monitorfile.php:56
 #, fuzzy
@@ -24126,6 +24122,10 @@ msgstr "Глобальное изменение"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Имя участника обязательно"
+
+#, fuzzy
+#~ msgid "No action to perform."
+#~ msgstr "Нет данных для отчета"
 
 #~ msgid "You Can Only Save Your Place If You Are Logged In"
 #~ msgstr "Сохранять позиции Вы можете лишь авторизировавшись"

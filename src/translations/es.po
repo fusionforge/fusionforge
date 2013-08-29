@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 12:23+0200\n"
+"POT-Creation-Date: 2013-08-29 12:32+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -117,8 +117,10 @@ msgstr "Documento(s)"
 #: common/docman/actions/delfile.php:48
 #: common/docman/actions/monitordirectory.php:51
 #: common/docman/actions/monitordirectory.php:69
+#: common/docman/actions/monitorfile.php:52
 #: common/docman/actions/monitorfile.php:72
-#: common/docman/actions/trashfile.php:62 www/docman/view.php:244
+#: common/docman/actions/trashfile.php:62
+#: common/docman/actions/validatefile.php:57 www/docman/view.php:244
 msgid "No action to perform"
 msgstr "No hay acciones a realizar"
 
@@ -193,12 +195,6 @@ msgstr "monitorización parada."
 #: common/docman/actions/monitorfile.php:80
 msgid "Docman: monitoring action unknown."
 msgstr "Docman: acción monitorización desconocida."
-
-#: common/docman/actions/monitorfile.php:52
-#: common/docman/actions/validatefile.php:57
-#, fuzzy
-msgid "No action to perform."
-msgstr "No hay acciones a realizar"
 
 #: common/docman/actions/monitorfile.php:56
 #, fuzzy
@@ -23264,6 +23260,10 @@ msgstr "No puedo actualizar"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "No ha proporcionado el nombre de usuario"
+
+#, fuzzy
+#~ msgid "No action to perform."
+#~ msgstr "No hay acciones a realizar"
 
 #~ msgid "You Can Only Save Your Place If You Are Logged In"
 #~ msgstr "Sólo puede guardar su lugar si ha iniciado su sesión."

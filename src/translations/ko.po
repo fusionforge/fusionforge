@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 12:23+0200\n"
+"POT-Creation-Date: 2013-08-29 12:32+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -123,8 +123,10 @@ msgstr "게시판 사용"
 #: common/docman/actions/delfile.php:48
 #: common/docman/actions/monitordirectory.php:51
 #: common/docman/actions/monitordirectory.php:69
+#: common/docman/actions/monitorfile.php:52
 #: common/docman/actions/monitorfile.php:72
-#: common/docman/actions/trashfile.php:62 www/docman/view.php:244
+#: common/docman/actions/trashfile.php:62
+#: common/docman/actions/validatefile.php:57 www/docman/view.php:244
 #, fuzzy
 msgid "No action to perform"
 msgstr "리포트할 데이터가 없습니다."
@@ -205,12 +207,6 @@ msgstr "모니터링이 중단되었습니다."
 #: common/docman/actions/monitorfile.php:80
 msgid "Docman: monitoring action unknown."
 msgstr ""
-
-#: common/docman/actions/monitorfile.php:52
-#: common/docman/actions/validatefile.php:57
-#, fuzzy
-msgid "No action to perform."
-msgstr "리포트할 데이터가 없습니다."
 
 #: common/docman/actions/monitorfile.php:56
 #, fuzzy
@@ -23508,6 +23504,10 @@ msgstr "대량 갱신"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "사용자ID"
+
+#, fuzzy
+#~ msgid "No action to perform."
+#~ msgstr "리포트할 데이터가 없습니다."
 
 #~ msgid "You Can Only Save Your Place If You Are Logged In"
 #~ msgstr "로그인하셔야만 현재 위치를 기록할 수 있습니다."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 12:23+0200\n"
+"POT-Creation-Date: 2013-08-29 12:32+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -122,8 +122,10 @@ msgstr "Documentos"
 #: common/docman/actions/delfile.php:48
 #: common/docman/actions/monitordirectory.php:51
 #: common/docman/actions/monitordirectory.php:69
+#: common/docman/actions/monitorfile.php:52
 #: common/docman/actions/monitorfile.php:72
-#: common/docman/actions/trashfile.php:62 www/docman/view.php:244
+#: common/docman/actions/trashfile.php:62
+#: common/docman/actions/validatefile.php:57 www/docman/view.php:244
 #, fuzzy
 msgid "No action to perform"
 msgstr "Non se atopou ningún dato para o informe"
@@ -205,12 +207,6 @@ msgstr "Monitorización detida"
 #: common/docman/actions/monitorfile.php:80
 msgid "Docman: monitoring action unknown."
 msgstr ""
-
-#: common/docman/actions/monitorfile.php:52
-#: common/docman/actions/validatefile.php:57
-#, fuzzy
-msgid "No action to perform."
-msgstr "Non se atopou ningún dato para o informe"
 
 #: common/docman/actions/monitorfile.php:56
 #, fuzzy
@@ -23989,6 +23985,10 @@ msgstr "Non se puido actualizar"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Non se introduciu un nome de usuario"
+
+#, fuzzy
+#~ msgid "No action to perform."
+#~ msgstr "Non se atopou ningún dato para o informe"
 
 #~ msgid "You Can Only Save Your Place If You Are Logged In"
 #~ msgstr "Só pode gardar o seu lugar se está conectado"

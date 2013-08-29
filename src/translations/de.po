@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 12:23+0200\n"
+"POT-Creation-Date: 2013-08-29 12:32+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -122,8 +122,10 @@ msgstr "Dokumente"
 #: common/docman/actions/delfile.php:48
 #: common/docman/actions/monitordirectory.php:51
 #: common/docman/actions/monitordirectory.php:69
+#: common/docman/actions/monitorfile.php:52
 #: common/docman/actions/monitorfile.php:72
-#: common/docman/actions/trashfile.php:62 www/docman/view.php:244
+#: common/docman/actions/trashfile.php:62
+#: common/docman/actions/validatefile.php:57 www/docman/view.php:244
 #, fuzzy
 msgid "No action to perform"
 msgstr "Keine Daten gefunden"
@@ -205,12 +207,6 @@ msgstr "Überwachung gestoppt"
 #: common/docman/actions/monitorfile.php:80
 msgid "Docman: monitoring action unknown."
 msgstr ""
-
-#: common/docman/actions/monitorfile.php:52
-#: common/docman/actions/validatefile.php:57
-#, fuzzy
-msgid "No action to perform."
-msgstr "Keine Daten gefunden"
 
 #: common/docman/actions/monitorfile.php:56
 #, fuzzy
@@ -24060,6 +24056,10 @@ msgstr "Aktualisierung nicht möglich"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Kein Benutzername angegeben"
+
+#, fuzzy
+#~ msgid "No action to perform."
+#~ msgstr "Keine Daten gefunden"
 
 #~ msgid "You Can Only Save Your Place If You Are Logged In"
 #~ msgstr "Sie können nur speichern, wenn Sie auch angemeldet sind."

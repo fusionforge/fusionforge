@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 12:23+0200\n"
+"POT-Creation-Date: 2013-08-29 12:32+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -115,8 +115,10 @@ msgstr "Document(s)"
 #: common/docman/actions/delfile.php:48
 #: common/docman/actions/monitordirectory.php:51
 #: common/docman/actions/monitordirectory.php:69
+#: common/docman/actions/monitorfile.php:52
 #: common/docman/actions/monitorfile.php:72
-#: common/docman/actions/trashfile.php:62 www/docman/view.php:244
+#: common/docman/actions/trashfile.php:62
+#: common/docman/actions/validatefile.php:57 www/docman/view.php:244
 msgid "No action to perform"
 msgstr "Aucune action à réaliser"
 
@@ -188,12 +190,6 @@ msgstr "Surveillance arrêtée."
 #: common/docman/actions/monitorfile.php:80
 msgid "Docman: monitoring action unknown."
 msgstr "Action de surveillance inconnue."
-
-#: common/docman/actions/monitorfile.php:52
-#: common/docman/actions/validatefile.php:57
-#, fuzzy
-msgid "No action to perform."
-msgstr "Aucune action à réaliser"
 
 #: common/docman/actions/monitorfile.php:56
 msgid "Monitoring started."
@@ -23391,6 +23387,10 @@ msgstr "Erreur de mise à jour"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
+
+#, fuzzy
+#~ msgid "No action to perform."
+#~ msgstr "Aucune action à réaliser"
 
 #~ msgid "No space"
 #~ msgstr "Caractère espace interdit"

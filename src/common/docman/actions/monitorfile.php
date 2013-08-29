@@ -49,7 +49,7 @@ switch ($option) {
 				if (!$d->addMonitoredBy($LUSER->getID()))
 					session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
 			} else {
-				$warning_msg = _('No action to perform.');
+				$warning_msg = _('No action to perform');
 				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&warning_msg='.urlencode($warning_msg));
 			}
 		}

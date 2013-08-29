@@ -54,7 +54,7 @@ foreach ($arr_fileid as $fileid) {
 		if (!$d->setState('1'))
 			session_redirect($urlredirect.'&error_msg='.urlencode($d->getErrorMessage()));
 	} else {
-		$warning_msg = _('No action to perform.');
+		$warning_msg = _('No action to perform');
 		session_redirect($urlredirect.'&warning_msg='.urlencode($warning_msg));
 	}
 }
