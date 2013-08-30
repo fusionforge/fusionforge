@@ -80,6 +80,7 @@ if (!$start) {
 if (!$end) {
 	$end = $z[ count($z)-1 ];
 }
+
 if ($end < $start) list($start, $end) = array($end, $start);
 
 html_use_jqueryjqplotpluginCanvas();
@@ -116,7 +117,9 @@ if ($report->isError()) {
 
 $data = $report->getData();
 
-if (count($data) == 0) {
+if ($start == $end) {
+    echo '<p class="warning">'._('Start and end dates must be different').'</p>';
+} elseif (count($data) == 0) {
 	echo '<p class="information">';
 	echo _('There have been no downloads for this package.');
 	echo '</p>';
