@@ -21495,7 +21495,7 @@ msgstr "Semaine de démarrage"
 
 #: www/reporting/timecategory.php:69
 msgid "Time Code"
-msgstr "Identifiant"
+msgstr "Code temporel"
 
 #: www/reporting/timecategory.php:83
 msgid ""
