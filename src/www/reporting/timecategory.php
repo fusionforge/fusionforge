@@ -37,9 +37,9 @@ if (getStringFromRequest('submit')) {
 
 		$r = new ReportSetup();
 		if (!$r->addTimeCode($category_name)) {
-			exit_error($r->getErrorMessage());
+			$error_msg = $r->getErrorMessage();
 		} else {
-			$feedback=_('Successful');
+			$feedback = _('Successfully Added');
 		}
 
 	} elseif (getStringFromRequest('update')) {
@@ -47,9 +47,9 @@ if (getStringFromRequest('submit')) {
 		$r = new ReportSetup();
 
 		if (!$r->updateTimeCode($time_code,$category_name)) {
-			exit_error($r->getErrorMessage());
+			$error_msg = $r->getErrorMessage();
 		} else {
-			$feedback=_('Successful');
+			$feedback = _('Update Successful');
 		}
 
 		$time_code=false;
