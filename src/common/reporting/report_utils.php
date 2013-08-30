@@ -131,12 +131,14 @@ function report_area_box($name='area', $selected='1', $Group=false) {
 		$use_docman = $Group->usesDocman();
 		$use_pm = $Group->usesPM();
 		$use_frs = $Group->usesFRS();
+		$use_pageviews = true;
 	} else {
 		$use_tracker = forge_get_config('use_tracker');
 		$use_forum = forge_get_config('use_forum');
 		$use_docman = forge_get_config('use_docman');
 		$use_pm = forge_get_config('use_pm');
-		$use_frs = forge_get_config('use_frs');
+		$use_frs = false; // Not implemented in ReportUserAct: forge_get_config('use_frs');
+		$use_pageviews = false;
 	}
 	if ($use_tracker) {
 		$arr[]='tracker';
@@ -158,8 +160,10 @@ function report_area_box($name='area', $selected='1', $Group=false) {
 		$arr[]='downloads';
 		$arr2[]=_('Downloads');
 	}
-	$arr[]='pageviews';
-	$arr2[]=_('Page Views');
+	if ($use_pageviews) {
+		$arr[]='pageviews';
+		$arr2[]=_('Page Views');
+	}
 
 	if (is_object($Group) && $Group->getID()) {
 		$hookParams['group'] = $Group->getID();
