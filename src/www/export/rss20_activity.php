@@ -106,6 +106,7 @@ if ($group_id) {
 				print "   <title>".htmlspecialchars('Commit for Tracker Item [#'.$arr['subref_id'].'] '.$arr['description'])."</title>\n";
 				print "   <link>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
 				print "   <comments>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
+				$arr['category'] = _('Source Code');
 				break;
 			}
 			case 'trackeropen': {
@@ -116,6 +117,7 @@ if ($group_id) {
 				print "   <title>".htmlspecialchars('Tracker Item [#'.$arr['subref_id'].' '.$arr['description'].'] Opened')."</title>\n";
 				print "   <link>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
 				print "   <comments>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
+				$arr['category'] = _('Trackers');
 				break;
 			}
 			case 'trackerclose': {
@@ -126,6 +128,7 @@ if ($group_id) {
 				print "   <title>".htmlspecialchars('Tracker Item [#'.$arr['subref_id'].' '.$arr['description'].'] Closed')."</title>\n";
 				print "   <link>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
 				print "   <comments>$url/tracker/?func=detail&amp;atid=".$arr['ref_id'].'&amp;aid='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
+				$arr['category'] = _('Trackers');
 				break;
 			}
 			case 'frsrelease': {
@@ -136,6 +139,7 @@ if ($group_id) {
 				print "   <title>".htmlspecialchars('FRS Release [#'.$arr['description'].']')."</title>\n";
 				print "   <link>$url/frs/?release_id=".$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
 				print "   <comments>$url/frs/?release_id=".$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
+				$arr['category'] = _('File Release System');
 				break;
 			}
 			case 'forumpost': {
@@ -146,6 +150,7 @@ if ($group_id) {
 				print "   <title>".htmlspecialchars('Forum Post [#'.$arr['subref_id'].'] '.$arr['description'])."</title>\n";
 				print "   <link>$url/forum/message.php?forum_id=".$arr['ref_id'].'&amp;msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</link>\n";
 				print "   <comments>$url/forum/message.php?forum_id=".$arr['ref_id'].'&amp;msg_id='.$arr['subref_id'].'&amp;group_id='.$arr['group_id']."</comments>\n";
+				$arr['category'] = _('Forums');
 				break;
 			}
 			case 'news': {
@@ -156,6 +161,7 @@ if ($group_id) {
 				print "   <title>".htmlspecialchars('News Post [#'.$arr['subref_id'].'] '.$arr['description'])."</title>\n";
 				print "   <link>$url/forum/forum.php?forum_id=".$arr['subref_id']."</link>\n";
 				print "   <comments>$url/forum/forum.php?forum_id=".$arr['subref_id']."</comments>\n";
+				$arr['category'] = _('News');
 				break;
 			}
 			default: {
@@ -167,6 +173,9 @@ if ($group_id) {
 		}
 
 		print "   <description>".rss_description($arr['description'])."</description>\n";
+		if (isset($arr['category']) && $arr['category']) {
+			print "   <category>".$arr['category']."</category>\n";
+		}
 		if (isset($arr['user_name']) && $arr['user_name']) {
 			print "   <author>".$arr['user_name']."@".forge_get_config('users_host')." (".$arr['realname'].")</author>\n";
 		} else {
