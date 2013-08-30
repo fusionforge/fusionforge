@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 13:38+0200\n"
+"POT-Creation-Date: 2013-08-30 10:45+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -386,8 +386,8 @@ msgstr "Projet"
 #: common/forum/Forum.class.php:607 common/forum/Forum.class.php:633
 #: common/forum/Forum.class.php:641 common/forum/Forum.class.php:649
 #: common/forum/Forum.class.php:665 common/forum/ForumHTML.class.php:73
-#: common/forum/ForumHTML.class.php:211 common/include/exit.php:80
-#: common/include/User.class.php:336
+#: common/forum/ForumHTML.class.php:211 common/include/Error.class.php:207
+#: common/include/exit.php:80 common/include/User.class.php:336
 #: common/mail/MailingListFactory.class.php:104
 #: common/tracker/actions/browse.php:406 common/tracker/actions/browse.php:409
 #: common/tracker/actions/query.php:329 common/tracker/actions/query.php:344
@@ -507,7 +507,7 @@ msgid "Document Folder"
 msgstr "Dossier de documents"
 
 #: common/docman/DocumentGroup.class.php:76
-#: common/frs/FRSPackage.class.php:116 common/include/Error.class.php:189
+#: common/frs/FRSPackage.class.php:116 common/include/Error.class.php:185
 #: common/mail/MailingList.class.php:83 common/survey/Survey.class.php:83
 #: common/survey/SurveyQuestion.class.php:74
 #: plugins/mailman/include/MailmanList.class.php:103
@@ -1353,6 +1353,8 @@ msgid "Stop monitoring"
 msgstr "Arrêter la surveillance"
 
 #: common/docman/views/listfile.php:371
+#: common/docman/views/listtrashfile.php:204
+#: common/docman/views/pendingfiles.php:138
 msgid "Download as a ZIP"
 msgstr "Télécharger un fichier ZIP"
 
@@ -1385,12 +1387,6 @@ msgstr "Détruire de manière irrémédiable ce document."
 #: common/docman/views/listtrashfile.php:203
 msgid "Delete permanently."
 msgstr "Supprimer de manière permanente."
-
-#: common/docman/views/listtrashfile.php:204
-#: common/docman/views/pendingfiles.php:138
-#, fuzzy
-msgid "Download as a zip"
-msgstr "Télécharger un fichier ZIP"
 
 #: common/docman/views/menu.php:44
 msgid "View Documents"
@@ -2147,7 +2143,7 @@ msgid "Update failed"
 msgstr "La mise à jour a échoué"
 
 #: common/forum/Forum.class.php:622 common/frs/FRSPackage.class.php:467
-#: common/frs/FRSRelease.class.php:354 common/include/Group.class.php:1590
+#: common/frs/FRSRelease.class.php:354 common/include/Group.class.php:1599
 #: common/mail/MailingList.class.php:393 common/pm/ProjectGroup.class.php:362
 #: common/pm/ProjectTask.class.php:515 common/tracker/Artifact.class.php:505
 #: common/tracker/ArtifactExtraField.class.php:430
@@ -2781,30 +2777,32 @@ msgstr "Pas de scripts trouvés pour l'installation de la base de données."
 msgid "Database initialisation error:"
 msgstr "Erreur d'initialisation de la base de données :"
 
-#: common/include/Error.class.php:130 common/include/Group.class.php:429
+#: common/include/Error.class.php:126 common/include/Group.class.php:429
 #: common/include/Group.class.php:496
 msgid "Permission denied."
 msgstr "Permission refusée."
 
-#: common/include/Error.class.php:147 common/include/User.class.php:336
+#: common/include/Error.class.php:143 common/include/User.class.php:336
 #: common/include/User.class.php:917 common/include/User.class.php:970
 #: common/tracker/actions/tracker.php:84
 #: plugins/forumml/www/forumml_utils.php:686 www/account/change_email.php:38
 msgid "Invalid Email Address"
 msgstr "Adresse de messagerie non valide"
 
-#: common/include/Error.class.php:151
+#: common/include/Error.class.php:147
 msgid "(none given)"
 msgstr "(aucun)"
 
-#: common/include/Error.class.php:172
+#: common/include/Error.class.php:168
 #, php-format
 msgid "Error On Update: %s"
 msgstr "Erreur lors de la mise à jour : %s"
 
-#: common/include/Error.class.php:213
-msgid "Missing Parameters"
-msgstr "Il manque des paramètres"
+#: common/include/Error.class.php:209 common/include/exit.php:80
+#: common/include/exit.php:85
+#, php-format
+msgid "Missing Required Parameters"
+msgstr "Il manque des paramètres obligatoires"
 
 #: common/include/exit.php:33
 msgid "Exiting with error"
@@ -2825,11 +2823,6 @@ msgid ""
 msgstr ""
 "Permission refusée. Aucun projet n'a été choisi, le projet n'existe pas ou "
 "vous n'avez pas les droits d'accès."
-
-#: common/include/exit.php:80 common/include/exit.php:85
-#, php-format
-msgid "Missing Required Parameters"
-msgstr "Il manque des paramètres obligatoires"
 
 #: common/include/exit.php:104
 msgid "The Site Administrator has turned off this feature."
@@ -2956,15 +2949,15 @@ msgstr ""
 msgid "Error: Cannot change group status: %s"
 msgstr "Erreur lors de la mise à jour du statut du projet : %s"
 
-#: common/include/Group.class.php:946
+#: common/include/Group.class.php:948
 msgid "Could not insert SCM_BOX to database"
 msgstr "Erreur lors de l'insertion de scm_box dans la base de données"
 
-#: common/include/Group.class.php:950
+#: common/include/Group.class.php:952
 msgid "SCM Box cannot be empty"
 msgstr "Le champ Serveur de sources ne peut pas être vide"
 
-#: common/include/Group.class.php:1558
+#: common/include/Group.class.php:1567
 msgid ""
 "Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&'#"
 "+. and space"
@@ -2972,148 +2965,148 @@ msgstr ""
 "Nom d'étiquette invalide.  Seuls les caractères suivants sont autorisés : [A-"
 "Z][a-z][0-9]-_&'#+. et l'espace."
 
-#: common/include/Group.class.php:1567
+#: common/include/Group.class.php:1576
 msgid "Setting tags:"
 msgstr "Réglage des mots-clefs :"
 
-#: common/include/Group.class.php:1597
+#: common/include/Group.class.php:1606
 msgid "Cannot Delete System Group"
 msgstr "Vous ne pouvez pas supprimer un groupe système."
 
-#: common/include/Group.class.php:1619
+#: common/include/Group.class.php:1628
 msgid "Could not properly remove member:"
 msgstr "Erreur lors de la suppression du membre :"
 
-#: common/include/Group.class.php:1643
+#: common/include/Group.class.php:1652
 msgid "Could not properly delete the tracker:"
 msgstr "Erreur lors de la suppression du traceur :"
 
-#: common/include/Group.class.php:1660
+#: common/include/Group.class.php:1669
 msgid "Could not properly delete the forum:"
 msgstr "Erreur lors de la suppression du forum :"
 
-#: common/include/Group.class.php:1676
+#: common/include/Group.class.php:1685
 msgid "Could not properly delete the ProjectGroup:"
 msgstr "Erreur lors de la suppression du projet :"
 
-#: common/include/Group.class.php:1687
+#: common/include/Group.class.php:1696
 msgid "Error FRS Packages: "
 msgstr "Erreur de paquets : "
 
-#: common/include/Group.class.php:1695
+#: common/include/Group.class.php:1704
 msgid "Could not properly delete the FRSPackage:"
 msgstr "Erreur lors de la suppression du paquet :"
 
-#: common/include/Group.class.php:1706 common/include/Group.class.php:1721
+#: common/include/Group.class.php:1715 common/include/Group.class.php:1730
 msgid "Error Deleting News: "
 msgstr "Erreur lors de la suppression d'une nouvelle : "
 
-#: common/include/Group.class.php:1714
+#: common/include/Group.class.php:1723
 #, php-format
 msgid "Could Not Delete News Forum: %d"
 msgstr "Erreur lors de la suppression du forum de nouvelles %d"
 
-#: common/include/Group.class.php:1732 common/include/Group.class.php:1740
+#: common/include/Group.class.php:1741 common/include/Group.class.php:1749
 msgid "Error Deleting Documents: "
 msgstr "Erreur lors de la suppression de documents : "
 
-#: common/include/Group.class.php:1750
+#: common/include/Group.class.php:1759
 msgid "Error Deleting Tags: "
 msgstr "Erreur lors de la suppression d'étiquettes : "
 
-#: common/include/Group.class.php:1761
+#: common/include/Group.class.php:1770
 msgid "Error Deleting Project History: "
 msgstr "Erreur lors de la suppression de l'historique d'un projet : "
 
-#: common/include/Group.class.php:1772
+#: common/include/Group.class.php:1781
 msgid "Error Deleting Project Plugins: "
 msgstr "Erreur lors de la suppression des greffons de projet : "
 
-#: common/include/Group.class.php:1783
+#: common/include/Group.class.php:1792
 msgid "Error Deleting SCM Statistics: "
 msgstr "Erreur lors de la suppression des statistiques de suivi de versions : "
 
-#: common/include/Group.class.php:1799
+#: common/include/Group.class.php:1808
 msgid "Could not properly delete the survey"
 msgstr "Erreur lors de la suppression du sondage."
 
-#: common/include/Group.class.php:1815
+#: common/include/Group.class.php:1824
 msgid "Could not properly delete the survey questions"
 msgstr "Erreur lors de la suppression des questions de sondage."
 
-#: common/include/Group.class.php:1833
+#: common/include/Group.class.php:1842
 #: plugins/mailman/include/mailmanPlugin.class.php:200
 msgid "Could not properly delete the mailing list"
 msgstr "Erreur lors de la suppression de la liste de diffusion."
 
-#: common/include/Group.class.php:1845 common/include/Group.class.php:1853
+#: common/include/Group.class.php:1854 common/include/Group.class.php:1862
 msgid "Error Deleting Trove: "
 msgstr "Erreur lors de la suppression du projet de l'arbre des catégories : "
 
-#: common/include/Group.class.php:1864
+#: common/include/Group.class.php:1873
 msgid "Error Deleting Counters: "
 msgstr "Erreur lors de la suppression des statistiques de projet : "
 
-#: common/include/Group.class.php:1874 common/include/Group.class.php:1883
+#: common/include/Group.class.php:1883 common/include/Group.class.php:1892
 msgid "Error Deleting Project:"
 msgstr "Erreur lors de la suppression d'un projet :"
 
-#: common/include/Group.class.php:1955
+#: common/include/Group.class.php:1964
 msgid "User is not active. Only active users can be added."
 msgstr ""
 "Cet utilisateur n'est pas actif.  Seul les utilisateurs actifs peuvent être "
 "ajoutés à un groupe."
 
-#: common/include/Group.class.php:1967
+#: common/include/Group.class.php:1976
 msgid "Error Getting Role Object"
 msgstr "Erreur lors de la création d'un objet Role"
 
-#: common/include/Group.class.php:1996
+#: common/include/Group.class.php:2005
 msgid "Error: User does not exist"
 msgstr "Erreur : cet utilisateur n'existe pas"
 
-#: common/include/Group.class.php:2044 common/include/Group.class.php:2163
+#: common/include/Group.class.php:2053 common/include/Group.class.php:2172
 #, php-format
 msgid "ERROR: User not removed: %s"
 msgstr "Erreur : utilisateur non supprimé : %s"
 
-#: common/include/Group.class.php:2066
+#: common/include/Group.class.php:2075
 msgid "Error: artifact:"
 msgstr "Erreur de base de données : artifact :"
 
-#: common/include/Group.class.php:2087 common/include/Group.class.php:2100
+#: common/include/Group.class.php:2096 common/include/Group.class.php:2109
 #, php-format
 msgid "Error: project_assigned_to %d: %s"
 msgstr "Erreur de base de données : project_assigned_to : %d / %s"
 
-#: common/include/Group.class.php:2143 www/admin/globalroledelete.php:37
+#: common/include/Group.class.php:2152 www/admin/globalroledelete.php:37
 #: www/admin/globalroleedit.php:43 www/project/admin/roledelete.php:46
 #: www/project/admin/roleedit.php:53
 msgid "Could Not Get Role"
 msgstr "Erreur lors de la création de l'objet Role"
 
-#: common/include/Group.class.php:2146
+#: common/include/Group.class.php:2155
 #, php-format
 msgid "Role: %s"
 msgstr "Rôle : %s"
 
-#: common/include/Group.class.php:2150
+#: common/include/Group.class.php:2159
 msgid "Wrong destination role"
 msgstr "Rôle de destination incorrect."
 
-#: common/include/Group.class.php:2258
+#: common/include/Group.class.php:2268
 msgid "Group already active"
 msgstr "Le groupe est déjà activé."
 
-#: common/include/Group.class.php:2498
+#: common/include/Group.class.php:2508
 msgid "Approved"
 msgstr "Approuvé"
 
-#: common/include/Group.class.php:2523 common/include/Group.class.php:2594
+#: common/include/Group.class.php:2533 common/include/Group.class.php:2604
 msgid "Group does not have any administrators."
 msgstr "Le groupe n'a pas d'administrateurs."
 
-#: common/include/Group.class.php:2531
+#: common/include/Group.class.php:2541
 #, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -3183,12 +3176,12 @@ msgstr ""
 "\n"
 "-- L'équipe de %4$s"
 
-#: common/include/Group.class.php:2567
+#: common/include/Group.class.php:2577
 #, php-format
 msgid "%1$s Project Approved"
 msgstr "%1$s - Projet approuvé"
 
-#: common/include/Group.class.php:2601
+#: common/include/Group.class.php:2611
 #, php-format
 msgid ""
 "Your project registration for %3$s has been denied.\n"
@@ -3207,20 +3200,20 @@ msgstr ""
 "Raison de notre refus :\n"
 "\n"
 
-#: common/include/Group.class.php:2620
+#: common/include/Group.class.php:2630
 #, php-format
 msgid "%1$s Project Denied"
 msgstr "%1$s - Projet refusé"
 
-#: common/include/Group.class.php:2644
+#: common/include/Group.class.php:2654
 msgid "Could not find user who has submitted the project."
 msgstr "L'utilisateur qui a soumis le projet est introuvable."
 
-#: common/include/Group.class.php:2651
+#: common/include/Group.class.php:2661
 msgid "There is no administrator to send the mail to."
 msgstr "Il n'y a pas d'administrateur à qui envoyer le courrier."
 
-#: common/include/Group.class.php:2659
+#: common/include/Group.class.php:2669
 #, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3233,12 +3226,12 @@ msgstr ""
 "Nom long du projet :  %2$s\n"
 "Description fournie : %3$s\n"
 
-#: common/include/Group.class.php:2669
+#: common/include/Group.class.php:2679
 #, php-format
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "Proposé par %1$s (%2$s)\n"
 
-#: common/include/Group.class.php:2675
+#: common/include/Group.class.php:2685
 #, php-format
 msgid ""
 "\n"
@@ -3249,12 +3242,12 @@ msgstr ""
 "Veuillez visiter l'URL suivante pour approuver ou rejeter ce projet :\n"
 "%1$s"
 
-#: common/include/Group.class.php:2679 common/include/Group.class.php:2694
+#: common/include/Group.class.php:2689 common/include/Group.class.php:2704
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "%1$s - Nouveau projet soumis"
 
-#: common/include/Group.class.php:2687
+#: common/include/Group.class.php:2697
 #, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3273,41 +3266,41 @@ msgstr ""
 "L'équipe d'administration de %1$s va maintenant examiner votre\n"
 "candidature. Vous serez tenu informé de sa décision."
 
-#: common/include/Group.class.php:2712
+#: common/include/Group.class.php:2719
 msgid "Group name is too short"
 msgstr "Le nom du groupe est trop court"
 
-#: common/include/Group.class.php:2715
+#: common/include/Group.class.php:2722
 msgid "Group name is too long"
 msgstr "Le nom du group est trop long"
 
-#: common/include/Group.class.php:2718
+#: common/include/Group.class.php:2725
 msgid "Group name already taken"
 msgstr "Le nom du groupe est déjà pris"
 
-#: common/include/Group.class.php:2800
+#: common/include/Group.class.php:2807
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr "Erreur lors de la mise à jour du statut Unix du groupe : %s"
 
-#: common/include/Group.class.php:2863
+#: common/include/Group.class.php:2870
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 "Erreur lors de la mise à jour du statut du système de création de\n"
 "documents en ligne : %s"
 
-#: common/include/Group.class.php:2881
+#: common/include/Group.class.php:2888
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "Erreur lors de la mise à jour du statut Unix du groupe : %s"
 
-#: common/include/Group.class.php:2899
+#: common/include/Group.class.php:2906
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "Erreur lors de la mise à jour du statut Unix du groupe : %s"
 
-#: common/include/Group.class.php:2917
+#: common/include/Group.class.php:2924
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "Erreur lors de la réindexation du moteur de recherche : %s"
@@ -4731,11 +4724,6 @@ msgstr "Question ajoutée"
 #: common/survey/SurveyQuestion.class.php:198
 msgid "Error finding question"
 msgstr "Erreur lors de la recherche de la question"
-
-#: common/survey/SurveyQuestionFactory.class.php:98
-#: www/survey/admin/show_results.php:122
-msgid "No Survey Question is found"
-msgstr "Aucune question trouvée"
 
 #: common/survey/SurveyResponseFactory.class.php:77
 msgid "No valid Survey Object"
@@ -22798,6 +22786,10 @@ msgstr "Erreur lors de l'accès au sondage"
 msgid "Votes"
 msgstr "Votes"
 
+#: www/survey/admin/show_results.php:122
+msgid "No Survey Question is found"
+msgstr "Aucune question trouvée"
+
 #: www/survey/admin/survey.php:72
 msgid "Survey Added"
 msgstr "Sondage ajouté"
@@ -23370,6 +23362,13 @@ msgstr "Erreur de mise à jour"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
+
+#, fuzzy
+#~ msgid "Download as a zip"
+#~ msgstr "Télécharger un fichier ZIP"
+
+#~ msgid "Missing Parameters"
+#~ msgstr "Il manque des paramètres"
 
 #~ msgid "monitoring stopped."
 #~ msgstr "Surveillance arrêtée."

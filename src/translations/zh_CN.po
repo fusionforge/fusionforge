@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 13:38+0200\n"
+"POT-Creation-Date: 2013-08-30 10:45+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -420,8 +420,8 @@ msgstr "项目"
 #: common/forum/Forum.class.php:607 common/forum/Forum.class.php:633
 #: common/forum/Forum.class.php:641 common/forum/Forum.class.php:649
 #: common/forum/Forum.class.php:665 common/forum/ForumHTML.class.php:73
-#: common/forum/ForumHTML.class.php:211 common/include/exit.php:80
-#: common/include/User.class.php:336
+#: common/forum/ForumHTML.class.php:211 common/include/Error.class.php:207
+#: common/include/exit.php:80 common/include/User.class.php:336
 #: common/mail/MailingListFactory.class.php:104
 #: common/tracker/actions/browse.php:406 common/tracker/actions/browse.php:409
 #: common/tracker/actions/query.php:329 common/tracker/actions/query.php:344
@@ -544,7 +544,7 @@ msgid "Document Folder"
 msgstr "文件标题"
 
 #: common/docman/DocumentGroup.class.php:76
-#: common/frs/FRSPackage.class.php:116 common/include/Error.class.php:189
+#: common/frs/FRSPackage.class.php:116 common/include/Error.class.php:185
 #: common/mail/MailingList.class.php:83 common/survey/Survey.class.php:83
 #: common/survey/SurveyQuestion.class.php:74
 #: plugins/mailman/include/MailmanList.class.php:103
@@ -1438,6 +1438,8 @@ msgid "Stop monitoring"
 msgstr "停止监视"
 
 #: common/docman/views/listfile.php:371
+#: common/docman/views/listtrashfile.php:204
+#: common/docman/views/pendingfiles.php:138
 #, fuzzy
 msgid "Download as a ZIP"
 msgstr "下载作为CSV"
@@ -1475,12 +1477,6 @@ msgstr "永久的删除这份文件"
 #, fuzzy
 msgid "Delete permanently."
 msgstr "删除样板"
-
-#: common/docman/views/listtrashfile.php:204
-#: common/docman/views/pendingfiles.php:138
-#, fuzzy
-msgid "Download as a zip"
-msgstr "下载作为CSV"
 
 #: common/docman/views/menu.php:44
 #, fuzzy
@@ -2256,7 +2252,7 @@ msgid "Update failed"
 msgstr "更新错误"
 
 #: common/forum/Forum.class.php:622 common/frs/FRSPackage.class.php:467
-#: common/frs/FRSRelease.class.php:354 common/include/Group.class.php:1590
+#: common/frs/FRSRelease.class.php:354 common/include/Group.class.php:1599
 #: common/mail/MailingList.class.php:393 common/pm/ProjectGroup.class.php:362
 #: common/pm/ProjectTask.class.php:515 common/tracker/Artifact.class.php:505
 #: common/tracker/ArtifactExtraField.class.php:430
@@ -2889,30 +2885,32 @@ msgstr ""
 msgid "Database initialisation error:"
 msgstr "数据库管理"
 
-#: common/include/Error.class.php:130 common/include/Group.class.php:429
+#: common/include/Error.class.php:126 common/include/Group.class.php:429
 #: common/include/Group.class.php:496
 msgid "Permission denied."
 msgstr "权限不足."
 
-#: common/include/Error.class.php:147 common/include/User.class.php:336
+#: common/include/Error.class.php:143 common/include/User.class.php:336
 #: common/include/User.class.php:917 common/include/User.class.php:970
 #: common/tracker/actions/tracker.php:84
 #: plugins/forumml/www/forumml_utils.php:686 www/account/change_email.php:38
 msgid "Invalid Email Address"
 msgstr "无效的Email"
 
-#: common/include/Error.class.php:151
+#: common/include/Error.class.php:147
 msgid "(none given)"
 msgstr ""
 
-#: common/include/Error.class.php:172
+#: common/include/Error.class.php:168
 #, fuzzy, php-format
 msgid "Error On Update: %s"
 msgstr "更新时错误："
 
-#: common/include/Error.class.php:213
-msgid "Missing Parameters"
-msgstr "缺少参数"
+#: common/include/Error.class.php:209 common/include/exit.php:80
+#: common/include/exit.php:85
+#, fuzzy, php-format
+msgid "Missing Required Parameters"
+msgstr "错误 - 缺少参数"
 
 #: common/include/exit.php:33
 msgid "Exiting with error"
@@ -2931,11 +2929,6 @@ msgid ""
 "Permission denied. No project was chosen, project does not exist or you "
 "cannot access it."
 msgstr "错误 - 没有选择分组编号"
-
-#: common/include/exit.php:80 common/include/exit.php:85
-#, fuzzy, php-format
-msgid "Missing Required Parameters"
-msgstr "错误 - 缺少参数"
 
 #: common/include/exit.php:104
 msgid "The Site Administrator has turned off this feature."
@@ -3061,185 +3054,185 @@ msgstr ""
 msgid "Error: Cannot change group status: %s"
 msgstr "错误: 数据库: 不能更改组状态: %s"
 
-#: common/include/Group.class.php:946
+#: common/include/Group.class.php:948
 msgid "Could not insert SCM_BOX to database"
 msgstr "不能插入版本控制主机(SCM_BOX)到数据库"
 
-#: common/include/Group.class.php:950
+#: common/include/Group.class.php:952
 msgid "SCM Box cannot be empty"
 msgstr "必须填写版本控制主机地址(SCM BOX)"
 
-#: common/include/Group.class.php:1558
+#: common/include/Group.class.php:1567
 msgid ""
 "Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&'#"
 "+. and space"
 msgstr "标记名有问题，你只能使用一下字符:[A-Z][a-z][0-9]-_&'#+.和空格"
 
-#: common/include/Group.class.php:1567
+#: common/include/Group.class.php:1576
 #, fuzzy
 msgid "Setting tags:"
 msgstr "设置标签:"
 
-#: common/include/Group.class.php:1597
+#: common/include/Group.class.php:1606
 msgid "Cannot Delete System Group"
 msgstr "不能删除系统组"
 
-#: common/include/Group.class.php:1619
+#: common/include/Group.class.php:1628
 #, fuzzy
 msgid "Could not properly remove member:"
 msgstr "无法删除邮件列表"
 
-#: common/include/Group.class.php:1643
+#: common/include/Group.class.php:1652
 #, fuzzy
 msgid "Could not properly delete the tracker:"
 msgstr "无法删除邮件列表"
 
-#: common/include/Group.class.php:1660
+#: common/include/Group.class.php:1669
 #, fuzzy
 msgid "Could not properly delete the forum:"
 msgstr "无法删除邮件列表"
 
-#: common/include/Group.class.php:1676
+#: common/include/Group.class.php:1685
 #, fuzzy
 msgid "Could not properly delete the ProjectGroup:"
 msgstr "无法删除邮件列表"
 
-#: common/include/Group.class.php:1687
+#: common/include/Group.class.php:1696
 #, fuzzy
 msgid "Error FRS Packages: "
 msgstr "添加讨论区错误"
 
-#: common/include/Group.class.php:1695
+#: common/include/Group.class.php:1704
 #, fuzzy
 msgid "Could not properly delete the FRSPackage:"
 msgstr "无法删除邮件列表"
 
-#: common/include/Group.class.php:1706 common/include/Group.class.php:1721
+#: common/include/Group.class.php:1715 common/include/Group.class.php:1730
 #, fuzzy
 msgid "Error Deleting News: "
 msgstr "添加讨论区错误"
 
-#: common/include/Group.class.php:1714
+#: common/include/Group.class.php:1723
 #, fuzzy, php-format
 msgid "Could Not Delete News Forum: %d"
 msgstr "不能删除新论坛:%d"
 
-#: common/include/Group.class.php:1732 common/include/Group.class.php:1740
+#: common/include/Group.class.php:1741 common/include/Group.class.php:1749
 #, fuzzy
 msgid "Error Deleting Documents: "
 msgstr "错误插入一个组成元件"
 
-#: common/include/Group.class.php:1750
+#: common/include/Group.class.php:1759
 #, fuzzy
 msgid "Error Deleting Tags: "
 msgstr "错误插入一个组成元件"
 
-#: common/include/Group.class.php:1761
+#: common/include/Group.class.php:1770
 #, fuzzy
 msgid "Error Deleting Project History: "
 msgstr " 更新项目信息错误:%s"
 
-#: common/include/Group.class.php:1772
+#: common/include/Group.class.php:1781
 #, fuzzy
 msgid "Error Deleting Project Plugins: "
 msgstr "获取成员对象错误:%s"
 
-#: common/include/Group.class.php:1783
+#: common/include/Group.class.php:1792
 #, fuzzy
 msgid "Error Deleting SCM Statistics: "
 msgstr "取得 %1$s 时错误"
 
-#: common/include/Group.class.php:1799
+#: common/include/Group.class.php:1808
 #, fuzzy
 msgid "Could not properly delete the survey"
 msgstr "无法删除邮件列表"
 
-#: common/include/Group.class.php:1815
+#: common/include/Group.class.php:1824
 #, fuzzy
 msgid "Could not properly delete the survey questions"
 msgstr "无法删除邮件列表"
 
-#: common/include/Group.class.php:1833
+#: common/include/Group.class.php:1842
 #: plugins/mailman/include/mailmanPlugin.class.php:200
 #, fuzzy
 msgid "Could not properly delete the mailing list"
 msgstr "无法删除邮件列表"
 
-#: common/include/Group.class.php:1845 common/include/Group.class.php:1853
+#: common/include/Group.class.php:1854 common/include/Group.class.php:1862
 #, fuzzy
 msgid "Error Deleting Trove: "
 msgstr "创建群组对象时发生错误"
 
-#: common/include/Group.class.php:1864
+#: common/include/Group.class.php:1873
 #, fuzzy
 msgid "Error Deleting Counters: "
 msgstr "创建群组对象时发生错误"
 
-#: common/include/Group.class.php:1874 common/include/Group.class.php:1883
+#: common/include/Group.class.php:1883 common/include/Group.class.php:1892
 #, fuzzy
 msgid "Error Deleting Project:"
 msgstr "获取成员对象错误:%s"
 
-#: common/include/Group.class.php:1955
+#: common/include/Group.class.php:1964
 msgid "User is not active. Only active users can be added."
 msgstr "用户没有激活。只能添加已经激活了的用户。"
 
-#: common/include/Group.class.php:1967
+#: common/include/Group.class.php:1976
 #, fuzzy
 msgid "Error Getting Role Object"
 msgstr "获取角色信息时发生错误"
 
-#: common/include/Group.class.php:1996
+#: common/include/Group.class.php:2005
 #, fuzzy
 msgid "Error: User does not exist"
 msgstr "错误:用户不存在"
 
-#: common/include/Group.class.php:2044 common/include/Group.class.php:2163
+#: common/include/Group.class.php:2053 common/include/Group.class.php:2172
 #, php-format
 msgid "ERROR: User not removed: %s"
 msgstr "错误：用户没有被删除：%s"
 
-#: common/include/Group.class.php:2066
+#: common/include/Group.class.php:2075
 #, fuzzy
 msgid "Error: artifact:"
 msgstr "获取成员对象错误:%s"
 
-#: common/include/Group.class.php:2087 common/include/Group.class.php:2100
+#: common/include/Group.class.php:2096 common/include/Group.class.php:2109
 #, php-format
 msgid "Error: project_assigned_to %d: %s"
 msgstr "错误：数据库：项目被指定给　%d: %s"
 
-#: common/include/Group.class.php:2143 www/admin/globalroledelete.php:37
+#: common/include/Group.class.php:2152 www/admin/globalroledelete.php:37
 #: www/admin/globalroleedit.php:43 www/project/admin/roledelete.php:46
 #: www/project/admin/roleedit.php:53
 #, fuzzy
 msgid "Could Not Get Role"
 msgstr "不能获取角色信息"
 
-#: common/include/Group.class.php:2146
+#: common/include/Group.class.php:2155
 #, fuzzy, php-format
 msgid "Role: %s"
 msgstr "角色:%s"
 
-#: common/include/Group.class.php:2150
+#: common/include/Group.class.php:2159
 msgid "Wrong destination role"
 msgstr ""
 
-#: common/include/Group.class.php:2258
+#: common/include/Group.class.php:2268
 #, fuzzy
 msgid "Group already active"
 msgstr "组已被激活"
 
-#: common/include/Group.class.php:2498
+#: common/include/Group.class.php:2508
 #, fuzzy
 msgid "Approved"
 msgstr "批准"
 
-#: common/include/Group.class.php:2523 common/include/Group.class.php:2594
+#: common/include/Group.class.php:2533 common/include/Group.class.php:2604
 msgid "Group does not have any administrators."
 msgstr "组没有任何管理员"
 
-#: common/include/Group.class.php:2531
+#: common/include/Group.class.php:2541
 #, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -3284,12 +3277,12 @@ msgstr ""
 "再选择左边菜单的'项目管理'.享用这个系统的同时请告诉其他人%4$s。如果有需要请与"
 "我们联系，我们乐于提供帮助。-- %4$s的成员"
 
-#: common/include/Group.class.php:2567
+#: common/include/Group.class.php:2577
 #, php-format
 msgid "%1$s Project Approved"
 msgstr "%1$s 项目通过审核了"
 
-#: common/include/Group.class.php:2601
+#: common/include/Group.class.php:2611
 #, php-format
 msgid ""
 "Your project registration for %3$s has been denied.\n"
@@ -3308,21 +3301,21 @@ msgstr ""
 "原因：\n"
 "\n"
 
-#: common/include/Group.class.php:2620
+#: common/include/Group.class.php:2630
 #, php-format
 msgid "%1$s Project Denied"
 msgstr "%1$s 项目被取消了"
 
-#: common/include/Group.class.php:2644
+#: common/include/Group.class.php:2654
 msgid "Could not find user who has submitted the project."
 msgstr "无法找到提交项目的用户。"
 
-#: common/include/Group.class.php:2651
+#: common/include/Group.class.php:2661
 #, fuzzy
 msgid "There is no administrator to send the mail to."
 msgstr "没有发送邮件的管理员"
 
-#: common/include/Group.class.php:2659
+#: common/include/Group.class.php:2669
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3339,12 +3332,12 @@ msgstr ""
 "请浏览下面网址审核这个项目：\n"
 "%4$s"
 
-#: common/include/Group.class.php:2669
+#: common/include/Group.class.php:2679
 #, fuzzy, php-format
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "发表人"
 
-#: common/include/Group.class.php:2675
+#: common/include/Group.class.php:2685
 #, php-format
 msgid ""
 "\n"
@@ -3352,12 +3345,12 @@ msgid ""
 "%1$s"
 msgstr ""
 
-#: common/include/Group.class.php:2679 common/include/Group.class.php:2694
+#: common/include/Group.class.php:2689 common/include/Group.class.php:2704
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "新项目 %1$s 已提交。"
 
-#: common/include/Group.class.php:2687
+#: common/include/Group.class.php:2697
 #, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3375,39 +3368,39 @@ msgstr ""
 "\n"
 " %1$s 的管理团队会尽快审核您注册的项目，通过审核与否您都会收到通知。"
 
-#: common/include/Group.class.php:2712
+#: common/include/Group.class.php:2719
 msgid "Group name is too short"
 msgstr "群组名称太短"
 
-#: common/include/Group.class.php:2715
+#: common/include/Group.class.php:2722
 msgid "Group name is too long"
 msgstr "群组名称太长"
 
-#: common/include/Group.class.php:2718
+#: common/include/Group.class.php:2725
 msgid "Group name already taken"
 msgstr "群组名称已经有人使用"
 
-#: common/include/Group.class.php:2800
+#: common/include/Group.class.php:2807
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr "错误: 数据库: 不能更改组状态: %s"
 
-#: common/include/Group.class.php:2863
+#: common/include/Group.class.php:2870
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/Group.class.php:2881
+#: common/include/Group.class.php:2888
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/Group.class.php:2899
+#: common/include/Group.class.php:2906
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/Group.class.php:2917
+#: common/include/Group.class.php:2924
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
@@ -4871,11 +4864,6 @@ msgstr "问题添加了"
 #: common/survey/SurveyQuestion.class.php:198
 msgid "Error finding question"
 msgstr "找寻问题错误"
-
-#: common/survey/SurveyQuestionFactory.class.php:98
-#: www/survey/admin/show_results.php:122
-msgid "No Survey Question is found"
-msgstr "没有发现问卷问题"
 
 #: common/survey/SurveyResponseFactory.class.php:77
 msgid "No valid Survey Object"
@@ -22984,6 +22972,10 @@ msgstr "不是对象: 调查: %d"
 msgid "Votes"
 msgstr "评分"
 
+#: www/survey/admin/show_results.php:122
+msgid "No Survey Question is found"
+msgstr "没有发现问卷问题"
+
 #: www/survey/admin/survey.php:72
 #, fuzzy
 msgid "Survey Added"
@@ -23567,6 +23559,13 @@ msgstr "大量更新"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "帐号"
+
+#, fuzzy
+#~ msgid "Download as a zip"
+#~ msgstr "下载作为CSV"
+
+#~ msgid "Missing Parameters"
+#~ msgstr "缺少参数"
 
 #, fuzzy
 #~ msgid "monitoring stopped."
