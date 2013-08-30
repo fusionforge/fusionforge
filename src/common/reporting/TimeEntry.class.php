@@ -76,8 +76,10 @@ class TimeEntry extends Error {
      * 'successfully added'.
      *
      */
-    function create($projectTaskId, $week, $daysAdjust, $timeCode, $hours)
+    function create($projectTaskId, $week, $days_adjust, $timeCode, $hours)
     {
+		global $feedback;
+
         $report_date=($week + ($days_adjust*REPORT_DAY_SPAN))+(12*60*60);
         $res = db_query_params ('INSERT INTO rep_time_tracking (user_id,week,report_date,project_task_id,time_code,hours) VALUES ($1,$2,$3,$4,$5,$6)',
 				array (user_getid(),
