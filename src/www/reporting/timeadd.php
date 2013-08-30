@@ -192,7 +192,7 @@ if ($week) {
 		?>
 <h2><?php echo _('Add Entry'); ?></h2>
 <p><?php echo _('Choose a Project/Subproject in the Tasks. You will then have to choose a Task and category to record your time in.'); ?></p>
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get" />
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <input type="hidden" name="week" value="<?php echo $week; ?>" />
 <table>
 	<tr>
@@ -207,7 +207,7 @@ if ($week) {
 <h2><?php echo _('Change Week') ?></h2>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>"
-	method="get" /><?php echo report_weeks_box($report,'week'); ?><input
+	method="get"><?php echo report_weeks_box($report,'week'); ?><input
 	type="submit" name="submit" value="<?php echo _('Change Week'); ?>" />
 </form>
 		<?php
@@ -224,7 +224,7 @@ if ($week) {
 
 <p><?php echo _("After you choose a week, you will be prompted to choose a Project/Subproject in the Tasks."); ?></p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>"
-	method="get" />
+	method="get">
 <p><strong><?php echo _('Week Starting'); ?>:</strong></p>
 	<?php echo report_weeks_box($report,'week'); ?>
 <p><input type="submit" name="submit" value="<?php echo _('Next'); ?>" /></p>
