@@ -178,6 +178,8 @@ function report_area_box($name='area', $selected='1', $Group=false) {
 }
 
 function report_tracker_box($name='datatype', $selected='1') {
+	$arr = array();
+	$arr2 = array();
 	if (forge_get_config('use_tracker')) {
 		$arr[]=_('Bugs');
 		$arr[]=_('Support');
