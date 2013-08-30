@@ -41,14 +41,14 @@ session_require_perm('project_admin', $group_id);
 
 $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
-    exit_no_group();
+	exit_no_group();
 } elseif ($group->isError()) {
 	exit_error($group->getErrorMessage(),'admin');
 }
 
 $report=new Report();
 if ($report->isError()) {
-    exit_error($report->getErrorMessage(),'admin');
+	exit_error($report->getErrorMessage(),'admin');
 }
 
 $area = getStringFromRequest('area');
@@ -116,7 +116,7 @@ project_admin_header(array('title'=>_('Project Statistics').'','group'=>$group_i
 <p>
 <?php
 if ($start == $end) {
-	echo '<p class="warning">'._('Cannot proceed the request. Start date is equal to end date.').'</p>';
+	echo '<p class="warning">'._('Start and end dates must be different').'</p>';
 } else {
 	if (!report_actgraph('project', $SPAN, $start, $end, $group_id, $area)) {
 		echo '<p class="error">'._('Error during graphic computation.');
@@ -126,4 +126,4 @@ if ($start == $end) {
 </p>
 <?php
 
-site_project_footer( array() );
+site_project_footer(array());

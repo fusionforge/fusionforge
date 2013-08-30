@@ -50,14 +50,14 @@ if ($report->isError()) {
 
 $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
-        exit_no_group();
+	exit_no_group();
 }
 if ($group->isError()) {
-        if($group->isPermissionDeniedError()) {
-                exit_permission_denied($group->getErrorMessage());
-        } else {
-                exit_error($group->getErrorMessage(), 'tracker');
-        }
+	if ($group->isPermissionDeniedError()) {
+		exit_permission_denied($group->getErrorMessage());
+	} else {
+		exit_error($group->getErrorMessage(), 'tracker');
+	}
 }
 
 /*
@@ -92,7 +92,7 @@ foreach ($atf->getArtifactTypes() as $at) {
 $restracker = db_query_params('SELECT group_artifact_id, name
 			FROM artifact_group_list
 			WHERE group_artifact_id = ANY ($1)',
-			       array(db_int_array_to_any_clause($tids)));
+				array(db_int_array_to_any_clause($tids)));
 echo db_error();
 
 //
@@ -139,7 +139,7 @@ $h->header(array('title' => _('Tracker Activity Reporting')));
 </form>
 <?php
 if ($start == $end) {
-	echo '<p class="warning">'._('Cannot proceed the request. Start date is equal to end date.').'</p>';
+	echo '<p class="warning">'._('Start and end dates must be different').'</p>';
 } else {
 	if ($atid) {
 		if (!$area || $area == 'activity') {

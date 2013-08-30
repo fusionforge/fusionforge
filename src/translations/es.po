@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-30 11:32+0200\n"
+"POT-Creation-Date: 2013-08-30 11:51+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -20903,9 +20903,15 @@ msgstr "Estadísticas de proyecto"
 msgid "Areas"
 msgstr "Áreas"
 
-#: www/project/stats/index.php:119 www/tracker/reporting/index.php:142
-msgid "Cannot proceed the request. Start date is equal to end date."
-msgstr ""
+#: www/project/stats/index.php:119 www/reporting/groupadded.php:53
+#: www/reporting/groupcum.php:53 www/reporting/projectact.php:55
+#: www/reporting/projecttime.php:54 www/reporting/siteact.php:54
+#: www/reporting/sitetimebar.php:52 www/reporting/sitetime.php:54
+#: www/reporting/toolspie.php:52 www/reporting/useract.php:56
+#: www/reporting/useradded.php:53 www/reporting/usercum.php:53
+#: www/reporting/usertime.php:54 www/tracker/reporting/index.php:142
+msgid "Start and end dates must be different"
+msgstr "Fechas de inicio y fin deben ser diferentes"
 
 #: www/project/stats/index.php:122 www/tracker/reporting/index.php:147
 #: www/tracker/reporting/index.php:151
@@ -21168,15 +21174,6 @@ msgid "Since no template project is available, your project will start empty."
 msgstr ""
 "Dado que no hay plantilla de proyecto disponible, su proyecto comenzará "
 "vacío."
-
-#: www/reporting/groupadded.php:53 www/reporting/groupcum.php:53
-#: www/reporting/projectact.php:55 www/reporting/projecttime.php:54
-#: www/reporting/siteact.php:54 www/reporting/sitetimebar.php:52
-#: www/reporting/sitetime.php:54 www/reporting/toolspie.php:52
-#: www/reporting/useract.php:56 www/reporting/useradded.php:53
-#: www/reporting/usercum.php:53 www/reporting/usertime.php:54
-msgid "Start and end dates must be different"
-msgstr "Fechas de inicio y fin deben ser diferentes"
 
 #: www/reporting/index.php:37 www/stats/i18n.php:34
 msgid "Users"
