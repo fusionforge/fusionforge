@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, Franck Villaume
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -25,7 +26,7 @@
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
-$HTML->header(array(title=>_('Exports Available')));
+$HTML->header(array('title' =>_('Exports Available')));
 ?>
 <p><?php echo forge_get_config ('forge_name'); ?> data is exported in a variety of standard formats. Many of
 the export URLs can also accept form/get data to customize the output. All
