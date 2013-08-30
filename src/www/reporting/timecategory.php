@@ -64,7 +64,7 @@ if ($time_code) {
 			array($time_code));
 	$category_name=db_result($res1,0,'category_name');
 }
-$res=db_query_params ('SELECT * FROM rep_time_category', array());
+$res = db_query_params('SELECT * FROM rep_time_category ORDER BY time_code', array());
 
 $arr[]=_('Time Code');
 $arr[]=_('Category Name');
@@ -87,7 +87,7 @@ echo $HTML->listTableBottom();
 <input type="hidden" name="submit" value="1" />
 <input type="hidden" name="time_code" value="<?php echo $time_code; ?>" />
 <strong><?php echo _('Category Name')._(':'); ?></strong><br />
-<input type="text" name="category_name" value="<?php echo $category_name; ?>" />
+<input required="required" type="text" name="category_name" value="<?php echo $category_name; ?>" />
 </p>
 <p>
 <?php
