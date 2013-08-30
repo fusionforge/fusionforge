@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2004 (c) Guillaume Smet / Open Wide
+ * Copyright 2013, French Ministry of National Education
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -103,7 +104,15 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 		if ($this->getResultId('type') == 2) {
 			session_redirect('/foundry/'.$project_name.'/');
 		} else {
-			header('Location: '.util_make_url_g($project_name,$project_id));
+			if (forge_check_perm ('project_read', $project_id)) {
+				header('Location: '.util_make_url_g($project_name,$project_id));
+			} else {
+				$this->writeHeader();
+				$html = '<h2>'.sprintf(_('Search results for <em>%1$s</em>'), $project_name).'</h2>';
+				$html .= '<p><strong>'.sprintf(_('No matches found for <em>%1$s</em>'), $project_name).'</strong></p>';
+				echo $html;
+				$this->writeFooter();
+			}
 		}
 		exit();
 	}
