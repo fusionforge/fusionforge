@@ -32,32 +32,36 @@
  * From http://www.php.net/manual/en/function.crypt.php#73619
  */
 function htpasswd_apr1_md5($plainpasswd) {
-    $salt = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789"), 0, 8);
-    $len = strlen($plainpasswd);
-    $text = $plainpasswd.'$apr1$'.$salt;
-    $bin = pack("H32", md5($plainpasswd.$salt.$plainpasswd));
-    $tmp = '';
-    for($i = $len; $i > 0; $i -= 16) { $text .= substr($bin, 0, min(16, $i)); }
-    for($i = $len; $i > 0; $i >>= 1) { $text .= ($i & 1) ? chr(0) : $plainpasswd{0}; }
-    $bin = pack("H32", md5($text));
-    for($i = 0; $i < 1000; $i++) {
-        $new = ($i & 1) ? $plainpasswd : $bin;
-        if ($i % 3) $new .= $salt;
-        if ($i % 7) $new .= $plainpasswd;
-        $new .= ($i & 1) ? $bin : $plainpasswd;
-        $bin = pack("H32", md5($new));
-    }
-    for ($i = 0; $i < 5; $i++) {
-        $k = $i + 6;
-        $j = $i + 12;
-        if ($j == 16) $j = 5;
-        $tmp = $bin[$i].$bin[$k].$bin[$j].$tmp;
-    }
-    $tmp = chr(0).chr(0).$bin[11].$tmp;
-    $tmp = strtr(strrev(substr(base64_encode($tmp), 2)),
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
-    "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
-    return "$"."apr1"."$".$salt."$".$tmp;
+	$salt = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz0123456789"), 0, 8);
+	$len = strlen($plainpasswd);
+	$text = $plainpasswd.'$apr1$'.$salt;
+	$bin = pack("H32", md5($plainpasswd.$salt.$plainpasswd));
+	$tmp = '';
+	for ($i = $len; $i > 0; $i -= 16) {
+		$text .= substr($bin, 0, min(16, $i));
+	}
+	for ($i = $len; $i > 0; $i >>= 1) {
+		$text .= ($i & 1)? chr(0) : $plainpasswd{0};
+	}
+	$bin = pack("H32", md5($text));
+	for ($i = 0; $i < 1000; $i++) {
+		$new = ($i & 1)? $plainpasswd : $bin;
+		if ($i % 3) $new .= $salt;
+		if ($i % 7) $new .= $plainpasswd;
+		$new .= ($i & 1)? $bin : $plainpasswd;
+		$bin = pack("H32", md5($new));
+	}
+	for ($i = 0; $i < 5; $i++) {
+		$k = $i + 6;
+		$j = $i + 12;
+		if ($j == 16) $j = 5;
+		$tmp = $bin[$i].$bin[$k].$bin[$j].$tmp;
+	}
+	$tmp = chr(0).chr(0).$bin[11].$tmp;
+	$tmp = strtr(strrev(substr(base64_encode($tmp), 2)),
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
+		"./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+	return "$"."apr1"."$".$salt."$".$tmp;
 }
 
 /**
@@ -66,29 +70,29 @@ function htpasswd_apr1_md5($plainpasswd) {
  * From http://www.php.net/manual/en/function.mb-detect-encoding.php#85294
  */
 function is_utf8($str) {
-    $c=0; $b=0;
-    $bits=0;
-    $len=strlen($str);
-    for($i=0; $i<$len; $i++){
-        $c=ord($str[$i]);
-        if($c > 128){
-            if(($c >= 254)) return false;
-            elseif($c >= 252) $bits=6;
-            elseif($c >= 248) $bits=5;
-            elseif($c >= 240) $bits=4;
-            elseif($c >= 224) $bits=3;
-            elseif($c >= 192) $bits=2;
-            else return false;
-            if(($i+$bits) > $len) return false;
-            while($bits > 1){
-                $i++;
-                $b=ord($str[$i]);
-                if($b < 128 || $b > 191) return false;
-                $bits--;
-            }
-        }
-    }
-    return true;
+	$c=0; $b=0;
+	$bits=0;
+	$len=strlen($str);
+	for($i=0; $i<$len; $i++){
+		$c=ord($str[$i]);
+		if($c > 128){
+			if(($c >= 254)) return false;
+			elseif($c >= 252) $bits=6;
+			elseif($c >= 248) $bits=5;
+			elseif($c >= 240) $bits=4;
+			elseif($c >= 224) $bits=3;
+			elseif($c >= 192) $bits=2;
+			else return false;
+			if(($i+$bits) > $len) return false;
+			while($bits > 1){
+				$i++;
+				$b=ord($str[$i]);
+				if($b < 128 || $b > 191) return false;
+				$bits--;
+			}
+		}
+	}
+	return true;
 }
 
 function util_strip_unprintable(&$data) {
@@ -96,8 +100,7 @@ function util_strip_unprintable(&$data) {
 		foreach ($data as $key => &$value) {
 			util_strip_unprintable($value);
 		}
-	}
-	else {
+	} else {
 		$data = preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/', '', $data);
 	}
 	return $data;
@@ -145,7 +148,7 @@ function util_check_fileupload($filename) {
 		return false;
 	}
 	if ((dirname($filename) != '/tmp') &&
-            (dirname($filename) != "/var/tmp")) {
+		(dirname($filename) != "/var/tmp")) {
 		return false;
 	}
 	return true;
@@ -186,7 +189,6 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 	if (!$from) {
 		$from='noreply@'.forge_get_config('web_host');
 	}
-
 
 	$charset = _('UTF-8');
 	if (!$charset) {
