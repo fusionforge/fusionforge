@@ -52,7 +52,7 @@ function createTables() {
 		user_id int not null,
 		project_task_id int not null,
 		time_code int not null CONSTRAINT reptimetrk_timecode REFERENCES rep_time_category(time_code),
-                hours float not null);";
+			hours float not null);";
 	$sql[]=$sql1;
 //	$sql[]="CREATE UNIQUE INDEX reptimetrk_weekusrtskcde ON
 //		rep_time_tracking (week,user_id,project_task_id,time_code);";
@@ -417,7 +417,7 @@ function dailyData() {
  */
 function users_added_daily($day) {
 	db_query_params ('DELETE FROM rep_users_added_daily WHERE day=$1',
-			array($day)) ;
+			array($day));
 
 
 	return db_query_params ('INSERT INTO rep_users_added_daily (day,added)
@@ -466,7 +466,7 @@ function backfill_users_added_daily($count=10000) {
  */
 function groups_added_daily($day) {
 	db_query_params ('DELETE FROM rep_groups_added_daily WHERE day=$1',
-			array($day)) ;
+			array($day));
 
 
 	return db_query_params ('INSERT INTO rep_groups_added_daily (day,added)
@@ -515,7 +515,7 @@ function backfill_groups_added_daily($count=10000) {
  */
 function users_added_weekly($week) {
 	db_query_params ('DELETE FROM rep_users_added_weekly WHERE week=$1',
-			array($week)) ;
+			array($week));
 
 
 	return db_query_params ('INSERT INTO rep_users_added_weekly (week,added)
@@ -554,7 +554,7 @@ function backfill_users_added_weekly($count=10000) {
  */
 function groups_added_weekly($week) {
 	db_query_params ('DELETE FROM rep_groups_added_weekly WHERE week=$1',
-			array($week)) ;
+			array($week));
 
 
 	return db_query_params ('INSERT INTO rep_groups_added_weekly (week,added)
@@ -594,7 +594,7 @@ function backfill_groups_added_weekly($count=10000) {
  */
 function users_added_monthly($month,$end) {
 	db_query_params ('DELETE FROM rep_users_added_monthly WHERE month=$1',
-			array($month)) ;
+			array($month));
 
 
 	return db_query_params ('INSERT INTO rep_users_added_monthly (month,added)
@@ -635,7 +635,7 @@ function backfill_users_added_monthly($count=10000) {
  */
 function groups_added_monthly($month,$end) {
 	db_query_params ('DELETE FROM rep_groups_added_monthly WHERE month=$1',
-			array($month)) ;
+			array($month));
 
 
 	return db_query_params ('INSERT INTO rep_groups_added_monthly (month,added)
@@ -679,15 +679,15 @@ function backfill_groups_added_monthly($count=10000) {
  */
 function users_cum_daily($day) {
 	db_query_params ('DELETE FROM rep_users_cum_daily WHERE day=$1',
-			array($day)) ;
+			array($day));
 
 
 	return db_query_params ('INSERT INTO rep_users_cum_daily (day,total)
 		VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date
 		BETWEEN 0 AND $3))',
 				array($day,
-				      'A',
-				      $day));
+					'A',
+					$day));
 }
 
 /**
@@ -727,15 +727,15 @@ function backfill_users_cum_daily($count=10000) {
  */
 function groups_cum_daily($day) {
 	db_query_params ('DELETE FROM rep_groups_cum_daily WHERE day=$1',
-			array($day)) ;
+			array($day));
 
 
 	return db_query_params ('INSERT INTO rep_groups_cum_daily (day,total)
 		VALUES ($1,(SELECT count(*) FROM groups WHERE status=$2 AND register_time
 		BETWEEN 0 AND $3))',
 				array($day,
-				      'A',
-				      $day));
+					'A',
+					$day));
 }
 
 /**
@@ -775,7 +775,7 @@ function backfill_groups_cum_daily($count=10000) {
  */
 function users_cum_weekly($week) {
 	db_query_params ('DELETE FROM rep_users_cum_weekly WHERE week=$1',
-			array($week)) ;
+			array($week));
 
 
 	return db_query_params ('INSERT INTO rep_users_cum_weekly (week,total)
@@ -814,7 +814,7 @@ function backfill_users_cum_weekly($count=10000) {
  */
 function groups_cum_weekly($week) {
 	db_query_params ('DELETE FROM rep_groups_cum_weekly WHERE week=$1',
-			array($week)) ;
+			array($week));
 
 
 	return db_query_params ('INSERT INTO rep_groups_cum_weekly (week,total)
@@ -854,15 +854,15 @@ function backfill_groups_cum_weekly($count=10000) {
  */
 function users_cum_monthly($month,$end) {
 	db_query_params ('DELETE FROM rep_users_cum_monthly WHERE month=$1',
-			array($month)) ;
+			array($month));
 
 
 	return db_query_params ('INSERT INTO rep_users_cum_monthly (month,total)
 		VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date
 		BETWEEN 0 AND $3))',
 				array($month,
-				      'A',
-				      $end));
+					'A',
+					$end));
 }
 
 /**
@@ -894,15 +894,15 @@ function backfill_users_cum_monthly($count=10000) {
  */
 function groups_cum_monthly($month,$end) {
 	db_query_params ('DELETE FROM rep_groups_cum_monthly WHERE month=$1',
-			array($month)) ;
+			array($month));
 
 
 	return db_query_params ('INSERT INTO rep_groups_cum_monthly (month,total)
 		VALUES ($1,(SELECT count(*) FROM groups WHERE status=$2 AND register_time
 		BETWEEN 0 AND $3))',
 				array($month,
-				      'A',
-				      $end));
+					'A',
+					$end));
 }
 
 /**
@@ -937,7 +937,7 @@ function backfill_groups_cum_monthly($count=10000) {
  */
 function user_act_daily($day) {
 	db_query_params ('DELETE FROM rep_user_act_daily WHERE day=$1',
-			array($day)) ;
+			array($day));
 
 	$end_day=$day+REPORT_DAY_SPAN-1;
 
@@ -998,10 +998,10 @@ function user_act_daily($day) {
 			AND old_value=$4 AND field_name=$5
 			GROUP BY user_id,day ) tclosed USING (user_id,day)) foo6',
 				array($day,
-				      $end_day,
-				      date ('Ym'),
-				      1,
-				      'status_id'));
+					$end_day,
+					date ('Ym'),
+					1,
+					'status_id'));
 }
 
 /**
@@ -1041,20 +1041,20 @@ function backfill_user_act_daily($count=10000) {
  */
 function user_act_weekly($week) {
 	db_query_params ('DELETE FROM rep_user_act_weekly WHERE week=$1',
-			array($week)) ;
+			array($week));
 
 	return db_query_params ('
 INSERT INTO rep_user_act_weekly (user_id, week, tracker_opened, tracker_closed,
-       forum, docs, cvs_commits, tasks_opened, tasks_closed)
+		forum, docs, cvs_commits, tasks_opened, tasks_closed)
 SELECT user_id,$1::int AS week, sum(tracker_opened) AS tracker_opened,
-       sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
-       sum(docs) AS docs, sum(cvs_commits) AS cvs_commits,
-       sum(tasks_opened) AS tasks_opened, sum(tasks_closed) AS tasks_closed
+		sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
+		sum(docs) AS docs, sum(cvs_commits) AS cvs_commits,
+		sum(tasks_opened) AS tasks_opened, sum(tasks_closed) AS tasks_closed
 FROM rep_user_act_daily
 WHERE DAY BETWEEN $1 AND $2
 GROUP BY user_id,week',
 				array ($week,
-				       $week+REPORT_WEEK_SPAN-1)) ;
+					$week+REPORT_WEEK_SPAN-1));
 }
 
 /**
@@ -1085,19 +1085,19 @@ function backfill_user_act_weekly($count=10000) {
  */
 function user_act_monthly($month,$end) {
 	db_query_params ('DELETE FROM rep_user_act_monthly WHERE month=$1',
-			array($month)) ;
+			array($month));
 
 	return db_query_params ('
 INSERT INTO rep_user_act_monthly (user_id, month, tracker_opened,
-       tracker_closed, forum, docs, cvs_commits, tasks_opened, tasks_closed)
+		tracker_closed, forum, docs, cvs_commits, tasks_opened, tasks_closed)
 SELECT user_id, $1::int AS month, sum(tracker_opened) AS tracker_opened,
-       sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
-       sum(docs) AS docs, sum(cvs_commits) AS cvs_commits,
-       sum(tasks_opened) AS tasks_opened, sum(tasks_closed) AS tasks_closed
+		sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
+		sum(docs) AS docs, sum(cvs_commits) AS cvs_commits,
+		sum(tasks_opened) AS tasks_opened, sum(tasks_closed) AS tasks_closed
 FROM rep_user_act_daily
 WHERE DAY BETWEEN $1 AND $2
 GROUP BY user_id, month',
-				array ($month, $end)) ;
+				array ($month, $end));
 }
 
 /**
@@ -1130,7 +1130,7 @@ function backfill_user_act_monthly($count=10000) {
  */
 function group_act_daily($day) {
 	db_query_params ('DELETE FROM rep_group_act_daily WHERE day=$1',
-			array($day)) ;
+			array($day));
 
 	$end_day=$day+REPORT_DAY_SPAN-1;
 
@@ -1209,11 +1209,11 @@ function group_act_daily($day) {
 			AND pt.group_project_id=pgl.group_project_id
 			GROUP BY group_id,day ) tclosed USING (group_id,day)) foo7',
 				array($day,
-				      $end_day,
-				      date('Ym', $day),
-				      date('d',$day),
-				      1,
-				      'status_id'));
+					$end_day,
+					date('Ym', $day),
+					date('d',$day),
+					1,
+					'status_id'));
 
 
 }
@@ -1255,22 +1255,22 @@ function backfill_group_act_daily($count=10000) {
  */
 function group_act_weekly($week) {
 	db_query_params ('DELETE FROM rep_group_act_weekly WHERE week=$1',
-			array($week)) ;
+			array($week));
 
 	return db_query_params ('
 INSERT INTO rep_group_act_weekly (group_id, week, tracker_opened,
-       tracker_closed, forum, docs, downloads, cvs_commits, tasks_opened,
-       tasks_closed)
+		tracker_closed, forum, docs, downloads, cvs_commits, tasks_opened,
+		tasks_closed)
 SELECT group_id, $1::int AS week, sum(tracker_opened) AS tracker_opened,
-       sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
-       sum(docs) AS docs, sum(downloads) AS downloads,
-       sum(cvs_commits) AS cvs_commits, sum(tasks_opened) AS tasks_opened,
-       sum(tasks_closed) AS tasks_closed
+		sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
+		sum(docs) AS docs, sum(downloads) AS downloads,
+		sum(cvs_commits) AS cvs_commits, sum(tasks_opened) AS tasks_opened,
+		sum(tasks_closed) AS tasks_closed
 FROM rep_group_act_daily
 WHERE DAY BETWEEN $1 AND $2
 GROUP BY group_id, week',
 				array ($week,
-				       $week+REPORT_WEEK_SPAN-1)) ;
+					$week+REPORT_WEEK_SPAN-1));
 }
 
 /**
@@ -1301,22 +1301,22 @@ function backfill_group_act_weekly($count=10000) {
  */
 function group_act_monthly($month,$end) {
 	db_query_params ('DELETE FROM rep_group_act_monthly WHERE month=$1',
-			array($month)) ;
+			array($month));
 
 	return db_query_params ('
 INSERT INTO rep_group_act_monthly (group_id, month, tracker_opened,
-       tracker_closed, forum, docs, downloads, cvs_commits, tasks_opened,
-       tasks_closed)
+		tracker_closed, forum, docs, downloads, cvs_commits, tasks_opened,
+		tasks_closed)
 SELECT group_id, $1::int AS month, sum(tracker_opened) AS tracker_opened,
-       sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
-       sum(docs) AS docs, sum(downloads) AS downloads,
-       sum(cvs_commits) AS cvs_commits,
-       sum(tasks_opened) AS tasks_opened,
-       sum(tasks_closed) AS tasks_closed
+		sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
+		sum(docs) AS docs, sum(downloads) AS downloads,
+		sum(cvs_commits) AS cvs_commits,
+		sum(tasks_opened) AS tasks_opened,
+		sum(tasks_closed) AS tasks_closed
 FROM rep_group_act_daily
 WHERE DAY BETWEEN $1 AND $2
 GROUP BY group_id,month',
-				array ($month, $end)) ;
+				array ($month, $end));
 }
 
 /**
@@ -1346,7 +1346,7 @@ function backfill_group_act_monthly($count=10000) {
  */
 function addTimeCode($category_name) {
 	return db_query_params ('INSERT INTO rep_time_category (category_name) VALUES ($1)',
-			array($category_name)) ;
+			array($category_name));
 }
 
 /**
@@ -1358,7 +1358,7 @@ function addTimeCode($category_name) {
 function updateTimeCode($time_code, $category_name) {
 	return db_query_params ('UPDATE rep_time_category SET category_name=$1 WHERE time_code=$2',
 			array($category_name,
-			$time_code)) ;
+			$time_code));
 }
 
 }
