@@ -132,6 +132,7 @@ class TrackersSearchQuery extends SearchQuery {
 	 *
 	 * @param $groupId int group id
 	 * @param $showNonPublic boolean if we should consider non public sections
+	 * @return array
 	 */
 	static function getSections($groupId, $showNonPublic=false) {
 		$sql = 'SELECT group_artifact_id, name FROM artifact_group_list WHERE group_id = $1';

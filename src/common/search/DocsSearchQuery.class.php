@@ -140,6 +140,7 @@ class DocsSearchQuery extends SearchQuery {
 	 *
 	 * @param	$groupId	int group id
 	 * @param	$showNonPublic	boolean if we should consider non public sections
+	 * @return array
 	 */
 	static function getSections($groupId, $showNonPublic = false) {
 		if (!forge_check_perm('docman',$groupId,'read')) {

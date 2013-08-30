@@ -135,6 +135,7 @@ class TasksSearchQuery extends SearchQuery {
 	 *
 	 * @param $groupId int group id
 	 * @param $showNonPublic boolean if we should consider non public sections
+	 * @return array
 	 */
 	static function getSections($groupId, $showNonPublic=false) {
 		$sql = 'SELECT group_project_id, project_name FROM project_group_list WHERE group_id=$1' ;
