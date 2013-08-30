@@ -103,7 +103,7 @@ if ($sw) {
 			$labels = $report->labels;
 			$data = $report->getData();
 
-			echo $HTML->listTableTop (array('Type','Time'));
+			echo $HTML->listTableTop(array(_('Type'), _('Time')));
 
 			for ($i=0; $i<count($labels); $i++) {
 
