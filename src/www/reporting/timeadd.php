@@ -48,21 +48,26 @@ if (getStringFromRequest('submit')) {
 	if (getStringFromRequest('delete')) {
 		if ($project_task_id && $report_date && $old_time_code) {
 			$res=db_query_params ('DELETE FROM rep_time_tracking
+				WHERE ctid IN
+				(SELECT ctid FROM rep_time_tracking
 				WHERE user_id=$1
 				AND report_date=$2
 				AND project_task_id=$3
-				AND time_code=$4',
+				AND time_code=$4
+				AND hours=$5
+				LIMIT 1)',
 					      array (user_getid(),
 						     $report_date,
 						     $project_task_id,
-						     $old_time_code));
+						     $old_time_code,
+						     $hours));
 			if (!$res || db_affected_rows($res) < 1) {
 				exit_error(db_error());
 			} else {
 				$feedback=_('Successfully Deleted');
 			}
 		} else {
-			$error_msg = _('INTERNAL ERROR: delete: ').$project_task_id.' && '.$report_date.' && '.$old_time_code;
+			$error_msg = _('Internal error: delete: ').$project_task_id.' && '.$report_date.' && '.$old_time_code;
 		}
 
 	} elseif (getStringFromRequest('add')) {
