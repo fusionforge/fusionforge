@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-30 11:51+0200\n"
+"POT-Creation-Date: 2013-08-30 17:47+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -778,7 +778,7 @@ msgstr ""
 #: www/project/admin/editimages.php:271
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:62
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:55
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:46
 #: www/snippet/package.php:151 www/snippet/submit.php:108
 msgid "Description"
 msgstr "Descrición"
@@ -805,7 +805,7 @@ msgstr "Documentos"
 #: common/docman/views/addfile.php:118 common/docman/views/addfile.php:144
 #: common/docman/views/editfile.php:51
 #: plugins/mantisbt/view/addAttachment.php:32
-#: www/frs/reporting/downloads.php:194
+#: www/frs/reporting/downloads.php:197
 msgid "File"
 msgstr "Ficheiro"
 
@@ -1252,7 +1252,7 @@ msgstr "Ver"
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:95
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:56
-#: plugins/hudson/include/hudsonViews.class.php:304
+#: plugins/hudson/include/hudsonViews.class.php:305
 #: plugins/mantisbt/view/admin/viewCategorie.php:50
 #: plugins/mantisbt/view/viewAttachment.php:50
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
@@ -1591,7 +1591,7 @@ msgstr ""
 
 #: common/docman/views/reporting.php:93
 #: common/tracker/include/ArtifactTypeHtml.class.php:323
-#: www/activity/index.php:180 www/frs/reporting/downloads.php:108
+#: www/activity/index.php:180 www/frs/reporting/downloads.php:109
 #: www/people/editprofile.php:283 www/people/skills_utils.php:50
 #: www/people/skills_utils.php:156 www/pm/add_task.php:95
 #: www/pm/browse_task.php:127 www/pm/browse_task.php:233
@@ -1696,8 +1696,8 @@ msgstr "Data de comezo"
 #: www/frs/admin/qrs.php:175 www/frs/admin/qrs.php:183
 #: www/frs/admin/qrs.php:227 www/frs/admin/qrs.php:237
 #: www/frs/admin/qrs.php:247 www/frs/admin/qrs.php:255
-#: www/frs/reporting/downloads.php:106 www/frs/reporting/downloads.php:108
-#: www/frs/reporting/downloads.php:110 www/pm/admin/index.php:211
+#: www/frs/reporting/downloads.php:107 www/frs/reporting/downloads.php:109
+#: www/frs/reporting/downloads.php:111 www/pm/admin/index.php:211
 #: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
 #: www/pm/format_csv.php:86 www/pm/format_csv.php:89 www/pm/format_csv.php:93
 #: www/pm/format_csv.php:97 www/project/stats/index.php:105
@@ -1737,7 +1737,7 @@ msgstr ""
 
 #: common/docman/views/reporting.php:95
 #: common/tracker/include/ArtifactTypeHtml.class.php:324
-#: www/activity/index.php:181 www/frs/reporting/downloads.php:110
+#: www/activity/index.php:181 www/frs/reporting/downloads.php:111
 #: www/people/editprofile.php:284 www/people/skills_utils.php:51
 #: www/people/skills_utils.php:157 www/pm/add_task.php:110
 #: www/pm/browse_task.php:128 www/pm/browse_task.php:235
@@ -1756,7 +1756,7 @@ msgid "End Date"
 msgstr "Data de fin"
 
 #: common/docman/views/reporting.php:97 www/activity/index.php:191
-#: www/frs/reporting/downloads.php:112 www/project/stats/index.php:111
+#: www/frs/reporting/downloads.php:113 www/project/stats/index.php:111
 #: www/reporting/groupadded.php:68 www/reporting/groupcum.php:68
 #: www/reporting/projectact.php:74 www/reporting/projecttime.php:83
 #: www/reporting/siteact.php:74 www/reporting/sitetimebar.php:68
@@ -1773,19 +1773,19 @@ msgid "There have been no viewed documents for this project yet."
 msgstr "Hai %1$s usuario monitorizando este paquete."
 
 #: common/docman/views/reporting.php:117 common/docman/views/reporting.php:125
-#: common/reporting/report_utils.php:86 www/frs/reporting/downloads.php:132
-#: www/frs/reporting/downloads.php:141
+#: common/reporting/report_utils.php:86 www/frs/reporting/downloads.php:135
+#: www/frs/reporting/downloads.php:144
 msgid "Y-m"
 msgstr "A-m"
 
-#: common/docman/views/reporting.php:145 www/frs/reporting/downloads.php:169
+#: common/docman/views/reporting.php:145 www/frs/reporting/downloads.php:172
 #: www/stats/site_stats_utils.php:414
 msgid "Month"
 msgstr "Mes"
 
-#: common/docman/views/reporting.php:151 common/reporting/report_utils.php:159
-#: common/reporting/report_utils.php:198 common/reporting/report_utils.php:678
-#: common/reporting/report_utils.php:679 www/frs/reporting/downloads.php:175
+#: common/docman/views/reporting.php:151 common/reporting/report_utils.php:161
+#: common/reporting/report_utils.php:202 common/reporting/report_utils.php:682
+#: common/reporting/report_utils.php:683 www/frs/reporting/downloads.php:178
 #: www/stats/site_stats_utils.php:233 www/stats/site_stats_utils.php:363
 #: www/stats/site_stats_utils.php:417 www/stats/site_stats_utils.php:476
 #: www/top/toplist.php:49
@@ -1800,7 +1800,7 @@ msgstr "Documentos"
 #: common/docman/views/reporting.php:170
 #: plugins/oauthprovider/www/access_tokens.php:58
 #: plugins/oauthprovider/www/request_tokens.php:59
-#: www/forum/admin/monitor.php:61 www/frs/reporting/downloads.php:194
+#: www/forum/admin/monitor.php:61 www/frs/reporting/downloads.php:197
 #: www/pm/mod_task.php:269 www/reporting/useract.php:84
 #: www/reporting/usertime.php:93
 msgid "User"
@@ -1822,11 +1822,11 @@ msgstr "Usuario"
 #: www/admin/cronman.php:42 www/admin/massmail.php:139
 #: www/developer/diary.php:81 www/forum/forum.php:248
 #: www/forum/message.php:161 www/frs/admin/showreleases.php:101
-#: www/frs/index.php:208 www/frs/reporting/downloads.php:194
+#: www/frs/index.php:208 www/frs/reporting/downloads.php:197
 #: www/news/admin/news_admin_utils.php:57 www/pm/calendar.php:268
 #: www/pm/include/ProjectTaskHTML.class.php:157
 #: www/pm/include/ProjectTaskHTML.class.php:203
-#: www/project/admin/project_admin_utils.php:161 www/reporting/timeadd.php:137
+#: www/project/admin/project_admin_utils.php:161 www/reporting/timeadd.php:142
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:56
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:50
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:51
@@ -1959,7 +1959,7 @@ msgstr "Non se puido obter o obxecto de foro"
 #: www/people/people_utils.php:178 www/people/people_utils.php:322
 #: www/people/skills_utils.php:46 www/people/skills_utils.php:104
 #: www/pm/admin/index.php:363 www/pm/admin/index.php:374
-#: www/project/admin/vhost.php:145 www/reporting/timeadd.php:157
+#: www/project/admin/vhost.php:145 www/reporting/timeadd.php:163
 #: www/snippet/detail.php:67 www/survey/include/SurveyHTML.class.php:312
 #: www/tracker/admin/index.php:103 www/tracker/admin/index.php:180
 msgid "Delete"
@@ -1978,7 +1978,7 @@ msgstr "Eliminar"
 #: www/account/editsshkeys.php:85 www/admin/admin_table.php:55
 #: www/admin/database.php:172 www/admin/trove/trove_cat_add.php:116
 #: www/admin/trove/trove_cat_list.php:51 www/admin/trove/trove_cat_list.php:54
-#: www/pm/mod_task.php:289 www/reporting/timeadd.php:174
+#: www/pm/mod_task.php:289 www/reporting/timeadd.php:183
 #: www/reporting/timecategory.php:98 www/trove/admin/trove_cat_add.php:101
 #: www/trove/admin/trove_cat_list.php:43
 msgid "Add"
@@ -2062,7 +2062,7 @@ msgid_plural "%1$s messages deleted"
 msgstr[0] "%1$s mensaxe borrada"
 msgstr[1] "%1$s mensaxes borradas"
 
-#: common/forum/ForumAdmin.class.php:258 www/reporting/timeadd.php:62
+#: common/forum/ForumAdmin.class.php:258 www/reporting/timeadd.php:67
 msgid "Successfully Deleted"
 msgstr "Eliminouse correctamente "
 
@@ -2097,7 +2097,7 @@ msgstr "Sen moderación "
 #: plugins/mantisbt/view/admin/editVersion.php:76
 #: plugins/mantisbt/view/admin/editVersion.php:79
 #: plugins/mantisbt/view/roadmap.php:98 plugins/mantisbt/view/roadmap.php:147
-#: www/frs/admin/editrelease.php:344 www/frs/reporting/downloads.php:194
+#: www/frs/admin/editrelease.php:344 www/frs/reporting/downloads.php:197
 #, fuzzy
 msgid "Release"
 msgstr "Liberacións"
@@ -2428,7 +2428,7 @@ msgstr "Mensaxe:"
 #: www/forum/monitor.php:65 www/my/rmproject.php:98
 #: www/people/editprofile.php:158 www/people/editprofile.php:217
 #: www/pm/mod_task.php:289 www/register/index.php:305
-#: www/reporting/timeadd.php:174 www/tracker/admin/index.php:103
+#: www/reporting/timeadd.php:183 www/tracker/admin/index.php:103
 #: www/tracker/admin/index.php:180
 msgid "Cancel"
 msgstr "Cancelar"
@@ -3511,22 +3511,24 @@ msgstr "Non se puido eliminar o foro de novas: %d"
 
 #: common/include/group_section_texts.php:29
 #: common/include/Navigation.class.php:425
-#: common/reporting/report_utils.php:147 common/reporting/report_utils.php:684
-#: common/reporting/report_utils.php:685 plugins/blocks/www/index.php:151
+#: common/reporting/report_utils.php:149 common/reporting/report_utils.php:688
+#: common/reporting/report_utils.php:689 plugins/blocks/www/index.php:151
 #: plugins/quota_management/www/quota_project.php:87
+#: www/export/rss20_activity.php:153
 msgid "Forums"
 msgstr "Foros "
 
 #: common/include/group_section_texts.php:30
-#: common/reporting/report_utils.php:705 plugins/blocks/www/index.php:152
+#: common/reporting/report_utils.php:709 plugins/blocks/www/index.php:152
+#: www/export/rss20_activity.php:120 www/export/rss20_activity.php:131
 #: www/reporting/toolspie.php:65
 msgid "Trackers"
 msgstr "Rexistros "
 
 #: common/include/group_section_texts.php:31
 #: common/include/Navigation.class.php:473 common/include/rbac_texts.php:157
-#: common/reporting/report_utils.php:155 common/reporting/report_utils.php:194
-#: common/reporting/report_utils.php:697
+#: common/reporting/report_utils.php:157 common/reporting/report_utils.php:198
+#: common/reporting/report_utils.php:701
 #: common/widget/Widget_ProjectPublicAreas.class.php:148
 #: plugins/blocks/www/index.php:154 www/my/dashboard.php:77
 #: www/stats/site_stats_utils.php:242 www/stats/site_stats_utils.php:367
@@ -3535,13 +3537,13 @@ msgid "Tasks"
 msgstr "Tarefas "
 
 #: common/include/group_section_texts.php:32
-#: common/reporting/report_utils.php:673
+#: common/reporting/report_utils.php:677
 #: plugins/quota_management/www/quota_project.php:56
 #: www/search/include/SearchManager.class.php:153
 msgid "Documents"
 msgstr "Documentos"
 
-#: common/include/group_section_texts.php:33
+#: common/include/group_section_texts.php:33 www/export/rss20_activity.php:142
 msgid "File Release System"
 msgstr "Sistema de liberación de ficheiros"
 
@@ -3549,7 +3551,8 @@ msgstr "Sistema de liberación de ficheiros"
 #: common/include/Navigation.class.php:518 plugins/blocks/www/index.php:157
 #: plugins/quota_management/www/quota_project.php:74
 #: www/activity/index.php:114 www/activity/index.php:311
-#: www/admin/index.php:187 www/news/index.php:34
+#: www/admin/index.php:187 www/export/rss20_activity.php:164
+#: www/news/index.php:34
 msgid "News"
 msgstr "Novas "
 
@@ -3682,7 +3685,7 @@ msgid "Tech & help forums."
 msgstr ""
 
 #: common/include/Navigation.class.php:440 common/include/rbac_texts.php:156
-#: common/reporting/report_utils.php:143
+#: common/reporting/report_utils.php:145
 #: common/tracker/actions/admin-ind.php:100 common/tracker/actions/ind.php:57
 #: common/widget/Widget_ProjectPublicAreas.class.php:56
 #: www/pm/include/ProjectTaskHTML.class.php:109
@@ -3709,7 +3712,7 @@ msgid "Project Management."
 msgstr "Nome do proxecto"
 
 #: common/include/Navigation.class.php:488
-#: common/reporting/report_utils.php:151 common/reporting/report_utils.php:672
+#: common/reporting/report_utils.php:153 common/reporting/report_utils.php:676
 #: plugins/blocks/www/index.php:155
 msgid "Docs"
 msgstr "Documentos "
@@ -3848,6 +3851,7 @@ msgstr "Foros: Administración"
 #: common/include/rbac_texts.php:97 common/include/rbac_texts.php:113
 #: common/include/rbac_texts.php:121 common/include/rbac_texts.php:127
 #: common/include/rbac_texts.php:130 common/include/rbac_texts.php:135
+#: plugins/hudson/include/hudsonPlugin.class.php:349
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:151
 msgid "No access"
 msgstr "Sen acceso "
@@ -4668,7 +4672,7 @@ msgstr "Diariamente"
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:106
 #: www/my/dashboard.php:125 www/news/admin/news_admin_utils.php:43
 #: www/pm/detail_task.php:87 www/pm/detail_task.php:91
-#: www/reporting/timeadd.php:116
+#: www/reporting/timeadd.php:121
 msgid "Y-m-d"
 msgstr "A-m-d"
 
@@ -4704,97 +4708,97 @@ msgstr "venres "
 msgid "Saturday"
 msgstr "sábado "
 
-#: common/reporting/report_utils.php:162 common/reporting/report_utils.php:690
-#: common/reporting/report_utils.php:691 www/stats/site_stats_utils.php:231
+#: common/reporting/report_utils.php:165 common/reporting/report_utils.php:694
+#: common/reporting/report_utils.php:695 www/stats/site_stats_utils.php:231
 #: www/top/toplist.php:38
 msgid "Page Views"
 msgstr "Visualizacións de páxina"
 
-#: common/reporting/report_utils.php:178 www/stats/site_stats_utils.php:236
+#: common/reporting/report_utils.php:182 www/stats/site_stats_utils.php:236
 #: www/stats/site_stats_utils.php:364 www/stats/site_stats_utils.php:418
 msgid "Bugs"
 msgstr "Erros "
 
-#: common/reporting/report_utils.php:179 www/stats/site_stats_utils.php:237
+#: common/reporting/report_utils.php:183 www/stats/site_stats_utils.php:237
 #: www/stats/site_stats_utils.php:365 www/stats/site_stats_utils.php:419
 msgid "Support"
 msgstr "Asistencia técnica"
 
-#: common/reporting/report_utils.php:180 www/stats/site_stats_utils.php:238
+#: common/reporting/report_utils.php:184 www/stats/site_stats_utils.php:238
 #: www/stats/site_stats_utils.php:366 www/stats/site_stats_utils.php:420
 msgid "Patches"
 msgstr "Parches "
 
-#: common/reporting/report_utils.php:181
+#: common/reporting/report_utils.php:185
 msgid "Feature Requests"
 msgstr "Solicitude de funcionalidade "
 
-#: common/reporting/report_utils.php:182
+#: common/reporting/report_utils.php:186
 msgid "Other Trackers"
 msgstr "Outros rexistros "
 
-#: common/reporting/report_utils.php:190
+#: common/reporting/report_utils.php:194
 msgid "Forum Messages"
 msgstr "Mensaxes en foros "
 
-#: common/reporting/report_utils.php:236 www/snippet/snippet_utils.php:38
+#: common/reporting/report_utils.php:240 www/snippet/snippet_utils.php:38
 #: www/snippet/snippet_utils.php:64
 msgid "Other"
 msgstr "Outro"
 
-#: common/reporting/report_utils.php:255 common/reporting/report_utils.php:378
+#: common/reporting/report_utils.php:259 common/reporting/report_utils.php:382
 #, fuzzy
 msgid "No selected area."
 msgstr "a data seleccionada"
 
-#: common/reporting/report_utils.php:268
+#: common/reporting/report_utils.php:272
 msgid "Avg Time Open (in days)"
 msgstr ""
 
-#: common/reporting/report_utils.php:270
+#: common/reporting/report_utils.php:274
 #, fuzzy
 msgid "Total Opened"
 msgstr "Data de apertura"
 
-#: common/reporting/report_utils.php:272
+#: common/reporting/report_utils.php:276
 msgid "Total Still Open"
 msgstr ""
 
-#: common/reporting/report_utils.php:318
+#: common/reporting/report_utils.php:322
 #, fuzzy
 msgid "Tracker Activity"
 msgstr "Informe de horas de usuario"
 
-#: common/reporting/report_utils.php:389
+#: common/reporting/report_utils.php:393
 #, fuzzy
 msgid "Per assignee"
 msgstr "Asignado a"
 
-#: common/reporting/report_utils.php:436 www/reporting/usercum.php:59
+#: common/reporting/report_utils.php:440 www/reporting/usercum.php:59
 msgid "Cumulative Users"
 msgstr "Total de usuarios"
 
-#: common/reporting/report_utils.php:441 www/reporting/useradded.php:59
+#: common/reporting/report_utils.php:445 www/reporting/useradded.php:59
 msgid "Users Added"
 msgstr "Usuarios engadidos"
 
-#: common/reporting/report_utils.php:446 www/reporting/groupadded.php:59
+#: common/reporting/report_utils.php:450 www/reporting/groupadded.php:59
 msgid "Projects Added"
 msgstr "Proxectos engadidos"
 
-#: common/reporting/report_utils.php:451 www/reporting/groupcum.php:59
+#: common/reporting/report_utils.php:455 www/reporting/groupcum.php:59
 msgid "Cumulative Projects"
 msgstr "Total de proxectos"
 
-#: common/reporting/report_utils.php:462 common/reporting/report_utils.php:634
-#: common/reporting/report_utils.php:984
-#: common/reporting/report_utils.php:1048
-#: common/reporting/report_utils.php:1151
+#: common/reporting/report_utils.php:466 common/reporting/report_utils.php:638
+#: common/reporting/report_utils.php:988
+#: common/reporting/report_utils.php:1052
+#: common/reporting/report_utils.php:1155
 #, fuzzy
 msgid "No data to display."
 msgstr "Non se atopou ningunha pregunta"
 
-#: common/reporting/report_utils.php:608 plugins/authopenid/www/index.php:38
+#: common/reporting/report_utils.php:612 plugins/authopenid/www/index.php:38
 #: plugins/authwebid/www/index.php:35 www/account/change_email-complete.php:52
 #: www/account/change_email.php:46 www/account/change_pw.php:32
 #: www/account/editsshkeys.php:39 www/account/index.php:36
@@ -4806,37 +4810,38 @@ msgstr "Non se atopou ningunha pregunta"
 msgid "Could Not Get User"
 msgstr "Non se puido obter o Rol"
 
-#: common/reporting/report_utils.php:698
+#: common/reporting/report_utils.php:702
 #, fuzzy
 msgid "Task open"
 msgstr "Rexistro aberto"
 
-#: common/reporting/report_utils.php:699
+#: common/reporting/report_utils.php:703
 #, fuzzy
 msgid "Task close"
 msgstr "Rexistro pechado"
 
-#: common/reporting/report_utils.php:706
+#: common/reporting/report_utils.php:710
 #, fuzzy
 msgid "Tracker items opened"
 msgstr "Elementos de rexistro abertos"
 
-#: common/reporting/report_utils.php:707
+#: common/reporting/report_utils.php:711
 #, fuzzy
 msgid "Tracker items closed"
 msgstr "Elementos de rexistro pechados"
 
-#: common/reporting/report_utils.php:1071
+#: common/reporting/report_utils.php:1075
 #, fuzzy
 msgid "Hours Recorded"
 msgstr "Avaliacións gardadas"
 
-#: common/reporting/report_utils.php:1075
+#: common/reporting/report_utils.php:1079
 #, fuzzy
 msgid " Hours"
 msgstr "Horas"
 
-#: common/reporting/TimeEntry.class.php:92 www/reporting/timeadd.php:88
+#: common/reporting/TimeEntry.class.php:92 www/reporting/timeadd.php:93
+#: www/reporting/timecategory.php:42
 msgid "Successfully Added"
 msgstr "Engadiuse correctamente "
 
@@ -5880,7 +5885,7 @@ msgid "Tracker Item"
 msgstr "Elemento do rexistro "
 
 #: common/tracker/actions/taskmgr.php:108
-#: common/tracker/actions/taskmgr.php:162 www/reporting/timeadd.php:195
+#: common/tracker/actions/taskmgr.php:162 www/reporting/timeadd.php:199
 #, fuzzy
 msgid "Tasks Project"
 msgstr "Proxecto de administración de tarefas"
@@ -7818,7 +7823,7 @@ msgid "This Project Has Not Released Any Files"
 msgstr "Este proxecto aínda non publicou ningún ficheiro"
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:82
-#: www/frs/reporting/downloads.php:106 www/frs/reporting/downloads.php:194
+#: www/frs/reporting/downloads.php:107 www/frs/reporting/downloads.php:197
 #: www/snippet/add_snippet_to_package.php:128
 msgid "Package"
 msgstr "Paquete "
@@ -9608,7 +9613,7 @@ msgid "Manage Remote Accounts"
 msgstr ""
 
 #: plugins/globaldashboard/include/globalDashboard_utils.php:43
-#: plugins/hudson/include/hudsonViews.class.php:61
+#: plugins/hudson/include/hudsonViews.class.php:62
 #: utils/fixscripts/populate_template_project.php:110
 msgid "Help"
 msgstr "Axuda"
@@ -9991,7 +9996,7 @@ msgid "Search results for %1$s"
 msgstr "Resultados da busca para %1$s"
 
 #: plugins/globalsearch/www/index.php:168
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:44
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
 #: www/stats/site_stats_utils.php:230 www/top/toplist.php:53
 msgid "Project Name"
 msgstr "Nome do proxecto"
@@ -10430,32 +10435,32 @@ msgstr "Non se puido obter a lista de correo %s"
 msgid "File not found at URL: %s"
 msgstr "Non se achou o foro "
 
-#: plugins/hudson/include/hudson.class.php:60
-#: plugins/hudson/include/hudson.class.php:86
+#: plugins/hudson/include/hudson.class.php:61
+#: plugins/hudson/include/hudson.class.php:87
 msgid "Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)"
 msgstr ""
 
-#: plugins/hudson/include/hudson.class.php:64
-#: plugins/hudson/include/hudson.class.php:76
-#: plugins/hudson/include/hudson.class.php:93
-#: plugins/hudson/include/hudson.class.php:106
-#: plugins/hudson/include/hudson.class.php:130
+#: plugins/hudson/include/hudson.class.php:65
+#: plugins/hudson/include/hudson.class.php:77
+#: plugins/hudson/include/hudson.class.php:94
+#: plugins/hudson/include/hudson.class.php:107
+#: plugins/hudson/include/hudson.class.php:131
 #, fuzzy
 msgid "Permission Denied"
 msgstr "Permiso denegado"
 
-#: plugins/hudson/include/hudson.class.php:73
-#: plugins/hudson/include/hudson.class.php:89
-#: plugins/hudson/include/hudson.class.php:102
+#: plugins/hudson/include/hudson.class.php:74
+#: plugins/hudson/include/hudson.class.php:90
+#: plugins/hudson/include/hudson.class.php:103
 msgid "Missing Hudson job ID"
 msgstr ""
 
-#: plugins/hudson/include/hudson.class.php:133
+#: plugins/hudson/include/hudson.class.php:134
 #, fuzzy
 msgid "Hudson service is not enabled"
 msgstr "Non se cubriron os datos da enquisa "
 
-#: plugins/hudson/include/hudson.class.php:136
+#: plugins/hudson/include/hudson.class.php:137
 #, fuzzy
 msgid "Missing group_id parameter."
 msgstr "Produciuse un erro - faltan parámetros obrigados"
@@ -10505,73 +10510,83 @@ msgstr "Foros monitorizados"
 msgid "Current used"
 msgstr "Ficheiro actual"
 
-#: plugins/hudson/include/hudsonPlugin.class.php:32
+#: plugins/hudson/include/hudsonPlugin.class.php:33
 #, fuzzy
 msgid "Hudson/Jenkins"
 msgstr "Publicar postos de traballo"
 
-#: plugins/hudson/include/hudsonPlugin.class.php:75
+#: plugins/hudson/include/hudsonPlugin.class.php:82
 msgid "Continuus Integration Scheduler"
 msgstr ""
 
-#: plugins/hudson/include/hudsonPlugin.class.php:214
+#: plugins/hudson/include/hudsonPlugin.class.php:233
 msgid "Hudson Build"
 msgstr ""
 
-#: plugins/hudson/include/hudsonPlugin.class.php:215
+#: plugins/hudson/include/hudsonPlugin.class.php:234
 msgid "Hudson Job"
 msgstr ""
 
-#: plugins/hudson/include/hudsonPlugin.class.php:245
+#: plugins/hudson/include/hudsonPlugin.class.php:264
 msgid "Build performed on:"
 msgstr ""
 
-#: plugins/hudson/include/hudsonPlugin.class.php:246
+#: plugins/hudson/include/hudsonPlugin.class.php:265
 #, fuzzy
 msgid "Status:"
 msgstr "Estado"
 
-#: plugins/hudson/include/hudsonPlugin.class.php:248
-#: plugins/hudson/include/hudsonPlugin.class.php:289
-#: plugins/hudson/include/hudsonViews.class.php:110
-#: plugins/hudson/include/hudsonViews.class.php:125
-#: plugins/hudson/include/hudsonViews.class.php:164
-#: plugins/hudson/include/hudsonViews.class.php:180
-#: plugins/hudson/include/hudsonViews.class.php:196
+#: plugins/hudson/include/hudsonPlugin.class.php:267
+#: plugins/hudson/include/hudsonPlugin.class.php:308
+#: plugins/hudson/include/hudsonViews.class.php:111
+#: plugins/hudson/include/hudsonViews.class.php:126
+#: plugins/hudson/include/hudsonViews.class.php:165
+#: plugins/hudson/include/hudsonViews.class.php:181
+#: plugins/hudson/include/hudsonViews.class.php:197
 #, fuzzy
 msgid "Error: Hudson object not found."
 msgstr "Erro: non se atopou o foro"
 
-#: plugins/hudson/include/hudsonPlugin.class.php:272
+#: plugins/hudson/include/hudsonPlugin.class.php:291
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:83
 #, fuzzy
 msgid "Last Build:"
 msgstr "Último identificador (id) de usuario que se enviou por correo "
 
-#: plugins/hudson/include/hudsonPlugin.class.php:273
+#: plugins/hudson/include/hudsonPlugin.class.php:292
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:84
 #, fuzzy
 msgid "Last Success:"
 msgstr "Actualizouse correctamente "
 
-#: plugins/hudson/include/hudsonPlugin.class.php:274
+#: plugins/hudson/include/hudsonPlugin.class.php:293
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:85
 #, fuzzy
 msgid "Last Failure:"
 msgstr "Apelidos: "
 
-#: plugins/hudson/include/hudsonPlugin.class.php:276
+#: plugins/hudson/include/hudsonPlugin.class.php:295
 #: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:96
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:87
 #, fuzzy
 msgid "No build found for this job."
 msgstr "Este grupo non ten calendario"
 
-#: plugins/hudson/include/hudsonPlugin.class.php:281
+#: plugins/hudson/include/hudsonPlugin.class.php:300
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:92
 #, fuzzy
 msgid "Weather Report:"
 msgstr "Xerar informe"
+
+#: plugins/hudson/include/hudsonPlugin.class.php:348
+#, fuzzy
+msgid "Hudson access"
+msgstr "Sen acceso "
+
+#: plugins/hudson/include/hudsonPlugin.class.php:350
+#, fuzzy
+msgid "Full access"
+msgstr "Sen acceso "
 
 #: plugins/hudson/include/hudsonPluginDescriptor.class.php:26
 msgid "Continuous Integration"
@@ -10596,154 +10611,157 @@ msgstr ""
 msgid "Skip (%s)"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:51
+#: plugins/hudson/include/hudsonViews.class.php:52
 #: plugins/hudson/include/HudsonWidget.class.php:28
 msgid "Hudson"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:215
+#: plugins/hudson/include/hudsonViews.class.php:216
 msgid "Back to jobs list"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:217
+#: plugins/hudson/include/hudsonViews.class.php:218
 #, fuzzy
 msgid "Edit job"
 msgstr "Editar o traballo"
 
-#: plugins/hudson/include/hudsonViews.class.php:220
-#: plugins/hudson/include/hudsonViews.class.php:396
+#: plugins/hudson/include/hudsonViews.class.php:221
+#: plugins/hudson/include/hudsonViews.class.php:401
 #, fuzzy
 msgid "Job URL:"
 msgstr "Nome de usuario: "
 
-#: plugins/hudson/include/hudsonViews.class.php:224
-#: plugins/hudson/include/hudsonViews.class.php:401
+#: plugins/hudson/include/hudsonViews.class.php:225
+#: plugins/hudson/include/hudsonViews.class.php:406
 msgid "eg: http://myCIserver/hudson/job/myJob"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:227
+#: plugins/hudson/include/hudsonViews.class.php:228
 #, fuzzy
 msgid "Job name:"
 msgstr "Nome do rol"
 
-#: plugins/hudson/include/hudsonViews.class.php:231
+#: plugins/hudson/include/hudsonViews.class.php:232
 #, php-format
 msgid "Name (with no space) used to make a reference to this job. Eg: job #%s"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:235
+#: plugins/hudson/include/hudsonViews.class.php:236
 #, fuzzy
 msgid "Trigger a build after SVN commits:"
 msgstr "Ligazóns a actualizacións do SVN relacionadas"
 
-#: plugins/hudson/include/hudsonViews.class.php:246
+#: plugins/hudson/include/hudsonViews.class.php:247
 #, fuzzy
 msgid "Trigger a build after CVS commits:"
 msgstr "Ligazóns a remisións de CVS relacionadas"
 
-#: plugins/hudson/include/hudsonViews.class.php:257
-#: plugins/hudson/include/hudsonViews.class.php:416
+#: plugins/hudson/include/hudsonViews.class.php:258
+#: plugins/hudson/include/hudsonViews.class.php:421
 msgid "with (optional) token:"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:265
+#: plugins/hudson/include/hudsonViews.class.php:266
 #, fuzzy
 msgid "Update job"
 msgstr "Actualizar "
 
-#: plugins/hudson/include/hudsonViews.class.php:293 www/admin/cronman.php:43
+#: plugins/hudson/include/hudsonViews.class.php:294 www/admin/cronman.php:43
 #: www/people/editjob.php:74 www/people/editjob.php:91
 #: www/people/editjob.php:107
 msgid "Job"
 msgstr "Traballo "
 
-#: plugins/hudson/include/hudsonViews.class.php:294
+#: plugins/hudson/include/hudsonViews.class.php:295
 #, fuzzy
 msgid "Last Success"
 msgstr "Actualizouse correctamente "
 
-#: plugins/hudson/include/hudsonViews.class.php:295
+#: plugins/hudson/include/hudsonViews.class.php:296
 #, fuzzy
 msgid "Last Failure"
 msgstr "Fallou a inserción"
 
-#: plugins/hudson/include/hudsonViews.class.php:296
+#: plugins/hudson/include/hudsonViews.class.php:297
 #, fuzzy
 msgid "RSS"
 msgstr "Sistema de publicación rápida"
 
-#: plugins/hudson/include/hudsonViews.class.php:298
+#: plugins/hudson/include/hudsonViews.class.php:299
 msgid "SVN trigger"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:301
+#: plugins/hudson/include/hudsonViews.class.php:302
 msgid "CVS trigger"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:323
+#: plugins/hudson/include/hudsonViews.class.php:324
 #, php-format
 msgid "Show job %s"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:325
-#: plugins/hudson/include/hudsonViews.class.php:330
+#: plugins/hudson/include/hudsonViews.class.php:326
+#: plugins/hudson/include/hudsonViews.class.php:331
 #, php-format
 msgid "Show build #%s of job %s"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:325
-#: plugins/hudson/include/hudsonViews.class.php:330
+#: plugins/hudson/include/hudsonViews.class.php:326
+#: plugins/hudson/include/hudsonViews.class.php:331
 msgid "build"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:334
+#: plugins/hudson/include/hudsonViews.class.php:335
 #, php-format
 msgid "RSS feed of all builds for %s job"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:338
+#: plugins/hudson/include/hudsonViews.class.php:339
 msgid "SVN commit will trigger a build"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:345
+#: plugins/hudson/include/hudsonViews.class.php:346
 msgid "CVS commit will trigger a build"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:363
+#: plugins/hudson/include/hudsonViews.class.php:364
 #, fuzzy
 msgid "Edit this job"
 msgstr "[Editar esta etiqueta]"
 
-#: plugins/hudson/include/hudsonViews.class.php:369
+#: plugins/hudson/include/hudsonViews.class.php:370
 #, fuzzy, php-format
 msgid "Are you sure you want to delete Job %s from project %s?"
 msgstr "Está seguro de que desexa eliminar este/a %1$s? "
 
-#: plugins/hudson/include/hudsonViews.class.php:370
+#: plugins/hudson/include/hudsonViews.class.php:371
 #, fuzzy
 msgid "Delete this job"
 msgstr "Eliminar esta tarefa"
 
-#: plugins/hudson/include/hudsonViews.class.php:383
-msgid ""
-"No Hudson jobs associated with this project. To add a job, select the link "
-"just below."
+#: plugins/hudson/include/hudsonViews.class.php:384
+#, fuzzy
+msgid "No Hudson jobs associated with this project."
+msgstr "Abandonando o proxecto"
+
+#: plugins/hudson/include/hudsonViews.class.php:386
+msgid "To add a job, select the link just below."
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:392
+#: plugins/hudson/include/hudsonViews.class.php:397
 #, fuzzy
 msgid "Add job"
 msgstr "Engadir separador"
 
-#: plugins/hudson/include/hudsonViews.class.php:405
+#: plugins/hudson/include/hudsonViews.class.php:410
 msgid "Trigger a build after commits:"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:407
+#: plugins/hudson/include/hudsonViews.class.php:412
 msgid "SVN"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:411
+#: plugins/hudson/include/hudsonViews.class.php:416
 msgid "CVS"
 msgstr "CVS"
 
@@ -11506,7 +11524,7 @@ msgstr ""
 #: www/pm/browse_task.php:161 www/pm/browse_task.php:239
 #: www/pm/browse_task.php:371 www/pm/detail_task.php:52
 #: www/pm/ganttpage.php:177 www/pm/mod_task.php:61 www/pm/mod_task.php:268
-#: www/reporting/timeadd.php:139 www/snippet/package.php:162
+#: www/reporting/timeadd.php:144 www/snippet/package.php:162
 #: www/snippet/submit.php:129
 msgid "Category"
 msgstr "Categoría"
@@ -15700,8 +15718,8 @@ msgstr "Administrador de tarefas "
 msgid "Previous"
 msgstr "Anterior "
 
-#: www/admin/cronman.php:104 www/reporting/timeadd.php:198
-#: www/reporting/timeadd.php:227
+#: www/admin/cronman.php:104 www/reporting/timeadd.php:202
+#: www/reporting/timeadd.php:230
 msgid "Next"
 msgstr "Seguinte "
 
@@ -17093,10 +17111,15 @@ msgstr ""
 msgid "PHP extension is missing."
 msgstr ""
 
-#: www/export/index.php:28
+#: www/export/index.php:29
 #, fuzzy
 msgid "Exports Available"
 msgstr "As estatísticas non están dispoñíbeis"
+
+#: www/export/rss20_activity.php:109 www/register/index.php:235
+#, fuzzy
+msgid "Source Code"
+msgstr "IP de orixe"
 
 #: www/export/rss20_docman.php:79
 msgid "Please supply a Group ID with the request."
@@ -17986,11 +18009,22 @@ msgstr "Produciuse un erro ao obter a mensaxe do foro "
 msgid "File Module ID"
 msgstr ""
 
-#: www/frs/reporting/downloads.php:88
+#: www/frs/reporting/downloads.php:89
 msgid "File Release Reporting"
 msgstr "Informes de liberacións de ficheiros"
 
-#: www/frs/reporting/downloads.php:121
+#: www/frs/reporting/downloads.php:121 www/project/stats/index.php:119
+#: www/reporting/groupadded.php:53 www/reporting/groupcum.php:53
+#: www/reporting/projectact.php:55 www/reporting/projecttime.php:54
+#: www/reporting/siteact.php:54 www/reporting/sitetimebar.php:52
+#: www/reporting/sitetime.php:54 www/reporting/toolspie.php:52
+#: www/reporting/useract.php:56 www/reporting/useradded.php:53
+#: www/reporting/usercum.php:53 www/reporting/usertime.php:54
+#: www/tracker/reporting/index.php:142
+msgid "Start and end dates must be different"
+msgstr ""
+
+#: www/frs/reporting/downloads.php:124
 #, fuzzy
 msgid "There have been no downloads for this package."
 msgstr "Hai %1$s usuario monitorizando este paquete."
@@ -19668,7 +19702,7 @@ msgstr ""
 "Pode introducir aquí habilidades que teña adquirido. por favor, introduza as "
 "datas de comezo e fin tan concretamente como poida."
 
-#: www/people/editprofile.php:278
+#: www/people/editprofile.php:278 www/reporting/timeadd.php:96
 msgid "All fields are required!"
 msgstr "Todos os campo son requiridos!"
 
@@ -20643,7 +20677,7 @@ msgstr ""
 "esta"
 
 #: www/pm/mod_task.php:261 www/reporting/index.php:69
-#: www/reporting/timeadd.php:99
+#: www/reporting/timeadd.php:104 www/reporting/timeadd.php:220
 msgid "Time tracking"
 msgstr "Seguimento temporal"
 
@@ -20684,35 +20718,40 @@ msgstr "Duración media (en días) das tarefas pechadas"
 msgid "Number of started tasks"
 msgstr "Número de tarefas comezadas"
 
-#: www/pm/reporting/index.php:176
+#: www/pm/reporting/index.php:145
+#, fuzzy, php-format
+msgid "%1$s to %2$s"
+msgstr "Por favor, %1$s inicie a sesión %2$s"
+
+#: www/pm/reporting/index.php:177
 msgid "Number of tasks still not completed"
 msgstr "Número de tarefas aínda non completadas"
 
-#: www/pm/reporting/index.php:204
+#: www/pm/reporting/index.php:205
 msgid "Tasks By Category"
 msgstr "Tarefas por categoría"
 
-#: www/pm/reporting/index.php:205
+#: www/pm/reporting/index.php:206
 msgid "Open Tasks By Category"
 msgstr "Tarefas abertas por categoría"
 
-#: www/pm/reporting/index.php:206
+#: www/pm/reporting/index.php:207
 msgid "All Tasks By Category"
 msgstr "Todas as tarefas por categoría"
 
-#: www/pm/reporting/index.php:234
+#: www/pm/reporting/index.php:235
 msgid "Tasks By Assignee"
 msgstr "Tarefas por responsábel"
 
-#: www/pm/reporting/index.php:235
+#: www/pm/reporting/index.php:236
 msgid "Open Tasks By Assignee"
 msgstr "Tarefas abertas por responsábel"
 
-#: www/pm/reporting/index.php:236
+#: www/pm/reporting/index.php:237
 msgid "All Tasks By Assignee"
 msgstr "Todas as tarefas por responsábel"
 
-#: www/pm/reporting/index.php:237
+#: www/pm/reporting/index.php:238
 #, fuzzy
 msgid ""
 "Note that same task can be assigned to several technicians. Such task will "
@@ -21111,8 +21150,7 @@ msgstr "Non se atoparon usuarios coincidentes"
 msgid "Finish"
 msgstr "Rematar"
 
-#: www/project/admin/massfinish.php:49 www/reporting/timecategory.php:42
-#: www/reporting/timecategory.php:52
+#: www/project/admin/massfinish.php:49
 msgid "Successful"
 msgstr "Éxito"
 
@@ -21625,16 +21663,6 @@ msgstr "Usar as estatísticas"
 msgid "Areas"
 msgstr "Áreas"
 
-#: www/project/stats/index.php:119 www/reporting/groupadded.php:53
-#: www/reporting/groupcum.php:53 www/reporting/projectact.php:55
-#: www/reporting/projecttime.php:54 www/reporting/siteact.php:54
-#: www/reporting/sitetimebar.php:52 www/reporting/sitetime.php:54
-#: www/reporting/toolspie.php:52 www/reporting/useract.php:56
-#: www/reporting/useradded.php:53 www/reporting/usercum.php:53
-#: www/reporting/usertime.php:54 www/tracker/reporting/index.php:142
-msgid "Start and end dates must be different"
-msgstr ""
-
 #: www/project/stats/index.php:122 www/tracker/reporting/index.php:147
 #: www/tracker/reporting/index.php:151
 #, fuzzy
@@ -21813,11 +21841,6 @@ msgstr ""
 #: www/register/index.php:223
 msgid "search engines throughout the site."
 msgstr ""
-
-#: www/register/index.php:235
-#, fuzzy
-msgid "Source Code"
-msgstr "IP de orixe"
 
 #: www/register/index.php:236
 msgid ""
@@ -22027,52 +22050,50 @@ msgstr "Actividade de todo o sistema"
 msgid "Site-Wide Time Tracking"
 msgstr "Seguimento temporal de todo o sistema"
 
-#: www/reporting/timeadd.php:65
-msgid "INTERNAL ERROR: delete: "
-msgstr ""
+#: www/reporting/timeadd.php:70
+#, fuzzy
+msgid "Internal error: delete: "
+msgstr "Produciuse un erro ao inserir "
 
-#: www/reporting/timeadd.php:91
-msgid "All Fields Are Required."
-msgstr "Todos os campos son obrigatorios."
-
-#: www/reporting/timeadd.php:116
+#: www/reporting/timeadd.php:121
 #, php-format
 msgid "Time Entries For The Week Starting %s"
 msgstr "Entradas de horas para a semana que comeza en %s"
 
-#: www/reporting/timeadd.php:136
+#: www/reporting/timeadd.php:141
 msgid "Project/Task"
 msgstr "Proxecto/tarefa"
 
-#: www/reporting/timeadd.php:138
+#: www/reporting/timeadd.php:143
 msgid "Hours worked"
 msgstr ""
 
-#: www/reporting/timeadd.php:179
+#: www/reporting/timeadd.php:187
 msgid "Total Hours"
 msgstr "Total de horas"
 
-#: www/reporting/timeadd.php:187
+#: www/reporting/timeadd.php:193
 msgid "Add Entry"
 msgstr "Engadir unha entrada"
 
-#: www/reporting/timeadd.php:188
+#: www/reporting/timeadd.php:194
+#, fuzzy
 msgid ""
-"Choose a Project/Subproject in the Task Manager. You will then have to "
-"choose a Task and category to record your time in."
+"Choose a Project/Subproject in the Tasks. You will then have to choose a "
+"Task and category to record your time in."
 msgstr ""
 "Elixa un proxecto/subproxecto no xestor de tarefas. Despois de o facer, terá "
 "que elixir unha tarefa e unha categoría en que gravar as súas horas."
 
-#: www/reporting/timeadd.php:203 www/reporting/timeadd.php:207
+#: www/reporting/timeadd.php:207 www/reporting/timeadd.php:211
 msgid "Change Week"
 msgstr "Cambiar semana"
 
-#: www/reporting/timeadd.php:220
+#: www/reporting/timeadd.php:223
 msgid "Choose A Week to Record Or Edit Your Time."
 msgstr "Elixir unha semana para gravar ou editar as súas horas."
 
-#: www/reporting/timeadd.php:222
+#: www/reporting/timeadd.php:225
 msgid ""
 "After you choose a week, you will be prompted to choose a Project/Subproject "
 "in the Tasks."
@@ -22080,9 +22101,15 @@ msgstr ""
 "Despois de elixir unha semana, pediráselle que elixa un proxecto ou "
 "subproxecto no xestor de tarefas."
 
-#: www/reporting/timeadd.php:225
+#: www/reporting/timeadd.php:228
 msgid "Week Starting"
 msgstr "Semana de inicio"
+
+#: www/reporting/timecategory.php:52 www/survey/admin/question.php:85
+#: www/survey/admin/survey.php:69 www/survey/admin/survey.php:82
+#, fuzzy
+msgid "Update Successful"
+msgstr "Actualizouse correctamente "
 
 #: www/reporting/timecategory.php:69
 msgid "Time Code"
@@ -22374,10 +22401,20 @@ msgstr ""
 msgid "People Search"
 msgstr "Busca global"
 
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:53
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:54
 #, fuzzy
 msgid "Project Search"
 msgstr "Nome do proxecto"
+
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
+#, php-format
+msgid "Search results for <em>%1$s</em>"
+msgstr "Resultados da procura para <em>%1$s</em>"
+
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
+#, php-format
+msgid "No matches found for <em>%1$s</em>"
+msgstr "Non se achou ningunha coincidencia para <em>%1$s</em>"
 
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:52
 msgid "Created By"
@@ -23310,12 +23347,6 @@ msgstr "Preguntas da enquisa"
 msgid "Delete successful"
 msgstr "Eliminouse correctamente"
 
-#: www/survey/admin/question.php:85 www/survey/admin/survey.php:69
-#: www/survey/admin/survey.php:82
-#, fuzzy
-msgid "Update Successful"
-msgstr "Actualizouse correctamente "
-
 #: www/survey/admin/question.php:119
 msgid "No questions found"
 msgstr "Non se atopou ningunha pregunta"
@@ -23954,6 +23985,9 @@ msgstr "Non se puido actualizar"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Non se introduciu un nome de usuario"
+
+#~ msgid "All Fields Are Required."
+#~ msgstr "Todos os campos son obrigatorios."
 
 #, fuzzy
 #~ msgid "Change week"
@@ -25985,12 +26019,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "Entire project search"
 #~ msgstr "Procura avanzada no proxecto "
 
-#~ msgid "Search results for <em>%1$s</em>"
-#~ msgstr "Resultados da procura para <em>%1$s</em>"
-
-#~ msgid "No matches found for <em>%1$s</em>"
-#~ msgstr "Non se achou ningunha coincidencia para <em>%1$s</em>"
-
 #~ msgid "Top Downloads (Past 7 Days)"
 #~ msgstr "Os proxectos máis descargados (nos últimos 7 días)"
 
@@ -26506,10 +26534,6 @@ msgstr "Non se introduciu un nome de usuario"
 #, fuzzy
 #~ msgid "Directory Name"
 #~ msgstr "Nome do proxecto"
-
-#, fuzzy
-#~ msgid "Internal Error"
-#~ msgstr "Produciuse un erro ao inserir "
 
 #~ msgid "Error - this news item was not found"
 #~ msgstr "Produciuse un erro - non se atopou o elemento de novas"
