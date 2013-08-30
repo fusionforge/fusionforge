@@ -23,35 +23,9 @@
 
 require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 
-function printr($var, $name='$var', $echo=true) {
-/*
-//	return;
-	//$str = highlight_string("<?php\n$name = ".var_export($var, 1).";\n? >\n", 1);
-//	$str=var_export($var, 1);
-	if ($echo) {
-		if (is_array($var)) {
-			$var =var_export($var, 1);
-		}
-//		echo $str;
-//	} else {
-		$fp=fopen('/tmp/msp.log','a');
-		fwrite($fp,"\n-------".date('Y-m-d H:i:s')."-----".$name."-----\n".$var);
-		fclose($fp);
-	}
-*/
-}
-
-function printrcomplete() {
-//	exec("/bin/cat /tmp/msp.log | mail -s\"printr\" tim@gforgegroup.com");
-//	exec("/bin/rm -f /tmp/msp.log");
-}
-
 function &pm_import_tasks($group_project_id,&$tasks) {
 	$was_error = false;
 	$foo = "";
-
-	printr($tasks,'MSPCheckin::in-array');
-	printr(getenv('TZ'),'MSPCheckin::entry TZ');
 
 	$pg = projectgroup_get_object($group_project_id);
 	if (!$pg || !is_object($pg)) {
@@ -62,7 +36,6 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 		$array['errormessage']='Could Not Get ProjectGroup: '.$pg->getErrorMessage();
 	} else {
 		$count=count($tasks);
-//printr($count,'count - count of tasks');
 		//
 		//  Build hash list of technicians so we can get their ID for assigning tasks
 		//
@@ -132,7 +105,6 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 						//remap priority names=>numbers
 						$priority=$tasks[$i]['priority'];
 						if (!$priority || $priority < 1 || $priority > 5) {
-			//				printr($priority,'Invalid Priority On New Task');
 							$priority=3;
 						}
 						//map users
@@ -174,8 +146,8 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 						}
 
 						if (!$pt->create(
-							addslashes($tasks[$i]['name']),
-							addslashes($tasks[$i]['notes']),
+							$tasks[$i]['name'],
+							$tasks[$i]['notes'],
 							$priority,
 							$hours,
 							strtotime($tasks[$i]['start_date']),
@@ -205,12 +177,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 					//create the task
 					$pt = projecttask_get_object($tasks[$i]['id']);
 					if (!$pt || !is_object($pt)) {
-						printr($tasks[$i]['id'],'Could not get task');
-					//	$array['success']=false;
-					//	$was_error=true;
-					//	$array['errormessage']='Could Not Get ProjectTask';
 					} elseif ($pt->isError()) {
-						printr($tasks[$i]['id'],'Could not get task - error in task');
 						$array['success']=false;
 						$was_error=true;
 						$array['errormessage']='Could Not Get ProjectTask: '.$pt->getErrorMessage();
@@ -218,9 +185,9 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 						//remap priority names=>numbers
 						$priority=$tasks[$i]['priority'];
 						if (!$priority || $priority < 1 || $priority > 5) {
-							printr($priority,'Invalid Priority On Existing Task');
 							$priority=3;
 						}
+
 						//map users
 						$assignees=array();
 						$resrc = $tasks[$i]['resources'];
@@ -228,6 +195,7 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 							//get their user_id from the $tarr we created earlier
 							$assignees[]=$tarr[strtolower($resrc[$ucount]['user_name'])];
 						}
+
 						//don't do anything with dependencies yet - we may only have the
 						//MSprojid from dependent items
 						$hours = $tasks[$i]['work'];
@@ -260,8 +228,8 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 						}
 
 						if (!$pt->update(
-							addslashes($tasks[$i]['name']),
-							addslashes($tasks[$i]['notes']),
+							$tasks[$i]['name'],
+							$tasks[$i]['notes'],
 							$priority,
 							$hours,
 							strtotime($tasks[$i]['start_date']),
@@ -300,7 +268,6 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 			//  Do task dependencies
 			//
 
-			printr($was_error,'Right before deps');
 			if (!$was_error) {
 				//iterate the tasks
 				for ($i=0; $i<$count; $i++) {
@@ -321,21 +288,15 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 						}
 						$deps[$id]=$darr[$dcount]['link_type'];
 					}
-					printr($deps,'Deps for task id: '.$tasks[$i]['id']);
 					if (isset($tasks[$i]['obj']) && is_object($tasks[$i]['obj'])) {
-						printr($deps,'11 Done Setting deps for task id: '.$tasks[$i]['id']);
 						if (!$tasks[$i]['obj']->setDependentOn($deps)) {
 							$was_error=true;
 							$array['success']=false;
-							printr($tasks[$i]['obj'],'FAILED TO SET DEPENDENCIES: '.$tasks[$i]['obj']->getErrorMessage());
 						}
-						printr($deps,'22 Done Setting deps for task id: '.$tasks[$i]['id']);
 					} else {
 		//				$was_error=true;
 		//				$array['success']=false;
-						printr($foo,'PROJECT TASK OBJECT DOES NOT EXIST IN OBJ ARRAY');
 					}
-					printr($deps,'Done Setting deps for task id: '.$tasks[$i]['id']);
 					unset($deps);
 				} //iterates tasks to do dependencies
 			}
@@ -344,18 +305,14 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 			//
 			//	Delete unreferenced tasks
 			//
-			printr($was_error,'Right before deleting unreferenced tasks');
 			if (!$was_error) {
 				$ptf = new ProjectTaskFactory($pg);
 				$pt_arr=& $ptf->getTasks();
 				for ($i=0; $i<count($pt_arr); $i++) {
 					if (is_object($pt_arr[$i])) {
 						if (!util_ifsetor($completed[$pt_arr[$i]->getID()])) {
-							printr($pt_arr[$i]->getID(),'Deleting task');
 							if (!$pt_arr[$i]->delete(true)) {
 								echo $pt_arr[$i]->getErrorMessage();
-							} else {
-								printr($foo,'Deleting Unreferenced Tasks');
 							}
 						}
 					}
@@ -368,8 +325,6 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 		$array['success']=true;
 	}
 
-//	printr($array,'MSPCheckin::return-array');
-	printr(getenv('TZ'),'MSPCheckin::exit TZ');
 	return $array;
 }
 
