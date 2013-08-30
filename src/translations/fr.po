@@ -1670,9 +1670,8 @@ msgid "Refresh"
 msgstr "Rafraîchir"
 
 #: common/docman/views/reporting.php:106
-#, fuzzy
 msgid "There have been no viewed documents for this project yet."
-msgstr "Ce paquet n'a pas encore été téléchargé."
+msgstr "Aucun document n'a été vu dans ce projet pour l'instant."
 
 #: common/docman/views/reporting.php:117 common/docman/views/reporting.php:125
 #: common/reporting/report_utils.php:86 www/frs/reporting/downloads.php:132
