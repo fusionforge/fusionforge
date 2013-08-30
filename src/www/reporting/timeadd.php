@@ -129,67 +129,66 @@ if ($week) {
 				array ('**',
 				       $week,
 				       user_getid()));
-}
-$rows=db_numrows($res);
-if ($group_project_id || $rows) {
 
-	$title_arr[]=_('Project/Task');
-	$title_arr[]=_('Date');
-	$title_arr[]=_('Hours worked');
-	$title_arr[]=_('Category');
-	$title_arr[]=' ';
+	$rows=db_numrows($res);
+	if ($group_project_id || $rows) {
 
-	$xi = 0;
-	$total_hours = 0;
+		$title_arr[]=_('Project/Task');
+		$title_arr[]=_('Date');
+		$title_arr[]=_('Hours worked');
+		$title_arr[]=_('Category');
+		$title_arr[]=' ';
 
-	echo $HTML->listTableTop ($title_arr);
-	while ($r=db_fetch_array($res)) {
-		echo '<form action="'.getStringFromServer('PHP_SELF').'?week='.$week.'&amp;project_task_id='.$r['project_task_id'].'" method="post">
-			<input type="hidden" name="submit" value="1" />
-			<input type="hidden" name="report_date" value="'.$r['report_date'] .'" />
-			<input type="hidden" name="old_time_code" value="'.$r['time_code'] .'" />
-			<tr '.$HTML->boxGetAltRowStyle($xi++).'>
-				<td align="middle">'.$r['name'].'</td>
-				<td align="middle">'. date( 'D, M d, Y',$r['report_date']) .'</td>
-				<td align="middle"><!-- <input type="text" name="hours" value="'. $r['hours'] .'" size="3" maxlength="3" /> -->'.$r['hours'].'</td>
-				<td align="middle"><!-- '.report_time_category_box('time_code',$r['time_code']).' -->'.$r['category_name'].'</td>
-				<td align="middle"><!-- <input type="submit" name="update" value="Update" /> -->
-				<input type="submit" name="delete" value="'. _('Delete').'" /></td>
-			</tr></form>';
-		$total_hours += $r['hours'];
-	}
-	if ($group_project_id) {
+		$xi = 0;
+		$total_hours = 0;
 
-		$respt=db_query_params ('SELECT project_task_id,summary FROM project_task WHERE group_project_id=$1',
+		echo $HTML->listTableTop ($title_arr);
+		while ($r=db_fetch_array($res)) {
+			echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'>
+				<td class="align-center">'.$r['name'].'</td>
+				<td class="align-center">'. date( 'D, M d, Y',$r['report_date']) .'</td>
+				<td class="align-center"><!-- <input type="text" name="hours" value="'. $r['hours'] .'" size="3" maxlength="3" /> -->'.$r['hours'].'</td>
+				<td class="align-center"><!-- '.report_time_category_box('time_code',$r['time_code']).' -->'.$r['category_name'].'</td>
+				<td class="align-center"><!-- <input type="submit" name="update" value="Update" /> -->
+				<form action="'.getStringFromServer('PHP_SELF').'?week='.$week.'&amp;project_task_id='.$r['project_task_id'].'" method="post">
+				<input type="hidden" name="submit" value="1" />
+				<input type="hidden" name="report_date" value="'.$r['report_date'] .'" />
+				<input type="hidden" name="old_time_code" value="'.$r['time_code'] .'" />
+				<input type="hidden" name="hours" value="'.$r['hours'].'" />
+				<input type="submit" name="delete" value="'. _('Delete').'" />
+				</form>
+				</td>
+			</tr>';
+			$total_hours += $r['hours'];
+		}
+		if ($group_project_id) {
+
+			$respt=db_query_params ('SELECT project_task_id,summary FROM project_task WHERE group_project_id=$1',
 			array($group_project_id));
 
 			echo '<form action="'.getStringFromServer('PHP_SELF').'?week='.$week.'" method="post">
 			<input type="hidden" name="submit" value="1" />
+			<input type="hidden" name="week" value="'.$week.'" />
 			<tr '.$HTML->boxGetAltRowStyle($xi++).'>
 				<td class="align-center">'. html_build_select_box ($respt,'project_task_id',false,false) .'</td>
-				<td class="align-center"><input type="text" name="report_date" value="'. date('Y-m-d',$week) .'" size="10" maxlength="10" /></td>
+				<td class="align-center">'.report_day_adjust_box($report, 'days_adjust').'</td>
 				<td class="align-center"><input type="text" name="hours" value="" size="3" maxlength="3" /></td>
 				<td class="align-center">'.report_time_category_box('time_code',false).'</td>
 				<td class="align-center"><input type="submit" name="add" value="'.
 		_('Add').'" /><input type="submit" name="cancel" value="'._('Cancel').'" /></td>
 			</tr></form>';
+		}
+		if (!isset($total_hours)) $total_hours = '';
+		echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'><td colspan="2"><strong>'._('Total Hours').':</strong></td><td class="align-center"><strong>'.$total_hours.'</strong></td><td colspan="2"></td></tr>';
+		echo $HTML->listTableBottom();
 
 	}
-    if (!isset($total_hours)) $total_hours = '';
-	echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'><td colspan="2"><strong>'._('Total Hours').':</strong></td><td><strong>'.$total_hours.'</strong></td><td colspan="2"></td></tr>';
-
-	echo $HTML->listTableBottom();
-
-}
-if (!$group_project_id) {
-	?>
-
-<h3><?php echo _('Add Entry'); ?></h3>
-<p><?php echo _('Choose a Project/Subproject in the Task Manager. You will then have to choose a Task and category to record your time in.'); ?>
-</p>
-<form action="<?php echo getStringFromServer('PHP_SELF'); ?>"
-	method="get" /><input type="hidden" name="week"
-	value="<?php echo $week; ?>" />
+	if (!$group_project_id) {
+		?>
+<h2><?php echo _('Add Entry'); ?></h2>
+<p><?php echo _('Choose a Project/Subproject in the Tasks. You will then have to choose a Task and category to record your time in.'); ?></p>
+<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get" />
+<input type="hidden" name="week" value="<?php echo $week; ?>" />
 <table>
 	<tr>
 		<td><strong><?php echo _("Tasks Project"); ?>:</strong></td>
@@ -200,21 +199,20 @@ if (!$group_project_id) {
 </table>
 </form>
 
-<h2><?php echo _('Change Week') ?></h2>
+<h2><?php echo _('Change week') ?></h2>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>"
 	method="get" /><?php echo report_weeks_box($report,'week'); ?><input
 	type="submit" name="submit" value="<?php echo _('Change Week'); ?>" />
 </form>
-	<?php
-}
-//
-//	First Choose A Week to add/update/delete time sheet info
-//
-else {
+		<?php
+	}
+	//
+	//	First Choose A Week to add/update/delete time sheet info
+	//
+} else {
 
-	/* report_header(_('Time tracking')); Outcommented the report_header().
-	 * Do not get the reason of the report_header() in here. */
+	report_header(_('Time tracking'));
 
 	?>
 <h2><?php echo _('Choose A Week to Record Or Edit Your Time.'); ?></h2>
