@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-30 10:45+0200\n"
+"POT-Creation-Date: 2013-08-30 11:20+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -21736,12 +21736,7 @@ msgid ""
 "choose a Task and category to record your time in."
 msgstr ""
 
-#: www/reporting/timeadd.php:203
-#, fuzzy
-msgid "Change week"
-msgstr "Ikusteko era aldatu"
-
-#: www/reporting/timeadd.php:207
+#: www/reporting/timeadd.php:203 www/reporting/timeadd.php:207
 msgid "Change Week"
 msgstr ""
 
@@ -23616,6 +23611,10 @@ msgstr "Ezin da eguneratu"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Ez da erabiltzaile-izenik eman"
+
+#, fuzzy
+#~ msgid "Change week"
+#~ msgstr "Ikusteko era aldatu"
 
 #, fuzzy
 #~ msgid "Download as a zip"

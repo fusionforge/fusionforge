@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-30 10:45+0200\n"
+"POT-Creation-Date: 2013-08-30 11:20+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -21875,12 +21875,7 @@ msgstr ""
 "Seleziona un progetto/sottoprogetto nel Gestore Attività. Devi selezionare "
 "una attività e una categoria per consuntivare."
 
-#: www/reporting/timeadd.php:203
-#, fuzzy
-msgid "Change week"
-msgstr "Cambia settimana"
-
-#: www/reporting/timeadd.php:207
+#: www/reporting/timeadd.php:203 www/reporting/timeadd.php:207
 msgid "Change Week"
 msgstr "Cambia settimana"
 
@@ -23774,6 +23769,10 @@ msgstr "Aggiornamento multiplo"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Non è stato inserito alcun file"
+
+#, fuzzy
+#~ msgid "Change week"
+#~ msgstr "Cambia settimana"
 
 #, fuzzy
 #~ msgid "Download as a zip"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-30 10:45+0200\n"
+"POT-Creation-Date: 2013-08-30 11:20+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -22199,12 +22199,7 @@ msgstr ""
 "Выберите Проект/Подпроект в Менеджере Задачи. Вы тогда должны будете выбрать "
 "Задачу и категорию, чтобы сделать запись вашего времени."
 
-#: www/reporting/timeadd.php:203
-#, fuzzy
-msgid "Change week"
-msgstr "Изменить неделю"
-
-#: www/reporting/timeadd.php:207
+#: www/reporting/timeadd.php:203 www/reporting/timeadd.php:207
 msgid "Change Week"
 msgstr "Изменить неделю"
 
@@ -24098,6 +24093,10 @@ msgstr "Глобальное изменение"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Имя участника обязательно"
+
+#, fuzzy
+#~ msgid "Change week"
+#~ msgstr "Изменить неделю"
 
 #, fuzzy
 #~ msgid "Download as a zip"

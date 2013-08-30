@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-30 10:45+0200\n"
+"POT-Creation-Date: 2013-08-30 11:20+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -21873,12 +21873,7 @@ msgstr ""
 "Kies een Project/Subproject in de taakbeheerder. Daarna moet je een taak en "
 "een categorie kiezen waarop je je tijd wilt boeken."
 
-#: www/reporting/timeadd.php:203
-#, fuzzy
-msgid "Change week"
-msgstr "Andere week"
-
-#: www/reporting/timeadd.php:207
+#: www/reporting/timeadd.php:203 www/reporting/timeadd.php:207
 msgid "Change Week"
 msgstr "Andere week"
 
@@ -23778,6 +23773,10 @@ msgstr "Alles bijwerken"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Gebruikersnaam"
+
+#, fuzzy
+#~ msgid "Change week"
+#~ msgstr "Andere week"
 
 #, fuzzy
 #~ msgid "Download as a zip"

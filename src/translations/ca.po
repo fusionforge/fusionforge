@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-30 10:45+0200\n"
+"POT-Creation-Date: 2013-08-30 11:20+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -21855,12 +21855,7 @@ msgstr ""
 "Escolliu un projecte/subprojecte al gestor de tasques. Aleshores haureu "
 "d'escollir una tasca i una categoria per registrar-hi el vostre temps."
 
-#: www/reporting/timeadd.php:203
-#, fuzzy
-msgid "Change week"
-msgstr "Canvia la setmana"
-
-#: www/reporting/timeadd.php:207
+#: www/reporting/timeadd.php:203 www/reporting/timeadd.php:207
 msgid "Change Week"
 msgstr "Canvia la setmana"
 
@@ -23753,6 +23748,10 @@ msgstr "Actualització en massa"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Nom d'usuari"
+
+#, fuzzy
+#~ msgid "Change week"
+#~ msgstr "Canvia la setmana"
 
 #, fuzzy
 #~ msgid "Download as a zip"

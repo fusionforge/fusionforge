@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-30 10:45+0200\n"
+"POT-Creation-Date: 2013-08-30 11:20+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -22121,12 +22121,7 @@ msgstr ""
 "Wählen Sie ein Projekt/Unterprojekt im Auftrags-Manager. Sie müssen dann "
 "einen Auftrag und Kategorie wählen, in der Sie Ihre Zeit erfassen."
 
-#: www/reporting/timeadd.php:203
-#, fuzzy
-msgid "Change week"
-msgstr "Woche ändern"
-
-#: www/reporting/timeadd.php:207
+#: www/reporting/timeadd.php:203 www/reporting/timeadd.php:207
 msgid "Change Week"
 msgstr "Woche ändern"
 
@@ -24032,6 +24027,10 @@ msgstr "Aktualisierung nicht möglich"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Kein Benutzername angegeben"
+
+#, fuzzy
+#~ msgid "Change week"
+#~ msgstr "Woche ändern"
 
 #, fuzzy
 #~ msgid "Download as a zip"

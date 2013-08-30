@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-30 10:45+0200\n"
+"POT-Creation-Date: 2013-08-30 11:20+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -21484,11 +21484,7 @@ msgstr ""
 "Choisissez un projet/sous-projet dans le gestionnaire de tâches. Vous aurez "
 "à choisir une tâche et une catégorie pour y enregistrer le temps passé."
 
-#: www/reporting/timeadd.php:203
-msgid "Change week"
-msgstr "Changer de semaine"
-
-#: www/reporting/timeadd.php:207
+#: www/reporting/timeadd.php:203 www/reporting/timeadd.php:207
 msgid "Change Week"
 msgstr "Changer de semaine"
 
@@ -23362,6 +23358,9 @@ msgstr "Erreur de mise à jour"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
+
+#~ msgid "Change week"
+#~ msgstr "Changer de semaine"
 
 #, fuzzy
 #~ msgid "Download as a zip"

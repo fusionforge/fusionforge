@@ -200,7 +200,7 @@ if (!$group_project_id) {
 </table>
 </form>
 
-<h2><?php echo _('Change week') ?></h2>
+<h2><?php echo _('Change Week') ?></h2>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>"
 	method="get" /><?php echo report_weeks_box($report,'week'); ?><input

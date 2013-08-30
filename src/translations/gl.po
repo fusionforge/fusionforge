@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-30 10:45+0200\n"
+"POT-Creation-Date: 2013-08-30 11:20+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -22066,12 +22066,7 @@ msgstr ""
 "Elixa un proxecto/subproxecto no xestor de tarefas. Despois de o facer, terá "
 "que elixir unha tarefa e unha categoría en que gravar as súas horas."
 
-#: www/reporting/timeadd.php:203
-#, fuzzy
-msgid "Change week"
-msgstr "Cambiar semana"
-
-#: www/reporting/timeadd.php:207
+#: www/reporting/timeadd.php:203 www/reporting/timeadd.php:207
 msgid "Change Week"
 msgstr "Cambiar semana"
 
@@ -23961,6 +23956,10 @@ msgstr "Non se puido actualizar"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Non se introduciu un nome de usuario"
+
+#, fuzzy
+#~ msgid "Change week"
+#~ msgstr "Cambiar semana"
 
 #, fuzzy
 #~ msgid "Download as a zip"

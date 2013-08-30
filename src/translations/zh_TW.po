@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-30 10:45+0200\n"
+"POT-Creation-Date: 2013-08-30 11:20+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -21710,12 +21710,7 @@ msgid ""
 msgstr ""
 "在任務管理中選擇一個專案/子專案，您然後將必須選擇一個任務和種類記錄你的時間。"
 
-#: www/reporting/timeadd.php:203
-#, fuzzy
-msgid "Change week"
-msgstr "變更星期"
-
-#: www/reporting/timeadd.php:207
+#: www/reporting/timeadd.php:203 www/reporting/timeadd.php:207
 msgid "Change Week"
 msgstr "變更星期"
 
@@ -23583,6 +23578,10 @@ msgstr "大量更新"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "帳號"
+
+#, fuzzy
+#~ msgid "Change week"
+#~ msgstr "變更星期"
 
 #, fuzzy
 #~ msgid "Download as a zip"

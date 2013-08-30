@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-30 10:45+0200\n"
+"POT-Creation-Date: 2013-08-30 11:20+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -21363,11 +21363,7 @@ msgstr ""
 "Elegir un Proyecto/Subproyecto en el gestor de tareas. Luego tendrá que "
 "elegir una tarea o categoría para grabar sus horas ahí."
 
-#: www/reporting/timeadd.php:203
-msgid "Change week"
-msgstr "Cambiar semana"
-
-#: www/reporting/timeadd.php:207
+#: www/reporting/timeadd.php:203 www/reporting/timeadd.php:207
 msgid "Change Week"
 msgstr "Cambiar semana"
 
@@ -23238,6 +23234,9 @@ msgstr "No puedo actualizar"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "No ha proporcionado el nombre de usuario"
+
+#~ msgid "Change week"
+#~ msgstr "Cambiar semana"
 
 #, fuzzy
 #~ msgid "Download as a zip"
