@@ -142,7 +142,9 @@ if ($what) {
 								AND project_group_list.group_id=$3 ',
 								array($start, $end, $group_id));
 
-			$ticks[$counter-1] = date("Y-m-d", ($start))." to ".date("Y-m-d",($end));
+			$ticks[$counter-1] = date("Y-m-d", ($start))
+								. ' ' . _('to') . ' '
+								. date("Y-m-d",($end));
 			$values[0][$counter-1] = ((int)(db_result($resAvgClosedTask, 0, 0)*1000))/1000;
 			$values[1][$counter-1] = (int)db_result($resStartTasks, 0, 0);
 		}
