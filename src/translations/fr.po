@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-30 11:20+0200\n"
+"POT-Creation-Date: 2013-08-30 11:32+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -264,7 +264,6 @@ msgstr "activé avec succès."
 #: common/tracker/ArtifactType.class.php:154
 #: common/tracker/ArtifactTypeFactory.class.php:59
 #: common/tracker/ArtifactTypes.class.php:54
-#, fuzzy
 msgid "No Valid Group Object"
 msgstr "Pas d'objet Group valide"
 
@@ -1439,7 +1438,7 @@ msgstr ""
 #: www/pm/include/ProjectGroupHTML.class.php:96
 #: www/scm/include/scm_utils.php:50
 msgid "Reporting"
-msgstr "Rapport"
+msgstr "Rapports"
 
 #: common/docman/views/menu.php:72
 #, fuzzy
@@ -4468,7 +4467,7 @@ msgstr "Pas de groupe."
 #: common/reporting/report_utils.php:27
 #, php-format
 msgid "%s Reporting"
-msgstr "Statistiques de %s"
+msgstr "Rapports de %s"
 
 #: common/reporting/report_utils.php:39 common/reporting/report_utils.php:44
 msgid "Weekly"
@@ -6429,7 +6428,7 @@ msgstr "Champs supplémentaires définis"
 #: www/reporting/siteact.php:71 www/reporting/sitetime.php:78
 #: www/reporting/sitetime.php:94 www/reporting/useract.php:86
 #: www/reporting/useradded.php:64 www/reporting/usercum.php:64
-#: www/reporting/usertime.php:94
+#: www/reporting/usertime.php:94 www/reporting/usertime.php:106
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:45
 #: www/survey/include/SurveyHTML.class.php:244
 #: www/tracker/reporting/index.php:130
@@ -11022,9 +11021,8 @@ msgid "Manage versions, categories and general configuration."
 msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:407
-#, fuzzy
 msgid "View global statistics."
-msgstr "Utiliser le statut global :"
+msgstr "Voir les statistiques globales."
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:446
 #, fuzzy
@@ -11064,7 +11062,6 @@ msgid "MantisBT description."
 msgstr "Description de MantisBT."
 
 #: plugins/mantisbt/common/mantisbt_Widget_ProjectLastIssues.class.php:42
-#, fuzzy
 msgid "Not yet implemented"
 msgstr "Pas encore implémenté"
 
@@ -11097,24 +11094,22 @@ msgid "Include child projects:"
 msgstr "Projet fils"
 
 #: plugins/mantisbt/controler/filter.php:122
-#, fuzzy
 msgid "Submitted by:"
-msgstr "Proposée par"
+msgstr "Proposé par :"
 
 #: plugins/mantisbt/controler/filter.php:138
-#, fuzzy
 msgid "Assigned to:"
-msgstr "Confié à"
+msgstr "Confié à :"
 
 #: plugins/mantisbt/controler/filter.php:199
 #: plugins/mantisbt/controler/filter_roadmap.php:128
 msgid "Clear filter"
-msgstr ""
+msgstr "Effacer le filtre"
 
 #: plugins/mantisbt/controler/filter.php:200
 #: plugins/mantisbt/controler/filter_roadmap.php:129
 msgid "Apply filter"
-msgstr ""
+msgstr "Appliquer le filtre"
 
 #: plugins/mantisbt/controler/filter_roadmap.php:48
 msgid "Versions:"
@@ -14940,6 +14935,7 @@ msgstr "Aucune activité trouvée"
 
 #: www/activity/index.php:264 www/reporting/projecttime.php:94
 #: www/reporting/sitetimebar.php:96 www/reporting/sitetime.php:94
+#: www/reporting/usertime.php:106
 msgid "Time"
 msgstr "Temps"
 
@@ -17028,9 +17024,8 @@ msgid "File Deleted"
 msgstr "Fichier effacé"
 
 #: www/frs/admin/editrelease.php:193
-#, fuzzy
 msgid "File not deleted: you did not check “I am Sure”"
-msgstr "Fichier non supprimé : veuillez cocher la case « Je suis sûr »."
+msgstr "Fichier non supprimé : vous n'avez pas coché « Je confirme »"
 
 #: www/frs/admin/editrelease.php:209
 msgid "File Updated"
@@ -21420,14 +21415,12 @@ msgstr ""
 "du système de rapports."
 
 #: www/reporting/rebuild.php:53
-#, fuzzy
 msgid ""
 "If you are sure you want to rebuild all the reporting tables, check the “I "
 "am Sure” box and click the button below."
 msgstr ""
 "Si vous êtes sûr de vouloir reconstruire toutes les tables du système de "
-"rapports, cochez la case « J'en suis sûr » et cliquez sur le bouton ci-"
-"dessous."
+"rapports, cochez la case « Je confirme » et cliquez sur le bouton ci-dessous."
 
 #: www/reporting/rebuild.php:56
 msgid "This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-30 11:20+0200\n"
+"POT-Creation-Date: 2013-08-30 11:32+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -6656,7 +6656,7 @@ msgstr "Campos personalizados definidos"
 #: www/reporting/siteact.php:71 www/reporting/sitetime.php:78
 #: www/reporting/sitetime.php:94 www/reporting/useract.php:86
 #: www/reporting/useradded.php:64 www/reporting/usercum.php:64
-#: www/reporting/usertime.php:94
+#: www/reporting/usertime.php:94 www/reporting/usertime.php:106
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:45
 #: www/survey/include/SurveyHTML.class.php:244
 #: www/tracker/reporting/index.php:130
@@ -15427,6 +15427,7 @@ msgstr "Non se achou ningunha actividade"
 
 #: www/activity/index.php:264 www/reporting/projecttime.php:94
 #: www/reporting/sitetimebar.php:96 www/reporting/sitetime.php:94
+#: www/reporting/usertime.php:106
 msgid "Time"
 msgstr "Tempo "
 
