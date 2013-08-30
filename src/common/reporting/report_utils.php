@@ -232,7 +232,7 @@ function report_pie_arr($labels, $vals, $format=1) {
 		if (($vals[$i]/$total) < .02) {
 			$rem += $vals[$i];
 		} else {
-			$pie_labels[]=utf8_decode(util_unconvert_htmlspecialchars($labels[$i]))." (". number_format($vals[$i],$format) .") ";
+			$pie_labels[]=util_unconvert_htmlspecialchars($labels[$i])." (". number_format($vals[$i],$format) .") ";
 			$pie_vals[]=$vals[$i];
 		}
 	}
@@ -319,7 +319,7 @@ function trackeract_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 	}
 	echo 'jQuery(document).ready(function(){
 		plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', series, {
-			title : \''.utf8_decode(_('Tracker Activity')).' ('.strftime('%x',$start).' - '.strftime('%x',$end).') \',
+			title : \''._('Tracker Activity').' ('.strftime('%x',$start).' - '.strftime('%x',$end).') \',
 			axesDefaults: {
 				tickOptions: {
 					angle: -90,
@@ -404,7 +404,7 @@ function trackerpie_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 	echo 'jQuery(document).ready(function(){
 		plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', [data],
 			{
-				title : \''.utf8_decode($areaname." (".strftime('%x',$start) ." - ". strftime('%x',$end) .")").'\',
+				title : \''.$areaname." (".strftime('%x',$start) ." - ". strftime('%x',$end) .")".'\',
 				seriesDefaults: {
 					// Make this a pie chart.
 					renderer: jQuery.jqplot.PieRenderer,
@@ -829,7 +829,7 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 	}
 	echo 'jQuery(document).ready(function(){
 			plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', series, {
-				title : \''.utf8_decode($areaname).' ('.strftime('%x', $start).' - '.strftime('%x', $end).') \',
+				title : \''.$areaname.' ('.strftime('%x', $start).' - '.strftime('%x', $end).') \',
 				axesDefaults: {
 					tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
 					tickOptions: {
@@ -1097,7 +1097,7 @@ function report_sitetimebargraph($start, $end) {
 		}
 		echo 'jQuery(document).ready(function(){
 				plot'.$chartid.' = jQuery.jqplot (\'chart'.$chartid.'\', series, {
-					title : \''.utf8_decode($areaname).' ('.strftime('%x', $start).' - '.strftime('%x', $end).') \',
+					title : \''.$areaname.' ('.strftime('%x', $start).' - '.strftime('%x', $end).') \',
 					axesDefaults: {
 						tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,
 						tickOptions: {
