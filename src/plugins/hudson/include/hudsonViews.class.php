@@ -3,6 +3,7 @@
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright (c) 2010 Alcatel-Lucent
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -380,7 +381,11 @@ class hudsonViews extends Views {
 			}
 			echo '</table>';
 		} else {
-			echo '<p>'._("No Hudson jobs associated with this project. To add a job, select the link just below.").'</p>';
+			echo '<p>'._('No Hudson jobs associated with this project.');
+			if ($user->isMember($request->get('group_id'), 'A')) {
+				echo _('To add a job, select the link just below.');
+			}
+			echo '</p>';
 		}
 	}
 

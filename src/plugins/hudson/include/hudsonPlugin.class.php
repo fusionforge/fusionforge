@@ -5,6 +5,7 @@
  * Copyright (c) Xerox Corporation, Codendi 2007-2008.
  * @author Marc Nazarian <marc.nazarian@xrce.xerox.com>
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -45,6 +46,12 @@ class hudsonPlugin extends Plugin {
 		$this->_addHook('widgets', 'widgets', false);
 		$this->_addHook('get_available_reference_natures', 'getAvailableReferenceNatures', false);
 		$this->_addHook('ajax_reference_tooltip', 'ajax_reference_tooltip', false);
+		$this->_addHook('role_get');
+		$this->_addHook('role_normalize');
+		$this->_addHook('role_translate_strings');
+		$this->_addHook('role_has_permission');
+		$this->_addHook('role_get_setting');
+		$this->_addHook('list_roles_by_permission');
 	}
 
 	function CallHook ($hookname, &$params) {
@@ -91,6 +98,18 @@ class hudsonPlugin extends Plugin {
 			$this->getAvailableReferenceNatures($params);
 		} elseif ($hookname == "ajax_reference_tooltip") {
 			$this->ajax_reference_tooltip($params);
+		} elseif ($hookname == 'role_get') {
+			$this->role_get($params);
+		} elseif ($hookname == 'role_normalize') {
+			$this->role_normalize($params);
+		} elseif ($hookname == 'role_translate_strings') {
+			$this->role_translate_strings($params);
+		} elseif ($hookname == 'role_has_permission') {
+			$this->role_has_permission($params);
+		} elseif ($hookname == 'role_get_setting') {
+			$this->role_get_setting($params);
+		} elseif ($hookname == 'list_roles_by_permission') {
+			$this->list_roles_by_permission($params);
 		}
 	}
 	
@@ -298,4 +317,87 @@ class hudsonPlugin extends Plugin {
 		$controler->process();
 	}
 
+	function role_get(&$params) {
+		$role =& $params['role'];
+		
+		// Read access
+		$right = new PluginSpecificRoleSetting($role, 'plugin_hudson_read');
+		$right->SetAllowedValues(array('0', '1'));
+		$right->SetDefaultValues(array('Admin' => '1',
+						'Senior Developer' => '1',
+						'Junior Developer' => '1',
+						'Doc Writer' => '1',
+						'Support Tech' => '1'));
+		return true;
+	}
+
+	function role_normalize(&$params) {
+		$role =& $params['role'];
+		$new_sa =& $params['new_sa'];
+		$new_pa =& $params['new_pa'];
+
+		$projects = $role->getLinkedProjects();
+		foreach ($projects as $p) {
+			$role->normalizePermsForSection($new_pa, 'plugin_hudson_read', $p->getID());
+		}
+		return true;
+	}
+
+	function role_translate_strings(&$params) {
+		$right = new PluginSpecificRoleSetting($role, 'plugin_hudson_read');
+		$right->setDescription(_('Hudson access'));
+		$right->setValueDescriptions(array('0' => _('No access'),
+							'1' => _('Full access')));
+		return true;
+	}
+
+	function role_has_permission(&$params) {
+		$value = $params['value'];
+
+		switch ($params['section']) {
+			case 'plugin_hudson_read':
+			default:
+				switch ($params['action']) {
+					case 'read':
+					default:
+						$params['result'] |= ($value >= 1);
+						break;
+				}
+				break;
+		}
+		return true;
+	}
+
+	function role_get_setting(&$params) {
+		$role = $params['role'];
+		$reference = $params['reference'];
+		$value = $params['value'];
+
+		switch ($params['section']) {
+			case 'plugin_hudson_read':
+			default:
+				if ($role->hasPermission('project_admin', $reference)) {
+					$params['result'] = 1;
+				} else {
+					$params['result'] = $value;
+				}
+				break;
+		}
+		return true;
+	}
+	
+	function list_roles_by_permission(&$params) {
+		switch ($params['section']) {
+			case 'plugin_hudson_read':
+			default:
+				switch ($params['action']) {
+					case 'read':
+					default:
+						$params['qpa'] = db_construct_qpa($params['qpa'], ' AND perm_val >= 1') ;
+						break;
+				}
+				break;
+		}
+		return true;
+	}
 }

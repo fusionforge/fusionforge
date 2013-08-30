@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -50,7 +51,7 @@ class hudson extends Controler {
 			$project = $pm->getProject($group_id);
 			if ($project->usesService('hudson')) {
 				$user = UserManager::instance()->getCurrentUser();
-				if ($user->isMember($group_id)) {
+				if (forge_check_perm('plugin_hudson_read', $group_id, 'read')) {
 					switch($request->get('action')) {
 						case 'add_job':
 							if ($user->isMember($group_id, 'A')) {
@@ -78,7 +79,7 @@ class hudson extends Controler {
 							}
 							break;
 						case 'update_job':
-							if ($user->isMember($group_id,'A')) {
+							if ($user->isMember($group_id, 'A')) {
 								if ($request->exist('job_id')) {
 								if ($request->exist('new_hudson_job_url') && $request->get('new_hudson_job_url') != '') {
 									$this->action = 'updateJob';
@@ -95,7 +96,7 @@ class hudson extends Controler {
 							}
 							break;
 						case 'delete_job':
-							if ($user->isMember($group_id,'A')) {
+							if ($user->isMember($group_id, 'A')) {
 								if ($request->exist('job_id')) {
 								$this->action = 'deleteJob';
 								} else {
