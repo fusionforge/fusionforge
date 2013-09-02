@@ -59,7 +59,9 @@ echo '</p>';
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <p>
-<input type="checkbox" name="im_sure" value="1" /><?php echo _('I am Sure'); ?>
+<label for="im_sure">
+<input type="checkbox" id="im_sure" name="im_sure" value="1" /><?php echo _('I am Sure'); ?>
+</label>
 </p>
 <p>
 <input type="submit" name="submit" value="<?php echo _('Press ONLY ONCE'); ?>" />
