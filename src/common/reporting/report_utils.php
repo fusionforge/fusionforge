@@ -977,6 +977,7 @@ function report_toolspiegraph($datatype = 0, $start, $end) {
 					},
 					legend: {
 						show:true, location: \'e\',
+						rendererOptions: {numberRows: 11, numberColumns: 2}
 					},
 				}
 				);
