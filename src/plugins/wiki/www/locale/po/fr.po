@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-28 14:17+0200\n"
+"POT-Creation-Date: 2013-09-03 11:37+0200\n"
 "PO-Revision-Date: 2004-06-22 21:10+0200\n"
 "Last-Translator: Pierrick Meignen <meignen.pierrick@wanadoo.fr>, Roland "
 "Trique <roland.trique@free.fr>, Stéphane Gourichon <stephane.gourichon@lip6."
@@ -1766,9 +1766,6 @@ msgid "Only files with extension HTML are allowed"
 msgstr ""
 
 msgid "Copy the output below and paste it into your Wiki page."
-msgstr ""
-
-msgid "Query a local imdb database."
 msgstr ""
 
 msgid "Include text from another wiki page."
@@ -4016,9 +4013,6 @@ msgstr "AliasAccueil"
 msgid "HtmlConverter"
 msgstr "ConvertisseurHtml"
 
-msgid "Imdb"
-msgstr "Imdb"
-
 msgid "IncludePage"
 msgstr "InclureUnePage"
 
@@ -5980,6 +5974,9 @@ msgstr ""
 
 msgid "Edit this page"
 msgstr "Modifier cette page"
+
+#~ msgid "Imdb"
+#~ msgstr "Imdb"
 
 #~ msgid "Version %s"
 #~ msgstr "Version %s"

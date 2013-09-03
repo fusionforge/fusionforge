@@ -115,7 +115,6 @@ ${POT_FILE}: ../lib/HtmlElement.php
 ${POT_FILE}: ../lib/HtmlParser.php
 ${POT_FILE}: ../lib/HttpClient.php
 ${POT_FILE}: ../lib/imagecache.php
-${POT_FILE}: ../lib/imdb.php
 ${POT_FILE}: ../lib/IniConfig.php
 ${POT_FILE}: ../lib/InlineParser.php
 ${POT_FILE}: ../lib/install.php
@@ -170,7 +169,6 @@ ${POT_FILE}: ../lib/plugin/GoTo.php
 ${POT_FILE}: ../lib/plugin/GraphViz.php
 ${POT_FILE}: ../lib/plugin/HelloWorld.php
 ${POT_FILE}: ../lib/plugin/HtmlConverter.php
-${POT_FILE}: ../lib/plugin/Imdb.php
 ${POT_FILE}: ../lib/plugin/IncludePage.php
 ${POT_FILE}: ../lib/plugin/IncludePages.php
 ${POT_FILE}: ../lib/plugin/IncludeSiteMap.php
