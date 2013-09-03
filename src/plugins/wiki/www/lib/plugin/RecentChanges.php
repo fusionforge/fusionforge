@@ -795,6 +795,9 @@ class _RecentChanges_BoxFormatter
     function format($changes)
     {
         include_once 'lib/InlineParser.php';
+
+        $html = HTML(HTML::h2(false, $this->headline()));
+
         $first = true;
         while ($rev = $changes->next()) {
             // enforce view permission
