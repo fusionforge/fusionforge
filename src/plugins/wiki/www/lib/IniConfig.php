@@ -713,7 +713,6 @@ function fixup_static_configs($file)
         $AllAllowedPlugins[] = 'GraphViz';
         $AllAllowedPlugins[] = 'DebugGroupInfo';
         $AllAllowedPlugins[] = 'HtmlConverter';
-        $AllAllowedPlugins[] = 'Imdb';
         $AllAllowedPlugins[] = 'JabberPresence';
         $AllAllowedPlugins[] = 'ListPages';
         $AllAllowedPlugins[] = 'PhpWeather';

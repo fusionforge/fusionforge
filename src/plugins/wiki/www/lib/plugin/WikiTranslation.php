@@ -109,7 +109,6 @@ $pgsrc_container =
     _("HelloWorldPlugin") . ',' .
     _("HomePageAlias") . ',' .
     _("HtmlConverter") . ',' .
-    _("Imdb") . ',' .
     _("IncludePage") . ',' .
     _("IncludePagePlugin") . ',' .
     _("IncludePages") . ',' .
