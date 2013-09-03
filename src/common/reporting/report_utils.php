@@ -1026,7 +1026,7 @@ function report_timegraph($type = 'site', $area = 'tasks', $start, $end, $id = 0
 		echo '<script type="text/javascript">//<![CDATA['."\n";
 		echo 'var data'.$chartid.' = new Array();';
 		for ($i = 0; $i < count($pie_vals); $i++) {
-			echo 'data'.$chartid.'.push([\''.htmlentities($pie_labels[0]).'\',\''.$pie_vals[1].'\']);';
+			echo 'data'.$chartid.'.push([\''.htmlentities($pie_labels[$i]).'\','.$pie_vals[$i].']);';
 		}
 		echo 'var plot'.$chartid.';';
 		echo 'jQuery(document).ready(function(){
