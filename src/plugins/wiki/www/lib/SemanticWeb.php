@@ -318,7 +318,7 @@ class SemanticAttributeSearchQuery
     {
         $ori_value = $value;
         $value = preg_replace("/,/", "", $value);
-        $this->_bound[] = array('linkname' => $x,
+        $this->bound[] = array('linkname' => $x,
             'linkvalue' => $value);
         // We must ensure that the same baseunits are matched against.
         // We cannot compare m^2 to m or ''
@@ -329,20 +329,20 @@ class SemanticAttributeSearchQuery
                 ;
             } else {
                 // non-matching units are silently ignored
-                $this->_workquery = '';
+                $this->workquery = '';
                 return '';
             }
         }
         $value = $val_base;
         if (!is_numeric($value)) {
-            $this->_workquery = ''; //must return false
+            $this->workquery = ''; //must return false
             trigger_error("Cannot match against non-numeric attribute value $x := $ori_value",
                 E_USER_NOTICE);
             return '';
         }
 
-        $this->_workquery = preg_replace("/\b" . preg_quote($x, "/") . "\b/", $value, $this->_workquery);
-        return $this->_workquery;
+        $this->workquery = preg_replace("/\b" . preg_quote($x, "/") . "\b/", $value, $this->workquery);
+        return $this->workquery;
     }
 
 }

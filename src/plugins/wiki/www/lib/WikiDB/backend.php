@@ -851,7 +851,7 @@ class WikiDB_backend_search_sql extends WikiDB_backend_search
 {
     function _pagename_match_clause($node)
     {
-        // word already quoted by TextSearchQuery_node_word::_sql_quote()
+        // word already quoted by TextSearchQuery_node_word::sql_quote()
         $word = $node->sql();
         if ($word == '%') // ALL shortcut
             return "1=1";
