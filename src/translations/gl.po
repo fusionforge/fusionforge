@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-30 17:47+0200\n"
+"POT-Creation-Date: 2013-09-04 19:11+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -333,9 +333,8 @@ msgid "Error updating document group:"
 msgstr "Houbo un erro ao engadir o foro"
 
 #: common/docman/Document.class.php:253
-#, fuzzy
 msgid "Document: Invalid docid"
-msgstr "Documento:: docid non válido"
+msgstr "Documento: docid non válido"
 
 #: common/docman/Document.class.php:582
 #: common/docman/DocumentGroup.class.php:410
@@ -1333,8 +1332,8 @@ msgstr ""
 #: www/export/rss20_docman.php:136 www/export/rss20_docman.php:138
 #: www/export/tracker.php:108 www/forum/index.php:90 www/forum/message.php:127
 #: www/forum/myforums.php:152 www/frs/index.php:178 www/frs/index.php:237
-#: www/include/html.php:1041 www/news/news_utils.php:147
-#: www/news/news_utils.php:267 www/people/people_utils.php:422
+#: www/include/html.php:1041 www/news/news_utils.php:149
+#: www/news/news_utils.php:269 www/people/people_utils.php:422
 #: www/people/viewjob.php:78 www/pm/browse_task.php:265
 #: www/pm/browse_task.php:275 www/pm/include/ProjectTaskHTML.class.php:122
 #: www/pm/include/ProjectTaskHTML.class.php:175
@@ -1610,7 +1609,7 @@ msgstr "Data de comezo"
 
 #: common/docman/views/reporting.php:93 common/docman/views/reporting.php:95
 #: common/frs/FRSRelease.class.php:294 common/frs/FRSRelease.class.php:297
-#: common/frs/FRSRelease.class.php:301 common/include/utils.php:488
+#: common/frs/FRSRelease.class.php:301 common/include/utils.php:490
 #: common/tracker/actions/query.php:403
 #: common/tracker/views/form-addcanned.php:68
 #: common/tracker/views/form-addcanned.php:71
@@ -1784,8 +1783,8 @@ msgid "Month"
 msgstr "Mes"
 
 #: common/docman/views/reporting.php:151 common/reporting/report_utils.php:161
-#: common/reporting/report_utils.php:202 common/reporting/report_utils.php:682
-#: common/reporting/report_utils.php:683 www/frs/reporting/downloads.php:178
+#: common/reporting/report_utils.php:204 common/reporting/report_utils.php:684
+#: common/reporting/report_utils.php:685 www/frs/reporting/downloads.php:178
 #: www/stats/site_stats_utils.php:233 www/stats/site_stats_utils.php:363
 #: www/stats/site_stats_utils.php:417 www/stats/site_stats_utils.php:476
 #: www/top/toplist.php:49
@@ -2103,7 +2102,7 @@ msgid "Release"
 msgstr "Liberacións"
 
 #: common/forum/ForumAdmin.class.php:357 common/forum/ForumHTML.class.php:330
-#: common/forum/ForumHTML.class.php:545
+#: common/forum/ForumHTML.class.php:555
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
 #: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:68
@@ -2403,15 +2402,15 @@ msgstr "Ficheiro para cargar"
 msgid "Warning: Uploaded file will replace current file"
 msgstr "Aviso: o ficheiro actual será eliminado de xeito permanente"
 
-#: common/forum/ForumHTML.class.php:517 common/forum/ForumHTML.class.php:582
+#: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:592
 msgid "Subject:"
 msgstr "Asunto:"
 
-#: common/forum/ForumHTML.class.php:520 common/forum/ForumHTML.class.php:585
+#: common/forum/ForumHTML.class.php:530 common/forum/ForumHTML.class.php:595
 msgid "Message:"
 msgstr "Mensaxe:"
 
-#: common/forum/ForumHTML.class.php:546
+#: common/forum/ForumHTML.class.php:556
 #: common/tracker/views/form-adminroadmap.php:167
 #: common/tracker/views/form-adminroadmap.php:235
 #: common/widget/Widget.class.php:103
@@ -2433,11 +2432,11 @@ msgstr "Mensaxe:"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: common/forum/ForumHTML.class.php:602
+#: common/forum/ForumHTML.class.php:612
 msgid "HTML tags will display in your post as text"
 msgstr "As etiquetas de HTML amosaranse na súa mensaxe como texto "
 
-#: common/forum/ForumHTML.class.php:609
+#: common/forum/ForumHTML.class.php:619
 #, php-format
 msgid ""
 "You are posting anonymously because you are not <a href=\"%1$s\">logged in</"
@@ -2446,24 +2445,24 @@ msgstr ""
 "Está a publicar de xeito anónimo porque non está <a href=\"%1$s\">conectado</"
 "a>"
 
-#: common/forum/ForumHTML.class.php:613
+#: common/forum/ForumHTML.class.php:623
 msgid "Post Comment"
 msgstr "Enviar comentario "
 
-#: common/forum/ForumHTML.class.php:613
+#: common/forum/ForumHTML.class.php:623
 msgid "Anonymously"
 msgstr "De xeito anónimo"
 
-#: common/forum/ForumHTML.class.php:614
+#: common/forum/ForumHTML.class.php:624
 msgid "Receive followups via email"
 msgstr "Recibir respostas por correo electrónico "
 
-#: common/forum/ForumHTML.class.php:626
+#: common/forum/ForumHTML.class.php:636
 #, php-format
 msgid "You could post if you were <a href=\"%1$s\">logged in</a>."
 msgstr "Podería comentar se estivese <a href=\"%1$s\">conectado</a>."
 
-#: common/forum/ForumHTML.class.php:630
+#: common/forum/ForumHTML.class.php:640
 #, php-format
 msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr "Por favor, <a href=\"%1$s\">conéctese</a>"
@@ -2488,7 +2487,7 @@ msgstr "errou a publicación do comentario "
 #: common/forum/ForumMessage.class.php:226
 #: common/forum/ForumMessage.class.php:327
 msgid "Unable to get new message id"
-msgstr "Mensaxe do foro::create() non se puido obter o id da mensaxe nova "
+msgstr "On se puido obter o id da mensaxe nova"
 
 #: common/forum/ForumMessage.class.php:183
 msgid "Could not Update Master Thread parent with current time"
@@ -2501,7 +2500,7 @@ msgid "Could Not Update Parent"
 msgstr "Non se pode actualizar a mensaxe superior "
 
 #: common/forum/ForumMessage.class.php:357
-#: common/forum/ForumMessage.class.php:802
+#: common/forum/ForumMessage.class.php:800
 msgid "Error: a forum message must include a message body and a subject."
 msgstr "Debe incluír o contido e o asunto da mensaxe."
 
@@ -2510,14 +2509,14 @@ msgstr "Debe incluír o contido e o asunto da mensaxe."
 msgid "Invalid ParentMessage Object"
 msgstr "o obxecto ParentMessage non é válido"
 
-#: common/forum/ForumMessage.class.php:407
-#: common/forum/ForumMessage.class.php:426
-#: common/forum/ForumMessage.class.php:579
+#: common/forum/ForumMessage.class.php:406
+#: common/forum/ForumMessage.class.php:424
+#: common/forum/ForumMessage.class.php:577
 #, fuzzy
 msgid "Invalid Message Id"
 msgstr "O ID da mensaxe non é válido"
 
-#: common/forum/ForumMessage.class.php:660
+#: common/forum/ForumMessage.class.php:658
 #, php-format
 msgid ""
 "\n"
@@ -2528,7 +2527,7 @@ msgstr ""
 "Lea e responda a esta mensaxe en: \n"
 "%s"
 
-#: common/forum/ForumMessage.class.php:662
+#: common/forum/ForumMessage.class.php:660
 #, fuzzy, php-format
 msgid ""
 "\n"
@@ -2545,7 +2544,7 @@ msgstr ""
 "(Introduza a súa resposta aquí)\n"
 "%1$s"
 
-#: common/forum/ForumMessage.class.php:668
+#: common/forum/ForumMessage.class.php:666
 #, php-format
 msgid ""
 "\n"
@@ -2558,11 +2557,11 @@ msgstr ""
 "\n"
 "Por: %s\n"
 
-#: common/forum/ForumMessage.class.php:673
+#: common/forum/ForumMessage.class.php:671
 msgid "A file has been uploaded with this message."
 msgstr "Subiuse un ficheiro con esta mensaxe."
 
-#: common/forum/ForumMessage.class.php:684
+#: common/forum/ForumMessage.class.php:682
 #, php-format
 msgid ""
 "You are receiving this email because you elected to monitor this forum.\n"
@@ -2573,7 +2572,7 @@ msgstr ""
 "Para deixar de monitorizalo, conéctese a %s e visite: \n"
 "%s\n"
 
-#: common/forum/ForumMessage.class.php:826
+#: common/forum/ForumMessage.class.php:824
 #, fuzzy
 msgid "Message not found"
 msgstr "Non se atopou a mensaxe"
@@ -2641,9 +2640,8 @@ msgid "FRSPackage Name Must Be At Least 3 Characters"
 msgstr "O nome do paquete de FRS debe ter, cando menos, 3 caracteres "
 
 #: common/frs/FRSPackage.class.php:143
-#, fuzzy
 msgid "Package Name can only be alphanumeric"
-msgstr "FRSPackage::Actualización: o nome do paquete só pode ser alfanumérico"
+msgstr "O nome do paquete só pode ser alfanumérico"
 
 #: common/frs/FRSPackage.class.php:154
 #, fuzzy
@@ -2982,7 +2980,7 @@ msgstr "Non se achou o grupo "
 
 #: common/include/Group.class.php:307
 msgid "Group object already exists"
-msgstr "Grupo::create: O obxecto de grupo xa existe"
+msgstr "O obxecto de grupo xa existe"
 
 #: common/include/Group.class.php:312 common/include/User.class.php:328
 #: common/include/User.class.php:388
@@ -3238,7 +3236,7 @@ msgstr "Este grupo xa está activo"
 msgid "Approved"
 msgstr "Aprobar/rexeitar "
 
-#: common/include/Group.class.php:2533 common/include/Group.class.php:2604
+#: common/include/Group.class.php:2533 common/include/Group.class.php:2603
 msgid "Group does not have any administrators."
 msgstr "O grupo non ten ningún administrador."
 
@@ -3322,7 +3320,7 @@ msgstr ""
 msgid "%1$s Project Approved"
 msgstr "O proxecto %1$s foi aprobado "
 
-#: common/include/Group.class.php:2611
+#: common/include/Group.class.php:2610
 #, php-format
 msgid ""
 "Your project registration for %3$s has been denied.\n"
@@ -3341,21 +3339,21 @@ msgstr ""
 "Razóns para o denegar:\n"
 "\n"
 
-#: common/include/Group.class.php:2630
+#: common/include/Group.class.php:2629
 #, php-format
 msgid "%1$s Project Denied"
 msgstr "O proxecto %1$s foi denegado "
 
-#: common/include/Group.class.php:2654
+#: common/include/Group.class.php:2653
 msgid "Could not find user who has submitted the project."
 msgstr "Non foi posíbel atopar o usuario que enviou o proxecto."
 
-#: common/include/Group.class.php:2661
+#: common/include/Group.class.php:2660
 #, fuzzy
 msgid "There is no administrator to send the mail to."
 msgstr "Non hai ningún administrador a quen enviarlle o correo."
 
-#: common/include/Group.class.php:2669
+#: common/include/Group.class.php:2668
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3372,12 +3370,12 @@ msgstr ""
 "Visite o seguinte URL para aprobar ou rexeitar este proxecto:\n"
 "%4$s"
 
-#: common/include/Group.class.php:2679
+#: common/include/Group.class.php:2678
 #, fuzzy, php-format
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "Enviados por %1$s (%2$s)"
 
-#: common/include/Group.class.php:2685
+#: common/include/Group.class.php:2684
 #, php-format
 msgid ""
 "\n"
@@ -3385,12 +3383,12 @@ msgid ""
 "%1$s"
 msgstr ""
 
-#: common/include/Group.class.php:2689 common/include/Group.class.php:2704
+#: common/include/Group.class.php:2688 common/include/Group.class.php:2703
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "Novo proxecto %1$s enviado"
 
-#: common/include/Group.class.php:2697
+#: common/include/Group.class.php:2696
 #, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3409,39 +3407,39 @@ msgstr ""
 "O equipo de administración de %1$s examinará o seu envío, e notificaráselle "
 "a súa decisión."
 
-#: common/include/Group.class.php:2719
+#: common/include/Group.class.php:2718
 msgid "Group name is too short"
 msgstr "O nome de grupo é demasiado corto"
 
-#: common/include/Group.class.php:2722
+#: common/include/Group.class.php:2721
 msgid "Group name is too long"
 msgstr "O nome de grupo é demasiado longo"
 
-#: common/include/Group.class.php:2725
+#: common/include/Group.class.php:2724
 msgid "Group name already taken"
 msgstr "O nome de grupo xa está en uso"
 
-#: common/include/Group.class.php:2807
+#: common/include/Group.class.php:2806
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr "ERRO: BD: Non se puido cambiar o estado de grupo: %s"
 
-#: common/include/Group.class.php:2870
+#: common/include/Group.class.php:2869
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#: common/include/Group.class.php:2888
+#: common/include/Group.class.php:2887
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#: common/include/Group.class.php:2906
+#: common/include/Group.class.php:2905
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#: common/include/Group.class.php:2924
+#: common/include/Group.class.php:2923
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
@@ -3511,15 +3509,15 @@ msgstr "Non se puido eliminar o foro de novas: %d"
 
 #: common/include/group_section_texts.php:29
 #: common/include/Navigation.class.php:425
-#: common/reporting/report_utils.php:149 common/reporting/report_utils.php:688
-#: common/reporting/report_utils.php:689 plugins/blocks/www/index.php:151
+#: common/reporting/report_utils.php:149 common/reporting/report_utils.php:690
+#: common/reporting/report_utils.php:691 plugins/blocks/www/index.php:151
 #: plugins/quota_management/www/quota_project.php:87
 #: www/export/rss20_activity.php:153
 msgid "Forums"
 msgstr "Foros "
 
 #: common/include/group_section_texts.php:30
-#: common/reporting/report_utils.php:709 plugins/blocks/www/index.php:152
+#: common/reporting/report_utils.php:711 plugins/blocks/www/index.php:152
 #: www/export/rss20_activity.php:120 www/export/rss20_activity.php:131
 #: www/reporting/toolspie.php:65
 msgid "Trackers"
@@ -3527,8 +3525,8 @@ msgstr "Rexistros "
 
 #: common/include/group_section_texts.php:31
 #: common/include/Navigation.class.php:473 common/include/rbac_texts.php:157
-#: common/reporting/report_utils.php:157 common/reporting/report_utils.php:198
-#: common/reporting/report_utils.php:701
+#: common/reporting/report_utils.php:157 common/reporting/report_utils.php:200
+#: common/reporting/report_utils.php:703
 #: common/widget/Widget_ProjectPublicAreas.class.php:148
 #: plugins/blocks/www/index.php:154 www/my/dashboard.php:77
 #: www/stats/site_stats_utils.php:242 www/stats/site_stats_utils.php:367
@@ -3537,7 +3535,7 @@ msgid "Tasks"
 msgstr "Tarefas "
 
 #: common/include/group_section_texts.php:32
-#: common/reporting/report_utils.php:677
+#: common/reporting/report_utils.php:679
 #: plugins/quota_management/www/quota_project.php:56
 #: www/search/include/SearchManager.class.php:153
 msgid "Documents"
@@ -3712,7 +3710,7 @@ msgid "Project Management."
 msgstr "Nome do proxecto"
 
 #: common/include/Navigation.class.php:488
-#: common/reporting/report_utils.php:153 common/reporting/report_utils.php:676
+#: common/reporting/report_utils.php:153 common/reporting/report_utils.php:678
 #: plugins/blocks/www/index.php:155
 msgid "Docs"
 msgstr "Documentos "
@@ -4422,57 +4420,57 @@ msgstr ""
 msgid "New %1$s User"
 msgstr "O equipo de %1$s"
 
-#: common/include/utils.php:191
+#: common/include/utils.php:193
 msgid "UTF-8"
 msgstr "UTF-8 "
 
-#: common/include/utils.php:488
+#: common/include/utils.php:490
 msgid "Priority Colors"
 msgstr "Cores das prioridades "
 
-#: common/include/utils.php:892 common/include/utils.php:896
-#: common/include/utils.php:907
+#: common/include/utils.php:894 common/include/utils.php:898
+#: common/include/utils.php:909
 msgid "bytes"
 msgstr "bytes"
 
-#: common/include/utils.php:892 common/include/utils.php:907
+#: common/include/utils.php:894 common/include/utils.php:909
 msgid "kB"
 msgstr ""
 
-#: common/include/utils.php:892
+#: common/include/utils.php:894
 msgid "MB"
 msgstr ""
 
-#: common/include/utils.php:892
+#: common/include/utils.php:894
 msgid "GB"
 msgstr ""
 
-#: common/include/utils.php:892
+#: common/include/utils.php:894
 msgid "TB"
 msgstr ""
 
-#: common/include/utils.php:896 common/include/utils.php:907
+#: common/include/utils.php:898 common/include/utils.php:909
 msgid "KiB"
 msgstr ""
 
-#: common/include/utils.php:896
+#: common/include/utils.php:898
 msgid "MiB"
 msgstr ""
 
-#: common/include/utils.php:896
+#: common/include/utils.php:898
 msgid "GiB"
 msgstr ""
 
-#: common/include/utils.php:896
+#: common/include/utils.php:898
 msgid "TiB"
 msgstr ""
 
-#: common/include/utils.php:1265
+#: common/include/utils.php:1267
 #, fuzzy
 msgid "Error: a mailing list with the same email address already exists."
 msgstr "Xa existe un usuario con este correo electrónico."
 
-#: common/include/utils.php:1283
+#: common/include/utils.php:1285
 #, fuzzy
 msgid "Error: a forum with the same email address already exists."
 msgstr "Xa existe un usuario con este correo electrónico."
@@ -4708,97 +4706,97 @@ msgstr "venres "
 msgid "Saturday"
 msgstr "sábado "
 
-#: common/reporting/report_utils.php:165 common/reporting/report_utils.php:694
-#: common/reporting/report_utils.php:695 www/stats/site_stats_utils.php:231
+#: common/reporting/report_utils.php:165 common/reporting/report_utils.php:696
+#: common/reporting/report_utils.php:697 www/stats/site_stats_utils.php:231
 #: www/top/toplist.php:38
 msgid "Page Views"
 msgstr "Visualizacións de páxina"
 
-#: common/reporting/report_utils.php:182 www/stats/site_stats_utils.php:236
+#: common/reporting/report_utils.php:184 www/stats/site_stats_utils.php:236
 #: www/stats/site_stats_utils.php:364 www/stats/site_stats_utils.php:418
 msgid "Bugs"
 msgstr "Erros "
 
-#: common/reporting/report_utils.php:183 www/stats/site_stats_utils.php:237
+#: common/reporting/report_utils.php:185 www/stats/site_stats_utils.php:237
 #: www/stats/site_stats_utils.php:365 www/stats/site_stats_utils.php:419
 msgid "Support"
 msgstr "Asistencia técnica"
 
-#: common/reporting/report_utils.php:184 www/stats/site_stats_utils.php:238
+#: common/reporting/report_utils.php:186 www/stats/site_stats_utils.php:238
 #: www/stats/site_stats_utils.php:366 www/stats/site_stats_utils.php:420
 msgid "Patches"
 msgstr "Parches "
 
-#: common/reporting/report_utils.php:185
+#: common/reporting/report_utils.php:187
 msgid "Feature Requests"
 msgstr "Solicitude de funcionalidade "
 
-#: common/reporting/report_utils.php:186
+#: common/reporting/report_utils.php:188
 msgid "Other Trackers"
 msgstr "Outros rexistros "
 
-#: common/reporting/report_utils.php:194
+#: common/reporting/report_utils.php:196
 msgid "Forum Messages"
 msgstr "Mensaxes en foros "
 
-#: common/reporting/report_utils.php:240 www/snippet/snippet_utils.php:38
+#: common/reporting/report_utils.php:242 www/snippet/snippet_utils.php:38
 #: www/snippet/snippet_utils.php:64
 msgid "Other"
 msgstr "Outro"
 
-#: common/reporting/report_utils.php:259 common/reporting/report_utils.php:382
+#: common/reporting/report_utils.php:261 common/reporting/report_utils.php:384
 #, fuzzy
 msgid "No selected area."
 msgstr "a data seleccionada"
 
-#: common/reporting/report_utils.php:272
+#: common/reporting/report_utils.php:274
 msgid "Avg Time Open (in days)"
 msgstr ""
 
-#: common/reporting/report_utils.php:274
+#: common/reporting/report_utils.php:276
 #, fuzzy
 msgid "Total Opened"
 msgstr "Data de apertura"
 
-#: common/reporting/report_utils.php:276
+#: common/reporting/report_utils.php:278
 msgid "Total Still Open"
 msgstr ""
 
-#: common/reporting/report_utils.php:322
+#: common/reporting/report_utils.php:324
 #, fuzzy
 msgid "Tracker Activity"
 msgstr "Informe de horas de usuario"
 
-#: common/reporting/report_utils.php:393
+#: common/reporting/report_utils.php:395
 #, fuzzy
 msgid "Per assignee"
 msgstr "Asignado a"
 
-#: common/reporting/report_utils.php:440 www/reporting/usercum.php:59
+#: common/reporting/report_utils.php:442 www/reporting/usercum.php:59
 msgid "Cumulative Users"
 msgstr "Total de usuarios"
 
-#: common/reporting/report_utils.php:445 www/reporting/useradded.php:59
+#: common/reporting/report_utils.php:447 www/reporting/useradded.php:59
 msgid "Users Added"
 msgstr "Usuarios engadidos"
 
-#: common/reporting/report_utils.php:450 www/reporting/groupadded.php:59
+#: common/reporting/report_utils.php:452 www/reporting/groupadded.php:59
 msgid "Projects Added"
 msgstr "Proxectos engadidos"
 
-#: common/reporting/report_utils.php:455 www/reporting/groupcum.php:59
+#: common/reporting/report_utils.php:457 www/reporting/groupcum.php:59
 msgid "Cumulative Projects"
 msgstr "Total de proxectos"
 
-#: common/reporting/report_utils.php:466 common/reporting/report_utils.php:638
-#: common/reporting/report_utils.php:988
-#: common/reporting/report_utils.php:1052
-#: common/reporting/report_utils.php:1155
+#: common/reporting/report_utils.php:468 common/reporting/report_utils.php:640
+#: common/reporting/report_utils.php:991
+#: common/reporting/report_utils.php:1055
+#: common/reporting/report_utils.php:1158
 #, fuzzy
 msgid "No data to display."
 msgstr "Non se atopou ningunha pregunta"
 
-#: common/reporting/report_utils.php:612 plugins/authopenid/www/index.php:38
+#: common/reporting/report_utils.php:614 plugins/authopenid/www/index.php:38
 #: plugins/authwebid/www/index.php:35 www/account/change_email-complete.php:52
 #: www/account/change_email.php:46 www/account/change_pw.php:32
 #: www/account/editsshkeys.php:39 www/account/index.php:36
@@ -4810,37 +4808,37 @@ msgstr "Non se atopou ningunha pregunta"
 msgid "Could Not Get User"
 msgstr "Non se puido obter o Rol"
 
-#: common/reporting/report_utils.php:702
+#: common/reporting/report_utils.php:704
 #, fuzzy
 msgid "Task open"
 msgstr "Rexistro aberto"
 
-#: common/reporting/report_utils.php:703
+#: common/reporting/report_utils.php:705
 #, fuzzy
 msgid "Task close"
 msgstr "Rexistro pechado"
 
-#: common/reporting/report_utils.php:710
+#: common/reporting/report_utils.php:712
 #, fuzzy
 msgid "Tracker items opened"
 msgstr "Elementos de rexistro abertos"
 
-#: common/reporting/report_utils.php:711
+#: common/reporting/report_utils.php:713
 #, fuzzy
 msgid "Tracker items closed"
 msgstr "Elementos de rexistro pechados"
 
-#: common/reporting/report_utils.php:1075
+#: common/reporting/report_utils.php:1078
 #, fuzzy
 msgid "Hours Recorded"
 msgstr "Avaliacións gardadas"
 
-#: common/reporting/report_utils.php:1079
+#: common/reporting/report_utils.php:1082
 #, fuzzy
 msgid " Hours"
 msgstr "Horas"
 
-#: common/reporting/TimeEntry.class.php:92 www/reporting/timeadd.php:93
+#: common/reporting/TimeEntry.class.php:94 www/reporting/timeadd.php:93
 #: www/reporting/timecategory.php:42
 msgid "Successfully Added"
 msgstr "Engadiuse correctamente "
@@ -6085,9 +6083,8 @@ msgid "Error updating artifact counts: "
 msgstr "Houbo un erro actualizando a información do proxecto: %s"
 
 #: common/tracker/Artifact.class.php:610
-#, fuzzy
 msgid "Valid Email Address Required"
-msgstr "Monitorizar::é necesario un correo electrónico válido"
+msgstr "É necesario un correo electrónico válido"
 
 #: common/tracker/Artifact.class.php:628
 msgid "Now Monitoring Artifact"
@@ -7070,7 +7067,7 @@ msgstr ""
 
 #: common/tracker/views/form-deletetracker.php:32
 #: www/admin/responses_admin.php:51 www/frs/admin/deletepackage.php:68
-#: www/frs/admin/editrelease.php:381 www/reporting/rebuild.php:62
+#: www/frs/admin/editrelease.php:381 www/reporting/rebuild.php:63
 msgid "I am Sure"
 msgstr "Estou seguro "
 
@@ -17164,7 +17161,7 @@ msgstr ""
 msgid "Complete"
 msgstr "Completo"
 
-#: www/export/rssAboTask.php:161 www/news/news_utils.php:177
+#: www/export/rssAboTask.php:161 www/news/news_utils.php:179
 #: www/pm/include/ProjectTaskHTML.class.php:156
 msgid "Comment"
 msgstr "Comentario "
@@ -19290,27 +19287,27 @@ msgstr "Non se atoparon novas"
 msgid "View News"
 msgstr "Usar as novas"
 
-#: www/news/news_utils.php:115 www/news/news_utils.php:246
+#: www/news/news_utils.php:117 www/news/news_utils.php:248
 msgid "No News Items Found"
 msgstr "Non se atoparon elementos novos"
 
-#: www/news/news_utils.php:179 www/survey/include/SurveyHTML.class.php:652
+#: www/news/news_utils.php:181 www/survey/include/SurveyHTML.class.php:652
 msgid "Comments"
 msgstr "Comentarios "
 
-#: www/news/news_utils.php:183
+#: www/news/news_utils.php:185
 msgid "Read&nbsp;More/Comment"
 msgstr "Ler&nbsp;máis/Comentar"
 
-#: www/news/news_utils.php:210
+#: www/news/news_utils.php:212
 msgid "News archive"
 msgstr "Arquivo de novas"
 
-#: www/news/news_utils.php:222
+#: www/news/news_utils.php:224
 msgid "Submit News"
 msgstr "Enviar novas"
 
-#: www/news/news_utils.php:280
+#: www/news/news_utils.php:282
 #, fuzzy
 msgid "Not Found"
 msgstr "Non se achou ningún "
@@ -22038,7 +22035,7 @@ msgstr ""
 msgid "This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE."
 msgstr ""
 
-#: www/reporting/rebuild.php:65
+#: www/reporting/rebuild.php:67
 msgid "Press ONLY ONCE"
 msgstr "Prema só UNHA VEZ"
 
@@ -24211,9 +24208,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "No Valid Forum Object"
 #~ msgstr "non é un obxecto válido de foro "
 
-#~ msgid "ForumMessage::create() No Valid ParentMessage Object"
-#~ msgstr "ForumMessage::create() o obxecto ParentMessage non é válido"
-
 #~ msgid "Invalid Unix name"
 #~ msgstr "O nome unix non é válido"
 
@@ -24514,12 +24508,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "Error in insert"
 #~ msgstr "Produciuse un erro ao inserir"
 
-#~ msgid "fetchData():: %s"
-#~ msgstr "fetchData():: %s"
-
-#~ msgid "Group::create: Group object already exists"
-#~ msgstr "Grupo::create: O obxecto de grupo xa existe"
-
 #~ msgid "ERROR: Could not create group: %s"
 #~ msgstr "ERRO: Non se puido crear o grupo: %s"
 
@@ -24545,37 +24533,12 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "ERROR - Could Not Update Group Unix Status: %s"
 #~ msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#~ msgid "ForumMessage:: No Valid Forum Object"
-#~ msgstr "ForumMessage:: non é un obxecto válido de foro "
-
-#~ msgid "ForumMessage::create() Posting Failed"
-#~ msgstr "ForumMessage::create() errou a publicación do comentario "
-
-#~ msgid "ForumMessage::create() Unable to get new message id"
-#~ msgstr "Mensaxe do foro::create() non se puido obter o id da mensaxe nova "
-
 #, fuzzy
 #~ msgid "Error: a forum message must iclude a message body and a subject."
 #~ msgstr "Debe incluír o contido e o asunto da mensaxe "
 
-#~ msgid "ForumMessage::fetchData() Invalid MessageID"
-#~ msgstr "ForumMessage::fetchData() o MessageID non é válido"
-
-#~ msgid "%1$s:: No Valid Group Object"
-#~ msgstr "%1$s:: Non hai obxectos de grupo válidos"
-
 #~ msgid "Error Creating %1$s"
 #~ msgstr "Produciuse un erro ao crear %1$s"
-
-#~ msgid "Forum:: No Valid Group Object"
-#~ msgstr "Foro:: o obxecto do grupo non é válido"
-
-#, fuzzy
-#~ msgid "Forums: No Valid Group Object"
-#~ msgstr "Foro:: o obxecto do grupo non é válido"
-
-#~ msgid "Forum::savePlace()"
-#~ msgstr "Foro::savePlace()"
 
 #, fuzzy
 #~ msgid ""
@@ -25646,14 +25609,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgstr "Remitente"
 
 #, fuzzy
-#~ msgid "ProjectGroup:: No Valid Group Object"
-#~ msgstr "Foro:: o obxecto do grupo non é válido"
-
-#, fuzzy
-#~ msgid "Document Directory: No Valid Project"
-#~ msgstr "Foro:: o obxecto do grupo non é válido"
-
-#, fuzzy
 #~ msgid "Document Directory:"
 #~ msgstr "Título do documento "
 
@@ -25668,10 +25623,6 @@ msgstr "Non se introduciu un nome de usuario"
 #, fuzzy
 #~ msgid "no description"
 #~ msgstr "Descrición:"
-
-#, fuzzy
-#~ msgid "DocumentGroupFactory:: Invalid Project"
-#~ msgstr "Documento:: docid non válido"
 
 #, fuzzy
 #~ msgid "Created_by:"
@@ -26222,10 +26173,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgstr "O documento enviouse correctamente "
 
 #, fuzzy
-#~ msgid "DocumentGroupHTML:: Invalid Project"
-#~ msgstr "Documento:: docid non válido"
-
-#, fuzzy
 #~ msgid "Invalid DocumentGroup ID"
 #~ msgstr "DocumentGroup: ID do DocumentGroup non válido"
 
@@ -26474,7 +26421,7 @@ msgstr "Non se introduciu un nome de usuario"
 #~ "válido</li><li>Non pode coincidir co nome dalgún dos nosos dominios</"
 #~ "li><li>O nome unix nunca cambiará para este proxecto</li></ul><p/>No "
 #~ "entanto, o seu nome unix é importante porque se usará para moitas cousas, "
-#~ "incluíndo::<ul><li>Un sitio web en  <tt>unixname.%1$s</tt></li><li>Un "
+#~ "incluíndo:<ul><li>Un sitio web en  <tt>unixname.%1$s</tt></li><li>Un "
 #~ "repositorio de CVS <tt>/cvsroot/unixname</tt> en <tt>cvs.unixname.%1$s</"
 #~ "tt></li><li>Acceso de consola a <tt>unixname.%1$s</tt></li><li>Motores de "
 #~ "busca ao longo de todo o sitio</li></ul><p/>Nome unix:<br/>"

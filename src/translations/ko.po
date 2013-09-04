@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-30 17:47+0200\n"
+"POT-Creation-Date: 2013-09-04 19:11+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -292,7 +292,7 @@ msgstr "성공적으로 갱신되었습니다."
 #: common/tracker/ArtifactTypes.class.php:54
 #, fuzzy
 msgid "No Valid Group Object"
-msgstr "%1$s:: 유효한 그룹 객체가 없습니다."
+msgstr "유효한 그룹 객체가 없습니다."
 
 #: common/docman/Document.class.php:83
 #, fuzzy
@@ -1322,8 +1322,8 @@ msgstr ""
 #: www/export/rss20_docman.php:136 www/export/rss20_docman.php:138
 #: www/export/tracker.php:108 www/forum/index.php:90 www/forum/message.php:127
 #: www/forum/myforums.php:152 www/frs/index.php:178 www/frs/index.php:237
-#: www/include/html.php:1041 www/news/news_utils.php:147
-#: www/news/news_utils.php:267 www/people/people_utils.php:422
+#: www/include/html.php:1041 www/news/news_utils.php:149
+#: www/news/news_utils.php:269 www/people/people_utils.php:422
 #: www/people/viewjob.php:78 www/pm/browse_task.php:265
 #: www/pm/browse_task.php:275 www/pm/include/ProjectTaskHTML.class.php:122
 #: www/pm/include/ProjectTaskHTML.class.php:175
@@ -1599,7 +1599,7 @@ msgstr ""
 
 #: common/docman/views/reporting.php:93 common/docman/views/reporting.php:95
 #: common/frs/FRSRelease.class.php:294 common/frs/FRSRelease.class.php:297
-#: common/frs/FRSRelease.class.php:301 common/include/utils.php:488
+#: common/frs/FRSRelease.class.php:301 common/include/utils.php:490
 #: common/tracker/actions/query.php:403
 #: common/tracker/views/form-addcanned.php:68
 #: common/tracker/views/form-addcanned.php:71
@@ -1773,8 +1773,8 @@ msgid "Month"
 msgstr "Month"
 
 #: common/docman/views/reporting.php:151 common/reporting/report_utils.php:161
-#: common/reporting/report_utils.php:202 common/reporting/report_utils.php:682
-#: common/reporting/report_utils.php:683 www/frs/reporting/downloads.php:178
+#: common/reporting/report_utils.php:204 common/reporting/report_utils.php:684
+#: common/reporting/report_utils.php:685 www/frs/reporting/downloads.php:178
 #: www/stats/site_stats_utils.php:233 www/stats/site_stats_utils.php:363
 #: www/stats/site_stats_utils.php:417 www/stats/site_stats_utils.php:476
 #: www/top/toplist.php:49
@@ -2094,7 +2094,7 @@ msgid "Release"
 msgstr "릴리즈"
 
 #: common/forum/ForumAdmin.class.php:357 common/forum/ForumHTML.class.php:330
-#: common/forum/ForumHTML.class.php:545
+#: common/forum/ForumHTML.class.php:555
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
 #: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:68
@@ -2356,7 +2356,7 @@ msgstr "새글 올리기"
 #: common/forum/ForumHTML.class.php:181 common/forum/ForumMessage.class.php:60
 #, fuzzy
 msgid "Invalid Forum Object"
-msgstr "%1$s:: 유효한 그룹 객체가 없습니다."
+msgstr "유효한 그룹 객체가 없습니다."
 
 #: common/forum/ForumHTML.class.php:205
 msgid "This is the content of the pending message"
@@ -2395,15 +2395,15 @@ msgstr ""
 msgid "Warning: Uploaded file will replace current file"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:517 common/forum/ForumHTML.class.php:582
+#: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:592
 msgid "Subject:"
 msgstr "제목:"
 
-#: common/forum/ForumHTML.class.php:520 common/forum/ForumHTML.class.php:585
+#: common/forum/ForumHTML.class.php:530 common/forum/ForumHTML.class.php:595
 msgid "Message:"
 msgstr "글:"
 
-#: common/forum/ForumHTML.class.php:546
+#: common/forum/ForumHTML.class.php:556
 #: common/tracker/views/form-adminroadmap.php:167
 #: common/tracker/views/form-adminroadmap.php:235
 #: common/widget/Widget.class.php:103
@@ -2425,36 +2425,36 @@ msgstr "글:"
 msgid "Cancel"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:602
+#: common/forum/ForumHTML.class.php:612
 msgid "HTML tags will display in your post as text"
 msgstr "HTML 태그는 해석되지 않고 본문에서 문자 그대로 보입니다."
 
-#: common/forum/ForumHTML.class.php:609
+#: common/forum/ForumHTML.class.php:619
 #, fuzzy, php-format
 msgid ""
 "You are posting anonymously because you are not <a href=\"%1$s\">logged in</"
 "a>"
 msgstr "익명으로 글을 올립니다."
 
-#: common/forum/ForumHTML.class.php:613
+#: common/forum/ForumHTML.class.php:623
 msgid "Post Comment"
 msgstr "답글 올리기"
 
-#: common/forum/ForumHTML.class.php:613
+#: common/forum/ForumHTML.class.php:623
 #, fuzzy
 msgid "Anonymously"
 msgstr "익명 FTP 공간"
 
-#: common/forum/ForumHTML.class.php:614
+#: common/forum/ForumHTML.class.php:624
 msgid "Receive followups via email"
 msgstr "이 글에 대한 답글을 이메일로 받아보기"
 
-#: common/forum/ForumHTML.class.php:626
+#: common/forum/ForumHTML.class.php:636
 #, fuzzy, php-format
 msgid "You could post if you were <a href=\"%1$s\">logged in</a>."
 msgstr "%1$s 로그인 %2$s 하시면 글을 올릴 수 있습니다."
 
-#: common/forum/ForumHTML.class.php:630
+#: common/forum/ForumHTML.class.php:640
 #, php-format
 msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr ""
@@ -2479,9 +2479,8 @@ msgstr "존재하는 파일"
 #: common/forum/ForumMessage.class.php:141
 #: common/forum/ForumMessage.class.php:226
 #: common/forum/ForumMessage.class.php:327
-#, fuzzy
 msgid "Unable to get new message id"
-msgstr "ForumMessage::create() Unable to get new message id"
+msgstr ""
 
 #: common/forum/ForumMessage.class.php:183
 msgid "Could not Update Master Thread parent with current time"
@@ -2491,10 +2490,10 @@ msgstr ""
 #: common/forum/ForumMessage.class.php:287
 #: common/forum/ForumMessage.class.php:299
 msgid "Could Not Update Parent"
-msgstr "Could Not Update Parent"
+msgstr ""
 
 #: common/forum/ForumMessage.class.php:357
-#: common/forum/ForumMessage.class.php:802
+#: common/forum/ForumMessage.class.php:800
 #, fuzzy
 msgid "Error: a forum message must include a message body and a subject."
 msgstr "Must Include A Message Body And Subject"
@@ -2504,14 +2503,14 @@ msgstr "Must Include A Message Body And Subject"
 msgid "Invalid ParentMessage Object"
 msgstr "유효하지 않은 사용자입니다."
 
-#: common/forum/ForumMessage.class.php:407
-#: common/forum/ForumMessage.class.php:426
-#: common/forum/ForumMessage.class.php:579
+#: common/forum/ForumMessage.class.php:406
+#: common/forum/ForumMessage.class.php:424
+#: common/forum/ForumMessage.class.php:577
 #, fuzzy
 msgid "Invalid Message Id"
 msgstr "유효하지 않은 이메일 주소"
 
-#: common/forum/ForumMessage.class.php:660
+#: common/forum/ForumMessage.class.php:658
 #, php-format
 msgid ""
 "\n"
@@ -2519,7 +2518,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:662
+#: common/forum/ForumMessage.class.php:660
 #, php-format
 msgid ""
 "\n"
@@ -2530,7 +2529,7 @@ msgid ""
 "%1$s"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:668
+#: common/forum/ForumMessage.class.php:666
 #, php-format
 msgid ""
 "\n"
@@ -2539,11 +2538,11 @@ msgid ""
 "By: %s\n"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:673
+#: common/forum/ForumMessage.class.php:671
 msgid "A file has been uploaded with this message."
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:684
+#: common/forum/ForumMessage.class.php:682
 #, php-format
 msgid ""
 "You are receiving this email because you elected to monitor this forum.\n"
@@ -2551,7 +2550,7 @@ msgid ""
 "%s\n"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:826
+#: common/forum/ForumMessage.class.php:824
 #, fuzzy
 msgid "Message not found"
 msgstr "글이 없습니다."
@@ -2617,7 +2616,7 @@ msgstr "릴리즈 이름은 3글자 이상이어야 합니다."
 #: common/frs/FRSPackage.class.php:143
 #, fuzzy
 msgid "Package Name can only be alphanumeric"
-msgstr "패키지::업데이트: 패키지 이름은 숫자/영문으로만 이루어져야 합니다."
+msgstr "패키지 이름은 숫자/영문으로만 이루어져야 합니다."
 
 #: common/frs/FRSPackage.class.php:154
 #, fuzzy
@@ -3203,7 +3202,7 @@ msgstr "계정이 이미 활성화되어 있습니다."
 msgid "Approved"
 msgstr "승인"
 
-#: common/include/Group.class.php:2533 common/include/Group.class.php:2604
+#: common/include/Group.class.php:2533 common/include/Group.class.php:2603
 msgid "Group does not have any administrators."
 msgstr ""
 
@@ -3289,7 +3288,7 @@ msgstr ""
 msgid "%1$s Project Approved"
 msgstr "%1$s 프로젝트가 승인되었습니다."
 
-#: common/include/Group.class.php:2611
+#: common/include/Group.class.php:2610
 #, php-format
 msgid ""
 "Your project registration for %3$s has been denied.\n"
@@ -3308,20 +3307,20 @@ msgstr ""
 "거부 이유:\n"
 "\n"
 
-#: common/include/Group.class.php:2630
+#: common/include/Group.class.php:2629
 #, php-format
 msgid "%1$s Project Denied"
 msgstr "%1$s 프로젝트가 거부되었습니다."
 
-#: common/include/Group.class.php:2654
+#: common/include/Group.class.php:2653
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2661
+#: common/include/Group.class.php:2660
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2669
+#: common/include/Group.class.php:2668
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3338,12 +3337,12 @@ msgstr ""
 "다음 URL을 방문하여 이 프로젝트를 승인하거나 거부하십시오.\n"
 "%5$s"
 
-#: common/include/Group.class.php:2679
+#: common/include/Group.class.php:2678
 #, fuzzy, php-format
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "제출자"
 
-#: common/include/Group.class.php:2685
+#: common/include/Group.class.php:2684
 #, php-format
 msgid ""
 "\n"
@@ -3351,12 +3350,12 @@ msgid ""
 "%1$s"
 msgstr ""
 
-#: common/include/Group.class.php:2689 common/include/Group.class.php:2704
+#: common/include/Group.class.php:2688 common/include/Group.class.php:2703
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "%1$s 프로젝트가 제출되었습니다."
 
-#: common/include/Group.class.php:2697
+#: common/include/Group.class.php:2696
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3376,42 +3375,42 @@ msgstr ""
 "%1$s의 관리자가 제출 상황을 점검할 것입니다. 결과는 이메일로 통보받으실 수 있"
 "습니다."
 
-#: common/include/Group.class.php:2719
+#: common/include/Group.class.php:2718
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Group Name (click to edit)"
 
-#: common/include/Group.class.php:2722
+#: common/include/Group.class.php:2721
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Group Name (click to edit)"
 
-#: common/include/Group.class.php:2725
+#: common/include/Group.class.php:2724
 #, fuzzy
 msgid "Group name already taken"
 msgstr "이미 존재하는 유닉스 이름입니다."
 
-#: common/include/Group.class.php:2807
+#: common/include/Group.class.php:2806
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2870
+#: common/include/Group.class.php:2869
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2888
+#: common/include/Group.class.php:2887
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2906
+#: common/include/Group.class.php:2905
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2924
+#: common/include/Group.class.php:2923
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
@@ -3478,15 +3477,15 @@ msgstr "Could Not Complete Operation"
 
 #: common/include/group_section_texts.php:29
 #: common/include/Navigation.class.php:425
-#: common/reporting/report_utils.php:149 common/reporting/report_utils.php:688
-#: common/reporting/report_utils.php:689 plugins/blocks/www/index.php:151
+#: common/reporting/report_utils.php:149 common/reporting/report_utils.php:690
+#: common/reporting/report_utils.php:691 plugins/blocks/www/index.php:151
 #: plugins/quota_management/www/quota_project.php:87
 #: www/export/rss20_activity.php:153
 msgid "Forums"
 msgstr "게시판"
 
 #: common/include/group_section_texts.php:30
-#: common/reporting/report_utils.php:709 plugins/blocks/www/index.php:152
+#: common/reporting/report_utils.php:711 plugins/blocks/www/index.php:152
 #: www/export/rss20_activity.php:120 www/export/rss20_activity.php:131
 #: www/reporting/toolspie.php:65
 msgid "Trackers"
@@ -3494,8 +3493,8 @@ msgstr ""
 
 #: common/include/group_section_texts.php:31
 #: common/include/Navigation.class.php:473 common/include/rbac_texts.php:157
-#: common/reporting/report_utils.php:157 common/reporting/report_utils.php:198
-#: common/reporting/report_utils.php:701
+#: common/reporting/report_utils.php:157 common/reporting/report_utils.php:200
+#: common/reporting/report_utils.php:703
 #: common/widget/Widget_ProjectPublicAreas.class.php:148
 #: plugins/blocks/www/index.php:154 www/my/dashboard.php:77
 #: www/stats/site_stats_utils.php:242 www/stats/site_stats_utils.php:367
@@ -3504,7 +3503,7 @@ msgid "Tasks"
 msgstr "Tasks"
 
 #: common/include/group_section_texts.php:32
-#: common/reporting/report_utils.php:677
+#: common/reporting/report_utils.php:679
 #: plugins/quota_management/www/quota_project.php:56
 #: www/search/include/SearchManager.class.php:153
 msgid "Documents"
@@ -3683,7 +3682,7 @@ msgid "Project Management."
 msgstr "새 프로젝트 이름"
 
 #: common/include/Navigation.class.php:488
-#: common/reporting/report_utils.php:153 common/reporting/report_utils.php:676
+#: common/reporting/report_utils.php:153 common/reporting/report_utils.php:678
 #: plugins/blocks/www/index.php:155
 msgid "Docs"
 msgstr "문서"
@@ -4388,58 +4387,58 @@ msgstr ""
 msgid "New %1$s User"
 msgstr "The %1$s Team"
 
-#: common/include/utils.php:191
+#: common/include/utils.php:193
 msgid "UTF-8"
 msgstr ""
 
-#: common/include/utils.php:488
+#: common/include/utils.php:490
 msgid "Priority Colors"
 msgstr "우선순위"
 
-#: common/include/utils.php:892 common/include/utils.php:896
-#: common/include/utils.php:907
+#: common/include/utils.php:894 common/include/utils.php:898
+#: common/include/utils.php:909
 #, fuzzy
 msgid "bytes"
 msgstr "예"
 
-#: common/include/utils.php:892 common/include/utils.php:907
+#: common/include/utils.php:894 common/include/utils.php:909
 msgid "kB"
 msgstr ""
 
-#: common/include/utils.php:892
+#: common/include/utils.php:894
 msgid "MB"
 msgstr ""
 
-#: common/include/utils.php:892
+#: common/include/utils.php:894
 msgid "GB"
 msgstr ""
 
-#: common/include/utils.php:892
+#: common/include/utils.php:894
 msgid "TB"
 msgstr ""
 
-#: common/include/utils.php:896 common/include/utils.php:907
+#: common/include/utils.php:898 common/include/utils.php:909
 msgid "KiB"
 msgstr ""
 
-#: common/include/utils.php:896
+#: common/include/utils.php:898
 msgid "MiB"
 msgstr ""
 
-#: common/include/utils.php:896
+#: common/include/utils.php:898
 msgid "GiB"
 msgstr ""
 
-#: common/include/utils.php:896
+#: common/include/utils.php:898
 msgid "TiB"
 msgstr ""
 
-#: common/include/utils.php:1265
+#: common/include/utils.php:1267
 #, fuzzy
 msgid "Error: a mailing list with the same email address already exists."
 msgstr "사용자 ID가 이미 존재합니다."
 
-#: common/include/utils.php:1283
+#: common/include/utils.php:1285
 #, fuzzy
 msgid "Error: a forum with the same email address already exists."
 msgstr "사용자 ID가 이미 존재합니다."
@@ -4659,97 +4658,97 @@ msgstr "금요일"
 msgid "Saturday"
 msgstr "토요일"
 
-#: common/reporting/report_utils.php:165 common/reporting/report_utils.php:694
-#: common/reporting/report_utils.php:695 www/stats/site_stats_utils.php:231
+#: common/reporting/report_utils.php:165 common/reporting/report_utils.php:696
+#: common/reporting/report_utils.php:697 www/stats/site_stats_utils.php:231
 #: www/top/toplist.php:38
 msgid "Page Views"
 msgstr "Page Views"
 
-#: common/reporting/report_utils.php:182 www/stats/site_stats_utils.php:236
+#: common/reporting/report_utils.php:184 www/stats/site_stats_utils.php:236
 #: www/stats/site_stats_utils.php:364 www/stats/site_stats_utils.php:418
 msgid "Bugs"
 msgstr "Bugs"
 
-#: common/reporting/report_utils.php:183 www/stats/site_stats_utils.php:237
+#: common/reporting/report_utils.php:185 www/stats/site_stats_utils.php:237
 #: www/stats/site_stats_utils.php:365 www/stats/site_stats_utils.php:419
 msgid "Support"
 msgstr "Support"
 
-#: common/reporting/report_utils.php:184 www/stats/site_stats_utils.php:238
+#: common/reporting/report_utils.php:186 www/stats/site_stats_utils.php:238
 #: www/stats/site_stats_utils.php:366 www/stats/site_stats_utils.php:420
 msgid "Patches"
 msgstr "Patches"
 
-#: common/reporting/report_utils.php:185
+#: common/reporting/report_utils.php:187
 msgid "Feature Requests"
 msgstr ""
 
-#: common/reporting/report_utils.php:186
+#: common/reporting/report_utils.php:188
 msgid "Other Trackers"
 msgstr ""
 
-#: common/reporting/report_utils.php:194
+#: common/reporting/report_utils.php:196
 msgid "Forum Messages"
 msgstr ""
 
-#: common/reporting/report_utils.php:240 www/snippet/snippet_utils.php:38
+#: common/reporting/report_utils.php:242 www/snippet/snippet_utils.php:38
 #: www/snippet/snippet_utils.php:64
 msgid "Other"
 msgstr "Other"
 
-#: common/reporting/report_utils.php:259 common/reporting/report_utils.php:382
+#: common/reporting/report_utils.php:261 common/reporting/report_utils.php:384
 #, fuzzy
 msgid "No selected area."
 msgstr "릴리즈 날짜"
 
-#: common/reporting/report_utils.php:272
+#: common/reporting/report_utils.php:274
 msgid "Avg Time Open (in days)"
 msgstr ""
 
-#: common/reporting/report_utils.php:274
+#: common/reporting/report_utils.php:276
 #, fuzzy
 msgid "Total Opened"
 msgstr "Date Opened"
 
-#: common/reporting/report_utils.php:276
+#: common/reporting/report_utils.php:278
 msgid "Total Still Open"
 msgstr ""
 
-#: common/reporting/report_utils.php:322
+#: common/reporting/report_utils.php:324
 #, fuzzy
 msgid "Tracker Activity"
 msgstr "추적 항목"
 
-#: common/reporting/report_utils.php:393
+#: common/reporting/report_utils.php:395
 #, fuzzy
 msgid "Per assignee"
 msgstr "담당자"
 
-#: common/reporting/report_utils.php:440 www/reporting/usercum.php:59
+#: common/reporting/report_utils.php:442 www/reporting/usercum.php:59
 msgid "Cumulative Users"
 msgstr ""
 
-#: common/reporting/report_utils.php:445 www/reporting/useradded.php:59
+#: common/reporting/report_utils.php:447 www/reporting/useradded.php:59
 msgid "Users Added"
 msgstr ""
 
-#: common/reporting/report_utils.php:450 www/reporting/groupadded.php:59
+#: common/reporting/report_utils.php:452 www/reporting/groupadded.php:59
 msgid "Projects Added"
 msgstr ""
 
-#: common/reporting/report_utils.php:455 www/reporting/groupcum.php:59
+#: common/reporting/report_utils.php:457 www/reporting/groupcum.php:59
 msgid "Cumulative Projects"
 msgstr ""
 
-#: common/reporting/report_utils.php:466 common/reporting/report_utils.php:638
-#: common/reporting/report_utils.php:988
-#: common/reporting/report_utils.php:1052
-#: common/reporting/report_utils.php:1155
+#: common/reporting/report_utils.php:468 common/reporting/report_utils.php:640
+#: common/reporting/report_utils.php:991
+#: common/reporting/report_utils.php:1055
+#: common/reporting/report_utils.php:1158
 #, fuzzy
 msgid "No data to display."
 msgstr "%1$s questions found"
 
-#: common/reporting/report_utils.php:612 plugins/authopenid/www/index.php:38
+#: common/reporting/report_utils.php:614 plugins/authopenid/www/index.php:38
 #: plugins/authwebid/www/index.php:35 www/account/change_email-complete.php:52
 #: www/account/change_email.php:46 www/account/change_pw.php:32
 #: www/account/editsshkeys.php:39 www/account/index.php:36
@@ -4761,36 +4760,36 @@ msgstr "%1$s questions found"
 msgid "Could Not Get User"
 msgstr "Could Not Complete Operation"
 
-#: common/reporting/report_utils.php:702
+#: common/reporting/report_utils.php:704
 #, fuzzy
 msgid "Task open"
 msgstr "임무 번호"
 
-#: common/reporting/report_utils.php:703
+#: common/reporting/report_utils.php:705
 #, fuzzy
 msgid "Task close"
 msgstr "종료일"
 
-#: common/reporting/report_utils.php:710
+#: common/reporting/report_utils.php:712
 #, fuzzy
 msgid "Tracker items opened"
 msgstr "추적 항목"
 
-#: common/reporting/report_utils.php:711
+#: common/reporting/report_utils.php:713
 #, fuzzy
 msgid "Tracker items closed"
 msgstr "추적 항목"
 
-#: common/reporting/report_utils.php:1075
+#: common/reporting/report_utils.php:1078
 #, fuzzy
 msgid "Hours Recorded"
 msgstr "평가정보가 기록되었습니다."
 
-#: common/reporting/report_utils.php:1079
+#: common/reporting/report_utils.php:1082
 msgid " Hours"
 msgstr ""
 
-#: common/reporting/TimeEntry.class.php:92 www/reporting/timeadd.php:93
+#: common/reporting/TimeEntry.class.php:94 www/reporting/timeadd.php:93
 #: www/reporting/timecategory.php:42
 msgid "Successfully Added"
 msgstr ""
@@ -6020,7 +6019,7 @@ msgstr "소프트웨어 맵 분류 정보"
 #: common/tracker/Artifact.class.php:610
 #, fuzzy
 msgid "Valid Email Address Required"
-msgstr "SetMonitor::유효한 이메일 주소가 필요합니다."
+msgstr "유효한 이메일 주소가 필요합니다."
 
 #: common/tracker/Artifact.class.php:628
 msgid "Now Monitoring Artifact"
@@ -6978,7 +6977,7 @@ msgstr ""
 
 #: common/tracker/views/form-deletetracker.php:32
 #: www/admin/responses_admin.php:51 www/frs/admin/deletepackage.php:68
-#: www/frs/admin/editrelease.php:381 www/reporting/rebuild.php:62
+#: www/frs/admin/editrelease.php:381 www/reporting/rebuild.php:63
 msgid "I am Sure"
 msgstr "확인"
 
@@ -16840,7 +16839,7 @@ msgstr ""
 msgid "Complete"
 msgstr "Survey Complete"
 
-#: www/export/rssAboTask.php:161 www/news/news_utils.php:177
+#: www/export/rssAboTask.php:161 www/news/news_utils.php:179
 #: www/pm/include/ProjectTaskHTML.class.php:156
 msgid "Comment"
 msgstr "Comment"
@@ -18894,27 +18893,27 @@ msgstr "뉴스가 없습니다."
 msgid "View News"
 msgstr "뉴스 기능 사용"
 
-#: www/news/news_utils.php:115 www/news/news_utils.php:246
+#: www/news/news_utils.php:117 www/news/news_utils.php:248
 msgid "No News Items Found"
 msgstr "뉴스 항목이 없습니다."
 
-#: www/news/news_utils.php:179 www/survey/include/SurveyHTML.class.php:652
+#: www/news/news_utils.php:181 www/survey/include/SurveyHTML.class.php:652
 msgid "Comments"
 msgstr ""
 
-#: www/news/news_utils.php:183
+#: www/news/news_utils.php:185
 msgid "Read&nbsp;More/Comment"
 msgstr "더 읽기/답글 올리기"
 
-#: www/news/news_utils.php:210
+#: www/news/news_utils.php:212
 msgid "News archive"
 msgstr "뉴스 아카이브"
 
-#: www/news/news_utils.php:222
+#: www/news/news_utils.php:224
 msgid "Submit News"
 msgstr "뉴스 제출하기"
 
-#: www/news/news_utils.php:280
+#: www/news/news_utils.php:282
 #, fuzzy
 msgid "Not Found"
 msgstr "None Found"
@@ -21577,7 +21576,7 @@ msgstr ""
 msgid "This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE."
 msgstr ""
 
-#: www/reporting/rebuild.php:65
+#: www/reporting/rebuild.php:67
 msgid "Press ONLY ONCE"
 msgstr ""
 
@@ -23537,10 +23536,6 @@ msgstr "사용자ID"
 #~ msgid "You Can Only Save Your Place If You Are Logged In"
 #~ msgstr "로그인하셔야만 현재 위치를 기록할 수 있습니다."
 
-#, fuzzy
-#~ msgid "No data to display"
-#~ msgstr "%1$s questions found"
-
 #~ msgid "ERROR doing insert"
 #~ msgstr "뉴스를 올리는 과정에서 오류가 발생하였습니다."
 
@@ -23548,25 +23543,11 @@ msgstr "사용자ID"
 #~ msgstr "오류 - 제목과 본문이 모두 필요합니다."
 
 #, fuzzy
-#~ msgid "Survey Title: "
-#~ msgstr "Survey Title"
-
-#~ msgid "ERROR inserting into skill inventory"
-#~ msgstr "ERROR inserting into skill inventory"
-
-#, fuzzy
-#~ msgid "Browse per category."
-#~ msgstr "Browse by Category"
-
-#, fuzzy
 #~ msgid "Release date"
 #~ msgstr "릴리즈 날짜"
 
 #~ msgid "Diary &amp; Notes"
 #~ msgstr "일기와 메모"
-
-#~ msgid "User fetch FAILED"
-#~ msgstr "User fetch FAILED"
 
 #, fuzzy
 #~ msgid "Page views"
@@ -23584,10 +23565,6 @@ msgstr "사용자ID"
 #~ msgid "Projects added."
 #~ msgstr "프로젝트 홈페이지"
 
-#, fuzzy
-#~ msgid "Cumulative Projects."
-#~ msgstr "Private Groups"
-
 #~ msgid "Months"
 #~ msgstr "달 단위"
 
@@ -23596,37 +23573,6 @@ msgstr "사용자ID"
 
 #~ msgid "Days"
 #~ msgstr "일별"
-
-#~ msgid "New Additions, by Day"
-#~ msgstr "New Additions, by Day"
-
-#~ msgid "New Users (RED), New Projects (BLUE)"
-#~ msgstr "New Users (RED), New Projects (BLUE"
-
-#~ msgid "Users (RED) / Projects (BLUE)"
-#~ msgstr "Users (RED) / Projects (BLUE)"
-
-#~ msgid "Forge Page Views"
-#~ msgstr "Forge Page Views"
-
-#~ msgid "Total Page Views (RED) (%1$s days)"
-#~ msgstr "Total Page Views (RED) (%1$s days)"
-
-#~ msgid "Views (RED)"
-#~ msgstr "Views (RED)"
-
-#~ msgid "Survey Aggregate Results"
-#~ msgstr "Survey Aggregate Results"
-
-#~ msgid "Responses"
-#~ msgstr "Responses"
-
-#~ msgid "Average"
-#~ msgstr "Average"
-
-#, fuzzy
-#~ msgid "View All Comments"
-#~ msgstr "View Comments"
 
 #~ msgid "%1$s Account Registration"
 #~ msgstr "%1$s 사용자 등록"
@@ -23644,25 +23590,6 @@ msgstr "사용자ID"
 
 #~ msgid "You must supply valid password (at least 6 chars)"
 #~ msgstr "유효한 비밀번호를 입력하셔야 합니다. (6글자 이상)"
-
-#, fuzzy
-#~ msgid "Date not valid"
-#~ msgstr "Date Posted"
-
-#, fuzzy
-#~ msgid "Invalid ArtifactType"
-#~ msgstr "Invalid ID"
-
-#, fuzzy
-#~ msgid "Invalid Group Object"
-#~ msgstr "%1$s:: 유효한 그룹 객체가 없습니다."
-
-#, fuzzy
-#~ msgid "No Valid Forum Object"
-#~ msgstr "%1$s:: 유효한 그룹 객체가 없습니다."
-
-#~ msgid "ForumMessage::create() No Valid ParentMessage Object"
-#~ msgstr "ForumMessage::create() No Valid ParentMessage Object"
 
 #, fuzzy
 #~ msgid "Invalid Unix name"
@@ -23692,25 +23619,6 @@ msgstr "사용자ID"
 #~ msgid "Error Getting Forum"
 #~ msgstr "게시판을 추가할 때 오류가 발생하였습니다."
 
-#~ msgid "Existing Responses:"
-#~ msgstr "Existing Responses:"
-
-#~ msgid "Yes, I'm sure"
-#~ msgstr "Yes, I'm sure"
-
-#~ msgid "go"
-#~ msgstr "go"
-
-#~ msgid "New category short name (no spaces, unix-like)"
-#~ msgstr "New category short name (no spaces, unix-like)"
-
-#, fuzzy
-#~ msgid "Error In Trove Operation :"
-#~ msgstr "Error In Trove Operation"
-
-#~ msgid "Parent Category:"
-#~ msgstr "Parent Category:"
-
 #~ msgid "Filename<br />Release"
 #~ msgstr "파일이름<br />릴리즈"
 
@@ -23738,35 +23646,18 @@ msgstr "사용자ID"
 #~ msgstr "새 프로젝트 이름"
 
 #, fuzzy
-#~ msgid "Tracker:"
-#~ msgstr "Tracker"
-
-#, fuzzy
 #~ msgid "Type:"
 #~ msgstr "DB 형태"
-
-#~ msgid "User name:"
-#~ msgstr "User name:"
-
-#~ msgid "Real name"
-#~ msgstr "Real name"
 
 #, fuzzy
 #~ msgid "User added successfully"
 #~ msgstr "사용자가 성공적으로 추가되었습니다."
-
-#, fuzzy
-#~ msgid "User name"
-#~ msgstr "User name:"
 
 #~ msgid "Pageviews"
 #~ msgstr "페이지뷰"
 
 #~ msgid "Invalid confirmation hash"
 #~ msgstr "확인에 사용된 hash값이 맞지 않습니다."
-
-#~ msgid "ERROR"
-#~ msgstr "ERROR"
 
 #~ msgid "New Password (min. 6 chars)"
 #~ msgstr "새로운 비밀번호 (6글자 이상)"
@@ -23779,16 +23670,8 @@ msgstr "사용자ID"
 #~ msgid "Login name or email address:"
 #~ msgstr "유효하지 않은 이메일 주소"
 
-#, fuzzy
-#~ msgid "UserName"
-#~ msgstr "Username"
-
 #~ msgid "Welcome to %1$s"
 #~ msgstr "환영합니다: %1$s"
-
-#, fuzzy
-#~ msgid "--the %1$s staff."
-#~ msgstr "The %1$s Team"
 
 #, fuzzy
 #~ msgid "Add user"
@@ -23797,52 +23680,11 @@ msgstr "사용자ID"
 #~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
 #~ msgstr "오류 - 파일은 20byte 이상, 256000byte 미만이어야 합니다."
 
-#~ msgid "Username"
-#~ msgstr "Username"
-
 #~ msgid "Error Getting %1$s"
 #~ msgstr "%1$s 가져오기 오류"
 
-#~ msgid "The %1$s Team"
-#~ msgstr "The %1$s Team"
-
-#~ msgid "The %1$s Crew"
-#~ msgstr "The %1$s Crew"
-
-#~ msgid "Circular Dependency Detected'"
-#~ msgstr "Circular Dependency Detected'"
-
-#~ msgid "UPDATE FAILED"
-#~ msgstr "UPDATE FAILED"
-
-#~ msgid "Error in insert"
-#~ msgstr "Error in insert"
-
-#~ msgid "ForumMessage:: No Valid Forum Object"
-#~ msgstr "ForumMessage:: No Valid Forum Object"
-
-#~ msgid "ForumMessage::create() Posting Failed"
-#~ msgstr "ForumMessage::create() Posting Failed"
-
-#, fuzzy
-#~ msgid "Error: a forum message must iclude a message body and a subject."
-#~ msgstr "Must Include A Message Body And Subject"
-
-#~ msgid "ForumMessage::fetchData() Invalid MessageID"
-#~ msgstr "ForumMessage::fetchData() Invalid MessageID"
-
 #~ msgid "Error Creating %1$s"
 #~ msgstr "%1$s 생성 오류 발생"
-
-#~ msgid "Forum:: No Valid Group Object"
-#~ msgstr "Forum:: 유효한 그룹 객체가 없습니다."
-
-#, fuzzy
-#~ msgid "Forums: No Valid Group Object"
-#~ msgstr "Forum:: 유효한 그룹 객체가 없습니다."
-
-#~ msgid "Forum::savePlace()"
-#~ msgstr "게시판::savePlace()"
 
 #, fuzzy
 #~ msgid "Invalid email address."
@@ -24091,14 +23933,6 @@ msgstr "사용자ID"
 #~ msgstr "제출자"
 
 #, fuzzy
-#~ msgid "ProjectGroup:: No Valid Group Object"
-#~ msgstr "Forum:: 유효한 그룹 객체가 없습니다."
-
-#, fuzzy
-#~ msgid "Document Directory: No Valid Project"
-#~ msgstr "Forum:: 유효한 그룹 객체가 없습니다."
-
-#, fuzzy
 #~ msgid "Document Directory:"
 #~ msgstr "문서 제목"
 
@@ -24109,14 +23943,6 @@ msgstr "사용자ID"
 #, fuzzy
 #~ msgid "New directory"
 #~ msgstr "새 프로젝트 이름"
-
-#, fuzzy
-#~ msgid "no description"
-#~ msgstr "Description:"
-
-#, fuzzy
-#~ msgid "DocumentGroupFactory:: Invalid Project"
-#~ msgstr "잘못된 문서 id 입니다."
 
 #, fuzzy
 #~ msgid "Document Title:"
@@ -24167,20 +23993,12 @@ msgstr "사용자ID"
 #~ msgstr "게시판 설정"
 
 #, fuzzy
-#~ msgid "List files & Directories"
-#~ msgstr "Tweak Directories"
-
-#, fuzzy
 #~ msgid "Reports"
 #~ msgstr "보고서"
 
 #, fuzzy
 #~ msgid "Mailing Lists."
 #~ msgstr "메일링 리스트"
-
-#, fuzzy
-#~ msgid "Relation"
-#~ msgstr "Resolution"
 
 #, fuzzy
 #~ msgid "Error creating ForumMessage:"
@@ -24190,53 +24008,8 @@ msgstr "사용자ID"
 #~ msgid "Tasks Admin"
 #~ msgstr "문제점 추적 관리"
 
-#~ msgid "ERROR DOING SNIPPET VERSION INSERT!"
-#~ msgstr "ERROR DOING SNIPPET VERSION INSERT!"
-
 #~ msgid "Package:"
 #~ msgstr "패키지:"
-
-#~ msgid "SUBMIT"
-#~ msgstr "SUBMIT"
-
-#, fuzzy
-#~ msgid "ERROR DOING SNIPPET VERSION INSERT! "
-#~ msgstr "ERROR DOING SNIPPET VERSION INSERT!"
-
-#~ msgid "Changes:"
-#~ msgstr "Changes:"
-
-#~ msgid "Paste the Code Here:"
-#~ msgstr "Paste the Code Here:"
-
-#, fuzzy
-#~ msgid "ERROR DOING SNIPPET PACKAGE VERSION INSERT! "
-#~ msgstr "ERROR DOING SNIPPET PACKAGE VERSION INSERT!"
-
-#~ msgid "ERROR DOING SNIPPET PACKAGE INSERT!"
-#~ msgstr "ERROR DOING SNIPPET PACKAGE INSERT!"
-
-#~ msgid "ERROR DOING SNIPPET PACKAGE VERSION INSERT!"
-#~ msgstr "ERROR DOING SNIPPET PACKAGE VERSION INSERT!"
-
-#~ msgid "Snippet Pacakge Version Added Successfully."
-#~ msgstr "Snippet Pacakge Version Added Successfully."
-
-#~ msgid "UNIX Admin"
-#~ msgstr "UNIX Admin"
-
-#~ msgid "Snippets In This Package:"
-#~ msgstr "Snippets In This Package:"
-
-#~ msgid "ERROR DOING SNIPPET INSERT!"
-#~ msgstr "ERROR DOING SNIPPET INSERT!"
-
-#~ msgid "all"
-#~ msgstr "all"
-
-#, fuzzy
-#~ msgid "could Not Get ArtifactTypeFactoryHtml"
-#~ msgstr "Could Not Complete Operation"
 
 #, fuzzy
 #~ msgid ""
@@ -24261,28 +24034,12 @@ msgstr "사용자ID"
 #~ msgstr "인자가 빠졌습니다."
 
 #, fuzzy
-#~ msgid "Project GroupMenu Admin"
-#~ msgstr "Project Admin"
-
-#, fuzzy
-#~ msgid "Project groupmenu Admin"
-#~ msgstr "Project Admin"
-
-#, fuzzy
 #~ msgid "Menu Type"
 #~ msgstr "파일 형식"
 
 #, fuzzy
-#~ msgid "Your HTML Code."
-#~ msgstr "Source IP"
-
-#, fuzzy
 #~ msgid "Add a new link"
 #~ msgstr "프로젝트 더하기"
-
-#, fuzzy
-#~ msgid "Full Name:"
-#~ msgstr "Full Name"
 
 #, fuzzy
 #~ msgid "mkdir failed"
@@ -24308,24 +24065,8 @@ msgstr "사용자ID"
 #~ msgstr "database 항목을 추가할 수 없습니다."
 
 #, fuzzy
-#~ msgid "Tab successfully renamed"
-#~ msgstr "JOB inserted successfully"
-
-#, fuzzy
-#~ msgid "URL successfully changed"
-#~ msgstr "JOB inserted successfully"
-
-#, fuzzy
-#~ msgid "Type successfully changed"
-#~ msgstr "JOB inserted successfully"
-
-#, fuzzy
 #~ msgid "Nothing done"
 #~ msgstr "갱신된 것이 없습니다."
-
-#, fuzzy
-#~ msgid "Name of the tab:"
-#~ msgstr "Number of started tasks"
 
 #, fuzzy
 #~ msgid "Add tab"
@@ -24334,10 +24075,6 @@ msgstr "사용자ID"
 #, fuzzy
 #~ msgid "Modify extra tabs"
 #~ msgstr "임무 수정"
-
-#, fuzzy
-#~ msgid "Rename to:"
-#~ msgstr "Real name"
 
 #, fuzzy
 #~ msgid "Move or delete tab"
@@ -24350,16 +24087,6 @@ msgstr "사용자ID"
 #, fuzzy
 #~ msgid "Anonymous Git Access"
 #~ msgstr "익명 FTP 공간"
-
-#~ msgid "get"
-#~ msgstr "get"
-
-#~ msgid "Last Logins"
-#~ msgstr "Last Logins"
-
-#, fuzzy
-#~ msgid "User list for "
-#~ msgstr "User list for group:"
 
 #, fuzzy
 #~ msgid "Subproject:"
@@ -24377,14 +24104,6 @@ msgstr "사용자ID"
 #~ msgid " Error inserting value: "
 #~ msgstr "추가 에러"
 
-#, fuzzy
-#~ msgid "Added to skill inventory "
-#~ msgstr "Added to skill inventory"
-
-#, fuzzy
-#~ msgid "ERROR - skill already in your inventory "
-#~ msgstr "ERROR - skill already in your inventory"
-
 #~ msgid "Top Downloads (Past 7 Days)"
 #~ msgstr "최다 다운로드 (최근 7일동안)"
 
@@ -24392,20 +24111,8 @@ msgstr "사용자ID"
 #~ msgstr "지난 7일동안의 최다 다운로드 기록"
 
 #, fuzzy
-#~ msgid "Could Not Get Artifact Object"
-#~ msgstr "Could Not Update Parent"
-
-#, fuzzy
-#~ msgid "Error: could Not Get ArtifactTypeFactoryHtml"
-#~ msgstr "Could Not Complete Operation"
-
-#, fuzzy
 #~ msgid "Error: roadmap %s is not available"
 #~ msgstr "정보가 없습니다."
-
-#, fuzzy
-#~ msgid "Roadmap: "
-#~ msgstr "Real name"
 
 #, fuzzy
 #~ msgid "Error Adding Document: No Storage API"
@@ -24416,10 +24123,6 @@ msgstr "사용자ID"
 #~ msgstr "계정을 활성화하는 도중 오류가 발생하였습니다."
 
 #, fuzzy
-#~ msgid "No Storage API Found"
-#~ msgstr "No Categories Found"
-
-#, fuzzy
 #~ msgid "Unable to add document from zip injection."
 #~ msgstr "모니터링 기능을 사용하실 수 없습니다."
 
@@ -24428,26 +24131,8 @@ msgstr "사용자ID"
 #~ msgstr "문서 보기"
 
 #, fuzzy
-#~ msgid ""
-#~ "This Artifact Type Does Not Allow Anonymous Submissions. Please Login."
-#~ msgstr ""
-#~ "Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please "
-#~ "Login."
-
-#~ msgid ""
-#~ "Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please "
-#~ "Login."
-#~ msgstr ""
-#~ "Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please "
-#~ "Login."
-
-#, fuzzy
 #~ msgid "Name: "
 #~ msgstr "이름"
-
-#, fuzzy
-#~ msgid "Role name:"
-#~ msgstr "Real name"
 
 #, fuzzy
 #~ msgid "Date:"
@@ -24456,9 +24141,6 @@ msgstr "사용자ID"
 #, fuzzy
 #~ msgid "Name:"
 #~ msgstr "이름"
-
-#~ msgid "Email:"
-#~ msgstr "Email:"
 
 #, fuzzy
 #~ msgid "Role:"
@@ -24541,11 +24223,6 @@ msgstr "사용자ID"
 #~ msgstr "미리 준비한 의견 추가/갱신"
 
 #, fuzzy
-#~ msgid "Existing Survey"
-#~ msgid_plural "Existing Surveys"
-#~ msgstr[0] "Existing Surveys"
-
-#, fuzzy
 #~ msgid "Error Adding Directory:"
 #~ msgstr "게시판을 추가할 때 오류가 발생하였습니다."
 
@@ -24564,10 +24241,6 @@ msgstr "사용자ID"
 #, fuzzy
 #~ msgid "Document Directory moved to trash successfully."
 #~ msgstr "문서가 성공적으로 제출되었습니다."
-
-#, fuzzy
-#~ msgid "DocumentGroupHTML:: Invalid Project"
-#~ msgstr "잘못된 문서 id 입니다."
 
 #, fuzzy
 #~ msgid "Invalid DocumentGroup ID"
@@ -24601,10 +24274,6 @@ msgstr "사용자ID"
 #~ msgstr "익명 사용자가 글을 올릴 수 있도록 하시겠습니까?"
 
 #, fuzzy
-#~ msgid "Write"
-#~ msgstr "Site"
-
-#, fuzzy
 #~ msgid "No Access"
 #~ msgstr "변경 없음"
 
@@ -24635,9 +24304,6 @@ msgstr "사용자ID"
 #, fuzzy
 #~ msgid "Anonymous Tracker"
 #~ msgstr "익명 FTP 공간"
-
-#~ msgid "ArtifactCanned: name and assignee are Required"
-#~ msgstr "ArtifactCanned: name and assignee are Required"
 
 #~ msgid "Insert Failed"
 #~ msgstr "입력 실패"
@@ -24695,9 +24361,6 @@ msgstr "사용자ID"
 #~ msgid "none"
 #~ msgstr "완료"
 
-#~ msgid "Name Of Survey:"
-#~ msgstr "Name Of Survey:"
-
 #~ msgid "Publicly Available"
 #~ msgstr "공개 가능"
 
@@ -24735,12 +24398,6 @@ msgstr "사용자ID"
 #~ msgid "License:"
 #~ msgstr "저작권:"
 
-#~ msgid "Approve/Reject"
-#~ msgstr "Approve/Reject"
-
-#~ msgid "User ID:"
-#~ msgstr "User ID:"
-
 #~ msgid "No Forums Found For %1$s"
 #~ msgstr "%1$s에 대한 게시판이 없습니다."
 
@@ -24750,26 +24407,11 @@ msgstr "사용자ID"
 #~ msgid "Project Admin: %1$s"
 #~ msgstr "프로젝트 관리: %1$s"
 
-#~ msgid "Sitewide Statistics Graphs"
-#~ msgstr "Sitewide Statistics Graphs"
-
-#~ msgid "Languages Distributions"
-#~ msgstr "Languages Distributions"
-
-#~ msgid "Project Statistical Comparisons"
-#~ msgstr "Project Statistical Comparisons"
-
-#~ msgid "Survey Inserted"
-#~ msgstr "Survey Inserted"
-
 #~ msgid "Edit Survey"
 #~ msgstr "설문조사 편집하기"
 
 #~ msgid "Edit Questions"
 #~ msgstr "질문 편집하기"
-
-#~ msgid "Edit A Question"
-#~ msgstr "Edit A Question"
 
 #~ msgid "Detail"
 #~ msgstr "문제점 추적 자세히 보기"
@@ -24805,14 +24447,6 @@ msgstr "사용자ID"
 #~ msgid "This project has no visible documents"
 #~ msgstr "이 프로젝트에 대해 공개되어 있는 문서가 없습니다."
 
-#, fuzzy
-#~ msgid "Not Object: ProjectGroup: %d"
-#~ msgstr "Could Not Update Parent"
-
-#, fuzzy
-#~ msgid "Webcalendar"
-#~ msgstr "Calendars"
-
 #~ msgid "Choose a User first"
 #~ msgstr "사용자를 먼저 선택하십시오"
 
@@ -24839,18 +24473,6 @@ msgstr "사용자ID"
 #~ msgid "Page Information"
 #~ msgstr "페이지 정보"
 
-#~ msgid "UNKNOWN HELP REQUEST:"
-#~ msgstr "UNKNOWN HELP REQUEST:"
-
-#~ msgid "No such trove category"
-#~ msgstr "No such trove category"
-
-#~ msgid "Full Category Name"
-#~ msgstr "Full Category Name"
-
-#~ msgid "Short Name"
-#~ msgstr "Short Name"
-
 #, fuzzy
 #~ msgid ""
 #~ "<p>The %1$s Project Help Wanted board is for non-commercial, project "
@@ -24870,9 +24492,6 @@ msgstr "사용자ID"
 #~ "여러분이 관리하고 계시는 프로젝트로 가신 후 그곳에서 글을 올리셔야 합니다."
 #~ "</p><p>만약 새로운 Job을 제안하고 싶으시다면 기술지원 관리자 기능을 이용하"
 #~ "여 주십시오.</p>"
-
-#~ msgid "You must be logged in first"
-#~ msgstr "You must be logged in first"
 
 #, fuzzy
 #~ msgid "Subprojects and Tasks"
@@ -24902,27 +24521,6 @@ msgstr "사용자ID"
 #~ msgid "Trove Categorization:&nbsp;"
 #~ msgstr "소프트웨어 맵 분류:&nbsp;"
 
-#~ msgid "%1$s Site Statistics"
-#~ msgstr "%1$s Site Statistics"
-
-#~ msgid "%1$s I18n Statistics"
-#~ msgstr "%1$s I18n Statistics"
-
-#~ msgid "Add A Question"
-#~ msgstr "Add A Question"
-
-#~ msgid "Error inserting question"
-#~ msgstr "Error inserting question"
-
-#~ msgid "Question type"
-#~ msgstr "Question type"
-
-#~ msgid "Add This Question."
-#~ msgstr "Add This Question."
-
-#~ msgid "Show Existing Questions."
-#~ msgstr "Show Existing Questions."
-
 #, fuzzy
 #~ msgid "Title required"
 #~ msgstr "모든 칸을 채워야 합니다!"
@@ -24934,74 +24532,6 @@ msgstr "사용자ID"
 #, fuzzy
 #~ msgid "Question insert failed"
 #~ msgstr "Question type"
-
-#~ msgid ""
-#~ "List question numbers, in desired order, separated by commas. "
-#~ "<strong>Refer to your list of questions</strong> so you can view the "
-#~ "question id's. Do <strong>not</strong> include spaces or end your list "
-#~ "with a comma. <br />Ex: 1,2,3,4,5,6,7"
-#~ msgstr ""
-#~ "List question numbers, in desired order, separated by commas. "
-#~ "<strong>Refer to your list of questions</strong> so you can view the "
-#~ "question id's. Do <strong>not</strong> include spaces or end your list "
-#~ "with a comma. <br />Ex: 1,2,3,4,5,6,7"
-
-#~ msgid "Show Existing Questions"
-#~ msgstr "Show Existing Questions"
-
-#~ msgid "Editing Question"
-#~ msgstr "Editing Question"
-
-#~ msgid ""
-#~ "If you change a question after responses have been posted, your results "
-#~ "pages may be misleading"
-#~ msgstr ""
-#~ "If you change a question after responses have been posted, your results "
-#~ "pages may be misleading"
-
-#, fuzzy
-#~ msgid "Update Failed: Missing Data"
-#~ msgstr "UPDATE FAILED: Missing Data"
-
-#~ msgid ""
-#~ "If you change a survey after you already have responses, your results "
-#~ "pages could be misleading or messed up"
-#~ msgstr ""
-#~ "If you change a survey after you already have responses, your results "
-#~ "pages could be misleading or messed up"
-
-#~ msgid "Name of Survey"
-#~ msgstr "Name of Survey"
-
-#, fuzzy
-#~ msgid "%1$s survey found"
-#~ msgid_plural "%1$s surveys found"
-#~ msgstr[0] "%1$s surveys found"
-
-#~ msgid ""
-#~ "<p>The information collected in these surveys will never be sold to third "
-#~ "parties or used to solicit you to purchase any goods or services.</"
-#~ "p><p>This information is being gathered to build a profile of the "
-#~ "projects and developers being surveyed. That profile will help visitors "
-#~ "to the site understand the quality of a given project.</p><p>The ID's of "
-#~ "those who answer surveys are suppressed and not viewable by project "
-#~ "administrators or the public or third parties.</p><p>The information "
-#~ "gathered is used only in aggregate form, not to single out specific users "
-#~ "or developers.</p><p>If any changes are made to this policy, it will "
-#~ "affect only future data that is collected and the user will of course "
-#~ "have the ability to 'opt-out'."
-#~ msgstr ""
-#~ "<p>The information collected in these surveys will never be sold to third "
-#~ "parties or used to solicit you to purchase any goods or services.</"
-#~ "p><p>This information is being gathered to build a profile of the "
-#~ "projects and developers being surveyed. That profile will help visitors "
-#~ "to the site understand the quality of a given project.</p><p>The ID's of "
-#~ "those who answer surveys are suppressed and not viewable by project "
-#~ "administrators or the public or third parties.</p><p>The information "
-#~ "gathered is used only in aggregate form, not to single out specific users "
-#~ "or developers.</p><p>If any changes are made to this policy, it will "
-#~ "affect only future data that is collected and the user will of course "
-#~ "have the ability to 'opt-out'."
 
 #~ msgid "Top Projects"
 #~ msgstr "상위 프로젝트"
@@ -25039,56 +24569,9 @@ msgstr "사용자ID"
 #~ msgid "Invalid operation"
 #~ msgstr "잘못된 동작입니다."
 
-#~ msgid "Unix Group Name:"
-#~ msgstr "Unix Group Name:"
-
-#, fuzzy
-#~ msgid "File %s wrote successfully."
-#~ msgstr "JOB inserted successfully"
-
 #, fuzzy
 #~ msgid "Value"
 #~ msgstr "이전값"
-
-#~ msgid "Group Unix Name:"
-#~ msgstr "Group Unix Name:"
-
-#~ msgid "Group List"
-#~ msgstr "Group List"
-
-#~ msgid "Group List for Category:"
-#~ msgstr "Group List for Category:"
-
-#~ msgid "Recent logins"
-#~ msgstr "Recent logins"
-
-#~ msgid "Missing parameter, You are trying to send empty message"
-#~ msgstr "Missing parameter, You are trying to send empty message"
-
-#~ msgid "Missing parameter, You must give proper subject to the mailing"
-#~ msgstr "Missing parameter, You must give proper subject to the mailing"
-
-#~ msgid "New category full name (VARCHAR 80)"
-#~ msgstr "New category full name (VARCHAR 80)"
-
-#~ msgid "New category description (VARCHAR 255)"
-#~ msgstr "New category description (VARCHAR 255)"
-
-#~ msgid "Groups Membership"
-#~ msgstr "Groups Membership"
-
-#~ msgid "All Groups"
-#~ msgstr "All Groups"
-
-#~ msgid "The provided group name does not exist"
-#~ msgstr "The provided group name does not exist"
-
-#~ msgid "Group Unix Name"
-#~ msgstr "Group Unix Name"
-
-#, fuzzy
-#~ msgid "Missing User Argument"
-#~ msgstr "Missing File Argument"
 
 #~ msgid "Ratings turned off"
 #~ msgstr "평가 기능을 사용하지 않습니다."
@@ -25096,9 +24579,6 @@ msgstr "사용자ID"
 #, fuzzy
 #~ msgid "Edit Docs"
 #~ msgstr "멤버 구함"
-
-#~ msgid "Group Name"
-#~ msgstr "Group Name"
 
 #~ msgid "No Document Groups defined"
 #~ msgstr "문서 그룹이 정의되어 있지 않습니다."
@@ -25192,12 +24672,6 @@ msgstr "사용자ID"
 #~ msgid "Operation Not Permitted"
 #~ msgstr "작업 불가"
 
-#~ msgid "error - missing info"
-#~ msgstr "error - missing info"
-
-#~ msgid "Change Project/Task Manager Status"
-#~ msgstr "Change Project/Task Manager Status"
-
 #, fuzzy
 #~ msgid "Invalid year"
 #~ msgstr "유효하지 않은 사용자입니다."
@@ -25228,48 +24702,8 @@ msgstr "사용자ID"
 #~ msgid "Error - That user does not exist"
 #~ msgstr "오류 - 코드가 존재하지 않습니다."
 
-#~ msgid "Missing File Argument"
-#~ msgstr "Missing File Argument"
-
-#~ msgid "Invalid File Argument"
-#~ msgstr "Invalid File Argument"
-
-#~ msgid "UPDATE SUCCESSFUL"
-#~ msgstr "UPDATE SUCCESSFUL"
-
-#~ msgid ""
-#~ "<p>It's simple to create a survey.<ol><li>Create questions and comments "
-#~ "using the forms above.</li><li>Create a survey, listing the questions in "
-#~ "order (choose from <strong>your</strong> list of questions).</li><li>Link "
-#~ "to the survey using this format: %1$s where XX is the survey number"
-#~ msgstr ""
-#~ "<p>It's simple to create a survey.<ol><li>Create questions and comments "
-#~ "using the forms above.</li><li>Create a survey, listing the questions in "
-#~ "order (choose from <strong>your</strong> list of questions).</li><li>Link "
-#~ "to the survey using this format: %1$s where XX is the survey number"
-
-#~ msgid "You must be logged in to vote"
-#~ msgstr "You must be logged in to vote"
-
-#~ msgid "Click to return to previous page"
-#~ msgstr "Click to return to previous page"
-
-#~ msgid "ERROR!!! MISSING PARAMS"
-#~ msgstr "ERROR!!! MISSING PARAMS"
-
-#~ msgid "Error - For some reason group_id and/or survey_id did not make it he"
-#~ msgstr ""
-#~ "Error - For some reason group_id and/or survey_id did not make it he"
-
-#~ msgid "Unfortunately, you have to be logged in to participate in surveys."
-#~ msgstr "Unfortunately, you have to be logged in to participate in surveys."
-
 #~ msgid "Project&nbsp;Tree"
 #~ msgstr "프로젝트 트리"
-
-#, fuzzy
-#~ msgid "Show Source"
-#~ msgstr "Show source"
 
 #~ msgid "No Files Currently Attached"
 #~ msgstr "현재 첨부 파일 없음"
@@ -25282,23 +24716,13 @@ msgstr "사용자ID"
 #~ msgid "Postal address"
 #~ msgstr "이메일 주소"
 
-#~ msgid "Update preferences"
-#~ msgstr "Update preferences"
-
 #, fuzzy
 #~ msgid " Developer Project News"
 #~ msgstr "개발자 프로필"
 
 #, fuzzy
-#~ msgid " Activity"
-#~ msgstr "Activate"
-
-#, fuzzy
 #~ msgid " Developer New Project Releases"
 #~ msgstr "개발자 프로필"
-
-#~ msgid "BY"
-#~ msgstr "BY"
 
 #~ msgid "DATE"
 #~ msgstr "날짜"
@@ -25347,18 +24771,6 @@ msgstr "사용자ID"
 #~ msgid "Group Change History"
 #~ msgstr "프로젝트 변경 이력"
 
-#, fuzzy
-#~ msgid "Could not create object in update: %s."
-#~ msgstr "Could Not Update Parent"
-
-#, fuzzy
-#~ msgid "Could not create object update database: %s."
-#~ msgstr "Could Not Update Parent"
-
-#, fuzzy
-#~ msgid "Group:"
-#~ msgstr "Group"
-
 #~ msgid "Developer Info"
 #~ msgstr "개발자 정보"
 
@@ -25396,12 +24808,6 @@ msgstr "사용자ID"
 #~ msgid " (<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 #~ msgid_plural " (<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 #~ msgstr[0] "%1$s 진행중 /전체 %2$s"
-
-#~ msgid "Artifact: Only Artifact Admins Can Modify Private ArtifactTypes"
-#~ msgstr "Artifact: Only Artifact Admins Can Modify Private ArtifactTypes"
-
-#~ msgid "Can't delete, That trove cat has sub categories"
-#~ msgstr "Can't delete, That trove cat has sub categories"
 
 #~ msgid "View My Developer Profile"
 #~ msgstr "나의 개발자 프로필 보기"
@@ -25449,32 +24855,11 @@ msgstr "사용자ID"
 #~ "%1$s 은 라이센스에 관해서 어떠한 법적인 책임도 지지 않습니다.<p><strong>라"
 #~ "이센스</strong>"
 
-#~ msgid "Opn"
-#~ msgstr "Opn"
-
-#~ msgid "Cls"
-#~ msgstr "Cls"
-
-#~ msgid "CO's"
-#~ msgstr "CO's"
-
-#~ msgid "Comm's"
-#~ msgstr "Comm's"
-
 #~ msgid "Invalid full name"
 #~ msgstr "유효하지 않은 프로젝트 이름입니다."
 
 #~ msgid "Error doing insert"
 #~ msgstr "뉴스를 올리는 과정에서 오류가 발생하였습니다."
-
-#~ msgid "ForumMessage::create() Unable to get new message id"
-#~ msgstr "ForumMessage::create() Unable to get new message id"
-
-#~ msgid "%1$s:: No Valid Group Object"
-#~ msgstr "%1$s:: 유효한 그룹 객체가 없습니다."
-
-#~ msgid "If you're aren't sure then why did you click 'Delete'?"
-#~ msgstr "If you're aren't sure then why did you click 'Delete'?"
 
 #~ msgid "Forum monitoring deactivated"
 #~ msgstr "게시판을 모니터링하지 않습니다."

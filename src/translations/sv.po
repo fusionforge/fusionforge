@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-30 17:47+0200\n"
+"POT-Creation-Date: 2013-09-04 19:11+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -335,7 +335,7 @@ msgstr "Fel vid tillägg i forum"
 #: common/docman/Document.class.php:253
 #, fuzzy
 msgid "Document: Invalid docid"
-msgstr "Dokument:: Ogiltigt docid"
+msgstr "Dokument: Ogiltigt docid"
 
 #: common/docman/Document.class.php:582
 #: common/docman/DocumentGroup.class.php:410
@@ -1320,8 +1320,8 @@ msgstr ""
 #: www/export/rss20_docman.php:136 www/export/rss20_docman.php:138
 #: www/export/tracker.php:108 www/forum/index.php:90 www/forum/message.php:127
 #: www/forum/myforums.php:152 www/frs/index.php:178 www/frs/index.php:237
-#: www/include/html.php:1041 www/news/news_utils.php:147
-#: www/news/news_utils.php:267 www/people/people_utils.php:422
+#: www/include/html.php:1041 www/news/news_utils.php:149
+#: www/news/news_utils.php:269 www/people/people_utils.php:422
 #: www/people/viewjob.php:78 www/pm/browse_task.php:265
 #: www/pm/browse_task.php:275 www/pm/include/ProjectTaskHTML.class.php:122
 #: www/pm/include/ProjectTaskHTML.class.php:175
@@ -1597,7 +1597,7 @@ msgstr ""
 
 #: common/docman/views/reporting.php:93 common/docman/views/reporting.php:95
 #: common/frs/FRSRelease.class.php:294 common/frs/FRSRelease.class.php:297
-#: common/frs/FRSRelease.class.php:301 common/include/utils.php:488
+#: common/frs/FRSRelease.class.php:301 common/include/utils.php:490
 #: common/tracker/actions/query.php:403
 #: common/tracker/views/form-addcanned.php:68
 #: common/tracker/views/form-addcanned.php:71
@@ -1771,8 +1771,8 @@ msgid "Month"
 msgstr "Månad"
 
 #: common/docman/views/reporting.php:151 common/reporting/report_utils.php:161
-#: common/reporting/report_utils.php:202 common/reporting/report_utils.php:682
-#: common/reporting/report_utils.php:683 www/frs/reporting/downloads.php:178
+#: common/reporting/report_utils.php:204 common/reporting/report_utils.php:684
+#: common/reporting/report_utils.php:685 www/frs/reporting/downloads.php:178
 #: www/stats/site_stats_utils.php:233 www/stats/site_stats_utils.php:363
 #: www/stats/site_stats_utils.php:417 www/stats/site_stats_utils.php:476
 #: www/top/toplist.php:49
@@ -2093,7 +2093,7 @@ msgid "Release"
 msgstr "Utgåvor"
 
 #: common/forum/ForumAdmin.class.php:357 common/forum/ForumHTML.class.php:330
-#: common/forum/ForumHTML.class.php:545
+#: common/forum/ForumHTML.class.php:555
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
 #: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:68
@@ -2353,7 +2353,7 @@ msgstr "Starta ny tråd"
 #: common/forum/ForumHTML.class.php:181 common/forum/ForumMessage.class.php:60
 #, fuzzy
 msgid "Invalid Forum Object"
-msgstr "Forummeddelande:: ogiltigt forumobjekt"
+msgstr "Forummeddelande: ogiltigt forumobjekt"
 
 #: common/forum/ForumHTML.class.php:205
 msgid "This is the content of the pending message"
@@ -2392,15 +2392,15 @@ msgstr ""
 msgid "Warning: Uploaded file will replace current file"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:517 common/forum/ForumHTML.class.php:582
+#: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:592
 msgid "Subject:"
 msgstr "Rubrik:"
 
-#: common/forum/ForumHTML.class.php:520 common/forum/ForumHTML.class.php:585
+#: common/forum/ForumHTML.class.php:530 common/forum/ForumHTML.class.php:595
 msgid "Message:"
 msgstr "Inlägg:"
 
-#: common/forum/ForumHTML.class.php:546
+#: common/forum/ForumHTML.class.php:556
 #: common/tracker/views/form-adminroadmap.php:167
 #: common/tracker/views/form-adminroadmap.php:235
 #: common/widget/Widget.class.php:103
@@ -2422,36 +2422,36 @@ msgstr "Inlägg:"
 msgid "Cancel"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:602
+#: common/forum/ForumHTML.class.php:612
 msgid "HTML tags will display in your post as text"
 msgstr "HTML-kod kommer att visas som text i ditt inlägg"
 
-#: common/forum/ForumHTML.class.php:609
+#: common/forum/ForumHTML.class.php:619
 #, fuzzy, php-format
 msgid ""
 "You are posting anonymously because you are not <a href=\"%1$s\">logged in</"
 "a>"
 msgstr "Du skapar inlägg anonymnt eftersom du inte är"
 
-#: common/forum/ForumHTML.class.php:613
+#: common/forum/ForumHTML.class.php:623
 msgid "Post Comment"
 msgstr "Skapa inlägg"
 
-#: common/forum/ForumHTML.class.php:613
+#: common/forum/ForumHTML.class.php:623
 #, fuzzy
 msgid "Anonymously"
 msgstr "Anonymt FTP-utrymme"
 
-#: common/forum/ForumHTML.class.php:614
+#: common/forum/ForumHTML.class.php:624
 msgid "Receive followups via email"
 msgstr "Ta emot svar på ditt inlägg via e-post"
 
-#: common/forum/ForumHTML.class.php:626
+#: common/forum/ForumHTML.class.php:636
 #, fuzzy, php-format
 msgid "You could post if you were <a href=\"%1$s\">logged in</a>."
 msgstr "Du hade kunnat gör ett inlägg om du var %1$s inloggad %2$s"
 
-#: common/forum/ForumHTML.class.php:630
+#: common/forum/ForumHTML.class.php:640
 #, php-format
 msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr ""
@@ -2489,7 +2489,7 @@ msgid "Could Not Update Parent"
 msgstr "Kunde inte uppdatera förälder"
 
 #: common/forum/ForumMessage.class.php:357
-#: common/forum/ForumMessage.class.php:802
+#: common/forum/ForumMessage.class.php:800
 msgid "Error: a forum message must include a message body and a subject."
 msgstr "Måste innehålla ett meddelande och rubrik."
 
@@ -2498,14 +2498,14 @@ msgstr "Måste innehålla ett meddelande och rubrik."
 msgid "Invalid ParentMessage Object"
 msgstr "Ogiltigt föräldermeddelandeobjekt"
 
-#: common/forum/ForumMessage.class.php:407
-#: common/forum/ForumMessage.class.php:426
-#: common/forum/ForumMessage.class.php:579
+#: common/forum/ForumMessage.class.php:406
+#: common/forum/ForumMessage.class.php:424
+#: common/forum/ForumMessage.class.php:577
 #, fuzzy
 msgid "Invalid Message Id"
 msgstr "Ogiltigt meddelande-id"
 
-#: common/forum/ForumMessage.class.php:660
+#: common/forum/ForumMessage.class.php:658
 #, php-format
 msgid ""
 "\n"
@@ -2516,7 +2516,7 @@ msgstr ""
 "Läs och svara på detta meddelande: \n"
 "%s"
 
-#: common/forum/ForumMessage.class.php:662
+#: common/forum/ForumMessage.class.php:660
 #, fuzzy, php-format
 msgid ""
 "\n"
@@ -2533,7 +2533,7 @@ msgstr ""
 "(fyll i ditt svar här)\n"
 "%1$s"
 
-#: common/forum/ForumMessage.class.php:668
+#: common/forum/ForumMessage.class.php:666
 #, php-format
 msgid ""
 "\n"
@@ -2546,11 +2546,11 @@ msgstr ""
 "\n"
 "Från: %s\n"
 
-#: common/forum/ForumMessage.class.php:673
+#: common/forum/ForumMessage.class.php:671
 msgid "A file has been uploaded with this message."
 msgstr "En fil har laddats upp med detta meddelande."
 
-#: common/forum/ForumMessage.class.php:684
+#: common/forum/ForumMessage.class.php:682
 #, php-format
 msgid ""
 "You are receiving this email because you elected to monitor this forum.\n"
@@ -2558,7 +2558,7 @@ msgid ""
 "%s\n"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:826
+#: common/forum/ForumMessage.class.php:824
 #, fuzzy
 msgid "Message not found"
 msgstr "Hittar inte inlägget"
@@ -2626,7 +2626,7 @@ msgstr "FRS-paketnamn måste ha minst 3 tecken"
 #: common/frs/FRSPackage.class.php:143
 #, fuzzy
 msgid "Package Name can only be alphanumeric"
-msgstr "FRS-Paket::Update: Paketnamn kan bara skrivas med alfanumeriska tecken"
+msgstr "Paketnamn kan bara skrivas med alfanumeriska tecken"
 
 #: common/frs/FRSPackage.class.php:154
 #, fuzzy
@@ -3209,7 +3209,7 @@ msgstr "Konto redan aktivt."
 msgid "Approved"
 msgstr "Godkänn"
 
-#: common/include/Group.class.php:2533 common/include/Group.class.php:2604
+#: common/include/Group.class.php:2533 common/include/Group.class.php:2603
 msgid "Group does not have any administrators."
 msgstr ""
 
@@ -3303,7 +3303,7 @@ msgstr ""
 msgid "%1$s Project Approved"
 msgstr "%1$s projekt godkänt"
 
-#: common/include/Group.class.php:2611
+#: common/include/Group.class.php:2610
 #, php-format
 msgid ""
 "Your project registration for %3$s has been denied.\n"
@@ -3322,20 +3322,20 @@ msgstr ""
 "Skäl för avslag:\n"
 "\n"
 
-#: common/include/Group.class.php:2630
+#: common/include/Group.class.php:2629
 #, php-format
 msgid "%1$s Project Denied"
 msgstr "%1$s projekt avslaget"
 
-#: common/include/Group.class.php:2654
+#: common/include/Group.class.php:2653
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2661
+#: common/include/Group.class.php:2660
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2669
+#: common/include/Group.class.php:2668
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3352,12 +3352,12 @@ msgstr ""
 "Var vänlig besök följande URL för att godkänna eller avslå detta projekt:\n"
 "%5$s"
 
-#: common/include/Group.class.php:2679
+#: common/include/Group.class.php:2678
 #, fuzzy, php-format
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "Inlämnad av"
 
-#: common/include/Group.class.php:2685
+#: common/include/Group.class.php:2684
 #, php-format
 msgid ""
 "\n"
@@ -3365,12 +3365,12 @@ msgid ""
 "%1$s"
 msgstr ""
 
-#: common/include/Group.class.php:2689 common/include/Group.class.php:2704
+#: common/include/Group.class.php:2688 common/include/Group.class.php:2703
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "Nytt %1$s projekt inlämnat"
 
-#: common/include/Group.class.php:2697
+#: common/include/Group.class.php:2696
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3390,42 +3390,42 @@ msgstr ""
 "Var vänlig besök följande URL för att godkänna eller avslå detta projekt:\n"
 "%5$s"
 
-#: common/include/Group.class.php:2719
+#: common/include/Group.class.php:2718
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Gruppnamn (klicka för redigering)"
 
-#: common/include/Group.class.php:2722
+#: common/include/Group.class.php:2721
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Gruppnamn (klicka för redigering)"
 
-#: common/include/Group.class.php:2725
+#: common/include/Group.class.php:2724
 #, fuzzy
 msgid "Group name already taken"
 msgstr "Unixnamn redan upptaget"
 
-#: common/include/Group.class.php:2807
+#: common/include/Group.class.php:2806
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2870
+#: common/include/Group.class.php:2869
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2888
+#: common/include/Group.class.php:2887
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2906
+#: common/include/Group.class.php:2905
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2924
+#: common/include/Group.class.php:2923
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
@@ -3492,15 +3492,15 @@ msgstr "Kan inte slutföra operationen"
 
 #: common/include/group_section_texts.php:29
 #: common/include/Navigation.class.php:425
-#: common/reporting/report_utils.php:149 common/reporting/report_utils.php:688
-#: common/reporting/report_utils.php:689 plugins/blocks/www/index.php:151
+#: common/reporting/report_utils.php:149 common/reporting/report_utils.php:690
+#: common/reporting/report_utils.php:691 plugins/blocks/www/index.php:151
 #: plugins/quota_management/www/quota_project.php:87
 #: www/export/rss20_activity.php:153
 msgid "Forums"
 msgstr "Forum"
 
 #: common/include/group_section_texts.php:30
-#: common/reporting/report_utils.php:709 plugins/blocks/www/index.php:152
+#: common/reporting/report_utils.php:711 plugins/blocks/www/index.php:152
 #: www/export/rss20_activity.php:120 www/export/rss20_activity.php:131
 #: www/reporting/toolspie.php:65
 msgid "Trackers"
@@ -3508,8 +3508,8 @@ msgstr ""
 
 #: common/include/group_section_texts.php:31
 #: common/include/Navigation.class.php:473 common/include/rbac_texts.php:157
-#: common/reporting/report_utils.php:157 common/reporting/report_utils.php:198
-#: common/reporting/report_utils.php:701
+#: common/reporting/report_utils.php:157 common/reporting/report_utils.php:200
+#: common/reporting/report_utils.php:703
 #: common/widget/Widget_ProjectPublicAreas.class.php:148
 #: plugins/blocks/www/index.php:154 www/my/dashboard.php:77
 #: www/stats/site_stats_utils.php:242 www/stats/site_stats_utils.php:367
@@ -3518,7 +3518,7 @@ msgid "Tasks"
 msgstr "Uppgifter"
 
 #: common/include/group_section_texts.php:32
-#: common/reporting/report_utils.php:677
+#: common/reporting/report_utils.php:679
 #: plugins/quota_management/www/quota_project.php:56
 #: www/search/include/SearchManager.class.php:153
 msgid "Documents"
@@ -3697,7 +3697,7 @@ msgid "Project Management."
 msgstr "Nytt projektnamn"
 
 #: common/include/Navigation.class.php:488
-#: common/reporting/report_utils.php:153 common/reporting/report_utils.php:676
+#: common/reporting/report_utils.php:153 common/reporting/report_utils.php:678
 #: plugins/blocks/www/index.php:155
 msgid "Docs"
 msgstr "Dokumentation"
@@ -4403,58 +4403,58 @@ msgstr ""
 msgid "New %1$s User"
 msgstr "%1$s Teamet"
 
-#: common/include/utils.php:191
+#: common/include/utils.php:193
 msgid "UTF-8"
 msgstr ""
 
-#: common/include/utils.php:488
+#: common/include/utils.php:490
 msgid "Priority Colors"
 msgstr "Prioritetsfärger"
 
-#: common/include/utils.php:892 common/include/utils.php:896
-#: common/include/utils.php:907
+#: common/include/utils.php:894 common/include/utils.php:898
+#: common/include/utils.php:909
 #, fuzzy
 msgid "bytes"
 msgstr "Ja"
 
-#: common/include/utils.php:892 common/include/utils.php:907
+#: common/include/utils.php:894 common/include/utils.php:909
 msgid "kB"
 msgstr ""
 
-#: common/include/utils.php:892
+#: common/include/utils.php:894
 msgid "MB"
 msgstr ""
 
-#: common/include/utils.php:892
+#: common/include/utils.php:894
 msgid "GB"
 msgstr ""
 
-#: common/include/utils.php:892
+#: common/include/utils.php:894
 msgid "TB"
 msgstr ""
 
-#: common/include/utils.php:896 common/include/utils.php:907
+#: common/include/utils.php:898 common/include/utils.php:909
 msgid "KiB"
 msgstr ""
 
-#: common/include/utils.php:896
+#: common/include/utils.php:898
 msgid "MiB"
 msgstr ""
 
-#: common/include/utils.php:896
+#: common/include/utils.php:898
 msgid "GiB"
 msgstr ""
 
-#: common/include/utils.php:896
+#: common/include/utils.php:898
 msgid "TiB"
 msgstr ""
 
-#: common/include/utils.php:1265
+#: common/include/utils.php:1267
 #, fuzzy
 msgid "Error: a mailing list with the same email address already exists."
 msgstr "Det användarnamnet existerar redan."
 
-#: common/include/utils.php:1283
+#: common/include/utils.php:1285
 #, fuzzy
 msgid "Error: a forum with the same email address already exists."
 msgstr "Det användarnamnet existerar redan."
@@ -4674,97 +4674,97 @@ msgstr "Fredag"
 msgid "Saturday"
 msgstr "Lördag"
 
-#: common/reporting/report_utils.php:165 common/reporting/report_utils.php:694
-#: common/reporting/report_utils.php:695 www/stats/site_stats_utils.php:231
+#: common/reporting/report_utils.php:165 common/reporting/report_utils.php:696
+#: common/reporting/report_utils.php:697 www/stats/site_stats_utils.php:231
 #: www/top/toplist.php:38
 msgid "Page Views"
 msgstr "Sidläsningar"
 
-#: common/reporting/report_utils.php:182 www/stats/site_stats_utils.php:236
+#: common/reporting/report_utils.php:184 www/stats/site_stats_utils.php:236
 #: www/stats/site_stats_utils.php:364 www/stats/site_stats_utils.php:418
 msgid "Bugs"
 msgstr "Fel"
 
-#: common/reporting/report_utils.php:183 www/stats/site_stats_utils.php:237
+#: common/reporting/report_utils.php:185 www/stats/site_stats_utils.php:237
 #: www/stats/site_stats_utils.php:365 www/stats/site_stats_utils.php:419
 msgid "Support"
 msgstr "Support"
 
-#: common/reporting/report_utils.php:184 www/stats/site_stats_utils.php:238
+#: common/reporting/report_utils.php:186 www/stats/site_stats_utils.php:238
 #: www/stats/site_stats_utils.php:366 www/stats/site_stats_utils.php:420
 msgid "Patches"
 msgstr "Rättningar"
 
-#: common/reporting/report_utils.php:185
+#: common/reporting/report_utils.php:187
 msgid "Feature Requests"
 msgstr ""
 
-#: common/reporting/report_utils.php:186
+#: common/reporting/report_utils.php:188
 msgid "Other Trackers"
 msgstr ""
 
-#: common/reporting/report_utils.php:194
+#: common/reporting/report_utils.php:196
 msgid "Forum Messages"
 msgstr ""
 
-#: common/reporting/report_utils.php:240 www/snippet/snippet_utils.php:38
+#: common/reporting/report_utils.php:242 www/snippet/snippet_utils.php:38
 #: www/snippet/snippet_utils.php:64
 msgid "Other"
 msgstr "Annan"
 
-#: common/reporting/report_utils.php:259 common/reporting/report_utils.php:382
+#: common/reporting/report_utils.php:261 common/reporting/report_utils.php:384
 #, fuzzy
 msgid "No selected area."
 msgstr "Utgåvans datum"
 
-#: common/reporting/report_utils.php:272
+#: common/reporting/report_utils.php:274
 msgid "Avg Time Open (in days)"
 msgstr ""
 
-#: common/reporting/report_utils.php:274
+#: common/reporting/report_utils.php:276
 #, fuzzy
 msgid "Total Opened"
 msgstr "Öppningsdatum"
 
-#: common/reporting/report_utils.php:276
+#: common/reporting/report_utils.php:278
 msgid "Total Still Open"
 msgstr ""
 
-#: common/reporting/report_utils.php:322
+#: common/reporting/report_utils.php:324
 #, fuzzy
 msgid "Tracker Activity"
 msgstr "Ordningspost"
 
-#: common/reporting/report_utils.php:393
+#: common/reporting/report_utils.php:395
 #, fuzzy
 msgid "Per assignee"
 msgstr "Tilldelad"
 
-#: common/reporting/report_utils.php:440 www/reporting/usercum.php:59
+#: common/reporting/report_utils.php:442 www/reporting/usercum.php:59
 msgid "Cumulative Users"
 msgstr ""
 
-#: common/reporting/report_utils.php:445 www/reporting/useradded.php:59
+#: common/reporting/report_utils.php:447 www/reporting/useradded.php:59
 msgid "Users Added"
 msgstr ""
 
-#: common/reporting/report_utils.php:450 www/reporting/groupadded.php:59
+#: common/reporting/report_utils.php:452 www/reporting/groupadded.php:59
 msgid "Projects Added"
 msgstr ""
 
-#: common/reporting/report_utils.php:455 www/reporting/groupcum.php:59
+#: common/reporting/report_utils.php:457 www/reporting/groupcum.php:59
 msgid "Cumulative Projects"
 msgstr ""
 
-#: common/reporting/report_utils.php:466 common/reporting/report_utils.php:638
-#: common/reporting/report_utils.php:988
-#: common/reporting/report_utils.php:1052
-#: common/reporting/report_utils.php:1155
+#: common/reporting/report_utils.php:468 common/reporting/report_utils.php:640
+#: common/reporting/report_utils.php:991
+#: common/reporting/report_utils.php:1055
+#: common/reporting/report_utils.php:1158
 #, fuzzy
 msgid "No data to display."
 msgstr "%1$s frågor hittade"
 
-#: common/reporting/report_utils.php:612 plugins/authopenid/www/index.php:38
+#: common/reporting/report_utils.php:614 plugins/authopenid/www/index.php:38
 #: plugins/authwebid/www/index.php:35 www/account/change_email-complete.php:52
 #: www/account/change_email.php:46 www/account/change_pw.php:32
 #: www/account/editsshkeys.php:39 www/account/index.php:36
@@ -4776,36 +4776,36 @@ msgstr "%1$s frågor hittade"
 msgid "Could Not Get User"
 msgstr "Kan inte slutföra operationen"
 
-#: common/reporting/report_utils.php:702
+#: common/reporting/report_utils.php:704
 #, fuzzy
 msgid "Task open"
 msgstr "Uppgift-ID"
 
-#: common/reporting/report_utils.php:703
+#: common/reporting/report_utils.php:705
 #, fuzzy
 msgid "Task close"
 msgstr "Datum stängd"
 
-#: common/reporting/report_utils.php:710
+#: common/reporting/report_utils.php:712
 #, fuzzy
 msgid "Tracker items opened"
 msgstr "Ordningspost"
 
-#: common/reporting/report_utils.php:711
+#: common/reporting/report_utils.php:713
 #, fuzzy
 msgid "Tracker items closed"
 msgstr "Ordningspost"
 
-#: common/reporting/report_utils.php:1075
+#: common/reporting/report_utils.php:1078
 #, fuzzy
 msgid "Hours Recorded"
 msgstr "Bedömning nedtecknad"
 
-#: common/reporting/report_utils.php:1079
+#: common/reporting/report_utils.php:1082
 msgid " Hours"
 msgstr ""
 
-#: common/reporting/TimeEntry.class.php:92 www/reporting/timeadd.php:93
+#: common/reporting/TimeEntry.class.php:94 www/reporting/timeadd.php:93
 #: www/reporting/timecategory.php:42
 msgid "Successfully Added"
 msgstr ""
@@ -6038,9 +6038,8 @@ msgid "Error updating artifact counts: "
 msgstr "Resursgrupp information"
 
 #: common/tracker/Artifact.class.php:610
-#, fuzzy
 msgid "Valid Email Address Required"
-msgstr "SetMonotoring::Giltig e-postadress obligatorisk"
+msgstr "Giltig e-postadress obligatorisk"
 
 #: common/tracker/Artifact.class.php:628
 msgid "Now Monitoring Artifact"
@@ -7000,7 +6999,7 @@ msgstr ""
 
 #: common/tracker/views/form-deletetracker.php:32
 #: www/admin/responses_admin.php:51 www/frs/admin/deletepackage.php:68
-#: www/frs/admin/editrelease.php:381 www/reporting/rebuild.php:62
+#: www/frs/admin/editrelease.php:381 www/reporting/rebuild.php:63
 msgid "I am Sure"
 msgstr "Jag är säker"
 
@@ -16880,7 +16879,7 @@ msgstr ""
 msgid "Complete"
 msgstr "Undersökning klar"
 
-#: www/export/rssAboTask.php:161 www/news/news_utils.php:177
+#: www/export/rssAboTask.php:161 www/news/news_utils.php:179
 #: www/pm/include/ProjectTaskHTML.class.php:156
 msgid "Comment"
 msgstr "Kommentar"
@@ -18939,27 +18938,27 @@ msgstr "Hittade inga nyheter"
 msgid "View News"
 msgstr "Använd nyheter"
 
-#: www/news/news_utils.php:115 www/news/news_utils.php:246
+#: www/news/news_utils.php:117 www/news/news_utils.php:248
 msgid "No News Items Found"
 msgstr "Hittade inga nyheter"
 
-#: www/news/news_utils.php:179 www/survey/include/SurveyHTML.class.php:652
+#: www/news/news_utils.php:181 www/survey/include/SurveyHTML.class.php:652
 msgid "Comments"
 msgstr ""
 
-#: www/news/news_utils.php:183
+#: www/news/news_utils.php:185
 msgid "Read&nbsp;More/Comment"
 msgstr "Read&nbsp;Mer/Kommentar"
 
-#: www/news/news_utils.php:210
+#: www/news/news_utils.php:212
 msgid "News archive"
 msgstr "Nyhetsarkiv"
 
-#: www/news/news_utils.php:222
+#: www/news/news_utils.php:224
 msgid "Submit News"
 msgstr "Lämna in nyheter"
 
-#: www/news/news_utils.php:280
+#: www/news/news_utils.php:282
 #, fuzzy
 msgid "Not Found"
 msgstr "Hittade ingen"
@@ -21643,7 +21642,7 @@ msgstr ""
 msgid "This could take a couple minutes, so DO NOT CLICK MORE THAN ONCE."
 msgstr ""
 
-#: www/reporting/rebuild.php:65
+#: www/reporting/rebuild.php:67
 msgid "Press ONLY ONCE"
 msgstr ""
 
@@ -23742,12 +23741,6 @@ msgstr "Användarenamn"
 #~ msgid "Invalid Group Object"
 #~ msgstr "Inga giltiga gruppobject"
 
-#~ msgid "No Valid Forum Object"
-#~ msgstr "Forummeddelande:: ogiltigt forumobjekt"
-
-#~ msgid "ForumMessage::create() No Valid ParentMessage Object"
-#~ msgstr "ForumMessage::create() Ogiltigt föräldermeddelandeobjekt"
-
 #~ msgid "Invalid Unix name"
 #~ msgstr "Ogiltigt Unixnamn"
 
@@ -23923,43 +23916,12 @@ msgstr "Användarenamn"
 #~ msgid "Error in insert"
 #~ msgstr "Fel vid infogning"
 
-#~ msgid "fetchData():: %s"
-#~ msgstr "fetchData():: %s"
-
-#~ msgid "Group::create: Group object already exists"
-#~ msgstr "Group::create: Gruppobjekt finns redan"
-
-#~ msgid "ForumMessage:: No Valid Forum Object"
-#~ msgstr "Forummeddelande:: ogiltigt forumobjekt"
-
-#~ msgid "ForumMessage::create() Posting Failed"
-#~ msgstr "ForumMessage::create() inlägg misslyckades"
-
-#~ msgid "ForumMessage::create() Unable to get new message id"
-#~ msgstr "ForumMessage::create() Kunde inte hämta nytt meddelande-ID"
-
 #, fuzzy
 #~ msgid "Error: a forum message must iclude a message body and a subject."
 #~ msgstr "Måste innehålla ett meddelande och rubrik"
 
-#~ msgid "ForumMessage::fetchData() Invalid MessageID"
-#~ msgstr "ForumMessage::fetchData() Ogiltigt meddelande-ID"
-
-#~ msgid "%1$s:: No Valid Group Object"
-#~ msgstr "%1$s:: Ej giltigt gruppobjekt"
-
 #~ msgid "Error Creating %1$s"
 #~ msgstr "Fel vid skapande av %1$s"
-
-#~ msgid "Forum:: No Valid Group Object"
-#~ msgstr "Forum:: Inga giltiga gruppobject"
-
-#, fuzzy
-#~ msgid "Forums: No Valid Group Object"
-#~ msgstr "Forum:: Inga giltiga gruppobject"
-
-#~ msgid "Forum::savePlace()"
-#~ msgstr "Forum::savePlace()"
 
 #, fuzzy
 #~ msgid "Invalid email address."
@@ -24311,14 +24273,6 @@ msgstr "Användarenamn"
 #~ msgstr "Inlämnare"
 
 #, fuzzy
-#~ msgid "ProjectGroup:: No Valid Group Object"
-#~ msgstr "Forum:: Inga giltiga gruppobject"
-
-#, fuzzy
-#~ msgid "Document Directory: No Valid Project"
-#~ msgstr "Forum:: Inga giltiga gruppobject"
-
-#, fuzzy
 #~ msgid "Document Directory:"
 #~ msgstr "Dokumentrubrik"
 
@@ -24333,10 +24287,6 @@ msgstr "Användarenamn"
 #, fuzzy
 #~ msgid "no description"
 #~ msgstr "Beskrivning:"
-
-#, fuzzy
-#~ msgid "DocumentGroupFactory:: Invalid Project"
-#~ msgstr "Dokument:: Ogiltigt docid"
 
 #, fuzzy
 #~ msgid "Document Title:"
@@ -24785,10 +24735,6 @@ msgstr "Användarenamn"
 #, fuzzy
 #~ msgid "Document Directory moved to trash successfully."
 #~ msgstr "Dokumentinlämning lyckades"
-
-#, fuzzy
-#~ msgid "DocumentGroupHTML:: Invalid Project"
-#~ msgstr "Dokument:: Ogiltigt docid"
 
 #, fuzzy
 #~ msgid "Invalid DocumentGroup ID"
@@ -25807,18 +25753,6 @@ msgstr "Användarenamn"
 
 #~ msgid "Click here to <a href=\"%s\">remove the page now</a>."
 #~ msgstr "Klicka shär för <a href=\"%s\">att ta bort sidan nu</a>."
-
-#~ msgid "WikiDiff::apply: line count mismatch: %s != %s"
-#~ msgstr "WikiDiff::apply: radantalet stämmer inte: %s != %s"
-
-#~ msgid "WikiDiff::_check: failed"
-#~ msgstr "WikiDiff::_check: misslyckades"
-
-#~ msgid "WikiDiff::_check: edit sequence is non-optimal"
-#~ msgstr "WikiDiff::_check: ändringssekvensen är icke optimal"
-
-#~ msgid "WikiDiff Okay: LCS = %s"
-#~ msgstr "WikiDiff Ok: LCS = %s"
 
 #~ msgid "Searching for \"%s\" ....."
 #~ msgstr "Söker efter \"%s\" ....."
