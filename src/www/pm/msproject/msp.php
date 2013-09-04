@@ -83,7 +83,6 @@ function &MSPLogin($username,$password) {
 		$array['success']=false;
 		$array['errormessage']=$feedback;
 	}
-	printr($array,'MSPLogin::return-array');
 	return $array;
 }
 
@@ -130,7 +129,6 @@ function &MSPDownload($session_hash,$group_project_id) {
 			}
 		}
 	}
-	printr($array,'MSPDownload::return-array');
 	return $array;
 }
 
@@ -196,8 +194,6 @@ Return:
 
 */
 function &MSPCheckin($session_hash,$group_project_id,$tasks) {
-	global $primap;
-	printr($tasks,'MSPCheckin::in-tasks');
 	if (!session_continue($session_hash)) {
 		$array['success']=false;
 		$array['errormessage']='Could Not Continue Session';
@@ -210,8 +206,8 @@ function &MSPCheckin($session_hash,$group_project_id,$tasks) {
 * Return the projects by user.
 *
 * @author	Luis Hurtado	luis@gforgegroup.com
-* @param	session_hash	User session
-* @return	Groups		User groups
+* @param	$session_hash	User session
+* @return	array	Groups		User groups
 * @date		2005-01-19
 *
 */
@@ -234,16 +230,16 @@ function &MSPGetProjects($session_hash) {
 * Create SubProjects
 *
 * @author	Luis Hurtado	luis@gforgegroup.com
-* @param	groupid		ID Group
-* @param	session_hash	User Session
-* @param	name		Project name
-* @param	ispublic	1 Public  0 Private
-* @param	description	Project Description
+* @param	int	$groupid		ID Group
+* @param	$session_hash	User Session
+* @param	$name		Project name
+* @param	bool	$ispublic	1 Public  0 Private
+* @param	$description	Project Description
 * @return	ProjectGroup	Object ProjectGroup
 * @date		2005-01-19
 *
 */
-function &MSPCreateProject($groupid,$session_hash,$name,$ispublic,$description) {
+function &MSPCreateProject($groupid, $session_hash, $name, $ispublic, $description) {
 	if (!session_continue($session_hash)) {
 		$array['success']=false;
 		$array['errormessage']='Could Not Continue Session';
