@@ -230,21 +230,21 @@ function &MSPGetProjects($session_hash) {
 * Create SubProjects
 *
 * @author	Luis Hurtado	luis@gforgegroup.com
-* @param	int	$groupid		ID Group
+* @param	int	$group_id		ID Group
 * @param	$session_hash	User Session
 * @param	$name		Project name
-* @param	bool	$ispublic	1 Public  0 Private
+* @param	bool	$is_public	1 Public  0 Private
 * @param	$description	Project Description
 * @return	ProjectGroup	Object ProjectGroup
 * @date		2005-01-19
 *
 */
-function &MSPCreateProject($groupid, $session_hash, $name, $ispublic, $description) {
+function &MSPCreateProject($group_id, $session_hash, $name, $is_public, $description) {
 	if (!session_continue($session_hash)) {
 		$array['success']=false;
 		$array['errormessage']='Could Not Continue Session';
 	}
-	$group = group_get_object($groupid);
+	$group = group_get_object($group_id);
 	if (!$group || !is_object($group)) {
 		$res['code']="error";
 		$res['description']="No Such Project";
@@ -261,7 +261,7 @@ function &MSPCreateProject($groupid, $session_hash, $name, $ispublic, $descripti
 				$res['description']="Could Not Get ProjectGroup";
 				return $res;
 			} else {
-				if (!$pg->create($name,$description,$ispublic)) {
+				if (!$pg->create($name, $description, $is_public)) {
 					$res['code']="error";
 					$res['description']='Error Creating Subproject '.$pg->getErrorMessage();
 					return $res;
