@@ -73,7 +73,8 @@
 	 * @access private
 	 * @param string $variable Name of the parameter to get.
 	 * @param array $array Name of the parameter to get.
-	 */
+     * @return bool
+     */
 	function _get($variable, $array) {
 		if ($this->_exist($variable, $array)) {
 			return $array[$variable];
@@ -160,7 +161,8 @@
 	 * @param string $variable Name of the parameter to get.
 	 * @param mixed $validator Name of the validator (string, uint, email) or an instance of a validator
 	 * @param mixed $default_value Value return if the validator is not valid. Optional, default is null.
-	 */
+     * @return mixed
+     */
 	function getValidated($variable, $validator = 'string', $default_value = null) {
 		/*$is_valid = false;
 		  if ($v = ValidFactory::getInstance($validator, $variable)) {

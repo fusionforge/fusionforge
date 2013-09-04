@@ -45,7 +45,7 @@ class ForumMessage extends Error {
 	 */
 	var $Forum;
 
-		/**
+	/**
 	 *  Constructor.
 	 *
 	 *	@param	$Forum  object	The Forum object to which this ForumMessage is associated.
@@ -248,7 +248,7 @@ class ForumMessage extends Error {
 	 *	@param	int	The message_id of the parent message, if any.
 	 *	@param 	int	The id of the user that is posting the message
 	 *	@param  boolean	Whether the message has an attach associated. Defaults to false
-	 *	@param	int	The timestamp of the message to insert, defaults to 0. 
+	 *	@param	int	The timestamp of the message to insert, defaults to 0.
 	 *	@return	boolean success.
 	*/
 	function insertmsg($subject, $body, $thread_id='', $is_followup_to='',$user_id,$has_attach=false,$timestamp=0) {
@@ -401,8 +401,7 @@ class ForumMessage extends Error {
 	 */
 	function fetchData($msg_id) {
 		$res = db_query_params ('SELECT * FROM forum_user_vw WHERE msg_id=$1 AND group_forum_id=$2',
-					array ($msg_id,
-						$this->Forum->getID())) ;
+					array($msg_id, $this->Forum->getID()));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Invalid Message Id'));
 			return false;
@@ -420,8 +419,7 @@ class ForumMessage extends Error {
 	 */
 	function fetchModeratedData($msg_id) {
 		$res = db_query_params ('SELECT * FROM forum_pending_user_vw WHERE msg_id=$1 AND group_forum_id=$2',
-					array ($msg_id,
-						$this->Forum->getID())) ;
+					array($msg_id, $this->Forum->getID()));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Invalid Message Id'));
 			return false;
@@ -623,7 +621,7 @@ class ForumMessage extends Error {
 	/**
 	 *	sendNotice - contains the logic to send out email followups when a message is posted.
 	 *
-	 *	@param  boolean	Whether the message has an attach associated. Defaults to false
+	 *	@param  boolean	$has_attach Whether the message has an attach associated. Defaults to false
 	 *
 	 *	@return boolean success.
 	 */

@@ -33,7 +33,7 @@ define('FORUM_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');
 /**
  * Gets a Forum object from its id
  *
- * @param	int	the Forum id
+ * @param	int	$forum_id	the Forum id
  * @return	object	the Forum object
  */
 function &forum_get_object($forum_id) {
@@ -84,7 +84,7 @@ class Forum extends Error {
 	 * @var	array	view_types.
 	 */
 	var $view_types;
-	
+
 	/**
 	 * flag : forum or news entry
 	 * @var int	is_news
@@ -119,7 +119,7 @@ class Forum extends Error {
 			//
 			$res = db_query_params('SELECT forum_id FROM news_bytes
 				WHERE forum_id=$1',
-			    array($group_forum_id));
+				array($group_forum_id));
 			$is_news = $res && db_numrows($res) >= 1;
 		}
 		if (!$is_news && !$Group->usesForum()) {
@@ -145,7 +145,7 @@ class Forum extends Error {
 			//	Make sure they can even access this object
 			//
 			if (!$is_news &&
-			    !forge_check_perm ('forum', $this->getID(), 'read')) {
+				!forge_check_perm ('forum', $this->getID(), 'read')) {
 				$this->setPermissionDeniedError();
 				$this->data_array = null;
 				return;
@@ -176,7 +176,7 @@ class Forum extends Error {
 			$this->setError(_('Forum description must be at least 10 characters.'));
 			return false;
 		}
-		if (!preg_match('/^([_\.0-9a-z-])*$/i',$forum_name)) {			
+		if (!preg_match('/^([_\.0-9a-z-])*$/i',$forum_name)) {
 			if (preg_match('/ /',$forum_name)){
 				$this->setError(_('Illegal characters in Forum name').' - '._('No space allowed.'));
 			}else{
@@ -467,7 +467,7 @@ class Forum extends Error {
 	 * stopMonitor - Remove the current user from the list of people monitoring the forum.
 	 *
 	 * @param $u
-	 * @return    boolean    success.
+	 * @return	boolean	success.
 	 */
 	function stopMonitor($u = -1) {
 		if ($u == -1) {
@@ -479,7 +479,7 @@ class Forum extends Error {
 		}
 		return db_query_params('DELETE FROM forum_monitored_forums WHERE user_id=$1 AND forum_id=$2',
 					array($u,
-					      $this->getID()));
+						  $this->getID()));
 	}
 
 	/**
@@ -590,7 +590,7 @@ class Forum extends Error {
 			$this->setError(_('Mailing List exists with same name.'));
 			return false;
 		}
-		
+
 		$res = db_query_params('UPDATE forum_group_list SET
 			forum_name=$1,
 			description=$2,
@@ -598,10 +598,10 @@ class Forum extends Error {
 			WHERE group_id=$4
 			AND group_forum_id=$5',
 					array(strtolower($forum_name),
-					      htmlspecialchars($description),
-					      $send_all_posts_to,
-					      $this->Group->getID(),
-					      $this->getID()));
+						  htmlspecialchars($description),
+						  $send_all_posts_to,
+						  $this->Group->getID(),
+						  $this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('Update failed')._(': ').db_error());

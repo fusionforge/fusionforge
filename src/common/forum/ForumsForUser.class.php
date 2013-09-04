@@ -38,7 +38,8 @@ class ForumsForUser extends Error {
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	object	The Group object to which this forum is associated.
+	 *	@param	$user   object	The Group object to which this forum is associated.
+	 * @return bool
 	 */
 	function ForumsForUser(&$user) {
 		$this->User =& $user;

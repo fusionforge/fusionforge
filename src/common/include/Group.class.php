@@ -160,7 +160,7 @@ function group_get_object_by_publicname($groupname) {
 /**
  * get_public_active_projects_asc() - Get a list of rows for public active projects (initially in trove/full_list)
  *
- * @param	   int	 Opional Maximum number of rows to limit query length 
+ * @param	   int	 Opional Maximum number of rows to limit query length
  */
 function get_public_active_projects_asc($max_query_limit = -1) {
 
@@ -627,7 +627,7 @@ class Group extends Error {
 
 		// Log the audit trail
 		$this->addHistory('Changed Public Info', '');
-		
+
 		if (!$this->fetchData($this->getID())) {
 			db_rollback();
 			return false;
@@ -2060,7 +2060,7 @@ class Group extends Error {
 			db_rollback();
 			return false;
 		}
-		
+
 		//
 		//	reassign open artifacts to id=100
 		//
@@ -2330,7 +2330,7 @@ class Group extends Error {
 				$r->addUser(user_get_object ($idadmin_group));
 			}
 		}
-		
+
 		// Temporarily switch to the submitter's identity
 		$saved_session = session_get_user();
 		session_set_internal($idadmin_group);
@@ -2581,7 +2581,6 @@ if there is anything we can do to help you.
 
 		return true;
 	}
-
 
 	/**
 	 * sendRejectionEmail - Send project rejection email.
@@ -2937,6 +2936,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
  * group_getname() - get the group name
  *
  * @param	   int	 The group ID
+ * @return string
  * @deprecated
  *
  */
@@ -2953,6 +2953,7 @@ function group_getname ($group_id = 0) {
  * group_getunixname() - get the unixname for a group
  *
  * @param	   int	 The group ID
+ * @return string
  * @deprecated
  *
  */
@@ -2969,6 +2970,7 @@ function group_getunixname ($group_id) {
  * group_get_result() - Get the group object result ID.
  *
  * @param	   int	 The group ID
+ * @return int
  * @deprecated
  *
  */

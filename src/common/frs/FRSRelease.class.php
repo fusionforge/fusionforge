@@ -28,8 +28,8 @@ require_once $gfcommon.'frs/FRSFile.class.php';
 /**
  *	  Factory method which creates a FRSRelease from an release id
  *
- *	  @param int	  The release id
- *	  @param array	The result array, if it's passed in
+ *	  @param int	$release_id	The release id
+ *	  @param array	$data		  The result array, if it's passed in
  *	  @return object  FRSRelease object
  */
 function frsrelease_get_object($release_id, $data = false) {
@@ -109,11 +109,11 @@ class FRSRelease extends Error {
 	/**
 	 *	create - create a new release in the database.
 	 *
-	 *	@param	string	The name of the release.
-	 *	@param	string	The release notes for the release.
-	 *	@param	string	The change log for the release.
-	 *	@param	int	Whether the notes/log are preformatted with \n chars (1) true (0) false.
-	 *	@param	int	The unix date of the release.
+	 *	@param	string	$name	The name of the release.
+	 *	@param	string	$notes	The release notes for the release.
+	 *	@param	string	$changes	The change log for the release.
+	 *	@param	int	$preformatted	Whether the notes/log are preformatted with \n chars (1) true (0) false.
+	 *	@param	int	$release_date	The unix date of the release.
 	 *	@return	boolean success.
 	 */
 	function create($name,$notes,$changes,$preformatted,$release_date=false) {
@@ -138,7 +138,7 @@ class FRSRelease extends Error {
 		}
 		$res = db_query_params ('SELECT * FROM frs_release WHERE package_id=$1 AND name=$2',
 					array ($this->FRSPackage->getID(),
-					       htmlspecialchars($name))) ;
+						   htmlspecialchars($name))) ;
 		if (db_numrows($res)) {
 			$this->setError(_('Error Adding Release: Name Already Exists'));
 			return false;
@@ -182,7 +182,7 @@ class FRSRelease extends Error {
 	function fetchData($release_id) {
 		$res = db_query_params ('SELECT * FROM frs_release WHERE release_id=$1 AND package_id=$2',
 					array ($release_id,
-					       $this->FRSPackage->getID())) ;
+						   $this->FRSPackage->getID())) ;
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(_('Invalid release_id'));
 			return false;
@@ -284,8 +284,8 @@ class FRSRelease extends Error {
 		$date = date('Y-m-d H:i',time());
 
 		$subject = sprintf (_('[%1$s Release] %2$s'),
-				    $this->FRSPackage->Group->getUnixName(),
-				    $this->FRSPackage->getName());
+					$this->FRSPackage->Group->getUnixName(),
+					$this->FRSPackage->getName());
 		$text = stripcslashes(sprintf(_('Project %1$s (%2$s) has released a new version of package “%3$s”.'),
 										$this->FRSPackage->Group->getPublicName(),
 										$this->FRSPackage->Group->getUnixName(),
@@ -313,11 +313,11 @@ class FRSRelease extends Error {
 			util_handle_message(array_unique($arr),$subject,$text);
 		}
 	}
-	
+
 	/**
 	 *	newFRSFile - generates a FRSFile (allows overloading by subclasses)
 	 *
-	 *  @param  string	FRS file identifier 
+	 *  @param  string	FRS file identifier
 	 *  @param  array	fetched data from the DB
 	 *	@return	FRSFile	new FRSFile object.
 	 */
@@ -414,7 +414,7 @@ class FRSRelease extends Error {
 		if($this->getName() != htmlspecialchars($name)) {
 			$res = db_query_params ('SELECT * FROM frs_release WHERE package_id=$1 AND name=$2',
 						array ($this->FRSPackage->getID(),
-						       htmlspecialchars($name))) ;
+							   htmlspecialchars($name))) ;
 			if (db_numrows($res)) {
 				$this->setError(_('Error On Update: Name Already Exists'));
 				return false;
@@ -425,14 +425,14 @@ class FRSRelease extends Error {
 			changes=$4,preformatted=$5,release_date=$6,released_by=$7
 			WHERE package_id=$8 AND release_id=$9',
 					array (htmlspecialchars($name),
-					       $status,
-					       htmlspecialchars($notes),
-					       htmlspecialchars($changes),
-					       $preformatted,
-					       $release_date,
-					       user_getid(),
-					       $this->FRSPackage->getID(),
-					       $this->getID())) ;
+						   $status,
+						   htmlspecialchars($notes),
+						   htmlspecialchars($changes),
+						   $preformatted,
+						   $release_date,
+						   user_getid(),
+						   $this->FRSPackage->getID(),
+						   $this->getID())) ;
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError(_('Error On Update: ').db_error());

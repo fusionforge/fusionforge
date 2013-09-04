@@ -137,13 +137,13 @@ function forum_header($params) {
 		if ($f) {
 			if ($f->isMonitoring()) {
 				echo util_make_link ('/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;stop=1',
-							     html_image('ic/xmail16w.png').' '._('Stop Monitoring')).' | ';
+								 html_image('ic/xmail16w.png').' '._('Stop Monitoring')).' | ';
 			} else {
 				echo util_make_link ('/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;start=1',
-						     html_image('ic/mail16w.png').' '._('Monitor Forum')).' | ';
+							 html_image('ic/mail16w.png').' '._('Monitor Forum')).' | ';
 			}
 			echo util_make_link ('/forum/save.php?forum_id='.$forum_id.'&amp;group_id='.$group_id,
-					     html_image('ic/save.png') .' '._('Save Place')).' | ';
+						 html_image('ic/save.png') .' '._('Save Place')).' | ';
 		}
 	} elseif ($f) {
 		echo '<a href="/forum/monitor.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'&amp;start=1">' .
@@ -152,8 +152,8 @@ function forum_header($params) {
 
 	if ($f && $forum_id) {
 		echo util_make_link ('/forum/new.php?forum_id='.$forum_id.'&amp;group_id='.$group_id,
-				     html_image('ic/write16w.png','20','20',array('alt'=>_('Start New Thread'))) .' '.
-				     _('Start New Thread'));
+					 html_image('ic/write16w.png','20','20',array('alt'=>_('Start New Thread'))) .' '.
+					 _('Start New Thread'));
 	}
 }
 
@@ -361,10 +361,14 @@ class ForumHTML extends Error {
 		</table>
 
 		</fieldset>";
-
 	}
 
 
+	/**
+	 * @param string $msg_arr
+	 * @param string $msg_id
+	 * @return string
+	 */
 	function showNestedMessages ( &$msg_arr, $msg_id ) {
 		global $total_rows;
 
@@ -404,6 +408,12 @@ class ForumHTML extends Error {
 		return $ret_val;
 	}
 
+	/**
+	 * @param $msg_arr
+	 * @param $msg_id
+	 * @param $level
+	 * @return string
+	 */
 	function showSubmessages(&$msg_arr, $msg_id, $level) {
 		/*
 			Recursive. Selects this message's id in this thread,

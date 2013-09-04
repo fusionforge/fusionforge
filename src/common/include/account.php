@@ -25,8 +25,8 @@
 /**
  * account_pwvalid() - Validates a password
  *
- * @param		string	The plaintext password string
- * @returns		true on success/false on failure
+ * @param		string	$pw	The plaintext password string
+ * @return		bool	true on success/false on failure
  *
  */
 function account_pwvalid($pw) {
@@ -40,9 +40,9 @@ function account_pwvalid($pw) {
 /**
  * account_namevalid() - Validates a login username
  *
- * @param		string	The username string
- * @param		bool	Check for an unix username
- * @returns		true on success/false on failure
+ * @param		string	$name	The username string
+ * @param		bool	$unix	Check for an unix username
+ * @return		bool	true on success/false on failure
  *
  */
 function account_namevalid($name, $unix=0) {
@@ -105,8 +105,8 @@ function account_namevalid($name, $unix=0) {
 /**
  * account_groupnamevalid() - Validates an account group name
  *
- * @param		string	The group name string
- * @returns		true on success/false on failure
+ * @param		string	$name	The group name string
+ * @return		bool	true on success/false on failure
  *
  */
 function account_groupnamevalid($name) {
@@ -183,7 +183,7 @@ function account_gensalt(){
 /**
  * account_genunixpw() - Generate unix password
  *
- * @param	string	The plaintext password string
+ * @param	string	$plainpw	The plaintext password string
  * @return	string	The encrypted password
  *
  */
@@ -203,12 +203,12 @@ function account_genunixpw($plainpw) {
  *
  */
 function account_get_user_default_shell() {
-        $user_default_shell = forge_get_config('user_default_shell');
-        if (! isset($user_default_shell)) {
-           // same as in DB schema before that config var was introduced
-           $user_default_shell = '/bin/bash';
-        }
-        return $user_default_shell;
+	$user_default_shell = forge_get_config('user_default_shell');
+	if (! isset($user_default_shell)) {
+		// same as in DB schema before that config var was introduced
+		$user_default_shell = '/bin/bash';
+	}
+	return $user_default_shell;
 }
 
 /**
@@ -222,8 +222,8 @@ function account_getavailableshells($add_user_default_shell = TRUE) {
 	if(! file_exists($shells_file) ) {
 		// otherwise, fallback to /etc/shells
 		$shells_file = '/etc/shells';
-        }
-        $shells = file($shells_file);
+	}
+	$shells = file($shells_file);
 
 	$out_shells = array();
 	foreach ($shells as $s) {
@@ -256,28 +256,28 @@ function account_shellselects($current) {
 	$html = '';
 
 	$shells = account_getavailableshells();
-	
-        $found = false;
-        for ($i = 0; $i < count($shells); $i++) {
-                $this_shell = $shells[$i];
-		
-                if ($current == $this_shell) {
-                        $found = true;
-                        $html .= "<option selected=\"selected\" value=\"$this_shell\">$this_shell</option>\n";
-                } else {
+
+	$found = false;
+	for ($i = 0; $i < count($shells); $i++) {
+		$this_shell = $shells[$i];
+
+		if ($current == $this_shell) {
+			$found = true;
+			$html .= "<option selected=\"selected\" value=\"$this_shell\">$this_shell</option>\n";
+		} else {
 			// the last one is supposed to be the default, so select it if not found current shell to observe default settings
 			if ( ($i == (count($shells) - 1)) && (! $found)) {
 				$html .= "<option selected=\"selected\" value=\"$this_shell\">$this_shell</option>\n";
 			} else {
 				$html .= "<option value=\"$this_shell\">$this_shell</option>\n";
 			}
-                }
-        }
-        if(! $found) {
+		}
+	}
+	if (!$found) {
 		// add the current option but unselectable -> defaults to cvssh if no other option in /var/lib/gforge/chroot/etc/shells
 		$html .= "<option value=\"$current\" disabled=\"disabled\">$current</option>\n";
 	}
-        echo $html;
+	echo $html;
 }
 
 /**

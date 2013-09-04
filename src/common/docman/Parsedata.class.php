@@ -44,12 +44,12 @@ class Parsedata {
 	/**
 	 * get_parse_data - analyse content and metadata
 	 *
-	 * @param	string	the path of the file to be analysed
-	 * @param	string	the file title
-	 * @param	string	the file description
-	 * @param	string	the file type
-	 * @param	string	the filename
-	 * @return	string	the analysed content
+	 * @param	string	$data			the path of the file to be analysed
+	 * @param	string	$title			the file title
+	 * @param	string	$description	the file description
+	 * @param	string	$filetype		the file type
+	 * @param	string	$filename		the filename
+	 * @return	string					the analysed content
 	 */
 	function get_parse_data($data, $title, $description, $filetype, $filename) {
 		$parser = "";
@@ -80,7 +80,7 @@ class Parsedata {
 	/**
 	 * get_parser_list - get the list of available parsers
 	 *
-	 * @param	string	the path where are located the parsers
+	 * @param	string	$parser_path	the path where are located the parsers
 	 * @return	array	available parsers
 	 */
 	function get_parser_list($parser_path) {
