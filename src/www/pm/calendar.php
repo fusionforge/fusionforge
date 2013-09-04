@@ -155,8 +155,8 @@ function make_task_link($task, $type) {
  * uses mktime() to readjust it and the year in such cases.
  *
  * @author    Ryan T. Sammartino <ryants at shaw dot ca>
- * @param     m  month
- * @param     y  year
+ * @param     int	$m	month
+ * @param     int	$y	year
  * @date      2002-12-29
  *
  */

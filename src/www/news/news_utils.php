@@ -76,6 +76,8 @@ function news_footer($params) {
  * @param bool $allow_submit (default: true)
  * @param bool $flat (default: false)
  * @param int  $tail_headlines number of additional news to display in short (-1 for all the others, default: 0)
+ * @param bool $show_forum
+ * @return string
  */
 function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_submit=true,$flat=false,$tail_headlines=0,$show_forum=true) {
 
