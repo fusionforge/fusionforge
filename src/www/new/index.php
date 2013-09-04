@@ -34,7 +34,7 @@ if ( !$offset || $offset < 0 || !is_numeric($offset) ) {
 	$offset = 0;
 }
 
-// For expediancy, list only the filereleases in the past three days.
+// For expediency, list only the file releases in the past three days.
 $start_time = time() - (30 * 86400);
 
 
@@ -82,7 +82,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 	$seen = array();
 	$i = 0;
 	foreach ($rows as $row_new) {
-		// avoid dupulicates of different file types
+		// avoid duplicates of different file types
 		if (!isset($seen[$row_new['group_id']])) {
 			print '
 			<tr valign="top">
