@@ -148,13 +148,10 @@ abstract class ForgeAuthPlugin extends Plugin {
 	/**
 	 * Terminate an authentication session
 	 * @param unknown_type $params
-	 * @return boolean
 	 */
 	function closeAuthSession($params) {
 		if ($this->isSufficient() || $this->isRequired()) {
 			$this->unsetSessionCookie();
-		} else {
-			return true;
 		}
 	}
 
