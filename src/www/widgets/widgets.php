@@ -29,7 +29,6 @@ require_once $gfcommon.'widget/Valid_Widget.class.php';
 
 use_javascript('/scripts/prototype/prototype.js');
 use_javascript('/scripts/scriptaculous/scriptaculous.js');
-use_javascript('/scripts/codendi/Tooltip.js');
 use_javascript('/scripts/codendi/LayoutManager.js');
 use_javascript('/scripts/codendi/ReorderColumns.js');
 

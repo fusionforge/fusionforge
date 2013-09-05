@@ -36,7 +36,6 @@ $title = _('Project Home');
 
 use_javascript('/scripts/prototype/prototype.js');
 use_javascript('/scripts/scriptaculous/scriptaculous.js');
-use_javascript('/scripts/codendi/Tooltip.js');
 use_javascript('/scripts/codendi/LayoutManager.js');
 use_javascript('/scripts/codendi/ReorderColumns.js');
 

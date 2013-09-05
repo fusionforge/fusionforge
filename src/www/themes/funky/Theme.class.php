@@ -420,7 +420,6 @@ class Theme extends Layout {
 		echo '<script type="text/javascript" src="/scripts/codendi/ReorderColumns.js"></script>';
 		echo '<script type="text/javascript" src="/scripts/codendi/codendi-1236793993.js"></script>';
 		echo '<script type="text/javascript" src="/scripts/codendi/validate.js"></script>';
-		echo '<script type="text/javascript" src="/scripts/codendi/Tooltip.js"></script>';
 
 		plugin_hook("javascript_file", false);
 
