@@ -338,8 +338,8 @@ function admin_table_show($table, $unit, $primary_key) {
 /**
  * getUnitLabel - returns the localized label of a unit
  *
- * @param string unit name
- * @return name localized label
+ * @param	string $unit	unit name
+ * @return	string	name localized label
  */
 function getUnitLabel($unit) {
 	return $unit;
