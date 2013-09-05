@@ -49,7 +49,7 @@ if (db_numrows($res_user) < 1) {
 }
 
 $row_user = db_fetch_array($res_user);
-$user =& user_get_object($row_user['user_id'], $res_user);
+$user = user_get_object($row_user['user_id'], $res_user);
 if (!$user || !is_object($user)) {
     exit_error(_('Could Not Get User'),'home');
 } elseif ($user->isError()) {

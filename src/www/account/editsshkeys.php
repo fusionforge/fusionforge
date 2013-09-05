@@ -34,7 +34,7 @@ if (!forge_get_config('use_shell')) {
 
 session_require_login();
 
-$u =& user_get_object(user_getid());
+$u = user_get_object(user_getid());
 if (!$u || !is_object($u)) {
 	exit_error(_('Could Not Get User'),'home');
 } elseif ($u->isError()) {

@@ -27,7 +27,7 @@ require_once $gfcommon.'include/account.php';
 
 session_require_login () ;
 
-$u =& user_get_object(user_getid());
+$u = user_get_object(user_getid());
 if (!$u || !is_object($u)) {
 	exit_error(_('Could Not Get User'),'my');
 } elseif ($u->isError()) {

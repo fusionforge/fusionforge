@@ -203,7 +203,7 @@ class CoreApiService {
 			return new SoapFault($e->getCode(),$e->getMessage());
 		}
 
-		$users =& user_get_objects($user_id);
+		$users = user_get_objects($user_id);
 		$this->logger->debug("users found : ".var_export($users, true));
 		if (!$users) {
 			return new SoapFault('3001','Could Not Get Users By Id');
@@ -358,7 +358,7 @@ class CoreApiService {
 			return new SoapFault($e->getCode(),$e->getMessage());
 		}
 
-		$users =& user_get_objects_by_name($user_names);
+		$users = user_get_objects_by_name($user_names);
 		if (!$users) {
 			return new SoapFault('3002','Could Not Get Users By Name');
 		}

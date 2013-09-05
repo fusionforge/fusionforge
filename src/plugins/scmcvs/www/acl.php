@@ -48,7 +48,7 @@ if (count($matches) == 0) {
 	}
 
 	$userName = $matches2[count($matches2)-1];
-	$User =& user_get_object_by_name($userName);
+	$User = user_get_object_by_name($userName);
 	if (!$User || !is_object($User)) {
 		exit_error(sprintf(_('User not found %s'),$userName),'home');
 	}

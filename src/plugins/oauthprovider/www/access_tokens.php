@@ -86,7 +86,7 @@ if(count($t_tokens)>0) {
 			echo '<td>'.'---'.'</td>';
 		}	
 		if($t_token->getUserId() > 0 ) {
-			$user_object =& user_get_object($t_token->getUserId());
+			$user_object = user_get_object($t_token->getUserId());
 	          $user = $user_object->getRealName().' ('.$user_object->getUnixName().')';
 		}	else {
 		  $user = "-";

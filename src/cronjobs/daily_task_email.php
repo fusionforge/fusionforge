@@ -48,7 +48,7 @@ for ($i=0; $i<db_numrows($res);$i++) {
 	$email = db_result($res, $i, 'email');
 
 	// get an object of the User with the current user_id
-	$user_object = &user_get_object($user_id);
+	$user_object = user_get_object($user_id);
 	if (!$user_object || !is_object($user_object)) {
 		$err .= "Could not get User object with ID: $user_id\n";
 	} else {

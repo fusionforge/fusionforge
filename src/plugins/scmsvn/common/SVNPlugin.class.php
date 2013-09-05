@@ -129,7 +129,7 @@ class SVNPlugin extends SCMPlugin {
 		$module = $this->topModule($project);
 
 		if (session_loggedin()) {
-			$u =& user_get_object(user_getid());
+			$u = user_get_object(user_getid());
 			$d = $u->getUnixName() ;
 			if (forge_get_config('use_ssh', 'scmsvn')) {
 				$b .= '<h2>';
@@ -490,7 +490,7 @@ class SVNPlugin extends SCMPlugin {
 
 			foreach ( $user_list as $user ) {
 				// trying to get user id from user name
-				$u = &user_get_object_by_name ($user) ;
+				$u = user_get_object_by_name ($user) ;
 				if ($u) {
 					$user_id = $u->getID();
 				} else {

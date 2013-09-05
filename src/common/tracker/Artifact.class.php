@@ -224,7 +224,7 @@ class Artifact extends Error {
 		//	the status_id based on the extra field - this keeps the counters
 		//	accurate
 		//
-		$status_id=$this->ArtifactType->remapStatus($status_id,$extra_fields);
+		$status_id = $this->ArtifactType->remapStatus($status_id,$extra_fields);
 		if (!$status_id) {
 			$this->setError(_('Error remapping status'));
 			return false;
@@ -606,10 +606,8 @@ class Artifact extends Error {
 			$email_sql='';
 
 		} else {
-
 			$this->setError(_('Valid Email Address Required'));
 			return false;
-
 		}
 
 		$res = db_query_params ('SELECT * FROM artifact_monitor WHERE artifact_id=$1 AND user_id=$2',
@@ -791,7 +789,7 @@ class Artifact extends Error {
 		}
 		if (session_loggedin()) {
 			$user_id=user_getid();
-			$user =& user_get_object($user_id);
+			$user = user_get_object($user_id);
 			if (!$user || !is_object($user)) {
 				$this->setError('Error: Logged In User But Could Not Get User Object');
 				return false;

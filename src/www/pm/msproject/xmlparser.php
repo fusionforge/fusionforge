@@ -61,14 +61,10 @@ if (!$data) {
 	exit;
 }
 
-//printr($data,'initial-data');
-
 // SECTION 1. DEBUG XML
 $data = str_replace("</ ","</",$data);
 $data = str_replace("</ ","</",$data);
 $data = str_replace("\r","",$data);
-printr($data,'next-data');
-printr(getenv('TZ'),'xmlparser1:: TZ');
 
 //SECTION 2.
 //FUNCTIONS AND VARIABLES
@@ -383,27 +379,19 @@ function characterDataHandler ($parser, $data) {
 		}
 	}
 }
-printr($foo2,'Starting XMLParse 1');
-printr(getenv('TZ'),'xmlparser2:: TZ');
 //SECTION 3. MAIN
 $xml_parser = xml_parser_create();
 xml_set_element_handler($xml_parser, "startElement", "endElement");
-printr($foo2,'Starting XMLParse 2');
 xml_set_character_data_handler( $xml_parser, "characterDataHandler");
-printr($foo2,'Starting XMLParse 3');
 if (!xml_parse($xml_parser, $data,true)) {
-	printr($foo2,'Starting XMLParse 4');
 	$err=sprintf("XML error: %s at line %d",
 	xml_error_string(xml_get_error_code($xml_parser)),
 	xml_get_current_line_number($xml_parser));
-	printr($err,'Fatal Error');
 	die($err);
 }
 xml_parser_free($xml_parser);
 
-printr($result["REQUEST"],'request');
-printr(getenv('TZ'),'xmlparser3:: TZ');
-//SECTION 4. CALL GFORGE FUNCTIONS
+//SECTION 4. CALL FUNCTIONS
 switch ($result["REQUEST"]) {
 	//MSPLogin
 	case $result["REQUEST"] == "GetSubprojects": {
@@ -435,7 +423,6 @@ switch ($result["REQUEST"]) {
 	case $result["REQUEST"] == "download": {
 		if ((trim($result["ACTION"]) == "GetLatestVersion") || (trim($result["ACTION"]) == "Checkout")) {
 			$gforgeresult =& MSPDownload($result["session_id"],$result["subproject"][0]["id"]);
-			printr($gforgeresult,'gforgeresult');
 			$return = ('<?xml version="1.0"?>');
 			$return .= ('<xml>');
 			if ($gforgeresult["success"] == true) {
@@ -459,7 +446,7 @@ switch ($result["REQUEST"]) {
 						$return .= (date('Y-m-d H:i:s',$task->getLastModifiedDate()));
 					}
 					$return .= ('</lastmodified>');
-					$users =& user_get_objects($task->getAssignedTo());
+					$users = user_get_objects($task->getAssignedTo());
 					if (count($users) == 1 && $users[0]->getID()==100) {
 						//skip if only one user - the 100 user
 					} else {
@@ -484,7 +471,6 @@ switch ($result["REQUEST"]) {
 					$return .= ('</task>');
 				}
 				$return .= ('</tasks>');
-				printr($return,'download XML');
 				print $return;
 			} else {
 				print($return.'<response handle="error">');
@@ -591,5 +577,3 @@ case $result["REQUEST"] == "CreateProject": {
 	break;
 }
 }
-
-printrcomplete();

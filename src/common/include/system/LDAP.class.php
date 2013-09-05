@@ -237,7 +237,7 @@ class LDAP extends UNIX {
 	 *
 	 */
 	function sysCheckUser($user_id) {
-		$user =& user_get_object($user_id);
+		$user = user_get_object($user_id);
 		if (!$user) {
 			return false;
 		}
@@ -280,7 +280,7 @@ class LDAP extends UNIX {
 		// Check even if the user shouldn't exist
 		// It can be created by a cron
 		if (!$this->sysCheckUser($user_id)){
-			$user = &user_get_object($user_id);
+			$user = user_get_object($user_id);
 			return $this->gfLdapcreate_user_from_object($user);
 		}
 		return true;
@@ -295,7 +295,7 @@ class LDAP extends UNIX {
 	 */
 	function sysCheckCreateUser($user_id) {
 		if (!$this->sysCheckUser($user_id)){
-			$user = &user_get_object($user_id);
+			$user = user_get_object($user_id);
 			return $this->gfLdapcreate_user_from_object($user);
 		}
 		return true;
@@ -394,7 +394,7 @@ class LDAP extends UNIX {
 	function sysRemoveUser($user_id) {
 
 
-		$user = &user_get_object($user_id);
+		$user = user_get_object($user_id);
 		if (!$this->gfLdapConnect()) {
 			return false;
 		}
@@ -420,7 +420,7 @@ class LDAP extends UNIX {
 	function sysUserSetAttribute($user_id,$attr,$value) {
 
 
-		$user = &user_get_object($user_id);
+		$user = user_get_object($user_id);
 		if (!$this->gfLdapConnect()) {
 			return false;
 		}
@@ -628,7 +628,7 @@ class LDAP extends UNIX {
 		global $ldap_conn;
 
 		$group = group_get_object($group_id);
-		$user  = &user_get_object($user_id);
+		$user  = user_get_object($user_id);
 		if (!$this->gfLdapConnect()) {
 			return false;
 		}
@@ -697,7 +697,7 @@ class LDAP extends UNIX {
 	function sysGroupRemoveUser($group_id,$user_id,$cvs_only=0) {
 
 		$group = group_get_object($group_id);
-		$user  = &user_get_object($user_id);
+		$user  = user_get_object($user_id);
 		if (!$this->gfLdapConnect()) {
 			return false;
 		}

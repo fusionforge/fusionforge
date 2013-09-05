@@ -25,16 +25,16 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-$USER_OBJ=array();
+$USER_OBJ = array();
 
 /**
  * user_get_object_by_name() - Get User object by username.
  * user_get_object is useful so you can pool user objects/save database queries
  * You should always use this instead of instantiating the object directly
  *
- * @param	string	The unix username - required
- * @param	int	The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
- * @return	a user object or false on failure
+ * @param string       $user_name The unix username - required
+ * @param bool|int     $res       The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
+ * @return GFUser User object or false on failure
  */
 function &user_get_object_by_name($user_name, $res = false) {
 	$user_name = strtolower($user_name);
@@ -54,14 +54,14 @@ function &user_get_object_by_name($user_name, $res = false) {
  * @return a user object or false on failure
  *
  */
-function user_get_object_by_email($email ,$res = false) {
+function user_get_object_by_email($email, $res = false) {
 	if (!validate_email($email)
 	    || !forge_get_config('require_unique_email')) {
 		return false;
 	}
 	if (!$res) {
-		$res=db_query_params('SELECT * FROM users WHERE email=$1',
-				     array($email));
+		$res = db_query_params('SELECT * FROM users WHERE email=$1',
+			array($email));
 	}
 	return user_get_object(db_result($res, 0, 'user_id'), $res);
 }
@@ -114,14 +114,18 @@ function &user_get_object($user_id, $res = false) {
 						array($user_id));
 		}
 		if (!$res || db_numrows($res) < 1) {
-			$USER_OBJ["_".$user_id."_"]=false;
+			$USER_OBJ["_".$user_id."_"] = false;
 		} else {
-			$USER_OBJ["_".$user_id."_"]= new GFUser($user_id,$res);
+			$USER_OBJ["_".$user_id."_"] = new GFUser($user_id, $res);
 		}
 	}
 	return $USER_OBJ["_".$user_id."_"];
 }
 
+/**
+ * @param $id_arr
+ * @return GFUser[]
+ */
 function &user_get_objects($id_arr) {
 	global $USER_OBJ;
 	$fetch = array();
@@ -132,14 +136,14 @@ function &user_get_objects($id_arr) {
 		//  See if this ID already has been fetched in the cache
 		//
 		if (!isset($USER_OBJ["_".$id."_"])) {
-			$fetch[]=$id;
+			$fetch[] = $id;
 		}
 	}
 	if (count($fetch) > 0) {
 		$res = db_query_params('SELECT * FROM users WHERE user_id = ANY ($1)',
-					array(db_int_array_to_any_clause ($fetch)));
+			array(db_int_array_to_any_clause($fetch)));
 		while ($arr = db_fetch_array($res)) {
-			$USER_OBJ["_".$arr['user_id']."_"] = new GFUser($arr['user_id'],$arr);
+			$USER_OBJ["_".$arr['user_id']."_"] = new GFUser($arr['user_id'], $arr);
 		}
 	}
 	foreach ($id_arr as $id) {
@@ -148,6 +152,10 @@ function &user_get_objects($id_arr) {
 	return $return;
 }
 
+/**
+ * @param string $username_arr
+ * @return GFUser[]
+ */
 function &user_get_objects_by_name($username_arr) {
 	$res = db_query_params('SELECT user_id FROM users WHERE lower(user_name) = ANY ($1)',
 				array(db_string_array_to_any_clause ($username_arr)));
@@ -155,16 +163,25 @@ function &user_get_objects_by_name($username_arr) {
 	return user_get_objects($arr);
 }
 
+/**
+ * @param string $email_arr
+ * @return GFUser[]
+ */
 function &user_get_objects_by_email($email_arr) {
-	$res=db_query_params('SELECT user_id FROM users WHERE lower(email) = ANY ($1)',
-				array(db_string_array_to_any_clause ($email_arr)));
+	$res = db_query_params('SELECT user_id FROM users WHERE lower(email) = ANY ($1)',
+		array(db_string_array_to_any_clause($email_arr)));
 	$arr =& util_result_column_to_array($res, 0);
 	return user_get_objects($arr);
 }
 
+/**
+ * user_get_active_users - Return the list of active users.
+ *
+ * @return GFUser[]
+ */
 function &user_get_active_users() {
-	$res=db_query_params('SELECT user_id FROM users WHERE status=$1',
-			      array('A'));
+	$res = db_query_params('SELECT user_id FROM users WHERE status=$1',
+		array('A'));
 	return user_get_objects(util_result_column_to_array($res, 0));
 }
 
@@ -229,7 +246,7 @@ class GFUser extends Error {
 			} elseif (db_numrows($res) < 1) {
 				//function in class we extended
 				$this->setError(_('User Not Found'));
-				$this->data_array=array();
+				$this->data_array = array();
 				return false;
 			} else {
 				//set up an associative array for use by other functions
@@ -292,7 +309,7 @@ class GFUser extends Error {
 			$this->setError(_('You must supply a theme'));
 			return false;
 		}
-		if (! forge_get_config('require_unique_email')) {
+		if (!forge_get_config('require_unique_email')) {
 			if (!$unix_name) {
 				$this->setError(_('You must supply a username'));
 				return false;
@@ -323,7 +340,7 @@ class GFUser extends Error {
 			$this->setError(_('Invalid Unix Name (must not contain uppercase characters)'));
 			return false;
 		}
-		$unix_name=strtolower($unix_name);
+		$unix_name = strtolower($unix_name);
 		if (!account_namevalid($unix_name)) {
 			$this->setError(_('Invalid Unix Name.'));
 			return false;
@@ -600,7 +617,7 @@ Enjoy the site.
 				theme_id=$15,
 				tooltips=$16
 				WHERE user_id=$17',
-			array (
+			array(
 				htmlspecialchars($firstname . ' ' .$lastname),
 				htmlspecialchars($firstname),
 				htmlspecialchars($lastname),
@@ -732,7 +749,7 @@ Enjoy the site.
 			db_rollback();
 			return false;
 		} else {
-			$this->data_array['status']=$status;
+			$this->data_array['status'] = $status;
 			if ($status == 'D') {
 				$projects = $this->getGroups() ;
 				foreach ($projects as $p) {
@@ -1765,6 +1782,7 @@ Email: %3$s
  *
  * @param        int        $group_id The Group ID
  * @param        int        $type     The Type
+ * @return bool
  * @deprecated
  *
  */
@@ -1779,7 +1797,8 @@ function user_ismember($group_id, $type = 0) {
 /**
  * user_getname() - DEPRECATED; DO NOT USE! (TODO: document what should be used instead)
  *
- * @param		int		The User ID
+ * @param        int        $user_id The User ID
+ * @return string
  * @deprecated
  *
  */
@@ -1787,7 +1806,7 @@ function user_getname($user_id = false) {
 	// use current user if one is not passed in
 	if (!$user_id) {
 		if (session_loggedin()) {
-			$user=&user_get_object(user_getid());
+			$user = user_get_object(user_getid());
 			if ($user) {
 				return $user->getUnixName();
 			} else {
@@ -1797,7 +1816,7 @@ function user_getname($user_id = false) {
 			return 'No User Id';
 		}
 	} else {
-		$user=&user_get_object($user_id);
+		$user = user_get_object($user_id);
 		if ($user) {
 			return $user->getUnixName();
 		} else {
@@ -1807,9 +1826,9 @@ function user_getname($user_id = false) {
 }
 
 class UserComparator {
-	var $criterion = 'name' ;
+	var $criterion = 'name';
 
-	function Compare ($a, $b) {
+	function Compare($a, $b) {
 		switch ($this->criterion) {
 		case 'name':
 		default:

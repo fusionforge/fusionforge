@@ -30,13 +30,13 @@ class Tasks{
 	}
 	/**
 	 * addComments - Add followup comments to an Artifact Object
-	 * @param Artifact	the artifact object where history should be added
-	 * @param array the artifact's data in json format (an array)
+	 * @param $artifact the artifact object where history should be added
+	 * @param $comments array the artifact's data in json format (an array)
 	 */
 	function addComments($artifact, $comments){
 		foreach($comments as $c){
 			$time = strtotime($c['date']);
-			$uid =&user_get_object_by_name($c['submitter'])->getID();
+			$uid = user_get_object_by_name($c['submitter'])->getID();
 			$importData = array('time' => $time, 'user' => $uid);
 			$artifact->addMessage($c['comment'], $importData);
 		}
@@ -44,19 +44,19 @@ class Tasks{
 
 	/**
 	 * addHistory - Add history of changes to an Artifact Object
-	 * @param Artifact	the artifact object where history should be added
-	 * @param array the artifact's data in json format (an array)
+	 * @param $artifact the artifact object where history should be added
+	 * @param $history  array the artifact's data in json format (an array)
 	 */
 	function addHistory($artifact, $history){
 		foreach($history as $h){
 			$time = strtotime($h['date']);
-			$uid =&user_get_object_by_name($h['by'])->getID();
+			$uid = user_get_object_by_name($h['by'])->getID();
 			$importData = array('time' => $time, 'user' => $uid);
 	//hack!!
 			$old = $h['old'];
 	//		if($h['field']=='assigned_to'){
 	//			if($old!='none'){
-	//				$old =&user_get_object_by_name($old)->getID();
+	//				$old = user_get_object_by_name($old)->getID();
 	//			} else {
 	//				$old = 100;
 	//			}
@@ -81,7 +81,7 @@ class Tasks{
 	 * @return ArtifactType	the tracker created
 	 */
 
-	function createTaskTracker($data){
+	function createTaskTracker($data) {
 		// TaskTracker's type
 		$tracker = $data['type'];
 		//	Create a tracker
@@ -122,8 +122,9 @@ class Tasks{
 
 	/**
 	 * Create each category for a single project group
-	 * @param ProjectGroup $pg
-	 * @param array $categoriesList
+	 * @param $pg   ProjectGroup
+	 * @param $categoriesList   array
+	 * @return array|bool
 	 */
 	function createCategories($pg, $categoriesList){
 		$cats = array();
@@ -149,8 +150,9 @@ class Tasks{
 
 	/**
 	 * Create each task for the considered project group
-	 * @param ProjectGroup $pg
-	 * @param array $data
+	 * @param $pg   ProjectGroup
+	 * @param $data    array
+	 * @return bool
 	 */
 	function createTasks($pg, $data, $cats){
 		// Stores each atid in a name:id array
@@ -179,7 +181,7 @@ class Tasks{
 						$assigned[] = user_get_object_by_mail($this->hashrn[$a['assigned_to[]']])->getID();
 					}
 				}
-				$uid =user_get_object_by_name($a['submitter'])->getID();
+				$uid = user_get_object_by_name($a['submitter'])->getID();
 				$dependentTemp = array();
 //				new dBug(array($a['summary'], $a['description'], $a['priority'], $a['hours'], $start, $end, $cats[$a['category']], $a['percent_complete'], &$assigned, &$dependentTemp, 0, 0, array('user' => $uid)));
 				if(!$artifact->create($a['summary'], $a['description'], $a['priority'], $a['hours'], $start, $end, $cats[$a['category']], $a['percent_complete'], $assigned, $dependentTemp, 0, 0, array('user' => $uid))){

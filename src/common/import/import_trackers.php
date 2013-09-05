@@ -19,9 +19,10 @@ static $NOT_EXTRA_FIELDS = array('assigned_to', 'attachments', 'class', 'comment
 
 /**
  * findType - get the type of a field from its name, value, and vocabulary : default 0 (text box), otherwise 1 (select box) or 2 (multi choice field)
- * @param string	Name of the field
- * @param string|array	Value of the field
+ * @param string        $fieldName Name of the field
+ * @param string|array  $fieldValue Value of the field
  * @param $vocabulary	Vocabulary of a tracker
+ * @return int
  */
 function findType($fieldName, $fieldValue, $vocabulary){
 	if (is_array($fieldValue)){
@@ -35,9 +36,9 @@ function findType($fieldName, $fieldValue, $vocabulary){
 
 /**
  * createFieldElements - Add elements (choices) to an extra field
- * @param ArtifactExtraField	The artifact extra field where the choices should be added
- * @param array	The choices to be declared for the specified extra field
- * @return false if failed
+ * @param ArtifactExtraField	$aef 		The artifact extra field where the choices should be added
+ * @param array					$vocabulary	The choices to be declared for the specified extra field
+ * @return bool false if failed
  */
 function createFieldElements($aef, $vocabulary){
 	//TODO:Add each element to tracker extra field
@@ -162,7 +163,7 @@ function deleteTrackers($group){
 function addComments($artifact, $jsonArtifact){
 	foreach($jsonArtifact['comments'] as $c){
 		$time = strtotime($c['date']);
-		$uid =&user_get_object_by_name($c['submitter'])->getID();
+		$uid = user_get_object_by_name($c['submitter'])->getID();
 		$importData = array('time' => $time, 'user' => $uid);
 		$artifact->addMessage($c['comment'],false,false, $importData);
 	}
@@ -176,13 +177,13 @@ function addComments($artifact, $jsonArtifact){
 function addHistory($artifact, $jsonArtifact){
 	foreach($jsonArtifact['history'] as $h){
 		$time = strtotime($h['date']);
-		$uid =&user_get_object_by_name($h['by'])->getID();
+		$uid = user_get_object_by_name($h['by'])->getID();
 		$importData = array('time' => $time, 'user' => $uid);
 //hack!!
 		$old = $h['old'];
 		if($h['field']=='assigned_to'){
 			if($old!='none'){
-				$old =&user_get_object_by_name($old)->getID();
+				$old = user_get_object_by_name($old)->getID();
 			} else {
 				$old = 100;
 			}
@@ -222,7 +223,7 @@ function addFiles($artifact, $jsonArtifact){
 
 			$ftype = $finfo->file($path);
 			$time = strtotime($a['date']);
-			$uid =&user_get_object_by_name($a['by'])->getID();
+			$uid = user_get_object_by_name($a['by'])->getID();
 			$importData = array('user' => $uid, 'time' => $time);
 
 			//we have no descriptions for files => None
@@ -282,7 +283,7 @@ function createArtifacts($at, $data, $hashrn, $hashlogin) {
 		//create the artif here with $extra_fields_array as extra fields
 		//new dBug($extra_fields_array);
 		//get user id
-		$uid =&user_get_object_by_name($artifact['submitter'])->getID();
+		$uid = user_get_object_by_name($artifact['submitter'])->getID();
 		//TODO:Search in hash table for corresponding mail for id, lookup object by mail, get ID
 		//get time from epoch
 		$timestamp = strtotime($artifact['date']);
@@ -294,7 +295,7 @@ function createArtifacts($at, $data, $hashrn, $hashlogin) {
 			$assigned_to = 100;
 		} else {
 			$m = $hashrn[$artifact['assigned_to']];
-			$assigned_to =&user_get_object_by_mail($m)->getID();
+			$assigned_to = user_get_object_by_mail($m)->getID();
 //new dBug(array($m,$assigned_to));
 		}
 

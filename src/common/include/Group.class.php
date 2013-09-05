@@ -2881,7 +2881,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		/* if we activate search engine, we probably want to reindex */
 		$res = db_query_params('UPDATE groups SET use_webdav=$1 WHERE group_id=$2',
 					array($status,
-						$this->getID()));
+						   $this->getID()));
 
 		if (!$res) {
 			$this->setError(sprintf(_('Error: Cannot Update Group UseWebdab Status: %s'),db_error()));

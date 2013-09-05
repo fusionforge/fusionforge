@@ -43,7 +43,7 @@
 /*
 Record description for .csv file format
 
-project_task_id					This is the ID in gforge database
+project_task_id					This is the ID in database
 external_task_id				The equivalent of project_task_id but determined by
 									external application, such as MS Project
 parent_id						The project_task_id of the parent task, if any
@@ -202,7 +202,7 @@ for ($i=0; $i<count($pt_arr); $i++) {
 		$pt_arr[$i]->getPriority().$sep.
 		str_replace($arrRemove, ' ', $pt_arr[$i]->getDetails()).$sep;
 
-		$users =& user_get_objects($pt_arr[$i]->getAssignedTo());
+		$users = user_get_objects($pt_arr[$i]->getAssignedTo());
 		for ($j=0; $j<5; $j++) {
 			if ($j < count($users)) {
 				if ($users[$j]->getUnixName() != 'none') {

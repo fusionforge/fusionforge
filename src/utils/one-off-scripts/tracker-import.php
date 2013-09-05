@@ -190,7 +190,7 @@ foreach ($iv as $k => $v) {
 	$importData['time'] = (int)$v["open_date"];
 
 	/* take over the submitter, but only if they exist */
-	if ($v["submitted_by"] != 100 && ($submitter =&
+	if ($v["submitted_by"] != 100 && ($submitter =
 	    user_get_object_by_name($v["submitted_unixname"])) &&
 	    is_object($submitter) && !($submitter->isError())) {
 		/* map the unixname of the submitter to our local user */

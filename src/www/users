@@ -67,7 +67,7 @@ if (forge_get_config('restrict_users_visibility')) {
 }
 
 //get the user object based on the user_name in the URL
-$user =& user_get_object_by_name($username);
+$user = user_get_object_by_name($username);
 
 if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 

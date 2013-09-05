@@ -40,7 +40,7 @@ if (getStringFromRequest('submit')) {
 
 	$confirm_hash = substr(md5($GLOBALS['session_ser'] . time()),0,16);
 
-	$u =& user_get_object(user_getid());
+	$u = user_get_object(user_getid());
 	if (!$u || !is_object($u)) {
    		form_release_key(getStringFromRequest('form_key'));
    		exit_error(_('Could Not Get User'),'my');

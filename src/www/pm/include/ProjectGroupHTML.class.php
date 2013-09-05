@@ -34,11 +34,11 @@ function pm_header($params) {
 		exit_disabled();
 	}
 
-	//required by site_project_header
+	// Required by site_project_header
 	$params['group']=$group_id;
 	$params['toptab']='pm';
 
-	//only projects can use the bug tracker, and only if they have it turned on
+	// Only projects can use the Project Manager, and only if they have it turned on
 	$project = group_get_object($group_id);
 	if (!$project || !is_object($project)) {
 		exit_no_group();
@@ -251,7 +251,8 @@ class ProjectGroupHTML extends ProjectGroup {
 	}
 
 	function renderAssigneeList($assignee_ids) {
-		$techs =& user_get_objects($assignee_ids);
+		$techs = user_get_objects($assignee_ids);
+		$return = '';
 		for ($i=0; $i<count($techs); $i++) {
 			$return .= $techs[$i]->getRealName().'<br />';
 		}

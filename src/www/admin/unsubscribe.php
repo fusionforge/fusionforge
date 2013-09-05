@@ -69,7 +69,7 @@ if (getStringFromRequest('submit') && $user_name) {
 			Perform unsubscription
 		*/
 
-		$u =& user_get_object_by_name($user_name);
+		$u = user_get_object_by_name($user_name);
 		if (!$u || !is_object($u)) {
 			exit_error(_('Could Not Get User'),'home');
 		} elseif ($u->isError()) {

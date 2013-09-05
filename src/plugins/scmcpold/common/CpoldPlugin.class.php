@@ -69,7 +69,7 @@ class CpoldPlugin extends SCMPlugin {
 
 	function getInstructionsForRW ($project) {
 		if (session_loggedin()) {
-			$u =& user_get_object(user_getid()) ;
+			$u = user_get_object(user_getid()) ;
 			$d = $u->getUnixName() ;
 			$b .= '<h2>';
 			$b .= sprintf(_('Developer %s Access via SSH'), 'CPOLD');

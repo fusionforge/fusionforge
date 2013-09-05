@@ -38,7 +38,7 @@ $unix_status2str = array(
 );
 
 $user_id = getIntFromRequest('user_id');
-$u =& user_get_object($user_id);
+$u = user_get_object($user_id);
 if (!$u || !is_object($u)) {
 	exit_error(_('Could Not Get User'),'admin');
 } elseif ($u->isError()) {

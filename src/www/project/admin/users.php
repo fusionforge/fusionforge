@@ -93,7 +93,7 @@ if (getStringFromRequest('submit')) {
 	if (getStringFromRequest('adduser')) {
 		/* Add user to this project */
 		$form_unix_name = getStringFromRequest('form_unix_name');
-		$user_object = &user_get_object_by_name($form_unix_name);
+		$user_object = user_get_object_by_name($form_unix_name);
 		if ($user_object === false) {
 			$warning_msg .= _('No Matching Users Found');
 		} else {

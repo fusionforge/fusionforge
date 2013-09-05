@@ -87,7 +87,7 @@ class pgsql extends System {
  	*
  	*/
 	function sysCheckUser($user_id) {
-		$user =& user_get_object($user_id);
+		$user = user_get_object($user_id);
 		if (!$user) {
 			return false;
 		}
@@ -102,7 +102,7 @@ class pgsql extends System {
  	*
  	*/
 	function sysCreateUser($user_id) {
-		$user = &user_get_object($user_id);
+		$user = user_get_object($user_id);
 		if (!$user) {
 			return false;
 		} else {

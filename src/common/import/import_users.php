@@ -399,7 +399,7 @@ function user_fill($users, $group_id, $check=False){
 	}
 
 	foreach ($users as $user => $role){
-		$user_object = &user_get_object_by_name($user);
+		$user_object = user_get_object_by_name($user);
 		if (!$user_object) {
 			$feedback .= sprintf(_('Failed to find user %s'), $user);
 		} else {

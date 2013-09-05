@@ -609,7 +609,7 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 	switch ($type) {
 		case 'user': {
 			$report = new ReportUserAct($SPAN, $id, $start, $end);
-			$u =& user_get_object($id);
+			$u = user_get_object($id);
 			if (!$u || $u->isError()) {
 				exit_error(_("Could Not Get User"));
 			}
@@ -946,14 +946,14 @@ function report_toolspiegraph($datatype = 0, $start, $end) {
 		exit_error(db_error(), '');
 	}
 	
-	$arr[1] = 'Bugs';
-	$arr[2] = 'Support Requests';
-	$arr[3] = 'Patches';
-	$arr[4] = 'Feature Requests';
-	$arr[0] = 'Other Trackers';
-	$arr[5] = 'Forum Messages';
-	$arr[6] = 'Tasks';
-	$arr[7] = 'Downloads';
+	$arr[1] = _('Bugs');
+	$arr[2] = _('Support Requests');
+	$arr[3] = _('Patches');
+	$arr[4] = _('Feature Requests');
+	$arr[0] = _('Other Trackers');
+	$arr[5] = _('Forum Messages');
+	$arr[6] = _('Tasks');
+	$arr[7] = _('Downloads');
 	
 	$chartid = 'toolspie';
 	if (db_numrows($res)) {

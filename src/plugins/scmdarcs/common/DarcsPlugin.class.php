@@ -579,7 +579,7 @@ class DarcsPlugin extends SCMPlugin {
 				  $id = $email_login[$id];
 				}
 
-				$u = &user_get_object_by_name ($id) ;
+				$u = user_get_object_by_name ($id) ;
 				if ($u) {
 					$user_id = $u->getID();
 				} else {

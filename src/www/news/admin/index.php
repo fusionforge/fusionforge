@@ -121,7 +121,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		<input type="hidden" name="group_id" value="'.db_result($result,0,'group_id').'" />
 		<input type="hidden" name="id" value="'.db_result($result,0,'id').'" />';
 
-		$user =& user_get_object(db_result($result,0,'submitted_by'));
+		$user = user_get_object(db_result($result,0,'submitted_by'));
 
 		echo '
 		<strong>'._('Submitted by').':</strong> '.$user->getRealName().'<br />

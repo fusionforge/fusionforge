@@ -33,7 +33,7 @@ require_once 'openid.php';
 session_require_login();
 
 // get global users vars
-$u =& user_get_object(user_getid());
+$u = user_get_object(user_getid());
 if (!$u || !is_object($u)) {
 	exit_error(_('Could Not Get User'));
 } elseif ($u->isError()) {

@@ -179,7 +179,7 @@ class MailingList extends Error {
 		$this->groupMailingListId = db_insertid($result, 'mail_group_list', 'group_list_id');
 		$this->fetchData($this->groupMailingListId);
 
-		$user = &user_get_object($creator_id);
+		$user = user_get_object($creator_id);
 		$userEmail = $user ? $user->getEmail() : "";
 		if(empty($userEmail) || !validate_email($userEmail)) {
 			$this->setInvalidEmailError();

@@ -49,7 +49,7 @@ if (db_numrows($res_user) > 1) {
 if (db_numrows($res_user) < 1) {
 	exit_error(_('Invalid confirmation hash.'),'my');
 }
-$u =& user_get_object(db_result($res_user, 0, 'user_id'), $res_user);
+$u = user_get_object(db_result($res_user, 0, 'user_id'), $res_user);
 if (!$u || !is_object($u)) {
 	exit_error(_('Could Not Get User'),'home');
 } elseif ($u->isError()) {

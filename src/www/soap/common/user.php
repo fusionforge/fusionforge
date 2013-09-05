@@ -188,7 +188,7 @@ $server->register(
 //get user objects for array of user_ids
 function &getUsers($session_ser,$user_ids) {
 	continue_session($session_ser);
-	$usrs =& user_get_objects($user_ids);
+	$usrs = user_get_objects($user_ids);
 	if (!$usrs) {
 		return new soap_fault ('3001','user','Could Not Get Users By Id','Could Not Get Users By Id');
 	}
@@ -232,7 +232,7 @@ function getGroupUsers($session_ser, $group_id) {
 //get user objects for array of unix_names
 function getUsersByName($session_ser,$user_names) {
 	continue_session($session_ser);
-	$usrs =& user_get_objects_by_name($user_names);
+	$usrs = user_get_objects_by_name($user_names);
 	if (!$usrs) {
 		return new soap_fault ('3002','user','Could Not Get Users By Name','Could Not Get Users By Name');
 	}
@@ -257,7 +257,7 @@ function addUser($unix_name,$firstname,$lastname,$password1,$password2,$email,
 //update user object
 function updateUser ($session_ser,$user_id,$firstname,$lastname,$language_id,$timezone,$mail_site,$mail_va,$use_ratings,$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode){
 	continue_session($session_ser);
-	$user =& user_get_object($user_id);
+	$user = user_get_object($user_id);
 	if (!$user || !is_object($user)) {
 		return new soap_fault ('updateUser','Could Not Get User','Could Not Get User');
 	}
@@ -272,7 +272,7 @@ function updateUser ($session_ser,$user_id,$firstname,$lastname,$language_id,$ti
 //delete user object
 function deleteUser ($session_ser,$user_id){
 	continue_session($session_ser);
-	$user =& user_get_object($user_id);
+	$user = user_get_object($user_id);
 	if (!$user || !is_object($user)) {
 		return new soap_fault ('deleteUser','Could Not Get User','Could Not Get User');
 	}elseif ($user->isError()){
@@ -289,7 +289,7 @@ function deleteUser ($session_ser,$user_id){
 //change status user object
 function changeStatus ($session_ser,$user_id,$status){
 	continue_session($session_ser);
-	$user =& user_get_object($user_id);
+	$user = user_get_object($user_id);
 	if (!$user || !is_object($user)) {
 		return new soap_fault ('changeStatus','Could Not Get User','Could Not Get User');
 	}elseif ($user->isError()){
@@ -306,7 +306,7 @@ function changeStatus ($session_ser,$user_id,$status){
 //change password user object
 function changePassword ($session_ser,$user_id,$password){
 	continue_session($session_ser);
-	$user =& user_get_object($user_id);
+	$user = user_get_object($user_id);
 	if (!$user || !is_object($user)) {
 		return new soap_fault ('changePassword','Could Not Get User','Could Not Get User');
 	}elseif ($user->isError()){
@@ -323,7 +323,7 @@ function changePassword ($session_ser,$user_id,$password){
 //get groups for user_id
 function &userGetGroups($session_ser,$user_id) {
 	continue_session($session_ser);
-	$user =& user_get_object($user_id);
+	$user = user_get_object($user_id);
 	if (!$user) {
 		return new soap_fault ('3003','user','Could Not Get Users Projects','Could Not Get Users Projects');
 	}

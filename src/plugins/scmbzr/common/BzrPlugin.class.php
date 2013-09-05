@@ -95,7 +95,7 @@ class BzrPlugin extends SCMPlugin {
 	function getInstructionsForRW ($project) {
 		$b = '' ;
 		if (session_loggedin()) {
-			$u =& user_get_object(user_getid()) ;
+			$u = user_get_object(user_getid()) ;
 			$d = $u->getUnixName() ;
 			$b .= '<h2>';
 			$b .= sprintf(_('Developer %s Access via SSH'), 'Bazaar');
@@ -403,7 +403,7 @@ class BzrPlugin extends SCMPlugin {
 
                         foreach ( $user_list as $user ) {
                                 // trying to get user id from user name
-                                $u = &user_get_object_by_name ($user) ;
+                                $u = user_get_object_by_name ($user) ;
                                 if ($u) {
                                         $user_id = $u->getID();
                                 } else {

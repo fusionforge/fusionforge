@@ -36,13 +36,13 @@ if (isset ($sys_noforcetype) && $sys_noforcetype) {
 	if (!$user_id) {
 		exit_missing_param('',array(_('A user must be specified for this page.')),'home');
 	} else {
-		$user =& user_get_object($user_id);
+		$user = user_get_object($user_id);
 		if (!$user || !is_object($user)) {
-			    exit_error(_('Invalid User'),'home');
+			exit_error(_('Invalid User'),'home');
 		} elseif ( $user->isError()) {
-			    exit_error($user->isError(),'home');
+			exit_error($user->isError(),'home');
 		} elseif ( !$user->isActive()) {
-			    exit_error(_('User not active'),'home');
+			exit_error(_('User not active'),'home');
 		}
 
 		include $gfwww.'include/user_home.php';

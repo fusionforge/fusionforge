@@ -160,7 +160,7 @@ function writeRssFeedItem($objProjectTask, $updates) {
 	foreach($updates as $update){
 	$update[6]==='message' ? $title = _('Comment') : $title = $update[5];
 	$update[6]==='message' ? $description = $update[5] : $description = $update[6];
-	$objGfUser = &user_get_object($update[7]);
+	$objGfUser = user_get_object($update[7]);
 		print'<item>';
 		print'<title>';
 		print $title;

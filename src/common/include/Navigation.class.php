@@ -187,7 +187,7 @@ class Navigation extends Error {
 	function getUserLinks() {
 		$res = array();
 		if (session_loggedin()) {
-			$u =& user_get_object(user_getid());
+			$u = user_get_object(user_getid());
 			$res['titles'][] = sprintf("%s (%s)", _('Log Out'), $u->getRealName());
 			$res['urls'][] = util_make_uri('/account/logout.php');
 

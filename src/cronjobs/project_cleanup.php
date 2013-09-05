@@ -58,7 +58,7 @@ if (db_numrows($result)) {
 
   while ($row = db_fetch_array($result)) {
     $hook_params = array();
-    $hook_params['user'] = &user_get_object($row['user_id']);
+    $hook_params['user'] = user_get_object($row['user_id']);
     $hook_params['user_id'] = $row['user_id'];
     plugin_hook ("user_delete", $hook_params);
   }

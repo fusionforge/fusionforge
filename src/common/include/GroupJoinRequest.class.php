@@ -254,7 +254,7 @@ class GroupJoinRequest extends Error {
 	 * @return    boolean    success.
 	 */
 	function reject() {
-		$user =& user_get_object($this->getUserId());
+		$user = user_get_object($this->getUserId());
 		setup_gettext_for_user($user);
 		$subject = sprintf(_('Request to Join Project %s'), $this->Group->getPublicName());
 		$body = sprintf(_('Your request to join the %s project was denied by an administrator.'), $this->Group->getPublicName());
@@ -268,7 +268,7 @@ class GroupJoinRequest extends Error {
 	 *
 	 */
 	function send_accept_mail() {
-		$user =& user_get_object($this->getUserId());
+		$user = user_get_object($this->getUserId());
 		setup_gettext_for_user($user);
 		$subject = sprintf(_('Request to Join Project %s'), $this->Group->getPublicName());
 		$body = sprintf(_('Your request to join the %s project was granted by an administrator.'), $this->Group->getPublicName());

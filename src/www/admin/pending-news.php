@@ -130,10 +130,9 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 	}
 
 	$group = group_get_object(db_result($result,0,'group_id'));
-	$user =& user_get_object(db_result($result,0,'submitted_by'));
+	$user = user_get_object(db_result($result,0,'submitted_by'));
 
 	echo '
-		<p />
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="for_group" value="'.db_result($result,0,'group_id').'" />
 		<input type="hidden" name="id" value="'.db_result($result,0,'id').'" />

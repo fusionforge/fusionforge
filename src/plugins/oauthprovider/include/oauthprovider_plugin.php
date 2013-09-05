@@ -266,7 +266,7 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 				$t_token = OauthAuthzAccessToken::load_by_key($token->key);
 				global $oauth_token, $oauth_user;
 				$oauth_token = $t_token;
-				$user =& user_get_object($t_token->getUserId());
+				$user = user_get_object($t_token->getUserId());
 				$oauth_user = $user;
 				//$user_name = $user->getRealName().' ('.$user->getUnixName().')';
 				//echo "Acting on behalf of user : $user_name\n";

@@ -41,12 +41,12 @@ class UNIX extends System {
 	/**
  	* sysCreateUser() - Create a user
  	*
- 	* @param		int	The user ID of the user to create
- 	* @return bool	 The return status
+ 	* @param		int	$user_id	The user ID of the user to create
+ 	* @return bool	The return status
  	*
  	*/
 	function sysCreateUser($user_id) {
-		$user = &user_get_object($user_id);
+		$user = user_get_object($user_id);
 		if (!$user) {
 			return false;
 		} else {
@@ -70,7 +70,7 @@ class UNIX extends System {
 	/**
  	* sysRemoveUser() - Remove a user
  	*
- 	* @param		int		The user ID of the user to remove
+ 	* @param		int		$user_id	The user ID of the user to remove
 	* @return bool	true on success/false on failure
  	*
  	*/
@@ -92,7 +92,7 @@ class UNIX extends System {
 	/**
  	* sysCheckGroup() - Check for the existence of a group
  	*
- 	* @param		int		The ID of the group to check
+ 	* @param	int		$group_id	The ID of the group to check
  	* @return	bool	true on success/false on error
  	*
  	*/
@@ -107,7 +107,7 @@ class UNIX extends System {
 	/**
  	* sysCreateGroup() - Create a group
  	*
- 	* @param		int		The ID of the group to create
+ 	* @param	int		$group_id	The ID of the group to create
  	* @return	bool	true on success/false on error
  	*
  	*/

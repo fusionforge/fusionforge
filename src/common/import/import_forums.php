@@ -24,7 +24,7 @@ class Forums {
 
 	function add_monitoring_users($users, $forumObject){
 		foreach($users as $user){
-			$uid = &user_get_object_by_name($user)->getID();
+			$uid = user_get_object_by_name($user)->getID();
 			$forumObject->setMonitor($uid);
 		}
 	}

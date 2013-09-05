@@ -494,7 +494,7 @@ function deleteGroup($session_ser, $group_id) {
 function addUserToGroup ($session_ser,$user_unix_name, $group_id, $role_id){
 	continue_session($session_ser);
 
-	$user_object = &user_get_object_by_name($user_unix_name);
+	$user_object = user_get_object_by_name($user_unix_name);
 	if ($user_object == false) {
 		return new soap_fault ('addUserToGroup','Could Not Get User','Could Not Get User');
 	}
@@ -564,7 +564,7 @@ function getUserRolesForGroup($session_ser, $group_id, $user_id) {
 	continue_session($session_ser);
 
 	$roles = array () ;
-	$user = &user_get_object($user_id);
+	$user = user_get_object($user_id);
 	if ($user == false) {
 		$errMsg = 'Could not get user: '.$user->getErrorMessage();
 		return new soap_fault ('2006','user',$errMsg,$errMsg);
