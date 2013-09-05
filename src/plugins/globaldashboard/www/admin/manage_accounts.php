@@ -148,7 +148,7 @@ function createNewAccountForm($user_id) {
 					<td>' . _('Account URI') . ': <span class="requiredfield">*</span> </td>
 					<td>
 						<input type="text" size="60" name="account_uri">
-						<input type="checkbox" name="account_is_foaf"> '. _("Is account foaf enabled ?").'
+						<input type="checkbox" name="account_is_foaf"> '. _("Is account FOAF enabled ?").'
 					</td>
 				</tr>
 				<tr>
