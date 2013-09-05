@@ -57,7 +57,7 @@ function html_generic_fileheader($title) {
 /**
  * html_feedback_top() - Show the feedback output at the top of the page.
  *
- * @param	string	The feedback.
+ * @param	string	$feedback	The feedback.
  */
 function html_feedback_top($feedback) {
 	global $HTML;
@@ -67,7 +67,7 @@ function html_feedback_top($feedback) {
 /**
  * html_warning_top() - Show the warning output at the top of the page.
  *
- * @param	string	The warning message.
+ * @param	string	$msg	The warning message.
  */
 function html_warning_top($msg) {
 	global $HTML;
@@ -77,7 +77,7 @@ function html_warning_top($msg) {
 /**
  * html_error_top() - Show the error output at the top of the page.
  *
- * @param	string	The error message.
+ * @param	string	$msg	The error message.
  */
 function html_error_top($msg) {
 	global $HTML;
@@ -87,7 +87,8 @@ function html_error_top($msg) {
 /**
  * make_user_link() - Make a username reference into a link to that users User page on SF.
  *
- * @param	string	The username of the user to link.
+ * @param	string	$username		The username of the user to link.
+ * @param	string	$displayname	The name to display.
  * @return	string
  */
 function make_user_link($username, $displayname = '') {
@@ -104,7 +105,7 @@ function make_user_link($username, $displayname = '') {
 /**
  * html_feedback_bottom() - Show the feedback output at the bottom of the page.
  *
- * @param	string	The feedback.
+ * @param	string	$feedback	The feedback.
  */
 function html_feedback_bottom($feedback) {
 	global $HTML;
@@ -114,8 +115,8 @@ function html_feedback_bottom($feedback) {
 /**
  * html_blankimage() - Show the blank spacer image.
  *
- * @param	int	The height of the image
- * @param	int	The width of the image
+ * @param	int	$height		The height of the image
+ * @param	int	$width		The width of the image
  * @return	string
  */
 function html_blankimage($height, $width) {
@@ -125,10 +126,10 @@ function html_blankimage($height, $width) {
 /**
  * html_abs_image() - Show an image given an absolute URL.
  *
- * @param	string	URL
- * @param	int	width of the image
- * @param	int 	height of the image
- * @param	array	Any <img> tag parameters (i.e. 'border', 'alt', etc...)
+ * @param	string	$url		URL
+ * @param	int		$width		width of the image
+ * @param	int		$height		height of the image
+ * @param	array	$args		Any <img> tag parameters (i.e. 'border', 'alt', etc...)
  * @return	string
  */
 function html_abs_image($url, $width, $height, $args) {
@@ -153,11 +154,11 @@ function html_abs_image($url, $width, $height, $args) {
 /**
  * html_image() - Build an image tag of an image contained in $src
  *
- * @param	string	The source location of the image
- * @param	int	The width of the image
- * @param	int	The height of the image
- * @param	array	Any IMG tag parameters associated with this image (i.e. 'border', 'alt', etc...)
- * @param	bool	DEPRECATED
+ * @param	string	$src		The source location of the image
+ * @param	int		$width		The width of the image
+ * @param	int		$height		The height of the image
+ * @param	array	$args		Any IMG tag parameters associated with this image (i.e. 'border', 'alt', etc...)
+ * @param	bool	$display	DEPRECATED
  * @return	string
  */
 function html_image($src, $width = '', $height = '', $args = array(), $display = 1) {
@@ -211,8 +212,8 @@ function html_get_theme_popup($title = 'theme_id', $selected = 'xzxz') {
 /**
  * html_get_ccode_popup() - Pop up box of supported country_codes.
  *
- * @param	string	The title of the popup box.
- * @param	string	Which element of the box is to be selected.
+ * @param	string	$title		The title of the popup box.
+ * @param	string	$selected	Which element of the box is to be selected.
  * @return	string	The html select box.
  */
 function html_get_ccode_popup($title = 'ccode', $selected = 'xzxz') {
@@ -225,8 +226,8 @@ function html_get_ccode_popup($title = 'ccode', $selected = 'xzxz') {
  * html_get_timezone_popup() - Pop up box of supported Timezones.
  * Assumes you have included Timezones array file.
  *
- * @param	string	The title of the popup box.
- * @param	string	Which element of the box is to be selected.
+ * @param	string	$title		The title of the popup box.
+ * @param	string	$selected	Which element of the box is to be selected.
  * @return	string	The html select box.
  */
 function html_get_timezone_popup($title = 'timezone', $selected = 'xzxz') {
@@ -242,12 +243,12 @@ function html_get_timezone_popup($title = 'timezone', $selected = 'xzxz') {
 /**
  * html_build_select_box_from_assoc() - Takes one assoc array and returns a pop-up box.
  *
- * @param	array	An array of items to use.
- * @param	string	The name you want assigned to this form element.
- * @param	string	The value of the item that should be checked.
- * @param	boolean	Whether we should swap the keys / names.
- * @param	bool	Whether or not to show the '100 row'.
- * @param	string	What to call the '100 row' defaults to none.
+ * @param	array	$arr			An array of items to use.
+ * @param	string	$select_name	The name you want assigned to this form element.
+ * @param	string	$checked_val	The value of the item that should be checked.
+ * @param	bool	$swap			Whether we should swap the keys / names.
+ * @param	bool	$show_100		Whether or not to show the '100 row'.
+ * @param	string	$text_100		What to call the '100 row' defaults to none.
  * @return	string
  */
 function html_build_select_box_from_assoc($arr, $select_name, $checked_val = 'xzxz', $swap = false, $show_100 = false, $text_100 = 'None') {
