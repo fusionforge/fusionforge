@@ -43,7 +43,7 @@ class Valid_GroupId
 extends Valid {
     function Valid_GroupId() {
         parent::Valid('group_id');
-        //$this->setErrorMessage(_("Error - No group_id was chosen."));
+        //$this->setErrorMessage(_("Error: No group_id was chosen."));
     }
 
     function validate($value) {

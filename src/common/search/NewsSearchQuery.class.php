@@ -86,7 +86,7 @@ class NewsSearchQuery extends SearchQuery {
 		}
 		return $qpa ;
 	}
-		
+
 	/**
 	 * getSections - returns the list of available forums
 	 *
