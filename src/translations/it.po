@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:03+0200\n"
+"POT-Creation-Date: 2013-09-06 17:17+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1592,7 +1592,7 @@ msgstr ""
 #: www/people/skills_utils.php:156 www/pm/add_task.php:95
 #: www/pm/browse_task.php:127 www/pm/browse_task.php:233
 #: www/pm/detail_task.php:86 www/pm/ganttpage.php:160 www/pm/mod_task.php:146
-#: www/project/stats/index.php:107 www/reporting/groupadded.php:66
+#: www/project/stats/index.php:106 www/reporting/groupadded.php:66
 #: www/reporting/groupcum.php:66 www/reporting/projectact.php:72
 #: www/reporting/projecttime.php:81 www/reporting/siteact.php:72
 #: www/reporting/sitetimebar.php:66 www/reporting/sitetime.php:79
@@ -1696,9 +1696,9 @@ msgstr "Data inizio"
 #: www/frs/reporting/downloads.php:111 www/pm/admin/index.php:211
 #: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
 #: www/pm/format_csv.php:86 www/pm/format_csv.php:89 www/pm/format_csv.php:93
-#: www/pm/format_csv.php:97 www/project/stats/index.php:105
-#: www/project/stats/index.php:106 www/project/stats/index.php:107
-#: www/project/stats/index.php:108 www/register/index.php:226
+#: www/pm/format_csv.php:97 www/project/stats/index.php:104
+#: www/project/stats/index.php:105 www/project/stats/index.php:106
+#: www/project/stats/index.php:107 www/register/index.php:226
 #: www/reporting/groupadded.php:65 www/reporting/groupadded.php:66
 #: www/reporting/groupadded.php:67 www/reporting/groupcum.php:65
 #: www/reporting/groupcum.php:66 www/reporting/groupcum.php:67
@@ -1738,7 +1738,7 @@ msgstr ""
 #: www/people/skills_utils.php:157 www/pm/add_task.php:110
 #: www/pm/browse_task.php:128 www/pm/browse_task.php:235
 #: www/pm/detail_task.php:90 www/pm/ganttpage.php:161 www/pm/mod_task.php:160
-#: www/project/stats/index.php:108 www/reporting/groupadded.php:67
+#: www/project/stats/index.php:107 www/reporting/groupadded.php:67
 #: www/reporting/groupcum.php:67 www/reporting/projectact.php:73
 #: www/reporting/projecttime.php:82 www/reporting/siteact.php:73
 #: www/reporting/sitetimebar.php:67 www/reporting/sitetime.php:80
@@ -1752,7 +1752,7 @@ msgid "End Date"
 msgstr "Data fine"
 
 #: common/docman/views/reporting.php:97 www/activity/index.php:191
-#: www/frs/reporting/downloads.php:113 www/project/stats/index.php:111
+#: www/frs/reporting/downloads.php:113 www/project/stats/index.php:110
 #: www/reporting/groupadded.php:68 www/reporting/groupcum.php:68
 #: www/reporting/projectact.php:74 www/reporting/projecttime.php:83
 #: www/reporting/siteact.php:74 www/reporting/sitetimebar.php:68
@@ -4777,19 +4777,23 @@ msgstr "Reportistica sulle consuntivazioni per utente"
 msgid "Per assignee"
 msgstr "Assegnatario"
 
-#: common/reporting/report_utils.php:442 www/reporting/usercum.php:59
+#: common/reporting/report_utils.php:442 www/reporting/index.php:40
+#: www/reporting/usercum.php:59
 msgid "Cumulative Users"
 msgstr "Utenti cumulativi"
 
-#: common/reporting/report_utils.php:447 www/reporting/useradded.php:59
+#: common/reporting/report_utils.php:447 www/reporting/index.php:39
+#: www/reporting/useradded.php:59
 msgid "Users Added"
 msgstr "Utenti aggiunti"
 
 #: common/reporting/report_utils.php:452 www/reporting/groupadded.php:59
+#: www/reporting/index.php:48
 msgid "Projects Added"
 msgstr "Progetti aggiunti"
 
 #: common/reporting/report_utils.php:457 www/reporting/groupcum.php:59
+#: www/reporting/index.php:49
 msgid "Cumulative Projects"
 msgstr "Progetti cumulativi"
 
@@ -6656,7 +6660,7 @@ msgstr "Campi personalizzati definiti"
 #: www/admin/massmail.php:137 www/frs/index.php:212
 #: www/people/editprofile.php:107 www/people/editprofile.php:282
 #: www/people/skills_utils.php:48 www/people/skills_utils.php:155
-#: www/project/stats/index.php:106 www/reporting/groupadded.php:65
+#: www/project/stats/index.php:105 www/reporting/groupadded.php:65
 #: www/reporting/groupcum.php:65 www/reporting/projectact.php:71
 #: www/reporting/projecttime.php:80 www/reporting/projecttime.php:93
 #: www/reporting/siteact.php:71 www/reporting/sitetime.php:78
@@ -17903,7 +17907,7 @@ msgstr ""
 msgid "File Release Reporting"
 msgstr "File rilasciato"
 
-#: www/frs/reporting/downloads.php:121 www/project/stats/index.php:119
+#: www/frs/reporting/downloads.php:121 www/project/stats/index.php:118
 #: www/reporting/groupadded.php:53 www/reporting/groupcum.php:53
 #: www/reporting/projectact.php:55 www/reporting/projecttime.php:54
 #: www/reporting/siteact.php:54 www/reporting/sitetimebar.php:52
@@ -21473,17 +21477,18 @@ msgid_plural "You must send a comment to the administrators:"
 msgstr[0] "Puoi inviare un commento agli amministratori:"
 msgstr[1] "Puoi inviare un commento agli amministratori:"
 
-#: www/project/stats/index.php:96
+#: www/project/stats/index.php:95
 #, fuzzy
 msgid "Project Statistics"
 msgstr "Usa Statistiche"
 
-#: www/project/stats/index.php:105 www/reporting/projectact.php:70
+#: www/project/stats/index.php:104 www/reporting/projectact.php:70
 #: www/reporting/siteact.php:70 www/reporting/useract.php:85
-msgid "Areas"
+#: www/tracker/reporting/index.php:128
+msgid "Area"
 msgstr "Aree"
 
-#: www/project/stats/index.php:122 www/tracker/reporting/index.php:147
+#: www/project/stats/index.php:121 www/tracker/reporting/index.php:147
 #: www/tracker/reporting/index.php:151
 #, fuzzy
 msgid "Error during graphic computation."
@@ -21721,25 +21726,9 @@ msgstr ""
 msgid "Users"
 msgstr "Utenti"
 
-#: www/reporting/index.php:39
-msgid "Users Added (graph)"
-msgstr "Utenti aggiunti (grafico)"
-
-#: www/reporting/index.php:40
-msgid "Cumulative Users (graph)"
-msgstr "Report cumulativo sugli utenti (grafico)"
-
-#: www/reporting/index.php:41 www/reporting/index.php:56
-msgid "Activity (graph)"
-msgstr "Attività (grafico)"
-
-#: www/reporting/index.php:48
-msgid "Projects Added (graph)"
-msgstr "Progetti aggiunti (grafico)"
-
-#: www/reporting/index.php:49
-msgid "Cumulative Projects (graph)"
-msgstr "Report cumulativo sui progetti (grafico)"
+#: www/reporting/index.php:41 www/reporting/useract.php:64
+msgid "User Activity"
+msgstr "Attività utente"
 
 #: www/reporting/index.php:54
 msgid "Project-specific reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads"
@@ -21747,19 +21736,23 @@ msgstr ""
 "Report specifici per il progetto: Tracker, Gestore attività, Forum, Gestore "
 "documenti, download"
 
+#: www/reporting/index.php:56 www/reporting/projectact.php:63
+msgid "Project Activity"
+msgstr "Attività del progetto"
+
 #: www/reporting/index.php:61
 msgid "Site-wide reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads"
 msgstr ""
 "Report per l'intero sito: Tracker, Gestore attività, Forum, Gestore "
 "Documentazione, Download"
 
-#: www/reporting/index.php:63
-msgid "Pie (graph)"
-msgstr "Torta (grafico)"
+#: www/reporting/index.php:63 www/reporting/toolspie.php:60
+msgid "Tool Pie Graphs"
+msgstr "Grafico a torta"
 
-#: www/reporting/index.php:64
-msgid "Line (graph)"
-msgstr "Linee (grafico)"
+#: www/reporting/index.php:64 www/reporting/siteact.php:64
+msgid "Site-Wide Activity"
+msgstr "Attività per l'intero sito"
 
 #: www/reporting/index.php:71
 msgid "Individual User Time Report (graph)"
@@ -21783,9 +21776,9 @@ msgstr "Reportistica sulle consuntivazioni per l'intero sito (grafico)"
 msgid "Site-Wide Total Hours Graph (graph)"
 msgstr "Grafico sulle ore totale per l'intero sito"
 
-#: www/reporting/index.php:75
-msgid "Site-Wide Task and Hours (report)"
-msgstr "Attività e ore per l'intero sito (grafico)"
+#: www/reporting/index.php:75 www/reporting/usersummary.php:63
+msgid "User Summary Report"
+msgstr "Sommario utente"
 
 #: www/reporting/index.php:82
 msgid "Administrative"
@@ -21798,10 +21791,6 @@ msgstr "Inizializza/Ricostruisci tabelle"
 #: www/reporting/index.php:85 www/reporting/timecategory.php:60
 msgid "Manage Time Tracker Categories"
 msgstr "Gestisci categorie delle consuntivazioni"
-
-#: www/reporting/projectact.php:63
-msgid "Project Activity"
-msgstr "Attività del progetto"
 
 #: www/reporting/projecttime.php:62
 msgid "Time Tracking By Project"
@@ -21855,10 +21844,6 @@ msgstr ""
 #: www/reporting/rebuild.php:67
 msgid "Press ONLY ONCE"
 msgstr "Premi UNA SOLA VOLTA"
-
-#: www/reporting/siteact.php:64
-msgid "Site-Wide Activity"
-msgstr "Attività per l'intero sito"
 
 #: www/reporting/sitetimebar.php:60 www/reporting/sitetime.php:62
 msgid "Site-Wide Time Tracking"
@@ -21936,14 +21921,6 @@ msgid ""
 "“Testing”."
 msgstr ""
 
-#: www/reporting/toolspie.php:60
-msgid "Tool Pie Graphs"
-msgstr "Grafico a torta"
-
-#: www/reporting/useract.php:64
-msgid "User Activity"
-msgstr "Attività utente"
-
 #: www/reporting/useract.php:68 www/reporting/usertime.php:66
 msgid ""
 "Choose the <strong>First Letter</strong> of the name of the person you wish "
@@ -21951,10 +21928,6 @@ msgid ""
 msgstr ""
 "Seleziona la <strong>prima lettera</strong> deel nome della persona per la "
 "quale creare la reportistica."
-
-#: www/reporting/usersummary.php:63
-msgid "User Summary Report"
-msgstr "Sommario utente"
 
 #: www/reporting/usersummary.php:66
 msgid ""
@@ -23644,10 +23617,6 @@ msgstr "Assegnatario"
 msgid "Tracker Activity Reporting"
 msgstr "Reportistica sulle consuntivazioni per utente"
 
-#: www/tracker/reporting/index.php:128
-msgid "Area"
-msgstr "Aree"
-
 #: www/tracker/roadmap.php:190 www/tracker/roadmap.php:230
 #, fuzzy
 msgid "No roadmap available"
@@ -23797,6 +23766,33 @@ msgstr "Aggiornamento multiplo"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Non è stato inserito alcun file"
+
+#~ msgid "Users Added (graph)"
+#~ msgstr "Utenti aggiunti (grafico)"
+
+#~ msgid "Cumulative Users (graph)"
+#~ msgstr "Report cumulativo sugli utenti (grafico)"
+
+#~ msgid "Activity (graph)"
+#~ msgstr "Attività (grafico)"
+
+#~ msgid "Projects Added (graph)"
+#~ msgstr "Progetti aggiunti (grafico)"
+
+#~ msgid "Cumulative Projects (graph)"
+#~ msgstr "Report cumulativo sui progetti (grafico)"
+
+#~ msgid "Pie (graph)"
+#~ msgstr "Torta (grafico)"
+
+#~ msgid "Line (graph)"
+#~ msgstr "Linee (grafico)"
+
+#~ msgid "Site-Wide Task and Hours (report)"
+#~ msgstr "Attività e ore per l'intero sito (grafico)"
+
+#~ msgid "Areas"
+#~ msgstr "Aree"
 
 #, fuzzy
 #~ msgid "Submit changes"
