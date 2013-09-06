@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:02+0200\n"
+"POT-Creation-Date: 2013-09-06 10:03+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -9411,6 +9411,7 @@ msgid "Account URI"
 msgstr "Mon compte"
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:139
+#: plugins/globaldashboard/www/admin/manage_accounts.php:151
 msgid "Is account FOAF enabled ?"
 msgstr ""
 
@@ -9491,10 +9492,6 @@ msgstr "Action"
 msgid "Create a new remote account"
 msgstr "Créer un nouvel outil de suivi."
 
-#: plugins/globaldashboard/www/admin/manage_accounts.php:151
-msgid "Is account foaf enabled ?"
-msgstr ""
-
 #: plugins/globaldashboard/www/help.php:52
 msgid "Global Dashboard Help"
 msgstr ""
@@ -9568,7 +9565,9 @@ msgid "Modify the associated forge below"
 msgstr "Modifier la forge partenaire ci-dessous"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:154
-msgid "Submit changes"
+#: www/survey/include/SurveyHTML.class.php:115
+#: www/survey/include/SurveyHTML.class.php:173
+msgid "Submit Changes"
 msgstr "Valider les changements"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:188
@@ -22853,11 +22852,6 @@ msgstr ""
 "Attention !!! C'est une mauvaise idée que de modifier une question qui à "
 "déjà des réponses"
 
-#: www/survey/include/SurveyHTML.class.php:115
-#: www/survey/include/SurveyHTML.class.php:173
-msgid "Submit Changes"
-msgstr "Valider les changements"
-
 #: www/survey/include/SurveyHTML.class.php:129
 #: www/survey/include/SurveyHTML.class.php:244
 msgid "Question"
@@ -23385,6 +23379,9 @@ msgstr "Erreur de mise à jour"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
+
+#~ msgid "Submit changes"
+#~ msgstr "Valider les changements"
 
 #~ msgid "INTERNAL ERROR: delete: "
 #~ msgstr "Erreur interne : suppression : "

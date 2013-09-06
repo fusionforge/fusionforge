@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:02+0200\n"
+"POT-Creation-Date: 2013-09-06 10:03+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -9720,6 +9720,7 @@ msgid "Account URI"
 msgstr "A miña conta "
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:139
+#: plugins/globaldashboard/www/admin/manage_accounts.php:151
 msgid "Is account FOAF enabled ?"
 msgstr ""
 
@@ -9800,10 +9801,6 @@ msgstr "Acción "
 msgid "Create a new remote account"
 msgstr "Crear un paquete "
 
-#: plugins/globaldashboard/www/admin/manage_accounts.php:151
-msgid "Is account foaf enabled ?"
-msgstr ""
-
 #: plugins/globaldashboard/www/help.php:52
 msgid "Global Dashboard Help"
 msgstr ""
@@ -9877,7 +9874,9 @@ msgid "Modify the associated forge below"
 msgstr "Modificar a forxa asociada de abaixo"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:154
-msgid "Submit changes"
+#: www/survey/include/SurveyHTML.class.php:115
+#: www/survey/include/SurveyHTML.class.php:173
+msgid "Submit Changes"
 msgstr "Enviar cambios"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:188
@@ -23451,11 +23450,6 @@ msgstr ""
 "ATENCIÓN! Non é unha boa idea cambiar unha pregunta cando xa se lle enviaron "
 "respostas"
 
-#: www/survey/include/SurveyHTML.class.php:115
-#: www/survey/include/SurveyHTML.class.php:173
-msgid "Submit Changes"
-msgstr "Enviar cambios"
-
 #: www/survey/include/SurveyHTML.class.php:129
 #: www/survey/include/SurveyHTML.class.php:244
 msgid "Question"
@@ -23989,6 +23983,9 @@ msgstr "Non se puido actualizar"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Non se introduciu un nome de usuario"
+
+#~ msgid "Submit changes"
+#~ msgstr "Enviar cambios"
 
 #~ msgid "All Fields Are Required."
 #~ msgstr "Todos os campos son obrigatorios."

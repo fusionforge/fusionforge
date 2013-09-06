@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:02+0200\n"
+"POT-Creation-Date: 2013-09-06 10:03+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9719,6 +9719,7 @@ msgid "Account URI"
 msgstr "Моя учетная запись"
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:139
+#: plugins/globaldashboard/www/admin/manage_accounts.php:151
 msgid "Is account FOAF enabled ?"
 msgstr ""
 
@@ -9798,10 +9799,6 @@ msgstr "Действие"
 #, fuzzy
 msgid "Create a new remote account"
 msgstr "Создать пакет"
-
-#: plugins/globaldashboard/www/admin/manage_accounts.php:151
-msgid "Is account foaf enabled ?"
-msgstr ""
 
 #: plugins/globaldashboard/www/help.php:52
 msgid "Global Dashboard Help"
@@ -9885,8 +9882,9 @@ msgid "Modify the associated forge below"
 msgstr "Изменить %1$s ниже:"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:154
-#, fuzzy
-msgid "Submit changes"
+#: www/survey/include/SurveyHTML.class.php:115
+#: www/survey/include/SurveyHTML.class.php:173
+msgid "Submit Changes"
 msgstr "Сохранить изменения"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:188
@@ -23585,11 +23583,6 @@ msgstr ""
 "ПРЕДУПРЕЖДЕНИЕ: Изменять суть вопроса, после представленных ответов "
 "НЕЖЕЛАТЕЛЬНО"
 
-#: www/survey/include/SurveyHTML.class.php:115
-#: www/survey/include/SurveyHTML.class.php:173
-msgid "Submit Changes"
-msgstr "Сохранить изменения"
-
 #: www/survey/include/SurveyHTML.class.php:129
 #: www/survey/include/SurveyHTML.class.php:244
 msgid "Question"
@@ -24129,6 +24122,10 @@ msgstr "Глобальное изменение"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Имя участника обязательно"
+
+#, fuzzy
+#~ msgid "Submit changes"
+#~ msgstr "Сохранить изменения"
 
 #~ msgid "All Fields Are Required."
 #~ msgstr "Все поля обязательны к заполнению"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:02+0200\n"
+"POT-Creation-Date: 2013-09-06 10:03+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9604,6 +9604,7 @@ msgid "Account URI"
 msgstr "Mítt&nbsp;konto"
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:139
+#: plugins/globaldashboard/www/admin/manage_accounts.php:151
 msgid "Is account FOAF enabled ?"
 msgstr ""
 
@@ -9684,10 +9685,6 @@ msgstr "Handling"
 msgid "Create a new remote account"
 msgstr "Skapa ett paket"
 
-#: plugins/globaldashboard/www/admin/manage_accounts.php:151
-msgid "Is account foaf enabled ?"
-msgstr ""
-
 #: plugins/globaldashboard/www/help.php:52
 msgid "Global Dashboard Help"
 msgstr ""
@@ -9766,8 +9763,9 @@ msgid "Modify the associated forge below"
 msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:154
-#, fuzzy
-msgid "Submit changes"
+#: www/survey/include/SurveyHTML.class.php:115
+#: www/survey/include/SurveyHTML.class.php:173
+msgid "Submit Changes"
 msgstr "Lämna in förändringar"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:188
@@ -23037,11 +23035,6 @@ msgstr ""
 "VARNING! Det är en dålig idé att ändra en fråga efter att svar på den har "
 "lämnats"
 
-#: www/survey/include/SurveyHTML.class.php:115
-#: www/survey/include/SurveyHTML.class.php:173
-msgid "Submit Changes"
-msgstr "Lämna in förändringar"
-
 #: www/survey/include/SurveyHTML.class.php:129
 #: www/survey/include/SurveyHTML.class.php:244
 msgid "Question"
@@ -23582,6 +23575,10 @@ msgstr "Mass uppdatering"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Användarenamn"
+
+#, fuzzy
+#~ msgid "Submit changes"
+#~ msgstr "Lämna in förändringar"
 
 #, fuzzy
 #~ msgid "Change week"

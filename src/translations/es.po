@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:02+0200\n"
+"POT-Creation-Date: 2013-09-06 10:03+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -9401,6 +9401,7 @@ msgid "Account URI"
 msgstr "URI Cuenta"
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:139
+#: plugins/globaldashboard/www/admin/manage_accounts.php:151
 msgid "Is account FOAF enabled ?"
 msgstr "Estan las cuentas FOAF activadas ?"
 
@@ -9475,10 +9476,6 @@ msgstr "Acción"
 msgid "Create a new remote account"
 msgstr "Crear una nueva cuenta remota"
 
-#: plugins/globaldashboard/www/admin/manage_accounts.php:151
-msgid "Is account foaf enabled ?"
-msgstr "están habilitadas las cuentas foaf?"
-
 #: plugins/globaldashboard/www/help.php:52
 msgid "Global Dashboard Help"
 msgstr "Ayuda Global de Cuadro de Mando"
@@ -9552,7 +9549,9 @@ msgid "Modify the associated forge below"
 msgstr "Modificar la forja asociada abajo"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:154
-msgid "Submit changes"
+#: www/survey/include/SurveyHTML.class.php:115
+#: www/survey/include/SurveyHTML.class.php:173
+msgid "Submit Changes"
 msgstr "Enviar cambios"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:188
@@ -22745,11 +22744,6 @@ msgstr ""
 "¡CUIDADO! Es una mala idea cambiar una pregunta cuando se han enviado "
 "respuestas a esa pregunta"
 
-#: www/survey/include/SurveyHTML.class.php:115
-#: www/survey/include/SurveyHTML.class.php:173
-msgid "Submit Changes"
-msgstr "Enviar cambios"
-
 #: www/survey/include/SurveyHTML.class.php:129
 #: www/survey/include/SurveyHTML.class.php:244
 msgid "Question"
@@ -23271,6 +23265,12 @@ msgstr "No puedo actualizar"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "No ha proporcionado el nombre de usuario"
+
+#~ msgid "Is account foaf enabled ?"
+#~ msgstr "están habilitadas las cuentas foaf?"
+
+#~ msgid "Submit changes"
+#~ msgstr "Enviar cambios"
 
 #~ msgid "INTERNAL ERROR: delete: "
 #~ msgstr "INTERNAL ERROR: delete: "

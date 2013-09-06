@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:02+0200\n"
+"POT-Creation-Date: 2013-09-06 10:03+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9684,6 +9684,7 @@ msgid "Account URI"
 msgstr "Account personale"
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:139
+#: plugins/globaldashboard/www/admin/manage_accounts.php:151
 msgid "Is account FOAF enabled ?"
 msgstr ""
 
@@ -9763,10 +9764,6 @@ msgstr "Azione"
 #, fuzzy
 msgid "Create a new remote account"
 msgstr "Crea un pacchetto"
-
-#: plugins/globaldashboard/www/admin/manage_accounts.php:151
-msgid "Is account foaf enabled ?"
-msgstr ""
 
 #: plugins/globaldashboard/www/help.php:52
 msgid "Global Dashboard Help"
@@ -9850,8 +9847,9 @@ msgid "Modify the associated forge below"
 msgstr "Modifica il %1$s:"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:154
-#, fuzzy
-msgid "Submit changes"
+#: www/survey/include/SurveyHTML.class.php:115
+#: www/survey/include/SurveyHTML.class.php:173
+msgid "Submit Changes"
 msgstr "Invia"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:188
@@ -23259,11 +23257,6 @@ msgstr ""
 "ATTENZIONE! Non è una buona idea cambiare una domanda quando sono state "
 "inserite risposte a questa domanda."
 
-#: www/survey/include/SurveyHTML.class.php:115
-#: www/survey/include/SurveyHTML.class.php:173
-msgid "Submit Changes"
-msgstr "Invia"
-
 #: www/survey/include/SurveyHTML.class.php:129
 #: www/survey/include/SurveyHTML.class.php:244
 msgid "Question"
@@ -23804,6 +23797,10 @@ msgstr "Aggiornamento multiplo"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Non è stato inserito alcun file"
+
+#, fuzzy
+#~ msgid "Submit changes"
+#~ msgstr "Invia"
 
 #~ msgid "All Fields Are Required."
 #~ msgstr "Tutti i campi sono obbligatori"

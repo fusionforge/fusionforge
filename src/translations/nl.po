@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:02+0200\n"
+"POT-Creation-Date: 2013-09-06 10:03+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9659,6 +9659,7 @@ msgid "Account URI"
 msgstr "Mijn account"
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:139
+#: plugins/globaldashboard/www/admin/manage_accounts.php:151
 msgid "Is account FOAF enabled ?"
 msgstr ""
 
@@ -9738,10 +9739,6 @@ msgstr "Actie"
 #, fuzzy
 msgid "Create a new remote account"
 msgstr "Cre&euml;er een bundel"
-
-#: plugins/globaldashboard/www/admin/manage_accounts.php:151
-msgid "Is account foaf enabled ?"
-msgstr ""
 
 #: plugins/globaldashboard/www/help.php:52
 msgid "Global Dashboard Help"
@@ -9825,8 +9822,9 @@ msgid "Modify the associated forge below"
 msgstr "Wijzig de %1$s hieronder:"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:154
-#, fuzzy
-msgid "Submit changes"
+#: www/survey/include/SurveyHTML.class.php:115
+#: www/survey/include/SurveyHTML.class.php:173
+msgid "Submit Changes"
 msgstr "Submit wijzigingen"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:188
@@ -23255,11 +23253,6 @@ msgstr ""
 "WAARSCHUWING! Het is geen goed idee vragen te veranderen nadat al antwoorden "
 "zijn ingediend"
 
-#: www/survey/include/SurveyHTML.class.php:115
-#: www/survey/include/SurveyHTML.class.php:173
-msgid "Submit Changes"
-msgstr "Submit wijzigingen"
-
 #: www/survey/include/SurveyHTML.class.php:129
 #: www/survey/include/SurveyHTML.class.php:244
 msgid "Question"
@@ -23806,6 +23799,10 @@ msgstr "Alles bijwerken"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Gebruikersnaam"
+
+#, fuzzy
+#~ msgid "Submit changes"
+#~ msgstr "Submit wijzigingen"
 
 #~ msgid "All Fields Are Required."
 #~ msgstr "Alle velden zijn verplicht."

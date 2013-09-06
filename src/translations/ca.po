@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:02+0200\n"
+"POT-Creation-Date: 2013-09-06 10:03+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9660,6 +9660,7 @@ msgid "Account URI"
 msgstr "El meu compte"
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:139
+#: plugins/globaldashboard/www/admin/manage_accounts.php:151
 msgid "Is account FOAF enabled ?"
 msgstr ""
 
@@ -9739,10 +9740,6 @@ msgstr "Acció"
 #, fuzzy
 msgid "Create a new remote account"
 msgstr "Crea un paquet a"
-
-#: plugins/globaldashboard/www/admin/manage_accounts.php:151
-msgid "Is account foaf enabled ?"
-msgstr ""
 
 #: plugins/globaldashboard/www/help.php:52
 msgid "Global Dashboard Help"
@@ -9826,8 +9823,9 @@ msgid "Modify the associated forge below"
 msgstr "Modifica el %1$s a sota:"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:154
-#, fuzzy
-msgid "Submit changes"
+#: www/survey/include/SurveyHTML.class.php:115
+#: www/survey/include/SurveyHTML.class.php:173
+msgid "Submit Changes"
 msgstr "Tramet els canvis"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:188
@@ -23235,11 +23233,6 @@ msgstr ""
 "AVÍS! És una mala idea canviar una pregunta després que s'hagin enviat les "
 "respostes"
 
-#: www/survey/include/SurveyHTML.class.php:115
-#: www/survey/include/SurveyHTML.class.php:173
-msgid "Submit Changes"
-msgstr "Tramet els canvis"
-
 #: www/survey/include/SurveyHTML.class.php:129
 #: www/survey/include/SurveyHTML.class.php:244
 msgid "Question"
@@ -23781,6 +23774,10 @@ msgstr "Actualització en massa"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Nom d'usuari"
+
+#, fuzzy
+#~ msgid "Submit changes"
+#~ msgstr "Tramet els canvis"
 
 #~ msgid "All Fields Are Required."
 #~ msgstr "Es requereixen tots els camps."

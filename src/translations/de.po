@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:02+0200\n"
+"POT-Creation-Date: 2013-09-06 10:03+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -9706,6 +9706,7 @@ msgid "Account URI"
 msgstr "Mein Account"
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:139
+#: plugins/globaldashboard/www/admin/manage_accounts.php:151
 msgid "Is account FOAF enabled ?"
 msgstr ""
 
@@ -9786,10 +9787,6 @@ msgstr "Aktion"
 msgid "Create a new remote account"
 msgstr "Einen neuen Tracker anlegen"
 
-#: plugins/globaldashboard/www/admin/manage_accounts.php:151
-msgid "Is account foaf enabled ?"
-msgstr ""
-
 #: plugins/globaldashboard/www/help.php:52
 msgid "Global Dashboard Help"
 msgstr ""
@@ -9869,7 +9866,9 @@ msgid "Modify the associated forge below"
 msgstr "Bearbeiten Sie die verwandte Forge unten"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:154
-msgid "Submit changes"
+#: www/survey/include/SurveyHTML.class.php:115
+#: www/survey/include/SurveyHTML.class.php:173
+msgid "Submit Changes"
 msgstr "Änderungen abschicken"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:188
@@ -23518,11 +23517,6 @@ msgstr ""
 "WARNUNG! Es ist nicht gut eine Frage zu ändern, wenn zu ihr schon Antworten "
 "geschrieben wurden"
 
-#: www/survey/include/SurveyHTML.class.php:115
-#: www/survey/include/SurveyHTML.class.php:173
-msgid "Submit Changes"
-msgstr "Änderungen abschicken"
-
 #: www/survey/include/SurveyHTML.class.php:129
 #: www/survey/include/SurveyHTML.class.php:244
 msgid "Question"
@@ -24061,6 +24055,9 @@ msgstr "Aktualisierung nicht möglich"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Kein Benutzername angegeben"
+
+#~ msgid "Submit changes"
+#~ msgstr "Änderungen abschicken"
 
 #~ msgid "All Fields Are Required."
 #~ msgstr "Alle Felder erforderlich."

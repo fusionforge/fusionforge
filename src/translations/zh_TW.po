@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:02+0200\n"
+"POT-Creation-Date: 2013-09-06 10:03+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9622,6 +9622,7 @@ msgid "Account URI"
 msgstr "我的帳號"
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:139
+#: plugins/globaldashboard/www/admin/manage_accounts.php:151
 msgid "Is account FOAF enabled ?"
 msgstr ""
 
@@ -9701,10 +9702,6 @@ msgstr "動作"
 #, fuzzy
 msgid "Create a new remote account"
 msgstr "建立一個集合"
-
-#: plugins/globaldashboard/www/admin/manage_accounts.php:151
-msgid "Is account foaf enabled ?"
-msgstr ""
 
 #: plugins/globaldashboard/www/help.php:52
 msgid "Global Dashboard Help"
@@ -9788,8 +9785,9 @@ msgid "Modify the associated forge below"
 msgstr "修改 %1$s 如下："
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:154
-#, fuzzy
-msgid "Submit changes"
+#: www/survey/include/SurveyHTML.class.php:115
+#: www/survey/include/SurveyHTML.class.php:173
+msgid "Submit Changes"
 msgstr "送出異動"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:188
@@ -23074,11 +23072,6 @@ msgid ""
 "been submitted"
 msgstr "警告！建議不要在問卷已經有人填寫後修改問卷"
 
-#: www/survey/include/SurveyHTML.class.php:115
-#: www/survey/include/SurveyHTML.class.php:173
-msgid "Submit Changes"
-msgstr "送出異動"
-
 #: www/survey/include/SurveyHTML.class.php:129
 #: www/survey/include/SurveyHTML.class.php:244
 msgid "Question"
@@ -23613,6 +23606,10 @@ msgstr "大量更新"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "帳號"
+
+#, fuzzy
+#~ msgid "Submit changes"
+#~ msgstr "送出異動"
 
 #~ msgid "All Fields Are Required."
 #~ msgstr "需要全部的欄位"

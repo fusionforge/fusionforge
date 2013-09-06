@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 10:02+0200\n"
+"POT-Creation-Date: 2013-09-06 10:03+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9622,6 +9622,7 @@ msgid "Account URI"
 msgstr "Nere kontua"
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:139
+#: plugins/globaldashboard/www/admin/manage_accounts.php:151
 msgid "Is account FOAF enabled ?"
 msgstr ""
 
@@ -9702,10 +9703,6 @@ msgstr "Akzioa"
 msgid "Create a new remote account"
 msgstr "Pakete bat sortu"
 
-#: plugins/globaldashboard/www/admin/manage_accounts.php:151
-msgid "Is account foaf enabled ?"
-msgstr ""
-
 #: plugins/globaldashboard/www/help.php:52
 msgid "Global Dashboard Help"
 msgstr ""
@@ -9785,8 +9782,9 @@ msgid "Modify the associated forge below"
 msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:154
-#, fuzzy
-msgid "Submit changes"
+#: www/survey/include/SurveyHTML.class.php:115
+#: www/survey/include/SurveyHTML.class.php:173
+msgid "Submit Changes"
 msgstr "Aldaketak bidali"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:188
@@ -23106,11 +23104,6 @@ msgid ""
 msgstr ""
 "¡Kontuz! Ez da ideia ona galdera bat aldatzea jadanik erantzunak jaso baditu"
 
-#: www/survey/include/SurveyHTML.class.php:115
-#: www/survey/include/SurveyHTML.class.php:173
-msgid "Submit Changes"
-msgstr "Aldaketak bidali"
-
 #: www/survey/include/SurveyHTML.class.php:129
 #: www/survey/include/SurveyHTML.class.php:244
 msgid "Question"
@@ -23644,6 +23637,10 @@ msgstr "Ezin da eguneratu"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Ez da erabiltzaile-izenik eman"
+
+#, fuzzy
+#~ msgid "Submit changes"
+#~ msgstr "Aldaketak bidali"
 
 #, fuzzy
 #~ msgid "Change week"
