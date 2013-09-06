@@ -82,7 +82,7 @@ if ($sw) {
 	<input type="hidden" name="sw" value="<?php echo $sw; ?>" />
 	<table><tr>
 	<td><strong><?php echo _('User')._(':'); ?></strong><br /><?php echo report_useract_box('dev_id',$dev_id,$sw); ?></td>
-	<td><strong><?php echo _('Areas')._(':'); ?></strong><br /><?php echo report_area_box('area',$area); ?></td>
+	<td><strong><?php echo _('Area')._(':'); ?></strong><br /><?php echo report_area_box('area',$area); ?></td>
 	<td><strong><?php echo _('Type')._(':'); ?></strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
 	<td><strong><?php echo _('Start Date')._(':'); ?></strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
 	<td><strong><?php echo _('End Date')._(':'); ?></strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>

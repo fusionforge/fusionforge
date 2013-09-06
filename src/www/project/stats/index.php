@@ -31,9 +31,8 @@ require_once $gfcommon.'reporting/Report.class.php';
 require_once $gfcommon.'reporting/ReportProjectAct.class.php';
 require_once $gfwww.'project/admin/project_admin_utils.php';
 
-
 $group_id = getIntFromRequest('group_id');
-if ( !$group_id ) {
+if (!$group_id) {
 	exit_no_group();
 }
 
@@ -102,7 +101,7 @@ project_admin_header(array('title'=>_('Project Statistics').'','group'=>$group_i
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table class="centered">
 <tr>
-<td><strong><?php echo _('Areas')._(':'); ?></strong><br /><?php echo report_area_box('area',$area,$group); ?></td>
+<td><strong><?php echo _('Area')._(':'); ?></strong><br /><?php echo report_area_box('area',$area,$group); ?></td>
 <td><strong><?php echo _('Type')._(':'); ?></strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
 <td><strong><?php echo _('Start Date')._(':'); ?></strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
 <td><strong><?php echo _('End Date')._(':'); ?></strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>

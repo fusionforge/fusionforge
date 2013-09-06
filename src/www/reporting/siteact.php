@@ -67,7 +67,7 @@ report_header(_('Site-Wide Activity'));
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="get">
 <table><tr>
-<td><strong><?php echo _('Areas')._(':'); ?></strong><br /><?php echo report_area_box('area',$area); ?></td>
+<td><strong><?php echo _('Area')._(':'); ?></strong><br /><?php echo report_area_box('area',$area); ?></td>
 <td><strong><?php echo _('Type')._(':'); ?></strong><br /><?php echo report_span_box('SPAN',$SPAN); ?></td>
 <td><strong><?php echo _('Start Date')._(':'); ?></strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
 <td><strong><?php echo _('End Date')._(':'); ?></strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
