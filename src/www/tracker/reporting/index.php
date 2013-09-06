@@ -139,7 +139,7 @@ $h->header(array('title' => _('Tracker Activity Reporting')));
 </form>
 <?php
 if ($start == $end) {
-	echo '<p class="warning">'._('Start and end dates must be different').'</p>';
+	echo '<p class="error">'._('Start and end dates must be different').'</p>';
 } else {
 	if ($atid) {
 		if (!$area || $area == 'activity') {

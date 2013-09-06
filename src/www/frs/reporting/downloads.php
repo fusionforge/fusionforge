@@ -118,7 +118,7 @@ if ($report->isError()) {
 $data = $report->getData();
 
 if ($start == $end) {
-    echo '<p class="warning">'._('Start and end dates must be different').'</p>';
+    echo '<p class="error">'._('Start and end dates must be different').'</p>';
 } elseif (count($data) == 0) {
 	echo '<p class="information">';
 	echo _('There have been no downloads for this package.');
