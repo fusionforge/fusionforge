@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-04 19:11+0200\n"
+"POT-Creation-Date: 2013-09-06 10:02+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -418,7 +418,7 @@ msgstr ""
 #: common/forum/Forum.class.php:641 common/forum/Forum.class.php:649
 #: common/forum/Forum.class.php:665 common/forum/ForumHTML.class.php:73
 #: common/forum/ForumHTML.class.php:211 common/include/Error.class.php:207
-#: common/include/exit.php:80 common/include/User.class.php:336
+#: common/include/exit.php:80 common/include/User.class.php:353
 #: common/mail/MailingListFactory.class.php:104
 #: common/tracker/actions/browse.php:406 common/tracker/actions/browse.php:409
 #: common/tracker/actions/query.php:329 common/tracker/actions/query.php:344
@@ -708,8 +708,8 @@ msgstr "1週間"
 msgid "Error"
 msgstr ""
 
-#: common/docman/include/webdav.php:221 common/docman/include/webdav.php:232
-#: common/docman/include/webdav.php:294
+#: common/docman/include/webdav.php:222 common/docman/include/webdav.php:233
+#: common/docman/include/webdav.php:295
 msgid "webdav db error:"
 msgstr ""
 
@@ -1037,7 +1037,7 @@ msgstr "ドキュメント所属グループ:"
 #: common/tracker/actions/detail.php:73
 #: common/tracker/actions/mod-limited.php:128
 #: common/tracker/actions/mod.php:155 common/tracker/actions/query.php:344
-#: common/tracker/Artifact.class.php:948
+#: common/tracker/Artifact.class.php:946
 #: common/tracker/views/form-customizelist.php:37 www/pm/browse_task.php:383
 #: www/project/admin/database.php:208
 msgid "State"
@@ -1290,11 +1290,11 @@ msgstr ""
 #: common/tracker/actions/mod-limited.php:98
 #: common/tracker/actions/mod-limited.php:103
 #: common/tracker/actions/mod.php:99 common/tracker/actions/mod.php:104
+#: common/tracker/Artifact.class.php:1582
 #: common/tracker/Artifact.class.php:1584
-#: common/tracker/Artifact.class.php:1586
-#: common/tracker/Artifact.class.php:1593
-#: common/tracker/Artifact.class.php:1599
-#: common/tracker/Artifact.class.php:1699
+#: common/tracker/Artifact.class.php:1591
+#: common/tracker/Artifact.class.php:1597
+#: common/tracker/Artifact.class.php:1697
 #: common/tracker/include/ArtifactHtml.class.php:112
 #: common/tracker/include/ArtifactHtml.class.php:170
 #: common/tracker/include/ArtifactHtml.class.php:179
@@ -1318,7 +1318,7 @@ msgstr ""
 #: www/export/rss20_docman.php:136 www/export/rss20_docman.php:138
 #: www/export/tracker.php:108 www/forum/index.php:90 www/forum/message.php:127
 #: www/forum/myforums.php:152 www/frs/index.php:178 www/frs/index.php:237
-#: www/include/html.php:1041 www/news/news_utils.php:149
+#: www/include/html.php:1042 www/news/news_utils.php:149
 #: www/news/news_utils.php:269 www/people/people_utils.php:422
 #: www/people/viewjob.php:78 www/pm/browse_task.php:265
 #: www/pm/browse_task.php:275 www/pm/include/ProjectTaskHTML.class.php:122
@@ -1765,10 +1765,10 @@ msgstr ""
 
 #: common/docman/views/reporting.php:151 common/reporting/report_utils.php:161
 #: common/reporting/report_utils.php:204 common/reporting/report_utils.php:684
-#: common/reporting/report_utils.php:685 www/frs/reporting/downloads.php:178
-#: www/stats/site_stats_utils.php:233 www/stats/site_stats_utils.php:363
-#: www/stats/site_stats_utils.php:417 www/stats/site_stats_utils.php:476
-#: www/top/toplist.php:49
+#: common/reporting/report_utils.php:685 common/reporting/report_utils.php:956
+#: www/frs/reporting/downloads.php:178 www/stats/site_stats_utils.php:233
+#: www/stats/site_stats_utils.php:363 www/stats/site_stats_utils.php:417
+#: www/stats/site_stats_utils.php:476 www/top/toplist.php:49
 msgid "Downloads"
 msgstr ""
 
@@ -2222,7 +2222,7 @@ msgstr "パスワードは最低 6 文字以上でなければいけません。
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
 #: common/survey/SurveyQuestion.class.php:153
-#: common/tracker/Artifact.class.php:1153
+#: common/tracker/Artifact.class.php:1151
 #: plugins/mailman/include/MailmanList.class.php:249
 #: plugins/mailman/include/MailmanList.class.php:376
 #: plugins/mailman/include/MailmanList.class.php:393
@@ -2808,7 +2808,7 @@ msgid "Name is reserved."
 msgstr "名前はCSVの為に予約されています。"
 
 #: common/include/account.php:89 common/include/account.php:93
-#: common/include/User.class.php:341
+#: common/include/User.class.php:358
 msgid "That username already exists."
 msgstr "そのユーザー名はすでに存在します。"
 
@@ -2846,8 +2846,8 @@ msgstr "データベース情報"
 msgid "Permission denied."
 msgstr "許可がありません"
 
-#: common/include/Error.class.php:143 common/include/User.class.php:336
-#: common/include/User.class.php:917 common/include/User.class.php:970
+#: common/include/Error.class.php:143 common/include/User.class.php:353
+#: common/include/User.class.php:934 common/include/User.class.php:987
 #: common/tracker/actions/tracker.php:84
 #: plugins/forumml/www/forumml_utils.php:686 www/account/change_email.php:38
 msgid "Invalid Email Address"
@@ -2931,13 +2931,13 @@ msgstr "調査報告は見つかりません"
 msgid "Group object already exists"
 msgstr "そのユーザー名はすでに存在します。"
 
-#: common/include/Group.class.php:312 common/include/User.class.php:328
-#: common/include/User.class.php:388
+#: common/include/Group.class.php:312 common/include/User.class.php:345
+#: common/include/User.class.php:405
 msgid "Invalid Unix Name."
 msgstr "無効なUnixネーム"
 
 #: common/include/Group.class.php:315 common/include/Group.class.php:319
-#: common/include/User.class.php:332
+#: common/include/User.class.php:349
 msgid "Unix name already taken"
 msgstr ""
 
@@ -3432,7 +3432,7 @@ msgstr ""
 #: common/include/group_section_texts.php:31
 #: common/include/Navigation.class.php:473 common/include/rbac_texts.php:157
 #: common/reporting/report_utils.php:157 common/reporting/report_utils.php:200
-#: common/reporting/report_utils.php:703
+#: common/reporting/report_utils.php:703 common/reporting/report_utils.php:955
 #: common/widget/Widget_ProjectPublicAreas.class.php:148
 #: plugins/blocks/www/index.php:154 www/my/dashboard.php:77
 #: www/stats/site_stats_utils.php:242 www/stats/site_stats_utils.php:367
@@ -3480,7 +3480,7 @@ msgstr ""
 msgid "Log Out"
 msgstr ""
 
-#: common/include/Navigation.class.php:194 www/include/html.php:966
+#: common/include/Navigation.class.php:194 www/include/html.php:967
 msgid "My Account"
 msgstr "マイアカウント"
 
@@ -4099,47 +4099,47 @@ msgstr ""
 msgid "Not a File %1$s or not a directory %2$s."
 msgstr ""
 
-#: common/include/User.class.php:231
+#: common/include/User.class.php:248
 #, fuzzy
 msgid "User Not Found"
 msgstr "調査報告は見つかりません"
 
-#: common/include/User.class.php:292
+#: common/include/User.class.php:309
 #, fuzzy
 msgid "You must supply a theme"
 msgstr "ユーザー名を入力して下さい。(必須)"
 
-#: common/include/User.class.php:297
+#: common/include/User.class.php:314
 msgid "You must supply a username"
 msgstr "ユーザー名を入力して下さい。(必須)"
 
-#: common/include/User.class.php:302
+#: common/include/User.class.php:319
 msgid "You must supply a first name"
 msgstr ""
 
-#: common/include/User.class.php:306
+#: common/include/User.class.php:323
 msgid "You must supply a last name"
 msgstr ""
 
-#: common/include/User.class.php:310
+#: common/include/User.class.php:327
 msgid "You must supply a password"
 msgstr "パスワードを入力してください。(必須)"
 
-#: common/include/User.class.php:314
+#: common/include/User.class.php:331
 msgid "Passwords do not match"
 msgstr "パスワードが一致しません"
 
-#: common/include/User.class.php:318
+#: common/include/User.class.php:335
 #, fuzzy
 msgid "Invalid Password"
 msgstr "無効なパスワード:"
 
-#: common/include/User.class.php:323
+#: common/include/User.class.php:340
 #, fuzzy
 msgid "Invalid Unix Name (must not contain uppercase characters)"
 msgstr "ログイン名(大文字を使用してはいけません)"
 
-#: common/include/User.class.php:346
+#: common/include/User.class.php:363
 msgid ""
 "User with this email already exists - use people search to recover your "
 "login."
@@ -4147,17 +4147,17 @@ msgstr ""
 "(未訳：account_register.err_mailexist)User with this email already exists - "
 "use people search to recover your login."
 
-#: common/include/User.class.php:422
+#: common/include/User.class.php:439
 #, fuzzy
 msgid "Insert Failed: "
 msgstr "インサート失敗"
 
-#: common/include/User.class.php:429
+#: common/include/User.class.php:446
 #, fuzzy
 msgid "Could Not Get User Id: "
 msgstr "パーミッションが取得できません。"
 
-#: common/include/User.class.php:463
+#: common/include/User.class.php:480
 #, fuzzy, php-format
 msgid ""
 "Thank you for registering on the %3$s web site. You have\n"
@@ -4194,109 +4194,109 @@ msgstr ""
 "\n"
 "どうぞ %3$s サイトを楽しんで下さい %3$s スタッフより。\n"
 
-#: common/include/User.class.php:485
+#: common/include/User.class.php:502
 #, php-format
 msgid "%s Account Registration"
 msgstr "%s アカウント登録"
 
-#: common/include/User.class.php:513
+#: common/include/User.class.php:530
 #, fuzzy
 msgid "Could Not Delete From artifact_monitor:"
 msgstr "パーミッションが取得できません。"
 
-#: common/include/User.class.php:520
+#: common/include/User.class.php:537
 #, fuzzy
 msgid "Could Not Delete From artifact_type_monitor:"
 msgstr "パーミッションが取得できません。"
 
-#: common/include/User.class.php:527
+#: common/include/User.class.php:544
 msgid "Could Not Delete From forum_monitored_forums:"
 msgstr ""
 
-#: common/include/User.class.php:534
+#: common/include/User.class.php:551
 msgid "Could Not Delete From filemodule_monitor:"
 msgstr ""
 
-#: common/include/User.class.php:623
+#: common/include/User.class.php:640
 #, fuzzy
 msgid "Error - Could Not Update User Object:"
 msgstr "パーミッションが取得できません。"
 
-#: common/include/User.class.php:717
+#: common/include/User.class.php:734
 #, fuzzy
 msgid "Error: Invalid status value"
 msgstr "無効なパラメータ"
 
-#: common/include/User.class.php:721
+#: common/include/User.class.php:738
 msgid "Error: You cannot set pending status if user is suspend or active"
 msgstr ""
 
-#: common/include/User.class.php:731
+#: common/include/User.class.php:748
 #, fuzzy
 msgid "Error - Could Not Update User Status:"
 msgstr "パーミッションが取得できません。"
 
-#: common/include/User.class.php:798
+#: common/include/User.class.php:815
 #, fuzzy
 msgid "Error - Could Not Update User Unix Status: "
 msgstr "パーミッションが取得できません。"
 
-#: common/include/User.class.php:925 common/include/User.class.php:978
+#: common/include/User.class.php:942 common/include/User.class.php:995
 #, fuzzy
 msgid "User with this email already exists."
 msgstr "そのユーザー名はすでに存在します。"
 
-#: common/include/User.class.php:936
+#: common/include/User.class.php:953
 #, fuzzy
 msgid "Error - Could Not Update User Email: "
 msgstr "パーミッションが取得できません。"
 
-#: common/include/User.class.php:987
+#: common/include/User.class.php:1004
 #, fuzzy
 msgid "Error - Could Not Update User Email And Hash: "
 msgstr "パーミッションが取得できません。"
 
-#: common/include/User.class.php:1015
+#: common/include/User.class.php:1032
 #, fuzzy
 msgid "Error - Could Not Update real name of user : "
 msgstr "パーミッションが取得できません。"
 
-#: common/include/User.class.php:1088
+#: common/include/User.class.php:1105
 #, fuzzy, php-format
 msgid "Error: Invalid Shell %s"
 msgstr "無効なパラメータ"
 
-#: common/include/User.class.php:1097
+#: common/include/User.class.php:1114
 #, fuzzy
 msgid "Error - Could Not Update User Unix Shell:"
 msgstr "パーミッションが取得できません。"
 
-#: common/include/User.class.php:1244
+#: common/include/User.class.php:1261
 msgid "SSH Key already in use"
 msgstr ""
 
-#: common/include/User.class.php:1252
+#: common/include/User.class.php:1269
 #, fuzzy
 msgid "Error - Could Not Add User SSH Key:"
 msgstr "パーミッションが取得できません。"
 
-#: common/include/User.class.php:1269
+#: common/include/User.class.php:1286
 #, fuzzy
 msgid "Error - Could Not Delete User SSH Key:"
 msgstr "パーミッションが取得できません。"
 
-#: common/include/User.class.php:1402
+#: common/include/User.class.php:1419
 #, fuzzy
 msgid "Error: "
 msgstr "アカウントをアクティブにするときにエラーが発生しました"
 
-#: common/include/User.class.php:1416 common/include/User.class.php:1452
-#: common/include/User.class.php:1477
+#: common/include/User.class.php:1433 common/include/User.class.php:1469
+#: common/include/User.class.php:1494
 #, fuzzy
 msgid "Error - Could Not Change User Password:"
 msgstr "パスワード変更"
 
-#: common/include/User.class.php:1733
+#: common/include/User.class.php:1750
 #, php-format
 msgid ""
 "New User %1$s registered and validated\n"
@@ -4304,7 +4304,7 @@ msgid ""
 "Email: %3$s\n"
 msgstr ""
 
-#: common/include/User.class.php:1738
+#: common/include/User.class.php:1755
 #, php-format
 msgid "New %1$s User"
 msgstr ""
@@ -4581,8 +4581,9 @@ msgstr "土曜日"
 msgid "Page Views"
 msgstr ""
 
-#: common/reporting/report_utils.php:184 www/stats/site_stats_utils.php:236
-#: www/stats/site_stats_utils.php:364 www/stats/site_stats_utils.php:418
+#: common/reporting/report_utils.php:184 common/reporting/report_utils.php:949
+#: www/stats/site_stats_utils.php:236 www/stats/site_stats_utils.php:364
+#: www/stats/site_stats_utils.php:418
 msgid "Bugs"
 msgstr ""
 
@@ -4591,20 +4592,21 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: common/reporting/report_utils.php:186 www/stats/site_stats_utils.php:238
-#: www/stats/site_stats_utils.php:366 www/stats/site_stats_utils.php:420
+#: common/reporting/report_utils.php:186 common/reporting/report_utils.php:951
+#: www/stats/site_stats_utils.php:238 www/stats/site_stats_utils.php:366
+#: www/stats/site_stats_utils.php:420
 msgid "Patches"
 msgstr ""
 
-#: common/reporting/report_utils.php:187
+#: common/reporting/report_utils.php:187 common/reporting/report_utils.php:952
 msgid "Feature Requests"
 msgstr ""
 
-#: common/reporting/report_utils.php:188
+#: common/reporting/report_utils.php:188 common/reporting/report_utils.php:953
 msgid "Other Trackers"
 msgstr ""
 
-#: common/reporting/report_utils.php:196
+#: common/reporting/report_utils.php:196 common/reporting/report_utils.php:954
 msgid "Forum Messages"
 msgstr ""
 
@@ -4695,6 +4697,10 @@ msgstr "ニュースが見つかりません"
 #, fuzzy
 msgid "Tracker items closed"
 msgstr "そのアカウントはすでにアクティブです。"
+
+#: common/reporting/report_utils.php:950
+msgid "Support Requests"
+msgstr ""
 
 #: common/reporting/report_utils.php:1078
 msgid "Hours Recorded"
@@ -4904,7 +4910,7 @@ msgstr ""
 #: plugins/scmhg/common/HgPlugin.class.php:632
 #: www/account/pending-resend.php:75 www/admin/admin_table.php:222
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:248
-#: www/admin/index.php:166 www/admin/pending-news.php:163
+#: www/admin/index.php:166 www/admin/pending-news.php:162
 #: www/forum/admin/index.php:412 www/include/vote_function.php:281
 #: www/my/bookmark_add.php:50 www/my/bookmark_edit.php:63 www/my/diary.php:189
 #: www/news/admin/index.php:151 www/news/news_utils.php:42
@@ -5257,7 +5263,7 @@ msgstr ""
 msgid "Advanced queries"
 msgstr ""
 
-#: common/tracker/actions/browse.php:361 www/include/html.php:621
+#: common/tracker/actions/browse.php:361 www/include/html.php:622
 #, fuzzy
 msgid "Select One"
 msgstr "ファイル"
@@ -5309,7 +5315,7 @@ msgstr ""
 #: common/tracker/actions/browse.php:568 common/tracker/actions/browse.php:747
 #: common/tracker/actions/detail.php:87
 #: common/tracker/actions/mod-limited.php:114
-#: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:944
+#: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:942
 #: common/tracker/include/build_submission_form.php:62
 #: cronjobs/send_pending_items_mail.php:119
 #: plugins/mantisbt/view/addIssue.php:74
@@ -5325,7 +5331,7 @@ msgstr ""
 #: common/tracker/actions/mod-limited.php:86 common/tracker/actions/mod.php:88
 #: cronjobs/send_pending_items_mail.php:79
 #: cronjobs/send_pending_items_mail.php:120 www/admin/approve-pending.php:213
-#: www/admin/pending-news.php:142 www/my/dashboard.php:75
+#: www/admin/pending-news.php:141 www/my/dashboard.php:75
 #: www/news/admin/index.php:127 www/pm/detail_task.php:42
 #: www/pm/mod_task.php:52
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
@@ -5358,8 +5364,8 @@ msgid ""
 msgstr ""
 
 #: common/tracker/actions/browse.php:737 common/tracker/actions/browse.php:748
-#: common/tracker/actions/browse.php:752 www/include/html.php:361
-#: www/include/html.php:592 www/include/html.php:788
+#: common/tracker/actions/browse.php:752 www/include/html.php:362
+#: www/include/html.php:593 www/include/html.php:789
 #: www/pm/browse_task.php:358 www/pm/browse_task.php:373
 #: www/pm/browse_task.php:384
 msgid "No Change"
@@ -5371,7 +5377,7 @@ msgstr ""
 msgid "Nobody"
 msgstr ""
 
-#: common/tracker/actions/browse.php:757 common/tracker/Artifact.class.php:952
+#: common/tracker/actions/browse.php:757 common/tracker/Artifact.class.php:950
 msgid "Canned Response"
 msgstr ""
 
@@ -5560,11 +5566,11 @@ msgstr ""
 msgid "Existing Files"
 msgstr ""
 
-#: common/tracker/actions/mod.php:111 common/tracker/Artifact.class.php:956
+#: common/tracker/actions/mod.php:111 common/tracker/Artifact.class.php:954
 msgid "Data Type"
 msgstr ""
 
-#: common/tracker/actions/mod.php:168 www/include/html.php:395
+#: common/tracker/actions/mod.php:168 www/include/html.php:396
 msgid ""
 "The summary text-box represents a short tracker item summary. Useful when "
 "browsing through several tracker items."
@@ -5842,7 +5848,7 @@ msgstr "無効なオペレーション"
 msgid "Only project members can view private artifact types"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:191 common/tracker/Artifact.class.php:789
+#: common/tracker/Artifact.class.php:191 common/tracker/Artifact.class.php:787
 #, fuzzy
 msgid "You are not currently allowed to submit items to this tracker."
 msgstr "あなたはアクティブプロジェクトのメンバーではありません。"
@@ -5901,57 +5907,57 @@ msgstr "アカウントをアクティブにするときにエラーが発生し
 msgid "Error updating artifact counts: "
 msgstr "パーミッションが取得できません。"
 
-#: common/tracker/Artifact.class.php:610
+#: common/tracker/Artifact.class.php:609
 #, fuzzy
 msgid "Valid Email Address Required"
 msgstr "無効なJabberアドレス"
 
-#: common/tracker/Artifact.class.php:628
+#: common/tracker/Artifact.class.php:626
 msgid "Now Monitoring Artifact"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:638
+#: common/tracker/Artifact.class.php:636
 msgid "Artifact Monitoring Deactivated"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:963
+#: common/tracker/Artifact.class.php:961
 msgid "Invalid assigned_to (assigned person is not a technician)"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:987
+#: common/tracker/Artifact.class.php:985
 #, fuzzy
 msgid "Could not move to new Artifact Type"
 msgstr "パーミッションが取得できません。"
 
-#: common/tracker/Artifact.class.php:999
+#: common/tracker/Artifact.class.php:997
 #, php-format
 msgid "Moved from %1$s to %2$s"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1073
+#: common/tracker/Artifact.class.php:1071
 msgid "Removal of old artifact_extra_field_data failed: "
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1181
+#: common/tracker/Artifact.class.php:1179
 #, fuzzy
 msgid "Could Not Create Canned Response Object"
 msgstr "パーミッションが取得できません。"
 
-#: common/tracker/Artifact.class.php:1194
+#: common/tracker/Artifact.class.php:1192
 msgid "Unable to Use Canned Response"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1209
+#: common/tracker/Artifact.class.php:1207
 msgid "Nothing Changed - Update Cancelled"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1242
+#: common/tracker/Artifact.class.php:1240
 #, fuzzy
 msgid "Error updating assigned_to in artifact: "
 msgstr "パーミッションが取得できません。"
 
-#: common/tracker/Artifact.class.php:1317
-#: common/tracker/Artifact.class.php:1327
+#: common/tracker/Artifact.class.php:1315
+#: common/tracker/Artifact.class.php:1325
 msgid "Status Custom Field Must Be Set"
 msgstr ""
 
@@ -6303,9 +6309,9 @@ msgstr ""
 #: common/tracker/include/ArtifactTypeHtml.class.php:749
 #: plugins/scmhg/common/HgPlugin.class.php:608 www/admin/pluginman.php:227
 #: www/admin/pluginman.php:246 www/admin/pluginman.php:258
-#: www/admin/pluginman.php:259 www/include/html.php:320
-#: www/include/html.php:532 www/include/html.php:618 www/include/html.php:639
-#: www/include/html.php:674 www/include/html.php:716 www/pm/format_csv.php:78
+#: www/admin/pluginman.php:259 www/include/html.php:321
+#: www/include/html.php:533 www/include/html.php:619 www/include/html.php:640
+#: www/include/html.php:675 www/include/html.php:717 www/pm/format_csv.php:78
 #: www/pm/ganttpage.php:152 www/tracker/roadmap.php:440
 msgid "None"
 msgstr ""
@@ -6978,7 +6984,7 @@ msgstr ""
 msgid "Preferences"
 msgstr ""
 
-#: common/widget/Widget.class.php:365
+#: common/widget/Widget.class.php:366
 #, fuzzy
 msgid "General"
 msgstr "タスクマネージャ"
@@ -7852,7 +7858,7 @@ msgstr ""
 msgid "The item #%s is pending"
 msgstr ""
 
-#: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:150
+#: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:149
 #: www/export/rssAboTask.php:146 www/my/diary.php:185
 #: www/news/admin/index.php:137 www/news/submit.php:149
 msgid "Details"
@@ -9190,7 +9196,7 @@ msgid "Submit a new thread"
 msgstr "新規スレッド開始"
 
 #: plugins/forumml/www/index.php:111 www/admin/massmail.php:113
-#: www/admin/massmail.php:138 www/admin/pending-news.php:148
+#: www/admin/massmail.php:138 www/admin/pending-news.php:147
 #: www/developer/diary.php:80 www/news/admin/index.php:135
 #: www/news/admin/news_admin_utils.php:58 www/news/submit.php:146
 #: www/sendmessage.php:69 www/sendmessage.php:150
@@ -11313,7 +11319,7 @@ msgid "Reporter"
 msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:129
-#: plugins/mantisbt/view/viewIssue.php:86 www/include/html.php:393
+#: plugins/mantisbt/view/viewIssue.php:86 www/include/html.php:394
 msgid "Resolution"
 msgstr ""
 
@@ -15006,7 +15012,7 @@ msgstr ""
 msgid "Add this custom response to canned responses"
 msgstr ""
 
-#: www/admin/approve-pending.php:167 www/admin/pending-news.php:147
+#: www/admin/approve-pending.php:167 www/admin/pending-news.php:146
 #: www/project/admin/users.php:248
 msgid "Reject"
 msgstr ""
@@ -15671,16 +15677,16 @@ msgstr "フォーラム: 管理"
 msgid "Newsbyte deleted"
 msgstr "調査報告は見つかりません"
 
-#: www/admin/pending-news.php:140
+#: www/admin/pending-news.php:139
 #, fuzzy
 msgid "Submitted for project"
 msgstr "これらのニュースアイテムはこのプロジェクトのために提出されています。"
 
-#: www/admin/pending-news.php:145
+#: www/admin/pending-news.php:144
 msgid "Approve For Front Page"
 msgstr ""
 
-#: www/admin/pending-news.php:146
+#: www/admin/pending-news.php:145
 msgid "Do Nothing"
 msgstr ""
 
@@ -17426,12 +17432,12 @@ msgstr "ユーザー名を入力して下さい。(必須)"
 msgid "File does not exist. File %s is not in incoming FTP directory."
 msgstr ""
 
-#: www/include/html.php:379
+#: www/include/html.php:380
 msgid ""
 "This drop-down box represents the person to which a tracker item is assigned."
 msgstr ""
 
-#: www/include/html.php:381
+#: www/include/html.php:382
 msgid ""
 "This drop-down box represents the current status of a tracker item.<br /"
 "><br />You can set the status to 'Pending' if you are waiting for a response "
@@ -17441,15 +17447,15 @@ msgid ""
 "item is given a status of 'Deleted'."
 msgstr ""
 
-#: www/include/html.php:383
+#: www/include/html.php:384
 msgid "Tracker category"
 msgstr ""
 
-#: www/include/html.php:385
+#: www/include/html.php:386
 msgid "Tracker group"
 msgstr ""
 
-#: www/include/html.php:387
+#: www/include/html.php:388
 msgid ""
 "The Sort By option allows you to determine how the browse results are sorted."
 "<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, "
@@ -17457,7 +17463,7 @@ msgid ""
 "or Descending order."
 msgstr ""
 
-#: www/include/html.php:389
+#: www/include/html.php:390
 msgid ""
 "The Data Type option determines the type of tracker item this is.  Since the "
 "tracker rolls into one the bug, patch, support, etc... managers you need to "
@@ -17466,7 +17472,7 @@ msgid ""
 "into a bug."
 msgstr ""
 
-#: www/include/html.php:391
+#: www/include/html.php:392
 msgid ""
 "The priority option allows a user to define a tracker item priority (ranging "
 "from 1-Lowest to 5-Highest).<br /><br />This is especially helpful for bugs "
@@ -17474,7 +17480,7 @@ msgid ""
 "project."
 msgstr ""
 
-#: www/include/html.php:397
+#: www/include/html.php:398
 msgid ""
 "The canned response drop-down represents a list of project admin-defined "
 "canned responses to common support or bug submission.<br /><br /> If you are "
@@ -17482,18 +17488,18 @@ msgid ""
 "responses"
 msgstr ""
 
-#: www/include/html.php:399
+#: www/include/html.php:400
 msgid ""
 "Anyone can add here comments to give additional information, answers and "
 "solutions. Please, be as precise as possible to avoid misunderstanding. If "
 "relevant, screenshots or documents can be added as attached files."
 msgstr ""
 
-#: www/include/html.php:401
+#: www/include/html.php:402
 msgid "Enter the complete description."
 msgstr ""
 
-#: www/include/html.php:402
+#: www/include/html.php:403
 msgid ""
 "<div align=\"left\"><b>Editing tips:</b><br/><strong>http,https or ftp</"
 "strong>: Hyperlinks.<br/><strong>[#NNN]</strong>: Tracker id NNN.<br/"
@@ -17502,13 +17508,13 @@ msgid ""
 "</div>"
 msgstr ""
 
-#: www/include/html.php:405
+#: www/include/html.php:406
 msgid ""
 "When you wish to attach a file to a tracker item you must check this "
 "checkbox before submitting changes."
 msgstr ""
 
-#: www/include/html.php:407
+#: www/include/html.php:408
 msgid ""
 "You can monitor or un-monitor this item by clicking the \"Monitor\" button. "
 "<br /><br /><strong>Note!</strong> this will send you additional email. If "
@@ -17516,99 +17522,99 @@ msgid ""
 "will also get emails for those reasons as well!"
 msgstr ""
 
-#: www/include/html.php:538
+#: www/include/html.php:539
 #, fuzzy
 msgid "Error: uneven row counts"
 msgstr "ニュースアイテムは見つかりません"
 
-#: www/include/html.php:790
+#: www/include/html.php:791
 msgid "Lowest"
 msgstr ""
 
-#: www/include/html.php:794
+#: www/include/html.php:795
 msgid "Highest"
 msgstr ""
 
-#: www/include/html.php:878
+#: www/include/html.php:879
 #, fuzzy, php-format
 msgid "Project access problem: %s"
 msgstr "管理サマリー"
 
-#: www/include/html.php:880
+#: www/include/html.php:881
 #, fuzzy, php-format
 msgid "Project Problem: %s"
 msgstr "管理サマリー"
 
-#: www/include/html.php:949 www/my/bookmark_add.php:28
+#: www/include/html.php:950 www/my/bookmark_add.php:28
 msgid "My Personal Page"
 msgstr "パーソナルページ"
 
-#: www/include/html.php:951
+#: www/include/html.php:952
 msgid ""
 "View your personal page, a selection of widgets to follow the informations "
 "from projects."
 msgstr ""
 
-#: www/include/html.php:954
+#: www/include/html.php:955
 msgid "My Trackers Dashboard"
 msgstr ""
 
-#: www/include/html.php:956
+#: www/include/html.php:957
 #, fuzzy
 msgid "View your tasks and artifacts."
 msgstr "あなたに割り当てられたタスクはありません。"
 
-#: www/include/html.php:961
+#: www/include/html.php:962
 msgid "My Diary and Notes"
 msgstr "日記 &amp; ノート"
 
-#: www/include/html.php:963
+#: www/include/html.php:964
 msgid "Manage your diary. Add, modify or delete your notes."
 msgstr ""
 
-#: www/include/html.php:968
+#: www/include/html.php:969
 msgid "Manage your account. Change your password, select your preferences."
 msgstr ""
 
-#: www/include/html.php:972 www/register/index.php:164
+#: www/include/html.php:973 www/register/index.php:164
 msgid "Register Project"
 msgstr "新規プロジェクト登録"
 
-#: www/include/html.php:974
+#: www/include/html.php:975
 msgid "Register a new project in forge, following the workflow."
 msgstr ""
 
-#: www/include/html.php:1023
+#: www/include/html.php:1024
 #, php-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] ""
 
-#: www/include/html.php:1027
+#: www/include/html.php:1028
 #, php-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] ""
 
-#: www/include/html.php:1031
+#: www/include/html.php:1032
 #, php-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] ""
 
-#: www/include/html.php:1035
+#: www/include/html.php:1036
 #, php-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 
-#: www/include/html.php:1039
+#: www/include/html.php:1040
 #, php-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] ""
 
-#: www/include/html.php:1257
+#: www/include/html.php:1258
 #, php-format
 msgid " Displaying %1$s per page. Projects sorted by alphabetical order."
 msgstr ""
