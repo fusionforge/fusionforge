@@ -63,7 +63,7 @@ class ScmHgUpdateScmRepo {
 			//now we enable new available hooks
 			$newHooks = explode('|', $hooksString);
 			if (count($newHooks)) {
-				$hooksServePushPullBundle = array();
+				$newHooksServePushPullBundle = array();
 				foreach($newHooks as $newHook) {
 					foreach($hooksServePushPullBundle as $hookServePushPullBundle) {
 						if ($hookServePushPullBundle->getClassname() == $newHook) {
