@@ -46,7 +46,7 @@ class commitTracker extends scmhook {
 		if ($this->group->usesTracker()) {
 			return true;
 		}
-		$this->disabledMessage = _('Hook not available due to missing dependency : Project not using tracker.');
+		$this->disabledMessage = _('Hook not available due to missing dependency: Project not using tracker.');
 		return false;
 	}
 

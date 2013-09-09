@@ -33,8 +33,9 @@ class commitEmail extends scmhook {
 	function __construct() {
 		$this->group = $GLOBALS['group'];
 		$this->name = "Commit Email";
-		$this->description = _('Every commit pushed sends a notification e-mail to the users of the commit-mailinglist.
-The hook is triggered after \'serve push pull bundle\' on the projects repository.');
+		$this->description = _('Every commit pushed sends a notification e-mail to the users of the commit-mailinglist.')
+							. "\n"
+							. _('The hook is triggered after \'serve push pull bundle\' on the projects repository.');
 		$this->classname = "commitEmail";
 		$this->label = "scmhg";
 		$this->hooktype = "serve-push-pull-bundle";
@@ -167,10 +168,10 @@ The hook is triggered after \'serve push pull bundle\' on the projects repositor
 				$hgrc .= "** = $mail";
 			} 
 			$f = fopen ("$main_repo/hgrc.new", 'w');
-			fwrite ($f, $hgrc);
-			fclose ($f);
-			rename ($main_repo.'/hgrc.new', $main_repo.'/hgrc');
-			system( "chown $unix_user:$unix_group $main_repo/hgrc" );
+			fwrite($f, $hgrc);
+			fclose($f);
+			rename($main_repo.'/hgrc.new', $main_repo.'/hgrc');
+			system("chown $unix_user:$unix_group $main_repo/hgrc" );
 			system("chmod 660 $main_repo/hgrc" );
 		}
 		return true;
@@ -226,8 +227,8 @@ The hook is triggered after \'serve push pull bundle\' on the projects repositor
 			fwrite($f, $hgrc);
 			fclose($f);
 			rename($main_repo.'/hgrc.new', $main_repo.'/hgrc');
-			system( "chown $unix_user:$unix_group $main_repo/hgrc" );
-			system( "chmod 660 $main_repo/hgrc" );
+			system("chown $unix_user:$unix_group $main_repo/hgrc" );
+			system("chmod 660 $main_repo/hgrc" );
 		}
 		return true;
 	}

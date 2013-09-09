@@ -38,7 +38,6 @@ class scmhookPlugin extends Plugin {
 	}
 
 	function CallHook($hookname, &$params) {
-		$returned = true;
 		switch ($hookname) {
 			case 'scm_admin_page': {
 				$group_id = $params['group_id'];

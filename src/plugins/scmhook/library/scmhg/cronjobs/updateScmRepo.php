@@ -28,15 +28,11 @@
 
 
 class ScmHgUpdateScmRepo {
-	function __construct() {
-		return true;
-	}
-
 	/**
-	* updateScmRepo - update the scmrepo with the new hooks
-	*
-	* @params	Array	the complete array description
-	* @return	boolean	success or not
+	 * updateScmRepo - update the scmrepo with the new hooks
+	 *
+	 * @param  Array   $params the complete array description
+	 * @return boolean    success or not
 	*/
 	function updateScmRepo($params) {
 		$group_id = $params['group_id'];
