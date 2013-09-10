@@ -21,7 +21,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-$ath->adminHeader(array('title'=>_('Customize Browse List'),'pagename'=>'tracker_admin_customize_liste','titlevals'=>array($ath->getName())));
+$ath->adminHeader(array('title'=>_('Customize Browse List'),
+	'pagename'=>'tracker_admin_customize_liste',
+	'titlevals'=>array($ath->getName())));
 
 /*
 	List of possible user built Selection Boxes for an ArtifactType
@@ -36,11 +38,11 @@ $fields = array (
 	'open_date' => _('Open Date'),
 	'status_id' => _('State'),
 	'priority'  => _('Priority'),
-	'assigned_to' => _('Assigned To'),
-	'submitted_by' => _('Submitted By'),
+	'assigned_to' => _('Assigned to'),
+	'submitted_by' => _('Submitted by'),
 	'close_date' => _('Close Date'),
 	'details' => _('Detailed description'),
-	'related_tasks' => _('Related tasks'),
+	'related_tasks' => _('Related Tasks'),
 	'last_modified_date' => _('Last Modified Date')
 );
 
@@ -118,7 +120,7 @@ echo $GLOBALS['HTML']->listTableBottom();
 	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="customize_list" value="1" />
 		<input type="hidden" name="add_field" value="1" />
-		<strong><?php echo _('Add New Field') ?>:</strong>
+		<strong><?php echo _('Add New Field')._(':'); ?></strong>
 <?php
 echo '<select name="field_to_add">'."\n";
 echo $select;
