@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-10 15:40+0200\n"
+"POT-Creation-Date: 2013-09-10 16:07+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2903,7 +2903,7 @@ msgid "Permission denied."
 msgstr "Baimena ukatu da"
 
 #: common/include/Error.class.php:143 common/include/User.class.php:353
-#: common/include/User.class.php:934 common/include/User.class.php:987
+#: common/include/User.class.php:932 common/include/User.class.php:984
 #: common/tracker/actions/tracker.php:84
 #: plugins/forumml/www/forumml_utils.php:686 www/account/change_email.php:38
 msgid "Invalid Email Address"
@@ -3296,7 +3296,8 @@ msgstr ""
 "Goza ezazu sistemaz eta mesedez %s -koei abisatu iezaiezu. Esaiguzu ere zu "
 "laguntzeko zer egin genezake."
 
-#: common/include/Group.class.php:2566 common/mail/MailingList.class.php:205
+#: common/include/Group.class.php:2566 common/include/User.class.php:498
+#: common/mail/MailingList.class.php:205
 #: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
 #: www/account/first.php:36 www/account/lostpw.php:68
 #: www/survey/privacy.php:58 www/survey/survey_resp.php:61
@@ -4232,11 +4233,7 @@ msgid ""
 "client.\n"
 "Use one below, but make sure it is entered as the single line.)\n"
 "\n"
-"%2$s\n"
-"\n"
-"Enjoy the site.\n"
-"\n"
-"-- the %3$s staff\n"
+"%2$s"
 msgstr ""
 "%4$s webgunean izenemateagatik eskerrik asko. %1$s izeneko kontua sortu da "
 "zuretzat. Erregistroa amaitzeko bisita ezazu ondorengo helbidea: \n"
@@ -4253,6 +4250,11 @@ msgstr ""
 "Webgune honetaz goza ezazu.\n"
 "\n"
 "-- %4$s taldea\n"
+
+#: common/include/User.class.php:496
+#, fuzzy
+msgid "Enjoy the site."
+msgstr "Ezabatu iragazkia"
 
 #: common/include/User.class.php:502
 #, php-format
@@ -4281,7 +4283,7 @@ msgstr "Ezin da berri foroa ezabatu: %d"
 
 #: common/include/User.class.php:640
 #, fuzzy
-msgid "Error - Could Not Update User Object:"
+msgid "Error: Cannot Update User Object:"
 msgstr "Ezin dut mezu nagusia eguneratu"
 
 #: common/include/User.class.php:734
@@ -4293,72 +4295,52 @@ msgstr "Parametro baliogabea"
 msgid "Error: You cannot set pending status if user is suspend or active"
 msgstr ""
 
-#: common/include/User.class.php:748
+#: common/include/User.class.php:747
 #, fuzzy
-msgid "Error - Could Not Update User Status:"
+msgid "Error: Cannot Update User Status:"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/User.class.php:815
-#, fuzzy
-msgid "Error - Could Not Update User Unix Status: "
-msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
-
-#: common/include/User.class.php:942 common/include/User.class.php:995
+#: common/include/User.class.php:940 common/include/User.class.php:992
 #, fuzzy
 msgid "User with this email already exists."
 msgstr "Erabiltzailea dagoeneko existitzen da"
 
-#: common/include/User.class.php:953
-#, fuzzy
-msgid "Error - Could Not Update User Email: "
-msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
-
-#: common/include/User.class.php:1004
-#, fuzzy
-msgid "Error - Could Not Update User Email And Hash: "
-msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
-
-#: common/include/User.class.php:1032
-#, fuzzy
-msgid "Error - Could Not Update real name of user : "
-msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
-
-#: common/include/User.class.php:1105
+#: common/include/User.class.php:1100
 #, fuzzy, php-format
 msgid "Error: Invalid Shell %s"
 msgstr "Parametro baliogabea"
 
-#: common/include/User.class.php:1114
+#: common/include/User.class.php:1108
 #, fuzzy
-msgid "Error - Could Not Update User Unix Shell:"
+msgid "Error: Cannot Update User Unix Shell:"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/User.class.php:1261
+#: common/include/User.class.php:1254
 msgid "SSH Key already in use"
 msgstr ""
 
-#: common/include/User.class.php:1269
+#: common/include/User.class.php:1262
 #, fuzzy
 msgid "Error - Could Not Add User SSH Key:"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/User.class.php:1286
+#: common/include/User.class.php:1279
 #, fuzzy
-msgid "Error - Could Not Delete User SSH Key:"
+msgid "Error: Cannot Update User SSH Keys"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/User.class.php:1419
+#: common/include/User.class.php:1411
 #, fuzzy
 msgid "Error: "
 msgstr "Akatsa"
 
-#: common/include/User.class.php:1433 common/include/User.class.php:1469
-#: common/include/User.class.php:1494
+#: common/include/User.class.php:1425 common/include/User.class.php:1461
+#: common/include/User.class.php:1485
 #, fuzzy
-msgid "Error - Could Not Change User Password:"
+msgid "Error: Cannot Change User Password:"
 msgstr "Hitz gakoa aldatu"
 
-#: common/include/User.class.php:1750
+#: common/include/User.class.php:1741
 #, php-format
 msgid ""
 "New User %1$s registered and validated\n"
@@ -4366,7 +4348,7 @@ msgid ""
 "Email: %3$s\n"
 msgstr ""
 
-#: common/include/User.class.php:1755
+#: common/include/User.class.php:1746
 #, fuzzy, php-format
 msgid "New %1$s User"
 msgstr "%1$s -en lantaldea"
@@ -23569,6 +23551,26 @@ msgstr "Ezin da eguneratu"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Ez da erabiltzaile-izenik eman"
+
+#, fuzzy
+#~ msgid "Error - Could Not Update User Unix Status: "
+#~ msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
+
+#, fuzzy
+#~ msgid "Error - Could Not Update User Email: "
+#~ msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
+
+#, fuzzy
+#~ msgid "Error - Could Not Update User Email And Hash: "
+#~ msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
+
+#, fuzzy
+#~ msgid "Error - Could Not Update real name of user : "
+#~ msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
+
+#, fuzzy
+#~ msgid "Error - Could Not Delete User SSH Key:"
+#~ msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
 #, fuzzy
 #~ msgid ""
