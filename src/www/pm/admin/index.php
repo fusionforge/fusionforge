@@ -357,19 +357,18 @@ if ($add_cat && $group_project_id) {
 
 	session_require_perm ('pm', $pg->getID(), 'manager') ;
 
-	pm_header(array('title'=>_('Delete')));
+	pm_header(array('title'=>_('Permanently delete this subproject and all its data')));
 
 	?>
 	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id; ?>" method="post">
-	<input type="hidden" name="post_changes" value="y" />
-	<input type="hidden" name="delete" value="y" /><br />
-	<?php echo _('You are about to permanently and irretrievably delete this subproject and all its related data!'); ?>
 	<p>
-	<input type="checkbox" name="sure" value="1" /><?php echo _('I\'m Sure') ?><br />
-	<input type="checkbox" name="really_sure" value="1" /><?php echo _('I\'m Really Sure'); ?>
-	</p><p>
-	<input type="submit" name="post_changes" value="<?php echo _('Delete') ?>" />
+	<input type="hidden" name="post_changes" value="y" />
+	<input type="hidden" name="delete" value="y" />
+	<?php echo _('You are about to permanently and irretrievably delete this subproject and all its related data!'); ?>
 	</p>
+	<p><input type="checkbox" name="sure" value="1" /><?php echo _('I am Sure') ?></p>
+	<p><input type="checkbox" name="really_sure" value="1" /><?php echo _('I am Really Sure'); ?></p>
+	<p><input type="submit" name="post_changes" value="<?php echo _('Permanently delete this subproject and all its data') ?>" /></p>
 	</form>
 	<?php
 

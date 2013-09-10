@@ -21,7 +21,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-$ath->adminHeader(array('title'=>sprintf(_('Delete a custom field for %s'),$ath->getName())));
+$ath->adminHeader(array('title'=>sprintf(_('Delete a custom field for %s'),
+	$ath->getName())));
 
 $id = getStringFromRequest('id');
 
@@ -35,8 +36,8 @@ $id = getStringFromRequest('id');
 		<?php echo _('You are about to permanently and irretrievably delete this custom field and all its contents!'); ?>
 		</p>
 		<p>
-		<input type="checkbox" name="sure" value="1" /><?php echo _("I'm Sure") ?><br />
-		<input type="checkbox" name="really_sure" value="1" /><?php echo _("I'm Really Sure") ?>
+		<input type="checkbox" name="sure" value="1" /><?php echo _("I am Sure") ?><br />
+		<input type="checkbox" name="really_sure" value="1" /><?php echo _("I am Really Sure") ?>
 		</p>
 		<p>
 		<input type="submit" name="post_changes" value="<?php echo _('Delete') ?>" /></p>

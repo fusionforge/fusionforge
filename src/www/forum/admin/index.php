@@ -101,7 +101,7 @@ if (getStringFromRequest('add_forum')) {
 	/*
 	  Show the form for adding forums
 	*/
-	forum_header(array('title'=>_('Add forum')));
+	forum_header(array('title'=>_('Add Forum')));
 
 	echo '
 			<form method="post" action="'.getStringFromServer('PHP_SELF').'">
@@ -446,7 +446,7 @@ if (getStringFromRequest('add_forum')) {
 	$farr = $ff->getForumsAdmin();
 
 	if ($ff->isError()) {
-		echo '<p class="error">'.sprintf(_('No Forums Found For %s'), $g->getPublicName())
+		echo '<p class="error">'.sprintf(_('No Forums Found for %s'), $g->getPublicName())
 			. $ff->getErrorMessage().'</p>';
 		forum_footer(array());
 		exit;
