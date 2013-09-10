@@ -147,7 +147,7 @@ if ($res && $rows > 0) {
 */
 
 if (!$res || $rows < 1) {
-	echo '<div class="warning">'._('You Have No Packages Defined').'</div>';
+	echo '<p class="information">'._('There are no packages defined.').'</p>';
 } else {
 	$title_arr = array();
 	$title_arr[] = _('Releases');
