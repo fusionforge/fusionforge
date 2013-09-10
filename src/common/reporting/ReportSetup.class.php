@@ -566,12 +566,13 @@ function groups_added_weekly($week) {
 				($week+REPORT_WEEK_SPAN-1) ));
 }
 
-/**
- *  Populate the users_added_weekly report table.
- *
- *  @return boolean Success.
- */
-function backfill_groups_added_weekly($count=10000) {
+	/**
+	 *  Populate the users_added_weekly report table.
+	 *
+	 * @param int $count
+	 * @return boolean Success.
+	 */
+	function backfill_groups_added_weekly($count=10000) {
 
 	$arr = array_slice ($this->getMonthStartArr(), -$count-1);
 	rsort($arr);
@@ -585,15 +586,15 @@ function backfill_groups_added_weekly($count=10000) {
 	return true;
 }
 
-/**
- *  Add a row to the users_added_monthly report table.
- *
- *  @param  int month_start - the unix time of the beginning of the month.
- *  @param  int month_end - the unix time of the end of the month.
- *  @return boolean Success.
- */
-function users_added_monthly($month,$end) {
-	db_query_params ('DELETE FROM rep_users_added_monthly WHERE month=$1',
+	/**
+	 *  Add a row to the users_added_monthly report table.
+	 *
+	 *  @param  int $month month_start - the unix time of the beginning of the month.
+	 *  @param  int $end month_end - the unix time of the end of the month.
+	 *  @return boolean Success.
+	 */
+	function users_added_monthly($month,$end) {
+		db_query_params ('DELETE FROM rep_users_added_monthly WHERE month=$1',
 			array($month));
 
 
@@ -626,15 +627,15 @@ function backfill_users_added_monthly($count=10000) {
 	return true;
 }
 
-/**
- *  Add a row to the groups_added_monthly report table.
- *
- *  @param  int month_start - the unix time of the beginning of the month.
- *  @param  int month_end - the unix time of the end of the month.
- *  @return boolean Success.
- */
-function groups_added_monthly($month,$end) {
-	db_query_params ('DELETE FROM rep_groups_added_monthly WHERE month=$1',
+	/**
+	 *  Add a row to the groups_added_monthly report table.
+	 *
+	 *  @param  int $month month_start - the unix time of the beginning of the month.
+	 *  @param  int $end month_end - the unix time of the end of the month.
+	 *  @return boolean Success.
+	 */
+	function groups_added_monthly($month,$end) {
+		db_query_params ('DELETE FROM rep_groups_added_monthly WHERE month=$1',
 			array($month));
 
 
@@ -668,31 +669,32 @@ function backfill_groups_added_monthly($count=10000) {
 }
 
 
-// ******************************
+	// ******************************
 
 
-/**
- *	Add a row to the users_cum_daily report table.
- *
- *	@param	int	Day - the unix time of the beginning of the day.
- *	@return	boolean	Success.
- */
-function users_cum_daily($day) {
-	db_query_params ('DELETE FROM rep_users_cum_daily WHERE day=$1',
+	/**
+	 *	Add a row to the users_cum_daily report table.
+	 *
+	 *	@param	int	$day Day - the unix time of the beginning of the day.
+	 *	@return	boolean	Success.
+	 */
+	function users_cum_daily($day) {
+		db_query_params ('DELETE FROM rep_users_cum_daily WHERE day=$1',
 			array($day));
 
 
-	return db_query_params ('INSERT INTO rep_users_cum_daily (day,total)
-		VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date
-		BETWEEN 0 AND $3))',
-				array($day,
-					'A',
-					$day));
-}
+		return db_query_params ('INSERT INTO rep_users_cum_daily (day,total)
+			VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date
+			BETWEEN 0 AND $3))',
+					array($day,
+						'A',
+						$day));
+	}
 
 /**
  *	Populate the users_cum_daily report table.
  *
+ * @param int $count
  *	@return	boolean	Success.
  */
 function backfill_users_cum_daily($count=10000) {
@@ -741,6 +743,7 @@ function groups_cum_daily($day) {
 /**
  *	Populate the groups_cum_daily report table.
  *
+ *	@param int $count
  *	@return	boolean	Success.
  */
 function backfill_groups_cum_daily($count=10000) {
@@ -806,14 +809,14 @@ function backfill_users_cum_weekly($count=10000) {
 	return true;
 }
 
-/**
- *  Add a row to the groups_cum_weekly report table.
- *
- *  @param  int Week - the unix time of the beginning of the sunday for this week.
- *  @return boolean Success.
- */
-function groups_cum_weekly($week) {
-	db_query_params ('DELETE FROM rep_groups_cum_weekly WHERE week=$1',
+	/**
+	 *  Add a row to the groups_cum_weekly report table.
+	 *
+	 *  @param  int $week Week - the unix time of the beginning of the sunday for this week.
+	 *  @return boolean Success.
+	 */
+	function groups_cum_weekly($week) {
+		db_query_params ('DELETE FROM rep_groups_cum_weekly WHERE week=$1',
 			array($week));
 
 
@@ -845,15 +848,15 @@ function backfill_groups_cum_weekly($count=10000) {
 	return true;
 }
 
-/**
- *  Add a row to the users_cum_monthly report table.
- *
- *  @param  int month_start - the unix time of the beginning of the month.
- *  @param  int month_end - the unix time of the end of the month.
- *  @return boolean Success.
- */
-function users_cum_monthly($month,$end) {
-	db_query_params ('DELETE FROM rep_users_cum_monthly WHERE month=$1',
+	/**
+	 *  Add a row to the users_cum_monthly report table.
+	 *
+	 *  @param  int $month month_start - the unix time of the beginning of the month.
+	 *  @param  int $end month_end - the unix time of the end of the month.
+	 *  @return boolean Success.
+	 */
+	function users_cum_monthly($month,$end) {
+		db_query_params ('DELETE FROM rep_users_cum_monthly WHERE month=$1',
 			array($month));
 
 
@@ -885,15 +888,15 @@ function backfill_users_cum_monthly($count=10000) {
 	return true;
 }
 
-/**
- *  Add a row to the groups_cum_monthly report table.
- *
- *  @param  int month_start - the unix time of the beginning of the month.
- *  @param  int month_end - the unix time of the end of the month.
- *  @return boolean Success.
- */
-function groups_cum_monthly($month,$end) {
-	db_query_params ('DELETE FROM rep_groups_cum_monthly WHERE month=$1',
+	/**
+	 *  Add a row to the groups_cum_monthly report table.
+	 *
+	 *  @param  int $month month_start - the unix time of the beginning of the month.
+	 *  @param  int $end month_end - the unix time of the end of the month.
+	 *  @return boolean Success.
+	 */
+	function groups_cum_monthly($month,$end) {
+		db_query_params ('DELETE FROM rep_groups_cum_monthly WHERE month=$1',
 			array($month));
 
 
@@ -926,87 +929,88 @@ function backfill_groups_cum_monthly($count=10000) {
 }
 
 
-// ************************
+	// ************************
 
 
-/**
- *	Add a row to the user_act_daily report table.
- *
- *	@param	int	Day - the unix time of the beginning of the day.
- *	@return	boolean	Success.
- */
-function user_act_daily($day) {
-	db_query_params ('DELETE FROM rep_user_act_daily WHERE day=$1',
-			array($day));
+	/**
+	 *	Add a row to the user_act_daily report table.
+	 *
+	 *	@param	int	$day Day - the unix time of the beginning of the day.
+	 *	@return	boolean	Success.
+	 */
+	function user_act_daily($day) {
+		db_query_params('DELETE FROM rep_user_act_daily WHERE day=$1',
+				array($day));
 
-	$end_day=$day+REPORT_DAY_SPAN-1;
+		$end_day=$day+REPORT_DAY_SPAN-1;
 
-	return db_query_params ('INSERT INTO rep_user_act_daily
-		SELECT user_id,day,coalesce(tracker_opened,0) AS tracker_opened,
-			coalesce(tracker_closed,0) AS tracker_closed,
-			coalesce(forum,0) AS forum,
-			coalesce(docs,0) AS docs,
-			coalesce(cvs_commits,0) AS cvs_commits,
-			coalesce(tasks_opened,0) AS tasks_opened,
-			coalesce(tasks_closed,0) AS tasks_closed
-			FROM
-		(SELECT * FROM
-		(SELECT * FROM
-		(SELECT * FROM
-		(SELECT * FROM
-		(SELECT * FROM
-		(SELECT * FROM
-			(SELECT submitted_by AS user_id, $1::int AS day, count(*) AS tracker_opened
-			FROM artifact
-			WHERE open_date BETWEEN $1 AND $2
-			GROUP BY user_id,day) aopen
+		return db_query_params ('INSERT INTO rep_user_act_daily
+			SELECT user_id,day,coalesce(tracker_opened,0) AS tracker_opened,
+				coalesce(tracker_closed,0) AS tracker_closed,
+				coalesce(forum,0) AS forum,
+				coalesce(docs,0) AS docs,
+				coalesce(cvs_commits,0) AS cvs_commits,
+				coalesce(tasks_opened,0) AS tasks_opened,
+				coalesce(tasks_closed,0) AS tasks_closed
+				FROM
+			(SELECT * FROM
+			(SELECT * FROM
+			(SELECT * FROM
+			(SELECT * FROM
+			(SELECT * FROM
+			(SELECT * FROM
+				(SELECT submitted_by AS user_id, $1::int AS day, count(*) AS tracker_opened
+				FROM artifact
+				WHERE open_date BETWEEN $1 AND $2
+				GROUP BY user_id,day) aopen
 
-		FULL OUTER JOIN
-			(SELECT assigned_to AS user_id, $1::int AS day, count(*) AS tracker_closed
-			FROM artifact
-			WHERE close_date BETWEEN $1 AND $2
-			GROUP BY user_id,day ) aclosed USING (user_id,day)) foo1
+			FULL OUTER JOIN
+				(SELECT assigned_to AS user_id, $1::int AS day, count(*) AS tracker_closed
+				FROM artifact
+				WHERE close_date BETWEEN $1 AND $2
+				GROUP BY user_id,day ) aclosed USING (user_id,day)) foo1
 
-		FULL OUTER JOIN
-			(SELECT posted_by AS user_id, $1::int AS day, count(*) AS forum
-			FROM forum
-			WHERE post_date BETWEEN $1 AND $2
-			GROUP BY user_id,day ) forum USING (user_id,day)) foo2
+			FULL OUTER JOIN
+				(SELECT posted_by AS user_id, $1::int AS day, count(*) AS forum
+				FROM forum
+				WHERE post_date BETWEEN $1 AND $2
+				GROUP BY user_id,day ) forum USING (user_id,day)) foo2
 
-		FULL OUTER JOIN
-			(SELECT created_by AS user_id, $1::int AS day, count(*) AS docs
-			FROM doc_data
-			WHERE createdate BETWEEN $1 AND $2
-			GROUP BY user_id,day ) docs USING (user_id,day)) foo3
+			FULL OUTER JOIN
+				(SELECT created_by AS user_id, $1::int AS day, count(*) AS docs
+				FROM doc_data
+				WHERE createdate BETWEEN $1 AND $2
+				GROUP BY user_id,day ) docs USING (user_id,day)) foo3
 
-		FULL OUTER JOIN
-			(SELECT user_id, $1::int AS day, sum(commits) AS cvs_commits
-			FROM stats_cvs_user
-			WHERE month=$3 AND day=$2
-			GROUP BY user_id,day ) cvs USING (user_id,day)) foo4
+			FULL OUTER JOIN
+				(SELECT user_id, $1::int AS day, sum(commits) AS cvs_commits
+				FROM stats_cvs_user
+				WHERE month=$3 AND day=$2
+				GROUP BY user_id,day ) cvs USING (user_id,day)) foo4
 
-		FULL OUTER JOIN
-			(SELECT created_by AS user_id, $1::int AS day, count(*) AS tasks_opened
-			FROM project_task
-			WHERE start_date BETWEEN $1 AND $2
-			GROUP BY user_id,day ) topen USING (user_id,day)) foo5
+			FULL OUTER JOIN
+				(SELECT created_by AS user_id, $1::int AS day, count(*) AS tasks_opened
+				FROM project_task
+				WHERE start_date BETWEEN $1 AND $2
+				GROUP BY user_id,day ) topen USING (user_id,day)) foo5
 
-		FULL OUTER JOIN
-			(SELECT mod_by AS user_id, $1::int AS day, count(*) AS tasks_closed
-			FROM project_history
-			WHERE mod_date BETWEEN $1 AND $2
-			AND old_value=$4 AND field_name=$5
-			GROUP BY user_id,day ) tclosed USING (user_id,day)) foo6',
-				array($day,
-					$end_day,
-					date ('Ym'),
-					1,
-					'status_id'));
-}
+			FULL OUTER JOIN
+				(SELECT mod_by AS user_id, $1::int AS day, count(*) AS tasks_closed
+				FROM project_history
+				WHERE mod_date BETWEEN $1 AND $2
+				AND old_value=$4 AND field_name=$5
+				GROUP BY user_id,day ) tclosed USING (user_id,day)) foo6',
+					array($day,
+						$end_day,
+						date ('Ym'),
+						1,
+						'status_id'));
+	}
 
 /**
  *	Populate the user_act_daily report table.
  *
+ *	@param int $count
  *	@return	boolean	Success.
  */
 function backfill_user_act_daily($count=10000) {
@@ -1033,15 +1037,15 @@ function backfill_user_act_daily($count=10000) {
 	return true;
 }
 
-/**
- *  Add a row to the user_act_weekly report table.
- *
- *  @param  int Week - the unix time of the beginning of the sunday for this week.
- *  @return boolean Success.
- */
-function user_act_weekly($week) {
-	db_query_params ('DELETE FROM rep_user_act_weekly WHERE week=$1',
-			array($week));
+	/**
+	 *  Add a row to the user_act_weekly report table.
+	 *
+	 *  @param  int $week Week - the unix time of the beginning of the sunday for this week.
+	 *  @return boolean Success.
+	 */
+	function user_act_weekly($week) {
+		db_query_params('DELETE FROM rep_user_act_weekly WHERE week=$1',
+				array($week));
 
 	return db_query_params ('
 INSERT INTO rep_user_act_weekly (user_id, week, tracker_opened, tracker_closed,
@@ -1057,12 +1061,13 @@ GROUP BY user_id,week',
 					$week+REPORT_WEEK_SPAN-1));
 }
 
-/**
- *  Populate the user_act_weekly report table.
- *
- *  @return boolean Success.
- */
-function backfill_user_act_weekly($count=10000) {
+	/**
+	 *  Populate the user_act_weekly report table.
+	 *
+	 * @param int $count
+	 * @return boolean Success.
+	 */
+	function backfill_user_act_weekly($count=10000) {
 
 	$arr = array_slice ($this->getMonthStartArr(), -$count-1);
 	rsort($arr);
@@ -1076,36 +1081,37 @@ function backfill_user_act_weekly($count=10000) {
 	return true;
 }
 
-/**
- *  Add a row to the user_act_monthly report table.
- *
- *  @param  int month_start - the unix time of the beginning of the month.
- *  @param  int month_end - the unix time of the end of the month.
- *  @return boolean Success.
- */
-function user_act_monthly($month,$end) {
-	db_query_params ('DELETE FROM rep_user_act_monthly WHERE month=$1',
-			array($month));
+	/**
+	 *  Add a row to the user_act_monthly report table.
+	 *
+	 *  @param  int $month month_start - the unix time of the beginning of the month.
+	 *  @param  int $end month_end - the unix time of the end of the month.
+	 *  @return boolean Success.
+	 */
+	function user_act_monthly($month,$end) {
+		db_query_params('DELETE FROM rep_user_act_monthly WHERE month=$1',
+				array($month));
 
-	return db_query_params ('
-INSERT INTO rep_user_act_monthly (user_id, month, tracker_opened,
-		tracker_closed, forum, docs, cvs_commits, tasks_opened, tasks_closed)
-SELECT user_id, $1::int AS month, sum(tracker_opened) AS tracker_opened,
-		sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
-		sum(docs) AS docs, sum(cvs_commits) AS cvs_commits,
-		sum(tasks_opened) AS tasks_opened, sum(tasks_closed) AS tasks_closed
-FROM rep_user_act_daily
-WHERE DAY BETWEEN $1 AND $2
-GROUP BY user_id, month',
-				array ($month, $end));
-}
+		return db_query_params ('
+		INSERT INTO rep_user_act_monthly (user_id, month, tracker_opened,
+			tracker_closed, forum, docs, cvs_commits, tasks_opened, tasks_closed)
+		SELECT user_id, $1::int AS month, sum(tracker_opened) AS tracker_opened,
+			sum(tracker_closed) AS tracker_closed, sum(forum) AS forum,
+			sum(docs) AS docs, sum(cvs_commits) AS cvs_commits,
+			sum(tasks_opened) AS tasks_opened, sum(tasks_closed) AS tasks_closed
+		FROM rep_user_act_daily
+		WHERE DAY BETWEEN $1 AND $2
+		GROUP BY user_id, month',
+			array ($month, $end));
+	}
 
-/**
- *  Populate the user_act_monthly report table.
- *
- *  @return boolean Success.
- */
-function backfill_user_act_monthly($count=10000) {
+	/**
+	 *  Populate the user_act_monthly report table.
+	 *
+	 * @param int $count
+	 * @return boolean Success.
+	 */
+	function backfill_user_act_monthly($count=10000) {
 
 	$arr = array_slice ($this->getMonthStartArr(), -$count-1);
 	rsort($arr);
@@ -1119,22 +1125,22 @@ function backfill_user_act_monthly($count=10000) {
 	return true;
 }
 
-// ************************
+	// ************************
 
 
-/**
- *	Add a row to the group_act_daily report table.
- *
- *	@param	int	Day - the unix time of the beginning of the day.
- *	@return	boolean	Success.
- */
-function group_act_daily($day) {
-	db_query_params ('DELETE FROM rep_group_act_daily WHERE day=$1',
-			array($day));
+	/**
+	 *	Add a row to the group_act_daily report table.
+	 *
+	 *	@param	int	$day Day - the unix time of the beginning of the day.
+	 *	@return	boolean	Success.
+	 */
+	function group_act_daily($day) {
+		db_query_params('DELETE FROM rep_group_act_daily WHERE day=$1',
+				array($day));
 
-	$end_day=$day+REPORT_DAY_SPAN-1;
+		$end_day=$day+REPORT_DAY_SPAN-1;
 
-	return db_query_params ('INSERT INTO rep_group_act_daily
+		return db_query_params ('INSERT INTO rep_group_act_daily
 		SELECT group_id,day,coalesce(tracker_opened,0) AS tracker_opened,
 			coalesce(tracker_closed,0) AS tracker_closed,
 			coalesce(forum,0) AS forum,
@@ -1157,47 +1163,47 @@ function group_act_daily($day) {
 			AND a.group_artifact_id=agl.group_artifact_id
 			GROUP BY group_id,day) aopen
 
-		FULL OUTER JOIN
-			(SELECT agl.group_id, $1::int AS day, count(*) AS tracker_closed
-			FROM artifact a, artifact_group_list agl
-			WHERE a.close_date BETWEEN $1 AND $2
-			AND a.group_artifact_id=agl.group_artifact_id
-			GROUP BY group_id,day ) aclosed USING (group_id,day)) foo1
+			FULL OUTER JOIN
+				(SELECT agl.group_id, $1::int AS day, count(*) AS tracker_closed
+				FROM artifact a, artifact_group_list agl
+				WHERE a.close_date BETWEEN $1 AND $2
+				AND a.group_artifact_id=agl.group_artifact_id
+				GROUP BY group_id,day ) aclosed USING (group_id,day)) foo1
 
-		FULL OUTER JOIN
-			(SELECT fgl.group_id, $1::int AS day, count(*) AS forum
-			FROM forum f, forum_group_list fgl
-			WHERE f.post_date BETWEEN $1 AND $2
-			AND f.group_forum_id=fgl.group_forum_id
-			GROUP BY group_id,day ) forum USING (group_id,day)) foo2
+			FULL OUTER JOIN
+				(SELECT fgl.group_id, $1::int AS day, count(*) AS forum
+				FROM forum f, forum_group_list fgl
+				WHERE f.post_date BETWEEN $1 AND $2
+				AND f.group_forum_id=fgl.group_forum_id
+				GROUP BY group_id,day ) forum USING (group_id,day)) foo2
 
-		FULL OUTER JOIN
-			(SELECT group_id, $1::int AS day, count(*) AS docs
-			FROM doc_data
-			WHERE createdate BETWEEN $1 AND $2
-			GROUP BY group_id,day ) docs USING (group_id,day)) foo3
+			FULL OUTER JOIN
+				(SELECT group_id, $1::int AS day, count(*) AS docs
+				FROM doc_data
+				WHERE createdate BETWEEN $1 AND $2
+				GROUP BY group_id,day ) docs USING (group_id,day)) foo3
 
-		FULL OUTER JOIN
-			(SELECT fp.group_id, $1::int AS day, count(*) AS downloads
-			FROM frs_package fp, frs_release fr, frs_file ff, frs_dlstats_file fdf
-			WHERE fp.package_id=fr.package_id
-			AND fr.release_id=ff.release_id
-			AND ff.file_id=fdf.file_id
-			AND fdf.month = $3 AND fdf.day = $4
-			GROUP BY fp.group_id,day ) docs USING (group_id,day)) foo4
+			FULL OUTER JOIN
+				(SELECT fp.group_id, $1::int AS day, count(*) AS downloads
+				FROM frs_package fp, frs_release fr, frs_file ff, frs_dlstats_file fdf
+				WHERE fp.package_id=fr.package_id
+				AND fr.release_id=ff.release_id
+				AND ff.file_id=fdf.file_id
+				AND fdf.month = $3 AND fdf.day = $4
+				GROUP BY fp.group_id,day ) docs USING (group_id,day)) foo4
 
-		FULL OUTER JOIN
-			(SELECT group_id, $1::int AS day, sum(commits) AS cvs_commits
-			FROM stats_cvs_group
-			WHERE month=$3 AND day=$4
-			GROUP BY group_id,day ) cvs USING (group_id,day)) foo5
+			FULL OUTER JOIN
+				(SELECT group_id, $1::int AS day, sum(commits) AS cvs_commits
+				FROM stats_cvs_group
+				WHERE month=$3 AND day=$4
+				GROUP BY group_id,day ) cvs USING (group_id,day)) foo5
 
-		FULL OUTER JOIN
-			(SELECT pgl.group_id, $1::int AS day,count(*) AS tasks_opened
-			FROM project_task pt, project_group_list pgl
-			WHERE pt.start_date BETWEEN $1 AND $2
-			AND pt.group_project_id=pgl.group_project_id
-			GROUP BY group_id,day ) topen USING (group_id,day)) foo6
+			FULL OUTER JOIN
+				(SELECT pgl.group_id, $1::int AS day,count(*) AS tasks_opened
+				FROM project_task pt, project_group_list pgl
+				WHERE pt.start_date BETWEEN $1 AND $2
+				AND pt.group_project_id=pgl.group_project_id
+				GROUP BY group_id,day ) topen USING (group_id,day)) foo6
 
 		FULL OUTER JOIN
 			(SELECT pgl.group_id, $1::int AS day, count(*) AS tasks_closed
@@ -1221,6 +1227,7 @@ function group_act_daily($day) {
 /**
  *	Populate the group_act_daily report table.
  *
+ *	@param int $count
  *	@return	boolean	Success.
  */
 function backfill_group_act_daily($count=10000) {
@@ -1276,7 +1283,8 @@ GROUP BY group_id, week',
 /**
  *  Populate the group_act_weekly report table.
  *
- *  @return boolean Success.
+ *	@param int $count
+ *	@return boolean Success.
  */
 function backfill_group_act_weekly($count=10000) {
 
@@ -1292,16 +1300,16 @@ function backfill_group_act_weekly($count=10000) {
 	return true;
 }
 
-/**
- *  Add a row to the group_act_monthly report table.
- *
- *  @param  int month_start - the unix time of the beginning of the month.
- *  @param  int month_end - the unix time of the end of the month.
- *  @return boolean Success.
- */
-function group_act_monthly($month,$end) {
-	db_query_params ('DELETE FROM rep_group_act_monthly WHERE month=$1',
-			array($month));
+	/**
+	 *  Add a row to the group_act_monthly report table.
+	 *
+	 *  @param  int $month month_start - the unix time of the beginning of the month.
+	 *  @param  int $end month_end - the unix time of the end of the month.
+	 *  @return boolean Success.
+	 */
+	function group_act_monthly($month,$end) {
+		db_query_params('DELETE FROM rep_group_act_monthly WHERE month=$1',
+				array($month));
 
 	return db_query_params ('
 INSERT INTO rep_group_act_monthly (group_id, month, tracker_opened,
@@ -1322,7 +1330,8 @@ GROUP BY group_id,month',
 /**
  *  Populate the group_act_monthly report table.
  *
- *  @return boolean Success.
+ *	@param int $count
+ *	@return boolean Success.
  */
 function backfill_group_act_monthly($count=10000) {
 
@@ -1341,7 +1350,7 @@ function backfill_group_act_monthly($count=10000) {
 /**
  *  Add a row to the rep_time_category table.
  *
- *	@param	string	The category name.
+ *	@param	string	$category_name	The category name.
  *  @return boolean Success.
  */
 function addTimeCode($category_name) {
@@ -1352,6 +1361,7 @@ function addTimeCode($category_name) {
 /**
  *  Update the rep_time_category table.
  *
+ *	@param integer	$time_code
  *	@param	string	The category name.
  *  @return boolean Success.
  */
