@@ -64,7 +64,7 @@ class TimeEntry extends Error {
      * @access public
      * @param  int   $projectTaskId The project task the user is reporting time to
      * @param  int   $week          The week the time being reported was done
-     * @param  int   $daysAdjust    Represents the offset to add to the given week to specify the day
+     * @param  int   $days_adjust    Represents the offset to add to the given week to specify the day
      * @param  int   $timeCode      The type of work that was done (general categorization)
      * @param  float $hours         The actual time spent
      * @return int   This will be the Artificat ID otherwise it will be false if an error occurred
