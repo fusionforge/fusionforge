@@ -58,24 +58,11 @@ function report_weeks_box($Report, $name='week', $selected=false) {
 	return html_build_select_box_from_arrays ($arr,$arr2,$name,$selected,false);
 }
 
-function report_day_adjust_box($Report, $name='days_adjust', $selected=false) {
-	$days[]='0';
-	$days[]='1';
-	$days[]='2';
-	$days[]='3';
-	$days[]='4';
-	$days[]='5';
-	$days[]='6';
-	$names[]=_('Sunday');
-	$names[]=_('Monday');
-	$names[]=_('Tuesday');
-	$names[]=_('Wednesday');
-	$names[]=_('Thursday');
-	$names[]=_('Friday');
-	$names[]=_('Saturday');
-	return html_build_select_box_from_arrays ($days,$names,$name,$selected,false);
-
-//	return html_build_select_box_from_arrays (array_reverse(array_values($Report->adjust_days)),array_reverse(array_keys($Report->adjust_days)),$name,$selected,false);
+function report_day_adjust_box() {
+	$days = array('0', '1', '2', '3', '4', '5', '6');
+	$names = array(_('Sunday'), _('Monday'), _('Tuesday'),
+				   _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'));
+	return html_build_select_box_from_arrays($days, $names, 'days_adjust', false, false);
 }
 
 function report_months_box($Report, $name='month', $selected=false) {
@@ -93,8 +80,8 @@ function report_useract_box($name='dev_id', $selected='1', $start_with='') {
 	if ($start_with) {
 		$res = db_query_params ('SELECT user_id,realname FROM users WHERE status=$1 AND (exists (SELECT user_id FROM rep_user_act_daily WHERE user_id=users.user_id)) AND (lower(lastname) LIKE $2 OR lower(user_name) LIKE $3) ORDER BY lastname',
 					array ('A',
-					       strtolower("$start_with%"),
-					       strtolower("$start_with%"))) ;
+							strtolower("$start_with%"),
+							strtolower("$start_with%"))) ;
 	} else {
 		$res = db_query_params ('SELECT user_id,realname FROM users WHERE status=$1 AND (exists (SELECT user_id FROM rep_user_act_daily WHERE user_id=users.user_id)) ORDER BY lastname',
 					array ('A')) ;
@@ -106,8 +93,8 @@ function report_usertime_box($name='dev_id', $selected='1', $start_with='') {
 	if ($start_with) {
 		$res = db_query_params ('SELECT user_id,realname FROM users WHERE status=$1 AND (exists (SELECT user_id FROM rep_time_tracking WHERE user_id=users.user_id)) AND (lower(lastname) LIKE $2 OR lower(user_name) LIKE $3) ORDER BY lastname',
 					array ('A',
-					       strtolower("$start_with%"),
-					       strtolower("$start_with%"))) ;
+							strtolower("$start_with%"),
+							strtolower("$start_with%"))) ;
 	} else {
 		$res = db_query_params ('SELECT user_id,realname FROM users WHERE status=$1 AND (exists (SELECT user_id FROM rep_time_tracking WHERE user_id=users.user_id)) ORDER BY lastname',
 					array ('A')) ;
@@ -210,8 +197,7 @@ function report_tracker_box($name='datatype', $selected='1') {
 function report_time_category_box($name='category',$selected=false) {
 	global $report_time_category_res;
 	if (!$report_time_category_res) {
-		$report_time_category_res = db_query_params ('SELECT * FROM rep_time_category',
-							     array()) ;
+		$report_time_category_res = db_query_params ('SELECT * FROM rep_time_category', array());
 	}
 	return html_build_select_box($report_time_category_res,$name,$selected,false);
 }
