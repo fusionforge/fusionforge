@@ -49,7 +49,7 @@ echo notepad_func();
 <table class="fullwidth mod_task">
 
 	<tr>
-		<td><strong><?php echo _('Submitted by') ?>:</strong><br />
+		<td><strong><?php echo _('Submitted by') . _(': '); ?></strong><br />
 			<?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
 		<td><input type="submit" value="<?php echo _('Submit') ?>" name="submit" /></td>
 		<td><strong>Task ID:</strong> <?php echo $project_task_id; ?> @ <?php
@@ -58,12 +58,12 @@ echo notepad_func();
 
 	<tr>
 		<td>
-			<strong><?php echo _('Category') ?></strong><br />
-			<?php echo $pg->categoryBox('category_id',$pt->getCategoryID()); ?> <?php util_make_link ('/pm/admin/?<?php echo "group_id=$group_id&amp;add_cat=1&amp;group_project_id='.$group_project_id,_('admin')); ?>
+			<strong><?php echo _('Category') . _(': '); ?></strong><br />
+			<?php echo $pg->categoryBox('category_id',$pt->getCategoryID()); ?> <?php util_make_link ('/pm/admin/?<?php echo "group_id=$group_id&amp;add_cat=1&amp;group_project_id='.$group_project_id,_('Admin')); ?>
 		</td>
 
 		<td>
-			<strong><?php echo _('Subproject'); ?>:</strong><br />
+			<strong><?php echo _('Subproject') . _(': '); ?></strong><br />
 			<?php echo $pg->groupProjectBox('new_group_project_id',$group_project_id,false); ?>
 		</td>
 
@@ -75,13 +75,13 @@ echo notepad_func();
 
 	<tr>
 		<td>
-		<strong><?php echo _('Percent Complete') ?>:</strong><br />
-		<?php echo $pg->percentCompleteBox('percent_complete',$pt->getPercentComplete()); ?>
+		<strong><?php echo _('Percent Complete') . _(': '); ?></strong><br />
+		<?php $pg->percentCompleteBox('percent_complete',$pt->getPercentComplete()); ?>
 		</td>
 
 		<td>
-		<strong><?php echo _('Priority') ?>:</strong><br />
-		<?php echo build_priority_select_box('priority',$pt->getPriority()); ?>
+		<strong><?php echo _('Priority') . _(': '); ?></strong><br />
+		<?php build_priority_select_box('priority',$pt->getPriority()); ?>
 		</td>
 
 		<td>
@@ -94,7 +94,7 @@ echo notepad_func();
 
   	<tr>
 		<td>
-		<strong><?php echo _('Task Summary') ?>:</strong><br />
+		<strong><?php echo _('Task Summary') . _(': '); ?></strong><br />
 		<input type="text" name="summary" size="65" maxlength="65" value="<?php echo $pt->getSummary(); ?>" />
 		</td>
 		<td colspan="2">
@@ -169,8 +169,8 @@ unset($GLOBALS['editor_was_set_up']);
 	</tr>
 
 	<tr>
-		<td valign="top">
-		<strong><?php echo _('Assigned to') ?>:</strong><br />
+		<td class="top">
+		<strong><?php echo _('Assigned to') . _(': '); ?></strong><br />
 		<?php
 		/*
 			List of possible users that this one could be assigned to
@@ -180,7 +180,7 @@ unset($GLOBALS['editor_was_set_up']);
 		</td>
 
 		<td class="top" colspan="2">
-		<strong><?php echo _('Dependent on task') ?>:</strong><br />
+		<strong><?php echo _('Dependent on task') . _(': '); ?></strong><br />
 		<?php
 		/*
 			List of possible tasks that this one could depend on
@@ -194,12 +194,12 @@ unset($GLOBALS['editor_was_set_up']);
 
 	<tr>
 		<td>
-		<strong><?php echo _('Estimated Hours') ?>:</strong><br />
+		<strong><?php echo _('Estimated Hours') . _(': '); ?></strong><br />
 		<input type="text" name="hours" size="5" value="<?php echo $pt->getHours(); ?>" />
 		</td>
 
 		<td colspan="2">
-		<strong><?php echo _('Status') ?>:</strong><br />
+		<strong><?php echo _('Status') . _(': '); ?></strong><br />
 		<?php
 		echo $pg->statusBox('status_id', $pt->getStatusID(), false );
 		?>
@@ -209,7 +209,7 @@ unset($GLOBALS['editor_was_set_up']);
 //will add duration and parent selection boxes
 	<tr>
 		<td>
-		<strong><?php echo _('Estimated Hours') ?>:</strong><br />
+		<strong><?php echo _('Estimated Hours') . _(': '); ?></strong><br />
 		<input type="text" name="hours" size="5" value="<?php echo $pt->getHours(); ?>" />
 		</td>
 
@@ -258,7 +258,7 @@ unset($GLOBALS['editor_was_set_up']);
 </table>
 </form>
 
-<h3><?php echo _('Time tracking'); ?></h3>
+<h2><?php echo _('Time tracking'); ?></h2>
 
 <?php
 $title_arr = array();
@@ -308,24 +308,25 @@ for ($i=0; $i<db_numrows($res); $i++) {
 
 	echo '
 	<tr '.$HTML->boxGetAltRowStyle($xi++).'>
-	<td>&nbsp;</td>
+	<td></td>
 	<td>'.date(_('Y-m-d H:i'),db_result($res,$i,'report_date')).'</td>
 	<td>'.db_result($res,$i,'hours').'</td>
 	<td>'.db_result($res,$i,'category_name').'</td>
 	<td>'.db_result($res,$i,'realname').'</td>
-	<td>&nbsp;</td></tr>';
+	<td></td></tr>';
 	$total_hours += db_result($res,$i,'hours');
 
 }
 
 echo '
 <tr '.$HTML->boxGetAltRowStyle($xi++).'>
-<td><strong>'._('Total').':</strong></td>
-<td>&nbsp;</td>
+<td><strong>'._('Total')._(': ').'</strong></td>
+<td></td>
 <td>'.$total_hours.'</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td></tr>';
+<td></td>
+<td></td>
+<td></td>
+</tr>';
 
 echo $HTML->listTableBottom();
 echo "</form>\n";
