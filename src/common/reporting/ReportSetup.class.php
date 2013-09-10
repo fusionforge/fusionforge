@@ -411,13 +411,12 @@ class ReportSetup extends Report {
 	/**
 	 *	Add a row to the users_added_daily report table.
 	 *
-	 *	@param	int	Day - the unix time of the beginning of the day.
+	 *	@param	int	$day int - the unix time of the beginning of the day.
 	 *	@return	boolean	Success.
 	 */
 	function users_added_daily($day) {
 		db_query_params ('DELETE FROM rep_users_added_daily WHERE day=$1',
 				array($day));
-
 
 		return db_query_params ('INSERT INTO rep_users_added_daily (day,added)
 			VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date
@@ -431,6 +430,7 @@ class ReportSetup extends Report {
 	/**
 	 *	Populate the users_added_daily report table.
 	 *
+	 *	@param int $count
 	 *	@return	boolean	Success.
 	 */
 	function backfill_users_added_daily($count=10000) {
@@ -460,7 +460,7 @@ class ReportSetup extends Report {
 	/**
 	 *	Add a row to the groups_added_daily report table.
 	 *
-	 *	@param	int	Day - the unix time of the beginning of the day.
+	 *	@param	int	$day Day - the unix time of the beginning of the day.
 	 *	@return	boolean	Success.
 	 */
 	function groups_added_daily($day) {
@@ -480,6 +480,7 @@ class ReportSetup extends Report {
 	/**
 	 *	Populate the groups_added_daily report table.
 	 *
+	 *	@param int $count
 	 *	@return	boolean	Success.
 	 */
 	function backfill_groups_added_daily($count=10000) {
@@ -509,7 +510,7 @@ class ReportSetup extends Report {
 	/**
 	 *  Add a row to the users_added_weekly report table.
 	 *
-	 *  @param  int Week - the unix time of the beginning of the sunday for this week.
+	 *  @param  int $week Week - the unix time of the beginning of the sunday for this week.
 	 *  @return boolean Success.
 	 */
 	function users_added_weekly($week) {
@@ -528,7 +529,8 @@ class ReportSetup extends Report {
 	/**
 	 *  Populate the users_added_weekly report table.
 	 *
-	 *  @return boolean Success.
+	 *	@param int $count
+	 *	@return boolean Success.
 	 */
 	function backfill_users_added_weekly($count=10000) {
 
@@ -547,7 +549,7 @@ class ReportSetup extends Report {
 	/**
 	 *  Add a row to the groups_added_weekly report table.
 	 *
-	 *  @param  int Week - the unix time of the beginning of the sunday for this week.
+	 *  @param  int $week Week - the unix time of the beginning of the sunday for this week.
 	 *  @return boolean Success.
 	 */
 	function groups_added_weekly($week) {
@@ -607,14 +609,15 @@ class ReportSetup extends Report {
 	/**
 	 *  Populate the users_added_monthly report table.
 	 *
-	 *  @return boolean Success.
+	 *	@param int $count
+	 *	@return boolean Success.
 	 */
 	function backfill_users_added_monthly($count=10000) {
 
 		$arr = array_slice ($this->getMonthStartArr(), -$count-1);
 		rsort($arr);
 
-	//skipping first one
+		//skipping first one
 		for ($i=1; $i<count($arr); $i++) {
 			if (!$this->users_added_monthly($arr[$i],($arr[$i-1]-1))) {
 				$this->setError('backfill_users_added_monthly:: Error adding monthly row: '.db_error());
@@ -647,7 +650,8 @@ class ReportSetup extends Report {
 	/**
 	 *  Populate the groups_added_monthly report table.
 	 *
-	 *  @return boolean Success.
+	 *	@param int $count
+	 *	@return boolean Success.
 	 */
 	function backfill_groups_added_monthly($count=10000) {
 
@@ -690,7 +694,7 @@ class ReportSetup extends Report {
 	/**
 	 *	Populate the users_cum_daily report table.
 	 *
-	 * @param int $count
+	 *	@param int $count
 	 *	@return	boolean	Success.
 	 */
 	function backfill_users_cum_daily($count=10000) {
@@ -720,7 +724,7 @@ class ReportSetup extends Report {
 	/**
 	 *	Add a row to the groups_cum_daily report table.
 	 *
-	 *	@param	int	Day - the unix time of the beginning of the day.
+	 *	@param	int	$day Day - the unix time of the beginning of the day.
 	 *	@return	boolean	Success.
 	 */
 	function groups_cum_daily($day) {
@@ -768,13 +772,12 @@ class ReportSetup extends Report {
 	/**
 	 *  Add a row to the users_cum_weekly report table.
 	 *
-	 *  @param  int Week - the unix time of the beginning of the sunday for this week.
+	 *  @param  int $week Week - the unix time of the beginning of the sunday for this week.
 	 *  @return boolean Success.
 	 */
 	function users_cum_weekly($week) {
 		db_query_params ('DELETE FROM rep_users_cum_weekly WHERE week=$1',
 				array($week));
-
 
 		return db_query_params ('INSERT INTO rep_users_cum_weekly (week,total)
 			VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date
@@ -788,7 +791,8 @@ class ReportSetup extends Report {
 	/**
 	 *  Populate the users_cum_weekly report table.
 	 *
-	 *  @return boolean Success.
+	 *	@param int $count
+	 *	@return boolean Success.
 	 */
 	function backfill_users_cum_weekly($count=10000) {
 
@@ -826,7 +830,8 @@ class ReportSetup extends Report {
 	/**
 	 *  Populate the groups_cum_weekly report table.
 	 *
-	 *  @return boolean Success.
+	 *	@param int $count
+	 *	@return boolean Success.
 	 */
 	function backfill_groups_cum_weekly($count=10000) {
 
@@ -842,17 +847,16 @@ class ReportSetup extends Report {
 		return true;
 	}
 
-		/**
-		 *  Add a row to the users_cum_monthly report table.
-		 *
-		 *  @param  int $month month_start - the unix time of the beginning of the month.
-		 *  @param  int $end month_end - the unix time of the end of the month.
-		 *  @return boolean Success.
-		 */
-		function users_cum_monthly($month,$end) {
-			db_query_params ('DELETE FROM rep_users_cum_monthly WHERE month=$1',
-				array($month));
-
+	/**
+	 *  Add a row to the users_cum_monthly report table.
+	 *
+	 *  @param  int $month month_start - the unix time of the beginning of the month.
+	 *  @param  int $end month_end - the unix time of the end of the month.
+	 *  @return boolean Success.
+	 */
+	function users_cum_monthly($month,$end) {
+		db_query_params ('DELETE FROM rep_users_cum_monthly WHERE month=$1',
+			array($month));
 
 		return db_query_params ('INSERT INTO rep_users_cum_monthly (month,total)
 			VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date
@@ -865,14 +869,15 @@ class ReportSetup extends Report {
 	/**
 	 *  Populate the users_cum_monthly report table.
 	 *
-	 *  @return boolean Success.
+	 *	@param int $count
+	 *	@return boolean Success.
 	 */
 	function backfill_users_cum_monthly($count=10000) {
 
 		$arr = array_slice ($this->getMonthStartArr(), -$count-1);
 		rsort($arr);
 
-	//skip first one
+		//skip first one
 		for ($i=1; $i<count($arr); $i++) {
 			if (!$this->users_cum_monthly($arr[$i],($arr[$i-1]-1))) {
 				$this->setError('backfill_users_cum_monthly:: Error adding monthly row: '.db_error());
@@ -904,14 +909,15 @@ class ReportSetup extends Report {
 	/**
 	 *  Populate the groups_cum_monthly report table.
 	 *
-	 *  @return boolean Success.
+	 *	@param int $count
+	 *	@return boolean Success.
 	 */
 	function backfill_groups_cum_monthly($count=10000) {
 
 		$arr = array_slice ($this->getMonthStartArr(), -$count-1);
 		rsort($arr);
 
-	//skip first one
+		//skip first one
 		for ($i=1; $i<count($arr); $i++) {
 			if (!$this->groups_cum_monthly($arr[$i],($arr[$i-1]-1))) {
 				$this->setError('backfill_groups_cum_monthly:: Error adding monthly row: '.db_error());
@@ -1054,13 +1060,13 @@ class ReportSetup extends Report {
 				$week+REPORT_WEEK_SPAN-1));
 	}
 
-		/**
-		 *  Populate the user_act_weekly report table.
-		 *
-		 * @param int $count
-		 * @return boolean Success.
-		 */
-		function backfill_user_act_weekly($count=10000) {
+	/**
+	 *  Populate the user_act_weekly report table.
+	 *
+	 * @param int $count
+	 * @return boolean Success.
+	 */
+	function backfill_user_act_weekly($count=10000) {
 
 		$arr = array_slice ($this->getMonthStartArr(), -$count-1);
 		rsort($arr);
@@ -1250,7 +1256,7 @@ class ReportSetup extends Report {
 	/**
 	 *  Add a row to the group_act_weekly report table.
 	 *
-	 *  @param  int Week - the unix time of the beginning of the sunday for this week.
+	 *  @param  int $week Week - the unix time of the beginning of the sunday for this week.
 	 *  @return boolean Success.
 	 */
 	function group_act_weekly($week) {
@@ -1355,8 +1361,8 @@ class ReportSetup extends Report {
 	 *  Update the rep_time_category table.
 	 *
 	 *	@param integer	$time_code
-	 *	@param	string	The category name.
-	 *  @return boolean Success.
+	 *	@param	string	$category_name The category name.
+	 *	@return boolean Success.
 	 */
 	function updateTimeCode($time_code, $category_name) {
 		return db_query_params ('UPDATE rep_time_category SET category_name=$1 WHERE time_code=$2',
