@@ -176,7 +176,7 @@ if ($week) {
 			<input type="hidden" name="week" value="'.$week.'" />
 			<tr '.$HTML->boxGetAltRowStyle($xi++).'>
 				<td class="align-center">'. html_build_select_box ($respt,'project_task_id',false,false) .'</td>
-				<td class="align-center">'.report_day_adjust_box($report, 'days_adjust').'</td>
+				<td class="align-center">'.report_day_adjust_box().'</td>
 				<td class="align-center"><input type="text" name="hours" value="" size="3" maxlength="3" /></td>
 				<td class="align-center">'.report_time_category_box('time_code',false).'</td>
 				<td class="align-center"><input type="submit" name="add" value="'.
@@ -184,9 +184,9 @@ if ($week) {
 			</tr></form>';
 		}
 		if (!isset($total_hours)) $total_hours = '';
-		echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'><td colspan="2"><strong>'._('Total Hours').':</strong></td><td class="align-center"><strong>'.$total_hours.'</strong></td><td colspan="2"></td></tr>';
+		echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'><td colspan="2"><strong>'._('Total Hours')._(':').'</strong></td>';
+		echo '<td class="align-center"><strong>'.$total_hours.'</strong></td><td colspan="2"></td></tr>';
 		echo $HTML->listTableBottom();
-
 	}
 	if (!$group_project_id) {
 		?>
@@ -196,7 +196,7 @@ if ($week) {
 <input type="hidden" name="week" value="<?php echo $week; ?>" />
 <table>
 	<tr>
-		<td><strong><?php echo _("Tasks Project"); ?>:</strong></td>
+		<td><strong><?php echo _("Tasks Project")._(':'); ?></strong></td>
 		<td><?php echo html_build_select_box ($respm,'group_project_id',false,false); ?></td>
 		<td><input type="submit" name="submit"
 			value="<?php echo _('Next'); ?>" /></td>
@@ -225,7 +225,7 @@ if ($week) {
 <p><?php echo _("After you choose a week, you will be prompted to choose a Project/Subproject in the Tasks."); ?></p>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>"
 	method="get">
-<p><strong><?php echo _('Week Starting'); ?>:</strong></p>
+<p><strong><?php echo _('Week Starting')._(':'); ?></strong></p>
 	<?php echo report_weeks_box($report,'week'); ?>
 <p><input type="submit" name="submit" value="<?php echo _('Next'); ?>" /></p>
 </form>

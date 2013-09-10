@@ -282,7 +282,7 @@ echo '<form id="time-tracking" action="/reporting/timeadd.php" method="post">
 echo $HTML->listTableTop ($title_arr);
 echo '<tr '.$HTML->boxGetAltRowStyle($xi++).'>
 		<td class="align-center">'. report_weeks_box($report, 'week') .'</td>
-		<td class="align-center">'. report_day_adjust_box($report, 'days_adjust') .'</td>
+		<td class="align-center">'. report_day_adjust_box() .'</td>
 		<td class="align-center"><input id="time-tracking-hours" type="text" required="required" name="hours" value="" size="3" maxlength="3" /></td>
 		<td class="align-center">'.report_time_category_box('time_code',false).'</td>
 		<td>&nbsp;</td>
