@@ -9197,8 +9197,6 @@ class SimplePie_Misc
 				return 'Adobe-Symbol-Encoding';
 
 			case 'ami1251':
-			case 'ami1251':
-			case 'amiga1251':
 			case 'amiga1251':
 				return 'Amiga-1251';
 
@@ -9292,7 +9290,6 @@ class SimplePie_Misc
 
 			case 'csiso646danish':
 			case 'dk':
-			case 'ds2089':
 			case 'ds2089':
 			case 'iso646dk':
 				return 'DS_2089';
@@ -9790,7 +9787,6 @@ class SimplePie_Misc
 				return 'IBM1026';
 
 			case 'ibm1047':
-			case 'ibm1047':
 				return 'IBM1047';
 
 			case 'csiso143iecp271':
@@ -9846,7 +9842,6 @@ class SimplePie_Misc
 			case 'csisolatin2':
 			case 'iso88592':
 			case 'isoir101':
-			case 'iso88592':
 			case 'iso885921987':
 			case 'l2':
 			case 'latin2':
@@ -9859,7 +9854,6 @@ class SimplePie_Misc
 			case 'csisolatin3':
 			case 'iso88593':
 			case 'isoir109':
-			case 'iso88593':
 			case 'iso885931988':
 			case 'l3':
 			case 'latin3':
@@ -9868,7 +9862,6 @@ class SimplePie_Misc
 			case 'csisolatin4':
 			case 'iso88594':
 			case 'isoir110':
-			case 'iso88594':
 			case 'iso885941988':
 			case 'l4':
 			case 'latin4':
@@ -9878,7 +9871,6 @@ class SimplePie_Misc
 			case 'cyrillic':
 			case 'iso88595':
 			case 'isoir144':
-			case 'iso88595':
 			case 'iso885951988':
 				return 'ISO-8859-5';
 
@@ -9888,17 +9880,14 @@ class SimplePie_Misc
 			case 'ecma114':
 			case 'iso88596':
 			case 'isoir127':
-			case 'iso88596':
 			case 'iso885961987':
 				return 'ISO-8859-6';
 
 			case 'csiso88596e':
 			case 'iso88596e':
-			case 'iso88596e':
 				return 'ISO-8859-6-E';
 
 			case 'csiso88596i':
-			case 'iso88596i':
 			case 'iso88596i':
 				return 'ISO-8859-6-I';
 
@@ -9909,7 +9898,6 @@ class SimplePie_Misc
 			case 'greek8':
 			case 'iso88597':
 			case 'isoir126':
-			case 'iso88597':
 			case 'iso885971987':
 				return 'ISO-8859-7';
 
@@ -9917,17 +9905,14 @@ class SimplePie_Misc
 			case 'hebrew':
 			case 'iso88598':
 			case 'isoir138':
-			case 'iso88598':
 			case 'iso885981988':
 				return 'ISO-8859-8';
 
 			case 'csiso88598e':
 			case 'iso88598e':
-			case 'iso88598e':
 				return 'ISO-8859-8-E';
 
 			case 'csiso88598i':
-			case 'iso88598i':
 			case 'iso88598i':
 				return 'ISO-8859-8-I';
 
@@ -9949,20 +9934,17 @@ class SimplePie_Misc
 			case 'iso885914':
 			case 'isoceltic':
 			case 'isoir199':
-			case 'iso885914':
 			case 'iso8859141998':
 			case 'l8':
 			case 'latin8':
 				return 'ISO-8859-14';
 
 			case 'iso885915':
-			case 'iso885915':
 			case 'latin9':
 				return 'ISO-8859-15';
 
 			case 'iso885916':
 			case 'isoir226':
-			case 'iso885916':
 			case 'iso8859162001':
 			case 'l10':
 			case 'latin10':
@@ -9993,7 +9975,6 @@ class SimplePie_Misc
 				return 'ISO-10646-UTF-1';
 
 			case 'csiso115481':
-			case 'iso115481':
 			case 'iso115481':
 			case 'isotr115481':
 				return 'ISO-11548-1';
@@ -10241,12 +10222,10 @@ class SimplePie_Misc
 				return 'MSZ_7795.3';
 
 			case 'csnatsdano':
-			case 'isoir91':
 			case 'natsdano':
 				return 'NATS-DANO';
 
 			case 'csnatsdanoadd':
-			case 'isoir92':
 			case 'natsdanoadd':
 				return 'NATS-DANO-ADD';
 
@@ -10489,9 +10468,6 @@ class SimplePie_Misc
 			case 'windows1252':
 				return 'Windows-1252';
 
-			case 'windows1252':
-				return 'windows-1252';
-
 			case 'windows1253':
 				return 'windows-1253';
 
@@ -10503,9 +10479,6 @@ class SimplePie_Misc
 			case 'latin5':
 			case 'windows1254':
 				return 'Windows-1254';
-
-			case 'windows1254':
-				return 'windows-1254';
 
 			case 'windows1255':
 				return 'windows-1255';
@@ -11217,7 +11190,6 @@ class SimplePie_Decode_HTML_Entities
 			case "\x09":
 			case "\x0A":
 			case "\x0B":
-			case "\x0B":
 			case "\x0C":
 			case "\x20":
 			case "\x3C":
@@ -11436,15 +11408,15 @@ class SimplePie_Parse_Date
 		'januari' => 1,
 		'februari' => 2,
 		'maart' => 3,
-		'april' => 4,
+		// 'april' => 4,
 		'mei' => 5,
 		'juni' => 6,
 		'juli' => 7,
 		'augustus' => 8,
-		'september' => 9,
+		// 'september' => 9,
 		'oktober' => 10,
-		'november' => 11,
-		'december' => 12,
+		// 'november' => 11,
+		// 'december' => 12,
 		// French
 		'janvier' => 1,
 		'février' => 2,
@@ -11462,14 +11434,14 @@ class SimplePie_Parse_Date
 		'januar' => 1,
 		'februar' => 2,
 		'märz' => 3,
-		'april' => 4,
-		'mai' => 5,
-		'juni' => 6,
-		'juli' => 7,
-		'august' => 8,
-		'september' => 9,
-		'oktober' => 10,
-		'november' => 11,
+		// 'april' => 4,
+		// 'mai' => 5,
+		// 'juni' => 6,
+		// 'juli' => 7,
+		// 'august' => 8,
+		// 'september' => 9,
+		// 'oktober' => 10,
+		// 'november' => 11,
 		'dezember' => 12,
 		// Italian
 		'gennaio' => 1,
@@ -11482,17 +11454,17 @@ class SimplePie_Parse_Date
 		'agosto' => 8,
 		'settembre' => 9,
 		'ottobre' => 10,
-		'novembre' => 11,
+		// 'novembre' => 11,
 		'dicembre' => 12,
 		// Spanish
 		'enero' => 1,
 		'febrero' => 2,
-		'marzo' => 3,
+		// 'marzo' => 3,
 		'abril' => 4,
 		'mayo' => 5,
 		'junio' => 6,
 		'julio' => 7,
-		'agosto' => 8,
+		// 'agosto' => 8,
 		'septiembre' => 9,
 		'setiembre' => 9,
 		'octubre' => 10,
@@ -11522,8 +11494,8 @@ class SimplePie_Parse_Date
 		'augusztus' => 8,
 		'szeptember' => 9,
 		'október' => 10,
-		'november' => 11,
-		'december' => 12,
+		// 'november' => 11,
+		// 'december' => 12,
 		// Greek
 		'Ιαν' => 1,
 		'Φεβ' => 2,
