@@ -33,7 +33,8 @@ $browse_instructions = getStringFromRequest('browse_instructions', $ath->getBrow
 //
 //	FORM TO UPDATE ARTIFACT TYPES
 //
-$ath->adminHeader(array('title'=>sprintf(_('Update settings for %s'),$ath->getName())));
+$ath->adminHeader(array('title'=>sprintf(_('Update settings for %s'),
+	$ath->getName())));
 		?>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<p>
@@ -49,7 +50,7 @@ $ath->adminHeader(array('title'=>sprintf(_('Update settings for %s'),$ath->getNa
 		?>
 		</p>
 		<p>
-		<strong><?php echo _('Description') ?>:</strong><br />
+		<strong><?php echo _('Description')._(':'); ?></strong><br />
 		<?php if ($ath->getDataType()) {
 			echo $ath->getDescription();
 		} else {
@@ -60,21 +61,21 @@ $ath->adminHeader(array('title'=>sprintf(_('Update settings for %s'),$ath->getNa
 		?>
 		</p>
 		<p>
-		<strong><?php echo _('Send email on new submission to address') ?>:</strong><br />
+		<strong><?php echo _('Send email on new submission to address')._(':'); ?></strong><br />
 		<input type="text" name="email_address" value="<?php echo $email_address; ?>" /></p>
 		<p>
 		<input type="checkbox" name="email_all" value="1" <?php echo (($email_all)?'checked="checked"':''); ?> /> <strong><?php echo _('Send email on all changes') ?></strong></p>
 		<p>
-		<strong><?php echo _('Days till considered overdue') ?>:</strong><br />
+		<strong><?php echo _('Days till considered overdue')._(':'); ?></strong><br />
 		<input type="text" name="due_period" value="<?php echo $due_period; ?>" /></p>
 		<p>
-		<strong><?php echo _('Days till pending tracker items time out') ?>:</strong><br />
+		<strong><?php echo _('Days till pending tracker items time out')._(':'); ?></strong><br />
 		<input type="text" name="status_timeout"  value="<?php echo $status_timeout; ?>" /></p>
 		<p>
-		<strong><?php echo _('Free form text for the "submit new item" page') ?>:</strong><br />
+		<strong><?php echo _('Free form text for the “Submit New” page')._(':'); ?></strong><br />
 		<textarea name="submit_instructions" rows="10" cols="55"><?php echo $submit_instructions; ?></textarea></p>
 		<p>
-		<strong><?php echo _('Free form text for the "browse items" page') ?>:</strong><br />
+		<strong><?php echo _('Free form text for the Browse page')._(':'); ?></strong><br />
 		<textarea name="browse_instructions" rows="10" cols="55"><?php echo $browse_instructions; ?></textarea></p>
 		<p>
 		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>

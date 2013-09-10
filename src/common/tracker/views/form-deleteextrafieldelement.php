@@ -44,7 +44,8 @@
 			exit_error($ao->getErrorMessage(),'tracker');
 		} else {
 
-			$ath->adminHeader(array('title'=>sprintf(_("Delete a custom field element in: %s"), $ath->getName())));
+			$ath->adminHeader(array('title'=>sprintf(_("Delete a custom field element in: %s"),
+				$ath->getName())));
 
 			?>
 			<fieldset>
@@ -55,10 +56,10 @@
 			<input type="hidden" name="boxid" value="<?php echo $boxid; ?>" />
 
 			<p>
-			<strong><?php echo _("Element") ?>:</strong> <?php echo $ao->getName(); ?></p>
+			<strong><?php echo _("Element")._(':'); ?></strong> <?php echo $ao->getName(); ?></p>
 
 			<p>
-			<input type="checkbox" name="sure" value="1" /><?php echo _("I'm Sure") ?><br />
+			<input type="checkbox" name="sure" value="1" /><?php echo _("I am Sure") ?><br />
 			</p>
 			<p>
 			<input type="submit" name="post_changes" value="<?php echo _('Delete') ?>" /></p>

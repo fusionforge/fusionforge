@@ -144,7 +144,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		echo util_make_link ('/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1','('._('Admin').')');
 		?>
 		</td><td>
-		<strong><?php echo _('Priority') ?>:</strong><br />
+		<strong><?php echo _('Priority'). _(': ') ?></strong><br />
 		<?php build_priority_select_box('priority',$ah->getPriority()); ?>
 		</td>
 	</tr>
@@ -152,17 +152,17 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 	<?php if (!$ath->usesCustomStatuses()) { ?>
 	<tr>
 		<td>
-			<strong><?php echo _('State') ?>:</strong><br />
+			<strong><?php echo _('State')._(': ') ?></strong><br />
 			<?php echo $ath->statusBox ('status_id', $ah->getStatusID() ); ?>
 		</td>
-		<td></td>
+		<td>
+		</td>
 	</tr>
 	<?php } ?>
 	<?php
 		$ath->renderRelatedTasks($group, $ah);
 		$ath->renderFiles($group_id, $ah);
 	?>
-
 	<tr>
 		<td colspan="2"><strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>:</strong><br />
 		<input id="tracker-summary" required="required" title="<?php echo _('The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.') ?>" type="text" name="summary" size="70" value="<?php
@@ -172,7 +172,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 	</tr>
 	<tr><td colspan="2">
 		<div id="edit" style="display:none;">
-		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?>: <?php echo notepad_button('document.forms.trackermodform.description') ?></strong>
+		<strong><?php echo _('Detailed description') ?><?php echo utils_requiredField(); ?><?php echo _(': ') ?><?php echo notepad_button('document.forms.trackermodform.description') ?></strong>
 		<br />
 		<textarea id="tracker-description" required="required" name="description" rows="30" cols="79" title="<?php echo html_get_tooltip_description('description') ?>"><?php echo $ah->getDetails(); ?></textarea>
 		</div>
@@ -213,7 +213,7 @@ $nb = $count? ' ('.$count.')' : '';
 			});
 		/* ]]> */</script>
 		<p>
-		<strong><?php echo _('Add A Comment') ?>:<?php echo notepad_button('document.forms.trackermodform.details') ?></strong><br />
+		<strong><?php echo _('Post Followup')._(': ') ?><?php echo notepad_button('document.forms.trackermodform.details') ?></strong><br />
 		<textarea id="tracker-comment" name="details" rows="7" cols="60" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea></p>
 		<h2><?php echo _('Followups: ') ;
 echo '</h2>';

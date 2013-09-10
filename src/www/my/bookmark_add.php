@@ -32,7 +32,9 @@ $bookmark_title = trim(getStringFromRequest('bookmark_title'));
 
 if (getStringFromRequest('submit') && $bookmark_url && $bookmark_title) {
 
-	printf(_('Added bookmark for <strong>%1$s</strong> with title <strong>%2$s</strong>'), htmlspecialchars($bookmark_url),htmlspecialchars($bookmark_title)).".<p>&nbsp;</p>";
+	printf(_('Added bookmark for <strong>%1$s</strong> with title <strong>%2$s</strong>'),
+		htmlspecialchars($bookmark_url),
+		htmlspecialchars($bookmark_title));
 
 	bookmark_add ($bookmark_url, $bookmark_title);
 	print "<a href=\"$bookmark_url\">"._('Visit the bookmarked page')."</a> - ";
@@ -41,10 +43,10 @@ if (getStringFromRequest('submit') && $bookmark_url && $bookmark_title) {
 } else {
 	?>
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-	<p><?php echo _('Bookmark URL') ?>:<br />
+	<p><?php echo _('Bookmark URL')._(':'); ?><br />
 	<input type="text" name="bookmark_url" value="http://" />
 	</p>
-	<p><?php echo _('Bookmark Title') ?>:<br />
+	<p><?php echo _('Bookmark Title')._(':'); ?><br />
 	<input type="text" name="bookmark_title" value="" />
 	</p>
 	<p><input type="submit" name="submit" value="<?php echo _('Submit') ?>" /></p>

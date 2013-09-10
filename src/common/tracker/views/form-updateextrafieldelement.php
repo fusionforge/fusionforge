@@ -41,7 +41,7 @@ if (!$ac || !is_object($ac)) {
 	} elseif ($ao->isError()) {
 		exit_error($ao->getErrorMessage(),'tracker');
 	} else {
-		$title = sprintf(_('Modify a custom field element in %s'), $ath->getName()) ;
+		$title = sprintf(_('Update a custom field element in %s'), $ath->getName()) ;
 		$ath->adminHeader(array('title'=>$title));
 
 ?>
@@ -51,7 +51,7 @@ if (!$ac || !is_object($ac)) {
 			<input type="hidden" name="boxid" value="<?php echo $boxid; ?>" />
 
 			<p>
-			<strong><?php echo _('Element') ?>:</strong><br />
+			<strong><?php echo _('Element')._(':'); ?></strong><br />
 			<input type="text" name="name" value="<?php echo $ao->getName(); ?>" /></p>
 			<!--
 			Show a pop-up box to choose the possible statuses that this element will map to

@@ -63,12 +63,12 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 
 	<tr>
 		<td>
-		<strong><?php echo _('Percent Complete') ?>:</strong><br />
+		<strong><?php echo _('Percent Complete') . _(': '); ?></strong><br />
 		<?php echo $pt->getPercentComplete(); ?>%
 		</td>
 
 		<td>
-		<strong><?php echo _('Priority') ?>:</strong><br />
+		<strong><?php echo _('Priority') . _(': '); ?></strong><br />
 		<?php echo $pt->getPriority(); ?>
 		</td>
 
@@ -83,25 +83,25 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 
 	<tr>
 		<td>
-		<strong><?php echo _('Start Date') ?>:</strong><br />
+		<strong><?php echo _('Start Date') . _(': '); ?></strong><br />
 		<?php echo date(_('Y-m-d'), $pt->getStartDate() ); ?>
 		</td>
 		<td>
-		<strong><?php echo _('End Date') ?>:</strong><br />
+		<strong><?php echo _('End Date') . _(': '); ?></strong><br />
 		<?php echo date(_('Y-m-d'), $pt->getEndDate() ); ?>
 		</td>
 	</tr>
 
   	<tr>
 		<td colspan="2">
-		<strong><?php echo _('Task Summary') ?>:</strong><br />
+		<strong><?php echo _('Task Summary') . _(': '); ?></strong><br />
 		<?php echo $pt->getSummary(); ?>
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-		<strong><?php echo _('Original Comment') ?>:</strong><br />
+		<strong><?php echo _('Original Comment') . _(': '); ?></strong><br />
 		<?php
              $sanitizer = new TextSanitizer();
              $body = $sanitizer->SanitizeHtml($pt->getDetails());

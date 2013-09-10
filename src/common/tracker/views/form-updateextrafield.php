@@ -45,7 +45,7 @@ if (!$ac || !is_object($ac)) {
 	<input type="hidden" name="update_box" value="y" />
 	<input type="hidden" name="id" value="<?php echo $ac->getID(); ?>" />
 	<p>
-		<strong><?php echo _('Custom Field Name') ?>:</strong><br />
+		<strong><?php echo _('Custom Field Name')._(':'); ?></strong><br />
 		<input type="text" name="name" value="<?php echo $ac->getName(); ?>" />
 	</p>
 	<p>

@@ -34,7 +34,7 @@
 	} else {
 		$efearr=$ath->getExtraFieldElements($boxid);
 		$title = sprintf(_('Add/Update Custom Field Elements in %s'), $ath->getName());
-		$ath->adminHeader(array ('title'=>$title));
+		$ath->adminHeader(array('title'=>$title));
 
 		$rows=count($efearr);
 		if ($rows > 0) {
@@ -99,7 +99,7 @@
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;boxid='.$boxid.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="add_opt" value="y" />
 		<br /><br />
-		<strong><?php echo _('Add New Element') ?>:</strong>
+		<strong><?php echo _('Add New Element')._(':'); ?></strong>
 		<input type="text" name="name" value="" size="15" maxlength="30" />
 		<!--
 		Show a pop-up box to choose the possible statuses that this element will map to

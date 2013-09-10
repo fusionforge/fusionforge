@@ -54,10 +54,10 @@ if ($result) {
 ?>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="bookmark_id" value="<?php echo $bookmark_id; ?>" />
-<p><?php echo _('Bookmark URL') ?>:<br />
+<p><?php echo _('Bookmark URL')._(':'); ?><br />
 <input type="text" name="bookmark_url" value="<?php echo $bookmark_url; ?>" />
 </p>
-<p><?php echo _('Bookmark Title') ?>:<br />
+<p><?php echo _('Bookmark Title')._(':'); ?><br />
 <input type="text" name="bookmark_title" value="<?php echo $bookmark_title; ?>" />
 </p>
 <p><input type="submit" name="submit" value=" <?php echo _('Submit') ?> " /></p>

@@ -224,11 +224,11 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <input type="hidden" name="step1" value="1" />
 <table cellpadding="1" cellspacing="1">
 <tr>
-	<td width="10%"><strong><?php echo _('Release Date') ?>:</strong></td>
+	<td width="10%"><strong><?php echo _('Release Date')._(':'); ?></strong></td>
 	<td><input type="text" name="release_date" value="<?php echo date('Y-m-d H:i',$frsr->getReleaseDate()) ?>" size="16" maxlength="16" /></td>
 </tr>
 <tr>
-	<td><strong><?php echo _('Release Name') ?>:</strong></td>
+	<td><strong><?php echo _('Release Name')._(':'); ?></strong></td>
 	<td><input type="text" name="release_name" value="<?php echo htmlspecialchars($frsr->getName()); ?>" /></td>
 </tr>
 <tr>
@@ -242,7 +242,9 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <tr>
 	<td colspan="2">
 		<br />
-		<?php echo _('Edit the Release Notes or Change Log for this release of this package. These changes will apply to all files attached to this release.<br />You can either upload the release notes and change log individually, or paste them in together below.') ?>
+		<?php echo _('Edit the Release Notes or Change Log for this release of this package. These changes will apply to all files attached to this release.') ?>
+		<br />
+		<?php echo _('You can either upload the release notes and change log individually, or paste them in together below.') ?>
 	</td>
 </tr>
 <tr>
@@ -259,13 +261,13 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 </tr>
 <tr>
 	<td colspan="2">
-		<strong><?php echo _('Paste The Notes In') ?>:</strong><br />
+		<strong><?php echo _('Paste The Notes In')._(':'); ?></strong><br />
 		<textarea name="release_notes" rows="10" cols="60"><?php echo $frsr->getNotes(); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td colspan="2">
-		<strong><?php echo _('Paste The Change Log In') ?>:</strong><br />
+		<strong><?php echo _('Paste The Change Log In')._(':'); ?></strong><br />
 		<textarea name="release_changes" rows="10" cols="60"><?php echo $frsr->getChanges(); ?></textarea>
 	</td>
 </tr>
@@ -315,13 +317,13 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <table width="60%">
 <tr>
 <td>
-<strong><?php echo _('File Type') ?>:</strong>
+<strong><?php echo _('File Type')._(':'); ?></strong>
 <?php
 	print frs_show_filetype_popup ('type_id');
 ?>
 </td>
 <td>
-<strong><?php echo _('Processor Type') ?>:</strong>
+<strong><?php echo _('Processor Type')._(':'); ?></strong>
 <?php
 	print frs_show_processor_popup ('processor_id');
 ?>

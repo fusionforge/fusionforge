@@ -246,18 +246,16 @@ if ($add_cat && $group_project_id) {
 	} else {
 	    pm_header(array ('title'=>$title));
 		?>
-		<p />
+		<p class="information"><?php echo _('It is not recommended that you change the category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.')?></p>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
+		<p>
 		<input type="hidden" name="update_cat" value="y" />
 		<input type="hidden" name="id" value="<?php echo $ac->getID(); ?>" />
 		<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
-		<p />
-		<strong><?php echo _('Category Name')?>:</strong><br />
-		<input type="text" name="name" value="<?php echo $ac->getName(); ?>" />
-		<p />
-		<div class="warning"><?php echo _('It is not recommended that you change the category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.')?></div>
-		<p />
-		<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" />
+		<strong><?php echo _('Category Name') . _(': '); ?></strong>
+		<input required="required" type="text" name="name" value="<?php echo $ac->getName(); ?>" />
+		</p>
+		<p><input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 		</form>
 		<?php
 	}
@@ -308,7 +306,6 @@ if ($add_cat && $group_project_id) {
 
 	?>
 	<p><?php echo _('You can modify an existing subproject using this form. Please note that private subprojects can still be viewed by members of your project, but not the general public.') ?></p>
-	<p />
 
 	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 	<input type="hidden" name="post_changes" value="y" />
