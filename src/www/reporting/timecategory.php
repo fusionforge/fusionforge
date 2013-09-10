@@ -86,8 +86,11 @@ echo $HTML->listTableBottom();
 <p>
 <input type="hidden" name="submit" value="1" />
 <input type="hidden" name="time_code" value="<?php echo $time_code; ?>" />
+<label for="category_name">
 <strong><?php echo _('Category Name')._(':'); ?></strong><br />
-<input required="required" type="text" name="category_name" value="<?php echo $category_name; ?>" />
+<input required="required" type="text" id="category_name" name="category_name" 
+	   value="<?php echo $category_name; ?>" />
+</label>
 </p>
 <p>
 <?php
