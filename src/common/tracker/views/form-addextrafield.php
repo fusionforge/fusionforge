@@ -27,7 +27,7 @@
 //
 
 $title = sprintf(_('Manage Custom Fields for %s'), $ath->getName());
-$ath->adminHeader(array ('title'=>$title));
+$ath->adminHeader(array('title'=>$title));
 
 		/*
 			List of possible user built Selection Boxes for an ArtifactType
