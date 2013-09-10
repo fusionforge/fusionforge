@@ -1026,6 +1026,7 @@ class SimplePie
 	 *
 	 * @access public
 	 * @param string $class Name of custom class.
+	 * @return bool
 	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
 	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
 	 */
@@ -1045,6 +1046,7 @@ class SimplePie
 	 *
 	 * @access public
 	 * @param string $class Name of custom class.
+	 * @return bool
 	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
 	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
 	 */
@@ -1064,6 +1066,7 @@ class SimplePie
 	 *
 	 * @access public
 	 * @param string $class Name of custom class.
+	 * @return bool
 	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
 	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
 	 */
@@ -1083,6 +1086,7 @@ class SimplePie
 	 *
 	 * @access public
 	 * @param string $class Name of custom class.
+	 * @return bool
 	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
 	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
 	 */
@@ -1102,6 +1106,7 @@ class SimplePie
 	 *
 	 * @access public
 	 * @param string $class Name of custom class.
+	 * @return bool
 	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
 	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
 	 */
@@ -1122,6 +1127,7 @@ class SimplePie
 	 *
 	 * @access public
 	 * @param string $class Name of custom class.
+	 * @return bool
 	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
 	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
 	 */
@@ -1141,6 +1147,7 @@ class SimplePie
 	 *
 	 * @access public
 	 * @param string $class Name of custom class.
+	 * @return bool
 	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
 	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
 	 */
@@ -1160,6 +1167,7 @@ class SimplePie
 	 *
 	 * @access public
 	 * @param string $class Name of custom class.
+	 * @return bool
 	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
 	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
 	 */
@@ -1179,6 +1187,7 @@ class SimplePie
 	 *
 	 * @access public
 	 * @param string $class Name of custom class.
+	 * @return bool
 	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
 	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
 	 */
@@ -1198,6 +1207,7 @@ class SimplePie
 	 *
 	 * @access public
 	 * @param string $class Name of custom class.
+	 * @return bool
 	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
 	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
 	 */
@@ -1217,6 +1227,7 @@ class SimplePie
 	 *
 	 * @access public
 	 * @param string $class Name of custom class.
+	 * @return bool
 	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
 	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
 	 */
@@ -1236,6 +1247,7 @@ class SimplePie
 	 *
 	 * @access public
 	 * @param string $class Name of custom class.
+	 * @return bool
 	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
 	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
 	 */
@@ -1255,6 +1267,7 @@ class SimplePie
 	 *
 	 * @access public
 	 * @param string $class Name of custom class.
+	 * @return bool
 	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
 	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
 	 */
@@ -1274,6 +1287,7 @@ class SimplePie
 	 *
 	 * @access public
 	 * @param string $class Name of custom class.
+	 * @return bool
 	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
 	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
 	 */
@@ -1293,6 +1307,7 @@ class SimplePie
 	 *
 	 * @access public
 	 * @param string $class Name of custom class.
+	 * @return bool
 	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
 	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
 	 */
@@ -1312,6 +1327,7 @@ class SimplePie
 	 *
 	 * @access public
 	 * @param string $class Name of custom class.
+	 * @return bool
 	 * @link http://php.net/manual/en/keyword.extends.php PHP4 extends documentation
 	 * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.extends PHP5 extends documentation
 	 */
@@ -7067,7 +7083,7 @@ class SimplePie_Enclosure
 			else
 			{
 				$embed .= '<script type="text/javascript">/* <![CDATA[ */' .
-				    "embed_flash('$bgcolor', '$width', '$height', '" . $this->get_link() . "', '$loop', '$type');/* ]]> */</script>";
+					"embed_flash('$bgcolor', '$width', '$height', '" . $this->get_link() . "', '$loop', '$type');/* ]]> */</script>";
 			}
 		}
 
@@ -7083,7 +7099,7 @@ class SimplePie_Enclosure
 			else
 			{
 				$embed .= '<script type="text/javascript">/* <![CDATA[ */' .
-				    "embed_flv('$width', '$height', '" . rawurlencode($this->get_link().'?file_extension=.'.$this->get_extension()) . "', '$placeholder', '$loop', '$mediaplayer');/* ]]> */</script>";
+					"embed_flv('$width', '$height', '" . rawurlencode($this->get_link().'?file_extension=.'.$this->get_extension()) . "', '$placeholder', '$loop', '$mediaplayer');/* ]]> */</script>";
 			}
 		}
 
@@ -7104,7 +7120,7 @@ class SimplePie_Enclosure
 			else
 			{
 				$embed .= '<script type="text/javascript">/* <![CDATA[ */' .
-				    "embed_quicktime('$type', '$bgcolor', '$width', '$height', '" . $this->get_link() . "', '$placeholder', '$loop');/* ]]> */</script>";
+					"embed_quicktime('$type', '$bgcolor', '$width', '$height', '" . $this->get_link() . "', '$placeholder', '$loop');/* ]]> */</script>";
 			}
 		}
 
@@ -7119,7 +7135,7 @@ class SimplePie_Enclosure
 			else
 			{
 				$embed .= '<script type="text/javascript">/* <![CDATA[ */' .
-				    "embed_wmedia('$width', '$height', '" . $this->get_link() . "');/* ]]> */</script>";
+					"embed_wmedia('$width', '$height', '" . $this->get_link() . "');/* ]]> */</script>";
 			}
 		}
 
@@ -7711,7 +7727,7 @@ class SimplePie_File
 				if ($proxy) {
 					$proxy_parts = explode(':', $proxy);
 					if (!isset($proxy_parts[1])) {
-					    $proxy_parts[1] = 80;
+						$proxy_parts[1] = 80;
 					}
 					$host = $proxy_parts[0];
 					$port = $proxy_parts[1];
@@ -7744,7 +7760,7 @@ class SimplePie_File
 						}
 						else
 						{
-						    $get = '/';
+							$get = '/';
 						}
 					}
 					$out = "GET $get HTTP/1.0\r\n";
@@ -10901,11 +10917,11 @@ class SimplePie_Misc
 	 * @access string
 	 * @param object $haystack
 	 * @param string $needle Note that the needle may be a string of one or more
-	 *     characters. If needle is not a string, it is converted to an integer
-	 *     and applied as the ordinal value of a character.
+	 *	 characters. If needle is not a string, it is converted to an integer
+	 *	 and applied as the ordinal value of a character.
 	 * @param int $offset The optional offset parameter allows you to specify which
-	 *     character in haystack to start searching. The position returned is still
-	 *     relative to the beginning of haystack.
+	 *	 character in haystack to start searching. The position returned is still
+	 *	 relative to the beginning of haystack.
 	 * @return bool If needle is not found, stripos() will return boolean false.
 	 */
 	function stripos($haystack, $needle, $offset = 0)
