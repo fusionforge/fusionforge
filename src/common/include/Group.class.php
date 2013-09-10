@@ -2538,34 +2538,43 @@ class Group extends Error {
 		foreach ($admins as $admin) {
 			setup_gettext_for_user ($admin) ;
 
-			$message = sprintf(_('Your project registration for %s has been approved.'), forge_get_config ('forge_name')) . "\n\n"
+			$message=sprintf(_('Your project registration for %4$s has been approved.
 
-					. _('Project Full Name')._(': '). htmlspecialchars_decode($this->getPublicName()) . "\n"
-					. _('Project Unix Name')._(': '). $this->getUnixName() . "\n\n"
+Project Full Name:  %1$s
+Project Unix Name:  %2$s
 
-					. sprintf(_('If you visit your own project page in %s while logged in, '
-								. 'you will find additional menu functions to your left labeled “Project Admin”.'),
-							  forge_get_config ('forge_name')) . "\n\n"
+Your DNS will take up to a day to become active on our site.
+Your web site is accessible through your shell account. Please read
+site documentation (see link below) about intended usage, available
+services, and directory layout of the account.
 
-					. sprintf(_('We highly suggest that you now visit %1$s and create a public '
-								. 'description for your project. This can be done by visiting your project '
-								. 'page while logged in, and selecting “Project Admin” from the menus '
-								. 'on the left (or by visiting %2$s after login).'),
-							  forge_get_config ('forge_name'), util_make_url('/project/admin/?group_id='.$this->getID())) . "\n\n"
+If you visit your
+own project page in %4$s while logged in, you will find
+additional menu functions to your left labeled \'Project Admin\'.
 
-					. sprintf(_('Your project will also not appear in the Trove Software Map (primary '
-								. 'list of projects hosted on %s which offers great flexibility in '
-								. 'browsing and search) until you categorize it in the project administration '
-								. 'screens. So that people can find your project, you should do this now. '
-								. 'Visit your project while logged in, and select “Project Admin” from the '
-								. 'menus on the left.'), forge_get_config ('forge_name')) . "\n\n"
+We highly suggest that you now visit %4$s and create a public
+description for your project. This can be done by visiting your project
+page while logged in, and selecting \'Project Admin\' from the menus
+on the left (or by visiting %3$s
+after login).
 
-					. sprintf(_('Enjoy the system, and please tell others about %s. Let us know '
-								. 'if there is anything we can do to help you.'), forge_get_config ('forge_name')) . "\n\n"
+Your project will also not appear in the Trove Software Map (primary
+list of projects hosted on %4$s which offers great flexibility in
+browsing and search) until you categorize it in the project administration
+screens. So that people can find your project, you should do this now.
+Visit your project while logged in, and select \'Project Admin\' from the
+menus on the left.
 
-					. sprintf(_('-- the %s staff'), forge_get_config ('forge_name')) . "\n" ;
+Enjoy the system, and please tell others about %4$s. Let us know
+if there is anything we can do to help you.
 
-			util_send_message($admin->getEmail(), sprintf(_('%s Project Approved'), forge_get_config ('forge_name')), $message);
+-- the %4$s crew'),
+							htmlspecialchars_decode($this->getPublicName()),
+							$this->getUnixName(),
+							util_make_url ('/project/admin/?group_id='.$this->getID()),
+							forge_get_config ('forge_name'));
+
+			util_send_message($admin->getEmail(), sprintf(_('%1$s Project Approved'), forge_get_config ('forge_name')), $message);
 
 			setup_gettext_from_context();
 		}
@@ -2598,10 +2607,14 @@ class Group extends Error {
 		foreach ($submitters as $admin) {
 			setup_gettext_for_user($admin);
 
-			$response = sprintf(_('Your project registration for %s has been denied.'), forge_get_config('forge_name')) . "\n\n"
-					. _('Project Full Name')._(': ').   $this->getPublicName() . "\n"
-					. _('Project Unix Name')._(': ').  $this->getUnixName() . "\n\n"
-					. _('Reasons for negative decision')._(': ') . "\n\n";
+			$response=sprintf(_('Your project registration for %3$s has been denied.
+
+Project Full Name:  %1$s
+Project Unix Name:  %2$s
+
+Reasons for negative decision:
+
+'), $this->getPublicName(), $this->getUnixName(), forge_get_config('forge_name'));
 
 			// Check to see if they want to send a custom rejection response
 			if ($response_id == 0) {
@@ -2652,26 +2665,42 @@ class Group extends Error {
 			$admin_email = $admin->getEmail () ;
 			setup_gettext_for_user ($admin) ;
 
-			$message = sprintf(_('New %s Project Submitted'), forge_get_config ('forge_name')) . "\n\n"
-					. _('Project Full Name')._(': ').htmlspecialchars_decode($this->getPublicName()) . "\n"
-					. _('Submitted Description')._(': ').htmlspecialchars_decode($this->getRegistrationPurpose()) . "\n"
-					. _('Submitter')._(': ').$submitter->getRealName().' ('.$submitter->getUnixName().')' . "\n\n"
-					. _('Please visit the following URL to approve or reject this project')._(': '). "\n"
-					. util_make_url('/admin/approve-pending.php');
-			util_send_message($admin_email, sprintf(_('New %s Project Submitted'), forge_get_config('forge_name')), $message);
+			$message = sprintf(_('New %1$s Project Submitted
+
+Project Full Name:  %2$s
+Submitted Description: %3$s
+'),
+					   forge_get_config ('forge_name'),
+					   htmlspecialchars_decode($this->getPublicName()),
+					   htmlspecialchars_decode($this->getRegistrationPurpose()));
+
+			foreach ($submitters as $submitter) {
+				$message .= sprintf(_('Submitter: %1$s (%2$s)
+'),
+							$submitter->getRealName(),
+							$submitter->getUnixName());
+			}
+
+			$message .= sprintf (_('
+Please visit the following URL to approve or reject this project:
+%1$s'),
+						util_make_url ('/admin/approve-pending.php')) ;
+			util_send_message($admin_email, sprintf(_('New %1$s Project Submitted'), forge_get_config ('forge_name')), $message);
 			setup_gettext_from_context();
 		}
+
 
 		$email = $submitter->getEmail() ;
 		setup_gettext_for_user ($submitter) ;
 
-		$message = sprintf(_('New %s Project Submitted'), forge_get_config ('forge_name')) . "\n\n"
-				. _('Project Full Name')._(': ') . $this->getPublicName() . "\n"
-				. _('Submitted Description')._(': ') . util_unconvert_htmlspecialchars($this->getRegistrationPurpose()) . "\n\n"
-				. sprintf(_('The %s admin team will now examine your project submission. You will be notified of their decision.'),
-						  forge_get_config ('forge_name'));
+		$message=sprintf(_('New %1$s Project Submitted
 
-		util_send_message($email, sprintf(_('New %s Project Submitted'), forge_get_config ('forge_name')), $message);
+Project Full Name:  %2$s
+Submitted Description: %3$s
+
+The %1$s admin team will now examine your project submission.  You will be notified of their decision.'), forge_get_config ('forge_name'), $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), forge_get_config('web_host'));
+
+		util_send_message($email, sprintf(_('New %1$s Project Submitted'), forge_get_config ('forge_name')), $message);
 		setup_gettext_from_context();
 
 		return true;
