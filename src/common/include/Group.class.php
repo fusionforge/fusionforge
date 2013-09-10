@@ -73,7 +73,7 @@ function &group_get_object($group_id, $res = false) {
 		if ($res) {
 			//the db result handle was passed in
 		} else {
-			$res = db_query_params('SELECT * FROM groups WHERE group_id=$1', array($group_id)) ;
+			$res = db_query_params('SELECT * FROM groups WHERE group_id=$1', array($group_id));
 		}
 		if (!$res || db_numrows($res) < 1) {
 			$GROUP_OBJ["_".$group_id."_"]=false;
@@ -129,14 +129,14 @@ function &group_get_active_projects() {
 
 function &group_get_all_projects() {
 	$res = db_query_params ('SELECT group_id FROM groups',
-				array ());
-	return group_get_objects(util_result_column_to_array($res,0)) ;
+				array());
+	return group_get_objects(util_result_column_to_array($res,0));
 }
 
 function &group_get_template_projects() {
 	$res = db_query_params('SELECT group_id FROM groups WHERE is_template=1 AND status != $1',
-				array ('D'));
-	return group_get_objects(util_result_column_to_array($res,0)) ;
+				array('D'));
+	return group_get_objects(util_result_column_to_array($res,0));
 }
 
 function &group_get_object_by_name($groupname) {
@@ -170,12 +170,12 @@ function get_public_active_projects_asc($max_query_limit = -1) {
 			WHERE status = $1 AND type_id=1 AND is_template=0 AND register_time > 0
 			ORDER BY group_name ASC
 			',
-			array ('A'),
+			array('A'),
 			$max_query_limit);
 	$projects = array();
 	while ($row_grp = db_fetch_array($res_grp)) {
 		if (!forge_check_perm ('project_read', $row_grp['group_id'])) {
-			continue ;
+			continue;
 		}
 		$projects[] = $row_grp;
 	}
@@ -274,7 +274,7 @@ class Group extends Error {
 	 */
 	function fetchData($group_id) {
 		$res = db_query_params ('SELECT * FROM groups WHERE group_id=$1',
-					array ($group_id));
+					array($group_id));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(sprintf('fetchData():: %s', db_error()));
 			return false;
@@ -354,7 +354,7 @@ class Group extends Error {
 					built_from_template
 				)
 				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)',
-						array (htmlspecialchars ($group_name),
+						array(htmlspecialchars ($group_name),
 							$unix_name,
 							htmlspecialchars($description),
 							$homepage,
@@ -797,7 +797,7 @@ class Group extends Error {
 	 * @return	boolean	is_public.
 	 */
 	function isPublic() {
-		$ra = RoleAnonymous::getInstance() ;
+		$ra = RoleAnonymous::getInstance();
 		return $ra->hasPermission('project_read', $this->getID());
 	}
 
@@ -937,7 +937,7 @@ class Group extends Error {
 		}
 		if ($scm_box) {
 			db_begin();
-			$res = db_query_params('UPDATE groups SET scm_box=$1 WHERE group_id=$2', array($scm_box, $this->getID ()));
+			$res = db_query_params('UPDATE groups SET scm_box=$1 WHERE group_id=$2', array($scm_box, $this->getID()));
 			if ($res) {
 				$this->addHistory('scm_box', $this->data_array['scm_box']);
 				$this->data_array['scm_box'] = $scm_box;
@@ -1069,16 +1069,16 @@ class Group extends Error {
 	 */
 	function setUseSCM($booleanparam) {
 		db_begin();
-		$booleanparam = $booleanparam ? 1 : 0 ;
+		$booleanparam = $booleanparam ? 1 : 0;
 		$res = db_query_params('UPDATE groups SET use_scm=$1 WHERE group_id=$2',
 					array($booleanparam, $this->getID()));
 		if ($res) {
 			$this->data_array['use_scm']=$booleanparam;
-			db_commit () ;
-			return true ;
+			db_commit();
+			return true;
 		} else {
-			db_rollback () ;
-			return false ;
+			db_rollback();
+			return false;
 		}
 	}
 
@@ -1094,7 +1094,7 @@ class Group extends Error {
 			return false;
 		}
 
-		$hook_params = array ();
+		$hook_params = array();
 		$hook_params['group'] = $this;
 		$hook_params['group_id'] = $this->getID();
 		$hook_params['group_homepage'] = $this->getHomePage();
@@ -1111,7 +1111,7 @@ class Group extends Error {
 	 */
 	function setUseMail($booleanparam) {
 		db_begin();
-		$booleanparam = $booleanparam ? 1 : 0 ;
+		$booleanparam = $booleanparam ? 1 : 0;
 		$res = db_query_params('UPDATE groups SET use_mail=$1 WHERE group_id=$2',
 					array($booleanparam, $this->getID()));
 		if ($res) {
@@ -1216,7 +1216,7 @@ class Group extends Error {
 		db_begin();
 		$booleanparam = $booleanparam ? 1 : 0;
 		$res = db_query_params('UPDATE groups SET use_frs=$1 WHERE group_id=$2',
-					array ($booleanparam, $this->getID()));
+					array($booleanparam, $this->getID()));
 		if ($res) {
 			$this->data_array['use_frs']=$booleanparam;
 			db_commit();
@@ -1247,17 +1247,17 @@ class Group extends Error {
 	 * @return bool
 	 */
 	function setUseTracker ($booleanparam) {
-		db_begin () ;
-		$booleanparam = $booleanparam ? 1 : 0 ;
+		db_begin();
+		$booleanparam = $booleanparam ? 1 : 0;
 		$res = db_query_params ('UPDATE groups SET use_tracker=$1 WHERE group_id=$2',
-					array ($booleanparam, $this->getID()));
+					array($booleanparam, $this->getID()));
 		if ($res) {
 			$this->data_array['use_tracker']=$booleanparam;
-			db_commit () ;
-			return true ;
+			db_commit();
+			return true;
 		} else {
-			db_rollback () ;
-			return false ;
+			db_rollback();
+			return false;
 		}
 	}
 
@@ -1497,7 +1497,7 @@ class Group extends Error {
 							$plugin_id));
 			return $res;
 		}
-		$this->normalizeAllRoles () ;
+		$this->normalizeAllRoles();
 	}
 
 	/**
@@ -1787,7 +1787,7 @@ class Group extends Error {
 		//	Delete group cvs stats
 		//
 		$res = db_query_params ('DELETE FROM stats_cvs_group WHERE group_id=$1',
-					array ($this->getID())) ;
+					array($this->getID()));
 		if (!$res) {
 			$this->setError(_('Error Deleting SCM Statistics: ').db_error());
 			db_rollback();
@@ -1911,13 +1911,13 @@ class Group extends Error {
 		//	Delete reporting
 		//
 		$res = db_query_params('DELETE FROM rep_group_act_monthly WHERE group_id=$1',
-		array ($this->getID()));
+		array($this->getID()));
 		//echo 'rep_group_act_monthly'.db_error();
 		$res = db_query_params('DELETE FROM rep_group_act_weekly WHERE group_id=$1',
-		array ($this->getID()));
+		array($this->getID()));
 		//echo 'rep_group_act_weekly'.db_error();
 		$res = db_query_params('DELETE FROM rep_group_act_daily WHERE group_id=$1',
-		array ($this->getID()));
+		array($this->getID()));
 		//echo 'rep_group_act_daily'.db_error();
 		unset($this->data_array);
 		return true;
@@ -1952,9 +1952,9 @@ class Group extends Error {
 			get user id for this user's unix_name
 		*/
 		if (is_int ($user_identifier)) { // user_id or user_name
-			$res_newuser = db_query_params ('SELECT * FROM users WHERE user_id=$1', array ($user_identifier)) ;
+			$res_newuser = db_query_params ('SELECT * FROM users WHERE user_id=$1', array($user_identifier));
 		} else {
-			$res_newuser = db_query_params ('SELECT * FROM users WHERE user_name=$1', array ($user_identifier)) ;
+			$res_newuser = db_query_params ('SELECT * FROM users WHERE user_name=$1', array($user_identifier));
 		}
 		if (db_numrows($res_newuser) > 0) {
 			//
@@ -1982,7 +1982,7 @@ class Group extends Error {
 				return false;
 			}
 
-			$role->addUser(user_get_object($user_id)) ;
+			$role->addUser(user_get_object($user_id));
 			if (!$SYS->sysCheckCreateGroup($this->getID())){
 				$this->setError($SYS->getErrorMessage());
 				db_rollback();
@@ -2147,7 +2147,7 @@ class Group extends Error {
 			return false;
 		}
 
-		$newrole = RBACEngine::getInstance()->getRoleById ($role_id) ;
+		$newrole = RBACEngine::getInstance()->getRoleById ($role_id);
 		if (!$newrole || !is_object($newrole)) {
 			$this->setError(_('Could Not Get Role'));
 			return false;
@@ -2159,13 +2159,13 @@ class Group extends Error {
 			$this->setError(_('Wrong destination role'));
 			return false;
 		}
-		$user = user_get_object ($user_id) ;
-		$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user) ;
-		$found_role = NULL ;
+		$user = user_get_object ($user_id);
+		$roles = RBACEngine::getInstance()->getAvailableRolesForUser ($user);
+		$found_role = NULL;
 		foreach ($roles as $role) {
 			if ($role->getHomeProject() && $role->getHomeProject()->getID() == $this->getID()) {
-				$found_role = $role ;
-				break ;
+				$found_role = $role;
+				break;
 			}
 		}
 		if ($found_role == NULL) {
@@ -2173,8 +2173,8 @@ class Group extends Error {
 			db_rollback();
 			return false;
 		}
-		$found_role->removeUser ($user) ;
-		$newrole->addUser ($user) ;
+		$found_role->removeUser ($user);
+		$newrole->addUser ($user);
 
 		$this->addHistory('Updated User',$user_id);
 		return true;
@@ -2191,7 +2191,7 @@ class Group extends Error {
 	function addHistory($field_name, $old_value) {
 		return db_query_params ('INSERT INTO group_history(group_id,field_name,old_value,mod_by,adddate)
 			VALUES ($1,$2,$3,$4,$5)',
-					array ($this->getID(),
+					array($this->getID(),
 						$field_name,
 						$old_value,
 						user_getid(),
@@ -2211,13 +2211,13 @@ class Group extends Error {
 			Activate member(s) of the project
 		*/
 
-		$members = $this->getUsers (true) ;
+		$members = $this->getUsers (true);
 
 		foreach ($members as $member) {
-			$roles = array () ;
+			$roles = array();
 			foreach (RBACEngine::getInstance()->getAvailableRolesForUser ($member) as $role) {
 				if ($role->getHomeProject() && $role->getHomeProject()->getID() == $this->getID()) {
-					$roles[] = $role ;
+					$roles[] = $role;
 				}
 			}
 			foreach ($roles as $role) {
@@ -2237,7 +2237,7 @@ class Group extends Error {
 	 *	@return array of User objects for this group.
 	 */
 	function getMembers() {
-		return $this->getUsers (true) ;
+		return $this->getUsers (true);
 	}
 
 	/**
@@ -2247,10 +2247,10 @@ class Group extends Error {
 	 *	@return	string	String after replacements
 	 */
 	function replaceTemplateStrings($string) {
-		$string = str_replace ('UNIXNAME', $this->getUnixName(), $string) ;
-		$string = str_replace ('PUBLICNAME', $this->getPublicName(), $string) ;
-		$string = str_replace ('DESCRIPTION', $this->getDescription(), $string) ;
-		return $string ;
+		$string = str_replace ('UNIXNAME', $this->getUnixName(), $string);
+		$string = str_replace ('PUBLICNAME', $this->getPublicName(), $string);
+		$string = str_replace ('DESCRIPTION', $this->getDescription(), $string);
+		return $string;
 	}
 
 	/**
@@ -2284,7 +2284,7 @@ class Group extends Error {
 		$idadmin_group = NULL;
 		foreach (get_group_join_requests ($this) as $gjr) {
 			$idadmin_group = $gjr->getUserID();
-			break ;
+			break;
 		}
 		if ($idadmin_group == NULL) {
 			$idadmin_group = $user->getID();
@@ -2311,17 +2311,17 @@ class Group extends Error {
 				}
 				$id_mappings['role'][$oldrole->getID()] = $role->getID();
 				// Reuse the project_admin permission
-				$role->setSetting ('project_admin', $this->getID(), $oldrole->getSetting ('project_admin', $template->getID())) ;
+				$role->setSetting ('project_admin', $this->getID(), $oldrole->getSetting ('project_admin', $template->getID()));
 			}
 		}
 
 		if (!$seen_admin_role) {
 			$role = new Role($this);
-			$adminperms = array ('project_admin' => array ($this->getID() => 1)) ;
-			$role_id = $role->create ('Admin', $adminperms, true) ;
+			$adminperms = array('project_admin' => array ($this->getID() => 1));
+			$role_id = $role->create ('Admin', $adminperms, true);
 		}
 
-		$roles = $this->getRoles() ;
+		$roles = $this->getRoles();
 		foreach ($roles as $r) {
 			if ($r->getHomeProject() == NULL) {
 				continue;
@@ -2341,8 +2341,8 @@ class Group extends Error {
 				if ($template->usesTracker()) {
 					$oldatf = new ArtifactTypeFactory($template);
 					foreach ($oldatf->getArtifactTypes() as $o) {
-						$t = new ArtifactType ($this) ;
-						$t->create ($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->emailAll(),$o->getEmailAddress(),$o->getDuePeriod()/86400,0,$o->getSubmitInstructions(),$o->getBrowseInstructions()) ;
+						$t = new ArtifactType ($this);
+						$t->create ($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->emailAll(),$o->getEmailAddress(),$o->getDuePeriod()/86400,0,$o->getSubmitInstructions(),$o->getBrowseInstructions());
 						$id_mappings['tracker'][$o->getID()] = $t->getID();
 						$t->cloneFieldsFrom ($o->getID());
 					}
@@ -2362,9 +2362,9 @@ class Group extends Error {
 			}
 
 			if (forge_get_config('use_forum')) {
-				$this->setUseForum($template->usesForum()) ;
+				$this->setUseForum($template->usesForum());
 				if ($template->usesForum()) {
-					$oldff = new ForumFactory($template) ;
+					$oldff = new ForumFactory($template);
 					foreach ($oldff->getForums() as $o) {
 						$f = new Forum($this);
 						$f->create($this->replaceTemplateStrings($o->getName()),$this->replaceTemplateStrings($o->getDescription()),$o->getSendAllPostsTo(),1);
@@ -2410,14 +2410,14 @@ class Group extends Error {
 			}
 
 			if (forge_get_config('use_mail')) {
-				$this->setUseMail($template->usesMail()) ;
+				$this->setUseMail($template->usesMail());
 				if ($template->usesMail()) {
 					$oldmlf = new MailingListFactory($template);
 					foreach ($oldmlf->getMailingLists() as $o) {
 						$ml = new MailingList($this);
-						$nname = preg_replace ('/^'.$template->getUnixName().'-/','',$o->getName()) ;
+						$nname = preg_replace ('/^'.$template->getUnixName().'-/','',$o->getName());
 
-						$ndescription = $this->replaceTemplateStrings($o->getDescription()) ;
+						$ndescription = $this->replaceTemplateStrings($o->getDescription());
 						$ml->create($nname, $ndescription, $o->isPublic());
 					}
 				}
@@ -2447,19 +2447,19 @@ class Group extends Error {
 			}
 
 			foreach ($template->getRoles() as $oldrole) {
-				$newrole = RBACEngine::getInstance()->getRoleById ($id_mappings['role'][$oldrole->getID()]) ;
+				$newrole = RBACEngine::getInstance()->getRoleById ($id_mappings['role'][$oldrole->getID()]);
 				if ($oldrole->getHomeProject() != NULL
 					&& $oldrole->getHomeProject()->getID() == $template->getID()) {
-					$newrole->setPublic ($oldrole->isPublic()) ;
+					$newrole->setPublic ($oldrole->isPublic());
 				}
-				$oldsettings = $oldrole->getSettingsForProject ($template) ;
+				$oldsettings = $oldrole->getSettingsForProject ($template);
 
-				$sections = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm') ;
+				$sections = array('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'forum_admin', 'new_forum', 'pm_admin', 'new_pm');
 				foreach ($sections as $section) {
-					$newrole->setSetting ($section, $this->getID(), $oldsettings[$section][$template->getID()]) ;
+					$newrole->setSetting ($section, $this->getID(), $oldsettings[$section][$template->getID()]);
 				}
 
-				$sections = array ('tracker', 'pm', 'forum') ;
+				$sections = array('tracker', 'pm', 'forum');
 				foreach ($sections as $section) {
 					if (isset ($oldsettings[$section])) {
 						foreach ($oldsettings[$section] as $k => $v) {
@@ -2467,7 +2467,7 @@ class Group extends Error {
 							if (isset ($id_mappings[$section][$k])) {
 								$newrole->setSetting ($section,
 											$id_mappings[$section][$k],
-											$v) ;
+											$v);
 							}
 						}
 					}
@@ -2475,17 +2475,17 @@ class Group extends Error {
 			}
 
 			$lm = new WidgetLayoutManager();
-			$lm->createDefaultLayoutForProject ($this->getID(), $template->getID()) ;
+			$lm->createDefaultLayoutForProject ($this->getID(), $template->getID());
 
-			$params = array () ;
-			$params['template'] = $template ;
-			$params['project'] = $this ;
-			$params['id_mappings'] = $id_mappings ;
-			plugin_hook_by_reference ('clone_project_from_template', $params) ;
+			$params = array();
+			$params['template'] = $template;
+			$params['project'] = $this;
+			$params['id_mappings'] = $id_mappings;
+			plugin_hook_by_reference ('clone_project_from_template', $params);
 		} else {
 			// Disable everything
 			db_query_params ('UPDATE groups SET use_mail=0, use_survey=0, use_forum=0, use_pm=0, use_pm_depend_box=0, use_scm=0, use_news=0, use_docman=0, use_ftp=0, use_tracker=0, use_frs=0, use_stats=0 WHERE group_id=$1',
-				array ($this->getID())) ;
+				array($this->getID()));
 		}
 
 		$this->normalizeAllRoles();
@@ -2495,7 +2495,7 @@ class Group extends Error {
 
 		// Delete fake join request
 		foreach (get_group_join_requests ($this) as $gjr) {
-			$gjr->delete(true) ;
+			$gjr->delete(true);
 		}
 
 		// Switch back to user preference
@@ -2510,8 +2510,8 @@ class Group extends Error {
 		//
 		//	Plugin can make approve operation there
 		//
-		$params = array () ;
-		$params['group'] = $this ;
+		$params = array();
+		$params['group'] = $this;
 		$params['group_id'] = $this->getID();
 		plugin_hook('group_approved', $params);
 
@@ -2527,7 +2527,7 @@ class Group extends Error {
 	 * @access	public
 	 */
 	function sendApprovalEmail() {
-		$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('project_admin', $this->getID()) ;
+		$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('project_admin', $this->getID());
 
 		if (count($admins) < 1) {
 			$this->setError(_("Group does not have any administrators."));
@@ -2536,7 +2536,7 @@ class Group extends Error {
 
 		// send one email per admin
 		foreach ($admins as $admin) {
-			setup_gettext_for_user ($admin) ;
+			setup_gettext_for_user ($admin);
 
 			$message=sprintf(_('Your project registration for %4$s has been approved.
 
@@ -2594,7 +2594,7 @@ if there is anything we can do to help you.
 	 * @access	public
 	 */
 	function sendRejectionEmail($response_id, $message="zxcv") {
-		$submitters = array () ;
+		$submitters = array();
 		foreach (get_group_join_requests ($this) as $gjr) {
 			$submitters[] = user_get_object($gjr->getUserID());
 		}
@@ -2621,7 +2621,7 @@ Reasons for negative decision:
 				$response .= $message;
 			} else {
 				$response .= db_result(
-					db_query_params('SELECT response_text FROM canned_responses WHERE response_id=$1', array ($response_id)),
+					db_query_params('SELECT response_text FROM canned_responses WHERE response_id=$1', array($response_id)),
 					0,
 					"response_text");
 			}
@@ -2654,7 +2654,7 @@ Reasons for negative decision:
 			return false;
 		}
 
-		$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('approve_projects', -1) ;
+		$admins = RBACEngine::getInstance()->getUsersByAllowedAction ('approve_projects', -1);
 
 		if (count($admins) < 1) {
 			$this->setError(_("There is no administrator to send the mail to."));
@@ -2662,8 +2662,8 @@ Reasons for negative decision:
 		}
 
 		foreach ($admins as $admin) {
-			$admin_email = $admin->getEmail () ;
-			setup_gettext_for_user ($admin) ;
+			$admin_email = $admin->getEmail();
+			setup_gettext_for_user ($admin);
 
 			$message = sprintf(_('New %1$s Project Submitted
 
@@ -2684,16 +2684,15 @@ Submitted Description: %3$s
 			$message .= sprintf (_('
 Please visit the following URL to approve or reject this project:
 %1$s'),
-						util_make_url ('/admin/approve-pending.php')) ;
+						util_make_url ('/admin/approve-pending.php'));
 			util_send_message($admin_email, sprintf(_('New %1$s Project Submitted'), forge_get_config ('forge_name')), $message);
 			setup_gettext_from_context();
 		}
 
+		$email = $submitter->getEmail();
+		setup_gettext_for_user ($submitter);
 
-		$email = $submitter->getEmail() ;
-		setup_gettext_for_user ($submitter) ;
-
-		$message=sprintf(_('New %1$s Project Submitted
+		$message = sprintf(_('New %1$s Project Submitted
 
 Project Full Name:  %2$s
 Submitted Description: %3$s
@@ -2799,8 +2798,8 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		global $SYS;
 		db_begin();
 		$res = db_query_params ('UPDATE groups SET unix_status=$1 WHERE group_id=$2',
-					array ($status,
-						$this->getID())) ;
+					array($status,
+						$this->getID()));
 
 		if (!$res) {
 			$this->setError(sprintf(_('Error: Cannot Update Group Unix Status: %s'),db_error()));
@@ -2836,23 +2835,23 @@ The %1$s admin team will now examine your project submission.  You will be notif
 	 */
 	function getUsers($onlylocal = true) {
 		if (!isset($this->membersArr)) {
-			$this->membersArr = array () ;
+			$this->membersArr = array();
 
-			$ids = array () ;
+			$ids = array();
 			foreach ($this->getRoles() as $role) {
 				if ($onlylocal
 					&& ($role->getHomeProject() == NULL || $role->getHomeProject()->getID() != $this->getID())) {
-					continue ;
+					continue;
 				}
 				foreach ($role->getUsers() as $user) {
-					$ids[] = $user->getID() ;
+					$ids[] = $user->getID();
 				}
 			}
-			$ids = array_unique ($ids) ;
+			$ids = array_unique ($ids);
 			foreach ($ids as $id) {
-				$u = user_get_object ($id) ;
+				$u = user_get_object ($id);
 				if ($u->isActive()) {
-					$this->membersArr[] = $u ;
+					$this->membersArr[] = $u;
 				}
 			}
 		}
@@ -2929,7 +2928,6 @@ The %1$s admin team will now examine your project submission.  You will be notif
 			return true;
 		}
 	}
-
 }
 
 /**
@@ -3015,39 +3013,39 @@ function getAllProjectTags($onlyvisible = true) {
  *
  */
 class ProjectComparator {
-	var $criterion = 'name' ;
+	var $criterion = 'name';
 
 	function Compare ($a, $b) {
 		switch ($this->criterion) {
 		case 'name':
 		default:
-			$namecmp = strcoll ($a->getPublicName(), $b->getPublicName()) ;
+			$namecmp = strcoll ($a->getPublicName(), $b->getPublicName());
 			if ($namecmp != 0) {
-				return $namecmp ;
+				return $namecmp;
 			}
 			/* If several projects share a same public name */
-			return strcoll ($a->getUnixName(), $b->getUnixName()) ;
-			break ;
+			return strcoll ($a->getUnixName(), $b->getUnixName());
+			break;
 		case 'unixname':
-			return strcmp ($a->getUnixName(), $b->getUnixName()) ;
-			break ;
+			return strcmp ($a->getUnixName(), $b->getUnixName());
+			break;
 		case 'id':
-			$aid = $a->getID() ;
-			$bid = $b->getID() ;
+			$aid = $a->getID();
+			$bid = $b->getID();
 			if ($a == $b) {
 				return 0;
 			}
 			return ($a < $b) ? -1 : 1;
-			break ;
+			break;
 		}
 	}
 }
 
 function sortProjectList (&$list, $criterion='name') {
-	$cmp = new ProjectComparator () ;
-	$cmp->criterion = $criterion ;
+	$cmp = new ProjectComparator();
+	$cmp->criterion = $criterion;
 
-	return usort ($list, array ($cmp, 'Compare')) ;
+	return usort ($list, array($cmp, 'Compare'));
 }
 
 // Local Variables:
