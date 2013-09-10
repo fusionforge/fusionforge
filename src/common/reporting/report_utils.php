@@ -24,7 +24,7 @@
  */
 
 function report_header($title) {
-	$t = sprintf(_('%s Reporting'), forge_get_config ('forge_name')) . ": " . $title;
+	$t = sprintf(_('%s Reporting'), forge_get_config ('forge_name')) . _(': ') . $title;
 	site_header(array('title'=>$t));
 }
 
@@ -432,7 +432,7 @@ function trackerpie_graph($group_id, $area, $SPAN, $start, $end, $atid) {
 }
 
 function report_graph($type, $SPAN, $start, $end) {
-	$now = time() - 60*24*24;
+	$now = time() - 60*60*24; // 1 day
 	if ($now < $end) {
 		$end = $now;
 	}
@@ -465,14 +465,14 @@ function report_graph($type, $SPAN, $start, $end) {
 	}
 	$rdates = $report->getRawDates();
 	if (!$rdates) {
-		echo '<p class="error">'._('No data to display.').'</p>';
+		echo '<p class="information">'._('No data to display.').'</p>';
 		return false;
 	}
 	$ydata[0]  = $report->getData();
 	
 	if ($SPAN == REPORT_TYPE_DAILY) {
 		$i = 0;
-		$formatDate = 'Y/m/d';
+		$formatDate = 'Y-m-d';
 		$looptime = $start;
 		while ($looptime < $end) {
 			$timeStampArr[$i] = $looptime;
@@ -501,8 +501,8 @@ function report_graph($type, $SPAN, $start, $end) {
 		echo $chartid.'values['.$z.'] = new Array();';
 		echo $chartid.'labels.push({label:\''.$label[$z].'\'});';
 		switch ($SPAN) {
-			case REPORT_TYPE_DAILY :
-			case REPORT_TYPE_MONTHLY : {
+			case REPORT_TYPE_DAILY:
+			case REPORT_TYPE_MONTHLY: {
 				for ($j = 0; $j < count($timeStampArr); $j++) {
 					if (in_array($timeStampArr[$j], $rdates)) {
 						$thekey = array_search($timeStampArr[$j], $rdates);
@@ -525,7 +525,7 @@ function report_graph($type, $SPAN, $start, $end) {
 				}
 				break;
 			}
-			case REPORT_TYPE_WEEKLY : {
+			case REPORT_TYPE_WEEKLY: {
 				for ($j = 0; $j < count($rdates); $j++) {
 					$wrdates[$j] = date($formatDate, $rdates[$j]);
 				}
@@ -602,7 +602,7 @@ function report_graph($type, $SPAN, $start, $end) {
 }
 
 function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
-	$now = time() - 60*24*24;
+	$now = time() - 60*60*24; // 1 day
 	if ($now < $end) {
 		$end = $now;
 	}
@@ -637,11 +637,12 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 	}
 	$rdates = $report->getRawDates();
 	if (!$rdates) {
-		echo '<p class="error">'._('No data to display.').'</p>';
+		echo '<p class="information">'._('No data to display.').'</p>';
 		return false;
 	}
-	if (!$SPAN)
-		$SPAN = 1;
+	if (!$SPAN) {
+		$SPAN = REPORT_TYPE_DAILY;
+	}
 
 	if ($SPAN == REPORT_TYPE_DAILY) {
 		$i = 0;
@@ -685,7 +686,7 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 			$label[] = _('Downloads');
 			break;
 		}
-		case 'forum' : {
+		case 'forum': {
 			$ydata[] =& $report->getForum();
 			$areaname = _('Forums');
 			$label[] = _('Forums');
@@ -773,8 +774,8 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 		echo 'labels.push({label:\''.$label[$z].'\'});';
 	}
 	switch ($SPAN) {
-		case REPORT_TYPE_DAILY :
-		case REPORT_TYPE_MONTHLY : {
+		case REPORT_TYPE_DAILY:
+		case REPORT_TYPE_MONTHLY: {
 			for ($j = 0; $j < count($timeStampArr); $j++) {
 				for ($z = 0; $z < count($ydata); $z++) {
 					if (in_array($timeStampArr[$j], $rdates)) {
@@ -889,7 +890,7 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 }
 
 function report_toolspiegraph($datatype = 0, $start, $end) {
-	$now = time() - 60*24*24;
+	$now = time() - 60*60*24; // 1 day
 	if ($now < $end) {
 		$end = $now;
 	}
@@ -995,7 +996,7 @@ function report_toolspiegraph($datatype = 0, $start, $end) {
 function report_timegraph($type = 'site', $area = 'tasks', $start, $end, $id = 0) {
 	global $pie_labels, $pie_vals;
 
-	$now = time() - 60*24*24;
+	$now = time() - 60*60*24; // 1 day
 	if ($now < $end) {
 		$end = $now;
 	}
@@ -1014,10 +1015,10 @@ function report_timegraph($type = 'site', $area = 'tasks', $start, $end, $id = 0
 		}
 	}
 
-	$arr['tasks']='By Task';
-	$arr['category']='By Category';
-	$arr['subproject']='By Subproject';
-	$arr['user']='By User';
+	$arr['tasks'] = _('By Task');
+	$arr['category'] = _('By Category');
+	$arr['subproject'] = _('By Subproject');
+	$arr['user'] = _('By User');
 
 	report_pie_arr($report->labels, $report->getData());
 	
@@ -1057,7 +1058,7 @@ function report_timegraph($type = 'site', $area = 'tasks', $start, $end, $id = 0
 }
 
 function report_sitetimebargraph($start, $end) {
-	$now = time() - 60*24*24;
+	$now = time() - 60*60*24; // 1 day
 	if ($now < $end) {
 		$end = $now;
 	}
