@@ -49,10 +49,9 @@ function &user_get_object_by_name($user_name, $res = false) {
  * user_get_object_by_email() - Get User object by email address
  * Only works if sys_require_unique_email is true
  *
- * @param	string	The unix username - required
- * @param	int	The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
- * @return a user object or false on failure
- *
+ * @param string    $email The unix username - required
+ * @param bool|int  $res   The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
+ * @return GFUser User object or false on failure
  */
 function user_get_object_by_email($email, $res = false) {
 	if (!validate_email($email)
@@ -94,9 +93,9 @@ function &user_get_object_by_name_or_email($user_name, $res = false) {
  * user_get_object is useful so you can pool user objects/save database queries
  * You should always use this instead of instantiating the object directly
  *
- * @param	int	The ID of the user - required
- * @param	int	The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
- * @return	object	a user object or false on failure
+ * @param int      $user_id The ID of the user - required
+ * @param int|bool $res     The result set handle ("SELECT * FROM USERS WHERE user_id=xx")
+ * @return GFUser a user object or false on failure
  */
 function &user_get_object($user_id, $res = false) {
 	//create a common set of group objects
@@ -228,8 +227,9 @@ class GFUser extends Error {
 	 *
 	 * instead use the user_get_object() function call
 	 *
-	 * @param	int	The user_id
-	 * @param	int	The database result set OR array of data
+	 * @param bool|int $id  The user_id
+	 * @param bool|int $res The database result set OR array of data
+	 * @return bool
 	 */
 	function __construct($id = false, $res = false) {
 		$this->Error();
@@ -298,7 +298,7 @@ class GFUser extends Error {
 	 * @param	char(2)	The users ISO country_code.
 	 * @param	bool	Whether to send an email or not
 	 * @param	int	The users preference for tooltips
-	 * @returns		The newly created user ID
+	 * @return	bool|int	The newly created user ID
 	 *
 	 */
 	function create($unix_name, $firstname, $lastname, $password1, $password2, $email,
@@ -350,7 +350,7 @@ class GFUser extends Error {
 			return false;
 		}
 		if (!validate_email($email)) {
-			$this->setError(_('Invalid Email Address') . _(': '). $email);
+			$this->setError(_('Invalid Email Address')._(': '). $email);
 			return false;
 		}
 		if ($unix_name && db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name LIKE $1',
@@ -375,12 +375,12 @@ class GFUser extends Error {
 			if (account_namevalid($l)
 			    && db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name = $1',
 							  array($l))) == 0) {
-				$unix_name = $l ;
+				$unix_name = $l;
 			} else {
 				// No? What if we add a number at the end?
-				$i = 0 ;
+				$i = 0;
 				while ($i < 1000) {
-					$c = substr ($l, 0, 15-strlen ("$i")) . "$i" ;
+					$c = substr($l, 0, 15-strlen ("$i")) . "$i" ;
 					if (account_namevalid($c)
 					    && db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name = $1',
 									  array($c))) == 0) {
@@ -488,15 +488,15 @@ You have 1 week to confirm your account. After this time, your account will be d
 (If you don\'t see any URL above, it is likely due to a bug in your mail client.
 Use one below, but make sure it is entered as the single line.)
 
-%2$s
-
-Enjoy the site.
-
--- the %3$s staff
-'),
-					       $this->getUnixName(),
-					       util_make_url('/account/verify.php?confirm_hash=_'.$this->getConfirmHash()),
-					       forge_get_config('forge_name')));
+%2$s'),
+			$this->getUnixName(),
+			util_make_url('/account/verify.php?confirm_hash=_'.$this->getConfirmHash()),
+			forge_get_config('forge_name')));
+		$message .= "\n\n";
+		$message .= _('Enjoy the site.');
+		$message .= "\n\n";
+		$message .= sprintf(_('-- the %s staff'), forge_get_config('forge_name'));
+		$message .= "\n";
 		util_send_message(
 			$this->getEmail(),
 			sprintf(_('%s Account Registration'), forge_get_config('forge_name')),
@@ -553,7 +553,7 @@ Enjoy the site.
 				return false;
 			}
 
-			$hook_params = array ();
+			$hook_params = array();
 			$hook_params['user'] = $this;
 			$hook_params['user_id'] = $this->getID();
 			plugin_hook("user_delete", $hook_params);
@@ -637,13 +637,13 @@ Enjoy the site.
 				$this->getID()));
 
 		if (!$res) {
-			$this->setError(_('Error - Could Not Update User Object:'). ' ' .db_error());
+			$this->setError(_('Error: Cannot Update User Object:').' '.db_error());
 			db_rollback();
 			return false;
 		}
 
 		if ($email && $email != $this->getEmail()
-		    && !$this->setEmail($email)) {
+			&& !$this->setEmail($email)) {
 			return false;
 		}
 
@@ -678,8 +678,8 @@ Enjoy the site.
 	 * @return    boolean    success;
 	 */
 	function fetchData($user_id) {
-		$res = db_query_params ('SELECT * FROM users WHERE user_id=$1',
-					array ($user_id)) ;
+		$res = db_query_params('SELECT * FROM users WHERE user_id=$1',
+					array($user_id));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('GFUser::fetchData():: '.db_error());
 			return false;
@@ -740,12 +740,11 @@ Enjoy the site.
 		}
 
 		db_begin();
-		$res = db_query_params ('UPDATE users SET status=$1 WHERE user_id=$2',
-					array ($status,
-					       $this->getID())) ;
+		$res = db_query_params('UPDATE users SET status=$1 WHERE user_id=$2',
+					array($status, $this->getID()));
 
 		if (!$res) {
-			$this->setError(_('Error - Could Not Update User Status:') . ' ' .db_error());
+			$this->setError(_('Error: Cannot Update User Status:').' '.db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -757,11 +756,11 @@ Enjoy the site.
 				}
 			}
 
-			$hook_params = array ();
+			$hook_params = array();
 			$hook_params['user'] = $this;
 			$hook_params['user_id'] = $this->getID();
 			$hook_params['status'] = $status;
-			plugin_hook ("user_setstatus", $hook_params);
+			plugin_hook("user_setstatus", $hook_params);
 
 			db_commit();
 
@@ -787,7 +786,7 @@ Enjoy the site.
 	/**
 	 * getUnixStatus - Status of activation of unix account.
 	 *
-	 * @return	char	(N)one, (A)ctive, (S)uspended or (D)eleted
+	 * @return string (N)one, (A)ctive, (S)uspended or (D)eleted
 	 */
 	function getUnixStatus() {
 		return $this->data_array['unix_status'];
@@ -796,23 +795,22 @@ Enjoy the site.
 	/**
 	 * setUnixStatus - Sets status of activation of unix account.
 	 *
-	 * @param	string	The unix status.
-	 *	N	no_unix_account
-	 *	A	active
-	 *	S	suspended
-	 *	D	deleted
+	 * @param    string    $status The unix status.
+	 *                             N    no_unix_account
+	 *                             A    active
+	 *                             S    suspended
+	 *                             D    deleted
 	 *
 	 * @return	boolean success.
 	 */
 	function setUnixStatus($status) {
 		global $SYS;
 		db_begin();
-		$res = db_query_params ('UPDATE users SET unix_status=$1 WHERE user_id=$2',
-					array ($status,
-					       $this->getID())) ;
+		$res = db_query_params('UPDATE users SET unix_status=$1 WHERE user_id=$2',
+					array($status, $this->getID()));
 
 		if (!$res) {
-			$this->setError(_('Error - Could Not Update User Unix Status: ').db_error());
+			$this->setError('Error: Cannot Update User Unix Status: '.db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -937,20 +935,19 @@ Enjoy the site.
 
 		if (forge_get_config('require_unique_email')) {
 			if (db_numrows(db_query_params('SELECT user_id FROM users WHERE user_id!=$1 AND (lower(email) LIKE $2 OR lower(email_new) LIKE $2)',
-						       array ($this->getID(),
-							      strtolower($email)))) > 0) {
+								array($this->getID(),
+									strtolower($email)))) > 0) {
 				$this->setError(_('User with this email already exists.'));
-			return false;
+				return false;
 			}
 		}
 
 		db_begin();
-		$res = db_query_params ('UPDATE users SET email=$1 WHERE user_id=$2',
-					array ($email,
-					       $this->getID()));
+		$res = db_query_params('UPDATE users SET email=$1 WHERE user_id=$2',
+					array($email, $this->getID()));
 
 		if (!$res) {
-			$this->setError(_('Error - Could Not Update User Email: ').db_error());
+			$this->setError('Error: Cannot Update User Email: '.db_error());
 			db_rollback();
 			return false;
 		} else {
@@ -977,10 +974,10 @@ Enjoy the site.
 	 * @param    string    $hash  The email hash.
 	 * @return    boolean    success.
 	 */
-	function setNewEmailAndHash($email, $hash='') {
+	function setNewEmailAndHash($email, $hash = '') {
 
 		if (!$hash) {
-			$hash = substr(md5(strval(time()) . strval(util_randbytes())), 0, 16);
+			$hash = substr(md5(strval(time()).strval(util_randbytes())), 0, 16);
 		}
 
 		if (!$email || !validate_email($email)) {
@@ -990,18 +987,16 @@ Enjoy the site.
 
 		if (forge_get_config('require_unique_email')) {
 			if (db_numrows(db_query_params('SELECT user_id FROM users WHERE user_id!=$1 AND (lower(email) LIKE $2 OR lower(email_new) LIKE $2)',
-						       array ($this->getID(),
-							      strtolower($email)))) > 0) {
+								array($this->getID(),
+									strtolower($email)))) > 0) {
 				$this->setError(_('User with this email already exists.'));
-			return false;
+				return false;
 			}
 		}
-		$res = db_query_params ('UPDATE users SET confirm_hash=$1, email_new=$2 WHERE user_id=$3',
-					array($hash,
-					       $email,
-					       $this->getID()));
+		$res = db_query_params('UPDATE users SET confirm_hash=$1, email_new=$2 WHERE user_id=$3',
+					array($hash, $email, $this->getID()));
 		if (!$res) {
-			$this->setError(_('Error - Could Not Update User Email And Hash: ').db_error());
+			$this->setError('Error: Cannot Update User Email And Hash: '.db_error());
 			return false;
 		} else {
 			$this->data_array['email_new'] = $email;
@@ -1029,7 +1024,7 @@ Enjoy the site.
 		$res = db_query_params('UPDATE users SET realname=$1 WHERE user_id=$2',
 			array($realname, $this->getID()));
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(_('Error - Could Not Update real name of user : ').db_error());
+			$this->setError('Error: Cannot Update real name of user : '.db_error());
 			return false;
 		}
 		$this->data_array['realname'] = $realname;
@@ -1107,19 +1102,17 @@ Enjoy the site.
 		}
 
 		db_begin();
-		$res = db_query_params ('UPDATE users SET shell=$1 WHERE user_id=$2',
-					array ($shell,
-					       $this->getID())) ;
+		$res = db_query_params('UPDATE users SET shell=$1 WHERE user_id=$2',
+					array($shell, $this->getID()));
 		if (!$res) {
-			$this->setError(_('Error - Could Not Update User Unix Shell:') . ' ' .db_error());
+			$this->setError(_('Error: Cannot Update User Unix Shell:').' '.db_error());
 			db_rollback();
 			return false;
 		} else {
 			// Now change LDAP attribute, but only if corresponding
 			// entry exists (i.e. if user have shell access)
-			if ($SYS->sysCheckUser($this->getID()))
-			{
-				if (!$SYS->sysUserSetAttribute($this->getID(),"loginShell",$shell)) {
+			if ($SYS->sysCheckUser($this->getID())) {
+				if (!$SYS->sysUserSetAttribute($this->getID(), "loginShell", $shell)) {
 					$this->setError($SYS->getErrorMessage());
 					db_rollback();
 					return false;
@@ -1237,8 +1230,8 @@ Enjoy the site.
 	/**
 	 *	addAuthorizedKey - add the SSH authorized key for the user.
 	 *
-	 * @param	string	The user public key.
-	 * @return	boolean	success.
+	 * @param    string    $keys The users public keys.
+	 * @return    boolean    success.
 	 */
 	function addAuthorizedKey($key) {
 		$key = trim($key);
@@ -1283,7 +1276,7 @@ Enjoy the site.
 		$res = db_query_params('update sshkeys set deleted = 1 where id_sshkeys =$1 and userid = $2',
 					array($keyid, $this->getID()));
 		if (!$res) {
-			$this->setError(_('Error - Could Not Delete User SSH Key:').db_error());
+			$this->setError(_('Error: Cannot Update User SSH Keys'));
 			return false;
 		} else {
 			unset($this->data_array['authorized_keys'][$keyid]);
@@ -1323,8 +1316,7 @@ Enjoy the site.
 		$preference_name = strtolower(trim($preference_name));
 		unset($this->user_pref["$preference_name"]);
 		$res = db_query_params('DELETE FROM user_preferences WHERE user_id=$1 AND preference_name=$2',
-					array ($this->getID(),
-					       $preference_name));
+					array($this->getID(), $preference_name));
 		return ((!$res || db_affected_rows($res) < 1) ? false : true);
 	}
 
@@ -1340,22 +1332,22 @@ Enjoy the site.
 		//delete pref if not value passed in
 		unset($this->user_pref);
 		if (!isset($value)) {
-			$result = db_query_params ('DELETE FROM user_preferences WHERE user_id=$1 AND preference_name=$2',
-						   array ($this->getID(),
-							  $preference_name)) ;
+			$result = db_query_params('DELETE FROM user_preferences WHERE user_id=$1 AND preference_name=$2',
+						   array($this->getID(),
+							  $preference_name));
 		} else {
-			$result = db_query_params ('UPDATE user_preferences SET preference_value=$1,set_date=$2	WHERE user_id=$3 AND preference_name=$4',
-						   array ($value,
+			$result = db_query_params('UPDATE user_preferences SET preference_value=$1,set_date=$2	WHERE user_id=$3 AND preference_name=$4',
+						   array($value,
 							  time(),
 							  $this->getID(),
-							  $preference_name)) ;
+							  $preference_name));
 			if (db_affected_rows($result) < 1) {
 				//echo db_error();
-				$result = db_query_params ('INSERT INTO user_preferences (user_id,preference_name,preference_value,set_date) VALUES ($1,$2,$3,$4)',
-							   array ($this->getID(),
+				$result = db_query_params('INSERT INTO user_preferences (user_id,preference_name,preference_value,set_date) VALUES ($1,$2,$3,$4)',
+							   array($this->getID(),
 								  $preference_name,
 								  $value,
-								  time())) ;
+								  time()));
 			}
 		}
 		return ((!$result || db_affected_rows($result) < 1) ? false : true);
@@ -1383,8 +1375,8 @@ Enjoy the site.
 			}
 		} else {
 			//we haven't returned prefs - go to the db
-			$result = db_query_params ('SELECT preference_name,preference_value FROM user_preferences WHERE user_id=$1',
-						   array ($this->getID())) ;
+			$result = db_query_params('SELECT preference_name,preference_value FROM user_preferences WHERE user_id=$1',
+						   array($this->getID()));
 			if (db_numrows($result) < 1) {
 				//echo "\n\nNo Prefs Found";
 				return false;
@@ -1424,20 +1416,20 @@ Enjoy the site.
 		$md5_pw = md5($passwd);
 		$unix_pw = account_genunixpw($passwd);
 
-		$res = db_query_params ('UPDATE users SET user_pw=$1, unix_pw=$2 WHERE user_id=$3',
-					array ($md5_pw,
+		$res = db_query_params('UPDATE users SET user_pw=$1, unix_pw=$2 WHERE user_id=$3',
+					array($md5_pw,
 					       $unix_pw,
-					       $this->getID())) ;
+					       $this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(_('Error - Could Not Change User Password:') . ' ' .db_error());
+			$this->setError(_('Error: Cannot Change User Password:').' '.db_error());
 			db_rollback();
 			return false;
 		} else {
 			// Now change LDAP password, but only if corresponding
 			// entry exists (i.e. if user have shell access)
 			if ($SYS->sysCheckUser($this->getID())) {
-				if (!$SYS->sysUserSetAttribute($this->getID(),"userPassword",'{crypt}'.$unix_pw)) {
+				if (!$SYS->sysUserSetAttribute($this->getID(), "userPassword", '{crypt}'.$unix_pw)) {
 					$this->setError($SYS->getErrorMessage());
 					db_rollback();
 					return false;
@@ -1448,7 +1440,7 @@ Enjoy the site.
 		$hook_params['user'] = $this;
 		$hook_params['user_id'] = $this->getID();
 		$hook_params['user_password'] = $passwd;
-		plugin_hook ("user_setpasswd", $hook_params);
+		plugin_hook("user_setpasswd", $hook_params);
 		db_commit();
 		return true;
 	}
@@ -1466,7 +1458,7 @@ Enjoy the site.
 				array($md5, $this->getID()));
 
 			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError(_('Error - Could Not Change User Password:') . ' ' .db_error());
+				$this->setError(_('Error: Cannot Change User Password:').' '.db_error());
 				db_rollback();
 				return false;
 			}
@@ -1487,11 +1479,10 @@ Enjoy the site.
 		db_begin();
 		if ($unix) {
 			$res = db_query_params('UPDATE users SET unix_pw=$1 WHERE user_id=$1',
-						array ($unix,
-						       $this->getID()));
+				array($unix, $this->getID()));
 
 			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError(_('Error - Could Not Change User Password:') . ' ' .db_error());
+				$this->setError(_('Error: Cannot Change User Password:').' '.db_error());
 				db_rollback();
 				return false;
 			}
@@ -1499,7 +1490,7 @@ Enjoy the site.
 			// Now change system password, but only if corresponding
 			// entry exists (i.e. if user have shell access)
 			if ($SYS->sysCheckUser($this->getID())) {
-				if (!$SYS->sysUserSetAttribute($this->getID(),"userPassword",'{crypt}'.$unix)) {
+				if (!$SYS->sysUserSetAttribute($this->getID(), "userPassword", '{crypt}'.$unix)) {
 					$this->setError($SYS->getErrorMessage());
 					db_rollback();
 					return false;
@@ -1830,26 +1821,26 @@ class UserComparator {
 
 	function Compare($a, $b) {
 		switch ($this->criterion) {
-		case 'name':
-		default:
-			$namecmp = strcoll ($a->getRealName(), $b->getRealName()) ;
-			if ($namecmp != 0) {
-				return $namecmp ;
-			}
-			/* If several projects share a same real name */
-			return strcoll ($a->getUnixName(), $b->getUnixName()) ;
-			break ;
-		case 'unixname':
-			return strcmp ($a->getUnixName(), $b->getUnixName()) ;
-			break ;
-		case 'id':
-			$aid = $a->getID() ;
-			$bid = $b->getID() ;
-			if ($a == $b) {
-				return 0;
-			}
-			return ($a < $b) ? -1 : 1;
-			break ;
+			case 'name':
+			default:
+				$name_compare = strcoll($a->getRealName(), $b->getRealName());
+				if ($name_compare != 0) {
+					return $name_compare;
+				}
+				/* If several projects share a same real name */
+				return strcoll($a->getUnixName(), $b->getUnixName());
+				break;
+			case 'unixname':
+				return strcmp($a->getUnixName(), $b->getUnixName());
+				break;
+			case 'id':
+				$aid = $a->getID();
+				$bid = $b->getID();
+				if ($a == $b) {
+					return 0;
+				}
+				return ($a < $b)? -1 : 1;
+				break;
 		}
 	}
 }
