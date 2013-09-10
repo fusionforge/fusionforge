@@ -119,7 +119,7 @@ if (getStringFromRequest('add_forum')) {
 			</p>
 			<p>
 			<strong>'._('Email All Posts To:').'</strong><br />
-			<input type="text" name="send_all_posts_to" value="" size="60" />
+			<input type="email" name="send_all_posts_to" value="" size="60" />
 			</p>
 			<p>
 			<input type="submit" name="submit" value="'._('Add This Forum').'" />
@@ -152,7 +152,7 @@ if (getStringFromRequest('add_forum')) {
 				</p>
 				<p>
 				<strong>'._('Email All Posts To:').'</strong><br />
-				<input type="text" name="send_all_posts_to" value="'. $f->getSendAllPostsTo() .'" size="60" />
+				<input type="email" name="send_all_posts_to" value="'. $f->getSendAllPostsTo() .'" size="60" />
 				</p>
 				<p>
 				<strong>'._('Description').':'.utils_requiredField().'</strong><br />
