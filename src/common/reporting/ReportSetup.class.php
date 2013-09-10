@@ -411,7 +411,7 @@ class ReportSetup extends Report {
 	/**
 	 *	Add a row to the users_added_daily report table.
 	 *
-	 *	@param	int	$day int - the unix time of the beginning of the day.
+	 *	@param	int	$day Day - the unix time of the beginning of the day.
 	 *	@return	boolean	Success.
 	 */
 	function users_added_daily($day) {
@@ -1349,12 +1349,12 @@ class ReportSetup extends Report {
 	/**
 	 *  Add a row to the rep_time_category table.
 	 *
-	 *	@param	string	$category_name	The category name.
+	 *	@param	string	$category_name The category name.
 	 *  @return boolean Success.
 	 */
 	function addTimeCode($category_name) {
 		return db_query_params ('INSERT INTO rep_time_category (category_name) VALUES ($1)',
-				array($category_name));
+			array($category_name));
 	}
 
 	/**
