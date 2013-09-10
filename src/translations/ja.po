@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-10 15:04+0200\n"
+"POT-Creation-Date: 2013-09-10 15:40+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -418,7 +418,13 @@ msgstr ""
 #: common/forum/Forum.class.php:641 common/forum/Forum.class.php:649
 #: common/forum/Forum.class.php:665 common/forum/ForumHTML.class.php:73
 #: common/forum/ForumHTML.class.php:211 common/include/Error.class.php:207
-#: common/include/exit.php:80 common/include/User.class.php:353
+#: common/include/exit.php:80 common/include/Group.class.php:2543
+#: common/include/Group.class.php:2544 common/include/Group.class.php:2602
+#: common/include/Group.class.php:2603 common/include/Group.class.php:2604
+#: common/include/Group.class.php:2656 common/include/Group.class.php:2657
+#: common/include/Group.class.php:2658 common/include/Group.class.php:2659
+#: common/include/Group.class.php:2669 common/include/Group.class.php:2670
+#: common/include/User.class.php:353
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:406
 #: common/tracker/actions/browse.php:409 common/tracker/actions/mod.php:147
@@ -514,8 +520,8 @@ msgstr "プロジェクト管理"
 
 #: common/docman/Document.class.php:945
 #: common/docman/DocumentGroup.class.php:725
-#: common/tracker/actions/browse.php:201 common/tracker/actions/query.php:203
-#: common/tracker/actions/query.php:350
+#: common/include/Group.class.php:2658 common/tracker/actions/browse.php:201
+#: common/tracker/actions/query.php:203 common/tracker/actions/query.php:350
 msgid "Submitter"
 msgstr ""
 
@@ -3202,136 +3208,113 @@ msgstr "そのアカウントはすでにアクティブです。"
 msgid "Approved"
 msgstr "ドキュメント閲覧"
 
-#: common/include/Group.class.php:2533 common/include/Group.class.php:2603
+#: common/include/Group.class.php:2533 common/include/Group.class.php:2594
 msgid "Group does not have any administrators."
 msgstr ""
 
 #: common/include/Group.class.php:2541
-#, fuzzy, php-format
-msgid ""
-"Your project registration for %4$s has been approved.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Your DNS will take up to a day to become active on our site.\n"
-"Your web site is accessible through your shell account. Please read\n"
-"site documentation (see link below) about intended usage, available\n"
-"services, and directory layout of the account.\n"
-"\n"
-"If you visit your\n"
-"own project page in %4$s while logged in, you will find\n"
-"additional menu functions to your left labeled 'Project Admin'.\n"
-"\n"
-"We highly suggest that you now visit %4$s and create a public\n"
-"description for your project. This can be done by visiting your project\n"
-"page while logged in, and selecting 'Project Admin' from the menus\n"
-"on the left (or by visiting %3$s\n"
-"after login).\n"
-"\n"
-"Your project will also not appear in the Trove Software Map (primary\n"
-"list of projects hosted on %4$s which offers great flexibility in\n"
-"browsing and search) until you categorize it in the project administration\n"
-"screens. So that people can find your project, you should do this now.\n"
-"Visit your project while logged in, and select 'Project Admin' from the\n"
-"menus on the left.\n"
-"\n"
-"Enjoy the system, and please tell others about %4$s. Let us know\n"
-"if there is anything we can do to help you.\n"
-"\n"
-"-- the %4$s crew"
-msgstr ""
-"%4$s へのプロジェクト登録が承認されました。\n"
-"\n"
-"プロジェクト名:%1$s\n"
-"Unixネーム:%2$s\n"
-"\n"
-"このサイトはCVSサーバーとシェル/ウェブサーバーのサービスは提供しておりませ"
-"ん\n"
-"シェル/ウェブサーバーに関しては設定を変更し各自のサイトを参照するようにしてく"
-"ださい。"
-
-#: common/include/Group.class.php:2577
 #, php-format
-msgid "%1$s Project Approved"
-msgstr "%1$s プロジェクト 承認"
+msgid "Your project registration for %s has been approved."
+msgstr "%s へのプロジェクト登録が承認されました。"
 
-#: common/include/Group.class.php:2610
+#: common/include/Group.class.php:2543 common/include/Group.class.php:2602
+#: common/include/Group.class.php:2656 common/include/Group.class.php:2669
+msgid "Project Full Name"
+msgstr "プロジェクト名"
+
+#: common/include/Group.class.php:2544 common/include/Group.class.php:2603
+#: www/admin/approve-pending.php:194 www/admin/database.php:162
+#: www/admin/groupedit.php:171 www/admin/vhost.php:123
+#: www/register/index.php:204
+msgid "Project Unix Name"
+msgstr "プロジェクトUnix名"
+
+#: common/include/Group.class.php:2546
 #, php-format
 msgid ""
-"Your project registration for %3$s has been denied.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Reasons for negative decision:\n"
-"\n"
+"If you visit your own project page in %s while logged in, you will find "
+"additional menu functions to your left labeled “Project Admin”."
 msgstr ""
-"%3$s へのプロジェクトの登録が拒否されました。\n"
-"\n"
-"プロジェクト名:%1$s\n"
-"プロジェクトUNIX名:%2$s\n"
-"\n"
-"拒否の理由:\n"
-"\n"
 
-#: common/include/Group.class.php:2629
+#: common/include/Group.class.php:2550
 #, php-format
-msgid "%1$s Project Denied"
-msgstr "%1$s プロジェクトの拒否"
+msgid ""
+"We highly suggest that you now visit %1$s and create a public description "
+"for your project. This can be done by visiting your project page while "
+"logged in, and selecting “Project Admin” from the menus on the left (or by "
+"visiting %2$s after login)."
+msgstr ""
 
-#: common/include/Group.class.php:2653
+#: common/include/Group.class.php:2556
+#, php-format
+msgid ""
+"Your project will also not appear in the Trove Software Map (primary list of "
+"projects hosted on %s which offers great flexibility in browsing and search) "
+"until you categorize it in the project administration screens. So that "
+"people can find your project, you should do this now. Visit your project "
+"while logged in, and select “Project Admin” from the menus on the left."
+msgstr ""
+
+#: common/include/Group.class.php:2563
+#, php-format
+msgid ""
+"Enjoy the system, and please tell others about %s. Let us know if there is "
+"anything we can do to help you."
+msgstr ""
+
+#: common/include/Group.class.php:2566 common/mail/MailingList.class.php:205
+#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
+#: www/account/first.php:36 www/account/lostpw.php:68
+#: www/survey/privacy.php:58 www/survey/survey_resp.php:61
+#, php-format
+msgid "-- the %s staff"
+msgstr ""
+
+#: common/include/Group.class.php:2568
+#, php-format
+msgid "%s Project Approved"
+msgstr "%s プロジェクト 承認"
+
+#: common/include/Group.class.php:2601
+#, php-format
+msgid "Your project registration for %s has been denied."
+msgstr "%s へのプロジェクトの登録が拒否されました。"
+
+#: common/include/Group.class.php:2604
+msgid "Reasons for negative decision"
+msgstr "拒否の理由"
+
+#: common/include/Group.class.php:2616
+#, php-format
+msgid "%s Project Denied"
+msgstr "%s プロジェクトの拒否"
+
+#: common/include/Group.class.php:2640
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2660
+#: common/include/Group.class.php:2647
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2668
+#: common/include/Group.class.php:2655 common/include/Group.class.php:2661
+#: common/include/Group.class.php:2668 common/include/Group.class.php:2674
+#, php-format
+msgid "New %s Project Submitted"
+msgstr "新しいプロジェクト %s が提出されました"
+
+#: common/include/Group.class.php:2657 common/include/Group.class.php:2670
+msgid "Submitted Description"
+msgstr "提出された記述"
+
+#: common/include/Group.class.php:2659
+msgid "Please visit the following URL to approve or reject this project"
+msgstr "以下のURLにてこのプロジェクトを許可、もしくは断って下さい。"
+
+#: common/include/Group.class.php:2671
 #, fuzzy, php-format
 msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-msgstr ""
-"新しいプロジェクト %1$s が提出されました\n"
-"\n"
-"プロジェクト名: %2$s\n"
-"提出された記述: %3$s\n"
-"ライセンス: %4$s\n"
-"\n"
-"以下のURLにてこのプロジェクトを許可、もしくは断って下さい。 \n"
-"%5$s"
-
-#: common/include/Group.class.php:2678
-#, php-format
-msgid "Submitter: %1$s (%2$s)\n"
-msgstr ""
-
-#: common/include/Group.class.php:2684
-#, php-format
-msgid ""
-"\n"
-"Please visit the following URL to approve or reject this project:\n"
-"%1$s"
-msgstr ""
-
-#: common/include/Group.class.php:2688 common/include/Group.class.php:2703
-#, php-format
-msgid "New %1$s Project Submitted"
-msgstr "新しいプロジェクト %1$s が提出されました"
-
-#: common/include/Group.class.php:2696
-#, fuzzy, php-format
-msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-"\n"
-"The %1$s admin team will now examine your project submission.  You will be "
+"The %s admin team will now examine your project submission. You will be "
 "notified of their decision."
 msgstr ""
 "新しいプロジェクト %1$s が提出されました\n"
@@ -3343,40 +3326,40 @@ msgstr ""
 "以下のURLにてこのプロジェクトを許可、もしくは断って下さい。 \n"
 "%5$s"
 
-#: common/include/Group.class.php:2718
+#: common/include/Group.class.php:2689
 msgid "Group name is too short"
 msgstr ""
 
-#: common/include/Group.class.php:2721
+#: common/include/Group.class.php:2692
 msgid "Group name is too long"
 msgstr ""
 
-#: common/include/Group.class.php:2724
+#: common/include/Group.class.php:2695
 #, fuzzy
 msgid "Group name already taken"
 msgstr "そのアカウントはすでにアクティブです。"
 
-#: common/include/Group.class.php:2806
+#: common/include/Group.class.php:2777
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2869
+#: common/include/Group.class.php:2840
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2887
+#: common/include/Group.class.php:2858
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2905
+#: common/include/Group.class.php:2876
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2923
+#: common/include/Group.class.php:2894
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
@@ -4435,14 +4418,6 @@ msgid ""
 "You are encouraged to change this password as soon as possible.\n"
 "\n"
 "Thank you for registering your project with %1$s."
-msgstr ""
-
-#: common/mail/MailingList.class.php:205
-#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
-#: www/account/first.php:36 www/account/lostpw.php:68
-#: www/survey/privacy.php:58 www/survey/survey_resp.php:61
-#, php-format
-msgid "-- the %s staff"
 msgstr ""
 
 #: common/mail/MailingList.class.php:208
@@ -15076,12 +15051,6 @@ msgstr ""
 msgid "HTTP Domain:"
 msgstr ""
 
-#: www/admin/approve-pending.php:194 www/admin/database.php:162
-#: www/admin/groupedit.php:171 www/admin/vhost.php:123
-#: www/register/index.php:204
-msgid "Project Unix Name"
-msgstr "プロジェクトUnix名"
-
 #: www/admin/approve-pending.php:196
 msgid "Submitted Description:"
 msgstr "提出された記述"
@@ -22900,6 +22869,93 @@ msgid "No User Name Provided"
 msgstr ""
 
 #, fuzzy
+#~ msgid ""
+#~ "Your project registration for %4$s has been approved.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Your DNS will take up to a day to become active on our site.\n"
+#~ "Your web site is accessible through your shell account. Please read\n"
+#~ "site documentation (see link below) about intended usage, available\n"
+#~ "services, and directory layout of the account.\n"
+#~ "\n"
+#~ "If you visit your\n"
+#~ "own project page in %4$s while logged in, you will find\n"
+#~ "additional menu functions to your left labeled 'Project Admin'.\n"
+#~ "\n"
+#~ "We highly suggest that you now visit %4$s and create a public\n"
+#~ "description for your project. This can be done by visiting your project\n"
+#~ "page while logged in, and selecting 'Project Admin' from the menus\n"
+#~ "on the left (or by visiting %3$s\n"
+#~ "after login).\n"
+#~ "\n"
+#~ "Your project will also not appear in the Trove Software Map (primary\n"
+#~ "list of projects hosted on %4$s which offers great flexibility in\n"
+#~ "browsing and search) until you categorize it in the project "
+#~ "administration\n"
+#~ "screens. So that people can find your project, you should do this now.\n"
+#~ "Visit your project while logged in, and select 'Project Admin' from the\n"
+#~ "menus on the left.\n"
+#~ "\n"
+#~ "Enjoy the system, and please tell others about %4$s. Let us know\n"
+#~ "if there is anything we can do to help you.\n"
+#~ "\n"
+#~ "-- the %4$s crew"
+#~ msgstr ""
+#~ "%4$s へのプロジェクト登録が承認されました。\n"
+#~ "\n"
+#~ "プロジェクト名:%1$s\n"
+#~ "Unixネーム:%2$s\n"
+#~ "\n"
+#~ "このサイトはCVSサーバーとシェル/ウェブサーバーのサービスは提供しておりませ"
+#~ "ん\n"
+#~ "シェル/ウェブサーバーに関しては設定を変更し各自のサイトを参照するようにし"
+#~ "てください。"
+
+#~ msgid "%1$s Project Approved"
+#~ msgstr "%1$s プロジェクト 承認"
+
+#~ msgid ""
+#~ "Your project registration for %3$s has been denied.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Reasons for negative decision:\n"
+#~ "\n"
+#~ msgstr ""
+#~ "%3$s へのプロジェクトの登録が拒否されました。\n"
+#~ "\n"
+#~ "プロジェクト名:%1$s\n"
+#~ "プロジェクトUNIX名:%2$s\n"
+#~ "\n"
+#~ "拒否の理由:\n"
+#~ "\n"
+
+#~ msgid "%1$s Project Denied"
+#~ msgstr "%1$s プロジェクトの拒否"
+
+#, fuzzy
+#~ msgid ""
+#~ "New %1$s Project Submitted\n"
+#~ "\n"
+#~ "Project Full Name:  %2$s\n"
+#~ "Submitted Description: %3$s\n"
+#~ msgstr ""
+#~ "新しいプロジェクト %1$s が提出されました\n"
+#~ "\n"
+#~ "プロジェクト名: %2$s\n"
+#~ "提出された記述: %3$s\n"
+#~ "ライセンス: %4$s\n"
+#~ "\n"
+#~ "以下のURLにてこのプロジェクトを許可、もしくは断って下さい。 \n"
+#~ "%5$s"
+
+#~ msgid "New %1$s Project Submitted"
+#~ msgstr "新しいプロジェクト %1$s が提出されました"
+
+#, fuzzy
 #~ msgid "Add forum"
 #~ msgstr "フォーラム"
 
@@ -23143,33 +23199,6 @@ msgstr ""
 
 #~ msgid "Error: this news item was not found"
 #~ msgstr "エラー - 新規アイテムが見つかりません。"
-
-#~ msgid "Your project registration for %s has been approved."
-#~ msgstr "%s へのプロジェクト登録が承認されました。"
-
-#~ msgid "Project Full Name"
-#~ msgstr "プロジェクト名"
-
-#~ msgid "%s Project Approved"
-#~ msgstr "%s プロジェクト 承認"
-
-#~ msgid "Your project registration for %s has been denied."
-#~ msgstr "%s へのプロジェクトの登録が拒否されました。"
-
-#~ msgid "Reasons for negative decision"
-#~ msgstr "拒否の理由"
-
-#~ msgid "%s Project Denied"
-#~ msgstr "%s プロジェクトの拒否"
-
-#~ msgid "New %s Project Submitted"
-#~ msgstr "新しいプロジェクト %s が提出されました"
-
-#~ msgid "Submitted Description"
-#~ msgstr "提出された記述"
-
-#~ msgid "Please visit the following URL to approve or reject this project"
-#~ msgstr "以下のURLにてこのプロジェクトを許可、もしくは断って下さい。"
 
 #~ msgid "You are not monitoring any files."
 #~ msgstr "ファイルをモニタリングしていません。"

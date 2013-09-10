@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-10 15:04+0200\n"
+"POT-Creation-Date: 2013-09-10 15:40+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -419,7 +419,13 @@ msgstr ""
 #: common/forum/Forum.class.php:641 common/forum/Forum.class.php:649
 #: common/forum/Forum.class.php:665 common/forum/ForumHTML.class.php:73
 #: common/forum/ForumHTML.class.php:211 common/include/Error.class.php:207
-#: common/include/exit.php:80 common/include/User.class.php:353
+#: common/include/exit.php:80 common/include/Group.class.php:2543
+#: common/include/Group.class.php:2544 common/include/Group.class.php:2602
+#: common/include/Group.class.php:2603 common/include/Group.class.php:2604
+#: common/include/Group.class.php:2656 common/include/Group.class.php:2657
+#: common/include/Group.class.php:2658 common/include/Group.class.php:2659
+#: common/include/Group.class.php:2669 common/include/Group.class.php:2670
+#: common/include/User.class.php:353
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:406
 #: common/tracker/actions/browse.php:409 common/tracker/actions/mod.php:147
@@ -515,8 +521,8 @@ msgstr "Beskrivning:"
 
 #: common/docman/Document.class.php:945
 #: common/docman/DocumentGroup.class.php:725
-#: common/tracker/actions/browse.php:201 common/tracker/actions/query.php:203
-#: common/tracker/actions/query.php:350
+#: common/include/Group.class.php:2658 common/tracker/actions/browse.php:201
+#: common/tracker/actions/query.php:203 common/tracker/actions/query.php:350
 msgid "Submitter"
 msgstr "Inlämnare"
 
@@ -3236,176 +3242,125 @@ msgstr "Konto redan aktivt."
 msgid "Approved"
 msgstr "Godkänn"
 
-#: common/include/Group.class.php:2533 common/include/Group.class.php:2603
+#: common/include/Group.class.php:2533 common/include/Group.class.php:2594
 msgid "Group does not have any administrators."
 msgstr ""
 
 #: common/include/Group.class.php:2541
-#, fuzzy, php-format
+#, php-format
+msgid "Your project registration for %s has been approved."
+msgstr "Din projektregistrering hos %s har blivit godkänd."
+
+#: common/include/Group.class.php:2543 common/include/Group.class.php:2602
+#: common/include/Group.class.php:2656 common/include/Group.class.php:2669
+msgid "Project Full Name"
+msgstr "Projekt, fullt namn"
+
+#: common/include/Group.class.php:2544 common/include/Group.class.php:2603
+#: www/admin/approve-pending.php:194 www/admin/database.php:162
+#: www/admin/groupedit.php:171 www/admin/vhost.php:123
+#: www/register/index.php:204
+msgid "Project Unix Name"
+msgstr "Projekt, Unixnamn"
+
+#: common/include/Group.class.php:2546
+#, php-format
 msgid ""
-"Your project registration for %4$s has been approved.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Your DNS will take up to a day to become active on our site.\n"
-"Your web site is accessible through your shell account. Please read\n"
-"site documentation (see link below) about intended usage, available\n"
-"services, and directory layout of the account.\n"
-"\n"
-"If you visit your\n"
-"own project page in %4$s while logged in, you will find\n"
-"additional menu functions to your left labeled 'Project Admin'.\n"
-"\n"
-"We highly suggest that you now visit %4$s and create a public\n"
-"description for your project. This can be done by visiting your project\n"
-"page while logged in, and selecting 'Project Admin' from the menus\n"
-"on the left (or by visiting %3$s\n"
-"after login).\n"
-"\n"
-"Your project will also not appear in the Trove Software Map (primary\n"
-"list of projects hosted on %4$s which offers great flexibility in\n"
-"browsing and search) until you categorize it in the project administration\n"
-"screens. So that people can find your project, you should do this now.\n"
-"Visit your project while logged in, and select 'Project Admin' from the\n"
-"menus on the left.\n"
-"\n"
-"Enjoy the system, and please tell others about %4$s. Let us know\n"
-"if there is anything we can do to help you.\n"
-"\n"
-"-- the %4$s crew"
+"If you visit your own project page in %s while logged in, you will find "
+"additional menu functions to your left labeled “Project Admin”."
 msgstr ""
-"Din projektregistrering hos %7$s har blivit godkänd.\n"
-"\n"
-"Projekt, fulltnamn:  %1$s\n"
-"Projekt, Unixnamn:  %2$s\n"
-"CVSserver:         cvs.%2$s.%3$s\n"
-"Shell/Webbserver:   %2$s.%3$s\n"
-"\n"
-"Din DNS kommera att behöva upp till en dag för att bli aktiv på vår "
-"webbplats.\n"
-"Medan du väntar på att din DNS skall bli klar, så kan du försöka koppla in "
-"till \n"
-"%4$s och peka CVS till %5$s\n"
-"\n"
-"Om ditt skal/CVS konto fortfarande inte fungerar efter sex timmar, var "
-"vänlig\n"
-"öppna en supportfråga så att vi kan titta på problemet.\n"
-"Notera att alla skal/CVS konton är stängda för telnet och endast\n"
-"fungerar med SSH1.\n"
-"\n"
-"Din webbplats är tillgänglig genom ditt skalkonto. Var vänlig läs i\n"
-"webbplatsdokumentationen (se länk nedan) om hur den är tänkt att användas, "
-"tillgängliga\n"
-"tjänster, och katalogstruktur för kontot.\n"
-"\n"
-"Var vänlig att ta dig tid att läsa webbplatsdokumentationen om projekt\n"
-"administration (http://%3$s/docs/site/). Om du besöker din\n"
-"egen projektsida i %7$s medan du är inloggad,så hittar du\n"
-"ytterligare menyfunktioner till vänster, rubricerade 'Projekt admin'.\n"
-"\n"
-"Vi rekommenderar varmt att du nu besöker %7$s och skapar en offentlig\n"
+
+#: common/include/Group.class.php:2550
+#, php-format
+msgid ""
+"We highly suggest that you now visit %1$s and create a public description "
+"for your project. This can be done by visiting your project page while "
+"logged in, and selecting “Project Admin” from the menus on the left (or by "
+"visiting %2$s after login)."
+msgstr ""
+"Vi rekommenderar varmt att du nu besöker %1$s och skapar en offentlig "
 "beskrivning på ditt projekt. Detta kan göras genom att besöka din "
-"projektsida\n"
-" medan du är inloggad, och välja 'Projekt admin' från menyn\n"
-"till vänster (eller genom att besöka http://%3$s/project/admin/?group_id="
-"%6$s\n"
-"efter inloggning).\n"
-"\n"
-"Ditt projekt kommer inte heller att synas i resurskartan (huvud\n"
-"listan för projekt på värden %7$s. Det ger stor flexibilitet vid\n"
-"bläddring och sökning) innan du kategoriserat det i projektadministrations\n"
-"skärmen. För att folk skall kunna hitta ditt projekt, bör du göra detta nu.\n"
-"Besök ditt projekt medan du är inloggad, och välj 'Projekt admin' från \n"
-"menyn till vänster.\n"
-"\n"
-"Dra nytta av systemet, och snälla berätta för andra om %7$s. Låt oss få "
-"veta\n"
-"om det finns något vi kan göra för att hjälpa dig.\n"
-"\n"
-"-- %7$s-personalen"
+"projektsida  medan du är inloggad, och välja 'Projekt admin' från menyn till "
+"vänster (eller genom att besöka %2$s efter inloggning)."
 
-#: common/include/Group.class.php:2577
-#, php-format
-msgid "%1$s Project Approved"
-msgstr "%1$s projekt godkänt"
-
-#: common/include/Group.class.php:2610
+#: common/include/Group.class.php:2556
 #, php-format
 msgid ""
-"Your project registration for %3$s has been denied.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Reasons for negative decision:\n"
-"\n"
+"Your project will also not appear in the Trove Software Map (primary list of "
+"projects hosted on %s which offers great flexibility in browsing and search) "
+"until you categorize it in the project administration screens. So that "
+"people can find your project, you should do this now. Visit your project "
+"while logged in, and select “Project Admin” from the menus on the left."
 msgstr ""
-"Din projektregistrering för %3$s har blivit avslagen.\n"
-"\n"
-"Projekt, fullt namn:  %1$s\n"
-"Projekt, unixnamn:  %2$s\n"
-"\n"
-"Skäl för avslag:\n"
-"\n"
+"Ditt projekt kommer inte heller att synas i resurskartan (huvud listan för "
+"projekt på värden %s. Det ger stor flexibilitet vid bläddring och sökning) "
+"innan du kategoriserat det i projektadministrations skärmen. För att folk "
+"skall kunna hitta ditt projekt, bör du göra detta nu. Besök ditt projekt "
+"medan du är inloggad, och välj 'Projekt admin' från  menyn till vänster."
 
-#: common/include/Group.class.php:2629
+#: common/include/Group.class.php:2563
 #, php-format
-msgid "%1$s Project Denied"
-msgstr "%1$s projekt avslaget"
+msgid ""
+"Enjoy the system, and please tell others about %s. Let us know if there is "
+"anything we can do to help you."
+msgstr ""
+"Dra nytta av systemet, och snälla berätta för andra om %s. Låt oss få veta "
+"om det finns något vi kan göra för att hjälpa dig."
 
-#: common/include/Group.class.php:2653
+#: common/include/Group.class.php:2566 common/mail/MailingList.class.php:205
+#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
+#: www/account/first.php:36 www/account/lostpw.php:68
+#: www/survey/privacy.php:58 www/survey/survey_resp.php:61
+#, php-format
+msgid "-- the %s staff"
+msgstr "%s Personalen"
+
+#: common/include/Group.class.php:2568
+#, php-format
+msgid "%s Project Approved"
+msgstr "%s projekt godkänt"
+
+#: common/include/Group.class.php:2601
+#, php-format
+msgid "Your project registration for %s has been denied."
+msgstr "Din projektregistrering för %s har blivit avslagen."
+
+#: common/include/Group.class.php:2604
+msgid "Reasons for negative decision"
+msgstr "Skäl för avslag"
+
+#: common/include/Group.class.php:2616
+#, php-format
+msgid "%s Project Denied"
+msgstr "%s projekt avslaget"
+
+#: common/include/Group.class.php:2640
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2660
+#: common/include/Group.class.php:2647
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2668
-#, fuzzy, php-format
-msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-msgstr ""
-"Nytt %1$s projekt Inlämnat\n"
-"\n"
-"Projekt, fullständigt namn:  %2$s\n"
-"Inlämnad beskrivning: %3$s\n"
-"Lisence: %4$s\n"
-"\n"
-"Var vänlig besök följande URL för att godkänna eller avslå detta projekt:\n"
-"%5$s"
-
-#: common/include/Group.class.php:2678
-#, fuzzy, php-format
-msgid "Submitter: %1$s (%2$s)\n"
-msgstr "Inlämnad av"
-
-#: common/include/Group.class.php:2684
+#: common/include/Group.class.php:2655 common/include/Group.class.php:2661
+#: common/include/Group.class.php:2668 common/include/Group.class.php:2674
 #, php-format
-msgid ""
-"\n"
-"Please visit the following URL to approve or reject this project:\n"
-"%1$s"
+msgid "New %s Project Submitted"
+msgstr "Nytt %s projekt inlämnat"
+
+#: common/include/Group.class.php:2657 common/include/Group.class.php:2670
+msgid "Submitted Description"
+msgstr "Inlämnad beskrivning"
+
+#: common/include/Group.class.php:2659
+msgid "Please visit the following URL to approve or reject this project"
 msgstr ""
+"Var vänlig besök följande URL för att godkänna eller avslå detta projekt"
 
-#: common/include/Group.class.php:2688 common/include/Group.class.php:2703
-#, php-format
-msgid "New %1$s Project Submitted"
-msgstr "Nytt %1$s projekt inlämnat"
-
-#: common/include/Group.class.php:2696
+#: common/include/Group.class.php:2671
 #, fuzzy, php-format
 msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-"\n"
-"The %1$s admin team will now examine your project submission.  You will be "
+"The %s admin team will now examine your project submission. You will be "
 "notified of their decision."
 msgstr ""
 "Nytt %1$s projekt Inlämnat\n"
@@ -3417,42 +3372,42 @@ msgstr ""
 "Var vänlig besök följande URL för att godkänna eller avslå detta projekt:\n"
 "%5$s"
 
-#: common/include/Group.class.php:2718
+#: common/include/Group.class.php:2689
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Gruppnamn (klicka för redigering)"
 
-#: common/include/Group.class.php:2721
+#: common/include/Group.class.php:2692
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Gruppnamn (klicka för redigering)"
 
-#: common/include/Group.class.php:2724
+#: common/include/Group.class.php:2695
 #, fuzzy
 msgid "Group name already taken"
 msgstr "Unixnamn redan upptaget"
 
-#: common/include/Group.class.php:2806
+#: common/include/Group.class.php:2777
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2869
+#: common/include/Group.class.php:2840
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2887
+#: common/include/Group.class.php:2858
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2905
+#: common/include/Group.class.php:2876
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2923
+#: common/include/Group.class.php:2894
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
@@ -4530,14 +4485,6 @@ msgid ""
 "\n"
 "Thank you for registering your project with %1$s."
 msgstr ""
-
-#: common/mail/MailingList.class.php:205
-#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
-#: www/account/first.php:36 www/account/lostpw.php:68
-#: www/survey/privacy.php:58 www/survey/survey_resp.php:61
-#, php-format
-msgid "-- the %s staff"
-msgstr "%s Personalen"
 
 #: common/mail/MailingList.class.php:208
 #: plugins/mailman/www/mailman_utils.php:38
@@ -15417,12 +15364,6 @@ msgstr "Hemlåda:"
 msgid "HTTP Domain:"
 msgstr "HTTP Domän:"
 
-#: www/admin/approve-pending.php:194 www/admin/database.php:162
-#: www/admin/groupedit.php:171 www/admin/vhost.php:123
-#: www/register/index.php:204
-msgid "Project Unix Name"
-msgstr "Projekt, Unixnamn"
-
 #: www/admin/approve-pending.php:196
 msgid "Submitted Description:"
 msgstr "Inlämnad beskrivning:"
@@ -23579,6 +23520,140 @@ msgstr "Mass uppdatering"
 msgid "No User Name Provided"
 msgstr "Användarenamn"
 
+#, fuzzy
+#~ msgid ""
+#~ "Your project registration for %4$s has been approved.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Your DNS will take up to a day to become active on our site.\n"
+#~ "Your web site is accessible through your shell account. Please read\n"
+#~ "site documentation (see link below) about intended usage, available\n"
+#~ "services, and directory layout of the account.\n"
+#~ "\n"
+#~ "If you visit your\n"
+#~ "own project page in %4$s while logged in, you will find\n"
+#~ "additional menu functions to your left labeled 'Project Admin'.\n"
+#~ "\n"
+#~ "We highly suggest that you now visit %4$s and create a public\n"
+#~ "description for your project. This can be done by visiting your project\n"
+#~ "page while logged in, and selecting 'Project Admin' from the menus\n"
+#~ "on the left (or by visiting %3$s\n"
+#~ "after login).\n"
+#~ "\n"
+#~ "Your project will also not appear in the Trove Software Map (primary\n"
+#~ "list of projects hosted on %4$s which offers great flexibility in\n"
+#~ "browsing and search) until you categorize it in the project "
+#~ "administration\n"
+#~ "screens. So that people can find your project, you should do this now.\n"
+#~ "Visit your project while logged in, and select 'Project Admin' from the\n"
+#~ "menus on the left.\n"
+#~ "\n"
+#~ "Enjoy the system, and please tell others about %4$s. Let us know\n"
+#~ "if there is anything we can do to help you.\n"
+#~ "\n"
+#~ "-- the %4$s crew"
+#~ msgstr ""
+#~ "Din projektregistrering hos %7$s har blivit godkänd.\n"
+#~ "\n"
+#~ "Projekt, fulltnamn:  %1$s\n"
+#~ "Projekt, Unixnamn:  %2$s\n"
+#~ "CVSserver:         cvs.%2$s.%3$s\n"
+#~ "Shell/Webbserver:   %2$s.%3$s\n"
+#~ "\n"
+#~ "Din DNS kommera att behöva upp till en dag för att bli aktiv på vår "
+#~ "webbplats.\n"
+#~ "Medan du väntar på att din DNS skall bli klar, så kan du försöka koppla "
+#~ "in till \n"
+#~ "%4$s och peka CVS till %5$s\n"
+#~ "\n"
+#~ "Om ditt skal/CVS konto fortfarande inte fungerar efter sex timmar, var "
+#~ "vänlig\n"
+#~ "öppna en supportfråga så att vi kan titta på problemet.\n"
+#~ "Notera att alla skal/CVS konton är stängda för telnet och endast\n"
+#~ "fungerar med SSH1.\n"
+#~ "\n"
+#~ "Din webbplats är tillgänglig genom ditt skalkonto. Var vänlig läs i\n"
+#~ "webbplatsdokumentationen (se länk nedan) om hur den är tänkt att "
+#~ "användas, tillgängliga\n"
+#~ "tjänster, och katalogstruktur för kontot.\n"
+#~ "\n"
+#~ "Var vänlig att ta dig tid att läsa webbplatsdokumentationen om projekt\n"
+#~ "administration (http://%3$s/docs/site/). Om du besöker din\n"
+#~ "egen projektsida i %7$s medan du är inloggad,så hittar du\n"
+#~ "ytterligare menyfunktioner till vänster, rubricerade 'Projekt admin'.\n"
+#~ "\n"
+#~ "Vi rekommenderar varmt att du nu besöker %7$s och skapar en offentlig\n"
+#~ "beskrivning på ditt projekt. Detta kan göras genom att besöka din "
+#~ "projektsida\n"
+#~ " medan du är inloggad, och välja 'Projekt admin' från menyn\n"
+#~ "till vänster (eller genom att besöka http://%3$s/project/admin/?group_id="
+#~ "%6$s\n"
+#~ "efter inloggning).\n"
+#~ "\n"
+#~ "Ditt projekt kommer inte heller att synas i resurskartan (huvud\n"
+#~ "listan för projekt på värden %7$s. Det ger stor flexibilitet vid\n"
+#~ "bläddring och sökning) innan du kategoriserat det i "
+#~ "projektadministrations\n"
+#~ "skärmen. För att folk skall kunna hitta ditt projekt, bör du göra detta "
+#~ "nu.\n"
+#~ "Besök ditt projekt medan du är inloggad, och välj 'Projekt admin' från \n"
+#~ "menyn till vänster.\n"
+#~ "\n"
+#~ "Dra nytta av systemet, och snälla berätta för andra om %7$s. Låt oss få "
+#~ "veta\n"
+#~ "om det finns något vi kan göra för att hjälpa dig.\n"
+#~ "\n"
+#~ "-- %7$s-personalen"
+
+#~ msgid "%1$s Project Approved"
+#~ msgstr "%1$s projekt godkänt"
+
+#~ msgid ""
+#~ "Your project registration for %3$s has been denied.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Reasons for negative decision:\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Din projektregistrering för %3$s har blivit avslagen.\n"
+#~ "\n"
+#~ "Projekt, fullt namn:  %1$s\n"
+#~ "Projekt, unixnamn:  %2$s\n"
+#~ "\n"
+#~ "Skäl för avslag:\n"
+#~ "\n"
+
+#~ msgid "%1$s Project Denied"
+#~ msgstr "%1$s projekt avslaget"
+
+#, fuzzy
+#~ msgid ""
+#~ "New %1$s Project Submitted\n"
+#~ "\n"
+#~ "Project Full Name:  %2$s\n"
+#~ "Submitted Description: %3$s\n"
+#~ msgstr ""
+#~ "Nytt %1$s projekt Inlämnat\n"
+#~ "\n"
+#~ "Projekt, fullständigt namn:  %2$s\n"
+#~ "Inlämnad beskrivning: %3$s\n"
+#~ "Lisence: %4$s\n"
+#~ "\n"
+#~ "Var vänlig besök följande URL för att godkänna eller avslå detta "
+#~ "projekt:\n"
+#~ "%5$s"
+
+#, fuzzy
+#~ msgid "Submitter: %1$s (%2$s)\n"
+#~ msgstr "Inlämnad av"
+
+#~ msgid "New %1$s Project Submitted"
+#~ msgstr "Nytt %1$s projekt inlämnat"
+
 #~ msgid "I'm Sure"
 #~ msgstr "Jag är säker"
 
@@ -24032,67 +24107,6 @@ msgstr "Användarenamn"
 #~ msgstr ""
 #~ "Filnamn får bara innehålla alfanumeriska värden samt “-”, “_”, “+”, “.”, "
 #~ "“~”."
-
-#~ msgid "Your project registration for %s has been approved."
-#~ msgstr "Din projektregistrering hos %s har blivit godkänd."
-
-#~ msgid "Project Full Name"
-#~ msgstr "Projekt, fullt namn"
-
-#~ msgid ""
-#~ "We highly suggest that you now visit %1$s and create a public description "
-#~ "for your project. This can be done by visiting your project page while "
-#~ "logged in, and selecting “Project Admin” from the menus on the left (or "
-#~ "by visiting %2$s after login)."
-#~ msgstr ""
-#~ "Vi rekommenderar varmt att du nu besöker %1$s och skapar en offentlig "
-#~ "beskrivning på ditt projekt. Detta kan göras genom att besöka din "
-#~ "projektsida  medan du är inloggad, och välja 'Projekt admin' från menyn "
-#~ "till vänster (eller genom att besöka %2$s efter inloggning)."
-
-#~ msgid ""
-#~ "Your project will also not appear in the Trove Software Map (primary list "
-#~ "of projects hosted on %s which offers great flexibility in browsing and "
-#~ "search) until you categorize it in the project administration screens. So "
-#~ "that people can find your project, you should do this now. Visit your "
-#~ "project while logged in, and select “Project Admin” from the menus on the "
-#~ "left."
-#~ msgstr ""
-#~ "Ditt projekt kommer inte heller att synas i resurskartan (huvud listan "
-#~ "för projekt på värden %s. Det ger stor flexibilitet vid bläddring och "
-#~ "sökning) innan du kategoriserat det i projektadministrations skärmen. För "
-#~ "att folk skall kunna hitta ditt projekt, bör du göra detta nu. Besök ditt "
-#~ "projekt medan du är inloggad, och välj 'Projekt admin' från  menyn till "
-#~ "vänster."
-
-#~ msgid ""
-#~ "Enjoy the system, and please tell others about %s. Let us know if there "
-#~ "is anything we can do to help you."
-#~ msgstr ""
-#~ "Dra nytta av systemet, och snälla berätta för andra om %s. Låt oss få "
-#~ "veta om det finns något vi kan göra för att hjälpa dig."
-
-#~ msgid "%s Project Approved"
-#~ msgstr "%s projekt godkänt"
-
-#~ msgid "Your project registration for %s has been denied."
-#~ msgstr "Din projektregistrering för %s har blivit avslagen."
-
-#~ msgid "Reasons for negative decision"
-#~ msgstr "Skäl för avslag"
-
-#~ msgid "%s Project Denied"
-#~ msgstr "%s projekt avslaget"
-
-#~ msgid "New %s Project Submitted"
-#~ msgstr "Nytt %s projekt inlämnat"
-
-#~ msgid "Submitted Description"
-#~ msgstr "Inlämnad beskrivning"
-
-#~ msgid "Please visit the following URL to approve or reject this project"
-#~ msgstr ""
-#~ "Var vänlig besök följande URL för att godkänna eller avslå detta projekt"
 
 #~ msgid "Enjoy the site."
 #~ msgstr "Ha trevligt på webbplatsen."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-10 15:04+0200\n"
+"POT-Creation-Date: 2013-09-10 15:40+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -419,7 +419,13 @@ msgstr "Project"
 #: common/forum/Forum.class.php:641 common/forum/Forum.class.php:649
 #: common/forum/Forum.class.php:665 common/forum/ForumHTML.class.php:73
 #: common/forum/ForumHTML.class.php:211 common/include/Error.class.php:207
-#: common/include/exit.php:80 common/include/User.class.php:353
+#: common/include/exit.php:80 common/include/Group.class.php:2543
+#: common/include/Group.class.php:2544 common/include/Group.class.php:2602
+#: common/include/Group.class.php:2603 common/include/Group.class.php:2604
+#: common/include/Group.class.php:2656 common/include/Group.class.php:2657
+#: common/include/Group.class.php:2658 common/include/Group.class.php:2659
+#: common/include/Group.class.php:2669 common/include/Group.class.php:2670
+#: common/include/User.class.php:353
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:406
 #: common/tracker/actions/browse.php:409 common/tracker/actions/mod.php:147
@@ -515,8 +521,8 @@ msgstr "Omschrijving:"
 
 #: common/docman/Document.class.php:945
 #: common/docman/DocumentGroup.class.php:725
-#: common/tracker/actions/browse.php:201 common/tracker/actions/query.php:203
-#: common/tracker/actions/query.php:350
+#: common/include/Group.class.php:2658 common/tracker/actions/browse.php:201
+#: common/tracker/actions/query.php:203 common/tracker/actions/query.php:350
 msgid "Submitter"
 msgstr "Indiener"
 
@@ -3240,214 +3246,165 @@ msgstr "Account is reeds actief."
 msgid "Approved"
 msgstr "Goedgekeurd"
 
-#: common/include/Group.class.php:2533 common/include/Group.class.php:2603
+#: common/include/Group.class.php:2533 common/include/Group.class.php:2594
 msgid "Group does not have any administrators."
 msgstr ""
 
 #: common/include/Group.class.php:2541
-#, fuzzy, php-format
+#, php-format
+msgid "Your project registration for %s has been approved."
+msgstr "Je project aanvraag voor %s is goedgekeurd."
+
+#: common/include/Group.class.php:2543 common/include/Group.class.php:2602
+#: common/include/Group.class.php:2656 common/include/Group.class.php:2669
+msgid "Project Full Name"
+msgstr "Volledige project naam"
+
+#: common/include/Group.class.php:2544 common/include/Group.class.php:2603
+#: www/admin/approve-pending.php:194 www/admin/database.php:162
+#: www/admin/groupedit.php:171 www/admin/vhost.php:123
+#: www/register/index.php:204
+msgid "Project Unix Name"
+msgstr "Unix project naam"
+
+#: common/include/Group.class.php:2546
+#, php-format
 msgid ""
-"Your project registration for %4$s has been approved.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Your DNS will take up to a day to become active on our site.\n"
-"Your web site is accessible through your shell account. Please read\n"
-"site documentation (see link below) about intended usage, available\n"
-"services, and directory layout of the account.\n"
-"\n"
-"If you visit your\n"
-"own project page in %4$s while logged in, you will find\n"
-"additional menu functions to your left labeled 'Project Admin'.\n"
-"\n"
-"We highly suggest that you now visit %4$s and create a public\n"
-"description for your project. This can be done by visiting your project\n"
-"page while logged in, and selecting 'Project Admin' from the menus\n"
-"on the left (or by visiting %3$s\n"
-"after login).\n"
-"\n"
-"Your project will also not appear in the Trove Software Map (primary\n"
-"list of projects hosted on %4$s which offers great flexibility in\n"
-"browsing and search) until you categorize it in the project administration\n"
-"screens. So that people can find your project, you should do this now.\n"
-"Visit your project while logged in, and select 'Project Admin' from the\n"
-"menus on the left.\n"
-"\n"
-"Enjoy the system, and please tell others about %4$s. Let us know\n"
-"if there is anything we can do to help you.\n"
-"\n"
-"-- the %4$s crew"
+"If you visit your own project page in %s while logged in, you will find "
+"additional menu functions to your left labeled “Project Admin”."
 msgstr ""
-"Je project aanvraag voor %7$s is goedgekeurd.\n"
-"\n"
-"Volledige projectnaam:  %1$s\n"
-"Unix project naam:  %2$s\n"
-"CVS server:         cvs.%2$s.%3$s\n"
-"Shell/Web server:   %2$s.%3$s\n"
-"\n"
-"Het duurt ongeveer een dag tot het DNS deze wijzigingen heeft doorgevoerd.\n"
-"Terwijl je wacht op de DNS toevoeging, kun je een shell login proberen op \n"
-"%4$s en met CVS naar %5$s gaan.\n"
-"\n"
-"Neem contact op met de beheerders als je shell/CVS accounts na een uur of 6 "
-"nog niet werken.\n"
-"Alle shell/CVS accounts zijn dichtgezet voor telnet en werken alleen met "
-"SSH2.\n"
-"\n"
-"Je web site is toegankelijk via je shell account. Lees de site documentatie "
-"(link hieronder) m.b.t. beoogd gebruik, beschikbare diensten, en directory "
-"structuur van het account.\n"
-"\n"
-"Neem ook wat tijd om de site documentatie m.b.t. project beheer te lezen "
-"(http://%3$s/docs/site/). Als je je eigen project pagina bezoekt in %7$s "
-"terwijl je ingelogd bent, vind je links aanvullende menu functies onder "
-"&#039;Project beheer&#039;.\n"
-"\n"
-"We adviseren dringend om %7$s te bezoeken en een algemene "
+
+#: common/include/Group.class.php:2550
+#, php-format
+msgid ""
+"We highly suggest that you now visit %1$s and create a public description "
+"for your project. This can be done by visiting your project page while "
+"logged in, and selecting “Project Admin” from the menus on the left (or by "
+"visiting %2$s after login)."
+msgstr ""
+"We adviseren dringend om %1$s te bezoeken en een algemene "
 "projectbeschrijving te geven. Dit kan ofwel door je project pagina te "
-"bezoeken terwijl je ingelogd bent, en &#039;Project beheer&#039; te keizen "
-"in het menu aan de linkerkant, ofwel door naar http://%3$s/project/admin/?"
-"group_id=%6$s , na login.\n"
-"\n"
-"Je project zal niet in het Trove overzicht verschijnen (een lijst van "
-"projecten op %7$s om makkelijk rond te kijken en te zoeken) zolang je het "
-"niet categorizeert in de project beheer schermen. Doe het meteen zodat de "
-"mensen je project ook kunnen vinden.\n"
-"\n"
-"Veel plezier met dit systeem en vertel ook anderen over %7$s. Laat het ons "
-"weten als we ergens mee kunnen helpen.\n"
-"\n"
-"-- het %7$s team"
+"bezoeken terwijl je ingelogd bent, en 'Project beheer' te keizen in het menu "
+"aan de linkerkant, ofwel door naar %2$s , na login."
 
-#: common/include/Group.class.php:2577
-#, php-format
-msgid "%1$s Project Approved"
-msgstr "%1$s project goedgekeurd"
-
-#: common/include/Group.class.php:2610
+#: common/include/Group.class.php:2556
 #, php-format
 msgid ""
-"Your project registration for %3$s has been denied.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Reasons for negative decision:\n"
-"\n"
+"Your project will also not appear in the Trove Software Map (primary list of "
+"projects hosted on %s which offers great flexibility in browsing and search) "
+"until you categorize it in the project administration screens. So that "
+"people can find your project, you should do this now. Visit your project "
+"while logged in, and select “Project Admin” from the menus on the left."
 msgstr ""
-"Je project aanvraag voor %3$s is afgewezen.\n"
-"\n"
-"Volledige project naam:  %1$s\n"
-"Unix project naam:  %2$s\n"
-"\n"
-"Reden van afwijzing:\n"
-"\n"
+"Je project zal niet in het Trove overzicht verschijnen (een lijst van "
+"projecten op %s om makkelijk rond te kijken en te zoeken) zolang je het niet "
+"categorizeert in de project beheer schermen. Doe het meteen zodat de mensen "
+"je project ook kunnen vinden."
 
-#: common/include/Group.class.php:2629
+#: common/include/Group.class.php:2563
 #, php-format
-msgid "%1$s Project Denied"
-msgstr "%1$s Project afgewezen"
+msgid ""
+"Enjoy the system, and please tell others about %s. Let us know if there is "
+"anything we can do to help you."
+msgstr ""
+"Veel plezier met dit systeem en vertel ook anderen over %s. Laat het ons "
+"weten als we ergens mee kunnen helpen."
 
-#: common/include/Group.class.php:2653
+#: common/include/Group.class.php:2566 common/mail/MailingList.class.php:205
+#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
+#: www/account/first.php:36 www/account/lostpw.php:68
+#: www/survey/privacy.php:58 www/survey/survey_resp.php:61
+#, php-format
+msgid "-- the %s staff"
+msgstr "Het %s team"
+
+#: common/include/Group.class.php:2568
+#, php-format
+msgid "%s Project Approved"
+msgstr "%s project goedgekeurd"
+
+#: common/include/Group.class.php:2601
+#, php-format
+msgid "Your project registration for %s has been denied."
+msgstr "Je project aanvraag voor %s is afgewezen."
+
+#: common/include/Group.class.php:2604
+msgid "Reasons for negative decision"
+msgstr "Reden van afwijzing"
+
+#: common/include/Group.class.php:2616
+#, php-format
+msgid "%s Project Denied"
+msgstr "%s Project afgewezen"
+
+#: common/include/Group.class.php:2640
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2660
+#: common/include/Group.class.php:2647
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2668
-#, fuzzy, php-format
-msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-msgstr ""
-"Nieuw %1$s project ingediend\n"
-"\n"
-"Volledige project naam:  %2$s\n"
-"Ingediende omschrijving: %3$s\n"
-"Licentie: %4$s\n"
-"\n"
-"Volg deze URL om de aanvraag goed of af te keuren:\n"
-"%5$s"
+#: common/include/Group.class.php:2655 common/include/Group.class.php:2661
+#: common/include/Group.class.php:2668 common/include/Group.class.php:2674
+#, php-format
+msgid "New %s Project Submitted"
+msgstr "Nieuw %s project ingediend"
 
-#: common/include/Group.class.php:2678
-#, fuzzy, php-format
-msgid "Submitter: %1$s (%2$s)\n"
-msgstr "Ingediend door"
+#: common/include/Group.class.php:2657 common/include/Group.class.php:2670
+msgid "Submitted Description"
+msgstr "Ingediende beschrijving"
 
-#: common/include/Group.class.php:2684
+#: common/include/Group.class.php:2659
+#, fuzzy
+msgid "Please visit the following URL to approve or reject this project"
+msgstr "Kies het volgende URL om de wijzging van je e-mail adres te voltooien:"
+
+#: common/include/Group.class.php:2671
 #, php-format
 msgid ""
-"\n"
-"Please visit the following URL to approve or reject this project:\n"
-"%1$s"
-msgstr ""
-
-#: common/include/Group.class.php:2688 common/include/Group.class.php:2703
-#, php-format
-msgid "New %1$s Project Submitted"
-msgstr "Nieuw %1$s project ingediend"
-
-#: common/include/Group.class.php:2696
-#, fuzzy, php-format
-msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-"\n"
-"The %1$s admin team will now examine your project submission.  You will be "
+"The %s admin team will now examine your project submission. You will be "
 "notified of their decision."
 msgstr ""
-"Nieuw %1$s project ingediend\n"
-"\n"
-"Volledige project naam:  %2$s\n"
-"Ingediende omschrijving: %3$s\n"
-"Licentie: %4$s\n"
-"\n"
-"De %1$s beheerder zal de projectaanvraag nu beoordelen. Je ontvangt bericht "
+"De %s beheerder zal de projectaanvraag nu beoordelen. Je ontvangt bericht "
 "krijgen over de beslissing."
 
-#: common/include/Group.class.php:2718
+#: common/include/Group.class.php:2689
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Vraag is te kort"
 
-#: common/include/Group.class.php:2721
+#: common/include/Group.class.php:2692
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Groepsnaam (klik om te wijzigen)"
 
-#: common/include/Group.class.php:2724
+#: common/include/Group.class.php:2695
 #, fuzzy
 msgid "Group name already taken"
 msgstr "Unixnaam is al in gebruik"
 
-#: common/include/Group.class.php:2806
+#: common/include/Group.class.php:2777
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2869
+#: common/include/Group.class.php:2840
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2887
+#: common/include/Group.class.php:2858
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2905
+#: common/include/Group.class.php:2876
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2923
+#: common/include/Group.class.php:2894
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
@@ -4549,14 +4506,6 @@ msgstr ""
 "Verander dit wachtwoord zo snel mogelijk.\n"
 "\n"
 "Bedankt voor het aanmelden van je project bij %1$s."
-
-#: common/mail/MailingList.class.php:205
-#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
-#: www/account/first.php:36 www/account/lostpw.php:68
-#: www/survey/privacy.php:58 www/survey/survey_resp.php:61
-#, php-format
-msgid "-- the %s staff"
-msgstr "Het %s team"
 
 #: common/mail/MailingList.class.php:208
 #: plugins/mailman/www/mailman_utils.php:38
@@ -15560,12 +15509,6 @@ msgstr "Home box:"
 msgid "HTTP Domain:"
 msgstr "HTTP Domein:"
 
-#: www/admin/approve-pending.php:194 www/admin/database.php:162
-#: www/admin/groupedit.php:171 www/admin/vhost.php:123
-#: www/register/index.php:204
-msgid "Project Unix Name"
-msgstr "Unix project naam"
-
 #: www/admin/approve-pending.php:196
 msgid "Submitted Description:"
 msgstr "Ingediende beschrijving:"
@@ -23804,6 +23747,149 @@ msgstr "Alles bijwerken"
 msgid "No User Name Provided"
 msgstr "Gebruikersnaam"
 
+#, fuzzy
+#~ msgid ""
+#~ "Your project registration for %4$s has been approved.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Your DNS will take up to a day to become active on our site.\n"
+#~ "Your web site is accessible through your shell account. Please read\n"
+#~ "site documentation (see link below) about intended usage, available\n"
+#~ "services, and directory layout of the account.\n"
+#~ "\n"
+#~ "If you visit your\n"
+#~ "own project page in %4$s while logged in, you will find\n"
+#~ "additional menu functions to your left labeled 'Project Admin'.\n"
+#~ "\n"
+#~ "We highly suggest that you now visit %4$s and create a public\n"
+#~ "description for your project. This can be done by visiting your project\n"
+#~ "page while logged in, and selecting 'Project Admin' from the menus\n"
+#~ "on the left (or by visiting %3$s\n"
+#~ "after login).\n"
+#~ "\n"
+#~ "Your project will also not appear in the Trove Software Map (primary\n"
+#~ "list of projects hosted on %4$s which offers great flexibility in\n"
+#~ "browsing and search) until you categorize it in the project "
+#~ "administration\n"
+#~ "screens. So that people can find your project, you should do this now.\n"
+#~ "Visit your project while logged in, and select 'Project Admin' from the\n"
+#~ "menus on the left.\n"
+#~ "\n"
+#~ "Enjoy the system, and please tell others about %4$s. Let us know\n"
+#~ "if there is anything we can do to help you.\n"
+#~ "\n"
+#~ "-- the %4$s crew"
+#~ msgstr ""
+#~ "Je project aanvraag voor %7$s is goedgekeurd.\n"
+#~ "\n"
+#~ "Volledige projectnaam:  %1$s\n"
+#~ "Unix project naam:  %2$s\n"
+#~ "CVS server:         cvs.%2$s.%3$s\n"
+#~ "Shell/Web server:   %2$s.%3$s\n"
+#~ "\n"
+#~ "Het duurt ongeveer een dag tot het DNS deze wijzigingen heeft "
+#~ "doorgevoerd.\n"
+#~ "Terwijl je wacht op de DNS toevoeging, kun je een shell login proberen "
+#~ "op \n"
+#~ "%4$s en met CVS naar %5$s gaan.\n"
+#~ "\n"
+#~ "Neem contact op met de beheerders als je shell/CVS accounts na een uur of "
+#~ "6 nog niet werken.\n"
+#~ "Alle shell/CVS accounts zijn dichtgezet voor telnet en werken alleen met "
+#~ "SSH2.\n"
+#~ "\n"
+#~ "Je web site is toegankelijk via je shell account. Lees de site "
+#~ "documentatie (link hieronder) m.b.t. beoogd gebruik, beschikbare "
+#~ "diensten, en directory structuur van het account.\n"
+#~ "\n"
+#~ "Neem ook wat tijd om de site documentatie m.b.t. project beheer te lezen "
+#~ "(http://%3$s/docs/site/). Als je je eigen project pagina bezoekt in %7$s "
+#~ "terwijl je ingelogd bent, vind je links aanvullende menu functies onder "
+#~ "&#039;Project beheer&#039;.\n"
+#~ "\n"
+#~ "We adviseren dringend om %7$s te bezoeken en een algemene "
+#~ "projectbeschrijving te geven. Dit kan ofwel door je project pagina te "
+#~ "bezoeken terwijl je ingelogd bent, en &#039;Project beheer&#039; te "
+#~ "keizen in het menu aan de linkerkant, ofwel door naar http://%3$s/project/"
+#~ "admin/?group_id=%6$s , na login.\n"
+#~ "\n"
+#~ "Je project zal niet in het Trove overzicht verschijnen (een lijst van "
+#~ "projecten op %7$s om makkelijk rond te kijken en te zoeken) zolang je het "
+#~ "niet categorizeert in de project beheer schermen. Doe het meteen zodat de "
+#~ "mensen je project ook kunnen vinden.\n"
+#~ "\n"
+#~ "Veel plezier met dit systeem en vertel ook anderen over %7$s. Laat het "
+#~ "ons weten als we ergens mee kunnen helpen.\n"
+#~ "\n"
+#~ "-- het %7$s team"
+
+#~ msgid "%1$s Project Approved"
+#~ msgstr "%1$s project goedgekeurd"
+
+#~ msgid ""
+#~ "Your project registration for %3$s has been denied.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Reasons for negative decision:\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Je project aanvraag voor %3$s is afgewezen.\n"
+#~ "\n"
+#~ "Volledige project naam:  %1$s\n"
+#~ "Unix project naam:  %2$s\n"
+#~ "\n"
+#~ "Reden van afwijzing:\n"
+#~ "\n"
+
+#~ msgid "%1$s Project Denied"
+#~ msgstr "%1$s Project afgewezen"
+
+#, fuzzy
+#~ msgid ""
+#~ "New %1$s Project Submitted\n"
+#~ "\n"
+#~ "Project Full Name:  %2$s\n"
+#~ "Submitted Description: %3$s\n"
+#~ msgstr ""
+#~ "Nieuw %1$s project ingediend\n"
+#~ "\n"
+#~ "Volledige project naam:  %2$s\n"
+#~ "Ingediende omschrijving: %3$s\n"
+#~ "Licentie: %4$s\n"
+#~ "\n"
+#~ "Volg deze URL om de aanvraag goed of af te keuren:\n"
+#~ "%5$s"
+
+#, fuzzy
+#~ msgid "Submitter: %1$s (%2$s)\n"
+#~ msgstr "Ingediend door"
+
+#~ msgid "New %1$s Project Submitted"
+#~ msgstr "Nieuw %1$s project ingediend"
+
+#, fuzzy
+#~ msgid ""
+#~ "New %1$s Project Submitted\n"
+#~ "\n"
+#~ "Project Full Name:  %2$s\n"
+#~ "Submitted Description: %3$s\n"
+#~ "\n"
+#~ "The %1$s admin team will now examine your project submission.  You will "
+#~ "be notified of their decision."
+#~ msgstr ""
+#~ "Nieuw %1$s project ingediend\n"
+#~ "\n"
+#~ "Volledige project naam:  %2$s\n"
+#~ "Ingediende omschrijving: %3$s\n"
+#~ "Licentie: %4$s\n"
+#~ "\n"
+#~ "De %1$s beheerder zal de projectaanvraag nu beoordelen. Je ontvangt "
+#~ "bericht krijgen over de beslissing."
+
 #~ msgid "I'm Sure"
 #~ msgstr "Ja, zeker weten!"
 
@@ -24500,68 +24586,6 @@ msgstr "Gebruikersnaam"
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "Berichttekst en -onderwerp verplicht"
-
-#~ msgid "Your project registration for %s has been approved."
-#~ msgstr "Je project aanvraag voor %s is goedgekeurd."
-
-#~ msgid "Project Full Name"
-#~ msgstr "Volledige project naam"
-
-#~ msgid ""
-#~ "We highly suggest that you now visit %1$s and create a public description "
-#~ "for your project. This can be done by visiting your project page while "
-#~ "logged in, and selecting “Project Admin” from the menus on the left (or "
-#~ "by visiting %2$s after login)."
-#~ msgstr ""
-#~ "We adviseren dringend om %1$s te bezoeken en een algemene "
-#~ "projectbeschrijving te geven. Dit kan ofwel door je project pagina te "
-#~ "bezoeken terwijl je ingelogd bent, en 'Project beheer' te keizen in het "
-#~ "menu aan de linkerkant, ofwel door naar %2$s , na login."
-
-#~ msgid ""
-#~ "Your project will also not appear in the Trove Software Map (primary list "
-#~ "of projects hosted on %s which offers great flexibility in browsing and "
-#~ "search) until you categorize it in the project administration screens. So "
-#~ "that people can find your project, you should do this now. Visit your "
-#~ "project while logged in, and select “Project Admin” from the menus on the "
-#~ "left."
-#~ msgstr ""
-#~ "Je project zal niet in het Trove overzicht verschijnen (een lijst van "
-#~ "projecten op %s om makkelijk rond te kijken en te zoeken) zolang je het "
-#~ "niet categorizeert in de project beheer schermen. Doe het meteen zodat de "
-#~ "mensen je project ook kunnen vinden."
-
-#~ msgid ""
-#~ "Enjoy the system, and please tell others about %s. Let us know if there "
-#~ "is anything we can do to help you."
-#~ msgstr ""
-#~ "Veel plezier met dit systeem en vertel ook anderen over %s. Laat het ons "
-#~ "weten als we ergens mee kunnen helpen."
-
-#~ msgid "%s Project Approved"
-#~ msgstr "%s project goedgekeurd"
-
-#~ msgid "Your project registration for %s has been denied."
-#~ msgstr "Je project aanvraag voor %s is afgewezen."
-
-#~ msgid "Reasons for negative decision"
-#~ msgstr "Reden van afwijzing"
-
-#~ msgid "%s Project Denied"
-#~ msgstr "%s Project afgewezen"
-
-#~ msgid "New %s Project Submitted"
-#~ msgstr "Nieuw %s project ingediend"
-
-#~ msgid "Submitted Description"
-#~ msgstr "Ingediende beschrijving"
-
-#~ msgid ""
-#~ "The %s admin team will now examine your project submission. You will be "
-#~ "notified of their decision."
-#~ msgstr ""
-#~ "De %s beheerder zal de projectaanvraag nu beoordelen. Je ontvangt bericht "
-#~ "krijgen over de beslissing."
 
 #~ msgid "Enjoy the site."
 #~ msgstr "Veel plezier."

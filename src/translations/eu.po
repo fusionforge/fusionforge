@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-10 15:04+0200\n"
+"POT-Creation-Date: 2013-09-10 15:40+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -420,7 +420,13 @@ msgstr ""
 #: common/forum/Forum.class.php:641 common/forum/Forum.class.php:649
 #: common/forum/Forum.class.php:665 common/forum/ForumHTML.class.php:73
 #: common/forum/ForumHTML.class.php:211 common/include/Error.class.php:207
-#: common/include/exit.php:80 common/include/User.class.php:353
+#: common/include/exit.php:80 common/include/Group.class.php:2543
+#: common/include/Group.class.php:2544 common/include/Group.class.php:2602
+#: common/include/Group.class.php:2603 common/include/Group.class.php:2604
+#: common/include/Group.class.php:2656 common/include/Group.class.php:2657
+#: common/include/Group.class.php:2658 common/include/Group.class.php:2659
+#: common/include/Group.class.php:2669 common/include/Group.class.php:2670
+#: common/include/User.class.php:353
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:406
 #: common/tracker/actions/browse.php:409 common/tracker/actions/mod.php:147
@@ -516,8 +522,8 @@ msgstr "Deskribapena:"
 
 #: common/docman/Document.class.php:945
 #: common/docman/DocumentGroup.class.php:725
-#: common/tracker/actions/browse.php:201 common/tracker/actions/query.php:203
-#: common/tracker/actions/query.php:350
+#: common/include/Group.class.php:2658 common/tracker/actions/browse.php:201
+#: common/tracker/actions/query.php:203 common/tracker/actions/query.php:350
 msgid "Submitter"
 msgstr "Nork bidalia"
 
@@ -3231,221 +3237,160 @@ msgstr "Taldea dagoeneko aktibo dago"
 msgid "Approved"
 msgstr "Onartu"
 
-#: common/include/Group.class.php:2533 common/include/Group.class.php:2603
+#: common/include/Group.class.php:2533 common/include/Group.class.php:2594
 msgid "Group does not have any administrators."
 msgstr "Taldeak ez du administratzailerik."
 
 #: common/include/Group.class.php:2541
-#, fuzzy, php-format
-msgid ""
-"Your project registration for %4$s has been approved.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Your DNS will take up to a day to become active on our site.\n"
-"Your web site is accessible through your shell account. Please read\n"
-"site documentation (see link below) about intended usage, available\n"
-"services, and directory layout of the account.\n"
-"\n"
-"If you visit your\n"
-"own project page in %4$s while logged in, you will find\n"
-"additional menu functions to your left labeled 'Project Admin'.\n"
-"\n"
-"We highly suggest that you now visit %4$s and create a public\n"
-"description for your project. This can be done by visiting your project\n"
-"page while logged in, and selecting 'Project Admin' from the menus\n"
-"on the left (or by visiting %3$s\n"
-"after login).\n"
-"\n"
-"Your project will also not appear in the Trove Software Map (primary\n"
-"list of projects hosted on %4$s which offers great flexibility in\n"
-"browsing and search) until you categorize it in the project administration\n"
-"screens. So that people can find your project, you should do this now.\n"
-"Visit your project while logged in, and select 'Project Admin' from the\n"
-"menus on the left.\n"
-"\n"
-"Enjoy the system, and please tell others about %4$s. Let us know\n"
-"if there is anything we can do to help you.\n"
-"\n"
-"-- the %4$s crew"
-msgstr ""
-"Zure proiektua %7$s -n onartua izan da.\n"
-"\n"
-"Proiektuaren izen osoa:  %1$s\n"
-"Unix proiektuaren izena:  %2$s\n"
-"CVS-n zerbitzaria: cvs.%2$s.%3$s\n"
-"Shell/Web zerbitzaria: %2$s.%3$s\n"
-"\n"
-"Zure DNS domeinua aktibatzeko egun bat baino gehiago beharko du .\n"
-"Zure DNS izena aktibatzen den bitartean %4$s -era sartzeko ahalegina\n"
-"egin zenezake eta zure CVS -a apuntatu %5$s -era\n"
-"\n"
-". Sei ordu barru zure Shell/CVS kontua ez badabil, mesedez\n"
-"laguntza eskaera egin ezazu arazoaren jatorria jakiteko.\n"
-"Gogoratu kontu guztiak itxiak daudela 'telnet' -entzako eta bakarrik 'ssh'-"
-"rekin\n"
-"ibiliko dela.\n"
-"\n"
-" Zure webgunera sarbidea 'shell' kontu honen bitartez bakarrik egin daiteke. "
-"Mesedez, dokumentazio hau irakurri (beherako loturan ikusi) proposatutako "
-"erabilpena,\n"
-"zerbitzu erabilgarriak, eta zure kontuko direktorioen distribuzioari buruz.\n"
-"\n"
-"Mesedez, har ezazu atari honetako proiektuen administrazioari buruzko "
-"dokumentazioa irakurtzeko beta. (http://%3$s/docs/site/). Zure webgunea "
-"bisitatzen baduzu\n"
-" izenpetua zauden bitartean %3$s funtzio\n"
-"gehigarriak bilatuko dituzu menuan izenburu honekin:'Proiektuen "
-"administrazioa'.\n"
-"\n"
-"Biziki aholkatzen dizugu %3$s orria bisitatzea orain eta zure proiektuaren\n"
-"deskribapen publikoa sortzea. Hau egiteko zure proiektuko webgunea\n"
-" bisitatu izenpetua zauden bitartean, eta ezkerreko menutik "
-"'Administrazioa'sakatu (edo http://%3$s/project/admin/?group_id=%6$s\n"
-"izenpetu ondoren).\n"
-"\n"
-"Zure proiektua ez da oraindik proiektuen mapan azalduko \n"
-"(%3$s -n ostatu jasotzen duten proiektuen zerrenda nagusiak nabigazio eta "
-"bilaketa \n"
-"malgua eskeintzen du) proiektuen administrazio pantailan sailkatu arte.\n"
-" Erabiltzaileek zure proiektua bilatu dezaten hauxe egin behar duzu orain.\n"
-"Izenpetua zauden bitartean, zure proiektua bisitatu 'Administrazioa' "
-"aukeratu menuan.\n"
-"\n"
-"Goza ezazu sistemaz eta mesedez %3$s -koei abisatu iezaiezu. Esaiguzu ere\n"
-"zu laguntzeko zer egin genezake.\n"
-"\n"
-"-- %7$s taldea"
-
-#: common/include/Group.class.php:2577
 #, php-format
-msgid "%1$s Project Approved"
-msgstr "%1$s -ek onartutako proiektua"
+msgid "Your project registration for %s has been approved."
+msgstr "Zure proiektua %s -n onartua izan da."
 
-#: common/include/Group.class.php:2610
+#: common/include/Group.class.php:2543 common/include/Group.class.php:2602
+#: common/include/Group.class.php:2656 common/include/Group.class.php:2669
+msgid "Project Full Name"
+msgstr "Egitasmoaren izen osoa"
+
+#: common/include/Group.class.php:2544 common/include/Group.class.php:2603
+#: www/admin/approve-pending.php:194 www/admin/database.php:162
+#: www/admin/groupedit.php:171 www/admin/vhost.php:123
+#: www/register/index.php:204
+msgid "Project Unix Name"
+msgstr "Egitasmoaren Unix izena"
+
+#: common/include/Group.class.php:2546
 #, php-format
 msgid ""
-"Your project registration for %3$s has been denied.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Reasons for negative decision:\n"
-"\n"
+"If you visit your own project page in %s while logged in, you will find "
+"additional menu functions to your left labeled “Project Admin”."
 msgstr ""
-"Zure egitasmoa %3$s -n erregistratzeko egin duzun eskaera ukatu da.\n"
-"\n"
-"Egitasmoaren izen osoa:  %1$s\n"
-"Egitasmoaren Unix izena:  %2$s\n"
-"\n"
-"Ukatzearen arrazoiak hauek dira:\n"
-"\n"
+"Zure webgunea bisitatzen baduzu izenpetua zauden bitartean %s "
+"funtziogehigarriak bilatuko dituzu menuan izenburu honekin:'Proiektuen "
+"administrazioa'."
 
-#: common/include/Group.class.php:2629
+#: common/include/Group.class.php:2550
 #, php-format
-msgid "%1$s Project Denied"
-msgstr "%1$s -ek egitasmoa ukatu du"
+msgid ""
+"We highly suggest that you now visit %1$s and create a public description "
+"for your project. This can be done by visiting your project page while "
+"logged in, and selecting “Project Admin” from the menus on the left (or by "
+"visiting %2$s after login)."
+msgstr ""
 
-#: common/include/Group.class.php:2653
+#: common/include/Group.class.php:2556
+#, php-format
+msgid ""
+"Your project will also not appear in the Trove Software Map (primary list of "
+"projects hosted on %s which offers great flexibility in browsing and search) "
+"until you categorize it in the project administration screens. So that "
+"people can find your project, you should do this now. Visit your project "
+"while logged in, and select “Project Admin” from the menus on the left."
+msgstr ""
+
+#: common/include/Group.class.php:2563
+#, php-format
+msgid ""
+"Enjoy the system, and please tell others about %s. Let us know if there is "
+"anything we can do to help you."
+msgstr ""
+"Goza ezazu sistemaz eta mesedez %s -koei abisatu iezaiezu. Esaiguzu ere zu "
+"laguntzeko zer egin genezake."
+
+#: common/include/Group.class.php:2566 common/mail/MailingList.class.php:205
+#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
+#: www/account/first.php:36 www/account/lostpw.php:68
+#: www/survey/privacy.php:58 www/survey/survey_resp.php:61
+#, php-format
+msgid "-- the %s staff"
+msgstr "-- %s taldea"
+
+#: common/include/Group.class.php:2568
+#, php-format
+msgid "%s Project Approved"
+msgstr "%s -ek onartutako proiektua"
+
+#: common/include/Group.class.php:2601
+#, php-format
+msgid "Your project registration for %s has been denied."
+msgstr "Zure egitasmoa %s -n erregistratzeko egin duzun eskaera ukatu da."
+
+#: common/include/Group.class.php:2604
+msgid "Reasons for negative decision"
+msgstr "Ukatzearen arrazoiak hauek dira"
+
+#: common/include/Group.class.php:2616
+#, php-format
+msgid "%s Project Denied"
+msgstr "%s -ek egitasmoa ukatu du"
+
+#: common/include/Group.class.php:2640
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2660
+#: common/include/Group.class.php:2647
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2668
-#, fuzzy, php-format
-msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-msgstr ""
-"%1$s -erako egitasmo berria erregistratu da\n"
-"\n"
-"Egitasmoaren izen osoa:  %2$s\n"
-"Jasotako deskribapena: %3$s\n"
-"Lizentzia: %4$s\n"
-"\n"
-"Mesedez, bisita ezazu helbide hau egitasmoa onartzeko ala baztertzeko:\n"
-"%5$s"
+#: common/include/Group.class.php:2655 common/include/Group.class.php:2661
+#: common/include/Group.class.php:2668 common/include/Group.class.php:2674
+#, php-format
+msgid "New %s Project Submitted"
+msgstr "%s -en egitasmoa onartzeke dago."
 
-#: common/include/Group.class.php:2678
-#, fuzzy, php-format
-msgid "Submitter: %1$s (%2$s)\n"
-msgstr "Nork bidalia"
+#: common/include/Group.class.php:2657 common/include/Group.class.php:2670
+msgid "Submitted Description"
+msgstr "Emandako deskribapena"
 
-#: common/include/Group.class.php:2684
+#: common/include/Group.class.php:2659
+#, fuzzy
+msgid "Please visit the following URL to approve or reject this project"
+msgstr "Mesedez, posta aldaketa egiteko bisita ezazu ondorengo helbidea:"
+
+#: common/include/Group.class.php:2671
 #, php-format
 msgid ""
-"\n"
-"Please visit the following URL to approve or reject this project:\n"
-"%1$s"
-msgstr ""
-
-#: common/include/Group.class.php:2688 common/include/Group.class.php:2703
-#, php-format
-msgid "New %1$s Project Submitted"
-msgstr "%1$s -en egitasmoa onartzeke dago."
-
-#: common/include/Group.class.php:2696
-#, fuzzy, php-format
-msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-"\n"
-"The %1$s admin team will now examine your project submission.  You will be "
+"The %s admin team will now examine your project submission. You will be "
 "notified of their decision."
 msgstr ""
-"%1$s -en egitasmo berri baten eskaera\n"
-"\n"
-"Egitasmoaren izen osoa: %2$s\n"
-"Bidalitako deskribapena: %3$s\n"
-"Lizentzia: %4$s\n"
-"\n"
-"%1$s administratzeko taldeak zure proposamena aztertuko du orain. "
-"Erabakiaren berri emango zaizu."
+"%s administratzeko taldeak zure proposamena aztertuko du orain. Erabakiaren "
+"berri emango zaizu."
 
-#: common/include/Group.class.php:2718
+#: common/include/Group.class.php:2689
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Galdera motzegia da"
 
-#: common/include/Group.class.php:2721
+#: common/include/Group.class.php:2692
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Taldearen izena (editatzeko sakatu)"
 
-#: common/include/Group.class.php:2724
+#: common/include/Group.class.php:2695
 #, fuzzy
 msgid "Group name already taken"
 msgstr "Unix izen hau hartua dago"
 
-#: common/include/Group.class.php:2806
+#: common/include/Group.class.php:2777
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:2869
+#: common/include/Group.class.php:2840
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:2887
+#: common/include/Group.class.php:2858
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:2905
+#: common/include/Group.class.php:2876
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:2923
+#: common/include/Group.class.php:2894
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "ERROREA: DB: Ezin dira talde baimenak aldatu: %s"
@@ -4540,14 +4485,6 @@ msgstr ""
 "Pasahitz hau lehen bait lehen aldatzea gomendatzen dizugu.\n"
 "\n"
 "Eskerrak zure proiektua %1$s -ekin erregistratzeagatik."
-
-#: common/mail/MailingList.class.php:205
-#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
-#: www/account/first.php:36 www/account/lostpw.php:68
-#: www/survey/privacy.php:58 www/survey/survey_resp.php:61
-#, php-format
-msgid "-- the %s staff"
-msgstr "-- %s taldea"
 
 #: common/mail/MailingList.class.php:208
 #: plugins/mailman/www/mailman_utils.php:38
@@ -15466,12 +15403,6 @@ msgstr "Postontzia:"
 msgid "HTTP Domain:"
 msgstr "HTTP domeinua:"
 
-#: www/admin/approve-pending.php:194 www/admin/database.php:162
-#: www/admin/groupedit.php:171 www/admin/vhost.php:123
-#: www/register/index.php:204
-msgid "Project Unix Name"
-msgstr "Egitasmoaren Unix izena"
-
 #: www/admin/approve-pending.php:196
 msgid "Submitted Description:"
 msgstr "Emandako deskribapena:"
@@ -23639,6 +23570,158 @@ msgstr "Ezin da eguneratu"
 msgid "No User Name Provided"
 msgstr "Ez da erabiltzaile-izenik eman"
 
+#, fuzzy
+#~ msgid ""
+#~ "Your project registration for %4$s has been approved.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Your DNS will take up to a day to become active on our site.\n"
+#~ "Your web site is accessible through your shell account. Please read\n"
+#~ "site documentation (see link below) about intended usage, available\n"
+#~ "services, and directory layout of the account.\n"
+#~ "\n"
+#~ "If you visit your\n"
+#~ "own project page in %4$s while logged in, you will find\n"
+#~ "additional menu functions to your left labeled 'Project Admin'.\n"
+#~ "\n"
+#~ "We highly suggest that you now visit %4$s and create a public\n"
+#~ "description for your project. This can be done by visiting your project\n"
+#~ "page while logged in, and selecting 'Project Admin' from the menus\n"
+#~ "on the left (or by visiting %3$s\n"
+#~ "after login).\n"
+#~ "\n"
+#~ "Your project will also not appear in the Trove Software Map (primary\n"
+#~ "list of projects hosted on %4$s which offers great flexibility in\n"
+#~ "browsing and search) until you categorize it in the project "
+#~ "administration\n"
+#~ "screens. So that people can find your project, you should do this now.\n"
+#~ "Visit your project while logged in, and select 'Project Admin' from the\n"
+#~ "menus on the left.\n"
+#~ "\n"
+#~ "Enjoy the system, and please tell others about %4$s. Let us know\n"
+#~ "if there is anything we can do to help you.\n"
+#~ "\n"
+#~ "-- the %4$s crew"
+#~ msgstr ""
+#~ "Zure proiektua %7$s -n onartua izan da.\n"
+#~ "\n"
+#~ "Proiektuaren izen osoa:  %1$s\n"
+#~ "Unix proiektuaren izena:  %2$s\n"
+#~ "CVS-n zerbitzaria: cvs.%2$s.%3$s\n"
+#~ "Shell/Web zerbitzaria: %2$s.%3$s\n"
+#~ "\n"
+#~ "Zure DNS domeinua aktibatzeko egun bat baino gehiago beharko du .\n"
+#~ "Zure DNS izena aktibatzen den bitartean %4$s -era sartzeko ahalegina\n"
+#~ "egin zenezake eta zure CVS -a apuntatu %5$s -era\n"
+#~ "\n"
+#~ ". Sei ordu barru zure Shell/CVS kontua ez badabil, mesedez\n"
+#~ "laguntza eskaera egin ezazu arazoaren jatorria jakiteko.\n"
+#~ "Gogoratu kontu guztiak itxiak daudela 'telnet' -entzako eta bakarrik "
+#~ "'ssh'-rekin\n"
+#~ "ibiliko dela.\n"
+#~ "\n"
+#~ " Zure webgunera sarbidea 'shell' kontu honen bitartez bakarrik egin "
+#~ "daiteke. Mesedez, dokumentazio hau irakurri (beherako loturan ikusi) "
+#~ "proposatutako erabilpena,\n"
+#~ "zerbitzu erabilgarriak, eta zure kontuko direktorioen distribuzioari "
+#~ "buruz.\n"
+#~ "\n"
+#~ "Mesedez, har ezazu atari honetako proiektuen administrazioari buruzko "
+#~ "dokumentazioa irakurtzeko beta. (http://%3$s/docs/site/). Zure webgunea "
+#~ "bisitatzen baduzu\n"
+#~ " izenpetua zauden bitartean %3$s funtzio\n"
+#~ "gehigarriak bilatuko dituzu menuan izenburu honekin:'Proiektuen "
+#~ "administrazioa'.\n"
+#~ "\n"
+#~ "Biziki aholkatzen dizugu %3$s orria bisitatzea orain eta zure "
+#~ "proiektuaren\n"
+#~ "deskribapen publikoa sortzea. Hau egiteko zure proiektuko webgunea\n"
+#~ " bisitatu izenpetua zauden bitartean, eta ezkerreko menutik "
+#~ "'Administrazioa'sakatu (edo http://%3$s/project/admin/?group_id=%6$s\n"
+#~ "izenpetu ondoren).\n"
+#~ "\n"
+#~ "Zure proiektua ez da oraindik proiektuen mapan azalduko \n"
+#~ "(%3$s -n ostatu jasotzen duten proiektuen zerrenda nagusiak nabigazio eta "
+#~ "bilaketa \n"
+#~ "malgua eskeintzen du) proiektuen administrazio pantailan sailkatu arte.\n"
+#~ " Erabiltzaileek zure proiektua bilatu dezaten hauxe egin behar duzu "
+#~ "orain.\n"
+#~ "Izenpetua zauden bitartean, zure proiektua bisitatu 'Administrazioa' "
+#~ "aukeratu menuan.\n"
+#~ "\n"
+#~ "Goza ezazu sistemaz eta mesedez %3$s -koei abisatu iezaiezu. Esaiguzu "
+#~ "ere\n"
+#~ "zu laguntzeko zer egin genezake.\n"
+#~ "\n"
+#~ "-- %7$s taldea"
+
+#~ msgid "%1$s Project Approved"
+#~ msgstr "%1$s -ek onartutako proiektua"
+
+#~ msgid ""
+#~ "Your project registration for %3$s has been denied.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Reasons for negative decision:\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Zure egitasmoa %3$s -n erregistratzeko egin duzun eskaera ukatu da.\n"
+#~ "\n"
+#~ "Egitasmoaren izen osoa:  %1$s\n"
+#~ "Egitasmoaren Unix izena:  %2$s\n"
+#~ "\n"
+#~ "Ukatzearen arrazoiak hauek dira:\n"
+#~ "\n"
+
+#~ msgid "%1$s Project Denied"
+#~ msgstr "%1$s -ek egitasmoa ukatu du"
+
+#, fuzzy
+#~ msgid ""
+#~ "New %1$s Project Submitted\n"
+#~ "\n"
+#~ "Project Full Name:  %2$s\n"
+#~ "Submitted Description: %3$s\n"
+#~ msgstr ""
+#~ "%1$s -erako egitasmo berria erregistratu da\n"
+#~ "\n"
+#~ "Egitasmoaren izen osoa:  %2$s\n"
+#~ "Jasotako deskribapena: %3$s\n"
+#~ "Lizentzia: %4$s\n"
+#~ "\n"
+#~ "Mesedez, bisita ezazu helbide hau egitasmoa onartzeko ala baztertzeko:\n"
+#~ "%5$s"
+
+#, fuzzy
+#~ msgid "Submitter: %1$s (%2$s)\n"
+#~ msgstr "Nork bidalia"
+
+#~ msgid "New %1$s Project Submitted"
+#~ msgstr "%1$s -en egitasmoa onartzeke dago."
+
+#, fuzzy
+#~ msgid ""
+#~ "New %1$s Project Submitted\n"
+#~ "\n"
+#~ "Project Full Name:  %2$s\n"
+#~ "Submitted Description: %3$s\n"
+#~ "\n"
+#~ "The %1$s admin team will now examine your project submission.  You will "
+#~ "be notified of their decision."
+#~ msgstr ""
+#~ "%1$s -en egitasmo berri baten eskaera\n"
+#~ "\n"
+#~ "Egitasmoaren izen osoa: %2$s\n"
+#~ "Bidalitako deskribapena: %3$s\n"
+#~ "Lizentzia: %4$s\n"
+#~ "\n"
+#~ "%1$s administratzeko taldeak zure proposamena aztertuko du orain. "
+#~ "Erabakiaren berri emango zaizu."
+
 #~ msgid "I'm Sure"
 #~ msgstr "Ziur nago"
 
@@ -24216,52 +24299,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 
 #~ msgid "Error: User not removed: %s"
 #~ msgstr "ERROREA: Erabiltzailea ez da ezabatu: %s"
-
-#~ msgid "Your project registration for %s has been approved."
-#~ msgstr "Zure proiektua %s -n onartua izan da."
-
-#~ msgid "Project Full Name"
-#~ msgstr "Egitasmoaren izen osoa"
-
-#~ msgid ""
-#~ "If you visit your own project page in %s while logged in, you will find "
-#~ "additional menu functions to your left labeled “Project Admin”."
-#~ msgstr ""
-#~ "Zure webgunea bisitatzen baduzu izenpetua zauden bitartean %s "
-#~ "funtziogehigarriak bilatuko dituzu menuan izenburu honekin:'Proiektuen "
-#~ "administrazioa'."
-
-#~ msgid ""
-#~ "Enjoy the system, and please tell others about %s. Let us know if there "
-#~ "is anything we can do to help you."
-#~ msgstr ""
-#~ "Goza ezazu sistemaz eta mesedez %s -koei abisatu iezaiezu. Esaiguzu ere "
-#~ "zu laguntzeko zer egin genezake."
-
-#~ msgid "%s Project Approved"
-#~ msgstr "%s -ek onartutako proiektua"
-
-#~ msgid "Your project registration for %s has been denied."
-#~ msgstr "Zure egitasmoa %s -n erregistratzeko egin duzun eskaera ukatu da."
-
-#~ msgid "Reasons for negative decision"
-#~ msgstr "Ukatzearen arrazoiak hauek dira"
-
-#~ msgid "%s Project Denied"
-#~ msgstr "%s -ek egitasmoa ukatu du"
-
-#~ msgid "New %s Project Submitted"
-#~ msgstr "%s -en egitasmoa onartzeke dago."
-
-#~ msgid "Submitted Description"
-#~ msgstr "Emandako deskribapena"
-
-#~ msgid ""
-#~ "The %s admin team will now examine your project submission. You will be "
-#~ "notified of their decision."
-#~ msgstr ""
-#~ "%s administratzeko taldeak zure proposamena aztertuko du orain. "
-#~ "Erabakiaren berri emango zaizu."
 
 #~ msgid "* Denotes requests > %s Days Old"
 #~ msgstr "* Duela %s egun erregistratu zela esan nahi du"

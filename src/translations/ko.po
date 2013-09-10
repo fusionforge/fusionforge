@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-10 15:04+0200\n"
+"POT-Creation-Date: 2013-09-10 15:40+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -422,7 +422,13 @@ msgstr ""
 #: common/forum/Forum.class.php:641 common/forum/Forum.class.php:649
 #: common/forum/Forum.class.php:665 common/forum/ForumHTML.class.php:73
 #: common/forum/ForumHTML.class.php:211 common/include/Error.class.php:207
-#: common/include/exit.php:80 common/include/User.class.php:353
+#: common/include/exit.php:80 common/include/Group.class.php:2543
+#: common/include/Group.class.php:2544 common/include/Group.class.php:2602
+#: common/include/Group.class.php:2603 common/include/Group.class.php:2604
+#: common/include/Group.class.php:2656 common/include/Group.class.php:2657
+#: common/include/Group.class.php:2658 common/include/Group.class.php:2659
+#: common/include/Group.class.php:2669 common/include/Group.class.php:2670
+#: common/include/User.class.php:353
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:406
 #: common/tracker/actions/browse.php:409 common/tracker/actions/mod.php:147
@@ -518,8 +524,8 @@ msgstr "Description:"
 
 #: common/docman/Document.class.php:945
 #: common/docman/DocumentGroup.class.php:725
-#: common/tracker/actions/browse.php:201 common/tracker/actions/query.php:203
-#: common/tracker/actions/query.php:350
+#: common/include/Group.class.php:2658 common/tracker/actions/browse.php:201
+#: common/tracker/actions/query.php:203 common/tracker/actions/query.php:350
 msgid "Submitter"
 msgstr "제출자"
 
@@ -3229,215 +3235,157 @@ msgstr "계정이 이미 활성화되어 있습니다."
 msgid "Approved"
 msgstr "승인"
 
-#: common/include/Group.class.php:2533 common/include/Group.class.php:2603
+#: common/include/Group.class.php:2533 common/include/Group.class.php:2594
 msgid "Group does not have any administrators."
 msgstr ""
 
 #: common/include/Group.class.php:2541
-#, fuzzy, php-format
-msgid ""
-"Your project registration for %4$s has been approved.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Your DNS will take up to a day to become active on our site.\n"
-"Your web site is accessible through your shell account. Please read\n"
-"site documentation (see link below) about intended usage, available\n"
-"services, and directory layout of the account.\n"
-"\n"
-"If you visit your\n"
-"own project page in %4$s while logged in, you will find\n"
-"additional menu functions to your left labeled 'Project Admin'.\n"
-"\n"
-"We highly suggest that you now visit %4$s and create a public\n"
-"description for your project. This can be done by visiting your project\n"
-"page while logged in, and selecting 'Project Admin' from the menus\n"
-"on the left (or by visiting %3$s\n"
-"after login).\n"
-"\n"
-"Your project will also not appear in the Trove Software Map (primary\n"
-"list of projects hosted on %4$s which offers great flexibility in\n"
-"browsing and search) until you categorize it in the project administration\n"
-"screens. So that people can find your project, you should do this now.\n"
-"Visit your project while logged in, and select 'Project Admin' from the\n"
-"menus on the left.\n"
-"\n"
-"Enjoy the system, and please tell others about %4$s. Let us know\n"
-"if there is anything we can do to help you.\n"
-"\n"
-"-- the %4$s crew"
-msgstr ""
-"%7$s에 신청하신 프로젝트가 승인되었습니다.\n"
-"\n"
-"프로젝트 이름:  %1$s\n"
-"프로젝트 Unix Name:  %2$s\n"
-"CVS 서버:         cvs.%2$s.%3$s\n"
-"Shell/Web 서버:   %2$s.%3$s\n"
-"\n"
-"DNS정보 갱신은 최대 하루가 걸립니다.\n"
-"While waiting for your DNS to resolve, you may try shelling into \n"
-"%4$s and pointing CVS to %5$s\n"
-"\n"
-"If after 6 hours your shell/CVS accounts still do not work, please\n"
-"open a support ticket so that we may take a look at the problem.\n"
-"Please note that all shell/CVS accounts are closed to telnet and only\n"
-"work with SSH1.\n"
-"\n"
-"Your web site is accessible through your shell account. Please read\n"
-"site documentation (see link below) about intended usage, available\n"
-"services, and directory layout of the account.\n"
-"\n"
-"If you visit your\n"
-"own project page in %7$s while logged in, you will find\n"
-"additional menu functions to your left labeled 'Project Admin'.\n"
-"\n"
-"We highly suggest that you now visit %7$s and create a public\n"
-"description for your project. This can be done by visiting your project\n"
-"page while logged in, and selecting 'Project Admin' from the menus\n"
-"on the left (or by visiting http://%3$s/project/admin/?group_id=%6$s\n"
-"after login).\n"
-"\n"
-"Your project will also not appear in the Trove Software Map (primary\n"
-"list of projects hosted on %7$s which offers great flexibility in\n"
-"browsing and search) until you categorize it in the project administration\n"
-"screens. So that people can find your project, you should do this now.\n"
-"Visit your project while logged in, and select 'Project Admin' from the\n"
-"menus on the left.\n"
-"\n"
-"Enjoy the system, and please tell others about %7$s. Let us know\n"
-"if there is anything we can do to help you.\n"
-"\n"
-"-- the %7$s crew"
-
-#: common/include/Group.class.php:2577
 #, php-format
-msgid "%1$s Project Approved"
-msgstr "%1$s 프로젝트가 승인되었습니다."
+msgid "Your project registration for %s has been approved."
+msgstr "%s에 신청하신 프로젝트가 승인되었습니다."
 
-#: common/include/Group.class.php:2610
+#: common/include/Group.class.php:2543 common/include/Group.class.php:2602
+#: common/include/Group.class.php:2656 common/include/Group.class.php:2669
+#, fuzzy
+msgid "Project Full Name"
+msgstr "새 프로젝트 이름"
+
+#: common/include/Group.class.php:2544 common/include/Group.class.php:2603
+#: www/admin/approve-pending.php:194 www/admin/database.php:162
+#: www/admin/groupedit.php:171 www/admin/vhost.php:123
+#: www/register/index.php:204
+#, fuzzy
+msgid "Project Unix Name"
+msgstr "새 프로젝트 이름"
+
+#: common/include/Group.class.php:2546
 #, php-format
 msgid ""
-"Your project registration for %3$s has been denied.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Reasons for negative decision:\n"
-"\n"
+"If you visit your own project page in %s while logged in, you will find "
+"additional menu functions to your left labeled “Project Admin”."
 msgstr ""
-"귀하가 제출하신 %3$s 프로젝트가 거부되었습니다.\n"
-"\n"
-"프로젝트 이름:  %1$s\n"
-"프로젝트 Unix Name:  %2$s\n"
-"\n"
-"거부 이유:\n"
-"\n"
 
-#: common/include/Group.class.php:2629
+#: common/include/Group.class.php:2550
 #, php-format
-msgid "%1$s Project Denied"
-msgstr "%1$s 프로젝트가 거부되었습니다."
+msgid ""
+"We highly suggest that you now visit %1$s and create a public description "
+"for your project. This can be done by visiting your project page while "
+"logged in, and selecting “Project Admin” from the menus on the left (or by "
+"visiting %2$s after login)."
+msgstr ""
 
-#: common/include/Group.class.php:2653
+#: common/include/Group.class.php:2556
+#, php-format
+msgid ""
+"Your project will also not appear in the Trove Software Map (primary list of "
+"projects hosted on %s which offers great flexibility in browsing and search) "
+"until you categorize it in the project administration screens. So that "
+"people can find your project, you should do this now. Visit your project "
+"while logged in, and select “Project Admin” from the menus on the left."
+msgstr ""
+
+#: common/include/Group.class.php:2563
+#, php-format
+msgid ""
+"Enjoy the system, and please tell others about %s. Let us know if there is "
+"anything we can do to help you."
+msgstr ""
+
+#: common/include/Group.class.php:2566 common/mail/MailingList.class.php:205
+#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
+#: www/account/first.php:36 www/account/lostpw.php:68
+#: www/survey/privacy.php:58 www/survey/survey_resp.php:61
+#, php-format
+msgid "-- the %s staff"
+msgstr "-- %s 관리자"
+
+#: common/include/Group.class.php:2568
+#, php-format
+msgid "%s Project Approved"
+msgstr "%s 프로젝트가 승인되었습니다."
+
+#: common/include/Group.class.php:2601
+#, php-format
+msgid "Your project registration for %s has been denied."
+msgstr "귀하가 제출하신 %s 프로젝트가 거부되었습니다."
+
+#: common/include/Group.class.php:2604
+msgid "Reasons for negative decision"
+msgstr "거부 이유"
+
+#: common/include/Group.class.php:2616
+#, php-format
+msgid "%s Project Denied"
+msgstr "%s 프로젝트가 거부되었습니다"
+
+#: common/include/Group.class.php:2640
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2660
+#: common/include/Group.class.php:2647
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2668
-#, fuzzy, php-format
-msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-msgstr ""
-"%1$s 프로젝트가 승인을 기다리고 있습니다.\n"
-"\n"
-"프로젝트 이름:  %2$s\n"
-"설명: %3$s\n"
-"저작권: %4$s\n"
-"\n"
-"다음 URL을 방문하여 이 프로젝트를 승인하거나 거부하십시오.\n"
-"%5$s"
+#: common/include/Group.class.php:2655 common/include/Group.class.php:2661
+#: common/include/Group.class.php:2668 common/include/Group.class.php:2674
+#, php-format
+msgid "New %s Project Submitted"
+msgstr "%s 프로젝트가 제출되었습니다"
 
-#: common/include/Group.class.php:2678
-#, fuzzy, php-format
-msgid "Submitter: %1$s (%2$s)\n"
-msgstr "제출자"
+#: common/include/Group.class.php:2657 common/include/Group.class.php:2670
+msgid "Submitted Description"
+msgstr "제출된 설명"
 
-#: common/include/Group.class.php:2684
+#: common/include/Group.class.php:2659
+#, fuzzy
+msgid "Please visit the following URL to approve or reject this project"
+msgstr "다음 URL을 방문하셔서 이메일 주소를 변경하십시오:"
+
+#: common/include/Group.class.php:2671
 #, php-format
 msgid ""
-"\n"
-"Please visit the following URL to approve or reject this project:\n"
-"%1$s"
-msgstr ""
-
-#: common/include/Group.class.php:2688 common/include/Group.class.php:2703
-#, php-format
-msgid "New %1$s Project Submitted"
-msgstr "%1$s 프로젝트가 제출되었습니다."
-
-#: common/include/Group.class.php:2696
-#, fuzzy, php-format
-msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-"\n"
-"The %1$s admin team will now examine your project submission.  You will be "
+"The %s admin team will now examine your project submission. You will be "
 "notified of their decision."
 msgstr ""
-"%1$s 프로젝트가 제출되었습니다.\n"
-"\n"
-"프로젝트 이름:  %2$s\n"
-"설명: %3$s\n"
-"저작권: %4$s\n"
-"\n"
-"%1$s의 관리자가 제출 상황을 점검할 것입니다. 결과는 이메일로 통보받으실 수 있"
-"습니다."
+"%s의 관리자가 제출 상황을 점검할 것입니다. 결과는 이메일로 통보받으실 수 있습"
+"니다."
 
-#: common/include/Group.class.php:2718
+#: common/include/Group.class.php:2689
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Group Name (click to edit)"
 
-#: common/include/Group.class.php:2721
+#: common/include/Group.class.php:2692
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Group Name (click to edit)"
 
-#: common/include/Group.class.php:2724
+#: common/include/Group.class.php:2695
 #, fuzzy
 msgid "Group name already taken"
 msgstr "이미 존재하는 유닉스 이름입니다."
 
-#: common/include/Group.class.php:2806
+#: common/include/Group.class.php:2777
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2869
+#: common/include/Group.class.php:2840
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2887
+#: common/include/Group.class.php:2858
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2905
+#: common/include/Group.class.php:2876
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2923
+#: common/include/Group.class.php:2894
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
@@ -4514,14 +4462,6 @@ msgid ""
 "\n"
 "Thank you for registering your project with %1$s."
 msgstr ""
-
-#: common/mail/MailingList.class.php:205
-#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
-#: www/account/first.php:36 www/account/lostpw.php:68
-#: www/survey/privacy.php:58 www/survey/survey_resp.php:61
-#, php-format
-msgid "-- the %s staff"
-msgstr "-- %s 관리자"
 
 #: common/mail/MailingList.class.php:208
 #: plugins/mailman/www/mailman_utils.php:38
@@ -15371,13 +15311,6 @@ msgstr "Home 박스:"
 msgid "HTTP Domain:"
 msgstr "HTTP 도메인:"
 
-#: www/admin/approve-pending.php:194 www/admin/database.php:162
-#: www/admin/groupedit.php:171 www/admin/vhost.php:123
-#: www/register/index.php:204
-#, fuzzy
-msgid "Project Unix Name"
-msgstr "새 프로젝트 이름"
-
 #: www/admin/approve-pending.php:196
 msgid "Submitted Description:"
 msgstr "제출된 설명:"
@@ -23505,6 +23438,149 @@ msgstr "대량 갱신"
 msgid "No User Name Provided"
 msgstr "사용자ID"
 
+#, fuzzy
+#~ msgid ""
+#~ "Your project registration for %4$s has been approved.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Your DNS will take up to a day to become active on our site.\n"
+#~ "Your web site is accessible through your shell account. Please read\n"
+#~ "site documentation (see link below) about intended usage, available\n"
+#~ "services, and directory layout of the account.\n"
+#~ "\n"
+#~ "If you visit your\n"
+#~ "own project page in %4$s while logged in, you will find\n"
+#~ "additional menu functions to your left labeled 'Project Admin'.\n"
+#~ "\n"
+#~ "We highly suggest that you now visit %4$s and create a public\n"
+#~ "description for your project. This can be done by visiting your project\n"
+#~ "page while logged in, and selecting 'Project Admin' from the menus\n"
+#~ "on the left (or by visiting %3$s\n"
+#~ "after login).\n"
+#~ "\n"
+#~ "Your project will also not appear in the Trove Software Map (primary\n"
+#~ "list of projects hosted on %4$s which offers great flexibility in\n"
+#~ "browsing and search) until you categorize it in the project "
+#~ "administration\n"
+#~ "screens. So that people can find your project, you should do this now.\n"
+#~ "Visit your project while logged in, and select 'Project Admin' from the\n"
+#~ "menus on the left.\n"
+#~ "\n"
+#~ "Enjoy the system, and please tell others about %4$s. Let us know\n"
+#~ "if there is anything we can do to help you.\n"
+#~ "\n"
+#~ "-- the %4$s crew"
+#~ msgstr ""
+#~ "%7$s에 신청하신 프로젝트가 승인되었습니다.\n"
+#~ "\n"
+#~ "프로젝트 이름:  %1$s\n"
+#~ "프로젝트 Unix Name:  %2$s\n"
+#~ "CVS 서버:         cvs.%2$s.%3$s\n"
+#~ "Shell/Web 서버:   %2$s.%3$s\n"
+#~ "\n"
+#~ "DNS정보 갱신은 최대 하루가 걸립니다.\n"
+#~ "While waiting for your DNS to resolve, you may try shelling into \n"
+#~ "%4$s and pointing CVS to %5$s\n"
+#~ "\n"
+#~ "If after 6 hours your shell/CVS accounts still do not work, please\n"
+#~ "open a support ticket so that we may take a look at the problem.\n"
+#~ "Please note that all shell/CVS accounts are closed to telnet and only\n"
+#~ "work with SSH1.\n"
+#~ "\n"
+#~ "Your web site is accessible through your shell account. Please read\n"
+#~ "site documentation (see link below) about intended usage, available\n"
+#~ "services, and directory layout of the account.\n"
+#~ "\n"
+#~ "If you visit your\n"
+#~ "own project page in %7$s while logged in, you will find\n"
+#~ "additional menu functions to your left labeled 'Project Admin'.\n"
+#~ "\n"
+#~ "We highly suggest that you now visit %7$s and create a public\n"
+#~ "description for your project. This can be done by visiting your project\n"
+#~ "page while logged in, and selecting 'Project Admin' from the menus\n"
+#~ "on the left (or by visiting http://%3$s/project/admin/?group_id=%6$s\n"
+#~ "after login).\n"
+#~ "\n"
+#~ "Your project will also not appear in the Trove Software Map (primary\n"
+#~ "list of projects hosted on %7$s which offers great flexibility in\n"
+#~ "browsing and search) until you categorize it in the project "
+#~ "administration\n"
+#~ "screens. So that people can find your project, you should do this now.\n"
+#~ "Visit your project while logged in, and select 'Project Admin' from the\n"
+#~ "menus on the left.\n"
+#~ "\n"
+#~ "Enjoy the system, and please tell others about %7$s. Let us know\n"
+#~ "if there is anything we can do to help you.\n"
+#~ "\n"
+#~ "-- the %7$s crew"
+
+#~ msgid "%1$s Project Approved"
+#~ msgstr "%1$s 프로젝트가 승인되었습니다."
+
+#~ msgid ""
+#~ "Your project registration for %3$s has been denied.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Reasons for negative decision:\n"
+#~ "\n"
+#~ msgstr ""
+#~ "귀하가 제출하신 %3$s 프로젝트가 거부되었습니다.\n"
+#~ "\n"
+#~ "프로젝트 이름:  %1$s\n"
+#~ "프로젝트 Unix Name:  %2$s\n"
+#~ "\n"
+#~ "거부 이유:\n"
+#~ "\n"
+
+#~ msgid "%1$s Project Denied"
+#~ msgstr "%1$s 프로젝트가 거부되었습니다."
+
+#, fuzzy
+#~ msgid ""
+#~ "New %1$s Project Submitted\n"
+#~ "\n"
+#~ "Project Full Name:  %2$s\n"
+#~ "Submitted Description: %3$s\n"
+#~ msgstr ""
+#~ "%1$s 프로젝트가 승인을 기다리고 있습니다.\n"
+#~ "\n"
+#~ "프로젝트 이름:  %2$s\n"
+#~ "설명: %3$s\n"
+#~ "저작권: %4$s\n"
+#~ "\n"
+#~ "다음 URL을 방문하여 이 프로젝트를 승인하거나 거부하십시오.\n"
+#~ "%5$s"
+
+#, fuzzy
+#~ msgid "Submitter: %1$s (%2$s)\n"
+#~ msgstr "제출자"
+
+#~ msgid "New %1$s Project Submitted"
+#~ msgstr "%1$s 프로젝트가 제출되었습니다."
+
+#, fuzzy
+#~ msgid ""
+#~ "New %1$s Project Submitted\n"
+#~ "\n"
+#~ "Project Full Name:  %2$s\n"
+#~ "Submitted Description: %3$s\n"
+#~ "\n"
+#~ "The %1$s admin team will now examine your project submission.  You will "
+#~ "be notified of their decision."
+#~ msgstr ""
+#~ "%1$s 프로젝트가 제출되었습니다.\n"
+#~ "\n"
+#~ "프로젝트 이름:  %2$s\n"
+#~ "설명: %3$s\n"
+#~ "저작권: %4$s\n"
+#~ "\n"
+#~ "%1$s의 관리자가 제출 상황을 점검할 것입니다. 결과는 이메일로 통보받으실 "
+#~ "수 있습니다."
+
 #~ msgid "I'm Sure"
 #~ msgstr "확인"
 
@@ -23785,34 +23861,6 @@ msgstr "사용자ID"
 
 #~ msgid "Error: this news item was not found"
 #~ msgstr "오류 - 이 뉴스 게시물은 없습니다."
-
-#~ msgid "Your project registration for %s has been approved."
-#~ msgstr "%s에 신청하신 프로젝트가 승인되었습니다."
-
-#~ msgid "%s Project Approved"
-#~ msgstr "%s 프로젝트가 승인되었습니다."
-
-#~ msgid "Your project registration for %s has been denied."
-#~ msgstr "귀하가 제출하신 %s 프로젝트가 거부되었습니다."
-
-#~ msgid "Reasons for negative decision"
-#~ msgstr "거부 이유"
-
-#~ msgid "%s Project Denied"
-#~ msgstr "%s 프로젝트가 거부되었습니다"
-
-#~ msgid "New %s Project Submitted"
-#~ msgstr "%s 프로젝트가 제출되었습니다"
-
-#~ msgid "Submitted Description"
-#~ msgstr "제출된 설명"
-
-#~ msgid ""
-#~ "The %s admin team will now examine your project submission. You will be "
-#~ "notified of their decision."
-#~ msgstr ""
-#~ "%s의 관리자가 제출 상황을 점검할 것입니다. 결과는 이메일로 통보받으실 수 "
-#~ "있습니다."
 
 #~ msgid "Enjoy the site."
 #~ msgstr "감사합니다."

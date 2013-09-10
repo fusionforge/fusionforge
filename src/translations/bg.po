@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-10 15:04+0200\n"
+"POT-Creation-Date: 2013-09-10 15:40+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -418,7 +418,13 @@ msgstr ""
 #: common/forum/Forum.class.php:641 common/forum/Forum.class.php:649
 #: common/forum/Forum.class.php:665 common/forum/ForumHTML.class.php:73
 #: common/forum/ForumHTML.class.php:211 common/include/Error.class.php:207
-#: common/include/exit.php:80 common/include/User.class.php:353
+#: common/include/exit.php:80 common/include/Group.class.php:2543
+#: common/include/Group.class.php:2544 common/include/Group.class.php:2602
+#: common/include/Group.class.php:2603 common/include/Group.class.php:2604
+#: common/include/Group.class.php:2656 common/include/Group.class.php:2657
+#: common/include/Group.class.php:2658 common/include/Group.class.php:2659
+#: common/include/Group.class.php:2669 common/include/Group.class.php:2670
+#: common/include/User.class.php:353
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:406
 #: common/tracker/actions/browse.php:409 common/tracker/actions/mod.php:147
@@ -514,8 +520,8 @@ msgstr "Описание:"
 
 #: common/docman/Document.class.php:945
 #: common/docman/DocumentGroup.class.php:725
-#: common/tracker/actions/browse.php:201 common/tracker/actions/query.php:203
-#: common/tracker/actions/query.php:350
+#: common/include/Group.class.php:2658 common/tracker/actions/browse.php:201
+#: common/tracker/actions/query.php:203 common/tracker/actions/query.php:350
 msgid "Submitter"
 msgstr ""
 
@@ -3206,150 +3212,160 @@ msgstr ""
 msgid "Approved"
 msgstr "Модул \"Форуми\""
 
-#: common/include/Group.class.php:2533 common/include/Group.class.php:2603
+#: common/include/Group.class.php:2533 common/include/Group.class.php:2594
 msgid "Group does not have any administrators."
 msgstr ""
 
 #: common/include/Group.class.php:2541
 #, php-format
-msgid ""
-"Your project registration for %4$s has been approved.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Your DNS will take up to a day to become active on our site.\n"
-"Your web site is accessible through your shell account. Please read\n"
-"site documentation (see link below) about intended usage, available\n"
-"services, and directory layout of the account.\n"
-"\n"
-"If you visit your\n"
-"own project page in %4$s while logged in, you will find\n"
-"additional menu functions to your left labeled 'Project Admin'.\n"
-"\n"
-"We highly suggest that you now visit %4$s and create a public\n"
-"description for your project. This can be done by visiting your project\n"
-"page while logged in, and selecting 'Project Admin' from the menus\n"
-"on the left (or by visiting %3$s\n"
-"after login).\n"
-"\n"
-"Your project will also not appear in the Trove Software Map (primary\n"
-"list of projects hosted on %4$s which offers great flexibility in\n"
-"browsing and search) until you categorize it in the project administration\n"
-"screens. So that people can find your project, you should do this now.\n"
-"Visit your project while logged in, and select 'Project Admin' from the\n"
-"menus on the left.\n"
-"\n"
-"Enjoy the system, and please tell others about %4$s. Let us know\n"
-"if there is anything we can do to help you.\n"
-"\n"
-"-- the %4$s crew"
+msgid "Your project registration for %s has been approved."
 msgstr ""
 
-#: common/include/Group.class.php:2577
-#, php-format
-msgid "%1$s Project Approved"
-msgstr ""
+#: common/include/Group.class.php:2543 common/include/Group.class.php:2602
+#: common/include/Group.class.php:2656 common/include/Group.class.php:2669
+msgid "Project Full Name"
+msgstr "Проект Пълно наименование"
 
-#: common/include/Group.class.php:2610
+#: common/include/Group.class.php:2544 common/include/Group.class.php:2603
+#: www/admin/approve-pending.php:194 www/admin/database.php:162
+#: www/admin/groupedit.php:171 www/admin/vhost.php:123
+#: www/register/index.php:204
+msgid "Project Unix Name"
+msgstr "Проект Unix идентификатор"
+
+#: common/include/Group.class.php:2546
 #, php-format
 msgid ""
-"Your project registration for %3$s has been denied.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Reasons for negative decision:\n"
-"\n"
+"If you visit your own project page in %s while logged in, you will find "
+"additional menu functions to your left labeled “Project Admin”."
 msgstr ""
 
-#: common/include/Group.class.php:2629
+#: common/include/Group.class.php:2550
 #, php-format
-msgid "%1$s Project Denied"
+msgid ""
+"We highly suggest that you now visit %1$s and create a public description "
+"for your project. This can be done by visiting your project page while "
+"logged in, and selecting “Project Admin” from the menus on the left (or by "
+"visiting %2$s after login)."
 msgstr ""
 
-#: common/include/Group.class.php:2653
+#: common/include/Group.class.php:2556
+#, php-format
+msgid ""
+"Your project will also not appear in the Trove Software Map (primary list of "
+"projects hosted on %s which offers great flexibility in browsing and search) "
+"until you categorize it in the project administration screens. So that "
+"people can find your project, you should do this now. Visit your project "
+"while logged in, and select “Project Admin” from the menus on the left."
+msgstr ""
+
+#: common/include/Group.class.php:2563
+#, php-format
+msgid ""
+"Enjoy the system, and please tell others about %s. Let us know if there is "
+"anything we can do to help you."
+msgstr ""
+
+#: common/include/Group.class.php:2566 common/mail/MailingList.class.php:205
+#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
+#: www/account/first.php:36 www/account/lostpw.php:68
+#: www/survey/privacy.php:58 www/survey/survey_resp.php:61
+#, php-format
+msgid "-- the %s staff"
+msgstr ""
+
+#: common/include/Group.class.php:2568
+#, fuzzy, php-format
+msgid "%s Project Approved"
+msgstr "Проекти на потребителя"
+
+#: common/include/Group.class.php:2601
+#, php-format
+msgid "Your project registration for %s has been denied."
+msgstr ""
+
+#: common/include/Group.class.php:2604
+msgid "Reasons for negative decision"
+msgstr ""
+
+#: common/include/Group.class.php:2616
+#, fuzzy, php-format
+msgid "%s Project Denied"
+msgstr "Проекти на потребителя"
+
+#: common/include/Group.class.php:2640
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2660
+#: common/include/Group.class.php:2647
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2668
+#: common/include/Group.class.php:2655 common/include/Group.class.php:2661
+#: common/include/Group.class.php:2668 common/include/Group.class.php:2674
+#, fuzzy, php-format
+msgid "New %s Project Submitted"
+msgstr "Проекти на потребителя"
+
+#: common/include/Group.class.php:2657 common/include/Group.class.php:2670
+#, fuzzy
+msgid "Submitted Description"
+msgstr "Кратко описание"
+
+#: common/include/Group.class.php:2659
+#, fuzzy
+msgid "Please visit the following URL to approve or reject this project"
+msgstr ""
+"Sledvashtoto syobshtenie e na kiriliza (izberete UTF8 encoding na browsera, "
+"za da go prochetete). Вие поискахте промяна на email адрес за GForge.\n"
+"Моля посетете следния линк, за да осъществите промяната на адреса:\n"
+"\n"
+"<http://%1$s/account/change_email-complete.php?ch=_%2$s>\n"
+"\n"
+" -- екипът на %1$s"
+
+#: common/include/Group.class.php:2671
 #, php-format
 msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-msgstr ""
-
-#: common/include/Group.class.php:2678
-#, php-format
-msgid "Submitter: %1$s (%2$s)\n"
-msgstr ""
-
-#: common/include/Group.class.php:2684
-#, php-format
-msgid ""
-"\n"
-"Please visit the following URL to approve or reject this project:\n"
-"%1$s"
-msgstr ""
-
-#: common/include/Group.class.php:2688 common/include/Group.class.php:2703
-#, php-format
-msgid "New %1$s Project Submitted"
-msgstr ""
-
-#: common/include/Group.class.php:2696
-#, php-format
-msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-"\n"
-"The %1$s admin team will now examine your project submission.  You will be "
+"The %s admin team will now examine your project submission. You will be "
 "notified of their decision."
 msgstr ""
 
-#: common/include/Group.class.php:2718
+#: common/include/Group.class.php:2689
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Въпросът е твърде кратък"
 
-#: common/include/Group.class.php:2721
+#: common/include/Group.class.php:2692
 #, fuzzy
 msgid "Group name is too long"
 msgstr "История на промените по проекта"
 
-#: common/include/Group.class.php:2724
+#: common/include/Group.class.php:2695
 msgid "Group name already taken"
 msgstr ""
 
-#: common/include/Group.class.php:2806
+#: common/include/Group.class.php:2777
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2869
+#: common/include/Group.class.php:2840
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2887
+#: common/include/Group.class.php:2858
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2905
+#: common/include/Group.class.php:2876
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2923
+#: common/include/Group.class.php:2894
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
@@ -4408,14 +4424,6 @@ msgid ""
 "You are encouraged to change this password as soon as possible.\n"
 "\n"
 "Thank you for registering your project with %1$s."
-msgstr ""
-
-#: common/mail/MailingList.class.php:205
-#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
-#: www/account/first.php:36 www/account/lostpw.php:68
-#: www/survey/privacy.php:58 www/survey/survey_resp.php:61
-#, php-format
-msgid "-- the %s staff"
 msgstr ""
 
 #: common/mail/MailingList.class.php:208
@@ -15140,12 +15148,6 @@ msgstr ""
 msgid "HTTP Domain:"
 msgstr ""
 
-#: www/admin/approve-pending.php:194 www/admin/database.php:162
-#: www/admin/groupedit.php:171 www/admin/vhost.php:123
-#: www/register/index.php:204
-msgid "Project Unix Name"
-msgstr "Проект Unix идентификатор"
-
 #: www/admin/approve-pending.php:196
 msgid "Submitted Description:"
 msgstr ""
@@ -23289,9 +23291,6 @@ msgstr ""
 
 #~ msgid "Error: this news item was not found"
 #~ msgstr "Грешка - тази новина не е намерена"
-
-#~ msgid "Project Full Name"
-#~ msgstr "Проект Пълно наименование"
 
 #~ msgid "You are not monitoring any files."
 #~ msgstr "Не наблюдавате никакви файлове."

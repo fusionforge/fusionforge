@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-10 15:04+0200\n"
+"POT-Creation-Date: 2013-09-10 15:40+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -421,7 +421,13 @@ msgstr "项目"
 #: common/forum/Forum.class.php:641 common/forum/Forum.class.php:649
 #: common/forum/Forum.class.php:665 common/forum/ForumHTML.class.php:73
 #: common/forum/ForumHTML.class.php:211 common/include/Error.class.php:207
-#: common/include/exit.php:80 common/include/User.class.php:353
+#: common/include/exit.php:80 common/include/Group.class.php:2543
+#: common/include/Group.class.php:2544 common/include/Group.class.php:2602
+#: common/include/Group.class.php:2603 common/include/Group.class.php:2604
+#: common/include/Group.class.php:2656 common/include/Group.class.php:2657
+#: common/include/Group.class.php:2658 common/include/Group.class.php:2659
+#: common/include/Group.class.php:2669 common/include/Group.class.php:2670
+#: common/include/User.class.php:353
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:406
 #: common/tracker/actions/browse.php:409 common/tracker/actions/mod.php:147
@@ -517,8 +523,8 @@ msgstr "说明："
 
 #: common/docman/Document.class.php:945
 #: common/docman/DocumentGroup.class.php:725
-#: common/tracker/actions/browse.php:201 common/tracker/actions/query.php:203
-#: common/tracker/actions/query.php:350
+#: common/include/Group.class.php:2658 common/tracker/actions/browse.php:201
+#: common/tracker/actions/query.php:203 common/tracker/actions/query.php:350
 msgid "Submitter"
 msgstr "发表人"
 
@@ -3255,179 +3261,153 @@ msgstr "组已被激活"
 msgid "Approved"
 msgstr "批准"
 
-#: common/include/Group.class.php:2533 common/include/Group.class.php:2603
+#: common/include/Group.class.php:2533 common/include/Group.class.php:2594
 msgid "Group does not have any administrators."
 msgstr "组没有任何管理员"
 
 #: common/include/Group.class.php:2541
 #, php-format
-msgid ""
-"Your project registration for %4$s has been approved.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Your DNS will take up to a day to become active on our site.\n"
-"Your web site is accessible through your shell account. Please read\n"
-"site documentation (see link below) about intended usage, available\n"
-"services, and directory layout of the account.\n"
-"\n"
-"If you visit your\n"
-"own project page in %4$s while logged in, you will find\n"
-"additional menu functions to your left labeled 'Project Admin'.\n"
-"\n"
-"We highly suggest that you now visit %4$s and create a public\n"
-"description for your project. This can be done by visiting your project\n"
-"page while logged in, and selecting 'Project Admin' from the menus\n"
-"on the left (or by visiting %3$s\n"
-"after login).\n"
-"\n"
-"Your project will also not appear in the Trove Software Map (primary\n"
-"list of projects hosted on %4$s which offers great flexibility in\n"
-"browsing and search) until you categorize it in the project administration\n"
-"screens. So that people can find your project, you should do this now.\n"
-"Visit your project while logged in, and select 'Project Admin' from the\n"
-"menus on the left.\n"
-"\n"
-"Enjoy the system, and please tell others about %4$s. Let us know\n"
-"if there is anything we can do to help you.\n"
-"\n"
-"-- the %4$s crew"
-msgstr ""
-"你注册的项目 %4$s 已经批准.项目全名:  %1$s项目Unix名:  %2$s你的DNS需要一天才"
-"能激活。你的WEB网站可以通过shell帐号存取。请阅读下面的链接中的建站文档来了解"
-"用法,可使用的服务,和帐号的目录布局.你如果登录后访问%4$s处的项目页面, 将会发现"
-"额外的菜单功能项:'项目管理'.强烈建议你现在访问 %4$s ,创建项目的公开说明.请登"
-"录后访问项目页面, 选择左边的'项目管理' 菜单(或登录后访问%3$s).在你未通过项目"
-"管理页面将项目分类前，你的项目不会在项目分类列表中显示(部署在%4$s上的项目列"
-"表，以易于查找和浏览) 。这样人们可以很方便的发现你的项目.登录后访问你的项目,"
-"再选择左边菜单的'项目管理'.享用这个系统的同时请告诉其他人%4$s。如果有需要请与"
-"我们联系，我们乐于提供帮助。-- %4$s的成员"
+msgid "Your project registration for %s has been approved."
+msgstr "你注册的项目 %s 已经批准.项目"
 
-#: common/include/Group.class.php:2577
-#, php-format
-msgid "%1$s Project Approved"
-msgstr "%1$s 项目通过审核了"
+#: common/include/Group.class.php:2543 common/include/Group.class.php:2602
+#: common/include/Group.class.php:2656 common/include/Group.class.php:2669
+#, fuzzy
+msgid "Project Full Name"
+msgstr "新项目名称"
 
-#: common/include/Group.class.php:2610
+#: common/include/Group.class.php:2544 common/include/Group.class.php:2603
+#: www/admin/approve-pending.php:194 www/admin/database.php:162
+#: www/admin/groupedit.php:171 www/admin/vhost.php:123
+#: www/register/index.php:204
+#, fuzzy
+msgid "Project Unix Name"
+msgstr "新项目名称"
+
+#: common/include/Group.class.php:2546
 #, php-format
 msgid ""
-"Your project registration for %3$s has been denied.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Reasons for negative decision:\n"
-"\n"
+"If you visit your own project page in %s while logged in, you will find "
+"additional menu functions to your left labeled “Project Admin”."
 msgstr ""
-"您在 %3$s 的项目注册被取消了\n"
-"\n"
-"项目全名：%1$s\n"
-"项目 Unix 名称：%2$s\n"
-"\n"
-"原因：\n"
-"\n"
 
-#: common/include/Group.class.php:2629
+#: common/include/Group.class.php:2550
 #, php-format
-msgid "%1$s Project Denied"
-msgstr "%1$s 项目被取消了"
+msgid ""
+"We highly suggest that you now visit %1$s and create a public description "
+"for your project. This can be done by visiting your project page while "
+"logged in, and selecting “Project Admin” from the menus on the left (or by "
+"visiting %2$s after login)."
+msgstr ""
 
-#: common/include/Group.class.php:2653
+#: common/include/Group.class.php:2556
+#, php-format
+msgid ""
+"Your project will also not appear in the Trove Software Map (primary list of "
+"projects hosted on %s which offers great flexibility in browsing and search) "
+"until you categorize it in the project administration screens. So that "
+"people can find your project, you should do this now. Visit your project "
+"while logged in, and select “Project Admin” from the menus on the left."
+msgstr ""
+
+#: common/include/Group.class.php:2563
+#, php-format
+msgid ""
+"Enjoy the system, and please tell others about %s. Let us know if there is "
+"anything we can do to help you."
+msgstr ""
+
+#: common/include/Group.class.php:2566 common/mail/MailingList.class.php:205
+#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
+#: www/account/first.php:36 www/account/lostpw.php:68
+#: www/survey/privacy.php:58 www/survey/survey_resp.php:61
+#, php-format
+msgid "-- the %s staff"
+msgstr "%s 团队"
+
+#: common/include/Group.class.php:2568
+#, php-format
+msgid "%s Project Approved"
+msgstr "%s 项目通过审核了"
+
+#: common/include/Group.class.php:2601
+#, php-format
+msgid "Your project registration for %s has been denied."
+msgstr "您在 %s 的项目注册被取消了"
+
+#: common/include/Group.class.php:2604
+msgid "Reasons for negative decision"
+msgstr "原因"
+
+#: common/include/Group.class.php:2616
+#, php-format
+msgid "%s Project Denied"
+msgstr "%s 项目被取消了"
+
+#: common/include/Group.class.php:2640
 msgid "Could not find user who has submitted the project."
 msgstr "无法找到提交项目的用户。"
 
-#: common/include/Group.class.php:2660
+#: common/include/Group.class.php:2647
 #, fuzzy
 msgid "There is no administrator to send the mail to."
 msgstr "没有发送邮件的管理员"
 
-#: common/include/Group.class.php:2668
-#, fuzzy, php-format
-msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-msgstr ""
-"有人注册了新项目 %1$s \n"
-"\n"
-"项目全名：%2$s\n"
-"注册说明：%3$s\n"
-"注册人：%5$s (%6$s)\n"
-"\n"
-"请浏览下面网址审核这个项目：\n"
-"%4$s"
+#: common/include/Group.class.php:2655 common/include/Group.class.php:2661
+#: common/include/Group.class.php:2668 common/include/Group.class.php:2674
+#, php-format
+msgid "New %s Project Submitted"
+msgstr "新项目 %s 已提交"
 
-#: common/include/Group.class.php:2678
-#, fuzzy, php-format
-msgid "Submitter: %1$s (%2$s)\n"
-msgstr "发表人"
+#: common/include/Group.class.php:2657 common/include/Group.class.php:2670
+msgid "Submitted Description"
+msgstr "已提交的说明"
 
-#: common/include/Group.class.php:2684
+#: common/include/Group.class.php:2659
+#, fuzzy
+msgid "Please visit the following URL to approve or reject this project"
+msgstr " 请点击这个网址来完成email信箱的改变："
+
+#: common/include/Group.class.php:2671
 #, php-format
 msgid ""
-"\n"
-"Please visit the following URL to approve or reject this project:\n"
-"%1$s"
-msgstr ""
-
-#: common/include/Group.class.php:2688 common/include/Group.class.php:2703
-#, php-format
-msgid "New %1$s Project Submitted"
-msgstr "新项目 %1$s 已提交。"
-
-#: common/include/Group.class.php:2696
-#, php-format
-msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-"\n"
-"The %1$s admin team will now examine your project submission.  You will be "
+"The %s admin team will now examine your project submission. You will be "
 "notified of their decision."
-msgstr ""
-"新项目 %1$s 注册了\n"
-"\n"
-"项目全名：  %2$s\n"
-"注册说明： %3$s\n"
-"\n"
-" %1$s 的管理团队会尽快审核您注册的项目，通过审核与否您都会收到通知。"
+msgstr "%s 的管理团队会尽快审核您注册的项目，通过审核与否您都会收到通知。"
 
-#: common/include/Group.class.php:2718
+#: common/include/Group.class.php:2689
 msgid "Group name is too short"
 msgstr "群组名称太短"
 
-#: common/include/Group.class.php:2721
+#: common/include/Group.class.php:2692
 msgid "Group name is too long"
 msgstr "群组名称太长"
 
-#: common/include/Group.class.php:2724
+#: common/include/Group.class.php:2695
 msgid "Group name already taken"
 msgstr "群组名称已经有人使用"
 
-#: common/include/Group.class.php:2806
+#: common/include/Group.class.php:2777
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr "错误: 数据库: 不能更改组状态: %s"
 
-#: common/include/Group.class.php:2869
+#: common/include/Group.class.php:2840
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/Group.class.php:2887
+#: common/include/Group.class.php:2858
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/Group.class.php:2905
+#: common/include/Group.class.php:2876
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/Group.class.php:2923
+#: common/include/Group.class.php:2894
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
@@ -4520,14 +4500,6 @@ msgstr ""
 "建议您尽快修改这个密码\n"
 "\n"
 "谢谢您将项目创建在 %1$s"
-
-#: common/mail/MailingList.class.php:205
-#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
-#: www/account/first.php:36 www/account/lostpw.php:68
-#: www/survey/privacy.php:58 www/survey/survey_resp.php:61
-#, php-format
-msgid "-- the %s staff"
-msgstr "%s 团队"
 
 #: common/mail/MailingList.class.php:208
 #: plugins/mailman/www/mailman_utils.php:38
@@ -15459,13 +15431,6 @@ msgstr "Home Box:"
 msgid "HTTP Domain:"
 msgstr "HTTP域名："
 
-#: www/admin/approve-pending.php:194 www/admin/database.php:162
-#: www/admin/groupedit.php:171 www/admin/vhost.php:123
-#: www/register/index.php:204
-#, fuzzy
-msgid "Project Unix Name"
-msgstr "新项目名称"
-
 #: www/admin/approve-pending.php:196
 msgid "Submitted Description:"
 msgstr "已提交的说明："
@@ -23583,6 +23548,112 @@ msgstr "大量更新"
 msgid "No User Name Provided"
 msgstr "帐号"
 
+#~ msgid ""
+#~ "Your project registration for %4$s has been approved.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Your DNS will take up to a day to become active on our site.\n"
+#~ "Your web site is accessible through your shell account. Please read\n"
+#~ "site documentation (see link below) about intended usage, available\n"
+#~ "services, and directory layout of the account.\n"
+#~ "\n"
+#~ "If you visit your\n"
+#~ "own project page in %4$s while logged in, you will find\n"
+#~ "additional menu functions to your left labeled 'Project Admin'.\n"
+#~ "\n"
+#~ "We highly suggest that you now visit %4$s and create a public\n"
+#~ "description for your project. This can be done by visiting your project\n"
+#~ "page while logged in, and selecting 'Project Admin' from the menus\n"
+#~ "on the left (or by visiting %3$s\n"
+#~ "after login).\n"
+#~ "\n"
+#~ "Your project will also not appear in the Trove Software Map (primary\n"
+#~ "list of projects hosted on %4$s which offers great flexibility in\n"
+#~ "browsing and search) until you categorize it in the project "
+#~ "administration\n"
+#~ "screens. So that people can find your project, you should do this now.\n"
+#~ "Visit your project while logged in, and select 'Project Admin' from the\n"
+#~ "menus on the left.\n"
+#~ "\n"
+#~ "Enjoy the system, and please tell others about %4$s. Let us know\n"
+#~ "if there is anything we can do to help you.\n"
+#~ "\n"
+#~ "-- the %4$s crew"
+#~ msgstr ""
+#~ "你注册的项目 %4$s 已经批准.项目全名:  %1$s项目Unix名:  %2$s你的DNS需要一天"
+#~ "才能激活。你的WEB网站可以通过shell帐号存取。请阅读下面的链接中的建站文档来"
+#~ "了解用法,可使用的服务,和帐号的目录布局.你如果登录后访问%4$s处的项目页面, "
+#~ "将会发现额外的菜单功能项:'项目管理'.强烈建议你现在访问 %4$s ,创建项目的公"
+#~ "开说明.请登录后访问项目页面, 选择左边的'项目管理' 菜单(或登录后访问%3$s)."
+#~ "在你未通过项目管理页面将项目分类前，你的项目不会在项目分类列表中显示(部署"
+#~ "在%4$s上的项目列表，以易于查找和浏览) 。这样人们可以很方便的发现你的项目."
+#~ "登录后访问你的项目,再选择左边菜单的'项目管理'.享用这个系统的同时请告诉其他"
+#~ "人%4$s。如果有需要请与我们联系，我们乐于提供帮助。-- %4$s的成员"
+
+#~ msgid "%1$s Project Approved"
+#~ msgstr "%1$s 项目通过审核了"
+
+#~ msgid ""
+#~ "Your project registration for %3$s has been denied.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Reasons for negative decision:\n"
+#~ "\n"
+#~ msgstr ""
+#~ "您在 %3$s 的项目注册被取消了\n"
+#~ "\n"
+#~ "项目全名：%1$s\n"
+#~ "项目 Unix 名称：%2$s\n"
+#~ "\n"
+#~ "原因：\n"
+#~ "\n"
+
+#~ msgid "%1$s Project Denied"
+#~ msgstr "%1$s 项目被取消了"
+
+#, fuzzy
+#~ msgid ""
+#~ "New %1$s Project Submitted\n"
+#~ "\n"
+#~ "Project Full Name:  %2$s\n"
+#~ "Submitted Description: %3$s\n"
+#~ msgstr ""
+#~ "有人注册了新项目 %1$s \n"
+#~ "\n"
+#~ "项目全名：%2$s\n"
+#~ "注册说明：%3$s\n"
+#~ "注册人：%5$s (%6$s)\n"
+#~ "\n"
+#~ "请浏览下面网址审核这个项目：\n"
+#~ "%4$s"
+
+#, fuzzy
+#~ msgid "Submitter: %1$s (%2$s)\n"
+#~ msgstr "发表人"
+
+#~ msgid "New %1$s Project Submitted"
+#~ msgstr "新项目 %1$s 已提交。"
+
+#~ msgid ""
+#~ "New %1$s Project Submitted\n"
+#~ "\n"
+#~ "Project Full Name:  %2$s\n"
+#~ "Submitted Description: %3$s\n"
+#~ "\n"
+#~ "The %1$s admin team will now examine your project submission.  You will "
+#~ "be notified of their decision."
+#~ msgstr ""
+#~ "新项目 %1$s 注册了\n"
+#~ "\n"
+#~ "项目全名：  %2$s\n"
+#~ "注册说明： %3$s\n"
+#~ "\n"
+#~ " %1$s 的管理团队会尽快审核您注册的项目，通过审核与否您都会收到通知。"
+
 #~ msgid "I'm Sure"
 #~ msgstr "我确定"
 
@@ -24281,32 +24352,6 @@ msgstr "帐号"
 
 #~ msgid "Error: User not removed: %s"
 #~ msgstr "错误：用户没有被删除：%s"
-
-#~ msgid "Your project registration for %s has been approved."
-#~ msgstr "你注册的项目 %s 已经批准.项目"
-
-#~ msgid "%s Project Approved"
-#~ msgstr "%s 项目通过审核了"
-
-#~ msgid "Your project registration for %s has been denied."
-#~ msgstr "您在 %s 的项目注册被取消了"
-
-#~ msgid "Reasons for negative decision"
-#~ msgstr "原因"
-
-#~ msgid "%s Project Denied"
-#~ msgstr "%s 项目被取消了"
-
-#~ msgid "New %s Project Submitted"
-#~ msgstr "新项目 %s 已提交"
-
-#~ msgid "Submitted Description"
-#~ msgstr "已提交的说明"
-
-#~ msgid ""
-#~ "The %s admin team will now examine your project submission. You will be "
-#~ "notified of their decision."
-#~ msgstr "%s 的管理团队会尽快审核您注册的项目，通过审核与否您都会收到通知。"
 
 #~ msgid "Read"
 #~ msgstr "读"

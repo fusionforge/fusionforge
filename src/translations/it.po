@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-10 15:04+0200\n"
+"POT-Creation-Date: 2013-09-10 15:40+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -419,7 +419,13 @@ msgstr "Progetto"
 #: common/forum/Forum.class.php:641 common/forum/Forum.class.php:649
 #: common/forum/Forum.class.php:665 common/forum/ForumHTML.class.php:73
 #: common/forum/ForumHTML.class.php:211 common/include/Error.class.php:207
-#: common/include/exit.php:80 common/include/User.class.php:353
+#: common/include/exit.php:80 common/include/Group.class.php:2543
+#: common/include/Group.class.php:2544 common/include/Group.class.php:2602
+#: common/include/Group.class.php:2603 common/include/Group.class.php:2604
+#: common/include/Group.class.php:2656 common/include/Group.class.php:2657
+#: common/include/Group.class.php:2658 common/include/Group.class.php:2659
+#: common/include/Group.class.php:2669 common/include/Group.class.php:2670
+#: common/include/User.class.php:353
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:406
 #: common/tracker/actions/browse.php:409 common/tracker/actions/mod.php:147
@@ -515,8 +521,8 @@ msgstr "Descrizione"
 
 #: common/docman/Document.class.php:945
 #: common/docman/DocumentGroup.class.php:725
-#: common/tracker/actions/browse.php:201 common/tracker/actions/query.php:203
-#: common/tracker/actions/query.php:350
+#: common/include/Group.class.php:2658 common/tracker/actions/browse.php:201
+#: common/tracker/actions/query.php:203 common/tracker/actions/query.php:350
 msgid "Submitter"
 msgstr "Inserito da"
 
@@ -3268,208 +3274,165 @@ msgstr "Utente già attivo."
 msgid "Approved"
 msgstr "Approva"
 
-#: common/include/Group.class.php:2533 common/include/Group.class.php:2603
+#: common/include/Group.class.php:2533 common/include/Group.class.php:2594
 msgid "Group does not have any administrators."
 msgstr ""
 
 #: common/include/Group.class.php:2541
-#, fuzzy, php-format
-msgid ""
-"Your project registration for %4$s has been approved.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Your DNS will take up to a day to become active on our site.\n"
-"Your web site is accessible through your shell account. Please read\n"
-"site documentation (see link below) about intended usage, available\n"
-"services, and directory layout of the account.\n"
-"\n"
-"If you visit your\n"
-"own project page in %4$s while logged in, you will find\n"
-"additional menu functions to your left labeled 'Project Admin'.\n"
-"\n"
-"We highly suggest that you now visit %4$s and create a public\n"
-"description for your project. This can be done by visiting your project\n"
-"page while logged in, and selecting 'Project Admin' from the menus\n"
-"on the left (or by visiting %3$s\n"
-"after login).\n"
-"\n"
-"Your project will also not appear in the Trove Software Map (primary\n"
-"list of projects hosted on %4$s which offers great flexibility in\n"
-"browsing and search) until you categorize it in the project administration\n"
-"screens. So that people can find your project, you should do this now.\n"
-"Visit your project while logged in, and select 'Project Admin' from the\n"
-"menus on the left.\n"
-"\n"
-"Enjoy the system, and please tell others about %4$s. Let us know\n"
-"if there is anything we can do to help you.\n"
-"\n"
-"-- the %4$s crew"
-msgstr ""
-"Il tuo progetto su %7$s e' stato approvato.\n"
-"\n"
-"Nome progetto: %1$s\n"
-"Nome unix: %2$s\n"
-"Server CVS: cvs.%2$s.%3$s\n"
-"Server Web/Shell: %2$s.%3$s\n"
-"\n"
-"Il DNS sara' attivato fra circa 1 giorno. Mentre aspetti che il DNS\n"
-"per il tuo sito venga risolto, puoi provare a loggarti a\n"
-"\n"
-" %4$s\n"
-" \n"
-"e impostare il CVS a %5$s\n"
-"\n"
-"Se dopo 6 ore il tuo account shell/CVS non funziona ancora, apri un\n"
-"ticket di supporto. Nota che tutti gli account di shell/CVS\n"
-"funzionano solo con SSH1 (e non con telnet).\n"
-"\n"
-"Il sito sara' accessibile tramite il tuo account. Leggi la\n"
-"documentazione del sito (vedi link in basso) sull'utilizzo e sui\n"
-"servizi disponibili.\n"
-"\n"
-"Quando visiterai la pagina del tuo progetto, troverai una funzionalita'\n"
-"aggiuntiva: 'Amministrazione Progetto'. Ti suggeriamo di visitarla\n"
-"e di creare la descrizione pubblica del progetto (una volta effettuato\n"
-"il login puoi accedervi all'URL http://%3$s/project/admin/?group_id=%6$s).\n"
-"\n"
-"Il tuo progetto non sara' visualizzato nella mappa dei progetti\n"
-"fintanto che non verra' categorizzato nella amministrazione progetto.\n"
-"Per fare in modo che le persone possano trovare il tuo progetto,\n"
-"dovresti farlo subito. Visita il tuo progetto mentre sei loggato e\n"
-"seleziona 'Amministrazione Progetto' dal menu. Per ogni problema,\n"
-"inviaci una mail.\n"
-"\n"
-"-- il team %7$s"
-
-#: common/include/Group.class.php:2577
 #, php-format
-msgid "%1$s Project Approved"
-msgstr "Progetto %1$s approvato"
+msgid "Your project registration for %s has been approved."
+msgstr "Il tuo progetto su %s e' stato approvato."
 
-#: common/include/Group.class.php:2610
+#: common/include/Group.class.php:2543 common/include/Group.class.php:2602
+#: common/include/Group.class.php:2656 common/include/Group.class.php:2669
+msgid "Project Full Name"
+msgstr "Nome completo del progetto"
+
+#: common/include/Group.class.php:2544 common/include/Group.class.php:2603
+#: www/admin/approve-pending.php:194 www/admin/database.php:162
+#: www/admin/groupedit.php:171 www/admin/vhost.php:123
+#: www/register/index.php:204
+msgid "Project Unix Name"
+msgstr "Unix Name del progetto"
+
+#: common/include/Group.class.php:2546
 #, php-format
 msgid ""
-"Your project registration for %3$s has been denied.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Reasons for negative decision:\n"
-"\n"
+"If you visit your own project page in %s while logged in, you will find "
+"additional menu functions to your left labeled “Project Admin”."
 msgstr ""
-"Il tuo progetto %3$s è stato rifiutato.\n"
-"\n"
-"Nome progetto: %1$s\n"
-"Unix Name del progetto: %2$s\n"
-"\n"
-"Ragioni per il rifiuto:\n"
-"\n"
+"Quando visiterai %s la pagina del tuo progetto, troverai una funzionalita' "
+"aggiuntiva: 'Amministrazione Progetto'."
 
-#: common/include/Group.class.php:2629
+#: common/include/Group.class.php:2550
 #, php-format
-msgid "%1$s Project Denied"
-msgstr "Progetto %1$s rifiutato"
+msgid ""
+"We highly suggest that you now visit %1$s and create a public description "
+"for your project. This can be done by visiting your project page while "
+"logged in, and selecting “Project Admin” from the menus on the left (or by "
+"visiting %2$s after login)."
+msgstr ""
+"Quando visiterai %1$s la pagina del tuo progetto, troverai una funzionalita' "
+"aggiuntiva: 'Amministrazione Progetto'. Ti suggeriamo di visitarla e di "
+"creare la descrizione pubblica del progetto (una volta effettuato il login "
+"puoi accedervi all' %2$s)."
 
-#: common/include/Group.class.php:2653
+#: common/include/Group.class.php:2556
+#, php-format
+msgid ""
+"Your project will also not appear in the Trove Software Map (primary list of "
+"projects hosted on %s which offers great flexibility in browsing and search) "
+"until you categorize it in the project administration screens. So that "
+"people can find your project, you should do this now. Visit your project "
+"while logged in, and select “Project Admin” from the menus on the left."
+msgstr ""
+"Il tuo progetto non sara' visualizzato nella mappa dei progetti %s fintanto "
+"che non verra' categorizzato nella amministrazione progetto. Per fare in "
+"modo che le persone possano trovare il tuo progetto, dovresti farlo subito. "
+"Visita il tuo progetto mentre sei loggato e seleziona 'Amministrazione "
+"Progetto' dal menu."
+
+#: common/include/Group.class.php:2563
+#, php-format
+msgid ""
+"Enjoy the system, and please tell others about %s. Let us know if there is "
+"anything we can do to help you."
+msgstr ""
+
+#: common/include/Group.class.php:2566 common/mail/MailingList.class.php:205
+#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
+#: www/account/first.php:36 www/account/lostpw.php:68
+#: www/survey/privacy.php:58 www/survey/survey_resp.php:61
+#, php-format
+msgid "-- the %s staff"
+msgstr "Il team %s"
+
+#: common/include/Group.class.php:2568
+#, php-format
+msgid "%s Project Approved"
+msgstr "Progetto %s approvato"
+
+#: common/include/Group.class.php:2601
+#, php-format
+msgid "Your project registration for %s has been denied."
+msgstr "Il tuo progetto %s è stato rifiutato."
+
+#: common/include/Group.class.php:2604
+msgid "Reasons for negative decision"
+msgstr "Ragioni per il rifiuto"
+
+#: common/include/Group.class.php:2616
+#, php-format
+msgid "%s Project Denied"
+msgstr "Progetto %s rifiutato"
+
+#: common/include/Group.class.php:2640
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2660
+#: common/include/Group.class.php:2647
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2668
-#, fuzzy, php-format
-msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-msgstr ""
-"Nuovo progetto %1$s inserito\n"
-"\n"
-"Nome progetto: %2$s\n"
-"Descrizione: %3$s\n"
-"Licenza: %4$s\n"
-"\n"
-"Collegati all'URL \n"
-"%5$s per approvare o rifiutare il progetto."
+#: common/include/Group.class.php:2655 common/include/Group.class.php:2661
+#: common/include/Group.class.php:2668 common/include/Group.class.php:2674
+#, php-format
+msgid "New %s Project Submitted"
+msgstr "Nuovo progetto %s inserito"
 
-#: common/include/Group.class.php:2678
-#, fuzzy, php-format
-msgid "Submitter: %1$s (%2$s)\n"
-msgstr "Inserita da"
+#: common/include/Group.class.php:2657 common/include/Group.class.php:2670
+msgid "Submitted Description"
+msgstr "Descrizione inserita"
 
-#: common/include/Group.class.php:2684
+#: common/include/Group.class.php:2659
+#, fuzzy
+msgid "Please visit the following URL to approve or reject this project"
+msgstr "Visita il seguente URL per completare il cambio di indirizzo email:"
+
+#: common/include/Group.class.php:2671
 #, php-format
 msgid ""
-"\n"
-"Please visit the following URL to approve or reject this project:\n"
-"%1$s"
-msgstr ""
-
-#: common/include/Group.class.php:2688 common/include/Group.class.php:2703
-#, php-format
-msgid "New %1$s Project Submitted"
-msgstr "Nuovo progetto %1$s inserito"
-
-#: common/include/Group.class.php:2696
-#, fuzzy, php-format
-msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-"\n"
-"The %1$s admin team will now examine your project submission.  You will be "
+"The %s admin team will now examine your project submission. You will be "
 "notified of their decision."
 msgstr ""
-"Inserito nuovo progetto su %1$s\n"
-"\n"
-"Nome completo del progetto: %2$s\n"
-"Descrizione inserita: %3$s\n"
-"Licenza: %4$s\n"
-"\n"
-"Il team di amministrazione di %1$s esaminera' la tua proposta di nuovo\n"
+"Il team di amministrazione di %s esaminera' la tua proposta di nuovo "
 "progetto; riceverai un messaggio con la decisione presa."
 
-#: common/include/Group.class.php:2718
+#: common/include/Group.class.php:2689
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Domanda troppo corta"
 
-#: common/include/Group.class.php:2721
+#: common/include/Group.class.php:2692
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Nome progetti (selezionare il nome per modificare)"
 
-#: common/include/Group.class.php:2724
+#: common/include/Group.class.php:2695
 msgid "Group name already taken"
 msgstr "Nome progetti già utilizzato"
 
-#: common/include/Group.class.php:2806
+#: common/include/Group.class.php:2777
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr "ERRORE: DB: Impossibile cambiare stato del gruppo: %s"
 
-#: common/include/Group.class.php:2869
+#: common/include/Group.class.php:2840
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr "ERRORE: DB: Impossibile cambiare stato del gruppo: %s"
 
-#: common/include/Group.class.php:2887
+#: common/include/Group.class.php:2858
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "ERRORE: DB: Impossibile cambiare stato del gruppo: %s"
 
-#: common/include/Group.class.php:2905
+#: common/include/Group.class.php:2876
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "ERRORE: DB: Impossibile cambiare stato del gruppo: %s"
 
-#: common/include/Group.class.php:2923
+#: common/include/Group.class.php:2894
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "ERRORE: DB: Impossibile cambiare proprieta' gruppo: %s"
@@ -4564,14 +4527,6 @@ msgstr ""
 "informazioni sulla Mailing List si trovano qui:n%4$s .nnAmministrazione "
 "Mailing List:n%5$s .nnPassword Mailing List: %6$s .nTi consigliamo di "
 "cambiare questa password appena possibile.nn-- Lo staff di %1$sn\n"
-
-#: common/mail/MailingList.class.php:205
-#: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
-#: www/account/first.php:36 www/account/lostpw.php:68
-#: www/survey/privacy.php:58 www/survey/survey_resp.php:61
-#, php-format
-msgid "-- the %s staff"
-msgstr "Il team %s"
 
 #: common/mail/MailingList.class.php:208
 #: plugins/mailman/www/mailman_utils.php:38
@@ -15570,12 +15525,6 @@ msgstr "Server homepage:"
 msgid "HTTP Domain:"
 msgstr "Dominio HTTP:"
 
-#: www/admin/approve-pending.php:194 www/admin/database.php:162
-#: www/admin/groupedit.php:171 www/admin/vhost.php:123
-#: www/register/index.php:204
-msgid "Project Unix Name"
-msgstr "Unix Name del progetto"
-
 #: www/admin/approve-pending.php:196
 msgid "Submitted Description:"
 msgstr "Descrizione:"
@@ -23802,6 +23751,143 @@ msgstr "Aggiornamento multiplo"
 msgid "No User Name Provided"
 msgstr "Non è stato inserito alcun file"
 
+#, fuzzy
+#~ msgid ""
+#~ "Your project registration for %4$s has been approved.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Your DNS will take up to a day to become active on our site.\n"
+#~ "Your web site is accessible through your shell account. Please read\n"
+#~ "site documentation (see link below) about intended usage, available\n"
+#~ "services, and directory layout of the account.\n"
+#~ "\n"
+#~ "If you visit your\n"
+#~ "own project page in %4$s while logged in, you will find\n"
+#~ "additional menu functions to your left labeled 'Project Admin'.\n"
+#~ "\n"
+#~ "We highly suggest that you now visit %4$s and create a public\n"
+#~ "description for your project. This can be done by visiting your project\n"
+#~ "page while logged in, and selecting 'Project Admin' from the menus\n"
+#~ "on the left (or by visiting %3$s\n"
+#~ "after login).\n"
+#~ "\n"
+#~ "Your project will also not appear in the Trove Software Map (primary\n"
+#~ "list of projects hosted on %4$s which offers great flexibility in\n"
+#~ "browsing and search) until you categorize it in the project "
+#~ "administration\n"
+#~ "screens. So that people can find your project, you should do this now.\n"
+#~ "Visit your project while logged in, and select 'Project Admin' from the\n"
+#~ "menus on the left.\n"
+#~ "\n"
+#~ "Enjoy the system, and please tell others about %4$s. Let us know\n"
+#~ "if there is anything we can do to help you.\n"
+#~ "\n"
+#~ "-- the %4$s crew"
+#~ msgstr ""
+#~ "Il tuo progetto su %7$s e' stato approvato.\n"
+#~ "\n"
+#~ "Nome progetto: %1$s\n"
+#~ "Nome unix: %2$s\n"
+#~ "Server CVS: cvs.%2$s.%3$s\n"
+#~ "Server Web/Shell: %2$s.%3$s\n"
+#~ "\n"
+#~ "Il DNS sara' attivato fra circa 1 giorno. Mentre aspetti che il DNS\n"
+#~ "per il tuo sito venga risolto, puoi provare a loggarti a\n"
+#~ "\n"
+#~ " %4$s\n"
+#~ " \n"
+#~ "e impostare il CVS a %5$s\n"
+#~ "\n"
+#~ "Se dopo 6 ore il tuo account shell/CVS non funziona ancora, apri un\n"
+#~ "ticket di supporto. Nota che tutti gli account di shell/CVS\n"
+#~ "funzionano solo con SSH1 (e non con telnet).\n"
+#~ "\n"
+#~ "Il sito sara' accessibile tramite il tuo account. Leggi la\n"
+#~ "documentazione del sito (vedi link in basso) sull'utilizzo e sui\n"
+#~ "servizi disponibili.\n"
+#~ "\n"
+#~ "Quando visiterai la pagina del tuo progetto, troverai una funzionalita'\n"
+#~ "aggiuntiva: 'Amministrazione Progetto'. Ti suggeriamo di visitarla\n"
+#~ "e di creare la descrizione pubblica del progetto (una volta effettuato\n"
+#~ "il login puoi accedervi all'URL http://%3$s/project/admin/?group_id="
+#~ "%6$s).\n"
+#~ "\n"
+#~ "Il tuo progetto non sara' visualizzato nella mappa dei progetti\n"
+#~ "fintanto che non verra' categorizzato nella amministrazione progetto.\n"
+#~ "Per fare in modo che le persone possano trovare il tuo progetto,\n"
+#~ "dovresti farlo subito. Visita il tuo progetto mentre sei loggato e\n"
+#~ "seleziona 'Amministrazione Progetto' dal menu. Per ogni problema,\n"
+#~ "inviaci una mail.\n"
+#~ "\n"
+#~ "-- il team %7$s"
+
+#~ msgid "%1$s Project Approved"
+#~ msgstr "Progetto %1$s approvato"
+
+#~ msgid ""
+#~ "Your project registration for %3$s has been denied.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Reasons for negative decision:\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Il tuo progetto %3$s è stato rifiutato.\n"
+#~ "\n"
+#~ "Nome progetto: %1$s\n"
+#~ "Unix Name del progetto: %2$s\n"
+#~ "\n"
+#~ "Ragioni per il rifiuto:\n"
+#~ "\n"
+
+#~ msgid "%1$s Project Denied"
+#~ msgstr "Progetto %1$s rifiutato"
+
+#, fuzzy
+#~ msgid ""
+#~ "New %1$s Project Submitted\n"
+#~ "\n"
+#~ "Project Full Name:  %2$s\n"
+#~ "Submitted Description: %3$s\n"
+#~ msgstr ""
+#~ "Nuovo progetto %1$s inserito\n"
+#~ "\n"
+#~ "Nome progetto: %2$s\n"
+#~ "Descrizione: %3$s\n"
+#~ "Licenza: %4$s\n"
+#~ "\n"
+#~ "Collegati all'URL \n"
+#~ "%5$s per approvare o rifiutare il progetto."
+
+#, fuzzy
+#~ msgid "Submitter: %1$s (%2$s)\n"
+#~ msgstr "Inserita da"
+
+#~ msgid "New %1$s Project Submitted"
+#~ msgstr "Nuovo progetto %1$s inserito"
+
+#, fuzzy
+#~ msgid ""
+#~ "New %1$s Project Submitted\n"
+#~ "\n"
+#~ "Project Full Name:  %2$s\n"
+#~ "Submitted Description: %3$s\n"
+#~ "\n"
+#~ "The %1$s admin team will now examine your project submission.  You will "
+#~ "be notified of their decision."
+#~ msgstr ""
+#~ "Inserito nuovo progetto su %1$s\n"
+#~ "\n"
+#~ "Nome completo del progetto: %2$s\n"
+#~ "Descrizione inserita: %3$s\n"
+#~ "Licenza: %4$s\n"
+#~ "\n"
+#~ "Il team di amministrazione di %1$s esaminera' la tua proposta di nuovo\n"
+#~ "progetto; riceverai un messaggio con la decisione presa."
+
 #~ msgid "I'm Sure"
 #~ msgstr "Sono sicuro"
 
@@ -24474,69 +24560,6 @@ msgstr "Non è stato inserito alcun file"
 
 #~ msgid "Error: Cannot add admin to newly created group: %s"
 #~ msgstr "ERRORE: Impossibile aggiungere l'amministratore al nuovo gruppo: %s"
-
-#~ msgid "Your project registration for %s has been approved."
-#~ msgstr "Il tuo progetto su %s e' stato approvato."
-
-#~ msgid "Project Full Name"
-#~ msgstr "Nome completo del progetto"
-
-#~ msgid ""
-#~ "If you visit your own project page in %s while logged in, you will find "
-#~ "additional menu functions to your left labeled “Project Admin”."
-#~ msgstr ""
-#~ "Quando visiterai %s la pagina del tuo progetto, troverai una "
-#~ "funzionalita' aggiuntiva: 'Amministrazione Progetto'."
-
-#~ msgid ""
-#~ "We highly suggest that you now visit %1$s and create a public description "
-#~ "for your project. This can be done by visiting your project page while "
-#~ "logged in, and selecting “Project Admin” from the menus on the left (or "
-#~ "by visiting %2$s after login)."
-#~ msgstr ""
-#~ "Quando visiterai %1$s la pagina del tuo progetto, troverai una "
-#~ "funzionalita' aggiuntiva: 'Amministrazione Progetto'. Ti suggeriamo di "
-#~ "visitarla e di creare la descrizione pubblica del progetto (una volta "
-#~ "effettuato il login puoi accedervi all' %2$s)."
-
-#~ msgid ""
-#~ "Your project will also not appear in the Trove Software Map (primary list "
-#~ "of projects hosted on %s which offers great flexibility in browsing and "
-#~ "search) until you categorize it in the project administration screens. So "
-#~ "that people can find your project, you should do this now. Visit your "
-#~ "project while logged in, and select “Project Admin” from the menus on the "
-#~ "left."
-#~ msgstr ""
-#~ "Il tuo progetto non sara' visualizzato nella mappa dei progetti %s "
-#~ "fintanto che non verra' categorizzato nella amministrazione progetto. Per "
-#~ "fare in modo che le persone possano trovare il tuo progetto, dovresti "
-#~ "farlo subito. Visita il tuo progetto mentre sei loggato e seleziona "
-#~ "'Amministrazione Progetto' dal menu."
-
-#~ msgid "%s Project Approved"
-#~ msgstr "Progetto %s approvato"
-
-#~ msgid "Your project registration for %s has been denied."
-#~ msgstr "Il tuo progetto %s è stato rifiutato."
-
-#~ msgid "Reasons for negative decision"
-#~ msgstr "Ragioni per il rifiuto"
-
-#~ msgid "%s Project Denied"
-#~ msgstr "Progetto %s rifiutato"
-
-#~ msgid "New %s Project Submitted"
-#~ msgstr "Nuovo progetto %s inserito"
-
-#~ msgid "Submitted Description"
-#~ msgstr "Descrizione inserita"
-
-#~ msgid ""
-#~ "The %s admin team will now examine your project submission. You will be "
-#~ "notified of their decision."
-#~ msgstr ""
-#~ "Il team di amministrazione di %s esaminera' la tua proposta di nuovo "
-#~ "progetto; riceverai un messaggio con la decisione presa."
 
 #~ msgid "* Denotes requests > %s Days Old"
 #~ msgstr "* indica richieste più vecchie di %s giorni"
