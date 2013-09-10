@@ -29,7 +29,7 @@ class ForumAdmin extends Error {
 	var $group_id;
 	var $p,$g;
 
-	function ForumAdmin($group_id) {
+	function __construct($group_id) {
 		$this->Error();
 		$this->group_id = $group_id;
 		if ($group_id) {
@@ -39,7 +39,7 @@ class ForumAdmin extends Error {
 			if (!$this->g->usesForum()) {
 				$this->setError(sprintf(_('%s does not use the Forum tool'),
 				    $this->g->getPublicName()));
-				return false;
+				return;
 			}
 		}
 	}
@@ -80,7 +80,7 @@ class ForumAdmin extends Error {
 
 		echo '
 			<p>
-			<a href="index.php?group_id='.$group_id.'&amp;add_forum=1">'._('Add forum').'</a>';
+			<a href="index.php?group_id='.$group_id.'&amp;add_forum=1">'._('Add Forum').'</a>';
 		echo '
 			| <a href="pending.php?action=view_pending&amp;group_id=' . $group_id . '">' . _('Manage Pending Messages').'</a><br /></p>';
 	}
@@ -127,7 +127,8 @@ class ForumAdmin extends Error {
 	 *  Authorized - authorizes and returns true if the user is authorized for the group, or false.
 	 *
 	 *  @param  string	 The group id.
-	 */
+     *	@return bool
+     */
 
 	function Authorized($group_id) {
 		if (!$group_id) {
@@ -156,7 +157,8 @@ class ForumAdmin extends Error {
 	 *  ExecuteAction - Executes the action passed as parameter
 	 *
 	 *  @param  string	 action to execute.
-	 */
+     *	@return string
+     */
 	function ExecuteAction ($action) {
 		global $HTML;
 
@@ -234,7 +236,7 @@ class ForumAdmin extends Error {
 			if (!$count || $fm->isError()) {
 				exit_error($fm->getErrorMessage(),'forums');
 			} else {
-				$feedback = sprintf(ngettext('%1$s message deleted', '%1$s messages deleted', $count), $count);
+				$feedback = sprintf(ngettext('%s message deleted', '%s messages deleted', $count), $count);
 			}
 			return $feedback;
 		}
@@ -344,17 +346,17 @@ class ForumAdmin extends Error {
 				//<a href=\"javascript:msgdetail('$url');\">$onemsg[subject]</a>
 				$url = "http://www.google.com";
 				echo "
-				<tr" . $HTML->boxGetAltRowStyle($i++). ">
+				<tr " . $HTML->boxGetAltRowStyle($i++). ">
 					<td>$onemsg[forum_name]</td>
 					<td><a href=\"#\" onclick=\"window.open('pendingmsgdetail.php?msg_id=$onemsg[msg_id]&amp;forum_id=$onemsg[group_forum_id]&amp;group_id=$group_id','PendingMessageDetail','width=800,height=600,status=no,resizable=yes');\">$onemsg[subject]</a></td>
-					<td><div align=\"right\">" . html_build_select_box_from_assoc($options,"doaction[]",1) . "</div></td>
+					<td><div class=\"align-right\">" . html_build_select_box_from_assoc($options,"doaction[]",1) . "</div></td>
 				</tr>";
 			}
 
 			echo $HTML->listTableBottom();
 			echo '
 			<input type="hidden" name="msgids" value="' . $ids . '" />
-			<p align="right"><input type="submit" onclick="return confirmDel();" name="update" value="' . _('Update') . '" /></p>
+			<p class="align-right"><input type="submit" onclick="return confirmDel();" name="update" value="' . _('Update') . '" /></p>
 			</form>
 			';
 		}
@@ -433,7 +435,7 @@ class ForumAdmin extends Error {
 						$has_followups = db_result($res1,0,"has_followups");
 						$most_recent_date = db_result($res1,0,"most_recent_date");
 						if ($fm->insertreleasedmsg($group_forum_id,$subject, $body,$post_date, $thread_id, $is_followup_to,$posted_by,$has_followups,time())) {
-							$feedback .= "( $subject ) " . _('Pending message released') . "<br />";
+							$feedback .= "($subject) " . _('Pending message released') . "<br />";
 							if (db_numrows($res2)>0) {
 								//if there's an attachment
 								$am = NEW AttachManager();//object that will handle and insert the attachment into the db
@@ -455,11 +457,11 @@ class ForumAdmin extends Error {
 							$deleteok = true;
 						} else {
 							if ($fm->isError()) {
-							    if ( $fm->getErrorMessage() == (_('Couldn\'t Update Master Thread parent with current time')) ) {
+							    if ( $fm->getErrorMessage() == (_('Could not Update Master Thread parent with current time')) ) {
 							    	//the thread which the message was replying to doesn't exist any more
-							    	$feedback .= "( " . $subject . " ) " . _('The thread which the message was posted to doesn\'t exist anymore, please delete the message.');
+							    	$feedback .= "( " . $subject . " ) " . _('The thread which the message was posted to doesn\'t exist anymore, please delete the message.') . "<br />";
 							    } else {
-									$error_msg .= "$msg_id - " . $fm->getErrorMessage();
+									$error_msg .= "$msg_id - " . $fm->getErrorMessage() . "<br />";
 							    }
 								$deleteok = false;
 							}

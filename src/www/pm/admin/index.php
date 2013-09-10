@@ -175,7 +175,7 @@ if ($add_cat && $group_project_id) {
 	session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 	$title = sprintf(_('Add Categories to: %s'), $pg->getName());
-	pm_header(array ('title'=>$title));
+	pm_header(array('title'=>$title));
 
 	/*
 		List of possible categories for this ArtifactType
@@ -404,7 +404,7 @@ if ($add_cat && $group_project_id) {
 
 	if (count($pg_arr) < 1 || $pg_arr == false) {
 		echo '<p class="information">' . _('No Subprojects Found in this Project') . '</p>';
-		echo '<p>' . _('You may add new Subprojects using the "Add a Subproject" link above.') . '</p>';
+		echo '<p>' . _('You may add new Subprojects using the “Add a Subproject” link above.') . '</p>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<count($pg_arr); $i++) {

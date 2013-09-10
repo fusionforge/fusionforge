@@ -171,7 +171,7 @@ if (getStringFromRequest('add_forum')) {
 
 	$f = new Forum ($g,$group_forum_id);
 
-	forum_header(array('title'=>_('Delete')));
+	forum_header(array('title'=>_('Permanently Delete Forum'));
 	echo '<p>
 			<strong>'._('You are about to permanently and irretrievably delete this entire forum and all its contents!').'</strong><br />
 			</p>
@@ -180,8 +180,8 @@ if (getStringFromRequest('add_forum')) {
 			<input type="hidden" name="deleteforum" value="y" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
 			<input type="hidden" name="group_forum_id" value="'.$group_forum_id.'" />
-			<input type="checkbox" name="sure" value="1" />'._('I\'m Sure').'<br />
-			<input type="checkbox" name="really_sure" value="1" />'._('I\'m Really Sure').'<br />
+			<input type="checkbox" name="sure" value="1" />'._('I am Sure').'<br />
+			<input type="checkbox" name="really_sure" value="1" />'._('I am Really Sure').'<br />
 			<input type="submit" name="submit" value="'._('Delete').'" />
 			</form>';
 	forum_footer(array());
@@ -370,7 +370,7 @@ if (getStringFromRequest('add_forum')) {
 		$farr = $ff->getForums();
 
 		if ($ff->isError()) {
-			echo '<p class="error">'.sprintf(_('No Forums Found For %s'), $g->getPublicName())
+			echo '<p class="error">'.sprintf(_('No Forums Found for %s'), $g->getPublicName())
                  . $ff->getErrorMessage().'</p>';
 			forum_footer(array());
 			exit;
