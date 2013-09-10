@@ -305,9 +305,7 @@ class ReportSetup extends Report {
 		FROM rep_group_act_monthly;";
 
 		for ($i=0; $i<count($sql); $i++) {
-
-			$res=db_query_params($sql[$i], array());
-
+			db_query_params($sql[$i], array());
 		}
 
 	}
