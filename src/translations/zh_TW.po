@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-10 14:22+0200\n"
+"POT-Creation-Date: 2013-09-10 15:04+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1937,7 +1937,7 @@ msgid "Could Not Get Forum Object"
 msgstr "無法更新上層文章"
 
 #: common/forum/AttachManager.class.php:150
-#: common/forum/ForumAdmin.class.php:68 common/forum/ForumAdmin.class.php:331
+#: common/forum/ForumAdmin.class.php:68 common/forum/ForumAdmin.class.php:333
 #: common/tracker/actions/admin-tracker.php:70
 #: common/tracker/actions/deleteartifact.php:56
 #: common/tracker/actions/mod.php:76
@@ -1947,7 +1947,7 @@ msgstr "無法更新上層文章"
 #: common/tracker/views/form-addextrafield.php:81
 #: common/tracker/views/form-customizelist.php:100
 #: common/tracker/views/form-deleteextrafieldelement.php:65
-#: common/tracker/views/form-deleteextrafield.php:42
+#: common/tracker/views/form-deleteextrafield.php:43
 #: common/tracker/views/form-deletetracker.php:35
 #: plugins/contribtracker/www/global_admin.php:274
 #: plugins/contribtracker/www/global_admin.php:317
@@ -1975,16 +1975,15 @@ msgstr "無法更新上層文章"
 #: plugins/scmgit/common/GitPlugin.class.php:1102
 #: www/admin/admin_table.php:162 www/admin/admin_table.php:326
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:152
-#: www/admin/useredit.php:231 www/forum/admin/index.php:174
-#: www/forum/admin/index.php:185 www/frs/admin/deletepackage.php:74
-#: www/frs/admin/deleterelease.php:77 www/frs/admin/index.php:184
-#: www/frs/admin/showreleases.php:114 www/news/admin/index.php:133
-#: www/people/people_utils.php:178 www/people/people_utils.php:322
-#: www/people/skills_utils.php:46 www/people/skills_utils.php:104
-#: www/pm/admin/index.php:360 www/pm/admin/index.php:371
-#: www/project/admin/vhost.php:145 www/reporting/timeadd.php:163
-#: www/snippet/detail.php:67 www/survey/include/SurveyHTML.class.php:312
-#: www/tracker/admin/index.php:103 www/tracker/admin/index.php:180
+#: www/admin/useredit.php:231 www/forum/admin/index.php:185
+#: www/frs/admin/deletepackage.php:74 www/frs/admin/deleterelease.php:77
+#: www/frs/admin/index.php:184 www/frs/admin/showreleases.php:114
+#: www/news/admin/index.php:133 www/people/people_utils.php:178
+#: www/people/people_utils.php:322 www/people/skills_utils.php:46
+#: www/people/skills_utils.php:104 www/project/admin/vhost.php:145
+#: www/reporting/timeadd.php:163 www/snippet/detail.php:67
+#: www/survey/include/SurveyHTML.class.php:312 www/tracker/admin/index.php:103
+#: www/tracker/admin/index.php:180
 msgid "Delete"
 msgstr "刪除"
 
@@ -2051,7 +2050,7 @@ msgstr ""
 
 #: common/forum/ForumAdmin.class.php:83 www/forum/admin/index.php:104
 #, fuzzy
-msgid "Add forum"
+msgid "Add Forum"
 msgstr "增加討論區"
 
 #: common/forum/ForumAdmin.class.php:85 common/forum/ForumAdmin.class.php:97
@@ -2059,65 +2058,65 @@ msgstr "增加討論區"
 msgid "Manage Pending Messages"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:174 common/forum/ForumAdmin.class.php:202
-#: common/forum/ForumAdmin.class.php:220 common/forum/ForumAdmin.class.php:248
+#: common/forum/ForumAdmin.class.php:176 common/forum/ForumAdmin.class.php:204
+#: common/forum/ForumAdmin.class.php:222 common/forum/ForumAdmin.class.php:250
 #: www/forum/attachment.php:72 www/forum/monitor.php:47 www/forum/new.php:48
 #: www/forum/save.php:47
 #, fuzzy
 msgid "Error getting Forum"
 msgstr "新增討論區錯誤"
 
-#: common/forum/ForumAdmin.class.php:184
+#: common/forum/ForumAdmin.class.php:186
 msgid "Forum Info Updated Successfully"
 msgstr "討論區資訊更新成功"
 
-#: common/forum/ForumAdmin.class.php:211
+#: common/forum/ForumAdmin.class.php:213
 #, fuzzy
 msgid "Forum added successfully"
 msgstr "討論區建立成功"
 
-#: common/forum/ForumAdmin.class.php:229 www/forum/admin/index.php:292
+#: common/forum/ForumAdmin.class.php:231 www/forum/admin/index.php:292
 #, fuzzy
 msgid "Error Getting ForumMessage"
 msgstr "新增討論區錯誤"
 
-#: common/forum/ForumAdmin.class.php:237
+#: common/forum/ForumAdmin.class.php:239
 #, fuzzy, php-format
-msgid "%1$s message deleted"
-msgid_plural "%1$s messages deleted"
+msgid "%s message deleted"
+msgid_plural "%s messages deleted"
 msgstr[0] "%1$s 文章已刪除"
 msgstr[1] "%1$s 文章已刪除"
 
-#: common/forum/ForumAdmin.class.php:258 www/reporting/timeadd.php:67
+#: common/forum/ForumAdmin.class.php:260 www/reporting/timeadd.php:67
 msgid "Successfully Deleted"
 msgstr "成功刪除"
 
-#: common/forum/ForumAdmin.class.php:283
+#: common/forum/ForumAdmin.class.php:285
 msgid "No forums are moderated for this group"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:297
+#: common/forum/ForumAdmin.class.php:299
 msgid "Proceed? Actions are permanent!"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:317 www/forum/admin/index.php:113
+#: common/forum/ForumAdmin.class.php:319 www/forum/admin/index.php:113
 #: www/forum/admin/index.php:150
 msgid "Forum Name"
 msgstr "討論區名稱"
 
-#: common/forum/ForumAdmin.class.php:318
+#: common/forum/ForumAdmin.class.php:320
 #: common/tracker/include/ArtifactHtml.class.php:73
 #: plugins/message/common/messagePlugin.class.php:35 www/admin/cronman.php:44
 #: www/sendmessage.php:154
 msgid "Message"
 msgstr "訊息"
 
-#: common/forum/ForumAdmin.class.php:330
+#: common/forum/ForumAdmin.class.php:332
 #, fuzzy
 msgid "No action"
 msgstr "動作"
 
-#: common/forum/ForumAdmin.class.php:332
+#: common/forum/ForumAdmin.class.php:334
 #: plugins/mantisbt/controler/filter_roadmap.php:60
 #: plugins/mantisbt/controler/filter_roadmap.php:92
 #: plugins/mantisbt/view/admin/editVersion.php:76
@@ -2128,7 +2127,7 @@ msgstr "動作"
 msgid "Release"
 msgstr "發佈"
 
-#: common/forum/ForumAdmin.class.php:357 common/forum/ForumHTML.class.php:330
+#: common/forum/ForumAdmin.class.php:359 common/forum/ForumHTML.class.php:330
 #: common/forum/ForumHTML.class.php:555
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
@@ -2159,41 +2158,41 @@ msgstr "發佈"
 msgid "Update"
 msgstr "更新"
 
-#: common/forum/ForumAdmin.class.php:397
+#: common/forum/ForumAdmin.class.php:399
 #, fuzzy
 msgid "Forum deleted"
 msgstr "確認刪除"
 
-#: common/forum/ForumAdmin.class.php:416 www/forum/forum.php:70
+#: common/forum/ForumAdmin.class.php:418 www/forum/forum.php:70
 #: www/forum/message.php:72
 #, fuzzy
 msgid "Error getting new Forum"
 msgstr "新增討論區錯誤"
 
-#: common/forum/ForumAdmin.class.php:422
+#: common/forum/ForumAdmin.class.php:424
 #: www/forum/admin/pendingmsgdetail.php:57 www/forum/forum.php:89
 #: www/forum/message.php:82
 #, fuzzy
 msgid "Error getting new ForumMessage"
 msgstr "新增討論區錯誤"
 
-#: common/forum/ForumAdmin.class.php:424
+#: common/forum/ForumAdmin.class.php:426
 #: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
 #, fuzzy
 msgid "Error getting new ForumMessage: "
 msgstr "新增討論區錯誤"
 
-#: common/forum/ForumAdmin.class.php:436
+#: common/forum/ForumAdmin.class.php:438
 #, fuzzy
 msgid "Pending message released"
 msgstr "未審核原因："
 
-#: common/forum/ForumAdmin.class.php:458
-#: common/forum/ForumMessage.class.php:276
-msgid "Couldn't Update Master Thread parent with current time"
+#: common/forum/ForumAdmin.class.php:460
+#: common/forum/ForumMessage.class.php:183
+msgid "Could not Update Master Thread parent with current time"
 msgstr "目前無法更新 Master Thread parent"
 
-#: common/forum/ForumAdmin.class.php:460
+#: common/forum/ForumAdmin.class.php:462
 msgid ""
 "The thread which the message was posted to doesn't exist anymore, please "
 "delete the message."
@@ -2515,15 +2514,15 @@ msgstr "張貼失敗"
 msgid "Unable to get new message id"
 msgstr "無法獲得文章編號"
 
-#: common/forum/ForumMessage.class.php:183
-msgid "Could not Update Master Thread parent with current time"
-msgstr "目前無法更新 Master Thread parent"
-
 #: common/forum/ForumMessage.class.php:194
 #: common/forum/ForumMessage.class.php:287
 #: common/forum/ForumMessage.class.php:299
 msgid "Could Not Update Parent"
 msgstr "無法更新上層文章"
+
+#: common/forum/ForumMessage.class.php:276
+msgid "Couldn't Update Master Thread parent with current time"
+msgstr "目前無法更新 Master Thread parent"
 
 #: common/forum/ForumMessage.class.php:357
 #: common/forum/ForumMessage.class.php:800
@@ -5314,7 +5313,7 @@ msgstr "元件更新了"
 
 #: common/tracker/actions/browse.php:94
 #: common/tracker/actions/downloadcsv.php:38
-#: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:382
+#: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:381
 #: www/pm/index.php:46 www/pm/task.php:88 www/tracker/roadmap.php:333
 #, fuzzy
 msgid "Could Not Get Factory"
@@ -7011,9 +7010,12 @@ msgid "Element"
 msgstr "組成元件"
 
 #: common/tracker/views/form-deleteextrafieldelement.php:62
+#: common/tracker/views/form-deleteextrafield.php:39
 #: common/tracker/views/form-deletetracker.php:32
-#: www/admin/responses_admin.php:51 www/frs/admin/deletepackage.php:68
-#: www/frs/admin/editrelease.php:383 www/reporting/rebuild.php:63
+#: www/admin/responses_admin.php:51 www/forum/admin/index.php:183
+#: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:75
+#: www/frs/admin/editrelease.php:383 www/pm/admin/index.php:369
+#: www/project/admin/roledelete.php:81 www/reporting/rebuild.php:63
 msgid "I am Sure"
 msgstr "我確定"
 
@@ -7022,27 +7024,22 @@ msgstr "我確定"
 msgid "Delete a custom field for %s"
 msgstr "訂製欄位類型"
 
-#: common/tracker/views/form-deleteextrafield.php:30
+#: common/tracker/views/form-deleteextrafield.php:31
 #, fuzzy
 msgid "Delete Custom Field"
 msgstr "訂製欄位類型"
 
-#: common/tracker/views/form-deleteextrafield.php:35
+#: common/tracker/views/form-deleteextrafield.php:36
 msgid ""
 "You are about to permanently and irretrievably delete this custom field and "
 "all its contents!"
 msgstr "您正在永久且不能挽回地刪除這個訂製欄位和它所有的內容！"
 
-#: common/tracker/views/form-deleteextrafield.php:38
-#: www/forum/admin/index.php:183 www/frs/admin/deleterelease.php:75
-#: www/pm/admin/index.php:368 www/project/admin/roledelete.php:81
-msgid "I'm Sure"
-msgstr "我確定"
-
-#: common/tracker/views/form-deleteextrafield.php:39
-#: www/forum/admin/index.php:184 www/frs/admin/deleterelease.php:76
-#: www/pm/admin/index.php:369
-msgid "I'm Really Sure"
+#: common/tracker/views/form-deleteextrafield.php:40
+#: common/tracker/views/form-deletetracker.php:33
+#: www/forum/admin/index.php:184 www/frs/admin/deletepackage.php:71
+#: www/frs/admin/deleterelease.php:76 www/pm/admin/index.php:370
+msgid "I am Really Sure"
 msgstr "我非常確定"
 
 #: common/tracker/views/form-deletetracker.php:24
@@ -7060,11 +7057,6 @@ msgid ""
 "You are about to permanently and irretrievably delete this tracker and all "
 "its contents!"
 msgstr "你將永久地刪除這個的追蹤者和它所有的內容，而且不能挽回！"
-
-#: common/tracker/views/form-deletetracker.php:33
-#: www/frs/admin/deletepackage.php:71
-msgid "I am Really Sure"
-msgstr "我非常確定"
 
 #: common/tracker/views/form-edittemplate.php:3
 #, fuzzy, php-format
@@ -17096,6 +17088,11 @@ msgstr ""
 msgid "Delete entire forum and all content"
 msgstr "刪除整個的討論區和所有的內容"
 
+#: www/forum/admin/index.php:174
+#, fuzzy
+msgid "Permanently Delete Forum"
+msgstr "永久的刪除"
+
 #: www/forum/admin/index.php:176
 msgid ""
 "You are about to permanently and irretrievably delete this entire forum and "
@@ -17161,9 +17158,9 @@ msgid "Move Thread"
 msgstr "討論"
 
 #: www/forum/admin/index.php:373 www/forum/admin/index.php:449
-#, fuzzy, php-format
-msgid "No Forums Found For %s"
-msgstr "%1$s 沒有討論區"
+#, php-format
+msgid "No Forums Found for %s"
+msgstr "%s 沒有討論區"
 
 #: www/forum/admin/index.php:403
 #, php-format
@@ -19788,39 +19785,44 @@ msgstr "增加/編輯分類"
 msgid "Permanently delete this subproject and all its data."
 msgstr "永久地刪除子專案與它的全部資料"
 
-#: www/pm/admin/index.php:366
+#: www/pm/admin/index.php:360 www/pm/admin/index.php:371
+#, fuzzy
+msgid "Permanently delete this subproject and all its data"
+msgstr "永久地刪除子專案與它的全部資料"
+
+#: www/pm/admin/index.php:367
 msgid ""
 "You are about to permanently and irretrievably delete this subproject and "
 "all its related data!"
 msgstr "你將永久地刪除這個子專案和它所有的相關內容，而且不能挽回！"
 
-#: www/pm/admin/index.php:390 www/project/admin/tools.php:326
+#: www/pm/admin/index.php:389 www/project/admin/tools.php:326
 #, fuzzy
 msgid "Tasks Administration"
 msgstr "管理部門"
 
-#: www/pm/admin/index.php:398
+#: www/pm/admin/index.php:397
 #, fuzzy
 msgid "Add a Subproject"
 msgstr "增加新專案"
 
-#: www/pm/admin/index.php:399
+#: www/pm/admin/index.php:398
 #, fuzzy
 msgid ""
 "Add a subproject, which can contain a set of tasks. This is different than "
 "creating a new task."
 msgstr "增加一個包括一系列任務的專案，這和建立一個新任務是不同的。"
 
-#: www/pm/admin/index.php:407
+#: www/pm/admin/index.php:406
 #, fuzzy
 msgid "No Subprojects Found in this Project"
 msgstr "該專案沒有這樣的文章"
 
-#: www/pm/admin/index.php:408
-msgid "You may add new Subprojects using the \"Add a Subproject\" link above."
+#: www/pm/admin/index.php:407
+msgid "You may add new Subprojects using the “Add a Subproject” link above."
 msgstr ""
 
-#: www/pm/admin/index.php:412
+#: www/pm/admin/index.php:411
 #, fuzzy
 msgid "Edit/Update Subproject"
 msgstr "編輯/更新專案"
@@ -23604,6 +23606,20 @@ msgstr "大量更新"
 msgid "No User Name Provided"
 msgstr "帳號"
 
+#~ msgid "I'm Sure"
+#~ msgstr "我確定"
+
+#, fuzzy
+#~ msgid "Add forum"
+#~ msgstr "增加討論區"
+
+#~ msgid "I'm Really Sure"
+#~ msgstr "我非常確定"
+
+#, fuzzy
+#~ msgid "No Forums Found For %s"
+#~ msgstr "%1$s 沒有討論區"
+
 #, fuzzy
 #~ msgid "Assigned To"
 #~ msgstr "指定給"
@@ -24332,9 +24348,6 @@ msgstr "帳號"
 
 #~ msgid "Error: Choose a User To Monitor First"
 #~ msgstr "錯誤 － 先選擇某個會員"
-
-#~ msgid "No Forums Found for %s"
-#~ msgstr "%s 沒有討論區"
 
 #~ msgid "Project totals"
 #~ msgstr "專案檔案總數"

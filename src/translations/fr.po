@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-10 14:22+0200\n"
+"POT-Creation-Date: 2013-09-10 15:04+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1835,7 +1835,7 @@ msgid "Could Not Get Forum Object"
 msgstr "Erreur lors de la création de l'objet Forum"
 
 #: common/forum/AttachManager.class.php:150
-#: common/forum/ForumAdmin.class.php:68 common/forum/ForumAdmin.class.php:331
+#: common/forum/ForumAdmin.class.php:68 common/forum/ForumAdmin.class.php:333
 #: common/tracker/actions/admin-tracker.php:70
 #: common/tracker/actions/deleteartifact.php:56
 #: common/tracker/actions/mod.php:76
@@ -1845,7 +1845,7 @@ msgstr "Erreur lors de la création de l'objet Forum"
 #: common/tracker/views/form-addextrafield.php:81
 #: common/tracker/views/form-customizelist.php:100
 #: common/tracker/views/form-deleteextrafieldelement.php:65
-#: common/tracker/views/form-deleteextrafield.php:42
+#: common/tracker/views/form-deleteextrafield.php:43
 #: common/tracker/views/form-deletetracker.php:35
 #: plugins/contribtracker/www/global_admin.php:274
 #: plugins/contribtracker/www/global_admin.php:317
@@ -1873,16 +1873,15 @@ msgstr "Erreur lors de la création de l'objet Forum"
 #: plugins/scmgit/common/GitPlugin.class.php:1102
 #: www/admin/admin_table.php:162 www/admin/admin_table.php:326
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:152
-#: www/admin/useredit.php:231 www/forum/admin/index.php:174
-#: www/forum/admin/index.php:185 www/frs/admin/deletepackage.php:74
-#: www/frs/admin/deleterelease.php:77 www/frs/admin/index.php:184
-#: www/frs/admin/showreleases.php:114 www/news/admin/index.php:133
-#: www/people/people_utils.php:178 www/people/people_utils.php:322
-#: www/people/skills_utils.php:46 www/people/skills_utils.php:104
-#: www/pm/admin/index.php:360 www/pm/admin/index.php:371
-#: www/project/admin/vhost.php:145 www/reporting/timeadd.php:163
-#: www/snippet/detail.php:67 www/survey/include/SurveyHTML.class.php:312
-#: www/tracker/admin/index.php:103 www/tracker/admin/index.php:180
+#: www/admin/useredit.php:231 www/forum/admin/index.php:185
+#: www/frs/admin/deletepackage.php:74 www/frs/admin/deleterelease.php:77
+#: www/frs/admin/index.php:184 www/frs/admin/showreleases.php:114
+#: www/news/admin/index.php:133 www/people/people_utils.php:178
+#: www/people/people_utils.php:322 www/people/skills_utils.php:46
+#: www/people/skills_utils.php:104 www/project/admin/vhost.php:145
+#: www/reporting/timeadd.php:163 www/snippet/detail.php:67
+#: www/survey/include/SurveyHTML.class.php:312 www/tracker/admin/index.php:103
+#: www/tracker/admin/index.php:180
 msgid "Delete"
 msgstr "Effacer"
 
@@ -1948,7 +1947,7 @@ msgid "Move thread"
 msgstr "Déplacer la discussion"
 
 #: common/forum/ForumAdmin.class.php:83 www/forum/admin/index.php:104
-msgid "Add forum"
+msgid "Add Forum"
 msgstr "Ajouter un forum"
 
 #: common/forum/ForumAdmin.class.php:85 common/forum/ForumAdmin.class.php:97
@@ -1956,61 +1955,61 @@ msgstr "Ajouter un forum"
 msgid "Manage Pending Messages"
 msgstr "Gérer les messages en attente"
 
-#: common/forum/ForumAdmin.class.php:174 common/forum/ForumAdmin.class.php:202
-#: common/forum/ForumAdmin.class.php:220 common/forum/ForumAdmin.class.php:248
+#: common/forum/ForumAdmin.class.php:176 common/forum/ForumAdmin.class.php:204
+#: common/forum/ForumAdmin.class.php:222 common/forum/ForumAdmin.class.php:250
 #: www/forum/attachment.php:72 www/forum/monitor.php:47 www/forum/new.php:48
 #: www/forum/save.php:47
 msgid "Error getting Forum"
 msgstr "Erreur lors de l'accès à un forum"
 
-#: common/forum/ForumAdmin.class.php:184
+#: common/forum/ForumAdmin.class.php:186
 msgid "Forum Info Updated Successfully"
 msgstr "Le forum a été mis à jour"
 
-#: common/forum/ForumAdmin.class.php:211
+#: common/forum/ForumAdmin.class.php:213
 msgid "Forum added successfully"
 msgstr "Le forum a été créé"
 
-#: common/forum/ForumAdmin.class.php:229 www/forum/admin/index.php:292
+#: common/forum/ForumAdmin.class.php:231 www/forum/admin/index.php:292
 msgid "Error Getting ForumMessage"
 msgstr "Erreur lors de l'accès à un message de forum"
 
-#: common/forum/ForumAdmin.class.php:237
+#: common/forum/ForumAdmin.class.php:239
 #, php-format
-msgid "%1$s message deleted"
-msgid_plural "%1$s messages deleted"
-msgstr[0] "%1$s message effacé"
-msgstr[1] "%1$s messages effacés"
+msgid "%s message deleted"
+msgid_plural "%s messages deleted"
+msgstr[0] "%s message supprimé"
+msgstr[1] "%s messages supprimés"
 
-#: common/forum/ForumAdmin.class.php:258 www/reporting/timeadd.php:67
+#: common/forum/ForumAdmin.class.php:260 www/reporting/timeadd.php:67
 msgid "Successfully Deleted"
 msgstr "Supprimé avec succès"
 
-#: common/forum/ForumAdmin.class.php:283
+#: common/forum/ForumAdmin.class.php:285
 msgid "No forums are moderated for this group"
 msgstr "Ce groupe n'a pas de forums modérés."
 
-#: common/forum/ForumAdmin.class.php:297
+#: common/forum/ForumAdmin.class.php:299
 msgid "Proceed? Actions are permanent!"
 msgstr "Continuer ?  Ces actions sont irréversibles !"
 
-#: common/forum/ForumAdmin.class.php:317 www/forum/admin/index.php:113
+#: common/forum/ForumAdmin.class.php:319 www/forum/admin/index.php:113
 #: www/forum/admin/index.php:150
 msgid "Forum Name"
 msgstr "Nom du forum"
 
-#: common/forum/ForumAdmin.class.php:318
+#: common/forum/ForumAdmin.class.php:320
 #: common/tracker/include/ArtifactHtml.class.php:73
 #: plugins/message/common/messagePlugin.class.php:35 www/admin/cronman.php:44
 #: www/sendmessage.php:154
 msgid "Message"
 msgstr "Message"
 
-#: common/forum/ForumAdmin.class.php:330
+#: common/forum/ForumAdmin.class.php:332
 msgid "No action"
 msgstr "Aucune action"
 
-#: common/forum/ForumAdmin.class.php:332
+#: common/forum/ForumAdmin.class.php:334
 #: plugins/mantisbt/controler/filter_roadmap.php:60
 #: plugins/mantisbt/controler/filter_roadmap.php:92
 #: plugins/mantisbt/view/admin/editVersion.php:76
@@ -2020,7 +2019,7 @@ msgstr "Aucune action"
 msgid "Release"
 msgstr "Accepter"
 
-#: common/forum/ForumAdmin.class.php:357 common/forum/ForumHTML.class.php:330
+#: common/forum/ForumAdmin.class.php:359 common/forum/ForumHTML.class.php:330
 #: common/forum/ForumHTML.class.php:555
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
@@ -2051,38 +2050,38 @@ msgstr "Accepter"
 msgid "Update"
 msgstr "Mettre à jour"
 
-#: common/forum/ForumAdmin.class.php:397
+#: common/forum/ForumAdmin.class.php:399
 msgid "Forum deleted"
 msgstr "Forum effacé"
 
-#: common/forum/ForumAdmin.class.php:416 www/forum/forum.php:70
+#: common/forum/ForumAdmin.class.php:418 www/forum/forum.php:70
 #: www/forum/message.php:72
 msgid "Error getting new Forum"
 msgstr "Erreur lors de l'accès à un forum"
 
-#: common/forum/ForumAdmin.class.php:422
+#: common/forum/ForumAdmin.class.php:424
 #: www/forum/admin/pendingmsgdetail.php:57 www/forum/forum.php:89
 #: www/forum/message.php:82
 msgid "Error getting new ForumMessage"
 msgstr "Erreur lors de l'accès à un message de forum"
 
-#: common/forum/ForumAdmin.class.php:424
+#: common/forum/ForumAdmin.class.php:426
 #: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
 msgid "Error getting new ForumMessage: "
 msgstr "Erreur lors de l'accès à un message de forum"
 
-#: common/forum/ForumAdmin.class.php:436
+#: common/forum/ForumAdmin.class.php:438
 msgid "Pending message released"
 msgstr "Message en attente validé"
 
-#: common/forum/ForumAdmin.class.php:458
-#: common/forum/ForumMessage.class.php:276
-msgid "Couldn't Update Master Thread parent with current time"
+#: common/forum/ForumAdmin.class.php:460
+#: common/forum/ForumMessage.class.php:183
+msgid "Could not Update Master Thread parent with current time"
 msgstr ""
 "Échec lors de la mise à jour du fil de discussion principal avec la date "
 "courante"
 
-#: common/forum/ForumAdmin.class.php:460
+#: common/forum/ForumAdmin.class.php:462
 msgid ""
 "The thread which the message was posted to doesn't exist anymore, please "
 "delete the message."
@@ -2403,17 +2402,17 @@ msgstr "L'ajout de message a échoué"
 msgid "Unable to get new message id"
 msgstr "Impossible d'obtenir un nouvel identifiant de message"
 
-#: common/forum/ForumMessage.class.php:183
-msgid "Could not Update Master Thread parent with current time"
-msgstr ""
-"Échec lors de la mise à jour du fil de discussion principal avec la date "
-"courante"
-
 #: common/forum/ForumMessage.class.php:194
 #: common/forum/ForumMessage.class.php:287
 #: common/forum/ForumMessage.class.php:299
 msgid "Could Not Update Parent"
 msgstr "Échec lors de la mise à jour du parent"
+
+#: common/forum/ForumMessage.class.php:276
+msgid "Couldn't Update Master Thread parent with current time"
+msgstr ""
+"Échec lors de la mise à jour du fil de discussion principal avec la date "
+"courante"
 
 #: common/forum/ForumMessage.class.php:357
 #: common/forum/ForumMessage.class.php:800
@@ -5161,7 +5160,7 @@ msgstr "Elément supprimé"
 
 #: common/tracker/actions/browse.php:94
 #: common/tracker/actions/downloadcsv.php:38
-#: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:382
+#: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:381
 #: www/pm/index.php:46 www/pm/task.php:88 www/tracker/roadmap.php:333
 msgid "Could Not Get Factory"
 msgstr "Erreur lors de la création de l'objet Factory"
@@ -6821,9 +6820,12 @@ msgid "Element"
 msgstr "Elément"
 
 #: common/tracker/views/form-deleteextrafieldelement.php:62
+#: common/tracker/views/form-deleteextrafield.php:39
 #: common/tracker/views/form-deletetracker.php:32
-#: www/admin/responses_admin.php:51 www/frs/admin/deletepackage.php:68
-#: www/frs/admin/editrelease.php:383 www/reporting/rebuild.php:63
+#: www/admin/responses_admin.php:51 www/forum/admin/index.php:183
+#: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:75
+#: www/frs/admin/editrelease.php:383 www/pm/admin/index.php:369
+#: www/project/admin/roledelete.php:81 www/reporting/rebuild.php:63
 msgid "I am Sure"
 msgstr "Je confirme"
 
@@ -6832,11 +6834,11 @@ msgstr "Je confirme"
 msgid "Delete a custom field for %s"
 msgstr "Suppimer un champ supplémentaire pour %s"
 
-#: common/tracker/views/form-deleteextrafield.php:30
+#: common/tracker/views/form-deleteextrafield.php:31
 msgid "Delete Custom Field"
 msgstr "Supprimer un champ supplémentaire"
 
-#: common/tracker/views/form-deleteextrafield.php:35
+#: common/tracker/views/form-deleteextrafield.php:36
 msgid ""
 "You are about to permanently and irretrievably delete this custom field and "
 "all its contents!"
@@ -6844,16 +6846,11 @@ msgstr ""
 "Vous êtes sur le point de supprimer irrémédiablement ce champ "
 "supplémentaire !"
 
-#: common/tracker/views/form-deleteextrafield.php:38
-#: www/forum/admin/index.php:183 www/frs/admin/deleterelease.php:75
-#: www/pm/admin/index.php:368 www/project/admin/roledelete.php:81
-msgid "I'm Sure"
-msgstr "Je suis sûr."
-
-#: common/tracker/views/form-deleteextrafield.php:39
-#: www/forum/admin/index.php:184 www/frs/admin/deleterelease.php:76
-#: www/pm/admin/index.php:369
-msgid "I'm Really Sure"
+#: common/tracker/views/form-deleteextrafield.php:40
+#: common/tracker/views/form-deletetracker.php:33
+#: www/forum/admin/index.php:184 www/frs/admin/deletepackage.php:71
+#: www/frs/admin/deleterelease.php:76 www/pm/admin/index.php:370
+msgid "I am Really Sure"
 msgstr "Je confirme vraiment"
 
 #: common/tracker/views/form-deletetracker.php:24
@@ -6872,11 +6869,6 @@ msgid ""
 msgstr ""
 "Vous êtes sur le point de supprimer irrémédiablement cet outil de suivi et "
 "tout son contenu !"
-
-#: common/tracker/views/form-deletetracker.php:33
-#: www/frs/admin/deletepackage.php:71
-msgid "I am Really Sure"
-msgstr "Je confirme vraiment"
 
 #: common/tracker/views/form-edittemplate.php:3
 #, php-format
@@ -16769,6 +16761,10 @@ msgstr ""
 msgid "Delete entire forum and all content"
 msgstr "Supprimer le forum et tout son contenu"
 
+#: www/forum/admin/index.php:174
+msgid "Permanently Delete Forum"
+msgstr "Supprimer définitivement le forum"
+
 #: www/forum/admin/index.php:176
 msgid ""
 "You are about to permanently and irretrievably delete this entire forum and "
@@ -16836,7 +16832,7 @@ msgstr "Déplacer la discussion"
 
 #: www/forum/admin/index.php:373 www/forum/admin/index.php:449
 #, php-format
-msgid "No Forums Found For %s"
+msgid "No Forums Found for %s"
 msgstr "Pas de forum trouvé pour %s"
 
 #: www/forum/admin/index.php:403
@@ -19554,7 +19550,11 @@ msgstr "Ajouter/Éditer catégories"
 msgid "Permanently delete this subproject and all its data."
 msgstr "Supprimer irrémédiablement ce sous-projet et toutes ses données."
 
-#: www/pm/admin/index.php:366
+#: www/pm/admin/index.php:360 www/pm/admin/index.php:371
+msgid "Permanently delete this subproject and all its data"
+msgstr "Supprimer irrémédiablement ce sous-projet et toutes ses données"
+
+#: www/pm/admin/index.php:367
 msgid ""
 "You are about to permanently and irretrievably delete this subproject and "
 "all its related data!"
@@ -19562,15 +19562,15 @@ msgstr ""
 "Vous êtes sur le point de supprimer irrémédiablement ce sous-projet et "
 "toutes ses données !"
 
-#: www/pm/admin/index.php:390 www/project/admin/tools.php:326
+#: www/pm/admin/index.php:389 www/project/admin/tools.php:326
 msgid "Tasks Administration"
 msgstr "Administration des gestionnaires de tâches"
 
-#: www/pm/admin/index.php:398
+#: www/pm/admin/index.php:397
 msgid "Add a Subproject"
 msgstr "Ajouter un sous-projet"
 
-#: www/pm/admin/index.php:399
+#: www/pm/admin/index.php:398
 msgid ""
 "Add a subproject, which can contain a set of tasks. This is different than "
 "creating a new task."
@@ -19578,17 +19578,17 @@ msgstr ""
 "Il s'agit ici d'ajouter un sous-projet, qui peut contenir un ensemble de "
 "tâches. Ce n'est pas la même chose que la création d'une tâche."
 
-#: www/pm/admin/index.php:407
+#: www/pm/admin/index.php:406
 msgid "No Subprojects Found in this Project"
 msgstr "Ce projet n'a pas actuellement de sous-projets."
 
-#: www/pm/admin/index.php:408
-msgid "You may add new Subprojects using the \"Add a Subproject\" link above."
+#: www/pm/admin/index.php:407
+msgid "You may add new Subprojects using the “Add a Subproject” link above."
 msgstr ""
 "Vous pouvez ajouter des sous-projets en utilisant le lien « Ajouter un sous-"
 "projet » ci-dessus."
 
-#: www/pm/admin/index.php:412
+#: www/pm/admin/index.php:411
 msgid "Edit/Update Subproject"
 msgstr "Éditer/Mettre à jour le sous-projet"
 
@@ -23383,6 +23383,29 @@ msgstr "Erreur de mise à jour"
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
 
+#~ msgid "I'm Sure"
+#~ msgstr "Je suis sûr."
+
+#~ msgid ""
+#~ "You may add new Subprojects using the \"Add a Subproject\" link above."
+#~ msgstr ""
+#~ "Vous pouvez ajouter des sous-projets en utilisant le lien « Ajouter un "
+#~ "sous-projet » ci-dessus."
+
+#~ msgid "Add forum"
+#~ msgstr "Ajouter un forum"
+
+#~ msgid "%1$s message deleted"
+#~ msgid_plural "%1$s messages deleted"
+#~ msgstr[0] "%1$s message effacé"
+#~ msgstr[1] "%1$s messages effacés"
+
+#~ msgid "I'm Really Sure"
+#~ msgstr "Je confirme vraiment"
+
+#~ msgid "No Forums Found For %s"
+#~ msgstr "Pas de forum trouvé pour %s"
+
 #~ msgid "Assigned To"
 #~ msgstr "Confié à"
 
@@ -24487,14 +24510,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "Delete this message"
 #~ msgstr "Supprimer ce message"
-
-#~ msgid "Add Forum"
-#~ msgstr "Ajouter un forum"
-
-#~ msgid "%s message deleted"
-#~ msgid_plural "%s messages deleted"
-#~ msgstr[0] "%s message supprimé"
-#~ msgstr[1] "%s messages supprimés"
 
 #~ msgid "No pending messages in this forum."
 #~ msgstr "Pas de messages en attente dans ce forum."
@@ -25677,12 +25692,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgid "Is External?"
 #~ msgstr "Externe ?"
 
-#~ msgid "Permanently Delete Forum"
-#~ msgstr "Supprimer définitivement le forum"
-
-#~ msgid "No Forums Found for %s"
-#~ msgstr "Pas de forum trouvé pour %s"
-
 #~ msgid "%d Pending Messages"
 #~ msgstr "%d messages en attente"
 
@@ -26118,14 +26127,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ "Les options suivantes déterminent si les autres peuvent voir vos "
 #~ "compétences. Même s'ils ne le peuvent pas, vous pouvez toujours remplir "
 #~ "vos compétences."
-
-#~ msgid "Permanently delete this subproject and all its data"
-#~ msgstr "Supprimer irrémédiablement ce sous-projet et toutes ses données"
-
-#~ msgid "You may add new Subprojects using the “Add a Subproject” link above."
-#~ msgstr ""
-#~ "Vous pouvez ajouter des sous-projets en utilisant le lien « Ajouter un "
-#~ "sous-projet » ci-dessus."
 
 #~ msgid "Delete Task [T%s]"
 #~ msgstr "Supprimer la tâche [T%s]"
