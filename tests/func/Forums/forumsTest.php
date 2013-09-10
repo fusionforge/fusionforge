@@ -145,7 +145,7 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->click("//body//div[@id='maindiv']/p[1]/strong/a[2]");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Add forum");
+		$this->click("link=Add Forum");
 		$this->waitForPageToLoad("30000");
 		$this->type("forum_name", "toto");
 		$this->type("//input[@name='description']", "Toto forum");

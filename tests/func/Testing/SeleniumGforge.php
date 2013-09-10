@@ -237,7 +237,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->click("link=Forums Admin");
 			$this->waitForPageToLoad("30000");
 
-			$this->click("link=Add forum");
+			$this->click("link=Add Forum");
 			$this->waitForPageToLoad("30000");
 			$this->type("forum_name", "Open-Discussion");
 			$this->type("//input[@name='description']", "General Discussion");
