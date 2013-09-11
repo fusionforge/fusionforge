@@ -162,22 +162,22 @@ class Tasks{
 		foreach($data['artifacts'] as $a){
 			//for each artifact
 			$artifact = new ProjectTask($pg);
-			if ($artifact){
+			if ($artifact) {
 				$start = strtotime($a['start_date']);
 				$end = strtotime($a['end_date']);
 				$assigned = array();
-				if(is_array($a['assigned_to[]'])){
-					foreach($a['assigned_to[]'] as $realname){
-						if($realname == 'None'){
+				if (is_array($a['assigned_to[]'])) {
+					foreach($a['assigned_to[]'] as $realname) {
+						if ($realname == 'None') {
 							$assigned[]=100;
-						}else{
+						} else {
 							$assigned[] = user_get_object_by_mail($this->hashrn[$realname])->getID(); // this should be done once instead of for each artifact, TODO
 						}
 					}
 				} else {
-					if($a['assigned_to[]']=='None'){
+					if ($a['assigned_to[]']=='None') {
 						$assigned[]=100;
-					}else{
+					} else {
 						$assigned[] = user_get_object_by_mail($this->hashrn[$a['assigned_to[]']])->getID();
 					}
 				}
@@ -185,9 +185,8 @@ class Tasks{
 				$dependentTemp = array();
 //				new dBug(array($a['summary'], $a['description'], $a['priority'], $a['hours'], $start, $end, $cats[$a['category']], $a['percent_complete'], &$assigned, &$dependentTemp, 0, 0, array('user' => $uid)));
 				if(!$artifact->create($a['summary'], $a['description'], $a['priority'], $a['hours'], $start, $end, $cats[$a['category']], $a['percent_complete'], $assigned, $dependentTemp, 0, 0, array('user' => $uid))){
-					return false;
+					return;
 				} else {
-
 					$atid =  $artifact->getID();
 					$atids[$a['summary']] = $atid;
 					$dependent[$atid] = $a['dependent_on[]'];
