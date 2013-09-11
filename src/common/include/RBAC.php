@@ -292,17 +292,17 @@ abstract class BaseRole extends Error {
 	function setSetting ($section, $reference, $value) {
 		$cur = $this->getSettingRaw($section, $reference);
 		if (($value == $cur) && ($cur != NULL)) {
-			return true;
+			return;
 		}
 
 		$role_id = $this->getID () ;
 
-		$res = db_query_params ('DELETE FROM pfo_role_setting WHERE role_id=$1 AND section_name=$2 AND ref_id=$3',
+		db_query_params ('DELETE FROM pfo_role_setting WHERE role_id=$1 AND section_name=$2 AND ref_id=$3',
 					array ($role_id,
 					       $section,
 					       $reference)) ;
 
-		$res = db_query_params ('INSERT INTO pfo_role_setting (role_id, section_name, ref_id, perm_val) VALUES ($1, $2, $3, $4)',
+		db_query_params ('INSERT INTO pfo_role_setting (role_id, section_name, ref_id, perm_val) VALUES ($1, $2, $3, $4)',
 						array ($role_id,
 						       $section,
 						       $reference,
@@ -311,8 +311,8 @@ abstract class BaseRole extends Error {
 	}
 
 	function getSettingsForProject ($project) {
-		$result = array () ;
-		$group_id = $project->getID() ;
+		$result = array();
+		$group_id = $project->getID();
 
 		$sections = array ('project_read', 'project_admin', 'frs', 'scm', 'docman', 'tracker_admin', 'new_tracker') ;
 		foreach ($sections as $section) {
@@ -382,7 +382,7 @@ abstract class BaseRole extends Error {
 	 * @return multitype:
 	 */
 	function getGlobalSettings () {
-		$result = array () ;
+		$result = array();
 
 		$sections = array ('forge_admin', 'forge_stats', 'approve_projects', 'approve_news') ;
 		foreach ($sections as $section) {
@@ -559,12 +559,11 @@ abstract class BaseRole extends Error {
 	/**
 	 *	getVal - get a value out of the array of settings for this role.
 	 *
-	 *	@param	string	The name of the role.
-	 *	@param	integer	The ref_id (ex: group_artifact_id, group_forum_id) for this item.
+	 *	@param	string	$section	The name of the role.
+	 *	@param	integer	$ref_id		The ref_id (ex: group_artifact_id, group_forum_id) for this item.
 	 *	@return integer	The value of this item.
 	 */
 	function getVal($section, $ref_id) {
-		global $role_default_array;
 		if (!$ref_id) {
 			$ref_id=0;
 		}
@@ -578,7 +577,7 @@ abstract class BaseRole extends Error {
 	 */
 	function &getRoleVals($section) {
 		global $role_vals, $rbac_permission_names;
-		setup_rbac_strings () ;
+		setup_rbac_strings();
 
 		//
 		//	Optimization - save array so it is only built once per page view
@@ -740,9 +739,9 @@ abstract class BaseRole extends Error {
 	/**
 	 *	update - update a role in the database.
 	 *
-	 *	@param	string	The name of the role.
-	 *	@param	array	A multi-dimensional array of data in this format: $data['section_name']['ref_id']=$val
-	 *      @param  boolean Perform permission checking
+	 *	@param	string	$role_name		The name of the role.
+	 *	@param	array	$data			A multi-dimensional array of data in this format: $data['section_name']['ref_id']=$val
+	 *  @param  boolean $check_perms	Perform permission checking
 	 *	@return	boolean	True on success or false on failure.
 	 */
 	function update($role_name,$data,$check_perms=true) {
