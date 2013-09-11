@@ -48,8 +48,6 @@ abstract class SCMPlugin extends Plugin {
 	}
 
 	function CallHook($hookname, &$params) {
-		global $HTML;
-
 		switch ($hookname) {
 			case 'scm_plugin': {
 				$scm_plugins=& $params['scm_plugins'];
@@ -167,7 +165,7 @@ abstract class SCMPlugin extends Plugin {
 		$b .= '</p>';
 		$b .= '<p>[' ;
 		$b .= util_make_link ("/scm/?group_id=".$project->getID(),
-				      _('Not implemented yet')
+					_('Not implemented yet')
 			) ;
 		$b .= ']</p>' ;
 		return $b ;
@@ -196,7 +194,7 @@ abstract class SCMPlugin extends Plugin {
 
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false;
+			return;
 		}
 
 		if ($project->usesPlugin($this->name)) {
@@ -232,13 +230,11 @@ abstract class SCMPlugin extends Plugin {
 			}
 
 			echo $HTML->boxBottom();
-			print '</td></tr></table>' ;
+			print '</td></tr></table>';
 		}
 	}
 
 	function printBrowserPage($params) {
-		global $HTML;
-
 		$project = $this->checkParams($params);
 		if (!$project) {
 			return;
@@ -263,7 +259,7 @@ abstract class SCMPlugin extends Plugin {
 	function adminUpdate($params) {
 		$project = $this->checkParams($params);
 		if (!$project) {
-			return false;
+			return;
 		}
 
 		if ($project->usesPlugin($this->name) ) {
