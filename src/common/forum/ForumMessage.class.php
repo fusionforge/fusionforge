@@ -48,13 +48,13 @@ class ForumMessage extends Error {
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	$Forum  object	The Forum object to which this ForumMessage is associated.
-	 *  @param  $msg_id int	 The message_id.
-	 *  @param  $arr	array   The associative array of data.
-	 *	@param 	$pending	boolean	Whether the message is a pending one.
-	 *	@return	boolean	success.
+	 *	@param	object	$Forum 		The Forum object to which this ForumMessage is associated.
+	 *  @param  int		$msg_id 	The message_id.
+	 *  @param  array	$arr		The associative array of data.
+	 *	@param 	bool	$pending	Whether the message is a pending one.
+	 *	@return	bool	success.
 	 */
-	function ForumMessage(&$Forum, $msg_id=false, $arr=false, $pending=false) {
+	function ForumMessage(&$Forum, $msg_id=false, $arr=array(), $pending=false) {
 		$this->Error();
 		if (!$Forum || !is_object($Forum)) {
 			$this->setError(_('Invalid Forum Object'));

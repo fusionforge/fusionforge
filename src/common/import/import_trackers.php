@@ -21,7 +21,7 @@ static $NOT_EXTRA_FIELDS = array('assigned_to', 'attachments', 'class', 'comment
  * findType - get the type of a field from its name, value, and vocabulary : default 0 (text box), otherwise 1 (select box) or 2 (multi choice field)
  * @param string        $fieldName Name of the field
  * @param string|array  $fieldValue Value of the field
- * @param $vocabulary	Vocabulary of a tracker
+ * @param string		$vocabulary	Vocabulary of a tracker
  * @return int
  */
 function findType($fieldName, $fieldValue, $vocabulary){

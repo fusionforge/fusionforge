@@ -56,11 +56,11 @@ class DocumentGroupHTML extends Error {
 	/**
 	 * showSelectNestedGroups - Display the tree of document groups inside a <select> tag
 	 *
-	 * @param	array	Array of groups.
-	 * @param	string	The name that will be assigned to the input
-	 * @param	bool	Allow selection of "None"
-	 * @param	int	The ID of the group that should be selected by default (if any)
-	 * @param	array	Array of IDs of groups that should not be displayed
+	 * @param	array	$group_arr		Array of groups.
+	 * @param	string	$select_name	The name that will be assigned to the input
+	 * @param	bool	$allow_none		Allow selection of "None"
+	 * @param	int		$selected_id	The ID of the group that should be selected by default (if any)
+	 * @param	array	$dont_display	Array of IDs of groups that should not be displayed
 	 * @return	string	html select box code
 	 */
 	function showSelectNestedGroups($group_arr, $select_name, $allow_none = true, $selected_id = 0, $dont_display = array()) {

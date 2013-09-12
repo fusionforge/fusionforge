@@ -206,7 +206,7 @@ function &MSPCheckin($session_hash,$group_project_id,$tasks) {
 * Return the projects by user.
 *
 * @author	Luis Hurtado	luis@gforgegroup.com
-* @param	$session_hash	User session
+* @param	object	$session_hash	User session
 * @return	array	Groups		User groups
 * @date		2005-01-19
 *

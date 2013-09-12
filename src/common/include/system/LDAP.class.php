@@ -64,7 +64,7 @@ class LDAP extends UNIX {
 	/**
 	 * gfLdapConnect() - Connect to the LDAP server
 	 *
-	 * @returns true on success/false on error
+	 * @returns bool	true on success/false on error
 	 *
 	 */
 	function gfLdapConnect() {
@@ -344,9 +344,9 @@ class LDAP extends UNIX {
 	/**
 	 * gfLdapCreateUserFromProps() - Creates an LDAP user from
 	 *
-	 * @param		string	The username
-	 * @param		string	????
-	 * @param		string	The encrypted password
+	 * @param		string	$username	The username
+	 * @param		string	$cn
+	 * @param		string	$crypt_pw	The encrypted password
 	 * @return bool	true on success/false on error
 	 *
 	 */

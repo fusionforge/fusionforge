@@ -70,8 +70,8 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	 * PROPFIND - use by any webdav client like cadaver
 	 * called by HTTP_WebDAV_Server
 	 *
-	 * @param	array	options passed by previous functions in HTTP_WebDAV_Server
-	 * @param	array	files passed by previous functions in HTTP_WebDAV_Server
+	 * @param	array	$options	options passed by previous functions in HTTP_WebDAV_Server
+	 * @param	array	$files		files passed by previous functions in HTTP_WebDAV_Server
 	 * @return bool
 	 */
 	function PROPFIND(&$options, &$files) {

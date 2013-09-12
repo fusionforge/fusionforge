@@ -36,12 +36,12 @@ class UserManager {
 	}
 
 	/**
-	 * @param $session_hash string Optional parameter. If given, this will force
+	 * @param string	$session_hash	Optional parameter. If given, this will force
 	 *                             the load of the user with the given session_hash.
 	 *                             else it will check from the user cookies & ip
-	 * @return User the user currently logged in (who made the request)
+	 * @return object	User the user currently logged in (who made the request)
 	 */
-	function getCurrentUser($session_hash = false) {
+	function getCurrentUser($session_hash = '') {
 		if (!session_get_user()) {
 			return new GFUser();
 		}

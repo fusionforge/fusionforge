@@ -66,9 +66,8 @@ class SurveyResponseFactory extends Error {
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	object	The Survey object
-	 *	@param	object	The Question object to which this survey Response is associated.
-     *  @param  int     The survey_id
+	 *	@param	object	$survey		The Survey object
+	 *	@param	object	$question	The Question object to which this survey Response is associated.
 	 */
 	function __construct(&$Survey, &$Question ) {
 		$this->Error();

@@ -130,12 +130,11 @@ pm_header(array('title'=>_('Calendar'),'group'=>$group_id));
  * Create link to a task.
  * This returns a string that is a link to a particular task.
  *
- * @author    Ryan T. Sammartino <ryants at shaw dot ca>
- * @param     $task  the task to make a link for.
- * @param     $type  either 'begin' for beginning of a task or 'end' for
- *                   end of a task.
- * @return string
- * @date      2002-01-04
+ * @author  Ryan T. Sammartino <ryants at shaw dot ca>
+ * @param   object	$task  the task to make a link for.
+ * @param   string	$type  either 'begin' for beginning of a task or 'end' for end of a task.
+ * @return	string
+ * @date    2002-01-04
  *
  */
 function make_task_link($task, $type) {

@@ -33,7 +33,6 @@ class Parsedata {
 	/**
 	 * Constructor.
 	 *
-	 * @param	string	path to the parser list file
 	 * @return	\Parsedata
 	 */
 	function __construct() {

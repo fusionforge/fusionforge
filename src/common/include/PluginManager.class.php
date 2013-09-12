@@ -68,8 +68,8 @@ class PluginManager extends Error {
 	/**
 	 * GetPluginObject() - get a particular plugin object
 	 *
-	 * @param	string	name of plugin
-	 * @return	object	plugin object or false if not available
+	 * @param	string	$pluginname		name of plugin
+	 * @return	object					plugin object or false if not available
 	 */
 	function GetPluginObject($pluginname) {
 		if (!isset($this->plugins_objects[$pluginname])) {
@@ -211,7 +211,8 @@ class PluginManager extends Error {
 	 * RegisterPlugin() - register a plugin
 	 *
 	 * @param	object	an object of a subclass of the Plugin class
-	 */
+     * @return bool
+     */
 	function RegisterPlugin(&$pluginobject) {
 		if (!$pluginobject->GetName()) {
 			exit_error(_("Some plugin did not provide a name. I'd gladly tell you which one, but obviously I cannot. Sorry."),'');
@@ -316,6 +317,7 @@ function &plugin_get_object ($pluginname) {
  * register_plugin () - register a plugin
  *
  * @param pluginobject - an object of a subclass of the Plugin class
+ * @return bool
  */
 function register_plugin(&$pluginobject) {
 	$pm =& plugin_manager_get_object () ;
@@ -325,8 +327,9 @@ function register_plugin(&$pluginobject) {
 /**
  * plugin_hook () - run a set of hooks
  *
- * @param hookname - name of the hook
- * @param params - parameters for the hook
+ * @param string $hookname - name of the hook
+ * @param array  $params - parameters for the hook
+ * @return bool
  */
 function plugin_hook($hookname, $params = false) {
 	$pm =& plugin_manager_get_object () ;
@@ -338,6 +341,7 @@ function plugin_hook($hookname, $params = false) {
  *
  * @param hookname - name of the hook
  * @param params - parameters for the hook
+ * @return bool
  */
 function plugin_hook_by_reference ($hookname, &$params) {
 	$pm =& plugin_manager_get_object () ;
@@ -348,6 +352,7 @@ function plugin_hook_by_reference ($hookname, &$params) {
  * plugin_hook_listeners () - count the number of listeners on a hook
  *
  * @param hookname - name of the hook
+ * @return int
  */
 function plugin_hook_listeners ($hookname, $params=false) {
 	$pm =& plugin_manager_get_object () ;

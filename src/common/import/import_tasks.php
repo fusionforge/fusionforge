@@ -30,8 +30,8 @@ class Tasks{
 	}
 	/**
 	 * addComments - Add followup comments to an Artifact Object
-	 * @param $artifact the artifact object where history should be added
-	 * @param $comments array the artifact's data in json format (an array)
+	 * @param object	$artifact the artifact object where history should be added
+	 * @param array		$comments the artifact's data in json format (an array)
 	 */
 	function addComments($artifact, $comments){
 		foreach($comments as $c){
@@ -152,6 +152,7 @@ class Tasks{
 	 * Create each task for the considered project group
 	 * @param $pg   ProjectGroup
 	 * @param $data    array
+	 * @param $cats
 	 * @return bool
 	 */
 	function createTasks($pg, $data, $cats){

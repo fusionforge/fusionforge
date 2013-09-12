@@ -36,7 +36,7 @@ class ArtifactsForUser extends Error {
 	/**
 	* __construct - Creates a new ArtifactsForUser object
 	*
-	* @param User $user	the User object for which to collect artifacts
+	* @param object	$user	the User object for which to collect artifacts
 	*/
 	function __construct(&$user) {
 		$this->User =& $user;
