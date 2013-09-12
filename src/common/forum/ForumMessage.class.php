@@ -48,11 +48,11 @@ class ForumMessage extends Error {
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	object	$Forum 		The Forum object to which this ForumMessage is associated.
-	 *  @param  int		$msg_id 	The message_id.
-	 *  @param  array	$arr		The associative array of data.
-	 *	@param 	bool	$pending	Whether the message is a pending one.
-	 *	@return	bool	success.
+	 * @param	object		$Forum		The Forum object to which this ForumMessage is associated.
+	 * @param	bool|int	$msg_id		The message_id.
+	 * @param	array		$arr		The associative array of data.
+	 * @param	bool		$pending	Whether the message is a pending one.
+	 * @return	bool		success.
 	 */
 	function ForumMessage(&$Forum, $msg_id=false, $arr=array(), $pending=false) {
 		$this->Error();
@@ -97,15 +97,15 @@ class ForumMessage extends Error {
 
 /**
 	*	insertmoderated - inserts the message into the table for moderation (forum_pending_messages)
-	 *	@param	$subject		string	The subject of the message.
-	 *	@param	$body			string	The body of the message.
-	 *	@param	$thread_id		int	The thread_id of the message, if known.
-	 *	@param	$is_followup_to int	The message_id of the parent message, if any.
-	 *	@param 	$user_id		int	The id of the user that is posting the message
+	 *	@param	string	$subject			The subject of the message.
+	 *	@param	string	$body				The body of the message.
+	 *	@param	int		$thread_id			The thread_id of the message, if known.
+	 *	@param	int		$is_followup_to 	The message_id of the parent message, if any.
+	 *	@param 	int		$user_id		The id of the user that is posting the message
 	 *	@return	boolean success.
 	*/
 
-	function insertmoderated($subject, $body, $thread_id='', $is_followup_to='',$user_id) {
+	function insertmoderated($subject, $body, $thread_id=0, $is_followup_to=0,$user_id) {
 		if (!$thread_id) {
 			$thread_id=$this->Forum->getNextThreadID();
 			$is_followup_to=0;
@@ -344,12 +344,12 @@ class ForumMessage extends Error {
 	/**
 	 *	create - use this function to create a new message in the database.
 	 *
-	 *	@param	string	The subject of the message.
-	 *	@param	string	The body of the message.
-	 *	@param	int	The thread_id of the message, if known.
-	 *	@param	int	The message_id of the parent message, if any.
-	 *	@param  boolean	Whether the message has an attach associated. Defaults to false
-	 *	@param	int	The timestamp of the message to create. Defaults to 0, meaning the timestamp used for this message will be "time()"
+	 *	@param	string	$subject		The subject of the message.
+	 *	@param	string	$body			The body of the message.
+	 *	@param	int		$thread_id		The thread_id of the message, if known.
+	 *	@param	int		$is_followup_to	The message_id of the parent message, if any.
+	 *	@param  bool	$has_attach		Whether the message has an attach associated. Defaults to false
+	 *	@param	int		$timestamp		The timestamp of the message to create. Defaults to 0, meaning the timestamp used for this message will be "time()"
 	 *	@return	boolean success.
 	 */
 	function create($subject, $body, $thread_id='', $is_followup_to='',$has_attach=false, $timestamp = 0) {

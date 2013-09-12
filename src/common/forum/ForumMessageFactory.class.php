@@ -136,9 +136,10 @@ class ForumMessageFactory extends Error {
 	}
 
 	/**
-	 *	nestArray - take an array of Forum Messages and building a multi-dimensional associative array for followups.
+	 * nestArray - take an array of Forum Messages and building a multi-dimensional associative array for followups.
 	 *
-	 *	@return	array	The nested multi-dimensional associative array.
+	 * @param	array	$row
+	 * @return	array	The nested multi-dimensional associative array.
 	 */
 	function &nestArray($row) {
 		$cnt=count($row);
@@ -151,9 +152,10 @@ class ForumMessageFactory extends Error {
 	}
 
 	/**
-	 *	getNested - Return an array of ForumMessage objects arranged for nested forum views.
+	 * getNested - Return an array of ForumMessage objects arranged for nested forum views.
 	 *
-	 *	@return	array	The array of ForumMessages.
+	 * @param	bool	$thread_id
+	 * @return	array   The array of ForumMessages.
 	 */
 	function &getNested($thread_id=false) {
 		if ($this->forum_messages) {
@@ -192,9 +194,10 @@ class ForumMessageFactory extends Error {
 	}
 
 	/**
-	 *	getThreaded - Return an array of ForumMessage objects arranged for threaded forum views.
+	 *    getThreaded - Return an array of ForumMessage objects arranged for threaded forum views.
 	 *
-	 *	@return	array	The array of ForumMessages.
+	 * @param	bool	$thread_id
+	 * @return	array	The array of ForumMessages.
 	 */
 	function &getThreaded($thread_id=false) {
 		if ($this->forum_messages) {

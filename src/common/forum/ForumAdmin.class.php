@@ -47,10 +47,11 @@ class ForumAdmin extends Error {
 	/**
 	 *  PrintAdminMessageOptions - prints the different administrator options for a message
 	 *
-	 *	@param   integer	The Message ID
-	 *	@param   integer	The Project ID
-	 *	@param   integer	The Thread ID : to return to the message if the user cancels (forumhtml only, not message.php)
-	 *	@param   integer	The Forum ID : to return to the message if the user cancels (forumhtml only, not message.php)
+	 *	@param   int	$msg_id		The Message ID
+	 *	@param   int	$group_id	The Project ID
+	 *	@param   int	$thread_id	The Thread ID : to return to the message if the user cancels (forumhtml only, not message.php)
+	 *	@param   int	$forum_id	The Forum ID : to return to the message if the user cancels (forumhtml only, not message.php)
+	 *	@param	 int	$return_to_message
 	 *	@return  The HTML output
 	 */
 
@@ -127,8 +128,8 @@ class ForumAdmin extends Error {
 	 *  Authorized - authorizes and returns true if the user is authorized for the group, or false.
 	 *
 	 *  @param  string	 The group id.
-     *	@return bool
-     */
+	 *	@return bool
+	 */
 
 	function Authorized($group_id) {
 		if (!$group_id) {
@@ -157,8 +158,8 @@ class ForumAdmin extends Error {
 	 *  ExecuteAction - Executes the action passed as parameter
 	 *
 	 *  @param  string	 action to execute.
-     *	@return string
-     */
+	 *	@return string
+	 */
 	function ExecuteAction ($action) {
 		global $HTML;
 

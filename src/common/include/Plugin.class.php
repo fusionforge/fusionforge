@@ -37,7 +37,7 @@ class Plugin extends Error {
 	/**
 	 * Plugin() - constructor
 	 *
-	 * @param	int	id
+	 * @param	int	$id
 	 */
 	function Plugin($id=0) {
 		$this->Error();
@@ -56,6 +56,7 @@ class Plugin extends Error {
 	/**
 	 * _addHooks() - add a hook to the list of hooks.
 	 *
+	 * @param	string	$name
 	 * @return	string	name of the added hook
 	 */
 	function _addHook($name) {
@@ -86,6 +87,7 @@ class Plugin extends Error {
 	/**
 	 * provide() - return true if plugin provides the feature.
 	 *
+	 * @param	string	$feature
 	 * @return	bool	if feature is provided or not.
 	 */
 	function provide($feature) {

@@ -24,7 +24,7 @@ require_once $gfcommon.'include/Error.class.php';
 
 class System extends Error {
 	/**
-	 *    System()
+	 * System()
 	 *
 	 */
 	function System() {
@@ -115,9 +115,9 @@ class System extends Error {
 	/**
 	 * sysUserSetAttribute() - Set an attribute for a user
 	 *
-	 * @param  int    $user_id  The user ID
-	 * @param  string $attr     The attribute to set
-	 * @param  string $value    The new value of the attribute
+	 * @param  int		$user_id	The user ID
+	 * @param  string	$attr		The attribute to set
+	 * @param  string	$value		The new value of the attribute
 	 * @return bool true on success/false on error
 	 *
 	 */
@@ -132,7 +132,7 @@ class System extends Error {
 	/**
 	 * sysCheckGroup() - Check for the existence of a group
 	 *
-	 * @param        int        The ID of the group to check
+	 * @param  int	 The ID of the group to check
 	 * @return bool True on success/false on error
 	 *
 	 */
@@ -144,7 +144,7 @@ class System extends Error {
 	 * sysCreateGroup() - Create a group
 	 *
 	 * @param	int		The ID of the group to create
-     * @return	bool	true on success/false on error
+	 * @return	bool	true on success/false on error
 	 *
 	 */
 	function sysCreateGroup($group_id) {
@@ -155,7 +155,7 @@ class System extends Error {
 	 * sysRemoveGroup() - Remove a group
 	 *
 	 * @param	int		The ID of the group to remove
-     * @return	bool	true on success/false on error
+	 * @return	bool	true on success/false on error
 	 *
 	 */
 	function sysRemoveGroup($group_id) {
@@ -167,7 +167,7 @@ class System extends Error {
 	 *
 	 * @param	int		The ID of the group two which the user will be added
 	 * @param	int		The ID of the user to add
-     * @return	bool	true on success/false on error
+	 * @return	bool	true on success/false on error
 	 *
 	 */
 	function sysGroupCheckUser($group_id, $user_id) {
@@ -180,7 +180,7 @@ class System extends Error {
 	 * @param	int		The ID of the group two which the user will be added
 	 * @param	int		The ID of the user to add
 	 * @param	bool	Only add this user to CVS
-     * @return	bool	true on success/false on error
+	 * @return	bool	true on success/false on error
 	 *
 	 */
 	function sysGroupAddUser($group_id, $user_id, $cvs_only = 0) {
@@ -190,26 +190,26 @@ class System extends Error {
 	/**
 	 * sysGroupRemoveUser() - Remove a user from a group
 	 *
-	 * @param	int		The ID of the group from which to remove the user
-	 * @param	int		The ID of the user to remove
-	 * @param	bool	Only remove user from CVS group
+	 * @param	int		$group_id	The ID of the group from which to remove the user
+	 * @param	int		$user_id	The ID of the user to remove
+	 * @param	bool	$cvs_only	Only remove user from CVS group
 	 * @return	bool	true on success/false on error
 	 *
 	 */
-	function sysGroupRemoveUser($group_id, $user_id, $cvs_only = 0) {
+	function sysGroupRemoveUser($group_id, $user_id, $cvs_only = false) {
 		return true;
 	}
 
 	/**
 	 * sysGroupUpdateUser() - Remove a user from a group
 	 *
-	 * @param	int		The ID of the group from which to remove the user
-	 * @param	int		The ID of the user to remove
-	 * @param	bool	Only remove user from CVS group
+	 * @param	int		$group_id	The ID of the group from which to remove the user
+	 * @param	int		$user_id	The ID of the user to remove
+	 * @param	bool	$cvs_only	Only remove user from CVS group
 	 * @return	bool	true on success/false on error
 	 *
 	 */
-	function sysGroupUpdateUser($group_id, $user_id, $cvs_only = 0) {
+	function sysGroupUpdateUser($group_id, $user_id, $cvs_only = false) {
 		$this->sysGroupRemoveUser($group_id, $user_id, $cvs_only);
 		$this->sysGroupAddUser($group_id, $user_id, $cvs_only);
 		return true;

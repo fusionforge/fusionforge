@@ -232,7 +232,7 @@ class Group extends Error {
 	 *
 	 * @param int|bool $id  Required - Id of the group you want to instantiate.
 	 * @param int|bool $res Database result from select query OR associative array of all columns.
-	 * @return boolean Success or not
+	 * @return bool Success or not
 	 */
 	function __construct($id = false, $res = false) {
 		$this->Error();

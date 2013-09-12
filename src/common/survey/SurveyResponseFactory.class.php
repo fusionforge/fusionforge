@@ -28,18 +28,18 @@ require_once $gfcommon.'survey/SurveyResponse.class.php';
 
 class SurveyResponseFactory extends Error {
 
-       /**
-        * The Survey object.
-        *
-        * @var	 object  $Survey.
-        */
+	/**
+	* The Survey object.
+	*
+	* @var	 object  $Survey.
+	*/
 	var $Survey;
 
-       /**
-        * The Question object.
-        *
-        * @var	 object  $Question.
-        */
+	/**
+	* The Question object.
+	*
+	* @var	 object  $Question.
+	*/
 	var $Question;
 
 	/**
@@ -69,28 +69,28 @@ class SurveyResponseFactory extends Error {
 	 *	@param	object	$survey		The Survey object
 	 *	@param	object	$question	The Question object to which this survey Response is associated.
 	 */
-	function __construct(&$Survey, &$Question ) {
+	function __construct(&$survey, &$question ) {
 		$this->Error();
 
-		if (!$Survey || !is_object($Survey)) {
+		if (!$survey || !is_object($survey)) {
 			$this->setError(_('No valid Survey Object'));
 			return;
 		}
-		if ($Survey->isError()) {
-			$this->setError(_('Survey').':: '.$Survey->getErrorMessage());
+		if ($survey->isError()) {
+			$this->setError(_('Survey').':: '.$survey->getErrorMessage());
 			return;
 		}
-		if (!$Question || !is_object($Question)) {
+		if (!$question || !is_object($question)) {
 			$this->setError(_('No valid Question Object'));
 			return;
 		}
-		if ($Question->isError()) {
-			$this->setError(_('Survey').':: '.$Question->getErrorMessage());
+		if ($question->isError()) {
+			$this->setError(_('Survey').':: '.$question->getErrorMessage());
 			return;
 		}
 
-		$this->Survey = &$Survey;
-		$this->Question = &$Question;
+		$this->Survey = &$survey;
+		$this->Question = &$question;
 	}
 
 	/**
@@ -103,7 +103,7 @@ class SurveyResponseFactory extends Error {
 		return $Survey->Group;
 	}
 
-        /**
+	/**
 	 *	getSurvey - get the Survey object this SurveyResponse is associated with.
 	 *
 	 *	@return object	The Survey object.
@@ -112,7 +112,7 @@ class SurveyResponseFactory extends Error {
 		return $this->Survey;
 	}
 
-        /**
+	/**
 	 *	getQuestion - get the Question object this SurveyResponse is associated with.
 	 *
 	 *	@return object	The Question object.
@@ -123,7 +123,7 @@ class SurveyResponseFactory extends Error {
 
 	/**
 	 *	getSurveyResponses - get an array of Survey Response objects
-         *                           for the Survey and Question
+	 *                           for the Survey and Question
 	 *
  	 *	@return	array	The array of Survey Response objects.
 	 */

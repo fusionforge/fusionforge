@@ -32,7 +32,7 @@ require_once $gfcommon.'frs/FRSFile.class.php';
  *	  @param array	$data		  The result array, if it's passed in
  *	  @return object  FRSRelease object
  */
-function frsrelease_get_object($release_id, $data = false) {
+function frsrelease_get_object($release_id, $data = array()) {
 	global $FRSRELEASE_OBJ;
 	if (!isset($FRSRELEASE_OBJ['_'.$release_id.'_'])) {
 		if ($data) {
