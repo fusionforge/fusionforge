@@ -386,7 +386,7 @@ CREATE OR REPLACE FUNCTION artifact_search(text, int) RETURNS SETOF artifact_res
 	AND u.user_id=a.submitted_by
 	AND a.artifact_id=ai.artifact_id
 	ORDER BY idx.total DESC, ts_rank(ai.vectors, q) DESC'
-LANGUAGE 'SQL';
+LANGUAGE SQL;
 
 CREATE OR REPLACE FUNCTION doc_data_search(text, integer, text, boolean) RETURNS SETOF doc_data_results AS '
 	DECLARE
@@ -514,7 +514,7 @@ CREATE OR REPLACE FUNCTION forum_search(text, integer) RETURNS SETOF forum_resul
 	AND msg_id IN (SELECT fi.msg_id FROM forum_idx fi, forum f, to_tsquery($1) AS q
 	WHERE fi.msg_id = f.msg_id AND f.group_forum_id=$2
 	AND vectors @@ q ORDER BY ts_rank(vectors, q) DESC);'
-LANGUAGE 'SQL';
+LANGUAGE SQL;
 
 CREATE OR REPLACE FUNCTION frs_search(text, integer, text, boolean) RETURNS SETOF frs_results AS '
 	DECLARE
@@ -593,7 +593,7 @@ CREATE OR REPLACE FUNCTION groups_search(text) RETURNS SETOF groups_results AS '
 	WHERE status IN (\'A\', \'H\') AND is_public=\'1\' AND
 	group_id IN (SELECT group_id FROM groups_idx, to_tsquery($1) AS q
 	WHERE vectors @@ q ORDER BY ts_rank(vectors, q) DESC);'
-LANGUAGE 'SQL';
+LANGUAGE SQL;
 
 CREATE OR REPLACE FUNCTION export_groups_search(text) RETURNS SETOF export_groups_results AS '
 	SELECT ts_headline(group_name, q) as group_name,
@@ -607,7 +607,7 @@ CREATE OR REPLACE FUNCTION export_groups_search(text) RETURNS SETOF export_group
 	WHERE status IN (\'A\', \'H\') AND is_public=\'1\' AND short_description <> \'\' AND
 	group_id IN (SELECT group_id FROM groups_idx, to_tsquery($1) AS q
 	WHERE vectors @@ q ORDER BY ts_rank(vectors, q) DESC);'
-LANGUAGE 'SQL';
+LANGUAGE SQL;
 
 CREATE OR REPLACE FUNCTION news_bytes_search(text, integer) RETURNS SETOF news_bytes_results AS '
 	SELECT ts_headline(news_bytes.summary, q) as summary,
@@ -618,7 +618,7 @@ CREATE OR REPLACE FUNCTION news_bytes_search(text, integer) RETURNS SETOF news_b
 	WHERE (news_bytes.group_id=$2 AND news_bytes.is_approved <> ''4'' AND news_bytes.submitted_by=users.user_id) AND
 	news_bytes.id IN (SELECT id FROM news_bytes_idx,
 	to_tsquery($1) AS q WHERE vectors @@ q ORDER BY ts_rank(vectors, q) DESC);'
-LANGUAGE 'SQL';
+LANGUAGE SQL;
 
 CREATE OR REPLACE FUNCTION project_task_search(text, integer, text, boolean) RETURNS SETOF project_task_results AS '
 	DECLARE
@@ -709,7 +709,7 @@ CREATE OR REPLACE FUNCTION skills_data_search(text) RETURNS SETOF skills_data_re
 	AND skills_data.type=skills_data_types.type_id
 	AND skills_data.skills_data_id IN (SELECT skills_data_id FROM skills_data_idx, 
 	to_tsquery($1) AS q WHERE vectors @@ q ORDER BY ts_rank(vectors, q) DESC);'
-LANGUAGE 'SQL';
+LANGUAGE SQL;
 
 CREATE OR REPLACE FUNCTION trackers_search(text, integer, text, boolean) RETURNS SETOF trackers_results AS '
 	DECLARE
@@ -822,4 +822,4 @@ CREATE OR REPLACE FUNCTION users_search(text) RETURNS SETOF users_results AS '
 	FROM users, to_tsquery($1) AS q
 	WHERE status = \'A\' AND user_id IN (SELECT user_id FROM users_idx,
 	to_tsquery($1) AS q WHERE vectors @@ q ORDER BY ts_rank(vectors, q) DESC);'
-LANGUAGE 'SQL';
+LANGUAGE SQL;
