@@ -26,6 +26,7 @@
  * vote_number_to_stars() - Turns vote results into *'s
  *
  * @param		int		Raw value
+ * @return string
  */
 function vote_number_to_stars($raw) {
 	$raw=intval($raw*2);
@@ -35,6 +36,7 @@ function vote_number_to_stars($raw) {
 	} else {
 		$show_half=1;
 	}
+	$return ='';
 	$count=intval($raw/2);
 	for ($i=0; $i<$count; $i++) {
 		$return .= html_image("ic/check.png","15","16");
@@ -402,7 +404,7 @@ function vote_show_user_rate_box ($user_id, $by_id=0) {
 		}
 	}
 
-	global $USER_RATING_VALUES,$USER_RATING_QUESTIONS,$USER_RATING_POPUP1,$USER_RATING_POPUP2,$USER_RATING_POPUP3,$USER_RATING_POPUP4,$USER_RATING_POPUP5;
+	global $USER_RATING_VALUES,$USER_RATING_QUESTIONS;
 	echo '
 	<table>
 		<form action="/developer/rate.php" method="post">
