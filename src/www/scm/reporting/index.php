@@ -34,23 +34,24 @@ html_use_jqueryjqplotplugindateAxisRenderer();
 $group_id = getIntFromRequest("group_id");
 scm_header(array('title'=>_('SCM Repository Reporting'), 'group'=>$group_id));
 
-?>
-<h2>Commits Over Time</h2>
-<p>
-<?php commitstime_graph($group_id, 1); ?>
-</p>
-<h2>Commits Last 30 Days</h2>
-<p>
-<?php commits_graph($group_id, 30, 2); ?>
-</p>
-<h2>Commits Last 90 Days</h2>
-<p>
-<?php commits_graph($group_id, 90, 3); ?>
-</p>
-<h2>Commits Last 365 Days</h2>
-<p>
-<?php commits_graph($group_id, 365, 4); ?>
-</p>
-<?php
+echo '<h2>'._('Commits Over Time')."</h2>\n";
+echo "<p>\n";
+commitstime_graph($group_id, 1);
+echo "</p>\n";
+
+echo '<h2>'._('Commits Last 30 Days')."</h2>\n";
+echo "<p>\n";
+commits_graph($group_id, 30, 2);
+echo "</p>\n";
+
+echo '<h2>'._('Commits Last 90 Days')."</h2>\n";
+echo "<p>\n";
+commits_graph($group_id, 90, 3);
+echo "</p>\n";
+
+echo '<h2>'._('Commits Last 365 Days')."</h2>\n";
+echo "<p>\n";
+commits_graph($group_id, 365, 4);
+echo "</p>\n";
 
 scm_footer();

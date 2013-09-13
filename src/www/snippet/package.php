@@ -133,7 +133,7 @@ function show_add_snippet_box() {
     </p>
 	<ol>
       <li><?php echo _('Create the package using this form.'); ?></li>
-	  <li><?php echo _('<strong>Then</strong> use the "Add Snippets to Package" link to add files to your package.'); ?></li>
+	  <li><?php echo _('<strong>Then</strong> use the “Add Snippets to Package” link to add files to your package.'); ?></li>
 	</ol>
 	<p><?php echo _('<span class="important">Note:</span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package.'); ?>
     </p>

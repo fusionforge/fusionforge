@@ -92,7 +92,7 @@ ORDER BY snippet_version.snippet_version_id DESC", array($id));
 		echo $GLOBALS['HTML']->listTableBottom();
 
 		echo '
-		</p><p>'._('Download a raw-text version of this code by clicking on &quot;<strong>Download Version</strong>&quot;').'
+		</p><p>'._('Download a raw-text version of this code by clicking on “Download Version”').'
 		</p>';
 	/*
 		show the latest version of this snippet's code
@@ -179,7 +179,7 @@ ORDER BY snippet_package_version.snippet_package_version_id DESC',
 		echo $GLOBALS['HTML']->listTableBottom();
 
 		echo '
-		</p><p>' ._('Download a raw-text version of this code by clicking on &quot;<strong>Download Version</strong>&quot;').'
+		</p><p>'._('Download a raw-text version of this code by clicking on “Download Version”').'
 		</p>';
 
 	/*
