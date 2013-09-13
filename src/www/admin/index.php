@@ -42,6 +42,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 
 ?>
 
+<div class="info-box">
 <h2><?php echo _('User Maintenance'); ?></h2>
 	<ul>
 	<li><?php
@@ -49,8 +50,6 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		printf(_('Active site users: <strong>%d</strong>'),
 		    $gforge->getNumberOfActiveUsers());
 	?></li>
-</ul>
-<ul>
 	<li><a href="userlist.php"><?php echo _('Display Full User List/Edit Users'); ?></a></li>
 	<li><?php
 	echo _('Display Users Beginning with:').' ';
@@ -67,10 +66,10 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		<input type="submit" value="<?php echo _('Search'); ?>" />
 		</form>
 	</li>
-    <li><a href="../account/register.php"><?php
-    echo _('Register a New User');
-    ?></a>
-    </li>
+	<li><a href="../account/register.php"><?php
+	echo _('Register a New User');
+	?></a>
+	</li>
 	<li><a href="userlist.php?status=P"><?php echo _('Pending users'); ?></a></li>
 </ul>
 <?php
@@ -86,8 +85,9 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		echo $plugins_site_admin_user_html;
 		echo '</ul>';
 	}
-?>
+?></div>
 
+<div class="info-box">
 <h2><?php echo _('Global roles and permissions'); ?></h2>
 	<ul>
 	<li><?php
@@ -105,6 +105,9 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		echo '<input type="submit" name="add" value="'._("Create Role").'" /></p></form>';
 	?></li>
 </ul>
+</div>
+
+<div class="info-box">
 <h2><?php echo _('Project Maintenance'); ?></h2>
 <ul>
 	<li><?php
@@ -180,29 +183,35 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		echo $plugins_site_admin_project_html;
 		echo '</ul>';
 	}
-
-
-if(forge_get_config('use_news')) {
 ?>
+</div>
+
+<?php if(forge_get_config('use_news')) {?>
+<div class="info-box">
 <h2><?php echo _('News'); ?></h2>
 <ul>
 	<li><?php echo util_make_link ('/admin/pending-news.php',_('Pending news (moderation for front-page)')); ?></li>
 </ul>
+</div>
 <?php } ?>
 
-
+<div class="info-box">
 <h2><?php echo _('Stats'); ?></h2>
 <ul>
 	<li><?php echo util_make_link('/stats/',_('Site-Wide Stats')); ?></li>
 	<?php plugin_hook('webanalytics_admin', array()); ?>
 </ul>
+</div>
 
+<div class="info-box">
 <h2><?php echo _('Trove Project Tree'); ?></h2>
 <ul>
 	<li><a href="trove/trove_cat_list.php"><?php echo _('Display Trove Map'); ?></a></li>
 	<li><a href="trove/trove_cat_add.php"><?php echo _('Add to the Trove Map'); ?></a></li>
 </ul>
+</div>
 
+<div class="info-box">
 <h2><?php echo _('Site Utilities'); ?></h2>
 <ul>
 	<li><a href="massmail.php"><?php printf(_('Mail Engine for %1$s Subscribers'), forge_get_config ('forge_name')); ?></a></li>
@@ -230,8 +239,11 @@ if(forge_get_config('use_news')) {
 		<li><a href="<?php echo util_make_url ('/people/admin/'); ?>"><?php echo _('Job / Categories Administration'); ?></a></li>
 	<?php } ?>
 </ul>
+</div>
 <?php }
-
+?>
+</div>
+<?php
 site_admin_footer(array());
 
 // Local Variables:
