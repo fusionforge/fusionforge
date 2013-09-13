@@ -95,14 +95,7 @@ $fdependenton = false;
 
 function startElement($parser, $name, $attrib){
     global $principal_tag;
-    global $principal_action;
     global $subproject_id;
-    global $task_id;
-    global $project_id;
-    global $parent_task_id;
-    global $parent_project_id;
-    global $isnew;
-    global $task_count;
     global $tasks;
     global $fdependenton;
     global $result;
@@ -183,9 +176,7 @@ function startElement($parser, $name, $attrib){
 
 function endElement($parser, $name) {
 	global $task_count;
-	global $iddependenton;
 	global $fdependenton;
-	global $result;
 	global $atasks;
 	global $resourcename;
 	global $principal_tag;
@@ -214,12 +205,6 @@ function characterDataHandler ($parser, $data) {
 	global $subproject_id;
 	global $result;
 	global $tag_aux;
-	global $task_count;
-	global $task_id;
-	global $project_id;
-	global $parent_task_id;
-	global $parent_project_id;
-	global $isnew;
 	global $atasks;
 	global $fdependenton;
 	global $iddependenton;

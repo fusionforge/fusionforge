@@ -48,6 +48,7 @@ function project_setup_agg($group_id) {
  *
  * @param		int		The group ID
  * @param		string	The type
+ * @return string
  * @access		private
  */
 function project_getaggvalue($group_id,$type) {
@@ -90,7 +91,7 @@ function project_get_survey_count($group_id) {
  */
 function project_summary($group_id,$mode,$no_table) {
 	if (!$group_id) {
-		return 'Error - No Project ID';
+		return 'Error: No Project ID';
 	}
 	if (!$mode) {
 		$mode='full';

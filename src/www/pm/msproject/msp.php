@@ -230,12 +230,12 @@ function &MSPGetProjects($session_hash) {
 * Create SubProjects
 *
 * @author	Luis Hurtado	luis@gforgegroup.com
-* @param	int	$group_id		ID Group
-* @param	$session_hash	User Session
-* @param	$name		Project name
+* @param	int		$group_id		ID Group
+* @param	object	$session_hash	User Session
+* @param	string	$name		Project name
 * @param	bool	$is_public	1 Public  0 Private
-* @param	$description	Project Description
-* @return	ProjectGroup	Object ProjectGroup
+* @param	string	$description	Project Description
+* @return	object	ProjectGroup	Object ProjectGroup
 * @date		2005-01-19
 *
 */
