@@ -140,7 +140,7 @@ if ($group_id) {
 		print '</p>';
 
 		print '<p>';
-		print _('It will take <span class="important">6-24 Hours</span> for your list to be created.');
+		print _('It will take one hour for your list to be created.');
 		print '</p>';
 
 		$mlFactory = new MailingListFactory($group);
@@ -242,7 +242,7 @@ if ($group_id) {
 		}
 
 		mail_header(array(
-			'title' => _('Mailing List Administration'))
+			'title' => _('Mailing Lists Administration'))
 		);
 
 		$mlArray = $mlFactory->getMailingLists();
@@ -283,7 +283,7 @@ if ($group_id) {
 						echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;change_status=1">'._('Update').'</a>';
 					}
 					echo '</td>';
-					echo '<td style="text-align:center">';
+					echo '<td class="align-center">';
 					if($currentList->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
 						echo _('Not activated yet');
 					} else {
