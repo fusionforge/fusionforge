@@ -120,7 +120,7 @@ function ts_makeSortable(t) {
 
 function ts_getInnerText(el) {
 	if (typeof el == "string") return el;
-	if (typeof el == "undefined") { return el };
+	if (typeof el == "undefined") return el;
 	if (el.hasAttribute("content")) return el.getAttribute("content");
 	if (el.innerText) return el.innerText;	//Not needed but it is faster
 	var str = "";
