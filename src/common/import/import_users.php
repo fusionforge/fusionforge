@@ -382,12 +382,11 @@ function role_fill($roles,$group_id, $equivs_text_value,$equivs_name_value, $obs
 
 /**
  * Insert users into the group
- * @param unknown_type $users 'user_name' => {'role': role_id }
-                  ... }
- * @param unknown_type $group_id group to insert users into
- * @param unknown_type $check
+ * @param array		$users 'user_name' => {'role': role_id }
+ * @param int		$group_id group to insert users into
+ * @param bool		$check
  */
-function user_fill($users, $group_id, $check=False){
+function user_fill($users, $group_id, $check=false){
 	global $feedback;
 	global $message;
 
