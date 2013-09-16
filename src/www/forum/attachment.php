@@ -32,10 +32,10 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'forum/ForumHTML.class.php';
 
 /**
-	 *  goodbye - Just prints a message and a close button.
-	 *
-	 *  @param  string	 The message.
-	 */
+ *  goodbye - Just prints a message and a close button.
+ *
+ *  @param  string	 The message.
+ */
 
 function goodbye($msg) {
 	site_header(array('title'=>_('Attachments')));

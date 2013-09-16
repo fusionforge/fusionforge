@@ -244,7 +244,7 @@ if ($add_cat && $group_project_id) {
 	} elseif ($ac->isError()) {
 		exit_error($ac->getErrorMessage(),'pm');
 	} else {
-	    pm_header(array ('title'=>$title));
+		pm_header(array ('title'=>$title));
 		?>
 		<p class="information"><?php echo _('It is not recommended that you change the category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.')?></p>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
@@ -299,7 +299,6 @@ if ($add_cat && $group_project_id) {
 	} elseif ($pg->isError()) {
 		exit_error($pg->getErrorMessage(),'pm');
 	}
-
 	session_require_perm ('pm', $pg->getID(), 'manager') ;
 
 	pm_header(array('title'=>_('Change Tasks Status')));

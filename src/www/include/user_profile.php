@@ -151,7 +151,7 @@ function user_personal_information($user, $compact = false, $title = false) {
 			<tr>
 				<td>'. _('Site Member Since:') .'</td>
 				<td><strong>'. relative_date($user->getAddDate()). '</strong>
-    			</td>
+				</td>
 			</tr>';
 	if($compact) {
 		$user_uri = util_make_url('/users/'. $user->getUnixName() . '/');

@@ -92,7 +92,7 @@ echo notepad_func();
 		</td>
 	</tr>
 
-  	<tr>
+	<tr>
 		<td>
 		<strong><?php echo _('Task Summary') . _(': '); ?></strong><br />
 		<input type="text" name="summary" size="65" maxlength="65" value="<?php echo $pt->getSummary(); ?>" />
@@ -114,7 +114,7 @@ echo notepad_func();
 		<strong><?php echo _('Original Comment') ?>:</strong><br />
 		<?php
 			$sanitizer = new TextSanitizer();
-        	$body = $sanitizer->SanitizeHtml($pt->getDetails());
+			$body = $sanitizer->SanitizeHtml($pt->getDetails());
 
 			if (strpos($body,'<') === false) {
 				echo nl2br($pt->getDetails());
@@ -134,7 +134,7 @@ $params['body'] = "";
 $params['group'] = $group_id;
 plugin_hook("text_editor",$params);
 if (!$GLOBALS['editor_was_set_up']) {
-    echo '<textarea name="details" rows="5" cols="80"></textarea>';
+	echo '<textarea name="details" rows="5" cols="80"></textarea>';
 }
 unset($GLOBALS['editor_was_set_up']);
 ?>
