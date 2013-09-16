@@ -663,7 +663,7 @@ function db_string_array_to_any_clause($arr) {
  * @param array  $new_params new params matching the new query instructions
  * @return array  array(SQL query, array(parameters...), newmax)
  */
-function db_construct_qpa($old_qpa = false, $new_sql = '', $new_params = array()) {
+function db_construct_qpa($old_qpa = array(), $new_sql = '', $new_params = array()) {
 
 	// can be invoked for the first time, starting with no previous query
 	if (!is_array($old_qpa) || count($old_qpa) < 3) {
