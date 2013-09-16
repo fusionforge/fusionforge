@@ -347,6 +347,11 @@ class LDAP extends UNIX {
 	 * @param		string	$username	The username
 	 * @param		string	$cn
 	 * @param		string	$crypt_pw	The encrypted password
+	 * @param		string	$shell
+	 * @param		string	$cvsshell
+	 * @param		int		$uid
+	 * @param		int		$gid
+	 * @param		string	$email
 	 * @return bool	true on success/false on error
 	 *
 	 */
@@ -618,13 +623,13 @@ class LDAP extends UNIX {
 	/**
 	 * sysGroupAddUser() - Add a user to an LDAP group
 	 *
-	 * @param		int		The ID of the group two which the user will be added
-	 * @param		int		The ID of the user to add
-	 * @param		bool	Only add this user to CVS
+	 * @param		int		$group_id	The ID of the group two which the user will be added
+	 * @param		int		$user_id	The ID of the user to add
+	 * @param		bool	$cvs_only	Only add this user to CVS
 	 * @return bool	true on success/false on error
 	 *
 	 */
-	function sysGroupAddUser($group_id,$user_id,$cvs_only=0) {
+	function sysGroupAddUser($group_id, $user_id, $cvs_only=false) {
 		global $ldap_conn;
 
 		$group = group_get_object($group_id);
@@ -688,13 +693,13 @@ class LDAP extends UNIX {
 	/**
 	 * sysGroupRemoveUser() - Remove a user from an LDAP group
 	 *
-	 * @param		int		The ID of the group from which to remove the user
-	 * @param		int		The ID of the user to remove
-	 * @param		bool	Only remove user from CVS group
+	 * @param		int		$group_id	The ID of the group from which to remove the user
+	 * @param		int		$user_id	The ID of the user to remove
+	 * @param		bool	$cvs_only	Only remove user from CVS group
 	 * @return bool	true on success/false on error
 	 *
 	 */
-	function sysGroupRemoveUser($group_id,$user_id,$cvs_only=0) {
+	function sysGroupRemoveUser($group_id, $user_id, $cvs_only=false) {
 
 		$group = group_get_object($group_id);
 		$user  = user_get_object($user_id);
