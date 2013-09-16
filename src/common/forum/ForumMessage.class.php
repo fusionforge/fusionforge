@@ -242,16 +242,17 @@ class ForumMessage extends Error {
 
 	/**
 	*	insertmsg - inserts the message into the main table (forum)
-	 *	@param	string	The subject of the message.
-	 *	@param	string	The body of the message.
-	 *	@param	int	The thread_id of the message, if known.
-	 *	@param	int	The message_id of the parent message, if any.
-	 *	@param 	int	The id of the user that is posting the message
-	 *	@param  boolean	Whether the message has an attach associated. Defaults to false
-	 *	@param	int	The timestamp of the message to insert, defaults to 0.
+	 *	@param	string	$subject			The subject of the message.
+	 *	@param	string	$body				The body of the message.
+	 *	@param	int		$thread_id			The thread_id of the message, if known.
+	 *	@param	int		$is_followup_to		The message_id of the parent message, if any.
+	 *	@param 	int		$user_id			The id of the user that is posting the message
+	 *	@param  bool	$has_attach			Whether the message has an attach associated. Defaults to false
+	 *	@param	int		$timestamp			The timestamp of the message to insert, defaults to 0.
 	 *	@return	boolean success.
 	*/
-	function insertmsg($subject, $body, $thread_id='', $is_followup_to='',$user_id,$has_attach=false,$timestamp=0) {
+	function insertmsg($subject, $body, $thread_id=0, $is_followup_to=0,
+					   $user_id, $has_attach=false, $timestamp=0) {
 		if ($timestamp == 0){
 			$timestamp = time();
 		}
@@ -352,7 +353,7 @@ class ForumMessage extends Error {
 	 *	@param	int		$timestamp		The timestamp of the message to create. Defaults to 0, meaning the timestamp used for this message will be "time()"
 	 *	@return	boolean success.
 	 */
-	function create($subject, $body, $thread_id='', $is_followup_to='',$has_attach=false, $timestamp = 0) {
+	function create($subject, $body, $thread_id=0, $is_followup_to=0, $has_attach=false, $timestamp = 0) {
 		if (!strlen(trim($body)) || !strlen(trim($subject))) {
 			$this->setError(_('Error: a forum message must include a message body and a subject.'));
 			return false;
