@@ -71,9 +71,6 @@ function show_top_downloads() {
 	//      to allow download list to be cached before nightly
 	//      aggregation is done. jbyers 2001.03.19
 	//
-	$month = date("Ym",time()-(2*3600*24));
-	$day = date("d",time()-(2*3600*24));
-
 	$return = '' ;
 
 	$res_topdown = db_query_params ('
@@ -106,7 +103,7 @@ function show_top_downloads() {
 		}
 	}
 	if ( $return == "" ) {
-		return _('No Stats Available');
+		return _('No stats available');
 	} else {
 		$return = '<table>' . $return . "</table>\n";
 	}
@@ -188,7 +185,7 @@ function show_newest_projects() {
 	}
 
 	if ( $return == "" ) {
-		return _('No Stats Available');
+		return _('No stats available');
 	} else {
 		$return = '<table>' . $return . "</table>\n";
 	}
@@ -208,7 +205,7 @@ function show_highest_ranked_users() {
 	} else {
 		$rows = db_numrows($res);
 		if ($rows < 1) {
-			return  _('No Stats Available');
+			return  _('No stats available');
 		} else {
 			$return = '';
 			for ($i=0; $i < $rows; $i++) {
@@ -243,7 +240,7 @@ function show_highest_ranked_projects() {
 		$count++ ;
 	}
 	if ( $return == "" ) {
-		return _('No Stats Available');
+		return _('No stats available');
 	} else {
 		$return = '<table>' . $return . "</table>\n";
 	}
