@@ -128,7 +128,7 @@ $title = _('Project Member List');
 site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'memberlist'));
 
 echo '<p>';
-echo _('If you would like to contribute to this project by becoming a developer, contact one of the project admins, designated in bold text below.');
+echo _('If you would like to contribute to this project by becoming a member, contact one of the project admins, designated in bold text below.');
 echo '</p>';
 
         $title_arr=array();
