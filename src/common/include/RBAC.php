@@ -191,7 +191,7 @@ abstract class BaseRole extends Error {
 		global $SYS;
 		$hp = $this->getHomeProject();
 		if ($hp != NULL && $hp->getID() == $project->getID()) {
-			$this->setError(_("Can't link to home project"));
+			$this->setError(_("Cannot link to home project"));
 			return false;
 		}
 
@@ -226,7 +226,7 @@ abstract class BaseRole extends Error {
 		global $SYS;
 		$hp = $this->getHomeProject();
 		if ($hp != NULL && $hp->getID() == $project->getID()) {
-			$this->setError (_("Can't unlink from home project"));
+			$this->setError (_("Cannot unlink from home project"));
 			return false;
 		}
 
@@ -255,7 +255,8 @@ abstract class BaseRole extends Error {
 	 *
 	 * If an update occurred and you need to access the updated info.
 	 *
-	 * @return	boolean	success;
+	 * @param		int		$role_id
+	 * @return		bool	success
 	 */
 	function fetchData($role_id) {
 		unset($this->data_array);
@@ -573,6 +574,7 @@ abstract class BaseRole extends Error {
 	/**
 	 *  &getRoleVals - get all the values and language text strings for this section.
 	 *
+	 *	@param	string	$section
 	 *  @return array	Assoc array of values for this section.
 	 */
 	function &getRoleVals($section) {
