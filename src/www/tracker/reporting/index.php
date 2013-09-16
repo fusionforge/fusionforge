@@ -123,7 +123,7 @@ $h->header(array('title' => _('Tracker Activity Reporting')));
 <tr>
 <td>
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
-<strong><?php echo _('Tracker').(': '); ?></strong><br />
+<strong><?php echo _('Tracker')._(': '); ?></strong><br />
 <?php echo html_build_select_box($restracker,'atid',$atid,false); ?></td>
 <td><strong><?php echo _('Area')._(': '); ?></strong><br />
 <?php echo html_build_select_box_from_arrays($vals, $labels, 'area',$area,false); ?></td>
