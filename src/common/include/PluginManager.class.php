@@ -43,7 +43,7 @@ class PluginManager extends Error {
 		if (!isset($PLUGINMANAGER_OBJ) || !$PLUGINMANAGER_OBJ) {
 			$PLUGINMANAGER_OBJ = new PluginManager;
 		}
-		return $PLUGINMANAGER_OBJ ;
+		return $PLUGINMANAGER_OBJ;
 
 	}
 	/**
@@ -88,14 +88,14 @@ class PluginManager extends Error {
 	 * @param	string	name of plugin
 	 * @return	boolean	true if installed
 	 */
-	function PluginIsInstalled ($pluginname) {
+	function PluginIsInstalled($pluginname) {
 		$plugins_data = $this->getPlugins();
 		foreach ($plugins_data as $p_id => $p_name) {
 			if ($p_name == $pluginname) {
-				return true ;
+				return true;
 			}
 		}
-		return false ;
+		return false;
 	}
 	function isPluginAvailable($plugin) {
 		$pluginname = $plugin->GetName();
@@ -112,7 +112,7 @@ class PluginManager extends Error {
 				array($pluginname, "This is the $pluginname plugin"));
 
 		$res = db_query_params ('SELECT plugin_id, plugin_name FROM plugins WHERE plugin_name=$1',
-				array ($pluginname));
+				array($pluginname));
 		if (db_numrows($res) == 1) {
 			$plugin_id = db_result($res, 0, 'plugin_id');
 			$this->plugins_data[$plugin_id] = db_result($res,0,'plugin_name');
@@ -133,7 +133,7 @@ class PluginManager extends Error {
 			}
 		}
 		if ($p_id != NULL) {
-			unset($this->plugins_data[$p_id]) ;
+			unset($this->plugins_data[$p_id]);
 		}
 		return $res;
 	}
@@ -148,17 +148,17 @@ class PluginManager extends Error {
 		$plugins_data = $this->GetPlugins();
 		$include_path = forge_get_config('plugins_path');
 		$filename = $include_path . '/'. $p_name . "/common/".$p_name."-init.php";
-		if (file_exists ($filename)) {
+		if (file_exists($filename)) {
 			require_once ($filename);
 		} else {
-			$filename = $include_path . '/'. $p_name . "/common/".$p_name."Plugin.class.php" ;
+			$filename = $include_path . '/'. $p_name . "/common/".$p_name."Plugin.class.php";
 			if (file_exists($filename)) {
 				require_once($filename);
 				$p_class = $p_name.'Plugin';
 				register_plugin (new $p_class);
 			} else { //if we didn't find it in common/ it may be an old plugin that has its files in include/
-				$filename = $include_path . '/' . $p_name . "/include/".$p_name."-init.php" ;
-				if (file_exists ($filename)) {
+				$filename = $include_path . '/' . $p_name . "/include/".$p_name."-init.php";
+				if (file_exists($filename)) {
 					require_once ($filename);
 				} else {
 					// we can't find the plugin so we remove it from the array
@@ -168,7 +168,7 @@ class PluginManager extends Error {
 						}
 					}
 					unset($this->plugins_data[$p_id]);
-					return false ;
+					return false;
 				}
 			}
 		}
@@ -198,7 +198,7 @@ class PluginManager extends Error {
 		$this->hooks_to_plugins = array();
 		foreach ($this->plugins_to_hooks as $p_name => $hook_list) {
 			foreach ($hook_list as $hook_name) {
-				if (!isset ($this->hooks_to_plugins[$hook_name])) {
+				if (!isset($this->hooks_to_plugins[$hook_name])) {
 					$this->hooks_to_plugins[$hook_name] = array();
 				}
 				$this->hooks_to_plugins[$hook_name][] = $p_name;
@@ -217,9 +217,9 @@ class PluginManager extends Error {
 		if (!$pluginobject->GetName()) {
 			exit_error(_("Some plugin did not provide a name. I'd gladly tell you which one, but obviously I cannot. Sorry."),'');
 		}
-		$p_name = $pluginobject->GetName() ;
+		$p_name = $pluginobject->GetName();
 		$this->plugins_objects[$p_name] =& $pluginobject;
-		$this->plugins_to_hooks[$p_name] = array_unique($pluginobject->GetHooks ()) ;
+		$this->plugins_to_hooks[$p_name] = array_unique($pluginobject->GetHooks());
 		return true;
 	}
 
@@ -237,7 +237,7 @@ class PluginManager extends Error {
 		if (isset($this->hooks_to_plugins[$hookname])) {
 			$p_list = $this->hooks_to_plugins[$hookname];
 			foreach ($p_list as $p_name) {
-				$p_obj = $this->plugins_objects[$p_name] ;
+				$p_obj = $this->plugins_objects[$p_name];
 				if (method_exists($p_obj, $hookname)) {
 					$returned = $p_obj->$hookname($params);
 				} else {
@@ -276,7 +276,7 @@ class PluginManager extends Error {
 	function CountHookListeners($hookname) {
 		if (isset($this->hooks_to_plugins[$hookname])) {
 			$p_list = $this->hooks_to_plugins[$hookname];
-			return count ($p_list);
+			return count($p_list);
 		} else {
 			return 0;
 		}
@@ -296,9 +296,9 @@ class PluginManager extends Error {
 function &plugin_manager_get_object() {
 	global $PLUGINMANAGER_OBJ;
 	if (!isset($PLUGINMANAGER_OBJ) || !$PLUGINMANAGER_OBJ) {
-		$PLUGINMANAGER_OBJ = new PluginManager ;
+		$PLUGINMANAGER_OBJ = new PluginManager;
 	}
-	return $PLUGINMANAGER_OBJ ;
+	return $PLUGINMANAGER_OBJ;
 }
 
 /**
@@ -307,64 +307,64 @@ function &plugin_manager_get_object() {
  * @param string $pluginname - a plugin name
  * @return Plugin The Plugin object
  */
-function &plugin_get_object ($pluginname) {
+function &plugin_get_object($pluginname) {
 	global $PLUGINMANAGER_OBJ;
-	$result=$PLUGINMANAGER_OBJ->Getpluginobject ($pluginname) ;
+	$result=$PLUGINMANAGER_OBJ->Getpluginobject($pluginname);
 	return $result;
 }
 
 /**
- * register_plugin () - register a plugin
+ * register_plugin() - register a plugin
  *
  * @param pluginobject - an object of a subclass of the Plugin class
  * @return bool
  */
 function register_plugin(&$pluginobject) {
-	$pm =& plugin_manager_get_object () ;
-	return $pm->RegisterPlugin ($pluginobject) ;
+	$pm =& plugin_manager_get_object();
+	return $pm->RegisterPlugin($pluginobject);
 }
 
 /**
- * plugin_hook () - run a set of hooks
+ * plugin_hook() - run a set of hooks
+ *
+ * @param string	$hookname - name of the hook
+ * @param array		$params - parameters for the hook
+ * @return bool
+ */
+function plugin_hook($hookname, $params = array()) {
+	$pm =& plugin_manager_get_object();
+	return $pm->RunHooks($hookname, $params);
+}
+
+/**
+ * plugin_hook_by_reference() - run a set of hooks with params passed by reference
+ *
+ * @param string	$hookname - name of the hook
+ * @param array		$params - parameters for the hook
+ * @return bool
+ */
+function plugin_hook_by_reference($hookname, &$params) {
+	$pm =& plugin_manager_get_object();
+	return $pm->RunHooks($hookname, $params);
+}
+
+/**
+ * plugin_hook_listeners() - count the number of listeners on a hook
  *
  * @param string $hookname - name of the hook
- * @param array  $params - parameters for the hook
- * @return bool
- */
-function plugin_hook($hookname, $params = false) {
-	$pm =& plugin_manager_get_object () ;
-	return $pm->RunHooks($hookname, $params) ;
-}
-
-/**
- * plugin_hook_by_reference () - run a set of hooks with params passed by reference
- *
- * @param hookname - name of the hook
- * @param params - parameters for the hook
- * @return bool
- */
-function plugin_hook_by_reference ($hookname, &$params) {
-	$pm =& plugin_manager_get_object () ;
-	return $pm->RunHooks ($hookname, $params) ;
-}
-
-/**
- * plugin_hook_listeners () - count the number of listeners on a hook
- *
- * @param hookname - name of the hook
  * @return int
  */
-function plugin_hook_listeners ($hookname, $params=false) {
-	$pm =& plugin_manager_get_object () ;
-	return $pm->CountHookListeners ($hookname) ;
+function plugin_hook_listeners($hookname) {
+	$pm =& plugin_manager_get_object();
+	return $pm->CountHookListeners($hookname);
 }
 
 /**
- * setup_plugin_manager () - initialise the plugin infrastructure
+ * setup_plugin_manager() - initialise the plugin infrastructure
  *
  */
 function setup_plugin_manager() {
-	$pm =& plugin_manager_get_object() ;
+	$pm =& plugin_manager_get_object();
 	$pm->LoadPlugins();
 	$pm->SetupHooks();
 	return true;
