@@ -1148,7 +1148,9 @@ class ProjectTask extends Error {
 	/**
 	 *	sendNotice - contains the logic for sending email updates.
 	 *
-	 *	@return	boolean	success.
+	 *	@param	bool	$first
+	 *	@param	array	$arrChangedAndInNotice
+	 *	@return	bool	success.
 	 */
 	function sendNotice($first=false, $arrChangedAndInNotice=array()) {
 		global $send_task_email;
