@@ -282,9 +282,9 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	/**
 	 * whatIsIt - do the analyse
 	 *
-	 * @param	string	the path to analyse
-	 * @param	int	group id
-	 * @param	array	the previous path analysed
+	 * @param	string	$string	the path to analyse
+	 * @param	int		$group_id	group id
+	 * @param	array	$path_array	the previous path analysed
 	 * @return	array	the path analysed
 	 */
 	function whatIsIt($string, $group_id, $path_array) {
