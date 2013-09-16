@@ -42,8 +42,8 @@ class WidgetLayoutManager {
 	 *
 	 * Display the default layout for the "owner". It may be the home page, the project summary page or /my/ page.
 	 *
-	 * @param	int	owner_id
-	 * @param	char	owner_type
+	 * @param	int		$owner_id
+	 * @param	char	$owner_type
 	 */
 	function displayLayout($owner_id, $owner_type) {
 		$sql = "SELECT * from owner_layouts where owner_id=$1 and owner_type=$2";
@@ -104,8 +104,8 @@ class WidgetLayoutManager {
 	/**
 	 * _currentUserCanUpdateLayout
 	 *
-	 * @param	int	owner_id
-	 * @param	char	owner_type
+	 * @param	int		$owner_id
+	 * @param	char	$owner_type
 	 * @return boolean true if the user dan uppdate the layout (add/remove widget, collapse, set preferences, ...)
 	 */
 	function _currentUserCanUpdateLayout($owner_id, $owner_type) {
@@ -142,7 +142,7 @@ class WidgetLayoutManager {
 	 * - MyMonitoredForums
 	 * - and widgets of plugins if they want to listen to the event default_widgets_for_new_owner
 	 *
-	 * @param	int	owner_id The id of the newly created user
+	 * @param	int	$owner_id The id of the newly created user
 	 */
 	function createDefaultLayoutForUser($owner_id) {
 		$owner_type = self::OWNER_TYPE_USER;
