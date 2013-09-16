@@ -132,8 +132,8 @@ class System extends Error {
 	/**
 	 * sysCheckGroup() - Check for the existence of a group
 	 *
-	 * @param  int	 The ID of the group to check
-	 * @return bool True on success/false on error
+	 * @param  int		$group_id	The ID of the group to check
+	 * @return bool		True on success/false on error
 	 *
 	 */
 	function sysCheckGroup($group_id) {
@@ -143,7 +143,7 @@ class System extends Error {
 	/**
 	 * sysCreateGroup() - Create a group
 	 *
-	 * @param	int		The ID of the group to create
+	 * @param	int		$group_id	The ID of the group to create
 	 * @return	bool	true on success/false on error
 	 *
 	 */
@@ -154,7 +154,7 @@ class System extends Error {
 	/**
 	 * sysRemoveGroup() - Remove a group
 	 *
-	 * @param	int		The ID of the group to remove
+	 * @param	int		$group_id	The ID of the group to remove
 	 * @return	bool	true on success/false on error
 	 *
 	 */
@@ -165,8 +165,8 @@ class System extends Error {
 	/**
 	 * sysGroupCheckUser() - Sync forge permissions with system permissions for that user/group
 	 *
-	 * @param	int		The ID of the group two which the user will be added
-	 * @param	int		The ID of the user to add
+	 * @param	int		$group_id	The ID of the group to which the user will be added
+	 * @param	int		$user_id	The ID of the user to add
 	 * @return	bool	true on success/false on error
 	 *
 	 */
@@ -177,13 +177,13 @@ class System extends Error {
 	/**
 	 * sysGroupAddUser() - Add a user to a group
 	 *
-	 * @param	int		The ID of the group two which the user will be added
-	 * @param	int		The ID of the user to add
-	 * @param	bool	Only add this user to CVS
+	 * @param	int		$group_id	The ID of the group to which the user will be added
+	 * @param	int		$user_id	The ID of the user to add
+	 * @param	bool	$cvs_only	Only add this user to CVS
 	 * @return	bool	true on success/false on error
 	 *
 	 */
-	function sysGroupAddUser($group_id, $user_id, $cvs_only = 0) {
+	function sysGroupAddUser($group_id, $user_id, $cvs_only = false) {
 		return true;
 	}
 
