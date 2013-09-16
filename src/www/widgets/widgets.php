@@ -46,41 +46,41 @@ if (isLogged()) {
 		$vOwner = new Valid_Widget_Owner('owner');
 		$vOwner->required();
 		if ($request->valid($vOwner)) {
-		$owner = $request->get('owner');
-		$owner_id   = (int)substr($owner, 1);
-		$owner_type = substr($owner, 0, 1);
-		switch($owner_type) {
-			case WidgetLayoutManager::OWNER_TYPE_USER:
-				$owner_id = user_getid();
-				$userm=UserManager::instance();
-				$current=$userm->getCurrentUser();
-		    	site_user_header(array('title'=>sprintf(_('Personal Page For %s'),user_getname())));
-				$lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER, $layout_id);
-				site_footer(array());
-				break;
-			case WidgetLayoutManager::OWNER_TYPE_GROUP:
-				$pm = ProjectManager::instance();
-				if ($project = $pm->getProject($owner_id)) {
-					$group_id = $owner_id;
-					$_REQUEST['group_id'] = $_GET['group_id'] = $group_id;
-					$request->params['group_id'] = $group_id; //bad!
-					if (forge_check_perm('project_admin', $group_id) ||
-					    forge_check_global_perm('forge_admin')) {
-						if (HTTPRequest::instance()->get('update') == 'layout') {
-							$title = _("Customize layout");
+			$owner = $request->get('owner');
+			$owner_id   = (int)substr($owner, 1);
+			$owner_type = substr($owner, 0, 1);
+			switch($owner_type) {
+				case WidgetLayoutManager::OWNER_TYPE_USER:
+					$owner_id = user_getid();
+					$userm=UserManager::instance();
+					$current=$userm->getCurrentUser();
+					site_user_header(array('title'=>sprintf(_('Personal Page for %s'), user_getname())));
+					$lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER, $layout_id);
+					site_footer(array());
+					break;
+				case WidgetLayoutManager::OWNER_TYPE_GROUP:
+					$pm = ProjectManager::instance();
+					if ($project = $pm->getProject($owner_id)) {
+						$group_id = $owner_id;
+						$_REQUEST['group_id'] = $_GET['group_id'] = $group_id;
+						$request->params['group_id'] = $group_id; //bad!
+						if (forge_check_perm('project_admin', $group_id) ||
+							forge_check_global_perm('forge_admin')) {
+							if (HTTPRequest::instance()->get('update') == 'layout') {
+								$title = _("Customize Layout");
+							} else {
+								$title = _("Add widgets");
+							}
+							site_project_header(array('title'=>$title, 'group'=>$group_id, 'toptab'=>'summary'));
+							$lm->displayAvailableWidgets($group_id, WidgetLayoutManager::OWNER_TYPE_GROUP, $layout_id);
+							site_footer(array());
 						} else {
-							$title = _("Add widgets");
+							$GLOBALS['Response']->redirect('/projects/'.$project->getUnixName().'/');
 						}
-						site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'summary'));
-						$lm->displayAvailableWidgets($group_id, WidgetLayoutManager::OWNER_TYPE_GROUP, $layout_id);
-						site_footer(array());
-					} else {
-						$GLOBALS['Response']->redirect('/projects/'.$project->getUnixName().'/');
 					}
-				}
-				break;
-			default:
-			break;
+					break;
+				default:
+					break;
 			}
 		}
 	}

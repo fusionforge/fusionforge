@@ -33,92 +33,92 @@ $redirect   = '/';
 $owner = $request->get('owner');
 
 if ($owner) {
-    $owner_id   = (int)substr($owner, 1);
-    $owner_type = substr($owner, 0, 1);
-    switch($owner_type) {
-        case WidgetLayoutManager::OWNER_TYPE_USER:
-            $owner_id = user_getid();
-            $layout_id =(int)$request->get('layout_id');
-            $redirect = '/my/';
-            $good = true;
-            break;
-        case WidgetLayoutManager::OWNER_TYPE_GROUP:
-            $pm = ProjectManager::instance();
-            if ($project = $pm->getProject($owner_id)) {
-                $group_id = $owner_id;
-                $_REQUEST['group_id'] = $_GET['group_id'] = $group_id;
-                $request->params['group_id'] = $group_id; //bad!
-                $redirect = '/projects/'. $project->getUnixName().'/';
-		if (!forge_check_perm('project_admin', $group_id) &&
-		    !forge_check_global_perm('forge_admin')) {
-                    $GLOBALS['Response']->redirect($redirect);
-                }
-                $good = true;
-            }
-            break;
-        default:
-            break;
-    }
-    if ($good) {
-        if (($layout_id = (int)$request->get('layout_id')) || $request->get('action') == 'preferences') {
-            $name = null;
-            if ($request->exist('name')) {
-                $param = $request->get('name');
-                $name = array_pop(array_keys($param));
-                $instance_id = (int)$param[$name];
-            }
-            switch($request->get('action')) {
-                case 'widget':
-                    if ($name && $request->exist('layout_id')) {
-                        if ($widget = Widget::getInstance($name)) {
-                            if ($widget->isAvailable()) {
-                                $action = array_pop(array_keys($param[$name]));
-                                switch($action) {
-                                    case 'remove':
-                                        $instance_id = (int)$param[$name][$action];
-					if ($owner_type == WidgetLayoutManager::OWNER_TYPE_GROUP) {
-						if (forge_check_perm ('project_admin', $owner_id, NULL)) {
-							$lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);
+	$owner_id   = (int)substr($owner, 1);
+	$owner_type = substr($owner, 0, 1);
+	switch($owner_type) {
+		case WidgetLayoutManager::OWNER_TYPE_USER:
+			$owner_id = user_getid();
+			$layout_id =(int)$request->get('layout_id');
+			$redirect = '/my/';
+			$good = true;
+			break;
+		case WidgetLayoutManager::OWNER_TYPE_GROUP:
+			$pm = ProjectManager::instance();
+			if ($project = $pm->getProject($owner_id)) {
+				$group_id = $owner_id;
+				$_REQUEST['group_id'] = $_GET['group_id'] = $group_id;
+				$request->params['group_id'] = $group_id; //bad!
+				$redirect = '/projects/'. $project->getUnixName().'/';
+				if (!forge_check_perm('project_admin', $group_id) &&
+					!forge_check_global_perm('forge_admin')) {
+					$GLOBALS['Response']->redirect($redirect);
+				}
+				$good = true;
+			}
+			break;
+		default:
+			break;
+	}
+	if ($good) {
+		if (($layout_id = (int)$request->get('layout_id')) || $request->get('action') == 'preferences') {
+			$name = null;
+			if ($request->exist('name')) {
+				$param = $request->get('name');
+				$name = array_pop(array_keys($param));
+				$instance_id = (int)$param[$name];
+			}
+			switch($request->get('action')) {
+				case 'widget':
+					if ($name && $request->exist('layout_id')) {
+						if ($widget = Widget::getInstance($name)) {
+							if ($widget->isAvailable()) {
+								$action = array_pop(array_keys($param[$name]));
+								switch($action) {
+									case 'remove':
+										$instance_id = (int)$param[$name][$action];
+										if ($owner_type == WidgetLayoutManager::OWNER_TYPE_GROUP) {
+											if (forge_check_perm ('project_admin', $owner_id, NULL)) {
+												$lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);
+											}
+										} else {
+											$lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);
+										}
+										break;
+									case 'add':
+									default:
+										$redirect ='/widgets/widgets.php?owner='. $owner_type.$owner_id.'&layout_id='. $layout_id.'#filter-widget-categ-'.$widget->getCategory();
+										$lm->addWidget($owner_id, $owner_type, $layout_id, $name, $widget, $request);
+										break;
+								}
+							}
 						}
-					} else {
-						$lm->removeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id, $widget);
 					}
-                                        break;
-                                    case 'add':
-                                    default:
-                                        $redirect ='/widgets/widgets.php?owner='. $owner_type.$owner_id.'&layout_id='. $layout_id.'#filter-widget-categ-'.$widget->getCategory();
-                                        $lm->addWidget($owner_id, $owner_type, $layout_id, $name, $widget, $request);
-                                        break;
-                                }
-                            }
-                        }
-                    }
-                    break;
-                case 'minimize':
-                    if ($name) {
-                        $lm->mimizeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id);
-                    }
-                    break;
-                case 'maximize':
-                    if ($name) {
-                        $lm->maximizeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id);
-                    }
-                    break;
-                case 'preferences':
-                    if ($name) {
-                        $lm->displayWidgetPreferences($owner_id, $owner_type, $layout_id, $name, $instance_id);
-                    }
-                    break;
-                case 'layout':
-                    $lm->updateLayout($owner_id, $owner_type, $request->get('layout_id'), $request->get('new_layout'));
-                    break;
-                default:
-                    $lm->reorderLayout($owner_id, $owner_type, $layout_id, $request);
-                    break;
-            }
-        }
-    }
+					break;
+				case 'minimize':
+					if ($name) {
+						$lm->mimizeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id);
+					}
+					break;
+				case 'maximize':
+					if ($name) {
+						$lm->maximizeWidget($owner_id, $owner_type, $layout_id, $name, $instance_id);
+					}
+					break;
+				case 'preferences':
+					if ($name) {
+						$lm->displayWidgetPreferences($owner_id, $owner_type, $layout_id, $name, $instance_id);
+					}
+					break;
+				case 'layout':
+					$lm->updateLayout($owner_id, $owner_type, $request->get('layout_id'), $request->get('new_layout'));
+					break;
+				default:
+					$lm->reorderLayout($owner_id, $owner_type, $layout_id, $request);
+					break;
+			}
+		}
+	}
 }
 if (!$request->isAjax()) {
-    htmlRedirect($redirect);
+	htmlRedirect($redirect);
 }
