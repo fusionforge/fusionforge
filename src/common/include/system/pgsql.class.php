@@ -421,12 +421,12 @@ WHERE users.user_id=$2
 	/**
  	* sysGroupRemoveUser() - Remove a user from a group
  	*
- 	* @param	int	The ID of the group from which to remove the user
- 	* @param	int	The ID of the user to remove
-	* @param	boolean	Compatibility issue but not used : pgsql extends System...
- 	* @return	boolean	true on success/false on error
+ 	* @param	int		$group_id	The ID of the group from which to remove the user
+ 	* @param	int		$user_id	The ID of the user to remove
+	* @param	bool	$unused		Compatibility issue but not used : pgsql extends System...
+ 	* @return	bool	true on success/false on error
  	*/
-	function sysGroupRemoveUser($group_id, $user_id, $unused = 0) {
+	function sysGroupRemoveUser($group_id, $user_id, $unused = false) {
 		$res = db_query_params ('DELETE FROM nss_usergroups WHERE user_id=$1 AND group_id=$2',
 					 array ($user_id,
 						$group_id)) ;
