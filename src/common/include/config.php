@@ -255,7 +255,7 @@ function forge_define_config_item_bool ($var, $section, $default) {
 
 /**
  * Read a *.ini file and inject its contents into the configuration database
- * @param string $file
+ * @param string $filename
  */
 function forge_read_config_file ($filename) {
 	$c = FusionForgeConfig::get_instance () ;
