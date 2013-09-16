@@ -616,8 +616,7 @@ if (!$at_arr || count($at_arr) < 1) {
 			});
 
 			function updatePage() {
-				jQuery('#div_roadmap').empty();
-				jQuery('#div_roadmap').append('<div class="align-center"><img src="<?php echo $gfwww ?>/images/ajax-loader.gif" /></div>');
+				jQuery('#div_roadmap').empty().append('<div class="align-center"><img src="<?php echo $gfwww ?>/images/ajax-loader.gif" /></div>');
 				jQuery.ajax({
 					type: 'POST',
 					url: 'roadmap.php',
@@ -629,8 +628,7 @@ if (!$at_arr || count($at_arr) < 1) {
 						ajax: 1
 					},
 					success: function(rep) {
-						jQuery('#div_roadmap').empty();
-						jQuery('#div_roadmap').append(rep);
+						jQuery('#div_roadmap').empty().append(rep);
 					}
 				});
 			}
@@ -644,10 +642,8 @@ if (!$at_arr || count($at_arr) < 1) {
 					url: 'roadmap.php',
 					data: '<?php echo 'group_id='.$group_id.'&roadmap_id='.$roadmap_id ?>&ajax=1&template=1&release='+release,
 					success: function(rep) {
-						jQuery('#div_options').empty();
-						jQuery('#div_options').append('<a href="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id ?>&roadmap_id='+selected_roadmap+'&nb_release='+selected_nb_release+'&display_graph='+selected_display_graph+'" ><?php echo _('Return to last release(s)') ?></a>');
-						jQuery('#div_roadmap').empty();
-						jQuery('#div_roadmap').append(rep);
+						jQuery('#div_options').empty().append('<a href="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id ?>&roadmap_id='+selected_roadmap+'&nb_release='+selected_nb_release+'&display_graph='+selected_display_graph+'" ><?php echo _('Return to last release(s)') ?></a>');
+						jQuery('#div_roadmap').empty().append(rep);
 					}
 				});
 			}
