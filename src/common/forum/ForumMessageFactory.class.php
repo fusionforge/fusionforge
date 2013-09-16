@@ -238,7 +238,8 @@ class ForumMessageFactory extends Error {
 	/**
 	 *	getFlat - Return an array of ForumMessage objects arranged for flat forum views.
 	 *
-	 *	@return	array	The array of ForumMessages.
+	 *	@param	int|bool	$thread_id
+	 *	@return	array		The array of ForumMessages.
 	 */
 	function &getFlat($thread_id=false) {
 		if ($this->forum_messages) {
