@@ -71,7 +71,7 @@ if (session_loggedin()) {
 		$id = db_result($res, 0 , 'id');
 		$params['submenu'] = $HTML->subMenu(
 			array(_("Add widgets"),
-				_("Customize layout")),
+				_("Customize Layout")),
 			array('/widgets/widgets.php?owner=g'. $group_id .'&amp;layout_id='. $id,
 				'/widgets/widgets.php?owner=g'. $group_id .'&amp;layout_id='. $id.'&amp;update=layout'));
 	}

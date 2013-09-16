@@ -83,7 +83,7 @@ if (getStringFromRequest('submit')) {
 		//
 		$frsp = new FRSPackage($g,$package_id);
 		if (!$frsp || !is_object($frsp)) {
-			exit_error(_('Could Not Get FRSPackage'),'frs');
+			exit_error(_('Could Not Get FRS Package'),'frs');
 		} elseif ($frsp->isError()) {
 			exit_error($frsp->getErrorMessage(),'frs');
 		} else {
