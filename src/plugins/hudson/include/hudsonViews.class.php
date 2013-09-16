@@ -39,8 +39,6 @@ class hudsonViews extends Views {
 	}
 
 	function header() {
-		use_javascript('/scripts/prototype/prototype.js');
-		use_javascript('/scripts/scriptaculous/scriptaculous.js');
 
 		parent::header();
 //		echo $this->_getHelp();

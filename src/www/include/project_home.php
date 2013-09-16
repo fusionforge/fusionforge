@@ -34,11 +34,6 @@ session_require_perm ('project_read', $group_id) ;
 
 $title = _('Project Home');
 
-use_javascript('/scripts/prototype/prototype.js');
-use_javascript('/scripts/scriptaculous/scriptaculous.js');
-use_javascript('/scripts/codendi/LayoutManager.js');
-use_javascript('/scripts/codendi/ReorderColumns.js');
-
 $request =& HTTPRequest::instance();
 $request->set('group_id', $group_id);
 

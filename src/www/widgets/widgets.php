@@ -27,8 +27,6 @@ require_once $gfcommon.'include/plugins_utils.php';
 require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 require_once $gfcommon.'widget/Valid_Widget.class.php';
 
-use_javascript('/scripts/prototype/prototype.js');
-use_javascript('/scripts/scriptaculous/scriptaculous.js');
 use_javascript('/scripts/codendi/LayoutManager.js');
 use_javascript('/scripts/codendi/ReorderColumns.js');
 

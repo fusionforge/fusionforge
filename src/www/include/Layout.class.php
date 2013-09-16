@@ -351,10 +351,6 @@ class Layout extends Error {
 	 */
 	function headerJS() {
 		echo '
-			<script type="text/javascript" src="/scripts/prototype/prototype.js"></script>
-			<script type="text/javascript" src="/scripts/scriptaculous/scriptaculous.js"></script>
-			<script type="text/javascript" src="/scripts/codendi/LayoutManager.js"></script>
-			<script type="text/javascript" src="/scripts/codendi/ReorderColumns.js"></script>
 			<script type="text/javascript" src="/scripts/codendi/codendi-1236793993.js"></script>
 			<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>
 			<script type="text/javascript">/* <![CDATA[ */';
