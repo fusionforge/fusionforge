@@ -1,4 +1,4 @@
-/* 
+/*
  * Common stylesheet for *all* FusionForge themes
  *
  * Copyright 2009 Matthieu Faure // Open-s.com
@@ -18,19 +18,19 @@
  * You should have received a copy of the GNU General Public License along
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- * 
+ *
  * Note to Forge developpers:
  * 		- put as less code here as possible
- * 
+ *
  * Note to Themes developpers:
  * 		- don't add CSS to this file;
  * 		- use your own's theme CSS file(s) instead
- * 
+ *
  * Final note: this CSS file should be ideally called:
  * 		- after YUI's reset,fonts and base
  * 		- before the theme's own CSS file
  * 		- Warning: font-size must be expressed in % according to YUI's font table http://developer.yahoo.com/yui/fonts/#chart
- * 
+ *
 */
 
 /* From old gforge-compat */
@@ -258,6 +258,8 @@ ul.tabbernav li.tabberactive a:hover {
 
 .top {vertical-align: top;}
 .bottom {vertical-align: bottom;}
+.middle {vertical-align: middle;}
+.baseline {vertical-align: baseline;}
 
 .nowrap {white-space: nowrap;}
 
@@ -277,7 +279,12 @@ ul.tabbernav li.tabberactive a:hover {
 
 /* A table with two columns, first one right-aligned and bold */
 table.infotable tr { vertical-align: top; }
-table.infotable td:first-child { font-weight: bold; text-align: right; padding-right: 4px;}
+table.infotable td:first-child {
+    font-weight: bold;
+    padding-right: 4px;
+    text-align: right;
+    white-space: nowrap;
+}
 
 table.full {
 	width: 100%;
@@ -299,8 +306,8 @@ table.centered {
 }
 
 .active {
-	background-color: #99ff99; 
-	text-decoration: none; 
+	background-color: #99ff99;
+	text-decoration: none;
 	font-weight: normal;
 }
 
@@ -365,12 +372,12 @@ table.progress {
 	margin-top: 1em;
 	empty-cells: show;
 	width: 50%;
-	margin-left: 25%; 
+	margin-left: 25%;
 	margin-right: 25%;
 }
 table.progress_legend {
 	width: 50%;
-	margin-left: 25%; 
+	margin-left: 25%;
 	margin-right: 25%;
 }
 table.progress a, table.progress :link, table.progress :visited,

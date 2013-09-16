@@ -59,7 +59,6 @@ class Theme extends Layout {
 	}
 
 	function bodyHeader($params) {
-		global $user_guide;
 
 		if (!isset($params['h1']) && isset($params['title'])) {
 			$params['h1'] = $params['title'];
@@ -71,7 +70,7 @@ class Theme extends Layout {
 			$params['title'] = $params['title'] . " - ".forge_get_config('forge_name');
 		}
 
-		echo '<table id="header" class="width-100p100">' . "\n";
+		echo '<table id="header" class="fullwidth">' . "\n";
 		echo '<tr>' . "\n";
 		echo '<td id="header-col1">' . "\n";
 		echo util_make_link('/', html_image('/header/top-logo.png', null, null, array('alt'=>'FusionForge Home'))) . "\n";
@@ -98,7 +97,7 @@ class Theme extends Layout {
 		echo '<tr><td colspan="2" id="header-news">' . "\n";
 		//echo $this->quicknews();
 		echo'</td></tr></table><!-- outer tabs -->' . "\n";
-		echo $this->outerTabs($params);
+		$this->outerTabs($params);
 		echo '<!-- inner tabs -->' . "\n";
 		echo '<div class="innertabs">' . "\n";
 		if (isset($params['group']) && $params['group']) {
@@ -232,8 +231,9 @@ class Theme extends Layout {
 	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false,  $selected=false, $sel_tab_bgcolor='WHITE',  $total_width='100%') {
 		$count = count($TABS_DIRS);
 
-		if ($count < 1)
-			return;
+		if ($count < 1) {
+			return '';
+		}
 
 		global $use_tooltips;
 
@@ -258,7 +258,7 @@ class Theme extends Layout {
 		}
 
 		$return = '<!-- start tabs -->';
-		$return .= '<table class="tabGenerator width-100p100" ';
+		$return .= '<table class="tabGenerator fullwidth" ';
 
 		if ($total_width != '100%')
 			$return .= 'style="width:' . $total_width . ';"';
@@ -369,6 +369,7 @@ class Theme extends Layout {
 	 *					handled by $istitle
 	 * @param	boolean	is this row part of the title ?
 	 *
+	 * @return string
 	 */
 	function multiTableRow($row_attr, $cell_data, $istitle)
 	{
