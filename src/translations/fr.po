@@ -833,7 +833,7 @@ msgstr "Dossier auquel le document appartient"
 
 #: common/docman/views/addfile.php:204
 msgid "Status of that document"
-msgstr "Statut de ce document"
+msgstr "État de ce document"
 
 #: common/docman/views/addfile.php:212 plugins/mantisbt/view/addIssue.php:148
 msgid "Mandatory fields"
@@ -1453,9 +1453,8 @@ msgid "Reporting"
 msgstr "Rapports"
 
 #: common/docman/views/menu.php:72
-#, fuzzy
 msgid "Docman module reporting."
-msgstr "Administration du gestionnaire de documents"
+msgstr "Rapports du gestionnaire de documents."
 
 #: common/docman/views/menu.php:73 common/forum/ForumHTML.class.php:115
 #: common/forum/ForumHTML.class.php:121 common/frs/include/frs_utils.php:78
@@ -3306,19 +3305,19 @@ msgstr "Le nom du groupe est déjà pris"
 #: common/include/Group.class.php:2822
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
-msgstr "Erreur lors de la mise à jour du statut Unix du groupe : %s"
+msgstr "Erreur lors de la mise à jour de l'état Unix du groupe : %s"
 
 #: common/include/Group.class.php:2885
-#, fuzzy, php-format
+#, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
-"Erreur lors de la mise à jour du statut du système de création de\n"
+"Erreur lors de la mise à jour de l'état du système de création de "
 "documents en ligne : %s"
 
 #: common/include/Group.class.php:2903
-#, fuzzy, php-format
+#, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
-msgstr "Erreur lors de la mise à jour du statut Unix du groupe : %s"
+msgstr "Erreur lors de la mise à jour de l'état Webdab du groupe : %s"
 
 #: common/include/Group.class.php:2921
 #, fuzzy, php-format
@@ -4214,7 +4213,7 @@ msgstr ""
 
 #: common/include/User.class.php:743
 msgid "Error: Cannot Update User Status:"
-msgstr "Erreur : impossible de mettre à jour le statut de l'utilisateur :"
+msgstr "Erreur : impossible de mettre à jour l'état de l'utilisateur :"
 
 #: common/include/User.class.php:936 common/include/User.class.php:988
 msgid "User with this email already exists."
@@ -6938,11 +6937,11 @@ msgid ""
 "'Status'."
 msgstr ""
 "Pour créer un processus, vous devez d'abord créer un champ personnalisé de "
-"type « statut »."
+"type « état »."
 
 #: common/tracker/views/form-workflow.php:34
 msgid "Internal error: Illegal number of status fields (WKFL01)."
-msgstr "Erreur interne : nombre de champs de statut invalide."
+msgstr "Erreur interne : nombre de champs d'état invalide."
 
 #: common/tracker/views/form-workflow.php:37
 msgid "Configure workflow"
@@ -7032,16 +7031,16 @@ msgstr "Tâches administratives en attente"
 #: common/widget/Widget_MyAdmin.class.php:51
 #, php-format
 msgid "Users in <a href=\"%s\"><b>P</b> (pending) Status</a>"
-msgstr "Utilisateurs au statut <a href=\"%s\"><b>P</b> (en attente)</a>"
+msgstr "Utilisateurs à l'état <a href=\"%s\"><b>P</b> (en attente)</a>"
 
 #: common/widget/Widget_MyAdmin.class.php:69
 #, php-format
 msgid "Groups in <a href=\"%s\"><b>P</b> (pending) Status</a>"
-msgstr "Groupes au statut <a href=\"%s\"><b>P</b> (en attente)</a>"
+msgstr "Groupes à l'état <a href=\"%s\"><b>P</b> (en attente)</a>"
 
 #: common/widget/Widget_MyAdmin.class.php:90
 msgid "Site News Approval"
-msgstr "Approbation des nouvelles"
+msgstr "Approbation des annonces"
 
 #: common/widget/Widget_MyArtifacts.class.php:52
 msgid "My Artifacts"
@@ -11125,9 +11124,8 @@ msgid "Technical error occurs during data retrieving:"
 msgstr ""
 
 #: plugins/mantisbt/controler/filter.php:62
-#, fuzzy
 msgid "With Status:"
-msgstr "État :"
+msgstr "À l'état :"
 
 #: plugins/mantisbt/controler/filter.php:91
 #, fuzzy
@@ -11246,11 +11244,11 @@ msgstr "Public cible"
 #: plugins/mantisbt/view/admin/StatPerStatus.php:45
 #, fuzzy
 msgid "Tickets oer Status"
-msgstr "Etat de la tâche"
+msgstr "État de la tâche"
 
 #: plugins/mantisbt/view/admin/StatPerStatus.php:49
 msgid "Fixed"
-msgstr ""
+msgstr "Résolu"
 
 #: plugins/mantisbt/view/admin/StatPerStatus.php:50 www/activity/index.php:296
 #: www/reporting/usersummary.php:57 www/stats/site_stats_utils.php:272
@@ -16203,7 +16201,7 @@ msgstr "Statut du compte Web :"
 
 #: www/admin/useredit.php:188
 msgid "Unix Account Status"
-msgstr "Statut du compte Unix"
+msgstr "État du compte Unix"
 
 #: www/admin/useredit.php:197
 msgid "Unix Shell:"
@@ -21533,7 +21531,7 @@ msgstr ""
 
 #: www/reporting/usersummary.php:73
 msgid "Task Status"
-msgstr "Etat de la tâche"
+msgstr "État de la tâche"
 
 #: www/reporting/usersummary.php:100
 msgid "No matches found"
