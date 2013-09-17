@@ -166,8 +166,8 @@ function util_check_fileupload($filename) {
  * Currently, test is very basic, only the protocol is
  * checked, allowed values are: http, https, ftp.
  *
- * @param        string  $url The URL
- * @return        boolean    true if valid, false if not valid.
+ * @param		string  $url The URL
+ * @return		bool    true if valid, false if not valid.
  */
 function util_check_url($url) {
 	return (preg_match('/^(http|https|ftp):\/\//', $url) > 0);
@@ -254,7 +254,7 @@ function util_encode_mailaddr($email, $name, $charset) {
  * @param        string    $headername The name of the header (e.g. "Subject")
  * @param        string    $str The email subject
  * @param        string    $charset The converting charset (like ISO-2022-JP)
- * @return        string    The MIME encoded subject
+ * @return       string    The MIME encoded subject
  *
  */
 function util_encode_mimeheader($headername, $str, $charset) {
