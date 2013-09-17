@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 15:21+0200\n"
+"POT-Creation-Date: 2013-09-17 15:32+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -282,6 +282,7 @@ msgstr "Обновено успешно"
 #: common/mail/MailingListFactory.class.php:55
 #: common/pm/ProjectGroup.class.php:102
 #: common/pm/ProjectGroupFactory.class.php:54
+#: common/reporting/ReportPerGroupDocmanDownloads.class.php:69
 #: common/survey/Survey.class.php:66 common/survey/SurveyFactory.class.php:54
 #: common/survey/SurveyQuestion.class.php:57
 #: common/survey/SurveyQuestionFactory.class.php:53
@@ -4504,11 +4505,6 @@ msgstr ""
 #: common/reporting/ReportDownloads.class.php:77 www/frs/admin/index.php:150
 msgid "There are no packages defined."
 msgstr ""
-
-#: common/reporting/ReportPerGroupDocmanDownloads.class.php:69
-#, fuzzy
-msgid "No group_id set."
-msgstr "Създаване на нова папка"
 
 #: common/reporting/report_utils.php:27
 #, fuzzy, php-format
@@ -23076,6 +23072,10 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Лична Информация"
+
+#, fuzzy
+#~ msgid "No group_id set."
+#~ msgstr "Създаване на нова папка"
 
 #~ msgid "Project Full Name"
 #~ msgstr "Проект Пълно наименование"

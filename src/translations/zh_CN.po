@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 15:21+0200\n"
+"POT-Creation-Date: 2013-09-17 15:32+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -283,6 +283,7 @@ msgstr "更新成功"
 #: common/mail/MailingListFactory.class.php:55
 #: common/pm/ProjectGroup.class.php:102
 #: common/pm/ProjectGroupFactory.class.php:54
+#: common/reporting/ReportPerGroupDocmanDownloads.class.php:69
 #: common/survey/Survey.class.php:66 common/survey/SurveyFactory.class.php:54
 #: common/survey/SurveyQuestion.class.php:57
 #: common/survey/SurveyQuestionFactory.class.php:53
@@ -4609,11 +4610,6 @@ msgstr "[%1$s - %2$s] [任务 #%3$d] "
 #, fuzzy
 msgid "There are no packages defined."
 msgstr "你已经是项目成员。"
-
-#: common/reporting/ReportPerGroupDocmanDownloads.class.php:69
-#, fuzzy
-msgid "No group_id set."
-msgstr "增加新分组"
 
 #: common/reporting/report_utils.php:27
 #, php-format
@@ -23573,6 +23569,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "No group_id set."
+#~ msgstr "增加新分组"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "你注册的项目 %s 已经批准.项目"

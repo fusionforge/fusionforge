@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 15:21+0200\n"
+"POT-Creation-Date: 2013-09-17 15:32+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -281,6 +281,7 @@ msgstr "Actualitzat amb èxit"
 #: common/mail/MailingListFactory.class.php:55
 #: common/pm/ProjectGroup.class.php:102
 #: common/pm/ProjectGroupFactory.class.php:54
+#: common/reporting/ReportPerGroupDocmanDownloads.class.php:69
 #: common/survey/Survey.class.php:66 common/survey/SurveyFactory.class.php:54
 #: common/survey/SurveyQuestion.class.php:57
 #: common/survey/SurveyQuestionFactory.class.php:53
@@ -4645,11 +4646,6 @@ msgstr ""
 #, fuzzy
 msgid "There are no packages defined."
 msgstr "No teniu paquets definits"
-
-#: common/reporting/ReportPerGroupDocmanDownloads.class.php:69
-#, fuzzy
-msgid "No group_id set."
-msgstr "Afegeix un grup"
 
 #: common/reporting/report_utils.php:27
 #, php-format
@@ -23769,6 +23765,10 @@ msgstr "Nom d'usuari"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
+
+#, fuzzy
+#~ msgid "No group_id set."
+#~ msgstr "Afegeix un grup"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "El vostre registre de projecte per %s ha estat aprovat."

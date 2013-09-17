@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 15:21+0200\n"
+"POT-Creation-Date: 2013-09-17 15:32+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -283,6 +283,7 @@ msgstr "성공적으로 갱신되었습니다."
 #: common/mail/MailingListFactory.class.php:55
 #: common/pm/ProjectGroup.class.php:102
 #: common/pm/ProjectGroupFactory.class.php:54
+#: common/reporting/ReportPerGroupDocmanDownloads.class.php:69
 #: common/survey/Survey.class.php:66 common/survey/SurveyFactory.class.php:54
 #: common/survey/SurveyQuestion.class.php:57
 #: common/survey/SurveyQuestionFactory.class.php:53
@@ -4603,11 +4604,6 @@ msgstr ""
 #, fuzzy
 msgid "There are no packages defined."
 msgstr "정의된 패키지가 없습니다."
-
-#: common/reporting/ReportPerGroupDocmanDownloads.class.php:69
-#, fuzzy
-msgid "No group_id set."
-msgstr "그룹 추가하기"
 
 #: common/reporting/report_utils.php:27
 #, fuzzy, php-format
@@ -23496,6 +23492,10 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "No group_id set."
+#~ msgstr "그룹 추가하기"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "%s에 신청하신 프로젝트가 승인되었습니다."

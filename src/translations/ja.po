@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 15:21+0200\n"
+"POT-Creation-Date: 2013-09-17 15:32+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -283,6 +283,7 @@ msgstr "更新に成功しました。"
 #: common/mail/MailingListFactory.class.php:55
 #: common/pm/ProjectGroup.class.php:102
 #: common/pm/ProjectGroupFactory.class.php:54
+#: common/reporting/ReportPerGroupDocmanDownloads.class.php:69
 #: common/survey/Survey.class.php:66 common/survey/SurveyFactory.class.php:54
 #: common/survey/SurveyQuestion.class.php:57
 #: common/survey/SurveyQuestionFactory.class.php:53
@@ -4520,11 +4521,6 @@ msgstr ""
 #: common/reporting/ReportDownloads.class.php:77 www/frs/admin/index.php:150
 msgid "There are no packages defined."
 msgstr ""
-
-#: common/reporting/ReportPerGroupDocmanDownloads.class.php:69
-#, fuzzy
-msgid "No group_id set."
-msgstr "グループ追加"
 
 #: common/reporting/report_utils.php:27
 #, fuzzy, php-format
@@ -22888,6 +22884,10 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr "%sのパーソナルページ"
+
+#, fuzzy
+#~ msgid "No group_id set."
+#~ msgstr "グループ追加"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "%s へのプロジェクト登録が承認されました。"

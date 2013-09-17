@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 15:21+0200\n"
+"POT-Creation-Date: 2013-09-17 15:32+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -257,6 +257,7 @@ msgstr "activé avec succès."
 #: common/mail/MailingListFactory.class.php:55
 #: common/pm/ProjectGroup.class.php:102
 #: common/pm/ProjectGroupFactory.class.php:54
+#: common/reporting/ReportPerGroupDocmanDownloads.class.php:69
 #: common/survey/Survey.class.php:66 common/survey/SurveyFactory.class.php:54
 #: common/survey/SurveyQuestion.class.php:57
 #: common/survey/SurveyQuestionFactory.class.php:53
@@ -4464,10 +4465,6 @@ msgstr "[%1$s - %2$s] [Tâche #%3$d] "
 #: common/reporting/ReportDownloads.class.php:77 www/frs/admin/index.php:150
 msgid "There are no packages defined."
 msgstr "Aucun paquet de fichiers n'a été défini pour ce projet."
-
-#: common/reporting/ReportPerGroupDocmanDownloads.class.php:69
-msgid "No group_id set."
-msgstr "Pas de groupe."
 
 #: common/reporting/report_utils.php:27
 #, php-format
@@ -23365,6 +23362,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "No group_id set."
+#~ msgstr "Pas de groupe."
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "La candidature de votre projet sur %s a été acceptée."

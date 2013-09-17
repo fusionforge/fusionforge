@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 15:21+0200\n"
+"POT-Creation-Date: 2013-09-17 15:32+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -281,6 +281,7 @@ msgstr "Uppdatering lyckades"
 #: common/mail/MailingListFactory.class.php:55
 #: common/pm/ProjectGroup.class.php:102
 #: common/pm/ProjectGroupFactory.class.php:54
+#: common/reporting/ReportPerGroupDocmanDownloads.class.php:69
 #: common/survey/Survey.class.php:66 common/survey/SurveyFactory.class.php:54
 #: common/survey/SurveyQuestion.class.php:57
 #: common/survey/SurveyQuestionFactory.class.php:53
@@ -4620,11 +4621,6 @@ msgstr ""
 #, fuzzy
 msgid "There are no packages defined."
 msgstr "Du har inga definierade paket"
-
-#: common/reporting/ReportPerGroupDocmanDownloads.class.php:69
-#, fuzzy
-msgid "No group_id set."
-msgstr "Lägg till en grupp"
 
 #: common/reporting/report_utils.php:27
 #, fuzzy, php-format
@@ -23570,6 +23566,10 @@ msgstr "Användarenamn"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
+
+#, fuzzy
+#~ msgid "No group_id set."
+#~ msgstr "Lägg till en grupp"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "Din projektregistrering hos %s har blivit godkänd."

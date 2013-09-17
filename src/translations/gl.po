@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 15:21+0200\n"
+"POT-Creation-Date: 2013-09-17 15:32+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -281,6 +281,7 @@ msgstr "Actualizouse correctamente "
 #: common/mail/MailingListFactory.class.php:55
 #: common/pm/ProjectGroup.class.php:102
 #: common/pm/ProjectGroupFactory.class.php:54
+#: common/reporting/ReportPerGroupDocmanDownloads.class.php:69
 #: common/survey/Survey.class.php:66 common/survey/SurveyFactory.class.php:54
 #: common/survey/SurveyQuestion.class.php:57
 #: common/survey/SurveyQuestionFactory.class.php:53
@@ -4653,11 +4654,6 @@ msgstr "[%1$s - %2$s] [Tarefa #%3$d] "
 #, fuzzy
 msgid "There are no packages defined."
 msgstr "Non hai ningún paquete de ficheiros definido para este proxecto."
-
-#: common/reporting/ReportPerGroupDocmanDownloads.class.php:69
-#, fuzzy
-msgid "No group_id set."
-msgstr "Non hai ningún título de grupo"
 
 #: common/reporting/report_utils.php:27
 #, php-format
@@ -23976,6 +23972,10 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "No group_id set."
+#~ msgstr "Non hai ningún título de grupo"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "Aprobouse o rexistro do proxecto %s."
