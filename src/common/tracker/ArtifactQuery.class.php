@@ -570,7 +570,7 @@ class ArtifactQuery extends Error {
 	function getOpenDateRange() {
 		if (!isset($this->element_array))
 			return false;
-		if ($this->element_array[ARTIFACT_QUERY_OPENDATE][0]) {
+		if (isset($this->element_array[ARTIFACT_QUERY_OPENDATE][0])) {
 			return $this->element_array[ARTIFACT_QUERY_OPENDATE][0];
 		} else {
 			return false;
@@ -585,7 +585,7 @@ class ArtifactQuery extends Error {
 	function getCloseDateRange() {
 		if (!isset($this->element_array))
 			return false;
-		if ($this->element_array[ARTIFACT_QUERY_CLOSEDATE][0]) {
+		if (isset($this->element_array[ARTIFACT_QUERY_CLOSEDATE][0])) {
 			return $this->element_array[ARTIFACT_QUERY_CLOSEDATE][0];
 		} else {
 			return false;
@@ -681,8 +681,20 @@ class ArtifactQuery extends Error {
 	 * @param string $daterange A range of two dates (1999-05-01 1999-06-01)
 	 * @return bool true/false.
 	 */
-	function validateDateRange($daterange) {
-		return preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{4}-[0-9]{2}-[0-9]{2}/',$daterange);
+	function validateDateRange(&$daterange) {
+		if(! preg_match('/([0-9]{4})-[0-9]{2}-[0-9]{2} ([0-9]{4})-[0-9]{2}-[0-9]{2}/', $daterange, $matches)) {
+			return false;
+		}
+		else {
+			# Hack to avoid exceeding the maximum value for an integer in the database
+			if ($matches[1] > 2037) {
+				$daterange = preg_replace('/[\d]{4}(-[\d]{2}-[\d]{2} [\d]{4}-[\d]{2}-[\d]{2})/', '2037$1', $daterange);
+			}
+			if ($matches[2] > 2037) {
+				$daterange = preg_replace('/([\d]{4}-[\d]{2}-[\d]{2} )[\d]{4}(-[\d]{2}-[\d]{2})/', '${1}2037$2', $daterange);
+			}
+		}
+		return true;
 	}
 
 	/**
