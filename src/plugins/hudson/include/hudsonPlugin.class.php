@@ -262,7 +262,7 @@ class hudsonPlugin extends Plugin {
 					$row = $dar->current();
 					$build = new HudsonBuild($row['job_url'].'/'.$build_id.'/');
 					echo '<strong>' . _("Build performed on:") . '</strong> ' . $build->getBuildTime() . '<br />';
-					echo '<strong>' . _("Status:") . '</strong> ' . $build->getResult();
+					echo '<strong>' . _("Status") . _(": ") . '</strong> ' . $build->getResult();
 				} else {
 					echo '<span class="error">'._("Error: Hudson object not found.").'</span>';
 				}
@@ -289,8 +289,8 @@ class hudsonPlugin extends Plugin {
 						$html .= '   <ul>';
 						if ($job->hasBuilds()) {
 							$html .= ' <li>'._("Last Build:").' <a href="/plugins/hudson/?action=view_build&group_id='.$group_id.'&job_id='.$job_id.'&build_id='.$job->getLastBuildNumber().'"># '.$job->getLastBuildNumber().'</a></li>';
-							$html .= ' <li>'._("Last Success:").' <a href="/plugins/hudson/?action=view_build&group_id='.$group_id.'&job_id='.$job_id.'&build_id='.$job->getLastSuccessfulBuildNumber().'"># '.$job->getLastSuccessfulBuildNumber().'</a></li>';
-							$html .= ' <li>'._("Last Failure:").' <a href="/plugins/hudson/?action=view_build&group_id='.$group_id.'&job_id='.$job_id.'&build_id='.$job->getLastFailedBuildNumber().'"># '.$job->getLastFailedBuildNumber().'</a></li>';
+							$html .= ' <li>'._("Last Success")._(": ").'<a href="/plugins/hudson/?action=view_build&group_id='.$group_id.'&job_id='.$job_id.'&build_id='.$job->getLastSuccessfulBuildNumber().'"># '.$job->getLastSuccessfulBuildNumber().'</a></li>';
+							$html .= ' <li>'._("Last Failure")._(": ").'<a href="/plugins/hudson/?action=view_build&group_id='.$group_id.'&job_id='.$job_id.'&build_id='.$job->getLastFailedBuildNumber().'"># '.$job->getLastFailedBuildNumber().'</a></li>';
 						} else {
 							$html .= ' <li>'. _("No build found for this job.") . '</li>';
 						}

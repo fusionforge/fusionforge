@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 19:01+0200\n"
+"POT-Creation-Date: 2013-09-17 19:25+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -447,6 +447,11 @@ msgstr "项目"
 #: cronjobs/send_pending_items_mail.php:120
 #: cronjobs/send_pending_items_mail.php:121
 #: plugins/forumml/www/forumml_utils.php:686
+#: plugins/hudson/include/hudsonPlugin.class.php:265
+#: plugins/hudson/include/hudsonPlugin.class.php:292
+#: plugins/hudson/include/hudsonPlugin.class.php:293
+#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:84
+#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:85
 #: plugins/mailman/include/MailmanList.class.php:150
 #: plugins/mailman/include/MailmanList.class.php:165
 #: plugins/mailman/include/MailmanList.class.php:249
@@ -1219,6 +1224,7 @@ msgstr "姓氏："
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:95
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:56
+#: plugins/hudson/include/hudsonPlugin.class.php:265
 #: plugins/mantisbt/view/editIssue.php:130
 #: plugins/mantisbt/view/viewIssue.php:87
 #: plugins/mantisbt/view/viewIssues.php:305 www/admin/groupedit.php:108
@@ -10459,11 +10465,6 @@ msgstr ""
 msgid "Build performed on:"
 msgstr ""
 
-#: plugins/hudson/include/hudsonPlugin.class.php:265
-#, fuzzy
-msgid "Status:"
-msgstr "状态"
-
 #: plugins/hudson/include/hudsonPlugin.class.php:267
 #: plugins/hudson/include/hudsonPlugin.class.php:308
 #: plugins/hudson/include/hudsonViews.class.php:111
@@ -10482,16 +10483,18 @@ msgid "Last Build:"
 msgstr "最后提交的用户编号"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:292
+#: plugins/hudson/include/hudsonViews.class.php:295
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:84
 #, fuzzy
-msgid "Last Success:"
+msgid "Last Success"
 msgstr "更新成功"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:293
+#: plugins/hudson/include/hudsonViews.class.php:296
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:85
 #, fuzzy
-msgid "Last Failure:"
-msgstr "姓氏："
+msgid "Last Failure"
+msgstr "添加失败"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:295
 #: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:96
@@ -10597,16 +10600,6 @@ msgstr "更新"
 #: www/people/editjob.php:107
 msgid "Job"
 msgstr "工作"
-
-#: plugins/hudson/include/hudsonViews.class.php:295
-#, fuzzy
-msgid "Last Success"
-msgstr "更新成功"
-
-#: plugins/hudson/include/hudsonViews.class.php:296
-#, fuzzy
-msgid "Last Failure"
-msgstr "添加失败"
 
 #: plugins/hudson/include/hudsonViews.class.php:297
 #, fuzzy
@@ -23566,6 +23559,18 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Last Success:"
+#~ msgstr "更新成功"
+
+#, fuzzy
+#~ msgid "Last Failure:"
+#~ msgstr "姓氏："
+
+#, fuzzy
+#~ msgid "Status:"
+#~ msgstr "状态"
 
 #~ msgid "No Stats Available"
 #~ msgstr "没有统计信息"

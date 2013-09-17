@@ -58,7 +58,7 @@ class hudson_Widget_JobLastBuilds extends HudsonJobWidget {
 		$res = db_query_params($sql,array($this->widget_id,$this->owner_id,$this->owner_type,$id));
 		if ($res && db_numrows($res)) {
 			$data = db_fetch_array($res);
-			$this->job_id    = $data['job_id'];
+			$this->job_id = $data['job_id'];
 			$this->content_id = $id;
 			$jobs = $this->getAvailableJobs();
 			if (array_key_exists($this->job_id, $jobs)) {
@@ -81,8 +81,8 @@ class hudson_Widget_JobLastBuilds extends HudsonJobWidget {
 			$html .= '   <ul>';
 			if ($job->hasBuilds()) {
 				$html .= ' <li>'._("Last Build:").' <a href="/plugins/hudson/?action=view_build&group_id='.$this->group_id.'&job_id='.$this->job_id.'&build_id='.$job->getLastBuildNumber().'"># '.$job->getLastBuildNumber().'</a></li>';
-				$html .= ' <li>'._("Last Success:").' <a href="/plugins/hudson/?action=view_build&group_id='.$this->group_id.'&job_id='.$this->job_id.'&build_id='.$job->getLastSuccessfulBuildNumber().'"># '.$job->getLastSuccessfulBuildNumber().'</a></li>';
-				$html .= ' <li>'._("Last Failure:").' <a href="/plugins/hudson/?action=view_build&group_id='.$this->group_id.'&job_id='.$this->job_id.'&build_id='.$job->getLastFailedBuildNumber().'"># '.$job->getLastFailedBuildNumber().'</a></li>';
+				$html .= ' <li>'._("Last Success")._(": ").'<a href="/plugins/hudson/?action=view_build&group_id='.$this->group_id.'&job_id='.$this->job_id.'&build_id='.$job->getLastSuccessfulBuildNumber().'"># '.$job->getLastSuccessfulBuildNumber().'</a></li>';
+				$html .= ' <li>'._("Last Failure")._(": ").'<a href="/plugins/hudson/?action=view_build&group_id='.$this->group_id.'&job_id='.$this->job_id.'&build_id='.$job->getLastFailedBuildNumber().'"># '.$job->getLastFailedBuildNumber().'</a></li>';
 			} else {
 				$html .= ' <li>'. _("No build found for this job.") . '</li>';
 			}

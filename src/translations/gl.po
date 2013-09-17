@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 19:01+0200\n"
+"POT-Creation-Date: 2013-09-17 19:25+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -444,6 +444,11 @@ msgstr "Proxecto "
 #: cronjobs/send_pending_items_mail.php:120
 #: cronjobs/send_pending_items_mail.php:121
 #: plugins/forumml/www/forumml_utils.php:686
+#: plugins/hudson/include/hudsonPlugin.class.php:265
+#: plugins/hudson/include/hudsonPlugin.class.php:292
+#: plugins/hudson/include/hudsonPlugin.class.php:293
+#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:84
+#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:85
 #: plugins/mailman/include/MailmanList.class.php:150
 #: plugins/mailman/include/MailmanList.class.php:165
 #: plugins/mailman/include/MailmanList.class.php:249
@@ -1224,6 +1229,7 @@ msgstr "Apelidos: "
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:95
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:56
+#: plugins/hudson/include/hudsonPlugin.class.php:265
 #: plugins/mantisbt/view/editIssue.php:130
 #: plugins/mantisbt/view/viewIssue.php:87
 #: plugins/mantisbt/view/viewIssues.php:305 www/admin/groupedit.php:108
@@ -10559,11 +10565,6 @@ msgstr ""
 msgid "Build performed on:"
 msgstr ""
 
-#: plugins/hudson/include/hudsonPlugin.class.php:265
-#, fuzzy
-msgid "Status:"
-msgstr "Estado"
-
 #: plugins/hudson/include/hudsonPlugin.class.php:267
 #: plugins/hudson/include/hudsonPlugin.class.php:308
 #: plugins/hudson/include/hudsonViews.class.php:111
@@ -10582,16 +10583,18 @@ msgid "Last Build:"
 msgstr "Último identificador (id) de usuario que se enviou por correo "
 
 #: plugins/hudson/include/hudsonPlugin.class.php:292
+#: plugins/hudson/include/hudsonViews.class.php:295
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:84
 #, fuzzy
-msgid "Last Success:"
+msgid "Last Success"
 msgstr "Actualizouse correctamente "
 
 #: plugins/hudson/include/hudsonPlugin.class.php:293
+#: plugins/hudson/include/hudsonViews.class.php:296
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:85
 #, fuzzy
-msgid "Last Failure:"
-msgstr "Apelidos: "
+msgid "Last Failure"
+msgstr "Fallou a inserción"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:295
 #: plugins/hudson/include/hudson_Widget_JobLastArtifacts.class.php:96
@@ -10699,16 +10702,6 @@ msgstr "Actualizar "
 #: www/people/editjob.php:107
 msgid "Job"
 msgstr "Traballo "
-
-#: plugins/hudson/include/hudsonViews.class.php:295
-#, fuzzy
-msgid "Last Success"
-msgstr "Actualizouse correctamente "
-
-#: plugins/hudson/include/hudsonViews.class.php:296
-#, fuzzy
-msgid "Last Failure"
-msgstr "Fallou a inserción"
 
 #: plugins/hudson/include/hudsonViews.class.php:297
 #, fuzzy
@@ -23969,6 +23962,18 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Last Success:"
+#~ msgstr "Actualizouse correctamente "
+
+#, fuzzy
+#~ msgid "Last Failure:"
+#~ msgstr "Apelidos: "
+
+#, fuzzy
+#~ msgid "Status:"
+#~ msgstr "Estado"
 
 #~ msgid ""
 #~ "To create a workflow, you need first to create a custom field of type "
