@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 15:32+0200\n"
+"POT-Creation-Date: 2013-09-17 18:35+0200\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -976,7 +976,7 @@ msgstr ""
 #: common/tracker/actions/detail.php:73
 #: common/tracker/actions/mod-limited.php:128
 #: common/tracker/actions/mod.php:155 common/tracker/actions/query.php:344
-#: common/tracker/Artifact.class.php:946
+#: common/tracker/Artifact.class.php:938
 #: common/tracker/views/form-customizelist.php:39 www/pm/browse_task.php:383
 #: www/project/admin/database.php:208
 msgid "State"
@@ -1216,11 +1216,11 @@ msgstr ""
 #: common/tracker/actions/mod-limited.php:98
 #: common/tracker/actions/mod-limited.php:103
 #: common/tracker/actions/mod.php:99 common/tracker/actions/mod.php:104
+#: common/tracker/Artifact.class.php:1573
+#: common/tracker/Artifact.class.php:1575
 #: common/tracker/Artifact.class.php:1582
-#: common/tracker/Artifact.class.php:1584
-#: common/tracker/Artifact.class.php:1591
-#: common/tracker/Artifact.class.php:1597
-#: common/tracker/Artifact.class.php:1697
+#: common/tracker/Artifact.class.php:1588
+#: common/tracker/Artifact.class.php:1688
 #: common/tracker/include/ArtifactHtml.class.php:112
 #: common/tracker/include/ArtifactHtml.class.php:170
 #: common/tracker/include/ArtifactHtml.class.php:179
@@ -2119,7 +2119,7 @@ msgstr ""
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
 #: common/survey/SurveyQuestion.class.php:153
-#: common/tracker/Artifact.class.php:1151
+#: common/tracker/Artifact.class.php:1142
 #: plugins/mailman/include/MailmanList.class.php:249
 #: plugins/mailman/include/MailmanList.class.php:376
 #: plugins/mailman/include/MailmanList.class.php:393
@@ -2255,8 +2255,8 @@ msgstr ""
 msgid "Current File"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:321 common/forum/ForumHTML.class.php:356
-msgid "Use the \"Browse\" button to find the file you want to attach"
+#: common/forum/ForumHTML.class.php:321
+msgid "Use the “Browse” button to find the file you want to attach"
 msgstr ""
 
 #: common/forum/ForumHTML.class.php:324 common/forum/ForumHTML.class.php:359
@@ -2265,6 +2265,10 @@ msgstr ""
 
 #: common/forum/ForumHTML.class.php:327
 msgid "Warning: Uploaded file will replace current file"
+msgstr ""
+
+#: common/forum/ForumHTML.class.php:356
+msgid "Use the \"Browse\" button to find the file you want to attach"
 msgstr ""
 
 #: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:592
@@ -2363,7 +2367,7 @@ msgid "Couldn't Update Master Thread parent with current time"
 msgstr ""
 
 #: common/forum/ForumMessage.class.php:358
-#: common/forum/ForumMessage.class.php:801
+#: common/forum/ForumMessage.class.php:802
 msgid "Error: a forum message must include a message body and a subject."
 msgstr ""
 
@@ -2417,7 +2421,7 @@ msgid ""
 "%s\n"
 msgstr ""
 
-#: common/forum/ForumMessage.class.php:825
+#: common/forum/ForumMessage.class.php:826
 msgid "Message not found"
 msgstr ""
 
@@ -3800,30 +3804,30 @@ msgstr ""
 msgid "Add Repository"
 msgstr "Developers"
 
-#: common/include/session.php:190 plugins/authldap/www/post-login.php:88
-msgid "Missing Password Or Users Name"
+#: common/include/session.php:189 plugins/authbuiltin/www/post-login.php:95
+msgid "Missing Password Or User Name"
 msgstr ""
 
-#: common/include/session.php:202 common/include/session.php:238
-#: common/include/session.php:249 common/include/session.php:280
+#: common/include/session.php:201 common/include/session.php:237
+#: common/include/session.php:248 common/include/session.php:279
 #: plugins/authbuiltin/www/post-login.php:93
 #: plugins/authldap/www/post-login.php:86 www/account/verify.php:47
 msgid "Invalid Password Or User Name"
 msgstr ""
 
-#: common/include/session.php:295
+#: common/include/session.php:294
 msgid "Account Suspended"
 msgstr ""
 
-#: common/include/session.php:300
+#: common/include/session.php:299
 msgid "Account Pending"
 msgstr ""
 
-#: common/include/session.php:305
+#: common/include/session.php:304
 msgid "Account Deleted"
 msgstr ""
 
-#: common/include/session.php:310
+#: common/include/session.php:309
 msgid "Account Not Active"
 msgstr ""
 
@@ -3838,11 +3842,11 @@ msgid ""
 "to view this page."
 msgstr ""
 
-#: common/include/session.php:585
+#: common/include/session.php:584
 msgid "Could not fetch user session data"
 msgstr ""
 
-#: common/include/session.php:612
+#: common/include/session.php:609
 msgid "No admin users ?"
 msgstr ""
 
@@ -5006,7 +5010,7 @@ msgstr ""
 #: common/tracker/actions/browse.php:568 common/tracker/actions/browse.php:747
 #: common/tracker/actions/detail.php:87
 #: common/tracker/actions/mod-limited.php:114
-#: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:942
+#: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:934
 #: common/tracker/include/build_submission_form.php:62
 #: common/tracker/views/form-customizelist.php:41
 #: cronjobs/send_pending_items_mail.php:119
@@ -5070,7 +5074,7 @@ msgstr ""
 msgid "Nobody"
 msgstr ""
 
-#: common/tracker/actions/browse.php:757 common/tracker/Artifact.class.php:950
+#: common/tracker/actions/browse.php:757 common/tracker/Artifact.class.php:942
 msgid "Canned Response"
 msgstr ""
 
@@ -5256,7 +5260,7 @@ msgstr ""
 msgid "Existing Files"
 msgstr ""
 
-#: common/tracker/actions/mod.php:111 common/tracker/Artifact.class.php:954
+#: common/tracker/actions/mod.php:111 common/tracker/Artifact.class.php:946
 msgid "Data Type"
 msgstr ""
 
@@ -5531,7 +5535,7 @@ msgstr ""
 msgid "Only project members can view private artifact types"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:191 common/tracker/Artifact.class.php:787
+#: common/tracker/Artifact.class.php:191 common/tracker/Artifact.class.php:779
 msgid "You are not currently allowed to submit items to this tracker."
 msgstr ""
 
@@ -5579,53 +5583,53 @@ msgstr ""
 msgid "Error updating artifact counts: "
 msgstr ""
 
-#: common/tracker/Artifact.class.php:609
+#: common/tracker/Artifact.class.php:601
 msgid "Valid Email Address Required"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:626
+#: common/tracker/Artifact.class.php:618
 msgid "Now Monitoring Artifact"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:636
+#: common/tracker/Artifact.class.php:628
 msgid "Artifact Monitoring Deactivated"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:961
+#: common/tracker/Artifact.class.php:953
 msgid "Invalid assigned_to (assigned person is not a technician)"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:985
+#: common/tracker/Artifact.class.php:976
 msgid "Could not move to new Artifact Type"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:997
+#: common/tracker/Artifact.class.php:988
 #, php-format
 msgid "Moved from %1$s to %2$s"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1071
+#: common/tracker/Artifact.class.php:1062
 msgid "Removal of old artifact_extra_field_data failed: "
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1179
+#: common/tracker/Artifact.class.php:1170
 msgid "Could Not Create Canned Response Object"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1192
+#: common/tracker/Artifact.class.php:1183
 msgid "Unable to Use Canned Response"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1207
+#: common/tracker/Artifact.class.php:1198
 msgid "Nothing Changed - Update Cancelled"
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1240
+#: common/tracker/Artifact.class.php:1231
 msgid "Error updating assigned_to in artifact: "
 msgstr ""
 
-#: common/tracker/Artifact.class.php:1315
-#: common/tracker/Artifact.class.php:1325
+#: common/tracker/Artifact.class.php:1306
+#: common/tracker/Artifact.class.php:1316
 msgid "Status Custom Field Must Be Set"
 msgstr ""
 
@@ -5752,8 +5756,8 @@ msgid "Invalid ArtifactMessage ID"
 msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:148
-#: common/tracker/ArtifactQuery.class.php:716
-#: common/tracker/ArtifactQuery.class.php:770
+#: common/tracker/ArtifactQuery.class.php:728
+#: common/tracker/ArtifactQuery.class.php:782
 msgid "Must Be Logged In"
 msgstr ""
 
@@ -5762,7 +5766,7 @@ msgid "Query already exists"
 msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:158
-#: common/tracker/ArtifactQuery.class.php:724
+#: common/tracker/ArtifactQuery.class.php:736
 msgid ""
 "You must have tracker admin rights to set or update a project level query."
 msgstr ""
@@ -5779,7 +5783,7 @@ msgstr ""
 msgid "Invalid Close Date Range"
 msgstr ""
 
-#: common/tracker/ArtifactQuery.class.php:720
+#: common/tracker/ArtifactQuery.class.php:732
 msgid "Query does not exist"
 msgstr ""
 
@@ -7613,10 +7617,6 @@ msgstr ""
 msgid "[Resend confirmation email to a pending account]"
 msgstr ""
 
-#: plugins/authbuiltin/www/post-login.php:95
-msgid "Missing Password Or User Name"
-msgstr ""
-
 #: plugins/authbuiltin/www/post-login.php:106
 #: plugins/authldap/www/post-login.php:105
 msgid "Your account does not exist."
@@ -7663,6 +7663,10 @@ msgstr ""
 
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:208
 msgid "Password:"
+msgstr ""
+
+#: plugins/authldap/www/post-login.php:88
+msgid "Missing Password Or Users Name"
 msgstr ""
 
 #: plugins/authldap/www/post-login.php:91
@@ -9097,6 +9101,8 @@ msgstr ""
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:128
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:73
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:103
+#: www/include/features_boxes.php:106 www/include/features_boxes.php:188
+#: www/include/features_boxes.php:208 www/include/features_boxes.php:243
 msgid "No stats available"
 msgstr ""
 
@@ -16408,36 +16414,31 @@ msgstr ""
 msgid "%s is running %s version %s"
 msgstr ""
 
-#: www/include/features_boxes.php:109 www/include/features_boxes.php:191
-#: www/include/features_boxes.php:211 www/include/features_boxes.php:246
-msgid "No Stats Available"
-msgstr ""
-
-#: www/include/features_boxes.php:113
+#: www/include/features_boxes.php:110
 msgid "All the ranking"
 msgstr ""
 
-#: www/include/features_boxes.php:155
+#: www/include/features_boxes.php:152
 msgid "Hosted Projects"
 msgstr ""
 
-#: www/include/features_boxes.php:164
+#: www/include/features_boxes.php:161
 msgid "Registered Users"
 msgstr ""
 
-#: www/include/features_boxes.php:181
+#: www/include/features_boxes.php:178
 msgid "m/d"
 msgstr ""
 
-#: www/include/features_boxes.php:197
+#: www/include/features_boxes.php:194
 msgid "All newest projects"
 msgstr ""
 
-#: www/include/features_boxes.php:220
+#: www/include/features_boxes.php:217
 msgid "All users"
 msgstr ""
 
-#: www/include/features_boxes.php:251
+#: www/include/features_boxes.php:248
 msgid "All project activities"
 msgstr ""
 
