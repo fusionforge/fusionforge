@@ -2882,7 +2882,7 @@ msgstr "Mettre à jour le logiciel"
 #: www/snippet/addversion.php:94 www/snippet/addversion.php:217
 #: www/snippet/package.php:169 www/snippet/submit.php:136
 msgid "Version"
-msgstr "Version&nbsp;"
+msgstr "Version"
 
 #: common/include/Group.class.php:256
 msgid "Group Not Found"
@@ -4842,7 +4842,7 @@ msgstr ""
 #: common/tracker/actions/admin-ind.php:140
 #: common/tracker/views/form-updatetracker.php:64
 msgid "Send email on new submission to address"
-msgstr "Envoyer un courrier pour toute nouvelle soumission à l'adresse&nbsp;"
+msgstr "Envoyer un courrier pour toute nouvelle soumission à l'adresse"
 
 #: common/tracker/actions/admin-ind.php:143
 #: common/tracker/views/form-updatetracker.php:67
@@ -4859,7 +4859,6 @@ msgstr "Délai avant de déclarer en retard (en jours)"
 msgid "Days till pending tracker items time out"
 msgstr ""
 "Attente maximale en jours avant de supprimer l'élément à suivre (persistance)"
-"&nbsp;"
 
 #: common/tracker/actions/admin-ind.php:151
 msgid "Free form text for the \"submit new item\" page"
@@ -6329,7 +6328,7 @@ msgstr "%1$s Identifiez-vous %2$s"
 #: common/tracker/include/build_submission_form.php:90
 msgid ""
 "If you <strong>cannot</strong> login, then enter your email address here"
-msgstr "Si vous ne parvenez pas à vous connecter, saisissez votre e-mail&nbsp;"
+msgstr "Si vous ne parvenez pas à vous connecter, saisissez votre e-mail"
 
 #: common/tracker/include/build_submission_form.php:53 www/news/submit.php:144
 #: www/people/viewjob.php:80
@@ -11179,7 +11178,7 @@ msgstr ""
 #: www/reporting/timeadd.php:144 www/snippet/package.php:162
 #: www/snippet/submit.php:129
 msgid "Category"
-msgstr "Catégorie&nbsp;"
+msgstr "Catégorie"
 
 #: plugins/mantisbt/view/addIssue.php:71
 #: plugins/mantisbt/view/editIssue.php:90
@@ -11237,7 +11236,7 @@ msgstr "Ajouter une nouvelle version"
 #: plugins/mantisbt/view/admin/editVersion.php:56
 #, fuzzy
 msgid "Version Detail"
-msgstr "Version&nbsp;"
+msgstr "Version"
 
 #: plugins/mantisbt/view/admin/editVersion.php:63
 #, fuzzy
@@ -11329,7 +11328,7 @@ msgstr "Date de début"
 #: plugins/mantisbt/view/admin/viewVersion.php:76
 #, fuzzy
 msgid "No versions"
-msgstr "Version&nbsp;"
+msgstr "Version"
 
 #: plugins/mantisbt/view/editIssue.php:84
 #, fuzzy
@@ -11726,7 +11725,7 @@ msgstr ""
 #: plugins/mediawiki/www/plugin_admin.php:194
 #: www/frs/admin/editrelease.php:293 www/frs/admin/qrs.php:198
 msgid "Upload a new file"
-msgstr "Télécharger un nouveau fichier&nbsp;"
+msgstr "Télécharger un nouveau fichier"
 
 #: plugins/mediawiki/www/plugin_admin.php:198
 #: www/frs/admin/editrelease.php:308 www/frs/admin/qrs.php:214
@@ -12059,7 +12058,7 @@ msgstr "Nom d'utilisateur"
 #: plugins/oauthprovider/www/consumer_update_page.php:75
 #: plugins/oauthprovider/www/request_tokens.php:55
 msgid "Key"
-msgstr "Légende&nbsp;"
+msgstr "Légende"
 
 #: plugins/oauthprovider/www/access_tokens.php:56
 #: plugins/oauthprovider/www/consumer_manage.php:81
@@ -15490,7 +15489,7 @@ msgstr "Public ?"
 
 #: www/admin/grouplist.php:70 www/snippet/submit.php:117
 msgid "License"
-msgstr "Licence&nbsp;"
+msgstr "Licence"
 
 #: www/admin/index.php:46
 msgid "User Maintenance"
@@ -15513,7 +15512,7 @@ msgstr "Afficher les utilisateurs commençant par :"
 msgid "Search <em>(userid, username, realname, email)</em>"
 msgstr ""
 "Rechercher <em>(identifiant, nom d'utilisateur, nom complet, email)</"
-"em>&nbsp;"
+"em>"
 
 #: www/admin/index.php:70
 msgid "Register a New User"
@@ -17095,9 +17094,8 @@ msgstr "Éditer les versions"
 
 #: www/frs/admin/editrelease.php:227 www/frs/admin/editrelease.php:347
 #: www/frs/admin/qrs.php:183
-#, fuzzy
 msgid "Release Date"
-msgstr "Date de la version&nbsp;"
+msgstr "Date de la version"
 
 #: www/frs/admin/editrelease.php:231 www/frs/admin/qrs.php:175
 msgid "Release Name"
@@ -17122,19 +17120,19 @@ msgstr ""
 
 #: www/frs/admin/editrelease.php:251
 msgid "Upload Release Notes"
-msgstr "Télécharger les notes&nbsp;"
+msgstr "Télécharger les notes"
 
 #: www/frs/admin/editrelease.php:257
 msgid "Upload Change Log"
-msgstr "Télécharger les modifications&nbsp;"
+msgstr "Télécharger les modifications"
 
 #: www/frs/admin/editrelease.php:264
 msgid "Paste The Notes In"
-msgstr "Coller les notes dans&nbsp;"
+msgstr "Coller les notes dans"
 
 #: www/frs/admin/editrelease.php:270
 msgid "Paste The Change Log In"
-msgstr "Coller les modifications dans &nbsp;"
+msgstr "Coller les modifications dans"
 
 #: www/frs/admin/editrelease.php:277
 msgid "Preserve my pre-formatted text."
@@ -17160,11 +17158,11 @@ msgstr "Vous pouvez également utiliser FTP pour uploader un fichier sur %1$s."
 #: www/frs/admin/editrelease.php:320 www/frs/admin/editrelease.php:348
 #: www/frs/admin/qrs.php:227
 msgid "File Type"
-msgstr "Type de fichier&nbsp;"
+msgstr "Type de fichier"
 
 #: www/frs/admin/editrelease.php:326 www/frs/admin/qrs.php:237
 msgid "Processor Type"
-msgstr "Type de microprocesseur&nbsp;"
+msgstr "Type de microprocesseur"
 
 #: www/frs/admin/editrelease.php:334
 msgid "Add This File"
@@ -17186,9 +17184,8 @@ msgstr ""
 "téléchargement."
 
 #: www/frs/admin/editrelease.php:347
-#, fuzzy
 msgid "Processor"
-msgstr "Type de microprocesseur&nbsp;"
+msgstr "Microprocesseur"
 
 #: www/frs/admin/editrelease.php:369
 msgid "Update/Refresh"
@@ -17215,7 +17212,7 @@ msgstr "Mettre à jour le paquet"
 
 #: www/frs/admin/index.php:120
 msgid "QRS"
-msgstr "NVR&nbsp;"
+msgstr "NVR"
 
 #: www/frs/admin/index.php:121
 #, php-format
@@ -17331,7 +17328,7 @@ msgstr ""
 
 #: www/frs/admin/qrs.php:149
 msgid "Package ID"
-msgstr "Identifiant du paquet&nbsp;"
+msgstr "Identifiant du paquet"
 
 #: www/frs/admin/qrs.php:156
 msgid "No File Types Available"
@@ -17541,11 +17538,11 @@ msgstr "Tout le classement"
 
 #: www/include/features_boxes.php:152
 msgid "Hosted Projects"
-msgstr "Projets hébergés&nbsp;"
+msgstr "Projets hébergés"
 
 #: www/include/features_boxes.php:161
 msgid "Registered Users"
-msgstr "Utilisateurs inscrits&nbsp;"
+msgstr "Utilisateurs inscrits"
 
 #: www/include/features_boxes.php:178
 msgid "m/d"
@@ -18872,7 +18869,7 @@ msgstr ""
 #: www/people/createjob.php:52 www/people/editjob.php:169
 #: www/project/admin/index.php:139
 msgid "Short Description"
-msgstr "Description courte&nbsp;"
+msgstr "Description courte"
 
 #: www/people/createjob.php:55 www/people/editjob.php:172
 #: www/people/viewjob.php:85
@@ -19349,11 +19346,11 @@ msgstr "Voir un poste"
 
 #: www/people/viewjob.php:69
 msgid "Contact Info"
-msgstr "Contact pour informations&nbsp;"
+msgstr "Contact pour informations"
 
 #: www/people/viewjob.php:89
 msgid "Required Skills"
-msgstr "Compétences requises&nbsp;"
+msgstr "Compétences requises"
 
 #: www/people/viewjob.php:104
 msgid "Posting ID not found"
@@ -19385,7 +19382,7 @@ msgstr "Ajout d'une tâche"
 
 #: www/pm/add_task.php:81
 msgid "Task Details"
-msgstr "Détails&nbsp;"
+msgstr "Détails de la tâche"
 
 #: www/pm/add_task.php:88 www/pm/add_task.php:149 www/pm/mod_task.php:197
 #: www/pm/mod_task.php:212 www/pm/mod_task.php:267
@@ -20546,7 +20543,7 @@ msgstr ""
 
 #: www/project/admin/index.php:261
 msgid "New Document Submissions"
-msgstr "Soumission de nouveaux documents&nbsp;"
+msgstr "Soumission de nouveaux documents"
 
 #: www/project/admin/index.php:263
 msgid "(send on all updates)"
@@ -22383,7 +22380,7 @@ msgstr ""
 
 #: www/snippet/submit.php:113
 msgid "Script Type"
-msgstr "Type de script&nbsp;"
+msgstr "Type de script"
 
 #: www/soap/index.php:161
 msgid "en_US"
@@ -22467,7 +22464,7 @@ msgstr "Projets en cours : %1$s"
 
 #: www/softwaremap/trove_list.php:219 www/trove/index.php:95
 msgid "Browse By"
-msgstr "Afficher par&nbsp;"
+msgstr "Afficher par"
 
 #: www/softwaremap/trove_list.php:270
 #, php-format
