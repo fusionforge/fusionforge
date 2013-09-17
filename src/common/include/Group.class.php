@@ -232,18 +232,17 @@ class Group extends Error {
 	 *
 	 * @param int|bool $id  Required - Id of the group you want to instantiate.
 	 * @param int|bool $res Database result from select query OR associative array of all columns.
-	 * @return bool Success or not
 	 */
 	function __construct($id = false, $res = false) {
 		$this->Error();
 		if (!$id) {
 			//setting up an empty object
 			//probably going to call create()
-			return true;
+			return;
 		}
 		if (!$res) {
 			if (!$this->fetchData($id)) {
-				return false;
+				return;
 			}
 		} else {
 			//
@@ -256,14 +255,14 @@ class Group extends Error {
 					//function in class we extended
 					$this->setError(_('Group Not Found'));
 					$this->data_array=array();
-					return false;
+					return;
 				} else {
 					//set up an associative array for use by other functions
 					$this->data_array = db_fetch_array_by_row($res, 0);
 				}
 			}
 		}
-		return true;
+
 	}
 
 	/**
@@ -289,17 +288,20 @@ class Group extends Error {
 	 * This method should be called on empty Group object.
 	 * It will add an entry for a pending group/project (status 'P')
 	 *
-	 * @param	object	The User object.
-	 * @param	string	The full name of the user.
-	 * @param	string	The Unix name of the user.
-	 * @param	string	The new group description.
-	 * @param	string	The purpose of the group.
-	 * @param	boolean	Whether to send an email or not
-	 * @param	int	The id of the project this new project is based on
+	 * @param	object	$user			The User object.
+	 * @param	string	$group_name		The full name of the user.
+	 * @param	string	$unix_name		The Unix name of the user.
+	 * @param	string	$description	The new group description.
+	 * @param	string	$purpose		The purpose of the group.
+	 * @param	string	$unix_box
+	 * @param	string	$scm_box
+	 * @param	bool	$is_public
+	 * @param	bool	$send_mail		Whether to send an email or not
+	 * @param	int		$built_from_template	The id of the project this new project is based on
 	 * @return	boolean	success or not
 	 */
 	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box = 'shell1',
-			$scm_box = 'cvs1', $is_public = 1, $send_mail = true, $built_from_template = 0) {
+			$scm_box = 'cvs1', $is_public = true, $send_mail = true, $built_from_template = 0) {
 		// $user is ignored - anyone can create pending group
 
 		global $SYS;
@@ -354,7 +356,7 @@ class Group extends Error {
 					built_from_template
 				)
 				VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)',
-						array(htmlspecialchars ($group_name),
+						array(htmlspecialchars($group_name),
 							$unix_name,
 							htmlspecialchars($description),
 							$homepage,
@@ -410,11 +412,11 @@ class Group extends Error {
 	 *
 	 * This function require site admin privilege.
 	 *
-	 * @param	object	User requesting operation (for access control).
-	 * @param	int	Group type (1-project, 2-foundry).
-	 * @param	string	Machine on which group's home directory located.
-	 * @param	string	Domain which serves group's WWW.
-	 * @return	status.
+	 * @param	object	$user			User requesting operation (for access control).
+	 * @param	int		$type_id		Group type (1-project, 2-foundry).
+	 * @param	string	$unix_box		Machine on which group's home directory located.
+	 * @param	string	$http_domain	Domain which serves group's WWW.
+	 * @return	bool					status.
 	 * @access	public
 	 */
 	function updateAdmin(&$user, $type_id, $unix_box, $http_domain) {
@@ -471,14 +473,30 @@ class Group extends Error {
 	 *
 	 * Unlike updateAdmin(), this function accessible to project admin.
 	 *
-	 * @param	object	User requesting operation (for access control).
-	 * @param	boolean	Whether group is publicly accessible (0/1).
-	 * @param	string	Project's license (string ident).
-	 * @param	int		Group type (1-project, 2-foundry).
-	 * @param	string	Machine on which group's home directory located.
-	 * @param	string	Domain which serves group's WWW.
-	 * @return	int	status.
-	 * @access	public
+	 * @param object	$user    User requesting operation (for access control).
+	 * @param string	$group_name
+	 * @param string	$homepage
+	 * @param string	$short_description
+	 * @param bool		$use_mail
+	 * @param bool		$use_survey
+	 * @param bool		$use_forum
+	 * @param bool		$use_pm
+	 * @param bool		$use_pm_depend_box
+	 * @param bool		$use_scm
+	 * @param bool		$use_news
+	 * @param bool		$use_docman
+	 * @param string	$new_doc_address
+	 * @param bool		$send_all_docs
+	 * @param int		$logo_image_id
+	 * @param bool		$use_ftp
+	 * @param bool		$use_tracker
+	 * @param bool		$use_frs
+	 * @param bool		$use_stats
+	 * @param $tags
+	 * @param bool		$use_activity
+	 * @param bool		$is_public			group is publicly accessible
+	 * @return    int    status.
+	 * @access    public
 	 */
 	function update(&$user, $group_name, $homepage, $short_description, $use_mail, $use_survey, $use_forum,
 		$use_pm, $use_pm_depend_box, $use_scm, $use_news, $use_docman,
@@ -1547,6 +1565,7 @@ class Group extends Error {
 	/**
 	 * setTags - Set tags of this project.
 	 *
+	 * @param	string	$tags
 	 * @return	string	database result.
 	 */
 	function setTags($tags) {
@@ -2517,8 +2536,6 @@ class Group extends Error {
 
 		return true;
 	}
-
-
 
 	/**
 	 * sendApprovalEmail - Send new project email.
