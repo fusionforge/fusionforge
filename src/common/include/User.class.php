@@ -223,20 +223,18 @@ class GFUser extends Error {
 	var $theme_id;
 
 	/**
-	 * GFUser($id,$res) - CONSTRUCTOR - GENERALLY DON'T USE THIS
-	 *
+	 * CONSTRUCTOR - GENERALLY DON'T USE THIS
 	 * instead use the user_get_object() function call
 	 *
 	 * @param bool|int $id  The user_id
 	 * @param bool|int $res The database result set OR array of data
-	 * @return bool
 	 */
 	function __construct($id = false, $res = false) {
 		$this->Error();
 		if (!$id) {
 			//setting up an empty object
 			//probably going to call create()
-			return true;
+			return;
 		}
 		if (!$res) {
 			$this->fetchData($id);
@@ -247,7 +245,7 @@ class GFUser extends Error {
 				//function in class we extended
 				$this->setError(_('User Not Found'));
 				$this->data_array = array();
-				return false;
+				return;
 			} else {
 				//set up an associative array for use by other functions
 				$this->data_array = db_fetch_array_by_row($res, 0);
@@ -268,37 +266,34 @@ class GFUser extends Error {
 		}
 		$this->is_super_user = false;
 		$this->is_logged_in = false;
-		return true;
 	}
 
 	/**
 	 * create() - Create a new user.
 	 *
-	 * @param	string	The unix username.
-	 * @param	string	The real firstname.
-	 * @param	string	The real lastname.
-	 * @param	string	The first password.
-	 * @param	string	The confirmation password.
-	 * @param	string	The users email address.
-	 * @param	string	The users preferred default language.
-	 * @param	string	The users preferred default timezone.
-	 * @param	string	The users preference for receiving site updates by email.
-	 * @param	string	The users preference for receiving community updates by email.
-	 * @param	int	The ID of the language preference.
-	 * @param	string	The users preferred timezone.
-	 * @param	ignored	(no longer used)
-	 * @param	ignored	(no longer used)
-	 * @param	int	The users theme_id.
-	 * @param	string	The users unix_box.
-	 * @param	string	The users address.
-	 * @param	string	The users address part 2.
-	 * @param	string	The users phone.
-	 * @param	string	The users fax.
-	 * @param	string	The users title.
-	 * @param	char(2)	The users ISO country_code.
-	 * @param	bool	Whether to send an email or not
-	 * @param	int	The users preference for tooltips
-	 * @return	bool|int	The newly created user ID
+	 * @param	string		$unix_name		The unix username.
+	 * @param	string		$firstname		The real firstname.
+	 * @param	string		$lastname		The real lastname.
+	 * @param	string		$password1		The first password.
+	 * @param	string		$password2		The confirmation password.
+	 * @param	string		$email			The users email address.
+	 * @param	string		$mail_site		The users preferred default language.
+	 * @param	string		$mail_va		The users preferred default timezone.
+	 * @param	int			$language_id	The ID of the language preference.
+	 * @param	string		$timezone		The users preferred default timezone.
+	 * @param	string		$dummy1			ignored	(no longer used)
+	 * @param	int			$dummy2			ignored	(no longer used)
+	 * @param	int			$theme_id		The users theme_id.
+	 * @param	string    	$unix_box		The users unix_box.
+	 * @param	string    	$address		The users address.
+	 * @param	string    	$address2		The users address part 2.
+	 * @param	string    	$phone			The users phone.
+	 * @param	string    	$fax			The users fax.
+	 * @param	string		$title			The users title.
+	 * @param	string		$ccode			The users ISO country_code.
+	 * @param	bool		$send_mail		Whether to send an email or not
+	 * @param	bool|int	$tooltips		The users preference for tooltips
+     * @return	bool|int	The newly created user ID
 	 *
 	 */
 	function create($unix_name, $firstname, $lastname, $password1, $password2, $email,
@@ -373,16 +368,16 @@ class GFUser extends Error {
 			$l = substr($l, 0, 15);
 			// Is the user part of the email address okay?
 			if (account_namevalid($l)
-			    && db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name = $1',
+				&& db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name = $1',
 							  array($l))) == 0) {
 				$unix_name = $l;
 			} else {
 				// No? What if we add a number at the end?
 				$i = 0;
 				while ($i < 1000) {
-					$c = substr($l, 0, 15-strlen ("$i")) . "$i" ;
+					$c = substr($l, 0, 15 - strlen("$i"))."$i";
 					if (account_namevalid($c)
-					    && db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name = $1',
+						&& db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name = $1',
 									  array($c))) == 0) {
 						$unix_name = $c;
 						break;
@@ -392,9 +387,9 @@ class GFUser extends Error {
 			}
 			// If we're really unlucky, then let's go brute-force
 			while (!$unix_name) {
-				$c = substr (md5($email . util_randbytes()), 0, 15);
+				$c = substr(md5($email.util_randbytes()), 0, 15);
 				if (account_namevalid($c)
-				    && db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name = $1',
+					&& db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name = $1',
 								  array($c))) == 0) {
 					$unix_name = $c;
 				}
@@ -570,24 +565,25 @@ Use one below, but make sure it is entered as the single line.)
 	 *
 	 * Use specific setter to change other properties.
 	 *
-	 * @param	string	The users first name.
-	 * @param	string	The users last name.
-	 * @param	int	The ID of the users language preference.
-	 * @param	string	The useres timezone preference.
-	 * @param	string	The users preference for receiving site updates by email.
-	 * @param	string	The users preference for receiving community updates by email.
-	 * @param	string	The users preference for being participating in "peer ratings".
-	 * @param	ignored	(no longer used)
-	 * @param	ignored	(no longer used)
-	 * @param	int	The users theme_id preference.
-	 * @param	string	The users address.
-	 * @param	string	The users address2.
-	 * @param	string	The users phone.
-	 * @param	string	The users fax.
-	 * @param	string	The users title.
-	 * @param	string	The users ccode.
-	 * @param	int	The users preference for tooltips.
-	 * @param	string	The users email.
+	 * @param	string	$firstname		The users first name.
+	 * @param	string	$lastname		The users last name.
+	 * @param	int		$language_id	The ID of the users language preference.
+	 * @param	string	$timezone		The users timezone preference.
+	 * @param	string	$mail_site		The users preference for receiving site updates by email.
+	 * @param	string	$mail_va		The users preference for receiving community updates by email.
+	 * @param	string	$use_ratings	The users preference for being participating in "peer ratings".
+	 * @param	string	$dummy1			ignored	(no longer used)
+	 * @param	int		$dummy2			ignored	(no longer used)
+	 * @param	int		$theme_id		The users theme_id preference.
+	 * @param	string	$address		The users address.
+	 * @param	string	$address2		The users address2.
+	 * @param	string	$phone			The users phone.
+	 * @param	string	$fax			The users fax.
+	 * @param	string	$title			The users title.
+	 * @param	string	$ccode			The users ccode.
+	 * @param	int		$tooltips		The users preference for tooltips.
+	 * @param	string	$email			The users email.
+     * @return bool
 	 */
 	function update($firstname, $lastname, $language_id, $timezone, $mail_site, $mail_va, $use_ratings,
 			$dummy1, $dummy2, $theme_id, $address, $address2, $phone, $fax, $title, $ccode, $tooltips, $email='') {
