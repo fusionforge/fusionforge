@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 18:35+0200\n"
+"POT-Creation-Date: 2013-09-17 18:41+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -2340,7 +2340,7 @@ msgstr "Por:"
 msgid "Current File"
 msgstr "Fichero actual"
 
-#: common/forum/ForumHTML.class.php:321
+#: common/forum/ForumHTML.class.php:321 common/forum/ForumHTML.class.php:356
 msgid "Use the “Browse” button to find the file you want to attach"
 msgstr "Use el botón \"Navegar\" para buscar el fichero que quiere adjuntar"
 
@@ -2351,10 +2351,6 @@ msgstr "Fichero a subir"
 #: common/forum/ForumHTML.class.php:327
 msgid "Warning: Uploaded file will replace current file"
 msgstr "Aviso: El fichero reemplazará el actual"
-
-#: common/forum/ForumHTML.class.php:356
-msgid "Use the \"Browse\" button to find the file you want to attach"
-msgstr "Use el botón \"Navegar\" para buscar el fichero que quiere adjuntar"
 
 #: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:592
 msgid "Subject:"
@@ -23263,6 +23259,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Use the \"Browse\" button to find the file you want to attach"
+#~ msgstr "Use el botón \"Navegar\" para buscar el fichero que quiere adjuntar"
 
 #~ msgid "No Stats Available"
 #~ msgstr "No hay estadísticas disponibles"

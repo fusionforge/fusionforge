@@ -353,7 +353,7 @@ class ForumHTML extends Error {
 		<fieldset class=\"fieldset\">
 		<table>
 				<tr>
-					<td>" . _('Use the "Browse" button to find the file you want to attach') . "</td>
+					<td>" . _('Use the “Browse” button to find the file you want to attach') . "</td>
 				</tr>
 				<tr>
 					<td>" . _('File to upload') . ":   <input type=\"file\" name=\"attachment1\"/></td>

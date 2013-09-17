@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 18:35+0200\n"
+"POT-Creation-Date: 2013-09-17 18:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2255,7 +2255,7 @@ msgstr ""
 msgid "Current File"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:321
+#: common/forum/ForumHTML.class.php:321 common/forum/ForumHTML.class.php:356
 msgid "Use the “Browse” button to find the file you want to attach"
 msgstr ""
 
@@ -2265,10 +2265,6 @@ msgstr ""
 
 #: common/forum/ForumHTML.class.php:327
 msgid "Warning: Uploaded file will replace current file"
-msgstr ""
-
-#: common/forum/ForumHTML.class.php:356
-msgid "Use the \"Browse\" button to find the file you want to attach"
 msgstr ""
 
 #: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:592

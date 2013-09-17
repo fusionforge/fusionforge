@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 18:35+0200\n"
+"POT-Creation-Date: 2013-09-17 18:41+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2420,7 +2420,7 @@ msgstr "От:"
 msgid "Current File"
 msgstr "Текущий файл"
 
-#: common/forum/ForumHTML.class.php:321
+#: common/forum/ForumHTML.class.php:321 common/forum/ForumHTML.class.php:356
 msgid "Use the “Browse” button to find the file you want to attach"
 msgstr ""
 "Воспользуйтесь клавишей \"Обзор\" для указания пути к файлу который вы "
@@ -2434,12 +2434,6 @@ msgstr "Файл для загрузки"
 #, fuzzy
 msgid "Warning: Uploaded file will replace current file"
 msgstr "Внимание! Файл будет удален безвозвратно"
-
-#: common/forum/ForumHTML.class.php:356
-msgid "Use the \"Browse\" button to find the file you want to attach"
-msgstr ""
-"Воспользуйтесь клавишей \"Обзор\" для указания пути к файлу который вы "
-"желаете прикрепить"
 
 #: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:592
 msgid "Subject:"
@@ -24113,6 +24107,11 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#~ msgid "Use the \"Browse\" button to find the file you want to attach"
+#~ msgstr ""
+#~ "Воспользуйтесь клавишей \"Обзор\" для указания пути к файлу который вы "
+#~ "желаете прикрепить"
 
 #~ msgid "No Stats Available"
 #~ msgstr "Нет доступной статистики"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 18:35+0200\n"
+"POT-Creation-Date: 2013-09-17 18:41+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2418,7 +2418,7 @@ msgstr "Da:"
 msgid "Current File"
 msgstr "File corrente"
 
-#: common/forum/ForumHTML.class.php:321
+#: common/forum/ForumHTML.class.php:321 common/forum/ForumHTML.class.php:356
 msgid "Use the “Browse” button to find the file you want to attach"
 msgstr ""
 
@@ -2430,10 +2430,6 @@ msgstr "File da inserire"
 #, fuzzy
 msgid "Warning: Uploaded file will replace current file"
 msgstr "Attenzione: il file attuale verr&agrave; cancellato in modo permanente"
-
-#: common/forum/ForumHTML.class.php:356
-msgid "Use the \"Browse\" button to find the file you want to attach"
-msgstr ""
 
 #: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:592
 msgid "Subject:"
