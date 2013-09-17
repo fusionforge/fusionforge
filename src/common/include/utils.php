@@ -7,7 +7,7 @@
  * Copyright 2009-2011, Franck Villaume - Capgemini
  * Copyright (c) 2010, 2011, 2012
  *	Thorsten Glaser <t.glaser@tarent.de>
- * Copyright 2010-2011, Alain Peyrat - Alcatel-Lucent
+ * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
  * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -95,6 +95,10 @@ function is_utf8($str) {
 	return true;
 }
 
+/**
+ * @param $data
+ * @return mixed
+ */
 function util_strip_unprintable(&$data) {
 	if (is_array($data)) {
 		foreach ($data as $key => &$value) {
@@ -111,7 +115,8 @@ function util_strip_unprintable(&$data) {
  * That function is useful to remove the possibility of a CRLF Injection when sending mail
  * All the data that we will send should be passed through that function
  *
- * @param	   string  The string that we want to empty from any CRLF
+ * @param  string  $str The string that we want to empty from any CRLF
+ * @return string
  */
 function util_remove_CRLF($str) {
 	return strtr($str, "\015\012", '  ');
@@ -121,7 +126,8 @@ function util_remove_CRLF($str) {
 /**
  * util_check_fileupload() - determines if a filename is appropriate for upload
  *
- * @param	   array  The uploaded file as returned by getUploadedFile()
+ * @param  array  $filename The uploaded file as returned by getUploadedFile()
+ * @return bool
  */
 function util_check_fileupload($filename) {
 
@@ -160,8 +166,8 @@ function util_check_fileupload($filename) {
  * Currently, test is very basic, only the protocol is
  * checked, allowed values are: http, https, ftp.
  *
- * @param		string  The URL
- * @return		boolean	true if valid, false if not valid.
+ * @param        string  $url The URL
+ * @return        boolean    true if valid, false if not valid.
  */
 function util_check_url($url) {
 	return (preg_match('/^(http|https|ftp):\/\//', $url) > 0);
@@ -171,23 +177,24 @@ function util_check_url($url) {
  * util_send_message() - Send email
  * This function should be used in place of the PHP mail() function
  *
- * @param		string	The email recipients address
- * @param		string	The email subject
- * @param		string	The body of the email message
- * @param		string	The optional email sender address.  Defaults to 'noreply@'
- * @param		string	The addresses to blind-carbon-copy this message
- * @param		string	The optional email sender name. Defaults to ''
- * @param 		boolean	Whether to send plain text or html email
- *
+ * @param string      $to            The email recipients address
+ * @param string      $subject       The email subject
+ * @param string      $body          The body of the email message
+ * @param string      $from          The optional email sender address.  Defaults to 'noreply@'
+ * @param string      $BCC           The addresses to blind-carbon-copy this message
+ * @param string      $sendername    The optional email sender name. Defaults to ''
+ * @param bool|string $extra_headers Whether to send plain text or html email
+ * @param bool        $send_html_email
  */
-function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$extra_headers='',$send_html_email=false) {
+function util_send_message($to, $subject, $body, $from = '', $BCC = '', $sendername = '', $extra_headers = '',
+						   $send_html_email = false) {
 
 
 	if (!$to) {
-		$to='noreply@'.forge_get_config('web_host');
+		$to = 'noreply@'.forge_get_config('web_host');
 	}
 	if (!$from) {
-		$from='noreply@'.forge_get_config('web_host');
+		$from = 'noreply@'.forge_get_config('web_host');
 	}
 
 	$charset = _('UTF-8');
@@ -200,14 +207,14 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 		$body2 .= $extra_headers."\n";
 	}
 	$body2 .= "To: $to".
-		"\nFrom: ".util_encode_mailaddr($from,$sendername,$charset);
+		"\nFrom: ".util_encode_mailaddr($from, $sendername, $charset);
 	if (forge_get_config('bcc_all_emails') != '') {
-		$BCC.=",".forge_get_config('bcc_all_emails');
+		$BCC .= ",".forge_get_config('bcc_all_emails');
 	}
-	if(!empty($BCC)) {
+	if (!empty($BCC)) {
 		$body2 .= "\nBCC: $BCC";
 	}
-	$send_html_email?$type="html":$type="plain";
+	$send_html_email? $type = "html" : $type = "plain";
 	$body2 .= "\n".util_encode_mimeheader("Subject", $subject, $charset).
 		"\nContent-type: text/$type; charset=$charset".
 		"\n\n".
@@ -217,57 +224,57 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 		$sys_sendmail_path="/usr/sbin/sendmail";
 	}
 
- 	$handle = popen(forge_get_config('sendmail_path')." -f'$from' -t -i", 'w');
-	fwrite ($handle, $body2);
- 	pclose($handle);
+	$handle = popen(forge_get_config('sendmail_path')." -f'$from' -t -i", 'w');
+	fwrite($handle, $body2);
+	pclose($handle);
 }
 
 /**
  * util_encode_mailaddr() - Encode email address to MIME format
  *
- * @param		string	The email address
- * @param		string	The email's owner name
- * @param		string	The converting charset
- *
+ * @param        string    $email The email address
+ * @param        string    $name The email's owner name
+ * @param        string    $charset The converting charset
+ * @return string
  */
-function util_encode_mailaddr($email,$name,$charset) {
+function util_encode_mailaddr($email, $name, $charset) {
 	if (function_exists('mb_convert_encoding') && trim($name) != "") {
 		$name = "=?".$charset."?B?".
 			base64_encode(mb_convert_encoding(
-				$name,$charset,"UTF-8")).
+				$name, $charset, "UTF-8")).
 			"?=";
 	}
 
-	return $name." <".$email."> ";
+	return $name." <".$email.">";
 }
 
 /**
  * util_encode_mimeheader() - Encode mimeheader
  *
- * @param		string	The name of the header (e.g. "Subject")
- * @param		string	The email subject
- * @param		string	The converting charset (like ISO-2022-JP)
- * @return		string	The MIME encoded subject
+ * @param        string    $headername The name of the header (e.g. "Subject")
+ * @param        string    $str The email subject
+ * @param        string    $charset The converting charset (like ISO-2022-JP)
+ * @return        string    The MIME encoded subject
  *
  */
-function util_encode_mimeheader($headername,$str,$charset) {
+function util_encode_mimeheader($headername, $str, $charset) {
 	if (function_exists('mb_internal_encoding') &&
 	    function_exists('mb_encode_mimeheader')) {
 		$x = mb_internal_encoding();
 		mb_internal_encoding("UTF-8");
-		$y = mb_encode_mimeheader($headername . ": " . $str,
-					  $charset, "Q");
+		$y = mb_encode_mimeheader($headername.": ".$str,
+			$charset, "Q");
 		mb_internal_encoding($x);
 		return $y;
 	}
 
 	if (!function_exists('mb_convert_encoding')) {
-		return $headername . ": " . $str;
+		return $headername.": ".$str;
 	}
 
-	return $headername . ": " . "=?".$charset."?B?".
+	return $headername.": "."=?".$charset."?B?".
 		base64_encode(mb_convert_encoding(
-			$str,$charset,"UTF-8")).
+			$str, $charset, "UTF-8")).
 		"?=";
 }
 
@@ -279,12 +286,12 @@ function util_encode_mimeheader($headername,$str,$charset) {
  * @return		string	The converted body of the email message
  *
  */
-function util_convert_body($str,$charset) {
+function util_convert_body($str, $charset) {
 	if (!function_exists('mb_convert_encoding') || $charset == 'UTF-8') {
 		return $str;
 	}
 
-	return mb_convert_encoding($str,$charset,"UTF-8");
+	return mb_convert_encoding($str, $charset, "UTF-8");
 }
 
 /**
@@ -298,37 +305,37 @@ function util_convert_body($str,$charset) {
  *	@param	ignored	(no longer used)
  *	@param	string	From header
  */
-function util_handle_message($id_arr,$subject,$body,$extra_emails='',$dummy1='',$from='') {
-	$address=array();
+function util_handle_message($id_arr, $subject, $body, $extra_emails = '', $dummy1 = '', $from = '') {
+	$address = array();
 
 	if (count($id_arr) < 1) {
 
 	} else {
-		$res = db_query_params ('SELECT user_id,email FROM users WHERE user_id = ANY ($1)',
-					array (db_int_array_to_any_clause ($id_arr))) ;
-		$rows = db_numrows($res) ;
+		$res = db_query_params('SELECT user_id,email FROM users WHERE user_id = ANY ($1)',
+					array(db_int_array_to_any_clause($id_arr)));
+		$rows = db_numrows($res);
 
-		for ($i=0; $i<$rows; $i++) {
+		for ($i = 0; $i < $rows; $i++) {
 			if (db_result($res, $i, 'user_id') == 100) {
 				// Do not send messages to "Nobody"
 				continue;
 			}
-			$address['email'][]=db_result($res,$i,'email');
+			$address['email'][] = db_result($res,$i,'email');
 		}
 		if (isset ($address['email']) && count($address['email']) > 0) {
-			$extra_emails=implode($address['email'],',').',' . $extra_emails;
+			$extra_emails = implode($address['email'], ',').','.$extra_emails;
 		}
 	}
 	if ($extra_emails) {
-		util_send_message('',$subject,$body,$from,$extra_emails);
+		util_send_message('', $subject, $body, $from, $extra_emails);
 	}
 }
 
 /**
  * util_unconvert_htmlspecialchars() - Unconverts a string converted with htmlspecialchars()
  *
- * @param		string	The string to unconvert
- * @returns The unconverted string
+ * @param	string		$string		The string to unconvert
+ * @return	string		The unconverted string
  *
  */
 function util_unconvert_htmlspecialchars($string) {
@@ -338,22 +345,22 @@ function util_unconvert_htmlspecialchars($string) {
 /**
  * util_result_columns_to_assoc() - Takes a result set and turns the column pair into an associative array
  *
- * @param		string	The result set ID
- * @param		int		The column key
- * @param		int		The optional column value
- * @returns An associative array
+ * @param        string     $result		The result set ID
+ * @param        int        $col_key	The column key
+ * @param        int        $col_val	The optional column value
+ * @return array			An associative array
  *
  */
-function util_result_columns_to_assoc($result, $col_key=0, $col_val=1) {
-	$rows=db_numrows($result);
+function util_result_columns_to_assoc($result, $col_key = 0, $col_val = 1) {
+	$rows = db_numrows($result);
 
 	if ($rows > 0) {
-		$arr=array();
-		for ($i=0; $i<$rows; $i++) {
-			$arr[db_result($result,$i,$col_key)]=db_result($result,$i,$col_val);
+		$arr = array();
+		for ($i = 0; $i < $rows; $i++) {
+			$arr[db_result($result, $i, $col_key)] = db_result($result, $i, $col_val);
 		}
 	} else {
-		$arr=array();
+		$arr = array();
 	}
 	return $arr;
 }
@@ -363,23 +370,23 @@ function util_result_columns_to_assoc($result, $col_key=0, $col_val=1) {
  *
  * @param		int		The result set ID
  * @param		int		The column
- * @resturns An array
+ * @return		array
  *
  */
-function &util_result_column_to_array($result, $col=0) {
+function &util_result_column_to_array($result, $col = 0) {
 	/*
 		Takes a result set and turns the optional column into
 		an array
 	*/
-	$rows=db_numrows($result);
+	$rows = db_numrows($result);
 
 	if ($rows > 0) {
-		$arr=array();
-		for ($i=0; $i<$rows; $i++) {
-			$arr[$i]=db_result($result,$i,$col);
+		$arr = array();
+		for ($i = 0; $i < $rows; $i++) {
+			$arr[$i] = db_result($result, $i, $col);
 		}
 	} else {
-		$arr=array();
+		$arr = array();
 	}
 	return $arr;
 }
@@ -390,10 +397,11 @@ function &util_result_column_to_array($result, $col=0) {
  * @param		string	The text to wrap
  * @param		int		The number of characters to wrap - Default is 80
  * @param		string	The line break to use - Default is '\n'
+ * @return string
  * @returns The wrapped text
  *
  */
-function util_line_wrap ($text, $wrap = 80, $break = "\n") {
+function util_line_wrap($text, $wrap = 80, $break = "\n") {
 	return wordwrap($text, $wrap, $break, false);
 }
 
@@ -401,17 +409,17 @@ function util_line_wrap ($text, $wrap = 80, $break = "\n") {
  * util_make_links() - Turn URL's into HREF's.
  *
  * @param		string	The URL
- * @returns The HREF'ed URL
+ * @return mixed|string	The HREF'ed URL
  *
  */
-function util_make_links($data='') {
-	if(empty($data)) {
+function util_make_links($data = '') {
+	if (empty($data)) {
 		return $data;
 	}
 	$withPattern = 0;
 	for ($i = 0; $i < 5; $i++) {
 		$randPattern = rand(10000, 30000);
-		if (! preg_match("/$randPattern/", $data)) {
+		if (!preg_match("/$randPattern/", $data)) {
 			$withPattern = 1;
 			break;
 		}
@@ -424,28 +432,28 @@ function util_make_links($data='') {
 		}
 */
 		$mem = array();
-		while(preg_match('/<a [^>]*>.*<\/a>/siU', $data, $part)) {
+		while (preg_match('/<a [^>]*>.*<\/a>/siU', $data, $part)) {
 			$mem[] = $part[0];
 			$data = preg_replace('/<a [^>]*>.*<\/a>/siU', $randPattern, $data, 1);
 		}
-		while(preg_match('/<img [^>]*\/>/siU', $data, $part)) {
+		while (preg_match('/<img [^>]*\/>/siU', $data, $part)) {
 			$mem[] = $part[0];
 			$data = preg_replace('/<img [^>]*\/>/siU', $randPattern, $data, 1);
 		}
 		$data = str_replace('&gt;', "\1", $data);
-		$data = preg_replace("#([ \t]|^)www\.#i"," http://www.",$data);
+		$data = preg_replace("#([ \t]|^)www\.#i", " http://www.", $data);
 		$data = preg_replace("#([[:alnum:]]+)://([^[:space:]<\1]*)([[:alnum:]\#?/&=])#i", "<a href=\"\\1://\\2\\3\" target=\"_new\">\\1://\\2\\3</a>", $data);
 		$data = preg_replace("#([[:space:]]|^)(([a-z0-9_]|\\-|\\.)+@([^[:space:]<\1]*)([[:alnum:]-]))#i", "\\1<a href=\"mailto:\\2\" target=\"_new\">\\2</a>", $data);
 		$data = str_replace("\1", '&gt;', $data);
 		for ($i = 0; $i < count($mem); $i++) {
 			$data = preg_replace("/$randPattern/", $mem[$i], $data, 1);
 		}
-		return($data);
+		return ($data);
 	}
 
-	$lines = split("\n",$data);
+	$lines = split("\n", $data);
 	$newText = "";
-	while ( list ($key, $line) = each ($lines)) {
+	while (list ($key, $line) = each($lines)) {
 		// Do not scan lines if they already have hyperlinks.
 		// Avoid problem with text written with an WYSIWYG HTML editor.
 		if (eregi('<a ([^>]*)>.*</a>', $line, $linePart)) {
@@ -475,7 +483,7 @@ function util_make_links($data='') {
 			"/([[:space:]]|^)(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))/i",
 			"\\1<a href=\"mailto:\\2\" target=\"_new\">\\2</a>",
 			$line
-			);
+		);
 		$line = str_replace("\1", '&gt;', $line);
 		$newText .= $line;
 	}
@@ -488,7 +496,7 @@ function util_make_links($data='') {
  */
 function show_priority_colors_key() {
 	echo '<p><strong> '._('Priority Colors')._(':').'</strong>';
-	for ($i=1; $i<6; $i++) {
+	for ($i = 1; $i < 6; $i++) {
 		echo ' <span class="priority'.$i.'">'.$i.'</span>';
 	}
 	echo '</p>';
@@ -497,9 +505,9 @@ function show_priority_colors_key() {
 /**
  * utils_buildcheckboxarray() - Build a checkbox array
  *
- * @param		int		Number of options to be in the array
- * @param		string	The name of the checkboxes
- * @param		array	An array of boxes to be pre-checked
+ * @param        int      $options        Number of options to be in the array
+ * @param        string   $name           The name of the checkboxes
+ * @param        array    $checked_array  An array of boxes to be pre-checked
  *
  */
 function utils_buildcheckboxarray($options, $name, $checked_array) {
@@ -509,7 +517,7 @@ function utils_buildcheckboxarray($options, $name, $checked_array) {
 	for ($i = 1; $i <= $option_count; $i++) {
 		echo '
 			<br /><input type="checkbox" name="'.$name.'" value="'.$i.'"';
-		for ($j=0; $j < $checked_count; $j++) {
+		for ($j = 0; $j < $checked_count; $j++) {
 			if ($i == $checked_array[$j]) {
 				echo ' checked';
 			}
@@ -521,7 +529,7 @@ function utils_buildcheckboxarray($options, $name, $checked_array) {
 /**
  * utils_requiredField() - Adds the required field marker
  *
- * @return	a string holding the HTML to mark a required field
+ * @return string A string holding the HTML to mark a required field
  */
 function utils_requiredField() {
 	return '<span class="requiredfield">*</span>';
@@ -533,8 +541,8 @@ function utils_requiredField() {
  * Be sure to include HTL_Graphs.php before using this function
  *
  * @author Tim Perdue tperdue@valinux.com
- * @param	int	The databse result set ID
- * @param	string	The title of the graph
+ * @param	int		$result	The databse result set ID
+ * @param	string	$title	The title of the graph
  *
  */
 function GraphResult($result, $title) {
@@ -546,8 +554,8 @@ function GraphResult($result, $title) {
 		$names = array();
 		$values = array();
 
-		for ($j=0; $j < db_numrows($result); $j++) {
-			if (db_result($result, $j, 0) != '' && db_result($result, $j, 1) != '' ) {
+		for ($j = 0; $j < db_numrows($result); $j++) {
+			if (db_result($result, $j, 0) != '' && db_result($result, $j, 1) != '') {
 				$names[$j] = db_result($result, $j, 0);
 				$values[$j] = db_result($result, $j, 1);
 			}
@@ -564,9 +572,9 @@ function GraphResult($result, $title) {
  * GraphIt() - Build a graph
  *
  * @author Tim Perdue tperdue@valinux.com
- * @param	array	An array of names
- * @param	array	An array of values
- * @param	string	The title of the graph
+ * @param	array	$name_string	An array of names
+ * @param	array	$value_string	An array of values
+ * @param	string	$title			The title of the graph
  *
  */
 function GraphIt($name_string, $value_string, $title) {
@@ -614,36 +622,36 @@ function GraphIt($name_string, $value_string, $title) {
 	$title_arr = array();
 	$title_arr[] = $title;
 
-	echo $GLOBALS['HTML']->listTableTop ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop($title_arr);
 	echo '<tr><td>';
 	/*
 		Create an associate array to pass in. I leave most of it blank
 	*/
 
-	$vals =  array(
-	'vlabel'=>'',
-	'hlabel'=>'',
-	'type'=>'',
-	'cellpadding'=>'',
-	'cellspacing'=>'0',
-	'border'=>'',
-	'width'=>'',
-	'background'=>'',
-	'vfcolor'=>'',
-	'hfcolor'=>'',
-	'vbgcolor'=>'',
-	'hbgcolor'=>'',
-	'vfstyle'=>'',
-	'hfstyle'=>'',
-	'noshowvals'=>'',
-	'scale'=>$scale,
-	'namebgcolor'=>'',
-	'valuebgcolor'=>'',
-	'namefcolor'=>'',
-	'valuefcolor'=>'',
-	'namefstyle'=>'',
-	'valuefstyle'=>'',
-	'doublefcolor'=>'');
+	$vals = array(
+		'vlabel'      => '',
+		'hlabel'      => '',
+		'type'        => '',
+		'cellpadding' => '',
+		'cellspacing' => '0',
+		'border'      => '',
+		'width'       => '',
+		'background'  => '',
+		'vfcolor'     => '',
+		'hfcolor'     => '',
+		'vbgcolor'    => '',
+		'hbgcolor'    => '',
+		'vfstyle'     => '',
+		'hfstyle'     => '',
+		'noshowvals'  => '',
+		'scale'       => $scale,
+		'namebgcolor' => '',
+		'valuebgcolor'=> '',
+		'namefcolor'  => '',
+		'valuefcolor' => '',
+		'namefstyle'  => '',
+		'valuefstyle' => '',
+		'doublefcolor'=> '');
 
 	/*
 		This is the actual call to the HTML_Graphs class
@@ -661,73 +669,71 @@ function GraphIt($name_string, $value_string, $title) {
  * ShowResultSet() - Show a generic result set
  * Very simple, plain way to show a generic result set
  *
- * @param	int		The result set ID
- * @param	string	The title of the result set
- * @param	bool	The option to turn URL's into links
- * @param	bool	The option to display headers
- * @param	array	The db field name -> label mapping
- * @param	array   Don't display these cols
- *
+ * @param	int		$result				The result set ID
+ * @param	string	$title				The title of the result set
+ * @param	bool	$linkify			The option to turn URL's into links
+ * @param	bool	$displayHeaders		The option to display headers
+ * @param	array	$headerMapping		The db field name -> label mapping
+ * @param	array	$excludedCols		Don't display these cols
  */
-function ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$headerMapping=array(), $excludedCols=array())  {
-	global $group_id,$HTML;
+function ShowResultSet($result, $title = '', $linkify = false, $displayHeaders = true, $headerMapping = array(), $excludedCols = array()) {
+	global $group_id, $HTML;
 
-	if($result)  {
-		$rows  =  db_numrows($result);
-		$cols  =  db_numfields($result);
+	if ($result) {
+		$rows = db_numrows($result);
+		$cols = db_numfields($result);
 
-		echo '<table width="100%">';
+		echo '<table class="fullwidth">'."\n";
 
 		/*  Create  the  headers  */
 		$headersCellData = array();
 		$colsToKeep = array();
-		for ($i=0; $i < $cols; $i++) {
+		for ($i = 0; $i < $cols; $i++) {
 			$fieldName = db_fieldname($result, $i);
-			if(in_array($fieldName, $excludedCols)) {
+			if (in_array($fieldName, $excludedCols)) {
 				continue;
 			}
 			$colsToKeep[] = $i;
-			if(isset($headerMapping[$fieldName])) {
-				if(is_array($headerMapping[$fieldName])) {
+			if (isset($headerMapping[$fieldName])) {
+				if (is_array($headerMapping[$fieldName])) {
 					$headersCellData[] = $headerMapping[$fieldName];
 				} else {
 					$headersCellData[] = array($headerMapping[$fieldName]);
 				}
-			}
-			else {
+			} else {
 				$headersCellData[] = array($fieldName);
 			}
 		}
 
 		/*  Create the title  */
-		if(strlen($title) > 0) {
+		if (strlen($title) > 0) {
 			$titleCellData = array();
 			$titleCellData[] = array($title, 'colspan="'.count($headersCellData).'"');
 			echo $HTML->multiTableRow('', $titleCellData, TRUE);
 		}
 
 		/* Display the headers */
-		if($displayHeaders) {
+		if ($displayHeaders) {
 			echo $HTML->multiTableRow('', $headersCellData, TRUE);
 		}
 
 		/*  Create the rows  */
- 		for ($j = 0; $j < $rows; $j++) {
-			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '>';
+		for ($j = 0; $j < $rows; $j++) {
+			echo '<tr '.$HTML->boxGetAltRowStyle($j).'>';
 			for ($i = 0; $i < $cols; $i++) {
-				if(in_array($i, $colsToKeep)) {
+				if (in_array($i, $colsToKeep)) {
 					if ($linkify && $i == 0) {
 						$link = '<a href="'.getStringFromServer('PHP_SELF').'?';
 						$linkend = '</a>';
 						if ($linkify == "bug_cat") {
 							$link .= 'group_id='.$group_id.'&amp;bug_cat_mod=y&amp;bug_cat_id='.db_result($result, $j, 'bug_category_id').'">';
-						} else if($linkify == "bug_group") {
+						} elseif ($linkify == "bug_group") {
 							$link .= 'group_id='.$group_id.'&amp;bug_group_mod=y&amp;bug_group_id='.db_result($result, $j, 'bug_group_id').'">';
-						} else if($linkify == "patch_cat") {
+						} elseif ($linkify == "patch_cat") {
 							$link .= 'group_id='.$group_id.'&amp;patch_cat_mod=y&amp;patch_cat_id='.db_result($result, $j, 'patch_category_id').'">';
-						} else if($linkify == "support_cat") {
+						} elseif ($linkify == "support_cat") {
 							$link .= 'group_id='.$group_id.'&amp;support_cat_mod=y&amp;support_cat_id='.db_result($result, $j, 'support_category_id').'">';
-						} else if($linkify == "pm_project") {
+						} elseif ($linkify == "pm_project") {
 							$link .= 'group_id='.$group_id.'&amp;project_cat_mod=y&amp;project_cat_id='.db_result($result, $j, 'group_project_id').'">';
 						} else {
 							$link = $linkend = '';
@@ -735,7 +741,7 @@ function ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$he
 					} else {
 						$link = $linkend = '';
 					}
-					echo '<td>'.$link . db_result($result,  $j,  $i) . $linkend.'</td>';
+					echo '<td>'.$link.db_result($result, $j, $i).$linkend.'</td>';
 				}
 			}
 			echo '</tr>';
@@ -749,21 +755,19 @@ function ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$he
 /**
  * validate_email() - Validate an email address
  *
- * @param		string	The address string to validate
- * @returns true on success/false on error
+ * @param	string	$address	The address string to validate
+ * @return	bool	true on success/false on error
  *
  */
-function validate_email ($address) {
+function validate_email($address) {
 	if (version_compare(PHP_VERSION, '5.2.0', '>=')) {
-		if ( filter_var($address, FILTER_VALIDATE_EMAIL) ) {
+		if (filter_var($address, FILTER_VALIDATE_EMAIL)) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
-	}
-	else {
-		if ( preg_match( "/^[-!#$%&\'*+\\.\/0-9=?A-Z^_`a-z{|}~]+@[-!#$%&\'*+\\/0-9=?A-Z^_`a-z{|}~]+\.[-!#$%&\'*+\\.\/0-9=?A-Z^_`a-z{|}~]+$/", $address) ) {
+	} else {
+		if (preg_match("/^[-!#$%&\'*+\\.\/0-9=?A-Z^_`a-z{|}~]+@[-!#$%&\'*+\\/0-9=?A-Z^_`a-z{|}~]+\.[-!#$%&\'*+\\.\/0-9=?A-Z^_`a-z{|}~]+$/", $address)) {
 			return true;
 		} else {
 			return false;
@@ -774,19 +778,19 @@ function validate_email ($address) {
 /**
  * validate_emails() - Validate a list of e-mail addresses
  *
- * @param	string	E-mail list
- * @param	char	Separator
- * @returns	array	Array of invalid e-mail addresses (if empty, all addresses are OK)
-*/
-function validate_emails($addresses, $separator=',') {
+ * @param	string	$addresses  E-mail list
+ * @param	string	$separator  Separator
+ * @return	array	Array of invalid e-mail addresses (if empty, all addresses are OK)
+ */
+function validate_emails($addresses, $separator = ',') {
 	if (strlen($addresses) == 0) return array();
 
 	$emails = explode($separator, $addresses);
-	$ret 	= array();
+	$ret = array();
 
 	if (is_array($emails)) {
 		foreach ($emails as $email) {
-			$email = trim($email);		// This is done so we can validate lists like "a@b.com, c@d.com"
+			$email = trim($email); // This is done so we can validate lists like "a@b.com, c@d.com"
 			if (!validate_email($email)) $ret[] = $email;
 		}
 	}
@@ -794,22 +798,21 @@ function validate_emails($addresses, $separator=',') {
 }
 
 
-
 /**
  * util_is_valid_filename() - Verifies whether a file has a valid filename
  *
- * @param		string	The file to verify
- * @returns true on success/false on error
+ * @param  string $file The file to verify
+ * @return bool true on success/false on error
  *
  */
 function util_is_valid_filename($file) {
 	//bad char test
-	$invalidchars = preg_replace("/[-A-Z0-9+_\. ~]/i","",$file);
+	$invalidchars = preg_replace("/[-A-Z0-9+_\. ~]/i", "", $file);
 
 	if (!empty($invalidchars)) {
 		return false;
 	} else {
-		if (strstr($file,'..')) {
+		if (strstr($file, '..')) {
 			return false;
 		} else {
 			return true;
@@ -817,10 +820,11 @@ function util_is_valid_filename($file) {
 	}
 }
 
-/* util_is_valid_repository_name() - Verifies whether a repository name is valid
+/**
+ * util_is_valid_repository_name() - Verifies whether a repository name is valid
  *
- * @param		string	The name to verify
- * @returns true on success/false on error
+ * @param	string	$file name to verify
+ * @return	bool	true on success/false on error
  *
  */
 function util_is_valid_repository_name ($file) {
@@ -839,25 +843,25 @@ function util_is_valid_repository_name ($file) {
 /**
  * valid_hostname() - Validates a hostname string to make sure it doesn't contain invalid characters
  *
- * @param		string	The optional hostname string
- * @returns true on success/false on failur
+ * @param	string	$hostname The optional hostname string
+ * @return	bool	true on success/false on failure
  *
  */
 function valid_hostname($hostname = "xyz") {
 
 	//bad char test
-	$invalidchars = preg_replace("/[-A-Z0-9\.]/i","",$hostname);
+	$invalidchars = preg_replace("/[-A-Z0-9\.]/i", "", $hostname);
 
 	if (!empty($invalidchars)) {
 		return false;
 	}
 
 	//double dot, starts with a . or -
-	if ( preg_match("/\.\./",$hostname) || preg_match("/^\./",$hostname)  || preg_match("/^\-/",$hostname) ) {
+	if (preg_match("/\.\./", $hostname) || preg_match("/^\./", $hostname) || preg_match("/^\-/", $hostname)) {
 		return false;
 	}
 
-	$multipoint = explode(".",$hostname);
+	$multipoint = explode(".", $hostname);
 
 	if (!(is_array($multipoint)) || ((count($multipoint) - 1) < 1)) {
 		return false;
@@ -875,33 +879,33 @@ function valid_hostname($hostname = "xyz") {
  * such as "xx Megabytes" or "xx Mo"
  *
  * @author           Andrea Paleni <andreaSPAMLESS_AT_SPAMLESScriticalbit.com>
- * @version        1.0
- * @param int       bytes   is the size
- * @param bool     base10  enable base 10 representation, otherwise
- *                 default base 2  is used
- * @param int       round   number of fractional digits
- * @param array     labels  strings associated to each 2^10 or
- *                  10^3(base10==true) multiple of base units
+ * @version          1.0
+ *
+ * @param int       $bytes   is the size
+ * @param bool      $base10  enable base 10 representation, otherwise default base 2  is used
+ * @param int       $round   number of fractional digits
+ * @param array     $labels  strings associated to each 2^10 or 10^3(base10==true) multiple of base units
+ * @return string
  */
-function human_readable_bytes ($bytes, $base10=false, $round=0, $labels=array()) {
+function human_readable_bytes($bytes, $base10 = false, $round = 0, $labels = array()) {
 	if ($bytes == 0) {
-        return "0";
-    }
-	if ($bytes < 0) {
-		return "-" . human_readable_bytes(-$bytes, $base10, $round);
+		return "0";
 	}
-    if ($base10) {
-        $labels = array(_('bytes'), _('kB'), _('MB'), _('GB'), _('TB'));
-	    $step = 3;
-	    $base = 10;
-    } else {
-        $labels = array(_('bytes'), _('KiB'), _('MiB'), _('GiB'), _('TiB'));
-	    $step = 10;
-	    $base = 2;
-    }
+	if ($bytes < 0) {
+		return "-".human_readable_bytes(-$bytes, $base10, $round);
+	}
+	if ($base10) {
+		$labels = array(_('bytes'), _('kB'), _('MB'), _('GB'), _('TB'));
+		$step = 3;
+		$base = 10;
+	} else {
+		$labels = array(_('bytes'), _('KiB'), _('MiB'), _('GiB'), _('TiB'));
+		$step = 10;
+		$base = 2;
+	}
 	$log = (int)(log10($bytes)/log10($base));
 	krsort($labels);
-	foreach ($labels as $p=>$lab) {
+	foreach ($labels as $p => $lab) {
 		$pow = $p * $step;
 		if ($log < $pow) {
 			continue;
@@ -909,7 +913,7 @@ function human_readable_bytes ($bytes, $base10=false, $round=0, $labels=array())
 		if ($lab != _("bytes") and $lab != _("kB") and $lab != _("KiB")) {
 			$round = 2;
 		}
-		$text = round($bytes/pow($base,$pow),$round) . " " . $lab;
+		$text = round($bytes/pow($base, $pow), $round)." ".$lab;
 		break;
 	}
 	return $text;
@@ -917,11 +921,11 @@ function human_readable_bytes ($bytes, $base10=false, $round=0, $labels=array())
 
 /**
  *	ls - lists a specified directory and returns an array of files
- *	@param	string	the path of the directory to list
- *	@param	boolean	whether to filter out directories and illegal filenames
+ *	@param  string	$dir	the path of the directory to list
+ *	@param  bool	$filter	whether to filter out directories and illegal filenames
  *	@return	array	array of file names.
  */
-function &ls($dir,$filter=false) {
+function &ls($dir, $filter = false) {
 	$out = array();
 
 	if (is_dir($dir) && ($h = opendir($dir))) {
@@ -930,7 +934,8 @@ function &ls($dir,$filter=false) {
 				continue;
 			if ($filter) {
 				if (!util_is_valid_filename($f) ||
-				    !is_file($dir . "/" . $f))
+					!is_file($dir."/".$f)
+				)
 					continue;
 			}
 			$out[] = $f;
@@ -943,88 +948,93 @@ function &ls($dir,$filter=false) {
 /**
  * readfile_chunked() - replacement for readfile
  *
- * @param		string	The file path
- * @param		bool    Whether to return bytes served or just a bool
- *
+ * @param  string    $filename    The file path
+ * @param  bool      $returnBytes Whether to return bytes served or just a bool
+ * @return bool|int
  */
-function readfile_chunked($filename, $returnBytes=true) {
-    $chunksize = 1*(1024*1024); // 1MB chunks
-    $buffer = '';
-    $byteCounter = 0;
+function readfile_chunked($filename, $returnBytes = true) {
+	$chunksize = 1*(1024*1024); // 1MB chunks
+	$buffer = '';
+	$byteCounter = 0;
 
-    $handle = fopen($filename, 'rb');
-    if ($handle === false) {
-        return false;
-    }
+	$handle = fopen($filename, 'rb');
+	if ($handle === false) {
+		return false;
+	}
 
-    ob_start () ;
-    while (!feof($handle)) {
-	    $buffer = fread($handle, $chunksize);
-	    echo $buffer;
-	    ob_flush() ;
-	    flush () ;
-	    if ($returnBytes) {
-		    $byteCounter += strlen($buffer);
-	    }
-    }
-    ob_end_flush () ;
-    $status = fclose($handle);
-    if ($returnBytes && $status) {
-        return $byteCounter; // return num. bytes delivered like readfile() does.
-    }
-    return $status;
+	ob_start();
+	while (!feof($handle)) {
+		$buffer = fread($handle, $chunksize);
+		echo $buffer;
+		ob_flush();
+		flush();
+		if ($returnBytes) {
+			$byteCounter += strlen($buffer);
+		}
+	}
+	ob_end_flush();
+	$status = fclose($handle);
+	if ($returnBytes && $status) {
+		return $byteCounter; // return num. bytes delivered like readfile() does.
+	}
+	return $status;
 }
 
 /**
  * util_is_root_dir() - Checks if a directory points to the root dir
- * @param	string	Directory
+ *
+ * @param  string  $dir   Directory
  * @return bool
  */
 function util_is_root_dir($dir) {
-	return !preg_match('/[^\\/]/',$dir);
+	return !preg_match('/[^\\/]/', $dir);
 }
 
 /**
  * util_is_dot_or_dotdot() - Checks if a directory points to . or ..
- * @param	string	Directory
+ *
+ * @param  string $dir    Directory
  * @return bool
  */
 function util_is_dot_or_dotdot($dir) {
-	return preg_match('/^\.\.?$/',trim($dir, '/'));
+	return preg_match('/^\.\.?$/', trim($dir, '/'));
 }
 
 /**
  * util_containts_dot_or_dotdot() - Checks if a directory containts . or ..
- * @param	string	Directory
+ *
+ * @param  string $dir Directory
  * @return bool
  */
 function util_containts_dot_or_dotdot($dir) {
-  foreach (explode('/', $dir) as $sub_dir) {
-    if (util_is_dot_or_dotdot($sub_dir))
-      return true;
-  }
+	foreach (explode('/', $dir) as $sub_dir) {
+		if (util_is_dot_or_dotdot($sub_dir))
+			return true;
+	}
 
-  return false;
+	return false;
 }
 
 /**
  * util_secure_filename() - Returns a secured file name
- * @param	string	Filename
- * @return	string  Filename
+ *
+ * @param  string $file    Filename
+ * @return string  Filename
  */
 function util_secure_filename($file) {
 	$f = preg_replace("/[^-A-Z0-9_\.]/i", '', $file);
 	if (util_containts_dot_or_dotdot($f))
 		$f = preg_replace("/\./", '_', $f);
-	if (! $f)
+	if (!$f)
 		$f = md5($file);
 	return $f;
 }
 
 /**
  * util_strip_accents() - Remove accents from given text.
- * @param	string	Text
- * @return 	string
+ *
+ * @param	string $text Text
+ * @return	string
  */
 function util_strip_accents($text) {
 	$find = utf8_decode($text);
@@ -1040,13 +1050,13 @@ function util_strip_accents($text) {
  * @return string
  */
 function normalized_urlprefix() {
-	$prefix = forge_get_config('url_prefix') ;
-	$prefix = preg_replace ("/^\//", "", $prefix) ;
-	$prefix = preg_replace ("/\/$/", "", $prefix) ;
-	$prefix = "/$prefix/" ;
+	$prefix = forge_get_config('url_prefix');
+	$prefix = preg_replace("/^\//", "", $prefix);
+	$prefix = preg_replace("/\/$/", "", $prefix);
+	$prefix = "/$prefix/";
 	if ($prefix == '//')
-		$prefix = '/' ;
-	return $prefix ;
+		$prefix = '/';
+	return $prefix;
 }
 
 /**
@@ -1076,9 +1086,9 @@ function util_url_prefix($prefix = '') {
  */
 function util_make_base_url($prefix = '') {
 	$url = util_url_prefix($prefix);
-	$url .= forge_get_config('web_host') ;
+	$url .= forge_get_config('web_host');
 	if (forge_get_config('https_port') && (forge_get_config('https_port') != 443)) {
-		$url .= ":".forge_get_config('https_port') ;
+		$url .= ":".forge_get_config('https_port');
 	}
 	return $url;
 }
@@ -1098,7 +1108,8 @@ function util_make_url($path = '', $prefix = '') {
 /**
  * Find the relative URL from full URL, removing http[s]://forge_name[:port]
  *
- * @param	string	URL
+ * @param  string $url URL
+ * @return string
  */
 function util_find_relative_referer($url) {
 	$relative_url = str_replace(util_make_base_url(), '', $url);
@@ -1125,6 +1136,15 @@ function util_make_uri($path) {
 	return $uri;
 }
 
+/**
+ * Construct proper (relative) URI from path & text
+ *
+ * @param string     $path
+ * @param string     $text
+ * @param array|bool $extra_params
+ * @param bool       $absolute
+ * @return string URI
+ */
 function util_make_link($path, $text, $extra_params = false, $absolute = false) {
 	global $use_tooltips;
 	$ep = '';
@@ -1139,115 +1159,122 @@ function util_make_link($path, $text, $extra_params = false, $absolute = false) 
 		}
 	}
 	if ($absolute) {
-		return '<a ' . $ep . 'href="' . $path . '">' . $text . '</a>' ;
+		return '<a '.$ep.'href="'.$path.'">'.$text.'</a>';
 	} else {
-		return '<a ' . $ep . 'href="' . util_make_uri($path) . '">' . $text . '</a>' ;
+		return '<a '.$ep.'href="'.util_make_uri($path).'">'.$text.'</a>';
 	}
 }
 
 /**
  * Create an HTML link to a user's profile page
  *
- * @param string $username
- * @param int $user_id
- * @param string $text
+ * @param string	$username
+ * @param int		$user_id
+ * @param string	$text
  * @return string
  */
-function util_make_link_u ($username, $user_id,$text) {
-	return '<a href="' . util_make_url_u ($username, $user_id) . '">' . $text . '</a>';
+function util_make_link_u($username, $user_id, $text) {
+	return '<a href="'.util_make_url_u($username, $user_id).'">'.$text.'</a>';
 }
 
 /**
  * Display username with link to a user's profile page
  * and icon face if possible.
  *
- * @param string $username
- * @param int $user_id
- * @param string $text
- * @param string $size
+ * @param string	$username
+ * @param int		$user_id
+ * @param string	$text
+ * @param string	$size
  * @return string
  */
-function util_display_user($username, $user_id, $text, $size='xs') {
-		// Invoke user_link_with_tooltip plugin
-  		$hook_params = array('resource_type' => 'user', 'username' => $username, 'user_id' => $user_id, 'size' => $size, 'user_link' => '');
-        plugin_hook_by_reference('user_link_with_tooltip', $hook_params);
-        if($hook_params['user_link'] != ''){
-                return $hook_params['user_link'];
-        }
+function util_display_user($username, $user_id, $text, $size = 'xs') {
+	// Invoke user_link_with_tooltip plugin
+	$hook_params = array('resource_type' => 'user', 'username' => $username, 'user_id' => $user_id, 'size' => $size, 'user_link' => '');
+	plugin_hook_by_reference('user_link_with_tooltip', $hook_params);
+	if ($hook_params['user_link'] != '') {
+		return $hook_params['user_link'];
+	}
 
-        // If no plugin replaced it, then back to default standard link
+	// If no plugin replaced it, then back to default standard link
 
-        // Invoke user_logo plugin (see gravatar plugin for instance)
-        $params = array('user_id' => $user_id, 'size' => $size, 'content' => '');
-        plugin_hook_by_reference('user_logo', $params);
+	// Invoke user_logo plugin (see gravatar plugin for instance)
+	$params = array('user_id' => $user_id, 'size' => $size, 'content' => '');
+	plugin_hook_by_reference('user_logo', $params);
 
-        $url = '<a href="' . util_make_url_u ($username, $user_id) . '">' . $text . '</a>';
-        if ($params['content']) {
-                return $params['content'].$url.'<div class="new_line"></div>';
-        }
-        return $url;
+	$url = '<a href="'.util_make_url_u($username, $user_id).'">'.$text.'</a>';
+	if ($params['content']) {
+		return $params['content'].$url.'<div class="new_line"></div>';
+	}
+	return $url;
 }
 
 /**
  * Create URL for user's profile page
  *
- * @param string $username
- * @param int $user_id
+ * @param string	$username
+ * @param int		$user_id
  * @return string URL
  */
-function util_make_url_u ($username, $user_id) {
+function util_make_url_u($username, $user_id) {
 	if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-		return util_make_url ("/developer/?user_id=$user_id");
+		return util_make_url("/developer/?user_id=$user_id");
 	} else {
-		return util_make_url ("/users/$username/");
+		return util_make_url("/users/$username/");
 	}
 }
 
 /**
  * Create a HTML link to a project's page
- * @param string $groupame
- * @param int $group_id
+ *
+ * @param string $group_name
+ * @param int    $group_id
  * @param string $text
  * @return string
  */
-function util_make_link_g ($groupname, $group_id,$text) {
-	$hook_params =array();
-	$hook_params['resource_type']  = 'group';
-	$hook_params['group_name'] = $groupname;
+function util_make_link_g($group_name, $group_id, $text) {
+	$hook_params = array();
+	$hook_params['resource_type'] = 'group';
+	$hook_params['group_name'] = $group_name;
 	$hook_params['group_id'] = $group_id;
 	$hook_params['link_text'] = $text;
 	$hook_params['group_link'] = '';
 	plugin_hook_by_reference('project_link_with_tooltip', $hook_params);
-	if($hook_params['group_link'] != '') {
+	if ($hook_params['group_link'] != '') {
 		return $hook_params['group_link'];
 	}
 
-	return '<a href="' . util_make_url_g ($groupname, $group_id) . '">' . $text . '</a>' ;
+	return '<a href="'.util_make_url_g($group_name, $group_id).'">'.$text.'</a>';
 }
 
 /**
  * Create URL for a project's page
  *
- * @param string $groupame
- * @param int $group_id
+ * @param string $group_name
+ * @param int    $group_id
  * @return string
  */
-function util_make_url_g ($groupame, $group_id) {
+function util_make_url_g($group_name, $group_id) {
 	if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
-		return util_make_url ("/project/?group_id=$group_id");
+		return util_make_url("/project/?group_id=$group_id");
 	} else {
-		return util_make_url ("/projects/$groupame/");
+		return util_make_url("/projects/$group_name/");
 	}
 }
 
-function util_ensure_value_in_set ($value, $set) {
-	if (in_array ($value, $set)) {
-		return $value ;
+function util_ensure_value_in_set($value, $set) {
+	if (in_array($value, $set)) {
+		return $value;
 	} else {
-		return $set[0] ;
+		return $set[0];
 	}
 }
 
+/**
+ * @param Group  $group
+ * @param string $email
+ * @param string $response
+ * @return bool
+ */
 function check_email_available($group, $email, &$response) {
 	// Check if a mailing list with same name already exists
 	if ($group->usesMail()) {
@@ -1278,10 +1305,10 @@ function check_email_available($group, $email, &$response) {
 			return false;
 		}
 		$farr = $ff->getForums();
-		$prefix = $group->getUnixName() . '-';
+		$prefix = $group->getUnixName().'-';
 		for ($j = 0; $j < count($farr); $j++) {
 			if (is_object($farr[$j])) {
-				if ($email == $prefix . $farr[$j]->getName()) {
+				if ($email == $prefix.$farr[$j]->getName()) {
 					$response .= _('Error: a forum with the same email address already exists.');
 					return false;
 				}
@@ -1301,7 +1328,7 @@ function use_javascript($js) {
 	return $GLOBALS['HTML']->addJavascript($js);
 }
 
-function use_stylesheet($css, $media='') {
+function use_stylesheet($css, $media = '') {
 	return $GLOBALS['HTML']->addStylesheet($css, $media);
 }
 
@@ -1311,34 +1338,33 @@ if (!function_exists('array_replace_recursive')) {
 	 * Replaces elements from passed arrays into the first array recursively
 	 * @param array $a1 The array in which elements are replaced.
 	 * @param array $a2 The array from which elements will be extracted.
-	 * @return Returns an array, or NULL if an error occurs.
+	 * @return array Returns an array, or NULL if an error occurs.
 	 */
-	function array_replace_recursive ($a1, $a2) {
-		$result = $a1 ;
+	function array_replace_recursive($a1, $a2) {
+		$result = $a1;
 
-		if (!is_array ($a2)) {
-			return $a2 ;
+		if (!is_array($a2)) {
+			return $a2;
 		}
 
 		foreach ($a2 as $k => $v) {
-			if (!is_array ($v) ||
-			    !isset ($result[$k]) || !is_array ($result[$k])) {
-				$result[$k] = $v ;
+			if (!is_array($v) ||
+				!isset($result[$k]) || !is_array($result[$k])) {
+				$result[$k] = $v;
 			}
 
-			$result[$k] = array_replace_recursive ($result[$k],
-							       $v) ;
+			$result[$k] = array_replace_recursive($result[$k], $v);
 		}
 
-		return $result ;
+		return $result;
 	}
 }
 
 // json_encode only appeared in PHP 5.2.0
 if (!function_exists('json_encode')) {
-	require_once $gfcommon.'include/minijson.php' ;
-	function json_encode ($a1) {
-		return minijson_encode ($a1) ;
+	require_once $gfcommon.'include/minijson.php';
+	function json_encode($a1) {
+		return minijson_encode($a1);
 	}
 }
 
@@ -1365,14 +1391,14 @@ function util_path_info_last_numeric_component() {
 	return false;
 }
 
-function get_cvs_binary_version () {
-	$string = `cvs --version 2>/dev/null | grep ^Concurrent.Versions.System.*client/server` ;
-	if (preg_match ('/^Concurrent Versions System .CVS. 1.11.[0-9]*/', $string)) {
-		return '1.11' ;
-	} elseif (preg_match ('/^Concurrent Versions System .CVS. 1.12.[0-9]*/', $string)) {
-		return '1.12' ;
+function get_cvs_binary_version() {
+	$string = `cvs --version 2>/dev/null | grep ^Concurrent.Versions.System.*client/server`;
+	if (preg_match('/^Concurrent Versions System .CVS. 1.11.[0-9]*/', $string)) {
+		return '1.11';
+	} elseif (preg_match('/^Concurrent Versions System .CVS. 1.12.[0-9]*/', $string)) {
+		return '1.12';
 	} else {
-		return '' ;
+		return '';
 	}
 }
 
@@ -1385,8 +1411,8 @@ function debug_string_backtrace() {
 
 	// Remove first item from backtrace as it's this function
 	// which is redundant.
-	$trace = preg_replace('/^#0\s+' . __FUNCTION__ . "[^\n]*\n/", '',
-	    $trace, 1);
+	$trace = preg_replace('/^#0\s+'.__FUNCTION__."[^\n]*\n/", '',
+		$trace, 1);
 
 	// Renumber backtrace items.
 	$trace = preg_replace('/^#(\d+)/me', '\'#\' . ($1 - 1)', $trace);
@@ -1398,12 +1424,12 @@ function util_ini_get_bytes($id) {
 	$val = trim(ini_get($id));
 	$last = strtolower($val[strlen($val)-1]);
 	switch ($last) {
-	case 'g':
-		$val *= 1024;
-	case 'm':
-		$val *= 1024;
-	case 'k':
-		$val *= 1024;
+		case 'g':
+			$val *= 1024;
+		case 'm':
+			$val *= 1024;
+		case 'k':
+			$val *= 1024;
 	}
 	return $val;
 }
@@ -1422,15 +1448,15 @@ function util_get_maxuploadfilesize() {
 
 function util_get_compressed_file_extension() {
 	$m = forge_get_config('compression_method');
-	if (preg_match ('/^gzip\b/', $m)) {
+	if (preg_match('/^gzip\b/', $m)) {
 		return '.gz';
-	} elseif (preg_match ('/^bzip2\b/', $m)) {
+	} elseif (preg_match('/^bzip2\b/', $m)) {
 		return '.bzip2';
-	} elseif (preg_match ('/^lzma\b/', $m)) {
+	} elseif (preg_match('/^lzma\b/', $m)) {
 		return '.lzma';
-	} elseif (preg_match ('/^xz\b/', $m)) {
+	} elseif (preg_match('/^xz\b/', $m)) {
 		return '.xz';
-	} elseif (preg_match ('/^cat\b/', $m)) {
+	} elseif (preg_match('/^cat\b/', $m)) {
 		return '';
 	} else {
 		return '.compressed';
@@ -1442,7 +1468,7 @@ function util_ifsetor(&$val, $default = false) {
 	return (isset($val) ? $val : $default);
 }
 
-function util_randbytes($num=6) {
+function util_randbytes($num = 6) {
 	$b = '';
 
 	// Let's try /dev/urandom first
@@ -1471,7 +1497,7 @@ function util_randbytes($num=6) {
 }
 
 /* maximum: 2^31 - 1 due to PHP weakness */
-function util_randnum($min=0,$max=32767) {
+function util_randnum($min = 0, $max = 32767) {
 	$ta = unpack("L", util_randbytes(4));
 	$n = $ta[1] & 0x7FFFFFFF;
 	$v = $n % (1 + $max - $min);
@@ -1479,11 +1505,11 @@ function util_randnum($min=0,$max=32767) {
 }
 
 // sys_get_temp_dir() is only available for PHP >= 5.2.1
-if ( !function_exists('sys_get_temp_dir')) {
+if (!function_exists('sys_get_temp_dir')) {
 	function sys_get_temp_dir() {
-		if ($temp=getenv('TMP'))    return $temp;
-		if ($temp=getenv('TEMP'))   return $temp;
-		if ($temp=getenv('TMPDIR')) return $temp;
+		if ($temp = getenv('TMP')) return $temp;
+		if ($temp = getenv('TEMP')) return $temp;
+		if ($temp = getenv('TMPDIR')) return $temp;
 		return '/tmp';
 	}
 }
@@ -1491,29 +1517,29 @@ if ( !function_exists('sys_get_temp_dir')) {
 /* convert '\n' to <br /> or </p><p> */
 function util_pwrap($encoded_string) {
 	return str_replace("<p></p>", "",
-	    str_replace("<br /></p>", "</p>",
-	    str_replace("<p><br />", "<p>",
-	    "<p>" . str_replace("<br /><br />", "</p><p>",
-	    implode("<br />", explode("\n",
-	    $encoded_string))) . "</p>")));
+		str_replace("<br /></p>", "</p>",
+			str_replace("<p><br />", "<p>",
+				"<p>".str_replace("<br /><br />", "</p><p>",
+					implode("<br />", explode("\n",
+						$encoded_string)))."</p>")));
 }
 
 /* takes a string and returns it HTML encoded, URIs made to hrefs */
-function util_uri_grabber($unencoded_string, $tryaidtid=false) {
+function util_uri_grabber($unencoded_string, $tryaidtid = false) {
 	/* escape all ^A and ^B as ^BX^B and ^BY^B, respectively */
 	$s = str_replace("\x01", "\x02X\x02", str_replace("\x02", "\x02Y\x02",
-	    $unencoded_string));
+		$unencoded_string));
 	/* replace all URIs with ^AURI^A */
 	$s = preg_replace(
-	    '|([a-zA-Z][a-zA-Z0-9+.-]*:[#0-9a-zA-Z;/?:@&=+$,_.!~*\'()%-]+)|',
-	    "\x01\$1\x01", $s);
+		'|([a-zA-Z][a-zA-Z0-9+.-]*:[#0-9a-zA-Z;/?:@&=+$,_.!~*\'()%-]+)|',
+		"\x01\$1\x01", $s);
 	if (!$s)
 		return htmlentities($unencoded_string, ENT_QUOTES, "UTF-8");
 	/* encode the string */
 	$s = htmlentities($s, ENT_QUOTES, "UTF-8");
 	/* convert 「^Afoo^A」 to 「<a href="foo">foo</a>」 */
 	$s = preg_replace('|\x01([^\x01]+)\x01|',
-	    '<a href="$1">$1</a>', $s);
+		'<a href="$1">$1</a>', $s);
 	if (!$s)
 		return htmlentities($unencoded_string, ENT_QUOTES, "UTF-8");
 //	/* convert [#123] to links if found */
@@ -1521,7 +1547,7 @@ function util_uri_grabber($unencoded_string, $tryaidtid=false) {
 //		$s = util_tasktracker_links($s);
 	/* convert ^BX^B and ^BY^B back to ^A and ^B, respectively */
 	$s = str_replace("\x02Y\x02", "\x02", str_replace("\x02X\x02", "\x01",
-	    $s));
+		$s));
 	/* return the final result */
 	return $s;
 }
@@ -1569,30 +1595,29 @@ function util_nat0(&$s) {
 
 /**
  * util_negociate_alternate_content_types() - Manage content-type negociation based on 'script_accepted_types' hooks
- * @param string $script
- * @param string $default_content_type
- * @param string $forced_content_type
+ * @param string		$script
+ * @param string		$default_content_type
+ * @param string|bool	$forced_content_type
  * @return string
  */
 function util_negociate_alternate_content_types($script, $default_content_type, $forced_content_type=false) {
 
 	$content_type = $default_content_type;
-	
-	// we can force the content-type to be returned automaticall if necessary
+
+	// we can force the content-type to be returned automatically if necessary
 	if ($forced_content_type) {
 		// TODO ideally, in this case we could try and apply the negociation to see if it matches 
 		// one provided by the hooks, but negotiateMimeType() doesn't allow this so for the moment, 
 		// we just force it whatever the hooks support
 		$content_type = $forced_content_type;
-	}
-	else {
+	} else {
 		// Invoke plugins' hooks 'script_accepted_types' to discover which alternate content types they would accept for /users/...
 		$hook_params = array();
 		$hook_params['script'] = $script;
 		$hook_params['accepted_types'] = array();
-		
+
 		plugin_hook_by_reference('script_accepted_types', $hook_params);
-		
+
 		if (count($hook_params['accepted_types'])) {
 			// By default, text/html is accepted
 			$accepted_types = array($default_content_type);
@@ -1603,7 +1628,7 @@ function util_negociate_alternate_content_types($script, $default_content_type, 
 			require_once 'HTTP.php';
 	
 			// negociate accepted content-type depending on the preferred ones declared by client
-			$http=new HTTP();
+			$http = new HTTP();
 			$content_type = $http->negotiateMimeType($accepted_types, false);
 		}
 	}
@@ -1614,32 +1639,31 @@ function util_negociate_alternate_content_types($script, $default_content_type, 
  * util_gethref() - Construct a hypertext reference
  *
  * @param	string	$baseurl
- *		(optional) base URL (absolute or relative);
+ *			(optional) base URL (absolute or relative);
  *			urlencoded, but not htmlencoded
- *		(default (falsy): PHP_SELF)
+ *			(default (falsy): PHP_SELF)
  * @param	array	$args
- *		(optional) associative array of unencoded query parameters;
+ *			(optional) associative array of unencoded query parameters;
  *			false values are ignored
  * @param	bool	$ashtml
- *		(optional) htmlencode the result?
- *		(default: true)
+ *			(optional) htmlencode the result?
+ *			(default: true)
  * @param	string	$sep
- *		(optional) argument separator ('&' or ';')
- *		(default: '&')
- * @return	string
- *		URL, possibly htmlencoded
+ *			(optional) argument separator ('&' or ';')
+ *			(default: '&')
+ * @return	string	URL, possibly htmlencoded
  */
-function util_gethref($baseurl=false, $args=array(), $ashtml=true, $sep='&') {
-	$rv = $baseurl ? $baseurl : getStringFromServer('PHP_SELF');
+function util_gethref($baseurl = '', $args = array(), $ashtml = true, $sep = '&') {
+	$rv = $baseurl? $baseurl : getStringFromServer('PHP_SELF');
 	$pfx = '?';
 	foreach ($args as $k => $v) {
 		if ($v === false) {
 			continue;
 		}
-		$rv .= $pfx . urlencode($k) . '=' . urlencode($v);
+		$rv .= $pfx.urlencode($k).'='.urlencode($v);
 		$pfx = $sep;
 	}
-	return ($ashtml ? util_html_encode($rv) : $rv);
+	return ($ashtml? util_html_encode($rv) : $rv);
 }
 
 /**
