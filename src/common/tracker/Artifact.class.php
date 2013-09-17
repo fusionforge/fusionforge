@@ -596,15 +596,7 @@ class Artifact extends Error {
 	 */
 	function setMonitor() {
 		if (session_loggedin()) {
-
 			$user_id=user_getid();
-			$user =& user_get_object(user_getid());
-			$email=' ';
-
-			//we don't want to include the "And email=" because
-			//a logged-in user's email may have changed
-			$email_sql='';
-
 		} else {
 			$this->setError(_('Valid Email Address Required'));
 			return false;
@@ -972,8 +964,7 @@ class Artifact extends Error {
 		//
 		//	Get a lock on this row in the database
 		//
-		$lock = db_query_params ('SELECT * FROM artifact WHERE artifact_id=$1 FOR UPDATE',
-					 array ($this->getID())) ;
+		db_query_params ('SELECT * FROM artifact WHERE artifact_id=$1 FOR UPDATE', array ($this->getID())) ;
 		$artifact_type_id = $this->ArtifactType->getID();
 		//
 		//	Attempt to move this Artifact to a new ArtifactType
@@ -1353,7 +1344,7 @@ class Artifact extends Error {
 				} elseif (($type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX)) {
 					$extra_fields[$efid]=array('100');
 				} else {
-					$resdel = db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1 AND extra_field_id=$2',
+					db_query_params ('DELETE FROM artifact_extra_field_data WHERE artifact_id=$1 AND extra_field_id=$2',
 								   array ($this->getID(),
 									  $efid)) ;
 					continue;
