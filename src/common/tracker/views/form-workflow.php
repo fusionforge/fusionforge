@@ -27,14 +27,14 @@ $has_error = false;
 $efarr = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELDTYPE_STATUS));
 if (count($efarr) === 0) {
 	$has_error = true;
-	$error_msg .= _('To create a workflow, you need first to create a custom field of type \'Status\'.');
+	$error_msg .= _('To create a workflow, you need first to create a custom field of type “Status”.');
 } elseif (count($efarr) !== 1) {
 	// Internal error.
 	$has_error = true;
 	$error_msg .= _('Internal error: Illegal number of status fields (WKFL01).');
 }
 
-$ath->adminHeader(array('title'=> _('Configure workflow'),
+$ath->adminHeader(array('title'=> _('Configure Workflow'),
 	'pagename'=>'tracker_admin_customize_liste',
 	'titlevals'=>array($ath->getName())));
 
@@ -54,7 +54,7 @@ if (!$has_error) {
 
 ?>
 
-	<h2><?php printf(_('Allowed initial values for the %1$s field'), $field_name) ?></h2>
+	<h2><?php printf(_('Allowed initial values for the %s field'), $field_name) ?></h2>
 	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 	<input type="hidden" name="field_id" value="<?php echo $field_id ?>" />
 	<input type="hidden" name="workflow" value="1" />

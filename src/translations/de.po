@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 18:41+0200\n"
+"POT-Creation-Date: 2013-09-17 19:01+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -7219,7 +7219,7 @@ msgstr "Freitext für die \"Durchsuche Objekte\" Seite"
 #, fuzzy
 msgid ""
 "To create a workflow, you need first to create a custom field of type "
-"'Status'."
+"“Status”."
 msgstr ""
 "Um einen Workflow zu erzeugen müssen Sie zuerst ein benutzerdefiniertes Feld "
 "des 'Status'-Typs anlegen."
@@ -7229,13 +7229,13 @@ msgid "Internal error: Illegal number of status fields (WKFL01)."
 msgstr ""
 
 #: common/tracker/views/form-workflow.php:37
-msgid "Configure workflow"
+msgid "Configure Workflow"
 msgstr "Workflow konfigurieren"
 
 #: common/tracker/views/form-workflow.php:57
 #, fuzzy, php-format
-msgid "Allowed initial values for the %1$s field"
-msgstr "Erlaubte Ausgangswerte für das %1$s - Feld"
+msgid "Allowed initial values for the %s field"
+msgstr "Erlaubte Ausgangswerte für das %s - Feld"
 
 #: common/tracker/views/form-workflow.php:63
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:48

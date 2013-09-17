@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 18:41+0200\n"
+"POT-Creation-Date: 2013-09-17 19:01+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -7193,7 +7193,7 @@ msgstr "Texto de formulario libre para a páxina de \"navegar polos elementos\""
 #: common/tracker/views/form-workflow.php:30
 msgid ""
 "To create a workflow, you need first to create a custom field of type "
-"'Status'."
+"“Status”."
 msgstr ""
 "Para crear un fluxo de traballo, precisa crear un campo personalizado do "
 "tipo 'Estado'."
@@ -7203,13 +7203,13 @@ msgid "Internal error: Illegal number of status fields (WKFL01)."
 msgstr ""
 
 #: common/tracker/views/form-workflow.php:37
-msgid "Configure workflow"
+msgid "Configure Workflow"
 msgstr "Configurar o fluxo de traballo"
 
 #: common/tracker/views/form-workflow.php:57
 #, php-format
-msgid "Allowed initial values for the %1$s field"
-msgstr "Valores iniciais permitidos para o campo %1$s"
+msgid "Allowed initial values for the %s field"
+msgstr "Valores iniciais permitidos para o campo %s"
 
 #: common/tracker/views/form-workflow.php:63
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:48
@@ -23970,6 +23970,16 @@ msgstr "Non se introduciu un nome de usuario"
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
 
+#~ msgid ""
+#~ "To create a workflow, you need first to create a custom field of type "
+#~ "'Status'."
+#~ msgstr ""
+#~ "Para crear un fluxo de traballo, precisa crear un campo personalizado do "
+#~ "tipo 'Estado'."
+
+#~ msgid "Allowed initial values for the %1$s field"
+#~ msgstr "Valores iniciais permitidos para o campo %1$s"
+
 #~ msgid "Use the \"Browse\" button to find the file you want to attach"
 #~ msgstr ""
 #~ "Empregue o botón de  \"Explorar\" para atopar o ficheiro que quere anexar"
@@ -25087,16 +25097,6 @@ msgstr "Páxina persoal de %s"
 #~ msgid " (examples: meeting minutes, test results, RFP Docs)"
 #~ msgstr ""
 #~ " (exemplos: minutos de reunión, resultados do test, Documentos do RFP)"
-
-#~ msgid ""
-#~ "To create a workflow, you need first to create a custom field of type "
-#~ "“Status”."
-#~ msgstr ""
-#~ "Para crear un fluxo de traballo, precisa crear un campo personalizado do "
-#~ "tipo 'Estado'."
-
-#~ msgid "Allowed initial values for the %s field"
-#~ msgstr "Valores iniciais permitidos para o campo %s"
 
 #~ msgid "You are not monitoring any files."
 #~ msgstr "Non está a monitorizar ningún ficheiro."

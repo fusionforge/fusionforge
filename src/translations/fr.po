@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 18:41+0200\n"
+"POT-Creation-Date: 2013-09-17 19:01+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -3311,8 +3311,8 @@ msgstr "Erreur lors de la mise à jour de l'état Unix du groupe : %s"
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
-"Erreur lors de la mise à jour de l'état du système de création de "
-"documents en ligne : %s"
+"Erreur lors de la mise à jour de l'état du système de création de documents "
+"en ligne : %s"
 
 #: common/include/Group.class.php:2903
 #, php-format
@@ -6934,23 +6934,23 @@ msgstr "Texte libre pour la page de navigation"
 #: common/tracker/views/form-workflow.php:30
 msgid ""
 "To create a workflow, you need first to create a custom field of type "
-"'Status'."
+"“Status”."
 msgstr ""
-"Pour créer un processus, vous devez d'abord créer un champ personnalisé de "
-"type « état »."
+"Pour définir des transitions, vous devez d'abord créer un champ "
+"supplémentaire de type « État »."
 
 #: common/tracker/views/form-workflow.php:34
 msgid "Internal error: Illegal number of status fields (WKFL01)."
 msgstr "Erreur interne : nombre de champs d'état invalide."
 
 #: common/tracker/views/form-workflow.php:37
-msgid "Configure workflow"
-msgstr "Configurer le processus"
+msgid "Configure Workflow"
+msgstr "Configuration des transitions"
 
 #: common/tracker/views/form-workflow.php:57
 #, php-format
-msgid "Allowed initial values for the %1$s field"
-msgstr "Valeurs initiales autorisées pour le champ %1$s"
+msgid "Allowed initial values for the %s field"
+msgstr "Valeurs initiales autorisées pour le champ %s"
 
 #: common/tracker/views/form-workflow.php:63
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:48
@@ -15509,8 +15509,7 @@ msgstr "Afficher les utilisateurs commençant par :"
 #: www/admin/index.php:62
 msgid "Search <em>(userid, username, realname, email)</em>"
 msgstr ""
-"Rechercher <em>(identifiant, nom d'utilisateur, nom complet, email)</"
-"em>"
+"Rechercher <em>(identifiant, nom d'utilisateur, nom complet, email)</em>"
 
 #: www/admin/index.php:70
 msgid "Register a New User"
@@ -23355,6 +23354,19 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
+#~ msgid ""
+#~ "To create a workflow, you need first to create a custom field of type "
+#~ "'Status'."
+#~ msgstr ""
+#~ "Pour créer un processus, vous devez d'abord créer un champ personnalisé "
+#~ "de type « état »."
+
+#~ msgid "Configure workflow"
+#~ msgstr "Configurer le processus"
+
+#~ msgid "Allowed initial values for the %1$s field"
+#~ msgstr "Valeurs initiales autorisées pour le champ %1$s"
+
 #~ msgid "Use the \"Browse\" button to find the file you want to attach"
 #~ msgstr ""
 #~ "Utiliser le bouton « Parcourir » pour trouver le fichier que vous voulez "
@@ -24883,9 +24895,6 @@ msgstr "Page personnelle de %s"
 #~ "Choisir l'ordre des champs qui seront affichés dans l'écran de navigation "
 #~ "de votre outil de suivi"
 
-#~ msgid "Configure Workflow"
-#~ msgstr "Configuration des transitions"
-
 #~ msgid "Manage Canned Responses"
 #~ msgstr "Gérer les réponses type"
 
@@ -25120,16 +25129,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Field Size: "
 #~ msgstr "Taille du champ : "
-
-#~ msgid ""
-#~ "To create a workflow, you need first to create a custom field of type "
-#~ "“Status”."
-#~ msgstr ""
-#~ "Pour définir des transitions, vous devez d'abord créer un champ "
-#~ "supplémentaire de type « État »."
-
-#~ msgid "Allowed initial values for the %s field"
-#~ msgstr "Valeurs initiales autorisées pour le champ %s"
 
 #~ msgid "Configuring Workflow for the %s field"
 #~ msgstr "Configuration des transitions pour le champ %s"

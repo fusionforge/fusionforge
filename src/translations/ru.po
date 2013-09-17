@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 18:41+0200\n"
+"POT-Creation-Date: 2013-09-17 19:01+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7185,7 +7185,7 @@ msgstr ""
 #: common/tracker/views/form-workflow.php:30
 msgid ""
 "To create a workflow, you need first to create a custom field of type "
-"'Status'."
+"“Status”."
 msgstr ""
 
 #: common/tracker/views/form-workflow.php:34
@@ -7193,12 +7193,12 @@ msgid "Internal error: Illegal number of status fields (WKFL01)."
 msgstr ""
 
 #: common/tracker/views/form-workflow.php:37
-msgid "Configure workflow"
+msgid "Configure Workflow"
 msgstr ""
 
 #: common/tracker/views/form-workflow.php:57
 #, php-format
-msgid "Allowed initial values for the %1$s field"
+msgid "Allowed initial values for the %s field"
 msgstr ""
 
 #: common/tracker/views/form-workflow.php:63

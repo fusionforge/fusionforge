@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 18:41+0200\n"
+"POT-Creation-Date: 2013-09-17 19:01+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -6970,23 +6970,23 @@ msgstr "Texto libre para la página \"navega por los elementos\""
 #: common/tracker/views/form-workflow.php:30
 msgid ""
 "To create a workflow, you need first to create a custom field of type "
-"'Status'."
+"“Status”."
 msgstr ""
 "Para crear un flujo de trabajo, primero debe crear un campo personalizado "
-"del tipo 'Status'."
+"del tipo “Status”."
 
 #: common/tracker/views/form-workflow.php:34
 msgid "Internal error: Illegal number of status fields (WKFL01)."
 msgstr "Error Interno: Ilegal numero de campos de estado (WKFL01)."
 
 #: common/tracker/views/form-workflow.php:37
-msgid "Configure workflow"
+msgid "Configure Workflow"
 msgstr "Configurar flujo de trabajo"
 
 #: common/tracker/views/form-workflow.php:57
 #, php-format
-msgid "Allowed initial values for the %1$s field"
-msgstr "Valores iniciales permitidos para el campo %1$s"
+msgid "Allowed initial values for the %s field"
+msgstr "Valores iniciales permitidos para el campo %s"
 
 #: common/tracker/views/form-workflow.php:63
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:48
@@ -23260,6 +23260,16 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
 
+#~ msgid ""
+#~ "To create a workflow, you need first to create a custom field of type "
+#~ "'Status'."
+#~ msgstr ""
+#~ "Para crear un flujo de trabajo, primero debe crear un campo personalizado "
+#~ "del tipo 'Status'."
+
+#~ msgid "Allowed initial values for the %1$s field"
+#~ msgstr "Valores iniciales permitidos para el campo %1$s"
+
 #~ msgid "Use the \"Browse\" button to find the file you want to attach"
 #~ msgstr "Use el botón \"Navegar\" para buscar el fichero que quiere adjuntar"
 
@@ -24283,16 +24293,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Copy choices from custom field %s"
 #~ msgstr "Copiar elecciones desde el campo personalizado %s"
-
-#~ msgid ""
-#~ "To create a workflow, you need first to create a custom field of type "
-#~ "“Status”."
-#~ msgstr ""
-#~ "Para crear un flujo de trabajo, primero debe crear un campo personalizado "
-#~ "del tipo “Status”."
-
-#~ msgid "Allowed initial values for the %s field"
-#~ msgstr "Valores iniciales permitidos para el campo %s"
 
 #~ msgid "Activity Percentile"
 #~ msgstr "Percentil de actividad"
