@@ -784,19 +784,20 @@ Or reply to this e-mail entering your response between the following markers:
 	/**
 	 *	updatemsg - impacts in the DB the new content of the message
 	 *
-	 *	@param	string	The forum ID
-	 *	@param 	int		The id of the user that is posting the message
-	 *	@param	string	The subject of the message.
-	 *	@param	string	The body of the message.
-	 *	@param	string	The post date
-	 *	@param	int		The message_id of the parent message, if any.
-	 *	@param	int		The thread_id of the message, if known.
-	 *	@param	int		has followups?
-	 *	@param	string	The most recent date.
+	 *	@param	string	$group_forum_id		The forum ID
+	 *	@param 	int		$posted_by			The id of the user that is posting the message
+	 *	@param	string	$subject			The subject of the message.
+	 *	@param	string	$body				The body of the message.
+	 *	@param	string	$post_date			The post date
+	 *	@param	int		$is_followup_to		The message_id of the parent message, if any.
+	 *	@param	int		$thread_id			The thread_id of the message, if known.
+	 *	@param	int		$has_followups		has followups?
+	 *	@param	string	$most_recent_date	The most recent date.
 	 *
 	 *	@return boolean success.
 	 */
-	function updatemsg($group_forum_id,$posted_by,$subject,$body,$post_date,$is_followup_to,$thread_id,$has_followups,$most_recent_date) {
+	function updatemsg($group_forum_id, $posted_by, $subject, $body,
+					   $post_date, $is_followup_to, $thread_id, $has_followups, $most_recent_date) {
 		if (!strlen(trim($body)) || !strlen(trim($subject))) {
 			$this->setError(_('Error: a forum message must include a message body and a subject.'));
 			return false;
