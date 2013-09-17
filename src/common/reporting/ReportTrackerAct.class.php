@@ -59,14 +59,14 @@ function ReportTrackerAct($span,$group_id,$atid,$start=0,$end=0) {
 		$this->setError('No group_id');
 		return false;
 	}
-	
+
 	switch ($span) {
 		case REPORT_TYPE_WEEKLY: {
-			$arr =& $this->getWeekStartArr();
+			$arr = $this->getWeekStartArr();
 			break;
 		}
 		default: {
-			$arr =& $this->getMonthStartArr();
+			$arr = $this->getMonthStartArr();
 			break;
 		}
 	}
