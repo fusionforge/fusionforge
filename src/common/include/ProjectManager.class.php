@@ -25,9 +25,6 @@
 class ProjectManager {
 
     /**
-
-
-    /**
      * Hold an instance of the class
      */
     private static $_instance;
