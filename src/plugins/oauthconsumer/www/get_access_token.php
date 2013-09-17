@@ -43,7 +43,7 @@ if(count($providers)>0)	{
 	<table class="width75" align="center" cellspacing="1">
 
 		<tr>
-		<td class="form-title" colspan="2"><?php echo _("<b>".$f_provider_name."</b>") ?></td>
+		<td class="form-title" colspan="2"><b><?php echo $f_provider_name; ?></b></td>
 		</tr>
 
 		<tr>
