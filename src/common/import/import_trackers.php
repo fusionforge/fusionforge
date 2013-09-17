@@ -315,8 +315,9 @@ function createArtifacts($at, $data, $hashrn, $hashlogin) {
 }
 /**
  * tracker_fill - Create trackers from an array in a given group
- * @param array Trackers part of a JSON pluck, including label, artifacts, vocabulary...
- * @param int	Group id of the group where the trackers should be added
+ * @param array $trackers	Trackers part of a JSON pluck, including label, artifacts, vocabulary...
+ * @param int	$group_id	Group id of the group where the trackers should be added
+ * @param array	$users
  */
 function tracker_fill($trackers, $group_id, $users){
 

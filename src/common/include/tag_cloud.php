@@ -68,16 +68,17 @@ $SELECTED_STYLE = 'style="text-decoration:overline underline;"';
  * 				 F(count) = size = A * count + 1 - A * Cmin
  * 				 => size = 1 + (count  - Cmin) * A
  *
- * @param		array	selected tag, max tag displayed, number of sizes available,
- * 						class prefix for css class, style for selected tag
+ * @param	array	$params	selected tag, max tag displayed, number of sizes available,
+ * 							class prefix for css class, style for selected tag
+ * @return string
  */
-function tag_cloud($params = '') {
+function tag_cloud($params = array()) {
 	global $NB_SIZE;
 	global $NB_MAX;
 	global $CLASS_PREFIX;
 	global $SELECTED_STYLE;
 
-	if (! is_array($params)) $parames = array();
+	if (! is_array($params)) $params = array();
 	if (! isset($params['selected'])) {
 		$params['selected'] = '';
 	}
@@ -169,6 +170,7 @@ function tag_cloud($params = '') {
  * 						where the tag is defined.
  *
  * @param		int		Group ID
+ * @return string
  */
 function list_project_tag($group_id) {
 	$req = 'SELECT name FROM project_tags WHERE group_id = $1';

@@ -88,13 +88,13 @@ class ArtifactExtraField extends Error {
 	 *	a tracker.  This function is only used to create rows for boxes
 	 *	configured by the admin.
 	 *
-	 *	@param	string	Name of the extra field.
-	 *	@param	int	The type of field - radio, select, text, textarea
-	 *	@param	int	Attribute1 - for text (size) and textarea (rows)
-	 *	@param	int	Attribute2 - for text (maxlength) and textarea (cols)
-	 *	@param	int	is_required - true or false whether this is a required field or not.
-	 *	@param	string	alias - alias for this extra field (optional)
-	 *  @return 	true on success / false on failure.
+	 *	@param	string	$name        Name of the extra field.
+	 *	@param	int	    $field_type  The type of field - radio, select, text, textarea
+	 *	@param	int	    $attribute1  For text (size) and textarea (rows)
+	 *	@param	int     $attribute2  For text (maxlength) and textarea (cols)
+	 *	@param	int     $is_required True or false whether this is a required field or not.
+	 *	@param	string	$alias       Alias for this extra field (optional)
+	 *  @return bool	true on success / false on failure.
 	 */
 	function create($name,$field_type,$attribute1,$attribute2,$is_required=0,$alias='') {
 		//
@@ -360,12 +360,12 @@ class ArtifactExtraField extends Error {
 	 *  for boxes configured by
 	 *  the admin.
 	 *
-	 *  @param	string	Name of the field.
-	 *	@param	int	Attribute1 - for text (size) and textarea (rows)
-	 *	@param	int	Attribute2 - for text (maxlength) and textarea (cols)
-	 *	@param	int	is_required - true or false whether this is a required field or not.
-	 *	@param	string	Alias for this field
-	 *  @return	boolean	success.
+	 *  @param	string $name        Name of the field.
+	 *	@param	int	   $attribute1  For text (size) and textarea (rows)
+	 *	@param	int	   $attribute2  For text (maxlength) and textarea (cols)
+	 *	@param	int	   $is_required True or false whether this is a required field or not.
+	 *	@param	string $alias       Alias for this field
+	 *  @return	bool success.
 	 */
 	function update($name,$attribute1,$attribute2,$is_required=0,$alias="") {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {

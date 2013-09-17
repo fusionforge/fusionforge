@@ -42,11 +42,11 @@ function doc_get_state_box($checkedval = 'xzxz', $removedval = '') {
 /**
  * docman_fill_zip - Recursive function to add docgroup and documents inside zip for backup
  *
- * @param	$object	zip
- * @param	$array	nested groups
- * @param	$object	documentfactory
- * @param	$int	documentgroup id : default value = 0
- * @param	$string	documentgroup parent name : default value = empty
+ * @param	object	$zip
+ * @param	array	$nested_groups
+ * @param	object	$document_factory
+ * @param	int		$docgroup id : default value = 0
+ * @param	string	$parent_docname parent name : default value = empty
  * @return	boolean	success or not
  * @access	public
  */

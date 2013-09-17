@@ -155,7 +155,7 @@ function session_check_session_cookie($session_cookie) {
  *	This function destroys object associated with the current session,
  *	making user "logged out".  Deletes both user and session cookies.
  *
- *	@return true/false
+ * @return	bool	true/false
  *
  */
 function session_logout() {
@@ -176,18 +176,17 @@ function session_logout() {
  *	High-level function for user login. Check credentials, and if they
  *	are valid, open new session.
  *
- *	@param		string	User name
- *	@param		string	User password (in clear text)
- *	@param		bool	Allow login to non-confirmed user account (only for confirmation of the very account)
- *	@return true/false, if false reason is in global $feedback
- *	@access public
+ *	@param	string		$loginname    User name
+ *	@param	string		$passwd       User password (in clear text)
+ *	@param	bool|int	$allowpending Allow login to non-confirmed user account (only for confirmation of the very account)
+ *	@return	bool		true/false, if false reason is in global $feedback
  *
  */
-function session_login_valid($loginname, $passwd, $allowpending=0) {
+function session_login_valid($loginname, $passwd, $allowpending = 0) {
 	global $feedback, $error_msg, $warning_msg;
 
 	if (!$loginname || !$passwd) {
-		$warning_msg = _('Missing Password Or Users Name');
+		$warning_msg = _('Missing Password Or User Name');
 		return false;
 	}
 
@@ -286,28 +285,28 @@ function session_login_valid_dbonly($loginname, $passwd, $allowpending) {
 		// Let's check the status of this user
 
 		// if allowpending (for verify.php) then allow
-		$userstatus=$usr['status'];
+		$userstatus = $usr['status'];
 		if ($allowpending && ($usr['status'] == 'P')) {
 			//1;
 		} else {
 			if ($usr['status'] == 'S') {
 				//acount suspended
-				$warning_msg = _('Account Suspended');
+				$feedback = _('Account Suspended');
 				return false;
 			}
 			if ($usr['status'] == 'P') {
 				//account pending
-				$warning_msg = _('Account Pending');
+				$feedback = _('Account Pending');
 				return false;
 			}
 			if ($usr['status'] == 'D') {
 				//account deleted
-				$warning_msg = _('Account Deleted');
+				$feedback = _('Account Deleted');
 				return false;
 			}
 			if ($usr['status'] != 'A') {
 				//unacceptable account flag
-				$warning_msg = _('Account Not Active');
+				$feedback = _('Account Not Active');
 				return false;
 			}
 		}
@@ -329,9 +328,9 @@ function session_login_valid_dbonly($loginname, $passwd, $allowpending) {
  *      For IPv6 addresses, no fuzz is needed since there's
  *      usually no NAT in IPv6.
  *
- *	@param		string	The old IP address
- *	@param		string	The new IP address
- *	@return true/false
+ *	@param	string	$oldip	The old IP address
+ *	@param	string	$newip	The new IP address
+ *	@return	bool	true/false
  *	@access private
  */
 function session_check_ip($oldip, $newip) {
@@ -358,8 +357,7 @@ function session_check_ip($oldip, $newip) {
 /**
  *	session_issecure() - Check if current session is secure
  *
- *	@return true/false
- *	@access public
+ *	@return bool
  */
 function session_issecure() {
 	return (strtoupper(getStringFromServer('HTTPS')) == "ON");
@@ -371,10 +369,10 @@ function session_issecure() {
  *	Set a cookie with default temporal scope of the current browser session
  *	and URL space of the current webserver
  *
- *	@param		string	Name of cookie
- *	@param		string	Value of cookie
- *	@param		string	Domain scope (default '')
- *	@param		string	Expiration time in UNIX seconds (default 0)
+ *	@param	string	$name		Name of cookie
+ *	@param	string	$value		Value of cookie
+ *	@param	string	$domain		Domain scope (default '')
+ *	@param	int		$expiration	Expiration time in UNIX seconds (default 0)
  */
 function session_set_cookie($name, $value, $domain='', $expiration=0) {
 	return session_cookie($name, $value, $domain, $expiration);
@@ -458,16 +456,18 @@ function session_redirect404() {
  *	Calling page will terminate with error message if current user
  *	fails checks.
  *
- *	@param		array	Associative array specifying criteria
- *	@return does not return if check is failed
+ * @deprecated
  *
+ *	@param array         $req   Associative array specifying criteria
+ *	@param string        $reason
+ *	@return does not return if check is failed
  */
-function session_require($req, $reason='') {
+function session_require($req, $reason = '') {
 	if (!session_loggedin()) {
 		exit_not_logged_in();
 	}
 
-	$user =& user_get_object(user_getid());
+	$user = user_get_object(user_getid());
 	if (!$user->isActive()) {
 		session_logout();
 		exit_error(_('Your account is no longer active; you have been disconnected'), '');
@@ -507,7 +507,7 @@ function session_require($req, $reason='') {
  *	fails checks.
  *
  */
-function session_require_perm($section, $reference, $action=NULL, $reason='') {
+function session_require_perm($section, $reference, $action = NULL, $reason = '') {
 	if (!forge_check_perm($section, $reference, $action)) {
 		exit_permission_denied($reason, $section);
 	}
@@ -549,8 +549,7 @@ function session_require_login() {
  *	This function sets up SourceForge session for the given user,
  *	making one be "logged in".
  *
- *	@param		int		The user ID
- *	@return none
+ *	@param	int	$user_id	The user ID
  */
 function session_set_new($user_id) {
 	$token = session_build_session_token($user_id);
@@ -588,7 +587,7 @@ function session_set_new($user_id) {
 	}
 }
 
-function session_set_internal($user_id, $res=false) {
+function session_set_internal($user_id, $res = false) {
 	global $G_SESSION;
 
 	$G_SESSION = user_get_object($user_id, $res);
@@ -603,8 +602,6 @@ function session_set_internal($user_id, $res=false) {
  *	session_set_admin() - Setup session for the admin user
  *
  *	This function sets up a session for the administrator
- *
- *	@return none
  */
 function session_set_admin() {
 	$admins = RBACEngine::getInstance()->getUsersByAllowedAction('forge_admin', -1);
@@ -627,11 +624,12 @@ function session_set_admin() {
 }
 
 /**
- *	Private optimization function for logins - fetches user data, language, and session
- *	with one query
+ * Private optimization function for logins - fetches user data, language, and session
+ * with one query
  *
- *	@param	int		The user ID
+ *	@param	int	$user_id	The user ID
  *	@access private
+ *	@return resource
  */
 function session_getdata($user_id) {
 	return db_query_params('SELECT u.*, sl.language_id, sl.name,
@@ -649,8 +647,6 @@ function session_getdata($user_id) {
  *
  *	This function checks that the user is logged in and if so, initialize
  *	internal session environment.
- *
- *	@return none
  */
 function session_set() {
 	global $G_SESSION;
@@ -787,13 +783,13 @@ function session_continue($sessionKey) {
 }
 
 function setup_tz_from_context() {
-	$LUSER =& session_get_user();
-	if (!is_object($LUSER) || $LUSER->isError()) {
+	$user = session_get_user();
+	if (!is_object($user) || $user->isError()) {
 		$tz = forge_get_config('default_timezone');
 	} else {
-		$tz = $LUSER->getTimeZone();
+		$tz = $user->getTimeZone();
 	}
-	putenv('TZ=' . $tz);
+	putenv('TZ='.$tz);
 	date_default_timezone_set($tz);
 }
 
@@ -816,8 +812,9 @@ function user_getid() {
 	global $G_SESSION;
 	if ($G_SESSION) {
 		return $G_SESSION->getID();
+	} else {
+		return false;
 	}
-	return false;
 }
 
 /**
@@ -829,8 +826,9 @@ function session_loggedin() {
 
 	if ($G_SESSION) {
 		return $G_SESSION->isLoggedIn();
+	} else {
+		return false;
 	}
-	return false;
 }
 
 // Local Variables:

@@ -29,14 +29,14 @@
  * @param		string	Error toptab
  */
 function exit_error($title,$toptab='') {
-	print 'ERROR - '.$title;
+	print 'Error: '.$title;
 	exit;
 }
 
 /**
  * exit_permission_denied() - Return a 'Permission Denied' error
- * @param   string  $reason_descr
- * @param   string  toptab needed for navigation
+ * @param   $reason_descr   string
+ * @param   $toptab         string  toptab needed for navigation
  */
 function exit_permission_denied($reason_descr='',$toptab='') {
 	exit_error('PERMISSION DENIED');
@@ -58,9 +58,9 @@ function exit_no_group() {
 
 /**
  * exit_missing_param() - Return a 'Missing Required Parameters' error
- * @param   string  URL : usually $_SERVER['HTTP_REFERER']
- * @param   array   array of missing parameters
- * @param   string  toptab needed for navigation
+ * @param   string  $url			URL : usually $_SERVER['HTTP_REFERER']
+ * @param   array   $missing_params	array of missing parameters
+ * @param   string  $toptab 		needed for navigation
  */
 function exit_missing_param($url='',$missing_params=array(),$toptab='') {
 	exit_error('MISSING REQUIRED PARAMETERS');

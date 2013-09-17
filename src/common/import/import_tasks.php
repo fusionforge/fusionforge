@@ -216,7 +216,7 @@ class Tasks{
 
 	/**
 	 * deleteTrackers - Delete all existing default trackers from a projet
-	 * @param Group A Group object
+	 * @param object	Group A Group object
 	 */
 	function deleteTrackers(){
 		$pgf = new ProjectGroupFactory($this->group);

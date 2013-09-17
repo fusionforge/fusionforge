@@ -45,35 +45,35 @@ function account_pwvalid($pw) {
  * @return		bool	true on success/false on failure
  *
  */
-function account_namevalid($name, $unix=0) {
+function account_namevalid($name, $unix=false) {
 
 	if (!$unix) {
 		// If accounts comes from ldap and no shell access, then disable controls.
 		$pluginManager = plugin_manager_get_object();
-		if (!forge_get_config('use_shell') && $pluginManager->PluginIsInstalled('authldap')) {
-			return 1;
+		if (!forge_get_config('use_shell') && $pluginManager->PluginIsInstalled('ldapextauth')) {
+			return true;
 		}
 	}
 
 	// no spaces
 	if (strrpos($name,' ') > 0) {
 		$GLOBALS['register_error'] = _('There cannot be any spaces in the login name.');
-		return 0;
+		return false;
 	}
 
 	// min and max length
 	if (strlen($name) < 3) {
 		$GLOBALS['register_error'] = _('Name is too short. It must be at least 3 characters.');
-		return 0;
+		return false;
 	}
 	if (strlen($name) > 15) {
 		$GLOBALS['register_error'] = _('Name is too long. It must be less than 15 characters.');
-		return 0;
+		return false;
 	}
 
 	if (!preg_match('/^[a-z0-9][-a-z0-9_\.]+$/', $name)) {
 		$GLOBALS['register_error'] = _('Illegal character in name.');
-		return 0;
+		return false;
 	}
 
 	// illegal names
@@ -82,24 +82,24 @@ function account_namevalid($name, $unix=0) {
 		. "debian|ns|download)$";
 	if( preg_match("/$regExpReservedNames/i", $name) ) {
 		$GLOBALS['register_error'] = _('Name is reserved.');
-		return 0;
+		return false;
 	}
 	if (forge_get_config('use_shell')) {
-		if ( exec("getent passwd $name") != "" ){
+		if (exec("getent passwd $name") != "" ){
 			$GLOBALS['register_error'] = _('That username already exists.');
-			return 0;
+			return false;
 		}
-		if ( exec("getent group $name") != "" ){
+		if (exec("getent group $name") != "" ){
 			$GLOBALS['register_error'] = _('That username already exists.');
-			return 0;
+			return false;
 		}
 	}
 	if (preg_match("/^(anoncvs_)/i",$name)) {
 		$GLOBALS['register_error'] = _('Name is reserved for CVS.');
-		return 0;
+		return false;
 	}
 
-	return 1;
+	return true;
 }
 
 /**

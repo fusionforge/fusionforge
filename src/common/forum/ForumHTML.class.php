@@ -295,11 +295,11 @@ class ForumHTML extends Error {
 	/**
 	 *  LinkAttachEditForm - Returns the link to the attach form for editing
 	 *
-	 *	@param 		string	Filename
-	 *	@param 		int		group id
-	 *	@param 		int		forum id
-	 *	@param 		int		attach id
-	 *	@param 		int		msg id
+	 * @param string $filename Filename
+	 * @param int	$group_id group id
+	 * @param int	$forum_id forum id
+	 * @param int	$attachid attach id
+	 * @param int	$msg_id   msg id
 	 *
 	 *	@return		The HTML output
 	 */
@@ -318,7 +318,7 @@ class ForumHTML extends Error {
 			<table>
 
 					<tr>
-						<td>' . _('Use the "Browse" button to find the file you want to attach') . '</td>
+						<td>' . _('Use the “Browse” button to find the file you want to attach') . '</td>
 					</tr>
 					<tr>
 						<td>' . _('File to upload') . ':   <input type="file" name="attachment1"/></td>
@@ -326,14 +326,14 @@ class ForumHTML extends Error {
 					<tr>
 						<td class="warning">' . _('Warning: Uploaded file will replace current file') . '</td>
 					</tr>
-			</table>
-				<input type="submit" name="go" value="'._('Update').'" />
-			<input type="hidden" name="doedit" value="1"/>
-			<input type="hidden" name="edit" value="yes"/>
-			<input type="hidden" name="forum_id" value="'.$forum_id.'"/>
-			<input type="hidden" name="group_id" value="'.$group_id.'"/>
-			<input type="hidden" name="attachid" value="'.$attachid.'"/>
-			<input type="hidden" name="msg_id" value="'.$msg_id.'"/>
+				</table>
+			<input type="submit" name="go" value="'._('Update').'" />
+			<input type="hidden" name="doedit" value="1" />
+			<input type="hidden" name="edit" value="yes" />
+			<input type="hidden" name="forum_id" value="'.$forum_id.'" />
+			<input type="hidden" name="group_id" value="'.$group_id.'" />
+			<input type="hidden" name="attachid" value="'.$attachid.'" />
+			<input type="hidden" name="msg_id" value="'.$msg_id.'" />
 			</fieldset>
 			</form>
 			<p/>';
@@ -501,7 +501,7 @@ class ForumHTML extends Error {
 		$is_followup_to = $msg->getParentID();
 		$has_followups = $msg->hasFollowups();
 		$most_recent_date = $msg->getMostRecentDate();
-		$g =& $this->Forum->getGroup();
+		$g = $this->Forum->getGroup();
 		$group_id = $g->getID();
 
 		if (forge_check_perm ('forum', $this->Forum->getID(), 'post')) { // minor control, but anyways it should be an admin at this point
@@ -528,19 +528,19 @@ class ForumHTML extends Error {
 				<input type="text" required="required" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
 		<br />
 		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms.ForumEditForm.body') ?><?php echo utils_requiredField(); ?><br />
-		<?php
-		$GLOBALS['editor_was_set_up']=false;
-		$params = array() ;
-		$params['body'] = $body;
-		$params['width'] = "800";
-		$params['height'] = "500";
-		$params['group'] = $group_id;
-		plugin_hook("text_editor",$params);
-		if (!$GLOBALS['editor_was_set_up']) {
-			//if we don't have any plugin for text editor, display a simple textarea edit box
-			echo '<textarea name="body" required="required" rows="10" cols="70">' . $body . '</textarea>';
-		}
-		unset($GLOBALS['editor_was_set_up']);
+			<?php
+			$GLOBALS['editor_was_set_up']=false;
+			$params = array() ;
+			$params['body'] = $body;
+			$params['width'] = "800";
+			$params['height'] = "500";
+			$params['group'] = $group_id;
+			plugin_hook("text_editor",$params);
+			if (!$GLOBALS['editor_was_set_up']) {
+				//if we don't have any plugin for text editor, display a simple textarea edit box
+				echo '<textarea required="required" name="body" rows="10" cols="70">' . $body . '</textarea>';
+			}
+			unset($GLOBALS['editor_was_set_up']);
 				?>
 			<br />
 

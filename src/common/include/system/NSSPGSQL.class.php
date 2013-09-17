@@ -41,7 +41,7 @@ class NSSPGSQL extends System {
 	/**
  	* sysCreateUser() - Create a user
  	*
- 	* @param		int		The user ID of the user to create
+ 	* @param		int		$user_id	The user ID of the user to create
 	* @return		bool	The return status
  	*
  	*/
@@ -52,7 +52,7 @@ class NSSPGSQL extends System {
 	/**
  	* sysRemoveUser() - Remove a user
  	*
- 	* @param		int		The user ID of the user to remove
+ 	* @param		int		$user_id	The user ID of the user to remove
 	* @return		bool	true on success/false on failure
  	*
  	*/
@@ -67,7 +67,7 @@ class NSSPGSQL extends System {
 	/**
  	* sysCheckGroup() - Check for the existence of a group
  	*
- 	* @param		int		The ID of the group to check
+ 	* @param		int		$group_id	The ID of the group to check
 	* @return		bool	true on success/false on failure
  	*
  	*/
@@ -82,7 +82,7 @@ class NSSPGSQL extends System {
 	/**
  	* sysCreateGroup() - Create a group
  	*
- 	* @param		int		The ID of the group to create
+ 	* @param		int		$group_id	The ID of the group to create
 	* @return		bool	true on success/false on failure
  	*
  	*/
