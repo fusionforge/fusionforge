@@ -67,7 +67,7 @@ class ReportPerGroupDocmanDownloads extends Report {
 
 		if (!$group_id) {
 			$this->setError(_('No group_id set.'));
-			return false;
+			return;
 		}
 
 		$res = db_query_params ('SELECT docdata_vw.filename, docdata_vw.realname,
@@ -89,7 +89,7 @@ class ReportPerGroupDocmanDownloads extends Report {
 
 		if (!$res || db_error()) {
 			$this->setError('ReportUserAct:: '.db_error());
-			return false;
+			return;
 		}
 		
 		$rows = db_numrows($res);
@@ -102,6 +102,5 @@ class ReportPerGroupDocmanDownloads extends Report {
 		}
 
 		$this->data =& $arr;
-		return true;
 	}
 }

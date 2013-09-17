@@ -40,7 +40,6 @@ class ArtifactsForUser extends Error {
 	*/
 	function __construct(&$user) {
 		$this->User =& $user;
-		return true;
 	}
 
 	/**

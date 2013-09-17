@@ -66,14 +66,14 @@ class Roadmap extends Error {
 		if (is_object($group)) {
 			if ($group->isError()) {
 				$this->setError('in Roadmap, '.$group->getErrorMessage());
-				return false;
+				return;
 			}
 			$this->group = $group;
 			$this->group_id = $group->getID();
 		}
 		else {
 			$this->setError(_('Invalid Group'));
-			return false;
+			return;
 		}
 
 		/*if (! $this->userCanView()) {
@@ -89,7 +89,7 @@ class Roadmap extends Error {
 		$this->is_default = 0;
 
 		$this->data_array = array();
-		return $this->_fetchData($data);
+		$this->_fetchData($data);
 	}
 
 

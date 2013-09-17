@@ -60,17 +60,13 @@ class RoadmapFactory extends Error {
 		if (is_object($group)) {
 			if ($group->isError()) {
 				$this->setError('in RoadmapFactory, '.$group->getErrorMessage());
-				return false;
+				return;
 			}
 			$this->group = $group;
 			$this->group_id = $group->getID();
-		}
-		else {
+		} else {
 			$this->setError(_('Invalid Group'));
-			return false;
 		}
-
-		return true;
 	}
 
 	public function getRoadmaps($enable_only=false) {

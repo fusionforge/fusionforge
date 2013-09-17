@@ -33,7 +33,6 @@ class ArtifactWorkflow extends Error {
 		$this->ath = $artifact;
 		$this->artifact_id = (int)$artifact->getID();
 		$this->field_id = (int)$field_id;
-		return true;
 	}
 
 	// Check if the following event is allowed or not.

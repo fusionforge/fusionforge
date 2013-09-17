@@ -37,7 +37,7 @@ class ArtifactFromID extends Error {
 						array ($id)) ;
 			if (!$res || db_numrows($res) < 1) {
 				$this->setError("Invalid Artifact ID");
-				return false;
+				return;
 			} else {
 				$art_arr = db_fetch_array($res);
 			}
@@ -46,23 +46,22 @@ class ArtifactFromID extends Error {
 		$at = artifactType_get_object($art_arr['group_artifact_id']);
 		if (!$at || !is_object($at)) {
 			$this->setError("Could Not Create ArtifactType");
-			return false;
+			return;
 		} elseif ($at->isError()) {
 			$this->setError($at->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->ArtifactType =& $at;
 
 		$a = artifact_get_object($id,$art_arr);
 		if (!$a || !is_object($a)) {
 			$this->setError("Could Not Create Artifact");
-			return false;
+			return;
 		} elseif ($a->isError()) {
 			$this->setError($a->getErrorMessage());
-			return false;
+			return;
 		}
 		$this->Artifact =& $a;
-		return true;
 	}
 
 }
