@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:26+0200\n"
+"POT-Creation-Date: 2013-09-18 10:31+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -10680,9 +10680,9 @@ msgstr ""
 msgid "Back to jobs list"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:218
-#, fuzzy
-msgid "Edit job"
+#: plugins/hudson/include/hudsonViews.class.php:218 www/people/editjob.php:147
+#: www/people/people_utils.php:42
+msgid "Edit Job"
 msgstr "Указать задание"
 
 #: plugins/hudson/include/hudsonViews.class.php:221
@@ -19579,10 +19579,6 @@ msgstr "Сведения о навыке удалены"
 msgid "JOB skill delete failed - wrong project_id"
 msgstr "Удаление невозможно, неправильный идентификатор проекта"
 
-#: www/people/editjob.php:147 www/people/people_utils.php:42
-msgid "Edit Job"
-msgstr "Указать задание"
-
 #: www/people/editjob.php:152
 #, fuzzy, php-format
 msgid "POSTING fetch FAILED: %s"
@@ -24045,6 +24041,10 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "Edit job"
+#~ msgstr "Указать задание"
 
 #, fuzzy
 #~ msgid "Trigger a build after CVS commits:"

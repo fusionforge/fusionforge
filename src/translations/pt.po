@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:26+0200\n"
+"POT-Creation-Date: 2013-09-18 10:31+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9799,9 +9799,10 @@ msgstr ""
 msgid "Back to jobs list"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:218
-msgid "Edit job"
-msgstr ""
+#: plugins/hudson/include/hudsonViews.class.php:218 www/people/editjob.php:147
+#: www/people/people_utils.php:42
+msgid "Edit Job"
+msgstr "Editar Trabalho"
 
 #: plugins/hudson/include/hudsonViews.class.php:221
 #: plugins/hudson/include/hudsonViews.class.php:405
@@ -17822,10 +17823,6 @@ msgstr "Habilidade de TRABALHO apagada com sucesso"
 #: www/people/editjob.php:139
 msgid "JOB skill delete failed - wrong project_id"
 msgstr "Deleção de habilidade de TRABALHO falhou - project_id incorreto"
-
-#: www/people/editjob.php:147 www/people/people_utils.php:42
-msgid "Edit Job"
-msgstr "Editar Trabalho"
 
 #: www/people/editjob.php:152
 #, php-format

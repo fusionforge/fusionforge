@@ -215,7 +215,7 @@ class hudsonViews extends Views {
 
 				echo '<a href="/plugins/hudson/?group_id='.$group_id.'">'._("Back to jobs list").'</a>';
 
-				echo '<h3>'._("Edit job").'</h3>';
+				echo '<h3>'._("Edit Job").'</h3>';
 				echo ' <form method="post">';
 				echo '  <p>';
 				echo '   <label for="new_hudson_job_url">'._("Job URL:").'</label>';

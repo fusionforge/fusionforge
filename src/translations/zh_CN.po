@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:26+0200\n"
+"POT-Creation-Date: 2013-09-18 10:31+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -10558,9 +10558,9 @@ msgstr ""
 msgid "Back to jobs list"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:218
-#, fuzzy
-msgid "Edit job"
+#: plugins/hudson/include/hudsonViews.class.php:218 www/people/editjob.php:147
+#: www/people/people_utils.php:42
+msgid "Edit Job"
 msgstr "编辑"
 
 #: plugins/hudson/include/hudsonViews.class.php:221
@@ -19125,10 +19125,6 @@ msgstr "工作技能删除成功"
 msgid "JOB skill delete failed - wrong project_id"
 msgstr "工作技能删除失败 － 错误的项目编号"
 
-#: www/people/editjob.php:147 www/people/people_utils.php:42
-msgid "Edit Job"
-msgstr "编辑"
-
 #: www/people/editjob.php:152
 #, fuzzy, php-format
 msgid "POSTING fetch FAILED: %s"
@@ -23507,6 +23503,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Edit job"
+#~ msgstr "编辑"
 
 #~ msgid "CVS"
 #~ msgstr "CVS"

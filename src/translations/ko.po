@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:26+0200\n"
+"POT-Creation-Date: 2013-09-18 10:31+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -10508,9 +10508,9 @@ msgstr ""
 msgid "Back to jobs list"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:218
-#, fuzzy
-msgid "Edit job"
+#: plugins/hudson/include/hudsonViews.class.php:218 www/people/editjob.php:147
+#: www/people/people_utils.php:42
+msgid "Edit Job"
 msgstr "Job 편집"
 
 #: plugins/hudson/include/hudsonViews.class.php:221
@@ -19057,10 +19057,6 @@ msgstr "JOB skill deleted successfully"
 msgid "JOB skill delete failed - wrong project_id"
 msgstr "JOB skill delete failed - wrong project_id"
 
-#: www/people/editjob.php:147 www/people/people_utils.php:42
-msgid "Edit Job"
-msgstr "Job 편집"
-
 #: www/people/editjob.php:152
 #, fuzzy, php-format
 msgid "POSTING fetch FAILED: %s"
@@ -23432,6 +23428,10 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "Edit job"
+#~ msgstr "Job 편집"
 
 #~ msgid "CVS"
 #~ msgstr "CVS"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:26+0200\n"
+"POT-Creation-Date: 2013-09-18 10:31+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -10658,9 +10658,9 @@ msgstr ""
 msgid "Back to jobs list"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:218
-#, fuzzy
-msgid "Edit job"
+#: plugins/hudson/include/hudsonViews.class.php:218 www/people/editjob.php:147
+#: www/people/people_utils.php:42
+msgid "Edit Job"
 msgstr "Editar o traballo"
 
 #: plugins/hudson/include/hudsonViews.class.php:221
@@ -19462,10 +19462,6 @@ msgstr ""
 "Produciuse un erro ao eliminar a habelencia de traballo - o project_id é "
 "erróneo"
 
-#: www/people/editjob.php:147 www/people/people_utils.php:42
-msgid "Edit Job"
-msgstr "Editar o traballo"
-
 #: www/people/editjob.php:152
 #, fuzzy, php-format
 msgid "POSTING fetch FAILED: %s"
@@ -23907,6 +23903,10 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Edit job"
+#~ msgstr "Editar o traballo"
 
 #, fuzzy
 #~ msgid "Trigger a build after CVS commits:"

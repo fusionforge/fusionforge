@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:26+0200\n"
+"POT-Creation-Date: 2013-09-18 10:31+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -10300,9 +10300,10 @@ msgstr "Hudson"
 msgid "Back to jobs list"
 msgstr "Retour à la liste des tâches"
 
-#: plugins/hudson/include/hudsonViews.class.php:218
-msgid "Edit job"
-msgstr "Éditer la tâche"
+#: plugins/hudson/include/hudsonViews.class.php:218 www/people/editjob.php:147
+#: www/people/people_utils.php:42
+msgid "Edit Job"
+msgstr "Édition d'une offre"
 
 #: plugins/hudson/include/hudsonViews.class.php:221
 #: plugins/hudson/include/hudsonViews.class.php:405
@@ -18910,10 +18911,6 @@ msgstr ""
 "L'effacement de cette compétence pour ce poste a échoué - mauvais numéro "
 "d'identification de projet"
 
-#: www/people/editjob.php:147 www/people/people_utils.php:42
-msgid "Edit Job"
-msgstr "Édition d'une offre"
-
 #: www/people/editjob.php:152
 #, php-format
 msgid "POSTING fetch FAILED: %s"
@@ -23300,6 +23297,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Edit job"
+#~ msgstr "Éditer la tâche"
 
 #~ msgid "Trigger a build after SVN commits:"
 #~ msgstr "Déclencher une construction après une validation SVN :"

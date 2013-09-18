@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:26+0200\n"
+"POT-Creation-Date: 2013-09-18 10:31+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -10314,8 +10314,9 @@ msgstr "Hudson"
 msgid "Back to jobs list"
 msgstr "Regresar a la lista de trabajos"
 
-#: plugins/hudson/include/hudsonViews.class.php:218
-msgid "Edit job"
+#: plugins/hudson/include/hudsonViews.class.php:218 www/people/editjob.php:147
+#: www/people/people_utils.php:42
+msgid "Edit Job"
 msgstr "Editar trabajos"
 
 #: plugins/hudson/include/hudsonViews.class.php:221
@@ -18814,10 +18815,6 @@ msgid "JOB skill delete failed - wrong project_id"
 msgstr ""
 "Falló la eliminación de la habilidad para el trabajo - project_id incorrecto"
 
-#: www/people/editjob.php:147 www/people/people_utils.php:42
-msgid "Edit Job"
-msgstr "Editar trabajos"
-
 #: www/people/editjob.php:152
 #, php-format
 msgid "POSTING fetch FAILED: %s"
@@ -23210,6 +23207,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Edit job"
+#~ msgstr "Editar trabajos"
 
 #~ msgid "Trigger a build after SVN commits:"
 #~ msgstr "Lanzar una compilación despues de las subidas al repositorio SVN:"

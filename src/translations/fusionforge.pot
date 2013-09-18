@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:26+0200\n"
+"POT-Creation-Date: 2013-09-18 10:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9696,8 +9696,9 @@ msgstr ""
 msgid "Back to jobs list"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:218
-msgid "Edit job"
+#: plugins/hudson/include/hudsonViews.class.php:218 www/people/editjob.php:147
+#: www/people/people_utils.php:42
+msgid "Edit Job"
 msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:221
@@ -17600,10 +17601,6 @@ msgstr ""
 
 #: www/people/editjob.php:139
 msgid "JOB skill delete failed - wrong project_id"
-msgstr ""
-
-#: www/people/editjob.php:147 www/people/people_utils.php:42
-msgid "Edit Job"
 msgstr ""
 
 #: www/people/editjob.php:152

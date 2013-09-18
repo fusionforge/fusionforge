@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:26+0200\n"
+"POT-Creation-Date: 2013-09-18 10:31+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -10661,9 +10661,9 @@ msgstr ""
 msgid "Back to jobs list"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:218
-#, fuzzy
-msgid "Edit job"
+#: plugins/hudson/include/hudsonViews.class.php:218 www/people/editjob.php:147
+#: www/people/people_utils.php:42
+msgid "Edit Job"
 msgstr "Job ändern"
 
 #: plugins/hudson/include/hudsonViews.class.php:221
@@ -19495,10 +19495,6 @@ msgstr "JOB Qualifikationen-Löschung erfolgreich"
 msgid "JOB skill delete failed - wrong project_id"
 msgstr "JOB Qualifikation-Löschung fehlgeschlagen - Falsche Projekt_ID"
 
-#: www/people/editjob.php:147 www/people/people_utils.php:42
-msgid "Edit Job"
-msgstr "Job ändern"
-
 #: www/people/editjob.php:152
 #, fuzzy, php-format
 msgid "POSTING fetch FAILED: %s"
@@ -23978,6 +23974,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "Edit job"
+#~ msgstr "Job ändern"
 
 #, fuzzy
 #~ msgid "Trigger a build after CVS commits:"
