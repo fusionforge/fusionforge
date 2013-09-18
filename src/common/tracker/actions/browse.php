@@ -356,7 +356,6 @@ if (db_numrows($res)>0) {
 	$optgroup['key'] = 'type';
 	$optgroup['values'][0] = 'Private queries';
 	$optgroup['values'][1] = 'Project queries';
-	echo '<span style="font-size:smaller">';
 	echo '<select name="query_id" id="query_id">';
 	echo '<option value="100">' . _('Select One') . '</option>';
 	$current = '';
@@ -376,8 +375,7 @@ if (db_numrows($res)>0) {
 	}
 	if ($current !== '')
 		echo '</optgroup>';
-	echo '</select>';
-	echo '</span>
+	echo '</select>
 	<noscript><input type="submit" name="run" value="'._('Power Query').'" /></noscript>
 	&nbsp;&nbsp;<a href="/tracker/?atid='. $ath->getID().'&amp;group_id='.$group_id.'&amp;func=query">'.
 	_('Build Query').'</a>
@@ -628,7 +626,7 @@ if ($art_arr && $art_cnt > 0) {
 						'&amp;group_id='.$group_id.'&amp;group_project_id='.$rest['group_project_id'];
 					$title = '[T'.$rest['project_task_id'].']';
 					if ($rest['status_id'] == 2) {
-						$title = '<strike>'.$title.'</strike>';
+						$title = '<span class="strike">'.$title.'</span>';
 					}
 					print $s.'<a href="'.$link.'" title="'.util_html_secure($rest['summary']).'">'.$title.'</a>';
 					$s = ' ';
@@ -644,7 +642,7 @@ if ($art_arr && $art_cnt > 0) {
 					$value = preg_replace('/\b(\d+)\b/e', "_artifactid2url('\\1')", $value);
 				} elseif ($extra_data[$f]['type'] == 7) {
 					if ($art_arr[$i]->getStatusID() == 2) {
-						$value = '<strike>'.$value.'</strike>';
+						$value = '<span class="strike">'.$value.'</span>';
 					}
 
 				}
@@ -757,7 +755,7 @@ if ($art_arr && $art_cnt > 0) {
 			<tr><td colspan="2"><strong>'._('Canned Response').':</strong><br />'.
 				$ath->cannedResponseBox ('canned_response') .'</td></tr>
 
-			<tr><td colspan="3" align="center"><input type="submit" name="submit" value="'._('Mass update').'" /></td></tr>
+			<tr><td colspan="3" align="center"><input type="submit" name="submit" value="'._('Mass Update').'" /></td></tr>
 			</table>';
 		echo '</div>
 		</fieldset>';

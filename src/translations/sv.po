@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:33+0200\n"
+"POT-Creation-Date: 2013-09-18 11:40+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -382,7 +382,7 @@ msgstr ""
 
 #: common/docman/Document.class.php:941
 #: common/docman/DocumentGroup.class.php:722
-#: common/forum/ForumHTML.class.php:73 common/tracker/actions/browse.php:368
+#: common/forum/ForumHTML.class.php:73 common/tracker/actions/browse.php:367
 #: plugins/contribtracker/www/index.php:35
 #: plugins/contribtracker/www/index.php:167
 #: plugins/mantisbt/view/admin/StatPerStatus.php:47
@@ -422,8 +422,8 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:211 common/include/Error.class.php:207
 #: common/include/exit.php:80 common/include/User.class.php:348
 #: common/mail/MailingListFactory.class.php:104
-#: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:406
-#: common/tracker/actions/browse.php:409 common/tracker/actions/mod.php:147
+#: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
+#: common/tracker/actions/browse.php:407 common/tracker/actions/mod.php:147
 #: common/tracker/actions/mod.php:155 common/tracker/actions/mod.php:175
 #: common/tracker/actions/mod.php:216 common/tracker/actions/query.php:329
 #: common/tracker/actions/query.php:344 common/tracker/actions/query.php:350
@@ -747,7 +747,7 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/actions/admin-ind.php:100
 #: common/tracker/actions/admin-ind.php:137
-#: common/tracker/actions/browse.php:558 common/tracker/actions/ind.php:57
+#: common/tracker/actions/browse.php:556 common/tracker/actions/ind.php:57
 #: common/tracker/views/form-updatetracker.php:53
 #: plugins/blocks/www/index.php:202
 #: plugins/contribtracker/www/global_admin.php:244
@@ -1050,8 +1050,8 @@ msgstr ""
 msgid "Folder that document belongs to:"
 msgstr "Grupp som dokumentet hör till:"
 
-#: common/docman/views/editfile.php:70 common/tracker/actions/browse.php:409
-#: common/tracker/actions/browse.php:564 common/tracker/actions/browse.php:751
+#: common/docman/views/editfile.php:70 common/tracker/actions/browse.php:407
+#: common/tracker/actions/browse.php:562 common/tracker/actions/browse.php:749
 #: common/tracker/actions/detail.php:73
 #: common/tracker/actions/mod-limited.php:128
 #: common/tracker/actions/mod.php:155 common/tracker/actions/query.php:344
@@ -1302,8 +1302,8 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:101
 #: common/docman/views/pendingfiles.php:103
 #: common/forum/ForumHTML.class.php:221 common/pm/ProjectTask.class.php:1213
-#: common/tracker/actions/browse.php:608 common/tracker/actions/browse.php:619
-#: common/tracker/actions/browse.php:639 common/tracker/actions/detail.php:68
+#: common/tracker/actions/browse.php:606 common/tracker/actions/browse.php:617
+#: common/tracker/actions/browse.php:637 common/tracker/actions/detail.php:68
 #: common/tracker/actions/downloadcsv.php:84
 #: common/tracker/actions/downloadcsv.php:85
 #: common/tracker/actions/downloadcsv.php:86
@@ -2329,7 +2329,7 @@ msgid "Posted by:"
 msgstr "Posta jobb"
 
 #: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:379
-#: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:556
+#: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:554
 #: common/tracker/actions/detail.php:96
 #: common/tracker/actions/mod-limited.php:142
 #: common/tracker/actions/mod.php:167 common/tracker/actions/query.php:199
@@ -5314,15 +5314,15 @@ msgstr "Alla"
 msgid "Unassigned"
 msgstr "Ej tilldelad"
 
-#: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:554
+#: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:552
 #: common/tracker/actions/query.php:197 www/admin/massmail.php:136
 #: www/admin/search.php:72 www/admin/search.php:148 www/pm/admin/index.php:187
 #: www/project/admin/editimages.php:265
 msgid "Id"
 msgstr "ID"
 
-#: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:566
-#: common/tracker/actions/browse.php:739 common/tracker/actions/detail.php:69
+#: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:564
+#: common/tracker/actions/browse.php:737 common/tracker/actions/detail.php:69
 #: common/tracker/actions/mod-limited.php:119
 #: common/tracker/actions/mod.php:147 common/tracker/actions/query.php:198
 #: common/tracker/include/build_submission_form.php:66
@@ -5336,7 +5336,7 @@ msgstr "ID"
 msgid "Priority"
 msgstr "Prioritet"
 
-#: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:560
+#: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:558
 #: common/tracker/actions/query.php:200
 #: common/tracker/views/form-customizelist.php:38
 #: cronjobs/send_pending_items_mail.php:118 www/people/viewjob.php:77
@@ -5346,20 +5346,20 @@ msgstr "Prioritet"
 msgid "Open Date"
 msgstr "Öppningsdatum"
 
-#: common/tracker/actions/browse.php:199 common/tracker/actions/browse.php:574
+#: common/tracker/actions/browse.php:199 common/tracker/actions/browse.php:572
 #: common/tracker/actions/query.php:201
 #: common/tracker/views/form-customizelist.php:46
 #, fuzzy
 msgid "Last Modified Date"
 msgstr "Mass uppdatering"
 
-#: common/tracker/actions/browse.php:200 common/tracker/actions/browse.php:562
+#: common/tracker/actions/browse.php:200 common/tracker/actions/browse.php:560
 #: common/tracker/actions/query.php:202
 #: common/tracker/views/form-customizelist.php:43
 msgid "Close Date"
 msgstr "Stängningsdatum"
 
-#: common/tracker/actions/browse.php:202 common/tracker/actions/browse.php:406
+#: common/tracker/actions/browse.php:202 common/tracker/actions/browse.php:404
 #: common/tracker/actions/query.php:204 common/tracker/actions/query.php:351
 #: www/pm/browse_task.php:159 www/pm/ganttpage.php:175
 msgid "Assignee"
@@ -5417,56 +5417,56 @@ msgstr "Förändring"
 msgid "Advanced queries"
 msgstr "Lägg till kategorier"
 
-#: common/tracker/actions/browse.php:361 www/include/html.php:622
+#: common/tracker/actions/browse.php:360 www/include/html.php:622
 #, fuzzy
 msgid "Select One"
 msgstr "Ta bort fil"
 
-#: common/tracker/actions/browse.php:368 www/frs/admin/index.php:209
+#: common/tracker/actions/browse.php:367 www/frs/admin/index.php:209
 msgid "Private"
 msgstr ""
 
-#: common/tracker/actions/browse.php:381
+#: common/tracker/actions/browse.php:379
 msgid "Power Query"
 msgstr ""
 
-#: common/tracker/actions/browse.php:383 common/tracker/actions/browse.php:395
+#: common/tracker/actions/browse.php:381 common/tracker/actions/browse.php:393
 #: common/tracker/actions/query.php:256 common/tracker/actions/query.php:260
 msgid "Build Query"
 msgstr ""
 
-#: common/tracker/actions/browse.php:399
+#: common/tracker/actions/browse.php:397
 msgid "Simple Filtering and Sorting"
 msgstr ""
 
-#: common/tracker/actions/browse.php:427 common/tracker/actions/query.php:395
+#: common/tracker/actions/browse.php:425 common/tracker/actions/query.php:395
 msgid "Order by"
 msgstr "Ordna efter"
 
-#: common/tracker/actions/browse.php:430
+#: common/tracker/actions/browse.php:428
 msgid "Quick Browse"
 msgstr ""
 
-#: common/tracker/actions/browse.php:439
+#: common/tracker/actions/browse.php:437
 #: common/tracker/views/form-adminroadmap.php:489
 msgid "Default"
 msgstr ""
 
-#: common/tracker/actions/browse.php:440
+#: common/tracker/actions/browse.php:438
 msgid ""
 "Viewing only opened records by default, use 'Advanced queries' or 'Simple "
 "Filtering and Sorting' to change."
 msgstr ""
 
-#: common/tracker/actions/browse.php:539 www/pm/browse_task.php:210
+#: common/tracker/actions/browse.php:537 www/pm/browse_task.php:210
 msgid "Check all"
 msgstr "Markera alla"
 
-#: common/tracker/actions/browse.php:541 www/pm/browse_task.php:212
+#: common/tracker/actions/browse.php:539 www/pm/browse_task.php:212
 msgid "Clear all"
 msgstr "Avmarkera alla"
 
-#: common/tracker/actions/browse.php:568 common/tracker/actions/browse.php:747
+#: common/tracker/actions/browse.php:566 common/tracker/actions/browse.php:745
 #: common/tracker/actions/detail.php:87
 #: common/tracker/actions/mod-limited.php:114
 #: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:934
@@ -5483,7 +5483,7 @@ msgstr "Avmarkera alla"
 msgid "Assigned to"
 msgstr "Tilldelad"
 
-#: common/tracker/actions/browse.php:570 common/tracker/actions/detail.php:78
+#: common/tracker/actions/browse.php:568 common/tracker/actions/detail.php:78
 #: common/tracker/actions/mod-limited.php:86 common/tracker/actions/mod.php:88
 #: common/tracker/views/form-customizelist.php:42
 #: cronjobs/send_pending_items_mail.php:79
@@ -5497,53 +5497,49 @@ msgstr "Tilldelad"
 msgid "Submitted by"
 msgstr ""
 
-#: common/tracker/actions/browse.php:572 common/tracker/actions/mod.php:228
+#: common/tracker/actions/browse.php:570 common/tracker/actions/mod.php:228
 #: common/tracker/include/ArtifactTypeHtml.class.php:320
 #: common/tracker/views/form-customizelist.php:45
 msgid "Related Tasks"
 msgstr ""
 
-#: common/tracker/actions/browse.php:692
+#: common/tracker/actions/browse.php:690
 #, php-format
 msgid "* Denotes requests > %1$s Days Old"
 msgstr "* Avser frågor > %1$s dagar gamla"
 
-#: common/tracker/actions/browse.php:715 www/pm/browse_task.php:361
-#: www/pm/browse_task.php:390
+#: common/tracker/actions/browse.php:713 common/tracker/actions/browse.php:758
+#: www/pm/browse_task.php:361 www/pm/browse_task.php:390
 #, fuzzy
 msgid "Mass Update"
 msgstr "Mass uppdatering"
 
-#: common/tracker/actions/browse.php:720 www/pm/browse_task.php:366
+#: common/tracker/actions/browse.php:718 www/pm/browse_task.php:366
 msgid ""
 "<strong>Admin:</strong> If you wish to apply changes to all items selected "
 "above, use these controls to change their properties and click once on "
 "\"Mass Update\"."
 msgstr ""
 
-#: common/tracker/actions/browse.php:737 common/tracker/actions/browse.php:748
-#: common/tracker/actions/browse.php:752 www/include/html.php:362
+#: common/tracker/actions/browse.php:735 common/tracker/actions/browse.php:746
+#: common/tracker/actions/browse.php:750 www/include/html.php:362
 #: www/include/html.php:593 www/include/html.php:789
 #: www/pm/browse_task.php:358 www/pm/browse_task.php:373
 #: www/pm/browse_task.php:384
 msgid "No Change"
 msgstr "Ingen förändring"
 
-#: common/tracker/actions/browse.php:748
+#: common/tracker/actions/browse.php:746
 #: common/tracker/include/ArtifactTypeHtml.class.php:683
 #: common/tracker/include/ArtifactTypeHtml.class.php:717
 msgid "Nobody"
 msgstr "Ingen"
 
-#: common/tracker/actions/browse.php:757 common/tracker/Artifact.class.php:942
+#: common/tracker/actions/browse.php:755 common/tracker/Artifact.class.php:942
 msgid "Canned Response"
 msgstr "Standardsvar"
 
-#: common/tracker/actions/browse.php:760
-msgid "Mass update"
-msgstr "Mass uppdatering"
-
-#: common/tracker/actions/browse.php:769
+#: common/tracker/actions/browse.php:767
 msgid "No items found"
 msgstr "Hittade inga poster"
 
@@ -23467,6 +23463,9 @@ msgstr "Användarenamn"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
+
+#~ msgid "Mass update"
+#~ msgstr "Mass uppdatering"
 
 #, fuzzy
 #~ msgid "Attach :"
