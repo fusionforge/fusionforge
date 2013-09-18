@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 13:52+0200\n"
+"POT-Creation-Date: 2013-09-18 13:55+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2223,25 +2223,21 @@ msgstr "Идентификатор группы в базе не соответ�
 msgid "Forum name must be at least 3 characters."
 msgstr "Имя форума должно быть минимум из 3 букв"
 
-#: common/forum/Forum.class.php:176
+#: common/forum/Forum.class.php:176 common/forum/Forum.class.php:558
 #, fuzzy
 msgid "Forum description must be at least 10 characters."
 msgstr "Описание форума долджно состоять минимум из 10 букв"
 
-#: common/forum/Forum.class.php:181 common/forum/Forum.class.php:563
+#: common/forum/Forum.class.php:181 common/forum/Forum.class.php:183
+#: common/forum/Forum.class.php:563 common/forum/Forum.class.php:565
 #, fuzzy
-msgid "Illegal characters in Forum name"
+msgid "Illegal characters in Forum name."
 msgstr "Недопустимые символы в названии форума"
 
 #: common/forum/Forum.class.php:181 common/forum/Forum.class.php:563
 #, fuzzy
 msgid "No space allowed."
 msgstr "Объём диска"
-
-#: common/forum/Forum.class.php:183 common/forum/Forum.class.php:565
-#, fuzzy
-msgid "Illegal characters in Forum name."
-msgstr "Недопустимые символы в названии форума"
 
 #: common/forum/Forum.class.php:203 common/forum/Forum.class.php:590
 #, fuzzy
@@ -2273,11 +2269,6 @@ msgstr "Если вы не идентифицированы, Вы можете �
 #, fuzzy
 msgid "You can only save your place if you are logged in."
 msgstr "Если вы не идентифицированы, Вы можете лишь просматривать"
-
-#: common/forum/Forum.class.php:558
-#, fuzzy
-msgid "Forum Description Must Be At Least 10 Characters."
-msgstr "Описание форума долджно состоять минимум из 10 букв"
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
@@ -23993,6 +23984,14 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "Illegal characters in Forum name"
+#~ msgstr "Недопустимые символы в названии форума"
+
+#, fuzzy
+#~ msgid "Forum Description Must Be At Least 10 Characters."
+#~ msgstr "Описание форума долджно состоять минимум из 10 букв"
 
 #, fuzzy
 #~ msgid "Group_id in db result does not match Group Object."

@@ -178,8 +178,8 @@ class Forum extends Error {
 		}
 		if (!preg_match('/^([_\.0-9a-z-])*$/i',$forum_name)) {
 			if (preg_match('/ /',$forum_name)){
-				$this->setError(_('Illegal characters in Forum name').' - '._('No space allowed.'));
-			}else{
+				$this->setError(_('Illegal characters in Forum name.').' - '._('No space allowed.'));
+			} else {
 				$this->setError(_('Illegal characters in Forum name.'));
 			}
 			return false;
@@ -555,12 +555,12 @@ class Forum extends Error {
 			return false;
 		}
 		if (strlen($description) < 10) {
-			$this->setError(_('Forum Description Must Be At Least 10 Characters.'));
+			$this->setError(_('Forum description must be at least 10 characters.'));
 			return false;
 		}
 		if (!preg_match('/^([_\.0-9a-z-])*$/i',$forum_name)) {
 			if (preg_match('/ /',$forum_name)){
-				$this->setError(_('Illegal characters in Forum name').' - '._('No space allowed.'));
+				$this->setError(_('Illegal characters in Forum name.').' - '._('No space allowed.'));
 			} else {
 				$this->setError(_('Illegal characters in Forum name.'));
 			}

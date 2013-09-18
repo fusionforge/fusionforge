@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 13:52+0200\n"
+"POT-Creation-Date: 2013-09-18 13:55+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2081,24 +2081,20 @@ msgstr "Group_id no resultado do bd não confere com o Objeto Grupo"
 msgid "Forum name must be at least 3 characters."
 msgstr "O Nome do Fórum Precisa Ter Pelo Menos 3 Caracteres"
 
-#: common/forum/Forum.class.php:176
+#: common/forum/Forum.class.php:176 common/forum/Forum.class.php:558
 #, fuzzy
 msgid "Forum description must be at least 10 characters."
 msgstr "A Descrição do Fórum Precisa Ter Pelo Menos 10 Caracteres"
 
-#: common/forum/Forum.class.php:181 common/forum/Forum.class.php:563
+#: common/forum/Forum.class.php:181 common/forum/Forum.class.php:183
+#: common/forum/Forum.class.php:563 common/forum/Forum.class.php:565
 #, fuzzy
-msgid "Illegal characters in Forum name"
+msgid "Illegal characters in Forum name."
 msgstr "Caractere ilegal no nome"
 
 #: common/forum/Forum.class.php:181 common/forum/Forum.class.php:563
 msgid "No space allowed."
 msgstr ""
-
-#: common/forum/Forum.class.php:183 common/forum/Forum.class.php:565
-#, fuzzy
-msgid "Illegal characters in Forum name."
-msgstr "Caractere ilegal no nome"
 
 #: common/forum/Forum.class.php:203 common/forum/Forum.class.php:590
 msgid "Mailing List exists with same name."
@@ -2127,11 +2123,6 @@ msgstr "Você Só Pode Monitorar Se Você Estiver Logado"
 #, fuzzy
 msgid "You can only save your place if you are logged in."
 msgstr "Você Só Pode Monitorar Se Você Estiver Logado"
-
-#: common/forum/Forum.class.php:558
-#, fuzzy
-msgid "Forum Description Must Be At Least 10 Characters."
-msgstr "A Descrição do Fórum Precisa Ter Pelo Menos 10 Caracteres"
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
@@ -21926,6 +21917,14 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Minha Página Pessoal"
+
+#, fuzzy
+#~ msgid "Illegal characters in Forum name"
+#~ msgstr "Caractere ilegal no nome"
+
+#, fuzzy
+#~ msgid "Forum Description Must Be At Least 10 Characters."
+#~ msgstr "A Descrição do Fórum Precisa Ter Pelo Menos 10 Caracteres"
 
 #~ msgid "Mass update"
 #~ msgstr "Atualização em massa"

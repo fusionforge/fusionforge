@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 13:52+0200\n"
+"POT-Creation-Date: 2013-09-18 13:55+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2216,24 +2216,20 @@ msgstr ""
 msgid "Forum name must be at least 3 characters."
 msgstr "Foroaren izenak gutxienez 3 karaktere izan behar ditu."
 
-#: common/forum/Forum.class.php:176
+#: common/forum/Forum.class.php:176 common/forum/Forum.class.php:558
 #, fuzzy
 msgid "Forum description must be at least 10 characters."
 msgstr "Foroaren deskribapenak gutxienez 10 karaktere izan behar ditu."
 
-#: common/forum/Forum.class.php:181 common/forum/Forum.class.php:563
+#: common/forum/Forum.class.php:181 common/forum/Forum.class.php:183
+#: common/forum/Forum.class.php:563 common/forum/Forum.class.php:565
 #, fuzzy
-msgid "Illegal characters in Forum name"
+msgid "Illegal characters in Forum name."
 msgstr "Karaktere baliogabeak foro izenean"
 
 #: common/forum/Forum.class.php:181 common/forum/Forum.class.php:563
 msgid "No space allowed."
 msgstr ""
-
-#: common/forum/Forum.class.php:183 common/forum/Forum.class.php:565
-#, fuzzy
-msgid "Illegal characters in Forum name."
-msgstr "Karaktere baliogabeak foro izenean"
 
 #: common/forum/Forum.class.php:203 common/forum/Forum.class.php:590
 #, fuzzy
@@ -2265,11 +2261,6 @@ msgstr "Monitorizatzeko saio hasia izan behar duzu."
 #, fuzzy
 msgid "You can only save your place if you are logged in."
 msgstr "Monitorizatzeko saio hasia izan behar duzu."
-
-#: common/forum/Forum.class.php:558
-#, fuzzy
-msgid "Forum Description Must Be At Least 10 Characters."
-msgstr "Foroaren deskribapenak gutxienez 10 karaktere izan behar ditu."
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
@@ -23514,6 +23505,14 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#, fuzzy
+#~ msgid "Illegal characters in Forum name"
+#~ msgstr "Karaktere baliogabeak foro izenean"
+
+#, fuzzy
+#~ msgid "Forum Description Must Be At Least 10 Characters."
+#~ msgstr "Foroaren deskribapenak gutxienez 10 karaktere izan behar ditu."
 
 #, fuzzy
 #~ msgid "Group_id in db result does not match Group Object."

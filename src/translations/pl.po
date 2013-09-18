@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 13:52+0200\n"
+"POT-Creation-Date: 2013-09-18 13:55+0200\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2179,21 +2179,18 @@ msgstr ""
 msgid "Forum name must be at least 3 characters."
 msgstr "Tytuł musi składać się z przynajmniej 5 znaków."
 
-#: common/forum/Forum.class.php:176
+#: common/forum/Forum.class.php:176 common/forum/Forum.class.php:558
 #, fuzzy
 msgid "Forum description must be at least 10 characters."
 msgstr "Opis dokumentu musi składać się z przynajmniej 5 znaków."
 
-#: common/forum/Forum.class.php:181 common/forum/Forum.class.php:563
-msgid "Illegal characters in Forum name"
+#: common/forum/Forum.class.php:181 common/forum/Forum.class.php:183
+#: common/forum/Forum.class.php:563 common/forum/Forum.class.php:565
+msgid "Illegal characters in Forum name."
 msgstr ""
 
 #: common/forum/Forum.class.php:181 common/forum/Forum.class.php:563
 msgid "No space allowed."
-msgstr ""
-
-#: common/forum/Forum.class.php:183 common/forum/Forum.class.php:565
-msgid "Illegal characters in Forum name."
 msgstr ""
 
 #: common/forum/Forum.class.php:203 common/forum/Forum.class.php:590
@@ -2223,11 +2220,6 @@ msgstr ""
 #: common/forum/Forum.class.php:508
 msgid "You can only save your place if you are logged in."
 msgstr ""
-
-#: common/forum/Forum.class.php:558
-#, fuzzy
-msgid "Forum Description Must Be At Least 10 Characters."
-msgstr "Opis dokumentu musi składać się z przynajmniej 5 znaków."
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
@@ -22290,6 +22282,10 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Forum Description Must Be At Least 10 Characters."
+#~ msgstr "Opis dokumentu musi składać się z przynajmniej 5 znaków."
 
 #, fuzzy
 #~ msgid "Could not get ProjectTaskFactory"

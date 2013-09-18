@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 13:52+0200\n"
+"POT-Creation-Date: 2013-09-18 13:55+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2221,24 +2221,20 @@ msgstr "Group_id in in risultato db non corrisponde a oggetto gruppo"
 msgid "Forum name must be at least 3 characters."
 msgstr "Il nome del forum deve essere almeno di 3 caratteri"
 
-#: common/forum/Forum.class.php:176
+#: common/forum/Forum.class.php:176 common/forum/Forum.class.php:558
 #, fuzzy
 msgid "Forum description must be at least 10 characters."
 msgstr "La descrizione del forum deve essere almeno di 10 caratteri"
 
-#: common/forum/Forum.class.php:181 common/forum/Forum.class.php:563
+#: common/forum/Forum.class.php:181 common/forum/Forum.class.php:183
+#: common/forum/Forum.class.php:563 common/forum/Forum.class.php:565
 #, fuzzy
-msgid "Illegal characters in Forum name"
+msgid "Illegal characters in Forum name."
 msgstr "Il nome del forum contiene caratteri non validi"
 
 #: common/forum/Forum.class.php:181 common/forum/Forum.class.php:563
 msgid "No space allowed."
 msgstr ""
-
-#: common/forum/Forum.class.php:183 common/forum/Forum.class.php:565
-#, fuzzy
-msgid "Illegal characters in Forum name."
-msgstr "Il nome del forum contiene caratteri non validi"
 
 #: common/forum/Forum.class.php:203 common/forum/Forum.class.php:590
 #, fuzzy
@@ -2270,11 +2266,6 @@ msgstr "Puoi richiedere la notifica di un forum solo se sei collegato"
 #, fuzzy
 msgid "You can only save your place if you are logged in."
 msgstr "Puoi richiedere la notifica di un forum solo se sei collegato"
-
-#: common/forum/Forum.class.php:558
-#, fuzzy
-msgid "Forum Description Must Be At Least 10 Characters."
-msgstr "La descrizione del forum deve essere almeno di 10 caratteri"
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
@@ -23674,6 +23665,14 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "Illegal characters in Forum name"
+#~ msgstr "Il nome del forum contiene caratteri non validi"
+
+#, fuzzy
+#~ msgid "Forum Description Must Be At Least 10 Characters."
+#~ msgstr "La descrizione del forum deve essere almeno di 10 caratteri"
 
 #, fuzzy
 #~ msgid "Group_id in db result does not match Group Object."

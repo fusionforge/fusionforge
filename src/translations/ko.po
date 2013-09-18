@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 13:52+0200\n"
+"POT-Creation-Date: 2013-09-18 13:55+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2213,24 +2213,20 @@ msgstr "데이터베이스의 그룹ID가 그룹 객체와 맞지 않습니다."
 msgid "Forum name must be at least 3 characters."
 msgstr "게시판 이름은 3글자 이상이어야 합니다."
 
-#: common/forum/Forum.class.php:176
+#: common/forum/Forum.class.php:176 common/forum/Forum.class.php:558
 #, fuzzy
 msgid "Forum description must be at least 10 characters."
 msgstr "게시판 설명은 10글자 이상이어야 합니다."
 
-#: common/forum/Forum.class.php:181 common/forum/Forum.class.php:563
+#: common/forum/Forum.class.php:181 common/forum/Forum.class.php:183
+#: common/forum/Forum.class.php:563 common/forum/Forum.class.php:565
 #, fuzzy
-msgid "Illegal characters in Forum name"
+msgid "Illegal characters in Forum name."
 msgstr "ID에 사용할 수 없는 문자를 입력하셨습니다."
 
 #: common/forum/Forum.class.php:181 common/forum/Forum.class.php:563
 msgid "No space allowed."
 msgstr ""
-
-#: common/forum/Forum.class.php:183 common/forum/Forum.class.php:565
-#, fuzzy
-msgid "Illegal characters in Forum name."
-msgstr "ID에 사용할 수 없는 문자를 입력하셨습니다."
 
 #: common/forum/Forum.class.php:203 common/forum/Forum.class.php:590
 #, fuzzy
@@ -2262,11 +2258,6 @@ msgstr "모니터링 기능을 사용하시려면 로그인하셔야 합니다."
 #, fuzzy
 msgid "You can only save your place if you are logged in."
 msgstr "모니터링 기능을 사용하시려면 로그인하셔야 합니다."
-
-#: common/forum/Forum.class.php:558
-#, fuzzy
-msgid "Forum Description Must Be At Least 10 Characters."
-msgstr "게시판 설명은 10글자 이상이어야 합니다."
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
@@ -23380,6 +23371,14 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "Illegal characters in Forum name"
+#~ msgstr "ID에 사용할 수 없는 문자를 입력하셨습니다."
+
+#, fuzzy
+#~ msgid "Forum Description Must Be At Least 10 Characters."
+#~ msgstr "게시판 설명은 10글자 이상이어야 합니다."
 
 #, fuzzy
 #~ msgid "Group_id in db result does not match Group Object."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 13:52+0200\n"
+"POT-Creation-Date: 2013-09-18 13:55+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -2113,25 +2113,21 @@ msgstr ""
 msgid "Forum name must be at least 3 characters."
 msgstr "Le nom d'un forum doit compter au moins 3 caractères."
 
-#: common/forum/Forum.class.php:176
+#: common/forum/Forum.class.php:176 common/forum/Forum.class.php:558
 #, fuzzy
 msgid "Forum description must be at least 10 characters."
 msgstr "La description d'un forum doit compter au moins 10 caractères."
 
-#: common/forum/Forum.class.php:181 common/forum/Forum.class.php:563
+#: common/forum/Forum.class.php:181 common/forum/Forum.class.php:183
+#: common/forum/Forum.class.php:563 common/forum/Forum.class.php:565
 #, fuzzy
-msgid "Illegal characters in Forum name"
+msgid "Illegal characters in Forum name."
 msgstr "Caractères interdits dans le nom du forum"
 
 #: common/forum/Forum.class.php:181 common/forum/Forum.class.php:563
 #, fuzzy
 msgid "No space allowed."
 msgstr "Interdit"
-
-#: common/forum/Forum.class.php:183 common/forum/Forum.class.php:565
-#, fuzzy
-msgid "Illegal characters in Forum name."
-msgstr "Caractères interdits dans le nom du forum"
 
 #: common/forum/Forum.class.php:203 common/forum/Forum.class.php:590
 #, fuzzy
@@ -2159,10 +2155,6 @@ msgstr "Vous ne pouvez pas établir de surveillance sans être identifié."
 #: common/forum/Forum.class.php:508
 msgid "You can only save your place if you are logged in."
 msgstr "Vous ne pouvez pas établir de surveillance sans être identifié."
-
-#: common/forum/Forum.class.php:558
-msgid "Forum Description Must Be At Least 10 Characters."
-msgstr "La description d'un forum doit compter au moins 10 caractères."
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
@@ -23255,6 +23247,13 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#, fuzzy
+#~ msgid "Illegal characters in Forum name"
+#~ msgstr "Caractères interdits dans le nom du forum"
+
+#~ msgid "Forum Description Must Be At Least 10 Characters."
+#~ msgstr "La description d'un forum doit compter au moins 10 caractères."
 
 #, fuzzy
 #~ msgid "Group_id in db result does not match Group Object."
