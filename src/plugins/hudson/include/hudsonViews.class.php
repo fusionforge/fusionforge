@@ -233,7 +233,9 @@ class hudsonViews extends Views {
 				echo '  </p>';
 				if ($project->usesService('svn')) {
 					echo '  <p>';
-					echo '   <label for="new_hudson_use_svn_trigger">'._("Trigger a build after SVN commits:").'</label>';
+					echo '   <label for="new_hudson_use_svn_trigger">';
+					echo sprintf(_("Trigger a build after %s commits:"), 'Subversion');
+					echo '</label>';
 					if ($row['use_svn_trigger'] == 1) {
 						$checked = ' checked="checked" ';
 					} else {
@@ -244,7 +246,9 @@ class hudsonViews extends Views {
 				}
 				if ($project->usesService('cvs')) {
 					echo '  <p>';
-					echo '   <label for="new_hudson_use_cvs_trigger">'._("Trigger a build after CVS commits:").'</label>';
+					echo '   <label for="new_hudson_use_cvs_trigger">';
+					echo sprintf(_("Trigger a build after %s commits:"), 'CVS');
+					echo '</label>';
 					if ($row['use_cvs_trigger'] == 1) {
 						$checked = ' checked="checked" ';
 					} else {
@@ -407,13 +411,13 @@ class hudsonViews extends Views {
 		echo '   <br />';
 		//echo '  <p>';
 		if ($project->usesService('svn')) {
-			echo _("Trigger a build after commits:");
+			echo sprintf(_("Trigger a build after %s commits:"), '');
 			if ($project->usesService('svn')) {
-				echo '   <label for="hudson_use_svn_trigger">'._("SVN").'</label>';
+				echo '   <label for="hudson_use_svn_trigger">Subversion</label>';
 				echo '   <input id="hudson_use_svn_trigger" name="hudson_use_svn_trigger" type="checkbox" />';
 			}
 			if ($project->usesService('cvs')) {
-				echo '   <label for="hudson_use_cvs_trigger">'._("CVS").'</label>';
+				echo '   <label for="hudson_use_cvs_trigger">CVS</label>';
 				echo '   <input id="hudson_use_cvs_trigger" name="hudson_use_cvs_trigger" type="checkbox" />';
 			}
 			//echo '  </p>';

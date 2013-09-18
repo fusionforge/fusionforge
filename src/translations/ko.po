@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:21+0200\n"
+"POT-Creation-Date: 2013-09-18 10:26+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1260,7 +1260,7 @@ msgstr "보기"
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:95
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:56
-#: plugins/hudson/include/hudsonViews.class.php:305
+#: plugins/hudson/include/hudsonViews.class.php:309
 #: plugins/mantisbt/view/admin/viewCategorie.php:50
 #: plugins/mantisbt/view/viewAttachment.php:50
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
@@ -10440,14 +10440,14 @@ msgid "Last Build:"
 msgstr "Last user_id mailed"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:292
-#: plugins/hudson/include/hudsonViews.class.php:295
+#: plugins/hudson/include/hudsonViews.class.php:299
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:84
 #, fuzzy
 msgid "Last Success"
 msgstr "성공적으로 갱신되었습니다."
 
 #: plugins/hudson/include/hudsonPlugin.class.php:293
-#: plugins/hudson/include/hudsonViews.class.php:296
+#: plugins/hudson/include/hudsonViews.class.php:300
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:85
 #, fuzzy
 msgid "Last Failure"
@@ -10514,13 +10514,13 @@ msgid "Edit job"
 msgstr "Job 편집"
 
 #: plugins/hudson/include/hudsonViews.class.php:221
-#: plugins/hudson/include/hudsonViews.class.php:401
+#: plugins/hudson/include/hudsonViews.class.php:405
 #, fuzzy
 msgid "Job URL:"
 msgstr "User name:"
 
 #: plugins/hudson/include/hudsonViews.class.php:225
-#: plugins/hudson/include/hudsonViews.class.php:406
+#: plugins/hudson/include/hudsonViews.class.php:410
 msgid "eg: http://myCIserver/hudson/job/myJob"
 msgstr ""
 
@@ -10534,112 +10534,99 @@ msgstr "Real name"
 msgid "Name (with no space) used to make a reference to this job. Eg: job #%s"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:236
-msgid "Trigger a build after SVN commits:"
+#: plugins/hudson/include/hudsonViews.class.php:237
+#: plugins/hudson/include/hudsonViews.class.php:250
+#: plugins/hudson/include/hudsonViews.class.php:414
+#, php-format
+msgid "Trigger a build after %s commits:"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:247
-msgid "Trigger a build after CVS commits:"
-msgstr ""
-
-#: plugins/hudson/include/hudsonViews.class.php:258
-#: plugins/hudson/include/hudsonViews.class.php:421
+#: plugins/hudson/include/hudsonViews.class.php:262
+#: plugins/hudson/include/hudsonViews.class.php:425
 msgid "with (optional) token:"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:266
+#: plugins/hudson/include/hudsonViews.class.php:270
 #, fuzzy
 msgid "Update job"
 msgstr "Updated"
 
-#: plugins/hudson/include/hudsonViews.class.php:294 www/admin/cronman.php:43
+#: plugins/hudson/include/hudsonViews.class.php:298 www/admin/cronman.php:43
 #: www/people/editjob.php:74 www/people/editjob.php:91
 #: www/people/editjob.php:107
 msgid "Job"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:297
+#: plugins/hudson/include/hudsonViews.class.php:301
 #, fuzzy
 msgid "RSS"
 msgstr "QRS"
 
-#: plugins/hudson/include/hudsonViews.class.php:299
+#: plugins/hudson/include/hudsonViews.class.php:303
 msgid "SVN trigger"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:302
+#: plugins/hudson/include/hudsonViews.class.php:306
 msgid "CVS trigger"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:324
+#: plugins/hudson/include/hudsonViews.class.php:328
 #, php-format
 msgid "Show job %s"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:326
-#: plugins/hudson/include/hudsonViews.class.php:331
+#: plugins/hudson/include/hudsonViews.class.php:330
+#: plugins/hudson/include/hudsonViews.class.php:335
 #, php-format
 msgid "Show build #%s of job %s"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:326
-#: plugins/hudson/include/hudsonViews.class.php:331
+#: plugins/hudson/include/hudsonViews.class.php:330
+#: plugins/hudson/include/hudsonViews.class.php:335
 msgid "build"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:335
+#: plugins/hudson/include/hudsonViews.class.php:339
 #, php-format
 msgid "RSS feed of all builds for %s job"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:339
+#: plugins/hudson/include/hudsonViews.class.php:343
 msgid "SVN commit will trigger a build"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:346
+#: plugins/hudson/include/hudsonViews.class.php:350
 msgid "CVS commit will trigger a build"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:364
+#: plugins/hudson/include/hudsonViews.class.php:368
 #, fuzzy
 msgid "Edit this job"
 msgstr "그룹 편집하기"
 
-#: plugins/hudson/include/hudsonViews.class.php:370
+#: plugins/hudson/include/hudsonViews.class.php:374
 #, php-format
 msgid "Are you sure you want to delete Job %s from project %s?"
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:371
+#: plugins/hudson/include/hudsonViews.class.php:375
 #, fuzzy
 msgid "Delete this job"
 msgstr "파일 삭제하기"
 
-#: plugins/hudson/include/hudsonViews.class.php:384
+#: plugins/hudson/include/hudsonViews.class.php:388
 #, fuzzy
 msgid "No Hudson jobs associated with this project."
 msgstr "프로젝트 떠나기"
 
-#: plugins/hudson/include/hudsonViews.class.php:386
+#: plugins/hudson/include/hudsonViews.class.php:390
 msgid "To add a job, select the link just below."
 msgstr ""
 
-#: plugins/hudson/include/hudsonViews.class.php:397
+#: plugins/hudson/include/hudsonViews.class.php:401
 #, fuzzy
 msgid "Add job"
 msgstr "임무 더하기"
-
-#: plugins/hudson/include/hudsonViews.class.php:410
-msgid "Trigger a build after commits:"
-msgstr ""
-
-#: plugins/hudson/include/hudsonViews.class.php:412
-msgid "SVN"
-msgstr ""
-
-#: plugins/hudson/include/hudsonViews.class.php:416
-msgid "CVS"
-msgstr "CVS"
 
 #: plugins/hudson/include/hudson_Widget_JobBuildHistory.class.php:45
 #, php-format
@@ -23445,6 +23432,9 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#~ msgid "CVS"
+#~ msgstr "CVS"
 
 #, fuzzy
 #~ msgid "Could Not Get FRSRelease"

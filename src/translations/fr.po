@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:21+0200\n"
+"POT-Creation-Date: 2013-09-18 10:26+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1192,7 +1192,7 @@ msgstr "Voir"
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:95
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:56
-#: plugins/hudson/include/hudsonViews.class.php:305
+#: plugins/hudson/include/hudsonViews.class.php:309
 #: plugins/mantisbt/view/admin/viewCategorie.php:50
 #: plugins/mantisbt/view/viewAttachment.php:50
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
@@ -10236,13 +10236,13 @@ msgid "Last Build:"
 msgstr "Dernière construction :"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:292
-#: plugins/hudson/include/hudsonViews.class.php:295
+#: plugins/hudson/include/hudsonViews.class.php:299
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:84
 msgid "Last Success"
 msgstr "Dernier succès"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:293
-#: plugins/hudson/include/hudsonViews.class.php:296
+#: plugins/hudson/include/hudsonViews.class.php:300
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:85
 msgid "Last Failure"
 msgstr "Dernier échec"
@@ -10305,12 +10305,12 @@ msgid "Edit job"
 msgstr "Éditer la tâche"
 
 #: plugins/hudson/include/hudsonViews.class.php:221
-#: plugins/hudson/include/hudsonViews.class.php:401
+#: plugins/hudson/include/hudsonViews.class.php:405
 msgid "Job URL:"
 msgstr "URL de la tâche :"
 
 #: plugins/hudson/include/hudsonViews.class.php:225
-#: plugins/hudson/include/hudsonViews.class.php:406
+#: plugins/hudson/include/hudsonViews.class.php:410
 msgid "eg: http://myCIserver/hudson/job/myJob"
 msgstr "exemple : http://myCIserver/hudson/job/myJob"
 
@@ -10325,112 +10325,99 @@ msgstr ""
 "Nom (sans espace) utilisé pour faire référence à cette tâche.  Par exemple : "
 "tâche n°%s."
 
-#: plugins/hudson/include/hudsonViews.class.php:236
-msgid "Trigger a build after SVN commits:"
-msgstr "Déclencher une construction après une validation SVN :"
+#: plugins/hudson/include/hudsonViews.class.php:237
+#: plugins/hudson/include/hudsonViews.class.php:250
+#: plugins/hudson/include/hudsonViews.class.php:414
+#, php-format
+msgid "Trigger a build after %s commits:"
+msgstr "Lancer une fabrication après les envois %s :"
 
-#: plugins/hudson/include/hudsonViews.class.php:247
-msgid "Trigger a build after CVS commits:"
-msgstr "Déclencher une construction après une validation SVN :"
-
-#: plugins/hudson/include/hudsonViews.class.php:258
-#: plugins/hudson/include/hudsonViews.class.php:421
+#: plugins/hudson/include/hudsonViews.class.php:262
+#: plugins/hudson/include/hudsonViews.class.php:425
 msgid "with (optional) token:"
 msgstr "utiliser un jeton (optionnel) :"
 
-#: plugins/hudson/include/hudsonViews.class.php:266
+#: plugins/hudson/include/hudsonViews.class.php:270
 msgid "Update job"
 msgstr "Mettre à jour la tâche"
 
-#: plugins/hudson/include/hudsonViews.class.php:294 www/admin/cronman.php:43
+#: plugins/hudson/include/hudsonViews.class.php:298 www/admin/cronman.php:43
 #: www/people/editjob.php:74 www/people/editjob.php:91
 #: www/people/editjob.php:107
 msgid "Job"
 msgstr "Tâche"
 
-#: plugins/hudson/include/hudsonViews.class.php:297
+#: plugins/hudson/include/hudsonViews.class.php:301
 msgid "RSS"
 msgstr "RSS"
 
-#: plugins/hudson/include/hudsonViews.class.php:299
+#: plugins/hudson/include/hudsonViews.class.php:303
 msgid "SVN trigger"
 msgstr "Déclencheur SVN"
 
-#: plugins/hudson/include/hudsonViews.class.php:302
+#: plugins/hudson/include/hudsonViews.class.php:306
 msgid "CVS trigger"
 msgstr "Déclencheur CVS"
 
-#: plugins/hudson/include/hudsonViews.class.php:324
+#: plugins/hudson/include/hudsonViews.class.php:328
 #, php-format
 msgid "Show job %s"
 msgstr "Montrer la tâche %s"
 
-#: plugins/hudson/include/hudsonViews.class.php:326
-#: plugins/hudson/include/hudsonViews.class.php:331
+#: plugins/hudson/include/hudsonViews.class.php:330
+#: plugins/hudson/include/hudsonViews.class.php:335
 #, php-format
 msgid "Show build #%s of job %s"
 msgstr "Montrer la construction n°%s de la tâche %s"
 
-#: plugins/hudson/include/hudsonViews.class.php:326
-#: plugins/hudson/include/hudsonViews.class.php:331
+#: plugins/hudson/include/hudsonViews.class.php:330
+#: plugins/hudson/include/hudsonViews.class.php:335
 msgid "build"
 msgstr "construction"
 
-#: plugins/hudson/include/hudsonViews.class.php:335
+#: plugins/hudson/include/hudsonViews.class.php:339
 #, php-format
 msgid "RSS feed of all builds for %s job"
 msgstr "Flux RSS de toutes les constructions de la tâche %s"
 
-#: plugins/hudson/include/hudsonViews.class.php:339
+#: plugins/hudson/include/hudsonViews.class.php:343
 msgid "SVN commit will trigger a build"
 msgstr "Une validation SVN déclenchera une construction."
 
-#: plugins/hudson/include/hudsonViews.class.php:346
+#: plugins/hudson/include/hudsonViews.class.php:350
 msgid "CVS commit will trigger a build"
 msgstr "Une validation CVS déclenchera une construction."
 
-#: plugins/hudson/include/hudsonViews.class.php:364
+#: plugins/hudson/include/hudsonViews.class.php:368
 msgid "Edit this job"
 msgstr "Modifier cette tâche"
 
-#: plugins/hudson/include/hudsonViews.class.php:370
+#: plugins/hudson/include/hudsonViews.class.php:374
 #, php-format
 msgid "Are you sure you want to delete Job %s from project %s?"
 msgstr "Etes-vous sûr de vouloir supprimer la tâche %s du projet %s ?"
 
-#: plugins/hudson/include/hudsonViews.class.php:371
+#: plugins/hudson/include/hudsonViews.class.php:375
 msgid "Delete this job"
 msgstr "Supprimer cette tâche"
 
-#: plugins/hudson/include/hudsonViews.class.php:384
+#: plugins/hudson/include/hudsonViews.class.php:388
 #, fuzzy
 msgid "No Hudson jobs associated with this project."
 msgstr ""
 "Ce projet n'a pas encore de tâches Hudson associées.  Pour en ajouter, "
 "utilisez le lien ci-dessous."
 
-#: plugins/hudson/include/hudsonViews.class.php:386
+#: plugins/hudson/include/hudsonViews.class.php:390
 #, fuzzy
 msgid "To add a job, select the link just below."
 msgstr ""
 "Ce projet n'a pas encore de tâches Hudson associées.  Pour en ajouter, "
 "utilisez le lien ci-dessous."
 
-#: plugins/hudson/include/hudsonViews.class.php:397
+#: plugins/hudson/include/hudsonViews.class.php:401
 msgid "Add job"
 msgstr "Ajouter une tâche"
-
-#: plugins/hudson/include/hudsonViews.class.php:410
-msgid "Trigger a build after commits:"
-msgstr "Déclencher une construction après validation :"
-
-#: plugins/hudson/include/hudsonViews.class.php:412
-msgid "SVN"
-msgstr "SVN"
-
-#: plugins/hudson/include/hudsonViews.class.php:416
-msgid "CVS"
-msgstr "CVS"
 
 #: plugins/hudson/include/hudson_Widget_JobBuildHistory.class.php:45
 #, php-format
@@ -23314,6 +23301,21 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
+#~ msgid "Trigger a build after SVN commits:"
+#~ msgstr "Déclencher une construction après une validation SVN :"
+
+#~ msgid "Trigger a build after CVS commits:"
+#~ msgstr "Déclencher une construction après une validation SVN :"
+
+#~ msgid "Trigger a build after commits:"
+#~ msgstr "Déclencher une construction après validation :"
+
+#~ msgid "SVN"
+#~ msgstr "SVN"
+
+#~ msgid "CVS"
+#~ msgstr "CVS"
+
 #~ msgid "Customize layout"
 #~ msgstr "Personnaliser la mise en page"
 
@@ -25378,9 +25380,6 @@ msgstr "Page personnelle de %s"
 #~ msgstr ""
 #~ "Les espaces ne sont pas autorisés dan un nom de tâche. Ils ont été "
 #~ "remplacés par « _ »."
-
-#~ msgid "Trigger a build after %s commits:"
-#~ msgstr "Lancer une fabrication après les envois %s :"
 
 #~ msgid "Jira Admin"
 #~ msgstr "Administration de Jira"
