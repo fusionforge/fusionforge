@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:16+0200\n"
+"POT-Creation-Date: 2013-09-18 11:33+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -447,7 +447,7 @@ msgstr ""
 #: cronjobs/send_pending_items_mail.php:119
 #: cronjobs/send_pending_items_mail.php:120
 #: cronjobs/send_pending_items_mail.php:121
-#: plugins/forumml/www/forumml_utils.php:686
+#: plugins/forumml/www/forumml_utils.php:686 plugins/forumml/www/index.php:122
 #: plugins/hudson/include/hudsonPlugin.class.php:265
 #: plugins/hudson/include/hudsonPlugin.class.php:292
 #: plugins/hudson/include/hudsonPlugin.class.php:293
@@ -2107,6 +2107,7 @@ msgstr "게시판 이름"
 
 #: common/forum/ForumAdmin.class.php:321
 #: common/tracker/include/ArtifactHtml.class.php:73
+#: plugins/forumml/www/index.php:122
 #: plugins/message/common/messagePlugin.class.php:35 www/admin/cronman.php:44
 #: www/sendmessage.php:154
 msgid "Message"
@@ -9321,6 +9322,7 @@ msgid "Toggle font family (typewriter/normal)"
 msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:442
+#: plugins/forumml/www/scripts/cc_attach_js.php:42
 msgid "Cc:"
 msgstr ""
 
@@ -9333,7 +9335,8 @@ msgstr "답글"
 msgid "Add cc:"
 msgstr ""
 
-#: plugins/forumml/www/forumml_utils.php:586
+#: plugins/forumml/www/forumml_utils.php:586 plugins/forumml/www/index.php:118
+#: plugins/forumml/www/scripts/cc_attach_js.php:50
 #, fuzzy
 msgid "Attach:"
 msgstr "첨부 파일"
@@ -9386,8 +9389,10 @@ msgid " Redirecting to archive page, please wait ..."
 msgstr ""
 
 #: plugins/forumml/www/index.php:102 plugins/forumml/www/message.php:151
+#: plugins/mailman/www/mailman_utils.php:51
+#: plugins/mailman/www/mailman_utils.php:66
 #, fuzzy
-msgid "Mailing List "
+msgid "Mailing List"
 msgstr "메일링 리스트"
 
 #: plugins/forumml/www/index.php:102
@@ -9412,17 +9417,6 @@ msgstr "Submit a new version"
 #: www/sendmessage.php:69 www/sendmessage.php:150
 msgid "Subject"
 msgstr "제목"
-
-#: plugins/forumml/www/index.php:118
-#: plugins/forumml/www/scripts/cc_attach_js.php:50
-#, fuzzy
-msgid "Attach :"
-msgstr "첨부 파일"
-
-#: plugins/forumml/www/index.php:122
-#, fuzzy
-msgid "Message :"
-msgstr "글:"
 
 #: plugins/forumml/www/message.php:101 plugins/forumml/www/upload.php:51
 #, fuzzy
@@ -9480,10 +9474,6 @@ msgstr "%1$s의 게시판"
 #, fuzzy
 msgid "Thread(s) found"
 msgstr "Thread View"
-
-#: plugins/forumml/www/scripts/cc_attach_js.php:42
-msgid "CC :"
-msgstr ""
 
 #: plugins/forumml/www/upload.php:82
 #, fuzzy
@@ -10985,12 +10975,6 @@ msgid ""
 "\n"
 "Thank you for registering your project with %1$s."
 msgstr ""
-
-#: plugins/mailman/www/mailman_utils.php:51
-#: plugins/mailman/www/mailman_utils.php:66
-#, fuzzy
-msgid "Mailing List"
-msgstr "메일링 리스트"
 
 #: plugins/mailman/www/mailman_utils.php:55 www/mail/index.php:80
 msgid "Subscription"
@@ -23409,6 +23393,18 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "Attach :"
+#~ msgstr "첨부 파일"
+
+#, fuzzy
+#~ msgid "Mailing List "
+#~ msgstr "메일링 리스트"
+
+#, fuzzy
+#~ msgid "Message :"
+#~ msgstr "글:"
 
 #, fuzzy
 #~ msgid "Error in Trove operation: "

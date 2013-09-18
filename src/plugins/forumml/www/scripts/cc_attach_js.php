@@ -39,7 +39,7 @@ function addHeader(cc,file,header_type)
 
   newdiv.setAttribute("id",divIdName);
   if (header_type == 1) {
-  	newdiv.innerHTML += "<table><tr><td width='65' align='right'><b><i><?php echo _('CC :') ?> </i></b></td><td align=center width=350><input name='ccs["
+  	newdiv.innerHTML += "<table><tr><td width='65' align='right'><b><i><?php echo _('Cc:') ?> </i></b></td><td align=center width=350><input name='ccs["
   					+num
   					+"]' type='text' value='"
   					+cc
@@ -47,7 +47,7 @@ function addHeader(cc,file,header_type)
   					+divIdName
   					+"\')\"><img border='0' src=\"<?php echo getImage("ic/trash.png"); ?>\"></a></td></tr></table>";
   } else {
-  	newdiv.innerHTML += "<table><tr><td width='65' align='right'><b><i><?php echo _('Attach :') ?> </i></b></td><td align=center width=350><input name='files["
+  	newdiv.innerHTML += "<table><tr><td width='65' align='right'><b><i><?php echo _('Attach:') ?> </i></b></td><td align=center width=350><input name='files["
   					+num
   					+"]'' type='file' value='"
   					+file

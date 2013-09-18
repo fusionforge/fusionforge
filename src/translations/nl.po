@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:16+0200\n"
+"POT-Creation-Date: 2013-09-18 11:33+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -444,7 +444,7 @@ msgstr "Project"
 #: cronjobs/send_pending_items_mail.php:119
 #: cronjobs/send_pending_items_mail.php:120
 #: cronjobs/send_pending_items_mail.php:121
-#: plugins/forumml/www/forumml_utils.php:686
+#: plugins/forumml/www/forumml_utils.php:686 plugins/forumml/www/index.php:122
 #: plugins/hudson/include/hudsonPlugin.class.php:265
 #: plugins/hudson/include/hudsonPlugin.class.php:292
 #: plugins/hudson/include/hudsonPlugin.class.php:293
@@ -2112,6 +2112,7 @@ msgstr "Forumnaam"
 
 #: common/forum/ForumAdmin.class.php:321
 #: common/tracker/include/ArtifactHtml.class.php:73
+#: plugins/forumml/www/index.php:122
 #: plugins/message/common/messagePlugin.class.php:35 www/admin/cronman.php:44
 #: www/sendmessage.php:154
 msgid "Message"
@@ -9408,6 +9409,7 @@ msgid "Toggle font family (typewriter/normal)"
 msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:442
+#: plugins/forumml/www/scripts/cc_attach_js.php:42
 msgid "Cc:"
 msgstr ""
 
@@ -9420,7 +9422,8 @@ msgstr "antwoord"
 msgid "Add cc:"
 msgstr ""
 
-#: plugins/forumml/www/forumml_utils.php:586
+#: plugins/forumml/www/forumml_utils.php:586 plugins/forumml/www/index.php:118
+#: plugins/forumml/www/scripts/cc_attach_js.php:50
 #, fuzzy
 msgid "Attach:"
 msgstr "Bijgevoegde bestanden"
@@ -9473,8 +9476,10 @@ msgid " Redirecting to archive page, please wait ..."
 msgstr ""
 
 #: plugins/forumml/www/index.php:102 plugins/forumml/www/message.php:151
+#: plugins/mailman/www/mailman_utils.php:51
+#: plugins/mailman/www/mailman_utils.php:66
 #, fuzzy
-msgid "Mailing List "
+msgid "Mailing List"
 msgstr "Mailing lijsten"
 
 #: plugins/forumml/www/index.php:102
@@ -9499,17 +9504,6 @@ msgstr "Submit nieuwe versie"
 #: www/sendmessage.php:69 www/sendmessage.php:150
 msgid "Subject"
 msgstr "Onderwerp"
-
-#: plugins/forumml/www/index.php:118
-#: plugins/forumml/www/scripts/cc_attach_js.php:50
-#, fuzzy
-msgid "Attach :"
-msgstr "Bijgevoegde bestanden"
-
-#: plugins/forumml/www/index.php:122
-#, fuzzy
-msgid "Message :"
-msgstr "Bericht:"
 
 #: plugins/forumml/www/message.php:101 plugins/forumml/www/upload.php:51
 #, fuzzy
@@ -9567,10 +9561,6 @@ msgstr "Zoekresulten voor <em>%1$s</em>"
 #, fuzzy
 msgid "Thread(s) found"
 msgstr "Thread"
-
-#: plugins/forumml/www/scripts/cc_attach_js.php:42
-msgid "CC :"
-msgstr ""
 
 #: plugins/forumml/www/upload.php:82
 #, fuzzy
@@ -11102,12 +11092,6 @@ msgstr ""
 "Verander dit wachtwoord zo snel mogelijk.\n"
 "\n"
 "Bedankt voor het aanmelden van je project bij %1$s."
-
-#: plugins/mailman/www/mailman_utils.php:51
-#: plugins/mailman/www/mailman_utils.php:66
-#, fuzzy
-msgid "Mailing List"
-msgstr "Mailing lijsten"
 
 #: plugins/mailman/www/mailman_utils.php:55 www/mail/index.php:80
 msgid "Subscription"
@@ -23707,6 +23691,18 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#, fuzzy
+#~ msgid "Attach :"
+#~ msgstr "Bijgevoegde bestanden"
+
+#, fuzzy
+#~ msgid "Mailing List "
+#~ msgstr "Mailing lijsten"
+
+#, fuzzy
+#~ msgid "Message :"
+#~ msgstr "Bericht:"
 
 #, fuzzy
 #~ msgid "Error in Trove operation: "

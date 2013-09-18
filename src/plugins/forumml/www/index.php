@@ -99,7 +99,7 @@ $list = new MailmanList($group_id,$list_id);
 	}
 
 	$list_link = '<a href="/plugins/forumml/message.php?group_id='.$group_id.'&list='.$list_id.'">'.$list->getName().'</a>';
-	echo '<h2>'._('Mailing List ').$list_link.' - '._('New Thread').'</h2>
+	echo '<h2>'._('Mailing List').' '.$list_link.' - '._('New Thread').'</h2>
 	<a href="/plugins/forumml/message.php?group_id='.$group_id.'&list='.$list_id.'">['._('Browse Archives').']</a><br><br>
 	<h3>'._('Submit a new thread').'</h3>';
 
@@ -115,11 +115,11 @@ $list = new MailmanList($group_id,$list_id);
     <tr>
 		<td align="left">
 			<p><a href="javascript:;" onclick="addHeader(\'\',\'\',1);">['.('Add cc').']</a>
-			- <a href="javascript:;" onclick="addHeader(\'\',\'\',2);">['._('Attach :').']</a></p>
+			- <a href="javascript:;" onclick="addHeader(\'\',\'\',2);">['._('Attach:').']</a></p>
 			<input type="hidden" value="0" id="header_val" />
 			<div id="mail_header"></div></td></tr></table>';
 	echo "<table><tr>
-			<td valign='top' align='left'><b>"._('Message :')."&nbsp;</b></td>
+			<td valign='top' align='left'><b>"._('Message')._(': ')."</b></td>
 			<td align='left'><textarea rows='20' cols='100' name='message'></textarea></td>
 		</tr>
 		<tr>

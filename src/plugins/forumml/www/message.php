@@ -148,7 +148,7 @@ if ($p && $plugin_manager->isPluginAvailable($p) && $p->isAllowed()) {
 	}
 
 	$list_link = '<a href="/plugins/forumml/message.php?group_id='.$group_id.'&list='.$list_id.'">'.$list_name.'</a>';
-	$title     = _('Mailing List '.$list_link);
+	$title = _('Mailing List').' '.$list_link;
 	if ($topic) {
 		$fmlMessageMgr = new ForumML_MessageManager();
 		$value = $fmlMessageMgr->getHeaderValue($topic, FORUMML_SUBJECT);

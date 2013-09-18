@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:16+0200\n"
+"POT-Creation-Date: 2013-09-18 11:33+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -443,7 +443,7 @@ msgstr "Proxecto "
 #: cronjobs/send_pending_items_mail.php:119
 #: cronjobs/send_pending_items_mail.php:120
 #: cronjobs/send_pending_items_mail.php:121
-#: plugins/forumml/www/forumml_utils.php:686
+#: plugins/forumml/www/forumml_utils.php:686 plugins/forumml/www/index.php:122
 #: plugins/hudson/include/hudsonPlugin.class.php:265
 #: plugins/hudson/include/hudsonPlugin.class.php:292
 #: plugins/hudson/include/hudsonPlugin.class.php:293
@@ -2116,6 +2116,7 @@ msgstr "Nome do foro "
 
 #: common/forum/ForumAdmin.class.php:321
 #: common/tracker/include/ArtifactHtml.class.php:73
+#: plugins/forumml/www/index.php:122
 #: plugins/message/common/messagePlugin.class.php:35 www/admin/cronman.php:44
 #: www/sendmessage.php:154
 msgid "Message"
@@ -9472,6 +9473,7 @@ msgid "Toggle font family (typewriter/normal)"
 msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:442
+#: plugins/forumml/www/scripts/cc_attach_js.php:42
 msgid "Cc:"
 msgstr ""
 
@@ -9484,7 +9486,8 @@ msgstr "Responder "
 msgid "Add cc:"
 msgstr ""
 
-#: plugins/forumml/www/forumml_utils.php:586
+#: plugins/forumml/www/forumml_utils.php:586 plugins/forumml/www/index.php:118
+#: plugins/forumml/www/scripts/cc_attach_js.php:50
 #, fuzzy
 msgid "Attach:"
 msgstr "Anexar ficheiros"
@@ -9537,8 +9540,10 @@ msgid " Redirecting to archive page, please wait ..."
 msgstr ""
 
 #: plugins/forumml/www/index.php:102 plugins/forumml/www/message.php:151
+#: plugins/mailman/www/mailman_utils.php:51
+#: plugins/mailman/www/mailman_utils.php:66
 #, fuzzy
-msgid "Mailing List "
+msgid "Mailing List"
 msgstr "Listas de correo"
 
 #: plugins/forumml/www/index.php:102
@@ -9563,17 +9568,6 @@ msgstr "Enviar unha nova versión"
 #: www/sendmessage.php:69 www/sendmessage.php:150
 msgid "Subject"
 msgstr "Asunto "
-
-#: plugins/forumml/www/index.php:118
-#: plugins/forumml/www/scripts/cc_attach_js.php:50
-#, fuzzy
-msgid "Attach :"
-msgstr "Anexar ficheiros"
-
-#: plugins/forumml/www/index.php:122
-#, fuzzy
-msgid "Message :"
-msgstr "Mensaxe:"
 
 #: plugins/forumml/www/message.php:101 plugins/forumml/www/upload.php:51
 #, fuzzy
@@ -9632,10 +9626,6 @@ msgstr "Resultados da busca para %1$s"
 #, fuzzy
 msgid "Thread(s) found"
 msgstr "Fíos "
-
-#: plugins/forumml/www/scripts/cc_attach_js.php:42
-msgid "CC :"
-msgstr ""
 
 #: plugins/forumml/www/upload.php:82
 #, fuzzy
@@ -11152,12 +11142,6 @@ msgstr ""
 "Animámoslle a que cambie este contrasinal canto antes.\n"
 "\n"
 "Grazas por rexistrar o seu proxecto en %1$s."
-
-#: plugins/mailman/www/mailman_utils.php:51
-#: plugins/mailman/www/mailman_utils.php:66
-#, fuzzy
-msgid "Mailing List"
-msgstr "Listas de correo"
 
 #: plugins/mailman/www/mailman_utils.php:55 www/mail/index.php:80
 msgid "Subscription"
@@ -23884,6 +23868,18 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Attach :"
+#~ msgstr "Anexar ficheiros"
+
+#, fuzzy
+#~ msgid "Mailing List "
+#~ msgstr "Listas de correo"
+
+#, fuzzy
+#~ msgid "Message :"
+#~ msgstr "Mensaxe:"
 
 #, fuzzy
 #~ msgid "Error in Trove operation: "
