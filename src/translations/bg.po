@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:10+0200\n"
+"POT-Creation-Date: 2013-09-18 11:16+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15947,7 +15947,7 @@ msgstr "Няма намерени документи"
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:70
 #: www/include/trove.php:408 www/include/trove.php:417
 #: www/include/trove.php:421 www/include/trove.php:425
-#: www/include/trove.php:429
+#: www/include/trove.php:429 www/trove/admin/trove_cat_add.php:49
 #, fuzzy, php-format
 msgid "Error in Trove Operation: %s"
 msgstr "Информация за проекта"
@@ -22914,11 +22914,6 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: www/trove/admin/trove_cat_add.php:49
-#, fuzzy
-msgid "Error in Trove operation: "
-msgstr "Информация за проекта"
-
 #: www/trove/admin/trove_cat_add.php:59
 msgid "Site Admin: Trove - Add Node"
 msgstr ""
@@ -22995,6 +22990,10 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Лична Информация"
+
+#, fuzzy
+#~ msgid "Error in Trove operation: "
+#~ msgstr "Информация за проекта"
 
 #, fuzzy
 #~ msgid "Error In Trove Operation: "

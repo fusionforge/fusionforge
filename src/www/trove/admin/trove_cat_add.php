@@ -46,12 +46,12 @@ if ($GLOBALS['submit']) {
 			);
 
 		if (!$res || db_affected_rows($res)<1) {
-			exit_error( _('Error in Trove operation: ').db_error(),'');
+			exit_error(sprintf(_('Error in Trove Operation: %s'), db_error()), '');
 		}
 	}
 
 	// update full paths now
-        trove_genfullpaths($newroot,trove_getfullname($newroot),$newroot);
+	trove_genfullpaths($newroot,trove_getfullname($newroot),$newroot);
 
 	session_redirect("/admin/trove/trove_cat_list.php");
 }

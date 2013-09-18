@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:10+0200\n"
+"POT-Creation-Date: 2013-09-18 11:16+0200\n"
 "PO-Revision-Date: 2009-10-06 16:32+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14935,7 +14935,7 @@ msgstr ""
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:70
 #: www/include/trove.php:408 www/include/trove.php:417
 #: www/include/trove.php:421 www/include/trove.php:425
-#: www/include/trove.php:429
+#: www/include/trove.php:429 www/trove/admin/trove_cat_add.php:49
 #, php-format
 msgid "Error in Trove Operation: %s"
 msgstr ""
@@ -21557,10 +21557,6 @@ msgstr ""
 
 #: www/tracker/roadmap.php:538
 msgid "Unknown"
-msgstr ""
-
-#: www/trove/admin/trove_cat_add.php:49
-msgid "Error in Trove operation: "
 msgstr ""
 
 #: www/trove/admin/trove_cat_add.php:59

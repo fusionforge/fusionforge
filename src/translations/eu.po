@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:10+0200\n"
+"POT-Creation-Date: 2013-09-18 11:16+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16279,7 +16279,7 @@ msgstr "Ez da proiektuaren taldea aurkitu"
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:70
 #: www/include/trove.php:408 www/include/trove.php:417
 #: www/include/trove.php:421 www/include/trove.php:425
-#: www/include/trove.php:429
+#: www/include/trove.php:429 www/trove/admin/trove_cat_add.php:49
 #, fuzzy, php-format
 msgid "Error in Trove Operation: %s"
 msgstr "Akatsa proiektuen mapan eginiko eragiketan"
@@ -23465,11 +23465,6 @@ msgstr "Ez daude daturik txostenean"
 msgid "Unknown"
 msgstr "Unix kontuaren egoera"
 
-#: www/trove/admin/trove_cat_add.php:49
-#, fuzzy
-msgid "Error in Trove operation: "
-msgstr "Akatsa proiektuen mapan eginiko eragiketan"
-
 #: www/trove/admin/trove_cat_add.php:59
 msgid "Site Admin: Trove - Add Node"
 msgstr "Webgunearen administrazioa: Proiektuen mapa - Nodoa gehitu"
@@ -23548,6 +23543,10 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#, fuzzy
+#~ msgid "Error in Trove operation: "
+#~ msgstr "Akatsa proiektuen mapan eginiko eragiketan"
 
 #, fuzzy
 #~ msgid "Error In Trove Operation: "

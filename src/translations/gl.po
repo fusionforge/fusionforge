@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:10+0200\n"
+"POT-Creation-Date: 2013-09-18 11:16+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -16508,7 +16508,7 @@ msgstr "Non se achou un grupo de proxecto "
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:70
 #: www/include/trove.php:408 www/include/trove.php:417
 #: www/include/trove.php:421 www/include/trove.php:425
-#: www/include/trove.php:429
+#: www/include/trove.php:429 www/trove/admin/trove_cat_add.php:49
 #, fuzzy, php-format
 msgid "Error in Trove Operation: %s"
 msgstr "Produciuse un error nunha operación na árbore de proxectos "
@@ -23808,11 +23808,6 @@ msgstr "Non se atopou ningún dato para o informe"
 msgid "Unknown"
 msgstr "Descoñecido"
 
-#: www/trove/admin/trove_cat_add.php:49
-#, fuzzy
-msgid "Error in Trove operation: "
-msgstr "Erro na operación de categorización"
-
 #: www/trove/admin/trove_cat_add.php:59
 msgid "Site Admin: Trove - Add Node"
 msgstr "Administración do sitio: árbore proxectos - engadir un nodo "
@@ -23889,6 +23884,10 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Error in Trove operation: "
+#~ msgstr "Erro na operación de categorización"
 
 #, fuzzy
 #~ msgid "Error In Trove Operation: "

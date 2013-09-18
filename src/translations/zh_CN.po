@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:10+0200\n"
+"POT-Creation-Date: 2013-09-18 11:16+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16269,7 +16269,7 @@ msgstr "没有发现项目组"
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:70
 #: www/include/trove.php:408 www/include/trove.php:417
 #: www/include/trove.php:421 www/include/trove.php:425
-#: www/include/trove.php:429
+#: www/include/trove.php:429 www/trove/admin/trove_cat_add.php:49
 #, fuzzy, php-format
 msgid "Error in Trove Operation: %s"
 msgstr "在软件执行时发生错误"
@@ -23402,11 +23402,6 @@ msgstr "找不到资料可以报告"
 msgid "Unknown"
 msgstr "Unix帐号状态"
 
-#: www/trove/admin/trove_cat_add.php:49
-#, fuzzy
-msgid "Error in Trove operation: "
-msgstr "在软件执行时发生错误"
-
 #: www/trove/admin/trove_cat_add.php:59
 msgid "Site Admin: Trove - Add Node"
 msgstr "网站管理：软件 - 添加节点"
@@ -23489,6 +23484,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Error in Trove operation: "
+#~ msgstr "在软件执行时发生错误"
 
 #, fuzzy
 #~ msgid "Error In Trove Operation: "
