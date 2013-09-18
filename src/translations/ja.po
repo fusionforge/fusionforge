@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:45+0200\n"
+"POT-Creation-Date: 2013-09-18 12:36+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -12774,6 +12774,7 @@ msgid "Enable Tree in projects tab."
 msgstr ""
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:38
+#: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:40
 msgid "Enable Tree"
 msgstr ""
 
@@ -12796,10 +12797,6 @@ msgstr "ドキュメントマネージャ：プロジェクトドキュメント
 
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:39
 msgid "Enable visibily in hierarchy tree."
-msgstr ""
-
-#: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:40
-msgid "Enable tree"
 msgstr ""
 
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:48

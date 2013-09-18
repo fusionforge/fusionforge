@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:45+0200\n"
+"POT-Creation-Date: 2013-09-18 12:36+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -13215,6 +13215,7 @@ msgid "Enable Tree in projects tab."
 msgstr ""
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:38
+#: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:40
 #, fuzzy
 msgid "Enable Tree"
 msgstr "Habilitar pserver"
@@ -13239,11 +13240,6 @@ msgstr "DocManager: documentación do proxecto"
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:39
 msgid "Enable visibily in hierarchy tree."
 msgstr ""
-
-#: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:40
-#, fuzzy
-msgid "Enable tree"
-msgstr "Habilitar pserver"
 
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:48
 msgid ""
@@ -23859,6 +23855,10 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Enable tree"
+#~ msgstr "Habilitar pserver"
 
 #, fuzzy
 #~ msgid "Could not get ProjectTaskFactory"

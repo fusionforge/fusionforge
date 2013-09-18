@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:45+0200\n"
+"POT-Creation-Date: 2013-09-18 12:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11984,6 +11984,7 @@ msgid "Enable Tree in projects tab."
 msgstr ""
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:38
+#: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:40
 msgid "Enable Tree"
 msgstr ""
 
@@ -12005,10 +12006,6 @@ msgstr ""
 
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:39
 msgid "Enable visibily in hierarchy tree."
-msgstr ""
-
-#: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:40
-msgid "Enable tree"
 msgstr ""
 
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:48

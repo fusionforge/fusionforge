@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:45+0200\n"
+"POT-Creation-Date: 2013-09-18 12:36+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -13123,6 +13123,7 @@ msgid "Enable Tree in projects tab."
 msgstr ""
 
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:38
+#: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:40
 #, fuzzy
 msgid "Enable Tree"
 msgstr "结束"
@@ -13147,11 +13148,6 @@ msgstr "文件管理：项目文件"
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:39
 msgid "Enable visibily in hierarchy tree."
 msgstr ""
-
-#: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:40
-#, fuzzy
-msgid "Enable tree"
-msgstr "结束"
 
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:48
 msgid ""
@@ -23459,6 +23455,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Enable tree"
+#~ msgstr "结束"
 
 #, fuzzy
 #~ msgid "Could not get ProjectTaskFactory"

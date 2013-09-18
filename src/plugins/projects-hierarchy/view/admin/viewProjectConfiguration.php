@@ -37,7 +37,7 @@ if (!$projectsHierarchyProjectConf) {
 	echo '<tr><td><label id="projectsHierarchy-tree" ';
 	if ($use_tooltips)
 		echo 'class="tabtitle-nw" title="'._('Enable visibily in hierarchy tree.').'"';
-	echo ' >'._('Enable tree').'</label></td><td><input type="checkbox" name="tree" value="1"';
+	echo ' >'._('Enable Tree').'</label></td><td><input type="checkbox" name="tree" value="1"';
 	if ($projectsHierarchyProjectConf['tree'])
 		echo 'checked="checked" ';
 
