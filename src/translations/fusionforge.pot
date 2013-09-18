@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:10+0200\n"
+"POT-Creation-Date: 2013-09-18 10:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14673,7 +14673,7 @@ msgstr ""
 msgid "All Project Admins"
 msgstr ""
 
-#: www/admin/massmail.php:102
+#: www/admin/massmail.php:102 www/include/features_boxes.php:217
 msgid "All Users"
 msgstr ""
 
@@ -16393,10 +16393,6 @@ msgstr ""
 
 #: www/include/features_boxes.php:194
 msgid "All newest projects"
-msgstr ""
-
-#: www/include/features_boxes.php:217
-msgid "All users"
 msgstr ""
 
 #: www/include/features_boxes.php:248

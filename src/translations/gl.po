@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:10+0200\n"
+"POT-Creation-Date: 2013-09-18 10:12+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -16227,7 +16227,7 @@ msgstr "Todos os desenvolvedores de proxectos "
 msgid "All Project Admins"
 msgstr "Todos os administradores de proxectos "
 
-#: www/admin/massmail.php:102
+#: www/admin/massmail.php:102 www/include/features_boxes.php:217
 msgid "All Users"
 msgstr "Todos os usuarios "
 
@@ -18114,11 +18114,6 @@ msgstr "m/d "
 #, fuzzy
 msgid "All newest projects"
 msgstr "Engadir un proxecto novo"
-
-#: www/include/features_boxes.php:217
-#, fuzzy
-msgid "All users"
-msgstr "Todos os usuarios "
 
 #: www/include/features_boxes.php:248
 #, fuzzy
@@ -23942,6 +23937,10 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "All users"
+#~ msgstr "Todos os usuarios "
 
 #, fuzzy
 #~ msgid "Add file"

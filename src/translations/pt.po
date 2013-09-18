@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:10+0200\n"
+"POT-Creation-Date: 2013-09-18 10:12+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14810,7 +14810,7 @@ msgstr "Todos os Desenvolvedores de Projeto"
 msgid "All Project Admins"
 msgstr "Todos os Administradores de Projeto"
 
-#: www/admin/massmail.php:102
+#: www/admin/massmail.php:102 www/include/features_boxes.php:217
 msgid "All Users"
 msgstr "Todos os Usuários"
 
@@ -16567,10 +16567,6 @@ msgstr ""
 
 #: www/include/features_boxes.php:194
 msgid "All newest projects"
-msgstr ""
-
-#: www/include/features_boxes.php:217
-msgid "All users"
 msgstr ""
 
 #: www/include/features_boxes.php:248

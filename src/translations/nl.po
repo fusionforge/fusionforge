@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:10+0200\n"
+"POT-Creation-Date: 2013-09-18 10:12+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16091,7 +16091,7 @@ msgstr "Alle project ontwikkelaars"
 msgid "All Project Admins"
 msgstr "Alle project beheerders"
 
-#: www/admin/massmail.php:102
+#: www/admin/massmail.php:102 www/include/features_boxes.php:217
 msgid "All Users"
 msgstr "Alle gebruikers"
 
@@ -17986,11 +17986,6 @@ msgstr "m/d"
 #, fuzzy
 msgid "All newest projects"
 msgstr "Voeg een project toe"
-
-#: www/include/features_boxes.php:217
-#, fuzzy
-msgid "All users"
-msgstr "Alle gebruikers"
 
 #: www/include/features_boxes.php:248
 #, fuzzy
@@ -23762,6 +23757,10 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#, fuzzy
+#~ msgid "All users"
+#~ msgstr "Alle gebruikers"
 
 #, fuzzy
 #~ msgid "Add file"

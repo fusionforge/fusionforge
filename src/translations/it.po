@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:10+0200\n"
+"POT-Creation-Date: 2013-09-18 10:12+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16100,7 +16100,7 @@ msgstr "Tutti gli sviluppatori del progetto"
 msgid "All Project Admins"
 msgstr "Tutti gli amministratori del progetto"
 
-#: www/admin/massmail.php:102
+#: www/admin/massmail.php:102 www/include/features_boxes.php:217
 msgid "All Users"
 msgstr "Tutti gli utenti"
 
@@ -18000,11 +18000,6 @@ msgstr "d/m"
 #, fuzzy
 msgid "All newest projects"
 msgstr "Aggiungi un progetto"
-
-#: www/include/features_boxes.php:217
-#, fuzzy
-msgid "All users"
-msgstr "Tutti gli utenti"
 
 #: www/include/features_boxes.php:248
 #, fuzzy
@@ -23760,6 +23755,10 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "All users"
+#~ msgstr "Tutti gli utenti"
 
 #, fuzzy
 #~ msgid "Add file"

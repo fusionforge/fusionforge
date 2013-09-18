@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:10+0200\n"
+"POT-Creation-Date: 2013-09-18 10:12+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -16216,7 +16216,7 @@ msgstr "Alle Projekt-Entwickler"
 msgid "All Project Admins"
 msgstr "Alle Projekt-Admins"
 
-#: www/admin/massmail.php:102
+#: www/admin/massmail.php:102 www/include/features_boxes.php:217
 msgid "All Users"
 msgstr "Alle Benutzer"
 
@@ -18123,10 +18123,6 @@ msgstr "m/y"
 #: www/include/features_boxes.php:194
 msgid "All newest projects"
 msgstr "Alle neuesten Projekte"
-
-#: www/include/features_boxes.php:217
-msgid "All users"
-msgstr "Alle Benutzer"
 
 #: www/include/features_boxes.php:248
 msgid "All project activities"
@@ -24011,6 +24007,9 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "All users"
+#~ msgstr "Alle Benutzer"
 
 #, fuzzy
 #~ msgid "Add file"

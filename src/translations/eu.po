@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:10+0200\n"
+"POT-Creation-Date: 2013-09-18 10:12+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15999,7 +15999,7 @@ msgstr "Proiektuen kolaboratzaile guztiak"
 msgid "All Project Admins"
 msgstr "Proiektuen administrari guztiak"
 
-#: www/admin/massmail.php:102
+#: www/admin/massmail.php:102 www/include/features_boxes.php:217
 msgid "All Users"
 msgstr "Erabiltzaile guztiak"
 
@@ -17880,11 +17880,6 @@ msgstr ""
 #, fuzzy
 msgid "All newest projects"
 msgstr "Azpi proiektu bat gehitu"
-
-#: www/include/features_boxes.php:217
-#, fuzzy
-msgid "All users"
-msgstr "Erabiltzaile guztiak"
 
 #: www/include/features_boxes.php:248
 #, fuzzy
@@ -23599,6 +23594,10 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#, fuzzy
+#~ msgid "All users"
+#~ msgstr "Erabiltzaile guztiak"
 
 #, fuzzy
 #~ msgid "Add file"

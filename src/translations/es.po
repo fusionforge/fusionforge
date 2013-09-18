@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:10+0200\n"
+"POT-Creation-Date: 2013-09-18 10:12+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -15678,7 +15678,7 @@ msgstr "Todos los colaboradores de Proyectos"
 msgid "All Project Admins"
 msgstr "Todos los Administradores de Proyectos"
 
-#: www/admin/massmail.php:102
+#: www/admin/massmail.php:102 www/include/features_boxes.php:217
 msgid "All Users"
 msgstr "Todos los Usuarios"
 
@@ -17484,10 +17484,6 @@ msgstr "m/d"
 #: www/include/features_boxes.php:194
 msgid "All newest projects"
 msgstr "Todos los proyectos nuevos"
-
-#: www/include/features_boxes.php:217
-msgid "All users"
-msgstr "Todos los Usuarios"
 
 #: www/include/features_boxes.php:248
 msgid "All project activities"
@@ -23239,6 +23235,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "All users"
+#~ msgstr "Todos los Usuarios"
 
 #~ msgid "Add file"
 #~ msgstr "Agregar ficheros"

@@ -214,7 +214,7 @@ function show_highest_ranked_users() {
 				.'<br />';
 			}
 		}
-		$return .= '<div class="align-center">'.util_make_link('/top/topusers.php', _('All users'), array('class' => 'dot-link')).'</div>';
+		$return .= '<div class="align-center">'.util_make_link('/top/topusers.php', _('All Users'), array('class' => 'dot-link')).'</div>';
 		return $return;
 	}
 }
