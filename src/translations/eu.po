@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 13:55+0200\n"
+"POT-Creation-Date: 2013-09-18 14:34+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -422,7 +422,7 @@ msgstr ""
 #: common/forum/Forum.class.php:649 common/forum/Forum.class.php:665
 #: common/forum/ForumHTML.class.php:73 common/forum/ForumHTML.class.php:211
 #: common/include/Error.class.php:207 common/include/exit.php:80
-#: common/include/User.class.php:348
+#: common/include/User.class.php:348 common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
 #: common/tracker/actions/browse.php:407 common/tracker/actions/mod.php:147
@@ -1231,7 +1231,7 @@ msgstr "Abizena:"
 #: www/admin/search.php:77 www/admin/search.php:152 www/admin/userlist.php:66
 #: www/export/rssAboTask.php:145 www/frs/admin/editrelease.php:235
 #: www/frs/admin/index.php:155 www/my/dashboard.php:69
-#: www/news/admin/index.php:131 www/people/editjob.php:74
+#: www/news/admin/index.php:129 www/people/editjob.php:74
 #: www/people/editjob.php:166 www/people/viewjob.php:72
 #: www/pm/browse_task.php:160 www/pm/detail_task.php:153
 #: www/pm/ganttpage.php:176 www/pm/include/ProjectTaskHTML.class.php:110
@@ -1984,7 +1984,7 @@ msgstr "Ezin dut mezu nagusia eguneratu"
 #: www/admin/useredit.php:231 www/forum/admin/index.php:185
 #: www/frs/admin/deletepackage.php:74 www/frs/admin/deleterelease.php:77
 #: www/frs/admin/index.php:184 www/frs/admin/showreleases.php:114
-#: www/news/admin/index.php:133 www/people/people_utils.php:178
+#: www/news/admin/index.php:131 www/people/people_utils.php:178
 #: www/people/people_utils.php:322 www/people/skills_utils.php:46
 #: www/people/skills_utils.php:104 www/project/admin/vhost.php:145
 #: www/reporting/timeadd.php:163 www/snippet/detail.php:67
@@ -2627,9 +2627,12 @@ msgid "Invalid file_id"
 msgstr "Izen osoa baliogabea"
 
 #: common/frs/FRSFile.class.php:418 common/frs/FRSPackage.class.php:396
-#: common/frs/FRSRelease.class.php:438 common/pm/ProjectGroup.class.php:347
-#, fuzzy
-msgid "Error On Update: "
+#: common/frs/FRSRelease.class.php:438 common/include/Error.class.php:168
+#: common/mail/MailingList.class.php:265 common/pm/ProjectGroup.class.php:347
+#: www/admin/pending-news.php:76 www/admin/pending-news.php:86
+#: www/admin/pending-news.php:106 www/news/admin/index.php:90
+#, fuzzy, php-format
+msgid "Error On Update: %s"
 msgstr "Akatsa eguneratzean"
 
 #: common/frs/FRSFileProcessorType.class.php:61
@@ -2905,11 +2908,6 @@ msgstr "Posta elektronikoaren helbidea baliogabea da"
 #: common/include/Error.class.php:147
 msgid "(none given)"
 msgstr ""
-
-#: common/include/Error.class.php:168
-#, fuzzy, php-format
-msgid "Error On Update: %s"
-msgstr "Akatsa eguneratzean"
 
 #: common/include/Error.class.php:209 common/include/exit.php:80
 #: common/include/exit.php:85
@@ -4492,8 +4490,9 @@ msgid "Forum exists with the same name"
 msgstr ""
 
 #: common/mail/MailingList.class.php:174
+#: plugins/mailman/include/MailmanList.class.php:165
 #, fuzzy
-msgid "Error Creating mailing list: "
+msgid "Error Creating mailing list"
 msgstr "Dauden Posta Zerrendak"
 
 #: common/mail/MailingList.class.php:189
@@ -4544,12 +4543,6 @@ msgstr "%s Posta Zerrenda Berriat"
 #, fuzzy
 msgid "Error Getting mailing list"
 msgstr "Dauden Posta Zerrendak"
-
-#: common/mail/MailingList.class.php:265 www/admin/pending-news.php:76
-#: www/admin/pending-news.php:86 www/admin/pending-news.php:107
-#: www/news/admin/index.php:90
-msgid "Error On Update:"
-msgstr "Akatsa eguneratzean"
 
 #: common/mail/MailingListFactory.class.php:63
 #, php-format
@@ -5055,10 +5048,10 @@ msgstr ""
 #: plugins/scmhg/common/HgPlugin.class.php:632
 #: www/account/pending-resend.php:75 www/admin/admin_table.php:222
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:248
-#: www/admin/index.php:169 www/admin/pending-news.php:162
+#: www/admin/index.php:169 www/admin/pending-news.php:160
 #: www/forum/admin/index.php:412 www/include/vote_function.php:283
 #: www/my/bookmark_add.php:52 www/my/bookmark_edit.php:63 www/my/diary.php:189
-#: www/news/admin/index.php:151 www/news/news_utils.php:42
+#: www/news/admin/index.php:149 www/news/news_utils.php:42
 #: www/news/submit.php:161 www/pm/add_task.php:57 www/pm/add_task.php:140
 #: www/pm/add_task.php:154 www/pm/admin/index.php:215
 #: www/pm/admin/index.php:258 www/pm/admin/index.php:289 www/pm/csv.php:91
@@ -5490,8 +5483,8 @@ msgstr "Nori esleitua"
 #: common/tracker/views/form-customizelist.php:42
 #: cronjobs/send_pending_items_mail.php:79
 #: cronjobs/send_pending_items_mail.php:120 www/admin/approve-pending.php:213
-#: www/admin/pending-news.php:141 www/my/dashboard.php:75
-#: www/news/admin/index.php:127 www/pm/detail_task.php:42
+#: www/admin/pending-news.php:139 www/my/dashboard.php:75
+#: www/news/admin/index.php:125 www/pm/detail_task.php:42
 #: www/pm/mod_task.php:52
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:50
@@ -8080,9 +8073,9 @@ msgstr ""
 msgid "The item #%s is pending"
 msgstr ""
 
-#: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:149
+#: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:147
 #: www/export/rssAboTask.php:146 www/my/diary.php:185
-#: www/news/admin/index.php:137 www/news/submit.php:149
+#: www/news/admin/index.php:135 www/news/submit.php:149
 msgid "Details"
 msgstr ""
 
@@ -9448,8 +9441,8 @@ msgid "Submit a new thread"
 msgstr "Bertsio berri bat bidali"
 
 #: plugins/forumml/www/index.php:111 www/admin/massmail.php:113
-#: www/admin/massmail.php:138 www/admin/pending-news.php:147
-#: www/developer/diary.php:80 www/news/admin/index.php:135
+#: www/admin/massmail.php:138 www/admin/pending-news.php:145
+#: www/developer/diary.php:80 www/news/admin/index.php:133
 #: www/news/admin/news_admin_utils.php:58 www/news/submit.php:146
 #: www/sendmessage.php:69 www/sendmessage.php:150
 msgid "Subject"
@@ -10803,11 +10796,6 @@ msgid ""
 "Shows an overview of all the jobs associated with this project. You can "
 "always choose the ones you want to display in the widget (preferences link)."
 msgstr ""
-
-#: plugins/mailman/include/MailmanList.class.php:165
-#, fuzzy
-msgid "Error Creating mailing list"
-msgstr "Dauden Posta Zerrendak"
 
 #: plugins/mailman/include/MailmanList.class.php:411
 #, fuzzy
@@ -15359,7 +15347,7 @@ msgstr "Bai"
 msgid "Add this custom response to canned responses"
 msgstr ""
 
-#: www/admin/approve-pending.php:167 www/admin/pending-news.php:146
+#: www/admin/approve-pending.php:167 www/admin/pending-news.php:144
 #: www/project/admin/users.php:248
 msgid "Reject"
 msgstr ""
@@ -16014,47 +16002,47 @@ msgstr "Administrariaren gunea: erabiltzailearen informazioa"
 msgid "Changing password for user #%1$s \"%2$s\" (%3$s)…"
 msgstr ""
 
-#: www/admin/pending-news.php:61 www/admin/pending-news.php:126
-#: www/news/admin/index.php:64 www/news/admin/index.php:112
+#: www/admin/pending-news.php:61 www/admin/pending-news.php:124
+#: www/news/admin/index.php:64 www/news/admin/index.php:111
 #, fuzzy
 msgid "Newsbyte not found"
 msgstr "Inkesta ez da ageri"
 
-#: www/admin/pending-news.php:78 www/news/admin/index.php:93
+#: www/admin/pending-news.php:78 www/news/admin/index.php:92
 #, fuzzy
 msgid "Newsbyte Updated."
 msgstr "Inkesta ez da ageri"
 
-#: www/admin/pending-news.php:89
+#: www/admin/pending-news.php:88
 #, fuzzy
 msgid "Newsbyte Deleted."
 msgstr "Inkesta ez da ageri"
 
-#: www/admin/pending-news.php:110
+#: www/admin/pending-news.php:108
 #, fuzzy
 msgid "Newsbytes Rejected."
 msgstr "Inkesta ez da ageri"
 
-#: www/admin/pending-news.php:115
+#: www/admin/pending-news.php:113
 #, fuzzy
 msgid "News administration"
 msgstr "Foroak: administrazioa"
 
-#: www/admin/pending-news.php:129
+#: www/admin/pending-news.php:127
 #, fuzzy
 msgid "Newsbyte deleted"
 msgstr "Inkesta ez da ageri"
 
-#: www/admin/pending-news.php:139
+#: www/admin/pending-news.php:137
 #, fuzzy
 msgid "Submitted for project"
 msgstr "Albiste berri hauek proiektu honetarako bidaliak izan ziren."
 
-#: www/admin/pending-news.php:144
+#: www/admin/pending-news.php:142
 msgid "Approve For Front Page"
 msgstr ""
 
-#: www/admin/pending-news.php:145
+#: www/admin/pending-news.php:143
 msgid "Do Nothing"
 msgstr ""
 
@@ -18875,23 +18863,23 @@ msgstr "Argitalpen berriak"
 msgid "Older Releases"
 msgstr "Argitalpen zaharrak"
 
-#: www/news/admin/index.php:103
+#: www/news/admin/index.php:102
 #, fuzzy
 msgid "News admin"
 msgstr "Albisteen administraria"
 
-#: www/news/admin/index.php:132
+#: www/news/admin/index.php:130
 msgid "Displayed"
 msgstr ""
 
-#: www/news/admin/index.php:150
+#: www/news/admin/index.php:148
 #, php-format
 msgid ""
 "If this item is on the %1$s home page and you edit it, it will be removed "
 "from the home page."
 msgstr ""
 
-#: www/news/admin/index.php:165 www/news/admin/news_admin_utils.php:79
+#: www/news/admin/index.php:162 www/news/admin/news_admin_utils.php:79
 msgid "No Queued Items Found"
 msgstr "Ez daude itsatsitako elementuak proiektu honetarako"
 
@@ -23505,6 +23493,17 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#, fuzzy
+#~ msgid "Error Creating mailing list: "
+#~ msgstr "Dauden Posta Zerrendak"
+
+#, fuzzy
+#~ msgid "Error On Update: "
+#~ msgstr "Akatsa eguneratzean"
+
+#~ msgid "Error On Update:"
+#~ msgstr "Akatsa eguneratzean"
 
 #, fuzzy
 #~ msgid "Illegal characters in Forum name"

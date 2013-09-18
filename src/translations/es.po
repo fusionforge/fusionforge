@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 13:55+0200\n"
+"POT-Creation-Date: 2013-09-18 14:34+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -400,7 +400,7 @@ msgstr "Proyecto"
 #: common/forum/Forum.class.php:649 common/forum/Forum.class.php:665
 #: common/forum/ForumHTML.class.php:73 common/forum/ForumHTML.class.php:211
 #: common/include/Error.class.php:207 common/include/exit.php:80
-#: common/include/User.class.php:348
+#: common/include/User.class.php:348 common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
 #: common/tracker/actions/browse.php:407 common/tracker/actions/mod.php:147
@@ -1191,7 +1191,7 @@ msgstr "Ultima vez"
 #: www/admin/search.php:77 www/admin/search.php:152 www/admin/userlist.php:66
 #: www/export/rssAboTask.php:145 www/frs/admin/editrelease.php:235
 #: www/frs/admin/index.php:155 www/my/dashboard.php:69
-#: www/news/admin/index.php:131 www/people/editjob.php:74
+#: www/news/admin/index.php:129 www/people/editjob.php:74
 #: www/people/editjob.php:166 www/people/viewjob.php:72
 #: www/pm/browse_task.php:160 www/pm/detail_task.php:153
 #: www/pm/ganttpage.php:176 www/pm/include/ProjectTaskHTML.class.php:110
@@ -1921,7 +1921,7 @@ msgstr "No se puedo obtener el objeto Forum"
 #: www/admin/useredit.php:231 www/forum/admin/index.php:185
 #: www/frs/admin/deletepackage.php:74 www/frs/admin/deleterelease.php:77
 #: www/frs/admin/index.php:184 www/frs/admin/showreleases.php:114
-#: www/news/admin/index.php:133 www/people/people_utils.php:178
+#: www/news/admin/index.php:131 www/people/people_utils.php:178
 #: www/people/people_utils.php:322 www/people/skills_utils.php:46
 #: www/people/skills_utils.php:104 www/project/admin/vhost.php:145
 #: www/reporting/timeadd.php:163 www/snippet/detail.php:67
@@ -2572,10 +2572,13 @@ msgid "Invalid file_id"
 msgstr "Nombre de fichero incorrecto"
 
 #: common/frs/FRSFile.class.php:418 common/frs/FRSPackage.class.php:396
-#: common/frs/FRSRelease.class.php:438 common/pm/ProjectGroup.class.php:347
-#, fuzzy
-msgid "Error On Update: "
-msgstr "Error en la actualización:"
+#: common/frs/FRSRelease.class.php:438 common/include/Error.class.php:168
+#: common/mail/MailingList.class.php:265 common/pm/ProjectGroup.class.php:347
+#: www/admin/pending-news.php:76 www/admin/pending-news.php:86
+#: www/admin/pending-news.php:106 www/news/admin/index.php:90
+#, php-format
+msgid "Error On Update: %s"
+msgstr "Error en la actualización: %s"
 
 #: common/frs/FRSFileProcessorType.class.php:61
 #: common/frs/FRSFileType.class.php:68
@@ -2853,11 +2856,6 @@ msgstr "Dirección de correo electrónico inválida"
 #: common/include/Error.class.php:147
 msgid "(none given)"
 msgstr "(no proporcionado)"
-
-#: common/include/Error.class.php:168
-#, php-format
-msgid "Error On Update: %s"
-msgstr "Error en la actualización: %s"
 
 #: common/include/Error.class.php:209 common/include/exit.php:80
 #: common/include/exit.php:85
@@ -4386,7 +4384,9 @@ msgid "Forum exists with the same name"
 msgstr "Existe un foro con el mismo nombre"
 
 #: common/mail/MailingList.class.php:174
-msgid "Error Creating mailing list: "
+#: plugins/mailman/include/MailmanList.class.php:165
+#, fuzzy
+msgid "Error Creating mailing list"
 msgstr "Error Creando lista de correos: "
 
 #: common/mail/MailingList.class.php:189
@@ -4436,12 +4436,6 @@ msgstr "%s Nueva Lista de Correo"
 #: plugins/mailman/include/MailmanListFactory.class.php:112
 msgid "Error Getting mailing list"
 msgstr "Error Obteniendo lista de correos"
-
-#: common/mail/MailingList.class.php:265 www/admin/pending-news.php:76
-#: www/admin/pending-news.php:86 www/admin/pending-news.php:107
-#: www/news/admin/index.php:90
-msgid "Error On Update:"
-msgstr "Error en la actualización:"
 
 #: common/mail/MailingListFactory.class.php:63
 #, php-format
@@ -4942,10 +4936,10 @@ msgstr "Texto libre para la página \"navega por los elementos\""
 #: plugins/scmhg/common/HgPlugin.class.php:632
 #: www/account/pending-resend.php:75 www/admin/admin_table.php:222
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:248
-#: www/admin/index.php:169 www/admin/pending-news.php:162
+#: www/admin/index.php:169 www/admin/pending-news.php:160
 #: www/forum/admin/index.php:412 www/include/vote_function.php:283
 #: www/my/bookmark_add.php:52 www/my/bookmark_edit.php:63 www/my/diary.php:189
-#: www/news/admin/index.php:151 www/news/news_utils.php:42
+#: www/news/admin/index.php:149 www/news/news_utils.php:42
 #: www/news/submit.php:161 www/pm/add_task.php:57 www/pm/add_task.php:140
 #: www/pm/add_task.php:154 www/pm/admin/index.php:215
 #: www/pm/admin/index.php:258 www/pm/admin/index.php:289 www/pm/csv.php:91
@@ -5364,8 +5358,8 @@ msgstr "Asignado a"
 #: common/tracker/views/form-customizelist.php:42
 #: cronjobs/send_pending_items_mail.php:79
 #: cronjobs/send_pending_items_mail.php:120 www/admin/approve-pending.php:213
-#: www/admin/pending-news.php:141 www/my/dashboard.php:75
-#: www/news/admin/index.php:127 www/pm/detail_task.php:42
+#: www/admin/pending-news.php:139 www/my/dashboard.php:75
+#: www/news/admin/index.php:125 www/pm/detail_task.php:42
 #: www/pm/mod_task.php:52
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:50
@@ -7943,9 +7937,9 @@ msgstr ""
 msgid "The item #%s is pending"
 msgstr "El registro #%s está pendiente"
 
-#: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:149
+#: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:147
 #: www/export/rssAboTask.php:146 www/my/diary.php:185
-#: www/news/admin/index.php:137 www/news/submit.php:149
+#: www/news/admin/index.php:135 www/news/submit.php:149
 msgid "Details"
 msgstr "Detalles"
 
@@ -9256,8 +9250,8 @@ msgid "Submit a new thread"
 msgstr "Envíe una nueva conversación"
 
 #: plugins/forumml/www/index.php:111 www/admin/massmail.php:113
-#: www/admin/massmail.php:138 www/admin/pending-news.php:147
-#: www/developer/diary.php:80 www/news/admin/index.php:135
+#: www/admin/massmail.php:138 www/admin/pending-news.php:145
+#: www/developer/diary.php:80 www/news/admin/index.php:133
 #: www/news/admin/news_admin_utils.php:58 www/news/submit.php:146
 #: www/sendmessage.php:69 www/sendmessage.php:150
 msgid "Subject"
@@ -10567,11 +10561,6 @@ msgid ""
 msgstr ""
 "Muestra una panoramica de todos los trabajos asociados con un proyecto. "
 "Puede elegir algunos para mostrar en el widget (enlace de preferencias)."
-
-#: plugins/mailman/include/MailmanList.class.php:165
-#, fuzzy
-msgid "Error Creating mailing list"
-msgstr "Error Creando lista de correos: "
 
 #: plugins/mailman/include/MailmanList.class.php:411
 msgid "Error On Query:"
@@ -15075,7 +15064,7 @@ msgstr "Sí"
 msgid "Add this custom response to canned responses"
 msgstr "Agregar esta respuesta personalizada a las predefinidas"
 
-#: www/admin/approve-pending.php:167 www/admin/pending-news.php:146
+#: www/admin/approve-pending.php:167 www/admin/pending-news.php:144
 #: www/project/admin/users.php:248
 msgid "Reject"
 msgstr "Rechazar"
@@ -15695,41 +15684,41 @@ msgstr "Administración de Sitio: Cambiar Clave Usuario"
 msgid "Changing password for user #%1$s \"%2$s\" (%3$s)…"
 msgstr "Modificando password para el usuario #%1$s \"%2$s\" (%3$s)…"
 
-#: www/admin/pending-news.php:61 www/admin/pending-news.php:126
-#: www/news/admin/index.php:64 www/news/admin/index.php:112
+#: www/admin/pending-news.php:61 www/admin/pending-news.php:124
+#: www/news/admin/index.php:64 www/news/admin/index.php:111
 msgid "Newsbyte not found"
 msgstr "ByteNews no encontrado"
 
-#: www/admin/pending-news.php:78 www/news/admin/index.php:93
+#: www/admin/pending-news.php:78 www/news/admin/index.php:92
 msgid "Newsbyte Updated."
 msgstr "ByteNews Actualizado."
 
-#: www/admin/pending-news.php:89
+#: www/admin/pending-news.php:88
 msgid "Newsbyte Deleted."
 msgstr "ByteNews Borrado."
 
-#: www/admin/pending-news.php:110
+#: www/admin/pending-news.php:108
 msgid "Newsbytes Rejected."
 msgstr "BytesNews Rechazado."
 
-#: www/admin/pending-news.php:115
+#: www/admin/pending-news.php:113
 #, fuzzy
 msgid "News administration"
 msgstr "Administración Forja"
 
-#: www/admin/pending-news.php:129
+#: www/admin/pending-news.php:127
 msgid "Newsbyte deleted"
 msgstr "BytesNews borrados"
 
-#: www/admin/pending-news.php:139
+#: www/admin/pending-news.php:137
 msgid "Submitted for project"
 msgstr "Enviado para el proyecto"
 
-#: www/admin/pending-news.php:144
+#: www/admin/pending-news.php:142
 msgid "Approve For Front Page"
 msgstr "Aprobar para la Página Principal"
 
-#: www/admin/pending-news.php:145
+#: www/admin/pending-news.php:143
 msgid "Do Nothing"
 msgstr "No hacer nada"
 
@@ -18522,15 +18511,15 @@ msgstr "Nuevas Publicaciones"
 msgid "Older Releases"
 msgstr "Antiguas Publicaciones"
 
-#: www/news/admin/index.php:103
+#: www/news/admin/index.php:102
 msgid "News admin"
 msgstr "Administración de Noticias"
 
-#: www/news/admin/index.php:132
+#: www/news/admin/index.php:130
 msgid "Displayed"
 msgstr "Mostrado"
 
-#: www/news/admin/index.php:150
+#: www/news/admin/index.php:148
 #, php-format
 msgid ""
 "If this item is on the %1$s home page and you edit it, it will be removed "
@@ -18539,7 +18528,7 @@ msgstr ""
 "Si este elemento esta en la página principal %1$s·y lo edita, será eliminado "
 "de la página principal."
 
-#: www/news/admin/index.php:165 www/news/admin/news_admin_utils.php:79
+#: www/news/admin/index.php:162 www/news/admin/news_admin_utils.php:79
 msgid "No Queued Items Found"
 msgstr "No hay elementos encolados para el proyecto"
 
@@ -23157,6 +23146,16 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Error Creating mailing list: "
+#~ msgstr "Error Creando lista de correos: "
+
+#, fuzzy
+#~ msgid "Error On Update: "
+#~ msgstr "Error en la actualización:"
+
+#~ msgid "Error On Update:"
+#~ msgstr "Error en la actualización:"
 
 #, fuzzy
 #~ msgid "Illegal characters in Forum name"

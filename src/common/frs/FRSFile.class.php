@@ -196,14 +196,14 @@ class FRSFile extends Error {
 
 
 		db_begin();
-		$result = db_query_params ('INSERT INTO frs_file(release_id,filename,release_time,type_id,processor_id,file_size,post_date) VALUES ($1,$2,$3,$4,$5,$6,$7)',
+		$result = db_query_params('INSERT INTO frs_file(release_id,filename,release_time,type_id,processor_id,file_size,post_date) VALUES ($1,$2,$3,$4,$5,$6,$7)',
 					   array ($this->FRSRelease->getId(),
 						  $name,
 						  $release_time,
 						  $type_id,
 						  $processor_id,
 						  $file_size,
-						  time ())) ;
+						  time()));
 		if (!$result) {
 			$this->setError(_('Error Adding Release: ').db_error());
 			db_rollback();
@@ -415,7 +415,7 @@ class FRSFile extends Error {
 					       $this->getID())) ;
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(_('Error On Update: ').db_error());
+			$this->setError(sprintf(_('Error On Update: %s'), db_error()));
 			db_rollback();
 			return false;
 		}

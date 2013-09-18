@@ -344,7 +344,7 @@ class ProjectGroup extends Error {
 					      $this->getID()));
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(_('Error On Update: ').db_error());
+			$this->setError(sprintf(_('Error On Update: %s'), db_error()));
 			return false;
 		}
 		return true;

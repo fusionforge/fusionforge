@@ -162,7 +162,7 @@ class MailingList extends Error {
 
 		db_begin();
 		$result = db_query_params ('INSERT INTO mail_group_list (group_id,list_name,is_public,password,list_admin,status,description) VALUES ($1,$2,$3,$4,$5,$6,$7)',
-					   array ($this->Group->getID(),
+					   array($this->Group->getID(),
 						  $realListName,
 						  $isPublic,
 						  $listPassword,
@@ -171,7 +171,7 @@ class MailingList extends Error {
 						  $description)) ;
 
 		if (!$result) {
-			$this->setError(_('Error Creating mailing list: ').db_error());
+			$this->setError(_('Error Creating mailing list')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -262,7 +262,7 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 					       $this->Group->getID())) ;
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError(_('Error On Update:').db_error());
+			$this->setError(sprintf(_('Error On Update: %s'), db_error()));
 			return false;
 		}
 		return true;

@@ -87,8 +87,7 @@ if ($group_id && $group_id != forge_get_config('news_group')) {
 details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summary), $details, $id, $group_id));
 
 			if (!$result || db_affected_rows($result) < 1) {
-				$error_msg .= _('Error On Update:');
-				$error_msg .= db_error();
+				$error_msg .= sprintf(_('Error On Update: %s'), db_error());
 			} else {
 				$feedback .= _('Newsbyte Updated.');
 			}
@@ -116,7 +115,6 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 
 		echo notepad_func();
 		echo '
-		<p />
 		<form id="newsadminform" action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="group_id" value="'.db_result($result,0,'group_id').'" />
 		<input type="hidden" name="id" value="'.db_result($result,0,'id').'" />';
@@ -133,7 +131,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		<input type="radio" name="status" value="4" /> '._('Delete').'<br />
 
 		<strong>'._('Subject').'</strong><br />
-		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="60" maxlength="60" /><br />
+		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="80" /><br />
 		<strong>'._('Details').'</strong>'.notepad_button('document.forms.newsadminform.details').'<br />';
 
 		$params = array () ;
@@ -161,8 +159,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		$group = group_get_object($group_id);
 
 		if ($rows < 1) {
-			echo '
-				<p class="warning_msg">'._('No Queued Items Found').'</p>';
+			echo '<p class="information">'._('No Queued Items Found').'</p>';
 		} else {
 			echo '
 				<ul>';
