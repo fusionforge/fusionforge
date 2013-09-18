@@ -57,7 +57,7 @@ if (getStringFromRequest('submit')) {
 
 		if (!$res || db_affected_rows($res)<1) {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error In Trove Operation: ').db_error(),'trove');
+			exit_error(sprintf(_('Error in Trove Operation: %s'), db_error()), 'trove');
 		}
 
 		// update full paths now

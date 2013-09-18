@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:05+0200\n"
+"POT-Creation-Date: 2013-09-18 11:10+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -476,18 +476,17 @@ msgstr "Proxecto "
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/lostlogin.php:84
 #: www/account/register.php:213 www/admin/approve-pending.php:194
 #: www/admin/database.php:162 www/admin/responses_admin.php:42
-#: www/admin/trove/trove_cat_edit.php:70 www/export/rssAboTask.php:142
-#: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
-#: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
-#: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
-#: www/export/rssAboTask.php:173 www/frs/admin/deletepackage.php:57
-#: www/frs/admin/qrs.php:191 www/frs/admin/qrs.php:198
-#: www/people/skills_utils.php:121 www/pm/add_task.php:50
-#: www/pm/add_task.php:63 www/pm/add_task.php:67 www/pm/add_task.php:74
-#: www/pm/add_task.php:81 www/pm/add_task.php:88 www/pm/add_task.php:95
-#: www/pm/add_task.php:110 www/pm/add_task.php:124 www/pm/add_task.php:130
-#: www/pm/add_task.php:149 www/pm/admin/index.php:255 www/pm/calendar.php:59
-#: www/pm/detail_task.php:66 www/pm/detail_task.php:71
+#: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
+#: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
+#: www/export/rssAboTask.php:146 www/export/rssAboTask.php:169
+#: www/export/rssAboTask.php:171 www/export/rssAboTask.php:173
+#: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:191
+#: www/frs/admin/qrs.php:198 www/people/skills_utils.php:121
+#: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
+#: www/pm/add_task.php:74 www/pm/add_task.php:81 www/pm/add_task.php:88
+#: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
+#: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/admin/index.php:255
+#: www/pm/calendar.php:59 www/pm/detail_task.php:66 www/pm/detail_task.php:71
 #: www/pm/detail_task.php:86 www/pm/detail_task.php:90
 #: www/pm/detail_task.php:97 www/pm/detail_task.php:104 www/pm/mod_task.php:52
 #: www/pm/mod_task.php:61 www/pm/mod_task.php:66 www/pm/mod_task.php:78
@@ -16506,9 +16505,12 @@ msgstr "Rexistrado "
 msgid "No project found."
 msgstr "Non se achou un grupo de proxecto "
 
-#: www/admin/trove/trove_cat_add.php:60
-#, fuzzy
-msgid "Error In Trove Operation: "
+#: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:70
+#: www/include/trove.php:408 www/include/trove.php:417
+#: www/include/trove.php:421 www/include/trove.php:425
+#: www/include/trove.php:429
+#, fuzzy, php-format
+msgid "Error in Trove Operation: %s"
 msgstr "Produciuse un error nunha operación na árbore de proxectos "
 
 #: www/admin/trove/trove_cat_add.php:72 www/trove/admin/trove_cat_add.php:62
@@ -16534,11 +16536,6 @@ msgstr "Descrición da nova categoría (máximo 255 caracteres)"
 #: www/admin/trove/trove_cat_edit.php:48
 msgid "Error: a category cannot be the same as its own parent: "
 msgstr "Erro: unha categoría non pode ser a mesma que a súa superior: "
-
-#: www/admin/trove/trove_cat_edit.php:70
-#, fuzzy
-msgid "Error In Trove Operation"
-msgstr "Produciuse un error nunha operación na árbore de proxectos "
 
 #: www/admin/trove/trove_cat_edit.php:92
 #, fuzzy
@@ -18457,13 +18454,6 @@ msgstr "(Filtrando agora)"
 #: www/include/trove.php:347
 msgid "[Filter]"
 msgstr "[Filtro]"
-
-#: www/include/trove.php:408 www/include/trove.php:417
-#: www/include/trove.php:421 www/include/trove.php:425
-#: www/include/trove.php:429
-#, fuzzy, php-format
-msgid "Error in Trove Operation: %s"
-msgstr "Produciuse un error nunha operación na árbore de proxectos "
 
 #: www/include/user_home.php:35
 #, fuzzy
@@ -23899,6 +23889,14 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Error In Trove Operation: "
+#~ msgstr "Produciuse un error nunha operación na árbore de proxectos "
+
+#, fuzzy
+#~ msgid "Error In Trove Operation"
+#~ msgstr "Produciuse un error nunha operación na árbore de proxectos "
 
 #, fuzzy
 #~ msgid "Error in Trove Operation : %s"
