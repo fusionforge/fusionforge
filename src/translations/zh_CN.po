@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:32+0200\n"
+"POT-Creation-Date: 2013-09-18 11:05+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18163,33 +18163,33 @@ msgstr "项目期间"
 msgid "for"
 msgstr "给"
 
-#: www/include/trove.php:228
+#: www/include/trove.php:229
 #, fuzzy
 msgid "None Selected"
 msgstr "选择拒绝"
 
-#: www/include/trove.php:270
+#: www/include/trove.php:272
 msgid "This project has not yet categorized itself in the"
 msgstr "这个项目还没自行归类于"
 
-#: www/include/trove.php:271
+#: www/include/trove.php:273
 msgid "Trove Software Map"
 msgstr "软件地图"
 
-#: www/include/trove.php:337
+#: www/include/trove.php:339
 msgid "(Now Filtering)"
 msgstr ""
 
-#: www/include/trove.php:345
+#: www/include/trove.php:347
 #, fuzzy
 msgid "[Filter]"
 msgstr "文件:"
 
-#: www/include/trove.php:406 www/include/trove.php:416
-#: www/include/trove.php:421 www/include/trove.php:426
-#: www/include/trove.php:431
+#: www/include/trove.php:408 www/include/trove.php:417
+#: www/include/trove.php:421 www/include/trove.php:425
+#: www/include/trove.php:429
 #, fuzzy, php-format
-msgid "Error In Trove Operation : %s"
+msgid "Error in Trove Operation: %s"
 msgstr "在软件执行时发生错误"
 
 #: www/include/user_home.php:35
@@ -23499,6 +23499,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Error in Trove Operation : %s"
+#~ msgstr "在软件执行时发生错误"
 
 #~ msgid "Email Addr:"
 #~ msgstr "Email："

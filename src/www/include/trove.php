@@ -39,14 +39,14 @@ $TROVE_HARDQUERYLIMIT = -1;
  */
 function trove_genfullpaths($mynode, $myfullpath, $myfullpathids) {
 	// first generate own path
-	$res_update = db_query_params ('UPDATE trove_cat SET fullpath=$1,fullpath_ids=$2 WHERE trove_cat_id=$3',
-					   array ($myfullpath,
-						  $myfullpathids,
-						  $mynode));
+	db_query_params('UPDATE trove_cat SET fullpath=$1,fullpath_ids=$2 WHERE trove_cat_id=$3',
+						array ($myfullpath,
+								$myfullpathids,
+								$mynode));
 	// now generate paths for all children by recursive call
 	if($mynode!=0)
 	{
-		$res_child = db_query_params ('
+		$res_child = db_query_params('
 			SELECT trove_cat_id,fullname
 			FROM trove_cat
 			WHERE parent=$1
@@ -71,20 +71,20 @@ function trove_genfullpaths($mynode, $myfullpath, $myfullpathids) {
  */
 function trove_updaterootparent($mynode, $rootnode) {
 	// first generate own path
-	if($mynode!=$rootnode) $res_update = db_query_params ('UPDATE trove_cat SET root_parent=$1 WHERE trove_cat_id=$2',
-								  array ($rootnode,
-									 $mynode));
-	else $res_update = db_query_params ('UPDATE trove_cat SET root_parent=0 WHERE trove_cat_id=$1',
+	if($mynode!=$rootnode) db_query_params('UPDATE trove_cat SET root_parent=$1 WHERE trove_cat_id=$2',
+								array ($rootnode,
+										$mynode));
+	else db_query_params('UPDATE trove_cat SET root_parent=0 WHERE trove_cat_id=$1',
 						array ($mynode));
 	// now generate paths for all children by recursive call
 	if($mynode!=0)
 	{
-		$res_child = db_query_params ('
+		$res_child = db_query_params('
 			SELECT trove_cat_id
 			FROM trove_cat
 			WHERE parent=$1
 			AND trove_cat_id!=0',
-						  array ($mynode));
+							array($mynode));
 
 		while ($row_child = db_fetch_array($res_child)) {
 			trove_updaterootparent($row_child['trove_cat_id'],$rootnode);
@@ -100,13 +100,14 @@ function trove_updaterootparent($mynode, $rootnode) {
  * @param		int	$group_id		The group ID
  * @param		int	$trove_cat_id	The trove category ID
  * @param		int	$rootnode		The root node
+ * @return int
  */
 function trove_setnode($group_id, $trove_cat_id, $rootnode=0) {
 	// verify we were passed information
 	if ((!$group_id) || (!$trove_cat_id)) return 1;
 
 	// verify trove category exists
-	$res_verifycat = db_query_params ('
+	$res_verifycat = db_query_params('
 		SELECT trove_cat_id,fullpath_ids
 		FROM trove_cat
 		WHERE trove_cat_id=$1',
@@ -121,7 +122,7 @@ function trove_setnode($group_id, $trove_cat_id, $rootnode=0) {
 	}
 
 	// must first make sure that this is not a subnode of anything current
-	$res_topnodes = db_query_params ('
+	$res_topnodes = db_query_params('
 		SELECT trove_cat.trove_cat_id AS trove_cat_id,
 			trove_cat.fullpath_ids AS fullpath_ids
 		FROM trove_cat,trove_group_link
@@ -144,7 +145,7 @@ function trove_setnode($group_id, $trove_cat_id, $rootnode=0) {
 	// need to see if this one is more specific than another
 	// if so, delete the other and proceed with this insertion
 	$subnodeids = explode(' :: ',$row_verifycat['fullpath_ids']);
-	$res_checksubs = db_query_params ('
+	$res_checksubs = db_query_params('
 		SELECT trove_cat_id
 		FROM trove_group_link
 		WHERE group_id=$1
@@ -157,7 +158,7 @@ function trove_setnode($group_id, $trove_cat_id, $rootnode=0) {
 		for ($i=0;$i<count($subnodeids);$i++) {
 			if ($subnodeids[$i] == $row_checksubs['trove_cat_id']) {
 				// then delete subnode
-				db_query_params ('DELETE FROM trove_group_link WHERE group_id=$1 AND trove_cat_id=$2',
+				db_query_params('DELETE FROM trove_group_link WHERE group_id=$1 AND trove_cat_id=$2',
 						 array ($group_id,
 							$subnodeids[$i]));
 			}
@@ -165,7 +166,7 @@ function trove_setnode($group_id, $trove_cat_id, $rootnode=0) {
 	}
 
 	// if we got this far, must be ok
-	db_query_params ('INSERT INTO trove_group_link (trove_cat_id,trove_cat_version,group_id,trove_cat_root) VALUES ($1,$2,$3,$4)',
+	db_query_params('INSERT INTO trove_group_link (trove_cat_id,trove_cat_version,group_id,trove_cat_root) VALUES ($1,$2,$3,$4)',
 			 array ($trove_cat_id,
 				time(),
 				$group_id,
@@ -183,7 +184,7 @@ function trove_getrootcat($trove_cat_id) {
 	$current_cat = $trove_cat_id;
 
 	while ($parent > 0) {
-		$res_par = db_query_params ('
+		$res_par = db_query_params('
 			SELECT parent
 			FROM trove_cat
 			WHERE trove_cat_id=$1',
@@ -202,7 +203,7 @@ function trove_getrootcat($trove_cat_id) {
  * trove_getallroots() - Returns an associative array of all project roots
  */
 function trove_getallroots() {
-	$res = db_query_params ('
+	$res = db_query_params('
 		SELECT trove_cat_id,fullname
 		FROM trove_cat
 		WHERE parent=0
@@ -248,13 +249,14 @@ function trove_catselectfull($node, $selected, $name, $title='') {
  * @param		bool	Whether filters have already been applied
  * @param		bool	Whether to print category links
  * @param		bool	???
+ * @return string
  */
 function trove_getcatlisting($group_id,$a_filter,$a_cats,$a_complete=0) {
 	global $discrim_url;
 	global $expl_discrim;
 	global $form_cat;
 
-	$res_trovecat = db_query_params ('
+	$res_trovecat = db_query_params('
 		SELECT trove_cat.fullpath AS fullpath,
 			trove_cat.fullpath_ids AS fullpath_ids,
 			trove_cat.trove_cat_id AS trove_cat_id
@@ -276,7 +278,7 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats,$a_complete=0) {
 	}
 
 	// first initialise the vars we're using here
-	$proj_discrim_used=array();
+	$proj_discrim_used = array();
 	$isfirstdiscrim = 1;
 	while ($row_trovecat = db_fetch_array($res_trovecat)) {
 		$folders = explode(" :: ",$row_trovecat['fullpath']);
@@ -361,7 +363,7 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats,$a_complete=0) {
  * @param		int		The node
  */
 function trove_getfullname($node) {
-	$res = db_query_params ('
+	$res = db_query_params('
 		SELECT fullname
 		FROM trove_cat
 		WHERE trove_cat_id=$1',
@@ -374,6 +376,7 @@ function trove_getfullname($node) {
  * trove_getfullpath() - Returns a full path for a trove category
  *
  * @param		int		The node
+ * @return string
  */
 function trove_getfullpath($node) {
 	$currentcat = $node;
@@ -381,7 +384,7 @@ function trove_getfullpath($node) {
 	$return = '';
 
 	while ($currentcat > 0) {
-		$res = db_query_params ('
+		$res = db_query_params('
 			SELECT trove_cat_id,parent,fullname
 			FROM trove_cat
 			WHERE trove_cat_id=$1',
@@ -400,30 +403,30 @@ function trove_getfullpath($node) {
  * @param	int	$node	The node
  */
 function trove_del_cat_id($node) {
-	$res=db_query_params ('SELECT * FROM trove_cat WHERE parent=$1', array($node));
+	$res=db_query_params('SELECT * FROM trove_cat WHERE parent=$1', array($node));
 	if (!$res) {
-		exit_error(sprintf(_('Error In Trove Operation : %s'),db_error()),'home');
+		exit_error(sprintf(_('Error in Trove Operation: %s'), db_error()), 'home');
 	}
 	if (db_numrows($res)>0) {
 		for ($i=0; $i<db_numrows($res); $i++) {
 			trove_del_cat_id(db_result($res,$i,'trove_cat_id'));
 		}
 	}
-	$res=db_query_params ('DELETE FROM trove_treesums WHERE trove_cat_id=$1', array($node));
+	$res=db_query_params('DELETE FROM trove_treesums WHERE trove_cat_id=$1', array($node));
 	if (!$res) {
-		exit_error(sprintf(_('Error In Trove Operation : %s'),db_error()),'home');
+		exit_error(sprintf(_('Error in Trove Operation: %s'), db_error()),'home');
 	}
-	$res=db_query_params ('DELETE FROM trove_group_link WHERE trove_cat_id=$1', array($node));
+	$res=db_query_params('DELETE FROM trove_group_link WHERE trove_cat_id=$1', array($node));
 	if (!$res) {
-		exit_error(sprintf(_('Error In Trove Operation : %s'),db_error()),'home');
+		exit_error(sprintf(_('Error in Trove Operation: %s'), db_error()), 'home');
 	}
-	$res=db_query_params ('DELETE FROM trove_agg WHERE trove_cat_id=$1', array($node));
+	$res=db_query_params('DELETE FROM trove_agg WHERE trove_cat_id=$1', array($node));
 	if (!$res) {
-		exit_error(sprintf(_('Error In Trove Operation : %s'),db_error()),'home');
+		exit_error(sprintf(_('Error in Trove Operation: %s'), db_error()), 'home');
 	}
-	$res=db_query_params ('DELETE FROM trove_cat WHERE trove_cat_id=$1', array($node));
+	$res=db_query_params('DELETE FROM trove_cat WHERE trove_cat_id=$1', array($node));
 	if (!$res || db_affected_rows($res)<1) {
-		exit_error(sprintf(_('Error In Trove Operation : %s'),db_error()),'home');
+		exit_error(sprintf(_('Error in Trove Operation: %s'), db_error()), 'home');
 	}
 }
 

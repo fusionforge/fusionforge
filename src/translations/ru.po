@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:32+0200\n"
+"POT-Creation-Date: 2013-09-18 11:05+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18568,31 +18568,31 @@ msgstr "Диапазон проекта"
 msgid "for"
 msgstr "для"
 
-#: www/include/trove.php:228
+#: www/include/trove.php:229
 msgid "None Selected"
 msgstr "Не указан"
 
-#: www/include/trove.php:270
+#: www/include/trove.php:272
 msgid "This project has not yet categorized itself in the"
 msgstr "Этот проект еще не зарегистрировался в"
 
-#: www/include/trove.php:271
+#: www/include/trove.php:273
 msgid "Trove Software Map"
 msgstr "Карта категорий хранилища"
 
-#: www/include/trove.php:337
+#: www/include/trove.php:339
 msgid "(Now Filtering)"
 msgstr "(Полная форма)"
 
-#: www/include/trove.php:345
+#: www/include/trove.php:347
 msgid "[Filter]"
 msgstr "[фильтр]"
 
-#: www/include/trove.php:406 www/include/trove.php:416
-#: www/include/trove.php:421 www/include/trove.php:426
-#: www/include/trove.php:431
+#: www/include/trove.php:408 www/include/trove.php:417
+#: www/include/trove.php:421 www/include/trove.php:425
+#: www/include/trove.php:429
 #, fuzzy, php-format
-msgid "Error In Trove Operation : %s"
+msgid "Error in Trove Operation: %s"
 msgstr "Ошибка операции в каталоге проектов"
 
 #: www/include/user_home.php:35
@@ -24037,6 +24037,10 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "Error in Trove Operation : %s"
+#~ msgstr "Ошибка операции в каталоге проектов"
 
 #~ msgid "Email Addr:"
 #~ msgstr "Email адрес:"

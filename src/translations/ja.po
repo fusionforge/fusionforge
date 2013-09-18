@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:32+0200\n"
+"POT-Creation-Date: 2013-09-18 11:05+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -17683,33 +17683,33 @@ msgstr ""
 msgid "for"
 msgstr ""
 
-#: www/include/trove.php:228
+#: www/include/trove.php:229
 #, fuzzy
 msgid "None Selected"
 msgstr "アカウント削除"
 
-#: www/include/trove.php:270
+#: www/include/trove.php:272
 msgid "This project has not yet categorized itself in the"
 msgstr "このプロジェクトはまだ分類されていません。"
 
-#: www/include/trove.php:271
+#: www/include/trove.php:273
 msgid "Trove Software Map"
 msgstr "ソフトマップ"
 
-#: www/include/trove.php:337
+#: www/include/trove.php:339
 msgid "(Now Filtering)"
 msgstr ""
 
-#: www/include/trove.php:345
+#: www/include/trove.php:347
 #, fuzzy
 msgid "[Filter]"
 msgstr "ファイル"
 
-#: www/include/trove.php:406 www/include/trove.php:416
-#: www/include/trove.php:421 www/include/trove.php:426
-#: www/include/trove.php:431
+#: www/include/trove.php:408 www/include/trove.php:417
+#: www/include/trove.php:421 www/include/trove.php:425
+#: www/include/trove.php:429
 #, fuzzy, php-format
-msgid "Error In Trove Operation : %s"
+msgid "Error in Trove Operation: %s"
 msgstr "パーミッションが取得できません。"
 
 #: www/include/user_home.php:35
@@ -22818,6 +22818,10 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr "%sのパーソナルページ"
+
+#, fuzzy
+#~ msgid "Error in Trove Operation : %s"
+#~ msgstr "パーミッションが取得できません。"
 
 #~ msgid "Email Addr:"
 #~ msgstr "メールアドレス:"

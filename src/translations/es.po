@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:32+0200\n"
+"POT-Creation-Date: 2013-09-18 11:05+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -17818,31 +17818,31 @@ msgstr "Vida del Proyecto"
 msgid "for"
 msgstr "para"
 
-#: www/include/trove.php:228
+#: www/include/trove.php:229
 msgid "None Selected"
 msgstr "Ninguno Seleccionado"
 
-#: www/include/trove.php:270
+#: www/include/trove.php:272
 msgid "This project has not yet categorized itself in the"
 msgstr "Este proyecto todavía no ha sido categorizado en el"
 
-#: www/include/trove.php:271
+#: www/include/trove.php:273
 msgid "Trove Software Map"
 msgstr "Mapa de Proyectos"
 
-#: www/include/trove.php:337
+#: www/include/trove.php:339
 msgid "(Now Filtering)"
 msgstr "(Ahora Filtrando)"
 
-#: www/include/trove.php:345
+#: www/include/trove.php:347
 msgid "[Filter]"
 msgstr "[Filtro]"
 
-#: www/include/trove.php:406 www/include/trove.php:416
-#: www/include/trove.php:421 www/include/trove.php:426
-#: www/include/trove.php:431
+#: www/include/trove.php:408 www/include/trove.php:417
+#: www/include/trove.php:421 www/include/trove.php:425
+#: www/include/trove.php:429
 #, php-format
-msgid "Error In Trove Operation : %s"
+msgid "Error in Trove Operation: %s"
 msgstr "Error en Operaciones Trove : %s"
 
 #: www/include/user_home.php:35
@@ -23203,6 +23203,10 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#, fuzzy
+#~ msgid "Error in Trove Operation : %s"
+#~ msgstr "Error en Operaciones Trove : %s"
 
 #~ msgid "Email Addr:"
 #~ msgstr "Dirección e-mail:"

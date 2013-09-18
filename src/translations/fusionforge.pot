@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:32+0200\n"
+"POT-Creation-Date: 2013-09-18 11:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16679,31 +16679,31 @@ msgstr ""
 msgid "for"
 msgstr ""
 
-#: www/include/trove.php:228
+#: www/include/trove.php:229
 msgid "None Selected"
 msgstr ""
 
-#: www/include/trove.php:270
+#: www/include/trove.php:272
 msgid "This project has not yet categorized itself in the"
 msgstr ""
 
-#: www/include/trove.php:271
+#: www/include/trove.php:273
 msgid "Trove Software Map"
 msgstr ""
 
-#: www/include/trove.php:337
+#: www/include/trove.php:339
 msgid "(Now Filtering)"
 msgstr ""
 
-#: www/include/trove.php:345
+#: www/include/trove.php:347
 msgid "[Filter]"
 msgstr ""
 
-#: www/include/trove.php:406 www/include/trove.php:416
-#: www/include/trove.php:421 www/include/trove.php:426
-#: www/include/trove.php:431
+#: www/include/trove.php:408 www/include/trove.php:417
+#: www/include/trove.php:421 www/include/trove.php:425
+#: www/include/trove.php:429
 #, php-format
-msgid "Error In Trove Operation : %s"
+msgid "Error in Trove Operation: %s"
 msgstr ""
 
 #: www/include/user_home.php:35
