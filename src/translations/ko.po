@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:06+0200\n"
+"POT-Creation-Date: 2013-09-18 10:10+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -11657,8 +11657,8 @@ msgid "No attached files for this ticket"
 msgstr "No Such posting For This Project"
 
 #: plugins/mantisbt/view/viewAttachment.php:78
-#, fuzzy
-msgid "Add file"
+#: www/project/admin/editimages.php:258
+msgid "Add File"
 msgstr "파일 추가하기"
 
 #: plugins/mantisbt/view/viewIssue.php:48
@@ -20577,10 +20577,6 @@ msgstr "멀티미디어 데이터 추가하기"
 msgid "Local filename"
 msgstr "로컬 파일명"
 
-#: www/project/admin/editimages.php:258
-msgid "Add File"
-msgstr "파일 추가하기"
-
 #: www/project/admin/editimages.php:270
 msgid "Dims"
 msgstr "Dims"
@@ -23468,6 +23464,10 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "Add file"
+#~ msgstr "파일 추가하기"
 
 #, fuzzy
 #~ msgid "Access Token Url"

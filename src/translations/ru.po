@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:06+0200\n"
+"POT-Creation-Date: 2013-09-18 10:10+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -11853,8 +11853,8 @@ msgid "No attached files for this ticket"
 msgstr "Для проекта нет сообщений"
 
 #: plugins/mantisbt/view/viewAttachment.php:78
-#, fuzzy
-msgid "Add file"
+#: www/project/admin/editimages.php:258
+msgid "Add File"
 msgstr "Добавить файл"
 
 #: plugins/mantisbt/view/viewIssue.php:48
@@ -21118,10 +21118,6 @@ msgstr "Добавить мультимедийные данные"
 msgid "Local filename"
 msgstr "Локальное имя файла"
 
-#: www/project/admin/editimages.php:258
-msgid "Add File"
-msgstr "Добавить файл"
-
 #: www/project/admin/editimages.php:270
 msgid "Dims"
 msgstr "Маскировать"
@@ -24084,6 +24080,10 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "Add file"
+#~ msgstr "Добавить файл"
 
 #, fuzzy
 #~ msgid "Request Token Url"

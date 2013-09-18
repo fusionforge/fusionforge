@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:06+0200\n"
+"POT-Creation-Date: 2013-09-18 10:10+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -11427,9 +11427,9 @@ msgid "No attached files for this ticket"
 msgstr ""
 
 #: plugins/mantisbt/view/viewAttachment.php:78
-#, fuzzy
-msgid "Add file"
-msgstr "タスク追加"
+#: www/project/admin/editimages.php:258
+msgid "Add File"
+msgstr ""
 
 #: plugins/mantisbt/view/viewIssue.php:48
 msgid "Woops: wrong issue id"
@@ -20088,10 +20088,6 @@ msgstr ""
 msgid "Local filename"
 msgstr ""
 
-#: www/project/admin/editimages.php:258
-msgid "Add File"
-msgstr ""
-
 #: www/project/admin/editimages.php:270
 msgid "Dims"
 msgstr ""
@@ -22861,6 +22857,10 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr "%sのパーソナルページ"
+
+#, fuzzy
+#~ msgid "Add file"
+#~ msgstr "タスク追加"
 
 #, fuzzy
 #~ msgid "Access Token Url"

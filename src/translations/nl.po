@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:06+0200\n"
+"POT-Creation-Date: 2013-09-18 10:10+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -11776,8 +11776,8 @@ msgid "No attached files for this ticket"
 msgstr "Een dergelijke vacature komt in dit project niet voor"
 
 #: plugins/mantisbt/view/viewAttachment.php:78
-#, fuzzy
-msgid "Add file"
+#: www/project/admin/editimages.php:258
+msgid "Add File"
 msgstr "Voeg bestand toe"
 
 #: plugins/mantisbt/view/viewIssue.php:48
@@ -20804,10 +20804,6 @@ msgstr "Voeg multimedia gegevens toe"
 msgid "Local filename"
 msgstr "Locale bestandsnaam"
 
-#: www/project/admin/editimages.php:258
-msgid "Add File"
-msgstr "Voeg bestand toe"
-
 #: www/project/admin/editimages.php:270
 msgid "Dims"
 msgstr "Afmeting"
@@ -23766,6 +23762,10 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#, fuzzy
+#~ msgid "Add file"
+#~ msgstr "Voeg bestand toe"
 
 #, fuzzy
 #~ msgid "Request Token Url"

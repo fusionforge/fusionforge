@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:06+0200\n"
+"POT-Creation-Date: 2013-09-18 10:10+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -11828,8 +11828,8 @@ msgid "No attached files for this ticket"
 msgstr "Este proxecto non ten definida ningunha etiqueta"
 
 #: plugins/mantisbt/view/viewAttachment.php:78
-#, fuzzy
-msgid "Add file"
+#: www/project/admin/editimages.php:258
+msgid "Add File"
 msgstr "Engadir ficheiro"
 
 #: plugins/mantisbt/view/viewIssue.php:48
@@ -20999,10 +20999,6 @@ msgstr "Engadir datos multimedia"
 msgid "Local filename"
 msgstr "Nome de ficheiro local"
 
-#: www/project/admin/editimages.php:258
-msgid "Add File"
-msgstr "Engadir ficheiro"
-
 #: www/project/admin/editimages.php:270
 msgid "Dims"
 msgstr "Dimensións"
@@ -23946,6 +23942,10 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Add file"
+#~ msgstr "Engadir ficheiro"
 
 #, fuzzy
 #~ msgid "Request Token Url"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:06+0200\n"
+"POT-Creation-Date: 2013-09-18 10:10+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -11409,8 +11409,9 @@ msgid "No attached files for this ticket"
 msgstr "No hay ficheros adjuntos para este ticket"
 
 #: plugins/mantisbt/view/viewAttachment.php:78
-msgid "Add file"
-msgstr "Agregar ficheros"
+#: www/project/admin/editimages.php:258
+msgid "Add File"
+msgstr "Añade fichero"
 
 #: plugins/mantisbt/view/viewIssue.php:48
 msgid "Woops: wrong issue id"
@@ -20315,10 +20316,6 @@ msgstr "Añade Datos Multimedia"
 msgid "Local filename"
 msgstr "Fichero local"
 
-#: www/project/admin/editimages.php:258
-msgid "Add File"
-msgstr "Añade fichero"
-
 #: www/project/admin/editimages.php:270
 msgid "Dims"
 msgstr "Dims"
@@ -23242,6 +23239,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Add file"
+#~ msgstr "Agregar ficheros"
 
 #~ msgid "<b>"
 #~ msgstr "<b>"

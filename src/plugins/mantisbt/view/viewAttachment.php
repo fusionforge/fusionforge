@@ -75,7 +75,7 @@ if (empty($msg)) {
 <?php
 	if ($editable) {
 ?>
-<p class="notice_title" onclick='jQuery("#expandable_file").slideToggle(300)'><?php echo _('Add file') ?></p>
+<p class="notice_title" onclick='jQuery("#expandable_file").slideToggle(300)'><?php echo _('Add File') ?></p>
 <div id='expandable_file' class="notice_content">
 <?php
 		include 'addAttachment.php';

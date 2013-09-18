@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:06+0200\n"
+"POT-Creation-Date: 2013-09-18 10:10+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -11778,8 +11778,8 @@ msgid "No attached files for this ticket"
 msgstr "No hi ha tal missatge per aquest projecte"
 
 #: plugins/mantisbt/view/viewAttachment.php:78
-#, fuzzy
-msgid "Add file"
+#: www/project/admin/editimages.php:258
+msgid "Add File"
 msgstr "Afegeix el fitxer"
 
 #: plugins/mantisbt/view/viewIssue.php:48
@@ -20798,10 +20798,6 @@ msgstr "Afegeix dades multimèdia"
 msgid "Local filename"
 msgstr "Nom de fitxer local"
 
-#: www/project/admin/editimages.php:258
-msgid "Add File"
-msgstr "Afegeix el fitxer"
-
 #: www/project/admin/editimages.php:270
 msgid "Dims"
 msgstr "Dims"
@@ -23741,6 +23737,10 @@ msgstr "Nom d'usuari"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
+
+#, fuzzy
+#~ msgid "Add file"
+#~ msgstr "Afegeix el fitxer"
 
 #, fuzzy
 #~ msgid "Access Token Url"

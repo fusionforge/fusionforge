@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:06+0200\n"
+"POT-Creation-Date: 2013-09-18 10:10+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -11725,8 +11725,8 @@ msgid "No attached files for this ticket"
 msgstr "该项目没有这样的文章"
 
 #: plugins/mantisbt/view/viewAttachment.php:78
-#, fuzzy
-msgid "Add file"
+#: www/project/admin/editimages.php:258
+msgid "Add File"
 msgstr "增加文件"
 
 #: plugins/mantisbt/view/viewIssue.php:48
@@ -20637,10 +20637,6 @@ msgstr "增加多媒体资料"
 msgid "Local filename"
 msgstr "本地文件名"
 
-#: www/project/admin/editimages.php:258
-msgid "Add File"
-msgstr "增加文件"
-
 #: www/project/admin/editimages.php:270
 msgid "Dims"
 msgstr "Dims"
@@ -23544,6 +23540,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Add file"
+#~ msgstr "增加文件"
 
 #, fuzzy
 #~ msgid "Request Token Url"

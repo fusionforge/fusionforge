@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:06+0200\n"
+"POT-Creation-Date: 2013-09-18 10:10+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -11791,8 +11791,8 @@ msgid "No attached files for this ticket"
 msgstr "Nessuna posizione disponibile per il progetto"
 
 #: plugins/mantisbt/view/viewAttachment.php:78
-#, fuzzy
-msgid "Add file"
+#: www/project/admin/editimages.php:258
+msgid "Add File"
 msgstr "Aggiungi file"
 
 #: plugins/mantisbt/view/viewIssue.php:48
@@ -20820,10 +20820,6 @@ msgstr "Aggiungi dati multimediali"
 msgid "Local filename"
 msgstr "Filename locale"
 
-#: www/project/admin/editimages.php:258
-msgid "Add File"
-msgstr "Aggiungi file"
-
 #: www/project/admin/editimages.php:270
 msgid "Dims"
 msgstr "Dimensioni"
@@ -23764,6 +23760,10 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "Add file"
+#~ msgstr "Aggiungi file"
 
 #, fuzzy
 #~ msgid "Request Token Url"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:06+0200\n"
+"POT-Creation-Date: 2013-09-18 10:10+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -11689,8 +11689,8 @@ msgid "No attached files for this ticket"
 msgstr "Inga sådana poster i detta projekt"
 
 #: plugins/mantisbt/view/viewAttachment.php:78
-#, fuzzy
-msgid "Add file"
+#: www/project/admin/editimages.php:258
+msgid "Add File"
 msgstr "Lägg till fil"
 
 #: plugins/mantisbt/view/viewIssue.php:48
@@ -20624,10 +20624,6 @@ msgstr "Lägg till multimediadata"
 msgid "Local filename"
 msgstr "Lokalt filnamn"
 
-#: www/project/admin/editimages.php:258
-msgid "Add File"
-msgstr "Lägg till fil"
-
 #: www/project/admin/editimages.php:270
 msgid "Dims"
 msgstr "Dims"
@@ -23542,6 +23538,10 @@ msgstr "Användarenamn"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
+
+#, fuzzy
+#~ msgid "Add file"
+#~ msgstr "Lägg till fil"
 
 #, fuzzy
 #~ msgid "Access Token Url"

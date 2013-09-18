@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:06+0200\n"
+"POT-Creation-Date: 2013-09-18 10:10+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -10836,8 +10836,9 @@ msgid "No attached files for this ticket"
 msgstr ""
 
 #: plugins/mantisbt/view/viewAttachment.php:78
-msgid "Add file"
-msgstr ""
+#: www/project/admin/editimages.php:258
+msgid "Add File"
+msgstr "Adicionar Arquivo"
 
 #: plugins/mantisbt/view/viewIssue.php:48
 msgid "Woops: wrong issue id"
@@ -19267,10 +19268,6 @@ msgstr "Adicionar Dado Multimídia"
 #: www/project/admin/editimages.php:252
 msgid "Local filename"
 msgstr "Arquivo local"
-
-#: www/project/admin/editimages.php:258
-msgid "Add File"
-msgstr "Adicionar Arquivo"
 
 #: www/project/admin/editimages.php:270
 msgid "Dims"
