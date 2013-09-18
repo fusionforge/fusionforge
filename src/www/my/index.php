@@ -53,7 +53,7 @@ echo '<ul class="widget_toolbar">';
 $url = "/widgets/widgets.php?owner=u".$user->getID().
 	"&amp;layout_id=".$layout_id;
 echo '	<li ><a href="'. $url .'">'. _("Add widgets") .'</a></li>';
-echo '	<li><a href="'. $url.'&amp;update=layout' .'">'. _("Customize layout") .'</a></li>';
+echo '	<li><a href="'. $url.'&amp;update=layout' .'">'. _("Customize Layout") .'</a></li>';
 echo '</ul>';
 
 

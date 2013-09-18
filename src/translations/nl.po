@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:19+0200\n"
+"POT-Creation-Date: 2013-09-18 10:21+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7245,9 +7245,11 @@ msgid "Add widgets"
 msgstr "Datum toevoegen"
 
 #: common/widget/WidgetLayoutManager.class.php:259
-#: common/widget/WidgetLayoutManager.class.php:264 www/my/index.php:56
+#: common/widget/WidgetLayoutManager.class.php:264
+#: www/include/project_home.php:74 www/my/index.php:56
+#: www/widgets/widgets.php:70
 #, fuzzy
-msgid "Customize layout"
+msgid "Customize Layout"
 msgstr "Extra veld aangepast"
 
 #: common/widget/WidgetLayoutManager.class.php:341
@@ -18286,11 +18288,6 @@ msgstr ""
 msgid "Project Home"
 msgstr "Nieuwe projectnaam"
 
-#: www/include/project_home.php:74 www/widgets/widgets.php:70
-#, fuzzy
-msgid "Customize Layout"
-msgstr "Extra veld aangepast"
-
 #: www/include/project_summary.php:132
 msgid "There are no public trackers available"
 msgstr "Er zijn geen openbare trackers beschikbaar"
@@ -23745,6 +23742,10 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#, fuzzy
+#~ msgid "Customize layout"
+#~ msgstr "Extra veld aangepast"
 
 #~ msgid "Created By"
 #~ msgstr "Aangemaakt door"

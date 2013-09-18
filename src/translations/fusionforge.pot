@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:19+0200\n"
+"POT-Creation-Date: 2013-09-18 10:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6630,8 +6630,10 @@ msgid "Add widgets"
 msgstr ""
 
 #: common/widget/WidgetLayoutManager.class.php:259
-#: common/widget/WidgetLayoutManager.class.php:264 www/my/index.php:56
-msgid "Customize layout"
+#: common/widget/WidgetLayoutManager.class.php:264
+#: www/include/project_home.php:74 www/my/index.php:56
+#: www/widgets/widgets.php:70
+msgid "Customize Layout"
 msgstr ""
 
 #: common/widget/WidgetLayoutManager.class.php:341
@@ -16655,10 +16657,6 @@ msgstr ""
 
 #: www/include/project_home.php:35
 msgid "Project Home"
-msgstr ""
-
-#: www/include/project_home.php:74 www/widgets/widgets.php:70
-msgid "Customize Layout"
 msgstr ""
 
 #: www/include/project_summary.php:132

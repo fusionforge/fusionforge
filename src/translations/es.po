@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:19+0200\n"
+"POT-Creation-Date: 2013-09-18 10:21+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -7051,9 +7051,11 @@ msgid "Add widgets"
 msgstr "Añadir widgets"
 
 #: common/widget/WidgetLayoutManager.class.php:259
-#: common/widget/WidgetLayoutManager.class.php:264 www/my/index.php:56
-msgid "Customize layout"
-msgstr "Personalizar vista"
+#: common/widget/WidgetLayoutManager.class.php:264
+#: www/include/project_home.php:74 www/my/index.php:56
+#: www/widgets/widgets.php:70
+msgid "Customize Layout"
+msgstr "Personalizar apariencia"
 
 #: common/widget/WidgetLayoutManager.class.php:341
 #, php-format
@@ -17796,10 +17798,6 @@ msgstr "%s nuevos elementos"
 msgid "Project Home"
 msgstr "Página Proyecto"
 
-#: www/include/project_home.php:74 www/widgets/widgets.php:70
-msgid "Customize Layout"
-msgstr "Personalizar apariencia"
-
 #: www/include/project_summary.php:132
 msgid "There are no public trackers available"
 msgstr "No hay sistemas de seguimiento de peticiones públicos disponibles"
@@ -23225,6 +23223,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Customize layout"
+#~ msgstr "Personalizar vista"
 
 #~ msgid "Created By"
 #~ msgstr "Creado por"

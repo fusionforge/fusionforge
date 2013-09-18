@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:19+0200\n"
+"POT-Creation-Date: 2013-09-18 10:21+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -7301,9 +7301,11 @@ msgid "Add widgets"
 msgstr "Datum hinzufügen"
 
 #: common/widget/WidgetLayoutManager.class.php:259
-#: common/widget/WidgetLayoutManager.class.php:264 www/my/index.php:56
+#: common/widget/WidgetLayoutManager.class.php:264
+#: www/include/project_home.php:74 www/my/index.php:56
+#: www/widgets/widgets.php:70
 #, fuzzy
-msgid "Customize layout"
+msgid "Customize Layout"
 msgstr "Liste Anpassen"
 
 #: common/widget/WidgetLayoutManager.class.php:341
@@ -18432,11 +18434,6 @@ msgstr ""
 msgid "Project Home"
 msgstr "Projektname"
 
-#: www/include/project_home.php:74 www/widgets/widgets.php:70
-#, fuzzy
-msgid "Customize Layout"
-msgstr "Liste Anpassen"
-
 #: www/include/project_summary.php:132
 msgid "There are no public trackers available"
 msgstr "Es sind keine öffentlichen Tracker verfügbar"
@@ -23996,6 +23993,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "Customize layout"
+#~ msgstr "Liste Anpassen"
 
 #~ msgid "Created By"
 #~ msgstr "Erstellt von"

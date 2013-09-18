@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:19+0200\n"
+"POT-Creation-Date: 2013-09-18 10:21+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7202,8 +7202,10 @@ msgid "Add widgets"
 msgstr "Lägg till uppgift"
 
 #: common/widget/WidgetLayoutManager.class.php:259
-#: common/widget/WidgetLayoutManager.class.php:264 www/my/index.php:56
-msgid "Customize layout"
+#: common/widget/WidgetLayoutManager.class.php:264
+#: www/include/project_home.php:74 www/my/index.php:56
+#: www/widgets/widgets.php:70
+msgid "Customize Layout"
 msgstr ""
 
 #: common/widget/WidgetLayoutManager.class.php:341
@@ -18118,10 +18120,6 @@ msgstr ""
 #, fuzzy
 msgid "Project Home"
 msgstr "Nytt projektnamn"
-
-#: www/include/project_home.php:74 www/widgets/widgets.php:70
-msgid "Customize Layout"
-msgstr ""
 
 #: www/include/project_summary.php:132
 msgid "There are no public trackers available"

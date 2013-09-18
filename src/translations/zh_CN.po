@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:19+0200\n"
+"POT-Creation-Date: 2013-09-18 10:21+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7199,9 +7199,11 @@ msgid "Add widgets"
 msgstr "添加日期"
 
 #: common/widget/WidgetLayoutManager.class.php:259
-#: common/widget/WidgetLayoutManager.class.php:264 www/my/index.php:56
+#: common/widget/WidgetLayoutManager.class.php:264
+#: www/include/project_home.php:74 www/my/index.php:56
+#: www/widgets/widgets.php:70
 #, fuzzy
-msgid "Customize layout"
+msgid "Customize Layout"
 msgstr "订制栏位已删除"
 
 #: common/widget/WidgetLayoutManager.class.php:341
@@ -18141,11 +18143,6 @@ msgstr ""
 msgid "Project Home"
 msgstr "新项目名称"
 
-#: www/include/project_home.php:74 www/widgets/widgets.php:70
-#, fuzzy
-msgid "Customize Layout"
-msgstr "订制栏位已删除"
-
 #: www/include/project_summary.php:132
 msgid "There are no public trackers available"
 msgstr "目前没有公开的跟踪项目"
@@ -23523,6 +23520,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Customize layout"
+#~ msgstr "订制栏位已删除"
 
 #~ msgid "Created By"
 #~ msgstr "创造者"

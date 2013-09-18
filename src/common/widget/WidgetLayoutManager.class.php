@@ -256,12 +256,12 @@ class WidgetLayoutManager {
 		if ($update_layout) {
 			// customized selected
 			echo '<li><a href="'. $url .'">'. _("Add widgets") .'</a></li>';
-			echo '<li class="current"><a href="'. $url.'&amp;update=layout' .'">'. _("Customize layout") .'</a></li>';
+			echo '<li class="current"><a href="'. $url.'&amp;update=layout' .'">'. _("Customize Layout") .'</a></li>';
 			$action = 'layout';
 		} else {
 			// add selected, or default when first displayed
 			echo '<li class="current"><a href="'. $url .'">'. _("Add widgets") .'</a></li>';
-			echo '<li><a href="'. $url.'&amp;update=layout' .'">'. _("Customize layout") .'</a></li>';
+			echo '<li><a href="'. $url.'&amp;update=layout' .'">'. _("Customize Layout") .'</a></li>';
 			$action = 'widget';
 		}
 		echo '</ul>';

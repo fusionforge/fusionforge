@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:19+0200\n"
+"POT-Creation-Date: 2013-09-18 10:21+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7266,9 +7266,11 @@ msgid "Add widgets"
 msgstr "Добавить дату"
 
 #: common/widget/WidgetLayoutManager.class.php:259
-#: common/widget/WidgetLayoutManager.class.php:264 www/my/index.php:56
+#: common/widget/WidgetLayoutManager.class.php:264
+#: www/include/project_home.php:74 www/my/index.php:56
+#: www/widgets/widgets.php:70
 #, fuzzy
-msgid "Customize layout"
+msgid "Customize Layout"
 msgstr "Выборочное поле удалено"
 
 #: common/widget/WidgetLayoutManager.class.php:341
@@ -18548,11 +18550,6 @@ msgstr ""
 msgid "Project Home"
 msgstr "Название проекта"
 
-#: www/include/project_home.php:74 www/widgets/widgets.php:70
-#, fuzzy
-msgid "Customize Layout"
-msgstr "Выборочное поле удалено"
-
 #: www/include/project_summary.php:132
 msgid "There are no public trackers available"
 msgstr "Трекеры пусты"
@@ -24063,6 +24060,10 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "Customize layout"
+#~ msgstr "Выборочное поле удалено"
 
 #~ msgid "Created By"
 #~ msgstr "Создал:"

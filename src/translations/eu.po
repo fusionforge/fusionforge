@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:19+0200\n"
+"POT-Creation-Date: 2013-09-18 10:21+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7220,9 +7220,11 @@ msgid "Add widgets"
 msgstr "Data gehitu"
 
 #: common/widget/WidgetLayoutManager.class.php:259
-#: common/widget/WidgetLayoutManager.class.php:264 www/my/index.php:56
+#: common/widget/WidgetLayoutManager.class.php:264
+#: www/include/project_home.php:74 www/my/index.php:56
+#: www/widgets/widgets.php:70
 #, fuzzy
-msgid "Customize layout"
+msgid "Customize Layout"
 msgstr "Eremu pertsonalizatua ezabatua"
 
 #: common/widget/WidgetLayoutManager.class.php:341
@@ -18180,11 +18182,6 @@ msgstr ""
 msgid "Project Home"
 msgstr "Azpiproiektuaren izen berria"
 
-#: www/include/project_home.php:74 www/widgets/widgets.php:70
-#, fuzzy
-msgid "Customize Layout"
-msgstr "Eremu pertsonalizatua ezabatua"
-
 #: www/include/project_summary.php:132
 msgid "There are no public trackers available"
 msgstr "Ez daude \"tracker\" publikorik eskuragarri"
@@ -23582,6 +23579,10 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#, fuzzy
+#~ msgid "Customize layout"
+#~ msgstr "Eremu pertsonalizatua ezabatua"
 
 #, fuzzy
 #~ msgid "Could Not Get FRSRelease"

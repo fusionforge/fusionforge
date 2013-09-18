@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:19+0200\n"
+"POT-Creation-Date: 2013-09-18 10:21+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -7015,8 +7015,10 @@ msgid "Add widgets"
 msgstr "Ajouter des widgets"
 
 #: common/widget/WidgetLayoutManager.class.php:259
-#: common/widget/WidgetLayoutManager.class.php:264 www/my/index.php:56
-msgid "Customize layout"
+#: common/widget/WidgetLayoutManager.class.php:264
+#: www/include/project_home.php:74 www/my/index.php:56
+#: www/widgets/widgets.php:70
+msgid "Customize Layout"
 msgstr "Personnaliser la mise en page"
 
 #: common/widget/WidgetLayoutManager.class.php:341
@@ -17846,10 +17848,6 @@ msgstr "%s nouveaux éléments"
 msgid "Project Home"
 msgstr "Page d'accueil du projet"
 
-#: www/include/project_home.php:74 www/widgets/widgets.php:70
-msgid "Customize Layout"
-msgstr "Personnaliser la mise en page"
-
 #: www/include/project_summary.php:132
 msgid "There are no public trackers available"
 msgstr "Il n'y a pas de traceur public"
@@ -23315,6 +23313,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Customize layout"
+#~ msgstr "Personnaliser la mise en page"
 
 #~ msgid "Created By"
 #~ msgstr "Créé par"
