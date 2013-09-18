@@ -56,7 +56,7 @@ $fm = new ForumMessage($f,$msg_id,false,true); //create the pending message
 if (!$fm || !is_object($fm)) {
 	exit_error(_('Error getting new ForumMessage'),'forums');
 } elseif ($fm->isError()) {
-	exit_error(_('Error getting new ForumMessage: ').$fm->getErrorMessage(),'forums');
+	exit_error(_('Error getting new ForumMessage')._(': ').$fm->getErrorMessage(),'forums');
 }
 $fhtml = new ForumHTML($f);
 if (!$fhtml || !is_object($fhtml)) {

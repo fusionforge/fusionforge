@@ -123,7 +123,7 @@ if ($msg_id) {
 		echo ' <a href="'.$url.'&amp;reply=1">[ '._("reply").' ]</a>';
 	}
 	echo '<br />';
-	echo _("By:").' '. util_make_link_u($fm->getPosterName(), $fm->getPosterID(), $fm->getPosterRealName());
+	echo _("By")._(': '). util_make_link_u($fm->getPosterName(), $fm->getPosterID(), $fm->getPosterRealName());
 	echo ' on '. date(_('Y-m-d H:i'), $fm->getPostDate()) .'</td><td class="align-right">';
 	echo '<a href="'.$url.'">[forum:'.$msg_id.']</a><br/>';
 	$fa = new ForumAdmin($f->Group->getID());

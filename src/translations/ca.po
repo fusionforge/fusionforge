@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 12:36+0200\n"
+"POT-Creation-Date: 2013-09-18 12:53+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -414,12 +414,13 @@ msgstr "Projecte"
 #: common/docman/views/listfile.php:174
 #: common/docman/views/listtrashfile.php:117
 #: common/docman/views/search.php:150 common/docman/views/search.php:151
-#: common/forum/Forum.class.php:231 common/forum/Forum.class.php:526
-#: common/forum/Forum.class.php:607 common/forum/Forum.class.php:633
-#: common/forum/Forum.class.php:641 common/forum/Forum.class.php:649
-#: common/forum/Forum.class.php:665 common/forum/ForumHTML.class.php:73
-#: common/forum/ForumHTML.class.php:211 common/include/Error.class.php:207
-#: common/include/exit.php:80 common/include/User.class.php:348
+#: common/forum/ForumAdmin.class.php:427 common/forum/Forum.class.php:231
+#: common/forum/Forum.class.php:526 common/forum/Forum.class.php:607
+#: common/forum/Forum.class.php:633 common/forum/Forum.class.php:641
+#: common/forum/Forum.class.php:649 common/forum/Forum.class.php:665
+#: common/forum/ForumHTML.class.php:73 common/forum/ForumHTML.class.php:211
+#: common/include/Error.class.php:207 common/include/exit.php:80
+#: common/include/User.class.php:348
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
 #: common/tracker/actions/browse.php:407 common/tracker/actions/mod.php:147
@@ -480,6 +481,8 @@ msgstr "Projecte"
 #: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
 #: www/export/rssAboTask.php:146 www/export/rssAboTask.php:169
 #: www/export/rssAboTask.php:171 www/export/rssAboTask.php:173
+#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
+#: www/forum/forum.php:157 www/forum/message.php:126
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:191
 #: www/frs/admin/qrs.php:198 www/people/skills_utils.php:121
 #: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
@@ -2175,17 +2178,12 @@ msgstr "Confirma la supressió"
 msgid "Error getting new Forum"
 msgstr "Error afegint un fòrum"
 
-#: common/forum/ForumAdmin.class.php:425
-#: www/forum/admin/pendingmsgdetail.php:57 www/forum/forum.php:89
-#: www/forum/message.php:82
+#: common/forum/ForumAdmin.class.php:425 common/forum/ForumAdmin.class.php:427
+#: www/forum/admin/pendingmsgdetail.php:57
+#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:89
+#: www/forum/forum.php:92 www/forum/message.php:82
 #, fuzzy
 msgid "Error getting new ForumMessage"
-msgstr "Error afegint un fòrum"
-
-#: common/forum/ForumAdmin.class.php:427
-#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
-#, fuzzy
-msgid "Error getting new ForumMessage: "
 msgstr "Error afegint un fòrum"
 
 #: common/forum/ForumAdmin.class.php:439
@@ -2305,7 +2303,7 @@ msgid "Error Deleting Forum:"
 msgstr "Error afegint un fòrum"
 
 #: common/forum/ForumFactory.class.php:56 common/include/rbac_texts.php:158
-#: www/forum/index.php:69 www/forum/myforums.php:69
+#: www/forum/forum.php:157 www/forum/index.php:69 www/forum/myforums.php:69
 msgid "Forum"
 msgstr "Fòrum"
 
@@ -2324,7 +2322,7 @@ msgstr "Enquesta no trobada."
 msgid "Thread not found"
 msgstr "Fil"
 
-#: common/forum/ForumHTML.class.php:58 www/forum/forum.php:157
+#: common/forum/ForumHTML.class.php:58
 #, fuzzy
 msgid "Forum: "
 msgstr "Fòrum"
@@ -2404,7 +2402,8 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:211
 #: common/tracker/include/ArtifactHtml.class.php:149
 #: common/tracker/include/ArtifactTypeHtml.class.php:367
-#: www/activity/index.php:266 www/pm/include/ProjectTaskHTML.class.php:158
+#: www/activity/index.php:266 www/forum/message.php:126
+#: www/pm/include/ProjectTaskHTML.class.php:158
 #: www/pm/include/ProjectTaskHTML.class.php:204
 #: www/project/admin/project_admin_utils.php:162
 msgid "By"
@@ -2414,7 +2413,7 @@ msgstr "Per"
 msgid "reply"
 msgstr "respon"
 
-#: common/forum/ForumHTML.class.php:269 www/forum/message.php:126
+#: common/forum/ForumHTML.class.php:269
 msgid "By:"
 msgstr "Per:"
 
@@ -23652,6 +23651,10 @@ msgstr "Nom d'usuari"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
+
+#, fuzzy
+#~ msgid "Error getting new ForumMessage: "
+#~ msgstr "Error afegint un fòrum"
 
 #, fuzzy
 #~ msgid "Enable tree"

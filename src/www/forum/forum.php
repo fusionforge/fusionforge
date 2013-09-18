@@ -89,7 +89,7 @@ if ($forum_id) {
 			exit_error(_('Error getting new ForumMessage'), 'forums');
 		} elseif ($fm->isError()) {
 			form_release_key(getStringFromRequest("form_key"));
-			exit_error(_('Error getting new ForumMessage:'.' '.$fm->getErrorMessage()), 'forums');
+			exit_error(_('Error getting new ForumMessage'._(': ').$fm->getErrorMessage()), 'forums');
 		}
 
 		if (getStringFromRequest('_body_content_type') == 'html') {
@@ -154,7 +154,7 @@ if ($forum_id) {
 		exit_error($fh->getErrorMessage(), 'forums');
 	}
 
-	forum_header(array('title'=>_('Forum: ') . $f->getName(), 'forum_id'=>$forum_id));
+	forum_header(array('title'=>_('Forum') . _(': ') . $f->getName(), 'forum_id'=>$forum_id));
 
 /**
  *

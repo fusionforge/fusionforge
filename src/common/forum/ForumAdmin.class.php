@@ -283,7 +283,7 @@ class ForumAdmin extends Error {
 			}
 
 			if (count($moderated_forums)==0) {
-				echo $HTML->warning_msg(_('No forums are moderated for this group'));
+				echo $HTML->feedback(_('No forums are moderated for this group'));
 				forum_footer(array());
 				exit();
 			}
@@ -424,7 +424,7 @@ class ForumAdmin extends Error {
 						if (!$fm || !is_object($fm)) {
 							exit_error(_('Error getting new ForumMessage'),'forums');
 						} elseif ($fm->isError()) {
-							exit_error(_('Error getting new ForumMessage: ').$fm->getErrorMessage(),'forums');
+							exit_error(_('Error getting new ForumMessage')._(': ').$fm->getErrorMessage(),'forums');
 						}
 						$group_forum_id = db_result($res1,0,"group_forum_id");
 						$subject = db_result($res1,0,"subject");
