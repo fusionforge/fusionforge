@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:17+0200\n"
+"POT-Creation-Date: 2013-09-18 10:19+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -672,6 +672,7 @@ msgid "Number of deleted documents in this folder"
 msgstr ""
 
 #: common/docman/DocumentManager.class.php:189
+#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:52
 #, fuzzy
 msgid "Created by"
 msgstr "Creat per"
@@ -22163,10 +22164,6 @@ msgstr "Resultats de cerca per <em>%1$s</em>"
 msgid "No matches found for <em>%1$s</em>"
 msgstr "No s'han trobat coincidències per <em>%1$s</em>"
 
-#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:52
-msgid "Created By"
-msgstr "Creat per"
-
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:53
 msgid "Completed"
 msgstr "Completat"
@@ -23723,6 +23720,9 @@ msgstr "Nom d'usuari"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
+
+#~ msgid "Created By"
+#~ msgstr "Creat per"
 
 #, fuzzy
 #~ msgid "Could Not Get FRSRelease"

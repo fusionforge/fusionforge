@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:17+0200\n"
+"POT-Creation-Date: 2013-09-18 10:19+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -647,6 +647,7 @@ msgid "Number of deleted documents in this folder"
 msgstr "Numero de documentos borrados en esta carpeta"
 
 #: common/docman/DocumentManager.class.php:189
+#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:52
 msgid "Created by"
 msgstr "Creado por"
 
@@ -21679,10 +21680,6 @@ msgstr "Resultados para <em>%1$s</em>"
 msgid "No matches found for <em>%1$s</em>"
 msgstr "Ninguna coincidencia encontrada para <em>%1$s</em>"
 
-#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:52
-msgid "Created By"
-msgstr "Creado por"
-
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:53
 msgid "Completed"
 msgstr "Completado"
@@ -23228,6 +23225,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Created By"
+#~ msgstr "Creado por"
 
 #~ msgid "Could Not Get FRSRelease"
 #~ msgstr "No puedo obtener Releases FRS"

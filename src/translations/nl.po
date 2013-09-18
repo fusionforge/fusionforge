@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:17+0200\n"
+"POT-Creation-Date: 2013-09-18 10:19+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -673,6 +673,7 @@ msgid "Number of deleted documents in this folder"
 msgstr ""
 
 #: common/docman/DocumentManager.class.php:189
+#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:52
 #, fuzzy
 msgid "Created by"
 msgstr "Aangemaakt door"
@@ -22177,10 +22178,6 @@ msgstr "Zoekresulten voor <em>%1$s</em>"
 msgid "No matches found for <em>%1$s</em>"
 msgstr "Niets passends gevonden voor <em>%1$s</em>"
 
-#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:52
-msgid "Created By"
-msgstr "Aangemaakt door"
-
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:53
 msgid "Completed"
 msgstr "Voltooid"
@@ -23748,6 +23745,9 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#~ msgid "Created By"
+#~ msgstr "Aangemaakt door"
 
 #, fuzzy
 #~ msgid "Could Not Get FRSRelease"

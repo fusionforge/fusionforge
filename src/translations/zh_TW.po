@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:17+0200\n"
+"POT-Creation-Date: 2013-09-18 10:19+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -675,6 +675,7 @@ msgid "Number of deleted documents in this folder"
 msgstr ""
 
 #: common/docman/DocumentManager.class.php:189
+#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:52
 #, fuzzy
 msgid "Created by"
 msgstr "創造者"
@@ -22004,10 +22005,6 @@ msgstr "<em>%1$s</em> 的搜尋結果"
 msgid "No matches found for <em>%1$s</em>"
 msgstr "找不到關於 <em>%1$s</em> 的資料"
 
-#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:52
-msgid "Created By"
-msgstr "創造者"
-
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:53
 msgid "Completed"
 msgstr "完成"
@@ -23549,6 +23546,9 @@ msgstr "帳號"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
+
+#~ msgid "Created By"
+#~ msgstr "創造者"
 
 #, fuzzy
 #~ msgid "Could Not Get FRSRelease"

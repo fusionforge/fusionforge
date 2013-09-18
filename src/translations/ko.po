@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:17+0200\n"
+"POT-Creation-Date: 2013-09-18 10:19+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -675,6 +675,7 @@ msgid "Number of deleted documents in this folder"
 msgstr ""
 
 #: common/docman/DocumentManager.class.php:189
+#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:52
 #, fuzzy
 msgid "Created by"
 msgstr "생성"
@@ -21897,10 +21898,6 @@ msgstr "%1$s의 게시판"
 #, fuzzy, php-format
 msgid "No matches found for <em>%1$s</em>"
 msgstr "%1$s에 대한 게시판이 없습니다."
-
-#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:52
-msgid "Created By"
-msgstr ""
 
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:53
 msgid "Completed"

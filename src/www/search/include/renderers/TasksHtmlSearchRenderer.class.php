@@ -49,7 +49,7 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			_('Summary'),
 			_('Start Date'),
 			_('End Date'),
-			_('Created By'),
+			_('Created by'),
 			_('Completed')
 		);
 	}
