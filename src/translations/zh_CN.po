@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:12+0200\n"
+"POT-Creation-Date: 2013-09-18 10:15+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -5564,8 +5564,12 @@ msgid "Delete artifact"
 msgstr "删除样板"
 
 #: common/tracker/actions/deleteartifact.php:42
-#, fuzzy
-msgid "Confirm Deletion"
+#: plugins/mailman/www/admin/deletelist.php:59
+#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:57
+#: www/admin/groupdelete.php:58 www/admin/groupdelete.php:59
+#: www/mail/admin/deletelist.php:67 www/mail/admin/deletelist.php:71
+#: www/people/editprofile.php:201
+msgid "Confirm Delete"
 msgstr "确认删除"
 
 #: common/tracker/actions/deleteartifact.php:48
@@ -10911,14 +10915,6 @@ msgstr ""
 #: plugins/mailman/www/admin/deletelist.php:52 www/mail/admin/index.php:232
 msgid "Permanently Delete List"
 msgstr "永久的删除邮件列表"
-
-#: plugins/mailman/www/admin/deletelist.php:59
-#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:57
-#: www/admin/groupdelete.php:58 www/admin/groupdelete.php:59
-#: www/mail/admin/deletelist.php:67 www/mail/admin/deletelist.php:71
-#: www/people/editprofile.php:201
-msgid "Confirm Delete"
-msgstr "确认删除"
 
 #: plugins/mailman/www/admin/deletelist.php:61 www/admin/groupdelete.php:61
 #: www/mail/admin/deletelist.php:74
@@ -23535,6 +23531,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Confirm Deletion"
+#~ msgstr "确认删除"
 
 #, fuzzy
 #~ msgid "All users"

@@ -39,7 +39,7 @@ $ath->header(array ('title'=>_('Delete artifact').': [#'. $ah->getID(). '] ' . $
 <tr>
 <td>
 <fieldset>
-<legend><?php echo _('Confirm Deletion'); ?></legend>
+<legend><?php echo _('Confirm Delete'); ?></legend>
 <form action="<?php echo getStringFromServer('PHP_SELF')."?aid=$aid&amp;group_id=$group_id"; ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>" />
 <input type="hidden" name="func" value="postdeleteartifact" />

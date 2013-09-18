@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:12+0200\n"
+"POT-Creation-Date: 2013-09-18 10:15+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -5637,8 +5637,13 @@ msgid "Delete artifact"
 msgstr "Artefakt löschen"
 
 #: common/tracker/actions/deleteartifact.php:42
-msgid "Confirm Deletion"
-msgstr "Löschung bestätigen"
+#: plugins/mailman/www/admin/deletelist.php:59
+#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:57
+#: www/admin/groupdelete.php:58 www/admin/groupdelete.php:59
+#: www/mail/admin/deletelist.php:67 www/mail/admin/deletelist.php:71
+#: www/people/editprofile.php:201
+msgid "Confirm Delete"
+msgstr "Löschen bestätigen"
 
 #: common/tracker/actions/deleteartifact.php:48
 msgid "Are you sure you want to delete this artifact?"
@@ -11015,14 +11020,6 @@ msgstr ""
 #: plugins/mailman/www/admin/deletelist.php:52 www/mail/admin/index.php:232
 msgid "Permanently Delete List"
 msgstr "Liste dauerhaft Löschen"
-
-#: plugins/mailman/www/admin/deletelist.php:59
-#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:57
-#: www/admin/groupdelete.php:58 www/admin/groupdelete.php:59
-#: www/mail/admin/deletelist.php:67 www/mail/admin/deletelist.php:71
-#: www/people/editprofile.php:201
-msgid "Confirm Delete"
-msgstr "Löschen bestätigen"
 
 #: plugins/mailman/www/admin/deletelist.php:61 www/admin/groupdelete.php:61
 #: www/mail/admin/deletelist.php:74
@@ -24007,6 +24004,9 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "Confirm Deletion"
+#~ msgstr "Löschung bestätigen"
 
 #~ msgid "All users"
 #~ msgstr "Alle Benutzer"

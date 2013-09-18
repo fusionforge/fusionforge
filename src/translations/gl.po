@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:12+0200\n"
+"POT-Creation-Date: 2013-09-18 10:15+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -5622,8 +5622,12 @@ msgid "Delete artifact"
 msgstr "Eliminar artefacto"
 
 #: common/tracker/actions/deleteartifact.php:42
-#, fuzzy
-msgid "Confirm Deletion"
+#: plugins/mailman/www/admin/deletelist.php:59
+#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:57
+#: www/admin/groupdelete.php:58 www/admin/groupdelete.php:59
+#: www/mail/admin/deletelist.php:67 www/mail/admin/deletelist.php:71
+#: www/people/editprofile.php:201
+msgid "Confirm Delete"
 msgstr "Confirme a eliminación "
 
 #: common/tracker/actions/deleteartifact.php:48
@@ -11013,14 +11017,6 @@ msgstr ""
 #: plugins/mailman/www/admin/deletelist.php:52 www/mail/admin/index.php:232
 msgid "Permanently Delete List"
 msgstr "Eliminar a lista permanentemente"
-
-#: plugins/mailman/www/admin/deletelist.php:59
-#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:57
-#: www/admin/groupdelete.php:58 www/admin/groupdelete.php:59
-#: www/mail/admin/deletelist.php:67 www/mail/admin/deletelist.php:71
-#: www/people/editprofile.php:201
-msgid "Confirm Delete"
-msgstr "Confirme a eliminación "
 
 #: plugins/mailman/www/admin/deletelist.php:61 www/admin/groupdelete.php:61
 #: www/mail/admin/deletelist.php:74
@@ -23937,6 +23933,10 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Confirm Deletion"
+#~ msgstr "Confirme a eliminación "
 
 #, fuzzy
 #~ msgid "All users"
