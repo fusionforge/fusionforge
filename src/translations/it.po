@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 19:25+0200\n"
+"POT-Creation-Date: 2013-09-18 10:06+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -12246,10 +12246,6 @@ msgstr "Accesso negato"
 msgid "Select"
 msgstr "Seleziona"
 
-#: plugins/oauthconsumer/www/get_access_token.php:46
-msgid "<b>"
-msgstr ""
-
 #: plugins/oauthconsumer/www/get_access_token.php:50
 #: plugins/oauthconsumer/www/provider_edit.php:44
 #: plugins/oauthconsumer/www/providers.php:14
@@ -12259,6 +12255,7 @@ msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:55
 #: plugins/oauthconsumer/www/provider_edit.php:54
+#: plugins/oauthconsumer/www/providers.php:14
 #: plugins/oauthconsumer/www/providers.php:93
 #, fuzzy
 msgid "Request Token URL"
@@ -12266,12 +12263,14 @@ msgstr "Richiedi di partecipare al progetto"
 
 #: plugins/oauthconsumer/www/get_access_token.php:60
 #: plugins/oauthconsumer/www/provider_edit.php:59
+#: plugins/oauthconsumer/www/providers.php:14
 #: plugins/oauthconsumer/www/providers.php:98
 msgid "Authorization URL"
 msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:65
 #: plugins/oauthconsumer/www/provider_edit.php:64
+#: plugins/oauthconsumer/www/providers.php:14
 #: plugins/oauthconsumer/www/providers.php:103
 #, fuzzy
 msgid "Access Token URL"
@@ -12364,20 +12363,6 @@ msgstr ""
 #, fuzzy
 msgid "Update Provider"
 msgstr "Aggiorna"
-
-#: plugins/oauthconsumer/www/providers.php:14
-#, fuzzy
-msgid "Request Token Url"
-msgstr "Richiedi di partecipare al progetto"
-
-#: plugins/oauthconsumer/www/providers.php:14
-msgid "Authorization Url"
-msgstr ""
-
-#: plugins/oauthconsumer/www/providers.php:14
-#, fuzzy
-msgid "Access Token Url"
-msgstr "Accesso negato"
 
 #: plugins/oauthconsumer/www/providers.php:49
 msgid "There are currently no OAuth Providers registered in the database"
@@ -23779,6 +23764,14 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "Request Token Url"
+#~ msgstr "Richiedi di partecipare al progetto"
+
+#, fuzzy
+#~ msgid "Access Token Url"
+#~ msgstr "Accesso negato"
 
 #, fuzzy
 #~ msgid "Last Success:"

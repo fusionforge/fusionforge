@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 19:25+0200\n"
+"POT-Creation-Date: 2013-09-18 10:06+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -11839,10 +11839,6 @@ msgstr ""
 msgid "Select"
 msgstr "Selecciona"
 
-#: plugins/oauthconsumer/www/get_access_token.php:46
-msgid "<b>"
-msgstr "<b>"
-
 #: plugins/oauthconsumer/www/get_access_token.php:50
 #: plugins/oauthconsumer/www/provider_edit.php:44
 #: plugins/oauthconsumer/www/providers.php:14
@@ -11852,18 +11848,21 @@ msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:55
 #: plugins/oauthconsumer/www/provider_edit.php:54
+#: plugins/oauthconsumer/www/providers.php:14
 #: plugins/oauthconsumer/www/providers.php:93
 msgid "Request Token URL"
 msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:60
 #: plugins/oauthconsumer/www/provider_edit.php:59
+#: plugins/oauthconsumer/www/providers.php:14
 #: plugins/oauthconsumer/www/providers.php:98
 msgid "Authorization URL"
 msgstr "URL de Autorización"
 
 #: plugins/oauthconsumer/www/get_access_token.php:65
 #: plugins/oauthconsumer/www/provider_edit.php:64
+#: plugins/oauthconsumer/www/providers.php:14
 #: plugins/oauthconsumer/www/providers.php:103
 msgid "Access Token URL"
 msgstr ""
@@ -11958,18 +11957,6 @@ msgstr ""
 #: plugins/oauthconsumer/www/provider_edit.php:69
 msgid "Update Provider"
 msgstr "Actualizar Proveedor"
-
-#: plugins/oauthconsumer/www/providers.php:14
-msgid "Request Token Url"
-msgstr "Pedir Token URL"
-
-#: plugins/oauthconsumer/www/providers.php:14
-msgid "Authorization Url"
-msgstr "Url Autorización"
-
-#: plugins/oauthconsumer/www/providers.php:14
-msgid "Access Token Url"
-msgstr ""
 
 #: plugins/oauthconsumer/www/providers.php:49
 msgid "There are currently no OAuth Providers registered in the database"
@@ -23255,6 +23242,15 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "<b>"
+#~ msgstr "<b>"
+
+#~ msgid "Request Token Url"
+#~ msgstr "Pedir Token URL"
+
+#~ msgid "Authorization Url"
+#~ msgstr "Url Autorización"
 
 #~ msgid "Last Success:"
 #~ msgstr "Ultimo Correcto:"

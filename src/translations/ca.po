@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 19:25+0200\n"
+"POT-Creation-Date: 2013-09-18 10:06+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -12230,10 +12230,6 @@ msgstr "Accés denegat"
 msgid "Select"
 msgstr "Selecciona"
 
-#: plugins/oauthconsumer/www/get_access_token.php:46
-msgid "<b>"
-msgstr ""
-
 #: plugins/oauthconsumer/www/get_access_token.php:50
 #: plugins/oauthconsumer/www/provider_edit.php:44
 #: plugins/oauthconsumer/www/providers.php:14
@@ -12243,18 +12239,21 @@ msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:55
 #: plugins/oauthconsumer/www/provider_edit.php:54
+#: plugins/oauthconsumer/www/providers.php:14
 #: plugins/oauthconsumer/www/providers.php:93
 msgid "Request Token URL"
 msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:60
 #: plugins/oauthconsumer/www/provider_edit.php:59
+#: plugins/oauthconsumer/www/providers.php:14
 #: plugins/oauthconsumer/www/providers.php:98
 msgid "Authorization URL"
 msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:65
 #: plugins/oauthconsumer/www/provider_edit.php:64
+#: plugins/oauthconsumer/www/providers.php:14
 #: plugins/oauthconsumer/www/providers.php:103
 #, fuzzy
 msgid "Access Token URL"
@@ -12347,19 +12346,6 @@ msgstr ""
 #, fuzzy
 msgid "Update Provider"
 msgstr "Actualitza"
-
-#: plugins/oauthconsumer/www/providers.php:14
-msgid "Request Token Url"
-msgstr ""
-
-#: plugins/oauthconsumer/www/providers.php:14
-msgid "Authorization Url"
-msgstr ""
-
-#: plugins/oauthconsumer/www/providers.php:14
-#, fuzzy
-msgid "Access Token Url"
-msgstr "Accés denegat"
 
 #: plugins/oauthconsumer/www/providers.php:49
 msgid "There are currently no OAuth Providers registered in the database"
@@ -23755,6 +23741,10 @@ msgstr "Nom d'usuari"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
+
+#, fuzzy
+#~ msgid "Access Token Url"
+#~ msgstr "Accés denegat"
 
 #, fuzzy
 #~ msgid "Last Success:"

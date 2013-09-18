@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 19:25+0200\n"
+"POT-Creation-Date: 2013-09-18 10:06+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -12288,10 +12288,6 @@ msgstr "Acceso denegado "
 msgid "Select"
 msgstr "Seleccionar "
 
-#: plugins/oauthconsumer/www/get_access_token.php:46
-msgid "<b>"
-msgstr ""
-
 #: plugins/oauthconsumer/www/get_access_token.php:50
 #: plugins/oauthconsumer/www/provider_edit.php:44
 #: plugins/oauthconsumer/www/providers.php:14
@@ -12301,6 +12297,7 @@ msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:55
 #: plugins/oauthconsumer/www/provider_edit.php:54
+#: plugins/oauthconsumer/www/providers.php:14
 #: plugins/oauthconsumer/www/providers.php:93
 #, fuzzy
 msgid "Request Token URL"
@@ -12308,6 +12305,7 @@ msgstr "Solicitude de rexistro"
 
 #: plugins/oauthconsumer/www/get_access_token.php:60
 #: plugins/oauthconsumer/www/provider_edit.php:59
+#: plugins/oauthconsumer/www/providers.php:14
 #: plugins/oauthconsumer/www/providers.php:98
 #, fuzzy
 msgid "Authorization URL"
@@ -12315,6 +12313,7 @@ msgstr "Autorizar"
 
 #: plugins/oauthconsumer/www/get_access_token.php:65
 #: plugins/oauthconsumer/www/provider_edit.php:64
+#: plugins/oauthconsumer/www/providers.php:14
 #: plugins/oauthconsumer/www/providers.php:103
 #, fuzzy
 msgid "Access Token URL"
@@ -12407,21 +12406,6 @@ msgstr ""
 #, fuzzy
 msgid "Update Provider"
 msgstr "Actualizar "
-
-#: plugins/oauthconsumer/www/providers.php:14
-#, fuzzy
-msgid "Request Token Url"
-msgstr "Solicitude de rexistro"
-
-#: plugins/oauthconsumer/www/providers.php:14
-#, fuzzy
-msgid "Authorization Url"
-msgstr "Autorizar"
-
-#: plugins/oauthconsumer/www/providers.php:14
-#, fuzzy
-msgid "Access Token Url"
-msgstr "Acceso denegado "
 
 #: plugins/oauthconsumer/www/providers.php:49
 msgid "There are currently no OAuth Providers registered in the database"
@@ -23962,6 +23946,18 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Request Token Url"
+#~ msgstr "Solicitude de rexistro"
+
+#, fuzzy
+#~ msgid "Authorization Url"
+#~ msgstr "Autorizar"
+
+#, fuzzy
+#~ msgid "Access Token Url"
+#~ msgstr "Acceso denegado "
 
 #, fuzzy
 #~ msgid "Last Success:"
