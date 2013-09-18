@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 12:53+0200\n"
+"POT-Creation-Date: 2013-09-18 13:52+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2204,7 +2204,7 @@ msgstr ""
 
 #: common/forum/Forum.class.php:139
 #, fuzzy
-msgid "Group_id in db result does not match Group Object."
+msgid "group_id in db result does not match Group Object."
 msgstr "Grupp-ID i db-resultatet motsvarar inte gruppobjektet"
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
@@ -23454,6 +23454,10 @@ msgstr "Användarenamn"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
+
+#, fuzzy
+#~ msgid "Group_id in db result does not match Group Object."
+#~ msgstr "Grupp-ID i db-resultatet motsvarar inte gruppobjektet"
 
 #, fuzzy
 #~ msgid "Error getting new ForumMessage: "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 12:53+0200\n"
+"POT-Creation-Date: 2013-09-18 13:52+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2205,7 +2205,7 @@ msgstr ""
 
 #: common/forum/Forum.class.php:139
 #, fuzzy
-msgid "Group_id in db result does not match Group Object."
+msgid "group_id in db result does not match Group Object."
 msgstr "데이터베이스의 그룹ID가 그룹 객체와 맞지 않습니다."
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
@@ -23380,6 +23380,10 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "Group_id in db result does not match Group Object."
+#~ msgstr "데이터베이스의 그룹ID가 그룹 객체와 맞지 않습니다."
 
 #, fuzzy
 #~ msgid "Error getting new ForumMessage: "

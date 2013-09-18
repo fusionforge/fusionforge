@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 12:53+0200\n"
+"POT-Creation-Date: 2013-09-18 13:52+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2207,7 +2207,7 @@ msgstr ""
 
 #: common/forum/Forum.class.php:139
 #, fuzzy
-msgid "Group_id in db result does not match Group Object."
+msgid "group_id in db result does not match Group Object."
 msgstr ""
 "Group_id -ko datu basearen erantzunak ez datoz taldearen objektuarekin bat"
 
@@ -23514,6 +23514,11 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#, fuzzy
+#~ msgid "Group_id in db result does not match Group Object."
+#~ msgstr ""
+#~ "Group_id -ko datu basearen erantzunak ez datoz taldearen objektuarekin bat"
 
 #, fuzzy
 #~ msgid "Error getting new ForumMessage: "

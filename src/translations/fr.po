@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 12:53+0200\n"
+"POT-Creation-Date: 2013-09-18 13:52+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -2103,10 +2103,10 @@ msgstr ""
 
 #: common/forum/Forum.class.php:139
 #, fuzzy
-msgid "Group_id in db result does not match Group Object."
+msgid "group_id in db result does not match Group Object."
 msgstr ""
 "L'identifiant du groupe dans la base de données ne correspond pas à l'objet "
-"groupe."
+"groupe"
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
 #, fuzzy
@@ -23255,6 +23255,12 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#, fuzzy
+#~ msgid "Group_id in db result does not match Group Object."
+#~ msgstr ""
+#~ "L'identifiant du groupe dans la base de données ne correspond pas à "
+#~ "l'objet groupe."
 
 #~ msgid "Error getting new ForumMessage: "
 #~ msgstr "Erreur lors de l'accès à un message de forum"

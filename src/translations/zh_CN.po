@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 12:53+0200\n"
+"POT-Creation-Date: 2013-09-18 13:52+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2212,7 +2212,7 @@ msgstr ""
 
 #: common/forum/Forum.class.php:139
 #, fuzzy
-msgid "Group_id in db result does not match Group Object."
+msgid "group_id in db result does not match Group Object."
 msgstr "数据库中的群组编号与群组对象不一致"
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
@@ -23454,6 +23454,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Group_id in db result does not match Group Object."
+#~ msgstr "数据库中的群组编号与群组对象不一致"
 
 #, fuzzy
 #~ msgid "Error getting new ForumMessage: "

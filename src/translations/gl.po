@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 12:53+0200\n"
+"POT-Creation-Date: 2013-09-18 13:52+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -2213,7 +2213,7 @@ msgstr ""
 
 #: common/forum/Forum.class.php:139
 #, fuzzy
-msgid "Group_id in db result does not match Group Object."
+msgid "group_id in db result does not match Group Object."
 msgstr "O group_id na base de datos non coincide co obxecto do grupo"
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
@@ -23855,6 +23855,10 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Group_id in db result does not match Group Object."
+#~ msgstr "O group_id na base de datos non coincide co obxecto do grupo"
 
 #~ msgid "Error getting new ForumMessage: "
 #~ msgstr "Produciuse un erro ao obter a nova mensaxe de foro:"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 12:53+0200\n"
+"POT-Creation-Date: 2013-09-18 13:52+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -2137,7 +2137,7 @@ msgstr ""
 
 #: common/forum/Forum.class.php:139
 #, fuzzy
-msgid "Group_id in db result does not match Group Object."
+msgid "group_id in db result does not match Group Object."
 msgstr ""
 "Group_id en Grupo los resultados de la Base de Datos no coincide con el "
 "Objeto de"
@@ -23166,6 +23166,12 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#, fuzzy
+#~ msgid "Group_id in db result does not match Group Object."
+#~ msgstr ""
+#~ "Group_id en Grupo los resultados de la Base de Datos no coincide con el "
+#~ "Objeto de"
 
 #~ msgid "Error getting new ForumMessage: "
 #~ msgstr "Error obteniendo el nuevo ForumMessage."
