@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:40+0200\n"
+"POT-Creation-Date: 2013-09-18 11:45+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -5894,7 +5894,7 @@ msgid "Could Not Get ProjectGroup"
 msgstr "No s'ha pogut actualitzar elpare"
 
 #: common/tracker/actions/taskmgr.php:66 www/pm/browse_task.php:43
-#: www/pm/downloadcsv.php:96
+#: www/pm/downloadcsv.php:96 www/pm/ganttpage.php:59
 msgid "Could Not Get ProjectTaskFactory"
 msgstr ""
 
@@ -20279,11 +20279,6 @@ msgstr ""
 msgid "Gantt Chart"
 msgstr "Gràfica de Gantt"
 
-#: www/pm/ganttpage.php:59
-#, fuzzy
-msgid "Could not get ProjectTaskFactory"
-msgstr "No s'ha pogut completar l'operació"
-
 #: www/pm/ganttpage.php:61
 #, fuzzy
 msgid "Error getting PTF: "
@@ -23661,6 +23656,10 @@ msgstr "Nom d'usuari"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
+
+#, fuzzy
+#~ msgid "Could not get ProjectTaskFactory"
+#~ msgstr "No s'ha pogut completar l'operació"
 
 #~ msgid "Mass update"
 #~ msgstr "Actualització en massa"

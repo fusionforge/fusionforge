@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:40+0200\n"
+"POT-Creation-Date: 2013-09-18 11:45+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -5868,7 +5868,7 @@ msgid "Could Not Get ProjectGroup"
 msgstr "無法更新上層文章"
 
 #: common/tracker/actions/taskmgr.php:66 www/pm/browse_task.php:43
-#: www/pm/downloadcsv.php:96
+#: www/pm/downloadcsv.php:96 www/pm/ganttpage.php:59
 msgid "Could Not Get ProjectTaskFactory"
 msgstr ""
 
@@ -20152,11 +20152,6 @@ msgstr ""
 msgid "Gantt Chart"
 msgstr "甘特圖"
 
-#: www/pm/ganttpage.php:59
-#, fuzzy
-msgid "Could not get ProjectTaskFactory"
-msgstr "無法完成執行"
-
 #: www/pm/ganttpage.php:61
 #, fuzzy
 msgid "Error getting PTF: "
@@ -23487,6 +23482,10 @@ msgstr "帳號"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
+
+#, fuzzy
+#~ msgid "Could not get ProjectTaskFactory"
+#~ msgstr "無法完成執行"
 
 #~ msgid "Mass update"
 #~ msgstr "大量更新"

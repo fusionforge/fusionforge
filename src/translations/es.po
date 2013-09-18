@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:40+0200\n"
+"POT-Creation-Date: 2013-09-18 11:45+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -5749,7 +5749,7 @@ msgid "Could Not Get ProjectGroup"
 msgstr "No puedo obtener el ProjectGroup"
 
 #: common/tracker/actions/taskmgr.php:66 www/pm/browse_task.php:43
-#: www/pm/downloadcsv.php:96
+#: www/pm/downloadcsv.php:96 www/pm/ganttpage.php:59
 msgid "Could Not Get ProjectTaskFactory"
 msgstr "No puedo obtener ProjectTaskFactory"
 
@@ -19811,11 +19811,6 @@ msgstr ""
 msgid "Gantt Chart"
 msgstr "Diagrama de Gantt"
 
-#: www/pm/ganttpage.php:59
-#, fuzzy
-msgid "Could not get ProjectTaskFactory"
-msgstr "No puedo obtener ProjectTaskFactory"
-
 #: www/pm/ganttpage.php:61
 msgid "Error getting PTF: "
 msgstr "Error obteniendo PTF:"
@@ -23174,6 +23169,10 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#, fuzzy
+#~ msgid "Could not get ProjectTaskFactory"
+#~ msgstr "No puedo obtener ProjectTaskFactory"
 
 #~ msgid "Mass update"
 #~ msgstr "Actualización Masiva"

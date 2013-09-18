@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:40+0200\n"
+"POT-Creation-Date: 2013-09-18 11:45+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -5933,7 +5933,7 @@ msgid "Could Not Get ProjectGroup"
 msgstr "Konnte die Projektgruppe nicht anzeigen"
 
 #: common/tracker/actions/taskmgr.php:66 www/pm/browse_task.php:43
-#: www/pm/downloadcsv.php:96
+#: www/pm/downloadcsv.php:96 www/pm/ganttpage.php:59
 #, fuzzy
 msgid "Could Not Get ProjectTaskFactory"
 msgstr "Konnte die ProjectTaskFactory nicht anzeigen"
@@ -20515,11 +20515,6 @@ msgstr ""
 msgid "Gantt Chart"
 msgstr "Gantt-Diagramm"
 
-#: www/pm/ganttpage.php:59
-#, fuzzy
-msgid "Could not get ProjectTaskFactory"
-msgstr "Konnte die ProjectTaskFactory nicht anzeigen"
-
 #: www/pm/ganttpage.php:61
 #, fuzzy
 msgid "Error getting PTF: "
@@ -23935,6 +23930,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "Could not get ProjectTaskFactory"
+#~ msgstr "Konnte die ProjectTaskFactory nicht anzeigen"
 
 #~ msgid "Mass update"
 #~ msgstr "Massen-Update"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:40+0200\n"
+"POT-Creation-Date: 2013-09-18 11:45+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -5890,7 +5890,7 @@ msgid "Could Not Get ProjectGroup"
 msgstr "Kan parent niet aanpassen"
 
 #: common/tracker/actions/taskmgr.php:66 www/pm/browse_task.php:43
-#: www/pm/downloadcsv.php:96
+#: www/pm/downloadcsv.php:96 www/pm/ganttpage.php:59
 msgid "Could Not Get ProjectTaskFactory"
 msgstr ""
 
@@ -20287,11 +20287,6 @@ msgstr ""
 msgid "Gantt Chart"
 msgstr "Gantt schema"
 
-#: www/pm/ganttpage.php:59
-#, fuzzy
-msgid "Could not get ProjectTaskFactory"
-msgstr "Kon de gevraagde bewerking niet uitvoeren"
-
 #: www/pm/ganttpage.php:61
 #, fuzzy
 msgid "Error getting PTF: "
@@ -23687,6 +23682,10 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#, fuzzy
+#~ msgid "Could not get ProjectTaskFactory"
+#~ msgstr "Kon de gevraagde bewerking niet uitvoeren"
 
 #~ msgid "Mass update"
 #~ msgstr "Alles bijwerken"

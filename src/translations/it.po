@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:40+0200\n"
+"POT-Creation-Date: 2013-09-18 11:45+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -5900,7 +5900,7 @@ msgid "Could Not Get ProjectGroup"
 msgstr "Non ho potuto aggiornare il messaggio superiore"
 
 #: common/tracker/actions/taskmgr.php:66 www/pm/browse_task.php:43
-#: www/pm/downloadcsv.php:96
+#: www/pm/downloadcsv.php:96 www/pm/ganttpage.php:59
 msgid "Could Not Get ProjectTaskFactory"
 msgstr ""
 
@@ -20298,11 +20298,6 @@ msgstr ""
 msgid "Gantt Chart"
 msgstr "Diagramma Gantt"
 
-#: www/pm/ganttpage.php:59
-#, fuzzy
-msgid "Could not get ProjectTaskFactory"
-msgstr "Impossibile completare l'operazione"
-
 #: www/pm/ganttpage.php:61
 #, fuzzy
 msgid "Error getting PTF: "
@@ -23684,6 +23679,10 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "Could not get ProjectTaskFactory"
+#~ msgstr "Impossibile completare l'operazione"
 
 #~ msgid "Mass update"
 #~ msgstr "Aggiornamento multiplo"

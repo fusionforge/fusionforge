@@ -56,7 +56,7 @@ $tech_name_arr = array();
 
 $ptf = new ProjectTaskFactory($pg);
 if (!$ptf || !is_object($ptf)) {
-	exit_error(_('Could not get ProjectTaskFactory'), 'pm');
+	exit_error(_('Could Not Get ProjectTaskFactory'), 'pm');
 } elseif ($ptf->isError()) {
 	exit_error(_('Error getting PTF: ').$ptf->getErrorMessage(), 'pm');
 }
@@ -219,7 +219,7 @@ echo '<div id="workSpace" style="padding:0px; overflow-y:auto; overflow-x:hidden
 			"canWriteOnParent":false,
 			"selectedRow":0,
 			"deletedTaskIds":[],
-			"minEditableDate":<?php echo $minstartdate*1000 ?>,
+			"minEditableDate":<?php echo $minstartdate*1000 ?>
 		})
 	});
 </script>
@@ -337,4 +337,3 @@ echo '<div id="workSpace" style="padding:0px; overflow-y:auto; overflow-x:hidden
   --></div>
 <?php
 $HTML->footer(false);
-?>

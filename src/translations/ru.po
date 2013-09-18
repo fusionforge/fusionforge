@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:40+0200\n"
+"POT-Creation-Date: 2013-09-18 11:45+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -5898,7 +5898,7 @@ msgid "Could Not Get ProjectGroup"
 msgstr "Невозможно получение группы проекта"
 
 #: common/tracker/actions/taskmgr.php:66 www/pm/browse_task.php:43
-#: www/pm/downloadcsv.php:96
+#: www/pm/downloadcsv.php:96 www/pm/ganttpage.php:59
 msgid "Could Not Get ProjectTaskFactory"
 msgstr "Невозможно получение задачи к выполнению"
 
@@ -20595,11 +20595,6 @@ msgstr ""
 msgid "Gantt Chart"
 msgstr "Диаграмма"
 
-#: www/pm/ganttpage.php:59
-#, fuzzy
-msgid "Could not get ProjectTaskFactory"
-msgstr "Невозможно получение задачи к выполнению"
-
 #: www/pm/ganttpage.php:61
 #, fuzzy
 msgid "Error getting PTF: "
@@ -24002,6 +23997,10 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "Could not get ProjectTaskFactory"
+#~ msgstr "Невозможно получение задачи к выполнению"
 
 #~ msgid "Mass update"
 #~ msgstr "Глобальное изменение"

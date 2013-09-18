@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 11:40+0200\n"
+"POT-Creation-Date: 2013-09-18 11:45+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -5703,7 +5703,7 @@ msgid "Could Not Get ProjectGroup"
 msgstr "Erreur lors de la création de l'objet ProjectGroup"
 
 #: common/tracker/actions/taskmgr.php:66 www/pm/browse_task.php:43
-#: www/pm/downloadcsv.php:96
+#: www/pm/downloadcsv.php:96 www/pm/ganttpage.php:59
 msgid "Could Not Get ProjectTaskFactory"
 msgstr "Erreur lors de la création de l'objet ProjectTaskFactory"
 
@@ -19896,11 +19896,6 @@ msgstr ""
 msgid "Gantt Chart"
 msgstr "Diagramme de Gantt"
 
-#: www/pm/ganttpage.php:59
-#, fuzzy
-msgid "Could not get ProjectTaskFactory"
-msgstr "Erreur lors de la création de l'objet ProjectTaskFactory"
-
 #: www/pm/ganttpage.php:61
 msgid "Error getting PTF: "
 msgstr "Erreur lors de l'accès à l'objet ProjectTaskFactory : "
@@ -23264,6 +23259,10 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#, fuzzy
+#~ msgid "Could not get ProjectTaskFactory"
+#~ msgstr "Erreur lors de la création de l'objet ProjectTaskFactory"
 
 #~ msgid "Mass update"
 #~ msgstr "Mise à jour massive"
