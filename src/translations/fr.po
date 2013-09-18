@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 14:34+0200\n"
+"POT-Creation-Date: 2013-09-18 14:45+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -385,7 +385,8 @@ msgstr "Projet"
 #: common/forum/ForumAdmin.class.php:427 common/forum/Forum.class.php:231
 #: common/forum/Forum.class.php:526 common/forum/Forum.class.php:607
 #: common/forum/Forum.class.php:633 common/forum/Forum.class.php:641
-#: common/forum/Forum.class.php:649 common/forum/Forum.class.php:665
+#: common/forum/Forum.class.php:649 common/forum/Forum.class.php:657
+#: common/forum/Forum.class.php:665 common/forum/Forum.class.php:673
 #: common/forum/ForumHTML.class.php:73 common/forum/ForumHTML.class.php:211
 #: common/include/Error.class.php:207 common/include/exit.php:80
 #: common/include/User.class.php:348 common/mail/MailingList.class.php:174
@@ -2176,13 +2177,10 @@ msgid "Please tick all checkboxes."
 msgstr "Veuillez cocher toutes les cases de confirmation."
 
 #: common/forum/Forum.class.php:633 common/forum/Forum.class.php:641
-#: common/forum/Forum.class.php:649 common/forum/Forum.class.php:665
+#: common/forum/Forum.class.php:649 common/forum/Forum.class.php:657
+#: common/forum/Forum.class.php:665 common/forum/Forum.class.php:673
 msgid "Error Deleting Forum"
 msgstr "Erreur lors de la suppression du forum"
-
-#: common/forum/Forum.class.php:657 common/forum/Forum.class.php:673
-msgid "Error Deleting Forum:"
-msgstr "Erreur lors de la suppression du forum :"
 
 #: common/forum/ForumFactory.class.php:56 common/include/rbac_texts.php:158
 #: www/forum/forum.php:157 www/forum/index.php:69 www/forum/myforums.php:69
@@ -23236,6 +23234,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Error Deleting Forum:"
+#~ msgstr "Erreur lors de la suppression du forum :"
 
 #~ msgid "Error Creating mailing list: "
 #~ msgstr "Erreur lors de la crétaion d'une liste de diffusion :"

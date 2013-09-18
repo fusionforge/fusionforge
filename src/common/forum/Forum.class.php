@@ -654,7 +654,7 @@ class Forum extends Error {
 		$result = db_query_params('DELETE FROM forum_attachment WHERE msg_id IN (SELECT msg_id from forum where group_forum_id=$1)',
 					array($this->getID()));
 		if (!$result) {
-			$this->setError(_('Error Deleting Forum:').' '.db_error());
+			$this->setError(_('Error Deleting Forum')._(': ').db_error());
 			db_rollback();
 			return false;
 		}
@@ -670,7 +670,7 @@ class Forum extends Error {
 		$result = db_query_params('DELETE FROM forum_group_list WHERE group_forum_id=$1',
 				 array($this->getID()));
 		if (!$result) {
-			$this->setError(_('Error Deleting Forum:').' '.db_error());
+			$this->setError(_('Error Deleting Forum')._(': ').db_error());
 			db_rollback();
 			return false;
 		}

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 14:34+0200\n"
+"POT-Creation-Date: 2013-09-18 14:45+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -418,7 +418,8 @@ msgstr "Projekt"
 #: common/forum/ForumAdmin.class.php:427 common/forum/Forum.class.php:231
 #: common/forum/Forum.class.php:526 common/forum/Forum.class.php:607
 #: common/forum/Forum.class.php:633 common/forum/Forum.class.php:641
-#: common/forum/Forum.class.php:649 common/forum/Forum.class.php:665
+#: common/forum/Forum.class.php:649 common/forum/Forum.class.php:657
+#: common/forum/Forum.class.php:665 common/forum/Forum.class.php:673
 #: common/forum/ForumHTML.class.php:73 common/forum/ForumHTML.class.php:211
 #: common/include/Error.class.php:207 common/include/exit.php:80
 #: common/include/User.class.php:348 common/mail/MailingList.class.php:174
@@ -2294,14 +2295,10 @@ msgid "Please tick all checkboxes."
 msgstr ""
 
 #: common/forum/Forum.class.php:633 common/forum/Forum.class.php:641
-#: common/forum/Forum.class.php:649 common/forum/Forum.class.php:665
+#: common/forum/Forum.class.php:649 common/forum/Forum.class.php:657
+#: common/forum/Forum.class.php:665 common/forum/Forum.class.php:673
 #, fuzzy
 msgid "Error Deleting Forum"
-msgstr "Fehler beim Suchen des Forums"
-
-#: common/forum/Forum.class.php:657 common/forum/Forum.class.php:673
-#, fuzzy
-msgid "Error Deleting Forum:"
 msgstr "Fehler beim Suchen des Forums"
 
 #: common/forum/ForumFactory.class.php:56 common/include/rbac_texts.php:158
@@ -23904,6 +23901,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "Error Deleting Forum:"
+#~ msgstr "Fehler beim Suchen des Forums"
 
 #, fuzzy
 #~ msgid "Error Creating mailing list: "
