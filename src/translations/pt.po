@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:31+0200\n"
+"POT-Creation-Date: 2013-09-18 10:32+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -13672,9 +13672,9 @@ msgstr ""
 msgid "Country:"
 msgstr ""
 
-#: www/account/index.php:199
-msgid "Email Addr:"
-msgstr "Endereço de E-mail:"
+#: www/account/index.php:199 www/include/user_profile.php:112
+msgid "Email Address:"
+msgstr ""
 
 #: www/account/index.php:201
 msgid "Change Email Addr"
@@ -16998,10 +16998,6 @@ msgstr "Perfil de Habilidades"
 
 #: www/include/user_profile.php:93
 msgid "Real Name:"
-msgstr ""
-
-#: www/include/user_profile.php:112
-msgid "Email Address:"
 msgstr ""
 
 #: www/include/user_profile.php:152
@@ -21967,6 +21963,9 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Minha Página Pessoal"
+
+#~ msgid "Email Addr:"
+#~ msgstr "Endereço de E-mail:"
 
 #~ msgid "CVS"
 #~ msgstr "CVS"

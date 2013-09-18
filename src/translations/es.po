@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:31+0200\n"
+"POT-Creation-Date: 2013-09-18 10:32+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -14474,8 +14474,8 @@ msgstr "Tema:"
 msgid "Country:"
 msgstr "País:"
 
-#: www/account/index.php:199
-msgid "Email Addr:"
+#: www/account/index.php:199 www/include/user_profile.php:112
+msgid "Email Address:"
 msgstr "Dirección e-mail:"
 
 #: www/account/index.php:201
@@ -17954,10 +17954,6 @@ msgstr "Experiencia"
 #: www/include/user_profile.php:93
 msgid "Real Name:"
 msgstr "Nombre real:"
-
-#: www/include/user_profile.php:112
-msgid "Email Address:"
-msgstr "Dirección e-mail:"
 
 #: www/include/user_profile.php:152
 msgid "Site Member Since:"
@@ -23207,6 +23203,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Email Addr:"
+#~ msgstr "Dirección e-mail:"
 
 #~ msgid "Edit job"
 #~ msgstr "Editar trabajos"

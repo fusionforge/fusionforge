@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:31+0200\n"
+"POT-Creation-Date: 2013-09-18 10:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13549,8 +13549,8 @@ msgstr ""
 msgid "Country:"
 msgstr ""
 
-#: www/account/index.php:199
-msgid "Email Addr:"
+#: www/account/index.php:199 www/include/user_profile.php:112
+msgid "Email Address:"
 msgstr ""
 
 #: www/account/index.php:201
@@ -16794,10 +16794,6 @@ msgstr ""
 
 #: www/include/user_profile.php:93
 msgid "Real Name:"
-msgstr ""
-
-#: www/include/user_profile.php:112
-msgid "Email Address:"
 msgstr ""
 
 #: www/include/user_profile.php:152

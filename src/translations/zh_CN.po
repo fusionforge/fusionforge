@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:31+0200\n"
+"POT-Creation-Date: 2013-09-18 10:32+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14781,8 +14781,9 @@ msgstr "主题："
 msgid "Country:"
 msgstr "国家："
 
-#: www/account/index.php:199
-msgid "Email Addr:"
+#: www/account/index.php:199 www/include/user_profile.php:112
+#, fuzzy
+msgid "Email Address:"
 msgstr "Email："
 
 #: www/account/index.php:201
@@ -18283,11 +18284,6 @@ msgstr "专长资料"
 #, fuzzy
 msgid "Real Name:"
 msgstr "真实姓名"
-
-#: www/include/user_profile.php:112
-#, fuzzy
-msgid "Email Address:"
-msgstr "Email："
 
 #: www/include/user_profile.php:152
 #, fuzzy
@@ -23503,6 +23499,9 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#~ msgid "Email Addr:"
+#~ msgstr "Email："
 
 #, fuzzy
 #~ msgid "Edit job"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:31+0200\n"
+"POT-Creation-Date: 2013-09-18 10:32+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14875,8 +14875,9 @@ msgstr "Tema:"
 msgid "Country:"
 msgstr "Nazione:"
 
-#: www/account/index.php:199
-msgid "Email Addr:"
+#: www/account/index.php:199 www/include/user_profile.php:112
+#, fuzzy
+msgid "Email Address:"
 msgstr "Indirizzo e-mail:"
 
 #: www/account/index.php:201
@@ -18436,11 +18437,6 @@ msgstr "Profilo delle competenze"
 #, fuzzy
 msgid "Real Name:"
 msgstr "Nome reale"
-
-#: www/include/user_profile.php:112
-#, fuzzy
-msgid "Email Address:"
-msgstr "Indirizzo e-mail:"
 
 #: www/include/user_profile.php:152
 #, fuzzy
@@ -23723,6 +23719,9 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#~ msgid "Email Addr:"
+#~ msgstr "Indirizzo e-mail:"
 
 #, fuzzy
 #~ msgid "Edit job"

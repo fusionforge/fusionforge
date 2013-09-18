@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:31+0200\n"
+"POT-Creation-Date: 2013-09-18 10:32+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -14489,8 +14489,8 @@ msgstr "Thème :"
 msgid "Country:"
 msgstr "Pays :"
 
-#: www/account/index.php:199
-msgid "Email Addr:"
+#: www/account/index.php:199 www/include/user_profile.php:112
+msgid "Email Address:"
 msgstr "Adresse e-mail :"
 
 #: www/account/index.php:201
@@ -18007,10 +18007,6 @@ msgstr "Compétences"
 #: www/include/user_profile.php:93
 msgid "Real Name:"
 msgstr "Nom complet :"
-
-#: www/include/user_profile.php:112
-msgid "Email Address:"
-msgstr "Adresse e-mail :"
 
 #: www/include/user_profile.php:152
 msgid "Site Member Since:"
@@ -23297,6 +23293,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Email Addr:"
+#~ msgstr "Adresse e-mail :"
 
 #~ msgid "Edit job"
 #~ msgstr "Éditer la tâche"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:31+0200\n"
+"POT-Creation-Date: 2013-09-18 10:32+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -14977,8 +14977,9 @@ msgstr "Theme-ID:"
 msgid "Country:"
 msgstr "Land:"
 
-#: www/account/index.php:199
-msgid "Email Addr:"
+#: www/account/index.php:199 www/include/user_profile.php:112
+#, fuzzy
+msgid "Email Address:"
 msgstr "Email-Adresse:"
 
 #: www/account/index.php:201
@@ -18594,11 +18595,6 @@ msgstr "Qualifikationenprofil"
 #, fuzzy
 msgid "Real Name:"
 msgstr "Richtiger Name"
-
-#: www/include/user_profile.php:112
-#, fuzzy
-msgid "Email Address:"
-msgstr "Email-Adresse:"
 
 #: www/include/user_profile.php:152
 #, fuzzy
@@ -23974,6 +23970,9 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "Email Addr:"
+#~ msgstr "Email-Adresse:"
 
 #, fuzzy
 #~ msgid "Edit job"

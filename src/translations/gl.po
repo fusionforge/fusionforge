@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:31+0200\n"
+"POT-Creation-Date: 2013-09-18 10:32+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -14991,8 +14991,9 @@ msgstr "Tema: "
 msgid "Country:"
 msgstr "País: "
 
-#: www/account/index.php:199
-msgid "Email Addr:"
+#: www/account/index.php:199 www/include/user_profile.php:112
+#, fuzzy
+msgid "Email Address:"
 msgstr "Enderezo de correo electrónico:"
 
 #: www/account/index.php:201
@@ -18579,11 +18580,6 @@ msgstr "Perfil de habelencias "
 #, fuzzy
 msgid "Real Name:"
 msgstr "Nome verdadeiro "
-
-#: www/include/user_profile.php:112
-#, fuzzy
-msgid "Email Address:"
-msgstr "Enderezo de correo electrónico:"
 
 #: www/include/user_profile.php:152
 #, fuzzy
@@ -23903,6 +23899,9 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#~ msgid "Email Addr:"
+#~ msgstr "Enderezo de correo electrónico:"
 
 #, fuzzy
 #~ msgid "Edit job"

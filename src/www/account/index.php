@@ -196,7 +196,7 @@ echo $HTML->boxTop(_('Account Maintenance'));
 </tr>
 
 <tr valign="top">
-<td><?php echo _('Email Addr:'); ?> </td>
+<td><?php echo _('Email Address:'); ?> </td>
 <td><strong><?php print $u->getEmail(); ?></strong>
 <br /><a href="change_email.php">[<?php echo _('Change Email Addr'); ?>]</a>
 </td>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:31+0200\n"
+"POT-Creation-Date: 2013-09-18 10:32+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14475,8 +14475,9 @@ msgstr "Тема:"
 msgid "Country:"
 msgstr "Държава:"
 
-#: www/account/index.php:199
-msgid "Email Addr:"
+#: www/account/index.php:199 www/include/user_profile.php:112
+#, fuzzy
+msgid "Email Address:"
 msgstr "Адрес за електронна поща:"
 
 #: www/account/index.php:201
@@ -17921,11 +17922,6 @@ msgstr "Профил на Уменията"
 #, fuzzy
 msgid "Real Name:"
 msgstr "Фамилия:"
-
-#: www/include/user_profile.php:112
-#, fuzzy
-msgid "Email Address:"
-msgstr "Адрес за електронна поща:"
 
 #: www/include/user_profile.php:152
 #, fuzzy
@@ -23009,6 +23005,9 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Лична Информация"
+
+#~ msgid "Email Addr:"
+#~ msgstr "Адрес за електронна поща:"
 
 #, fuzzy
 #~ msgid "Edit job"
