@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:15+0200\n"
+"POT-Creation-Date: 2013-09-18 10:17+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -17287,7 +17287,7 @@ msgid ""
 msgstr ""
 
 #: www/frs/admin/deleterelease.php:57 www/frs/admin/editrelease.php:66
-#: www/frs/admin/showreleases.php:74
+#: www/frs/admin/qrs.php:95 www/frs/admin/showreleases.php:74
 #, fuzzy
 msgid "Could Not Get FRS Release"
 msgstr "Kan inte slutföra operationen"
@@ -17573,11 +17573,6 @@ msgstr "Måste definiera ett namn på utgåvan."
 #: www/frs/admin/qrs.php:77
 msgid "Must select a package."
 msgstr "Måste välja en paket."
-
-#: www/frs/admin/qrs.php:95
-#, fuzzy
-msgid "Could Not Get FRSRelease"
-msgstr "Kan inte slutföra operationen"
 
 #: www/frs/admin/qrs.php:114 www/frs/admin/qrs.php:141
 msgid "Quick Release System"
@@ -23529,6 +23524,10 @@ msgstr "Användarenamn"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
+
+#, fuzzy
+#~ msgid "Could Not Get FRSRelease"
+#~ msgstr "Kan inte slutföra operationen"
 
 #, fuzzy
 #~ msgid "Confirm Deletion"

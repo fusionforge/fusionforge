@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:15+0200\n"
+"POT-Creation-Date: 2013-09-18 10:17+0200\n"
 "PO-Revision-Date: 2009-10-06 16:32+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15899,7 +15899,7 @@ msgid ""
 msgstr ""
 
 #: www/frs/admin/deleterelease.php:57 www/frs/admin/editrelease.php:66
-#: www/frs/admin/showreleases.php:74
+#: www/frs/admin/qrs.php:95 www/frs/admin/showreleases.php:74
 msgid "Could Not Get FRS Release"
 msgstr ""
 
@@ -16158,10 +16158,6 @@ msgstr ""
 
 #: www/frs/admin/qrs.php:77
 msgid "Must select a package."
-msgstr ""
-
-#: www/frs/admin/qrs.php:95
-msgid "Could Not Get FRSRelease"
 msgstr ""
 
 #: www/frs/admin/qrs.php:114 www/frs/admin/qrs.php:141

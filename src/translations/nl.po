@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:15+0200\n"
+"POT-Creation-Date: 2013-09-18 10:17+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -17443,7 +17443,7 @@ msgstr ""
 "bestanden volledig en onherroepelijk te verwijderen!"
 
 #: www/frs/admin/deleterelease.php:57 www/frs/admin/editrelease.php:66
-#: www/frs/admin/showreleases.php:74
+#: www/frs/admin/qrs.php:95 www/frs/admin/showreleases.php:74
 #, fuzzy
 msgid "Could Not Get FRS Release"
 msgstr "Kon de gevraagde bewerking niet uitvoeren"
@@ -17733,11 +17733,6 @@ msgstr "Release naam is verplicht."
 #: www/frs/admin/qrs.php:77
 msgid "Must select a package."
 msgstr "Selecteer een bundel."
-
-#: www/frs/admin/qrs.php:95
-#, fuzzy
-msgid "Could Not Get FRSRelease"
-msgstr "Kon de gevraagde bewerking niet uitvoeren"
 
 #: www/frs/admin/qrs.php:114 www/frs/admin/qrs.php:141
 msgid "Quick Release System"
@@ -23753,6 +23748,10 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#, fuzzy
+#~ msgid "Could Not Get FRSRelease"
+#~ msgstr "Kon de gevraagde bewerking niet uitvoeren"
 
 #, fuzzy
 #~ msgid "Confirm Deletion"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:15+0200\n"
+"POT-Creation-Date: 2013-09-18 10:17+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -17579,7 +17579,7 @@ msgstr ""
 "unwiederbringlich zu löschen!"
 
 #: www/frs/admin/deleterelease.php:57 www/frs/admin/editrelease.php:66
-#: www/frs/admin/showreleases.php:74
+#: www/frs/admin/qrs.php:95 www/frs/admin/showreleases.php:74
 #, fuzzy
 msgid "Could Not Get FRS Release"
 msgstr "Konnte die Rolle nicht bekommen"
@@ -17868,11 +17868,6 @@ msgstr "Sie müssen einen Versionsnamen definieren."
 #: www/frs/admin/qrs.php:77
 msgid "Must select a package."
 msgstr "Sie müssen ein Paket auswählen."
-
-#: www/frs/admin/qrs.php:95
-#, fuzzy
-msgid "Could Not Get FRSRelease"
-msgstr "Konnte die Rolle nicht bekommen"
 
 #: www/frs/admin/qrs.php:114 www/frs/admin/qrs.php:141
 msgid "Quick Release System"
@@ -24004,6 +23999,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "Could Not Get FRSRelease"
+#~ msgstr "Konnte die Rolle nicht bekommen"
 
 #~ msgid "Confirm Deletion"
 #~ msgstr "Löschung bestätigen"

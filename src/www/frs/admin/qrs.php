@@ -92,7 +92,7 @@ if (getStringFromRequest('submit')) {
 			//
 			$frsr = new FRSRelease($frsp);
 			if (!$frsr || !is_object($frsr)) {
-				exit_error(_('Could Not Get FRSRelease'),'frs');
+				exit_error(_('Could Not Get FRS Release'),'frs');
 			} elseif ($frsr->isError()) {
 				exit_error($frsr->getErrorMessage(),'frs');
 			} else {

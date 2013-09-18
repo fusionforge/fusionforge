@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:15+0200\n"
+"POT-Creation-Date: 2013-09-18 10:17+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -17324,7 +17324,7 @@ msgid ""
 msgstr "你将永久地删除这个软件包与它所有的发布版本和文件，而且不能挽回！"
 
 #: www/frs/admin/deleterelease.php:57 www/frs/admin/editrelease.php:66
-#: www/frs/admin/showreleases.php:74
+#: www/frs/admin/qrs.php:95 www/frs/admin/showreleases.php:74
 #, fuzzy
 msgid "Could Not Get FRS Release"
 msgstr "不能获取角色信息"
@@ -17606,11 +17606,6 @@ msgstr "必须定义一个发布名"
 #: www/frs/admin/qrs.php:77
 msgid "Must select a package."
 msgstr "必须选择一个软件包"
-
-#: www/frs/admin/qrs.php:95
-#, fuzzy
-msgid "Could Not Get FRSRelease"
-msgstr "不能获取角色信息"
 
 #: www/frs/admin/qrs.php:114 www/frs/admin/qrs.php:141
 msgid "Quick Release System"
@@ -23531,6 +23526,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Could Not Get FRSRelease"
+#~ msgstr "不能获取角色信息"
 
 #, fuzzy
 #~ msgid "Confirm Deletion"

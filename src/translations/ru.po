@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 10:15+0200\n"
+"POT-Creation-Date: 2013-09-18 10:17+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -17699,7 +17699,7 @@ msgstr ""
 "Вы запрашиваете полное удаление пакета и всех сопутствующих файлов релиза!"
 
 #: www/frs/admin/deleterelease.php:57 www/frs/admin/editrelease.php:66
-#: www/frs/admin/showreleases.php:74
+#: www/frs/admin/qrs.php:95 www/frs/admin/showreleases.php:74
 #, fuzzy
 msgid "Could Not Get FRS Release"
 msgstr "Ошибка, не указана роль"
@@ -17983,11 +17983,6 @@ msgstr "Необходимо задать имя релиза."
 #: www/frs/admin/qrs.php:77
 msgid "Must select a package."
 msgstr "Необходимо выбрать пакет."
-
-#: www/frs/admin/qrs.php:95
-#, fuzzy
-msgid "Could Not Get FRSRelease"
-msgstr "Ошибка, не указана роль"
 
 #: www/frs/admin/qrs.php:114 www/frs/admin/qrs.php:141
 msgid "Quick Release System"
@@ -24071,6 +24066,10 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "Could Not Get FRSRelease"
+#~ msgstr "Ошибка, не указана роль"
 
 #, fuzzy
 #~ msgid "Confirm Deletion"
