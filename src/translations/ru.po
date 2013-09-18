@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 14:45+0200\n"
+"POT-Creation-Date: 2013-09-18 14:48+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -294,7 +294,7 @@ msgstr "Обновление завершено"
 msgid "No Valid Group Object"
 msgstr "Объект не соответствует группе"
 
-#: common/docman/Document.class.php:83
+#: common/docman/Document.class.php:83 common/forum/Forum.class.php:139
 #, fuzzy
 msgid "group_id in db result does not match Group Object"
 msgstr "Идентификатор группы в базе не соответствует объекту"
@@ -2213,11 +2213,6 @@ msgstr "Ветвь для сообщения более не существуе�
 #, php-format
 msgid "%s does not use the Forum tool."
 msgstr ""
-
-#: common/forum/Forum.class.php:139
-#, fuzzy
-msgid "group_id in db result does not match Group Object."
-msgstr "Идентификатор группы в базе не соответствует объекту"
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
 #, fuzzy
@@ -23969,6 +23964,10 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "group_id in db result does not match Group Object."
+#~ msgstr "Идентификатор группы в базе не соответствует объекту"
 
 #, fuzzy
 #~ msgid "Error Deleting Forum:"

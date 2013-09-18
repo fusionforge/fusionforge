@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 14:45+0200\n"
+"POT-Creation-Date: 2013-09-18 14:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -266,7 +266,7 @@ msgstr ""
 msgid "No Valid Group Object"
 msgstr ""
 
-#: common/docman/Document.class.php:83
+#: common/docman/Document.class.php:83 common/forum/Forum.class.php:139
 msgid "group_id in db result does not match Group Object"
 msgstr ""
 
@@ -2067,10 +2067,6 @@ msgstr ""
 #: common/forum/Forum.class.php:126
 #, php-format
 msgid "%s does not use the Forum tool."
-msgstr ""
-
-#: common/forum/Forum.class.php:139
-msgid "group_id in db result does not match Group Object."
 msgstr ""
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554

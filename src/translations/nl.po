@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 14:45+0200\n"
+"POT-Creation-Date: 2013-09-18 14:48+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -292,7 +292,7 @@ msgstr "Wijziging doorgevoerd"
 msgid "No Valid Group Object"
 msgstr "Geen geldig groep object"
 
-#: common/docman/Document.class.php:83
+#: common/docman/Document.class.php:83 common/forum/Forum.class.php:139
 #, fuzzy
 msgid "group_id in db result does not match Group Object"
 msgstr "Groep ID in database resultaat komt niet overeen met groep object"
@@ -2208,11 +2208,6 @@ msgstr ""
 #, php-format
 msgid "%s does not use the Forum tool."
 msgstr ""
-
-#: common/forum/Forum.class.php:139
-#, fuzzy
-msgid "group_id in db result does not match Group Object."
-msgstr "Groep ID in database resultaat komt niet overeen met groep object"
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
 #, fuzzy
@@ -23653,6 +23648,10 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#, fuzzy
+#~ msgid "group_id in db result does not match Group Object."
+#~ msgstr "Groep ID in database resultaat komt niet overeen met groep object"
 
 #, fuzzy
 #~ msgid "Error Deleting Forum:"

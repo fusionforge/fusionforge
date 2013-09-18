@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 14:45+0200\n"
+"POT-Creation-Date: 2013-09-18 14:48+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -294,7 +294,7 @@ msgstr "更新成功"
 msgid "No Valid Group Object"
 msgstr "无效的群组对象"
 
-#: common/docman/Document.class.php:83
+#: common/docman/Document.class.php:83 common/forum/Forum.class.php:139
 #, fuzzy
 msgid "group_id in db result does not match Group Object"
 msgstr "数据库中的群组编号与群组对象不一致"
@@ -2210,11 +2210,6 @@ msgstr ""
 #, php-format
 msgid "%s does not use the Forum tool."
 msgstr ""
-
-#: common/forum/Forum.class.php:139
-#, fuzzy
-msgid "group_id in db result does not match Group Object."
-msgstr "数据库中的群组编号与群组对象不一致"
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
 #, fuzzy
@@ -23430,6 +23425,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "group_id in db result does not match Group Object."
+#~ msgstr "数据库中的群组编号与群组对象不一致"
 
 #, fuzzy
 #~ msgid "Error Deleting Forum:"

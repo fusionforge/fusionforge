@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 14:45+0200\n"
+"POT-Creation-Date: 2013-09-18 14:48+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -278,7 +278,7 @@ msgstr "activado con éxito."
 msgid "No Valid Group Object"
 msgstr "Objeto de Grupo inválido"
 
-#: common/docman/Document.class.php:83
+#: common/docman/Document.class.php:83 common/forum/Forum.class.php:139
 #, fuzzy
 msgid "group_id in db result does not match Group Object"
 msgstr ""
@@ -2135,13 +2135,6 @@ msgstr ""
 #, php-format
 msgid "%s does not use the Forum tool."
 msgstr ""
-
-#: common/forum/Forum.class.php:139
-#, fuzzy
-msgid "group_id in db result does not match Group Object."
-msgstr ""
-"Group_id en Grupo los resultados de la Base de Datos no coincide con el "
-"Objeto de"
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
 #, fuzzy
@@ -23144,6 +23137,12 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#, fuzzy
+#~ msgid "group_id in db result does not match Group Object."
+#~ msgstr ""
+#~ "Group_id en Grupo los resultados de la Base de Datos no coincide con el "
+#~ "Objeto de"
 
 #~ msgid "Error Deleting Forum:"
 #~ msgstr "Error Borrando Foro:"

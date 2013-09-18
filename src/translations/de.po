@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 14:45+0200\n"
+"POT-Creation-Date: 2013-09-18 14:48+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -292,7 +292,7 @@ msgstr "Aktualisierung erfolgreich"
 msgid "No Valid Group Object"
 msgstr "Kein gültiges Gruppen-Objekt"
 
-#: common/docman/Document.class.php:83
+#: common/docman/Document.class.php:83 common/forum/Forum.class.php:139
 #, fuzzy
 msgid "group_id in db result does not match Group Object"
 msgstr "Group_id Datenbank-Ergebnis stimmt nicht mit Gruppen-Objekt überein"
@@ -2217,11 +2217,6 @@ msgstr ""
 #, php-format
 msgid "%s does not use the Forum tool."
 msgstr ""
-
-#: common/forum/Forum.class.php:139
-#, fuzzy
-msgid "group_id in db result does not match Group Object."
-msgstr "Group_id Datenbank-Ergebnis stimmt nicht mit Gruppen-Objekt überein"
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
 #, fuzzy
@@ -23901,6 +23896,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "group_id in db result does not match Group Object."
+#~ msgstr "Group_id Datenbank-Ergebnis stimmt nicht mit Gruppen-Objekt überein"
 
 #, fuzzy
 #~ msgid "Error Deleting Forum:"
