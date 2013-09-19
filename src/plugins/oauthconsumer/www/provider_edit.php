@@ -26,7 +26,7 @@ $i = 0;
 <table class="width75" align="center" cellspacing="1">
 
 <tr>
-<td class="form-title" colspan="2"><?php echo _('<b>Edit OAuth Provider</b>') ?></td>
+<td class="form-title" colspan="2"><b><?php echo _('Edit OAuth Provider'); ?></b></td>
 <td class="right"><?php print util_make_link("/plugins/".$pluginname.'/providers.php', _('Cancel') ); ?></td>
 </tr>
 

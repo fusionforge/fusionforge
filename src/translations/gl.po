@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 15:56+0200\n"
+"POT-Creation-Date: 2013-09-19 16:00+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -12313,8 +12313,9 @@ msgid ""
 msgstr ""
 
 #: plugins/oauthconsumer/www/provider_edit.php:29
-msgid "<b>Edit OAuth Provider</b>"
-msgstr ""
+#, fuzzy
+msgid "Edit OAuth Provider"
+msgstr "Autorizar"
 
 #: plugins/oauthconsumer/www/provider_edit.php:49
 #: plugins/oauthconsumer/www/providers.php:14
