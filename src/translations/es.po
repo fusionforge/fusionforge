@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 16:00+0200\n"
+"POT-Creation-Date: 2013-09-19 16:05+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -11844,8 +11844,9 @@ msgid "Accessing resources with OAuth"
 msgstr "Accediendo a recursos con OAuth"
 
 #: plugins/oauthconsumer/www/index.php:17
-msgid "<b>Providers</b>"
-msgstr "<b>Proveedores</b>"
+#, fuzzy
+msgid "Providers"
+msgstr "Proveedor"
 
 #: plugins/oauthconsumer/www/index.php:40
 #: plugins/oauthprovider/www/access_tokens.php:65
@@ -23128,6 +23129,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "<b>Providers</b>"
+#~ msgstr "<b>Proveedores</b>"
 
 #~ msgid "Include child projects:"
 #~ msgstr "Incluir proyectos hijos:"

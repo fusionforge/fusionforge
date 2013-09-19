@@ -14,13 +14,13 @@ if(count($providers)>0)	{
 	echo '<h4>'._('Accessing resources with OAuth').'</h4>';
 	?>
 	<form action="index.php" method="post">
-	<?php echo _('<b>Providers</b>');
-	$f_provider_id = getStringFromPost('providers');?>
+	<b><?php echo _('Providers'); ?></b>
+	<?php $f_provider_id = getStringFromPost('providers'); ?>
 	<select name=providers>
 	<?php foreach ($providers as $provider) 	{
 		echo '<option value="'.$provider->get_id().'" ';
 		if($provider->get_id()==$f_provider_id)	{
-			echo 'SELECTED';
+			echo 'selected';
 		}
 		echo '>'.$provider->get_name().'</option>';
 	}?>
