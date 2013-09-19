@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 16:11+0200\n"
+"POT-Creation-Date: 2013-09-19 16:18+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -11529,8 +11529,10 @@ msgid "(128 char max)"
 msgstr ""
 
 #: plugins/mantisbt/view/addIssue.php:141
+#: plugins/mantisbt/view/editIssue.php:221
+#: plugins/mantisbt/view/viewIssue.php:116
 #, fuzzy
-msgid "Additional informations"
+msgid "Additional Informations"
 msgstr "Персональная информация"
 
 #: plugins/mantisbt/view/addOrEditNote.php:52
@@ -11699,12 +11701,6 @@ msgstr "Большой"
 #: plugins/mantisbt/view/editIssue.php:213
 msgid "(max128 char )"
 msgstr ""
-
-#: plugins/mantisbt/view/editIssue.php:221
-#: plugins/mantisbt/view/viewIssue.php:116
-#, fuzzy
-msgid "Additional Informations"
-msgstr "Персональная информация"
 
 #: plugins/mantisbt/view/init.php:81
 msgid "If this project does NOT exist in MantisBT, do you want to create it ?"
@@ -23948,6 +23944,10 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "Additional informations"
+#~ msgstr "Персональная информация"
 
 #, fuzzy
 #~ msgid "Access Tokens"

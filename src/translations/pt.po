@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 16:11+0200\n"
+"POT-Creation-Date: 2013-09-19 16:18+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -10553,7 +10553,9 @@ msgid "(128 char max)"
 msgstr ""
 
 #: plugins/mantisbt/view/addIssue.php:141
-msgid "Additional informations"
+#: plugins/mantisbt/view/editIssue.php:221
+#: plugins/mantisbt/view/viewIssue.php:116
+msgid "Additional Informations"
 msgstr ""
 
 #: plugins/mantisbt/view/addOrEditNote.php:52
@@ -10699,11 +10701,6 @@ msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:213
 msgid "(max128 char )"
-msgstr ""
-
-#: plugins/mantisbt/view/editIssue.php:221
-#: plugins/mantisbt/view/viewIssue.php:116
-msgid "Additional Informations"
 msgstr ""
 
 #: plugins/mantisbt/view/init.php:81

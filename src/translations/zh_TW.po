@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 16:11+0200\n"
+"POT-Creation-Date: 2013-09-19 16:18+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -11414,8 +11414,10 @@ msgid "(128 char max)"
 msgstr ""
 
 #: plugins/mantisbt/view/addIssue.php:141
+#: plugins/mantisbt/view/editIssue.php:221
+#: plugins/mantisbt/view/viewIssue.php:116
 #, fuzzy
-msgid "Additional informations"
+msgid "Additional Informations"
 msgstr "個人資訊"
 
 #: plugins/mantisbt/view/addOrEditNote.php:52
@@ -11583,12 +11585,6 @@ msgstr ""
 #: plugins/mantisbt/view/editIssue.php:213
 msgid "(max128 char )"
 msgstr ""
-
-#: plugins/mantisbt/view/editIssue.php:221
-#: plugins/mantisbt/view/viewIssue.php:116
-#, fuzzy
-msgid "Additional Informations"
-msgstr "個人資訊"
 
 #: plugins/mantisbt/view/init.php:81
 msgid "If this project does NOT exist in MantisBT, do you want to create it ?"
@@ -23432,6 +23428,10 @@ msgstr "帳號"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
+
+#, fuzzy
+#~ msgid "Additional informations"
+#~ msgstr "個人資訊"
 
 #, fuzzy
 #~ msgid "Access Tokens"

@@ -138,7 +138,7 @@ if (!isset($errorPage)){
 	echo			'<td><textarea name="description" style="width:99%;" rows="12"></textarea></td>';
 	echo		'</tr>';
 	echo		'<tr>';
-	echo 			'<td>'._('Additional informations').'</td>';
+	echo 			'<td>'._('Additional Informations').'</td>';
 	echo			'<td><textarea name="informations" style="width:99%;" rows="12"></textarea></td>';
 	echo		'</tr>';
 	echo	'</table>';

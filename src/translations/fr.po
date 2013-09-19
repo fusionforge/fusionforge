@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 16:11+0200\n"
+"POT-Creation-Date: 2013-09-19 16:18+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -11139,8 +11139,10 @@ msgid "(128 char max)"
 msgstr ""
 
 #: plugins/mantisbt/view/addIssue.php:141
+#: plugins/mantisbt/view/editIssue.php:221
+#: plugins/mantisbt/view/viewIssue.php:116
 #, fuzzy
-msgid "Additional informations"
+msgid "Additional Informations"
 msgstr "Informations personnelles"
 
 #: plugins/mantisbt/view/addOrEditNote.php:52
@@ -11300,12 +11302,6 @@ msgstr ""
 #: plugins/mantisbt/view/editIssue.php:213
 msgid "(max128 char )"
 msgstr ""
-
-#: plugins/mantisbt/view/editIssue.php:221
-#: plugins/mantisbt/view/viewIssue.php:116
-#, fuzzy
-msgid "Additional Informations"
-msgstr "Informations personnelles"
 
 #: plugins/mantisbt/view/init.php:81
 msgid "If this project does NOT exist in MantisBT, do you want to create it ?"
@@ -23213,6 +23209,10 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#, fuzzy
+#~ msgid "Additional informations"
+#~ msgstr "Informations personnelles"
 
 #, fuzzy
 #~ msgid "Access Tokens"

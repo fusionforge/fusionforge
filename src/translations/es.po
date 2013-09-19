@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 16:11+0200\n"
+"POT-Creation-Date: 2013-09-19 16:18+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -11116,7 +11116,9 @@ msgid "(128 char max)"
 msgstr "(128 car max)"
 
 #: plugins/mantisbt/view/addIssue.php:141
-msgid "Additional informations"
+#: plugins/mantisbt/view/editIssue.php:221
+#: plugins/mantisbt/view/viewIssue.php:116
+msgid "Additional Informations"
 msgstr "Información adicional"
 
 #: plugins/mantisbt/view/addOrEditNote.php:52
@@ -11266,11 +11268,6 @@ msgstr "Objetivo"
 #: plugins/mantisbt/view/editIssue.php:213
 msgid "(max128 char )"
 msgstr "(max128 car )"
-
-#: plugins/mantisbt/view/editIssue.php:221
-#: plugins/mantisbt/view/viewIssue.php:116
-msgid "Additional Informations"
-msgstr "Información adicional"
 
 #: plugins/mantisbt/view/init.php:81
 msgid "If this project does NOT exist in MantisBT, do you want to create it ?"
@@ -23126,6 +23123,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Additional informations"
+#~ msgstr "Información adicional"
 
 #~ msgid "<b>Providers</b>"
 #~ msgstr "<b>Proveedores</b>"
