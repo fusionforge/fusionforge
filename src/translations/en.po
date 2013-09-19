@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 16:05+0200\n"
+"POT-Creation-Date: 2013-09-19 16:11+0200\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -11066,10 +11066,12 @@ msgstr ""
 
 #: plugins/oauthconsumer/www/callback.php:80
 #: plugins/oauthconsumer/www/get_access_token.php:176
+#: plugins/oauthconsumer/www/index.php:40
 #: plugins/oauthconsumer/www/index.php:88
 #: plugins/oauthconsumer/www/provider_edit.php:80
 #: plugins/oauthconsumer/www/providers.php:119
 #: plugins/oauthconsumer/www/response.php:76
+#: plugins/oauthprovider/www/access_tokens.php:65
 #: plugins/oauthprovider/www/index.php:75
 msgid "Access tokens"
 msgstr ""
@@ -11146,11 +11148,6 @@ msgstr ""
 
 #: plugins/oauthconsumer/www/index.php:17
 msgid "Providers"
-msgstr ""
-
-#: plugins/oauthconsumer/www/index.php:40
-#: plugins/oauthprovider/www/access_tokens.php:65
-msgid "Access Tokens"
 msgstr ""
 
 #: plugins/oauthconsumer/www/index.php:49

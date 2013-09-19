@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 16:05+0200\n"
+"POT-Creation-Date: 2013-09-19 16:11+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -12087,10 +12087,12 @@ msgstr "Sarbidea ukatua"
 
 #: plugins/oauthconsumer/www/callback.php:80
 #: plugins/oauthconsumer/www/get_access_token.php:176
+#: plugins/oauthconsumer/www/index.php:40
 #: plugins/oauthconsumer/www/index.php:88
 #: plugins/oauthconsumer/www/provider_edit.php:80
 #: plugins/oauthconsumer/www/providers.php:119
 #: plugins/oauthconsumer/www/response.php:76
+#: plugins/oauthprovider/www/access_tokens.php:65
 #: plugins/oauthprovider/www/index.php:75
 #, fuzzy
 msgid "Access tokens"
@@ -12174,12 +12176,6 @@ msgstr ""
 #, fuzzy
 msgid "Providers"
 msgstr "Egilea"
-
-#: plugins/oauthconsumer/www/index.php:40
-#: plugins/oauthprovider/www/access_tokens.php:65
-#, fuzzy
-msgid "Access Tokens"
-msgstr "Sarbidea ukatua"
 
 #: plugins/oauthconsumer/www/index.php:49
 msgid "Resource URL"
@@ -23472,6 +23468,10 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#, fuzzy
+#~ msgid "Access Tokens"
+#~ msgstr "Sarbidea ukatua"
 
 #, fuzzy
 #~ msgid "Include child projects:"

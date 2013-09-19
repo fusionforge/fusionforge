@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 16:05+0200\n"
+"POT-Creation-Date: 2013-09-19 16:11+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -11793,10 +11793,12 @@ msgstr "Récupérer les jetons d'accès"
 
 #: plugins/oauthconsumer/www/callback.php:80
 #: plugins/oauthconsumer/www/get_access_token.php:176
+#: plugins/oauthconsumer/www/index.php:40
 #: plugins/oauthconsumer/www/index.php:88
 #: plugins/oauthconsumer/www/provider_edit.php:80
 #: plugins/oauthconsumer/www/providers.php:119
 #: plugins/oauthconsumer/www/response.php:76
+#: plugins/oauthprovider/www/access_tokens.php:65
 #: plugins/oauthprovider/www/index.php:75
 msgid "Access tokens"
 msgstr "Jetons d'accès"
@@ -11880,12 +11882,6 @@ msgstr ""
 #: plugins/oauthconsumer/www/index.php:17
 msgid "Providers"
 msgstr "Fournisseurs"
-
-#: plugins/oauthconsumer/www/index.php:40
-#: plugins/oauthprovider/www/access_tokens.php:65
-#, fuzzy
-msgid "Access Tokens"
-msgstr "Accès refusé"
 
 #: plugins/oauthconsumer/www/index.php:49
 msgid "Resource URL"
@@ -23217,6 +23213,10 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#, fuzzy
+#~ msgid "Access Tokens"
+#~ msgstr "Accès refusé"
 
 #, fuzzy
 #~ msgid "Include child projects:"

@@ -62,7 +62,7 @@ $headers = array(
 
 
 if(count($t_tokens)>0) {
-	echo $HTML->boxTop(_('Access Tokens'));
+	echo $HTML->boxTop(_('Access tokens'));
 	echo $HTML->listTableTop($headers);
 	
 	$i = 0;
@@ -112,7 +112,5 @@ if(count($t_tokens)>0) {
 }else {
 	echo '<p>'. _('No access tokens were found!').'</p>';
 }
-
-
 
 site_project_footer(array());

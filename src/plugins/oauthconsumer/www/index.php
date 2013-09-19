@@ -37,7 +37,7 @@ if(count($providers)>0)	{
 			<table class="width50" align="center" cellspacing="1">
 
 			<tr>
-			<td class="category"><?php echo _('Access Tokens');?></td>
+			<td class="category"><?php echo _('Access tokens'); ?></td>
 			<td><select name=tokens>
 			<?php foreach ($access_tokens as $token) 	{
 				echo '<option value="'.$token->get_id().'">'.$token->get_token_key().'</option>';
