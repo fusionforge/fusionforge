@@ -65,7 +65,7 @@ function user_personal_information($user, $compact = false, $title = false) {
 	$html .='<td>
 			<table class="my-layout-table" id="user-profile-personal-info">
 			<tr>
-				<td>'. _('User Id:') . '</td>';
+				<td>'. _('User Id')._(':') . '</td>';
 
 	//print '<div property ="foaf:member" content="fusionforge:ForgeCommunity">';
 	//echo '</div>';
@@ -85,12 +85,12 @@ function user_personal_information($user, $compact = false, $title = false) {
 	$html .= '</td>
 			</tr>
 			<tr>
-				<td>'. _('Login name:') .'</td>
+				<td>'. _('Login Name') . _(': ') .'</td>
 				<td><strong><span property="sioc:name">' .
 	$user->getUnixName() . '</span></strong></td>
 			</tr>
 			<tr>
-				<td>'. _('Real Name:') .'</td>';
+				<td>'. _('Real Name') . _(': ')  .'</td>';
 	$user_title = $user->getTitle();
 	$user_title_name = $user_title ? $user_title .' ' :'' . $user->getRealName();
 	$html .= '<td>
@@ -109,7 +109,7 @@ function user_personal_information($user, $compact = false, $title = false) {
 			$user_mailsha1=$user->getSha1Email();
 
 			$html .= '<tr>
-				<td>'. _('Email Address:') .': </td>
+				<td>'. _('Email Address') . _(': ') .'</td>
 				<td><strong>'.
 
 			// Removed for privacy reasons
@@ -123,14 +123,14 @@ function user_personal_information($user, $compact = false, $title = false) {
 
 			if ($user->getAddress() || $user->getAddress2()) {
 				$html .= '<tr>
-				<td><'. _('Address:') .'</td>
+				<td><'. _('Address')._(':') .'</td>
 				<td>'. $user->getAddress() .'<br/>'. $user->getAddress2() .'</td>
 			</tr>';
 			}
 
 			if ($user->getPhone()) {
 				$html .= '<tr>
-				<td>' . _('Phone:') . '</td>
+				<td>' . _('Phone')._(':') . '</td>
 				<td>' .
 				//print '<div property="foaf:phone" content="'.$user->getPhone().'">';
 				$user->getPhone()
@@ -141,7 +141,7 @@ function user_personal_information($user, $compact = false, $title = false) {
 
 			if ($user->getFax()) {
 				$html .= '<tr>
-				<td>'. _('FAX:') .'</td>
+				<td>'. _('Fax')._(':') .'</td>
 				<td>'. $user->getFax() .'</td>
 			</tr>';
 			}
@@ -149,7 +149,7 @@ function user_personal_information($user, $compact = false, $title = false) {
 	}
 	$html .= '
 			<tr>
-				<td>'. _('Site Member Since:') .'</td>
+				<td>'. _('Site Member Since')._(':') .'</td>
 				<td><strong>'. relative_date($user->getAddDate()). '</strong>
 				</td>
 			</tr>';

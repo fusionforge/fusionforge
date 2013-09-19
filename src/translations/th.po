@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 16:18+0200\n"
+"POT-Creation-Date: 2013-09-19 16:28+0200\n"
 "PO-Revision-Date: 2009-10-06 16:32+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -439,22 +439,24 @@ msgstr ""
 #: plugins/projects-hierarchy/view/home_project_link.php:37
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:632
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:634
-#: plugins/scmhg/common/HgPlugin.class.php:625 www/account/lostlogin.php:84
-#: www/account/register.php:213 www/admin/approve-pending.php:194
-#: www/admin/database.php:162 www/admin/responses_admin.php:42
-#: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
-#: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
-#: www/export/rssAboTask.php:146 www/export/rssAboTask.php:169
-#: www/export/rssAboTask.php:171 www/export/rssAboTask.php:173
-#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
-#: www/forum/forum.php:157 www/forum/message.php:126
+#: plugins/scmhg/common/HgPlugin.class.php:625 www/account/index.php:199
+#: www/account/lostlogin.php:84 www/account/register.php:213
+#: www/admin/approve-pending.php:194 www/admin/database.php:162
+#: www/admin/responses_admin.php:42 www/export/rssAboTask.php:142
+#: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
+#: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
+#: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
+#: www/export/rssAboTask.php:173 www/forum/admin/pendingmsgdetail.php:59
+#: www/forum/forum.php:92 www/forum/forum.php:157 www/forum/message.php:126
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:191
-#: www/frs/admin/qrs.php:198 www/people/skills_utils.php:121
-#: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
-#: www/pm/add_task.php:74 www/pm/add_task.php:81 www/pm/add_task.php:88
-#: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
-#: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/admin/index.php:255
-#: www/pm/calendar.php:59 www/pm/detail_task.php:66 www/pm/detail_task.php:71
+#: www/frs/admin/qrs.php:198 www/include/user_profile.php:88
+#: www/include/user_profile.php:93 www/include/user_profile.php:112
+#: www/people/skills_utils.php:121 www/pm/add_task.php:50
+#: www/pm/add_task.php:63 www/pm/add_task.php:67 www/pm/add_task.php:74
+#: www/pm/add_task.php:81 www/pm/add_task.php:88 www/pm/add_task.php:95
+#: www/pm/add_task.php:110 www/pm/add_task.php:124 www/pm/add_task.php:130
+#: www/pm/add_task.php:149 www/pm/admin/index.php:255 www/pm/calendar.php:59
+#: www/pm/detail_task.php:66 www/pm/detail_task.php:71
 #: www/pm/detail_task.php:86 www/pm/detail_task.php:90
 #: www/pm/detail_task.php:97 www/pm/detail_task.php:104 www/pm/mod_task.php:52
 #: www/pm/mod_task.php:61 www/pm/mod_task.php:66 www/pm/mod_task.php:78
@@ -1090,10 +1092,10 @@ msgstr ""
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:148
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
-#: www/account/register.php:171 www/people/editjob.php:52
-#: www/people/editjob.php:74 www/people/editprofile.php:107
-#: www/people/people_utils.php:405 www/people/skills_utils.php:49
-#: www/pm/admin/index.php:188
+#: www/account/index.php:234 www/account/register.php:171
+#: www/people/editjob.php:52 www/people/editjob.php:74
+#: www/people/editprofile.php:107 www/people/people_utils.php:405
+#: www/people/skills_utils.php:49 www/pm/admin/index.php:188
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:61
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:54
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:46
@@ -1589,18 +1591,23 @@ msgstr ""
 #: plugins/mailman/www/admin/index.php:150
 #: plugins/mailman/www/admin/index.php:183
 #: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
-#: www/account/lostpw.php:90 www/account/pending-resend.php:65
-#: www/account/pending-resend.php:67 www/account/register.php:171
-#: www/account/register.php:220 www/account/register.php:226
-#: www/account/register.php:232 www/account/register.php:238
-#: www/account/verify.php:76 www/account/verify.php:78
-#: www/account/verify.php:86 www/activity/index.php:179
-#: www/activity/index.php:180 www/activity/index.php:181
-#: www/admin/groupedit.php:108 www/admin/groupedit.php:171
-#: www/admin/massmail.php:94 www/admin/massmail.php:113
-#: www/admin/massmail.php:116 www/admin/massmail.php:142
-#: www/admin/trove/trove_cat_add.php:77 www/admin/trove/trove_cat_add.php:110
-#: www/admin/trove/trove_cat_add.php:112 www/admin/trove/trove_cat_add.php:114
+#: www/account/index.php:145 www/account/index.php:149
+#: www/account/index.php:154 www/account/index.php:175
+#: www/account/index.php:206 www/account/index.php:213
+#: www/account/index.php:220 www/account/index.php:227
+#: www/account/index.php:234 www/account/lostpw.php:90
+#: www/account/pending-resend.php:65 www/account/pending-resend.php:67
+#: www/account/register.php:171 www/account/register.php:220
+#: www/account/register.php:226 www/account/register.php:232
+#: www/account/register.php:238 www/account/verify.php:76
+#: www/account/verify.php:78 www/account/verify.php:86
+#: www/activity/index.php:179 www/activity/index.php:180
+#: www/activity/index.php:181 www/admin/groupedit.php:108
+#: www/admin/groupedit.php:171 www/admin/massmail.php:94
+#: www/admin/massmail.php:113 www/admin/massmail.php:116
+#: www/admin/massmail.php:142 www/admin/trove/trove_cat_add.php:77
+#: www/admin/trove/trove_cat_add.php:110 www/admin/trove/trove_cat_add.php:112
+#: www/admin/trove/trove_cat_add.php:114
 #: www/admin/trove/trove_cat_edit.php:117
 #: www/admin/trove/trove_cat_edit.php:143
 #: www/admin/trove/trove_cat_edit.php:146
@@ -1614,44 +1621,47 @@ msgstr ""
 #: www/frs/admin/qrs.php:227 www/frs/admin/qrs.php:237
 #: www/frs/admin/qrs.php:247 www/frs/admin/qrs.php:255
 #: www/frs/reporting/downloads.php:107 www/frs/reporting/downloads.php:109
-#: www/frs/reporting/downloads.php:111 www/my/bookmark_add.php:46
-#: www/my/bookmark_add.php:49 www/my/bookmark_edit.php:57
-#: www/my/bookmark_edit.php:60 www/pm/admin/index.php:211
-#: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
-#: www/pm/format_csv.php:86 www/pm/format_csv.php:89 www/pm/format_csv.php:93
-#: www/pm/format_csv.php:97 www/project/stats/index.php:104
-#: www/project/stats/index.php:105 www/project/stats/index.php:106
-#: www/project/stats/index.php:107 www/register/index.php:226
-#: www/reporting/groupadded.php:65 www/reporting/groupadded.php:66
-#: www/reporting/groupadded.php:67 www/reporting/groupcum.php:65
-#: www/reporting/groupcum.php:66 www/reporting/groupcum.php:67
-#: www/reporting/projectact.php:69 www/reporting/projectact.php:70
-#: www/reporting/projectact.php:71 www/reporting/projectact.php:72
-#: www/reporting/projectact.php:73 www/reporting/projecttime.php:79
-#: www/reporting/projecttime.php:80 www/reporting/projecttime.php:81
-#: www/reporting/projecttime.php:82 www/reporting/siteact.php:70
-#: www/reporting/siteact.php:71 www/reporting/siteact.php:72
-#: www/reporting/siteact.php:73 www/reporting/sitetimebar.php:66
-#: www/reporting/sitetimebar.php:67 www/reporting/sitetime.php:78
-#: www/reporting/sitetime.php:79 www/reporting/sitetime.php:80
-#: www/reporting/timeadd.php:187 www/reporting/timeadd.php:199
-#: www/reporting/timeadd.php:228 www/reporting/timecategory.php:90
-#: www/reporting/toolspie.php:65 www/reporting/toolspie.php:66
-#: www/reporting/toolspie.php:67 www/reporting/useract.php:84
-#: www/reporting/useract.php:85 www/reporting/useract.php:86
-#: www/reporting/useract.php:87 www/reporting/useract.php:88
-#: www/reporting/useradded.php:64 www/reporting/useradded.php:65
-#: www/reporting/useradded.php:66 www/reporting/usercum.php:64
-#: www/reporting/usercum.php:65 www/reporting/usercum.php:66
-#: www/reporting/usersummary.php:71 www/reporting/usersummary.php:72
-#: www/reporting/usersummary.php:73 www/reporting/usertime.php:93
-#: www/reporting/usertime.php:94 www/reporting/usertime.php:95
-#: www/reporting/usertime.php:96 www/snippet/add_snippet_to_package.php:128
-#: www/snippet/addversion.php:94 www/snippet/addversion.php:98
-#: www/snippet/addversion.php:102 www/snippet/addversion.php:217
-#: www/snippet/addversion.php:221 www/snippet/package.php:147
-#: www/snippet/package.php:151 www/snippet/package.php:156
-#: www/snippet/package.php:169 www/survey/include/SurveyHTML.class.php:191
+#: www/frs/reporting/downloads.php:111 www/include/user_profile.php:68
+#: www/include/user_profile.php:126 www/include/user_profile.php:133
+#: www/include/user_profile.php:144 www/include/user_profile.php:152
+#: www/my/bookmark_add.php:46 www/my/bookmark_add.php:49
+#: www/my/bookmark_edit.php:57 www/my/bookmark_edit.php:60
+#: www/pm/admin/index.php:211 www/pm/format_csv.php:66
+#: www/pm/format_csv.php:71 www/pm/format_csv.php:76 www/pm/format_csv.php:86
+#: www/pm/format_csv.php:89 www/pm/format_csv.php:93 www/pm/format_csv.php:97
+#: www/project/stats/index.php:104 www/project/stats/index.php:105
+#: www/project/stats/index.php:106 www/project/stats/index.php:107
+#: www/register/index.php:226 www/reporting/groupadded.php:65
+#: www/reporting/groupadded.php:66 www/reporting/groupadded.php:67
+#: www/reporting/groupcum.php:65 www/reporting/groupcum.php:66
+#: www/reporting/groupcum.php:67 www/reporting/projectact.php:69
+#: www/reporting/projectact.php:70 www/reporting/projectact.php:71
+#: www/reporting/projectact.php:72 www/reporting/projectact.php:73
+#: www/reporting/projecttime.php:79 www/reporting/projecttime.php:80
+#: www/reporting/projecttime.php:81 www/reporting/projecttime.php:82
+#: www/reporting/siteact.php:70 www/reporting/siteact.php:71
+#: www/reporting/siteact.php:72 www/reporting/siteact.php:73
+#: www/reporting/sitetimebar.php:66 www/reporting/sitetimebar.php:67
+#: www/reporting/sitetime.php:78 www/reporting/sitetime.php:79
+#: www/reporting/sitetime.php:80 www/reporting/timeadd.php:187
+#: www/reporting/timeadd.php:199 www/reporting/timeadd.php:228
+#: www/reporting/timecategory.php:90 www/reporting/toolspie.php:65
+#: www/reporting/toolspie.php:66 www/reporting/toolspie.php:67
+#: www/reporting/useract.php:84 www/reporting/useract.php:85
+#: www/reporting/useract.php:86 www/reporting/useract.php:87
+#: www/reporting/useract.php:88 www/reporting/useradded.php:64
+#: www/reporting/useradded.php:65 www/reporting/useradded.php:66
+#: www/reporting/usercum.php:64 www/reporting/usercum.php:65
+#: www/reporting/usercum.php:66 www/reporting/usersummary.php:71
+#: www/reporting/usersummary.php:72 www/reporting/usersummary.php:73
+#: www/reporting/usertime.php:93 www/reporting/usertime.php:94
+#: www/reporting/usertime.php:95 www/reporting/usertime.php:96
+#: www/snippet/add_snippet_to_package.php:128 www/snippet/addversion.php:94
+#: www/snippet/addversion.php:98 www/snippet/addversion.php:102
+#: www/snippet/addversion.php:217 www/snippet/addversion.php:221
+#: www/snippet/package.php:147 www/snippet/package.php:151
+#: www/snippet/package.php:156 www/snippet/package.php:169
+#: www/survey/include/SurveyHTML.class.php:191
 #, php-format
 msgid ":"
 msgstr ""
@@ -2025,7 +2035,7 @@ msgstr ""
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:53
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:73
 #: plugins/webanalytics/view/admin/updateLinkValue.php:41
-#: www/account/index.php:336 www/account/lostlogin.php:107
+#: www/account/index.php:337 www/account/lostlogin.php:107
 #: www/admin/groupedit.php:224 www/admin/trove/trove_cat_edit.php:152
 #: www/admin/useredit.php:236 www/admin/useredit.php:315
 #: www/admin/vhost.php:189 www/forum/admin/index.php:162
@@ -13453,16 +13463,19 @@ msgstr ""
 msgid "Edit My Skills Profile"
 msgstr ""
 
-#: www/account/index.php:145
-msgid "Member since:"
+#: www/account/index.php:145 www/admin/search.php:76
+msgid "Member since"
 msgstr ""
 
-#: www/account/index.php:149 www/include/user_profile.php:68
-msgid "User Id:"
+#: www/account/index.php:149 www/admin/useredit.php:130
+#: www/include/user_profile.php:68
+msgid "User Id"
 msgstr ""
 
-#: www/account/index.php:154 www/include/user_profile.php:88
-msgid "Login name:"
+#: www/account/index.php:154 www/account/lostpw.php:90
+#: www/account/pending-resend.php:67 www/account/verify.php:78
+#: www/include/user_profile.php:88
+msgid "Login Name"
 msgstr ""
 
 #: www/account/index.php:161 www/account/register.php:177
@@ -13473,8 +13486,9 @@ msgstr ""
 msgid "Last Name:"
 msgstr ""
 
-#: www/account/index.php:175
-msgid "Language:"
+#: www/account/index.php:175 www/snippet/package.php:156
+#: www/snippet/submit.php:123 www/stats/i18n.php:34
+msgid "Language"
 msgstr ""
 
 #: www/account/index.php:181 www/account/register.php:195
@@ -13489,29 +13503,32 @@ msgstr ""
 msgid "Country:"
 msgstr ""
 
-#: www/account/index.php:199 www/include/user_profile.php:112
-msgid "Email Address:"
+#: www/account/index.php:199 www/account/register.php:213
+#: www/include/user_profile.php:112
+msgid "Email Address"
 msgstr ""
 
 #: www/account/index.php:201
 msgid "Change Email Addr"
 msgstr ""
 
-#: www/account/index.php:206 www/account/index.php:213
-#: www/include/user_profile.php:126
-msgid "Address:"
+#: www/account/index.php:206 www/account/register.php:220
+#: www/include/user_profile.php:126 www/mail/index.php:78
+msgid "Address"
 msgstr ""
 
-#: www/account/index.php:220 www/include/user_profile.php:133
-msgid "Phone:"
+#: www/account/index.php:213 www/account/register.php:226
+msgid "Address (continued)"
 msgstr ""
 
-#: www/account/index.php:227 www/include/user_profile.php:144
-msgid "FAX:"
+#: www/account/index.php:220 www/account/register.php:232
+#: www/include/user_profile.php:133
+msgid "Phone"
 msgstr ""
 
-#: www/account/index.php:234
-msgid "Title:"
+#: www/account/index.php:227 www/account/register.php:238
+#: www/include/user_profile.php:144
+msgid "Fax"
 msgstr ""
 
 #: www/account/index.php:249 www/account/register.php:247
@@ -13564,7 +13581,7 @@ msgstr ""
 msgid "%s Mandatory fields"
 msgstr ""
 
-#: www/account/index.php:337
+#: www/account/index.php:338
 msgid "Reset Changes"
 msgstr ""
 
@@ -13632,11 +13649,6 @@ msgid ""
 "have on file for you. In this URL is a 128-bit confirmation hash for your "
 "account. Visiting the URL will allow you to change your password online and "
 "login."
-msgstr ""
-
-#: www/account/lostpw.php:90 www/account/pending-resend.php:67
-#: www/account/verify.php:78
-msgid "Login Name"
 msgstr ""
 
 #: www/account/lostpw.php:96
@@ -13747,32 +13759,12 @@ msgstr ""
 msgid "Theme"
 msgstr ""
 
-#: www/account/register.php:213
-msgid "Email Address"
-msgstr ""
-
 #: www/account/register.php:214
 #, php-format
 msgid ""
 "This email address will be verified before account activation. You will "
 "receive a mail forward account at &lt;loginname@%1$s&gt; that will forward "
 "to this address."
-msgstr ""
-
-#: www/account/register.php:220 www/mail/index.php:78
-msgid "Address"
-msgstr ""
-
-#: www/account/register.php:226
-msgid "Address (continued)"
-msgstr ""
-
-#: www/account/register.php:232
-msgid "Phone"
-msgstr ""
-
-#: www/account/register.php:238
-msgid "Fax"
 msgstr ""
 
 #: www/account/register.php:258
@@ -14838,15 +14830,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:114
-#: www/admin/useredit.php:148 www/project/admin/massadd.php:90
-#: www/project/admin/massfinish.php:74
+#: www/admin/useredit.php:148 www/include/user_profile.php:93
+#: www/project/admin/massadd.php:90 www/project/admin/massfinish.php:74
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:45
 #: www/top/topusers.php:64
 msgid "Real Name"
-msgstr ""
-
-#: www/admin/search.php:76
-msgid "Member since"
 msgstr ""
 
 #: www/admin/search.php:96
@@ -15034,10 +15022,6 @@ msgstr ""
 
 #: www/admin/useredit.php:121
 msgid "Account Information"
-msgstr ""
-
-#: www/admin/useredit.php:130
-msgid "User Id"
 msgstr ""
 
 #: www/admin/useredit.php:157
@@ -16719,12 +16703,8 @@ msgstr ""
 msgid "Skills Profile"
 msgstr ""
 
-#: www/include/user_profile.php:93
-msgid "Real Name:"
-msgstr ""
-
 #: www/include/user_profile.php:152
-msgid "Site Member Since:"
+msgid "Site Member Since"
 msgstr ""
 
 #: www/include/user_profile.php:159
@@ -20517,11 +20497,6 @@ msgid ""
 "existing package by browsing the library and using the link on the existing "
 "package. You should only use this page if you are submitting an entirely new "
 "package."
-msgstr ""
-
-#: www/snippet/package.php:156 www/snippet/submit.php:123
-#: www/stats/i18n.php:34
-msgid "Language"
 msgstr ""
 
 #: www/snippet/package.php:159 www/snippet/submit.php:125

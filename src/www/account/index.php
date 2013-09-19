@@ -142,16 +142,16 @@ echo $HTML->boxTop(_('Account Maintenance'));
 <table width="100%" border="0">
 
 <tr class="top">
-<td><?php echo _('Member since:'); ?> </td>
+<td><?php echo _('Member since')._(':'); ?> </td>
 <td><strong><?php print date(_('Y-m-d H:i'),$u->getAddDate()); ?></strong></td>
 </tr>
 <tr class="top">
-<td><?php echo _('User Id:'); ?> </td>
+<td><?php echo _('User Id')._(':'); ?> </td>
 <td><strong><?php print $u->getID(); ?></strong></td>
 </tr>
 
 <tr class="top">
-<td><?php echo _('Login name:'); ?> </td>
+<td><?php echo _('Login Name')._(':'); ?> </td>
 <td><strong><?php print $u->getUnixName(); ?></strong>
 <br /><a href="change_pw.php">[<?php echo _('Change Password'); ?>]</a>
 </td>
@@ -172,7 +172,7 @@ echo $HTML->boxTop(_('Account Maintenance'));
 </tr>
 
 <tr valign="top">
-<td><?php echo _('Language:'); ?> </td>
+<td><?php echo _('Language')._(':'); ?> </td>
 <td><?php echo html_get_language_popup ('language',$u->getLanguage()); ?>
 </td>
 </tr>
@@ -196,42 +196,42 @@ echo $HTML->boxTop(_('Account Maintenance'));
 </tr>
 
 <tr valign="top">
-<td><?php echo _('Email Address:'); ?> </td>
+<td><?php echo _('Email Address') . _(': '); ?> </td>
 <td><strong><?php print $u->getEmail(); ?></strong>
 <br /><a href="change_email.php">[<?php echo _('Change Email Addr'); ?>]</a>
 </td>
 </tr>
 
 <tr valign="top">
-<td><?php echo _('Address:'); ?></td>
+<td><?php echo _('Address') . _(':'); ?></td>
 <td>
 <input type="text" name="address" value="<?php echo $u->getAddress(); ?>" size="80"/>
 </td>
 </tr>
 
 <tr valign="top">
-<td><?php echo _('Address:'); ?></td>
+<td><?php echo _('Address (continued)') . _(':'); ?></td>
 <td>
 <input type="text" name="address2" value="<?php echo $u->getAddress2(); ?>" size="80"/>
 </td>
 </tr>
 
 <tr valign="top">
-<td><?php echo _('Phone:'); ?></td>
+<td><?php echo _('Phone')._(':'); ?></td>
 <td>
 <input type="text" name="phone" value="<?php echo $u->getPhone(); ?>" size="20"/>
 </td>
 </tr>
 
 <tr valign="top">
-<td><?php echo _('FAX:'); ?></td>
+<td><?php echo _('Fax')._(':'); ?></td>
 <td>
 <input type="text" name="fax" value="<?php echo $u->getFax(); ?>" size="20"/>
 </td>
 </tr>
 
 <tr valign="top">
-<td><?php echo _('Title:'); ?></td>
+<td><?php echo _('Title')._(':'); ?></td>
 <td>
 <input type="text" name="title" value="<?php echo $u->getTitle(); ?>" size="10"/>
 </td>
@@ -265,13 +265,13 @@ echo "\n</div>";
 
 <?php if (forge_get_config('use_ratings')) { ?>
 <div>
-<input type="checkbox"  name="use_ratings" value="1"<?php
+<input type="checkbox" name="use_ratings" value="1"<?php
 	if ($u->usesRatings()) print ' checked="checked"'; ?> />
 		<?php printf(_('Participate in peer ratings. <i>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</i>'),util_make_url_u ($u->getUnixName(),$u->getId()));
 echo "\n</div>";
 } ?>
 <div>
-<input type="checkbox"  name="use_tooltips" value="1"<?php
+<input type="checkbox" name="use_tooltips" value="1"<?php
 	if ($u->usesTooltips()) print ' checked="checked"'; ?> />
 		<?php echo _('Enable tooltips. Small help texts displayed on mouse over links, images.');
 ?>
@@ -332,6 +332,7 @@ if (forge_get_config('use_shell')) {
 
 </table>
 <span><?php echo sprintf(_('%s Mandatory fields'), utils_requiredField())?></span>
+
 <p style="text-align: center;">
 <input type="submit" name="submit" value="<?php echo _('Update'); ?>" />
 <input type="reset" name="reset" value="<?php echo _('Reset Changes'); ?>" />
