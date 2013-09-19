@@ -46,7 +46,7 @@ if ($role->getHomeProject() != NULL) {
 if (getStringFromRequest('submit')) {
 	if (getIntFromRequest('sure')) {
 		if (!$role->delete()) {
-			$error_msg = _('ERROR: ').$role->getErrorMessage();
+			$error_msg = _('Error')._(': ').$role->getErrorMessage();
 		} else {
 			$feedback = _('Successfully Deleted Role');
 			session_redirect('/admin/index.php?feedback='.urlencode($feedback));

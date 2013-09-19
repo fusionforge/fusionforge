@@ -1404,7 +1404,7 @@ Use one below, but make sure it is entered as the single line.)
 	function setPasswd($passwd) {
 		global $SYS;
 		if (!account_pwvalid($passwd)) {
-			$this->setError(_('Error: ').$GLOBALS['register_error']);
+			$this->setError(_('Error')._(': ').$GLOBALS['register_error']);
 			return false;
 		}
 

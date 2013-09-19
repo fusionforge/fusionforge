@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 17:15+0200\n"
+"POT-Creation-Date: 2013-09-19 18:42+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -406,7 +406,8 @@ msgstr "Proyecto"
 #: common/forum/Forum.class.php:665 common/forum/Forum.class.php:673
 #: common/forum/ForumHTML.class.php:73 common/forum/ForumHTML.class.php:211
 #: common/include/Error.class.php:207 common/include/exit.php:80
-#: common/include/User.class.php:348 common/mail/MailingList.class.php:174
+#: common/include/User.class.php:348 common/include/User.class.php:1407
+#: common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
 #: common/tracker/actions/browse.php:407 common/tracker/actions/mod.php:147
@@ -465,12 +466,13 @@ msgstr "Proyecto"
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/index.php:198
 #: www/account/lostlogin.php:84 www/account/register.php:213
 #: www/admin/approve-pending.php:194 www/admin/database.php:162
-#: www/admin/responses_admin.php:42 www/export/rssAboTask.php:142
-#: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
-#: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
-#: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
-#: www/export/rssAboTask.php:173 www/forum/admin/pendingmsgdetail.php:59
-#: www/forum/forum.php:92 www/forum/forum.php:157 www/forum/message.php:126
+#: www/admin/globalroledelete.php:49 www/admin/responses_admin.php:42
+#: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
+#: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
+#: www/export/rssAboTask.php:146 www/export/rssAboTask.php:169
+#: www/export/rssAboTask.php:171 www/export/rssAboTask.php:173
+#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
+#: www/forum/forum.php:157 www/forum/message.php:126
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:191
 #: www/frs/admin/qrs.php:198 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
@@ -662,6 +664,7 @@ msgid "Last modified"
 msgstr "Última modificación"
 
 #: common/docman/include/DocumentGroupHTML.class.php:50
+#: common/include/User.class.php:1407
 #: common/survey/SurveyResponse.class.php:95
 #: common/tracker/actions/tracker.php:271
 #: common/tracker/views/form-adminroadmap.php:57
@@ -682,9 +685,9 @@ msgstr "Última modificación"
 #: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:27
 #: plugins/mailman/www/index.php:34 plugins/mailman/www/index.php:37
 #: plugins/mailman/www/index.php:49 www/account/lostlogin.php:84
-#: www/admin/passedit.php:53 www/admin/passedit.php:61
-#: www/admin/passedit.php:69 www/export/rss20_docman.php:152
-#: www/forum/admin/pendingmsgdetail.php:51
+#: www/admin/globalroledelete.php:49 www/admin/passedit.php:53
+#: www/admin/passedit.php:61 www/admin/passedit.php:69
+#: www/export/rss20_docman.php:152 www/forum/admin/pendingmsgdetail.php:51
 #: www/forum/admin/pendingmsgdetail.php:53 www/mail/admin/index.php:154
 #: www/mail/admin/index.php:251 www/project/admin/roledelete.php:62
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
@@ -4294,11 +4297,6 @@ msgstr "ERRO - No puedo actualizar Keys SSH de Usuario"
 #, fuzzy
 msgid "Error: Cannot Update User SSH Keys"
 msgstr "ERRO - No puedo actualizar Keys SSH de Usuario"
-
-#: common/include/User.class.php:1407
-#, fuzzy
-msgid "Error: "
-msgstr "Error"
 
 #: common/include/User.class.php:1421 common/include/User.class.php:1457
 #: common/include/User.class.php:1481
@@ -15159,10 +15157,6 @@ msgstr "Añadir una Base de Datos ya activa"
 msgid "You can only delete a global role from here."
 msgstr "Puede solamente borrar un rol global desde aqui."
 
-#: www/admin/globalroledelete.php:49
-msgid "ERROR: "
-msgstr "ERROR: "
-
 #: www/admin/globalroledelete.php:51 www/project/admin/roledelete.php:64
 msgid "Successfully Deleted Role"
 msgstr "Rol Borrado Correctamente"
@@ -23090,6 +23084,13 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#, fuzzy
+#~ msgid "Error: "
+#~ msgstr "Error"
+
+#~ msgid "ERROR: "
+#~ msgstr "ERROR: "
 
 #~ msgid "Permission Denied"
 #~ msgstr "Permiso denegado"
