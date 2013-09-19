@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 16:41+0200\n"
+"POT-Creation-Date: 2013-09-19 16:51+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -7357,8 +7357,9 @@ msgid "Quit this project?"
 msgstr "Salir del proyecto?"
 
 #: common/widget/Widget_MyProjects.class.php:96
-msgid "<em>Private project</em>"
-msgstr "<em>Proyecto Privado</em>"
+#, fuzzy
+msgid "Private project"
+msgstr "Grupos Privados"
 
 #: common/widget/Widget_MyProjects.class.php:109
 #, fuzzy
@@ -23101,6 +23102,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
 
+#~ msgid "<em>Private project</em>"
+#~ msgstr "<em>Proyecto Privado</em>"
+
 #~ msgid "Cannot Process your request : No TYPE specified"
 #~ msgstr ""
 #~ "No se puede procesar su petición: No se ha especificado el tipo (TYPE)"
@@ -25433,10 +25437,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "ArtifactCanned: name and assignee are Required"
 #~ msgstr "Respuesta Prefijada: Se requiere nombre y asignación"
-
-#, fuzzy
-#~ msgid "Private project"
-#~ msgstr "Grupos Privados"
 
 #~ msgid "Edit actors and roles for the contribution tracker plugin"
 #~ msgstr ""

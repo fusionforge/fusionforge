@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 16:41+0200\n"
+"POT-Creation-Date: 2013-09-19 16:51+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7514,7 +7514,7 @@ msgstr "Proiektutik irtetzen"
 
 #: common/widget/Widget_MyProjects.class.php:96
 #, fuzzy
-msgid "<em>Private project</em>"
+msgid "Private project"
 msgstr "Talde pribatua"
 
 #: common/widget/Widget_MyProjects.class.php:109
@@ -23437,6 +23437,10 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#, fuzzy
+#~ msgid "<em>Private project</em>"
+#~ msgstr "Talde pribatua"
 
 #~ msgid "Member since:"
 #~ msgstr "Noiztik bazkide"

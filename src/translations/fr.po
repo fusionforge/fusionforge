@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 16:41+0200\n"
+"POT-Creation-Date: 2013-09-19 16:51+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -7321,8 +7321,8 @@ msgid "Quit this project?"
 msgstr "Quitter ce projet ?"
 
 #: common/widget/Widget_MyProjects.class.php:96
-msgid "<em>Private project</em>"
-msgstr "<em>Projet privé</em>"
+msgid "Private project"
+msgstr "Projet privé"
 
 #: common/widget/Widget_MyProjects.class.php:109
 #, fuzzy
@@ -23186,6 +23186,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
+#~ msgid "<em>Private project</em>"
+#~ msgstr "<em>Projet privé</em>"
+
 #~ msgid "Member since:"
 #~ msgstr "Membre depuis le :"
 
@@ -25150,9 +25153,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "You are not monitoring any files."
 #~ msgstr "Vous ne surveillez pas de fichier."
-
-#~ msgid "Private project"
-#~ msgstr "Projet privé"
 
 #~ msgid "There are no surveys in your groups."
 #~ msgstr "Il n'y a pas de sondages dans vos projets."

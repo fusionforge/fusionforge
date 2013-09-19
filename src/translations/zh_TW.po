@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 16:41+0200\n"
+"POT-Creation-Date: 2013-09-19 16:51+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7507,7 +7507,7 @@ msgstr "退出專案"
 
 #: common/widget/Widget_MyProjects.class.php:96
 #, fuzzy
-msgid "<em>Private project</em>"
+msgid "Private project"
 msgstr "私人群組"
 
 #: common/widget/Widget_MyProjects.class.php:109
@@ -23401,6 +23401,10 @@ msgstr "帳號"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
+
+#, fuzzy
+#~ msgid "<em>Private project</em>"
+#~ msgstr "私人群組"
 
 #~ msgid "Member since:"
 #~ msgstr "帳號建立日期"
