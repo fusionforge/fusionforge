@@ -113,7 +113,7 @@ class FRSPackage extends Error {
 			} else {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
-					$this->setError(_('Group_id in db result does not match Group Object'));
+					$this->setError(_('group_id in db result does not match Group Object'));
 					$this->data_array = null;
 					return;
 				}

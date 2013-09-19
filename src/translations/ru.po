@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 16:51+0200\n"
+"POT-Creation-Date: 2013-09-19 17:00+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -294,7 +294,12 @@ msgstr "Обновление завершено"
 msgid "No Valid Group Object"
 msgstr "Объект не соответствует группе"
 
-#: common/docman/Document.class.php:83 common/forum/Forum.class.php:139
+#: common/docman/Document.class.php:83
+#: common/docman/DocumentGroup.class.php:76 common/forum/Forum.class.php:139
+#: common/frs/FRSPackage.class.php:116 common/include/Error.class.php:185
+#: common/mail/MailingList.class.php:83 common/survey/Survey.class.php:83
+#: common/survey/SurveyQuestion.class.php:74
+#: plugins/mailman/include/MailmanList.class.php:103
 #, fuzzy
 msgid "group_id in db result does not match Group Object"
 msgstr "Идентификатор группы в базе не соответствует объекту"
@@ -566,14 +571,6 @@ msgstr "Нет документов"
 #, fuzzy
 msgid "Document Folder"
 msgstr "Название документа"
-
-#: common/docman/DocumentGroup.class.php:76
-#: common/frs/FRSPackage.class.php:116 common/include/Error.class.php:185
-#: common/mail/MailingList.class.php:83 common/survey/Survey.class.php:83
-#: common/survey/SurveyQuestion.class.php:74
-#: plugins/mailman/include/MailmanList.class.php:103
-msgid "Group_id in db result does not match Group Object"
-msgstr "Идентификатор группы в базе не соответствует объекту"
 
 #: common/docman/DocumentGroup.class.php:101
 #, fuzzy
@@ -23917,6 +23914,9 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#~ msgid "Group_id in db result does not match Group Object"
+#~ msgstr "Идентификатор группы в базе не соответствует объекту"
 
 #, fuzzy
 #~ msgid "<em>Private project</em>"

@@ -100,7 +100,7 @@ class MailmanList extends Error {
 			} else {
 				$this->dataArray =& $dataArray;
 				if ($this->dataArray['group_id'] != $this->Group->getID()) {
-					$this->setError(_('Group_id in db result does not match Group Object'));
+					$this->setError(_('group_id in db result does not match Group Object'));
 					$this->dataArray = null;
 					return false;
 				}

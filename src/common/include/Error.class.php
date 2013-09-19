@@ -182,7 +182,7 @@ class Error {
 	 *  retrieves the localized error string for Group ID
 	 */
 	function setGroupIdError(){
-		$this->setError(_('Group_id in db result does not match Group Object'), ERROR__GROUPID_ERROR);
+		$this->setError(_('group_id in db result does not match Group Object'), ERROR__GROUPID_ERROR);
 
 	}
 

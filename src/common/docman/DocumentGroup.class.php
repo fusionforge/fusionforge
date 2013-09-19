@@ -73,7 +73,7 @@ class DocumentGroup extends Error {
 			if (is_array($data)) {
 				$this->data_array =& $data;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
-					$this->setError('DocumentGroup: '. _('Group_id in db result does not match Group Object'));
+					$this->setError('DocumentGroup: '. _('group_id in db result does not match Group Object'));
 					$this->data_array = null;
 					return;
 				}
