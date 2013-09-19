@@ -62,7 +62,7 @@ class hudson extends Controler {
 								}
 								$this->view = 'projectOverview';
 							} else {
-								$error_msg .= _("Permission Denied");
+								$error_msg .= _("Permission denied.");
 								$this->view = 'projectOverview';
 							}
 							break;
@@ -74,7 +74,7 @@ class hudson extends Controler {
 								$error_msg .= _("Missing Hudson job ID");
 								}
 							} else {
-								$error_msg .= _("Permission Denied");
+								$error_msg .= _("Permission denied.");
 								$this->view = 'projectOverview';
 							}
 							break;
@@ -91,7 +91,7 @@ class hudson extends Controler {
 								}
 								$this->view = 'projectOverview';
 							} else {
-								$error_msg .= _("Permission Denied");
+								$error_msg .= _("Permission denied.");
 								$this->view = 'projectOverview';
 							}
 							break;
@@ -104,7 +104,7 @@ class hudson extends Controler {
 								}
 								$this->view = 'projectOverview';
 							} else {
-								$error_msg .= _("Permission Denied");
+								$error_msg .= _("Permission denied.");
 								$this->view = 'projectOverview';
 							}
 							break;
@@ -128,7 +128,7 @@ class hudson extends Controler {
 							break;
 					}
 				} else {
-					$error_msg .= _("Permission Denied");
+					$error_msg .= _("Permission denied.");
 				}
 			} else {
 				$error_msg .= _("Hudson service is not enabled");

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 17:00+0200\n"
+"POT-Creation-Date: 2013-09-19 17:15+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2899,6 +2899,15 @@ msgstr "Databasebewerking"
 
 #: common/include/Error.class.php:126 common/include/Group.class.php:431
 #: common/include/Group.class.php:514
+#: plugins/hudson/include/hudson.class.php:65
+#: plugins/hudson/include/hudson.class.php:77
+#: plugins/hudson/include/hudson.class.php:94
+#: plugins/hudson/include/hudson.class.php:107
+#: plugins/hudson/include/hudson.class.php:131
+#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
+#: www/survey/admin/show_questions.php:35
+#: www/survey/admin/show_results_individual.php:36
+#: www/survey/admin/show_results.php:66 www/survey/admin/survey.php:53
 #, fuzzy
 msgid "Permission denied."
 msgstr "Toegang geweigerd"
@@ -10402,15 +10411,6 @@ msgstr "Geen."
 #: plugins/hudson/include/hudson.class.php:87
 msgid "Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)"
 msgstr ""
-
-#: plugins/hudson/include/hudson.class.php:65
-#: plugins/hudson/include/hudson.class.php:77
-#: plugins/hudson/include/hudson.class.php:94
-#: plugins/hudson/include/hudson.class.php:107
-#: plugins/hudson/include/hudson.class.php:131
-#, fuzzy
-msgid "Permission Denied"
-msgstr "Toegang geweigerd"
 
 #: plugins/hudson/include/hudson.class.php:74
 #: plugins/hudson/include/hudson.class.php:90
@@ -22935,14 +22935,6 @@ msgstr "Bewerk een vraag"
 msgid "Add a Question"
 msgstr "Voeg een vraag toe"
 
-#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
-#: www/survey/admin/show_questions.php:35
-#: www/survey/admin/show_results_individual.php:36
-#: www/survey/admin/show_results.php:66 www/survey/admin/survey.php:53
-#, fuzzy
-msgid "Permission denied"
-msgstr "Toegang geweigerd"
-
 #: www/survey/admin/question.php:64 www/survey/admin/show_results.php:91
 #, fuzzy
 msgid "Cannot get Survey Question"
@@ -23598,6 +23590,14 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#, fuzzy
+#~ msgid "Permission Denied"
+#~ msgstr "Toegang geweigerd"
+
+#, fuzzy
+#~ msgid "Permission denied"
+#~ msgstr "Toegang geweigerd"
 
 #~ msgid "Group_id in db result does not match Group Object"
 #~ msgstr "Groep ID in database resultaat komt niet overeen met groep object"

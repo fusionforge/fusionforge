@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 17:00+0200\n"
+"POT-Creation-Date: 2013-09-19 17:15+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2925,6 +2925,15 @@ msgstr "Manipolazione database"
 
 #: common/include/Error.class.php:126 common/include/Group.class.php:431
 #: common/include/Group.class.php:514
+#: plugins/hudson/include/hudson.class.php:65
+#: plugins/hudson/include/hudson.class.php:77
+#: plugins/hudson/include/hudson.class.php:94
+#: plugins/hudson/include/hudson.class.php:107
+#: plugins/hudson/include/hudson.class.php:131
+#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
+#: www/survey/admin/show_questions.php:35
+#: www/survey/admin/show_results_individual.php:36
+#: www/survey/admin/show_results.php:66 www/survey/admin/survey.php:53
 msgid "Permission denied."
 msgstr "Autorizzazione negata"
 
@@ -10427,15 +10436,6 @@ msgstr "Forum non trovato"
 #: plugins/hudson/include/hudson.class.php:87
 msgid "Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)"
 msgstr ""
-
-#: plugins/hudson/include/hudson.class.php:65
-#: plugins/hudson/include/hudson.class.php:77
-#: plugins/hudson/include/hudson.class.php:94
-#: plugins/hudson/include/hudson.class.php:107
-#: plugins/hudson/include/hudson.class.php:131
-#, fuzzy
-msgid "Permission Denied"
-msgstr "Autorizzazione negata"
 
 #: plugins/hudson/include/hudson.class.php:74
 #: plugins/hudson/include/hudson.class.php:90
@@ -22941,13 +22941,6 @@ msgstr "Modifica una domanda"
 msgid "Add a Question"
 msgstr "Aggiungi domanda"
 
-#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
-#: www/survey/admin/show_questions.php:35
-#: www/survey/admin/show_results_individual.php:36
-#: www/survey/admin/show_results.php:66 www/survey/admin/survey.php:53
-msgid "Permission denied"
-msgstr "Autorizzazione negata"
-
 #: www/survey/admin/question.php:64 www/survey/admin/show_results.php:91
 #, fuzzy
 msgid "Cannot get Survey Question"
@@ -23595,6 +23588,13 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "Permission Denied"
+#~ msgstr "Autorizzazione negata"
+
+#~ msgid "Permission denied"
+#~ msgstr "Autorizzazione negata"
 
 #~ msgid "Group_id in db result does not match Group Object"
 #~ msgstr "Group_id in in risultato db non corrisponde a oggetto gruppo"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 17:00+0200\n"
+"POT-Creation-Date: 2013-09-19 17:15+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2918,6 +2918,15 @@ msgstr "数据库管理"
 
 #: common/include/Error.class.php:126 common/include/Group.class.php:431
 #: common/include/Group.class.php:514
+#: plugins/hudson/include/hudson.class.php:65
+#: plugins/hudson/include/hudson.class.php:77
+#: plugins/hudson/include/hudson.class.php:94
+#: plugins/hudson/include/hudson.class.php:107
+#: plugins/hudson/include/hudson.class.php:131
+#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
+#: www/survey/admin/show_questions.php:35
+#: www/survey/admin/show_results_individual.php:36
+#: www/survey/admin/show_results.php:66 www/survey/admin/survey.php:53
 msgid "Permission denied."
 msgstr "权限不足."
 
@@ -10353,15 +10362,6 @@ msgstr "找不到论坛"
 #: plugins/hudson/include/hudson.class.php:87
 msgid "Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)"
 msgstr ""
-
-#: plugins/hudson/include/hudson.class.php:65
-#: plugins/hudson/include/hudson.class.php:77
-#: plugins/hudson/include/hudson.class.php:94
-#: plugins/hudson/include/hudson.class.php:107
-#: plugins/hudson/include/hudson.class.php:131
-#, fuzzy
-msgid "Permission Denied"
-msgstr "权限不足"
 
 #: plugins/hudson/include/hudson.class.php:74
 #: plugins/hudson/include/hudson.class.php:90
@@ -22728,14 +22728,6 @@ msgstr "编辑一个问题"
 msgid "Add a Question"
 msgstr "添加一个问题"
 
-#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
-#: www/survey/admin/show_questions.php:35
-#: www/survey/admin/show_results_individual.php:36
-#: www/survey/admin/show_results.php:66 www/survey/admin/survey.php:53
-#, fuzzy
-msgid "Permission denied"
-msgstr "权限不足"
-
 #: www/survey/admin/question.php:64 www/survey/admin/show_results.php:91
 #, fuzzy
 msgid "Cannot get Survey Question"
@@ -23375,6 +23367,14 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Permission Denied"
+#~ msgstr "权限不足"
+
+#, fuzzy
+#~ msgid "Permission denied"
+#~ msgstr "权限不足"
 
 #~ msgid "Group_id in db result does not match Group Object"
 #~ msgstr "数据库中的群组编号与群组对象不一致"

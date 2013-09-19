@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 17:00+0200\n"
+"POT-Creation-Date: 2013-09-19 17:15+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -2804,6 +2804,15 @@ msgstr "Erreur d'initialisation de la base de données :"
 
 #: common/include/Error.class.php:126 common/include/Group.class.php:431
 #: common/include/Group.class.php:514
+#: plugins/hudson/include/hudson.class.php:65
+#: plugins/hudson/include/hudson.class.php:77
+#: plugins/hudson/include/hudson.class.php:94
+#: plugins/hudson/include/hudson.class.php:107
+#: plugins/hudson/include/hudson.class.php:131
+#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
+#: www/survey/admin/show_questions.php:35
+#: www/survey/admin/show_results_individual.php:36
+#: www/survey/admin/show_results.php:66 www/survey/admin/survey.php:53
 msgid "Permission denied."
 msgstr "Permission refusée."
 
@@ -10110,14 +10119,6 @@ msgid "Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)"
 msgstr ""
 "URL manquante pour la tâche Hudson (par exemple http://myCIserver:8080/"
 "hudson/job/MyJob)."
-
-#: plugins/hudson/include/hudson.class.php:65
-#: plugins/hudson/include/hudson.class.php:77
-#: plugins/hudson/include/hudson.class.php:94
-#: plugins/hudson/include/hudson.class.php:107
-#: plugins/hudson/include/hudson.class.php:131
-msgid "Permission Denied"
-msgstr "Permission refusée"
 
 #: plugins/hudson/include/hudson.class.php:74
 #: plugins/hudson/include/hudson.class.php:90
@@ -22548,13 +22549,6 @@ msgstr "Éditer une question"
 msgid "Add a Question"
 msgstr "Ajouter une question"
 
-#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
-#: www/survey/admin/show_questions.php:35
-#: www/survey/admin/show_results_individual.php:36
-#: www/survey/admin/show_results.php:66 www/survey/admin/survey.php:53
-msgid "Permission denied"
-msgstr "Permission refusée"
-
 #: www/survey/admin/question.php:64 www/survey/admin/show_results.php:91
 msgid "Cannot get Survey Question"
 msgstr "Erreur lors de l'accès à une question de sondage."
@@ -23180,6 +23174,12 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Permission Denied"
+#~ msgstr "Permission refusée"
+
+#~ msgid "Permission denied"
+#~ msgstr "Permission refusée"
 
 #~ msgid "Group_id in db result does not match Group Object"
 #~ msgstr ""

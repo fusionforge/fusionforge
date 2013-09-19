@@ -32,7 +32,7 @@ $survey_id = getIntFromRequest('survey_id');
 survey_header(array('title'=>_('Survey Questions')));
 
 if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
-	echo '<div class="error">'._('Permission denied').'</div>';
+	echo '<div class="error">'._('Permission denied.').'</div>';
 	survey_footer(array());
 	exit;
 }

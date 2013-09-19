@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 17:00+0200\n"
+"POT-Creation-Date: 2013-09-19 17:15+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2907,6 +2907,15 @@ msgstr "Управление базой данных"
 
 #: common/include/Error.class.php:126 common/include/Group.class.php:431
 #: common/include/Group.class.php:514
+#: plugins/hudson/include/hudson.class.php:65
+#: plugins/hudson/include/hudson.class.php:77
+#: plugins/hudson/include/hudson.class.php:94
+#: plugins/hudson/include/hudson.class.php:107
+#: plugins/hudson/include/hudson.class.php:131
+#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
+#: www/survey/admin/show_questions.php:35
+#: www/survey/admin/show_results_individual.php:36
+#: www/survey/admin/show_results.php:66 www/survey/admin/survey.php:53
 msgid "Permission denied."
 msgstr "Доступ запрещен"
 
@@ -10476,15 +10485,6 @@ msgstr "Нет форума"
 #: plugins/hudson/include/hudson.class.php:87
 msgid "Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)"
 msgstr ""
-
-#: plugins/hudson/include/hudson.class.php:65
-#: plugins/hudson/include/hudson.class.php:77
-#: plugins/hudson/include/hudson.class.php:94
-#: plugins/hudson/include/hudson.class.php:107
-#: plugins/hudson/include/hudson.class.php:131
-#, fuzzy
-msgid "Permission Denied"
-msgstr "Доступ запрещен"
 
 #: plugins/hudson/include/hudson.class.php:74
 #: plugins/hudson/include/hudson.class.php:90
@@ -23262,13 +23262,6 @@ msgstr "Изменить вопрос"
 msgid "Add a Question"
 msgstr "Добавить новый вопрос"
 
-#: www/survey/admin/question.php:56 www/survey/admin/show_csv.php:59
-#: www/survey/admin/show_questions.php:35
-#: www/survey/admin/show_results_individual.php:36
-#: www/survey/admin/show_results.php:66 www/survey/admin/survey.php:53
-msgid "Permission denied"
-msgstr "Доступ запрещен"
-
 #: www/survey/admin/question.php:64 www/survey/admin/show_results.php:91
 #, fuzzy
 msgid "Cannot get Survey Question"
@@ -23914,6 +23907,13 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "Permission Denied"
+#~ msgstr "Доступ запрещен"
+
+#~ msgid "Permission denied"
+#~ msgstr "Доступ запрещен"
 
 #~ msgid "Group_id in db result does not match Group Object"
 #~ msgstr "Идентификатор группы в базе не соответствует объекту"

@@ -63,7 +63,7 @@ $title = _('Survey Results');
 $sh->header(array('title' => $title, 'modal' => 1));
 
 if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
-	echo '<p class="error">'._('Permission denied').'</p>';
+	echo '<p class="error">'._('Permission denied.').'</p>';
 	$sh->footer(array());
 	exit;
 }
