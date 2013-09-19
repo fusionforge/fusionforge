@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 18:42+0200\n"
+"POT-Creation-Date: 2013-09-19 18:50+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -699,8 +699,11 @@ msgstr "Zerrenda Gehitua"
 #: common/survey/SurveyResponse.class.php:95
 #: common/tracker/actions/tracker.php:271
 #: common/tracker/views/form-adminroadmap.php:57
-#: plugins/forumml/www/index.php:55 plugins/forumml/www/index.php:63
-#: plugins/forumml/www/message.php:93 plugins/mailman/www/admin/index.php:50
+#: plugins/forumml/www/index.php:55 plugins/forumml/www/index.php:60
+#: plugins/forumml/www/index.php:63 plugins/forumml/www/message.php:93
+#: plugins/forumml/www/message.php:98 plugins/forumml/www/message.php:101
+#: plugins/forumml/www/upload.php:48 plugins/forumml/www/upload.php:51
+#: plugins/mailman/www/admin/index.php:50
 #: plugins/mailman/www/admin/index.php:53
 #: plugins/mailman/www/admin/index.php:73
 #: plugins/mailman/www/admin/index.php:75
@@ -9399,12 +9402,6 @@ msgstr "Arrazoia zergatik dagoen zintzilik:"
 #, fuzzy
 msgid "No list specified"
 msgstr "Foro talde identifikatzaile baliogabea"
-
-#: plugins/forumml/www/index.php:60 plugins/forumml/www/message.php:98
-#: plugins/forumml/www/message.php:101 plugins/forumml/www/upload.php:48
-#: plugins/forumml/www/upload.php:51
-msgid "error"
-msgstr "Akatsa"
 
 #: plugins/forumml/www/index.php:60 plugins/forumml/www/message.php:98
 #: plugins/forumml/www/upload.php:48
@@ -23419,6 +23416,9 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#~ msgid "error"
+#~ msgstr "Akatsa"
 
 #, fuzzy
 #~ msgid "Error: "

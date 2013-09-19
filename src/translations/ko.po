@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 18:42+0200\n"
+"POT-Creation-Date: 2013-09-19 18:50+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -700,8 +700,11 @@ msgstr "대량 갱신"
 #: common/survey/SurveyResponse.class.php:95
 #: common/tracker/actions/tracker.php:271
 #: common/tracker/views/form-adminroadmap.php:57
-#: plugins/forumml/www/index.php:55 plugins/forumml/www/index.php:63
-#: plugins/forumml/www/message.php:93 plugins/mailman/www/admin/index.php:50
+#: plugins/forumml/www/index.php:55 plugins/forumml/www/index.php:60
+#: plugins/forumml/www/index.php:63 plugins/forumml/www/message.php:93
+#: plugins/forumml/www/message.php:98 plugins/forumml/www/message.php:101
+#: plugins/forumml/www/upload.php:48 plugins/forumml/www/upload.php:51
+#: plugins/mailman/www/admin/index.php:50
 #: plugins/mailman/www/admin/index.php:53
 #: plugins/mailman/www/admin/index.php:73
 #: plugins/mailman/www/admin/index.php:75
@@ -9350,12 +9353,6 @@ msgstr "대기중인 제출이유:"
 #, fuzzy
 msgid "No list specified"
 msgstr "잘못된 인자입니다."
-
-#: plugins/forumml/www/index.php:60 plugins/forumml/www/message.php:98
-#: plugins/forumml/www/message.php:101 plugins/forumml/www/upload.php:48
-#: plugins/forumml/www/upload.php:51
-msgid "error"
-msgstr "error"
 
 #: plugins/forumml/www/index.php:60 plugins/forumml/www/message.php:98
 #: plugins/forumml/www/upload.php:48
@@ -23286,6 +23283,9 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#~ msgid "error"
+#~ msgstr "error"
 
 #, fuzzy
 #~ msgid "Error: "

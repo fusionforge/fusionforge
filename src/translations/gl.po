@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 18:42+0200\n"
+"POT-Creation-Date: 2013-09-19 18:50+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -698,8 +698,11 @@ msgstr "Modificado por última vez"
 #: common/survey/SurveyResponse.class.php:95
 #: common/tracker/actions/tracker.php:271
 #: common/tracker/views/form-adminroadmap.php:57
-#: plugins/forumml/www/index.php:55 plugins/forumml/www/index.php:63
-#: plugins/forumml/www/message.php:93 plugins/mailman/www/admin/index.php:50
+#: plugins/forumml/www/index.php:55 plugins/forumml/www/index.php:60
+#: plugins/forumml/www/index.php:63 plugins/forumml/www/message.php:93
+#: plugins/forumml/www/message.php:98 plugins/forumml/www/message.php:101
+#: plugins/forumml/www/upload.php:48 plugins/forumml/www/upload.php:51
+#: plugins/mailman/www/admin/index.php:50
 #: plugins/mailman/www/admin/index.php:53
 #: plugins/mailman/www/admin/index.php:73
 #: plugins/mailman/www/admin/index.php:75
@@ -9502,12 +9505,6 @@ msgstr "Publicouse o foro pendente"
 #, fuzzy
 msgid "No list specified"
 msgstr "O identificador de foro non é válido"
-
-#: plugins/forumml/www/index.php:60 plugins/forumml/www/message.php:98
-#: plugins/forumml/www/message.php:101 plugins/forumml/www/upload.php:48
-#: plugins/forumml/www/upload.php:51
-msgid "error"
-msgstr "Erro "
 
 #: plugins/forumml/www/index.php:60 plugins/forumml/www/message.php:98
 #: plugins/forumml/www/upload.php:48
@@ -23762,6 +23759,9 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#~ msgid "error"
+#~ msgstr "Erro "
 
 #, fuzzy
 #~ msgid "Error: "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 18:42+0200\n"
+"POT-Creation-Date: 2013-09-19 18:50+0200\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -640,8 +640,11 @@ msgstr ""
 #: common/survey/SurveyResponse.class.php:95
 #: common/tracker/actions/tracker.php:271
 #: common/tracker/views/form-adminroadmap.php:57
-#: plugins/forumml/www/index.php:55 plugins/forumml/www/index.php:63
-#: plugins/forumml/www/message.php:93 plugins/mailman/www/admin/index.php:50
+#: plugins/forumml/www/index.php:55 plugins/forumml/www/index.php:60
+#: plugins/forumml/www/index.php:63 plugins/forumml/www/message.php:93
+#: plugins/forumml/www/message.php:98 plugins/forumml/www/message.php:101
+#: plugins/forumml/www/upload.php:48 plugins/forumml/www/upload.php:51
+#: plugins/mailman/www/admin/index.php:50
 #: plugins/mailman/www/admin/index.php:53
 #: plugins/mailman/www/admin/index.php:73
 #: plugins/mailman/www/admin/index.php:75
@@ -8654,12 +8657,6 @@ msgstr ""
 
 #: plugins/forumml/www/index.php:55 plugins/forumml/www/message.php:93
 msgid "No list specified"
-msgstr ""
-
-#: plugins/forumml/www/index.php:60 plugins/forumml/www/message.php:98
-#: plugins/forumml/www/message.php:101 plugins/forumml/www/upload.php:48
-#: plugins/forumml/www/upload.php:51
-msgid "error"
 msgstr ""
 
 #: plugins/forumml/www/index.php:60 plugins/forumml/www/message.php:98

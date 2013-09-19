@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 18:42+0200\n"
+"POT-Creation-Date: 2013-09-19 18:50+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -697,8 +697,11 @@ msgstr "Ultima modifica"
 #: common/survey/SurveyResponse.class.php:95
 #: common/tracker/actions/tracker.php:271
 #: common/tracker/views/form-adminroadmap.php:57
-#: plugins/forumml/www/index.php:55 plugins/forumml/www/index.php:63
-#: plugins/forumml/www/message.php:93 plugins/mailman/www/admin/index.php:50
+#: plugins/forumml/www/index.php:55 plugins/forumml/www/index.php:60
+#: plugins/forumml/www/index.php:63 plugins/forumml/www/message.php:93
+#: plugins/forumml/www/message.php:98 plugins/forumml/www/message.php:101
+#: plugins/forumml/www/upload.php:48 plugins/forumml/www/upload.php:51
+#: plugins/mailman/www/admin/index.php:50
 #: plugins/mailman/www/admin/index.php:53
 #: plugins/mailman/www/admin/index.php:73
 #: plugins/mailman/www/admin/index.php:75
@@ -9462,12 +9465,6 @@ msgstr "Ragioni per l'attesa:"
 #, fuzzy
 msgid "No list specified"
 msgstr "Parametro non valido"
-
-#: plugins/forumml/www/index.php:60 plugins/forumml/www/message.php:98
-#: plugins/forumml/www/message.php:101 plugins/forumml/www/upload.php:48
-#: plugins/forumml/www/upload.php:51
-msgid "error"
-msgstr "errore"
 
 #: plugins/forumml/www/index.php:60 plugins/forumml/www/message.php:98
 #: plugins/forumml/www/upload.php:48
@@ -23581,6 +23578,9 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#~ msgid "error"
+#~ msgstr "errore"
 
 #, fuzzy
 #~ msgid "Error: "

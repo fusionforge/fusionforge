@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 18:42+0200\n"
+"POT-Creation-Date: 2013-09-19 18:50+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -698,8 +698,11 @@ msgstr "Zuletzt bearbeitet"
 #: common/survey/SurveyResponse.class.php:95
 #: common/tracker/actions/tracker.php:271
 #: common/tracker/views/form-adminroadmap.php:57
-#: plugins/forumml/www/index.php:55 plugins/forumml/www/index.php:63
-#: plugins/forumml/www/message.php:93 plugins/mailman/www/admin/index.php:50
+#: plugins/forumml/www/index.php:55 plugins/forumml/www/index.php:60
+#: plugins/forumml/www/index.php:63 plugins/forumml/www/message.php:93
+#: plugins/forumml/www/message.php:98 plugins/forumml/www/message.php:101
+#: plugins/forumml/www/upload.php:48 plugins/forumml/www/upload.php:51
+#: plugins/mailman/www/admin/index.php:50
 #: plugins/mailman/www/admin/index.php:53
 #: plugins/mailman/www/admin/index.php:73
 #: plugins/mailman/www/admin/index.php:75
@@ -9487,12 +9490,6 @@ msgstr "Forum aus Warteliste Freigegeben "
 #, fuzzy
 msgid "No list specified"
 msgstr "Ungültiger Teilnehmer aufgelistet."
-
-#: plugins/forumml/www/index.php:60 plugins/forumml/www/message.php:98
-#: plugins/forumml/www/message.php:101 plugins/forumml/www/upload.php:48
-#: plugins/forumml/www/upload.php:51
-msgid "error"
-msgstr "Fehler"
 
 #: plugins/forumml/www/index.php:60 plugins/forumml/www/message.php:98
 #: plugins/forumml/www/upload.php:48
@@ -23832,6 +23829,9 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "error"
+#~ msgstr "Fehler"
 
 #, fuzzy
 #~ msgid "Error: "
