@@ -66,7 +66,7 @@ if ($admin_access) {
 	<table class="width50" align="center" cellspacing="1">
 	
 	<tr>
-	<td class="form-title" colspan="2"><?php echo _('<b>Add a new OAuth provider</b>') ?></td>
+	<td class="form-title" colspan="2"><b><?php echo _('Add a new OAuth provider'); ?></b></td>
 	</tr>
 	
 	<tr>
