@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 16:28+0200\n"
+"POT-Creation-Date: 2013-09-19 16:41+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -477,7 +477,7 @@ msgstr "Projecte"
 #: plugins/projects-hierarchy/view/home_project_link.php:37
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:632
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:634
-#: plugins/scmhg/common/HgPlugin.class.php:625 www/account/index.php:199
+#: plugins/scmhg/common/HgPlugin.class.php:625 www/account/index.php:198
 #: www/account/lostlogin.php:84 www/account/register.php:213
 #: www/admin/approve-pending.php:194 www/admin/database.php:162
 #: www/admin/responses_admin.php:42 www/export/rssAboTask.php:142
@@ -1177,7 +1177,7 @@ msgstr "Nom de fitxer"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:148
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
-#: www/account/index.php:234 www/account/register.php:171
+#: www/account/index.php:233 www/account/register.php:171
 #: www/people/editjob.php:52 www/people/editjob.php:74
 #: www/people/editprofile.php:107 www/people/people_utils.php:405
 #: www/people/skills_utils.php:49 www/pm/admin/index.php:188
@@ -1343,8 +1343,8 @@ msgstr ""
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:190
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:54
 #: plugins/hudson/include/HudsonBuild.class.php:115
-#: www/account/editsshkeys.php:59 www/account/index.php:146
-#: www/account/index.php:308 www/admin/cronman.php:78
+#: www/account/editsshkeys.php:59 www/account/index.php:145
+#: www/account/index.php:307 www/admin/cronman.php:78
 #: www/admin/grouplist.php:118 www/admin/massmail.php:158
 #: www/admin/search.php:88 www/admin/search.php:168 www/admin/userlist.php:115
 #: www/developer/diary.php:56 www/developer/diary.php:87
@@ -1705,11 +1705,11 @@ msgstr "Data d'inici"
 #: plugins/mailman/www/admin/index.php:150
 #: plugins/mailman/www/admin/index.php:183
 #: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
-#: www/account/index.php:145 www/account/index.php:149
-#: www/account/index.php:154 www/account/index.php:175
-#: www/account/index.php:206 www/account/index.php:213
-#: www/account/index.php:220 www/account/index.php:227
-#: www/account/index.php:234 www/account/lostpw.php:90
+#: www/account/index.php:144 www/account/index.php:148
+#: www/account/index.php:153 www/account/index.php:174
+#: www/account/index.php:205 www/account/index.php:212
+#: www/account/index.php:219 www/account/index.php:226
+#: www/account/index.php:233 www/account/lostpw.php:90
 #: www/account/pending-resend.php:65 www/account/pending-resend.php:67
 #: www/account/register.php:171 www/account/register.php:220
 #: www/account/register.php:226 www/account/register.php:232
@@ -2167,7 +2167,7 @@ msgstr "Publicacions"
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:53
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:73
 #: plugins/webanalytics/view/admin/updateLinkValue.php:41
-#: www/account/index.php:337 www/account/lostlogin.php:107
+#: www/account/index.php:336 www/account/lostlogin.php:107
 #: www/admin/groupedit.php:224 www/admin/trove/trove_cat_edit.php:152
 #: www/admin/useredit.php:236 www/admin/useredit.php:315
 #: www/admin/vhost.php:189 www/forum/admin/index.php:162
@@ -6502,7 +6502,7 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:340
 #: plugins/scmsvn/common/SVNPlugin.class.php:222
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
-#: www/account/editsshkeys.php:51 www/account/index.php:300
+#: www/account/editsshkeys.php:51 www/account/index.php:299
 #: www/admin/useredit.php:262 www/admin/useredit.php:292
 #: www/project/admin/editimages.php:267 www/reporting/usersummary.php:103
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:44
@@ -7214,7 +7214,7 @@ msgid "Configuring allowed roles for the transitions from %1$s to %2$s"
 msgstr ""
 
 #: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:56
-#: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:244
+#: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:243
 #: www/include/Layout.class.php:1348
 msgid "Preferences"
 msgstr "Preferències"
@@ -8613,11 +8613,11 @@ msgid "Display block at the top of the main page"
 msgstr ""
 
 #: plugins/blocks/www/index.php:163
-msgid "Cannot Process your request : No TYPE specified"
+msgid "Cannot Process your request: No TYPE specified"
 msgstr ""
 
 #: plugins/blocks/www/index.php:165
-msgid "Cannot Process your request : No ID specified"
+msgid "Cannot Process your request: No ID specified"
 msgstr ""
 
 #: plugins/blocks/www/index.php:173 plugins/extsubproj/www/index.php:55
@@ -12277,8 +12277,9 @@ msgid "There are currently no OAuth Providers registered in the database"
 msgstr ""
 
 #: plugins/oauthconsumer/www/providers.php:69
-msgid "<b>Add a new OAuth provider</b>"
-msgstr ""
+#, fuzzy
+msgid "Add a new OAuth provider"
+msgstr "Afegeix una n ova habilitat"
 
 #: plugins/oauthconsumer/www/providers.php:108
 #, fuzzy
@@ -14578,7 +14579,7 @@ msgstr ""
 msgid "You should now <a href=\"%s\">Return to User Prefs</a>."
 msgstr "Ara haurieu de %1$s tornar a UserPrefs %2$s."
 
-#: www/account/change_pw.php:87 www/account/index.php:156
+#: www/account/change_pw.php:87 www/account/index.php:155
 msgid "Change Password"
 msgstr "Canvi de contrasenya"
 
@@ -14610,29 +14611,29 @@ msgstr "Claus SSH compartides autoritzades"
 msgid "Available keys"
 msgstr "No s'han trobat rastrejadors accessibles"
 
-#: www/account/editsshkeys.php:51 www/account/index.php:300
+#: www/account/editsshkeys.php:51 www/account/index.php:299
 msgid "Algorithm"
 msgstr ""
 
-#: www/account/editsshkeys.php:51 www/account/index.php:300
+#: www/account/editsshkeys.php:51 www/account/index.php:299
 msgid "Fingerprint"
 msgstr ""
 
-#: www/account/editsshkeys.php:51 www/account/index.php:300
+#: www/account/editsshkeys.php:51 www/account/index.php:299
 #: www/project/admin/editimages.php:266
 msgid "Uploaded"
 msgstr "Carregat"
 
-#: www/account/editsshkeys.php:51 www/account/index.php:300
+#: www/account/editsshkeys.php:51 www/account/index.php:299
 #, fuzzy
 msgid "Ready ?"
 msgstr "Records"
 
-#: www/account/editsshkeys.php:61 www/account/index.php:310
+#: www/account/editsshkeys.php:61 www/account/index.php:309
 msgid "ssh key is deployed."
 msgstr ""
 
-#: www/account/editsshkeys.php:63 www/account/index.php:312
+#: www/account/editsshkeys.php:63 www/account/index.php:311
 msgid "ssh key is not deployed yet."
 msgstr ""
 
@@ -14750,76 +14751,76 @@ msgstr "Visualitza un perfil d'usuari"
 msgid "Edit My Skills Profile"
 msgstr "Edita el meu perfil de coneixements"
 
-#: www/account/index.php:145 www/admin/search.php:76
+#: www/account/index.php:144 www/admin/search.php:76
 msgid "Member since"
 msgstr "Membre des de"
 
-#: www/account/index.php:149 www/admin/useredit.php:130
+#: www/account/index.php:148 www/admin/useredit.php:130
 #: www/include/user_profile.php:68
 msgid "User Id"
 msgstr "Id usuari"
 
-#: www/account/index.php:154 www/account/lostpw.php:90
+#: www/account/index.php:153 www/account/lostpw.php:90
 #: www/account/pending-resend.php:67 www/account/verify.php:78
 #: www/include/user_profile.php:88
 #, fuzzy
 msgid "Login Name"
 msgstr "Nom d'inici de sessió"
 
-#: www/account/index.php:161 www/account/register.php:177
+#: www/account/index.php:160 www/account/register.php:177
 msgid "First Name:"
 msgstr "Nom:"
 
-#: www/account/index.php:168 www/account/register.php:184
+#: www/account/index.php:167 www/account/register.php:184
 msgid "Last Name:"
 msgstr "Cognom:"
 
-#: www/account/index.php:175 www/snippet/package.php:156
+#: www/account/index.php:174 www/snippet/package.php:156
 #: www/snippet/submit.php:123 www/stats/i18n.php:34
 msgid "Language"
 msgstr "Idioma"
 
-#: www/account/index.php:181 www/account/register.php:195
+#: www/account/index.php:180 www/account/register.php:195
 msgid "Timezone:"
 msgstr "Zona horària:"
 
-#: www/account/index.php:187
+#: www/account/index.php:186
 msgid "Theme:"
 msgstr "Tema:"
 
-#: www/account/index.php:193 www/account/register.php:208
+#: www/account/index.php:192 www/account/register.php:208
 msgid "Country:"
 msgstr "País:"
 
-#: www/account/index.php:199 www/account/register.php:213
+#: www/account/index.php:198 www/account/register.php:213
 #: www/include/user_profile.php:112
 msgid "Email Address"
 msgstr "Adr. correu"
 
-#: www/account/index.php:201
+#: www/account/index.php:200
 msgid "Change Email Addr"
 msgstr "Canvia l'adreça de correu"
 
-#: www/account/index.php:206 www/account/register.php:220
+#: www/account/index.php:205 www/account/register.php:220
 #: www/include/user_profile.php:126 www/mail/index.php:78
 msgid "Address"
 msgstr "Adreça"
 
-#: www/account/index.php:213 www/account/register.php:226
+#: www/account/index.php:212 www/account/register.php:226
 msgid "Address (continued)"
 msgstr ""
 
-#: www/account/index.php:220 www/account/register.php:232
+#: www/account/index.php:219 www/account/register.php:232
 #: www/include/user_profile.php:133
 msgid "Phone"
 msgstr "Telèfon:"
 
-#: www/account/index.php:227 www/account/register.php:238
+#: www/account/index.php:226 www/account/register.php:238
 #: www/include/user_profile.php:144
 msgid "Fax"
 msgstr "Fax:"
 
-#: www/account/index.php:249 www/account/register.php:247
+#: www/account/index.php:248 www/account/register.php:247
 msgid ""
 "Receive Email about Site Updates <i>(Very low traffic and includes security "
 "notices. Highly Recommended.)</i>"
@@ -14827,11 +14828,11 @@ msgstr ""
 "Rebre correu sobre actualitzacions del lloc <i>(tràfic molt baix i inclou "
 "notícies de seguretat. Molt recomanable.)</i>"
 
-#: www/account/index.php:255 www/account/register.php:253
+#: www/account/index.php:254 www/account/register.php:253
 msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
 msgstr "Rebre enviaments addicionals de la comunitat. <i>(tràfic baix.)</i>"
 
-#: www/account/index.php:270
+#: www/account/index.php:269
 #, php-format
 msgid ""
 "Participate in peer ratings. <i>(Allows you to rate other users using "
@@ -14840,39 +14841,39 @@ msgid ""
 "participate in ratings.)</i>"
 msgstr ""
 
-#: www/account/index.php:276
+#: www/account/index.php:275
 msgid ""
 "Enable tooltips. Small help texts displayed on mouse over links, images."
 msgstr ""
 
-#: www/account/index.php:292
+#: www/account/index.php:291
 msgid "Shell Account Information"
 msgstr "Informació del compte de shell"
 
-#: www/account/index.php:295
+#: www/account/index.php:294
 msgid "Shell box"
 msgstr "Quadre de Shell"
 
-#: www/account/index.php:296
+#: www/account/index.php:295
 msgid "SSH Shared Authorized Keys"
 msgstr "Claus SSH compartides autoritzades"
 
-#: www/account/index.php:322
+#: www/account/index.php:321
 msgid "Edit Keys"
 msgstr "Edita les claus"
 
-#: www/account/index.php:324
+#: www/account/index.php:323
 #, fuzzy
 msgid "Shell Account deactivated"
 msgstr "Informació del compte de shell"
 
-#: www/account/index.php:334 www/forum/admin/index.php:128
+#: www/account/index.php:333 www/forum/admin/index.php:128
 #: www/forum/admin/index.php:167
 #, fuzzy, php-format
 msgid "%s Mandatory fields"
 msgstr "Afegeix/actualitza els camps extra"
 
-#: www/account/index.php:338
+#: www/account/index.php:337
 msgid "Reset Changes"
 msgstr "Reinicialitza els canvis"
 
@@ -24803,10 +24804,6 @@ msgstr "La meva pàgina personal"
 
 #, fuzzy
 #~ msgid "Add a new folder."
-#~ msgstr "Afegeix una n ova habilitat"
-
-#, fuzzy
-#~ msgid "Add a new sub folder"
 #~ msgstr "Afegeix una n ova habilitat"
 
 #, fuzzy
