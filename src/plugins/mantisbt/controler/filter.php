@@ -88,7 +88,7 @@ if (!isset($errorPage)) {
 		if (!isset($errorPage)) {
 			if (sizeof($listChild)) {
 				echo '<div style="float: left; margin-right: 10px; width: 160px">';
-				echo '<h4 style="border-bottom: 1px solid #DAE0EA">'. _('Include child projects:') .'</h4>';
+				echo '<h4 style="border-bottom: 1px solid #DAE0EA">'. _('Include child projects') .'</h4>';
 
 				echo '<select name="projectChildId[]" id="projectChildId" multiple style="width: 160px; height: 100px">';
 				foreach ($listChild as $key => $child) {
@@ -119,7 +119,7 @@ if (!isset($errorPage)) {
 				echo '</div>';
 			}
 			echo '<div style="float: left; margin-right: 10px; width: 160px">';
-			echo '<h4 style="border-bottom: 1px solid #DAE0EA">'. _('Submitted by:') .'</h3>';
+			echo '<h4 style="border-bottom: 1px solid #DAE0EA">'. _('Submitted by') .  _(': ') . '</h4>';
 			echo '<select name="projectReporters[]" id="projectReporters" multiple style="width: 160px; height: 100px">';
 			foreach ($mantisbtMembers as $key => $mantisbtMember) {
 				echo '<option value="'.$mantisbtMember->id.'"';
@@ -135,7 +135,7 @@ if (!isset($errorPage)) {
 			echo '</div>';
 
 			echo '<div style="float: left; margin-right: 10px; width: 160px">';
-			echo '<h4 style="border-bottom: 1px solid #DAE0EA">'. _('Assigned to:') .'</h3>';
+			echo '<h4 style="border-bottom: 1px solid #DAE0EA">'. _('Assigned to') . _(': ') .'</h4>';
 			echo '<select name="projectFixers[]" id="projectFixers" multiple style="width: 160px; height: 100px">';
 			foreach ($mantisbtMembers as $key => $mantisbtMember) {
 				echo '<option value="'.$mantisbtMember->id.'"';
