@@ -41,12 +41,12 @@ if (empty($msg)) {
 	}
 
 	if (!isset($errorPage)){
-		echo '<h2>'._('Attached files').'</h2>';
+		echo '<h2>'._('Attached Files').'</h2>';
 		$boxTitle = 'Fichiers attach&eacute;s (<a style="color:#FFFFFF;font-size:0.8em" href="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$idBug.'&view=addAttachment">Ajouter un fichier</a>)';
 		if (isset($defect->attachments) && count($defect->attachments) > 0) {
 			echo	'<table class="innertabs">';
 			echo '<tr>';
-			echo '<td>'._('Filename').'</td>';
+			echo '<td>'._('File Name').'</td>';
 			echo '<td>'._('Actions').'</td>';
 			echo '</tr>';
 			foreach ($defect->attachments as $key => $attachement){

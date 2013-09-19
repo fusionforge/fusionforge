@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 14:48+0200\n"
+"POT-Creation-Date: 2013-09-19 15:56+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -472,6 +472,8 @@ msgstr "Проект"
 #: plugins/mantisbt/action/updateNote.php:37
 #: plugins/mantisbt/action/updateNote.php:61
 #: plugins/mantisbt/action/updateVersion.php:59
+#: plugins/mantisbt/controler/filter.php:122
+#: plugins/mantisbt/controler/filter.php:138
 #: plugins/mantisbt/view/addAttachment.php:32
 #: plugins/oauthconsumer/www/get_access_token.php:134
 #: plugins/oauthconsumer/www/get_access_token.php:135
@@ -882,8 +884,10 @@ msgstr ""
 msgid "You need first to upload file in %s"
 msgstr "Войдите в Вашу учетную запись"
 
-#: common/docman/views/addfile.php:165 www/frs/admin/editrelease.php:292
-#: www/frs/admin/editrelease.php:346 www/frs/admin/qrs.php:191
+#: common/docman/views/addfile.php:165
+#: plugins/mantisbt/view/viewAttachment.php:49
+#: www/frs/admin/editrelease.php:292 www/frs/admin/editrelease.php:346
+#: www/frs/admin/qrs.php:191
 msgid "File Name"
 msgstr "Имя файла"
 
@@ -1164,7 +1168,6 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:63
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:108
-#: plugins/mantisbt/view/viewAttachment.php:49
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:133
 #: www/frs/index.php:207
 msgid "Filename"
@@ -1915,7 +1918,7 @@ msgstr "Документация"
 msgid "search into childs following project hierarchy"
 msgstr ""
 
-#: common/docman/views/search.php:75
+#: common/docman/views/search.php:75 plugins/mantisbt/controler/filter.php:91
 #, fuzzy
 msgid "Include child projects"
 msgstr "Дочерний проект"
@@ -5481,6 +5484,7 @@ msgstr "Очистить все"
 #: common/tracker/include/build_submission_form.php:62
 #: common/tracker/views/form-customizelist.php:41
 #: cronjobs/send_pending_items_mail.php:119
+#: plugins/mantisbt/controler/filter.php:138
 #: plugins/mantisbt/view/addIssue.php:74
 #: plugins/mantisbt/view/editIssue.php:127
 #: plugins/mantisbt/view/viewIssue.php:84 www/my/dashboard.php:73
@@ -5494,7 +5498,8 @@ msgstr "Назначено на"
 #: common/tracker/actions/mod-limited.php:86 common/tracker/actions/mod.php:88
 #: common/tracker/views/form-customizelist.php:42
 #: cronjobs/send_pending_items_mail.php:79
-#: cronjobs/send_pending_items_mail.php:120 www/admin/approve-pending.php:213
+#: cronjobs/send_pending_items_mail.php:120
+#: plugins/mantisbt/controler/filter.php:122 www/admin/approve-pending.php:213
 #: www/admin/pending-news.php:139 www/my/dashboard.php:75
 #: www/news/admin/index.php:125 www/pm/detail_task.php:42
 #: www/pm/mod_task.php:52
@@ -5660,6 +5665,7 @@ msgstr ""
 
 #: common/tracker/actions/detail.php:147
 #: common/tracker/actions/mod-limited.php:188
+#: plugins/mantisbt/view/viewAttachment.php:44
 msgid "Attached Files"
 msgstr "Прикрепленные файлы"
 
@@ -11454,21 +11460,6 @@ msgstr ""
 msgid "With Status:"
 msgstr "Состояние"
 
-#: plugins/mantisbt/controler/filter.php:91
-#, fuzzy
-msgid "Include child projects:"
-msgstr "Дочерний проект"
-
-#: plugins/mantisbt/controler/filter.php:122
-#, fuzzy
-msgid "Submitted by:"
-msgstr "Утверждено"
-
-#: plugins/mantisbt/controler/filter.php:138
-#, fuzzy
-msgid "Assigned to:"
-msgstr "Назначено на"
-
 #: plugins/mantisbt/controler/filter.php:199
 #: plugins/mantisbt/controler/filter_roadmap.php:128
 msgid "Clear filter"
@@ -11775,11 +11766,6 @@ msgstr ""
 #, fuzzy
 msgid "No versions to display"
 msgstr "Вопросов нет"
-
-#: plugins/mantisbt/view/viewAttachment.php:44
-#, fuzzy
-msgid "Attached files"
-msgstr "Прикрепленные файлы"
 
 #: plugins/mantisbt/view/viewAttachment.php:65
 #, fuzzy
@@ -23964,6 +23950,22 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "Include child projects:"
+#~ msgstr "Дочерний проект"
+
+#, fuzzy
+#~ msgid "Submitted by:"
+#~ msgstr "Утверждено"
+
+#, fuzzy
+#~ msgid "Assigned to:"
+#~ msgstr "Назначено на"
+
+#, fuzzy
+#~ msgid "Attached files"
+#~ msgstr "Прикрепленные файлы"
 
 #, fuzzy
 #~ msgid "group_id in db result does not match Group Object."

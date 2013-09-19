@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-18 14:48+0200\n"
+"POT-Creation-Date: 2013-09-19 15:56+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -449,6 +449,8 @@ msgstr "Proyecto"
 #: plugins/mantisbt/action/updateNote.php:37
 #: plugins/mantisbt/action/updateNote.php:61
 #: plugins/mantisbt/action/updateVersion.php:59
+#: plugins/mantisbt/controler/filter.php:122
+#: plugins/mantisbt/controler/filter.php:138
 #: plugins/mantisbt/view/addAttachment.php:32
 #: plugins/oauthconsumer/www/get_access_token.php:134
 #: plugins/oauthconsumer/www/get_access_token.php:135
@@ -853,8 +855,10 @@ msgstr ""
 msgid "You need first to upload file in %s"
 msgstr "Necesita primero para subir fichero en %s"
 
-#: common/docman/views/addfile.php:165 www/frs/admin/editrelease.php:292
-#: www/frs/admin/editrelease.php:346 www/frs/admin/qrs.php:191
+#: common/docman/views/addfile.php:165
+#: plugins/mantisbt/view/viewAttachment.php:49
+#: www/frs/admin/editrelease.php:292 www/frs/admin/editrelease.php:346
+#: www/frs/admin/qrs.php:191
 msgid "File Name"
 msgstr "Nombre del Fichero"
 
@@ -1115,7 +1119,6 @@ msgstr "Seleccionar/Deselecionar todas las acciones masivas de documentos"
 #: common/docman/views/pendingfiles.php:63
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:108
-#: plugins/mantisbt/view/viewAttachment.php:49
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:133
 #: www/frs/index.php:207
 msgid "Filename"
@@ -1845,7 +1848,7 @@ msgstr "Dentro de los documentos"
 msgid "search into childs following project hierarchy"
 msgstr "buscar en hijos siguiendo la organizacion del proyecto"
 
-#: common/docman/views/search.php:75
+#: common/docman/views/search.php:75 plugins/mantisbt/controler/filter.php:91
 msgid "Include child projects"
 msgstr "Incluir proyectos hijos"
 
@@ -5335,6 +5338,7 @@ msgstr "Borrar todo"
 #: common/tracker/include/build_submission_form.php:62
 #: common/tracker/views/form-customizelist.php:41
 #: cronjobs/send_pending_items_mail.php:119
+#: plugins/mantisbt/controler/filter.php:138
 #: plugins/mantisbt/view/addIssue.php:74
 #: plugins/mantisbt/view/editIssue.php:127
 #: plugins/mantisbt/view/viewIssue.php:84 www/my/dashboard.php:73
@@ -5348,7 +5352,8 @@ msgstr "Asignado a"
 #: common/tracker/actions/mod-limited.php:86 common/tracker/actions/mod.php:88
 #: common/tracker/views/form-customizelist.php:42
 #: cronjobs/send_pending_items_mail.php:79
-#: cronjobs/send_pending_items_mail.php:120 www/admin/approve-pending.php:213
+#: cronjobs/send_pending_items_mail.php:120
+#: plugins/mantisbt/controler/filter.php:122 www/admin/approve-pending.php:213
 #: www/admin/pending-news.php:139 www/my/dashboard.php:75
 #: www/news/admin/index.php:125 www/pm/detail_task.php:42
 #: www/pm/mod_task.php:52
@@ -5514,6 +5519,7 @@ msgstr ""
 
 #: common/tracker/actions/detail.php:147
 #: common/tracker/actions/mod-limited.php:188
+#: plugins/mantisbt/view/viewAttachment.php:44
 msgid "Attached Files"
 msgstr "Adjuntar Ficheros"
 
@@ -11044,18 +11050,6 @@ msgstr "Error tecnico mientras se obtenian los datos:"
 msgid "With Status:"
 msgstr "Con estado:"
 
-#: plugins/mantisbt/controler/filter.php:91
-msgid "Include child projects:"
-msgstr "Incluir proyectos hijos:"
-
-#: plugins/mantisbt/controler/filter.php:122
-msgid "Submitted by:"
-msgstr "Enviado por:"
-
-#: plugins/mantisbt/controler/filter.php:138
-msgid "Assigned to:"
-msgstr "Asignado a:"
-
 #: plugins/mantisbt/controler/filter.php:199
 #: plugins/mantisbt/controler/filter_roadmap.php:128
 msgid "Clear filter"
@@ -11340,10 +11334,6 @@ msgstr ""
 #: plugins/mantisbt/view/roadmap.php:179
 msgid "No versions to display"
 msgstr "No hay versiones para mostrar"
-
-#: plugins/mantisbt/view/viewAttachment.php:44
-msgid "Attached files"
-msgstr "Ficheros adjuntos"
 
 #: plugins/mantisbt/view/viewAttachment.php:65
 msgid "No attached files for this ticket"
@@ -23137,6 +23127,18 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Include child projects:"
+#~ msgstr "Incluir proyectos hijos:"
+
+#~ msgid "Submitted by:"
+#~ msgstr "Enviado por:"
+
+#~ msgid "Assigned to:"
+#~ msgstr "Asignado a:"
+
+#~ msgid "Attached files"
+#~ msgstr "Ficheros adjuntos"
 
 #, fuzzy
 #~ msgid "group_id in db result does not match Group Object."
