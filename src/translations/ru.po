@@ -15810,7 +15810,7 @@ msgid "Cannot add user to this type of role"
 msgstr "Текущая версия"
 
 #: www/admin/globalroleedit.php:117
-msgid "ERROR: You did not tick the “really remove” box!"
+msgid "Error: You did not tick the “really remove” box!"
 msgstr ""
 
 #: www/admin/globalroleedit.php:125

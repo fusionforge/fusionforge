@@ -114,7 +114,7 @@ if (getStringFromRequest('adduser')) {
 if (getStringFromRequest('dormusers')) {
 	$reallyremove = getStringFromRequest('reallyremove');
 	if (!$reallyremove) {
-		$error_msg .= _('ERROR: You did not tick the “really remove” box!');
+		$error_msg .= _('Error: You did not tick the “really remove” box!');
 	} elseif ($role instanceof RoleExplicit) {
 		$rmlist = getArrayFromRequest('rmusers');
 		foreach ($rmlist as $user_id) {

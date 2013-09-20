@@ -15205,7 +15205,7 @@ msgid "Cannot add user to this type of role"
 msgstr "Impossible d'ajouter un utilisateur à un rôle de ce type."
 
 #: www/admin/globalroleedit.php:117
-msgid "ERROR: You did not tick the “really remove” box!"
+msgid "Error: You did not tick the “really remove” box!"
 msgstr "Erreur : vous n'avez pas coché la case « réellement supprimer »."
 
 #: www/admin/globalroleedit.php:125
