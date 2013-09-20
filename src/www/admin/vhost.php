@@ -73,7 +73,7 @@ if (getStringFromRequest('add')) {
 			if (!$res || db_affected_rows($res) < 1) {
 				$error_msg .= _('Error adding VHOST: ') .db_error();
 			} else {
-				$feedback .= _('Virtual Host: ').$vhost_name._(' scheduled for creation on group ').$group->getUnixName();
+				$feedback .= _('Virtual Host').' '.$vhost_name._(' scheduled for creation on group ').$group->getUnixName();
 			}
 		} else {
 			$error_msg .= _('Vhost not valid');
@@ -98,17 +98,14 @@ if (getStringFromRequest('tweakcommit')) {
 			$cgidir,
 			$vhostid)) ;
 
-
 	if (!$res || db_affected_rows($res) < 1) {
 		$error_msg .= _('Error updating VHOST entry: ') .db_error();
 	} else {
 		$feedback .= _('Virtual Host entry updated.');
 	}
-
 }
 
-
-site_admin_header(array('title'=>_('Site admin')));
+site_admin_header(array('title'=>_('Site Admin')));
 ?>
 
 <h3><?php echo _('Virtual Host Administration'); ?></h3>
@@ -142,7 +139,7 @@ site_admin_header(array('title'=>_('Site admin')));
 <form name="tweak" method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>">
 <table>
 <tr>
-   <td><?php echo _('Virtual Host:'); ?></td><td><input type="text" name="vhost_name" /></td>
+   <td><?php echo _('Virtual Host')._(':'); ?></td><td><input type="text" name="vhost_name" /></td>
    <td><input type="submit" value="<?php echo _('Get Info'); ?>" /></td>
 </tr>
 </table>
