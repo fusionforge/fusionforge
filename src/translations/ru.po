@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:52+0200\n"
+"POT-Creation-Date: 2013-09-20 16:42+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15566,12 +15566,12 @@ msgstr "Ошибка создания группы"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:149
 #, fuzzy, php-format
-msgid "Approving Project: %1$s"
+msgid "Approving Project: %s"
 msgstr "Утверждаемая группа: %1$s"
 
 #: www/admin/approve-pending.php:57
 #, fuzzy, php-format
-msgid "Error when approving Project: %1$s"
+msgid "Error when approving Project: %s"
 msgstr "Утверждаемая группа: %1$s"
 
 #: www/admin/approve-pending.php:88
@@ -21696,15 +21696,14 @@ msgid "Project full name"
 msgstr "Название проекта"
 
 #: www/register/index.php:185
-#, fuzzy
 msgid ""
-"You should start with specifying the name of your project. The \"Full Name\" "
+"You should start with specifying the name of your project. The “Full Name” "
 "is descriptive, and has no arbitrary restrictions (except a 40 character "
 "limit)."
 msgstr ""
-"<h3>1. Полное имя проекта</h3>Вы должны начать с выбора имени Вашему "
-"проекту. Название проекта должно состоять не более чем из 30 букв, "
-"выражающее смысл проекта (желательно краткое).<p/>Имя Проекта:<br/>"
+"Вы должны начать с выбора имени Вашему проекту. Название проекта должно "
+"состоять не более чем из 40 букв, выражающее смысл проекта (желательно "
+"краткое)."
 
 #: www/register/index.php:195
 #, fuzzy
@@ -23894,6 +23893,16 @@ msgstr "Имя участника обязательно"
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
 
+#, fuzzy
+#~ msgid ""
+#~ "You should start with specifying the name of your project. The \"Full Name"
+#~ "\" is descriptive, and has no arbitrary restrictions (except a 40 "
+#~ "character limit)."
+#~ msgstr ""
+#~ "<h3>1. Полное имя проекта</h3>Вы должны начать с выбора имени Вашему "
+#~ "проекту. Название проекта должно состоять не более чем из 30 букв, "
+#~ "выражающее смысл проекта (желательно краткое).<p/>Имя Проекта:<br/>"
+
 #~ msgid "ERROR: User not removed: %s"
 #~ msgstr "Ошибка при удалении пользователя: %s"
 
@@ -25356,15 +25365,6 @@ msgstr "Персональная страница для %s"
 #~ msgstr ""
 #~ "Здесь Вы можете указать какие языки программирования Вы знаете, и на "
 #~ "каком уровне Вы ими владеете."
-
-#~ msgid ""
-#~ "You should start with specifying the name of your project. The “Full "
-#~ "Name” is descriptive, and has no arbitrary restrictions (except a 40 "
-#~ "character limit)."
-#~ msgstr ""
-#~ "Вы должны начать с выбора имени Вашему проекту. Название проекта должно "
-#~ "состоять не более чем из 40 букв, выражающее смысл проекта (желательно "
-#~ "краткое)."
 
 #~ msgid "Error: Site has SCM but no plugins registered"
 #~ msgstr "Ошибка! SCM плагин незарегистрирован"

@@ -52,9 +52,9 @@ function activate_group($group_id) {
 	}
 
 	if ($group->approve(session_get_user())) {
-		$feedback .= sprintf(_('Approving Project: %1$s'), $group->getUnixName()).'<br />';
+		$feedback .= sprintf(_('Approving Project: %s'), $group->getUnixName()).'<br />';
 	} else {
-		$error_msg .= sprintf(_('Error when approving Project: %1$s'), $group->getUnixName()).'<br />';
+		$error_msg .= sprintf(_('Error when approving Project: %s'), $group->getUnixName()).'<br />';
 		$error_msg .= $group->getErrorMessage();
 		return false;
 	}

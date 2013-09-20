@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:52+0200\n"
+"POT-Creation-Date: 2013-09-20 16:42+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -15459,12 +15459,12 @@ msgstr "Produciuse un erro ao crear o grupo"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:149
 #, fuzzy, php-format
-msgid "Approving Project: %1$s"
+msgid "Approving Project: %s"
 msgstr "Estase a aprobar o grupo: %1$s"
 
 #: www/admin/approve-pending.php:57
 #, fuzzy, php-format
-msgid "Error when approving Project: %1$s"
+msgid "Error when approving Project: %s"
 msgstr "Estase a aprobar o grupo: %1$s"
 
 #: www/admin/approve-pending.php:88
@@ -21565,15 +21565,14 @@ msgid "Project full name"
 msgstr "Nome do proxecto"
 
 #: www/register/index.php:185
-#, fuzzy
 msgid ""
-"You should start with specifying the name of your project. The \"Full Name\" "
+"You should start with specifying the name of your project. The “Full Name” "
 "is descriptive, and has no arbitrary restrictions (except a 40 character "
 "limit)."
 msgstr ""
-"<h3>1. Nome completo do proxecto</h3>Debería comezar especificando o nome do "
-"proxecto. O \"nome completo\" é descritivo, e non ten ningunha restrición "
-"arbitraria (exceptuando un límite de 40 caracteres).<p/>Nome completo:<br/>"
+"Debería comezar especificando o nome do proxecto. O “nome completo” é "
+"descritivo, e non ten ningunha restrición arbitraria (exceptuando un límite "
+"de 40 caracteres)."
 
 #: www/register/index.php:195
 #, fuzzy
@@ -23756,6 +23755,17 @@ msgstr "Non se introduciu un nome de usuario"
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
 
+#, fuzzy
+#~ msgid ""
+#~ "You should start with specifying the name of your project. The \"Full Name"
+#~ "\" is descriptive, and has no arbitrary restrictions (except a 40 "
+#~ "character limit)."
+#~ msgstr ""
+#~ "<h3>1. Nome completo do proxecto</h3>Debería comezar especificando o nome "
+#~ "do proxecto. O \"nome completo\" é descritivo, e non ten ningunha "
+#~ "restrición arbitraria (exceptuando un límite de 40 caracteres).<p/>Nome "
+#~ "completo:<br/>"
+
 #~ msgid "ERROR: User not removed: %s"
 #~ msgstr "ERRO: non se eliminou o usuario: %s"
 
@@ -25439,15 +25449,6 @@ msgstr "Páxina persoal de %s"
 #~ msgstr ""
 #~ "A seguinte opción determina se os demais poden ver as súas habilidades. "
 #~ "Aínda que non poidan, poderá introducilas igualmente."
-
-#~ msgid ""
-#~ "You should start with specifying the name of your project. The “Full "
-#~ "Name” is descriptive, and has no arbitrary restrictions (except a 40 "
-#~ "character limit)."
-#~ msgstr ""
-#~ "Debería comezar especificando o nome do proxecto. O “nome completo” é "
-#~ "descritivo, e non ten ningunha restrición arbitraria (exceptuando un "
-#~ "límite de 40 caracteres)."
 
 #~ msgid "Error: Site has SCM but no plugins registered"
 #~ msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:52+0200\n"
+"POT-Creation-Date: 2013-09-20 16:42+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14913,12 +14913,12 @@ msgstr "Грешка при създаването на %1$s"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:149
 #, fuzzy, php-format
-msgid "Approving Project: %1$s"
+msgid "Approving Project: %s"
 msgstr "Общо за целия проект"
 
 #: www/admin/approve-pending.php:57
 #, fuzzy, php-format
-msgid "Error when approving Project: %1$s"
+msgid "Error when approving Project: %s"
 msgstr "Грешка при създаването на %1$s"
 
 #: www/admin/approve-pending.php:88
@@ -20762,7 +20762,7 @@ msgstr "Проекти на потребителя"
 
 #: www/register/index.php:185
 msgid ""
-"You should start with specifying the name of your project. The \"Full Name\" "
+"You should start with specifying the name of your project. The “Full Name” "
 "is descriptive, and has no arbitrary restrictions (except a 40 character "
 "limit)."
 msgstr ""

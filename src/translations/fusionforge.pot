@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:59+0200\n"
+"POT-Creation-Date: 2013-09-20 16:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13965,12 +13965,12 @@ msgstr ""
 
 #: www/admin/approve-pending.php:55 www/register/index.php:149
 #, php-format
-msgid "Approving Project: %1$s"
+msgid "Approving Project: %s"
 msgstr ""
 
 #: www/admin/approve-pending.php:57
 #, php-format
-msgid "Error when approving Project: %1$s"
+msgid "Error when approving Project: %s"
 msgstr ""
 
 #: www/admin/approve-pending.php:88
@@ -19511,7 +19511,7 @@ msgstr ""
 
 #: www/register/index.php:185
 msgid ""
-"You should start with specifying the name of your project. The \"Full Name\" "
+"You should start with specifying the name of your project. The “Full Name” "
 "is descriptive, and has no arbitrary restrictions (except a 40 character "
 "limit)."
 msgstr ""

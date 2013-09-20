@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:59+0200\n"
+"POT-Creation-Date: 2013-09-20 16:42+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -14969,14 +14969,14 @@ msgid "Error creating group"
 msgstr "Erreur lors de la création d'un objet groupe"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:149
-#, php-format
-msgid "Approving Project: %1$s"
+#, fuzzy, php-format
+msgid "Approving Project: %s"
 msgstr "Projet approuvé : %1$s"
 
 #: www/admin/approve-pending.php:57
 #, php-format
-msgid "Error when approving Project: %1$s"
-msgstr "Erreur pendant l'approbation d'un projet : %1$s"
+msgid "Error when approving Project: %s"
+msgstr "Erreur pendant l'approbation d'un projet : %s"
 
 #: www/admin/approve-pending.php:88
 msgid "Error during group rejection: "
@@ -20963,15 +20963,14 @@ msgid "Project full name"
 msgstr "Nom complet du projet"
 
 #: www/register/index.php:185
-#, fuzzy
 msgid ""
-"You should start with specifying the name of your project. The \"Full Name\" "
+"You should start with specifying the name of your project. The “Full Name” "
 "is descriptive, and has no arbitrary restrictions (except a 40 character "
 "limit)."
 msgstr ""
-"<p>Vous devez commencer par donner un nom à votre projet.  Ce nom complet "
-"doit être descriptif, et n'a pas de restrictions arbitraires à l'exception "
-"d'une limitation de taille (à 40 caractères).</p><p>Nom complet :</p>"
+"Vous devez commencer par donner un nom à votre projet. Ce nom complet doit "
+"être descriptif, et n'a pas de restrictions arbitraires à l'exception d'une "
+"limitation de taille (à 40 caractères)."
 
 #: www/register/index.php:195
 msgid "Project Purpose And Summarization"
@@ -23160,6 +23159,20 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Error when approving Project: %1$s"
+#~ msgstr "Erreur pendant l'approbation d'un projet : %1$s"
+
+#, fuzzy
+#~ msgid ""
+#~ "You should start with specifying the name of your project. The \"Full Name"
+#~ "\" is descriptive, and has no arbitrary restrictions (except a 40 "
+#~ "character limit)."
+#~ msgstr ""
+#~ "<p>Vous devez commencer par donner un nom à votre projet.  Ce nom complet "
+#~ "doit être descriptif, et n'a pas de restrictions arbitraires à "
+#~ "l'exception d'une limitation de taille (à 40 caractères).</p><p>Nom "
+#~ "complet :</p>"
 
 #~ msgid "ERROR: User not removed: %s"
 #~ msgstr "Erreur : utilisateur non supprimé : %s"
@@ -25687,9 +25700,6 @@ msgstr "Page personnelle de %s"
 #~ msgid "Approving Project"
 #~ msgstr "Approbation du projet"
 
-#~ msgid "Error when approving Project: %s"
-#~ msgstr "Erreur pendant l'approbation d'un projet : %s"
-
 #~ msgid "Edit Project Details"
 #~ msgstr "Modifier les informations du projet"
 
@@ -26333,15 +26343,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Project Statistics for %s"
 #~ msgstr "Statistiques du projet %s"
-
-#~ msgid ""
-#~ "You should start with specifying the name of your project. The “Full "
-#~ "Name” is descriptive, and has no arbitrary restrictions (except a 40 "
-#~ "character limit)."
-#~ msgstr ""
-#~ "Vous devez commencer par donner un nom à votre projet. Ce nom complet "
-#~ "doit être descriptif, et n'a pas de restrictions arbitraires à "
-#~ "l'exception d'une limitation de taille (à 40 caractères)."
 
 #~ msgid ""
 #~ "If you make your project private, it won't be visible in the project list "

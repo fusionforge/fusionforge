@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:52+0200\n"
+"POT-Creation-Date: 2013-09-20 16:42+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14098,14 +14098,14 @@ msgid "Error creating group"
 msgstr "Erro criando grupo"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:149
-#, php-format
-msgid "Approving Project: %1$s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Approving Project: %s"
+msgstr "Aprovando Grupo"
 
 #: www/admin/approve-pending.php:57
-#, php-format
-msgid "Error when approving Project: %1$s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Error when approving Project: %s"
+msgstr "Aprovando Grupo"
 
 #: www/admin/approve-pending.php:88
 msgid "Error during group rejection: "
@@ -19793,7 +19793,7 @@ msgstr ""
 
 #: www/register/index.php:185
 msgid ""
-"You should start with specifying the name of your project. The \"Full Name\" "
+"You should start with specifying the name of your project. The “Full Name” "
 "is descriptive, and has no arbitrary restrictions (except a 40 character "
 "limit)."
 msgstr ""
@@ -22278,9 +22278,6 @@ msgstr "Minha Página Pessoal"
 #~ "Será enviado a você um e-mail de confirmação para verificar seu endereço "
 #~ "de e-mail. Ao visitar o link enviado para você nesse e-mail você irá "
 #~ "ativar a sua conta."
-
-#~ msgid "Approving Project"
-#~ msgstr "Aprovando Grupo"
 
 #~ msgid "Other Information"
 #~ msgstr "Outras Informações"

@@ -122,7 +122,7 @@ if (getStringFromRequest('submit')) {
 		0,
 		$send_mail,
 		$built_from_template
-		);
+	);
 	if ($res && forge_get_config('use_scm') && $plugin) {
 		$group->setUseSCM (true) ;
 		$res = $group->setPluginUse ($scm, true);
@@ -146,7 +146,7 @@ if (getStringFromRequest('submit')) {
 		} elseif ($group->isError()) {
 			echo '<p class="error">' . $group->getErrorMessage() . '</p>';
 		} else {
-			printf(_('Approving Project: %1$s'), $group->getUnixName()).'<br />';
+			printf(_('Approving Project: %s'), $group->getUnixName()).'<br />';
 
 			if (forge_get_config('project_auto_approval')) {
 				$u = user_get_object_by_name(forge_get_config('project_auto_approval_user'));
@@ -182,7 +182,7 @@ site_user_header(array('title'=>_('Register Project')));
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <h2><?php echo $index++.'. '._('Project full name') ?></h2>
 <p>
-<?php echo _('You should start with specifying the name of your project. The "Full Name" is descriptive, and has no arbitrary restrictions (except a 40 character limit).') ?>
+<?php echo _('You should start with specifying the name of your project. The “Full Name” is descriptive, and has no arbitrary restrictions (except a 40 character limit).') ?>
 </p>
 <p>
 <?php echo _('Full Name') . _(': ') ?><br/>
