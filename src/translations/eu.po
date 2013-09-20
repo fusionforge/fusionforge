@@ -5967,12 +5967,12 @@ msgstr "Iruzkina gehiturik"
 
 #: common/tracker/actions/tracker.php:340
 #, php-format
-msgid "ERROR: Skipping attachment %d: file is too large."
+msgid "Error: Skipping attachment %d: file is too large."
 msgstr ""
 
 #: common/tracker/actions/tracker.php:344
 #, php-format
-msgid "ERROR: Skipping attachment %d: transfer interrupted."
+msgid "Error: Skipping attachment %d: transfer interrupted."
 msgstr ""
 
 #: common/tracker/actions/tracker.php:368

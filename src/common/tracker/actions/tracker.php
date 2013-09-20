@@ -337,11 +337,11 @@ switch (getStringFromRequest('func')) {
 						if ($error === 1 || $error === 2) {
 							// UPLOAD_ERR_INI_SIZE or UPLOAD_ERR_FORM_SIZE
 							$ext_feedback .= "<br />" .
-								sprintf(_("ERROR: Skipping attachment %d: file is too large."), $n);
+								sprintf(_("Error: Skipping attachment %d: file is too large."), $n);
 						} elseif ($error === 3) {
 							// UPLOAD_ERR_PARTIAL
 							$ext_feedback .= "<br />" .
-								sprintf(_("ERROR: Skipping attachment %d: transfer interrupted."), $n);
+								sprintf(_("Error: Skipping attachment %d: transfer interrupted."), $n);
 						}
 						continue;
 					}

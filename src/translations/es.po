@@ -5833,12 +5833,12 @@ msgstr "Comentarios agregados"
 
 #: common/tracker/actions/tracker.php:340
 #, php-format
-msgid "ERROR: Skipping attachment %d: file is too large."
+msgid "Error: Skipping attachment %d: file is too large."
 msgstr "ERROR: Desechando adjunto %d: fichero muy grande."
 
 #: common/tracker/actions/tracker.php:344
 #, php-format
-msgid "ERROR: Skipping attachment %d: transfer interrupted."
+msgid "Error: Skipping attachment %d: transfer interrupted."
 msgstr "ERROR: Desechando adjunto %d: transferencia interrumpida."
 
 #: common/tracker/actions/tracker.php:368

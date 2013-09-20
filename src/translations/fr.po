@@ -5786,12 +5786,12 @@ msgstr "Commentaire ajouté"
 
 #: common/tracker/actions/tracker.php:340
 #, php-format
-msgid "ERROR: Skipping attachment %d: file is too large."
+msgid "Error: Skipping attachment %d: file is too large."
 msgstr "La pièce jointe %d a été ignorée car trop volumineuse."
 
 #: common/tracker/actions/tracker.php:344
 #, php-format
-msgid "ERROR: Skipping attachment %d: transfer interrupted."
+msgid "Error: Skipping attachment %d: transfer interrupted."
 msgstr "La pièce jointe %d a été ignorée (transfert interrompu)."
 
 #: common/tracker/actions/tracker.php:368

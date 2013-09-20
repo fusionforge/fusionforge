@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:31+0200\n"
+"POT-Creation-Date: 2013-09-20 10:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5479,12 +5479,12 @@ msgstr ""
 
 #: common/tracker/actions/tracker.php:340
 #, php-format
-msgid "ERROR: Skipping attachment %d: file is too large."
+msgid "Error: Skipping attachment %d: file is too large."
 msgstr ""
 
 #: common/tracker/actions/tracker.php:344
 #, php-format
-msgid "ERROR: Skipping attachment %d: transfer interrupted."
+msgid "Error: Skipping attachment %d: transfer interrupted."
 msgstr ""
 
 #: common/tracker/actions/tracker.php:368
