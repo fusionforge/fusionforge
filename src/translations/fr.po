@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:02+0200\n"
+"POT-Creation-Date: 2013-09-20 10:31+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -5109,7 +5109,7 @@ msgid "Renderer Updated"
 msgstr "Moteur de rendu mis à jour"
 
 #: common/tracker/actions/admin-updates.php:539
-msgid "ERROR: Initial values not saved, no initial state given."
+msgid "Error: Initial values not saved, no initial state given."
 msgstr ""
 "Erreur : valeurs initiales non sauvegardées et pas d'état initial spécifié."
 
@@ -23163,6 +23163,11 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
+#~ msgid "ERROR: Initial values not saved, no initial state given."
+#~ msgstr ""
+#~ "Erreur : valeurs initiales non sauvegardées et pas d'état initial "
+#~ "spécifié."
+
 #, fuzzy
 #~ msgid "Registation Complete"
 #~ msgstr "Enregistrement complet"
@@ -24948,11 +24953,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "“%s” formula is no longer valid"
 #~ msgstr "La formule « %s » n'est plus valide"
-
-#~ msgid "Error: Initial values not saved, no initial state given."
-#~ msgstr ""
-#~ "Erreur : valeurs initiales non sauvegardées et pas d'état initial "
-#~ "spécifié."
 
 #~ msgid ""
 #~ "Viewing only opened records by default, use “%1$s” or “%2$s” to change."

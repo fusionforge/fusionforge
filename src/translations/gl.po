@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:02+0200\n"
+"POT-Creation-Date: 2013-09-20 10:31+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -5316,7 +5316,7 @@ msgid "Renderer Updated"
 msgstr "Subiuse o renderizador"
 
 #: common/tracker/actions/admin-updates.php:539
-msgid "ERROR: Initial values not saved, no initial state given."
+msgid "Error: Initial values not saved, no initial state given."
 msgstr ""
 "Produciuse un erro: non se gardaron os valores iniciais, non se proporcionou "
 "un estado inicial."
@@ -23756,6 +23756,11 @@ msgstr "Non se introduciu un nome de usuario"
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
 
+#~ msgid "ERROR: Initial values not saved, no initial state given."
+#~ msgstr ""
+#~ "Produciuse un erro: non se gardaron os valores iniciais, non se "
+#~ "proporcionou un estado inicial."
+
 #, fuzzy
 #~ msgid "Registation Complete"
 #~ msgstr "Completouse o rexistro"
@@ -25064,11 +25069,6 @@ msgstr "Páxina persoal de %s"
 
 #~ msgid "Tech & Admin"
 #~ msgstr "Téc. e admin. "
-
-#~ msgid "Error: Initial values not saved, no initial state given."
-#~ msgstr ""
-#~ "Produciuse un erro: non se gardaron os valores iniciais, non se "
-#~ "proporcionou un estado inicial."
 
 #~ msgid "* Denotes requests > %s Days Old"
 #~ msgstr "* Indica que se rexistrou hai máis de %s días"

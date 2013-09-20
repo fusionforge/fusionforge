@@ -536,7 +536,7 @@ if (getStringFromRequest('add_extrafield')) {
 	$atw = new ArtifactWorkflow($ath, $field_id);
 
 	if (!isset($wk[100])) {
-		$error_msg .= _('ERROR: Initial values not saved, no initial state given.').'<br />';
+		$error_msg .= _('Error: Initial values not saved, no initial state given.').'<br />';
 	} else {
 		// Save values for the submit form (from=100).
 		$atw->saveNextNodes('100', array_keys($wk[100]));

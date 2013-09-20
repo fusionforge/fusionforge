@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:02+0200\n"
+"POT-Creation-Date: 2013-09-20 10:31+0200\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -5003,7 +5003,7 @@ msgid "Renderer Updated"
 msgstr ""
 
 #: common/tracker/actions/admin-updates.php:539
-msgid "ERROR: Initial values not saved, no initial state given."
+msgid "Error: Initial values not saved, no initial state given."
 msgstr ""
 
 #: common/tracker/actions/admin-updates.php:543

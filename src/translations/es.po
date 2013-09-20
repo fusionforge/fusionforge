@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:02+0200\n"
+"POT-Creation-Date: 2013-09-20 10:31+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -5157,7 +5157,8 @@ msgid "Renderer Updated"
 msgstr "Actualización de "
 
 #: common/tracker/actions/admin-updates.php:539
-msgid "ERROR: Initial values not saved, no initial state given."
+#, fuzzy
+msgid "Error: Initial values not saved, no initial state given."
 msgstr "ERROR: Valores iniciales no grabados, no proporcionado estado inicial."
 
 #: common/tracker/actions/admin-updates.php:543
