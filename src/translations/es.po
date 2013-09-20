@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:42+0200\n"
+"POT-Creation-Date: 2013-09-20 16:46+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -2151,7 +2151,6 @@ msgid "%s does not use the Forum tool."
 msgstr ""
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
-#, fuzzy
 msgid "Forum name must be at least 3 characters."
 msgstr "El nombre del foro tiene que tener al menos 3 carácteres."
 
@@ -2188,19 +2187,16 @@ msgid "Welcome to %s"
 msgstr "Bienvenido a %s"
 
 #: common/forum/Forum.class.php:266
-#, fuzzy
 msgid "Invalid forum group identifier."
-msgstr "Identificador de grupo de foro inválido"
+msgstr "Identificador de grupo de foro inválido."
 
 #: common/forum/Forum.class.php:440 common/forum/Forum.class.php:475
-#, fuzzy
 msgid "You can only monitor if you are logged in."
 msgstr "Sólo puede monitorizar si está autenticado."
 
 #: common/forum/Forum.class.php:508
-#, fuzzy
 msgid "You can only save your place if you are logged in."
-msgstr "Sólo puede monitorizar si está autenticado."
+msgstr "Sólo puede guardar su lugar si ha iniciado su sesión."
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
@@ -2460,7 +2456,6 @@ msgid "Error: a forum message must include a message body and a subject."
 msgstr "Se deben añadir Contenido y Asunto al Mensaje."
 
 #: common/forum/ForumMessage.class.php:374
-#, fuzzy
 msgid "Invalid ParentMessage Object"
 msgstr "Objeto ParentMessage no válido"
 
@@ -3314,7 +3309,7 @@ msgid "Submitter: %1$s (%2$s)\n"
 msgstr "Enviado por %1$s (%2$s)\n"
 
 #: common/include/Group.class.php:2701
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "\n"
 "Please visit the following URL to approve or reject this project:\n"
@@ -14950,9 +14945,9 @@ msgid "Error creating group"
 msgstr "Error creando proyecto"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:149
-#, fuzzy, php-format
+#, php-format
 msgid "Approving Project: %s"
-msgstr "Aprobando Proyecto: %1$s"
+msgstr "Aprobando Proyecto: %s"
 
 #: www/admin/approve-pending.php:57
 #, fuzzy, php-format
@@ -23081,6 +23076,26 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
 
+#~ msgid "Illegal characters in Forum name"
+#~ msgstr "El nombre del foro contiene carácteres ilegales."
+
+#~ msgid ""
+#~ "No Hudson jobs associated with this project. To add a job, select the "
+#~ "link just below."
+#~ msgstr ""
+#~ "No hay trabajos Hudson asociados a este proyecto. Para agregar un "
+#~ "trabajo, selecciona el enlace siguiente."
+
+#~ msgid ""
+#~ "You cannot submit news for a project unless you are an admin on that "
+#~ "project"
+#~ msgstr ""
+#~ "No se puede enviar noticias de un proyecto a no ser que sea uno de los "
+#~ "administradores del proyecto"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "Error: son necesarios tanto el asunto como el cuerpo"
+
 #~ msgid "ERROR: User not removed: %s"
 #~ msgstr "ERROR: Usuario no eliminado: %s"
 
@@ -23201,10 +23216,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Error On Update:"
 #~ msgstr "Error en la actualización:"
-
-#, fuzzy
-#~ msgid "Illegal characters in Forum name"
-#~ msgstr "El nombre del foro contiene carácteres ilegales."
 
 #, fuzzy
 #~ msgid "Forum Description Must Be At Least 10 Characters."
@@ -26666,3 +26677,169 @@ msgstr "Página personal de %s"
 
 #~ msgid "\"%s\" roadmap already exists"
 #~ msgstr "\"%s\" roadmap ya existe"
+
+#~ msgid "<b>Edit OAuth Provider</b>"
+#~ msgstr "<b>Editar Proveedor OAuth</b>"
+
+#~ msgid "Tracker Items Opened"
+#~ msgstr "Elementos Tracker Abiertos"
+
+#~ msgid "Tracker Items Closed"
+#~ msgstr "Elementos Tracker Cerrados"
+
+#~ msgid "Task Open"
+#~ msgstr "Abrir Tarea"
+
+#~ msgid "Task Close"
+#~ msgstr "Cierre de tarea"
+
+#~ msgid "Site Member Since:"
+#~ msgstr "Miembro del Sitio desde:"
+
+#~ msgid "Mailing List Exists with same name"
+#~ msgstr "Existe una lista de correo con el mismo nombre"
+
+#~ msgid "Can't link to home project"
+#~ msgstr "No puedo enlazar con página proyecto"
+
+#~ msgid "Can't unlink from home project"
+#~ msgstr "No puedo desenlazar desde página proyecto"
+
+#~ msgid ""
+#~ "Thank you for registering on the %3$s web site. You have\n"
+#~ "account with username %1$s created for you. In order\n"
+#~ "to complete your registration, visit the following url:\n"
+#~ "\n"
+#~ "<%2$s>\n"
+#~ "\n"
+#~ "You have 1 week to confirm your account. After this time, your account "
+#~ "will be deleted.\n"
+#~ "\n"
+#~ "(If you don't see any URL above, it is likely due to a bug in your mail "
+#~ "client.\n"
+#~ "Use one below, but make sure it is entered as the single line.)\n"
+#~ "\n"
+#~ "%2$s\n"
+#~ "\n"
+#~ "Enjoy the site.\n"
+#~ "\n"
+#~ "-- the %3$s staff\n"
+#~ msgstr ""
+#~ "Gracias por registrarse en el sitio Web de %3$s. Tiene\n"
+#~ "una cuenta con nombre %1$s creada para usted. Para completar\n"
+#~ "su registro, visite la siguiente dirección: \n"
+#~ "\n"
+#~ "<%2$s>\n"
+#~ "\n"
+#~ "Dispone de 1 semana para confirmar su cuenta. Después de ese periodo su "
+#~ "cuenta será borrada.\n"
+#~ "\n"
+#~ "(Si no se ve ninguna dirección URL arriba, se debe a un error en su "
+#~ "cliente de correo.\n"
+#~ "Use la dirección de abajo, pero asegúrese que lo escriba todo en una "
+#~ "misma línea.)\n"
+#~ "\n"
+#~ "%2$s\n"
+#~ "\n"
+#~ "Disfrute de este sitio.\n"
+#~ "\n"
+#~ "-- El equipo de %3$s\n"
+
+#~ msgid "ERROR: Initial values not saved, no initial state given."
+#~ msgstr ""
+#~ "ERROR: Valores iniciales no grabados, no proporcionado estado inicial."
+
+#~ msgid "ERROR: Skipping attachment %d: file is too large."
+#~ msgstr "ERROR: Desechando adjunto %d: fichero muy grande."
+
+#~ msgid "ERROR: Skipping attachment %d: transfer interrupted."
+#~ msgstr "ERROR: Desechando adjunto %d: transferencia interrumpida."
+
+#~ msgid "ERROR: Missing URL for the new identity"
+#~ msgstr "ERROR: Nombre o URL no encontrado para la nueva pestaña"
+
+#~ msgid "ERROR: Malformed URL (only http, https and ftp allowed)"
+#~ msgstr "ERROR: URL mal formada (solo http, https y ftp son permitidos)"
+
+#~ msgid "ERROR: identity already used by a forge user."
+#~ msgstr "ERROR: identidad ya registrada en la forja."
+
+#~ msgid "Manage OpenID identities for user %1$s"
+#~ msgstr "Gestione pestañas OpenID para el usuario: %1$s"
+
+#~ msgid "Trigger a build after commits:"
+#~ msgstr "Lanzar una compilación tras una subida al repositorio:"
+
+#~ msgid "Error when approving Project: %1$s"
+#~ msgstr "Error al aprobar Proyecto: %1$s"
+
+#~ msgid "ERROR: You did not tick the “really remove” box!"
+#~ msgstr "ERROR: No ha marcado la casilla \"borrar realmente\"!"
+
+#~ msgid "Trackers dashboard"
+#~ msgstr "Panel de peticiones"
+
+#~ msgid "Can't find theme directory!"
+#~ msgstr "No puedo encontrar el directorio del tema!"
+
+#~ msgid ""
+#~ "It will take <span class=\"important\">6-24 Hours</span> for your list to "
+#~ "be created."
+#~ msgstr ""
+#~ "Llevará <span·class=\"important\">6-24·Horas</span> la creación de la "
+#~ "lista."
+
+#~ msgid ""
+#~ "<p>Your project has been automatically approved.  You should receive an "
+#~ "email containing further information shortly.</p><p>Thank you for "
+#~ "choosing %1$s</p>"
+#~ msgstr ""
+#~ "Su proyecto ha sido enviado a los administradores de %1$s . Transcurridas "
+#~ "72 horas, recibira una notificación sobre la decisión e instrucciones.</"
+#~ "p><p>Gracias por elegir %1$s"
+
+#~ msgid ""
+#~ "You should start with specifying the name of your project. The \"Full Name"
+#~ "\" is descriptive, and has no arbitrary restrictions (except a 40 "
+#~ "character limit)."
+#~ msgstr ""
+#~ "Deberia comenzar con asignarle un nombre al proyecto. El \"Nombre Completo"
+#~ "\" es descriptivo, y no tiene restricciones iniciales (excepto el limite "
+#~ "de 40 caracteres)."
+
+#~ msgid ""
+#~ "Choose a Project/Subproject in the Task Manager. You will then have to "
+#~ "choose a Task and category to record your time in."
+#~ msgstr ""
+#~ "Elegir un Proyecto/Subproyecto en el gestor de tareas. Luego tendrá que "
+#~ "elegir una tarea o categoría para grabar sus horas ahí."
+
+#~ msgid ""
+#~ "You can create categories for how time might be spent when completing a "
+#~ "particular task. Examples of categories include \"Meeting\", \"Coding\", "
+#~ "\"Testing\"."
+#~ msgstr ""
+#~ "Puede crear categorias para el tiempo consumido cuando completando una "
+#~ "tarea en particular. Ejemplos : \"Reuniones\", \"Escribiendo codigo\", "
+#~ "\"Pruebas\"."
+
+#~ msgid ""
+#~ "The \"Snippet Version ID\" is the unique ID number that is shown next to "
+#~ "a specific version of a snippet on the browse pages."
+#~ msgstr ""
+#~ "La \"Version Recorte ID\" es el identificador único ID que se muestra "
+#~ "junto a la versión específica de un recorte de código en las páginas "
+#~ "mostradas."
+
+#~ msgid ""
+#~ "<strong>Then</strong> use the \"Add Snippets to Package\" link to add "
+#~ "files to your package."
+#~ msgstr ""
+#~ "<strong>Luego</strong> use el enlace \"Agregar recortes al Paquete\" para "
+#~ "agregar ficheros a su paquete."
+
+#~ msgid "Error inserting into skill inventory"
+#~ msgstr "ERROR insertando en el inventario de habilidades"
+
+#~ msgid "Configure workflow"
+#~ msgstr "Configurar flujo de trabajo"

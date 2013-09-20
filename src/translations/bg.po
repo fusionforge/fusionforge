@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:42+0200\n"
+"POT-Creation-Date: 2013-09-20 16:46+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2211,9 +2211,8 @@ msgid "%s does not use the Forum tool."
 msgstr ""
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
-#, fuzzy
 msgid "Forum name must be at least 3 characters."
-msgstr "Името на форума трябва да бъде поне 3 символа"
+msgstr "Името на форума трябва да бъде поне 3 символа."
 
 #: common/forum/Forum.class.php:176 common/forum/Forum.class.php:558
 #, fuzzy
@@ -22868,6 +22867,14 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Лична Информация"
+
+#~ msgid ""
+#~ "You cannot submit news for a project unless you are an admin on that "
+#~ "project"
+#~ msgstr "Само администраторите на проект могат да създават новини за него"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "Грешка - и двете полета <i>тема</i> и <i>тяло</i> са задължителни"
 
 #, fuzzy
 #~ msgid "Error: "

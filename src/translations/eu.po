@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:42+0200\n"
+"POT-Creation-Date: 2013-09-20 16:46+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2222,7 +2222,6 @@ msgid "%s does not use the Forum tool."
 msgstr ""
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
-#, fuzzy
 msgid "Forum name must be at least 3 characters."
 msgstr "Foroaren izenak gutxienez 3 karaktere izan behar ditu."
 
@@ -2258,19 +2257,16 @@ msgid "Welcome to %s"
 msgstr "Ongietorri %1$s -era"
 
 #: common/forum/Forum.class.php:266
-#, fuzzy
 msgid "Invalid forum group identifier."
-msgstr "Foro talde identifikatzaile baliogabea"
+msgstr "Foro talde identifikatzaile baliogabea."
 
 #: common/forum/Forum.class.php:440 common/forum/Forum.class.php:475
-#, fuzzy
 msgid "You can only monitor if you are logged in."
 msgstr "Monitorizatzeko saio hasia izan behar duzu."
 
 #: common/forum/Forum.class.php:508
-#, fuzzy
 msgid "You can only save your place if you are logged in."
-msgstr "Monitorizatzeko saio hasia izan behar duzu."
+msgstr "Zure gunea mantentzeko izenpetua egon behar duzu."
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
@@ -2531,7 +2527,6 @@ msgid "Error: a forum message must include a message body and a subject."
 msgstr "Edukia eta gaia gehitu behar zaizkio mezuari."
 
 #: common/forum/ForumMessage.class.php:374
-#, fuzzy
 msgid "Invalid ParentMessage Object"
 msgstr "ParentMessage objektua baliogabea"
 
@@ -15222,9 +15217,9 @@ msgid "Error creating group"
 msgstr "Akatsa taldea sortzen"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:149
-#, fuzzy, php-format
+#, php-format
 msgid "Approving Project: %s"
-msgstr "Taldea onartu:"
+msgstr "Taldea onartu: %s"
 
 #: www/admin/approve-pending.php:57
 #, fuzzy, php-format
@@ -23413,6 +23408,17 @@ msgstr "Ez da erabiltzaile-izenik eman"
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
 
+#~ msgid "Illegal characters in Forum name"
+#~ msgstr "Karaktere baliogabeak foro izenean"
+
+#~ msgid ""
+#~ "You cannot submit news for a project unless you are an admin on that "
+#~ "project"
+#~ msgstr "Proiektu baten berriak ezin dira bidali administraria ez bazara"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "Akatsa - bai gaia eta bai berriaren gorputza beharrezkoak dira"
+
 #~ msgid "ERROR: User not removed: %s"
 #~ msgstr "ERROREA: Erabiltzailea ez da ezabatu: %s"
 
@@ -23532,10 +23538,6 @@ msgstr "Nere orri pertsonala"
 
 #~ msgid "Error On Update:"
 #~ msgstr "Akatsa eguneratzean"
-
-#, fuzzy
-#~ msgid "Illegal characters in Forum name"
-#~ msgstr "Karaktere baliogabeak foro izenean"
 
 #, fuzzy
 #~ msgid "Forum Description Must Be At Least 10 Characters."
@@ -26044,3 +26046,12 @@ msgstr "Nere orri pertsonala"
 
 #~ msgid "Error - disabled feature."
 #~ msgstr "Akatsa - baliabide desgaitua."
+
+#~ msgid "Mailing List Exists with same name"
+#~ msgstr "Badago izen horretako posta-zerrenda bat"
+
+#~ msgid "Error inserting into skill inventory"
+#~ msgstr "Akatsa trebezien inbentariora sartzean"
+
+#~ msgid "Followup"
+#~ msgstr "Azalpenak"

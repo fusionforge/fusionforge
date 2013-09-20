@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:42+0200\n"
+"POT-Creation-Date: 2013-09-20 16:46+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1837,9 +1837,8 @@ msgid "Your search did not match any documents."
 msgstr "Votre recherche n'a renvoyé aucun document."
 
 #: common/docman/views/search.php:154
-#, fuzzy
 msgid "Browse document manager for this project."
-msgstr "Vous n'êtes pas membre de ce projet."
+msgstr "Naviguer dans les documents de ce projet."
 
 #: common/docman/views/search.php:162
 msgid "Your search is empty."
@@ -2117,7 +2116,6 @@ msgid "%s does not use the Forum tool."
 msgstr ""
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
-#, fuzzy
 msgid "Forum name must be at least 3 characters."
 msgstr "Le nom d'un forum doit compter au moins 3 caractères."
 
@@ -2128,14 +2126,12 @@ msgstr "La description d'un forum doit compter au moins 10 caractères."
 
 #: common/forum/Forum.class.php:181 common/forum/Forum.class.php:183
 #: common/forum/Forum.class.php:563 common/forum/Forum.class.php:565
-#, fuzzy
 msgid "Illegal characters in Forum name."
-msgstr "Caractères interdits dans le nom du forum"
+msgstr "Caractères interdits dans le nom du forum."
 
 #: common/forum/Forum.class.php:181 common/forum/Forum.class.php:563
-#, fuzzy
 msgid "No space allowed."
-msgstr "Interdit"
+msgstr "Espace interdit."
 
 #: common/forum/Forum.class.php:203 common/forum/Forum.class.php:590
 #, fuzzy
@@ -2204,9 +2200,8 @@ msgid "Forum not found"
 msgstr "Forum non trouvé"
 
 #: common/forum/ForumFactory.class.php:193
-#, fuzzy
 msgid "Thread not found"
-msgstr "Discussion non déplacée"
+msgstr "Fil de discussion non trouvé"
 
 #: common/forum/ForumHTML.class.php:58
 msgid "Forum: "
@@ -2496,9 +2491,8 @@ msgid "Message not found"
 msgstr "Message non trouvé"
 
 #: common/forum/ForumMessageFactory.class.php:58
-#, fuzzy
 msgid "Invalid group_form_id"
-msgstr "Opération non valide"
+msgstr "group_form_id invalide"
 
 #: common/frs/FRSFile.class.php:82 common/frs/FRSFile.class.php:400
 #, fuzzy
@@ -2535,9 +2529,8 @@ msgid "Error Adding Release: "
 msgstr "Erreur lors de l'ajout d'une base de données : "
 
 #: common/frs/FRSFile.class.php:234
-#, fuzzy
 msgid "Invalid file_id"
-msgstr "Nom de fichier invalide."
+msgstr "file_id invalide"
 
 #: common/frs/FRSFile.class.php:418 common/frs/FRSPackage.class.php:396
 #: common/frs/FRSRelease.class.php:438 common/include/Error.class.php:168
@@ -2550,9 +2543,8 @@ msgstr "Erreur lors de la mise à jour : %s"
 
 #: common/frs/FRSFileProcessorType.class.php:61
 #: common/frs/FRSFileType.class.php:68
-#, fuzzy
 msgid "Invalid type_id"
-msgstr "Type invalide"
+msgstr "type_id invalide"
 
 #: common/frs/FRSPackage.class.php:139 common/frs/FRSPackage.class.php:371
 #: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:399
@@ -2564,19 +2556,16 @@ msgid "Package Name can only be alphanumeric"
 msgstr "Le nom du paquet doit être alphanumérique"
 
 #: common/frs/FRSPackage.class.php:154
-#, fuzzy
 msgid "Error Adding Package: Name Already Exists"
-msgstr "Impossible d'ajouter la version : ce nom existe déjà"
+msgstr "Impossible d'ajouter le paquet : ce nom existe déjà"
 
 #: common/frs/FRSPackage.class.php:165
-#, fuzzy
 msgid "Error Adding Package: "
-msgstr "Erreur lors de l'ajout d'une base de données : "
+msgstr "Erreur lors de l'ajout du paquet : "
 
 #: common/frs/FRSPackage.class.php:205
-#, fuzzy
 msgid "Invalid package_id"
-msgstr "Clé invalide"
+msgstr "package_id invalide"
 
 #: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
 #: common/tracker/ArtifactType.class.php:526
@@ -2584,9 +2573,8 @@ msgid "You can only monitor if you are logged in"
 msgstr "Vous ne pouvez pas établir de surveillance sans être identifié"
 
 #: common/frs/FRSPackage.class.php:291
-#, fuzzy
 msgid "Unable to add monitor: "
-msgstr "Impossible d'ajouter la surveillance"
+msgstr "Impossible d'ajouter la surveillance : "
 
 #: common/frs/FRSPackage.class.php:323
 #, fuzzy
@@ -2641,9 +2629,8 @@ msgid "Error Adding Release: Name Already Exists"
 msgstr "Impossible d'ajouter la version : ce nom existe déjà"
 
 #: common/frs/FRSRelease.class.php:187
-#, fuzzy
 msgid "Invalid release_id"
-msgstr "Nom de fichier invalide."
+msgstr "release_id invalide"
 
 #: common/frs/FRSRelease.class.php:286
 #, php-format
@@ -2687,9 +2674,8 @@ msgid "Release delete error: trying to delete root dir"
 msgstr ""
 
 #: common/frs/FRSRelease.class.php:419
-#, fuzzy
 msgid "Error On Update: Name Already Exists"
-msgstr "Impossible d'ajouter la version : ce nom existe déjà"
+msgstr "Erreur lors de la mise à jour : ce nom existe déjà"
 
 #: common/frs/FRSRelease.class.php:445
 #, fuzzy
@@ -3401,9 +3387,8 @@ msgid "Must be sure before deleting"
 msgstr ""
 
 #: common/include/GroupJoinRequest.class.php:298
-#, fuzzy
 msgid "Could Not Delete: "
-msgstr "Erreur lors de la suppression du forum de nouvelles %d"
+msgstr "Erreur lors de la suppression : "
 
 #: common/include/group_section_texts.php:29
 #: common/include/Navigation.class.php:425
@@ -4114,9 +4099,8 @@ msgid "Passwords do not match"
 msgstr "Les mots de passe ne concordent pas"
 
 #: common/include/User.class.php:330
-#, fuzzy
 msgid "Invalid Password"
-msgstr "Mot de passe non valide :"
+msgstr "Mot de passe non valide"
 
 #: common/include/User.class.php:335
 #, fuzzy
@@ -4136,9 +4120,8 @@ msgid "Insert Failed: "
 msgstr "L'insertion a échoué : "
 
 #: common/include/User.class.php:441
-#, fuzzy
 msgid "Could Not Get User Id: "
-msgstr "Erreur lors de la récupération de l'objet User."
+msgstr "Utilisateur introuvable : "
 
 #: common/include/User.class.php:475
 #, fuzzy, php-format
@@ -4411,9 +4394,8 @@ msgid "Subproject Description Must Be At Least 10 Characters"
 msgstr "La description du sous-projet doit avoir au moins 10 caractères"
 
 #: common/pm/ProjectGroup.class.php:195
-#, fuzzy
 msgid "Invalid group_project_id"
-msgstr "Opération non valide"
+msgstr "group_project_id invalide"
 
 #: common/pm/ProjectGroupFactory.class.php:62
 #, php-format
@@ -4566,32 +4548,28 @@ msgid "Other"
 msgstr "Autre"
 
 #: common/reporting/report_utils.php:247 common/reporting/report_utils.php:370
-#, fuzzy
 msgid "No selected area."
-msgstr "date sélectionnée"
+msgstr "Pas de type sélectionné."
 
 #: common/reporting/report_utils.php:260
 msgid "Avg Time Open (in days)"
-msgstr ""
+msgstr "Temps moyen ouvert (en jours)"
 
 #: common/reporting/report_utils.php:262
-#, fuzzy
 msgid "Total Opened"
-msgstr "Date de dépot"
+msgstr "Total ouverts"
 
 #: common/reporting/report_utils.php:264
 msgid "Total Still Open"
-msgstr ""
+msgstr "Total encore ouverts"
 
 #: common/reporting/report_utils.php:310
-#, fuzzy
 msgid "Tracker Activity"
-msgstr "Statistiques sur le temps consommé par les utilisateurs"
+msgstr "Activité du traceur"
 
 #: common/reporting/report_utils.php:381
-#, fuzzy
 msgid "Per assignee"
-msgstr "responsable"
+msgstr "Par responsable"
 
 #: common/reporting/report_utils.php:428 www/reporting/index.php:40
 #: www/reporting/usercum.php:59
@@ -4617,9 +4595,8 @@ msgstr "Projets cumulés"
 #: common/reporting/report_utils.php:978
 #: common/reporting/report_utils.php:1042
 #: common/reporting/report_utils.php:1145
-#, fuzzy
 msgid "No data to display."
-msgstr "Aucune question trouvée"
+msgstr "Pas de données à afficher."
 
 #: common/reporting/report_utils.php:600 plugins/authopenid/www/index.php:38
 #: plugins/authwebid/www/index.php:35 www/account/change_email-complete.php:52
@@ -4633,29 +4610,24 @@ msgid "Could Not Get User"
 msgstr "Erreur lors de la récupération de l'objet User."
 
 #: common/reporting/report_utils.php:691
-#, fuzzy
 msgid "Task open"
 msgstr "Tâche ouverte"
 
 #: common/reporting/report_utils.php:692
-#, fuzzy
 msgid "Task close"
 msgstr "Tâche fermée"
 
 #: common/reporting/report_utils.php:699
-#, fuzzy
 msgid "Tracker items opened"
-msgstr "Eléments ouverts"
+msgstr "Éléments de traceur ouverts"
 
 #: common/reporting/report_utils.php:700
-#, fuzzy
 msgid "Tracker items closed"
-msgstr "Eléments fermés"
+msgstr "Éléments de traceur fermés"
 
 #: common/reporting/report_utils.php:937
-#, fuzzy
 msgid "Support Requests"
-msgstr "Demandes de fonctionnalités"
+msgstr "Demandes de support"
 
 #: common/reporting/report_utils.php:1004 www/reporting/projecttime.php:64
 #: www/reporting/sitetime.php:64 www/reporting/usertime.php:79
@@ -4678,14 +4650,12 @@ msgid "By User"
 msgstr "Par utilisateur"
 
 #: common/reporting/report_utils.php:1065
-#, fuzzy
 msgid "Hours Recorded"
-msgstr "Heures travaillées"
+msgstr "Heures consommées"
 
 #: common/reporting/report_utils.php:1069
-#, fuzzy
 msgid " Hours"
-msgstr "Heures"
+msgstr " Heures"
 
 #: common/reporting/TimeEntry.class.php:94 www/reporting/timeadd.php:93
 #: www/reporting/timecategory.php:42
@@ -8021,9 +7991,8 @@ msgid ""
 msgstr ""
 
 #: plugins/admssw/www/index.php:43
-#, fuzzy
 msgid "Public projects :"
-msgstr "Sous-projets"
+msgstr "Projets publics :"
 
 #: plugins/admssw/www/index.php:46
 #, fuzzy
@@ -8031,9 +8000,8 @@ msgid "short index"
 msgstr "Nom court"
 
 #: plugins/admssw/www/index.php:47
-#, fuzzy
 msgid "or "
-msgstr "ou"
+msgstr "ou "
 
 #: plugins/admssw/www/index.php:47
 msgid "full dump"
@@ -10558,9 +10526,8 @@ msgid "Missing params"
 msgstr "Il manque des paramètres"
 
 #: plugins/mailman/include/MailmanList.class.php:451
-#, fuzzy
 msgid "Could Not Delete List: "
-msgstr "Erreur lors de la suppression du forum de nouvelles %d"
+msgstr "Erreur lors de la suppression de la liste : "
 
 #: plugins/mailman/include/mailmanPlugin.class.php:137
 #, fuzzy
@@ -14969,9 +14936,9 @@ msgid "Error creating group"
 msgstr "Erreur lors de la création d'un objet groupe"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:149
-#, fuzzy, php-format
+#, php-format
 msgid "Approving Project: %s"
-msgstr "Projet approuvé : %1$s"
+msgstr "Approbation du projet : %s"
 
 #: www/admin/approve-pending.php:57
 #, php-format
@@ -20900,9 +20867,8 @@ msgstr "Outil"
 
 #: www/project/stats/index.php:121 www/tracker/reporting/index.php:147
 #: www/tracker/reporting/index.php:151
-#, fuzzy
 msgid "Error during graphic computation."
-msgstr "Erreur lors du refus d'un projet : "
+msgstr "Erreur lors du calcul du graphique."
 
 #: www/register/index.php:50
 #, php-format
@@ -21421,9 +21387,8 @@ msgid "Commits By User"
 msgstr "Envois par utilisateur"
 
 #: www/scm/include/scm_utils.php:244
-#, fuzzy
 msgid "No commits during this period."
-msgstr "Pas d'utilisateur dans ce projet"
+msgstr "Pas d'envois pendant cette période."
 
 #: www/scm/include/viewvc_utils.php:98
 msgid ""
@@ -21448,23 +21413,20 @@ msgid "SCM Repository Reporting"
 msgstr "Statistiques sur le dépôt de sources"
 
 #: www/scm/reporting/index.php:37
-#, fuzzy
 msgid "Commits Over Time"
-msgstr "Envois par utilisateur"
+msgstr "Tous les envois"
 
 #: www/scm/reporting/index.php:42
-#, fuzzy
 msgid "Commits Last 30 Days"
-msgstr "Accès commit"
+msgstr "Envois du mois écoulé"
 
 #: www/scm/reporting/index.php:47
-#, fuzzy
 msgid "Commits Last 90 Days"
-msgstr "Accès commit"
+msgstr "Envois du trimestre écoulé"
 
 #: www/scm/reporting/index.php:52
 msgid "Commits Last 365 Days"
-msgstr ""
+msgstr "Envois de l'année écoulée"
 
 #: www/scm/viewvc.php:95
 #, php-format
@@ -23018,9 +22980,8 @@ msgid "By Assignee"
 msgstr "Responsable"
 
 #: www/tracker/reporting/index.php:118
-#, fuzzy
 msgid "Tracker Activity Reporting"
-msgstr "Statistiques sur le temps consommé par les utilisateurs"
+msgstr "Rapport d'activité des outils de suivi"
 
 #: www/tracker/roadmap.php:190 www/tracker/roadmap.php:230
 msgid "No roadmap available"
@@ -23160,6 +23121,37 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
+#~ msgid "Illegal characters in Forum name"
+#~ msgstr "Caractères interdits dans le nom du forum"
+
+#~ msgid "Not allowed"
+#~ msgstr "Interdit"
+
+#~ msgid "assignee"
+#~ msgstr "responsable"
+
+#~ msgid "or"
+#~ msgstr "ou"
+
+#~ msgid ""
+#~ "No Hudson jobs associated with this project. To add a job, select the "
+#~ "link just below."
+#~ msgstr ""
+#~ "Ce projet n'a pas encore de tâches Hudson associées.  Pour en ajouter, "
+#~ "utilisez le lien ci-dessous."
+
+#~ msgid ""
+#~ "You cannot submit news for a project unless you are an admin on that "
+#~ "project"
+#~ msgstr ""
+#~ "Vous ne pouvez soumettre une annonce sans être administrateur de ce projet"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "Erreur: le sujet et le corps sont obligatoires"
+
+#~ msgid "No commits available."
+#~ msgstr "Pas d'envois disponibles."
+
 #~ msgid "Error when approving Project: %1$s"
 #~ msgstr "Erreur pendant l'approbation d'un projet : %1$s"
 
@@ -23204,9 +23196,8 @@ msgstr "Page personnelle de %s"
 #~ msgid "error"
 #~ msgstr "Erreur"
 
-#, fuzzy
 #~ msgid "Error: "
-#~ msgstr "Erreur :"
+#~ msgstr "Erreur : "
 
 #~ msgid "ERROR: "
 #~ msgstr "Erreur : "
@@ -23291,16 +23282,11 @@ msgstr "Page personnelle de %s"
 #~ msgid "Error Creating mailing list: "
 #~ msgstr "Erreur lors de la crétaion d'une liste de diffusion :"
 
-#, fuzzy
 #~ msgid "Error On Update: "
-#~ msgstr "Erreur lors de la mise à jour :"
+#~ msgstr "Erreur lors de la mise à jour : "
 
 #~ msgid "Error On Update:"
 #~ msgstr "Erreur lors de la mise à jour :"
-
-#, fuzzy
-#~ msgid "Illegal characters in Forum name"
-#~ msgstr "Caractères interdits dans le nom du forum"
 
 #~ msgid "Forum Description Must Be At Least 10 Characters."
 #~ msgstr "La description d'un forum doit compter au moins 10 caractères."
@@ -23725,9 +23711,8 @@ msgstr "Page personnelle de %s"
 #~ msgid "You Can Only Save Your Place If You Are Logged In"
 #~ msgstr "Vous ne pouvez pas sauvegarder cette position sans être identifié"
 
-#, fuzzy
 #~ msgid "No data to display"
-#~ msgstr "Aucune question trouvée"
+#~ msgstr "Cliquez pour afficher"
 
 #~ msgid "Validated users <a href=\"%s\"><b>pending email activation</b></a>"
 #~ msgstr ""
@@ -31128,3 +31113,61 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Error - disabled feature."
 #~ msgstr "Erreur - fonctionnalité désactivée."
+
+#~ msgid "Tracker Items Opened"
+#~ msgstr "Éléments ouverts"
+
+#~ msgid "Tracker Items Closed"
+#~ msgstr "Éléments fermés"
+
+#~ msgid "Task Open"
+#~ msgstr "Tâche ouverte"
+
+#~ msgid "Task Close"
+#~ msgstr "Tâche fermée"
+
+#~ msgid "ERROR: Skipping attachment %d: file is too large."
+#~ msgstr "La pièce jointe %d a été ignorée car trop volumineuse."
+
+#~ msgid "ERROR: Skipping attachment %d: transfer interrupted."
+#~ msgstr "La pièce jointe %d a été ignorée (transfert interrompu)."
+
+#~ msgid "ERROR: Missing URL for the new identity"
+#~ msgstr "Erreur : il manque l'URL de la nouvelle identité."
+
+#~ msgid "ERROR: Malformed URL (only http, https and ftp allowed)"
+#~ msgstr ""
+#~ "Erreur : mauvaise adresse (seules les adresses en http://, https:// et "
+#~ "ftp:// sont autorisées)."
+
+#~ msgid "ERROR: identity already used by a forge user."
+#~ msgstr ""
+#~ "Erreur : cette identité est déjà enregistrée par un autre utilisateur de "
+#~ "la forge."
+
+#~ msgid "Cannot Process your request : No TYPE specified"
+#~ msgstr "Erreur de traitement de votre requête : pas de type spécifié."
+
+#~ msgid "Cannot Process your request : No ID specified"
+#~ msgstr "Erreur de traitement de votre requête : pas d'identifiant spécifié."
+
+#~ msgid "ERROR: You did not tick the “really remove” box!"
+#~ msgstr "Erreur : vous n'avez pas coché la case « réellement supprimer »."
+
+#~ msgid "Can't find theme directory!"
+#~ msgstr "Répertoire du thème introuvable !"
+
+#~ msgid ""
+#~ "<p>Your project has been automatically approved.  You should receive an "
+#~ "email containing further information shortly.</p><p>Thank you for "
+#~ "choosing %1$s</p>"
+#~ msgstr ""
+#~ "<p>Votre projet a automatiquement approuvé.  Vous devriez recevoir "
+#~ "prochainement un e-mail contenant des informations supplémentaires.</"
+#~ "p><p>Merci d'avoir choisi %1$s.</p>"
+
+#~ msgid "Forums: No Valid Group Object"
+#~ msgstr "Forums : pas d'objet groupe valide"
+
+#~ msgid "Mailing List Exists with same name"
+#~ msgstr "Il existe déjà une liste de diffusion portant ce nom."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:42+0200\n"
+"POT-Creation-Date: 2013-09-20 16:46+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -2235,9 +2235,8 @@ msgid "%s does not use the Forum tool."
 msgstr ""
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
-#, fuzzy
 msgid "Forum name must be at least 3 characters."
-msgstr "Der Forenname muss mindestens 3 Buchstaben lang sein"
+msgstr "Der Forenname muss mindestens 3 Buchstaben lang sein."
 
 #: common/forum/Forum.class.php:176 common/forum/Forum.class.php:558
 #, fuzzy
@@ -2272,19 +2271,16 @@ msgid "Welcome to %s"
 msgstr "Willkommen auf %s"
 
 #: common/forum/Forum.class.php:266
-#, fuzzy
 msgid "Invalid forum group identifier."
-msgstr "Ungültige Forengruppen Kennung"
+msgstr "Ungültige Forengruppen Kennung."
 
 #: common/forum/Forum.class.php:440 common/forum/Forum.class.php:475
-#, fuzzy
 msgid "You can only monitor if you are logged in."
 msgstr "Sie können nur Foren beobachten/überwachen, wenn Sie angemeldet sind."
 
 #: common/forum/Forum.class.php:508
-#, fuzzy
 msgid "You can only save your place if you are logged in."
-msgstr "Sie können nur Foren beobachten/überwachen, wenn Sie angemeldet sind."
+msgstr "Sie können nur speichern, wenn Sie auch angemeldet sind."
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
@@ -2552,7 +2548,6 @@ msgstr ""
 "Die Nachricht muss einen Hauptteil (Body) und einen Betreff beinhalten."
 
 #: common/forum/ForumMessage.class.php:374
-#, fuzzy
 msgid "Invalid ParentMessage Object"
 msgstr "Forennachricht:\"create()\" kein gültiges Vorgänger-Nachrichten-Objekt"
 
@@ -15449,9 +15444,9 @@ msgid "Error creating group"
 msgstr "Fehler beim Erstellen einer Gruppe"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:149
-#, fuzzy, php-format
+#, php-format
 msgid "Approving Project: %s"
-msgstr "Genehmige Gruppe: %1$s"
+msgstr "Genehmige Gruppe: %s"
 
 #: www/admin/approve-pending.php:57
 #, php-format
@@ -23825,6 +23820,19 @@ msgstr "Kein Benutzername angegeben"
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
 
+#~ msgid "Illegal characters in Forum name"
+#~ msgstr "Illegale Zeichen im Forenname"
+
+#~ msgid ""
+#~ "You cannot submit news for a project unless you are an admin on that "
+#~ "project"
+#~ msgstr ""
+#~ "Sie können keine Neuigkeiten für ein Projekt posten, wenn Sie nicht Admin "
+#~ "dieses Projektes sind."
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "Fehler - Betreff und Hauptteil (Body) werden benötigt."
+
 #, fuzzy
 #~ msgid "Error when approving Project: %1$s"
 #~ msgstr "Fehler beim Genehmigen von Gruppe: %1$s"
@@ -23957,10 +23965,6 @@ msgstr "Persönliche Seite für %s"
 
 #~ msgid "Error On Update:"
 #~ msgstr "Fehler bei der Aktualisierung:"
-
-#, fuzzy
-#~ msgid "Illegal characters in Forum name"
-#~ msgstr "Illegale Zeichen im Forenname"
 
 #, fuzzy
 #~ msgid "Forum Description Must Be At Least 10 Characters."
@@ -28730,3 +28734,35 @@ msgstr "Persönliche Seite für %s"
 
 #~ msgid "Error - disabled feature."
 #~ msgstr "Fehler - abgeschaltetes Feature."
+
+#~ msgid "Tracker Items Opened"
+#~ msgstr "Tracker Inhalte geöffnet"
+
+#~ msgid "Tracker Items Closed"
+#~ msgstr "Tracker Inhalte geschlossen"
+
+#~ msgid "Configure workflow"
+#~ msgstr "Workflow konfigurieren"
+
+#~ msgid ""
+#~ "Choose a Project/Subproject in the Task Manager. You will then have to "
+#~ "choose a Task and category to record your time in."
+#~ msgstr ""
+#~ "Wählen Sie ein Projekt/Unterprojekt im Auftrags-Manager. Sie müssen dann "
+#~ "einen Auftrag und Kategorie wählen, in der Sie Ihre Zeit erfassen."
+
+#~ msgid "Error inserting into skill inventory"
+#~ msgstr "FEHLER beim Einfügen in den Bestand der Qualifikationen"
+
+#~ msgid "Followup"
+#~ msgstr "Nachfolgender"
+
+#~ msgid ""
+#~ "In total there are %d user sessions online. : Unique %d Registered and %d "
+#~ "Guests"
+#~ msgstr ""
+#~ "Insgesamt sind %d Benutzersessions online. : %d verschiedene Registrierte "
+#~ "und %d Gäste"
+
+#~ msgid "Mailing List Exists with same name"
+#~ msgstr "Mailingliste mit gleichem Namen existiert bereits"

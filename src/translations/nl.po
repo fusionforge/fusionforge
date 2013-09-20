@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:42+0200\n"
+"POT-Creation-Date: 2013-09-20 16:46+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2226,9 +2226,8 @@ msgid "%s does not use the Forum tool."
 msgstr ""
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
-#, fuzzy
 msgid "Forum name must be at least 3 characters."
-msgstr "Forum naam moet minstens 3 tekens lang zijn"
+msgstr "Forum naam moet minstens 3 tekens lang zijn."
 
 #: common/forum/Forum.class.php:176 common/forum/Forum.class.php:558
 #, fuzzy
@@ -2272,9 +2271,8 @@ msgid "You can only monitor if you are logged in."
 msgstr "Je kunt alleen monitoren als je bent ingelogd"
 
 #: common/forum/Forum.class.php:508
-#, fuzzy
 msgid "You can only save your place if you are logged in."
-msgstr "Je kunt alleen monitoren als je bent ingelogd"
+msgstr "Je kunt je positie alleen opslaan als je bent ingelogd."
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
@@ -2536,7 +2534,6 @@ msgid "Error: a forum message must include a message body and a subject."
 msgstr "Berichttekst en -onderwerp verplicht."
 
 #: common/forum/ForumMessage.class.php:374
-#, fuzzy
 msgid "Invalid ParentMessage Object"
 msgstr "Geen geldig ParentMessage object"
 
@@ -15315,9 +15312,9 @@ msgid "Error creating group"
 msgstr "Fout bij aanmaken groep object"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:149
-#, fuzzy, php-format
+#, php-format
 msgid "Approving Project: %s"
-msgstr "Groep goedgekeurd:"
+msgstr "Groep goedgekeurd: %s"
 
 #: www/admin/approve-pending.php:57
 #, fuzzy, php-format
@@ -23578,6 +23575,19 @@ msgstr "Gebruikersnaam"
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
 
+#~ msgid "Illegal characters in Forum name"
+#~ msgstr "Niet-toegestane tekens in de forum naam"
+
+#~ msgid ""
+#~ "You cannot submit news for a project unless you are an admin on that "
+#~ "project"
+#~ msgstr ""
+#~ "Je kunt alleen nieuws aan een project toevoegen als je beheerder van dat "
+#~ "project bent"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "Fout - zowel titel als berichttekst zijn verplicht"
+
 #, fuzzy
 #~ msgid "Registation Complete"
 #~ msgstr "Registratie compleet"
@@ -23692,10 +23702,6 @@ msgstr "Mijn persoonlijke pagina"
 
 #~ msgid "Error On Update:"
 #~ msgstr "Fout bij bewerken:"
-
-#, fuzzy
-#~ msgid "Illegal characters in Forum name"
-#~ msgstr "Niet-toegestane tekens in de forum naam"
 
 #, fuzzy
 #~ msgid "Forum Description Must Be At Least 10 Characters."
@@ -26592,3 +26598,16 @@ msgstr "Mijn persoonlijke pagina"
 
 #~ msgid "Error - disabled feature."
 #~ msgstr "Fout - optie uitgezet."
+
+#~ msgid ""
+#~ "Choose a Project/Subproject in the Task Manager. You will then have to "
+#~ "choose a Task and category to record your time in."
+#~ msgstr ""
+#~ "Kies een Project/Subproject in de taakbeheerder. Daarna moet je een taak "
+#~ "en een categorie kiezen waarop je je tijd wilt boeken."
+
+#~ msgid "Error inserting into skill inventory"
+#~ msgstr "Fout bij toevoegen aan vaardigheden overzicht"
+
+#~ msgid "Followup"
+#~ msgstr "Reacties"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:42+0200\n"
+"POT-Creation-Date: 2013-09-20 16:46+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2228,7 +2228,6 @@ msgid "%s does not use the Forum tool."
 msgstr ""
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
-#, fuzzy
 msgid "Forum name must be at least 3 characters."
 msgstr "討論區名稱必須至少3個字元"
 
@@ -2274,9 +2273,8 @@ msgid "You can only monitor if you are logged in."
 msgstr "只有登入後才能監視"
 
 #: common/forum/Forum.class.php:508
-#, fuzzy
 msgid "You can only save your place if you are logged in."
-msgstr "只有登入後才能監視"
+msgstr "只有登入後才能保存位置"
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
@@ -2537,7 +2535,6 @@ msgid "Error: a forum message must include a message body and a subject."
 msgstr "必須包括文章標題和內容"
 
 #: common/forum/ForumMessage.class.php:374
-#, fuzzy
 msgid "Invalid ParentMessage Object"
 msgstr "無效的 ParentMessage 物件"
 
@@ -3393,7 +3390,7 @@ msgid ""
 msgstr " 請點擊這個網址來完成email信箱的改變："
 
 #: common/include/Group.class.php:2705 common/include/Group.class.php:2719
-#, fuzzy, php-format
+#, php-format
 msgid "New %1$s Project Submitted"
 msgstr "新專案 %1$s 完成註冊了"
 
@@ -15241,9 +15238,9 @@ msgid "Error creating group"
 msgstr "建立群組物件時發生錯誤"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:149
-#, fuzzy, php-format
+#, php-format
 msgid "Approving Project: %s"
-msgstr "審核中群組："
+msgstr "審核中群組: %s"
 
 #: www/admin/approve-pending.php:57
 #, fuzzy, php-format
@@ -23378,6 +23375,17 @@ msgstr "帳號"
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
 
+#~ msgid "Illegal characters in Forum name"
+#~ msgstr "討論區名稱包含不合法字元"
+
+#~ msgid ""
+#~ "You cannot submit news for a project unless you are an admin on that "
+#~ "project"
+#~ msgstr "除非您是專案管理員，否則不能發佈該專案的新聞"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "錯誤 - 標題和內容都是必須的"
+
 #, fuzzy
 #~ msgid "Registation Complete"
 #~ msgstr "註冊完成"
@@ -23483,10 +23491,6 @@ msgstr "我的個人首頁"
 
 #~ msgid "Error On Update:"
 #~ msgstr "更新時錯誤："
-
-#, fuzzy
-#~ msgid "Illegal characters in Forum name"
-#~ msgstr "討論區名稱包含不合法字元"
 
 #, fuzzy
 #~ msgid "Forum Description Must Be At Least 10 Characters."
@@ -26093,3 +26097,22 @@ msgstr "我的個人首頁"
 
 #~ msgid "Error - disabled feature."
 #~ msgstr "錯誤 - 停用的功能"
+
+#~ msgid "Tracker Items Opened"
+#~ msgstr "追蹤項目開啟"
+
+#~ msgid "Tracker Items Closed"
+#~ msgstr "追蹤項目關閉"
+
+#~ msgid ""
+#~ "Choose a Project/Subproject in the Task Manager. You will then have to "
+#~ "choose a Task and category to record your time in."
+#~ msgstr ""
+#~ "在任務管理中選擇一個專案/子專案，您然後將必須選擇一個任務和種類記錄你的時"
+#~ "間。"
+
+#~ msgid "Error inserting into skill inventory"
+#~ msgstr "錯誤 － 無法新增技能目錄"
+
+#~ msgid "Followup"
+#~ msgstr "回覆"

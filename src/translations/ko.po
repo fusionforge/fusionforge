@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:42+0200\n"
+"POT-Creation-Date: 2013-09-20 16:46+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2221,7 +2221,6 @@ msgid "%s does not use the Forum tool."
 msgstr ""
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
-#, fuzzy
 msgid "Forum name must be at least 3 characters."
 msgstr "게시판 이름은 3글자 이상이어야 합니다."
 
@@ -2267,9 +2266,8 @@ msgid "You can only monitor if you are logged in."
 msgstr "모니터링 기능을 사용하시려면 로그인하셔야 합니다."
 
 #: common/forum/Forum.class.php:508
-#, fuzzy
 msgid "You can only save your place if you are logged in."
-msgstr "모니터링 기능을 사용하시려면 로그인하셔야 합니다."
+msgstr "로그인하셔야만 현재 위치를 기록할 수 있습니다."
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
@@ -2520,7 +2518,7 @@ msgstr ""
 #: common/forum/ForumMessage.class.php:288
 #: common/forum/ForumMessage.class.php:300
 msgid "Could Not Update Parent"
-msgstr ""
+msgstr "Could Not Update Parent"
 
 #: common/forum/ForumMessage.class.php:277
 msgid "Couldn't Update Master Thread parent with current time"
@@ -23281,6 +23279,21 @@ msgstr "사용자ID"
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
 
+#~ msgid ""
+#~ "Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please "
+#~ "Login."
+#~ msgstr ""
+#~ "Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please "
+#~ "Login."
+
+#~ msgid ""
+#~ "You cannot submit news for a project unless you are an admin on that "
+#~ "project"
+#~ msgstr "프로젝트의 관리자가 아니라면 뉴스를 올릴 수 없습니다."
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "오류 - 제목과 본문이 모두 필요합니다."
+
 #, fuzzy
 #~ msgid "Registation Complete"
 #~ msgstr "등록 완료"
@@ -24911,3 +24924,360 @@ msgstr "개인 페이지"
 
 #~ msgid "Message Not Found"
 #~ msgstr "글이 없습니다."
+
+#~ msgid "New Additions, by Day"
+#~ msgstr "New Additions, by Day"
+
+#~ msgid "New Users (RED), New Projects (BLUE)"
+#~ msgstr "New Users (RED), New Projects (BLUE"
+
+#~ msgid "Users (RED) / Projects (BLUE)"
+#~ msgstr "Users (RED) / Projects (BLUE)"
+
+#~ msgid "Forge Page Views"
+#~ msgstr "Forge Page Views"
+
+#~ msgid "Total Page Views (RED) (%1$s days)"
+#~ msgstr "Total Page Views (RED) (%1$s days)"
+
+#~ msgid "Views (RED)"
+#~ msgstr "Views (RED)"
+
+#~ msgid "Survey Aggregate Results"
+#~ msgstr "Survey Aggregate Results"
+
+#~ msgid "Responses"
+#~ msgstr "Responses"
+
+#~ msgid "Average"
+#~ msgstr "Average"
+
+#~ msgid ""
+#~ "Download a raw-text version of this code by clicking on &quot;"
+#~ "<strong>Download Version</strong>&quot;"
+#~ msgstr ""
+#~ "Download a raw-text version of this code by clicking on &quot;"
+#~ "<strong>Download Version</strong>&quot;"
+
+#~ msgid "Error in insert"
+#~ msgstr "Error in insert"
+
+#~ msgid "Circular Dependency Detected'"
+#~ msgstr "Circular Dependency Detected'"
+
+#~ msgid "UPDATE FAILED"
+#~ msgstr "UPDATE FAILED"
+
+#~ msgid "ERROR"
+#~ msgstr "ERROR"
+
+#~ msgid "Existing Responses:"
+#~ msgstr "Existing Responses:"
+
+#~ msgid "Yes, I'm sure"
+#~ msgstr "Yes, I'm sure"
+
+#~ msgid "go"
+#~ msgstr "go"
+
+#~ msgid "If you're aren't sure then why did you click 'Delete'?"
+#~ msgstr "If you're aren't sure then why did you click 'Delete'?"
+
+#~ msgid "Real name"
+#~ msgstr "Real name"
+
+#~ msgid "New category short name (no spaces, unix-like)"
+#~ msgstr "New category short name (no spaces, unix-like)"
+
+#~ msgid "Parent Category:"
+#~ msgstr "Parent Category:"
+
+#~ msgid "User name:"
+#~ msgstr "User name:"
+
+#~ msgid "ERROR inserting into skill inventory"
+#~ msgstr "ERROR inserting into skill inventory"
+
+#~ msgid "User fetch FAILED"
+#~ msgstr "User fetch FAILED"
+
+#~ msgid "The %1$s Team"
+#~ msgstr "The %1$s Team"
+
+#~ msgid "The %1$s Crew"
+#~ msgstr "The %1$s Crew"
+
+#~ msgid "ERROR DOING SNIPPET VERSION INSERT!"
+#~ msgstr "ERROR DOING SNIPPET VERSION INSERT!"
+
+#~ msgid "SUBMIT"
+#~ msgstr "SUBMIT"
+
+#~ msgid "Changes:"
+#~ msgstr "Changes:"
+
+#~ msgid "Paste the Code Here:"
+#~ msgstr "Paste the Code Here:"
+
+#~ msgid "ERROR DOING SNIPPET PACKAGE INSERT!"
+#~ msgstr "ERROR DOING SNIPPET PACKAGE INSERT!"
+
+#~ msgid "ERROR DOING SNIPPET PACKAGE VERSION INSERT!"
+#~ msgstr "ERROR DOING SNIPPET PACKAGE VERSION INSERT!"
+
+#~ msgid "Snippet Pacakge Version Added Successfully."
+#~ msgstr "Snippet Pacakge Version Added Successfully."
+
+#~ msgid "UNIX Admin"
+#~ msgstr "UNIX Admin"
+
+#~ msgid "Snippets In This Package:"
+#~ msgstr "Snippets In This Package:"
+
+#~ msgid "ERROR DOING SNIPPET INSERT!"
+#~ msgstr "ERROR DOING SNIPPET INSERT!"
+
+#~ msgid "all"
+#~ msgstr "all"
+
+#~ msgid "get"
+#~ msgstr "get"
+
+#~ msgid "Last Logins"
+#~ msgstr "Last Logins"
+
+#~ msgid "Email:"
+#~ msgstr "Email:"
+
+#~ msgid "ArtifactCanned: name and assignee are Required"
+#~ msgstr "ArtifactCanned: name and assignee are Required"
+
+#~ msgid "Name Of Survey:"
+#~ msgstr "Name Of Survey:"
+
+#~ msgid "Approve/Reject"
+#~ msgstr "Approve/Reject"
+
+#~ msgid "User ID:"
+#~ msgstr "User ID:"
+
+#~ msgid "Sitewide Statistics Graphs"
+#~ msgstr "Sitewide Statistics Graphs"
+
+#~ msgid "Languages Distributions"
+#~ msgstr "Languages Distributions"
+
+#~ msgid "Project Statistical Comparisons"
+#~ msgstr "Project Statistical Comparisons"
+
+#~ msgid "Survey Inserted"
+#~ msgstr "Survey Inserted"
+
+#~ msgid "Edit A Question"
+#~ msgstr "Edit A Question"
+
+#~ msgid "UNKNOWN HELP REQUEST:"
+#~ msgstr "UNKNOWN HELP REQUEST:"
+
+#~ msgid "No such trove category"
+#~ msgstr "No such trove category"
+
+#~ msgid "Full Category Name"
+#~ msgstr "Full Category Name"
+
+#~ msgid "Short Name"
+#~ msgstr "Short Name"
+
+#~ msgid "You must be logged in first"
+#~ msgstr "You must be logged in first"
+
+#~ msgid "%1$s Site Statistics"
+#~ msgstr "%1$s Site Statistics"
+
+#~ msgid "%1$s I18n Statistics"
+#~ msgstr "%1$s I18n Statistics"
+
+#~ msgid "Add A Question"
+#~ msgstr "Add A Question"
+
+#~ msgid "Error inserting question"
+#~ msgstr "Error inserting question"
+
+#~ msgid "Question type"
+#~ msgstr "Question type"
+
+#~ msgid "Add This Question."
+#~ msgstr "Add This Question."
+
+#~ msgid "Show Existing Questions."
+#~ msgstr "Show Existing Questions."
+
+#~ msgid ""
+#~ "List question numbers, in desired order, separated by commas. "
+#~ "<strong>Refer to your list of questions</strong> so you can view the "
+#~ "question id's. Do <strong>not</strong> include spaces or end your list "
+#~ "with a comma. <br />Ex: 1,2,3,4,5,6,7"
+#~ msgstr ""
+#~ "List question numbers, in desired order, separated by commas. "
+#~ "<strong>Refer to your list of questions</strong> so you can view the "
+#~ "question id's. Do <strong>not</strong> include spaces or end your list "
+#~ "with a comma. <br />Ex: 1,2,3,4,5,6,7"
+
+#~ msgid "Show Existing Questions"
+#~ msgstr "Show Existing Questions"
+
+#~ msgid "Editing Question"
+#~ msgstr "Editing Question"
+
+#~ msgid ""
+#~ "If you change a question after responses have been posted, your results "
+#~ "pages may be misleading"
+#~ msgstr ""
+#~ "If you change a question after responses have been posted, your results "
+#~ "pages may be misleading"
+
+#~ msgid ""
+#~ "If you change a survey after you already have responses, your results "
+#~ "pages could be misleading or messed up"
+#~ msgstr ""
+#~ "If you change a survey after you already have responses, your results "
+#~ "pages could be misleading or messed up"
+
+#~ msgid "Name of Survey"
+#~ msgstr "Name of Survey"
+
+#~ msgid ""
+#~ "<p>The information collected in these surveys will never be sold to third "
+#~ "parties or used to solicit you to purchase any goods or services.</"
+#~ "p><p>This information is being gathered to build a profile of the "
+#~ "projects and developers being surveyed. That profile will help visitors "
+#~ "to the site understand the quality of a given project.</p><p>The ID's of "
+#~ "those who answer surveys are suppressed and not viewable by project "
+#~ "administrators or the public or third parties.</p><p>The information "
+#~ "gathered is used only in aggregate form, not to single out specific users "
+#~ "or developers.</p><p>If any changes are made to this policy, it will "
+#~ "affect only future data that is collected and the user will of course "
+#~ "have the ability to 'opt-out'."
+#~ msgstr ""
+#~ "<p>The information collected in these surveys will never be sold to third "
+#~ "parties or used to solicit you to purchase any goods or services.</"
+#~ "p><p>This information is being gathered to build a profile of the "
+#~ "projects and developers being surveyed. That profile will help visitors "
+#~ "to the site understand the quality of a given project.</p><p>The ID's of "
+#~ "those who answer surveys are suppressed and not viewable by project "
+#~ "administrators or the public or third parties.</p><p>The information "
+#~ "gathered is used only in aggregate form, not to single out specific users "
+#~ "or developers.</p><p>If any changes are made to this policy, it will "
+#~ "affect only future data that is collected and the user will of course "
+#~ "have the ability to 'opt-out'."
+
+#~ msgid "Unix Group Name:"
+#~ msgstr "Unix Group Name:"
+
+#~ msgid "Group Unix Name:"
+#~ msgstr "Group Unix Name:"
+
+#~ msgid "Group List"
+#~ msgstr "Group List"
+
+#~ msgid "Group List for Category:"
+#~ msgstr "Group List for Category:"
+
+#~ msgid "Recent logins"
+#~ msgstr "Recent logins"
+
+#~ msgid "Missing parameter, You are trying to send empty message"
+#~ msgstr "Missing parameter, You are trying to send empty message"
+
+#~ msgid "Missing parameter, You must give proper subject to the mailing"
+#~ msgstr "Missing parameter, You must give proper subject to the mailing"
+
+#~ msgid "New category full name (VARCHAR 80)"
+#~ msgstr "New category full name (VARCHAR 80)"
+
+#~ msgid "New category description (VARCHAR 255)"
+#~ msgstr "New category description (VARCHAR 255)"
+
+#~ msgid "Groups Membership"
+#~ msgstr "Groups Membership"
+
+#~ msgid "All Groups"
+#~ msgstr "All Groups"
+
+#~ msgid "The provided group name does not exist"
+#~ msgstr "The provided group name does not exist"
+
+#~ msgid "Group Unix Name"
+#~ msgstr "Group Unix Name"
+
+#~ msgid "Group Name"
+#~ msgstr "Group Name"
+
+#~ msgid "error - missing info"
+#~ msgstr "error - missing info"
+
+#~ msgid "Change Project/Task Manager Status"
+#~ msgstr "Change Project/Task Manager Status"
+
+#~ msgid "BY"
+#~ msgstr "BY"
+
+#~ msgid "Artifact: Only Artifact Admins Can Modify Private ArtifactTypes"
+#~ msgstr "Artifact: Only Artifact Admins Can Modify Private ArtifactTypes"
+
+#~ msgid "Can't delete, That trove cat has sub categories"
+#~ msgstr "Can't delete, That trove cat has sub categories"
+
+#~ msgid "Opn"
+#~ msgstr "Opn"
+
+#~ msgid "Cls"
+#~ msgstr "Cls"
+
+#~ msgid "CO's"
+#~ msgstr "CO's"
+
+#~ msgid "Comm's"
+#~ msgstr "Comm's"
+
+#~ msgid "Username"
+#~ msgstr "Username"
+
+#~ msgid "Missing File Argument"
+#~ msgstr "Missing File Argument"
+
+#~ msgid "Invalid File Argument"
+#~ msgstr "Invalid File Argument"
+
+#~ msgid "UPDATE SUCCESSFUL"
+#~ msgstr "UPDATE SUCCESSFUL"
+
+#~ msgid ""
+#~ "<p>It's simple to create a survey.<ol><li>Create questions and comments "
+#~ "using the forms above.</li><li>Create a survey, listing the questions in "
+#~ "order (choose from <strong>your</strong> list of questions).</li><li>Link "
+#~ "to the survey using this format: %1$s where XX is the survey number"
+#~ msgstr ""
+#~ "<p>It's simple to create a survey.<ol><li>Create questions and comments "
+#~ "using the forms above.</li><li>Create a survey, listing the questions in "
+#~ "order (choose from <strong>your</strong> list of questions).</li><li>Link "
+#~ "to the survey using this format: %1$s where XX is the survey number"
+
+#~ msgid "You must be logged in to vote"
+#~ msgstr "You must be logged in to vote"
+
+#~ msgid "Click to return to previous page"
+#~ msgstr "Click to return to previous page"
+
+#~ msgid "ERROR!!! MISSING PARAMS"
+#~ msgstr "ERROR!!! MISSING PARAMS"
+
+#~ msgid "Error - For some reason group_id and/or survey_id did not make it he"
+#~ msgstr ""
+#~ "Error - For some reason group_id and/or survey_id did not make it he"
+
+#~ msgid "Unfortunately, you have to be logged in to participate in surveys."
+#~ msgstr "Unfortunately, you have to be logged in to participate in surveys."
+
+#~ msgid "Update preferences"
+#~ msgstr "Update preferences"

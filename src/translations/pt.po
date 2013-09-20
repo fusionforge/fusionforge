@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:42+0200\n"
+"POT-Creation-Date: 2013-09-20 16:46+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2089,9 +2089,8 @@ msgid "%s does not use the Forum tool."
 msgstr ""
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
-#, fuzzy
 msgid "Forum name must be at least 3 characters."
-msgstr "O Nome do Fórum Precisa Ter Pelo Menos 3 Caracteres"
+msgstr "O Nome do Fórum Precisa Ter Pelo Menos 3 Caracteres."
 
 #: common/forum/Forum.class.php:176 common/forum/Forum.class.php:558
 #, fuzzy
@@ -2127,14 +2126,12 @@ msgid "Invalid forum group identifier."
 msgstr ""
 
 #: common/forum/Forum.class.php:440 common/forum/Forum.class.php:475
-#, fuzzy
 msgid "You can only monitor if you are logged in."
-msgstr "Você Só Pode Monitorar Se Você Estiver Logado"
+msgstr "Você Só Pode Monitorar Se Você Estiver Logado."
 
 #: common/forum/Forum.class.php:508
-#, fuzzy
 msgid "You can only save your place if you are logged in."
-msgstr "Você Só Pode Monitorar Se Você Estiver Logado"
+msgstr "Você Só Pode Salvar Seu Ambiente Se Estiver Logado."
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
@@ -2389,7 +2386,6 @@ msgid "Error: a forum message must include a message body and a subject."
 msgstr "Precisa Incluir Um Corpo de Mensagem e um Assunto."
 
 #: common/forum/ForumMessage.class.php:374
-#, fuzzy
 msgid "Invalid ParentMessage Object"
 msgstr "Nenhum Objeto ParentMessage válido"
 
@@ -5672,7 +5668,7 @@ msgstr ""
 
 #: common/tracker/Artifact.class.php:601
 msgid "Valid Email Address Required"
-msgstr ""
+msgstr "Um Endereço de e-mail Válido é Necessário"
 
 #: common/tracker/Artifact.class.php:618
 msgid "Now Monitoring Artifact"
@@ -14098,9 +14094,9 @@ msgid "Error creating group"
 msgstr "Erro criando grupo"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:149
-#, fuzzy, php-format
+#, php-format
 msgid "Approving Project: %s"
-msgstr "Aprovando Grupo"
+msgstr "Aprovando Grupo: %s"
 
 #: www/admin/approve-pending.php:57
 #, fuzzy, php-format
@@ -21843,6 +21839,26 @@ msgstr ""
 msgid "Personal Page for %s"
 msgstr "Minha Página Pessoal"
 
+#~ msgid "Illegal characters in Forum name"
+#~ msgstr "Caractere ilegal no nome"
+
+#~ msgid ""
+#~ "The %s admin team will now examine your project submission. You will be "
+#~ "notified of their decision."
+#~ msgstr ""
+#~ "O time de administradores do %s irá examinar agora o projeto que você "
+#~ "enviou.  Você será notificado sobre a decisão deles."
+
+#~ msgid ""
+#~ "You cannot submit news for a project unless you are an admin on that "
+#~ "project"
+#~ msgstr ""
+#~ "Você não pode enviar notícias para um projeto a não ser que você seja "
+#~ "administrador nesse projeto"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "ERRO - tanto o assunto quanto o corpo são necessários"
+
 #~ msgid "error"
 #~ msgstr "erro"
 
@@ -21878,10 +21894,6 @@ msgstr "Minha Página Pessoal"
 
 #~ msgid "Error On Update:"
 #~ msgstr "Erro Ao Atualizar:"
-
-#, fuzzy
-#~ msgid "Illegal characters in Forum name"
-#~ msgstr "Caractere ilegal no nome"
 
 #, fuzzy
 #~ msgid "Forum Description Must Be At Least 10 Characters."
@@ -23017,3 +23029,9 @@ msgstr "Minha Página Pessoal"
 
 #~ msgid "Invalid full name"
 #~ msgstr "Nome completo inválido"
+
+#~ msgid "ERROR inserting into skill inventory"
+#~ msgstr "ERRO inserindo no inventário de habilidades"
+
+#~ msgid "No Forums Found For %1$s"
+#~ msgstr "Nenhum Fórum Encontrado Para %1$s"

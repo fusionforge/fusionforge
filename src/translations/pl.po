@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:42+0200\n"
+"POT-Creation-Date: 2013-09-20 16:46+0200\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -335,9 +335,8 @@ msgid "Error updating document group:"
 msgstr "Szukaj w dokumentach"
 
 #: common/docman/Document.class.php:253
-#, fuzzy
 msgid "Document: Invalid docid"
-msgstr "Niepoprawny identyfikator dokumentu"
+msgstr "Dokument: Niepoprawny identyfikator dokumentu"
 
 #: common/docman/Document.class.php:582
 #: common/docman/DocumentGroup.class.php:410

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:42+0200\n"
+"POT-Creation-Date: 2013-09-20 16:46+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -22681,6 +22681,17 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr "%sのパーソナルページ"
+
+#~ msgid "Please visit the following URL to approve or reject this project"
+#~ msgstr "以下のURLにてこのプロジェクトを許可、もしくは断って下さい。"
+
+#~ msgid ""
+#~ "You cannot submit news for a project unless you are an admin on that "
+#~ "project"
+#~ msgstr "プロジェクトの管理者でなければニュースの提出はできません。"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "エラー - 件名と本文は必須項目です。"
 
 #, fuzzy
 #~ msgid "Error: "

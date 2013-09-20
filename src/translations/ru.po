@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:42+0200\n"
+"POT-Creation-Date: 2013-09-20 16:46+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2231,9 +2231,8 @@ msgid "%s does not use the Forum tool."
 msgstr ""
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
-#, fuzzy
 msgid "Forum name must be at least 3 characters."
-msgstr "Имя форума должно быть минимум из 3 букв"
+msgstr "Имя форума должно быть минимум из 3 букв."
 
 #: common/forum/Forum.class.php:176 common/forum/Forum.class.php:558
 #, fuzzy
@@ -2268,19 +2267,16 @@ msgid "Welcome to %s"
 msgstr "Добро пожаловать в %1$s"
 
 #: common/forum/Forum.class.php:266
-#, fuzzy
 msgid "Invalid forum group identifier."
-msgstr "Недопустимый идентификатор форума"
+msgstr "Недопустимый идентификатор форума."
 
 #: common/forum/Forum.class.php:440 common/forum/Forum.class.php:475
-#, fuzzy
 msgid "You can only monitor if you are logged in."
-msgstr "Если вы не идентифицированы, Вы можете лишь просматривать"
+msgstr "Если вы не идентифицированы, Вы можете лишь просматривать."
 
 #: common/forum/Forum.class.php:508
-#, fuzzy
 msgid "You can only save your place if you are logged in."
-msgstr "Если вы не идентифицированы, Вы можете лишь просматривать"
+msgstr "Сохранять позиции Вы можете лишь авторизировавшись."
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
@@ -2542,7 +2538,6 @@ msgid "Error: a forum message must include a message body and a subject."
 msgstr "Должен иметь тему и содержать текст сообщения."
 
 #: common/forum/ForumMessage.class.php:374
-#, fuzzy
 msgid "Invalid ParentMessage Object"
 msgstr "неправильное вложение"
 
@@ -15565,9 +15560,9 @@ msgid "Error creating group"
 msgstr "Ошибка создания группы"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:149
-#, fuzzy, php-format
+#, php-format
 msgid "Approving Project: %s"
-msgstr "Утверждаемая группа: %1$s"
+msgstr "Утверждаемая группа: %s"
 
 #: www/admin/approve-pending.php:57
 #, fuzzy, php-format
@@ -23893,6 +23888,19 @@ msgstr "Имя участника обязательно"
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
 
+#~ msgid "Illegal characters in Forum name"
+#~ msgstr "Недопустимые символы в названии форума"
+
+#~ msgid ""
+#~ "You cannot submit news for a project unless you are an admin on that "
+#~ "project"
+#~ msgstr ""
+#~ "Если Вы не являетесь администратором проекта, Вы не можете утверждать "
+#~ "новости."
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "Все параметры обязательны к заполнению"
+
 #, fuzzy
 #~ msgid ""
 #~ "You should start with specifying the name of your project. The \"Full Name"
@@ -24020,10 +24028,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "Error On Update:"
 #~ msgstr "Ошибка при изменении"
-
-#, fuzzy
-#~ msgid "Illegal characters in Forum name"
-#~ msgstr "Недопустимые символы в названии форума"
 
 #, fuzzy
 #~ msgid "Forum Description Must Be At Least 10 Characters."
@@ -27879,3 +27883,25 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "Error - disabled feature."
 #~ msgstr "временно отключено"
+
+#~ msgid "Tracker Items Opened"
+#~ msgstr "Открытые записи в трекере"
+
+#~ msgid "Tracker Items Closed"
+#~ msgstr "Закрытые записи в трекере"
+
+#~ msgid ""
+#~ "Choose a Project/Subproject in the Task Manager. You will then have to "
+#~ "choose a Task and category to record your time in."
+#~ msgstr ""
+#~ "Выберите Проект/Подпроект в Менеджере Задачи. Вы тогда должны будете "
+#~ "выбрать Задачу и категорию, чтобы сделать запись вашего времени."
+
+#~ msgid "Error inserting into skill inventory"
+#~ msgstr "Неверное значение при указании опыта"
+
+#~ msgid "Followup"
+#~ msgstr "Следовать"
+
+#~ msgid "Mailing List Exists with same name"
+#~ msgstr "Список рассылок с таким именем уже существует"

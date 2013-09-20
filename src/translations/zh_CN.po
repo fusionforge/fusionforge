@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:42+0200\n"
+"POT-Creation-Date: 2013-09-20 16:46+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2228,7 +2228,6 @@ msgid "%s does not use the Forum tool."
 msgstr ""
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
-#, fuzzy
 msgid "Forum name must be at least 3 characters."
 msgstr "讨论区名称必须至少3个字节"
 
@@ -2264,7 +2263,6 @@ msgid "Welcome to %s"
 msgstr "欢迎来到 %1$s"
 
 #: common/forum/Forum.class.php:266
-#, fuzzy
 msgid "Invalid forum group identifier."
 msgstr "非法的论坛组ID"
 
@@ -2274,9 +2272,8 @@ msgid "You can only monitor if you are logged in."
 msgstr "只有登录后才能监视"
 
 #: common/forum/Forum.class.php:508
-#, fuzzy
 msgid "You can only save your place if you are logged in."
-msgstr "只有登录后才能监视"
+msgstr "只有登录后才能保存你的位置"
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
@@ -2536,7 +2533,6 @@ msgid "Error: a forum message must include a message body and a subject."
 msgstr "必须包括文章标题和内容"
 
 #: common/forum/ForumMessage.class.php:374
-#, fuzzy
 msgid "Invalid ParentMessage Object"
 msgstr "无效的 ParentMessage 对象"
 
@@ -15213,9 +15209,9 @@ msgid "Error creating group"
 msgstr "创建群组对象时发生错误"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:149
-#, fuzzy, php-format
+#, php-format
 msgid "Approving Project: %s"
-msgstr "审核中群组："
+msgstr "审核中群组: %s"
 
 #: www/admin/approve-pending.php:57
 #, fuzzy, php-format
@@ -23355,6 +23351,17 @@ msgstr "帐号"
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
 
+#~ msgid "Illegal characters in Forum name"
+#~ msgstr "讨论区名称包含不合法字节"
+
+#~ msgid ""
+#~ "You cannot submit news for a project unless you are an admin on that "
+#~ "project"
+#~ msgstr "除非您是项目管理员，否则不能发布该项目的新闻"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "错误 - 标题和内容都是必须的"
+
 #~ msgid "ERROR: User not removed: %s"
 #~ msgstr "错误：用户没有被删除：%s"
 
@@ -23463,10 +23470,6 @@ msgstr "我的个人首页"
 
 #~ msgid "Error On Update:"
 #~ msgstr "更新时错误："
-
-#, fuzzy
-#~ msgid "Illegal characters in Forum name"
-#~ msgstr "讨论区名称包含不合法字节"
 
 #, fuzzy
 #~ msgid "Forum Description Must Be At Least 10 Characters."
@@ -26213,3 +26216,22 @@ msgstr "我的个人首页"
 
 #~ msgid "'%1$s' is a reserved alias. Please provide another name."
 #~ msgstr "'%1$s' 是保留别名，请选用其他别名"
+
+#~ msgid "Tracker Items Opened"
+#~ msgstr "条跟踪项打开"
+
+#~ msgid "Tracker Items Closed"
+#~ msgstr "条跟踪项关闭"
+
+#~ msgid ""
+#~ "Choose a Project/Subproject in the Task Manager. You will then have to "
+#~ "choose a Task and category to record your time in."
+#~ msgstr ""
+#~ "在任务管理中选择一个项目/子项目，您然后将必须选择一个任务和种类记录你的时"
+#~ "间。"
+
+#~ msgid "Error inserting into skill inventory"
+#~ msgstr "错误 － 无法添加技能目录"
+
+#~ msgid "Followup"
+#~ msgstr "回覆"

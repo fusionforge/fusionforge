@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:42+0200\n"
+"POT-Creation-Date: 2013-09-20 16:46+0200\n"
 "PO-Revision-Date: 2009-10-06 16:32+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2122,9 +2122,8 @@ msgid "Welcome to %s"
 msgstr ""
 
 #: common/forum/Forum.class.php:266
-#, fuzzy
 msgid "Invalid forum group identifier."
-msgstr "หมายเลขกลุ่มกระทู้ไม่ถูกต้อง"
+msgstr "หมายเลขกลุ่มกระทู้ไม่ถูกต้อง."
 
 #: common/forum/Forum.class.php:440 common/forum/Forum.class.php:475
 #, fuzzy
@@ -2132,9 +2131,8 @@ msgid "You can only monitor if you are logged in."
 msgstr "จะบันทึกได้ก็ต่อเมื่อได้กรอกข้อมูลเข้าใช้งานแล้วเท่านั้น"
 
 #: common/forum/Forum.class.php:508
-#, fuzzy
 msgid "You can only save your place if you are logged in."
-msgstr "จะบันทึกได้ก็ต่อเมื่อได้กรอกข้อมูลเข้าใช้งานแล้วเท่านั้น"
+msgstr "จะบันทึกได้ก็ต่อเมื่อได้กรอกข้อมูลเข้าใช้งานแล้วเท่านั้น."
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219

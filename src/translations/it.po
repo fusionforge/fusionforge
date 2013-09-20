@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:42+0200\n"
+"POT-Creation-Date: 2013-09-20 16:46+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2229,9 +2229,8 @@ msgid "%s does not use the Forum tool."
 msgstr ""
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
-#, fuzzy
 msgid "Forum name must be at least 3 characters."
-msgstr "Il nome del forum deve essere almeno di 3 caratteri"
+msgstr "Il nome del forum deve essere almeno di 3 caratteri."
 
 #: common/forum/Forum.class.php:176 common/forum/Forum.class.php:558
 #, fuzzy
@@ -2265,9 +2264,8 @@ msgid "Welcome to %s"
 msgstr "Benvenuto su %s"
 
 #: common/forum/Forum.class.php:266
-#, fuzzy
 msgid "Invalid forum group identifier."
-msgstr "Identificatore gruppo forum non valido"
+msgstr "Identificatore gruppo forum non valido."
 
 #: common/forum/Forum.class.php:440 common/forum/Forum.class.php:475
 #, fuzzy
@@ -2275,9 +2273,8 @@ msgid "You can only monitor if you are logged in."
 msgstr "Puoi richiedere la notifica di un forum solo se sei collegato"
 
 #: common/forum/Forum.class.php:508
-#, fuzzy
 msgid "You can only save your place if you are logged in."
-msgstr "Puoi richiedere la notifica di un forum solo se sei collegato"
+msgstr "Si può salvare la posizione solo quando si è collegati."
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
@@ -2538,7 +2535,6 @@ msgid "Error: a forum message must include a message body and a subject."
 msgstr "Deve includere un oggetto e il contenuto."
 
 #: common/forum/ForumMessage.class.php:374
-#, fuzzy
 msgid "Invalid ParentMessage Object"
 msgstr "nessun oggetto padre valido"
 
@@ -15325,9 +15321,9 @@ msgid "Error creating group"
 msgstr "Errore nella creazione  del progetto"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:149
-#, fuzzy, php-format
+#, php-format
 msgid "Approving Project: %s"
-msgstr "Approvazione Progetto:"
+msgstr "Approvazione Progetto: %s"
 
 #: www/admin/approve-pending.php:57
 #, fuzzy, php-format
@@ -23575,6 +23571,19 @@ msgstr "Non è stato inserito alcun file"
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
 
+#~ msgid "Illegal characters in Forum name"
+#~ msgstr "Il nome del forum contiene caratteri non validi"
+
+#~ msgid ""
+#~ "You cannot submit news for a project unless you are an admin on that "
+#~ "project"
+#~ msgstr ""
+#~ "Non è possibile inserire news per un progetto se non si è un "
+#~ "amministratore del progetto"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "ERRORE - oggetto e messaggio sono obbligatori"
+
 #, fuzzy
 #~ msgid "Registation Complete"
 #~ msgstr "Registrazione completata"
@@ -23689,10 +23698,6 @@ msgstr "Pagina Personale"
 
 #~ msgid "Error On Update:"
 #~ msgstr "Errore nell'aggiornamento:"
-
-#, fuzzy
-#~ msgid "Illegal characters in Forum name"
-#~ msgstr "Il nome del forum contiene caratteri non validi"
 
 #, fuzzy
 #~ msgid "Forum Description Must Be At Least 10 Characters."
@@ -26855,3 +26860,25 @@ msgstr "Pagina Personale"
 
 #~ msgid "Error - disabled feature."
 #~ msgstr "Errore - funzionalità disabilitata."
+
+#~ msgid "Tracker Items Opened"
+#~ msgstr "Elementi del tracker aperti"
+
+#~ msgid "Tracker Items Closed"
+#~ msgstr "Elementi del tracker chiusi"
+
+#~ msgid "Mailing List Exists with same name"
+#~ msgstr "Nome Mailing List già esistente"
+
+#~ msgid ""
+#~ "Choose a Project/Subproject in the Task Manager. You will then have to "
+#~ "choose a Task and category to record your time in."
+#~ msgstr ""
+#~ "Seleziona un progetto/sottoprogetto nel Gestore Attività. Devi "
+#~ "selezionare una attività e una categoria per consuntivare."
+
+#~ msgid "Error inserting into skill inventory"
+#~ msgstr "ERRORE durante l'inserimento della competenza"
+
+#~ msgid "Followup"
+#~ msgstr "Commenti"

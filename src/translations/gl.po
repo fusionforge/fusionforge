@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:42+0200\n"
+"POT-Creation-Date: 2013-09-20 16:46+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -2229,9 +2229,8 @@ msgid "%s does not use the Forum tool."
 msgstr ""
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:554
-#, fuzzy
 msgid "Forum name must be at least 3 characters."
-msgstr "O nome do foro debe ter, cando menos, 3 caracteres"
+msgstr "O nome do foro debe ter, cando menos, 3 caracteres."
 
 #: common/forum/Forum.class.php:176 common/forum/Forum.class.php:558
 #, fuzzy
@@ -2266,19 +2265,16 @@ msgid "Welcome to %s"
 msgstr "Benvido/a a %s"
 
 #: common/forum/Forum.class.php:266
-#, fuzzy
 msgid "Invalid forum group identifier."
-msgstr "O identificador de foro non é válido"
+msgstr "O identificador de foro non é válido."
 
 #: common/forum/Forum.class.php:440 common/forum/Forum.class.php:475
-#, fuzzy
 msgid "You can only monitor if you are logged in."
-msgstr "Só pode facer un seguimento se está conectado "
+msgstr "Só pode facer un seguimento se está conectado."
 
 #: common/forum/Forum.class.php:508
-#, fuzzy
 msgid "You can only save your place if you are logged in."
-msgstr "Só pode facer un seguimento se está conectado "
+msgstr "Só pode gardar o seu lugar se está conectado."
 
 #: common/forum/Forum.class.php:607 common/survey/Survey.class.php:181
 #: common/survey/Survey.class.php:219
@@ -2541,7 +2537,6 @@ msgid "Error: a forum message must include a message body and a subject."
 msgstr "Debe incluír o contido e o asunto da mensaxe."
 
 #: common/forum/ForumMessage.class.php:374
-#, fuzzy
 msgid "Invalid ParentMessage Object"
 msgstr "o obxecto ParentMessage non é válido"
 
@@ -23755,6 +23750,18 @@ msgstr "Non se introduciu un nome de usuario"
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
 
+#~ msgid "Illegal characters in Forum name"
+#~ msgstr "O nome do foro contén caracteres non permitidos"
+
+#~ msgid ""
+#~ "You cannot submit news for a project unless you are an admin on that "
+#~ "project"
+#~ msgstr ""
+#~ "Non pode enviar novas para un proxecto se non é administrador do proxecto"
+
+#~ msgid "Error: both subject and body are required"
+#~ msgstr "ERRO - É necesario tanto o corpo como o asunto"
+
 #, fuzzy
 #~ msgid ""
 #~ "You should start with specifying the name of your project. The \"Full Name"
@@ -23888,10 +23895,6 @@ msgstr "Páxina persoal de %s"
 
 #~ msgid "Error On Update:"
 #~ msgstr "Hai un erro na actualización:"
-
-#, fuzzy
-#~ msgid "Illegal characters in Forum name"
-#~ msgstr "O nome do foro contén caracteres non permitidos"
 
 #, fuzzy
 #~ msgid "Forum Description Must Be At Least 10 Characters."
@@ -27895,3 +27898,28 @@ msgstr "Páxina persoal de %s"
 
 #~ msgid "Error - disabled feature."
 #~ msgstr "Produciuse un erro - esa característica non está activada."
+
+#~ msgid "Tracker Items Opened"
+#~ msgstr "Elementos de rexistro abertos"
+
+#~ msgid "Tracker Items Closed"
+#~ msgstr "Elementos de rexistro pechados"
+
+#~ msgid "Configure workflow"
+#~ msgstr "Configurar o fluxo de traballo"
+
+#~ msgid ""
+#~ "Choose a Project/Subproject in the Task Manager. You will then have to "
+#~ "choose a Task and category to record your time in."
+#~ msgstr ""
+#~ "Elixa un proxecto/subproxecto no xestor de tarefas. Despois de o facer, "
+#~ "terá que elixir unha tarefa e unha categoría en que gravar as súas horas."
+
+#~ msgid "Error inserting into skill inventory"
+#~ msgstr "Produciuse un erro ao inserir no inventario de habilidades"
+
+#~ msgid "Followup"
+#~ msgstr "Resposta"
+
+#~ msgid "Mailing List Exists with same name"
+#~ msgstr "Xa existe unha lista de correo co mesmo nome"
