@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:31+0200\n"
+"POT-Creation-Date: 2013-09-20 10:46+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -8223,17 +8223,15 @@ msgid "Identity successfully added"
 msgstr "Identité ajoutée avec succès."
 
 #: plugins/authopenid/www/index.php:81
-msgid "ERROR: Missing URL for the new identity"
+msgid "Error: Missing URL for the new identity"
 msgstr "Erreur : il manque l'URL de la nouvelle identité."
 
 #: plugins/authopenid/www/index.php:83
-msgid "ERROR: Malformed URL (only http, https and ftp allowed)"
-msgstr ""
-"Erreur : mauvaise adresse (seules les adresses en http://, https:// et "
-"ftp:// sont autorisées)."
+msgid "Error: Malformed URL (only http, https and ftp allowed)"
+msgstr "Erreur : URL invalide (seuls http, https et ftp sont autorisés)"
 
 #: plugins/authopenid/www/index.php:88
-msgid "ERROR: identity already used by a forge user."
+msgid "Error: identity already used by a forge user."
 msgstr ""
 "Erreur : cette identité est déjà enregistrée par un autre utilisateur de la "
 "forge."
@@ -25264,12 +25262,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Thank you"
 #~ msgstr "Merci"
-
-#~ msgid "Error: Missing URL for the new identity"
-#~ msgstr "Erreur : il manque l'URL pour la nouvelle identité"
-
-#~ msgid "Error: Malformed URL (only http, https and ftp allowed)"
-#~ msgstr "Erreur : URL invalide (seuls http, https et ftp sont autorisés)"
 
 #~ msgid "Manage OpenID identities for user %s"
 #~ msgstr "Gestion des identités OpenID de l'utilisateur %s"

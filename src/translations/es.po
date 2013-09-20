@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:31+0200\n"
+"POT-Creation-Date: 2013-09-20 10:46+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -3368,22 +3368,22 @@ msgstr "Error: No se pudo cambiar el estado del grupo: %s"
 #: common/include/Group.class.php:2885
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
-msgstr "ERROR - No puedo actualizar el estado del Grupo DocmanCreateOnline: %s"
+msgstr "Error - No puedo actualizar el estado del Grupo DocmanCreateOnline: %s"
 
 #: common/include/Group.class.php:2903
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
-msgstr "ERROR - No puedo actaulizar Estado de Grupo UseWebdab: %s"
+msgstr "Error - No puedo actaulizar Estado de Grupo UseWebdab: %s"
 
 #: common/include/Group.class.php:2921
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
-msgstr "ERROR - No puedo actualizar estado grupo UseDocmanSearch: %s"
+msgstr "Error - No puedo actualizar estado grupo UseDocmanSearch: %s"
 
 #: common/include/Group.class.php:2939
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
-msgstr "ERROR - No puedo actualizar Grupo force_docman_reindex %s"
+msgstr "Error - No puedo actualizar Grupo force_docman_reindex %s"
 
 #: common/include/GroupJoinRequest.class.php:104
 #: common/pm/ProjectTask.class.php:152 common/pm/ProjectTask.class.php:949
@@ -4256,12 +4256,12 @@ msgstr "No Puedo Borrar desde filemodule_monitor:"
 #: common/include/User.class.php:636
 #, fuzzy
 msgid "Error: Cannot Update User Object:"
-msgstr "ERROR - No se pudo actualizar el Objeto Usuario:"
+msgstr "Error - No se pudo actualizar el Objeto Usuario:"
 
 #: common/include/User.class.php:730
 #, fuzzy
 msgid "Error: Invalid status value"
-msgstr "ERROR: Valor de estado incorrecto"
+msgstr "Error: Valor de estado incorrecto"
 
 #: common/include/User.class.php:734
 msgid "Error: You cannot set pending status if user is suspend or active"
@@ -4270,7 +4270,7 @@ msgstr ""
 #: common/include/User.class.php:743
 #, fuzzy
 msgid "Error: Cannot Update User Status:"
-msgstr "ERROR - No puedo actualizar Estado Usuario:"
+msgstr "Error - No puedo actualizar Estado Usuario:"
 
 #: common/include/User.class.php:936 common/include/User.class.php:988
 msgid "User with this email already exists."
@@ -4279,12 +4279,12 @@ msgstr "Ya existe un usuario con esa dirección de correcto electrónico"
 #: common/include/User.class.php:1096
 #, fuzzy, php-format
 msgid "Error: Invalid Shell %s"
-msgstr "ERROR: Shell Invalido"
+msgstr "Error: Shell Invalido"
 
 #: common/include/User.class.php:1104
 #, fuzzy
 msgid "Error: Cannot Update User Unix Shell:"
-msgstr "ERROR - No puedo Actualizar Shell Unix de Usuario:"
+msgstr "Error - No puedo Actualizar Shell Unix de Usuario:"
 
 #: common/include/User.class.php:1250
 #, fuzzy
@@ -4305,7 +4305,7 @@ msgstr "ERRO - No puedo actualizar Keys SSH de Usuario"
 #: common/include/User.class.php:1481
 #, fuzzy
 msgid "Error: Cannot Change User Password:"
-msgstr "ERROR - No puedo cambiar la Clave del Usuario:"
+msgstr "Error - No puedo cambiar la Clave del Usuario:"
 
 #: common/include/User.class.php:1737
 #, php-format
@@ -5159,7 +5159,7 @@ msgstr "Actualización de "
 #: common/tracker/actions/admin-updates.php:539
 #, fuzzy
 msgid "Error: Initial values not saved, no initial state given."
-msgstr "ERROR: Valores iniciales no grabados, no proporcionado estado inicial."
+msgstr "Error: Valores iniciales no grabados, no proporcionado estado inicial."
 
 #: common/tracker/actions/admin-updates.php:543
 msgid "Initial values saved."
@@ -5806,7 +5806,7 @@ msgstr ""
 #: common/tracker/actions/tracker.php:112
 #, fuzzy, php-format
 msgid "Error on attached file %1$d, transfert interrupted."
-msgstr "ERROR: Desechando adjunto %d: transferencia interrumpida."
+msgstr "Error: Desechando adjunto %d: transferencia interrumpida."
 
 #: common/tracker/actions/tracker.php:126
 #: common/tracker/actions/tracker.php:359
@@ -5834,12 +5834,12 @@ msgstr "Comentarios agregados"
 #: common/tracker/actions/tracker.php:340
 #, php-format
 msgid "Error: Skipping attachment %d: file is too large."
-msgstr "ERROR: Desechando adjunto %d: fichero muy grande."
+msgstr "Error: Desechando adjunto %d: fichero muy grande."
 
 #: common/tracker/actions/tracker.php:344
 #, php-format
 msgid "Error: Skipping attachment %d: transfer interrupted."
-msgstr "ERROR: Desechando adjunto %d: transferencia interrumpida."
+msgstr "Error: Desechando adjunto %d: transferencia interrumpida."
 
 #: common/tracker/actions/tracker.php:368
 msgid "File Upload: Error"
@@ -6113,7 +6113,7 @@ msgstr "ID Artefacto Incorrecto"
 #: common/tracker/ArtifactMessage.class.php:89
 #, fuzzy
 msgid "Error: Logged In User Bug Could Not Get User Object"
-msgstr "ERROR - No se pudo actualizar el Objeto Usuario:"
+msgstr "Error - No se pudo actualizar el Objeto Usuario:"
 
 #: common/tracker/ArtifactMessage.class.php:92
 msgid "Logged In: YES"
@@ -8252,16 +8252,16 @@ msgid "Identity successfully added"
 msgstr "Pestaña añadida correctamente"
 
 #: plugins/authopenid/www/index.php:81
-msgid "ERROR: Missing URL for the new identity"
-msgstr "ERROR: Nombre o URL no encontrado para la nueva pestaña"
+msgid "Error: Missing URL for the new identity"
+msgstr "Error: Nombre o URL no encontrado para la nueva pestaña"
 
 #: plugins/authopenid/www/index.php:83
-msgid "ERROR: Malformed URL (only http, https and ftp allowed)"
-msgstr "ERROR: URL mal formada (solo http, https y ftp son permitidos)"
+msgid "Error: Malformed URL (only http, https and ftp allowed)"
+msgstr "Error: URL mal formada (solo http, https y ftp son permitidos)"
 
 #: plugins/authopenid/www/index.php:88
-msgid "ERROR: identity already used by a forge user."
-msgstr "ERROR: identidad ya registrada en la forja."
+msgid "Error: identity already used by a forge user."
+msgstr "Error: identidad ya registrada en la forja."
 
 #: plugins/authopenid/www/index.php:114
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:317
@@ -15187,7 +15187,7 @@ msgstr "No puedo agregar al usurio a este tipo de rol"
 
 #: www/admin/globalroleedit.php:117
 msgid "Error: You did not tick the “really remove” box!"
-msgstr "ERROR: No ha marcado la casilla \"borrar realmente\"!"
+msgstr "Error: No ha marcado la casilla \"borrar realmente\"!"
 
 #: www/admin/globalroleedit.php:125
 #, php-format
@@ -19016,7 +19016,7 @@ msgstr "Debe seleccionar una ID de habilidad"
 #: www/people/people_utils.php:103
 #, fuzzy
 msgid "Error inserting into skill inventory: "
-msgstr "ERROR insertando en el inventario de habilidades"
+msgstr "Error insertando en el inventario de habilidades"
 
 #: www/people/people_utils.php:106
 msgid "Added to skill inventory"
@@ -19052,7 +19052,7 @@ msgstr "Añadir habilidad"
 #: www/people/people_utils.php:211
 #, fuzzy
 msgid "Error inserting into job inventory: "
-msgstr "ERROR insertando en el inventario de habilidades"
+msgstr "Error insertando en el inventario de habilidades"
 
 #: www/people/people_utils.php:214
 #, fuzzy
@@ -19087,7 +19087,7 @@ msgstr "No se encontraron"
 
 #: www/people/viewjob.php:54
 msgid "POSTING fetch FAILED: No such posting for this project :"
-msgstr "ERROR PUBLICACIÓN: No existe esta publicación en este proyecto :"
+msgstr "Error publicación: No existe esta publicación en este proyecto :"
 
 #: www/people/viewjob.php:55 www/people/viewjob.php:58
 msgid "View a Job"
@@ -20111,7 +20111,7 @@ msgstr "Error: un fichero debe de ser > 20 bytes y < 256000 bytes de tamaño"
 #: www/project/admin/editimages.php:101
 #, fuzzy
 msgid "Error: Cannot store multimedia file: "
-msgstr "ERROR: BBDD: No puedo almacenar fichero multimedia"
+msgstr "Error: BBDD: No puedo almacenar fichero multimedia"
 
 #: www/project/admin/editimages.php:103
 msgid "Multimedia File Uploaded"
@@ -20124,7 +20124,7 @@ msgstr "Tanto el nombre como la descripción son necesarios"
 #: www/project/admin/editimages.php:139
 #, fuzzy
 msgid "Error: Cannot delete multimedia file: "
-msgstr "ERROR: BBDD: No puedo borrar fichero multimedia"
+msgstr "Error: BBDD: No puedo borrar fichero multimedia"
 
 #: www/project/admin/editimages.php:141
 msgid "Multimedia File Deleted"
@@ -20137,7 +20137,7 @@ msgstr "La descripción del fichero es necesaria"
 #: www/project/admin/editimages.php:163
 #, fuzzy
 msgid "Error: Cannot update multimedia file"
-msgstr "ERROR: DB: No puedo actualizar fichero multimedia"
+msgstr "Error: DB: No puedo actualizar fichero multimedia"
 
 #: www/project/admin/editimages.php:165
 msgid "Multimedia File Properties Updated"
@@ -21657,7 +21657,7 @@ msgstr "Error: Este recorte ya ha sido añadido anteriormente a este paquete."
 #: www/snippet/add_snippet_to_package.php:108 www/snippet/addversion.php:71
 #: www/snippet/submit.php:74
 msgid "Error doing snippet version insert"
-msgstr "¡ERROR INSERTANDO LA VERSIÓN DEL RECORTE!"
+msgstr "¡Error insertando la versión del recorte!"
 
 #: www/snippet/add_snippet_to_package.php:110 www/snippet/addversion.php:74
 msgid "Snippet Version Added Successfully."
@@ -21726,7 +21726,7 @@ msgstr "Error, Error - el paquete del recorte no existe"
 
 #: www/snippet/addversion.php:154 www/snippet/package.php:75
 msgid "Error doing snippet package version insert"
-msgstr "¡ERROR INSERTANDO VERSIÓN DE PAQUETE DE RECORTES!"
+msgstr "¡Error insertando versión de paquete de recortes!"
 
 #: www/snippet/addversion.php:155
 msgid "New snippet package"
@@ -22081,7 +22081,7 @@ msgstr "Crear un Paquete"
 
 #: www/snippet/submit.php:59
 msgid "Error doing snippet insert"
-msgstr "¡ERROR HACIENDO INSERCIÓN DEL RECORTE!"
+msgstr "¡Error haciendo inserción del recorte!"
 
 #: www/snippet/submit.php:61 www/snippet/submit.php:76
 msgid "Snippet Added Successfully."
@@ -24362,9 +24362,6 @@ msgstr "Página personal de %s"
 #~ msgid ""
 #~ "Visiting the link sent to you in this email will activate your account."
 #~ msgstr "Visitando el enlace que le hemos enviado le activará la cuenta."
-
-#~ msgid "Error: Malformed URL (only http, https and ftp allowed)"
-#~ msgstr "Error: URL mal formada (solo http, https y ftp son permitidos)"
 
 #~ msgid "Invalid user name: %s"
 #~ msgstr "Usuario no válido: %s"

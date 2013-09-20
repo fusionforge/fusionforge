@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:37+0200\n"
+"POT-Creation-Date: 2013-09-20 10:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -7714,15 +7714,15 @@ msgid "Identity successfully added"
 msgstr ""
 
 #: plugins/authopenid/www/index.php:81
-msgid "ERROR: Missing URL for the new identity"
+msgid "Error: Missing URL for the new identity"
 msgstr ""
 
 #: plugins/authopenid/www/index.php:83
-msgid "ERROR: Malformed URL (only http, https and ftp allowed)"
+msgid "Error: Malformed URL (only http, https and ftp allowed)"
 msgstr ""
 
 #: plugins/authopenid/www/index.php:88
-msgid "ERROR: identity already used by a forge user."
+msgid "Error: identity already used by a forge user."
 msgstr ""
 
 #: plugins/authopenid/www/index.php:114

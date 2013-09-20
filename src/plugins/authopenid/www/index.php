@@ -78,14 +78,14 @@ try {
 // called to add a new identity
 if (getStringFromRequest('addidentity') != '') {
 	if ($openid_identity == '' || $openid_identity == 'http://') {
-		$error_msg = _('ERROR: Missing URL for the new identity');
+		$error_msg = _('Error: Missing URL for the new identity');
 	} elseif (!util_check_url($openid_identity)) {
-		$error_msg = _('ERROR: Malformed URL (only http, https and ftp allowed)');
+		$error_msg = _('Error: Malformed URL (only http, https and ftp allowed)');
 	} else {
 		$res = db_query_params('SELECT openid_identity FROM plugin_authopenid_user_identities WHERE openid_identity =$1',
 					array($openid_identity));
 		if ($res && db_numrows($res) > 0) {
-			$error_msg = _('ERROR: identity already used by a forge user.');
+			$error_msg = _('Error: identity already used by a forge user.');
 		} else {
 
 			// TODO : redirect and check that the identity is authorized for the user
