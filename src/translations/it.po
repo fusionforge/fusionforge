@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 18:50+0200\n"
+"POT-Creation-Date: 2013-09-20 10:02+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -509,7 +509,7 @@ msgstr "Progetto"
 #: www/pm/mod_task.php:83 www/pm/mod_task.php:97 www/pm/mod_task.php:173
 #: www/pm/mod_task.php:183 www/pm/mod_task.php:197 www/pm/mod_task.php:202
 #: www/pm/mod_task.php:212 www/pm/mod_task.php:323
-#: www/project/admin/roledelete.php:62 www/register/index.php:178
+#: www/project/admin/roledelete.php:62 www/register/index.php:188
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/softwaremap/tag_cloud.php:143 www/survey/survey.php:51
@@ -1752,7 +1752,7 @@ msgstr "Data inizio"
 #: www/pm/format_csv.php:89 www/pm/format_csv.php:93 www/pm/format_csv.php:97
 #: www/project/stats/index.php:104 www/project/stats/index.php:105
 #: www/project/stats/index.php:106 www/project/stats/index.php:107
-#: www/register/index.php:226 www/reporting/groupadded.php:65
+#: www/register/index.php:236 www/reporting/groupadded.php:65
 #: www/reporting/groupadded.php:66 www/reporting/groupadded.php:67
 #: www/reporting/groupcum.php:65 www/reporting/groupcum.php:66
 #: www/reporting/groupcum.php:67 www/reporting/projectact.php:69
@@ -2460,7 +2460,7 @@ msgstr "Messaggio:"
 #: www/admin/admin_table.php:224 www/forum/admin/index.php:413
 #: www/forum/monitor.php:65 www/my/rmproject.php:98
 #: www/people/editprofile.php:158 www/people/editprofile.php:217
-#: www/pm/mod_task.php:289 www/register/index.php:305
+#: www/pm/mod_task.php:289 www/register/index.php:315
 #: www/reporting/timeadd.php:183 www/tracker/admin/index.php:103
 #: www/tracker/admin/index.php:180
 msgid "Cancel"
@@ -5095,7 +5095,7 @@ msgstr ""
 #: www/pm/deletetask.php:44 www/pm/mod_task.php:54 www/pm/mod_task.php:254
 #: www/project/admin/editimages.php:237 www/project/admin/roledelete.php:85
 #: www/project/admin/roleedit.php:302 www/project/request.php:70
-#: www/register/index.php:304 www/snippet/add_snippet_to_package.php:167
+#: www/register/index.php:314 www/snippet/add_snippet_to_package.php:167
 #: www/snippet/addversion.php:109 www/snippet/addversion.php:228
 #: www/snippet/package.php:176 www/snippet/submit.php:144
 #: www/survey/include/SurveyHTML.class.php:555 www/tracker/roadmap.php:444
@@ -7981,7 +7981,7 @@ msgstr "sondaggi"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:183
 #: plugins/scmgit/www/index.php:57 plugins/scmgit/www/index.php:71
-#: www/register/index.php:237 www/scm/admin/index.php:128
+#: www/register/index.php:247 www/scm/admin/index.php:128
 #: www/scm/admin/index.php:154 www/scm/browser.php:31 www/scm/viewvc.php:162
 msgid "SCM Repository"
 msgstr "Repository SCM"
@@ -15324,7 +15324,7 @@ msgstr "Modifica la tabella %ss"
 msgid "Error creating group"
 msgstr "Errore nella creazione  del progetto"
 
-#: www/admin/approve-pending.php:55 www/register/index.php:144
+#: www/admin/approve-pending.php:55 www/register/index.php:149
 #, fuzzy, php-format
 msgid "Approving Project: %1$s"
 msgstr "Approvazione Progetto:"
@@ -15423,7 +15423,7 @@ msgstr "Dominio HTTP:"
 
 #: www/admin/approve-pending.php:194 www/admin/database.php:162
 #: www/admin/groupedit.php:171 www/admin/vhost.php:123
-#: www/register/index.php:204
+#: www/register/index.php:214
 msgid "Project Unix Name"
 msgstr "Unix Name del progetto"
 
@@ -15732,7 +15732,7 @@ msgstr "Ora di registrazione"
 
 #: www/admin/grouplist.php:67 www/admin/search.php:149
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
-#: www/register/index.php:226
+#: www/register/index.php:236
 msgid "Unix Name"
 msgstr "Nome Unix"
 
@@ -16268,7 +16268,7 @@ msgid_plural "Group search with criteria <em>%s</em>: %d matches"
 msgstr[0] "Ricerca utente con criterio"
 msgstr[1] "Ricerca utente con criterio"
 
-#: www/admin/search.php:150 www/register/index.php:178
+#: www/admin/search.php:150 www/register/index.php:188
 msgid "Full Name"
 msgstr "Nome completo"
 
@@ -16879,7 +16879,7 @@ msgstr ""
 msgid "Exports Available"
 msgstr "Statistiche non disponibili"
 
-#: www/export/rss20_activity.php:109 www/register/index.php:235
+#: www/export/rss20_activity.php:109 www/register/index.php:245
 #, fuzzy
 msgid "Source Code"
 msgstr "Indirizzo IP"
@@ -18073,7 +18073,7 @@ msgstr ""
 msgid "Manage your account. Change your password, select your preferences."
 msgstr ""
 
-#: www/include/html.php:973 www/register/index.php:164
+#: www/include/html.php:973 www/register/index.php:174
 msgid "Register Project"
 msgstr "Registra progetto"
 
@@ -21336,43 +21336,39 @@ msgid ""
 msgstr ""
 
 #: www/register/index.php:137
-#, fuzzy
-msgid "Registation Complete"
+msgid "Registration complete"
 msgstr "Registrazione completata"
 
-#: www/register/index.php:140
-#, fuzzy, php-format
+#: www/register/index.php:141
+#, php-format
 msgid ""
-"<p>Your project has been submitted to the %1$s administrators. Within 72 "
-"hours, you will receive notification of their decision and further "
-"instructions.</p><p>Thank you for choosing %1$s</p>"
+"Your project has been submitted to the %1$s administrators. Within 72 hours, "
+"you will receive notification of their decision and further instructions."
+msgstr ""
+"Il progetto è stato sottoposto agli amministratori di %1$s. Entro 72 ore "
+"riceverai notifica della loro decisione e ulteriori istruzioni."
+
+#: www/register/index.php:144 www/register/index.php:162
+#, php-format
+msgid "Thank you for choosing %1$s."
+msgstr "Grazie per aver scelto %1$s."
+
+#: www/register/index.php:156
+#, fuzzy, php-format
+msgid "Approval Error: %1$s"
+msgstr "Approvazione Progetto:"
+
+#: www/register/index.php:159
+#, fuzzy
+msgid ""
+"Your project has been automatically approved. You should receive an email "
+"containing further information shortly."
 msgstr ""
 "Il progetto è stato sottoposto agli amministratori di %1$s. Entro 72 ore "
 "riceverai notifica della loro decisione e ulteriori istruzioni.</p><p>Grazie "
 "per aver scelto %1$s"
 
-#: www/register/index.php:142
-#, php-format
-msgid "<div class=\"error\">ERROR: %1$s</div>"
-msgstr ""
-
-#: www/register/index.php:151
-#, php-format
-msgid "<div class=\"error\">Approval ERROR: %1$s</div>"
-msgstr ""
-
-#: www/register/index.php:153
-#, fuzzy, php-format
-msgid ""
-"<p>Your project has been automatically approved.  You should receive an "
-"email containing further information shortly.</p><p>Thank you for choosing "
-"%1$s</p>"
-msgstr ""
-"Il progetto è stato sottoposto agli amministratori di %1$s. Entro 72 ore "
-"riceverai notifica della loro decisione e ulteriori istruzioni.</p><p>Grazie "
-"per aver scelto %1$s"
-
-#: www/register/index.php:168
+#: www/register/index.php:178
 msgid ""
 "To apply for project registration, you should fill in basic information "
 "about it. Please read descriptions below carefully and provide complete and "
@@ -21382,24 +21378,24 @@ msgstr ""
 "attentamente le descrizioni e fornisci informazioni complete e attendibili. "
 "Tutti i campi sono obbligatori."
 
-#: www/register/index.php:173
+#: www/register/index.php:183
 #, fuzzy
 msgid "Project full name"
 msgstr "Nome progetto"
 
-#: www/register/index.php:175
+#: www/register/index.php:185
 msgid ""
 "You should start with specifying the name of your project. The \"Full Name\" "
 "is descriptive, and has no arbitrary restrictions (except a 40 character "
 "limit)."
 msgstr ""
 
-#: www/register/index.php:185
+#: www/register/index.php:195
 #, fuzzy
 msgid "Project Purpose And Summarization"
 msgstr "Amministrazione database per i progetti"
 
-#: www/register/index.php:187
+#: www/register/index.php:197
 #, php-format
 msgid ""
 "Please provide detailed, accurate description of your project and what %1$s "
@@ -21415,12 +21411,12 @@ msgstr ""
 "l'utilizzo delle risorse nel modo dovuto. La descrizione non sarà utilizzata "
 "come descrizione pubblica del progetto. Deve essere scritta in inglese."
 
-#: www/register/index.php:195
+#: www/register/index.php:205
 #, fuzzy
 msgid "Project Public Description"
 msgstr "Durata del progetto"
 
-#: www/register/index.php:197
+#: www/register/index.php:207
 msgid ""
 "This is the description of your project which will be shown on the Project "
 "Summary page, in search results, etc."
@@ -21428,91 +21424,91 @@ msgstr ""
 "Questa è la descrizione del tuo progetto che sarà visualizzata nel sommario, "
 "nei risultati della ricerca, ecc."
 
-#: www/register/index.php:205
+#: www/register/index.php:215
 msgid ""
 "In addition to full project name, you will need to choose short, \"Unix\" "
 "name for your project."
 msgstr ""
 
-#: www/register/index.php:206
+#: www/register/index.php:216
 msgid ""
 "The \"Unix Name\" has several restrictions because it is used in so many "
 "places around the site. They are:"
 msgstr ""
 
-#: www/register/index.php:208
+#: www/register/index.php:218
 #, fuzzy
 msgid "cannot match the Unix name of any other project;"
 msgstr "Non sei membro di nessun progetto attivo"
 
-#: www/register/index.php:209
+#: www/register/index.php:219
 msgid "must be between 3 and 15 characters in length;"
 msgstr ""
 
-#: www/register/index.php:210
+#: www/register/index.php:220
 msgid ""
 "must be in lower case (upper case letters will be converted to lower case);"
 msgstr ""
 
-#: www/register/index.php:211
+#: www/register/index.php:221
 msgid "can only contain characters, numbers, and dashes;"
 msgstr ""
 
-#: www/register/index.php:212
+#: www/register/index.php:222
 #, fuzzy
 msgid "must be a valid Unix username;"
 msgstr "Nome unix non valido "
 
-#: www/register/index.php:213
+#: www/register/index.php:223
 msgid "cannot match one of our reserved domains;"
 msgstr ""
 
-#: www/register/index.php:214
+#: www/register/index.php:224
 #, fuzzy
 msgid "Unix name will never change for this project;"
 msgstr "Nessuna posizione disponibile per il progetto"
 
-#: www/register/index.php:216
+#: www/register/index.php:226
 msgid ""
 "Your Unix name is important, however, because it will be used for many "
 "things, including:"
 msgstr ""
 
-#: www/register/index.php:218
+#: www/register/index.php:228
 #, php-format
 msgid "a web site at <tt>unixname.%1$s</tt>,"
 msgstr ""
 
-#: www/register/index.php:219
+#: www/register/index.php:229
 msgid "the URL of your source code repository,"
 msgstr ""
 
-#: www/register/index.php:221
+#: www/register/index.php:231
 #, php-format
 msgid "shell access to <span class=\"tt\">unixname.%1$s</span>,"
 msgstr ""
 
-#: www/register/index.php:223
+#: www/register/index.php:233
 msgid "search engines throughout the site."
 msgstr ""
 
-#: www/register/index.php:236
+#: www/register/index.php:246
 msgid ""
 "You can choose among different SCM for your project, but just one (or none "
 "at all). Please select the SCM system you want to use."
 msgstr "Puoi selezionare un solo SCM per il tuo progetto."
 
-#: www/register/index.php:239 www/register/index.php:241
+#: www/register/index.php:249 www/register/index.php:251
 #, fuzzy
 msgid "No SCM"
 msgstr "SCM"
 
-#: www/register/index.php:255
+#: www/register/index.php:265
 #, fuzzy
 msgid "Project template"
 msgstr "Nome progetto"
 
-#: www/register/index.php:262
+#: www/register/index.php:272
 #, php-format
 msgid ""
 "You can either start from an empty project, or pick a project that will act "
@@ -21521,12 +21517,12 @@ msgid ""
 "same set of enabled plugins, and so on)."
 msgstr ""
 
-#: www/register/index.php:264 www/register/index.php:284
+#: www/register/index.php:274 www/register/index.php:294
 #, fuzzy
 msgid "Start from empty project"
 msgstr "Ricerca all'interno di tutto il progetto"
 
-#: www/register/index.php:266
+#: www/register/index.php:276
 #, php-format
 msgid ""
 "Please pick a project that will act as a template for yours.  Your project "
@@ -21534,7 +21530,7 @@ msgid ""
 "permissions, same trackers, same set of enabled plugins, and so on)."
 msgstr ""
 
-#: www/register/index.php:278
+#: www/register/index.php:288
 #, php-format
 msgid ""
 "You can either start from an empty project, or use the %s project as a "
@@ -21543,7 +21539,7 @@ msgid ""
 "enabled plugins, and so on)."
 msgstr ""
 
-#: www/register/index.php:290
+#: www/register/index.php:300
 #, php-format
 msgid ""
 "Your project will initially have the same configuration as the %s project "
@@ -21551,7 +21547,7 @@ msgid ""
 "so on)."
 msgstr ""
 
-#: www/register/index.php:297
+#: www/register/index.php:307
 #, php-format
 msgid "Since no template project is available, your project will start empty."
 msgstr ""
@@ -23579,6 +23575,20 @@ msgstr "Non è stato inserito alcun file"
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
 
+#, fuzzy
+#~ msgid "Registation Complete"
+#~ msgstr "Registrazione completata"
+
+#, fuzzy
+#~ msgid ""
+#~ "<p>Your project has been submitted to the %1$s administrators. Within 72 "
+#~ "hours, you will receive notification of their decision and further "
+#~ "instructions.</p><p>Thank you for choosing %1$s</p>"
+#~ msgstr ""
+#~ "Il progetto è stato sottoposto agli amministratori di %1$s. Entro 72 ore "
+#~ "riceverai notifica della loro decisione e ulteriori istruzioni.</"
+#~ "p><p>Grazie per aver scelto %1$s"
+
 #~ msgid "error"
 #~ msgstr "errore"
 
@@ -24801,20 +24811,6 @@ msgstr "Pagina Personale"
 #~ msgstr ""
 #~ "Le seguenti opzioni determinano se altri possono vedere le tue "
 #~ "competenze. Anche se non possono vederle, puoi comunque inserirle."
-
-#~ msgid "Registration complete"
-#~ msgstr "Registrazione completata"
-
-#~ msgid ""
-#~ "Your project has been submitted to the %1$s administrators. Within 72 "
-#~ "hours, you will receive notification of their decision and further "
-#~ "instructions."
-#~ msgstr ""
-#~ "Il progetto è stato sottoposto agli amministratori di %1$s. Entro 72 ore "
-#~ "riceverai notifica della loro decisione e ulteriori istruzioni."
-
-#~ msgid "Thank you for choosing %1$s."
-#~ msgstr "Grazie per aver scelto %1$s."
 
 #, fuzzy
 #~ msgid "Bazaar Repository Browser"

@@ -11,7 +11,7 @@
  *	 o Project Unix Name
  * All these data are more or less strictly validated.
  *
- * This is last page in registartion sequence. Its successful subsmission
+ * This is last page in registration sequence. Its successful subsmission
  * leads to creation of new group with Pending status, suitable for approval.
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
@@ -134,12 +134,17 @@ if (getStringFromRequest('submit')) {
 		form_release_key(getStringFromRequest("form_key"));
 		$error_msg .= $group->getErrorMessage();
 	} else {
-		site_user_header(array('title'=>_('Registation Complete')));
+		site_user_header(array('title'=>_('Registration complete')));
 
 		if ( !forge_get_config('project_auto_approval') && !forge_check_global_perm('approve_projects')) {
-			printf(_('<p>Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.</p><p>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
+			echo '<p>';
+			printf(_('Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.'), forge_get_config ('forge_name'));
+			echo '</p>';
+			echo '<p>';
+			printf(_('Thank you for choosing %1$s.'), forge_get_config ('forge_name'));
+			echo '</p>';
 		} elseif ($group->isError()) {
-			printf(_('<div class="error">ERROR: %1$s</div>'), $group->getErrorMessage() );
+			echo '<p class="error">' . $group->getErrorMessage() . '</p>';
 		} else {
 			printf(_('Approving Project: %1$s'), $group->getUnixName()).'<br />';
 
@@ -148,9 +153,14 @@ if (getStringFromRequest('submit')) {
 			}
 
 			if (!$group->approve($u)) {
-				printf(_('<div class="error">Approval ERROR: %1$s</div>'), $group->getErrorMessage() );
+				printf('<p class="error">' . _('Approval Error: %1$s'), $group->getErrorMessage() . '</p>');
 			} else {
-				printf(_('<p>Your project has been automatically approved.  You should receive an email containing further information shortly.</p><p>Thank you for choosing %1$s</p>'), forge_get_config ('forge_name'));
+				echo '<p>';
+				echo _('Your project has been automatically approved. You should receive an email containing further information shortly.');
+				echo '</p>';
+				echo '<p>';
+				printf(_('Thank you for choosing %1$s.'), forge_get_config ('forge_name'));
+				echo '</p>';
 			}
 		}
 

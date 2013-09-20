@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 18:50+0200\n"
+"POT-Creation-Date: 2013-09-20 10:02+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -511,7 +511,7 @@ msgstr "项目"
 #: www/pm/mod_task.php:83 www/pm/mod_task.php:97 www/pm/mod_task.php:173
 #: www/pm/mod_task.php:183 www/pm/mod_task.php:197 www/pm/mod_task.php:202
 #: www/pm/mod_task.php:212 www/pm/mod_task.php:323
-#: www/project/admin/roledelete.php:62 www/register/index.php:178
+#: www/project/admin/roledelete.php:62 www/register/index.php:188
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/softwaremap/tag_cloud.php:143 www/survey/survey.php:51
@@ -1751,7 +1751,7 @@ msgstr "开启日期"
 #: www/pm/format_csv.php:89 www/pm/format_csv.php:93 www/pm/format_csv.php:97
 #: www/project/stats/index.php:104 www/project/stats/index.php:105
 #: www/project/stats/index.php:106 www/project/stats/index.php:107
-#: www/register/index.php:226 www/reporting/groupadded.php:65
+#: www/register/index.php:236 www/reporting/groupadded.php:65
 #: www/reporting/groupadded.php:66 www/reporting/groupadded.php:67
 #: www/reporting/groupcum.php:65 www/reporting/groupcum.php:66
 #: www/reporting/groupcum.php:67 www/reporting/projectact.php:69
@@ -2458,7 +2458,7 @@ msgstr "消息："
 #: www/admin/admin_table.php:224 www/forum/admin/index.php:413
 #: www/forum/monitor.php:65 www/my/rmproject.php:98
 #: www/people/editprofile.php:158 www/people/editprofile.php:217
-#: www/pm/mod_task.php:289 www/register/index.php:305
+#: www/pm/mod_task.php:289 www/register/index.php:315
 #: www/reporting/timeadd.php:183 www/tracker/admin/index.php:103
 #: www/tracker/admin/index.php:180
 msgid "Cancel"
@@ -5046,7 +5046,7 @@ msgstr ""
 #: www/pm/deletetask.php:44 www/pm/mod_task.php:54 www/pm/mod_task.php:254
 #: www/project/admin/editimages.php:237 www/project/admin/roledelete.php:85
 #: www/project/admin/roleedit.php:302 www/project/request.php:70
-#: www/register/index.php:304 www/snippet/add_snippet_to_package.php:167
+#: www/register/index.php:314 www/snippet/add_snippet_to_package.php:167
 #: www/snippet/addversion.php:109 www/snippet/addversion.php:228
 #: www/snippet/package.php:176 www/snippet/submit.php:144
 #: www/survey/include/SurveyHTML.class.php:555 www/tracker/roadmap.php:444
@@ -7911,7 +7911,7 @@ msgstr "问卷"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:183
 #: plugins/scmgit/www/index.php:57 plugins/scmgit/www/index.php:71
-#: www/register/index.php:237 www/scm/admin/index.php:128
+#: www/register/index.php:247 www/scm/admin/index.php:128
 #: www/scm/admin/index.php:154 www/scm/browser.php:31 www/scm/viewvc.php:162
 msgid "SCM Repository"
 msgstr "SCM Repository"
@@ -15212,7 +15212,7 @@ msgstr "编辑 %1$s 表格"
 msgid "Error creating group"
 msgstr "创建群组对象时发生错误"
 
-#: www/admin/approve-pending.php:55 www/register/index.php:144
+#: www/admin/approve-pending.php:55 www/register/index.php:149
 #, fuzzy, php-format
 msgid "Approving Project: %1$s"
 msgstr "审核中群组："
@@ -15311,7 +15311,7 @@ msgstr "HTTP域名："
 
 #: www/admin/approve-pending.php:194 www/admin/database.php:162
 #: www/admin/groupedit.php:171 www/admin/vhost.php:123
-#: www/register/index.php:204
+#: www/register/index.php:214
 #, fuzzy
 msgid "Project Unix Name"
 msgstr "新项目名称"
@@ -15621,7 +15621,7 @@ msgstr "注册时间"
 
 #: www/admin/grouplist.php:67 www/admin/search.php:149
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
-#: www/register/index.php:226
+#: www/register/index.php:236
 #, fuzzy
 msgid "Unix Name"
 msgstr "Unix帐号"
@@ -16153,7 +16153,7 @@ msgid_plural "Group search with criteria <em>%s</em>: %d matches"
 msgstr[0] "依照条件搜索用户"
 msgstr[1] "依照条件搜索用户"
 
-#: www/admin/search.php:150 www/register/index.php:178
+#: www/admin/search.php:150 www/register/index.php:188
 msgid "Full Name"
 msgstr "全名"
 
@@ -16757,7 +16757,7 @@ msgstr ""
 msgid "Exports Available"
 msgstr "没有统计信息"
 
-#: www/export/rss20_activity.php:109 www/register/index.php:235
+#: www/export/rss20_activity.php:109 www/register/index.php:245
 #, fuzzy
 msgid "Source Code"
 msgstr "来源 IP"
@@ -17926,7 +17926,7 @@ msgstr ""
 msgid "Manage your account. Change your password, select your preferences."
 msgstr ""
 
-#: www/include/html.php:973 www/register/index.php:164
+#: www/include/html.php:973 www/register/index.php:174
 msgid "Register Project"
 msgstr "注册项目"
 
@@ -21144,41 +21144,38 @@ msgid ""
 msgstr ""
 
 #: www/register/index.php:137
-#, fuzzy
-msgid "Registation Complete"
+msgid "Registration complete"
 msgstr "注册完成"
 
-#: www/register/index.php:140
+#: www/register/index.php:141
 #, fuzzy, php-format
 msgid ""
-"<p>Your project has been submitted to the %1$s administrators. Within 72 "
-"hours, you will receive notification of their decision and further "
-"instructions.</p><p>Thank you for choosing %1$s</p>"
+"Your project has been submitted to the %1$s administrators. Within 72 hours, "
+"you will receive notification of their decision and further instructions."
 msgstr ""
 "您的项目计划已经被提交给 %1$s 的管理员，在72小时之内，您将收到管理员的决定与"
 "更进一步指示的通知。</p><p>感谢您选择 %1$s"
 
-#: www/register/index.php:142
+#: www/register/index.php:144 www/register/index.php:162
 #, php-format
-msgid "<div class=\"error\">ERROR: %1$s</div>"
-msgstr ""
+msgid "Thank you for choosing %1$s."
+msgstr "感谢您选择 %1$s"
 
-#: www/register/index.php:151
-#, php-format
-msgid "<div class=\"error\">Approval ERROR: %1$s</div>"
-msgstr ""
-
-#: www/register/index.php:153
+#: www/register/index.php:156
 #, fuzzy, php-format
+msgid "Approval Error: %1$s"
+msgstr "审核中群组："
+
+#: www/register/index.php:159
+#, fuzzy
 msgid ""
-"<p>Your project has been automatically approved.  You should receive an "
-"email containing further information shortly.</p><p>Thank you for choosing "
-"%1$s</p>"
+"Your project has been automatically approved. You should receive an email "
+"containing further information shortly."
 msgstr ""
 "您的项目计划已经被提交给 %1$s 的管理员，在72小时之内，您将收到管理员的决定与"
 "更进一步指示的通知。</p><p>感谢您选择 %1$s"
 
-#: www/register/index.php:168
+#: www/register/index.php:178
 msgid ""
 "To apply for project registration, you should fill in basic information "
 "about it. Please read descriptions below carefully and provide complete and "
@@ -21187,24 +21184,24 @@ msgstr ""
 "要同意项目的注册，您必须填写一些基本的信息。请仔细阅读下面叙述并且提供完整且"
 "正确的资料。"
 
-#: www/register/index.php:173
+#: www/register/index.php:183
 #, fuzzy
 msgid "Project full name"
 msgstr "新项目名称"
 
-#: www/register/index.php:175
+#: www/register/index.php:185
 msgid ""
 "You should start with specifying the name of your project. The \"Full Name\" "
 "is descriptive, and has no arbitrary restrictions (except a 40 character "
 "limit)."
 msgstr ""
 
-#: www/register/index.php:185
+#: www/register/index.php:195
 #, fuzzy
 msgid "Project Purpose And Summarization"
 msgstr "项目数据库管理"
 
-#: www/register/index.php:187
+#: www/register/index.php:197
 #, fuzzy, php-format
 msgid ""
 "Please provide detailed, accurate description of your project and what %1$s "
@@ -21219,12 +21216,12 @@ msgstr ""
 "在 %1$s 是否能注册的依据，进而确保您能以预期的方式使用敝站提供的服务。同时这"
 "份说明将不会作为您项目的公开说明。</strong>"
 
-#: www/register/index.php:195
+#: www/register/index.php:205
 #, fuzzy
 msgid "Project Public Description"
 msgstr "项目期间"
 
-#: www/register/index.php:197
+#: www/register/index.php:207
 #, fuzzy
 msgid ""
 "This is the description of your project which will be shown on the Project "
@@ -21233,75 +21230,75 @@ msgstr ""
 "<h3>4. 项目公开说明</h3><p>这个说明会出现在项目首页、搜索结果等，这不需要像是"
 "第二个步骤时提供那么详细的信息，所以用您熟悉的方式去描述即可，最多255字节。"
 
-#: www/register/index.php:205
+#: www/register/index.php:215
 msgid ""
 "In addition to full project name, you will need to choose short, \"Unix\" "
 "name for your project."
 msgstr ""
 
-#: www/register/index.php:206
+#: www/register/index.php:216
 msgid ""
 "The \"Unix Name\" has several restrictions because it is used in so many "
 "places around the site. They are:"
 msgstr ""
 
-#: www/register/index.php:208
+#: www/register/index.php:218
 #, fuzzy
 msgid "cannot match the Unix name of any other project;"
 msgstr "您目前不属于任何一个活动项目"
 
-#: www/register/index.php:209
+#: www/register/index.php:219
 msgid "must be between 3 and 15 characters in length;"
 msgstr ""
 
-#: www/register/index.php:210
+#: www/register/index.php:220
 msgid ""
 "must be in lower case (upper case letters will be converted to lower case);"
 msgstr ""
 
-#: www/register/index.php:211
+#: www/register/index.php:221
 msgid "can only contain characters, numbers, and dashes;"
 msgstr ""
 
-#: www/register/index.php:212
+#: www/register/index.php:222
 #, fuzzy
 msgid "must be a valid Unix username;"
 msgstr "Unix名称错误"
 
-#: www/register/index.php:213
+#: www/register/index.php:223
 msgid "cannot match one of our reserved domains;"
 msgstr ""
 
-#: www/register/index.php:214
+#: www/register/index.php:224
 #, fuzzy
 msgid "Unix name will never change for this project;"
 msgstr "该项目没有这样的文章"
 
-#: www/register/index.php:216
+#: www/register/index.php:226
 msgid ""
 "Your Unix name is important, however, because it will be used for many "
 "things, including:"
 msgstr ""
 
-#: www/register/index.php:218
+#: www/register/index.php:228
 #, php-format
 msgid "a web site at <tt>unixname.%1$s</tt>,"
 msgstr ""
 
-#: www/register/index.php:219
+#: www/register/index.php:229
 msgid "the URL of your source code repository,"
 msgstr ""
 
-#: www/register/index.php:221
+#: www/register/index.php:231
 #, php-format
 msgid "shell access to <span class=\"tt\">unixname.%1$s</span>,"
 msgstr ""
 
-#: www/register/index.php:223
+#: www/register/index.php:233
 msgid "search engines throughout the site."
 msgstr ""
 
-#: www/register/index.php:236
+#: www/register/index.php:246
 #, fuzzy
 msgid ""
 "You can choose among different SCM for your project, but just one (or none "
@@ -21311,17 +21308,17 @@ msgstr ""
 "您要使用的SCM系统。</p> <p><strong>一旦项目被注册你将不能够改变它！</"
 "strong></p>"
 
-#: www/register/index.php:239 www/register/index.php:241
+#: www/register/index.php:249 www/register/index.php:251
 #, fuzzy
 msgid "No SCM"
 msgstr "SCM"
 
-#: www/register/index.php:255
+#: www/register/index.php:265
 #, fuzzy
 msgid "Project template"
 msgstr "新项目名称"
 
-#: www/register/index.php:262
+#: www/register/index.php:272
 #, php-format
 msgid ""
 "You can either start from an empty project, or pick a project that will act "
@@ -21330,12 +21327,12 @@ msgid ""
 "same set of enabled plugins, and so on)."
 msgstr ""
 
-#: www/register/index.php:264 www/register/index.php:284
+#: www/register/index.php:274 www/register/index.php:294
 #, fuzzy
 msgid "Start from empty project"
 msgstr "搜索整个的项目"
 
-#: www/register/index.php:266
+#: www/register/index.php:276
 #, php-format
 msgid ""
 "Please pick a project that will act as a template for yours.  Your project "
@@ -21343,7 +21340,7 @@ msgid ""
 "permissions, same trackers, same set of enabled plugins, and so on)."
 msgstr ""
 
-#: www/register/index.php:278
+#: www/register/index.php:288
 #, php-format
 msgid ""
 "You can either start from an empty project, or use the %s project as a "
@@ -21352,7 +21349,7 @@ msgid ""
 "enabled plugins, and so on)."
 msgstr ""
 
-#: www/register/index.php:290
+#: www/register/index.php:300
 #, php-format
 msgid ""
 "Your project will initially have the same configuration as the %s project "
@@ -21360,7 +21357,7 @@ msgid ""
 "so on)."
 msgstr ""
 
-#: www/register/index.php:297
+#: www/register/index.php:307
 #, php-format
 msgid "Since no template project is available, your project will start empty."
 msgstr ""
@@ -23358,6 +23355,10 @@ msgstr "帐号"
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
 
+#, fuzzy
+#~ msgid "Registation Complete"
+#~ msgstr "注册完成"
+
 #~ msgid "error"
 #~ msgstr "错误"
 
@@ -24520,12 +24521,6 @@ msgstr "我的个人首页"
 #~ msgstr ""
 #~ "以下选项决定别人是否可以看见您的技能。就算他们不能看见您的技能，您也可以一"
 #~ "样的输入您的技能。"
-
-#~ msgid "Registration complete"
-#~ msgstr "注册完成"
-
-#~ msgid "Thank you for choosing %1$s."
-#~ msgstr "感谢您选择 %1$s"
 
 #, fuzzy
 #~ msgid "Bazaar Repository Browser"
