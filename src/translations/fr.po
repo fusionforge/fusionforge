@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 17:14+0200\n"
+"POT-Creation-Date: 2013-09-20 17:17+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -20503,11 +20503,11 @@ msgstr ""
 
 #: www/project/admin/roledelete.php:68
 msgid ""
-"Error: Please check \"I'm Sure\" to confirm or return to previous page to "
+"Error: Please check “I am Sure” to confirm or return to previous page to "
 "cancel."
 msgstr ""
-"Veuillez confirmer en cochant la case « Je suis sûr », ou retourner à la "
-"page précédente pour annuler."
+"Erreur : veuillez cocher « Je confirme » ou retourner à la page précédente "
+"pour annuler."
 
 #: www/project/admin/roledelete.php:74
 #, php-format
@@ -23110,6 +23110,13 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid ""
+#~ "Error: Please check \"I'm Sure\" to confirm or return to previous page to "
+#~ "cancel."
+#~ msgstr ""
+#~ "Veuillez confirmer en cochant la case « Je suis sûr », ou retourner à la "
+#~ "page précédente pour annuler."
 
 #~ msgid "Error creating group object"
 #~ msgstr "Erreur lors de la création d'un objet groupe"
@@ -26287,13 +26294,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Frontpage choice"
 #~ msgstr "Choix de la page d'accueil"
-
-#~ msgid ""
-#~ "Error: Please check “I am Sure” to confirm or return to previous page to "
-#~ "cancel."
-#~ msgstr ""
-#~ "Erreur : veuillez cocher « Je confirme » ou retourner à la page "
-#~ "précédente pour annuler."
 
 #~ msgid "Use this page to add a new role to your project."
 #~ msgstr "Utilisez cette page pour ajouter un nouveau rôle à votre projet."

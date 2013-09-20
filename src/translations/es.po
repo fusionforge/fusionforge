@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 17:14+0200\n"
+"POT-Creation-Date: 2013-09-20 17:17+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -20452,10 +20452,10 @@ msgstr "No puede borrar un rol perteneciente a otro proyecto."
 
 #: www/project/admin/roledelete.php:68
 msgid ""
-"Error: Please check \"I'm Sure\" to confirm or return to previous page to "
+"Error: Please check “I am Sure” to confirm or return to previous page to "
 "cancel."
 msgstr ""
-"Error: Por favor elige \"Estoy seguro\" para confirmar or vuelve a la página "
+"Error: Por favor elige “Estoy seguro” para confirmar or vuelve a la página "
 "anterior para cancelar."
 
 #: www/project/admin/roledelete.php:74
@@ -23066,6 +23066,13 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
 
+#~ msgid ""
+#~ "Error: Please check \"I'm Sure\" to confirm or return to previous page to "
+#~ "cancel."
+#~ msgstr ""
+#~ "Error: Por favor elige \"Estoy seguro\" para confirmar or vuelve a la "
+#~ "página anterior para cancelar."
+
 #~ msgid "Trackers for %s"
 #~ msgstr "Seguimiento de peticiones para %s"
 
@@ -23807,13 +23814,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Sorry, no match for “%s”."
 #~ msgstr "Ninguna coincidencia encontrada para “%s”."
-
-#~ msgid ""
-#~ "Error: Please check “I am Sure” to confirm or return to previous page to "
-#~ "cancel."
-#~ msgstr ""
-#~ "Error: Por favor elige “Estoy seguro” para confirmar or vuelve a la "
-#~ "página anterior para cancelar."
 
 #~ msgid "Error Getting Forum"
 #~ msgstr "Error Obteniendo Foro"

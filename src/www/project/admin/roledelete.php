@@ -65,7 +65,7 @@ if (getStringFromRequest('submit')) {
 			session_redirect('/project/admin/users.php?group_id='.$group_id.'&feedback='.urlencode($feedback));
 		}
 	} else {
-		$error_msg = _('Error: Please check "I\'m Sure" to confirm or return to previous page to cancel.');
+		$error_msg = _('Error: Please check “I am Sure” to confirm or return to previous page to cancel.');
 	}
 
 	session_redirect('/project/admin/users.php?group_id='.$group_id.'&error_msg='.urlencode($error_msg));
@@ -86,4 +86,5 @@ printf(_('You are about to permanently delete role %s'), $role->getName()); ?>
 </p>
 </form>
 
-<?php project_admin_footer(array());
+<?php
+project_admin_footer(array());
