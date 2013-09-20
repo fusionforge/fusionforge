@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:52+0200\n"
+"POT-Creation-Date: 2013-09-20 10:59+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -8247,9 +8247,9 @@ msgid "Identity successfully deleted"
 msgstr "Identité supprimée avec succès"
 
 #: plugins/authopenid/www/index.php:122
-#, fuzzy, php-format
-msgid "Manage OpenID identities for user %1$s"
-msgstr "Gestion des onglets supplémentaires pour le projet %1$s"
+#, php-format
+msgid "Manage OpenID identities for user %s"
+msgstr "Gestion des identités OpenID de l'utilisateur %s"
 
 #: plugins/authopenid/www/index.php:125
 msgid "My OpenID identities"
@@ -25262,9 +25262,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Thank you"
 #~ msgstr "Merci"
-
-#~ msgid "Manage OpenID identities for user %s"
-#~ msgstr "Gestion des identités OpenID de l'utilisateur %s"
 
 #~ msgid "Unknown user with identity “%s”"
 #~ msgstr "L'utilisateur « %s » est inconnu"

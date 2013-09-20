@@ -7835,7 +7835,7 @@ msgstr ""
 
 #: plugins/authopenid/www/index.php:122
 #, php-format
-msgid "Manage OpenID identities for user %1$s"
+msgid "Manage OpenID identities for user %s"
 msgstr ""
 
 #: plugins/authopenid/www/index.php:125

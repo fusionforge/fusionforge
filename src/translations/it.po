@@ -8452,7 +8452,7 @@ msgstr "%1$s rimosso."
 
 #: plugins/authopenid/www/index.php:122
 #, fuzzy, php-format
-msgid "Manage OpenID identities for user %1$s"
+msgid "Manage OpenID identities for user %s"
 msgstr "Statistiche dei database dei progetti"
 
 #: plugins/authopenid/www/index.php:125

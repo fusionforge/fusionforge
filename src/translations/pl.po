@@ -7993,7 +7993,7 @@ msgstr "Pomyślnie Zmieniono Hasło"
 
 #: plugins/authopenid/www/index.php:122
 #, fuzzy, php-format
-msgid "Manage OpenID identities for user %1$s"
+msgid "Manage OpenID identities for user %s"
 msgstr "Zgłoś chęć dołączenia do projektu %1$s"
 
 #: plugins/authopenid/www/index.php:125

@@ -8519,7 +8519,7 @@ msgstr "%1$s erfolgreich gelöscht."
 
 #: plugins/authopenid/www/index.php:122
 #, fuzzy, php-format
-msgid "Manage OpenID identities for user %1$s"
+msgid "Manage OpenID identities for user %s"
 msgstr "Zusätzliche Tabs verwalten"
 
 #: plugins/authopenid/www/index.php:125

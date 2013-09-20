@@ -8492,7 +8492,7 @@ msgstr "%1$s удалено."
 
 #: plugins/authopenid/www/index.php:122
 #, fuzzy, php-format
-msgid "Manage OpenID identities for user %1$s"
+msgid "Manage OpenID identities for user %s"
 msgstr "Статистика по базе данных проекта"
 
 #: plugins/authopenid/www/index.php:125

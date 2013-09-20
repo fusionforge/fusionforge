@@ -8428,7 +8428,7 @@ msgstr "%1$s verwijderen gelukt."
 
 #: plugins/authopenid/www/index.php:122
 #, fuzzy, php-format
-msgid "Manage OpenID identities for user %1$s"
+msgid "Manage OpenID identities for user %s"
 msgstr "Statistieken voor project databases"
 
 #: plugins/authopenid/www/index.php:125

@@ -8348,7 +8348,7 @@ msgstr "JOB inserted successfully"
 
 #: plugins/authopenid/www/index.php:122
 #, fuzzy, php-format
-msgid "Manage OpenID identities for user %1$s"
+msgid "Manage OpenID identities for user %s"
 msgstr "Statistics for Project Databases"
 
 #: plugins/authopenid/www/index.php:125

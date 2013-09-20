@@ -119,7 +119,7 @@ if (getStringFromRequest('addidentity') != '') {
 	}
 }
 
-$title = sprintf(_('Manage OpenID identities for user %1$s'), $u->getUnixName());
+$title = sprintf(_('Manage OpenID identities for user %s'), $u->getUnixName());
 site_user_header(array('title'=>$title));
 
 echo $HTML->boxTop(_('My OpenID identities'));

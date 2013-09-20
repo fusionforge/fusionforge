@@ -8377,7 +8377,7 @@ msgstr "%1$s 删除成功"
 
 #: plugins/authopenid/www/index.php:122
 #, fuzzy, php-format
-msgid "Manage OpenID identities for user %1$s"
+msgid "Manage OpenID identities for user %s"
 msgstr "项目数据库统计"
 
 #: plugins/authopenid/www/index.php:125
