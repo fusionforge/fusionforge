@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:31+0200\n"
+"POT-Creation-Date: 2013-09-20 10:52+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3222,7 +3222,7 @@ msgstr "Ошибка: Пользователь не существует"
 
 #: common/include/Group.class.php:2072 common/include/Group.class.php:2191
 #, php-format
-msgid "ERROR: User not removed: %s"
+msgid "Error: User not removed: %s"
 msgstr "Ошибка при удалении пользователя: %s"
 
 #: common/include/Group.class.php:2094
@@ -23894,6 +23894,9 @@ msgstr "Имя участника обязательно"
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
 
+#~ msgid "ERROR: User not removed: %s"
+#~ msgstr "Ошибка при удалении пользователя: %s"
+
 #, fuzzy
 #~ msgid "Registation Complete"
 #~ msgstr "Регистрация завершена"
@@ -25018,9 +25021,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "Error: Could Not Add User To Group: %s"
 #~ msgstr "Участник в группу: %s не добавлен"
-
-#~ msgid "Error: User not removed: %s"
-#~ msgstr "Ошибка при удалении пользователя: %s"
 
 #~ msgid "Read"
 #~ msgstr "Чтение"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:31+0200\n"
+"POT-Creation-Date: 2013-09-20 10:52+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -3242,7 +3242,7 @@ msgstr "ERRO: O usuario non existe"
 
 #: common/include/Group.class.php:2072 common/include/Group.class.php:2191
 #, php-format
-msgid "ERROR: User not removed: %s"
+msgid "Error: User not removed: %s"
 msgstr "ERRO: non se eliminou o usuario: %s"
 
 #: common/include/Group.class.php:2094
@@ -23756,6 +23756,9 @@ msgstr "Non se introduciu un nome de usuario"
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
 
+#~ msgid "ERROR: User not removed: %s"
+#~ msgstr "ERRO: non se eliminou o usuario: %s"
+
 #~ msgid "ERROR: Initial values not saved, no initial state given."
 #~ msgstr ""
 #~ "Produciuse un erro: non se gardaron os valores iniciais, non se "
@@ -25060,9 +25063,6 @@ msgstr "Páxina persoal de %s"
 
 #~ msgid "Error: Could Not Add User To Group: %s"
 #~ msgstr "ERRO: Non se puido engadir o usuario ao grupo: %s"
-
-#~ msgid "Error: User not removed: %s"
-#~ msgstr "ERRO: non se eliminou o usuario: %s"
 
 #~ msgid "Read"
 #~ msgstr "Ler"

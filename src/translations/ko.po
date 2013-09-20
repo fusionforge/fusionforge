@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:31+0200\n"
+"POT-Creation-Date: 2013-09-20 10:52+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3204,9 +3204,9 @@ msgid "Error: User does not exist"
 msgstr "분류 기준이 존재하지 않습니다."
 
 #: common/include/Group.class.php:2072 common/include/Group.class.php:2191
-#, php-format
-msgid "ERROR: User not removed: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Error: User not removed: %s"
+msgstr "분류 기준이 존재하지 않습니다."
 
 #: common/include/Group.class.php:2094
 msgid "Error: artifact:"

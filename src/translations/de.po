@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:31+0200\n"
+"POT-Creation-Date: 2013-09-20 10:52+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -3260,7 +3260,7 @@ msgstr "Fehler: Der Nutzer existiert nicht"
 
 #: common/include/Group.class.php:2072 common/include/Group.class.php:2191
 #, php-format
-msgid "ERROR: User not removed: %s"
+msgid "Error: User not removed: %s"
 msgstr "Fehler: Der Nutzer: %s wurde nicht entfernt"
 
 #: common/include/Group.class.php:2094
@@ -23827,6 +23827,9 @@ msgstr "Kein Benutzername angegeben"
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
 
+#~ msgid "ERROR: User not removed: %s"
+#~ msgstr "Fehler: Der Nutzer: %s wurde nicht entfernt"
+
 #, fuzzy
 #~ msgid "Registation Complete"
 #~ msgstr "Registrierung abgeschlossen"
@@ -25193,9 +25196,6 @@ msgstr "Persönliche Seite für %s"
 
 #~ msgid "Error: Could Not Add User To Group: %s"
 #~ msgstr "Fehler: Konnte Nutzer nicht zur Gruppe: %s hinzufügen"
-
-#~ msgid "Error: User not removed: %s"
-#~ msgstr "Fehler: Der Nutzer: %s wurde nicht entfernt"
 
 #~ msgid "Read"
 #~ msgstr "Lesen"

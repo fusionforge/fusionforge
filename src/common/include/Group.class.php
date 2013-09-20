@@ -2069,7 +2069,7 @@ class Group extends Error {
 			}
 		}
 		if ($found_role == NULL) {
-			$this->setError(sprintf(_('ERROR: User not removed: %s')));
+			$this->setError(sprintf(_('Error: User not removed: %s')));
 			db_rollback();
 			return false;
 		}
@@ -2188,7 +2188,7 @@ class Group extends Error {
 			}
 		}
 		if ($found_role == NULL) {
-			$this->setError(sprintf(_('ERROR: User not removed: %s')));
+			$this->setError(sprintf(_('Error: User not removed: %s')));
 			db_rollback();
 			return false;
 		}

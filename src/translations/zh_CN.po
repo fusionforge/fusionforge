@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:31+0200\n"
+"POT-Creation-Date: 2013-09-20 10:52+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3230,7 +3230,7 @@ msgstr "错误:用户不存在"
 
 #: common/include/Group.class.php:2072 common/include/Group.class.php:2191
 #, php-format
-msgid "ERROR: User not removed: %s"
+msgid "Error: User not removed: %s"
 msgstr "错误：用户没有被删除：%s"
 
 #: common/include/Group.class.php:2094
@@ -23355,6 +23355,9 @@ msgstr "帐号"
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
 
+#~ msgid "ERROR: User not removed: %s"
+#~ msgstr "错误：用户没有被删除：%s"
+
 #, fuzzy
 #~ msgid "Registation Complete"
 #~ msgstr "注册完成"
@@ -24349,9 +24352,6 @@ msgstr "我的个人首页"
 
 #~ msgid "Error: Could Not Add User To Group: %s"
 #~ msgstr "错误:不能将用户加到组：%s"
-
-#~ msgid "Error: User not removed: %s"
-#~ msgstr "错误：用户没有被删除：%s"
 
 #~ msgid "Read"
 #~ msgstr "读"

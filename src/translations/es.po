@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 10:46+0200\n"
+"POT-Creation-Date: 2013-09-20 10:52+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -3142,8 +3142,8 @@ msgstr "Error: El usuario no existe"
 
 #: common/include/Group.class.php:2072 common/include/Group.class.php:2191
 #, php-format
-msgid "ERROR: User not removed: %s"
-msgstr "ERROR: Usuario no eliminado: %s"
+msgid "Error: User not removed: %s"
+msgstr "Error: Usuario no eliminado: %s"
 
 #: common/include/Group.class.php:2094
 #, fuzzy
@@ -23080,6 +23080,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
 
+#~ msgid "ERROR: User not removed: %s"
+#~ msgstr "ERROR: Usuario no eliminado: %s"
+
 #~ msgid "Registation Complete"
 #~ msgstr "Registro completo"
 
@@ -24319,9 +24322,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Error: Could Not Add User To Group: %s"
 #~ msgstr "Error: No se pudo añadir el usuario al grupo: %s"
-
-#~ msgid "Error: User not removed: %s"
-#~ msgstr "Error: Usuario no eliminado: %s"
 
 #~ msgid "* Denotes requests > %s Days Old"
 #~ msgstr "* Indica que se registró hace más de %s días"
