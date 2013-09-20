@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:56+0200\n"
+"POT-Creation-Date: 2013-09-20 17:14+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -2188,7 +2188,7 @@ msgstr "Version"
 #: www/people/people_utils.php:177 www/people/people_utils.php:321
 #: www/pm/admin/index.php:339 www/pm/calendar.php:292
 #: www/project/admin/database.php:234 www/project/admin/index.php:289
-#: www/project/admin/tools.php:304 www/reporting/timecategory.php:99
+#: www/project/admin/tools.php:305 www/reporting/timecategory.php:99
 #: www/scm/admin/index.php:176
 msgid "Update"
 msgstr "Aktualisierung"
@@ -15439,7 +15439,8 @@ msgstr "Neuen hinzufügen"
 msgid "Edit the %ss Table"
 msgstr "Editieren Sie die %ss Tabelle"
 
-#: www/admin/approve-pending.php:47 www/snapshots.php:39 www/tarballs.php:40
+#: www/admin/approve-pending.php:47 www/project/admin/tools.php:34
+#: www/snapshots.php:39 www/tarballs.php:40
 msgid "Error creating group"
 msgstr "Fehler beim Erstellen einer Gruppe"
 
@@ -19942,7 +19943,7 @@ msgstr ""
 "Sie sind dabei dieses Unterprojekt und all seine Daten dauerhaft und "
 "unwiderbringlich zu löschen!"
 
-#: www/pm/admin/index.php:388 www/project/admin/tools.php:326
+#: www/pm/admin/index.php:388 www/project/admin/tools.php:327
 #, fuzzy
 msgid "Tasks Administration"
 msgstr "Administration"
@@ -21068,7 +21069,6 @@ msgid ""
 msgstr ""
 
 #: www/project/admin/project_admin_utils.php:56
-#: www/project/admin/tools.php:108
 msgid "Tools"
 msgstr "Werkzeuge"
 
@@ -21203,102 +21203,103 @@ msgstr ""
 msgid "Shared role (can be referenced by other projects)"
 msgstr "Das Kennzeichen ist dem Projekt zugeordnet worden."
 
-#: www/project/admin/tools.php:34
-msgid "Error creating group object"
-msgstr "Fehler beim Erstellen des Gruppen-Objektes"
-
 #: www/project/admin/tools.php:97
 msgid "At least one plugin does not initialize correctly"
 msgstr ""
 
-#: www/project/admin/tools.php:114
+#: www/project/admin/tools.php:108
+#, fuzzy, php-format
+msgid "Tools for %s"
+msgstr "Foren für %1$s"
+
+#: www/project/admin/tools.php:115
 #, fuzzy
 msgid "Active Tools"
 msgstr "Aktiv"
 
-#: www/project/admin/tools.php:151
+#: www/project/admin/tools.php:152
 msgid "Use Project Activity"
 msgstr "Benutze Projekt Aktivität"
 
-#: www/project/admin/tools.php:164
+#: www/project/admin/tools.php:165
 msgid "Use Forums"
 msgstr "Benutze Foren"
 
-#: www/project/admin/tools.php:177
+#: www/project/admin/tools.php:178
 msgid "Use Trackers"
 msgstr "Benutze Tracker"
 
-#: www/project/admin/tools.php:190
+#: www/project/admin/tools.php:191
 msgid "Use Mailing Lists"
 msgstr "Benutze Mailing Listen"
 
-#: www/project/admin/tools.php:203
+#: www/project/admin/tools.php:204
 #, fuzzy
 msgid "Use Tasks"
 msgstr "Aufträge"
 
-#: www/project/admin/tools.php:216
+#: www/project/admin/tools.php:217
 msgid "Use Documents"
 msgstr "Dokumente benutzen"
 
-#: www/project/admin/tools.php:229
+#: www/project/admin/tools.php:230
 msgid "Use Surveys"
 msgstr "Benutze Umfragen"
 
-#: www/project/admin/tools.php:242
+#: www/project/admin/tools.php:243
 msgid "Use News"
 msgstr "Benutze Neuigkeiten"
 
-#: www/project/admin/tools.php:255
+#: www/project/admin/tools.php:256
 msgid "Use Source Code"
 msgstr "Source-Code benutzen"
 
-#: www/project/admin/tools.php:268
+#: www/project/admin/tools.php:269
 msgid "Use File Release System"
 msgstr "Benutze Datei Freigabesystem"
 
-#: www/project/admin/tools.php:281
+#: www/project/admin/tools.php:282
 msgid "Use FTP"
 msgstr "Benutze FTP"
 
-#: www/project/admin/tools.php:290
+#: www/project/admin/tools.php:291
 msgid "Use Statistics"
 msgstr "Benutze Statistiken"
 
-#: www/project/admin/tools.php:314
+#: www/project/admin/tools.php:315
 msgid "Tool Admin"
 msgstr "Tool Admin"
 
-#: www/project/admin/tools.php:317
+#: www/project/admin/tools.php:318
 msgid "Forums Admin"
 msgstr "Foren-Admin"
 
-#: www/project/admin/tools.php:320
+#: www/project/admin/tools.php:321
 msgid "Trackers Admin"
 msgstr "Tracker Admin"
 
-#: www/project/admin/tools.php:323
+#: www/project/admin/tools.php:324
 msgid "Mailing Lists Admin"
 msgstr "Mailinglisten Admin"
 
-#: www/project/admin/tools.php:329
+#: www/project/admin/tools.php:330
 msgid "Documents Admin"
 msgstr "Dokumenten-Admin"
 
-#: www/project/admin/tools.php:332
+#: www/project/admin/tools.php:333
 msgid "Survey Admin"
 msgstr "Umfragen-Admin"
 
-#: www/project/admin/tools.php:335
+#: www/project/admin/tools.php:336
 #, fuzzy
 msgid "News Admin"
 msgstr "News-Admin"
 
-#: www/project/admin/tools.php:338
+#: www/project/admin/tools.php:339
 msgid "Source Code Admin"
 msgstr "Source-Code Admin"
 
-#: www/project/admin/tools.php:341
+#: www/project/admin/tools.php:342
 msgid "File Release System Admin"
 msgstr "Dateifreigabe Admin"
 
@@ -23807,6 +23808,9 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "Error creating group object"
+#~ msgstr "Fehler beim Erstellen des Gruppen-Objektes"
 
 #, fuzzy
 #~ msgid "Virtual Host: "

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:56+0200\n"
+"POT-Creation-Date: 2013-09-20 17:14+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -2184,7 +2184,7 @@ msgstr "Liberacións"
 #: www/people/people_utils.php:177 www/people/people_utils.php:321
 #: www/pm/admin/index.php:339 www/pm/calendar.php:292
 #: www/project/admin/database.php:234 www/project/admin/index.php:289
-#: www/project/admin/tools.php:304 www/reporting/timecategory.php:99
+#: www/project/admin/tools.php:305 www/reporting/timecategory.php:99
 #: www/scm/admin/index.php:176
 msgid "Update"
 msgstr "Actualizar "
@@ -15448,7 +15448,8 @@ msgstr "Engadir novo "
 msgid "Edit the %ss Table"
 msgstr "Editar a táboa de %ss"
 
-#: www/admin/approve-pending.php:47 www/snapshots.php:39 www/tarballs.php:40
+#: www/admin/approve-pending.php:47 www/project/admin/tools.php:34
+#: www/snapshots.php:39 www/tarballs.php:40
 msgid "Error creating group"
 msgstr "Produciuse un erro ao crear o grupo"
 
@@ -19906,7 +19907,7 @@ msgstr ""
 "Vai eliminar permanente e irrecuperabelmente este subproxecto e todos os "
 "seus datos relacionados!"
 
-#: www/pm/admin/index.php:388 www/project/admin/tools.php:326
+#: www/pm/admin/index.php:388 www/project/admin/tools.php:327
 #, fuzzy
 msgid "Tasks Administration"
 msgstr "Administración"
@@ -21017,7 +21018,6 @@ msgid ""
 msgstr ""
 
 #: www/project/admin/project_admin_utils.php:56
-#: www/project/admin/tools.php:108
 #, fuzzy
 msgid "Tools"
 msgstr "Pendente"
@@ -21150,111 +21150,112 @@ msgstr ""
 msgid "Shared role (can be referenced by other projects)"
 msgstr "Engadiuse a etiqueta ao proxecto."
 
-#: www/project/admin/tools.php:34
-msgid "Error creating group object"
-msgstr "Produciuse un erro ao crear o obxecto de grupo "
-
 #: www/project/admin/tools.php:97
 msgid "At least one plugin does not initialize correctly"
 msgstr ""
 
-#: www/project/admin/tools.php:114
+#: www/project/admin/tools.php:108
+#, fuzzy, php-format
+msgid "Tools for %s"
+msgstr "Foros para %1$s"
+
+#: www/project/admin/tools.php:115
 #, fuzzy
 msgid "Active Tools"
 msgstr "Activo "
 
-#: www/project/admin/tools.php:151
+#: www/project/admin/tools.php:152
 msgid "Use Project Activity"
 msgstr "Usar actividade do proxecto"
 
-#: www/project/admin/tools.php:164
+#: www/project/admin/tools.php:165
 msgid "Use Forums"
 msgstr "Usar os foros"
 
-#: www/project/admin/tools.php:177
+#: www/project/admin/tools.php:178
 #, fuzzy
 msgid "Use Trackers"
 msgstr "Usar o rexistro"
 
-#: www/project/admin/tools.php:190
+#: www/project/admin/tools.php:191
 msgid "Use Mailing Lists"
 msgstr "Usar as listas de correo"
 
-#: www/project/admin/tools.php:203
+#: www/project/admin/tools.php:204
 #, fuzzy
 msgid "Use Tasks"
 msgstr "Tarefas "
 
-#: www/project/admin/tools.php:216
+#: www/project/admin/tools.php:217
 #, fuzzy
 msgid "Use Documents"
 msgstr "Documentos"
 
-#: www/project/admin/tools.php:229
+#: www/project/admin/tools.php:230
 msgid "Use Surveys"
 msgstr "Usar as enquisas"
 
-#: www/project/admin/tools.php:242
+#: www/project/admin/tools.php:243
 msgid "Use News"
 msgstr "Usar as novas"
 
-#: www/project/admin/tools.php:255
+#: www/project/admin/tools.php:256
 #, fuzzy
 msgid "Use Source Code"
 msgstr "IP de orixe"
 
-#: www/project/admin/tools.php:268
+#: www/project/admin/tools.php:269
 msgid "Use File Release System"
 msgstr "Usar o sistema de liberación de ficheiros"
 
-#: www/project/admin/tools.php:281
+#: www/project/admin/tools.php:282
 msgid "Use FTP"
 msgstr "Usar o FTP"
 
-#: www/project/admin/tools.php:290
+#: www/project/admin/tools.php:291
 msgid "Use Statistics"
 msgstr "Usar as estatísticas"
 
-#: www/project/admin/tools.php:314
+#: www/project/admin/tools.php:315
 msgid "Tool Admin"
 msgstr "Administración de ferramentas"
 
-#: www/project/admin/tools.php:317
+#: www/project/admin/tools.php:318
 #, fuzzy
 msgid "Forums Admin"
 msgstr "Administración do foro "
 
-#: www/project/admin/tools.php:320
+#: www/project/admin/tools.php:321
 #, fuzzy
 msgid "Trackers Admin"
 msgstr "Administración do rexistro "
 
-#: www/project/admin/tools.php:323
+#: www/project/admin/tools.php:324
 #, fuzzy
 msgid "Mailing Lists Admin"
 msgstr "Listas de correo"
 
-#: www/project/admin/tools.php:329
+#: www/project/admin/tools.php:330
 #, fuzzy
 msgid "Documents Admin"
 msgstr "Documentos"
 
-#: www/project/admin/tools.php:332
+#: www/project/admin/tools.php:333
 #, fuzzy
 msgid "Survey Admin"
 msgstr "Administración de enquisas"
 
-#: www/project/admin/tools.php:335
+#: www/project/admin/tools.php:336
 #, fuzzy
 msgid "News Admin"
 msgstr "Administración de novas"
 
-#: www/project/admin/tools.php:338
+#: www/project/admin/tools.php:339
 #, fuzzy
 msgid "Source Code Admin"
 msgstr "IP de orixe"
 
-#: www/project/admin/tools.php:341
+#: www/project/admin/tools.php:342
 #, fuzzy
 msgid "File Release System Admin"
 msgstr "Sistema de liberación de ficheiros"
@@ -23737,6 +23738,9 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#~ msgid "Error creating group object"
+#~ msgstr "Produciuse un erro ao crear o obxecto de grupo "
 
 #, fuzzy
 #~ msgid "Virtual Host: "

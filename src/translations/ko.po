@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:56+0200\n"
+"POT-Creation-Date: 2013-09-20 17:14+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2175,7 +2175,7 @@ msgstr "릴리즈"
 #: www/people/people_utils.php:177 www/people/people_utils.php:321
 #: www/pm/admin/index.php:339 www/pm/calendar.php:292
 #: www/project/admin/database.php:234 www/project/admin/index.php:289
-#: www/project/admin/tools.php:304 www/reporting/timecategory.php:99
+#: www/project/admin/tools.php:305 www/reporting/timecategory.php:99
 #: www/scm/admin/index.php:176
 msgid "Update"
 msgstr ""
@@ -15120,7 +15120,8 @@ msgstr ""
 msgid "Edit the %ss Table"
 msgstr "그룹 편집하기"
 
-#: www/admin/approve-pending.php:47 www/snapshots.php:39 www/tarballs.php:40
+#: www/admin/approve-pending.php:47 www/project/admin/tools.php:34
+#: www/snapshots.php:39 www/tarballs.php:40
 #, fuzzy
 msgid "Error creating group"
 msgstr "그룹 객체 생성 오류"
@@ -19499,7 +19500,7 @@ msgid ""
 "all its related data!"
 msgstr ""
 
-#: www/pm/admin/index.php:388 www/project/admin/tools.php:326
+#: www/pm/admin/index.php:388 www/project/admin/tools.php:327
 #, fuzzy
 msgid "Tasks Administration"
 msgstr "관리"
@@ -20590,7 +20591,6 @@ msgid ""
 msgstr ""
 
 #: www/project/admin/project_admin_utils.php:56
-#: www/project/admin/tools.php:108
 #, fuzzy
 msgid "Tools"
 msgstr "Total"
@@ -20715,112 +20715,113 @@ msgstr ""
 msgid "Shared role (can be referenced by other projects)"
 msgstr ""
 
-#: www/project/admin/tools.php:34
-msgid "Error creating group object"
-msgstr "그룹 객체 생성 오류"
-
 #: www/project/admin/tools.php:97
 msgid "At least one plugin does not initialize correctly"
 msgstr ""
 
-#: www/project/admin/tools.php:114
+#: www/project/admin/tools.php:108
+#, fuzzy, php-format
+msgid "Tools for %s"
+msgstr "%1$s의 게시판"
+
+#: www/project/admin/tools.php:115
 #, fuzzy
 msgid "Active Tools"
 msgstr "Active"
 
-#: www/project/admin/tools.php:151
+#: www/project/admin/tools.php:152
 #, fuzzy
 msgid "Use Project Activity"
 msgstr "All Project Admins"
 
-#: www/project/admin/tools.php:164
+#: www/project/admin/tools.php:165
 msgid "Use Forums"
 msgstr "게시판 사용"
 
-#: www/project/admin/tools.php:177
+#: www/project/admin/tools.php:178
 #, fuzzy
 msgid "Use Trackers"
 msgstr "문제점 추적 기능 사용"
 
-#: www/project/admin/tools.php:190
+#: www/project/admin/tools.php:191
 msgid "Use Mailing Lists"
 msgstr "메일링 리스트 사용"
 
-#: www/project/admin/tools.php:203
+#: www/project/admin/tools.php:204
 #, fuzzy
 msgid "Use Tasks"
 msgstr "Tasks"
 
-#: www/project/admin/tools.php:216
+#: www/project/admin/tools.php:217
 #, fuzzy
 msgid "Use Documents"
 msgstr "게시판 사용"
 
-#: www/project/admin/tools.php:229
+#: www/project/admin/tools.php:230
 msgid "Use Surveys"
 msgstr "설문조사 기능 사용"
 
-#: www/project/admin/tools.php:242
+#: www/project/admin/tools.php:243
 msgid "Use News"
 msgstr "뉴스 기능 사용"
 
-#: www/project/admin/tools.php:255
+#: www/project/admin/tools.php:256
 #, fuzzy
 msgid "Use Source Code"
 msgstr "Source IP"
 
-#: www/project/admin/tools.php:268
+#: www/project/admin/tools.php:269
 msgid "Use File Release System"
 msgstr "파일 릴리즈 시스템 사용"
 
-#: www/project/admin/tools.php:281
+#: www/project/admin/tools.php:282
 msgid "Use FTP"
 msgstr "FTP 사용"
 
-#: www/project/admin/tools.php:290
+#: www/project/admin/tools.php:291
 msgid "Use Statistics"
 msgstr "통계 기능 사용"
 
-#: www/project/admin/tools.php:314
+#: www/project/admin/tools.php:315
 msgid "Tool Admin"
 msgstr "툴 관리자"
 
-#: www/project/admin/tools.php:317
+#: www/project/admin/tools.php:318
 #, fuzzy
 msgid "Forums Admin"
 msgstr "게시판 설정"
 
-#: www/project/admin/tools.php:320
+#: www/project/admin/tools.php:321
 #, fuzzy
 msgid "Trackers Admin"
 msgstr "문제점 추적 관리"
 
-#: www/project/admin/tools.php:323
+#: www/project/admin/tools.php:324
 #, fuzzy
 msgid "Mailing Lists Admin"
 msgstr "메일링 리스트"
 
-#: www/project/admin/tools.php:329
+#: www/project/admin/tools.php:330
 #, fuzzy
 msgid "Documents Admin"
 msgstr "게시판 설정"
 
-#: www/project/admin/tools.php:332
+#: www/project/admin/tools.php:333
 #, fuzzy
 msgid "Survey Admin"
 msgstr "Survey Administration"
 
-#: www/project/admin/tools.php:335
+#: www/project/admin/tools.php:336
 #, fuzzy
 msgid "News Admin"
 msgstr "뉴스 설정"
 
-#: www/project/admin/tools.php:338
+#: www/project/admin/tools.php:339
 #, fuzzy
 msgid "Source Code Admin"
 msgstr "Source IP"
 
-#: www/project/admin/tools.php:341
+#: www/project/admin/tools.php:342
 #, fuzzy
 msgid "File Release System Admin"
 msgstr "파일 릴리즈 시스템 사용"
@@ -23265,6 +23266,9 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#~ msgid "Error creating group object"
+#~ msgstr "그룹 객체 생성 오류"
 
 #, fuzzy
 #~ msgid "Virtual Host: "

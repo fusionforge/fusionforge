@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:56+0200\n"
+"POT-Creation-Date: 2013-09-20 17:14+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -2070,7 +2070,7 @@ msgstr "Accepter"
 #: www/people/people_utils.php:177 www/people/people_utils.php:321
 #: www/pm/admin/index.php:339 www/pm/calendar.php:292
 #: www/project/admin/database.php:234 www/project/admin/index.php:289
-#: www/project/admin/tools.php:304 www/reporting/timecategory.php:99
+#: www/project/admin/tools.php:305 www/reporting/timecategory.php:99
 #: www/scm/admin/index.php:176
 msgid "Update"
 msgstr "Mettre à jour"
@@ -14931,7 +14931,8 @@ msgstr "ajouter nouveau"
 msgid "Edit the %ss Table"
 msgstr "Modifier la table : %s"
 
-#: www/admin/approve-pending.php:47 www/snapshots.php:39 www/tarballs.php:40
+#: www/admin/approve-pending.php:47 www/project/admin/tools.php:34
+#: www/snapshots.php:39 www/tarballs.php:40
 msgid "Error creating group"
 msgstr "Erreur lors de la création d'un objet groupe"
 
@@ -19328,7 +19329,7 @@ msgstr ""
 "Vous êtes sur le point de supprimer irrémédiablement ce sous-projet et "
 "toutes ses données !"
 
-#: www/pm/admin/index.php:388 www/project/admin/tools.php:326
+#: www/pm/admin/index.php:388 www/project/admin/tools.php:327
 msgid "Tasks Administration"
 msgstr "Administration des gestionnaires de tâches"
 
@@ -20403,7 +20404,6 @@ msgid ""
 msgstr ""
 
 #: www/project/admin/project_admin_utils.php:56
-#: www/project/admin/tools.php:108
 msgid "Tools"
 msgstr "Outils"
 
@@ -20541,99 +20541,100 @@ msgstr ""
 msgid "Shared role (can be referenced by other projects)"
 msgstr "Rôle partagé (peut être référencé par d'autres projets)"
 
-#: www/project/admin/tools.php:34
-msgid "Error creating group object"
-msgstr "Erreur lors de la création d'un objet groupe"
-
 #: www/project/admin/tools.php:97
 msgid "At least one plugin does not initialize correctly"
 msgstr "Au moins un greffon ne s'est pas initialisé correctement"
 
-#: www/project/admin/tools.php:114
+#: www/project/admin/tools.php:108
+#, php-format
+msgid "Tools for %s"
+msgstr "Outils de %s"
+
+#: www/project/admin/tools.php:115
 msgid "Active Tools"
 msgstr "Outils actifs"
 
-#: www/project/admin/tools.php:151
+#: www/project/admin/tools.php:152
 msgid "Use Project Activity"
 msgstr "Utiliser l'activité du projet"
 
-#: www/project/admin/tools.php:164
+#: www/project/admin/tools.php:165
 msgid "Use Forums"
 msgstr "Forums"
 
-#: www/project/admin/tools.php:177
+#: www/project/admin/tools.php:178
 msgid "Use Trackers"
 msgstr "Utiliser les outils de suivi"
 
-#: www/project/admin/tools.php:190
+#: www/project/admin/tools.php:191
 msgid "Use Mailing Lists"
 msgstr "Listes de diffusion"
 
-#: www/project/admin/tools.php:203
+#: www/project/admin/tools.php:204
 msgid "Use Tasks"
 msgstr "Utiliser les gestionnaires de tâches"
 
-#: www/project/admin/tools.php:216
+#: www/project/admin/tools.php:217
 msgid "Use Documents"
 msgstr "Utiliser le gestionnaire de documents"
 
-#: www/project/admin/tools.php:229
+#: www/project/admin/tools.php:230
 msgid "Use Surveys"
 msgstr "Sondages"
 
-#: www/project/admin/tools.php:242
+#: www/project/admin/tools.php:243
 msgid "Use News"
 msgstr "Annonces"
 
-#: www/project/admin/tools.php:255
+#: www/project/admin/tools.php:256
 msgid "Use Source Code"
 msgstr "Utiliser le gestionnaire de code source"
 
-#: www/project/admin/tools.php:268
+#: www/project/admin/tools.php:269
 msgid "Use File Release System"
 msgstr "Publication de fichiers (avec version)"
 
-#: www/project/admin/tools.php:281
+#: www/project/admin/tools.php:282
 msgid "Use FTP"
 msgstr "FTP"
 
-#: www/project/admin/tools.php:290
+#: www/project/admin/tools.php:291
 msgid "Use Statistics"
 msgstr "Statistiques"
 
-#: www/project/admin/tools.php:314
+#: www/project/admin/tools.php:315
 msgid "Tool Admin"
 msgstr "La boite à outils de l'administrateur"
 
-#: www/project/admin/tools.php:317
+#: www/project/admin/tools.php:318
 msgid "Forums Admin"
 msgstr "Administration des forums"
 
-#: www/project/admin/tools.php:320
+#: www/project/admin/tools.php:321
 msgid "Trackers Admin"
 msgstr "Administration des outils de suivi"
 
-#: www/project/admin/tools.php:323
+#: www/project/admin/tools.php:324
 msgid "Mailing Lists Admin"
 msgstr "Administration des listes de diffusion"
 
-#: www/project/admin/tools.php:329
+#: www/project/admin/tools.php:330
 msgid "Documents Admin"
 msgstr "Administration du gestionnaire de documents"
 
-#: www/project/admin/tools.php:332
+#: www/project/admin/tools.php:333
 msgid "Survey Admin"
 msgstr "Administration des sondages"
 
-#: www/project/admin/tools.php:335
+#: www/project/admin/tools.php:336
 msgid "News Admin"
 msgstr "Administration des annonces"
 
-#: www/project/admin/tools.php:338
+#: www/project/admin/tools.php:339
 msgid "Source Code Admin"
 msgstr "Administration du gestionnaire de code source"
 
-#: www/project/admin/tools.php:341
+#: www/project/admin/tools.php:342
 msgid "File Release System Admin"
 msgstr "Administration du système de publication de fichiers"
 
@@ -23109,6 +23110,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Error creating group object"
+#~ msgstr "Erreur lors de la création d'un objet groupe"
 
 #~ msgid "Virtual Host: "
 #~ msgstr "Hôte virtuel :  "
@@ -26308,9 +26312,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Configuration using ACL"
 #~ msgstr "Configuration par ACL"
-
-#~ msgid "Tools for %s"
-#~ msgstr "Outils de %s"
 
 #~ msgid "Add Members From List"
 #~ msgstr "Ajouter des membres à partir de la liste"

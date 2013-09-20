@@ -31,7 +31,7 @@ $group_id = getIntFromRequest('group_id');
 session_require_perm('project_admin', $group_id);
 $group = group_get_object($group_id);
 if (!$group || !is_object($group)) {
-	exit_error(_('Error creating group object'), 'admin');
+	exit_error(_('Error creating group'), 'admin');
 } elseif ($group->isError()) {
 	exit_error($group->getErrorMessage(), 'admin');
 }
@@ -105,7 +105,8 @@ if (getStringFromRequest('submit')) {
 
 }
 
-project_admin_header(array('title'=>_('Tools'),'group'=>$group->getID()));
+project_admin_header(array('title'=>sprintf(_('Tools for %s'), $group->getPublicName()),
+						   'group'=>$group->getID()));
 
 echo '<table class="fullwidth">';
 echo '<tr class="top">';

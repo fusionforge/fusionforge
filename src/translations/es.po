@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 16:56+0200\n"
+"POT-Creation-Date: 2013-09-20 17:14+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -2107,7 +2107,7 @@ msgstr "Versiones"
 #: www/people/people_utils.php:177 www/people/people_utils.php:321
 #: www/pm/admin/index.php:339 www/pm/calendar.php:292
 #: www/project/admin/database.php:234 www/project/admin/index.php:289
-#: www/project/admin/tools.php:304 www/reporting/timecategory.php:99
+#: www/project/admin/tools.php:305 www/reporting/timecategory.php:99
 #: www/scm/admin/index.php:176
 msgid "Update"
 msgstr "Actualizar"
@@ -14940,7 +14940,8 @@ msgstr "añadir nuevo"
 msgid "Edit the %ss Table"
 msgstr "Editar la tabla de %s"
 
-#: www/admin/approve-pending.php:47 www/snapshots.php:39 www/tarballs.php:40
+#: www/admin/approve-pending.php:47 www/project/admin/tools.php:34
+#: www/snapshots.php:39 www/tarballs.php:40
 msgid "Error creating group"
 msgstr "Error creando proyecto"
 
@@ -19268,7 +19269,7 @@ msgstr ""
 "Está a punto de borrar permanentemente e irrevocablemente este subproyecto y "
 "todos sus datos asociados"
 
-#: www/pm/admin/index.php:388 www/project/admin/tools.php:326
+#: www/pm/admin/index.php:388 www/project/admin/tools.php:327
 msgid "Tasks Administration"
 msgstr "Administrador Tareas"
 
@@ -20357,7 +20358,6 @@ msgstr ""
 "Agregar / Borrar miembros."
 
 #: www/project/admin/project_admin_utils.php:56
-#: www/project/admin/tools.php:108
 msgid "Tools"
 msgstr "Herramientas"
 
@@ -20487,99 +20487,100 @@ msgstr ""
 msgid "Shared role (can be referenced by other projects)"
 msgstr "Rol compartido (puede ser referenciado por otros proyectos)"
 
-#: www/project/admin/tools.php:34
-msgid "Error creating group object"
-msgstr "Error creando el objeto grupo"
-
 #: www/project/admin/tools.php:97
 msgid "At least one plugin does not initialize correctly"
 msgstr "Como mínimo un plugin no se inicia correctamente"
 
-#: www/project/admin/tools.php:114
+#: www/project/admin/tools.php:108
+#, fuzzy, php-format
+msgid "Tools for %s"
+msgstr "Seguimiento de peticiones para %s"
+
+#: www/project/admin/tools.php:115
 msgid "Active Tools"
 msgstr "Herramientas activas"
 
-#: www/project/admin/tools.php:151
+#: www/project/admin/tools.php:152
 msgid "Use Project Activity"
 msgstr "Activar actividad de proyecto"
 
-#: www/project/admin/tools.php:164
+#: www/project/admin/tools.php:165
 msgid "Use Forums"
 msgstr "Activar foros"
 
-#: www/project/admin/tools.php:177
+#: www/project/admin/tools.php:178
 msgid "Use Trackers"
 msgstr "Activar Peticiones"
 
-#: www/project/admin/tools.php:190
+#: www/project/admin/tools.php:191
 msgid "Use Mailing Lists"
 msgstr "Activar listas de correo"
 
-#: www/project/admin/tools.php:203
+#: www/project/admin/tools.php:204
 msgid "Use Tasks"
 msgstr "Activar tareas"
 
-#: www/project/admin/tools.php:216
+#: www/project/admin/tools.php:217
 msgid "Use Documents"
 msgstr "Activar documentos"
 
-#: www/project/admin/tools.php:229
+#: www/project/admin/tools.php:230
 msgid "Use Surveys"
 msgstr "Activar encuestas"
 
-#: www/project/admin/tools.php:242
+#: www/project/admin/tools.php:243
 msgid "Use News"
 msgstr "Activar noticias"
 
-#: www/project/admin/tools.php:255
+#: www/project/admin/tools.php:256
 msgid "Use Source Code"
 msgstr "Activar repositorios de código fuente"
 
-#: www/project/admin/tools.php:268
+#: www/project/admin/tools.php:269
 msgid "Use File Release System"
 msgstr "Activar sistema de publicación de ficheros"
 
-#: www/project/admin/tools.php:281
+#: www/project/admin/tools.php:282
 msgid "Use FTP"
 msgstr "Activar FTP"
 
-#: www/project/admin/tools.php:290
+#: www/project/admin/tools.php:291
 msgid "Use Statistics"
 msgstr "Activar estadísticas"
 
-#: www/project/admin/tools.php:314
+#: www/project/admin/tools.php:315
 msgid "Tool Admin"
 msgstr "Herramienta de administración"
 
-#: www/project/admin/tools.php:317
+#: www/project/admin/tools.php:318
 msgid "Forums Admin"
 msgstr "Administración de foros"
 
-#: www/project/admin/tools.php:320
+#: www/project/admin/tools.php:321
 msgid "Trackers Admin"
 msgstr "Administración del repositorio de informes"
 
-#: www/project/admin/tools.php:323
+#: www/project/admin/tools.php:324
 msgid "Mailing Lists Admin"
 msgstr "Listas de correo"
 
-#: www/project/admin/tools.php:329
+#: www/project/admin/tools.php:330
 msgid "Documents Admin"
 msgstr "Administración de documentos"
 
-#: www/project/admin/tools.php:332
+#: www/project/admin/tools.php:333
 msgid "Survey Admin"
 msgstr "Administración de encuestas"
 
-#: www/project/admin/tools.php:335
+#: www/project/admin/tools.php:336
 msgid "News Admin"
 msgstr "Administración de noticias"
 
-#: www/project/admin/tools.php:338
+#: www/project/admin/tools.php:339
 msgid "Source Code Admin"
 msgstr "Administración del código fuente"
 
-#: www/project/admin/tools.php:341
+#: www/project/admin/tools.php:342
 msgid "File Release System Admin"
 msgstr "Sistema de publicación de ficheros"
 
@@ -23065,6 +23066,12 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
 
+#~ msgid "Trackers for %s"
+#~ msgstr "Seguimiento de peticiones para %s"
+
+#~ msgid "Error creating group object"
+#~ msgstr "Error creando el objeto grupo"
+
 #~ msgid "Virtual Host: "
 #~ msgstr "Host Virtual: "
 
@@ -24338,9 +24345,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Related commits"
 #~ msgstr "Commits relacionado"
-
-#~ msgid "Trackers for %s"
-#~ msgstr "Seguimiento de peticiones para %s"
 
 #~ msgid "No Canned Responses set up in this Project"
 #~ msgstr "No hay respuesta prefijadas en este grupo"
