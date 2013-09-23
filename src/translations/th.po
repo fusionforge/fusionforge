@@ -20004,9 +20004,9 @@ msgstr ""
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
-#, fuzzy, php-format
+#, php-format
 msgid "No matches found for “%s”"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:341
 msgid "with all words"

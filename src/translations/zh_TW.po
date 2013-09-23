@@ -21754,7 +21754,7 @@ msgstr "未發現符合項目 - 沒有部份提供(檢查您的權限)"
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
 #, fuzzy, php-format
 msgid "No matches found for “%s”"
-msgstr "找不到關於 <em>%1$s</em> 的資料"
+msgstr "找不到關於 “%s” 的資料"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:341
 msgid "with all words"

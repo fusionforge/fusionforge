@@ -21730,7 +21730,7 @@ msgstr "未发现符合项目 - 没有部份提供(检查您的权限)"
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
 #, fuzzy, php-format
 msgid "No matches found for “%s”"
-msgstr "找不到关于 <em>%1$s</em> 的资料"
+msgstr "找不到关于 “%s” 的资料"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:341
 msgid "with all words"

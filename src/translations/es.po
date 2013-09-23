@@ -21442,11 +21442,11 @@ msgstr "Nota: sólo se muestran los primeros %d resultados de esta categoría."
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:195
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:221
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "No matches found for “%s” - No sections available (check your permissions)"
 msgstr ""
-"No coincidencias para <em>%s</em> - No hay secciones disponibles (verifica "
+"Ninguna coincidencia encontrada para “%s” - No hay secciones disponibles (verifica "
 "tus permisos)"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197

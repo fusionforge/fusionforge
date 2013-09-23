@@ -21289,7 +21289,7 @@ msgstr ""
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
 #, fuzzy, php-format
 msgid "No matches found for “%s”"
-msgstr "Няма открити резултати за <em>%1$s</em>"
+msgstr "Няма открити резултати за <em>%s</em>"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:341
 msgid "with all words"

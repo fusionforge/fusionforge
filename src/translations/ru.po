@@ -22250,7 +22250,7 @@ msgstr "Проверьте ваши полномочия, секция недо�
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
 #, fuzzy, php-format
 msgid "No matches found for “%s”"
-msgstr "Ничего не найдено для <em>%1$s</em>"
+msgstr "Ничего не найдено для “%s”"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:341
 msgid "with all words"
