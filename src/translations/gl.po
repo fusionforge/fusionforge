@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-23 11:28+0200\n"
+"POT-Creation-Date: 2013-09-23 11:51+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -1531,7 +1531,7 @@ msgstr ""
 #: common/include/Navigation.class.php:171
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:48
 #: www/admin/index.php:66 www/admin/index.php:155
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:336
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:338
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:57
 msgid "Search"
 msgstr "Busca"
@@ -9996,8 +9996,10 @@ msgid "Enter Your Search Words Above"
 msgstr "Introduza as palabras da busca arriba"
 
 #: plugins/globalsearch/www/index.php:153
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:195
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:199
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:221
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:225
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
 #, fuzzy, php-format
@@ -22109,24 +22111,25 @@ msgstr "Resultado da procura nas novas"
 msgid "Note: only the first %d results for this category are displayed."
 msgstr ""
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:195
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:221
-#, fuzzy, php-format
-msgid ""
-"No matches found for “%s” - No sections available (check your permissions)"
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:196
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:222
+msgid " - "
 msgstr ""
-"Non se achou ningunha coincidencia – Non hai ningunha sección dispoñíbel "
-"(comprobe os seus permisos) "
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:341
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
+msgid "No sections available (check your permissions)"
+msgstr "Non hai ningunha sección dispoñíbel (comprobe os seus permisos) "
+
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:343
 msgid "with all words"
 msgstr "Con todas as palabras "
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:344
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:346
 msgid "with one word"
 msgstr "con unha palabra"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:391
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:393
 #, fuzzy
 msgid "Search All"
 msgstr "Busca"

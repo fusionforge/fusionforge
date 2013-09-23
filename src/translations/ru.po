@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-23 11:28+0200\n"
+"POT-Creation-Date: 2013-09-23 11:51+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1533,7 +1533,7 @@ msgstr ""
 #: common/include/Navigation.class.php:171
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:48
 #: www/admin/index.php:66 www/admin/index.php:155
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:336
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:338
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:57
 msgid "Search"
 msgstr "Поиск"
@@ -10021,8 +10021,10 @@ msgid "Enter Your Search Words Above"
 msgstr ""
 
 #: plugins/globalsearch/www/index.php:153
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:195
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:199
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:221
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:225
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
 #, fuzzy, php-format
@@ -22244,22 +22246,26 @@ msgstr "Результаты поиска новостей"
 msgid "Note: only the first %d results for this category are displayed."
 msgstr ""
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:195
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:221
-#, fuzzy, php-format
-msgid ""
-"No matches found for “%s” - No sections available (check your permissions)"
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:196
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:222
+msgid " - "
+msgstr ""
+
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
+#, fuzzy
+msgid "No sections available (check your permissions)"
 msgstr "Проверьте ваши полномочия, секция недоступна"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:341
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:343
 msgid "with all words"
 msgstr "все слова"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:344
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:346
 msgid "with one word"
 msgstr "в одно слово"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:391
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:393
 #, fuzzy
 msgid "Search All"
 msgstr "Поиск"
