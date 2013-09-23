@@ -211,7 +211,7 @@ class CreateTrackerWorkflow extends FForge_SeleniumTestCase
 		$this->click("//tr[@id='initval']//td[10]/input");
 		$this->click("post_changes");
 		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isTextPresent("ERROR: Initial values not saved"));
+		$this->assertTrue($this->isTextPresent("Error: Initial values not saved"));
 		$this->assertTrue($this->isTextPresent("Workflow saved"));
 		// unset postponned
 		$this->click("//tr[@id='initval']//td[9]/input");
