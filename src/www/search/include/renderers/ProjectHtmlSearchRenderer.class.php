@@ -108,8 +108,8 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 				header('Location: '.util_make_url_g($project_name,$project_id));
 			} else {
 				$this->writeHeader();
-				$html = '<h2>'.sprintf(_('Search results for <em>%1$s</em>'), $project_name).'</h2>';
-				$html .= '<p><strong>'.sprintf(_('No matches found for <em>%1$s</em>'), $project_name).'</strong></p>';
+				$html = '<h2>'.sprintf(_('Search results for “%s”'), $project_name).'</h2>';
+				$html .= '<p><strong>'.sprintf(_('No matches found for “%s”'), $project_name).'</strong></p>';
 				echo $html;
 				$this->writeFooter();
 			}

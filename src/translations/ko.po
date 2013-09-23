@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-23 11:06+0200\n"
+"POT-Creation-Date: 2013-09-23 11:24+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -21649,6 +21649,7 @@ msgstr ""
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
 #, fuzzy, php-format
 msgid "No matches found for “%s”"
 msgstr "%s에 대한 게시판이 없습니다"
@@ -21692,6 +21693,7 @@ msgid "%s Search Results"
 msgstr "Admin Search Results"
 
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
 #, fuzzy, php-format
 msgid "Search results for “%s”"
 msgstr "%1$s의 게시판"
@@ -21715,16 +21717,6 @@ msgstr "찾기"
 #, fuzzy
 msgid "Project Search"
 msgstr "새 프로젝트 이름"
-
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
-#, fuzzy, php-format
-msgid "Search results for <em>%1$s</em>"
-msgstr "%1$s의 게시판"
-
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
-#, fuzzy, php-format
-msgid "No matches found for <em>%1$s</em>"
-msgstr "%1$s에 대한 게시판이 없습니다."
 
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:53
 msgid "Completed"
@@ -23256,6 +23248,14 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "Search results for <em>%1$s</em>"
+#~ msgstr "%1$s의 게시판"
+
+#, fuzzy
+#~ msgid "No matches found for <em>%1$s</em>"
+#~ msgstr "%1$s에 대한 게시판이 없습니다."
 
 #, fuzzy
 #~ msgid "No matches found for <em>%s</em>"

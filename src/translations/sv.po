@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-23 11:06+0200\n"
+"POT-Creation-Date: 2013-09-23 11:24+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -21709,6 +21709,7 @@ msgstr ""
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
 #, fuzzy, php-format
 msgid "No matches found for “%s”"
 msgstr "Hittade inga forum för “%s”"
@@ -21752,6 +21753,7 @@ msgid "%s Search Results"
 msgstr "Admin Sökresultat"
 
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
 #, php-format
 msgid "Search results for “%s”"
 msgstr "Hittade inga forum för %s"
@@ -21775,16 +21777,6 @@ msgstr "Sök"
 #, fuzzy
 msgid "Project Search"
 msgstr "Nytt projektnamn"
-
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
-#, fuzzy, php-format
-msgid "Search results for <em>%1$s</em>"
-msgstr "Forum för %1$s"
-
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
-#, fuzzy, php-format
-msgid "No matches found for <em>%1$s</em>"
-msgstr "Hittade inga forum för %1$s"
 
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:53
 msgid "Completed"
@@ -23324,6 +23316,14 @@ msgstr "Användarenamn"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
+
+#, fuzzy
+#~ msgid "Search results for <em>%1$s</em>"
+#~ msgstr "Forum för %1$s"
+
+#, fuzzy
+#~ msgid "No matches found for <em>%1$s</em>"
+#~ msgstr "Hittade inga forum för %1$s"
 
 #, fuzzy
 #~ msgid "No matches found for <em>%s</em>"

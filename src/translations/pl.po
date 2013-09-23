@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-23 11:06+0200\n"
+"POT-Creation-Date: 2013-09-23 11:24+0200\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -20665,6 +20665,7 @@ msgstr ""
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
 #, fuzzy, php-format
 msgid "No matches found for “%s”"
 msgstr "Nie znaleziono żadnych dokumentów"
@@ -20706,6 +20707,7 @@ msgid "%s Search Results"
 msgstr ""
 
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
 #, fuzzy, php-format
 msgid "Search results for “%s”"
 msgstr "Nie znaleziono żadnych dokumentów"
@@ -20728,16 +20730,6 @@ msgstr ""
 #, fuzzy
 msgid "Project Search"
 msgstr "Brak wydań"
-
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
-#, php-format
-msgid "Search results for <em>%1$s</em>"
-msgstr ""
-
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
-#, fuzzy, php-format
-msgid "No matches found for <em>%1$s</em>"
-msgstr "Nie znaleziono żadnych dokumentów"
 
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:53
 msgid "Completed"
@@ -22181,6 +22173,10 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr ""
+
+#, fuzzy
+#~ msgid "No matches found for <em>%1$s</em>"
+#~ msgstr "Nie znaleziono żadnych dokumentów"
 
 #, fuzzy
 #~ msgid "<em>Private project</em>"

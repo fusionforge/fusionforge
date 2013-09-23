@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-23 11:06+0200\n"
+"POT-Creation-Date: 2013-09-23 11:24+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -21752,6 +21752,7 @@ msgstr "未發現符合項目 - 沒有部份提供(檢查您的權限)"
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
 #, fuzzy, php-format
 msgid "No matches found for “%s”"
 msgstr "找不到關於 “%s” 的資料"
@@ -21795,6 +21796,7 @@ msgid "%s Search Results"
 msgstr "%1$s 搜尋結果"
 
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
 #, fuzzy, php-format
 msgid "Search results for “%s”"
 msgstr "<em>%1$s</em> 的搜尋結果"
@@ -21818,16 +21820,6 @@ msgstr "搜尋"
 #, fuzzy
 msgid "Project Search"
 msgstr "新專案名稱"
-
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
-#, php-format
-msgid "Search results for <em>%1$s</em>"
-msgstr "<em>%1$s</em> 的搜尋結果"
-
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
-#, php-format
-msgid "No matches found for <em>%1$s</em>"
-msgstr "找不到關於 <em>%1$s</em> 的資料"
 
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:53
 msgid "Completed"
@@ -23352,6 +23344,12 @@ msgstr "帳號"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
+
+#~ msgid "Search results for <em>%1$s</em>"
+#~ msgstr "<em>%1$s</em> 的搜尋結果"
+
+#~ msgid "No matches found for <em>%1$s</em>"
+#~ msgstr "找不到關於 <em>%1$s</em> 的資料"
 
 #, fuzzy
 #~ msgid ""

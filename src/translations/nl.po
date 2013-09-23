@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-23 11:06+0200\n"
+"POT-Creation-Date: 2013-09-23 11:24+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -21921,11 +21921,13 @@ msgstr ""
 #, php-format
 msgid ""
 "No matches found for “%s” - No sections available (check your permissions)"
-msgstr "Niets gevonden voor “%s” - geen secties beschikbaar (controleer je rechten)"
+msgstr ""
+"Niets gevonden voor “%s” - geen secties beschikbaar (controleer je rechten)"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
 #, php-format
 msgid "No matches found for “%s”"
 msgstr "Niets passends gevonden voor “%s”"
@@ -21969,6 +21971,7 @@ msgid "%s Search Results"
 msgstr "%1$s zoekresultaat"
 
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
 #, php-format
 msgid "Search results for “%s”"
 msgstr "Zoekresulten voor <em>%s</em>"
@@ -21992,16 +21995,6 @@ msgstr "Zoeken"
 #, fuzzy
 msgid "Project Search"
 msgstr "Nieuwe projectnaam"
-
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
-#, php-format
-msgid "Search results for <em>%1$s</em>"
-msgstr "Zoekresulten voor <em>%1$s</em>"
-
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
-#, php-format
-msgid "No matches found for <em>%1$s</em>"
-msgstr "Niets passends gevonden voor <em>%1$s</em>"
 
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:53
 msgid "Completed"
@@ -23552,6 +23545,12 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#~ msgid "Search results for <em>%1$s</em>"
+#~ msgstr "Zoekresulten voor <em>%1$s</em>"
+
+#~ msgid "No matches found for <em>%1$s</em>"
+#~ msgstr "Niets passends gevonden voor <em>%1$s</em>"
 
 #, fuzzy
 #~ msgid ""

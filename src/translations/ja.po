@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-23 11:06+0200\n"
+"POT-Creation-Date: 2013-09-23 11:24+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -21126,6 +21126,7 @@ msgstr ""
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
 #, fuzzy, php-format
 msgid "No matches found for “%s”"
 msgstr "ニュースが見つかりません"
@@ -21168,6 +21169,7 @@ msgid "%s Search Results"
 msgstr "ニュースアーカイブ"
 
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
 #, fuzzy, php-format
 msgid "Search results for “%s”"
 msgstr "ニュースアーカイブ"
@@ -21191,16 +21193,6 @@ msgstr "検索"
 #, fuzzy
 msgid "Project Search"
 msgstr "プロジェクト管理"
-
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
-#, fuzzy, php-format
-msgid "Search results for <em>%1$s</em>"
-msgstr "ニュースアーカイブ"
-
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
-#, fuzzy, php-format
-msgid "No matches found for <em>%1$s</em>"
-msgstr "ニュースが見つかりません"
 
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:53
 msgid "Completed"
@@ -22660,6 +22652,14 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr "%sのパーソナルページ"
+
+#, fuzzy
+#~ msgid "Search results for <em>%1$s</em>"
+#~ msgstr "ニュースアーカイブ"
+
+#, fuzzy
+#~ msgid "No matches found for <em>%1$s</em>"
+#~ msgstr "ニュースが見つかりません"
 
 #, fuzzy
 #~ msgid "No matches found for <em>%s</em>"

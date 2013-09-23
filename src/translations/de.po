@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-23 11:06+0200\n"
+"POT-Creation-Date: 2013-09-23 11:24+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -22173,6 +22173,7 @@ msgstr ""
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
 #, php-format
 msgid "No matches found for “%s”"
 msgstr "Keine Treffer für »%s« gefunden"
@@ -22215,6 +22216,7 @@ msgid "%s Search Results"
 msgstr "Neuigkeiten Suchergebnisse"
 
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
 #, php-format
 msgid "Search results for “%s”"
 msgstr "Suchergebnisse für <em>%s</em>"
@@ -22238,16 +22240,6 @@ msgstr "Allgemeine Suche"
 #, fuzzy
 msgid "Project Search"
 msgstr "Projektname"
-
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
-#, php-format
-msgid "Search results for <em>%1$s</em>"
-msgstr "Suchergebnisse für<em>%1$s</em>"
-
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
-#, php-format
-msgid "No matches found for <em>%1$s</em>"
-msgstr "Keine Treffer für <em>%1$s</em> gefunden"
 
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:53
 msgid "Completed"
@@ -23796,6 +23788,12 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "Search results for <em>%1$s</em>"
+#~ msgstr "Suchergebnisse für<em>%1$s</em>"
+
+#~ msgid "No matches found for <em>%1$s</em>"
+#~ msgstr "Keine Treffer für <em>%1$s</em> gefunden"
 
 #, fuzzy
 #~ msgid ""
