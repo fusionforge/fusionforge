@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-23 11:24+0200\n"
+"POT-Creation-Date: 2013-09-23 11:28+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -767,7 +767,7 @@ msgstr ""
 #: plugins/contribtracker/www/index.php:46
 #: plugins/contribtracker/www/index.php:142
 #: plugins/contribtracker/www/project_admin.php:293
-#: plugins/globalsearch/www/index.php:170
+#: plugins/globalsearch/www/index.php:168
 #: plugins/headermenu/view/admin/updateLinkValue.php:63
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:95
@@ -9915,33 +9915,39 @@ msgid "Enter Your Search Words Above"
 msgstr ""
 
 #: plugins/globalsearch/www/index.php:153
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
+#: www/search/include/renderers/HtmlSearchRenderer.class.php:100
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
 #, fuzzy, php-format
-msgid "No matches found for %1$s"
-msgstr "找不到關於 <em>%1$s</em> 的資料"
+msgid "No matches found for “%s”"
+msgstr "找不到關於 “%s” 的資料"
 
-#: plugins/globalsearch/www/index.php:163
+#: plugins/globalsearch/www/index.php:162
+#: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
 #, fuzzy, php-format
-msgid "Search results for %1$s"
+msgid "Search results for “%s”"
 msgstr "<em>%1$s</em> 的搜尋結果"
 
-#: plugins/globalsearch/www/index.php:168
+#: plugins/globalsearch/www/index.php:166
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
 #: www/stats/site_stats_utils.php:230 www/top/toplist.php:53
 #, fuzzy
 msgid "Project Name"
 msgstr "新專案名稱"
 
-#: plugins/globalsearch/www/index.php:172
+#: plugins/globalsearch/www/index.php:170
 #, fuzzy
 msgid "Forge"
 msgstr "更多"
 
-#: plugins/globalsearch/www/index.php:207
+#: plugins/globalsearch/www/index.php:205
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:130
 msgid "Previous Results"
 msgstr "上一個結果"
 
-#: plugins/globalsearch/www/index.php:215
+#: plugins/globalsearch/www/index.php:213
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:137
 msgid "Next Results"
 msgstr "下一個結果"
@@ -21749,14 +21755,6 @@ msgid ""
 "No matches found for “%s” - No sections available (check your permissions)"
 msgstr "未發現符合項目 - 沒有部份提供(檢查您的權限)"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
-#: www/search/include/renderers/HtmlSearchRenderer.class.php:100
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
-#, fuzzy, php-format
-msgid "No matches found for “%s”"
-msgstr "找不到關於 “%s” 的資料"
-
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:341
 msgid "with all words"
 msgstr "以所有字"
@@ -21794,12 +21792,6 @@ msgstr ""
 #, fuzzy, php-format
 msgid "%s Search Results"
 msgstr "%1$s 搜尋結果"
-
-#: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
-#, fuzzy, php-format
-msgid "Search results for “%s”"
-msgstr "<em>%1$s</em> 的搜尋結果"
 
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:72
 #, php-format
@@ -23344,6 +23336,14 @@ msgstr "帳號"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
+
+#, fuzzy
+#~ msgid "No matches found for %1$s"
+#~ msgstr "找不到關於 <em>%1$s</em> 的資料"
+
+#, fuzzy
+#~ msgid "Search results for %1$s"
+#~ msgstr "<em>%1$s</em> 的搜尋結果"
 
 #~ msgid "Search results for <em>%1$s</em>"
 #~ msgstr "<em>%1$s</em> 的搜尋結果"

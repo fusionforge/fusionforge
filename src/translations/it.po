@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-23 11:24+0200\n"
+"POT-Creation-Date: 2013-09-23 11:28+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -764,7 +764,7 @@ msgstr ""
 #: plugins/contribtracker/www/index.php:46
 #: plugins/contribtracker/www/index.php:142
 #: plugins/contribtracker/www/project_admin.php:293
-#: plugins/globalsearch/www/index.php:170
+#: plugins/globalsearch/www/index.php:168
 #: plugins/headermenu/view/admin/updateLinkValue.php:63
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:95
@@ -9976,33 +9976,39 @@ msgid "Enter Your Search Words Above"
 msgstr ""
 
 #: plugins/globalsearch/www/index.php:153
-#, fuzzy, php-format
-msgid "No matches found for %1$s"
-msgstr "Nessuna occorrenza trovata per <em>%1$s</em>"
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
+#: www/search/include/renderers/HtmlSearchRenderer.class.php:100
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
+#, php-format
+msgid "No matches found for “%s”"
+msgstr "Nessuna occorrenza trovata per “%s”"
 
-#: plugins/globalsearch/www/index.php:163
-#, fuzzy, php-format
-msgid "Search results for %1$s"
-msgstr "Risultati per <em>%1$s</em>"
+#: plugins/globalsearch/www/index.php:162
+#: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
+#, php-format
+msgid "Search results for “%s”"
+msgstr "Risultati per <em>%s</em>"
 
-#: plugins/globalsearch/www/index.php:168
+#: plugins/globalsearch/www/index.php:166
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
 #: www/stats/site_stats_utils.php:230 www/top/toplist.php:53
 #, fuzzy
 msgid "Project Name"
 msgstr "Nome progetto"
 
-#: plugins/globalsearch/www/index.php:172
+#: plugins/globalsearch/www/index.php:170
 #, fuzzy
 msgid "Forge"
 msgstr "Altri"
 
-#: plugins/globalsearch/www/index.php:207
+#: plugins/globalsearch/www/index.php:205
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:130
 msgid "Previous Results"
 msgstr "Risultati precedenti"
 
-#: plugins/globalsearch/www/index.php:215
+#: plugins/globalsearch/www/index.php:213
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:137
 msgid "Next Results"
 msgstr "Prossimi risultati"
@@ -21926,14 +21932,6 @@ msgstr ""
 "Nessuna corrispondenza trovata per “%s” - Non è stata trovata alcuna sezione "
 "(controlla i tuoi privilegi)"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
-#: www/search/include/renderers/HtmlSearchRenderer.class.php:100
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
-#, php-format
-msgid "No matches found for “%s”"
-msgstr "Nessuna occorrenza trovata per “%s”"
-
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:341
 msgid "with all words"
 msgstr "con tutte le parole"
@@ -21971,12 +21969,6 @@ msgstr ""
 #, php-format
 msgid "%s Search Results"
 msgstr "Risultati di ricerca %s"
-
-#: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
-#, php-format
-msgid "Search results for “%s”"
-msgstr "Risultati per <em>%s</em>"
 
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:72
 #, php-format
@@ -23538,6 +23530,14 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "No matches found for %1$s"
+#~ msgstr "Nessuna occorrenza trovata per <em>%1$s</em>"
+
+#, fuzzy
+#~ msgid "Search results for %1$s"
+#~ msgstr "Risultati per <em>%1$s</em>"
 
 #~ msgid "Search results for <em>%1$s</em>"
 #~ msgstr "Risultati per <em>%1$s</em>"

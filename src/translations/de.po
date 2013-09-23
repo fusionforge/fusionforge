@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-23 11:24+0200\n"
+"POT-Creation-Date: 2013-09-23 11:28+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -765,7 +765,7 @@ msgstr ""
 #: plugins/contribtracker/www/index.php:46
 #: plugins/contribtracker/www/index.php:142
 #: plugins/contribtracker/www/project_admin.php:293
-#: plugins/globalsearch/www/index.php:170
+#: plugins/globalsearch/www/index.php:168
 #: plugins/headermenu/view/admin/updateLinkValue.php:63
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:95
@@ -9994,31 +9994,37 @@ msgid "Enter Your Search Words Above"
 msgstr "Geben Sie Ihre Suchworte Oben ein"
 
 #: plugins/globalsearch/www/index.php:153
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
+#: www/search/include/renderers/HtmlSearchRenderer.class.php:100
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
 #, php-format
-msgid "No matches found for %1$s"
-msgstr "Keine Treffer für <em>%1$s</em> gefunden"
+msgid "No matches found for “%s”"
+msgstr "Keine Treffer für »%s« gefunden"
 
-#: plugins/globalsearch/www/index.php:163
+#: plugins/globalsearch/www/index.php:162
+#: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
+#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
 #, php-format
-msgid "Search results for %1$s"
-msgstr "Suchergebnisse für<em>%1$s</em>"
+msgid "Search results for “%s”"
+msgstr "Suchergebnisse für <em>%s</em>"
 
-#: plugins/globalsearch/www/index.php:168
+#: plugins/globalsearch/www/index.php:166
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
 #: www/stats/site_stats_utils.php:230 www/top/toplist.php:53
 msgid "Project Name"
 msgstr "Projektname"
 
-#: plugins/globalsearch/www/index.php:172
+#: plugins/globalsearch/www/index.php:170
 msgid "Forge"
 msgstr "Forge"
 
-#: plugins/globalsearch/www/index.php:207
+#: plugins/globalsearch/www/index.php:205
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:130
 msgid "Previous Results"
 msgstr "Vorherige Ergebnisse"
 
-#: plugins/globalsearch/www/index.php:215
+#: plugins/globalsearch/www/index.php:213
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:137
 msgid "Next Results"
 msgstr "Nächste Ergebnisse"
@@ -22170,14 +22176,6 @@ msgstr ""
 "Keine Treffer gefunden für »%s« - Keine Sektionen verfügbar (Überprüfen Sie "
 "Ihre Erlaubnis)"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
-#: www/search/include/renderers/HtmlSearchRenderer.class.php:100
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
-#, php-format
-msgid "No matches found for “%s”"
-msgstr "Keine Treffer für »%s« gefunden"
-
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:341
 msgid "with all words"
 msgstr "Mit allen Wörtern"
@@ -22214,12 +22212,6 @@ msgstr ""
 #, fuzzy, php-format
 msgid "%s Search Results"
 msgstr "Neuigkeiten Suchergebnisse"
-
-#: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
-#: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
-#, php-format
-msgid "Search results for “%s”"
-msgstr "Suchergebnisse für <em>%s</em>"
 
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:72
 #, php-format
@@ -23788,6 +23780,12 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "No matches found for %1$s"
+#~ msgstr "Keine Treffer für <em>%1$s</em> gefunden"
+
+#~ msgid "Search results for %1$s"
+#~ msgstr "Suchergebnisse für<em>%1$s</em>"
 
 #~ msgid "Search results for <em>%1$s</em>"
 #~ msgstr "Suchergebnisse für<em>%1$s</em>"

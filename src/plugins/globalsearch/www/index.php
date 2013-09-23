@@ -150,8 +150,7 @@ $rows = $rows_returned = db_numrows($result);
 
 if (!$result || $rows < 1) {
         $no_rows = 1;
-        echo "<h2>".sprintf (_('No matches found for %1$s'),
-			     $gwords)."</h2>";
+        echo "<h2>".sprintf (_('No matches found for “%s”'), $gwords)."</h2>";
         echo db_error('DB_SEARCH');
 
 } else {
@@ -160,8 +159,7 @@ if (!$result || $rows < 1) {
                 $rows = $limit;
         }
 
-        echo "<h3>".sprintf (_('Search results for %1$s'),
-			     $gwords)."</h3><p>\n\n";
+        echo "<h3>".sprintf (_('Search results for “%s”'), $gwords)."</h3><p>\n\n";
 
         $title_arr = array();
         $title_arr[] = util_make_link ('/plugins/globalsearch/?gwords='.urlencode($gwords).'&amp;order=project_title&amp;gexact='.$gexact,
