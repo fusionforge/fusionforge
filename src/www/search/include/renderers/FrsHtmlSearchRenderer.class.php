@@ -59,7 +59,6 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getRows() {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
-		$dateFormat = _('Y-m-d H:i');
 
 		$return = '';
 		$rowColor = 0;
@@ -77,7 +76,7 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				. '<td width="5%">&nbsp;</td>'
 				. '<td>'.util_make_link ('/frs/shownotes.php?release_id='.db_result($result, $i, 'release_id'),db_result($result, $i, 'release_name')).'</td>'
 				. '<td width="15%">'.db_result($result, $i, 'realname').'</td>'
-				. '<td width="15%">'.date($dateFormat,db_result($result,$i, 'release_date')).'</td></tr>';
+				. '<td width="15%">'.relative_date(db_result($result,$i, 'release_date')).'</td></tr>';
 			$rowColor ++;
 		}
 		return $return;

@@ -192,9 +192,9 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			$result .= $renderer->getRows();
 			$result .= $GLOBALS['HTML']->listTableBottom();
 		} elseif(method_exists($renderer, 'getSections') && (count($renderer->getSections($this->groupId)) == 0)) {
-			$result .= '<p>'.sprintf(_('No matches found for “%1$s” - No sections available (check your permissions)'), $this->words).'</p>';
+			$result .= '<p>'.sprintf(_('No matches found for “%s” - No sections available (check your permissions)'), $this->words).'</p>';
 		} else {
-			$result .= '<p>'.sprintf(_('No matches found for “%1$s”'), $this->words).'</p>';
+			$result .= '<p>'.sprintf(_('No matches found for “%s”'), $this->words).'</p>';
 		}
 		return $result;
 	}

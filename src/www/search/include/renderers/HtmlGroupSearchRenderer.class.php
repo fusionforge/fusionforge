@@ -66,7 +66,7 @@ class HtmlGroupSearchRenderer extends HtmlSearchRenderer {
 	 * writeHeader - write the header of the output
 	 */
 	function writeHeader() {
-		$title = sprintf(_('Search results for “%1$s”'), $this->query['words']);
+		$title = sprintf(_('Search results for “%s”'), $this->query['words']);
 		site_project_header(array('title' => $title, 'group' => $this->groupId, 'toptab' => $this->topTab));
 
 		printf (_('Tip: Use %s to get more precise results.'),

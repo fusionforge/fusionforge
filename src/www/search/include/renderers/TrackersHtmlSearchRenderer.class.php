@@ -86,8 +86,6 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getRows() {
 		$fd = $this->getFilteredRows();
 
-		$dateFormat = _('Y-m-d H:i');
-
 		$return = '';
 		$rowColor = 0;
 		$lastTracker = null;
@@ -108,7 +106,7 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 							. html_image('ic/tracker20g.png').' '.$row['summary']
 							. '</a></td>'		
 						. '<td width="15%">'.$row['realname'].'</td>'
-						. '<td width="15%">'.date($dateFormat, $row['open_date']).'</td></tr>';
+						. '<td width="15%">'.relative_date($row['open_date']).'</td></tr>';
 			$rowColor ++;
 		}
 		return $return;

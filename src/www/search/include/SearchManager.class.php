@@ -142,7 +142,7 @@ class SearchManager {
 		// Global search engine
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_SOFTWARE,
-			new GFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectHtmlSearchRenderer', _('Project'))
+			new GFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectHtmlSearchRenderer', _('Projects'))
 		);
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_PEOPLE,
@@ -155,14 +155,14 @@ class SearchManager {
 		if (forge_get_config('use_people')) {
 			$this->addSearchEngine(
 				SEARCH__TYPE_IS_SKILL,
-				new GFSearchEngine(SEARCH__TYPE_IS_SKILL, 'SkillHtmlSearchRenderer', _('Skill'))
+				new GFSearchEngine(SEARCH__TYPE_IS_SKILL, 'SkillHtmlSearchRenderer', _('Skills'))
 			);
 		}
 
 		// Rss search engines
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_SOFTWARE,
-			new GFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectRssSearchRenderer', _('Project')),
+			new GFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectRssSearchRenderer', _('Projects')),
 			SEARCH__OUTPUT_RSS
 		);
 

@@ -29,12 +29,11 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	 * Constructor
 	 *
-	 * @param string $words words we are searching for
-	 * @param int $offset offset
-	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
-	 * @param int $groupId group id
-	 * @param array $sections array of all sections to search in (array of strings)
-	 *
+	 * @param string       $words    words we are searching for
+	 * @param int          $offset   offset
+	 * @param boolean      $isExact  if we want to search for all the words or if only one matching the query is sufficient
+	 * @param int          $groupId  group id
+	 * @param array|string $sections array of all sections to search in (array of strings)
 	 */
 	function ForumsHtmlSearchRenderer($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS) {
 		$userIsGroupMember = $this->isGroupMember($groupId);
@@ -85,8 +84,6 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getRows() {
 		$fd = $this->getFilteredRows();
 
-		$dateFormat = _('Y-m-d H:i');
-
 		$return = '';
 		$rowColor = 0;
 		$lastForumName = null;
@@ -105,7 +102,7 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 							. html_image('ic/msg.png', '10', '12').' '.$row['subject']
 							.'</a></td>'			
 						. '<td width="15%">'.$row['realname'].'</td>'
-						. '<td width="15%">'.date($dateFormat, $row['post_date']).'</td></tr>';
+						. '<td width="15%">'.relative_date($row['post_date']).'</td></tr>';
 			$rowColor ++;
 		}
 		return $return;

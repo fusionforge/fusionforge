@@ -48,7 +48,7 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$this->tableHeaders = array(
 			_('Summary'),
 			_('Submitted by'),
-			_('Post date'),
+			_('Post Date'),
 		);
 	}
 
@@ -60,7 +60,6 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getRows() {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
-		$dateFormat = _('Y-m-d H:i');
 
 		$return = '';
 		for($i = 0; $i < $rowsCount; $i++) {
@@ -69,7 +68,7 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				. html_image('ic/msg.png', '10', '12')
 				. ' '.db_result($result, $i, 'summary').'</a></td>
 				<td width="15%">'.db_result($result, $i, 'realname').'</td>
-				<td width="15%">'.date($dateFormat, db_result($result, $i, 'post_date')).'</td></tr>';
+				<td width="15%">'.relative_date(db_result($result, $i, 'post_date')).'</td></tr>';
 		}
 		return $return;
 	}

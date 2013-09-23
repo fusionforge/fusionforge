@@ -97,7 +97,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 		$query =& $this->query;
 
 		if(!$searchQuery->getResult() || $searchQuery->getRowsCount() < 1) {
-			$html = '<p><strong>'.sprintf(_('No matches found for “%1$s”'), $query['words']).'</strong></p>';
+			$html = '<p><strong>'.sprintf(_('No matches found for “%s”'), $query['words']).'</strong></p>';
 			$html .= db_error();
 		} else {
 			$html = $GLOBALS['HTML']->listTableTop($this->tableHeaders);
