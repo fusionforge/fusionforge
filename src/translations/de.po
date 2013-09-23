@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-20 17:17+0200\n"
+"POT-Creation-Date: 2013-09-23 11:06+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -395,8 +395,6 @@ msgstr ""
 #: www/forum/myforums.php:69 www/news/admin/news_admin_utils.php:59
 #: www/reporting/projectact.php:69 www/reporting/projecttime.php:79
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:59
-#: www/search/include/SearchManager.class.php:145
-#: www/search/include/SearchManager.class.php:165
 msgid "Project"
 msgstr "Projekt"
 
@@ -1214,7 +1212,7 @@ msgstr "Titel"
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/forum/forum.php:247 www/forum/message.php:160
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:55
-#: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:49
+#: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:48
 #: www/snippet/detail.php:66 www/snippet/detail.php:155
 #: www/snippet/snippet_utils.php:157
 msgid "Author"
@@ -1374,11 +1372,7 @@ msgstr ""
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:98
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:67
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
-#: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:88
-#: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:62
-#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:63
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:93
-#: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:89
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1131 www/softwaremap/full_list.php:123
 #: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
@@ -1884,7 +1878,7 @@ msgstr "Benutzer"
 #: www/pm/include/ProjectTaskHTML.class.php:203
 #: www/project/admin/project_admin_utils.php:161 www/reporting/timeadd.php:142
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:56
-#: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:50
+#: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:49
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:51
 #: www/stats/lastlogins.php:50
 msgid "Date"
@@ -3660,7 +3654,9 @@ msgid "Your Page, widgets selected by you to follow your items."
 msgstr ""
 
 #: common/include/Navigation.class.php:248 www/project/admin/index.php:163
-#: www/reporting/index.php:46 www/stats/site_stats_utils.php:478
+#: www/reporting/index.php:46 www/search/include/SearchManager.class.php:145
+#: www/search/include/SearchManager.class.php:165
+#: www/stats/site_stats_utils.php:478
 msgid "Projects"
 msgstr "Projekte"
 
@@ -9382,7 +9378,7 @@ msgstr "Forum"
 #: plugins/forumml/www/forumml_utils.php:139 www/forum/forum.php:246
 #: www/forum/message.php:159
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:54
-#: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:48
+#: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:47
 msgid "Thread"
 msgstr "Thread"
 
@@ -19308,7 +19304,6 @@ msgstr "JOB Aktualisierung erfolgreich"
 #: www/people/editjob.php:91 www/people/people_utils.php:126
 #: www/people/people_utils.php:156 www/people/people_utils.php:234
 #: www/people/people_utils.php:296
-#: www/search/include/SearchManager.class.php:158
 msgid "Skill"
 msgstr "Qualifikationen"
 
@@ -21471,6 +21466,7 @@ msgid "Role(s)/Position(s)"
 msgstr "Rolle/Position"
 
 #: www/project/memberlist.php:53
+#: www/search/include/SearchManager.class.php:158
 msgid "Skills"
 msgstr "Fähigkeiten"
 
@@ -22166,18 +22162,20 @@ msgstr ""
 "Hinweis: Nur die ersten %d Ergebnisse für diese Kategorie werden angezeigt."
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:195
-#, fuzzy, php-format
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:221
+#, php-format
 msgid ""
-"No matches found for “%1$s” - No sections available (check your permissions)"
+"No matches found for “%s” - No sections available (check your permissions)"
 msgstr ""
-"Keine Treffer gefunden - Keine Sektionen verfügbar (Überprüfen Sie Ihre "
-"Erlaubnis)"
+"Keine Treffer gefunden für »%s« - Keine Sektionen verfügbar (Überprüfen Sie "
+"Ihre Erlaubnis)"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
-#, fuzzy, php-format
-msgid "No matches found for “%1$s”"
-msgstr "Keine Treffer für <em>%1$s</em> gefunden"
+#, php-format
+msgid "No matches found for “%s”"
+msgstr "Keine Treffer für »%s« gefunden"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:341
 msgid "with all words"
@@ -22204,7 +22202,6 @@ msgid "#"
 msgstr "#"
 
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:50
-#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:51
 msgid "Post date"
 msgstr "Beitragsdatum"
 
@@ -22217,29 +22214,20 @@ msgstr ""
 msgid "%s Search Results"
 msgstr "Neuigkeiten Suchergebnisse"
 
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:221
-#, fuzzy, php-format
-msgid ""
-"No matches found for <em>%s</em> - No sections available (check your "
-"permissions)"
-msgstr ""
-"Keine Treffer gefunden - Keine Sektionen verfügbar (Überprüfen Sie Ihre "
-"Erlaubnis)"
-
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
-#, fuzzy, php-format
-msgid "No matches found for <em>%s</em>"
-msgstr "Keine Treffer für <em>%1$s</em> gefunden"
-
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:69
-#, fuzzy, php-format
-msgid "Search results for “%1$s”"
-msgstr "Suchergebnisse für<em>%1$s</em>"
+#, php-format
+msgid "Search results for “%s”"
+msgstr "Suchergebnisse für <em>%s</em>"
 
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:72
 #, php-format
 msgid "Tip: Use %s to get more precise results."
 msgstr ""
+
+#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:51
+#, fuzzy
+msgid "Post Date"
+msgstr "Beitragsdatum"
 
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:53
 #, fuzzy
@@ -23809,6 +23797,34 @@ msgstr "Kein Benutzername angegeben"
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
 
+#, fuzzy
+#~ msgid ""
+#~ "No matches found for “%1$s” - No sections available (check your "
+#~ "permissions)"
+#~ msgstr ""
+#~ "Keine Treffer gefunden - Keine Sektionen verfügbar (Überprüfen Sie Ihre "
+#~ "Erlaubnis)"
+
+#, fuzzy
+#~ msgid "No matches found for “%1$s”"
+#~ msgstr "Keine Treffer für <em>%1$s</em> gefunden"
+
+#, fuzzy
+#~ msgid ""
+#~ "No matches found for <em>%s</em> - No sections available (check your "
+#~ "permissions)"
+#~ msgstr ""
+#~ "Keine Treffer gefunden - Keine Sektionen verfügbar (Überprüfen Sie Ihre "
+#~ "Erlaubnis)"
+
+#, fuzzy
+#~ msgid "No matches found for <em>%s</em>"
+#~ msgstr "Keine Treffer für <em>%1$s</em> gefunden"
+
+#, fuzzy
+#~ msgid "Search results for “%1$s”"
+#~ msgstr "Suchergebnisse für<em>%1$s</em>"
+
 #~ msgid "Error creating group object"
 #~ msgstr "Fehler beim Erstellen des Gruppen-Objektes"
 
@@ -24593,9 +24609,6 @@ msgstr "Persönliche Seite für %s"
 #~ "exportieren oder importieren (<a href=\"http://en.wikipedia.org/wiki/"
 #~ "Comma-separated_values\">Comma Separated Values</a>)."
 
-#~ msgid "No matches found for “%s”"
-#~ msgstr "Keine Treffer für »%s« gefunden"
-
 #~ msgid "Sorry, no match for “%s”."
 #~ msgstr "Keine Treffer für »%s« gefunden."
 
@@ -24624,12 +24637,6 @@ msgstr "Persönliche Seite für %s"
 #~ "exportieren oder importieren (<a href=\"http://en.wikipedia.org/wiki/"
 #~ "Comma-separated_values\">Comma Separated Values</a>). Dieses Format kann "
 #~ "genutzt werden um Aufgaben in Microsoft Excel zu betrachten."
-
-#~ msgid ""
-#~ "No matches found for “%s” - No sections available (check your permissions)"
-#~ msgstr ""
-#~ "Keine Treffer gefunden für »%s« - Keine Sektionen verfügbar (Überprüfen "
-#~ "Sie Ihre Erlaubnis)"
 
 #, fuzzy
 #~ msgid "Error Getting Forum"
@@ -25355,9 +25362,6 @@ msgstr "Persönliche Seite für %s"
 #~ msgid "No legal structures yet, cannot define actors without them."
 #~ msgstr ""
 #~ "Noch keine gültigen Strukturen, kann ohne keine Teilnehmer definieren."
-
-#~ msgid "Search results for “%s”"
-#~ msgstr "Suchergebnisse für <em>%s</em>"
 
 #~ msgid ""
 #~ "Lists are named in this manner:<br /><strong>projectname-listname@%s</"
