@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-23 11:51+0200\n"
+"POT-Creation-Date: 2013-09-24 10:09+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1369,10 +1369,7 @@ msgstr ""
 #: www/pm/include/ProjectTaskHTML.class.php:236 www/pm/mod_task.php:312
 #: www/project/admin/project_admin_utils.php:180
 #: www/reporting/usersummary.php:129
-#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:98
-#: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:67
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
-#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1131 www/softwaremap/full_list.php:123
 #: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
@@ -5338,9 +5335,12 @@ msgid "Unassigned"
 msgstr "Неназначено"
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:552
-#: common/tracker/actions/query.php:197 www/admin/massmail.php:136
-#: www/admin/search.php:72 www/admin/search.php:148 www/pm/admin/index.php:187
+#: common/tracker/actions/query.php:197
+#: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:136
+#: www/admin/search.php:72 www/admin/search.php:148 www/my/dashboard.php:63
+#: www/pm/admin/index.php:187 www/pm/index.php:98
 #: www/project/admin/editimages.php:265
+#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "Id"
 msgstr "Идентификатор"
 
@@ -5512,6 +5512,7 @@ msgstr "Назначено на"
 #: www/news/admin/index.php:125 www/pm/detail_task.php:42
 #: www/pm/mod_task.php:52
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
+#: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:49
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:50
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:50
 msgid "Submitted by"
@@ -6592,12 +6593,6 @@ msgstr "Добавить/изменить Ответы для %s"
 #: common/tracker/views/form-addcanned.php:38 www/admin/responses_admin.php:42
 msgid "Existing Responses"
 msgstr "Плоученые ответы"
-
-#: common/tracker/views/form-addcanned.php:40 www/my/dashboard.php:63
-#: www/pm/index.php:98
-#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
-msgid "ID"
-msgstr "<small><u>категория</u> :</small>"
 
 #: common/tracker/views/form-addcanned.php:42 plugins/blocks/www/index.php:205
 #, fuzzy
@@ -17184,7 +17179,6 @@ msgid "Updated value"
 msgstr "Обновляется ежедневно"
 
 #: www/export/rssAboTask.php:171
-#: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:49
 msgid "Posted by"
 msgstr "Опубликовал:"
 
@@ -17648,6 +17642,8 @@ msgid "Release Date"
 msgstr "Дата релиза"
 
 #: www/frs/admin/editrelease.php:231 www/frs/admin/qrs.php:175
+#: www/frs/admin/showreleases.php:100
+#: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:48
 msgid "Release Name"
 msgstr "Название релиза"
 
@@ -17927,11 +17923,6 @@ msgstr "У пакета нет релизов"
 #: www/frs/admin/showreleases.php:96
 msgid "Release New File Version"
 msgstr "Новый релиз версии файла"
-
-#: www/frs/admin/showreleases.php:100
-#: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:48
-msgid "Release name"
-msgstr "Название релиза"
 
 #: www/frs/index.php:90
 msgid "Project Filelist"
@@ -22282,7 +22273,9 @@ msgid "#"
 msgstr ""
 
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:50
-msgid "Post date"
+#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:51
+#, fuzzy
+msgid "Post Date"
 msgstr "Дата отправки"
 
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
@@ -22298,11 +22291,6 @@ msgstr "Результаты поиска новостей"
 #, php-format
 msgid "Tip: Use %s to get more precise results."
 msgstr ""
-
-#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:51
-#, fuzzy
-msgid "Post Date"
-msgstr "Дата отправки"
 
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:53
 #, fuzzy
@@ -23856,6 +23844,15 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#~ msgid "ID"
+#~ msgstr "<small><u>категория</u> :</small>"
+
+#~ msgid "Release name"
+#~ msgstr "Название релиза"
+
+#~ msgid "Post date"
+#~ msgstr "Дата отправки"
 
 #, fuzzy
 #~ msgid "No matches found for %1$s"

@@ -45,9 +45,9 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 		$this->tableHeaders = array(
 			'&nbsp;',
-			_('Release name'),
-			_('Posted by'),
-			_('Post date'),
+			_('Release Name'),
+			_('Submitted by'),
+			_('Post Date'),
 		);
 	}
 

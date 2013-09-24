@@ -95,7 +95,7 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 	}
 
 	$tablearr = array () ;
-	$tablearr[] = build_column_sort_header ($group_id, _('ID'), 'project_id') ;
+	$tablearr[] = build_column_sort_header ($group_id, _('Id'), 'project_id') ;
 	$tablearr[] = build_column_sort_header ($group_id, _('Subproject Name'), 'project_name') ;
 	$tablearr[] = build_column_sort_header ($group_id, _('Description'), 'project_description') ;
 	$tablearr[] = build_column_sort_header ($group_id, _('Open'), 'open_count') ;

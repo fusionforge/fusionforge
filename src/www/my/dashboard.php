@@ -60,7 +60,7 @@ if (!session_loggedin()) {
 
 		$title_arr=array();
 
-		$title_arr[]=_('ID');
+		$title_arr[]=_('Id');
 		if ($display_col['summary'])
 			$title_arr[]=_('Summary');
 		if ($display_col['changed'])

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-23 11:51+0200\n"
+"POT-Creation-Date: 2013-09-24 10:09+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1285,10 +1285,7 @@ msgstr "Créé ou mis à jour au cours des 7 derniers jours"
 #: www/pm/include/ProjectTaskHTML.class.php:236 www/pm/mod_task.php:312
 #: www/project/admin/project_admin_utils.php:180
 #: www/reporting/usersummary.php:129
-#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:98
-#: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:67
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
-#: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1131 www/softwaremap/full_list.php:123
 #: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
@@ -5118,9 +5115,12 @@ msgid "Unassigned"
 msgstr "Personne"
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:552
-#: common/tracker/actions/query.php:197 www/admin/massmail.php:136
-#: www/admin/search.php:72 www/admin/search.php:148 www/pm/admin/index.php:187
+#: common/tracker/actions/query.php:197
+#: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:136
+#: www/admin/search.php:72 www/admin/search.php:148 www/my/dashboard.php:63
+#: www/pm/admin/index.php:187 www/pm/index.php:98
 #: www/project/admin/editimages.php:265
+#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "Id"
 msgstr "Numéro d'identifiant"
 
@@ -5292,6 +5292,7 @@ msgstr "Confié à"
 #: www/news/admin/index.php:125 www/pm/detail_task.php:42
 #: www/pm/mod_task.php:52
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
+#: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:49
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:50
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:50
 msgid "Submitted by"
@@ -6337,12 +6338,6 @@ msgstr "Gérer les réponses type de %s"
 #: common/tracker/views/form-addcanned.php:38 www/admin/responses_admin.php:42
 msgid "Existing Responses"
 msgstr "Réponses existantes"
-
-#: common/tracker/views/form-addcanned.php:40 www/my/dashboard.php:63
-#: www/pm/index.php:98
-#: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
-msgid "ID"
-msgstr "Identifiant"
 
 #: common/tracker/views/form-addcanned.php:42 plugins/blocks/www/index.php:205
 msgid "Operation"
@@ -16484,7 +16479,6 @@ msgid "Updated value"
 msgstr "Nouvelle valeur"
 
 #: www/export/rssAboTask.php:171
-#: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:49
 msgid "Posted by"
 msgstr "Posté par"
 
@@ -16930,6 +16924,8 @@ msgid "Release Date"
 msgstr "Date de la version"
 
 #: www/frs/admin/editrelease.php:231 www/frs/admin/qrs.php:175
+#: www/frs/admin/showreleases.php:100
+#: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:48
 msgid "Release Name"
 msgstr "Nom de version"
 
@@ -17205,11 +17201,6 @@ msgstr "Aucune version n'est disponible pour ce paquet."
 #: www/frs/admin/showreleases.php:96
 msgid "Release New File Version"
 msgstr "Mise à jour d'une nouvelle version de fichier."
-
-#: www/frs/admin/showreleases.php:100
-#: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:48
-msgid "Release name"
-msgstr "Nom de version"
 
 #: www/frs/index.php:90
 msgid "Project Filelist"
@@ -21528,7 +21519,8 @@ msgid "#"
 msgstr "#"
 
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:50
-msgid "Post date"
+#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:51
+msgid "Post Date"
 msgstr "Date de publication"
 
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
@@ -21544,10 +21536,6 @@ msgstr "Résultats de la recherche dans %s"
 #, php-format
 msgid "Tip: Use %s to get more precise results."
 msgstr "Astuce : utilisez %s pour obtenir des résultats plus précis."
-
-#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:51
-msgid "Post Date"
-msgstr "Date de publication"
 
 #: www/search/include/renderers/PeopleHtmlSearchRenderer.class.php:53
 msgid "People Search"
@@ -23084,6 +23072,15 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "ID"
+#~ msgstr "Identifiant"
+
+#~ msgid "Release name"
+#~ msgstr "Nom de version"
+
+#~ msgid "Post date"
+#~ msgstr "Date de publication"
 
 #~ msgid "No matches found for %1$s"
 #~ msgstr "Aucun résultat trouvé pour %1$s."

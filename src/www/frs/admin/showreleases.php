@@ -97,7 +97,7 @@ frs_admin_header(array('title'=>_('Release New File Version'),'group'=>$group_id
 
 $title_arr=array();
 $title_arr[]=_('Package name');
-$title_arr[]=_('Release name');
+$title_arr[]=_('Release Name');
 $title_arr[]=_('Date');
 
 echo $GLOBALS['HTML']->listTableTop($title_arr);

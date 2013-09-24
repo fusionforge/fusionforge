@@ -37,7 +37,7 @@ $ath->adminHeader(array('title'=>$title, 'modal'=>1));
 			//code to show existing responses and link to update page
 			echo '<h2>'._('Existing Responses').'</h2>';
 			$title_arr=array();
-			$title_arr[]=_('ID');
+			$title_arr[]=_('Id');
 			$title_arr[]=_('Title');
 			$title_arr[]=_('Operation');
 
