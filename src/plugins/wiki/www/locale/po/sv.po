@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-03 11:37+0200\n"
+"POT-Creation-Date: 2013-09-24 18:23+0200\n"
 "PO-Revision-Date: 2001-01-27 01:58+0200\n"
 "Last-Translator: Jon Åslund <jooon@hem.passagen.se>\n"
 "Language-Team: \n"
@@ -3057,7 +3057,7 @@ msgid "ACCESS DENIED: You must log in to upload files."
 msgstr ""
 
 #, php-format
-msgid "ERROR uploading “%s”"
+msgid "Error uploading “%s”"
 msgstr ""
 
 #, php-format
@@ -3074,7 +3074,7 @@ msgid ""
 msgstr ""
 
 #, php-format
-msgid "There is already a file with name %s uploaded."
+msgid "There is already a file with name “%s” uploaded."
 msgstr ""
 
 msgid "Sorry but this file is too big."

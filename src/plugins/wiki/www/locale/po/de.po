@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-03 11:37+0200\n"
+"POT-Creation-Date: 2013-09-24 18:23+0200\n"
 "PO-Revision-Date: 2000-10-31 02:23+0200\n"
 "Last-Translator: Reini Urban <rurban@x-ray.at>, Carsten Klapp "
 "<carstenklapp@users.sourceforge.net>, Helmer Pardun <pardunpress@t-online."
@@ -608,7 +608,7 @@ msgstr "»%s«: Ungültiger Seitenname"
 
 #, php-format
 msgid "from “%s”"
-msgstr "von %s"
+msgstr "von »%s«"
 
 msgid "New page"
 msgstr "Neue Seite"
@@ -1032,11 +1032,11 @@ msgstr " ... erste %d Bytes"
 
 #, php-format
 msgid " ... around “%s”"
-msgstr "... cirka “%s”"
+msgstr "... cirka »%s«"
 
 #, php-format
 msgid "“%s” not found"
-msgstr "“%s” nicht gefunden"
+msgstr "»%s« nicht gefunden"
 
 #, php-format
 msgid "page permission inherited from %s"
@@ -1543,7 +1543,7 @@ msgstr "Allgemeine Authentifizierungs-Einstellungen"
 
 #, php-format
 msgid "Personal Auth Settings for “%s”"
-msgstr "Spezielle Authentifizierungs-Einstellungen %s"
+msgstr "Spezielle Authentifizierungs-Einstellungen »%s«"
 
 msgid "No userid"
 msgstr ""
@@ -2251,7 +2251,7 @@ msgstr ""
 
 #, php-format
 msgid "Unable to find src=“%s”"
-msgstr "Konnte src=»%s« nicht lesen"
+msgstr "Konnte src=»%s« nicht finden"
 
 #, php-format
 msgid "Unable to read src=“%s”"
@@ -2280,7 +2280,7 @@ msgstr "Die angegebene ICAO »%s« war nicht bekannt."
 #, php-format
 msgid "%s does not know about the language “%s”, using “en” instead."
 msgstr ""
-"%s weißt nichts von die Sprache »%s«, stattdessen wird 'en' angewendet."
+"%s weißt nichts von die Sprache »%s«, stattdessen wird »en« angewendet."
 
 msgid "Submit country"
 msgstr "Land eingeben"
@@ -3192,7 +3192,7 @@ msgstr ""
 "ZUGRIFF VERWEIGERT: Bitte melden Sie sich erst an, um Dateien hochzuladen."
 
 #, php-format
-msgid "ERROR uploading “%s”"
+msgid "Error uploading “%s”"
 msgstr "FEHLER beim Hochladen von »%s«"
 
 #, php-format
@@ -3211,8 +3211,8 @@ msgstr ""
 "Punkt, Unterstrich, Leerzeichen und Bindestrich."
 
 #, php-format
-msgid "There is already a file with name %s uploaded."
-msgstr "Es existiert schon eine gleichnamige, hochgeladene Datei %s."
+msgid "There is already a file with name “%s” uploaded."
+msgstr "Es existiert schon eine gleichnamige, hochgeladene Datei »%s«."
 
 msgid "Sorry but this file is too big."
 msgstr "Leider ist diese Datei zu groß."
@@ -3582,7 +3582,7 @@ msgstr "Kein Ausgewählte. Seite Name zu lang."
 
 #, php-format
 msgid "Page “%s” already exists. Ignored."
-msgstr "Seite %s existiert bereits. Ignoriert."
+msgstr "Seite »%s« existiert bereits. Ignoriert."
 
 #, php-format
 msgid "Access denied to rename page “%s”."
@@ -4490,7 +4490,7 @@ msgstr "Die PhpWiki Zugriffslog Datei"
 
 #, php-format
 msgid "the file “%s”"
-msgstr "die Datei %s"
+msgstr "die Datei »%s«"
 
 msgid "Bad URL -- remove all of <, >, \""
 msgstr "URL Formfehler - Entfernen Sie alle Zeichen mit <, >, \""
@@ -4890,7 +4890,7 @@ msgid ""
 "There is no image creation data available to id “%s”. Please reload "
 "referring page."
 msgstr ""
-"Es sind keine Bilddaten vorhanden für '%'. Bitte laden Sie die Seite neu."
+"Es sind keine Bilddaten vorhanden für »%s«. Bitte laden Sie die Seite neu."
 
 msgid "Image map expired. Reload wiki page to recreate its html part."
 msgstr ""

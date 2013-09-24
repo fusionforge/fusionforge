@@ -208,7 +208,7 @@ ws[cfh]");
             $u_userfile = preg_replace("/ /", "%20", $u_userfile);
             $userfile_tmpname = $userfile->getTmpName();
             $err_header = HTML::div(array('class' => 'error'),
-                HTML::p(fmt("ERROR uploading “%s”", $userfile_name)));
+                HTML::p(fmt("Error uploading “%s”", $userfile_name)));
             if (preg_match("/(\." . join("|\.", $this->disallowed_extensions) . ")(\.|\$)/i",
                 $userfile_name)
             ) {
@@ -226,7 +226,7 @@ ws[cfh]");
                 $err_header->pushContent(HTML::p(_("Invalid filename. File names may only contain alphanumeric characters and dot, underscore, space or dash.")));
                 $message->pushContent($err_header);
             } elseif (file_exists($file_dir . $userfile_name)) {
-                $err_header->pushContent(HTML::p(fmt("There is already a file with name %s uploaded.", $u_userfile)));
+                $err_header->pushContent(HTML::p(fmt("There is already a file with name “%s” uploaded.", $userfile_name)));
                 $message->pushContent($err_header);
             } elseif ($userfile->getSize() > (MAX_UPLOAD_SIZE)) {
                 $err_header->pushContent(HTML::p(_("Sorry but this file is too big.")));
