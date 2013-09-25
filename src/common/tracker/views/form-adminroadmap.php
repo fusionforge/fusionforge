@@ -67,7 +67,7 @@ if (getStringFromRequest('set_roadmap')) {
 	$roadmap_list = getArrayFromRequest('roadmap_list');
 
 	if (! $roadmap_name) {
-		$error_msg .= _("Can't create or rename roadmap")._(': ')._('name is empty');
+		$error_msg .= _("Cannot create or rename roadmap")._(': ')._('name is empty');
 	}
 	else {
 		$roadmap = new Roadmap($group, $roadmap_id);
@@ -77,7 +77,7 @@ if (getStringFromRequest('set_roadmap')) {
 				$feedback .= sprintf(_('Roadmap %s created'), $roadmap_name);
 			}
 			else {
-				$error_msg .= _("Can't create roadmap: ").$roadmap->getErrorMessage();
+				$error_msg .= _("Cannot create roadmap: ").$roadmap->getErrorMessage();
 			}
 		}
 		else {
@@ -88,14 +88,14 @@ if (getStringFromRequest('set_roadmap')) {
 					$feedback .= sprintf(_('Roadmap %s renamed to %s'), $old_roadmap_name, $roadmap_name);
 				}
 				else {
-					$error_msg .= _("Can't rename roadmap: ").$roadmap->getErrorMessage();
+					$error_msg .= _("Cannot rename roadmap: ").$roadmap->getErrorMessage();
 				}
 			}
 		}
 		if (! $error_msg && is_array($roadmap_list) && ! empty($roadmap_list)) {
 			$result = $roadmap->setList($roadmap_list);
 			if (! $result) {
-				$error_msg .= _("Can't set roadmap: ").$roadmap->getErrorMessage();
+				$error_msg .= _("Cannot set roadmap: ").$roadmap->getErrorMessage();
 			}
 		}
 	}
@@ -119,11 +119,11 @@ elseif (getStringFromRequest('set_roadmap_state')) {
 		} else {
 			$result = $roadmap->setState((array_key_exists($roadmap->getID(), $roadmap_states) ? 1 : 0));
 			if (! $result) {
-				$error_msg .= _("Can't set roadmap state: ").$roadmap->getErrorMessage();
+				$error_msg .= _("Cannot set roadmap state: ").$roadmap->getErrorMessage();
 			}
 			$result = $roadmap->isDefault(($default_roadmap == $roadmap->getID() ? 1 : 0));
 			if (! $result) {
-				$error_msg .= _("Can't set default value: ").$roadmap->getErrorMessage();
+				$error_msg .= _("Cannot set default value: ").$roadmap->getErrorMessage();
 			}
 			if (! $error_msg && $updated === false) {
 				$feedback .= _('Roadmap configuration is updated');
@@ -141,7 +141,7 @@ elseif (getStringFromRequest('delete_roadmap_sure')) {
 		$feedback .= sprintf(_('Roadmap %s is deleted'), $roadmap->getName());
 	}
 	else {
-		$error_msg .= _("Can't delete roadmap: ").$roadmap->getErrorMessage();
+		$error_msg .= _("Cannot delete roadmap: ").$roadmap->getErrorMessage();
 	}
 }
 
@@ -190,7 +190,7 @@ if ($set_roadmap_failed ||
 	?>
 	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;admin_roadmap=1' ?>" method="post">
 	<?php
-	echo '<p>'._('Name'). _(': ') . '<input type="text" name="roadmap_name" value="'.$roadmap->getName().'" size="40" /></p>';
+	echo '<p>'._('Name'). _(': ') . '<input required="required" type="text" name="roadmap_name" value="'.$roadmap->getName().'" size="40" /></p>';
 
 	if ($roadmap_id) {
 		echo '<input type="hidden" name="roadmap_id" value="'.$roadmap_id.'" />';
@@ -280,7 +280,7 @@ if (getIntFromRequest('manage_release') ||
 					$feedback .= _('Release(s) order updated');
 				}
 				else {
-					$error_msg .= _("Can't modify release order: ").$selected_roadmap->getErrorMessage();
+					$error_msg .= _("Cannot modify release order: ").$selected_roadmap->getErrorMessage();
 				}
 			}
 			elseif (getStringFromRequest('release_auto_order')) {
@@ -367,7 +367,7 @@ if (getIntFromRequest('manage_release') ||
 				$feedback .= _('Release(s) order updated');
 			}
 			else {
-				$error_msg .= _("Can't modify release order: ").$selected_roadmap->getErrorMessage();
+				$error_msg .= _("Cannot modify release order: ").$selected_roadmap->getErrorMessage();
 			}
 		}
 

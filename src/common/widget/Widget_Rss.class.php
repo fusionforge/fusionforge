@@ -98,7 +98,7 @@ require_once 'Widget.class.php';
 	function getInstallPreferences() {
 		$prefs  = '';
 		$prefs .= '<table>';
-		$prefs .= '<tr><td>Url:</td><td><input type="text" class="textfield_medium" name="rss[url]" value="'. _("http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1") .'" /></td></tr>';
+		$prefs .= '<tr><td>URL:</td><td><input type="text" class="textfield_medium" name="rss[url]" value="'. _("http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1") .'" /></td></tr>';
 		$prefs .= '</table>';
 		return $prefs;
 	}
@@ -123,7 +123,7 @@ require_once 'Widget.class.php';
 	function create(&$request) {
 		$content_id = false;
 		$vUrl = new Valid_String('url');
-		$vUrl->setErrorMessage("Can't add empty rss url");
+		$vUrl->setErrorMessage(_("Cannot add empty RSS URL"));
 		$vUrl->required();
 		if($request->validInArray('rss', $vUrl)) {
 			$rss = $request->get('rss');

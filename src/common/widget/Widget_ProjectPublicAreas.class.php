@@ -113,7 +113,7 @@ class Widget_ProjectPublicAreas extends Widget {
 			echo util_make_link ( '/forum/?group_id=' . $group_id, $link_content);
 			print ' (';
 			printf(ngettext("<strong>%d</strong> message","<strong>%d</strong> messages",$messages_count),$messages_count);
-			print ' in ';
+			print ' ' . _('in') . ' ';
 			printf(ngettext("<strong>%d</strong> forum","<strong>%d</strong> forums",$forums_count),$forums_count);
 			print ')' ;
 			print "\n</div>";
@@ -122,18 +122,18 @@ class Widget_ProjectPublicAreas extends Widget {
 		// ##################### Doc Manager
 
 		if ($project->usesDocman()) {
-			echo '<div class="public-area-box">'."\n";
-			$link_content = $HTML->getDocmanPic('') . ' ' . _('DocManager: Project Documentation');
+			echo '<div class="public-area-box">';
+			$link_content = $HTML->getDocmanPic('') . ' ' . _('DocManager: Project Documentation');
 			//	<a rel="sioc:container_of" xmlns:sioc="http://rdfs.org/sioc/ns#" href="'.util_make_url ('/docman/?group_id='.$group_id).'">';
 			print util_make_link( '/docman/?group_id='.$group_id, $link_content);
-			echo "\n</div>\n";
+			echo '</div>';
 		}
 
 		// ##################### Mailing lists
 
 		if ($project->usesMail()) {
-			echo '<div class="public-area-box">'."\n";
-			$link_content = $HTML->getMailPic('') . ' ' . _('Mailing Lists');
+			echo '<div class="public-area-box">';
+			$link_content = $HTML->getMailPic('') . ' ' . _('Mailing Lists');
 			print util_make_link( '/mail/?group_id='.$group_id, $link_content);
 			$n = project_get_mail_list_count($group_id);
 			echo ' ';
@@ -142,12 +142,12 @@ class Widget_ProjectPublicAreas extends Widget {
 		}
 
 		// ##################### Task Manager
-					
+
 		if ($project->usesPm()) {
-			echo '<div class="public-area-box">'."\n";
-			$link_content = $HTML->getPmPic('') . ' ' . _('Tasks');
+			echo '<div class="public-area-box">';
+			$link_content = $HTML->getPmPic('') . ' ' . _('Tasks');
 			print util_make_link( '/pm/?group_id='.$group_id, $link_content);
-			
+
 			$pgf = new ProjectGroupFactory ($project);
 			$pgs = $pgf->getProjectGroups();
 			
@@ -169,7 +169,7 @@ class Widget_ProjectPublicAreas extends Widget {
 
 		if ($project->usesSurvey()) {
 			echo '<div class="public-area-box">'."\n";
-			$link_content = $HTML->getSurveyPic('') . ' ' . _('Surveys');
+			$link_content = $HTML->getSurveyPic('') . ' ' . _('Surveys');
 			echo util_make_link( '/survey/?group_id='.$group_id, $link_content);
 			echo ' (<strong>'. project_get_survey_count($group_id) .'</strong> ' . _('surveys').')';
 			echo "\n</div>\n";
@@ -180,7 +180,7 @@ class Widget_ProjectPublicAreas extends Widget {
 		if ($project->usesSCM()) {
 			echo '<div class="public-area-box">'."\n";
 
-			$link_content = $HTML->getScmPic('') . ' ' . _('SCM Repository');
+			$link_content = $HTML->getScmPic('') . ' ' . _('SCM Repository');
 			//	print '<hr size="1" /><a rel="doap:repository" href="'.util_make_url ('/scm/?group_id='.$group_id).'">';
 			print util_make_link( '/scm/?group_id='.$group_id, $link_content);
 
@@ -203,7 +203,7 @@ class Widget_ProjectPublicAreas extends Widget {
 			if ($project->isActive()) {
 				echo '<div class="public-area-box">'."\n";
 
-				$link_content = $HTML->getFtpPic('') . ' ' . _('Anonymous FTP Space');
+				$link_content = $HTML->getFtpPic('') . ' ' . _('Anonymous FTP Space');
 				//		print '<a rel="doap:anonymous root" href="ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName() .'/">';
 				if (forge_get_config('use_project_vhost')) {
 					print util_make_link('ftp://' . $project->getUnixName() . '.' . forge_get_config('web_host') . '/pub/'. $project->getUnixName(), $link_content, false, true);
@@ -220,6 +220,8 @@ class Widget_ProjectPublicAreas extends Widget {
 	}
 
 	function getDescription() {
-		return _('List all available services for this project along with some information next to it. Click on any of this item to access a service.<br />The role of this area is pretty much equivalent to the Project Main Menu at the top of the screen except that it shows additional information about each of the service (e.g. total number of open bugs, tasks, ...)');
+		return _('List all available services for this project along with some information next to it. Click on any of this item to access a service.')
+             . '<br />'
+             . _('The role of this area is pretty much equivalent to the Project Main Menu at the top of the screen except that it shows additional information about each of the service (e.g. total number of open bugs, tasks, ...)');
 	}
 }
