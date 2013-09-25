@@ -255,7 +255,7 @@ $res = db_query_params ('SELECT artifact_query_id,query_name FROM artifact_query
 //
 $ath->header(array('atid'=>$ath->getID(), 'title' =>_('Build Query')));
 
-echo '<table align="center"><tr><td>' .
+echo '<table style="margin-left:auto;margin-right:auto"><tr><td>' .
 		'<fieldset><legend>'.
 		_('Build Query').
 		'</legend>';
@@ -318,7 +318,7 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 		if ($default_query == $aq->getName()) {
 			$note = '';
 		} else {
-			$note= '<br/><i>'.sprintf(_('Note: The default project query is currently \'%1$s\'.'), $default_query).'</i>';
+			$note= '<br/><i>'.sprintf(_('Note: The default project query is currently “%s”.'), $default_query).'</i>';
 		}
 	} else {
 		$note= '<br/><i>'._('Note: There is no default project query defined.').'</i>';
@@ -383,16 +383,16 @@ echo '
 	</tr>
 	<tr>
 		<td colspan="2">'.
-		'<strong>'._('Summary').':</strong> '.$tips.'<br />
+		'<strong>'._('Summary')._(': ').'</strong> '.$tips.'<br />
 		<input type="text" name="_summary" size="40" value="'. htmlspecialchars($_summary) .'" /><p/>
-		<strong>'._('Detailed description').':</strong> '.$tips.'<br />
+		<strong>'._('Detailed description')._(': ').'</strong> '.$tips.'<br />
 		<input type="text" name="_description" size="40" value="'. htmlspecialchars($_description) .'" /><p/>
-		<strong>'._('Followups').':</strong> '.$tips.'<br />
+		<strong>'._('Followups')._(': ').'</strong> '.$tips.'<br />
 		<input type="text" name="_followups" size="40" value="'. htmlspecialchars($_followups) .'" />
 		</td>
 	</tr>
 	<tr>
-		<td><strong>'._('Order by').':</strong><br />
+		<td><strong>'._('Order by')._(': ').'</strong><br />
 		'.
 		html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .'</td>
 		<td><br />
