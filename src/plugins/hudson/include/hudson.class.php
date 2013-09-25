@@ -56,9 +56,9 @@ class hudson extends Controler {
 						case 'add_job':
 							if ($user->isMember($group_id, 'A')) {
 								if ( $request->exist('hudson_job_url') && trim($request->get('hudson_job_url') != '') ) {
-								$this->action = 'addJob';
+									$this->action = 'addJob';
 								} else {
-								$error_msg .= _("Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)");
+									$error_msg .= _("Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)");
 								}
 								$this->view = 'projectOverview';
 							} else {
@@ -69,9 +69,9 @@ class hudson extends Controler {
 						case 'edit_job':
 							if ($user->isMember($group_id,'A')) {
 								if ($request->exist('job_id')) {
-								$this->view = 'editJob';
+									$this->view = 'editJob';
 								} else {
-								$error_msg .= _("Missing Hudson job ID");
+									$error_msg .= _("Missing Hudson job ID");
 								}
 							} else {
 								$error_msg .= _("Permission denied.");
@@ -81,13 +81,13 @@ class hudson extends Controler {
 						case 'update_job':
 							if ($user->isMember($group_id, 'A')) {
 								if ($request->exist('job_id')) {
-								if ($request->exist('new_hudson_job_url') && $request->get('new_hudson_job_url') != '') {
-									$this->action = 'updateJob';
+									if ($request->exist('new_hudson_job_url') && $request->get('new_hudson_job_url') != '') {
+										$this->action = 'updateJob';
+									} else {
+										$error_msg .= _("Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)");
+									}
 								} else {
-									$error_msg .= _("Missing Hudson job url (eg: http://myCIserver:8080/hudson/job/MyJob)");
-								}
-								} else {
-								$error_msg .= _("Missing Hudson job ID");
+									$error_msg .= _("Missing Hudson job ID");
 								}
 								$this->view = 'projectOverview';
 							} else {
@@ -98,9 +98,9 @@ class hudson extends Controler {
 						case 'delete_job':
 							if ($user->isMember($group_id, 'A')) {
 								if ($request->exist('job_id')) {
-								$this->action = 'deleteJob';
+									$this->action = 'deleteJob';
 								} else {
-								$error_msg .= _("Missing Hudson job ID");
+									$error_msg .= _("Missing Hudson job ID");
 								}
 								$this->view = 'projectOverview';
 							} else {

@@ -67,7 +67,7 @@ class hudsonActions extends Actions {
 		$new_job_name = $request->get('new_hudson_job_name');
 		if (strpos($new_job_name, " ") !== false) {
 			$new_job_name = str_replace(" ", "_", $new_job_name);
-			$error_msg .= _('Spaces are not allowed in job name. They were replaced by "_".');
+			$error_msg .= _('Spaces are not allowed in job name. They were replaced by “_”.');
 		}
 		$new_use_svn_trigger = ($request->get('new_hudson_use_svn_trigger') === 'on');
 		$new_use_cvs_trigger = ($request->get('new_hudson_use_cvs_trigger') === 'on');

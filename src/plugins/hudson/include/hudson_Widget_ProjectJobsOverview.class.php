@@ -42,12 +42,12 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
 
 		if ($this->_use_global_status == "true") {
 			$this->_all_status = array(
-						'grey' => 0,
-						'blue' => 0,
-						'yellow' => 0,
-						'red' => 0,
-						);
-		$this->computeGlobalStatus();
+				'grey' => 0,
+				'blue' => 0,
+				'yellow' => 0,
+				'red' => 0,
+			);
+			$this->computeGlobalStatus();
 		}
 	}
 
@@ -97,19 +97,19 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
 
 				try {
 
-				$html .= '<tr class="'. $class .'">';
-				$html .= ' <td>';
-				$html .= ' <img src="'.$job->getStatusIcon().'" title="'.$job->getStatus().'" >';
-				$html .= ' </td>';
-				$html .= ' <td style="width:99%">';
-				$html .= '  <a href="/plugins/hudson/?action=view_job&group_id='.$this->group_id.'&job_id='.$job_id.'">'.$job->getName().'</a><br />';
-				$html .= ' </td>';
-				$html .= '</tr>';
+					$html .= '<tr class="'. $class .'">';
+					$html .= ' <td>';
+					$html .= ' <img src="'.$job->getStatusIcon().'" title="'.$job->getStatus().'" >';
+					$html .= ' </td>';
+					$html .= ' <td style="width:99%">';
+					$html .= '  <a href="/plugins/hudson/?action=view_job&group_id='.$this->group_id.'&job_id='.$job_id.'">'.$job->getName().'</a><br />';
+					$html .= ' </td>';
+					$html .= '</tr>';
 
-				$cpt++;
+					$cpt++;
 
 				} catch (Exception $e) {
-				// Do not display wrong jobs
+					// Do not display wrong jobs
 				}
 			}
 			$html .= '</table>';

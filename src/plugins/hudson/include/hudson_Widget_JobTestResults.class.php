@@ -48,7 +48,7 @@ class hudson_Widget_JobTestResults extends HudsonJobWidget {
 			$title .= vsprintf(_('%1$s Test Results (%2$s / %3$s)'),
 					array($this->job->getName(), $this->test_result->getPassCount(), $this->test_result->getTotalCount()));
 		} elseif ($this->job && ! $this->test_result) {
-			$title .= sprintf(_('%1$s Test Results'), $this->job->getName());
+			$title .= sprintf(_('%s Test Results'), $this->job->getName());
 		} else {
 			$title .= _('Test Results');
 		}
@@ -64,7 +64,7 @@ class hudson_Widget_JobTestResults extends HudsonJobWidget {
 		$res = db_query_params($sql,array($this->widget_id,$this->owner_id,$this->owner_type,$id));
 		if ($res && db_numrows($res)) {
 			$data = db_fetch_array($res);
-			$this->job_id    = $data['job_id'];
+			$this->job_id = $data['job_id'];
 			$this->content_id = $id;
 			$jobs = $this->getAvailableJobs();
 			if (array_key_exists($this->job_id, $jobs)) {

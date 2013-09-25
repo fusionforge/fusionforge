@@ -61,7 +61,7 @@ class hudson_Widget_JobLastArtifacts extends HudsonJobWidget {
 		$res = db_query_params($sql,array($this->widget_id,$this->owner_id,$this->owner_type,$id));
 		if ($res && db_numrows($res)) {
 			$data = db_fetch_array($res);
-			$this->job_id    = $data['job_id'];
+			$this->job_id = $data['job_id'];
 			$this->content_id = $id;
 			$jobs = $this->getAvailableJobs();
 			if (array_key_exists($this->job_id, $jobs)) {
@@ -91,10 +91,10 @@ class hudson_Widget_JobLastArtifacts extends HudsonJobWidget {
 				$html .= ' <li><a href="'.$build->getUrl().'/artifact/'.$artifact->relativePath.'">'.$artifact->displayPath.'</a></li>';
 			}
 			$html .= '</ul>';
+		} else {
+			if ($this->job != null) {
+				$html .= _("No build found for this job.");
 			} else {
-				if ($this->job != null) {
-					$html .= _("No build found for this job.");
-				} else {
 				$html .= _("Job not found.");
 			}
 		}

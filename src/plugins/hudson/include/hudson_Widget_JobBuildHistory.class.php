@@ -58,7 +58,7 @@ class hudson_Widget_JobBuildHistory extends HudsonJobWidget {
 		$res = db_query_params($sql,array($this->widget_id,$this->owner_id,$this->owner_type,$id));
 		if ($res && db_numrows($res)) {
 			$data = db_fetch_array($res);
-			$this->job_id    = $data['job_id'];
+			$this->job_id = $data['job_id'];
 			$this->content_id = $id;
 			$jobs = $this->getAvailableJobs();
 

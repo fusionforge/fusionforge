@@ -63,33 +63,33 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
 		}
 	}
 
-    function computeGlobalStatus() {
-        $monitored_jobs = $this->_getMonitoredJobsByUser();
-        foreach ($monitored_jobs as $monitored_job) {
-            try {
-                $job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
-                $dar = $job_dao->searchByJobID($monitored_job);
-                if ($dar->valid()) {
-                    $row = $dar->current();
-                    $job_url = $row['job_url'];
-                    $job = new HudsonJob($job_url);
-                    $this->_all_status[(string)$job->getColorNoAnime()] = $this->_all_status[(string)$job->getColorNoAnime()] + 1;
-                }
-            } catch (Exception $e) {
-                // Do not display wrong jobs
-            }
-        }
-        if ($this->_all_status['grey'] > 0 || $this->_all_status['red'] > 0) {
-            $this->_global_status = _("One or more failure or pending job");
-            $this->_global_status_icon = $this->plugin->getThemePath() . "/images/ic/" . "status_red.png";
-        } elseif ($this->_all_status['yellow'] > 0) {
-            $this->_global_status = _("One or more unstable job");
-            $this->_global_status_icon = $this->plugin->getThemePath() . "/images/ic/" . "status_yellow.png";
-        } else {
-            $this->_global_status = _("Success");
-            $this->_global_status_icon = $this->plugin->getThemePath() . "/images/ic/" . "status_blue.png";
-        }
-    }
+	function computeGlobalStatus() {
+		$monitored_jobs = $this->_getMonitoredJobsByUser();
+		foreach ($monitored_jobs as $monitored_job) {
+			try {
+				$job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
+				$dar = $job_dao->searchByJobID($monitored_job);
+				if ($dar->valid()) {
+					$row = $dar->current();
+					$job_url = $row['job_url'];
+					$job = new HudsonJob($job_url);
+					$this->_all_status[(string)$job->getColorNoAnime()] = $this->_all_status[(string)$job->getColorNoAnime()] + 1;
+				}
+			} catch (Exception $e) {
+				// Do not display wrong jobs
+			}
+		}
+		if ($this->_all_status['grey'] > 0 || $this->_all_status['red'] > 0) {
+			$this->_global_status = _("One or more failure or pending job");
+			$this->_global_status_icon = $this->plugin->getThemePath() . "/images/ic/" . "status_red.png";
+		} elseif ($this->_all_status['yellow'] > 0) {
+			$this->_global_status = _("One or more unstable job");
+			$this->_global_status_icon = $this->plugin->getThemePath() . "/images/ic/" . "status_yellow.png";
+		} else {
+			$this->_global_status = _("Success");
+			$this->_global_status_icon = $this->plugin->getThemePath() . "/images/ic/" . "status_blue.png";
+		}
+	}
 
 	function getTitle() {
 		$title = '';
@@ -166,37 +166,37 @@ class hudson_Widget_MyMonitoredJobs extends HudsonOverviewWidget {
 
 			foreach ($monitored_jobs as $monitored_job) {
 				try {
-				$job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
-				$dar = $job_dao->searchByJobID($monitored_job);
-				if ($dar->valid()) {
-					$row = $dar->current();
-					$job_url = $row['job_url'];
-					$job_id = $row['job_id'];
-					$group_id = $row['group_id'];
-					$job = new HudsonJob($job_url);
-					if ($cpt % 2 == 0) {
-						$class="boxitemalt bgcolor-white";
-					} else {
-						$class="boxitem bgcolor-grey";
+					$job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
+					$dar = $job_dao->searchByJobID($monitored_job);
+					if ($dar->valid()) {
+						$row = $dar->current();
+						$job_url = $row['job_url'];
+						$job_id = $row['job_id'];
+						$group_id = $row['group_id'];
+						$job = new HudsonJob($job_url);
+						if ($cpt % 2 == 0) {
+							$class="boxitemalt bgcolor-white";
+						} else {
+							$class="boxitem bgcolor-grey";
+						}
+
+						$html .= '<tr class="'. $class .'">';
+						$html .= ' <td>';
+						$html .= ' <img src="'.$job->getStatusIcon().'" title="'.$job->getStatus().'" >';
+						$html .= ' </td>';
+						$html .= ' <td style="width:99%">';
+						$html .= '  <a href="/plugins/hudson/?action=view_job&group_id='.$group_id.'&job_id='.$job_id.'">'.$job->getName().'</a><br />';
+						$html .= ' </td>';
+						$html .= '</tr>';
+
+						$cpt++;
 					}
-
-					$html .= '<tr class="'. $class .'">';
-					$html .= ' <td>';
-					$html .= ' <img src="'.$job->getStatusIcon().'" title="'.$job->getStatus().'" >';
-					$html .= ' </td>';
-					$html .= ' <td style="width:99%">';
-					$html .= '  <a href="/plugins/hudson/?action=view_job&group_id='.$group_id.'&job_id='.$job_id.'">'.$job->getName().'</a><br />';
-					$html .= ' </td>';
-					$html .= '</tr>';
-
-					$cpt++;
-				}
 				} catch (Exception $e) {
-				// Do not display wrong jobs
+					// Do not display wrong jobs
+				}
 			}
-		}
-		$html .= '</table>';
-		return $html;
+			$html .= '</table>';
+			return $html;
 		}
 	}
 
