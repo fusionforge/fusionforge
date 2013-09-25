@@ -60,8 +60,8 @@ class Validator {
 	/**
 	* Returns an error message which contains the null field names which have been checked
 	*
-	* @param preamble string - A string with which to start the error message
-	* @return string - A complete error message
+	* @param	string	$preamble  - A string with which to start the error message
+	* @return	string - A complete error message
 	*/
 	function formErrorMsg($preamble) {
 		foreach ($this->badfields as $field) {
