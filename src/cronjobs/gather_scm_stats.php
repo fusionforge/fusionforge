@@ -44,12 +44,12 @@ $starttime = $endtime - 86400 ;
 
 $shortopts = "v";       // enable verbose mode
 $longopts = array(
-    "all",              // consider all commits from registration date saved in db up to now
-    "allepoch",         // consider all commits from start of the epoch (1970-01-01) up to now
-    "startdate:",       // consider only commits later than given startdate (YYYY-MM-DD), overwritten by all/allsvn
-    "enddate:",         // consider only commits before given enddate (YYYY-MM-DD), overwritten by all/allsvn
-    "group_id:",        // update data only for group with given id
-    "unix_group_name:"  // update data only for group with given unix name
+	"all",              // consider all commits from registration date saved in db up to now
+	"allepoch",         // consider all commits from start of the epoch (1970-01-01) up to now
+	"startdate:",       // consider only commits later than given startdate (YYYY-MM-DD), overwritten by all/allsvn
+	"enddate:",         // consider only commits before given enddate (YYYY-MM-DD), overwritten by all/allsvn
+	"group_id:",        // update data only for group with given id
+	"unix_group_name:"  // update data only for group with given unix name
 );
 $options = getopt($shortopts, $longopts);
 $EXTRA_WHERE = "";
@@ -58,23 +58,23 @@ $verbose = false;
 $qpa = db_construct_qpa(false, 'SELECT group_id, group_name, register_time FROM groups WHERE status=$1 AND use_scm=$2', array ('A', 1));
 
 if ( isset($options['v']) ) {
-    $verbose = true;
+	$verbose = true;
 }
 if ( isset($options['startdate']) ) {
 	$starttime = strtotime($options['startdate']) ;
-    ($verbose) && print "Startdate: ".date("Y-m-d", $starttime)."\n";
+	($verbose) && print "Startdate: ".date("Y-m-d", $starttime)."\n";
 }
 if ( isset($options['enddate']) ) {
 	$endtime = strtotime($options['enddate']) ;
-    ($verbose) && print "Enddate:   ".date("Y-m-d", $endtime)."\n";
+	($verbose) && print "Enddate:   ".date("Y-m-d", $endtime)."\n";
 }
 if ( isset($options['group_id']) ) {
-    ($verbose) && print "group_id:      ".$options['group_id']."\n";
-    $qpa = db_construct_qpa($qpa, ' AND group_id=$1', array($options['group_id']));
+	($verbose) && print "group_id:      ".$options['group_id']."\n";
+	$qpa = db_construct_qpa($qpa, ' AND group_id=$1', array($options['group_id']));
 }
 if ( isset($options['unix_group_name']) ) {
-    ($verbose) && print "unix_group_name: ".$options['unix_group_name']."\n";
-    $qpa = db_construct_qpa($qpa, ' AND unix_group_name=$1', array($options['unix_group_name']));
+	($verbose) && print "unix_group_name: ".$options['unix_group_name']."\n";
+	$qpa = db_construct_qpa($qpa, ' AND unix_group_name=$1', array($options['unix_group_name']));
 }
 
 $qpa = db_construct_qpa($qpa, ' ORDER BY group_id DESC');
@@ -89,32 +89,32 @@ if (!$res) {
 
 $output = '';
 while ($data = db_fetch_array ($res)) {
-    print "Processing GroupId ".$data['group_id']." (".$data['group_name'].")\n";
-    $time = $starttime;
-    $etime = $endtime;
-    if ( isset($options['all']) ) {
-        $time = date($data['register_time']);
-        $etime = time();
-    }
-    if ( isset($options['allepoch']) ) {
-        $time = 0;
-        $etime = time();
-    }
-    $last_seen_day = '' ;
-    while ($time < $etime) {
-        $day = date ('Y-m-d', $time) ;
-        if ($day != $last_seen_day) {
-            $last_seen_day = $day ;
-            ($verbose) && print "processing $day\n" ;
-            $hook_params = array ('group_id' => $data['group_id'],
-                          'mode' => 'day',
-                          'year' => date ('Y', $time),
-                          'month' => date ('n', $time),
-                          'day' => date ('j', $time)) ;
-            plugin_hook ('scm_gather_stats', $hook_params) ;
-        }
-        $time = $time + 86400 ;
-    }
+	print "Processing GroupId ".$data['group_id']." (".$data['group_name'].")\n";
+	$time = $starttime;
+	$etime = $endtime;
+	if ( isset($options['all']) ) {
+		$time = date($data['register_time']);
+		$etime = time();
+	}
+	if ( isset($options['allepoch']) ) {
+		$time = 0;
+		$etime = time();
+	}
+	$last_seen_day = '' ;
+	while ($time < $etime) {
+		$day = date ('Y-m-d', $time) ;
+		if ($day != $last_seen_day) {
+			$last_seen_day = $day ;
+			($verbose) && print "processing $day\n" ;
+			$hook_params = array ('group_id' => $data['group_id'],
+						  'mode' => 'day',
+						  'year' => date ('Y', $time),
+						  'month' => date ('n', $time),
+						  'day' => date ('j', $time)) ;
+			plugin_hook ('scm_gather_stats', $hook_params) ;
+		}
+		$time = $time + 86400 ;
+	}
 }
 
 if ($output) cron_entry(28, $output);
@@ -123,5 +123,3 @@ if ($output) cron_entry(28, $output);
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>
