@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-24 10:09+0200\n"
+"POT-Creation-Date: 2013-09-25 11:55+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -6514,9 +6514,8 @@ msgid "Could Not Get ArtifactTypeFactoryHtml"
 msgstr "Erreur lors de la création de l'objet ArtifactTypeFactory."
 
 #: common/tracker/views/form-adminroadmap.php:70
-#, fuzzy
-msgid "Can't create or rename roadmap"
-msgstr "Impossible de renommer l'onglet : %s"
+msgid "Cannot create or rename roadmap"
+msgstr "Impossible de créer ou renommer la feuille de route"
 
 #: common/tracker/views/form-adminroadmap.php:70
 msgid "name is empty"
@@ -6528,8 +6527,8 @@ msgid "Roadmap %s created"
 msgstr "Feuille de route %s créée"
 
 #: common/tracker/views/form-adminroadmap.php:80
-msgid "Can't create roadmap: "
-msgstr "Erreur lors de la création de la feuille de route : "
+msgid "Cannot create roadmap: "
+msgstr "Impossible de créer la feuille de route : "
 
 #: common/tracker/views/form-adminroadmap.php:88
 #, php-format
@@ -6537,22 +6536,20 @@ msgid "Roadmap %s renamed to %s"
 msgstr "Feuille de route %s renommée en %s"
 
 #: common/tracker/views/form-adminroadmap.php:91
-#, fuzzy
-msgid "Can't rename roadmap: "
-msgstr "Impossible de renommer l'onglet : %s"
+msgid "Cannot rename roadmap: "
+msgstr "Impossible de renommer la feuille de route : "
 
 #: common/tracker/views/form-adminroadmap.php:98
-#, fuzzy
-msgid "Can't set roadmap: "
-msgstr "Échec lors du changement de type : %s"
+msgid "Cannot set roadmap: "
+msgstr "Impossible de modifier la feuille de route : "
 
 #: common/tracker/views/form-adminroadmap.php:122
-msgid "Can't set roadmap state: "
-msgstr "Erreur lors de la sauvegarde de l'état de la feuille de route : "
+msgid "Cannot set roadmap state: "
+msgstr "Impossible de modifier l'état de la feuille de route : "
 
 #: common/tracker/views/form-adminroadmap.php:126
-msgid "Can't set default value: "
-msgstr "Erreur lors du réglage de la valeur par défaut : "
+msgid "Cannot set default value: "
+msgstr "Impossible de modifier la valeur par défaut : "
 
 #: common/tracker/views/form-adminroadmap.php:129
 msgid "Roadmap configuration is updated"
@@ -6564,8 +6561,8 @@ msgid "Roadmap %s is deleted"
 msgstr "La feuille de route %s est supprimée."
 
 #: common/tracker/views/form-adminroadmap.php:144
-msgid "Can't delete roadmap: "
-msgstr "Échec lors de la suppression d'une feuille de route : "
+msgid "Cannot delete roadmap: "
+msgstr "Impossible de supprimer la feuille de route : "
 
 #: common/tracker/views/form-adminroadmap.php:156
 #: common/tracker/views/form-adminroadmap.php:478
@@ -6623,9 +6620,8 @@ msgstr "Ordre des versions mis à jour"
 
 #: common/tracker/views/form-adminroadmap.php:283
 #: common/tracker/views/form-adminroadmap.php:370
-#, fuzzy
-msgid "Can't modify release order: "
-msgstr "Impossible de modifier le label : %s"
+msgid "Cannot modify release order: "
+msgstr "Impossible de modifier l'ordre des versions : "
 
 #: common/tracker/views/form-adminroadmap.php:390
 #: common/tracker/views/form-adminroadmap.php:475
@@ -7676,6 +7672,10 @@ msgid_plural "<strong>%d</strong> messages"
 msgstr[0] "<strong>%d</strong> message"
 msgstr[1] "<strong>%d</strong> messages"
 
+#: common/widget/Widget_ProjectPublicAreas.class.php:116
+msgid "in"
+msgstr "dans"
+
 #: common/widget/Widget_ProjectPublicAreas.class.php:117
 #: www/include/project_summary.php:164
 #, php-format
@@ -7718,10 +7718,15 @@ msgstr "Espace FTP anonyme"
 #: common/widget/Widget_ProjectPublicAreas.class.php:223
 msgid ""
 "List all available services for this project along with some information "
-"next to it. Click on any of this item to access a service.<br />The role of "
-"this area is pretty much equivalent to the Project Main Menu at the top of "
-"the screen except that it shows additional information about each of the "
-"service (e.g. total number of open bugs, tasks, ...)"
+"next to it. Click on any of this item to access a service."
+msgstr ""
+
+#: common/widget/Widget_ProjectPublicAreas.class.php:225
+#, fuzzy
+msgid ""
+"The role of this area is pretty much equivalent to the Project Main Menu at "
+"the top of the screen except that it shows additional information about each "
+"of the service (e.g. total number of open bugs, tasks, ...)"
 msgstr ""
 "Liste de tous les services activés pour ce projet, avec quelques "
 "informations supplémentaires pour chacun.  Cliquez sur un de ces liens pour "
@@ -7742,6 +7747,10 @@ msgstr ""
 #: common/widget/Widget_Rss.class.php:101
 msgid "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
 msgstr "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
+
+#: common/widget/Widget_Rss.class.php:126
+msgid "Cannot add empty RSS URL"
+msgstr ""
 
 #: common/widget/Widget_Rss.class.php:190
 msgid "less than 1 minute"
@@ -10031,10 +10040,10 @@ msgid "Please wait 1 hour for triggers to be updated."
 msgstr "Veuillez attendre une heure pour que les déclencheurs soient activés."
 
 #: plugins/hudson/include/hudsonActions.class.php:70
-msgid "Spaces are not allowed in job name. They were replaced by \"_\"."
+msgid "Spaces are not allowed in job name. They were replaced by “_”."
 msgstr ""
-"Les caractères d'espacement ne sont pas autorisés dans les noms de tâches. "
-"Ils ont été remplacés par « _ »."
+"Les espaces ne sont pas autorisés dan un nom de tâche. Ils ont été remplacés "
+"par « _ »."
 
 #: plugins/hudson/include/hudsonActions.class.php:81
 msgid "Unable to update Hudson job"
@@ -10424,8 +10433,8 @@ msgid "%1$s Test Results (%2$s / %3$s)"
 msgstr "Résultats des tests de %1$s (%2$s / %3$s)"
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:51
-#, php-format
-msgid "%1$s Test Results"
+#, fuzzy, php-format
+msgid "%s Test Results"
 msgstr "Résultats des tests de %1$s"
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:53
@@ -23073,6 +23082,39 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
+#, fuzzy
+#~ msgid "Can't create or rename roadmap"
+#~ msgstr "Impossible de renommer l'onglet : %s"
+
+#~ msgid "Can't create roadmap: "
+#~ msgstr "Erreur lors de la création de la feuille de route : "
+
+#, fuzzy
+#~ msgid "Can't rename roadmap: "
+#~ msgstr "Impossible de renommer l'onglet : %s"
+
+#, fuzzy
+#~ msgid "Can't set roadmap: "
+#~ msgstr "Échec lors du changement de type : %s"
+
+#~ msgid "Can't set roadmap state: "
+#~ msgstr "Erreur lors de la sauvegarde de l'état de la feuille de route : "
+
+#~ msgid "Can't set default value: "
+#~ msgstr "Erreur lors du réglage de la valeur par défaut : "
+
+#~ msgid "Can't delete roadmap: "
+#~ msgstr "Échec lors de la suppression d'une feuille de route : "
+
+#, fuzzy
+#~ msgid "Can't modify release order: "
+#~ msgstr "Impossible de modifier le label : %s"
+
+#~ msgid "Spaces are not allowed in job name. They were replaced by \"_\"."
+#~ msgstr ""
+#~ "Les caractères d'espacement ne sont pas autorisés dans les noms de "
+#~ "tâches. Ils ont été remplacés par « _ »."
+
 #~ msgid "ID"
 #~ msgstr "Identifiant"
 
@@ -25100,30 +25142,6 @@ msgstr "Page personnelle de %s"
 #~ msgid "Add Custom Field"
 #~ msgstr "Ajouter un nouveau champ supplémentaire"
 
-#~ msgid "Cannot create or rename roadmap"
-#~ msgstr "Impossible de créer ou renommer la feuille de route"
-
-#~ msgid "Cannot create roadmap: "
-#~ msgstr "Impossible de créer la feuille de route : "
-
-#~ msgid "Cannot rename roadmap: "
-#~ msgstr "Impossible de renommer la feuille de route : "
-
-#~ msgid "Cannot set roadmap: "
-#~ msgstr "Impossible de modifier la feuille de route : "
-
-#~ msgid "Cannot set roadmap state: "
-#~ msgstr "Impossible de modifier l'état de la feuille de route : "
-
-#~ msgid "Cannot set default value: "
-#~ msgstr "Impossible de modifier la valeur par défaut : "
-
-#~ msgid "Cannot delete roadmap: "
-#~ msgstr "Impossible de supprimer la feuille de route : "
-
-#~ msgid "Cannot modify release order: "
-#~ msgstr "Impossible de modifier l'ordre des versions : "
-
 #~ msgid "Choose the tracker to clone."
 #~ msgstr "Veuillez choisir le modèle d'outil de suivi à cloner."
 
@@ -25222,9 +25240,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Available Tools"
 #~ msgstr "Outils à disposition"
-
-#~ msgid "in"
-#~ msgstr "dans"
 
 #~ msgid "There are no public subprojects available"
 #~ msgstr "Il n'y a pas de sous-projet public"
@@ -25404,11 +25419,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Error: Missing parameter "
 #~ msgstr "Erreur : paramètre manquant "
-
-#~ msgid "Spaces are not allowed in job name. They were replaced by “_”."
-#~ msgstr ""
-#~ "Les espaces ne sont pas autorisés dan un nom de tâche. Ils ont été "
-#~ "remplacés par « _ »."
 
 #~ msgid "Jira Admin"
 #~ msgstr "Administration de Jira"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-24 10:09+0200\n"
+"POT-Creation-Date: 2013-09-25 11:55+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -6584,7 +6584,7 @@ msgstr "パーミッションが取得できません。"
 
 #: common/tracker/views/form-adminroadmap.php:70
 #, fuzzy
-msgid "Can't create or rename roadmap"
+msgid "Cannot create or rename roadmap"
 msgstr "新規プロジェクト登録"
 
 #: common/tracker/views/form-adminroadmap.php:70
@@ -6597,8 +6597,9 @@ msgid "Roadmap %s created"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:80
-msgid "Can't create roadmap: "
-msgstr ""
+#, fuzzy
+msgid "Cannot create roadmap: "
+msgstr "ドキュメントタイトル"
 
 #: common/tracker/views/form-adminroadmap.php:88
 #, php-format
@@ -6606,19 +6607,22 @@ msgid "Roadmap %s renamed to %s"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:91
-msgid "Can't rename roadmap: "
-msgstr ""
+#, fuzzy
+msgid "Cannot rename roadmap: "
+msgstr "新規プロジェクト登録"
 
 #: common/tracker/views/form-adminroadmap.php:98
-msgid "Can't set roadmap: "
-msgstr ""
+#, fuzzy
+msgid "Cannot set roadmap: "
+msgstr "新規プロジェクト登録"
 
 #: common/tracker/views/form-adminroadmap.php:122
-msgid "Can't set roadmap state: "
-msgstr ""
+#, fuzzy
+msgid "Cannot set roadmap state: "
+msgstr "新規プロジェクト登録"
 
 #: common/tracker/views/form-adminroadmap.php:126
-msgid "Can't set default value: "
+msgid "Cannot set default value: "
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:129
@@ -6632,8 +6636,9 @@ msgid "Roadmap %s is deleted"
 msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:144
-msgid "Can't delete roadmap: "
-msgstr ""
+#, fuzzy
+msgid "Cannot delete roadmap: "
+msgstr "グループ編集"
 
 #: common/tracker/views/form-adminroadmap.php:156
 #: common/tracker/views/form-adminroadmap.php:478
@@ -6696,8 +6701,9 @@ msgstr "クイックリリースシステム"
 
 #: common/tracker/views/form-adminroadmap.php:283
 #: common/tracker/views/form-adminroadmap.php:370
-msgid "Can't modify release order: "
-msgstr ""
+#, fuzzy
+msgid "Cannot modify release order: "
+msgstr "ドキュメントタイトル"
 
 #: common/tracker/views/form-adminroadmap.php:390
 #: common/tracker/views/form-adminroadmap.php:475
@@ -7695,6 +7701,11 @@ msgid "<strong>%d</strong> message"
 msgid_plural "<strong>%d</strong> messages"
 msgstr[0] ""
 
+#: common/widget/Widget_ProjectPublicAreas.class.php:116
+#, fuzzy
+msgid "in"
+msgstr "ログイン"
+
 #: common/widget/Widget_ProjectPublicAreas.class.php:117
 #: www/include/project_summary.php:164
 #, php-format
@@ -7735,10 +7746,14 @@ msgstr "Anonymous FTP スペース"
 #: common/widget/Widget_ProjectPublicAreas.class.php:223
 msgid ""
 "List all available services for this project along with some information "
-"next to it. Click on any of this item to access a service.<br />The role of "
-"this area is pretty much equivalent to the Project Main Menu at the top of "
-"the screen except that it shows additional information about each of the "
-"service (e.g. total number of open bugs, tasks, ...)"
+"next to it. Click on any of this item to access a service."
+msgstr ""
+
+#: common/widget/Widget_ProjectPublicAreas.class.php:225
+msgid ""
+"The role of this area is pretty much equivalent to the Project Main Menu at "
+"the top of the screen except that it shows additional information about each "
+"of the service (e.g. total number of open bugs, tasks, ...)"
 msgstr ""
 
 #: common/widget/Widget_ProjectRss.class.php:40
@@ -7751,6 +7766,10 @@ msgstr ""
 
 #: common/widget/Widget_Rss.class.php:101
 msgid "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
+msgstr ""
+
+#: common/widget/Widget_Rss.class.php:126
+msgid "Cannot add empty RSS URL"
 msgstr ""
 
 #: common/widget/Widget_Rss.class.php:190
@@ -10072,7 +10091,7 @@ msgid "Please wait 1 hour for triggers to be updated."
 msgstr ""
 
 #: plugins/hudson/include/hudsonActions.class.php:70
-msgid "Spaces are not allowed in job name. They were replaced by \"_\"."
+msgid "Spaces are not allowed in job name. They were replaced by “_”."
 msgstr ""
 
 #: plugins/hudson/include/hudsonActions.class.php:81
@@ -10461,7 +10480,7 @@ msgstr ""
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:51
 #, fuzzy, php-format
-msgid "%1$s Test Results"
+msgid "%s Test Results"
 msgstr "ニュースアーカイブ"
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:53
