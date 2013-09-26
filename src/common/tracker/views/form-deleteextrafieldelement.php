@@ -48,8 +48,11 @@
 				$ath->getName())));
 
 			?>
+			<table class="centered">
+			<tr>
+			<td>
 			<fieldset>
-			<legend><?php echo _("Delete Custom Field Element") ?></legend>
+			<legend><?php echo _('Confirm Delete') ?></legend>
 			<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 			<input type="hidden" name="delete_opt" value="y" />
 			<input type="hidden" name="id" value="<?php echo $ao->getID(); ?>" />
@@ -65,6 +68,9 @@
 			<input type="submit" name="post_changes" value="<?php echo _('Delete') ?>" /></p>
 			</form>
 			</fieldset>
+			</td>
+			</tr>
+			</table>
 			<?php
 			$ath->footer(array());
 		}

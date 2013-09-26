@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-26 17:16+0200\n"
+"POT-Creation-Date: 2013-09-26 17:45+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -1638,7 +1638,7 @@ msgstr "Data de comezo"
 #: common/tracker/views/form-addcanned.php:71
 #: common/tracker/views/form-addextrafieldoption.php:102
 #: common/tracker/views/form-customizelist.php:123
-#: common/tracker/views/form-deleteextrafieldelement.php:59
+#: common/tracker/views/form-deleteextrafieldelement.php:62
 #: common/tracker/views/form-updatecanned.php:43
 #: common/tracker/views/form-updatecanned.php:46
 #: common/tracker/views/form-updateextrafieldelement.php:54
@@ -1971,9 +1971,9 @@ msgstr "Non se puido obter o obxecto de foro"
 #: common/tracker/views/form-addextrafield.php:57
 #: common/tracker/views/form-addextrafield.php:81
 #: common/tracker/views/form-customizelist.php:100
-#: common/tracker/views/form-deleteextrafieldelement.php:65
-#: common/tracker/views/form-deleteextrafield.php:43
-#: common/tracker/views/form-deletetracker.php:35
+#: common/tracker/views/form-deleteextrafieldelement.php:68
+#: common/tracker/views/form-deleteextrafield.php:46
+#: common/tracker/views/form-deletetracker.php:39
 #: plugins/contribtracker/www/global_admin.php:274
 #: plugins/contribtracker/www/global_admin.php:317
 #: plugins/contribtracker/www/global_admin.php:356
@@ -5611,6 +5611,9 @@ msgid "Delete artifact"
 msgstr "Eliminar artefacto"
 
 #: common/tracker/actions/deleteartifact.php:43
+#: common/tracker/views/form-deleteextrafieldelement.php:55
+#: common/tracker/views/form-deleteextrafield.php:34
+#: common/tracker/views/form-deletetracker.php:31
 #: plugins/mailman/www/admin/deletelist.php:59
 #: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:57
 #: www/admin/groupdelete.php:58 www/admin/groupdelete.php:59
@@ -5624,9 +5627,9 @@ msgid "Are you sure you want to delete this artifact?"
 msgstr "Está seguro de querer eliminar este artefacto?"
 
 #: common/tracker/actions/deleteartifact.php:54
-#: common/tracker/views/form-deleteextrafieldelement.php:62
-#: common/tracker/views/form-deleteextrafield.php:39
-#: common/tracker/views/form-deletetracker.php:32
+#: common/tracker/views/form-deleteextrafieldelement.php:65
+#: common/tracker/views/form-deleteextrafield.php:42
+#: common/tracker/views/form-deletetracker.php:36
 #: www/admin/responses_admin.php:51 www/forum/admin/index.php:183
 #: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:75
 #: www/frs/admin/editrelease.php:383 www/pm/admin/index.php:368
@@ -7043,12 +7046,7 @@ msgstr "Engadir novo campo personalizado"
 msgid "Delete a custom field element in: %s"
 msgstr "Modificar un elemento de campo personalizado en %s"
 
-#: common/tracker/views/form-deleteextrafieldelement.php:52
-#, fuzzy
-msgid "Delete Custom Field Element"
-msgstr "Modificar un elemento de campo personalizado en %s"
-
-#: common/tracker/views/form-deleteextrafieldelement.php:59
+#: common/tracker/views/form-deleteextrafieldelement.php:62
 #: common/tracker/views/form-updateextrafieldelement.php:54
 msgid "Element"
 msgstr "Elemento"
@@ -7058,12 +7056,7 @@ msgstr "Elemento"
 msgid "Delete a custom field for %s"
 msgstr "Eliminar un campo personalizado para %s"
 
-#: common/tracker/views/form-deleteextrafield.php:31
-#, fuzzy
-msgid "Delete Custom Field"
-msgstr "Eliminar un campo personalizado para %s"
-
-#: common/tracker/views/form-deleteextrafield.php:36
+#: common/tracker/views/form-deleteextrafield.php:39
 msgid ""
 "You are about to permanently and irretrievably delete this custom field and "
 "all its contents!"
@@ -7071,8 +7064,8 @@ msgstr ""
 "Vai eliminar de forma permanente e irrevogábel este campo personalizado e "
 "todo o seu contido!"
 
-#: common/tracker/views/form-deleteextrafield.php:40
-#: common/tracker/views/form-deletetracker.php:33
+#: common/tracker/views/form-deleteextrafield.php:43
+#: common/tracker/views/form-deletetracker.php:37
 #: www/forum/admin/index.php:184 www/frs/admin/deletepackage.php:71
 #: www/frs/admin/deleterelease.php:76 www/pm/admin/index.php:369
 msgid "I am Really Sure"
@@ -7083,12 +7076,7 @@ msgstr "Estou totalmente seguro "
 msgid "Permanently Delete Tracker %s"
 msgstr "Eliminar permanentemente este rexistro."
 
-#: common/tracker/views/form-deletetracker.php:27
-#, fuzzy
-msgid "Delete Tracker"
-msgstr "Clonar rexistro"
-
-#: common/tracker/views/form-deletetracker.php:30
+#: common/tracker/views/form-deletetracker.php:34
 msgid ""
 "You are about to permanently and irretrievably delete this tracker and all "
 "its contents!"
@@ -23713,6 +23701,18 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Delete Custom Field Element"
+#~ msgstr "Modificar un elemento de campo personalizado en %s"
+
+#, fuzzy
+#~ msgid "Delete Custom Field"
+#~ msgstr "Eliminar un campo personalizado para %s"
+
+#, fuzzy
+#~ msgid "Delete Tracker"
+#~ msgstr "Clonar rexistro"
 
 #~ msgid "Yes, I want to delete this task"
 #~ msgstr "Si, quero eliminar esta tarefa"

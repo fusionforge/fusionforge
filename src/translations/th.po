@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-26 17:16+0200\n"
+"POT-Creation-Date: 2013-09-26 17:45+0200\n"
 "PO-Revision-Date: 2009-10-06 16:32+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1517,7 +1517,7 @@ msgstr ""
 #: common/tracker/views/form-addcanned.php:71
 #: common/tracker/views/form-addextrafieldoption.php:102
 #: common/tracker/views/form-customizelist.php:123
-#: common/tracker/views/form-deleteextrafieldelement.php:59
+#: common/tracker/views/form-deleteextrafieldelement.php:62
 #: common/tracker/views/form-updatecanned.php:43
 #: common/tracker/views/form-updatecanned.php:46
 #: common/tracker/views/form-updateextrafieldelement.php:54
@@ -1839,9 +1839,9 @@ msgstr ""
 #: common/tracker/views/form-addextrafield.php:57
 #: common/tracker/views/form-addextrafield.php:81
 #: common/tracker/views/form-customizelist.php:100
-#: common/tracker/views/form-deleteextrafieldelement.php:65
-#: common/tracker/views/form-deleteextrafield.php:43
-#: common/tracker/views/form-deletetracker.php:35
+#: common/tracker/views/form-deleteextrafieldelement.php:68
+#: common/tracker/views/form-deleteextrafield.php:46
+#: common/tracker/views/form-deletetracker.php:39
 #: plugins/contribtracker/www/global_admin.php:274
 #: plugins/contribtracker/www/global_admin.php:317
 #: plugins/contribtracker/www/global_admin.php:356
@@ -5121,6 +5121,9 @@ msgid "Delete artifact"
 msgstr ""
 
 #: common/tracker/actions/deleteartifact.php:43
+#: common/tracker/views/form-deleteextrafieldelement.php:55
+#: common/tracker/views/form-deleteextrafield.php:34
+#: common/tracker/views/form-deletetracker.php:31
 #: plugins/mailman/www/admin/deletelist.php:59
 #: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:57
 #: www/admin/groupdelete.php:58 www/admin/groupdelete.php:59
@@ -5134,9 +5137,9 @@ msgid "Are you sure you want to delete this artifact?"
 msgstr ""
 
 #: common/tracker/actions/deleteartifact.php:54
-#: common/tracker/views/form-deleteextrafieldelement.php:62
-#: common/tracker/views/form-deleteextrafield.php:39
-#: common/tracker/views/form-deletetracker.php:32
+#: common/tracker/views/form-deleteextrafieldelement.php:65
+#: common/tracker/views/form-deleteextrafield.php:42
+#: common/tracker/views/form-deletetracker.php:36
 #: www/admin/responses_admin.php:51 www/forum/admin/index.php:183
 #: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:75
 #: www/frs/admin/editrelease.php:383 www/pm/admin/index.php:368
@@ -6435,11 +6438,7 @@ msgstr ""
 msgid "Delete a custom field element in: %s"
 msgstr ""
 
-#: common/tracker/views/form-deleteextrafieldelement.php:52
-msgid "Delete Custom Field Element"
-msgstr ""
-
-#: common/tracker/views/form-deleteextrafieldelement.php:59
+#: common/tracker/views/form-deleteextrafieldelement.php:62
 #: common/tracker/views/form-updateextrafieldelement.php:54
 msgid "Element"
 msgstr ""
@@ -6449,18 +6448,14 @@ msgstr ""
 msgid "Delete a custom field for %s"
 msgstr ""
 
-#: common/tracker/views/form-deleteextrafield.php:31
-msgid "Delete Custom Field"
-msgstr ""
-
-#: common/tracker/views/form-deleteextrafield.php:36
+#: common/tracker/views/form-deleteextrafield.php:39
 msgid ""
 "You are about to permanently and irretrievably delete this custom field and "
 "all its contents!"
 msgstr ""
 
-#: common/tracker/views/form-deleteextrafield.php:40
-#: common/tracker/views/form-deletetracker.php:33
+#: common/tracker/views/form-deleteextrafield.php:43
+#: common/tracker/views/form-deletetracker.php:37
 #: www/forum/admin/index.php:184 www/frs/admin/deletepackage.php:71
 #: www/frs/admin/deleterelease.php:76 www/pm/admin/index.php:369
 msgid "I am Really Sure"
@@ -6471,11 +6466,7 @@ msgstr ""
 msgid "Permanently Delete Tracker %s"
 msgstr ""
 
-#: common/tracker/views/form-deletetracker.php:27
-msgid "Delete Tracker"
-msgstr ""
-
-#: common/tracker/views/form-deletetracker.php:30
+#: common/tracker/views/form-deletetracker.php:34
 msgid ""
 "You are about to permanently and irretrievably delete this tracker and all "
 "its contents!"

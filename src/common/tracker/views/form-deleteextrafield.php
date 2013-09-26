@@ -25,10 +25,13 @@ $ath->adminHeader(array('title'=>sprintf(_('Delete a custom field for %s'),
 	$ath->getName())));
 
 $id = getStringFromRequest('id');
-
 ?>
+
+		<table class="centered">
+		<tr>
+		<td>
 		<fieldset>
-		<legend><?php echo _("Delete Custom Field") ?></legend>
+		<legend><?php echo _('Confirm Delete') ?></legend>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<p>
 		<input type="hidden" name="deleteextrafield" value="y" />
@@ -43,6 +46,9 @@ $id = getStringFromRequest('id');
 		<input type="submit" name="post_changes" value="<?php echo _('Delete') ?>" /></p>
 		</form>
 		</fieldset>
+		</td>
+		</tr>
+		</table>
 		<?php
 
 		$ath->footer(array());

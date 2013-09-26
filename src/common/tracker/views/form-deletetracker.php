@@ -21,10 +21,14 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-$ath->adminHeader(array ('title'=>sprintf(_('Permanently Delete Tracker %s'), $ath->getName())));
+$ath->adminHeader(array ('title'=>sprintf(_('Permanently Delete Tracker %s'),
+	$ath->getName())));
 ?>
+		<table class="centered">
+		<tr>
+		<td>
 		<fieldset>
-		<legend><?php echo _("Delete Tracker") ?></legend>
+		<legend><?php echo _('Confirm Delete') ?></legend>
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<input type="hidden" name="delete" value="y" /><br />
 		<?php echo _('You are about to permanently and irretrievably delete this tracker and all its contents!'); ?>
@@ -35,6 +39,10 @@ $ath->adminHeader(array ('title'=>sprintf(_('Permanently Delete Tracker %s'), $a
 		<input type="submit" name="post_changes" value="<?php echo _('Delete') ?>" /></p>
 		</form>
 		</fieldset>
+		</td>
+		</tr>
+		</table>
+
 <?php
 
 $ath->footer(array());
