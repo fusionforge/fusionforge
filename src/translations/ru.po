@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-26 17:06+0200\n"
+"POT-Creation-Date: 2013-09-26 17:16+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -5614,7 +5614,8 @@ msgstr "Подтвердите удаление образца?"
 #: www/admin/responses_admin.php:51 www/forum/admin/index.php:183
 #: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:75
 #: www/frs/admin/editrelease.php:383 www/pm/admin/index.php:368
-#: www/project/admin/roledelete.php:81 www/reporting/rebuild.php:63
+#: www/pm/deletetask.php:41 www/project/admin/roledelete.php:81
+#: www/reporting/rebuild.php:63
 msgid "I am Sure"
 msgstr "Я уверен"
 
@@ -20410,10 +20411,6 @@ msgstr "Удалить задачу"
 msgid "Are you sure you want to delete this task?"
 msgstr "Вы действительно хотите удалить эту задачу?"
 
-#: www/pm/deletetask.php:41
-msgid "Yes, I want to delete this task"
-msgstr "Да, я хочу удалить эту задачу"
-
 #: www/pm/detail_task.php:35
 msgid "Task Detail"
 msgstr "Детали задачи"
@@ -23860,6 +23857,9 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#~ msgid "Yes, I want to delete this task"
+#~ msgstr "Да, я хочу удалить эту задачу"
 
 #~ msgid "Yes, I want to delete this artifact"
 #~ msgstr "Подтвеждаю удалние образца"

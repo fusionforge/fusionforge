@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-26 17:06+0200\n"
+"POT-Creation-Date: 2013-09-26 17:16+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -5572,7 +5572,8 @@ msgstr "您确定要删除这个定制类型？"
 #: www/admin/responses_admin.php:51 www/forum/admin/index.php:183
 #: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:75
 #: www/frs/admin/editrelease.php:383 www/pm/admin/index.php:368
-#: www/project/admin/roledelete.php:81 www/reporting/rebuild.php:63
+#: www/pm/deletetask.php:41 www/project/admin/roledelete.php:81
+#: www/reporting/rebuild.php:63
 msgid "I am Sure"
 msgstr "我确定"
 
@@ -19938,10 +19939,6 @@ msgstr "删除一个任务"
 msgid "Are you sure you want to delete this task?"
 msgstr "您确定要删除这个任务吗？"
 
-#: www/pm/deletetask.php:41
-msgid "Yes, I want to delete this task"
-msgstr "是，我要删除这个任务"
-
 #: www/pm/detail_task.php:35
 msgid "Task Detail"
 msgstr "任务细节"
@@ -23320,6 +23317,9 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#~ msgid "Yes, I want to delete this task"
+#~ msgstr "是，我要删除这个任务"
 
 #~ msgid "Yes, I want to delete this artifact"
 #~ msgstr "是，我要删除这个定制类型"

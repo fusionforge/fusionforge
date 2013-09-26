@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-26 17:06+0200\n"
+"POT-Creation-Date: 2013-09-26 17:16+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -5396,7 +5396,8 @@ msgstr "Etes-vous sûr de vouloir supprimer cet élément ?"
 #: www/admin/responses_admin.php:51 www/forum/admin/index.php:183
 #: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:75
 #: www/frs/admin/editrelease.php:383 www/pm/admin/index.php:368
-#: www/project/admin/roledelete.php:81 www/reporting/rebuild.php:63
+#: www/pm/deletetask.php:41 www/project/admin/roledelete.php:81
+#: www/reporting/rebuild.php:63
 msgid "I am Sure"
 msgstr "Je confirme"
 
@@ -19687,10 +19688,6 @@ msgstr "Supprimer une tâche"
 msgid "Are you sure you want to delete this task?"
 msgstr "Etes-vous sûr de vouloir supprimer cette tâche ?"
 
-#: www/pm/deletetask.php:41
-msgid "Yes, I want to delete this task"
-msgstr "Je confirme la suppression de cette tâche"
-
 #: www/pm/detail_task.php:35
 msgid "Task Detail"
 msgstr "Détails d'une tâche"
@@ -23080,6 +23077,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Yes, I want to delete this task"
+#~ msgstr "Je confirme la suppression de cette tâche"
 
 #~ msgid "Yes, I want to delete this artifact"
 #~ msgstr "Je confirme la suppression de l'élément"

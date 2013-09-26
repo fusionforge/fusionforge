@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-26 17:06+0200\n"
+"POT-Creation-Date: 2013-09-26 17:16+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -5586,7 +5586,8 @@ msgstr "您確定要刪除這個自訂類型？"
 #: www/admin/responses_admin.php:51 www/forum/admin/index.php:183
 #: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:75
 #: www/frs/admin/editrelease.php:383 www/pm/admin/index.php:368
-#: www/project/admin/roledelete.php:81 www/reporting/rebuild.php:63
+#: www/pm/deletetask.php:41 www/project/admin/roledelete.php:81
+#: www/reporting/rebuild.php:63
 msgid "I am Sure"
 msgstr "我確定"
 
@@ -19966,10 +19967,6 @@ msgstr "刪除一個任務"
 msgid "Are you sure you want to delete this task?"
 msgstr "您確定要刪除這個任務嗎？"
 
-#: www/pm/deletetask.php:41
-msgid "Yes, I want to delete this task"
-msgstr "是，我要刪除這個任務"
-
 #: www/pm/detail_task.php:35
 msgid "Task Detail"
 msgstr "任務細節"
@@ -23344,6 +23341,9 @@ msgstr "帳號"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
+
+#~ msgid "Yes, I want to delete this task"
+#~ msgstr "是，我要刪除這個任務"
 
 #~ msgid "Yes, I want to delete this artifact"
 #~ msgstr "是，我要刪除這個自訂類型"
