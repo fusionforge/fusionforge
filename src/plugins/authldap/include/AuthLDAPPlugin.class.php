@@ -181,6 +181,7 @@ class AuthLDAPPlugin extends ForgeAuthPlugin {
 			   $u->getFax(),
 			   $u->getTitle(),
 			   $u->getCountryCode(),
+			   $u->usesTooltips(),
 			   $mapped_data['email']);
 
 		$u->setMD5Passwd ($mapped_data['md5_password']);
