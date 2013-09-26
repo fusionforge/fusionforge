@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-25 11:55+0200\n"
+"POT-Creation-Date: 2013-09-26 17:06+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -434,7 +434,9 @@ msgstr ""
 #: common/tracker/actions/mod.php:155 common/tracker/actions/mod.php:175
 #: common/tracker/actions/mod.php:216 common/tracker/actions/query.php:329
 #: common/tracker/actions/query.php:344 common/tracker/actions/query.php:350
-#: common/tracker/actions/query.php:351
+#: common/tracker/actions/query.php:351 common/tracker/actions/query.php:386
+#: common/tracker/actions/query.php:388 common/tracker/actions/query.php:390
+#: common/tracker/actions/query.php:395
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -1952,7 +1954,7 @@ msgstr "Ezin dut mezu nagusia eguneratu"
 #: common/forum/AttachManager.class.php:150
 #: common/forum/ForumAdmin.class.php:69 common/forum/ForumAdmin.class.php:334
 #: common/tracker/actions/admin-tracker.php:70
-#: common/tracker/actions/deleteartifact.php:56
+#: common/tracker/actions/deleteartifact.php:57
 #: common/tracker/actions/mod.php:76
 #: common/tracker/include/ArtifactTypeHtml.class.php:130
 #: common/tracker/views/form-addcanned.php:54
@@ -5568,7 +5570,7 @@ msgstr "Bertsioa deskargatu"
 msgid "Delete artifact"
 msgstr "Ezabatu artefaktua"
 
-#: common/tracker/actions/deleteartifact.php:42
+#: common/tracker/actions/deleteartifact.php:43
 #: plugins/mailman/www/admin/deletelist.php:59
 #: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:57
 #: www/admin/groupdelete.php:58 www/admin/groupdelete.php:59
@@ -5577,13 +5579,20 @@ msgstr "Ezabatu artefaktua"
 msgid "Confirm Delete"
 msgstr "Ezabapena baieztatu"
 
-#: common/tracker/actions/deleteartifact.php:48
+#: common/tracker/actions/deleteartifact.php:49
 msgid "Are you sure you want to delete this artifact?"
 msgstr "Ziur zaude artefaktu hau ezabatu nahi duzula?"
 
-#: common/tracker/actions/deleteartifact.php:53
-msgid "Yes, I want to delete this artifact"
-msgstr "Bai, artefaktu hau ezabatu nahi dut"
+#: common/tracker/actions/deleteartifact.php:54
+#: common/tracker/views/form-deleteextrafieldelement.php:62
+#: common/tracker/views/form-deleteextrafield.php:39
+#: common/tracker/views/form-deletetracker.php:32
+#: www/admin/responses_admin.php:51 www/forum/admin/index.php:183
+#: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:75
+#: www/frs/admin/editrelease.php:383 www/pm/admin/index.php:368
+#: www/project/admin/roledelete.php:81 www/reporting/rebuild.php:63
+msgid "I am Sure"
+msgstr "Ziur nago"
 
 #: common/tracker/actions/detail.php:49
 #: common/tracker/actions/mod-limited.php:58 common/tracker/actions/mod.php:56
@@ -5795,7 +5804,7 @@ msgstr ""
 
 #: common/tracker/actions/query.php:321
 #, php-format
-msgid "Note: The default project query is currently '%1$s'."
+msgid "Note: The default project query is currently “%s”."
 msgstr ""
 
 #: common/tracker/actions/query.php:324
@@ -6991,16 +7000,6 @@ msgstr "Eremu pertsonalizatu izena"
 #: common/tracker/views/form-updateextrafieldelement.php:54
 msgid "Element"
 msgstr ""
-
-#: common/tracker/views/form-deleteextrafieldelement.php:62
-#: common/tracker/views/form-deleteextrafield.php:39
-#: common/tracker/views/form-deletetracker.php:32
-#: www/admin/responses_admin.php:51 www/forum/admin/index.php:183
-#: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:75
-#: www/frs/admin/editrelease.php:383 www/pm/admin/index.php:368
-#: www/project/admin/roledelete.php:81 www/reporting/rebuild.php:63
-msgid "I am Sure"
-msgstr "Ziur nago"
 
 #: common/tracker/views/form-deleteextrafield.php:24
 #, php-format
@@ -8237,7 +8236,7 @@ msgstr ""
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:66
 #: plugins/authcas/include/AuthCASPlugin.class.php:88
 #: plugins/authhttpd/include/AuthHTTPDPlugin.class.php:61
-#: plugins/authldap/include/AuthLDAPPlugin.class.php:200
+#: plugins/authldap/include/AuthLDAPPlugin.class.php:201
 #: plugins/authopenid/include/AuthOpenIDPlugin.class.php:79
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:103
 msgid "Cookies must be enabled past this point."
@@ -8259,7 +8258,7 @@ msgid "Password"
 msgstr "Pasahitza"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
-#: plugins/authldap/include/AuthLDAPPlugin.class.php:208
+#: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: www/account/verify.php:93 www/admin/userlist.php:79
 msgid "Login"
 msgstr "Izenpetu"
@@ -8319,12 +8318,12 @@ msgstr "Kontu bat erregistratzeko %1$s -n"
 msgid "Login via HTTP authentication"
 msgstr ""
 
-#: plugins/authldap/include/AuthLDAPPlugin.class.php:207
+#: plugins/authldap/include/AuthLDAPPlugin.class.php:208
 #, fuzzy
 msgid "LDAP Login name:"
 msgstr "Erabiltzailearen izena:"
 
-#: plugins/authldap/include/AuthLDAPPlugin.class.php:208
+#: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 msgid "Password:"
 msgstr "Pasahitza:"
 
@@ -23377,6 +23376,9 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#~ msgid "Yes, I want to delete this artifact"
+#~ msgstr "Bai, artefaktu hau ezabatu nahi dut"
 
 #~ msgid "ID"
 #~ msgstr "ID-a"

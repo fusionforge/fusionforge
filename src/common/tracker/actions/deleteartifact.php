@@ -29,7 +29,8 @@ global $group_id;
 global $aid;
 global $atid;
 
-$ath->header(array ('title'=>_('Delete artifact').': [#'. $ah->getID(). '] ' . $ah->getSummary(), 'atid'=>$ath->getID()));
+$ath->header(array ('title'=>_('Delete artifact').': [#'. $ah->getID(). '] ' . $ah->getSummary(),
+					'atid'=>$ath->getID()));
 
 // $atid, $aid and $group_id are set in tracker.php
 
@@ -50,7 +51,7 @@ $ath->header(array ('title'=>_('Delete artifact').': [#'. $ah->getID(). '] ' . $
 <p class="align-center">
 <input id="confirm_delete" type="checkbox" value="1" name="confirm_delete" />
 <label for="confirm_delete">
-<?php echo _('Yes, I want to delete this artifact'); ?>
+<?php echo _('I am Sure'); ?>
 </label>
 </p>
 <p class="align-center"><input type="submit" value="<?php echo _('Delete'); ?>" name="submit" />
