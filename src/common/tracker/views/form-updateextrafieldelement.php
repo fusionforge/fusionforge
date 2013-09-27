@@ -51,8 +51,11 @@ if (!$ac || !is_object($ac)) {
 			<input type="hidden" name="boxid" value="<?php echo $boxid; ?>" />
 
 			<p>
+			<label for="name">
 			<strong><?php echo _('Element')._(':'); ?></strong><br />
-			<input type="text" name="name" value="<?php echo $ao->getName(); ?>" /></p>
+			</label>
+			<input id="name" type="text" name="name" value="<?php echo $ao->getName(); ?>" />
+			</p>
 			<!--
 			Show a pop-up box to choose the possible statuses that this element will map to
 			-->

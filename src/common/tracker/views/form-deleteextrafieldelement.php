@@ -59,11 +59,17 @@
 			<input type="hidden" name="boxid" value="<?php echo $boxid; ?>" />
 
 			<p>
-			<strong><?php echo _("Element")._(':'); ?></strong> <?php echo $ao->getName(); ?></p>
+			<strong><?php echo _("Element")._(':'); ?></strong>
+			<?php echo $ao->getName(); ?>
+			</p>
 
 			<p>
-			<input type="checkbox" name="sure" value="1" /><?php echo _("I am Sure") ?><br />
+			<input id="sure" type="checkbox" name="sure" value="1" />
+			<label for="sure">
+			<?php echo _("I am Sure") ?>
+			</label>
 			</p>
+
 			<p>
 			<input type="submit" name="post_changes" value="<?php echo _('Delete') ?>" /></p>
 			</form>

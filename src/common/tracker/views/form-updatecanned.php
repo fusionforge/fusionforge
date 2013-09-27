@@ -40,11 +40,15 @@ $ath->adminHeader(array('title'=>$title));
 			<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 			<input type="hidden" name="update_canned" value="y" />
 			<input type="hidden" name="id" value="<?php echo $acr->getID(); ?>" />
+			<label for="title">
 			<strong><?php echo _('Title') . _(':') ?></strong><br />
-			<input type="text" name="title" value="<?php echo $acr->getTitle(); ?>" size="80" maxlength="80" />
+			</label>
+			<input id="title" type="text" name="title" value="<?php echo $acr->getTitle(); ?>" size="80" maxlength="80" />
 			<p>
+			<label for="body">
 			<strong><?php echo _('Message Body') . _(':') ?></strong><br />
-			<textarea name="body" rows="30" cols="80"><?php echo $acr->getBody(); ?></textarea></p>
+			</label>
+			<textarea id="body" name="body" rows="30" cols="80"><?php echo $acr->getBody(); ?></textarea></p>
 			<p>
 			<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 			</form>

@@ -760,7 +760,7 @@ function html_build_multiple_select_box_from_arrays($ids, $texts, $name, $checke
  *	@return	html code for checkbox control
  */
 function html_build_checkbox($name, $value, $checked) {
-	return '<input type="checkbox" name="'.$name.'"'
+	return '<input type="checkbox" id="'.$name.'" name="'.$name.'"'
 		.' value="'.$value.'"'
 		.($checked ? 'checked="checked"' : '').'>';
 }

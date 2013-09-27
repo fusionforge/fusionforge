@@ -33,8 +33,15 @@ $ath->adminHeader(array ('title'=>sprintf(_('Permanently Delete Tracker %s'),
 		<input type="hidden" name="delete" value="y" /><br />
 		<?php echo _('You are about to permanently and irretrievably delete this tracker and all its contents!'); ?>
 		<p>
-		<input type="checkbox" name="sure" value="1" /><?php echo _("I am Sure") ?><br />
-		<input type="checkbox" name="really_sure" value="1" /><?php echo _("I am Really Sure") ?></p>
+		<input id="sure" type="checkbox" name="sure" value="1" />
+		<label for="sure">
+		<?php echo _("I am Sure") ?><br />
+		</label>
+		<input id="really_sure" type="checkbox" name="really_sure" value="1" />
+		<label for="really_sure">
+		<?php echo _("I am Really Sure") ?>
+		</label>
+		</p>
 		<p>
 		<input type="submit" name="post_changes" value="<?php echo _('Delete') ?>" /></p>
 		</form>
