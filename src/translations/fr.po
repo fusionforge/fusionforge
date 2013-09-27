@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-27 14:01+0200\n"
+"POT-Creation-Date: 2013-09-27 18:35+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1106,8 +1106,8 @@ msgstr "Nom du fichier"
 #: common/docman/views/listtrashfile.php:130
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/views/form-addcanned.php:41
-#: common/tracker/views/form-addcanned.php:68
-#: common/tracker/views/form-updatecanned.php:43
+#: common/tracker/views/form-addcanned.php:69
+#: common/tracker/views/form-updatecanned.php:44
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:36
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
@@ -1154,10 +1154,10 @@ msgstr "Dernière modification"
 #: common/docman/views/pendingfiles.php:63 common/docman/views/search.php:150
 #: common/include/Group.class.php:792
 #: common/tracker/ArtifactExtraField.class.php:327
-#: common/tracker/include/ArtifactTypeHtml.class.php:325
+#: common/tracker/include/ArtifactTypeHtml.class.php:326
 #: common/tracker/views/form-addextrafieldoption.php:108
 #: common/tracker/views/form-addextrafield.php:131
-#: common/tracker/views/form-updateextrafieldelement.php:60
+#: common/tracker/views/form-updateextrafieldelement.php:63
 #: common/widget/Widget_ProjectLatestDocuments.class.php:76
 #: cronjobs/send_pending_items_mail.php:80
 #: cronjobs/send_pending_items_mail.php:117
@@ -1185,7 +1185,7 @@ msgstr "État"
 #: common/docman/views/listfile.php:219
 #: common/docman/views/listtrashfile.php:130
 #: common/docman/views/pendingfiles.php:63
-#: common/tracker/include/ArtifactTypeHtml.class.php:364 www/frs/index.php:209
+#: common/tracker/include/ArtifactTypeHtml.class.php:368 www/frs/index.php:209
 #: www/project/admin/editimages.php:269
 msgid "Size"
 msgstr "Taille"
@@ -1263,9 +1263,9 @@ msgstr "Créé ou mis à jour au cours des 7 derniers jours"
 #: common/tracker/include/ArtifactHtml.class.php:112
 #: common/tracker/include/ArtifactHtml.class.php:170
 #: common/tracker/include/ArtifactHtml.class.php:179
-#: common/tracker/include/ArtifactTypeHtml.class.php:336
 #: common/tracker/include/ArtifactTypeHtml.class.php:337
-#: common/tracker/include/ArtifactTypeHtml.class.php:375
+#: common/tracker/include/ArtifactTypeHtml.class.php:338
+#: common/tracker/include/ArtifactTypeHtml.class.php:379
 #: common/widget/Widget_MyLatestSvnCommits.class.php:65
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:112
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:114
@@ -1283,7 +1283,7 @@ msgstr "Créé ou mis à jour au cours des 7 derniers jours"
 #: www/export/rss20_docman.php:136 www/export/rss20_docman.php:138
 #: www/export/tracker.php:108 www/forum/index.php:90 www/forum/message.php:127
 #: www/forum/myforums.php:152 www/frs/index.php:178 www/frs/index.php:237
-#: www/include/html.php:1042 www/news/news_utils.php:149
+#: www/include/html.php:1055 www/news/news_utils.php:149
 #: www/news/news_utils.php:269 www/people/people_utils.php:422
 #: www/people/viewjob.php:78 www/pm/browse_task.php:265
 #: www/pm/browse_task.php:275 www/pm/include/ProjectTaskHTML.class.php:122
@@ -1516,7 +1516,7 @@ msgid "Mass actions for selected pending files:"
 msgstr "Actions collectives sur les fichiers en attente sélectionnés :"
 
 #: common/docman/views/reporting.php:93
-#: common/tracker/include/ArtifactTypeHtml.class.php:323
+#: common/tracker/include/ArtifactTypeHtml.class.php:324
 #: www/activity/index.php:180 www/frs/reporting/downloads.php:109
 #: www/people/editprofile.php:283 www/people/skills_utils.php:50
 #: www/people/skills_utils.php:156 www/pm/add_task.php:95
@@ -1538,14 +1538,14 @@ msgstr "Date de début"
 #: common/frs/FRSRelease.class.php:294 common/frs/FRSRelease.class.php:297
 #: common/frs/FRSRelease.class.php:301 common/include/utils.php:498
 #: common/tracker/actions/query.php:403
-#: common/tracker/views/form-addcanned.php:68
-#: common/tracker/views/form-addcanned.php:71
+#: common/tracker/views/form-addcanned.php:69
+#: common/tracker/views/form-addcanned.php:74
 #: common/tracker/views/form-addextrafieldoption.php:102
 #: common/tracker/views/form-customizelist.php:123
 #: common/tracker/views/form-deleteextrafieldelement.php:62
-#: common/tracker/views/form-updatecanned.php:43
-#: common/tracker/views/form-updatecanned.php:46
-#: common/tracker/views/form-updateextrafieldelement.php:54
+#: common/tracker/views/form-updatecanned.php:44
+#: common/tracker/views/form-updatecanned.php:49
+#: common/tracker/views/form-updateextrafieldelement.php:55
 #: common/tracker/views/form-updateextrafield.php:48
 #: common/tracker/views/form-updatetracker.php:53
 #: common/tracker/views/form-updatetracker.php:64
@@ -1688,7 +1688,7 @@ msgid ":"
 msgstr " :"
 
 #: common/docman/views/reporting.php:95
-#: common/tracker/include/ArtifactTypeHtml.class.php:324
+#: common/tracker/include/ArtifactTypeHtml.class.php:325
 #: www/activity/index.php:181 www/frs/reporting/downloads.php:111
 #: www/people/editprofile.php:284 www/people/skills_utils.php:51
 #: www/people/skills_utils.php:157 www/pm/add_task.php:110
@@ -1760,7 +1760,7 @@ msgstr "Utilisateur"
 #: common/tracker/actions/detail.php:68
 #: common/tracker/include/ArtifactHtml.class.php:111
 #: common/tracker/include/ArtifactHtml.class.php:148
-#: common/tracker/include/ArtifactTypeHtml.class.php:366
+#: common/tracker/include/ArtifactTypeHtml.class.php:370
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:88
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:111
@@ -1865,9 +1865,9 @@ msgstr "Erreur lors de la création de l'objet Forum"
 #: common/tracker/views/form-addextrafield.php:57
 #: common/tracker/views/form-addextrafield.php:81
 #: common/tracker/views/form-customizelist.php:100
-#: common/tracker/views/form-deleteextrafieldelement.php:68
-#: common/tracker/views/form-deleteextrafield.php:46
-#: common/tracker/views/form-deletetracker.php:39
+#: common/tracker/views/form-deleteextrafieldelement.php:74
+#: common/tracker/views/form-deleteextrafield.php:52
+#: common/tracker/views/form-deletetracker.php:46
 #: plugins/contribtracker/www/global_admin.php:274
 #: plugins/contribtracker/www/global_admin.php:317
 #: plugins/contribtracker/www/global_admin.php:356
@@ -2276,7 +2276,7 @@ msgstr "Voici le contenu du message en attente"
 
 #: common/forum/ForumHTML.class.php:211
 #: common/tracker/include/ArtifactHtml.class.php:149
-#: common/tracker/include/ArtifactTypeHtml.class.php:367
+#: common/tracker/include/ArtifactTypeHtml.class.php:371
 #: www/activity/index.php:266 www/forum/message.php:126
 #: www/pm/include/ProjectTaskHTML.class.php:158
 #: www/pm/include/ProjectTaskHTML.class.php:204
@@ -3454,7 +3454,7 @@ msgstr "Recherche avancée"
 msgid "Log Out"
 msgstr "Se déconnecter"
 
-#: common/include/Navigation.class.php:194 www/include/html.php:967
+#: common/include/Navigation.class.php:194 www/include/html.php:980
 msgid "My Account"
 msgstr "Mon compte"
 
@@ -4840,15 +4840,15 @@ msgstr "Texte libre pour la page de navigation."
 #: common/tracker/actions/admin-ind.php:157
 #: common/tracker/include/build_submission_form.php:54
 #: common/tracker/include/build_submission_form.php:118
-#: common/tracker/views/form-addcanned.php:74
+#: common/tracker/views/form-addcanned.php:78
 #: common/tracker/views/form-addextrafieldoption.php:111
 #: common/tracker/views/form-addextrafield.php:146
 #: common/tracker/views/form-adminroadmap.php:234
 #: common/tracker/views/form-clonetracker.php:59
 #: common/tracker/views/form-edittemplate.php:24
 #: common/tracker/views/form-extrafieldcopy.php:95
-#: common/tracker/views/form-updatecanned.php:49
-#: common/tracker/views/form-updateextrafieldelement.php:67
+#: common/tracker/views/form-updatecanned.php:53
+#: common/tracker/views/form-updateextrafieldelement.php:70
 #: common/tracker/views/form-updateextrafield.php:79
 #: common/tracker/views/form-updatetracker.php:81
 #: common/tracker/views/form-workflow.php:123
@@ -5220,7 +5220,7 @@ msgstr "Changement"
 msgid "Advanced queries"
 msgstr "Requêtes avancées"
 
-#: common/tracker/actions/browse.php:360 www/include/html.php:622
+#: common/tracker/actions/browse.php:360 www/include/html.php:634
 msgid "Select One"
 msgstr "Sélectionner"
 
@@ -5333,15 +5333,15 @@ msgstr ""
 
 #: common/tracker/actions/browse.php:735 common/tracker/actions/browse.php:746
 #: common/tracker/actions/browse.php:750 www/include/html.php:362
-#: www/include/html.php:593 www/include/html.php:789
+#: www/include/html.php:605 www/include/html.php:802
 #: www/pm/browse_task.php:358 www/pm/browse_task.php:373
 #: www/pm/browse_task.php:384
 msgid "No Change"
 msgstr "Aucun changement"
 
 #: common/tracker/actions/browse.php:746
-#: common/tracker/include/ArtifactTypeHtml.class.php:683
-#: common/tracker/include/ArtifactTypeHtml.class.php:717
+#: common/tracker/include/ArtifactTypeHtml.class.php:687
+#: common/tracker/include/ArtifactTypeHtml.class.php:721
 msgid "Nobody"
 msgstr "Personne"
 
@@ -5397,9 +5397,9 @@ msgid "Are you sure you want to delete this artifact?"
 msgstr "Etes-vous sûr de vouloir supprimer cet élément ?"
 
 #: common/tracker/actions/deleteartifact.php:54
-#: common/tracker/views/form-deleteextrafieldelement.php:65
-#: common/tracker/views/form-deleteextrafield.php:42
-#: common/tracker/views/form-deletetracker.php:36
+#: common/tracker/views/form-deleteextrafieldelement.php:69
+#: common/tracker/views/form-deleteextrafield.php:44
+#: common/tracker/views/form-deletetracker.php:38
 #: www/admin/responses_admin.php:51 www/forum/admin/index.php:183
 #: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:75
 #: www/frs/admin/editrelease.php:383 www/pm/admin/index.php:368
@@ -5449,7 +5449,7 @@ msgstr "Suites"
 #: common/tracker/actions/detail.php:135
 #: common/tracker/actions/mod-limited.php:177
 #: common/tracker/actions/mod.php:240
-#: common/tracker/include/ArtifactTypeHtml.class.php:362
+#: common/tracker/include/ArtifactTypeHtml.class.php:366
 #: www/forum/attachment.php:41 www/forum/attachment.php:125
 #: www/forum/attachment.php:153
 msgid "Attachments"
@@ -5558,7 +5558,7 @@ msgstr "Fichiers existants"
 msgid "Data Type"
 msgstr "Type de données"
 
-#: common/tracker/actions/mod.php:168 www/include/html.php:396
+#: common/tracker/actions/mod.php:168 www/include/html.php:406
 msgid ""
 "The summary text-box represents a short tracker item summary. Useful when "
 "browsing through several tracker items."
@@ -6101,17 +6101,17 @@ msgid "Query does not exist"
 msgstr "La requête n'existe pas"
 
 #: common/tracker/ArtifactType.class.php:209
-#: common/tracker/ArtifactType.class.php:969
+#: common/tracker/ArtifactType.class.php:968
 msgid ""
 "ArtifactType: Name, Description, Due Period, and Status Timeout are required"
 msgstr "Type de trace : nom, description, délai avant retard, persistance."
 
 #: common/tracker/ArtifactType.class.php:216
-#: common/tracker/ArtifactType.class.php:987
+#: common/tracker/ArtifactType.class.php:986
 msgid "E-mail address(es) appeared invalid"
 msgstr "Une ou plusieurs adresses email semblent invalides"
 
-#: common/tracker/ArtifactType.class.php:980
+#: common/tracker/ArtifactType.class.php:979
 msgid "Tracker name already used"
 msgstr "Ce nom d'outil de suivi est déjà pris."
 
@@ -6229,17 +6229,22 @@ msgstr "Cloner l'outil de suivi"
 msgid "Task Id and Summary"
 msgstr "Résumé des tâches"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:326
+#: common/tracker/include/ArtifactTypeHtml.class.php:323
+#, fuzzy
+msgid "Progress"
+msgstr "En cours"
+
+#: common/tracker/include/ArtifactTypeHtml.class.php:327
 #: www/pm/include/ProjectTaskHTML.class.php:112
 msgid "Remove Relation"
 msgstr "Supprimer la relation"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:350
+#: common/tracker/include/ArtifactTypeHtml.class.php:353
 #, php-format
 msgid "Average completion rate: %d%%"
 msgstr "Taux de complétion moyen : %d%%"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:365
+#: common/tracker/include/ArtifactTypeHtml.class.php:369
 #: common/tracker/views/form-adminroadmap.php:193
 #: plugins/blocks/www/index.php:196 plugins/contribtracker/www/index.php:134
 #: plugins/mantisbt/view/admin/addCategory.php:32
@@ -6263,7 +6268,7 @@ msgstr "Taux de complétion moyen : %d%%"
 msgid "Name"
 msgstr "Nom"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:368
+#: common/tracker/include/ArtifactTypeHtml.class.php:372
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:97
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:146
 #: plugins/mantisbt/view/viewAttachment.php:56
@@ -6271,19 +6276,19 @@ msgstr "Nom"
 msgid "Download"
 msgstr "Télécharger"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:537
-#: common/tracker/include/ArtifactTypeHtml.class.php:582
-#: common/tracker/include/ArtifactTypeHtml.class.php:749
+#: common/tracker/include/ArtifactTypeHtml.class.php:541
+#: common/tracker/include/ArtifactTypeHtml.class.php:586
+#: common/tracker/include/ArtifactTypeHtml.class.php:753
 #: plugins/scmhg/common/HgPlugin.class.php:608 www/admin/pluginman.php:227
 #: www/admin/pluginman.php:246 www/admin/pluginman.php:258
 #: www/admin/pluginman.php:259 www/include/html.php:321
-#: www/include/html.php:533 www/include/html.php:619 www/include/html.php:640
-#: www/include/html.php:675 www/include/html.php:717 www/pm/format_csv.php:78
+#: www/include/html.php:545 www/include/html.php:631 www/include/html.php:652
+#: www/include/html.php:687 www/include/html.php:729 www/pm/format_csv.php:78
 #: www/pm/ganttpage.php:152 www/tracker/roadmap.php:440
 msgid "None"
 msgstr "Aucun(e)"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:661
+#: common/tracker/include/ArtifactTypeHtml.class.php:665
 msgid ""
 "Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)"
 msgstr ""
@@ -6361,8 +6366,8 @@ msgstr ""
 "Créer des réponses types peut vous faire gagner beaucoup de temps dans le "
 "traitement de requêtes récurrentes"
 
-#: common/tracker/views/form-addcanned.php:71
-#: common/tracker/views/form-updatecanned.php:46
+#: common/tracker/views/form-addcanned.php:74
+#: common/tracker/views/form-updatecanned.php:49
 msgid "Message Body"
 msgstr "Corps du message"
 
@@ -6745,7 +6750,7 @@ msgid "Delete a custom field element in: %s"
 msgstr "Supprimer un élément personnalisé pour %s"
 
 #: common/tracker/views/form-deleteextrafieldelement.php:62
-#: common/tracker/views/form-updateextrafieldelement.php:54
+#: common/tracker/views/form-updateextrafieldelement.php:55
 msgid "Element"
 msgstr "Elément"
 
@@ -6762,8 +6767,8 @@ msgstr ""
 "Vous êtes sur le point de supprimer irrémédiablement ce champ "
 "supplémentaire !"
 
-#: common/tracker/views/form-deleteextrafield.php:43
-#: common/tracker/views/form-deletetracker.php:37
+#: common/tracker/views/form-deleteextrafield.php:48
+#: common/tracker/views/form-deletetracker.php:42
 #: www/forum/admin/index.php:184 www/frs/admin/deletepackage.php:71
 #: www/frs/admin/deleterelease.php:76 www/pm/admin/index.php:369
 msgid "I am Really Sure"
@@ -6816,7 +6821,7 @@ msgstr "Modifier les réponses types pour %s"
 msgid "Update a custom field element in %s"
 msgstr "Renommer un champ supplémentaire pour %s"
 
-#: common/tracker/views/form-updateextrafieldelement.php:64
+#: common/tracker/views/form-updateextrafieldelement.php:67
 #: common/tracker/views/form-updateextrafield.php:76
 msgid ""
 "It is not recommended that you change the custom field name because other "
@@ -11238,7 +11243,7 @@ msgid "Reporter"
 msgstr "Rapport"
 
 #: plugins/mantisbt/view/editIssue.php:129
-#: plugins/mantisbt/view/viewIssue.php:86 www/include/html.php:394
+#: plugins/mantisbt/view/viewIssue.php:86 www/include/html.php:404
 msgid "Resolution"
 msgstr "Précision"
 
@@ -17387,88 +17392,110 @@ msgid "File does not exist. File %s is not in incoming FTP directory."
 msgstr ""
 "Ce fichier n'existe pas.  Le fichier %s n'est pas dans le répertoire entrant."
 
-#: www/include/html.php:380
+#: www/include/html.php:382
 msgid ""
 "This drop-down box represents the person to which a tracker item is assigned."
 msgstr ""
 "Cette liste déroulante représente la personne à qui un élément à suivre est "
 "confié."
 
-#: www/include/html.php:382
+#: www/include/html.php:384
+msgid "This drop-down box represents the current status of a tracker item."
+msgstr ""
+"Cette liste déroulante recense les états possibles d'un élément à suivre."
+
+#: www/include/html.php:386
 msgid ""
-"This drop-down box represents the current status of a tracker item.<br /"
-"><br />You can set the status to 'Pending' if you are waiting for a response "
-"from the tracker item author.  When the author responds the status is "
+"You can set the status to 'Pending' if you are waiting for a response from "
+"the tracker item author.  When the author responds the status is "
 "automatically reset to that of 'Open'. Otherwise, if the author doesn't "
 "respond with an admin-defined amount of time (default is 14 days) then the "
 "item is given a status of 'Deleted'."
 msgstr ""
-"Cette liste déroulante recense les états possibles d'un élément à suivre."
-"<br /><br />'En attente' si vous attendez une réponse de l'auteur. Quand "
-"l'auteur aura répondu, le statut repassera à 'Ouvert'. Toutefois, si "
-"l'auteur ne répond pas en un temps défini par l'administrateur (par défaut "
-"14 jours), le statut passe à 'Supprimé'."
+"En attente » si vous attendez une réponse de l'auteur. Quand l'auteur aura "
+"répondu, l'état repassera à « Ouvert ». Toutefois, si l'auteur ne répond pas "
+"en un temps défini par l'administrateur (par défaut 14 jours), l'état passe "
+"à « Supprimé »."
 
-#: www/include/html.php:384
+#: www/include/html.php:388
 msgid "Tracker category"
 msgstr "Catégorie de suivi"
 
-#: www/include/html.php:386
+#: www/include/html.php:390
 msgid "Tracker group"
 msgstr "Groupe de suivi"
 
-#: www/include/html.php:388
+#: www/include/html.php:392
 msgid ""
 "The Sort By option allows you to determine how the browse results are sorted."
-"<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, "
-"Submitter, or Assignee.  You can also have the results sorted in Ascending "
-"or Descending order."
 msgstr ""
 "L'option 'Trier par' vous permet de préciser l'ordre dans lequel sont "
-"affichés les résultats.<br /><br /> Vous pouvez trier par identifiant, "
-"priorité, résumé, date d'ouverture, date de fermeture, auteur, responsable.  "
-"Vous pouvez aussi trier les résultats par ordre croissant ou décroissant."
+"affichés les résultats."
 
-#: www/include/html.php:390
+#: www/include/html.php:394
+msgid ""
+"You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, or "
+"Assignee.  You can also have the results sorted in Ascending or Descending "
+"order."
+msgstr ""
+"Vous pouvez trier par identifiant, priorité, résumé, date d'ouverture, date "
+"de fermeture, auteur, responsable. Vous pouvez aussi trier les résultats par "
+"ordre croissant ou décroissant."
+
+#: www/include/html.php:396
 msgid ""
 "The Data Type option determines the type of tracker item this is.  Since the "
 "tracker rolls into one the bug, patch, support, etc... managers you need to "
-"be able to determine which one of these an item should belong.<br /><br /"
-">This has the added benefit of enabling an admin to turn a support request "
-"into a bug."
+"be able to determine which one of these an item should belong."
 msgstr ""
 "L'option 'Type de données' détermine le genre d'élément de suivi dont il "
-"s'agit. Comme l'élément se trouve dans un des gestionnaires (de bugs, de "
+"s'agit. Comme l'élément se trouve dans un des gestionnaires (de bogues, de "
 "support, de patchs...), on a besoin de déterminer auquel de ces "
-"gestionnaires un élément doit appartenir. <br /><br />De plus, ceci permet à "
-"un administrateur de transformer une demande de support en bug."
-
-#: www/include/html.php:392
-msgid ""
-"The priority option allows a user to define a tracker item priority (ranging "
-"from 1-Lowest to 5-Highest).<br /><br />This is especially helpful for bugs "
-"and support requests where a user might find a critical problem with a "
-"project."
-msgstr ""
-"L'option priorité permet à un utilisateur de définir une priorité (de 1 - La "
-"plus basse à 5 - La plus haute).<br /><br />Elle est particulièrement utile "
-"pour des bugs ou des demandes de support pour lesquels un utilisateur peut "
-"avoir découvert un problème critique pour le projet."
+"gestionnaires un élément doit appartenir."
 
 #: www/include/html.php:398
 msgid ""
+"This has the added benefit of enabling an admin to turn a support request "
+"into a bug."
+msgstr ""
+"De plus, ceci permet à un administrateur de transformer une demande de "
+"support en bogue."
+
+#: www/include/html.php:400
+msgid ""
+"The priority option allows a user to define a tracker item priority (ranging "
+"from 1-Lowest to 5-Highest)."
+msgstr ""
+"L'option priorité permet à un utilisateur de définir une priorité (de 1 - La "
+"plus basse à 5 - La plus haute)."
+
+#: www/include/html.php:402
+msgid ""
+"This is especially helpful for bugs and support requests where a user might "
+"find a critical problem with a project."
+msgstr ""
+"Elle est particulièrement utile pour des bogues ou des demandes de support "
+"pour lesquels un utilisateur peut avoir découvert un problème critique pour "
+"le projet."
+
+#: www/include/html.php:408
+msgid ""
 "The canned response drop-down represents a list of project admin-defined "
-"canned responses to common support or bug submission.<br /><br /> If you are "
-"a project admin you can click the '(admin)' link to define your own canned "
-"responses"
+"canned responses to common support or bug submission."
 msgstr ""
 "La liste déroulante de réponses types recense les réponses définies par les "
 "administrateurs pour réagir à des demandes de support récurrentes ou à des "
-"soumissions de bugs.<br /><br /> Si vous êtes administrateur du projet, vous "
-"pouvez suivre le lien 'Administration' pour définir vos propres réponses "
-"types."
+"soumissions de bogues."
 
-#: www/include/html.php:400
+#: www/include/html.php:410
+msgid ""
+"If you are a project admin you can click the 'Manage Canned Responses' link "
+"to define your own canned responses"
+msgstr ""
+"Si vous êtes administrateur du projet, vous pouvez suivre le lien 'Gérer les "
+"réponses type' pour définir vos propres réponses types."
+
+#: www/include/html.php:412
 msgid ""
 "Anyone can add here comments to give additional information, answers and "
 "solutions. Please, be as precise as possible to avoid misunderstanding. If "
@@ -17479,17 +17506,17 @@ msgstr ""
 "éviter des malentendus.  Des copies d'écran ou des documents peuvent être "
 "ajoutés en pièce jointe lorsque c'est pertinent."
 
-#: www/include/html.php:402
+#: www/include/html.php:414
 msgid "Enter the complete description."
 msgstr "Saisissez une description détaillée."
 
-#: www/include/html.php:403
+#: www/include/html.php:417
+#, fuzzy
 msgid ""
-"<div align=\"left\"><b>Editing tips:</b><br/><strong>http,https or ftp</"
-"strong>: Hyperlinks.<br/><strong>[#NNN]</strong>: Tracker id NNN.<br/"
-"><strong>[TNNN]</strong>: Task id NNN.<br/><strong>[wiki:&lt;pagename&gt;]</"
-"strong>: Wiki page.<br/><strong>[forum:&lt;msg_id&gt;]</strong>: Forum post."
-"</div>"
+"<b>Editing tips:</b><br/><strong>http,https or ftp</strong>: Hyperlinks.<br/"
+"><strong>[#NNN]</strong>: Tracker id NNN.<br/><strong>[TNNN]</strong>: Task "
+"id NNN.<br/><strong>[wiki:&lt;pagename&gt;]</strong>: Wiki page.<br/><strong>"
+"[forum:&lt;msg_id&gt;]</strong>: Forum post."
 msgstr ""
 "<div align=\"left\"><b>Astuces pour l'édition :</b><br/><strong>http,https "
 "ou ftp</strong>: Hyperliens.<br/><strong>[#NNN]</strong> : Item n°NNN dans "
@@ -17497,7 +17524,7 @@ msgstr ""
 "gestionnaire de tâches.<br/><strong>[wiki:&lt;pagename&gt;]</strong>: Page "
 "wiki.<br/><strong>[forum:&lt;msg_id&gt;]</strong>: Article de forum.</div>"
 
-#: www/include/html.php:406
+#: www/include/html.php:420
 msgid ""
 "When you wish to attach a file to a tracker item you must check this "
 "checkbox before submitting changes."
@@ -17505,47 +17532,51 @@ msgstr ""
 "Si vous souhaitez annexer un fichier à un élément à suivre, vous devez "
 "cocher cette case avant de soumettre les changements."
 
-#: www/include/html.php:408
+#: www/include/html.php:422
 msgid ""
-"You can monitor or un-monitor this item by clicking the \"Monitor\" button. "
-"<br /><br /><strong>Note!</strong> this will send you additional email. If "
-"you add comments to this item, or submitted, or are assigned this item, you "
-"will also get emails for those reasons as well!"
+"You can monitor or un-monitor this item by clicking the “Monitor” button."
 msgstr ""
-"Vous pouvez surveiller cet objet, ou cesser la surveillance, en cliquant sur "
-"le bouton « Surveiller ».<br/><br/><strong>Note :</strong> surveiller un "
-"objet vous enverra des messages email supplémentaires si vous ajoutez des "
-"commentaires, ou si cet objet vous est affecté, ou si c'est vous qui l'avez "
-"créé."
+"Vous pouvez activer ou arrêter la surveillance de cet élément en cliquant "
+"sur « Surveiller »."
 
-#: www/include/html.php:539
+#: www/include/html.php:424
+msgid ""
+"<strong>Note!</strong> this will send you additional email. If you add "
+"comments to this item, or submitted, or are assigned this item, you will "
+"also get emails for those reasons as well!"
+msgstr ""
+"<strong>Note !</strong> Cela vous occasionnera du courrier supplémentaire. "
+"Si vous ajoutez des commentaires à cet élément à suivre, que vous l'avez "
+"soumis ou s'il vous est affecté, vous recevrez des messages également."
+
+#: www/include/html.php:551
 #, fuzzy
 msgid "Error: uneven row counts"
 msgstr "Erreur: aucune version trouvée"
 
-#: www/include/html.php:791
+#: www/include/html.php:804
 msgid "Lowest"
 msgstr "Minimum"
 
-#: www/include/html.php:795
+#: www/include/html.php:808
 msgid "Highest"
 msgstr "Maximum"
 
-#: www/include/html.php:879
+#: www/include/html.php:892
 #, php-format
 msgid "Project access problem: %s"
 msgstr "Problème d'accès au projet : %s"
 
-#: www/include/html.php:881
+#: www/include/html.php:894
 #, php-format
 msgid "Project Problem: %s"
 msgstr "Problème dans le projet : %s"
 
-#: www/include/html.php:950 www/my/bookmark_add.php:28
+#: www/include/html.php:963 www/my/bookmark_add.php:28
 msgid "My Personal Page"
 msgstr "Ma page personnelle"
 
-#: www/include/html.php:952
+#: www/include/html.php:965
 msgid ""
 "View your personal page, a selection of widgets to follow the informations "
 "from projects."
@@ -17553,73 +17584,73 @@ msgstr ""
 "Visualisez votre page personnelle, une sélection de gadgets pour suivre les "
 "projets."
 
-#: www/include/html.php:955
+#: www/include/html.php:968
 msgid "My Trackers Dashboard"
 msgstr "Tableau de bord des outils de suivi"
 
-#: www/include/html.php:957
+#: www/include/html.php:970
 msgid "View your tasks and artifacts."
 msgstr "Visualisez vos tâches et vos artifacts."
 
-#: www/include/html.php:962
+#: www/include/html.php:975
 msgid "My Diary and Notes"
 msgstr "Journal et notes"
 
-#: www/include/html.php:964
+#: www/include/html.php:977
 msgid "Manage your diary. Add, modify or delete your notes."
 msgstr "Gérez votre journal. Ajoutez, modifiez ou supprimez vos notes."
 
-#: www/include/html.php:969
+#: www/include/html.php:982
 msgid "Manage your account. Change your password, select your preferences."
 msgstr ""
 "Gérez votre compte. Modifiez votre mot de passe, sélectionnez vos "
 "préférences."
 
-#: www/include/html.php:973 www/register/index.php:174
+#: www/include/html.php:986 www/register/index.php:174
 msgid "Register Project"
 msgstr "Enregistrer un projet"
 
-#: www/include/html.php:975
+#: www/include/html.php:988
 msgid "Register a new project in forge, following the workflow."
 msgstr ""
 "Enregistrer un nouveau projet dans la forge en suivant les transitions."
 
-#: www/include/html.php:1024
+#: www/include/html.php:1037
 #, php-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "il y a %d seconde"
 msgstr[1] "il y a %d secondes"
 
-#: www/include/html.php:1028
+#: www/include/html.php:1041
 #, php-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "il y a %d minute"
 msgstr[1] "il y a %d minutes"
 
-#: www/include/html.php:1032
+#: www/include/html.php:1045
 #, php-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "il y a %d heure"
 msgstr[1] "il y a %d heures"
 
-#: www/include/html.php:1036
+#: www/include/html.php:1049
 #, php-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] "il y a %d jour"
 msgstr[1] "il y a %d jours"
 
-#: www/include/html.php:1040
+#: www/include/html.php:1053
 #, php-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] "il y a %d semaine"
 msgstr[1] "il y a %d semaines"
 
-#: www/include/html.php:1258
+#: www/include/html.php:1271
 #, php-format
 msgid " Displaying %1$s per page. Projects sorted by alphabetical order."
 msgstr ""
@@ -23057,6 +23088,80 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
+#~ msgid ""
+#~ "This drop-down box represents the current status of a tracker item.<br /"
+#~ "><br />You can set the status to 'Pending' if you are waiting for a "
+#~ "response from the tracker item author.  When the author responds the "
+#~ "status is automatically reset to that of 'Open'. Otherwise, if the author "
+#~ "doesn't respond with an admin-defined amount of time (default is 14 days) "
+#~ "then the item is given a status of 'Deleted'."
+#~ msgstr ""
+#~ "Cette liste déroulante recense les états possibles d'un élément à suivre."
+#~ "<br /><br />'En attente' si vous attendez une réponse de l'auteur. Quand "
+#~ "l'auteur aura répondu, le statut repassera à 'Ouvert'. Toutefois, si "
+#~ "l'auteur ne répond pas en un temps défini par l'administrateur (par "
+#~ "défaut 14 jours), le statut passe à 'Supprimé'."
+
+#~ msgid ""
+#~ "The Sort By option allows you to determine how the browse results are "
+#~ "sorted.<br /><br />  You can sort by ID, Priority, Summary, Open Date, "
+#~ "Close Date, Submitter, or Assignee.  You can also have the results sorted "
+#~ "in Ascending or Descending order."
+#~ msgstr ""
+#~ "L'option 'Trier par' vous permet de préciser l'ordre dans lequel sont "
+#~ "affichés les résultats.<br /><br /> Vous pouvez trier par identifiant, "
+#~ "priorité, résumé, date d'ouverture, date de fermeture, auteur, "
+#~ "responsable.  Vous pouvez aussi trier les résultats par ordre croissant "
+#~ "ou décroissant."
+
+#~ msgid ""
+#~ "The Data Type option determines the type of tracker item this is.  Since "
+#~ "the tracker rolls into one the bug, patch, support, etc... managers you "
+#~ "need to be able to determine which one of these an item should belong."
+#~ "<br /><br />This has the added benefit of enabling an admin to turn a "
+#~ "support request into a bug."
+#~ msgstr ""
+#~ "L'option 'Type de données' détermine le genre d'élément de suivi dont il "
+#~ "s'agit. Comme l'élément se trouve dans un des gestionnaires (de bugs, de "
+#~ "support, de patchs...), on a besoin de déterminer auquel de ces "
+#~ "gestionnaires un élément doit appartenir. <br /><br />De plus, ceci "
+#~ "permet à un administrateur de transformer une demande de support en bug."
+
+#~ msgid ""
+#~ "The priority option allows a user to define a tracker item priority "
+#~ "(ranging from 1-Lowest to 5-Highest).<br /><br />This is especially "
+#~ "helpful for bugs and support requests where a user might find a critical "
+#~ "problem with a project."
+#~ msgstr ""
+#~ "L'option priorité permet à un utilisateur de définir une priorité (de 1 - "
+#~ "La plus basse à 5 - La plus haute).<br /><br />Elle est particulièrement "
+#~ "utile pour des bugs ou des demandes de support pour lesquels un "
+#~ "utilisateur peut avoir découvert un problème critique pour le projet."
+
+#~ msgid ""
+#~ "The canned response drop-down represents a list of project admin-defined "
+#~ "canned responses to common support or bug submission.<br /><br /> If you "
+#~ "are a project admin you can click the '(admin)' link to define your own "
+#~ "canned responses"
+#~ msgstr ""
+#~ "La liste déroulante de réponses types recense les réponses définies par "
+#~ "les administrateurs pour réagir à des demandes de support récurrentes ou "
+#~ "à des soumissions de bugs.<br /><br /> Si vous êtes administrateur du "
+#~ "projet, vous pouvez suivre le lien 'Administration' pour définir vos "
+#~ "propres réponses types."
+
+#~ msgid ""
+#~ "You can monitor or un-monitor this item by clicking the \"Monitor\" "
+#~ "button. <br /><br /><strong>Note!</strong> this will send you additional "
+#~ "email. If you add comments to this item, or submitted, or are assigned "
+#~ "this item, you will also get emails for those reasons as well!"
+#~ msgstr ""
+#~ "Vous pouvez surveiller cet objet, ou cesser la surveillance, en cliquant "
+#~ "sur le bouton « Surveiller ».<br/><br/><strong>Note :</strong> surveiller "
+#~ "un objet vous enverra des messages email supplémentaires si vous ajoutez "
+#~ "des commentaires, ou si cet objet vous est affecté, ou si c'est vous qui "
+#~ "l'avez créé."
+
 #~ msgid "Now Monitoring Artifact"
 #~ msgstr "Surveillance activée"
 
@@ -25888,101 +25993,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Hosted Public Projects"
 #~ msgstr "Projets publics hébergés"
-
-#~ msgid "This drop-down box represents the current status of a tracker item."
-#~ msgstr ""
-#~ "Cette liste déroulante recense les états possibles d'un élément à suivre."
-
-#~ msgid ""
-#~ "You can set the status to 'Pending' if you are waiting for a response "
-#~ "from the tracker item author.  When the author responds the status is "
-#~ "automatically reset to that of 'Open'. Otherwise, if the author doesn't "
-#~ "respond with an admin-defined amount of time (default is 14 days) then "
-#~ "the item is given a status of 'Deleted'."
-#~ msgstr ""
-#~ "En attente » si vous attendez une réponse de l'auteur. Quand l'auteur "
-#~ "aura répondu, l'état repassera à « Ouvert ». Toutefois, si l'auteur ne "
-#~ "répond pas en un temps défini par l'administrateur (par défaut 14 jours), "
-#~ "l'état passe à « Supprimé »."
-
-#~ msgid ""
-#~ "The Sort By option allows you to determine how the browse results are "
-#~ "sorted."
-#~ msgstr ""
-#~ "L'option 'Trier par' vous permet de préciser l'ordre dans lequel sont "
-#~ "affichés les résultats."
-
-#~ msgid ""
-#~ "You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, "
-#~ "or Assignee.  You can also have the results sorted in Ascending or "
-#~ "Descending order."
-#~ msgstr ""
-#~ "Vous pouvez trier par identifiant, priorité, résumé, date d'ouverture, "
-#~ "date de fermeture, auteur, responsable. Vous pouvez aussi trier les "
-#~ "résultats par ordre croissant ou décroissant."
-
-#~ msgid ""
-#~ "The Data Type option determines the type of tracker item this is.  Since "
-#~ "the tracker rolls into one the bug, patch, support, etc... managers you "
-#~ "need to be able to determine which one of these an item should belong."
-#~ msgstr ""
-#~ "L'option 'Type de données' détermine le genre d'élément de suivi dont il "
-#~ "s'agit. Comme l'élément se trouve dans un des gestionnaires (de bogues, "
-#~ "de support, de patchs...), on a besoin de déterminer auquel de ces "
-#~ "gestionnaires un élément doit appartenir."
-
-#~ msgid ""
-#~ "This has the added benefit of enabling an admin to turn a support request "
-#~ "into a bug."
-#~ msgstr ""
-#~ "De plus, ceci permet à un administrateur de transformer une demande de "
-#~ "support en bogue."
-
-#~ msgid ""
-#~ "The priority option allows a user to define a tracker item priority "
-#~ "(ranging from 1-Lowest to 5-Highest)."
-#~ msgstr ""
-#~ "L'option priorité permet à un utilisateur de définir une priorité (de 1 - "
-#~ "La plus basse à 5 - La plus haute)."
-
-#~ msgid ""
-#~ "This is especially helpful for bugs and support requests where a user "
-#~ "might find a critical problem with a project."
-#~ msgstr ""
-#~ "Elle est particulièrement utile pour des bogues ou des demandes de "
-#~ "support pour lesquels un utilisateur peut avoir découvert un problème "
-#~ "critique pour le projet."
-
-#~ msgid ""
-#~ "The canned response drop-down represents a list of project admin-defined "
-#~ "canned responses to common support or bug submission."
-#~ msgstr ""
-#~ "La liste déroulante de réponses types recense les réponses définies par "
-#~ "les administrateurs pour réagir à des demandes de support récurrentes ou "
-#~ "à des soumissions de bogues."
-
-#~ msgid ""
-#~ "If you are a project admin you can click the 'Manage Canned Responses' "
-#~ "link to define your own canned responses"
-#~ msgstr ""
-#~ "Si vous êtes administrateur du projet, vous pouvez suivre le lien 'Gérer "
-#~ "les réponses type' pour définir vos propres réponses types."
-
-#~ msgid ""
-#~ "You can monitor or un-monitor this item by clicking the “Monitor” button."
-#~ msgstr ""
-#~ "Vous pouvez activer ou arrêter la surveillance de cet élément en cliquant "
-#~ "sur « Surveiller »."
-
-#~ msgid ""
-#~ "<strong>Note!</strong> this will send you additional email. If you add "
-#~ "comments to this item, or submitted, or are assigned this item, you will "
-#~ "also get emails for those reasons as well!"
-#~ msgstr ""
-#~ "<strong>Note !</strong> Cela vous occasionnera du courrier "
-#~ "supplémentaire. Si vous ajoutez des commentaires à cet élément à suivre, "
-#~ "que vous l'avez soumis ou s'il vous est affecté, vous recevrez des "
-#~ "messages également."
 
 #~ msgid "Show only this frame"
 #~ msgstr "Ne montrer que ce cadre"
