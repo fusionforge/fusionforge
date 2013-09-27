@@ -186,19 +186,19 @@ class ArtifactType extends Error {
 	/**
 	 * create - use this to create a new ArtifactType in the database.
 	 *
-	 *	@param	string	The type name.
-	 *	@param	string	The type description.
-	 *	@param	bool	(1) true (0) false - whether to email on all updates.
-	 *	@param	string	The address to send new entries and updates to.
-	 *	@param	int		Days before this item is considered overdue.
-	 *	@param	bool	(1) true (0) false - whether the resolution box should be shown.
-	 *	@param	string	Free-form string that project admins can place on the submit page.
-	 *	@param	string	Free-form string that project admins can place on the browse page.
-	 *	@param	int		(1) bug tracker, (2) Support Tracker, (3) Patch Tracker, (4) features (0) other.
-	 *	@return id on success, false on failure.
+	 * @param    string     $name                The type name.
+	 * @param    string     $description         The type description.
+	 * @param    bool       $email_all           (1) true (0) false - whether to email on all updates.
+	 * @param    string     $email_address       The address to send new entries and updates to.
+	 * @param    int        $due_period          Days before this item is considered overdue.
+	 * @param    bool       $use_resolution      (1) true (0) false - whether the resolution box should be shown.
+	 * @param    string     $submit_instructions Free-form string that project admins can place on the submit page.
+	 * @param    string     $browse_instructions Free-form string that project admins can place on the browse page.
+	 * @param    int        $datatype            (1) bug tracker, (2) Support Tracker, (3) Patch Tracker, (4) features (0) other.
+	 * @return int id on success, false on failure.
 	 */
-	function create($name,$description,$email_all,$email_address,
-		$due_period,$use_resolution,$submit_instructions,$browse_instructions,$datatype=0) {
+	function create($name, $description, $email_all, $email_address,
+					$due_period, $use_resolution, $submit_instructions, $browse_instructions, $datatype = 0) {
 
 		if (!forge_check_perm('tracker_admin', $this->Group->getID())) {
 			$this->setPermissionDeniedError();
@@ -237,16 +237,16 @@ class ArtifactType extends Error {
 			datatype)
 			VALUES
 			($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)',
-					array ($this->Group->getID(),
-					       htmlspecialchars($name),
-					       htmlspecialchars($description),
-					       $email_all,
-					       $email_address,
-					       $due_period*(60*60*24),
-					       1209600,
-					       htmlspecialchars($submit_instructions),
-					       htmlspecialchars($browse_instructions),
-					       $datatype)) ;
+					array($this->Group->getID(),
+							htmlspecialchars($name),
+							htmlspecialchars($description),
+							$email_all,
+							$email_address,
+							$due_period*(60*60*24),
+							1209600,
+							htmlspecialchars($submit_instructions),
+							htmlspecialchars($browse_instructions),
+							$datatype));
 
 		$id = db_insertid($res, 'artifact_group_list', 'group_artifact_id');
 
@@ -324,9 +324,9 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	  getSubmitInstructions - get the free-form string strings.
+	 *	getSubmitInstructions - get the free-form string strings.
 	 *
-	 *	  @return	string	instructions.
+	 *	@return	string	instructions.
 	 */
 	function getSubmitInstructions() {
 		return $this->data_array['submit_instructions'];
@@ -360,9 +360,9 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	  getName - the name of this ArtifactType.
+	 *	getName - the name of this ArtifactType.
 	 *
-	 *	  @return	string	name.
+	 *	@return	string	name.
 	 */
 	function getName() {
 		return $this->data_array['name'];
@@ -476,11 +476,11 @@ class ArtifactType extends Error {
 			//get the selected element for the extra_field_status element
 			$csfield = $this->getCustomStatusField();
 			if (array_key_exists($csfield, $extra_fields)) {
-				$element_id=$extra_fields[$csfield];
+				$element_id = $extra_fields[$csfield];
 
 				//convert that element_id into the status_id
-				$res = db_query_params ('SELECT status_id FROM artifact_extra_field_elements WHERE element_id=$1',
-							array ($element_id)) ;
+				$res = db_query_params('SELECT status_id FROM artifact_extra_field_elements WHERE element_id=$1',
+					array($element_id));
 				if (!$res) {
 					$this->setError('Error Remapping Status: '.db_error());
 					return false;
@@ -572,11 +572,11 @@ class ArtifactType extends Error {
 	/**
 	 *  getMonitorIds - array of email addresses monitoring this Artifact.
 	 *
-	 *  @return array of email addresses monitoring this Artifact.
+	 *	@return array of email addresses monitoring this Artifact.
 	 */
 	function &getMonitorIds() {
-		$res = db_query_params ('SELECT user_id	FROM artifact_type_monitor WHERE group_artifact_id=$1',
-					array ($this->getID())) ;
+		$res = db_query_params('SELECT user_id	FROM artifact_type_monitor WHERE group_artifact_id=$1',
+					array($this->getID()));
 		return util_result_column_to_array($res);
 	}
 
@@ -586,7 +586,7 @@ class ArtifactType extends Error {
 	 *
 	 *	@return arrays of data;
 	 */
-	function getExtraFields($types=array()) {
+	function getExtraFields($types = array()) {
 		if (count($types)) {
 			$filter = implode(',', $types);
 			$types = explode(',', $filter);
@@ -601,8 +601,8 @@ class ArtifactType extends Error {
 				WHERE group_artifact_id=$1
 				AND field_type = ANY ($2)
 				ORDER BY field_type ASC',
-							array ($this->getID(),
-							       db_int_array_to_any_clause ($types))) ;
+							array($this->getID(),
+									db_int_array_to_any_clause($types)));
 			} else {
 				$res = db_query_params('SELECT *
 				FROM artifact_extra_field_list
@@ -610,7 +610,7 @@ class ArtifactType extends Error {
 				ORDER BY field_type ASC',
 					array($this->getID()));
 			}
-			while($arr = db_fetch_array($res)) {
+			while ($arr = db_fetch_array($res)) {
 				$this->extra_fields["$filter"][$arr['extra_field_id']] = $arr;
 			}
 		}
@@ -651,7 +651,7 @@ class ArtifactType extends Error {
 		foreach ($efs as $ef) {
 			//new field in this tracker
 			$nef = new ArtifactExtraField($this);
-			if (!$nef->create( util_unconvert_htmlspecialchars($ef['field_name']), $ef['field_type'], $ef['attribute1'], $ef['attribute2'], $ef['is_required'], $ef['alias'])) {
+			if (!$nef->create(util_unconvert_htmlspecialchars($ef['field_name']), $ef['field_type'], $ef['attribute1'], $ef['attribute2'], $ef['is_required'], $ef['alias'])) {
 				$this->setError('Error Creating New Extra Field: '.$nef->getErrorMessage());
 				db_rollback();
 				return false;
@@ -738,13 +738,13 @@ class ArtifactType extends Error {
 			return 'None';
 		}
 		if (!isset($this->element_name["$choiceid"])) {
-			$res = db_query_params ('SELECT element_id,extra_field_id,element_name
+			$res = db_query_params('SELECT element_id,extra_field_id,element_name
 				FROM artifact_extra_field_elements
 				WHERE element_id = ANY ($1)',
-						array (db_int_array_to_any_clause (explode (',', $choiceid)))) ;
+						array(db_int_array_to_any_clause(explode (',', $choiceid)))) ;
 			if (db_numrows($res) > 1) {
-				$arr=util_result_column_to_array($res,2);
-				$this->element_name["$choiceid"]=implode(',',$arr);
+				$arr = util_result_column_to_array($res,2);
+				$this->element_name["$choiceid"] = implode(',',$arr);
 			} else {
 				$this->element_name["$choiceid"]=db_result($res,0,'element_name');
 			}
@@ -892,7 +892,7 @@ class ArtifactType extends Error {
 	/**
 	 *	getCannedResponses - returns a result set of canned responses.
 	 *
-	 *	@return database result set.
+	 *	@return resource database result set.
 	 */
 	function getCannedResponses() {
 		if (!isset($this->cannedresponses_res)) {
@@ -912,8 +912,7 @@ class ArtifactType extends Error {
 	 *	to an artifact the status_id is remapped from the extra_field_element_id to
 	 *	the standard open/closed id.
 	 *
-	 *	@param	boolean	Whether to show the real statuses or not.
-	 *	@return database result set.
+	 * @return resource database result set.
 	 */
 	function getStatuses() {
 		if (!isset($this->status_res)) {
@@ -941,19 +940,19 @@ class ArtifactType extends Error {
 	/**
 	 *  update - use this to update this ArtifactType in the database.
 	 *
-	 *  @param	string	The item name.
-	 *  @param	string	The item description.
-	 *  @param	bool	(1) true (0) false - whether to email on all updates.
-	 *  @param	string	The address to send new entries and updates to.
-	 *  @param	int		Days before this item is considered overdue.
-	 *  @param	int		Days before stale items time out.
-	 *  @param	bool	(1) true (0) false - whether the resolution box should be shown.
-	 *  @param	string	Free-form string that project admins can place on the submit page.
-	 *  @param	string	Free-form string that project admins can place on the browse page.
-	 *  @return true on success, false on failure.
+	 * @param    string     $name                The item name.
+	 * @param    string     $description         The item description.
+	 * @param    bool       $email_all           (1) true (0) false - whether to email on all updates.
+	 * @param    string     $email_address       The address to send new entries and updates to.
+	 * @param    int        $due_period          Days before this item is considered overdue.
+	 * @param    int        $status_timeout      Days before stale items time out.
+	 * @param    bool       $use_resolution      (1) true (0) false - whether the resolution box should be shown.
+	 * @param    string     $submit_instructions Free-form string that project admins can place on the submit page.
+	 * @param    string     $browse_instructions Free-form string that project admins can place on the browse page.
+	 * @return bool true on success, false on failure.
 	 */
-	function update($name,$description,$email_all,$email_address,
-		$due_period, $status_timeout,$use_resolution,$submit_instructions,$browse_instructions) {
+	function update($name, $description, $email_all, $email_address,
+					$due_period, $status_timeout, $use_resolution, $submit_instructions, $browse_instructions) {
 
 		if (!forge_check_perm ('tracker_admin', $this->Group->getID())) {
 			$this->setPermissionDeniedError();
