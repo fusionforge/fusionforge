@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-26 17:45+0200\n"
+"POT-Creation-Date: 2013-09-27 14:01+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -196,14 +196,18 @@ msgstr "파일 이름"
 #: common/docman/actions/monitordirectory.php:54
 #: common/docman/actions/monitorfile.php:56
 #: common/tracker/actions/tracker.php:434
-#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
+#: common/tracker/actions/tracker.php:451
+#: common/tracker/Artifact.class.php:618
+#: common/tracker/ArtifactType.class.php:545 www/frs/monitor.php:66
 #: www/frs/monitor.php:67
 #, fuzzy
 msgid "Monitoring Started"
 msgstr "모니터링이 시작되었습니다."
 
 #: common/docman/actions/monitordirectory.php:72
-#: common/docman/actions/monitorfile.php:76 www/frs/monitor.php:58
+#: common/docman/actions/monitorfile.php:76
+#: common/tracker/Artifact.class.php:628
+#: common/tracker/ArtifactType.class.php:555 www/frs/monitor.php:58
 #: www/frs/monitor.php:59
 #, fuzzy
 msgid "Monitoring Stopped"
@@ -2278,7 +2282,7 @@ msgstr "매일 갱신됩니다."
 #: common/mail/MailingList.class.php:393 common/pm/ProjectGroup.class.php:362
 #: common/pm/ProjectTask.class.php:515 common/tracker/Artifact.class.php:505
 #: common/tracker/ArtifactExtraField.class.php:430
-#: common/tracker/ArtifactType.class.php:794
+#: common/tracker/ArtifactType.class.php:796
 msgid "Please tick all checkboxes."
 msgstr ""
 
@@ -2662,7 +2666,7 @@ msgid "Invalid package_id"
 msgstr "잘못된 인자입니다."
 
 #: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
-#: common/tracker/ArtifactType.class.php:526
+#: common/tracker/ArtifactType.class.php:527
 #, fuzzy
 msgid "You can only monitor if you are logged in"
 msgstr "모니터링 기능을 사용하시려면 로그인하셔야 합니다."
@@ -6077,14 +6081,6 @@ msgstr "소프트웨어 맵 분류 정보"
 msgid "Valid Email Address Required"
 msgstr "유효한 이메일 주소가 필요합니다."
 
-#: common/tracker/Artifact.class.php:618
-msgid "Now Monitoring Artifact"
-msgstr "Now Monitoring"
-
-#: common/tracker/Artifact.class.php:628
-msgid "Artifact Monitoring Deactivated"
-msgstr "Monitoring Deactivated"
-
 #: common/tracker/Artifact.class.php:953
 msgid "Invalid assigned_to (assigned person is not a technician)"
 msgstr ""
@@ -6296,26 +6292,18 @@ msgid "Query does not exist"
 msgstr ""
 
 #: common/tracker/ArtifactType.class.php:209
-#: common/tracker/ArtifactType.class.php:967
+#: common/tracker/ArtifactType.class.php:969
 msgid ""
 "ArtifactType: Name, Description, Due Period, and Status Timeout are required"
 msgstr ""
 "ArtifactType: Name, Description, Due Period, and Status Timeout are required"
 
 #: common/tracker/ArtifactType.class.php:216
-#: common/tracker/ArtifactType.class.php:985
+#: common/tracker/ArtifactType.class.php:987
 msgid "E-mail address(es) appeared invalid"
 msgstr ""
 
-#: common/tracker/ArtifactType.class.php:544
-msgid "Now Monitoring Tracker"
-msgstr ""
-
-#: common/tracker/ArtifactType.class.php:554
-msgid "Tracker Monitoring Deactivated"
-msgstr ""
-
-#: common/tracker/ArtifactType.class.php:978
+#: common/tracker/ArtifactType.class.php:980
 #, fuzzy
 msgid "Tracker name already used"
 msgstr "이미 존재하는 유닉스 이름입니다."
@@ -23233,6 +23221,12 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#~ msgid "Now Monitoring Artifact"
+#~ msgstr "Now Monitoring"
+
+#~ msgid "Artifact Monitoring Deactivated"
+#~ msgstr "Monitoring Deactivated"
 
 #, fuzzy
 #~ msgid "Delete Custom Field"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-26 17:45+0200\n"
+"POT-Creation-Date: 2013-09-27 14:01+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -196,14 +196,18 @@ msgstr "Имя файла"
 #: common/docman/actions/monitordirectory.php:54
 #: common/docman/actions/monitorfile.php:56
 #: common/tracker/actions/tracker.php:434
-#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
+#: common/tracker/actions/tracker.php:451
+#: common/tracker/Artifact.class.php:618
+#: common/tracker/ArtifactType.class.php:545 www/frs/monitor.php:66
 #: www/frs/monitor.php:67
 #, fuzzy
 msgid "Monitoring Started"
 msgstr "Оповещение на емайл включено"
 
 #: common/docman/actions/monitordirectory.php:72
-#: common/docman/actions/monitorfile.php:76 www/frs/monitor.php:58
+#: common/docman/actions/monitorfile.php:76
+#: common/tracker/Artifact.class.php:628
+#: common/tracker/ArtifactType.class.php:555 www/frs/monitor.php:58
 #: www/frs/monitor.php:59
 #, fuzzy
 msgid "Monitoring Stopped"
@@ -2286,7 +2290,7 @@ msgstr "Ошибка обновления"
 #: common/mail/MailingList.class.php:393 common/pm/ProjectGroup.class.php:362
 #: common/pm/ProjectTask.class.php:515 common/tracker/Artifact.class.php:505
 #: common/tracker/ArtifactExtraField.class.php:430
-#: common/tracker/ArtifactType.class.php:794
+#: common/tracker/ArtifactType.class.php:796
 msgid "Please tick all checkboxes."
 msgstr ""
 
@@ -2671,7 +2675,7 @@ msgid "Invalid package_id"
 msgstr "Неверно указана дата"
 
 #: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
-#: common/tracker/ArtifactType.class.php:526
+#: common/tracker/ArtifactType.class.php:527
 msgid "You can only monitor if you are logged in"
 msgstr "Если вы не идентифицированы, Вы можете лишь просматривать"
 
@@ -6129,14 +6133,6 @@ msgstr "Нет доступа к изменению информации про�
 msgid "Valid Email Address Required"
 msgstr "Для установки оповещения на емайл, необходим Ваш емайл адрес"
 
-#: common/tracker/Artifact.class.php:618
-msgid "Now Monitoring Artifact"
-msgstr "Оповещение на емайл об измениях в образце включено"
-
-#: common/tracker/Artifact.class.php:628
-msgid "Artifact Monitoring Deactivated"
-msgstr "Оповещения о новостях в образцах отключены"
-
 #: common/tracker/Artifact.class.php:953
 msgid "Invalid assigned_to (assigned person is not a technician)"
 msgstr ""
@@ -6354,7 +6350,7 @@ msgid "Query does not exist"
 msgstr "Запрос не существует"
 
 #: common/tracker/ArtifactType.class.php:209
-#: common/tracker/ArtifactType.class.php:967
+#: common/tracker/ArtifactType.class.php:969
 msgid ""
 "ArtifactType: Name, Description, Due Period, and Status Timeout are required"
 msgstr ""
@@ -6362,19 +6358,11 @@ msgstr ""
 "действительности, продолжительность статуса"
 
 #: common/tracker/ArtifactType.class.php:216
-#: common/tracker/ArtifactType.class.php:985
+#: common/tracker/ArtifactType.class.php:987
 msgid "E-mail address(es) appeared invalid"
 msgstr "Указан не действительный емайл адрес "
 
-#: common/tracker/ArtifactType.class.php:544
-msgid "Now Monitoring Tracker"
-msgstr "Извещения о изменениях в этом трекере отправляются на Ваш емейл"
-
-#: common/tracker/ArtifactType.class.php:554
-msgid "Tracker Monitoring Deactivated"
-msgstr "Оповещение о изменениях в этом трекере на Ваш емейл отключено"
-
-#: common/tracker/ArtifactType.class.php:978
+#: common/tracker/ArtifactType.class.php:980
 #, fuzzy
 msgid "Tracker name already used"
 msgstr "Такое название для проекта уже занято."
@@ -23845,6 +23833,18 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#~ msgid "Now Monitoring Artifact"
+#~ msgstr "Оповещение на емайл об измениях в образце включено"
+
+#~ msgid "Artifact Monitoring Deactivated"
+#~ msgstr "Оповещения о новостях в образцах отключены"
+
+#~ msgid "Now Monitoring Tracker"
+#~ msgstr "Извещения о изменениях в этом трекере отправляются на Ваш емейл"
+
+#~ msgid "Tracker Monitoring Deactivated"
+#~ msgstr "Оповещение о изменениях в этом трекере на Ваш емейл отключено"
 
 #, fuzzy
 #~ msgid "Delete Custom Field Element"

@@ -615,7 +615,7 @@ class Artifact extends Error {
 				$this->setError(db_error());
 				return false;
 			} else {
-				$this->setError(_('Now Monitoring Artifact'));
+				$this->setError(_('Monitoring Started'));
 				return false;
 			}
 		} else {
@@ -625,7 +625,7 @@ class Artifact extends Error {
 				AND user_id=$2',
 					 array ($this->getID(),
 						$user_id)) ;
-			$this->setError(_('Artifact Monitoring Deactivated'));
+			$this->setError(_('Monitoring Stopped'));
 			return false;
 		}
 	}
@@ -1384,7 +1384,7 @@ class Artifact extends Error {
 						$this->addHistory($field_name, $this->ArtifactType->getElementName(array_reverse($old_values)));
 						$update = true;
 
-						$resdel = db_query_params ('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
+						db_query_params ('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
 									   array ($this->getID(),
 										  $efid)) ;
 					} else {
@@ -1399,7 +1399,7 @@ class Artifact extends Error {
 					if (!preg_match('/^@/', $ef[$efid]['alias'])) {
 						$changes["extra_fields"][$efid] = 1;
 					}
-					$resdel = db_query_params ('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
+					db_query_params ('DELETE FROM artifact_extra_field_data WHERE	artifact_id=$1 AND extra_field_id=$2',
 								   array ($this->getID(),
 									  $efid)) ;
 
@@ -1559,7 +1559,7 @@ class Artifact extends Error {
 	 *	@access private
 	 *	@return	boolean	success.
 	 */
-	function mailFollowupEx($tm,$type,$more_addresses=false,$changes='') {
+	function mailFollowupEx($tm, $type, $more_addresses = false, $changes='') {
 
 		$monitor_ids = array();
 
@@ -1714,7 +1714,7 @@ class Artifact extends Error {
 		$extra_headers = 'Reply-to: '.$from;
 
 		// load the e-mail addresses of the users
-		$users =& user_get_objects($monitor_ids);
+		$users = user_get_objects($monitor_ids);
 		if (count($users) > 0) {
 			foreach ($users as $user) {
 				if ($user->getStatus() == "A") { //we are only sending emails to active users

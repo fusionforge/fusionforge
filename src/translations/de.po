@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-26 17:45+0200\n"
+"POT-Creation-Date: 2013-09-27 14:01+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -196,13 +196,17 @@ msgstr "Dateiname"
 #: common/docman/actions/monitordirectory.php:54
 #: common/docman/actions/monitorfile.php:56
 #: common/tracker/actions/tracker.php:434
-#: common/tracker/actions/tracker.php:451 www/frs/monitor.php:66
+#: common/tracker/actions/tracker.php:451
+#: common/tracker/Artifact.class.php:618
+#: common/tracker/ArtifactType.class.php:545 www/frs/monitor.php:66
 #: www/frs/monitor.php:67
 msgid "Monitoring Started"
 msgstr "Überwachung gestartet"
 
 #: common/docman/actions/monitordirectory.php:72
-#: common/docman/actions/monitorfile.php:76 www/frs/monitor.php:58
+#: common/docman/actions/monitorfile.php:76
+#: common/tracker/Artifact.class.php:628
+#: common/tracker/ArtifactType.class.php:555 www/frs/monitor.php:58
 #: www/frs/monitor.php:59
 msgid "Monitoring Stopped"
 msgstr "Überwachung gestoppt"
@@ -2290,7 +2294,7 @@ msgstr "Update fehlgeschlagen"
 #: common/mail/MailingList.class.php:393 common/pm/ProjectGroup.class.php:362
 #: common/pm/ProjectTask.class.php:515 common/tracker/Artifact.class.php:505
 #: common/tracker/ArtifactExtraField.class.php:430
-#: common/tracker/ArtifactType.class.php:794
+#: common/tracker/ArtifactType.class.php:796
 msgid "Please tick all checkboxes."
 msgstr ""
 
@@ -2699,7 +2703,7 @@ msgid "Invalid package_id"
 msgstr "Ungültiges Datum"
 
 #: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
-#: common/tracker/ArtifactType.class.php:526
+#: common/tracker/ArtifactType.class.php:527
 msgid "You can only monitor if you are logged in"
 msgstr "Sie können nur Foren beobachten/überwachen, wenn Sie angemeldet sind."
 
@@ -6161,14 +6165,6 @@ msgstr "Fehler bei der Aktualisierung der Projekt- Informationen: %s"
 msgid "Valid Email Address Required"
 msgstr "Gültige Email-Adresse benötigt"
 
-#: common/tracker/Artifact.class.php:618
-msgid "Now Monitoring Artifact"
-msgstr "Überwachung aktiviert"
-
-#: common/tracker/Artifact.class.php:628
-msgid "Artifact Monitoring Deactivated"
-msgstr "Überwachung deaktiviert"
-
 #: common/tracker/Artifact.class.php:953
 msgid "Invalid assigned_to (assigned person is not a technician)"
 msgstr ""
@@ -6384,26 +6380,18 @@ msgid "Query does not exist"
 msgstr "Anfrage existiert nicht"
 
 #: common/tracker/ArtifactType.class.php:209
-#: common/tracker/ArtifactType.class.php:967
+#: common/tracker/ArtifactType.class.php:969
 msgid ""
 "ArtifactType: Name, Description, Due Period, and Status Timeout are required"
 msgstr ""
 "ArtifactType: Name, Beschreibung, Frist, und Statustimeout werden benötigt"
 
 #: common/tracker/ArtifactType.class.php:216
-#: common/tracker/ArtifactType.class.php:985
+#: common/tracker/ArtifactType.class.php:987
 msgid "E-mail address(es) appeared invalid"
 msgstr "Die E-Mail-Adresse(n) erscheint ungültig"
 
-#: common/tracker/ArtifactType.class.php:544
-msgid "Now Monitoring Tracker"
-msgstr "Sie beobachten nun den Tracker."
-
-#: common/tracker/ArtifactType.class.php:554
-msgid "Tracker Monitoring Deactivated"
-msgstr "Beobachtung des Trackers deaktiviert."
-
-#: common/tracker/ArtifactType.class.php:978
+#: common/tracker/ArtifactType.class.php:980
 #, fuzzy
 msgid "Tracker name already used"
 msgstr "Gruppenname bereits verwendet"
@@ -23771,6 +23759,18 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "Now Monitoring Artifact"
+#~ msgstr "Überwachung aktiviert"
+
+#~ msgid "Artifact Monitoring Deactivated"
+#~ msgstr "Überwachung deaktiviert"
+
+#~ msgid "Now Monitoring Tracker"
+#~ msgstr "Sie beobachten nun den Tracker."
+
+#~ msgid "Tracker Monitoring Deactivated"
+#~ msgstr "Beobachtung des Trackers deaktiviert."
 
 #, fuzzy
 #~ msgid "Delete Custom Field Element"
