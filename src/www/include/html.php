@@ -383,7 +383,7 @@ function html_get_tooltip_description($element_name) {
 		case 'status_id':
 			return _('This drop-down box represents the current status of a tracker item.')
 				.'<br /><br />'
-				._('You can set the status to \'Pending\' if you are waiting for a response from the tracker item author.  When the author responds the status is automatically reset to that of \'Open\'. Otherwise, if the author doesn\'t respond with an admin-defined amount of time (default is 14 days) then the item is given a status of \'Deleted\'.');
+				._('You can set the status to “Pending” if you are waiting for a response from the tracker item author.  When the author responds the status is automatically reset to that of “Open”. Otherwise, if the author does not respond with an admin-defined amount of time (default is 14 days) then the item is given a status of “Deleted”.');
 		case 'category':
 			return _('Tracker category');
 		case 'group':
@@ -407,7 +407,7 @@ function html_get_tooltip_description($element_name) {
 		case 'canned_response':
 			return _('The canned response drop-down represents a list of project admin-defined canned responses to common support or bug submission.')
 				.'<br /><br />'
-				._('If you are a project admin you can click the \'Manage Canned Responses\' link to define your own canned responses');
+				._('If you are a project admin you can click the “Manage Canned Responses” link to define your own canned responses');
 		case 'comment':
 			return _('Anyone can add here comments to give additional information, answers and solutions. Please, be as precise as possible to avoid misunderstanding. If relevant, screenshots or documents can be added as attached files.');
 		case 'description':
