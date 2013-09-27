@@ -320,6 +320,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			echo '<b>'._("Related Tasks").':</b>'.'<br/>';
 			$title_arr = array();
 			$title_arr[] = _('Task Id and Summary');
+			$title_arr[] = _('Progress');
 			$title_arr[] = _('Start Date');
 			$title_arr[] = _('End Date');
 			$title_arr[] = _('Status');
@@ -338,6 +339,8 @@ class ArtifactTypeHtml extends ArtifactType {
 				$status   = $taskinfo['status_name'];
 				echo '<tr>
 						<td><a href="/pm/task.php?func=detailtask&amp;project_task_id='.$taskid.'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid.'">[T'.$taskid.'] '.$summary.'</a></td>
+						<td><div class="percentbar" style="width: 100px;">
+							<div style="width:'.round($taskinfo['percent_complete']).'px;"></div></div></td>
 						<td>'.$startdate.'</td>
 						<td>'.$enddate.'</td>
 						<td>'.$status.' ('.$taskinfo['percent_complete'].'%)</td>'.
@@ -348,7 +351,8 @@ class ArtifactTypeHtml extends ArtifactType {
 
 			echo "\n<hr /><p style=\"text-align:right;\">";
 			printf(_('Average completion rate: %d%%'), (int)($totalPercentage/$taskcount));
-			echo "</p>\n";			echo '</td></tr>';
+			echo "</p>\n";
+			echo '</td></tr>';
 		}
 	}
 
