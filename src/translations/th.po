@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-27 18:35+0200\n"
+"POT-Creation-Date: 2013-09-27 19:06+0200\n"
 "PO-Revision-Date: 2009-10-06 16:32+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16312,11 +16312,11 @@ msgstr ""
 
 #: www/include/html.php:386
 msgid ""
-"You can set the status to 'Pending' if you are waiting for a response from "
+"You can set the status to “Pending” if you are waiting for a response from "
 "the tracker item author.  When the author responds the status is "
-"automatically reset to that of 'Open'. Otherwise, if the author doesn't "
+"automatically reset to that of “Open”. Otherwise, if the author does not "
 "respond with an admin-defined amount of time (default is 14 days) then the "
-"item is given a status of 'Deleted'."
+"item is given a status of “Deleted”."
 msgstr ""
 
 #: www/include/html.php:388
@@ -16372,7 +16372,7 @@ msgstr ""
 
 #: www/include/html.php:410
 msgid ""
-"If you are a project admin you can click the 'Manage Canned Responses' link "
+"If you are a project admin you can click the “Manage Canned Responses” link "
 "to define your own canned responses"
 msgstr ""
 

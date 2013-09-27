@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-27 18:35+0200\n"
+"POT-Creation-Date: 2013-09-27 19:06+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -311,9 +311,8 @@ msgstr "Erreur lors de la récupération d'un document."
 
 #: common/docman/Document.class.php:226 common/docman/Document.class.php:882
 #: common/docman/Document.class.php:1097
-#, fuzzy
 msgid "Error updating document group:"
-msgstr "Erreur lors de l'ajout d'un document :"
+msgstr "Erreur lors de la mise à jour du groupe de documents :"
 
 #: common/docman/Document.class.php:253
 msgid "Document: Invalid docid"
@@ -331,9 +330,8 @@ msgstr "Impossible d'ajouter la surveillance"
 
 #: common/docman/Document.class.php:619
 #: common/docman/DocumentGroup.class.php:447
-#, fuzzy
 msgid "Unable To Clear Monitor"
-msgstr "Impossible d'ajouter la surveillance"
+msgstr "Impossible de supprimer la surveillance"
 
 #: common/docman/Document.class.php:670
 msgid "Document lock failed"
@@ -528,7 +526,7 @@ msgstr "Erreur lors de la suppression d'un document :"
 #: common/docman/Document.class.php:1092
 #: common/docman/DocumentGroup.class.php:873
 msgid "wrong column name"
-msgstr ""
+msgstr "Nom de colonne invalide"
 
 #: common/docman/DocumentFactory.class.php:316
 msgid "No Documents Found"
@@ -2117,7 +2115,6 @@ msgid "Forum name must be at least 3 characters."
 msgstr "Le nom d'un forum doit compter au moins 3 caractères."
 
 #: common/forum/Forum.class.php:176 common/forum/Forum.class.php:558
-#, fuzzy
 msgid "Forum description must be at least 10 characters."
 msgstr "La description d'un forum doit compter au moins 10 caractères."
 
@@ -2266,9 +2263,8 @@ msgid "Start New Thread"
 msgstr "Commencer une nouvelle discussion"
 
 #: common/forum/ForumHTML.class.php:181 common/forum/ForumMessage.class.php:60
-#, fuzzy
 msgid "Invalid Forum Object"
-msgstr "Pas d'objet Forum valide"
+msgstr "Objet Forum invalide"
 
 #: common/forum/ForumHTML.class.php:205
 msgid "This is the content of the pending message"
@@ -17406,11 +17402,11 @@ msgstr ""
 
 #: www/include/html.php:386
 msgid ""
-"You can set the status to 'Pending' if you are waiting for a response from "
+"You can set the status to “Pending” if you are waiting for a response from "
 "the tracker item author.  When the author responds the status is "
-"automatically reset to that of 'Open'. Otherwise, if the author doesn't "
+"automatically reset to that of “Open”. Otherwise, if the author does not "
 "respond with an admin-defined amount of time (default is 14 days) then the "
-"item is given a status of 'Deleted'."
+"item is given a status of “Deleted”."
 msgstr ""
 "En attente » si vous attendez une réponse de l'auteur. Quand l'auteur aura "
 "répondu, l'état repassera à « Ouvert ». Toutefois, si l'auteur ne répond pas "
@@ -17489,11 +17485,11 @@ msgstr ""
 
 #: www/include/html.php:410
 msgid ""
-"If you are a project admin you can click the 'Manage Canned Responses' link "
+"If you are a project admin you can click the “Manage Canned Responses” link "
 "to define your own canned responses"
 msgstr ""
-"Si vous êtes administrateur du projet, vous pouvez suivre le lien 'Gérer les "
-"réponses type' pour définir vos propres réponses types."
+"Si vous êtes administrateur du projet, vous pouvez suivre le lien « Gérer "
+"les réponses type » pour définir vos propres réponses types."
 
 #: www/include/html.php:412
 msgid ""
@@ -23087,6 +23083,28 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid ""
+#~ "You can set the status to 'Pending' if you are waiting for a response "
+#~ "from the tracker item author.  When the author responds the status is "
+#~ "automatically reset to that of 'Open'. Otherwise, if the author doesn't "
+#~ "respond with an admin-defined amount of time (default is 14 days) then "
+#~ "the item is given a status of 'Deleted'."
+#~ msgstr ""
+#~ "En attente » si vous attendez une réponse de l'auteur. Quand l'auteur "
+#~ "aura répondu, l'état repassera à « Ouvert ». Toutefois, si l'auteur ne "
+#~ "répond pas en un temps défini par l'administrateur (par défaut 14 jours), "
+#~ "l'état passe à « Supprimé »."
+
+#~ msgid ""
+#~ "If you are a project admin you can click the 'Manage Canned Responses' "
+#~ "link to define your own canned responses"
+#~ msgstr ""
+#~ "Si vous êtes administrateur du projet, vous pouvez suivre le lien 'Gérer "
+#~ "les réponses type' pour définir vos propres réponses types."
+
+#~ msgid "No message in body"
+#~ msgstr "Pas de message dans le corps"
 
 #~ msgid ""
 #~ "This drop-down box represents the current status of a tracker item.<br /"
@@ -31187,3 +31205,48 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Mailing List Exists with same name"
 #~ msgstr "Il existe déjà une liste de diffusion portant ce nom."
+
+#~ msgid ""
+#~ "List all available services for this project along with some information "
+#~ "next to it. Click on any of this item to access a service.<br />The role "
+#~ "of this area is pretty much equivalent to the Project Main Menu at the "
+#~ "top of the screen except that it shows additional information about each "
+#~ "of the service (e.g. total number of open bugs, tasks, ...)"
+#~ msgstr ""
+#~ "Liste de tous les services activés pour ce projet, avec quelques "
+#~ "informations supplémentaires pour chacun.  Cliquez sur un de ces liens "
+#~ "pour accéder au service correspondant.<br />Cette section a un rôle "
+#~ "similaire au menu principal du projet en haut de page, mais elle fournit "
+#~ "des informations supplémentaires sur chaque service (par exemple, nombre "
+#~ "de rapports d'anomalies ouverts, de tâches en cours, etc.)."
+
+#~ msgid "%1$s Test Results"
+#~ msgstr "Résultats des tests de %1$s"
+
+#~ msgid ""
+#~ "This drop-down box represents the current status of a tracker item.<br /"
+#~ "><br />You can set the status to “Pending” if you are waiting for a "
+#~ "response from the tracker item author.  When the author responds the "
+#~ "status is automatically reset to that of “Open”. Otherwise, if the author "
+#~ "doesn't respond with an admin-defined amount of time (default is 14 days) "
+#~ "then the item is given a status of “Deleted”."
+#~ msgstr ""
+#~ "Cette liste déroulante recense les états possibles d'un élément à suivre."
+#~ "<br /><br />'En attente' si vous attendez une réponse de l'auteur. Quand "
+#~ "l'auteur aura répondu, le statut repassera à 'Ouvert'. Toutefois, si "
+#~ "l'auteur ne répond pas en un temps défini par l'administrateur (par "
+#~ "défaut 14 jours), le statut passe à 'Supprimé'."
+
+#~ msgid ""
+#~ "<div align=\"left\"><b>Editing tips:</b><br/><strong>http,https or ftp</"
+#~ "strong>: Hyperlinks.<br/><strong>[#NNN]</strong>: Tracker id NNN.<br/"
+#~ "><strong>[TNNN]</strong>: Task id NNN.<br/><strong>[wiki:&lt;pagename&gt;]"
+#~ "</strong>: Wiki page.<br/><strong>[forum:&lt;msg_id&gt;]</strong>: Forum "
+#~ "post.</div>"
+#~ msgstr ""
+#~ "<div align=\"left\"><b>Astuces pour l'édition :</b><br/><strong>http,"
+#~ "https ou ftp</strong>: Hyperliens.<br/><strong>[#NNN]</strong> : Item n"
+#~ "°NNN dans un outil de suivi.<br/><strong>[TNNN]</strong> : Item n°NNN "
+#~ "dans un gestionnaire de tâches.<br/><strong>[wiki:&lt;pagename&gt;]</"
+#~ "strong>: Page wiki.<br/><strong>[forum:&lt;msg_id&gt;]</strong>: Article "
+#~ "de forum.</div>"
