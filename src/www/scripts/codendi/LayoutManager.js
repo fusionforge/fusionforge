@@ -144,38 +144,4 @@ document.observe('dom:loaded', function() {
                 });
         });
     }
-
-    //Widget categorizer
-    var default_categ = location.href.match(/#filter-(widget-categ-[a-zA-Z0-9-_]+)$/);
-    var current_categ;
-    if (default_categ && default_categ[1]) {
-        current_categ = default_categ[1];
-    } else {
-        current_categ = 'widget-categ-general';
-    }
-    $$('.widget-categ-switcher').each(function (a) {
-        var scan_id = a.href.match(/#(widget-categ-[a-zA-Z0-9-_]+)$/);
-        if (scan_id && scan_id[1]) {
-            var id = scan_id[1];
-            a.href = a.href.gsub(/#(widget-categ-[a-zA-Z0-9-_]+)$/, '#filter-'+id);
-            a.observe('click', function(evt) {
-                current_categ = id;
-                //Display widgets of this category
-                $('widget-content-categ').childElements().invoke('hide');
-                a.up('ul').select('.widget-categ-switcher').each(function(other_a) {
-                    other_a.up().removeClassName('selected');
-                });
-                a.up().addClassName('selected');
-                $(id).show();
-            });
-            //remove corresponding table
-            if (id != current_categ) {
-                $(id).hide();
-            } else {
-                a.up().addClassName('selected');
-            }
-            Element.remove($(id).down('h4'));
-            $('widget-content-categ').appendChild(Element.remove($(id)));
-        }
-    });
 });

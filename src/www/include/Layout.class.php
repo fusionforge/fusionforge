@@ -351,7 +351,6 @@ class Layout extends Error {
 	 */
 	function headerJS() {
 		echo '
-			<script type="text/javascript" src="/scripts/codendi/codendi-1236793993.js"></script>
 			<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>
 			<script type="text/javascript">/* <![CDATA[ */';
 		plugin_hook ("javascript",false);

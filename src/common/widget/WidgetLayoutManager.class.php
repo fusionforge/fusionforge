@@ -2,6 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -336,11 +337,7 @@ class WidgetLayoutManager {
 				<tbody>
 				<tr class="top">
 				<td>';
-			echo '<table>
-				<tbody>';
 			$after .= $this->_displayWidgetsSelectionForm(sprintf(_("%s Widgets"),  forge_get_config('forge_name')), Widget::getCodendiWidgets($owner_type), $used_widgets);
-			echo '</tbody>
-				</table>';
 			echo '</td>
 				<td id="widget-content-categ">'. $after .'</td>
 				</tr>
@@ -485,13 +482,12 @@ class WidgetLayoutManager {
 		$hp = Codendi_HTMLPurifier::instance();
 		$additionnal_html = '';
 		if (count($widgets)) {
-			echo '<tr><td colspan="2">';
 			$categs = $this->getCategories($widgets);
 			$widget_rows = array();
 			if (count($categs)) {
 				// display the categories selector in left panel
 				foreach($categs as $c => $ws) {
-					$widget_rows[$c] = '<a class="widget-categ-switcher" href="#widget-categ-'. $c .'"><span>'.  str_replace('-',' ', $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML))  .'</span></a>';
+					$widget_rows[$c] = '<a class="widget-categ-switcher" id="widget-categ-switcher-'. $c .'" href="#widget-categ-'. $c .'" onClick="jQuery(\'.widget-categ-class-void\').hide();jQuery(\'.widget-categ-switcher\').removeClass(\'selected\');jQuery(\'#widget-categ-'. $c .'\').show();jQuery(\'#widget-categ-switcher-'. $c .'\').addClass(\'selected\');" ><span>'.  str_replace('-',' ', $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML))  .'</span></a>';
 				}
 				uksort($widget_rows, 'strnatcasecmp');
 				echo '<ul id="widget-categories">';
@@ -499,9 +495,7 @@ class WidgetLayoutManager {
 					echo '<li>'. $row .'</li>';
 				}
 				echo '</ul>';
-				echo '</td></tr>';
 			} else {
-				echo '</td></tr>';
 				foreach($widgets as $widget_name) {
 					if ($widget = Widget::getInstance($widget_name)) {
 						if ($widget->isAvailable()) {
@@ -544,7 +538,7 @@ class WidgetLayoutManager {
 						$widget_rows[$widget->getTitle()] = $row;
 					}
 					uksort($widget_rows, 'strnatcasecmp');
-					$additionnal_html .= '<div id="widget-categ-'. $c .'"><h4 class="boxtitle">'. $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML) .'</h4>';
+					$additionnal_html .= '<div id="widget-categ-'. $c .'" style="display:none" class="widget-categ-class-void" ><h4 class="boxtitle">'. $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML) .'</h4>';
 					foreach($widget_rows as $row) {
 						$additionnal_html .= $row;
 					}

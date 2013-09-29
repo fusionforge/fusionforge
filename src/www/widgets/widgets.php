@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * http://fusionforge.org
  *
  * Copyright 2011, Franck Villaume - TrivialDev
@@ -27,8 +27,9 @@ require_once $gfcommon.'include/plugins_utils.php';
 require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 require_once $gfcommon.'widget/Valid_Widget.class.php';
 
+use_javascript('/scripts/codendi/codendi-1236793993.js');
 use_javascript('/scripts/codendi/LayoutManager.js');
-use_javascript('/scripts/codendi/ReorderColumns.js');
+html_use_jquery();
 
 $hp = Codendi_HTMLPurifier::instance();
 if (isLogged()) {
@@ -49,8 +50,8 @@ if (isLogged()) {
 			switch($owner_type) {
 				case WidgetLayoutManager::OWNER_TYPE_USER:
 					$owner_id = user_getid();
-					$userm=UserManager::instance();
-					$current=$userm->getCurrentUser();
+					$userm = UserManager::instance();
+					$current = $userm->getCurrentUser();
 					site_user_header(array('title'=>sprintf(_('Personal Page for %s'), user_getname())));
 					$lm->displayAvailableWidgets(user_getid(), WidgetLayoutManager::OWNER_TYPE_USER, $layout_id);
 					site_footer(array());
