@@ -127,6 +127,7 @@ class scmhookPlugin extends Plugin {
 	function displayScmHook($group_id) {
 		global $HTML;
 		use_javascript('/js/sortable.js');
+		echo $HTML->getJavascripts();
 		$hooksAvailable = $this->getAvailableHooks($group_id);
 		$statusDeploy = $this->getStatusDeploy($group_id);
 		$hooksEnabled = $this->getEnabledHooks($group_id);
