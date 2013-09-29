@@ -416,7 +416,6 @@ class Theme extends Layout {
 	function headerJS()
 	{
 		echo '<script type="text/javascript" src="'. util_make_uri('/js/common.js') .'"></script>';
-		echo '<script type="text/javascript" src="/scripts/codendi/codendi-1236793993.js"></script>';
 
 		plugin_hook("javascript_file", false);
 
@@ -438,7 +437,6 @@ class Theme extends Layout {
 		echo $this->getStylesheets();
 		?>
 		<script type="text/javascript">//<![CDATA[
-		jQuery.noConflict();
 		jQuery(window).load(function(){
 			jQuery(".quicknews").hide();
 			setTimeout("jQuery('.feedback').hide('slow')", 5000);
