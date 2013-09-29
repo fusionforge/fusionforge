@@ -34,7 +34,6 @@ class scmhookPlugin extends Plugin {
 		$this->_addHook('scm_admin_update');
 		$this->_addHook('artifact_extra_detail');
 		$this->_addHook('task_extra_detail');
-		$this->_addHook('javascript_file');
 	}
 
 	function CallHook($hookname, &$params) {
@@ -66,10 +65,6 @@ class scmhookPlugin extends Plugin {
 				if ($group->usesPlugin($this->name)) {
 					$this->task_extra_detail($params);
 				}
-				break;
-			}
-			case 'javascript_file': {
-				use_javascript('/js/sortable.js');
 				break;
 			}
 		}
@@ -132,6 +127,7 @@ class scmhookPlugin extends Plugin {
 	}
 
 	function displayScmHook($group_id, $scm) {
+		use_javascript('/js/sortable.js');
 		$hooksAvailable = $this->getAvailableHooks($group_id);
 		$statusDeploy = $this->getStatusDeploy($group_id);
 		$hooksEnabled = $this->getEnabledHooks($group_id);
