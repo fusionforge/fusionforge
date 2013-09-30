@@ -19,30 +19,31 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
- * Note to Forge developpers:
+ * Note to Forge developers:
  * 		- put as less code here as possible
  *
- * Note to Themes developpers:
+ * Note to Themes developers:
  * 		- don't add CSS to this file;
- * 		- use your own's theme CSS file(s) instead
+ * 		- use your own theme CSS file(s) instead
  *
  * Final note: this CSS file should be ideally called:
- * 		- after YUI's reset,fonts and base
+ * 		- after YUI reset,fonts and base
  * 		- before the theme's own CSS file
- * 		- Warning: font-size must be expressed in % according to YUI's font table http://developer.yahoo.com/yui/fonts/#chart
+ * 		- Warning: font-size must be expressed in % according to YUI font table
+ *          http://developer.yahoo.com/yui/fonts/#chart
  *
 */
 
 /* From old gforge-compat */
 .altrowstyleeven,
 .even {
-	background-color: #EAEAEA;
+	background-color: #eaeaea;
 	font-weight: normal;
 }
 
 .altrowstyleodd,
 .odd {
-	background-color: #E0E0E0;
+	background-color: #e0e0e0;
 	font-weight: normal;
 }
 
@@ -63,7 +64,7 @@
 }
 
 .multitablerowtitle {
-	background-color: #DAD5D7;
+	background-color: #dad5d7;
 }
 
 .next {
@@ -131,22 +132,22 @@
 }
 
 .tablecontent {
-	background-color: #eeeeee;
+	background-color: #eee;
 	font-size: 13px;
 }
 
 .tablegetmore {
-	background-color: #EAEAEA;
+	background-color: #eaeaea;
 }
 
 .tableheading {
-	background-color: #D0D0D0;
+	background-color: #d0d0d0;
 	font-weight: bold;
 	text-align: center;
 }
 
 .titlebar {
-	color: #FFFFFF;
+	color: #fff;
 	font-size: 13px;
 	text-decoration: none;
 }
@@ -179,7 +180,7 @@ td.footer2 {
 }
 
 td.footer3 {
-	background-color: #ffffff;
+	background-color: #fff;
 }
 
 td.notseltab {
@@ -187,7 +188,7 @@ td.notseltab {
 }
 
 td.projecttab {
-	background-color: #ffffff;
+	background-color: #fff;
 }
 
 td.seltab {
@@ -195,7 +196,7 @@ td.seltab {
 }
 
 td.toptab {
-	background-color: #E0E0E0;
+	background-color: #e0e0e0;
 }
 
 ul.tabbernav {
@@ -280,10 +281,10 @@ ul.tabbernav li.tabberactive a:hover {
 /* A table with two columns, first one right-aligned and bold */
 table.infotable tr { vertical-align: top; }
 table.infotable td:first-child {
-    font-weight: bold;
-    padding-right: 4px;
-    text-align: right;
-    white-space: nowrap;
+	font-weight: bold;
+	padding-right: 4px;
+	text-align: right;
+	white-space: nowrap;
 }
 
 table.full {
@@ -357,9 +358,9 @@ table.centered {
 }
 
 #globalWrapper #toc ul li, #globalWrapper .toc ul li {
-        margin:0em 0em 0.1em 0em;
-        list-style-image:none;
-        list-style-type:none;
+	margin:0 0 0.1em 0;
+	list-style-image:none;
+	list-style-type:none;
 }
 
 /* Progress bargraph (trackers) */
@@ -394,12 +395,12 @@ table.progress td :hover { background: none }
 
 /* style for warning messages box */
 .warning_msg {
-    font-weight: bold;
-    border-width: 2px;
-    border-style: solid;
-    background-color: #ffd297; /* orange */
-    border-color: #FFA500; /* orange */
-    padding: 0.5em;
+	font-weight: bold;
+	border-width: 2px;
+	border-style: solid;
+	background-color: #ffd297; /* orange */
+	border-color: #ffa500; /* orange */
+	padding: 0.5em;
 }
 
 p.information {
@@ -413,7 +414,7 @@ p.information {
 
 p.information {
    border-color: blue;
-   background-color: #BDE5F8;
+   background-color: #bde5f8;
 }
 
 /* {{{ Widgets */
@@ -434,7 +435,7 @@ p.information {
 	clear: both;
 }
 .widget_preferences {
-	background: #E0DDD2;
+	background: #e0ddd2;
 	border-bottom: 1px solid #bcbcad;
 }
 .widget_preferences form {
@@ -872,7 +873,7 @@ legend {
 #message_box {
    display:none;
    background:#ffc;
-   border:1px solid #CCCCCC;
+   border:1px solid #ccc;
    text-align:center;
    font-weight:bold;
    width:99%;
@@ -963,8 +964,8 @@ fieldset {
 }
 
 #ff-mw-wrapper ul li {
-	/*      ↑   →    ↓   ←    */
-	margin:0em 0em 0.1em 0em;
+	/*     ↑ →   ↓   ←    */
+	margin:0 0 0.1em 0;
 	list-style-type:square;
 	list-style-image:url(data:image/gif;base64,R0lGODlhBQANAIAAAGOMnP///yH5BAEAAAEALAAAAAAFAA0AAAIJjI+pu+APo4SpADs=);
 }
@@ -974,7 +975,7 @@ fieldset {
 }
 
 #ff-mw-wrapper #toc ul li, #ff-mw-wrapper .toc ul li {
-	margin:0em 0em 0.1em 0em;
+	margin:0 0 0.1em 0;
 	list-style-image:none;
 	list-style-type:none;
 }
@@ -991,7 +992,7 @@ fieldset {
 }
 
 #ff-mw-wrapper ol li {
-	margin:0em 0em 0.1em 0em;
+	margin:0 0 0.1em 0;
 	list-style-type:decimal;
 }
 
@@ -1011,17 +1012,17 @@ fieldset {
 }
 
 #ff-mw-wrapper a {
-	color:#002BB8;
+	color:#002bb8;
 	font-weight:normal;
 }
 
 .percentbar {
-	background:#CCCCCC;
-	border:1px solid #666666;
+	background:#ccc;
+	border:1px solid #666;
 	height:10px;
 }
 
 .percentbar div {
-	background: #28B8C0;
+	background: #28b8c0;
 	height: 10px;
 }
