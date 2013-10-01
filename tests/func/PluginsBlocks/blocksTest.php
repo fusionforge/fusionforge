@@ -70,7 +70,7 @@ class UserBlocks extends FForge_SeleniumTestCase
     $this->waitForPageToLoad("30000");
 
     $this->open("/plugins/blocks/index.php?id=7&type=admin&pluginname=blocks");
-    $this->click("link=configure");
+    $this->click("link=Configure");
     $this->waitForPageToLoad("30000");
     $this->type("body", "This is my nice block.");
     $this->click("//input[@value='Save']");
