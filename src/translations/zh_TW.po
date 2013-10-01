@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 14:37+0200\n"
+"POT-Creation-Date: 2013-10-01 14:43+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16391,17 +16391,17 @@ msgstr "我要刪除這個使用者"
 #: www/admin/useredit.php:238
 msgid ""
 "This pages allows to change only direct properties of user object. To edit "
-"properties pertinent to user within specific group, visit admin page of that "
-"group (below)."
+"properties pertinent to user within specific project, visit admin page of "
+"that project (below)."
 msgstr ""
 "這個頁面只能修改使用者物件的直接屬性，要在特定的群組中編輯適當的屬性請連到那"
 "個群組的管理頁面 (下面)。"
 
 #: www/admin/useredit.php:245
 msgid ""
-"Unix status updated mirroring web status, unless it has value 'No unix "
-"account (N)'"
-msgstr "Unix帳號狀態更新反映自網站的狀態，除非它的設定值是'沒有Unix帳號 (N)'。"
+"Unix status updated mirroring web status, unless it has value “No Unix "
+"account (N)”"
+msgstr "Unix帳號狀態更新反映自網站的狀態，除非它的設定值是'沒有Unix帳號 (N)'"
 
 #: www/admin/useredit.php:253
 #, fuzzy
@@ -21197,9 +21197,8 @@ msgstr ""
 "正確的資料。"
 
 #: www/register/index.php:183
-#, fuzzy
-msgid "Project full name"
-msgstr "新專案名稱"
+msgid "Project Full Name"
+msgstr "專案全名"
 
 #: www/register/index.php:185
 msgid ""
@@ -21244,13 +21243,13 @@ msgstr ""
 
 #: www/register/index.php:215
 msgid ""
-"In addition to full project name, you will need to choose short, \"Unix\" "
-"name for your project."
+"In addition to full project name, you will need to choose short, “Unix” name "
+"for your project."
 msgstr ""
 
 #: www/register/index.php:216
 msgid ""
-"The \"Unix Name\" has several restrictions because it is used in so many "
+"The “Unix Name” has several restrictions because it is used in so many "
 "places around the site. They are:"
 msgstr ""
 
@@ -22166,15 +22165,14 @@ msgstr ""
 
 #: www/snippet/index.php:52
 msgid ""
-"You can create a \"new snippet\", then post additional versions of that "
+"You can create a “new snippet”, then post additional versions of that "
 "snippet quickly and easily."
 msgstr ""
 
 #: www/snippet/index.php:54
 msgid ""
-"Once you have snippets posted, you can then create a \"Package\" of "
-"snippets. That package can contain multiple, specific versions of other "
-"snippets."
+"Once you have snippets posted, you can then create a “Package” of snippets. "
+"That package can contain multiple, specific versions of other snippets."
 msgstr ""
 
 #: www/snippet/index.php:56
@@ -23337,6 +23335,24 @@ msgstr "帳號"
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
 
+#~ msgid ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific group, visit admin page "
+#~ "of that group (below)."
+#~ msgstr ""
+#~ "這個頁面只能修改使用者物件的直接屬性，要在特定的群組中編輯適當的屬性請連到"
+#~ "那個群組的管理頁面 (下面)。"
+
+#~ msgid ""
+#~ "Unix status updated mirroring web status, unless it has value 'No unix "
+#~ "account (N)'"
+#~ msgstr ""
+#~ "Unix帳號狀態更新反映自網站的狀態，除非它的設定值是'沒有Unix帳號 (N)'。"
+
+#, fuzzy
+#~ msgid "Project full name"
+#~ msgstr "新專案名稱"
+
 #~ msgid "Add/Edit Categories"
 #~ msgstr "增加/編輯分類"
 
@@ -23721,9 +23737,6 @@ msgstr "我的個人首頁"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "您在 %s 註冊的專案通過審核了"
-
-#~ msgid "Project Full Name"
-#~ msgstr "專案全名"
 
 #~ msgid "%s Project Approved"
 #~ msgstr "%s 專案通過審核了"
@@ -24495,14 +24508,6 @@ msgstr "我的個人首頁"
 
 #~ msgid "Active site users: <strong>%1$s</strong>"
 #~ msgstr "啟用中的使用者：<strong>%1$s</strong>"
-
-#~ msgid ""
-#~ "This pages allows to change only direct properties of user object. To "
-#~ "edit properties pertinent to user within specific project, visit admin "
-#~ "page of that project (below)."
-#~ msgstr ""
-#~ "這個頁面只能修改使用者物件的直接屬性，要在特定的群組中編輯適當的屬性請連到"
-#~ "那個群組的管理頁面 (下面)。"
 
 #~ msgid "Project totals"
 #~ msgstr "專案檔案總數"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 14:37+0200\n"
+"POT-Creation-Date: 2013-10-01 14:43+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16321,8 +16321,8 @@ msgstr ""
 #: www/admin/useredit.php:238
 msgid ""
 "This pages allows to change only direct properties of user object. To edit "
-"properties pertinent to user within specific group, visit admin page of that "
-"group (below)."
+"properties pertinent to user within specific project, visit admin page of "
+"that project (below)."
 msgstr ""
 "Denna sida tillåter endast förändringar av direkta egenskaper på "
 "användarobjektet. För att redigera egenskaper hos en användare inom en viss "
@@ -16330,11 +16330,11 @@ msgstr ""
 
 #: www/admin/useredit.php:245
 msgid ""
-"Unix status updated mirroring web status, unless it has value 'No unix "
-"account (N)'"
+"Unix status updated mirroring web status, unless it has value “No Unix "
+"account (N)”"
 msgstr ""
 "Unixstatus uppdaterad, speglar webbstatus om det inte har värdet 'Inget "
-"unixkonto (N)'"
+"Unixkonto (N)'"
 
 #: www/admin/useredit.php:253
 #, fuzzy
@@ -21163,9 +21163,8 @@ msgstr ""
 "fullständig och omfattande information. Alla fält nedan är obligatoriska."
 
 #: www/register/index.php:183
-#, fuzzy
-msgid "Project full name"
-msgstr "Nytt projektnamn"
+msgid "Project Full Name"
+msgstr "Projekt, fullt namn"
 
 #: www/register/index.php:185
 msgid ""
@@ -21216,13 +21215,13 @@ msgstr ""
 
 #: www/register/index.php:215
 msgid ""
-"In addition to full project name, you will need to choose short, \"Unix\" "
-"name for your project."
+"In addition to full project name, you will need to choose short, “Unix” name "
+"for your project."
 msgstr ""
 
 #: www/register/index.php:216
 msgid ""
-"The \"Unix Name\" has several restrictions because it is used in so many "
+"The “Unix Name” has several restrictions because it is used in so many "
 "places around the site. They are:"
 msgstr ""
 
@@ -22134,15 +22133,14 @@ msgstr ""
 
 #: www/snippet/index.php:52
 msgid ""
-"You can create a \"new snippet\", then post additional versions of that "
+"You can create a “new snippet”, then post additional versions of that "
 "snippet quickly and easily."
 msgstr ""
 
 #: www/snippet/index.php:54
 msgid ""
-"Once you have snippets posted, you can then create a \"Package\" of "
-"snippets. That package can contain multiple, specific versions of other "
-"snippets."
+"Once you have snippets posted, you can then create a “Package” of snippets. "
+"That package can contain multiple, specific versions of other snippets."
 msgstr ""
 
 #: www/snippet/index.php:56
@@ -23314,6 +23312,26 @@ msgstr "Användarenamn"
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
 
+#~ msgid ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific group, visit admin page "
+#~ "of that group (below)."
+#~ msgstr ""
+#~ "Denna sida tillåter endast förändringar av direkta egenskaper på "
+#~ "användarobjektet. För att redigera egenskaper hos en användare inom en "
+#~ "viss gruppp, gå till admin sidan för den gruppen (nedan)."
+
+#~ msgid ""
+#~ "Unix status updated mirroring web status, unless it has value 'No unix "
+#~ "account (N)'"
+#~ msgstr ""
+#~ "Unixstatus uppdaterad, speglar webbstatus om det inte har värdet 'Inget "
+#~ "unixkonto (N)'"
+
+#, fuzzy
+#~ msgid "Project full name"
+#~ msgstr "Nytt projektnamn"
+
 #~ msgid "Add/Edit Categories"
 #~ msgstr "Lägg till/Redigera kategorier"
 
@@ -23668,9 +23686,6 @@ msgstr "Min personliga sida"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "Din projektregistrering hos %s har blivit godkänd."
-
-#~ msgid "Project Full Name"
-#~ msgstr "Projekt, fullt namn"
 
 #~ msgid ""
 #~ "We highly suggest that you now visit %1$s and create a public description "
@@ -24262,15 +24277,6 @@ msgstr "Min personliga sida"
 
 #~ msgid "Other Information"
 #~ msgstr "Annan information"
-
-#~ msgid ""
-#~ "This pages allows to change only direct properties of user object. To "
-#~ "edit properties pertinent to user within specific project, visit admin "
-#~ "page of that project (below)."
-#~ msgstr ""
-#~ "Denna sida tillåter endast förändringar av direkta egenskaper på "
-#~ "användarobjektet. För att redigera egenskaper hos en användare inom en "
-#~ "viss gruppp, gå till admin sidan för den gruppen (nedan)."
 
 #~ msgid "Suspend"
 #~ msgstr "Suspenderad"

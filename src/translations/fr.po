@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 14:37+0200\n"
+"POT-Creation-Date: 2013-10-01 14:43+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -8431,9 +8431,8 @@ msgid "Active"
 msgstr "Actif"
 
 #: plugins/blocks/www/index.php:225
-#, fuzzy
 msgid "Configure"
-msgstr "Confirmer"
+msgstr "Configurer"
 
 #: plugins/blocks/www/index.php:229
 msgid "Save Blocks"
@@ -13585,13 +13584,12 @@ msgid "Use Mercurial as Source Code Management tool. Offer DAV or SSH access."
 msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:61
-#, fuzzy
 msgid ""
 "Another short Introduction can be found at <a href=\"http://hginit.com/"
 "\">http://hginit.com/</a>"
 msgstr ""
-"La documentation de Git est disponible <a href=\"http://git-scm.com/\">ici</"
-"a> (en anglais)."
+"Une autre brève introduction su trouve à <a href=\"http://hginit.com/"
+"\">http://hginit.com/</a> (en anglais)."
 
 #: plugins/scmhg/common/HgPlugin.class.php:67
 msgid "Anonymous Mercurial Access"
@@ -13850,9 +13848,8 @@ msgid ""
 msgstr ""
 
 #: plugins/webanalytics/action/addLink.php:38
-#, fuzzy
 msgid "Missing Link URL or name."
-msgstr "Le nom du projet est manquant."
+msgstr "URL ou nom manquant."
 
 #: plugins/webanalytics/action/updateLinkValue.php:33
 msgid "Link updated"
@@ -14206,13 +14203,12 @@ msgid "Manage Authorized Keys"
 msgstr "Clés publiques SSH autorisées"
 
 #: www/account/editsshkeys.php:50
-#, fuzzy
 msgid "Available keys"
-msgstr "Aucune tâche trouvée."
+msgstr "Clefs disponibles"
 
 #: www/account/editsshkeys.php:51 www/account/index.php:299
 msgid "Algorithm"
-msgstr ""
+msgstr "Algorithme"
 
 #: www/account/editsshkeys.php:51 www/account/index.php:299
 msgid "Fingerprint"
@@ -14224,9 +14220,8 @@ msgid "Uploaded"
 msgstr "Téléchargé"
 
 #: www/account/editsshkeys.php:51 www/account/index.php:299
-#, fuzzy
 msgid "Ready ?"
-msgstr "Lecture"
+msgstr "Prêt ?"
 
 #: www/account/editsshkeys.php:61 www/account/index.php:309
 msgid "ssh key is deployed."
@@ -14237,17 +14232,14 @@ msgid "ssh key is not deployed yet."
 msgstr ""
 
 #: www/account/editsshkeys.php:66
-#, fuzzy
 msgid "Delete this ssh key."
-msgstr "Supprimer cette tâche"
+msgstr "Supprimer cette clef SSH"
 
 #: www/account/editsshkeys.php:73
-#, fuzzy
 msgid "Add a new ssh key"
-msgstr "Ajout d'un ticket"
+msgstr "Ajouter une nouvelle clef SSH"
 
 #: www/account/editsshkeys.php:74
-#, fuzzy
 msgid ""
 "To avoid having to type your password every time for your CVS/SSH developer "
 "account, you may upload your public key(s) here and they will be placed on "
@@ -14256,9 +14248,9 @@ msgid ""
 msgstr ""
 "Pour éviter d'avoir à saisir votre mot de passe à chaque fois que vous "
 "utilisez votre compte CVS/SSH, vous pouvez déposer votre clé publique ici et "
-"elles seront placées sur le serveur CVS dans votre fichier ~/.ssh/"
+"elles seront placées sur le serveur dans votre fichier ~/.ssh/"
 "authorized_keys. Cette opération s'effectue à l'aide d'une tâche programmée "
-"et n'est donc pas instantanée. Attendez vous à un délai d'une heure."
+"et n'est donc pas instantanée. Attendez-vous à un délai d'une heure."
 
 #: www/account/editsshkeys.php:75
 msgid ""
@@ -14274,15 +14266,13 @@ msgstr ""
 "documentation de SSH pour plus d'informations sur le partage de clés."
 
 #: www/account/editsshkeys.php:76
-#, fuzzy
 msgid ""
 "Important: Make sure there are no line breaks. After submitting, verify that "
 "the number of keys in your file is what you expected."
 msgstr ""
-"Clés autorisées :<br /><em>Important: Vérifiez qu'il n'y ait pas de retour à "
-"la ligne sauf pour séparer les différentes clés. Après avoir validé, "
-"vérifiez que le nombre de clés dans le fichier correspond bien à ce que vous "
-"attendiez.</em>"
+"Important : vérifiez qu'il n'y a pas de retour à la ligne. Après avoir "
+"validé, vérifiez que le nombre de clés dans le fichier correspond bien à ce "
+"que vous attendiez."
 
 #: www/account/editsshkeys.php:82
 msgid ""
@@ -14570,10 +14560,10 @@ msgid "Send Lost PW Hash"
 msgstr "Envoyer une clé de hachage pour mot de passe perdu"
 
 #: www/account/pending-resend.php:31
-#, fuzzy
 msgid "Missing Parameter. You must provide a login name or an email address."
 msgstr ""
-"Paramètre manquant : vous devez indiquer à qui le message doit être adressé."
+"Paramètre manquant : vous devez fournir un identifiant d'utilisateur ou une "
+"adresse électronique."
 
 #: www/account/pending-resend.php:38
 msgid "That user does not exist."
@@ -14871,12 +14861,12 @@ msgstr ""
 "référencé dans une version de fichier."
 
 #: www/admin/admin_table.php:126
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "You can't delete the license %s since it is currently referenced in a "
 "project."
 msgstr ""
-"Vous ne pouvez pas supprimer la licence %1$s car elle est actuellement "
+"Vous ne pouvez pas supprimer la licence %s car elle est actuellement "
 "référencée dans un projet."
 
 #: www/admin/admin_table.php:134
@@ -15335,9 +15325,9 @@ msgid "User Maintenance"
 msgstr "Gestion des utilisateurs"
 
 #: www/admin/index.php:50
-#, fuzzy, php-format
+#, php-format
 msgid "Active site users: <strong>%d</strong>"
-msgstr "Utilisateurs actifs : <strong>%1$s</strong>"
+msgstr "Utilisateurs actifs : <strong>%d</strong>"
 
 #: www/admin/index.php:53
 msgid "Display Full User List/Edit Users"
@@ -15824,9 +15814,8 @@ msgid "Real Name"
 msgstr "Nom complet"
 
 #: www/admin/search.php:96
-#, fuzzy
 msgid "No user found."
-msgstr "Aucun résultat trouvé"
+msgstr "Aucun utilisateur trouvé."
 
 #: www/admin/search.php:145
 #, php-format
@@ -16050,21 +16039,21 @@ msgstr "Je confirme la suppression de cet utilisateur"
 #: www/admin/useredit.php:238
 msgid ""
 "This pages allows to change only direct properties of user object. To edit "
-"properties pertinent to user within specific group, visit admin page of that "
-"group (below)."
+"properties pertinent to user within specific project, visit admin page of "
+"that project (below)."
 msgstr ""
 "Cette page permet uniquement de changer les propriétés directes d'un "
-"utilisateur. Pour éditer les propriétés d'un utilisateur au sein d'un groupe "
-"spécifique, rendez vous sur la page d'administration de ce groupe (voir ci-"
-"dessous)."
+"utilisateur. Pour modifier les propriétés d'un utilisateur au sein d'un "
+"projet spécifique, rendez-vous sur la page d'administration de ce projet "
+"(voir ci-dessous)."
 
 #: www/admin/useredit.php:245
 msgid ""
-"Unix status updated mirroring web status, unless it has value 'No unix "
-"account (N)'"
+"Unix status updated mirroring web status, unless it has value “No Unix "
+"account (N)”"
 msgstr ""
-"Statut Unix mis à jour en copiant le statut web, sauf s'il a la valeur 'Pas "
-"de compte Unix (N)'."
+"Statut Unix mis à jour en copiant le statut web, sauf s'il a la valeur « Pas "
+"de compte Unix (N) »."
 
 #: www/admin/useredit.php:253
 msgid "Projects Membership"
@@ -19786,23 +19775,20 @@ msgid "Error in PTF: "
 msgstr "Erreur dans la ProjectTaskFactory : "
 
 #: www/pm/ganttpage.php:244
-#, fuzzy
 msgid "task summary"
-msgstr "Résumé des tâches"
+msgstr "résumé de la tâche"
 
 #: www/pm/ganttpage.php:245
-#, fuzzy
 msgid "start"
-msgstr "Début"
+msgstr "début"
 
 #: www/pm/ganttpage.php:246
-#, fuzzy
 msgid "end"
-msgstr "Envoyer"
+msgstr "fin"
 
 #: www/pm/ganttpage.php:247
 msgid "dur."
-msgstr ""
+msgstr "durée"
 
 #: www/pm/ganttpage.php:248
 msgid "dep."
@@ -20759,15 +20745,15 @@ msgstr ""
 "strong>.  %3$s n'héberge pas de messagerie électronique (MX) ni de DNS."
 
 #: www/project/admin/vhost.php:112
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Clicking on “Create” will schedule the creation of the Virtual Host.  This "
 "will be synced to the project webservers - such that <em>yourhost.org</em> "
 "will display the material at <em>%1$s.%2$s</em>."
 msgstr ""
 "Un clic sur « Créer » déclenchera la procédure de création de l'hôte "
-"virtuel.  Cet hôte virtuel sera un alias pour le site web du projet, c'est-à-"
-"dire que <em>votre.domaine.org</em> aura le même contenu que <em>%1$s.%2$s</ "
+"virtuel. Cet hôte virtuel sera un alias pour le site web du projet, c'est-à-"
+"dire que <em>votre.domaine.org</em> aura le même contenu que <em>%1$s.%2$s</"
 "em>."
 
 #: www/project/admin/vhost.php:120
@@ -20920,7 +20906,7 @@ msgstr ""
 "les champs sont obligatoires."
 
 #: www/register/index.php:183
-msgid "Project full name"
+msgid "Project Full Name"
 msgstr "Nom complet du projet"
 
 #: www/register/index.php:185
@@ -20959,25 +20945,24 @@ msgid "Project Public Description"
 msgstr "Description publique du projet"
 
 #: www/register/index.php:207
-#, fuzzy
 msgid ""
 "This is the description of your project which will be shown on the Project "
 "Summary page, in search results, etc."
 msgstr ""
-"C'est la description de votre projet qui apparaîtra sur la page de résumé du "
-"projet, dans les résultats des recherches, etc. La longueur maximale est de "
-"255 caractères."
+"C'est la description de votre projet qui apparaîtra sur la page 'résumé du "
+"projet', dans les résultats des recherches, etc."
 
 #: www/register/index.php:215
 msgid ""
-"In addition to full project name, you will need to choose short, \"Unix\" "
-"name for your project."
+"In addition to full project name, you will need to choose short, “Unix” name "
+"for your project."
 msgstr ""
-"En plus du nom complet du projet, vous devez choisir un nom « Unix » court."
+"En plus du nom complet du projet, vous devez choisir un nom « Unix » court "
+"pour votre projet."
 
 #: www/register/index.php:216
 msgid ""
-"The \"Unix Name\" has several restrictions because it is used in so many "
+"The “Unix Name” has several restrictions because it is used in so many "
 "places around the site. They are:"
 msgstr ""
 "Du fait de son utilisation à de nombreux endroits sur le site, le « nom "
@@ -21912,8 +21897,9 @@ msgstr ""
 "des scripts, et des fonctions avec la communauté."
 
 #: www/snippet/index.php:52
+#, fuzzy
 msgid ""
-"You can create a \"new snippet\", then post additional versions of that "
+"You can create a “new snippet”, then post additional versions of that "
 "snippet quickly and easily."
 msgstr ""
 "Vous pouvez créer un nouvel échantillon, puis le faire évoluer en publiant "
@@ -21921,12 +21907,11 @@ msgstr ""
 
 #: www/snippet/index.php:54
 msgid ""
-"Once you have snippets posted, you can then create a \"Package\" of "
-"snippets. That package can contain multiple, specific versions of other "
-"snippets."
+"Once you have snippets posted, you can then create a “Package” of snippets. "
+"That package can contain multiple, specific versions of other snippets."
 msgstr ""
 "Une fois que des échantillons ont été publiés, il est possible de les "
-"rassembler en « paquets ».  Chaque paquet peut contenir différentes versions "
+"rassembler en « paquets ». Chaque paquet peut contenir différentes versions "
 "de différents échantillons de code."
 
 #: www/snippet/index.php:56
@@ -23083,6 +23068,94 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
+#~ msgid ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific group, visit admin page "
+#~ "of that group (below)."
+#~ msgstr ""
+#~ "Cette page permet uniquement de changer les propriétés directes d'un "
+#~ "utilisateur. Pour éditer les propriétés d'un utilisateur au sein d'un "
+#~ "groupe spécifique, rendez vous sur la page d'administration de ce groupe "
+#~ "(voir ci-dessous)."
+
+#~ msgid ""
+#~ "Unix status updated mirroring web status, unless it has value 'No unix "
+#~ "account (N)'"
+#~ msgstr ""
+#~ "Statut Unix mis à jour en copiant le statut web, sauf s'il a la valeur "
+#~ "'Pas de compte Unix (N)'."
+
+#~ msgid "Project full name"
+#~ msgstr "Nom complet du projet"
+
+#~ msgid ""
+#~ "In addition to full project name, you will need to choose short, \"Unix\" "
+#~ "name for your project."
+#~ msgstr ""
+#~ "En plus du nom complet du projet, vous devez choisir un nom « Unix » "
+#~ "court."
+
+#~ msgid ""
+#~ "The \"Unix Name\" has several restrictions because it is used in so many "
+#~ "places around the site. They are:"
+#~ msgstr ""
+#~ "Du fait de son utilisation à de nombreux endroits sur le site, le « nom "
+#~ "Unix » est soumis à plusieurs restrictions :"
+
+#~ msgid ""
+#~ "Once you have snippets posted, you can then create a \"Package\" of "
+#~ "snippets. That package can contain multiple, specific versions of other "
+#~ "snippets."
+#~ msgstr ""
+#~ "Une fois que des échantillons ont été publiés, il est possible de les "
+#~ "rassembler en « paquets ».  Chaque paquet peut contenir différentes "
+#~ "versions de différents échantillons de code."
+
+#~ msgid "Error in Trove Operation : %s"
+#~ msgstr "Erreur lors d'une opération sur l'arbre : %s"
+
+#~ msgid "File(s) successfully uploaded, you can now share it for one month."
+#~ msgstr ""
+#~ "Le(s) fichier(s) a été téléchargé avec succès, vous pouvez maintenant le "
+#~ "partager pendant un mois."
+
+#~ msgid ""
+#~ "This file exchange service is opened to everyone and can host files up to "
+#~ "%s."
+#~ msgstr ""
+#~ "Le service de partage de fichiers est ouvert à tous et peut contenir des "
+#~ "fichiers jusqu'à %s."
+
+#~ msgid ""
+#~ "Your file(s) will stay accessible for 1 month and will be removed after."
+#~ msgstr ""
+#~ "Vos fichiers seront accessibles pendant un mois et supprimés ensuite."
+
+#~ msgid "Your file is now accessible using the following link"
+#~ msgstr "Votre fichier est maintenant accessible par le lien suivant"
+
+#~ msgid "Your files are now accessible using the following links"
+#~ msgstr "Vos fichiers sont maintenant accessibles par les liens suivants"
+
+#~ msgid ""
+#~ "Disclaimer: Do not use this file sharing service for hosting confidential "
+#~ "files."
+#~ msgstr ""
+#~ "Avertissement: n'utilisez pas ce service de partage de fichiers pour "
+#~ "l'hébergement de fichiers confidentiels."
+
+#~ msgid "artifact"
+#~ msgstr "élément"
+
+#~ msgid "Wikiconverter Plugin"
+#~ msgstr "Greffon Wikiconverter"
+
+#~ msgid "This mailing list is accessible to Internet users."
+#~ msgstr "Cette liste est accessible à des utilisateurs extérieurs."
+
+#~ msgid "User update failed: %s"
+#~ msgstr "La mise à jour de cet utilisateur a échoué : %s"
+
 #~ msgid "Add/Edit Categories"
 #~ msgstr "Ajouter/Éditer catégories"
 
@@ -23523,10 +23596,6 @@ msgstr "Page personnelle de %s"
 #~ msgid "Error In Trove Operation"
 #~ msgstr "Erreur lors d'une opération sur l'arbre"
 
-#, fuzzy
-#~ msgid "Error in Trove Operation : %s"
-#~ msgstr "Erreur lors d'une opération sur l'arbre : %s"
-
 #~ msgid "Email Addr:"
 #~ msgstr "Adresse e-mail :"
 
@@ -23614,9 +23683,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "La candidature de votre projet sur %s a été acceptée."
-
-#~ msgid "Project Full Name"
-#~ msgstr "Nom complet du projet"
 
 #~ msgid ""
 #~ "If you visit your own project page in %s while logged in, you will find "
@@ -25871,16 +25937,6 @@ msgstr "Page personnelle de %s"
 #~ "Recherche de projets selon les critères <em>%s</em> : %d résultat"
 #~ msgstr[1] ""
 #~ "Recherche de projets selon les critères <em>%s</em> : %d résultats"
-
-#~ msgid ""
-#~ "This pages allows to change only direct properties of user object. To "
-#~ "edit properties pertinent to user within specific project, visit admin "
-#~ "page of that project (below)."
-#~ msgstr ""
-#~ "Cette page permet uniquement de changer les propriétés directes d'un "
-#~ "utilisateur. Pour modifier les propriétés d'un utilisateur au sein d'un "
-#~ "projet spécifique, rendez-vous sur la page d'administration de ce projet "
-#~ "(voir ci-dessous)."
 
 #~ msgid ""
 #~ "Unix status updated mirroring web status, unless it has value 'No Unix "

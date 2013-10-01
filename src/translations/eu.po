@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 14:37+0200\n"
+"POT-Creation-Date: 2013-10-01 14:43+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16374,8 +16374,8 @@ msgstr ""
 #: www/admin/useredit.php:238
 msgid ""
 "This pages allows to change only direct properties of user object. To edit "
-"properties pertinent to user within specific group, visit admin page of that "
-"group (below)."
+"properties pertinent to user within specific project, visit admin page of "
+"that project (below)."
 msgstr ""
 "Orri hauek erabiltzailearen ezaugarriak aldatzea ahalbideratzen dute. Talde "
 "bateko erabiltzailearen ezaugarriak editatzeko administrazio, dagokion "
@@ -16383,11 +16383,11 @@ msgstr ""
 
 #: www/admin/useredit.php:245
 msgid ""
-"Unix status updated mirroring web status, unless it has value 'No unix "
-"account (N)'"
+"Unix status updated mirroring web status, unless it has value “No Unix "
+"account (N)”"
 msgstr ""
 "Unix egoera eguneratua webgunea isladatzen (\"mirroring\") zen bitartean, "
-"bestela ondorengo balio du 'Ez du unix (N) konturik'"
+"bestela ondorengo balio du 'Ez du Unix (N) konturik'"
 
 #: www/admin/useredit.php:253
 #, fuzzy
@@ -21231,9 +21231,8 @@ msgstr ""
 "ulerterrezak zehaztasunez. Eremu guztiak derrigorrezkoak dira."
 
 #: www/register/index.php:183
-#, fuzzy
-msgid "Project full name"
-msgstr "Azpiproiektuaren izen berria"
+msgid "Project Full Name"
+msgstr "Egitasmoaren izen osoa"
 
 #: www/register/index.php:185
 msgid ""
@@ -21281,13 +21280,13 @@ msgstr ""
 
 #: www/register/index.php:215
 msgid ""
-"In addition to full project name, you will need to choose short, \"Unix\" "
-"name for your project."
+"In addition to full project name, you will need to choose short, “Unix” name "
+"for your project."
 msgstr ""
 
 #: www/register/index.php:216
 msgid ""
-"The \"Unix Name\" has several restrictions because it is used in so many "
+"The “Unix Name” has several restrictions because it is used in so many "
 "places around the site. They are:"
 msgstr ""
 
@@ -22198,15 +22197,14 @@ msgstr ""
 
 #: www/snippet/index.php:52
 msgid ""
-"You can create a \"new snippet\", then post additional versions of that "
+"You can create a “new snippet”, then post additional versions of that "
 "snippet quickly and easily."
 msgstr ""
 
 #: www/snippet/index.php:54
 msgid ""
-"Once you have snippets posted, you can then create a \"Package\" of "
-"snippets. That package can contain multiple, specific versions of other "
-"snippets."
+"Once you have snippets posted, you can then create a “Package” of snippets. "
+"That package can contain multiple, specific versions of other snippets."
 msgstr ""
 
 #: www/snippet/index.php:56
@@ -23375,6 +23373,26 @@ msgstr "Ez da erabiltzaile-izenik eman"
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
 
+#~ msgid ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific group, visit admin page "
+#~ "of that group (below)."
+#~ msgstr ""
+#~ "Orri hauek erabiltzailearen ezaugarriak aldatzea ahalbideratzen dute. "
+#~ "Talde bateko erabiltzailearen ezaugarriak editatzeko administrazio, "
+#~ "dagokion taldeko administrariaren atala bisita ezazu (beheran)."
+
+#~ msgid ""
+#~ "Unix status updated mirroring web status, unless it has value 'No unix "
+#~ "account (N)'"
+#~ msgstr ""
+#~ "Unix egoera eguneratua webgunea isladatzen (\"mirroring\") zen bitartean, "
+#~ "bestela ondorengo balio du 'Ez du unix (N) konturik'"
+
+#, fuzzy
+#~ msgid "Project full name"
+#~ msgstr "Azpiproiektuaren izen berria"
+
 #~ msgid "Add/Edit Categories"
 #~ msgstr "Kategoriak gehitu/argitaratu"
 
@@ -23762,9 +23780,6 @@ msgstr "Nere orri pertsonala"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "Zure proiektua %s -n onartua izan da."
-
-#~ msgid "Project Full Name"
-#~ msgstr "Egitasmoaren izen osoa"
 
 #~ msgid ""
 #~ "If you visit your own project page in %s while logged in, you will find "
@@ -24482,15 +24497,6 @@ msgstr "Nere orri pertsonala"
 
 #~ msgid "Active site users: <strong>%1$s</strong>"
 #~ msgstr "Tokiaren erabiltzaile aktiboak: <strong>%1$s</strong>"
-
-#~ msgid ""
-#~ "This pages allows to change only direct properties of user object. To "
-#~ "edit properties pertinent to user within specific project, visit admin "
-#~ "page of that project (below)."
-#~ msgstr ""
-#~ "Orri hauek erabiltzailearen ezaugarriak aldatzea ahalbideratzen dute. "
-#~ "Talde bateko erabiltzailearen ezaugarriak editatzeko administrazio, "
-#~ "dagokion taldeko administrariaren atala bisita ezazu (beheran)."
 
 #~ msgid "Suspend"
 #~ msgstr "Suspenditua"

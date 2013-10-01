@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 14:37+0200\n"
+"POT-Creation-Date: 2013-10-01 14:43+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16480,8 +16480,8 @@ msgstr "Voglio rimuovere questo utente"
 #: www/admin/useredit.php:238
 msgid ""
 "This pages allows to change only direct properties of user object. To edit "
-"properties pertinent to user within specific group, visit admin page of that "
-"group (below)."
+"properties pertinent to user within specific project, visit admin page of "
+"that project (below)."
 msgstr ""
 "Questa pagina permette di cambiare solo attributi diretti di un utente. Per "
 "modificare le informazioni dell'utente relative a un particolare progetto, "
@@ -16489,11 +16489,11 @@ msgstr ""
 
 #: www/admin/useredit.php:245
 msgid ""
-"Unix status updated mirroring web status, unless it has value 'No unix "
-"account (N)'"
+"Unix status updated mirroring web status, unless it has value “No Unix "
+"account (N)”"
 msgstr ""
 "L'attivazione dell'account Unix è legato a quella dell'account web, a meno "
-"che non sia impostato a 'Nessun account UNIX (N)'"
+"che non sia impostato a 'Nessun account Unix (N)'"
 
 #: www/admin/useredit.php:253
 #, fuzzy
@@ -21373,9 +21373,8 @@ msgstr ""
 "Tutti i campi sono obbligatori."
 
 #: www/register/index.php:183
-#, fuzzy
-msgid "Project full name"
-msgstr "Nome progetto"
+msgid "Project Full Name"
+msgstr "Nome completo del progetto"
 
 #: www/register/index.php:185
 msgid ""
@@ -21420,13 +21419,13 @@ msgstr ""
 
 #: www/register/index.php:215
 msgid ""
-"In addition to full project name, you will need to choose short, \"Unix\" "
-"name for your project."
+"In addition to full project name, you will need to choose short, “Unix” name "
+"for your project."
 msgstr ""
 
 #: www/register/index.php:216
 msgid ""
-"The \"Unix Name\" has several restrictions because it is used in so many "
+"The “Unix Name” has several restrictions because it is used in so many "
 "places around the site. They are:"
 msgstr ""
 
@@ -22353,15 +22352,14 @@ msgstr ""
 
 #: www/snippet/index.php:52
 msgid ""
-"You can create a \"new snippet\", then post additional versions of that "
+"You can create a “new snippet”, then post additional versions of that "
 "snippet quickly and easily."
 msgstr ""
 
 #: www/snippet/index.php:54
 msgid ""
-"Once you have snippets posted, you can then create a \"Package\" of "
-"snippets. That package can contain multiple, specific versions of other "
-"snippets."
+"Once you have snippets posted, you can then create a “Package” of snippets. "
+"That package can contain multiple, specific versions of other snippets."
 msgstr ""
 
 #: www/snippet/index.php:56
@@ -23536,6 +23534,27 @@ msgstr "Non è stato inserito alcun file"
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
 
+#~ msgid ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific group, visit admin page "
+#~ "of that group (below)."
+#~ msgstr ""
+#~ "Questa pagina permette di cambiare solo attributi diretti di un utente. "
+#~ "Per modificare le informazioni dell'utente relative a un particolare "
+#~ "progetto, visita la pagina di amministrazione del progetto in questione "
+#~ "(vedi sotto)."
+
+#~ msgid ""
+#~ "Unix status updated mirroring web status, unless it has value 'No unix "
+#~ "account (N)'"
+#~ msgstr ""
+#~ "L'attivazione dell'account Unix è legato a quella dell'account web, a "
+#~ "meno che non sia impostato a 'Nessun account UNIX (N)'"
+
+#, fuzzy
+#~ msgid "Project full name"
+#~ msgstr "Nome progetto"
+
 #~ msgid "Add/Edit Categories"
 #~ msgstr "Aggiungi/modifica categorie"
 
@@ -23946,9 +23965,6 @@ msgstr "Pagina Personale"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "Il tuo progetto su %s e' stato approvato."
-
-#~ msgid "Project Full Name"
-#~ msgstr "Nome completo del progetto"
 
 #~ msgid ""
 #~ "If you visit your own project page in %s while logged in, you will find "
@@ -24822,16 +24838,6 @@ msgstr "Pagina Personale"
 
 #~ msgid "Active site users: <strong>%1$s</strong>"
 #~ msgstr "Utenti attivi: <strong>%1$s</strong>"
-
-#~ msgid ""
-#~ "This pages allows to change only direct properties of user object. To "
-#~ "edit properties pertinent to user within specific project, visit admin "
-#~ "page of that project (below)."
-#~ msgstr ""
-#~ "Questa pagina permette di cambiare solo attributi diretti di un utente. "
-#~ "Per modificare le informazioni dell'utente relative a un particolare "
-#~ "progetto, visita la pagina di amministrazione del progetto in questione "
-#~ "(vedi sotto)."
 
 #~ msgid "Suspend"
 #~ msgstr "Sospeso"

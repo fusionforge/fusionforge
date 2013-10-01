@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 14:37+0200\n"
+"POT-Creation-Date: 2013-10-01 14:43+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16285,17 +16285,15 @@ msgstr ""
 #: www/admin/useredit.php:238
 msgid ""
 "This pages allows to change only direct properties of user object. To edit "
-"properties pertinent to user within specific group, visit admin page of that "
-"group (below)."
+"properties pertinent to user within specific project, visit admin page of "
+"that project (below)."
 msgstr ""
-"This pages allows to change only direct properties of user object. To edit "
-"properties pertinent to user within specific group, visit admin page of that "
-"group (below)."
 
 #: www/admin/useredit.php:245
+#, fuzzy
 msgid ""
-"Unix status updated mirroring web status, unless it has value 'No unix "
-"account (N)'"
+"Unix status updated mirroring web status, unless it has value “No Unix "
+"account (N)”"
 msgstr ""
 "Unix status updated mirroring web status, unless it has value 'No unix "
 "account (N)'"
@@ -21110,7 +21108,7 @@ msgstr ""
 
 #: www/register/index.php:183
 #, fuzzy
-msgid "Project full name"
+msgid "Project Full Name"
 msgstr "새 프로젝트 이름"
 
 #: www/register/index.php:185
@@ -21159,13 +21157,13 @@ msgstr ""
 
 #: www/register/index.php:215
 msgid ""
-"In addition to full project name, you will need to choose short, \"Unix\" "
-"name for your project."
+"In addition to full project name, you will need to choose short, “Unix” name "
+"for your project."
 msgstr ""
 
 #: www/register/index.php:216
 msgid ""
-"The \"Unix Name\" has several restrictions because it is used in so many "
+"The “Unix Name” has several restrictions because it is used in so many "
 "places around the site. They are:"
 msgstr ""
 
@@ -22080,15 +22078,14 @@ msgstr ""
 
 #: www/snippet/index.php:52
 msgid ""
-"You can create a \"new snippet\", then post additional versions of that "
+"You can create a “new snippet”, then post additional versions of that "
 "snippet quickly and easily."
 msgstr ""
 
 #: www/snippet/index.php:54
 msgid ""
-"Once you have snippets posted, you can then create a \"Package\" of "
-"snippets. That package can contain multiple, specific versions of other "
-"snippets."
+"Once you have snippets posted, you can then create a “Package” of snippets. "
+"That package can contain multiple, specific versions of other snippets."
 msgstr ""
 
 #: www/snippet/index.php:56
@@ -23249,6 +23246,19 @@ msgstr "사용자ID"
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
 
+#~ msgid ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific group, visit admin page "
+#~ "of that group (below)."
+#~ msgstr ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific group, visit admin page "
+#~ "of that group (below)."
+
+#, fuzzy
+#~ msgid "Project full name"
+#~ msgstr "새 프로젝트 이름"
+
 #~ msgid "Add/Edit Categories"
 #~ msgstr "분류 더하기/고치기"
 
@@ -23592,10 +23602,6 @@ msgstr "개인 페이지"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "%s에 신청하신 프로젝트가 승인되었습니다."
-
-#, fuzzy
-#~ msgid "Project Full Name"
-#~ msgstr "새 프로젝트 이름"
 
 #~ msgid "%s Project Approved"
 #~ msgstr "%s 프로젝트가 승인되었습니다."

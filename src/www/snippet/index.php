@@ -49,9 +49,9 @@ function snippet_mainpage() {
 	$return = '<p>'
       . _('The purpose of this archive is to let you share your code snippets, scripts, and functions with the Open Source Software Community.')
       . '</p><p>'
-      . _('You can create a "new snippet", then post additional versions of that snippet quickly and easily.')
+      . _('You can create a “new snippet”, then post additional versions of that snippet quickly and easily.')
       . '</p><p>'
-      . _('Once you have snippets posted, you can then create a "Package" of snippets. That package can contain multiple, specific versions of other snippets.')
+      . _('Once you have snippets posted, you can then create a “Package” of snippets. That package can contain multiple, specific versions of other snippets.')
       . '</p><h3>'
       . _('Browse Snippets')
       . '</h3><p>'

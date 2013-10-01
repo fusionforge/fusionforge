@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 14:37+0200\n"
+"POT-Creation-Date: 2013-10-01 14:43+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15174,8 +15174,8 @@ msgstr ""
 #: www/admin/useredit.php:238
 msgid ""
 "This pages allows to change only direct properties of user object. To edit "
-"properties pertinent to user within specific group, visit admin page of that "
-"group (below)."
+"properties pertinent to user within specific project, visit admin page of "
+"that project (below)."
 msgstr ""
 "Estas páginas permitem alterar apenas propriedades diretas do objeto "
 "usuário. Para editar propriedades pertinentes ao usuário relativas a um "
@@ -15183,11 +15183,11 @@ msgstr ""
 
 #: www/admin/useredit.php:245
 msgid ""
-"Unix status updated mirroring web status, unless it has value 'No unix "
-"account (N)'"
+"Unix status updated mirroring web status, unless it has value “No Unix "
+"account (N)”"
 msgstr ""
 "Estado do Unix atualizado espelhando o estado da web, a menos que tenha o "
-"valor 'Sem conta unix (N)'"
+"valor 'Sem conta Unix (N)'"
 
 #: www/admin/useredit.php:253
 msgid "Projects Membership"
@@ -19782,8 +19782,8 @@ msgstr ""
 "dados completos e compreensíveis. Todos os cambos abaixo são obrigatórios."
 
 #: www/register/index.php:183
-msgid "Project full name"
-msgstr ""
+msgid "Project Full Name"
+msgstr "Nome Completo do Projeto"
 
 #: www/register/index.php:185
 msgid ""
@@ -19821,13 +19821,13 @@ msgstr ""
 
 #: www/register/index.php:215
 msgid ""
-"In addition to full project name, you will need to choose short, \"Unix\" "
-"name for your project."
+"In addition to full project name, you will need to choose short, “Unix” name "
+"for your project."
 msgstr ""
 
 #: www/register/index.php:216
 msgid ""
-"The \"Unix Name\" has several restrictions because it is used in so many "
+"The “Unix Name” has several restrictions because it is used in so many "
 "places around the site. They are:"
 msgstr ""
 
@@ -20698,15 +20698,14 @@ msgstr ""
 
 #: www/snippet/index.php:52
 msgid ""
-"You can create a \"new snippet\", then post additional versions of that "
+"You can create a “new snippet”, then post additional versions of that "
 "snippet quickly and easily."
 msgstr ""
 
 #: www/snippet/index.php:54
 msgid ""
-"Once you have snippets posted, you can then create a \"Package\" of "
-"snippets. That package can contain multiple, specific versions of other "
-"snippets."
+"Once you have snippets posted, you can then create a “Package” of snippets. "
+"That package can contain multiple, specific versions of other snippets."
 msgstr ""
 
 #: www/snippet/index.php:56
@@ -21809,6 +21808,22 @@ msgstr ""
 msgid "Personal Page for %s"
 msgstr "Minha Página Pessoal"
 
+#~ msgid ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific group, visit admin page "
+#~ "of that group (below)."
+#~ msgstr ""
+#~ "Estas páginas permitem alterar apenas propriedades diretas do objeto "
+#~ "usuário. Para editar propriedades pertinentes ao usuário relativas a um "
+#~ "grupo específico, visite a página de administração desse grupo (abaixo)."
+
+#~ msgid ""
+#~ "Unix status updated mirroring web status, unless it has value 'No unix "
+#~ "account (N)'"
+#~ msgstr ""
+#~ "Estado do Unix atualizado espelhando o estado da web, a menos que tenha o "
+#~ "valor 'Sem conta unix (N)'"
+
 #~ msgid "Add/Edit Categories"
 #~ msgstr "Adicionar/Editar Categorias"
 
@@ -21996,9 +22011,6 @@ msgstr "Minha Página Pessoal"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "O registro do seu projeto para o %s foi aprovado."
-
-#~ msgid "Project Full Name"
-#~ msgstr "Nome Completo do Projeto"
 
 #~ msgid ""
 #~ "If you visit your own project page in %s while logged in, you will find "
@@ -22368,15 +22380,6 @@ msgstr "Minha Página Pessoal"
 
 #~ msgid "Other Information"
 #~ msgstr "Outras Informações"
-
-#~ msgid ""
-#~ "This pages allows to change only direct properties of user object. To "
-#~ "edit properties pertinent to user within specific project, visit admin "
-#~ "page of that project (below)."
-#~ msgstr ""
-#~ "Estas páginas permitem alterar apenas propriedades diretas do objeto "
-#~ "usuário. Para editar propriedades pertinentes ao usuário relativas a um "
-#~ "grupo específico, visite a página de administração desse grupo (abaixo)."
 
 #~ msgid "Suspend"
 #~ msgstr "Suspenso"

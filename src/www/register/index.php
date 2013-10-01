@@ -180,7 +180,7 @@ site_user_header(array('title'=>_('Register Project')));
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
-<h2><?php echo $index++.'. '._('Project full name') ?></h2>
+<h2><?php echo $index++.'. '._('Project Full Name') ?></h2>
 <p>
 <?php echo _('You should start with specifying the name of your project. The “Full Name” is descriptive, and has no arbitrary restrictions (except a 40 character limit).') ?>
 </p>
@@ -212,8 +212,8 @@ if ( !forge_get_config ('project_auto_approval') ) {
 </textarea>
 
 <h2><?php echo $index++.'. '._('Project Unix Name') ?></h2>
-<p><?php echo _('In addition to full project name, you will need to choose short, "Unix" name for your project.') ?></p>
-<p><?php echo _('The "Unix Name" has several restrictions because it is used in so many places around the site. They are:') ?></p>
+<p><?php echo _('In addition to full project name, you will need to choose short, “Unix” name for your project.') ?></p>
+<p><?php echo _('The “Unix Name” has several restrictions because it is used in so many places around the site. They are:') ?></p>
 <ul>
 <li><?php echo _('cannot match the Unix name of any other project;') ?></li>
 <li><?php echo _('must be between 3 and 15 characters in length;') ?></li>

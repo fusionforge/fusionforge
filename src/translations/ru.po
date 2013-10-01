@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 14:37+0200\n"
+"POT-Creation-Date: 2013-10-01 14:43+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16734,17 +16734,18 @@ msgstr "Я хочу удалить этого участника"
 #: www/admin/useredit.php:238
 msgid ""
 "This pages allows to change only direct properties of user object. To edit "
-"properties pertinent to user within specific group, visit admin page of that "
-"group (below)."
+"properties pertinent to user within specific project, visit admin page of "
+"that project (below)."
 msgstr ""
 "Эти страницы только для прямого изменения свойств пользовательского объекта. "
 "Для изменения свойств соответствующего пользователю специфичной группы, "
-"следуйте на страницу управления той группы"
+"следуйте на страницу управления той группы."
 
 #: www/admin/useredit.php:245
+#, fuzzy
 msgid ""
-"Unix status updated mirroring web status, unless it has value 'No unix "
-"account (N)'"
+"Unix status updated mirroring web status, unless it has value “No Unix "
+"account (N)”"
 msgstr ""
 "Статус UNIX отражает статус сайта, безполезно если значение 'Нет аккаунта "
 "UNIX'"
@@ -21684,7 +21685,7 @@ msgstr ""
 
 #: www/register/index.php:183
 #, fuzzy
-msgid "Project full name"
+msgid "Project Full Name"
 msgstr "Название проекта"
 
 #: www/register/index.php:185
@@ -21736,13 +21737,13 @@ msgstr ""
 
 #: www/register/index.php:215
 msgid ""
-"In addition to full project name, you will need to choose short, \"Unix\" "
-"name for your project."
+"In addition to full project name, you will need to choose short, “Unix” name "
+"for your project."
 msgstr ""
 
 #: www/register/index.php:216
 msgid ""
-"The \"Unix Name\" has several restrictions because it is used in so many "
+"The “Unix Name” has several restrictions because it is used in so many "
 "places around the site. They are:"
 msgstr ""
 
@@ -22667,15 +22668,14 @@ msgstr ""
 
 #: www/snippet/index.php:52
 msgid ""
-"You can create a \"new snippet\", then post additional versions of that "
+"You can create a “new snippet”, then post additional versions of that "
 "snippet quickly and easily."
 msgstr ""
 
 #: www/snippet/index.php:54
 msgid ""
-"Once you have snippets posted, you can then create a \"Package\" of "
-"snippets. That package can contain multiple, specific versions of other "
-"snippets."
+"Once you have snippets posted, you can then create a “Package” of snippets. "
+"That package can contain multiple, specific versions of other snippets."
 msgstr ""
 
 #: www/snippet/index.php:56
@@ -23858,6 +23858,19 @@ msgstr "Имя участника обязательно"
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
 
+#~ msgid ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific group, visit admin page "
+#~ "of that group (below)."
+#~ msgstr ""
+#~ "Эти страницы только для прямого изменения свойств пользовательского "
+#~ "объекта. Для изменения свойств соответствующего пользователю специфичной "
+#~ "группы, следуйте на страницу управления той группы"
+
+#, fuzzy
+#~ msgid "Project full name"
+#~ msgstr "Название проекта"
+
 #~ msgid "Add/Edit Categories"
 #~ msgstr "Добавить/изменить категории"
 
@@ -24301,10 +24314,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "Регистрация вашего проекта %s одобрена."
-
-#, fuzzy
-#~ msgid "Project Full Name"
-#~ msgstr "Название проекта"
 
 #~ msgid "%s Project Approved"
 #~ msgstr "Проект %s утвержден"
@@ -25338,15 +25347,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "Active site users: <strong>%1$s</strong>"
 #~ msgstr "Активных участников сайта: <strong>%1$s</strong>"
-
-#~ msgid ""
-#~ "This pages allows to change only direct properties of user object. To "
-#~ "edit properties pertinent to user within specific project, visit admin "
-#~ "page of that project (below)."
-#~ msgstr ""
-#~ "Эти страницы только для прямого изменения свойств пользовательского "
-#~ "объекта. Для изменения свойств соответствующего пользователю специфичной "
-#~ "группы, следуйте на страницу управления той группы."
 
 #~ msgid "Suspend"
 #~ msgstr "Приостановлено"
@@ -27970,3 +27970,43 @@ msgstr "Персональная страница для %s"
 #~ "автора части в трекере.  Когда автор ответит, статус автоматичесски "
 #~ "перейдет в состояние 'Открыт'. Иначе, если автор неотвечает в течении "
 #~ "двух недель, то часть перейдет в состояние 'Удалено'."
+
+#~ msgid ""
+#~ "<p>The purpose of this archive is to let you share your code snippets, "
+#~ "scripts,\tand functions with the Open Source Software Community.</"
+#~ "p><p>You can create a \"new snippet\", then post additional versions of "
+#~ "that snippet quickly and easily.</p><p>Once you have snippets posted, you "
+#~ "can then create a “Package” of snippets. That package can contain "
+#~ "multiple, specific versions of other snippets.</p><p></p><h3>Browse "
+#~ "Snippets</h3>\t<p>You can browse the snippet library quickly:</p>"
+#~ msgstr ""
+#~ "<p>Назначение данной страницы архивов библиотеки, скриптов, заметок и "
+#~ "отдельных частей открытого исходного кода,\t функций, с другими "
+#~ "участниками и пользователями Сообщества Программного Обеспечения "
+#~ "Открытого Типа.</p><p>Здесь Вы можете создать\"новую страничку к "
+#~ "библиотеке\", которая возможно будет полезна другим пользователям.</"
+#~ "p><p>Как только ваша страничка примечаний оформлена, Вы можете создать "
+#~ "\"буклет\" с примечаниями и вырезками. Такой буклет может содержать "
+#~ "разделы по тематикам, различным версиям вырезок.</p><p></p><h3>Навигация "
+#~ "в буклете</h3>\t<p>Вы можете таким способом быстро находить нужный "
+#~ "участок библиотеки:</p>"
+
+#~ msgid ""
+#~ "<p>The purpose of this archive is to let you share your code snippets, "
+#~ "scripts,\tand functions with the Open Source Software Community.</"
+#~ "p><p>You can create a \"new snippet\", then post additional versions of "
+#~ "that snippet quickly and easily.</p><p>Once you have snippets posted, you "
+#~ "can then create a “Package” of snippets. That package can contain "
+#~ "multiple, specific versions of other snippets.</p><p>&nbsp;</p><h3>Browse "
+#~ "Snippets</h3>\t<p>You can browse the snippet library quickly:</p>"
+#~ msgstr ""
+#~ "<p>Назначение данной страницы архивов библиотеки, скриптов, заметок и "
+#~ "отдельных частей открытого исходного кода,\t функций, с другими "
+#~ "участниками и пользователями Сообщества Программного Обеспечения "
+#~ "Открытого Типа.</p><p>Здесь Вы можете создать\"новую страничку к "
+#~ "библиотеке\", которая возможно будет полезна другим пользователям.</"
+#~ "p><p>Как только ваша страничка примечаний оформлена, Вы можете создать "
+#~ "\"буклет\" с примечаниями и вырезками. Такой буклет может содержать "
+#~ "разделы по тематикам, различным версиям вырезок.</p><p>&nbsp;</"
+#~ "p><h3>Навигация в буклете</h3>\t<p>Вы можете таким способом быстро "
+#~ "находить нужный участок библиотеки:</p>"

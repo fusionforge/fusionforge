@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 14:37+0200\n"
+"POT-Creation-Date: 2013-10-01 14:43+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -16070,8 +16070,8 @@ msgstr "Quiero borrar este usuario"
 #: www/admin/useredit.php:238
 msgid ""
 "This pages allows to change only direct properties of user object. To edit "
-"properties pertinent to user within specific group, visit admin page of that "
-"group (below)."
+"properties pertinent to user within specific project, visit admin page of "
+"that project (below)."
 msgstr ""
 "Estas páginas te permiten cambiar propiedades de un usuario. Para editar las "
 "propiedades de un usuario dentro de un grupo, visite el apartado de "
@@ -16079,11 +16079,11 @@ msgstr ""
 
 #: www/admin/useredit.php:245
 msgid ""
-"Unix status updated mirroring web status, unless it has value 'No unix "
-"account (N)'"
+"Unix status updated mirroring web status, unless it has value “No Unix "
+"account (N)”"
 msgstr ""
 "Estado Unix actualizado mientras se mirroreaba el web, por el contrario "
-"tiene el valor 'No tiene cuenta unix (N)'"
+"tiene el valor 'No tiene cuenta Unix (N)'"
 
 #: www/admin/useredit.php:253
 msgid "Projects Membership"
@@ -20884,8 +20884,8 @@ msgstr ""
 "comprensibles. Todos los campos son necesarios."
 
 #: www/register/index.php:183
-msgid "Project full name"
-msgstr "Nombre completo del proyecto:"
+msgid "Project Full Name"
+msgstr "Nombre completo del proyecto"
 
 #: www/register/index.php:185
 #, fuzzy
@@ -20933,16 +20933,17 @@ msgstr ""
 "de búsquedas, etc. La máxima longitud es 255 caracteres."
 
 #: www/register/index.php:215
+#, fuzzy
 msgid ""
-"In addition to full project name, you will need to choose short, \"Unix\" "
-"name for your project."
+"In addition to full project name, you will need to choose short, “Unix” name "
+"for your project."
 msgstr ""
 "Además del nombre completo debe elegir un nombre corto, \"Unix\" para el "
 "proyecto."
 
 #: www/register/index.php:216
 msgid ""
-"The \"Unix Name\" has several restrictions because it is used in so many "
+"The “Unix Name” has several restrictions because it is used in so many "
 "places around the site. They are:"
 msgstr ""
 "El \"Nombre Unix\" tiene restricciones por que se utilizará en muchas partes "
@@ -21883,8 +21884,9 @@ msgstr ""
 "scripts y funciones con la Comunidad de Open Source."
 
 #: www/snippet/index.php:52
+#, fuzzy
 msgid ""
-"You can create a \"new snippet\", then post additional versions of that "
+"You can create a “new snippet”, then post additional versions of that "
 "snippet quickly and easily."
 msgstr ""
 "Ha podido crear un nuevo \"recorte\", luego publica versiones adicionales de "
@@ -21892,9 +21894,8 @@ msgstr ""
 
 #: www/snippet/index.php:54
 msgid ""
-"Once you have snippets posted, you can then create a \"Package\" of "
-"snippets. That package can contain multiple, specific versions of other "
-"snippets."
+"Once you have snippets posted, you can then create a “Package” of snippets. "
+"That package can contain multiple, specific versions of other snippets."
 msgstr ""
 "Una vez que tus recortes han sido publicados, puedes crear un \"Paquete\" de "
 "recortes. El paquete puede contener varias, versiones específicas de otros "
@@ -23055,6 +23056,41 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
 
+#~ msgid ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific group, visit admin page "
+#~ "of that group (below)."
+#~ msgstr ""
+#~ "Estas páginas te permiten cambiar propiedades de un usuario. Para editar "
+#~ "las propiedades de un usuario dentro de un grupo, visite el apartado de "
+#~ "administración de ese grupo (abajo)."
+
+#~ msgid ""
+#~ "Unix status updated mirroring web status, unless it has value 'No unix "
+#~ "account (N)'"
+#~ msgstr ""
+#~ "Estado Unix actualizado mientras se mirroreaba el web, por el contrario "
+#~ "tiene el valor 'No tiene cuenta unix (N)'"
+
+#~ msgid "Project full name"
+#~ msgstr "Nombre completo del proyecto:"
+
+#~ msgid ""
+#~ "The \"Unix Name\" has several restrictions because it is used in so many "
+#~ "places around the site. They are:"
+#~ msgstr ""
+#~ "El \"Nombre Unix\" tiene restricciones por que se utilizará en muchas "
+#~ "partes del sistema. Son:"
+
+#~ msgid ""
+#~ "Once you have snippets posted, you can then create a \"Package\" of "
+#~ "snippets. That package can contain multiple, specific versions of other "
+#~ "snippets."
+#~ msgstr ""
+#~ "Una vez que tus recortes han sido publicados, puedes crear un \"Paquete\" "
+#~ "de recortes. El paquete puede contener varias, versiones específicas de "
+#~ "otros recortes."
+
 #~ msgid "Add/Edit Categories"
 #~ msgstr "Añadir/Editar Categorias"
 
@@ -23497,9 +23533,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "El registro de su proyecto en %s ha sido aprobado."
-
-#~ msgid "Project Full Name"
-#~ msgstr "Nombre completo del proyecto"
 
 #~ msgid ""
 #~ "If you visit your own project page in %s while logged in, you will find "
@@ -24583,15 +24616,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Active site users: <strong>%1$s</strong>"
 #~ msgstr "Usuarios del sistema activos: <strong>%1$s</strong>"
-
-#~ msgid ""
-#~ "This pages allows to change only direct properties of user object. To "
-#~ "edit properties pertinent to user within specific project, visit admin "
-#~ "page of that project (below)."
-#~ msgstr ""
-#~ "Estas páginas te permiten cambiar propiedades de un usuario. Para editar "
-#~ "las propiedades de un usuario dentro de un grupo, visite el apartado de "
-#~ "administración de ese grupo (abajo)."
 
 #~ msgid "Suspend"
 #~ msgstr "Suspendido"

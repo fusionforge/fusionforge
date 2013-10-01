@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 14:37+0200\n"
+"POT-Creation-Date: 2013-10-01 14:43+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -16607,20 +16607,20 @@ msgstr "Desexo borrar este usuario "
 #: www/admin/useredit.php:238
 msgid ""
 "This pages allows to change only direct properties of user object. To edit "
-"properties pertinent to user within specific group, visit admin page of that "
-"group (below)."
+"properties pertinent to user within specific project, visit admin page of "
+"that project (below)."
 msgstr ""
 "Estas páxinas permiten cambiar só as propiedades directas dun usuario. Para "
 "editar as propiedades dun usuario dentro dun grupo específico, visite a "
-"páxina de administración dese grupo (abaixo). "
+"páxina de administración dese grupo (abaixo)."
 
 #: www/admin/useredit.php:245
 msgid ""
-"Unix status updated mirroring web status, unless it has value 'No unix "
-"account (N)'"
+"Unix status updated mirroring web status, unless it has value “No Unix "
+"account (N)”"
 msgstr ""
 "Actualizouse o estado de Unix mentres se facía réplica do estado do web; a "
-"non ser que teña o valor 'Non ten conta de unix (N)' "
+"non ser que teña o valor 'Non ten conta de Unix (N)'"
 
 #: www/admin/useredit.php:253
 #, fuzzy
@@ -21554,9 +21554,8 @@ msgstr ""
 "exhaustivos. Todos os campos inferiores son obrigatorios."
 
 #: www/register/index.php:183
-#, fuzzy
-msgid "Project full name"
-msgstr "Nome do proxecto"
+msgid "Project Full Name"
+msgstr "Nome completo de proxecto"
 
 #: www/register/index.php:185
 msgid ""
@@ -21605,13 +21604,13 @@ msgstr ""
 
 #: www/register/index.php:215
 msgid ""
-"In addition to full project name, you will need to choose short, \"Unix\" "
-"name for your project."
+"In addition to full project name, you will need to choose short, “Unix” name "
+"for your project."
 msgstr ""
 
 #: www/register/index.php:216
 msgid ""
-"The \"Unix Name\" has several restrictions because it is used in so many "
+"The “Unix Name” has several restrictions because it is used in so many "
 "places around the site. They are:"
 msgstr ""
 
@@ -22541,15 +22540,14 @@ msgstr ""
 
 #: www/snippet/index.php:52
 msgid ""
-"You can create a \"new snippet\", then post additional versions of that "
+"You can create a “new snippet”, then post additional versions of that "
 "snippet quickly and easily."
 msgstr ""
 
 #: www/snippet/index.php:54
 msgid ""
-"Once you have snippets posted, you can then create a \"Package\" of "
-"snippets. That package can contain multiple, specific versions of other "
-"snippets."
+"Once you have snippets posted, you can then create a “Package” of snippets. "
+"That package can contain multiple, specific versions of other snippets."
 msgstr ""
 
 #: www/snippet/index.php:56
@@ -23717,6 +23715,26 @@ msgstr "Non se introduciu un nome de usuario"
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
 
+#~ msgid ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific group, visit admin page "
+#~ "of that group (below)."
+#~ msgstr ""
+#~ "Estas páxinas permiten cambiar só as propiedades directas dun usuario. "
+#~ "Para editar as propiedades dun usuario dentro dun grupo específico, "
+#~ "visite a páxina de administración dese grupo (abaixo). "
+
+#~ msgid ""
+#~ "Unix status updated mirroring web status, unless it has value 'No unix "
+#~ "account (N)'"
+#~ msgstr ""
+#~ "Actualizouse o estado de Unix mentres se facía réplica do estado do web; "
+#~ "a non ser que teña o valor 'Non ten conta de unix (N)' "
+
+#, fuzzy
+#~ msgid "Project full name"
+#~ msgstr "Nome do proxecto"
+
 #~ msgid "Add/Edit Categories"
 #~ msgstr "Engadir/editar categorías"
 
@@ -24181,9 +24199,6 @@ msgstr "Páxina persoal de %s"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "Aprobouse o rexistro do proxecto %s."
-
-#~ msgid "Project Full Name"
-#~ msgstr "Nome completo de proxecto"
 
 #~ msgid ""
 #~ "If you visit your own project page in %s while logged in, you will find "
@@ -25416,15 +25431,6 @@ msgstr "Páxina persoal de %s"
 
 #~ msgid "Active site users: <strong>%1$s</strong>"
 #~ msgstr "Usuarios activos: <strong>%1$s</strong>"
-
-#~ msgid ""
-#~ "This pages allows to change only direct properties of user object. To "
-#~ "edit properties pertinent to user within specific project, visit admin "
-#~ "page of that project (below)."
-#~ msgstr ""
-#~ "Estas páxinas permiten cambiar só as propiedades directas dun usuario. "
-#~ "Para editar as propiedades dun usuario dentro dun grupo específico, "
-#~ "visite a páxina de administración dese grupo (abaixo)."
 
 #~ msgid "Suspend"
 #~ msgstr "Suspendido"
@@ -27984,3 +27990,39 @@ msgstr "Páxina persoal de %s"
 #~ "autor responder, o estado restáurase a 'aberto'. Pola contra, se o autor "
 #~ "non responde nun tempo definido (14 días, como valor predeterminado) o "
 #~ "elemento recibe o estado de eliminado. "
+
+#~ msgid ""
+#~ "<p>The purpose of this archive is to let you share your code snippets, "
+#~ "scripts,\tand functions with the Open Source Software Community.</"
+#~ "p><p>You can create a \"new snippet\", then post additional versions of "
+#~ "that snippet quickly and easily.</p><p>Once you have snippets posted, you "
+#~ "can then create a “Package” of snippets. That package can contain "
+#~ "multiple, specific versions of other snippets.</p><p></p><h3>Browse "
+#~ "Snippets</h3>\t<p>You can browse the snippet library quickly:</p>"
+#~ msgstr ""
+#~ "<p>O propósito deste arquivo é permitirlle compartir fragmentos de "
+#~ "código, scripts,\te funcións coa comunidade de código aberto.</p><p>Pode "
+#~ "crear un \"fragmento novo\", e despois publicar versións adicionais dese "
+#~ "fragmento de xeito rápido e sinxelo.</p><p>Unha vez que teña publicados "
+#~ "fragmentos, pode crear un \"paquete\" de fragmentos. Ese paquete pode "
+#~ "conter versións múltiples e específicas de outros fragmentos.</p><p></"
+#~ "p><h3>Navegar polos fragmentos</h3>\t<p>Pode navegar pola biblioteca de "
+#~ "fragmentos de xeito rápido:</p>"
+
+#~ msgid ""
+#~ "<p>The purpose of this archive is to let you share your code snippets, "
+#~ "scripts,\tand functions with the Open Source Software Community.</"
+#~ "p><p>You can create a \"new snippet\", then post additional versions of "
+#~ "that snippet quickly and easily.</p><p>Once you have snippets posted, you "
+#~ "can then create a “Package” of snippets. That package can contain "
+#~ "multiple, specific versions of other snippets.</p><p>&nbsp;</p><h3>Browse "
+#~ "Snippets</h3>\t<p>You can browse the snippet library quickly:</p>"
+#~ msgstr ""
+#~ "<p>O propósito deste arquivo é permitirlle compartir fragmentos de "
+#~ "código, scripts,\te funcións coa comunidade de código aberto.</p><p>Pode "
+#~ "crear un \"fragmento novo\", e despois publicar versións adicionais dese "
+#~ "fragmento de xeito rápido e sinxelo.</p><p>Unha vez que teña publicados "
+#~ "fragmentos, pode crear un \"paquete\" de fragmentos. Ese paquete pode "
+#~ "conter versións múltiples e específicas de outros fragmentos.</p><p>&nbsp;"
+#~ "</p><h3>Navegar polos fragmentos</h3>\t<p>Pode navegar pola biblioteca de "
+#~ "fragmentos de xeito rápido:</p>"

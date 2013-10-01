@@ -235,14 +235,14 @@ echo html_build_select_box_from_arrays(
 </table>
 <input type="submit" name="submit" value="<?php echo _('Update'); ?>" />
 <p>
-<?php echo _('This pages allows to change only direct properties of user object. To edit properties pertinent to user within specific group, visit admin page of that group (below).'); ?>
+<?php echo _('This pages allows to change only direct properties of user object. To edit properties pertinent to user within specific project, visit admin page of that project (below).'); ?>
 </p>
 
 <?php
 	if (forge_get_config('use_shell')) {
 ?>
 <p>
-<?php echo _('Unix status updated mirroring web status, unless it has value \'No unix account (N)\''); ?>
+<?php echo _('Unix status updated mirroring web status, unless it has value “No Unix account (N)”'); ?>
 </p>
 <?php
 	} //end of sys_use_shell condition

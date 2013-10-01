@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 14:37+0200\n"
+"POT-Creation-Date: 2013-10-01 14:43+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16467,8 +16467,8 @@ msgstr "Ik wil deze gebruiker verwijderen"
 #: www/admin/useredit.php:238
 msgid ""
 "This pages allows to change only direct properties of user object. To edit "
-"properties pertinent to user within specific group, visit admin page of that "
-"group (below)."
+"properties pertinent to user within specific project, visit admin page of "
+"that project (below)."
 msgstr ""
 "Via deze pagina kun je alleen de directe eigenschappen van de het "
 "gebruikerobject wijzigen. Om eigenschappen van een gebruiker in een "
@@ -16477,10 +16477,10 @@ msgstr ""
 
 #: www/admin/useredit.php:245
 msgid ""
-"Unix status updated mirroring web status, unless it has value 'No unix "
-"account (N)'"
+"Unix status updated mirroring web status, unless it has value “No Unix "
+"account (N)”"
 msgstr ""
-"Unix status aangepast conform web status, tenzij de status was 'Geen unix "
+"Unix status aangepast conform web status, tenzij de status was 'Geen Unix "
 "account (N)'"
 
 #: www/admin/useredit.php:253
@@ -21360,9 +21360,8 @@ msgstr ""
 "begrijpelijke gegevens in. Alle velden hieronder zijn verplicht."
 
 #: www/register/index.php:183
-#, fuzzy
-msgid "Project full name"
-msgstr "Nieuwe projectnaam"
+msgid "Project Full Name"
+msgstr "Volledige project naam"
 
 #: www/register/index.php:185
 msgid ""
@@ -21413,13 +21412,13 @@ msgstr ""
 
 #: www/register/index.php:215
 msgid ""
-"In addition to full project name, you will need to choose short, \"Unix\" "
-"name for your project."
+"In addition to full project name, you will need to choose short, “Unix” name "
+"for your project."
 msgstr ""
 
 #: www/register/index.php:216
 msgid ""
-"The \"Unix Name\" has several restrictions because it is used in so many "
+"The “Unix Name” has several restrictions because it is used in so many "
 "places around the site. They are:"
 msgstr ""
 
@@ -22351,15 +22350,14 @@ msgstr ""
 
 #: www/snippet/index.php:52
 msgid ""
-"You can create a \"new snippet\", then post additional versions of that "
+"You can create a “new snippet”, then post additional versions of that "
 "snippet quickly and easily."
 msgstr ""
 
 #: www/snippet/index.php:54
 msgid ""
-"Once you have snippets posted, you can then create a \"Package\" of "
-"snippets. That package can contain multiple, specific versions of other "
-"snippets."
+"Once you have snippets posted, you can then create a “Package” of snippets. "
+"That package can contain multiple, specific versions of other snippets."
 msgstr ""
 
 #: www/snippet/index.php:56
@@ -23541,6 +23539,27 @@ msgstr "Gebruikersnaam"
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
 
+#~ msgid ""
+#~ "This pages allows to change only direct properties of user object. To "
+#~ "edit properties pertinent to user within specific group, visit admin page "
+#~ "of that group (below)."
+#~ msgstr ""
+#~ "Via deze pagina kun je alleen de directe eigenschappen van de het "
+#~ "gebruikerobject wijzigen. Om eigenschappen van een gebruiker in een "
+#~ "specifieke groep te wijzigen moet je naar de beheerpagina van die bewuste "
+#~ "groep gaan (hieronder)."
+
+#~ msgid ""
+#~ "Unix status updated mirroring web status, unless it has value 'No unix "
+#~ "account (N)'"
+#~ msgstr ""
+#~ "Unix status aangepast conform web status, tenzij de status was 'Geen unix "
+#~ "account (N)'"
+
+#, fuzzy
+#~ msgid "Project full name"
+#~ msgstr "Nieuwe projectnaam"
+
 #~ msgid "Add/Edit Categories"
 #~ msgstr "Categori&euml;n toevoegen/aanpassen"
 
@@ -23946,9 +23965,6 @@ msgstr "Mijn persoonlijke pagina"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "Je project aanvraag voor %s is goedgekeurd."
-
-#~ msgid "Project Full Name"
-#~ msgstr "Volledige project naam"
 
 #~ msgid ""
 #~ "We highly suggest that you now visit %1$s and create a public description "
@@ -24835,16 +24851,6 @@ msgstr "Mijn persoonlijke pagina"
 
 #~ msgid "Active site users: <strong>%1$s</strong>"
 #~ msgstr "Actieve site deelnemers: <strong>%1$s</strong>"
-
-#~ msgid ""
-#~ "This pages allows to change only direct properties of user object. To "
-#~ "edit properties pertinent to user within specific project, visit admin "
-#~ "page of that project (below)."
-#~ msgstr ""
-#~ "Via deze pagina kun je alleen de directe eigenschappen van de het "
-#~ "gebruikerobject wijzigen. Om eigenschappen van een gebruiker in een "
-#~ "specifieke groep te wijzigen moet je naar de beheerpagina van die bewuste "
-#~ "groep gaan (hieronder)."
 
 #~ msgid ""
 #~ "Unix status updated mirroring web status, unless it has value 'No Unix "
