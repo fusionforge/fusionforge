@@ -208,8 +208,10 @@ if ($add_cat && $group_project_id) {
 	<p>
 	<input type="hidden" name="add_cat" value="y" />
 	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
-	<strong><?php echo _('Category Name') . _(':'); ?></strong>
-	<input required="required" type="text" name="name" value="" />
+	<label for="name">
+		<strong><?php echo _('Category Name') . _(':'); ?></strong>
+	</label>
+	<input id="name" required="required" type="text" name="name" value="" />
 	</p>
 	<p class="important"><?php echo _('Once you add a category, it cannot be deleted') ?></p>
 	<p><input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
@@ -252,8 +254,10 @@ if ($add_cat && $group_project_id) {
 		<input type="hidden" name="update_cat" value="y" />
 		<input type="hidden" name="id" value="<?php echo $ac->getID(); ?>" />
 		<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
-		<strong><?php echo _('Category Name') . _(': '); ?></strong>
-		<input required="required" type="text" name="name" value="<?php echo $ac->getName(); ?>" />
+		<label for="name">
+			<strong><?php echo _('Category Name') . _(': '); ?></strong>
+		</label>
+		<input id="name" required="required" type="text" name="name" value="<?php echo $ac->getName(); ?>" />
 		</p>
 		<p><input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>
 		</form>
@@ -310,28 +314,35 @@ if ($add_cat && $group_project_id) {
 	<input type="hidden" name="post_changes" value="y" />
 	<input type="hidden" name="update_pg" value="y" />
 	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
-	<table>
+	<table class="infotable">
 	<tr>
-		<td><strong><?php echo _('Subproject Name').utils_requiredField() ?>:</strong><br />
-			<input type="text" name="project_name" value="<?php echo $pg->getName() ?>" />
+		<td>
+		<label for="project_name">
+			<?php echo _('Subproject Name')._(':'); ?>
+		</label>
+		</td>
+		<td>
+			<input id="project_name" type="text" name="project_name" value="<?php echo $pg->getName() ?>" />
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<strong><?php echo _('Description').utils_requiredField() ?>:</strong><br />
-			<input type="text" name="description" value="<?php echo $pg->getDescription(); ?>" size="40" maxlength="80" /><br />
+		<label for="description">
+			<?php echo _('Description')._(':'); ?>
+		</label>
+		</td>
+		<td>
+			<input id="description" type="text" name="description" value="<?php echo $pg->getDescription(); ?>" size="40" maxlength="80" />
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<strong><?php echo _('Send All Updates To')?>:</strong><br />
-			<input type="text" name="send_all_posts_to" value="<?php echo $pg->getSendAllPostsTo(); ?>" size="40" maxlength="80" /><br />
+		<label for="send_all_posts_to">
+			<?php echo _('Send All Updates To')._(':'); ?>
+		</label>
 		</td>
-	</tr>
-	<tr>
 		<td>
-			<strong><a href="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;add_cat=1&amp;group_project_id=".$pg->getID(); ?>"><?php echo _('Add/Edit Categories')?></a></strong><br />
-			<strong><a href="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;delete=1&amp;group_project_id=".$pg->getID(); ?>"><?php echo _('Permanently delete this subproject and all its data.')?></a></strong><br />
+			<input id="send_all_posts_to" type="text" name="send_all_posts_to" value="<?php echo $pg->getSendAllPostsTo(); ?>" size="40" maxlength="80" />
 		</td>
 	</tr>
 	<tr>
@@ -365,9 +376,21 @@ if ($add_cat && $group_project_id) {
 	<input type="hidden" name="delete" value="y" />
 	<?php echo _('You are about to permanently and irretrievably delete this subproject and all its related data!'); ?>
 	</p>
-	<p><input type="checkbox" name="sure" value="1" /><?php echo _('I am Sure') ?></p>
-	<p><input type="checkbox" name="really_sure" value="1" /><?php echo _('I am Really Sure'); ?></p>
-	<p><input type="submit" name="post_changes" value="<?php echo _('Permanently delete this subproject and all its data') ?>" /></p>
+	<p>
+		<input id="sure" type="checkbox" name="sure" value="1" />
+		<label for="sure">
+			<?php echo _('I am Sure') ?>
+		</label>
+	</p>
+	<p>
+		<input id="really_sure" type="checkbox" name="really_sure" value="1" />
+		<label for="really_sure">
+			<?php echo _('I am Really Sure'); ?>
+		</label>
+	</p>
+	<p>
+		<input type="submit" name="post_changes" value="<?php echo _('Permanently delete this subproject and all its data') ?>" />
+	</p>
 	</form>
 	<?php
 
