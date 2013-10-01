@@ -191,7 +191,7 @@ if ($type == 'admin') {
 	print "<input type=\"hidden\" name=\"pluginname\" value=\"$pluginname\" />\n";
 	print "<input type=\"hidden\" name=\"type\" value=\"admin_post\" />\n";
 
-	print "<table class=\"listing\" align=\"center\">";
+	print "<table class=\"centered listing\">";
 	print "<thead><tr><th>".
 			_("Name").
 			"</th>" .
@@ -219,16 +219,16 @@ if ($type == 'admin') {
 		$checked = (isset($status[$b]) && $status[$b] == 1) ? ' checked="checked"' : '';
 
 		print "<tr class=\"$class\"><td>$b</td>\n" .
-		"<td align=\"center\">" .
+		"<td class=\"align-center\">" .
 		"<input type=\"checkbox\" name=\"activate[$b]\" value=\"1\"$checked /></td>\n" .
 		"<td>$help</td>\n" .
-		"<td><a href=\"/plugins/blocks/index.php?id=$id&amp;type=configure&amp;pluginname=blocks&amp;name=".urlencode($b)."\">configure</a></td>\n</tr>\n";
+		"<td><a href=\"/plugins/blocks/index.php?id=$id&amp;type=configure&amp;pluginname=blocks&amp;name=".urlencode($b)."\">"._('Configure')."</a></td>\n</tr>\n";
 	}
-	print "</table>";
-	print "<p align=\"center\"><input type=\"submit\" value=\"" .
+	print "</table>\n";
+	print '<p class="align-center"><input type="submit" value="' .
 			_("Save Blocks") .
-			"\" /></p>";
-	print "</form><p />";
+			'" /></p>';
+	print "</form>\n";
 } elseif ($type == 'admin_post') {
 	$res = db_query_params('SELECT name, status FROM plugin_blocks WHERE group_id=$1',
 			array($id));
