@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-27 19:06+0200\n"
+"POT-Creation-Date: 2013-10-01 14:37+0200\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -498,7 +498,7 @@ msgstr ""
 #: www/pm/add_task.php:63 www/pm/add_task.php:67 www/pm/add_task.php:74
 #: www/pm/add_task.php:81 www/pm/add_task.php:88 www/pm/add_task.php:95
 #: www/pm/add_task.php:110 www/pm/add_task.php:124 www/pm/add_task.php:130
-#: www/pm/add_task.php:149 www/pm/admin/index.php:255 www/pm/calendar.php:59
+#: www/pm/add_task.php:149 www/pm/admin/index.php:258 www/pm/calendar.php:59
 #: www/pm/detail_task.php:66 www/pm/detail_task.php:71
 #: www/pm/detail_task.php:86 www/pm/detail_task.php:90
 #: www/pm/detail_task.php:97 www/pm/detail_task.php:104 www/pm/mod_task.php:52
@@ -786,15 +786,15 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer.php:110
 #: plugins/oauthprovider/www/consumer_update_page.php:65
 #: plugins/scmhg/common/HgPlugin.class.php:627
-#: plugins/scmhook/common/scmhookPlugin.class.php:286
-#: plugins/scmhook/common/scmhookPlugin.class.php:329
-#: plugins/scmhook/common/scmhookPlugin.class.php:372
-#: plugins/scmhook/common/scmhookPlugin.class.php:433
-#: plugins/scmhook/common/scmhookPlugin.class.php:494
+#: plugins/scmhook/common/scmhookPlugin.class.php:283
+#: plugins/scmhook/common/scmhookPlugin.class.php:326
+#: plugins/scmhook/common/scmhookPlugin.class.php:369
+#: plugins/scmhook/common/scmhookPlugin.class.php:430
+#: plugins/scmhook/common/scmhookPlugin.class.php:491
 #: www/forum/admin/index.php:117 www/forum/admin/index.php:158
 #: www/forum/index.php:69 www/mail/index.php:79 www/people/editjob.php:52
-#: www/people/editjob.php:74 www/pm/admin/index.php:284
-#: www/pm/admin/index.php:321 www/pm/csv.php:106 www/pm/index.php:100
+#: www/people/editjob.php:74 www/pm/admin/index.php:288
+#: www/pm/admin/index.php:331 www/pm/csv.php:106 www/pm/index.php:100
 #: www/project/admin/editimages.php:228 www/project/admin/editimages.php:255
 #: www/project/admin/editimages.php:271
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:62
@@ -1708,44 +1708,46 @@ msgstr ""
 #: www/frs/reporting/downloads.php:109 www/frs/reporting/downloads.php:111
 #: www/include/user_profile.php:68 www/include/user_profile.php:126
 #: www/include/user_profile.php:133 www/include/user_profile.php:144
-#: www/include/user_profile.php:152 www/my/bookmark_add.php:46
-#: www/my/bookmark_add.php:49 www/my/bookmark_edit.php:57
-#: www/my/bookmark_edit.php:60 www/pm/admin/index.php:211
-#: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
-#: www/pm/format_csv.php:86 www/pm/format_csv.php:89 www/pm/format_csv.php:93
-#: www/pm/format_csv.php:97 www/project/stats/index.php:104
-#: www/project/stats/index.php:105 www/project/stats/index.php:106
-#: www/project/stats/index.php:107 www/register/index.php:236
-#: www/reporting/groupadded.php:65 www/reporting/groupadded.php:66
-#: www/reporting/groupadded.php:67 www/reporting/groupcum.php:65
-#: www/reporting/groupcum.php:66 www/reporting/groupcum.php:67
-#: www/reporting/projectact.php:69 www/reporting/projectact.php:70
-#: www/reporting/projectact.php:71 www/reporting/projectact.php:72
-#: www/reporting/projectact.php:73 www/reporting/projecttime.php:79
-#: www/reporting/projecttime.php:80 www/reporting/projecttime.php:81
-#: www/reporting/projecttime.php:82 www/reporting/siteact.php:70
-#: www/reporting/siteact.php:71 www/reporting/siteact.php:72
-#: www/reporting/siteact.php:73 www/reporting/sitetimebar.php:66
-#: www/reporting/sitetimebar.php:67 www/reporting/sitetime.php:78
-#: www/reporting/sitetime.php:79 www/reporting/sitetime.php:80
-#: www/reporting/timeadd.php:187 www/reporting/timeadd.php:199
-#: www/reporting/timeadd.php:228 www/reporting/timecategory.php:90
-#: www/reporting/toolspie.php:65 www/reporting/toolspie.php:66
-#: www/reporting/toolspie.php:67 www/reporting/useract.php:84
-#: www/reporting/useract.php:85 www/reporting/useract.php:86
-#: www/reporting/useract.php:87 www/reporting/useract.php:88
-#: www/reporting/useradded.php:64 www/reporting/useradded.php:65
-#: www/reporting/useradded.php:66 www/reporting/usercum.php:64
-#: www/reporting/usercum.php:65 www/reporting/usercum.php:66
-#: www/reporting/usersummary.php:71 www/reporting/usersummary.php:72
-#: www/reporting/usersummary.php:73 www/reporting/usertime.php:93
-#: www/reporting/usertime.php:94 www/reporting/usertime.php:95
-#: www/reporting/usertime.php:96 www/snippet/add_snippet_to_package.php:128
-#: www/snippet/addversion.php:94 www/snippet/addversion.php:98
-#: www/snippet/addversion.php:102 www/snippet/addversion.php:217
-#: www/snippet/addversion.php:221 www/snippet/package.php:147
-#: www/snippet/package.php:151 www/snippet/package.php:156
-#: www/snippet/package.php:169 www/survey/include/SurveyHTML.class.php:191
+#: www/include/user_profile.php:152 www/my/bookmark_add.php:48
+#: www/my/bookmark_add.php:54 www/my/bookmark_edit.php:60
+#: www/my/bookmark_edit.php:66 www/pm/admin/index.php:212
+#: www/pm/admin/index.php:321 www/pm/admin/index.php:331
+#: www/pm/admin/index.php:341 www/pm/format_csv.php:66
+#: www/pm/format_csv.php:71 www/pm/format_csv.php:76 www/pm/format_csv.php:86
+#: www/pm/format_csv.php:89 www/pm/format_csv.php:93 www/pm/format_csv.php:97
+#: www/project/stats/index.php:104 www/project/stats/index.php:105
+#: www/project/stats/index.php:106 www/project/stats/index.php:107
+#: www/register/index.php:236 www/reporting/groupadded.php:65
+#: www/reporting/groupadded.php:66 www/reporting/groupadded.php:67
+#: www/reporting/groupcum.php:65 www/reporting/groupcum.php:66
+#: www/reporting/groupcum.php:67 www/reporting/projectact.php:69
+#: www/reporting/projectact.php:70 www/reporting/projectact.php:71
+#: www/reporting/projectact.php:72 www/reporting/projectact.php:73
+#: www/reporting/projecttime.php:79 www/reporting/projecttime.php:80
+#: www/reporting/projecttime.php:81 www/reporting/projecttime.php:82
+#: www/reporting/siteact.php:70 www/reporting/siteact.php:71
+#: www/reporting/siteact.php:72 www/reporting/siteact.php:73
+#: www/reporting/sitetimebar.php:66 www/reporting/sitetimebar.php:67
+#: www/reporting/sitetime.php:78 www/reporting/sitetime.php:79
+#: www/reporting/sitetime.php:80 www/reporting/timeadd.php:187
+#: www/reporting/timeadd.php:199 www/reporting/timeadd.php:228
+#: www/reporting/timecategory.php:90 www/reporting/toolspie.php:65
+#: www/reporting/toolspie.php:66 www/reporting/toolspie.php:67
+#: www/reporting/useract.php:84 www/reporting/useract.php:85
+#: www/reporting/useract.php:86 www/reporting/useract.php:87
+#: www/reporting/useract.php:88 www/reporting/useradded.php:64
+#: www/reporting/useradded.php:65 www/reporting/useradded.php:66
+#: www/reporting/usercum.php:64 www/reporting/usercum.php:65
+#: www/reporting/usercum.php:66 www/reporting/usersummary.php:71
+#: www/reporting/usersummary.php:72 www/reporting/usersummary.php:73
+#: www/reporting/usertime.php:93 www/reporting/usertime.php:94
+#: www/reporting/usertime.php:95 www/reporting/usertime.php:96
+#: www/snippet/add_snippet_to_package.php:128 www/snippet/addversion.php:94
+#: www/snippet/addversion.php:98 www/snippet/addversion.php:102
+#: www/snippet/addversion.php:217 www/snippet/addversion.php:221
+#: www/snippet/package.php:147 www/snippet/package.php:151
+#: www/snippet/package.php:156 www/snippet/package.php:169
+#: www/survey/include/SurveyHTML.class.php:191
 #, php-format
 msgid ":"
 msgstr ""
@@ -2140,7 +2142,7 @@ msgstr "Brak wydań"
 #: www/frs/admin/editrelease.php:348 www/frs/admin/index.php:181
 #: www/mail/admin/index.php:230 www/mail/admin/index.php:283
 #: www/people/people_utils.php:177 www/people/people_utils.php:321
-#: www/pm/admin/index.php:339 www/pm/calendar.php:292
+#: www/pm/admin/index.php:350 www/pm/calendar.php:292
 #: www/project/admin/database.php:234 www/project/admin/index.php:289
 #: www/project/admin/tools.php:305 www/reporting/timecategory.php:99
 #: www/scm/admin/index.php:176
@@ -4795,12 +4797,12 @@ msgstr ""
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:248
 #: www/admin/index.php:169 www/admin/pending-news.php:160
 #: www/forum/admin/index.php:412 www/include/vote_function.php:283
-#: www/my/bookmark_add.php:52 www/my/bookmark_edit.php:63 www/my/diary.php:189
+#: www/my/bookmark_add.php:58 www/my/diary.php:189
 #: www/news/admin/index.php:149 www/news/news_utils.php:42
 #: www/news/submit.php:161 www/pm/add_task.php:57 www/pm/add_task.php:140
-#: www/pm/add_task.php:154 www/pm/admin/index.php:215
-#: www/pm/admin/index.php:258 www/pm/admin/index.php:289 www/pm/csv.php:91
-#: www/pm/deletetask.php:44 www/pm/mod_task.php:54 www/pm/mod_task.php:254
+#: www/pm/add_task.php:154 www/pm/admin/index.php:217
+#: www/pm/admin/index.php:262 www/pm/admin/index.php:293 www/pm/csv.php:91
+#: www/pm/deletetask.php:51 www/pm/mod_task.php:54 www/pm/mod_task.php:254
 #: www/project/admin/editimages.php:237 www/project/admin/roledelete.php:85
 #: www/project/admin/roleedit.php:302 www/project/request.php:70
 #: www/register/index.php:314 www/snippet/add_snippet_to_package.php:167
@@ -5023,7 +5025,7 @@ msgstr ""
 
 #: common/tracker/actions/browse.php:94
 #: common/tracker/actions/downloadcsv.php:38
-#: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:380
+#: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:403
 #: www/pm/index.php:46 www/pm/task.php:88 www/tracker/roadmap.php:333
 msgid "Could Not Get Factory"
 msgstr ""
@@ -5305,7 +5307,7 @@ msgstr ""
 #: plugins/mailman/www/admin/deletelist.php:59
 #: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:57
 #: www/admin/groupdelete.php:58 www/admin/groupdelete.php:59
-#: www/mail/admin/deletelist.php:67 www/mail/admin/deletelist.php:71
+#: www/mail/admin/deletelist.php:67 www/mail/admin/deletelist.php:73
 #: www/people/editprofile.php:201
 msgid "Confirm Delete"
 msgstr ""
@@ -5320,8 +5322,8 @@ msgstr ""
 #: common/tracker/views/form-deletetracker.php:38
 #: www/admin/responses_admin.php:51 www/forum/admin/index.php:183
 #: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:75
-#: www/frs/admin/editrelease.php:383 www/pm/admin/index.php:368
-#: www/pm/deletetask.php:41 www/project/admin/roledelete.php:81
+#: www/frs/admin/editrelease.php:383 www/pm/admin/index.php:382
+#: www/pm/deletetask.php:45 www/project/admin/roledelete.php:81
 #: www/reporting/rebuild.php:63
 #, fuzzy
 msgid "I am Sure"
@@ -5588,8 +5590,8 @@ msgstr ""
 msgid "Artifact Could Not Be Created"
 msgstr ""
 
-#: common/tracker/actions/taskmgr.php:59 www/pm/admin/index.php:298
-#: www/pm/admin/index.php:352
+#: common/tracker/actions/taskmgr.php:59 www/pm/admin/index.php:302
+#: www/pm/admin/index.php:363
 msgid "Could Not Get ProjectGroup"
 msgstr ""
 
@@ -6665,7 +6667,7 @@ msgstr ""
 #: common/tracker/views/form-deleteextrafield.php:48
 #: common/tracker/views/form-deletetracker.php:42
 #: www/forum/admin/index.php:184 www/frs/admin/deletepackage.php:71
-#: www/frs/admin/deleterelease.php:76 www/pm/admin/index.php:369
+#: www/frs/admin/deleterelease.php:76 www/pm/admin/index.php:388
 msgid "I am Really Sure"
 msgstr ""
 
@@ -8197,6 +8199,11 @@ msgstr ""
 #: www/admin/userlist.php:68
 msgid "Active"
 msgstr ""
+
+#: plugins/blocks/www/index.php:225
+#, fuzzy
+msgid "Configure"
+msgstr "Login:"
 
 #: plugins/blocks/www/index.php:229
 msgid "Save Blocks"
@@ -10323,7 +10330,7 @@ msgid "Permanently Delete List"
 msgstr ""
 
 #: plugins/mailman/www/admin/deletelist.php:61 www/admin/groupdelete.php:61
-#: www/mail/admin/deletelist.php:74
+#: www/mail/admin/deletelist.php:77
 msgid "Permanently Delete"
 msgstr ""
 
@@ -13405,49 +13412,49 @@ msgstr "Telefon:"
 msgid "Feature not implemented."
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:141
+#: plugins/scmhook/common/scmhookPlugin.class.php:138
 msgid "Hooks management update process waiting ..."
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:143
+#: plugins/scmhook/common/scmhookPlugin.class.php:140
 #, fuzzy
 msgid "Enable Repository Hooks"
 msgstr "Przeglądaj Repozytorium Subversion"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:158
+#: plugins/scmhook/common/scmhookPlugin.class.php:155
 msgid "SCM Type not supported yet by scmhook"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:164
+#: plugins/scmhook/common/scmhookPlugin.class.php:161
 msgid "No hooks available"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:285
+#: plugins/scmhook/common/scmhookPlugin.class.php:282
 msgid "pre-commit Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:286
-#: plugins/scmhook/common/scmhookPlugin.class.php:329
-#: plugins/scmhook/common/scmhookPlugin.class.php:372
-#: plugins/scmhook/common/scmhookPlugin.class.php:433
-#: plugins/scmhook/common/scmhookPlugin.class.php:494
+#: plugins/scmhook/common/scmhookPlugin.class.php:283
+#: plugins/scmhook/common/scmhookPlugin.class.php:326
+#: plugins/scmhook/common/scmhookPlugin.class.php:369
+#: plugins/scmhook/common/scmhookPlugin.class.php:430
+#: plugins/scmhook/common/scmhookPlugin.class.php:491
 #, fuzzy
 msgid "Hook Name"
 msgstr "Nazwa Pliku"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:328
+#: plugins/scmhook/common/scmhookPlugin.class.php:325
 msgid "pre-revprop-change Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:371
+#: plugins/scmhook/common/scmhookPlugin.class.php:368
 msgid "post-commit Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:432
+#: plugins/scmhook/common/scmhookPlugin.class.php:429
 msgid "serve-push-pull-bundle Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:493
+#: plugins/scmhook/common/scmhookPlugin.class.php:490
 msgid "post-receive Hooks"
 msgstr ""
 
@@ -13761,7 +13768,7 @@ msgstr ""
 
 #: www/account/change_email-complete.php:69 www/account/change_email.php:94
 #: www/account/lostpw.php:100 www/account/unsubscribe.php:76
-#: www/my/bookmark_edit.php:67
+#: www/my/bookmark_edit.php:74
 msgid "Return"
 msgstr ""
 
@@ -17730,11 +17737,11 @@ msgstr ""
 msgid "Back to your homepage"
 msgstr ""
 
-#: www/my/bookmark_add.php:46 www/my/bookmark_edit.php:57
+#: www/my/bookmark_add.php:48 www/my/bookmark_edit.php:60
 msgid "Bookmark URL"
 msgstr ""
 
-#: www/my/bookmark_add.php:49 www/my/bookmark_edit.php:60
+#: www/my/bookmark_add.php:54 www/my/bookmark_edit.php:66
 msgid "Bookmark Title"
 msgstr ""
 
@@ -18552,7 +18559,7 @@ msgstr ""
 
 #: www/pm/admin/index.php:62 www/pm/admin/index.php:93
 #: www/pm/admin/index.php:113 www/pm/admin/index.php:170
-#: www/pm/admin/index.php:232 www/pm/admin/index.php:243
+#: www/pm/admin/index.php:234 www/pm/admin/index.php:245
 msgid "Unable to create ProjectCategory Object"
 msgstr ""
 
@@ -18591,103 +18598,95 @@ msgstr ""
 msgid "No categories defined"
 msgstr ""
 
-#: www/pm/admin/index.php:211 www/pm/admin/index.php:255
+#: www/pm/admin/index.php:212 www/pm/admin/index.php:258
 #: www/reporting/timecategory.php:70 www/reporting/timecategory.php:90
 msgid "Category Name"
 msgstr ""
 
-#: www/pm/admin/index.php:214
+#: www/pm/admin/index.php:216
 msgid "Once you add a category, it cannot be deleted"
 msgstr ""
 
-#: www/pm/admin/index.php:239
+#: www/pm/admin/index.php:241
 #, php-format
 msgid "Modify a Category in: %s"
 msgstr ""
 
-#: www/pm/admin/index.php:249
+#: www/pm/admin/index.php:251
 msgid ""
 "It is not recommended that you change the category name because other things "
 "are dependent upon it. When you change the category name, all related items "
 "will be changed to the new name."
 msgstr ""
 
-#: www/pm/admin/index.php:271
+#: www/pm/admin/index.php:275
 msgid "Add a new subproject"
 msgstr ""
 
-#: www/pm/admin/index.php:274
+#: www/pm/admin/index.php:278
 msgid ""
 "Add a new subproject to the Tasks. <strong>This is different than adding a "
 "task to a subproject.</strong>"
 msgstr ""
 
-#: www/pm/admin/index.php:280
+#: www/pm/admin/index.php:284
 #, fuzzy
 msgid "New Subproject Name"
 msgstr "Nazwa nowej grupy"
 
-#: www/pm/admin/index.php:287 www/pm/admin/index.php:327
+#: www/pm/admin/index.php:291 www/pm/admin/index.php:341
 msgid "Send All Updates To"
 msgstr ""
 
-#: www/pm/admin/index.php:304
+#: www/pm/admin/index.php:308
 msgid "Change Tasks Status"
 msgstr ""
 
-#: www/pm/admin/index.php:307
+#: www/pm/admin/index.php:311
 msgid ""
 "You can modify an existing subproject using this form. Please note that "
 "private subprojects can still be viewed by members of your project, but not "
 "the general public."
 msgstr ""
 
-#: www/pm/admin/index.php:315 www/pm/index.php:99
+#: www/pm/admin/index.php:321 www/pm/index.php:99
 msgid "Subproject Name"
 msgstr ""
 
-#: www/pm/admin/index.php:333
-msgid "Add/Edit Categories"
-msgstr ""
-
-#: www/pm/admin/index.php:334
-msgid "Permanently delete this subproject and all its data."
-msgstr ""
-
-#: www/pm/admin/index.php:359 www/pm/admin/index.php:370
+#: www/pm/admin/index.php:370 www/pm/admin/index.php:392
 #, fuzzy
 msgid "Permanently delete this subproject and all its data"
 msgstr "Edytuj grupę"
 
-#: www/pm/admin/index.php:366
+#: www/pm/admin/index.php:377
 msgid ""
 "You are about to permanently and irretrievably delete this subproject and "
 "all its related data!"
 msgstr ""
 
-#: www/pm/admin/index.php:388 www/project/admin/tools.php:327
+#: www/pm/admin/index.php:411 www/project/admin/tools.php:326
 msgid "Tasks Administration"
 msgstr ""
 
-#: www/pm/admin/index.php:396
+#: www/pm/admin/index.php:419
 msgid "Add a Subproject"
 msgstr ""
 
-#: www/pm/admin/index.php:397
+#: www/pm/admin/index.php:420
 msgid ""
 "Add a subproject, which can contain a set of tasks. This is different than "
 "creating a new task."
 msgstr ""
 
-#: www/pm/admin/index.php:405
+#: www/pm/admin/index.php:428
 msgid "No Subprojects Found in this Project"
 msgstr ""
 
-#: www/pm/admin/index.php:406
+#: www/pm/admin/index.php:429
 msgid "You may add new Subprojects using the “Add a Subproject” link above."
 msgstr ""
 
-#: www/pm/admin/index.php:410
+#: www/pm/admin/index.php:433
 msgid "Edit/Update Subproject"
 msgstr ""
 
@@ -19814,94 +19813,94 @@ msgstr ""
 msgid "Tools for %s"
 msgstr ""
 
-#: www/project/admin/tools.php:115
+#: www/project/admin/tools.php:116
 msgid "Active Tools"
 msgstr ""
 
-#: www/project/admin/tools.php:152
+#: www/project/admin/tools.php:153
 #, fuzzy
 msgid "Use Project Activity"
 msgstr "Brak wydań"
 
-#: www/project/admin/tools.php:165
+#: www/project/admin/tools.php:166
 msgid "Use Forums"
 msgstr ""
 
-#: www/project/admin/tools.php:178
+#: www/project/admin/tools.php:179
 msgid "Use Trackers"
 msgstr ""
 
-#: www/project/admin/tools.php:191
+#: www/project/admin/tools.php:192
 msgid "Use Mailing Lists"
 msgstr ""
 
-#: www/project/admin/tools.php:204
+#: www/project/admin/tools.php:205
 msgid "Use Tasks"
 msgstr ""
 
-#: www/project/admin/tools.php:217
+#: www/project/admin/tools.php:218
 #, fuzzy
 msgid "Use Documents"
 msgstr "Nie znaleziono żadnych dokumentów"
 
-#: www/project/admin/tools.php:230
+#: www/project/admin/tools.php:231
 msgid "Use Surveys"
 msgstr ""
 
-#: www/project/admin/tools.php:243
+#: www/project/admin/tools.php:244
 msgid "Use News"
 msgstr ""
 
-#: www/project/admin/tools.php:256
+#: www/project/admin/tools.php:257
 msgid "Use Source Code"
 msgstr ""
 
-#: www/project/admin/tools.php:269
+#: www/project/admin/tools.php:270
 msgid "Use File Release System"
 msgstr ""
 
-#: www/project/admin/tools.php:282
+#: www/project/admin/tools.php:283
 msgid "Use FTP"
 msgstr ""
 
-#: www/project/admin/tools.php:291
+#: www/project/admin/tools.php:292
 msgid "Use Statistics"
 msgstr ""
 
-#: www/project/admin/tools.php:315
+#: www/project/admin/tools.php:314
 msgid "Tool Admin"
 msgstr ""
 
-#: www/project/admin/tools.php:318
+#: www/project/admin/tools.php:317
 msgid "Forums Admin"
 msgstr ""
 
-#: www/project/admin/tools.php:321
+#: www/project/admin/tools.php:320
 msgid "Trackers Admin"
 msgstr ""
 
-#: www/project/admin/tools.php:324
+#: www/project/admin/tools.php:323
 msgid "Mailing Lists Admin"
 msgstr ""
 
-#: www/project/admin/tools.php:330
+#: www/project/admin/tools.php:329
 #, fuzzy
 msgid "Documents Admin"
 msgstr "Nie znaleziono żadnych dokumentów"
 
-#: www/project/admin/tools.php:333
+#: www/project/admin/tools.php:332
 msgid "Survey Admin"
 msgstr ""
 
-#: www/project/admin/tools.php:336
+#: www/project/admin/tools.php:335
 msgid "News Admin"
 msgstr ""
 
-#: www/project/admin/tools.php:339
+#: www/project/admin/tools.php:338
 msgid "Source Code Admin"
 msgstr ""
 
-#: www/project/admin/tools.php:342
+#: www/project/admin/tools.php:341
 #, fuzzy
 msgid "File Release System Admin"
 msgstr "Uwagi oraz Lista Zmian Wydania"
