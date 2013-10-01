@@ -43,11 +43,17 @@ if (getStringFromRequest('submit') && $bookmark_url && $bookmark_title) {
 } else {
 	?>
 	<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-	<p><?php echo _('Bookmark URL')._(':'); ?><br />
-	<input type="text" name="bookmark_url" value="http://" />
+	<p>
+		<label for="bookmark_url">
+			<?php echo _('Bookmark URL')._(':'); ?><br />
+		</label>
+		<input id="bookmark_url" type="text" name="bookmark_url" value="http://" />
 	</p>
-	<p><?php echo _('Bookmark Title')._(':'); ?><br />
-	<input type="text" name="bookmark_title" value="" />
+	<p>
+		<label for="bookmark_title">
+			<?php echo _('Bookmark Title')._(':'); ?><br />
+		</label>
+		<input id="bookmark_title" type="text" name="bookmark_title" value="" />
 	</p>
 	<p><input type="submit" name="submit" value="<?php echo _('Submit') ?>" /></p>
 	</form>

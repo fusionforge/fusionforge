@@ -53,14 +53,21 @@ if ($result) {
 }
 ?>
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
-<input type="hidden" name="bookmark_id" value="<?php echo $bookmark_id; ?>" />
-<p><?php echo _('Bookmark URL')._(':'); ?><br />
-<input type="text" name="bookmark_url" value="<?php echo $bookmark_url; ?>" />
-</p>
-<p><?php echo _('Bookmark Title')._(':'); ?><br />
-<input type="text" name="bookmark_title" value="<?php echo $bookmark_title; ?>" />
-</p>
-<p><input type="submit" name="submit" value=" <?php echo _('Submit') ?> " /></p>
+	<input type="hidden" name="bookmark_id" value="<?php echo $bookmark_id; ?>" />
+
+	<p>
+		<label for="bookmark_url">
+			<?php echo _('Bookmark URL')._(':'); ?><br />
+		</label>
+		<input id="bookmark_url" type="text" name="bookmark_url" value="<?php echo $bookmark_url; ?>" />
+	</p>
+	<p>
+		<label for="bookmark_title">
+			<?php echo _('Bookmark Title')._(':'); ?><br />
+		</label>
+		<input id="bookmark_title" type="text" name="bookmark_title" value="<?php echo $bookmark_title; ?>" />
+	</p>
+
 </form>
 <?php
 

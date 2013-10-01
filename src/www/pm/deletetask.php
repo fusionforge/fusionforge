@@ -35,13 +35,21 @@ pm_header(array('title'=>_('Delete a Task'),'group_project_id'=>$group_project_i
 
 	<tr>
 		<td ><span class="important"><?php echo _('Are you sure you want to delete this task?'); ?></span>
-			<p><strong><?php echo $pt->getSummary(); ?></strong></p></td>
+			<p><strong><?php echo $pt->getSummary(); ?></strong></p>
+		</td>
 	</tr>
 	<tr class="align-center">
-		<td class="align-center"><input type="checkbox" value="1" name="confirm_delete" /> <?php echo _('I am Sure'); ?></td>
+		<td class="align-center">
+			<input id="confirm_delete" type="checkbox" value="1" name="confirm_delete" />
+			<label for="confirm_delete">
+				<?php echo _('I am Sure'); ?>
+			</label>
+		</td>
 	</tr>
 	<tr>
-		<td class="align-center"><input type="submit" value="<?php echo _('Submit'); ?>" name="submit" /></td>
+		<td class="align-center">
+			<input type="submit" value="<?php echo _('Submit'); ?>" name="submit" />
+		</td>
 	</tr>
 
 </table>

@@ -68,10 +68,13 @@ mail_header(array('title' => _('Permanently Delete Mailing List ') . $ml->getNam
 <form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;group_list_id=<?php echo $ml->getID(); ?>">
 <p><?php printf(_("Do you really want to delete mailing list %s?"), $ml->getName()); ?></p>
 <p>
-<input type="checkbox" name="sure" value="1" /><?php echo _('Confirm Delete'); ?><br />
+	<input id="sure" type="checkbox" name="sure" value="1" />
+	<label for="sure">
+		<?php echo _('Confirm Delete'); ?><br />
+	</label>
 </p>
 <p>
-<input type="submit" name="submit" value="<?php echo _('Permanently Delete'); ?>" />
+	<input type="submit" name="submit" value="<?php echo _('Permanently Delete'); ?>" />
 </p>
 </form>
 </fieldset>
