@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 18:05+0200\n"
+"POT-Creation-Date: 2013-10-03 18:24+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -504,19 +504,20 @@ msgstr "项目"
 #: www/frs/admin/qrs.php:198 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
 #: www/people/admin/index.php:52 www/people/admin/index.php:65
-#: www/people/skills_utils.php:121 www/pm/add_task.php:50
-#: www/pm/add_task.php:63 www/pm/add_task.php:67 www/pm/add_task.php:74
-#: www/pm/add_task.php:81 www/pm/add_task.php:88 www/pm/add_task.php:95
-#: www/pm/add_task.php:110 www/pm/add_task.php:124 www/pm/add_task.php:130
-#: www/pm/add_task.php:149 www/pm/admin/index.php:258 www/pm/calendar.php:59
-#: www/pm/detail_task.php:66 www/pm/detail_task.php:71
-#: www/pm/detail_task.php:86 www/pm/detail_task.php:90
-#: www/pm/detail_task.php:97 www/pm/detail_task.php:104 www/pm/mod_task.php:52
-#: www/pm/mod_task.php:61 www/pm/mod_task.php:66 www/pm/mod_task.php:78
-#: www/pm/mod_task.php:83 www/pm/mod_task.php:97 www/pm/mod_task.php:173
-#: www/pm/mod_task.php:183 www/pm/mod_task.php:197 www/pm/mod_task.php:202
-#: www/pm/mod_task.php:212 www/pm/mod_task.php:323
-#: www/project/admin/roledelete.php:62 www/register/index.php:188
+#: www/people/editprofile.php:233 www/people/skills_utils.php:121
+#: www/people/viewprofile.php:47 www/pm/add_task.php:50 www/pm/add_task.php:63
+#: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
+#: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
+#: www/pm/add_task.php:124 www/pm/add_task.php:130 www/pm/add_task.php:149
+#: www/pm/admin/index.php:258 www/pm/calendar.php:59 www/pm/detail_task.php:66
+#: www/pm/detail_task.php:71 www/pm/detail_task.php:86
+#: www/pm/detail_task.php:90 www/pm/detail_task.php:97
+#: www/pm/detail_task.php:104 www/pm/mod_task.php:52 www/pm/mod_task.php:61
+#: www/pm/mod_task.php:66 www/pm/mod_task.php:78 www/pm/mod_task.php:83
+#: www/pm/mod_task.php:97 www/pm/mod_task.php:173 www/pm/mod_task.php:183
+#: www/pm/mod_task.php:197 www/pm/mod_task.php:202 www/pm/mod_task.php:212
+#: www/pm/mod_task.php:323 www/project/admin/roledelete.php:62
+#: www/register/index.php:188
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/softwaremap/tag_cloud.php:143 www/survey/survey.php:51
@@ -1190,7 +1191,7 @@ msgstr "文件名称"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
 #: www/account/index.php:233 www/account/register.php:171
 #: www/people/editjob.php:52 www/people/editjob.php:74
-#: www/people/editprofile.php:107 www/people/people_utils.php:405
+#: www/people/editprofile.php:106 www/people/people_utils.php:405
 #: www/people/skills_utils.php:49 www/pm/admin/index.php:188
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:61
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:54
@@ -1615,7 +1616,7 @@ msgstr ""
 #: common/docman/views/reporting.php:93
 #: common/tracker/include/ArtifactTypeHtml.class.php:324
 #: www/activity/index.php:180 www/frs/reporting/downloads.php:109
-#: www/people/editprofile.php:283 www/people/skills_utils.php:50
+#: www/people/editprofile.php:279 www/people/skills_utils.php:50
 #: www/people/skills_utils.php:156 www/pm/add_task.php:95
 #: www/pm/browse_task.php:127 www/pm/browse_task.php:233
 #: www/pm/detail_task.php:86 www/pm/ganttpage.php:160 www/pm/mod_task.php:146
@@ -1789,7 +1790,7 @@ msgstr ""
 #: common/docman/views/reporting.php:95
 #: common/tracker/include/ArtifactTypeHtml.class.php:325
 #: www/activity/index.php:181 www/frs/reporting/downloads.php:111
-#: www/people/editprofile.php:284 www/people/skills_utils.php:51
+#: www/people/editprofile.php:280 www/people/skills_utils.php:51
 #: www/people/skills_utils.php:157 www/pm/add_task.php:110
 #: www/pm/browse_task.php:128 www/pm/browse_task.php:235
 #: www/pm/detail_task.php:90 www/pm/ganttpage.php:161 www/pm/mod_task.php:160
@@ -2454,7 +2455,7 @@ msgstr "消息："
 #: www/admin/admin_table.php:59 www/admin/admin_table.php:165
 #: www/admin/admin_table.php:224 www/forum/admin/index.php:413
 #: www/forum/monitor.php:65 www/my/rmproject.php:98
-#: www/people/editprofile.php:158 www/people/editprofile.php:217
+#: www/people/editprofile.php:157 www/people/editprofile.php:215
 #: www/pm/mod_task.php:289 www/register/index.php:315
 #: www/reporting/timeadd.php:183 www/tracker/admin/index.php:103
 #: www/tracker/admin/index.php:180
@@ -5569,7 +5570,7 @@ msgstr "删除样板"
 #: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:57
 #: www/admin/groupdelete.php:58 www/admin/groupdelete.php:59
 #: www/mail/admin/deletelist.php:67 www/mail/admin/deletelist.php:73
-#: www/people/editprofile.php:201
+#: www/people/editprofile.php:199
 msgid "Confirm Delete"
 msgstr "确认删除"
 
@@ -6638,7 +6639,7 @@ msgstr "订制栏位定义"
 #: plugins/mantisbt/view/admin/editVersion.php:64
 #: plugins/mantisbt/view/admin/viewVersion.php:52 www/admin/database.php:104
 #: www/admin/massmail.php:137 www/frs/index.php:212
-#: www/people/editprofile.php:107 www/people/editprofile.php:282
+#: www/people/editprofile.php:106 www/people/editprofile.php:278
 #: www/people/skills_utils.php:48 www/people/skills_utils.php:155
 #: www/project/stats/index.php:105 www/reporting/groupadded.php:65
 #: www/reporting/groupcum.php:65 www/reporting/projectact.php:71
@@ -6812,7 +6813,7 @@ msgstr "您确定要删除这个任务吗？"
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
 #: www/admin/groupedit.php:162 www/admin/responses_admin.php:50
 #: www/forum/admin/index.php:222 www/mail/admin/index.php:192
-#: www/mail/admin/index.php:223 www/people/editprofile.php:247
+#: www/mail/admin/index.php:223 www/people/editprofile.php:244
 #: www/survey/include/SurveyHTML.class.php:195
 #: www/survey/include/SurveyHTML.class.php:418
 msgid "Yes"
@@ -9760,7 +9761,7 @@ msgstr "您确定要删除这个定制类型？"
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
 #: www/admin/groupedit.php:161 www/forum/admin/index.php:223
 #: www/mail/admin/index.php:193 www/mail/admin/index.php:224
-#: www/people/editprofile.php:246 www/survey/include/SurveyHTML.class.php:196
+#: www/people/editprofile.php:243 www/survey/include/SurveyHTML.class.php:196
 #: www/survey/include/SurveyHTML.class.php:420
 msgid "No"
 msgstr "否"
@@ -17454,7 +17455,7 @@ msgid "Package name"
 msgstr "分类名称"
 
 #: www/frs/admin/index.php:156 www/frs/admin/index.php:207
-#: www/people/editprofile.php:244
+#: www/people/editprofile.php:241
 msgid "Publicly Viewable"
 msgstr "是否公开浏览"
 
@@ -19023,8 +19024,8 @@ msgstr "完成"
 
 #: www/people/editprofile.php:54
 #, fuzzy, php-format
-msgid "User update FAILED: %s"
-msgstr "用户更新失败"
+msgid "User update failed: %s"
+msgstr "更新错误"
 
 #: www/people/editprofile.php:56
 msgid "User updated successfully"
@@ -19035,191 +19036,169 @@ msgstr "用户更新成功"
 msgid "Failed to add the skill %s"
 msgstr "增加技能失败"
 
-#: www/people/editprofile.php:100
-msgid "Failed to add the skill"
-msgstr "增加技能失败"
-
-#: www/people/editprofile.php:102
+#: www/people/editprofile.php:101
 msgid "Skill added successfully"
 msgstr "增加技能成功"
 
-#: www/people/editprofile.php:107
+#: www/people/editprofile.php:106
 #, fuzzy
 msgid "Start Month"
 msgstr "开启日期"
 
-#: www/people/editprofile.php:107
+#: www/people/editprofile.php:106
 #, fuzzy
 msgid "Start Year"
 msgstr "开启日期"
 
-#: www/people/editprofile.php:107
+#: www/people/editprofile.php:106
 #, fuzzy
 msgid "End Month"
 msgstr "月"
 
-#: www/people/editprofile.php:107
+#: www/people/editprofile.php:106
 #, fuzzy
 msgid "End Year"
 msgstr "结束日期"
 
-#: www/people/editprofile.php:107 www/people/skills_utils.php:52
+#: www/people/editprofile.php:106 www/people/skills_utils.php:52
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:47
 msgid "Keywords"
 msgstr "关键字"
 
-#: www/people/editprofile.php:125
+#: www/people/editprofile.php:124
 msgid "No skills selected to edit."
 msgstr "没有选择技能进行编辑"
 
-#: www/people/editprofile.php:142
+#: www/people/editprofile.php:141
 #, fuzzy, php-format
 msgid "Failed to update skills: %s"
 msgstr "更新技能失败"
 
-#: www/people/editprofile.php:145
+#: www/people/editprofile.php:144
 #, fuzzy
 msgid "Skill updated"
 msgid_plural "Skills updated"
 msgstr[0] "文件更新"
 msgstr[1] "文件更新"
 
-#: www/people/editprofile.php:150
-msgid "Skills edit"
-msgstr "编辑技能"
-
-#: www/people/editprofile.php:151
+#: www/people/editprofile.php:149 www/people/editprofile.php:150
 msgid "Edit Skills"
 msgstr "编辑技能"
 
-#: www/people/editprofile.php:152
-msgid ""
-"Change the required fields, and press \"Done\" at the bottom of the page"
+#: www/people/editprofile.php:151
+msgid "Change the required fields, and press “Done” at the bottom of the page"
 msgstr ""
 
-#: www/people/editprofile.php:157
+#: www/people/editprofile.php:156
 msgid "Done"
 msgstr "完成"
 
-#: www/people/editprofile.php:165
+#: www/people/editprofile.php:164
 msgid "Cancelled skills update"
 msgstr "取消技能的更新"
 
-#: www/people/editprofile.php:178
+#: www/people/editprofile.php:177
 msgid "No skills selected to delete."
 msgstr "没有选择技能进行删除"
 
-#: www/people/editprofile.php:187
+#: www/people/editprofile.php:186
 #, fuzzy, php-format
 msgid "Failed to delete any skills: %s"
 msgstr "删除技能失败"
 
 #: www/people/editprofile.php:188
-msgid "Failed to delete any skills"
-msgstr "删除技能失败"
-
-#: www/people/editprofile.php:190
 #, fuzzy
 msgid "Skill deleted successfully"
 msgid_plural "Skills deleted successfully"
 msgstr[0] "工作技能删除成功"
 msgstr[1] "工作技能删除成功"
 
-#: www/people/editprofile.php:199
+#: www/people/editprofile.php:197
 msgid "Confirm skill delete"
 msgstr "确认删除该技能"
 
-#: www/people/editprofile.php:202
+#: www/people/editprofile.php:200
 msgid "You are about to delete the following skill from the skills database:"
 msgid_plural ""
 "You are about to delete the following skills from the skills database:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/people/editprofile.php:207
+#: www/people/editprofile.php:205
 #, fuzzy
 msgid "This action cannot be undone."
 msgstr "这个动作无法在技能数据库中完成。"
 
-#: www/people/editprofile.php:208
+#: www/people/editprofile.php:206
 msgid "Are you <strong>sure</strong> you wish to continue?"
 msgstr "您<strong>确定</strong> 您希望继续？"
 
-#: www/people/editprofile.php:216
+#: www/people/editprofile.php:214
 msgid "Confirm"
 msgstr "确认"
 
-#: www/people/editprofile.php:226
+#: www/people/editprofile.php:224
 msgid "Skill deletion cancelled"
 msgstr "取消技能删除"
 
-#: www/people/editprofile.php:229
+#: www/people/editprofile.php:227
 msgid "Edit Your Profile"
 msgstr "编辑您的个人能力"
 
-#: www/people/editprofile.php:235
-#, fuzzy, php-format
-msgid "User fetch FAILED: %s"
-msgstr "取得用户失败"
-
-#: www/people/editprofile.php:236 www/people/skills_utils.php:121
-#: www/people/skills_utils.php:122
+#: www/people/editprofile.php:233 www/people/skills_utils.php:121
+#: www/people/skills_utils.php:122 www/people/viewprofile.php:47
 msgid "No Such User"
 msgstr "没有这个用户"
 
-#: www/people/editprofile.php:240
+#: www/people/editprofile.php:237
 msgid "Edit Public Permissions"
 msgstr "编辑公共许可权"
 
-#: www/people/editprofile.php:242
+#: www/people/editprofile.php:239
 msgid ""
 "The following option determines if others can see your skills. If they "
-"can't, you can still enter your skills."
+"cannot, you can still enter your skills."
 msgstr ""
 "以下选项决定别人是否可以看见您的技能。就算他们不能看见您的技能，您也可以一样"
 "的输入您的技能。"
 
-#: www/people/editprofile.php:249
+#: www/people/editprofile.php:246
 msgid "Update Permissions"
 msgstr "更新许可权"
 
-#: www/people/editprofile.php:258
+#: www/people/editprofile.php:255
 msgid "No skill types in database (skills_data_types table)"
 msgstr "数据库中没有技能类型(skills_data_types table)"
 
-#: www/people/editprofile.php:259
-msgid "No skill types in database - inform system administrator"
-msgstr "数据库中没有技能类型 - 通知系统管理员"
-
-#: www/people/editprofile.php:276 www/people/people_utils.php:187
+#: www/people/editprofile.php:272 www/people/people_utils.php:187
 #: www/people/people_utils.php:331
 msgid "Add a new skill"
 msgstr "增加新技能"
 
-#: www/people/editprofile.php:277
+#: www/people/editprofile.php:273
 msgid ""
 "You can enter new skills you have acquired here. Please enter the start and "
 "finish dates as accurately as possible."
 msgstr "您可以输入在这儿学到的新技能。请输入尽量正确的开始和结束时间。"
 
-#: www/people/editprofile.php:278 www/reporting/timeadd.php:96
+#: www/people/editprofile.php:274 www/reporting/timeadd.php:96
 msgid "All fields are required!"
 msgstr "所有项都必须填写！"
 
-#: www/people/editprofile.php:300 www/people/skills_utils.php:172
+#: www/people/editprofile.php:296 www/people/skills_utils.php:172
 #, fuzzy
 msgid "Title (max 100 characters)"
 msgstr "关键字（不多于255字节）"
 
-#: www/people/editprofile.php:307 www/people/skills_utils.php:179
+#: www/people/editprofile.php:303 www/people/skills_utils.php:179
 msgid "Keywords (max 255 characters)"
 msgstr "关键字（不多于255字节）"
 
-#: www/people/editprofile.php:313
+#: www/people/editprofile.php:309
 msgid "Add This Skill"
 msgstr "增加这个技能"
 
-#: www/people/editprofile.php:320
+#: www/people/editprofile.php:315
 msgid "Edit/Delete Your Skills"
 msgstr "编辑/删除您的技能"
 
@@ -19373,11 +19352,6 @@ msgstr "需要技能"
 #: www/people/viewjob.php:104
 msgid "Posting ID not found"
 msgstr ""
-
-#: www/people/viewprofile.php:47
-#, fuzzy
-msgid "User fetch FAILED : No Such User: "
-msgstr "取得用户失败"
 
 #: www/people/viewprofile.php:48 www/people/viewprofile.php:51
 msgid "View a User Profile"
@@ -23300,6 +23274,37 @@ msgid "Personal Page for %s"
 msgstr "我的个人首页"
 
 #, fuzzy
+#~ msgid "User update FAILED: %s"
+#~ msgstr "用户更新失败"
+
+#~ msgid "Failed to add the skill"
+#~ msgstr "增加技能失败"
+
+#~ msgid "Skills edit"
+#~ msgstr "编辑技能"
+
+#~ msgid "Failed to delete any skills"
+#~ msgstr "删除技能失败"
+
+#, fuzzy
+#~ msgid "User fetch FAILED: %s"
+#~ msgstr "取得用户失败"
+
+#~ msgid ""
+#~ "The following option determines if others can see your skills. If they "
+#~ "can't, you can still enter your skills."
+#~ msgstr ""
+#~ "以下选项决定别人是否可以看见您的技能。就算他们不能看见您的技能，您也可以一"
+#~ "样的输入您的技能。"
+
+#~ msgid "No skill types in database - inform system administrator"
+#~ msgstr "数据库中没有技能类型 - 通知系统管理员"
+
+#, fuzzy
+#~ msgid "User fetch FAILED : No Such User: "
+#~ msgstr "取得用户失败"
+
+#, fuzzy
 #~ msgid "JOB insert FAILED: %s"
 #~ msgstr "添加工作失败"
 
@@ -24583,13 +24588,6 @@ msgstr "我的个人首页"
 
 #~ msgid "Notes and Changes"
 #~ msgstr "记事与变动"
-
-#~ msgid ""
-#~ "The following option determines if others can see your skills. If they "
-#~ "cannot, you can still enter your skills."
-#~ msgstr ""
-#~ "以下选项决定别人是否可以看见您的技能。就算他们不能看见您的技能，您也可以一"
-#~ "样的输入您的技能。"
 
 #, fuzzy
 #~ msgid "Bazaar Repository Browser"

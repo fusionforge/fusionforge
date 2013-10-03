@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 18:05+0200\n"
+"POT-Creation-Date: 2013-10-03 18:24+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -501,19 +501,20 @@ msgstr ""
 #: www/frs/admin/qrs.php:198 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
 #: www/people/admin/index.php:52 www/people/admin/index.php:65
-#: www/people/skills_utils.php:121 www/pm/add_task.php:50
-#: www/pm/add_task.php:63 www/pm/add_task.php:67 www/pm/add_task.php:74
-#: www/pm/add_task.php:81 www/pm/add_task.php:88 www/pm/add_task.php:95
-#: www/pm/add_task.php:110 www/pm/add_task.php:124 www/pm/add_task.php:130
-#: www/pm/add_task.php:149 www/pm/admin/index.php:258 www/pm/calendar.php:59
-#: www/pm/detail_task.php:66 www/pm/detail_task.php:71
-#: www/pm/detail_task.php:86 www/pm/detail_task.php:90
-#: www/pm/detail_task.php:97 www/pm/detail_task.php:104 www/pm/mod_task.php:52
-#: www/pm/mod_task.php:61 www/pm/mod_task.php:66 www/pm/mod_task.php:78
-#: www/pm/mod_task.php:83 www/pm/mod_task.php:97 www/pm/mod_task.php:173
-#: www/pm/mod_task.php:183 www/pm/mod_task.php:197 www/pm/mod_task.php:202
-#: www/pm/mod_task.php:212 www/pm/mod_task.php:323
-#: www/project/admin/roledelete.php:62 www/register/index.php:188
+#: www/people/editprofile.php:233 www/people/skills_utils.php:121
+#: www/people/viewprofile.php:47 www/pm/add_task.php:50 www/pm/add_task.php:63
+#: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
+#: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
+#: www/pm/add_task.php:124 www/pm/add_task.php:130 www/pm/add_task.php:149
+#: www/pm/admin/index.php:258 www/pm/calendar.php:59 www/pm/detail_task.php:66
+#: www/pm/detail_task.php:71 www/pm/detail_task.php:86
+#: www/pm/detail_task.php:90 www/pm/detail_task.php:97
+#: www/pm/detail_task.php:104 www/pm/mod_task.php:52 www/pm/mod_task.php:61
+#: www/pm/mod_task.php:66 www/pm/mod_task.php:78 www/pm/mod_task.php:83
+#: www/pm/mod_task.php:97 www/pm/mod_task.php:173 www/pm/mod_task.php:183
+#: www/pm/mod_task.php:197 www/pm/mod_task.php:202 www/pm/mod_task.php:212
+#: www/pm/mod_task.php:323 www/project/admin/roledelete.php:62
+#: www/register/index.php:188
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/softwaremap/tag_cloud.php:143 www/survey/survey.php:51
@@ -1182,7 +1183,7 @@ msgstr "Filnamn"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
 #: www/account/index.php:233 www/account/register.php:171
 #: www/people/editjob.php:52 www/people/editjob.php:74
-#: www/people/editprofile.php:107 www/people/people_utils.php:405
+#: www/people/editprofile.php:106 www/people/people_utils.php:405
 #: www/people/skills_utils.php:49 www/pm/admin/index.php:188
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:61
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:54
@@ -1606,7 +1607,7 @@ msgstr ""
 #: common/docman/views/reporting.php:93
 #: common/tracker/include/ArtifactTypeHtml.class.php:324
 #: www/activity/index.php:180 www/frs/reporting/downloads.php:109
-#: www/people/editprofile.php:283 www/people/skills_utils.php:50
+#: www/people/editprofile.php:279 www/people/skills_utils.php:50
 #: www/people/skills_utils.php:156 www/pm/add_task.php:95
 #: www/pm/browse_task.php:127 www/pm/browse_task.php:233
 #: www/pm/detail_task.php:86 www/pm/ganttpage.php:160 www/pm/mod_task.php:146
@@ -1780,7 +1781,7 @@ msgstr ""
 #: common/docman/views/reporting.php:95
 #: common/tracker/include/ArtifactTypeHtml.class.php:325
 #: www/activity/index.php:181 www/frs/reporting/downloads.php:111
-#: www/people/editprofile.php:284 www/people/skills_utils.php:51
+#: www/people/editprofile.php:280 www/people/skills_utils.php:51
 #: www/people/skills_utils.php:157 www/pm/add_task.php:110
 #: www/pm/browse_task.php:128 www/pm/browse_task.php:235
 #: www/pm/detail_task.php:90 www/pm/ganttpage.php:161 www/pm/mod_task.php:160
@@ -2443,7 +2444,7 @@ msgstr "Inlägg:"
 #: www/admin/admin_table.php:59 www/admin/admin_table.php:165
 #: www/admin/admin_table.php:224 www/forum/admin/index.php:413
 #: www/forum/monitor.php:65 www/my/rmproject.php:98
-#: www/people/editprofile.php:158 www/people/editprofile.php:217
+#: www/people/editprofile.php:157 www/people/editprofile.php:215
 #: www/pm/mod_task.php:289 www/register/index.php:315
 #: www/reporting/timeadd.php:183 www/tracker/admin/index.php:103
 #: www/tracker/admin/index.php:180
@@ -5575,7 +5576,7 @@ msgstr "Ta bort fil"
 #: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:57
 #: www/admin/groupdelete.php:58 www/admin/groupdelete.php:59
 #: www/mail/admin/deletelist.php:67 www/mail/admin/deletelist.php:73
-#: www/people/editprofile.php:201
+#: www/people/editprofile.php:199
 msgid "Confirm Delete"
 msgstr "Bekräfta borttag"
 
@@ -6645,7 +6646,7 @@ msgstr ""
 #: plugins/mantisbt/view/admin/editVersion.php:64
 #: plugins/mantisbt/view/admin/viewVersion.php:52 www/admin/database.php:104
 #: www/admin/massmail.php:137 www/frs/index.php:212
-#: www/people/editprofile.php:107 www/people/editprofile.php:282
+#: www/people/editprofile.php:106 www/people/editprofile.php:278
 #: www/people/skills_utils.php:48 www/people/skills_utils.php:155
 #: www/project/stats/index.php:105 www/reporting/groupadded.php:65
 #: www/reporting/groupcum.php:65 www/reporting/projectact.php:71
@@ -6817,7 +6818,7 @@ msgstr ""
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
 #: www/admin/groupedit.php:162 www/admin/responses_admin.php:50
 #: www/forum/admin/index.php:222 www/mail/admin/index.php:192
-#: www/mail/admin/index.php:223 www/people/editprofile.php:247
+#: www/mail/admin/index.php:223 www/people/editprofile.php:244
 #: www/survey/include/SurveyHTML.class.php:195
 #: www/survey/include/SurveyHTML.class.php:418
 msgid "Yes"
@@ -9750,7 +9751,7 @@ msgstr ""
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
 #: www/admin/groupedit.php:161 www/forum/admin/index.php:223
 #: www/mail/admin/index.php:193 www/mail/admin/index.php:224
-#: www/people/editprofile.php:246 www/survey/include/SurveyHTML.class.php:196
+#: www/people/editprofile.php:243 www/survey/include/SurveyHTML.class.php:196
 #: www/survey/include/SurveyHTML.class.php:420
 msgid "No"
 msgstr "Nej"
@@ -17419,7 +17420,7 @@ msgid "Package name"
 msgstr "Paketnamn"
 
 #: www/frs/admin/index.php:156 www/frs/admin/index.php:207
-#: www/people/editprofile.php:244
+#: www/people/editprofile.php:241
 msgid "Publicly Viewable"
 msgstr ""
 
@@ -19003,8 +19004,8 @@ msgstr "Klar"
 
 #: www/people/editprofile.php:54
 #, fuzzy, php-format
-msgid "User update FAILED: %s"
-msgstr "Uppdatering av användare MISSLYCKADES"
+msgid "User update failed: %s"
+msgstr "Uppdatering misslyckades"
 
 #: www/people/editprofile.php:56
 msgid "User updated successfully"
@@ -19015,167 +19016,145 @@ msgstr "Uppdatering av användare lyckades"
 msgid "Failed to add the skill %s"
 msgstr "Misslyckdes att lägga till kompetens"
 
-#: www/people/editprofile.php:100
-msgid "Failed to add the skill"
-msgstr "Misslyckdes att lägga till kompetens"
-
-#: www/people/editprofile.php:102
+#: www/people/editprofile.php:101
 msgid "Skill added successfully"
 msgstr "Tillägg av kompetens"
 
-#: www/people/editprofile.php:107
+#: www/people/editprofile.php:106
 #, fuzzy
 msgid "Start Month"
 msgstr "Månad"
 
-#: www/people/editprofile.php:107
+#: www/people/editprofile.php:106
 #, fuzzy
 msgid "Start Year"
 msgstr "Starta ny tråd"
 
-#: www/people/editprofile.php:107
+#: www/people/editprofile.php:106
 #, fuzzy
 msgid "End Month"
 msgstr "Månad"
 
-#: www/people/editprofile.php:107
+#: www/people/editprofile.php:106
 msgid "End Year"
 msgstr ""
 
-#: www/people/editprofile.php:107 www/people/skills_utils.php:52
+#: www/people/editprofile.php:106 www/people/skills_utils.php:52
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:47
 msgid "Keywords"
 msgstr ""
 
-#: www/people/editprofile.php:125
+#: www/people/editprofile.php:124
 msgid "No skills selected to edit."
 msgstr "Inga kompetenser valda för redigering"
 
-#: www/people/editprofile.php:142
+#: www/people/editprofile.php:141
 #, fuzzy, php-format
 msgid "Failed to update skills: %s"
 msgstr "Misslyckdes att uppdatera kompetenser"
 
-#: www/people/editprofile.php:145
+#: www/people/editprofile.php:144
 #, fuzzy
 msgid "Skill updated"
 msgid_plural "Skills updated"
 msgstr[0] "Fil uppdaterad"
 msgstr[1] "Fil uppdaterad"
 
-#: www/people/editprofile.php:150
-msgid "Skills edit"
-msgstr "Redigera kompetens"
-
-#: www/people/editprofile.php:151
+#: www/people/editprofile.php:149 www/people/editprofile.php:150
 msgid "Edit Skills"
 msgstr "Redigera kompetenser"
 
-#: www/people/editprofile.php:152
-msgid ""
-"Change the required fields, and press \"Done\" at the bottom of the page"
+#: www/people/editprofile.php:151
+msgid "Change the required fields, and press “Done” at the bottom of the page"
 msgstr ""
 
-#: www/people/editprofile.php:157
+#: www/people/editprofile.php:156
 msgid "Done"
 msgstr "Klar"
 
-#: www/people/editprofile.php:165
+#: www/people/editprofile.php:164
 msgid "Cancelled skills update"
 msgstr "Avbruten kompetensuppdatering"
 
-#: www/people/editprofile.php:178
+#: www/people/editprofile.php:177
 msgid "No skills selected to delete."
 msgstr "Inga kompetenser valda för radering"
 
-#: www/people/editprofile.php:187
+#: www/people/editprofile.php:186
 #, fuzzy, php-format
 msgid "Failed to delete any skills: %s"
 msgstr "Misslyckdes att ta bort några kompetenser"
 
 #: www/people/editprofile.php:188
-msgid "Failed to delete any skills"
-msgstr "Misslyckdes att ta bort några kompetenser"
-
-#: www/people/editprofile.php:190
 #, fuzzy
 msgid "Skill deleted successfully"
 msgid_plural "Skills deleted successfully"
 msgstr[0] "JOBB kompetens borttag lyckades"
 msgstr[1] "JOBB kompetens borttag lyckades"
 
-#: www/people/editprofile.php:199
+#: www/people/editprofile.php:197
 msgid "Confirm skill delete"
 msgstr "Bekräfta borttag av kompetens"
 
-#: www/people/editprofile.php:202
+#: www/people/editprofile.php:200
 msgid "You are about to delete the following skill from the skills database:"
 msgid_plural ""
 "You are about to delete the following skills from the skills database:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/people/editprofile.php:207
+#: www/people/editprofile.php:205
 #, fuzzy
 msgid "This action cannot be undone."
 msgstr "från kompetensdatabasen. Denna handling kan inte ångras."
 
-#: www/people/editprofile.php:208
+#: www/people/editprofile.php:206
 msgid "Are you <strong>sure</strong> you wish to continue?"
 msgstr "Är du<strong>säker</strong> att du vill fortsätta?"
 
-#: www/people/editprofile.php:216
+#: www/people/editprofile.php:214
 msgid "Confirm"
 msgstr "Bekräfta"
 
-#: www/people/editprofile.php:226
+#: www/people/editprofile.php:224
 msgid "Skill deletion cancelled"
 msgstr "Borttag av kompetens avbruten"
 
-#: www/people/editprofile.php:229
+#: www/people/editprofile.php:227
 msgid "Edit Your Profile"
 msgstr "Redigera din profil"
 
-#: www/people/editprofile.php:235
-#, fuzzy, php-format
-msgid "User fetch FAILED: %s"
-msgstr "Användarhämtning MISSLYCKADES"
-
-#: www/people/editprofile.php:236 www/people/skills_utils.php:121
-#: www/people/skills_utils.php:122
+#: www/people/editprofile.php:233 www/people/skills_utils.php:121
+#: www/people/skills_utils.php:122 www/people/viewprofile.php:47
 msgid "No Such User"
 msgstr "Inga sådana användare"
 
-#: www/people/editprofile.php:240
+#: www/people/editprofile.php:237
 msgid "Edit Public Permissions"
 msgstr "Redigera offentliga rättigheter"
 
-#: www/people/editprofile.php:242
+#: www/people/editprofile.php:239
 msgid ""
 "The following option determines if others can see your skills. If they "
-"can't, you can still enter your skills."
+"cannot, you can still enter your skills."
 msgstr ""
 "Följande valmöjlighet bestämmer om andra kan se dina kompetenser. Om inte, "
 "så kan du ändå lägga in dina kompetenser."
 
-#: www/people/editprofile.php:249
+#: www/people/editprofile.php:246
 msgid "Update Permissions"
 msgstr "Uppdateringsrättigheter"
 
-#: www/people/editprofile.php:258
+#: www/people/editprofile.php:255
 msgid "No skill types in database (skills_data_types table)"
 msgstr "Ingen kompetenstyp i databasen (skills_data_types table)"
 
-#: www/people/editprofile.php:259
-msgid "No skill types in database - inform system administrator"
-msgstr "Ingen kompetenstyp i databasen - informera systemadministratören"
-
-#: www/people/editprofile.php:276 www/people/people_utils.php:187
+#: www/people/editprofile.php:272 www/people/people_utils.php:187
 #: www/people/people_utils.php:331
 msgid "Add a new skill"
 msgstr "Lägg till en ny kompetens"
 
-#: www/people/editprofile.php:277
+#: www/people/editprofile.php:273
 msgid ""
 "You can enter new skills you have acquired here. Please enter the start and "
 "finish dates as accurately as possible."
@@ -19183,24 +19162,24 @@ msgstr ""
 "Du kan skriva in nya kompetenser du har skaffat dig här. Var vänlig skriv in "
 "start- och slut-datum så korrekt som möjligt."
 
-#: www/people/editprofile.php:278 www/reporting/timeadd.php:96
+#: www/people/editprofile.php:274 www/reporting/timeadd.php:96
 msgid "All fields are required!"
 msgstr "Alla fält är obligatoriska!"
 
-#: www/people/editprofile.php:300 www/people/skills_utils.php:172
+#: www/people/editprofile.php:296 www/people/skills_utils.php:172
 #, fuzzy
 msgid "Title (max 100 characters)"
 msgstr "Nyckelord (max 255 tecken)"
 
-#: www/people/editprofile.php:307 www/people/skills_utils.php:179
+#: www/people/editprofile.php:303 www/people/skills_utils.php:179
 msgid "Keywords (max 255 characters)"
 msgstr "Nyckelord (max 255 tecken)"
 
-#: www/people/editprofile.php:313
+#: www/people/editprofile.php:309
 msgid "Add This Skill"
 msgstr "Lägg till denna kompetens"
 
-#: www/people/editprofile.php:320
+#: www/people/editprofile.php:315
 msgid "Edit/Delete Your Skills"
 msgstr "Redigera/Ta bort dina kompetenser"
 
@@ -19354,11 +19333,6 @@ msgstr "Obligatoriska kompetenser"
 #: www/people/viewjob.php:104
 msgid "Posting ID not found"
 msgstr ""
-
-#: www/people/viewprofile.php:47
-#, fuzzy
-msgid "User fetch FAILED : No Such User: "
-msgstr "Användarhämtning MISSLYCKADES"
 
 #: www/people/viewprofile.php:48 www/people/viewprofile.php:51
 msgid "View a User Profile"
@@ -23299,6 +23273,37 @@ msgid "Personal Page for %s"
 msgstr "Min personliga sida"
 
 #, fuzzy
+#~ msgid "User update FAILED: %s"
+#~ msgstr "Uppdatering av användare MISSLYCKADES"
+
+#~ msgid "Failed to add the skill"
+#~ msgstr "Misslyckdes att lägga till kompetens"
+
+#~ msgid "Skills edit"
+#~ msgstr "Redigera kompetens"
+
+#~ msgid "Failed to delete any skills"
+#~ msgstr "Misslyckdes att ta bort några kompetenser"
+
+#, fuzzy
+#~ msgid "User fetch FAILED: %s"
+#~ msgstr "Användarhämtning MISSLYCKADES"
+
+#~ msgid ""
+#~ "The following option determines if others can see your skills. If they "
+#~ "can't, you can still enter your skills."
+#~ msgstr ""
+#~ "Följande valmöjlighet bestämmer om andra kan se dina kompetenser. Om "
+#~ "inte, så kan du ändå lägga in dina kompetenser."
+
+#~ msgid "No skill types in database - inform system administrator"
+#~ msgstr "Ingen kompetenstyp i databasen - informera systemadministratören"
+
+#, fuzzy
+#~ msgid "User fetch FAILED : No Such User: "
+#~ msgstr "Användarhämtning MISSLYCKADES"
+
+#, fuzzy
 #~ msgid "JOB insert FAILED: %s"
 #~ msgstr "JOBB infogning MISSLYCKADES"
 
@@ -24321,13 +24326,6 @@ msgstr "Min personliga sida"
 
 #~ msgid "Read More/Comment"
 #~ msgstr "Read Mer/Kommentar"
-
-#~ msgid ""
-#~ "The following option determines if others can see your skills. If they "
-#~ "cannot, you can still enter your skills."
-#~ msgstr ""
-#~ "Följande valmöjlighet bestämmer om andra kan se dina kompetenser. Om "
-#~ "inte, så kan du ändå lägga in dina kompetenser."
 
 #, fuzzy
 #~ msgid "Bazaar Repository Browser"

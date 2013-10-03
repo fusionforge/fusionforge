@@ -44,7 +44,7 @@ if ($user_id && is_numeric($user_id)) {
 	//for security, include group_id
 	$result=db_query_params('SELECT * FROM users WHERE user_id=$1', array($user_id));
 	if (!$result || db_numrows($result) < 1) {
-		$error_msg .= _('User fetch FAILED : No Such User: ').db_error();
+		$error_msg .= _('No Such User')._(': ').db_error();
 	    people_header(array('title'=>_('View a User Profile')));
 	} else {
 

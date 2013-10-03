@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 18:05+0200\n"
+"POT-Creation-Date: 2013-10-03 18:24+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -501,19 +501,20 @@ msgstr "Proxecto "
 #: www/frs/admin/qrs.php:198 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
 #: www/people/admin/index.php:52 www/people/admin/index.php:65
-#: www/people/skills_utils.php:121 www/pm/add_task.php:50
-#: www/pm/add_task.php:63 www/pm/add_task.php:67 www/pm/add_task.php:74
-#: www/pm/add_task.php:81 www/pm/add_task.php:88 www/pm/add_task.php:95
-#: www/pm/add_task.php:110 www/pm/add_task.php:124 www/pm/add_task.php:130
-#: www/pm/add_task.php:149 www/pm/admin/index.php:258 www/pm/calendar.php:59
-#: www/pm/detail_task.php:66 www/pm/detail_task.php:71
-#: www/pm/detail_task.php:86 www/pm/detail_task.php:90
-#: www/pm/detail_task.php:97 www/pm/detail_task.php:104 www/pm/mod_task.php:52
-#: www/pm/mod_task.php:61 www/pm/mod_task.php:66 www/pm/mod_task.php:78
-#: www/pm/mod_task.php:83 www/pm/mod_task.php:97 www/pm/mod_task.php:173
-#: www/pm/mod_task.php:183 www/pm/mod_task.php:197 www/pm/mod_task.php:202
-#: www/pm/mod_task.php:212 www/pm/mod_task.php:323
-#: www/project/admin/roledelete.php:62 www/register/index.php:188
+#: www/people/editprofile.php:233 www/people/skills_utils.php:121
+#: www/people/viewprofile.php:47 www/pm/add_task.php:50 www/pm/add_task.php:63
+#: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
+#: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
+#: www/pm/add_task.php:124 www/pm/add_task.php:130 www/pm/add_task.php:149
+#: www/pm/admin/index.php:258 www/pm/calendar.php:59 www/pm/detail_task.php:66
+#: www/pm/detail_task.php:71 www/pm/detail_task.php:86
+#: www/pm/detail_task.php:90 www/pm/detail_task.php:97
+#: www/pm/detail_task.php:104 www/pm/mod_task.php:52 www/pm/mod_task.php:61
+#: www/pm/mod_task.php:66 www/pm/mod_task.php:78 www/pm/mod_task.php:83
+#: www/pm/mod_task.php:97 www/pm/mod_task.php:173 www/pm/mod_task.php:183
+#: www/pm/mod_task.php:197 www/pm/mod_task.php:202 www/pm/mod_task.php:212
+#: www/pm/mod_task.php:323 www/project/admin/roledelete.php:62
+#: www/register/index.php:188
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/softwaremap/tag_cloud.php:143 www/survey/survey.php:51
@@ -1195,7 +1196,7 @@ msgstr "Nome de ficheiro "
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
 #: www/account/index.php:233 www/account/register.php:171
 #: www/people/editjob.php:52 www/people/editjob.php:74
-#: www/people/editprofile.php:107 www/people/people_utils.php:405
+#: www/people/editprofile.php:106 www/people/people_utils.php:405
 #: www/people/skills_utils.php:49 www/pm/admin/index.php:188
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:61
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:54
@@ -1619,7 +1620,7 @@ msgstr ""
 #: common/docman/views/reporting.php:93
 #: common/tracker/include/ArtifactTypeHtml.class.php:324
 #: www/activity/index.php:180 www/frs/reporting/downloads.php:109
-#: www/people/editprofile.php:283 www/people/skills_utils.php:50
+#: www/people/editprofile.php:279 www/people/skills_utils.php:50
 #: www/people/skills_utils.php:156 www/pm/add_task.php:95
 #: www/pm/browse_task.php:127 www/pm/browse_task.php:233
 #: www/pm/detail_task.php:86 www/pm/ganttpage.php:160 www/pm/mod_task.php:146
@@ -1793,7 +1794,7 @@ msgstr ""
 #: common/docman/views/reporting.php:95
 #: common/tracker/include/ArtifactTypeHtml.class.php:325
 #: www/activity/index.php:181 www/frs/reporting/downloads.php:111
-#: www/people/editprofile.php:284 www/people/skills_utils.php:51
+#: www/people/editprofile.php:280 www/people/skills_utils.php:51
 #: www/people/skills_utils.php:157 www/pm/add_task.php:110
 #: www/pm/browse_task.php:128 www/pm/browse_task.php:235
 #: www/pm/detail_task.php:90 www/pm/ganttpage.php:161 www/pm/mod_task.php:160
@@ -2457,7 +2458,7 @@ msgstr "Mensaxe:"
 #: www/admin/admin_table.php:59 www/admin/admin_table.php:165
 #: www/admin/admin_table.php:224 www/forum/admin/index.php:413
 #: www/forum/monitor.php:65 www/my/rmproject.php:98
-#: www/people/editprofile.php:158 www/people/editprofile.php:217
+#: www/people/editprofile.php:157 www/people/editprofile.php:215
 #: www/pm/mod_task.php:289 www/register/index.php:315
 #: www/reporting/timeadd.php:183 www/tracker/admin/index.php:103
 #: www/tracker/admin/index.php:180
@@ -5627,7 +5628,7 @@ msgstr "Eliminar artefacto"
 #: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:57
 #: www/admin/groupdelete.php:58 www/admin/groupdelete.php:59
 #: www/mail/admin/deletelist.php:67 www/mail/admin/deletelist.php:73
-#: www/people/editprofile.php:201
+#: www/people/editprofile.php:199
 msgid "Confirm Delete"
 msgstr "Confirme a eliminación "
 
@@ -6697,7 +6698,7 @@ msgstr "Campos personalizados definidos"
 #: plugins/mantisbt/view/admin/editVersion.php:64
 #: plugins/mantisbt/view/admin/viewVersion.php:52 www/admin/database.php:104
 #: www/admin/massmail.php:137 www/frs/index.php:212
-#: www/people/editprofile.php:107 www/people/editprofile.php:282
+#: www/people/editprofile.php:106 www/people/editprofile.php:278
 #: www/people/skills_utils.php:48 www/people/skills_utils.php:155
 #: www/project/stats/index.php:105 www/reporting/groupadded.php:65
 #: www/reporting/groupcum.php:65 www/reporting/projectact.php:71
@@ -6872,7 +6873,7 @@ msgstr "Está seguro de querer eliminar esta tarefa?"
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
 #: www/admin/groupedit.php:162 www/admin/responses_admin.php:50
 #: www/forum/admin/index.php:222 www/mail/admin/index.php:192
-#: www/mail/admin/index.php:223 www/people/editprofile.php:247
+#: www/mail/admin/index.php:223 www/people/editprofile.php:244
 #: www/survey/include/SurveyHTML.class.php:195
 #: www/survey/include/SurveyHTML.class.php:418
 msgid "Yes"
@@ -9867,7 +9868,7 @@ msgstr "Está seguro de querer eliminar esta forxa asociada?"
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
 #: www/admin/groupedit.php:161 www/forum/admin/index.php:223
 #: www/mail/admin/index.php:193 www/mail/admin/index.php:224
-#: www/people/editprofile.php:246 www/survey/include/SurveyHTML.class.php:196
+#: www/people/editprofile.php:243 www/survey/include/SurveyHTML.class.php:196
 #: www/survey/include/SurveyHTML.class.php:420
 msgid "No"
 msgstr "Non"
@@ -17703,7 +17704,7 @@ msgid "Package name"
 msgstr "Nome de paquete "
 
 #: www/frs/admin/index.php:156 www/frs/admin/index.php:207
-#: www/people/editprofile.php:244
+#: www/people/editprofile.php:241
 msgid "Publicly Viewable"
 msgstr "Visíbel publicamente "
 
@@ -19372,8 +19373,8 @@ msgstr "Rematado"
 
 #: www/people/editprofile.php:54
 #, fuzzy, php-format
-msgid "User update FAILED: %s"
-msgstr "Produciuse un erro ao actualizar o usuario"
+msgid "User update failed: %s"
+msgstr "Produciuse un erro na actualización"
 
 #: www/people/editprofile.php:56
 msgid "User updated successfully"
@@ -19384,99 +19385,86 @@ msgstr "O usuario actualizouse correctamente"
 msgid "Failed to add the skill %s"
 msgstr "Non foi posíbel engadir a habelencia"
 
-#: www/people/editprofile.php:100
-msgid "Failed to add the skill"
-msgstr "Non foi posíbel engadir a habelencia"
-
-#: www/people/editprofile.php:102
+#: www/people/editprofile.php:101
 msgid "Skill added successfully"
 msgstr "Engadiuse correctamente a habelencia"
 
-#: www/people/editprofile.php:107
+#: www/people/editprofile.php:106
 #, fuzzy
 msgid "Start Month"
 msgstr "Data de comezo"
 
-#: www/people/editprofile.php:107
+#: www/people/editprofile.php:106
 #, fuzzy
 msgid "Start Year"
 msgstr "Data de comezo"
 
-#: www/people/editprofile.php:107
+#: www/people/editprofile.php:106
 #, fuzzy
 msgid "End Month"
 msgstr "Mes"
 
-#: www/people/editprofile.php:107
+#: www/people/editprofile.php:106
 #, fuzzy
 msgid "End Year"
 msgstr "Data de fin"
 
-#: www/people/editprofile.php:107 www/people/skills_utils.php:52
+#: www/people/editprofile.php:106 www/people/skills_utils.php:52
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:47
 msgid "Keywords"
 msgstr "Palabras clave"
 
-#: www/people/editprofile.php:125
+#: www/people/editprofile.php:124
 msgid "No skills selected to edit."
 msgstr "Non se seleccionou ningunha habelencia para editar."
 
-#: www/people/editprofile.php:142
+#: www/people/editprofile.php:141
 #, fuzzy, php-format
 msgid "Failed to update skills: %s"
 msgstr "Produciuse un erro ao actualizar as habilidades"
 
-#: www/people/editprofile.php:145
+#: www/people/editprofile.php:144
 msgid "Skill updated"
 msgid_plural "Skills updated"
 msgstr[0] "Actualizouse a habelencia"
 msgstr[1] "Actualizáronse as habilidades"
 
-#: www/people/editprofile.php:150
-msgid "Skills edit"
-msgstr "Editar o meu perfil de habelencias "
-
-#: www/people/editprofile.php:151
+#: www/people/editprofile.php:149 www/people/editprofile.php:150
 msgid "Edit Skills"
 msgstr "Editar o meu perfil de habelencias "
 
-#: www/people/editprofile.php:152
-msgid ""
-"Change the required fields, and press \"Done\" at the bottom of the page"
-msgstr "Cambie os campos obrigados e prema \"Feito\" ao final da páxina"
+#: www/people/editprofile.php:151
+msgid "Change the required fields, and press “Done” at the bottom of the page"
+msgstr "Cambie os campos obrigados e prema “Feito” ao final da páxina"
 
-#: www/people/editprofile.php:157
+#: www/people/editprofile.php:156
 msgid "Done"
 msgstr "Feito"
 
-#: www/people/editprofile.php:165
+#: www/people/editprofile.php:164
 msgid "Cancelled skills update"
 msgstr "Cancelouse a actualización de habilidades"
 
-#: www/people/editprofile.php:178
+#: www/people/editprofile.php:177
 msgid "No skills selected to delete."
 msgstr "Non se seleccionou ningunha habelencia para eliminar."
 
-#: www/people/editprofile.php:187
+#: www/people/editprofile.php:186
 #, fuzzy, php-format
 msgid "Failed to delete any skills: %s"
 msgstr "Produciuse un erro e non se eliminou ningunha habelencia"
 
 #: www/people/editprofile.php:188
-msgid "Failed to delete any skills"
-msgstr "Produciuse un erro e non se eliminou ningunha habelencia"
-
-#: www/people/editprofile.php:190
 msgid "Skill deleted successfully"
 msgid_plural "Skills deleted successfully"
 msgstr[0] "Eliminouse a habelencia correctamente"
 msgstr[1] "Elimináronse as habilidades correctamente"
 
-#: www/people/editprofile.php:199
+#: www/people/editprofile.php:197
 msgid "Confirm skill delete"
 msgstr "Confirmar a eliminación de habelencia"
 
-#: www/people/editprofile.php:202
+#: www/people/editprofile.php:200
 msgid "You are about to delete the following skill from the skills database:"
 msgid_plural ""
 "You are about to delete the following skills from the skills database:"
@@ -19485,69 +19473,58 @@ msgstr[0] ""
 msgstr[1] ""
 "Vai a eliminar as seguintes habilidades da base de datos de habilidades:"
 
-#: www/people/editprofile.php:207
+#: www/people/editprofile.php:205
 msgid "This action cannot be undone."
 msgstr "Esta acción non se pode desfacer."
 
-#: www/people/editprofile.php:208
+#: www/people/editprofile.php:206
 msgid "Are you <strong>sure</strong> you wish to continue?"
 msgstr "Está <strong>seguro</strong> de querer continuar?"
 
-#: www/people/editprofile.php:216
+#: www/people/editprofile.php:214
 msgid "Confirm"
 msgstr "Confirmar"
 
-#: www/people/editprofile.php:226
+#: www/people/editprofile.php:224
 msgid "Skill deletion cancelled"
 msgstr "Cancelouse a eliminación"
 
-#: www/people/editprofile.php:229
+#: www/people/editprofile.php:227
 msgid "Edit Your Profile"
 msgstr "Editar o seu perfil"
 
-#: www/people/editprofile.php:235
-#, fuzzy, php-format
-msgid "User fetch FAILED: %s"
-msgstr "Produciuse un erro ao obter o usuario"
-
-#: www/people/editprofile.php:236 www/people/skills_utils.php:121
-#: www/people/skills_utils.php:122
+#: www/people/editprofile.php:233 www/people/skills_utils.php:121
+#: www/people/skills_utils.php:122 www/people/viewprofile.php:47
 msgid "No Such User"
 msgstr "Non existe tal usuario"
 
-#: www/people/editprofile.php:240
+#: www/people/editprofile.php:237
 msgid "Edit Public Permissions"
 msgstr "Editar os permisos públicos"
 
-#: www/people/editprofile.php:242
+#: www/people/editprofile.php:239
 msgid ""
 "The following option determines if others can see your skills. If they "
-"can't, you can still enter your skills."
+"cannot, you can still enter your skills."
 msgstr ""
 "A seguinte opción determina se os demais poden ver as súas habilidades. "
 "Aínda que non poidan, poderá introducilas igualmente."
 
-#: www/people/editprofile.php:249
+#: www/people/editprofile.php:246
 msgid "Update Permissions"
 msgstr "Actualizar permisos"
 
-#: www/people/editprofile.php:258
+#: www/people/editprofile.php:255
 msgid "No skill types in database (skills_data_types table)"
 msgstr ""
 "Non hai ningún tipo de habelencia na base de datos (táboa skills_data_types)"
 
-#: www/people/editprofile.php:259
-msgid "No skill types in database - inform system administrator"
-msgstr ""
-"Non hai ningún tipo de habelencia na base de datos - Informe á "
-"administración do sistema"
-
-#: www/people/editprofile.php:276 www/people/people_utils.php:187
+#: www/people/editprofile.php:272 www/people/people_utils.php:187
 #: www/people/people_utils.php:331
 msgid "Add a new skill"
 msgstr "Engadir unha nova habelencia"
 
-#: www/people/editprofile.php:277
+#: www/people/editprofile.php:273
 msgid ""
 "You can enter new skills you have acquired here. Please enter the start and "
 "finish dates as accurately as possible."
@@ -19555,23 +19532,23 @@ msgstr ""
 "Pode introducir aquí habilidades que teña adquirido. por favor, introduza as "
 "datas de comezo e fin tan concretamente como poida."
 
-#: www/people/editprofile.php:278 www/reporting/timeadd.php:96
+#: www/people/editprofile.php:274 www/reporting/timeadd.php:96
 msgid "All fields are required!"
 msgstr "Todos os campo son requiridos!"
 
-#: www/people/editprofile.php:300 www/people/skills_utils.php:172
+#: www/people/editprofile.php:296 www/people/skills_utils.php:172
 msgid "Title (max 100 characters)"
 msgstr "Título (100 caracteres como máximo)"
 
-#: www/people/editprofile.php:307 www/people/skills_utils.php:179
+#: www/people/editprofile.php:303 www/people/skills_utils.php:179
 msgid "Keywords (max 255 characters)"
 msgstr "Palabras clave (255 caracteres como máximo)"
 
-#: www/people/editprofile.php:313
+#: www/people/editprofile.php:309
 msgid "Add This Skill"
 msgstr "Engadir esta habelencia"
 
-#: www/people/editprofile.php:320
+#: www/people/editprofile.php:315
 msgid "Edit/Delete Your Skills"
 msgstr "Editar/eliminar as súas habilidades"
 
@@ -19726,11 +19703,6 @@ msgstr "Habilidades requiridas"
 #: www/people/viewjob.php:104
 msgid "Posting ID not found"
 msgstr "Non se atopou o ID da publicación"
-
-#: www/people/viewprofile.php:47
-#, fuzzy
-msgid "User fetch FAILED : No Such User: "
-msgstr "Produciuse un erro ao obter o usuario"
 
 #: www/people/viewprofile.php:48 www/people/viewprofile.php:51
 msgid "View a User Profile"
@@ -23703,6 +23675,43 @@ msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
 
 #, fuzzy
+#~ msgid "User update FAILED: %s"
+#~ msgstr "Produciuse un erro ao actualizar o usuario"
+
+#~ msgid "Failed to add the skill"
+#~ msgstr "Non foi posíbel engadir a habelencia"
+
+#~ msgid "Skills edit"
+#~ msgstr "Editar o meu perfil de habelencias "
+
+#~ msgid ""
+#~ "Change the required fields, and press \"Done\" at the bottom of the page"
+#~ msgstr "Cambie os campos obrigados e prema \"Feito\" ao final da páxina"
+
+#~ msgid "Failed to delete any skills"
+#~ msgstr "Produciuse un erro e non se eliminou ningunha habelencia"
+
+#, fuzzy
+#~ msgid "User fetch FAILED: %s"
+#~ msgstr "Produciuse un erro ao obter o usuario"
+
+#~ msgid ""
+#~ "The following option determines if others can see your skills. If they "
+#~ "can't, you can still enter your skills."
+#~ msgstr ""
+#~ "A seguinte opción determina se os demais poden ver as súas habilidades. "
+#~ "Aínda que non poidan, poderá introducilas igualmente."
+
+#~ msgid "No skill types in database - inform system administrator"
+#~ msgstr ""
+#~ "Non hai ningún tipo de habelencia na base de datos - Informe á "
+#~ "administración do sistema"
+
+#, fuzzy
+#~ msgid "User fetch FAILED : No Such User: "
+#~ msgstr "Produciuse un erro ao obter o usuario"
+
+#, fuzzy
 #~ msgid "JOB insert FAILED: %s"
 #~ msgstr "Produciuse un erro ao inserir o traballo"
 
@@ -25519,17 +25528,6 @@ msgstr "Páxina persoal de %s"
 #~ "páxina de resumo do seu proxecto. AS publicacións que sexan de especial "
 #~ "interese para a comunidade terán que ser aprobadas por un membro do "
 #~ "equipo de %1$s antes de poder aparecer na páxina de inicio de %1$s."
-
-#~ msgid ""
-#~ "Change the required fields, and press “Done” at the bottom of the page"
-#~ msgstr "Cambie os campos obrigados e prema “Feito” ao final da páxina"
-
-#~ msgid ""
-#~ "The following option determines if others can see your skills. If they "
-#~ "cannot, you can still enter your skills."
-#~ msgstr ""
-#~ "A seguinte opción determina se os demais poden ver as súas habilidades. "
-#~ "Aínda que non poidan, poderá introducilas igualmente."
 
 #~ msgid "Error: Site has SCM but no plugins registered"
 #~ msgstr ""

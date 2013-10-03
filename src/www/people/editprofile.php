@@ -51,7 +51,7 @@ if (session_loggedin()) {
 WHERE user_id=$2', array($people_view_skills, user_getid()));
 		if (!$result || db_affected_rows($result) < 1) {
 			form_release_key(getStringFromRequest("form_key"));
-			$error_msg .= sprintf(_('User update FAILED: %s'),db_error());
+			$error_msg .= sprintf(_('User update failed: %s'),db_error());
 		} else {
 			$feedback .= _('User updated successfully');
 		}
@@ -97,7 +97,6 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 				if (!$result || db_affected_rows($result) < 1) {
 					form_release_key(getStringFromRequest("form_key"));
 					$error_msg .= sprintf(_('Failed to add the skill %s'),db_error());
-					echo '<h2>'._('Failed to add the skill').'</h2>';
 				} else {
 					$feedback = _('Skill added successfully');
 				}
@@ -147,9 +146,9 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 				}   /* end for */
 
 			} else	/* not confirmed multiedit */ {
-				people_header(array('title'=>_('Skills edit')));
+				people_header(array('title'=>_('Edit Skills')));
 				echo '<h2>'._('Edit Skills').'</h2>';
-				echo _('Change the required fields, and press "Done" at the bottom of the page');
+				echo _('Change the required fields, and press “Done” at the bottom of the page');
 				echo '<form action="'.getStringFromServer('PHP_SELF').'" method="post">';
 				echo '<input type="hidden" name="form_key" value="'.form_generate_key().'">';
 				handle_multi_edit($skill_edit);
@@ -185,7 +184,6 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 							   array (db_int_array_to_any_clause ($skill_delete)));
 				if (!$result || db_affected_rows($result) < 1) {
 					$error_msg .= sprintf(_('Failed to delete any skills: %s'),db_error());
-					echo '<h2>'._('Failed to delete any skills').'</h2>';
 				} else {
 					$feedback = ngettext ('Skill deleted successfully', 'Skills deleted successfully', db_affected_rows($result));
 				}
@@ -232,14 +230,13 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 	$result = db_query_params("SELECT * FROM users WHERE user_id=$1", array(user_getid()));
 
 	if (!$result || db_numrows($result) < 1) {
-		$error_msg .= sprintf(_('User fetch FAILED: %s'),db_error());
-		echo '<h2>'._('No Such User').'</h2>';
+		$error_msg .= _('No Such User')._(': ').db_error();
 	} else {
 
 		echo '
 		<h2>'._('Edit Public Permissions').'</h2>
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
-		'._('The following option determines if others can see your skills. If they can\'t, you can still enter your skills.').'
+		'._('The following option determines if others can see your skills. If they cannot, you can still enter your skills.').'
 		<p>
 		<strong>'._('Publicly Viewable').':</strong><br />
 		<input type="hidden" name="form_key" value="'.form_generate_key().'">
@@ -256,7 +253,6 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 		if (!$skills || db_numrows($skills) < 1) {
 			echo db_error();
 			$feedback .= _('No skill types in database (skills_data_types table)');
-			echo '<h2>'._('No skill types in database - inform system administrator').'</h2>';
 		}
 
 		$yearArray = array();
@@ -315,7 +311,6 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 </table>";
 
 		echo '</form>';
-
 
 		echo '<h2>'._('Edit/Delete Your Skills').'</h2>
 		<table class="fullwidth">';
