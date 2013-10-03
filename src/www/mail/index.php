@@ -50,7 +50,7 @@ if ($group_id) {
 	}
 
 	mail_header(array(
-		'title' => sprintf(_('Mailing Lists for %1$s'), $group->getPublicName())
+		'title' => sprintf(_('Mailing Lists for %s'), $group->getPublicName())
 	));
 
 	plugin_hook ("blocks", "mail index");
@@ -58,14 +58,14 @@ if ($group_id) {
 	$mlArray = $mlFactory->getMailingLists();
 
 	if ($mlFactory->isError()) {
-		echo '<p class="error">'.sprintf(_('Unable to get the list %s : %s'), $group->getPublicName(), $mlFactory->getErrorMessage()) .'</p>';
+		echo '<p class="error">'.sprintf(_('Unable to get the list %s: %s'), $group->getPublicName(), $mlFactory->getErrorMessage()) .'</p>';
 		mail_footer(array());
 		exit;
 	}
 
 	$mlCount = count($mlArray);
 	if($mlCount == 0) {
-		echo '<p class="information">'.sprintf(_('No Lists found for %1$s'), $group->getPublicName()) .'</p>';
+		echo '<p class="information">'.sprintf(_('No Lists found for %s'), $group->getPublicName()) .'</p>';
 		echo '<p>'._('Project administrators use the admin link to request mailing lists.').'</p>';
 		mail_footer(array());
 		exit;
@@ -74,7 +74,7 @@ if ($group_id) {
 	echo '<p>' . _('Choose a list to browse, search, and post messages.') . '</p>';
 
 	$tableHeaders = array(
-		_('Mailing list'),
+		_('Mailing List'),
 		_('Address'),
 		_('Description'),
 		_('Subscription')

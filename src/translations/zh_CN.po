@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 14:43+0200\n"
+"POT-Creation-Date: 2013-10-03 17:39+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -721,9 +721,9 @@ msgstr "最后修改日期"
 #: plugins/mailman/www/admin/index.php:164
 #: plugins/mailman/www/admin/index.php:166
 #: plugins/mailman/www/admin/index.php:196
-#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:27
-#: plugins/mailman/www/index.php:34 plugins/mailman/www/index.php:37
-#: plugins/mailman/www/index.php:49 www/account/lostlogin.php:84
+#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:25
+#: plugins/mailman/www/index.php:32 plugins/mailman/www/index.php:35
+#: plugins/mailman/www/index.php:47 www/account/lostlogin.php:84
 #: www/admin/globalroledelete.php:49 www/admin/passedit.php:53
 #: www/admin/passedit.php:61 www/admin/passedit.php:69
 #: www/export/rss20_docman.php:152 www/forum/admin/pendingmsgdetail.php:51
@@ -2159,7 +2159,7 @@ msgstr "发布"
 #: common/forum/ForumHTML.class.php:555
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
-#: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:68
+#: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:66
 #: plugins/mailman/www/mailman_utils.php:68
 #: plugins/mailman/www/mailman_utils.php:175
 #: plugins/mantisbt/view/addOrEditNote.php:54
@@ -9406,7 +9406,8 @@ msgstr ""
 
 #: plugins/forumml/www/index.php:102 plugins/forumml/www/message.php:151
 #: plugins/mailman/www/mailman_utils.php:51
-#: plugins/mailman/www/mailman_utils.php:66
+#: plugins/mailman/www/mailman_utils.php:66 www/mail/admin/index.php:265
+#: www/mail/index.php:77
 #, fuzzy
 msgid "Mailing List"
 msgstr "邮件列表"
@@ -10927,7 +10928,7 @@ msgstr "是否公开？"
 msgid "Add This List"
 msgstr "添加这个邮件列表"
 
-#: plugins/mailman/www/admin/index.php:169 www/mail/admin/index.php:215
+#: plugins/mailman/www/admin/index.php:169
 #, fuzzy
 msgid "Mail admin"
 msgstr "邮件管理"
@@ -10936,7 +10937,7 @@ msgstr "邮件管理"
 msgid "Mailing List Administration"
 msgstr "邮件列表管理"
 
-#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:49
+#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:47
 #: www/mail/admin/index.php:251
 #, php-format
 msgid "Unable to get the list %s"
@@ -10955,27 +10956,27 @@ msgstr ""
 msgid "Add Mailing List"
 msgstr "添加邮件列表"
 
-#: plugins/mailman/www/index.php:41
-#, fuzzy
-msgid "Mailing Lists for"
+#: plugins/mailman/www/index.php:39 www/mail/index.php:53
+#, fuzzy, php-format
+msgid "Mailing Lists for %s"
 msgstr "%1$s 的邮件列表"
 
-#: plugins/mailman/www/index.php:57 www/mail/index.php:68
+#: plugins/mailman/www/index.php:55 www/mail/index.php:68
 #, php-format
-msgid "No Lists found for %1$s"
-msgstr "%1$s 没有任何邮件列表"
+msgid "No Lists found for %s"
+msgstr "%s 没有任何邮件列表"
 
-#: plugins/mailman/www/index.php:58 www/mail/index.php:69
+#: plugins/mailman/www/index.php:56 www/mail/index.php:69
 msgid "Project administrators use the admin link to request mailing lists."
 msgstr "项目管理员使用管理链接取得邮件列表"
 
-#: plugins/mailman/www/index.php:67
+#: plugins/mailman/www/index.php:65
 msgid ""
 "You seem to have mailman account with a different name or password. If you "
 "want to update mailman information, click on "
 msgstr ""
 
-#: plugins/mailman/www/index.php:74 www/mail/index.php:74
+#: plugins/mailman/www/index.php:72 www/mail/index.php:74
 #, fuzzy
 msgid "Choose a list to browse, search, and post messages."
 msgstr "<p>选一个邮件列表来浏览、搜索与发布消息</p>"
@@ -18510,8 +18511,7 @@ msgstr "密码（重复）："
 #: www/mail/admin/index.php:139
 #, php-format
 msgid ""
-"Lists are named in this manner:<br /><strong>projectname-listname@%1$s</"
-"strong>"
+"Lists are named in this manner:<br /><strong>projectname-listname@%s</strong>"
 msgstr ""
 
 #: www/mail/admin/index.php:143
@@ -18526,14 +18526,15 @@ msgstr "已经存在的邮件列表"
 msgid "Mailing List Name:"
 msgstr "邮件列表名称："
 
+#: www/mail/admin/index.php:215
+#, fuzzy, php-format
+msgid "Update Mailing List %s"
+msgstr "使用邮件列表"
+
 #: www/mail/admin/index.php:245
 #, fuzzy
 msgid "Mailing Lists Administration"
 msgstr "邮件列表管理"
-
-#: www/mail/admin/index.php:265 www/mail/index.php:77
-msgid "Mailing list"
-msgstr "邮件列表"
 
 #: www/mail/admin/index.php:295
 msgid "Reset admin password"
@@ -18544,14 +18545,9 @@ msgstr ""
 msgid "Could Not Get MailingListFactory"
 msgstr "无法完成执行"
 
-#: www/mail/index.php:53
-#, php-format
-msgid "Mailing Lists for %1$s"
-msgstr "%1$s 的邮件列表"
-
 #: www/mail/index.php:61
 #, php-format
-msgid "Unable to get the list %s : %s"
+msgid "Unable to get the list %s: %s"
 msgstr ""
 
 #: www/mail/index.php:97
@@ -23313,6 +23309,16 @@ msgstr "帐号"
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
 
+#~ msgid "Mailing list"
+#~ msgstr "邮件列表"
+
+#, fuzzy
+#~ msgid "Mailing Lists for"
+#~ msgstr "%1$s 的邮件列表"
+
+#~ msgid "No Lists found for %1$s"
+#~ msgstr "%1$s 没有任何邮件列表"
+
 #~ msgid ""
 #~ "This pages allows to change only direct properties of user object. To "
 #~ "edit properties pertinent to user within specific group, visit admin page "
@@ -24493,9 +24499,6 @@ msgstr "我的个人首页"
 #~ msgstr ""
 #~ "您可以从这里管理邮件列表，请注意，隐藏的邮件列表还是可以从您的项目网页看"
 #~ "到，但是不会出现在 %1$s。"
-
-#~ msgid "No Lists found for %s"
-#~ msgstr "%s 没有任何邮件列表"
 
 #~ msgid ""
 #~ "To avoid having to type your password every time for your CVS/SSH "

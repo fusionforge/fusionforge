@@ -1,6 +1,4 @@
 <?php
-
-
 /*
  * mailman plugin
  *
@@ -38,7 +36,7 @@ if (isset ($group_id)) {
 	}
 
 	mailman_header(array (
-		'title' => _('Mailing Lists for') . $Group->getPublicName(),
+		'title' => sprintf(_("Mailing Lists for %s"), $group->getPublicName()),
 		'help' => 'CommunicationServices.html#MailingLists',
 		'pv' => isset ($pv) ? $pv : false
 	));
@@ -54,7 +52,7 @@ if (isset ($group_id)) {
 
 	$mlCount = count($mlArray);
 	if ($mlCount == 0) {
-		echo '<p>' . sprintf(_('No Lists found for %1$s'), $Group->getPublicName()) . '</p>';
+		echo '<p>' . sprintf(_('No Lists found for %s'), $Group->getPublicName()) . '</p>';
 		echo '<p>' . _('Project administrators use the admin link to request mailing lists.') . '</p>';
 		mail_footer(array ());
 		exit;

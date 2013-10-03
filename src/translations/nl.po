@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 14:43+0200\n"
+"POT-Creation-Date: 2013-10-03 17:39+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -718,9 +718,9 @@ msgstr "Meest recente verandering"
 #: plugins/mailman/www/admin/index.php:164
 #: plugins/mailman/www/admin/index.php:166
 #: plugins/mailman/www/admin/index.php:196
-#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:27
-#: plugins/mailman/www/index.php:34 plugins/mailman/www/index.php:37
-#: plugins/mailman/www/index.php:49 www/account/lostlogin.php:84
+#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:25
+#: plugins/mailman/www/index.php:32 plugins/mailman/www/index.php:35
+#: plugins/mailman/www/index.php:47 www/account/lostlogin.php:84
 #: www/admin/globalroledelete.php:49 www/admin/passedit.php:53
 #: www/admin/passedit.php:61 www/admin/passedit.php:69
 #: www/export/rss20_docman.php:152 www/forum/admin/pendingmsgdetail.php:51
@@ -2157,7 +2157,7 @@ msgstr "Release"
 #: common/forum/ForumHTML.class.php:555
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
-#: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:68
+#: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:66
 #: plugins/mailman/www/mailman_utils.php:68
 #: plugins/mailman/www/mailman_utils.php:175
 #: plugins/mantisbt/view/addOrEditNote.php:54
@@ -9457,7 +9457,8 @@ msgstr ""
 
 #: plugins/forumml/www/index.php:102 plugins/forumml/www/message.php:151
 #: plugins/mailman/www/mailman_utils.php:51
-#: plugins/mailman/www/mailman_utils.php:66
+#: plugins/mailman/www/mailman_utils.php:66 www/mail/admin/index.php:265
+#: www/mail/index.php:77
 #, fuzzy
 msgid "Mailing List"
 msgstr "Mailing lijsten"
@@ -10977,7 +10978,7 @@ msgstr "Openbaar?"
 msgid "Add This List"
 msgstr "Deze lijst toevoegen"
 
-#: plugins/mailman/www/admin/index.php:169 www/mail/admin/index.php:215
+#: plugins/mailman/www/admin/index.php:169
 #, fuzzy
 msgid "Mail admin"
 msgstr "Mailbeheer"
@@ -10986,7 +10987,7 @@ msgstr "Mailbeheer"
 msgid "Mailing List Administration"
 msgstr "Mailinglijst beheer"
 
-#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:49
+#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:47
 #: www/mail/admin/index.php:251
 #, php-format
 msgid "Unable to get the list %s"
@@ -11006,29 +11007,29 @@ msgstr ""
 msgid "Add Mailing List"
 msgstr "Mailinglijst toevoegen"
 
-#: plugins/mailman/www/index.php:41
-#, fuzzy
-msgid "Mailing Lists for"
-msgstr "Mailinglijsten voor %1$s"
-
-#: plugins/mailman/www/index.php:57 www/mail/index.php:68
+#: plugins/mailman/www/index.php:39 www/mail/index.php:53
 #, php-format
-msgid "No Lists found for %1$s"
-msgstr "Geen lijsten gevonden voor %1$s"
+msgid "Mailing Lists for %s"
+msgstr "Mailinglijsten voor %s"
 
-#: plugins/mailman/www/index.php:58 www/mail/index.php:69
+#: plugins/mailman/www/index.php:55 www/mail/index.php:68
+#, php-format
+msgid "No Lists found for %s"
+msgstr "Geen lijsten gevonden voor %s"
+
+#: plugins/mailman/www/index.php:56 www/mail/index.php:69
 msgid "Project administrators use the admin link to request mailing lists."
 msgstr ""
 "Projectbeheerders kunnen de beheerslink gebruiken om mail lijsten aan te "
 "vragen."
 
-#: plugins/mailman/www/index.php:67
+#: plugins/mailman/www/index.php:65
 msgid ""
 "You seem to have mailman account with a different name or password. If you "
 "want to update mailman information, click on "
 msgstr ""
 
-#: plugins/mailman/www/index.php:74 www/mail/index.php:74
+#: plugins/mailman/www/index.php:72 www/mail/index.php:74
 msgid "Choose a list to browse, search, and post messages."
 msgstr "Kies een lijst als je berichten wilt zoeken, lezen of plaatsen."
 
@@ -18661,8 +18662,7 @@ msgstr "Wachtwoord (herhaal):"
 #: www/mail/admin/index.php:139
 #, php-format
 msgid ""
-"Lists are named in this manner:<br /><strong>projectname-listname@%1$s</"
-"strong>"
+"Lists are named in this manner:<br /><strong>projectname-listname@%s</strong>"
 msgstr ""
 
 #: www/mail/admin/index.php:143
@@ -18677,14 +18677,15 @@ msgstr "Bestaande mailinglijsten"
 msgid "Mailing List Name:"
 msgstr "Mailinglijst naam:"
 
+#: www/mail/admin/index.php:215
+#, fuzzy, php-format
+msgid "Update Mailing List %s"
+msgstr "Gebruik mailinglijsten"
+
 #: www/mail/admin/index.php:245
 #, fuzzy
 msgid "Mailing Lists Administration"
 msgstr "Mailinglijst beheer"
-
-#: www/mail/admin/index.php:265 www/mail/index.php:77
-msgid "Mailing list"
-msgstr "Mailinglijst"
 
 #: www/mail/admin/index.php:295
 msgid "Reset admin password"
@@ -18695,14 +18696,9 @@ msgstr ""
 msgid "Could Not Get MailingListFactory"
 msgstr "Kon de gevraagde bewerking niet uitvoeren"
 
-#: www/mail/index.php:53
-#, php-format
-msgid "Mailing Lists for %1$s"
-msgstr "Mailinglijsten voor %1$s"
-
 #: www/mail/index.php:61
 #, php-format
-msgid "Unable to get the list %s : %s"
+msgid "Unable to get the list %s: %s"
 msgstr ""
 
 #: www/mail/index.php:97
@@ -23539,6 +23535,19 @@ msgstr "Gebruikersnaam"
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
 
+#~ msgid "Mailing list"
+#~ msgstr "Mailinglijst"
+
+#, fuzzy
+#~ msgid "Mailing Lists for"
+#~ msgstr "Mailinglijsten voor %1$s"
+
+#~ msgid "No Lists found for %1$s"
+#~ msgstr "Geen lijsten gevonden voor %1$s"
+
+#~ msgid "Mailing Lists for %1$s"
+#~ msgstr "Mailinglijsten voor %1$s"
+
 #~ msgid ""
 #~ "This pages allows to change only direct properties of user object. To "
 #~ "edit properties pertinent to user within specific group, visit admin page "
@@ -24801,12 +24810,6 @@ msgstr "Mijn persoonlijke pagina"
 #~ "Je kunt lijsten hiervandaan beheren. Denk eraan dat privé denk eraan dat "
 #~ "lijsten nog steeds door leden van jouw project zichtbaar zijn, maar niet "
 #~ "zichtbaar zijn in %1$s."
-
-#~ msgid "Mailing Lists for %s"
-#~ msgstr "Mailinglijsten voor %s"
-
-#~ msgid "No Lists found for %s"
-#~ msgstr "Geen lijsten gevonden voor %s"
 
 #~ msgid ""
 #~ "To avoid having to type your password every time for your CVS/SSH "

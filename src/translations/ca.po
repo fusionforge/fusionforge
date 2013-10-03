@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 14:43+0200\n"
+"POT-Creation-Date: 2013-10-03 17:39+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -718,9 +718,9 @@ msgstr "Llista Afegida"
 #: plugins/mailman/www/admin/index.php:164
 #: plugins/mailman/www/admin/index.php:166
 #: plugins/mailman/www/admin/index.php:196
-#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:27
-#: plugins/mailman/www/index.php:34 plugins/mailman/www/index.php:37
-#: plugins/mailman/www/index.php:49 www/account/lostlogin.php:84
+#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:25
+#: plugins/mailman/www/index.php:32 plugins/mailman/www/index.php:35
+#: plugins/mailman/www/index.php:47 www/account/lostlogin.php:84
 #: www/admin/globalroledelete.php:49 www/admin/passedit.php:53
 #: www/admin/passedit.php:61 www/admin/passedit.php:69
 #: www/export/rss20_docman.php:152 www/forum/admin/pendingmsgdetail.php:51
@@ -2156,7 +2156,7 @@ msgstr "Publicacions"
 #: common/forum/ForumHTML.class.php:555
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
-#: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:68
+#: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:66
 #: plugins/mailman/www/mailman_utils.php:68
 #: plugins/mailman/www/mailman_utils.php:175
 #: plugins/mantisbt/view/addOrEditNote.php:54
@@ -9457,7 +9457,8 @@ msgstr ""
 
 #: plugins/forumml/www/index.php:102 plugins/forumml/www/message.php:151
 #: plugins/mailman/www/mailman_utils.php:51
-#: plugins/mailman/www/mailman_utils.php:66
+#: plugins/mailman/www/mailman_utils.php:66 www/mail/admin/index.php:265
+#: www/mail/index.php:77
 #, fuzzy
 msgid "Mailing List"
 msgstr "Llistes d'enviament de correus"
@@ -10976,7 +10977,7 @@ msgstr "És Públic?"
 msgid "Add This List"
 msgstr "Afegeix aquesta llista"
 
-#: plugins/mailman/www/admin/index.php:169 www/mail/admin/index.php:215
+#: plugins/mailman/www/admin/index.php:169
 #, fuzzy
 msgid "Mail admin"
 msgstr "Administració de les llistes de correu"
@@ -10985,7 +10986,7 @@ msgstr "Administració de les llistes de correu"
 msgid "Mailing List Administration"
 msgstr "Administració de la llista de correu"
 
-#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:49
+#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:47
 #: www/mail/admin/index.php:251
 #, php-format
 msgid "Unable to get the list %s"
@@ -11005,29 +11006,29 @@ msgstr ""
 msgid "Add Mailing List"
 msgstr "Afegeix una llista de correu"
 
-#: plugins/mailman/www/index.php:41
-#, fuzzy
-msgid "Mailing Lists for"
+#: plugins/mailman/www/index.php:39 www/mail/index.php:53
+#, fuzzy, php-format
+msgid "Mailing Lists for %s"
 msgstr "Llistes de correu per %1$s"
 
-#: plugins/mailman/www/index.php:57 www/mail/index.php:68
+#: plugins/mailman/www/index.php:55 www/mail/index.php:68
 #, php-format
-msgid "No Lists found for %1$s"
-msgstr "No s'han trobat llistes per %1$s"
+msgid "No Lists found for %s"
+msgstr "No s'han trobat llistes per %s"
 
-#: plugins/mailman/www/index.php:58 www/mail/index.php:69
+#: plugins/mailman/www/index.php:56 www/mail/index.php:69
 msgid "Project administrators use the admin link to request mailing lists."
 msgstr ""
 "Els administradors del projecte usen l'enllaç d'administració per a "
 "sol·licitar llistes de correu."
 
-#: plugins/mailman/www/index.php:67
+#: plugins/mailman/www/index.php:65
 msgid ""
 "You seem to have mailman account with a different name or password. If you "
 "want to update mailman information, click on "
 msgstr ""
 
-#: plugins/mailman/www/index.php:74 www/mail/index.php:74
+#: plugins/mailman/www/index.php:72 www/mail/index.php:74
 msgid "Choose a list to browse, search, and post messages."
 msgstr "Trieu una llista per navegar, cercar i enviar missatges."
 
@@ -18644,8 +18645,7 @@ msgstr "Contrasenya (repetició):"
 #: www/mail/admin/index.php:139
 #, php-format
 msgid ""
-"Lists are named in this manner:<br /><strong>projectname-listname@%1$s</"
-"strong>"
+"Lists are named in this manner:<br /><strong>projectname-listname@%s</strong>"
 msgstr ""
 
 #: www/mail/admin/index.php:143
@@ -18660,14 +18660,15 @@ msgstr "Llistes de correu existents"
 msgid "Mailing List Name:"
 msgstr "Nom de la llista de correu:"
 
+#: www/mail/admin/index.php:215
+#, fuzzy, php-format
+msgid "Update Mailing List %s"
+msgstr "Usa les llistes de correu"
+
 #: www/mail/admin/index.php:245
 #, fuzzy
 msgid "Mailing Lists Administration"
 msgstr "Administració de la llista de correu"
-
-#: www/mail/admin/index.php:265 www/mail/index.php:77
-msgid "Mailing list"
-msgstr "Llista de correu"
 
 #: www/mail/admin/index.php:295
 msgid "Reset admin password"
@@ -18678,14 +18679,9 @@ msgstr ""
 msgid "Could Not Get MailingListFactory"
 msgstr "No s'ha pogut completar l'operació"
 
-#: www/mail/index.php:53
-#, php-format
-msgid "Mailing Lists for %1$s"
-msgstr "Llistes de correu per %1$s"
-
 #: www/mail/index.php:61
 #, php-format
-msgid "Unable to get the list %s : %s"
+msgid "Unable to get the list %s: %s"
 msgstr ""
 
 #: www/mail/index.php:97
@@ -23506,6 +23502,16 @@ msgstr "Nom d'usuari"
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
 
+#~ msgid "Mailing list"
+#~ msgstr "Llista de correu"
+
+#, fuzzy
+#~ msgid "Mailing Lists for"
+#~ msgstr "Llistes de correu per %1$s"
+
+#~ msgid "No Lists found for %1$s"
+#~ msgstr "No s'han trobat llistes per %1$s"
+
 #~ msgid ""
 #~ "This pages allows to change only direct properties of user object. To "
 #~ "edit properties pertinent to user within specific group, visit admin page "
@@ -24695,9 +24701,6 @@ msgstr "La meva pàgina personal"
 #~ "Podeu administrar llistes des d'aquí. Tingueu en compte que les llistes "
 #~ "privades encara poden ser vistes per membres del vostre projecte, però no "
 #~ "estan llistades a %1$s."
-
-#~ msgid "No Lists found for %s"
-#~ msgstr "No s'han trobat llistes per %s"
 
 #~ msgid ""
 #~ "To avoid having to type your password every time for your CVS/SSH "

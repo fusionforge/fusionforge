@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 14:43+0200\n"
+"POT-Creation-Date: 2013-10-03 17:39+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -666,9 +666,9 @@ msgstr "Dernière modification"
 #: plugins/mailman/www/admin/index.php:164
 #: plugins/mailman/www/admin/index.php:166
 #: plugins/mailman/www/admin/index.php:196
-#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:27
-#: plugins/mailman/www/index.php:34 plugins/mailman/www/index.php:37
-#: plugins/mailman/www/index.php:49 www/account/lostlogin.php:84
+#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:25
+#: plugins/mailman/www/index.php:32 plugins/mailman/www/index.php:35
+#: plugins/mailman/www/index.php:47 www/account/lostlogin.php:84
 #: www/admin/globalroledelete.php:49 www/admin/passedit.php:53
 #: www/admin/passedit.php:61 www/admin/passedit.php:69
 #: www/export/rss20_docman.php:152 www/forum/admin/pendingmsgdetail.php:51
@@ -2045,7 +2045,7 @@ msgstr "Accepter"
 #: common/forum/ForumHTML.class.php:555
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
-#: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:68
+#: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:66
 #: plugins/mailman/www/mailman_utils.php:68
 #: plugins/mailman/www/mailman_utils.php:175
 #: plugins/mantisbt/view/addOrEditNote.php:54
@@ -9179,7 +9179,8 @@ msgstr ""
 
 #: plugins/forumml/www/index.php:102 plugins/forumml/www/message.php:151
 #: plugins/mailman/www/mailman_utils.php:51
-#: plugins/mailman/www/mailman_utils.php:66
+#: plugins/mailman/www/mailman_utils.php:66 www/mail/admin/index.php:265
+#: www/mail/index.php:77
 msgid "Mailing List"
 msgstr "Liste de diffusion"
 
@@ -10640,7 +10641,7 @@ msgstr "Public ?"
 msgid "Add This List"
 msgstr "Ajouter cette liste"
 
-#: plugins/mailman/www/admin/index.php:169 www/mail/admin/index.php:215
+#: plugins/mailman/www/admin/index.php:169
 msgid "Mail admin"
 msgstr "Administration des listes de diffusion"
 
@@ -10648,7 +10649,7 @@ msgstr "Administration des listes de diffusion"
 msgid "Mailing List Administration"
 msgstr "Administration des listes de diffusion"
 
-#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:49
+#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:47
 #: www/mail/admin/index.php:251
 #, php-format
 msgid "Unable to get the list %s"
@@ -10668,28 +10669,29 @@ msgstr ""
 msgid "Add Mailing List"
 msgstr "Ajouter une liste de diffusion"
 
-#: plugins/mailman/www/index.php:41
-msgid "Mailing Lists for"
-msgstr "Listes de diffusion pour"
-
-#: plugins/mailman/www/index.php:57 www/mail/index.php:68
+#: plugins/mailman/www/index.php:39 www/mail/index.php:53
 #, php-format
-msgid "No Lists found for %1$s"
-msgstr "Pas de listes trouvées pour %1$s"
+msgid "Mailing Lists for %s"
+msgstr "Listes de diffusion pour %s"
 
-#: plugins/mailman/www/index.php:58 www/mail/index.php:69
+#: plugins/mailman/www/index.php:55 www/mail/index.php:68
+#, php-format
+msgid "No Lists found for %s"
+msgstr "Pas de listes trouvées pour %s"
+
+#: plugins/mailman/www/index.php:56 www/mail/index.php:69
 msgid "Project administrators use the admin link to request mailing lists."
 msgstr ""
 "Les administrateurs de projets doivent utiliser le lien Administration pour "
 "demander des listes de diffusion."
 
-#: plugins/mailman/www/index.php:67
+#: plugins/mailman/www/index.php:65
 msgid ""
 "You seem to have mailman account with a different name or password. If you "
 "want to update mailman information, click on "
 msgstr ""
 
-#: plugins/mailman/www/index.php:74 www/mail/index.php:74
+#: plugins/mailman/www/index.php:72 www/mail/index.php:74
 msgid "Choose a list to browse, search, and post messages."
 msgstr "Choisissez une liste pour parcourir, chercher ou poster des messages."
 
@@ -18249,11 +18251,10 @@ msgstr "Remise à zéro du mot de passe déclenchée."
 #: www/mail/admin/index.php:139
 #, php-format
 msgid ""
-"Lists are named in this manner:<br /><strong>projectname-listname@%1$s</"
-"strong>"
+"Lists are named in this manner:<br /><strong>projectname-listname@%s</strong>"
 msgstr ""
 "Les listes sont nommées selon le schéma suivant :<br /><strong>nomduprojet-"
-"nomdelaliste@%1$s</strong>"
+"nomdelaliste@%s</strong>"
 
 #: www/mail/admin/index.php:143
 msgid "It will take one hour for your list to be created."
@@ -18267,13 +18268,14 @@ msgstr "Listes de diffusion existantes"
 msgid "Mailing List Name:"
 msgstr "Nom de la liste de diffusion :"
 
+#: www/mail/admin/index.php:215
+#, php-format
+msgid "Update Mailing List %s"
+msgstr "Mettre à jour la liste de diffusion %s"
+
 #: www/mail/admin/index.php:245
 msgid "Mailing Lists Administration"
 msgstr "Administration des listes de diffusion"
-
-#: www/mail/admin/index.php:265 www/mail/index.php:77
-msgid "Mailing list"
-msgstr "Liste de diffusion"
 
 #: www/mail/admin/index.php:295
 msgid "Reset admin password"
@@ -18283,14 +18285,9 @@ msgstr "Régénérer un mot de passe d'administration"
 msgid "Could Not Get MailingListFactory"
 msgstr "Erreur lors de l'accès à une MailingListFactory."
 
-#: www/mail/index.php:53
-#, php-format
-msgid "Mailing Lists for %1$s"
-msgstr "Listes de diffusion pour %1$s"
-
 #: www/mail/index.php:61
 #, php-format
-msgid "Unable to get the list %s : %s"
+msgid "Unable to get the list %s: %s"
 msgstr "Erreur lors de la récupération de la liste %s : %s"
 
 #: www/mail/index.php:97
@@ -23069,6 +23066,25 @@ msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
 #~ msgid ""
+#~ "Lists are named in this manner:<br /><strong>projectname-listname@%1$s</"
+#~ "strong>"
+#~ msgstr ""
+#~ "Les listes sont nommées selon le schéma suivant :<br /"
+#~ "><strong>nomduprojet-nomdelaliste@%1$s</strong>"
+
+#~ msgid "Mailing list"
+#~ msgstr "Liste de diffusion"
+
+#~ msgid "Mailing Lists for"
+#~ msgstr "Listes de diffusion pour"
+
+#~ msgid "No Lists found for %1$s"
+#~ msgstr "Pas de listes trouvées pour %1$s"
+
+#~ msgid "Mailing Lists for %1$s"
+#~ msgstr "Listes de diffusion pour %1$s"
+
+#~ msgid ""
 #~ "This pages allows to change only direct properties of user object. To "
 #~ "edit properties pertinent to user within specific group, visit admin page "
 #~ "of that group (below)."
@@ -25688,25 +25704,12 @@ msgstr "Page personnelle de %s"
 #~ msgstr "Impossible de modifier le mode de passe d'un compte LDAP"
 
 #~ msgid ""
-#~ "Lists are named in this manner:<br /><strong>projectname-listname@%s</"
-#~ "strong>"
-#~ msgstr ""
-#~ "Les listes sont nommées selon le schéma suivant :<br /"
-#~ "><strong>nomduprojet-nomdelaliste@%s</strong>"
-
-#~ msgid ""
 #~ "You can administrate lists from here. Please note that private lists can "
 #~ "still be viewed by members of your project, but are not listed on %s."
 #~ msgstr ""
 #~ "Vous pouvez administrer les listes de diffusion à partir de cette "
 #~ "interface. Veuillez noter que les listes privées sont visibles par les "
 #~ "membres de votre projet mais pas par les autres utilisateurs de %1$s."
-
-#~ msgid "Mailing Lists for %s"
-#~ msgstr "Listes de diffusion pour %s"
-
-#~ msgid "No Lists found for %s"
-#~ msgstr "Pas de listes trouvées pour %s"
 
 #~ msgid "Cannot copy file to target directory"
 #~ msgstr "Le fichier ne peut pas être copié vers sa destination"
@@ -26105,9 +26108,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "(at least 4 characters)"
 #~ msgstr "(4 caractères minimum)"
-
-#~ msgid "Update Mailing List %s"
-#~ msgstr "Mettre à jour la liste de diffusion %s"
 
 #~ msgid "%s Archives"
 #~ msgstr "Archives de %s"

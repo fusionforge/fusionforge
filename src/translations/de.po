@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-01 14:43+0200\n"
+"POT-Creation-Date: 2013-10-03 17:39+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -719,9 +719,9 @@ msgstr "Zuletzt bearbeitet"
 #: plugins/mailman/www/admin/index.php:164
 #: plugins/mailman/www/admin/index.php:166
 #: plugins/mailman/www/admin/index.php:196
-#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:27
-#: plugins/mailman/www/index.php:34 plugins/mailman/www/index.php:37
-#: plugins/mailman/www/index.php:49 www/account/lostlogin.php:84
+#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:25
+#: plugins/mailman/www/index.php:32 plugins/mailman/www/index.php:35
+#: plugins/mailman/www/index.php:47 www/account/lostlogin.php:84
 #: www/admin/globalroledelete.php:49 www/admin/passedit.php:53
 #: www/admin/passedit.php:61 www/admin/passedit.php:69
 #: www/export/rss20_docman.php:152 www/forum/admin/pendingmsgdetail.php:51
@@ -2165,7 +2165,7 @@ msgstr "Version"
 #: common/forum/ForumHTML.class.php:555
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
-#: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:68
+#: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:66
 #: plugins/mailman/www/mailman_utils.php:68
 #: plugins/mailman/www/mailman_utils.php:175
 #: plugins/mantisbt/view/addOrEditNote.php:54
@@ -9504,7 +9504,8 @@ msgstr ""
 
 #: plugins/forumml/www/index.php:102 plugins/forumml/www/message.php:151
 #: plugins/mailman/www/mailman_utils.php:51
-#: plugins/mailman/www/mailman_utils.php:66
+#: plugins/mailman/www/mailman_utils.php:66 www/mail/admin/index.php:265
+#: www/mail/index.php:77
 #, fuzzy
 msgid "Mailing List"
 msgstr "Mailinglisten"
@@ -11029,7 +11030,7 @@ msgstr "Ist öffentlich?"
 msgid "Add This List"
 msgstr "Diese Liste hinzufügen"
 
-#: plugins/mailman/www/admin/index.php:169 www/mail/admin/index.php:215
+#: plugins/mailman/www/admin/index.php:169
 msgid "Mail admin"
 msgstr "Post-Admin"
 
@@ -11037,7 +11038,7 @@ msgstr "Post-Admin"
 msgid "Mailing List Administration"
 msgstr "Administration der Mailingliste"
 
-#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:49
+#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:47
 #: www/mail/admin/index.php:251
 #, php-format
 msgid "Unable to get the list %s"
@@ -11057,29 +11058,29 @@ msgstr ""
 msgid "Add Mailing List"
 msgstr "Mailinglisten hinzufügen"
 
-#: plugins/mailman/www/index.php:41
-#, fuzzy
-msgid "Mailing Lists for"
+#: plugins/mailman/www/index.php:39 www/mail/index.php:53
+#, fuzzy, php-format
+msgid "Mailing Lists for %s"
 msgstr "Mailinglisten für %1$s"
 
-#: plugins/mailman/www/index.php:57 www/mail/index.php:68
+#: plugins/mailman/www/index.php:55 www/mail/index.php:68
 #, php-format
-msgid "No Lists found for %1$s"
-msgstr "Keine Listen für %1$s gefunden"
+msgid "No Lists found for %s"
+msgstr "Keine Listen für %s gefunden"
 
-#: plugins/mailman/www/index.php:58 www/mail/index.php:69
+#: plugins/mailman/www/index.php:56 www/mail/index.php:69
 msgid "Project administrators use the admin link to request mailing lists."
 msgstr ""
 "Projektadministratoren benutzen den Admin-Link um eine Mailingliste "
 "anzufordern"
 
-#: plugins/mailman/www/index.php:67
+#: plugins/mailman/www/index.php:65
 msgid ""
 "You seem to have mailman account with a different name or password. If you "
 "want to update mailman information, click on "
 msgstr ""
 
-#: plugins/mailman/www/index.php:74 www/mail/index.php:74
+#: plugins/mailman/www/index.php:72 www/mail/index.php:74
 msgid "Choose a list to browse, search, and post messages."
 msgstr ""
 "Wählen Sie eine Liste zum Durchsuchen, suchen und um Nachrichten posten."
@@ -18849,14 +18850,12 @@ msgid "Password reset requested"
 msgstr "Rücksetzung des Passworts beantragt "
 
 #: www/mail/admin/index.php:139
-#, fuzzy, php-format
+#, php-format
 msgid ""
-"Lists are named in this manner:<br /><strong>projectname-listname@%1$s</"
-"strong>"
+"Lists are named in this manner:<br /><strong>projectname-listname@%s</strong>"
 msgstr ""
-"<p>Listen werden folgendermaßen benannt:<br /><strong> projectname-listname@"
-"%1$s</strong></p><p> Es dauert <span class=\"important\">6-24 Stunden</"
-"span>bis die Liste angelegt ist.</p>"
+"Listen werden folgendermaßen benannt:<br /><strong> projectname-listname@%s</"
+"strong>"
 
 #: www/mail/admin/index.php:143
 msgid "It will take one hour for your list to be created."
@@ -18870,14 +18869,15 @@ msgstr "Existierende Mailinglisten"
 msgid "Mailing List Name:"
 msgstr "Name der Mailingliste :"
 
+#: www/mail/admin/index.php:215
+#, fuzzy, php-format
+msgid "Update Mailing List %s"
+msgstr "Benutze Mailing Listen"
+
 #: www/mail/admin/index.php:245
 #, fuzzy
 msgid "Mailing Lists Administration"
 msgstr "Administration der Mailingliste"
-
-#: www/mail/admin/index.php:265 www/mail/index.php:77
-msgid "Mailing list"
-msgstr "Mailingliste"
 
 #: www/mail/admin/index.php:295
 msgid "Reset admin password"
@@ -18888,14 +18888,9 @@ msgstr "Admin-Passwort zurücksetzen"
 msgid "Could Not Get MailingListFactory"
 msgstr "Konnte Factory nicht anzeigen"
 
-#: www/mail/index.php:53
-#, php-format
-msgid "Mailing Lists for %1$s"
-msgstr "Mailinglisten für %1$s"
-
 #: www/mail/index.php:61
 #, fuzzy, php-format
-msgid "Unable to get the list %s : %s"
+msgid "Unable to get the list %s: %s"
 msgstr "Kein Zugriff auf Liste %s möglich."
 
 #: www/mail/index.php:97
@@ -23781,6 +23776,25 @@ msgstr "Kein Benutzername angegeben"
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
 
+#, fuzzy
+#~ msgid ""
+#~ "Lists are named in this manner:<br /><strong>projectname-listname@%1$s</"
+#~ "strong>"
+#~ msgstr ""
+#~ "<p>Listen werden folgendermaßen benannt:<br /><strong> projectname-"
+#~ "listname@%1$s</strong></p><p> Es dauert <span class=\"important\">6-24 "
+#~ "Stunden</span>bis die Liste angelegt ist.</p>"
+
+#~ msgid "Mailing list"
+#~ msgstr "Mailingliste"
+
+#, fuzzy
+#~ msgid "Mailing Lists for"
+#~ msgstr "Mailinglisten für %1$s"
+
+#~ msgid "No Lists found for %1$s"
+#~ msgstr "Keine Listen für %1$s gefunden"
+
 #~ msgid ""
 #~ "This pages allows to change only direct properties of user object. To "
 #~ "edit properties pertinent to user within specific group, visit admin page "
@@ -25507,22 +25521,12 @@ msgstr "Persönliche Seite für %s"
 #~ "Noch keine gültigen Strukturen, kann ohne keine Teilnehmer definieren."
 
 #~ msgid ""
-#~ "Lists are named in this manner:<br /><strong>projectname-listname@%s</"
-#~ "strong>"
-#~ msgstr ""
-#~ "Listen werden folgendermaßen benannt:<br /><strong> projectname-listname@"
-#~ "%s</strong>"
-
-#~ msgid ""
 #~ "You can administrate lists from here. Please note that private lists can "
 #~ "still be viewed by members of your project, but are not listed on %s."
 #~ msgstr ""
 #~ "Sie können die Listen von hier aus administrieren. Bitte bedenken Sie, "
 #~ "dass private Listen immernoch von Mitgliedern Ihres Projektes angeschaut "
 #~ "werden können, die aber nicht in %1$s aufgelistet sind."
-
-#~ msgid "No Lists found for %s"
-#~ msgstr "Keine Listen für %s gefunden"
 
 #~ msgid ""
 #~ "This project's Git repository can be cloned and fetched through anonymous "

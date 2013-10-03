@@ -136,7 +136,7 @@ if ($group_id) {
 	if(getIntFromGet('add_list')) {
 		mail_header(array('title' => _('Add a Mailing List')));
 		print '<p>';
-		printf(_('Lists are named in this manner:<br /><strong>projectname-listname@%1$s</strong>'), forge_get_config('lists_host'));
+		printf(_('Lists are named in this manner:<br /><strong>projectname-listname@%s</strong>'), forge_get_config('lists_host'));
 		print '</p>';
 
 		print '<p>';
@@ -212,7 +212,7 @@ if ($group_id) {
 		}
 
 		mail_header(array(
-			'title' => _('Mail admin')));
+			'title' => sprintf(_('Update Mailing List %s'), $mailingList->getName())));
 		?>
 		<h3><?php echo $mailingList->getName(); ?></h3>
 		<form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;group_list_id=<?php echo $mailingList->getID(); ?>">
@@ -262,7 +262,7 @@ if ($group_id) {
 		$mlCount = count($mlArray);
 		if($mlCount > 0) {
 			$tableHeaders = array(
-				_('Mailing list'),
+				_('Mailing List'),
 				'',
 				'',
 				''
@@ -278,7 +278,7 @@ if ($group_id) {
 					echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td>'.
 					'<strong>'.$currentList->getName().'</strong><br />'.
 					htmlspecialchars($currentList->getDescription()).'</td>'.
-					'<td style="text-align:center">';
+					'<td class="align-center">';
 					if ($currentList->getStatus() != MAIL__MAILING_LIST_PW_RESET_REQUESTED) {
 						echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;change_status=1">'._('Update').'</a>';
 					}
