@@ -51,7 +51,7 @@ AND groups.group_id=people_job.group_id
 AND people_job.job_id=$1 AND people_job.group_id=$2",
 array($job_id, $group_id));
 	if (!$result || db_numrows($result) < 1) {
-		$error_msg .= _('POSTING fetch FAILED: No such posting for this project :').db_error();
+		$error_msg .= _('Posting fetch failed: No such posting for this project:').db_error();
 		people_header(array('title'=>_('View a Job')));
 	} else {
 
@@ -59,9 +59,8 @@ array($job_id, $group_id));
 
 //		<h2>'. db_result($result,0,'category_name') .' wanted for '. db_result($result,0,'group_name') .'</h2>
 		echo '
-		<p />
 		<table class="fullwidth">
-                <tr><td colspan="2">
+		<tr><td colspan="2">
 			<strong>'. db_result($result,0,'title') .'</strong>
 		</td></tr>
 

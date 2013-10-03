@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 18:24+0200\n"
+"POT-Creation-Date: 2013-10-03 18:27+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1242,7 +1242,7 @@ msgstr "最後の投稿"
 #: www/export/rssAboTask.php:145 www/frs/admin/editrelease.php:235
 #: www/frs/admin/index.php:155 www/my/dashboard.php:72
 #: www/news/admin/index.php:129 www/people/editjob.php:74
-#: www/people/editjob.php:166 www/people/viewjob.php:72
+#: www/people/editjob.php:166 www/people/viewjob.php:71
 #: www/pm/browse_task.php:160 www/pm/detail_task.php:153
 #: www/pm/ganttpage.php:176 www/pm/include/ProjectTaskHTML.class.php:110
 #: www/pm/mod_task.php:202 www/pm/mod_task.php:217
@@ -1356,7 +1356,7 @@ msgstr ""
 #: www/forum/myforums.php:152 www/frs/index.php:178 www/frs/index.php:237
 #: www/include/html.php:1055 www/news/news_utils.php:149
 #: www/news/news_utils.php:269 www/people/people_utils.php:422
-#: www/people/viewjob.php:78 www/pm/browse_task.php:265
+#: www/people/viewjob.php:77 www/pm/browse_task.php:265
 #: www/pm/browse_task.php:275 www/pm/include/ProjectTaskHTML.class.php:122
 #: www/pm/include/ProjectTaskHTML.class.php:175
 #: www/pm/include/ProjectTaskHTML.class.php:236 www/pm/mod_task.php:312
@@ -5229,7 +5229,7 @@ msgstr ""
 #: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:558
 #: common/tracker/actions/query.php:200
 #: common/tracker/views/form-customizelist.php:38
-#: cronjobs/send_pending_items_mail.php:118 www/people/viewjob.php:77
+#: cronjobs/send_pending_items_mail.php:118 www/people/viewjob.php:76
 #: www/pm/include/ProjectTaskHTML.class.php:111
 #: www/project/report/index.php:137
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:59
@@ -6386,7 +6386,7 @@ msgid ""
 msgstr ""
 
 #: common/tracker/include/build_submission_form.php:53 www/news/submit.php:144
-#: www/people/viewjob.php:80
+#: www/people/viewjob.php:79
 msgid "For project"
 msgstr ""
 
@@ -18441,7 +18441,7 @@ msgid "Short Description"
 msgstr ""
 
 #: www/people/createjob.php:55 www/people/editjob.php:172
-#: www/people/viewjob.php:85
+#: www/people/viewjob.php:84
 msgid "Long Description"
 msgstr ""
 
@@ -18853,22 +18853,23 @@ msgid "None Found"
 msgstr ""
 
 #: www/people/viewjob.php:54
-msgid "POSTING fetch FAILED: No such posting for this project :"
-msgstr ""
+#, fuzzy
+msgid "Posting fetch failed: No such posting for this project:"
+msgstr "あなたはアクティブプロジェクトのメンバーではありません。"
 
 #: www/people/viewjob.php:55 www/people/viewjob.php:58
 msgid "View a Job"
 msgstr ""
 
-#: www/people/viewjob.php:69
+#: www/people/viewjob.php:68
 msgid "Contact Info"
 msgstr ""
 
-#: www/people/viewjob.php:89
+#: www/people/viewjob.php:88
 msgid "Required Skills"
 msgstr ""
 
-#: www/people/viewjob.php:104
+#: www/people/viewjob.php:103
 msgid "Posting ID not found"
 msgstr ""
 
