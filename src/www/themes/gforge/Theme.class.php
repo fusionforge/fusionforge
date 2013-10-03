@@ -67,12 +67,12 @@ class Theme extends Layout {
 			$params['title'] = $params['title'] . " – " . forge_get_config('forge_name');
 		}
 
-                echo '
-			<table id="header" class="width-100p100">
+		echo '
+			<table id="header" class="fullwidth">
 				<tr>
 					<td id="header-col1">';
-				echo util_make_link ('/', html_image('header/top-logo.png',192,54,array('alt'=>'FusionForge Home')));
-				echo '</td>
+		echo util_make_link ('/', html_image('header/top-logo.png',192,54,array('alt'=>'FusionForge Home')));
+		echo '</td>
 					<td id="header-col2">';
 		$this->searchBox();
 		echo '
@@ -129,9 +129,9 @@ class Theme extends Layout {
 		echo '</div><!-- id="maindiv" -->' . "\n";
 	}
 
-        function footer($params) {
+	function footer($params) {
 		$this->bodyFooter($params);
-                echo '
+		echo '
 			<!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 			<div class="align-right">
                        ' . $this->navigation->getPoweredBy() . '
@@ -141,11 +141,11 @@ class Theme extends Layout {
 
 		plugin_hook('webanalytics_url', array());
 
-                echo '
+		echo '
 		</body>
 		</html>
 		';
-        }
+	}
 
 	/**
 	 * boxTop() - Top HTML box
@@ -153,6 +153,7 @@ class Theme extends Layout {
 	 * @param   string  Box title
 	 * @param   bool    Whether to echo or return the results
 	 * @param   string  The box background color
+	 * @return string
 	 */
 	function boxTop($title, $id = '') {
 		if ($id) {
@@ -187,6 +188,7 @@ class Theme extends Layout {
 	 *
 	 * @param   string  Box title
 	 * @param   string  The box background color
+	 * @return string
 	 */
 	function boxMiddle($title, $id = '') {
 		if ($id) {
@@ -210,8 +212,8 @@ class Theme extends Layout {
 	 */
 	function boxBottom() {
 		$t_result='
-		</div> <!-- class="box-content" -->
-	</div> <!-- class="box-surround" -->
+                </div> <!-- class="box-content" -->
+            </div> <!-- class="box-surround" -->
 		';
 		return $t_result;
 	}
@@ -230,18 +232,18 @@ class Theme extends Layout {
 	}
 
 	function tabGenerator($TABS_DIRS, $TABS_TITLES, $TABS_TOOLTIPS, $nested=false,
-					$selected=false, $sel_tab_bgcolor='WHITE',
-					$total_width='100%') {
+						  $selected=false, $sel_tab_bgcolor='WHITE',
+						  $total_width='100%') {
 		$count=count($TABS_DIRS);
 		if ($count < 1) {
-			return;
+			return '';
 		}
 
 		global $use_tooltips ;
 
 		$return = '
 		<!-- start tabs -->
-		<table class="tabGenerator width-100p100" ';
+		<table class="tabGenerator fullwidth" ';
 
 		if ($total_width != '100%') {
 			$return .= 'style="width:' . $total_width . ';"';
@@ -334,8 +336,8 @@ class Theme extends Layout {
 		}
 
 		$return .= '</tr>
-	</table>
-	<!-- end tabs -->';
+		</table>
+		<!-- end tabs -->';
 
 		return $return;
 	}
@@ -347,7 +349,7 @@ class Theme extends Layout {
 	 */
 	function beginSubMenu() {
 		$return = '
-	<p><strong>';
+            <p><strong>';
 		return $return;
 	}
 
@@ -419,7 +421,7 @@ class Theme extends Layout {
 	 */
 	function multiTableRow($row_attr, $cell_data, $istitle) {
 		$return= '
-	<tr class="ff" '.$row_attr;
+		<tr class="ff" '.$row_attr;
 		if ( $istitle ) {
 			$return .=' align="center"';
 		}
@@ -441,7 +443,7 @@ class Theme extends Layout {
 
 		}
 		$return .= '</tr>
-	';
+		';
 
 		return $return;
 	}
@@ -454,7 +456,7 @@ class Theme extends Layout {
 	 */
 	function getThemeIdFromName($dirname) {
 		$res=db_query_params ('SELECT theme_id FROM themes WHERE dirname=$1',
-				      array($dirname));
+					  array($dirname));
 		return db_result($res,0,'theme_id');
 	}
 }
