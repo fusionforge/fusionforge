@@ -112,8 +112,7 @@ echo '<table class="fullwidth">';
 echo '<tr class="top">';
 echo '<td class="halfwidth">';
 
-echo '<div class="info-box">' . "\n";
-echo '<h2>' . _('Active Tools') . '</h2>';
+echo $HTML->boxTop(_('Active Tools').'');
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
@@ -121,8 +120,8 @@ echo '<h2>' . _('Active Tools') . '</h2>';
 <input type="hidden" name="group_id" value="<?php echo $group->getID(); ?>" />
 <input type="hidden" name="form_group_name" value="<?php echo $group->getPublicName(); ?>" />
 <input type="hidden" name="form_shortdesc" value="<?php echo $group->getDescription(); ?>" />
-<input type="hidden" name="form_tags" value="<?php echo $group->getTags(); ?>" />
-<input type="hidden" name="form_homepage" value="<?php echo $group->getHomePage(); ?>" />
+<input type="hidden" name="form_tags" size="100" value="<?php echo $group->getTags(); ?>" />
+<input type="hidden" name="form_homepage" size="100" value="<?php echo $group->getHomePage(); ?>" />
 
 <?php
 
@@ -302,16 +301,18 @@ plugin_hook("groupisactivecheckbox",$hookParams);
 
 <input type="hidden" name="new_doc_address" value="<?php echo $group->getDocEmailAddress(); ?>" />
 <input type="hidden" name="send_all_docs" value="1" <?php echo c($group->docEmailAll()); ?> />
+
 <input type="submit" name="submit" value="<?php echo _('Update') ?>" />
 </form>
 
+<br />
+
 <?php
-echo '</div>';
+echo $HTML->boxBottom();
 echo '</td>';
 
 echo '<td>';
-echo '<div class="info-box">' . "\n";
-echo '<h2>' . _('Tool Admin') . '</h2>';
+echo $HTML->boxTop(_('Tool Admin').'');
 
 if($group->usesForum()) { ?>
 	<p><a href="/forum/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Forums Admin') ?></a></p>
@@ -345,7 +346,8 @@ $hook_params = array();
 $hook_params['group_id'] = $group_id;
 plugin_hook("project_admin_plugins", $hook_params);
 
-echo '</div>';
+echo $HTML->boxBottom();
+
 echo '</td>';
 echo '</tr>';
 echo '</table>';
