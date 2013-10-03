@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 19:43+0200\n"
+"POT-Creation-Date: 2013-10-03 19:57+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3229,9 +3229,10 @@ msgstr ""
 msgid "Error Getting Role Object"
 msgstr "Errore nella creazione  del progetto"
 
-#: common/include/Group.class.php:2024
+#: common/include/Group.class.php:2024 www/account/lostpw.php:45
+#: www/account/pending-resend.php:38 www/sendmessage.php:45 www/users:74
 #, fuzzy
-msgid "Error: User does not exist"
+msgid "That user does not exist."
 msgstr "La query non esiste"
 
 #: common/include/Group.class.php:2072 common/include/Group.class.php:2191
@@ -14914,11 +14915,6 @@ msgstr "[Hai dimenticato la password?]"
 msgid "Welcome, %s. You may now change your password."
 msgstr ""
 
-#: www/account/lostpw.php:45 www/sendmessage.php:45 www/users:74
-#, fuzzy
-msgid "That user does not exist"
-msgstr "La query non esiste"
-
 #: www/account/lostpw.php:58
 #, php-format
 msgid ""
@@ -14974,11 +14970,6 @@ msgstr "Invia codice hash della password smarrita"
 #, fuzzy
 msgid "Missing Parameter. You must provide a login name or an email address."
 msgstr "Parametro mancante, non è stato selezionato un destinatario"
-
-#: www/account/pending-resend.php:38
-#, fuzzy
-msgid "That user does not exist."
-msgstr "La query non esiste"
 
 #: www/account/pending-resend.php:42
 #, fuzzy
@@ -23487,6 +23478,14 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "Error: User does not exist"
+#~ msgstr "La query non esiste"
+
+#, fuzzy
+#~ msgid "That user does not exist"
+#~ msgstr "La query non esiste"
 
 #, fuzzy
 #~ msgid "Move to trash this document"

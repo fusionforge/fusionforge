@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 19:43+0200\n"
+"POT-Creation-Date: 2013-10-03 19:57+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -3128,9 +3128,10 @@ msgstr ""
 msgid "Error Getting Role Object"
 msgstr "Error obteniendo el objeto rol"
 
-#: common/include/Group.class.php:2024
-msgid "Error: User does not exist"
-msgstr "Error: El usuario no existe"
+#: common/include/Group.class.php:2024 www/account/lostpw.php:45
+#: www/account/pending-resend.php:38 www/sendmessage.php:45 www/users:74
+msgid "That user does not exist."
+msgstr "El usuario no existe"
 
 #: common/include/Group.class.php:2072 common/include/Group.class.php:2191
 #, php-format
@@ -14539,10 +14540,6 @@ msgstr "[¿Se le olvidó su contraseña?]"
 msgid "Welcome, %s. You may now change your password."
 msgstr "Bienvenido, %s. Puede ahora cambiar su contraseña."
 
-#: www/account/lostpw.php:45 www/sendmessage.php:45 www/users:74
-msgid "That user does not exist"
-msgstr "Ese usuario no existe"
-
 #: www/account/lostpw.php:58
 #, php-format
 msgid ""
@@ -14604,10 +14601,6 @@ msgid "Missing Parameter. You must provide a login name or an email address."
 msgstr ""
 "Falta un parámetro, debe seleccionar la audiencia a la que será enviado el "
 "correo"
-
-#: www/account/pending-resend.php:38
-msgid "That user does not exist."
-msgstr "El usuario no existe"
 
 #: www/account/pending-resend.php:42
 msgid "Your account is already active."
@@ -23016,6 +23009,12 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Error: User does not exist"
+#~ msgstr "Error: El usuario no existe"
+
+#~ msgid "That user does not exist"
+#~ msgstr "Ese usuario no existe"
 
 #~ msgid "Move to trash this document"
 #~ msgstr "Mover a papelera este documento"

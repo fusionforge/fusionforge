@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 19:43+0200\n"
+"POT-Creation-Date: 2013-10-03 19:57+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -3075,9 +3075,10 @@ msgstr ""
 msgid "Error Getting Role Object"
 msgstr "Erreur lors de la création d'un objet Role"
 
-#: common/include/Group.class.php:2024
-msgid "Error: User does not exist"
-msgstr "Erreur : cet utilisateur n'existe pas"
+#: common/include/Group.class.php:2024 www/account/lostpw.php:45
+#: www/account/pending-resend.php:38 www/sendmessage.php:45 www/users:74
+msgid "That user does not exist."
+msgstr "Cet utilisateur n'existe pas"
 
 #: common/include/Group.class.php:2072 common/include/Group.class.php:2191
 #, php-format
@@ -14496,10 +14497,6 @@ msgstr "Connexion avec mot de passe perdu"
 msgid "Welcome, %s. You may now change your password."
 msgstr "Bienvenue, %s.  Vous pouvez maintenant changer votre mot de passe."
 
-#: www/account/lostpw.php:45 www/sendmessage.php:45 www/users:74
-msgid "That user does not exist"
-msgstr "Cet utilisateur n'existe pas"
-
 #: www/account/lostpw.php:58
 #, php-format
 msgid ""
@@ -14566,10 +14563,6 @@ msgid "Missing Parameter. You must provide a login name or an email address."
 msgstr ""
 "Paramètre manquant : vous devez fournir un identifiant d'utilisateur ou une "
 "adresse électronique."
-
-#: www/account/pending-resend.php:38
-msgid "That user does not exist."
-msgstr "Cet utilisateur n'existe pas"
 
 #: www/account/pending-resend.php:42
 msgid "Your account is already active."
@@ -23023,6 +23016,12 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Error: User does not exist"
+#~ msgstr "Erreur : cet utilisateur n'existe pas"
+
+#~ msgid "That user does not exist"
+#~ msgstr "Cet utilisateur n'existe pas"
 
 #~ msgid "Move to trash this document"
 #~ msgstr "Mettre ce document à la corbeille"

@@ -2021,7 +2021,7 @@ class Group extends Error {
 			//
 			//	user doesn't exist
 			//
-			$this->setError(_('Error: User does not exist'));
+			$this->setError(_('That user does not exist.'));
 			db_rollback();
 			return false;
 		}

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 19:43+0200\n"
+"POT-Creation-Date: 2013-10-03 19:57+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3010,9 +3010,11 @@ msgstr ""
 msgid "Error Getting Role Object"
 msgstr ""
 
-#: common/include/Group.class.php:2024
-msgid "Error: User does not exist"
-msgstr ""
+#: common/include/Group.class.php:2024 www/account/lostpw.php:45
+#: www/account/pending-resend.php:38 www/sendmessage.php:45 www/users:74
+#, fuzzy
+msgid "That user does not exist."
+msgstr "Aquela categoria de repositório não existe"
 
 #: common/include/Group.class.php:2072 common/include/Group.class.php:2191
 #, fuzzy, php-format
@@ -13721,10 +13723,6 @@ msgstr ""
 msgid "Welcome, %s. You may now change your password."
 msgstr ""
 
-#: www/account/lostpw.php:45 www/sendmessage.php:45 www/users:74
-msgid "That user does not exist"
-msgstr ""
-
 #: www/account/lostpw.php:58
 #, php-format
 msgid ""
@@ -13780,11 +13778,6 @@ msgstr "Enviar Hash de Senha Perdida"
 msgid "Missing Parameter. You must provide a login name or an email address."
 msgstr ""
 "Faltando parâmetro, Você precisa selecionar o público alvo para a postagem"
-
-#: www/account/pending-resend.php:38
-#, fuzzy
-msgid "That user does not exist."
-msgstr "Aquela categoria de repositório não existe"
 
 #: www/account/pending-resend.php:42
 msgid "Your account is already active."

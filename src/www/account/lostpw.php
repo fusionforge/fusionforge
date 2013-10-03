@@ -42,7 +42,7 @@ if (getStringFromRequest('submit')) {
 
 	if (!$u || !is_object($u)){
 		form_release_key(getStringFromRequest('form_key'));
-		exit_error(_('That user does not exist'),'my');
+		exit_error(_('That user does not exist.'),'my');
 	}
 
 	// First, we need to create new confirm hash

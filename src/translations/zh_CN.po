@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 19:43+0200\n"
+"POT-Creation-Date: 2013-10-03 19:57+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3215,10 +3215,11 @@ msgstr "用户没有激活。只能添加已经激活了的用户。"
 msgid "Error Getting Role Object"
 msgstr "获取角色信息时发生错误"
 
-#: common/include/Group.class.php:2024
+#: common/include/Group.class.php:2024 www/account/lostpw.php:45
+#: www/account/pending-resend.php:38 www/sendmessage.php:45 www/users:74
 #, fuzzy
-msgid "Error: User does not exist"
-msgstr "错误:用户不存在"
+msgid "That user does not exist."
+msgstr "查询不存在"
 
 #: common/include/Group.class.php:2072 common/include/Group.class.php:2191
 #, php-format
@@ -14819,11 +14820,6 @@ msgstr "[忘了密码？]"
 msgid "Welcome, %s. You may now change your password."
 msgstr ""
 
-#: www/account/lostpw.php:45 www/sendmessage.php:45 www/users:74
-#, fuzzy
-msgid "That user does not exist"
-msgstr "查询不存在"
-
 #: www/account/lostpw.php:58
 #, php-format
 msgid ""
@@ -14876,11 +14872,6 @@ msgstr "发送遗失密码确认信"
 #, fuzzy
 msgid "Missing Parameter. You must provide a login name or an email address."
 msgstr "参数未填，您必须选择群发邮件的收件人"
-
-#: www/account/pending-resend.php:38
-#, fuzzy
-msgid "That user does not exist."
-msgstr "查询不存在"
 
 #: www/account/pending-resend.php:42
 #, fuzzy
@@ -23267,6 +23258,14 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Error: User does not exist"
+#~ msgstr "错误:用户不存在"
+
+#, fuzzy
+#~ msgid "That user does not exist"
+#~ msgstr "查询不存在"
 
 #, fuzzy
 #~ msgid "Move to trash this document"

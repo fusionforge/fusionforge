@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 19:43+0200\n"
+"POT-Creation-Date: 2013-10-03 19:57+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3207,9 +3207,10 @@ msgstr "Добавлены в группу могут быть только ак
 msgid "Error Getting Role Object"
 msgstr "Неполучена роль объекта"
 
-#: common/include/Group.class.php:2024
-msgid "Error: User does not exist"
-msgstr "Ошибка: Пользователь не существует"
+#: common/include/Group.class.php:2024 www/account/lostpw.php:45
+#: www/account/pending-resend.php:38 www/sendmessage.php:45 www/users:74
+msgid "That user does not exist."
+msgstr "Пользователь с таким именем не существует."
 
 #: common/include/Group.class.php:2072 common/include/Group.class.php:2191
 #, php-format
@@ -15146,11 +15147,6 @@ msgstr "Восстановление паролей"
 msgid "Welcome, %s. You may now change your password."
 msgstr "Добро пожаловать, %s. Теперь вы можете изменить ваш пароль."
 
-#: www/account/lostpw.php:45 www/sendmessage.php:45 www/users:74
-#, fuzzy
-msgid "That user does not exist"
-msgstr "Пользователь с таким именем не существует."
-
 #: www/account/lostpw.php:58
 #, php-format
 msgid ""
@@ -15215,10 +15211,6 @@ msgstr "Отправить ХЕШ утеряного пароля"
 #, fuzzy
 msgid "Missing Parameter. You must provide a login name or an email address."
 msgstr "Параметр не указан, Вы должны указать получателя"
-
-#: www/account/pending-resend.php:38
-msgid "That user does not exist."
-msgstr "Пользователь с таким именем не существует."
 
 #: www/account/pending-resend.php:42
 #, fuzzy
@@ -23807,6 +23799,13 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#~ msgid "Error: User does not exist"
+#~ msgstr "Ошибка: Пользователь не существует"
+
+#, fuzzy
+#~ msgid "That user does not exist"
+#~ msgstr "Пользователь с таким именем не существует."
 
 #, fuzzy
 #~ msgid "Move to trash this document"

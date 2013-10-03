@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 19:43+0200\n"
+"POT-Creation-Date: 2013-10-03 19:57+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -3245,9 +3245,10 @@ msgstr ""
 msgid "Error Getting Role Object"
 msgstr "Kann Rollen-Objekt nicht holen"
 
-#: common/include/Group.class.php:2024
-msgid "Error: User does not exist"
-msgstr "Fehler: Der Nutzer existiert nicht"
+#: common/include/Group.class.php:2024 www/account/lostpw.php:45
+#: www/account/pending-resend.php:38 www/sendmessage.php:45 www/users:74
+msgid "That user does not exist."
+msgstr "Dieser Nutzer existiert nicht."
 
 #: common/include/Group.class.php:2072 common/include/Group.class.php:2191
 #, php-format
@@ -15018,11 +15019,6 @@ msgstr "[Passwort vergessen?]"
 msgid "Welcome, %s. You may now change your password."
 msgstr "Willkommen %s. Sie können nun Ihr Passwort ändern."
 
-#: www/account/lostpw.php:45 www/sendmessage.php:45 www/users:74
-#, fuzzy
-msgid "That user does not exist"
-msgstr "Dieser Nutzer existiert nicht."
-
 #: www/account/lostpw.php:58
 #, php-format
 msgid ""
@@ -15084,10 +15080,6 @@ msgstr "Sende vergessenen Passwort-Hash"
 msgid "Missing Parameter. You must provide a login name or an email address."
 msgstr ""
 "Parameter fehlt. Sie müssen einen Empfängerkreis für das Mailing auswählen."
-
-#: www/account/pending-resend.php:38
-msgid "That user does not exist."
-msgstr "Dieser Nutzer existiert nicht."
 
 #: www/account/pending-resend.php:42
 #, fuzzy
@@ -23732,6 +23724,13 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "Error: User does not exist"
+#~ msgstr "Fehler: Der Nutzer existiert nicht"
+
+#, fuzzy
+#~ msgid "That user does not exist"
+#~ msgstr "Dieser Nutzer existiert nicht."
 
 #, fuzzy
 #~ msgid "Move to trash this document"

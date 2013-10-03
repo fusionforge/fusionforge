@@ -42,7 +42,7 @@ if ($touser) {
 			array($touser)) ;
 
 	if (!$result || db_numrows($result) < 1) {
-		exit_error(_('That user does not exist'),'home');
+		exit_error(_('That user does not exist.'),'home');
 	}
 }
 

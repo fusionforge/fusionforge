@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 19:43+0200\n"
+"POT-Creation-Date: 2013-10-03 19:57+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3193,9 +3193,10 @@ msgstr ""
 msgid "Error Getting Role Object"
 msgstr "Fel vid skapande av gruppobjekt"
 
-#: common/include/Group.class.php:2024
+#: common/include/Group.class.php:2024 www/account/lostpw.php:45
+#: www/account/pending-resend.php:38 www/sendmessage.php:45 www/users:74
 #, fuzzy
-msgid "Error: User does not exist"
+msgid "That user does not exist."
 msgstr "Den resurskategorin existerar inte"
 
 #: common/include/Group.class.php:2072 common/include/Group.class.php:2191
@@ -14773,11 +14774,6 @@ msgstr "[Förlorat ditt lösenord?]"
 msgid "Welcome, %s. You may now change your password."
 msgstr ""
 
-#: www/account/lostpw.php:45 www/sendmessage.php:45 www/users:74
-#, fuzzy
-msgid "That user does not exist"
-msgstr "Den resurskategorin existerar inte"
-
 #: www/account/lostpw.php:58
 #, php-format
 msgid ""
@@ -14835,11 +14831,6 @@ msgstr "Skicka förlorad lösenordsnyckel"
 #, fuzzy
 msgid "Missing Parameter. You must provide a login name or an email address."
 msgstr "Parameter saknas, du måste ange en målgrupp för e-posten"
-
-#: www/account/pending-resend.php:38
-#, fuzzy
-msgid "That user does not exist."
-msgstr "Den resurskategorin existerar inte"
 
 #: www/account/pending-resend.php:42
 #, fuzzy
@@ -23266,6 +23257,14 @@ msgstr "Användarenamn"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
+
+#, fuzzy
+#~ msgid "Error: User does not exist"
+#~ msgstr "Den resurskategorin existerar inte"
+
+#, fuzzy
+#~ msgid "That user does not exist"
+#~ msgstr "Den resurskategorin existerar inte"
 
 #, fuzzy
 #~ msgid "Move to trash this document"
