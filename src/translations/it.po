@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 18:27+0200\n"
+"POT-Creation-Date: 2013-10-03 19:43+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1389,11 +1389,6 @@ msgstr "Usa Forum"
 #, fuzzy
 msgid "Move this document to trash"
 msgstr "Nessun documento"
-
-#: common/docman/views/listfile.php:326 common/docman/views/listfile.php:337
-#, fuzzy
-msgid "Move to trash this document"
-msgstr "Rimuovi questo documento in modo permanente"
 
 #: common/docman/views/listfile.php:327 common/docman/views/listfile.php:338
 #: common/docman/views/listtrashfile.php:193
@@ -23492,6 +23487,10 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "Move to trash this document"
+#~ msgstr "Rimuovi questo documento in modo permanente"
 
 #, fuzzy
 #~ msgid "User update FAILED: %s"

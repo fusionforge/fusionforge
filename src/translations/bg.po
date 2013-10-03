@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 18:27+0200\n"
+"POT-Creation-Date: 2013-10-03 19:43+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1375,11 +1375,6 @@ msgstr "Модул \"Форуми\""
 #: common/docman/views/listfile.php:326 common/docman/views/listfile.php:337
 msgid "Move this document to trash"
 msgstr ""
-
-#: common/docman/views/listfile.php:326 common/docman/views/listfile.php:337
-#, fuzzy
-msgid "Move to trash this document"
-msgstr "Регистрация"
 
 #: common/docman/views/listfile.php:327 common/docman/views/listfile.php:338
 #: common/docman/views/listtrashfile.php:193
@@ -22803,6 +22798,10 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Лична Информация"
+
+#, fuzzy
+#~ msgid "Move to trash this document"
+#~ msgstr "Регистрация"
 
 #, fuzzy
 #~ msgid "Error inserting value: "

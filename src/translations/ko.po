@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 18:27+0200\n"
+"POT-Creation-Date: 2013-10-03 19:43+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1383,11 +1383,6 @@ msgstr "게시판 사용"
 #, fuzzy
 msgid "Move this document to trash"
 msgstr "문서에 내용이 없습니다."
-
-#: common/docman/views/listfile.php:326 common/docman/views/listfile.php:337
-#, fuzzy
-msgid "Move to trash this document"
-msgstr "이 패키지를 모니터링하기"
 
 #: common/docman/views/listfile.php:327 common/docman/views/listfile.php:338
 #: common/docman/views/listtrashfile.php:193
@@ -23210,6 +23205,10 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "Move to trash this document"
+#~ msgstr "이 패키지를 모니터링하기"
 
 #, fuzzy
 #~ msgid "User update FAILED: %s"

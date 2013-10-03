@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 18:27+0200\n"
+"POT-Creation-Date: 2013-10-03 19:43+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -1337,10 +1337,6 @@ msgstr "Documento Protegido"
 #: common/docman/views/listfile.php:326 common/docman/views/listfile.php:337
 msgid "Move this document to trash"
 msgstr "Mover este documento a papelera"
-
-#: common/docman/views/listfile.php:326 common/docman/views/listfile.php:337
-msgid "Move to trash this document"
-msgstr "Mover a papelera este documento"
 
 #: common/docman/views/listfile.php:327 common/docman/views/listfile.php:338
 #: common/docman/views/listtrashfile.php:193
@@ -23020,6 +23016,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Move to trash this document"
+#~ msgstr "Mover a papelera este documento"
 
 #~ msgid "User update FAILED: %s"
 #~ msgstr "Actualización de Usuario FALLIDA: %s"

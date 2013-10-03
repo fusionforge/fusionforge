@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 18:27+0200\n"
+"POT-Creation-Date: 2013-10-03 19:43+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -1394,11 +1394,6 @@ msgstr "Dokumente benutzen"
 #, fuzzy
 msgid "Move this document to trash"
 msgstr "Keine Dokumenten-Daten"
-
-#: common/docman/views/listfile.php:326 common/docman/views/listfile.php:337
-#, fuzzy
-msgid "Move to trash this document"
-msgstr "Dieses Dokument dauerhaft löschen"
 
 #: common/docman/views/listfile.php:327 common/docman/views/listfile.php:338
 #: common/docman/views/listtrashfile.php:193
@@ -23737,6 +23732,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "Move to trash this document"
+#~ msgstr "Dieses Dokument dauerhaft löschen"
 
 #, fuzzy
 #~ msgid "User update FAILED: %s"
