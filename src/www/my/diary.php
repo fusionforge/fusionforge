@@ -161,13 +161,13 @@ To stop monitoring this user, visit the following link:
 		$_diary_id = '';
 	}
 
-	site_user_header(array('title'=>_('My Diary And Notes')));
+	site_user_header(array('title'=>_('My Diary and Notes')));
 
 	$params['name'] = "details";
 	$params['body'] = $_details;
 	$params['height'] = "350";
 	$params['width'] = "100%";
-	$params['content'] = '<textarea name="details" rows="10" cols="60">'.$_details.'</textarea>';
+	$params['content'] = '<textarea required="required" name="details" rows="10" cols="60">'.$_details.'</textarea>';
 	$params['user_id'] = $u->getID();
 	plugin_hook_by_reference("text_editor", $params);
 
@@ -178,11 +178,11 @@ To stop monitoring this user, visit the following link:
 	<input type="hidden" name="'. $proc_str .'" value="1" />
 	<input type="hidden" name="diary_id" value="'. $_diary_id .'" />
 	<table class="fullwidth">
-	<tr><td><strong>'._('Summary').':</strong><br />
-		<input type="text" name="summary" size="60" maxlength="60" value="'. $_summary .'" />
+	<tr><td><strong>'._('Summary')._(':').'</strong><br />
+		<input required="required" type="text" name="summary" size="60" maxlength="60" value="'. $_summary .'" />
 	</td></tr>
 
-	<tr><td><strong>'._('Details').':</strong><br />'.
+	<tr><td><strong>'._('Details')._(':').'</strong><br />'.
 		$params['content'].'</td></tr>
 	<tr><td>
 		<p>
@@ -194,18 +194,17 @@ To stop monitoring this user, visit the following link:
 	</td></tr>
 	</table></form>';
 
-	echo "<h2>" . _('Existing Diary And Note Entries') . "</h2>\n";
-	echo '<table class="fullwidth">';
+	echo "<h2>" . _('Existing Diary and Notes Entries') . "</h2>\n";
 	$result=db_query_params ('SELECT * FROM user_diary WHERE user_id=$1 ORDER BY id DESC',
 			array(user_getid() ));
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<tr><td><strong>'._('You Have No Diary Entries').'</strong></td></tr>';
-		echo db_error();
+		echo '<p class="information">'._('You Have No Diary Entries').'</p>';
 	} else {
+		echo '<table class="fullwidth">';
 		for ($i=0; $i<$rows; $i++) {
 			$date   = relative_date(db_result($result,$i,'date_posted'));
-			$public = db_result($result,$i,'is_public')? '(public)':'(private)';
+			$public = db_result($result,$i,'is_public') ? _('Public') : _('Private');
 			echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="'. getStringFromServer('PHP_SELF') .'?diary_id='.
 				db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</a></td>'.
@@ -213,8 +212,8 @@ To stop monitoring this user, visit the following link:
 				'<td>'. $public .'</td>'.
 			'</tr>';
 		}
+		echo '</table>';
 	}
-	echo '</table>';
 
 	site_user_footer(array());
 }

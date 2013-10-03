@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:39+0200\n"
+"POT-Creation-Date: 2013-10-03 17:49+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1244,7 +1244,7 @@ msgstr "Cognom:"
 #: www/admin/grouplist.php:68 www/admin/pluginman.php:134
 #: www/admin/search.php:77 www/admin/search.php:152 www/admin/userlist.php:66
 #: www/export/rssAboTask.php:145 www/frs/admin/editrelease.php:235
-#: www/frs/admin/index.php:155 www/my/dashboard.php:69
+#: www/frs/admin/index.php:155 www/my/dashboard.php:72
 #: www/news/admin/index.php:129 www/people/editjob.php:74
 #: www/people/editjob.php:166 www/people/viewjob.php:72
 #: www/pm/browse_task.php:160 www/pm/detail_task.php:153
@@ -1740,44 +1740,44 @@ msgstr "Data d'inici"
 #: www/include/user_profile.php:133 www/include/user_profile.php:144
 #: www/include/user_profile.php:152 www/my/bookmark_add.php:48
 #: www/my/bookmark_add.php:54 www/my/bookmark_edit.php:60
-#: www/my/bookmark_edit.php:66 www/pm/admin/index.php:212
-#: www/pm/admin/index.php:321 www/pm/admin/index.php:331
-#: www/pm/admin/index.php:341 www/pm/format_csv.php:66
-#: www/pm/format_csv.php:71 www/pm/format_csv.php:76 www/pm/format_csv.php:86
-#: www/pm/format_csv.php:89 www/pm/format_csv.php:93 www/pm/format_csv.php:97
-#: www/project/stats/index.php:104 www/project/stats/index.php:105
-#: www/project/stats/index.php:106 www/project/stats/index.php:107
-#: www/register/index.php:236 www/reporting/groupadded.php:65
-#: www/reporting/groupadded.php:66 www/reporting/groupadded.php:67
-#: www/reporting/groupcum.php:65 www/reporting/groupcum.php:66
-#: www/reporting/groupcum.php:67 www/reporting/projectact.php:69
-#: www/reporting/projectact.php:70 www/reporting/projectact.php:71
-#: www/reporting/projectact.php:72 www/reporting/projectact.php:73
-#: www/reporting/projecttime.php:79 www/reporting/projecttime.php:80
-#: www/reporting/projecttime.php:81 www/reporting/projecttime.php:82
-#: www/reporting/siteact.php:70 www/reporting/siteact.php:71
-#: www/reporting/siteact.php:72 www/reporting/siteact.php:73
-#: www/reporting/sitetimebar.php:66 www/reporting/sitetimebar.php:67
-#: www/reporting/sitetime.php:78 www/reporting/sitetime.php:79
-#: www/reporting/sitetime.php:80 www/reporting/timeadd.php:187
-#: www/reporting/timeadd.php:199 www/reporting/timeadd.php:228
-#: www/reporting/timecategory.php:90 www/reporting/toolspie.php:65
-#: www/reporting/toolspie.php:66 www/reporting/toolspie.php:67
-#: www/reporting/useract.php:84 www/reporting/useract.php:85
-#: www/reporting/useract.php:86 www/reporting/useract.php:87
-#: www/reporting/useract.php:88 www/reporting/useradded.php:64
-#: www/reporting/useradded.php:65 www/reporting/useradded.php:66
-#: www/reporting/usercum.php:64 www/reporting/usercum.php:65
-#: www/reporting/usercum.php:66 www/reporting/usersummary.php:71
-#: www/reporting/usersummary.php:72 www/reporting/usersummary.php:73
-#: www/reporting/usertime.php:93 www/reporting/usertime.php:94
-#: www/reporting/usertime.php:95 www/reporting/usertime.php:96
-#: www/snippet/add_snippet_to_package.php:128 www/snippet/addversion.php:94
-#: www/snippet/addversion.php:98 www/snippet/addversion.php:102
-#: www/snippet/addversion.php:217 www/snippet/addversion.php:221
-#: www/snippet/package.php:147 www/snippet/package.php:151
-#: www/snippet/package.php:156 www/snippet/package.php:169
-#: www/survey/include/SurveyHTML.class.php:191
+#: www/my/bookmark_edit.php:66 www/my/diary.php:181 www/my/diary.php:185
+#: www/pm/admin/index.php:212 www/pm/admin/index.php:321
+#: www/pm/admin/index.php:331 www/pm/admin/index.php:341
+#: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
+#: www/pm/format_csv.php:86 www/pm/format_csv.php:89 www/pm/format_csv.php:93
+#: www/pm/format_csv.php:97 www/project/stats/index.php:104
+#: www/project/stats/index.php:105 www/project/stats/index.php:106
+#: www/project/stats/index.php:107 www/register/index.php:236
+#: www/reporting/groupadded.php:65 www/reporting/groupadded.php:66
+#: www/reporting/groupadded.php:67 www/reporting/groupcum.php:65
+#: www/reporting/groupcum.php:66 www/reporting/groupcum.php:67
+#: www/reporting/projectact.php:69 www/reporting/projectact.php:70
+#: www/reporting/projectact.php:71 www/reporting/projectact.php:72
+#: www/reporting/projectact.php:73 www/reporting/projecttime.php:79
+#: www/reporting/projecttime.php:80 www/reporting/projecttime.php:81
+#: www/reporting/projecttime.php:82 www/reporting/siteact.php:70
+#: www/reporting/siteact.php:71 www/reporting/siteact.php:72
+#: www/reporting/siteact.php:73 www/reporting/sitetimebar.php:66
+#: www/reporting/sitetimebar.php:67 www/reporting/sitetime.php:78
+#: www/reporting/sitetime.php:79 www/reporting/sitetime.php:80
+#: www/reporting/timeadd.php:187 www/reporting/timeadd.php:199
+#: www/reporting/timeadd.php:228 www/reporting/timecategory.php:90
+#: www/reporting/toolspie.php:65 www/reporting/toolspie.php:66
+#: www/reporting/toolspie.php:67 www/reporting/useract.php:84
+#: www/reporting/useract.php:85 www/reporting/useract.php:86
+#: www/reporting/useract.php:87 www/reporting/useract.php:88
+#: www/reporting/useradded.php:64 www/reporting/useradded.php:65
+#: www/reporting/useradded.php:66 www/reporting/usercum.php:64
+#: www/reporting/usercum.php:65 www/reporting/usercum.php:66
+#: www/reporting/usersummary.php:71 www/reporting/usersummary.php:72
+#: www/reporting/usersummary.php:73 www/reporting/usertime.php:93
+#: www/reporting/usertime.php:94 www/reporting/usertime.php:95
+#: www/reporting/usertime.php:96 www/snippet/add_snippet_to_package.php:128
+#: www/snippet/addversion.php:94 www/snippet/addversion.php:98
+#: www/snippet/addversion.php:102 www/snippet/addversion.php:217
+#: www/snippet/addversion.php:221 www/snippet/package.php:147
+#: www/snippet/package.php:151 www/snippet/package.php:156
+#: www/snippet/package.php:169 www/survey/include/SurveyHTML.class.php:191
 #, php-format
 msgid ":"
 msgstr ""
@@ -2341,7 +2341,7 @@ msgstr "Enviat per"
 #: plugins/mantisbt/view/editIssue.php:213
 #: plugins/mantisbt/view/viewIssue.php:108
 #: plugins/mantisbt/view/viewIssues.php:363 www/export/rssAboTask.php:143
-#: www/my/dashboard.php:65 www/my/diary.php:181 www/pm/browse_task.php:145
+#: www/my/dashboard.php:66 www/my/diary.php:181 www/pm/browse_task.php:145
 #: www/project/report/index.php:136
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:57
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:49
@@ -3553,7 +3553,7 @@ msgstr "Rastrejadors"
 #: common/reporting/report_utils.php:144 common/reporting/report_utils.php:187
 #: common/reporting/report_utils.php:690 common/reporting/report_utils.php:942
 #: common/widget/Widget_ProjectPublicAreas.class.php:148
-#: plugins/blocks/www/index.php:154 www/my/dashboard.php:77
+#: plugins/blocks/www/index.php:154 www/my/dashboard.php:84
 #: www/stats/site_stats_utils.php:242 www/stats/site_stats_utils.php:367
 #: www/stats/site_stats_utils.php:422
 msgid "Tasks"
@@ -4668,7 +4668,7 @@ msgstr "Diàriament"
 #: common/widget/Widget_ProjectLatestDocuments.class.php:102
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:79
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:106
-#: www/my/dashboard.php:125 www/news/admin/news_admin_utils.php:43
+#: www/my/dashboard.php:133 www/news/admin/news_admin_utils.php:43
 #: www/pm/detail_task.php:87 www/pm/detail_task.php:91
 #: www/reporting/timeadd.php:121
 msgid "Y-m-d"
@@ -5344,7 +5344,7 @@ msgstr "No assignat"
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:552
 #: common/tracker/actions/query.php:197
 #: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:136
-#: www/admin/search.php:72 www/admin/search.php:148 www/my/dashboard.php:63
+#: www/admin/search.php:72 www/admin/search.php:148 www/my/dashboard.php:64
 #: www/pm/admin/index.php:187 www/pm/index.php:98
 #: www/project/admin/editimages.php:265
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
@@ -5359,7 +5359,7 @@ msgstr "Id"
 #: common/tracker/views/form-customizelist.php:40
 #: plugins/mantisbt/view/addIssue.php:73
 #: plugins/mantisbt/view/editIssue.php:128
-#: plugins/mantisbt/view/viewIssue.php:85 www/my/dashboard.php:71
+#: plugins/mantisbt/view/viewIssue.php:85 www/my/dashboard.php:75
 #: www/pm/add_task.php:67 www/pm/browse_task.php:130
 #: www/pm/browse_task.php:243 www/pm/browse_task.php:374
 #: www/pm/detail_task.php:71 www/pm/mod_task.php:83
@@ -5450,6 +5450,7 @@ msgid "Select One"
 msgstr "Suprimeix el fitxer"
 
 #: common/tracker/actions/browse.php:367 www/frs/admin/index.php:209
+#: www/my/diary.php:207
 msgid "Private"
 msgstr "Privat"
 
@@ -5503,7 +5504,7 @@ msgstr "Suprimeix-ho tot"
 #: plugins/mantisbt/controler/filter.php:138
 #: plugins/mantisbt/view/addIssue.php:74
 #: plugins/mantisbt/view/editIssue.php:127
-#: plugins/mantisbt/view/viewIssue.php:84 www/my/dashboard.php:73
+#: plugins/mantisbt/view/viewIssue.php:84 www/my/dashboard.php:78
 #: www/pm/add_task.php:124 www/pm/browse_task.php:241
 #: www/pm/browse_task.php:381 www/pm/detail_task.php:128
 #: www/pm/mod_task.php:173
@@ -5516,7 +5517,7 @@ msgstr "Assignat a"
 #: cronjobs/send_pending_items_mail.php:79
 #: cronjobs/send_pending_items_mail.php:120
 #: plugins/mantisbt/controler/filter.php:122 www/admin/approve-pending.php:213
-#: www/admin/pending-news.php:139 www/my/dashboard.php:75
+#: www/admin/pending-news.php:139 www/my/dashboard.php:81
 #: www/news/admin/index.php:125 www/pm/detail_task.php:42
 #: www/pm/mod_task.php:52
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
@@ -16685,7 +16686,7 @@ msgstr "Entrada no trobada per a aquest usuari"
 msgid "Posted on "
 msgstr "Enviat per"
 
-#: www/developer/diary.php:62
+#: www/developer/diary.php:62 www/my/diary.php:197
 msgid "Existing Diary and Notes Entries"
 msgstr "Entrades existents de Diari i Notes"
 
@@ -17580,7 +17581,7 @@ msgstr "Crea un paquet a"
 msgid "New Package Name"
 msgstr "Nou nom de pàquet"
 
-#: www/frs/admin/index.php:208
+#: www/frs/admin/index.php:208 www/my/diary.php:207
 msgid "Public"
 msgstr "Públic"
 
@@ -18047,7 +18048,7 @@ msgstr "Rastrejador actualitzat"
 msgid "View your tasks and artifacts."
 msgstr "No teniu entrades de diari"
 
-#: www/include/html.php:975
+#: www/include/html.php:975 www/my/diary.php:164
 msgid "My Diary and Notes"
 msgstr "El meu diari i les meves notes"
 
@@ -18739,20 +18740,20 @@ msgstr "No s'ha pogut actualitzar l'enllaç d'interès."
 msgid "Edit Bookmark"
 msgstr "Edita enllaç d'interès"
 
-#: www/my/dashboard.php:39 www/my/index.php:41
+#: www/my/dashboard.php:40 www/my/index.php:41
 #, fuzzy, php-format
 msgid "Personal Page For %s"
 msgstr "La meva pàgina personal"
 
-#: www/my/dashboard.php:46
+#: www/my/dashboard.php:47
 msgid "All trackers for my projects"
 msgstr ""
 
-#: www/my/dashboard.php:51
+#: www/my/dashboard.php:52
 msgid "You're not a member of any active projects"
 msgstr "No sou membre de cap projecte actiu"
 
-#: www/my/dashboard.php:67
+#: www/my/dashboard.php:69
 #, fuzzy
 msgid "Changed"
 msgstr "Canvi"
@@ -18811,10 +18812,6 @@ msgstr "Afegeix una nova entrada"
 msgid "Update An Entry"
 msgstr "Actualitza una entrada"
 
-#: www/my/diary.php:164
-msgid "My Diary And Notes"
-msgstr "El meu diari i les meves notes"
-
 #: www/my/diary.php:190
 msgid "Is Public"
 msgstr "És pública"
@@ -18827,11 +18824,7 @@ msgstr ""
 "Si està marcat com a pública,  un cop enviada la vostra entrada s'enviarà "
 "per correu a tots els usuaris que monitoritzen."
 
-#: www/my/diary.php:197
-msgid "Existing Diary And Note Entries"
-msgstr "Entrades existents de Diari i Notes"
-
-#: www/my/diary.php:203
+#: www/my/diary.php:202
 msgid "You Have No Diary Entries"
 msgstr "No teniu entrades de diari"
 
@@ -23501,6 +23494,12 @@ msgstr "Nom d'usuari"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
+
+#~ msgid "My Diary And Notes"
+#~ msgstr "El meu diari i les meves notes"
+
+#~ msgid "Existing Diary And Note Entries"
+#~ msgstr "Entrades existents de Diari i Notes"
 
 #~ msgid "Mailing list"
 #~ msgstr "Llista de correu"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:39+0200\n"
+"POT-Creation-Date: 2013-10-03 17:49+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1247,7 +1247,7 @@ msgstr "姓氏："
 #: www/admin/grouplist.php:68 www/admin/pluginman.php:134
 #: www/admin/search.php:77 www/admin/search.php:152 www/admin/userlist.php:66
 #: www/export/rssAboTask.php:145 www/frs/admin/editrelease.php:235
-#: www/frs/admin/index.php:155 www/my/dashboard.php:69
+#: www/frs/admin/index.php:155 www/my/dashboard.php:72
 #: www/news/admin/index.php:129 www/people/editjob.php:74
 #: www/people/editjob.php:166 www/people/viewjob.php:72
 #: www/pm/browse_task.php:160 www/pm/detail_task.php:153
@@ -1743,44 +1743,44 @@ msgstr "开启日期"
 #: www/include/user_profile.php:133 www/include/user_profile.php:144
 #: www/include/user_profile.php:152 www/my/bookmark_add.php:48
 #: www/my/bookmark_add.php:54 www/my/bookmark_edit.php:60
-#: www/my/bookmark_edit.php:66 www/pm/admin/index.php:212
-#: www/pm/admin/index.php:321 www/pm/admin/index.php:331
-#: www/pm/admin/index.php:341 www/pm/format_csv.php:66
-#: www/pm/format_csv.php:71 www/pm/format_csv.php:76 www/pm/format_csv.php:86
-#: www/pm/format_csv.php:89 www/pm/format_csv.php:93 www/pm/format_csv.php:97
-#: www/project/stats/index.php:104 www/project/stats/index.php:105
-#: www/project/stats/index.php:106 www/project/stats/index.php:107
-#: www/register/index.php:236 www/reporting/groupadded.php:65
-#: www/reporting/groupadded.php:66 www/reporting/groupadded.php:67
-#: www/reporting/groupcum.php:65 www/reporting/groupcum.php:66
-#: www/reporting/groupcum.php:67 www/reporting/projectact.php:69
-#: www/reporting/projectact.php:70 www/reporting/projectact.php:71
-#: www/reporting/projectact.php:72 www/reporting/projectact.php:73
-#: www/reporting/projecttime.php:79 www/reporting/projecttime.php:80
-#: www/reporting/projecttime.php:81 www/reporting/projecttime.php:82
-#: www/reporting/siteact.php:70 www/reporting/siteact.php:71
-#: www/reporting/siteact.php:72 www/reporting/siteact.php:73
-#: www/reporting/sitetimebar.php:66 www/reporting/sitetimebar.php:67
-#: www/reporting/sitetime.php:78 www/reporting/sitetime.php:79
-#: www/reporting/sitetime.php:80 www/reporting/timeadd.php:187
-#: www/reporting/timeadd.php:199 www/reporting/timeadd.php:228
-#: www/reporting/timecategory.php:90 www/reporting/toolspie.php:65
-#: www/reporting/toolspie.php:66 www/reporting/toolspie.php:67
-#: www/reporting/useract.php:84 www/reporting/useract.php:85
-#: www/reporting/useract.php:86 www/reporting/useract.php:87
-#: www/reporting/useract.php:88 www/reporting/useradded.php:64
-#: www/reporting/useradded.php:65 www/reporting/useradded.php:66
-#: www/reporting/usercum.php:64 www/reporting/usercum.php:65
-#: www/reporting/usercum.php:66 www/reporting/usersummary.php:71
-#: www/reporting/usersummary.php:72 www/reporting/usersummary.php:73
-#: www/reporting/usertime.php:93 www/reporting/usertime.php:94
-#: www/reporting/usertime.php:95 www/reporting/usertime.php:96
-#: www/snippet/add_snippet_to_package.php:128 www/snippet/addversion.php:94
-#: www/snippet/addversion.php:98 www/snippet/addversion.php:102
-#: www/snippet/addversion.php:217 www/snippet/addversion.php:221
-#: www/snippet/package.php:147 www/snippet/package.php:151
-#: www/snippet/package.php:156 www/snippet/package.php:169
-#: www/survey/include/SurveyHTML.class.php:191
+#: www/my/bookmark_edit.php:66 www/my/diary.php:181 www/my/diary.php:185
+#: www/pm/admin/index.php:212 www/pm/admin/index.php:321
+#: www/pm/admin/index.php:331 www/pm/admin/index.php:341
+#: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
+#: www/pm/format_csv.php:86 www/pm/format_csv.php:89 www/pm/format_csv.php:93
+#: www/pm/format_csv.php:97 www/project/stats/index.php:104
+#: www/project/stats/index.php:105 www/project/stats/index.php:106
+#: www/project/stats/index.php:107 www/register/index.php:236
+#: www/reporting/groupadded.php:65 www/reporting/groupadded.php:66
+#: www/reporting/groupadded.php:67 www/reporting/groupcum.php:65
+#: www/reporting/groupcum.php:66 www/reporting/groupcum.php:67
+#: www/reporting/projectact.php:69 www/reporting/projectact.php:70
+#: www/reporting/projectact.php:71 www/reporting/projectact.php:72
+#: www/reporting/projectact.php:73 www/reporting/projecttime.php:79
+#: www/reporting/projecttime.php:80 www/reporting/projecttime.php:81
+#: www/reporting/projecttime.php:82 www/reporting/siteact.php:70
+#: www/reporting/siteact.php:71 www/reporting/siteact.php:72
+#: www/reporting/siteact.php:73 www/reporting/sitetimebar.php:66
+#: www/reporting/sitetimebar.php:67 www/reporting/sitetime.php:78
+#: www/reporting/sitetime.php:79 www/reporting/sitetime.php:80
+#: www/reporting/timeadd.php:187 www/reporting/timeadd.php:199
+#: www/reporting/timeadd.php:228 www/reporting/timecategory.php:90
+#: www/reporting/toolspie.php:65 www/reporting/toolspie.php:66
+#: www/reporting/toolspie.php:67 www/reporting/useract.php:84
+#: www/reporting/useract.php:85 www/reporting/useract.php:86
+#: www/reporting/useract.php:87 www/reporting/useract.php:88
+#: www/reporting/useradded.php:64 www/reporting/useradded.php:65
+#: www/reporting/useradded.php:66 www/reporting/usercum.php:64
+#: www/reporting/usercum.php:65 www/reporting/usercum.php:66
+#: www/reporting/usersummary.php:71 www/reporting/usersummary.php:72
+#: www/reporting/usersummary.php:73 www/reporting/usertime.php:93
+#: www/reporting/usertime.php:94 www/reporting/usertime.php:95
+#: www/reporting/usertime.php:96 www/snippet/add_snippet_to_package.php:128
+#: www/snippet/addversion.php:94 www/snippet/addversion.php:98
+#: www/snippet/addversion.php:102 www/snippet/addversion.php:217
+#: www/snippet/addversion.php:221 www/snippet/package.php:147
+#: www/snippet/package.php:151 www/snippet/package.php:156
+#: www/snippet/package.php:169 www/survey/include/SurveyHTML.class.php:191
 #, php-format
 msgid ":"
 msgstr ""
@@ -2342,7 +2342,7 @@ msgstr "张贴者"
 #: plugins/mantisbt/view/editIssue.php:213
 #: plugins/mantisbt/view/viewIssue.php:108
 #: plugins/mantisbt/view/viewIssues.php:363 www/export/rssAboTask.php:143
-#: www/my/dashboard.php:65 www/my/diary.php:181 www/pm/browse_task.php:145
+#: www/my/dashboard.php:66 www/my/diary.php:181 www/pm/browse_task.php:145
 #: www/project/report/index.php:136
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:57
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:49
@@ -3522,7 +3522,7 @@ msgstr "跟踪者"
 #: common/reporting/report_utils.php:144 common/reporting/report_utils.php:187
 #: common/reporting/report_utils.php:690 common/reporting/report_utils.php:942
 #: common/widget/Widget_ProjectPublicAreas.class.php:148
-#: plugins/blocks/www/index.php:154 www/my/dashboard.php:77
+#: plugins/blocks/www/index.php:154 www/my/dashboard.php:84
 #: www/stats/site_stats_utils.php:242 www/stats/site_stats_utils.php:367
 #: www/stats/site_stats_utils.php:422
 msgid "Tasks"
@@ -4632,7 +4632,7 @@ msgstr "每日"
 #: common/widget/Widget_ProjectLatestDocuments.class.php:102
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:79
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:106
-#: www/my/dashboard.php:125 www/news/admin/news_admin_utils.php:43
+#: www/my/dashboard.php:133 www/news/admin/news_admin_utils.php:43
 #: www/pm/detail_task.php:87 www/pm/detail_task.php:91
 #: www/reporting/timeadd.php:121
 msgid "Y-m-d"
@@ -5301,7 +5301,7 @@ msgstr "不能指定"
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:552
 #: common/tracker/actions/query.php:197
 #: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:136
-#: www/admin/search.php:72 www/admin/search.php:148 www/my/dashboard.php:63
+#: www/admin/search.php:72 www/admin/search.php:148 www/my/dashboard.php:64
 #: www/pm/admin/index.php:187 www/pm/index.php:98
 #: www/project/admin/editimages.php:265
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
@@ -5316,7 +5316,7 @@ msgstr "编号"
 #: common/tracker/views/form-customizelist.php:40
 #: plugins/mantisbt/view/addIssue.php:73
 #: plugins/mantisbt/view/editIssue.php:128
-#: plugins/mantisbt/view/viewIssue.php:85 www/my/dashboard.php:71
+#: plugins/mantisbt/view/viewIssue.php:85 www/my/dashboard.php:75
 #: www/pm/add_task.php:67 www/pm/browse_task.php:130
 #: www/pm/browse_task.php:243 www/pm/browse_task.php:374
 #: www/pm/detail_task.php:71 www/pm/mod_task.php:83
@@ -5407,6 +5407,7 @@ msgid "Select One"
 msgstr "删除文件"
 
 #: common/tracker/actions/browse.php:367 www/frs/admin/index.php:209
+#: www/my/diary.php:207
 msgid "Private"
 msgstr "私人"
 
@@ -5462,7 +5463,7 @@ msgstr "全部清除"
 #: plugins/mantisbt/controler/filter.php:138
 #: plugins/mantisbt/view/addIssue.php:74
 #: plugins/mantisbt/view/editIssue.php:127
-#: plugins/mantisbt/view/viewIssue.php:84 www/my/dashboard.php:73
+#: plugins/mantisbt/view/viewIssue.php:84 www/my/dashboard.php:78
 #: www/pm/add_task.php:124 www/pm/browse_task.php:241
 #: www/pm/browse_task.php:381 www/pm/detail_task.php:128
 #: www/pm/mod_task.php:173
@@ -5475,7 +5476,7 @@ msgstr "指定给"
 #: cronjobs/send_pending_items_mail.php:79
 #: cronjobs/send_pending_items_mail.php:120
 #: plugins/mantisbt/controler/filter.php:122 www/admin/approve-pending.php:213
-#: www/admin/pending-news.php:139 www/my/dashboard.php:75
+#: www/admin/pending-news.php:139 www/my/dashboard.php:81
 #: www/news/admin/index.php:125 www/pm/detail_task.php:42
 #: www/pm/mod_task.php:52
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
@@ -16589,7 +16590,7 @@ msgstr "没有发现该用户的资料"
 msgid "Posted on "
 msgstr "张贴者"
 
-#: www/developer/diary.php:62
+#: www/developer/diary.php:62 www/my/diary.php:197
 msgid "Existing Diary and Notes Entries"
 msgstr "已有的日记和笔记"
 
@@ -17468,7 +17469,7 @@ msgstr "创建一个软件包"
 msgid "New Package Name"
 msgstr "新软件包名称"
 
-#: www/frs/admin/index.php:208
+#: www/frs/admin/index.php:208 www/my/diary.php:207
 msgid "Public"
 msgstr "公开"
 
@@ -17918,7 +17919,7 @@ msgstr "跟踪更新"
 msgid "View your tasks and artifacts."
 msgstr "您没有日记或笔记"
 
-#: www/include/html.php:975
+#: www/include/html.php:975 www/my/diary.php:164
 msgid "My Diary and Notes"
 msgstr "我的日记和笔记"
 
@@ -18603,20 +18604,20 @@ msgstr "更新书签失败"
 msgid "Edit Bookmark"
 msgstr "编辑书签"
 
-#: www/my/dashboard.php:39 www/my/index.php:41
+#: www/my/dashboard.php:40 www/my/index.php:41
 #, fuzzy, php-format
 msgid "Personal Page For %s"
 msgstr "我的个人首页"
 
-#: www/my/dashboard.php:46
+#: www/my/dashboard.php:47
 msgid "All trackers for my projects"
 msgstr ""
 
-#: www/my/dashboard.php:51
+#: www/my/dashboard.php:52
 msgid "You're not a member of any active projects"
 msgstr "您目前不属于任何一个活动项目"
 
-#: www/my/dashboard.php:67
+#: www/my/dashboard.php:69
 #, fuzzy
 msgid "Changed"
 msgstr "更新"
@@ -18678,10 +18679,6 @@ msgstr "增加新日记或笔记"
 msgid "Update An Entry"
 msgstr "更新日记或笔记"
 
-#: www/my/diary.php:164
-msgid "My Diary And Notes"
-msgstr "我的日记和笔记"
-
 #: www/my/diary.php:190
 msgid "Is Public"
 msgstr "是否公开？"
@@ -18694,11 +18691,7 @@ msgstr ""
 "如果标记为<strong>公开</strong>，您的日记或笔记将被通过mail发送到监视您日记或"
 "笔记的用户信箱。"
 
-#: www/my/diary.php:197
-msgid "Existing Diary And Note Entries"
-msgstr "已有的日记和笔记"
-
-#: www/my/diary.php:203
+#: www/my/diary.php:202
 msgid "You Have No Diary Entries"
 msgstr "您没有日记或笔记"
 
@@ -23308,6 +23301,12 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#~ msgid "My Diary And Notes"
+#~ msgstr "我的日记和笔记"
+
+#~ msgid "Existing Diary And Note Entries"
+#~ msgstr "已有的日记和笔记"
 
 #~ msgid "Mailing list"
 #~ msgstr "邮件列表"
