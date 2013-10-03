@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:49+0200\n"
+"POT-Creation-Date: 2013-10-03 17:51+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -480,6 +480,7 @@ msgstr "Proyecto"
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:191
 #: www/frs/admin/qrs.php:198 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
+#: www/people/admin/index.php:52 www/people/admin/index.php:65
 #: www/people/skills_utils.php:121 www/pm/add_task.php:50
 #: www/pm/add_task.php:63 www/pm/add_task.php:67 www/pm/add_task.php:74
 #: www/pm/add_task.php:81 www/pm/add_task.php:88 www/pm/add_task.php:95
@@ -4759,6 +4760,7 @@ msgstr "Falló Actualización: Preguntas Encuesta Necesarias"
 #: common/survey/Survey.class.php:129
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
+#: www/people/admin/index.php:52 www/people/admin/index.php:65
 #: www/survey/rating_resp.php:57
 msgid "Insert Error"
 msgstr "Error de Inserccion"
@@ -18614,10 +18616,6 @@ msgstr ""
 "URLS, pero no HTML en sus envios.</p><p>URLs que empiecen con http:// serán "
 "convertidas en enlaces."
 
-#: www/people/admin/index.php:52 www/people/admin/index.php:65
-msgid "Error inserting value: "
-msgstr "Error insertando valor: "
-
 #: www/people/admin/index.php:55 www/pm/admin/index.php:98
 msgid "Category Inserted"
 msgstr "Categoria Insertada"
@@ -23045,6 +23043,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Error inserting value: "
+#~ msgstr "Error insertando valor: "
 
 #~ msgid "My Diary And Notes"
 #~ msgstr "Diario y Notas"

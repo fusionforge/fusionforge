@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:49+0200\n"
+"POT-Creation-Date: 2013-10-03 17:51+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -504,6 +504,7 @@ msgstr ""
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:191
 #: www/frs/admin/qrs.php:198 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
+#: www/people/admin/index.php:52 www/people/admin/index.php:65
 #: www/people/skills_utils.php:121 www/pm/add_task.php:50
 #: www/pm/add_task.php:63 www/pm/add_task.php:67 www/pm/add_task.php:74
 #: www/pm/add_task.php:81 www/pm/add_task.php:88 www/pm/add_task.php:95
@@ -4855,6 +4856,7 @@ msgstr "UPDATE FAILED: Survey Questions Required"
 #: common/survey/Survey.class.php:129
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
+#: www/people/admin/index.php:52 www/people/admin/index.php:65
 #: www/survey/rating_resp.php:57
 msgid "Insert Error"
 msgstr ""
@@ -18826,11 +18828,6 @@ msgid ""
 "submissions.</p><p>URLs that start with http:// are made clickable."
 msgstr ""
 
-#: www/people/admin/index.php:52 www/people/admin/index.php:65
-#, fuzzy
-msgid "Error inserting value: "
-msgstr "추가 에러"
-
 #: www/people/admin/index.php:55 www/pm/admin/index.php:98
 msgid "Category Inserted"
 msgstr "Category Inserted"
@@ -23234,6 +23231,10 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "Error inserting value: "
+#~ msgstr "추가 에러"
 
 #~ msgid "My Diary And Notes"
 #~ msgstr "일기쓰기 및 메모"

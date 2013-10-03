@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:49+0200\n"
+"POT-Creation-Date: 2013-10-03 17:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -462,6 +462,7 @@ msgstr ""
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:191
 #: www/frs/admin/qrs.php:198 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
+#: www/people/admin/index.php:52 www/people/admin/index.php:65
 #: www/people/skills_utils.php:121 www/pm/add_task.php:50
 #: www/pm/add_task.php:63 www/pm/add_task.php:67 www/pm/add_task.php:74
 #: www/pm/add_task.php:81 www/pm/add_task.php:88 www/pm/add_task.php:95
@@ -4450,6 +4451,7 @@ msgstr ""
 #: common/survey/Survey.class.php:129
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
+#: www/people/admin/index.php:52 www/people/admin/index.php:65
 #: www/survey/rating_resp.php:57
 msgid "Insert Error"
 msgstr ""
@@ -17399,10 +17401,6 @@ msgid ""
 "to be approved by a member of the %1$s news team before they will appear on "
 "the %1$s home page.</p><p>You may include URLs, but not HTML in your "
 "submissions.</p><p>URLs that start with http:// are made clickable."
-msgstr ""
-
-#: www/people/admin/index.php:52 www/people/admin/index.php:65
-msgid "Error inserting value: "
 msgstr ""
 
 #: www/people/admin/index.php:55 www/pm/admin/index.php:98

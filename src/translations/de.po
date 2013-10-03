@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:49+0200\n"
+"POT-Creation-Date: 2013-10-03 17:51+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -501,6 +501,7 @@ msgstr "Projekt"
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:191
 #: www/frs/admin/qrs.php:198 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
+#: www/people/admin/index.php:52 www/people/admin/index.php:65
 #: www/people/skills_utils.php:121 www/pm/add_task.php:50
 #: www/pm/add_task.php:63 www/pm/add_task.php:67 www/pm/add_task.php:74
 #: www/pm/add_task.php:81 www/pm/add_task.php:88 www/pm/add_task.php:95
@@ -4920,6 +4921,7 @@ msgstr "UPDATE FEHLGESCHLAGEN: Umfragefragen werden benötigt"
 #: common/survey/Survey.class.php:129
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
+#: www/people/admin/index.php:52 www/people/admin/index.php:65
 #: www/survey/rating_resp.php:57
 msgid "Insert Error"
 msgstr "Fehler einfügen"
@@ -19256,11 +19258,6 @@ msgstr ""
 "können Links in Ihren Text einfügen, aber kein HTML.</p><p>Links die mit "
 "http:// beginnen können angeklickt werden."
 
-#: www/people/admin/index.php:52 www/people/admin/index.php:65
-#, fuzzy
-msgid "Error inserting value: "
-msgstr "Fehler beim Einfügen"
-
 #: www/people/admin/index.php:55 www/pm/admin/index.php:98
 msgid "Category Inserted"
 msgstr "Kategorie eingefügt"
@@ -23768,6 +23765,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "Error inserting value: "
+#~ msgstr "Fehler beim Einfügen"
 
 #~ msgid "My Diary And Notes"
 #~ msgstr "Mein Terminkalender und Notizen"
