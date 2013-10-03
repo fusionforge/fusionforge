@@ -72,7 +72,7 @@ msgstr "Erreur lors de l'ajout d'un document."
 
 #: common/docman/actions/addfile.php:152
 msgid "Manual uploads disabled."
-msgstr "Les publications de fichiers manuelles sont désactivées."
+msgstr "Téléchargements manuels désactivés."
 
 #: common/docman/actions/addfile.php:176
 msgid "Unknown type submission."
@@ -87,7 +87,8 @@ msgstr "Le document %s a été soumis avec succès."
 #, php-format
 msgid ""
 "Document %s has been successfully uploaded and is waiting to be approved."
-msgstr "Le document %s a été soumis avec succès (en attente de validation)."
+msgstr ""
+"Le document %s a été soumis avec succès et est en attente de validation."
 
 #: common/docman/actions/addsubdocgroup.php:63
 msgid "Document subfolder successfully created."
@@ -100,7 +101,7 @@ msgstr "Le dossier de documents a été soumis avec succès."
 #: common/docman/actions/deldir.php:64
 #, php-format
 msgid "Document folder %s deleted successfully."
-msgstr "Le repétoire de documents %s a été supprimé avec succès."
+msgstr "Le dossier de documents %s a été supprimé avec succès."
 
 #: common/docman/actions/delfile.php:36
 #: common/docman/actions/enforcereserve.php:36
@@ -120,7 +121,7 @@ msgstr "Document(s)"
 #: common/docman/actions/trashfile.php:62
 #: common/docman/actions/validatefile.php:57 www/docman/view.php:244
 msgid "No action to perform"
-msgstr "Aucune action à réaliser"
+msgstr "Aucune action à effectuer"
 
 #: common/docman/actions/delfile.php:52
 msgid "deleted successfully."
@@ -129,7 +130,7 @@ msgstr "correctement effacée."
 #: common/docman/actions/editdocgroup.php:101
 #, php-format
 msgid "Documents folder %s updated successfully"
-msgstr "Le dossier de documents %s a été mis à jour avec succès."
+msgstr "Le dossier de documents %s a été mis à jour avec succès"
 
 #: common/docman/actions/editdocgroup.php:103
 #, php-format
@@ -152,11 +153,11 @@ msgstr "Le document %s a été mis à jour avec succès."
 
 #: common/docman/actions/emptytrash.php:38
 msgid "Unable to clean trash"
-msgstr "Erreur lors du vidage de la corbeille"
+msgstr "Impossible de vider la corbeille"
 
 #: common/docman/actions/emptytrash.php:42
 msgid "Emptied Trash successfully."
-msgstr "La corbeille a été vidée."
+msgstr "La corbeille a été vidée avec succès."
 
 #: common/docman/actions/enforcereserve.php:47
 msgid "reservation enforced successfully."
@@ -207,17 +208,16 @@ msgstr "publié avec succès."
 
 #: common/docman/actions/reservefile.php:49
 msgid "reserved successfully."
-msgstr "Le document a été réservé avec succès."
+msgstr "a été réservé avec succès."
 
 #: common/docman/actions/trashdir.php:99
 #, php-format
 msgid "Documents folder %s moved to trash successfully."
-msgstr ""
-"Le dossier %s et son contenu ont été déplacés vers la corbeille avec succès."
+msgstr "Le dossier de documents %s a été mis à corbeille avec succès."
 
 #: common/docman/actions/trashfile.php:66
 msgid "moved to trash successfully."
-msgstr "Le document a été déplacé vers la corbeille avec succès."
+msgstr "a été mis à corbeille avec succès."
 
 #: common/docman/actions/updatecreateonline.php:33
 msgid "Create Online Documents Status updated successfully: Active."
@@ -286,11 +286,11 @@ msgstr ""
 #: common/docman/Document.class.php:114 common/docman/Document.class.php:829
 #: common/pm/ProjectGroup.class.php:144 common/pm/ProjectGroup.class.php:316
 msgid "Title Must Be At Least 5 Characters"
-msgstr "Le titre doit avoir au moins 5 caractères."
+msgstr "Le titre doit avoir au moins 5 caractères"
 
 #: common/docman/Document.class.php:118 common/docman/Document.class.php:834
 msgid "Document Description Must Be At Least 10 Characters"
-msgstr "La description du document doit avoir au moins 10 caractères."
+msgstr "La description du document doit avoir au moins 10 caractères"
 
 #: common/docman/Document.class.php:142 common/docman/Document.class.php:150
 #: common/docman/Document.class.php:843
@@ -299,7 +299,7 @@ msgstr "Document déjà publié dans ce dossier"
 
 #: common/docman/Document.class.php:199 common/docman/Document.class.php:206
 msgid "Error Adding Document:"
-msgstr "Erreur lors de l'ajout d'un document :"
+msgstr "Erreur lors de l'ajout du document :"
 
 #: common/docman/Document.class.php:199
 msgid "Not a file"
@@ -307,7 +307,7 @@ msgstr "Pas un fichier"
 
 #: common/docman/Document.class.php:215
 msgid "Error fetching Document"
-msgstr "Erreur lors de la récupération d'un document."
+msgstr "Erreur lors de la récupération du document"
 
 #: common/docman/Document.class.php:226 common/docman/Document.class.php:882
 #: common/docman/Document.class.php:1097
@@ -316,12 +316,12 @@ msgstr "Erreur lors de la mise à jour du groupe de documents :"
 
 #: common/docman/Document.class.php:253
 msgid "Document: Invalid docid"
-msgstr "Document : numéro de document invalide."
+msgstr "Document : n° de document invalide"
 
 #: common/docman/Document.class.php:582
 #: common/docman/DocumentGroup.class.php:410
 msgid "Unable To Remove Monitor"
-msgstr "Impossible de désactiver la surveillance."
+msgstr "Impossible de désactiver la surveillance"
 
 #: common/docman/Document.class.php:603
 #: common/docman/DocumentGroup.class.php:431 common/forum/Forum.class.php:458
@@ -335,11 +335,11 @@ msgstr "Impossible de supprimer la surveillance"
 
 #: common/docman/Document.class.php:670
 msgid "Document lock failed"
-msgstr "Erreur lors du verrouillage du document :"
+msgstr "Impossible de verrouiller le document"
 
 #: common/docman/Document.class.php:698
 msgid "Document reservation failed"
-msgstr "Erreur lors de la réservation du document :"
+msgstr "Impossible de réserver le document"
 
 #: common/docman/Document.class.php:936
 msgid "New document"
@@ -523,7 +523,7 @@ msgstr ""
 
 #: common/docman/Document.class.php:1017
 msgid "Error Deleting Document:"
-msgstr "Erreur lors de la suppression d'un document :"
+msgstr "Erreur lors de la suppression du document :"
 
 #: common/docman/Document.class.php:1092
 #: common/docman/DocumentGroup.class.php:873
@@ -542,12 +542,12 @@ msgstr "Dossier de documents"
 
 #: common/docman/DocumentGroup.class.php:101
 msgid "Name is required"
-msgstr "Un nom est requis."
+msgstr "Le nom est obligatoire"
 
 #: common/docman/DocumentGroup.class.php:110
 #: common/docman/DocumentGroup.class.php:490
 msgid "Invalid Documents Folder parent ID"
-msgstr "Identifiant du dossier parent invalide."
+msgstr "Identifiant du dossier parent invalide"
 
 #: common/docman/DocumentGroup.class.php:131
 msgid "Folder name already exists"
@@ -563,11 +563,11 @@ msgstr "Ce type de fichier ne peut être injecté :"
 
 #: common/docman/DocumentGroup.class.php:259
 msgid "Invalid Document Folder ID"
-msgstr "Identifiant de répertoire de documents invalide"
+msgstr "Numéro de dossier de documents invalide"
 
 #: common/docman/DocumentGroup.class.php:502
 msgid "Documents Folder name already exists"
-msgstr "Ce nom de dossier est déjà pris."
+msgstr "Ce nom de dossier est déjà pris"
 
 #: common/docman/DocumentGroup.class.php:525
 #, php-format
@@ -596,7 +596,7 @@ msgstr "Erreur lors de l'extraction du fichier ZIP."
 
 #: common/docman/DocumentGroup.class.php:767
 msgid "Unable to open ZIP file."
-msgstr "Erreur lors de l'ouverture de l'archive ZIP."
+msgstr "Impossible d'ouvrir le fichier ZIP."
 
 #: common/docman/DocumentGroup.class.php:818
 msgid "(Title must be at least 5 characters.)"
@@ -617,7 +617,7 @@ msgstr "Impossible d'ouvrir le dossier pour injecter l'arbre"
 #: common/docman/DocumentGroupFactory.class.php:86
 #: common/docman/DocumentGroupFactory.class.php:120
 msgid "No Documents Folder Found"
-msgstr "Aucun dossier trouvé."
+msgstr "Aucun dossier de documents trouvé"
 
 #: common/docman/DocumentManager.class.php:177
 msgid "Number of documents in this folder"
@@ -932,23 +932,23 @@ msgstr "Désactiver la création de documents en ligne"
 
 #: common/docman/views/admin.php:69
 msgid "Enable Search Engine"
-msgstr "Activer le moteur de recherche"
+msgstr "Activer la recherche"
 
 #: common/docman/views/admin.php:72
 msgid "Disable Search Engine"
-msgstr "Désactiver le moteur de recherche"
+msgstr "Désactiver la recherche"
 
 #: common/docman/views/admin.php:81
 msgid "Force reindexation search engine"
-msgstr "Forcer une réindexation par le moteur de recherche"
+msgstr "Réindexer les documents"
 
 #: common/docman/views/admin.php:90
 msgid "Enable Webdav Interface"
-msgstr "Activer l'interface WebDAV"
+msgstr "Activer l'interface Webdav"
 
 #: common/docman/views/admin.php:93
 msgid "Disable Webdav Interface"
-msgstr "Désactiver l'interface WebDAV"
+msgstr "Désactiver l'interface Webdav"
 
 #: common/docman/views/editdocgroup.php:59
 msgid "Folder Name"
@@ -995,7 +995,7 @@ msgstr ""
 
 #: common/docman/views/editfile.php:47
 msgid "Both fields are used by document search engine."
-msgstr "Les deux champs sont utilisés par le moteur de recherche."
+msgstr "Les deux champs sont utilisés lors de la recherche de documents."
 
 #: common/docman/views/editfile.php:57
 msgid ""
@@ -1026,7 +1026,7 @@ msgstr "Spécifier une URL externe pour le fichier :"
 
 #: common/docman/views/editfile.php:80
 msgid "OPTIONAL: Upload new file:"
-msgstr "Optionnel : Uploader un nouveau fichier"
+msgstr "Optionnel : déposer un nouveau fichier :"
 
 #: common/docman/views/help.php:38
 msgid "Documents parsing is also available thru webdav"
@@ -1039,7 +1039,7 @@ msgstr "Accès direct par WebDAV"
 #: common/docman/views/listfile.php:112
 #: common/docman/views/listtrashfile.php:73
 msgid "Invalid folder"
-msgstr "Répertoire non valide"
+msgstr "Dossier non valide"
 
 #: common/docman/views/listfile.php:158
 #: common/docman/views/listtrashfile.php:102
@@ -1064,7 +1064,7 @@ msgstr "Modifier ce dossier"
 
 #: common/docman/views/listfile.php:177
 msgid "Move this folder and his content to trash"
-msgstr "Déplacer ce dossier et son contenu vers la corbeille"
+msgstr "Mettre ce dossier et son contenu à la corbeille"
 
 #: common/docman/views/listfile.php:179
 msgid "Permanently delete this folder"
@@ -1072,11 +1072,11 @@ msgstr "Supprimer ce dossier de manière permanente"
 
 #: common/docman/views/listfile.php:184
 msgid "Add a new item in this folder"
-msgstr "Ajouter un nouvel élément dans ce dossier"
+msgstr "Ajouter un nouvel élément à ce dossier"
 
 #: common/docman/views/listfile.php:191
 msgid "Download this folder as a ZIP"
-msgstr "Télécharger ce dossier dans un fichier ZIP"
+msgstr "Télécharger ce dossier au format ZIP"
 
 #: common/docman/views/listfile.php:196
 msgid "Stop monitoring this folder"
@@ -1147,7 +1147,7 @@ msgstr "Auteur"
 #: common/docman/views/listtrashfile.php:130
 #: common/docman/views/pendingfiles.php:63
 msgid "Last time"
-msgstr "Dernière modification"
+msgstr "Dernière date"
 
 #: common/docman/views/listfile.php:219
 #: common/docman/views/listtrashfile.php:130
@@ -1234,12 +1234,12 @@ msgstr "Voir ce document"
 #: common/docman/views/listtrashfile.php:157
 #: common/docman/views/pendingfiles.php:89
 msgid "new"
-msgstr "Nouvelle"
+msgstr "nouveau"
 
 #: common/docman/views/listfile.php:260
 #: common/docman/views/pendingfiles.php:91
 msgid "Created or updated since less than 7 days"
-msgstr "Créé ou mis à jour au cours des 7 derniers jours"
+msgstr "Créé ou mis à jour depuis moins de 7 jours"
 
 #: common/docman/views/listfile.php:270 common/docman/views/listfile.php:272
 #: common/docman/views/listtrashfile.php:169
@@ -1305,17 +1305,17 @@ msgstr "Document réservé"
 
 #: common/docman/views/listfile.php:326 common/docman/views/listfile.php:337
 msgid "Move this document to trash"
-msgstr "Déplacer ce document vers la corbeille"
+msgstr "Mettre ce document à la corbeille"
 
 #: common/docman/views/listfile.php:326 common/docman/views/listfile.php:337
 msgid "Move to trash this document"
-msgstr "Déplacer ce document vers la corbeille"
+msgstr "Mettre ce document à la corbeille"
 
 #: common/docman/views/listfile.php:327 common/docman/views/listfile.php:338
 #: common/docman/views/listtrashfile.php:193
 #: common/docman/views/pendingfiles.php:127
 msgid "Edit this document"
-msgstr "Éditer ce document"
+msgstr "Modifier ce document"
 
 #: common/docman/views/listfile.php:329
 msgid "Reserve this document for later edition"
@@ -1402,15 +1402,15 @@ msgstr "Supprimer ce dossier et tout son contenu."
 
 #: common/docman/views/listtrashfile.php:159
 msgid "Updated since less than 7 days"
-msgstr "Créé ou mis à jour au cours des 7 derniers jours"
+msgstr "Mis à jour depuis moins de 7 jours"
 
 #: common/docman/views/listtrashfile.php:192
 msgid "Delete permanently this document."
-msgstr "Détruire de manière irrémédiable ce document."
+msgstr "Supprimer définitivement ce document."
 
 #: common/docman/views/listtrashfile.php:203
 msgid "Delete permanently."
-msgstr "Supprimer de manière permanente."
+msgstr "Supprimer définitivement."
 
 #: common/docman/views/menu.php:44
 msgid "View Documents"
@@ -1743,7 +1743,7 @@ msgstr "Mois"
 #: www/stats/site_stats_utils.php:363 www/stats/site_stats_utils.php:417
 #: www/stats/site_stats_utils.php:476 www/top/toplist.php:49
 msgid "Downloads"
-msgstr "Téléchargement"
+msgstr "Téléchargements"
 
 #: common/docman/views/reporting.php:170 www/activity/index.php:317
 msgid "Document"
