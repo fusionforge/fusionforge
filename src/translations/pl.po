@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:51+0200\n"
+"POT-Creation-Date: 2013-10-03 18:05+0200\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18059,21 +18059,23 @@ msgstr ""
 
 #: www/people/editjob.php:61
 #, php-format
-msgid "JOB insert FAILED: %s"
+msgid "Job insert failed: %s"
 msgstr ""
 
 #: www/people/editjob.php:65
-msgid "JOB inserted successfully"
-msgstr ""
+#, fuzzy
+msgid "Job inserted successfully"
+msgstr "Grupa dokumentów: Nazwa jest wymagana"
 
 #: www/people/editjob.php:80
-#, php-format
-msgid "JOB update FAILED : %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Job update failed: %s"
+msgstr "Aktualizuj hasło"
 
 #: www/people/editjob.php:82 www/people/editjob.php:96
-msgid "JOB updated successfully"
-msgstr ""
+#, fuzzy
+msgid "Job updated successfully"
+msgstr "Grupa dokumentów: Nazwa jest wymagana"
 
 #: www/people/editjob.php:91 www/people/people_utils.php:126
 #: www/people/people_utils.php:156 www/people/people_utils.php:234
@@ -18090,7 +18092,7 @@ msgid "Skill Year"
 msgstr ""
 
 #: www/people/editjob.php:98
-msgid "JOB update failed - wrong project_id"
+msgid "Job update failed - wrong project_id"
 msgstr ""
 
 #: www/people/editjob.php:107
@@ -18098,16 +18100,17 @@ msgid "Job Inventory"
 msgstr ""
 
 #: www/people/editjob.php:114
-#, php-format
-msgid "JOB skill update FAILED: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Job skill update failed: %s"
+msgstr "Aktualizuj hasło"
 
 #: www/people/editjob.php:116
-msgid "JOB skill updated successfully"
-msgstr ""
+#, fuzzy
+msgid "Job skill updated successfully"
+msgstr "Grupa dokumentów: Nazwa jest wymagana"
 
 #: www/people/editjob.php:119
-msgid "JOB skill update failed - wrong project_id"
+msgid "Job skill update failed - wrong project_id"
 msgstr ""
 
 #: www/people/editjob.php:128
@@ -18116,20 +18119,21 @@ msgstr ""
 
 #: www/people/editjob.php:134
 #, php-format
-msgid "JOB skill delete FAILED : %s"
+msgid "Job skill delete failed: %s"
 msgstr ""
 
 #: www/people/editjob.php:136
-msgid "JOB skill deleted successfully"
-msgstr ""
+#, fuzzy
+msgid "Job skill deleted successfully"
+msgstr "Grupa dokumentów: Nazwa jest wymagana"
 
 #: www/people/editjob.php:139
-msgid "JOB skill delete failed - wrong project_id"
+msgid "Job skill delete failed - wrong project_id"
 msgstr ""
 
 #: www/people/editjob.php:152
 #, php-format
-msgid "POSTING fetch FAILED: %s"
+msgid "Posting fetch failed: %s"
 msgstr ""
 
 #: www/people/editjob.php:153

@@ -58,11 +58,11 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 VALUES ($1, $2, $3, $4, $5, $6, $7)",
 array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($description), time(), '1',$category_id));
 		if (!$result || db_affected_rows($result) < 1) {
-			$error_msg .= sprintf(_('JOB insert FAILED: %s'),db_error());
+			$error_msg .= sprintf(_('Job insert failed: %s'),db_error());
 			form_release_key(getStringFromRequest("form_key"));
 		} else {
 			$job_id=db_insertid($result,'people_job','job_id');
-			$feedback .= _('JOB inserted successfully');
+			$feedback .= _('Job inserted successfully');
 		}
 
 	} elseif (getStringFromRequest('update_job')) {
@@ -77,9 +77,9 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 		$result=db_query_params("UPDATE people_job SET title=$1,description=$2,status_id=$3,category_id=$4 WHERE job_id=$5 AND group_id=$6",
 			array(htmlspecialchars($title), htmlspecialchars($description), $status_id, $category_id, $job_id, $group_id));
 		if (!$result || db_affected_rows($result) < 1) {
-			$error_msg = sprintf(_('JOB update FAILED : %s'),db_error());
+			$error_msg = sprintf(_('Job update failed: %s'),db_error());
 		} else {
-			$feedback = _('JOB updated successfully');
+			$feedback = _('Job updated successfully');
 		}
 
 } elseif (getStringFromRequest('add_to_job_inventory')) {
@@ -93,9 +93,9 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 
 		if (people_verify_job_group($job_id,$group_id)) {
 			people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_year_id);
-			$feedback .= _('JOB updated successfully');
+			$feedback .= _('Job updated successfully');
 		} else {
-			$error_msg .= _('JOB update failed - wrong project_id');
+			$error_msg .= _('Job update failed - wrong project_id');
 		}
 
 	} elseif (getStringFromRequest('update_job_inventory')) {
@@ -111,12 +111,12 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 			$result=db_query_params("UPDATE people_job_inventory SET skill_level_id=$1,skill_year_id=$2 WHERE job_id=$3 AND job_inventory_id=$4",
 				array($skill_level_id, $skill_year_id, $job_id, $job_inventory_id));
 			if (!$result || db_affected_rows($result) < 1) {
-				$error_msg .= sprintf(_('JOB skill update FAILED: %s'), db_error());
+				$error_msg .= sprintf(_('Job skill update failed: %s'), db_error());
 			} else {
-				$feedback .= _('JOB skill updated successfully');
+				$feedback .= _('Job skill updated successfully');
 			}
 		} else {
-			$error_msg .= _('JOB skill update failed - wrong project_id');
+			$error_msg .= _('Job skill update failed - wrong project_id');
 		}
 
 	} elseif (getStringFromRequest('delete_from_job_inventory')) {
@@ -131,12 +131,12 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 		if (people_verify_job_group($job_id,$group_id)) {
 			$result = db_query_params("DELETE FROM people_job_inventory WHERE job_id=$1 AND job_inventory_id=$2", array($job_id, $job_inventory_id));
 			if (!$result || db_affected_rows($result) < 1) {
-				$error_msg .= sprintf(_('JOB skill delete FAILED : %s'),db_error());
+				$error_msg .= sprintf(_('Job skill delete failed: %s'),db_error());
 			} else {
-				$feedback .= _('JOB skill deleted successfully');
+				$feedback .= _('Job skill deleted successfully');
 			}
 		} else {
-			$error_msg .= _('JOB skill delete failed - wrong project_id');
+			$error_msg .= _('Job skill delete failed - wrong project_id');
 		}
 
 	}
@@ -149,7 +149,7 @@ array($group_id, user_getid(), htmlspecialchars($title), htmlspecialchars($descr
 	//for security, include group_id
 	$result=db_query_params("SELECT * FROM people_job WHERE job_id=$1 AND group_id=$2", array($job_id, $group_id));
 	if (!$result || db_numrows($result) < 1) {
-		$error_msg .= sprintf(_('POSTING fetch FAILED: %s'),db_error());
+		$error_msg .= sprintf(_('Posting fetch failed: %s'),db_error());
 		echo '<h2>'._('No such posting for this project').'</h2>';
 	} else {
 

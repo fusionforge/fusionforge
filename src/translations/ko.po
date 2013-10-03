@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:51+0200\n"
+"POT-Creation-Date: 2013-10-03 18:05+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18861,20 +18861,22 @@ msgstr "계속 >>"
 
 #: www/people/editjob.php:61
 #, fuzzy, php-format
-msgid "JOB insert FAILED: %s"
-msgstr "JOB insert FAILED"
+msgid "Job insert failed: %s"
+msgstr "입력 실패"
 
 #: www/people/editjob.php:65
-msgid "JOB inserted successfully"
+#, fuzzy
+msgid "Job inserted successfully"
 msgstr "JOB inserted successfully"
 
 #: www/people/editjob.php:80
 #, fuzzy, php-format
-msgid "JOB update FAILED : %s"
-msgstr "JOB update FAILED"
+msgid "Job update failed: %s"
+msgstr "매일 갱신됩니다."
 
 #: www/people/editjob.php:82 www/people/editjob.php:96
-msgid "JOB updated successfully"
+#, fuzzy
+msgid "Job updated successfully"
 msgstr "JOB updated successfully"
 
 #: www/people/editjob.php:91 www/people/people_utils.php:126
@@ -18894,7 +18896,8 @@ msgid "Skill Year"
 msgstr "스킬 편집"
 
 #: www/people/editjob.php:98
-msgid "JOB update failed - wrong project_id"
+#, fuzzy
+msgid "Job update failed - wrong project_id"
 msgstr "JOB update failed - wrong project_id"
 
 #: www/people/editjob.php:107
@@ -18903,15 +18906,17 @@ msgstr ""
 
 #: www/people/editjob.php:114
 #, fuzzy, php-format
-msgid "JOB skill update FAILED: %s"
+msgid "Job skill update failed: %s"
 msgstr "JOB skill update FAILED"
 
 #: www/people/editjob.php:116
-msgid "JOB skill updated successfully"
+#, fuzzy
+msgid "Job skill updated successfully"
 msgstr "JOB skill updated successfully"
 
 #: www/people/editjob.php:119
-msgid "JOB skill update failed - wrong project_id"
+#, fuzzy
+msgid "Job skill update failed - wrong project_id"
 msgstr "JOB skill update failed - wrong project_id"
 
 #: www/people/editjob.php:128
@@ -18920,21 +18925,23 @@ msgstr ""
 
 #: www/people/editjob.php:134
 #, fuzzy, php-format
-msgid "JOB skill delete FAILED : %s"
+msgid "Job skill delete failed: %s"
 msgstr "JOB skill delete FAILED"
 
 #: www/people/editjob.php:136
-msgid "JOB skill deleted successfully"
+#, fuzzy
+msgid "Job skill deleted successfully"
 msgstr "JOB skill deleted successfully"
 
 #: www/people/editjob.php:139
-msgid "JOB skill delete failed - wrong project_id"
+#, fuzzy
+msgid "Job skill delete failed - wrong project_id"
 msgstr "JOB skill delete failed - wrong project_id"
 
 #: www/people/editjob.php:152
 #, fuzzy, php-format
-msgid "POSTING fetch FAILED: %s"
-msgstr "POSTING fetch FAILED"
+msgid "Posting fetch failed: %s"
+msgstr "존재하는 파일"
 
 #: www/people/editjob.php:153
 #, fuzzy
@@ -23233,6 +23240,18 @@ msgid "Personal Page for %s"
 msgstr "개인 페이지"
 
 #, fuzzy
+#~ msgid "JOB insert FAILED: %s"
+#~ msgstr "JOB insert FAILED"
+
+#, fuzzy
+#~ msgid "JOB update FAILED : %s"
+#~ msgstr "JOB update FAILED"
+
+#, fuzzy
+#~ msgid "POSTING fetch FAILED: %s"
+#~ msgstr "POSTING fetch FAILED"
+
+#, fuzzy
 #~ msgid "Error inserting value: "
 #~ msgstr "추가 에러"
 
@@ -25339,3 +25358,24 @@ msgstr "개인 페이지"
 #~ "need to be able to determine which one of these an item should belong."
 #~ "<br /><br />This has the added benefit of enabling an admin to turn a "
 #~ "support request into a bug."
+
+#~ msgid "JOB inserted successfully"
+#~ msgstr "JOB inserted successfully"
+
+#~ msgid "JOB updated successfully"
+#~ msgstr "JOB updated successfully"
+
+#~ msgid "JOB update failed - wrong project_id"
+#~ msgstr "JOB update failed - wrong project_id"
+
+#~ msgid "JOB skill updated successfully"
+#~ msgstr "JOB skill updated successfully"
+
+#~ msgid "JOB skill update failed - wrong project_id"
+#~ msgstr "JOB skill update failed - wrong project_id"
+
+#~ msgid "JOB skill deleted successfully"
+#~ msgstr "JOB skill deleted successfully"
+
+#~ msgid "JOB skill delete failed - wrong project_id"
+#~ msgstr "JOB skill delete failed - wrong project_id"

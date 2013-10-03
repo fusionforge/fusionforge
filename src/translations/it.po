@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:51+0200\n"
+"POT-Creation-Date: 2013-10-03 18:05+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -19088,20 +19088,20 @@ msgstr "Continua >>"
 
 #: www/people/editjob.php:61
 #, fuzzy, php-format
-msgid "JOB insert FAILED: %s"
-msgstr "Inserimento Posizione fallita"
+msgid "Job insert failed: %s"
+msgstr "Inserimento fallito"
 
 #: www/people/editjob.php:65
-msgid "JOB inserted successfully"
+msgid "Job inserted successfully"
 msgstr "Posizione inserita"
 
 #: www/people/editjob.php:80
 #, fuzzy, php-format
-msgid "JOB update FAILED : %s"
-msgstr "Aggiornamento posizione fallita"
+msgid "Job update failed: %s"
+msgstr "Aggiornamento fallito"
 
 #: www/people/editjob.php:82 www/people/editjob.php:96
-msgid "JOB updated successfully"
+msgid "Job updated successfully"
 msgstr "Aggiornamento posizione effettuata"
 
 #: www/people/editjob.php:91 www/people/people_utils.php:126
@@ -19121,7 +19121,7 @@ msgid "Skill Year"
 msgstr "Modifica competenze"
 
 #: www/people/editjob.php:98
-msgid "JOB update failed - wrong project_id"
+msgid "Job update failed - wrong project_id"
 msgstr "Aggiornamento posizione fallita - project_id errato"
 
 #: www/people/editjob.php:107
@@ -19130,15 +19130,15 @@ msgstr ""
 
 #: www/people/editjob.php:114
 #, fuzzy, php-format
-msgid "JOB skill update FAILED: %s"
+msgid "Job skill update failed: %s"
 msgstr "Aggiornamento competenza posizione fallito"
 
 #: www/people/editjob.php:116
-msgid "JOB skill updated successfully"
+msgid "Job skill updated successfully"
 msgstr "Aggiornamento competenza posizione eseguito"
 
 #: www/people/editjob.php:119
-msgid "JOB skill update failed - wrong project_id"
+msgid "Job skill update failed - wrong project_id"
 msgstr "Aggiornamento competenza posizione fallita - project_id errato"
 
 #: www/people/editjob.php:128
@@ -19147,21 +19147,21 @@ msgstr ""
 
 #: www/people/editjob.php:134
 #, fuzzy, php-format
-msgid "JOB skill delete FAILED : %s"
-msgstr "Rimozione competenza posizione fallita"
+msgid "Job skill delete failed: %s"
+msgstr "Rimozione competenza posizione fallita - project_id errato"
 
 #: www/people/editjob.php:136
-msgid "JOB skill deleted successfully"
+msgid "Job skill deleted successfully"
 msgstr "Rimozione competenza posizione effettuata"
 
 #: www/people/editjob.php:139
-msgid "JOB skill delete failed - wrong project_id"
+msgid "Job skill delete failed - wrong project_id"
 msgstr "Rimozione competenza posizione fallita - project_id errato"
 
 #: www/people/editjob.php:152
 #, fuzzy, php-format
-msgid "POSTING fetch FAILED: %s"
-msgstr "POSTING fetch FAILED"
+msgid "Posting fetch failed: %s"
+msgstr "Posting Failed"
 
 #: www/people/editjob.php:153
 #, fuzzy
@@ -23521,6 +23521,43 @@ msgid "Personal Page for %s"
 msgstr "Pagina Personale"
 
 #, fuzzy
+#~ msgid "JOB insert FAILED: %s"
+#~ msgstr "Inserimento Posizione fallita"
+
+#~ msgid "JOB inserted successfully"
+#~ msgstr "Posizione inserita"
+
+#, fuzzy
+#~ msgid "JOB update FAILED : %s"
+#~ msgstr "Aggiornamento posizione fallita"
+
+#~ msgid "JOB updated successfully"
+#~ msgstr "Aggiornamento posizione effettuata"
+
+#~ msgid "JOB update failed - wrong project_id"
+#~ msgstr "Aggiornamento posizione fallita - project_id errato"
+
+#~ msgid "JOB skill updated successfully"
+#~ msgstr "Aggiornamento competenza posizione eseguito"
+
+#~ msgid "JOB skill update failed - wrong project_id"
+#~ msgstr "Aggiornamento competenza posizione fallita - project_id errato"
+
+#, fuzzy
+#~ msgid "JOB skill delete FAILED : %s"
+#~ msgstr "Rimozione competenza posizione fallita"
+
+#~ msgid "JOB skill deleted successfully"
+#~ msgstr "Rimozione competenza posizione effettuata"
+
+#~ msgid "JOB skill delete failed - wrong project_id"
+#~ msgstr "Rimozione competenza posizione fallita - project_id errato"
+
+#, fuzzy
+#~ msgid "POSTING fetch FAILED: %s"
+#~ msgstr "POSTING fetch FAILED"
+
+#, fuzzy
 #~ msgid "Error inserting value: "
 #~ msgstr "Errore nell'inserimento"
 
@@ -24859,27 +24896,6 @@ msgstr "Pagina Personale"
 
 #~ msgid "Read More/Comment"
 #~ msgstr "Leggi altro/Replica"
-
-#~ msgid "Job inserted successfully"
-#~ msgstr "Posizione inserita"
-
-#~ msgid "Job updated successfully"
-#~ msgstr "Aggiornamento posizione effettuata"
-
-#~ msgid "Job update failed - wrong project_id"
-#~ msgstr "Aggiornamento posizione fallita - project_id errato"
-
-#~ msgid "Job skill updated successfully"
-#~ msgstr "Aggiornamento competenza posizione eseguito"
-
-#~ msgid "Job skill update failed - wrong project_id"
-#~ msgstr "Aggiornamento competenza posizione fallita - project_id errato"
-
-#~ msgid "Job skill deleted successfully"
-#~ msgstr "Rimozione competenza posizione effettuata"
-
-#~ msgid "Job skill delete failed - wrong project_id"
-#~ msgstr "Rimozione competenza posizione fallita - project_id errato"
 
 #~ msgid ""
 #~ "The following option determines if others can see your skills. If they "

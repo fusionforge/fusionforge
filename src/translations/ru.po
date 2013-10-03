@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:51+0200\n"
+"POT-Creation-Date: 2013-10-03 18:05+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -19379,20 +19379,20 @@ msgstr "Продолжить"
 
 #: www/people/editjob.php:61
 #, fuzzy, php-format
-msgid "JOB insert FAILED: %s"
-msgstr "Вид работы не добавлен"
+msgid "Job insert failed: %s"
+msgstr "Ошибка вставки"
 
 #: www/people/editjob.php:65
-msgid "JOB inserted successfully"
+msgid "Job inserted successfully"
 msgstr "Вид работы добавлен"
 
 #: www/people/editjob.php:80
 #, fuzzy, php-format
-msgid "JOB update FAILED : %s"
-msgstr "Вид работы не изменен"
+msgid "Job update failed: %s"
+msgstr "Ошибка обновления"
 
 #: www/people/editjob.php:82 www/people/editjob.php:96
-msgid "JOB updated successfully"
+msgid "Job updated successfully"
 msgstr "Вид работы изменен"
 
 #: www/people/editjob.php:91 www/people/people_utils.php:126
@@ -19412,7 +19412,7 @@ msgid "Skill Year"
 msgstr "Указать опытность"
 
 #: www/people/editjob.php:98
-msgid "JOB update failed - wrong project_id"
+msgid "Job update failed - wrong project_id"
 msgstr "Изменение невозможно, неправильный идентификатор проекта"
 
 #: www/people/editjob.php:107
@@ -19421,15 +19421,15 @@ msgstr ""
 
 #: www/people/editjob.php:114
 #, fuzzy, php-format
-msgid "JOB skill update FAILED: %s"
+msgid "Job skill update failed: %s"
 msgstr "Изменение навыков неудалось"
 
 #: www/people/editjob.php:116
-msgid "JOB skill updated successfully"
+msgid "Job skill updated successfully"
 msgstr "Навыки изменены"
 
 #: www/people/editjob.php:119
-msgid "JOB skill update failed - wrong project_id"
+msgid "Job skill update failed - wrong project_id"
 msgstr "Изменение невозможно, неправильный идентификатор проекта"
 
 #: www/people/editjob.php:128
@@ -19438,21 +19438,21 @@ msgstr ""
 
 #: www/people/editjob.php:134
 #, fuzzy, php-format
-msgid "JOB skill delete FAILED : %s"
-msgstr "Удаление навыка невозможно"
+msgid "Job skill delete failed: %s"
+msgstr "Удаление невозможно, неправильный идентификатор проекта"
 
 #: www/people/editjob.php:136
-msgid "JOB skill deleted successfully"
+msgid "Job skill deleted successfully"
 msgstr "Сведения о навыке удалены"
 
 #: www/people/editjob.php:139
-msgid "JOB skill delete failed - wrong project_id"
+msgid "Job skill delete failed - wrong project_id"
 msgstr "Удаление невозможно, неправильный идентификатор проекта"
 
 #: www/people/editjob.php:152
 #, fuzzy, php-format
-msgid "POSTING fetch FAILED: %s"
-msgstr "Ошибка составления почты"
+msgid "Posting fetch failed: %s"
+msgstr "Ошибка при создании сообщения"
 
 #: www/people/editjob.php:153
 #, fuzzy
@@ -23843,6 +23843,43 @@ msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
 
 #, fuzzy
+#~ msgid "JOB insert FAILED: %s"
+#~ msgstr "Вид работы не добавлен"
+
+#~ msgid "JOB inserted successfully"
+#~ msgstr "Вид работы добавлен"
+
+#, fuzzy
+#~ msgid "JOB update FAILED : %s"
+#~ msgstr "Вид работы не изменен"
+
+#~ msgid "JOB updated successfully"
+#~ msgstr "Вид работы изменен"
+
+#~ msgid "JOB update failed - wrong project_id"
+#~ msgstr "Изменение невозможно, неправильный идентификатор проекта"
+
+#~ msgid "JOB skill updated successfully"
+#~ msgstr "Навыки изменены"
+
+#~ msgid "JOB skill update failed - wrong project_id"
+#~ msgstr "Изменение невозможно, неправильный идентификатор проекта"
+
+#, fuzzy
+#~ msgid "JOB skill delete FAILED : %s"
+#~ msgstr "Удаление навыка невозможно"
+
+#~ msgid "JOB skill deleted successfully"
+#~ msgstr "Сведения о навыке удалены"
+
+#~ msgid "JOB skill delete failed - wrong project_id"
+#~ msgstr "Удаление невозможно, неправильный идентификатор проекта"
+
+#, fuzzy
+#~ msgid "POSTING fetch FAILED: %s"
+#~ msgstr "Ошибка составления почты"
+
+#, fuzzy
 #~ msgid "Error inserting value: "
 #~ msgstr "Ошибка вставки"
 
@@ -25396,27 +25433,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "URLs that start with http:// are made clickable."
 #~ msgstr "Ссылки, начинающиеся с http:// будут автоматически распознаны."
-
-#~ msgid "Job inserted successfully"
-#~ msgstr "Вид работы добавлен"
-
-#~ msgid "Job updated successfully"
-#~ msgstr "Вид работы изменен"
-
-#~ msgid "Job update failed - wrong project_id"
-#~ msgstr "Изменение невозможно, неправильный идентификатор проекта"
-
-#~ msgid "Job skill updated successfully"
-#~ msgstr "Навыки изменены"
-
-#~ msgid "Job skill update failed - wrong project_id"
-#~ msgstr "Изменение невозможно, неправильный идентификатор проекта"
-
-#~ msgid "Job skill deleted successfully"
-#~ msgstr "Сведения о навыке удалены"
-
-#~ msgid "Job skill delete failed - wrong project_id"
-#~ msgstr "Удаление невозможно, неправильный идентификатор проекта"
 
 #~ msgid ""
 #~ "Change the required fields, and press “Done” at the bottom of the page"
@@ -28014,3 +28030,13 @@ msgstr "Персональная страница для %s"
 #~ "разделы по тематикам, различным версиям вырезок.</p><p>&nbsp;</"
 #~ "p><h3>Навигация в буклете</h3>\t<p>Вы можете таким способом быстро "
 #~ "находить нужный участок библиотеки:</p>"
+
+#~ msgid ""
+#~ "Unix status updated mirroring web status, unless it has value 'No unix "
+#~ "account (N)'"
+#~ msgstr ""
+#~ "Статус UNIX отражает статус сайта, безполезно если значение 'Нет аккаунта "
+#~ "UNIX'"
+
+#~ msgid "Mailing Lists for %1$s"
+#~ msgstr "Список рассылки для %1$s"

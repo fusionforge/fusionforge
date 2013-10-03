@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:51+0200\n"
+"POT-Creation-Date: 2013-10-03 18:05+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18948,20 +18948,20 @@ msgstr "繼續 >>"
 
 #: www/people/editjob.php:61
 #, fuzzy, php-format
-msgid "JOB insert FAILED: %s"
-msgstr "新增工作失敗"
+msgid "Job insert failed: %s"
+msgstr "新增失敗"
 
 #: www/people/editjob.php:65
-msgid "JOB inserted successfully"
+msgid "Job inserted successfully"
 msgstr "工作新增成功"
 
 #: www/people/editjob.php:80
 #, fuzzy, php-format
-msgid "JOB update FAILED : %s"
-msgstr "工作更新失敗"
+msgid "Job update failed: %s"
+msgstr "更新錯誤"
 
 #: www/people/editjob.php:82 www/people/editjob.php:96
-msgid "JOB updated successfully"
+msgid "Job updated successfully"
 msgstr "工作更新成功"
 
 #: www/people/editjob.php:91 www/people/people_utils.php:126
@@ -18981,7 +18981,7 @@ msgid "Skill Year"
 msgstr "編輯技能"
 
 #: www/people/editjob.php:98
-msgid "JOB update failed - wrong project_id"
+msgid "Job update failed - wrong project_id"
 msgstr "工作更新失敗 － 錯誤的專案編號"
 
 #: www/people/editjob.php:107
@@ -18990,15 +18990,15 @@ msgstr ""
 
 #: www/people/editjob.php:114
 #, fuzzy, php-format
-msgid "JOB skill update FAILED: %s"
+msgid "Job skill update failed: %s"
 msgstr "工作技能更新失敗"
 
 #: www/people/editjob.php:116
-msgid "JOB skill updated successfully"
+msgid "Job skill updated successfully"
 msgstr "工作技能更新成功"
 
 #: www/people/editjob.php:119
-msgid "JOB skill update failed - wrong project_id"
+msgid "Job skill update failed - wrong project_id"
 msgstr "工作技能更新失敗 － 錯誤的專案編號"
 
 #: www/people/editjob.php:128
@@ -19007,21 +19007,21 @@ msgstr ""
 
 #: www/people/editjob.php:134
 #, fuzzy, php-format
-msgid "JOB skill delete FAILED : %s"
-msgstr "工作技能刪除失敗"
+msgid "Job skill delete failed: %s"
+msgstr "工作技能刪除失敗 － 錯誤的專案編號"
 
 #: www/people/editjob.php:136
-msgid "JOB skill deleted successfully"
+msgid "Job skill deleted successfully"
 msgstr "工作技能刪除成功"
 
 #: www/people/editjob.php:139
-msgid "JOB skill delete failed - wrong project_id"
+msgid "Job skill delete failed - wrong project_id"
 msgstr "工作技能刪除失敗 － 錯誤的專案編號"
 
 #: www/people/editjob.php:152
 #, fuzzy, php-format
-msgid "POSTING fetch FAILED: %s"
-msgstr "文章取得失敗"
+msgid "Posting fetch failed: %s"
+msgstr "張貼失敗"
 
 #: www/people/editjob.php:153
 #, fuzzy
@@ -23322,6 +23322,43 @@ msgid "Personal Page for %s"
 msgstr "我的個人首頁"
 
 #, fuzzy
+#~ msgid "JOB insert FAILED: %s"
+#~ msgstr "新增工作失敗"
+
+#~ msgid "JOB inserted successfully"
+#~ msgstr "工作新增成功"
+
+#, fuzzy
+#~ msgid "JOB update FAILED : %s"
+#~ msgstr "工作更新失敗"
+
+#~ msgid "JOB updated successfully"
+#~ msgstr "工作更新成功"
+
+#~ msgid "JOB update failed - wrong project_id"
+#~ msgstr "工作更新失敗 － 錯誤的專案編號"
+
+#~ msgid "JOB skill updated successfully"
+#~ msgstr "工作技能更新成功"
+
+#~ msgid "JOB skill update failed - wrong project_id"
+#~ msgstr "工作技能更新失敗 － 錯誤的專案編號"
+
+#, fuzzy
+#~ msgid "JOB skill delete FAILED : %s"
+#~ msgstr "工作技能刪除失敗"
+
+#~ msgid "JOB skill deleted successfully"
+#~ msgstr "工作技能刪除成功"
+
+#~ msgid "JOB skill delete failed - wrong project_id"
+#~ msgstr "工作技能刪除失敗 － 錯誤的專案編號"
+
+#, fuzzy
+#~ msgid "POSTING fetch FAILED: %s"
+#~ msgstr "文章取得失敗"
+
+#, fuzzy
 #~ msgid "Error inserting value: "
 #~ msgstr "新增時發生錯誤"
 
@@ -24520,27 +24557,6 @@ msgstr "我的個人首頁"
 
 #~ msgid "Notes and Changes"
 #~ msgstr "記事與異動"
-
-#~ msgid "Job inserted successfully"
-#~ msgstr "工作新增成功"
-
-#~ msgid "Job updated successfully"
-#~ msgstr "工作更新成功"
-
-#~ msgid "Job update failed - wrong project_id"
-#~ msgstr "工作更新失敗 － 錯誤的專案編號"
-
-#~ msgid "Job skill updated successfully"
-#~ msgstr "工作技能更新成功"
-
-#~ msgid "Job skill update failed - wrong project_id"
-#~ msgstr "工作技能更新失敗 － 錯誤的專案編號"
-
-#~ msgid "Job skill deleted successfully"
-#~ msgstr "工作技能刪除成功"
-
-#~ msgid "Job skill delete failed - wrong project_id"
-#~ msgstr "工作技能刪除失敗 － 錯誤的專案編號"
 
 #~ msgid ""
 #~ "The following option determines if others can see your skills. If they "
@@ -26191,3 +26207,6 @@ msgstr "我的個人首頁"
 #~ "蹤者項目作者的一個回應，你能將狀態設定為'未決定的'。當作者回應時，這狀態將"
 #~ "自動重新設定為'Open'。否則，如果作者未在管理員定義的時間點內回應(預設是14"
 #~ "天)，然後這個項目將被給予'Deleted'的狀態。"
+
+#~ msgid "Mailing Lists for %1$s"
+#~ msgstr "%1$s 的通信論壇"

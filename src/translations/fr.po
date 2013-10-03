@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:51+0200\n"
+"POT-Creation-Date: 2013-10-03 18:05+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -18677,21 +18677,21 @@ msgstr "Continuer >>"
 
 #: www/people/editjob.php:61
 #, php-format
-msgid "JOB insert FAILED: %s"
-msgstr "L'insertion du poste a échoué : %s."
+msgid "Job insert failed: %s"
+msgstr "L'insertion du poste a échoué : %s"
 
 #: www/people/editjob.php:65
-msgid "JOB inserted successfully"
-msgstr "Poste correctement inséré."
+msgid "Job inserted successfully"
+msgstr "Poste correctement inséré"
 
 #: www/people/editjob.php:80
 #, php-format
-msgid "JOB update FAILED : %s"
-msgstr "La mise à jour de ce poste a échoué : %s."
+msgid "Job update failed: %s"
+msgstr "La mise à jour de ce poste a échoué : %s"
 
 #: www/people/editjob.php:82 www/people/editjob.php:96
-msgid "JOB updated successfully"
-msgstr "Le poste a été mis à jour correctement."
+msgid "Job updated successfully"
+msgstr "Le poste a été mis à jour correctement"
 
 #: www/people/editjob.php:91 www/people/people_utils.php:126
 #: www/people/people_utils.php:156 www/people/people_utils.php:234
@@ -18708,10 +18708,8 @@ msgid "Skill Year"
 msgstr "Ancienneté de la compétence"
 
 #: www/people/editjob.php:98
-msgid "JOB update failed - wrong project_id"
-msgstr ""
-"La mise à jour de ce poste a échoué : mauvais numéro d'identification de "
-"projet."
+msgid "Job update failed - wrong project_id"
+msgstr "La mise à jour de ce poste a échoué - mauvais numéro de projet"
 
 #: www/people/editjob.php:107
 msgid "Job Inventory"
@@ -18719,18 +18717,18 @@ msgstr "Liste des postes"
 
 #: www/people/editjob.php:114
 #, php-format
-msgid "JOB skill update FAILED: %s"
-msgstr "La mise à jour de la compétence pour ce poste a échoué : %s."
+msgid "Job skill update failed: %s"
+msgstr "La mise à jour de la compétence pour ce poste a échoué : %s"
 
 #: www/people/editjob.php:116
-msgid "JOB skill updated successfully"
+msgid "Job skill updated successfully"
 msgstr "La compétence demandée pour ce poste a été correctement mise à jour"
 
 #: www/people/editjob.php:119
-msgid "JOB skill update failed - wrong project_id"
+msgid "Job skill update failed - wrong project_id"
 msgstr ""
-"La mise à jour de cette compétence pour ce travail a échoué - mauvais numéro "
-"d'identification de projet"
+"La mise à jour de cette compétence pour ce poste a échoué - mauvais numéro "
+"de projet"
 
 #: www/people/editjob.php:128
 msgid "Job ID"
@@ -18738,24 +18736,24 @@ msgstr "Identifiant de poste"
 
 #: www/people/editjob.php:134
 #, php-format
-msgid "JOB skill delete FAILED : %s"
+msgid "Job skill delete failed: %s"
 msgstr ""
-"La compétence demandée pour ce poste n'a pas été correctement effacée : %s."
+"La compétence demandée pour ce poste n'a pas été correctement effacée : %s"
 
 #: www/people/editjob.php:136
-msgid "JOB skill deleted successfully"
+msgid "Job skill deleted successfully"
 msgstr "La compétence pour ce poste a été correctement effacée"
 
 #: www/people/editjob.php:139
-msgid "JOB skill delete failed - wrong project_id"
+msgid "Job skill delete failed - wrong project_id"
 msgstr ""
-"L'effacement de cette compétence pour ce poste a échoué - mauvais numéro "
+"La suppression de cette compétence pour ce poste a échoué - mauvais numéro "
 "d'identification de projet"
 
 #: www/people/editjob.php:152
-#, php-format
-msgid "POSTING fetch FAILED: %s"
-msgstr "La récupération de l'affectation a échoué : %s."
+#, fuzzy, php-format
+msgid "Posting fetch failed: %s"
+msgstr "L'insertion du poste a échoué : %s"
 
 #: www/people/editjob.php:153
 msgid "No such posting for this project"
@@ -23056,6 +23054,60 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
+#~ msgid "Invalid CSS, CSS not saved"
+#~ msgstr "Le CSS est invalide, il n'a pas été enregistré"
+
+#~ msgid "CSS customization"
+#~ msgstr "CSS personnalisé"
+
+#~ msgid "If you wish, you can provide extra CSS for your project."
+#~ msgstr ""
+#~ "Si vous le désirez, vous pouvez ajouter du CSS spécifique à votre projet."
+
+#~ msgid "JOB insert FAILED: %s"
+#~ msgstr "L'insertion du poste a échoué : %s."
+
+#~ msgid "JOB inserted successfully"
+#~ msgstr "Poste correctement inséré."
+
+#~ msgid "JOB update FAILED : %s"
+#~ msgstr "La mise à jour de ce poste a échoué : %s."
+
+#~ msgid "JOB updated successfully"
+#~ msgstr "Le poste a été mis à jour correctement."
+
+#~ msgid "JOB update failed - wrong project_id"
+#~ msgstr ""
+#~ "La mise à jour de ce poste a échoué : mauvais numéro d'identification de "
+#~ "projet."
+
+#~ msgid "JOB skill update FAILED: %s"
+#~ msgstr "La mise à jour de la compétence pour ce poste a échoué : %s."
+
+#~ msgid "JOB skill updated successfully"
+#~ msgstr "La compétence demandée pour ce poste a été correctement mise à jour"
+
+#~ msgid "JOB skill update failed - wrong project_id"
+#~ msgstr ""
+#~ "La mise à jour de cette compétence pour ce travail a échoué - mauvais "
+#~ "numéro d'identification de projet"
+
+#~ msgid "JOB skill delete FAILED : %s"
+#~ msgstr ""
+#~ "La compétence demandée pour ce poste n'a pas été correctement effacée : "
+#~ "%s."
+
+#~ msgid "JOB skill deleted successfully"
+#~ msgstr "La compétence pour ce poste a été correctement effacée"
+
+#~ msgid "JOB skill delete failed - wrong project_id"
+#~ msgstr ""
+#~ "L'effacement de cette compétence pour ce poste a échoué - mauvais numéro "
+#~ "d'identification de projet"
+
+#~ msgid "POSTING fetch FAILED: %s"
+#~ msgstr "La récupération de l'affectation a échoué : %s."
+
 #~ msgid "Error inserting value: "
 #~ msgstr "Erreur d'insertion : "
 
@@ -26235,39 +26287,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "URLs that start with http:// are made clickable."
 #~ msgstr "Les URL commençant par http:// sont rendues cliquables."
-
-#~ msgid "Job insert failed: %s"
-#~ msgstr "L'insertion du poste a échoué : %s"
-
-#~ msgid "Job inserted successfully"
-#~ msgstr "Poste correctement inséré"
-
-#~ msgid "Job update failed: %s"
-#~ msgstr "La mise à jour de ce poste a échoué : %s"
-
-#~ msgid "Job updated successfully"
-#~ msgstr "Le poste a été mis à jour correctement"
-
-#~ msgid "Job update failed - wrong project_id"
-#~ msgstr ""
-#~ "La mise à jour de ce travail a échoué - mauvais numéro d'identification "
-#~ "de projet"
-
-#~ msgid "Job skill updated successfully"
-#~ msgstr "La compétence demandée pour ce poste a été correctement mise à jour"
-
-#~ msgid "Job skill update failed - wrong project_id"
-#~ msgstr ""
-#~ "La mise à jour de cette compétence pour ce travail a échoué - mauvais "
-#~ "numéro d'identification de projet"
-
-#~ msgid "Job skill deleted successfully"
-#~ msgstr "La compétence pour ce poste a été correctement effacée"
-
-#~ msgid "Job skill delete failed - wrong project_id"
-#~ msgstr ""
-#~ "La suppression de cette compétence pour ce poste a échoué - mauvais "
-#~ "numéro d'identification de projet"
 
 #~ msgid ""
 #~ "Change the required fields, and press “Done” at the bottom of the page"
@@ -31311,3 +31330,6 @@ msgstr "Page personnelle de %s"
 #~ "dans un gestionnaire de tâches.<br/><strong>[wiki:&lt;pagename&gt;]</"
 #~ "strong>: Page wiki.<br/><strong>[forum:&lt;msg_id&gt;]</strong>: Article "
 #~ "de forum.</div>"
+
+#~ msgid "Unable to get the list %s : %s"
+#~ msgstr "Erreur lors de la récupération de la liste %s : %s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:51+0200\n"
+"POT-Creation-Date: 2013-10-03 18:05+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18964,20 +18964,20 @@ msgstr "Jarraitu >>"
 
 #: www/people/editjob.php:61
 #, fuzzy, php-format
-msgid "JOB insert FAILED: %s"
-msgstr "Akatsa lanari buruz informazioa sartzean"
+msgid "Job insert failed: %s"
+msgstr "Datu sartze okerra"
 
 #: www/people/editjob.php:65
-msgid "JOB inserted successfully"
+msgid "Job inserted successfully"
 msgstr "Arrakastaz sartutako lana"
 
 #: www/people/editjob.php:80
 #, fuzzy, php-format
-msgid "JOB update FAILED : %s"
-msgstr "Akatsa lana eguneratzean"
+msgid "Job update failed: %s"
+msgstr "Akatsa eguneratzean"
 
 #: www/people/editjob.php:82 www/people/editjob.php:96
-msgid "JOB updated successfully"
+msgid "Job updated successfully"
 msgstr "Arrakastaz eguneratutako lana"
 
 #: www/people/editjob.php:91 www/people/people_utils.php:126
@@ -18997,7 +18997,7 @@ msgid "Skill Year"
 msgstr "Lanarentzako trebezien argitalpena"
 
 #: www/people/editjob.php:98
-msgid "JOB update failed - wrong project_id"
+msgid "Job update failed - wrong project_id"
 msgstr "Akatsa lana eguneratzean - project_id -a baliogabea"
 
 #: www/people/editjob.php:107
@@ -19006,15 +19006,15 @@ msgstr ""
 
 #: www/people/editjob.php:114
 #, fuzzy, php-format
-msgid "JOB skill update FAILED: %s"
+msgid "Job skill update failed: %s"
 msgstr "Akatsa lanaren trebezia eguneratzean"
 
 #: www/people/editjob.php:116
-msgid "JOB skill updated successfully"
+msgid "Job skill updated successfully"
 msgstr "Lanaren trebezia arrakastaz eguneratu da"
 
 #: www/people/editjob.php:119
-msgid "JOB skill update failed - wrong project_id"
+msgid "Job skill update failed - wrong project_id"
 msgstr "Akatsa lanaren trebeziaeguneratzean - project_id -a ez da zuzena"
 
 #: www/people/editjob.php:128
@@ -19023,21 +19023,21 @@ msgstr ""
 
 #: www/people/editjob.php:134
 #, fuzzy, php-format
-msgid "JOB skill delete FAILED : %s"
-msgstr "Akatsa lanaren trebezia ezabatzean"
+msgid "Job skill delete failed: %s"
+msgstr "Akatsa lanaren trebezia ezabatzean - project_id -a ez da zuzena"
 
 #: www/people/editjob.php:136
-msgid "JOB skill deleted successfully"
+msgid "Job skill deleted successfully"
 msgstr "Lanaren trebezia arrakastaz ezabatu da"
 
 #: www/people/editjob.php:139
-msgid "JOB skill delete failed - wrong project_id"
+msgid "Job skill delete failed - wrong project_id"
 msgstr "Akatsa lanaren trebezia ezabatzean - project_id -a ez da zuzena"
 
 #: www/people/editjob.php:152
 #, fuzzy, php-format
-msgid "POSTING fetch FAILED: %s"
-msgstr "Akatsa argitalpena lortzen"
+msgid "Posting fetch failed: %s"
+msgstr "Akatsa mezuaren argitalpenean"
 
 #: www/people/editjob.php:153
 #, fuzzy
@@ -23360,6 +23360,43 @@ msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
 
 #, fuzzy
+#~ msgid "JOB insert FAILED: %s"
+#~ msgstr "Akatsa lanari buruz informazioa sartzean"
+
+#~ msgid "JOB inserted successfully"
+#~ msgstr "Arrakastaz sartutako lana"
+
+#, fuzzy
+#~ msgid "JOB update FAILED : %s"
+#~ msgstr "Akatsa lana eguneratzean"
+
+#~ msgid "JOB updated successfully"
+#~ msgstr "Arrakastaz eguneratutako lana"
+
+#~ msgid "JOB update failed - wrong project_id"
+#~ msgstr "Akatsa lana eguneratzean - project_id -a baliogabea"
+
+#~ msgid "JOB skill updated successfully"
+#~ msgstr "Lanaren trebezia arrakastaz eguneratu da"
+
+#~ msgid "JOB skill update failed - wrong project_id"
+#~ msgstr "Akatsa lanaren trebeziaeguneratzean - project_id -a ez da zuzena"
+
+#, fuzzy
+#~ msgid "JOB skill delete FAILED : %s"
+#~ msgstr "Akatsa lanaren trebezia ezabatzean"
+
+#~ msgid "JOB skill deleted successfully"
+#~ msgstr "Lanaren trebezia arrakastaz ezabatu da"
+
+#~ msgid "JOB skill delete failed - wrong project_id"
+#~ msgstr "Akatsa lanaren trebezia ezabatzean - project_id -a ez da zuzena"
+
+#, fuzzy
+#~ msgid "POSTING fetch FAILED: %s"
+#~ msgstr "Akatsa argitalpena lortzen"
+
+#, fuzzy
 #~ msgid "Error inserting value: "
 #~ msgstr "Akatsa txertatzean"
 
@@ -24515,27 +24552,6 @@ msgstr "Nere orri pertsonala"
 
 #~ msgid "Read More/Comment"
 #~ msgstr "Gehiago irakurri/Azalpenak idatzi"
-
-#~ msgid "Job inserted successfully"
-#~ msgstr "Arrakastaz sartutako lana"
-
-#~ msgid "Job updated successfully"
-#~ msgstr "Arrakastaz eguneratutako lana"
-
-#~ msgid "Job update failed - wrong project_id"
-#~ msgstr "Akatsa lana eguneratzean - project_id -a baliogabea"
-
-#~ msgid "Job skill updated successfully"
-#~ msgstr "Lanaren trebezia arrakastaz eguneratu da"
-
-#~ msgid "Job skill update failed - wrong project_id"
-#~ msgstr "Akatsa lanaren trebeziaeguneratzean - project_id -a ez da zuzena"
-
-#~ msgid "Job skill deleted successfully"
-#~ msgstr "Lanaren trebezia arrakastaz ezabatu da"
-
-#~ msgid "Job skill delete failed - wrong project_id"
-#~ msgstr "Akatsa lanaren trebezia ezabatzean - project_id -a ez da zuzena"
 
 #~ msgid ""
 #~ "The following option determines if others can see your skills. If they "
@@ -26121,3 +26137,6 @@ msgstr "Nere orri pertsonala"
 #~ "automatikoki \"Irekia\" jartzen da. Egileak ez badu definitutako denboran "
 #~ "(14 egun defektuz) erantzuten orduan elementuari \"Ezabatua\" egoera "
 #~ "jartzen zaio."
+
+#~ msgid "Mailing Lists for %1$s"
+#~ msgstr "Posta zerrendak %1$s -entzako"

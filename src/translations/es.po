@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:51+0200\n"
+"POT-Creation-Date: 2013-10-03 18:05+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -18648,21 +18648,21 @@ msgid "Continue >>"
 msgstr "Continuar >>"
 
 #: www/people/editjob.php:61
-#, php-format
-msgid "JOB insert FAILED: %s"
-msgstr "FALLO al insertar TRABAJO: %s"
+#, fuzzy, php-format
+msgid "Job insert failed: %s"
+msgstr "Fallo al insertar: "
 
 #: www/people/editjob.php:65
-msgid "JOB inserted successfully"
+msgid "Job inserted successfully"
 msgstr "TRABAJO insertado con éxito"
 
 #: www/people/editjob.php:80
-#, php-format
-msgid "JOB update FAILED : %s"
-msgstr "FALLO actualización del TRABAJO : %s"
+#, fuzzy, php-format
+msgid "Job update failed: %s"
+msgstr "Actualización fallida"
 
 #: www/people/editjob.php:82 www/people/editjob.php:96
-msgid "JOB updated successfully"
+msgid "Job updated successfully"
 msgstr "TRABAJO actualizado con éxito"
 
 #: www/people/editjob.php:91 www/people/people_utils.php:126
@@ -18680,7 +18680,7 @@ msgid "Skill Year"
 msgstr "Año de Habilidad"
 
 #: www/people/editjob.php:98
-msgid "JOB update failed - wrong project_id"
+msgid "Job update failed - wrong project_id"
 msgstr "Falló la actualización del TRABAJO - project_id incorrecto"
 
 #: www/people/editjob.php:107
@@ -18688,16 +18688,16 @@ msgid "Job Inventory"
 msgstr "Inventario de trabajos"
 
 #: www/people/editjob.php:114
-#, php-format
-msgid "JOB skill update FAILED: %s"
+#, fuzzy, php-format
+msgid "Job skill update failed: %s"
 msgstr "FALLÓ al actualizar habilidad : %s"
 
 #: www/people/editjob.php:116
-msgid "JOB skill updated successfully"
+msgid "Job skill updated successfully"
 msgstr "Habilidad para el trabajo actualizada con éxito"
 
 #: www/people/editjob.php:119
-msgid "JOB skill update failed - wrong project_id"
+msgid "Job skill update failed - wrong project_id"
 msgstr ""
 "Falló la actualización de la habilidad para el trabajo - project_id "
 "incorrecto"
@@ -18707,23 +18707,24 @@ msgid "Job ID"
 msgstr "ID Trabajo"
 
 #: www/people/editjob.php:134
-#, php-format
-msgid "JOB skill delete FAILED : %s"
-msgstr "FALLÓ la eliminación de la habilidad : %s"
+#, fuzzy, php-format
+msgid "Job skill delete failed: %s"
+msgstr ""
+"Falló la eliminación de la habilidad para el trabajo - project_id incorrecto"
 
 #: www/people/editjob.php:136
-msgid "JOB skill deleted successfully"
+msgid "Job skill deleted successfully"
 msgstr "Habilidad para el trabajo eliminada con éxito"
 
 #: www/people/editjob.php:139
-msgid "JOB skill delete failed - wrong project_id"
+msgid "Job skill delete failed - wrong project_id"
 msgstr ""
 "Falló la eliminación de la habilidad para el trabajo - project_id incorrecto"
 
 #: www/people/editjob.php:152
-#, php-format
-msgid "POSTING fetch FAILED: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Posting fetch failed: %s"
+msgstr "publicación fallida"
 
 #: www/people/editjob.php:153
 msgid "No such posting for this project"
@@ -23044,6 +23045,40 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
 
+#~ msgid "JOB insert FAILED: %s"
+#~ msgstr "FALLO al insertar TRABAJO: %s"
+
+#~ msgid "JOB inserted successfully"
+#~ msgstr "TRABAJO insertado con éxito"
+
+#~ msgid "JOB update FAILED : %s"
+#~ msgstr "FALLO actualización del TRABAJO : %s"
+
+#~ msgid "JOB updated successfully"
+#~ msgstr "TRABAJO actualizado con éxito"
+
+#~ msgid "JOB update failed - wrong project_id"
+#~ msgstr "Falló la actualización del TRABAJO - project_id incorrecto"
+
+#~ msgid "JOB skill updated successfully"
+#~ msgstr "Habilidad para el trabajo actualizada con éxito"
+
+#~ msgid "JOB skill update failed - wrong project_id"
+#~ msgstr ""
+#~ "Falló la actualización de la habilidad para el trabajo - project_id "
+#~ "incorrecto"
+
+#~ msgid "JOB skill delete FAILED : %s"
+#~ msgstr "FALLÓ la eliminación de la habilidad : %s"
+
+#~ msgid "JOB skill deleted successfully"
+#~ msgstr "Habilidad para el trabajo eliminada con éxito"
+
+#~ msgid "JOB skill delete failed - wrong project_id"
+#~ msgstr ""
+#~ "Falló la eliminación de la habilidad para el trabajo - project_id "
+#~ "incorrecto"
+
 #~ msgid "Error inserting value: "
 #~ msgstr "Error insertando valor: "
 
@@ -24637,31 +24672,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Read More/Comment"
 #~ msgstr "Leer más/Comentar"
-
-#~ msgid "Job inserted successfully"
-#~ msgstr "TRABAJO insertado con éxito"
-
-#~ msgid "Job updated successfully"
-#~ msgstr "TRABAJO actualizado con éxito"
-
-#~ msgid "Job update failed - wrong project_id"
-#~ msgstr "Falló la actualización del TRABAJO - project_id incorrecto"
-
-#~ msgid "Job skill updated successfully"
-#~ msgstr "Habilidad para el trabajo actualizada con éxito"
-
-#~ msgid "Job skill update failed - wrong project_id"
-#~ msgstr ""
-#~ "Falló la actualización de la habilidad para el trabajo - project_id "
-#~ "incorrecto"
-
-#~ msgid "Job skill deleted successfully"
-#~ msgstr "Habilidad para el trabajo eliminada con éxito"
-
-#~ msgid "Job skill delete failed - wrong project_id"
-#~ msgstr ""
-#~ "Falló la eliminación de la habilidad para el trabajo - project_id "
-#~ "incorrecto"
 
 #~ msgid ""
 #~ "The following option determines if others can see your skills. If they "
@@ -27024,3 +27034,16 @@ msgstr "Página personal de %s"
 #~ "·<br·/><br·/><strong>Atención!</strong>·esto le enviará un email "
 #~ "adicional. Si agregas comentarios a este elemento, o envias, o eres "
 #~ "asignado al elemnto, tambien puedes recibir emails por otras razones.!"
+
+#~ msgid ""
+#~ "Lists are named in this manner:<br /><strong>projectname-listname@%1$s</"
+#~ "strong>"
+#~ msgstr ""
+#~ "Las listas son creadas de esta forma:<br·/><strong>projectname-listname@"
+#~ "%1$s</strong>"
+
+#~ msgid "Unable to get the list %s : %s"
+#~ msgstr "Incapaz de obtener la lista %s·:·%s"
+
+#~ msgid "JOB skill update FAILED: %s"
+#~ msgstr "FALLÓ al actualizar habilidad : %s"

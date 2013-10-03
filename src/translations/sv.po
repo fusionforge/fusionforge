@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:51+0200\n"
+"POT-Creation-Date: 2013-10-03 18:05+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18901,21 +18901,21 @@ msgstr "Fortsätt >>"
 
 #: www/people/editjob.php:61
 #, fuzzy, php-format
-msgid "JOB insert FAILED: %s"
-msgstr "JOBB infogning MISSLYCKADES"
+msgid "Job insert failed: %s"
+msgstr "Infogandet misslyckades"
 
 #: www/people/editjob.php:65
-msgid "JOB inserted successfully"
-msgstr "JOBB infogning lyckades"
+msgid "Job inserted successfully"
+msgstr "JobB infogning lyckades"
 
 #: www/people/editjob.php:80
 #, fuzzy, php-format
-msgid "JOB update FAILED : %s"
-msgstr "JOBB uppdatering MISSLYCKADES"
+msgid "Job update failed: %s"
+msgstr "Uppdatering misslyckades"
 
 #: www/people/editjob.php:82 www/people/editjob.php:96
-msgid "JOB updated successfully"
-msgstr "JOBB uppdatering lyckades"
+msgid "Job updated successfully"
+msgstr "JobB uppdatering lyckades"
 
 #: www/people/editjob.php:91 www/people/people_utils.php:126
 #: www/people/people_utils.php:156 www/people/people_utils.php:234
@@ -18934,8 +18934,8 @@ msgid "Skill Year"
 msgstr "Redigera kompetens"
 
 #: www/people/editjob.php:98
-msgid "JOB update failed - wrong project_id"
-msgstr "JOBB uppdatering misslyckades - fel project_id"
+msgid "Job update failed - wrong project_id"
+msgstr "JobB uppdatering misslyckades - fel project_id"
 
 #: www/people/editjob.php:107
 msgid "Job Inventory"
@@ -18943,16 +18943,16 @@ msgstr ""
 
 #: www/people/editjob.php:114
 #, fuzzy, php-format
-msgid "JOB skill update FAILED: %s"
+msgid "Job skill update failed: %s"
 msgstr "JOBB kompetens uppdatering MISSLYCKADES"
 
 #: www/people/editjob.php:116
-msgid "JOB skill updated successfully"
-msgstr "JOBB kompetens uppdatering lyckades"
+msgid "Job skill updated successfully"
+msgstr "JobB kompetens uppdatering lyckades"
 
 #: www/people/editjob.php:119
-msgid "JOB skill update failed - wrong project_id"
-msgstr "JOBB kompetens uppdatering misslyckades - fel project_id"
+msgid "Job skill update failed - wrong project_id"
+msgstr "JobB kompetens uppdatering misslyckades - fel project_id"
 
 #: www/people/editjob.php:128
 msgid "Job ID"
@@ -18960,21 +18960,21 @@ msgstr ""
 
 #: www/people/editjob.php:134
 #, fuzzy, php-format
-msgid "JOB skill delete FAILED : %s"
-msgstr "JOBB kompetens borttag MISSLYCKADES"
+msgid "Job skill delete failed: %s"
+msgstr "JobB kompetens borttag misslyckades - fel project_id"
 
 #: www/people/editjob.php:136
-msgid "JOB skill deleted successfully"
-msgstr "JOBB kompetens borttag lyckades"
+msgid "Job skill deleted successfully"
+msgstr "JobB kompetens borttag lyckades"
 
 #: www/people/editjob.php:139
-msgid "JOB skill delete failed - wrong project_id"
-msgstr "JOBB kompetens borttag misslyckades - fel project_id"
+msgid "Job skill delete failed - wrong project_id"
+msgstr "JobB kompetens borttag misslyckades - fel project_id"
 
 #: www/people/editjob.php:152
 #, fuzzy, php-format
-msgid "POSTING fetch FAILED: %s"
-msgstr "Hämtning av POSTNINGAR MISSLYCKADES"
+msgid "Posting fetch failed: %s"
+msgstr "inlägg misslyckades"
 
 #: www/people/editjob.php:153
 #, fuzzy
@@ -23299,6 +23299,43 @@ msgid "Personal Page for %s"
 msgstr "Min personliga sida"
 
 #, fuzzy
+#~ msgid "JOB insert FAILED: %s"
+#~ msgstr "JOBB infogning MISSLYCKADES"
+
+#~ msgid "JOB inserted successfully"
+#~ msgstr "JOBB infogning lyckades"
+
+#, fuzzy
+#~ msgid "JOB update FAILED : %s"
+#~ msgstr "JOBB uppdatering MISSLYCKADES"
+
+#~ msgid "JOB updated successfully"
+#~ msgstr "JOBB uppdatering lyckades"
+
+#~ msgid "JOB update failed - wrong project_id"
+#~ msgstr "JOBB uppdatering misslyckades - fel project_id"
+
+#~ msgid "JOB skill updated successfully"
+#~ msgstr "JOBB kompetens uppdatering lyckades"
+
+#~ msgid "JOB skill update failed - wrong project_id"
+#~ msgstr "JOBB kompetens uppdatering misslyckades - fel project_id"
+
+#, fuzzy
+#~ msgid "JOB skill delete FAILED : %s"
+#~ msgstr "JOBB kompetens borttag MISSLYCKADES"
+
+#~ msgid "JOB skill deleted successfully"
+#~ msgstr "JOBB kompetens borttag lyckades"
+
+#~ msgid "JOB skill delete failed - wrong project_id"
+#~ msgstr "JOBB kompetens borttag misslyckades - fel project_id"
+
+#, fuzzy
+#~ msgid "POSTING fetch FAILED: %s"
+#~ msgstr "Hämtning av POSTNINGAR MISSLYCKADES"
+
+#, fuzzy
 #~ msgid "Error inserting value: "
 #~ msgstr "Fel vid infogning"
 
@@ -24284,27 +24321,6 @@ msgstr "Min personliga sida"
 
 #~ msgid "Read More/Comment"
 #~ msgstr "Read Mer/Kommentar"
-
-#~ msgid "Job inserted successfully"
-#~ msgstr "JobB infogning lyckades"
-
-#~ msgid "Job updated successfully"
-#~ msgstr "JobB uppdatering lyckades"
-
-#~ msgid "Job update failed - wrong project_id"
-#~ msgstr "JobB uppdatering misslyckades - fel project_id"
-
-#~ msgid "Job skill updated successfully"
-#~ msgstr "JobB kompetens uppdatering lyckades"
-
-#~ msgid "Job skill update failed - wrong project_id"
-#~ msgstr "JobB kompetens uppdatering misslyckades - fel project_id"
-
-#~ msgid "Job skill deleted successfully"
-#~ msgstr "JobB kompetens borttag lyckades"
-
-#~ msgid "Job skill delete failed - wrong project_id"
-#~ msgstr "JobB kompetens borttag misslyckades - fel project_id"
 
 #~ msgid ""
 #~ "The following option determines if others can see your skills. If they "

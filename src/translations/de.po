@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:51+0200\n"
+"POT-Creation-Date: 2013-10-03 18:05+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -19292,21 +19292,21 @@ msgstr "Weiter >>"
 
 #: www/people/editjob.php:61
 #, fuzzy, php-format
-msgid "JOB insert FAILED: %s"
-msgstr "JOB Eingabe fehlgeschlagen"
+msgid "Job insert failed: %s"
+msgstr "Eingabe fehlgeschlagen"
 
 #: www/people/editjob.php:65
-msgid "JOB inserted successfully"
-msgstr "JOB erfolgreich eingefügt"
+msgid "Job inserted successfully"
+msgstr "Job erfolgreich eingefügt"
 
 #: www/people/editjob.php:80
 #, fuzzy, php-format
-msgid "JOB update FAILED : %s"
-msgstr "JOB Aktualisierung fehlgeschlagen"
+msgid "Job update failed: %s"
+msgstr "Update fehlgeschlagen"
 
 #: www/people/editjob.php:82 www/people/editjob.php:96
-msgid "JOB updated successfully"
-msgstr "JOB Aktualisierung erfolgreich"
+msgid "Job updated successfully"
+msgstr "Job Aktualisierung erfolgreich"
 
 #: www/people/editjob.php:91 www/people/people_utils.php:126
 #: www/people/people_utils.php:156 www/people/people_utils.php:234
@@ -19325,8 +19325,8 @@ msgid "Skill Year"
 msgstr "Qualifikationen ändern"
 
 #: www/people/editjob.php:98
-msgid "JOB update failed - wrong project_id"
-msgstr "JOB Aktualisierung fehlgeschlagen - Falsche Projekt_ID"
+msgid "Job update failed - wrong project_id"
+msgstr "Job Aktualisierung fehlgeschlagen - Falsche Projekt_ID"
 
 #: www/people/editjob.php:107
 msgid "Job Inventory"
@@ -19334,16 +19334,16 @@ msgstr ""
 
 #: www/people/editjob.php:114
 #, fuzzy, php-format
-msgid "JOB skill update FAILED: %s"
+msgid "Job skill update failed: %s"
 msgstr "JOB Qualifikationen-Aktualisierung fehlgeschlagen"
 
 #: www/people/editjob.php:116
-msgid "JOB skill updated successfully"
-msgstr "JOB Qualifikationen-Aktualisierung erfolgreich"
+msgid "Job skill updated successfully"
+msgstr "Job Qualifikationen-Aktualisierung erfolgreich"
 
 #: www/people/editjob.php:119
-msgid "JOB skill update failed - wrong project_id"
-msgstr "JOB Qualifikationen-Aktualisierung fehlgeschlagen - Falsche Projekt_ID"
+msgid "Job skill update failed - wrong project_id"
+msgstr "Job Qualifikationen-Aktualisierung fehlgeschlagen - Falsche Projekt_ID"
 
 #: www/people/editjob.php:128
 msgid "Job ID"
@@ -19351,21 +19351,21 @@ msgstr ""
 
 #: www/people/editjob.php:134
 #, fuzzy, php-format
-msgid "JOB skill delete FAILED : %s"
-msgstr "JOB Qualifikation-Löschung fehlgeschlagen"
+msgid "Job skill delete failed: %s"
+msgstr "Job Qualifikation-Löschung fehlgeschlagen - Falsche Projekt_ID"
 
 #: www/people/editjob.php:136
-msgid "JOB skill deleted successfully"
-msgstr "JOB Qualifikationen-Löschung erfolgreich"
+msgid "Job skill deleted successfully"
+msgstr "Job Qualifikationen-Löschung erfolgreich"
 
 #: www/people/editjob.php:139
-msgid "JOB skill delete failed - wrong project_id"
-msgstr "JOB Qualifikation-Löschung fehlgeschlagen - Falsche Projekt_ID"
+msgid "Job skill delete failed - wrong project_id"
+msgstr "Job Qualifikation-Löschung fehlgeschlagen - Falsche Projekt_ID"
 
 #: www/people/editjob.php:152
 #, fuzzy, php-format
-msgid "POSTING fetch FAILED: %s"
-msgstr "POSTING Abruf FEHLGESCHLAGEN"
+msgid "Posting fetch failed: %s"
+msgstr "Forennachricht:\"create()\" Posting fehlgeschlagen"
 
 #: www/people/editjob.php:153
 #, fuzzy
@@ -23767,6 +23767,44 @@ msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
 
 #, fuzzy
+#~ msgid "JOB insert FAILED: %s"
+#~ msgstr "JOB Eingabe fehlgeschlagen"
+
+#~ msgid "JOB inserted successfully"
+#~ msgstr "JOB erfolgreich eingefügt"
+
+#, fuzzy
+#~ msgid "JOB update FAILED : %s"
+#~ msgstr "JOB Aktualisierung fehlgeschlagen"
+
+#~ msgid "JOB updated successfully"
+#~ msgstr "JOB Aktualisierung erfolgreich"
+
+#~ msgid "JOB update failed - wrong project_id"
+#~ msgstr "JOB Aktualisierung fehlgeschlagen - Falsche Projekt_ID"
+
+#~ msgid "JOB skill updated successfully"
+#~ msgstr "JOB Qualifikationen-Aktualisierung erfolgreich"
+
+#~ msgid "JOB skill update failed - wrong project_id"
+#~ msgstr ""
+#~ "JOB Qualifikationen-Aktualisierung fehlgeschlagen - Falsche Projekt_ID"
+
+#, fuzzy
+#~ msgid "JOB skill delete FAILED : %s"
+#~ msgstr "JOB Qualifikation-Löschung fehlgeschlagen"
+
+#~ msgid "JOB skill deleted successfully"
+#~ msgstr "JOB Qualifikationen-Löschung erfolgreich"
+
+#~ msgid "JOB skill delete failed - wrong project_id"
+#~ msgstr "JOB Qualifikation-Löschung fehlgeschlagen - Falsche Projekt_ID"
+
+#, fuzzy
+#~ msgid "POSTING fetch FAILED: %s"
+#~ msgstr "POSTING Abruf FEHLGESCHLAGEN"
+
+#, fuzzy
 #~ msgid "Error inserting value: "
 #~ msgstr "Fehler beim Einfügen"
 
@@ -25649,28 +25687,6 @@ msgstr "Persönliche Seite für %s"
 
 #~ msgid "URLs that start with http:// are made clickable."
 #~ msgstr "Links die mit http:// beginnen können angeklickt werden."
-
-#~ msgid "Job inserted successfully"
-#~ msgstr "Job erfolgreich eingefügt"
-
-#~ msgid "Job updated successfully"
-#~ msgstr "Job Aktualisierung erfolgreich"
-
-#~ msgid "Job update failed - wrong project_id"
-#~ msgstr "Job Aktualisierung fehlgeschlagen - Falsche Projekt_ID"
-
-#~ msgid "Job skill updated successfully"
-#~ msgstr "Job Qualifikationen-Aktualisierung erfolgreich"
-
-#~ msgid "Job skill update failed - wrong project_id"
-#~ msgstr ""
-#~ "Job Qualifikationen-Aktualisierung fehlgeschlagen - Falsche Projekt_ID"
-
-#~ msgid "Job skill deleted successfully"
-#~ msgstr "Job Qualifikationen-Löschung erfolgreich"
-
-#~ msgid "Job skill delete failed - wrong project_id"
-#~ msgstr "Job Qualifikation-Löschung fehlgeschlagen - Falsche Projekt_ID"
 
 #~ msgid ""
 #~ "Change the required fields, and press “Done” at the bottom of the page"
@@ -28853,3 +28869,6 @@ msgstr "Persönliche Seite für %s"
 #~ "\" gesetzt. Andernfalls, wenn der Autor nicht in der vom Administrator "
 #~ "vorgegebenen Zeit antwortet (vorgegeben sind 14 Tage), dann wechselt der "
 #~ "Status zu 'Gelöscht'."
+
+#~ msgid "Mailing Lists for %1$s"
+#~ msgstr "Mailinglisten für %1$s"

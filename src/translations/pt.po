@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:51+0200\n"
+"POT-Creation-Date: 2013-10-03 18:05+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -17648,21 +17648,21 @@ msgid "Continue >>"
 msgstr "Continuar >>"
 
 #: www/people/editjob.php:61
-#, php-format
-msgid "JOB insert FAILED: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Job insert failed: %s"
+msgstr "Erro inserindo"
 
 #: www/people/editjob.php:65
-msgid "JOB inserted successfully"
+msgid "Job inserted successfully"
 msgstr "TAREFA inserida com sucesso"
 
 #: www/people/editjob.php:80
-#, php-format
-msgid "JOB update FAILED : %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Job update failed: %s"
+msgstr "Atualização falhou"
 
 #: www/people/editjob.php:82 www/people/editjob.php:96
-msgid "JOB updated successfully"
+msgid "Job updated successfully"
 msgstr "TRABALHO atualizado com sucesso"
 
 #: www/people/editjob.php:91 www/people/people_utils.php:126
@@ -17680,7 +17680,7 @@ msgid "Skill Year"
 msgstr ""
 
 #: www/people/editjob.php:98
-msgid "JOB update failed - wrong project_id"
+msgid "Job update failed - wrong project_id"
 msgstr "Atualização do TRABALHO falhou - project_id incorreto"
 
 #: www/people/editjob.php:107
@@ -17688,16 +17688,16 @@ msgid "Job Inventory"
 msgstr ""
 
 #: www/people/editjob.php:114
-#, php-format
-msgid "JOB skill update FAILED: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Job skill update failed: %s"
+msgstr "Atualização de habilidade de TRABALHO falhou - project_id incorreto"
 
 #: www/people/editjob.php:116
-msgid "JOB skill updated successfully"
+msgid "Job skill updated successfully"
 msgstr "Habilidade de TRABALHO atualizada com sucesso"
 
 #: www/people/editjob.php:119
-msgid "JOB skill update failed - wrong project_id"
+msgid "Job skill update failed - wrong project_id"
 msgstr "Atualização de habilidade de TRABALHO falhou - project_id incorreto"
 
 #: www/people/editjob.php:128
@@ -17705,22 +17705,22 @@ msgid "Job ID"
 msgstr ""
 
 #: www/people/editjob.php:134
-#, php-format
-msgid "JOB skill delete FAILED : %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Job skill delete failed: %s"
+msgstr "Deleção de habilidade de TRABALHO falhou - project_id incorreto"
 
 #: www/people/editjob.php:136
-msgid "JOB skill deleted successfully"
+msgid "Job skill deleted successfully"
 msgstr "Habilidade de TRABALHO apagada com sucesso"
 
 #: www/people/editjob.php:139
-msgid "JOB skill delete failed - wrong project_id"
+msgid "Job skill delete failed - wrong project_id"
 msgstr "Deleção de habilidade de TRABALHO falhou - project_id incorreto"
 
 #: www/people/editjob.php:152
-#, php-format
-msgid "POSTING fetch FAILED: %s"
-msgstr ""
+#, fuzzy, php-format
+msgid "Posting fetch failed: %s"
+msgstr "Postagem Falhou"
 
 #: www/people/editjob.php:153
 msgid "No such posting for this project"
@@ -21796,6 +21796,27 @@ msgstr ""
 msgid "Personal Page for %s"
 msgstr "Minha Página Pessoal"
 
+#~ msgid "JOB inserted successfully"
+#~ msgstr "TAREFA inserida com sucesso"
+
+#~ msgid "JOB updated successfully"
+#~ msgstr "TRABALHO atualizado com sucesso"
+
+#~ msgid "JOB update failed - wrong project_id"
+#~ msgstr "Atualização do TRABALHO falhou - project_id incorreto"
+
+#~ msgid "JOB skill updated successfully"
+#~ msgstr "Habilidade de TRABALHO atualizada com sucesso"
+
+#~ msgid "JOB skill update failed - wrong project_id"
+#~ msgstr "Atualização de habilidade de TRABALHO falhou - project_id incorreto"
+
+#~ msgid "JOB skill deleted successfully"
+#~ msgstr "Habilidade de TRABALHO apagada com sucesso"
+
+#~ msgid "JOB skill delete failed - wrong project_id"
+#~ msgstr "Deleção de habilidade de TRABALHO falhou - project_id incorreto"
+
 #~ msgid "My Diary And Notes"
 #~ msgstr "Meu Diário E Anotações"
 
@@ -22389,27 +22410,6 @@ msgstr "Minha Página Pessoal"
 
 #~ msgid "Read More/Comment"
 #~ msgstr "Ler Mais/Comentar"
-
-#~ msgid "Job inserted successfully"
-#~ msgstr "TAREFA inserida com sucesso"
-
-#~ msgid "Job updated successfully"
-#~ msgstr "TRABALHO atualizado com sucesso"
-
-#~ msgid "Job update failed - wrong project_id"
-#~ msgstr "Atualização do TRABALHO falhou - project_id incorreto"
-
-#~ msgid "Job skill updated successfully"
-#~ msgstr "Habilidade de TRABALHO atualizada com sucesso"
-
-#~ msgid "Job skill update failed - wrong project_id"
-#~ msgstr "Atualização de habilidade de TRABALHO falhou - project_id incorreto"
-
-#~ msgid "Job skill deleted successfully"
-#~ msgstr "Habilidade de TRABALHO apagada com sucesso"
-
-#~ msgid "Job skill delete failed - wrong project_id"
-#~ msgstr "Deleção de habilidade de TRABALHO falhou - project_id incorreto"
 
 #~ msgid ""
 #~ "The following option determines if others can see your skills. If they "

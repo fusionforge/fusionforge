@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:51+0200\n"
+"POT-Creation-Date: 2013-10-03 18:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17433,20 +17433,20 @@ msgstr ""
 
 #: www/people/editjob.php:61
 #, php-format
-msgid "JOB insert FAILED: %s"
+msgid "Job insert failed: %s"
 msgstr ""
 
 #: www/people/editjob.php:65
-msgid "JOB inserted successfully"
+msgid "Job inserted successfully"
 msgstr ""
 
 #: www/people/editjob.php:80
 #, php-format
-msgid "JOB update FAILED : %s"
+msgid "Job update failed: %s"
 msgstr ""
 
 #: www/people/editjob.php:82 www/people/editjob.php:96
-msgid "JOB updated successfully"
+msgid "Job updated successfully"
 msgstr ""
 
 #: www/people/editjob.php:91 www/people/people_utils.php:126
@@ -17464,7 +17464,7 @@ msgid "Skill Year"
 msgstr ""
 
 #: www/people/editjob.php:98
-msgid "JOB update failed - wrong project_id"
+msgid "Job update failed - wrong project_id"
 msgstr ""
 
 #: www/people/editjob.php:107
@@ -17473,15 +17473,15 @@ msgstr ""
 
 #: www/people/editjob.php:114
 #, php-format
-msgid "JOB skill update FAILED: %s"
+msgid "Job skill update failed: %s"
 msgstr ""
 
 #: www/people/editjob.php:116
-msgid "JOB skill updated successfully"
+msgid "Job skill updated successfully"
 msgstr ""
 
 #: www/people/editjob.php:119
-msgid "JOB skill update failed - wrong project_id"
+msgid "Job skill update failed - wrong project_id"
 msgstr ""
 
 #: www/people/editjob.php:128
@@ -17490,20 +17490,20 @@ msgstr ""
 
 #: www/people/editjob.php:134
 #, php-format
-msgid "JOB skill delete FAILED : %s"
+msgid "Job skill delete failed: %s"
 msgstr ""
 
 #: www/people/editjob.php:136
-msgid "JOB skill deleted successfully"
+msgid "Job skill deleted successfully"
 msgstr ""
 
 #: www/people/editjob.php:139
-msgid "JOB skill delete failed - wrong project_id"
+msgid "Job skill delete failed - wrong project_id"
 msgstr ""
 
 #: www/people/editjob.php:152
 #, php-format
-msgid "POSTING fetch FAILED: %s"
+msgid "Posting fetch failed: %s"
 msgstr ""
 
 #: www/people/editjob.php:153
