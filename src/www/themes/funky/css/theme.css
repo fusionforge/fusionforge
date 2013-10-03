@@ -842,3 +842,34 @@ p.information {
 	background-color: #FFFFFF;
 	font-weight: normal;
 }
+
+.info-box h2 {
+    font-size: 1.3em;
+    -moz-border-radius: 0.5em 0.5em 0 0;
+    -webkit-border-radius: 0.5em 0.5em 0 0;
+    border-radius: 0.5em 0.5em 0 0;
+    color: white;
+    background: #34b234;
+    padding: 3px;
+    padding-left: 10px;
+}
+
+.info-box:nth-child(4n) h2 {
+    background: #402c5d;
+}
+.info-box:nth-child(4n+1) h2 {
+    background: #34b234;
+}
+.info-box:nth-child(4n+2) h2 {
+    background: #00539f;
+}
+.info-box:nth-child(4n+3) h2 {
+    background: #b4355e;
+}
+
+.info-box {
+    background: #f7f6f7;
+    color: #565c5e;
+    padding: 1px 4px 4px 4px;
+    margin-bottom: 8px;
+}
