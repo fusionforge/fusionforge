@@ -7,6 +7,7 @@
  * Copyright 2009, Jean-Pierre Fortune/Spirtech
  * Copyright 2009-2010, Roland Mas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright (C) 2012-2013 Marc-Etienne Vargenau - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -48,7 +49,7 @@ if (!session_loggedin()) {
 	// aware of membership in either.
 	$projects = session_get_user()->getGroups();
 	if (count ($projects) < 1) {
-		echo '<strong>'._('You\'re not a member of any active projects').'</strong>';
+		echo '<p class="information">'._("You're not a member of any active projects").'</p>';
 	} else {
 		$display_col=array('summary'=>1,
 				'changed'=>1,
@@ -61,20 +62,27 @@ if (!session_loggedin()) {
 		$title_arr=array();
 
 		$title_arr[]=_('Id');
-		if ($display_col['summary'])
+		if ($display_col['summary']) {
 			$title_arr[]=_('Summary');
-		if ($display_col['changed'])
+		}
+		if ($display_col['changed']) {
 			$title_arr[]=_('Changed');
-		if ($display_col['status'])
+		}
+		if ($display_col['status']) {
 			$title_arr[]=_('Status');
-		if ($display_col['priority'])
+		}
+		if ($display_col['priority']) {
 			$title_arr[]=_('Priority');
-		if ($display_col['assigned_to'])
+		}
+		if ($display_col['assigned_to']) {
 			$title_arr[]=_('Assigned to');
-		if ($display_col['submitted_by'])
+		}
+		if ($display_col['submitted_by']) {
 			$title_arr[]=_('Submitted by');
-		if ($display_col['related_tasks'])
+		}
+		if ($display_col['related_tasks']) {
 			$title_arr[]=_('Tasks');
+		}
 
 		echo $GLOBALS['HTML']->listTableTop($title_arr);
 
