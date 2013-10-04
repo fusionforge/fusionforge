@@ -87,7 +87,7 @@ class Widget_MyMonitoredDocuments extends Widget {
 							stripslashes(db_result($result2,$i,'filename')).'</a></td>'.
 							'<td align="center"><a href="/docman/?group_id='.$group_id.'&amp;action=monitorfile&amp;option=remove&amp;view=listfile&amp;dirid='.$doc_group.'&amp;fileid='.$docid.'">'.
 							'<img src="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" height="16" width="16" '.
-							'border="0" alt="'._("STOP MONITORING").'" /></a></td></tr>';
+							'border="0" alt="'._("Stop Monitoring").'" /></a></td></tr>';
 					}
 				}
 
@@ -104,7 +104,9 @@ class Widget_MyMonitoredDocuments extends Widget {
 	}
 
 	function getDescription() {
-		return _("List documents that you are currently monitoring, by project.<br />To cancel any of the monitored items just click on the trash icon next to the item label.");
+		return _("List documents that you are currently monitoring, by project.")
+				. '<br />'
+				. _("To cancel any of the monitored items just click on the trash icon next to the item label.");
 	}
 
 	function isAvailable() {
