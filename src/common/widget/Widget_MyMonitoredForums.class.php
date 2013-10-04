@@ -57,7 +57,7 @@ class Widget_MyMonitoredForums extends Widget {
 		$result=db_query_params($sql,array(user_getid()));
 		$glist = array();
 		while ($r = db_fetch_array($result)) {
-			if (forge_check_perm('project', $r['group_id'], 'read') 
+			if (forge_check_perm('project', $r['group_id'], 'read')
 					&& forge_check_perm('forum', $r['group_forum_id'], 'read')) {
 				$glist[] = $r;
 			}
@@ -122,7 +122,7 @@ class Widget_MyMonitoredForums extends Widget {
 					'<td class="align-center"><a href="/forum/monitor.php?forum_id='.$group_forum_id.'&group_id='.$group_id.'&stop=1'.
 					'" onClick="return confirm(\''._("Stop monitoring this Forum?").'\')">'.
 					'<img src="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" height="16" width="16" '.
-					'border="0" alt="'._("Stop monitoring").'" /></a></td></tr>';
+					'border="0" alt="'._("Stop Monitoring").'" /></a></td></tr>';
 					}
 				}
 
@@ -139,7 +139,9 @@ class Widget_MyMonitoredForums extends Widget {
 	}
 
 	function getDescription() {
-		return _("List forums that you are currently monitoring, by project.<br />To cancel any of the monitored items just click on the trash icon next to the item label.");
+		return _("List forums that you are currently monitoring, by project.")
+             . "<br />"
+             . _("To cancel any of the monitored items just click on the trash icon next to the item label.");
 	}
 
 	function isAjax() {
