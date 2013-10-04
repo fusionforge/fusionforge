@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 14:53+0200\n"
+"POT-Creation-Date: 2013-10-04 15:15+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -2038,7 +2038,7 @@ msgstr "Hinzufügen"
 #: common/forum/AttachManager.class.php:269
 #: common/forum/AttachManager.class.php:325
 #, fuzzy
-msgid "Couldn't get message id"
+msgid "Could not get message id"
 msgstr "Konnte keine Nachrichten-ID einholen"
 
 #: common/forum/AttachManager.class.php:197

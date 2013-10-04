@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 14:53+0200\n"
+"POT-Creation-Date: 2013-10-04 15:15+0200\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1900,7 +1900,7 @@ msgstr ""
 #: common/forum/AttachManager.class.php:181
 #: common/forum/AttachManager.class.php:269
 #: common/forum/AttachManager.class.php:325
-msgid "Couldn't get message id"
+msgid "Could not get message id"
 msgstr ""
 
 #: common/forum/AttachManager.class.php:197

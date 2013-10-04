@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 14:53+0200\n"
+"POT-Creation-Date: 2013-10-04 15:15+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -2035,7 +2035,7 @@ msgstr "Engadir "
 #: common/forum/AttachManager.class.php:181
 #: common/forum/AttachManager.class.php:269
 #: common/forum/AttachManager.class.php:325
-msgid "Couldn't get message id"
+msgid "Could not get message id"
 msgstr "Non se puido obter o identificador da mensaxe"
 
 #: common/forum/AttachManager.class.php:197
@@ -23645,6 +23645,9 @@ msgstr "Non se introduciu un nome de usuario"
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
 
+#~ msgid "Couldn't get message id"
+#~ msgstr "Non se puido obter o identificador da mensaxe"
+
 #~ msgid "FRSFile Name Must Be At Least 3 Characters"
 #~ msgstr "O nome de ficheiro de FRSFile debe ter, cando menos, 3 caracteres "
 
@@ -25295,9 +25298,6 @@ msgstr "Páxina persoal de %s"
 #~ "Your request to join the %1$s project was granted by an administrator."
 #~ msgstr ""
 #~ "A súa petición de unirse ao proxecto %1$s foi aprobada polo administrador."
-
-#~ msgid "Could not get message id"
-#~ msgstr "Non se puido obter o identificador da mensaxe"
 
 #~ msgid "Error: this news item was not found"
 #~ msgstr "Produciuse un erro - non se atopou o elemento de novas"

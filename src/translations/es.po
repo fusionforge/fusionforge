@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 14:53+0200\n"
+"POT-Creation-Date: 2013-10-04 15:15+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -1962,7 +1962,7 @@ msgstr "Añadir"
 #: common/forum/AttachManager.class.php:181
 #: common/forum/AttachManager.class.php:269
 #: common/forum/AttachManager.class.php:325
-msgid "Couldn't get message id"
+msgid "Could not get message id"
 msgstr "No se pudo obtener el id del mensaje"
 
 #: common/forum/AttachManager.class.php:197
@@ -22995,6 +22995,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
 
+#~ msgid "Couldn't get message id"
+#~ msgstr "No se pudo obtener el id del mensaje"
+
 #~ msgid "FRSFile Name Must Be At Least 3 Characters"
 #~ msgstr "FRSFile El nombre debe contener al menos 3 caracteres"
 
@@ -24551,9 +24554,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "empty source"
 #~ msgstr "archivos vacíos"
-
-#~ msgid "Could not get message id"
-#~ msgstr "No se pudo obtener el id del mensaje"
 
 #~ msgid "Error: this news item was not found"
 #~ msgstr "Error: esta noticia no se ha encontrado"

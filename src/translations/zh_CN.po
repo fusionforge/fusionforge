@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 14:53+0200\n"
+"POT-Creation-Date: 2013-10-04 15:15+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2031,8 +2031,9 @@ msgstr "添加"
 #: common/forum/AttachManager.class.php:181
 #: common/forum/AttachManager.class.php:269
 #: common/forum/AttachManager.class.php:325
-msgid "Couldn't get message id"
-msgstr ""
+#, fuzzy
+msgid "Could not get message id"
+msgstr "无法获得权限"
 
 #: common/forum/AttachManager.class.php:197
 #: common/forum/AttachManager.class.php:289

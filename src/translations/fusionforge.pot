@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 14:53+0200\n"
+"POT-Creation-Date: 2013-10-04 15:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1900,7 +1900,7 @@ msgstr ""
 #: common/forum/AttachManager.class.php:181
 #: common/forum/AttachManager.class.php:269
 #: common/forum/AttachManager.class.php:325
-msgid "Couldn't get message id"
+msgid "Could not get message id"
 msgstr ""
 
 #: common/forum/AttachManager.class.php:197

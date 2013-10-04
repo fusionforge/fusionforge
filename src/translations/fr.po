@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 14:53+0200\n"
+"POT-Creation-Date: 2013-10-04 15:15+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1923,7 +1923,7 @@ msgstr "Ajouter"
 #: common/forum/AttachManager.class.php:181
 #: common/forum/AttachManager.class.php:269
 #: common/forum/AttachManager.class.php:325
-msgid "Couldn't get message id"
+msgid "Could not get message id"
 msgstr "Erreur lors de la récupération de l'identifiant de message"
 
 #: common/forum/AttachManager.class.php:197
@@ -22999,6 +22999,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
+#~ msgid "Couldn't get message id"
+#~ msgstr "Erreur lors de la récupération de l'identifiant de message"
+
 #~ msgid "FRSFile Name Must Be At Least 3 Characters"
 #~ msgstr "Le nom du fichier doit compter au moins 3 caractères"
 
@@ -25040,9 +25043,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Attach a file to the message"
 #~ msgstr "Joindre un fichier à ce message"
-
-#~ msgid "Could not get message id"
-#~ msgstr "Erreur lors de la récupération de l'identifiant de message"
 
 #~ msgid "Move thread to another forum"
 #~ msgstr "Déplacer la discussion dans un autre forum"

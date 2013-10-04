@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 14:53+0200\n"
+"POT-Creation-Date: 2013-10-04 15:15+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2038,7 +2038,7 @@ msgstr "Добавить"
 #: common/forum/AttachManager.class.php:181
 #: common/forum/AttachManager.class.php:269
 #: common/forum/AttachManager.class.php:325
-msgid "Couldn't get message id"
+msgid "Could not get message id"
 msgstr "Нет идентификатора сообщения"
 
 #: common/forum/AttachManager.class.php:197
@@ -23785,6 +23785,9 @@ msgstr "Имя участника обязательно"
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
 
+#~ msgid "Couldn't get message id"
+#~ msgstr "Нет идентификатора сообщения"
+
 #~ msgid "FRSFile Name Must Be At Least 3 Characters"
 #~ msgstr "FRS Имя файла минимум из 3 букв"
 
@@ -25243,9 +25246,6 @@ msgstr "Персональная страница для %s"
 #~ msgid ""
 #~ "Your request to join the %1$s project was granted by an administrator."
 #~ msgstr "Вы приняты в проект %1$s его управляющим."
-
-#~ msgid "Could not get message id"
-#~ msgstr "Нет идентификатора сообщения"
 
 #~ msgid "Error: this news item was not found"
 #~ msgstr "Таких новостей не найдено"
