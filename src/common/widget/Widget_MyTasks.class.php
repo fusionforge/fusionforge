@@ -99,7 +99,7 @@ class Widget_MyTasks extends Widget {
                     $hide_url.'<a href="/pm/task.php?group_id='.$group_id.
                     '&amp;group_project_id='.$group_project_id.'">'.
                     db_result($result,$j,'group_name').' - '.
-                    db_result($result,$j,'project_name').'</a>    ';
+                    db_result($result,$j,'project_name').'</a> ';
                 $html = '';
                 $count_new = max(0, $count_diff);
                 for ($i=0; $i<$rows2; $i++) {
