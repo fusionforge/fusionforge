@@ -35,7 +35,7 @@ msgstr "Nom de fichier invalide."
 
 #: common/account/actions/deletesshkey.php:30
 msgid "SSH Key deleted successfully."
-msgstr "Clé SSH correctement supprimée."
+msgstr "Clé SSH supprimée avec succès."
 
 #: common/docman/actions/addfile.php:58 common/docman/actions/addfile.php:65
 #: common/docman/actions/addsubdocgroup.php:48
