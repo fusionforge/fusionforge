@@ -301,7 +301,7 @@ class ForumHTML extends Error {
 	 * @param int	$attachid attach id
 	 * @param int	$msg_id   msg id
 	 *
-	 *	@return		The HTML output
+	 * @return string The HTML output
 	 */
 
 	function LinkAttachEditForm($filename,$group_id,$forum_id,$attachid,$msg_id) {
@@ -342,15 +342,14 @@ class ForumHTML extends Error {
 
 	/**
 	 *  LinkAttachForm - echoes the link to the attach form
-	 *
-	 *	@return		The HTML output echoed
 	 */
 
 	function LinkAttachForm() {
 		$poststarttime = time();
 		$posthash = md5($poststarttime . user_getid() );
-		echo "
-		<fieldset class=\"fieldset\">
+		echo '
+		<fieldset class="fieldset">
+		<legend>' . _('Attachments') . "</legend>
 		<table>
 				<tr>
 					<td>" . _('Use the “Browse” button to find the file you want to attach') . "</td>
@@ -507,27 +506,30 @@ class ForumHTML extends Error {
 		if (forge_check_perm ('forum', $this->Forum->getID(), 'post')) { // minor control, but anyways it should be an admin at this point
 			echo notepad_func();
 			?>
-<div align="center">
-	 <form id="ForumEditForm" enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/admin/index.php') ?>" method="post">
-	<?php $objid = $this->Forum->getID();?>
-	<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
-	<input type="hidden" name="forum_id" value="<?php echo $objid; ?>" />
-	<input type="hidden" name="editmsg" value="<?php echo $msg_id; ?>" />
-	<input type="hidden" name="is_followup_to" value="<?php echo $is_followup_to; ?>" />
-	<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
-	<input type="hidden" name="posted_by" value="<?php echo $posted_by;?>">
-	<input type="hidden" name="post_date" value="<?php echo $post_date;?>">
-	<input type="hidden" name="has_followups" value="<?php echo $has_followups;?>">
-	<input type="hidden" name="most_recent_date" value="<?php echo $most_recent_date;?>">
-	<input type="hidden" name="group_id" value="<?php echo $group_id;?>">
-<fieldset class="fieldset">
-			<table><tr><td valign="top">
-			</td><td valign="top">
-			<br />
-		<strong><?php echo _('Subject:'); ?></strong><?php echo utils_requiredField(); ?><br />
-				<input type="text" required="required" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
-		<br />
-		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms.ForumEditForm.body') ?><?php echo utils_requiredField(); ?><br />
+			<div style="margin-left: auto; margin-right: auto;">
+			<form id="ForumEditForm" enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/admin/index.php') ?>" method="post">
+			<?php $objid = $this->Forum->getID();?>
+			<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
+			<input type="hidden" name="forum_id" value="<?php echo $objid; ?>" />
+			<input type="hidden" name="editmsg" value="<?php echo $msg_id; ?>" />
+			<input type="hidden" name="is_followup_to" value="<?php echo $is_followup_to; ?>" />
+			<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
+			<input type="hidden" name="posted_by" value="<?php echo $posted_by;?>">
+			<input type="hidden" name="post_date" value="<?php echo $post_date;?>">
+			<input type="hidden" name="has_followups" value="<?php echo $has_followups;?>">
+			<input type="hidden" name="most_recent_date" value="<?php echo $most_recent_date;?>">
+			<input type="hidden" name="group_id" value="<?php echo $group_id;?>">
+			<fieldset class="fieldset">
+			<legend><?php echo _('Edit Message'); ?></legend>
+			<table><tr><td class="top">
+			</td><td class="top">
+			<p>
+			<strong><?php echo _('Subject')._(': '); ?></strong><?php echo utils_requiredField(); ?><br />
+				<input type="text" autofocus="autofocus" required="required" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
+			</p>
+			<p>
+			<strong><?php echo _('Message')._(': '); ?></strong><?php echo notepad_button('document.forms.ForumEditForm.body') ?><?php echo utils_requiredField(); ?>
+			</p>
 			<?php
 			$GLOBALS['editor_was_set_up']=false;
 			$params = array() ;
@@ -542,26 +544,17 @@ class ForumHTML extends Error {
 			}
 			unset($GLOBALS['editor_was_set_up']);
 				?>
-			<br />
 
-				<p>
-				<?php //$this->LinkAttachForm();?>
-				<p>
-
-
-		<?php
-		?>
-		<br />
-		<center><input type="submit" name="ok" value="<?php echo _('Update'); ?>" />
-			<input type="submit" name="cancel" value="<?php echo _('Cancel'); ?>" />
-		</center>
-		</p>
+				<p style="text-align: center">
+				<input type="submit" name="ok" value="<?php echo _('Update'); ?>" />
+				<input type="submit" name="cancel" value="<?php echo _('Cancel'); ?>" />
+				</p>
 			</td></tr></table></fieldset>
-</form>
-</div>
-		<?php
-}
-}
+			</form>
+			</div>
+			<?php
+		}
+	}
 
 	/**
 	 * @param int $thread_id
@@ -571,52 +564,53 @@ class ForumHTML extends Error {
 	function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		global $group_id;
 
-	$body = '';
+		$body = '';
 
-	$rl = RoleLoggedIn::getInstance() ;
-	if (forge_check_perm ('forum', $this->Forum->getID(), 'post')) {
-		if ($subject) {
-			//if this is a followup, put a RE: before it if needed
-			if (!preg_match('/RE:/i',$subject,$test)) {
-				$subject ='RE: '.$subject;
+		$rl = RoleLoggedIn::getInstance() ;
+		if (forge_check_perm ('forum', $this->Forum->getID(), 'post')) {
+			if ($subject) {
+				//if this is a followup, put a RE: before it if needed
+				if (!preg_match('/RE:/i',$subject,$test)) {
+					$subject ='RE: '.$subject;
+				}
 			}
-		}
-		echo notepad_func();
-		?>
-<div align="center">
+			echo notepad_func();
+			?>
+			<div align="center">
 <form id="ForumPostForm" enctype="multipart/form-data" action="<?php echo util_make_url ('/forum/forum.php?forum_id='.$this->Forum->getID().'&amp;group_id='.$group_id); ?>" method="post">
-	<?php $objid = $this->Forum->getID();?>
-	<input type="hidden" name="post_message" value="y" />
-	<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
-	<input type="hidden" name="msg_id" value="<?php echo $is_followup_to; ?>" />
-	<input type="hidden" name="is_followup_to" value="<?php echo $is_followup_to; ?>" />
-	<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>" />
-			<fieldset class="fieldset"><table><tr><td valign="top">
-			</td><td valign="top">
+			<?php $objid = $this->Forum->getID();?>
+			<input type="hidden" name="post_message" value="y" />
+			<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
+			<input type="hidden" name="msg_id" value="<?php echo $is_followup_to; ?>" />
+			<input type="hidden" name="is_followup_to" value="<?php echo $is_followup_to; ?>" />
+			<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>" />
+			<fieldset class="fieldset"><table><tr>
+			<td class="top">
+			</td>
+			<td class="top">
+			<strong><?php echo _('Subject')._(': '); ?></strong><?php echo utils_requiredField(); ?><br />
+				<input type="text" autofocus="autofocus" required="required" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
 			<br />
-		<strong><?php echo _('Subject:'); ?></strong><?php echo utils_requiredField(); ?><br />
-				<input type="text" required="required" name="subject" value="<?php echo $subject; ?>" size="80" maxlength="80" />
-			<br />
-		<strong><?php echo _('Message:'); ?></strong><?php echo notepad_button('document.forms.ForumPostForm.body') ?><?php echo utils_requiredField(); ?><br />
+		<strong><?php echo _('Message')._(': '); ?></strong><?php echo notepad_button('document.forms.ForumPostForm.body') ?><?php echo utils_requiredField(); ?><br />
 
-		<?php
-		$GLOBALS['editor_was_set_up']=false;
-		$params = array();
-		$params['body'] = $body;
-		$params['width'] = "800";
-		$params['height'] = "500";
-		$params['group'] = $group_id;
-		plugin_hook("text_editor",$params);
-		if (!$GLOBALS['editor_was_set_up']) {
-			//if we don't have any plugin for text editor, display a simple textarea edit box
-					echo '<textarea name="body" required="required" rows="10" cols="70">' . $body . '</textarea>';
-		}
-		unset($GLOBALS['editor_was_set_up']);
-		?> <?php //$text_support->displayTextField('body'); ?> <br>
-		<br>
+			<?php
+				$GLOBALS['editor_was_set_up']=false;
+				$params = array();
+				$params['body'] = $body;
+				$params['width'] = "800";
+				$params['height'] = "500";
+				$params['group'] = $group_id;
+				plugin_hook("text_editor",$params);
+				if (!$GLOBALS['editor_was_set_up']) {
+					//if we don't have any plugin for text editor, display a simple textarea edit box
+					echo '<textarea required="required" name="body"  rows="10" cols="70">' . $body . '</textarea>';
+				}
+				unset($GLOBALS['editor_was_set_up']);
+				//$text_support->displayTextField('body'); ?>
+		<br />
 		<!--		<span class="selected"><?php echo _('HTML tags will display in your post as text'); ?></span> -->
-		<p><?php $this->LinkAttachForm();?>
-
+		<p>
+				<?php $this->LinkAttachForm();?>
 
 		<p><?php
 		if (!session_loggedin()) {
@@ -638,11 +632,11 @@ class ForumHTML extends Error {
 
 		} elseif ($rl->hasPermission('forum', $this->Forum->getID(), 'post')) {
 			echo '<span class="error">';
-			printf(_('You could post if you were <a href="%1$s">logged in</a>.'), util_make_uri('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
+			printf(_('You could post if you were <a href="%s">logged in</a>.'), util_make_uri('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
 			echo '</span>';
 		} elseif (!session_loggedin()) {
 			echo '<span class="error">';
-			printf(_('Please <a href="%1$s">log in</a>'), util_make_uri('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
+			printf(_('Please <a href="%s">log in</a>'), util_make_uri('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
 			echo '</span><br/></p>';
 		} else {
 			//do nothing

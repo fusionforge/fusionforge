@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 12:55+0200\n"
+"POT-Creation-Date: 2013-10-04 14:18+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -394,7 +394,9 @@ msgstr "Projet"
 #: common/forum/Forum.class.php:665 common/forum/Forum.class.php:673
 #: common/forum/ForumHTML.class.php:68 common/forum/ForumHTML.class.php:69
 #: common/forum/ForumHTML.class.php:70 common/forum/ForumHTML.class.php:73
-#: common/forum/ForumHTML.class.php:211 common/include/Error.class.php:207
+#: common/forum/ForumHTML.class.php:211 common/forum/ForumHTML.class.php:527
+#: common/forum/ForumHTML.class.php:531 common/forum/ForumHTML.class.php:591
+#: common/forum/ForumHTML.class.php:594 common/include/Error.class.php:207
 #: common/include/exit.php:80 common/include/User.class.php:348
 #: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
@@ -2018,7 +2020,8 @@ msgstr "Continuer ?  Ces actions sont irréversibles !"
 msgid "Forum Name"
 msgstr "Nom du forum"
 
-#: common/forum/ForumAdmin.class.php:321
+#: common/forum/ForumAdmin.class.php:321 common/forum/ForumHTML.class.php:531
+#: common/forum/ForumHTML.class.php:594
 #: common/tracker/include/ArtifactHtml.class.php:73
 #: plugins/forumml/www/index.php:122
 #: plugins/message/common/messagePlugin.class.php:35 www/admin/cronman.php:44
@@ -2041,7 +2044,7 @@ msgid "Release"
 msgstr "Accepter"
 
 #: common/forum/ForumAdmin.class.php:360 common/forum/ForumHTML.class.php:330
-#: common/forum/ForumHTML.class.php:555
+#: common/forum/ForumHTML.class.php:549
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
 #: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:66
@@ -2293,13 +2296,13 @@ msgstr "Par :"
 msgid "Current File"
 msgstr "Fichier actuel"
 
-#: common/forum/ForumHTML.class.php:321 common/forum/ForumHTML.class.php:356
+#: common/forum/ForumHTML.class.php:321 common/forum/ForumHTML.class.php:355
 msgid "Use the “Browse” button to find the file you want to attach"
 msgstr ""
 "Utilisez le bouton « Parcourir » pour trouver le fichier que vous voulez "
 "joindre"
 
-#: common/forum/ForumHTML.class.php:324 common/forum/ForumHTML.class.php:359
+#: common/forum/ForumHTML.class.php:324 common/forum/ForumHTML.class.php:358
 msgid "File to upload"
 msgstr "Fichier à publier"
 
@@ -2307,15 +2310,29 @@ msgstr "Fichier à publier"
 msgid "Warning: Uploaded file will replace current file"
 msgstr "Attention : le fichier actuel sera supprimé de manière permanente."
 
-#: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:597
-msgid "Subject:"
-msgstr "Sujet :"
+#: common/forum/ForumHTML.class.php:352 common/tracker/actions/detail.php:135
+#: common/tracker/actions/mod-limited.php:177
+#: common/tracker/actions/mod.php:240
+#: common/tracker/include/ArtifactTypeHtml.class.php:366
+#: www/forum/attachment.php:41 www/forum/attachment.php:125
+#: www/forum/attachment.php:153
+msgid "Attachments"
+msgstr "Pièces jointes"
 
-#: common/forum/ForumHTML.class.php:530 common/forum/ForumHTML.class.php:600
-msgid "Message:"
-msgstr "Message :"
+#: common/forum/ForumHTML.class.php:523
+msgid "Edit Message"
+msgstr "Modifier un message"
 
-#: common/forum/ForumHTML.class.php:556
+#: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:591
+#: plugins/forumml/www/index.php:111 www/admin/massmail.php:113
+#: www/admin/massmail.php:138 www/admin/pending-news.php:145
+#: www/developer/diary.php:80 www/news/admin/index.php:133
+#: www/news/admin/news_admin_utils.php:58 www/news/submit.php:146
+#: www/sendmessage.php:69 www/sendmessage.php:150
+msgid "Subject"
+msgstr "Sujet"
+
+#: common/forum/ForumHTML.class.php:550
 #: common/tracker/views/form-adminroadmap.php:167
 #: common/tracker/views/form-adminroadmap.php:235
 #: common/widget/Widget.class.php:103
@@ -2337,11 +2354,11 @@ msgstr "Message :"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: common/forum/ForumHTML.class.php:617
+#: common/forum/ForumHTML.class.php:611
 msgid "HTML tags will display in your post as text"
 msgstr "Les balises HTML de votre message seront affichées comme du texte."
 
-#: common/forum/ForumHTML.class.php:624
+#: common/forum/ForumHTML.class.php:618
 #, php-format
 msgid ""
 "You are posting anonymously because you are not <a href=\"%1$s\">logged in</"
@@ -2350,27 +2367,27 @@ msgstr ""
 "Vous ajoutez un message anonyme car vous n'êtes pas <a href=\"%1$s"
 "\">identifié</a>"
 
-#: common/forum/ForumHTML.class.php:628
+#: common/forum/ForumHTML.class.php:622
 msgid "Post Comment"
 msgstr "Ajouter un commentaire"
 
-#: common/forum/ForumHTML.class.php:628
+#: common/forum/ForumHTML.class.php:622
 msgid "Anonymously"
 msgstr "de manière anonyme"
 
-#: common/forum/ForumHTML.class.php:629
+#: common/forum/ForumHTML.class.php:623
 msgid "Receive followups via email"
 msgstr "Recevoir les réponses par e-mail"
 
-#: common/forum/ForumHTML.class.php:641
+#: common/forum/ForumHTML.class.php:635
 #, php-format
-msgid "You could post if you were <a href=\"%1$s\">logged in</a>."
-msgstr "Vous pourriez répondre si vous étiez <a href=\"%1$s\">identifié</a>."
+msgid "You could post if you were <a href=\"%s\">logged in</a>."
+msgstr "Vous pourriez répondre si vous étiez <a href=\"%s\">identifié</a>."
 
-#: common/forum/ForumHTML.class.php:645
+#: common/forum/ForumHTML.class.php:639
 #, php-format
-msgid "Please <a href=\"%1$s\">log in</a>"
-msgstr "Veuillez vous <a href=\"%1$s\">connecter</a>"
+msgid "Please <a href=\"%s\">log in</a>"
+msgstr "Veuillez vous <a href=\"%s\">identifier</a>"
 
 #: common/forum/ForumMessage.class.php:88
 msgid "Group_forum_id in db result does not match Forum Object"
@@ -5445,15 +5462,6 @@ msgstr "Ajouter un commentaire"
 #, fuzzy
 msgid "Followups: "
 msgstr "Suites"
-
-#: common/tracker/actions/detail.php:135
-#: common/tracker/actions/mod-limited.php:177
-#: common/tracker/actions/mod.php:240
-#: common/tracker/include/ArtifactTypeHtml.class.php:366
-#: www/forum/attachment.php:41 www/forum/attachment.php:125
-#: www/forum/attachment.php:153
-msgid "Attachments"
-msgstr "Pièces jointes"
 
 #: common/tracker/actions/detail.php:139
 #: common/tracker/actions/mod-limited.php:181
@@ -9197,14 +9205,6 @@ msgstr "Naviguer dans les archives"
 #: plugins/forumml/www/index.php:104
 msgid "Submit a new thread"
 msgstr "Proposer une nouvelle discussion"
-
-#: plugins/forumml/www/index.php:111 www/admin/massmail.php:113
-#: www/admin/massmail.php:138 www/admin/pending-news.php:145
-#: www/developer/diary.php:80 www/news/admin/index.php:133
-#: www/news/admin/news_admin_utils.php:58 www/news/submit.php:146
-#: www/sendmessage.php:69 www/sendmessage.php:150
-msgid "Subject"
-msgstr "Sujet"
 
 #: plugins/forumml/www/message.php:101 plugins/forumml/www/upload.php:51
 msgid "This list is not active"
@@ -23014,6 +23014,19 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
+#~ msgid "Subject:"
+#~ msgstr "Sujet :"
+
+#~ msgid "Message:"
+#~ msgstr "Message :"
+
+#~ msgid "You could post if you were <a href=\"%1$s\">logged in</a>."
+#~ msgstr ""
+#~ "Vous pourriez répondre si vous étiez <a href=\"%1$s\">identifié</a>."
+
+#~ msgid "Please <a href=\"%1$s\">log in</a>"
+#~ msgstr "Veuillez vous <a href=\"%1$s\">connecter</a>"
+
 #~ msgid "Posted by:"
 #~ msgstr "Publié par :"
 
@@ -25098,9 +25111,6 @@ msgstr "Page personnelle de %s"
 #~ msgid "Reply to this message"
 #~ msgstr "Répondre à ce message"
 
-#~ msgid "Edit Message"
-#~ msgstr "Modifier un message"
-
 #~ msgid "You are posting anonymously because you are not"
 #~ msgstr "Vous ajoutez un message anonyme car vous n'êtes pas"
 
@@ -25115,12 +25125,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Post Message Anonymously"
 #~ msgstr "Publier le message de manière anonyme"
-
-#~ msgid "You could post if you were <a href=\"%s\">logged in</a>."
-#~ msgstr "Vous pourriez répondre si vous étiez <a href=\"%s\">identifié</a>."
-
-#~ msgid "Please <a href=\"%s\">log in</a>"
-#~ msgstr "Veuillez vous <a href=\"%s\">identifier</a>"
 
 #~ msgid "Anonymous message posted by "
 #~ msgstr "Message anonyme posté par "

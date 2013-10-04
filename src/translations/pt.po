@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 12:55+0200\n"
+"POT-Creation-Date: 2013-10-04 14:18+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -390,7 +390,9 @@ msgstr ""
 #: common/forum/Forum.class.php:665 common/forum/Forum.class.php:673
 #: common/forum/ForumHTML.class.php:68 common/forum/ForumHTML.class.php:69
 #: common/forum/ForumHTML.class.php:70 common/forum/ForumHTML.class.php:73
-#: common/forum/ForumHTML.class.php:211 common/include/Error.class.php:207
+#: common/forum/ForumHTML.class.php:211 common/forum/ForumHTML.class.php:527
+#: common/forum/ForumHTML.class.php:531 common/forum/ForumHTML.class.php:591
+#: common/forum/ForumHTML.class.php:594 common/include/Error.class.php:207
 #: common/include/exit.php:80 common/include/User.class.php:348
 #: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
@@ -1997,7 +1999,8 @@ msgstr ""
 msgid "Forum Name"
 msgstr "Nome do Fórum"
 
-#: common/forum/ForumAdmin.class.php:321
+#: common/forum/ForumAdmin.class.php:321 common/forum/ForumHTML.class.php:531
+#: common/forum/ForumHTML.class.php:594
 #: common/tracker/include/ArtifactHtml.class.php:73
 #: plugins/forumml/www/index.php:122
 #: plugins/message/common/messagePlugin.class.php:35 www/admin/cronman.php:44
@@ -2020,7 +2023,7 @@ msgid "Release"
 msgstr ""
 
 #: common/forum/ForumAdmin.class.php:360 common/forum/ForumHTML.class.php:330
-#: common/forum/ForumHTML.class.php:555
+#: common/forum/ForumHTML.class.php:549
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
 #: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:66
@@ -2271,11 +2274,11 @@ msgstr "Por:"
 msgid "Current File"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:321 common/forum/ForumHTML.class.php:356
+#: common/forum/ForumHTML.class.php:321 common/forum/ForumHTML.class.php:355
 msgid "Use the “Browse” button to find the file you want to attach"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:324 common/forum/ForumHTML.class.php:359
+#: common/forum/ForumHTML.class.php:324 common/forum/ForumHTML.class.php:358
 msgid "File to upload"
 msgstr ""
 
@@ -2283,15 +2286,30 @@ msgstr ""
 msgid "Warning: Uploaded file will replace current file"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:597
-msgid "Subject:"
-msgstr "Assunto:"
+#: common/forum/ForumHTML.class.php:352 common/tracker/actions/detail.php:135
+#: common/tracker/actions/mod-limited.php:177
+#: common/tracker/actions/mod.php:240
+#: common/tracker/include/ArtifactTypeHtml.class.php:366
+#: www/forum/attachment.php:41 www/forum/attachment.php:125
+#: www/forum/attachment.php:153
+msgid "Attachments"
+msgstr ""
 
-#: common/forum/ForumHTML.class.php:530 common/forum/ForumHTML.class.php:600
-msgid "Message:"
-msgstr "Mensagem:"
+#: common/forum/ForumHTML.class.php:523
+#, fuzzy
+msgid "Edit Message"
+msgstr "Enviar Mensagem"
 
-#: common/forum/ForumHTML.class.php:556
+#: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:591
+#: plugins/forumml/www/index.php:111 www/admin/massmail.php:113
+#: www/admin/massmail.php:138 www/admin/pending-news.php:145
+#: www/developer/diary.php:80 www/news/admin/index.php:133
+#: www/news/admin/news_admin_utils.php:58 www/news/submit.php:146
+#: www/sendmessage.php:69 www/sendmessage.php:150
+msgid "Subject"
+msgstr "Assunto"
+
+#: common/forum/ForumHTML.class.php:550
 #: common/tracker/views/form-adminroadmap.php:167
 #: common/tracker/views/form-adminroadmap.php:235
 #: common/widget/Widget.class.php:103
@@ -2313,37 +2331,37 @@ msgstr "Mensagem:"
 msgid "Cancel"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:617
+#: common/forum/ForumHTML.class.php:611
 msgid "HTML tags will display in your post as text"
 msgstr "Tags HTML serão mostradas na sua postagem como texto"
 
-#: common/forum/ForumHTML.class.php:624
+#: common/forum/ForumHTML.class.php:618
 #, php-format
 msgid ""
 "You are posting anonymously because you are not <a href=\"%1$s\">logged in</"
 "a>"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:628
+#: common/forum/ForumHTML.class.php:622
 msgid "Post Comment"
 msgstr "Postar Comentário"
 
-#: common/forum/ForumHTML.class.php:628
+#: common/forum/ForumHTML.class.php:622
 msgid "Anonymously"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:629
+#: common/forum/ForumHTML.class.php:623
 msgid "Receive followups via email"
 msgstr "Receber respostas via e-mail"
 
-#: common/forum/ForumHTML.class.php:641
-#, php-format
-msgid "You could post if you were <a href=\"%1$s\">logged in</a>."
-msgstr ""
+#: common/forum/ForumHTML.class.php:635
+#, fuzzy, php-format
+msgid "You could post if you were <a href=\"%s\">logged in</a>."
+msgstr "Você Só Pode Monitorar Se Você Estiver Logado."
 
-#: common/forum/ForumHTML.class.php:645
+#: common/forum/ForumHTML.class.php:639
 #, php-format
-msgid "Please <a href=\"%1$s\">log in</a>"
+msgid "Please <a href=\"%s\">log in</a>"
 msgstr ""
 
 #: common/forum/ForumMessage.class.php:88
@@ -5252,15 +5270,6 @@ msgstr "Adicionar Um Comentário"
 #: common/tracker/actions/mod.php:218
 #: www/pm/include/ProjectTaskHTML.class.php:142
 msgid "Followups: "
-msgstr ""
-
-#: common/tracker/actions/detail.php:135
-#: common/tracker/actions/mod-limited.php:177
-#: common/tracker/actions/mod.php:240
-#: common/tracker/include/ArtifactTypeHtml.class.php:366
-#: www/forum/attachment.php:41 www/forum/attachment.php:125
-#: www/forum/attachment.php:153
-msgid "Attachments"
 msgstr ""
 
 #: common/tracker/actions/detail.php:139
@@ -8784,14 +8793,6 @@ msgstr ""
 #: plugins/forumml/www/index.php:104
 msgid "Submit a new thread"
 msgstr ""
-
-#: plugins/forumml/www/index.php:111 www/admin/massmail.php:113
-#: www/admin/massmail.php:138 www/admin/pending-news.php:145
-#: www/developer/diary.php:80 www/news/admin/index.php:133
-#: www/news/admin/news_admin_utils.php:58 www/news/submit.php:146
-#: www/sendmessage.php:69 www/sendmessage.php:150
-msgid "Subject"
-msgstr "Assunto"
 
 #: plugins/forumml/www/message.php:101 plugins/forumml/www/upload.php:51
 msgid "This list is not active"
@@ -21754,6 +21755,12 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Minha Página Pessoal"
+
+#~ msgid "Subject:"
+#~ msgstr "Assunto:"
+
+#~ msgid "Message:"
+#~ msgstr "Mensagem:"
 
 #~ msgid "Failed to add the skill"
 #~ msgstr "Falhou ao adicionar a habilidade"
