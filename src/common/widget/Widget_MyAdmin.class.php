@@ -66,7 +66,7 @@ class Widget_MyAdmin extends Widget {
 
 		$html_my_admin .= $this->_get_admin_row(
 			$i++,
-			vsprintf(_('Groups in <a href="%s"><b>P</b> (pending) Status</a>'), array("/admin/approve-pending.php")),
+			vsprintf(_('Groups in <a href="%s"><strong>P</strong> (pending) Status</A>'), array("/admin/approve-pending.php")),
 			$pending_projects,
 			$this->_get_color($pending_projects)
 			);
