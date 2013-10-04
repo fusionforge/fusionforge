@@ -145,7 +145,6 @@ class Widget_MyProjects extends Widget {
 					);
 		}
 		$rss->display();
-		return;
 	}
 
 	function getDescription() {
