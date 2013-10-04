@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 15:15+0200\n"
+"POT-Creation-Date: 2013-10-04 17:32+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -426,6 +426,7 @@ msgstr "Proyecto"
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
+#: common/widget/Widget_ProjectInfo.class.php:45
 #: cronjobs/send_pending_items_mail.php:77
 #: cronjobs/send_pending_items_mail.php:78
 #: cronjobs/send_pending_items_mail.php:79
@@ -1298,7 +1299,7 @@ msgstr "Creado o actualizado hace 7 dias"
 #: common/widget/Widget_MyLatestSvnCommits.class.php:65
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:112
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:114
-#: common/widget/Widget_ProjectInfo.class.php:68
+#: common/widget/Widget_ProjectInfo.class.php:67
 #: common/widget/Widget_Rss.class.php:76
 #: cronjobs/send_pending_items_mail.php:96
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:190
@@ -1397,7 +1398,6 @@ msgid "Start monitoring"
 msgstr "Comenzar monitorización"
 
 #: common/docman/views/listfile.php:368
-#: common/widget/Widget_MyMonitoredForums.class.php:125
 msgid "Stop monitoring"
 msgstr "Parar de monitorizar"
 
@@ -1942,8 +1942,8 @@ msgstr "Borrar"
 
 #: common/forum/AttachManager.class.php:164
 #: common/tracker/views/form-customizelist.php:129
-#: common/widget/WidgetLayoutManager.class.php:513
-#: common/widget/WidgetLayoutManager.class.php:540
+#: common/widget/WidgetLayoutManager.class.php:514
+#: common/widget/WidgetLayoutManager.class.php:541
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:61
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:165
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:123
@@ -2288,7 +2288,10 @@ msgstr "Ver foros"
 msgid "Discussion Forums:"
 msgstr "Foros de discusión:"
 
-#: common/forum/ForumHTML.class.php:140 www/forum/monitor.php:59
+#: common/forum/ForumHTML.class.php:140
+#: common/widget/Widget_MyMonitoredDocuments.class.php:90
+#: common/widget/Widget_MyMonitoredForums.class.php:125
+#: common/widget/Widget_MyMonitoredFp.class.php:106 www/forum/monitor.php:59
 msgid "Stop Monitoring"
 msgstr "Parar de monitorizar"
 
@@ -7033,14 +7036,14 @@ msgstr "Personalizar apariencia"
 msgid "%s Widgets"
 msgstr "%s Widgets"
 
-#: common/widget/WidgetLayoutManager.class.php:511
-#: common/widget/WidgetLayoutManager.class.php:538
+#: common/widget/WidgetLayoutManager.class.php:512
+#: common/widget/WidgetLayoutManager.class.php:539
 #: plugins/hudson/include/HudsonJobWidget.class.php:65
 #: plugins/hudson/include/HudsonJobWidget.class.php:89
 msgid "Already used"
 msgstr "Ya utilizado"
 
-#: common/widget/WidgetLayoutManager.class.php:682
+#: common/widget/WidgetLayoutManager.class.php:683
 #, php-format
 msgid "Your <a href=\"%s\">dashboard</a> has been updated."
 msgstr "Tu <a href=\"%s\">cuadro de mando</a> ha sido actualizado."
@@ -7055,8 +7058,8 @@ msgid "Users in <a href=\"%s\"><b>P</b> (pending) Status</a>"
 msgstr "Usuarios en  <a href=\"%s\">Estado <b>P</b> (pendientes)</a>"
 
 #: common/widget/Widget_MyAdmin.class.php:69
-#, php-format
-msgid "Groups in <a href=\"%s\"><b>P</b> (pending) Status</a>"
+#, fuzzy, php-format
+msgid "Groups in <a href=\"%s\"><strong>P</strong> (pending) Status</A>"
 msgstr "Grupos en <a href=\"%s\">Estado <b>P</b> (pendientes)</a>"
 
 #: common/widget/Widget_MyAdmin.class.php:90
@@ -7164,13 +7167,15 @@ msgstr "Añadir marcador"
 
 #: common/widget/Widget_MyBookmarks.class.php:64
 #, php-format
+msgid "List your favorite bookmarks (your favorite pages in %s or external)."
+msgstr ""
+
+#: common/widget/Widget_MyBookmarks.class.php:66
+#, fuzzy, php-format
 msgid ""
-"List your favorite bookmarks (your favorite pages in %1$s or external).<br /"
-">Note that in many cases %1$s uses URL with enough embedded information to "
+"Note that in many cases %s uses URL with enough embedded information to "
 "bookmark sophisticated items like Software Map browsing, typical search in "
-"your project Bug or Task database, etc. <br />Bookmarked items can be edited "
-"which means that both the title of the bookmark and its destination URL can "
-"be modified."
+"your project Bug or Task database, etc."
 msgstr ""
 "Lista tus enlaces favoritos (tus paginas favoritas en %1$s o externas).<br /"
 ">Indicar que en muchos casos %1$s usan direcciones con suficiente "
@@ -7179,6 +7184,12 @@ msgstr ""
 "base de datos, etc. <br />Los elementos enlazados pueden ser editados lo que "
 "significa que ambos, el titulo y sus direcciones de destino pueden ser "
 "modificxados."
+
+#: common/widget/Widget_MyBookmarks.class.php:68
+msgid ""
+"Bookmarked items can be edited which means that both the title of the "
+"bookmark and its destination URL can be modified."
+msgstr ""
 
 #: common/widget/Widget_MyLatestSvnCommits.class.php:31
 msgid "My Latest SVN Commits"
@@ -7227,11 +7238,6 @@ msgstr ""
 "Puede monitorizar documetos pulsando en el correspondiente icono de accion "
 "del directorio."
 
-#: common/widget/Widget_MyMonitoredDocuments.class.php:90
-#: common/widget/Widget_MyMonitoredFp.class.php:106
-msgid "STOP MONITORING"
-msgstr "PARAR MONITORIZACION"
-
 #: common/widget/Widget_MyMonitoredDocuments.class.php:94
 #: common/widget/Widget_MyMonitoredForums.class.php:129
 #, php-format
@@ -7239,14 +7245,21 @@ msgid "%s new"
 msgstr "%s nuevo"
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:107
+#, fuzzy
+msgid "List documents that you are currently monitoring, by project."
+msgstr "Listado de peticiones enviados o asignados a ti por el proyecto. "
+
+#: common/widget/Widget_MyMonitoredDocuments.class.php:109
+#: common/widget/Widget_MyMonitoredForums.class.php:144
+#: common/widget/Widget_MyMonitoredFp.class.php:124
+#, fuzzy
 msgid ""
-"List documents that you are currently monitoring, by project.<br />To cancel "
-"any of the monitored items just click on the trash icon next to the item "
-"label."
+"To cancel any of the monitored items just click on the trash icon next to "
+"the item label."
 msgstr ""
-"Lista documentos que esta monitorizando actualmente en el proyecto.<br /"
-">Para cancelar cualquier elemento monitorizado pulsa en el icono papelera "
-"junto a la etiqueta del elemento."
+"Lista foros que actualmente esta monitorizando, por proyectos<br />Para "
+"cancelar algun elemento monitorizado pulsa en el icono papelera junto al "
+"nombre del elemento."
 
 #: common/widget/Widget_MyMonitoredForums.class.php:37
 msgid "Monitored Forums"
@@ -7277,21 +7290,17 @@ msgid "Stop monitoring this Forum?"
 msgstr "Parar seguir este Foro?"
 
 #: common/widget/Widget_MyMonitoredForums.class.php:142
-msgid ""
-"List forums that you are currently monitoring, by project.<br />To cancel "
-"any of the monitored items just click on the trash icon next to the item "
-"label."
-msgstr ""
-"Lista foros que actualmente esta monitorizando, por proyectos<br />Para "
-"cancelar algun elemento monitorizado pulsa en el icono papelera junto al "
-"nombre del elemento."
+#, fuzzy
+msgid "List forums that you are currently monitoring, by project."
+msgstr "Listado de peticiones enviados o asignados a ti por el proyecto. "
 
 #: common/widget/Widget_MyMonitoredFp.class.php:33
 msgid "Monitored File Packages"
 msgstr "Paquetes de Ficheros Monitorizados"
 
 #: common/widget/Widget_MyMonitoredFp.class.php:55
-msgid "You are not monitoring any files"
+#, fuzzy
+msgid "You are not monitoring any files."
 msgstr "No está monitorizando ningún fichero"
 
 #: common/widget/Widget_MyMonitoredFp.class.php:55
@@ -7303,9 +7312,10 @@ msgstr ""
 "con un enlace al nuevo fichero en nuestro servidor de descargas."
 
 #: common/widget/Widget_MyMonitoredFp.class.php:55
+#, fuzzy
 msgid ""
-"You can monitor files by visiting a project's &quot;Summary Page&quot; and "
-"clicking on the appropriate icon in the files section."
+"You can monitor files by visiting a project's “Summary Page” and clicking on "
+"the appropriate icon in the files section."
 msgstr ""
 "Puede monitorizar ficheros visitando la pagina de &quot;Pagina Sumario&quot; "
 "y pulsando en el icono correcpondiente en la seccion de ficheros."
@@ -7315,14 +7325,9 @@ msgid "Stop Monitoring this Package?"
 msgstr "Parar de monitorizar este Paquete?"
 
 #: common/widget/Widget_MyMonitoredFp.class.php:122
-msgid ""
-"List packages that you are currently monitoring, by project.<br />To cancel "
-"any of the monitored items just click on the trash icon next to the item "
-"label."
-msgstr ""
-"Lista paquetes que está actualmente monitorizando, por proyecto.<br />Para "
-"cancelar alguno de los elementos monitorizados pulsa en el icono papelera "
-"junto a la e"
+#, fuzzy
+msgid "List packages that you are currently monitoring, by project."
+msgstr "Listado de peticiones enviados o asignados a ti por el proyecto. "
 
 #: common/widget/Widget_MyProjects.class.php:38
 #: plugins/globaldashboard/include/globalDashboard_Widget_MyArtifacts.php:51
@@ -7354,7 +7359,7 @@ msgstr "Mis Proyectos"
 msgid "My projects"
 msgstr "Mis Proyectos"
 
-#: common/widget/Widget_MyProjects.class.php:152
+#: common/widget/Widget_MyProjects.class.php:151
 msgid ""
 "List the projects you belong to. Selecting any of these projects brings you "
 "to the corresponding Project Summary page."
@@ -7539,46 +7544,47 @@ msgid ""
 "directory ...) during the last 4 weeks."
 msgstr ""
 
-#: common/widget/Widget_ProjectInfo.class.php:32 www/include/user_home.php:89
-msgid "Project Info"
-msgstr "Información del Proyecto"
+#: common/widget/Widget_ProjectInfo.class.php:32
+#: www/project/admin/project_admin_utils.php:48
+msgid "Project Information"
+msgstr "Información del proyecto"
 
 #: common/widget/Widget_ProjectInfo.class.php:45
 #: www/project/admin/index.php:162 www/softwaremap/tag_cloud.php:143
 msgid "Tags"
 msgstr "Tags"
 
-#: common/widget/Widget_ProjectInfo.class.php:50
-#: common/widget/Widget_ProjectInfo.class.php:53
+#: common/widget/Widget_ProjectInfo.class.php:49
+#: common/widget/Widget_ProjectInfo.class.php:52
 msgid "No tag defined for this project"
 msgstr "No se han definido etiquetas para este proyecto"
 
-#: common/widget/Widget_ProjectInfo.class.php:66
+#: common/widget/Widget_ProjectInfo.class.php:65
 msgid "Registered: "
 msgstr "Registrado:"
 
-#: common/widget/Widget_ProjectInfo.class.php:84
+#: common/widget/Widget_ProjectInfo.class.php:83
 #, php-format
 msgid "Activity Ranking: %d"
 msgstr "Ranking de actividad: %d"
 
-#: common/widget/Widget_ProjectInfo.class.php:85
-#, php-format
-msgid "View project <a href=\"%1$s\" >Statistics</a>"
-msgstr "Ver <a href=\"%1$s\" >estadísticas</a> del proyecto"
+#: common/widget/Widget_ProjectInfo.class.php:84
+#, fuzzy, php-format
+msgid "View project <a href=\"%s\" >Statistics</a>"
+msgstr "Ver <a href=\"%s\" >estadísticas</a> del proyecto"
 
-#: common/widget/Widget_ProjectInfo.class.php:87
+#: common/widget/Widget_ProjectInfo.class.php:86
 #, php-format
-msgid " or <a href=\"%1$s\">Activity</a>"
-msgstr " o <a href=\"%1$s\"> Actividad</a>"
+msgid " or <a href=\"%s\">Activity</a>"
+msgstr " o <a href=\"%s\">Actividad</a>"
 
-#: common/widget/Widget_ProjectInfo.class.php:89
+#: common/widget/Widget_ProjectInfo.class.php:88
 #, php-format
-msgid "View list of <a href=\"%1$s\">RSS feeds</a> available for this project."
+msgid "View list of <a href=\"%s\">RSS feeds</a> available for this project."
 msgstr ""
-"Ver listado de <a href=\"%1$s\">feeds RSS</a> disponibles para este proyecto."
+"Ver listado de <a href=\"%s\">feeds RSS</a> disponibles para este proyecto."
 
-#: common/widget/Widget_ProjectInfo.class.php:106
+#: common/widget/Widget_ProjectInfo.class.php:105
 #, php-format
 msgid ""
 "HELP WANTED: This project is looking for a <a href=\"%1$s\">\"%2$s\"</a>."
@@ -7588,7 +7594,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: common/widget/Widget_ProjectInfo.class.php:132
+#: common/widget/Widget_ProjectInfo.class.php:131
 msgid "Some infos about the project."
 msgstr "Algunos datos acerca del proyecto."
 
@@ -7640,14 +7646,29 @@ msgstr "Fichero Actualizado"
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:172
 msgid ""
-" List the most recent packages available for download along with their "
-"revision. <br />A Release Notes icon allows you to see the latest changes "
-"and developers comments associated with this revision.<br />Then comes the "
-"monitor icon, selecting this icon will cause this package to be monitored "
-"for you.<br />Anytime the project development team posts a new release, you "
-"will be automatically notified via e-mail. All monitored File Releases are "
-"listed in your Personal Page and can be canceled from this page or from the "
-"main page of the file release system."
+"List the most recent packages available for download along with their "
+"revision."
+msgstr ""
+
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:174
+msgid ""
+"A Release Notes icon allows you to see the latest changes and developers "
+"comments associated with this revision."
+msgstr ""
+
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:176
+msgid ""
+"Then comes the monitor icon, selecting this icon will cause this package to "
+"be monitored for you."
+msgstr ""
+
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:178
+#, fuzzy
+msgid ""
+"Anytime the project development team posts a new release, you will be "
+"automatically notified via e-mail. All monitored File Releases are listed in "
+"your Personal Page and can be canceled from this page or from the main page "
+"of the file release system."
 msgstr ""
 "Lista los mas recientes paquetes disponibles para descargar en una revisión. "
 "<br />Un Icono de Notas de Liberación le permite localizar los ultimos "
@@ -7689,8 +7710,9 @@ msgid "List the project members."
 msgstr "Lista de miembros del proyecto."
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:35
-msgid "Public Areas"
-msgstr "Área pública"
+#, fuzzy
+msgid "Public Tools"
+msgstr "Foros Públicos"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:48
 msgid "Home Page"
@@ -17782,6 +17804,10 @@ msgstr "Ver Diario y Notas"
 msgid "Monitor this Diary"
 msgstr "Monitorizar este Diario"
 
+#: www/include/user_home.php:89
+msgid "Project Info"
+msgstr "Información del Proyecto"
+
 #: www/include/user_home.php:100
 msgid "This developer is not a member of any projects."
 msgstr "Este desarrollador no es mienbro de ningún proyecto."
@@ -20295,10 +20321,6 @@ msgstr "Elija el rol de cada usuario y presione &quot;Añadir todos&quot;."
 #: www/project/admin/massfinish.php:96
 msgid "Add All"
 msgstr "Añadir Todo"
-
-#: www/project/admin/project_admin_utils.php:48
-msgid "Project Information"
-msgstr "Información del proyecto"
 
 #: www/project/admin/project_admin_utils.php:49
 msgid "General information about project. Tag, trove list, description."
@@ -22995,6 +23017,42 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
 
+#~ msgid "View project <a href=\"%1$s\" >Statistics</a>"
+#~ msgstr "Ver <a href=\"%1$s\" >estadísticas</a> del proyecto"
+
+#~ msgid " or <a href=\"%1$s\">Activity</a>"
+#~ msgstr " o <a href=\"%1$s\"> Actividad</a>"
+
+#~ msgid "STOP MONITORING"
+#~ msgstr "PARAR MONITORIZACION"
+
+#~ msgid ""
+#~ "List documents that you are currently monitoring, by project.<br />To "
+#~ "cancel any of the monitored items just click on the trash icon next to "
+#~ "the item label."
+#~ msgstr ""
+#~ "Lista documentos que esta monitorizando actualmente en el proyecto.<br /"
+#~ ">Para cancelar cualquier elemento monitorizado pulsa en el icono papelera "
+#~ "junto a la etiqueta del elemento."
+
+#~ msgid ""
+#~ "List packages that you are currently monitoring, by project.<br />To "
+#~ "cancel any of the monitored items just click on the trash icon next to "
+#~ "the item label."
+#~ msgstr ""
+#~ "Lista paquetes que está actualmente monitorizando, por proyecto.<br /"
+#~ ">Para cancelar alguno de los elementos monitorizados pulsa en el icono "
+#~ "papelera junto a la e"
+
+#~ msgid ""
+#~ "View list of <a href=\"%1$s\">RSS feeds</a> available for this project."
+#~ msgstr ""
+#~ "Ver listado de <a href=\"%1$s\">feeds RSS</a> disponibles para este "
+#~ "proyecto."
+
+#~ msgid "Public Areas"
+#~ msgstr "Área pública"
+
 #~ msgid "Couldn't get message id"
 #~ msgstr "No se pudo obtener el id del mensaje"
 
@@ -24584,18 +24642,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Activity Percentile"
 #~ msgstr "Percentil de actividad"
-
-#~ msgid "View project <a href=\"%s\">Statistics</a>"
-#~ msgstr "Ver <a href=\"%s\" >estadísticas</a> del proyecto"
-
-#~ msgid " or <a href=\"%s\">Activity</a>"
-#~ msgstr " o <a href=\"%s\">Actividad</a>"
-
-#~ msgid ""
-#~ "View list of <a href=\"%s\">RSS feeds</a> available for this project."
-#~ msgstr ""
-#~ "Ver listado de <a href=\"%s\">feeds RSS</a> disponibles para este "
-#~ "proyecto."
 
 #~ msgid "View the %d Member(s)"
 #~ msgstr "Ver el/los %d miembro(s)"
