@@ -204,7 +204,7 @@ if ( $num_packages < 1) {
 				@$proj_stats['files'] += $num_files;
 
                 $cell_data = array();
-                $cell_data[] = _('Filename');
+                $cell_data[] = _('File Name');
                 $cell_data[] = _('Date');
                 $cell_data[] = _('Size');
                 $cell_data[] = _('D/L');

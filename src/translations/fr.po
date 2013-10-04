@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 14:18+0200\n"
+"POT-Creation-Date: 2013-10-04 14:37+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -709,8 +709,8 @@ msgid ""
 "Refers to the relatively brief title of the document (e.g. How to use the "
 "download server)."
 msgstr ""
-"Titre court du document (par exemple : « Comment utiliser le serveur de téléchargement "
-"»)."
+"Titre court du document (par exemple : « Comment utiliser le serveur de "
+"téléchargement »)."
 
 #: common/docman/views/addfile.php:92 common/docman/views/addfile.php:108
 #: common/docman/views/editfile.php:42 common/docman/views/listfile.php:219
@@ -843,10 +843,15 @@ msgstr ""
 msgid "You need first to upload file in %s"
 msgstr "Vous devez d'abord télécharger le fichier dans %s"
 
-#: common/docman/views/addfile.php:165
+#: common/docman/views/addfile.php:165 common/docman/views/listfile.php:219
+#: common/docman/views/listtrashfile.php:130
+#: common/docman/views/pendingfiles.php:63
+#: common/widget/Widget_ProjectLatestDocuments.class.php:73
+#: plugins/cvstracker/common/cvstrackerPlugin.class.php:108
 #: plugins/mantisbt/view/viewAttachment.php:49
+#: plugins/scmhook/library/scmsvn/commitTracker.class.php:133
 #: www/frs/admin/editrelease.php:292 www/frs/admin/editrelease.php:346
-#: www/frs/admin/qrs.php:191
+#: www/frs/admin/qrs.php:191 www/frs/index.php:207
 msgid "File Name"
 msgstr "Nom du fichier"
 
@@ -1094,16 +1099,6 @@ msgstr "Surveiller ce dossier"
 msgid "Select / Deselect all documents for massaction"
 msgstr ""
 "Sélectionner/désélectionner tous les documents pour une action collective"
-
-#: common/docman/views/listfile.php:219
-#: common/docman/views/listtrashfile.php:130
-#: common/docman/views/pendingfiles.php:63
-#: common/widget/Widget_ProjectLatestDocuments.class.php:73
-#: plugins/cvstracker/common/cvstrackerPlugin.class.php:108
-#: plugins/scmhook/library/scmsvn/commitTracker.class.php:133
-#: www/frs/index.php:207
-msgid "Filename"
-msgstr "Nom du fichier"
 
 #: common/docman/views/listfile.php:219
 #: common/docman/views/listtrashfile.php:130
@@ -23012,6 +23007,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Filename"
+#~ msgstr "Nom du fichier"
 
 #~ msgid "Subject:"
 #~ msgstr "Sujet :"

@@ -60,7 +60,7 @@ jQuery(document).ready(function() {
 	if (isset($nested_pending_docs[$dirid]) && is_array($nested_pending_docs[$dirid])) {
 		echo '<div class="docmanDiv">';
 		echo '<h4>'._('Pending files').'</h4>';
-		$tabletop = array('<input id="checkallpending" type="checkbox" onchange="controllerListPending.checkAll(\'checkeddocidpending\', \'pending\')" />', '', _('Filename'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
+		$tabletop = array('<input id="checkallpending" type="checkbox" onchange="controllerListPending.checkAll(\'checkeddocidpending\', \'pending\')" />', '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
 		$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', 'unsortable');
 		echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
 		$time_new = 604800;

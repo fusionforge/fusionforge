@@ -130,7 +130,7 @@ class commitTracker extends scmhook {
 	*/
 	function getTitleArr() {
 		$title_arr=array();
-		$title_arr[]=_('Filename');
+		$title_arr[]=_('File Name');
 		$title_arr[]=_('Date');
 		$title_arr[]=_('Previous Version');
 		$title_arr[]=_('Current Version');

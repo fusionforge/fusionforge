@@ -70,7 +70,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 			// No documents
 			echo '<div class="warning">'._('This Project Has Not Published Any Documents').'</div>';
 		} else {
-			$tabletop = array(_('Date'), _('Filename'), _('Title'), _('Author'));
+			$tabletop = array(_('Date'), _('File Name'), _('Title'), _('Author'));
 			if (session_loggedin() && (user_ismember($group_id) ||
 			    forge_check_global_perm('forge_admin'))) {
 				$tabletop[] = _('Status');

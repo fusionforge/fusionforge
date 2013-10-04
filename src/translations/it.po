@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 14:18+0200\n"
+"POT-Creation-Date: 2013-10-04 14:37+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -893,10 +893,15 @@ msgstr ""
 msgid "You need first to upload file in %s"
 msgstr "Devi essere loggato"
 
-#: common/docman/views/addfile.php:165
+#: common/docman/views/addfile.php:165 common/docman/views/listfile.php:219
+#: common/docman/views/listtrashfile.php:130
+#: common/docman/views/pendingfiles.php:63
+#: common/widget/Widget_ProjectLatestDocuments.class.php:73
+#: plugins/cvstracker/common/cvstrackerPlugin.class.php:108
 #: plugins/mantisbt/view/viewAttachment.php:49
+#: plugins/scmhook/library/scmsvn/commitTracker.class.php:133
 #: www/frs/admin/editrelease.php:292 www/frs/admin/editrelease.php:346
-#: www/frs/admin/qrs.php:191
+#: www/frs/admin/qrs.php:191 www/frs/index.php:207
 msgid "File Name"
 msgstr "Nome file"
 
@@ -1171,16 +1176,6 @@ msgstr "Tieni sotto controllo questo package"
 #: common/docman/views/listtrashfile.php:130
 msgid "Select / Deselect all documents for massaction"
 msgstr ""
-
-#: common/docman/views/listfile.php:219
-#: common/docman/views/listtrashfile.php:130
-#: common/docman/views/pendingfiles.php:63
-#: common/widget/Widget_ProjectLatestDocuments.class.php:73
-#: plugins/cvstracker/common/cvstrackerPlugin.class.php:108
-#: plugins/scmhook/library/scmsvn/commitTracker.class.php:133
-#: www/frs/index.php:207
-msgid "Filename"
-msgstr "Nome file"
 
 #: common/docman/views/listfile.php:219
 #: common/docman/views/listtrashfile.php:130
@@ -23475,6 +23470,9 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#~ msgid "Filename"
+#~ msgstr "Nome file"
 
 #~ msgid "Subject:"
 #~ msgstr "Oggetto:"

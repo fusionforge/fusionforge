@@ -127,7 +127,7 @@ if ($DocGroupName) {
 }
 
 if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
-	$tabletop = array('<input id="checkallactive" title="'._('Select / Deselect all documents for massaction').'" class="tabtitle-w" type="checkbox" onchange="controllerListTrash.checkAll(\'checkeddocidactive\', \'active\')" />', '', _('Filename'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
+	$tabletop = array('<input id="checkallactive" title="'._('Select / Deselect all documents for massaction').'" class="tabtitle-w" type="checkbox" onchange="controllerListTrash.checkAll(\'checkeddocidactive\', \'active\')" />', '', _('File Name'), _('Title'), _('Description'), _('Author'), _('Last time'), _('Status'), _('Size'), _('Actions'));
 	$classth = array('unsortable', 'unsortable', '', '', '', '', '', '', '', 'unsortable');
 	echo '<div class="docmanDiv">';
 	echo $HTML->listTableTop($tabletop, false, 'sortable_docman_listfile', 'sortable', $classth);
