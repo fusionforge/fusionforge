@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 14:37+0200\n"
+"POT-Creation-Date: 2013-10-04 14:53+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2606,15 +2606,9 @@ msgstr "Unix Group Name:"
 msgid "Invalid FRS Release Object"
 msgstr ""
 
-#: common/frs/FRSFile.class.php:121 common/frs/include/frs_utils.php:249
-msgid "FRSFile Name Must Be At Least 3 Characters"
-msgstr "파일명은 3글자 이상이어야 합니다."
-
-#: common/frs/FRSFile.class.php:125
-msgid ""
-"Filename can only be alphanumeric and \"-\" \"_\" \"+\" \".\" \"~\" "
-"characters."
-msgstr ""
+#: common/frs/FRSFile.class.php:121 common/include/account.php:66
+msgid "Name is too short. It must be at least 3 characters."
+msgstr "ID가 너무 짧습니다. 3글자 이상이어야 합니다."
 
 #: common/frs/FRSFile.class.php:135
 msgid "FRSFile Appears to be invalid"
@@ -2830,6 +2824,10 @@ msgstr ""
 msgid "Must select a file."
 msgstr "파일을 선택하셔야 합니다."
 
+#: common/frs/include/frs_utils.php:249
+msgid "Le nom est trop court. Il doit compter au moins 3 caractères."
+msgstr ""
+
 #: common/frs/include/frs_utils.php:257 www/frs/admin/editrelease.php:182
 #: www/frs/admin/editrelease.php:199
 #, fuzzy
@@ -2853,10 +2851,6 @@ msgstr "비밀번호는 적어도 6글자 이상이어야 합니다."
 #: common/include/account.php:60
 msgid "There cannot be any spaces in the login name."
 msgstr "ID에 공백이 들어가면 안됩니다."
-
-#: common/include/account.php:66
-msgid "Name is too short. It must be at least 3 characters."
-msgstr "ID가 너무 짧습니다. 3글자 이상이어야 합니다."
 
 #: common/include/account.php:70
 msgid "Name is too long. It must be less than 15 characters."
@@ -23188,6 +23182,9 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#~ msgid "FRSFile Name Must Be At Least 3 Characters"
+#~ msgstr "파일명은 3글자 이상이어야 합니다."
 
 #~ msgid "Filename"
 #~ msgstr "파일명"

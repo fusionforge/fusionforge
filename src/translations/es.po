@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 14:37+0200\n"
+"POT-Creation-Date: 2013-10-04 14:53+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -2548,17 +2548,9 @@ msgstr "Nombre Unix del Grupo:"
 msgid "Invalid FRS Release Object"
 msgstr "Encuesta inválida"
 
-#: common/frs/FRSFile.class.php:121 common/frs/include/frs_utils.php:249
-msgid "FRSFile Name Must Be At Least 3 Characters"
-msgstr "FRSFile El nombre debe contener al menos 3 caracteres"
-
-#: common/frs/FRSFile.class.php:125
-msgid ""
-"Filename can only be alphanumeric and \"-\" \"_\" \"+\" \".\" \"~\" "
-"characters."
-msgstr ""
-"El nombre del archivo sólo puede contener caracteres alfanuméricos y los "
-"siguientes caracteres \"-\", \"_\", \".\"."
+#: common/frs/FRSFile.class.php:121 common/include/account.php:66
+msgid "Name is too short. It must be at least 3 characters."
+msgstr "Debe proporcionar un nombre válido (por lo menos seis carácteres)."
 
 #: common/frs/FRSFile.class.php:135
 msgid "FRSFile Appears to be invalid"
@@ -2778,6 +2770,10 @@ msgstr "Error desconocido en el envío de fichero."
 msgid "Must select a file."
 msgstr "Debe elegir un fichero."
 
+#: common/frs/include/frs_utils.php:249
+msgid "Le nom est trop court. Il doit compter au moins 3 caractères."
+msgstr ""
+
 #: common/frs/include/frs_utils.php:257 www/frs/admin/editrelease.php:182
 #: www/frs/admin/editrelease.php:199
 msgid "Could Not Get FRSFile"
@@ -2800,10 +2796,6 @@ msgstr ""
 #: common/include/account.php:60
 msgid "There cannot be any spaces in the login name."
 msgstr "No se permiten los espacios en el nombre de la cuenta."
-
-#: common/include/account.php:66
-msgid "Name is too short. It must be at least 3 characters."
-msgstr "Debe proporcionar un nombre válido (por lo menos seis carácteres)."
 
 #: common/include/account.php:70
 msgid "Name is too long. It must be less than 15 characters."
@@ -23002,6 +22994,16 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "FRSFile Name Must Be At Least 3 Characters"
+#~ msgstr "FRSFile El nombre debe contener al menos 3 caracteres"
+
+#~ msgid ""
+#~ "Filename can only be alphanumeric and \"-\" \"_\" \"+\" \".\" \"~\" "
+#~ "characters."
+#~ msgstr ""
+#~ "El nombre del archivo sólo puede contener caracteres alfanuméricos y los "
+#~ "siguientes caracteres \"-\", \"_\", \".\"."
 
 #~ msgid "Filename"
 #~ msgstr "Nombre del Fichero"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 14:37+0200\n"
+"POT-Creation-Date: 2013-10-04 14:53+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2594,14 +2594,8 @@ msgstr "Невалиден UNIX идентификатор."
 msgid "Invalid FRS Release Object"
 msgstr "Невалидно проучване"
 
-#: common/frs/FRSFile.class.php:121 common/frs/include/frs_utils.php:249
-msgid "FRSFile Name Must Be At Least 3 Characters"
-msgstr ""
-
-#: common/frs/FRSFile.class.php:125
-msgid ""
-"Filename can only be alphanumeric and \"-\" \"_\" \"+\" \".\" \"~\" "
-"characters."
+#: common/frs/FRSFile.class.php:121 common/include/account.php:66
+msgid "Name is too short. It must be at least 3 characters."
 msgstr ""
 
 #: common/frs/FRSFile.class.php:135
@@ -2816,6 +2810,10 @@ msgstr ""
 msgid "Must select a file."
 msgstr ""
 
+#: common/frs/include/frs_utils.php:249
+msgid "Le nom est trop court. Il doit compter au moins 3 caractères."
+msgstr ""
+
 #: common/frs/include/frs_utils.php:257 www/frs/admin/editrelease.php:182
 #: www/frs/admin/editrelease.php:199
 #, fuzzy
@@ -2838,10 +2836,6 @@ msgstr ""
 
 #: common/include/account.php:60
 msgid "There cannot be any spaces in the login name."
-msgstr ""
-
-#: common/include/account.php:66
-msgid "Name is too short. It must be at least 3 characters."
 msgstr ""
 
 #: common/include/account.php:70

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 14:37+0200\n"
+"POT-Creation-Date: 2013-10-04 14:53+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2621,16 +2621,9 @@ msgstr "Unix群组名称："
 msgid "Invalid FRS Release Object"
 msgstr "没有有效的问卷对象"
 
-#: common/frs/FRSFile.class.php:121 common/frs/include/frs_utils.php:249
-msgid "FRSFile Name Must Be At Least 3 Characters"
-msgstr "文件发布系统规定文件名称必须至少3个字节"
-
-#: common/frs/FRSFile.class.php:125
-#, fuzzy
-msgid ""
-"Filename can only be alphanumeric and \"-\" \"_\" \"+\" \".\" \"~\" "
-"characters."
-msgstr "文件名只能是字符和\"-\"\"_\"\".\"。"
+#: common/frs/FRSFile.class.php:121 common/include/account.php:66
+msgid "Name is too short. It must be at least 3 characters."
+msgstr "名称太短，至少要三个字节"
 
 #: common/frs/FRSFile.class.php:135
 msgid "FRSFile Appears to be invalid"
@@ -2855,6 +2848,10 @@ msgstr "文件上传错误"
 msgid "Must select a file."
 msgstr "必须选择一个文件"
 
+#: common/frs/include/frs_utils.php:249
+msgid "Le nom est trop court. Il doit compter au moins 3 caractères."
+msgstr ""
+
 #: common/frs/include/frs_utils.php:257 www/frs/admin/editrelease.php:182
 #: www/frs/admin/editrelease.php:199
 #, fuzzy
@@ -2878,10 +2875,6 @@ msgstr "密码至少要6个字节"
 #: common/include/account.php:60
 msgid "There cannot be any spaces in the login name."
 msgstr "帐号不能够使用任何空白"
-
-#: common/include/account.php:66
-msgid "Name is too short. It must be at least 3 characters."
-msgstr "名称太短，至少要三个字节"
 
 #: common/include/account.php:70
 msgid "Name is too long. It must be less than 15 characters."
@@ -23250,6 +23243,15 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#~ msgid "FRSFile Name Must Be At Least 3 Characters"
+#~ msgstr "文件发布系统规定文件名称必须至少3个字节"
+
+#, fuzzy
+#~ msgid ""
+#~ "Filename can only be alphanumeric and \"-\" \"_\" \"+\" \".\" \"~\" "
+#~ "characters."
+#~ msgstr "文件名只能是字符和\"-\"\"_\"\".\"。"
 
 #~ msgid "Filename"
 #~ msgstr "文件名称"

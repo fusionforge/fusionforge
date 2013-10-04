@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 14:37+0200\n"
+"POT-Creation-Date: 2013-10-04 14:53+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2461,15 +2461,9 @@ msgstr "Operação inválida"
 msgid "Invalid FRS Release Object"
 msgstr ""
 
-#: common/frs/FRSFile.class.php:121 common/frs/include/frs_utils.php:249
-msgid "FRSFile Name Must Be At Least 3 Characters"
-msgstr "Nome do FRSFile Deveria Ter Pelo Menos 3 Caracteres"
-
-#: common/frs/FRSFile.class.php:125
-msgid ""
-"Filename can only be alphanumeric and \"-\" \"_\" \"+\" \".\" \"~\" "
-"characters."
-msgstr ""
+#: common/frs/FRSFile.class.php:121 common/include/account.php:66
+msgid "Name is too short. It must be at least 3 characters."
+msgstr "O nome é muito curto. Ele precisa ter pelo menos 3 caracteres."
 
 #: common/frs/FRSFile.class.php:135
 msgid "FRSFile Appears to be invalid"
@@ -2676,6 +2670,10 @@ msgstr ""
 msgid "Must select a file."
 msgstr "Precisa escolher um arquivo."
 
+#: common/frs/include/frs_utils.php:249
+msgid "Le nom est trop court. Il doit compter au moins 3 caractères."
+msgstr ""
+
 #: common/frs/include/frs_utils.php:257 www/frs/admin/editrelease.php:182
 #: www/frs/admin/editrelease.php:199
 msgid "Could Not Get FRSFile"
@@ -2697,10 +2695,6 @@ msgstr "A senha precisa ter pelo menos 6 caracteres."
 #: common/include/account.php:60
 msgid "There cannot be any spaces in the login name."
 msgstr "Não pode haver nenhum espaço no nome de login."
-
-#: common/include/account.php:66
-msgid "Name is too short. It must be at least 3 characters."
-msgstr "O nome é muito curto. Ele precisa ter pelo menos 3 caracteres."
 
 #: common/include/account.php:70
 msgid "Name is too long. It must be less than 15 characters."
@@ -21750,6 +21744,9 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Minha Página Pessoal"
+
+#~ msgid "FRSFile Name Must Be At Least 3 Characters"
+#~ msgstr "Nome do FRSFile Deveria Ter Pelo Menos 3 Caracteres"
 
 #~ msgid "Filename"
 #~ msgstr "Nome do arquivo"

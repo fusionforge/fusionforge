@@ -246,7 +246,7 @@ function frs_add_file_from_form ($release, $type_id, $processor_id, $release_dat
 
 	if ($filechecks) {
 		if (strlen($fname) < 3)
-			exit_error('Error',_('FRSFile Name Must Be At Least 3 Characters'));
+			exit_error('Error',_('Le nom est trop court. Il doit compter au moins 3 caractères.'));
 		if (!$move) {
 			$tmp = tempnam ('', '') ;
 			copy ($infile, $tmp) ;

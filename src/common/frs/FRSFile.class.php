@@ -118,19 +118,19 @@ class FRSFile extends Error {
 	 */
 	function create($name,$file_location,$type_id,$processor_id,$release_time=false) {
 		if (strlen($name) < 3) {
-			$this->setError(_('FRSFile Name Must Be At Least 3 Characters'));
+			$this->setError(_('Name is too short. It must be at least 3 characters.'));'));
 			return false;
 		}
 		if (!util_is_valid_filename($name)) {
-			$this->setError(_('Filename can only be alphanumeric and "-" "_" "+" "." "~" characters.'));
+			$this->setError(_('Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters.'));
 			return false;
 		}
-//
-//	Can't really use is_uploaded_file() or move_uploaded_file()
-//	since we want this to be generalized code
-//	This is potentially exploitable if you do not validate
-//	before calling this function
-//
+		//
+		//	Can't really use is_uploaded_file() or move_uploaded_file()
+		//	since we want this to be generalized code
+		//	This is potentially exploitable if you do not validate
+		//	before calling this function
+		//
 		if (!is_file($file_location) || !file_exists($file_location)) {
 			$this->setError(_('FRSFile Appears to be invalid'));
 			return false;

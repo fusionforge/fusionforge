@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 14:37+0200\n"
+"POT-Creation-Date: 2013-10-04 14:53+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -2627,18 +2627,9 @@ msgstr "A operación non é válida"
 msgid "Invalid FRS Release Object"
 msgstr "A enquisa non é válida"
 
-#: common/frs/FRSFile.class.php:121 common/frs/include/frs_utils.php:249
-msgid "FRSFile Name Must Be At Least 3 Characters"
-msgstr "O nome de ficheiro de FRSFile debe ter, cando menos, 3 caracteres "
-
-#: common/frs/FRSFile.class.php:125
-#, fuzzy
-msgid ""
-"Filename can only be alphanumeric and \"-\" \"_\" \"+\" \".\" \"~\" "
-"characters."
-msgstr ""
-"O nome do ficheiro só pode conter caracteres alfanuméricos e \"-\" \"_\" \"."
-"\" ."
+#: common/frs/FRSFile.class.php:121 common/include/account.php:66
+msgid "Name is too short. It must be at least 3 characters."
+msgstr "O nome é moi curto. Debe ter, como mínimo, 3 caracteres. "
 
 #: common/frs/FRSFile.class.php:135
 msgid "FRSFile Appears to be invalid"
@@ -2859,6 +2850,10 @@ msgstr "Produciuse un erro descoñecido no envío do ficheiro."
 msgid "Must select a file."
 msgstr "Debe seleccionar un ficheiro. "
 
+#: common/frs/include/frs_utils.php:249
+msgid "Le nom est trop court. Il doit compter au moins 3 caractères."
+msgstr ""
+
 #: common/frs/include/frs_utils.php:257 www/frs/admin/editrelease.php:182
 #: www/frs/admin/editrelease.php:199
 #, fuzzy
@@ -2882,10 +2877,6 @@ msgstr "O contrasinal debe ter, cando menos, 6 caracteres. "
 #: common/include/account.php:60
 msgid "There cannot be any spaces in the login name."
 msgstr "Non pode haber ningún espazo no nome de rexistro."
-
-#: common/include/account.php:66
-msgid "Name is too short. It must be at least 3 characters."
-msgstr "O nome é moi curto. Debe ter, como mínimo, 3 caracteres. "
 
 #: common/include/account.php:70
 msgid "Name is too long. It must be less than 15 characters."
@@ -23653,6 +23644,17 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#~ msgid "FRSFile Name Must Be At Least 3 Characters"
+#~ msgstr "O nome de ficheiro de FRSFile debe ter, cando menos, 3 caracteres "
+
+#, fuzzy
+#~ msgid ""
+#~ "Filename can only be alphanumeric and \"-\" \"_\" \"+\" \".\" \"~\" "
+#~ "characters."
+#~ msgstr ""
+#~ "O nome do ficheiro só pode conter caracteres alfanuméricos e \"-\" \"_\" "
+#~ "\".\" ."
 
 #~ msgid "Filename"
 #~ msgstr "Nome de ficheiro "
