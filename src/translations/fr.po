@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 19:57+0200\n"
+"POT-Creation-Date: 2013-10-04 12:55+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -392,10 +392,11 @@ msgstr "Projet"
 #: common/forum/Forum.class.php:633 common/forum/Forum.class.php:641
 #: common/forum/Forum.class.php:649 common/forum/Forum.class.php:657
 #: common/forum/Forum.class.php:665 common/forum/Forum.class.php:673
-#: common/forum/ForumHTML.class.php:73 common/forum/ForumHTML.class.php:211
-#: common/include/Error.class.php:207 common/include/exit.php:80
-#: common/include/User.class.php:348 common/include/User.class.php:1407
-#: common/mail/MailingList.class.php:174
+#: common/forum/ForumHTML.class.php:68 common/forum/ForumHTML.class.php:69
+#: common/forum/ForumHTML.class.php:70 common/forum/ForumHTML.class.php:73
+#: common/forum/ForumHTML.class.php:211 common/include/Error.class.php:207
+#: common/include/exit.php:80 common/include/User.class.php:348
+#: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
 #: common/tracker/actions/browse.php:407 common/tracker/actions/mod.php:147
@@ -2201,9 +2202,9 @@ msgstr "Fil de discussion non trouvé"
 msgid "Forum: "
 msgstr "Forum : "
 
-#: common/forum/ForumHTML.class.php:68
-msgid "Posted by:"
-msgstr "Publié par :"
+#: common/forum/ForumHTML.class.php:68 www/export/rssAboTask.php:171
+msgid "Posted by"
+msgstr "Posté par"
 
 #: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:379
 #: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:554
@@ -2306,11 +2307,11 @@ msgstr "Fichier à publier"
 msgid "Warning: Uploaded file will replace current file"
 msgstr "Attention : le fichier actuel sera supprimé de manière permanente."
 
-#: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:592
+#: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:597
 msgid "Subject:"
 msgstr "Sujet :"
 
-#: common/forum/ForumHTML.class.php:530 common/forum/ForumHTML.class.php:595
+#: common/forum/ForumHTML.class.php:530 common/forum/ForumHTML.class.php:600
 msgid "Message:"
 msgstr "Message :"
 
@@ -2336,11 +2337,11 @@ msgstr "Message :"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: common/forum/ForumHTML.class.php:612
+#: common/forum/ForumHTML.class.php:617
 msgid "HTML tags will display in your post as text"
 msgstr "Les balises HTML de votre message seront affichées comme du texte."
 
-#: common/forum/ForumHTML.class.php:619
+#: common/forum/ForumHTML.class.php:624
 #, php-format
 msgid ""
 "You are posting anonymously because you are not <a href=\"%1$s\">logged in</"
@@ -2349,24 +2350,24 @@ msgstr ""
 "Vous ajoutez un message anonyme car vous n'êtes pas <a href=\"%1$s"
 "\">identifié</a>"
 
-#: common/forum/ForumHTML.class.php:623
+#: common/forum/ForumHTML.class.php:628
 msgid "Post Comment"
 msgstr "Ajouter un commentaire"
 
-#: common/forum/ForumHTML.class.php:623
+#: common/forum/ForumHTML.class.php:628
 msgid "Anonymously"
 msgstr "de manière anonyme"
 
-#: common/forum/ForumHTML.class.php:624
+#: common/forum/ForumHTML.class.php:629
 msgid "Receive followups via email"
 msgstr "Recevoir les réponses par e-mail"
 
-#: common/forum/ForumHTML.class.php:636
+#: common/forum/ForumHTML.class.php:641
 #, php-format
 msgid "You could post if you were <a href=\"%1$s\">logged in</a>."
 msgstr "Vous pourriez répondre si vous étiez <a href=\"%1$s\">identifié</a>."
 
-#: common/forum/ForumHTML.class.php:640
+#: common/forum/ForumHTML.class.php:645
 #, php-format
 msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr "Veuillez vous <a href=\"%1$s\">connecter</a>"
@@ -16458,10 +16459,6 @@ msgstr "Commentaire"
 msgid "Updated value"
 msgstr "Nouvelle valeur"
 
-#: www/export/rssAboTask.php:171
-msgid "Posted by"
-msgstr "Posté par"
-
 #: www/export/rssAboTask.php:173
 msgid "Update time"
 msgstr "Date de mise à jour"
@@ -19275,7 +19272,7 @@ msgstr ""
 "Vous êtes sur le point de supprimer irrémédiablement ce sous-projet et "
 "toutes ses données !"
 
-#: www/pm/admin/index.php:411 www/project/admin/tools.php:326
+#: www/pm/admin/index.php:411 www/project/admin/tools.php:327
 msgid "Tasks Administration"
 msgstr "Administration des gestionnaires de tâches"
 
@@ -20489,91 +20486,91 @@ msgstr "Au moins un greffon ne s'est pas initialisé correctement"
 msgid "Tools for %s"
 msgstr "Outils de %s"
 
-#: www/project/admin/tools.php:116
+#: www/project/admin/tools.php:115
 msgid "Active Tools"
 msgstr "Outils actifs"
 
-#: www/project/admin/tools.php:153
+#: www/project/admin/tools.php:152
 msgid "Use Project Activity"
 msgstr "Utiliser l'activité du projet"
 
-#: www/project/admin/tools.php:166
+#: www/project/admin/tools.php:165
 msgid "Use Forums"
 msgstr "Forums"
 
-#: www/project/admin/tools.php:179
+#: www/project/admin/tools.php:178
 msgid "Use Trackers"
 msgstr "Utiliser les outils de suivi"
 
-#: www/project/admin/tools.php:192
+#: www/project/admin/tools.php:191
 msgid "Use Mailing Lists"
 msgstr "Listes de diffusion"
 
-#: www/project/admin/tools.php:205
+#: www/project/admin/tools.php:204
 msgid "Use Tasks"
 msgstr "Utiliser les gestionnaires de tâches"
 
-#: www/project/admin/tools.php:218
+#: www/project/admin/tools.php:217
 msgid "Use Documents"
 msgstr "Utiliser le gestionnaire de documents"
 
-#: www/project/admin/tools.php:231
+#: www/project/admin/tools.php:230
 msgid "Use Surveys"
 msgstr "Sondages"
 
-#: www/project/admin/tools.php:244
+#: www/project/admin/tools.php:243
 msgid "Use News"
 msgstr "Annonces"
 
-#: www/project/admin/tools.php:257
+#: www/project/admin/tools.php:256
 msgid "Use Source Code"
 msgstr "Utiliser le gestionnaire de code source"
 
-#: www/project/admin/tools.php:270
+#: www/project/admin/tools.php:269
 msgid "Use File Release System"
 msgstr "Publication de fichiers (avec version)"
 
-#: www/project/admin/tools.php:283
+#: www/project/admin/tools.php:282
 msgid "Use FTP"
 msgstr "FTP"
 
-#: www/project/admin/tools.php:292
+#: www/project/admin/tools.php:291
 msgid "Use Statistics"
 msgstr "Statistiques"
 
-#: www/project/admin/tools.php:314
+#: www/project/admin/tools.php:315
 msgid "Tool Admin"
 msgstr "La boite à outils de l'administrateur"
 
-#: www/project/admin/tools.php:317
+#: www/project/admin/tools.php:318
 msgid "Forums Admin"
 msgstr "Administration des forums"
 
-#: www/project/admin/tools.php:320
+#: www/project/admin/tools.php:321
 msgid "Trackers Admin"
 msgstr "Administration des outils de suivi"
 
-#: www/project/admin/tools.php:323
+#: www/project/admin/tools.php:324
 msgid "Mailing Lists Admin"
 msgstr "Administration des listes de diffusion"
 
-#: www/project/admin/tools.php:329
+#: www/project/admin/tools.php:330
 msgid "Documents Admin"
 msgstr "Administration du gestionnaire de documents"
 
-#: www/project/admin/tools.php:332
+#: www/project/admin/tools.php:333
 msgid "Survey Admin"
 msgstr "Administration des sondages"
 
-#: www/project/admin/tools.php:335
+#: www/project/admin/tools.php:336
 msgid "News Admin"
 msgstr "Administration des annonces"
 
-#: www/project/admin/tools.php:338
+#: www/project/admin/tools.php:339
 msgid "Source Code Admin"
 msgstr "Administration du gestionnaire de code source"
 
-#: www/project/admin/tools.php:341
+#: www/project/admin/tools.php:342
 msgid "File Release System Admin"
 msgstr "Administration du système de publication de fichiers"
 
@@ -23016,6 +23013,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Posted by:"
+#~ msgstr "Publié par :"
 
 #~ msgid "Error: User does not exist"
 #~ msgstr "Erreur : cet utilisateur n'existe pas"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 19:57+0200\n"
+"POT-Creation-Date: 2013-10-04 12:55+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -426,10 +426,11 @@ msgstr ""
 #: common/forum/Forum.class.php:633 common/forum/Forum.class.php:641
 #: common/forum/Forum.class.php:649 common/forum/Forum.class.php:657
 #: common/forum/Forum.class.php:665 common/forum/Forum.class.php:673
-#: common/forum/ForumHTML.class.php:73 common/forum/ForumHTML.class.php:211
-#: common/include/Error.class.php:207 common/include/exit.php:80
-#: common/include/User.class.php:348 common/include/User.class.php:1407
-#: common/mail/MailingList.class.php:174
+#: common/forum/ForumHTML.class.php:68 common/forum/ForumHTML.class.php:69
+#: common/forum/ForumHTML.class.php:70 common/forum/ForumHTML.class.php:73
+#: common/forum/ForumHTML.class.php:211 common/include/Error.class.php:207
+#: common/include/exit.php:80 common/include/User.class.php:348
+#: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
 #: common/tracker/actions/browse.php:407 common/tracker/actions/mod.php:147
@@ -2311,9 +2312,9 @@ msgstr "Trådvy"
 msgid "Forum: "
 msgstr "Forum"
 
-#: common/forum/ForumHTML.class.php:68
+#: common/forum/ForumHTML.class.php:68 www/export/rssAboTask.php:171
 #, fuzzy
-msgid "Posted by:"
+msgid "Posted by"
 msgstr "Posta jobb"
 
 #: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:379
@@ -2416,11 +2417,11 @@ msgstr ""
 msgid "Warning: Uploaded file will replace current file"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:592
+#: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:597
 msgid "Subject:"
 msgstr "Rubrik:"
 
-#: common/forum/ForumHTML.class.php:530 common/forum/ForumHTML.class.php:595
+#: common/forum/ForumHTML.class.php:530 common/forum/ForumHTML.class.php:600
 msgid "Message:"
 msgstr "Inlägg:"
 
@@ -2446,36 +2447,36 @@ msgstr "Inlägg:"
 msgid "Cancel"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:612
+#: common/forum/ForumHTML.class.php:617
 msgid "HTML tags will display in your post as text"
 msgstr "HTML-kod kommer att visas som text i ditt inlägg"
 
-#: common/forum/ForumHTML.class.php:619
+#: common/forum/ForumHTML.class.php:624
 #, fuzzy, php-format
 msgid ""
 "You are posting anonymously because you are not <a href=\"%1$s\">logged in</"
 "a>"
 msgstr "Du skapar inlägg anonymnt eftersom du inte är"
 
-#: common/forum/ForumHTML.class.php:623
+#: common/forum/ForumHTML.class.php:628
 msgid "Post Comment"
 msgstr "Skapa inlägg"
 
-#: common/forum/ForumHTML.class.php:623
+#: common/forum/ForumHTML.class.php:628
 #, fuzzy
 msgid "Anonymously"
 msgstr "Anonymt FTP-utrymme"
 
-#: common/forum/ForumHTML.class.php:624
+#: common/forum/ForumHTML.class.php:629
 msgid "Receive followups via email"
 msgstr "Ta emot svar på ditt inlägg via e-post"
 
-#: common/forum/ForumHTML.class.php:636
+#: common/forum/ForumHTML.class.php:641
 #, fuzzy, php-format
 msgid "You could post if you were <a href=\"%1$s\">logged in</a>."
 msgstr "Du hade kunnat gör ett inlägg om du var %1$s inloggad %2$s"
 
-#: common/forum/ForumHTML.class.php:640
+#: common/forum/ForumHTML.class.php:645
 #, php-format
 msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr ""
@@ -16759,11 +16760,6 @@ msgstr "Kommentar"
 msgid "Updated value"
 msgstr "Uppdaterad dagligen"
 
-#: www/export/rssAboTask.php:171
-#, fuzzy
-msgid "Posted by"
-msgstr "Posta jobb"
-
 #: www/export/rssAboTask.php:173
 #, fuzzy
 msgid "Update time"
@@ -19496,7 +19492,7 @@ msgid ""
 "all its related data!"
 msgstr ""
 
-#: www/pm/admin/index.php:411 www/project/admin/tools.php:326
+#: www/pm/admin/index.php:411 www/project/admin/tools.php:327
 #, fuzzy
 msgid "Tasks Administration"
 msgstr "Administration"
@@ -20731,104 +20727,104 @@ msgstr ""
 msgid "Tools for %s"
 msgstr "Forum för %1$s"
 
-#: www/project/admin/tools.php:116
+#: www/project/admin/tools.php:115
 #, fuzzy
 msgid "Active Tools"
 msgstr "Aktiv"
 
-#: www/project/admin/tools.php:153
+#: www/project/admin/tools.php:152
 #, fuzzy
 msgid "Use Project Activity"
 msgstr "Alla projektadmins"
 
-#: www/project/admin/tools.php:166
+#: www/project/admin/tools.php:165
 msgid "Use Forums"
 msgstr "Använd forum"
 
-#: www/project/admin/tools.php:179
+#: www/project/admin/tools.php:178
 #, fuzzy
 msgid "Use Trackers"
 msgstr "Använd ordningslistor"
 
-#: www/project/admin/tools.php:192
+#: www/project/admin/tools.php:191
 msgid "Use Mailing Lists"
 msgstr "Använd e-postlistor"
 
-#: www/project/admin/tools.php:205
+#: www/project/admin/tools.php:204
 #, fuzzy
 msgid "Use Tasks"
 msgstr "Uppgifter"
 
-#: www/project/admin/tools.php:218
+#: www/project/admin/tools.php:217
 #, fuzzy
 msgid "Use Documents"
 msgstr "Använd forum"
 
-#: www/project/admin/tools.php:231
+#: www/project/admin/tools.php:230
 msgid "Use Surveys"
 msgstr "Använd undersökningar"
 
-#: www/project/admin/tools.php:244
+#: www/project/admin/tools.php:243
 msgid "Use News"
 msgstr "Använd nyheter"
 
-#: www/project/admin/tools.php:257
+#: www/project/admin/tools.php:256
 #, fuzzy
 msgid "Use Source Code"
 msgstr "Source IP"
 
-#: www/project/admin/tools.php:270
+#: www/project/admin/tools.php:269
 msgid "Use File Release System"
 msgstr "Använd filutgåvosystemet"
 
-#: www/project/admin/tools.php:283
+#: www/project/admin/tools.php:282
 msgid "Use FTP"
 msgstr "Använd FTP"
 
-#: www/project/admin/tools.php:292
+#: www/project/admin/tools.php:291
 msgid "Use Statistics"
 msgstr "Använd statistik"
 
-#: www/project/admin/tools.php:314
+#: www/project/admin/tools.php:315
 msgid "Tool Admin"
 msgstr "Verktyg admin"
 
-#: www/project/admin/tools.php:317
+#: www/project/admin/tools.php:318
 #, fuzzy
 msgid "Forums Admin"
 msgstr "Forum admin"
 
-#: www/project/admin/tools.php:320
+#: www/project/admin/tools.php:321
 #, fuzzy
 msgid "Trackers Admin"
 msgstr "Ordningslista admin"
 
-#: www/project/admin/tools.php:323
+#: www/project/admin/tools.php:324
 #, fuzzy
 msgid "Mailing Lists Admin"
 msgstr "Sändlistor"
 
-#: www/project/admin/tools.php:329
+#: www/project/admin/tools.php:330
 #, fuzzy
 msgid "Documents Admin"
 msgstr "Forum admin"
 
-#: www/project/admin/tools.php:332
+#: www/project/admin/tools.php:333
 #, fuzzy
 msgid "Survey Admin"
 msgstr "Administration av undersökning"
 
-#: www/project/admin/tools.php:335
+#: www/project/admin/tools.php:336
 #, fuzzy
 msgid "News Admin"
 msgstr "Nyheter admin"
 
-#: www/project/admin/tools.php:338
+#: www/project/admin/tools.php:339
 #, fuzzy
 msgid "Source Code Admin"
 msgstr "Source IP"
 
-#: www/project/admin/tools.php:341
+#: www/project/admin/tools.php:342
 #, fuzzy
 msgid "File Release System Admin"
 msgstr "Använd filutgåvosystemet"
@@ -23257,6 +23253,10 @@ msgstr "Användarenamn"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
+
+#, fuzzy
+#~ msgid "Posted by:"
+#~ msgstr "Posta jobb"
 
 #, fuzzy
 #~ msgid "Error: User does not exist"

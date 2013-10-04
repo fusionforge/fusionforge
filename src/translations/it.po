@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 19:57+0200\n"
+"POT-Creation-Date: 2013-10-04 12:55+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -427,10 +427,11 @@ msgstr "Progetto"
 #: common/forum/Forum.class.php:633 common/forum/Forum.class.php:641
 #: common/forum/Forum.class.php:649 common/forum/Forum.class.php:657
 #: common/forum/Forum.class.php:665 common/forum/Forum.class.php:673
-#: common/forum/ForumHTML.class.php:73 common/forum/ForumHTML.class.php:211
-#: common/include/Error.class.php:207 common/include/exit.php:80
-#: common/include/User.class.php:348 common/include/User.class.php:1407
-#: common/mail/MailingList.class.php:174
+#: common/forum/ForumHTML.class.php:68 common/forum/ForumHTML.class.php:69
+#: common/forum/ForumHTML.class.php:70 common/forum/ForumHTML.class.php:73
+#: common/forum/ForumHTML.class.php:211 common/include/Error.class.php:207
+#: common/include/exit.php:80 common/include/User.class.php:348
+#: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
 #: common/tracker/actions/browse.php:407 common/tracker/actions/mod.php:147
@@ -2322,9 +2323,9 @@ msgstr "Argomento"
 msgid "Forum: "
 msgstr "Forum"
 
-#: common/forum/ForumHTML.class.php:68
+#: common/forum/ForumHTML.class.php:68 www/export/rssAboTask.php:171
 #, fuzzy
-msgid "Posted by:"
+msgid "Posted by"
 msgstr "Inserito da"
 
 #: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:379
@@ -2429,11 +2430,11 @@ msgstr "File da inserire"
 msgid "Warning: Uploaded file will replace current file"
 msgstr "Attenzione: il file attuale verr&agrave; cancellato in modo permanente"
 
-#: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:592
+#: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:597
 msgid "Subject:"
 msgstr "Oggetto:"
 
-#: common/forum/ForumHTML.class.php:530 common/forum/ForumHTML.class.php:595
+#: common/forum/ForumHTML.class.php:530 common/forum/ForumHTML.class.php:600
 msgid "Message:"
 msgstr "Messaggio:"
 
@@ -2459,36 +2460,36 @@ msgstr "Messaggio:"
 msgid "Cancel"
 msgstr "Annulla"
 
-#: common/forum/ForumHTML.class.php:612
+#: common/forum/ForumHTML.class.php:617
 msgid "HTML tags will display in your post as text"
 msgstr "I Tag HTML verranno visualizzati come testo"
 
-#: common/forum/ForumHTML.class.php:619
+#: common/forum/ForumHTML.class.php:624
 #, fuzzy, php-format
 msgid ""
 "You are posting anonymously because you are not <a href=\"%1$s\">logged in</"
 "a>"
 msgstr "Stai inserendo i messaggi in modalità anonima perché non sei"
 
-#: common/forum/ForumHTML.class.php:623
+#: common/forum/ForumHTML.class.php:628
 msgid "Post Comment"
 msgstr "Invia messaggio"
 
-#: common/forum/ForumHTML.class.php:623
+#: common/forum/ForumHTML.class.php:628
 #, fuzzy
 msgid "Anonymously"
 msgstr "Spazio FTP anonimo"
 
-#: common/forum/ForumHTML.class.php:624
+#: common/forum/ForumHTML.class.php:629
 msgid "Receive followups via email"
 msgstr "Ricevi risposte via email"
 
-#: common/forum/ForumHTML.class.php:636
+#: common/forum/ForumHTML.class.php:641
 #, fuzzy, php-format
 msgid "You could post if you were <a href=\"%1$s\">logged in</a>."
 msgstr "Potresti inviare messaggi se tu fossi %1$s collegato %2$s"
 
-#: common/forum/ForumHTML.class.php:640
+#: common/forum/ForumHTML.class.php:645
 #, php-format
 msgid "Please <a href=\"%1$s\">log in</a>"
 msgstr ""
@@ -16919,11 +16920,6 @@ msgstr "Commento"
 msgid "Updated value"
 msgstr "Aggiornato giornalmente"
 
-#: www/export/rssAboTask.php:171
-#, fuzzy
-msgid "Posted by"
-msgstr "Inserito da"
-
 #: www/export/rssAboTask.php:173
 #, fuzzy
 msgid "Update time"
@@ -19688,7 +19684,7 @@ msgstr ""
 "Stai per rimuovere in modo permanente e irrimediabile questo sottoprogetto e "
 "tutti i dati!"
 
-#: www/pm/admin/index.php:411 www/project/admin/tools.php:326
+#: www/pm/admin/index.php:411 www/project/admin/tools.php:327
 #, fuzzy
 msgid "Tasks Administration"
 msgstr "Amministrazione"
@@ -20933,103 +20929,103 @@ msgstr ""
 msgid "Tools for %s"
 msgstr "Forum per %1$s"
 
-#: www/project/admin/tools.php:116
+#: www/project/admin/tools.php:115
 #, fuzzy
 msgid "Active Tools"
 msgstr "Attivo"
 
-#: www/project/admin/tools.php:153
+#: www/project/admin/tools.php:152
 msgid "Use Project Activity"
 msgstr "Usa Attività del progetto"
 
-#: www/project/admin/tools.php:166
+#: www/project/admin/tools.php:165
 msgid "Use Forums"
 msgstr "Usa Forum"
 
-#: www/project/admin/tools.php:179
+#: www/project/admin/tools.php:178
 #, fuzzy
 msgid "Use Trackers"
 msgstr "Usa Tracker"
 
-#: www/project/admin/tools.php:192
+#: www/project/admin/tools.php:191
 msgid "Use Mailing Lists"
 msgstr "Usa Mailing Lists"
 
-#: www/project/admin/tools.php:205
+#: www/project/admin/tools.php:204
 #, fuzzy
 msgid "Use Tasks"
 msgstr "Attività"
 
-#: www/project/admin/tools.php:218
+#: www/project/admin/tools.php:217
 #, fuzzy
 msgid "Use Documents"
 msgstr "Usa Forum"
 
-#: www/project/admin/tools.php:231
+#: www/project/admin/tools.php:230
 msgid "Use Surveys"
 msgstr "Usa sondaggi"
 
-#: www/project/admin/tools.php:244
+#: www/project/admin/tools.php:243
 msgid "Use News"
 msgstr "Usa News"
 
-#: www/project/admin/tools.php:257
+#: www/project/admin/tools.php:256
 #, fuzzy
 msgid "Use Source Code"
 msgstr "Indirizzo IP"
 
-#: www/project/admin/tools.php:270
+#: www/project/admin/tools.php:269
 msgid "Use File Release System"
 msgstr "Usa il sistema per i rilasci di file"
 
-#: www/project/admin/tools.php:283
+#: www/project/admin/tools.php:282
 msgid "Use FTP"
 msgstr "Usa FTP"
 
-#: www/project/admin/tools.php:292
+#: www/project/admin/tools.php:291
 msgid "Use Statistics"
 msgstr "Usa Statistiche"
 
-#: www/project/admin/tools.php:314
+#: www/project/admin/tools.php:315
 msgid "Tool Admin"
 msgstr "Amministrazione tool"
 
-#: www/project/admin/tools.php:317
+#: www/project/admin/tools.php:318
 #, fuzzy
 msgid "Forums Admin"
 msgstr "Amministrazione Forum"
 
-#: www/project/admin/tools.php:320
+#: www/project/admin/tools.php:321
 #, fuzzy
 msgid "Trackers Admin"
 msgstr "Amministrazione Tracker"
 
-#: www/project/admin/tools.php:323
+#: www/project/admin/tools.php:324
 #, fuzzy
 msgid "Mailing Lists Admin"
 msgstr "Mailing List"
 
-#: www/project/admin/tools.php:329
+#: www/project/admin/tools.php:330
 #, fuzzy
 msgid "Documents Admin"
 msgstr "Amministrazione Forum"
 
-#: www/project/admin/tools.php:332
+#: www/project/admin/tools.php:333
 #, fuzzy
 msgid "Survey Admin"
 msgstr "Amministrazione sondaggi"
 
-#: www/project/admin/tools.php:335
+#: www/project/admin/tools.php:336
 #, fuzzy
 msgid "News Admin"
 msgstr "Amministrazione News"
 
-#: www/project/admin/tools.php:338
+#: www/project/admin/tools.php:339
 #, fuzzy
 msgid "Source Code Admin"
 msgstr "Indirizzo IP"
 
-#: www/project/admin/tools.php:341
+#: www/project/admin/tools.php:342
 #, fuzzy
 msgid "File Release System Admin"
 msgstr "Usa il sistema per i rilasci di file"
@@ -23478,6 +23474,10 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "Posted by:"
+#~ msgstr "Inserito da"
 
 #, fuzzy
 #~ msgid "Error: User does not exist"

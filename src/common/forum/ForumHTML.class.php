@@ -65,9 +65,9 @@ function forum_header($params) {
 				exit_no_group();
 			}
 			echo '<p>
-				<strong>'._('Posted by:').'</strong> '.$user->getRealName().'<br />
-				<strong>'._('Date').':</strong> '. relative_date(db_result($result,0,'post_date')).'<br />
-				<strong>'._('Summary').':</strong>'.
+				<strong>'._('Posted by')._(': ').'</strong> '.$user->getRealName().'<br />
+				<strong>'._('Date')._(': ').'</strong> '. relative_date(db_result($result,0,'post_date')).'<br />
+				<strong>'._('Summary')._(': ').'</strong>'.
 				util_make_link('/forum/forum.php?forum_id='.db_result($result, 0, 'forum_id').'&amp;group_id='.$group_id,
 						db_result($result, 0, 'summary')).'<br/>
 				<strong>'._('Project')._(': ').'</strong>'.
@@ -563,8 +563,13 @@ class ForumHTML extends Error {
 }
 }
 
-function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
-	global $group_id;
+	/**
+	 * @param int $thread_id
+	 * @param int $is_followup_to
+	 * @param string $subject
+	 */
+	function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
+		global $group_id;
 
 	$body = '';
 
@@ -631,18 +636,18 @@ function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 </div>
 			<?php
 
-} elseif ($rl->hasPermission('forum', $this->Forum->getID(), 'post')) {
-	echo '<span class="error">';
+		} elseif ($rl->hasPermission('forum', $this->Forum->getID(), 'post')) {
+			echo '<span class="error">';
 			printf(_('You could post if you were <a href="%1$s">logged in</a>.'), util_make_uri('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
-	echo '</span>';
-} elseif (!session_loggedin()) {
-	echo '<span class="error">';
+			echo '</span>';
+		} elseif (!session_loggedin()) {
+			echo '<span class="error">';
 			printf(_('Please <a href="%1$s">log in</a>'), util_make_uri('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))));
-	echo '</span><br/></p>';
-} else {
-	//do nothing
-}
-}
+			echo '</span><br/></p>';
+		} else {
+			//do nothing
+		}
+	}
 }
 // Local Variables:
 // mode: php
