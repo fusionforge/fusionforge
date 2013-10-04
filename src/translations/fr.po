@@ -709,8 +709,8 @@ msgid ""
 "Refers to the relatively brief title of the document (e.g. How to use the "
 "download server)."
 msgstr ""
-"Se rapporte au titre (relativement bref) du document (par exemple : Comment "
-"utiliser le serveur de téléchargement)."
+"Titre court du document (par exemple : « Comment utiliser le serveur de téléchargement "
+"»)."
 
 #: common/docman/views/addfile.php:92 common/docman/views/addfile.php:108
 #: common/docman/views/editfile.php:42 common/docman/views/listfile.php:219
@@ -771,7 +771,7 @@ msgstr "Description"
 
 #: common/docman/views/addfile.php:92
 msgid "A brief description to be placed just under the title."
-msgstr "Une brève description, affichée sous le titre."
+msgstr "Une courte description placée sous le titre."
 
 #: common/docman/views/addfile.php:94
 msgid "Both fields are used by the document search engine."
@@ -780,11 +780,11 @@ msgstr "Les deux champs sont utilisés lors de la recherche de documents."
 #: common/docman/views/addfile.php:103 common/docman/views/addfile.php:111
 #, php-format
 msgid "(at least %1$s characters)"
-msgstr "(%1$s caractères minimum)."
+msgstr "(%1$s caractères minimum)"
 
 #: common/docman/views/addfile.php:116
 msgid "Type of Document"
-msgstr "Type de document"
+msgstr "Type du document"
 
 #: common/docman/views/addfile.php:118 common/docman/views/addfile.php:144
 #: common/docman/views/editfile.php:51
@@ -821,13 +821,13 @@ msgstr "Créer en ligne"
 #: common/docman/views/addfile.php:130
 #: plugins/mantisbt/view/addAttachment.php:34
 msgid "Upload File"
-msgstr "Télécharger vers le serveur"
+msgstr "Importer un fichier"
 
 #: common/docman/views/addfile.php:132 common/docman/views/additem.php:85
 #: common/docman/views/editfile.php:81
 #, php-format
 msgid "(max upload size: %1$s)"
-msgstr "(taille maximale d'upload: %1$s)"
+msgstr "(taille maximale pour l'import : %1$s)"
 
 #: common/docman/views/addfile.php:151
 #, php-format
@@ -1037,7 +1037,7 @@ msgstr "La navigation des documents est également possible par WebDAV."
 
 #: common/docman/views/help.php:39
 msgid "Direct Webdav URL"
-msgstr "Accès direct par WebDAV"
+msgstr "URL directe du Webdav"
 
 #: common/docman/views/listfile.php:112
 #: common/docman/views/listtrashfile.php:73
@@ -1318,7 +1318,7 @@ msgstr "Modifier ce document"
 
 #: common/docman/views/listfile.php:329
 msgid "Reserve this document for later edition"
-msgstr "Réserver ce document pour une édition ultérieure"
+msgstr "Réserver ce document pour modification ultérieure"
 
 #: common/docman/views/listfile.php:329
 msgid "Reserve this document"
@@ -1326,19 +1326,19 @@ msgstr "Réserver ce document"
 
 #: common/docman/views/listfile.php:334
 msgid "Enforce reservation"
-msgstr "Appliquer la réservation"
+msgstr "Forcer la réservation"
 
 #: common/docman/views/listfile.php:339 common/docman/views/listfile.php:366
 msgid "Release reservation"
-msgstr "Annnuler la réservation"
+msgstr "Annuler la réservation"
 
 #: common/docman/views/listfile.php:345
 msgid "Stop monitoring this document"
-msgstr "Arrêter de surveiller ce document"
+msgstr "Ne plus surveiller ce document"
 
 #: common/docman/views/listfile.php:348
 msgid "Start monitoring this document"
-msgstr "Démarrer la surveillance de ce document"
+msgstr "Surveiller ce document"
 
 #: common/docman/views/listfile.php:359
 #: common/docman/views/listtrashfile.php:200
@@ -1356,7 +1356,7 @@ msgstr "Actions en attente sur les documents sélectionnés :"
 
 #: common/docman/views/listfile.php:363
 msgid "Move to trash"
-msgstr "Déplacer vers la corbeille"
+msgstr "Mettre à la corbeille"
 
 #: common/docman/views/listfile.php:365
 msgid "Reserve for later edition"
@@ -1368,7 +1368,7 @@ msgstr "Réserver"
 
 #: common/docman/views/listfile.php:367
 msgid "Start monitoring"
-msgstr "Démarrer la surveillance"
+msgstr "Surveiller"
 
 #: common/docman/views/listfile.php:368
 #: common/widget/Widget_MyMonitoredForums.class.php:125
@@ -1379,12 +1379,12 @@ msgstr "Arrêter la surveillance"
 #: common/docman/views/listtrashfile.php:204
 #: common/docman/views/pendingfiles.php:138
 msgid "Download as a ZIP"
-msgstr "Télécharger un fichier ZIP"
+msgstr "Télécharger comme ZIP"
 
 #: common/docman/views/listfile.php:377
 #: common/docman/views/listtrashfile.php:210
 msgid "No documents."
-msgstr "Aucun document"
+msgstr "Aucun document."
 
 #: common/docman/views/listfile.php:392
 msgid "Documents are also available thru webdav access"
@@ -1392,8 +1392,7 @@ msgstr "La navigation dans les documents est aussi disponible par le Webdav"
 
 #: common/docman/views/listtrashfile.php:108
 msgid "Delete permanently all documents and folders with deleted status."
-msgstr ""
-"Détruire de manière irrémédiable tous les documents au statut « supprimé »."
+msgstr "Supprimer définitivement les dossiers et documents de la corbeille."
 
 #: common/docman/views/listtrashfile.php:120
 msgid "Delete permanently this folder and his content."
