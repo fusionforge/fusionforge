@@ -52,7 +52,7 @@ class Widget_MyMonitoredFp extends Widget {
         $result=db_query_params($sql,array($frsrf->STATUS_DELETED,user_getid()));
         $rows=db_numrows($result);
         if (!$result || $rows < 1) {
-            $html_my_monitored_fp .= '<p><b>' . _("You are not monitoring any files") . '</b></p><p>' . _("If you monitor files, you will be sent new release notices via email, with a link to the new file on our download server.") . '</p><p>' . _("You can monitor files by visiting a project's &quot;Summary Page&quot; and clicking on the appropriate icon in the files section.") . '</p>';
+            $html_my_monitored_fp .= '<p><b>' . _("You are not monitoring any files.") . '</b></p><p>' . _("If you monitor files, you will be sent new release notices via email, with a link to the new file on our download server.") . '</p><p>' . _("You can monitor files by visiting a project's “Summary Page” and clicking on the appropriate icon in the files section.") . '</p>';
         } else {
             $html_my_monitored_fp .= '<table style="width:100%">';
             $request =& HTTPRequest::instance();
@@ -89,7 +89,7 @@ class Widget_MyMonitoredFp extends Widget {
 
                 $html_hdr = '<tr class="boxitem"><td colspan="2">'.
                     $hide_url.'<a href="/project/?group_id='.$group_id.'">'.
-                    db_result($result,$j,'group_name').'</a>    ';
+                    db_result($result,$j,'group_name').'</a> ';
 
                 $html = '';
                 $count_new = max(0, $count_diff);
@@ -103,7 +103,7 @@ class Widget_MyMonitoredFp extends Widget {
                             db_result($result2,$i,'filemodule_id').
                             '" onClick="return confirm(\''._("Stop Monitoring this Package?").'\')">'.
                             '<img src="'.util_get_image_theme("ic/trash.png").'" height="16" width="16" '.
-                            'border="0" alt="'._("STOP MONITORING").'" /></a></td></tr>';
+                            'border="0" alt="'._("Stop Monitoring").'" /></a></td></tr>';
                     }
                 }
 
@@ -119,7 +119,9 @@ class Widget_MyMonitoredFp extends Widget {
         return 'frs';
     }
     function getDescription() {
-        return _("List packages that you are currently monitoring, by project.<br />To cancel any of the monitored items just click on the trash icon next to the item label.");
+        return _("List packages that you are currently monitoring, by project.")
+             . '<br />'
+             . _("To cancel any of the monitored items just click on the trash icon next to the item label.");
     }
     function isAjax() {
         return true;
