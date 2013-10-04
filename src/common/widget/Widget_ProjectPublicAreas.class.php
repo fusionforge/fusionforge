@@ -32,7 +32,7 @@ class Widget_ProjectPublicAreas extends Widget {
 	}
 
 	function getTitle() {
-		return _('Public Areas');
+		return _('Public Tools');
 	}
 
 	function getContent() {
@@ -108,7 +108,7 @@ class Widget_ProjectPublicAreas extends Widget {
 			foreach ($f_arr as $f) {
 				$messages_count += $f->getMessageCount();
 			}
-			
+
 			$link_content = $HTML->getForumPic('') . ' ' . _('Public Forums');
 			echo util_make_link ( '/forum/?group_id=' . $group_id, $link_content);
 			print ' (';
@@ -150,7 +150,7 @@ class Widget_ProjectPublicAreas extends Widget {
 
 			$pgf = new ProjectGroupFactory ($project);
 			$pgs = $pgf->getProjectGroups();
-			
+
 			if (count($pgs) < 1) {
 				echo "<br />\n<em>"._('There are no subprojects available').'</em>';
 			} else {
