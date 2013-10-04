@@ -6828,7 +6828,7 @@ msgstr ""
 #: common/tracker/views/form-updateextrafield.php:30
 #, php-format
 msgid "Modify a custom field in %s"
-msgstr "Modifuer un champ supplémentaire pour %s"
+msgstr "Modifier un champ supplémentaire pour %s"
 
 #: common/tracker/views/form-updateextrafield.php:53
 msgid "Text Area Rows"
@@ -6844,7 +6844,7 @@ msgstr "Taille du champ texte"
 
 #: common/tracker/views/form-updateextrafield.php:64
 msgid "Text Field Maxlength"
-msgstr "Longeur maximale du champ texte"
+msgstr "Longueur maximale du champ texte"
 
 #: common/tracker/views/form-updateextrafield.php:75
 msgid "Field is mandatory"
@@ -6951,7 +6951,7 @@ msgstr "Personnaliser la mise en page"
 #: common/widget/WidgetLayoutManager.class.php:341
 #, php-format
 msgid "%s Widgets"
-msgstr "Widgets de %s"
+msgstr "Gadgets de %s"
 
 #: common/widget/WidgetLayoutManager.class.php:511
 #: common/widget/WidgetLayoutManager.class.php:538
@@ -6981,7 +6981,7 @@ msgstr "Groupes à l'état <a href=\"%s\"><b>P</b> (en attente)</a>"
 
 #: common/widget/Widget_MyAdmin.class.php:90
 msgid "Site News Approval"
-msgstr "Approbation des annonces"
+msgstr "Approbation des annonces du site"
 
 #: common/widget/Widget_MyArtifacts.class.php:52
 msgid "My Artifacts"
@@ -7071,11 +7071,11 @@ msgstr "Mes favoris"
 
 #: common/widget/Widget_MyBookmarks.class.php:45
 msgid "You currently do not have any bookmarks saved"
-msgstr "Vous n'avez pas de favoris enregistrés."
+msgstr "Vous n'avez pas de favoris enregistrés"
 
 #: common/widget/Widget_MyBookmarks.class.php:54
 msgid "Delete this bookmark?"
-msgstr "Supprimer ce favori ?"
+msgstr "Supprimer ce favori ?"
 
 #: common/widget/Widget_MyBookmarks.class.php:59
 msgid "Add a bookmark"
@@ -7100,7 +7100,7 @@ msgstr ""
 
 #: common/widget/Widget_MyLatestSvnCommits.class.php:31
 msgid "My Latest SVN Commits"
-msgstr "Mes dernières validations Subversion"
+msgstr "Mes derniers envois Subversion"
 
 #: common/widget/Widget_MyLatestSvnCommits.class.php:63
 msgid "on"
@@ -7127,7 +7127,7 @@ msgstr "Documents que vous surveillez"
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:47
 msgid "You are not monitoring any documents."
-msgstr "Vous ne surveillez pas de document."
+msgstr "Vous ne surveillez aucun document."
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:47
 msgid ""
@@ -7324,9 +7324,8 @@ msgid "Quick Survey"
 msgstr "Sondage rapide"
 
 #: common/widget/Widget_MySurveys.class.php:148
-#, fuzzy
 msgid "List the surveys in your projects."
-msgstr "<p>Il n'y a pas de sondage dans vos projets.<p>"
+msgstr "Il n'y a pas de sondages dans vos projets."
 
 #: common/widget/Widget_MySurveys.class.php:158
 msgid "answered [A]"
@@ -7347,7 +7346,7 @@ msgstr "Afficher l'arbre des projets"
 
 #: common/widget/Widget_MyTasks.class.php:125
 msgid "No task yet"
-msgstr "Pas encore de tâche"
+msgstr "Aucune tâche pour l'instant"
 
 #: common/widget/Widget_MyTasks.class.php:129
 msgid "My Tasks"
@@ -7367,7 +7366,7 @@ msgstr "Ce projet n'a pas encore soumis de description."
 
 #: common/widget/Widget_ProjectDescription.class.php:63
 msgid "Allow you to view the project description"
-msgstr "Vous permet de visualiser la description du projet."
+msgstr "Vous permet de voir la description du projet"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:42
 #, fuzzy
@@ -7404,7 +7403,7 @@ msgstr ""
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:94
 #, fuzzy
 msgid "Display statistics:"
-msgstr "Afficher les éléments :"
+msgstr "Voir les statistiques :"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:126
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:144
@@ -7511,7 +7510,7 @@ msgstr[1] ""
 
 #: common/widget/Widget_ProjectInfo.class.php:132
 msgid "Some infos about the project."
-msgstr "Quelques informations au sujet de ce projet."
+msgstr "Quelques informations concernant ce projet."
 
 #: common/widget/Widget_ProjectLatestDocuments.class.php:38
 msgid "5 Latest Published Documents"
@@ -7679,7 +7678,7 @@ msgstr "Il n'y a pas de sous-projet public"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:174
 msgid "surveys"
-msgstr "Sondages"
+msgstr "sondages"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:183
 #: plugins/scmgit/www/index.php:57 plugins/scmgit/www/index.php:71
@@ -7731,16 +7730,16 @@ msgstr ""
 
 #: common/widget/Widget_Rss.class.php:190
 msgid "less than 1 minute"
-msgstr "Il y a moins d'une minute"
+msgstr "il y a moins d'une minute"
 
 #: common/widget/Widget_Rss.class.php:190
 msgid "1 minute"
-msgstr "Environ une minute"
+msgstr "1 minute"
 
 #: common/widget/Widget_Rss.class.php:192
 #, php-format
 msgid "%s minutes ago"
-msgstr "Il y a environ %s minutes"
+msgstr "il y a %s minutes"
 
 #: common/widget/Widget_Rss.class.php:194
 msgid "About one hour"
@@ -7749,7 +7748,7 @@ msgstr "Environ une heure"
 #: common/widget/Widget_Rss.class.php:196
 #, php-format
 msgid "about %s hours"
-msgstr "Environ %s heures"
+msgstr "environ %s heures"
 
 #: common/widget/Widget_Rss.class.php:198
 msgid "About one day"
@@ -7758,7 +7757,7 @@ msgstr "Environ un jour"
 #: common/widget/Widget_Rss.class.php:200
 #, php-format
 msgid "%s days ago"
-msgstr "Il y a %s jours"
+msgstr "il y a %s jours"
 
 #: common/widget/Widget_Rss.class.php:202
 msgid "About one month"
@@ -7991,7 +7990,7 @@ msgstr ""
 #: plugins/admssw/www/index.php:53
 #, fuzzy
 msgid "Trove categories :"
-msgstr "Aucune catégorie"
+msgstr "Aucune catégorie :"
 
 #: plugins/admssw/www/index.php:56
 msgid "as Turtle"
@@ -8161,15 +8160,15 @@ msgstr ""
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:300
 #, php-format
 msgid "Cannot insert new identity: %s"
-msgstr "Erreur lors de l'ajout d'une identité : %s."
+msgstr "Impossible d'ajouter une nouvelle identité : %s"
 
 #: plugins/authopenid/www/index.php:67
 msgid "Identity successfully added"
-msgstr "Identité ajoutée avec succès."
+msgstr "Identité ajoutée avec succès"
 
 #: plugins/authopenid/www/index.php:81
 msgid "Error: Missing URL for the new identity"
-msgstr "Erreur : il manque l'URL de la nouvelle identité."
+msgstr "Erreur : il manque l'URL de la nouvelle identité"
 
 #: plugins/authopenid/www/index.php:83
 msgid "Error: Malformed URL (only http, https and ftp allowed)"
@@ -8384,11 +8383,11 @@ msgstr "Afficher ce bloc en haut de la liste."
 #: plugins/blocks/www/index.php:86 plugins/blocks/www/index.php:95
 #: plugins/blocks/www/index.php:110
 msgid "Display block at the top"
-msgstr "Afficher ce bloc en haut"
+msgstr "Afficher le bloc en haut"
 
 #: plugins/blocks/www/index.php:102
 msgid "Display block at the top of the main page"
-msgstr "Afficher ce bloc en haut de page"
+msgstr "Afficher le bloc en haut de la page principale"
 
 #: plugins/blocks/www/index.php:163
 msgid "Cannot Process your request: No TYPE specified"
@@ -8409,8 +8408,8 @@ msgstr "Erreur de traitement de votre requête : pas d'identifiant spécifié."
 #, php-format
 msgid "First activate the %s plugin through the Project's Admin Interface"
 msgstr ""
-"Vous devez d'abord activer le plugin %s par l'interface d'administration du "
-"projet."
+"Vous devez d'abord activer le greffon %s dans l'interface d'administration "
+"du projet"
 
 #: plugins/blocks/www/index.php:187
 msgid ""
@@ -8431,11 +8430,11 @@ msgstr "Configurer"
 
 #: plugins/blocks/www/index.php:229
 msgid "Save Blocks"
-msgstr "Sauvegarder les blocs"
+msgstr "Enregistrer les blocs"
 
 #: plugins/blocks/www/index.php:269
 msgid "Block Saved"
-msgstr "Bloc sauvegardé"
+msgstr "Bloc enregistré"
 
 #: plugins/blocks/www/index.php:280
 msgid ""
@@ -8497,7 +8496,7 @@ msgstr ""
 
 #: plugins/blocks/www/index.php:356
 msgid "Block configuration saved"
-msgstr "Configuration des blocs sauvegardée"
+msgstr "Configuration du bloc enregistrée"
 
 #: plugins/ckeditor/common/ckeditorPlugin.class.php:38
 msgid "HTML editor (ckeditor)"
@@ -8584,7 +8583,7 @@ msgstr "[Voir toutes les contributions]"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:175
 #, fuzzy
 msgid "Edit actors and roles"
-msgstr "Modifier un rôle"
+msgstr "Modifier le rôle"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:175
 #, fuzzy
@@ -8632,7 +8631,7 @@ msgstr "L'objet n'existe pas"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:833
 #, php-format
 msgid "Could not update object in database: %s."
-msgstr "Erreur lors de la mise à jour d'un objet en base de données : %s."
+msgstr "Erreur lors de la mise à jour de l'objet en base de données : %s."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:351
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:457
@@ -8676,7 +8675,7 @@ msgstr "Acteur invalide"
 
 #: plugins/contribtracker/www/global_admin.php:232
 msgid "Contribution tracker administration"
-msgstr "Outil de suivi des contributions : administration"
+msgstr "Administration de l'outil de suivi des contributions"
 
 #: plugins/contribtracker/www/global_admin.php:236
 msgid "Existing actors"
