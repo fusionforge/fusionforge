@@ -29,7 +29,7 @@ class Widget_ProjectInfo extends Widget {
 	}
 
 	public function getTitle() {
-		return _('Project Info');
+		return _('Project Information');
 	}
 
 	public function getContent() {
@@ -42,9 +42,8 @@ class Widget_ProjectInfo extends Widget {
 			$list_tag = list_project_tag($group_id);
 			echo '<p>'.html_image('ic/tag.png'). ' ';
 			if ($list_tag) {
-				print _('Tags').': '. $list_tag;
-			}
-			else {
+				echo _('Tags')._(': '). $list_tag;
+			} else {
 				$project = group_get_object($group_id);
 				if (forge_check_perm ('project_admin', $project->getID())) {
 					print '<a href="/project/admin/?group_id=' . $group_id . '" >' . _('No tag defined for this project') . '</a>.';
@@ -82,11 +81,11 @@ class Widget_ProjectInfo extends Widget {
 				$actv_res=0;
 			}
 			print '<br />'.sprintf (_('Activity Ranking: %d'), $actv_res)."\n";
-			print '<br />'.sprintf(_('View project <a href="%1$s" >Statistics</a>'),util_make_url ('/project/stats/?group_id='.$group_id))."\n";
+			print '<br />'.sprintf(_('View project <a href="%s" >Statistics</a>'),util_make_url ('/project/stats/?group_id='.$group_id))."\n";
 			if ( ($project->usesTracker() && forge_get_config('use_tracker')) || ($project->usesPm() && forge_get_config('use_pm')) ) {
-				print sprintf(_(' or <a href="%1$s">Activity</a>'),util_make_url ('/project/report/?group_id='.$group_id))."\n";
+				print sprintf(_(' or <a href="%s">Activity</a>'),util_make_url ('/project/report/?group_id='.$group_id))."\n";
 			}
-			print '<br />'.sprintf(_('View list of <a href="%1$s">RSS feeds</a> available for this project.'), util_make_url ('/export/rss_project.php?group_id='.$group_id)). ' ' . html_image('ic/rss.png',16,16,array())."\n";
+			print '<br />'.sprintf(_('View list of <a href="%s">RSS feeds</a> available for this project.'), util_make_url ('/export/rss_project.php?group_id='.$group_id)). ' ' . html_image('ic/rss.png',16,16,array());
 		}
 
 		if(forge_get_config('use_people')) {
