@@ -484,8 +484,6 @@ class WidgetLayoutManager {
 				}
 			}
 		}
-		die();
-		exit();
 		$this->feedback($owner_id, $owner_type);
 	}
 
