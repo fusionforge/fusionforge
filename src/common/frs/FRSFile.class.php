@@ -118,7 +118,7 @@ class FRSFile extends Error {
 	 */
 	function create($name,$file_location,$type_id,$processor_id,$release_time=false) {
 		if (strlen($name) < 3) {
-			$this->setError(_('Name is too short. It must be at least 3 characters.'));'));
+			$this->setError(_('Name is too short. It must be at least 3 characters.'));
 			return false;
 		}
 		if (!util_is_valid_filename($name)) {
