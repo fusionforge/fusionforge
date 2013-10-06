@@ -1,5 +1,6 @@
 <?php
-/*
+/**
+ * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;

@@ -268,6 +268,38 @@ class WidgetLayoutManager {
 		echo '</ul>';
 		echo '<form action="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action='. $action .'&amp;layout_id='. $layout_id .'" method="post">';
 		if ($update_layout) {
+			?>
+			<script type='text/javascript'>//<![CDATA[
+				var controllerLayoutBuilder;
+				jQuery(document).ready(function() {
+					controllerLayoutBuilder = new LayoutBuilderController({
+						buttonAddRow:		jQuery('.layout-manager-row-add'),
+						buttonAddColumn:	jQuery('.layout-manager-column-add'),
+						buttonRemoveColumn:	jQuery('.layout-manager-column-remove'),
+					});
+					jQuery('#save').click(function(){
+						if (jQuery('#layout_custom').is(':checked')) {
+							var form = jQuery('#layout-manager').parents('form').first();
+							jQuery('#layout-manager').find('.layout-manager-row').each(function(i, e) {
+								jQuery('<input>', {
+									type: 'hidden',
+									name: 'new_layout[]',
+									value: jQuery(e).find('.layout-manager-column input[type=number]').map(function(){ return this.value;}).get().join(','),
+									}).appendTo(form);
+							});
+						}
+					});
+					jQuery('.layout-manager-chooser').each(function(i, e) {
+						jQuery(e).find('input[type=radio]').change(function() {
+							jQuery('.layout-manager-chooser').each(function(i, e) {
+								jQuery(e).removeClass('layout-manager-chooser_selected');
+							});
+							jQuery(e).addClass('layout-manager-chooser_selected');
+						});
+					});
+				});
+			//]]></script>
+			<?php
 			$sql = "SELECT * FROM layouts WHERE scope='S' ORDER BY id ";
 			$req_layouts = db_query_params($sql,array());
 			echo '<table>';
@@ -315,7 +347,7 @@ class WidgetLayoutManager {
 					echo '<td class="layout-manager-column">
 						<div class="layout-manager-column-remove">x</div>
 						<div class="layout-manager-column-width">
-						<input type="text" value="'. $data['width'] .'" size="1" maxlength="3" />%
+						<input type="number" value="'. $data['width'] .'" size="1" maxlength="3" />%
 						</div>
 						</td>
 						<td class="layout-manager-column-add">+</td>';
@@ -379,19 +411,19 @@ class WidgetLayoutManager {
 					if (count($rows)) {
 						$sql = "INSERT INTO layouts(name, description, scope)
 							VALUES ('custom', '', 'P')";
-						if ($res = db_query_params($sql,array())) {
-							if ($new_layout_id = db_insertid($res,'layouts', 'id')) {
+						if ($res = db_query_params($sql, array())) {
+							if ($new_layout_id = db_insertid($res, 'layouts', 'id')) {
 								//Create rows & columns
 								$rank = 0;
 								foreach($rows as $cols) {
 									$sql = "INSERT INTO layouts_rows(layout_id, rank)
 										VALUES ($1,$2)";
-									if ($res = db_query_params($sql,array($new_layout_id,$rank++))) {
+									if ($res = db_query_params($sql, array($new_layout_id, $rank++))) {
 										if ($row_id = db_insertid($res,'layouts_rows', 'id')) {
 											foreach($cols as $width) {
 												$sql = "INSERT INTO layouts_rows_columns(layout_row_id, width)
 													VALUES ($1,$2)";
-												db_query_params($sql,array($row_id,$width));
+												db_query_params($sql, array($row_id, $width));
 											}
 										}
 									}
@@ -431,7 +463,7 @@ class WidgetLayoutManager {
 						WHERE owner_type = $2
 						AND owner_id   = $3
 						AND layout_id  = $4";
-					db_query_params($sql,array($new_layout_id,$owner_type,$owner_id,$old_layout_id));
+					db_query_params($sql, array($new_layout_id, $owner_type, $owner_id, $old_layout_id));
 
 					//If the old layout is custom remove it
 					if ($old_scope != 'S') {
@@ -439,19 +471,21 @@ class WidgetLayoutManager {
 						foreach($structure['rows'] as $row) {
 							$sql = "DELETE FROM layouts_rows
 								WHERE id  = $1";
-							db_query_params($sql,array($row['id']));
+							db_query_params($sql, array($row['id']));
 							$sql = "DELETE FROM layouts_rows_columns
 								WHERE layout_row_id  = $1";
-							db_query_params($sql,array($row['id']));
+							db_query_params($sql, array($row['id']));
 						}
 						$sql = "DELETE FROM layouts
 							WHERE id  = $1";
-						db_query_params($sql,array($old_layout_id));
+						db_query_params($sql, array($old_layout_id));
 					}
 
 				}
 			}
 		}
+		die();
+		exit();
 		$this->feedback($owner_id, $owner_type);
 	}
 

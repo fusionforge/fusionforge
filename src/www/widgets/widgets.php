@@ -27,8 +27,9 @@ require_once $gfcommon.'include/plugins_utils.php';
 require_once $gfcommon.'widget/WidgetLayoutManager.class.php';
 require_once $gfcommon.'widget/Valid_Widget.class.php';
 
-use_javascript('/widgets/scripts/LayoutController.js');
 html_use_jquery();
+use_javascript('scripts/LayoutController.js');
+
 
 $hp = Codendi_HTMLPurifier::instance();
 if (isLogged()) {

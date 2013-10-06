@@ -21,128 +21,78 @@
  * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var codendi = codendi || { };
+LayoutBuilderController = function(params)
+{
+	this.params		= params;
+	this.bindControls();
+};
 
-codendi.layout_manager = { 
-    addCol: function(col) {
-        var new_col = '<td class="layout-manager-column"><div class="layout-manager-column-remove">x</div><div class="layout-manager-column-width"><input type="text" value="" autocomplete="off" size="1" maxlength="3" />%</div></td>';
-        col.up('tr').insert({bottom: new_col});
-        new_col = new Element('td');
-        new_col.addClassName("layout-manager-column-add");
-        new_col.update('+');
-        this.loadColAdd(new_col);
-        col.up('tr').insert({bottom: new_col});
-        
-        this.distributeWidth(col.up('tr'));
-        var rm = col.up('tr').down('.layout-manager-column-remove', col.up('tr').select('.layout-manager-column').size() - 1);
-        this.loadColRemove(rm);
-    },
-    addRow: function(row) {
-        var new_row = '<table class="layout-manager-row" cellspacing="5" cellpadding="2"><tr><td>+</td></tr></table>';
-        row.insert({after: new_row});
+LayoutBuilderController.prototype =
+{
+	loadRemoveColumn: function(i, e) {
+		jQuery(e).mouseenter(function(){jQuery(this).addClass('layout-manager-column-remove_hover')})
+			.mouseleave(function(){jQuery(this).removeClass('layout-manager-column-remove_hover')});
+		jQuery(e).click(function(){
+				var tr = jQuery(e).parents('tr').first();
+				if (jQuery('#layout-manager').find('.layout-manager-column').length == 1) {
+					alert('You must keep at least one column in your layout.');
+				} else if (tr.find('.layout-manager-column').length == 1) {
+					tr.parents('table').first().next().remove();
+					tr.parents('table').first().remove();
+				} else {
+					jQuery(e).parent().next().remove();
+					jQuery(e).parent().remove();
+					LayoutBuilderController.prototype.distributeWidth(tr);
+				}
+			});
+	},
 
-        var new_col = row.next().down('td');
-        new_col.addClassName("layout-manager-column-add");
-        new_col.update('+');
-        this.loadColAdd(new_col);
-        
-        this.addCol(new_col);
-        
-        new_row = new Element('div');
-        new_row.addClassName("layout-manager-row-add");
-        new_row.update('+');
-        this.loadRowAdd(new_row);
-        
-        row.next().insert({after: new_row});
-    },
-    removeCol: function (rm) {
-        var row = rm.up('tr');
-        
-        //Check columns number in layout
-        if ($('layout-manager').select('.layout-manager-column').size() == 1) {
-            alert('You must keep at least one column in your layout.');
-        } else if (row.select('.layout-manager-column').size() == 1) {
-            //remove row
-            Element.remove(row.up('table').next());
-            Element.remove(row.up('table'));
-        } else {
-            //remove column
-            Element.remove(rm.up('td').next());
-            Element.remove(rm.up('td'));
-            this.distributeWidth(row);
-        }
-    },
-    distributeWidth: function (row) {
-        var cols = row.select('input[type=text]');
-        var width = Math.round(100 / cols.size());
-        cols.each(function (input) {
-            input.value = width;
-        });
-    },
-    load: function() {
-        $$(".layout-manager-column-add").each(this.loadColAdd.bind(this));
-        $$(".layout-manager-column-remove").each(this.loadColRemove.bind(this));
-        $$(".layout-manager-row-add").each(this.loadRowAdd.bind(this));
-    },
-    loadColAdd: function(col) {
-        col.observe('mouseover', function() {
-            this.addClassName('layout-manager-column-add_hover');
-        });
-        col.observe('mouseout', function() {
-            this.removeClassName('layout-manager-column-add_hover');
-        });
-        col.observe('click', function () { this.addCol(col) }.bind(this));
-    },
-    loadColRemove: function(rm) {
-        rm.observe('mouseover', function() {
-            this.addClassName('layout-manager-column-remove_hover');
-        }).observe('mouseout', function() {
-            this.removeClassName('layout-manager-column-remove_hover');
-        }).observe('click', function () { this.removeCol(rm); }.bind(this));
-    },
-    loadRowAdd: function(row) {
-        row.observe('mouseover', function() {
-            this.addClassName('layout-manager-row-add_hover');
-        });
-        row.observe('mouseout', function() {
-            this.removeClassName('layout-manager-row-add_hover');
-        });
-        row.observe('click', function () { this.addRow(row); }.bind(this));
-    }
-}
+	loadAddColumn: function(i, e) {
+		jQuery(e).mouseenter(function(){jQuery(this).addClass('layout-manager-column-add_hover')})
+			.mouseleave(function(){jQuery(this).removeClass('layout-manager-column-add_hover')});
+		jQuery(e).click(function(){
+				var newCol = jQuery('<td></td>');
+				newCol.addClass('layout-manager-column');
+				newCol.append('<div>x</div>');
+				newCol.children('div').addClass('layout-manager-column-remove');
+				LayoutBuilderController.prototype.loadRemoveColumn(0, newCol.children('div'));
+				newCol.append('<div class="layout-manager-column-width"><input type="number" value="" autocomplete="off" size="1" maxlength="3" />%</div>');
+				jQuery(e).parent().append(newCol);
+				newCol = jQuery('<td>+</td>');
+				newCol.addClass('layout-manager-column-add');
+				LayoutBuilderController.prototype.loadAddColumn(0, newCol);
+				jQuery(e).parent().append(newCol);
+				LayoutBuilderController.prototype.distributeWidth(jQuery(e).parent());
+			});
+	},
 
-document.observe('dom:loaded', function() {
-    if ($('layout-manager')) {
-        codendi.layout_manager.load();
-        $('save').observe('click', function(evt) {
-            if ($('layout-manager')) {
-                var reg = /^\d+$/
-                var invalid = $('layout-manager').select('.layout-manager-column input[type=text]').find(function (element) {
-                    return (!reg.test(element.value)) ? element : false;
-                });
-                if (invalid) {
-                    alert(invalid.value+' is not a valid number');
-                } else {
-                    var form = $('layout-manager').up('form');
-                    if (form) {
-                        $('layout-manager').select('.layout-manager-row').each(function (row) {
-                            form.insert(new Element('input', {
-                                    type: 'hidden',
-                                    name: 'new_layout[]',
-                                    value: row.select('.layout-manager-column input[type=text]').pluck('value').join(',')
-                            }));
-                        });
-                    }
-                }
-            }
-        });
-        $$('.layout-manager-chooser').each(function (row) {
-                row.down('input[type=radio]').observe('change', function() {
-                        $$('.layout-manager-chooser').each(function (row) {
-                                row.removeClassName('layout-manager-chooser_selected');
-                        });
-                        row.addClassName('layout-manager-chooser_selected');
-                });
-        });
-    }
-});
+	loadAddRow: function(i, e) {
+		jQuery(e).mouseenter(function(){jQuery(this).addClass('layout-manager-row-add_hover')})
+			.mouseleave(function(){jQuery(this).removeClass('layout-manager-row-add_hover')});
+		jQuery(e).click(function(){
+				var newRow = jQuery('<table class="layout-manager-row" cellspacing="5" cellpadding="2"><tr><td>+</td></tr></table>');
+				newRow.insertAfter(jQuery(e));
+				var newCol = jQuery(e).next().find('td').first();
+				newCol.addClass('layout-manager-column-add');
+				LayoutBuilderController.prototype.loadAddColumn(0, newCol);
+				newRow = jQuery('<div>+</div>');
+				newRow.addClass("layout-manager-row-add");
+				LayoutBuilderController.prototype.loadAddRow(0, newRow);
+				newRow.insertAfter(jQuery(e).next());
+			});
+	},
+
+	distributeWidth: function(row) {
+		var cols = row.find('input[type=number]');
+		var width = Math.round(100 / cols.length);
+		cols.val(width);
+	},
+
+	/*! Binds the controls to the actions
+	 */
+	bindControls: function() {
+		this.params.buttonAddRow.each(jQuery.proxy(this.loadAddRow, this));
+		this.params.buttonAddColumn.each(jQuery.proxy(this.loadAddColumn, this));
+		this.params.buttonRemoveColumn.each(jQuery.proxy(this.loadRemoveColumn, this));
+	},
+};
