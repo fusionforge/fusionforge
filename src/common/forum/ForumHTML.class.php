@@ -82,7 +82,7 @@ function forum_header($params) {
 				print stripslashes(trove_getcatlisting($params['group'],0,1));
 			}
 
-			echo '<p><strong>'._('Content:').'</strong></p>';
+			echo '<p><strong>'._('Content')._(':').'</strong></p>';
 			$body = db_result($result,0,'details');
 			$body = TextSanitizer::purify($body);
 			if (!strstr($body,'<')) {

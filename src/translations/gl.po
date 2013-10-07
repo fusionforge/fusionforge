@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:56+0200\n"
+"POT-Creation-Date: 2013-10-07 17:58+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -1635,9 +1635,9 @@ msgid "Start Date"
 msgstr "Data de comezo"
 
 #: common/docman/views/reporting.php:93 common/docman/views/reporting.php:95
-#: common/frs/FRSRelease.class.php:294 common/frs/FRSRelease.class.php:297
-#: common/frs/FRSRelease.class.php:301 common/include/utils.php:498
-#: common/tracker/actions/query.php:403
+#: common/forum/ForumHTML.class.php:85 common/frs/FRSRelease.class.php:294
+#: common/frs/FRSRelease.class.php:297 common/frs/FRSRelease.class.php:301
+#: common/include/utils.php:498 common/tracker/actions/query.php:403
 #: common/tracker/views/form-addcanned.php:69
 #: common/tracker/views/form-addcanned.php:74
 #: common/tracker/views/form-addextrafieldoption.php:102
@@ -2350,9 +2350,9 @@ msgstr "Publicado por "
 msgid "Summary"
 msgstr "Resumo "
 
-#: common/forum/ForumHTML.class.php:85
+#: common/forum/ForumHTML.class.php:85 www/pm/format_csv.php:66
 #, fuzzy
-msgid "Content:"
+msgid "Content"
 msgstr "Contido novo?"
 
 #: common/forum/ForumHTML.class.php:95
@@ -20225,11 +20225,6 @@ msgstr "Actualizar "
 msgid "CSV Format"
 msgstr "Actualizar "
 
-#: www/pm/format_csv.php:66
-#, fuzzy
-msgid "Content"
-msgstr "Contido novo?"
-
 #: www/pm/format_csv.php:67
 #, fuzzy
 msgid "Full"
@@ -23615,6 +23610,10 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Content:"
+#~ msgstr "Contido novo?"
 
 #, fuzzy
 #~ msgid "Child project: "

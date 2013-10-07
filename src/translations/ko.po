@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:56+0200\n"
+"POT-Creation-Date: 2013-10-07 17:58+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1625,9 +1625,9 @@ msgid "Start Date"
 msgstr ""
 
 #: common/docman/views/reporting.php:93 common/docman/views/reporting.php:95
-#: common/frs/FRSRelease.class.php:294 common/frs/FRSRelease.class.php:297
-#: common/frs/FRSRelease.class.php:301 common/include/utils.php:498
-#: common/tracker/actions/query.php:403
+#: common/forum/ForumHTML.class.php:85 common/frs/FRSRelease.class.php:294
+#: common/frs/FRSRelease.class.php:297 common/frs/FRSRelease.class.php:301
+#: common/include/utils.php:498 common/tracker/actions/query.php:403
 #: common/tracker/views/form-addcanned.php:69
 #: common/tracker/views/form-addcanned.php:74
 #: common/tracker/views/form-addextrafieldoption.php:102
@@ -2347,9 +2347,9 @@ msgstr "멤버 구함 공지 올리기"
 msgid "Summary"
 msgstr "요약"
 
-#: common/forum/ForumHTML.class.php:85
+#: common/forum/ForumHTML.class.php:85 www/pm/format_csv.php:66
 #, fuzzy
-msgid "Content:"
+msgid "Content"
 msgstr "사용자 등록"
 
 #: common/forum/ForumHTML.class.php:95
@@ -19824,11 +19824,6 @@ msgstr "Updated"
 msgid "CSV Format"
 msgstr "Updated"
 
-#: www/pm/format_csv.php:66
-#, fuzzy
-msgid "Content"
-msgstr "사용자 등록"
-
 #: www/pm/format_csv.php:67
 #, fuzzy
 msgid "Full"
@@ -23157,6 +23152,10 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "Content:"
+#~ msgstr "사용자 등록"
 
 #, fuzzy
 #~ msgid "Child project: "
