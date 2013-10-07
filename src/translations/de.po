@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 11:04+0200\n"
+"POT-Creation-Date: 2013-10-07 12:40+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -2082,8 +2082,9 @@ msgstr "Datei erfolgreich aktualisiert"
 msgid "%s does not use the Forum tool"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:61
-msgid "Move thread"
+#: common/forum/ForumAdmin.class.php:61 www/forum/admin/index.php:363
+#, fuzzy
+msgid "Move Thread"
 msgstr "Thread verschieben"
 
 #: common/forum/ForumAdmin.class.php:84 www/forum/admin/index.php:104
@@ -2412,8 +2413,10 @@ msgstr "Dies ist der Inhalt der wartenden Nachricht"
 msgid "By"
 msgstr "Von"
 
-#: common/forum/ForumHTML.class.php:268 www/forum/message.php:123
-msgid "reply"
+#: common/forum/ForumHTML.class.php:268
+#: plugins/forumml/www/forumml_utils.php:563 www/forum/message.php:123
+#, fuzzy
+msgid "Reply"
 msgstr "antworten"
 
 #: common/forum/ForumHTML.class.php:269
@@ -7919,8 +7922,8 @@ msgstr "Mitglieder"
 
 #: common/widget/Widget_ProjectMembers.class.php:103
 #, php-format
-msgid "View the %1$d Member(s)"
-msgstr "Zeige %1$d Mitglied(er)"
+msgid "View the %d Member(s)"
+msgstr "Zeige %d Mitglied(er)"
 
 #: common/widget/Widget_ProjectMembers.class.php:110
 msgid "Request to join"
@@ -9455,11 +9458,6 @@ msgstr ""
 #: plugins/forumml/www/scripts/cc_attach_js.php:42
 msgid "Cc:"
 msgstr ""
-
-#: plugins/forumml/www/forumml_utils.php:563
-#, fuzzy
-msgid "Reply"
-msgstr "antworten"
 
 #: plugins/forumml/www/forumml_utils.php:585
 msgid "Add cc:"
@@ -17191,11 +17189,6 @@ msgstr "Thread erfolgreich vom %1$s Forum ins %2$s Forum verschoben."
 msgid "Return to the thread"
 msgstr "Zurück zum Forum"
 
-#: www/forum/admin/index.php:363
-#, fuzzy
-msgid "Move Thread"
-msgstr "Thread verschieben"
-
 #: www/forum/admin/index.php:373 www/forum/admin/index.php:449
 #, php-format
 msgid "No Forums Found for %s"
@@ -23723,6 +23716,15 @@ msgstr "Kein Benutzername angegeben"
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
 
+#~ msgid "Move thread"
+#~ msgstr "Thread verschieben"
+
+#~ msgid "reply"
+#~ msgstr "antworten"
+
+#~ msgid "View the %1$d Member(s)"
+#~ msgstr "Zeige %1$d Mitglied(er)"
+
 #, fuzzy
 #~ msgid "Start Monitoring"
 #~ msgstr "Stoppe Beobachtung"
@@ -25533,9 +25535,6 @@ msgstr "Persönliche Seite für %s"
 
 #~ msgid " (examples: meeting minutes, test results, RFP Docs)"
 #~ msgstr " (Beispiele: Protokoll des Meetings, Testergebnisse, RFP Dokumente)"
-
-#~ msgid "View the %d Member(s)"
-#~ msgstr "Zeige %d Mitglied(er)"
 
 #~ msgid "There are no public subprojects available"
 #~ msgstr "Keine öffentlichen Unterprojekte vorhanden"

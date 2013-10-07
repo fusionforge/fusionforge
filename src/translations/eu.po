@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 11:04+0200\n"
+"POT-Creation-Date: 2013-10-07 12:40+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2068,9 +2068,10 @@ msgstr ""
 msgid "%s does not use the Forum tool"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:61
-msgid "Move thread"
-msgstr ""
+#: common/forum/ForumAdmin.class.php:61 www/forum/admin/index.php:363
+#, fuzzy
+msgid "Move Thread"
+msgstr "Haria"
 
 #: common/forum/ForumAdmin.class.php:84 www/forum/admin/index.php:104
 #, fuzzy
@@ -2399,8 +2400,10 @@ msgstr ""
 msgid "By"
 msgstr "Noiztik"
 
-#: common/forum/ForumHTML.class.php:268 www/forum/message.php:123
-msgid "reply"
+#: common/forum/ForumHTML.class.php:268
+#: plugins/forumml/www/forumml_utils.php:563 www/forum/message.php:123
+#, fuzzy
+msgid "Reply"
 msgstr "Erantzun"
 
 #: common/forum/ForumHTML.class.php:269
@@ -7831,7 +7834,7 @@ msgstr "Kideak"
 
 #: common/widget/Widget_ProjectMembers.class.php:103
 #, fuzzy, php-format
-msgid "View the %1$d Member(s)"
+msgid "View the %d Member(s)"
 msgstr "Kideak ikusi"
 
 #: common/widget/Widget_ProjectMembers.class.php:110
@@ -9369,11 +9372,6 @@ msgstr ""
 #: plugins/forumml/www/scripts/cc_attach_js.php:42
 msgid "Cc:"
 msgstr ""
-
-#: plugins/forumml/www/forumml_utils.php:563
-#, fuzzy
-msgid "Reply"
-msgstr "Erantzun"
 
 #: plugins/forumml/www/forumml_utils.php:585
 msgid "Add cc:"
@@ -16957,11 +16955,6 @@ msgstr ""
 msgid "Return to the thread"
 msgstr "Elkarrizketa berria hasi"
 
-#: www/forum/admin/index.php:363
-#, fuzzy
-msgid "Move Thread"
-msgstr "Haria"
-
 #: www/forum/admin/index.php:373 www/forum/admin/index.php:449
 #, php-format
 msgid "No Forums Found for %s"
@@ -23316,6 +23309,9 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#~ msgid "reply"
+#~ msgstr "Erantzun"
 
 #, fuzzy
 #~ msgid "Start Monitoring"

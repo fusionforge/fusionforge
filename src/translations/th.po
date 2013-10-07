@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 11:04+0200\n"
+"POT-Creation-Date: 2013-10-07 12:40+0200\n"
 "PO-Revision-Date: 2009-10-06 16:32+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1948,8 +1948,8 @@ msgstr ""
 msgid "%s does not use the Forum tool"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:61
-msgid "Move thread"
+#: common/forum/ForumAdmin.class.php:61 www/forum/admin/index.php:363
+msgid "Move Thread"
 msgstr ""
 
 #: common/forum/ForumAdmin.class.php:84 www/forum/admin/index.php:104
@@ -2262,8 +2262,9 @@ msgstr ""
 msgid "By"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:268 www/forum/message.php:123
-msgid "reply"
+#: common/forum/ForumHTML.class.php:268
+#: plugins/forumml/www/forumml_utils.php:563 www/forum/message.php:123
+msgid "Reply"
 msgstr ""
 
 #: common/forum/ForumHTML.class.php:269
@@ -7210,7 +7211,7 @@ msgstr ""
 
 #: common/widget/Widget_ProjectMembers.class.php:103
 #, php-format
-msgid "View the %1$d Member(s)"
+msgid "View the %d Member(s)"
 msgstr ""
 
 #: common/widget/Widget_ProjectMembers.class.php:110
@@ -8637,10 +8638,6 @@ msgstr ""
 #: plugins/forumml/www/forumml_utils.php:442
 #: plugins/forumml/www/scripts/cc_attach_js.php:42
 msgid "Cc:"
-msgstr ""
-
-#: plugins/forumml/www/forumml_utils.php:563
-msgid "Reply"
 msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:585
@@ -15563,10 +15560,6 @@ msgstr ""
 
 #: www/forum/admin/index.php:350
 msgid "Return to the thread"
-msgstr ""
-
-#: www/forum/admin/index.php:363
-msgid "Move Thread"
 msgstr ""
 
 #: www/forum/admin/index.php:373 www/forum/admin/index.php:449

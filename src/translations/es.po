@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 11:04+0200\n"
+"POT-Creation-Date: 2013-10-07 12:40+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -2006,9 +2006,9 @@ msgstr "Fichero subido con éxito"
 msgid "%s does not use the Forum tool"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:61
-msgid "Move thread"
-msgstr "Mover hilo"
+#: common/forum/ForumAdmin.class.php:61 www/forum/admin/index.php:363
+msgid "Move Thread"
+msgstr "Mover Hilo"
 
 #: common/forum/ForumAdmin.class.php:84 www/forum/admin/index.php:104
 #, fuzzy
@@ -2328,9 +2328,10 @@ msgstr "Este es el contenido del mensaje pendiente"
 msgid "By"
 msgstr "De"
 
-#: common/forum/ForumHTML.class.php:268 www/forum/message.php:123
-msgid "reply"
-msgstr "responder"
+#: common/forum/ForumHTML.class.php:268
+#: plugins/forumml/www/forumml_utils.php:563 www/forum/message.php:123
+msgid "Reply"
+msgstr "Responder"
 
 #: common/forum/ForumHTML.class.php:269
 msgid "By:"
@@ -7694,8 +7695,8 @@ msgstr "Miembros"
 
 #: common/widget/Widget_ProjectMembers.class.php:103
 #, php-format
-msgid "View the %1$d Member(s)"
-msgstr "Ver el/los %1$d miembro(s)"
+msgid "View the %d Member(s)"
+msgstr "Ver el/los %d miembro(s)"
 
 #: common/widget/Widget_ProjectMembers.class.php:110
 msgid "Request to join"
@@ -9199,10 +9200,6 @@ msgstr "Cambiar fuente (typewriter/normal)"
 #: plugins/forumml/www/scripts/cc_attach_js.php:42
 msgid "Cc:"
 msgstr "Cc:"
-
-#: plugins/forumml/www/forumml_utils.php:563
-msgid "Reply"
-msgstr "Responder"
 
 #: plugins/forumml/www/forumml_utils.php:585
 msgid "Add cc:"
@@ -16632,10 +16629,6 @@ msgstr "Hilo correctamente movido desde %1$s foro a %2$s foro"
 msgid "Return to the thread"
 msgstr "Regresar a el foro"
 
-#: www/forum/admin/index.php:363
-msgid "Move Thread"
-msgstr "Mover Hilo"
-
 #: www/forum/admin/index.php:373 www/forum/admin/index.php:449
 #, php-format
 msgid "No Forums Found for %s"
@@ -23013,6 +23006,15 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
 
+#~ msgid "Move thread"
+#~ msgstr "Mover hilo"
+
+#~ msgid "reply"
+#~ msgstr "responder"
+
+#~ msgid "View the %1$d Member(s)"
+#~ msgstr "Ver el/los %1$d miembro(s)"
+
 #, fuzzy
 #~ msgid "Start Monitoring"
 #~ msgstr "Comenzar monitorización"
@@ -24642,9 +24644,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Activity Percentile"
 #~ msgstr "Percentil de actividad"
-
-#~ msgid "View the %d Member(s)"
-#~ msgstr "Ver el/los %d miembro(s)"
 
 #~ msgid "There are no public subprojects available"
 #~ msgstr "No hay subproyectos públicos disponibles"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 11:04+0200\n"
+"POT-Creation-Date: 2013-10-07 12:40+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -2078,9 +2078,10 @@ msgstr "O ficheiro actualizouse correctamente"
 msgid "%s does not use the Forum tool"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:61
-msgid "Move thread"
-msgstr ""
+#: common/forum/ForumAdmin.class.php:61 www/forum/admin/index.php:363
+#, fuzzy
+msgid "Move Thread"
+msgstr "Fío"
 
 #: common/forum/ForumAdmin.class.php:84 www/forum/admin/index.php:104
 #, fuzzy
@@ -2406,8 +2407,10 @@ msgstr "Este é o contido da mensaxe pendente"
 msgid "By"
 msgstr "Por "
 
-#: common/forum/ForumHTML.class.php:268 www/forum/message.php:123
-msgid "reply"
+#: common/forum/ForumHTML.class.php:268
+#: plugins/forumml/www/forumml_utils.php:563 www/forum/message.php:123
+#, fuzzy
+msgid "Reply"
 msgstr "Responder "
 
 #: common/forum/ForumHTML.class.php:269
@@ -7892,9 +7895,9 @@ msgid "Members"
 msgstr "Membros "
 
 #: common/widget/Widget_ProjectMembers.class.php:103
-#, fuzzy, php-format
-msgid "View the %1$d Member(s)"
-msgstr "Ver os membros "
+#, php-format
+msgid "View the %d Member(s)"
+msgstr "Ver os %d membros"
 
 #: common/widget/Widget_ProjectMembers.class.php:110
 msgid "Request to join"
@@ -9468,11 +9471,6 @@ msgstr ""
 #: plugins/forumml/www/scripts/cc_attach_js.php:42
 msgid "Cc:"
 msgstr ""
-
-#: plugins/forumml/www/forumml_utils.php:563
-#, fuzzy
-msgid "Reply"
-msgstr "Responder "
 
 #: plugins/forumml/www/forumml_utils.php:585
 msgid "Add cc:"
@@ -17188,11 +17186,6 @@ msgstr ""
 msgid "Return to the thread"
 msgstr "Volver ao foro"
 
-#: www/forum/admin/index.php:363
-#, fuzzy
-msgid "Move Thread"
-msgstr "Fío"
-
 #: www/forum/admin/index.php:373 www/forum/admin/index.php:449
 #, php-format
 msgid "No Forums Found for %s"
@@ -23658,6 +23651,13 @@ msgstr "Non se introduciu un nome de usuario"
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
 
+#~ msgid "reply"
+#~ msgstr "Responder "
+
+#, fuzzy
+#~ msgid "View the %1$d Member(s)"
+#~ msgstr "Ver os membros "
+
 #, fuzzy
 #~ msgid "Start Monitoring"
 #~ msgstr "Parar de monitorizar "
@@ -25407,9 +25407,6 @@ msgstr "Páxina persoal de %s"
 
 #~ msgid "Activity Percentile"
 #~ msgstr "Percentil de actividade"
-
-#~ msgid "View the %d Member(s)"
-#~ msgstr "Ver os %d membros"
 
 #~ msgid "There are no public subprojects available"
 #~ msgstr "Non hai ningún subproxecto dispoñíbel"

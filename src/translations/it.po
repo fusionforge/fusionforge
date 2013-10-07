@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 11:04+0200\n"
+"POT-Creation-Date: 2013-10-07 12:40+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2075,9 +2075,10 @@ msgstr "Effettuato l'upload del file"
 msgid "%s does not use the Forum tool"
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:61
-msgid "Move thread"
-msgstr ""
+#: common/forum/ForumAdmin.class.php:61 www/forum/admin/index.php:363
+#, fuzzy
+msgid "Move Thread"
+msgstr "Argomento"
 
 #: common/forum/ForumAdmin.class.php:84 www/forum/admin/index.php:104
 #, fuzzy
@@ -2407,8 +2408,10 @@ msgstr "Questo &egrave; il contenuto del messaggio in attesa di approvazione"
 msgid "By"
 msgstr "Da"
 
-#: common/forum/ForumHTML.class.php:268 www/forum/message.php:123
-msgid "reply"
+#: common/forum/ForumHTML.class.php:268
+#: plugins/forumml/www/forumml_utils.php:563 www/forum/message.php:123
+#, fuzzy
+msgid "Reply"
 msgstr "rispondi"
 
 #: common/forum/ForumHTML.class.php:269
@@ -7883,9 +7886,9 @@ msgid "Members"
 msgstr "Membri"
 
 #: common/widget/Widget_ProjectMembers.class.php:103
-#, fuzzy, php-format
-msgid "View the %1$d Member(s)"
-msgstr "Visualizza i membri"
+#, php-format
+msgid "View the %d Member(s)"
+msgstr "Visualizza i %d membri"
 
 #: common/widget/Widget_ProjectMembers.class.php:110
 msgid "Request to join"
@@ -9432,11 +9435,6 @@ msgstr ""
 #: plugins/forumml/www/scripts/cc_attach_js.php:42
 msgid "Cc:"
 msgstr ""
-
-#: plugins/forumml/www/forumml_utils.php:563
-#, fuzzy
-msgid "Reply"
-msgstr "rispondi"
 
 #: plugins/forumml/www/forumml_utils.php:585
 msgid "Add cc:"
@@ -17066,11 +17064,6 @@ msgstr ""
 msgid "Return to the thread"
 msgstr "Inizia un nuovo argomento"
 
-#: www/forum/admin/index.php:363
-#, fuzzy
-msgid "Move Thread"
-msgstr "Argomento"
-
 #: www/forum/admin/index.php:373 www/forum/admin/index.php:449
 #, php-format
 msgid "No Forums Found for %s"
@@ -23476,6 +23469,13 @@ msgstr "Non è stato inserito alcun file"
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
 
+#~ msgid "reply"
+#~ msgstr "rispondi"
+
+#, fuzzy
+#~ msgid "View the %1$d Member(s)"
+#~ msgstr "Visualizza i membri"
+
 #, fuzzy
 #~ msgid "Start Monitoring"
 #~ msgstr "Termina Notifica"
@@ -24843,9 +24843,6 @@ msgstr "Pagina Personale"
 
 #~ msgid "Activity Percentile"
 #~ msgstr "Percentuale di attività"
-
-#~ msgid "View the %d Member(s)"
-#~ msgstr "Visualizza i %d membri"
 
 #~ msgid "There are no public subprojects available"
 #~ msgstr "Non ci sono sottoprogetti pubblici"
