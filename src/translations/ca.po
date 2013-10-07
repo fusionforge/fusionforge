@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 12:40+0200\n"
+"POT-Creation-Date: 2013-10-07 16:01+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -426,22 +426,23 @@ msgstr "Projecte"
 #: common/forum/Forum.class.php:633 common/forum/Forum.class.php:641
 #: common/forum/Forum.class.php:649 common/forum/Forum.class.php:657
 #: common/forum/Forum.class.php:665 common/forum/Forum.class.php:673
-#: common/forum/ForumHTML.class.php:68 common/forum/ForumHTML.class.php:69
-#: common/forum/ForumHTML.class.php:70 common/forum/ForumHTML.class.php:73
-#: common/forum/ForumHTML.class.php:211 common/forum/ForumHTML.class.php:527
-#: common/forum/ForumHTML.class.php:531 common/forum/ForumHTML.class.php:591
-#: common/forum/ForumHTML.class.php:594 common/include/Error.class.php:207
-#: common/include/exit.php:80 common/include/User.class.php:348
-#: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
+#: common/forum/ForumHTML.class.php:58 common/forum/ForumHTML.class.php:68
+#: common/forum/ForumHTML.class.php:69 common/forum/ForumHTML.class.php:70
+#: common/forum/ForumHTML.class.php:73 common/forum/ForumHTML.class.php:211
+#: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:531
+#: common/forum/ForumHTML.class.php:591 common/forum/ForumHTML.class.php:594
+#: common/include/Error.class.php:207 common/include/exit.php:80
+#: common/include/User.class.php:348 common/include/User.class.php:1407
+#: common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
-#: common/tracker/actions/browse.php:407 common/tracker/actions/mod.php:147
-#: common/tracker/actions/mod.php:155 common/tracker/actions/mod.php:175
-#: common/tracker/actions/mod.php:216 common/tracker/actions/query.php:329
-#: common/tracker/actions/query.php:344 common/tracker/actions/query.php:350
-#: common/tracker/actions/query.php:351 common/tracker/actions/query.php:386
-#: common/tracker/actions/query.php:388 common/tracker/actions/query.php:390
-#: common/tracker/actions/query.php:395
+#: common/tracker/actions/browse.php:407 common/tracker/actions/browse.php:751
+#: common/tracker/actions/mod.php:147 common/tracker/actions/mod.php:155
+#: common/tracker/actions/mod.php:175 common/tracker/actions/mod.php:216
+#: common/tracker/actions/query.php:329 common/tracker/actions/query.php:344
+#: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
+#: common/tracker/actions/query.php:386 common/tracker/actions/query.php:388
+#: common/tracker/actions/query.php:390 common/tracker/actions/query.php:395
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -768,7 +769,7 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/actions/admin-ind.php:100
 #: common/tracker/actions/admin-ind.php:137
-#: common/tracker/actions/browse.php:556 common/tracker/actions/ind.php:57
+#: common/tracker/actions/browse.php:559 common/tracker/actions/ind.php:57
 #: common/tracker/views/form-updatetracker.php:53
 #: plugins/blocks/www/index.php:202
 #: plugins/contribtracker/www/global_admin.php:244
@@ -1082,7 +1083,7 @@ msgid "Folder that document belongs to:"
 msgstr "Grup al que pertany aquest document:"
 
 #: common/docman/views/editfile.php:70 common/tracker/actions/browse.php:407
-#: common/tracker/actions/browse.php:562 common/tracker/actions/browse.php:749
+#: common/tracker/actions/browse.php:565 common/tracker/actions/browse.php:751
 #: common/tracker/actions/detail.php:73
 #: common/tracker/actions/mod-limited.php:128
 #: common/tracker/actions/mod.php:155 common/tracker/actions/query.php:344
@@ -1323,8 +1324,8 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:101
 #: common/docman/views/pendingfiles.php:103
 #: common/forum/ForumHTML.class.php:221 common/pm/ProjectTask.class.php:1213
-#: common/tracker/actions/browse.php:606 common/tracker/actions/browse.php:617
-#: common/tracker/actions/browse.php:637 common/tracker/actions/detail.php:68
+#: common/tracker/actions/browse.php:609 common/tracker/actions/browse.php:620
+#: common/tracker/actions/browse.php:640 common/tracker/actions/detail.php:68
 #: common/tracker/actions/downloadcsv.php:84
 #: common/tracker/actions/downloadcsv.php:85
 #: common/tracker/actions/downloadcsv.php:86
@@ -2303,8 +2304,9 @@ msgstr ""
 msgid "Error Deleting Forum"
 msgstr "Error afegint un fòrum"
 
-#: common/forum/ForumFactory.class.php:56 common/include/rbac_texts.php:158
-#: www/forum/forum.php:157 www/forum/index.php:69 www/forum/myforums.php:69
+#: common/forum/ForumFactory.class.php:56 common/forum/ForumHTML.class.php:58
+#: common/include/rbac_texts.php:158 www/forum/forum.php:157
+#: www/forum/index.php:69 www/forum/myforums.php:69
 msgid "Forum"
 msgstr "Fòrum"
 
@@ -2323,18 +2325,13 @@ msgstr "Enquesta no trobada."
 msgid "Thread not found"
 msgstr "Fil"
 
-#: common/forum/ForumHTML.class.php:58
-#, fuzzy
-msgid "Forum: "
-msgstr "Fòrum"
-
 #: common/forum/ForumHTML.class.php:68 www/export/rssAboTask.php:171
 #, fuzzy
 msgid "Posted by"
 msgstr "Enviat per"
 
 #: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:379
-#: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:554
+#: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:557
 #: common/tracker/actions/detail.php:96
 #: common/tracker/actions/mod-limited.php:142
 #: common/tracker/actions/mod.php:167 common/tracker/actions/query.php:199
@@ -5360,7 +5357,7 @@ msgstr "Qualsevol"
 msgid "Unassigned"
 msgstr "No assignat"
 
-#: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:552
+#: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:555
 #: common/tracker/actions/query.php:197
 #: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:136
 #: www/admin/search.php:72 www/admin/search.php:148 www/my/dashboard.php:64
@@ -5370,8 +5367,8 @@ msgstr "No assignat"
 msgid "Id"
 msgstr "Id"
 
-#: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:564
-#: common/tracker/actions/browse.php:737 common/tracker/actions/detail.php:69
+#: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:567
+#: common/tracker/actions/browse.php:739 common/tracker/actions/detail.php:69
 #: common/tracker/actions/mod-limited.php:119
 #: common/tracker/actions/mod.php:147 common/tracker/actions/query.php:198
 #: common/tracker/include/build_submission_form.php:66
@@ -5385,7 +5382,7 @@ msgstr "Id"
 msgid "Priority"
 msgstr "Prioritat"
 
-#: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:558
+#: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:561
 #: common/tracker/actions/query.php:200
 #: common/tracker/views/form-customizelist.php:38
 #: cronjobs/send_pending_items_mail.php:118 www/people/viewjob.php:76
@@ -5395,14 +5392,14 @@ msgstr "Prioritat"
 msgid "Open Date"
 msgstr "Data oberta"
 
-#: common/tracker/actions/browse.php:199 common/tracker/actions/browse.php:572
+#: common/tracker/actions/browse.php:199 common/tracker/actions/browse.php:575
 #: common/tracker/actions/query.php:201
 #: common/tracker/views/form-customizelist.php:46
 #, fuzzy
 msgid "Last Modified Date"
 msgstr "Llista Afegida"
 
-#: common/tracker/actions/browse.php:200 common/tracker/actions/browse.php:560
+#: common/tracker/actions/browse.php:200 common/tracker/actions/browse.php:563
 #: common/tracker/actions/query.php:202
 #: common/tracker/views/form-customizelist.php:43
 msgid "Close Date"
@@ -5458,7 +5455,7 @@ msgstr ""
 msgid "Change"
 msgstr "Canvi"
 
-#: common/tracker/actions/browse.php:329
+#: common/tracker/actions/browse.php:329 common/tracker/actions/browse.php:440
 #, fuzzy
 msgid "Advanced queries"
 msgstr "Cerca avançada"
@@ -5482,7 +5479,7 @@ msgstr ""
 msgid "Build Query"
 msgstr ""
 
-#: common/tracker/actions/browse.php:397
+#: common/tracker/actions/browse.php:397 common/tracker/actions/browse.php:441
 msgid "Simple Filtering and Sorting"
 msgstr ""
 
@@ -5499,21 +5496,20 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: common/tracker/actions/browse.php:438
-msgid ""
-"Viewing only opened records by default, use 'Advanced queries' or 'Simple "
-"Filtering and Sorting' to change."
+#: common/tracker/actions/browse.php:439
+#, php-format
+msgid "Viewing only opened records by default, use “%1$s” or “%2$s” to change."
 msgstr ""
 
-#: common/tracker/actions/browse.php:537 www/pm/browse_task.php:210
+#: common/tracker/actions/browse.php:540 www/pm/browse_task.php:210
 msgid "Check all"
 msgstr "Marca-ho tot"
 
-#: common/tracker/actions/browse.php:539 www/pm/browse_task.php:212
+#: common/tracker/actions/browse.php:542 www/pm/browse_task.php:212
 msgid "Clear all"
 msgstr "Suprimeix-ho tot"
 
-#: common/tracker/actions/browse.php:566 common/tracker/actions/browse.php:745
+#: common/tracker/actions/browse.php:569 common/tracker/actions/browse.php:747
 #: common/tracker/actions/detail.php:87
 #: common/tracker/actions/mod-limited.php:114
 #: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:934
@@ -5530,7 +5526,7 @@ msgstr "Suprimeix-ho tot"
 msgid "Assigned to"
 msgstr "Assignat a"
 
-#: common/tracker/actions/browse.php:568 common/tracker/actions/detail.php:78
+#: common/tracker/actions/browse.php:571 common/tracker/actions/detail.php:78
 #: common/tracker/actions/mod-limited.php:86 common/tracker/actions/mod.php:88
 #: common/tracker/views/form-customizelist.php:42
 #: cronjobs/send_pending_items_mail.php:79
@@ -5546,48 +5542,47 @@ msgstr "Assignat a"
 msgid "Submitted by"
 msgstr "Tramès per"
 
-#: common/tracker/actions/browse.php:570 common/tracker/actions/mod.php:228
+#: common/tracker/actions/browse.php:573 common/tracker/actions/mod.php:228
 #: common/tracker/include/ArtifactTypeHtml.class.php:320
 #: common/tracker/views/form-customizelist.php:45
 msgid "Related Tasks"
 msgstr ""
 
-#: common/tracker/actions/browse.php:690
+#: common/tracker/actions/browse.php:693
 #, php-format
-msgid "* Denotes requests > %1$s Days Old"
-msgstr "* Denota requeriments de fa > %1$s dia"
+msgid "* Denotes requests > %s Days Old"
+msgstr "* Denota requeriments de fa > %s dia"
 
-#: common/tracker/actions/browse.php:713 common/tracker/actions/browse.php:758
+#: common/tracker/actions/browse.php:716 common/tracker/actions/browse.php:760
 #: www/pm/browse_task.php:361 www/pm/browse_task.php:390
 msgid "Mass Update"
 msgstr "Actualització en massa"
 
-#: common/tracker/actions/browse.php:718 www/pm/browse_task.php:366
+#: common/tracker/actions/browse.php:720 www/pm/browse_task.php:366
 msgid ""
-"<strong>Admin:</strong> If you wish to apply changes to all items selected "
-"above, use these controls to change their properties and click once on "
-"\"Mass Update\"."
+"If you wish to apply changes to all items selected above, use these controls "
+"to change their properties and click once on “Mass Update”."
 msgstr ""
 
-#: common/tracker/actions/browse.php:735 common/tracker/actions/browse.php:746
-#: common/tracker/actions/browse.php:750 www/include/html.php:362
+#: common/tracker/actions/browse.php:737 common/tracker/actions/browse.php:748
+#: common/tracker/actions/browse.php:752 www/include/html.php:362
 #: www/include/html.php:605 www/include/html.php:802
 #: www/pm/browse_task.php:358 www/pm/browse_task.php:373
 #: www/pm/browse_task.php:384
 msgid "No Change"
 msgstr "No hi ha canvis"
 
-#: common/tracker/actions/browse.php:746
+#: common/tracker/actions/browse.php:748
 #: common/tracker/include/ArtifactTypeHtml.class.php:687
 #: common/tracker/include/ArtifactTypeHtml.class.php:721
 msgid "Nobody"
 msgstr "Ningú"
 
-#: common/tracker/actions/browse.php:755 common/tracker/Artifact.class.php:942
+#: common/tracker/actions/browse.php:757 common/tracker/Artifact.class.php:942
 msgid "Canned Response"
 msgstr "Resposta 'enllaunada'"
 
-#: common/tracker/actions/browse.php:767
+#: common/tracker/actions/browse.php:769
 msgid "No items found"
 msgstr "No s'han trobat elements"
 
@@ -5965,7 +5960,7 @@ msgstr ""
 
 #: common/tracker/actions/tracker.php:112
 #, php-format
-msgid "Error on attached file %1$d, transfert interrupted."
+msgid "Error on attached file %d, transfer interrupted."
 msgstr ""
 
 #: common/tracker/actions/tracker.php:126
@@ -6396,7 +6391,7 @@ msgstr "Crea una relació de tasca"
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:43
 #, fuzzy, php-format
-msgid "Trackers for %1$s"
+msgid "Trackers for %s"
 msgstr "Fòrums per %1$s"
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:47
@@ -6596,7 +6591,7 @@ msgid "Operation"
 msgstr "Operacions"
 
 #: common/tracker/views/form-addcanned.php:60
-msgid "No responses set up in this group"
+msgid "No Canned Responses set up in this Project"
 msgstr "No hi ha respostes establertes en aquest grup"
 
 #: common/tracker/views/form-addcanned.php:63
@@ -7060,7 +7055,7 @@ msgstr "Administració del Gestor de Documents"
 
 #: common/tracker/views/form-extrafieldcopy.php:55
 #, fuzzy, php-format
-msgid "Copy choices from custom field %1$s"
+msgid "Copy choices from custom field %s"
 msgstr "Tipus de camp extra"
 
 #: common/tracker/views/form-extrafieldcopy.php:68
@@ -7247,7 +7242,7 @@ msgstr "Administratiu"
 
 #: common/widget/Widget_MyAdmin.class.php:51
 #, php-format
-msgid "Users in <a href=\"%s\"><b>P</b> (pending) Status</a>"
+msgid "Users in <a href=\"%s\"><strong>P</strong> (pending) Status</a>"
 msgstr ""
 
 #: common/widget/Widget_MyAdmin.class.php:69
@@ -8474,9 +8469,9 @@ msgstr ""
 
 #: plugins/authopenid/www/post-login.php:105
 #: plugins/authwebid/www/post-login.php:85
-#, php-format
-msgid "Unknown user with identity '%s'"
-msgstr ""
+#, fuzzy, php-format
+msgid "Unknown user with identity “%s”"
+msgstr "No es pot afegir una entrada de la base de dades"
 
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:82
 #, php-format
@@ -8963,7 +8958,7 @@ msgid "Register new actor"
 msgstr "Registra un nou projecte"
 
 #: plugins/contribtracker/www/global_admin.php:294
-msgid "No legal structures yet, can't define actors without them."
+msgid "No legal structures yet, cannot define actors without them."
 msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:297
@@ -12338,8 +12333,8 @@ msgstr ""
 #: plugins/oauthprovider/www/authorize.php:99
 #, php-format
 msgid ""
-"Consumer <b>\"%s\"</b> wants to be authorized to access Fusionforge on your "
-"behalf (asked %s)"
+"Consumer “%s” wants to be authorized to access Fusionforge on your behalf "
+"(asked %s)"
 msgstr ""
 
 #: plugins/oauthprovider/www/authorize.php:115
@@ -23442,6 +23437,16 @@ msgstr "Nom d'usuari"
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
 
+#, fuzzy
+#~ msgid "Forum: "
+#~ msgstr "Fòrum"
+
+#~ msgid "* Denotes requests > %1$s Days Old"
+#~ msgstr "* Denota requeriments de fa > %1$s dia"
+
+#~ msgid "No responses set up in this group"
+#~ msgstr "No hi ha respostes establertes en aquest grup"
+
 #~ msgid "reply"
 #~ msgstr "respon"
 
@@ -24741,14 +24746,8 @@ msgstr "La meva pàgina personal"
 #~ "Categories o Grups) per a descriure i navegar errors o altres tipus "
 #~ "d'artefactes"
 
-#~ msgid "* Denotes requests > %s Days Old"
-#~ msgstr "* Denota requeriments de fa > %s dia"
-
 #~ msgid "This Tracker Does Not Allow Anonymous Submissions."
 #~ msgstr "Aquest tipus d'artefacte no permet enviaments anònims."
-
-#~ msgid "No Canned Responses set up in this Project"
-#~ msgstr "No hi ha respostes establertes en aquest grup"
 
 #~ msgid "There are no public subprojects available"
 #~ msgstr "No hi ha subprojectes públics disponibles"
