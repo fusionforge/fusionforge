@@ -52,7 +52,7 @@ $res = db_query_params ('SELECT g.unix_group_name, agl.name AS tracker_name, aef
 			exit_error(_('Cannot find a destination tracker where you have administration rights.'),'tracker');
 		}
 
-		$title = sprintf(_('Copy choices from custom field %1$s'), $fb->getName());
+		$title = sprintf(_('Copy choices from custom field %s'), $fb->getName());
 		$ath->adminHeader(array('title'=>$title));
 
 		$efearr = $ath->getExtraFieldElements($id);
