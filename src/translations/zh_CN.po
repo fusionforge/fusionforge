@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:58+0200\n"
+"POT-Creation-Date: 2013-10-07 18:03+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -447,6 +447,8 @@ msgstr "项目"
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
 #: common/tracker/actions/query.php:386 common/tracker/actions/query.php:388
 #: common/tracker/actions/query.php:390 common/tracker/actions/query.php:395
+#: common/tracker/actions/tracker.php:388
+#: common/tracker/actions/tracker.php:393
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -5903,6 +5905,7 @@ msgstr ""
 
 #: common/tracker/actions/tracker.php:126
 #: common/tracker/actions/tracker.php:359
+#: common/tracker/actions/tracker.php:388
 #, fuzzy
 msgid "Could Not Create File Object"
 msgstr "无法更新上层文章"
@@ -5946,14 +5949,9 @@ msgstr "文件上传错误"
 msgid "File Upload: Successful"
 msgstr "文件上传：成功"
 
-#: common/tracker/actions/tracker.php:388
-#, fuzzy
-msgid "Could Not Create File Object: "
-msgstr "无法更新上层文章"
-
 #: common/tracker/actions/tracker.php:393
-msgid "File Delete:"
-msgstr "文件移除："
+msgid "File Delete"
+msgstr "文件移除"
 
 #: common/tracker/actions/tracker.php:396
 msgid "File Delete: Successful"
@@ -23208,6 +23206,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Could Not Create File Object: "
+#~ msgstr "无法更新上层文章"
 
 #, fuzzy
 #~ msgid "Content:"

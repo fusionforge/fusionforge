@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:58+0200\n"
+"POT-Creation-Date: 2013-10-07 18:03+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -424,6 +424,8 @@ msgstr "Proyecto"
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
 #: common/tracker/actions/query.php:386 common/tracker/actions/query.php:388
 #: common/tracker/actions/query.php:390 common/tracker/actions/query.php:395
+#: common/tracker/actions/tracker.php:388
+#: common/tracker/actions/tracker.php:393
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -5795,6 +5797,7 @@ msgstr "Error: Desechando adjunto %d: transferencia interrumpida."
 
 #: common/tracker/actions/tracker.php:126
 #: common/tracker/actions/tracker.php:359
+#: common/tracker/actions/tracker.php:388
 msgid "Could Not Create File Object"
 msgstr "No puedo crear un Objeto Fichero"
 
@@ -5834,12 +5837,8 @@ msgstr "Subida de Fichero: Error"
 msgid "File Upload: Successful"
 msgstr "Fichero enviado con éxito"
 
-#: common/tracker/actions/tracker.php:388
-msgid "Could Not Create File Object: "
-msgstr "No puedo crear el Objeto Fichero:"
-
 #: common/tracker/actions/tracker.php:393
-msgid "File Delete:"
+msgid "File Delete"
 msgstr "Borrar fichero"
 
 #: common/tracker/actions/tracker.php:396
@@ -16876,9 +16875,8 @@ msgid "File Deleted"
 msgstr "Fichero Borrado"
 
 #: www/frs/admin/editrelease.php:193
-#, fuzzy
 msgid "File not deleted: you did not check “I am Sure”"
-msgstr "Fichero no borrado no ha marcado \"Estoy Seguro\""
+msgstr "Fichero no borrado no ha marcado “Estoy Seguro”"
 
 #: www/frs/admin/editrelease.php:209
 msgid "File Updated"
@@ -22969,6 +22967,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Could Not Create File Object: "
+#~ msgstr "No puedo crear el Objeto Fichero:"
 
 #, fuzzy
 #~ msgid "Content:"

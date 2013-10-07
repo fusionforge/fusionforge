@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:58+0200\n"
+"POT-Creation-Date: 2013-10-07 18:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -406,6 +406,8 @@ msgstr ""
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
 #: common/tracker/actions/query.php:386 common/tracker/actions/query.php:388
 #: common/tracker/actions/query.php:390 common/tracker/actions/query.php:395
+#: common/tracker/actions/tracker.php:388
+#: common/tracker/actions/tracker.php:393
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -5448,6 +5450,7 @@ msgstr ""
 
 #: common/tracker/actions/tracker.php:126
 #: common/tracker/actions/tracker.php:359
+#: common/tracker/actions/tracker.php:388
 msgid "Could Not Create File Object"
 msgstr ""
 
@@ -5487,12 +5490,8 @@ msgstr ""
 msgid "File Upload: Successful"
 msgstr ""
 
-#: common/tracker/actions/tracker.php:388
-msgid "Could Not Create File Object: "
-msgstr ""
-
 #: common/tracker/actions/tracker.php:393
-msgid "File Delete:"
+msgid "File Delete"
 msgstr ""
 
 #: common/tracker/actions/tracker.php:396

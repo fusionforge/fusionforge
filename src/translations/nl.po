@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:58+0200\n"
+"POT-Creation-Date: 2013-10-07 18:03+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -445,6 +445,8 @@ msgstr "Project"
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
 #: common/tracker/actions/query.php:386 common/tracker/actions/query.php:388
 #: common/tracker/actions/query.php:390 common/tracker/actions/query.php:395
+#: common/tracker/actions/tracker.php:388
+#: common/tracker/actions/tracker.php:393
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -5944,6 +5946,7 @@ msgstr ""
 
 #: common/tracker/actions/tracker.php:126
 #: common/tracker/actions/tracker.php:359
+#: common/tracker/actions/tracker.php:388
 #, fuzzy
 msgid "Could Not Create File Object"
 msgstr "Kan parent niet aanpassen"
@@ -5987,14 +5990,9 @@ msgstr "Onbekende fout bij het uploaden van het bestand."
 msgid "File Upload: Successful"
 msgstr "Bestand geupload"
 
-#: common/tracker/actions/tracker.php:388
-#, fuzzy
-msgid "Could Not Create File Object: "
-msgstr "Kan parent niet aanpassen"
-
 #: common/tracker/actions/tracker.php:393
-msgid "File Delete:"
-msgstr "Bestand wissen:"
+msgid "File Delete"
+msgstr "Bestand wissen"
 
 #: common/tracker/actions/tracker.php:396
 msgid "File Delete: Successful"
@@ -23438,6 +23436,10 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#, fuzzy
+#~ msgid "Could Not Create File Object: "
+#~ msgstr "Kan parent niet aanpassen"
 
 #, fuzzy
 #~ msgid "Content:"

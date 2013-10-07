@@ -385,12 +385,12 @@ switch (getStringFromRequest('func')) {
 						for ($i=0; $i<$count; $i++) {
 							$afh=new ArtifactFileHtml($ah,$delete_file[$i]);
 							if (!$afh || !is_object($afh)) {
-								$error_msg .= _('Could Not Create File Object: ').$delete_file[$i];
+								$error_msg .= _('Could Not Create File Object')._(': ').$delete_file[$i];
 							} elseif ($afh->isError()) {
 								$error_msg .= $afh->getErrorMessage().'::'.$delete_file[$i];
 							} else {
 								if (!$afh->delete()) {
-									$error_msg .= ' <br />'._('File Delete:').': '.$afh->getErrorMessage();
+									$error_msg .= ' <br />'._('File Delete')._(': ').$afh->getErrorMessage();
 									$was_error=true;
 								} else {
 									$feedback .= ' <br />'._('File Delete: Successful');

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:58+0200\n"
+"POT-Creation-Date: 2013-10-07 18:03+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -444,6 +444,8 @@ msgstr ""
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
 #: common/tracker/actions/query.php:386 common/tracker/actions/query.php:388
 #: common/tracker/actions/query.php:390 common/tracker/actions/query.php:395
+#: common/tracker/actions/tracker.php:388
+#: common/tracker/actions/tracker.php:393
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -5789,6 +5791,7 @@ msgstr ""
 
 #: common/tracker/actions/tracker.php:126
 #: common/tracker/actions/tracker.php:359
+#: common/tracker/actions/tracker.php:388
 #, fuzzy
 msgid "Could Not Create File Object"
 msgstr "パーミッションが取得できません。"
@@ -5830,14 +5833,10 @@ msgstr ""
 msgid "File Upload: Successful"
 msgstr ""
 
-#: common/tracker/actions/tracker.php:388
-#, fuzzy
-msgid "Could Not Create File Object: "
-msgstr "パーミッションが取得できません。"
-
 #: common/tracker/actions/tracker.php:393
-msgid "File Delete:"
-msgstr ""
+#, fuzzy
+msgid "File Delete"
+msgstr "ニューリリース"
 
 #: common/tracker/actions/tracker.php:396
 msgid "File Delete: Successful"
@@ -22562,6 +22561,10 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr "%sのパーソナルページ"
+
+#, fuzzy
+#~ msgid "Could Not Create File Object: "
+#~ msgstr "パーミッションが取得できません。"
 
 #, fuzzy
 #~ msgid "Child project: "

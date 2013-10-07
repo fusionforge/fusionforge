@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:58+0200\n"
+"POT-Creation-Date: 2013-10-07 18:03+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -445,6 +445,8 @@ msgstr "Projekt"
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
 #: common/tracker/actions/query.php:386 common/tracker/actions/query.php:388
 #: common/tracker/actions/query.php:390 common/tracker/actions/query.php:395
+#: common/tracker/actions/tracker.php:388
+#: common/tracker/actions/tracker.php:393
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -5979,6 +5981,7 @@ msgstr ""
 
 #: common/tracker/actions/tracker.php:126
 #: common/tracker/actions/tracker.php:359
+#: common/tracker/actions/tracker.php:388
 #, fuzzy
 msgid "Could Not Create File Object"
 msgstr "Konnte kein Foren-Objekt einholen"
@@ -6020,14 +6023,9 @@ msgstr "Dateihochlade- Fehler."
 msgid "File Upload: Successful"
 msgstr "Datei hochladen: Erfolgreich"
 
-#: common/tracker/actions/tracker.php:388
-#, fuzzy
-msgid "Could Not Create File Object: "
-msgstr "Konnte kein Foren-Objekt einholen"
-
 #: common/tracker/actions/tracker.php:393
-msgid "File Delete:"
-msgstr "Datei löschen:"
+msgid "File Delete"
+msgstr "Datei löschen"
 
 #: common/tracker/actions/tracker.php:396
 msgid "File Delete: Successful"
@@ -23674,6 +23672,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "Could Not Create File Object: "
+#~ msgstr "Konnte kein Foren-Objekt einholen"
 
 #, fuzzy
 #~ msgid "Content:"

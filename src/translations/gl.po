@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:58+0200\n"
+"POT-Creation-Date: 2013-10-07 18:03+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -444,6 +444,8 @@ msgstr "Proxecto "
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
 #: common/tracker/actions/query.php:386 common/tracker/actions/query.php:388
 #: common/tracker/actions/query.php:390 common/tracker/actions/query.php:395
+#: common/tracker/actions/tracker.php:388
+#: common/tracker/actions/tracker.php:393
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -5958,6 +5960,7 @@ msgstr ""
 
 #: common/tracker/actions/tracker.php:126
 #: common/tracker/actions/tracker.php:359
+#: common/tracker/actions/tracker.php:388
 #, fuzzy
 msgid "Could Not Create File Object"
 msgstr "Non se puido obter o obxecto de foro"
@@ -5999,14 +6002,9 @@ msgstr "Produciuse un erro no envío do ficheiro."
 msgid "File Upload: Successful"
 msgstr "O ficheiro enviouse correctamente"
 
-#: common/tracker/actions/tracker.php:388
-#, fuzzy
-msgid "Could Not Create File Object: "
-msgstr "Non se puido obter o obxecto de foro"
-
 #: common/tracker/actions/tracker.php:393
-msgid "File Delete:"
-msgstr "Eliminar ficheiro:"
+msgid "File Delete"
+msgstr "Eliminar ficheiro"
 
 #: common/tracker/actions/tracker.php:396
 msgid "File Delete: Successful"
@@ -23610,6 +23608,10 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Could Not Create File Object: "
+#~ msgstr "Non se puido obter o obxecto de foro"
 
 #, fuzzy
 #~ msgid "Content:"

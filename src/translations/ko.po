@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:58+0200\n"
+"POT-Creation-Date: 2013-10-07 18:03+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -448,6 +448,8 @@ msgstr ""
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
 #: common/tracker/actions/query.php:386 common/tracker/actions/query.php:388
 #: common/tracker/actions/query.php:390 common/tracker/actions/query.php:395
+#: common/tracker/actions/tracker.php:388
+#: common/tracker/actions/tracker.php:393
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -5897,6 +5899,7 @@ msgstr ""
 
 #: common/tracker/actions/tracker.php:126
 #: common/tracker/actions/tracker.php:359
+#: common/tracker/actions/tracker.php:388
 #, fuzzy
 msgid "Could Not Create File Object"
 msgstr "Could Not Update Parent"
@@ -5940,14 +5943,9 @@ msgstr "파일 업로드: 성공"
 msgid "File Upload: Successful"
 msgstr "파일 업로드: 성공"
 
-#: common/tracker/actions/tracker.php:388
-#, fuzzy
-msgid "Could Not Create File Object: "
-msgstr "Could Not Update Parent"
-
 #: common/tracker/actions/tracker.php:393
-msgid "File Delete:"
-msgstr "파일 삭제:"
+msgid "File Delete"
+msgstr "파일 삭제"
 
 #: common/tracker/actions/tracker.php:396
 msgid "File Delete: Successful"
@@ -23152,6 +23150,10 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "Could Not Create File Object: "
+#~ msgstr "Could Not Update Parent"
 
 #, fuzzy
 #~ msgid "Content:"

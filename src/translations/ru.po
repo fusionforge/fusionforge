@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:58+0200\n"
+"POT-Creation-Date: 2013-10-07 18:03+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -447,6 +447,8 @@ msgstr "Проект"
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
 #: common/tracker/actions/query.php:386 common/tracker/actions/query.php:388
 #: common/tracker/actions/query.php:390 common/tracker/actions/query.php:395
+#: common/tracker/actions/tracker.php:388
+#: common/tracker/actions/tracker.php:393
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -5948,6 +5950,7 @@ msgstr ""
 
 #: common/tracker/actions/tracker.php:126
 #: common/tracker/actions/tracker.php:359
+#: common/tracker/actions/tracker.php:388
 #, fuzzy
 msgid "Could Not Create File Object"
 msgstr "Невозможно получение группы проекта"
@@ -5989,14 +5992,9 @@ msgstr "Ошибка загрузки файла."
 msgid "File Upload: Successful"
 msgstr "Загрузка файла: завершено"
 
-#: common/tracker/actions/tracker.php:388
-#, fuzzy
-msgid "Could Not Create File Object: "
-msgstr "Невозможно получение группы проекта"
-
 #: common/tracker/actions/tracker.php:393
-msgid "File Delete:"
-msgstr "Удаляемый файл:"
+msgid "File Delete"
+msgstr "Удаляемый файл"
 
 #: common/tracker/actions/tracker.php:396
 msgid "File Delete: Successful"
@@ -23753,6 +23751,10 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "Could Not Create File Object: "
+#~ msgstr "Невозможно получение группы проекта"
 
 #, fuzzy
 #~ msgid "Content:"

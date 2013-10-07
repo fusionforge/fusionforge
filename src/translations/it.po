@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:58+0200\n"
+"POT-Creation-Date: 2013-10-07 18:03+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -445,6 +445,8 @@ msgstr "Progetto"
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
 #: common/tracker/actions/query.php:386 common/tracker/actions/query.php:388
 #: common/tracker/actions/query.php:390 common/tracker/actions/query.php:395
+#: common/tracker/actions/tracker.php:388
+#: common/tracker/actions/tracker.php:393
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -5948,6 +5950,7 @@ msgstr ""
 
 #: common/tracker/actions/tracker.php:126
 #: common/tracker/actions/tracker.php:359
+#: common/tracker/actions/tracker.php:388
 #, fuzzy
 msgid "Could Not Create File Object"
 msgstr "Non ho potuto aggiornare il messaggio superiore"
@@ -5991,14 +5994,9 @@ msgstr "Effettuato l'upload del file"
 msgid "File Upload: Successful"
 msgstr "File caricato con successo"
 
-#: common/tracker/actions/tracker.php:388
-#, fuzzy
-msgid "Could Not Create File Object: "
-msgstr "Non ho potuto aggiornare il messaggio superiore"
-
 #: common/tracker/actions/tracker.php:393
-msgid "File Delete:"
-msgstr "Rimozione file:"
+msgid "File Delete"
+msgstr "Rimozione file"
 
 #: common/tracker/actions/tracker.php:396
 msgid "File Delete: Successful"
@@ -23428,6 +23426,10 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "Could Not Create File Object: "
+#~ msgstr "Non ho potuto aggiornare il messaggio superiore"
 
 #, fuzzy
 #~ msgid "Content:"

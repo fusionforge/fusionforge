@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:58+0200\n"
+"POT-Creation-Date: 2013-10-07 18:03+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -446,6 +446,8 @@ msgstr ""
 #: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
 #: common/tracker/actions/query.php:386 common/tracker/actions/query.php:388
 #: common/tracker/actions/query.php:390 common/tracker/actions/query.php:395
+#: common/tracker/actions/tracker.php:388
+#: common/tracker/actions/tracker.php:393
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -5927,6 +5929,7 @@ msgstr ""
 
 #: common/tracker/actions/tracker.php:126
 #: common/tracker/actions/tracker.php:359
+#: common/tracker/actions/tracker.php:388
 #, fuzzy
 msgid "Could Not Create File Object"
 msgstr "Ezin dut mezu nagusia eguneratu"
@@ -5968,14 +5971,10 @@ msgstr "Fitxategi igoera: Errorea"
 msgid "File Upload: Successful"
 msgstr "Fitxategi igoera: Arrakasta"
 
-#: common/tracker/actions/tracker.php:388
-#, fuzzy
-msgid "Could Not Create File Object: "
-msgstr "Ezin dut mezu nagusia eguneratu"
-
 #: common/tracker/actions/tracker.php:393
-msgid "File Delete:"
-msgstr "Fitxategia ezabatu:"
+#, fuzzy
+msgid "File Delete"
+msgstr "Fitxategia ezabatu"
 
 #: common/tracker/actions/tracker.php:396
 msgid "File Delete: Successful"
@@ -23274,6 +23273,10 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#, fuzzy
+#~ msgid "Could Not Create File Object: "
+#~ msgstr "Ezin dut mezu nagusia eguneratu"
 
 #, fuzzy
 #~ msgid "Content:"
