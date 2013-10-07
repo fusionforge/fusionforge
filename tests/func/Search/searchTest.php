@@ -280,12 +280,12 @@ class Search extends FForge_SeleniumTestCase
 		$this->type("body", "ninetynine of them on Charlie's wall - also, ZONGO");
 		$this->clickAndWait("submit");
 		$this->clickAndWait("link=Message1 in a bottle");
-		$this->clickAndWait("link=[ reply ]");
+		$this->clickAndWait("link=[ Reply ]");
 		$this->type("subject", "Message2 in a bottle");
 		$this->type("body", "ninetyeight of them in Charlie's fridge - also, ZONGO");
 		$this->clickAndWait("submit");
 		$this->clickAndWait("link=Message1 in a bottle");
-		$this->clickAndWait("link=[ reply ]");
+		$this->clickAndWait("link=[ Reply ]");
 		$this->type("subject", "Message3 in a bottle");
 		$this->type("body", "and yet another needle for the forums - also, ZONGO");
 		$this->clickAndWait("submit");

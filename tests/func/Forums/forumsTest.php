@@ -111,7 +111,7 @@ class CreateForum extends FForge_SeleniumTestCase
 		$this->clickAndWait("link=Forums");
 		$this->clickAndWait("link=open-discussion");
 		$this->clickAndWait("link=Welcome to open-discussion");
-		$this->click("link=[ reply ]");
+		$this->click("link=[ Reply ]");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isLoginRequired());
 		$this->triggeredLogin(FORGE_ADMIN_USERNAME);
