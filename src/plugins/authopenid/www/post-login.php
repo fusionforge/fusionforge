@@ -102,7 +102,7 @@ try {
 					}
 				}
 				else {
-					$warning_msg = sprintf (_("Unknown user with identity '%s'"),$plugin->openid->identity);
+					$warning_msg = sprintf (_("Unknown user with identity “%s”"),$plugin->openid->identity);
 				}
 	    	}
 		}

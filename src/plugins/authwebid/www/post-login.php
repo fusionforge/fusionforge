@@ -82,7 +82,7 @@ if (forge_get_config('use_ssl') && !session_issecure()) {
 					}
 				}
 				else {
-					$warning_msg = sprintf (_("Unknown user with identity '%s'"),$plugin->getCurrentWebID());
+					$warning_msg = sprintf (_("Unknown user with identity “%s”"),$plugin->getCurrentWebID());
 				}
 	    	}
 		}
