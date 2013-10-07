@@ -109,7 +109,7 @@ switch (getStringFromRequest('func')) {
 							$n, ini_get('upload_max_filesize'));
 					} elseif ($error === 3) {
 						// UPLOAD_ERR_PARTIAL
-						$error_msg = sprintf(_('Error on attached file %1$d, transfert interrupted.'), $n);
+						$error_msg = sprintf(_('Error on attached file %d, transfer interrupted.'), $n);
 					}
 					continue;
 				}
