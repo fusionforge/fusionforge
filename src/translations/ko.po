@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:44+0200\n"
+"POT-Creation-Date: 2013-10-07 17:53+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -435,7 +435,8 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:73 common/forum/ForumHTML.class.php:211
 #: common/forum/ForumHTML.class.php:269 common/forum/ForumHTML.class.php:527
 #: common/forum/ForumHTML.class.php:531 common/forum/ForumHTML.class.php:591
-#: common/forum/ForumHTML.class.php:594 common/include/Error.class.php:207
+#: common/forum/ForumHTML.class.php:594
+#: common/forum/ForumMessage.class.php:667 common/include/Error.class.php:207
 #: common/include/exit.php:80 common/include/User.class.php:348
 #: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
@@ -2207,6 +2208,7 @@ msgstr "대기중인 제출이유:"
 
 #: common/forum/ForumAdmin.class.php:461
 #: common/forum/ForumMessage.class.php:183
+#: common/forum/ForumMessage.class.php:277
 msgid "Could not Update Master Thread parent with current time"
 msgstr ""
 
@@ -2387,6 +2389,7 @@ msgid "This is the content of the pending message"
 msgstr ""
 
 #: common/forum/ForumHTML.class.php:211 common/forum/ForumHTML.class.php:269
+#: common/forum/ForumMessage.class.php:667
 #: common/tracker/include/ArtifactHtml.class.php:149
 #: common/tracker/include/ArtifactTypeHtml.class.php:371
 #: www/activity/index.php:266 www/forum/message.php:126
@@ -2526,10 +2529,6 @@ msgstr ""
 msgid "Could Not Update Parent"
 msgstr "Could Not Update Parent"
 
-#: common/forum/ForumMessage.class.php:277
-msgid "Couldn't Update Master Thread parent with current time"
-msgstr "Couldn't Update Master Thread parent with current time"
-
 #: common/forum/ForumMessage.class.php:358
 #: common/forum/ForumMessage.class.php:802
 #, fuzzy
@@ -2565,15 +2564,6 @@ msgid ""
 "%1$s\n"
 "(enter your response here)\n"
 "%1$s"
-msgstr ""
-
-#: common/forum/ForumMessage.class.php:667
-#, php-format
-msgid ""
-"\n"
-"\n"
-"\n"
-"By: %s\n"
 msgstr ""
 
 #: common/forum/ForumMessage.class.php:672
@@ -23171,6 +23161,9 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#~ msgid "Couldn't Update Master Thread parent with current time"
+#~ msgstr "Couldn't Update Master Thread parent with current time"
 
 #~ msgid "By:"
 #~ msgstr "By:"

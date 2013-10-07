@@ -274,7 +274,7 @@ class ForumMessage extends Error {
 						 array ($timestamp,
 							$thread_id)) ;
 				if (!$res4 || db_affected_rows($res4) < 1) {
-					$this->setError(_('Couldn\'t Update Master Thread parent with current time'));
+					$this->setError(_('Could not Update Master Thread parent with current time'));
 					db_rollback();
 					return false;
 				} else {
@@ -664,7 +664,7 @@ Or reply to this e-mail entering your response between the following markers:
 (enter your response here)
 %1$s'), FORUM_MAIL_MARKER));
 			}
-			$body .= sprintf(_("\n\n\nBy: %s\n"), $this->getPosterRealName());
+			$body .= "\n\n\n"._('By')._(': ').$this->getPosterRealName()."\n";
 
 			if ($has_attach) {
 				//if there's an attachment for the message, make it note.
@@ -676,7 +676,7 @@ Or reply to this e-mail entering your response between the following markers:
 			$sanitizer = new TextSanitizer();
 			$text = $this->getBody();
 			$text = $sanitizer->convertNeededTagsForEmail($text);
-			$text= strip_tags($this->removebbcode(util_line_wrap($text)));
+			$text = strip_tags($this->removebbcode(util_line_wrap($text)));
 			$text = $sanitizer->convertExtendedCharsForEmail($text);
 			$body .= sprintf(
 				"%s\n\n______________________________________________________________________\n".

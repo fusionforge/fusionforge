@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:44+0200\n"
+"POT-Creation-Date: 2013-10-07 17:53+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -411,7 +411,8 @@ msgstr "Proyecto"
 #: common/forum/ForumHTML.class.php:73 common/forum/ForumHTML.class.php:211
 #: common/forum/ForumHTML.class.php:269 common/forum/ForumHTML.class.php:527
 #: common/forum/ForumHTML.class.php:531 common/forum/ForumHTML.class.php:591
-#: common/forum/ForumHTML.class.php:594 common/include/Error.class.php:207
+#: common/forum/ForumHTML.class.php:594
+#: common/forum/ForumMessage.class.php:667 common/include/Error.class.php:207
 #: common/include/exit.php:80 common/include/User.class.php:348
 #: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
@@ -2136,6 +2137,7 @@ msgstr "Mensaje pendiente liberado"
 
 #: common/forum/ForumAdmin.class.php:461
 #: common/forum/ForumMessage.class.php:183
+#: common/forum/ForumMessage.class.php:277
 msgid "Could not Update Master Thread parent with current time"
 msgstr "No se pudo actualizar el hilo padre con la hora actual"
 
@@ -2313,6 +2315,7 @@ msgid "This is the content of the pending message"
 msgstr "Este es el contenido del mensaje pendiente"
 
 #: common/forum/ForumHTML.class.php:211 common/forum/ForumHTML.class.php:269
+#: common/forum/ForumMessage.class.php:667
 #: common/tracker/include/ArtifactHtml.class.php:149
 #: common/tracker/include/ArtifactTypeHtml.class.php:371
 #: www/activity/index.php:266 www/forum/message.php:126
@@ -2453,10 +2456,6 @@ msgstr "No se pudo obtener un nuevo message id"
 msgid "Could Not Update Parent"
 msgstr "No se pudo actualizar el padre"
 
-#: common/forum/ForumMessage.class.php:277
-msgid "Couldn't Update Master Thread parent with current time"
-msgstr "No se pudo actualizar el hilo padre con la hora actual"
-
 #: common/forum/ForumMessage.class.php:358
 #: common/forum/ForumMessage.class.php:802
 msgid "Error: a forum message must include a message body and a subject."
@@ -2500,19 +2499,6 @@ msgstr ""
 "%1$s\n"
 "(ingrese su respuesta aquí)\n"
 "%1$s"
-
-#: common/forum/ForumMessage.class.php:667
-#, php-format
-msgid ""
-"\n"
-"\n"
-"\n"
-"By: %s\n"
-msgstr ""
-"\n"
-"\n"
-"\n"
-"Por: %s\n"
 
 #: common/forum/ForumMessage.class.php:672
 msgid "A file has been uploaded with this message."
@@ -22991,6 +22977,20 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Couldn't Update Master Thread parent with current time"
+#~ msgstr "No se pudo actualizar el hilo padre con la hora actual"
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "By: %s\n"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "Por: %s\n"
 
 #~ msgid "By:"
 #~ msgstr "Por:"
