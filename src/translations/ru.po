@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:37+0200\n"
+"POT-Creation-Date: 2013-10-07 17:44+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -432,11 +432,11 @@ msgstr "Проект"
 #: common/forum/ForumHTML.class.php:58 common/forum/ForumHTML.class.php:68
 #: common/forum/ForumHTML.class.php:69 common/forum/ForumHTML.class.php:70
 #: common/forum/ForumHTML.class.php:73 common/forum/ForumHTML.class.php:211
-#: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:531
-#: common/forum/ForumHTML.class.php:591 common/forum/ForumHTML.class.php:594
-#: common/include/Error.class.php:207 common/include/exit.php:80
-#: common/include/User.class.php:348 common/include/User.class.php:1407
-#: common/mail/MailingList.class.php:174
+#: common/forum/ForumHTML.class.php:269 common/forum/ForumHTML.class.php:527
+#: common/forum/ForumHTML.class.php:531 common/forum/ForumHTML.class.php:591
+#: common/forum/ForumHTML.class.php:594 common/include/Error.class.php:207
+#: common/include/exit.php:80 common/include/User.class.php:348
+#: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
 #: common/tracker/actions/browse.php:407 common/tracker/actions/browse.php:751
@@ -2390,7 +2390,7 @@ msgstr "Неправильный объект форума"
 msgid "This is the content of the pending message"
 msgstr "Содержимое незаконченного сообщения"
 
-#: common/forum/ForumHTML.class.php:211
+#: common/forum/ForumHTML.class.php:211 common/forum/ForumHTML.class.php:269
 #: common/tracker/include/ArtifactHtml.class.php:149
 #: common/tracker/include/ArtifactTypeHtml.class.php:371
 #: www/activity/index.php:266 www/forum/message.php:126
@@ -2405,10 +2405,6 @@ msgstr "По"
 #, fuzzy
 msgid "Reply"
 msgstr "Ответить"
-
-#: common/forum/ForumHTML.class.php:269
-msgid "By:"
-msgstr "От:"
 
 #: common/forum/ForumHTML.class.php:313
 msgid "Current File"
@@ -23776,6 +23772,9 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#~ msgid "By:"
+#~ msgstr "От:"
 
 #, fuzzy
 #~ msgid "Both fields are used by document search engine."
