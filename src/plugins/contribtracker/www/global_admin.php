@@ -291,7 +291,7 @@ case 'display':
 
 			<?php
 			} else {
-		print _("No legal structures yet, can't define actors without them.") ;
+		print _("No legal structures yet, cannot define actors without them.") ;
 	}
 
 	print '<h1>'._('Existing legal structures').'</h1>' ;
