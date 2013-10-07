@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:32+0200\n"
+"POT-Creation-Date: 2013-10-07 17:37+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -825,7 +825,7 @@ msgstr "Beschreibung"
 msgid "A brief description to be placed just under the title."
 msgstr ""
 
-#: common/docman/views/addfile.php:94
+#: common/docman/views/addfile.php:94 common/docman/views/editfile.php:47
 #, fuzzy
 msgid "Both fields are used by the document search engine."
 msgstr "Dokumenten Suchmaschine"
@@ -1072,11 +1072,6 @@ msgid ""
 msgstr ""
 "Der Gruppen-Name wird als Titel benutzt, falls er dementsprechend formatiert "
 "sein sollte."
-
-#: common/docman/views/editfile.php:47
-#, fuzzy
-msgid "Both fields are used by document search engine."
-msgstr "Dokumenten Suchmaschine"
 
 #: common/docman/views/editfile.php:57
 #, fuzzy
@@ -23706,6 +23701,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "Both fields are used by document search engine."
+#~ msgstr "Dokumenten Suchmaschine"
 
 #~ msgid "[add new]"
 #~ msgstr "[Neu hinzufügen]"

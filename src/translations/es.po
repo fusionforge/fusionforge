@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:32+0200\n"
+"POT-Creation-Date: 2013-10-07 17:37+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -799,7 +799,7 @@ msgstr "Descripción"
 msgid "A brief description to be placed just under the title."
 msgstr "Una descripcion corta para ser insertada debajo del titulo"
 
-#: common/docman/views/addfile.php:94
+#: common/docman/views/addfile.php:94 common/docman/views/editfile.php:47
 msgid "Both fields are used by the document search engine."
 msgstr "Ambos campos son usados por el motor de busqueda del documento"
 
@@ -1032,10 +1032,6 @@ msgid ""
 msgstr ""
 "El nombr de la carpeta será usado como el titulo, asi qué deberá estar "
 "correctamente formateado."
-
-#: common/docman/views/editfile.php:47
-msgid "Both fields are used by document search engine."
-msgstr "Ambos campos son usados por el motor de busqueda de documentos"
 
 #: common/docman/views/editfile.php:57
 msgid ""
@@ -22999,6 +22995,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Both fields are used by document search engine."
+#~ msgstr "Ambos campos son usados por el motor de busqueda de documentos"
 
 #~ msgid "[add new]"
 #~ msgstr "[añadir nuevo]"

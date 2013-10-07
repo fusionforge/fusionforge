@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:32+0200\n"
+"POT-Creation-Date: 2013-10-07 17:37+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -827,7 +827,7 @@ msgstr "說明"
 msgid "A brief description to be placed just under the title."
 msgstr ""
 
-#: common/docman/views/addfile.php:94
+#: common/docman/views/addfile.php:94 common/docman/views/editfile.php:47
 msgid "Both fields are used by the document search engine."
 msgstr ""
 
@@ -1069,10 +1069,6 @@ msgid ""
 "Folder name will be used as a title, so it should be formatted "
 "correspondingly."
 msgstr "分組名稱將被用作標題，所以它應該相應的格式化。"
-
-#: common/docman/views/editfile.php:47
-msgid "Both fields are used by document search engine."
-msgstr ""
 
 #: common/docman/views/editfile.php:57
 msgid ""

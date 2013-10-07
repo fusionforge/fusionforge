@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:32+0200\n"
+"POT-Creation-Date: 2013-10-07 17:37+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -828,7 +828,7 @@ msgstr "Описание"
 msgid "A brief description to be placed just under the title."
 msgstr ""
 
-#: common/docman/views/addfile.php:94
+#: common/docman/views/addfile.php:94 common/docman/views/editfile.php:47
 #, fuzzy
 msgid "Both fields are used by the document search engine."
 msgstr "Служба поиска документов"
@@ -1074,11 +1074,6 @@ msgid ""
 msgstr ""
 "Имя группы будет использовано в качестве заголовка, поэтому должно быть "
 "задано в соответствующей форме."
-
-#: common/docman/views/editfile.php:47
-#, fuzzy
-msgid "Both fields are used by document search engine."
-msgstr "Служба поиска документов"
 
 #: common/docman/views/editfile.php:57
 msgid ""
@@ -23781,6 +23776,10 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "Both fields are used by document search engine."
+#~ msgstr "Служба поиска документов"
 
 #, fuzzy
 #~ msgid "[add new]"

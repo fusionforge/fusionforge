@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:32+0200\n"
+"POT-Creation-Date: 2013-10-07 17:37+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -824,7 +824,7 @@ msgstr "Omschrijving"
 msgid "A brief description to be placed just under the title."
 msgstr ""
 
-#: common/docman/views/addfile.php:94
+#: common/docman/views/addfile.php:94 common/docman/views/editfile.php:47
 msgid "Both fields are used by the document search engine."
 msgstr ""
 
@@ -1067,10 +1067,6 @@ msgid ""
 msgstr ""
 "Groepsnaam zal als titel gebruikt worden - denk daaraan bij naamgeving en "
 "formattering."
-
-#: common/docman/views/editfile.php:47
-msgid "Both fields are used by document search engine."
-msgstr ""
 
 #: common/docman/views/editfile.php:57
 msgid ""

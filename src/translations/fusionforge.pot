@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:32+0200\n"
+"POT-Creation-Date: 2013-10-07 17:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -767,7 +767,7 @@ msgstr ""
 msgid "A brief description to be placed just under the title."
 msgstr ""
 
-#: common/docman/views/addfile.php:94
+#: common/docman/views/addfile.php:94 common/docman/views/editfile.php:47
 msgid "Both fields are used by the document search engine."
 msgstr ""
 
@@ -989,10 +989,6 @@ msgstr ""
 msgid ""
 "Folder name will be used as a title, so it should be formatted "
 "correspondingly."
-msgstr ""
-
-#: common/docman/views/editfile.php:47
-msgid "Both fields are used by document search engine."
 msgstr ""
 
 #: common/docman/views/editfile.php:57

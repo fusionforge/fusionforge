@@ -44,7 +44,7 @@ echo '		<input id="description" type="text" name="description" size="40" maxleng
 echo '	</tr>';
 if ($g->useDocmanSearch()) {
 	echo '	<tr>';
-	echo '		<td>'. _('Both fields are used by document search engine.') .'</td>';
+	echo '		<td>'. _('Both fields are used by the document search engine.') .'</td>';
 	echo '	</tr>';
 }
 echo '	<tr>';
