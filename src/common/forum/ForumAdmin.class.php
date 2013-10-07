@@ -58,7 +58,7 @@ class ForumAdmin extends Error {
 	function PrintAdminMessageOptions($msg_id,$group_id,$thread_id=0,$forum_id=0,$return_to_message=0) {
 
 		$return = '<a href="admin/index.php?movethread=' . $thread_id  . '&amp;msg_id=' . $msg_id . '&amp;group_id=' . $group_id . '&amp;forum_id=' . $forum_id .
-				  '&amp;return_to_message=' . $return_to_message . '">' . html_image('ic/forum_move.gif','37','15',array('alt'=>_('Move thread'))). "</a>";
+				  '&amp;return_to_message=' . $return_to_message . '">' . html_image('ic/forum_move.gif','37','15',array('alt'=>_('Move Thread'))). "</a>";
 
 		// Following code (if ...) is to keep old implementation but need to be cleaned
 		if ($return_to_message) {
