@@ -9436,12 +9436,12 @@ msgstr "Thread View"
 
 #: plugins/forumml/www/upload.php:82
 #, fuzzy
-msgid "Error : Attachment not found"
+msgid "Error: Attachment not found"
 msgstr "Error - no versions found"
 
 #: plugins/forumml/www/upload.php:85
 #, fuzzy
-msgid "Error : Missing parameter "
+msgid "Error: Missing parameter"
 msgstr "오류 - 필요한 인자가 빠졌습니다."
 
 #: plugins/globaldashboard/include/globalDashboard_utils.php:42

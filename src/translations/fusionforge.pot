@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 18:08+0200\n"
+"POT-Creation-Date: 2013-10-07 18:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -8724,11 +8724,11 @@ msgid "Thread(s) found"
 msgstr ""
 
 #: plugins/forumml/www/upload.php:82
-msgid "Error : Attachment not found"
+msgid "Error: Attachment not found"
 msgstr ""
 
 #: plugins/forumml/www/upload.php:85
-msgid "Error : Missing parameter "
+msgid "Error: Missing parameter"
 msgstr ""
 
 #: plugins/globaldashboard/include/globalDashboard_utils.php:42

@@ -79,10 +79,10 @@ echo $attch['file_path'];
 		    readfile($attch['file_path']);
 		    exit;
 	    } else {
-		    $feedback.= _('Error : Attachment not found');
+		    $feedback.= _('Error: Attachment not found');
 	    }
     } else {
-		    $feedback.= _('Error : Missing parameter ');
+		$feedback.= _('Error: Missing parameter');
     }
     htmlRedirect('/plugins/forumml/message.php?group_id='.$groupId.'&list='.$list_id.'&topic='.$topic);
 } else {

@@ -9576,12 +9576,12 @@ msgstr "Fíos "
 
 #: plugins/forumml/www/upload.php:82
 #, fuzzy
-msgid "Error : Attachment not found"
+msgid "Error: Attachment not found"
 msgstr "Non se atopou ningún anexo"
 
 #: plugins/forumml/www/upload.php:85
 #, fuzzy
-msgid "Error : Missing parameter "
+msgid "Error: Missing parameter"
 msgstr "Produciuse un erro - faltan parámetros"
 
 #: plugins/globaldashboard/include/globalDashboard_utils.php:42

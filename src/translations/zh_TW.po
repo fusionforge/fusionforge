@@ -9483,12 +9483,12 @@ msgstr "討論"
 
 #: plugins/forumml/www/upload.php:82
 #, fuzzy
-msgid "Error : Attachment not found"
+msgid "Error: Attachment not found"
 msgstr "錯誤 - 未發現版本"
 
 #: plugins/forumml/www/upload.php:85
 #, fuzzy
-msgid "Error : Missing parameter "
+msgid "Error: Missing parameter"
 msgstr "錯誤 - 缺少參數"
 
 #: plugins/globaldashboard/include/globalDashboard_utils.php:42

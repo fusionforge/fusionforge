@@ -9522,12 +9522,12 @@ msgstr "Fil"
 
 #: plugins/forumml/www/upload.php:82
 #, fuzzy
-msgid "Error : Attachment not found"
+msgid "Error: Attachment not found"
 msgstr "Error - no s'han trobat versions"
 
 #: plugins/forumml/www/upload.php:85
 #, fuzzy
-msgid "Error : Missing parameter "
+msgid "Error: Missing parameter"
 msgstr "Error - falten parametres"
 
 #: plugins/globaldashboard/include/globalDashboard_utils.php:42

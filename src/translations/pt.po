@@ -8823,11 +8823,11 @@ msgid "Thread(s) found"
 msgstr ""
 
 #: plugins/forumml/www/upload.php:82
-msgid "Error : Attachment not found"
+msgid "Error: Attachment not found"
 msgstr ""
 
 #: plugins/forumml/www/upload.php:85
-msgid "Error : Missing parameter "
+msgid "Error: Missing parameter"
 msgstr ""
 
 #: plugins/globaldashboard/include/globalDashboard_utils.php:42

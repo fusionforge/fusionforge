@@ -9482,12 +9482,12 @@ msgstr "Haria"
 
 #: plugins/forumml/www/upload.php:82
 #, fuzzy
-msgid "Error : Attachment not found"
+msgid "Error: Attachment not found"
 msgstr "Akatsa - Ez dira bertsiorik aurkitu"
 
 #: plugins/forumml/www/upload.php:85
 #, fuzzy
-msgid "Error : Missing parameter "
+msgid "Error: Missing parameter"
 msgstr "Akatsa - parametroak falta dira"
 
 #: plugins/globaldashboard/include/globalDashboard_utils.php:42

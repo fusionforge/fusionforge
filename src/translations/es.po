@@ -9294,11 +9294,11 @@ msgid "Thread(s) found"
 msgstr "Hilo(s) encontrado(s)"
 
 #: plugins/forumml/www/upload.php:82
-msgid "Error : Attachment not found"
+msgid "Error: Attachment not found"
 msgstr "Error : Adjunto no encontrado"
 
 #: plugins/forumml/www/upload.php:85
-msgid "Error : Missing parameter "
+msgid "Error: Missing parameter"
 msgstr "Error : faltan parámetros"
 
 #: plugins/globaldashboard/include/globalDashboard_utils.php:42
