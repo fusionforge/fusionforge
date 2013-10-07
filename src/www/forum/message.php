@@ -120,7 +120,7 @@ if ($msg_id) {
 	echo '<tr class="tablecontent"><td class="top">'."\n";
 	echo '<strong>'.$fm->getSubject() .'</strong>';
 	if (!$reply) {
-		echo ' <a href="'.$url.'&amp;reply=1">[ '._("reply").' ]</a>';
+		echo ' <a href="'.$url.'&amp;reply=1">[ '._("Reply").' ]</a>';
 	}
 	echo '<br />';
 	echo _("By")._(': '). util_make_link_u($fm->getPosterName(), $fm->getPosterID(), $fm->getPosterRealName());
