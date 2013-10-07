@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 17:32+0200\n"
+"POT-Creation-Date: 2013-10-07 10:47+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2616,6 +2616,12 @@ msgstr ""
 #: common/frs/FRSFile.class.php:121 common/include/account.php:66
 msgid "Name is too short. It must be at least 3 characters."
 msgstr "Namnet är för kort. Det måste ha minst 3 tecken."
+
+#: common/frs/FRSFile.class.php:125
+msgid ""
+"Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
+msgstr ""
+"Filnamn får bara innehålla alfanumeriska värden samt “-”, “_”, “+”, “.”, “~”."
 
 #: common/frs/FRSFile.class.php:135
 msgid "FRSFile Appears to be invalid"
@@ -24303,12 +24309,6 @@ msgstr "Min personliga sida"
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "Måste innehålla ett meddelande och rubrik"
-
-#~ msgid ""
-#~ "Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
-#~ msgstr ""
-#~ "Filnamn får bara innehålla alfanumeriska värden samt “-”, “_”, “+”, “.”, "
-#~ "“~”."
 
 #~ msgid "* Denotes requests > %s Days Old"
 #~ msgstr "* Avser frågor > %s dagar gamla"

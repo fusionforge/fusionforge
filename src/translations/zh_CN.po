@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 17:32+0200\n"
+"POT-Creation-Date: 2013-10-07 10:47+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2628,6 +2628,11 @@ msgstr "没有有效的问卷对象"
 #: common/frs/FRSFile.class.php:121 common/include/account.php:66
 msgid "Name is too short. It must be at least 3 characters."
 msgstr "名称太短，至少要三个字节"
+
+#: common/frs/FRSFile.class.php:125
+msgid ""
+"Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
+msgstr "文件名只能是字符和“-”, “_”, “+”, “.”, “~”。"
 
 #: common/frs/FRSFile.class.php:135
 msgid "FRSFile Appears to be invalid"
@@ -24532,10 +24537,6 @@ msgstr "我的个人首页"
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "必须包括文章标题和内容"
-
-#~ msgid ""
-#~ "Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
-#~ msgstr "文件名只能是字符和“-”, “_”, “+”, “.”, “~”。"
 
 #~ msgid "Error: Cannot add admin to newly created group: %s"
 #~ msgstr "错误: 不能将管理员帐号添加到新建组:%s"

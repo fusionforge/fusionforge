@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 17:32+0200\n"
+"POT-Creation-Date: 2013-10-07 10:47+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -2633,6 +2633,13 @@ msgstr "A enquisa non é válida"
 #: common/frs/FRSFile.class.php:121 common/include/account.php:66
 msgid "Name is too short. It must be at least 3 characters."
 msgstr "O nome é moi curto. Debe ter, como mínimo, 3 caracteres. "
+
+#: common/frs/FRSFile.class.php:125
+msgid ""
+"Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
+msgstr ""
+"O nome do ficheiro só pode conter caracteres alfanuméricos e “-”, “_”, “+”, "
+"“.”, “~”."
 
 #: common/frs/FRSFile.class.php:135
 msgid "FRSFile Appears to be invalid"
@@ -25345,12 +25352,6 @@ msgstr "Páxina persoal de %s"
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "Debe incluír o contido e o asunto da mensaxe "
-
-#~ msgid ""
-#~ "Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
-#~ msgstr ""
-#~ "O nome do ficheiro só pode conter caracteres alfanuméricos e “-”, “_”, "
-#~ "“+”, “.”, “~”."
 
 #~ msgid "Error: Cannot add admin to newly created group: %s"
 #~ msgstr ""

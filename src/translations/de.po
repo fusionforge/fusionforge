@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 17:32+0200\n"
+"POT-Creation-Date: 2013-10-07 10:47+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -2646,6 +2646,13 @@ msgstr "Kein gültiges Umfrageobjekt"
 #: common/frs/FRSFile.class.php:121 common/include/account.php:66
 msgid "Name is too short. It must be at least 3 characters."
 msgstr "Der Name ist zu kurz. Er muss mindestens 3 Buchstaben enthalten."
+
+#: common/frs/FRSFile.class.php:125
+msgid ""
+"Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
+msgstr ""
+"Für Dateinamen können ausschließlich alphanumerische und “-”, “_”, “+”, “.”, "
+"“~” Zeichen verwendet werden."
 
 #: common/frs/FRSFile.class.php:135
 msgid "FRSFile Appears to be invalid"
@@ -25462,12 +25469,6 @@ msgstr "Persönliche Seite für %s"
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr ""
 #~ "Die Nachricht muss einen Hauptteil (Body) und einen Betreff beinhalten"
-
-#~ msgid ""
-#~ "Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
-#~ msgstr ""
-#~ "Für Dateinamen können ausschließlich alphanumerische und “-”, “_”, “+”, "
-#~ "“.”, “~” Zeichen verwendet werden."
 
 #~ msgid "Error: Cannot add admin to newly created group: %s"
 #~ msgstr ""

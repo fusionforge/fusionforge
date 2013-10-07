@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 17:32+0200\n"
+"POT-Creation-Date: 2013-10-07 10:47+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2613,6 +2613,11 @@ msgstr ""
 #: common/frs/FRSFile.class.php:121 common/include/account.php:66
 msgid "Name is too short. It must be at least 3 characters."
 msgstr "ID가 너무 짧습니다. 3글자 이상이어야 합니다."
+
+#: common/frs/FRSFile.class.php:125
+msgid ""
+"Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
+msgstr ""
 
 #: common/frs/FRSFile.class.php:135
 msgid "FRSFile Appears to be invalid"

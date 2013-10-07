@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 17:32+0200\n"
+"POT-Creation-Date: 2013-10-07 10:47+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -2554,6 +2554,13 @@ msgstr "Encuesta inválida"
 #: common/frs/FRSFile.class.php:121 common/include/account.php:66
 msgid "Name is too short. It must be at least 3 characters."
 msgstr "Debe proporcionar un nombre válido (por lo menos seis carácteres)."
+
+#: common/frs/FRSFile.class.php:125
+msgid ""
+"Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
+msgstr ""
+"El nombre del archivo sólo puede contener caracteres alfanuméricos y los "
+"siguientes caracteres “-”, “_”, “+”, “.”, “~”."
 
 #: common/frs/FRSFile.class.php:135
 msgid "FRSFile Appears to be invalid"
@@ -24618,12 +24625,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "Se deben añadir Contenido y Asunto al Mensaje"
-
-#~ msgid ""
-#~ "Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
-#~ msgstr ""
-#~ "El nombre del archivo sólo puede contener caracteres alfanuméricos y los "
-#~ "siguientes caracteres “-”, “_”, “+”, “.”, “~”."
 
 #~ msgid "Error: Could Not Add User To Group: %s"
 #~ msgstr "Error: No se pudo añadir el usuario al grupo: %s"

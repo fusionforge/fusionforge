@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-04 17:32+0200\n"
+"POT-Creation-Date: 2013-10-07 10:47+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2609,6 +2609,13 @@ msgstr "Baliodun Inkesta Objeturik Ez"
 #: common/frs/FRSFile.class.php:121 common/include/account.php:66
 msgid "Name is too short. It must be at least 3 characters."
 msgstr "Izen egokia eman behar duzu (gutxienez 6 karaktere)."
+
+#: common/frs/FRSFile.class.php:125
+msgid ""
+"Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
+msgstr ""
+"Fitxategi izenek alfanumerikoak eta “-”, “_”, “+”, “.”, “~” karaktereak "
+"bakarrik eduki ditzakete."
 
 #: common/frs/FRSFile.class.php:135
 msgid "FRSFile Appears to be invalid"
@@ -24518,12 +24525,6 @@ msgstr "Nere orri pertsonala"
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "Edukia eta gaia gehitu behar zaizkio mezuari"
-
-#~ msgid ""
-#~ "Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
-#~ msgstr ""
-#~ "Fitxategi izenek alfanumerikoak eta “-”, “_”, “+”, “.”, “~” karaktereak "
-#~ "bakarrik eduki ditzakete."
 
 #~ msgid "Error: Cannot add admin to newly created group: %s"
 #~ msgstr "ERROREA: Ezin da administratzailea gehitu talde sortu berrira: %s"
