@@ -100,7 +100,7 @@ class Widget_ProjectMembers extends Widget {
 		echo '<p><span rel="sioc:has_usergroup">';
 		echo '<span about="members/" typeof="sioc:UserGroup">';
 		echo '<span rel="http://www.w3.org/2002/07/owl#sameAs">';
-		echo util_make_link ('/project/memberlist.php?group_id='.$group_id,sprintf(_('View the %1$d Member(s)'),count($members)));
+		echo util_make_link ('/project/memberlist.php?group_id='.$group_id,sprintf(_('View the %d Member(s)'),count($members)));
 		echo '</span>';
 		echo '</span>';
 		echo '</span></p>';
