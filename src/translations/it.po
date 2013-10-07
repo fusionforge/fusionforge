@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 10:47+0200\n"
+"POT-Creation-Date: 2013-10-07 11:04+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1450,14 +1450,21 @@ msgstr ""
 msgid "Reserve"
 msgstr "Osservatore"
 
-#: common/docman/views/listfile.php:367
-#, fuzzy
-msgid "Start monitoring"
-msgstr "Termina Notifica"
+#: common/docman/views/listfile.php:367 common/tracker/actions/detail.php:53
+#: common/tracker/actions/mod-limited.php:62 common/tracker/actions/mod.php:60
+#: common/tracker/include/ArtifactTypeHtml.class.php:75
+#: common/tracker/include/ArtifactTypeHtml.class.php:86
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:94
+msgid "Monitor"
+msgstr "Notifica"
 
-#: common/docman/views/listfile.php:368
-#, fuzzy
-msgid "Stop monitoring"
+#: common/docman/views/listfile.php:368 common/forum/ForumHTML.class.php:140
+#: common/tracker/actions/detail.php:49
+#: common/tracker/actions/mod-limited.php:58 common/tracker/actions/mod.php:56
+#: common/widget/Widget_MyMonitoredDocuments.class.php:90
+#: common/widget/Widget_MyMonitoredForums.class.php:125
+#: common/widget/Widget_MyMonitoredFp.class.php:106 www/forum/monitor.php:59
+msgid "Stop Monitoring"
 msgstr "Termina Notifica"
 
 #: common/docman/views/listfile.php:371
@@ -2368,13 +2375,6 @@ msgstr "Usa Forum"
 #: common/forum/ForumHTML.class.php:111
 msgid "Discussion Forums:"
 msgstr "Forum di discussione:"
-
-#: common/forum/ForumHTML.class.php:140
-#: common/widget/Widget_MyMonitoredDocuments.class.php:90
-#: common/widget/Widget_MyMonitoredForums.class.php:125
-#: common/widget/Widget_MyMonitoredFp.class.php:106 www/forum/monitor.php:59
-msgid "Stop Monitoring"
-msgstr "Termina Notifica"
 
 #: common/forum/ForumHTML.class.php:143 common/forum/ForumHTML.class.php:150
 msgid "Monitor Forum"
@@ -5648,20 +5648,6 @@ msgstr "Sei sicuro di voler rimuovere questo tracker?"
 #: www/reporting/rebuild.php:63
 msgid "I am Sure"
 msgstr "Sono sicuro"
-
-#: common/tracker/actions/detail.php:49
-#: common/tracker/actions/mod-limited.php:58 common/tracker/actions/mod.php:56
-#, fuzzy
-msgid "Stop monitor"
-msgstr "Termina notifica"
-
-#: common/tracker/actions/detail.php:53
-#: common/tracker/actions/mod-limited.php:62 common/tracker/actions/mod.php:60
-#: common/tracker/include/ArtifactTypeHtml.class.php:75
-#: common/tracker/include/ArtifactTypeHtml.class.php:86
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:94
-msgid "Monitor"
-msgstr "Notifica"
 
 #: common/tracker/actions/detail.php:61
 #: common/tracker/actions/mod-limited.php:78 common/tracker/actions/mod.php:79
@@ -23489,6 +23475,18 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "Start Monitoring"
+#~ msgstr "Termina Notifica"
+
+#, fuzzy
+#~ msgid "Stop monitoring"
+#~ msgstr "Termina Notifica"
+
+#, fuzzy
+#~ msgid "Stop monitor"
+#~ msgstr "Termina notifica"
 
 #, fuzzy
 #~ msgid "You are not monitoring any files"

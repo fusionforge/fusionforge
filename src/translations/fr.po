@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 10:47+0200\n"
+"POT-Creation-Date: 2013-10-07 11:04+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1362,12 +1362,21 @@ msgstr "Réserver ce document pour une édition ultérieure"
 msgid "Reserve"
 msgstr "Réserver"
 
-#: common/docman/views/listfile.php:367
-msgid "Start monitoring"
+#: common/docman/views/listfile.php:367 common/tracker/actions/detail.php:53
+#: common/tracker/actions/mod-limited.php:62 common/tracker/actions/mod.php:60
+#: common/tracker/include/ArtifactTypeHtml.class.php:75
+#: common/tracker/include/ArtifactTypeHtml.class.php:86
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:94
+msgid "Monitor"
 msgstr "Surveiller"
 
-#: common/docman/views/listfile.php:368
-msgid "Stop monitoring"
+#: common/docman/views/listfile.php:368 common/forum/ForumHTML.class.php:140
+#: common/tracker/actions/detail.php:49
+#: common/tracker/actions/mod-limited.php:58 common/tracker/actions/mod.php:56
+#: common/widget/Widget_MyMonitoredDocuments.class.php:90
+#: common/widget/Widget_MyMonitoredForums.class.php:125
+#: common/widget/Widget_MyMonitoredFp.class.php:106 www/forum/monitor.php:59
+msgid "Stop Monitoring"
 msgstr "Arrêter la surveillance"
 
 #: common/docman/views/listfile.php:371
@@ -2243,13 +2252,6 @@ msgstr "Voir les forums"
 #: common/forum/ForumHTML.class.php:111
 msgid "Discussion Forums:"
 msgstr "Forums de discussion :"
-
-#: common/forum/ForumHTML.class.php:140
-#: common/widget/Widget_MyMonitoredDocuments.class.php:90
-#: common/widget/Widget_MyMonitoredForums.class.php:125
-#: common/widget/Widget_MyMonitoredFp.class.php:106 www/forum/monitor.php:59
-msgid "Stop Monitoring"
-msgstr "Arrêter la surveillance"
 
 #: common/forum/ForumHTML.class.php:143 common/forum/ForumHTML.class.php:150
 msgid "Monitor Forum"
@@ -5419,19 +5421,6 @@ msgstr "Etes-vous sûr de vouloir supprimer cet élément ?"
 #: www/reporting/rebuild.php:63
 msgid "I am Sure"
 msgstr "Je confirme"
-
-#: common/tracker/actions/detail.php:49
-#: common/tracker/actions/mod-limited.php:58 common/tracker/actions/mod.php:56
-msgid "Stop monitor"
-msgstr "Arrêter la surveillance"
-
-#: common/tracker/actions/detail.php:53
-#: common/tracker/actions/mod-limited.php:62 common/tracker/actions/mod.php:60
-#: common/tracker/include/ArtifactTypeHtml.class.php:75
-#: common/tracker/include/ArtifactTypeHtml.class.php:86
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:94
-msgid "Monitor"
-msgstr "Surveiller"
 
 #: common/tracker/actions/detail.php:61
 #: common/tracker/actions/mod-limited.php:78 common/tracker/actions/mod.php:79
@@ -23030,6 +23019,16 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#, fuzzy
+#~ msgid "Start Monitoring"
+#~ msgstr "Surveiller"
+
+#~ msgid "Stop monitoring"
+#~ msgstr "Arrêter la surveillance"
+
+#~ msgid "Stop monitor"
+#~ msgstr "Arrêter la surveillance"
 
 #~ msgid "View project <a href=\"%1$s\" >Statistics</a>"
 #~ msgstr "Voir les <a href=\"%1$s\">statistiques</a>"

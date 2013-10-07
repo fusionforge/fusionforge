@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 10:47+0200\n"
+"POT-Creation-Date: 2013-10-07 11:04+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1444,14 +1444,21 @@ msgstr ""
 msgid "Reserve"
 msgstr "Behatzailea"
 
-#: common/docman/views/listfile.php:367
-#, fuzzy
-msgid "Start monitoring"
-msgstr "Monitorizatzeaz gelditu"
+#: common/docman/views/listfile.php:367 common/tracker/actions/detail.php:53
+#: common/tracker/actions/mod-limited.php:62 common/tracker/actions/mod.php:60
+#: common/tracker/include/ArtifactTypeHtml.class.php:75
+#: common/tracker/include/ArtifactTypeHtml.class.php:86
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:94
+msgid "Monitor"
+msgstr ""
 
-#: common/docman/views/listfile.php:368
-#, fuzzy
-msgid "Stop monitoring"
+#: common/docman/views/listfile.php:368 common/forum/ForumHTML.class.php:140
+#: common/tracker/actions/detail.php:49
+#: common/tracker/actions/mod-limited.php:58 common/tracker/actions/mod.php:56
+#: common/widget/Widget_MyMonitoredDocuments.class.php:90
+#: common/widget/Widget_MyMonitoredForums.class.php:125
+#: common/widget/Widget_MyMonitoredFp.class.php:106 www/forum/monitor.php:59
+msgid "Stop Monitoring"
 msgstr "Monitorizatzeaz gelditu"
 
 #: common/docman/views/listfile.php:371
@@ -2360,13 +2367,6 @@ msgstr "Foroak erabili"
 #: common/forum/ForumHTML.class.php:111
 msgid "Discussion Forums:"
 msgstr "Eztabaidatzeko foroak:"
-
-#: common/forum/ForumHTML.class.php:140
-#: common/widget/Widget_MyMonitoredDocuments.class.php:90
-#: common/widget/Widget_MyMonitoredForums.class.php:125
-#: common/widget/Widget_MyMonitoredFp.class.php:106 www/forum/monitor.php:59
-msgid "Stop Monitoring"
-msgstr "Monitorizatzeaz gelditu"
 
 #: common/forum/ForumHTML.class.php:143 common/forum/ForumHTML.class.php:150
 msgid "Monitor Forum"
@@ -5620,20 +5620,6 @@ msgstr "Ziur zaude artefaktu hau ezabatu nahi duzula?"
 #: www/reporting/rebuild.php:63
 msgid "I am Sure"
 msgstr "Ziur nago"
-
-#: common/tracker/actions/detail.php:49
-#: common/tracker/actions/mod-limited.php:58 common/tracker/actions/mod.php:56
-#, fuzzy
-msgid "Stop monitor"
-msgstr "Monitorizatzeaz gelditu"
-
-#: common/tracker/actions/detail.php:53
-#: common/tracker/actions/mod-limited.php:62 common/tracker/actions/mod.php:60
-#: common/tracker/include/ArtifactTypeHtml.class.php:75
-#: common/tracker/include/ArtifactTypeHtml.class.php:86
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:94
-msgid "Monitor"
-msgstr ""
 
 #: common/tracker/actions/detail.php:61
 #: common/tracker/actions/mod-limited.php:78 common/tracker/actions/mod.php:79
@@ -23330,6 +23316,18 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#, fuzzy
+#~ msgid "Start Monitoring"
+#~ msgstr "Monitorizatzeaz gelditu"
+
+#, fuzzy
+#~ msgid "Stop monitoring"
+#~ msgstr "Monitorizatzeaz gelditu"
+
+#, fuzzy
+#~ msgid "Stop monitor"
+#~ msgstr "Monitorizatzeaz gelditu"
 
 #, fuzzy
 #~ msgid "You are not monitoring any files"

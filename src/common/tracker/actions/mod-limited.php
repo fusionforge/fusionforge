@@ -55,7 +55,7 @@ if (session_loggedin()) {
 				if ($ah->isMonitoring()) {
 					$img="xmail16w.png";
 					$key="monitorstop";
-					$text=_('Stop monitor');
+					$text=_('Stop Monitoring');
 				} else {
 					$img="mail16w.png";
 					$key="monitor";

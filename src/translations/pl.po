@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 10:47+0200\n"
+"POT-Creation-Date: 2013-10-07 11:04+0200\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1423,15 +1423,22 @@ msgstr ""
 msgid "Reserve"
 msgstr ""
 
-#: common/docman/views/listfile.php:367
-#, fuzzy
-msgid "Start monitoring"
-msgstr "Szukaj w dokumentach"
+#: common/docman/views/listfile.php:367 common/tracker/actions/detail.php:53
+#: common/tracker/actions/mod-limited.php:62 common/tracker/actions/mod.php:60
+#: common/tracker/include/ArtifactTypeHtml.class.php:75
+#: common/tracker/include/ArtifactTypeHtml.class.php:86
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:94
+msgid "Monitor"
+msgstr ""
 
-#: common/docman/views/listfile.php:368
-#, fuzzy
-msgid "Stop monitoring"
-msgstr "Szukaj w dokumentach"
+#: common/docman/views/listfile.php:368 common/forum/ForumHTML.class.php:140
+#: common/tracker/actions/detail.php:49
+#: common/tracker/actions/mod-limited.php:58 common/tracker/actions/mod.php:56
+#: common/widget/Widget_MyMonitoredDocuments.class.php:90
+#: common/widget/Widget_MyMonitoredForums.class.php:125
+#: common/widget/Widget_MyMonitoredFp.class.php:106 www/forum/monitor.php:59
+msgid "Stop Monitoring"
+msgstr ""
 
 #: common/docman/views/listfile.php:371
 #: common/docman/views/listtrashfile.php:204
@@ -2323,13 +2330,6 @@ msgstr "Forum"
 
 #: common/forum/ForumHTML.class.php:111
 msgid "Discussion Forums:"
-msgstr ""
-
-#: common/forum/ForumHTML.class.php:140
-#: common/widget/Widget_MyMonitoredDocuments.class.php:90
-#: common/widget/Widget_MyMonitoredForums.class.php:125
-#: common/widget/Widget_MyMonitoredFp.class.php:106 www/forum/monitor.php:59
-msgid "Stop Monitoring"
 msgstr ""
 
 #: common/forum/ForumHTML.class.php:143 common/forum/ForumHTML.class.php:150
@@ -5345,19 +5345,6 @@ msgstr ""
 #, fuzzy
 msgid "I am Sure"
 msgstr "Edytuj grupę"
-
-#: common/tracker/actions/detail.php:49
-#: common/tracker/actions/mod-limited.php:58 common/tracker/actions/mod.php:56
-msgid "Stop monitor"
-msgstr ""
-
-#: common/tracker/actions/detail.php:53
-#: common/tracker/actions/mod-limited.php:62 common/tracker/actions/mod.php:60
-#: common/tracker/include/ArtifactTypeHtml.class.php:75
-#: common/tracker/include/ArtifactTypeHtml.class.php:86
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:94
-msgid "Monitor"
-msgstr ""
 
 #: common/tracker/actions/detail.php:61
 #: common/tracker/actions/mod-limited.php:78 common/tracker/actions/mod.php:79
@@ -22141,6 +22128,14 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Start Monitoring"
+#~ msgstr "Szukaj w dokumentach"
+
+#, fuzzy
+#~ msgid "Stop monitoring"
+#~ msgstr "Szukaj w dokumentach"
 
 #, fuzzy
 #~ msgid "Error: User does not exist"
