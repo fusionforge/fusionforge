@@ -162,7 +162,7 @@ echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.
 		<td>'._('Sort On').'<br />'. $order_box .'</td>
 		<td>'._('Detail View').'<br />'. $view_box .'</td>
 		<td><input type="submit" name="submit" value="'._('Browse').'" /></td>
-	</tr></table></form><p />';
+	</tr></table></form>';
 
 
 $rows=count($pt_arr);
@@ -363,7 +363,7 @@ if ($rows < 1) {
 			<table class="fullwidth">
 			<tr><td colspan="2">
 			<p>
-			<span class="important">'._('<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".').'</span>
+			<span class="important">'._('If you wish to apply changes to all items selected above, use these controls to change their properties and click once on “Mass Update”.').'</span>
 			</p>
 			</td></tr>
 
