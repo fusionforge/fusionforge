@@ -40,7 +40,7 @@ class ArtifactTypeFactoryHtml extends ArtifactTypeFactory {
 
 		$params['group']=$group_id;
 		if (!isset($params['title'])) {
-			$params['title']=sprintf(_('Trackers for %1$s'), $this->Group->getPublicName());
+			$params['title']=sprintf(_('Trackers for %s'), $this->Group->getPublicName());
 		}
 		$params['toptab']='tracker';
 
