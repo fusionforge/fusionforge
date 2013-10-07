@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 17:53+0200\n"
+"POT-Creation-Date: 2013-10-07 17:56+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -421,17 +421,17 @@ msgstr "Proxecto "
 #: common/docman/views/listfile.php:174
 #: common/docman/views/listtrashfile.php:117
 #: common/docman/views/search.php:150 common/docman/views/search.php:151
-#: common/forum/ForumAdmin.class.php:427 common/forum/Forum.class.php:231
-#: common/forum/Forum.class.php:526 common/forum/Forum.class.php:607
-#: common/forum/Forum.class.php:633 common/forum/Forum.class.php:641
-#: common/forum/Forum.class.php:649 common/forum/Forum.class.php:657
-#: common/forum/Forum.class.php:665 common/forum/Forum.class.php:673
-#: common/forum/ForumHTML.class.php:58 common/forum/ForumHTML.class.php:68
-#: common/forum/ForumHTML.class.php:69 common/forum/ForumHTML.class.php:70
-#: common/forum/ForumHTML.class.php:73 common/forum/ForumHTML.class.php:211
-#: common/forum/ForumHTML.class.php:269 common/forum/ForumHTML.class.php:527
-#: common/forum/ForumHTML.class.php:531 common/forum/ForumHTML.class.php:591
-#: common/forum/ForumHTML.class.php:594
+#: common/docman/views/tree.php:63 common/forum/ForumAdmin.class.php:427
+#: common/forum/Forum.class.php:231 common/forum/Forum.class.php:526
+#: common/forum/Forum.class.php:607 common/forum/Forum.class.php:633
+#: common/forum/Forum.class.php:641 common/forum/Forum.class.php:649
+#: common/forum/Forum.class.php:657 common/forum/Forum.class.php:665
+#: common/forum/Forum.class.php:673 common/forum/ForumHTML.class.php:58
+#: common/forum/ForumHTML.class.php:68 common/forum/ForumHTML.class.php:69
+#: common/forum/ForumHTML.class.php:70 common/forum/ForumHTML.class.php:73
+#: common/forum/ForumHTML.class.php:211 common/forum/ForumHTML.class.php:269
+#: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:531
+#: common/forum/ForumHTML.class.php:591 common/forum/ForumHTML.class.php:594
 #: common/forum/ForumMessage.class.php:667 common/include/Error.class.php:207
 #: common/include/exit.php:80 common/include/User.class.php:348
 #: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
@@ -1952,8 +1952,8 @@ msgid "Your search is empty."
 msgstr ""
 
 #: common/docman/views/tree.php:63
-#, fuzzy
-msgid "Child project: "
+#: plugins/projects-hierarchy/view/home_project_link.php:47
+msgid "Child project"
 msgstr "Proxecto fillo"
 
 #: common/docman/views/tree.php:63
@@ -13218,10 +13218,6 @@ msgstr "Proxecto pai"
 msgid "Direct link to project"
 msgstr "Proxecto pai"
 
-#: plugins/projects-hierarchy/view/home_project_link.php:47
-msgid "Child project"
-msgstr "Proxecto fillo"
-
 #: plugins/quota_management/common/quota_managementPlugin.class.php:50
 #: plugins/quota_management/common/quota_managementPlugin.class.php:66
 msgid "View the quota_management Administration"
@@ -23619,6 +23615,10 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Child project: "
+#~ msgstr "Proxecto fillo"
 
 #~ msgid "Couldn't Update Master Thread parent with current time"
 #~ msgstr ""
