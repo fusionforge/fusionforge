@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 16:01+0200\n"
+"POT-Creation-Date: 2013-10-07 17:32+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9785,8 +9785,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:206
-#, fuzzy
-msgid "[add new]"
+#: www/admin/admin_table.php:308
+msgid "add new"
 msgstr "add new"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:213
@@ -15182,10 +15182,6 @@ msgstr "修改 %1$s 如下："
 #, fuzzy, php-format
 msgid "%s successfully modified."
 msgstr "%1$s 修改成功"
-
-#: www/admin/admin_table.php:308
-msgid "add new"
-msgstr "add new"
 
 #: www/admin/admin_table.php:353
 #, fuzzy, php-format
@@ -23243,6 +23239,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "[add new]"
+#~ msgstr "add new"
 
 #, fuzzy
 #~ msgid "Forum: "

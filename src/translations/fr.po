@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 16:01+0200\n"
+"POT-Creation-Date: 2013-10-07 17:32+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -9525,8 +9525,9 @@ msgstr[0] "Forge partenaire"
 msgstr[1] "Forges partenaires"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:206
-msgid "[add new]"
-msgstr "ajouter une nouvelle forge"
+#: www/admin/admin_table.php:308
+msgid "add new"
+msgstr "ajouter nouveau"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:213
 msgid "Forge ID"
@@ -14882,10 +14883,6 @@ msgstr "Modifier le(la) %s ci-dessous :"
 #, php-format
 msgid "%s successfully modified."
 msgstr "%s modifié(e) avec succès."
-
-#: www/admin/admin_table.php:308
-msgid "add new"
-msgstr "ajouter nouveau"
 
 #: www/admin/admin_table.php:353
 #, php-format
@@ -22989,6 +22986,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "[add new]"
+#~ msgstr "ajouter une nouvelle forge"
 
 #, fuzzy
 #~ msgid ""

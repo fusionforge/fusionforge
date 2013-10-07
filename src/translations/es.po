@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 16:01+0200\n"
+"POT-Creation-Date: 2013-10-07 17:32+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -9584,8 +9584,9 @@ msgstr[0] "Forja asociada"
 msgstr[1] "Forjas asociadas"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:206
-msgid "[add new]"
-msgstr "[añadir nuevo]"
+#: www/admin/admin_table.php:308
+msgid "add new"
+msgstr "añadir nuevo"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:213
 msgid "Forge ID"
@@ -14938,10 +14939,6 @@ msgstr "Modificar el %s abajo:"
 #, php-format
 msgid "%s successfully modified."
 msgstr "%s modificado correctamente."
-
-#: www/admin/admin_table.php:308
-msgid "add new"
-msgstr "añadir nuevo"
 
 #: www/admin/admin_table.php:353
 #, php-format
@@ -23002,6 +22999,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "[add new]"
+#~ msgstr "[añadir nuevo]"
 
 #~ msgid ""
 #~ "<strong>Admin:</strong> If you wish to apply changes to all items "

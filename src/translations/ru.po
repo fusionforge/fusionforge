@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 16:01+0200\n"
+"POT-Creation-Date: 2013-10-07 17:32+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9904,8 +9904,8 @@ msgstr[1] ""
 msgstr[2] ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:206
-#, fuzzy
-msgid "[add new]"
+#: www/admin/admin_table.php:308
+msgid "add new"
 msgstr "добавить"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:213
@@ -15535,10 +15535,6 @@ msgstr "Изменить %1$s ниже:"
 #, fuzzy, php-format
 msgid "%s successfully modified."
 msgstr "%1$s изменено."
-
-#: www/admin/admin_table.php:308
-msgid "add new"
-msgstr "добавить"
 
 #: www/admin/admin_table.php:353
 #, fuzzy, php-format
@@ -23785,6 +23781,10 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "[add new]"
+#~ msgstr "добавить"
 
 #~ msgid ""
 #~ "<strong>Admin:</strong> If you wish to apply changes to all items "

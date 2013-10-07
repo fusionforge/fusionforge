@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 16:01+0200\n"
+"POT-Creation-Date: 2013-10-07 17:32+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -9887,8 +9887,9 @@ msgstr[0] "Forxa asociada"
 msgstr[1] "Forxas asociadas"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:206
-msgid "[add new]"
-msgstr "[Engadir unha nova]"
+#: www/admin/admin_table.php:308
+msgid "add new"
+msgstr "Engadir novo "
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:213
 msgid "Forge ID"
@@ -15426,10 +15427,6 @@ msgstr "Modificar o %s abaixo:"
 #, php-format
 msgid "%s successfully modified."
 msgstr "Modificouse %s correctamente."
-
-#: www/admin/admin_table.php:308
-msgid "add new"
-msgstr "Engadir novo "
 
 #: www/admin/admin_table.php:353
 #, php-format
@@ -23645,6 +23642,9 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#~ msgid "[add new]"
+#~ msgstr "[Engadir unha nova]"
 
 #~ msgid ""
 #~ "<strong>Admin:</strong> If you wish to apply changes to all items "

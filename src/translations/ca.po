@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 16:01+0200\n"
+"POT-Creation-Date: 2013-10-07 17:32+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9837,8 +9837,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:206
-#, fuzzy
-msgid "[add new]"
+#: www/admin/admin_table.php:308
+msgid "add new"
 msgstr "afegeix nou"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:213
@@ -15274,10 +15274,6 @@ msgstr "Modifica el %s a sota:"
 #, php-format
 msgid "%s successfully modified."
 msgstr "%1$s modificat(s) amb èxit."
-
-#: www/admin/admin_table.php:308
-msgid "add new"
-msgstr "afegeix nou"
 
 #: www/admin/admin_table.php:353
 #, php-format
@@ -23436,6 +23432,10 @@ msgstr "Nom d'usuari"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
+
+#, fuzzy
+#~ msgid "[add new]"
+#~ msgstr "afegeix nou"
 
 #, fuzzy
 #~ msgid "Forum: "

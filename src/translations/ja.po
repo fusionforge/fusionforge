@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 16:01+0200\n"
+"POT-Creation-Date: 2013-10-07 17:32+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9570,7 +9570,8 @@ msgid_plural "Associated forges"
 msgstr[0] ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:206
-msgid "[add new]"
+#: www/admin/admin_table.php:308
+msgid "add new"
 msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:213
@@ -14819,10 +14820,6 @@ msgstr "タスク修正"
 #, fuzzy, php-format
 msgid "%s successfully modified."
 msgstr "更新に成功しました。"
-
-#: www/admin/admin_table.php:308
-msgid "add new"
-msgstr ""
 
 #: www/admin/admin_table.php:353
 #, fuzzy, php-format

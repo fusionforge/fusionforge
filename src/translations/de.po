@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 16:01+0200\n"
+"POT-Creation-Date: 2013-10-07 17:32+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -9881,8 +9881,9 @@ msgstr[0] "Verwandte Forge"
 msgstr[1] "Verwandte Forges"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:206
-msgid "[add new]"
-msgstr "[Neu hinzufügen]"
+#: www/admin/admin_table.php:308
+msgid "add new"
+msgstr "Neuen hinzufügen"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:213
 msgid "Forge ID"
@@ -15417,10 +15418,6 @@ msgstr "Modifizieren Sie %s unten:"
 #, php-format
 msgid "%s successfully modified."
 msgstr "%s erfolgreich modifiziert."
-
-#: www/admin/admin_table.php:308
-msgid "add new"
-msgstr "Neuen hinzufügen"
 
 #: www/admin/admin_table.php:353
 #, php-format
@@ -23709,6 +23706,9 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "[add new]"
+#~ msgstr "[Neu hinzufügen]"
 
 #, fuzzy
 #~ msgid ""

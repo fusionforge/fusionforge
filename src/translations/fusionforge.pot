@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 16:04+0200\n"
+"POT-Creation-Date: 2013-10-07 17:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9009,7 +9009,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:206
-msgid "[add new]"
+#: www/admin/admin_table.php:308
+msgid "add new"
 msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:213
@@ -13940,10 +13941,6 @@ msgstr ""
 #: www/admin/admin_table.php:259
 #, php-format
 msgid "%s successfully modified."
-msgstr ""
-
-#: www/admin/admin_table.php:308
-msgid "add new"
 msgstr ""
 
 #: www/admin/admin_table.php:353

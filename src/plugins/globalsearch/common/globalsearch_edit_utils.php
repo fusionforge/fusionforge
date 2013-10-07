@@ -203,7 +203,7 @@ function globalsearch_admin_table_show () {
                 $rows = db_numrows($result);
 
                 $cell_data=array();
-                $cell_data[]=array(ngettext('Associated forge','Associated forges',$rows).' <a href="'.$PHP_SELF.'?function=add">'._('[add new]').'</a>',
+                $cell_data[]=array(ngettext('Associated forge','Associated forges',$rows).' <a href="'.$PHP_SELF.'?function=add">['._('add new').']</a>',
                         'colspan="8"');
 
                 echo '<table border="0" width="100%">';

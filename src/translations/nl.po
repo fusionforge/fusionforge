@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 16:01+0200\n"
+"POT-Creation-Date: 2013-10-07 17:32+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9837,8 +9837,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:206
-#, fuzzy
-msgid "[add new]"
+#: www/admin/admin_table.php:308
+msgid "add new"
 msgstr "nieuwe toevoegen"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:213
@@ -15286,10 +15286,6 @@ msgstr "Wijzig de %s hieronder:"
 #, php-format
 msgid "%s successfully modified."
 msgstr "%s wijzigen gelukt."
-
-#: www/admin/admin_table.php:308
-msgid "add new"
-msgstr "nieuwe toevoegen"
 
 #: www/admin/admin_table.php:353
 #, php-format
@@ -23469,6 +23465,10 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#, fuzzy
+#~ msgid "[add new]"
+#~ msgstr "nieuwe toevoegen"
 
 #, fuzzy
 #~ msgid "Forum: "
