@@ -435,11 +435,14 @@ echo '
 	</div>';
 if ($af->query_type == 'default') {
 	echo '<div class="tabbertab tabbertabdefault" title="'._('Default').'">';
-	echo '<strong>'._('Viewing only opened records by default, use \'Advanced queries\' or \'Simple Filtering and Sorting\' to change.').'</strong>';
-	echo '</div>';
+	echo '<strong>';
+	echo sprintf(_('Viewing only opened records by default, use “%1$s” or “%2$s” to change.'),
+				_('Advanced queries'),
+				_('Simple Filtering and Sorting'));
+	echo '</strong>';
+	echo '</div>' . "\n";
 }
-echo '
-</div>';
+echo '</div>' . "\n";
 
 $art_cnt = count($art_arr);
 if ($art_arr && $art_cnt > 0) {
@@ -687,7 +690,7 @@ if ($art_arr && $art_cnt > 0) {
 	echo '<div style="display:table-row">';
 
 	echo '<div style="display:table-cell">';
-	printf(_('* Denotes requests > %1$s Days Old'), ($ath->getDuePeriod()/86400));
+	printf(_('* Denotes requests > %s Days Old'), ($ath->getDuePeriod()/86400));
 	echo '</div>';
 
 	if (in_array('priority', $browse_fields)) {
@@ -714,8 +717,7 @@ if ($art_arr && $art_cnt > 0) {
 	<div>
 		<table class="fullwidth" id="admin_mass_update">
 			<tr><td colspan="2">
-		<p class="important">
-		<span>'._('<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".').'</span></p>
+		<p class="information">'._('If you wish to apply changes to all items selected above, use these controls to change their properties and click once on “Mass Update”.').'</p>
 			</td></tr>';
 
 		//
@@ -732,7 +734,7 @@ if ($art_arr && $art_cnt > 0) {
 			$sel[$keys[$i]]='100';
 		}
 	}
-	$ath->renderExtraFields($sel,true,_('No Change'),false,'',array(ARTIFACT_EXTRAFIELD_FILTER_INT),true);
+	$ath->renderExtraFields($sel,true,_('No Change'),false,'', array(ARTIFACT_EXTRAFIELD_FILTER_INT),true);
 		echo   '<tr>
 			<td><strong>'._('Priority').':</strong><br />';
 		echo build_priority_select_box ('priority', '100', true);
@@ -746,16 +748,16 @@ if ($art_arr && $art_cnt > 0) {
 				$ath->technicianBox ('assigned_to','100.1',true,_('Nobody'),'100.1',_('No Change')) .'</td>
 			<td>';
 		if (!$ath->usesCustomStatuses()) {
-		echo '<strong>'._('State').':</strong>
+		echo '<strong>'._('State')._(': ').'</strong>
 				<br />'. $ath->statusBox ('status_id','xzxz',true,_('No Change'));
 		}
-		echo '</td>
-			</tr>
+		echo '</td>';
+		echo '</tr>';
 
-			<tr><td colspan="2"><strong>'._('Canned Response').':</strong><br />'.
+		echo '<tr><td colspan="2"><strong>'._('Canned Response').':</strong><br />'.
 				$ath->cannedResponseBox ('canned_response') .'</td></tr>
 
-			<tr><td colspan="3" align="center"><input type="submit" name="submit" value="'._('Mass Update').'" /></td></tr>
+			<tr><td colspan="3" class="align-center"><input type="submit" name="submit" value="'._('Mass Update').'" /></td></tr>
 			</table>';
 		echo '</div>
 		</fieldset>';
