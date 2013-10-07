@@ -96,7 +96,7 @@ try {
 		}
 
 		// Now we can display the pending request token and point to the authorization confirmation dialog
-	echo sprintf( _('Consumer <b>"%s"</b> wants to be authorized to access Fusionforge on your behalf (asked %s)'), $consumer->getName(), $date ) . ' ';
+	echo sprintf( _('Consumer “%s” wants to be authorized to access Fusionforge on your behalf (asked %s)'), $consumer->getName(), $date ) . ' ';
 	echo "<table><tr><td>";
 	if( isset($time_stamp) ) {
 		// the time_stamp is recent enough so we can allow authorization
