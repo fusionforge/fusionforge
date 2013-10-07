@@ -50,14 +50,14 @@ $ath->adminHeader(array('title'=>$title, 'modal'=>1));
 						db_result($result, $i, 'id').'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
 						db_result($result, $i, 'title').'</a></td>
 					<td><a href="'.getStringFromServer('PHP_SELF').'?delete_canned=1&amp;id='.
-						db_result($result, $i, 'id').'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">['.
-						_('Delete').']</a></td></tr>';
+						db_result($result, $i, 'id').'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
+						_('Delete').'</a></td></tr>';
 			}
 
 			echo $GLOBALS['HTML']->listTableBottom();
 
 		} else {
-			echo '<p class="information">'._('No responses set up in this group').'</p>';
+			echo '<p class="information">'._('No Canned Responses set up in this Project').'</p>';
 		}
 
 		echo '<h2>'._('Add New Canned Response').'</h2>';
