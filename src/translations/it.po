@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-08 15:42+0200\n"
+"POT-Creation-Date: 2013-10-08 18:20+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -726,12 +726,12 @@ msgstr "Ultima modifica"
 #: plugins/mailman/www/admin/index.php:94
 #: plugins/mailman/www/admin/index.php:96
 #: plugins/mailman/www/admin/index.php:104
-#: plugins/mailman/www/admin/index.php:125
-#: plugins/mailman/www/admin/index.php:131
-#: plugins/mailman/www/admin/index.php:164
-#: plugins/mailman/www/admin/index.php:166
-#: plugins/mailman/www/admin/index.php:196
-#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:25
+#: plugins/mailman/www/admin/index.php:129
+#: plugins/mailman/www/admin/index.php:135
+#: plugins/mailman/www/admin/index.php:168
+#: plugins/mailman/www/admin/index.php:170
+#: plugins/mailman/www/admin/index.php:200
+#: plugins/mailman/www/admin/index.php:212 plugins/mailman/www/index.php:25
 #: plugins/mailman/www/index.php:32 plugins/mailman/www/index.php:35
 #: plugins/mailman/www/index.php:47 www/account/lostlogin.php:84
 #: www/admin/globalroledelete.php:49 www/admin/passedit.php:53
@@ -790,8 +790,8 @@ msgstr ""
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:132
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:56
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:97
-#: plugins/mailman/www/admin/index.php:150
-#: plugins/mailman/www/admin/index.php:183
+#: plugins/mailman/www/admin/index.php:154
+#: plugins/mailman/www/admin/index.php:187
 #: plugins/mailman/www/mailman_utils.php:52
 #: plugins/mailman/www/mailman_utils.php:67
 #: plugins/mantisbt/view/addIssue.php:137
@@ -814,11 +814,12 @@ msgstr ""
 #: plugins/scmhook/common/scmhookPlugin.class.php:430
 #: plugins/scmhook/common/scmhookPlugin.class.php:491
 #: www/forum/admin/index.php:117 www/forum/admin/index.php:158
-#: www/forum/index.php:69 www/mail/index.php:79 www/people/editjob.php:52
-#: www/people/editjob.php:74 www/pm/admin/index.php:288
-#: www/pm/admin/index.php:331 www/pm/csv.php:106 www/pm/index.php:100
-#: www/project/admin/editimages.php:228 www/project/admin/editimages.php:255
-#: www/project/admin/editimages.php:271
+#: www/forum/index.php:69 www/mail/admin/index.php:194
+#: www/mail/admin/index.php:227 www/mail/index.php:79
+#: www/people/editjob.php:52 www/people/editjob.php:74
+#: www/pm/admin/index.php:288 www/pm/admin/index.php:331 www/pm/csv.php:106
+#: www/pm/index.php:100 www/project/admin/editimages.php:228
+#: www/project/admin/editimages.php:255 www/project/admin/editimages.php:271
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:62
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:55
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:46
@@ -1709,9 +1710,9 @@ msgstr "Data inizio"
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:99
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:106
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:117
-#: plugins/mailman/www/admin/index.php:144
-#: plugins/mailman/www/admin/index.php:150
-#: plugins/mailman/www/admin/index.php:183
+#: plugins/mailman/www/admin/index.php:148
+#: plugins/mailman/www/admin/index.php:154
+#: plugins/mailman/www/admin/index.php:187
 #: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
 #: www/account/index.php:144 www/account/index.php:148
 #: www/account/index.php:153 www/account/index.php:174
@@ -1746,7 +1747,8 @@ msgstr "Data inizio"
 #: www/frs/reporting/downloads.php:109 www/frs/reporting/downloads.php:111
 #: www/include/user_profile.php:68 www/include/user_profile.php:126
 #: www/include/user_profile.php:133 www/include/user_profile.php:144
-#: www/include/user_profile.php:152 www/my/bookmark_add.php:48
+#: www/include/user_profile.php:152 www/mail/admin/index.php:194
+#: www/mail/admin/index.php:227 www/my/bookmark_add.php:48
 #: www/my/bookmark_add.php:54 www/my/bookmark_edit.php:60
 #: www/my/bookmark_edit.php:66 www/my/diary.php:181 www/my/diary.php:185
 #: www/pm/admin/index.php:212 www/pm/admin/index.php:321
@@ -2167,7 +2169,7 @@ msgstr "Rilasci"
 #: common/forum/ForumHTML.class.php:549
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
-#: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:66
+#: plugins/mailman/www/admin/index.php:190 plugins/mailman/www/index.php:66
 #: plugins/mailman/www/mailman_utils.php:68
 #: plugins/mailman/www/mailman_utils.php:175
 #: plugins/mantisbt/view/addOrEditNote.php:54
@@ -2833,6 +2835,7 @@ msgstr ""
 
 #: common/frs/include/frs_utils.php:227
 #: plugins/mediawiki/www/plugin_admin.php:130
+#: plugins/projectimport/common/UploadedFiles.class.php:405
 msgid "The uploaded file was only partially uploaded."
 msgstr "Il file è stato inviato solo parzialmente."
 
@@ -3621,6 +3624,7 @@ msgid "Log In"
 msgstr "Accedi"
 
 #: common/include/Navigation.class.php:206
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:85
 msgid "New Account"
 msgstr "Nuovo account"
 
@@ -6842,8 +6846,8 @@ msgstr "Sei sicuro di voler rimuovere questa attività?"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:99
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:232
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:233
-#: plugins/mailman/www/admin/index.php:148
-#: plugins/mailman/www/admin/index.php:180
+#: plugins/mailman/www/admin/index.php:152
+#: plugins/mailman/www/admin/index.php:184
 #: plugins/projects-hierarchy/view/admin_project_link.php:69
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
 #: www/admin/groupedit.php:162 www/admin/responses_admin.php:50
@@ -7752,9 +7756,9 @@ msgid "Activity Ranking: %d"
 msgstr "Percentuale di attività:"
 
 #: common/widget/Widget_ProjectInfo.class.php:84
-#, php-format
-msgid "View project <a href=\"%s\" >Statistics</a>"
-msgstr ""
+#, fuzzy, php-format
+msgid "View project <a href=\"%s\">Statistics</a>"
+msgstr "Potresti inviare messaggi se tu fossi %1$s collegato %2$s"
 
 #: common/widget/Widget_ProjectInfo.class.php:86
 #, fuzzy, php-format
@@ -8293,7 +8297,11 @@ msgid "Login name or email address"
 msgstr "Indirizzo email non valido"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
-msgid "Login name"
+#: www/account/index.php:153 www/account/lostpw.php:90
+#: www/account/pending-resend.php:67 www/account/verify.php:78
+#: www/include/user_profile.php:88
+#, fuzzy
+msgid "Login Name"
 msgstr "Nome login"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
@@ -8311,12 +8319,10 @@ msgstr "Accedi"
 msgid "[Lost your password?]"
 msgstr "[Hai dimenticato la password?]"
 
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:85
-msgid "[New Account]"
-msgstr "[Nuovo account]"
-
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:87
-msgid "[Resend confirmation email to a pending account]"
+#: www/account/pending-resend.php:53 www/account/register.php:277
+#, fuzzy
+msgid "Resend confirmation email to a pending account"
 msgstr "[Rispedisci l'email di conferma di un nuovo account]"
 
 #: plugins/authbuiltin/www/post-login.php:106
@@ -9005,9 +9011,11 @@ msgstr "Registra un nuovo utente"
 
 #: plugins/contribtracker/www/global_admin.php:380
 #: plugins/contribtracker/www/global_admin.php:397
+#: www/admin/globalroleedit.php:202 www/admin/globalroleedit.php:209
+#: www/project/admin/roleedit.php:123 www/project/admin/roleedit.php:126
 #: www/project/admin/users.php:381 www/project/admin/users.php:441
 #: www/project/admin/users.php:465
-msgid "Role name"
+msgid "Role Name"
 msgstr "Nome ruolo"
 
 #: plugins/contribtracker/www/global_admin.php:381
@@ -9812,8 +9820,8 @@ msgstr "Sei sicuro di voler rimuovere questo tracker?"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:99
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:232
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:233
-#: plugins/mailman/www/admin/index.php:149
-#: plugins/mailman/www/admin/index.php:181
+#: plugins/mailman/www/admin/index.php:153
+#: plugins/mailman/www/admin/index.php:185
 #: plugins/projects-hierarchy/view/admin_project_link.php:69
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
 #: www/admin/groupedit.php:161 www/forum/admin/index.php:223
@@ -10938,7 +10946,7 @@ msgstr "Rimuovi in modo permanente"
 #: plugins/mailman/www/admin/index.php:50
 #: plugins/mailman/www/admin/index.php:73
 #: plugins/mailman/www/admin/index.php:94
-#: plugins/mailman/www/admin/index.php:164 www/mail/admin/index.php:63
+#: plugins/mailman/www/admin/index.php:168 www/mail/admin/index.php:63
 #: www/mail/admin/index.php:90 www/mail/admin/index.php:114
 #: www/mail/admin/index.php:209
 #, fuzzy
@@ -10963,57 +10971,61 @@ msgstr "Mailing List aggiunta"
 msgid "Add a Mailing List"
 msgstr "Aggiungi una Mailing List"
 
-#: plugins/mailman/www/admin/index.php:120
+#: plugins/mailman/www/admin/index.php:120 www/mail/admin/index.php:139
 #, php-format
 msgid ""
-"Lists are named in this manner:<br /><strong>projectname-listname@%1$s</"
-"strong></p><p>It will take <span class=\"important\">few minutes</span> for "
-"your list to be created."
+"Lists are named in this manner:<br /><strong>projectname-listname@%s</strong>"
 msgstr ""
 
-#: plugins/mailman/www/admin/index.php:131 www/mail/admin/index.php:154
+#: plugins/mailman/www/admin/index.php:124
+msgid ""
+"It will take <span class=\"important\">few minutes</span> for your list to "
+"be created."
+msgstr ""
+
+#: plugins/mailman/www/admin/index.php:135 www/mail/admin/index.php:154
 msgid "Unable to get the lists"
 msgstr ""
 
-#: plugins/mailman/www/admin/index.php:144
+#: plugins/mailman/www/admin/index.php:148
 msgid "Mailing List Name"
 msgstr "Nome Mailing List"
 
-#: plugins/mailman/www/admin/index.php:147
-#: plugins/mailman/www/admin/index.php:179 www/mail/admin/index.php:191
+#: plugins/mailman/www/admin/index.php:151
+#: plugins/mailman/www/admin/index.php:183 www/mail/admin/index.php:191
 #: www/mail/admin/index.php:222
 msgid "Is Public?"
 msgstr "Progetto pubblico?"
 
-#: plugins/mailman/www/admin/index.php:153 www/mail/admin/index.php:197
+#: plugins/mailman/www/admin/index.php:157 www/mail/admin/index.php:197
 msgid "Add This List"
 msgstr "Aggiungi questa lista"
 
-#: plugins/mailman/www/admin/index.php:169
+#: plugins/mailman/www/admin/index.php:173
 #, fuzzy
 msgid "Mail admin"
 msgstr "Amministrazione Mail"
 
-#: plugins/mailman/www/admin/index.php:200
+#: plugins/mailman/www/admin/index.php:204
 msgid "Mailing List Administration"
 msgstr "Amministrazione di Mailing List"
 
-#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:47
+#: plugins/mailman/www/admin/index.php:212 plugins/mailman/www/index.php:47
 #: www/mail/admin/index.php:251
 #, php-format
 msgid "Unable to get the list %s"
 msgstr ""
 
-#: plugins/mailman/www/admin/index.php:213 www/mail/admin/index.php:256
+#: plugins/mailman/www/admin/index.php:217 www/mail/admin/index.php:256
 #, php-format
 msgid ""
 "You can administrate lists from here. Please note that private lists can "
-"still be viewed by members of your project, but are not listed on %1$s."
+"still be viewed by members of your project, but are not listed on %s."
 msgstr ""
 "Puoi amministrare Mailing List da qui. Considera che liste private possono "
 "essere viste da membri del progetto, non saranno però elencate su %1$s."
 
-#: plugins/mailman/www/admin/index.php:216 www/mail/admin/index.php:259
+#: plugins/mailman/www/admin/index.php:220 www/mail/admin/index.php:259
 msgid "Add Mailing List"
 msgstr "Aggiungi Mailing List"
 
@@ -11878,6 +11890,7 @@ msgid "Mediawiki integration in the forge"
 msgstr ""
 
 #: plugins/mediawiki/mediawiki-skin/FusionForge.php:220
+#: plugins/projectimport/www/index.php:568
 #, fuzzy
 msgid "Project Summary"
 msgstr "Cronologia delle modifiche"
@@ -12445,7 +12458,7 @@ msgstr "Autorizzazione negata"
 #: plugins/oauthprovider/www/token_deny.php:60
 #, php-format
 msgid ""
-"You have denied Consumer \"%s\" access to Fusionforge on your behalf. The "
+"You have denied Consumer “%s” access to Fusionforge on your behalf. The "
 "pending OAuth token request has been deleted."
 msgstr ""
 
@@ -12544,7 +12557,7 @@ msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:392
 #, php-format
-msgid "File \"%s\" uploaded and pre-selected"
+msgid "File “%s” uploaded and pre-selected"
 msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:401
@@ -12557,22 +12570,17 @@ msgid ""
 "the HTML form"
 msgstr ""
 
-#: plugins/projectimport/common/UploadedFiles.class.php:405
-#, fuzzy
-msgid "The uploaded file was only partially uploaded"
-msgstr "Il file è stato inviato solo parzialmente."
-
 #: plugins/projectimport/common/UploadedFiles.class.php:409
 msgid "Missing a temporary folder"
 msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:411
 #, fuzzy
-msgid "Failed to write file to disk"
+msgid "Failed to write file to disk."
 msgstr "Aggiunta competenza fallita"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:413
-msgid "File upload stopped by extension"
+msgid "File upload stopped by extension."
 msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:415
@@ -12599,18 +12607,18 @@ msgstr ""
 
 #: plugins/projectimport/www/index.php:282
 #, php-format
-msgid "Found matching existing forge user with same login \"%s\""
+msgid "Found matching existing forge user with same login “%s”"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:295
 #, php-format
-msgid "Found matching existing forge user \"%s\" with same email \"%s\""
+msgid "Found matching existing forge user “%s” with same email “%s”"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:301
-#, php-format
-msgid "Failed to find existing user matching imported user \"%s\""
-msgstr ""
+#, fuzzy, php-format
+msgid "Failed to find existing user matching imported user “%s”"
+msgstr "Aggiunta competenza fallita"
 
 #: plugins/projectimport/www/index.php:317
 msgid "Optionally change for another existing user"
@@ -12691,25 +12699,19 @@ msgstr "Nuovo ruolo"
 #: plugins/projectimport/www/index.php:473
 #, php-format
 msgid ""
-"Imported user \"%s\" (role \"%s\"), mapped as \"%s\" which is not yet in the "
-"project : need to add it as role \"%s\"."
+"Imported user “%s” (role “%s”), mapped as “%s” which is not yet in the "
+"project: need to add it as role “%s”."
 msgstr ""
 
 #: plugins/projectimport/www/index.php:484
 #, fuzzy, php-format
-msgid "Failed to find mapped user \"%s\""
+msgid "Failed to find mapped user “%s”"
 msgstr "Aggiunta competenza fallita"
 
 #: plugins/projectimport/www/index.php:565
 #, fuzzy
-msgid "Details of imported project : "
+msgid "Details of imported project: "
 msgstr "Elenco utenti del progetto:"
-
-#: plugins/projectimport/www/index.php:568
-#: plugins/projectimport/www/projectsimport.php:267
-#, fuzzy
-msgid "Project summary"
-msgstr "Cronologia delle modifiche"
 
 #: plugins/projectimport/www/index.php:579
 #, fuzzy
@@ -12759,6 +12761,11 @@ msgstr "Errore nella creazione  del progetto"
 #, fuzzy
 msgid "Created project"
 msgstr "Progetti privati"
+
+#: plugins/projectimport/www/projectsimport.php:267
+#, fuzzy
+msgid "Project summary"
+msgstr "Cronologia delle modifiche"
 
 #: plugins/projectimport/www/usersimport.php:72
 #, fuzzy
@@ -12965,7 +12972,7 @@ msgstr "Elemento creato con successo"
 
 #: plugins/projects-hierarchy/actions/removeChild.php:34
 #, fuzzy
-msgid "Failed to removed child"
+msgid "Failed to remove child"
 msgstr "Aggiunta competenza fallita"
 
 #: plugins/projects-hierarchy/actions/removeParent.php:32
@@ -12974,8 +12981,9 @@ msgid "Successfully removed parent"
 msgstr "Elemento creato con successo"
 
 #: plugins/projects-hierarchy/actions/removeParent.php:34
-msgid "Failed to removed parent"
-msgstr ""
+#, fuzzy
+msgid "Failed to remove parent"
+msgstr "Errore nella creazione  del progetto"
 
 #: plugins/projects-hierarchy/actions/updateGlobalConf.php:37
 msgid "Projects Hierarchy global configuration successfully updated."
@@ -13954,8 +13962,7 @@ msgstr "Statistiche dei database dei progetti"
 msgid "Repository name:"
 msgstr "Repository SCM"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1119 www/mail/admin/index.php:194
-#: www/mail/admin/index.php:227
+#: plugins/scmgit/common/GitPlugin.class.php:1119
 msgid "Description:"
 msgstr "Descrizione"
 
@@ -14758,13 +14765,6 @@ msgstr "Registrato il"
 msgid "User Id"
 msgstr "Id utente"
 
-#: www/account/index.php:153 www/account/lostpw.php:90
-#: www/account/pending-resend.php:67 www/account/verify.php:78
-#: www/include/user_profile.php:88
-#, fuzzy
-msgid "Login Name"
-msgstr "Nome login"
-
 #: www/account/index.php:160 www/account/register.php:177
 msgid "First Name:"
 msgstr "Nome:"
@@ -14969,11 +14969,6 @@ msgid ""
 "Your email confirmation has been resent. Visit the link in this email to "
 "complete the registration process."
 msgstr ""
-
-#: www/account/pending-resend.php:53 www/account/register.php:277
-#, fuzzy
-msgid "Resend confirmation email to a pending account"
-msgstr "[Rispedisci l'email di conferma di un nuovo account]"
 
 #: www/account/pending-resend.php:56
 #, fuzzy
@@ -15570,11 +15565,6 @@ msgstr "Nessun file inserito"
 #, fuzzy
 msgid "Add User"
 msgstr "Aggiungi utente"
-
-#: www/admin/globalroleedit.php:202 www/admin/globalroleedit.php:209
-#: www/project/admin/roleedit.php:123 www/project/admin/roleedit.php:126
-msgid "Role Name"
-msgstr "Nome ruolo"
 
 #: www/admin/globalroleedit.php:207
 msgid "Public role (can be referenced by projects)"
@@ -18624,12 +18614,6 @@ msgstr "Sei sicuro di voler rimuovere questa attività?"
 #, fuzzy
 msgid "Password reset requested"
 msgstr "Conferma password:"
-
-#: www/mail/admin/index.php:139
-#, php-format
-msgid ""
-"Lists are named in this manner:<br /><strong>projectname-listname@%s</strong>"
-msgstr ""
 
 #: www/mail/admin/index.php:143
 msgid "It will take one hour for your list to be created."
@@ -23423,6 +23407,30 @@ msgstr "Non è stato inserito alcun file"
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
 
+#~ msgid "Login name"
+#~ msgstr "Nome login"
+
+#~ msgid "[New Account]"
+#~ msgstr "[Nuovo account]"
+
+#~ msgid "[Resend confirmation email to a pending account]"
+#~ msgstr "[Rispedisci l'email di conferma di un nuovo account]"
+
+#~ msgid "Role name"
+#~ msgstr "Nome ruolo"
+
+#~ msgid ""
+#~ "You can administrate lists from here. Please note that private lists can "
+#~ "still be viewed by members of your project, but are not listed on %1$s."
+#~ msgstr ""
+#~ "Puoi amministrare Mailing List da qui. Considera che liste private "
+#~ "possono essere viste da membri del progetto, non saranno però elencate su "
+#~ "%1$s."
+
+#, fuzzy
+#~ msgid "The uploaded file was only partially uploaded"
+#~ msgstr "Il file è stato inviato solo parzialmente."
+
 #, fuzzy
 #~ msgid "Insert Failed: "
 #~ msgstr "Inserimento fallito"
@@ -24872,14 +24880,6 @@ msgstr "Pagina Personale"
 
 #~ msgid "Invalid user name: %s"
 #~ msgstr "Utente non valido: %s"
-
-#~ msgid ""
-#~ "You can administrate lists from here. Please note that private lists can "
-#~ "still be viewed by members of your project, but are not listed on %s."
-#~ msgstr ""
-#~ "Puoi amministrare Mailing List da qui. Considera che liste private "
-#~ "possono essere viste da membri del progetto, non saranno però elencate su "
-#~ "%1$s."
 
 #~ msgid ""
 #~ "To avoid having to type your password every time for your CVS/SSH "

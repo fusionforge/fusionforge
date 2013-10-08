@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-08 15:42+0200\n"
+"POT-Creation-Date: 2013-10-08 18:20+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -729,12 +729,12 @@ msgstr "已經新增通信論壇"
 #: plugins/mailman/www/admin/index.php:94
 #: plugins/mailman/www/admin/index.php:96
 #: plugins/mailman/www/admin/index.php:104
-#: plugins/mailman/www/admin/index.php:125
-#: plugins/mailman/www/admin/index.php:131
-#: plugins/mailman/www/admin/index.php:164
-#: plugins/mailman/www/admin/index.php:166
-#: plugins/mailman/www/admin/index.php:196
-#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:25
+#: plugins/mailman/www/admin/index.php:129
+#: plugins/mailman/www/admin/index.php:135
+#: plugins/mailman/www/admin/index.php:168
+#: plugins/mailman/www/admin/index.php:170
+#: plugins/mailman/www/admin/index.php:200
+#: plugins/mailman/www/admin/index.php:212 plugins/mailman/www/index.php:25
 #: plugins/mailman/www/index.php:32 plugins/mailman/www/index.php:35
 #: plugins/mailman/www/index.php:47 www/account/lostlogin.php:84
 #: www/admin/globalroledelete.php:49 www/admin/passedit.php:53
@@ -793,8 +793,8 @@ msgstr ""
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:132
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:56
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:97
-#: plugins/mailman/www/admin/index.php:150
-#: plugins/mailman/www/admin/index.php:183
+#: plugins/mailman/www/admin/index.php:154
+#: plugins/mailman/www/admin/index.php:187
 #: plugins/mailman/www/mailman_utils.php:52
 #: plugins/mailman/www/mailman_utils.php:67
 #: plugins/mantisbt/view/addIssue.php:137
@@ -817,11 +817,12 @@ msgstr ""
 #: plugins/scmhook/common/scmhookPlugin.class.php:430
 #: plugins/scmhook/common/scmhookPlugin.class.php:491
 #: www/forum/admin/index.php:117 www/forum/admin/index.php:158
-#: www/forum/index.php:69 www/mail/index.php:79 www/people/editjob.php:52
-#: www/people/editjob.php:74 www/pm/admin/index.php:288
-#: www/pm/admin/index.php:331 www/pm/csv.php:106 www/pm/index.php:100
-#: www/project/admin/editimages.php:228 www/project/admin/editimages.php:255
-#: www/project/admin/editimages.php:271
+#: www/forum/index.php:69 www/mail/admin/index.php:194
+#: www/mail/admin/index.php:227 www/mail/index.php:79
+#: www/people/editjob.php:52 www/people/editjob.php:74
+#: www/pm/admin/index.php:288 www/pm/admin/index.php:331 www/pm/csv.php:106
+#: www/pm/index.php:100 www/project/admin/editimages.php:228
+#: www/project/admin/editimages.php:255 www/project/admin/editimages.php:271
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:62
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:55
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:46
@@ -1708,9 +1709,9 @@ msgstr "開啟日期"
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:99
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:106
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:117
-#: plugins/mailman/www/admin/index.php:144
-#: plugins/mailman/www/admin/index.php:150
-#: plugins/mailman/www/admin/index.php:183
+#: plugins/mailman/www/admin/index.php:148
+#: plugins/mailman/www/admin/index.php:154
+#: plugins/mailman/www/admin/index.php:187
 #: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
 #: www/account/index.php:144 www/account/index.php:148
 #: www/account/index.php:153 www/account/index.php:174
@@ -1745,7 +1746,8 @@ msgstr "開啟日期"
 #: www/frs/reporting/downloads.php:109 www/frs/reporting/downloads.php:111
 #: www/include/user_profile.php:68 www/include/user_profile.php:126
 #: www/include/user_profile.php:133 www/include/user_profile.php:144
-#: www/include/user_profile.php:152 www/my/bookmark_add.php:48
+#: www/include/user_profile.php:152 www/mail/admin/index.php:194
+#: www/mail/admin/index.php:227 www/my/bookmark_add.php:48
 #: www/my/bookmark_add.php:54 www/my/bookmark_edit.php:60
 #: www/my/bookmark_edit.php:66 www/my/diary.php:181 www/my/diary.php:185
 #: www/pm/admin/index.php:212 www/pm/admin/index.php:321
@@ -2166,7 +2168,7 @@ msgstr "發佈"
 #: common/forum/ForumHTML.class.php:549
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
-#: plugins/mailman/www/admin/index.php:186 plugins/mailman/www/index.php:66
+#: plugins/mailman/www/admin/index.php:190 plugins/mailman/www/index.php:66
 #: plugins/mailman/www/mailman_utils.php:68
 #: plugins/mailman/www/mailman_utils.php:175
 #: plugins/mantisbt/view/addOrEditNote.php:54
@@ -2813,6 +2815,7 @@ msgstr "上傳的檔案超過系統限制，您可以聯絡管理員來上傳這
 
 #: common/frs/include/frs_utils.php:227
 #: plugins/mediawiki/www/plugin_admin.php:130
+#: plugins/projectimport/common/UploadedFiles.class.php:405
 msgid "The uploaded file was only partially uploaded."
 msgstr "上傳的檔案並不完整"
 
@@ -3592,6 +3595,7 @@ msgid "Log In"
 msgstr "登入"
 
 #: common/include/Navigation.class.php:206
+#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:85
 msgid "New Account"
 msgstr "新帳號"
 
@@ -6804,8 +6808,8 @@ msgstr "您確定要刪除這個任務嗎？"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:99
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:232
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:233
-#: plugins/mailman/www/admin/index.php:148
-#: plugins/mailman/www/admin/index.php:180
+#: plugins/mailman/www/admin/index.php:152
+#: plugins/mailman/www/admin/index.php:184
 #: plugins/projects-hierarchy/view/admin_project_link.php:69
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
 #: www/admin/groupedit.php:162 www/admin/responses_admin.php:50
@@ -7701,9 +7705,9 @@ msgid "Activity Ranking: %d"
 msgstr "活躍度："
 
 #: common/widget/Widget_ProjectInfo.class.php:84
-#, php-format
-msgid "View project <a href=\"%s\" >Statistics</a>"
-msgstr ""
+#, fuzzy, php-format
+msgid "View project <a href=\"%s\">Statistics</a>"
+msgstr "您只有 %1$s 登入 %2$s 之後才能發表"
 
 #: common/widget/Widget_ProjectInfo.class.php:86
 #, fuzzy, php-format
@@ -8234,7 +8238,11 @@ msgid "Login name or email address"
 msgstr "無效的Email"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
-msgid "Login name"
+#: www/account/index.php:153 www/account/lostpw.php:90
+#: www/account/pending-resend.php:67 www/account/verify.php:78
+#: www/include/user_profile.php:88
+#, fuzzy
+msgid "Login Name"
 msgstr "使用者名稱"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
@@ -8253,12 +8261,10 @@ msgstr "登入"
 msgid "[Lost your password?]"
 msgstr "[忘了密碼？]"
 
-#: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:85
-msgid "[New Account]"
-msgstr "[新帳號]"
-
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:87
-msgid "[Resend confirmation email to a pending account]"
+#: www/account/pending-resend.php:53 www/account/register.php:277
+#, fuzzy
+msgid "Resend confirmation email to a pending account"
 msgstr "[重新發送確認信函給未通過的帳號]"
 
 #: plugins/authbuiltin/www/post-login.php:106
@@ -8948,10 +8954,11 @@ msgstr "註冊新帳號"
 
 #: plugins/contribtracker/www/global_admin.php:380
 #: plugins/contribtracker/www/global_admin.php:397
+#: www/admin/globalroleedit.php:202 www/admin/globalroleedit.php:209
+#: www/project/admin/roleedit.php:123 www/project/admin/roleedit.php:126
 #: www/project/admin/users.php:381 www/project/admin/users.php:441
 #: www/project/admin/users.php:465
-#, fuzzy
-msgid "Role name"
+msgid "Role Name"
 msgstr "角色名稱"
 
 #: plugins/contribtracker/www/global_admin.php:381
@@ -9756,8 +9763,8 @@ msgstr "您確定要刪除這個自訂類型？"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:99
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:232
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:233
-#: plugins/mailman/www/admin/index.php:149
-#: plugins/mailman/www/admin/index.php:181
+#: plugins/mailman/www/admin/index.php:153
+#: plugins/mailman/www/admin/index.php:185
 #: plugins/projects-hierarchy/view/admin_project_link.php:69
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
 #: www/admin/groupedit.php:161 www/forum/admin/index.php:223
@@ -10881,7 +10888,7 @@ msgstr "永久的刪除"
 #: plugins/mailman/www/admin/index.php:50
 #: plugins/mailman/www/admin/index.php:73
 #: plugins/mailman/www/admin/index.php:94
-#: plugins/mailman/www/admin/index.php:164 www/mail/admin/index.php:63
+#: plugins/mailman/www/admin/index.php:168 www/mail/admin/index.php:63
 #: www/mail/admin/index.php:90 www/mail/admin/index.php:114
 #: www/mail/admin/index.php:209
 #, fuzzy
@@ -10906,57 +10913,61 @@ msgstr "已經新增通信論壇"
 msgid "Add a Mailing List"
 msgstr "新增一個通信論壇"
 
-#: plugins/mailman/www/admin/index.php:120
+#: plugins/mailman/www/admin/index.php:120 www/mail/admin/index.php:139
 #, php-format
 msgid ""
-"Lists are named in this manner:<br /><strong>projectname-listname@%1$s</"
-"strong></p><p>It will take <span class=\"important\">few minutes</span> for "
-"your list to be created."
+"Lists are named in this manner:<br /><strong>projectname-listname@%s</strong>"
 msgstr ""
 
-#: plugins/mailman/www/admin/index.php:131 www/mail/admin/index.php:154
+#: plugins/mailman/www/admin/index.php:124
+msgid ""
+"It will take <span class=\"important\">few minutes</span> for your list to "
+"be created."
+msgstr ""
+
+#: plugins/mailman/www/admin/index.php:135 www/mail/admin/index.php:154
 msgid "Unable to get the lists"
 msgstr ""
 
-#: plugins/mailman/www/admin/index.php:144
+#: plugins/mailman/www/admin/index.php:148
 msgid "Mailing List Name"
 msgstr "通信論壇名稱"
 
-#: plugins/mailman/www/admin/index.php:147
-#: plugins/mailman/www/admin/index.php:179 www/mail/admin/index.php:191
+#: plugins/mailman/www/admin/index.php:151
+#: plugins/mailman/www/admin/index.php:183 www/mail/admin/index.php:191
 #: www/mail/admin/index.php:222
 msgid "Is Public?"
 msgstr "是否公開？"
 
-#: plugins/mailman/www/admin/index.php:153 www/mail/admin/index.php:197
+#: plugins/mailman/www/admin/index.php:157 www/mail/admin/index.php:197
 msgid "Add This List"
 msgstr "新增這個通信論壇"
 
-#: plugins/mailman/www/admin/index.php:169
+#: plugins/mailman/www/admin/index.php:173
 #, fuzzy
 msgid "Mail admin"
 msgstr "郵件管理"
 
-#: plugins/mailman/www/admin/index.php:200
+#: plugins/mailman/www/admin/index.php:204
 msgid "Mailing List Administration"
 msgstr "通信論壇管理"
 
-#: plugins/mailman/www/admin/index.php:208 plugins/mailman/www/index.php:47
+#: plugins/mailman/www/admin/index.php:212 plugins/mailman/www/index.php:47
 #: www/mail/admin/index.php:251
 #, php-format
 msgid "Unable to get the list %s"
 msgstr ""
 
-#: plugins/mailman/www/admin/index.php:213 www/mail/admin/index.php:256
+#: plugins/mailman/www/admin/index.php:217 www/mail/admin/index.php:256
 #, php-format
 msgid ""
 "You can administrate lists from here. Please note that private lists can "
-"still be viewed by members of your project, but are not listed on %1$s."
+"still be viewed by members of your project, but are not listed on %s."
 msgstr ""
 "您可以從這裡管理通信論壇，請注意，隱藏的通信論壇還是可以從您的專案網頁看到，"
 "但是不會出現在 %1$s。"
 
-#: plugins/mailman/www/admin/index.php:216 www/mail/admin/index.php:259
+#: plugins/mailman/www/admin/index.php:220 www/mail/admin/index.php:259
 msgid "Add Mailing List"
 msgstr "新增通信論壇"
 
@@ -11827,6 +11838,7 @@ msgid "Mediawiki integration in the forge"
 msgstr ""
 
 #: plugins/mediawiki/mediawiki-skin/FusionForge.php:220
+#: plugins/projectimport/www/index.php:568
 #, fuzzy
 msgid "Project Summary"
 msgstr "專案歷史紀錄"
@@ -12394,7 +12406,7 @@ msgstr "權限不足"
 #: plugins/oauthprovider/www/token_deny.php:60
 #, php-format
 msgid ""
-"You have denied Consumer \"%s\" access to Fusionforge on your behalf. The "
+"You have denied Consumer “%s” access to Fusionforge on your behalf. The "
 "pending OAuth token request has been deleted."
 msgstr ""
 
@@ -12493,7 +12505,7 @@ msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:392
 #, php-format
-msgid "File \"%s\" uploaded and pre-selected"
+msgid "File “%s” uploaded and pre-selected"
 msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:401
@@ -12506,22 +12518,17 @@ msgid ""
 "the HTML form"
 msgstr ""
 
-#: plugins/projectimport/common/UploadedFiles.class.php:405
-#, fuzzy
-msgid "The uploaded file was only partially uploaded"
-msgstr "上傳的檔案並不完整"
-
 #: plugins/projectimport/common/UploadedFiles.class.php:409
 msgid "Missing a temporary folder"
 msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:411
 #, fuzzy
-msgid "Failed to write file to disk"
+msgid "Failed to write file to disk."
 msgstr "增加技能失敗"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:413
-msgid "File upload stopped by extension"
+msgid "File upload stopped by extension."
 msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:415
@@ -12548,18 +12555,18 @@ msgstr ""
 
 #: plugins/projectimport/www/index.php:282
 #, php-format
-msgid "Found matching existing forge user with same login \"%s\""
+msgid "Found matching existing forge user with same login “%s”"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:295
 #, php-format
-msgid "Found matching existing forge user \"%s\" with same email \"%s\""
+msgid "Found matching existing forge user “%s” with same email “%s”"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:301
-#, php-format
-msgid "Failed to find existing user matching imported user \"%s\""
-msgstr ""
+#, fuzzy, php-format
+msgid "Failed to find existing user matching imported user “%s”"
+msgstr "增加技能失敗"
 
 #: plugins/projectimport/www/index.php:317
 msgid "Optionally change for another existing user"
@@ -12640,25 +12647,19 @@ msgstr "新角色"
 #: plugins/projectimport/www/index.php:473
 #, php-format
 msgid ""
-"Imported user \"%s\" (role \"%s\"), mapped as \"%s\" which is not yet in the "
-"project : need to add it as role \"%s\"."
+"Imported user “%s” (role “%s”), mapped as “%s” which is not yet in the "
+"project: need to add it as role “%s”."
 msgstr ""
 
 #: plugins/projectimport/www/index.php:484
 #, fuzzy, php-format
-msgid "Failed to find mapped user \"%s\""
+msgid "Failed to find mapped user “%s”"
 msgstr "增加技能失敗"
 
 #: plugins/projectimport/www/index.php:565
 #, fuzzy
-msgid "Details of imported project : "
+msgid "Details of imported project: "
 msgstr "群組的會員清單："
-
-#: plugins/projectimport/www/index.php:568
-#: plugins/projectimport/www/projectsimport.php:267
-#, fuzzy
-msgid "Project summary"
-msgstr "專案歷史紀錄"
 
 #: plugins/projectimport/www/index.php:579
 #, fuzzy
@@ -12706,6 +12707,11 @@ msgstr "建立群組物件時發生錯誤"
 #, fuzzy
 msgid "Created project"
 msgstr "私人群組"
+
+#: plugins/projectimport/www/projectsimport.php:267
+#, fuzzy
+msgid "Project summary"
+msgstr "專案歷史紀錄"
 
 #: plugins/projectimport/www/usersimport.php:72
 #, fuzzy
@@ -12910,7 +12916,7 @@ msgstr "項目成功創造"
 
 #: plugins/projects-hierarchy/actions/removeChild.php:34
 #, fuzzy
-msgid "Failed to removed child"
+msgid "Failed to remove child"
 msgstr "增加技能失敗"
 
 #: plugins/projects-hierarchy/actions/removeParent.php:32
@@ -12919,8 +12925,9 @@ msgid "Successfully removed parent"
 msgstr "項目成功創造"
 
 #: plugins/projects-hierarchy/actions/removeParent.php:34
-msgid "Failed to removed parent"
-msgstr ""
+#, fuzzy
+msgid "Failed to remove parent"
+msgstr "建立群組物件時發生錯誤"
 
 #: plugins/projects-hierarchy/actions/updateGlobalConf.php:37
 msgid "Projects Hierarchy global configuration successfully updated."
@@ -13899,8 +13906,7 @@ msgstr "專案資料庫統計"
 msgid "Repository name:"
 msgstr "原始碼版本控制系統資料庫"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1119 www/mail/admin/index.php:194
-#: www/mail/admin/index.php:227
+#: plugins/scmgit/common/GitPlugin.class.php:1119
 msgid "Description:"
 msgstr "說明："
 
@@ -14701,13 +14707,6 @@ msgstr "帳號建立日期"
 msgid "User Id"
 msgstr "使用者編號"
 
-#: www/account/index.php:153 www/account/lostpw.php:90
-#: www/account/pending-resend.php:67 www/account/verify.php:78
-#: www/include/user_profile.php:88
-#, fuzzy
-msgid "Login Name"
-msgstr "使用者名稱"
-
 #: www/account/index.php:160 www/account/register.php:177
 msgid "First Name:"
 msgstr "名字："
@@ -14907,11 +14906,6 @@ msgid ""
 "Your email confirmation has been resent. Visit the link in this email to "
 "complete the registration process."
 msgstr ""
-
-#: www/account/pending-resend.php:53 www/account/register.php:277
-#, fuzzy
-msgid "Resend confirmation email to a pending account"
-msgstr "[重新發送確認信函給未通過的帳號]"
 
 #: www/account/pending-resend.php:56
 #, fuzzy
@@ -15492,11 +15486,6 @@ msgstr "目前沒有附加檔案"
 #, fuzzy
 msgid "Add User"
 msgstr "增加會員"
-
-#: www/admin/globalroleedit.php:202 www/admin/globalroleedit.php:209
-#: www/project/admin/roleedit.php:123 www/project/admin/roleedit.php:126
-msgid "Role Name"
-msgstr "角色名稱"
 
 #: www/admin/globalroleedit.php:207
 msgid "Public role (can be referenced by projects)"
@@ -18499,12 +18488,6 @@ msgstr "您確定要刪除這個任務嗎？"
 #, fuzzy
 msgid "Password reset requested"
 msgstr "密碼（重複）："
-
-#: www/mail/admin/index.php:139
-#, php-format
-msgid ""
-"Lists are named in this manner:<br /><strong>projectname-listname@%s</strong>"
-msgstr ""
 
 #: www/mail/admin/index.php:143
 msgid "It will take one hour for your list to be created."
@@ -23230,6 +23213,30 @@ msgstr "帳號"
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
 
+#~ msgid "Login name"
+#~ msgstr "使用者名稱"
+
+#~ msgid "[New Account]"
+#~ msgstr "[新帳號]"
+
+#~ msgid "[Resend confirmation email to a pending account]"
+#~ msgstr "[重新發送確認信函給未通過的帳號]"
+
+#, fuzzy
+#~ msgid "Role name"
+#~ msgstr "角色名稱"
+
+#~ msgid ""
+#~ "You can administrate lists from here. Please note that private lists can "
+#~ "still be viewed by members of your project, but are not listed on %1$s."
+#~ msgstr ""
+#~ "您可以從這裡管理通信論壇，請注意，隱藏的通信論壇還是可以從您的專案網頁看"
+#~ "到，但是不會出現在 %1$s。"
+
+#, fuzzy
+#~ msgid "The uploaded file was only partially uploaded"
+#~ msgstr "上傳的檔案並不完整"
+
 #, fuzzy
 #~ msgid "Insert Failed: "
 #~ msgstr "新增失敗"
@@ -24542,13 +24549,6 @@ msgstr "我的個人首頁"
 #~ msgid ""
 #~ "Visiting the link sent to you in this email will activate your account."
 #~ msgstr "點擊email中的連結就可以啟動您的帳號。"
-
-#~ msgid ""
-#~ "You can administrate lists from here. Please note that private lists can "
-#~ "still be viewed by members of your project, but are not listed on %s."
-#~ msgstr ""
-#~ "您可以從這裡管理通信論壇，請注意，隱藏的通信論壇還是可以從您的專案網頁看"
-#~ "到，但是不會出現在 %1$s。"
 
 #~ msgid ""
 #~ "To avoid having to type your password every time for your CVS/SSH "
