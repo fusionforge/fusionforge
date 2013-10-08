@@ -57,7 +57,7 @@ try {
 
 <h2><?php echo _('Authorization Denied') ?></h2>
 
-<p><?php echo sprintf( _('You have denied Consumer "%s" access to Fusionforge on your behalf. The pending OAuth token request has been deleted.'), $consumer->getName() )?></p>
+<p><?php echo sprintf( _('You have denied Consumer “%s” access to Fusionforge on your behalf. The pending OAuth token request has been deleted.'), $consumer->getName() )?></p>
 
 <?php
 
