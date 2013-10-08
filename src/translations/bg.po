@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-08 15:24+0200\n"
+"POT-Creation-Date: 2013-10-08 15:42+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -435,8 +435,8 @@ msgstr ""
 #: common/forum/ForumMessage.class.php:667 common/include/Error.class.php:207
 #: common/include/exit.php:80 common/include/Group.class.php:2628
 #: common/include/Group.class.php:2629 common/include/Group.class.php:2630
-#: common/include/User.class.php:348 common/include/User.class.php:1407
-#: common/mail/MailingList.class.php:174
+#: common/include/User.class.php:348 common/include/User.class.php:434
+#: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
 #: common/tracker/actions/browse.php:407 common/tracker/actions/browse.php:751
@@ -516,6 +516,7 @@ msgstr ""
 #: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
 #: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
 #: www/pm/add_task.php:124 www/pm/add_task.php:130 www/pm/add_task.php:149
+#: www/pm/admin/index.php:96 www/pm/admin/index.php:118
 #: www/pm/admin/index.php:258 www/pm/calendar.php:59 www/pm/detail_task.php:66
 #: www/pm/detail_task.php:71 www/pm/detail_task.php:86
 #: www/pm/detail_task.php:90 www/pm/detail_task.php:97
@@ -2271,6 +2272,7 @@ msgstr ""
 #: plugins/mailman/include/MailmanList.class.php:249
 #: plugins/mailman/include/MailmanList.class.php:376
 #: plugins/mailman/include/MailmanList.class.php:393
+#: www/pm/admin/index.php:118
 #, fuzzy
 msgid "Update failed"
 msgstr "Невалиден UNIX идентификатор."
@@ -4184,8 +4186,12 @@ msgid ""
 "login."
 msgstr "Потребител с такъв електронен адрес вече е регистриран."
 
-#: common/include/User.class.php:434
-msgid "Insert Failed: "
+#: common/include/User.class.php:434 common/survey/Survey.class.php:129
+#: common/tracker/ArtifactExtraField.class.php:187
+#: common/tracker/ArtifactExtraField.class.php:193
+#: www/people/admin/index.php:52 www/people/admin/index.php:65
+#: www/pm/admin/index.php:96 www/survey/rating_resp.php:57
+msgid "Insert Error"
 msgstr ""
 
 #: common/include/User.class.php:441
@@ -4758,14 +4764,6 @@ msgstr ""
 #, fuzzy
 msgid "Update Failed: Survey Questions Required"
 msgstr "Няма въпроси към това проучване"
-
-#: common/survey/Survey.class.php:129
-#: common/tracker/ArtifactExtraField.class.php:187
-#: common/tracker/ArtifactExtraField.class.php:193
-#: www/people/admin/index.php:52 www/people/admin/index.php:65
-#: www/survey/rating_resp.php:57
-msgid "Insert Error"
-msgstr ""
 
 #: common/survey/Survey.class.php:168 common/survey/Survey.class.php:201
 msgid "The Survey data is not filled"
@@ -19039,16 +19037,6 @@ msgstr "Грешка при създаването на %1$s"
 msgid "Subproject Inserted"
 msgstr "Въпросът е твърде кратък"
 
-#: www/pm/admin/index.php:96
-#, fuzzy
-msgid "Error inserting: "
-msgstr "Грешка при получаването на %1$s"
-
-#: www/pm/admin/index.php:118
-#, fuzzy
-msgid "Error updating: "
-msgstr "Грешка при Обновяване:"
-
 #: www/pm/admin/index.php:120
 msgid "Category Updated"
 msgstr ""
@@ -22762,6 +22750,14 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Лична Информация"
+
+#, fuzzy
+#~ msgid "Error inserting: "
+#~ msgstr "Грешка при получаването на %1$s"
+
+#, fuzzy
+#~ msgid "Error updating: "
+#~ msgstr "Грешка при Обновяване:"
 
 #, fuzzy
 #~ msgid "Could Not Create File Object: "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-08 15:24+0200\n"
+"POT-Creation-Date: 2013-10-08 15:42+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -436,8 +436,8 @@ msgstr "Progetto"
 #: common/forum/ForumMessage.class.php:667 common/include/Error.class.php:207
 #: common/include/exit.php:80 common/include/Group.class.php:2628
 #: common/include/Group.class.php:2629 common/include/Group.class.php:2630
-#: common/include/User.class.php:348 common/include/User.class.php:1407
-#: common/mail/MailingList.class.php:174
+#: common/include/User.class.php:348 common/include/User.class.php:434
+#: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
 #: common/tracker/actions/browse.php:407 common/tracker/actions/browse.php:751
@@ -517,6 +517,7 @@ msgstr "Progetto"
 #: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
 #: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
 #: www/pm/add_task.php:124 www/pm/add_task.php:130 www/pm/add_task.php:149
+#: www/pm/admin/index.php:96 www/pm/admin/index.php:118
 #: www/pm/admin/index.php:258 www/pm/calendar.php:59 www/pm/detail_task.php:66
 #: www/pm/detail_task.php:71 www/pm/detail_task.php:86
 #: www/pm/detail_task.php:90 www/pm/detail_task.php:97
@@ -2289,6 +2290,7 @@ msgstr "Si può salvare la posizione solo quando si è collegati."
 #: plugins/mailman/include/MailmanList.class.php:249
 #: plugins/mailman/include/MailmanList.class.php:376
 #: plugins/mailman/include/MailmanList.class.php:393
+#: www/pm/admin/index.php:118
 msgid "Update failed"
 msgstr "Aggiornamento fallito"
 
@@ -4302,10 +4304,13 @@ msgstr ""
 "Sul sistema esiste già un utente con questo indirizzo di posta elettronica - "
 "usa la ricerca persone per recuperare il tuo login."
 
-#: common/include/User.class.php:434
-#, fuzzy
-msgid "Insert Failed: "
-msgstr "Inserimento fallito"
+#: common/include/User.class.php:434 common/survey/Survey.class.php:129
+#: common/tracker/ArtifactExtraField.class.php:187
+#: common/tracker/ArtifactExtraField.class.php:193
+#: www/people/admin/index.php:52 www/people/admin/index.php:65
+#: www/pm/admin/index.php:96 www/survey/rating_resp.php:57
+msgid "Insert Error"
+msgstr ""
 
 #: common/include/User.class.php:441
 #, fuzzy
@@ -4897,14 +4902,6 @@ msgstr "AGGIORNAMENTO FALLITO: titolo del sondaggio obbligatorio"
 #, fuzzy
 msgid "Update Failed: Survey Questions Required"
 msgstr "AGGIORNAMENTO FALLITO: domande necessarie"
-
-#: common/survey/Survey.class.php:129
-#: common/tracker/ArtifactExtraField.class.php:187
-#: common/tracker/ArtifactExtraField.class.php:193
-#: www/people/admin/index.php:52 www/people/admin/index.php:65
-#: www/survey/rating_resp.php:57
-msgid "Insert Error"
-msgstr ""
 
 #: common/survey/Survey.class.php:168 common/survey/Survey.class.php:201
 msgid "The Survey data is not filled"
@@ -19546,16 +19543,6 @@ msgstr "Errore nella creazione  del progetto"
 msgid "Subproject Inserted"
 msgstr "Progetto inserito"
 
-#: www/pm/admin/index.php:96
-#, fuzzy
-msgid "Error inserting: "
-msgstr "Errore nell'inserimento"
-
-#: www/pm/admin/index.php:118
-#, fuzzy
-msgid "Error updating: "
-msgstr "Errore nell'aggiornamento"
-
 #: www/pm/admin/index.php:120
 msgid "Category Updated"
 msgstr "Categoria aggiornata"
@@ -23435,6 +23422,18 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "Insert Failed: "
+#~ msgstr "Inserimento fallito"
+
+#, fuzzy
+#~ msgid "Error inserting: "
+#~ msgstr "Errore nell'inserimento"
+
+#, fuzzy
+#~ msgid "Error updating: "
+#~ msgstr "Errore nell'aggiornamento"
 
 #~ msgid ""
 #~ "Your project registration for %3$s has been denied.\n"

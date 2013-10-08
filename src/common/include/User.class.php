@@ -345,7 +345,7 @@ class GFUser extends Error {
 			return false;
 		}
 		if (!validate_email($email)) {
-			$this->setError(_('Invalid Email Address')._(': '). $email);
+			$this->setError(_('Invalid Email Address')._(': ').$email);
 			return false;
 		}
 		if ($unix_name && db_numrows(db_query_params('SELECT user_id FROM users WHERE user_name LIKE $1',
@@ -431,7 +431,7 @@ class GFUser extends Error {
 						 $tooltips,
 						 $shell));
 		if (!$result) {
-			$this->setError(_('Insert Failed: ') . db_error());
+			$this->setError(_('Insert Error')._(': ').db_error());
 			db_rollback();
 			return false;
 		} else {

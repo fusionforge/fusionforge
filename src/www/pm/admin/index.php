@@ -93,7 +93,7 @@ if (getStringFromRequest('post_changes')) {
 			exit_error(_('Unable to create ProjectCategory Object'),'pm');
 		} else {
 			if (!$pc->create($name)) {
-				exit_error(_('Error inserting: ').$pc->getErrorMessage(),'pm');
+				$error_msg .= _('Insert Error')._(': ').$pc->getErrorMessage();
 			} else {
 				$feedback .= _('Category Inserted');
 			}
@@ -115,7 +115,7 @@ if (getStringFromRequest('post_changes')) {
 			exit_error($pc->getErrorMessage(),'pm');
 		} else {
 			if (!$pc->update($name)) {
-				exit_error(_('Error updating: '.$pc->getErrorMessage()),'pm');
+				exit_error(_('Update failed')._(': ').$pc->getErrorMessage(),'pm');
 			} else {
 				$feedback .= _('Category Updated');
 				$update_cat=false;
@@ -272,7 +272,7 @@ if ($add_cat && $group_project_id) {
 	*/
 	session_require_perm ('pm_admin', $group_id) ;
 
-	pm_header(array ('title'=>_('Add a new subproject')));
+	pm_header(array('title'=>_('Add a new subproject')));
 
 	?>
 	<p><?php echo _('Add a new subproject to the Tasks. <strong>This is different than adding a task to a subproject.</strong>') ?></p>
