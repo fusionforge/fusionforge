@@ -191,7 +191,7 @@ if ($group_id) {
 			<strong><?php echo _('Is Public?'); ?></strong><br />
 			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PUBLIC; ?>" <?php echo ($group->isPublic() ? ' checked="checked"' : '') ?> /> <?php echo _('Yes'); ?><br />
 			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PRIVATE; ?>" <?php echo ($group->isPublic() ? '' : ' checked="checked"') ?> /> <?php echo _('No'); ?></p><p>
-			<strong><?php echo _('Description:'); ?></strong><br />
+			<strong><?php echo _('Description')._(':'); ?></strong><br />
 			<input type="text" name="description" value="" size="40" maxlength="80" /></p>
 			<p>
 			<input type="submit" name="submit" value="<?php echo _('Add This List'); ?>" /></p>
@@ -224,7 +224,7 @@ if ($group_id) {
 			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PRIVATE; ?>"<?php echo ($mailingList->isPublic() == MAIL__MAILING_LIST_IS_PRIVATE ? ' checked="checked"' : ''); ?> /> <?php echo _('No'); ?>
 			</p>
 			<p>
-			<strong><?php echo _('Description:'); ?></strong><br />
+			<strong><?php echo _('Description')._(':'); ?></strong><br />
 			<input type="text" name="description" value="<?php echo inputSpecialChars($mailingList->getDescription()); ?>" size="40" maxlength="80" /></p>
 			<p>
 			<input type="submit" name="submit" value="<?php echo _('Update'); ?>" /></p>
@@ -253,7 +253,7 @@ if ($group_id) {
 			mail_footer(array());
 			exit;
 		}
-		echo '<p>'.sprintf(_('You can administrate lists from here. Please note that private lists can still be viewed by members of your project, but are not listed on %1$s.'), forge_get_config ('forge_name')).'</p>';
+		echo '<p>'.sprintf(_('You can administrate lists from here. Please note that private lists can still be viewed by members of your project, but are not listed on %s.'), forge_get_config ('forge_name')).'</p>';
 		echo '<ul>
 			<li>
 				<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;add_list=1">'._('Add Mailing List').'</a>
@@ -277,8 +277,8 @@ if ($group_id) {
 				} else {
 					echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td>'.
 					'<strong>'.$currentList->getName().'</strong><br />'.
-					htmlspecialchars($currentList->getDescription()).'</td>'.
-					'<td class="align-center">';
+					htmlspecialchars($currentList->getDescription()).'</td>';
+					echo '<td class="align-center">';
 					if ($currentList->getStatus() != MAIL__MAILING_LIST_PW_RESET_REQUESTED) {
 						echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;change_status=1">'._('Update').'</a>';
 					}
