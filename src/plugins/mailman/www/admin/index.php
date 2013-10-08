@@ -117,7 +117,11 @@ if ($group_id) {
 					'help'=>'CommunicationServices.html#MailingLists',
 					'admin' => '1'));
 		echo '<p>';
-		printf(_('Lists are named in this manner:<br /><strong>projectname-listname@%1$s</strong></p><p>It will take <span class="important">few minutes</span> for your list to be created.'), forge_get_config('lists_host'));
+		printf(_('Lists are named in this manner:<br /><strong>projectname-listname@%s</strong>'),
+				forge_get_config('lists_host'));
+		echo '</p>';
+		echo '<p>';
+		echo _('It will take <span class="important">few minutes</span> for your list to be created.');
 		echo '</p>';
 
 		$mlFactory = new MailmanListFactory($Group);
@@ -210,7 +214,7 @@ if ($group_id) {
 			mail_footer(array());
 			exit;
 		}
-		echo '<p>'.sprintf(_('You can administrate lists from here. Please note that private lists can still be viewed by members of your project, but are not listed on %1$s.'), forge_get_config ('forge_name')).'</p>';
+		echo '<p>'.sprintf(_('You can administrate lists from here. Please note that private lists can still be viewed by members of your project, but are not listed on %s.'), forge_get_config ('forge_name')).'</p>';
 		echo '<ul>
 			<li>
 			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;add_list=1">'._('Add Mailing List').'</a>
