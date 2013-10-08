@@ -42,7 +42,7 @@ require_once $gfplugins.'projectimport/common/UploadedFiles.class.php';
 // Dependency on php-arc
 //include_once('arc/ARC2.php');
 /**
- * Manages the display of the page : HTML + forms
+ * Manages the display of the page: HTML + forms
  *
  * @author Olivier Berger
  *
@@ -105,11 +105,11 @@ class ProjectImportPage extends FileManagerPage {
 			// Get the user mappings posted (if any)
 			if (getStringFromPost('submit_mappings')) {
 				foreach (array_keys($_POST) as $key) {
-					//					print_r('key : '. $key);
+					//					print_r('key: '. $key);
 					if(!strncmp($key, 'map_', 4)) {
 						$imported_user = substr($key, 4);
 						$mapped_user = getStringFromPost($key);
-						// print_r('Mapped : '. $imported_user . ' to ' . $mapped_user);
+						// print_r('Mapped: '. $imported_user . ' to ' . $mapped_user);
 						//						echo '<br />';
 						if($mapped_user) {
 							$this->posted_user_mapping[$imported_user] = $mapped_user;
@@ -119,11 +119,11 @@ class ProjectImportPage extends FileManagerPage {
 			}
 			if (getStringFromPost('submit_new_roles')) {
 				foreach (array_keys($_POST) as $key) {
-					//					print_r('key : '. $key);
+					//					print_r('key: '. $key);
 					if(!strncmp($key, 'role_', 5)) {
 						$added_user = substr($key, 5);
 						$new_role = getStringFromPost($key);
-						// print_r('Mapped : '. $imported_user . ' to ' . $mapped_user);
+						// print_r('Mapped: '. $imported_user . ' to ' . $mapped_user);
 						//						echo '<br />';
 						if($new_role) {
 							$this->posted_new_member_roles[$added_user] = $new_role;
@@ -136,13 +136,13 @@ class ProjectImportPage extends FileManagerPage {
 				foreach (array_keys($_POST) as $key) {
 					if(!strncmp($key, 'import_', 7)) {
 						$spacesha1 = substr($key, 7);
-						//						print_r('Selected for import : '. $spacesha1);
+						//						print_r('Selected for import: '. $spacesha1);
 						//						echo '<br />';
 						$this->posted_spaces_imported[] = $spacesha1;
 					}
 				}
 			}
-			//	echo '$posted_spaces_imported : ';
+			//	echo '$posted_spaces_imported: ';
 			//	print_r($posted_spaces_imported);
 			//	echo '<br />';
 
@@ -226,7 +226,7 @@ class ProjectImportPage extends FileManagerPage {
 		$active_users = user_get_active_users();
 		foreach($active_users as $user_object) {
 			$username = $user_object->getUnixName();
-			//print_r('User : '.$username .'<br />');
+			//print_r('User: '.$username .'<br />');
 			$role = '';
 			if ($user_object->isMember($group_id)) {
 				//print_r('member of project as ');
@@ -279,7 +279,7 @@ class ProjectImportPage extends FileManagerPage {
 					if ($this->message) {
 						$this->message .= '<br />';
 					}
-					$this->message .= sprintf(_('Found matching existing forge user with same login "%s"'), $username);
+					$this->message .= sprintf(_('Found matching existing forge user with same login “%s”'), $username);
 				}
 				else {
 					// try to match by email
@@ -292,13 +292,13 @@ class ProjectImportPage extends FileManagerPage {
 						if ($this->message) {
 							$this->message .= '<br />';
 						}
-						$this->message .= sprintf(_('Found matching existing forge user "%s" with same email "%s"'), $username, $imported_email);
+						$this->message .= sprintf(_('Found matching existing forge user “%s” with same email “%s”'), $username, $imported_email);
 					}
 				}
 			}
 
 			if (! $user_object) {
-				$this->feedback(sprintf(_('Failed to find existing user matching imported user "%s"'), $username));
+				$this->feedback(sprintf(_('Failed to find existing user matching imported user “%s”'), $username));
 				$needs_to_warn = TRUE;
 			}
 
@@ -319,7 +319,7 @@ class ProjectImportPage extends FileManagerPage {
 				else {
 					$html_tbody .= '<option value="0" selected="selected">'._('Select existing user').'</option>';
 				}
-				// TODO : use html_build_select_box_from_arrays(...); ?
+				// TODO: use html_build_select_box_from_arrays(...); ?
 				foreach($existing_users as $existing_user) {
 					$name = $existing_user['name'];
 					$role = $existing_user['role'];
@@ -433,7 +433,7 @@ class ProjectImportPage extends FileManagerPage {
 							$html .= '<td>'. $new_member . '</td>';
 							$html .= '<td>'. implode(', ', $imported_users_mapped) . '</td>';
 
-							// TODO : use a more sophisticated select box maybe : the selection by default of the first may not be the right thing to suggest ?
+							// TODO: use a more sophisticated select box maybe: the selection by default of the first may not be the right thing to suggest ?
 							$html .= '<td>'. role_box($group_id, 'role_'.$new_member) . '</td>';
 							$html .= '</tr>';
 						}
@@ -449,7 +449,7 @@ class ProjectImportPage extends FileManagerPage {
 				$users = array();
 				foreach ($imported_users as $user => $userres) {
 
-					//print_r('Check for : '. $user. '<br />');
+					//print_r('Check for: '. $user. '<br />');
 
 					$imported_username = $this->importer->get_user_name($user);
 					$mapped_to_username = $this->posted_user_mapping[$imported_username];
@@ -458,7 +458,7 @@ class ProjectImportPage extends FileManagerPage {
 					if ($user_object) {
 						if ( ! $user_object->isMember($group_id) ) {
 							// no need to add it, already in the group
-							// $this->message .= sprintf(_('Imported user "%s", mapped as "%s" which is already in the project : no need to add it.'), $imported_username, $mapped_to_username);
+							// $this->message .= sprintf(_('Imported user “%s”, mapped as “%s” which is already in the project: no need to add it.'), $imported_username, $mapped_to_username);
 
 							// need to add it to the group
 							if ( array_key_exists($mapped_to_username, $this->posted_new_member_roles) ) {
@@ -470,7 +470,7 @@ class ProjectImportPage extends FileManagerPage {
 								if ($this->message) {
 									$this->message .= '<br />';
 								}
-								$this->message .= sprintf(_('Imported user "%s" (role "%s"), mapped as "%s" which is not yet in the project : need to add it as role "%s".'),
+								$this->message .= sprintf(_('Imported user “%s” (role “%s”), mapped as “%s” which is not yet in the project: need to add it as role “%s”.'),
 												$imported_username, $rolename, $mapped_to_username, $role);
 							}
 							else {
@@ -480,8 +480,8 @@ class ProjectImportPage extends FileManagerPage {
 						}
 					}
 					else {
-						// user not found : probably messing with the form post
-						$this->feedback(sprintf(_('Failed to find mapped user "%s"'), $mapped_to_username));
+						// user not found: probably messing with the form post
+						$this->feedback(sprintf(_('Failed to find mapped user “%s”'), $mapped_to_username));
 						$can_proceed = FALSE;
 					}
 				} // foreach
@@ -491,7 +491,7 @@ class ProjectImportPage extends FileManagerPage {
 					$check=TRUE;
 					if($apply) $check = FALSE;
 
-					// For security, for now : TODO to be removed later
+					// For security, for now: TODO to be removed later
 					//$check = TRUE;
 					user_fill($users, $group_id, $check);
 					$html .= $message;
@@ -523,7 +523,7 @@ class ProjectImportPage extends FileManagerPage {
 		if($this->importer) {
 			// If it indeed has valid data
 			if ($this->importer->has_project_dump()) {
-				$this->message .= "Here are the results from your upload :";
+				$this->message .= "Here are the results from your upload:";
 
 				$imported_users = $this->importer->get_users();
 
@@ -562,10 +562,10 @@ class ProjectImportPage extends FileManagerPage {
 						$html .= '<table id="project-summary-and-devs" class="my-layout-table">
 	                               <tr>
 		                             <td>
-			                            <h2>'._('Details of imported project : ').
+			                            <h2>'._('Details of imported project: ').
 			                             '<pre>'.$project->getUnixName().'</pre>
 			                            </h2>
-			                            <h3>'._('Project summary').'</h3>';
+			                            <h3>'._('Project Summary').'</h3>';
 						$html .= '<p><pre>'.$project->getDescription().'</pre></p>';
 
 						$spaces = $project->getSpaces();
@@ -618,7 +618,7 @@ class ProjectImportPage extends FileManagerPage {
 								$sha_uri = sha1($uri);
 								//						$html .= 'sha1 :'.$sha_uri.'<br />';
 								if (in_array($sha_uri, $this->posted_spaces_imported)) {
-									$html .= 'Importing :'.$uri.'<br />';
+									$html .= 'Importing:'.$uri.'<br />';
 									$this->importer->decode_space($uri, $spaceres);
 								}
 							}
