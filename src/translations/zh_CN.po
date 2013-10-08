@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 18:40+0200\n"
+"POT-Creation-Date: 2013-10-08 14:47+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1569,7 +1569,6 @@ msgstr "文件管理员管理"
 
 #: common/docman/views/menu.php:73 common/forum/ForumHTML.class.php:115
 #: common/forum/ForumHTML.class.php:121 common/frs/include/frs_utils.php:78
-#: common/tracker/actions/admin-tracker.php:32
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:59
 #: common/tracker/include/ArtifactTypeHtml.class.php:81
 #: plugins/mailman/www/mailman_utils.php:202
@@ -1969,7 +1968,7 @@ msgstr "无法更新上层文章"
 
 #: common/forum/AttachManager.class.php:150
 #: common/forum/ForumAdmin.class.php:69 common/forum/ForumAdmin.class.php:334
-#: common/tracker/actions/admin-tracker.php:70
+#: common/tracker/actions/admin-tracker.php:75
 #: common/tracker/actions/deleteartifact.php:57
 #: common/tracker/actions/mod.php:76
 #: common/tracker/include/ArtifactTypeHtml.class.php:130
@@ -5049,7 +5048,12 @@ msgstr ""
 msgid "Submit"
 msgstr "提交"
 
-#: common/tracker/actions/admin-tracker.php:35
+#: common/tracker/actions/admin-tracker.php:31
+#, fuzzy
+msgid "Administration of tracker"
+msgstr "管理部门"
+
+#: common/tracker/actions/admin-tracker.php:34
 #: common/tracker/include/ArtifactTypeHtml.class.php:109
 msgid "New Tracker"
 msgstr "添加定制类型"
@@ -5064,17 +5068,17 @@ msgstr "创建一个软件包"
 msgid "Update Settings"
 msgstr "更新设置"
 
-#: common/tracker/actions/admin-tracker.php:41
+#: common/tracker/actions/admin-tracker.php:42
 #, fuzzy
 msgid "Set up preferences like expiration times, email addresses."
 msgstr "设置偏好，像过期时间、Email"
 
-#: common/tracker/actions/admin-tracker.php:45
+#: common/tracker/actions/admin-tracker.php:46
 #: common/tracker/include/ArtifactTypeHtml.class.php:115
 msgid "Manage Custom Fields"
 msgstr "管理订制栏位"
 
-#: common/tracker/actions/admin-tracker.php:46
+#: common/tracker/actions/admin-tracker.php:48
 #, fuzzy
 msgid ""
 "Add new boxes like Phases, Quality Metrics, Components, etc.  Once added "
@@ -5085,44 +5089,44 @@ msgstr ""
 "等，只要添加一次，它们可以被使用在其它的选择式选单(譬如类别或群组)来说明与浏"
 "览 bugs 或其它的定制类型。"
 
-#: common/tracker/actions/admin-tracker.php:50
+#: common/tracker/actions/admin-tracker.php:52
 #: common/tracker/include/ArtifactTypeHtml.class.php:118
 msgid "Manage Workflow"
 msgstr ""
 
-#: common/tracker/actions/admin-tracker.php:51
+#: common/tracker/actions/admin-tracker.php:54
 msgid "Edit tracker workflow."
 msgstr ""
 
-#: common/tracker/actions/admin-tracker.php:55
+#: common/tracker/actions/admin-tracker.php:58
 #: common/tracker/include/ArtifactTypeHtml.class.php:121
 msgid "Customize List"
 msgstr ""
 
-#: common/tracker/actions/admin-tracker.php:56
+#: common/tracker/actions/admin-tracker.php:60
 msgid "Customize display for the tracker."
 msgstr ""
 
-#: common/tracker/actions/admin-tracker.php:60
-#: common/tracker/include/ArtifactTypeHtml.class.php:124
-msgid "Add/Update Canned Responses"
+#: common/tracker/actions/admin-tracker.php:64
+#, fuzzy
+msgid "Manage Canned Responses"
 msgstr "添加/更新 预设回应"
 
-#: common/tracker/actions/admin-tracker.php:61
+#: common/tracker/actions/admin-tracker.php:66
 #, fuzzy
 msgid "Create/change generic response messages for the tracker."
 msgstr "创造/修改关于这个跟踪者的一般回应消息。"
 
-#: common/tracker/actions/admin-tracker.php:65
+#: common/tracker/actions/admin-tracker.php:70
 #, fuzzy
 msgid "Apply Template Tracker"
 msgstr "相关的跟踪项"
 
-#: common/tracker/actions/admin-tracker.php:66
+#: common/tracker/actions/admin-tracker.php:72
 msgid "Duplicate parameters and fields from a template trackers in this one."
 msgstr ""
 
-#: common/tracker/actions/admin-tracker.php:71
+#: common/tracker/actions/admin-tracker.php:77
 msgid "Permanently delete this tracker."
 msgstr "永久地删除这个跟踪系统。"
 
@@ -6398,6 +6402,10 @@ msgstr ""
 #: common/tracker/include/ArtifactTypeHtml.class.php:88
 msgid "Add this tracker from your monitoring."
 msgstr ""
+
+#: common/tracker/include/ArtifactTypeHtml.class.php:124
+msgid "Add/Update Canned Responses"
+msgstr "添加/更新 预设回应"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:127
 #: common/tracker/views/form-clonetracker.php:48

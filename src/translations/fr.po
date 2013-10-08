@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 18:40+0200\n"
+"POT-Creation-Date: 2013-10-08 14:47+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1474,7 +1474,6 @@ msgstr "Rapports du gestionnaire de documents."
 
 #: common/docman/views/menu.php:73 common/forum/ForumHTML.class.php:115
 #: common/forum/ForumHTML.class.php:121 common/frs/include/frs_utils.php:78
-#: common/tracker/actions/admin-tracker.php:32
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:59
 #: common/tracker/include/ArtifactTypeHtml.class.php:81
 #: plugins/mailman/www/mailman_utils.php:202
@@ -1863,7 +1862,7 @@ msgstr "Erreur lors de la création de l'objet Forum"
 
 #: common/forum/AttachManager.class.php:150
 #: common/forum/ForumAdmin.class.php:69 common/forum/ForumAdmin.class.php:334
-#: common/tracker/actions/admin-tracker.php:70
+#: common/tracker/actions/admin-tracker.php:75
 #: common/tracker/actions/deleteartifact.php:57
 #: common/tracker/actions/mod.php:76
 #: common/tracker/include/ArtifactTypeHtml.class.php:130
@@ -2258,7 +2257,7 @@ msgstr "Surveiller ce forum"
 
 #: common/forum/ForumHTML.class.php:146
 msgid "Save Place"
-msgstr "Sauvegarder cette position"
+msgstr "Enregistrer cette position"
 
 #: common/forum/ForumHTML.class.php:155 common/forum/ForumHTML.class.php:156
 msgid "Start New Thread"
@@ -3777,42 +3776,36 @@ msgid "Read only"
 msgstr "Lecture seule"
 
 #: common/include/rbac_texts.php:69 common/include/rbac_texts.php:99
-#, fuzzy
 msgid "Technician (no read access, no submitting)"
-msgstr "Technicien (sans accès en lecture)"
+msgstr "Technicien (sans accès en lecture, sans soumission)"
 
 #: common/include/rbac_texts.php:70 common/include/rbac_texts.php:100
-#, fuzzy
 msgid "Technician (no submitting)"
-msgstr "Technicien (sans accès en lecture)"
+msgstr "Technicien (pas de soumission)"
 
 #: common/include/rbac_texts.php:71 common/include/rbac_texts.php:101
-#, fuzzy
 msgid "Manager (no read access, no submitting)"
-msgstr "Manager (sans accès en lecture)"
+msgstr "Manager (sans accès en lecture, sans soumission)"
 
 #: common/include/rbac_texts.php:72 common/include/rbac_texts.php:102
 msgid "Manager (no submitting)"
-msgstr ""
+msgstr "Manager (sans soumission)"
 
 #: common/include/rbac_texts.php:73 common/include/rbac_texts.php:103
-#, fuzzy
 msgid "Tech & manager (no read access, no submitting)"
-msgstr "Technicien et manager (pas d'accès en lecture)"
+msgstr "Technicien et manager (sans accès en lecture, sans soumission)"
 
 #: common/include/rbac_texts.php:74 common/include/rbac_texts.php:104
-#, fuzzy
 msgid "Tech & manager (no submitting)"
-msgstr "Technicien et manager (pas d'accès en lecture)"
+msgstr "Technicien et manager (sans soumission)"
 
 #: common/include/rbac_texts.php:75 common/include/rbac_texts.php:105
-#, fuzzy
 msgid "Submit only"
-msgstr "Proposée par"
+msgstr "Soumission uniquement"
 
 #: common/include/rbac_texts.php:76 common/include/rbac_texts.php:106
 msgid "Read & submit"
-msgstr ""
+msgstr "Accès en lecture et soumission"
 
 #: common/include/rbac_texts.php:77 common/include/rbac_texts.php:85
 #: common/include/rbac_texts.php:107 common/include/rbac_texts.php:115
@@ -4090,9 +4083,8 @@ msgid "Invalid Password"
 msgstr "Mot de passe non valide"
 
 #: common/include/User.class.php:335
-#, fuzzy
 msgid "Invalid Unix Name (must not contain uppercase characters)"
-msgstr "Nom du compte (ne pas utiliser de majuscules) :"
+msgstr "Nom Unix invalide (ne pas utiliser de majuscules)"
 
 #: common/include/User.class.php:358
 msgid ""
@@ -4762,9 +4754,8 @@ msgstr ""
 "catégories, groupes, membres, et permissions"
 
 #: common/tracker/actions/admin-ind.php:120
-#, fuzzy
 msgid "Manage your roadmaps."
-msgstr "Gestion des feuilles de route"
+msgstr "Gestion des feuilles de route."
 
 #: common/tracker/actions/admin-ind.php:130
 msgid ""
@@ -4871,7 +4862,11 @@ msgstr "Texte libre pour la page de navigation."
 msgid "Submit"
 msgstr "Soumettre"
 
-#: common/tracker/actions/admin-tracker.php:35
+#: common/tracker/actions/admin-tracker.php:31
+msgid "Administration of tracker"
+msgstr "Administration du traceur"
+
+#: common/tracker/actions/admin-tracker.php:34
 #: common/tracker/include/ArtifactTypeHtml.class.php:109
 msgid "New Tracker"
 msgstr "Nouvel outil de suivi"
@@ -4885,17 +4880,16 @@ msgstr "Créer un nouvel outil de suivi."
 msgid "Update Settings"
 msgstr "Mettre à jour les réglages"
 
-#: common/tracker/actions/admin-tracker.php:41
-#, fuzzy
+#: common/tracker/actions/admin-tracker.php:42
 msgid "Set up preferences like expiration times, email addresses."
 msgstr "Modifier les préférences (date d'expiration, adresse électronique)."
 
-#: common/tracker/actions/admin-tracker.php:45
+#: common/tracker/actions/admin-tracker.php:46
 #: common/tracker/include/ArtifactTypeHtml.class.php:115
 msgid "Manage Custom Fields"
 msgstr "Ajouter/modifier les champs supplémentaires"
 
-#: common/tracker/actions/admin-tracker.php:46
+#: common/tracker/actions/admin-tracker.php:48
 msgid ""
 "Add new boxes like Phases, Quality Metrics, Components, etc.  Once added "
 "they can be used with other selection boxes (for example, Categories or "
@@ -4906,43 +4900,42 @@ msgstr ""
 "déroulantes (par exemple, Catégories ou Groupes) pour décrire ou parcourir "
 "les bugs et autres."
 
-#: common/tracker/actions/admin-tracker.php:50
+#: common/tracker/actions/admin-tracker.php:52
 #: common/tracker/include/ArtifactTypeHtml.class.php:118
 msgid "Manage Workflow"
 msgstr "Gérer le processus"
 
-#: common/tracker/actions/admin-tracker.php:51
+#: common/tracker/actions/admin-tracker.php:54
 msgid "Edit tracker workflow."
 msgstr "Configurer le processus de suivi."
 
-#: common/tracker/actions/admin-tracker.php:55
+#: common/tracker/actions/admin-tracker.php:58
 #: common/tracker/include/ArtifactTypeHtml.class.php:121
 msgid "Customize List"
 msgstr "Personnaliser la liste"
 
-#: common/tracker/actions/admin-tracker.php:56
+#: common/tracker/actions/admin-tracker.php:60
 msgid "Customize display for the tracker."
 msgstr "Personnaliser l'affichage de l'outil de suivi."
 
-#: common/tracker/actions/admin-tracker.php:60
-#: common/tracker/include/ArtifactTypeHtml.class.php:124
-msgid "Add/Update Canned Responses"
-msgstr "Ajouter/modifier les réponses types"
+#: common/tracker/actions/admin-tracker.php:64
+msgid "Manage Canned Responses"
+msgstr "Gérer les réponses type"
 
-#: common/tracker/actions/admin-tracker.php:61
+#: common/tracker/actions/admin-tracker.php:66
 msgid "Create/change generic response messages for the tracker."
 msgstr "Ajouter/modifier des réponses types pour l'outil de suivi."
 
-#: common/tracker/actions/admin-tracker.php:65
+#: common/tracker/actions/admin-tracker.php:70
 #, fuzzy
 msgid "Apply Template Tracker"
 msgstr "éléments à suivre liés"
 
-#: common/tracker/actions/admin-tracker.php:66
+#: common/tracker/actions/admin-tracker.php:72
 msgid "Duplicate parameters and fields from a template trackers in this one."
 msgstr ""
 
-#: common/tracker/actions/admin-tracker.php:71
+#: common/tracker/actions/admin-tracker.php:77
 msgid "Permanently delete this tracker."
 msgstr "Supprimer irrémédiablement cet outil de suivi."
 
@@ -4969,7 +4962,7 @@ msgstr "Erreur lors de l'ajout d'un champ"
 
 #: common/tracker/actions/admin-updates.php:54
 msgid "Extra field inserted"
-msgstr "Champ ajouté"
+msgstr "Champ supplémentaire ajouté"
 
 #: common/tracker/actions/admin-updates.php:81
 msgid "Custom Field Deleted"
@@ -6139,7 +6132,7 @@ msgstr "Afficher les feuilles de route configurées"
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:56
 msgid "Various graph of statistics."
-msgstr "Divers graphiques de statistiques"
+msgstr "Divers graphiques de statistiques."
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:61
 #: common/tracker/include/ArtifactTypeHtml.class.php:83
@@ -6181,6 +6174,11 @@ msgstr "Arrêter de surveiller cet outil de suivi."
 #: common/tracker/include/ArtifactTypeHtml.class.php:88
 msgid "Add this tracker from your monitoring."
 msgstr "Ajouter cet outil de suivi à votre liste de surveillance."
+
+#: common/tracker/include/ArtifactTypeHtml.class.php:124
+#, fuzzy
+msgid "Add/Update Canned Responses"
+msgstr "Ajouter/modifier les réponses types pour %s"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:127
 #: common/tracker/views/form-clonetracker.php:48
@@ -6343,7 +6341,7 @@ msgstr "Ajouter/modifier des champs supplémentaires pour %s"
 #: common/tracker/views/form-adminroadmap.php:402
 #: common/tracker/views/form-customizelist.php:98
 msgid "Current / New positions"
-msgstr "Postes actuellement ouverts"
+msgstr "Postes courants et nouveaux"
 
 #: common/tracker/views/form-addextrafieldoption.php:47
 #: common/tracker/views/form-adminroadmap.php:403
@@ -6463,11 +6461,11 @@ msgstr "Longueur maximale du champ texte/Colonne de la zone de texte"
 
 #: common/tracker/views/form-addextrafield.php:143
 msgid "Warning: this add new custom field"
-msgstr "Attention : ceci ajoute un nouveau champ personnalisé"
+msgstr "Attention : ceci ajoute un nouveau champ supplémentaire"
 
 #: common/tracker/views/form-addextrafield.php:151
 msgid "Custom Field Rendering Template"
-msgstr "Modèle de rendu de champ personnalisé"
+msgstr "Modèle de rendu de champ supplémentaire"
 
 #: common/tracker/views/form-addextrafield.php:154
 msgid "Edit template"
@@ -25294,9 +25292,6 @@ msgstr "Page personnelle de %s"
 #~ msgid "Permanently delete tracker"
 #~ msgstr "Supprimer irrémédiablement cet outil de suivi"
 
-#~ msgid "Administration of tracker"
-#~ msgstr "Administration du traceur"
-
 #~ msgid "Update settings"
 #~ msgstr "Mettre à jour les réglages"
 
@@ -25315,12 +25310,6 @@ msgstr "Page personnelle de %s"
 #~ msgstr ""
 #~ "Choisir l'ordre des champs qui seront affichés dans l'écran de navigation "
 #~ "de votre outil de suivi"
-
-#~ msgid "Manage Canned Responses"
-#~ msgstr "Gérer les réponses type"
-
-#~ msgid "Create/Change generic response messages for the tracker"
-#~ msgstr "Ajouter/modifier des réponses types pour l'outil de suivi."
 
 #~ msgid ""
 #~ "Cloning will duplicate all fields and all elements from the selected "
@@ -27214,9 +27203,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Submit Edit"
 #~ msgstr "Valider"
-
-#~ msgid "Add/Update Canned Responses to %s"
-#~ msgstr "Ajouter/modifier les réponses types pour %s"
 
 #~ msgid "I'm Sure."
 #~ msgstr "Je confirme"

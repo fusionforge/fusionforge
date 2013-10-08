@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 18:40+0200\n"
+"POT-Creation-Date: 2013-10-08 14:47+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -1573,7 +1573,6 @@ msgstr "Administración da xestión de documentos"
 
 #: common/docman/views/menu.php:73 common/forum/ForumHTML.class.php:115
 #: common/forum/ForumHTML.class.php:121 common/frs/include/frs_utils.php:78
-#: common/tracker/actions/admin-tracker.php:32
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:59
 #: common/tracker/include/ArtifactTypeHtml.class.php:81
 #: plugins/mailman/www/mailman_utils.php:202
@@ -1973,7 +1972,7 @@ msgstr "Non se puido obter o obxecto de foro"
 
 #: common/forum/AttachManager.class.php:150
 #: common/forum/ForumAdmin.class.php:69 common/forum/ForumAdmin.class.php:334
-#: common/tracker/actions/admin-tracker.php:70
+#: common/tracker/actions/admin-tracker.php:75
 #: common/tracker/actions/deleteartifact.php:57
 #: common/tracker/actions/mod.php:76
 #: common/tracker/include/ArtifactTypeHtml.class.php:130
@@ -5103,7 +5102,12 @@ msgstr "Texto de formulario libre para a páxina de \"navegar polos elementos\""
 msgid "Submit"
 msgstr "Enviar"
 
-#: common/tracker/actions/admin-tracker.php:35
+#: common/tracker/actions/admin-tracker.php:31
+#, fuzzy
+msgid "Administration of tracker"
+msgstr "Administración"
+
+#: common/tracker/actions/admin-tracker.php:34
 #: common/tracker/include/ArtifactTypeHtml.class.php:109
 msgid "New Tracker"
 msgstr "Novo rexistro"
@@ -5118,18 +5122,18 @@ msgstr "Crear un paquete "
 msgid "Update Settings"
 msgstr "Actualizar configuración"
 
-#: common/tracker/actions/admin-tracker.php:41
+#: common/tracker/actions/admin-tracker.php:42
 #, fuzzy
 msgid "Set up preferences like expiration times, email addresses."
 msgstr ""
 "Configurar preferencias como tempos de expiración, correos electrónicos"
 
-#: common/tracker/actions/admin-tracker.php:45
+#: common/tracker/actions/admin-tracker.php:46
 #: common/tracker/include/ArtifactTypeHtml.class.php:115
 msgid "Manage Custom Fields"
 msgstr "Xestionar campos personalizados"
 
-#: common/tracker/actions/admin-tracker.php:46
+#: common/tracker/actions/admin-tracker.php:48
 #, fuzzy
 msgid ""
 "Add new boxes like Phases, Quality Metrics, Components, etc.  Once added "
@@ -5141,45 +5145,45 @@ msgstr ""
 "categorías ou grupos) para describir e navegar por erros ou outro tipo de "
 "artefactos"
 
-#: common/tracker/actions/admin-tracker.php:50
+#: common/tracker/actions/admin-tracker.php:52
 #: common/tracker/include/ArtifactTypeHtml.class.php:118
 msgid "Manage Workflow"
 msgstr "Xestionar o fluxo de traballo"
 
-#: common/tracker/actions/admin-tracker.php:51
+#: common/tracker/actions/admin-tracker.php:54
 #, fuzzy
 msgid "Edit tracker workflow."
 msgstr "Configurar o fluxo de traballo"
 
-#: common/tracker/actions/admin-tracker.php:55
+#: common/tracker/actions/admin-tracker.php:58
 #: common/tracker/include/ArtifactTypeHtml.class.php:121
 msgid "Customize List"
 msgstr "Personalizar lista"
 
-#: common/tracker/actions/admin-tracker.php:56
+#: common/tracker/actions/admin-tracker.php:60
 msgid "Customize display for the tracker."
 msgstr ""
 
-#: common/tracker/actions/admin-tracker.php:60
-#: common/tracker/include/ArtifactTypeHtml.class.php:124
-msgid "Add/Update Canned Responses"
-msgstr "Engadir/actualizar as respostas prefixadas"
+#: common/tracker/actions/admin-tracker.php:64
+#, fuzzy
+msgid "Manage Canned Responses"
+msgstr "Engadir/cambiar as respostas prefixadas a %s"
 
-#: common/tracker/actions/admin-tracker.php:61
+#: common/tracker/actions/admin-tracker.php:66
 #, fuzzy
 msgid "Create/change generic response messages for the tracker."
 msgstr "Crear/cambiar mensaxes xenéricas de respostas para o rexistro"
 
-#: common/tracker/actions/admin-tracker.php:65
+#: common/tracker/actions/admin-tracker.php:70
 #, fuzzy
 msgid "Apply Template Tracker"
 msgstr "Elementos de rexistro relacionados"
 
-#: common/tracker/actions/admin-tracker.php:66
+#: common/tracker/actions/admin-tracker.php:72
 msgid "Duplicate parameters and fields from a template trackers in this one."
 msgstr ""
 
-#: common/tracker/actions/admin-tracker.php:71
+#: common/tracker/actions/admin-tracker.php:77
 msgid "Permanently delete this tracker."
 msgstr "Eliminar permanentemente este rexistro."
 
@@ -6451,6 +6455,10 @@ msgstr ""
 #: common/tracker/include/ArtifactTypeHtml.class.php:88
 msgid "Add this tracker from your monitoring."
 msgstr ""
+
+#: common/tracker/include/ArtifactTypeHtml.class.php:124
+msgid "Add/Update Canned Responses"
+msgstr "Engadir/actualizar as respostas prefixadas"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:127
 #: common/tracker/views/form-clonetracker.php:48
