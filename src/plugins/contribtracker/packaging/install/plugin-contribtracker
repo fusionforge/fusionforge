@@ -1,4 +1,5 @@
 plugins/contribtracker/bin/* usr/share/@OLDPACKAGE@/plugins/contribtracker/bin/
 plugins/contribtracker/common/* usr/share/@OLDPACKAGE@/plugins/contribtracker/common/
 plugins/contribtracker/db/* usr/share/@OLDPACKAGE@/plugins/contribtracker/db/
+plugins/contribtracker/etc/*.ini 	   etc/@PACKAGE@/config.ini.d/
 plugins/contribtracker/www/* usr/share/@OLDPACKAGE@/plugins/contribtracker/www/
