@@ -389,7 +389,7 @@ class FileManagerPage {
 					}
 					else {
 						$this->posted_uploadedfile = $uploaded_file['name'];
-						$this->message .= sprintf(_('File "%s" uploaded and pre-selected'),$this->posted_uploadedfile);
+						$this->message .= sprintf(_('File “%s” uploaded and pre-selected'),$this->posted_uploadedfile);
 					}
 				}
 			}
@@ -402,15 +402,15 @@ class FileManagerPage {
 	        			case UPLOAD_ERR_FORM_SIZE:
 	            			$this->feedback(_('The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form'));
 	        			case UPLOAD_ERR_PARTIAL:
-	            			$this->feedback(_('The uploaded file was only partially uploaded'));
+	            			$this->feedback(_('The uploaded file was only partially uploaded.'));
 	        			/* case UPLOAD_ERR_NO_FILE:
 	            			return 'No file was uploaded';*/
 	        			case UPLOAD_ERR_NO_TMP_DIR:
 	            			$this->feedback(_('Missing a temporary folder'));
 	        			case UPLOAD_ERR_CANT_WRITE:
-	            			$this->feedback(_('Failed to write file to disk'));
+	            			$this->feedback(_('Failed to write file to disk.'));
 	        			case UPLOAD_ERR_EXTENSION:
-	            			$this->feedback(_('File upload stopped by extension'));
+	            			$this->feedback(_('File upload stopped by extension.'));
 	        			default:
 	            			$this->feedback(_('Unknown upload error %d', $error_code));
 	    			}
