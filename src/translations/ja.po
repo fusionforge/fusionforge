@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-08 14:47+0200\n"
+"POT-Creation-Date: 2013-10-08 15:24+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -772,7 +772,7 @@ msgstr ""
 #: common/docman/views/listtrashfile.php:130
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/actions/admin-ind.php:100
-#: common/tracker/actions/admin-ind.php:137
+#: common/tracker/actions/admin-ind.php:140
 #: common/tracker/actions/browse.php:559 common/tracker/actions/ind.php:57
 #: common/tracker/views/form-updatetracker.php:53
 #: plugins/blocks/www/index.php:202
@@ -4870,51 +4870,60 @@ msgid "Manage your roadmaps."
 msgstr "ニューリリース"
 
 #: common/tracker/actions/admin-ind.php:130
+#, fuzzy
+msgid "Create a new tracker"
+msgstr "新規プロジェクト登録"
+
+#: common/tracker/actions/admin-ind.php:131
 msgid ""
-"<h3>Create a new tracker</h3><p>You can use this system to track virtually "
-"any kind of data, with each tracker having separate user, group, category, "
-"and permission lists. You can also easily move items between trackers when "
-"needed.</p><p>Trackers are referred to as \"Artifact Types\" and individual "
-"pieces of data are \"Artifacts\". \"Bugs\" might be an Artifact Type, whiles "
-"a bug report would be an Artifact. You can create as many Artifact Types as "
-"you want, but remember you need to set up categories, groups, and permission "
-"for each type, which can get time-consuming.</p>"
+"You can use this system to track virtually any kind of data, with each "
+"tracker having separate user, group, category, and permission lists. You can "
+"also easily move items between trackers when needed."
 msgstr ""
 
-#: common/tracker/actions/admin-ind.php:134
+#: common/tracker/actions/admin-ind.php:132
+msgid ""
+"Trackers are referred to as “Artifact Types” and individual pieces of data "
+"are “Artifacts”. “Bugs” might be an Artifact Type, whiles a bug report would "
+"be an Artifact. You can create as many Artifact Types as you want, but "
+"remember you need to set up categories, groups, and permission for each "
+"type, which can get time-consuming."
+msgstr ""
+
+#: common/tracker/actions/admin-ind.php:137
 msgid ""
 "<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)"
 msgstr ""
 
-#: common/tracker/actions/admin-ind.php:140
+#: common/tracker/actions/admin-ind.php:143
 #: common/tracker/views/form-updatetracker.php:64
 msgid "Send email on new submission to address"
 msgstr ""
 
-#: common/tracker/actions/admin-ind.php:143
+#: common/tracker/actions/admin-ind.php:146
 #: common/tracker/views/form-updatetracker.php:67
 msgid "Send email on all changes"
 msgstr ""
 
-#: common/tracker/actions/admin-ind.php:145
+#: common/tracker/actions/admin-ind.php:148
 #: common/tracker/views/form-updatetracker.php:69
 msgid "Days till considered overdue"
 msgstr ""
 
-#: common/tracker/actions/admin-ind.php:148
+#: common/tracker/actions/admin-ind.php:151
 #: common/tracker/views/form-updatetracker.php:72
 msgid "Days till pending tracker items time out"
 msgstr ""
 
-#: common/tracker/actions/admin-ind.php:151
+#: common/tracker/actions/admin-ind.php:154
 msgid "Free form text for the \"submit new item\" page"
 msgstr ""
 
-#: common/tracker/actions/admin-ind.php:154
+#: common/tracker/actions/admin-ind.php:157
 msgid "Free form text for the \"browse items\" page"
 msgstr ""
 
-#: common/tracker/actions/admin-ind.php:157
+#: common/tracker/actions/admin-ind.php:160
 #: common/tracker/include/build_submission_form.php:54
 #: common/tracker/include/build_submission_form.php:118
 #: common/tracker/views/form-addcanned.php:78
