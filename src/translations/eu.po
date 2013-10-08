@@ -4370,7 +4370,7 @@ msgstr ""
 #: common/include/User.class.php:743
 #, fuzzy
 msgid "Error: Cannot Update User Status:"
-msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
+msgstr "Errorea: DB: Ezin da talde egoera aldatu: %s"
 
 #: common/include/User.class.php:936 common/include/User.class.php:988
 #, fuzzy
@@ -4380,12 +4380,12 @@ msgstr "Erabiltzailea dagoeneko existitzen da"
 #: common/include/User.class.php:1096
 #, fuzzy, php-format
 msgid "Error: Invalid Shell %s"
-msgstr "Parametro baliogabea"
+msgstr "Shell baliogabea %s"
 
 #: common/include/User.class.php:1104
 #, fuzzy
 msgid "Error: Cannot Update User Unix Shell:"
-msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
+msgstr "Errorea: DB: Ezin da talde egoera aldatu: %s"
 
 #: common/include/User.class.php:1250
 msgid "SSH Key already in use"
@@ -4399,7 +4399,7 @@ msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
 #: common/include/User.class.php:1275
 #, fuzzy
 msgid "Error: Cannot Update User SSH Keys"
-msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
+msgstr "Errorea: DB: Ezin da talde egoera aldatu: %s"
 
 #: common/include/User.class.php:1421 common/include/User.class.php:1457
 #: common/include/User.class.php:1481

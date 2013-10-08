@@ -4410,7 +4410,7 @@ msgstr "Il nome è specificato già usato da un altro utente."
 #: common/include/User.class.php:1096
 #, fuzzy, php-format
 msgid "Error: Invalid Shell %s"
-msgstr "Parametro non valido"
+msgstr "Shell non valido %s"
 
 #: common/include/User.class.php:1104
 #, fuzzy

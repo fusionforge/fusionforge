@@ -4395,7 +4395,7 @@ msgstr "Aquest nom d'usuari ja existeix."
 #: common/include/User.class.php:1096
 #, fuzzy, php-format
 msgid "Error: Invalid Shell %s"
-msgstr "Paràmetre no vàlid"
+msgstr "Shell no vàlid %s"
 
 #: common/include/User.class.php:1104
 #, fuzzy

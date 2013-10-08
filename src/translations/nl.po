@@ -4392,7 +4392,7 @@ msgstr "De opgegeven gebruikersnaam bestaat al."
 #: common/include/User.class.php:1096
 #, fuzzy, php-format
 msgid "Error: Invalid Shell %s"
-msgstr "Ongeldige parameter"
+msgstr "Ongeldige Shell %s"
 
 #: common/include/User.class.php:1104
 #, fuzzy

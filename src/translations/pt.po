@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-08 14:47+0200\n"
+"POT-Creation-Date: 2013-10-08 15:11+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4053,9 +4053,9 @@ msgid "User with this email already exists."
 msgstr ""
 
 #: common/include/User.class.php:1096
-#, php-format
+#, fuzzy, php-format
 msgid "Error: Invalid Shell %s"
-msgstr ""
+msgstr "Shell inválido %s"
 
 #: common/include/User.class.php:1104
 #, fuzzy

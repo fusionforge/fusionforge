@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-08 14:47+0200\n"
+"POT-Creation-Date: 2013-10-08 15:11+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -4416,9 +4416,9 @@ msgid "User with this email already exists."
 msgstr "Ein Benutzer mit dieser Email-Adresse existiert bereits."
 
 #: common/include/User.class.php:1096
-#, fuzzy, php-format
+#, php-format
 msgid "Error: Invalid Shell %s"
-msgstr "Ungültige Bewertungsgröße"
+msgstr "Fehler - Ungültige Shell %s"
 
 #: common/include/User.class.php:1104
 #, fuzzy

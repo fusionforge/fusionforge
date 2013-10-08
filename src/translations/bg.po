@@ -32,7 +32,7 @@ msgstr "Обновено успешно"
 #: common/tracker/actions/tracker.php:365 www/project/admin/editimages.php:59
 #, fuzzy
 msgid "Invalid file name."
-msgstr "Невалиден UNIX идентификатор."
+msgstr "Невалиден Unix идентификатор."
 
 #: common/account/actions/deletesshkey.php:30
 #, fuzzy
