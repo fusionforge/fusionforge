@@ -73,7 +73,7 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 		if (forge_get_config('require_unique_email')) {
 			$result .= _('Login name or email address');
 		} else {
-			$result .= _('Login name')._(':');
+			$result .= _('Login Name')._(':');
 		}
 		$result .= '<br /><input type="text" name="form_loginname" value="' . htmlspecialchars(stripslashes($loginname)) . '" /></p><p>' . _('Password')._(':') . '<br /><input type="password" name="form_pw" /></p><p><input type="submit" name="login" value="' . _('Login') . '" />
 </p>
@@ -82,9 +82,9 @@ class AuthBuiltinPlugin extends ForgeAuthPlugin {
 		$result .= '<p>' . util_make_link('/account/lostpw.php', _('[Lost your password?]')) . '</p>';
 		// hide "new account" item if restricted to admin
 		if (!forge_get_config ('user_registration_restricted')) {
-			$result .= '<p>' . util_make_link('/account/register.php', _('[New Account]')) . '</p>';
+			$result .= '<p>' . util_make_link('/account/register.php', _('New Account')) . '</p>';
 		}
-		$result .= '<p>' . util_make_link('/account/pending-resend.php', _('[Resend confirmation email to a pending account]')) . '</p>';
+		$result .= '<p>' . util_make_link('/account/pending-resend.php', _('Resend confirmation email to a pending account')) . '</p>';
 
 		$params['html_snippets'][$this->name] = $result;
 	}
