@@ -1093,7 +1093,7 @@ Use one below, but make sure it is entered as the single line.)
 		$shells = account_getavailableshells();
 
 		if (!in_array($shell, $shells)) {
-			$this->setError( sprintf(_('Error: Invalid Shell %s'), $shell) );
+			$this->setError(sprintf(_('Error: Invalid Shell %s'), $shell));
 			return false;
 		}
 
