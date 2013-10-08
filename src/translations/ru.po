@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 18:03+0200\n"
+"POT-Creation-Date: 2013-10-07 18:40+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -436,8 +436,10 @@ msgstr "Проект"
 #: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:531
 #: common/forum/ForumHTML.class.php:591 common/forum/ForumHTML.class.php:594
 #: common/forum/ForumMessage.class.php:667 common/include/Error.class.php:207
-#: common/include/exit.php:80 common/include/User.class.php:348
-#: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
+#: common/include/exit.php:80 common/include/Group.class.php:2628
+#: common/include/Group.class.php:2629 common/include/Group.class.php:2630
+#: common/include/User.class.php:348 common/include/User.class.php:1407
+#: common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
 #: common/tracker/actions/browse.php:407 common/tracker/actions/browse.php:751
@@ -3327,38 +3329,40 @@ msgstr "Проект %1$s утвержден."
 
 #: common/include/Group.class.php:2627
 #, php-format
-msgid ""
-"Your project registration for %3$s has been denied.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Reasons for negative decision:\n"
-"\n"
-msgstr ""
-"В регистрации проекта %3$s отказано.\n"
-"\n"
-"Название проекта:  %1$s\n"
-"Сокращенное название проекта:  %2$s\n"
-"\n"
-"Мотивация:\n"
-"\n"
+msgid "Your project registration for %s has been denied."
+msgstr "В регистрации проекта %s отказано."
 
-#: common/include/Group.class.php:2646
+#: common/include/Group.class.php:2628 www/register/index.php:183
+#, fuzzy
+msgid "Project Full Name"
+msgstr "Название проекта"
+
+#: common/include/Group.class.php:2629 www/admin/approve-pending.php:194
+#: www/admin/database.php:162 www/admin/groupedit.php:171
+#: www/admin/vhost.php:120 www/register/index.php:214
+#, fuzzy
+msgid "Project Unix Name"
+msgstr "Название проекта"
+
+#: common/include/Group.class.php:2630
+msgid "Reasons for negative decision"
+msgstr "Мотивация"
+
+#: common/include/Group.class.php:2642
 #, php-format
 msgid "%s Project Denied"
 msgstr "Проект %s отклонён"
 
-#: common/include/Group.class.php:2670
+#: common/include/Group.class.php:2666
 msgid "Could not find user who has submitted the project."
 msgstr "Автор проекта не найден."
 
-#: common/include/Group.class.php:2677
+#: common/include/Group.class.php:2673
 #, fuzzy
 msgid "There is no administrator to send the mail to."
 msgstr "Нет администратора, которому отправить емайл."
 
-#: common/include/Group.class.php:2685
+#: common/include/Group.class.php:2681
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3377,12 +3381,12 @@ msgstr ""
 "по ссылке:\n"
 "http://%5$s/admin/approve-pending.php"
 
-#: common/include/Group.class.php:2695
+#: common/include/Group.class.php:2691
 #, fuzzy, php-format
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "Утверждено %1$s (%2$s)"
 
-#: common/include/Group.class.php:2701
+#: common/include/Group.class.php:2697
 #, fuzzy, php-format
 msgid ""
 "\n"
@@ -3392,12 +3396,12 @@ msgstr ""
 "Пожалуйста посетите следующий линк чтобы завершить смену вашего e-mail "
 "адреса:"
 
-#: common/include/Group.class.php:2705 common/include/Group.class.php:2719
+#: common/include/Group.class.php:2701 common/include/Group.class.php:2715
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "Подана заявка о создании нового проекта %1$s"
 
-#: common/include/Group.class.php:2712
+#: common/include/Group.class.php:2708
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3417,42 +3421,42 @@ msgstr ""
 "Администрация %1$s приняла к рассмотрению ваш проект. О принятом решении Вы "
 "будете поставлены в известность."
 
-#: common/include/Group.class.php:2734
+#: common/include/Group.class.php:2730
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Вопрос слижком краток"
 
-#: common/include/Group.class.php:2737
+#: common/include/Group.class.php:2733
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Название группы (щелкните для изменения)"
 
-#: common/include/Group.class.php:2740
+#: common/include/Group.class.php:2736
 #, fuzzy
 msgid "Group name already taken"
 msgstr "Такое название для проекта уже занято."
 
-#: common/include/Group.class.php:2822
+#: common/include/Group.class.php:2818
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr "Ошибка при изменении статуса группы: %s"
 
-#: common/include/Group.class.php:2885
+#: common/include/Group.class.php:2881
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
-#: common/include/Group.class.php:2903
+#: common/include/Group.class.php:2899
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
-#: common/include/Group.class.php:2921
+#: common/include/Group.class.php:2917
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
 
-#: common/include/Group.class.php:2939
+#: common/include/Group.class.php:2935
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
@@ -15618,13 +15622,6 @@ msgstr "Домашняя область:"
 msgid "HTTP Domain:"
 msgstr "Домен HTTP:"
 
-#: www/admin/approve-pending.php:194 www/admin/database.php:162
-#: www/admin/groupedit.php:171 www/admin/vhost.php:120
-#: www/register/index.php:214
-#, fuzzy
-msgid "Project Unix Name"
-msgstr "Название проекта"
-
 #: www/admin/approve-pending.php:196
 msgid "Submitted Description:"
 msgstr "Присланное описание:"
@@ -21577,11 +21574,6 @@ msgstr ""
 "Для регистрации проекта заполните форму ниже. Внимательно прочитайте "
 "описания и укажите требуемую информацию. Необходимо заполнить все поля."
 
-#: www/register/index.php:183
-#, fuzzy
-msgid "Project Full Name"
-msgstr "Название проекта"
-
 #: www/register/index.php:185
 msgid ""
 "You should start with specifying the name of your project. The “Full Name” "
@@ -23752,6 +23744,23 @@ msgstr "Имя участника обязательно"
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
 
+#~ msgid ""
+#~ "Your project registration for %3$s has been denied.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Reasons for negative decision:\n"
+#~ "\n"
+#~ msgstr ""
+#~ "В регистрации проекта %3$s отказано.\n"
+#~ "\n"
+#~ "Название проекта:  %1$s\n"
+#~ "Сокращенное название проекта:  %2$s\n"
+#~ "\n"
+#~ "Мотивация:\n"
+#~ "\n"
+
 #, fuzzy
 #~ msgid "Could Not Create File Object: "
 #~ msgstr "Невозможно получение группы проекта"
@@ -24414,12 +24423,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "%s Project Approved"
 #~ msgstr "Проект %s утвержден"
-
-#~ msgid "Your project registration for %s has been denied."
-#~ msgstr "В регистрации проекта %s отказано."
-
-#~ msgid "Reasons for negative decision"
-#~ msgstr "Мотивация"
 
 #~ msgid "New %s Project Submitted"
 #~ msgstr "Подана заявка о создании нового проекта %s"

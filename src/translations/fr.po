@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 18:03+0200\n"
+"POT-Creation-Date: 2013-10-07 18:40+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -399,8 +399,10 @@ msgstr "Projet"
 #: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:531
 #: common/forum/ForumHTML.class.php:591 common/forum/ForumHTML.class.php:594
 #: common/forum/ForumMessage.class.php:667 common/include/Error.class.php:207
-#: common/include/exit.php:80 common/include/User.class.php:348
-#: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
+#: common/include/exit.php:80 common/include/Group.class.php:2628
+#: common/include/Group.class.php:2629 common/include/Group.class.php:2630
+#: common/include/User.class.php:348 common/include/User.class.php:1407
+#: common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
 #: common/tracker/actions/browse.php:407 common/tracker/actions/browse.php:751
@@ -3189,37 +3191,37 @@ msgstr "%1$s - Projet approuvé"
 
 #: common/include/Group.class.php:2627
 #, php-format
-msgid ""
-"Your project registration for %3$s has been denied.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Reasons for negative decision:\n"
-"\n"
-msgstr ""
-"La candidature de votre projet %3$s a été rejetée.\n"
-"\n"
-"Nom long du projet :  %1$s\n"
-"Nom UNIX du projet : %2$s\n"
-"\n"
-"Raison de notre refus :\n"
-"\n"
+msgid "Your project registration for %s has been denied."
+msgstr "La candidature de votre projet %s a été rejetée."
 
-#: common/include/Group.class.php:2646
+#: common/include/Group.class.php:2628 www/register/index.php:183
+msgid "Project Full Name"
+msgstr "Nom complet du projet"
+
+#: common/include/Group.class.php:2629 www/admin/approve-pending.php:194
+#: www/admin/database.php:162 www/admin/groupedit.php:171
+#: www/admin/vhost.php:120 www/register/index.php:214
+msgid "Project Unix Name"
+msgstr "Nom Unix du projet"
+
+#: common/include/Group.class.php:2630
+msgid "Reasons for negative decision"
+msgstr "Raison de notre refus"
+
+#: common/include/Group.class.php:2642
 #, php-format
 msgid "%s Project Denied"
 msgstr "Projet %s refusé"
 
-#: common/include/Group.class.php:2670
+#: common/include/Group.class.php:2666
 msgid "Could not find user who has submitted the project."
 msgstr "L'utilisateur qui a soumis le projet est introuvable."
 
-#: common/include/Group.class.php:2677
+#: common/include/Group.class.php:2673
 msgid "There is no administrator to send the mail to."
 msgstr "Il n'y a pas d'administrateur à qui envoyer le courriel."
 
-#: common/include/Group.class.php:2685
+#: common/include/Group.class.php:2681
 #, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3232,12 +3234,12 @@ msgstr ""
 "Nom long du projet :  %2$s\n"
 "Description fournie : %3$s\n"
 
-#: common/include/Group.class.php:2695
+#: common/include/Group.class.php:2691
 #, php-format
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "Proposé par %1$s (%2$s)\n"
 
-#: common/include/Group.class.php:2701
+#: common/include/Group.class.php:2697
 #, php-format
 msgid ""
 "\n"
@@ -3248,12 +3250,12 @@ msgstr ""
 "Veuillez visiter l'URL suivante pour approuver ou rejeter ce projet :\n"
 "%1$s"
 
-#: common/include/Group.class.php:2705 common/include/Group.class.php:2719
+#: common/include/Group.class.php:2701 common/include/Group.class.php:2715
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "%1$s - Nouveau projet soumis"
 
-#: common/include/Group.class.php:2712
+#: common/include/Group.class.php:2708
 #, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3272,41 +3274,41 @@ msgstr ""
 "L'équipe d'administration de %1$s va maintenant examiner votre\n"
 "candidature. Vous serez tenu informé de sa décision."
 
-#: common/include/Group.class.php:2734
+#: common/include/Group.class.php:2730
 msgid "Group name is too short"
-msgstr "Le nom du groupe est trop court"
+msgstr "Le nom du projet est trop court"
 
-#: common/include/Group.class.php:2737
+#: common/include/Group.class.php:2733
 msgid "Group name is too long"
 msgstr "Le nom du projet est trop long"
 
-#: common/include/Group.class.php:2740
+#: common/include/Group.class.php:2736
 msgid "Group name already taken"
-msgstr "Le nom du groupe est déjà pris"
+msgstr "Le nom du projet est déjà pris"
 
-#: common/include/Group.class.php:2822
+#: common/include/Group.class.php:2818
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
-msgstr "Erreur lors de la mise à jour de l'état Unix du groupe : %s"
+msgstr "Erreur lors de la mise à jour de l'état Unix du projet : %s"
 
-#: common/include/Group.class.php:2885
+#: common/include/Group.class.php:2881
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 "Erreur lors de la mise à jour de l'état du système de création de documents "
 "en ligne : %s"
 
-#: common/include/Group.class.php:2903
+#: common/include/Group.class.php:2899
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
-msgstr "Erreur lors de la mise à jour de l'état Webdab du groupe : %s"
+msgstr "Erreur lors de la mise à jour de l'état Webdab du projet : %s"
 
-#: common/include/Group.class.php:2921
+#: common/include/Group.class.php:2917
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
-msgstr "Erreur lors de la mise à jour du statut Unix du groupe : %s"
+msgstr "Erreur lors de la mise à jour du statut Unix du projet : %s"
 
-#: common/include/Group.class.php:2939
+#: common/include/Group.class.php:2935
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "Erreur lors de la réindexation du moteur de recherche : %s"
@@ -4205,7 +4207,7 @@ msgstr "Erreur : shell invalide %s"
 
 #: common/include/User.class.php:1104
 msgid "Error: Cannot Update User Unix Shell:"
-msgstr "Erreur lors de la mise à jour du statut Unix du groupe :"
+msgstr "Erreur lors de la mise à jour du statut Unix de l'utilisateur :"
 
 #: common/include/User.class.php:1250
 #, fuzzy
@@ -7757,7 +7759,7 @@ msgstr "Il y a plus de %s ans"
 #: cronjobs/homedirs.php:152
 msgid "Default Web Page for groups that haven't setup their page yet"
 msgstr ""
-"Page web par défaut pour les groupes qui n'ont pas encore défini de site."
+"Page web par défaut pour les projets qui n'ont pas encore défini de site."
 
 #: cronjobs/homedirs.php:154
 msgid "Please replace this file with your own website"
@@ -12401,8 +12403,8 @@ msgstr "Vous pouvez modifier les labels déjà créés."
 #: plugins/projectlabels/www/index.php:154
 msgid "This label is used on the following group:"
 msgid_plural "This label is used on the following groups:"
-msgstr[0] "Ce label est utilisé sur le groupe suivant :"
-msgstr[1] "Ce label est utilisé sur les groupes suivants :"
+msgstr[0] "Ce label est utilisé sur le projet suivant :"
+msgstr[1] "Ce label est utilisé sur les projets suivants :"
 
 #: plugins/projectlabels/www/index.php:165
 msgid "[Remove this label]"
@@ -14862,7 +14864,7 @@ msgstr "Modifier la table : %s"
 #: www/admin/approve-pending.php:47 www/project/admin/tools.php:34
 #: www/snapshots.php:39 www/tarballs.php:40
 msgid "Error creating group"
-msgstr "Erreur lors de la création d'un objet groupe"
+msgstr "Erreur lors de la création d'un projet"
 
 #: www/admin/approve-pending.php:55 www/register/index.php:149
 #, php-format
@@ -14958,12 +14960,6 @@ msgstr "Serveur shell :"
 #: www/admin/approve-pending.php:185 www/admin/groupedit.php:194
 msgid "HTTP Domain:"
 msgstr "Domaine HTTP :"
-
-#: www/admin/approve-pending.php:194 www/admin/database.php:162
-#: www/admin/groupedit.php:171 www/admin/vhost.php:120
-#: www/register/index.php:214
-msgid "Project Unix Name"
-msgstr "Nom Unix du projet"
 
 #: www/admin/approve-pending.php:196
 msgid "Submitted Description:"
@@ -18538,7 +18534,7 @@ msgstr ""
 #: www/news/submit.php:79
 msgid "Submitting news from the news group is not allowed."
 msgstr ""
-"Soumettre des annonces en provenance du groupe 'annonces' n'est pas autorisé."
+"Soumettre des annonces en provenance du projet 'annonces' n'est pas autorisé."
 
 #: www/news/submit.php:108
 #, fuzzy
@@ -20790,10 +20786,6 @@ msgstr ""
 "descriptions ci-dessous et fournir des données précises et complètes. Tous "
 "les champs sont obligatoires."
 
-#: www/register/index.php:183
-msgid "Project Full Name"
-msgstr "Nom complet du projet"
-
 #: www/register/index.php:185
 msgid ""
 "You should start with specifying the name of your project. The “Full Name” "
@@ -22953,6 +22945,23 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
+#~ msgid ""
+#~ "Your project registration for %3$s has been denied.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Reasons for negative decision:\n"
+#~ "\n"
+#~ msgstr ""
+#~ "La candidature de votre projet %3$s a été rejetée.\n"
+#~ "\n"
+#~ "Nom long du projet :  %1$s\n"
+#~ "Nom UNIX du projet : %2$s\n"
+#~ "\n"
+#~ "Raison de notre refus :\n"
+#~ "\n"
+
 #, fuzzy
 #~ msgid "Could Not Create File Object: "
 #~ msgstr "Erreur lors de la création de l'objet ArtifactFileHtml : "
@@ -23871,12 +23880,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "%s Project Approved"
 #~ msgstr "Projet %s approuvé"
-
-#~ msgid "Your project registration for %s has been denied."
-#~ msgstr "La candidature de votre projet %s a été rejetée."
-
-#~ msgid "Reasons for negative decision"
-#~ msgstr "Raison de notre refus"
 
 #~ msgid "New %s Project Submitted"
 #~ msgstr "Un nouveau projet a été soumis sur %s"

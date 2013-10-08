@@ -2624,14 +2624,10 @@ if there is anything we can do to help you.
 		foreach ($submitters as $admin) {
 			setup_gettext_for_user($admin);
 
-			$response=sprintf(_('Your project registration for %3$s has been denied.
-
-Project Full Name:  %1$s
-Project Unix Name:  %2$s
-
-Reasons for negative decision:
-
-'), $this->getPublicName(), $this->getUnixName(), forge_get_config('forge_name'));
+			$response = sprintf(_('Your project registration for %s has been denied.'), forge_get_config('forge_name')) . "\n\n"
+					. _('Project Full Name')._(': ').   $this->getPublicName() . "\n"
+					. _('Project Unix Name')._(': ').  $this->getUnixName() . "\n\n"
+					. _('Reasons for negative decision')._(': ') . "\n\n";
 
 			// Check to see if they want to send a custom rejection response
 			if ($response_id == 0) {

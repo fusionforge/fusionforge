@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 18:03+0200\n"
+"POT-Creation-Date: 2013-10-07 18:40+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -436,8 +436,10 @@ msgstr "项目"
 #: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:531
 #: common/forum/ForumHTML.class.php:591 common/forum/ForumHTML.class.php:594
 #: common/forum/ForumMessage.class.php:667 common/include/Error.class.php:207
-#: common/include/exit.php:80 common/include/User.class.php:348
-#: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
+#: common/include/exit.php:80 common/include/Group.class.php:2628
+#: common/include/Group.class.php:2629 common/include/Group.class.php:2630
+#: common/include/User.class.php:348 common/include/User.class.php:1407
+#: common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
 #: common/tracker/actions/browse.php:407 common/tracker/actions/browse.php:751
@@ -3314,38 +3316,40 @@ msgstr "%1$s 项目通过审核了"
 
 #: common/include/Group.class.php:2627
 #, php-format
-msgid ""
-"Your project registration for %3$s has been denied.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Reasons for negative decision:\n"
-"\n"
-msgstr ""
-"您在 %3$s 的项目注册被取消了\n"
-"\n"
-"项目全名：%1$s\n"
-"项目 Unix 名称：%2$s\n"
-"\n"
-"原因：\n"
-"\n"
+msgid "Your project registration for %s has been denied."
+msgstr "您在 %s 的项目注册被取消了"
 
-#: common/include/Group.class.php:2646
+#: common/include/Group.class.php:2628 www/register/index.php:183
+#, fuzzy
+msgid "Project Full Name"
+msgstr "新项目名称"
+
+#: common/include/Group.class.php:2629 www/admin/approve-pending.php:194
+#: www/admin/database.php:162 www/admin/groupedit.php:171
+#: www/admin/vhost.php:120 www/register/index.php:214
+#, fuzzy
+msgid "Project Unix Name"
+msgstr "新项目名称"
+
+#: common/include/Group.class.php:2630
+msgid "Reasons for negative decision"
+msgstr "原因"
+
+#: common/include/Group.class.php:2642
 #, php-format
 msgid "%s Project Denied"
 msgstr "%s 项目被取消了"
 
-#: common/include/Group.class.php:2670
+#: common/include/Group.class.php:2666
 msgid "Could not find user who has submitted the project."
 msgstr "无法找到提交项目的用户。"
 
-#: common/include/Group.class.php:2677
+#: common/include/Group.class.php:2673
 #, fuzzy
 msgid "There is no administrator to send the mail to."
 msgstr "没有发送邮件的管理员"
 
-#: common/include/Group.class.php:2685
+#: common/include/Group.class.php:2681
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3362,12 +3366,12 @@ msgstr ""
 "请浏览下面网址审核这个项目：\n"
 "%4$s"
 
-#: common/include/Group.class.php:2695
+#: common/include/Group.class.php:2691
 #, fuzzy, php-format
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "发表人"
 
-#: common/include/Group.class.php:2701
+#: common/include/Group.class.php:2697
 #, fuzzy, php-format
 msgid ""
 "\n"
@@ -3375,12 +3379,12 @@ msgid ""
 "%1$s"
 msgstr " 请点击这个网址来完成email信箱的改变："
 
-#: common/include/Group.class.php:2705 common/include/Group.class.php:2719
+#: common/include/Group.class.php:2701 common/include/Group.class.php:2715
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "新项目 %1$s 已提交。"
 
-#: common/include/Group.class.php:2712
+#: common/include/Group.class.php:2708
 #, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3398,39 +3402,39 @@ msgstr ""
 "\n"
 " %1$s 的管理团队会尽快审核您注册的项目，通过审核与否您都会收到通知。"
 
-#: common/include/Group.class.php:2734
+#: common/include/Group.class.php:2730
 msgid "Group name is too short"
 msgstr "群组名称太短"
 
-#: common/include/Group.class.php:2737
+#: common/include/Group.class.php:2733
 msgid "Group name is too long"
 msgstr "群组名称太长"
 
-#: common/include/Group.class.php:2740
+#: common/include/Group.class.php:2736
 msgid "Group name already taken"
 msgstr "群组名称已经有人使用"
 
-#: common/include/Group.class.php:2822
+#: common/include/Group.class.php:2818
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr "错误: 数据库: 不能更改组状态: %s"
 
-#: common/include/Group.class.php:2885
+#: common/include/Group.class.php:2881
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/Group.class.php:2903
+#: common/include/Group.class.php:2899
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/Group.class.php:2921
+#: common/include/Group.class.php:2917
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
 
-#: common/include/Group.class.php:2939
+#: common/include/Group.class.php:2935
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "错误 - 不能更新组的Unix状态: %s"
@@ -15263,13 +15267,6 @@ msgstr "Home Box:"
 msgid "HTTP Domain:"
 msgstr "HTTP域名："
 
-#: www/admin/approve-pending.php:194 www/admin/database.php:162
-#: www/admin/groupedit.php:171 www/admin/vhost.php:120
-#: www/register/index.php:214
-#, fuzzy
-msgid "Project Unix Name"
-msgstr "新项目名称"
-
 #: www/admin/approve-pending.php:196
 msgid "Submitted Description:"
 msgstr "已提交的说明："
@@ -21065,11 +21062,6 @@ msgstr ""
 "要同意项目的注册，您必须填写一些基本的信息。请仔细阅读下面叙述并且提供完整且"
 "正确的资料。"
 
-#: www/register/index.php:183
-#, fuzzy
-msgid "Project Full Name"
-msgstr "新项目名称"
-
 #: www/register/index.php:185
 msgid ""
 "You should start with specifying the name of your project. The “Full Name” "
@@ -23207,6 +23199,23 @@ msgstr "帐号"
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
 
+#~ msgid ""
+#~ "Your project registration for %3$s has been denied.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Reasons for negative decision:\n"
+#~ "\n"
+#~ msgstr ""
+#~ "您在 %3$s 的项目注册被取消了\n"
+#~ "\n"
+#~ "项目全名：%1$s\n"
+#~ "项目 Unix 名称：%2$s\n"
+#~ "\n"
+#~ "原因：\n"
+#~ "\n"
+
 #, fuzzy
 #~ msgid "Could Not Create File Object: "
 #~ msgstr "无法更新上层文章"
@@ -23778,12 +23787,6 @@ msgstr "我的个人首页"
 
 #~ msgid "%s Project Approved"
 #~ msgstr "%s 项目通过审核了"
-
-#~ msgid "Your project registration for %s has been denied."
-#~ msgstr "您在 %s 的项目注册被取消了"
-
-#~ msgid "Reasons for negative decision"
-#~ msgstr "原因"
 
 #~ msgid "New %s Project Submitted"
 #~ msgstr "新项目 %s 已提交"

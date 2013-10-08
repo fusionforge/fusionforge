@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 18:03+0200\n"
+"POT-Creation-Date: 2013-10-07 18:40+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -433,8 +433,10 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:531
 #: common/forum/ForumHTML.class.php:591 common/forum/ForumHTML.class.php:594
 #: common/forum/ForumMessage.class.php:667 common/include/Error.class.php:207
-#: common/include/exit.php:80 common/include/User.class.php:348
-#: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
+#: common/include/exit.php:80 common/include/Group.class.php:2628
+#: common/include/Group.class.php:2629 common/include/Group.class.php:2630
+#: common/include/User.class.php:348 common/include/User.class.php:1407
+#: common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
 #: common/tracker/actions/browse.php:407 common/tracker/actions/browse.php:751
@@ -3270,37 +3272,37 @@ msgstr "%1$s プロジェクト 承認"
 
 #: common/include/Group.class.php:2627
 #, php-format
-msgid ""
-"Your project registration for %3$s has been denied.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Reasons for negative decision:\n"
-"\n"
-msgstr ""
-"%3$s へのプロジェクトの登録が拒否されました。\n"
-"\n"
-"プロジェクト名:%1$s\n"
-"プロジェクトUNIX名:%2$s\n"
-"\n"
-"拒否の理由:\n"
-"\n"
+msgid "Your project registration for %s has been denied."
+msgstr "%s へのプロジェクトの登録が拒否されました。"
 
-#: common/include/Group.class.php:2646
+#: common/include/Group.class.php:2628 www/register/index.php:183
+msgid "Project Full Name"
+msgstr "プロジェクト名"
+
+#: common/include/Group.class.php:2629 www/admin/approve-pending.php:194
+#: www/admin/database.php:162 www/admin/groupedit.php:171
+#: www/admin/vhost.php:120 www/register/index.php:214
+msgid "Project Unix Name"
+msgstr "プロジェクトUnix名"
+
+#: common/include/Group.class.php:2630
+msgid "Reasons for negative decision"
+msgstr "拒否の理由"
+
+#: common/include/Group.class.php:2642
 #, php-format
 msgid "%s Project Denied"
 msgstr "%s プロジェクトの拒否"
 
-#: common/include/Group.class.php:2670
+#: common/include/Group.class.php:2666
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2677
+#: common/include/Group.class.php:2673
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2685
+#: common/include/Group.class.php:2681
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3317,12 +3319,12 @@ msgstr ""
 "以下のURLにてこのプロジェクトを許可、もしくは断って下さい。 \n"
 "%5$s"
 
-#: common/include/Group.class.php:2695
+#: common/include/Group.class.php:2691
 #, fuzzy, php-format
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "編集結果を送信"
 
-#: common/include/Group.class.php:2701
+#: common/include/Group.class.php:2697
 #, fuzzy, php-format
 msgid ""
 "\n"
@@ -3330,12 +3332,12 @@ msgid ""
 "%1$s"
 msgstr "以下のURLにてこのプロジェクトを許可、もしくは断って下さい。"
 
-#: common/include/Group.class.php:2705 common/include/Group.class.php:2719
+#: common/include/Group.class.php:2701 common/include/Group.class.php:2715
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "新しいプロジェクト %1$s が提出されました"
 
-#: common/include/Group.class.php:2712
+#: common/include/Group.class.php:2708
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3355,40 +3357,40 @@ msgstr ""
 "以下のURLにてこのプロジェクトを許可、もしくは断って下さい。 \n"
 "%5$s"
 
-#: common/include/Group.class.php:2734
+#: common/include/Group.class.php:2730
 msgid "Group name is too short"
 msgstr ""
 
-#: common/include/Group.class.php:2737
+#: common/include/Group.class.php:2733
 msgid "Group name is too long"
 msgstr ""
 
-#: common/include/Group.class.php:2740
+#: common/include/Group.class.php:2736
 #, fuzzy
 msgid "Group name already taken"
 msgstr "そのアカウントはすでにアクティブです。"
 
-#: common/include/Group.class.php:2822
+#: common/include/Group.class.php:2818
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2885
+#: common/include/Group.class.php:2881
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2903
+#: common/include/Group.class.php:2899
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2921
+#: common/include/Group.class.php:2917
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2939
+#: common/include/Group.class.php:2935
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
@@ -14906,12 +14908,6 @@ msgstr ""
 msgid "HTTP Domain:"
 msgstr ""
 
-#: www/admin/approve-pending.php:194 www/admin/database.php:162
-#: www/admin/groupedit.php:171 www/admin/vhost.php:120
-#: www/register/index.php:214
-msgid "Project Unix Name"
-msgstr "プロジェクトUnix名"
-
 #: www/admin/approve-pending.php:196
 msgid "Submitted Description:"
 msgstr "提出された記述"
@@ -20516,10 +20512,6 @@ msgid ""
 "comprehensive data. All fields below are mandatory."
 msgstr ""
 
-#: www/register/index.php:183
-msgid "Project Full Name"
-msgstr "プロジェクト名"
-
 #: www/register/index.php:185
 msgid ""
 "You should start with specifying the name of your project. The “Full Name” "
@@ -22562,6 +22554,23 @@ msgstr ""
 msgid "Personal Page for %s"
 msgstr "%sのパーソナルページ"
 
+#~ msgid ""
+#~ "Your project registration for %3$s has been denied.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Reasons for negative decision:\n"
+#~ "\n"
+#~ msgstr ""
+#~ "%3$s へのプロジェクトの登録が拒否されました。\n"
+#~ "\n"
+#~ "プロジェクト名:%1$s\n"
+#~ "プロジェクトUNIX名:%2$s\n"
+#~ "\n"
+#~ "拒否の理由:\n"
+#~ "\n"
+
 #, fuzzy
 #~ msgid "Could Not Create File Object: "
 #~ msgstr "パーミッションが取得できません。"
@@ -22804,12 +22813,6 @@ msgstr "%sのパーソナルページ"
 
 #~ msgid "%s Project Approved"
 #~ msgstr "%s プロジェクト 承認"
-
-#~ msgid "Your project registration for %s has been denied."
-#~ msgstr "%s へのプロジェクトの登録が拒否されました。"
-
-#~ msgid "Reasons for negative decision"
-#~ msgstr "拒否の理由"
 
 #~ msgid "New %s Project Submitted"
 #~ msgstr "新しいプロジェクト %s が提出されました"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-07 18:03+0200\n"
+"POT-Creation-Date: 2013-10-07 18:40+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -437,8 +437,10 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:527 common/forum/ForumHTML.class.php:531
 #: common/forum/ForumHTML.class.php:591 common/forum/ForumHTML.class.php:594
 #: common/forum/ForumMessage.class.php:667 common/include/Error.class.php:207
-#: common/include/exit.php:80 common/include/User.class.php:348
-#: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
+#: common/include/exit.php:80 common/include/Group.class.php:2628
+#: common/include/Group.class.php:2629 common/include/Group.class.php:2630
+#: common/include/User.class.php:348 common/include/User.class.php:1407
+#: common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
 #: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
 #: common/tracker/actions/browse.php:407 common/tracker/actions/browse.php:751
@@ -3327,37 +3329,39 @@ msgstr "%1$s 프로젝트가 승인되었습니다."
 
 #: common/include/Group.class.php:2627
 #, php-format
-msgid ""
-"Your project registration for %3$s has been denied.\n"
-"\n"
-"Project Full Name:  %1$s\n"
-"Project Unix Name:  %2$s\n"
-"\n"
-"Reasons for negative decision:\n"
-"\n"
-msgstr ""
-"귀하가 제출하신 %3$s 프로젝트가 거부되었습니다.\n"
-"\n"
-"프로젝트 이름:  %1$s\n"
-"프로젝트 Unix Name:  %2$s\n"
-"\n"
-"거부 이유:\n"
-"\n"
+msgid "Your project registration for %s has been denied."
+msgstr "귀하가 제출하신 %s 프로젝트가 거부되었습니다."
 
-#: common/include/Group.class.php:2646
+#: common/include/Group.class.php:2628 www/register/index.php:183
+#, fuzzy
+msgid "Project Full Name"
+msgstr "새 프로젝트 이름"
+
+#: common/include/Group.class.php:2629 www/admin/approve-pending.php:194
+#: www/admin/database.php:162 www/admin/groupedit.php:171
+#: www/admin/vhost.php:120 www/register/index.php:214
+#, fuzzy
+msgid "Project Unix Name"
+msgstr "새 프로젝트 이름"
+
+#: common/include/Group.class.php:2630
+msgid "Reasons for negative decision"
+msgstr "거부 이유"
+
+#: common/include/Group.class.php:2642
 #, php-format
 msgid "%s Project Denied"
 msgstr "%s 프로젝트가 거부되었습니다"
 
-#: common/include/Group.class.php:2670
+#: common/include/Group.class.php:2666
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2677
+#: common/include/Group.class.php:2673
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2685
+#: common/include/Group.class.php:2681
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3374,12 +3378,12 @@ msgstr ""
 "다음 URL을 방문하여 이 프로젝트를 승인하거나 거부하십시오.\n"
 "%5$s"
 
-#: common/include/Group.class.php:2695
+#: common/include/Group.class.php:2691
 #, fuzzy, php-format
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "제출자"
 
-#: common/include/Group.class.php:2701
+#: common/include/Group.class.php:2697
 #, fuzzy, php-format
 msgid ""
 "\n"
@@ -3387,12 +3391,12 @@ msgid ""
 "%1$s"
 msgstr "다음 URL을 방문하셔서 이메일 주소를 변경하십시오:"
 
-#: common/include/Group.class.php:2705 common/include/Group.class.php:2719
+#: common/include/Group.class.php:2701 common/include/Group.class.php:2715
 #, php-format
 msgid "New %1$s Project Submitted"
 msgstr "%1$s 프로젝트가 제출되었습니다."
 
-#: common/include/Group.class.php:2712
+#: common/include/Group.class.php:2708
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3412,42 +3416,42 @@ msgstr ""
 "%1$s의 관리자가 제출 상황을 점검할 것입니다. 결과는 이메일로 통보받으실 수 있"
 "습니다."
 
-#: common/include/Group.class.php:2734
+#: common/include/Group.class.php:2730
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Group Name (click to edit)"
 
-#: common/include/Group.class.php:2737
+#: common/include/Group.class.php:2733
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Group Name (click to edit)"
 
-#: common/include/Group.class.php:2740
+#: common/include/Group.class.php:2736
 #, fuzzy
 msgid "Group name already taken"
 msgstr "이미 존재하는 유닉스 이름입니다."
 
-#: common/include/Group.class.php:2822
+#: common/include/Group.class.php:2818
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2885
+#: common/include/Group.class.php:2881
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2903
+#: common/include/Group.class.php:2899
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2921
+#: common/include/Group.class.php:2917
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2939
+#: common/include/Group.class.php:2935
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
@@ -15187,13 +15191,6 @@ msgstr "Home 박스:"
 msgid "HTTP Domain:"
 msgstr "HTTP 도메인:"
 
-#: www/admin/approve-pending.php:194 www/admin/database.php:162
-#: www/admin/groupedit.php:171 www/admin/vhost.php:120
-#: www/register/index.php:214
-#, fuzzy
-msgid "Project Unix Name"
-msgstr "새 프로젝트 이름"
-
 #: www/admin/approve-pending.php:196
 msgid "Submitted Description:"
 msgstr "제출된 설명:"
@@ -21011,11 +21008,6 @@ msgstr ""
 "설명을 주의깊게 읽어보시고, 완전하고 자세한 내용을 제공해 주십시오. 아래의 모"
 "든 필드는 필수입니다."
 
-#: www/register/index.php:183
-#, fuzzy
-msgid "Project Full Name"
-msgstr "새 프로젝트 이름"
-
 #: www/register/index.php:185
 msgid ""
 "You should start with specifying the name of your project. The “Full Name” "
@@ -23151,6 +23143,23 @@ msgstr "사용자ID"
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
 
+#~ msgid ""
+#~ "Your project registration for %3$s has been denied.\n"
+#~ "\n"
+#~ "Project Full Name:  %1$s\n"
+#~ "Project Unix Name:  %2$s\n"
+#~ "\n"
+#~ "Reasons for negative decision:\n"
+#~ "\n"
+#~ msgstr ""
+#~ "귀하가 제출하신 %3$s 프로젝트가 거부되었습니다.\n"
+#~ "\n"
+#~ "프로젝트 이름:  %1$s\n"
+#~ "프로젝트 Unix Name:  %2$s\n"
+#~ "\n"
+#~ "거부 이유:\n"
+#~ "\n"
+
 #, fuzzy
 #~ msgid "Could Not Create File Object: "
 #~ msgstr "Could Not Update Parent"
@@ -23639,12 +23648,6 @@ msgstr "개인 페이지"
 
 #~ msgid "%s Project Approved"
 #~ msgstr "%s 프로젝트가 승인되었습니다."
-
-#~ msgid "Your project registration for %s has been denied."
-#~ msgstr "귀하가 제출하신 %s 프로젝트가 거부되었습니다."
-
-#~ msgid "Reasons for negative decision"
-#~ msgstr "거부 이유"
 
 #~ msgid "New %s Project Submitted"
 #~ msgstr "%s 프로젝트가 제출되었습니다"
