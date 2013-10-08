@@ -378,7 +378,7 @@ echo '</tbody></table>';
 		echo $HTML->boxTop(_("Edit Roles"));
 
 echo '<table width="100%"><thead><tr>';
-echo '<th>'._('Role name').'</th>';
+echo '<th>'._('Role Name').'</th>';
 echo '<th style="text-align:right">'._('Action').'</th>';
 echo '</tr></thead><tbody>';
 
@@ -438,7 +438,7 @@ echo '
 if (count ($used_external_roles)) {
 	echo $HTML->boxMiddle(_("Currently used external roles"));
 echo '<table width="100%"><thead><tr>';
-echo '<th>'._('Role name').'</th>';
+echo '<th>'._('Role Name').'</th>';
 echo '<th style="text-align:right">'._('Action').'</th>';
 echo '</tr></thead><tbody>';
 
@@ -462,7 +462,7 @@ echo '</tbody></table>' ;
 	if (count ($unused_external_roles)) {
 		echo $HTML->boxMiddle(_("Available external roles"));
 echo '<table width="100%"><thead><tr>';
-echo '<th>'._('Role name').'</th>';
+echo '<th>'._('Role Name').'</th>';
 echo '<th style="text-align:right">'._('Action').'</th>';
 echo '</tr></thead><tbody>';
 

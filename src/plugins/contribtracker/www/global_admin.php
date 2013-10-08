@@ -377,7 +377,7 @@ case 'add_role':
 	?>
 		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
 			 <input type="hidden" name="action" value="post_add_role" />
-			 <?php echo _('Role name')._(':') ?> <input type="text" name="role_name" size="20" /><br />
+			 <?php echo _('Role Name')._(':') ?> <input type="text" name="role_name" size="20" /><br />
 			 <?php echo _('Role description')._(':') ?><br />
 			 <textarea name="role_desc" rows="20" cols="80"></textarea><br />
 			 <input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
@@ -394,7 +394,7 @@ case 'edit_role':
 		<form action="<?php echo util_make_url ('/plugins/'.$plugin->name.'/global_admin.php') ?>" method="post">
 			 <input type="hidden" name="action" value="post_edit_role" />
 			 <input type="hidden" name="role_id" value="<?php echo $role->getId() ?>" />
-			 <?php echo _('Role name')._(':') ?> <input type="text" name="role_name" size="20" value="<?php echo htmlspecialchars ($role->getName()) ?>" /><br />
+			 <?php echo _('Role Name')._(':') ?> <input type="text" name="role_name" size="20" value="<?php echo htmlspecialchars ($role->getName()) ?>" /><br />
 			 <?php echo _('Role description')._(':') ?><br />
 			 <textarea name="role_desc" rows="20" cols="80"><?php echo htmlspecialchars ($role->getDescription()) ?></textarea><br />
 			 <input type="submit" name="submit" value="<?php echo _('Save') ?>" />
