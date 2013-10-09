@@ -71,7 +71,7 @@ else oauthprovider_CheckUser();
 <?php
 $link_param = '?type='.$type.'&'.$type_param[0].'='.$type_param[1];
 echo util_make_link('/plugins/'.$pluginname.'/consumer.php', _('Consumers')). ' <br />';
-echo util_make_link('/plugins/'.$pluginname.'/request_tokens.php'.$link_param, _('Request tokens')).'<br /> ';
+echo util_make_link('/plugins/'.$pluginname.'/request_tokens.php'.$link_param, _('Request Tokens')).'<br /> ';
 echo util_make_link('/plugins/'.$pluginname.'/access_tokens.php'.$link_param, _('Access tokens')).'<br /> ';
 
 //html_page_bottom();
