@@ -2952,7 +2952,7 @@ msgstr "Datenbankmanipulation"
 #: www/survey/admin/show_results_individual.php:36
 #: www/survey/admin/show_results.php:66 www/survey/admin/survey.php:53
 msgid "Permission denied."
-msgstr "Erlaubnis verweigert"
+msgstr "Erlaubnis verweigert."
 
 #: common/include/Error.class.php:143 common/include/User.class.php:348
 #: common/include/User.class.php:928 common/include/User.class.php:980
@@ -3505,7 +3505,7 @@ msgstr ""
 
 #: common/include/GroupJoinRequest.class.php:112
 msgid "You are already a member of this project."
-msgstr "Sie sind bereits Mitglied dieses Projekts. "
+msgstr "Sie sind bereits Mitglied dieses Projekts."
 
 #: common/include/GroupJoinRequest.class.php:122
 msgid ""
@@ -3781,7 +3781,7 @@ msgstr "Dokumentation"
 
 #: common/include/Navigation.class.php:489 www/index_std.php:18
 msgid "Document Management."
-msgstr "Dokumenten-Verwaltung"
+msgstr "Dokumenten-Verwaltung."
 
 #: common/include/Navigation.class.php:503
 #: common/widget/Widget_ProjectPublicAreas.class.php:172
@@ -5163,7 +5163,7 @@ msgstr "Neuer Tracker"
 
 #: common/tracker/actions/admin-tracker.php:36
 msgid "Create a new tracker."
-msgstr "Einen neuen Tracker anlegen"
+msgstr "Einen neuen Tracker anlegen."
 
 #: common/tracker/actions/admin-tracker.php:40
 #: common/tracker/include/ArtifactTypeHtml.class.php:112
@@ -5172,7 +5172,7 @@ msgstr "Einstellungen aktualisieren"
 
 #: common/tracker/actions/admin-tracker.php:42
 msgid "Set up preferences like expiration times, email addresses."
-msgstr "Richten Sie Einstellungen ein, wie z.B. Ablaufzeiten, E-Mailadressen"
+msgstr "Richten Sie Einstellungen ein, wie z.B. Ablaufzeiten, E-Mailadressen."
 
 #: common/tracker/actions/admin-tracker.php:46
 #: common/tracker/include/ArtifactTypeHtml.class.php:115
@@ -5206,7 +5206,7 @@ msgstr "Liste Anpassen"
 
 #: common/tracker/actions/admin-tracker.php:60
 msgid "Customize display for the tracker."
-msgstr "Anzeige für den Tracker Anpassen"
+msgstr "Anzeige für den Tracker Anpassen."
 
 #: common/tracker/actions/admin-tracker.php:64
 #, fuzzy
@@ -5302,7 +5302,7 @@ msgstr "ArtifactType konnte nicht angelegt werden"
 
 #: common/tracker/actions/admin-updates.php:184
 msgid "Copy into Tracker: "
-msgstr "In den Tracker hinein kopieren:"
+msgstr "In den Tracker hinein kopieren: "
 
 #: common/tracker/actions/admin-updates.php:235
 #: common/tracker/actions/admin-updates.php:266
@@ -9274,7 +9274,7 @@ msgstr "Links zu zugehörigen CVS-Commits"
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:96
 msgid "No commits have been made."
-msgstr "Momentan gibt es keine Commits"
+msgstr "Momentan gibt es keine Commits."
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:110
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:135
@@ -11095,7 +11095,7 @@ msgstr "Keine Listen für %s gefunden"
 msgid "Project administrators use the admin link to request mailing lists."
 msgstr ""
 "Projektadministratoren benutzen den Admin-Link um eine Mailingliste "
-"anzufordern"
+"anzufordern."
 
 #: plugins/mailman/www/index.php:65
 msgid ""
@@ -12897,7 +12897,7 @@ msgstr "Kann das Kennzeichen nicht verändern: %s"
 
 #: plugins/projectlabels/www/index.php:106
 msgid "Label has been saved."
-msgstr "Kennzeichen wurde gespeichert"
+msgstr "Kennzeichen wurde gespeichert."
 
 #: plugins/projectlabels/www/index.php:120
 msgid "Label name:"
@@ -16254,7 +16254,7 @@ msgstr "Bearbeitete Antwort"
 
 #: www/admin/responses_admin.php:84
 msgid "Edit Response:"
-msgstr "Bearbeitete Antwort"
+msgstr "Bearbeitete Antwort:"
 
 #: www/admin/responses_admin.php:86 www/admin/responses_admin.php:127
 msgid "Response Title:"
@@ -18733,11 +18733,11 @@ msgstr ""
 
 #: www/index_std.php:87
 msgid "Support for PHP5."
-msgstr "PHP5-Support"
+msgstr "PHP5-Support."
 
 #: www/index_std.php:88
 msgid "Support for PostgreSQL 8.x."
-msgstr "Support für PostgreSQL 8.x. "
+msgstr "Support für PostgreSQL 8.x."
 
 #: www/index_std.php:89
 #, fuzzy
@@ -19162,7 +19162,7 @@ msgstr "Fehler beim Einfügen"
 
 #: www/news/submit.php:111
 msgid "News Added."
-msgstr "Neuigkeit hinzugefügt"
+msgstr "Neuigkeit hinzugefügt."
 
 #: www/news/submit.php:116
 #, fuzzy
@@ -21841,7 +21841,7 @@ msgid ""
 "to report on."
 msgstr ""
 "Wählen Sie den <strong>ersten Buchstaben</strong> des Namens der Person, "
-"über die Sie berichten möchten.<p>"
+"über die Sie berichten möchten."
 
 #: www/reporting/usersummary.php:66
 msgid ""
@@ -22758,7 +22758,7 @@ msgstr "Aktivitäten-Rangliste:&nbsp;"
 
 #: www/softwaremap/trove_list.php:324
 msgid "Registered:&nbsp;"
-msgstr "Registriert: "
+msgstr "Registriert:&nbsp;"
 
 #: www/source.php:37
 msgid "A file must be specified for this page."
@@ -23576,7 +23576,7 @@ msgstr "Seiten Administrator: Projekt-Katalog - Kategorie hinzufügen"
 
 #: www/trove/admin/trove_cat_add.php:65 www/trove/admin/trove_cat_edit.php:137
 msgid "Parent Category: "
-msgstr "Übergeordnete Kategorie:"
+msgstr "Übergeordnete Kategorie: "
 
 #: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_edit.php:85
 msgid "New category short name (no spaces, Unix-like): "

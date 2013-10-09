@@ -2710,7 +2710,7 @@ msgstr "Erreur inconnue lors de la transmission du fichier."
 
 #: common/frs/include/frs_utils.php:244
 msgid "Must select a file."
-msgstr "Vous devez sélectionner un fichier"
+msgstr "Vous devez sélectionner un fichier."
 
 #: common/frs/include/frs_utils.php:249
 msgid "Le nom est trop court. Il doit compter au moins 3 caractères."
@@ -6188,11 +6188,11 @@ msgstr ""
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:63
 msgid "Add a new issue."
-msgstr "Ajout d'un ticket"
+msgstr "Ajout d'un ticket."
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:69
 msgid "Various graph about statistics."
-msgstr "Divers graphiques de statistiques"
+msgstr "Divers graphiques de statistiques."
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:71
 msgid "Stop Monitor"
@@ -14198,7 +14198,7 @@ msgstr "Bienvenue"
 
 #: www/account/index.php:131
 msgid "Account options:"
-msgstr "Options du compte"
+msgstr "Options du compte:"
 
 #: www/account/index.php:134
 msgid "View My Profile"
@@ -16944,11 +16944,11 @@ msgstr "Créer ce paquet"
 
 #: www/frs/admin/qrs.php:75
 msgid "Must define a release name."
-msgstr "Vous devez définir un nom de version"
+msgstr "Vous devez définir un nom de version."
 
 #: www/frs/admin/qrs.php:77
 msgid "Must select a package."
-msgstr "Vous devez sélectionner un paquet"
+msgstr "Vous devez sélectionner un paquet."
 
 #: www/frs/admin/qrs.php:114 www/frs/admin/qrs.php:141
 msgid "Quick Release System"
@@ -17040,7 +17040,7 @@ msgid ""
 "The release you have chosen is <span class=\"selected\">highlighted</span>."
 msgstr ""
 "La version que vous avez choisie est <span class=\"selected\">mise en "
-"valeur</span>"
+"valeur</span>."
 
 #: www/frs/index.php:105
 msgid ""
@@ -18455,13 +18455,12 @@ msgid "News Added."
 msgstr "Annonce ajoutée."
 
 #: www/news/submit.php:116
-#, fuzzy
 msgid "Error: both subject and body are required."
-msgstr "Erreur: le sujet et le corps sont obligatoires"
+msgstr "Erreur: le sujet et le corps sont obligatoires."
 
 #: www/news/submit.php:132
 msgid "Submit News for Project: "
-msgstr "Soumettre une annonce pour le projet :"
+msgstr "Soumettre une annonce pour le projet : "
 
 #: www/news/submit.php:138
 #, php-format
@@ -19824,11 +19823,11 @@ msgstr "Identifiant de tâche"
 
 #: www/pm/t_lookup.php:41
 msgid "No Task with ID: "
-msgstr "Aucune tâche d'identifiant :"
+msgstr "Aucune tâche d'identifiant : "
 
 #: www/pm/uploadcsv.php:31
 msgid "Upload data into the tasks."
-msgstr "Chargement de données dans le gestionnaire de tâches"
+msgstr "Chargement de données dans le gestionnaire de tâches."
 
 #: www/pm/uploadcsv.php:36
 msgid "Warning!"
@@ -20075,13 +20074,13 @@ msgstr "Étiquettes de projet"
 
 #: www/project/admin/index.php:152
 msgid "Add tags (use comma as separator): "
-msgstr "Ajouter des étiquettes (séparées par des virgules) :"
+msgstr "Ajouter des étiquettes (séparées par des virgules) : "
 
 #: www/project/admin/index.php:159
 msgid "Or pick a tag from those used by other projects: "
 msgstr ""
 "Vous pouvez aussi choisir parmi les étiquettes déjà utilisées par d'autres "
-"projets :"
+"projets : "
 
 #: www/project/admin/index.php:192
 msgid "Trove Categorization"
@@ -21451,7 +21450,7 @@ msgstr ""
 
 #: www/snippet/add_snippet_to_package.php:140
 msgid "Add This Snippet Version ID:"
-msgstr "Ajouter cet identifiant de version"
+msgstr "Ajouter cet identifiant de version :"
 
 #: www/snippet/add_snippet_to_package.php:165 www/snippet/addversion.php:107
 #: www/snippet/addversion.php:226 www/snippet/package.php:174

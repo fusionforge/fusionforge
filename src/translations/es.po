@@ -31,7 +31,7 @@ msgstr "Nota agregada correctamente."
 #: common/tracker/actions/tracker.php:131
 #: common/tracker/actions/tracker.php:365 www/project/admin/editimages.php:59
 msgid "Invalid file name."
-msgstr "Nombre de fichero inválido"
+msgstr "Nombre de fichero inválido."
 
 #: common/account/actions/deletesshkey.php:30
 #, fuzzy
@@ -83,7 +83,7 @@ msgstr "Tipo desconocido de subida."
 #: common/docman/actions/addfile.php:193
 #, php-format
 msgid "Document %s submitted successfully."
-msgstr "Documento %s enviado con éxito"
+msgstr "Documento %s enviado con éxito."
 
 #: common/docman/actions/addfile.php:196
 #, php-format
@@ -169,7 +169,7 @@ msgid ""
 "Search Engine Reindex Forced: search results will be available within 24 h."
 msgstr ""
 "Motoro de busqueda forzado a reindexar : resultados de busqueda disponibles "
-"en 24 h"
+"en 24 h."
 
 #: common/docman/actions/injectzip.php:49
 msgid "Archive injected successfully."
@@ -546,13 +546,12 @@ msgstr "Para más información, visite:"
 
 #: common/docman/Document.class.php:952
 #: common/docman/DocumentGroup.class.php:735
-#, fuzzy
 msgid "Docman"
-msgstr "Activar Docman."
+msgstr ""
 
 #: common/docman/Document.class.php:1017
 msgid "Error Deleting Document:"
-msgstr "Hubo un error eliminando el documento"
+msgstr "Hubo un error eliminando el documento:"
 
 #: common/docman/Document.class.php:1092
 #: common/docman/DocumentGroup.class.php:873
@@ -806,11 +805,11 @@ msgstr "Descripción"
 
 #: common/docman/views/addfile.php:92
 msgid "A brief description to be placed just under the title."
-msgstr "Una descripcion corta para ser insertada debajo del titulo"
+msgstr "Una descripcion corta para ser insertada debajo del titulo."
 
 #: common/docman/views/addfile.php:94 common/docman/views/editfile.php:47
 msgid "Both fields are used by the document search engine."
-msgstr "Ambos campos son usados por el motor de busqueda del documento"
+msgstr "Ambos campos son usados por el motor de busqueda del documento."
 
 #: common/docman/views/addfile.php:103 common/docman/views/addfile.php:111
 #, php-format
@@ -1425,7 +1424,7 @@ msgstr "Descargar como ZIP"
 #: common/docman/views/listfile.php:377
 #: common/docman/views/listtrashfile.php:210
 msgid "No documents."
-msgstr "No hay documentos"
+msgstr "No hay documentos."
 
 #: common/docman/views/listfile.php:392
 #, fuzzy
@@ -1465,7 +1464,7 @@ msgid ""
 "files of selected folder."
 msgstr ""
 "Visualizar ficheros y directorios en 2 paneles. Dejar un arbol de "
-"directorios, Derecha una lista de ficheros del directorio seleccionado. "
+"directorios, Derecha una lista de ficheros del directorio seleccionado."
 
 #: common/docman/views/menu.php:49
 msgid "Add new item"
@@ -2856,7 +2855,7 @@ msgstr "Error incializando Base Datos:"
 #: www/survey/admin/show_results_individual.php:36
 #: www/survey/admin/show_results.php:66 www/survey/admin/survey.php:53
 msgid "Permission denied."
-msgstr "Permiso Denegado"
+msgstr "Permiso Denegado."
 
 #: common/include/Error.class.php:143 common/include/User.class.php:348
 #: common/include/User.class.php:928 common/include/User.class.php:980
@@ -2943,7 +2942,7 @@ msgstr "el objeto Group ya existe"
 #: common/include/Group.class.php:314 common/include/User.class.php:340
 #: common/include/User.class.php:400
 msgid "Invalid Unix Name."
-msgstr "Nombre de usuario Unix inválido"
+msgstr "Nombre de usuario Unix inválido."
 
 #: common/include/Group.class.php:317 common/include/Group.class.php:321
 #: common/include/User.class.php:344
@@ -2980,7 +2979,7 @@ msgstr "Error: No se pudo obtener el grupo de id: %s"
 
 #: common/include/Group.class.php:426 common/include/Group.class.php:509
 msgid "Could not get permission."
-msgstr "No se pudo obtener permiso"
+msgstr "No se pudo obtener permiso."
 
 #: common/include/Group.class.php:447
 #, php-format
@@ -3137,7 +3136,7 @@ msgstr "Error obteniendo el objeto rol"
 #: common/include/Group.class.php:2024 www/account/lostpw.php:45
 #: www/account/pending-resend.php:38 www/sendmessage.php:45 www/users:74
 msgid "That user does not exist."
-msgstr "El usuario no existe"
+msgstr "El usuario no existe."
 
 #: common/include/Group.class.php:2072 common/include/Group.class.php:2191
 #, php-format
@@ -3180,7 +3179,7 @@ msgstr "Aprobar"
 
 #: common/include/Group.class.php:2550 common/include/Group.class.php:2620
 msgid "Group does not have any administrators."
-msgstr "El grupo no tiene administradores"
+msgstr "El grupo no tiene administradores."
 
 #: common/include/Group.class.php:2558
 #, php-format
@@ -3289,7 +3288,7 @@ msgstr "Proyecto denegado %s"
 
 #: common/include/Group.class.php:2666
 msgid "Could not find user who has submitted the project."
-msgstr "No se pudo encontrar al usuario que creó el proyecto"
+msgstr "No se pudo encontrar al usuario que creó el proyecto."
 
 #: common/include/Group.class.php:2673
 msgid "There is no administrator to send the mail to."
@@ -3392,7 +3391,7 @@ msgstr "Debe incluir"
 
 #: common/include/GroupJoinRequest.class.php:112
 msgid "You are already a member of this project."
-msgstr "Ya eres miembro de este proyecto"
+msgstr "Ya eres miembro de este proyecto."
 
 #: common/include/GroupJoinRequest.class.php:122
 msgid ""
@@ -3998,11 +3997,11 @@ msgstr "No se puede eliminar un rol no vacío"
 
 #: common/include/Role.class.php:304
 msgid "Cannot remove a non empty role."
-msgstr "No se puede eliminar un rol no vacío"
+msgstr "No se puede eliminar un rol no vacío."
 
 #: common/include/SCMPlugin.class.php:145
 msgid "Unimplemented SCM plugin."
-msgstr "<p>Plugin de SCM no implementado.</p>"
+msgstr "Plugin de SCM no implementado."
 
 #: common/include/SCMPlugin.class.php:149
 msgid "Instructions for anonymous access for unimplemented SCM plugin."
@@ -4282,7 +4281,7 @@ msgstr "Error - No puedo actualizar Estado Usuario:"
 
 #: common/include/User.class.php:936 common/include/User.class.php:988
 msgid "User with this email already exists."
-msgstr "Ya existe un usuario con esa dirección de correcto electrónico"
+msgstr "Ya existe un usuario con esa dirección de correcto electrónico."
 
 #: common/include/User.class.php:1096
 #, fuzzy, php-format
@@ -4544,7 +4543,7 @@ msgstr "[%1$s - %2$s] [Tarea #%3$d] "
 
 #: common/reporting/ReportDownloads.class.php:77 www/frs/admin/index.php:150
 msgid "There are no packages defined."
-msgstr "No hay paquetes definidos"
+msgstr "No hay paquetes definidos."
 
 #: common/reporting/report_utils.php:27
 #, php-format
@@ -5007,7 +5006,7 @@ msgstr "Nuevo Seguimiento"
 
 #: common/tracker/actions/admin-tracker.php:36
 msgid "Create a new tracker."
-msgstr "Añadir un nuevo sistema de seguimiento de peticiones"
+msgstr "Añadir un nuevo sistema de seguimiento de peticiones."
 
 #: common/tracker/actions/admin-tracker.php:40
 #: common/tracker/include/ArtifactTypeHtml.class.php:112
@@ -5016,7 +5015,7 @@ msgstr "Actualizar Configuración"
 
 #: common/tracker/actions/admin-tracker.php:42
 msgid "Set up preferences like expiration times, email addresses."
-msgstr "Introduzca sus preferencias tipo tiempo expiracion, correo electrónico"
+msgstr "Introduzca sus preferencias tipo tiempo expiracion, correo electrónico."
 
 #: common/tracker/actions/admin-tracker.php:46
 #: common/tracker/include/ArtifactTypeHtml.class.php:115
@@ -5032,7 +5031,7 @@ msgstr ""
 "Añadir nuevos elementos como Fases, Métricas de calidad, componentes, etc.  "
 "Una vez añadidos, pueden ser usados en otras Cajas de Selección (for "
 "ejemplo, Categorías o Grupos) para describir y navegador por bugs y otros "
-"tipos de artefactos"
+"tipos de artefactos."
 
 #: common/tracker/actions/admin-tracker.php:52
 #: common/tracker/include/ArtifactTypeHtml.class.php:118
@@ -5041,7 +5040,7 @@ msgstr "Gestionar Flujos de Trabajo"
 
 #: common/tracker/actions/admin-tracker.php:54
 msgid "Edit tracker workflow."
-msgstr "Editar el workflow del sistema de seguimiento de peticiones"
+msgstr "Editar el workflow del sistema de seguimiento de peticiones."
 
 #: common/tracker/actions/admin-tracker.php:58
 #: common/tracker/include/ArtifactTypeHtml.class.php:121
@@ -5058,7 +5057,7 @@ msgstr "Gestionar Respuestas Estándar"
 
 #: common/tracker/actions/admin-tracker.php:66
 msgid "Create/change generic response messages for the tracker."
-msgstr "Crear/Cambiar mensajes genéricos de respuesta para el tracker"
+msgstr "Crear/Cambiar mensajes genéricos de respuesta para el tracker."
 
 #: common/tracker/actions/admin-tracker.php:70
 msgid "Apply Template Tracker"
@@ -5759,7 +5758,7 @@ msgstr "Opciones"
 #: common/tracker/actions/query.php:406
 msgid "Display a short summary box on top of the list (roadmap status)."
 msgstr ""
-"Muestra una caja sumario en la parte superior de la lista (estado roadmap)"
+"Muestra una caja sumario en la parte superior de la lista (estado roadmap)."
 
 #: common/tracker/actions/taskmgr.php:40 common/tracker/actions/tracker.php:74
 #: common/tracker/actions/tracker.php:258
@@ -5846,7 +5845,7 @@ msgstr "No puedo crear un Objeto Fichero"
 
 #: common/tracker/actions/tracker.php:134
 msgid "Could Not Attach File to Item: "
-msgstr "Imposible agregar Fichero al Elemento:"
+msgstr "Imposible agregar Fichero al Elemento: "
 
 #: common/tracker/actions/tracker.php:225
 msgid "Updated Successfully"
@@ -5952,7 +5951,7 @@ msgstr "Error borrando campos de datos extras: "
 
 #: common/tracker/Artifact.class.php:527
 msgid "Error deleting file from db: "
-msgstr "Error borrando ficheros de la base de datos:"
+msgstr "Error borrando ficheros de la base de datos: "
 
 #: common/tracker/Artifact.class.php:535
 msgid "Error deleting message: "
@@ -6752,7 +6751,7 @@ msgstr "No hay tracker seleccionados para este roadmap"
 #: common/tracker/views/form-adminroadmap.php:422
 #, php-format
 msgid "You can <a href=\"%s\">select tracker(s) for this roadmap</a>."
-msgstr "Puedes <a href=\"%s\">seleccionar tracker(s) para este roadmap</a>"
+msgstr "Puedes <a href=\"%s\">seleccionar tracker(s) para este roadmap</a>."
 
 #: common/tracker/views/form-adminroadmap.php:428
 msgid "Return to list of roadmaps"
@@ -7123,7 +7122,7 @@ msgstr "asignado a o enviado por mi [AS]"
 
 #: common/widget/Widget_MyArtifacts.class.php:107
 msgid "Display artifacts:"
-msgstr "Mostrar peticiones"
+msgstr "Mostrar peticiones:"
 
 #: common/widget/Widget_MyArtifacts.class.php:142
 msgid "You have no artifacts"
@@ -7232,7 +7231,7 @@ msgstr "scm"
 #: common/widget/Widget_MyLatestSvnCommits.class.php:111
 msgid "List SVN commits you have done, by project."
 msgstr ""
-"Lista los envios al repositorio (SVN) que has realizado, por proyecto. "
+"Lista los envios al repositorio (SVN) que has realizado, por proyecto."
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:39
 msgid "Monitored Documents"
@@ -7286,7 +7285,7 @@ msgstr "Foros monitorizados"
 
 #: common/widget/Widget_MyMonitoredForums.class.php:67
 msgid "You are not monitoring any forums."
-msgstr "No está monitorizando ningún foro"
+msgstr "No está monitorizando ningún foro."
 
 #: common/widget/Widget_MyMonitoredForums.class.php:67
 msgid ""
@@ -7459,7 +7458,7 @@ msgstr "Mis tareas"
 
 #: common/widget/Widget_MyTasks.class.php:148
 msgid "List the tasks assigned to you."
-msgstr "Listado de tareas asignadas a usted"
+msgstr "Listado de tareas asignadas a usted."
 
 #: common/widget/Widget_ProjectDescription.class.php:34
 msgid "Project description"
@@ -7467,7 +7466,7 @@ msgstr "Descripción del proyecto"
 
 #: common/widget/Widget_ProjectDescription.class.php:53
 msgid "This project has not yet submitted a description."
-msgstr "Este proyecto no ha proporcionado todavía una descripción"
+msgstr "Este proyecto no ha proporcionado todavía una descripción."
 
 #: common/widget/Widget_ProjectDescription.class.php:63
 msgid "Allow you to view the project description"
@@ -7698,7 +7697,7 @@ msgstr ""
 
 #: common/widget/Widget_ProjectLatestNews.class.php:80
 msgid "List the last 10 pieces of news posted by the project members."
-msgstr "Lista las últimas 10 noticias publicadas por los miembros del proyecto"
+msgstr "Lista las últimas 10 noticias publicadas por los miembros del proyecto."
 
 #: common/widget/Widget_ProjectMembers.class.php:33
 msgid "Project Members"
@@ -8174,7 +8173,7 @@ msgstr "[Reenviar el email de confirmación a una cuenta pendiente de registro]"
 #: plugins/authbuiltin/www/post-login.php:106
 #: plugins/authldap/www/post-login.php:105
 msgid "Your account does not exist."
-msgstr "Esta cuenta no existe"
+msgstr "Esta cuenta no existe."
 
 #: plugins/authbuiltin/www/post-login.php:110
 #, php-format
@@ -8473,7 +8472,7 @@ msgstr ""
 #: plugins/blocks/www/index.php:58
 msgid "Block to replace the default project description with an enhanced one."
 msgstr ""
-"Bloque para remplazar la descripción del proyecto por defecto con una mejora"
+"Bloque para remplazar la descripción del proyecto por defecto con una mejora."
 
 #: plugins/blocks/www/index.php:60
 msgid "Block to list informations requested to ask to join a project"
@@ -8526,7 +8525,7 @@ msgid ""
 "the web site. They are created manually."
 msgstr ""
 "Los bloques son cajas HTML modificables en la izquierda o la derechadel "
-"sitio web. Ellos son creados manualmente"
+"sitio web. Ellos son creados manualmente."
 
 #: plugins/blocks/www/index.php:199 www/admin/pluginman.php:207
 #: www/admin/userlist.php:68
@@ -8670,7 +8669,7 @@ msgstr "Rol"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:120
 #: plugins/contribtracker/www/index.php:115
 msgid "No contributions have been recorded for this project yet."
-msgstr "No se han guardado contribuciones para este proyecto aún"
+msgstr "No se han guardado contribuciones para este proyecto aún."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:134
 #: plugins/contribtracker/www/index.php:43
@@ -8738,7 +8737,7 @@ msgstr "El objeto no existe"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:833
 #, php-format
 msgid "Could not update object in database: %s."
-msgstr "No se pudo actualizar el objeto en la base de datos: %s"
+msgstr "No se pudo actualizar el objeto en la base de datos: %s."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:351
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:457
@@ -8746,7 +8745,7 @@ msgstr "No se pudo actualizar el objeto en la base de datos: %s"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:704
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:846
 msgid "Cannot delete a non-existing object."
-msgstr "No se puede eliminar un objeto que no existe"
+msgstr "No se puede eliminar un objeto que no existe."
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:358
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:464
