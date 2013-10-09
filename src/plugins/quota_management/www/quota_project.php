@@ -174,7 +174,7 @@ foreach ($quotas as $q) {
 			<tr>
 				<td style="border-top:thin solid #808080"><?php echo $q["name"]; ?></td>
 				<td style="border-top:thin solid #808080" align="right"><?php echo $q["nb"]; ?></td>
-				<td style="border-top:thin solid #808080" align="right"><?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["size"]))." "._('Mb'); ?></td>
+				<td style="border-top:thin solid #808080" align="right"><?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["size"]))." "._('MB'); ?></td>
 			</tr>
 <?php
 	}
@@ -186,7 +186,7 @@ foreach ($quotas as $q) {
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080">&nbsp;</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080" align="right">
-			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($sizetot))." "._('Mb'); ?>
+			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($sizetot))." "._('MB'); ?>
 		</td>
 	</tr>
 </table>
@@ -219,7 +219,7 @@ foreach ($quotas_disk as $q) {
 			<?php echo $q["quota_label"]; ?>&nbsp;
 		</td>
 		<td style="border-top:thin solid #808080" align="right">
-			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["size"]))." "._('Mb'); ?>
+			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["size"]))." "._('MB'); ?>
 		</td>
 	</tr>
 <?php
@@ -230,7 +230,7 @@ foreach ($quotas_disk as $q) {
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><?php echo _('Total'); ?></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080">&nbsp;</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080" align="right">
-			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($sizetot))." "._('Mb'); ?>
+			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($sizetot))." "._('MB'); ?>
 		</td>
 	</tr>
 </table>
@@ -285,7 +285,7 @@ if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0) {
 					echo "---";
 				} else {
 					echo "$quota_soft";
-					echo _('Mb');
+					echo _('MB');
 				}
 			?>
 		</td>
@@ -295,14 +295,14 @@ if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0) {
 					echo "---";
 				} else {
 					echo "$quota_hard";
-					echo _('Mb');
+					echo _('MB');
 				}
 			?>
 		</td>
 	</tr>
 	<tr style="background:<?php echo $color2; ?>">
 		<td style="border-top:thin solid #808080">
-			<?php echo _('CVS, SVN'); ?>
+			<?php echo 'CVS, Subversion'; ?>
 		</td>
 		<td style="border-top:thin solid #808080;font-weight:bold;color:red" align="right">
 			<?php echo $msg2; ?>
@@ -313,7 +313,7 @@ if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0) {
 					echo "---";
 				} else {
 					echo "$quota_soft";
-					echo _('Mb');
+					echo _('MB');
 				}
 			?>
 			</td>
@@ -323,7 +323,7 @@ if (($quota_tot_scm+0) > ($qs+0) && ($qs+0) > 0) {
 					echo "---";
 				} else {
 					echo "$quota_hard";
-					echo _('Mb');
+					echo _('MB');
 				}
 			?>
 		</td>

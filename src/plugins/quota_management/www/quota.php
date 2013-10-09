@@ -160,10 +160,10 @@ foreach ($users as $u)
 			<span style="font-size:10px">
 				(&nbsp;
 				<?php echo _('project'); ?>* :
-				<?php echo _('Ftp, Home'); ?>
+				<?php echo 'FTP, ' . _('Home'); ?>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<?php echo _('scm'); ?>* :
-				<?php echo _('CVS, SVN'); ?>
+				<?php echo 'CVS, Subversion'; ?>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<?php echo _('others'); ?>* :
 				<?php echo _('Download - without quota control'); ?>
@@ -245,23 +245,23 @@ foreach ($users as $u)
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color1; ?>" align="right">
 				<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["database_size"])); ?>
-				<?php echo _('Mb'); ?>
+				<?php echo _('MB'); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color0; ?>" align="right">
 				<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["disk_size_1"])); ?>
-				<?php echo _('Mb'); ?>
+				<?php echo _('MB'); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color0; ?>" align="right">
 				<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["disk_size_scm"])); ?>
-				<?php echo _('Mb'); ?>
+				<?php echo _('MB'); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color1; ?>" align="right">
 				<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["disk_size_other"])); ?>
-				<?php echo _('Mb'); ?>
+				<?php echo _('MB'); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $color1; ?>;font-weight:bold" align="right">
 				<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($local_disk_size)); ?>
-				<?php echo _('Mb'); ?>
+				<?php echo _('MB'); ?>
 			</td>
 			<td style="border-top:thin solid #808080;background:<?php echo $colorq; ?>" align="right">
 				<?php
@@ -269,7 +269,7 @@ foreach ($users as $u)
 					{
 						echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["quota_soft"]));
 						echo " ";
-						echo _('Mb');
+						echo _('MB');
 					}
 					else
 					{
@@ -283,7 +283,7 @@ foreach ($users as $u)
 					{
 						echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($q["quota_hard"]));
 						echo " ";
-						echo _('Mb');
+						echo _('MB');
 					}
 					else
 					{
@@ -303,23 +303,23 @@ foreach ($users as $u)
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
 			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($total_database)); ?>
-			<?php echo _('Mb'); ?>
+			<?php echo _('MB'); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
 			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($total_disk_1)); ?>
-			<?php echo _('Mb'); ?>
+			<?php echo _('MB'); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
 			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($total_disk_scm)); ?>
-			<?php echo _('Mb'); ?>
+			<?php echo _('MB'); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
 			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($total_disk_other)); ?>
-			<?php echo _('Mb'); ?>
+			<?php echo _('MB'); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080;background:#e0e0e0" align="right">
 			<?php echo $quota_management->add_numbers_separator($quota_management->convert_bytes_to_mega($total_database+$total_disk_1+$total_disk_scm+$total_disk_other)); ?>
-			<?php echo _('Mb'); ?>
+			<?php echo _('MB'); ?>
 		</td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
@@ -357,7 +357,7 @@ foreach ($users as $u)
 			<td style="border-top:thin solid #808080"><br /></td>
 			<td style="border-top:thin solid #808080" align="right">
 				<?php echo $quota_management->add_numbers_separator($u["disk_size"]); ?>
-				<?php echo _('Mb'); ?>
+				<?php echo _('MB'); ?>
 			</td>
 		</tr>
 		<?php
@@ -373,7 +373,7 @@ foreach ($users as $u)
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080"><br /></td>
 		<td style="border-top:thick solid #808080;border-bottom:thick solid #808080" align="right">
 			<?php echo $quota_management->add_numbers_separator($total); ?>
-			<?php echo _('Mb'); ?>
+			<?php echo _('MB'); ?>
 		</td>
 	</tr>
 </table>
