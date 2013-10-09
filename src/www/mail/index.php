@@ -94,7 +94,7 @@ if ($group_id) {
 			} else {
 				echo '<td width="25%">'.
 					'<strong><a href="'.$currentList->getArchivesUrl().'">' .
-					sprintf(_('%1$s Archives'), $currentList->getName()).'</a></strong></td>'.
+					sprintf(_('%s Archives'), $currentList->getName()).'</a></strong></td>'.
 					'<td width="25%" align="center"><a href="&#109;&#097;&#105;&#108;&#116;&#111;:'.$currentList->getListEmail().'">'.$currentList->getListEmail(). '</a></td>'.
 					'<td width="25%">'.htmlspecialchars($currentList->getDescription()). '</td>'.
 					'<td width="25%" class="align-center"><a href="'.$currentList->getExternalInfoUrl().'">'._('Subscribe/Unsubscribe/Preferences').'</a>'.
