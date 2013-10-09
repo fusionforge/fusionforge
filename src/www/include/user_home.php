@@ -86,7 +86,7 @@ if (forge_get_config('use_diary')) {
 
 <?php
 
-    echo $HTML->boxMiddle(_('Project Info'), _('Project Info'));
+echo $HTML->boxMiddle(_('Project Information'), _('Project Information'));
 
 $projects = $user->getGroups () ;
 sortProjectList ($projects) ;
