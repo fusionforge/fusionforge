@@ -60,7 +60,7 @@ if (!isset($errorPage)){
 	echo	'<tr>';
 	echo		'<th>'._('Version').'</th>';
 	echo		'<th>'._('Description').'</th>';
-	echo		'<th>'._('Target date').'</th>';
+	echo		'<th>'._('Target Date').'</th>';
 	echo		'<th>'._('Type').'</th>';
 	echo	'</tr>';
 	echo	'</thead>';
