@@ -41,7 +41,7 @@ class WidgetLayout_Row {
 	}
 
 	function display($readonly, $owner_id, $owner_type) {
-		echo '<table id="mainwidget_table" class="fullwidth"><tbody>' . "\n";
+		echo '<table id="mainwidget_table'.$this->id.'" class="fullwidth "><tbody>' . "\n";
 		echo '<tr style="vertical-align:top;">' . "\n";
 		$last = count($this->columns) - 1;
 		$i = 0;
