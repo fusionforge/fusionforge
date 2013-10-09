@@ -70,7 +70,7 @@ if (forge_get_config('use_diary')) {
 		echo _('Diary/Note entries:').' '.db_result($res, 0, 0).'
 		<p>';
 		//.'<span rel="foaf:weblog">'
-		echo util_make_link('/developer/diary.php?diary_user='.$user_id,htmlentities(_('View Diary & Notes')));
+		echo util_make_link('/developer/diary.php?diary_user='.$user_id,htmlentities(_('View Diary and Notes')));
 		//.'</span>'.
 		echo '</p>
 		<p>';
@@ -97,10 +97,10 @@ sortRoleList ($roles) ;
 echo '<div>'."\n";
 if (count ($projects) < 1) {
 	?>
-	<p><?php echo _('This developer is not a member of any projects.') ?></p>
+	<p><?php echo _('This user is not a member of any projects.') ?></p>
 	<?php
 } else { // endif no groups
-	print "<p>"._('This developer is a member of the following projects:')."</p>\n";
+	print "<p>"._('This user is a member of the following projects:')."</p>\n";
 
 	foreach ($projects as $p) {
 		if (!forge_check_perm('project_read', $p->getID())) {
@@ -166,20 +166,40 @@ if (forge_get_config('use_ratings')) {
         <?php vote_show_user_rate_box ($user_id, $me?$me->getID():0); ?>
 	</div>
 
-		  <?php printf(_('<p>The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both "trusted" and "non-trusted" users.</p><ul><li>The "Sitewide Rank" field shows the user\'s rank compared to all ranked %1$s users.</li><li>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.</li><li>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user\'s responses are given more weight.</li></ul><p>If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="%2$s">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the \'Peer Rating\' box will disappear from your user page.</p>'),
-			       forge_get_config ('forge_name'),
-			       util_make_url ("/account/"));
+<?php 
+		print "<p>";
+		print _('The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both “trusted” and “non-trusted” users.');
+		print "</p>";
 
-} elseif ($me && !$me->usesRatings()) { ?>
-<p>
-<em>
-		<?php printf (_('You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="%1$s">your account maintenance page</a> for more information.'),
-			      util_make_url ("/account")); ?>
-</em>
-</p>
-<?php }
-      }
+		print "<ul>";
+		print "<li>";
+		printf(_('The “Sitewide Rank” field shows the user\'s rank compared to all ranked %s users.'), forge_get_config('forge_name'));
+		print "</li>";
 
+		print "<li>";
+		print _('The “Aggregate Score” shows an average, weighted overall score, based on trusted-responses only.');
+		print "</li>";
+
+		print "<li>";
+		print _('The “Personal Importance” field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user\'s responses are given more weight.');
+		print "</li>";
+		print "</ul>";
+
+		print "<p>";
+		print "<em>";
+		print _('If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="/account/">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the “Peer Rating” box will disappear from your user page.');
+		print "</em>";
+		print "</p>";
+
+} elseif ($me && !$me->usesRatings()) {
+		print "<p>";
+		print "<em>";
+		printf (_('You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="%1$s">your account maintenance page</a> for more information.'),
+				  util_make_url ("/account"));
+		print "</em>";
+		print "</p>";
+	}
+}
 echo $HTML->boxBottom();
 
 $HTML->footer(array());
