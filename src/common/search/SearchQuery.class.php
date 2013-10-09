@@ -90,7 +90,6 @@ class SearchQuery extends Error {
 	 * @param	int	$rowsPerPage number of rows per page
 	 */
 	function __construct($words, $offset, $isExact, $rowsPerPage = SEARCH__DEFAULT_ROWS_PER_PAGE) {
-
 		$this->cleanSearchWords($words);
 		//We manual escap because every Query in Search escap parameters
 		$words = addslashes($words);
@@ -118,7 +117,7 @@ class SearchQuery extends Error {
 	function cleanSearchWords($words) {
 		$words = trim($words);
 		if(!$words) {
-			$this->setError(_('Error: criteria not specified'));
+			$this->setError(_('Error') . _(': ') . _('Please enter a term to search for'));
 			return;
 		}
 
