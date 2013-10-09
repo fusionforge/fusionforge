@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-08 18:20+0200\n"
+"POT-Creation-Date: 2013-10-09 15:56+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -439,15 +439,16 @@ msgstr "Projekt"
 #: common/include/User.class.php:348 common/include/User.class.php:434
 #: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
-#: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
-#: common/tracker/actions/browse.php:407 common/tracker/actions/browse.php:751
-#: common/tracker/actions/mod.php:147 common/tracker/actions/mod.php:155
-#: common/tracker/actions/mod.php:175 common/tracker/actions/mod.php:216
-#: common/tracker/actions/query.php:329 common/tracker/actions/query.php:344
-#: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
-#: common/tracker/actions/query.php:386 common/tracker/actions/query.php:388
-#: common/tracker/actions/query.php:390 common/tracker/actions/query.php:395
-#: common/tracker/actions/tracker.php:388
+#: common/reporting/report_utils.php:27
+#: common/search/SearchQuery.class.php:120
+#: common/tracker/actions/browse.php:404 common/tracker/actions/browse.php:407
+#: common/tracker/actions/browse.php:751 common/tracker/actions/mod.php:147
+#: common/tracker/actions/mod.php:155 common/tracker/actions/mod.php:175
+#: common/tracker/actions/mod.php:216 common/tracker/actions/query.php:329
+#: common/tracker/actions/query.php:344 common/tracker/actions/query.php:350
+#: common/tracker/actions/query.php:351 common/tracker/actions/query.php:386
+#: common/tracker/actions/query.php:388 common/tracker/actions/query.php:390
+#: common/tracker/actions/query.php:395 common/tracker/actions/tracker.php:388
 #: common/tracker/actions/tracker.php:393
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
@@ -495,6 +496,7 @@ msgstr "Projekt"
 #: plugins/mantisbt/view/addAttachment.php:32
 #: plugins/oauthconsumer/www/get_access_token.php:134
 #: plugins/oauthconsumer/www/get_access_token.php:135
+#: plugins/projectlabels/www/index.php:172
 #: plugins/projects-hierarchy/view/home_project_link.php:37
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:632
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:634
@@ -711,7 +713,7 @@ msgid "Last modified"
 msgstr "Zuletzt bearbeitet"
 
 #: common/docman/include/DocumentGroupHTML.class.php:50
-#: common/include/User.class.php:1407
+#: common/include/User.class.php:1407 common/search/SearchQuery.class.php:120
 #: common/survey/SurveyResponse.class.php:95
 #: common/tracker/actions/tracker.php:271
 #: common/tracker/views/form-adminroadmap.php:57
@@ -3378,9 +3380,10 @@ msgstr "Ihre Projekt-Registrierung für %s wurde verweigert."
 msgid "Project Full Name"
 msgstr "Vollständiger Projekt-Name"
 
-#: common/include/Group.class.php:2629 www/admin/approve-pending.php:194
-#: www/admin/database.php:162 www/admin/groupedit.php:171
-#: www/admin/vhost.php:120 www/register/index.php:214
+#: common/include/Group.class.php:2629 plugins/projectlabels/www/index.php:172
+#: www/admin/approve-pending.php:194 www/admin/database.php:162
+#: www/admin/groupedit.php:171 www/admin/vhost.php:120
+#: www/register/index.php:214
 msgid "Project Unix Name"
 msgstr "Unix-Name des Projektes"
 
@@ -3641,7 +3644,8 @@ msgstr "Anmelden"
 msgid "New Account"
 msgstr "Neuer Account"
 
-#: common/include/Navigation.class.php:230 www/account/lostpw.php:75
+#: common/include/Navigation.class.php:230
+#: plugins/quota_management/www/quota.php:163 www/account/lostpw.php:75
 #, php-format
 msgid "Home"
 msgstr "Home"
@@ -4485,7 +4489,28 @@ msgstr "Bytes"
 msgid "kB"
 msgstr ""
 
-#: common/include/utils.php:898
+#: common/include/utils.php:898 plugins/quota_management/www/quota.php:248
+#: plugins/quota_management/www/quota.php:252
+#: plugins/quota_management/www/quota.php:256
+#: plugins/quota_management/www/quota.php:260
+#: plugins/quota_management/www/quota.php:264
+#: plugins/quota_management/www/quota.php:272
+#: plugins/quota_management/www/quota.php:286
+#: plugins/quota_management/www/quota.php:306
+#: plugins/quota_management/www/quota.php:310
+#: plugins/quota_management/www/quota.php:314
+#: plugins/quota_management/www/quota.php:318
+#: plugins/quota_management/www/quota.php:322
+#: plugins/quota_management/www/quota.php:360
+#: plugins/quota_management/www/quota.php:376
+#: plugins/quota_management/www/quota_project.php:177
+#: plugins/quota_management/www/quota_project.php:189
+#: plugins/quota_management/www/quota_project.php:222
+#: plugins/quota_management/www/quota_project.php:233
+#: plugins/quota_management/www/quota_project.php:288
+#: plugins/quota_management/www/quota_project.php:298
+#: plugins/quota_management/www/quota_project.php:316
+#: plugins/quota_management/www/quota_project.php:326
 msgid "MB"
 msgstr ""
 
@@ -4902,11 +4927,12 @@ msgstr "Stunden"
 msgid "Successfully Added"
 msgstr "Erfolgreich hinzugefügt"
 
-#: common/search/SearchQuery.class.php:121
-msgid "Error: criteria not specified"
-msgstr "Fehler: Kriterien nicht spezifiziert"
+#: common/search/SearchQuery.class.php:120
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
+msgid "Please enter a term to search for"
+msgstr ""
 
-#: common/search/SearchQuery.class.php:127
+#: common/search/SearchQuery.class.php:126
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:152
 msgid "Error: search query too short"
 msgstr "Fehler: Suchabfrage zu kurz"
@@ -7756,7 +7782,7 @@ msgid ""
 "directory ...) during the last 4 weeks."
 msgstr ""
 
-#: common/widget/Widget_ProjectInfo.class.php:32
+#: common/widget/Widget_ProjectInfo.class.php:32 www/include/user_home.php:89
 #: www/project/admin/project_admin_utils.php:48
 msgid "Project Information"
 msgstr "Projektinformation"
@@ -11538,9 +11564,10 @@ msgid "Version Detail"
 msgstr "Version"
 
 #: plugins/mantisbt/view/admin/editVersion.php:63
+#: plugins/mantisbt/view/admin/viewVersion.php:51
 #, fuzzy
-msgid "Target date"
-msgstr "Tracker aktualisiert"
+msgid "Target Date"
+msgstr "Startdatum"
 
 #: plugins/mantisbt/view/admin/StatPerStatus.php:45
 #, fuzzy
@@ -11623,11 +11650,6 @@ msgstr ""
 #, fuzzy
 msgid "Manage versions"
 msgstr "Paketversion"
-
-#: plugins/mantisbt/view/admin/viewVersion.php:51
-#, fuzzy
-msgid "Target Date"
-msgstr "Startdatum"
 
 #: plugins/mantisbt/view/admin/viewVersion.php:76
 #, fuzzy
@@ -12469,19 +12491,15 @@ msgid "Consumers"
 msgstr ""
 
 #: plugins/oauthprovider/www/index.php:74
+#: plugins/oauthprovider/www/request_tokens.php:65
 #, fuzzy
-msgid "Request tokens"
+msgid "Request Tokens"
 msgstr "Beitrittsgesuch"
 
 #: plugins/oauthprovider/www/request_tokens.php:57
 #, fuzzy
 msgid "Authorized"
 msgstr "Genehmigen"
-
-#: plugins/oauthprovider/www/request_tokens.php:65
-#, fuzzy
-msgid "Request Tokens"
-msgstr "Beitrittsgesuch"
 
 #: plugins/oauthprovider/www/request_tokens.php:118
 #, fuzzy
@@ -12921,10 +12939,6 @@ msgstr "[Dieses Kennzeichen entfernen]"
 msgid "This label is not used on any group."
 msgstr "Dieses Kennzeichen wird in keiner Gruppe verwendet."
 
-#: plugins/projectlabels/www/index.php:172
-msgid "Unix name of the project:"
-msgstr "Unixname des Projekts:"
-
 #: plugins/projectlabels/www/index.php:175
 msgid "Add label to project"
 msgstr "Kennzeichen zum projekt hinzufügen"
@@ -13309,28 +13323,6 @@ msgstr ""
 
 #: plugins/quota_management/www/quota_admin.php:120
 #: plugins/quota_management/www/quota_admin.php:127
-#: plugins/quota_management/www/quota.php:248
-#: plugins/quota_management/www/quota.php:252
-#: plugins/quota_management/www/quota.php:256
-#: plugins/quota_management/www/quota.php:260
-#: plugins/quota_management/www/quota.php:264
-#: plugins/quota_management/www/quota.php:272
-#: plugins/quota_management/www/quota.php:286
-#: plugins/quota_management/www/quota.php:306
-#: plugins/quota_management/www/quota.php:310
-#: plugins/quota_management/www/quota.php:314
-#: plugins/quota_management/www/quota.php:318
-#: plugins/quota_management/www/quota.php:322
-#: plugins/quota_management/www/quota.php:360
-#: plugins/quota_management/www/quota.php:376
-#: plugins/quota_management/www/quota_project.php:177
-#: plugins/quota_management/www/quota_project.php:189
-#: plugins/quota_management/www/quota_project.php:222
-#: plugins/quota_management/www/quota_project.php:233
-#: plugins/quota_management/www/quota_project.php:288
-#: plugins/quota_management/www/quota_project.php:298
-#: plugins/quota_management/www/quota_project.php:316
-#: plugins/quota_management/www/quota_project.php:326
 msgid "Mb"
 msgstr "MB"
 
@@ -13342,15 +13334,6 @@ msgstr "Projekt Ressourcennutzung"
 #: plugins/quota_management/www/quota.php:186
 msgid "project"
 msgstr "Projekt"
-
-#: plugins/quota_management/www/quota.php:163
-msgid "Ftp, Home"
-msgstr "Ftp, Home"
-
-#: plugins/quota_management/www/quota.php:166
-#: plugins/quota_management/www/quota_project.php:305
-msgid "CVS, SVN"
-msgstr ""
 
 #: plugins/quota_management/www/quota.php:168
 #: plugins/quota_management/www/quota.php:192
@@ -18341,23 +18324,21 @@ msgid "Diary/Note entries:"
 msgstr "Terminkalender/Notiz-Einträge:"
 
 #: www/include/user_home.php:73
-msgid "View Diary & Notes"
+msgid "View Diary and Notes"
 msgstr "Zeige Terminkalender/Notizen"
 
 #: www/include/user_home.php:78
 msgid "Monitor this Diary"
 msgstr "Beobachte diesen Terminkalender"
 
-#: www/include/user_home.php:89
-msgid "Project Info"
-msgstr "Projekt-Info"
-
 #: www/include/user_home.php:100
-msgid "This developer is not a member of any projects."
+#, fuzzy
+msgid "This user is not a member of any projects."
 msgstr "Dieser Entwickler ist kein Mitglied bei einem Projekt."
 
 #: www/include/user_home.php:103
-msgid "This developer is a member of the following projects:"
+#, fuzzy
+msgid "This user is a member of the following projects:"
 msgstr "Dieser Entwickler ist Mitglied bei den folgenden Projekten:"
 
 #: www/include/user_home.php:157
@@ -18381,42 +18362,62 @@ msgstr ""
 "advogato.com/\">Advogato.</a> Das System wurde wieder eingeführt und in "
 "einigen Aspekten erweitert."
 
-#: www/include/user_home.php:169
-#, fuzzy, php-format
+#: www/include/user_home.php:171
 msgid ""
-"<p>The Peer rating box shows all rating averages (and response levels) for "
-"each individual criteria. Due to the math and processing required to do "
-"otherwise, these numbers incoporate responses from both \"trusted\" and "
-"\"non-trusted\" users.</p><ul><li>The \"Sitewide Rank\" field shows the "
-"user's rank compared to all ranked %1$s users.</li><li>The \"Aggregate Score"
-"\" shows an average, weighted overall score, based on trusted-responses only."
-"</li><li>The \"Personal Importance\" field shows the weight that users "
-"ratings of other developers will be given (between 1 and 1.5) -- higher "
-"rated user's responses are given more weight.</li></ul><p>If you would like "
-"to opt-out from peer rating system (this will affect your ability to both "
-"rate and be rated), refer to <a href=\"%2$s\">your account maintenance page</"
-"a>. If you choose not to participate, your ratings of other users will be "
-"permanently deleted and the 'Peer Rating' box will disappear from your user "
-"page.</p>"
+"The Peer rating box shows all rating averages (and response levels) for each "
+"individual criteria. Due to the math and processing required to do "
+"otherwise, these numbers incoporate responses from both “trusted” and “non-"
+"trusted” users."
 msgstr ""
-"<p>Der Peer-Rating Kasten zeigt alle Bewertungsdurchschnitte (und Rückmelde-"
+"Der Peer-Rating Kasten zeigt alle Bewertungsdurchschnitte (und Rückmelde-"
 "Häufigkeit) zu jedem einzelnen Merkmal. Aufgrund der sonst nötigen "
 "Berechnungen und Verarbeitungen enthalten diese Angaben Antworten sowohl von "
-"\"trusted\" als auch \"non-trusted\" Nutzern.</p><ul><li> Das \"Sitewide Rank"
-"\" Feld zeigt den Rang des Nutzers im Vergleich zu allen anderen "
-"eingetragenen %1$s Nutzern.</li><li> Der \"Aggregate Score\" zeigt ein "
-"durchschnittlich gewichtetes allgemeingültiges Ergebnis, das ausschliesslich "
-"auf vertrauenswürdigen Antworten basiert.</li><li> Das \"Personal Importance"
-"\" Feld zeigt das Gewicht, das Bewertungen von anderen Entwicklern gegeben "
-"wird (zwischen 1 und 1.5), den Bewertungen von höher eingestuften Nutzern "
-"wird ein größeres Gewicht eingeräumt.</li></ul><p> Wenn Sie sich vom Peer-"
-"Rating-System abmelden möchten (dies wird Ihre Möglichkeit zu bewerten und "
-"bewertet zu werden beeinflussen) gehen Sie dazu auf <a href=\"%2$s\">Ihre "
-"Account Einstellungen-Seite</a>. Wenn Sie sich dafür entscheiden, nicht "
-"teilzunehmen, werden Ihre Bewertungen anderer Nutzer permanent gelöscht und "
-"das 'Peer-Rating' Feld wird von Ihrer Nutzerseite entfernt.</p>"
+"\"trusted\" als auch \"non-trusted\" Nutzern."
 
 #: www/include/user_home.php:176
+#, php-format
+msgid ""
+"The “Sitewide Rank” field shows the user's rank compared to all ranked %s "
+"users."
+msgstr ""
+"Das \"Sitewide Rank\" Feld zeigt den Rang des Nutzers im Vergleich zu allen "
+"anderen eingetragenen %1$s Nutzern."
+
+#: www/include/user_home.php:180
+msgid ""
+"The “Aggregate Score” shows an average, weighted overall score, based on "
+"trusted-responses only."
+msgstr ""
+" Der \"Aggregate Score\" zeigt ein durchschnittlich gewichtetes "
+"allgemeingültiges Ergebnis, das ausschliesslich auf vertrauenswürdigen "
+"Antworten basiert."
+
+#: www/include/user_home.php:184
+msgid ""
+"The “Personal Importance” field shows the weight that users ratings of other "
+"developers will be given (between 1 and 1.5) -- higher rated user's "
+"responses are given more weight."
+msgstr ""
+"Das \"Personal Importance\" Feld zeigt das Gewicht, das Bewertungen von "
+"anderen Entwicklern gegeben wird (zwischen 1 und 1.5), den Bewertungen von "
+"höher eingestuften Nutzern wird ein größeres Gewicht eingeräumt."
+
+#: www/include/user_home.php:190
+msgid ""
+"If you would like to opt-out from peer rating system (this will affect your "
+"ability to both rate and be rated), refer to <a href=\"/account/\">your "
+"account maintenance page</a>. If you choose not to participate, your ratings "
+"of other users will be permanently deleted and the “Peer Rating” box will "
+"disappear from your user page."
+msgstr ""
+"Wenn Sie sich vom Peer-Rating-System abmelden möchten (dies wird Ihre "
+"Möglichkeit zu bewerten und bewertet zu werden beeinflussen) gehen Sie dazu "
+"auf <a href=\"/account/\">Ihre Account Einstellungen-Seite</a>. Wenn Sie "
+"sich dafür entscheiden, nicht teilzunehmen, werden Ihre Bewertungen anderer "
+"Nutzer permanent gelöscht und das 'Peer-Rating' Feld wird von Ihrer "
+"Nutzerseite entfernt."
+
+#: www/include/user_home.php:197
 #, php-format
 msgid ""
 "You opted-out from peer rating system, otherwise you would have a chance to "
@@ -18833,8 +18834,8 @@ msgid "Unable to get the list %s: %s"
 msgstr "Kein Zugriff auf Liste %s möglich."
 
 #: www/mail/index.php:97
-#, php-format
-msgid "%1$s Archives"
+#, fuzzy, php-format
+msgid "%s Archives"
 msgstr "%1$s Archive"
 
 #: www/mail/index.php:100
@@ -19037,7 +19038,7 @@ msgid "Project Total:"
 msgstr "Projekt Total:"
 
 #: www/new/index.php:122
-msgid "Notes &amp; Changes"
+msgid "Notes and Changes"
 msgstr "Notiz-Änderungen"
 
 #: www/new/index.php:136
@@ -22079,10 +22080,6 @@ msgstr "#"
 msgid "Post Date"
 msgstr "Beitragsdatum"
 
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
-msgid "Please enter a term to search for"
-msgstr ""
-
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:173
 #, fuzzy, php-format
 msgid "%s Search Results"
@@ -23649,6 +23646,32 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "Project Info"
+#~ msgstr "Projekt-Info"
+
+#~ msgid "Error: criteria not specified"
+#~ msgstr "Fehler: Kriterien nicht spezifiziert"
+
+#, fuzzy
+#~ msgid "Target date"
+#~ msgstr "Tracker aktualisiert"
+
+#, fuzzy
+#~ msgid "Request tokens"
+#~ msgstr "Beitrittsgesuch"
+
+#~ msgid "Unix name of the project:"
+#~ msgstr "Unixname des Projekts:"
+
+#~ msgid "Ftp, Home"
+#~ msgstr "Ftp, Home"
+
+#~ msgid "This developer is not a member of any projects."
+#~ msgstr "Dieser Entwickler ist kein Mitglied bei einem Projekt."
+
+#~ msgid "Notes &amp; Changes"
+#~ msgstr "Notiz-Änderungen"
 
 #~ msgid "Login name"
 #~ msgstr "Anmelde-Name"
@@ -25725,14 +25748,8 @@ msgstr "Persönliche Seite für %s"
 #~ msgid "Project totals"
 #~ msgstr "Projektsumme"
 
-#~ msgid "View Diary and Notes"
-#~ msgstr "Zeige Terminkalender/Notizen"
-
 #~ msgid "Monitored Items"
 #~ msgstr "Überwachte Items"
-
-#~ msgid "Notes and Changes"
-#~ msgstr "Notiz-Änderungen"
 
 #~ msgid ""
 #~ "All posts <b>for your project</b> will appear instantly on your project "
@@ -27951,42 +27968,6 @@ msgstr "Persönliche Seite für %s"
 
 #~ msgid "Smilies's list"
 #~ msgstr "Liste der Smilies"
-
-#, fuzzy
-#~ msgid ""
-#~ "<p>The Peer rating box shows all rating averages (and response levels) "
-#~ "for each individual criteria. Due to the math and processing required to "
-#~ "do otherwise, these numbers incoporate responses from both \"trusted\" "
-#~ "and \"non-trusted\" users.</p><ul><li>The \"Sitewide Rank\" field shows "
-#~ "the user's rank compared to all ranked %1$s users.</li><li>The "
-#~ "\"Aggregate Score\" shows an average, weighted overall score, based on "
-#~ "trusted-responses only.</li><li>The \"Personal Importance\" field shows "
-#~ "the weight that users ratings of other developers will be given (between "
-#~ "1 and 1.5) -- higher rated user's responses are given more weight.</li></"
-#~ "ul><p><i>If you would like to opt-out from peer rating system (this will "
-#~ "affect your ability to both rate and be rated), refer to <a href=\"%2$s"
-#~ "\">your account maintenance page</a>. If you choose not to participate, "
-#~ "your ratings of other users will be permanently deleted and the 'Peer "
-#~ "Rating' box will disappear from your user page. </i></p>"
-#~ msgstr ""
-#~ "<p>Die Peer-Rating Box zeigt die Durchschnitte aller Bewertungen (und den "
-#~ "Grad der Rückmeldungen) für jedes einzelne Merkmal. Aufgrund der "
-#~ "ansonsten benötigten mathematischen Prozesse, enthalten diese Ergebnisse "
-#~ "Rückmeldungen sowohl von \"vertrauenswürdigen\" als auch von \"nicht "
-#~ "vertrauenswürdigen\" Nutzern.</p><ul><li>Das \"Rangliste auf der gesamten "
-#~ "Site\" Feld zeigt den Rang des Nutzers im Vergleich zu den Rängen aller "
-#~ "anderen %1$s Nutzer.</li><li>Die \"Gesamtsumme der Ränge\" zeigt den "
-#~ "durchschnittlich gewichteten Gesamtrang an, allein basierend auf "
-#~ "vertrauenswürdigen Antworten.</li><li>Das  \"Persönliche Wichtigkeit\" "
-#~ "Feld zeigt welches Gewicht den Bewertungen anderer Entwickler eingeräumt "
-#~ "wird (zwischen 1 und 1.5)- die Antworten höher bewertete Nutzer erhalten "
-#~ "ein stärkeres Gewicht.</li></ul><p><i>Wenn Sie sich vom Peer-Rating-"
-#~ "System abmelden möchten (dies beeinflusst Ihre Möglichkeit andere zu "
-#~ "bewerten und bewertet zu werden) gehen Sie auf <a href=\"%2$s\">Ihre "
-#~ "Account Einstellungen-Seite</a>. Wenn Sie sich dafür entscheiden, nicht "
-#~ "mehr teilzunehmen, werden Ihre Bewertungen anderer Nutzer dauerhaft "
-#~ "gelöscht und die Peer-Rating-Box wird von Ihrer Nutzerseite verschwinden."
-#~ "</i></p>"
 
 #~ msgid "What's new in FusionForge trunk"
 #~ msgstr "Was gibt es neues im FusionForge Trunk"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-08 18:20+0200\n"
+"POT-Creation-Date: 2013-10-09 15:56+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -404,15 +404,16 @@ msgstr "Projet"
 #: common/include/User.class.php:348 common/include/User.class.php:434
 #: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:104
-#: common/reporting/report_utils.php:27 common/tracker/actions/browse.php:404
-#: common/tracker/actions/browse.php:407 common/tracker/actions/browse.php:751
-#: common/tracker/actions/mod.php:147 common/tracker/actions/mod.php:155
-#: common/tracker/actions/mod.php:175 common/tracker/actions/mod.php:216
-#: common/tracker/actions/query.php:329 common/tracker/actions/query.php:344
-#: common/tracker/actions/query.php:350 common/tracker/actions/query.php:351
-#: common/tracker/actions/query.php:386 common/tracker/actions/query.php:388
-#: common/tracker/actions/query.php:390 common/tracker/actions/query.php:395
-#: common/tracker/actions/tracker.php:388
+#: common/reporting/report_utils.php:27
+#: common/search/SearchQuery.class.php:120
+#: common/tracker/actions/browse.php:404 common/tracker/actions/browse.php:407
+#: common/tracker/actions/browse.php:751 common/tracker/actions/mod.php:147
+#: common/tracker/actions/mod.php:155 common/tracker/actions/mod.php:175
+#: common/tracker/actions/mod.php:216 common/tracker/actions/query.php:329
+#: common/tracker/actions/query.php:344 common/tracker/actions/query.php:350
+#: common/tracker/actions/query.php:351 common/tracker/actions/query.php:386
+#: common/tracker/actions/query.php:388 common/tracker/actions/query.php:390
+#: common/tracker/actions/query.php:395 common/tracker/actions/tracker.php:388
 #: common/tracker/actions/tracker.php:393
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
@@ -460,6 +461,7 @@ msgstr "Projet"
 #: plugins/mantisbt/view/addAttachment.php:32
 #: plugins/oauthconsumer/www/get_access_token.php:134
 #: plugins/oauthconsumer/www/get_access_token.php:135
+#: plugins/projectlabels/www/index.php:172
 #: plugins/projects-hierarchy/view/home_project_link.php:37
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:632
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:634
@@ -658,7 +660,7 @@ msgid "Last modified"
 msgstr "Dernière modification"
 
 #: common/docman/include/DocumentGroupHTML.class.php:50
-#: common/include/User.class.php:1407
+#: common/include/User.class.php:1407 common/search/SearchQuery.class.php:120
 #: common/survey/SurveyResponse.class.php:95
 #: common/tracker/actions/tracker.php:271
 #: common/tracker/views/form-adminroadmap.php:57
@@ -2368,7 +2370,7 @@ msgstr ""
 
 #: common/forum/ForumHTML.class.php:622
 msgid "Post Comment"
-msgstr "Ajouter un commentaire"
+msgstr "Publier le commentaire"
 
 #: common/forum/ForumHTML.class.php:622
 msgid "Anonymously"
@@ -3202,9 +3204,10 @@ msgstr "La candidature de votre projet %s a été rejetée."
 msgid "Project Full Name"
 msgstr "Nom complet du projet"
 
-#: common/include/Group.class.php:2629 www/admin/approve-pending.php:194
-#: www/admin/database.php:162 www/admin/groupedit.php:171
-#: www/admin/vhost.php:120 www/register/index.php:214
+#: common/include/Group.class.php:2629 plugins/projectlabels/www/index.php:172
+#: www/admin/approve-pending.php:194 www/admin/database.php:162
+#: www/admin/groupedit.php:171 www/admin/vhost.php:120
+#: www/register/index.php:214
 msgid "Project Unix Name"
 msgstr "Nom Unix du projet"
 
@@ -3462,7 +3465,8 @@ msgstr "S'identifier"
 msgid "New Account"
 msgstr "Nouveau compte"
 
-#: common/include/Navigation.class.php:230 www/account/lostpw.php:75
+#: common/include/Navigation.class.php:230
+#: plugins/quota_management/www/quota.php:163 www/account/lostpw.php:75
 #, php-format
 msgid "Home"
 msgstr "Accueil"
@@ -4260,7 +4264,28 @@ msgstr "octets"
 msgid "kB"
 msgstr "ko"
 
-#: common/include/utils.php:898
+#: common/include/utils.php:898 plugins/quota_management/www/quota.php:248
+#: plugins/quota_management/www/quota.php:252
+#: plugins/quota_management/www/quota.php:256
+#: plugins/quota_management/www/quota.php:260
+#: plugins/quota_management/www/quota.php:264
+#: plugins/quota_management/www/quota.php:272
+#: plugins/quota_management/www/quota.php:286
+#: plugins/quota_management/www/quota.php:306
+#: plugins/quota_management/www/quota.php:310
+#: plugins/quota_management/www/quota.php:314
+#: plugins/quota_management/www/quota.php:318
+#: plugins/quota_management/www/quota.php:322
+#: plugins/quota_management/www/quota.php:360
+#: plugins/quota_management/www/quota.php:376
+#: plugins/quota_management/www/quota_project.php:177
+#: plugins/quota_management/www/quota_project.php:189
+#: plugins/quota_management/www/quota_project.php:222
+#: plugins/quota_management/www/quota_project.php:233
+#: plugins/quota_management/www/quota_project.php:288
+#: plugins/quota_management/www/quota_project.php:298
+#: plugins/quota_management/www/quota_project.php:316
+#: plugins/quota_management/www/quota_project.php:326
 msgid "MB"
 msgstr "Mo"
 
@@ -4650,11 +4675,12 @@ msgstr " Heures"
 msgid "Successfully Added"
 msgstr "Ajouté avec succès"
 
-#: common/search/SearchQuery.class.php:121
-msgid "Error: criteria not specified"
-msgstr "Erreur : critère non indiqué"
+#: common/search/SearchQuery.class.php:120
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
+msgid "Please enter a term to search for"
+msgstr "Vous devez entrer un terme à rechercher"
 
-#: common/search/SearchQuery.class.php:127
+#: common/search/SearchQuery.class.php:126
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:152
 msgid "Error: search query too short"
 msgstr "Erreur : requête de recherche trop courte"
@@ -4967,7 +4993,7 @@ msgstr "Impossible de créer un objet ArtifactExtraField"
 
 #: common/tracker/actions/admin-updates.php:51
 msgid "Error inserting a custom field"
-msgstr "Erreur lors de l'ajout d'un champ"
+msgstr "Erreur lors de l'ajout d'un champ supplémentaire"
 
 #: common/tracker/actions/admin-updates.php:54
 msgid "Extra field inserted"
@@ -5343,7 +5369,6 @@ msgid "No items found"
 msgstr "Aucun élément trouvé"
 
 #: common/tracker/actions/csv.php:84
-#, fuzzy
 msgid ""
 "This page allows you to export the items using a CSV (<a href=\"http://en."
 "wikipedia.org/wiki/Comma-separated_values\">Comma Separated Values</a>) "
@@ -7382,7 +7407,7 @@ msgstr "Fichiers"
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:145
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:162
 msgid "updated Files"
-msgstr ""
+msgstr "fichiers mis à jour"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:137
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:153
@@ -7418,7 +7443,7 @@ msgid ""
 "directory ...) during the last 4 weeks."
 msgstr ""
 
-#: common/widget/Widget_ProjectInfo.class.php:32
+#: common/widget/Widget_ProjectInfo.class.php:32 www/include/user_home.php:89
 #: www/project/admin/project_admin_utils.php:48
 msgid "Project Information"
 msgstr "Information du projet"
@@ -7527,33 +7552,31 @@ msgstr "Publication-de-fichiers"
 msgid ""
 "List the most recent packages available for download along with their "
 "revision."
-msgstr ""
+msgstr "Liste des paquets les plus récents disponibles au téléchargement."
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:174
 msgid ""
 "A Release Notes icon allows you to see the latest changes and developers "
 "comments associated with this revision."
 msgstr ""
+"Une icône de Notes de Publication donne une liste des derniers changements "
+"et des commentaires des développeurs sur une révision."
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:176
 msgid ""
 "Then comes the monitor icon, selecting this icon will cause this package to "
 "be monitored for you."
 msgstr ""
+"L'icône de supervision permet de déclencher la surveillance d'un paquet."
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:178
-#, fuzzy
 msgid ""
 "Anytime the project development team posts a new release, you will be "
 "automatically notified via e-mail. All monitored File Releases are listed in "
 "your Personal Page and can be canceled from this page or from the main page "
 "of the file release system."
 msgstr ""
-"Liste des paquets les plus récents disponibles au téléchargement.<br />Une "
-"icône de Notes de Publication donne une liste des derniers changements et "
-"des commentaires des développeurs sur une révision.<br />L'icône de "
-"supervision permet de déclencher la surveillance d'un paquet. À toute "
-"publication d'une nouvelle version d'un paquet, vous recevrez une "
+"À toute publication d'une nouvelle version d'un paquet, vous recevrez une "
 "notification par courrier électronique.  Tous les paquets que vous "
 "surveillez sont listés sur votre page personnelle, et la surveillance peut "
 "être annulée depuis cette page ou depuis la page du système de publication "
@@ -10735,9 +10758,8 @@ msgstr "Pièce jointe supprimée."
 #: plugins/mantisbt/action/deleteCategory.php:37
 #: plugins/mantisbt/action/deleteVersion.php:41
 #: plugins/mantisbt/action/renameCategory.php:44
-#, fuzzy
 msgid "Task failed:"
-msgstr "Détails d'une tâche"
+msgstr ""
 
 #: plugins/mantisbt/action/deleteCategory.php:40
 #, fuzzy, php-format
@@ -11047,7 +11069,8 @@ msgid "Version Detail"
 msgstr "Version"
 
 #: plugins/mantisbt/view/admin/editVersion.php:63
-msgid "Target date"
+#: plugins/mantisbt/view/admin/viewVersion.php:51
+msgid "Target Date"
 msgstr "Date cible"
 
 #: plugins/mantisbt/view/admin/StatPerStatus.php:45
@@ -11125,11 +11148,6 @@ msgstr ""
 #, fuzzy
 msgid "Manage versions"
 msgstr "Version du paquet"
-
-#: plugins/mantisbt/view/admin/viewVersion.php:51
-#, fuzzy
-msgid "Target Date"
-msgstr "Date de début"
 
 #: plugins/mantisbt/view/admin/viewVersion.php:76
 msgid "No versions"
@@ -11264,14 +11282,12 @@ msgid "No tickets to display"
 msgstr ""
 
 #: plugins/mantisbt/view/viewIssues.php:334
-#, fuzzy
 msgid "Last update"
-msgstr "Liste mise à jour"
+msgstr "Dernière mise à jour"
 
 #: plugins/mantisbt/view/viewIssues.php:496
-#, fuzzy
 msgid "Add a new ticket"
-msgstr "Ajouter un document"
+msgstr "Ajouter un nouveau ticket"
 
 #: plugins/mantisbt/view/viewNote.php:59
 #: plugins/quota_management/www/quota_admin.php:130
@@ -11928,16 +11944,13 @@ msgid "Consumers"
 msgstr "Consommateurs"
 
 #: plugins/oauthprovider/www/index.php:74
-msgid "Request tokens"
+#: plugins/oauthprovider/www/request_tokens.php:65
+msgid "Request Tokens"
 msgstr "Demander des jetons"
 
 #: plugins/oauthprovider/www/request_tokens.php:57
 msgid "Authorized"
 msgstr "Autorisé"
-
-#: plugins/oauthprovider/www/request_tokens.php:65
-msgid "Request Tokens"
-msgstr "Demander des jetons"
 
 #: plugins/oauthprovider/www/request_tokens.php:118
 #, fuzzy
@@ -12354,10 +12367,6 @@ msgstr "[Supprimer ce label]"
 msgid "This label is not used on any group."
 msgstr "Ce label n'est utilisé par aucun projet."
 
-#: plugins/projectlabels/www/index.php:172
-msgid "Unix name of the project:"
-msgstr "Nom Unix du projet :"
-
 #: plugins/projectlabels/www/index.php:175
 msgid "Add label to project"
 msgstr "Ajouter un label au projet"
@@ -12710,28 +12719,6 @@ msgstr "limite de blocage du disque"
 
 #: plugins/quota_management/www/quota_admin.php:120
 #: plugins/quota_management/www/quota_admin.php:127
-#: plugins/quota_management/www/quota.php:248
-#: plugins/quota_management/www/quota.php:252
-#: plugins/quota_management/www/quota.php:256
-#: plugins/quota_management/www/quota.php:260
-#: plugins/quota_management/www/quota.php:264
-#: plugins/quota_management/www/quota.php:272
-#: plugins/quota_management/www/quota.php:286
-#: plugins/quota_management/www/quota.php:306
-#: plugins/quota_management/www/quota.php:310
-#: plugins/quota_management/www/quota.php:314
-#: plugins/quota_management/www/quota.php:318
-#: plugins/quota_management/www/quota.php:322
-#: plugins/quota_management/www/quota.php:360
-#: plugins/quota_management/www/quota.php:376
-#: plugins/quota_management/www/quota_project.php:177
-#: plugins/quota_management/www/quota_project.php:189
-#: plugins/quota_management/www/quota_project.php:222
-#: plugins/quota_management/www/quota_project.php:233
-#: plugins/quota_management/www/quota_project.php:288
-#: plugins/quota_management/www/quota_project.php:298
-#: plugins/quota_management/www/quota_project.php:316
-#: plugins/quota_management/www/quota_project.php:326
 msgid "Mb"
 msgstr "Mo"
 
@@ -12743,15 +12730,6 @@ msgstr "Utilisation de ressources"
 #: plugins/quota_management/www/quota.php:186
 msgid "project"
 msgstr "projet"
-
-#: plugins/quota_management/www/quota.php:163
-msgid "Ftp, Home"
-msgstr "FTP, site personnel"
-
-#: plugins/quota_management/www/quota.php:166
-#: plugins/quota_management/www/quota_project.php:305
-msgid "CVS, SVN"
-msgstr ""
 
 #: plugins/quota_management/www/quota.php:168
 #: plugins/quota_management/www/quota.php:192
@@ -13713,7 +13691,7 @@ msgstr ""
 #: plugins/scmsvn/common/SVNPlugin.class.php:149
 #: plugins/scmsvn/common/SVNPlugin.class.php:176
 msgid "Developer Subversion Access via DAV"
-msgstr "Accès Subversion pour les développeurs via WebDAV"
+msgstr "Accès Subversion pour les développeurs via Webdav"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:648
 msgid "Subversion Commits"
@@ -14271,7 +14249,7 @@ msgstr "Adresse électronique"
 
 #: www/account/index.php:200
 msgid "Change Email Addr"
-msgstr "Modifier mon adresse e-mail"
+msgstr "Modifier l'adresse électronique"
 
 #: www/account/index.php:205 www/account/register.php:220
 #: www/include/user_profile.php:126 www/mail/index.php:78
@@ -15200,7 +15178,8 @@ msgstr "Afficher les utilisateurs commençant par :"
 #: www/admin/index.php:62
 msgid "Search <em>(userid, username, realname, email)</em>"
 msgstr ""
-"Rechercher <em>(identifiant, nom d'utilisateur, nom complet, email)</em>"
+"Rechercher <em>(identifiant, nom d'utilisateur, nom complet, électronique)</"
+"em> "
 
 #: www/admin/index.php:70
 msgid "Register a New User"
@@ -15477,7 +15456,7 @@ msgstr "Changement de mot de passe pour l'utilisateur n°%1$s « %2$s » (%3$s
 #: www/admin/pending-news.php:61 www/admin/pending-news.php:124
 #: www/news/admin/index.php:64 www/news/admin/index.php:111
 msgid "Newsbyte not found"
-msgstr "Annonce non trouvée."
+msgstr "Annonce non trouvée"
 
 #: www/admin/pending-news.php:78 www/news/admin/index.php:92
 msgid "Newsbyte Updated."
@@ -15489,7 +15468,7 @@ msgstr "Annonce supprimée."
 
 #: www/admin/pending-news.php:108
 msgid "Newsbytes Rejected."
-msgstr "Annonce(s) rejetée(s)."
+msgstr "Annonce rejetée."
 
 #: www/admin/pending-news.php:113
 msgid "News administration"
@@ -16461,7 +16440,6 @@ msgstr "Le fil de discussion n'a pas été déplacé"
 msgid "Thread successfully moved from %1$s forum to %2$s forum"
 msgstr "La discussion a été déplacée du forum %1$s au forum %2$s."
 
-# : www/forum/admin/index.php : 370
 #: www/forum/admin/index.php:350
 msgid "Return to the thread"
 msgstr "Retourner à la discussion"
@@ -16669,7 +16647,7 @@ msgstr "Commencer une nouvelle discussion pour : "
 #: www/forum/save.php:55
 msgid "Forum Position Saved. New messages will be highlighted when you return"
 msgstr ""
-"Position dans le forum enregistrée.  Les nouveaux messages seront mis en "
+"Position dans le forum enregistrée. Les nouveaux messages seront mis en "
 "valeur lorsque vous reviendrez."
 
 #: www/frs/admin/deletepackage.php:48 www/frs/admin/deleterelease.php:50
@@ -16810,7 +16788,7 @@ msgstr "Soumettre/rafraîchir"
 
 #: www/frs/admin/editrelease.php:287
 msgid "Add Files To This Release"
-msgstr "Ajouter des fichiers dans cette version"
+msgstr "Ajouter des fichiers à cette version"
 
 #: www/frs/admin/editrelease.php:288
 msgid "Now, choose a file to upload into the system."
@@ -17410,7 +17388,7 @@ msgstr "Maximum"
 #: www/include/html.php:892
 #, php-format
 msgid "Project access problem: %s"
-msgstr "Problème d'accès au projet : %s"
+msgstr "Problème d'accès au projet : %s"
 
 #: www/include/html.php:894
 #, php-format
@@ -17530,7 +17508,7 @@ msgstr "Affichage par Catégorie"
 #: www/include/Layout.class.php:1415
 #, fuzzy
 msgid "Complete listing of available projects."
-msgstr "Voici une liste de fonctions possibles dans ce projet"
+msgstr "Voici une liste de fonctions possibles dans ce projet."
 
 #: www/include/login-form.php:71
 msgid ""
@@ -17632,27 +17610,23 @@ msgstr "Journal et notes"
 
 #: www/include/user_home.php:70
 msgid "Diary/Note entries:"
-msgstr "Entrées dans le journal ou les notes"
+msgstr "Entrées dans le journal ou les notes :"
 
 #: www/include/user_home.php:73
-msgid "View Diary & Notes"
+msgid "View Diary and Notes"
 msgstr "Voir le journal et les notes"
 
 #: www/include/user_home.php:78
 msgid "Monitor this Diary"
 msgstr "Surveiller ce journal"
 
-#: www/include/user_home.php:89
-msgid "Project Info"
-msgstr "Information sur un projet"
-
 #: www/include/user_home.php:100
-msgid "This developer is not a member of any projects."
-msgstr "Ce développeur ne fait partie d'aucun projet"
+msgid "This user is not a member of any projects."
+msgstr "Cet utilisateur ne fait partie d'aucun projet."
 
 #: www/include/user_home.php:103
-msgid "This developer is a member of the following projects:"
-msgstr "Ce développeur fait partie des projets suivants :"
+msgid "This user is a member of the following projects:"
+msgstr "Cet utilisateur fait partie des projets suivants :"
 
 #: www/include/user_home.php:157
 msgid ""
@@ -17674,41 +17648,60 @@ msgstr ""
 "Le système d'évaluation par les pairs de %s reprend des concepts d'<a href="
 "\"http://www.advogato.com/\">Advogato</a>, mais il a été repris et étendu."
 
-#: www/include/user_home.php:169
-#, php-format
+#: www/include/user_home.php:171
 msgid ""
-"<p>The Peer rating box shows all rating averages (and response levels) for "
-"each individual criteria. Due to the math and processing required to do "
-"otherwise, these numbers incoporate responses from both \"trusted\" and "
-"\"non-trusted\" users.</p><ul><li>The \"Sitewide Rank\" field shows the "
-"user's rank compared to all ranked %1$s users.</li><li>The \"Aggregate Score"
-"\" shows an average, weighted overall score, based on trusted-responses only."
-"</li><li>The \"Personal Importance\" field shows the weight that users "
-"ratings of other developers will be given (between 1 and 1.5) -- higher "
-"rated user's responses are given more weight.</li></ul><p>If you would like "
-"to opt-out from peer rating system (this will affect your ability to both "
-"rate and be rated), refer to <a href=\"%2$s\">your account maintenance page</"
-"a>. If you choose not to participate, your ratings of other users will be "
-"permanently deleted and the 'Peer Rating' box will disappear from your user "
-"page.</p>"
+"The Peer rating box shows all rating averages (and response levels) for each "
+"individual criteria. Due to the math and processing required to do "
+"otherwise, these numbers incoporate responses from both “trusted” and “non-"
+"trusted” users."
 msgstr ""
-"<p>La boîte d'évaluations croisées renvoie les notes moyennes (et les "
-"niveaux de réponse) de chaque critère individuel.  Pour des raisons de "
-"calcul, ces chiffres tiennent compte à la fois des utilisateurs de confiance "
-"et des autres.</p><ul><li>Le champ « rang global » indique le rang de "
-"l'utilisateur comparé à tous les utilisateurs de %1$s classés.</li><li>Le "
-"« score agrégé » indique un score global moyen pondéré, basé uniquement sur "
-"les réponses de confiance.</li><li>Le champ « importance personnelle » "
-"indique le poids que cet utilisateur aura lors de ses évaluations des autres "
-"développeurs (entre 1 et 1,5).</li></ul><p><i>Si vous ne souhaitez pas "
-"participer à ces évaluations (ni en tant qu'évaluateur, ni en tant que sujet "
-"des évaluations), vous pouvez désactiver cette fonction depuis la <a href="
-"\"%2$s\">page de gestion de votre compte</a>.  Si vous choisissez de ne plus "
-"participer, vos évaluations des autres utilisateurs seront effacées, et la "
-"boîte d'évaluations croisées n'apparaîtra plus sur votre page d'utilisateur."
-"</i></p>"
+"La boîte d'évaluations croisées renvoie les notes moyennes (et les niveaux "
+"de réponse) de chaque critère individuel.  Pour des raisons de calcul, ces "
+"chiffres tiennent compte à la fois des utilisateurs de confiance et des "
+"autres."
 
 #: www/include/user_home.php:176
+#, php-format
+msgid ""
+"The “Sitewide Rank” field shows the user's rank compared to all ranked %s "
+"users."
+msgstr ""
+"Le champ « rang global » indique le rang de l'utilisateur comparé à tous les "
+"utilisateurs de %s classés."
+
+#: www/include/user_home.php:180
+msgid ""
+"The “Aggregate Score” shows an average, weighted overall score, based on "
+"trusted-responses only."
+msgstr ""
+"Le « score agrégé » indique un score global moyen pondéré, basé uniquement "
+"sur les réponses de confiance."
+
+#: www/include/user_home.php:184
+msgid ""
+"The “Personal Importance” field shows the weight that users ratings of other "
+"developers will be given (between 1 and 1.5) -- higher rated user's "
+"responses are given more weight."
+msgstr ""
+"Le champ « importance personnelle » indique le poids que cet utilisateur "
+"aura lors de ses évaluations des autres développeurs (entre 1 et 1,5)."
+
+#: www/include/user_home.php:190
+msgid ""
+"If you would like to opt-out from peer rating system (this will affect your "
+"ability to both rate and be rated), refer to <a href=\"/account/\">your "
+"account maintenance page</a>. If you choose not to participate, your ratings "
+"of other users will be permanently deleted and the “Peer Rating” box will "
+"disappear from your user page."
+msgstr ""
+"Si vous ne souhaitez pas participer à ces évaluations (ni en tant "
+"qu'évaluateur, ni en tant que sujet des évaluations), vous pouvez désactiver "
+"cette fonction depuis la <a href=\"/account/\">page de gestion de votre "
+"compte</a>.  Si vous choisissez de ne plus participer, vos évaluations des "
+"autres utilisateurs seront effacées, et la boîte d'évaluations croisées "
+"n'apparaîtra plus sur votre page d'utilisateur."
+
+#: www/include/user_home.php:197
 #, php-format
 msgid ""
 "You opted-out from peer rating system, otherwise you would have a chance to "
@@ -18139,8 +18132,8 @@ msgstr "Erreur lors de la récupération de la liste %s : %s"
 
 #: www/mail/index.php:97
 #, php-format
-msgid "%1$s Archives"
-msgstr "Archives de %1$s"
+msgid "%s Archives"
+msgstr "Archives de %s"
 
 #: www/mail/index.php:100
 msgid "Subscribe/Unsubscribe/Preferences"
@@ -18252,7 +18245,7 @@ msgstr "aucun message de notification envoyé (personne ne surveille)."
 
 #: www/my/diary.php:131
 msgid "Error Adding Item: "
-msgstr "Erreur lors de l'ajout d'une entrée : "
+msgstr "Erreur lors de l'ajout : "
 
 #: www/my/diary.php:147
 msgid "Entry not found or does not belong to you"
@@ -18264,7 +18257,7 @@ msgstr "Ajouter une nouvelle entrée"
 
 #: www/my/diary.php:152
 msgid "Update An Entry"
-msgstr "Mise à jour d'une donnée"
+msgstr "Mise à jour d'une entrée"
 
 #: www/my/diary.php:190
 msgid "Is Public"
@@ -18274,7 +18267,9 @@ msgstr "Affichage public ?"
 msgid ""
 "If marked as public, your entry will be mailed to any monitoring users when "
 "it is first submitted."
-msgstr "Si cette donnée est publique"
+msgstr ""
+"Si cette entrée est publique, elle sera envoyée par courriel aux "
+"utilisateurs abonnés."
 
 #: www/my/diary.php:202
 msgid "You Have No Diary Entries"
@@ -18291,7 +18286,7 @@ msgid ""
 msgstr ""
 "Vous ne pouvez pas vous supprimer vous-même de ce projet, parce que vous en "
 "êtes un administrateur.  Vous devez d'abord demander à un autre "
-"administrateur de supprimer vos privilèves d'administrateur.  Si vous êtes "
+"administrateur de supprimer vos privilèges d'administrateur.  Si vous êtes "
 "le seul administrateur de ce projet, vous pouvez annoncer la disponibilité "
 "du poste sur le <a href=\"%s\">tableau d'affichage</a>, de manière à pouvoir "
 "passer les privilèges d'administrateur aux personnes intéressées."
@@ -18333,8 +18328,8 @@ msgid "Project Total:"
 msgstr "Total pour le projet :"
 
 #: www/new/index.php:122
-msgid "Notes &amp; Changes"
-msgstr "Changements :"
+msgid "Notes and Changes"
+msgstr "Notes et changements"
 
 #: www/new/index.php:136
 msgid "Newer Releases"
@@ -21296,10 +21291,6 @@ msgstr "#"
 msgid "Post Date"
 msgstr "Date de publication"
 
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
-msgid "Please enter a term to search for"
-msgstr "Vous devez entrer un terme à rechercher"
-
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:173
 #, php-format
 msgid "%s Search Results"
@@ -22849,6 +22840,16 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#, fuzzy
+#~ msgid "Project Info"
+#~ msgstr "Information sur un projet"
+
+#~ msgid "Projects Information"
+#~ msgstr "Information des projets"
+
+#~ msgid "Notes &amp; Changes"
+#~ msgstr "Changements :"
 
 #~ msgid "[New Account]"
 #~ msgstr "[Nouveau compte]"
@@ -26015,18 +26016,6 @@ msgstr "Page personnelle de %s"
 #~ msgid "This news is not categorized in the"
 #~ msgstr "Cette annonce n'a pas encore été classée dans l'"
 
-#~ msgid "View Diary and Notes"
-#~ msgstr "Voir le journal et les notes"
-
-#~ msgid "Projects Information"
-#~ msgstr "Information des projets"
-
-#~ msgid "This user is not a member of any projects."
-#~ msgstr "Cet utilisateur ne fait partie d'aucun projet."
-
-#~ msgid "This user is a member of the following projects:"
-#~ msgstr "Cet utilisateur fait partie des projets suivants :"
-
 #~ msgid "Using Forge"
 #~ msgstr "Utiliser la Forge"
 
@@ -26035,9 +26024,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "(at least 4 characters)"
 #~ msgstr "(4 caractères minimum)"
-
-#~ msgid "%s Archives"
-#~ msgstr "Archives de %s"
 
 #~ msgid "Assigned Artifacts"
 #~ msgstr "Éléments affectés"
@@ -26085,9 +26071,6 @@ msgstr "Page personnelle de %s"
 #~ "Si vous êtes le seul administrateur de ce projet, vous pouvez annoncer la "
 #~ "disponibilité du poste sur le tableau d'affichage (%s), de manière à "
 #~ "pouvoir passer les privilèges d'administrateur aux personnes intéressées."
-
-#~ msgid "Notes and Changes"
-#~ msgstr "Notes et changements"
 
 #~ msgid "Are you sure you want to delete this news?"
 #~ msgstr "Êtes-vous sûr de vouloir supprimer cette annonce ?"
@@ -27533,9 +27516,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Detail"
 #~ msgstr "Vue détaillée d'un traceur"
-
-#~ msgid "Project info"
-#~ msgstr "Information sur un projet"
 
 #~ msgid ""
 #~ " Refers to the relatively brief title of the document (e.g. How to use "
