@@ -169,7 +169,7 @@ if (db_numrows($res) >= 1) {
 		}
 		?>
 <form name="addlabeltoproject" method="post" action="<?php echo util_make_url ('/plugins/projectlabels/') ; ?>">
-	 <?php echo _('Unix name of the project:') . " " ; ?>
+	 <?php echo _('Project Unix Name')._(': '); ?>
 <input type=text name=group_uname>
 <input type="hidden" name="func" value="addlabeltoproject">
 <input type="submit" value="<?php echo _('Add label to project') ?>">
