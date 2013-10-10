@@ -178,5 +178,3 @@ class RDFedFRSFile extends FRSFile {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

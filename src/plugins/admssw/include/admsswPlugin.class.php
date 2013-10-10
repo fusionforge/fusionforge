@@ -26,11 +26,11 @@
 // as RDF conforming to the ADMS.SW 1.0 specifications :  
 // https://joinup.ec.europa.eu/asset/adms_foss/release/release100
 
-require_once('common/include/TroveCat.class.php');
-require_once('common/frs/FRSFileType.class.php');
+require_once 'common/include/TroveCat.class.php';
+require_once 'common/frs/FRSFileType.class.php';
 require_once $gfplugins.'admssw/common/RDFedFRSPackage.class.php' ;
-require_once('common/include/rdfutils.php');
-include_once("Graphite.php");
+require_once 'common/include/rdfutils.php';
+include_once 'Graphite.php';
 
 class admsswPlugin extends Plugin {
 	

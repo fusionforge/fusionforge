@@ -22,7 +22,7 @@
 
 // This class overloads FRSPackage to add RDF representation, based on ADMS.SW, using ARC2 and Graphite
 
-include_once('RDFedFRSRelease.class.php');
+include_once 'RDFedFRSRelease.class.php';
 
 /**
  *	  Factory method which creates a RDFedFRSPackage from an project/group
@@ -109,5 +109,3 @@ class RDFedFRSPackage extends FRSPackage {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

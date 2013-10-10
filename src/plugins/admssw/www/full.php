@@ -30,7 +30,7 @@
 // which contain only an index of projects, like /projects/ (for RDF harvested by machines)
 // or its HTML Turtle preview in /plugins/admssw/projectsturtle.php
 
-require_once('../../env.inc.php');
+require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
 $pluginname = 'admssw';
@@ -72,5 +72,3 @@ if ($content_type == 'text/html') {
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>

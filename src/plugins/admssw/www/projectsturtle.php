@@ -20,7 +20,7 @@
 * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-require_once('../../env.inc.php');
+require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
 // Dumps an HTML preview of the Turtle RDF document for an index of public projects
@@ -63,5 +63,3 @@ $HTML->footer(array());
 // mode: php
 // c-file-style: "bsd"
 // End:
-
-?>
