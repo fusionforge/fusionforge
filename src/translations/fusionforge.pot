@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:32+0200\n"
+"POT-Creation-Date: 2013-10-10 15:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9297,6 +9297,7 @@ msgstr ""
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:112
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:692
+#: plugins/webanalytics/common/webanalyticsPlugin.class.php:56
 msgid "Direct link to global configuration of this plugin"
 msgstr ""
 
@@ -13001,10 +13002,6 @@ msgstr ""
 
 #: plugins/webanalytics/common/webanalyticsPlugin.class.php:56
 msgid "Global WebAnalytics admin"
-msgstr ""
-
-#: plugins/webanalytics/common/webanalyticsPlugin.class.php:56
-msgid "Direct link to global configuration of this plugin."
 msgstr ""
 
 #: plugins/webanalytics/common/webanalyticsPlugin.class.php:161

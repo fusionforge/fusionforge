@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:32+0200\n"
+"POT-Creation-Date: 2013-10-10 15:45+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -10102,6 +10102,7 @@ msgstr "搜尋"
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:112
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:692
+#: plugins/webanalytics/common/webanalyticsPlugin.class.php:56
 msgid "Direct link to global configuration of this plugin"
 msgstr ""
 
@@ -14171,11 +14172,6 @@ msgstr "已經新增通信論壇"
 #, fuzzy
 msgid "Global WebAnalytics admin"
 msgstr "郵件管理"
-
-#: plugins/webanalytics/common/webanalyticsPlugin.class.php:56
-#, fuzzy
-msgid "Direct link to global configuration of this plugin."
-msgstr "更新書籤失敗"
 
 #: plugins/webanalytics/common/webanalyticsPlugin.class.php:161
 #, fuzzy
@@ -23179,6 +23175,10 @@ msgstr "帳號"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
+
+#, fuzzy
+#~ msgid "Direct link to global configuration of this plugin."
+#~ msgstr "更新書籤失敗"
 
 #, fuzzy
 #~ msgid "Browse document manager in this project"

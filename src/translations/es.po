@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:32+0200\n"
+"POT-Creation-Date: 2013-10-10 15:45+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -9872,6 +9872,7 @@ msgstr "Administrador Jerarquías Globales"
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:112
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:692
+#: plugins/webanalytics/common/webanalyticsPlugin.class.php:56
 msgid "Direct link to global configuration of this plugin"
 msgstr "Enlace directo a configuración global de este plugin"
 
@@ -13864,11 +13865,6 @@ msgstr "Lista actualizada"
 #, fuzzy
 msgid "Global WebAnalytics admin"
 msgstr "Administración Global MantisBT"
-
-#: plugins/webanalytics/common/webanalyticsPlugin.class.php:56
-#, fuzzy
-msgid "Direct link to global configuration of this plugin."
-msgstr "Enlace directo a configuración global de este plugin"
 
 #: plugins/webanalytics/common/webanalyticsPlugin.class.php:161
 #, fuzzy
@@ -22934,6 +22930,10 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#, fuzzy
+#~ msgid "Direct link to global configuration of this plugin."
+#~ msgstr "Enlace directo a configuración global de este plugin"
 
 #~ msgid "Browse document manager in this project"
 #~ msgstr "Navegar Gestor de documentos en este proyecto"

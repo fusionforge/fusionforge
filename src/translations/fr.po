@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:32+0200\n"
+"POT-Creation-Date: 2013-10-10 15:45+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -9762,6 +9762,7 @@ msgstr "Rechercher globale"
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:112
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:692
+#: plugins/webanalytics/common/webanalyticsPlugin.class.php:56
 msgid "Direct link to global configuration of this plugin"
 msgstr ""
 
@@ -13708,11 +13709,6 @@ msgstr "Lien mis à jour"
 #, fuzzy
 msgid "Global WebAnalytics admin"
 msgstr "Administration de Mantis"
-
-#: plugins/webanalytics/common/webanalyticsPlugin.class.php:56
-#, fuzzy
-msgid "Direct link to global configuration of this plugin."
-msgstr "Incapable de mettre à jour les favoris"
 
 #: plugins/webanalytics/common/webanalyticsPlugin.class.php:161
 #, fuzzy
@@ -22817,6 +22813,10 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#, fuzzy
+#~ msgid "Direct link to global configuration of this plugin."
+#~ msgstr "Incapable de mettre à jour les favoris"
 
 #~ msgid "Browse document manager in this project"
 #~ msgstr "Naviguer dans le gestionnaire de documents de ce projet"

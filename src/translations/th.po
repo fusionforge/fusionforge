@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:32+0200\n"
+"POT-Creation-Date: 2013-10-10 15:45+0200\n"
 "PO-Revision-Date: 2009-10-06 16:32+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9305,6 +9305,7 @@ msgstr ""
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:112
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:692
+#: plugins/webanalytics/common/webanalyticsPlugin.class.php:56
 msgid "Direct link to global configuration of this plugin"
 msgstr ""
 
@@ -12999,10 +13000,6 @@ msgstr ""
 
 #: plugins/webanalytics/common/webanalyticsPlugin.class.php:56
 msgid "Global WebAnalytics admin"
-msgstr ""
-
-#: plugins/webanalytics/common/webanalyticsPlugin.class.php:56
-msgid "Direct link to global configuration of this plugin."
 msgstr ""
 
 #: plugins/webanalytics/common/webanalyticsPlugin.class.php:161

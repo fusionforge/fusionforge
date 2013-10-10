@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:32+0200\n"
+"POT-Creation-Date: 2013-10-10 15:45+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -10087,6 +10087,7 @@ msgstr "搜索"
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:112
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:692
+#: plugins/webanalytics/common/webanalyticsPlugin.class.php:56
 msgid "Direct link to global configuration of this plugin"
 msgstr ""
 
@@ -14150,11 +14151,6 @@ msgstr "已经添加邮件列表"
 #, fuzzy
 msgid "Global WebAnalytics admin"
 msgstr "邮件管理"
-
-#: plugins/webanalytics/common/webanalyticsPlugin.class.php:56
-#, fuzzy
-msgid "Direct link to global configuration of this plugin."
-msgstr "更新书签失败"
 
 #: plugins/webanalytics/common/webanalyticsPlugin.class.php:161
 #, fuzzy
@@ -23153,6 +23149,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Direct link to global configuration of this plugin."
+#~ msgstr "更新书签失败"
 
 #, fuzzy
 #~ msgid "Browse document manager in this project"

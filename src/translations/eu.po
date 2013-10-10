@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:32+0200\n"
+"POT-Creation-Date: 2013-10-10 15:45+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -10097,6 +10097,7 @@ msgstr "Bilatu"
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:112
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:692
+#: plugins/webanalytics/common/webanalyticsPlugin.class.php:56
 msgid "Direct link to global configuration of this plugin"
 msgstr ""
 
@@ -14156,11 +14157,6 @@ msgstr "Zerrenda Gehitua"
 #, fuzzy
 msgid "Global WebAnalytics admin"
 msgstr "Posta elektronikoen administraria"
-
-#: plugins/webanalytics/common/webanalyticsPlugin.class.php:56
-#, fuzzy
-msgid "Direct link to global configuration of this plugin."
-msgstr "Akatsa marka eguneratzean"
 
 #: plugins/webanalytics/common/webanalyticsPlugin.class.php:161
 #, fuzzy
@@ -23220,6 +23216,10 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#, fuzzy
+#~ msgid "Direct link to global configuration of this plugin."
+#~ msgstr "Akatsa marka eguneratzean"
 
 #, fuzzy
 #~ msgid "Browse document manager in this project"
