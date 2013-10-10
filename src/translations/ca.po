@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:02+0200\n"
+"POT-Creation-Date: 2013-10-10 16:14+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16944,6 +16944,7 @@ msgid "Return to the thread"
 msgstr "Inicia un nou fil"
 
 #: www/forum/admin/index.php:373 www/forum/admin/index.php:449
+#: www/forum/index.php:58
 #, php-format
 msgid "No Forums Found for %s"
 msgstr "No s'han trobat fòrums per %s"
@@ -17096,11 +17097,6 @@ msgstr ""
 #, php-format
 msgid "Forums for %1$s"
 msgstr "Fòrums per %1$s"
-
-#: www/forum/index.php:58
-#, fuzzy, php-format
-msgid "No Forums Found for %1$s"
-msgstr "No s'han trobat fòrums per %1$s"
 
 #: www/forum/index.php:65 www/forum/myforums.php:44 www/forum/myforums.php:46
 msgid "My Monitored Forums"
@@ -23331,6 +23327,10 @@ msgstr "Nom d'usuari"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
+
+#, fuzzy
+#~ msgid "No Forums Found for %1$s"
+#~ msgstr "No s'han trobat fòrums per %1$s"
 
 #~ msgid "Missing Password Or Users Name"
 #~ msgstr "Falta contrasenya o nom d'usuari"

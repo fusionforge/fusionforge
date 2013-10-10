@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:02+0200\n"
+"POT-Creation-Date: 2013-10-10 16:14+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15642,6 +15642,7 @@ msgid "Return to the thread"
 msgstr ""
 
 #: www/forum/admin/index.php:373 www/forum/admin/index.php:449
+#: www/forum/index.php:58
 #, php-format
 msgid "No Forums Found for %s"
 msgstr "Nenhum Fórum Encontrado Para %s"
@@ -15780,11 +15781,6 @@ msgstr ""
 #, php-format
 msgid "Forums for %1$s"
 msgstr "Fóruns para %1$s"
-
-#: www/forum/index.php:58
-#, php-format
-msgid "No Forums Found for %1$s"
-msgstr ""
 
 #: www/forum/index.php:65 www/forum/myforums.php:44 www/forum/myforums.php:46
 msgid "My Monitored Forums"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:02+0200\n"
+"POT-Creation-Date: 2013-10-10 16:14+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -17081,6 +17081,7 @@ msgid "Return to the thread"
 msgstr "Volver ao foro"
 
 #: www/forum/admin/index.php:373 www/forum/admin/index.php:449
+#: www/forum/index.php:58
 #, php-format
 msgid "No Forums Found for %s"
 msgstr "Non se achou ningún foro para %s"
@@ -17231,11 +17232,6 @@ msgstr "Non se elixiu ningún foro "
 #, php-format
 msgid "Forums for %1$s"
 msgstr "Foros para %1$s"
-
-#: www/forum/index.php:58
-#, fuzzy, php-format
-msgid "No Forums Found for %1$s"
-msgstr "Non se achou ningún foro para %1$s"
 
 #: www/forum/index.php:65 www/forum/myforums.php:44 www/forum/myforums.php:46
 msgid "My Monitored Forums"
@@ -23533,6 +23529,10 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "No Forums Found for %1$s"
+#~ msgstr "Non se achou ningún foro para %1$s"
 
 #~ msgid "Missing Password Or Users Name"
 #~ msgstr "Falta o contrasinal ou o nome de usuario "

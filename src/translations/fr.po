@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:02+0200\n"
+"POT-Creation-Date: 2013-10-10 16:14+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -16399,6 +16399,7 @@ msgid "Return to the thread"
 msgstr "Retourner à la discussion"
 
 #: www/forum/admin/index.php:373 www/forum/admin/index.php:449
+#: www/forum/index.php:58
 #, php-format
 msgid "No Forums Found for %s"
 msgstr "Pas de forum trouvé pour %s"
@@ -16539,11 +16540,6 @@ msgstr "Aucun forum choisi"
 #, php-format
 msgid "Forums for %1$s"
 msgstr "Forums de %1$s"
-
-#: www/forum/index.php:58
-#, php-format
-msgid "No Forums Found for %1$s"
-msgstr "Pas de forum trouvé pour %1$s."
 
 #: www/forum/index.php:65 www/forum/myforums.php:44 www/forum/myforums.php:46
 msgid "My Monitored Forums"
@@ -22797,6 +22793,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "No Forums Found for %1$s"
+#~ msgstr "Pas de forum trouvé pour %1$s."
 
 #~ msgid "Missing Password Or Users Name"
 #~ msgstr "Nom du compte ou mot de passe manquant"

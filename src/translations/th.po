@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:02+0200\n"
+"POT-Creation-Date: 2013-10-10 16:14+0200\n"
 "PO-Revision-Date: 2009-10-06 16:32+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15483,6 +15483,7 @@ msgid "Return to the thread"
 msgstr ""
 
 #: www/forum/admin/index.php:373 www/forum/admin/index.php:449
+#: www/forum/index.php:58
 #, fuzzy, php-format
 msgid "No Forums Found for %s"
 msgstr "ไม่พบเอกสาร"
@@ -15620,11 +15621,6 @@ msgstr ""
 #: www/forum/index.php:51
 #, php-format
 msgid "Forums for %1$s"
-msgstr ""
-
-#: www/forum/index.php:58
-#, php-format
-msgid "No Forums Found for %1$s"
 msgstr ""
 
 #: www/forum/index.php:65 www/forum/myforums.php:44 www/forum/myforums.php:46

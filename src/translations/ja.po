@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:02+0200\n"
+"POT-Creation-Date: 2013-10-10 16:14+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16432,6 +16432,7 @@ msgid "Return to the thread"
 msgstr "新規スレッド開始"
 
 #: www/forum/admin/index.php:373 www/forum/admin/index.php:449
+#: www/forum/index.php:58
 #, fuzzy, php-format
 msgid "No Forums Found for %s"
 msgstr "ニュースが見つかりません"
@@ -16581,11 +16582,6 @@ msgstr ""
 #, php-format
 msgid "Forums for %1$s"
 msgstr ""
-
-#: www/forum/index.php:58
-#, fuzzy, php-format
-msgid "No Forums Found for %1$s"
-msgstr "ニュースが見つかりません"
 
 #: www/forum/index.php:65 www/forum/myforums.php:44 www/forum/myforums.php:46
 msgid "My Monitored Forums"
@@ -22497,6 +22493,10 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr "%sのパーソナルページ"
+
+#, fuzzy
+#~ msgid "No Forums Found for %1$s"
+#~ msgstr "ニュースが見つかりません"
 
 #~ msgid "Missing Password Or Users Name"
 #~ msgstr "そのようなユーザー名、あるいは、パスワードは存在しません。"

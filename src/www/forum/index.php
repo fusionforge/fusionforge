@@ -55,7 +55,7 @@ if ($group_id) {
 		forum_footer(array());
 		exit;
 	} elseif ( count($farr) < 1) {
-		echo '<div class="warning_msg">'.sprintf(_('No Forums Found for %1$s'), $g->getPublicName()) .'</div>';
+		echo '<div class="warning_msg">'.sprintf(_('No Forums Found for %s'), $g->getPublicName()) .'</div>';
 		forum_footer(array());
 		exit;
 	}

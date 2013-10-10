@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:02+0200\n"
+"POT-Creation-Date: 2013-10-10 16:14+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16960,6 +16960,7 @@ msgid "Return to the thread"
 msgstr "Inizia un nuovo argomento"
 
 #: www/forum/admin/index.php:373 www/forum/admin/index.php:449
+#: www/forum/index.php:58
 #, php-format
 msgid "No Forums Found for %s"
 msgstr "Nessun forum trovato per %s"
@@ -17114,11 +17115,6 @@ msgstr ""
 #, php-format
 msgid "Forums for %1$s"
 msgstr "Forum per %1$s"
-
-#: www/forum/index.php:58
-#, fuzzy, php-format
-msgid "No Forums Found for %1$s"
-msgstr "Nessun forum trovato per %1$s"
 
 #: www/forum/index.php:65 www/forum/myforums.php:44 www/forum/myforums.php:46
 msgid "My Monitored Forums"
@@ -23353,6 +23349,10 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "No Forums Found for %1$s"
+#~ msgstr "Nessun forum trovato per %1$s"
 
 #~ msgid "Missing Password Or Users Name"
 #~ msgstr "Password o nome utente mancante"
