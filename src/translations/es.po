@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 10:21+0200\n"
+"POT-Creation-Date: 2013-10-10 10:40+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -9856,7 +9856,7 @@ msgid "No link to update or name missing."
 msgstr ""
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:67
-#: plugins/headermenu/common/headermenuPlugin.class.php:428
+#: plugins/headermenu/common/headermenuPlugin.class.php:427
 #, fuzzy
 msgid "Menu Tabs Manager Admin"
 msgstr "Administración de Tareas"
@@ -9865,28 +9865,28 @@ msgstr "Administración de Tareas"
 msgid "Add/Remove/Activate/Desactivate tabs"
 msgstr ""
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:113
+#: plugins/headermenu/common/headermenuPlugin.class.php:112
 #, fuzzy
 msgid "Global HeaderMenu admin"
 msgstr "Administrador Jerarquías Globales"
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:113
+#: plugins/headermenu/common/headermenuPlugin.class.php:112
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:692
 msgid "Direct link to global configuration of this plugin"
 msgstr "Enlace directo a configuración global de este plugin"
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:365
-#: plugins/headermenu/common/headermenuPlugin.class.php:380
+#: plugins/headermenu/common/headermenuPlugin.class.php:364
+#: plugins/headermenu/common/headermenuPlugin.class.php:379
 #, fuzzy
 msgid "Cannot retrieve the page"
 msgstr "No puedo obtener datos de DB"
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:401
+#: plugins/headermenu/common/headermenuPlugin.class.php:400
 #, fuzzy
 msgid "Site Global Menu Admin"
 msgstr "Administrador Global MantisBT"
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:467
+#: plugins/headermenu/common/headermenuPlugin.class.php:466
 msgid ""
 "Get the ability to set new links next to the login menu (headermenu), in the "
 "main menu (outermenu) or in the project menu (groupmenu)."
@@ -11533,6 +11533,7 @@ msgstr "Mediawiki integracion en la forja"
 
 #: plugins/mediawiki/mediawiki-skin/FusionForge.php:220
 #: plugins/projectimport/www/index.php:568
+#: plugins/projectimport/www/projectsimport.php:267
 msgid "Project Summary"
 msgstr "Historial del Proyecto"
 
@@ -12363,10 +12364,6 @@ msgstr "Fallo la creacion del proyecto"
 #: plugins/projectimport/www/projectsimport.php:263
 msgid "Created project"
 msgstr "Proyecto Creado"
-
-#: plugins/projectimport/www/projectsimport.php:267
-msgid "Project summary"
-msgstr "Resumen Proyecto"
 
 #: plugins/projectimport/www/usersimport.php:72
 msgid "Users importer"
@@ -22946,6 +22943,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Project summary"
+#~ msgstr "Resumen Proyecto"
 
 #~ msgid "Edit Ticket: "
 #~ msgstr "Editar Ticket: "

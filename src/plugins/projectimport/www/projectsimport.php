@@ -264,7 +264,7 @@ class ProjectsImportPage extends FileManagerPage {
 			                            </h2>';
 
 					}
-					$html .= '<h3>'._('Project summary').'</h3>';
+					$html .= '<h3>'._('Project Summary').'</h3>';
 					$html .= '<p><pre>'. $description .'</pre></p>';
 
 					$html .= '<p>full_name : '. $full_name .'</p>';

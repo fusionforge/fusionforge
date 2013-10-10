@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 10:21+0200\n"
+"POT-Creation-Date: 2013-10-10 10:40+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -10034,7 +10034,7 @@ msgid "No link to update or name missing."
 msgstr ""
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:67
-#: plugins/headermenu/common/headermenuPlugin.class.php:428
+#: plugins/headermenu/common/headermenuPlugin.class.php:427
 #, fuzzy
 msgid "Menu Tabs Manager Admin"
 msgstr "임무 관리자 설정"
@@ -10043,28 +10043,28 @@ msgstr "임무 관리자 설정"
 msgid "Add/Remove/Activate/Desactivate tabs"
 msgstr ""
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:113
+#: plugins/headermenu/common/headermenuPlugin.class.php:112
 #, fuzzy
 msgid "Global HeaderMenu admin"
 msgstr "찾기"
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:113
+#: plugins/headermenu/common/headermenuPlugin.class.php:112
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:692
 msgid "Direct link to global configuration of this plugin"
 msgstr ""
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:365
-#: plugins/headermenu/common/headermenuPlugin.class.php:380
+#: plugins/headermenu/common/headermenuPlugin.class.php:364
+#: plugins/headermenu/common/headermenuPlugin.class.php:379
 #, fuzzy
 msgid "Cannot retrieve the page"
 msgstr "database 항목을 추가할 수 없습니다."
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:401
+#: plugins/headermenu/common/headermenuPlugin.class.php:400
 #, fuzzy
 msgid "Site Global Menu Admin"
 msgstr "찾기"
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:467
+#: plugins/headermenu/common/headermenuPlugin.class.php:466
 msgid ""
 "Get the ability to set new links next to the login menu (headermenu), in the "
 "main menu (outermenu) or in the project menu (groupmenu)."
@@ -11772,6 +11772,7 @@ msgstr ""
 
 #: plugins/mediawiki/mediawiki-skin/FusionForge.php:220
 #: plugins/projectimport/www/index.php:568
+#: plugins/projectimport/www/projectsimport.php:267
 #, fuzzy
 msgid "Project Summary"
 msgstr "프로젝트 히스토리"
@@ -12632,11 +12633,6 @@ msgstr "그룹 객체 생성 오류"
 #, fuzzy
 msgid "Created project"
 msgstr "Private Groups"
-
-#: plugins/projectimport/www/projectsimport.php:267
-#, fuzzy
-msgid "Project summary"
-msgstr "프로젝트 히스토리"
 
 #: plugins/projectimport/www/usersimport.php:72
 #, fuzzy
@@ -23115,6 +23111,10 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "Project summary"
+#~ msgstr "프로젝트 히스토리"
 
 #, fuzzy
 #~ msgid "Edit Ticket: "

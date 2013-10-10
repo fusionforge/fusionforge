@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 10:21+0200\n"
+"POT-Creation-Date: 2013-10-10 10:40+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -10154,7 +10154,7 @@ msgid "No link to update or name missing."
 msgstr ""
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:67
-#: plugins/headermenu/common/headermenuPlugin.class.php:428
+#: plugins/headermenu/common/headermenuPlugin.class.php:427
 #, fuzzy
 msgid "Menu Tabs Manager Admin"
 msgstr "Administración do xestor de tarefas"
@@ -10163,28 +10163,28 @@ msgstr "Administración do xestor de tarefas"
 msgid "Add/Remove/Activate/Desactivate tabs"
 msgstr ""
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:113
+#: plugins/headermenu/common/headermenuPlugin.class.php:112
 #, fuzzy
 msgid "Global HeaderMenu admin"
 msgstr "Busca global"
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:113
+#: plugins/headermenu/common/headermenuPlugin.class.php:112
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:692
 msgid "Direct link to global configuration of this plugin"
 msgstr ""
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:365
-#: plugins/headermenu/common/headermenuPlugin.class.php:380
+#: plugins/headermenu/common/headermenuPlugin.class.php:364
+#: plugins/headermenu/common/headermenuPlugin.class.php:379
 #, fuzzy
 msgid "Cannot retrieve the page"
 msgstr "Non se pode eliminar a etiqueta: %s"
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:401
+#: plugins/headermenu/common/headermenuPlugin.class.php:400
 #, fuzzy
 msgid "Site Global Menu Admin"
 msgstr "Busca global"
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:467
+#: plugins/headermenu/common/headermenuPlugin.class.php:466
 msgid ""
 "Get the ability to set new links next to the login menu (headermenu), in the "
 "main menu (outermenu) or in the project menu (groupmenu)."
@@ -11926,6 +11926,7 @@ msgstr ""
 
 #: plugins/mediawiki/mediawiki-skin/FusionForge.php:220
 #: plugins/projectimport/www/index.php:568
+#: plugins/projectimport/www/projectsimport.php:267
 #, fuzzy
 msgid "Project Summary"
 msgstr "Historial do proxecto"
@@ -12798,11 +12799,6 @@ msgstr "Non se puido crear o obxecto ArtifactCanned"
 #, fuzzy
 msgid "Created project"
 msgstr "Proxectos privados "
-
-#: plugins/projectimport/www/projectsimport.php:267
-#, fuzzy
-msgid "Project summary"
-msgstr "Historial do proxecto"
 
 #: plugins/projectimport/www/usersimport.php:72
 #, fuzzy
@@ -23568,6 +23564,10 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Project summary"
+#~ msgstr "Historial do proxecto"
 
 #, fuzzy
 #~ msgid "Edit Ticket: "

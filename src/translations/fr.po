@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 10:21+0200\n"
+"POT-Creation-Date: 2013-10-10 10:40+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -9748,7 +9748,7 @@ msgid "No link to update or name missing."
 msgstr ""
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:67
-#: plugins/headermenu/common/headermenuPlugin.class.php:428
+#: plugins/headermenu/common/headermenuPlugin.class.php:427
 msgid "Menu Tabs Manager Admin"
 msgstr "Administration gestionnaire d'onglets"
 
@@ -9756,25 +9756,25 @@ msgstr "Administration gestionnaire d'onglets"
 msgid "Add/Remove/Activate/Desactivate tabs"
 msgstr ""
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:113
+#: plugins/headermenu/common/headermenuPlugin.class.php:112
 msgid "Global HeaderMenu admin"
 msgstr "Rechercher globale"
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:113
+#: plugins/headermenu/common/headermenuPlugin.class.php:112
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:692
 msgid "Direct link to global configuration of this plugin"
 msgstr ""
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:365
-#: plugins/headermenu/common/headermenuPlugin.class.php:380
+#: plugins/headermenu/common/headermenuPlugin.class.php:364
+#: plugins/headermenu/common/headermenuPlugin.class.php:379
 msgid "Cannot retrieve the page"
 msgstr ""
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:401
+#: plugins/headermenu/common/headermenuPlugin.class.php:400
 msgid "Site Global Menu Admin"
 msgstr ""
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:467
+#: plugins/headermenu/common/headermenuPlugin.class.php:466
 msgid ""
 "Get the ability to set new links next to the login menu (headermenu), in the "
 "main menu (outermenu) or in the project menu (groupmenu)."
@@ -11408,6 +11408,7 @@ msgstr "Intégration de Mediawiki dans la forge"
 
 #: plugins/mediawiki/mediawiki-skin/FusionForge.php:220
 #: plugins/projectimport/www/index.php:568
+#: plugins/projectimport/www/projectsimport.php:267
 msgid "Project Summary"
 msgstr "Résumé du projet"
 
@@ -12236,11 +12237,6 @@ msgstr "Erreur lors de la création du projet"
 #: plugins/projectimport/www/projectsimport.php:263
 msgid "Created project"
 msgstr "Projet créé"
-
-#: plugins/projectimport/www/projectsimport.php:267
-#, fuzzy
-msgid "Project summary"
-msgstr "Résumé du projet"
 
 #: plugins/projectimport/www/usersimport.php:72
 #, fuzzy
@@ -22830,6 +22826,10 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#, fuzzy
+#~ msgid "Project summary"
+#~ msgstr "Résumé du projet"
 
 #, fuzzy
 #~ msgid "Missing category name."

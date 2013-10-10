@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 10:21+0200\n"
+"POT-Creation-Date: 2013-10-10 10:40+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9853,7 +9853,7 @@ msgid "No link to update or name missing."
 msgstr ""
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:67
-#: plugins/headermenu/common/headermenuPlugin.class.php:428
+#: plugins/headermenu/common/headermenuPlugin.class.php:427
 #, fuzzy
 msgid "Menu Tabs Manager Admin"
 msgstr "タスクマネージャ"
@@ -9862,27 +9862,27 @@ msgstr "タスクマネージャ"
 msgid "Add/Remove/Activate/Desactivate tabs"
 msgstr ""
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:113
+#: plugins/headermenu/common/headermenuPlugin.class.php:112
 #, fuzzy
 msgid "Global HeaderMenu admin"
 msgstr "検索"
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:113
+#: plugins/headermenu/common/headermenuPlugin.class.php:112
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:692
 msgid "Direct link to global configuration of this plugin"
 msgstr ""
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:365
-#: plugins/headermenu/common/headermenuPlugin.class.php:380
+#: plugins/headermenu/common/headermenuPlugin.class.php:364
+#: plugins/headermenu/common/headermenuPlugin.class.php:379
 msgid "Cannot retrieve the page"
 msgstr ""
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:401
+#: plugins/headermenu/common/headermenuPlugin.class.php:400
 #, fuzzy
 msgid "Site Global Menu Admin"
 msgstr "検索"
 
-#: plugins/headermenu/common/headermenuPlugin.class.php:467
+#: plugins/headermenu/common/headermenuPlugin.class.php:466
 msgid ""
 "Get the ability to set new links next to the login menu (headermenu), in the "
 "main menu (outermenu) or in the project menu (groupmenu)."
@@ -11542,6 +11542,7 @@ msgstr ""
 
 #: plugins/mediawiki/mediawiki-skin/FusionForge.php:220
 #: plugins/projectimport/www/index.php:568
+#: plugins/projectimport/www/projectsimport.php:267
 #, fuzzy
 msgid "Project Summary"
 msgstr "プロジェクト管理"
@@ -12384,11 +12385,6 @@ msgstr "パーミッションが取得できません。"
 #, fuzzy
 msgid "Created project"
 msgstr "新規プロジェクト登録"
-
-#: plugins/projectimport/www/projectsimport.php:267
-#, fuzzy
-msgid "Project summary"
-msgstr "プロジェクト管理"
 
 #: plugins/projectimport/www/usersimport.php:72
 msgid "Users importer"
@@ -22530,6 +22526,10 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr "%sのパーソナルページ"
+
+#, fuzzy
+#~ msgid "Project summary"
+#~ msgstr "プロジェクト管理"
 
 #, fuzzy
 #~ msgid "Edit Ticket: "
