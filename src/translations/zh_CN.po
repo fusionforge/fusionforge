@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:49+0200\n"
+"POT-Creation-Date: 2013-10-10 15:55+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -5037,11 +5037,13 @@ msgid "Days till pending tracker items time out"
 msgstr "未决定跟踪项目的逾期天数"
 
 #: common/tracker/actions/admin-ind.php:154
-msgid "Free form text for the \"submit new item\" page"
+#: common/tracker/views/form-updatetracker.php:75
+msgid "Free form text for the “Submit New” page"
 msgstr ""
 
 #: common/tracker/actions/admin-ind.php:157
-msgid "Free form text for the \"browse items\" page"
+#: common/tracker/views/form-updatetracker.php:78
+msgid "Free form text for the Browse page"
 msgstr ""
 
 #: common/tracker/actions/admin-ind.php:160
@@ -7105,14 +7107,6 @@ msgstr "更新设置"
 msgid ""
 "<strong>Name:</strong> (examples: meeting minutes, test results, RFP Docs)"
 msgstr "<strong> 名称：</strong> (范例：会议纪录、测试结果、参考说明文件)"
-
-#: common/tracker/views/form-updatetracker.php:75
-msgid "Free form text for the “Submit New” page"
-msgstr ""
-
-#: common/tracker/views/form-updatetracker.php:78
-msgid "Free form text for the Browse page"
-msgstr ""
 
 #: common/tracker/views/form-workflow.php:30
 msgid ""

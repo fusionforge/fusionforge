@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:49+0200\n"
+"POT-Creation-Date: 2013-10-10 15:55+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -4948,11 +4948,13 @@ msgid "Days till pending tracker items time out"
 msgstr "Tiempo límite en días para peticiones pendientes"
 
 #: common/tracker/actions/admin-ind.php:154
-msgid "Free form text for the \"submit new item\" page"
+#: common/tracker/views/form-updatetracker.php:75
+msgid "Free form text for the “Submit New” page"
 msgstr "Texto libre para la página \"añade un nuevo elemento\""
 
 #: common/tracker/actions/admin-ind.php:157
-msgid "Free form text for the \"browse items\" page"
+#: common/tracker/views/form-updatetracker.php:78
+msgid "Free form text for the Browse page"
 msgstr "Texto libre para la página \"navega por los elementos\""
 
 #: common/tracker/actions/admin-ind.php:160
@@ -6970,14 +6972,6 @@ msgid ""
 msgstr ""
 "<strong>Nombre:</strong> (ejemplos: minutas de reuniones, resultados de "
 "test, documentos)"
-
-#: common/tracker/views/form-updatetracker.php:75
-msgid "Free form text for the “Submit New” page"
-msgstr "Texto libre para la página \"añade un nuevo elemento\""
-
-#: common/tracker/views/form-updatetracker.php:78
-msgid "Free form text for the Browse page"
-msgstr "Texto libre para la página \"navega por los elementos\""
 
 #: common/tracker/views/form-workflow.php:30
 msgid ""
@@ -22926,6 +22920,12 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Free form text for the \"submit new item\" page"
+#~ msgstr "Texto libre para la página \"añade un nuevo elemento\""
+
+#~ msgid "Free form text for the \"browse items\" page"
+#~ msgstr "Texto libre para la página \"navega por los elementos\""
 
 #, fuzzy
 #~ msgid "Error getting forum"

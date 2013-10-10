@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:49+0200\n"
+"POT-Creation-Date: 2013-10-10 15:55+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -4851,12 +4851,14 @@ msgstr ""
 "Attente maximale en jours avant de supprimer l'élément à suivre (persistance)"
 
 #: common/tracker/actions/admin-ind.php:154
-msgid "Free form text for the \"submit new item\" page"
-msgstr "Texte libre pour la page de soumission d'un nouvel objet."
+#: common/tracker/views/form-updatetracker.php:75
+msgid "Free form text for the “Submit New” page"
+msgstr "Texte libre pour la page de soumission d'un nouvel objet"
 
 #: common/tracker/actions/admin-ind.php:157
-msgid "Free form text for the \"browse items\" page"
-msgstr "Texte libre pour la page de navigation."
+#: common/tracker/views/form-updatetracker.php:78
+msgid "Free form text for the Browse page"
+msgstr "Texte libre pour la page de navigation"
 
 #: common/tracker/actions/admin-ind.php:160
 #: common/tracker/include/build_submission_form.php:54
@@ -6866,14 +6868,6 @@ msgid ""
 msgstr ""
 "<strong>Nom&nbsp;:</strong> (exemples&nbsp;: comptes-rendus de réunions, "
 "résultats de tests... )"
-
-#: common/tracker/views/form-updatetracker.php:75
-msgid "Free form text for the “Submit New” page"
-msgstr "Texte libre pour la page de soumission d'un nouvel objet"
-
-#: common/tracker/views/form-updatetracker.php:78
-msgid "Free form text for the Browse page"
-msgstr "Texte libre pour la page de navigation"
 
 #: common/tracker/views/form-workflow.php:30
 msgid ""
@@ -22809,6 +22803,12 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Free form text for the \"submit new item\" page"
+#~ msgstr "Texte libre pour la page de soumission d'un nouvel objet."
+
+#~ msgid "Free form text for the \"browse items\" page"
+#~ msgstr "Texte libre pour la page de navigation."
 
 #, fuzzy
 #~ msgid "Error getting forum"

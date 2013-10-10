@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:49+0200\n"
+"POT-Creation-Date: 2013-10-10 15:55+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -5104,11 +5104,13 @@ msgid "Days till pending tracker items time out"
 msgstr "Tage bis unbearbeitete Trackerelemente Timeout haben"
 
 #: common/tracker/actions/admin-ind.php:154
-msgid "Free form text for the \"submit new item\" page"
+#: common/tracker/views/form-updatetracker.php:75
+msgid "Free form text for the “Submit New” page"
 msgstr "Freitext für die \"Neues Objekt vorschlagen\" Seite"
 
 #: common/tracker/actions/admin-ind.php:157
-msgid "Free form text for the \"browse items\" page"
+#: common/tracker/views/form-updatetracker.php:78
+msgid "Free form text for the Browse page"
 msgstr "Freitext für die \"Durchsuche Objekte\" Seite"
 
 #: common/tracker/actions/admin-ind.php:160
@@ -7197,14 +7199,6 @@ msgid ""
 msgstr ""
 "<strong> Name:</strong> (Beispiele: Protokoll des Meetings, Testergebnisse, "
 "RFP Dokumente)"
-
-#: common/tracker/views/form-updatetracker.php:75
-msgid "Free form text for the “Submit New” page"
-msgstr "Freitext für die \"Neues Objekt vorschlagen\" Seite"
-
-#: common/tracker/views/form-updatetracker.php:78
-msgid "Free form text for the Browse page"
-msgstr "Freitext für die \"Durchsuche Objekte\" Seite"
 
 #: common/tracker/views/form-workflow.php:30
 #, fuzzy
@@ -23612,6 +23606,12 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "Free form text for the \"submit new item\" page"
+#~ msgstr "Freitext für die \"Neues Objekt vorschlagen\" Seite"
+
+#~ msgid "Free form text for the \"browse items\" page"
+#~ msgstr "Freitext für die \"Durchsuche Objekte\" Seite"
 
 #, fuzzy
 #~ msgid "Error getting forum"

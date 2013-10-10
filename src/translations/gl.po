@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:49+0200\n"
+"POT-Creation-Date: 2013-10-10 15:55+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -5086,11 +5086,13 @@ msgid "Days till pending tracker items time out"
 msgstr "Días ata que se acabe o tempo dos elementos pendentes do rexistro"
 
 #: common/tracker/actions/admin-ind.php:154
-msgid "Free form text for the \"submit new item\" page"
+#: common/tracker/views/form-updatetracker.php:75
+msgid "Free form text for the “Submit New” page"
 msgstr "Texto de formulario libre para a páxina de \"enviar un novo elemento\""
 
 #: common/tracker/actions/admin-ind.php:157
-msgid "Free form text for the \"browse items\" page"
+#: common/tracker/views/form-updatetracker.php:78
+msgid "Free form text for the Browse page"
 msgstr "Texto de formulario libre para a páxina de \"navegar polos elementos\""
 
 #: common/tracker/actions/admin-ind.php:160
@@ -7171,14 +7173,6 @@ msgid ""
 msgstr ""
 "<strong>Nome:</strong> (exemplos: minutos de reunión, resultados do test, "
 "Documentos do RFP)"
-
-#: common/tracker/views/form-updatetracker.php:75
-msgid "Free form text for the “Submit New” page"
-msgstr "Texto de formulario libre para a páxina de \"enviar un novo elemento\""
-
-#: common/tracker/views/form-updatetracker.php:78
-msgid "Free form text for the Browse page"
-msgstr "Texto de formulario libre para a páxina de \"navegar polos elementos\""
 
 #: common/tracker/views/form-workflow.php:30
 msgid ""
@@ -23545,6 +23539,14 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#~ msgid "Free form text for the \"submit new item\" page"
+#~ msgstr ""
+#~ "Texto de formulario libre para a páxina de \"enviar un novo elemento\""
+
+#~ msgid "Free form text for the \"browse items\" page"
+#~ msgstr ""
+#~ "Texto de formulario libre para a páxina de \"navegar polos elementos\""
 
 #, fuzzy
 #~ msgid "Error getting forum"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:49+0200\n"
+"POT-Creation-Date: 2013-10-10 15:55+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -5083,11 +5083,13 @@ msgid "Days till pending tracker items time out"
 msgstr "Numero giorni dopo i quali elementi in attesa di conferma scadono"
 
 #: common/tracker/actions/admin-ind.php:154
-msgid "Free form text for the \"submit new item\" page"
+#: common/tracker/views/form-updatetracker.php:75
+msgid "Free form text for the “Submit New” page"
 msgstr ""
 
 #: common/tracker/actions/admin-ind.php:157
-msgid "Free form text for the \"browse items\" page"
+#: common/tracker/views/form-updatetracker.php:78
+msgid "Free form text for the Browse page"
 msgstr ""
 
 #: common/tracker/actions/admin-ind.php:160
@@ -7170,14 +7172,6 @@ msgid ""
 msgstr ""
 "<strong> Nome:</strong> (esempio: verbali, risultati di test, documenti, "
 "etc.)"
-
-#: common/tracker/views/form-updatetracker.php:75
-msgid "Free form text for the “Submit New” page"
-msgstr ""
-
-#: common/tracker/views/form-updatetracker.php:78
-msgid "Free form text for the Browse page"
-msgstr ""
 
 #: common/tracker/views/form-workflow.php:30
 msgid ""

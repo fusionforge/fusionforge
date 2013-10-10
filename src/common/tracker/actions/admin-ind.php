@@ -151,10 +151,10 @@ if (forge_check_perm ('tracker_admin', $group->getID())) { ?>
 	<strong><?php echo _('Days till pending tracker items time out') ?>:</strong><br />
 	<input type="text" name="status_timeout" value="14" /></p>
 	<p>
-	<strong><?php echo _('Free form text for the "submit new item" page') ?>:</strong><br />
+	<strong><?php echo _('Free form text for the “Submit New” page') ?>:</strong><br />
 	<textarea name="submit_instructions" rows="10" cols="55"></textarea></p>
 	<p>
-	<strong><?php echo _('Free form text for the "browse items" page') ?>:</strong><br />
+	<strong><?php echo _('Free form text for the Browse page') ?>:</strong><br />
 	<textarea name="browse_instructions" rows="10" cols="55"></textarea></p>
 	<p>
 	<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>

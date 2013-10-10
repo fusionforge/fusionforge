@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:49+0200\n"
+"POT-Creation-Date: 2013-10-10 15:55+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -5074,13 +5074,17 @@ msgid "Days till pending tracker items time out"
 msgstr "Период действия запроса трекера до истечения"
 
 #: common/tracker/actions/admin-ind.php:154
-msgid "Free form text for the \"submit new item\" page"
+#: common/tracker/views/form-updatetracker.php:75
+#, fuzzy
+msgid "Free form text for the “Submit New” page"
 msgstr ""
 "В свободной форме изложите описание бага на странице \"рассмотреть новую "
 "деталь\""
 
 #: common/tracker/actions/admin-ind.php:157
-msgid "Free form text for the \"browse items\" page"
+#: common/tracker/views/form-updatetracker.php:78
+#, fuzzy
+msgid "Free form text for the Browse page"
 msgstr ""
 "В свободной форме изложите описание бага на странице \"навигация среди "
 "деталей\""
@@ -7164,20 +7168,6 @@ msgid ""
 msgstr ""
 "<strong>Название:</strong> (к примеру: результат теста, время случая, часть "
 "документа)"
-
-#: common/tracker/views/form-updatetracker.php:75
-#, fuzzy
-msgid "Free form text for the “Submit New” page"
-msgstr ""
-"В свободной форме изложите описание бага на странице \"рассмотреть новую "
-"деталь\""
-
-#: common/tracker/views/form-updatetracker.php:78
-#, fuzzy
-msgid "Free form text for the Browse page"
-msgstr ""
-"В свободной форме изложите описание бага на странице \"навигация среди "
-"деталей\""
 
 #: common/tracker/views/form-workflow.php:30
 msgid ""
@@ -23684,6 +23674,16 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#~ msgid "Free form text for the \"submit new item\" page"
+#~ msgstr ""
+#~ "В свободной форме изложите описание бага на странице \"рассмотреть новую "
+#~ "деталь\""
+
+#~ msgid "Free form text for the \"browse items\" page"
+#~ msgstr ""
+#~ "В свободной форме изложите описание бага на странице \"навигация среди "
+#~ "деталей\""
 
 #, fuzzy
 #~ msgid "Error getting forum"
