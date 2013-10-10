@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 10:12+0200\n"
+"POT-Creation-Date: 2013-10-10 10:21+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -485,7 +485,10 @@ msgstr "Projecte"
 #: plugins/mantisbt/action/addNote.php:59
 #: plugins/mantisbt/action/addVersion.php:67
 #: plugins/mantisbt/action/deleteAttachment.php:38
+#: plugins/mantisbt/action/deleteCategory.php:37
 #: plugins/mantisbt/action/deleteNote.php:36
+#: plugins/mantisbt/action/deleteVersion.php:41
+#: plugins/mantisbt/action/renameCategory.php:44
 #: plugins/mantisbt/action/updateIssue.php:179
 #: plugins/mantisbt/action/updateNote.php:37
 #: plugins/mantisbt/action/updateNote.php:61
@@ -493,6 +496,8 @@ msgstr "Projecte"
 #: plugins/mantisbt/controler/filter.php:122
 #: plugins/mantisbt/controler/filter.php:138
 #: plugins/mantisbt/view/addAttachment.php:32
+#: plugins/mantisbt/view/editIssue.php:84
+#: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
 #: plugins/oauthconsumer/www/get_access_token.php:134
 #: plugins/oauthconsumer/www/get_access_token.php:135
 #: plugins/projectlabels/www/index.php:172
@@ -2988,6 +2993,7 @@ msgstr "Arbre de projectes"
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:85
 #: plugins/mantisbt/view/admin/editVersion.php:61
 #: plugins/mantisbt/view/admin/viewVersion.php:49
+#: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
 #: www/snippet/addversion.php:94 www/snippet/addversion.php:217
 #: www/snippet/package.php:169 www/snippet/submit.php:136
 msgid "Version"
@@ -10053,7 +10059,10 @@ msgstr ""
 #: plugins/mantisbt/action/addNote.php:59
 #: plugins/mantisbt/action/addVersion.php:67
 #: plugins/mantisbt/action/deleteAttachment.php:38
+#: plugins/mantisbt/action/deleteCategory.php:37
 #: plugins/mantisbt/action/deleteNote.php:36
+#: plugins/mantisbt/action/deleteVersion.php:41
+#: plugins/mantisbt/action/renameCategory.php:44
 #: plugins/mantisbt/action/updateIssue.php:179
 #: plugins/mantisbt/action/updateNote.php:37
 #: plugins/mantisbt/action/updateNote.php:61
@@ -11143,6 +11152,7 @@ msgid "Category added successfully"
 msgstr "Usuari afegit amb èxit"
 
 #: plugins/mantisbt/action/addCategory.php:45
+#: plugins/mantisbt/action/renameCategory.php:50
 #, fuzzy
 msgid "Missing category name"
 msgstr "Paràmetre perdut"
@@ -11170,13 +11180,6 @@ msgstr "Document tramès amb èxit"
 #, fuzzy
 msgid "Missing Attachment ID to delete."
 msgstr "Paràmetres faltants"
-
-#: plugins/mantisbt/action/deleteCategory.php:37
-#: plugins/mantisbt/action/deleteVersion.php:41
-#: plugins/mantisbt/action/renameCategory.php:44
-#, fuzzy
-msgid "Task failed:"
-msgstr "Detall de la tasca"
 
 #: plugins/mantisbt/action/deleteCategory.php:40
 #, fuzzy, php-format
@@ -11226,11 +11229,6 @@ msgstr "Paràmetre perdut"
 #, fuzzy
 msgid "Category renamed successfully."
 msgstr "Creat amb èxit"
-
-#: plugins/mantisbt/action/renameCategory.php:50
-#, fuzzy
-msgid "Missing category name."
-msgstr "Paràmetre perdut"
 
 #: plugins/mantisbt/action/updateConf.php:39
 #, fuzzy
@@ -11611,9 +11609,10 @@ msgid "No versions"
 msgstr "Versió"
 
 #: plugins/mantisbt/view/editIssue.php:84
+#: plugins/mantisbt/view/viewIssue.php:130
 #, fuzzy
-msgid "Edit Ticket: "
-msgstr "Edita Rol"
+msgid "Edit ticket"
+msgstr "Edita un grup"
 
 #: plugins/mantisbt/view/editIssue.php:91
 #: plugins/mantisbt/view/viewIssue.php:60
@@ -11699,11 +11698,6 @@ msgstr ""
 msgid "Display filter rules"
 msgstr ""
 
-#: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
-#: www/new/index.php:99
-msgid "Version:"
-msgstr "Versió:"
-
 #: plugins/mantisbt/view/roadmap.php:105 plugins/mantisbt/view/roadmap.php:154
 msgid "no-handler"
 msgstr ""
@@ -11730,11 +11724,6 @@ msgstr ""
 #: plugins/mantisbt/view/viewIssue.php:54
 msgid "Ticket"
 msgstr ""
-
-#: plugins/mantisbt/view/viewIssue.php:130
-#, fuzzy
-msgid "Edit ticket"
-msgstr "Edita un grup"
 
 #: plugins/mantisbt/view/viewIssues.php:68
 #, fuzzy
@@ -18806,6 +18795,10 @@ msgstr "Publicat per:"
 msgid "Module:"
 msgstr "Mòdul:"
 
+#: www/new/index.php:99
+msgid "Version:"
+msgstr "Versió:"
+
 #: www/new/index.php:109
 msgid "This project has not submitted a description"
 msgstr "Aquest projecte no ha enviat una subscripció"
@@ -23373,6 +23366,18 @@ msgstr "Nom d'usuari"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
+
+#, fuzzy
+#~ msgid "Edit Ticket: "
+#~ msgstr "Edita Rol"
+
+#, fuzzy
+#~ msgid "Task failed:"
+#~ msgstr "Detall de la tasca"
+
+#, fuzzy
+#~ msgid "Missing category name."
+#~ msgstr "Paràmetre perdut"
 
 #, fuzzy
 #~ msgid "External subprojects Admin"

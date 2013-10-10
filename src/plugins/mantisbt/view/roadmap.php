@@ -97,7 +97,7 @@ if (!isset($errorPage)) {
 			if ( $version->released ) {
 				$typeVersion = _('Release');
 			}
-			echo	_('Version:').' '.$version->name.' (<i>'.strftime("%d/%m/%Y",strtotime($version->date_order)).'</i> '.$typeVersion.') - <i>'.count($idsBug).' ticket(s)</i>';
+			echo _('Version')._(': ').$version->name.' (<i>'.strftime("%d/%m/%Y",strtotime($version->date_order)).'</i> '.$typeVersion.') - <i>'.count($idsBug).' ticket(s)</i>';
 			echo	'<ul>';
 			foreach ( $idsBug as $key => $idBug ) {
 				$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));
@@ -146,7 +146,7 @@ if (!isset($errorPage)) {
 								if ( $childprintversion->released == 1 ) {
 									$typeVersion = _('Release');
 								}
-								echo	_('Version:').' '.$childprintversion->name.' (<i>'.strftime("%d/%m/%Y",strtotime($childprintversion->date_order)).'</i> '.$typeVersion.') - <i>'.count($idsBug).'</i>';
+								echo _('Version')._(': ').$childprintversion->name.' (<i>'.strftime("%d/%m/%Y",strtotime($childprintversion->date_order)).'</i> '.$typeVersion.') - <i>'.count($idsBug).'</i>';
 								echo	'<ul>';
 								foreach ( $idsBug as $key => $idBug ) {
 									$defect = $clientSOAP->__soapCall('mc_issue_get', array("username" => $username, "password" => $password, "issue_id" => $idBug));

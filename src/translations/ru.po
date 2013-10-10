@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 10:12+0200\n"
+"POT-Creation-Date: 2013-10-10 10:21+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -488,7 +488,10 @@ msgstr "Проект"
 #: plugins/mantisbt/action/addNote.php:59
 #: plugins/mantisbt/action/addVersion.php:67
 #: plugins/mantisbt/action/deleteAttachment.php:38
+#: plugins/mantisbt/action/deleteCategory.php:37
 #: plugins/mantisbt/action/deleteNote.php:36
+#: plugins/mantisbt/action/deleteVersion.php:41
+#: plugins/mantisbt/action/renameCategory.php:44
 #: plugins/mantisbt/action/updateIssue.php:179
 #: plugins/mantisbt/action/updateNote.php:37
 #: plugins/mantisbt/action/updateNote.php:61
@@ -496,6 +499,8 @@ msgstr "Проект"
 #: plugins/mantisbt/controler/filter.php:122
 #: plugins/mantisbt/controler/filter.php:138
 #: plugins/mantisbt/view/addAttachment.php:32
+#: plugins/mantisbt/view/editIssue.php:84
+#: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
 #: plugins/oauthconsumer/www/get_access_token.php:134
 #: plugins/oauthconsumer/www/get_access_token.php:135
 #: plugins/projectlabels/www/index.php:172
@@ -2991,6 +2996,7 @@ msgstr "Карта категорий хранилища"
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:85
 #: plugins/mantisbt/view/admin/editVersion.php:61
 #: plugins/mantisbt/view/admin/viewVersion.php:49
+#: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
 #: www/snippet/addversion.php:94 www/snippet/addversion.php:217
 #: www/snippet/package.php:169 www/snippet/submit.php:136
 msgid "Version"
@@ -10116,7 +10122,10 @@ msgstr "Задача успешно удалена"
 #: plugins/mantisbt/action/addNote.php:59
 #: plugins/mantisbt/action/addVersion.php:67
 #: plugins/mantisbt/action/deleteAttachment.php:38
+#: plugins/mantisbt/action/deleteCategory.php:37
 #: plugins/mantisbt/action/deleteNote.php:36
+#: plugins/mantisbt/action/deleteVersion.php:41
+#: plugins/mantisbt/action/renameCategory.php:44
 #: plugins/mantisbt/action/updateIssue.php:179
 #: plugins/mantisbt/action/updateNote.php:37
 #: plugins/mantisbt/action/updateNote.php:61
@@ -11211,6 +11220,7 @@ msgid "Category added successfully"
 msgstr "Вы добавили участника в проект"
 
 #: plugins/mantisbt/action/addCategory.php:45
+#: plugins/mantisbt/action/renameCategory.php:50
 #, fuzzy
 msgid "Missing category name"
 msgstr "Неуказан параметр"
@@ -11238,13 +11248,6 @@ msgstr "Образец удален"
 #, fuzzy
 msgid "Missing Attachment ID to delete."
 msgstr "Прикрепленная часть удалена"
-
-#: plugins/mantisbt/action/deleteCategory.php:37
-#: plugins/mantisbt/action/deleteVersion.php:41
-#: plugins/mantisbt/action/renameCategory.php:44
-#, fuzzy
-msgid "Task failed:"
-msgstr "Детали задачи"
 
 #: plugins/mantisbt/action/deleteCategory.php:40
 #, fuzzy, php-format
@@ -11294,11 +11297,6 @@ msgstr "Неуказан параметр"
 #, fuzzy
 msgid "Category renamed successfully."
 msgstr "Создание завершено"
-
-#: plugins/mantisbt/action/renameCategory.php:50
-#, fuzzy
-msgid "Missing category name."
-msgstr "Неуказан параметр"
 
 #: plugins/mantisbt/action/updateConf.php:39
 #, fuzzy
@@ -11679,9 +11677,10 @@ msgid "No versions"
 msgstr "Версия"
 
 #: plugins/mantisbt/view/editIssue.php:84
+#: plugins/mantisbt/view/viewIssue.php:130
 #, fuzzy
-msgid "Edit Ticket: "
-msgstr "Изменить роль"
+msgid "Edit ticket"
+msgstr "Ftp директория проекта"
 
 #: plugins/mantisbt/view/editIssue.php:91
 #: plugins/mantisbt/view/viewIssue.php:60
@@ -11768,11 +11767,6 @@ msgstr ""
 msgid "Display filter rules"
 msgstr ""
 
-#: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
-#: www/new/index.php:99
-msgid "Version:"
-msgstr "Версия:"
-
 #: plugins/mantisbt/view/roadmap.php:105 plugins/mantisbt/view/roadmap.php:154
 msgid "no-handler"
 msgstr ""
@@ -11799,11 +11793,6 @@ msgstr ""
 #: plugins/mantisbt/view/viewIssue.php:54
 msgid "Ticket"
 msgstr ""
-
-#: plugins/mantisbt/view/viewIssue.php:130
-#, fuzzy
-msgid "Edit ticket"
-msgstr "Ftp директория проекта"
 
 #: plugins/mantisbt/view/viewIssues.php:68
 #, fuzzy
@@ -19111,6 +19100,10 @@ msgstr "Автор релиза:"
 msgid "Module:"
 msgstr "Модуль:"
 
+#: www/new/index.php:99
+msgid "Version:"
+msgstr "Версия:"
+
 #: www/new/index.php:109
 msgid "This project has not submitted a description"
 msgstr "У проекта отсутствует описание"
@@ -23714,6 +23707,18 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "Edit Ticket: "
+#~ msgstr "Изменить роль"
+
+#, fuzzy
+#~ msgid "Task failed:"
+#~ msgstr "Детали задачи"
+
+#, fuzzy
+#~ msgid "Missing category name."
+#~ msgstr "Неуказан параметр"
 
 #, fuzzy
 #~ msgid "External subprojects Admin"

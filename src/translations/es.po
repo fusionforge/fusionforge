@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 10:12+0200\n"
+"POT-Creation-Date: 2013-10-10 10:21+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -465,7 +465,10 @@ msgstr "Proyecto"
 #: plugins/mantisbt/action/addNote.php:59
 #: plugins/mantisbt/action/addVersion.php:67
 #: plugins/mantisbt/action/deleteAttachment.php:38
+#: plugins/mantisbt/action/deleteCategory.php:37
 #: plugins/mantisbt/action/deleteNote.php:36
+#: plugins/mantisbt/action/deleteVersion.php:41
+#: plugins/mantisbt/action/renameCategory.php:44
 #: plugins/mantisbt/action/updateIssue.php:179
 #: plugins/mantisbt/action/updateNote.php:37
 #: plugins/mantisbt/action/updateNote.php:61
@@ -473,6 +476,8 @@ msgstr "Proyecto"
 #: plugins/mantisbt/controler/filter.php:122
 #: plugins/mantisbt/controler/filter.php:138
 #: plugins/mantisbt/view/addAttachment.php:32
+#: plugins/mantisbt/view/editIssue.php:84
+#: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
 #: plugins/oauthconsumer/www/get_access_token.php:134
 #: plugins/oauthconsumer/www/get_access_token.php:135
 #: plugins/projectlabels/www/index.php:172
@@ -2926,6 +2931,7 @@ msgstr "Actualizar Software Forja"
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:85
 #: plugins/mantisbt/view/admin/editVersion.php:61
 #: plugins/mantisbt/view/admin/viewVersion.php:49
+#: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
 #: www/snippet/addversion.php:94 www/snippet/addversion.php:217
 #: www/snippet/package.php:169 www/snippet/submit.php:136
 msgid "Version"
@@ -9784,7 +9790,10 @@ msgstr "Tarea realizada."
 #: plugins/mantisbt/action/addNote.php:59
 #: plugins/mantisbt/action/addVersion.php:67
 #: plugins/mantisbt/action/deleteAttachment.php:38
+#: plugins/mantisbt/action/deleteCategory.php:37
 #: plugins/mantisbt/action/deleteNote.php:36
+#: plugins/mantisbt/action/deleteVersion.php:41
+#: plugins/mantisbt/action/renameCategory.php:44
 #: plugins/mantisbt/action/updateIssue.php:179
 #: plugins/mantisbt/action/updateNote.php:37
 #: plugins/mantisbt/action/updateNote.php:61
@@ -10863,6 +10872,7 @@ msgid "Category added successfully"
 msgstr "Categoria agregada correctamente"
 
 #: plugins/mantisbt/action/addCategory.php:45
+#: plugins/mantisbt/action/renameCategory.php:50
 msgid "Missing category name"
 msgstr "Olvidó nombre de categoria"
 
@@ -10885,12 +10895,6 @@ msgstr "Adjuntos borrados correctamente."
 #: plugins/mantisbt/action/deleteAttachment.php:43
 msgid "Missing Attachment ID to delete."
 msgstr "ID Adjunto a borra no localizado."
-
-#: plugins/mantisbt/action/deleteCategory.php:37
-#: plugins/mantisbt/action/deleteVersion.php:41
-#: plugins/mantisbt/action/renameCategory.php:44
-msgid "Task failed:"
-msgstr "Falló Tarea:"
 
 #: plugins/mantisbt/action/deleteCategory.php:40
 #, php-format
@@ -10932,10 +10936,6 @@ msgstr "No acción, mismo nombre de categoria."
 #: plugins/mantisbt/action/renameCategory.php:47
 msgid "Category renamed successfully."
 msgstr "Categoria renombrada correctamente."
-
-#: plugins/mantisbt/action/renameCategory.php:50
-msgid "Missing category name."
-msgstr "Nombre de Categoria no localizado."
 
 #: plugins/mantisbt/action/updateConf.php:39
 msgid "MantisBT configuration successfully updated."
@@ -11273,8 +11273,9 @@ msgid "No versions"
 msgstr "No hay versiones"
 
 #: plugins/mantisbt/view/editIssue.php:84
-msgid "Edit Ticket: "
-msgstr "Editar Ticket: "
+#: plugins/mantisbt/view/viewIssue.php:130
+msgid "Edit ticket"
+msgstr "Editar ticket"
 
 #: plugins/mantisbt/view/editIssue.php:91
 #: plugins/mantisbt/view/viewIssue.php:60
@@ -11360,11 +11361,6 @@ msgstr "Ir al ticket:"
 msgid "Display filter rules"
 msgstr "Mostrar reglas de filtrado"
 
-#: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
-#: www/new/index.php:99
-msgid "Version:"
-msgstr "Versión:"
-
 #: plugins/mantisbt/view/roadmap.php:105 plugins/mantisbt/view/roadmap.php:154
 msgid "no-handler"
 msgstr ""
@@ -11389,10 +11385,6 @@ msgstr "Oops: incorrecto id de petición"
 #: plugins/mantisbt/view/viewIssue.php:54
 msgid "Ticket"
 msgstr "Ticket"
-
-#: plugins/mantisbt/view/viewIssue.php:130
-msgid "Edit ticket"
-msgstr "Editar ticket"
 
 #: plugins/mantisbt/view/viewIssues.php:68
 msgid "No data to retrieve"
@@ -18409,6 +18401,10 @@ msgstr "Publicado por:"
 msgid "Module:"
 msgstr "Módulo:"
 
+#: www/new/index.php:99
+msgid "Version:"
+msgstr "Versión:"
+
 #: www/new/index.php:109
 msgid "This project has not submitted a description"
 msgstr "Este proyecto no ha publicado una descripción"
@@ -22950,6 +22946,15 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Edit Ticket: "
+#~ msgstr "Editar Ticket: "
+
+#~ msgid "Task failed:"
+#~ msgstr "Falló Tarea:"
+
+#~ msgid "Missing category name."
+#~ msgstr "Nombre de Categoria no localizado."
 
 #~ msgid "External subprojects Admin"
 #~ msgstr "Administración subproyectos externos"

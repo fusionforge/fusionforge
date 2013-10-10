@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 10:12+0200\n"
+"POT-Creation-Date: 2013-10-10 10:21+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -486,7 +486,10 @@ msgstr "Projekt"
 #: plugins/mantisbt/action/addNote.php:59
 #: plugins/mantisbt/action/addVersion.php:67
 #: plugins/mantisbt/action/deleteAttachment.php:38
+#: plugins/mantisbt/action/deleteCategory.php:37
 #: plugins/mantisbt/action/deleteNote.php:36
+#: plugins/mantisbt/action/deleteVersion.php:41
+#: plugins/mantisbt/action/renameCategory.php:44
 #: plugins/mantisbt/action/updateIssue.php:179
 #: plugins/mantisbt/action/updateNote.php:37
 #: plugins/mantisbt/action/updateNote.php:61
@@ -494,6 +497,8 @@ msgstr "Projekt"
 #: plugins/mantisbt/controler/filter.php:122
 #: plugins/mantisbt/controler/filter.php:138
 #: plugins/mantisbt/view/addAttachment.php:32
+#: plugins/mantisbt/view/editIssue.php:84
+#: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
 #: plugins/oauthconsumer/www/get_access_token.php:134
 #: plugins/oauthconsumer/www/get_access_token.php:135
 #: plugins/projectlabels/www/index.php:172
@@ -3024,6 +3029,7 @@ msgstr "Softwarefundkarte"
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:85
 #: plugins/mantisbt/view/admin/editVersion.php:61
 #: plugins/mantisbt/view/admin/viewVersion.php:49
+#: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
 #: www/snippet/addversion.php:94 www/snippet/addversion.php:217
 #: www/snippet/package.php:169 www/snippet/submit.php:136
 msgid "Version"
@@ -10082,7 +10088,10 @@ msgstr "Auftrag erfolgreich gelöscht"
 #: plugins/mantisbt/action/addNote.php:59
 #: plugins/mantisbt/action/addVersion.php:67
 #: plugins/mantisbt/action/deleteAttachment.php:38
+#: plugins/mantisbt/action/deleteCategory.php:37
 #: plugins/mantisbt/action/deleteNote.php:36
+#: plugins/mantisbt/action/deleteVersion.php:41
+#: plugins/mantisbt/action/renameCategory.php:44
 #: plugins/mantisbt/action/updateIssue.php:179
 #: plugins/mantisbt/action/updateNote.php:37
 #: plugins/mantisbt/action/updateNote.php:61
@@ -11187,6 +11196,7 @@ msgid "Category added successfully"
 msgstr "Benutzer erfolgreich hinzugefügt"
 
 #: plugins/mantisbt/action/addCategory.php:45
+#: plugins/mantisbt/action/renameCategory.php:50
 #, fuzzy
 msgid "Missing category name"
 msgstr "Fehlende Parameter"
@@ -11214,13 +11224,6 @@ msgstr "Produkt erfolgreich gelöscht"
 #, fuzzy
 msgid "Missing Attachment ID to delete."
 msgstr "Anhang gelöscht"
-
-#: plugins/mantisbt/action/deleteCategory.php:37
-#: plugins/mantisbt/action/deleteVersion.php:41
-#: plugins/mantisbt/action/renameCategory.php:44
-#, fuzzy
-msgid "Task failed:"
-msgstr "Auftragsdetails"
 
 #: plugins/mantisbt/action/deleteCategory.php:40
 #, fuzzy, php-format
@@ -11270,11 +11273,6 @@ msgstr "Fehlende Parameter"
 #, fuzzy
 msgid "Category renamed successfully."
 msgstr "Erfolgreich erstellt"
-
-#: plugins/mantisbt/action/renameCategory.php:50
-#, fuzzy
-msgid "Missing category name."
-msgstr "Fehlende Parameter"
 
 #: plugins/mantisbt/action/updateConf.php:39
 #, fuzzy
@@ -11653,9 +11651,10 @@ msgid "No versions"
 msgstr "Version"
 
 #: plugins/mantisbt/view/editIssue.php:84
+#: plugins/mantisbt/view/viewIssue.php:130
 #, fuzzy
-msgid "Edit Ticket: "
-msgstr "Eine Rolle bearbeiten"
+msgid "Edit ticket"
+msgstr "FTP Projektverzeichnis"
 
 #: plugins/mantisbt/view/editIssue.php:91
 #: plugins/mantisbt/view/viewIssue.php:60
@@ -11742,11 +11741,6 @@ msgstr ""
 msgid "Display filter rules"
 msgstr ""
 
-#: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
-#: www/new/index.php:99
-msgid "Version:"
-msgstr "Version:"
-
 #: plugins/mantisbt/view/roadmap.php:105 plugins/mantisbt/view/roadmap.php:154
 msgid "no-handler"
 msgstr ""
@@ -11773,11 +11767,6 @@ msgstr ""
 #: plugins/mantisbt/view/viewIssue.php:54
 msgid "Ticket"
 msgstr ""
-
-#: plugins/mantisbt/view/viewIssue.php:130
-#, fuzzy
-msgid "Edit ticket"
-msgstr "FTP Projektverzeichnis"
 
 #: plugins/mantisbt/view/viewIssues.php:68
 #, fuzzy
@@ -19025,6 +19014,10 @@ msgstr "Herausgegeben von:"
 msgid "Module:"
 msgstr "Modul:"
 
+#: www/new/index.php:99
+msgid "Version:"
+msgstr "Version:"
+
 #: www/new/index.php:109
 msgid "This project has not submitted a description"
 msgstr "Für dieses Projekt gibt es keine Beschreibung"
@@ -23642,6 +23635,18 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "Edit Ticket: "
+#~ msgstr "Eine Rolle bearbeiten"
+
+#, fuzzy
+#~ msgid "Task failed:"
+#~ msgstr "Auftragsdetails"
+
+#, fuzzy
+#~ msgid "Missing category name."
+#~ msgstr "Fehlende Parameter"
 
 #, fuzzy
 #~ msgid "External subprojects Admin"

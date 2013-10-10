@@ -81,7 +81,7 @@ if (!isset($errorPage)){
 	global $target_value;
 	global $additional_value;
 
-	$boxTitle = _('Edit Ticket: ').sprintf($format,$defect->id);
+	$boxTitle = _('Edit ticket')._(': ').sprintf($format,$defect->id);
 	echo 	'<form name="issue" Method="POST" Action="?type='.$type.'&group_id='.$group_id.'&pluginname='.$mantisbt->name.'&idBug='.$defect->id.'&action=updateIssue&view=viewIssue">';
 	echo	'<table>';
 	echo		'<tr>';

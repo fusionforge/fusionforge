@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 10:12+0200\n"
+"POT-Creation-Date: 2013-10-10 10:21+0200\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -479,7 +479,10 @@ msgstr ""
 #: plugins/mantisbt/action/addNote.php:59
 #: plugins/mantisbt/action/addVersion.php:67
 #: plugins/mantisbt/action/deleteAttachment.php:38
+#: plugins/mantisbt/action/deleteCategory.php:37
 #: plugins/mantisbt/action/deleteNote.php:36
+#: plugins/mantisbt/action/deleteVersion.php:41
+#: plugins/mantisbt/action/renameCategory.php:44
 #: plugins/mantisbt/action/updateIssue.php:179
 #: plugins/mantisbt/action/updateNote.php:37
 #: plugins/mantisbt/action/updateNote.php:61
@@ -487,6 +490,8 @@ msgstr ""
 #: plugins/mantisbt/controler/filter.php:122
 #: plugins/mantisbt/controler/filter.php:138
 #: plugins/mantisbt/view/addAttachment.php:32
+#: plugins/mantisbt/view/editIssue.php:84
+#: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
 #: plugins/oauthconsumer/www/get_access_token.php:134
 #: plugins/oauthconsumer/www/get_access_token.php:135
 #: plugins/projectlabels/www/index.php:172
@@ -2919,6 +2924,7 @@ msgstr ""
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:85
 #: plugins/mantisbt/view/admin/editVersion.php:61
 #: plugins/mantisbt/view/admin/viewVersion.php:49
+#: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
 #: www/snippet/addversion.php:94 www/snippet/addversion.php:217
 #: www/snippet/package.php:169 www/snippet/submit.php:136
 msgid "Version"
@@ -9535,7 +9541,10 @@ msgstr ""
 #: plugins/mantisbt/action/addNote.php:59
 #: plugins/mantisbt/action/addVersion.php:67
 #: plugins/mantisbt/action/deleteAttachment.php:38
+#: plugins/mantisbt/action/deleteCategory.php:37
 #: plugins/mantisbt/action/deleteNote.php:36
+#: plugins/mantisbt/action/deleteVersion.php:41
+#: plugins/mantisbt/action/renameCategory.php:44
 #: plugins/mantisbt/action/updateIssue.php:179
 #: plugins/mantisbt/action/updateNote.php:37
 #: plugins/mantisbt/action/updateNote.php:61
@@ -10539,6 +10548,7 @@ msgid "Category added successfully"
 msgstr "Grupa dokumentów: Nazwa jest wymagana"
 
 #: plugins/mantisbt/action/addCategory.php:45
+#: plugins/mantisbt/action/renameCategory.php:50
 msgid "Missing category name"
 msgstr ""
 
@@ -10562,12 +10572,6 @@ msgstr "Grupa dokumentów: Nazwa jest wymagana"
 
 #: plugins/mantisbt/action/deleteAttachment.php:43
 msgid "Missing Attachment ID to delete."
-msgstr ""
-
-#: plugins/mantisbt/action/deleteCategory.php:37
-#: plugins/mantisbt/action/deleteVersion.php:41
-#: plugins/mantisbt/action/renameCategory.php:44
-msgid "Task failed:"
 msgstr ""
 
 #: plugins/mantisbt/action/deleteCategory.php:40
@@ -10615,10 +10619,6 @@ msgstr ""
 #, fuzzy
 msgid "Category renamed successfully."
 msgstr "Grupa dokumentów: Nazwa jest wymagana"
-
-#: plugins/mantisbt/action/renameCategory.php:50
-msgid "Missing category name."
-msgstr ""
 
 #: plugins/mantisbt/action/updateConf.php:39
 msgid "MantisBT configuration successfully updated."
@@ -10963,8 +10963,9 @@ msgid "No versions"
 msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:84
+#: plugins/mantisbt/view/viewIssue.php:130
 #, fuzzy
-msgid "Edit Ticket: "
+msgid "Edit ticket"
 msgstr "Edytuj grupę"
 
 #: plugins/mantisbt/view/editIssue.php:91
@@ -11049,11 +11050,6 @@ msgstr ""
 msgid "Display filter rules"
 msgstr ""
 
-#: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
-#: www/new/index.php:99
-msgid "Version:"
-msgstr ""
-
 #: plugins/mantisbt/view/roadmap.php:105 plugins/mantisbt/view/roadmap.php:154
 msgid "no-handler"
 msgstr ""
@@ -11078,11 +11074,6 @@ msgstr ""
 #: plugins/mantisbt/view/viewIssue.php:54
 msgid "Ticket"
 msgstr ""
-
-#: plugins/mantisbt/view/viewIssue.php:130
-#, fuzzy
-msgid "Edit ticket"
-msgstr "Edytuj grupę"
 
 #: plugins/mantisbt/view/viewIssues.php:68
 msgid "No data to retrieve"
@@ -17839,6 +17830,10 @@ msgstr ""
 msgid "Module:"
 msgstr ""
 
+#: www/new/index.php:99
+msgid "Version:"
+msgstr ""
+
 #: www/new/index.php:109
 msgid "This project has not submitted a description"
 msgstr ""
@@ -22071,6 +22066,10 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Edit Ticket: "
+#~ msgstr "Edytuj grupę"
 
 #, fuzzy
 #~ msgid "Target date"
