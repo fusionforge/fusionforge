@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 10:40+0200\n"
+"POT-Creation-Date: 2013-10-10 15:19+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -1956,7 +1956,7 @@ msgstr "Datenbank Abfragefehler"
 msgid "Your search did not match any documents."
 msgstr "Ihre Suchanfrage ergab keine Dokumente"
 
-#: common/docman/views/search.php:154
+#: common/docman/views/search.php:154 common/docman/views/tree.php:63
 #, fuzzy
 msgid "Browse document manager for this project."
 msgstr "Sie sind bereits Mitglied dieses Projekts. "
@@ -1970,11 +1970,6 @@ msgstr ""
 #, fuzzy
 msgid "Child project"
 msgstr "Kindprojekt"
-
-#: common/docman/views/tree.php:63
-#, fuzzy
-msgid "Browse document manager in this project"
-msgstr "Sie sind bereits Mitglied dieses Projekts. "
 
 #: common/forum/AttachManager.class.php:144 www/forum/admin/index.php:325
 #: www/forum/admin/index.php:331 www/forum/admin/index.php:396
@@ -4495,7 +4490,10 @@ msgstr "Bytes"
 msgid "kB"
 msgstr ""
 
-#: common/include/utils.php:898 plugins/quota_management/www/quota.php:248
+#: common/include/utils.php:898
+#: plugins/quota_management/www/quota_admin.php:120
+#: plugins/quota_management/www/quota_admin.php:127
+#: plugins/quota_management/www/quota.php:248
 #: plugins/quota_management/www/quota.php:252
 #: plugins/quota_management/www/quota.php:256
 #: plugins/quota_management/www/quota.php:260
@@ -13301,11 +13299,6 @@ msgstr ""
 #: plugins/quota_management/www/quota.php:201
 msgid "disk quota hard"
 msgstr ""
-
-#: plugins/quota_management/www/quota_admin.php:120
-#: plugins/quota_management/www/quota_admin.php:127
-msgid "Mb"
-msgstr "MB"
 
 #: plugins/quota_management/www/quota.php:157
 msgid "Projects ressources use"
@@ -23631,6 +23624,13 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "Browse document manager in this project"
+#~ msgstr "Sie sind bereits Mitglied dieses Projekts. "
+
+#~ msgid "Mb"
+#~ msgstr "MB"
 
 #, fuzzy
 #~ msgid "Project summary"

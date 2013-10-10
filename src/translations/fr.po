@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 10:40+0200\n"
+"POT-Creation-Date: 2013-10-10 15:19+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1847,7 +1847,7 @@ msgstr "Erreur lors de la requête en base de données"
 msgid "Your search did not match any documents."
 msgstr "Votre recherche n'a renvoyé aucun document."
 
-#: common/docman/views/search.php:154
+#: common/docman/views/search.php:154 common/docman/views/tree.php:63
 msgid "Browse document manager for this project."
 msgstr "Naviguer dans les documents de ce projet."
 
@@ -1859,10 +1859,6 @@ msgstr "Votre recherche est vide."
 #: plugins/projects-hierarchy/view/home_project_link.php:47
 msgid "Child project"
 msgstr "Projet fils"
-
-#: common/docman/views/tree.php:63
-msgid "Browse document manager in this project"
-msgstr "Naviguer dans le gestionnaire de documents de ce projet"
 
 #: common/forum/AttachManager.class.php:144 www/forum/admin/index.php:325
 #: www/forum/admin/index.php:331 www/forum/admin/index.php:396
@@ -4270,7 +4266,10 @@ msgstr "octets"
 msgid "kB"
 msgstr "ko"
 
-#: common/include/utils.php:898 plugins/quota_management/www/quota.php:248
+#: common/include/utils.php:898
+#: plugins/quota_management/www/quota_admin.php:120
+#: plugins/quota_management/www/quota_admin.php:127
+#: plugins/quota_management/www/quota.php:248
 #: plugins/quota_management/www/quota.php:252
 #: plugins/quota_management/www/quota.php:256
 #: plugins/quota_management/www/quota.php:260
@@ -12699,11 +12698,6 @@ msgstr "limite d'avertissement du disque"
 #: plugins/quota_management/www/quota.php:201
 msgid "disk quota hard"
 msgstr "limite de blocage du disque"
-
-#: plugins/quota_management/www/quota_admin.php:120
-#: plugins/quota_management/www/quota_admin.php:127
-msgid "Mb"
-msgstr "Mo"
 
 #: plugins/quota_management/www/quota.php:157
 msgid "Projects ressources use"
@@ -22826,6 +22820,12 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Browse document manager in this project"
+#~ msgstr "Naviguer dans le gestionnaire de documents de ce projet"
+
+#~ msgid "Mb"
+#~ msgstr "Mo"
 
 #, fuzzy
 #~ msgid "Project summary"

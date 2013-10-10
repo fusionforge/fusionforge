@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 10:40+0200\n"
+"POT-Creation-Date: 2013-10-10 15:19+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -1885,7 +1885,7 @@ msgstr "Error en la consulta a la base de datos"
 msgid "Your search did not match any documents."
 msgstr "Su busqueda no coincide con ningún documento."
 
-#: common/docman/views/search.php:154
+#: common/docman/views/search.php:154 common/docman/views/tree.php:63
 #, fuzzy
 msgid "Browse document manager for this project."
 msgstr "Navegar Gestor de documentos en este proyecto"
@@ -1898,10 +1898,6 @@ msgstr "Tu busqueda esta vacia."
 #: plugins/projects-hierarchy/view/home_project_link.php:47
 msgid "Child project"
 msgstr "Proyecto Hijo"
-
-#: common/docman/views/tree.php:63
-msgid "Browse document manager in this project"
-msgstr "Navegar Gestor de documentos en este proyecto"
 
 #: common/forum/AttachManager.class.php:144 www/forum/admin/index.php:325
 #: www/forum/admin/index.php:331 www/forum/admin/index.php:396
@@ -4350,7 +4346,10 @@ msgstr "bytes"
 msgid "kB"
 msgstr "kB"
 
-#: common/include/utils.php:898 plugins/quota_management/www/quota.php:248
+#: common/include/utils.php:898
+#: plugins/quota_management/www/quota_admin.php:120
+#: plugins/quota_management/www/quota_admin.php:127
+#: plugins/quota_management/www/quota.php:248
 #: plugins/quota_management/www/quota.php:252
 #: plugins/quota_management/www/quota.php:256
 #: plugins/quota_management/www/quota.php:260
@@ -12832,11 +12831,6 @@ msgstr "espacio de disco minimo"
 #: plugins/quota_management/www/quota.php:201
 msgid "disk quota hard"
 msgstr "espacio de disco maximo"
-
-#: plugins/quota_management/www/quota_admin.php:120
-#: plugins/quota_management/www/quota_admin.php:127
-msgid "Mb"
-msgstr "Mb"
 
 #: plugins/quota_management/www/quota.php:157
 msgid "Projects ressources use"
@@ -22943,6 +22937,12 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Browse document manager in this project"
+#~ msgstr "Navegar Gestor de documentos en este proyecto"
+
+#~ msgid "Mb"
+#~ msgstr "Mb"
 
 #~ msgid "Project summary"
 #~ msgstr "Resumen Proyecto"

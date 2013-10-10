@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 10:40+0200\n"
+"POT-Creation-Date: 2013-10-10 15:19+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -1955,7 +1955,7 @@ msgstr "Houbo un erro coa consulta á base de datos"
 msgid "Your search did not match any documents."
 msgstr "A súa busca non coincide con ningún documento"
 
-#: common/docman/views/search.php:154
+#: common/docman/views/search.php:154 common/docman/views/tree.php:63
 #, fuzzy
 msgid "Browse document manager for this project."
 msgstr "Xa é membro deste proxecto"
@@ -1968,11 +1968,6 @@ msgstr ""
 #: plugins/projects-hierarchy/view/home_project_link.php:47
 msgid "Child project"
 msgstr "Proxecto fillo"
-
-#: common/docman/views/tree.php:63
-#, fuzzy
-msgid "Browse document manager in this project"
-msgstr "Xa é membro deste proxecto"
 
 #: common/forum/AttachManager.class.php:144 www/forum/admin/index.php:325
 #: www/forum/admin/index.php:331 www/forum/admin/index.php:396
@@ -4475,7 +4470,10 @@ msgstr "bytes"
 msgid "kB"
 msgstr ""
 
-#: common/include/utils.php:898 plugins/quota_management/www/quota.php:248
+#: common/include/utils.php:898
+#: plugins/quota_management/www/quota_admin.php:120
+#: plugins/quota_management/www/quota_admin.php:127
+#: plugins/quota_management/www/quota.php:248
 #: plugins/quota_management/www/quota.php:252
 #: plugins/quota_management/www/quota.php:256
 #: plugins/quota_management/www/quota.php:260
@@ -13292,11 +13290,6 @@ msgstr "Cota de disco soft "
 #: plugins/quota_management/www/quota.php:201
 msgid "disk quota hard"
 msgstr "Cota de disco hard"
-
-#: plugins/quota_management/www/quota_admin.php:120
-#: plugins/quota_management/www/quota_admin.php:127
-msgid "Mb"
-msgstr "Mb"
 
 #: plugins/quota_management/www/quota.php:157
 msgid "Projects ressources use"
@@ -23564,6 +23557,13 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Browse document manager in this project"
+#~ msgstr "Xa é membro deste proxecto"
+
+#~ msgid "Mb"
+#~ msgstr "Mb"
 
 #, fuzzy
 #~ msgid "Project summary"

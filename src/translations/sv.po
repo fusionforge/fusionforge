@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 10:40+0200\n"
+"POT-Creation-Date: 2013-10-10 15:19+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1941,7 +1941,7 @@ msgstr ""
 msgid "Your search did not match any documents."
 msgstr "Du bevakar inga forum"
 
-#: common/docman/views/search.php:154
+#: common/docman/views/search.php:154 common/docman/views/tree.php:63
 #, fuzzy
 msgid "Browse document manager for this project."
 msgstr "Du är inte medlem i några aktiva projekt"
@@ -1954,11 +1954,6 @@ msgstr ""
 #: plugins/projects-hierarchy/view/home_project_link.php:47
 msgid "Child project"
 msgstr ""
-
-#: common/docman/views/tree.php:63
-#, fuzzy
-msgid "Browse document manager in this project"
-msgstr "Du är inte medlem i några aktiva projekt"
 
 #: common/forum/AttachManager.class.php:144 www/forum/admin/index.php:325
 #: www/forum/admin/index.php:331 www/forum/admin/index.php:396
@@ -4456,7 +4451,10 @@ msgstr "Ja"
 msgid "kB"
 msgstr ""
 
-#: common/include/utils.php:898 plugins/quota_management/www/quota.php:248
+#: common/include/utils.php:898
+#: plugins/quota_management/www/quota_admin.php:120
+#: plugins/quota_management/www/quota_admin.php:127
+#: plugins/quota_management/www/quota.php:248
 #: plugins/quota_management/www/quota.php:252
 #: plugins/quota_management/www/quota.php:256
 #: plugins/quota_management/www/quota.php:260
@@ -13155,11 +13153,6 @@ msgstr ""
 #: plugins/quota_management/www/quota_admin.php:95
 #: plugins/quota_management/www/quota.php:201
 msgid "disk quota hard"
-msgstr ""
-
-#: plugins/quota_management/www/quota_admin.php:120
-#: plugins/quota_management/www/quota_admin.php:127
-msgid "Mb"
 msgstr ""
 
 #: plugins/quota_management/www/quota.php:157
@@ -23168,6 +23161,10 @@ msgstr "Användarenamn"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
+
+#, fuzzy
+#~ msgid "Browse document manager in this project"
+#~ msgstr "Du är inte medlem i några aktiva projekt"
 
 #, fuzzy
 #~ msgid "Project summary"
