@@ -246,7 +246,7 @@ class Plugin extends Error {
 		// This code creates the checkbox in the project edit public info page
 		// to activate/deactivate the plugin
 		$display = 1;
-		$title = _('current plugin status is:').' '.forge_get_config('plugin_status', $this->name);
+		$title = _('Current plugin status is').' '.forge_get_config('plugin_status', $this->name);
 		$imgStatus = 'plugin_status_valid.png';
 
 		$group = group_get_object($params['group']);
@@ -303,7 +303,7 @@ class Plugin extends Error {
 		// This code creates the checkbox in the user account maintenance page
 		// to activate/deactivate the plugin
 		$display = 1;
-		$title = _('current plugin status is:').' '.forge_get_config('plugin_status', $this->name);
+		$title = _('Current plugin status is').' '.forge_get_config('plugin_status', $this->name);
 		$imgStatus = 'plugin_status_valid.png';
 
 		$user = $params['user'];

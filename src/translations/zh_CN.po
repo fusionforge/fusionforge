@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:19+0200\n"
+"POT-Creation-Date: 2013-10-10 15:32+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3776,7 +3776,8 @@ msgstr ""
 "的写权限或手工创建。"
 
 #: common/include/Plugin.class.php:249 common/include/Plugin.class.php:306
-msgid "current plugin status is:"
+#: www/admin/pluginman.php:276
+msgid "Current plugin status is"
 msgstr ""
 
 #: common/include/Plugin.class.php:279 common/include/Plugin.class.php:326
@@ -15981,11 +15982,6 @@ msgstr "不活跃"
 #: www/admin/pluginman.php:257
 msgid "Activate"
 msgstr "启用"
-
-#: www/admin/pluginman.php:276
-#, fuzzy
-msgid "Current plugin status:"
-msgstr "版本"
 
 #: www/admin/responses_admin.php:32
 msgid "Site Admin: Edit Rejection Responses"

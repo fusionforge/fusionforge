@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:19+0200\n"
+"POT-Creation-Date: 2013-10-10 15:32+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -3654,8 +3654,9 @@ msgstr ""
 "gforge/plugins pour Apache, ou créer le lien manuellement."
 
 #: common/include/Plugin.class.php:249 common/include/Plugin.class.php:306
-msgid "current plugin status is:"
-msgstr "L'état actuel du plugin est :"
+#: www/admin/pluginman.php:276
+msgid "Current plugin status is"
+msgstr "L'état actuel du greffon est"
 
 #: common/include/Plugin.class.php:279 common/include/Plugin.class.php:326
 #, php-format
@@ -15558,10 +15559,6 @@ msgstr "Inactif"
 #: www/admin/pluginman.php:257
 msgid "Activate"
 msgstr "Activer"
-
-#: www/admin/pluginman.php:276
-msgid "Current plugin status:"
-msgstr "État actuel du greffon :"
 
 #: www/admin/responses_admin.php:32
 msgid "Site Admin: Edit Rejection Responses"

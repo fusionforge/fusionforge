@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:19+0200\n"
+"POT-Creation-Date: 2013-10-10 15:32+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -3710,13 +3710,14 @@ msgid ""
 "Config file could not be linked to etc/gforge/plugins/%s. Check the write "
 "permissions for apache in /etc/gforge/plugins or create the link manually."
 msgstr ""
-"<br />Fichero de configuracion no enlazado a /etc/gforge/plugins/%1$s. "
-"Verifica permisos de escritura para apache en /etc/gforge/plugins o crea un "
-"enlace manual."
+"Fichero de configuracion no enlazado a /etc/gforge/plugins/%1$s. Verifica "
+"permisos de escritura para apache en /etc/gforge/plugins o crea un enlace "
+"manual."
 
 #: common/include/Plugin.class.php:249 common/include/Plugin.class.php:306
-msgid "current plugin status is:"
-msgstr "Estado Actual del plugin:"
+#: www/admin/pluginman.php:276
+msgid "Current plugin status is"
+msgstr "Estado Actual del plugin es"
 
 #: common/include/Plugin.class.php:279 common/include/Plugin.class.php:326
 #, php-format
@@ -15717,10 +15718,6 @@ msgstr "Inactivo"
 #: www/admin/pluginman.php:257
 msgid "Activate"
 msgstr "Activar"
-
-#: www/admin/pluginman.php:276
-msgid "Current plugin status:"
-msgstr "Estado Actual Plugin"
 
 #: www/admin/responses_admin.php:32
 msgid "Site Admin: Edit Rejection Responses"

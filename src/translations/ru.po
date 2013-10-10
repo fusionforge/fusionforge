@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:19+0200\n"
+"POT-Creation-Date: 2013-10-10 15:32+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3797,7 +3797,8 @@ msgstr ""
 "уровень достпа к /etc/gforge/plugins или создайте линк в ручном режиме."
 
 #: common/include/Plugin.class.php:249 common/include/Plugin.class.php:306
-msgid "current plugin status is:"
+#: www/admin/pluginman.php:276
+msgid "Current plugin status is"
 msgstr ""
 
 #: common/include/Plugin.class.php:279 common/include/Plugin.class.php:326
@@ -16344,11 +16345,6 @@ msgstr "Выключен"
 #: www/admin/pluginman.php:257
 msgid "Activate"
 msgstr "Включить"
-
-#: www/admin/pluginman.php:276
-#, fuzzy
-msgid "Current plugin status:"
-msgstr "Текущий файл"
 
 #: www/admin/responses_admin.php:32
 msgid "Site Admin: Edit Rejection Responses"

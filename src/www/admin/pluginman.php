@@ -273,7 +273,7 @@ foreach ($filelist as $filename) {
 		$link = '';
 	}
 
-	$title = _('Current plugin status:'). ' ' .forge_get_config('plugin_status', $filename);
+	$title = _('Current plugin status is'). ' ' .forge_get_config('plugin_status', $filename);
 	echo '<tr '. $HTML->boxGetAltRowStyle($j+1) .'>'.
 		'<td title="'. $description.' '.$title .'">'. $filename.'</td>'.
 		'<td class="'.$status.'" class="align-center">'. $msg .'</td>'.
