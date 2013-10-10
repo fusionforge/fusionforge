@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -23,7 +24,7 @@ require_once $gfcommon.'include/pre.php';
 require_once 'preplugins.php';
 require_once 'plugins_utils.php';
 
-use_javascript('/plugins/hudson/hudson_tab.js');
+html_use_jquery();
 
 $plugin_manager = PluginManager::instance();
 $p = $plugin_manager->getPluginByName('hudson');

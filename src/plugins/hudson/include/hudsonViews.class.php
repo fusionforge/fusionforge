@@ -395,10 +395,9 @@ class hudsonViews extends Views {
 		$project_manager = ProjectManager::instance();
 		$project = $project_manager->getProject($group_id);
 
-		// function toggle_addurlform is in script plugins/hudson/www/hudson_tab.js
-		echo '<a href="#" onclick="toggle_addurlform(); return false;">' . getIcon("ic/add.png") . ' '._("Add job").'</a>';
+		echo '<a href="#" onclick="jQuery(\'#hudson_add_job\').slideToggle(); return false;">' . getIcon("ic/add.png") . ' '._("Add job").'</a>';
 		echo ' '.$this->_getHelp('HudsonService', true);
-		echo '<div id="hudson_add_job">';
+		echo '<div id="hudson_add_job" style="display:none" >';
 		echo ' <form action="">'."\n";
 		echo '   <label for="hudson_job_url">'._("Job URL:").'</label>'."\n";
 		echo '   <input id="hudson_job_url" name="hudson_job_url" type="text" size="64" />'."\n";
@@ -428,7 +427,7 @@ class hudsonViews extends Views {
 		echo '   <input type="submit" value="Add job" />';
 		echo ' </form>';
 		echo '</div>';
-		echo "<script type=\"text/javascript\">Element.toggle('hudson_add_job', 'slide');</script>\n";
+		//echo "<script type=\"text/javascript\">jQuery('#hudson_add_job').slideToggle();</script>\n";
 	}
 
 	function _display_iframe($url = '') {
@@ -438,6 +437,6 @@ class hudsonViews extends Views {
 	}
 
 	function _hide_iframe() {
-		echo "<script type=\"text/javascript\">Element.toggle('hudson_iframe_div', 'slide');</script>";
+		echo "<script type=\"text/javascript\">jQuery('hudson_iframe_div').slideToggle();</script>";
 	}
 }
