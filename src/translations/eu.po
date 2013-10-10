@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:18+0200\n"
+"POT-Creation-Date: 2013-10-10 16:38+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3689,10 +3689,9 @@ msgstr "Fitxero zerrenda"
 msgid "Admin"
 msgstr "Admin"
 
-#: common/include/Navigation.class.php:398
-#, fuzzy
-msgid "Project Administration."
-msgstr "Proiektuen datu baseen administrazioa"
+#: common/include/Navigation.class.php:398 www/admin/groupedit.php:100
+msgid "Project Admin"
+msgstr "Proiektuen administrariaAdminitrador de Projectos"
 
 #: common/include/Navigation.class.php:414 www/activity/index.php:95
 #: www/activity/index.php:179 www/activity/index.php:265
@@ -15456,10 +15455,6 @@ msgstr "Posta elektronikoa bidali zaizu argibideekin"
 msgid "Site Admin: Project Info for "
 msgstr "Webgunearen administrazioa: taldearen informazioa"
 
-#: www/admin/groupedit.php:100
-msgid "Project Admin"
-msgstr "Proiektuen administrariaAdminitrador de Projectos"
-
 #: www/admin/groupedit.php:101
 msgid "Permanently Delete Project"
 msgstr ""
@@ -23192,6 +23187,10 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#, fuzzy
+#~ msgid "Project Administration."
+#~ msgstr "Proiektuen datu baseen administrazioa"
 
 #~ msgid "Preserve my pre-formatted text."
 #~ msgstr "Nere testu formatua mantendu"

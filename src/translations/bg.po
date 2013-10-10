@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:18+0200\n"
+"POT-Creation-Date: 2013-10-10 16:38+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3612,10 +3612,10 @@ msgstr ""
 msgid "Admin"
 msgstr "Администриране"
 
-#: common/include/Navigation.class.php:398
+#: common/include/Navigation.class.php:398 www/admin/groupedit.php:100
 #, fuzzy
-msgid "Project Administration."
-msgstr "Администриране"
+msgid "Project Admin"
+msgstr "Администратори"
 
 #: common/include/Navigation.class.php:414 www/activity/index.php:95
 #: www/activity/index.php:179 www/activity/index.php:265
@@ -15164,11 +15164,6 @@ msgstr ""
 msgid "Site Admin: Project Info for "
 msgstr "Проекти на потребителя"
 
-#: www/admin/groupedit.php:100
-#, fuzzy
-msgid "Project Admin"
-msgstr "Администратори"
-
 #: www/admin/groupedit.php:101
 msgid "Permanently Delete Project"
 msgstr ""
@@ -22678,6 +22673,10 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Лична Информация"
+
+#, fuzzy
+#~ msgid "Project Administration."
+#~ msgstr "Администриране"
 
 #, fuzzy
 #~ msgid "No Forums Found for %1$s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:18+0200\n"
+"POT-Creation-Date: 2013-10-10 16:38+0200\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3544,9 +3544,9 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
-#: common/include/Navigation.class.php:398
+#: common/include/Navigation.class.php:398 www/admin/groupedit.php:100
 #, fuzzy
-msgid "Project Administration."
+msgid "Project Admin"
 msgstr "Brak wydań"
 
 #: common/include/Navigation.class.php:414 www/activity/index.php:95
@@ -14772,11 +14772,6 @@ msgstr ""
 msgid "Site Admin: Project Info for "
 msgstr ""
 
-#: www/admin/groupedit.php:100
-#, fuzzy
-msgid "Project Admin"
-msgstr "Brak wydań"
-
 #: www/admin/groupedit.php:101
 msgid "Permanently Delete Project"
 msgstr ""
@@ -22026,6 +22021,10 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Project Administration."
+#~ msgstr "Brak wydań"
 
 #, fuzzy
 #~ msgid "No Forums Found for %1$s"

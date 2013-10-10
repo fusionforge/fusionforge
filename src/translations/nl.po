@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:18+0200\n"
+"POT-Creation-Date: 2013-10-10 16:38+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3697,10 +3697,9 @@ msgstr "Project bestandslijst"
 msgid "Admin"
 msgstr "Beheer"
 
-#: common/include/Navigation.class.php:398
-#, fuzzy
-msgid "Project Administration."
-msgstr "Project database beheer"
+#: common/include/Navigation.class.php:398 www/admin/groupedit.php:100
+msgid "Project Admin"
+msgstr "Project beheer"
 
 #: common/include/Navigation.class.php:414 www/activity/index.php:95
 #: www/activity/index.php:179 www/activity/index.php:265
@@ -15549,10 +15548,6 @@ msgstr "E-mail met uitleg verstuurd"
 msgid "Site Admin: Project Info for "
 msgstr "Site beheer: groepsinfo"
 
-#: www/admin/groupedit.php:100
-msgid "Project Admin"
-msgstr "Project beheer"
-
 #: www/admin/groupedit.php:101
 msgid "Permanently Delete Project"
 msgstr ""
@@ -23355,6 +23350,10 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#, fuzzy
+#~ msgid "Project Administration."
+#~ msgstr "Project database beheer"
 
 #~ msgid "Preserve my pre-formatted text."
 #~ msgstr "Laat de voorgeformatteerde tekst intact."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:18+0200\n"
+"POT-Creation-Date: 2013-10-10 16:38+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -3726,10 +3726,9 @@ msgstr "Projektkennzeichen gelöscht."
 msgid "Admin"
 msgstr "Verwalten"
 
-#: common/include/Navigation.class.php:398
-#, fuzzy
-msgid "Project Administration."
-msgstr "Projekt-Datenbank Administration"
+#: common/include/Navigation.class.php:398 www/admin/groupedit.php:100
+msgid "Project Admin"
+msgstr "Projekt-Administrator"
 
 #: common/include/Navigation.class.php:414 www/activity/index.php:95
 #: www/activity/index.php:179 www/activity/index.php:265
@@ -15668,10 +15667,6 @@ msgstr "Email mit Anweisungen abgeschickt"
 msgid "Site Admin: Project Info for "
 msgstr "Seite Administrator: Gruppen-Informationen"
 
-#: www/admin/groupedit.php:100
-msgid "Project Admin"
-msgstr "Projekt-Administrator"
-
 #: www/admin/groupedit.php:101
 msgid "Permanently Delete Project"
 msgstr "Projekt dauerhaft löschen"
@@ -23592,6 +23587,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "Project Administration."
+#~ msgstr "Projekt-Datenbank Administration"
 
 #~ msgid "Preserve my pre-formatted text."
 #~ msgstr "Bewahre meinen vor-formatierten Text auf."

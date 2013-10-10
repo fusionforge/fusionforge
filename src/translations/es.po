@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:18+0200\n"
+"POT-Creation-Date: 2013-10-10 16:38+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -3611,9 +3611,9 @@ msgstr "Página Principal de Proyecto orientada a Widgets"
 msgid "Admin"
 msgstr "Administración"
 
-#: common/include/Navigation.class.php:398
-msgid "Project Administration."
-msgstr "Administración Proyecto."
+#: common/include/Navigation.class.php:398 www/admin/groupedit.php:100
+msgid "Project Admin"
+msgstr "Admin. de Projectos"
 
 #: common/include/Navigation.class.php:414 www/activity/index.php:95
 #: www/activity/index.php:179 www/activity/index.php:265
@@ -15199,10 +15199,6 @@ msgstr "Se ha enviado un correo con Instrucciones"
 msgid "Site Admin: Project Info for "
 msgstr "Administrador de Sitio: Información del Proyecto para "
 
-#: www/admin/groupedit.php:100
-msgid "Project Admin"
-msgstr "Admin. de Projectos"
-
 #: www/admin/groupedit.php:101
 msgid "Permanently Delete Project"
 msgstr "Proyecto Borrado Permanentemente"
@@ -22906,6 +22902,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Project Administration."
+#~ msgstr "Administración Proyecto."
 
 #~ msgid "Preserve my pre-formatted text."
 #~ msgstr "Conservar mi formato de texto."

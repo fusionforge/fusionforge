@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:18+0200\n"
+"POT-Creation-Date: 2013-10-10 16:38+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -3707,10 +3707,9 @@ msgstr "Eliminouse a etiqueta de proxecto"
 msgid "Admin"
 msgstr "Administración "
 
-#: common/include/Navigation.class.php:398
-#, fuzzy
-msgid "Project Administration."
-msgstr "Administración da base de datos de proxectos "
+#: common/include/Navigation.class.php:398 www/admin/groupedit.php:100
+msgid "Project Admin"
+msgstr "Administración do proxecto "
 
 #: common/include/Navigation.class.php:414 www/activity/index.php:95
 #: www/activity/index.php:179 www/activity/index.php:265
@@ -15679,10 +15678,6 @@ msgstr "Enviouse un correo con instrucións "
 msgid "Site Admin: Project Info for "
 msgstr "Administración do sitio: información do grupo "
 
-#: www/admin/groupedit.php:100
-msgid "Project Admin"
-msgstr "Administración do proxecto "
-
 #: www/admin/groupedit.php:101
 msgid "Permanently Delete Project"
 msgstr "Eliminar o proxecto permanentemente "
@@ -23525,6 +23520,10 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Project Administration."
+#~ msgstr "Administración da base de datos de proxectos "
 
 #~ msgid "Preserve my pre-formatted text."
 #~ msgstr "Conservar o meu texto co seu formato. "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:18+0200\n"
+"POT-Creation-Date: 2013-10-10 16:38+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3713,10 +3713,9 @@ msgstr "File rilasciati per il progetto"
 msgid "Admin"
 msgstr "Amministra"
 
-#: common/include/Navigation.class.php:398
-#, fuzzy
-msgid "Project Administration."
-msgstr "Amministrazione database per i progetti"
+#: common/include/Navigation.class.php:398 www/admin/groupedit.php:100
+msgid "Project Admin"
+msgstr "Amministrazione progetto"
 
 #: common/include/Navigation.class.php:414 www/activity/index.php:95
 #: www/activity/index.php:179 www/activity/index.php:265
@@ -15553,10 +15552,6 @@ msgstr "Inviata email di istruzioni"
 msgid "Site Admin: Project Info for "
 msgstr "Site Admin: Group Info"
 
-#: www/admin/groupedit.php:100
-msgid "Project Admin"
-msgstr "Amministrazione progetto"
-
 #: www/admin/groupedit.php:101
 msgid "Permanently Delete Project"
 msgstr "Rimuovi il progetto in modo permanente"
@@ -23345,6 +23340,10 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "Project Administration."
+#~ msgstr "Amministrazione database per i progetti"
 
 #~ msgid "Preserve my pre-formatted text."
 #~ msgstr "Mantieni il testo preformattato"

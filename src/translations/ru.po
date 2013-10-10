@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:18+0200\n"
+"POT-Creation-Date: 2013-10-10 16:38+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3690,10 +3690,9 @@ msgstr "Файлы проекта"
 msgid "Admin"
 msgstr "Управление"
 
-#: common/include/Navigation.class.php:398
-#, fuzzy
-msgid "Project Administration."
-msgstr "Администрирование баз данных проекта"
+#: common/include/Navigation.class.php:398 www/admin/groupedit.php:100
+msgid "Project Admin"
+msgstr "Администратор проекта"
 
 #: common/include/Navigation.class.php:414 www/activity/index.php:95
 #: www/activity/index.php:179 www/activity/index.php:265
@@ -15790,10 +15789,6 @@ msgstr "На емайл высланы инструкции"
 msgid "Site Admin: Project Info for "
 msgstr "Администрирование сайта: Информация о группе"
 
-#: www/admin/groupedit.php:100
-msgid "Project Admin"
-msgstr "Администратор проекта"
-
 #: www/admin/groupedit.php:101
 msgid "Permanently Delete Project"
 msgstr "Полностью удалить объект"
@@ -23660,6 +23655,10 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "Project Administration."
+#~ msgstr "Администрирование баз данных проекта"
 
 #~ msgid "Preserve my pre-formatted text."
 #~ msgstr "Сохранить мою разметку текста."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:18+0200\n"
+"POT-Creation-Date: 2013-10-10 16:38+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3687,10 +3687,10 @@ msgstr "파일 보기"
 msgid "Admin"
 msgstr "관리"
 
-#: common/include/Navigation.class.php:398
+#: common/include/Navigation.class.php:398 www/admin/groupedit.php:100
 #, fuzzy
-msgid "Project Administration."
-msgstr "Project Database Administration"
+msgid "Project Admin"
+msgstr "프로젝트 관리자"
 
 #: common/include/Navigation.class.php:414 www/activity/index.php:95
 #: www/activity/index.php:179 www/activity/index.php:265
@@ -15370,11 +15370,6 @@ msgstr "Instruction email sent"
 msgid "Site Admin: Project Info for "
 msgstr "Site Admin: Group Info"
 
-#: www/admin/groupedit.php:100
-#, fuzzy
-msgid "Project Admin"
-msgstr "프로젝트 관리자"
-
 #: www/admin/groupedit.php:101
 msgid "Permanently Delete Project"
 msgstr ""
@@ -23072,6 +23067,10 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "Project Administration."
+#~ msgstr "Project Database Administration"
 
 #~ msgid "Preserve my pre-formatted text."
 #~ msgstr "본문 형식을 그대로 보전합니다."

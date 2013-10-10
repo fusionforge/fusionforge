@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:18+0200\n"
+"POT-Creation-Date: 2013-10-10 16:38+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3684,10 +3684,9 @@ msgstr "專案檔案列表"
 msgid "Admin"
 msgstr "管理"
 
-#: common/include/Navigation.class.php:398
-#, fuzzy
-msgid "Project Administration."
-msgstr "專案資料庫管理"
+#: common/include/Navigation.class.php:398 www/admin/groupedit.php:100
+msgid "Project Admin"
+msgstr "專案管理"
 
 #: common/include/Navigation.class.php:414 www/activity/index.php:95
 #: www/activity/index.php:179 www/activity/index.php:265
@@ -15474,10 +15473,6 @@ msgstr "已送出說明 Email"
 msgid "Site Admin: Project Info for "
 msgstr "網站管理：群組資訊"
 
-#: www/admin/groupedit.php:100
-msgid "Project Admin"
-msgstr "專案管理"
-
 #: www/admin/groupedit.php:101
 msgid "Permanently Delete Project"
 msgstr "永久的刪除專案"
@@ -23151,6 +23146,10 @@ msgstr "帳號"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
+
+#, fuzzy
+#~ msgid "Project Administration."
+#~ msgstr "專案資料庫管理"
 
 #~ msgid "Preserve my pre-formatted text."
 #~ msgstr "保存我預設格式化的文字"

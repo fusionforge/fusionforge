@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:18+0200\n"
+"POT-Creation-Date: 2013-10-10 16:38+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3701,10 +3701,9 @@ msgstr "Llista de fitxers del projecte"
 msgid "Admin"
 msgstr "Administració"
 
-#: common/include/Navigation.class.php:398
-#, fuzzy
-msgid "Project Administration."
-msgstr "Administració de la base dedades de projectes"
+#: common/include/Navigation.class.php:398 www/admin/groupedit.php:100
+msgid "Project Admin"
+msgstr "Administració del projecte"
 
 #: common/include/Navigation.class.php:414 www/activity/index.php:95
 #: www/activity/index.php:179 www/activity/index.php:265
@@ -15538,10 +15537,6 @@ msgstr "Enviat correu d'instrucció"
 msgid "Site Admin: Project Info for "
 msgstr "Administració del lloc: informació de grup"
 
-#: www/admin/groupedit.php:100
-msgid "Project Admin"
-msgstr "Administració del projecte"
-
 #: www/admin/groupedit.php:101
 msgid "Permanently Delete Project"
 msgstr ""
@@ -23323,6 +23318,10 @@ msgstr "Nom d'usuari"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
+
+#, fuzzy
+#~ msgid "Project Administration."
+#~ msgstr "Administració de la base dedades de projectes"
 
 #~ msgid "Preserve my pre-formatted text."
 #~ msgstr "Preserva el meu text preformatat."
