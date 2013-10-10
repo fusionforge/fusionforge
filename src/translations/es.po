@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:45+0200\n"
+"POT-Creation-Date: 2013-10-10 15:49+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -2029,6 +2029,7 @@ msgstr "Gestionar mensajes pendientes"
 
 #: common/forum/ForumAdmin.class.php:177 common/forum/ForumAdmin.class.php:205
 #: common/forum/ForumAdmin.class.php:223 common/forum/ForumAdmin.class.php:251
+#: www/forum/admin/index.php:246 www/forum/admin/index.php:285
 #: www/forum/attachment.php:72 www/forum/monitor.php:47 www/forum/new.php:48
 #: www/forum/save.php:47
 msgid "Error getting Forum"
@@ -16526,11 +16527,6 @@ msgid ""
 msgstr ""
 "¡CUIDADO! ¡Vas a eliminar permanentemente un mensaje y todas sus respuestas!"
 
-#: www/forum/admin/index.php:246 www/forum/admin/index.php:285
-#, fuzzy
-msgid "Error getting forum"
-msgstr "Error obteniendo el foro."
-
 #: www/forum/admin/index.php:252
 msgid "Error getting new forum message"
 msgstr "Error obteniendo nuevos mensajes del foro"
@@ -22930,6 +22926,10 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#, fuzzy
+#~ msgid "Error getting forum"
+#~ msgstr "Error obteniendo el foro."
 
 #, fuzzy
 #~ msgid "Direct link to global configuration of this plugin."

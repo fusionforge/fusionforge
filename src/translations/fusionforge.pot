@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:45+0200\n"
+"POT-Creation-Date: 2013-10-10 15:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1967,6 +1967,7 @@ msgstr ""
 
 #: common/forum/ForumAdmin.class.php:177 common/forum/ForumAdmin.class.php:205
 #: common/forum/ForumAdmin.class.php:223 common/forum/ForumAdmin.class.php:251
+#: www/forum/admin/index.php:246 www/forum/admin/index.php:285
 #: www/forum/attachment.php:72 www/forum/monitor.php:47 www/forum/new.php:48
 #: www/forum/save.php:47
 msgid "Error getting Forum"
@@ -15464,10 +15465,6 @@ msgstr ""
 msgid ""
 "WARNING! You are about to permanently delete a message and all of its "
 "followups!!"
-msgstr ""
-
-#: www/forum/admin/index.php:246 www/forum/admin/index.php:285
-msgid "Error getting forum"
 msgstr ""
 
 #: www/forum/admin/index.php:252

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:45+0200\n"
+"POT-Creation-Date: 2013-10-10 15:49+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -2105,6 +2105,7 @@ msgstr "Unerledigte Nachrichten Verwalten"
 
 #: common/forum/ForumAdmin.class.php:177 common/forum/ForumAdmin.class.php:205
 #: common/forum/ForumAdmin.class.php:223 common/forum/ForumAdmin.class.php:251
+#: www/forum/admin/index.php:246 www/forum/admin/index.php:285
 #: www/forum/attachment.php:72 www/forum/monitor.php:47 www/forum/new.php:48
 #: www/forum/save.php:47
 #, fuzzy
@@ -17062,11 +17063,6 @@ msgstr ""
 "WARNUNG! Sie sind dabei, eine Nachricht und ihre Antworten für immer zu "
 "löschen!!"
 
-#: www/forum/admin/index.php:246 www/forum/admin/index.php:285
-#, fuzzy
-msgid "Error getting forum"
-msgstr "Fehler beim Suchen des Forums"
-
 #: www/forum/admin/index.php:252
 msgid "Error getting new forum message"
 msgstr "Fehler beim Einholen neuer Forennachrichten"
@@ -23616,6 +23612,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "Error getting forum"
+#~ msgstr "Fehler beim Suchen des Forums"
 
 #, fuzzy
 #~ msgid "Direct link to global configuration of this plugin."

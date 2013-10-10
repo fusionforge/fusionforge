@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:45+0200\n"
+"POT-Creation-Date: 2013-10-10 15:49+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2095,6 +2095,7 @@ msgstr ""
 
 #: common/forum/ForumAdmin.class.php:177 common/forum/ForumAdmin.class.php:205
 #: common/forum/ForumAdmin.class.php:223 common/forum/ForumAdmin.class.php:251
+#: www/forum/admin/index.php:246 www/forum/admin/index.php:285
 #: www/forum/attachment.php:72 www/forum/monitor.php:47 www/forum/new.php:48
 #: www/forum/save.php:47
 #, fuzzy
@@ -16932,11 +16933,6 @@ msgid ""
 msgstr ""
 "LET OP! Je gaat nu een bericht met alle followups permanent verwijderen!!"
 
-#: www/forum/admin/index.php:246 www/forum/admin/index.php:285
-#, fuzzy
-msgid "Error getting forum"
-msgstr "Fout bij het toevoegen van een forum"
-
 #: www/forum/admin/index.php:252
 msgid "Error getting new forum message"
 msgstr ""
@@ -23379,6 +23375,10 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#, fuzzy
+#~ msgid "Error getting forum"
+#~ msgstr "Fout bij het toevoegen van een forum"
 
 #, fuzzy
 #~ msgid "Direct link to global configuration of this plugin."

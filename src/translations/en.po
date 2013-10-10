@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:45+0200\n"
+"POT-Creation-Date: 2013-10-10 15:49+0200\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1967,6 +1967,7 @@ msgstr ""
 
 #: common/forum/ForumAdmin.class.php:177 common/forum/ForumAdmin.class.php:205
 #: common/forum/ForumAdmin.class.php:223 common/forum/ForumAdmin.class.php:251
+#: www/forum/admin/index.php:246 www/forum/admin/index.php:285
 #: www/forum/attachment.php:72 www/forum/monitor.php:47 www/forum/new.php:48
 #: www/forum/save.php:47
 msgid "Error getting Forum"
@@ -15483,10 +15484,6 @@ msgstr ""
 msgid ""
 "WARNING! You are about to permanently delete a message and all of its "
 "followups!!"
-msgstr ""
-
-#: www/forum/admin/index.php:246 www/forum/admin/index.php:285
-msgid "Error getting forum"
 msgstr ""
 
 #: www/forum/admin/index.php:252

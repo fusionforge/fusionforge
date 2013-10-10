@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:45+0200\n"
+"POT-Creation-Date: 2013-10-10 15:49+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -2100,6 +2100,7 @@ msgstr "Xestionar mensaxes pendentes"
 
 #: common/forum/ForumAdmin.class.php:177 common/forum/ForumAdmin.class.php:205
 #: common/forum/ForumAdmin.class.php:223 common/forum/ForumAdmin.class.php:251
+#: www/forum/admin/index.php:246 www/forum/admin/index.php:285
 #: www/forum/attachment.php:72 www/forum/monitor.php:47 www/forum/new.php:48
 #: www/forum/save.php:47
 msgid "Error getting Forum"
@@ -17059,11 +17060,6 @@ msgid ""
 msgstr ""
 "AVISO! Vai eliminar permanentemente unha mensaxe e todas as súas respostas!! "
 
-#: www/forum/admin/index.php:246 www/forum/admin/index.php:285
-#, fuzzy
-msgid "Error getting forum"
-msgstr "Produciuse un erro ao obter o foro "
-
 #: www/forum/admin/index.php:252
 msgid "Error getting new forum message"
 msgstr "Produciuse un erro ao obter a nova mensaxe de foro"
@@ -23549,6 +23545,10 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Error getting forum"
+#~ msgstr "Produciuse un erro ao obter o foro "
 
 #, fuzzy
 #~ msgid "Direct link to global configuration of this plugin."
