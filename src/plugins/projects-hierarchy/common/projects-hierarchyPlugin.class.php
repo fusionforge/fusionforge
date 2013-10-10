@@ -42,7 +42,7 @@ class projects_hierarchyPlugin extends Plugin {
 	}
 
 	function CallHook($hookname, &$params) {
-		global $G_SESSION, $HTML;
+		global $HTML;
 		$returned = false;
 		switch($hookname) {
 			case "display_hierarchy": {
@@ -385,7 +385,7 @@ class projects_hierarchyPlugin extends Plugin {
 	/**
 	 * add - add a new group_id using the plugin
 	 *
-	 * @param	integer	group_id
+	 * @param	integer	$group_id
 	 * @return	boolean	true on success
 	 * @access	public
 	 */
@@ -402,7 +402,7 @@ class projects_hierarchyPlugin extends Plugin {
 	/**
 	 * remove - remove group_id using the plugin
 	 *
-	 * @param	integer	group_id
+	 * @param	integer	$group_id
 	 * @return	boolean	true on success
 	 * @access	public
 	 */
@@ -429,8 +429,8 @@ class projects_hierarchyPlugin extends Plugin {
 	/**
 	 * addChild - add a new child to this project
 	 *
-	 * @param	integer	group_id
-	 * @param	integer	sub_group_id
+	 * @param	integer	$project_id
+	 * @param	integer	$sub_project_id
 	 * @return	boolean	true on success
 	 * @access	public
 	 */
@@ -451,8 +451,8 @@ class projects_hierarchyPlugin extends Plugin {
 	/**
 	 * removeChild - remove a child to this project
 	 *
-	 * @param	integer	group_id
-	 * @param	integer	sub_group_id
+	 * @param	integer	$project_id
+	 * @param	integer	$sub_project_id
 	 * @return	boolean	true on success
 	 * @access	public
 	 */
@@ -474,8 +474,8 @@ class projects_hierarchyPlugin extends Plugin {
 	/**
 	 * removeParent - remove a parent to this project
 	 *
-	 * @param	integer	group_id
-	 * @param	integer	sub_group_id
+	 * @param	integer	$project_id
+	 * @param	integer	$sub_project_id
 	 * @return	boolean	true on success
 	 * @access	public
 	 */
@@ -497,8 +497,8 @@ class projects_hierarchyPlugin extends Plugin {
 	/**
 	 * hasRelation - check if there is a relation child->parent or parent->child between 2 projects
 	 *
-	 * @param	integer	group_id
-	 * @param	integer	sub_group_id
+	 * @param	integer	$project_id
+	 * @param	integer	$sub_project_id
 	 * @return	boolean	true on success
 	 * @access	public
 	 */
@@ -517,10 +517,10 @@ class projects_hierarchyPlugin extends Plugin {
 	/**
 	 * validateRelationship - validate or reject a relation between 2 projects
 	 *
-	 * @param	integer	group_id
-	 * @param	integer	sub_group_id
-	 * @param	string	type of relation
-	 * @param	integer	status of the relation
+	 * @param	integer	$project_id
+	 * @param	integer	$sub_project_id
+	 * @param	string	$relation type of relation
+	 * @param	integer	$status status of the relation
 	 * @return	boolean	true on success
 	 * @access	public
 	 */
@@ -585,7 +585,7 @@ class projects_hierarchyPlugin extends Plugin {
 	/**
 	 * exists - if this project use the plugin
 	 *
-	 * @param	integer	group_id
+	 * @param	integer	$group_id
 	 * @return	boolean	true on success
 	 * @access	public
 	 */
@@ -612,8 +612,8 @@ class projects_hierarchyPlugin extends Plugin {
 
 	/**
 	 * getHeader - initialize header and js
-	 * @param	string	type : user, project (aka group)
-	 * @param       array   params
+	 * @param	string	$type type : user, project (aka group)
+	 * @param   array   $params
 	 * @return	bool	success or not
 	 */
 	function getHeader($type, $params=NULL) {
@@ -684,7 +684,7 @@ class projects_hierarchyPlugin extends Plugin {
 	/**
 	 * getConf - return the configuration defined at project level
 	 *
-	 * @param	integer	the group id
+	 * @param	integer	$project_id the group id
 	 * @return	array	the configuration array
 	 */
 	function getConf($project_id) {
@@ -744,7 +744,7 @@ class projects_hierarchyPlugin extends Plugin {
 	/**
 	 * updateGlobalConf - update the global configuration in database
 	 *
-	 * @param	array	configuration array (tree, docman, delegate)
+	 * @param	array	$confArr configuration array (tree, docman, delegate)
 	 * @return	bool	true on success
 	 */
 	function updateGlobalConf($confArr) {
@@ -771,7 +771,8 @@ class projects_hierarchyPlugin extends Plugin {
 	/**
 	 * updateConf - update the configuration in database for this project
 	 *
-	 * @param	array	configuration array (tree, docman, delegate)
+	 * @param	integer	$project_id
+	 * @param	array	$confArr configuration array (tree, docman, delegate)
 	 * @return	bool	true on success
 	 */
 	function updateConf($project_id, $confArr) {
@@ -797,9 +798,9 @@ class projects_hierarchyPlugin extends Plugin {
 	/**
 	 * son_box - display a select box for son selection
 	 *
-	 * @param	integer	group_id
-	 * @param	string
-	 * @param	string	selected value
+	 * @param	integer	$group_id
+	 * @param	string  $name
+	 * @param	string	$selected value
 	 * @return	string	html box
 	 * @access	public
 	 */
@@ -823,7 +824,8 @@ class projects_hierarchyPlugin extends Plugin {
 	/**
 	 * isUsed - is this plugin used by other projects than the current family ?
 	 *
-	 * @return	bool	yes or no
+	 * @param integer $group_id
+	 * @return    bool    yes or no
 	 */
 	function isUsed($group_id) {
 		$sons = $this->getFamily($group_id, 'child', true, 'any');
@@ -847,9 +849,9 @@ class projects_hierarchyPlugin extends Plugin {
 	}
 
 	/**
-	 * is_child - to verif if project already has a parent
+	 * is_child - to verify if project already has a parent
 	 *
-	 * @param	integer	group_id
+	 * @param	integer	$group_id
 	 * @return	bool	true on success
 	 * @access	public
 	 */
