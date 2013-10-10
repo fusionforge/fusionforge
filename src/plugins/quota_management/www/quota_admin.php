@@ -117,14 +117,14 @@ if (db_numrows($res_db) > 0) {
 					size="12"
 					value="<?php echo $q["quota_soft"]; ?>"
 					style="background:#ffffd0;text-align:right" />
-					<?php echo _('Mb'); ?>
+					<?php echo _('MB'); ?>
 			</td>
 			<td style="border-top:thin solid #808080" align="right">
 				<input type="text" name="qh"
 					size="12"
 					value="<?php echo $q["quota_hard"]; ?>"
 					style="background:#ffffd0;text-align:right" />
-				<?php echo _('Mb'); ?>
+				<?php echo _('MB'); ?>
 			</td>
 			<td style="border-top:thin solid #808080" align="right">
 				<input type="submit" value="<?php echo _('Modify'); ?>" />
