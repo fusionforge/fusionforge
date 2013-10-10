@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:55+0200\n"
+"POT-Creation-Date: 2013-10-10 15:59+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -2632,7 +2632,8 @@ msgstr "Ungültige Operation"
 msgid "Invalid FRS Release Object"
 msgstr "Kein gültiges Umfrageobjekt"
 
-#: common/frs/FRSFile.class.php:121 common/include/account.php:66
+#: common/frs/FRSFile.class.php:121 common/frs/include/frs_utils.php:249
+#: common/include/account.php:66
 msgid "Name is too short. It must be at least 3 characters."
 msgstr "Der Name ist zu kurz. Er muss mindestens 3 Buchstaben enthalten."
 
@@ -2865,10 +2866,6 @@ msgstr "Unbekannter Dateihochlade Fehler."
 #: common/frs/include/frs_utils.php:244
 msgid "Must select a file."
 msgstr "Sie müssen eine Datei auswählen."
-
-#: common/frs/include/frs_utils.php:249
-msgid "Le nom est trop court. Il doit compter au moins 3 caractères."
-msgstr ""
 
 #: common/frs/include/frs_utils.php:257 www/frs/admin/editrelease.php:182
 #: www/frs/admin/editrelease.php:199

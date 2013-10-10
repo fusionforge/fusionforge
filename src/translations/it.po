@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:55+0200\n"
+"POT-Creation-Date: 2013-10-10 15:59+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2617,7 +2617,8 @@ msgstr "Nome unix del progetto:"
 msgid "Invalid FRS Release Object"
 msgstr "Survey Object non valido"
 
-#: common/frs/FRSFile.class.php:121 common/include/account.php:66
+#: common/frs/FRSFile.class.php:121 common/frs/include/frs_utils.php:249
+#: common/include/account.php:66
 msgid "Name is too short. It must be at least 3 characters."
 msgstr "Nome troppo corto, la lunghezza minima è di 3 caratteri."
 
@@ -2851,10 +2852,6 @@ msgstr "Errore sconosciuto nell'invio del file."
 #: common/frs/include/frs_utils.php:244
 msgid "Must select a file."
 msgstr "È necessario selezionare un file."
-
-#: common/frs/include/frs_utils.php:249
-msgid "Le nom est trop court. Il doit compter au moins 3 caractères."
-msgstr ""
 
 #: common/frs/include/frs_utils.php:257 www/frs/admin/editrelease.php:182
 #: www/frs/admin/editrelease.php:199

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:55+0200\n"
+"POT-Creation-Date: 2013-10-10 15:59+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2598,7 +2598,8 @@ msgstr "Talde izen baliogabea"
 msgid "Invalid FRS Release Object"
 msgstr "Baliodun Inkesta Objeturik Ez"
 
-#: common/frs/FRSFile.class.php:121 common/include/account.php:66
+#: common/frs/FRSFile.class.php:121 common/frs/include/frs_utils.php:249
+#: common/include/account.php:66
 msgid "Name is too short. It must be at least 3 characters."
 msgstr "Izen egokia eman behar duzu (gutxienez 6 karaktere)."
 
@@ -2824,10 +2825,6 @@ msgstr "Akats ezezaguna fitxategia igotzean."
 #: common/frs/include/frs_utils.php:244
 msgid "Must select a file."
 msgstr "Fitxero bat aukeratu behar duzu"
-
-#: common/frs/include/frs_utils.php:249
-msgid "Le nom est trop court. Il doit compter au moins 3 caractères."
-msgstr ""
 
 #: common/frs/include/frs_utils.php:257 www/frs/admin/editrelease.php:182
 #: www/frs/admin/editrelease.php:199
