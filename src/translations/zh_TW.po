@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:14+0200\n"
+"POT-Creation-Date: 2013-10-10 16:18+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -17211,9 +17211,9 @@ msgstr "粘貼發佈通知"
 msgid "Paste The Change Log In"
 msgstr "粘貼更改日誌"
 
-#: www/frs/admin/editrelease.php:277
-msgid "Preserve my pre-formatted text."
-msgstr "保存我預設格式化的文字"
+#: www/frs/admin/editrelease.php:277 www/frs/admin/qrs.php:263
+msgid "Preserve my pre-formatted text"
+msgstr "保存我的預設格式化文字"
 
 #: www/frs/admin/editrelease.php:279
 msgid "Submit/Refresh"
@@ -17426,10 +17426,6 @@ msgstr ""
 #: www/frs/admin/qrs.php:204
 msgid "Choose an FTP file instead of uploading:"
 msgstr "選擇一個FTP檔案代替上傳："
-
-#: www/frs/admin/qrs.php:263
-msgid "Preserve my pre-formatted text"
-msgstr "保存我的預設格式化文字"
 
 #: www/frs/admin/qrs.php:264
 msgid "Release File"
@@ -23155,6 +23151,9 @@ msgstr "帳號"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
+
+#~ msgid "Preserve my pre-formatted text."
+#~ msgstr "保存我預設格式化的文字"
 
 #, fuzzy
 #~ msgid "No Forums Found for %1$s"

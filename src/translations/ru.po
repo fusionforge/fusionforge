@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:14+0200\n"
+"POT-Creation-Date: 2013-10-10 16:18+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -17555,9 +17555,9 @@ msgstr "Занесите Информацию о релизе"
 msgid "Paste The Change Log In"
 msgstr "Занесите Список изменений"
 
-#: www/frs/admin/editrelease.php:277
-msgid "Preserve my pre-formatted text."
-msgstr "Сохранить мою разметку текста."
+#: www/frs/admin/editrelease.php:277 www/frs/admin/qrs.php:263
+msgid "Preserve my pre-formatted text"
+msgstr "Сохранить мою разметку текста"
 
 #: www/frs/admin/editrelease.php:279
 msgid "Submit/Refresh"
@@ -17778,10 +17778,6 @@ msgstr ""
 #: www/frs/admin/qrs.php:204
 msgid "Choose an FTP file instead of uploading:"
 msgstr "Указать файл на ftp сервере вместо закачки:"
-
-#: www/frs/admin/qrs.php:263
-msgid "Preserve my pre-formatted text"
-msgstr "Сохранить мою разметку текста"
 
 #: www/frs/admin/qrs.php:264
 msgid "Release File"
@@ -23664,6 +23660,9 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#~ msgid "Preserve my pre-formatted text."
+#~ msgstr "Сохранить мою разметку текста."
 
 #, fuzzy
 #~ msgid "No Forums Found for %1$s"

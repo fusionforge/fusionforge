@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:14+0200\n"
+"POT-Creation-Date: 2013-10-10 16:18+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -16877,9 +16877,9 @@ msgstr "Copiar las Notas en"
 msgid "Paste The Change Log In"
 msgstr "Copiar la Relación de Cambios en"
 
-#: www/frs/admin/editrelease.php:277
-msgid "Preserve my pre-formatted text."
-msgstr "Conservar mi formato de texto."
+#: www/frs/admin/editrelease.php:277 www/frs/admin/qrs.php:263
+msgid "Preserve my pre-formatted text"
+msgstr "Mantener mi texto preformateado"
 
 #: www/frs/admin/editrelease.php:279
 msgid "Submit/Refresh"
@@ -17093,10 +17093,6 @@ msgstr ""
 #: www/frs/admin/qrs.php:204
 msgid "Choose an FTP file instead of uploading:"
 msgstr "Escoja un fichero FTP en vez de subirlo:"
-
-#: www/frs/admin/qrs.php:263
-msgid "Preserve my pre-formatted text"
-msgstr "Mantener mi texto preformateado"
 
 #: www/frs/admin/qrs.php:264
 msgid "Release File"
@@ -22910,6 +22906,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Preserve my pre-formatted text."
+#~ msgstr "Conservar mi formato de texto."
 
 #~ msgid "No Forums Found for %1$s"
 #~ msgstr "No se encontraron foros para %1$s"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:14+0200\n"
+"POT-Creation-Date: 2013-10-10 16:18+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -17428,9 +17428,9 @@ msgstr "Pegar as notas"
 msgid "Paste The Change Log In"
 msgstr "Pegar o rexistro de cambios "
 
-#: www/frs/admin/editrelease.php:277
-msgid "Preserve my pre-formatted text."
-msgstr "Conservar o meu texto co seu formato. "
+#: www/frs/admin/editrelease.php:277 www/frs/admin/qrs.php:263
+msgid "Preserve my pre-formatted text"
+msgstr "Conservar o texto co seu formato "
 
 #: www/frs/admin/editrelease.php:279
 msgid "Submit/Refresh"
@@ -17652,10 +17652,6 @@ msgstr ""
 #: www/frs/admin/qrs.php:204
 msgid "Choose an FTP file instead of uploading:"
 msgstr "Elixa un ficheiro de FTP en lugar do enviar: "
-
-#: www/frs/admin/qrs.php:263
-msgid "Preserve my pre-formatted text"
-msgstr "Conservar o texto co seu formato "
 
 #: www/frs/admin/qrs.php:264
 msgid "Release File"
@@ -23529,6 +23525,9 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#~ msgid "Preserve my pre-formatted text."
+#~ msgstr "Conservar o meu texto co seu formato. "
 
 #, fuzzy
 #~ msgid "No Forums Found for %1$s"

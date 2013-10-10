@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:14+0200\n"
+"POT-Creation-Date: 2013-10-10 16:18+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -17311,9 +17311,9 @@ msgstr "Plak de Release Notes in"
 msgid "Paste The Change Log In"
 msgstr "Plak het Change Log in"
 
-#: www/frs/admin/editrelease.php:277
-msgid "Preserve my pre-formatted text."
-msgstr "Laat de voorgeformatteerde tekst intact."
+#: www/frs/admin/editrelease.php:277 www/frs/admin/qrs.php:263
+msgid "Preserve my pre-formatted text"
+msgstr "Laat de voorgeformatteerde tekst intact"
 
 #: www/frs/admin/editrelease.php:279
 msgid "Submit/Refresh"
@@ -17529,10 +17529,6 @@ msgstr ""
 #: www/frs/admin/qrs.php:204
 msgid "Choose an FTP file instead of uploading:"
 msgstr "Kies een FTP bestand in plaats van uploaden:"
-
-#: www/frs/admin/qrs.php:263
-msgid "Preserve my pre-formatted text"
-msgstr "Laat de voorgeformatteerde tekst intact"
 
 #: www/frs/admin/qrs.php:264
 msgid "Release File"
@@ -23359,6 +23355,9 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#~ msgid "Preserve my pre-formatted text."
+#~ msgstr "Laat de voorgeformatteerde tekst intact."
 
 #, fuzzy
 #~ msgid "No Forums Found for %1$s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:14+0200\n"
+"POT-Creation-Date: 2013-10-10 16:18+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15967,9 +15967,9 @@ msgstr "Colar As Notas No"
 msgid "Paste The Change Log In"
 msgstr "Colar o Log de Alterações No"
 
-#: www/frs/admin/editrelease.php:277
-msgid "Preserve my pre-formatted text."
-msgstr "Preservar meu texto pré-formatado."
+#: www/frs/admin/editrelease.php:277 www/frs/admin/qrs.php:263
+msgid "Preserve my pre-formatted text"
+msgstr "Preservar meu texto pré-formatado"
 
 #: www/frs/admin/editrelease.php:279
 msgid "Submit/Refresh"
@@ -16174,10 +16174,6 @@ msgstr ""
 #: www/frs/admin/qrs.php:204
 msgid "Choose an FTP file instead of uploading:"
 msgstr ""
-
-#: www/frs/admin/qrs.php:263
-msgid "Preserve my pre-formatted text"
-msgstr "Preservar meu texto pré-formatado"
 
 #: www/frs/admin/qrs.php:264
 msgid "Release File"
@@ -21664,6 +21660,9 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Minha Página Pessoal"
+
+#~ msgid "Preserve my pre-formatted text."
+#~ msgstr "Preservar meu texto pré-formatado."
 
 #~ msgid "Missing Password Or Users Name"
 #~ msgstr "Faltando Nome do Usuário Ou Senha"

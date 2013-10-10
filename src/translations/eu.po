@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:14+0200\n"
+"POT-Creation-Date: 2013-10-10 16:18+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -17206,9 +17206,9 @@ msgstr "Oharrak hemen kopiatu"
 msgid "Paste The Change Log In"
 msgstr "Aldaketen zerrenda hemen kopiatu"
 
-#: www/frs/admin/editrelease.php:277
-msgid "Preserve my pre-formatted text."
-msgstr "Nere testu formatua mantendu"
+#: www/frs/admin/editrelease.php:277 www/frs/admin/qrs.php:263
+msgid "Preserve my pre-formatted text"
+msgstr "Nere testua aurreformateatua mantendu"
 
 #: www/frs/admin/editrelease.php:279
 msgid "Submit/Refresh"
@@ -17422,10 +17422,6 @@ msgstr ""
 #: www/frs/admin/qrs.php:204
 msgid "Choose an FTP file instead of uploading:"
 msgstr ""
-
-#: www/frs/admin/qrs.php:263
-msgid "Preserve my pre-formatted text"
-msgstr "Nere testua aurreformateatua mantendu"
 
 #: www/frs/admin/qrs.php:264
 msgid "Release File"
@@ -23196,6 +23192,9 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#~ msgid "Preserve my pre-formatted text."
+#~ msgstr "Nere testu formatua mantendu"
 
 #, fuzzy
 #~ msgid "No Forums Found for %1$s"

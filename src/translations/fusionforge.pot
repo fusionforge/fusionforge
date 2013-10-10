@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:14+0200\n"
+"POT-Creation-Date: 2013-10-10 16:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15802,8 +15802,8 @@ msgstr ""
 msgid "Paste The Change Log In"
 msgstr ""
 
-#: www/frs/admin/editrelease.php:277
-msgid "Preserve my pre-formatted text."
+#: www/frs/admin/editrelease.php:277 www/frs/admin/qrs.php:263
+msgid "Preserve my pre-formatted text"
 msgstr ""
 
 #: www/frs/admin/editrelease.php:279
@@ -16003,10 +16003,6 @@ msgstr ""
 
 #: www/frs/admin/qrs.php:204
 msgid "Choose an FTP file instead of uploading:"
-msgstr ""
-
-#: www/frs/admin/qrs.php:263
-msgid "Preserve my pre-formatted text"
 msgstr ""
 
 #: www/frs/admin/qrs.php:264

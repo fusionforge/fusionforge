@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 16:14+0200\n"
+"POT-Creation-Date: 2013-10-10 16:18+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -17119,8 +17119,8 @@ msgstr "릴리즈 노트 내용"
 msgid "Paste The Change Log In"
 msgstr "변동사항 내용"
 
-#: www/frs/admin/editrelease.php:277
-msgid "Preserve my pre-formatted text."
+#: www/frs/admin/editrelease.php:277 www/frs/admin/qrs.php:263
+msgid "Preserve my pre-formatted text"
 msgstr "본문 형식을 그대로 보전합니다."
 
 #: www/frs/admin/editrelease.php:279
@@ -17334,10 +17334,6 @@ msgstr ""
 #: www/frs/admin/qrs.php:204
 msgid "Choose an FTP file instead of uploading:"
 msgstr ""
-
-#: www/frs/admin/qrs.php:263
-msgid "Preserve my pre-formatted text"
-msgstr "본문 형식을 그대로 보전합니다."
 
 #: www/frs/admin/qrs.php:264
 msgid "Release File"
@@ -23076,6 +23072,9 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#~ msgid "Preserve my pre-formatted text."
+#~ msgstr "본문 형식을 그대로 보전합니다."
 
 #, fuzzy
 #~ msgid "No Forums Found for %1$s"

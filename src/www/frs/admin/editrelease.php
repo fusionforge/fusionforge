@@ -274,7 +274,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 <tr>
 	<td colspan="2">
 		<br />
-		<input type="checkbox" name="preformatted" value="1" <?php echo (($frsr->getPreformatted())?'checked="checked"':''); ?> /> <?php echo _('Preserve my pre-formatted text.') ?>
+		<input type="checkbox" name="preformatted" value="1" <?php echo (($frsr->getPreformatted())?'checked="checked"':''); ?> /> <?php echo _('Preserve my pre-formatted text') ?>
 		<p>
 		<input type="submit" name="submit" value="<?php echo _('Submit/Refresh') ?>"/>
 		</p>
