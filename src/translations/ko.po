@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-09 15:56+0200\n"
+"POT-Creation-Date: 2013-10-10 10:12+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9195,6 +9195,7 @@ msgid "Sub project succesfully deleted."
 msgstr "JOB inserted successfully"
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
+#: plugins/extsubproj/include/extsubprojPlugin.class.php:76
 #, fuzzy
 msgid "External subprojects admin"
 msgstr "새 프로젝트 이름"
@@ -9203,11 +9204,6 @@ msgstr "새 프로젝트 이름"
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:76
 msgid "Configure the External subprojects plugin"
 msgstr ""
-
-#: plugins/extsubproj/include/extsubprojPlugin.class.php:76
-#, fuzzy
-msgid "External subprojects Admin"
-msgstr "문제점 추적 관리"
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:98
 msgid "Site Global External subprojects Admin"
@@ -23126,6 +23122,10 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "External subprojects Admin"
+#~ msgstr "문제점 추적 관리"
 
 #~ msgid "Project Info"
 #~ msgstr "프로젝트 정보"

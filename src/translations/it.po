@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-09 15:56+0200\n"
+"POT-Creation-Date: 2013-10-10 10:12+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9298,6 +9298,7 @@ msgid "Sub project succesfully deleted."
 msgstr "%1$s rimosso."
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
+#: plugins/extsubproj/include/extsubprojPlugin.class.php:76
 #, fuzzy
 msgid "External subprojects admin"
 msgstr "Nome sottoprogetto"
@@ -9306,11 +9307,6 @@ msgstr "Nome sottoprogetto"
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:76
 msgid "Configure the External subprojects plugin"
 msgstr ""
-
-#: plugins/extsubproj/include/extsubprojPlugin.class.php:76
-#, fuzzy
-msgid "External subprojects Admin"
-msgstr "Amministrazione Tracker"
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:98
 msgid "Site Global External subprojects Admin"
@@ -23399,6 +23395,10 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "External subprojects Admin"
+#~ msgstr "Amministrazione Tracker"
 
 #~ msgid "Project Info"
 #~ msgstr "Informazioni progetto"

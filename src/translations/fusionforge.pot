@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-09 16:51+0200\n"
+"POT-Creation-Date: 2013-10-10 10:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -8528,16 +8528,13 @@ msgid "Sub project succesfully deleted."
 msgstr ""
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
+#: plugins/extsubproj/include/extsubprojPlugin.class.php:76
 msgid "External subprojects admin"
 msgstr ""
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:76
 msgid "Configure the External subprojects plugin"
-msgstr ""
-
-#: plugins/extsubproj/include/extsubprojPlugin.class.php:76
-msgid "External subprojects Admin"
 msgstr ""
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:98

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-09 15:56+0200\n"
+"POT-Creation-Date: 2013-10-10 10:12+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -5015,7 +5015,8 @@ msgstr "Actualizar Configuración"
 
 #: common/tracker/actions/admin-tracker.php:42
 msgid "Set up preferences like expiration times, email addresses."
-msgstr "Introduzca sus preferencias tipo tiempo expiracion, correo electrónico."
+msgstr ""
+"Introduzca sus preferencias tipo tiempo expiracion, correo electrónico."
 
 #: common/tracker/actions/admin-tracker.php:46
 #: common/tracker/include/ArtifactTypeHtml.class.php:115
@@ -7230,8 +7231,7 @@ msgstr "scm"
 
 #: common/widget/Widget_MyLatestSvnCommits.class.php:111
 msgid "List SVN commits you have done, by project."
-msgstr ""
-"Lista los envios al repositorio (SVN) que has realizado, por proyecto."
+msgstr "Lista los envios al repositorio (SVN) que has realizado, por proyecto."
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:39
 msgid "Monitored Documents"
@@ -7666,20 +7666,23 @@ msgstr "Fichero Actualizado"
 msgid ""
 "List the most recent packages available for download along with their "
 "revision."
-msgstr "Lista los mas recientes paquetes disponibles para descargar en una revisión."
+msgstr ""
+"Lista los mas recientes paquetes disponibles para descargar en una revisión."
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:174
 msgid ""
 "A Release Notes icon allows you to see the latest changes and developers "
 "comments associated with this revision."
-msgstr "Un Icono de Notas de Liberación le permite localizar los ultimos "
-"cambios y comentarios de desarolladores asociados con esta revisión."
+msgstr ""
+"Un Icono de Notas de Liberación le permite localizar los ultimos cambios y "
+"comentarios de desarolladores asociados con esta revisión."
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:176
 msgid ""
 "Then comes the monitor icon, selecting this icon will cause this package to "
 "be monitored for you."
-msgstr "Aparecerá un icono de monitorización, seleccionando este icono provocará la "
+msgstr ""
+"Aparecerá un icono de monitorización, seleccionando este icono provocará la "
 "monitorización de este paquete."
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:178
@@ -7689,15 +7692,16 @@ msgid ""
 "your Personal Page and can be canceled from this page or from the main page "
 "of the file release system."
 msgstr ""
-"Cuando alguien del equipo de desarrollo "
-"del proyecto publique una nueva release, sera notificado automaricamente por "
-"email. Todas las monitorizaciones de Releases de Ficheros se mostrarán en su "
-"Página Personal y pueden ser canceladas en esta página o en la pagina "
-"principal del sistema de liberación(release) de ficheros."
+"Cuando alguien del equipo de desarrollo del proyecto publique una nueva "
+"release, sera notificado automaricamente por email. Todas las "
+"monitorizaciones de Releases de Ficheros se mostrarán en su Página Personal "
+"y pueden ser canceladas en esta página o en la pagina principal del sistema "
+"de liberación(release) de ficheros."
 
 #: common/widget/Widget_ProjectLatestNews.class.php:80
 msgid "List the last 10 pieces of news posted by the project members."
-msgstr "Lista las últimas 10 noticias publicadas por los miembros del proyecto."
+msgstr ""
+"Lista las últimas 10 noticias publicadas por los miembros del proyecto."
 
 #: common/widget/Widget_ProjectMembers.class.php:33
 msgid "Project Members"
@@ -9086,6 +9090,7 @@ msgid "Sub project succesfully deleted."
 msgstr "Subproyecto eliminado correctamente."
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
+#: plugins/extsubproj/include/extsubprojPlugin.class.php:76
 msgid "External subprojects admin"
 msgstr "Administracion subproyectos externos"
 
@@ -9093,10 +9098,6 @@ msgstr "Administracion subproyectos externos"
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:76
 msgid "Configure the External subprojects plugin"
 msgstr "Configura el plugin de subproyectos Externos"
-
-#: plugins/extsubproj/include/extsubprojPlugin.class.php:76
-msgid "External subprojects Admin"
-msgstr "Administración subproyectos externos"
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:98
 msgid "Site Global External subprojects Admin"
@@ -22949,6 +22950,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "External subprojects Admin"
+#~ msgstr "Administración subproyectos externos"
 
 #~ msgid "Project Info"
 #~ msgstr "Información del Proyecto"

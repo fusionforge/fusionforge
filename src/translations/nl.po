@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-09 15:56+0200\n"
+"POT-Creation-Date: 2013-10-10 10:12+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9279,6 +9279,7 @@ msgid "Sub project succesfully deleted."
 msgstr "%1$s verwijderen gelukt."
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
+#: plugins/extsubproj/include/extsubprojPlugin.class.php:76
 #, fuzzy
 msgid "External subprojects admin"
 msgstr "Subproject Naam"
@@ -9287,11 +9288,6 @@ msgstr "Subproject Naam"
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:76
 msgid "Configure the External subprojects plugin"
 msgstr ""
-
-#: plugins/extsubproj/include/extsubprojPlugin.class.php:76
-#, fuzzy
-msgid "External subprojects Admin"
-msgstr "Tracker beheer"
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:98
 msgid "Site Global External subprojects Admin"
@@ -23409,6 +23405,10 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#, fuzzy
+#~ msgid "External subprojects Admin"
+#~ msgstr "Tracker beheer"
 
 #~ msgid "Project Info"
 #~ msgstr "Project info"
