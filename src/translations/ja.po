@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:59+0200\n"
+"POT-Creation-Date: 2013-10-10 16:02+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4091,6 +4091,7 @@ msgid "Add Repository"
 msgstr "デベロッパー情報"
 
 #: common/include/session.php:189 plugins/authbuiltin/www/post-login.php:95
+#: plugins/authldap/www/post-login.php:88
 #, fuzzy
 msgid "Missing Password Or User Name"
 msgstr "そのようなユーザー名、あるいは、パスワードは存在しません。"
@@ -8157,10 +8158,6 @@ msgstr "ログイン名:"
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 msgid "Password:"
 msgstr "パスワード:"
-
-#: plugins/authldap/www/post-login.php:88
-msgid "Missing Password Or Users Name"
-msgstr "そのようなユーザー名、あるいは、パスワードは存在しません。"
 
 #: plugins/authldap/www/post-login.php:91
 msgid "LDAP server unreachable"
@@ -22500,6 +22497,9 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr "%sのパーソナルページ"
+
+#~ msgid "Missing Password Or Users Name"
+#~ msgstr "そのようなユーザー名、あるいは、パスワードは存在しません。"
 
 #, fuzzy
 #~ msgid "Error getting forum"

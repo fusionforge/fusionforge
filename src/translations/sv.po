@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:59+0200\n"
+"POT-Creation-Date: 2013-10-10 16:02+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4170,6 +4170,7 @@ msgid "Add Repository"
 msgstr "SCM Lager"
 
 #: common/include/session.php:189 plugins/authbuiltin/www/post-login.php:95
+#: plugins/authldap/www/post-login.php:88
 #, fuzzy
 msgid "Missing Password Or User Name"
 msgstr "Saknat lösenord eller användarnamn"
@@ -8318,10 +8319,6 @@ msgstr "Inloggningsnamn:"
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 msgid "Password:"
 msgstr "Lösenord:"
-
-#: plugins/authldap/www/post-login.php:88
-msgid "Missing Password Or Users Name"
-msgstr "Saknat lösenord eller användarnamn"
 
 #: plugins/authldap/www/post-login.php:91
 msgid "LDAP server unreachable"
@@ -23140,6 +23137,9 @@ msgstr "Användarenamn"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
+
+#~ msgid "Missing Password Or Users Name"
+#~ msgstr "Saknat lösenord eller användarnamn"
 
 #, fuzzy
 #~ msgid "Error getting forum"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:59+0200\n"
+"POT-Creation-Date: 2013-10-10 16:02+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -4193,6 +4193,7 @@ msgid "Add Repository"
 msgstr "Repositorio de SCM "
 
 #: common/include/session.php:189 plugins/authbuiltin/www/post-login.php:95
+#: plugins/authldap/www/post-login.php:88
 #, fuzzy
 msgid "Missing Password Or User Name"
 msgstr "Falta o contrasinal ou o nome de usuario "
@@ -8422,10 +8423,6 @@ msgstr "Nome de usuario: "
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 msgid "Password:"
 msgstr "Contrasinal: "
-
-#: plugins/authldap/www/post-login.php:88
-msgid "Missing Password Or Users Name"
-msgstr "Falta o contrasinal ou o nome de usuario "
 
 #: plugins/authldap/www/post-login.php:91
 msgid "LDAP server unreachable"
@@ -23536,6 +23533,9 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#~ msgid "Missing Password Or Users Name"
+#~ msgstr "Falta o contrasinal ou o nome de usuario "
 
 #~ msgid "Free form text for the \"submit new item\" page"
 #~ msgstr ""

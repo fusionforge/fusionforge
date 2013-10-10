@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:59+0200\n"
+"POT-Creation-Date: 2013-10-10 16:02+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4181,6 +4181,7 @@ msgid "Add Repository"
 msgstr "SCM repository"
 
 #: common/include/session.php:189 plugins/authbuiltin/www/post-login.php:95
+#: plugins/authldap/www/post-login.php:88
 #, fuzzy
 msgid "Missing Password Or User Name"
 msgstr "Ontbrekend wachtwoord of gebruikersnaam"
@@ -8379,10 +8380,6 @@ msgstr "Loginnaam:"
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 msgid "Password:"
 msgstr "Wachtwoord:"
-
-#: plugins/authldap/www/post-login.php:88
-msgid "Missing Password Or Users Name"
-msgstr "Ontbrekend wachtwoord of gebruikersnaam"
 
 #: plugins/authldap/www/post-login.php:91
 msgid "LDAP server unreachable"
@@ -23366,6 +23363,9 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#~ msgid "Missing Password Or Users Name"
+#~ msgstr "Ontbrekend wachtwoord of gebruikersnaam"
 
 #, fuzzy
 #~ msgid "Error getting forum"

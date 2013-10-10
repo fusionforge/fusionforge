@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 15:59+0200\n"
+"POT-Creation-Date: 2013-10-10 16:02+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -4068,6 +4068,7 @@ msgid "Add Repository"
 msgstr "Repositorio SCM"
 
 #: common/include/session.php:189 plugins/authbuiltin/www/post-login.php:95
+#: plugins/authldap/www/post-login.php:88
 msgid "Missing Password Or User Name"
 msgstr "No se encuentra nombre de usuario o password"
 
@@ -8233,10 +8234,6 @@ msgstr "LDAP nombre acceso:"
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 msgid "Password:"
 msgstr "Contraseña:"
-
-#: plugins/authldap/www/post-login.php:88
-msgid "Missing Password Or Users Name"
-msgstr "Nombre de usuario o password olvidado"
 
 #: plugins/authldap/www/post-login.php:91
 msgid "LDAP server unreachable"
@@ -22917,6 +22914,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Missing Password Or Users Name"
+#~ msgstr "Nombre de usuario o password olvidado"
 
 #~ msgid "Free form text for the \"submit new item\" page"
 #~ msgstr "Texto libre para la página \"añade un nuevo elemento\""
