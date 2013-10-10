@@ -108,7 +108,6 @@ class headermenuPlugin extends Plugin {
 		}
 	}
 
-
 	function getAdminOptionLink() {
 		return util_make_link('/plugins/'.$this->name.'/?type=globaladmin', _('Global HeaderMenu admin'), array('class' => 'tabtitle', 'title' => _('Direct link to global configuration of this plugin')));
 	}
@@ -116,7 +115,7 @@ class headermenuPlugin extends Plugin {
 	/**
 	 * headermenu - Display the links following the template
 	 *
-	 * @param $params
+	 * @param	array	$params
 	 * @return	bool	true...
 	 */
 	function headermenu($params) {
@@ -134,7 +133,7 @@ class headermenuPlugin extends Plugin {
 	/**
 	 * getOuterLink - update the links before generate the tab.
 	 *
-	 * @param 	array	hook params array
+	 * @param 	array	$params	hook params array
 	 * @return	bool	true...
 	 */
 	function getOuterLink($params) {
@@ -163,7 +162,7 @@ class headermenuPlugin extends Plugin {
 	/**
 	 * getGroupLink - update the links before generate the tab.
 	 *
-	 * @param	array	hook params array
+	 * @param	array	$params	hook params array
 	 * @return	bool	true...
 	 */
 	function getGroupLink($params) {
@@ -204,8 +203,8 @@ class headermenuPlugin extends Plugin {
 	/**
 	 * getAvailableLinks - get all the links from the db of certain kind
 	 *
-	 * @param	string	the type of menu links search in db
-	 * @param	int	the group_id. Default is 0 meaning : forge level
+	 * @param	string	$linkmenu	the type of menu links search in db
+	 * @param	int		$project	the group_id. Default is 0 meaning : forge level
 	 * @return	array	the available links
 	 */
 	function getAvailableLinks($linkmenu, $project = 0) {
@@ -289,7 +288,7 @@ class headermenuPlugin extends Plugin {
 	/**
 	 * deleteLink - delete a link
 	 *
-	 * @param	int	$idLink the link id
+	 * @param	int		$idLink the link id
 	 * @return	bool	success or not
 	 */
 	function deleteLink($idLink) {
@@ -303,8 +302,8 @@ class headermenuPlugin extends Plugin {
 	/**
 	 * updateLinkStatus - update the link status
 	 *
-	 * @param	int	$idLink the link id
-	 * @param	int	$linkStatus the new status of the link id
+	 * @param	int		$idLink the link id
+	 * @param	int		$linkStatus the new status of the link id
 	 * @return	bool	success or not
 	 */
 	function updateLinkStatus($idLink, $linkStatus) {
@@ -332,7 +331,7 @@ class headermenuPlugin extends Plugin {
 	/**
 	 * updateLink - update a valid link
 	 *
-	 * @param	int	$idLink the link id to be updated
+	 * @param	int		$idLink the link id to be updated
 	 * @param	string	$url the url
 	 * @param	string	$name the displayed name
 	 * @param	string	$description a short description (to help administration)
@@ -354,7 +353,7 @@ class headermenuPlugin extends Plugin {
 	/**
 	 * pageView - display an HTML Page
 	 *
-	 * @param	int	the page id
+	 * @param	int		$pageid	the page id
 	 * @return	string	the html code
 	 */
 	function pageView($pageid) {
@@ -369,7 +368,7 @@ class headermenuPlugin extends Plugin {
 	/**
 	 * iframeView - display the iframe
 	 *
-	 * @param	int	the iframe id
+	 * @param	int		$pageid	the iframe id
 	 * @return	string	the html code
 	 */
 	 function iframeView($pageid) {
@@ -384,7 +383,7 @@ class headermenuPlugin extends Plugin {
 	/**
 	 * getHeader - initialize header and js
 	 *
-	 * @param	string	type : user, project, globaladmin (aka group)
+	 * @param	string	$type : user, project, globaladmin (aka group)
 	 * @return	bool	success or not
 	 */
 	function getHeader($type) {
