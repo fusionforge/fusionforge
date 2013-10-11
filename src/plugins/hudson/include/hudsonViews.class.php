@@ -322,7 +322,7 @@ class hudsonViews extends Views {
 					$job = new HudsonJob($row['job_url']);
 
 					echo '  <td><img src="'.$job->getStatusIcon().'" alt="'.$job->getStatus().'" title="'.$job->getStatus().'" /></td>';
-					// function toggle_iframe is in script plugins/hudson/www/hudson_tab.js
+					// function toggle_iframe is in script plugins/hudson/www/scripts/hudson_tab.js
 					echo '  <td class="boxitem"><a href="'.$job->getUrl().'" onclick="toggle_iframe(this); return false;" title="'.vsprintf(_("Show job %s"),  array($row['name'])).'">'.$row['name'].'</a></td>';
 					if ($job->getLastSuccessfulBuildNumber() != '') {
 						echo '  <td><a href="'.$job->getLastSuccessfulBuildUrl().'" onclick="toggle_iframe(this); return false;" title="'.vsprintf(_("Show build #%s of job %s"),  array($job->getLastSuccessfulBuildNumber(), $row['name'])).'">'._("build").' #'.$job->getLastSuccessfulBuildNumber().'</a></td>';
