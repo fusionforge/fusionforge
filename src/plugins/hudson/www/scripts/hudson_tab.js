@@ -1,7 +1,7 @@
-<?php
 /**
- * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright (c) Xerox Corporation, Codendi Team, 2001-2008. All rights reserved
  * Copyright 2013, Franck Villaume - TrivialDev
+ * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
  *
@@ -19,19 +19,12 @@
  * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once '../../env.inc.php';
-require_once $gfcommon.'include/pre.php';
-require_once 'preplugins.php';
-require_once 'plugins_utils.php';
-
-html_use_jquery();
-use_javascripts('scripts/hudson_tab.js');
-
-$plugin_manager = PluginManager::instance();
-$p = $plugin_manager->getPluginByName('hudson');
-
-if ($p && $plugin_manager->isPluginAvailable($p)) {
-	$p->process();
-} else {
-	session_redirect(get_server_url());
+function toggle_iframe(joburl) {
+	if (!jQuery('#hudson_iframe_div').visible()) {
+		jQuery('#hudson_iframe_div').fadeToggle('slow', 'linear');
+	}
+	jQuery('#hudson_iframe').attr('src', joburl);
+	if (jQuery('#link_show_only').length) {
+		jQuery('#link_show_only').attr('href', joburl);
+	}
 }
