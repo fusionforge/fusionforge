@@ -8,7 +8,7 @@
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
  * Copyright © 2011 Thorsten Glaser – tarent GmbH
  * Copyright 2011 - Marc-Etienne Vargenau, Alcatel-Lucent
- * Copyright 2012 - Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -1363,11 +1363,11 @@ if (isset($params['group']) && $params['group']) {
 		echo "</div>\n";
 		if ($widget->isAjax()) {
 			echo '<script type="text/javascript">/* <![CDATA[ */'."
-				document.observe('dom:loaded', function () {
-						$('$element_id-ajax').update('<div style=\"text-align:center\">". $this->getPicto('ic/spinner.gif','spinner','spinner', 10, 10) ."</div>');
-						new Ajax.Updater('$element_id-ajax',
-							'". $widget->getAjaxUrl($owner_id, $owner_type) ."'
-							);
+				jQuery(document).ready(function() {
+						jQuery('#$element_id-ajax').html('<div style=\"text-align:center\">". $this->getPicto('ic/spinner.gif','spinner','spinner', 10, 10) ."</div>');
+						jQuery.ajax({url:'". $widget->getAjaxUrl($owner_id, $owner_type) ."',
+							success: function(result){jQuery('#$element_id-ajax').html(result)},
+							});
 						});
 			/* ]]> */</script>";
 		}
