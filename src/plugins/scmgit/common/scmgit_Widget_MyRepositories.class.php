@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -43,7 +43,7 @@ class scmgit_Widget_MyRepositories extends Widget {
 	function getContent() {
 		$user = UserManager::instance()->getCurrentUser();
 		$scmgitplugin = plugin_get_object('scmgit');
-		$GitRepositories = $this->getMyRepositoriesList();
+		$GitRepositories = $this->getMyRepositoriesList($scmgitplugin);
 		if (count($GitRepositories)) {
 			$returnhtml = '<table>';
 			foreach ($GitRepositories as $GitRepository) {
@@ -58,16 +58,17 @@ class scmgit_Widget_MyRepositories extends Widget {
 		}
 	}
 
-	function getMyRepositoriesList() {
+	function getMyRepositoriesList($scmgitplugin) {
+		$scmgitplugin_id = array_search('scmgit', PluginManager::instance()->getPlugins());
 		$returnedArray = array();
-		$res = db_query_params('SELECT p.group_id FROM plugin_scmgit_personal_repos p, users u WHERE u.user_id=p.user_id AND u.unix_status = $1 AND u.user_id = $2',
-					array('A',$this->owner_id));
+		$res = db_query_params('SELECT group_id FROM scm_personal_repos WHERE user_id = $1 AND plugin_id = $2',
+					array($this->owner_id, $scmgitplugin_id));
 		if (!$res) {
 			return $returnedArray;
 		} else {
 			$rows = db_numrows($res);
-			for ($i=0; $i<$rows; $i++) {
-				$returnedArray[] = db_result($res,$i,'group_id');
+			for ($i = 0; $i < $rows; $i++) {
+				$returnedArray[] = db_result($res, $i, 'group_id');
 			}
 		}
 		return $returnedArray;
