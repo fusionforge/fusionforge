@@ -7,6 +7,7 @@
  * Copyright 2001-2009, Xerox Corporation, Codendi Team
  * Copyright 2010, Mélanie Le Bail
  * Copyright 2011, Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -325,7 +326,7 @@ class Plugin extends Error {
 			}
 			echo ' />    '. sprintf(_('Use %s Plugin'), $this->text);
 			echo html_image($imgStatus, '16', '16',array('alt'=>$title, 'title'=>$title));
-			echo '</div';
+			echo '</div>';
 		}
 	}
 

@@ -136,7 +136,7 @@ echo $HTML->boxTop(_('Account Maintenance'));
 	<li><?php echo util_make_link ('/people/editprofile.php','<strong>'._('Edit My Skills Profile').'</strong>'); ?></li>
 <?php } ?>
 </ul>
-<?php echo $HTML->boxBottom(); ?>
+
 
 <table class="infotable">
 
@@ -235,10 +235,9 @@ echo $HTML->boxTop(_('Account Maintenance'));
 <input type="text" name="title" value="<?php echo $u->getTitle(); ?>" size="10"/>
 </td>
 </tr>
-
-<tr>
-<td colspan="2">
-<?php
+</table>
+<?php 
+echo $HTML->boxBottom();
 // ############################# Preferences
 echo $HTML->boxTop(_('Preferences')); ?>
 
@@ -279,9 +278,6 @@ echo "\n</div>";
 // displays a "Use xxxx Plugin" checkbox
 plugin_hook("userisactivecheckbox", $hookParams);
 ?>
-</td></tr>
-<tr><td colspan="2">
-
 <?php
 echo $HTML->boxBottom();
 
