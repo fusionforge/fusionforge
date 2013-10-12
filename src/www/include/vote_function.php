@@ -4,6 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010, FusionForge Team
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -412,6 +413,7 @@ function vote_show_user_rate_box ($user_id, $by_id=0) {
 ';
 	for ($i=1; $i<=count($USER_RATING_QUESTIONS); $i++) {
 		$popup="USER_RATING_POPUP$i";
+		global $$popup;
 		if (!isset($prev_vote[$i])) {
 			$prev_vote[$i] = '';
 		}
