@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2011-2012, Franck Villaume - TrivialDev
+ * Copyright 2011-2013, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -84,6 +84,14 @@ if ($d_arr != NULL ) {
 		}
 	}
 }
+
+echo '<div id="leftdiv">';
+include ($gfcommon.'docman/views/tree.php');
+echo '</div>';
+echo '<div id="rightdiv">';
+echo '<div style="padding:5px;"><form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&amp;action=emptytrash" >';
+echo '<input id="submitemptytrash" type="submit" value="'. _('Delete permanently all documents and folders with deleted status.') .'" >';
+echo '</form></div>';
 ?>
 <script type="text/javascript">//<![CDATA[
 var controllerListTrash;
@@ -95,24 +103,14 @@ jQuery(document).ready(function() {
 		buttonEditDirectory:	jQuery('#docman-editdirectory'),
 		docManURL:		'<?php util_make_uri("docman") ?>',
 		lockIntervalDelay:	60000, //in microsecond and if you change this value, please update the check value 600
-		divLeft:		jQuery('#left'),
-		divHandle:		jQuery('#handle'),
-		divRight:		jQuery('#right'),
+		divLeft:		jQuery('leftdiv'),
+		divRight:		jQuery('rightdiv'),
 		divEditFile:		jQuery('#editFile'),
 		divEditTitle:		'<?php echo _("Edit document dialog box") ?>'
 	});
 });
 //]]></script>
 <?php
-echo '<div style="padding:5px;"><form id="emptytrash" name="emptytrash" method="post" action="?group_id='.$group_id.'&amp;action=emptytrash" >';
-echo '<input id="submitemptytrash" type="submit" value="'. _('Delete permanently all documents and folders with deleted status.') .'" >';
-echo '</form></div>';
-
-echo '<div id="left" style="float:left; width:17%; min-width: 50px;">';
-include ($gfcommon.'docman/views/tree.php');
-echo '</div>';
-echo '<div id="handle" style="float:left; height:100px; margin:3px; width:3px; background: #000; cursor:e-resize;"></div>';
-echo '<div id="right" style="float:left; width: 80%; overflow: auto; max-width: 90%;">';
 if ($DocGroupName) {
 	echo '<h3 class="docman_h3" >'._('Document Folder')._(': ').' <i>'.$DocGroupName.'</i>&nbsp;';
 	if ($DocGroupName != '.trash') {
@@ -212,7 +210,6 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 }
 
 echo '</div>';
-echo '<div style="clear: both;"></div>';
 if (forge_check_perm('docman', $g->getID(), 'approve')) {
 	include ($gfcommon.'docman/views/editfile.php');
 }

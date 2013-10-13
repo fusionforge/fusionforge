@@ -62,7 +62,7 @@ DocManListFileController.prototype =
 
 	resizableDiv: function() {
 		var splitterPosition = '30%';
-		var mainwidth = jQuery(document).width();
+		var mainwidth = jQuery(window).width();
 		if (jQuery.Storage.get('splitterStyle') !== undefined) {
 			storedSplitterPosition = jQuery.Storage.get('splitterStyle').replace(/\D/g, '');
 			splitterPosition = Math.round(storedSplitterPosition * 100 / mainwidth )+'%';
@@ -75,7 +75,7 @@ DocManListFileController.prototype =
 			jQuery.Storage.set('splitterStyle',''+jQuery('.vsplitter').attr('style'));
 		});
 		jQuery(window).resize(function(){
-			(jQuery('#leftdiv').height() > jQuery('#rightdiv').height()) ? mainheight = jQuery('#leftdiv').height() : mainheight = jQuery('#rightdiv').height();
+			(jQuery('#leftdiv').height() > jQuery('#rightdiv')) ? mainheight = jQuery('#leftdiv').height() : mainheight = jQuery('#rightdiv').height();
 			jQuery('#views').width(jQuery(window).width() - 35).height(mainheight);
 		});
 	},
@@ -136,14 +136,20 @@ DocManListFileController.prototype =
 			if (typeof(this.params.divAddItem) != 'undefined') {
 				this.params.divAddItem.hide();
 			}
+			computeHeight = this.params.divRight.height() + jQuery(this.params.divEditDirectory).height();
+			currentLeftHeight = this.params.divLeft.height();
+			this.params.divLeft.height(currentLeftHeight + jQuery(this.params.divEditDirectory).height());
 		} else {
 			this.params.divEditDirectory.hide();
+			computeHeight = this.params.divRight.height() - jQuery(this.params.divEditDirectory).height();
+			currentLeftHeight = this.params.divLeft.height();
+			this.params.divLeft.height(currentLeftHeight - jQuery(this.params.divEditDirectory).height());
 		}
 		if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
-			if (this.params.divLeft.height() > this.params.divRight.height()) {
-				this.params.divHandle.css('height', this.params.divLeft.height());
+			if (this.params.divLeft.height() > computeHeight) {
+				jQuery('#views').width(jQuery(window).width() - 35).height(this.params.divLeft.height());
 			} else {
-				this.params.divHandle.css('height', this.params.divRight.height());
+				jQuery('#views').width(jQuery(window).width() - 35).height(computeHeight);
 			}
 		}
 		return false;
@@ -155,14 +161,20 @@ DocManListFileController.prototype =
 		if (!this.params.divAddItem.is(":visible")) {
 			this.params.divAddItem.show();
 			this.params.divEditDirectory.hide();
+			computeHeight = this.params.divRight.height() + jQuery(this.params.divAddItem).height();
+			currentLeftHeight = this.params.divLeft.height();
+			this.params.divLeft.height(currentLeftHeight + jQuery(this.params.divAddItem).height());
 		} else {
 			this.params.divAddItem.hide();
+			computeHeight = this.params.divRight.height() - jQuery(this.params.divAddItem).height();
+			currentLeftHeight = this.params.divLeft.height();
+			this.params.divLeft.height(currentLeftHeight - jQuery(this.params.divAddItem).height());
 		}
 		if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
-			if (this.params.divLeft.height() > this.params.divRight.height()) {
-				this.params.divHandle.css('height', this.params.divLeft.height());
+			if (this.params.divLeft.height() > computeHeight) {
+				jQuery('#views').width(jQuery(window).width() - 35).height(this.params.divLeft.height());
 			} else {
-				this.params.divHandle.css('height', this.params.divRight.height());
+				jQuery('#views').width(jQuery(window).width() - 35).height(computeHeight);
 			}
 		}
 		return false;
@@ -258,7 +270,6 @@ DocManListFileController.prototype =
 			jQuery('#massaction'+id).hide();
 		}
 		for (var h = 0; h < jQuery("input:checked").length; h++) {
-			console.log("%s", jQuery("input:checked")[h].className);
 			if (typeof(jQuery("input:checked")[h].className) != "undefined" && jQuery("input:checked")[h].className.match('checkeddocid'+id)) {
 				jQuery('#massaction'+id).show();
 			}
