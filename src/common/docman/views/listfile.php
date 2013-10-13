@@ -45,7 +45,7 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 	session_redirect($baseredirecturl.'&warning_msg='.urlencode($return_msg));
 }
 
-echo '<div id="left" style="float:left; width:17%; min-width: 50px; overflow: auto;">';
+echo '<div id="leftdiv">';
 include ($gfcommon.'docman/views/tree.php');
 echo '</div>';
 
@@ -137,6 +137,7 @@ if ($d_pending_arr != NULL ) {
 	}
 }
 
+echo '<div id="rightdiv">';
 ?>
 
 <script type="text/javascript">//<![CDATA[
@@ -162,8 +163,6 @@ jQuery(document).ready(function() {
 //]]></script>
 
 <?php
-echo '<div id="handle" style="float:left; height:100px; margin:3px; width:3px; background: #000; cursor:e-resize;"></div>';
-echo '<div id="right" style="float:left; width: 80%; overflow: auto; max-width: 90%;">';
 if ($DocGroupName) {
 	$headerPath = '<h2>';
 	if ($childgroup_id) {
@@ -380,15 +379,9 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 if (forge_check_perm('docman', $group_id, 'approve') && $DocGroupName) {
 	include ($gfcommon.'docman/views/pendingfiles.php');
 }
-echo '</div>';
-echo '<div style="clear: both;"></div>';
 if (forge_check_perm('docman', $g->getID(), 'approve')) {
 	include ($gfcommon.'docman/views/editfile.php');
 }
 
-echo '<div class="docmanDivIncluded">';
-plugin_hook ("blocks", "doc help");
-if (forge_get_config('use_webdav') && $g->useWebdav()) {
-	echo '<p><i>'. util_make_link('/docman/view.php/'.$group_id.'/webdav',_('Documents are also available thru webdav access')) .'</i></p>';
-}
+include ($gfcommon.'docman/views/help.php');
 echo '</div>';

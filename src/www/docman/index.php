@@ -111,6 +111,7 @@ if (session_loggedin()) {
 html_use_storage();
 html_use_simplemenu();
 html_use_jqueryui();
+html_use_jquerysplitter();
 use_javascript('scripts/DocManController.js');
 use_javascript('/js/sortable.js');
 
@@ -118,11 +119,11 @@ $title = _('Documents for ').$g->getPublicName();
 
 site_project_header(array('title'=>$title, 'group'=>$group_id, 'toptab'=>'docman'));
 
-echo '<div>';
+echo '<div id="menu" >';
 include ($gfcommon.'docman/views/menu.php');
 echo '</div>';
 
-echo '<div>';
+echo '<div id="views" >';
 include ($gfcommon.'docman/views/views.php');
 echo '</div>';
 

@@ -6,6 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -36,7 +37,7 @@ if (!forge_check_perm('docman', $group_id, 'read')) {
 	session_redirect('/docman/?group_id='.$group_id.'&warning_msg='.urlencode($return_msg));
 }
 
-echo '<div id="documenttree" style="height:100%">';
+echo '<div id="documenttree">';
 $dm = new DocumentManager($g);
 echo '<ul id="'.$g->getUnixname().'-tree">';
 $dm->getTree($dirid, $linkmenu);

@@ -32,7 +32,6 @@ DocManListFileController = function(params)
 	this.params		= params;
 	this.bindControls();
 	this.resizableDiv();
-	this.initSize();
 	this.initModalEditWindow();
 };
 
@@ -62,35 +61,23 @@ DocManListFileController.prototype =
 	},
 
 	resizableDiv: function() {
-		if (typeof(this.params.divHandle) != 'undefined') {
-			this.params.divHandle.mousedown(jQuery.proxy(this, "dragging"));
-			var params = this.params;
-			var w = jQuery('#maindiv').width() - this.params.divHandle.width() - 10;
-			jQuery(document).mouseup(function(){isDragging = false;}).mousemove(function(e){
-				if (typeof(isDragging) != 'undefined') {
-					if (isDragging) {
-						params.divLeft.css('width', e.pageX);
-						params.divRight.css('width', w - e.pageX);
-						jQuery.Storage.set("treesize",""+params.divLeft.width());
-					}
-				}
-			});
+		var splitterPosition = '30%';
+		var mainwidth = jQuery(document).width();
+		if (jQuery.Storage.get('splitterStyle') !== undefined) {
+			storedSplitterPosition = jQuery.Storage.get('splitterStyle').replace(/\D/g, '');
+			splitterPosition = Math.round(storedSplitterPosition * 100 / mainwidth )+'%';
 		}
-	},
-
-	initSize: function() {
-		if (typeof(this.params.divLeft) != 'undefined' && typeof(this.params.divRight) != 'undefined') {
-			if (this.params.divLeft.height() > this.params.divRight.height()) {
-				this.params.divHandle.css('height', this.params.divLeft.height());
-			} else {
-				this.params.divHandle.css('height', this.params.divRight.height());
-			}
-			if (jQuery.Storage.get("treesize") != 0) {
-				this.params.divLeft.css('width', parseInt(jQuery.Storage.get("treesize")));
-				var w = jQuery('#maindiv').width() - this.params.divHandle.width() - 10;
-				this.params.divRight.css('width', w - this.params.divLeft.width());
-			}
-		}
+		(jQuery('#leftdiv').height() > jQuery('#rightdiv').height()) ? mainheight = jQuery('#leftdiv').height() : mainheight = jQuery('#rightdiv').height();
+		jQuery('#views').width(mainwidth - 35)
+				.height(mainheight)
+				.split({orientation:'vertical', limit:100, position: splitterPosition});
+		jQuery('.vsplitter').mouseup(function(){
+			jQuery.Storage.set('splitterStyle',''+jQuery('.vsplitter').attr('style'));
+		});
+		jQuery(window).resize(function(){
+			(jQuery('#leftdiv').height() > jQuery('#rightdiv').height()) ? mainheight = jQuery('#leftdiv').height() : mainheight = jQuery('#rightdiv').height();
+			jQuery('#views').width(jQuery(window).width() - 35).height(mainheight);
+		});
 	},
 
 	initModalEditWindow: function() {
@@ -139,10 +126,6 @@ DocManListFileController.prototype =
 			});
 			clearInterval(this.lockInterval[id]);
 		}, this));
-	},
-
-	dragging: function() {
-		isDragging = true;
 	},
 
 	/*! toggle edit group view div visibility

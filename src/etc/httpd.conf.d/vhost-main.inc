@@ -42,6 +42,7 @@ Alias /scripts/jquery-simpletreemenu/ {core/source_path}/vendor/jquery-simpletre
 Alias /scripts/jquery-jqplot/ {core/source_path}/vendor/jquery-jqplot/
 Alias /scripts/jquery-teamwork-gantt/ {core/source_path}/vendor/jquery-teamwork-gantt/
 Alias /scripts/yui/ {core/source_path}/vendor/yui/build/
+Alias /scripts/jquery-splitter/ {core/source_path}/vendor/jquery-splitter/
 
 # For FusionForge without DNS delegation, uncomment this
 # and remove 30-vhosts-projects.conf
