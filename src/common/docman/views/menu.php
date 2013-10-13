@@ -58,8 +58,8 @@ if ($g->useDocmanSearch()) {
 }
 
 if (forge_check_perm('docman', $group_id, 'approve')) {
-    $df = new DocumentFactory($g);
-    if (!$df->isTrashEmpty()) {
+    $dm = new DocumentManager($g);
+    if (!$dm->isTrashEmpty()) {
         $menu_text[] = _('Trash');
         $menu_links[] = '/docman/?group_id='.$group_id.'&amp;view=listtrashfile';
         $menu_attr[] = array('title' => _('Recover or delete permanently files with deleted status.'), 'id' => 'trashDocmanMenu', 'class' => 'tabtitle');

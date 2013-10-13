@@ -369,19 +369,6 @@ class DocumentFactory extends Error {
 		}
 		return true;
 	}
-
-	/**
-	 * isTrashEmpty - check if the trash is empty
-	 * @return	boolean	success or not
-	 */
-	function isTrashEmpty() {
-		$res = db_query_params('select count(*) as c from docdata_vw where group_id = $1 and stateid = 2',
-					array($this->Group->getID()));
-		if (!$res) {
-			return false;
-		}
-		return (db_result($res, 0, 'c') == 0);
-	}
 }
 
 // Local Variables:

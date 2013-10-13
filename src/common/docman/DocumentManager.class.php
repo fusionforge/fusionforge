@@ -127,6 +127,20 @@ class DocumentManager extends Error {
 		}
 		return false;
 	}
+	
+	/**
+	 * isTrashEmpty - check if the trash is empty
+	 * @return	boolean	success or not
+	 */
+	function isTrashEmpty() {
+		$res = db_query_params('select ( select count(*) from doc_groups where group_id = $1 and stateid = 2 and groupname !=$2 )
+					+ ( select count(*) from docdata_vw where group_id = $3 and stateid = 2 ) as c',
+					array($this->Group->getID(), '.trash', $this->Group->getID()));
+		if (!$res) {
+			return false;
+		}
+		return (db_result($res, 0, 'c') == 0);
+	}
 
 	/**
 	 *  getTree - display recursively the content of the doc_group. Only doc_groups within doc_groups.
