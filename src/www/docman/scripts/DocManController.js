@@ -62,7 +62,7 @@ DocManListFileController.prototype =
 
 	resizableDiv: function() {
 		var splitterPosition = '30%';
-		var mainwidth = jQuery(window).width();
+		var mainwidth = jQuery('#views').width();
 		if (jQuery.Storage.get('splitterStyle') !== undefined) {
 			storedSplitterPosition = jQuery.Storage.get('splitterStyle').replace(/\D/g, '');
 			splitterPosition = Math.round(storedSplitterPosition * 100 / mainwidth )+'%';
