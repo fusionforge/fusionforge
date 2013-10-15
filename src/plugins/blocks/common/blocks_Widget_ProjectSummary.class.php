@@ -40,11 +40,11 @@ class blocks_Widget_ProjectSummary extends Widget {
 	}
 
 	function getTitle() {
-		return ($this->title ? $this->title : 'Summary Page block of text');
+		return ($this->title ? $this->title : _('Summary Page block of text'));
 	}
 
 	function getDescription() {
-		return _("Add a free blocks on the project summary page to allow giving information.");
+		return _("Add a free block on the project summary page to allow giving information.");
 	}
 
 	function hasPreferences() {
@@ -52,9 +52,9 @@ class blocks_Widget_ProjectSummary extends Widget {
 	}
 	private function getPartialPreferencesForm($title, $content) {
 		$prefs  = '<table>';
-		$prefs .= '<tr><td>Title:</td>';
+		$prefs .= '<tr><td>'._('Title')._(':').'</td>';
 		$prefs .= '<td><input type="text" class="textfield_medium" name="title" value="'. htmlspecialchars($title) .'" /></td></tr>';
-		$prefs .= '<tr><td>Content:</td>';
+		$prefs .= '<tr><td>'._('Content')._(':').'</td>';
 
 		$params['body'] = $content;
 		$params['width'] = "500";
