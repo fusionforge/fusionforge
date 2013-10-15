@@ -133,7 +133,7 @@ class Widget_MyProjectsLastDocuments extends Widget {
 	}
 
 	function getCategory() {
-		return 'Documents-Manager';
+		return _('Documents Manager');
 	}
 
 	function isAvailable() {

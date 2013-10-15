@@ -100,7 +100,7 @@ class Widget_MyMonitoredDocuments extends Widget {
 	}
 
 	function getCategory() {
-		return 'Documents-Manager';
+		return _('Documents Manager');
 	}
 
 	function getDescription() {

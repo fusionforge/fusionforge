@@ -288,7 +288,7 @@ class Widget_MyArtifacts extends Widget {
 	}
 
 	function getCategory() {
-		return 'Trackers';
+		return _('Trackers');
 	}
 
 	function getDescription() {

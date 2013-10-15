@@ -116,7 +116,7 @@ class Widget_MyMonitoredFp extends Widget {
     }
 
     function getCategory() {
-        return 'frs';
+        return _('File Release System');
     }
     function getDescription() {
         return _("List packages that you are currently monitoring, by project.")

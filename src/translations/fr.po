@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 16:34+0200\n"
+"POT-Creation-Date: 2013-10-15 16:45+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -3383,16 +3383,19 @@ msgstr "Erreur lors de la suppression : "
 #: common/include/group_section_texts.php:29
 #: common/include/Navigation.class.php:425
 #: common/reporting/report_utils.php:136 common/reporting/report_utils.php:677
-#: common/reporting/report_utils.php:678 plugins/blocks/www/index.php:151
+#: common/reporting/report_utils.php:678
+#: common/widget/Widget_MyMonitoredForums.class.php:138
+#: plugins/blocks/www/index.php:151
 #: plugins/quota_management/www/quota_project.php:87
 #: www/export/rss20_activity.php:153
 msgid "Forums"
 msgstr "Forums"
 
 #: common/include/group_section_texts.php:30
-#: common/reporting/report_utils.php:698 plugins/blocks/www/index.php:152
-#: www/export/rss20_activity.php:120 www/export/rss20_activity.php:131
-#: www/reporting/toolspie.php:65
+#: common/reporting/report_utils.php:698
+#: common/widget/Widget_MyArtifacts.class.php:291
+#: plugins/blocks/www/index.php:152 www/export/rss20_activity.php:120
+#: www/export/rss20_activity.php:131 www/reporting/toolspie.php:65
 msgid "Trackers"
 msgstr "Outils de suivi"
 
@@ -3414,7 +3417,10 @@ msgstr "Tâches"
 msgid "Documents"
 msgstr "Documents"
 
-#: common/include/group_section_texts.php:33 www/export/rss20_activity.php:142
+#: common/include/group_section_texts.php:33
+#: common/widget/Widget_MyMonitoredFp.class.php:119
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:168
+#: www/export/rss20_activity.php:142
 msgid "File Release System"
 msgstr "Système de publication de fichiers"
 
@@ -7153,6 +7159,14 @@ msgstr ""
 msgid "%s new"
 msgstr "%s nouveaux"
 
+#: common/widget/Widget_MyMonitoredDocuments.class.php:103
+#: common/widget/Widget_MyProjectsLastDocuments.class.php:136
+#: common/widget/Widget_ProjectDocumentsActivity.class.php:212
+#: common/widget/Widget_ProjectLatestDocuments.class.php:135
+#, fuzzy
+msgid "Documents Manager"
+msgstr "Naviguer dans le gestionnaire de documentation"
+
 #: common/widget/Widget_MyMonitoredDocuments.class.php:107
 msgid "List documents that you are currently monitoring, by project."
 msgstr "Liste des documents que vous surveillez actuellement, par projet."
@@ -7432,7 +7446,7 @@ msgstr "Naviguer dans le gestionnaire de documentation"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:216
 msgid ""
-" Display activity about Document Manager (new documents, new edit, new "
+"Display activity about Documents Manager (new documents, new edit, new "
 "directory ...) during the last 4 weeks."
 msgstr ""
 "Afficher l'activité du gestionnaire de documentation (nouveaux documents, "
@@ -7505,7 +7519,8 @@ msgid "This Project Has Not Published Any Documents"
 msgstr "Ce projet n'a pas encore publié de documents"
 
 #: common/widget/Widget_ProjectLatestDocuments.class.php:139
-msgid " List the 5 most recent documents published by team project."
+#, fuzzy
+msgid "List the 5 most recent documents published by team project."
 msgstr "Liste des 5 derniers documents publiés par les membres du projet."
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:36
@@ -7536,11 +7551,6 @@ msgstr "Surveiller ce paquet"
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:157
 msgid "View All Project Files"
 msgstr "Voir tous les fichiers du projet"
-
-# : common/widget/Widget_ProjectLatestFileReleases.class.php:166
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:168
-msgid "File-Release"
-msgstr "Publication-de-fichiers"
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:172
 msgid ""
@@ -22737,6 +22747,10 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+# : common/widget/Widget_ProjectLatestFileReleases.class.php:166
+#~ msgid "File-Release"
+#~ msgstr "Publication-de-fichiers"
 
 #~ msgid ""
 #~ "Check to disable automatic linking of camelcase words to pages. Internal "

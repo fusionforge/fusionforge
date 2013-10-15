@@ -209,10 +209,10 @@ class Widget_ProjectDocumentsActivity extends Widget {
 	}
 
 	function getCategory() {
-		return 'Documents-Manager';
+		return _('Documents Manager');
 	}
 
 	function getDescription() {
-		return _(' Display activity about Document Manager (new documents, new edit, new directory ...) during the last 4 weeks.');
+		return _('Display activity about Documents Manager (new documents, new edit, new directory ...) during the last 4 weeks.');
 	}
 }

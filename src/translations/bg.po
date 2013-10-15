@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 16:34+0200\n"
+"POT-Creation-Date: 2013-10-15 16:45+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3444,16 +3444,19 @@ msgstr "Разрешение не беше получено"
 #: common/include/group_section_texts.php:29
 #: common/include/Navigation.class.php:425
 #: common/reporting/report_utils.php:136 common/reporting/report_utils.php:677
-#: common/reporting/report_utils.php:678 plugins/blocks/www/index.php:151
+#: common/reporting/report_utils.php:678
+#: common/widget/Widget_MyMonitoredForums.class.php:138
+#: plugins/blocks/www/index.php:151
 #: plugins/quota_management/www/quota_project.php:87
 #: www/export/rss20_activity.php:153
 msgid "Forums"
 msgstr "Форуми"
 
 #: common/include/group_section_texts.php:30
-#: common/reporting/report_utils.php:698 plugins/blocks/www/index.php:152
-#: www/export/rss20_activity.php:120 www/export/rss20_activity.php:131
-#: www/reporting/toolspie.php:65
+#: common/reporting/report_utils.php:698
+#: common/widget/Widget_MyArtifacts.class.php:291
+#: plugins/blocks/www/index.php:152 www/export/rss20_activity.php:120
+#: www/export/rss20_activity.php:131 www/reporting/toolspie.php:65
 msgid "Trackers"
 msgstr ""
 
@@ -3475,7 +3478,10 @@ msgstr ""
 msgid "Documents"
 msgstr ""
 
-#: common/include/group_section_texts.php:33 www/export/rss20_activity.php:142
+#: common/include/group_section_texts.php:33
+#: common/widget/Widget_MyMonitoredFp.class.php:119
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:168
+#: www/export/rss20_activity.php:142
 #, fuzzy
 msgid "File Release System"
 msgstr "Модул \"Пакети\""
@@ -7241,6 +7247,14 @@ msgstr ""
 msgid "%s new"
 msgstr ""
 
+#: common/widget/Widget_MyMonitoredDocuments.class.php:103
+#: common/widget/Widget_MyProjectsLastDocuments.class.php:136
+#: common/widget/Widget_ProjectDocumentsActivity.class.php:212
+#: common/widget/Widget_ProjectLatestDocuments.class.php:135
+#, fuzzy
+msgid "Documents Manager"
+msgstr "Преглед на документите"
+
 #: common/widget/Widget_MyMonitoredDocuments.class.php:107
 msgid "List documents that you are currently monitoring, by project."
 msgstr ""
@@ -7518,7 +7532,7 @@ msgstr "Преглед на документите"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:216
 msgid ""
-" Display activity about Document Manager (new documents, new edit, new "
+"Display activity about Documents Manager (new documents, new edit, new "
 "directory ...) during the last 4 weeks."
 msgstr ""
 
@@ -7588,7 +7602,7 @@ msgid "This Project Has Not Published Any Documents"
 msgstr "Този проект не е публикувал никакви файлове."
 
 #: common/widget/Widget_ProjectLatestDocuments.class.php:139
-msgid " List the 5 most recent documents published by team project."
+msgid "List the 5 most recent documents published by team project."
 msgstr ""
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:36
@@ -7619,11 +7633,6 @@ msgstr ""
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:157
 msgid "View All Project Files"
 msgstr "Преглед на всички издадени пакети"
-
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:168
-#, fuzzy
-msgid "File-Release"
-msgstr "Следващи Резултати"
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:172
 msgid ""
@@ -22626,6 +22635,10 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Лична Информация"
+
+#, fuzzy
+#~ msgid "File-Release"
+#~ msgstr "Следващи Резултати"
 
 #, fuzzy
 #~ msgid "Page"

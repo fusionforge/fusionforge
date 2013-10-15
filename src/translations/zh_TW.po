@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 16:34+0200\n"
+"POT-Creation-Date: 2013-10-15 16:45+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3515,16 +3515,19 @@ msgstr "無法完成執行"
 #: common/include/group_section_texts.php:29
 #: common/include/Navigation.class.php:425
 #: common/reporting/report_utils.php:136 common/reporting/report_utils.php:677
-#: common/reporting/report_utils.php:678 plugins/blocks/www/index.php:151
+#: common/reporting/report_utils.php:678
+#: common/widget/Widget_MyMonitoredForums.class.php:138
+#: plugins/blocks/www/index.php:151
 #: plugins/quota_management/www/quota_project.php:87
 #: www/export/rss20_activity.php:153
 msgid "Forums"
 msgstr "討論區"
 
 #: common/include/group_section_texts.php:30
-#: common/reporting/report_utils.php:698 plugins/blocks/www/index.php:152
-#: www/export/rss20_activity.php:120 www/export/rss20_activity.php:131
-#: www/reporting/toolspie.php:65
+#: common/reporting/report_utils.php:698
+#: common/widget/Widget_MyArtifacts.class.php:291
+#: plugins/blocks/www/index.php:152 www/export/rss20_activity.php:120
+#: www/export/rss20_activity.php:131 www/reporting/toolspie.php:65
 msgid "Trackers"
 msgstr "追蹤者"
 
@@ -3546,7 +3549,10 @@ msgstr "任務"
 msgid "Documents"
 msgstr ""
 
-#: common/include/group_section_texts.php:33 www/export/rss20_activity.php:142
+#: common/include/group_section_texts.php:33
+#: common/widget/Widget_MyMonitoredFp.class.php:119
+#: common/widget/Widget_ProjectLatestFileReleases.class.php:168
+#: www/export/rss20_activity.php:142
 #, fuzzy
 msgid "File Release System"
 msgstr "使用檔案發佈系統"
@@ -7406,6 +7412,14 @@ msgstr ""
 msgid "%s new"
 msgstr "新增"
 
+#: common/widget/Widget_MyMonitoredDocuments.class.php:103
+#: common/widget/Widget_MyProjectsLastDocuments.class.php:136
+#: common/widget/Widget_ProjectDocumentsActivity.class.php:212
+#: common/widget/Widget_ProjectLatestDocuments.class.php:135
+#, fuzzy
+msgid "Documents Manager"
+msgstr "查看文件"
+
 #: common/widget/Widget_MyMonitoredDocuments.class.php:107
 msgid "List documents that you are currently monitoring, by project."
 msgstr ""
@@ -7688,7 +7702,7 @@ msgstr "查看文件"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:216
 msgid ""
-" Display activity about Document Manager (new documents, new edit, new "
+"Display activity about Documents Manager (new documents, new edit, new "
 "directory ...) during the last 4 weeks."
 msgstr ""
 
@@ -7759,7 +7773,7 @@ msgid "This Project Has Not Published Any Documents"
 msgstr "該專案沒有發佈任何檔案"
 
 #: common/widget/Widget_ProjectLatestDocuments.class.php:139
-msgid " List the 5 most recent documents published by team project."
+msgid "List the 5 most recent documents published by team project."
 msgstr ""
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:36
@@ -7790,11 +7804,6 @@ msgstr "訂閱這個集合"
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:157
 msgid "View All Project Files"
 msgstr "瀏覽全部檔案"
-
-#: common/widget/Widget_ProjectLatestFileReleases.class.php:168
-#, fuzzy
-msgid "File-Release"
-msgstr "文件已發佈"
 
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:172
 msgid ""
@@ -23099,6 +23108,10 @@ msgstr "帳號"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
+
+#, fuzzy
+#~ msgid "File-Release"
+#~ msgstr "文件已發佈"
 
 #, fuzzy
 #~ msgid "Page"

@@ -132,11 +132,11 @@ class Widget_ProjectLatestDocuments extends Widget {
 	}
 
 	function getCategory() {
-		return 'Documents-Manager';
+		return _('Documents Manager');
 	}
 
 	function getDescription() {
-		return _(' List the 5 most recent documents published by team project.');
+		return _('List the 5 most recent documents published by team project.');
 	}
 
 }
