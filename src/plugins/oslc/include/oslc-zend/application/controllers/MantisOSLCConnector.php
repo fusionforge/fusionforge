@@ -69,7 +69,6 @@ if(MANTIS_GLOBALS_SETAGAIN == 1) {
 
 require_once( $t_mantis_dir . 'core/summary_api.php' );
 
-
 foreach(get_defined_vars() as $key=>$value)
 {
        if((substr($key,0,2)=="g_")&&(!array_key_exists($key, $GLOBALS)))
@@ -543,7 +542,6 @@ class MantisOSLCConnector extends OSLCConnector {
 			throw new BadRequestException("Invalid project specified!");
 		}
 
-
 		//construct array for oslc.where with all possible values for each attribute
 		foreach (self::$where_params as $param) {
 			if($param=='dc:creator')
@@ -708,7 +706,6 @@ class MantisOSLCConnector extends OSLCConnector {
 			$arr['where']['terms'][] = array("=","mantisbt:project",'"'.$params['project'].'"');
 			$this->postQuery($arr, null);
 		}
-
 
 	}
 
@@ -935,7 +932,6 @@ class MantisOSLCConnector extends OSLCConnector {
 			$stats[$x][] = $t_days;
 			$stats[$x][] = $t_new_count;
 			$stats[$x][] = $t_resolved_count;
-
 
 			$t_balance = $t_new_count - $t_resolved_count;
 			if( $t_balance > 0 ) {
@@ -1542,7 +1538,6 @@ class MantisOSLCConnector extends OSLCConnector {
 				throw new BadRequestException("mantisbt:target_version mentioned in the request query not found in request body!");
 			}
 		}
-
 
 		$cm_data->summary = trim( $cm_data->summary );
 

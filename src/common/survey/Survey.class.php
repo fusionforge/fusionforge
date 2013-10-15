@@ -135,7 +135,6 @@ class Survey extends Error {
 		return $this->fetchData($survey_id);
 	}
 
-
     /**
      * update - use this function to update a survey
      *

@@ -60,7 +60,6 @@ class DataAccessResult  implements Iterator {
             return false;
     }
 
-
     // {{{ Iterator
     function &current() {
         return $this->_row;

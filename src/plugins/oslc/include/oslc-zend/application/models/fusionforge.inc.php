@@ -28,7 +28,6 @@
 $model_dir = APPLICATION_PATH.'/models/';
 require_once($model_dir . 'ChangeRequests.php');
 
-
 /**
  * For FusionForge
  *
@@ -55,7 +54,6 @@ class FusionForgeChangeRequest extends ChangeRequest
 
 	// may then add a status ?
 	//private $_status;
-
 
 	/**
 	 * Create from XML (RDF) OSLC-CM document

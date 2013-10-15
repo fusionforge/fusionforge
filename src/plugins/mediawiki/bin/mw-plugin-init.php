@@ -56,7 +56,6 @@ function mysymlink($from, $to) {
 	}
 }
 
-
 # install links in master
 echo "Creating symlinks from $master_path to $src_path...\n";
 if (!($dh = opendir($src_path))) {

@@ -117,7 +117,6 @@ class Error {
 		return $this->error_state;
 	}
 
-
 	/**
 	 * setPermissionDeniedError() - sets a Permission Denied error
 	 *  retrieves the localized error string for Permission Denied and calls exit_error()

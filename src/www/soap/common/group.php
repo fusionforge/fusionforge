@@ -152,7 +152,6 @@ $server->register(
     $uri.'#approveGroup','rpc','encoded'
 );
 
-
 //addGroup ($user, $group_name, $unix_name, $description, $purpose, $unix_box = 'shell1', $scm_box = 'cvs1', $is_public = 1, $send_mail = true, $built_from_template = 0)
 $server->register(
     'addGroup',
@@ -355,7 +354,6 @@ function &getGroupsByName($session_ser,$group_names) {
 	return groups_to_soap($grps);
 }
 
-
 // use as a way to get group names for use in getGroupsByName
 function &getPublicProjectNames($session_ser) {
 	continue_session($session_ser);
@@ -476,7 +474,6 @@ function updateGroup2($session_ser, $group_id, $form_group_name, $form_homepage,
 	return true;
 }
 
-
 // delete a group
 function deleteGroup($session_ser, $group_id) {
 	continue_session($session_ser);
@@ -589,7 +586,6 @@ function getUserRolesForGroup($session_ser, $group_id, $user_id) {
 	return roles_to_soap($roles,$group_id);
 }
 
-
 //[Yosu]add group role object
 function addGroupRole ($session_ser, $group_id, $role_name, $project_read, $project_admin, $frs, $scm, $docman,
 		$tracker_admin, $new_tracker, $forum_admin, $new_forum, $pm_admin, $new_pm){
@@ -691,7 +687,6 @@ function deleteGroupRole ($session_ser, $group_id, $role_id){
 		return true;
 	}
 }
-
 
 /*
 	Converts an array of Group objects to soap data

@@ -53,7 +53,6 @@ function &MSPLogin($username,$password) {
 		$array['success']=true;
 		$array['session_hash']=$session_ser;
 
-
 		$result = db_query_params ('SELECT group_project_id FROM project_group_list',
 					   array ()) ;
 
@@ -143,7 +142,6 @@ LINK TYPES -
 				SF . Start to Finish
 				FS . Finish to Start
 				FF . Finish to Finish
-
 
 	params:
 

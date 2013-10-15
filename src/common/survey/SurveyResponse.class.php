@@ -134,7 +134,6 @@ class SurveyResponse extends Error {
 		return $this->data_array['survey_id'];
 	}
 
-
 	/**
 	 *	getQuestionID - Get the question id of this Survey response
 	 *
@@ -152,7 +151,6 @@ class SurveyResponse extends Error {
 	function getResponse() {
 		return $this->data_array['response'];
 	}
-
 
 	/**
 	 *	getPostDate - Get the post date of this Survey response

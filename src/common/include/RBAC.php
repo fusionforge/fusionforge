@@ -359,7 +359,6 @@ abstract class BaseRole extends Error {
 		}
 		array_push ($sections,'pm') ;
 
-
 		// Add settings not yet listed so far (probably plugins)
 		// Currently handled:
 		// - global settings (ignored here)
@@ -762,7 +761,6 @@ abstract class BaseRole extends Error {
 
 		db_begin();
 
-
 		if ($role_name != $this->getName()) {
 			$this->setName($role_name) ;
 		}
@@ -778,7 +776,6 @@ abstract class BaseRole extends Error {
 		$hook_params['role_id'] = $this->getID();
 		$hook_params['data'] = $data;
 		plugin_hook ("role_update", $hook_params);
-
 
 		db_commit();
 		$this->fetchData($this->getID());
@@ -815,7 +812,6 @@ abstract class BaseRole extends Error {
 		db_query_params ('DELETE FROM pfo_role_setting where role_id=$1 AND section_name=ANY($2) and ref_id NOT IN (SELECT home_group_id FROM pfo_role WHERE role_id=$1 AND home_group_id IS NOT NULL UNION SELECT group_id from role_project_refs WHERE role_id=$1)',
 				 array ($this->getID(),
 					db_string_array_to_any_clause($sections))) ;
-
 
 		// Remove obsolete settings for multiple-instance tools
 		db_query_params ('DELETE FROM pfo_role_setting where role_id=$1 AND section_name=$2 and ref_id NOT IN (SELECT group_artifact_id FROM artifact_group_list WHERE group_id IN (SELECT home_group_id FROM pfo_role WHERE role_id=$1 AND home_group_id IS NOT NULL UNION SELECT group_id from role_project_refs WHERE role_id=$1))',

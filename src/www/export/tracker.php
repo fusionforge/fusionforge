@@ -40,7 +40,6 @@ function endOnError($errorMessage) {
 	endDocument();
 }
 
-
 ?>
 <?php
 

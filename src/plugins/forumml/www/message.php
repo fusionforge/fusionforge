@@ -40,7 +40,6 @@ require_once(dirname(__FILE__).'/../include/ForumML_HTMLPurifier.class.php');
 require_once(dirname(__FILE__).'/../include/ForumML_MessageManager.class.php');
 global $feedback;
 
-
 $pm = ProjectManager::instance();
 $Group = $pm->getProject($group_id);
 $plugin_manager =& PluginManager::instance();

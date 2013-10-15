@@ -159,7 +159,6 @@ $server->wsdl->addComplexType(
 	'tns:ArtifactExtraFieldsData'
 );
 
-
 //
 //	Artifacts
 //
@@ -207,7 +206,6 @@ $server->register(
 	array('getArtifactsResponse'=>'tns:ArrayOfArtifact'),
 	$uri,$uri.'#getArtifacts','rpc','encoded');
 
-
 //addArtifact
 $server->register(
 	'addArtifact',
@@ -225,7 +223,6 @@ $server->register(
 	array('addArtifactResponse'=>'xsd:int'),
 	$uri,$uri.'#addArtifact','rpc','encoded'
 );
-
 
 //updateArtifact
 $server->register(
@@ -336,7 +333,6 @@ function artifactFileDelete($session_ser,$group_id,$group_artifact_id,$artifact_
 		return true;
 	}
 }
-
 
 //
 //	ArtifactMessage
@@ -893,7 +889,6 @@ function getArtifactFileData($session_ser,$group_id,$group_artifact_id,$artifact
 	//send file encoded in base64
 	return base64_encode($af->getData());
 }
-
 
 //
 //

@@ -877,7 +877,6 @@ class Artifact extends Error {
 			}
 		}
 
-
 		//commiting changes
 		db_commit();
 		return true;
@@ -1588,7 +1587,6 @@ class Artifact extends Error {
 				    date(_('Y-m-d H:i'), $tm);
 			}
 		}
-
 
 		$body .= "\nYou can respond by visiting: ".
 			"\n".util_make_url ('/tracker/?func=detail&atid='. $this->ArtifactType->getID() .

@@ -46,10 +46,8 @@
 //	so a user can choose a file to upload a .csv file and store it in task mgr
 //
 
-
 global $ath;
 global $group_id;
-
 
 //pm_header(array('title'=>_('Upload data into the tasks.'),'group_project_id'=>$group_project_id));
 $ath->header(array('atid'=>$ath->getID(), 'title'=>$ath->getName()));

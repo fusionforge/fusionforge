@@ -139,5 +139,4 @@ class OauthAuthzRequestToken extends OauthAuthzToken {
   	}
   }
 
-
 };

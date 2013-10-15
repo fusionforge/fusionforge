@@ -152,7 +152,6 @@ class FRSFile extends Error {
 			return false;
 		}
 
-
 		$path_name = forge_get_config('upload_dir').'/'.$this->FRSRelease->FRSPackage->Group->getUnixName();
 		if (!is_dir($path_name)) {
 			mkdir($path_name, 0755, true);
@@ -193,7 +192,6 @@ class FRSFile extends Error {
 			$release_time=time();
 		}
 		$file_size=filesize("$newfilelocation$name");
-
 
 		db_begin();
 		$result = db_query_params('INSERT INTO frs_file(release_id,filename,release_time,type_id,processor_id,file_size,post_date) VALUES ($1,$2,$3,$4,$5,$6,$7)',

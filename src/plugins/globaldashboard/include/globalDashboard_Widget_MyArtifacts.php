@@ -21,7 +21,6 @@
 require_once 'common/widget/Widget.class.php';
 require_once 'common/widget/WidgetLayoutManager.class.php';
 
-
 class globalDashboard_Widget_MyArtifacts extends Widget {
 
 	function __construct($owner_type, $plugin) {
@@ -63,7 +62,6 @@ class globalDashboard_Widget_MyArtifacts extends Widget {
 				//print_r($triples);
 				$turtle = $parser->toTurtle($triples);
 				$datauri = $parser->toDataURI($turtle);
-
 
 				/*
 				 $graph = new Graphite();

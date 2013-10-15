@@ -994,8 +994,6 @@ function usleepWindows($usec)
 
 ?><?php
 
-
-
 /**
 * Contains information for a SOAP fault.
 * Mainly used for returning faults from deployed functions
@@ -1080,8 +1078,6 @@ class soap_fault extends nusoap_fault {
 }
 
 ?><?php
-
-
 
 /**
 * parses an XML Schema, allows access to it's data, other utility methods.
@@ -2593,7 +2589,6 @@ class soap_transport_http extends nusoap_base {
 		return $respdata;
 	}
 
-
 	/**
 	* sends the SOAP request and gets the SOAP response via HTTPS using CURL
 	*
@@ -2745,7 +2740,6 @@ class soap_transport_http extends nusoap_base {
 			unsetHeader('Proxy-Authorization');
 		}
 	}
-
 
 	/**
 	 * Test if the given string starts with a header that is to be skipped.
@@ -3459,8 +3453,6 @@ class soap_transport_http extends nusoap_base {
 
 ?><?php
 
-
-
 /**
 *
 * nusoap_server allows the user to create a SOAP server
@@ -3619,7 +3611,6 @@ class nusoap_server extends nusoap_base {
 	 * @access public
 	 */
 	var $debug_flag = false;
-
 
 	/**
 	* constructor
@@ -4582,8 +4573,6 @@ class soap_server extends nusoap_server {
 }
 
 ?><?php
-
-
 
 /**
 * parses a WSDL file, allows access to it's data, other utility methods.
@@ -6518,8 +6507,6 @@ class wsdl extends nusoap_base {
 }
 ?><?php
 
-
-
 /**
 *
 * nusoap_parser class parses SOAP XML messages into native PHP values
@@ -7157,8 +7144,6 @@ class soap_parser extends nusoap_parser {
 }
 
 ?><?php
-
-
 
 /**
 *

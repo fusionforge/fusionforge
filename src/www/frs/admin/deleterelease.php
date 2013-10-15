@@ -59,7 +59,6 @@ if (!$frsr || !is_object($frsr)) {
 	exit_error($frsr->getErrorMessage(),'frs');
 }
 
-
 /*
 	Relatively simple form to delete packages of releases
 */

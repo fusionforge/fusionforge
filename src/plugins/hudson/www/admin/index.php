@@ -34,7 +34,6 @@ function hudson_User_Header($params) {
 	site_user_header($params);
 }
 
-
 	$user = session_get_user(); // get the session user
 
 	if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {

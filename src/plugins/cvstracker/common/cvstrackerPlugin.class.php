@@ -164,7 +164,6 @@ class cvstrackerPlugin extends Plugin {
 				      _('Diff To').' '.$PrevVersion);
 	}
 
-
 	/**
 	* Function to add cvstracker lines to a loginfo file
 	*

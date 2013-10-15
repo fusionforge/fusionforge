@@ -304,7 +304,6 @@ class DarcsPlugin extends SCMPlugin {
 			}
 		}
 
-
 		foreach ($this->getRepositories($project) as $repo_name)
 		{
 			$repo =  $toprepo . '/' . $repo_name ;
@@ -329,7 +328,6 @@ class DarcsPlugin extends SCMPlugin {
 				."\trepoencoding = 'utf8'\n"
 				. "\n") ;
 	}
-
 
 	function updateRepositoryList ($params) {
 		$groups = $this->getGroups () ;
@@ -377,7 +375,6 @@ class DarcsPlugin extends SCMPlugin {
 	}
 
 	function generateSnapshots ($params) {
-
 
 		$project = $this->checkParams ($params) ;
 		if (!$project) {

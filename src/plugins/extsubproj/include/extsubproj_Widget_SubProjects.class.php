@@ -21,7 +21,6 @@
 require_once 'common/widget/Widget.class.php';
 require_once 'common/widget/WidgetLayoutManager.class.php';
 
-
 class extsubproj_Widget_SubProjects extends Widget {
 	function extsubproj_Widget_SubProjects($owner_type, $plugin) {
 		$this->plugin = $plugin;
@@ -73,7 +72,6 @@ class extsubproj_Widget_SubProjects extends Widget {
 					//print_r($triples);
 					$turtle = $parser->toTurtle($triples);
 					$datauri = $parser->toDataURI($turtle);
-
 
 					$graph = new Graphite();
 					//$graph->setDebug(1);

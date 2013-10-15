@@ -21,7 +21,6 @@
 global $gfplugins;
 require_once $gfplugins.'aselectextauth/include/Aselect.class.php';
 
-
 class ASelectextauthPlugin extends Plugin {
 	function ASelectextauthPlugin () {
 		$this->Plugin() ;
@@ -54,7 +53,6 @@ class ASelectextauthPlugin extends Plugin {
 			return false;
 		}
 
-
 		$u = user_get_object_by_name ($loginname) ;
 		if ($u) {
 			// User exists in DB
@@ -71,8 +69,6 @@ class ASelectextauthPlugin extends Plugin {
 					$GLOBALS['aselect_auth_failed']=true;
 					return false;
 		}
-
-
 
 	}
 }

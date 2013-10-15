@@ -18,7 +18,6 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 /**
  * Provide access to projects
  */
@@ -48,8 +47,6 @@ class ProjectManager {
         return self::$_instance;
     }
 
-
-
     /**
      * @param $group_id int The id of the project to look for
      * @return Project
@@ -58,6 +55,5 @@ class ProjectManager {
 
         return  group_get_object($group_id);
     }
-
 
 }

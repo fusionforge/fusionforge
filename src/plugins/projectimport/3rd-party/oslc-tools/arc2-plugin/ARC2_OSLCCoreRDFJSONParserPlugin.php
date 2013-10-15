@@ -208,7 +208,6 @@ class ARC2_OSLCCoreRDFJSONParserPlugin extends ARC2_JSONParser {
 		 }
 		 */
 
-
 	}
 	function extractRDF() {
 		$this->extractRDFFromStruct($this->struct);

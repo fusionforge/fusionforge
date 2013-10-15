@@ -42,7 +42,6 @@ class MailingListFactory extends Error {
 	 */
 	var $mailingLists;
 
-
 	/**
 	 * Constructor.
 	 *

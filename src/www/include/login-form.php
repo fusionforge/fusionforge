@@ -73,7 +73,6 @@ function display_login_form($return_to = '/', $triggered = false, $full_page = f
 		echo '</p>';
 	}
 
-
 	if (count ($params['html_snippets']) > 1) {
 		$use_tabber = true;
 		echo '<div id="tabber" class="tabber">';

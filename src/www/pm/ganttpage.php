@@ -282,7 +282,6 @@ echo '<div id="workSpace" style="padding:0px; overflow-y:auto; overflow-x:hidden
   </div>
   --></div>
 
-
   <div class="__template__" type="CHANGE_STATUS"><!--
     <div class="taskStatusBox">
       <div class="taskStatus cvcColorSquare" status="STATUS_ACTIVE" title="active"></div>
@@ -292,7 +291,6 @@ echo '<div id="workSpace" style="padding:0px; overflow-y:auto; overflow-x:hidden
       <div class="taskStatus cvcColorSquare" status="STATUS_UNDEFINED" title="undefined"></div>
     </div>
   --></div>
-
 
   <div class="__template__" type="TASK_EDITOR"><!--
   <div class="ganttTaskEditor">
@@ -331,7 +329,6 @@ echo '<div id="workSpace" style="padding:0px; overflow-y:auto; overflow-x:hidden
     </table>
   </div>
   --></div>
-
 
   <div class="__template__" type="ASSIGNMENT_ROW"><!--
   --></div>

@@ -308,7 +308,6 @@ class Layout extends Error {
 		echo $this->navigation->getTitle($params);
 	}
 
-
 	/**
 	 * headerFavIcon() - creates the favicon <link> headers.
 	 *

@@ -178,7 +178,6 @@ class SearchManager {
 		);
 	}
 
-
 }
 
 // Local Variables:

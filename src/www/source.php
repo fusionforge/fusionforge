@@ -26,7 +26,6 @@
 require_once 'env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
-
 if (!forge_get_config('show_source')) {
 	exit_permission_denied('home');
 }
@@ -57,7 +56,6 @@ if (!file_exists($fname) || @is_dir($fname)) {
 $HTML->header(array('title'=>sprintf(_('Source of %1$s'), $file)));
 
 show_source($fname);
-
 
 $HTML->footer(array());
 

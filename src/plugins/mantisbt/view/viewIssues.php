@@ -489,7 +489,6 @@ if (!isset($clientSOAP) && !isset($errorPage)) {
 		echo "</table><br/>";
 	}
 
-
 	// Add new issue
 	if ($type == "group" && $editable) {
 	?>

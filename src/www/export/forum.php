@@ -31,7 +31,6 @@ $group_id = getIntFromRequest('group_id');
 session_require_perm ('project_read', $group_id) ;
 $group = group_get_object($group_id);
 
-
 print '<?xml version="1.0"?>
 <!DOCTYPE sf_forum SYSTEM "http://'.forge_get_config('web_host').'/exports/sf_forum_0.1.dtd">
 ';
@@ -56,7 +55,6 @@ while ($row_forum = db_fetch_array($res_forum)) {
 		WHERE forum.posted_by=users.user_id
 		AND forum.group_forum_id=$1',
 				     array ($row_forum['group_forum_id']));
-
 
 	// ## item outputs
 	while ($row_post = db_fetch_array($res_post)) {

@@ -136,7 +136,6 @@ if (getStringFromRequest('dormusers')) {
 	}
 }
 
-
 if ($role instanceof RoleExplicit) {
 	$users = $role->getUsers () ;
 	if (count ($users) > 0) {

@@ -30,7 +30,6 @@
 class CompactResource {
 	public $params;
 
-
 	/**
 	 * Constructor
 	 * @param unknown_type $params
@@ -122,7 +121,6 @@ class OslcUserCompactResource extends UserCompactResource {
 		return 'resourceOslcPopupTrigger';
 	}
 }
-
 
 /**
  * Enter description here ...

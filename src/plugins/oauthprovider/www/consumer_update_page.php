@@ -36,7 +36,6 @@ $f_consumer_id = getIntFromGet( 'consumer_id' );
 
 $t_consumer = OauthAuthzConsumer::load( $f_consumer_id );
 
-
 $i=0;
 ?>
 
@@ -87,7 +86,6 @@ $i=0;
 </tr>
 </table>
 </form>
-
 
 <?php
 //html_page_bottom1( __FILE__ );

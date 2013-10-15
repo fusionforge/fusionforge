@@ -184,7 +184,6 @@ function display_list_admin($currentList)
 	}
 }
 
-
 function mailman_header($params) {
 	global $group_id;
 	$current_user=UserManager::instance()->getCurrentUser();
@@ -215,7 +214,6 @@ function mailman_header($params) {
 function mail_footer($params) {
 	site_project_footer($params);
 }
-
 
 // Local Variables:
 // mode: php

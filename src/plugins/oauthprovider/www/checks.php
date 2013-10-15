@@ -45,7 +45,6 @@ function oauthprovider_Admin_Header() {
 	site_admin_header(array('title'=>_('OAuth')));
 }
 
-
 function oauthprovider_CheckGroup() {
 	if (!session_loggedin()) {
 		exit_not_logged_in();

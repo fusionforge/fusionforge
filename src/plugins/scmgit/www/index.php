@@ -80,7 +80,6 @@ default:
 	exit_missing_param () ;
 }
 
-
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

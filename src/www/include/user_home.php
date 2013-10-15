@@ -83,7 +83,6 @@ if (forge_get_config('use_diary')) {
 	}
 	?>
 
-
 <?php
 
 echo $HTML->boxMiddle(_('Project Information'), _('Project Information'));

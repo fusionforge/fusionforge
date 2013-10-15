@@ -28,7 +28,6 @@ require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'frs/FRSPackage.class.php';
 require_once $gfcommon.'frs/include/frs_utils.php';
 
-
 if (session_loggedin()) {
 	$group_id = getIntFromRequest('group_id');
 	$filemodule_id = getIntFromRequest('filemodule_id');

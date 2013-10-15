@@ -44,7 +44,6 @@ class FusionForgeCompactController extends CompactController {
 		// now do things that relate to the REST framework
 		$req = $this->getRequest();
 
-
 		$action = $req->getActionName();
 
 		if($action =='get')	{

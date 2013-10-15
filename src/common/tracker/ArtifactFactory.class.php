@@ -261,7 +261,6 @@ class ArtifactFactory extends Error {
 		$this->setChangedFrom($_changed);
 	}
 
-
 	/**
 	 *	setChangedFrom - sets up changed-from and last-changed before you call getTasks().
 	 *

@@ -171,7 +171,6 @@ class CCasePlugin extends SCMPlugin {
 		echo ')';
 	}
 
-
 	function GetDefaultServer () {
 		return forge_get_config('default_server', 'scmccase') ;
 	}

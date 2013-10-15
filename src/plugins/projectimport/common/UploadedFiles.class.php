@@ -27,7 +27,6 @@
 
 // TODO : add cleanup mechanism for storage
 
-
 /**
  * Generic file storage management class
  * The files are stored in an arbitrary dir on the server side
@@ -159,8 +158,6 @@ class AbstractFilesDirectory extends Error {
 	public function displayFileSelectionForm($preselected = False) {
 		$html = '';
 
-
-
 		if (is_dir($this->dir_path)) {
 			$contents = scandir($this->dir_path);
 			if(count($contents) > 2) {
@@ -231,7 +228,6 @@ class AbstractFilesDirectory extends Error {
 		return $filepath;
 	}
 }
-
 
 /**
  * Specialized file storage management class for site-level files

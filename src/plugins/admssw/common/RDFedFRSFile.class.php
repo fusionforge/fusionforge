@@ -87,7 +87,6 @@ class RDFedFRSFile extends FRSFile {
 				'ns' => $ns
 		);
 
-
 		$res = ARC2::getResource($conf);
 
 		$frs_release = $this->getFRSRelease();

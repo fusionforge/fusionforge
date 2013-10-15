@@ -43,7 +43,6 @@ foreach ($SubmittedVars as $SubmittedVar) {
 	$i++;
 }
 
-
 /**
  * Checks if the commit it's possible and parse arguments
  * Checks if repository, group and user_name are right.

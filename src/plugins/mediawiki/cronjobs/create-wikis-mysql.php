@@ -148,7 +148,6 @@ while ( $row = db_fetch_array($project_res) ) {
 	}
 }
 
-
   // Local Variables:
   // mode: php
   // c-file-style: "bsd"

@@ -71,7 +71,6 @@ function listStoredRemoteAccounts($user_id) {
 
 	//echo 'Here are stored accounts list';
 
-
 	$accounts = getDBStoredRemoteAccountsByUserId($user_id);
 	if (count($accounts) > 0) {
 		echo '<p>';

@@ -22,7 +22,6 @@
  *
  */
 
-
 // Inspired from examples described in "Creating a OAuth Service
 // Provider in PHP" by Morten Fangel
 // (http://sevengoslings.net/~fangel/oauthprovider-sp-guide.html)

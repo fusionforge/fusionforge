@@ -7,7 +7,6 @@ require_once(dirname(__FILE__).'/../include/ForumML_FileStorage.class.php');
 Mock::generatePartial('ForumMLInsert', 'ForumMLInsertTest', array('insertMessage', 'insertAttachment'));
 Mock::generate('ForumML_FileStorage');
 
-
 class ForumML_InsertTest extends UnitTestCase {
 	private $_fixture;
 
@@ -15,7 +14,6 @@ class ForumML_InsertTest extends UnitTestCase {
         parent::__construct($name);
         $this->_fixture     = dirname(__FILE__).'/_fixtures/samples';
 	}
-
 
     function getEmailStructure($path) {
         $message                = file_get_contents($this->_fixture.'/'.$path);
@@ -67,7 +65,6 @@ class ForumML_InsertTest extends UnitTestCase {
 
         $i->storeEmail($structure, $storage);
     }
-
 
     /**
      * Text + attachment
@@ -213,7 +210,5 @@ class ForumML_InsertTest extends UnitTestCase {
 
         $i->storeEmail($structure, $storage);
     }
-
-
 
 }

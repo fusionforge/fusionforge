@@ -24,7 +24,6 @@
  *
  */
 
-
 require_once '../../env.inc.php';
 require_once $gfwww.'include/pre.php';
 
@@ -116,8 +115,6 @@ $f_consumer_email = getStringFromPost( 'consumer_email' );
 <td><input name="consumer_email" maxlength="250" size="40" value="<?php echo $f_consumer_email ?>"/></td>
 </tr>
 
-
-
 <tr>
 <td class="center" colspan="2"><input type="submit" value="<?php echo _('Create Consumer') ?>"/></td>
 </tr>
@@ -125,7 +122,6 @@ $f_consumer_email = getStringFromPost( 'consumer_email' );
 </table>
 </form>
 <?php }
-
 
 	site_project_footer(array());
 

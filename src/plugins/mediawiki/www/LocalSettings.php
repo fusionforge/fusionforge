@@ -66,7 +66,6 @@ if (!is_dir($project_dir)) {
 	exit_error (sprintf(_('Mediawiki for project %s not created yet, please wait for a few minutes.'), $fusionforgeproject.':'.$project_dir)) ;
 }
 
-
 $path = array( $IP, "$IP/includes", "$IP/languages" );
 set_include_path( implode( PATH_SEPARATOR, $path ) . PATH_SEPARATOR . get_include_path() );
 
@@ -135,7 +134,6 @@ $wgColorErrors          = true;
 $wgShowExceptionDetails = true;
 $wgShowHostnames = true;
 */
-
 
 $GLOBALS['sys_dbhost'] = forge_get_config('database_host') ;
 $GLOBALS['sys_dbport'] = forge_get_config('database_port') ;

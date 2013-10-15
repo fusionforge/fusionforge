@@ -35,7 +35,6 @@ forge_set_config_item_bool('use_dav', 'scmgit');
 forge_define_config_item('use_ssl', 'scmgit', true);
 forge_set_config_item_bool('use_ssl', 'scmgit');
 
-
 class GitPlugin extends SCMPlugin {
 	function GitPlugin() {
 		$this->SCMPlugin();
@@ -198,7 +197,6 @@ class GitPlugin extends SCMPlugin {
 				foreach ($repo_list as $repo_name) {
 					$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>' ;
 				}
-
 
 				$validSetup = 1;
 			}

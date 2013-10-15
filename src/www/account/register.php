@@ -97,8 +97,6 @@ if (getStringFromRequest('submit')) {
 		if ($register) {
 			site_header(array('title'=>_('Register Confirmation')));
 
-
-
 			if ($activate_immediately) {
 				if (!$new_user->setStatus('A')) {
 					print '<span class="error">' .

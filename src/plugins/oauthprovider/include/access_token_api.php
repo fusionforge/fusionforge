@@ -119,7 +119,6 @@ class OauthAuthzAccessToken extends OauthAuthzToken {
 	  	return $this->role_id;
 	  }
 
-
   /**
    * Check that mandatory values are OK
    */

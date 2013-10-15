@@ -70,7 +70,6 @@ if (!$frsr || !is_object($frsr)) {
 
 $upload_dir = forge_get_config('ftp_upload_dir') . "/" . $group->getUnixName();
 
-
 /*
  * Here's where we do the dirty work based on the step the user has chosen
  */

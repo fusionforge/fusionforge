@@ -21,7 +21,6 @@
 require_once 'DataAccessResult.class.php';
 require_once 'DataAccessException.class.php';
 
-
 class DataAccess {
 
     /**
@@ -34,6 +33,5 @@ class DataAccess {
 
         return $value;
     }
-
 
 }

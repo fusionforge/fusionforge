@@ -37,8 +37,6 @@ class ForumMLHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
                // $this->tableHeaders = array(_('Thread'),_('Submitted on'), _('Author'));
 
-
-
         }
 
         /**

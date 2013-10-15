@@ -82,7 +82,6 @@ function stats_generate_trove_pulldown( $selected_id = 0 ) {
 		</select>';
 }
 
-
 function stats_trove_cat_to_name( $trovecatid ) {
 
 	$res = db_query_params ('
@@ -97,7 +96,6 @@ function stats_trove_cat_to_name( $trovecatid ) {
 		return sprintf(_(" (no category found with ID %d)"), $trovecatid) ;
 	}
 }
-
 
 function stats_generate_trove_grouplist( $trovecatid ) {
 
@@ -118,7 +116,6 @@ function stats_generate_trove_grouplist( $trovecatid ) {
 
 	return $results;
 }
-
 
 function stats_site_projects_form( $report='last_30', $orderby = 'downloads', $projects = 0, $trovecat = 0 ) {
 	global $allowed_orderby_vals ;
@@ -455,16 +452,13 @@ function stats_site_aggregate( ) {
 			array ());
 	$site_totals = db_fetch_array($res);
 
-
 	$res = db_query_params ('SELECT COUNT(*) AS count FROM groups WHERE status=$1',
 			array ('A'));
 	$groups = db_fetch_array($res);
 
-
 	$res = db_query_params ('SELECT COUNT(*) AS count FROM users WHERE status=$1',
 			array ('A'));
 	$users = db_fetch_array($res);
-
 
 	?>
 	<h2><?php echo _('Current Aggregate Statistics for All Time'); ?></h2>

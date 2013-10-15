@@ -72,7 +72,6 @@ class DocumentManager extends Error {
 		return $this->Group;
 	}
 
-
 	/**
 	 * getTrashID - the trash doc_group id for this DocumentManager.
 	 *

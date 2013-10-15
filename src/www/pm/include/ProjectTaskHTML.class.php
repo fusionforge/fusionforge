@@ -56,7 +56,6 @@ class ProjectTaskHTML extends ProjectTask {
 		return html_build_multiple_select_box_from_arrays ($tech_id_arr,$tech_name_arr,$name,$arr2);
 	}
 
-
 	function showDependentTasks () {
 
 		$result=db_query_params ('SELECT project_task.project_task_id,project_task.summary

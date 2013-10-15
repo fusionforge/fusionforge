@@ -18,7 +18,6 @@
  * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 require_once 'HudsonOverviewWidget.class.php';
 //require_once('common/user/UserManager.class.php');
 require_once 'common/include/HTTPRequest.class.php';

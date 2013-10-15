@@ -21,7 +21,6 @@ if ($token) {
   $test_token = new OAuthConsumer($token, $token_secret);
 }
 
-
 if ($action == "request_token") {
   $parsed = parse_url($endpoint);
   $params = array();

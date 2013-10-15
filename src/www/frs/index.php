@@ -24,12 +24,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'frs/include/frs_utils.php';
 require_once $gfcommon.'frs/FRSPackage.class.php';
-
 
 $group_id = getIntFromRequest('group_id');
 $release_id = getIntFromRequest('release_id');
@@ -90,7 +88,6 @@ $num_packages = db_numrows( $res_package );
 frs_header(array('title'=>_('Project Filelist'),'group'=>$group_id));
 
 plugin_hook("blocks", "files index");
-
 
 if ( $num_packages < 1) {
 	echo "<h1>"._('No File Packages')."</h1>";

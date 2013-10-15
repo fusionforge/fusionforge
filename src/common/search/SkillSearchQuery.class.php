@@ -34,7 +34,6 @@ class SkillSearchQuery extends SearchQuery {
 	 */
 	function getQuery() {
 
-
 		$qpa = db_construct_qpa () ;
 
 		if (forge_get_config('use_fti')) {

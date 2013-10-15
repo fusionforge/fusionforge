@@ -27,8 +27,6 @@
 */
 class SystemEventManager {
 
-
-
     // Constructor
     function SystemEventManager() {
 

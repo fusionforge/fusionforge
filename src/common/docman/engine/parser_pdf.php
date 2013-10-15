@@ -28,7 +28,6 @@ require dirname(__FILE__).'/../../include/env.inc.php';
 
 require_once $gfcommon.'docman/engine/parser_text.inc.php';
 
-
 if ($argc != 2) {
 	echo 'Usage : parser_pdf.php <filename>'."\n";
 	exit (1);

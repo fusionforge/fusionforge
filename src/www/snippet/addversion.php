@@ -232,7 +232,6 @@ function show_add_snippet_box() {
 
 		snippet_footer(array());
 
-
 	} else {
 		exit_error(_('Error: was the URL or form mangled??'));
 	}

@@ -117,8 +117,6 @@ class SurveyQuestion extends Error {
 		return $this->fetchData($question_id);
 	}
 
-
-
 	/**
 	 * update - use this function to update a survey question
 	 *
@@ -230,7 +228,6 @@ class SurveyQuestion extends Error {
 		return $this->data_array['question'];
 	}
 
-
 	/**
 	 * getQuestionType - Get the question type
 	 *
@@ -239,7 +236,6 @@ class SurveyQuestion extends Error {
 	function getQuestionType() {
 		return $this->data_array['question_type'];
 	}
-
 
 	/**
 	 * getQuestionStringType - Get the type from survey_question_types

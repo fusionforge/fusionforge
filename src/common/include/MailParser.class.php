@@ -74,7 +74,6 @@ class MailParser extends Error {
 				$body .= $lines[$i]."\r\n";
 			}
 
-
 		}
 		$this->body =& $body;
 		$this->headers =& $header;
@@ -89,8 +88,6 @@ class MailParser extends Error {
 			}
 		}
 //echo "\n\n**".$header['Content-Type']."**\n\n";
-
-
 
 		unset ($lines);
 //system("echo \"mp: headers".implode("***\n",$header)."\n\" >> /tmp/forum.log");

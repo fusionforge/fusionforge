@@ -50,7 +50,6 @@ if ($toaddress && !preg_match('/'.forge_get_config('web_host').'/i',$toaddress))
 	exit_error(sprintf(_('You can only send to addresses @<em>%1$s</em>.'),forge_get_config('web_host')),'home');
 }
 
-
 if (getStringFromRequest('send_mail')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit('home');

@@ -637,7 +637,6 @@ class HgPlugin extends SCMPlugin {
 		project_admin_footer(array());
 	}
 
-
 }
 
 // Local Variables:

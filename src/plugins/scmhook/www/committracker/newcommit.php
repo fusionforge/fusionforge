@@ -256,8 +256,6 @@ if (isset($Configs) && is_array($Configs)) {
 	}
 }
 
-
-
 exit (0);
 
 // Local Variables:

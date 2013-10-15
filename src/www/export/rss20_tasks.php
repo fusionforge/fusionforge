@@ -18,12 +18,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'export/rss_utils.inc';
-
-
 
 //Default Vars
 $number_items = 10;
@@ -188,8 +185,6 @@ if(0<pg_num_rows($res))
 				$group_c[$row1['group_id']]='Wrong or deleted group';
 			}
 
-
-
 			$item_cat = $group_c[$project_c[pg_fetch_result($res,$i,'group_project_id')]['group_id']]." - ".$project_c[pg_fetch_result($res,$i,'group_project_id')]['project_name']." -- ".pg_fetch_result($res,$i,'summary');
 			$ar['project_task_id']=pg_fetch_result($res,$i,'project_task_id');
 			$ar['group_project_id']=pg_fetch_result($res,$i,'group_project_id');
@@ -207,9 +202,6 @@ if(0<pg_num_rows($res))
 	displayError('No tasks found! Please check for invalid params.');
 }
 endFeed();
-
-
-
 
 //*********************** HELPER FUNCTIONS ***************************************
 
@@ -240,7 +232,6 @@ function handle_getvar($name)
 	}
 	return $return;
 }
-
 
 function beginTaskFeed($feed_title, $feed_link, $feed_desc) {
 
@@ -281,7 +272,6 @@ function writeTaskFeed($msg, $item_cat){
     print "  </item>\n";
 
 }
-
 
 function displayError($errorMessage) {
 	print "  <title>Error</title>\n".

@@ -27,7 +27,6 @@ class Mailman {
 		$this->newlistname = $this->newpjct."-".$this->listname;
 	}
 
-
 	function copy(){
 		echo "Copying archives : ".$this->dir."/archives/* ---> /var/lib/mailman/archives/\n\n";
 		shell_exec( " cp -r -a ".$this->dir."/archives/* /var/lib/mailman/archives/ 2>&1 " );
@@ -99,14 +98,10 @@ class Mailman {
 
 }
 
-
-
-
 	$oldpjctname = $argv[1];
 	$newpjctname = $argv[2];
 	$olddomainname = $argv[3];
 	$newdomainname = $argv[4];
-
 
 	/*
 	Optional necessitates PHP>5.3.0 not supported by lenny, use $argv in the meantime

@@ -34,8 +34,6 @@ require_once $gfcommon.'include/pre.php';
 // This script is the counterpart, with only un index of projects, of an other lists of projects
 // with full details which can be accessed in /plugins/admssw/full.php
 
-
-
 $pluginname = 'admssw';
 
 $HTML->header(array('title'=>_('ADMS.SW meta-data index of public projects'),'pagename'=>'admssw'));

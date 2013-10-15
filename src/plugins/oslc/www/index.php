@@ -21,7 +21,6 @@ $application = new Zend_Application(APPLICATION_ENV,APPLICATION_PATH . '/configs
 // The next stop is in application/Bootstrap.php
 $application->bootstrap()->run();
 
-
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

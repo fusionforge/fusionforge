@@ -59,7 +59,6 @@ if (getStringFromRequest('add')) {
 			$docdir = $homedir.'/htdocs/';
 			$cgidir = $homedir.'/cgi-bin/';
 
-
 			$res = db_query_params ('
 				INSERT INTO prweb_vhost(vhost_name, docdir, cgidir, group_id)
 				VALUES ($1,$2,$3,$4)
@@ -68,7 +67,6 @@ if (getStringFromRequest('add')) {
 			$docdir,
 			$cgidir,
 			$group_id)) ;
-
 
 			if (!$res || db_affected_rows($res) < 1) {
 				$error_msg .= _('Error adding VHOST: ') .db_error();
@@ -159,7 +157,6 @@ if (getStringFromRequest('tweak')) {
 		AND prweb_vhost.group_id=groups.group_id
 	',
 			array($vhost_name)) ;
-
 
 	if (db_numrows($res_vh) > 0) {
 

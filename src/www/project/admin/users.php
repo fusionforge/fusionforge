@@ -366,12 +366,6 @@ echo '</tbody></table>';
 		?></td>
 		<td><?php
 
-
-
-
-
-
-
 		//
 		//      RBAC Editing Functions
 		//

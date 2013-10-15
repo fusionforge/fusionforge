@@ -335,7 +335,6 @@ function ffExceptionHandler($e) {
 	exit(1);
 }
 
-
 if (forge_get_config('sysdebug_phphandler')) {
 	// set to the user defined error handler
 	set_error_handler("ffErrorHandler");

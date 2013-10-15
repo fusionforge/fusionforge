@@ -42,7 +42,6 @@ function get_rdfed_frs_packages($Group) {
 	return $ps;
 }
 
-
 class RDFedFRSPackage extends FRSPackage {
 
 	/**

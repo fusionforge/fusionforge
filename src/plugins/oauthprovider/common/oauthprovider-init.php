@@ -30,7 +30,6 @@ require_once $gfplugins.'oauthprovider/include/request_token_api.php';
 require_once $gfplugins.'oauthprovider/include/access_token_api.php';
 require_once $gfplugins.'oauthprovider/include/fusionforge_oauth_datastore.php';
 
-
 $oauthproviderPluginObject = new oauthproviderPlugin ;
 
 register_plugin ($oauthproviderPluginObject) ;

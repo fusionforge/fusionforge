@@ -15,7 +15,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 define('LIME_CALL_PROTOCOL', '$tokens, &$result');
 
 abstract class lime_parser {

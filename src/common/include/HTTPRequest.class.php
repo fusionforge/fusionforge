@@ -18,9 +18,7 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 require_once 'common/include/Codendi_Request.class.php';
-
 
 /**
  * @package Codendi
@@ -33,7 +31,6 @@ class HTTPRequest extends Codendi_Request {
     function HTTPRequest() {
         parent::Codendi_Request($_REQUEST);
     }
-
 
     /**
      * Get the value of $variable in $this->params (server side values).

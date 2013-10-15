@@ -202,8 +202,6 @@ class AttachManager extends Error {
 		}
 	}
 
-
-
 	/**
 	 * Function attach : saves the file in the DB
 	 *

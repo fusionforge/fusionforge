@@ -49,7 +49,6 @@ $dg = new DocumentGroup($g, $dirid);
 if ($dg->isError())
 	session_redirect($urlredirect.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 
-
 if (!$dg->delete($dirid, $g->getID()))
 	session_redirect($urlredirect.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));
 

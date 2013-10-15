@@ -204,7 +204,6 @@ class Forum extends Error {
 			return false;
 		}
 
-
 		// This is a hack to allow non-site-wide-admins to post
 		// news.  The news/submit.php checks for proper permissions.
 		// This needs to be revisited.

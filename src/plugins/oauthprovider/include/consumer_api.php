@@ -240,7 +240,6 @@ class OauthAuthzConsumer extends OAuthConsumer {
 			$this->setId($id);
 		}
 
-
 	}
 
 	/**
@@ -252,6 +251,5 @@ class OauthAuthzConsumer extends OAuthConsumer {
 			exit_error("Error trying to delete consumer from DB", 'oauthprovider');
 		}
 	}
-
 
   };

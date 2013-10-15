@@ -406,7 +406,6 @@ class ProjectImportPage extends FileManagerPage {
 			$html .= '</tbody></table>';
 			$html .= $this->html_generator->boxBottom();
 
-
 			if ($mapping_all_users_provided) {
 				// the mapping must be applied as all users mapping has been posted
 

@@ -228,7 +228,6 @@ if ($sysdebug_enable && getenv('SERVER_SOFTWARE')) {
 // Get constants used for flags or status
 require $gfcommon.'include/constants.php';
 
-
 // Base error library for new objects
 require_once $gfcommon.'include/Error.class.php';
 
@@ -240,7 +239,6 @@ if (forge_get_config('database_name') != "") {
 	// Authentication and access control
 	require_once $gfcommon.'include/session.php';
 	require_once $gfcommon.'include/RBACEngine.class.php';
-
 
 	// System library
 	require_once $gfcommon.'include/System.class.php';
@@ -361,7 +359,6 @@ $session_hash
 $LUSER - Logged in user object
 $HTML
 */
-
 
 // Local Variables:
 // mode: php

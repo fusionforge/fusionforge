@@ -40,7 +40,6 @@ require_once 'checks.php';
 
 $pluginname = 'oauthprovider';
 
-
 try {
 
 	$req = OAuthRequest::from_request();

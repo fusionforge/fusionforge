@@ -22,7 +22,6 @@
  *
  */
 
-
 require_once '../../env.inc.php';
 require_once $gfwww.'include/pre.php';
 

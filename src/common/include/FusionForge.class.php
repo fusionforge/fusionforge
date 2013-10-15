@@ -105,7 +105,6 @@ class FusionForge extends Error {
 		return $this->parseCount($res);
 	}
 
-
 	function getPublicProjectNames() {
 		$res = db_query_params ('SELECT unix_group_name, group_id FROM groups WHERE status=$1 ORDER BY unix_group_name',
 					array ('A'));

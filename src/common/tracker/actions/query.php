@@ -189,7 +189,6 @@ $submitter_box = $ath->submitterBox('_submitted_by[]',$_submitted_by,true,'none'
 //	creating a custom technician box which includes "any" and "unassigned"
 $tech_box=$ath->technicianBox ('_assigned_to[]',$_assigned_to,true,'none','-1',false,true);
 
-
 //
 //	custom order by arrays to build a pop-up box
 //
@@ -202,7 +201,6 @@ $order_name_arr[]=_('Last Modified Date');
 $order_name_arr[]=_('Close Date');
 $order_name_arr[]=_('Submitter');
 $order_name_arr[]=_('Assignee');
-
 
 $order_arr=array();
 $order_arr[]='artifact_id';
@@ -220,7 +218,6 @@ $order_arr[]='assigned_to';
 $sort_name_arr=array();
 $sort_name_arr[]=_('Ascending');
 $sort_name_arr[]=_('Descending');
-
 
 $sort_arr=array();
 $sort_arr[]='ASC';
@@ -249,7 +246,6 @@ $changed_arr[]= 3600 * 24 * 30;// 1 month
 $res = db_query_params ('SELECT artifact_query_id,query_name FROM artifact_query WHERE user_id=$1 AND group_artifact_id=$2',
 			array(user_getid(),
 			      $ath->getID()));
-
 
 //	Show the new pop-up boxes to select assigned to, status, etc
 //

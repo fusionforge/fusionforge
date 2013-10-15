@@ -27,9 +27,6 @@ require_once $gfcommon.'docman/DocumentFactory.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
 require_once $gfcommon.'docman/DocumentGroupFactory.class.php';
 
-
-
-
 //
 //	DocumentGroup
 //
@@ -59,8 +56,6 @@ $server->wsdl->addComplexType(
 	array(),
 	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:DocumentGroup[]')),
 	'tns:DocumentGroup');
-
-
 
 //
 //	Documents
@@ -125,8 +120,6 @@ $server->wsdl->addComplexType(
 	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:DocumentFile[]')),
 	'tns:DocumentFile');
 
-
-
 //
 // DocumentState
 //
@@ -155,8 +148,6 @@ $server->wsdl->addComplexType(
 	array(),
 	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:DocumentState[]')),
 	'tns:DocumentState');
-
-
 
 //
 //getDocumentStates
@@ -294,7 +285,6 @@ function &updateDocument($session_ser,$group_id,$doc_group,$doc_id,$title,$descr
 		return new soap_fault ('','updateDocument',$d->getErrorMessage(),$d->getErrorMessage());
 	}
 
-
 	if($state_id){
 		if(!validateState($state_id)){
 			return new soap_fault ('','updateDocument','Invalid State ID','Invalid State ID');
@@ -310,7 +300,6 @@ function &updateDocument($session_ser,$group_id,$doc_group,$doc_id,$title,$descr
 	if(!$description){
 		$description=$d->getDescription();
 	}
-
 
 	if((!$base64_contents) && (!$file_url)){
 		if((!$base64_contents) && (!$d->isURL())){
@@ -335,7 +324,6 @@ function &updateDocument($session_ser,$group_id,$doc_group,$doc_id,$title,$descr
 		$uploaded_data_name=$filename;
 	}
 
-
 	if (!$d->update($uploaded_data_name,$uploaded_data_type,$file,$doc_group,$title,$description,$state_id)) {
 		return new soap_fault ('','updateDocument',$d->getErrorMessage(),$d->getErrorMessage());
 	} else {
@@ -343,9 +331,6 @@ function &updateDocument($session_ser,$group_id,$doc_group,$doc_id,$title,$descr
 	}
 
 }
-
-
-
 
 //
 //addDocumentGroup
@@ -387,7 +372,6 @@ function &addDocumentGroup($session_ser,$group_id,$groupname,$parent_doc_group) 
 		return $dg->getID();
 	}
 }
-
 
 //
 //updateDocumentGroup
@@ -432,9 +416,6 @@ function &updateDocumentGroup($session_ser, $group_id, $doc_group, $new_groupnam
 	}
 }
 
-
-
-
 //
 //getDocuments
 //
@@ -461,7 +442,6 @@ function &getDocuments($session_ser,$group_id,$doc_group_id) {
 		return new soap_fault ('','getDocuments',$g->getErrorMessage(),$g->getErrorMessage());
 	}
 
-
 	$df = new DocumentFactory($g);
 	if (!$df || !is_object($df)) {
 		return new soap_fault ('','getDocuments','Could Not Get Document Factory','Could Not Get Document Factory');
@@ -475,7 +455,6 @@ function &getDocuments($session_ser,$group_id,$doc_group_id) {
 
 }
 
-
 //
 //	convert array of documents to soap data structure
 //
@@ -488,7 +467,6 @@ function documents_to_soap($d_arr) {
 
 	//***********
 	// Retrieving the documents details
-
 
 			if(count($d_arr[$i]) < 1) { continue; }
 
@@ -529,7 +507,6 @@ function &getDocumentGroups($session_ser,$group_id) {
 		return new soap_fault ('','getDocumentGroups',$g->getErrorMessage(),$g->getErrorMessage());
 	}
 
-
 	$dgf = new DocumentGroupFactory($g);
 	if (!$dgf || !is_object($dgf)) {
 		return new soap_fault ('','getDocumentGroups','Could Not Get Document Group Factory','Could Not Get Document Group Factory');
@@ -539,7 +516,6 @@ function &getDocumentGroups($session_ser,$group_id) {
 
 	return documentsGroup_to_soap($dgf->getDocumentGroups());
 }
-
 
 //
 //	convert array of document group to soap data structure
@@ -561,11 +537,6 @@ function documentsGroup_to_soap($dg_arr) {
 	}
 	return $return;
 }
-
-
-
-
-
 
 //
 //getDocumentGroup
@@ -592,7 +563,6 @@ function &getDocumentGroup($session_ser,$group_id,$doc_group) {
 		return new soap_fault ('','getDocumentGroup',$g->getErrorMessage(),$g->getErrorMessage());
 	}
 
-
 	$dg = new DocumentGroup($g,$doc_group);
 	if (!$dg || !is_object($dg)) {
 		return new soap_fault ('','getDocumentGroup','Could Not Get Document Group Factory','Could Not Get Document Group Factory');
@@ -600,21 +570,16 @@ function &getDocumentGroup($session_ser,$group_id,$doc_group) {
 		return new soap_fault ('','getDocumentGroup',$dg->getErrorMessage(),$dg->getErrorMessage());
 	}
 
-
 	$documentGroup=array('doc_group_id'=>$dg->getID(),
 									'parent_doc_group'=>$dg->getParentID(),
 									'groupname'=>$dg->getName());
 
-
 	return $documentGroup;
 }
-
-
 
 ///
 /// getDocumentFiles
 ///
-
 
 $server->register(
 	'getDocumentFiles',
@@ -650,7 +615,6 @@ function &getDocumentFiles($session_ser,$group_id,$doc_id) {
 	return $return;
 }
 
-
 //
 // convert array of document files to soap data structure
 //
@@ -664,7 +628,6 @@ function documentfiles_to_soap($document) {
 			);
 	return $return;
 }
-
 
 //
 //	Document Delete

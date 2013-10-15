@@ -161,7 +161,6 @@ class ArtifactExtraFieldElement extends Error {
 		}
 	}
 
-
 	/**
 	 *	fetchData - re-fetch the data for this ArtifactExtraFieldElement from the database.
 	 *

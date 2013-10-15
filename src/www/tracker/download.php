@@ -17,7 +17,6 @@ require_once $gfcommon.'tracker/Artifact.class.php';
 require_once $gfcommon.'tracker/ArtifactFile.class.php';
 require_once $gfcommon.'tracker/ArtifactType.class.php';
 
-
 $arr=explode('/',getStringFromServer('REQUEST_URI'));
 $group_id=(int)$arr[3];
 $atid=(int)$arr[4];

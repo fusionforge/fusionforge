@@ -60,7 +60,6 @@ function pg_connectstring($dbname, $user, $password = "", $host = "", $port = ""
 	return $string;
 }
 
-
 /**
  *  db_connect() - Connect to the primary database
  */

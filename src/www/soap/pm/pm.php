@@ -91,7 +91,6 @@ $server->wsdl->addComplexType(
 	'tns:TaskDependency'
 );
 
-
 $server->wsdl->addComplexType(
 	'TaskAssignee',
 	'complexType',
@@ -114,8 +113,6 @@ $server->wsdl->addComplexType(
 	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:TaskAssignee[]')),
 	'tns:TaskAssignee'
 );
-
-
 
 //
 //	ProjectTasks
@@ -354,7 +351,6 @@ $server->register(
 	array('updateSubproject'=>'xsd:boolean'),
 	$uri,$uri.'#updateSubproject','rpc','encoded'
 );
-
 
 //deleteSubproject
 $server->register(

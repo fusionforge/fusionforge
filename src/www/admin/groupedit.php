@@ -76,7 +76,6 @@ function do_update(&$group, $is_template, $status, $group_type, $unix_box, $http
 	return true;
 }
 
-
 if (getStringFromRequest('submit')) {
 	$form_template = getStringFromRequest('form_template');
 	$form_status = getStringFromRequest('form_status');

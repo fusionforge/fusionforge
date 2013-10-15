@@ -20,7 +20,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 $unit        = 'theme';
 $table       = 'themes';
 $primary_key = 'theme_id';

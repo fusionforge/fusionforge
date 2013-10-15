@@ -129,7 +129,6 @@ require_once $gfwww.'soap/frs/frs.php';
 //
 require_once $gfwww.'soap/scm/scm.php';
 
-
 $wsdl_data = $server->wsdl->serialize();
 
 if (isset($wsdl)) {

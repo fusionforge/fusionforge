@@ -38,7 +38,6 @@ require_once 'common/mail/Mail.class.php';
 require_once 'PEAR.php';
 global $feedback;
 
-
 function getForumMLDao() {
 	return new ForumML_MessageDao(CodendiDataAccess::instance());
 }
@@ -189,8 +188,6 @@ $res = getForumMLDao()->countAllThreadsFromList($list_id);
 			<th class='forumml' width='25%'>"._('Author')."</th>
 			</tr>";
 
-
-
 		$hp =& ForumML_HTMLPurifier::instance();
 		$i = 0;
 		while (($msg = $result->getRow())) {
@@ -206,7 +203,6 @@ $res = getForumMLDao()->countAllThreadsFromList($list_id);
 			// Get the number of messages in thread
 			// nb of children + message
 			$count = 1 + plugin_forumml_nb_children(array($msg['id_message']));
-
 
 			// all threads
 			print "<tr class='".$class."'><a name='".$msg['id_message']."'></a>
@@ -390,7 +386,6 @@ function plugin_forumml_show_thread($p, $list_id, $parentId, $purgeCache) {
 		plugin_forumml_show_message($p, $hp, $message, $parentId, $purgeCache);
 	}
 }
-
 
 // Display a message
 function plugin_forumml_show_message($p, $hp, $msg, $id_parent, $purgeCache) {

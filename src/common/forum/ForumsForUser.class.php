@@ -47,7 +47,6 @@ class ForumsForUser extends Error {
 		return true;
 	}
 
-
 	/**
 	*       getMonitoredForums
 	*

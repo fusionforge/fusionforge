@@ -92,7 +92,6 @@ class Roadmap extends Error {
 		$this->_fetchData($data);
 	}
 
-
 	// Public methods
 
 	public function create($name) {
@@ -358,7 +357,6 @@ class Roadmap extends Error {
 
 		return array_keys($releases);
 	}
-
 
 	// Private methods
 

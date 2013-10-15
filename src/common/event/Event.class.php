@@ -25,5 +25,4 @@ class Event {
      */
      const GET_SYSTEM_EVENT_CLASS = 'get_system_event_class';
 
-
 }

@@ -16,7 +16,6 @@ class News{
 	//	$sys_news_group = 3; Use this var instead.
 		$importForum = new Forums($this->news, 3 , true);
 
-
 		foreach($importForum->forums as $singleNews){
 			$fid = $importForum->create_forum($singleNews);
 			$this->addToDB($singleNews, $fid);
@@ -46,7 +45,5 @@ class News{
 //		$summary = $news["summary"];
 //		$forum = $news["forum"];
 //
-
-
 
 }

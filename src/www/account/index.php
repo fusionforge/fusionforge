@@ -52,7 +52,6 @@ if (getStringFromRequest('submit')) {
 		exit_form_double_submit('my');
 	}
 
-
 	$firstname = getStringFromRequest('firstname');
 	$lastname = getStringFromRequest('lastname');
 	$language = getIntFromRequest('language');
@@ -69,7 +68,6 @@ if (getStringFromRequest('submit')) {
 	$remember_user = getStringFromRequest('remember_user');
 	$use_ratings = getStringFromRequest('use_ratings');
 	$use_tooltips = getIntFromRequest('use_tooltips');
-
 
 	$check = true;
 	if (!strlen(trim($firstname))) {
@@ -136,7 +134,6 @@ echo $HTML->boxTop(_('Account Maintenance'));
 	<li><?php echo util_make_link ('/people/editprofile.php','<strong>'._('Edit My Skills Profile').'</strong>'); ?></li>
 <?php } ?>
 </ul>
-
 
 <table class="infotable">
 

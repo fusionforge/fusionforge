@@ -37,7 +37,6 @@ if ( !$offset || $offset < 0 || !is_numeric($offset) ) {
 // For expediency, list only the file releases in the past three days.
 $start_time = time() - (30 * 86400);
 
-
 $res_new = db_query_params ('SELECT groups.group_name,
 	groups.group_id,
 	groups.unix_group_name,

@@ -28,7 +28,6 @@ $id = getStringFromRequest('id');
 $res=db_query_params ('SELECT * FROM db_images WHERE id=$1',
 			array($id)) ;
 
-
 $filename=db_result($res,0,'filename');
 $type=db_result($res,0,'filetype');
 $data=base64_decode(db_result($res,0,'bin_data'));

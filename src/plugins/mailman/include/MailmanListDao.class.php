@@ -31,7 +31,6 @@ class MailmanListDao extends DataAccessObject {
 		parent::__construct($da);
 	}
 
-
 	/**
 	 * Search active (=not deteted) mailing lists
 	 * return all active lists

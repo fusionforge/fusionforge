@@ -443,7 +443,6 @@ class FRSPackage extends Error {
 		return $this->package_releases;
 	}
 
-
 	/**
 	 *	newFRSRelease - generates a FRSRelease (allows overloading by subclasses)
 	 *

@@ -37,7 +37,6 @@ require_once($exceptions_dir . 'oslcException.php');
  */
 class CmController extends Zend_Rest_Controller {
 
-
 	/**
 	 * Defines by default accepted mime-types for queries on actions, and corresponding
 	 * format of output. Applications can define more actions and their respective accepted

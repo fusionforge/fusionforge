@@ -18,7 +18,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 // Export software version in RSS 2.0
 // Author: Christian Bayle <bayle@debian.org>
 

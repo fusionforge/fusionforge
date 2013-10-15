@@ -56,7 +56,6 @@ class ArtifactHtml extends Artifact {
 		echo $GLOBALS['HTML']->listTableBottom();
 	}
 
-
 	function showMessages() {
 
 		if (session_loggedin()) {

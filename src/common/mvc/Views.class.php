@@ -45,7 +45,6 @@ class Views {
         return $this->_controler;
     }
 
-
   function header() {
     site_project_header($this->html_params);
   }

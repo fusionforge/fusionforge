@@ -118,7 +118,6 @@ function project_trackers_to_service_catalog($server_url, $base_url, $trackers, 
 	return $doc->saveXML();
 }
 
-
 // Generate an OSLC Core V2 ServiceProviderCatalog that lists projects as OSLC Service Providers.
 function projects_to_service_catalog($base_url, $projects) {
 

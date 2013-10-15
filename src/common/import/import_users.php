@@ -251,7 +251,6 @@ function role_update($group_id, $rolename, $role_id, $data){
       $feedback = _('Successfully Updated Role');
     }
 
-
   }
   else{
     echo "update de : ".$role_id." ".$rolename."<br>";

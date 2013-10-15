@@ -467,7 +467,6 @@ class ReportSetup extends Report {
 		db_query_params ('DELETE FROM rep_groups_added_daily WHERE day=$1',
 				array($day));
 
-
 		return db_query_params ('INSERT INTO rep_groups_added_daily (day,added)
 			VALUES ($1,(SELECT count(*) FROM groups WHERE status=$2 AND register_time
 			BETWEEN $3 AND $4 ))',
@@ -555,7 +554,6 @@ class ReportSetup extends Report {
 	function groups_added_weekly($week) {
 		db_query_params ('DELETE FROM rep_groups_added_weekly WHERE week=$1',
 				array($week));
-
 
 		return db_query_params ('INSERT INTO rep_groups_added_weekly (week,added)
 			VALUES ($1,(SELECT count(*) FROM groups WHERE status=$2 AND register_time
@@ -668,9 +666,7 @@ class ReportSetup extends Report {
 		return true;
 	}
 
-
 	// ******************************
-
 
 	/**
 	 *	Add a row to the users_cum_daily report table.
@@ -681,7 +677,6 @@ class ReportSetup extends Report {
 	function users_cum_daily($day) {
 		db_query_params ('DELETE FROM rep_users_cum_daily WHERE day=$1',
 			array($day));
-
 
 		return db_query_params ('INSERT INTO rep_users_cum_daily (day,total)
 			VALUES ($1,(SELECT count(*) FROM users WHERE status=$2 AND add_date
@@ -927,9 +922,7 @@ class ReportSetup extends Report {
 		return true;
 	}
 
-
 	// ************************
-
 
 	/**
 	 *	Add a row to the user_act_daily report table.
@@ -1126,7 +1119,6 @@ class ReportSetup extends Report {
 
 	// ************************
 
-
 	/**
 	 *	Add a row to the group_act_daily report table.
 	 *
@@ -1219,7 +1211,6 @@ class ReportSetup extends Report {
 						date('d',$day),
 						1,
 						'status_id'));
-
 
 	}
 

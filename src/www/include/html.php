@@ -239,7 +239,6 @@ function html_get_timezone_popup($title = 'timezone', $selected = 'xzxz') {
 	return html_build_select_box_from_arrays($TZs, $TZs, $title, $selected, false);
 }
 
-
 /**
  * html_build_select_box_from_assoc() - Takes one assoc array and returns a pop-up box.
  *
@@ -976,7 +975,6 @@ function site_user_header($params) {
 		$arr_attr[] = array('title' => _('View your tasks and artifacts.'), 'class' => 'tabtitle');
 	}
 
-
 	if (forge_get_config('use_diary')) {
 		$arr_t[] = _('My Diary and Notes');
 		$arr_l[] = '/my/diary.php';
@@ -1292,7 +1290,6 @@ function html_trove_limit_navigation_box($php_self, $querytotalcount, $trove_bro
 	}
 	return $html_limit;
 }
-
 
 // Local Variables:
 // mode: php

@@ -167,7 +167,6 @@ class UsersImportPage extends FileManagerPage {
 
 	}
 
-
 	/**
 	 * Does the main work
 	 * @return html string
@@ -243,7 +242,6 @@ class UsersImportPage extends FileManagerPage {
 		return $html;
 	}
 
-
 }
 
 // The user should be forge admin
@@ -270,8 +268,6 @@ else {
 $this_page->display_headers($message);
 
 $this_page->display_main();
-
-
 
 // Local Variables:
 // mode: php

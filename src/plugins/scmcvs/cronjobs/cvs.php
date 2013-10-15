@@ -338,7 +338,6 @@ if(is_dir($cvsdir_prefix)) {
 	}
 }
 
-
 cron_entry(13,$err);
 
 ?>

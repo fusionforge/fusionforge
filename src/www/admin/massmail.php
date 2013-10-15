@@ -106,7 +106,6 @@ print '
 )
 .'<br />';
 
-
 print '
 
 <p>
@@ -122,7 +121,6 @@ print '
 
 </form>
 ';
-
 
 $res = db_query_params ('
 	SELECT *

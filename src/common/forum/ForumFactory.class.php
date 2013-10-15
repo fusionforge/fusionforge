@@ -137,7 +137,6 @@ ORDER BY group_forum_id',
 			return $this->forums;
 		}
 
-
 		if (session_loggedin()) {
 			if (!forge_check_perm ('forum_admin', $this->Group->getID())) {
 				$this->setError(_("You don't have a permission to access this page"));

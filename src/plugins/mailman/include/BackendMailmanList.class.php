@@ -58,7 +58,6 @@ class BackendMailmanList {
         return $this->_mailinglistdao;
     }
 
-
     /**
      * Update mailman configuration for the given list
      * Write configuration in temporary file, and load it with mailman config_list tool

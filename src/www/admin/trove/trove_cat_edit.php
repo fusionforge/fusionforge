@@ -24,7 +24,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/trove.php';
@@ -81,7 +80,6 @@ if (getStringFromRequest('submit')) {
 	}
 	db_query_params ('update trove_group_link set trove_cat_root=(select root_parent from trove_cat where trove_cat_id=trove_group_link.trove_cat_id)',
 			array()) ;
-
 
 	session_redirect("/admin/trove/trove_cat_list.php");
 }

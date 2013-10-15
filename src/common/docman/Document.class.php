@@ -32,7 +32,6 @@ require_once $gfcommon.'docman/DocumentManager.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
 require_once $gfcommon.'docman/DocumentStorage.class.php';
 
-
 class Document extends Error {
 
 	/**

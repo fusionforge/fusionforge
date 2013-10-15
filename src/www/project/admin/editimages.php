@@ -22,7 +22,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 // Quota in bytes
 $QUOTA = 1048576;
 
@@ -95,7 +94,6 @@ function store_file($id, $input_file) {
 		                          array($description, $data, $input_file['name'], $size,
 		                          $input_file['type'], $width, $height, $curtime, $group_id, $id));
 		}
-
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$error_msg .= _('Error: Cannot store multimedia file: ').db_error();

@@ -783,7 +783,6 @@ class ArtifactType extends Error {
 		return $this->element_status["$choiceid"];
 	}
 
-
 	/**
 	 * delete - delete this tracker and all its related data.
 	 *

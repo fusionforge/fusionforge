@@ -457,7 +457,6 @@ class Snoopy
 			return false;
 	}
 
-
 /*======================================================================*\
 	Function:	fetchtext
 	Purpose:	fetch the text from a web page, stripping the links
@@ -546,8 +545,6 @@ class Snoopy
 			return false;
 	}
 
-
-
 /*======================================================================*\
 	Function:	set_submit_multipart
 	Purpose:	Set the form submission content type to
@@ -557,7 +554,6 @@ class Snoopy
 	{
 		$this->_submit_type = "multipart/form-data";
 	}
-
 
 /*======================================================================*\
 	Function:	set_submit_normal
@@ -569,13 +565,9 @@ class Snoopy
 		$this->_submit_type = "application/x-www-form-urlencoded";
 	}
 
-
-
-
 /*======================================================================*\
 	Private functions
 \*======================================================================*/
-
 
 /*======================================================================*\
 	Function:	_striplinks
@@ -591,7 +583,6 @@ class Snoopy
 						(?(1) (.*?)\\1 | ([^\s\>]+))		# if quote found, match up to next matching
 													# quote, otherwise match up to next space
 						'isx",$document,$links);
-
 
 		// catenate the non-empty matches from the conditional subpattern
 
@@ -628,8 +619,6 @@ class Snoopy
 		// return the links
 		return $match;
 	}
-
-
 
 /*======================================================================*\
 	Function:	_striptext
@@ -1042,7 +1031,6 @@ class Snoopy
 		}
 	}
 
-
 /*======================================================================*\
 	Function:	_check_timeout
 	Purpose:	checks whether timeout has occurred
@@ -1123,7 +1111,6 @@ class Snoopy
 	{
 		return(fclose($fp));
 	}
-
 
 /*======================================================================*\
 	Function:	_prepare_post_body

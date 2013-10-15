@@ -68,7 +68,6 @@ if (!$group || !is_object($group)) {
 $summary = getStringFromRequest('summary');
 $details = getHtmlTextFromRequest('details');
 
-
 if (session_loggedin()) {
 
 	if (!forge_check_perm('project_admin', $group_id)) {

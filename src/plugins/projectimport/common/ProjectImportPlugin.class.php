@@ -184,7 +184,6 @@ class ProjectImportPlugin extends Plugin {
 		$params['result'] = $html;
 	}
 
-
 }
 
 // Local Variables:

@@ -220,7 +220,6 @@ function forge_set_vars_from_config () {
 	}
 }
 
-
 /**
  * Define a new configuration item with given name/section and default value
  * @param string $var name

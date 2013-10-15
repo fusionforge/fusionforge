@@ -170,7 +170,6 @@ class MailmanListFactory extends Error {
 		return $result;
 	}
 
-
 }
 
 // Local Variables:

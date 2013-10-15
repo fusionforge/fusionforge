@@ -54,7 +54,6 @@ if (getStringFromRequest('post_changes')) {
 	}
 }
 
-
 //
 //	Display existing artifact types
 //

@@ -39,7 +39,6 @@ function print_words_elem( $word, $index, $text_input_idx ) {
 	echo "words[$text_input_idx][$index] = '" . escape_quote( $word ) . "';\n";
 }
 
-
 # set an element of the JavaScript 'suggs' array to a list of suggestions
 function print_suggs_elem( $suggs, $index, $text_input_idx ) {
 	echo "suggs[$text_input_idx][$index] = [";
@@ -58,7 +57,6 @@ function print_suggs_elem( $suggs, $index, $text_input_idx ) {
 function escape_quote( $str ) {
 	return preg_replace ( "/'/", "\\'", $str );
 }
-
 
 # handle a server-side error.
 function error_handler( $err ) {
@@ -144,7 +142,6 @@ function print_checker_results() {
 	unlink( $tempfile );
 }
 
-
 ?>
 <html>
 <head>
@@ -182,8 +179,6 @@ function init_spell() {
 		}
 	}
 }
-
-
 
 </script>
 

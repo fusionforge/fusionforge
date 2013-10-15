@@ -3,7 +3,6 @@
  * @author: Patrick Apel, tarent GmbH
  */
 
-
 /**
  * Retrieve group_project_id and group_id for a specific project_task_id,
  * for URI construction and similar things.
@@ -35,7 +34,6 @@ function getGroupProjectIdGroupId($project_task_id) {
 	return $arrResult;
 }
 
-
 /**
  * Check if the task behind project_task_id is considered public.
  *
@@ -54,7 +52,6 @@ function isProjectTaskInfoPublic($project_task_id) {
 							   db_result ($res, 0, 'group_project_id'),
 							   'read') ;
 }
-
 
 /**
  * Check whether the user has access to the project task by
@@ -94,7 +91,6 @@ function isUserAndTaskinSameGroup($project_task_id, $user_name) {
  * LEFT JOIN project_task ON project_group_list.group_project_id = project_task.group_project_id
  * WHERE project_task_id isNull;
  */
-
 
 /**
  * Retrieve extended information about a project task.

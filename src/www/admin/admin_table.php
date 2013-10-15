@@ -22,7 +22,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 /**
  *	admin_table_add() - present a form for adding a record to the specified table
  *

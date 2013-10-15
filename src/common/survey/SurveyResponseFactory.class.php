@@ -187,7 +187,6 @@ class SurveyResponseFactory extends Error {
 		return $this->Responses;
 	}
 
-
 	/**
 	 *	getNumberOfSurveyResponses - get the number of Survey Responses
 	 *

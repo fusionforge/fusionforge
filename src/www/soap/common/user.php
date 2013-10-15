@@ -184,7 +184,6 @@ $server->register(
     $uri.'#userGetGroups','rpc','encoded'
 );
 
-
 //get user objects for array of user_ids
 function &getUsers($session_ser,$user_ids) {
 	continue_session($session_ser);

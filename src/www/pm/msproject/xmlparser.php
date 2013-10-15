@@ -173,7 +173,6 @@ function startElement($parser, $name, $attrib){
 	}
 }
 
-
 function endElement($parser, $name) {
 	global $task_count;
 	global $fdependenton;

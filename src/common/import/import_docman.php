@@ -20,7 +20,6 @@ class Docman {
 
 	public $docman_states = array("active"=>1, "deleted"=>2, "pending"=>3, "hidden"=>4, "private"=>5);
 
-
     function __construct($docman, $group_id) {
         $this->docman = $docman;
         $this->group_id = $group_id;
@@ -69,8 +68,6 @@ class Docman {
 			$doc->update($fn, $ftype, $fdata, $fdocgrp, $ftitle, $flanguage, $fdesc,$fstate_id);
 		}
     }
-
-
 
     function addDirectory($dirName, $parent_dir_id){
     	if(!$parent_dir_id){
@@ -148,7 +145,6 @@ class Docman {
 
 		$r2 = db_query_params ('DELETE FROM doc_groups WHERE group_id=$1',
 					   array ($this->group_id)) ;
-
 
 		foreach($this->docman as $status => $content){
 			$this->fill_type($content, $status);

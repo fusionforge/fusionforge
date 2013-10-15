@@ -60,7 +60,6 @@ $headers = array(
 	'DELETE'
 	);
 
-
 if(count($t_tokens)>0) {
 	echo $HTML->boxTop(_('Access tokens'));
 	echo $HTML->listTableTop($headers);

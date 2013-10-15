@@ -98,7 +98,6 @@ function createRessourceCollectionView($view){
 		$href = $doc->createTextNode($entry['id']);
 		$child = $child->appendChild($href);
 
-
 		if( count($entry['resource']) ) {
 			$content = $doc->createElement('content');
 			$content = $entryel->appendChild($content);

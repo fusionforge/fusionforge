@@ -187,7 +187,6 @@ if (is_array($_assigned_to)) {
 }
 $tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'_assigned_to',$_assigned_to,true,_('Unassigned'));
 
-
 //
 //	custom order by arrays to build a pop-up box
 //
@@ -200,7 +199,6 @@ $order_name_arr[]=_('Last Modified Date');
 $order_name_arr[]=_('Close Date');
 $order_name_arr[]=_('Submitter');
 $order_name_arr[]=_('Assignee');
-
 
 $order_arr=array();
 $order_arr[]='artifact_id';

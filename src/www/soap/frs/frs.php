@@ -199,7 +199,6 @@ $server->wsdl->addComplexType(
 	)
 );
 
-
 $server->wsdl->addComplexType(
 	'ArrayOfFRSFile',
 	'complexType',

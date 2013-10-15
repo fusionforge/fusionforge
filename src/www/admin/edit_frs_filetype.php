@@ -20,7 +20,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 $unit        = 'file_type';
 $table       = 'frs_filetype';
 $primary_key = 'type_id';

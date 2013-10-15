@@ -172,7 +172,6 @@ $userp_res = db_query_params ('SELECT  unix_pw FROM users WHERE unix_status=$1',
 
 $err .= db_error();
 
-
 $user_pws = array();
 for($i = 0; $i < db_numrows($userp_res); $i++) {
         $us_pw = db_result($userp_res,$i,'unix_pw');
@@ -218,8 +217,6 @@ for($i = 0; $i < db_numrows($group_res); $i++) {
         $gforge_groups[] = $group_name;
         $gids[$group_name] = db_result($group_res,$i,'group_id') + 50000;       // 50000: hardcoded value (for now).
 }
-
-
 
 //	Add the groups from the gforge database
 for ($i=0; $i < count($group_orig); $i++) {

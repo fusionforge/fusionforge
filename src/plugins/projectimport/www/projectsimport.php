@@ -148,7 +148,6 @@ class ProjectsImportPage extends FileManagerPage {
 			if ($this->storage->getMimeType($filepath) == 'application/x-planetforge-forge-export') {
 				$package = Opendocument::open($filepath);
 
-
 		        $dumpfilenames = $package->getFileNamesByMediaType('application/x-forgeplucker-oslc-rdf+json');
         		if (count($dumpfilenames) == 1) {
         			$filename = $dumpfilenames[0];
@@ -187,7 +186,6 @@ class ProjectsImportPage extends FileManagerPage {
 			$this->feedback(_('Please select an existing file to process, or upload a new one'));
 		}
 	}
-
 
 	/**
 	 * Does the main work

@@ -30,7 +30,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
@@ -64,7 +63,6 @@ if (getStringFromRequest('submit')) {
 			exit_error($u->getErrorMessage(),'home');
 		}
 
-
 		$res = db_query_params ('
 			INSERT INTO prdb_dbs(group_id, dbname, dbusername, dbuserpass, requestdate, dbtype, created_by, state)
 			VALUES ($group_id,$1,$2,$3,$4,1,$5,1)
@@ -95,7 +93,6 @@ $res_db = db_query_params ('
 ',
 			array()) ;
 
-
 echo '<h3>' ._('Statistics for Project Databases').'</h3>';
 
 if (db_numrows($res_db) > 0) {
@@ -116,7 +113,6 @@ if (db_numrows($res_db) > 0) {
 } else {
 	echo '<p>' ._('No databases defined').'</p>';
 }
-
 
 if ($displaydb) {
 
@@ -144,10 +140,7 @@ if ($displaydb) {
 	}
 	print "</ul>";
 
-
 }
-
-
 
 ?>
 <hr />

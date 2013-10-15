@@ -60,7 +60,6 @@ function reports_quick_graph($title,$qpa1,$qpa2,$bar_colors) {
 	}
 }
 
-
 /**
  * reports_header() - Show the reports header
  *

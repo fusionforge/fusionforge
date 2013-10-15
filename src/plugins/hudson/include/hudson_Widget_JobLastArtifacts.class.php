@@ -18,7 +18,6 @@
  * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 require_once 'HudsonJobWidget.class.php';
 require_once 'common/include/HTTPRequest.class.php';
 require_once 'PluginHudsonJobDao.class.php';

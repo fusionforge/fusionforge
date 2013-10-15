@@ -47,8 +47,6 @@ function goodbye($msg) {
 	die ('<center><form method="post"><input type="button" value="Close Window" onclick="window.close()"></form></center>');*/
 }
 
-
-
 $attachid = getIntFromRequest("attachid");
 $delete = getStringFromRequest("delete");
 $edit = getStringFromRequest("edit");
@@ -202,14 +200,12 @@ if ($extension != 'txt') {
 
 header('Content-Length: ' . db_result($res,0,'filesize') );
 
-
 $mimetype = db_result($res,0,'mimetype');
 if ($mimetype) {
 	header('Content-type: '.$mimetype);
 } else {
 	header('Content-type: application/octet-stream');
 }
-
 
 $filedata = base64_decode(db_result($res,0,'filedata'));
 for ($i = 0; $i < strlen($filedata); $i = $i+100) {
@@ -223,7 +219,6 @@ if (!$pending) { //we don't care for the pending attach counter, it's just for a
 	db_query_params ('UPDATE forum_attachment SET counter=counter+1 WHERE attachmentid=$1',
 			array($attachid));
 }
-
 
 // Local Variables:
 // mode: php

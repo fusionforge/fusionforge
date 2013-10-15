@@ -150,7 +150,6 @@ class admsswPlugin extends Plugin {
 		print '<br />'. sprintf( _('Preview <a href="%1$s">ADMS.SW meta-data</a> about the project'), util_make_url ('/plugins/'. $this->name .'/projectturtle.php?group_id='.$group_id));
 	}
 
-
 	//
 	// Utility functions
 	//
@@ -260,7 +259,6 @@ class admsswPlugin extends Plugin {
 		// we could save the type doap:Project in such case, as there's an equivalence, but not sure all consumers do reasoning
 		$types = array('doap:Project', 'admssw:SoftwareProject');
 		rdfutils_setPropToUri($res, 'rdf:type', $types);
-
 
 		// Handle project tags
 		$tags_list = NULL;
@@ -468,7 +466,6 @@ class admsswPlugin extends Plugin {
 		// same as for trove's full list
 		$projects = get_public_active_projects_asc();
 
-
 		if ( isset($chunk) && isset($chunksize) ) {
 			// TODO : do some checks on $chunk $chunksize values
 			// 			if ( ($chunk < 1) && ($chunksize >= 1) ) {
@@ -555,7 +552,6 @@ class admsswPlugin extends Plugin {
 
 		return $p;
 	}
-
 
 	/**
 	 * Provides either an HTML preview looking like turtle, or plain RDF of the ADMS.SW SoftwareRepository meta-data
@@ -667,7 +663,6 @@ class admsswPlugin extends Plugin {
 	 */
 	public function content_negociated_projects_list (&$params) {
 
-
 		$accept = $params['accept'];
 
 		// we are asked for RDF either as RDF+XML or Turtle
@@ -691,7 +686,6 @@ class admsswPlugin extends Plugin {
 
  		}
 	}
-
 
 	//
 	// Trove related methods

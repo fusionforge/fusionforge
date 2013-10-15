@@ -28,7 +28,6 @@ include_once 'ARC2_OSLCCoreRDFJSONParserPlugin.php';
 
 //require_once $gfcommon.'import/import_trackers.php';
 
-
 define('FORGEPLUCKER_NS', 'http://planetforge.org/ns/forgeplucker_dump/');
 define('PLANETFORGE_NS', 'http://coclico-project.org/ontology/planetforge#');
 
@@ -285,7 +284,6 @@ class ProjectImporter {
 		$this->group_id = $the_group_id;
 		$this->index = False;
 
-
 		$this->trackers = array();
 		$this->users = False;
 		$this->persons = False;
@@ -420,7 +418,6 @@ class ProjectImporter {
 				// assuming it misses the top-level resource, so adding one
 				if (array_key_exists('', $this->index)) {
 					$base = $this->index[''];
-
 
 					$about = array();
 					$about[] = array('value' => 'http://coin.example.com/');
@@ -721,7 +718,6 @@ class ProjectImporter {
 			//  ...
 		}
 	}
-
 
 }
 // Local Variables:

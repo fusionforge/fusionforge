@@ -33,7 +33,6 @@ require_once $gfwww.'project/stats/project_stats_utils.php';
 require_once $gfwww.'include/tool_reports.php';
 require_once $gfcommon.'reporting/report_utils.php';
 
-
 if (!session_loggedin()) {
 	exit_not_logged_in();
 }

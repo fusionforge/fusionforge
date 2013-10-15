@@ -65,7 +65,6 @@
 		$this->params[$name] = $value;
 	}
 
-
 	/**
 	 * Get the value of $variable in $array.
 	 *
@@ -96,7 +95,6 @@
 			$files[count($files) - 1] . ' Line: '.
 			$backtrace[1]['line'];
 	}
-
 
 	/**
 	 * Check if $variable exists in user submitted parameters.

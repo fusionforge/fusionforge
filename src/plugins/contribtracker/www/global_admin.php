@@ -33,7 +33,6 @@ $max_logo_size = 50 ;		// In kibibytes
 
 session_require_global_perm ('forge_admin') ;
 
-
 $action = getStringFromRequest ('action') ;
 $action = util_ensure_value_in_set ($action, array ('display',
 						    'add_role',

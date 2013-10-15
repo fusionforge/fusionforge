@@ -18,7 +18,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 // export forum posts in RSS 2.0
 // Author: Jutta Horstmann, data in transit <jh@dataintransit.com>
 // Created: 14.01.08
@@ -48,8 +47,6 @@ require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfcommon.'forum/ForumFactory.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';
 require_once $gfcommon.'forum/ForumMessageFactory.class.php';
-
-
 
 //Initialize
 $groups = array();
@@ -194,7 +191,6 @@ $feed_title_desc = $show_threads ? "Current threads" : "Recent postings";
 $feed_title = forge_get_config('forge_name')." Forums: ".$feed_title_desc; //all site's forums
 $feed_link = "http://".forge_get_config('web_host');
 $feed_desc = forge_get_config('forge_name')." Forums";
-
 
 // -------------for filtered feeds - set feed title, link and description-------------
 

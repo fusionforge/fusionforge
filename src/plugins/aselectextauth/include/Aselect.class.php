@@ -18,7 +18,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 class ASelect {
 	var $username;
 	var $organization;
@@ -76,6 +75,5 @@ class ASelect {
 	function getTicket () {
 		return $this->ticket;
 	}
-
 
 }

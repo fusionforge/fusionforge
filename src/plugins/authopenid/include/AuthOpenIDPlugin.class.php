@@ -61,7 +61,6 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 		$this->declareConfigVars();
 	}
 
-
 	/**
 	 * Display a form to input credentials
 	 * @param unknown_type $params

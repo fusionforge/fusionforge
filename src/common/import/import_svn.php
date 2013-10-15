@@ -6,7 +6,6 @@ OLD_PROJECT_NAME : Name of the project when it was exported (should be the name 
 NEW_PROJECT_NAME : Name of the project where the svn should be imported
 */
 
-
 $oldpjctname = $argv[1];
 $newpjctname = $argv[2];
 

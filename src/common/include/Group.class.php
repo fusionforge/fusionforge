@@ -990,7 +990,6 @@ class Group extends Error {
 		return $this->data_array['register_purpose'];
 	}
 
-
 	/**
 	 * getAdmins() - Get array of Admin user objects.
 	 *
@@ -1536,7 +1535,6 @@ class Group extends Error {
 		return $this->data_array['send_all_docs'];
 	}
 
-
 	/**
 	 * getHomePage - The URL for this project's home page.
 	 *
@@ -1611,7 +1609,6 @@ class Group extends Error {
 	function &getPermission() {
 		return permission_get_object($this);
 	}
-
 
 	function delete($sure, $really_sure, $really_really_sure) {
 		if (!$sure || !$really_sure || !$really_really_sure) {
@@ -2738,7 +2735,6 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		}
 		return true;
 	}
-
 
 	/**
 	 * getRolesId - Get Ids of the roles of the group.

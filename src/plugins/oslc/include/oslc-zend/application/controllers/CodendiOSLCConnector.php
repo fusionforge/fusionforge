@@ -30,9 +30,7 @@ require_once 'common/tracker/Tracker_Artifact.class.php';
 require_once 'common/tracker/Tracker_ArtifactFactory.class.php';
 require_once 'common/tracker/Tracker_FormElementFactory.class.php';
 
-
 class CodendiOSLCConnector extends OSLCConnector {
-
 
     /**
      * Filter parameters provided in the REST GET request to check whether mandatory ones are set.
@@ -248,7 +246,6 @@ class CodendiOSLCConnector extends OSLCConnector {
 				throw new BadRequestException("helios_bt:assigned_to mentionned in the request query not found in request body!");
 			}
 		}
-
 
 		$canned_response=100;
 

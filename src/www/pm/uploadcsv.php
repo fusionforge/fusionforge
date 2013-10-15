@@ -21,12 +21,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 //
 //	This page contains a form with a file-upload button
 //	so a user can choose a file to upload a .csv file and store it in task mgr
 //
-
 
 pm_header(array('title'=>_('Upload data into the tasks.'),'group_project_id'=>$group_project_id));
 

@@ -92,7 +92,6 @@ abstract class ForgeAuthPlugin extends Plugin {
 
 	// Default mechanisms
 
-
 	/**
 	 * Current forge user
 	 *

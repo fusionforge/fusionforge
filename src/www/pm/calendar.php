@@ -69,7 +69,6 @@ if (!$type) {
 	$type = 'threemonth';
 }
 
-
 $today = getdate(time());
 
 if (!$year) {
@@ -83,7 +82,6 @@ if (!$month) {
 if (!$day) {
 	$day = $today['mday'];
 }
-
 
 $months = array(1 => _('January'), _('February'), _('March'), _('April'), _('May'), _('June'),
 		_('July'), _('August'), _('September'), _('October'), _('November'), _('December'));
@@ -146,7 +144,6 @@ function make_task_link($task, $type) {
 			  sprintf(_('Task %d ends'), $task->getID()) )
 		. '</a>';
 }
-
 
 /**
  * Display one month.

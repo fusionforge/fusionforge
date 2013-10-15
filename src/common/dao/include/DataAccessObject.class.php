@@ -16,7 +16,6 @@ class DataAccessObject {
         $this->da=$da;
     }
 
-
     //! An accessor
 	/**
 	 * For SELECT queries

@@ -34,7 +34,6 @@ require_once 'common/dao/CodendiDataAccess.class.php';
 require_once 'mailman/include/events/SystemEvent_MAILMAN_LIST_CREATE.class.php';
 require_once 'mailman/include/events/SystemEvent_MAILMAN_LIST_DELETE.class.php';
 
-
 class mailmanPlugin extends Plugin {
 	public function __construct($id=0) {
 		$this->Plugin($id);
@@ -218,8 +217,6 @@ class mailmanPlugin extends Plugin {
 			echo '<li><a href="'.$this->getPluginPath().'/">Template [' . _('Mailman plugin') . ']</a></li>';
 		}
 
-
-
 	}
 	function getSystemEventClass($params) {
 
@@ -239,10 +236,6 @@ class mailmanPlugin extends Plugin {
 		}
 
 	}
-
-
-
-
 
 }
 

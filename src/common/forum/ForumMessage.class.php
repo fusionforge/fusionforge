@@ -152,7 +152,6 @@ class ForumMessage extends Error {
 		}
 	}
 
-
 	/**
 	*	insertreleasedmsg - inserts the released message into the main table (forum)
 	 *	@param 	string	The Forum id
@@ -340,7 +339,6 @@ class ForumMessage extends Error {
 		$this->awaits_moderation = false;
 		return true;
 	}
-
 
 	/**
 	 *	create - use this function to create a new message in the database.

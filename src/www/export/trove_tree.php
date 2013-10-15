@@ -10,7 +10,6 @@
   *
   */
 
-
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
@@ -18,7 +17,6 @@ header("Content-Type: text/plain");
 print("<?xml version=\"1.0\"?>
 <!DOCTYPE trove-tree SYSTEM ".util_make_url ('/export/trove_tree_0.1.dtd')."\">
 <trove-tree>\n");
-
 
 /*
  *  This code does special formatting to achieve more human-readable look -

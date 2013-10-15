@@ -97,7 +97,6 @@ if ($usersearch) {
 	}
 } // end if ($usersearch)
 
-
 if (getStringFromRequest('groupsearch')) {
 	$status = getStringFromRequest('status');
 	$is_public = getIntFromRequest('is_public', -1);

@@ -27,7 +27,6 @@ require_once $gfcommon.'tracker/ArtifactQueryFactory.class.php';
 // imports ArrayOfArtifactExtraFieldsData type
 require_once $gfwww.'soap/tracker/tracker.php';
 
-
 /**
  * artifactGetViews
  */
@@ -56,7 +55,6 @@ $server->wsdl->addComplexType(
 	'tns:ArtifactQueryExtraField'
 );
 
-
 $server->wsdl->addComplexType(
 	'ArtifactQueryFields',
 	'complexType',
@@ -74,7 +72,6 @@ $server->wsdl->addComplexType(
 		'closedaterange' => array('name' => 'changed', 'type' => 'xsd:string')
 	)
 );
-
 
 $server->wsdl->addComplexType(
 	'ArtifactQuery',
@@ -186,7 +183,6 @@ function queries_to_soap($queries) {
 
 	return $result;
 }
-
 
 /**
  * artifactDeleteView
@@ -388,7 +384,6 @@ function artifactUpdateView($session_ser, $group_id, $group_artifact_id, $query_
 	//rearrange the extra fields
 	$aef = $at->getExtraFields();
 	$extra_fields = arrangeExtraFields($extra_fields, $aef);
-
 
 	$query = new ArtifactQuery($at, $query_id);
 	if (!$query || !is_object($query)) {

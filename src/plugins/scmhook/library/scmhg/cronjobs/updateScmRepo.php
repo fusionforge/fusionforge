@@ -26,7 +26,6 @@
  *	$params['scm_root'] = directory containing the scm repository
  */
 
-
 class ScmHgUpdateScmRepo {
 	/**
 	 * updateScmRepo - update the scmrepo with the new hooks

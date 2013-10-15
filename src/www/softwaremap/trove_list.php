@@ -52,7 +52,6 @@ if($content_type != $default_content_type) {
 	exit(0);
 }
 
-
 $HTML->header(array('title'=>_('Software Map'),'pagename'=>'softwaremap'));
 $HTML->printSoftwareMapLinks();
 

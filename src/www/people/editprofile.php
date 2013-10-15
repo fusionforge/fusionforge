@@ -267,7 +267,6 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 			array_push($monthArray,date("M", mktime(0,0,0,$i,1,1980)));
 		}
 
-
 		/* add skills. */
 		echo '<h2>'._('Add a new skill').'</h2>';
 		echo _('You can enter new skills you have acquired here. Please enter the start and finish dates as accurately as possible.').'<br />'.

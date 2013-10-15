@@ -30,7 +30,6 @@ require_once $gfcommon.'widget/Valid_Widget.class.php';
 html_use_jquery();
 use_javascript('scripts/LayoutController.js');
 
-
 $hp = Codendi_HTMLPurifier::instance();
 if (isLogged()) {
 

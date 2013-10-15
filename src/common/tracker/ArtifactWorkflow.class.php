@@ -41,7 +41,6 @@ class ArtifactWorkflow extends Error {
 		if ($from === $to)
 			return true;
 
-
 		$res = db_query_params ('SELECT event_id FROM artifact_workflow_event
 				WHERE group_artifact_id=$1
 				AND field_id=$2
@@ -132,7 +131,6 @@ class ArtifactWorkflow extends Error {
 
 	}
 
-
 	function saveNextNodes($from, $nodes) {
 
 		// Get All possible nodes.
@@ -169,7 +167,6 @@ class ArtifactWorkflow extends Error {
 		}
 		return $values;
 	}
-
 
 	function saveAllowedRoles($from, $to, $roles) {
 
@@ -213,7 +210,6 @@ class ArtifactWorkflow extends Error {
 
 	}
 
-
 	function _addEvent($from, $to) {
 
 		$res = db_query_params ('INSERT INTO artifact_workflow_event
@@ -241,7 +237,6 @@ class ArtifactWorkflow extends Error {
 
 	function _removeEvent($from, $to) {
 		$event_id = $this->_getEventId($from, $to);
-
 
 		$res = db_query_params ('DELETE FROM artifact_workflow_event
 				WHERE group_artifact_id=$1

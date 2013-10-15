@@ -22,7 +22,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 // Attempt to set up the include path, to fix problems with relative includes
 
 require_once $gfcommon.'include/FusionForge.class.php';
@@ -111,7 +110,6 @@ function show_top_downloads() {
 
 	return $return;
 }
-
 
 function stats_getprojects_active_public() {
 	$ff = new FusionForge();

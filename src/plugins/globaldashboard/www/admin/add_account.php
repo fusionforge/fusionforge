@@ -36,7 +36,6 @@ $soap_wsdl = getStringFromPost('soap_wsdl');
 $projects_discovery = getIntFromPost('projects_discovery_method');
 $artifacts_discovery = getIntFromPost('artifacts_discovery_method');
 
-
 $user = session_get_user();
 if($user->getID() != $user_id) {
 	session_redirect( '/plugins/globaldashboard/admin/manage_accounts.php?type=user&id='.$user_id.'&pluginname=globaldashboard&error_msg='. urlencode(_('You can add remote accounts ONLY for yourself !!!')));

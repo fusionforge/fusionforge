@@ -10,7 +10,6 @@ require_once './coreapiobjects.php';
 require_once dirname(__FILE__).'/../log4php/Logger.php';
 Logger::configure(dirname(__FILE__).'/../log4php.properties');
 
-
 /**
  * CoreApiService (SOAP Server)
  */
@@ -62,7 +61,6 @@ Class CoreApiServer extends SoapServer {
 		parent::__construct($wsdl, $options);
 	}
 }
-
 
 class CoreApiService {
 
@@ -122,7 +120,6 @@ class CoreApiService {
 		return $response;
 	}
 
-
 	/**
 	 * Service Call: getGroups
 	 *
@@ -171,7 +168,6 @@ class CoreApiService {
 
 		return $response;
 	}
-
 
 	/**
 	 * Service Call: getUsers
@@ -236,7 +232,6 @@ class CoreApiService {
 		return $response;
 	}
 
-
 	/**
 	 * Service Call: getGroupsByName
 	 *
@@ -295,7 +290,6 @@ class CoreApiService {
 		return $response;
 	}
 
-
 	/**
 	 * Service Call: getPublicProjectNames
 	 *
@@ -328,7 +322,6 @@ class CoreApiService {
 		$this->logger->debug("Public Projects number found : ".var_export($response->project_name, true));
 		return $response;
 	}
-
 
 	/**
 	 * Service Call: getUsersByName
@@ -390,7 +383,6 @@ class CoreApiService {
 		return $response;
 	}
 
-
 	/**
 	 * Service Call: userGetGroups
 	 *
@@ -449,7 +441,6 @@ class CoreApiService {
 		return $response;
 
 	}
-
 
 	/**
 	 * Service Call: getSCMData

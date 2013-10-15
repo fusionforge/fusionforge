@@ -69,7 +69,6 @@ if (!$paging) {
 	$paging = 25;
 }
 
-
 $ptf->setup($offset,$_order,$paging,$set,$_assigned_to,$_status,$_category_id,$_view);
 if ($ptf->isError()) {
 	exit_error($ptf->getErrorMessage(),'pm');
@@ -117,7 +116,6 @@ $cat_name_arr=util_result_column_to_array($res_cat,1);
 $cat_name_arr[]=_('Any');
 $cat_box=html_build_select_box_from_arrays ($cat_id_arr,$cat_name_arr,'_category_id',$_category_id,true,'none');
 
-
 /*
 	Creating a custom sort box
 */
@@ -163,7 +161,6 @@ echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.
 		<td>'._('Detail View').'<br />'. $view_box .'</td>
 		<td><input type="submit" name="submit" value="'._('Browse').'" /></td>
 	</tr></table></form>';
-
 
 $rows=count($pt_arr);
 if ($rows < 1) {

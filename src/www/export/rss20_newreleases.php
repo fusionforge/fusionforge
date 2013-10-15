@@ -99,7 +99,6 @@ ORDER BY frs_file.release_time DESC',
 			       $group_id ? 1 : 0),
 			$limit * 3);
 
-
 // ## item outputs
 $outputtotal = 0;
 $seen = array();

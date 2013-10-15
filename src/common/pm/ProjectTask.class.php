@@ -976,7 +976,6 @@ class ProjectTask extends Error {
 			 $has_changes = true;
 		}*/
 
-
 		db_begin();
 
 		//
@@ -1008,7 +1007,6 @@ class ProjectTask extends Error {
 			$has_changes = true;
 			$arrChangedAndInNotice['subproject'] = ">";
 		}
-
 
 		if ($details) {
 			$has_changes = true;

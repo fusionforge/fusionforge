@@ -161,7 +161,6 @@ function forum_footer($params) {
 	site_project_footer($params);
 }
 
-
 /**
 
 	Wrap many forum functions in this class
@@ -188,7 +187,6 @@ class ForumHTML extends Error {
 		$this->Forum =& $Forum;
 		return true;
 	}
-
 
 	/**
 	 * Function showPendingMessage
@@ -361,7 +359,6 @@ class ForumHTML extends Error {
 
 		</fieldset>";
 	}
-
 
 	/**
 	 * @param string $msg_arr

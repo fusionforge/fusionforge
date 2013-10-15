@@ -200,7 +200,6 @@ function addHistory($artifact, $jsonArtifact){
 	}
 }
 
-
 function addFiles($artifact, $jsonArtifact){
 	foreach($jsonArtifact['attachments'] as $a){
 
@@ -213,7 +212,6 @@ function addFiles($artifact, $jsonArtifact){
 			$bin_data = file_get_contents($path);
 
 			$fs = filesize($path);
-
 
 			$finfo = new finfo(FILEINFO_MIME, "/usr/share/misc/magic"); // Retourne le type mime
 			if (!$finfo) {
@@ -232,7 +230,6 @@ function addFiles($artifact, $jsonArtifact){
 	}
 }
 
-
 /**
  * createArtifacts - Create all the artifacts for an ArtifactType from an array of data.
  * @param ArtifactType The ArtifactType object which the artifacts to be added belong to.
@@ -246,7 +243,6 @@ function createArtifacts($at, $data, $hashrn, $hashlogin) {
 	$name_id = array();
 	//include $GLOBALS['gfcommon'].'import/import_arrays.php';
 	$extra_fields_ids = $at->getExtraFields();
-
 
 	foreach($extra_fields_ids as $extraField => $val){
 	$extras[$val[2]] = $extraField;
@@ -288,7 +284,6 @@ function createArtifacts($at, $data, $hashrn, $hashlogin) {
 		//get time from epoch
 		$timestamp = strtotime($artifact['date']);
 		//TODO:get the id of the assigned_to user, in the meantime -> Nobody (100)
-
 
 		//assigned to : real name dans le pluck
 		if($artifact['assigned_to']=='Nobody'){
@@ -339,7 +334,6 @@ function tracker_fill($trackers, $group_id, $users){
 
 	//Tracker creation
 	foreach ($trackers as $data){
-
 
 		$at = createTracker($data['type'], $group, $data);
 		createArtifacts($at, $data['artifacts'], $hashrn, $hashlogin);

@@ -128,7 +128,6 @@ if ($forum_id) {
 		}
 	}
 
-
 	$fmf = new ForumMessageFactory($f);
 	if (!$fmf || !is_object($fmf)) {
 		form_release_key(getStringFromRequest("form_key"));

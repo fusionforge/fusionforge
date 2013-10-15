@@ -92,7 +92,6 @@ class Widget_ProjectPublicAreas extends Widget {
 				echo "</ul>\n";
 			}
 
-
 			echo "</div>\n";
 		}
 

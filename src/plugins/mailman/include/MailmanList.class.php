@@ -26,7 +26,6 @@
  * Portions Copyright 2010 (c) Mélanie Le Bail
  */
 
-
 /*
 
    This work is based on Tim Perdue's work on the forum stuff
@@ -158,7 +157,6 @@ class MailmanList extends Error {
 			return false;
 		}
 
-
 		$listPassword = substr(md5($GLOBALS['session_hash'] . time() . rand(0,40000)), 0, 16);
 		$result = $this->_mailingDAO->insertNewList($this->Group->getID(), $realListName,$isPublic,$listPassword,$creator_id,'1',$description);
 		if (!$result) {
@@ -270,7 +268,6 @@ class MailmanList extends Error {
 		return $this->dataArray['group_list_id'];
 	}
 
-
 	/**
 	 *	isPublic - Is this mailing list open to the general public.
 	 *
@@ -288,7 +285,6 @@ class MailmanList extends Error {
 	function getName() {
 		return $this->dataArray['list_name'];
 	}
-
 
 	/**
 	 *	getDescription - get the description of this mailing list
@@ -415,8 +411,6 @@ class MailmanList extends Error {
 		return $row_count['count'] > 0;
 	}
 
-
-
 	/**
 	 * getExternalAdminUrl - get the url to admin the list with the external tools used
 	 *
@@ -454,7 +448,6 @@ class MailmanList extends Error {
 		require_once 'mailman/include/events/SystemEvent_MAILMAN_LIST_DELETE.class.php';
 		$systemevent =	SystemEventManager::instance();
 		$systemevent->createEvent('MAILMAN_LIST_DELETE',  $this->groupMailmanListId,SystemEvent::PRIORITY_MEDIUM);
-
 
 		return true;
 

@@ -91,7 +91,6 @@ function frs_footer() {
 	site_project_footer(array());
 }
 
-
 /*
 	The following functions are for the FRS (File Release System)
 */
@@ -160,7 +159,6 @@ function frs_show_processor_popup($name='processor_id', $checked_val="xzxz") {
 	pop-up box of packages:releases for this group
 */
 
-
 function frs_show_release_popup ($group_id, $name='release_id', $checked_val="xzxz") {
 	/*
 		return a pop-up select box of releases for the project
@@ -205,7 +203,6 @@ function frs_show_package_popup ($group_id, $name='package_id', $checked_val="xz
 
 function frs_add_file_from_form ($release, $type_id, $processor_id, $release_date,
 				 $userfile, $ftp_filename, $manual_filename) {
-
 
 	$group_unix_name = $release->getFRSPackage()->getGroup()->getUnixName() ;
 	$incoming = forge_get_config('groupdir_prefix')."/$group_unix_name/incoming" ;

@@ -122,7 +122,6 @@ function util_remove_CRLF($str) {
 	return strtr($str, "\015\012", '  ');
 }
 
-
 /**
  * util_check_fileupload() - determines if a filename is appropriate for upload
  *
@@ -796,7 +795,6 @@ function validate_emails($addresses, $separator = ',') {
 	}
 	return $ret;
 }
-
 
 /**
  * util_is_valid_filename() - Verifies whether a file has a valid filename

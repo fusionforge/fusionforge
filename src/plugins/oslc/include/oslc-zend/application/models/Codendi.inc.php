@@ -20,8 +20,6 @@
 
 require_once 'ChangeRequests.php';
 
-
-
         // will contain an array of fields read in the oslc:ChangeRequest
         $resource = null;
 

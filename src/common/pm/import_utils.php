@@ -263,7 +263,6 @@ function &pm_import_tasks($group_project_id,&$tasks) {
 				$completed[$tasks[$i]['id']]=true;
 			} //for i
 
-
 			//
 			//  Do task dependencies
 			//

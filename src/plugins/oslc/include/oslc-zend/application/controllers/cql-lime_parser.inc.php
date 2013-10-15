@@ -1,6 +1,5 @@
 <?php
 
-
 /*
 
 DON'T EDIT THIS FILE!
@@ -222,7 +221,6 @@ function reduce_2_query_in_1($tokens, &$result) {
 #
 $result = reset($tokens);
 
-
 	$result = array( 'terms' => array($tokens[0]) );
 
 	debug_found('query_in', 'single term :'. print_r($result,true) );
@@ -234,7 +232,6 @@ function reduce_3_query_in_2($tokens, &$result) {
 # (3) query_in :=  query_in  boolean_op  term
 #
 $result = reset($tokens);
-
 
 	$first_subquery = $tokens[0];
 	$terms = $first_subquery['terms'];
@@ -253,7 +250,6 @@ $result = reset($tokens);
 $i =& $tokens[0];
 $o =& $tokens[1];
 $v =& $tokens[2];
-
 
 	$result = array($o, $i, $v);
 
@@ -358,7 +354,6 @@ function reduce_16_identifier_2($tokens, &$result) {
 # (16) identifier :=  word  ':'  word
 #
 $result = reset($tokens);
-
 
 	$result = $tokens[0].':'.$tokens[2];
 

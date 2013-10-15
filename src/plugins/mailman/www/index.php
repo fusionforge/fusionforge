@@ -58,7 +58,6 @@ if (isset ($group_id)) {
 		exit;
 	}
 
-
 	if (isLogged()){
 		if ($mlFactory->compareInfos()) {
 			echo '<p>';

@@ -22,7 +22,6 @@
  *
  */
 
-
 global $gfwww;
 require_once '../../../env.inc.php';
 require_once '../checks.php';
@@ -59,7 +58,6 @@ oauthprovider_CheckAdminExit();
 <h3>Signature method</h3>
 
   <p>The <b>HMAC_SHA1</b> signature method is the only one supported at the moment.</p>
-
 
 <?php
 # Create a basic href link to the manage.php plugin page

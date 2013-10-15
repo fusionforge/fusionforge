@@ -354,7 +354,6 @@ class CVSPlugin extends SCMPlugin {
 				return false ;
 			}
 
-
 			// analyzing history file
 			while (!feof($hist_file)) {
 				$hist_line = fgets($hist_file, 1024);
@@ -410,7 +409,6 @@ class CVSPlugin extends SCMPlugin {
 					continue;
 				}
 
-
 				if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
 						      array ($month_string,
 							     $day,
@@ -428,8 +426,6 @@ class CVSPlugin extends SCMPlugin {
 	}
 
 	function generateSnapshots ($params) {
-
-
 
 		$project = $this->checkParams ($params) ;
 		if (!$project) {

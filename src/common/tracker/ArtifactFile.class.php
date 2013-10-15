@@ -142,7 +142,6 @@ class ArtifactFile extends Error {
 			$time = time();
 		}
 
-
 		// If $filetype is "text/plain", $bin_data convert UTF-8 encoding.
 		if (strcasecmp($filetype,"text/plain") === 0 &&
 		    function_exists('mb_convert_encoding') &&

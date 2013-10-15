@@ -176,7 +176,6 @@ class OAuthRequest {/*{{{*/
     $this->http_url = $http_url;
   }/*}}}*/
 
-
   /**
    * attempt to build up a request from what was passed to the server
    */
@@ -377,7 +376,6 @@ class OAuthRequest {/*{{{*/
   public function __toString() {/*{{{*/
     return $this->to_url();
   }/*}}}*/
-
 
   public function sign_request($signature_method, $consumer, $token) {/*{{{*/
     $this->set_parameter("oauth_signature_method", $signature_method->get_name());

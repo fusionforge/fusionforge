@@ -449,7 +449,6 @@ function session_redirect404() {
 	exit;
 }
 
-
 /**
  *	session_require() - DEPRECATED Convenience function to easily enforce permissions
  *

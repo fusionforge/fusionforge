@@ -46,7 +46,6 @@ require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 require_once $gfcommon.'include/Group.class.php';
 require_once $gfcommon.'include/FusionForge.class.php';
 
-
 /**
  * FusionForge OSLC server controller
  *
@@ -54,7 +53,6 @@ require_once $gfcommon.'include/FusionForge.class.php';
  *
  */
 class FusionForgeOSLCConnector extends OslcConnector {
-
 
 	private static $status_arr = array('open'=>1, 'closed'=>2, 'deleted' => 3);
 	private static $query_properties = array(
@@ -715,7 +713,6 @@ class FusionForge_Http_Auth_Resolver implements Zend_Auth_Adapter_Http_Resolver_
 		$this->username = $username;
 		$this->password = $password;
 	}
-
 
 	/**
 	 * Check if the password matches with FusionForge database

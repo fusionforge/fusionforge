@@ -44,7 +44,6 @@ $res=db_query_params ('SELECT
 		      array('A'),
 		      $limit * 3);
 
-
 // ## one time output
 print " <channel>\n";
 print "  <copyright>Copyright ".date("Y")." ".forge_get_config ('forge_name')."</copyright>\n";

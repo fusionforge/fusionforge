@@ -237,7 +237,6 @@ foreach ($quotas_disk as $q) {
 <br />
 <br />
 
-
 <?php
 $color1 = "#ffffff";
 $color2 = "#ffffff";

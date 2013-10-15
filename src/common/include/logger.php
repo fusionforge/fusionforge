@@ -71,7 +71,6 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 			$subpage  = isset($expl_pathinfo[3]) ? $expl_pathinfo[3] : '';
 			$subpage2 = isset($expl_pathinfo[4]) ? $expl_pathinfo[4] : '';
 
-
 			global $RESTPATH_PROJECTS_GROUP_ID;
 			global $RESTPATH_PROJECTS_PROJECT;
 

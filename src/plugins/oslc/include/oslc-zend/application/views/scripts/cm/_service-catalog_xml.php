@@ -71,7 +71,6 @@ function projects_to_service_catalog($base_url, $projects) {
 			$child = $doc->createTextNode($base_url.'/cm/oslc-cm-service/'.$proj['id']);
 			$child = $resource->appendChild($child);
 
-
 		}
 	}
 	return $doc->saveXML();

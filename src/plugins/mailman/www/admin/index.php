@@ -31,7 +31,6 @@ $description=$request->get('description');
 $PHP_SELF = $request->get('PHP_SELF');
 $feedback = '';
 
-
 if ($group_id) {
 	if (!$Group || !is_object($Group) || $Group->isError()) {
 

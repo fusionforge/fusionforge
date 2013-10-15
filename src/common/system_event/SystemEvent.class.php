@@ -20,8 +20,6 @@
  *
  */
 
-
-
 /**
  * System Event class
  *

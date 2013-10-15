@@ -23,7 +23,6 @@
 
 require_once 'common/plugin/PluginDescriptor.class.php';
 
-
 class HelloWorldPluginDescriptor extends PluginDescriptor {
 
     function HelloWorldPluginDescriptor() {

@@ -1,6 +1,5 @@
 <?php
 
-
 function get_url() {
 	 $url = 'http';
 	 if ($_SERVER["HTTPS"] == "on") {$url .= "s";}

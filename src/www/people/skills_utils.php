@@ -134,8 +134,6 @@ function handle_multi_edit($skill_ids = array()) {
 			array_push($monthArray,date("M", mktime(0,0,0,$i,1,1980)));
 		}
 
-
-
 		for($i = 0; $i < $rows; $i++) {
 			$start = db_result($result, $i, 'start');
 			$finish = db_result($result, $i, 'finish');

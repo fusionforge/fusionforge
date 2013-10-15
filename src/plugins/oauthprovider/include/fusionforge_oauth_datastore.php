@@ -22,7 +22,6 @@
  *
  */
 
-
 // Inspired from examples described in "Creating a OAuth Service
 // Provider in PHP" by Morten Fangel
 // (http://sevengoslings.net/~fangel/oauthprovider-sp-guide.html)
@@ -587,7 +586,6 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 		return $token_id;
 	}
 
-
   /**
    * Deletes a token from the DB
    *
@@ -600,6 +598,5 @@ class FFDbOAuthDataStore extends OAuthDataStore {
     $t_query = "DELETE FROM $t_token_table WHERE id=$1";
     $t_result = db_query_params( $t_query, array( (int) $token_id ) );
   }
-
 
 }

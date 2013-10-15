@@ -70,11 +70,9 @@ function browser_is_netscape() {
 	}
 }
 
-
 /*
 	Determine browser and version
 */
-
 
 if (preg_match('/MSIE ([0-9].[0-9]{1,2})/',getStringFromServer('HTTP_USER_AGENT'),$log_version)) {
 	$GLOBALS['BROWSER_VER']=$log_version[1];

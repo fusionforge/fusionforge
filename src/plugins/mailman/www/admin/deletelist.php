@@ -35,7 +35,6 @@ if(isLogged()) {
 	}
 }
 
-
 $ml = new MailmanList($group_id,$request->get('id'));
 
 if ($request->exist('submit')) {

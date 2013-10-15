@@ -38,5 +38,4 @@ class CodendiDataAccess extends DataAccess {
         return self::$_instance;
     }
 
-
 }

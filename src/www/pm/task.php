@@ -60,8 +60,6 @@ $dependent_on = getStringFromRequest('dependent_on');
 $duration = getStringFromRequest('duration');
 $parent_id = getIntFromRequest('parent_id');
 
-
-
 if (!$group_id || !$group_project_id) {
     $redirect_url = '';
     if (isset($_SERVER['HTTP_REFERER']))

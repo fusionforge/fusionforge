@@ -73,7 +73,6 @@ class Widget_MyTasks extends Widget {
                     'AND project_group_list.group_project_id=project_task.group_project_id '.
                    "AND project_group_list.group_project_id= $3 LIMIT 100";
 
-
                 $result2 = db_query_params($sql2,array(user_getid(),$group_id,$group_project_id));
                 $rows2 = db_numrows($result2);
 

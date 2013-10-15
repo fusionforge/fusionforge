@@ -25,7 +25,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 require_once 'common/include/ProjectManager.class.php';
 require_once 'common/include/rdfutils.php';
 
@@ -149,7 +148,6 @@ class doaprdfPlugin extends Plugin {
 		$group_id = $params['group_id'];
 
 		if($accept == 'application/rdf+xml' || $accept == 'text/turtle') {
-
 
 			// We will return RDF+XML
 			$params['content_type'] = $accept;

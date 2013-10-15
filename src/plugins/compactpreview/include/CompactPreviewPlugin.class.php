@@ -164,49 +164,35 @@ class CompactPreviewPlugin extends Plugin {
 					</td>*/.'
 					<td><b>Project name:</b>
 
-
-
 					 '. $public_name .'</td>
 				</tr>
 				<tr>
 					<td><b>Project short name:</b>
-
-
 
 					 '. $unix_name .'</td>
 				</tr>
 				<tr>
 					<td><b>Identifier:</b>
 
-
-
 					  '. $id .'</td>
 				</tr>
 				<tr>
 					<td><b>Started since:</b>
-
-
 
 					 '. date(_('Y-m-d H:i'), $start_date) .'</td>
 				</tr>
 				<tr>
 					<td><b>Status:</b>
 
-
-
 					  '. $project_status .'</td>
 				</tr>
 				<tr>
 					<td><b>Is Public:</b>
 
-
-
 					  '. $public .'</td>
 				</tr>
 				<tr>
 					<td><b>Description:</b>
-
-
 
 					  '. $description .'</td>
 				</tr>

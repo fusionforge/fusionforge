@@ -20,7 +20,6 @@
 
 require_once 'User.class.php';
 
-
 class UserManager {
 
 	protected function __construct() {

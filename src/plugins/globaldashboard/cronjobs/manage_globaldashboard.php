@@ -30,7 +30,6 @@ require_once $gfcommon.'include/cron_utils.php';
 /* This is only sample
 require_once $gfplugins.'globaldashboard/include/BackendHelloworld.class.php' ;
 
-
 $res = db_query_params ('SELECT id,type, parameters FROM system_event WHERE status=$1 ORDER BY id DESC',
 			array ('1'));
 if (!$res) {
@@ -60,7 +59,6 @@ if(isset($events)) {
 
 }
 */
-
 
 // Local Variables:
 // mode: php

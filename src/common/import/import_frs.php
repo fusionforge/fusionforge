@@ -17,7 +17,6 @@ class FRS {
 
 	public $rel_vars = array('Active' => 1, 'Hidden' =>3);
 
-
     function __construct($frs, $group_id) {
         $this->frs = $frs;
         $this->group_id = $group_id;
@@ -29,7 +28,6 @@ class FRS {
 		}
 		$this->group = $group;
     }
-
 
 	function frs_fill(){
 $pkgs = &get_frs_packages($this->group);

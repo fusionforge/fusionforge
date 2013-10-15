@@ -448,8 +448,6 @@ class BzrPlugin extends SCMPlugin {
 
 	function generateSnapshots ($params) {
 
-
-
 		$project = $this->checkParams ($params) ;
 		if (!$project) {
 			return false ;

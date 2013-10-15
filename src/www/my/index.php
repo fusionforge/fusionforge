@@ -57,7 +57,6 @@ echo '	<li ><a href="'. $url .'">'. _("Add widgets") .'</a></li>';
 echo '	<li><a href="'. $url.'&amp;update=layout' .'">'. _("Customize Layout") .'</a></li>';
 echo '</ul>';
 
-
 $lm = new WidgetLayoutManager();
 $lm->displayLayout($user->getID(), WidgetLayoutManager::OWNER_TYPE_USER);
 

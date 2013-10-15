@@ -22,7 +22,6 @@
 
 require_once 'common/plugin/PluginDescriptor.class.php';
 
-
 class MailmanPluginDescriptor extends PluginDescriptor {
 
     function MailmanPluginDescriptor() {

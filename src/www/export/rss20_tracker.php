@@ -18,7 +18,6 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 // export a group's tracker bugs per artifact in RSS 2.0
 // Author: Jutta Horstmann, data in transit <jh@dataintransit.com>
 // Created: 01.10.07
