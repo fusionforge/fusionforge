@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 19:05+0200\n"
+"POT-Creation-Date: 2013-10-15 19:34+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -6928,10 +6928,9 @@ msgstr "Configuration des rôles autorisés pour les transitions de %1$s à %2$s
 msgid "Preferences"
 msgstr "Préférences"
 
-# : common/widget/Widget.class.php:335
 #: common/widget/Widget.class.php:366
 msgid "General"
-msgstr "General"
+msgstr "Général"
 
 #: common/widget/WidgetLayoutManager.class.php:182
 #, fuzzy, php-format
@@ -7168,9 +7167,8 @@ msgstr "%s nouveaux"
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:136
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:212
 #: common/widget/Widget_ProjectLatestDocuments.class.php:135
-#, fuzzy
 msgid "Documents Manager"
-msgstr "Naviguer dans le gestionnaire de documentation"
+msgstr "Gestionnaire de documentation"
 
 #: common/widget/Widget_MyMonitoredDocuments.class.php:107
 msgid "List documents that you are currently monitoring, by project."
@@ -7412,9 +7410,8 @@ msgstr "Voir les statistiques :"
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:144
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:152
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:161
-#, fuzzy
 msgid "new Files"
-msgstr "Fichiers"
+msgstr "nouveaux fichiers"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:131
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:145
@@ -7524,7 +7521,6 @@ msgid "This Project Has Not Published Any Documents"
 msgstr "Ce projet n'a pas encore publié de documents"
 
 #: common/widget/Widget_ProjectLatestDocuments.class.php:139
-#, fuzzy
 msgid "List the 5 most recent documents published by team project."
 msgstr "Liste des 5 derniers documents publiés par les membres du projet."
 
@@ -8356,12 +8352,14 @@ msgstr "Administration des blocs"
 
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:43
 msgid "Summary Page block of text"
-msgstr ""
+msgstr "Bloc de texte pour la page de résumé du projet"
 
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:47
 msgid ""
 "Add a free block on the project summary page to allow giving information."
 msgstr ""
+"Ajouter un bloc de texte libre sur la page de résumé du projet pour donner "
+"des informations."
 
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:74
 msgid "Enter title of block"
@@ -11155,7 +11153,7 @@ msgstr "Pas de version"
 #: plugins/mantisbt/view/editIssue.php:84
 #: plugins/mantisbt/view/viewIssue.php:130
 msgid "Edit ticket"
-msgstr "Modifier ce ticket"
+msgstr "Modifier le ticket"
 
 #: plugins/mantisbt/view/editIssue.php:91
 #: plugins/mantisbt/view/viewIssue.php:60
@@ -12054,7 +12052,7 @@ msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:397
 msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini"
-msgstr ""
+msgstr "Le fichier transmis dépasse la taille maximale définie dans php.ini"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:399
 msgid ""
@@ -12064,7 +12062,7 @@ msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:405
 msgid "Missing a temporary folder"
-msgstr ""
+msgstr "répertoire temporaire manquant"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:407
 msgid "Failed to write file to disk."
@@ -13660,7 +13658,7 @@ msgstr "Liens vers les envois SVN pertinents"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:108
 msgid "Anonymous Subversion Access"
-msgstr "Accès anonyme au dépôt Subversion"
+msgstr "Accès anonyme à Subversion"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:110
 msgid ""
@@ -15735,7 +15733,7 @@ msgstr "Montrer les utilisateurs correspondant au motif"
 
 #: www/admin/unsubscribe.php:111
 msgid "user_id"
-msgstr "Identifiant utilisateur :"
+msgstr "Identifiant utilisateur"
 
 #: www/admin/unsubscribe.php:115
 msgid "Site Mail."
@@ -15822,7 +15820,7 @@ msgstr ""
 
 #: www/admin/useredit.php:253
 msgid "Projects Membership"
-msgstr "Liens avec les projets"
+msgstr "Membre des projets"
 
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
 msgid "Unix name"
@@ -16697,7 +16695,7 @@ msgstr "Coller les modifications dans"
 
 #: www/frs/admin/editrelease.php:276 www/frs/admin/qrs.php:262
 msgid "Preserve my pre-formatted text"
-msgstr "Conserver mon texte pré-formaté"
+msgstr "Préserver mon texte préformaté"
 
 #: www/frs/admin/editrelease.php:278
 msgid "Submit/Refresh"
@@ -18297,7 +18295,9 @@ msgstr "Aucune annonce rejetée cette semaine"
 msgid ""
 "These items were rejected this past week or were not intended for front page "
 "(total: %1$s)"
-msgstr "Ces annonces ont été rejetées la semaine passée (total : %1$s)."
+msgstr ""
+"Ces annonces ont été rejetées la semaine passée ou n'étaient pas destinées à "
+"la page d'accueil (total : %1$s)"
 
 #: www/news/admin/news_admin_utils.php:130
 msgid "No approved items found for this week"
@@ -18324,7 +18324,7 @@ msgstr "Aucune annonce"
 
 #: www/news/news_utils.php:40
 msgid "View News"
-msgstr "Voir les nouvelles"
+msgstr "Voir les annonces"
 
 #: www/news/news_utils.php:117 www/news/news_utils.php:248
 msgid "No News Items Found"
@@ -19094,7 +19094,7 @@ msgstr "Aucune tâche correspondante trouvée"
 
 #: www/pm/browse_task.php:171
 msgid "Add tasks using the link above"
-msgstr "Vous pouvez ajouter des tâches en utilisant le lien ci-dessus."
+msgstr "Vous pouvez ajouter des tâches en utilisant le lien ci-dessus"
 
 #: www/pm/browse_task.php:179
 #, php-format
@@ -19185,11 +19185,11 @@ msgstr "Décembre"
 
 #: www/pm/calendar.php:101
 msgid "Error: Could Not Get Factory"
-msgstr "Erreur lors de la création de l'objet Factory"
+msgstr "Erreur : Factory introuvable "
 
 #: www/pm/calendar.php:108
 msgid "Error: Could Not Get ProjectTaskFactory"
-msgstr "Erreur lors de la création de l'objet ProjectTaskFactory"
+msgstr "Erreur : ProjectTaskFactory introuvable "
 
 #: www/pm/calendar.php:125
 msgid "Calendar"
@@ -19203,12 +19203,12 @@ msgstr "Résumé des tâches pour %s"
 #: www/pm/calendar.php:143
 #, php-format
 msgid "Task %d begins"
-msgstr "Début de tâche %d"
+msgstr "Début de la tâche %d"
 
 #: www/pm/calendar.php:144
 #, php-format
 msgid "Task %d ends"
-msgstr "Fin de tâche %d"
+msgstr "Fin de la tâche %d"
 
 #: www/pm/calendar.php:176
 msgid "F Y"
@@ -19471,11 +19471,11 @@ msgstr "Diagramme de Gantt"
 
 #: www/pm/ganttpage.php:61
 msgid "Error getting PTF: "
-msgstr "Erreur lors de l'accès à l'objet ProjectTaskFactory : "
+msgstr "Erreur en accédant au PTF : "
 
 #: www/pm/ganttpage.php:66
 msgid "Error in PTF: "
-msgstr "Erreur dans la ProjectTaskFactory : "
+msgstr "Erreur dans le PTF : "
 
 #: www/pm/ganttpage.php:244
 msgid "task summary"
@@ -19586,7 +19586,7 @@ msgstr ""
 #: www/pm/index.php:66
 msgid "Choose a Subproject and you can browse/edit/add tasks to it."
 msgstr ""
-"Choisissez un sous projet pour pouvoir naviguer/éditer/modifier les tâches."
+"Choisissez un sous-projet pour pouvoir naviguer/éditer/modifier les tâches."
 
 #: www/pm/mod_task.php:37
 msgid "Modify Task"
@@ -19832,7 +19832,6 @@ msgstr ""
 "Erreur : la taille du fichier doit être comprise entre 20 et 256 000 octets"
 
 #: www/project/admin/editimages.php:99
-#, fuzzy
 msgid "Error: Cannot store multimedia file: "
 msgstr "Erreur de base de données lors du stockage d'un fichier multimédia : "
 
@@ -19845,7 +19844,6 @@ msgid "Both file name and description are required"
 msgstr "Le nom de fichier et la description sont requis"
 
 #: www/project/admin/editimages.php:137
-#, fuzzy
 msgid "Error: Cannot delete multimedia file: "
 msgstr ""
 "Erreur de base de données lors de la suppression d'un fichier multimédia : "
@@ -19859,7 +19857,6 @@ msgid "File description is required"
 msgstr "Description de fichier requise"
 
 #: www/project/admin/editimages.php:161
-#, fuzzy
 msgid "Error: Cannot update multimedia file"
 msgstr ""
 "Erreur de base de données lors de la mise à jour d'un fichier multimédia : "
@@ -19921,7 +19918,6 @@ msgid "Edit Trove Categorization"
 msgstr "Modifier une branche"
 
 #: www/project/admin/group_trove.php:79
-#, fuzzy
 msgid ""
 "Select up to three locations for this project in each of the Trove root "
 "categories. If the project does not require any or all of these locations, "
@@ -20001,11 +19997,11 @@ msgstr ""
 
 #: www/project/admin/index.php:192
 msgid "Trove Categorization"
-msgstr "Catégorisation dans l'arbre des projets"
+msgstr "Classement du projet dans l'arbre"
 
 #: www/project/admin/index.php:194
 msgid "Edit Trove"
-msgstr "Éditer la catégorisation"
+msgstr "Modifier l'arbre"
 
 #: www/project/admin/index.php:197
 msgid "Homepage Link"
@@ -20343,7 +20339,7 @@ msgstr "Mise à jour du membre réussie"
 
 #: www/project/admin/users.php:161 www/project/admin/users.php:173
 msgid "Error Getting GroupJoinRequest"
-msgstr "Erreur lors de la création d'un objet GroupJoinRequest."
+msgstr "Erreur lors de la récupération d'un objet GroupJoinRequest."
 
 # : www/project/admin/users.php : 201
 #: www/project/admin/users.php:178
@@ -20410,7 +20406,7 @@ msgstr "Référencer"
 
 #: www/project/admin/vhost.php:59
 msgid "Virtual Host scheduled for creation."
-msgstr "la création de l'hôte virtuel est programmée."
+msgstr "La création de l'hôte virtuel est programmée."
 
 #: www/project/admin/vhost.php:65
 #, php-format
@@ -21812,7 +21808,7 @@ msgstr "Date d'enregistrement :"
 msgid ""
 "More than <strong>%1$s</strong> projects have <strong>%2$s</strong> as tag."
 msgstr ""
-"L'étiquette <strong>%2$s</strong> est utilisée sur plus de de <strong>%1$s</"
+"L'étiquette <strong>%2$s</strong> est utilisée sur plus de <strong>%1$s</"
 "strong> projets."
 
 #: www/softwaremap/tag_cloud.php:89 www/trove/index.php:171
@@ -22484,7 +22480,7 @@ msgid ""
 "We track many project usage statistics on %1$s, and display here the top "
 "ranked projects in several categories."
 msgstr ""
-"Diverses statistiques d'utilisations sont collectées sur %1$s.  Les projets "
+"Diverses statistiques d'utilisations sont collectées sur %1$s. Les projets "
 "les mieux classés dans certaines catégories sont affichées ici."
 
 #: www/top/index.php:35 www/top/mostactive.php:43
