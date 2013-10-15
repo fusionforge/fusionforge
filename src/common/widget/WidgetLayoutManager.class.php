@@ -519,7 +519,7 @@ class WidgetLayoutManager {
 			if (count($categs)) {
 				// display the categories selector in left panel
 				foreach($categs as $c => $ws) {
-					$widget_rows[$c] = '<a class="widget-categ-switcher" id="widget-categ-switcher-'. $c .'" href="#widget-categ-'. $c .'" onClick="jQuery(\'.widget-categ-class-void\').hide();jQuery(\'.widget-categ-switcher\').removeClass(\'selected\');jQuery(\'#widget-categ-'. $c .'\').show();jQuery(\'#widget-categ-switcher-'. $c .'\').addClass(\'selected\');" ><span>'.  str_replace('-',' ', $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML))  .'</span></a>';
+					$widget_rows[$c] = '<a class="widget-categ-switcher" id="widget-categ-switcher-'. $c .'" href="#widget-categ-'. $c .'" onClick="jQuery(\'.widget-categ-class-void\').hide();jQuery(\'.widget-categ-switcher\').removeClass(\'selected\');jQuery(\'#widget-categ-'. $c .'\').show();jQuery(\'#widget-categ-switcher-'. $c .'\').addClass(\'selected\');" ><span>'.  str_replace('_',' ', $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML))  .'</span></a>';
 				}
 				uksort($widget_rows, 'strnatcasecmp');
 				echo '<ul id="widget-categories">';
