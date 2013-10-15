@@ -328,8 +328,8 @@ class WidgetLayoutManager {
 			echo html_image('layout/custom.png', '', '', array('style' => 'vertical-align:top;float:left;'));
 			echo '</label>';
 			echo '</td><td>';
-			echo '<label for="layout_custom"><strong>'. 'Custom' .'</strong><br />';
-			echo 'Define your own layout:';
+			echo '<label for="layout_custom"><strong>'. _('Custom') .'</strong><br />';
+			echo _('Define your own layout:');
 			echo '</label>';
 			echo '<table id="layout-manager">
 				<tr>
