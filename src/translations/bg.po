@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 16:45+0200\n"
+"POT-Creation-Date: 2013-10-15 19:05+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1183,6 +1183,7 @@ msgstr ""
 #: common/tracker/views/form-addcanned.php:69
 #: common/tracker/views/form-updatecanned.php:43
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
+#: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:55
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:36
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:148
@@ -1640,6 +1641,8 @@ msgstr ""
 #: common/tracker/views/form-updatetracker.php:78
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
+#: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:55
+#: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:57
 #: plugins/contribtracker/www/global_admin.php:379
 #: plugins/contribtracker/www/global_admin.php:380
 #: plugins/contribtracker/www/global_admin.php:396
@@ -2339,7 +2342,9 @@ msgstr "Публикуване на обяви"
 msgid "Summary"
 msgstr ""
 
-#: common/forum/ForumHTML.class.php:85 www/pm/format_csv.php:66
+#: common/forum/ForumHTML.class.php:85
+#: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:57
+#: www/pm/format_csv.php:66
 #, fuzzy
 msgid "Content"
 msgstr "Регистрация"
@@ -7053,7 +7058,7 @@ msgstr ""
 msgid "Already used"
 msgstr "Нишка"
 
-#: common/widget/WidgetLayoutManager.class.php:709
+#: common/widget/WidgetLayoutManager.class.php:710
 #, php-format
 msgid "Your <a href=\"%s\">dashboard</a> has been updated."
 msgstr ""
@@ -8388,9 +8393,13 @@ msgstr ""
 msgid "Blocks Admin"
 msgstr "Тракер"
 
+#: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:43
+msgid "Summary Page block of text"
+msgstr ""
+
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:47
 msgid ""
-"Add a free blocks on the project summary page to allow giving information."
+"Add a free block on the project summary page to allow giving information."
 msgstr ""
 
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:74
