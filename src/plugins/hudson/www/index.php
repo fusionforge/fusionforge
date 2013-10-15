@@ -21,11 +21,11 @@
 
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-require_once 'preplugins.php';
+require_once $gfcommon.'include/preplugins.php';
 require_once 'plugins_utils.php';
 
 html_use_jquery();
-use_javascripts('scripts/hudson_tab.js');
+use_javascript('scripts/hudson_tab.js');
 
 $plugin_manager = PluginManager::instance();
 $p = $plugin_manager->getPluginByName('hudson');
