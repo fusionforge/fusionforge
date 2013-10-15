@@ -592,7 +592,8 @@ class WidgetLayoutManager {
 		foreach($widgets as $widget_name) {
 			if ($widget = Widget::getInstance($widget_name)) {
 				if ($widget->isAvailable()) {
-					$cs = explode(',', $widget->getCategory());
+					$category = str_replace(' ', '_', $widget->getCategory());
+					$cs = explode(',', $category);
 					foreach($cs as $c) {
 						if ($c = trim($c)) {
 							if (!isset($categ[$c])) {

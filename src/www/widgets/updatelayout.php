@@ -87,7 +87,8 @@ if ($owner) {
 										break;
 									case 'add':
 									default:
-										$redirect ='/widgets/widgets.php?owner='. $owner_type.$owner_id.'&layout_id='. $layout_id.'#filter-widget-categ-'.$widget->getCategory();
+										$category = str_replace(' ', '_', $widget->getCategory());
+										$redirect ='/widgets/widgets.php?owner='. $owner_type.$owner_id.'&layout_id='. $layout_id.'#filter-widget-categ-'.$category;
 										$lm->addWidget($owner_id, $owner_type, $layout_id, $name, $widget, $request);
 										break;
 								}
