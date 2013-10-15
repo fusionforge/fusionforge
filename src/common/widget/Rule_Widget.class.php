@@ -4,9 +4,9 @@
  *
  * Originally written by Manuel VACELET, 2008.
  *
- * This file is a part of Codendi.
+ * This file is a part of Fusionforge.
  *
- * Codendi is free software; you can redistribute it and/or modify
+ * Fusionforge is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
