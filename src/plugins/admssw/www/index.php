@@ -43,7 +43,7 @@ echo '<ul>';
 echo '<li>'._('Public projects :');
 
 	echo '<ul>';
-	echo '<li>'.util_make_link('/plugins/'.$pluginname.'/projectsturtle.php', _('short index')).', '. 
+	echo '<li>'.util_make_link('/plugins/'.$pluginname.'/projectsturtle.php', _('short index')).', '.
 	_('or '). util_make_link('/plugins/'.$pluginname.'/full.php', _('full dump')) . _(' (as Turtle)').'</li>';
 	//echo '<li>'.util_make_link('/plugins/'.$pluginname.'/projectsrdfxml.php', _('as RDF+XML')).'</li>';
 	echo '</ul>';

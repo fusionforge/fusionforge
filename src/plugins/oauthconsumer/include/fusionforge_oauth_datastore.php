@@ -157,7 +157,7 @@ class FFOAuthDataStore extends OAuthDataStore {
 		return $provider_id;
 	}
 
-	
+
   /**
    * Deletes a provider from the DB
    *
@@ -178,7 +178,7 @@ class FFOAuthDataStore extends OAuthDataStore {
 		db_commit();
 		return true;
 	}
-	
+
 	/**
 	* Saves an OAuthAccessToken to the DB
 	*
@@ -186,7 +186,7 @@ class FFOAuthDataStore extends OAuthDataStore {
 	* @return int the token ID in the DB
 	*/
 	public function save_access_token($token) {
-	
+
 		$t_token_table = "plugin_oauthconsumer_access_token";
 		$time_stamp = time();
 		$token_id = $token->get_id();
@@ -194,7 +194,7 @@ class FFOAuthDataStore extends OAuthDataStore {
 			# create
 			$t_query = "INSERT INTO $t_token_table ( provider_id, token_key, token_secret, user_id, time_stamp ) VALUES ($1, $2, $3, $4, $5)";
 			$t_result = db_query_params( $t_query, array( $token->get_provider_id(), $token->get_token_key(), $token->get_token_secret(), $token->get_user_id(), $time_stamp ) );
-		
+
 			$token_id = db_insertid($t_result, $t_token_table, 'id');
 			return $token_id;
 		}
@@ -203,7 +203,7 @@ class FFOAuthDataStore extends OAuthDataStore {
 			//db_query_params( $t_query, array( $token->getproviderId(), $token->key, $token->secret, $token->getUserId(), $token->gettime_stamp(), $token->getId() ) );
 			exit_error("The access token already exists and cannot be modified.", 'oauthconsumer');
 		}
-	
+
 	}
 
 	/**
@@ -217,17 +217,17 @@ class FFOAuthDataStore extends OAuthDataStore {
 		if(isset($user_id)||($user_id)) {
 			$t_query = "SELECT * FROM $t_token_table WHERE user_id = $1";
 			$t_result = db_query_params( $t_query, array( (int) $user_id ) );
-				
+
 		}
 		$t_rows = array();
-	
+
 		while ( $t_row = db_fetch_array( $t_result ) ) {
 			$t_rows[] = $t_row;
 		}
-	
+
 		return $t_rows;
 	}
-	
+
 	/**
 	* Retrieve values of columns for a token in the DB provided its key
 	*
@@ -236,18 +236,18 @@ class FFOAuthDataStore extends OAuthDataStore {
 	*/
 	public function find_access_token_from_key($token_key) {
 		$t_token_table = "plugin_oauthconsumer_access_token";
-	
+
 		$t_query = "SELECT * FROM $t_token_table WHERE token_key = $1";
 		$t_result = db_query_params( $t_query, array( $token_key ) );
-	
+
 		if ( db_numrows( $t_result ) < 1 ) {
 			return null;
 		}
-	
-		$t_row = db_fetch_array( $t_result );	
+
+		$t_row = db_fetch_array( $t_result );
 		return $t_row;
 	}
-	
+
 	/**
 	 * Retrieve values of columns for a token in the DB provided its id
 	 *
@@ -256,18 +256,18 @@ class FFOAuthDataStore extends OAuthDataStore {
 	 */
 	public function find_token_from_id($token_id) {
 		$t_token_table = "plugin_oauthconsumer_access_token";
-	
+
 		$t_query = "SELECT * FROM $t_token_table WHERE id = $1";
 		$t_result = db_query_params( $t_query, array( (int) $token_id ) );
-	
+
 		if ( db_numrows( $t_result ) < 1 ) {
 			return null;
 		}
-	
-		$t_row = db_fetch_array( $t_result );	
+
+		$t_row = db_fetch_array( $t_result );
 		return $t_row;
 	}
-	
+
 	/**
 	 * Retrieve a table of columns values for all tokens issued for a provider (and a user)
 	 *
@@ -277,21 +277,21 @@ class FFOAuthDataStore extends OAuthDataStore {
 	 */
 	public function find_access_tokens_by_provider($provider_id, $user_id) {
 		$t_token_table = "plugin_oauthconsumer_access_token";
-	
+
 		if(isset($user_id)) {
 			$t_query = "SELECT * FROM $t_token_table WHERE provider_id = $1 AND user_id = $2";
 			$t_result = db_query_params( $t_query, array( (int) $provider_id, (int) $user_id ) );
 		}
-	
+
 		$t_rows = array();
-	
+
 		while ( $t_row = db_fetch_array( $t_result ) ) {
 			$t_rows[] = $t_row;
 		}
-	
+
 		return $t_rows;
 	}
-	
+
 	/**
 	* Deletes an access token from the DB
 	*
@@ -300,19 +300,19 @@ class FFOAuthDataStore extends OAuthDataStore {
 	*/
 	function delete_access_token($token_id) {
 		$t_token_table = "plugin_oauthconsumer_access_token";
-	
+
 		$t_query = "DELETE FROM $t_token_table WHERE id=$1";
 		$t_result = db_query_params( $t_query, array( (int) $token_id ) );
-		
+
 		if (!$t_result) {
 			db_rollback();
 			return false;
 		}
-		
+
 		db_commit();
 		return true;
 	}
-	
+
 	/**
 	* Saves an OAuthResource to the DB
 	*
@@ -320,7 +320,7 @@ class FFOAuthDataStore extends OAuthDataStore {
 	* @return int the resource ID in the DB
 	*/
 	public function save_oauth_resource($resource) {
-	
+
 		$t_resource_table = "plugin_oauthconsumer_resource";
 		$id = $resource->get_id();
 		if ( 0 == $id ) { # create
@@ -341,7 +341,7 @@ class FFOAuthDataStore extends OAuthDataStore {
 			db_query_params( $t_query, array ($resource->get_url(), $resource->get_provider_id(), $resource->get_http_method(), $resource->get_id()) );
 		}
 		return $provider_id;
-	
+
 	}
 
 }

@@ -170,7 +170,7 @@ class CmController extends Zend_Rest_Controller {
 	  $req = $this->getRequest();
 	  //		$action = $req->getActionName();
 	  //	  print_r("Action : ".$action);
-	  
+
 	  if($action == 'put'  || $action == 'post') {
 		$accept = $req->getHeader('Content-Type');
 	  } else {

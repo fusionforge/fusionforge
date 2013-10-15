@@ -100,7 +100,7 @@ if ($report->isError()) {
 
 ?>
 
-<form action="<?php echo util_make_url('/frs/reporting/downloads.php') ?>" 
+<form action="<?php echo util_make_url('/frs/reporting/downloads.php') ?>"
 	  method="get"
 	  class="align-center">
 	<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />

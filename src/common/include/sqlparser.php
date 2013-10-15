@@ -73,7 +73,7 @@ function parse_sql_file($filename) {
 	$copy_data = array();
 	$copy_data_tmp = array();
 	$copy_field = '';
-	
+
 	while ($state != $states['DONE']) {
 		// error_log("STATE_LOOP: state=$names[$state], l=".RED.$l.NORMAL.", chunk=".RED.$chunk.NORMAL.", rest=".RED.$rest.NORMAL);
 		// error_log(RED."<".GREEN.$sql.RED.">".NORMAL);
@@ -82,7 +82,7 @@ function parse_sql_file($filename) {
 		switch ($state) {
 		case $states['INIT']:
 			// error_log('INIT');
-			
+
 			$l = get_next_line($f);
 			if ($l === false) {
 				$state = $states['DONE'];
@@ -187,7 +187,7 @@ function parse_sql_file($filename) {
 				}
 				$state = $states['IN_SQL_COMMENT'];
 				continue;
-			}				
+			}
 			break; // End of IN_SQL_COMMENT
 
 		case $states['SQL_SCAN']:
@@ -220,7 +220,7 @@ function parse_sql_file($filename) {
 				$state = $states['IN_SQL'];
 				continue;
 			}
-				
+
 			break; // End of SQL_SCAN
 
 		case $states['IN_SQL']:
@@ -466,18 +466,18 @@ function parse_sql_file($filename) {
 				continue;
 			}
 			break; // End of IN_COPY
-			
+
 		case $states['DONE']:
 			// error_log('DONE');
 			// We're done.
 			break; // End of DONE
-			
+
 		case $states['ERROR']:
 			// error_log('ERROR');
 			error_log("Reached the ERROR state, dying.  State machine is buggy.");
 			exit (1);
 			break; // End of ERROR
-			
+
 		default:
 			error_log("State machine went to an unknown state, redirecting to ERROR");
 			$state = $states['ERROR'];

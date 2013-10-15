@@ -30,7 +30,7 @@ class extsubprojPlugin extends Plugin {
 		$this->_addHook("user_personal_links");//to make a link to the user's personal part of the plugin
 		$this->_addHook("usermenu");
 		$this->_addHook("groupmenu");	// To put into the project tabs
-		
+
 		$this->_addHook("userisactivecheckbox"); // The "use ..." checkbox in user account
 		$this->_addHook("userisactivecheckboxpost"); //
 		*/
@@ -46,7 +46,7 @@ class extsubprojPlugin extends Plugin {
 		// Use this to provide a link to the site wide administrative pages for your plugin
 		echo '<li>'.$this->getAdminOptionLink().'</li>';
 	}
-	
+
 	function project_admin_plugins(&$params) {
 		$group_id = $params['group_id'];
 		$group = group_get_object($group_id);
@@ -56,7 +56,7 @@ class extsubprojPlugin extends Plugin {
 			echo '</p>';
 		}
 	}
-	
+
 	/**
 	* getAdminOptionLink - return the admin link url
 	*
@@ -108,7 +108,7 @@ class extsubprojPlugin extends Plugin {
 		}
 		return $returned;
 	}
-	
+
 	/**
 	* getFooter - display footer
 	*/
@@ -154,7 +154,7 @@ class extsubprojPlugin extends Plugin {
 		}
 		session_redirect($url.'?'.$type.'='.urlencode($message));
 	}
-	
+
 	/**
 	* getGlobalAdminView - display the global configuration view
 	*
@@ -166,7 +166,7 @@ class extsubprojPlugin extends Plugin {
 		include $gfplugins.$this->name.'/view/admin/viewGlobalConfiguration.php';
 		return true;
 	}
-	
+
 	/**
 	 * getProjectAdminView - display the project admin view
 	 * @return boolean
@@ -176,7 +176,7 @@ class extsubprojPlugin extends Plugin {
 		include $gfplugins.$this->name.'/view/admin/viewProjectConfiguration.php';
 		return true;
 	}
-	
+
 	function getSubProjects($project_id) {
 		$res = db_query_params('SELECT sub_project_url from plugin_extsubproj_subprojects where project_id=$1', array($project_id));
 		if (!$res) {
@@ -185,10 +185,10 @@ class extsubprojPlugin extends Plugin {
 		$returnArr = array();
 		while ($row = db_fetch_array($res)) {
 			$returnArr[] = $row['sub_project_url'];
-		}		
+		}
 		return $returnArr;
 	}
-	
+
 	function addExtSubProj($project_id, $url) {
 		// verify URL
 		if(!util_check_url($url)) {
@@ -196,9 +196,9 @@ class extsubprojPlugin extends Plugin {
 		}
 		// check if not already in the existing subprojects (even for another project)
 		// TODO first check with HTTP then check with HTTPS
-		$res = db_query_params('SELECT count(*) from plugin_extsubproj_subprojects where sub_project_url=$1', array($url));	
+		$res = db_query_params('SELECT count(*) from plugin_extsubproj_subprojects where sub_project_url=$1', array($url));
 		if ($res && db_result($res, 0, 'count') == '0') {
-			$res = db_query_params('INSERT INTO plugin_extsubproj_subprojects (project_id, sub_project_url) VALUES ($1, $2)', 
+			$res = db_query_params('INSERT INTO plugin_extsubproj_subprojects (project_id, sub_project_url) VALUES ($1, $2)',
 				array($project_id, $url));
 			if (!$res) {
 				return false;
@@ -206,7 +206,7 @@ class extsubprojPlugin extends Plugin {
 			return true;
 		}
 	}
-	
+
 	function delExtSubProj($project_id, $url) {
 		// TODO verify URL
 		// check if not already in the existing subprojects (even for another project)
@@ -221,7 +221,7 @@ class extsubprojPlugin extends Plugin {
 			return true;
 		}
 	}
-	
+
 	/**
 	* widgets - 'widgets' hook handler
 	* @param array $params
@@ -237,7 +237,7 @@ class extsubprojPlugin extends Plugin {
 		}*/
 		return true;
 	}
-	
+
 	/**
 	 * Process the 'widget_instance' hook to create instances of the widgets
 	 * @param array $params
@@ -262,16 +262,16 @@ class extsubprojPlugin extends Plugin {
 		if (!$resConf) {
 			return false;
 		}
-	
+
 		$row = db_numrows($resConf);
-	
+
 		if ($row == null || count($row) > 2) {
 			return false;
 		}
-	
+
 		$resArr = db_fetch_array($resConf);
 		$returnArr = array();
-	
+
 		foreach($resArr as $column => $value) {
 			if ($value == 't') {
 				$returnArr[$column] = true;
@@ -279,11 +279,11 @@ class extsubprojPlugin extends Plugin {
 				$returnArr[$column] = false;
 			}
 		}
-	
+
 		return $returnArr;
 	}
 	*/
-	
+
 //	function CallHook ($hookname, &$params) {
 //		global $use_extsubprojplugin,$G_SESSION,$HTML;
 		/*
@@ -370,7 +370,7 @@ class extsubprojPlugin extends Plugin {
 		}
 		*/
 //	}
-	
+
 }
 
 // Local Variables:

@@ -89,7 +89,7 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$return = '';
 		$rowColor = 0;
 		$lastTracker = null;
-		
+
 		foreach ($fd as $row) {
 			//section changed
 			$currentTracker = $row['name'];
@@ -104,7 +104,7 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 						. '<td>'
 							. '<a href="'.util_make_url ('/tracker/?func=detail&amp;group_id='.$this->groupId.'&amp;aid='.$row['artifact_id'] . '&amp;atid='.$row['group_artifact_id']).'">'
 							. html_image('ic/tracker20g.png').' '.$row['summary']
-							. '</a></td>'		
+							. '</a></td>'
 						. '<td width="15%">'.$row['realname'].'</td>'
 						. '<td width="15%">'.relative_date($row['open_date']).'</td></tr>';
 			$rowColor ++;

@@ -4,7 +4,7 @@
  * Copyright 2012, Denise Patzker <denise.patzker@tu-dresden.de>
  * Copyright 2012, Franck Villaume - TrivialDev
  *
- * This class provides hook to activate/deactivate Mercurials e-mail 
+ * This class provides hook to activate/deactivate Mercurials e-mail
  * notification per repository.
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -69,8 +69,8 @@ class commitEmail extends scmhook {
 	}
 
 	/**
-	 * This function activates e-mail notification for pushed commits.  
-	 * This is done by adding the needed entries to the projects hgrc file. 
+	 * This function activates e-mail notification for pushed commits.
+	 * This is done by adding the needed entries to the projects hgrc file.
 	 */
 	function enable($project) {
 		if (!$project) {
@@ -90,12 +90,12 @@ class commitEmail extends scmhook {
 			/*strip of repository path for subject line*/
 			$delim = "/";
 			$strip = count(explode($delim, $root))-1;
-			
+
 			if (is_file($main_repo.'/hgrc')) {
 				/*set the needed entries within hgrc*/
 
 				$hgrc_val = parse_ini_file("$main_repo/hgrc", true);
-				if (!isset( $hgrc_val['extensions'])) { 
+				if (!isset( $hgrc_val['extensions'])) {
 					/*makes notify extension usable*/
 					$hgrc_val['extensions']['hgext.notify'] = '';
 				}
@@ -113,7 +113,7 @@ class commitEmail extends scmhook {
 					$hgrc_val['notify']['sources'] = 'serve push pull bundle';
 					/*test = true will not deliver the mail, instead you will get command line output*/
 					$hgrc_val['notify']['test'] = 'false';
-					
+
 					/*configure subscribers*/
 					if (!isset( $hgrc_val['reposubs'])) {
 						$hgrc_val['reposubs']['**'] = $mail;
@@ -166,7 +166,7 @@ class commitEmail extends scmhook {
 				$hgrc .= "strip = $strip\n\n";
 				$hgrc .= "[reposubs]\n";
 				$hgrc .= "** = $mail";
-			} 
+			}
 			$f = fopen ("$main_repo/hgrc.new", 'w');
 			fwrite($f, $hgrc);
 			fclose($f);
@@ -178,8 +178,8 @@ class commitEmail extends scmhook {
 	}
 
 	/**
-	 * This function deactivates e-mail notification.  
-	 * This is done by removing the needed entries from the projects hgrc file. 
+	 * This function deactivates e-mail notification.
+	 * This is done by removing the needed entries from the projects hgrc file.
 	 *
 	 * @param	$project	object containing project data
 	 * @return bool
@@ -232,5 +232,5 @@ class commitEmail extends scmhook {
 		}
 		return true;
 	}
-	
+
 }

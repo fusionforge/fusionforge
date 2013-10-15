@@ -209,12 +209,12 @@ function FusionForgeMWAuth( $user, &$result ) {
 		$rs = array () ;
 		foreach ($available_roles as $r) {
 			$linked_projects = $r->getLinkedProjects () ;
-			
+
 			if ($r->hasGlobalPermission('forge_admin')) {
 				$rs[] = $r ;
 				continue ;
 			}
-				
+
 			foreach ($linked_projects as $lp) {
 				if ($lp->getID() == $g->getID()) {
 					$rs[] = $r ;
@@ -268,7 +268,7 @@ function SetupPermissionsFromRoles () {
 	foreach ($rids as $rid) {
 		$rs[] = $e->getRoleById($rid);
 	}
-	
+
 	foreach ($rs as $r) {
 		$gr = FusionForgeRoleToMediawikiGroupName ($r, $g) ;
 

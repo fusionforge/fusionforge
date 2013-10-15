@@ -26,7 +26,7 @@
 // redirecting if necessary to ?page=1
 // This can be overriden with ?allatonce
 
-// This script is the counterpart, with full details, of other lists of projects 
+// This script is the counterpart, with full details, of other lists of projects
 // which contain only an index of projects, like /projects/ (for RDF harvested by machines)
 // or its HTML Turtle preview in /plugins/admssw/projectsturtle.php
 

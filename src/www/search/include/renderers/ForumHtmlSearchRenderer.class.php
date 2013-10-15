@@ -56,7 +56,7 @@ class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			_('Date')
 		);
 	}
-	
+
 	function getFilteredRows() {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();

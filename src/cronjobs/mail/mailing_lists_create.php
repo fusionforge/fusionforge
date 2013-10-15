@@ -315,7 +315,7 @@ for($k = 0; $k < $rows; $k++) {
     if (!file_exists(forge_get_config('mailman_data_path')."/lists/$deleted_mail_list")) {
 		 $success = true;
     }
-    
+
 	if($success) {
 		$res1 = db_query_params('UPDATE deleted_mailing_lists SET isdeleted = 1 WHERE mailing_list_name = $1',
 			array($deleted_mail_list));

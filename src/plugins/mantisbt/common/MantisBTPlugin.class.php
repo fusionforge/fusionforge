@@ -512,7 +512,7 @@ class MantisBTPlugin extends Plugin {
 			$confArr['soap_user'] = $globalConfArr['soap_user'];
 			$confArr['soap_password'] = $globalConfArr['soap_password'];
 		}
-		
+
 		if ($confArr['mantisbtcreate']) {
 			$idMantisBTUser = $this->addUserMantisBT($confArr);
 			$confArr['mantisbt_user'] = $user->getUnixName();

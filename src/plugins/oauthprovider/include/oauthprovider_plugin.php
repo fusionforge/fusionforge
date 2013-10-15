@@ -48,7 +48,7 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 		$this->_addHook("check_auth_session");
 		$this->_addHook("fetch_authenticated_user");
 		$this->_addHook("restrict_roles");
-		
+
 		// Is the plugin temporarily sufficient, only for one particular script
 		$this->sufficient_forced = NULL;
 
@@ -61,7 +61,7 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 		if ($G_SESSION->usesPlugin("oauthprovider")) {
 			$param = '?type=user&id=' . $G_SESSION->getId(); // we indicate the part we're calling is the user one
 			echo  $HTML->PrintSubMenu (array ($text),
-					  array ('/plugins/oauthprovider/index.php'. $param) , NULL);				
+					  array ('/plugins/oauthprovider/index.php'. $param) , NULL);
 		}
 	}
 	function groupmenu($params) {
@@ -87,8 +87,8 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 	}
 	/*
 	 * works with the function implementations in Plugin.class.php
-	 * re-implementation below is redundant 
-	 * 
+	 * re-implementation below is redundant
+	 *
 	 function groupisactivecheckbox($params) {
 		//Check if the group is active
 			// this code creates the checkbox in the project edit public info page to activate/deactivate the plugin
@@ -154,7 +154,7 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 				$user->setPluginUse ( $this->name, false );
 			}
 	}*/
-	
+
 	function user_personal_links($params) {
 	// this displays the link in the user's profile page to it's personal oauthprovider (if you want other sto access it, youll have to change the permissions in the index.php
 			$userid = $params['user_id'];
@@ -217,12 +217,12 @@ class oauthproviderPlugin extends ForgeAuthPlugin {
 				$tempid = $role->getID();
 				if($tempid!=$id) {
 					$params['dropped_roles'][] = RBACEngine::getInstance()->getRoleById($tempid);
-					//print_r($role->getName() . " removed!");	
+					//print_r($role->getName() . " removed!");
 				}
 			}
 		}
 	}
-	
+
 	/**
 	 * Is there a valid session?
 	 *

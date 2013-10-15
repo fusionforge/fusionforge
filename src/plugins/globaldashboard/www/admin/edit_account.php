@@ -57,9 +57,9 @@ $t_acc_query = 	 "UPDATE $t_account_table ".
 			" WHERE account_id=$10".
 			" AND   user_id=$11";
 
-$result = db_query_params( $t_acc_query, array( $login_name, $account_password, $forge_software, $account_domain, $account_uri, $account_is_foaf, $oslc_uri, 
-								  $rss_uri, $soap_wsdl, $account_id, $user_id 
-						   ) 
+$result = db_query_params( $t_acc_query, array( $login_name, $account_password, $forge_software, $account_domain, $account_uri, $account_is_foaf, $oslc_uri,
+								  $rss_uri, $soap_wsdl, $account_id, $user_id
+						   )
 				);
 if ($result) {
 	// Now try to update discovery table

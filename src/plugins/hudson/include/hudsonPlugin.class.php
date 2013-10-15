@@ -112,7 +112,7 @@ class hudsonPlugin extends Plugin {
 			$this->list_roles_by_permission($params);
 		}
 	}
-	
+
 	function &getPluginInfo() {
 		if (!is_a($this->pluginInfo, 'hudsonPluginInfo')) {
 			require_once 'hudsonPluginInfo.class.php';
@@ -319,7 +319,7 @@ class hudsonPlugin extends Plugin {
 
 	function role_get(&$params) {
 		$role =& $params['role'];
-		
+
 		// Read access
 		$right = new PluginSpecificRoleSetting($role, 'plugin_hudson_read');
 		$right->SetAllowedValues(array('0', '1'));
@@ -385,7 +385,7 @@ class hudsonPlugin extends Plugin {
 		}
 		return true;
 	}
-	
+
 	function list_roles_by_permission(&$params) {
 		switch ($params['section']) {
 			case 'plugin_hudson_read':

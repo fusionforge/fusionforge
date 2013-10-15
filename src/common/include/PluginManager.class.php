@@ -250,20 +250,20 @@ class PluginManager extends Error {
 		// Return true only if all the plugins have returned true.
 		return $result;
 	}
-	
+
 	function getReturnedValues($hookname) {
 		return $this->returned_values[$hookname];
 	}
 
 	function getReturnedValuesAsString($hookname) {
 		$return = '';
-		
+
 		if (isset($this->returned_values[$hookname])) {
 			foreach ($this->returned_values[$hookname] as $value) {
 				$return .= $value;
 			}
 		}
-		
+
 		return $return;
 	}
 

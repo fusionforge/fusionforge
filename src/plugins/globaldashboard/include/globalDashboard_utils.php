@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Copyright 2011, Sabri LABBENE - Institut Télécom
  *
@@ -21,10 +21,10 @@
  */
 
 /**
- * 
- * Show user toolbar menu which contains "My Personal Page", "Account Maintenance" 
+ *
+ * Show user toolbar menu which contains "My Personal Page", "Account Maintenance"
  * and so on ... + the link to this user plugin
- *  
+ *
  * @param array $params
  */
 function globaldashboard_header($params) {
@@ -45,7 +45,7 @@ function globaldashboard_toolbar() {
 }
 
 /**
- * 
+ *
  * Display the welcome message on the plugin index page
  * and a few instrunctions to get started with it.
  */

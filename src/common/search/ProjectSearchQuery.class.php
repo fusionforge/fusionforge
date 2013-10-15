@@ -57,7 +57,7 @@ class ProjectSearchQuery extends SearchQuery {
 				$qpa = $this->addMatchCondition($qpa, 'unix_group_name');
 				$qpa = db_construct_qpa ($qpa,
 							 ')) ') ;
-			}				
+			}
 			$qpa = db_construct_qpa ($qpa,
 						 'AND g.group_id = i.group_id ORDER BY ts_rank(vectors, q) DESC, group_name') ;
 		} else {

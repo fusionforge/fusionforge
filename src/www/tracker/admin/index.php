@@ -248,7 +248,7 @@ if ($group_id && $atid) {
 
 	} elseif (getStringFromRequest('admin_roadmap')) {
 		include $gfcommon.'tracker/views/form-adminroadmap.php';
-	
+
 	} else {
 		include $gfcommon.'tracker/actions/admin-ind.php';
 	}

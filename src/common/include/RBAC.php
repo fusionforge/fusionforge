@@ -334,7 +334,7 @@ abstract class BaseRole extends Error {
 			$result[$section_forum][$group_id] = $this->getVal ($section_forum, $group_id) ;
 		}
 		$sections = array_merge($sections, $sections_forum);
-		
+
 		$ff = new ForumFactory ($project) ;
 		if (!$ff->isError()) {
 			$fids = $ff->getAllForumIdsWithNews () ;
@@ -766,7 +766,7 @@ abstract class BaseRole extends Error {
 		if ($role_name != $this->getName()) {
 			$this->setName($role_name) ;
 		}
-		
+
 		foreach ($data as $sect => $refs) {
 			foreach ($refs as $refid => $value) {
 				$this->setSetting ($sect, $refid, $value) ;
@@ -879,7 +879,7 @@ abstract class BaseRole extends Error {
 		$this->normalizePermsForSection ($new_pa, 'approve_projects', -1) ;
 		$this->normalizePermsForSection ($new_pa, 'approve_news', -1) ;
 		$this->normalizePermsForSection ($new_pa, 'forge_stats', -1) ;
-		
+
 		$hook_params = array ();
 		$hook_params['role'] =& $this;
 		$hook_params['new_sa'] =& $new_sa ;

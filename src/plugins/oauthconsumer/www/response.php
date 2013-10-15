@@ -51,7 +51,7 @@ if(substr($f_resource_url, -5, 5)==".json")	{
 					}
 				}
 				echo "</ol>";
-			}			
+			}
 		}
 	}
 	if(!$timeline)	{

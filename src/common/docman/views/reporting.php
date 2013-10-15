@@ -85,7 +85,7 @@ if ($report->isError()) {
 } else {
 ?>
 
-<form action="<?php echo util_make_url('/docman/') ?>" 
+<form action="<?php echo util_make_url('/docman/') ?>"
 	  method="get"
 	  class="align-center">
 	<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />

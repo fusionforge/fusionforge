@@ -122,7 +122,7 @@ function tag_cloud($params = array()) {
 		}
 		$count_to_tags[$count][] = $name;
 	}
-	
+
 	$available_counts = array_keys($count_to_tags);
 	rsort ($available_counts, SORT_NUMERIC);
 

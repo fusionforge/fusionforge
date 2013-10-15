@@ -8,20 +8,20 @@
  * Copyright (C) 2012 Melvin Carvalho, Akbar Hossain, László Török
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal 
- * in the Software without restriction, including without limitation the rights 
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
- * copies of the Software, and to permit persons to whom the Software is furnished 
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is furnished
  * to do so, subject to the following conditions:
 
- * The above copyright notice and this permission notice shall be included in all 
+ * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
- * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * Everything should be made as simple as possible, but no simpler."
@@ -60,16 +60,16 @@ class Authentication_Delegated {
 
     const STATUS_AUTH_VIA_SESSION =
     "Authenticated via a session";
-    
+
     const STATUS_DELEGATED_LOGIN_OK =
     "Delegated WebID Login response has been authenticated";
-    
+
     const STATUS_SIGNATURE_VERIFICATION_ERR =
     "Signature on response could not be verified";
-    
+
     const STATUS_UNSUPPORTED_SIGNATURE_ALG_ERR =
     "Unsupported signature algorithm";
-    
+
     const STATUS_IDP_RESPONSE_TIMEOUT_ERR =
     "Response from delegate IdP was outside of the allowed time window";
 
@@ -126,9 +126,9 @@ class Authentication_Delegated {
         $ts = null;
 
         isset($_GET["error"]) and $error = $_GET["error"];
-        
+
         isset($_GET["sig"]) and $sig = $_GET["sig"];
-        
+
         isset($_GET["ts"]) and $ts = $_GET["ts"];
 
         $error = $request->getQueryParameter('error', $error);
@@ -152,7 +152,7 @@ class Authentication_Delegated {
 
         $webid = null;
         isset($_GET["webid"]) and $webid = $_GET["webid"];
-        
+
         $this->webid             = $request->getQueryParameter('webid', $webid);
         $this->allowedTimeWindow = $allowedTimeWindow;
         $this->elapsedTime       = time() - strtotime($ts);
@@ -196,7 +196,7 @@ class Authentication_Delegated {
                         // The signature didn't match.
                         $this->isAuthenticated = 0;
                         $this->authnDiagnostic = self::STATUS_SIGNATURE_VERIFICATION_ERR;
-                    } 
+                    }
                     else
                     {
                         // Error during the verification.
@@ -207,7 +207,7 @@ class Authentication_Delegated {
                     openssl_free_key($pubKeyId);
 
             }
-            else 
+            else
             {
                 // Unsupported signature algorithm.
                 $this->isAuthenticated = 0;

@@ -81,7 +81,7 @@ class globalDashboard_Widget_MyProjects extends Widget {
 				} elseif ($account['forge_software'] == REMOTE_FORGE_SOFTWARE_CODENDI) {
 					$favicon_url = $account['forge_account_domain'] . '/favicon.ico';
 				}
-				 
+
 				$i = 0;
 				foreach ($remote_account_projs as $remote_proj) {
 					$project_url = $account['forge_account_domain'] . '/projects/'. $remote_proj['unix_group_name'];
@@ -99,11 +99,11 @@ class globalDashboard_Widget_MyProjects extends Widget {
 	}
 
 	/**
-	 * 
+	 *
 	 * Fetches user remote projects from all forges
-	 * 
+	 *
 	 * @param integer $user_id
-	 * 
+	 *
 	 * @return array $projects
 	 */
 	function getUserRemoteProjects($user_id){
@@ -129,7 +129,7 @@ class globalDashboard_Widget_MyProjects extends Widget {
 		}
 		return $projects;
 	}
-	
+
 	function getAccountRemoteProjectsBySOAP($account, $projects) {
 		switch ($account['forge_software']) {
 			case REMOTE_FORGE_SOFTWARE_FUSIONFORGE:
@@ -157,38 +157,38 @@ class globalDashboard_Widget_MyProjects extends Widget {
 		return $projects;
 	}
 	/**
-	 * 
-	 * Gets the list of remote projects relative to an account from the account 
+	 *
+	 * Gets the list of remote projects relative to an account from the account
 	 * foaf profile.
 	 * Projects are described using planetForge ontology in remote user account.
-	 * 
+	 *
 	 * @param array $account array of a DB stored remote account.
-	 * 
+	 *
 	 * @return array $projects array of remote projects.
 	 */
 	function getAccountRemoteProjectsByFOAF($account){
 		$projects = array();
-		
+
 		include_once 'arc/ARC2.php';
 		require_once 'plugins/globaldashboard/include/Graphite.php';
-		
+
 		$reader = ARC2::getComponent('Reader');
-		
+
 		$parser = ARC2::getRDFParser();
-		
+
 		$reader->setAcceptHeader('Accept: application/rdf+xml');
 		$parser->setReader($reader);
-		
+
 		$parser->parse($account['forge_account_uri']);
-		
+
 		if(! $parser->reader->errors) {
 			//print_r($parser); die();
 			$triples = $parser->getTriples();
-			
+
 			$turtle = $parser->toTurtle($triples);
 			$datauri = $parser->toDataURI($turtle);
 
-				
+
 			$graph = new Graphite();
 			//$graph->setDebug(1);
 			$graph->ns( "doap", "http://usefulinc.com/ns/doap#" );
@@ -215,19 +215,19 @@ class globalDashboard_Widget_MyProjects extends Widget {
 					foreach ($projects as $project) {
 						$params = array('name' => $project["project_name"], 'url' => $project["project_url"]);
 						$cR = new OslcGroupCompactResource($params);
-						$project["project_link"] = $cR->getResourceLink(); 
+						$project["project_link"] = $cR->getResourceLink();
 					}
 				}
 			}
 		}
 		return $projects;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * Converts an stdClass object to an array.
 	 * @param stdClass $result
-	 * 
+	 *
 	 * @return array $array
 	 */
 	function soapToArray($results) {
@@ -240,16 +240,16 @@ class globalDashboard_Widget_MyProjects extends Widget {
 		}
 		return $array;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * Returns fetch method of remote projects related to an account
-	 * 
+	 *
 	 * @param integer $account_id
-	 * 
+	 *
 	 * @return integer $method value corresponding to fetch method
  	 */
 	function getProjectsFetchMethodForAccount($account_id) {
 		return getDBFetchMethod($account_id, 'projects');
-	} 
+	}
 }

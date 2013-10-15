@@ -27,9 +27,9 @@
  *
  */
 class TroveCat extends Error {
-	
+
 	var $data_array;
-	
+
 	/**
 	 * TroveCat() - CONSTRUCTOR.
 	 *
@@ -37,7 +37,7 @@ class TroveCat extends Error {
 	 * @param	int	The role_id.
 	 */
 	function TroveCat($cat_id = false) {
-		
+
 		if (!$cat_id) {
 			//setting up an empty object
 			//probably going to call create()
@@ -54,9 +54,9 @@ class TroveCat extends Error {
 	 * @return	boolean	success;
 	 */
 	function fetchData($cat_id, &$res = false) {
-		
+
 		unset($this->data_array);
-		
+
 		if(! $res) {
 			$res = db_query_params('SELECT * FROM trove_cat WHERE trove_cat_id=$1',
 					array ($cat_id)) ;
@@ -74,51 +74,51 @@ class TroveCat extends Error {
 			return false;
 		}
 	}
-	
+
 	function getId() {
 		return $this->data_array['trove_cat_id'];
 	}
-	
+
 	function getShortName() {
 		return $this->data_array['shortname'];
 	}
-	
+
 	function getFullName() {
 		return $this->data_array['fullname'];
 	}
-	
+
 	function getParentId() {
 		return $this->data_array['parent'];
 	}
-	
+
 	function getRootCatId() {
 		return $this->data_array['root_parent'];
 	}
 
 	function getIdsFullPath() {
 		return $this->data_array['fullpath_ids'];
-	
+
 	}
 
 	function getDescription() {
 		return $this->data_array['description'];
-	
+
 	}
-	
+
 	function listSubTree() {
 		return TroveCat::getSubtree($this->data_array['trove_cat_id']);
 	}
-	
+
 	static function getAllRoots() {
 		$rootcats = array();
-		
+
 		$res = db_query_params ('
 		SELECT *
 		FROM trove_cat
 		WHERE parent=0
 		AND trove_cat_id!=0',
 				array());
-	
+
 		do {
 			$trovecat = new TroveCat();
 			$fetched = $trovecat->fetchData(false, $res);
@@ -126,20 +126,20 @@ class TroveCat extends Error {
 				$rootcats[] = $trovecat;
 			}
 		} while ($fetched);
-		
-		return $rootcats; 
+
+		return $rootcats;
 	}
-	
+
 	static function getSubtree($root_cat_id) {
 		$subcats = array();
-		
+
 		$res = db_query_params('
 			SELECT *
 			FROM trove_cat
 			WHERE root_parent=$1
 			ORDER BY fullpath',
 				array($root_cat_id));
-	
+
 		do {
 			$trovecat = new TroveCat();
 			$fetched = $trovecat->fetchData(false, $res);
@@ -147,13 +147,13 @@ class TroveCat extends Error {
 				$subcats[] = $trovecat;
 			}
 		} while ($fetched);
-		
+
 		return $subcats;
 	}
-	
+
 	static function getProjectCats($group_id) {
-		$cats = array();		
-	
+		$cats = array();
+
 		$res = db_query_params ('
 		SELECT trove_cat.trove_cat_id AS trove_cat_id
 		FROM trove_cat,trove_group_link
@@ -161,12 +161,12 @@ class TroveCat extends Error {
 		AND trove_group_link.group_id=$1
 		ORDER BY trove_cat.fullpath',
 			array($group_id));
-		
+
 		$catids = array();
 		while($row = db_fetch_array($res)) {
 			$catids[] = $row['trove_cat_id'];
 		}
-		
+
 		foreach($catids as $catid) {
 			$cats[] = new TroveCat($catid);
 		}

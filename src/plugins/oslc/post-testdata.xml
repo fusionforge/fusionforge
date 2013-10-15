@@ -3,7 +3,7 @@
 <!--  POST to 		/oslc-zend/cm/project/project_name
 	  or		/oslc-zend/cm/project/project_id
 -->
-<!-- POST FOR MANTIS TRACKER 
+<!-- POST FOR MANTIS TRACKER
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	<oslc_cm:ChangeRequest xmlns:oslc_cm="http://open-services.net/xmlns/cm/1.0/">
 		<dc:title xmlns:dc="http://purl.org/dc/terms/">Provide import</dc:title>

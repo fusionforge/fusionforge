@@ -99,7 +99,7 @@ function db_connect() {
 	define('SYS_DB_TROVE', $gfconn2);
 	define('SYS_DB_SEARCH', $gfconn2);
 
-	$res = db_query_params ('SELECT set_config($1, $2, false)', 
+	$res = db_query_params ('SELECT set_config($1, $2, false)',
 				array('default_text_search_config',
 				      'simple'));
 

@@ -2,7 +2,7 @@
 /**
  * MediaWikiPlugin Class
  *
- * Copyright 2000-2011, Fusionforge Team 
+ * Copyright 2000-2011, Fusionforge Team
  * Copyright 2012, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *

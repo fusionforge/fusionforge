@@ -444,7 +444,7 @@ function report_graph($type, $SPAN, $start, $end) {
 			break;
 		}
 	}
-	
+
 	if ($report->isError()) {
 		echo '<p class="error">'.$report->getErrorMessage().'</p>';
 		return false;
@@ -455,7 +455,7 @@ function report_graph($type, $SPAN, $start, $end) {
 		return false;
 	}
 	$ydata[0]  = $report->getData();
-	
+
 	if ($SPAN == REPORT_TYPE_DAILY) {
 		$i = 0;
 		$formatDate = 'Y-m-d';
@@ -658,7 +658,7 @@ function report_actgraph($type, $SPAN, $start, $end, $id, $area) {
 	for ($j = 0; $j < count($timeStampArr); $j++) {
 		$tickArr[] = date($formatDate, $timeStampArr[$j]);
 	}
-	
+
 	switch ($area) {
 		case 'docman': {
 			$ydata[] =& $report->getDocs();
@@ -932,7 +932,7 @@ function report_toolspiegraph($datatype = 0, $start, $end) {
 	if (db_error()) {
 		exit_error(db_error(), '');
 	}
-	
+
 	$arr[1] = _('Bugs');
 	$arr[2] = _('Support Requests');
 	$arr[3] = _('Patches');
@@ -941,7 +941,7 @@ function report_toolspiegraph($datatype = 0, $start, $end) {
 	$arr[5] = _('Forum Messages');
 	$arr[6] = _('Tasks');
 	$arr[7] = _('Downloads');
-	
+
 	$chartid = 'toolspie';
 	if (db_numrows($res)) {
 		echo '<script type="text/javascript">//<![CDATA['."\n";
@@ -1007,7 +1007,7 @@ function report_timegraph($type = 'site', $area = 'tasks', $start, $end, $id = 0
 	$arr['user'] = _('By User');
 
 	report_pie_arr($report->labels, $report->getData());
-	
+
 	$chartid = 'timegraph';
 	if (count($pie_vals)) {
 		echo '<script type="text/javascript">//<![CDATA['."\n";
@@ -1048,7 +1048,7 @@ function report_sitetimebargraph($start, $end) {
 	if ($now < $end) {
 		$end = $now;
 	}
-	
+
 	$res = db_query_params('SELECT week,sum(hours)
 		FROM rep_time_tracking
 		WHERE week
@@ -1174,7 +1174,7 @@ function report_pm_hbar($id, $values, $ticks, $labels, $stackSeries = false) {
 		echo 'series'.$id.'.push(values'.$id.'['.$z.']);';
 	}
 	$height = 40 + 50 * count($ticks);
-	
+
 	echo 'jQuery(document).ready(function(){
 			plot'.$id.' = jQuery.jqplot (\'chart'.$id.'\', series'.$id.', {
 				height: '.$height.',';

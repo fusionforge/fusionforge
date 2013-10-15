@@ -60,7 +60,7 @@ class Widget_MyProjectsLastDocuments extends Widget {
 			foreach ($groups as $g) {
 				if ($g->usesDocman()) {
 					$i++;
-					
+
 					$vWhiteList = new Valid_WhiteList('hide_dmproj', array(0, 1));
 					$vWhiteList->required();
 					if($request->valid($vWhiteList)) {

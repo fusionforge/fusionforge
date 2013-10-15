@@ -22,7 +22,7 @@
  * with FusionForge; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
- 
+
 class phpcaptchaPlugin extends Plugin {
 
 	var $phpcaptcha_path;
@@ -35,7 +35,7 @@ class phpcaptchaPlugin extends Plugin {
 		$this->_addHook('captcha_form');
 		$this->phpcaptcha_path = forge_get_config('phpcaptcha_path', 'phpcaptcha');
 	}
-	
+
 	function captcha_check($params) {
 		$captcha_code = getStringFromRequest('captcha_code');
 		require_once $this->phpcaptcha_path.'/securimage.php';
@@ -45,7 +45,7 @@ class phpcaptchaPlugin extends Plugin {
 			$params['warning_msg'] = _('Wrong captcha code');
 		}
 	}
-	
+
 	function captcha_form() {
 		if ($this->checkConfig()) {
 			echo '<p>
@@ -55,16 +55,16 @@ class phpcaptchaPlugin extends Plugin {
 			echo '</p><p>';
 			echo _('Write captcha here:').'<br />';
 			echo '<input type="text" name="captcha_code" size="10" maxlength="6" />';
-			echo '</p>'; 
+			echo '</p>';
 		} else {
 			echo '<p class="information">'._('phpcaptcha seems not installed. Contact your administrator for more informations.').'</p>';
 		}
 	}
-	
+
 	function checkConfig() {
 		if(!is_file($this->phpcaptcha_path.'/securimage.php') || !extension_loaded('gd'))
 			return false;
-		
+
 		return true;
 	}
 }

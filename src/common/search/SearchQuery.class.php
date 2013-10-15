@@ -195,7 +195,7 @@ class SearchQuery extends Error {
 		foreach ($this->phrases as $p) {
 			$regexs[] = strtolower (preg_replace ("/\s+/", "\s+", $p));
 		}
-	
+
 		for ($i = 0; $i < count ($regexs); $i++) {
 			if ($i > 0) {
 				$qpa = db_construct_qpa ($qpa,
@@ -299,7 +299,7 @@ class SearchQuery extends Error {
 	function getPhrases() {
 		return $this->phrases;
 	}
-	
+
 	/**
 	 * setSections - set the sections list
 	 *
@@ -316,8 +316,8 @@ class SearchQuery extends Error {
 	/**
 	 * getFTIwords - get words formatted in order to be used in the FTI stored procedures
 	 *
-	 * @return string words we are searching for, separated by 
-	 */	
+	 * @return string words we are searching for, separated by
+	 */
 	function getFTIwords() {
 		$bits = $this->words;
 		foreach ($this->phrases as $p) {

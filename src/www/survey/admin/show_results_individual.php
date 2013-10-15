@@ -94,7 +94,7 @@ for ($i=0; $i<$count; $i++) {
 			Don't show question number if it's just a comment
 		*/
 
-		echo "\n<tr><td class=\"top\">&nbsp;</td>\n<td>"; 
+		echo "\n<tr><td class=\"top\">&nbsp;</td>\n<td>";
 
 	} else {
 

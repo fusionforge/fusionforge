@@ -404,7 +404,7 @@ foreach ($roles as $r) {
 		<input type="submit" name="edit" value="'._("Edit Permissions").'" />
 	</div>
 	</form>';
-	
+
 	if ($r->getHomeProject() != NULL && $r->getHomeProject()->getId() == $group_id) {
 		echo '<form action="roledelete.php?group_id='. $group_id .'" method="post">
         <div style="float:right;">

@@ -62,7 +62,7 @@ class doaprdfPlugin extends Plugin {
 		);
 		return $ns;
 	}
-	
+
 	function getProjectResourceIndex($group_id, &$ns, $detailed = false) {
 
 		// connect to FusionForge internals
@@ -76,17 +76,17 @@ class doaprdfPlugin extends Plugin {
 			$group = group_get_object($group_id);
 			$tags_list = $group->getTags();
 		}
-		
+
 		$conf = array(
 				'ns' => $ns
 		);
-			
+
 		$res = ARC2::getResource($conf);
 		$res->setURI(util_make_url_g($projectname, $group_id).'#project');
-		
+
 		// $res->setRel('rdf:type', 'doap:Project');
 		rdfutils_setPropToUri($res, 'rdf:type', 'doap:Project');
-			
+
 		$res->setProp('doap:name', $projectname);
 		$res->setProp('doap:shortdesc', $project_shortdesc);
 		if($project_description) {
@@ -103,7 +103,7 @@ class doaprdfPlugin extends Plugin {
 			$tags = split(', ',$tags_list);
 			$res->setProp('dcterms:subject', $tags);
 		}
-			
+
 		// Now, we need to collect complementary RDF descriptiosn of the project via other plugins
 		// invoke the 'project_rdf_metadata' hook so as to complement the RDF description
 		$hook_params = array();
@@ -117,28 +117,28 @@ class doaprdfPlugin extends Plugin {
 		$hook_params['out_Resources'] = array();
 		if ($detailed) {
 			$hook_params['details'] = 'full';
-		} 
+		}
 		else {
 			$hook_params['details'] = 'minimal';
 		}
 		plugin_hook_by_reference('project_rdf_metadata', $hook_params);
-		
+
 		// add new prefixes to the list
 		foreach($hook_params['prefixes'] as $url => $prefix) {
 			if (!isset($ns[$prefix])) {
 				$ns[$prefix] = $url;
 			}
 		}
-		
+
 		// merge the two sets of triples
 		$merged_index = $res->index;
 		foreach($hook_params['out_Resources'] as $out_res) {
 			$merged_index = ARC2::getMergedIndex($merged_index, $out_res->index);
 		}
-		
+
 		return $merged_index;
 	}
-	
+
 	/**
 	 * Outputs project's DOAP profile
 	 * @param unknown_type $params
@@ -149,34 +149,34 @@ class doaprdfPlugin extends Plugin {
 		$group_id = $params['group_id'];
 
 		if($accept == 'application/rdf+xml' || $accept == 'text/turtle') {
-			
-			
+
+
 			// We will return RDF+XML
 			$params['content_type'] = $accept;
 
 			$ns = $this->doapNameSpaces();
-			
+
 			$merged_index = $this->getProjectResourceIndex($group_id, $ns, $detailed = true);
-				
+
 			$conf = array(
 					'ns' => $ns,
 					'serializer_type_nodes' => true
 			);
-			
+
 			if($accept == 'application/rdf+xml') {
 				$ser = ARC2::getRDFXMLSerializer($conf);
 			}
-			else { 
+			else {
 				// text/turtle
 				$ser = ARC2::getTurtleSerializer($conf);
-			}	
+			}
 			/* Serialize a resource index */
 			$doc = $ser->getSerializedIndex($merged_index);
 
 			$params['content'] = $doc . "\n";
 		}
 	}
-	
+
 	/**
 	 * Declares a link to itself in the link+meta HTML headers
 	 * @param unknown_type $params
@@ -190,7 +190,7 @@ class doaprdfPlugin extends Plugin {
 			$params['return'][] = '<link rel="alternate" type="test/turtle" title="DOAP RDF Data" href=""/>';
 		}
 	}
-	
+
 }
 
 // Local Variables:

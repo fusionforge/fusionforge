@@ -22,7 +22,7 @@
  */
 
 class CompactPreviewPlugin extends Plugin {
-	
+
 	public function __construct($id=0) {
 		$this->Plugin($id) ;
 		$this->name = "compactpreview";
@@ -35,22 +35,22 @@ class CompactPreviewPlugin extends Plugin {
 		$this->_addHook("script_accepted_types");
 		$this->_addHook("content_negociated_user_home");
 		$this->_addHook("content_negociated_project_home");
-		
+
 	}
-	
+
 	// hook methods
-	
+
 	/**
 	 * override util_display_user() with modified version to display compact preview popup on user links
 	 * @param array $params hook params (return in $params['user_link'])
 	 */
 	function user_link_with_tooltip (&$params) {
-		// 
+		//
 		require_once dirname( __FILE__ ) . '/CompactResource.class.php';
 		$cR = CompactResource::createCompactResource($params);
 		$params['user_link'] = $cR->getResourceLink();
 	}
-	
+
 	/**
 	 * override util_make_link_g() with modified version to display compact preview popup on project links
 	 * @param array $params hook params (return in $params['user_link'])
@@ -60,7 +60,7 @@ class CompactPreviewPlugin extends Plugin {
 		$cR = CompactResource::createCompactResource($params);
 		$params['group_link'] = $cR->getResourceLink();
 	}
-	
+
 	function javascript_file (&$params) {
 		// The userTooltip.js script is used by the compact preview feature (see content_negociated_user_home)
 		html_use_jquery();
@@ -76,7 +76,7 @@ class CompactPreviewPlugin extends Plugin {
 	function cssfile (&$params) {
 		use_stylesheet('/plugins/'.$this->name.'/css/oslcTooltipStyle.css');
 	}
-	
+
 	/**
 	 * Declaration of which content-negociation alternatives are provided by this plugin
 	 * @param unknown_type $params
@@ -91,17 +91,17 @@ class CompactPreviewPlugin extends Plugin {
 			$params['accepted_types'][] = 'application/x-fusionforge-compact+html';
 		}
 	}
-	
+
 	function display_user_html_compact_preview($username, $title = false) {
 		global $gfwww;
-		
+
 		require_once $gfwww.'include/user_profile.php';
-		
+
 		$user_obj = user_get_object_by_name($username);
 
 		$user_real_name = $user_obj->getRealName();
 		$user_id = $user_obj->getID();
-		
+
 		$html = '<html>
 						<head>
 						<title>User: '. $user_real_name .' (Identifier: '. $user_id .')</title>
@@ -111,15 +111,15 @@ class CompactPreviewPlugin extends Plugin {
 		$html .= user_personal_information($user_obj, true, $title);
 		$html .= '</body>
 						</html>';
-		
+
 		return $html;
-				
+
 	}
-	
+
 	function display_project_html_compact_preview($project, $title) {
-		
+
 		$project_obj = group_get_object_by_name($project);
-		
+
 		$public_name = $project_obj->getPublicName();
 		$unix_name = $project_obj->getUnixName();
 		$id = $project_obj->getID();
@@ -148,14 +148,14 @@ class CompactPreviewPlugin extends Plugin {
 		} else {
 			$public = 'No';
 		}
-		
+
 		$html='<html>
 		<head>
 		<title>Project: '. $public_name .' ('. $unix_name .')</title>
 		</head>
 		<body>
 			<table>
-		
+
 				<tr>
 					<td colspan="2"><i>'. $title .'</i></td>
 				</tr>
@@ -163,72 +163,72 @@ class CompactPreviewPlugin extends Plugin {
 					'/* <td rowspan="8"><img src="/plugins/compactpreview/images/userTooltip/oslc.png" />
 					</td>*/.'
 					<td><b>Project name:</b>
-					
-					
-					
+
+
+
 					 '. $public_name .'</td>
 				</tr>
 				<tr>
 					<td><b>Project short name:</b>
-					
-					
-					
+
+
+
 					 '. $unix_name .'</td>
 				</tr>
 				<tr>
 					<td><b>Identifier:</b>
-					
-					
-					
+
+
+
 					  '. $id .'</td>
 				</tr>
 				<tr>
 					<td><b>Started since:</b>
-					
-					
-					
+
+
+
 					 '. date(_('Y-m-d H:i'), $start_date) .'</td>
 				</tr>
 				<tr>
 					<td><b>Status:</b>
-					
-					
-					
+
+
+
 					  '. $project_status .'</td>
 				</tr>
 				<tr>
 					<td><b>Is Public:</b>
-					
-					
-					
+
+
+
 					  '. $public .'</td>
 				</tr>
 				<tr>
 					<td><b>Description:</b>
-					
-					
-					
+
+
+
 					  '. $description .'</td>
 				</tr>
 				<tr>
 					<td><small><b>Home Page:</b> <a href="'. $home_page .'">'. $home_page .'
 						</a> </small></td>
 				</tr>
-		
+
 			</table>
 		</body>
 		</html>';
-	
+
 		return $html;
-				
+
 	}
-	
+
 	function content_negociated_user_home (&$params) {
 
 		$username = $params['username'];
 		$accept = $params['accept'];
 		$param['content'] = false;
-		
+
 		switch ($accept) {
 			// if want some OSLC compact-preview, provide the document pointing to the compact-preview
 			case 'application/x-oslc-compact+xml' : {
@@ -258,7 +258,7 @@ class CompactPreviewPlugin extends Plugin {
 			}
 		}
 	}
-	
+
 	function content_negociated_project_home (&$params) {
 
 		$projectname = $params['groupname'];

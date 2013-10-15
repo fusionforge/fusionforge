@@ -26,7 +26,7 @@ if (($msg=OAuthProvider::check_provider_values(FALSE, $f_provider_name, $f_provi
 else {
 
 	$provider = OAuthProvider::get_provider($f_provider_id);
-	
+
 	$provider->set_name($f_provider_name);
 	$provider->set_description($f_provider_desc);
 	$provider->set_consumer_key($f_consumer_key);
@@ -34,10 +34,10 @@ else {
 	$provider->set_request_token_url($f_request_token_url);
 	$provider->set_authorize_url($f_authorize_url);
 	$provider->set_access_token_url($f_access_token_url);
-	
+
 	$provider->write_to_db();
-	
+
 	form_release_key(getStringFromRequest( 'plugin_oauthconsumer_provider_update_token' ));
-	
+
 	session_redirect( '/plugins/'.$pluginname.'/providers.php' );
 }

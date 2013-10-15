@@ -72,7 +72,7 @@ class globalDashboard_Widget_MyArtifacts extends Widget {
 				$graph->load( $datauri );
 				//print $graph->resource('https://vm2.localdomain/projects/coinsuper/')->dumpText();
 				$projname = $graph->resource( $url )->get( "doap:name" );
-					
+
 				$html = $html . '
 				<tr>
 				<td><a href="'.$url.'">'.$projname.'</a>

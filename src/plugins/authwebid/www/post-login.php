@@ -95,7 +95,7 @@ if (forge_get_config('use_ssl') && !session_issecure()) {
 
 	// Otherwise, display the login form again
 	display_login_page($return_to, $triggered);
-	
+
 // Local Variables:
 // mode: php
 // c-file-style: "bsd"

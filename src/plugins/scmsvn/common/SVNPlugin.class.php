@@ -84,7 +84,7 @@ class SVNPlugin extends SCMPlugin {
 	}
 
 	function getBlurb() {
-		return '<p>' 
+		return '<p>'
 				. sprintf(_('Documentation for %1$s is available at <a href="%2$s">%2$s</a>.'),
 							'Subversion (“SVN”)',
 							'href="http://svnbook.red-bean.com/')
@@ -416,7 +416,7 @@ class SVNPlugin extends SCMPlugin {
 			$updates = 0;
 			$usr_adds    = array();
 			$usr_updates = array();
- 
+
 			$repo = forge_get_config('repos_path', 'scmsvn') . '/' . $project->getUnixName();
 			if (!is_dir ($repo) || !is_file ("$repo/format")) {
 				echo "No repository $repo\n";
@@ -439,7 +439,7 @@ class SVNPlugin extends SCMPlugin {
 				db_rollback();
 				return false;
 			}
- 
+
 			$res = db_query_params ('DELETE FROM stats_cvs_user WHERE month=$1 AND day=$2 AND group_id=$3',
 						array ($month_string,
 						       $day,
@@ -449,7 +449,7 @@ class SVNPlugin extends SCMPlugin {
 				db_rollback () ;
 				return false ;
 			}
- 
+
 			$xml_parser = xml_parser_create();
 			xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
 			xml_set_character_data_handler($xml_parser, "SVNPluginCharData");

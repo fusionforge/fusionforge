@@ -81,7 +81,7 @@ $server->wsdl->addComplexType(
 	'',
 	array(
 	'role_id' => array('name'=>'role_id', 'type' => 'xsd:int'),
-	'role_name' => array('name'=>'role_name', 'type' => 'xsd:string'), 
+	'role_name' => array('name'=>'role_name', 'type' => 'xsd:string'),
 	'project_read' => array('name'=>'project_read', 'type' => 'xsd:int'),
 	'project_admin' => array('name'=>'project_admin', 'type' => 'xsd:int'),
 	'frs' => array('name'=>'frs', 'type' => 'xsd:int'),
@@ -156,7 +156,7 @@ $server->register(
 //addGroup ($user, $group_name, $unix_name, $description, $purpose, $unix_box = 'shell1', $scm_box = 'cvs1', $is_public = 1, $send_mail = true, $built_from_template = 0)
 $server->register(
     'addGroup',
-    array('session_ser'=>'xsd:string', 
+    array('session_ser'=>'xsd:string',
 	'group_name'=>'xsd:string',
 	'unix_name'=>'xsd:string',
 	'description'=>'xsd:string',
@@ -188,7 +188,7 @@ $server->register(
     $uri.'#updateGroup','rpc','encoded'
 );
 
-//function updateGroup($session_ser, $group_id, $form_group_name, $form_homepage, $form_shortdesc, $use_mail, $use_survey, $use_forum, $use_pm, 
+//function updateGroup($session_ser, $group_id, $form_group_name, $form_homepage, $form_shortdesc, $use_mail, $use_survey, $use_forum, $use_pm,
 //	$use_scm, $use_news, $use_docman, $new_doc_address, $send_all_docs, $use_ftp, $use_tracker, $use_frs, $use_stats, $tags)
 $server->register(
     'updateGroup2',
@@ -234,7 +234,7 @@ $server->register(
          'group_id'=>'xsd:int',
          'role_id'=>'xsd:int'),
     array('addUserToGroupResonse'=>'xsd:boolean'),
-    $uri,  
+    $uri,
     $uri.'#addUserToGroup','rpc','encoded'
 );
 
@@ -245,7 +245,7 @@ $server->register(
          'user_id'=>'xsd:string',
          'role_id'=>'xsd:int'),
     array('removeUserFromGroupResonse'=>'xsd:boolean'),
-    $uri,  
+    $uri,
     $uri.'#removeUserFromGroup','rpc','encoded'
 );
 
@@ -392,7 +392,7 @@ function approveGroup($session_ser, $group_id) {
 		$errMsg = 'Could Not Approve The Project: '.$group->getErrorMessage();
 		return new soap_fault ('2005','group',$errMsg,$errMsg);
 	}
-	
+
 	return $result;
 }
 
@@ -402,7 +402,7 @@ function addGroup($session_ser, $group_name, $unix_name, $description, $purpose,
 	$group = new Group();
 	$u = session_get_user();
 	$result = $group->create($u, $group_name, $unix_name, $description, $purpose, $unix_box, $scm_box, $is_public, $send_mail, $built_from_template);
-	
+
 	if (!$result){
 		$errMsg = 'Could Not Add A New Project: '.$group->getErrorMessage();
 		return new soap_fault ('2006','group',$errMsg,$errMsg);
@@ -439,36 +439,36 @@ function updateGroup($session_ser, $group_id, $is_public, $is_template, $status,
 }
 
 // update a group
-function updateGroup2($session_ser, $group_id, $form_group_name, $form_homepage, $form_shortdesc, $use_mail, $use_survey, $use_forum, $use_pm, 
+function updateGroup2($session_ser, $group_id, $form_group_name, $form_homepage, $form_shortdesc, $use_mail, $use_survey, $use_forum, $use_pm,
 	$use_scm, $use_news, $use_docman, $new_doc_address, $send_all_docs, $use_ftp, $use_tracker, $use_frs, $use_stats, $tags) {
 	continue_session($session_ser);
 	$group = group_get_object($group_id);
 
-	$res = $group->update( 
-		session_get_user(), 
-		$form_group_name, 
-		$form_homepage, 
-		$form_shortdesc, 
-		$use_mail, 
-		$use_survey, 
-		$use_forum, 
-		$use_pm, 
-		1, 
-		$use_scm, 
-		$use_news, 
-		$use_docman, 
-		$new_doc_address, 
-		$send_all_docs, 
-		100, 
-		$use_ftp, 
-		$use_tracker, 
-		$use_frs, 
-		$use_stats, 
-		$tags, 
-		0 
-	); 
-	
-	if (!$res) { 
+	$res = $group->update(
+		session_get_user(),
+		$form_group_name,
+		$form_homepage,
+		$form_shortdesc,
+		$use_mail,
+		$use_survey,
+		$use_forum,
+		$use_pm,
+		1,
+		$use_scm,
+		$use_news,
+		$use_docman,
+		$new_doc_address,
+		$send_all_docs,
+		100,
+		$use_ftp,
+		$use_tracker,
+		$use_frs,
+		$use_stats,
+		$tags,
+		0
+	);
+
+	if (!$res) {
 		$errMsg = 'Could Not Update A Project: '.$group->getErrorMessage();
 		return new soap_fault ('2007','group',$errMsg,$errMsg);
 	}
@@ -542,7 +542,7 @@ function &getGroupRoles($session_ser,$group_id) {
 	continue_session($session_ser);
 
 	$group = group_get_object($group_id);
-	
+
 	if (!$group || !is_object($group)) {
     		$errMsg = 'Could not get group: '.$group->getErrorMessage();
 		return new soap_fault ('2005','group',$errMsg,$errMsg);
@@ -595,7 +595,7 @@ function addGroupRole ($session_ser, $group_id, $role_name, $project_read, $proj
 		$tracker_admin, $new_tracker, $forum_admin, $new_forum, $pm_admin, $new_pm){
 
 	continue_session($session_ser);
-	
+
 	$group = group_get_object($group_id);
 	$role = new Role ($group) ;
 
@@ -630,9 +630,9 @@ function addGroupRole ($session_ser, $group_id, $role_name, $project_read, $proj
 //update role object
 function updateGroupRole ($session_ser, $group_id, $role_id, $role_name, $project_read, $project_admin, $frs, $scm, $docman,
 		$tracker_admin, $new_tracker, $forum_admin, $new_forum, $pm_admin, $new_pm){
-	
+
 	continue_session($session_ser);
-	
+
 	$role = RBACEngine::getInstance()->getRoleById($role_id) ;
 
 	if (!$role || !is_object($role)) {
@@ -668,7 +668,7 @@ function updateGroupRole ($session_ser, $group_id, $role_id, $role_name, $projec
 function deleteGroupRole ($session_ser, $group_id, $role_id){
 
 	continue_session($session_ser);
-	
+
 	$role = RBACEngine::getInstance()->getRoleById($role_id) ;
 
 	if (!$role || !is_object($role)) {
@@ -754,7 +754,7 @@ function &roles_to_soap($roles, $group_id) {
 		} else {
 			//build an array of just the fields we want
 
-			$return[] = array('role_id'=>$roles[$i]->data_array['role_id'], 
+			$return[] = array('role_id'=>$roles[$i]->data_array['role_id'],
 			'role_name'=>$roles[$i]->data_array['role_name'],
 			'project_read'=>$roles[$i]->getVal('project_read',$group_id),
 			'project_admin'=>$roles[$i]->getVal('project_admin',$group_id),

@@ -64,11 +64,11 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getRows() {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();
-		
+
 		if (!forge_check_perm('docman', $this->groupId, 'read')) {
 			return '';
 		}
-		
+
 		$return = '';
 
 		$lastDocGroup = null;

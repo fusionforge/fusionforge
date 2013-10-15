@@ -26,7 +26,7 @@ require_once $gfplugins.'globaldashboard/include/globalDashboard_utils.php';
 require_once $gfplugins.'globaldashboard/include/globalDashboardConstants.php';
 require_once $gfplugins.'globaldashboard/common/manage_accounts_db_utils.php';
 
-$user = session_get_user(); // get the user session 
+$user = session_get_user(); // get the user session
 
 if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 	exit_error("Invalid User", "Cannot Process your request for this user.");
@@ -51,7 +51,7 @@ if (!$type) {
 			// if someone else tried to access the private GlobalDashboard part of this user
 			exit_error("Access Denied", "You cannot access other user's personal $pluginname");
 		}
-		// show the header 
+		// show the header
 		globaldashboard_header(array('title'=> _('Remote Account Management')));
 		globaldashboard_toolbar();
 		editRemoteAccount(getStringFromRequest('account_id'));
@@ -60,7 +60,7 @@ if (!$type) {
 site_project_footer(array());
 
 /**
- * 
+ *
  * UI to edit a stored remote account.
  * @param integer $account_id
  */
@@ -70,27 +70,27 @@ function editRemoteAccount($account_id) {
 	echo '<p>
 		<form action="edit_account.php" method="POST">';
 	echo '
-		<fieldset>	
-		<legend> '. _('Main account properties') . ' </legend>	
+		<fieldset>
+		<legend> '. _('Main account properties') . ' </legend>
 		<table>
 			<tr>
 				<td>' . _('User Name') . ': </td>
-				<td> 
+				<td>
 					<input type="hidden" value="'. $account['account_id'] .'" name="account_id">
 					<input type="hidden" value="'. $account['user_id'] .'" name="user_id">
 					<input type="text" value="'.$account["forge_account_login_name"].'" name="login_name">
-					</input> 
+					</input>
 				</td>
 			</tr>
 			<tr>
 				<td>' . _('Account password') . ': </td>
-				<td>  
+				<td>
 					<input type="password" name="account_password">
 				</td>
 			</tr>
 			<tr>
 				<td>' . _('Remote Forge Software') . ': </td>
-				<td>  
+				<td>
 					<select name="forge_software">
 						<option value="'. REMOTE_FORGE_SOFTWARE_FUSIONFORGE .'"';
 						if ($account['forge_software'] == REMOTE_FORGE_SOFTWARE_FUSIONFORGE){
@@ -122,7 +122,7 @@ function editRemoteAccount($account_id) {
 			</tr>
 			<tr>
 				<td>' . _('Account domain') . ': </td>
-				<td>  
+				<td>
 					<input type="text" size="60" value="'.$account["forge_account_domain"].'" name="account_domain">
 					</input>
 				</td>
@@ -136,36 +136,36 @@ function editRemoteAccount($account_id) {
 						echo 'checked="yes"';
 					}
 					echo '> ';
-					echo _('Is account FOAF enabled ?') . ' 
+					echo _('Is account FOAF enabled ?') . '
 				</td>
 			</tr>
-		</table>	
+		</table>
 		</fieldset>';
 
 	echo '
-		<fieldset>	
-		<legend> '. _('Account Discovery Capabilities') . ' </legend>	
+		<fieldset>
+		<legend> '. _('Account Discovery Capabilities') . ' </legend>
 		<table>
 			<tr>
 				<td>' . _('OSLC Discovery URI') . ': </td>
-				<td> 
+				<td>
 					<input type="text" size="60" value="'.$account["forge_oslc_discovery_uri"].'" name="oslc_uri">
-					</input> 
+					</input>
 				</td>
 			</tr>
 			<tr>
 				<td>' . _('RSS Stream URI') . ': </td>
-				<td>  
+				<td>
 					<input type="text" size="60" value="'.$account["forge_account_rss_uri"].'" name="rss_uri">
 				</td>
 			</tr>
 			<tr>
 				<td>' . _('SOAP WSDL URI') . ': </td>
-				<td>  
+				<td>
 					<input type="text" size="60" value="'.$account['forge_account_soap_wsdl_uri'].'" name="soap_wsdl">
 				</td>
 			</tr>
-		</table>	
+		</table>
 		</fieldset>';
 	$discovery = getDBAccountDiscoveryByAccountId($account_id);
 	echo '
@@ -212,7 +212,7 @@ function editRemoteAccount($account_id) {
 						if($discovery['artifacts_discovery_method'] == USER_ARTIFACTS_FETCH_METHOD_SOAP) {
 							echo 'selected="selected"';
 						}
-						
+
 						echo '> SOAP </option>
 						<option value="'. USER_ARTIFACTS_FETCH_METHOD_OSLC .'"';
 						if($discovery['artifacts_discovery_method'] == USER_PROJECTS_FETCH_METHOD_OSLC) {
@@ -224,11 +224,11 @@ function editRemoteAccount($account_id) {
 			</tr>
 		</table>
 		</fieldset>';
-	
+
 	echo '<p style="text-align: center;">
 			<input type="submit" value="Submit account changes">
 		</p>
 		</form>
 	</p>';
-	
+
 }

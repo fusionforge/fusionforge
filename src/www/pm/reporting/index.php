@@ -115,7 +115,7 @@ if ($what) {
 		$labels = array();
 		$labels[0] = _('Average duration for closed tasks (days)');
 		$labels[1] = _('Number of started tasks');
-		
+
 		for ($counter=1; $counter<=$span; $counter++) {
 
 			$start = ($time_now-($counter*$sub_duration));
@@ -133,7 +133,7 @@ if ($what) {
 								AND project_group_list.group_project_id=project_task.group_project_id
 								AND project_group_list.group_id=$3 ',
 								array($start, $end, $group_id));
-				
+
 			$resStartTasks = db_query_params ('SELECT count(*)
 								FROM project_task,project_group_list
 								WHERE start_date >= $1

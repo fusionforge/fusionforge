@@ -92,13 +92,13 @@ case 'file':
 	// foo.tar.gz ignored
 
 	$file_id = $expl_pathinfo[4];
-	
+
 	// Allow alternate content-type rendering by hook
 	$default_content_type = 'application/binary';
-	
+
 	$script = 'frs_download_file';
 	$content_type = util_negociate_alternate_content_types($script, $default_content_type);
-	
+
 	if($content_type != $default_content_type) {
 		$hook_params = array();
 		$hook_params['accept'] = $content_type;
@@ -116,7 +116,7 @@ case 'file':
 		}
 		exit(0);
 	}
-	
+
 	$File = frsfile_get_object($file_id);
 	if (!$File) {
 		session_redirect404();

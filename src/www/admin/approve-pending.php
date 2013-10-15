@@ -134,7 +134,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<p />
 	<h3><?php  echo _('Pre-approval modifications :'); ?></h3>
 
-	<p><?php echo util_make_link ('/admin/groupedit.php?group_id='.$row_grp['group_id'],_('[Edit Project Details]')); 
+	<p><?php echo util_make_link ('/admin/groupedit.php?group_id='.$row_grp['group_id'],_('[Edit Project Details]'));
 	echo _(' or ');
 	echo util_make_link ('/project/admin/?group_id='.$row_grp['group_id'],_('[Project Admin]'));
 	echo _(' or ');

@@ -60,7 +60,7 @@ class OauthAuthzRequestToken extends OauthAuthzToken {
   public function getAuthorized() {
   	return $this->authorized;
   }
-  
+
   public function getVerifier()	{
   	return $this->verifier;
   }
@@ -128,11 +128,11 @@ class OauthAuthzRequestToken extends OauthAuthzToken {
   	$this->authorized = 1;
   	$this->verifier = substr(sha1(util_randbytes(32)),-10,12);
   	$this->user_id = $user_id;
-  	$this->role_id = $role_id;   	
+  	$this->role_id = $role_id;
   	$this->save();
   	return $this->verifier;
   }
-  
+
   public function check_verifier($verifier)	{
   	if(!$this->verifier || ($this->verifier!=$verifier))	 {
   		throw new OAuthException("Incorrect OAuth verification code provided.");

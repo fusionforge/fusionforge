@@ -383,12 +383,12 @@ class Layout extends Error {
 		if($end) {
 			$script_name = substr($script_name,0,$end);
 		}
-		
-		// Only activated for /projects, /users or /softwaremap for the moment 
+
+		// Only activated for /projects, /users or /softwaremap for the moment
 		if ($script_name == '/projects' || $script_name == '/users' || $script_name == '/softwaremap') {
 
 			$php_self = getStringFromServer('PHP_SELF');
-			
+
 			// invoke the 'alt_representations' hook to add potential 'alternate' links (useful for Linked Data)
 			// cf. http://www.w3.org/TR/cooluris/#linking
 			$params = array('script_name' => $script_name,
@@ -1414,7 +1414,7 @@ if (isset($params['group']) && $params['group']) {
 		$hookParams['URLS'] = & $subMenuUrl;
 		$hookParams['ATTRS'] = & $subMenuAttr;
 		plugin_hook("softwaremap_links", $hookParams);
-		
+
 		echo $this->subMenu($subMenuTitle, $subMenuUrl, $subMenuAttr);
 	}
 

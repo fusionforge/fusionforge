@@ -300,7 +300,7 @@ class FFDbOAuthDataStore extends OAuthDataStore {
 		if(isset($user_id)||($user_id)) {
 			$t_query = "SELECT * FROM $t_token_table WHERE user_id = $1";
 			$t_result = db_query_params( $t_query, array( (int) $user_id ) );
-			
+
 		}
 		else {
 			$t_query = "SELECT * FROM $t_token_table";

@@ -81,7 +81,7 @@ function local_exit($msg='') {
 	global $atfh;
 	global $ajax;
 	global $error_msg;
-	
+
 	if ($ajax) {
 		echo $error_msg."\n";
 		echo $msg;
@@ -100,7 +100,7 @@ function nrange($col1, $col2, $nb) {
 	}
 	else {
 		$nb = $nb - 1;
-		
+
 		if ($col2 < $col1) {
 			$range[0] = $col1;
 			$range[1] = $col2;
@@ -114,7 +114,7 @@ function nrange($col1, $col2, $nb) {
 			$range[$i] = $range[1] + round(($range[0] - $range[1]) * sqrt(($i - 1) / $nb));
 		}
 		$range[] = array_shift($range);
-		
+
 		if ($col2 < $col1) {
 			$range = array_reverse($range);
 		}
@@ -130,14 +130,14 @@ function color_gradient($colors, $nb_colors) {
 	elseif (count($colors) < 2 || $nb_colors <= 2) {
 		return $colors;
 	}
-	
+
 	$colors[0] = preg_replace('/^#/', '', $colors[0]);
 	$colors[1] = preg_replace('/^#/', '', $colors[1]);
-	
+
 	$colors_start = array_map('hexdec', str_split($colors[0], 2));
 	$colors_end = array_map('hexdec', str_split($colors[1], 2));
 	$format_func = create_function('$val', 'return sprintf("%02s", $val);');
-	
+
 	$colors_comp = array();
 	for($i = 0; $i < 3; $i++) {
 		$colors_comp[] = array_map($format_func,
@@ -146,7 +146,7 @@ function color_gradient($colors, $nb_colors) {
 	for($i = 0; $i < $nb_colors; $i++) {
 		$grad[] = $colors_comp[0][$i].$colors_comp[1][$i].$colors_comp[2][$i];
 	}
-	
+
 	return $grad;
 }
 
@@ -256,7 +256,7 @@ $artifact_type_list = $selected_roadmap->getList();
 if (!$at_arr || count($at_arr) < 1) {
 	local_exit('<p class="information">'._('No trackers have been set up.').'</p>');
 } else {
-	
+
 	foreach ($at_arr as $artifact_type) {
 		if (!is_object($artifact_type)) {
 			//just skip it
@@ -299,7 +299,7 @@ if (!$at_arr || count($at_arr) < 1) {
 						$rel_art_states_colors[$artifact_type_name][$row['status_name']] = 0;
 					}
 				}
-				
+
 				// Set color radiant for custom states graph
 				$nb_colors = count(array_keys($rel_art_states_colors[$artifact_type_name]));
 				if (count($red_green_count) && array_key_exists('1', $red_green_count) && array_key_exists('2', $red_green_count) &&
@@ -316,7 +316,7 @@ if (!$at_arr || count($at_arr) < 1) {
 					$rel_art_states_colors[$artifact_type_name][$state] = '#'.$colors_gradient[$i];
 					$i++;
 				}
-				
+
 				// Set color radiant for open/closed states graph
 				$nb_colors = count(array_keys($rel_states_colors));
 				$colors = array('dd0000', '00dd00');
@@ -362,7 +362,7 @@ if (!$at_arr || count($at_arr) < 1) {
 				if ($selected_release && $release_value != $selected_release) {
 					continue;
 				}
-				
+
 				$custom_status_name = $artifact->getCustomStatusName();
 				$artifact_id = $artifact->getID();
 
@@ -400,7 +400,7 @@ if (!$at_arr || count($at_arr) < 1) {
 			}
 		}
 	}
-	
+
 	if (! $ajax) {
 		$atfh->header(array('title' => _('Roadmap'), 'modal' => 1));
 
@@ -451,7 +451,7 @@ if (!$at_arr || count($at_arr) < 1) {
 	if (empty($release_order)) {
 		echo '<p><strong>'._('No release available').'</strong></p>';
 	}
-	
+
 	for ($i = 0; $i < count($release_order); $i++) {
 		$release_value = $release_order[$i];
 
@@ -584,7 +584,7 @@ if (!$at_arr || count($at_arr) < 1) {
 				jQuery('#roadmap').change(function() {
 					updatePage();
 				});
-				
+
 				jQuery('#nb_release').change(function() {
 					updatePage();
 				});

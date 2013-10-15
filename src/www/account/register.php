@@ -69,7 +69,7 @@ if (getStringFromRequest('submit')) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit('my');
 	}
-	
+
 	$valide = 1;
 	if (forge_get_config('user_registration_accept_conditions') && ! $accept_conditions) {
 		$warning_msg = _("You can't register an account unless you accept the terms of use.");
@@ -78,7 +78,7 @@ if (getStringFromRequest('submit')) {
 	$params['valide'] =& $valide;
 	$params['warning_msg'] =& $warning_msg;
 	plugin_hook('captcha_check', $params);
-	
+
 	if ($valide) {
 		$activate_immediately = getIntFromRequest('activate_immediately');
 		if (($activate_immediately == 1) &&

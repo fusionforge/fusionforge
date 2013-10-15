@@ -197,7 +197,7 @@ echo '
 <p>
 <form action="'.util_make_url('/admin/globalroleedit.php').'" method="post">';
 echo '<input type="hidden" name="role_id" value="'.$role_id.'" />' ;
-		
+
 if ($role instanceof RoleExplicit) {
 	echo '<p><strong>'._('Role Name').'</strong><br /><input type="text" name="role_name" value="'.$role->getName().'"></p>';
 	echo '<input type="checkbox" name="public" value="1"' ;
@@ -251,7 +251,7 @@ echo '<p><input type="submit" name="submit" value="'._('Submit').'" /></p>
 echo '
 <form action="'.util_make_url('/admin/globalroledelete.php').'" method="post">';
 echo '<input type="hidden" name="role_id" value="'.$role_id.'" />';
-		
+
 echo '<p><strong>'._('Delete role').'</strong></p>';
 echo '<p><input type="checkbox" name="sure" value="1"/> '._("Really delete this role?");
 echo '<input type="submit" name="submit" value="'._('Delete role').'" /></p>

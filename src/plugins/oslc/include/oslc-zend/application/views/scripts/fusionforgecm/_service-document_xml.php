@@ -83,7 +83,7 @@ function project_to_service_description($base_url, $project, $tracker) {
 	// Creation Factory.
 	$cfactnode = $doc->createElement("oslc:creationFactory");
 	$cfact = $doc->createElement("oslc:CreationFactory");
-	
+
 	$cfacttitle = $doc->createElement("dcterms:title", "Location for creation of change Requests with a POST HTTP request");
 	$cfactlabel = $doc->createElement("oslc:label", "New Tracker items Creation");
 	$cfactcreation = $doc->createElement("oslc:creation");

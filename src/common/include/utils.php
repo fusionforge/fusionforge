@@ -833,7 +833,7 @@ function util_is_valid_repository_name ($file) {
 
 	if (!empty($invalidchars)) {
 		return false;
-	} 
+	}
 	if (strstr($file,'..')) {
 		return false;
 	}
@@ -1606,8 +1606,8 @@ function util_negociate_alternate_content_types($script, $default_content_type, 
 
 	// we can force the content-type to be returned automatically if necessary
 	if ($forced_content_type) {
-		// TODO ideally, in this case we could try and apply the negociation to see if it matches 
-		// one provided by the hooks, but negotiateMimeType() doesn't allow this so for the moment, 
+		// TODO ideally, in this case we could try and apply the negociation to see if it matches
+		// one provided by the hooks, but negotiateMimeType() doesn't allow this so for the moment,
 		// we just force it whatever the hooks support
 		$content_type = $forced_content_type;
 	} else {
@@ -1623,10 +1623,10 @@ function util_negociate_alternate_content_types($script, $default_content_type, 
 			$accepted_types = array($default_content_type);
 			$new_accepted_types = $hook_params['accepted_types'];
 			$accepted_types = array_merge($accepted_types, $new_accepted_types);
-	
+
 			// PEAR::HTTP (for negotiateMimeType())
 			require_once 'HTTP.php';
-	
+
 			// negociate accepted content-type depending on the preferred ones declared by client
 			$http = new HTTP();
 			$content_type = $http->negotiateMimeType($accepted_types, false);

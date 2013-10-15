@@ -39,42 +39,42 @@ class extsubproj_Widget_SubProjects extends Widget {
 	function getDescription() {
 		return _("Displays links to external subprojects of the project");
 	}
-	
+
 	function getContent() {
 		global $pluginExtSubProj;
 		global $group_id;
 		global $HTML;
-		
+
 		$subProjects = $this->plugin->getSubProjects($group_id);
-		
+
 		$html='';
 		if(is_array($subProjects)) {
 			$tablearr = array(_('Sub projects'),'');
 			$html .= $HTML->listTableTop($tablearr);
-		
+
 			foreach ($subProjects as $url) {
-				
+
 				include_once 'arc/ARC2.php';
 				require_once 'plugins/extsubproj/include/Graphite.php';
-				
+
 				$reader = ARC2::getComponent('Reader');
-				
+
 				$parser = ARC2::getRDFParser();
 
 				$reader->setAcceptHeader('Accept: application/rdf+xml');
 				$parser->setReader($reader);
-				
+
 				//$parser->parse('https://vm2.localdomain/projects/coinsuper/');
 				$parser->parse($url);
-				
+
 				if(! $parser->reader->errors) {
 					//print_r($parser);
 					$triples = $parser->getTriples();
 					//print_r($triples);
 					$turtle = $parser->toTurtle($triples);
 					$datauri = $parser->toDataURI($turtle);
-					
-					
+
+
 					$graph = new Graphite();
 					//$graph->setDebug(1);
 					$graph->ns( "doap", "http://usefulinc.com/ns/doap#" );
@@ -90,14 +90,14 @@ class extsubproj_Widget_SubProjects extends Widget {
 					*/
 					$projname = $url;
 				}
-				
+
 				//@TODO: check plugin compactpreview is installed through the right functions...
 				require_once 'plugins/compactpreview/include/CompactResource.class.php';
 				$params = array('name' => $projname,
 								'url' => $url);
-				
+
 				$cR = new OslcGroupCompactResource($params);
-				
+
  				$html = $html . '
  				<tr>
  					<td>';
@@ -106,10 +106,10 @@ class extsubproj_Widget_SubProjects extends Widget {
 				$html = $html . '</td>
  				</tr>';
 			}
-		
+
 			$html .= $HTML->listTableBottom();
 		}
-		
+
 		return $html;
 	}
 }

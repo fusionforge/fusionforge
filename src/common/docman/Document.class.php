@@ -876,7 +876,7 @@ class Document extends Error {
 			db_rollback();
 			return false;
 		}
-		
+
 		$localDg = new DocumentGroup($this->Group, $doc_group);
 		if (!$localDg->update($localDg->getName(), $localDg->getParentID(), 1)) {
 			$this->setOnUpdateError(_('Error updating document group:').$localDg->getErrorMessage());
@@ -899,13 +899,13 @@ class Document extends Error {
 							$this->Group->getID(),
 							$this->getID())
 						);
- 
+
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setOnUpdateError(db_error());
 				db_rollback();
 				return false;
 			}
- 
+
 			DocumentStorage::instance()->delete($this->getID())->commit();
 			DocumentStorage::instance()->store($this->getID(), $data);
 		}

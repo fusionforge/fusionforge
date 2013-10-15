@@ -68,7 +68,7 @@ class CVSPlugin extends SCMPlugin {
 	}
 
 	function getBlurb () {
-		return '<p>' 
+		return '<p>'
 				. sprintf(_('Documentation for %1$s is available at <a href="%2$s">%2$s</a>.'),
 							'CVS',
 							'http://cvsbook.red-bean.com/')
@@ -251,7 +251,7 @@ class CVSPlugin extends SCMPlugin {
 			system ("mkdir -p $locks_dir") ;
 			system ("chgrp $unix_group $locks_dir") ;
 			system ("chmod 3777 $locks_dir") ;
-			
+
 			if (forge_get_config('use_shell')) {
 				util_create_file_with_contents ("$repo/CVSROOT/config", "SystemAuth=no\nLockDir=$locks_dir\nUseNewInfoFmtStrings=yes\n");
 				if ($project->enableAnonSCM()) {
@@ -409,7 +409,7 @@ class CVSPlugin extends SCMPlugin {
 				} else {
 					continue;
 				}
-				
+
 
 				if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
 						      array ($month_string,

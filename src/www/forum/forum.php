@@ -332,7 +332,7 @@ ORDER BY f.most_recent_date DESC',
 			$title_arr[]=_('Topic Starter');
 			$title_arr[]=_('Replies');
 			$title_arr[]=_('Last Post');
-	
+
 			$ret_val .= $GLOBALS['HTML']->listTableTop ($title_arr);
 			$i=0;
 			while (($row=db_fetch_array($result)) && ($i < $max_rows)) {

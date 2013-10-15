@@ -69,13 +69,13 @@ if (phpCAS::isAuthenticated()) {
 
 			validate_return_to($return_to);
 			session_redirect($return_to);
-			//header ("Location: " . util_make_url($return_to));                                                                                                                                                                                                                    
-			//exit;                                                                                                                                                                                                                                                                 
+			//header ("Location: " . util_make_url($return_to));
+			//exit;
 		} else {
 
 			session_redirect("/my");
-			//header ("Location: " . util_make_url("/my"));                                                                                                                                                                                                                         
-			//exit;                                                                                                                                                                                                                                                                 
+			//header ("Location: " . util_make_url("/my"));
+			//exit;
 		}
 	}
 

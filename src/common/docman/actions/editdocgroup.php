@@ -67,7 +67,7 @@ if ($dg->getState() == 2) {
 		exit_error($dgf->getErrorMessage(), 'docman');
 
 	$trashnested_groups =& $dgf->getNested(2);
-	
+
 	$df->setDocGroupID($dirid);
 	$d_arr =& $df->getDocuments();
 
@@ -78,7 +78,7 @@ if ($dg->getState() == 2) {
 			$trashnested_docs[$doc->getDocGroupID()][] = $doc;
 		}
 	}
-	
+
 	if (is_array($trashnested_groups[$dirid])) {
 		foreach ($trashnested_groups[$dirid] as $ndg) {
 			$localdf = new DocumentFactory($g);

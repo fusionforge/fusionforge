@@ -67,7 +67,7 @@ try {
 			if ($role->getHomeProject()->getID() == $group->getID()) {
 					//print_r('role1 :');
 					$roles[] = $role ;
-			}			
+			}
 		}
 	}
 

@@ -42,10 +42,10 @@ class globaldashboardPlugin extends Plugin {
 		if ($G_SESSION->usesPlugin("globaldashboard")) {
 			$param = '?type=user&id=' . $G_SESSION->getId() . "&pluginname=" . $this->name; // we indicate the part we're calling is the user one
 			echo $HTML->PrintSubMenu (array ($text),
-			array ('/plugins/globaldashboard/index.php' . $param ), array());	
+			array ('/plugins/globaldashboard/index.php' . $param ), array());
 		}
 	}
-	
+
 	function widgets(&$params) {
 		require_once 'common/widget/WidgetLayoutManager.class.php';
 		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_USER) {
@@ -54,7 +54,7 @@ class globaldashboardPlugin extends Plugin {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Process the 'widget_instance' hook to create instances of the widgets
 	 * @param array $params
@@ -66,13 +66,13 @@ class globaldashboardPlugin extends Plugin {
 		if ($params['widget'] == 'plugin_globalDashboard_MyProjects') {
 			require_once $gfplugins.$this->name.'/include/globalDashboard_Widget_MyProjects.php';
 			$params['instance'] = new globalDashboard_Widget_MyProjects(WidgetLayoutManager::OWNER_TYPE_USER, $this);
-		} 
+		}
 		if ($params['widget'] == 'plugin_globalDashboard_MyArtifacts') {
 			require_once $gfplugins.$this->name.'/include/globalDashboard_Widget_MyArtifacts.php';
 			$params['instance'] = new globalDashboard_Widget_MyArtifacts(WidgetLayoutManager::OWNER_TYPE_USER, $this);
 		}
 	}
-	
+
 	// TODO: move this to its corresponding widget.
 	function getMyArtifacts() {
 		return array('Artifact 1', 'Artifact 2');

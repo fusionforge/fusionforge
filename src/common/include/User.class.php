@@ -84,7 +84,7 @@ function &user_get_object_by_name_or_email($user_name, $res = false) {
 	if (is_object($user)) {
 		return $user ;
 	}
-	
+
 	return false;
 }
 

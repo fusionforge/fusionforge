@@ -107,7 +107,7 @@ function createRessourceCollectionRdfView($view){
 	$responseInfo->appendChild($titlenode);
 
 	$root->appendChild($responseInfo);
-	
+
 	$rdfDescription = $doc->createElement("rdf:Description");
 	$rdfDescription->setAttribute("rdf:about", $view->id);
 

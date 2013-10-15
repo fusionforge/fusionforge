@@ -1,6 +1,6 @@
 <?php
 /**
- * FusionForge ADMS.SW plugin - RDF serializable extension of FRSPackage  
+ * FusionForge ADMS.SW plugin - RDF serializable extension of FRSPackage
  *
  * Copyright 2013, Olivier Berger and Institut Mines-Telecom
  *
@@ -44,18 +44,18 @@ function get_rdfed_frs_packages($Group) {
 
 
 class RDFedFRSPackage extends FRSPackage {
-	
+
 	/**
 	 *	newFRSRelease - generates a RDFedFRSRelease, overloading base class' generator
 	 *
-	 *  @param  string	FRS release identifier 
+	 *  @param  string	FRS release identifier
 	 *  @param  array	fetched data from the DB
 	 *	@return	RDFedFRSRelease	new RDFedFRSRelease object.
 	 */
 	protected function newFRSRelease($release_id, $data) {
 		return new RDFedFRSRelease($this,$release_id, $data);
 	}
-	
+
 	/**
 	 *	getUri - constructs the resource URI
 	 *
@@ -64,38 +64,38 @@ class RDFedFRSPackage extends FRSPackage {
 	static function getUri($projectname, $package_name) {
 		return util_make_url ('/frs/'.$projectname.'/'.$package_name);
 	}
-	
+
 	/**
 	 *	saveToGraph - updates a Graphite graph to add the resource's triples
 	 *
 	 *  @param  Graphite	a Graphite graph to be updated
 	 */
 	public function saveToGraph(&$graph) {
-		
+
 		$ns = $graph->ns;
-			
+
 		$conf = array(
 				'ns' => $ns
 		);
-		
+
 		$group = $this->getGroup();
-		
+
 		$projectname = $group->getUnixName();
-			
+
 		$package_name = $this->getFileName();
-			
+
 		$res = ARC2::getResource($conf);
-					
+
 		$res->setURI(RDFedFRSPackage::getUri($projectname, $package_name));
-		
+
 		// We don't type the object, which is only there for information, and does not correspond to any ADMS.SW entity
 		// $res->setRel('rdf:type', 'fusionforge:ReleaseSeries');
 		//rdfutils_setPropToUri($res, 'rdf:type', 'fusionforge:ReleaseSeries');
-			
+
 		$res->setProp('rdfs:label', sprintf( _('%1$s release series of project %2$s'), $package_name, $projectname) );
-		
+
 		$count = $graph->addTriples( ARC2::getTriplesFromIndex($res->index) );
-			
+
 		$frs_releases = $this->getReleases();
 		foreach($frs_releases as $frs_release) {
 			if( $frs_release->getStatus() == 1 ) {

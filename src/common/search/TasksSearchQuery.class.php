@@ -93,7 +93,7 @@ class TasksSearchQuery extends SearchQuery {
 				$qpa = db_construct_qpa ($qpa,
 							 'SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, users.realname, project_group_list.project_name, project_task_idx.vectors FROM project_task, users, project_group_list, project_task_idx WHERE users.user_id = project_task.created_by AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id = $1 ',
 							 array ($this->groupId)) ;
-				
+
 				if ($this->sections != SEARCH__ALL_SECTIONS) {
 					$qpa = db_construct_qpa ($qpa,
 								 'AND project_group_list.group_project_id = ANY ($1) ',

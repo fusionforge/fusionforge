@@ -40,7 +40,7 @@ if (!$u || !is_object($u)) {
 
 $action = getStringFromRequest('action');
 switch ($action) {
-	case "deletesshkey": 
+	case "deletesshkey":
 	case "addsshkey": {
 		include ($gfcommon."account/actions/$action.php");
 		break;
@@ -70,7 +70,7 @@ if (getStringFromRequest('submit')) {
 	$use_ratings = getStringFromRequest('use_ratings');
 	$use_tooltips = getIntFromRequest('use_tooltips');
 
-	
+
 	$check = true;
 	if (!strlen(trim($firstname))) {
 		$error_msg = _('You must supply a first name.');
@@ -79,7 +79,7 @@ if (getStringFromRequest('submit')) {
 		$error_msg = _('You must supply a last name.');
 		$check = false;
 	}
-	
+
 	if ($check) {
 /*
 //needs security audit
@@ -236,7 +236,7 @@ echo $HTML->boxTop(_('Account Maintenance'));
 </td>
 </tr>
 </table>
-<?php 
+<?php
 echo $HTML->boxBottom();
 // ############################# Preferences
 echo $HTML->boxTop(_('Preferences')); ?>

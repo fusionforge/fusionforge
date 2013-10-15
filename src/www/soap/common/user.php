@@ -196,7 +196,7 @@ function &getUsers($session_ser,$user_ids) {
 	return users_to_soap($usrs);
 }
 
-//get active user objects 
+//get active user objects
 function getActiveUsers($session_ser) {
 	continue_session($session_ser);
 	$usrs =& user_get_active_users();

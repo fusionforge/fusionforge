@@ -340,7 +340,7 @@ class ArtifactFactory extends Error {
 			$params[] = $this->status;
 		}
 
-		// Add filter if submitted_by is selected. 
+		// Add filter if submitted_by is selected.
 		if ($this->submitted_by) {
 			if (is_array($this->submitted_by)) {
 				$wheresql .= ' AND submitted_by = ANY ($'.$paramcount++ ;

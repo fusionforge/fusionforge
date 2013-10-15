@@ -134,13 +134,13 @@ class MoinMoinPlugin extends Plugin {
 							 'Junior Developer' => '2',
 							 'Doc Writer' => '2',
 							 'Support Tech' => '1')) ;
-			
+
 		} elseif ($hookname == "role_normalize") {
 			$role =& $params['role'] ;
 			$new_sa =& $params['new_sa'] ;
 			$new_pa =& $params['new_pa'] ;
 
-			$projects = $role->getLinkedProjects() ;		
+			$projects = $role->getLinkedProjects() ;
 			foreach ($projects as $p) {
 				$role->normalizePermsForSection ($new_pa, 'plugin_moinmoin_access', $p->getID()) ;
 			}

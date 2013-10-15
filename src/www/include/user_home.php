@@ -166,7 +166,7 @@ if (forge_get_config('use_ratings')) {
         <?php vote_show_user_rate_box ($user_id, $me?$me->getID():0); ?>
 	</div>
 
-<?php 
+<?php
 		print "<p>";
 		print _('The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both “trusted” and “non-trusted” users.');
 		print "</p>";

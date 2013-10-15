@@ -59,7 +59,7 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			_('Open Date')
 		);
 	}
-	
+
 	function getFilteredRows() {
 		$rowsCount = $this->searchQuery->getRowsCount();
 		$result =& $this->searchQuery->getResult();

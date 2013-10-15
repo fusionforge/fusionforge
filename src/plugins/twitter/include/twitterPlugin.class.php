@@ -32,7 +32,7 @@ class twitterPlugin extends ForgeAuthPlugin {
 		$this->_addHook("usermenu");
 		$this->_addHook("userisactivecheckbox"); // The "use ..." checkbox in user account
 		$this->_addHook("userisactivecheckboxpost"); //
-		
+
 	}
 
 	function usermenu() {
@@ -42,7 +42,7 @@ class twitterPlugin extends ForgeAuthPlugin {
 			echo  $HTML->PrintSubMenu (array ($text), array ('/plugins/twitter/index.php') );
 		}
 	}
-	
+
 }
 
 // Local Variables:

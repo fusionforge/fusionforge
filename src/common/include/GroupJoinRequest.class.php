@@ -232,7 +232,7 @@ class GroupJoinRequest extends Error {
 			);
 			$comments = util_unconvert_htmlspecialchars($this->data_array["comments"]);
 			$body = sprintf(_('%1$s (%2$s) has requested to join your project.'),
-							 $user->getRealName(), $user->getUnixName()); 
+							 $user->getRealName(), $user->getUnixName());
 			$body .= "\n";
 			$body .= sprintf(_('You can approve this request here: %s'),
 							 util_make_url('/project/admin/users.php?group_id='.$this->Group->getId()));

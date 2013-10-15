@@ -7,20 +7,20 @@
  * Copyright (C) 2012 Melvin Carvalho, Akbar Hossain, László Török
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal 
- * in the Software without restriction, including without limitation the rights 
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
- * copies of the Software, and to permit persons to whom the Software is furnished 
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is furnished
  * to do so, subject to the following conditions:
 
- * The above copyright notice and this permission notice shall be included in all 
+ * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
- * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * Everything should be made as simple as possible, but no simpler."
@@ -90,7 +90,7 @@ class Authentication_URL
         $this->parsedURL = $URL_string;
         $this->scheme = isset($URL_map['scheme']) ? $URL_map['scheme'] : 'http';
         $this->host = $URL_map['host'];
-        $this->port = isset($URL_map['port']) ? 
+        $this->port = isset($URL_map['port']) ?
                     (int)$URL_map['port'] : ($this->scheme == 'https') ? 443 : 80;
         $this->path = isset($URL_map['path']) ? $URL_map['path'] : '';
         if (isset($URL_map['query']))
@@ -108,9 +108,9 @@ class Authentication_URL
         }
 
         $this->path .= isset($URL_map['query']) ? "?$URL_map[query]" : '';
-        
+
         isset($URL_map['fragment']) and $this->path .= '#'.$URL_map['fragment'];
-        
+
         return true;
     }
 }
@@ -127,7 +127,7 @@ class Authentication_SignedURL extends Authentication_URL
     public function digitalSignature()
     {
 		$data = $this->getQueryParameter('sig');
-        return base64_decode(str_pad(strtr($data, '-_', '+/'), 
+        return base64_decode(str_pad(strtr($data, '-_', '+/'),
                             strlen($data) % 4, '=', STR_PAD_RIGHT));
     }
     /**
@@ -137,7 +137,7 @@ class Authentication_SignedURL extends Authentication_URL
     public function URLWithoutSignature()
     {
         $sig = $this->getQueryParameter('sig');
-        
+
         $encodedsig=urlencode(isset($sig) ? $sig : NULL);
         $encodedsig='&sig='.$encodedsig;
         $startofsig=strpos($this->parsedURL, $encodedsig);

@@ -44,7 +44,7 @@ if (!$res) {
 }
 
 if (!is_dir(forge_get_config('scm_tarballs_path'))) {
-	mkdir(forge_get_config('scm_tarballs_path'), 0700, true); 
+	mkdir(forge_get_config('scm_tarballs_path'), 0700, true);
 }
 
 while ($data = db_fetch_array ($res)) {

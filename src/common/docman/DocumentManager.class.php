@@ -127,7 +127,7 @@ class DocumentManager extends Error {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * isTrashEmpty - check if the trash is empty
 	 * @return	boolean	success or not

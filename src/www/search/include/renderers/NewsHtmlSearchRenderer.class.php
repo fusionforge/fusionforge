@@ -72,7 +72,7 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		}
 		return $return;
 	}
-	
+
 	/**
 	 * getSections - get the array of possible sections to search in
 	 *

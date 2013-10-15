@@ -48,7 +48,7 @@ class Widget_MyTasks extends Widget {
 
 	$plist = array();
 	while ($r = db_fetch_array($result)) {
-		if (forge_check_perm('project', $r['group_id'], 'read') 
+		if (forge_check_perm('project', $r['group_id'], 'read')
 				&& forge_check_perm('pm', $r['group_project_id'], 'read')) {
 			$plist[] = $r;
 		}

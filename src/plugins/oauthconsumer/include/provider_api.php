@@ -1,7 +1,7 @@
 <?php
 
 class OAuthProvider	{
-	
+
 	protected $id;
 	protected $name;
 	protected $description;
@@ -10,7 +10,7 @@ class OAuthProvider	{
 	protected $request_token_url;
 	protected $authorize_url;
 	protected $access_token_url;
-	
+
 	function __construct($name, $description, $consumer_key, $consumer_secret, $request_token_url, $authorize_url, $access_token_url, $id = 0)	{
 		$this->id = $id;
 		$this->name = $name;
@@ -19,73 +19,73 @@ class OAuthProvider	{
 		$this->consumer_secret = $consumer_secret;
 		$this->request_token_url = $request_token_url;
 		$this->authorize_url = $authorize_url;
-		$this->access_token_url = $access_token_url;		
+		$this->access_token_url = $access_token_url;
 	}
-	
+
 	public function get_id()	{
 		return $this->id;
-	} 
-	
+	}
+
 	protected function set_id($id)	{
 		$this->id = $id;
 	}
-	
+
 	public function get_name() {
 		return $this->name;
 	}
-	
+
 	public function get_description()	{
 		return $this->description;
 	}
-	
+
 	public function get_consumer_key()	{
 		return $this->consumer_key;
 	}
-	
+
 	public function get_consumer_secret()	{
 		return $this->consumer_secret;
 	}
-	
+
 	public function get_request_token_url()	{
 		return $this->request_token_url;
 	}
-	
+
 	public function get_authorize_url()	{
 		return $this->authorize_url;
 	}
-	
+
 	public function get_access_token_url()	{
 		return $this->access_token_url;
 	}
-	
+
 	public function set_name($name) {
 		$this->name = $name;
 	}
-	
+
 	public function set_description($description)	{
 		$this->description = $description;
 	}
-	
+
 	public function set_consumer_key($consumer_key)	{
 		$this->consumer_key = $consumer_key;
 	}
-	
+
 	public function set_consumer_secret($consumer_secret)	{
 		$this->consumer_secret = $consumer_secret;
 	}
-	
+
 	public function set_request_token_url($request_token_url)	{
 		$this->request_token_url = $request_token_url;
 	}
-	
+
 	public function set_authorize_url($authorize_url)	{
 		$this->authorize_url = $authorize_url;
 	}
-	
+
 	public function set_access_token_url($access_token_url)	{
 		$this->access_token_url = $access_token_url;
 	}
-	
+
 	static function convert_row_to_object($row)	{
 		if($row!=null)	{
 			$provider = new OAuthProvider($row['name'], $row['description'], $row['consumer_key'], $row['consumer_secret'], $row['request_token_url'], $row['authorize_url'], $row['access_token_url'], $row['id']);
@@ -94,21 +94,21 @@ class OAuthProvider	{
 			return null;
 		}
 	}
-	
+
 	static function get_provider($id) {
 		$conn = FFOAuthDataStore::singleton();
 		$row = $conn->find_provider_from_id($id);
 		$provider = self::convert_row_to_object($row);
 		return $provider;
 	}
-	
+
 	static function get_provider_by_name($name) {
 		$conn = FFOAuthDataStore::singleton();
 		$row = $conn->find_provider_from_name($name);
 		$provider = self::convert_row_to_object($row);
 		return $provider;
 	}
-	
+
 	static function get_all_oauthproviders()	{
 		$conn = FFOAuthDataStore::singleton();
 		$rows = $conn->find_all_providers();
@@ -119,7 +119,7 @@ class OAuthProvider	{
 		}
 		return $providers;
 	}
-	
+
 	static function check_provider_values($new=TRUE, $name, $description, $consumer_key, $consumer_secret, $request_token_url, $authorize_url, $access_token_url)	{
 		if ((!trim($name))) {
 			return "The field 'Name' is empty! ";
@@ -149,7 +149,7 @@ class OAuthProvider	{
 			return "The field 'Name' can only contain alphabets (a-z,A-Z), numbers (0-9) and underscores (_). Please choose a Name accordingly!";
 		}
 		elseif($new && self::provider_exists($name))	{
-			return "The name '".$name."' has already been taken. Please choose another!";	
+			return "The name '".$name."' has already been taken. Please choose another!";
 		}
 		elseif((trim($request_token_url))&&(!preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $request_token_url)))	{
 			return "The Request Token URL is not valid.";
@@ -164,7 +164,7 @@ class OAuthProvider	{
 			return null;
 		}
 	}
-	
+
 	static function provider_exists($name)	{
 		$conn = FFOAuthDataStore::singleton();
 		$row = $conn->find_provider_from_name($name);
@@ -175,7 +175,7 @@ class OAuthProvider	{
 			return true;
 		}
 	}
-	
+
 	function write_to_db() {
 		if ( strlen(trim( $this->name ))==0 || strlen(trim( $this->description ))==0 || strlen(trim( $this->consumer_key ))==0 || strlen(trim( $this->consumer_secret ))==0 ) {
 			exit_error( "Error trying to add the oauth provider. Please try again.", 'oauthconsumer' );
@@ -186,9 +186,9 @@ class OAuthProvider	{
 			exit_error("Error trying to add new oauth provider to DB", 'oauthconsumer');
 		}else {
 			$this->set_id($id);
-		}	
+		}
 	}
-	
+
 	function delete()	{
 		$conn = FFOAuthDataStore::singleton();
 		$id = $this->get_id();
@@ -200,5 +200,5 @@ class OAuthProvider	{
 			exit_error("Trying to delete non-existent provider from DB", 'oauthconsumer');
 		}
 	}
-	
+
 }

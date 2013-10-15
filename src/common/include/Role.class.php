@@ -304,7 +304,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 			$this->setError(_('Cannot remove a non empty role.'));
 			return false;
 		}
-		
+
 		db_begin();
 		$res=db_query_params('DELETE FROM pfo_user_role WHERE role_id=$1',
 				     array($this->getID())) ;

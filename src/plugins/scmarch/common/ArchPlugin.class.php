@@ -39,7 +39,7 @@ class ArchPlugin extends SCMPlugin {
 	}
 
 	function getBlurb () {
-		return '<p>' 
+		return '<p>'
 				. sprintf(_('Documentation for %1$s is available at <a href="%2$s">%2$s</a>.'),
 							'GNU Arch (“tla”)',
 							'http://www.gnu.org/software/gnu-arch/')

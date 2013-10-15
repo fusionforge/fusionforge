@@ -10,7 +10,7 @@
  * it under the terms of the GNU General Public License as published
  * by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
- * 
+ *
  * FusionForge is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
@@ -81,7 +81,7 @@ class SysAuthLDAPPlugin extends SysAuthPlugin {
 		$result = $s;
 		if (preg_match ('/\b(fromhost:[^,]+)/', $s, $matches)) {
 			$m = preg_replace ('/^fromhost:/','',$matches[0]);
-			
+
 			$r = array();
 			foreach (explode ('.', $m) as $i) {
 				$r[] = 'dc='.$i;
@@ -96,7 +96,7 @@ class SysAuthLDAPPlugin extends SysAuthPlugin {
 	function user_update($params) {
 		if (!forge_get_config('enabled',$this->name)) return true;
 		if (!$this->_connect()) { exit_error("Error connecting to LDAP"); }
-		
+
 		$user = $params['user'];
 
 		if (! $user->isActive()) {
@@ -110,7 +110,7 @@ class SysAuthLDAPPlugin extends SysAuthPlugin {
 			if (@ldap_add($this->ldap_conn,$dn,$entry)) {
 				return true;
 			}
-			
+
 			$this->_create_user_suffix();
 			if (ldap_add($this->ldap_conn,$dn,$entry)) {
 				return true;
@@ -164,12 +164,12 @@ class SysAuthLDAPPlugin extends SysAuthPlugin {
 			if (@ldap_add($this->ldap_conn,$dn,$entry)) {
 				return true;
 			}
-			
+
 			$this->_create_group_suffix();
 			if (ldap_add($this->ldap_conn,$dn,$entry)) {
 				return true;
 			}
-			
+
 			$this->setError("ERROR: cannot add LDAP group entry '".
 					$group->getUnixName()."' ($dn): ".ldap_error($this->ldap_conn));
 			return false;
@@ -177,7 +177,7 @@ class SysAuthLDAPPlugin extends SysAuthPlugin {
 			if (@ldap_modify($this->ldap_conn,$dn,$entry)) {
 				return true;
 			}
-			
+
 			$this->setError("ERROR: cannot modify LDAP group entry '".
 					$group->getUnixName()."' ($dn): ".ldap_error($this->ldap_conn));
 			return false;
@@ -202,12 +202,12 @@ class SysAuthLDAPPlugin extends SysAuthPlugin {
 			if (@ldap_add($this->ldap_conn,$dn,$entry)) {
 				return true;
 			}
-			
+
 			$this->_create_group_suffix();
 			if (ldap_add($this->ldap_conn,$dn,$entry)) {
 				return true;
 			}
-			
+
 			$this->setError("ERROR: cannot add LDAP group entry '".
 					$group->getUnixName()."' ($dn): ".ldap_error($this->ldap_conn));
 			return false;
@@ -215,7 +215,7 @@ class SysAuthLDAPPlugin extends SysAuthPlugin {
 			if (@ldap_modify($this->ldap_conn,$dn,$entry)) {
 				return true;
 			}
-			
+
 			$this->setError("ERROR: cannot modify LDAP group entry '".
 					$group->getUnixName()."' ($dn): ".ldap_error($this->ldap_conn));
 			return false;
@@ -232,7 +232,7 @@ class SysAuthLDAPPlugin extends SysAuthPlugin {
 		if (ldap_delete($this->ldap_conn,$dn)) {
 			return true;
 		}
-		
+
 		$this->setError("ERROR: cannot delete LDAP group entry '".
 				$group->getUnixName()."' ($dn): ".ldap_error($this->ldap_conn));
 		return false;
@@ -302,7 +302,7 @@ class SysAuthLDAPPlugin extends SysAuthPlugin {
 		$entry['shadowLastChange']=1;
 		$entry['shadowMax']=99999;
 		$entry['shadowWarning']=7;
-	
+
 		return $entry;
 	}
 
@@ -350,7 +350,7 @@ class SysAuthLDAPPlugin extends SysAuthPlugin {
 			if ($e[$i]['dn'] == $dn) {
 				return true;
 			}
-		} 
+		}
 		return false;
 	}
 }

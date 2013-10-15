@@ -45,14 +45,14 @@ if($user->getID() != $user_id) {
 $t_account_table = "plugin_globaldashboard_user_forge_account";
 
 $t_query = "INSERT INTO $t_account_table "
-		." ( user_id, " 
+		." ( user_id, "
 		."forge_account_login_name, "
-		."forge_account_password, " 
+		."forge_account_password, "
 		."forge_software, "
 		."forge_account_domain, "
 		."forge_account_uri, "
 		."forge_account_is_foaf, "
-		."forge_oslc_discovery_uri, " 
+		."forge_oslc_discovery_uri, "
 		."forge_account_rss_uri, "
 		."forge_account_soap_wsdl_uri ) "
 		."VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10 )";
@@ -67,7 +67,7 @@ if($result) {
 				."artifacts_discovery_method ) "
 				."VALUES ( $1, $2, $3)";
 	$disc_result = db_query_params($t_disc_query, array(db_insertid($result, $t_account_table, 'account_id'), $projects_discovery, $artifacts_discovery));
-	if($disc_result) {	
+	if($disc_result) {
 		session_redirect( '/plugins/globaldashboard/admin/manage_accounts.php?type=user&id='.$user_id.'&pluginname=globaldashboard&feedback='. urlencode(_('Remote Account successfully created')));
 	} else {
 		session_redirect( '/plugins/globaldashboard/admin/manage_accounts.php?type=user&id='.$user_id.'&pluginname=globaldashboard&error_msg='. urlencode(printf('Remote account created but unable to create remote associated discovery parameters: '.db_error())));

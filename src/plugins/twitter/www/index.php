@@ -35,18 +35,18 @@ if($_GET['list']=="public")	{
 }
 
 $http_method = "get";
-		
+
 $resource = new OAuthResource($resource_url, $twitter_provider->get_id(), $http_method);
 $transaction = new OAuthTransaction($twitter_provider, $twitter_token, $resource);
 $response = $transaction->send_request();
 $response_array = json_decode($response);
 //print_r($response_array[0]->user);
-	
+
 echo '<table cellpadding="10">';
 foreach ($response_array as $tweet)	{
 	echo '<tr><th><img src="'.$tweet->user->profile_image_url.'" alt="twitter"></th>';
 	echo '<td valign="top"><b>'.$tweet->user->name.'</b><br>'.$tweet->text.'</th></tr>';
 }
 echo '</table>';
-	
+
 site_user_footer();

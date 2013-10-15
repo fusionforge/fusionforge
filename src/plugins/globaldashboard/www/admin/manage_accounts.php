@@ -26,7 +26,7 @@ require_once $gfplugins.'globaldashboard/include/globalDashboard_utils.php';
 require_once $gfplugins.'globaldashboard/include/globalDashboardConstants.php';
 require_once $gfplugins.'globaldashboard/common/manage_accounts_db_utils.php';
 
-$user = session_get_user(); // get the user session 
+$user = session_get_user(); // get the user session
 
 if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 	exit_error("Invalid User", "Cannot Process your request for this user.");
@@ -50,10 +50,10 @@ if (!$type) {
 			// if someone else tried to access the private GlobalDashboard part of this user
 			exit_error("Access Denied", "You cannot access other user's personal $pluginname");
 		}
-		// show the header 
+		// show the header
 		globaldashboard_header(array('title'=> _('Global Dashboard Configuration')));
 		globaldashboard_toolbar();
-		
+
 		listStoredRemoteAccounts($user->getID());
 		createNewAccountForm($user->getID());
 	}
@@ -63,17 +63,17 @@ site_project_footer(array());
 /**
 *
 * Displays the list of all stored remote accounts of the user.
-* 
+*
 * @param integer $user_id user id.
 */
 function listStoredRemoteAccounts($user_id) {
 	global $HTML, $feedback;
-	
+
 	//echo 'Here are stored accounts list';
 
-	
+
 	$accounts = getDBStoredRemoteAccountsByUserId($user_id);
-	if (count($accounts) > 0) { 
+	if (count($accounts) > 0) {
 		echo '<p>';
 		echo '<fieldset>';
 		echo '<legend> ' . _('Stored remote accounts') . ' </legend>';
@@ -91,7 +91,7 @@ function listStoredRemoteAccounts($user_id) {
 				<td><a href="'.$account['forge_account_uri'].'">'.$account['forge_account_uri'].'</a>
 				</td>
 				<td><a href="/plugins/globaldashboard/admin/edit_account_page.php?type=user&id='.$user_id.'&pluginname=globaldashboard&action=edit&account_id='.$account['account_id'].'">   '. _("Edit") . '    </a>
-					<a href="/plugins/globaldashboard/admin/delete_account.php?account_id='.$account['account_id'].'&user_id='.$account['user_id'].'">   '. _("Delete") . ' </a> 
+					<a href="/plugins/globaldashboard/admin/delete_account.php?account_id='.$account['account_id'].'&user_id='.$account['user_id'].'">   '. _("Delete") . ' </a>
 				</td>
 				</tr>';
 		}
@@ -110,25 +110,25 @@ function createNewAccountForm($user_id) {
 	echo '<p>
 			<form action="add_account.php" method="POST">';
 	echo '
-			<fieldset>	
-			<legend> '. _('Create a new remote account') . ' </legend>	
+			<fieldset>
+			<legend> '. _('Create a new remote account') . ' </legend>
 			<table>
 				<tr>
 					<td>' . _('User Name') . ': <span class="requiredfield">*</span> </td>
-					<td> 
+					<td>
 						<input type="hidden" value="'. $user_id .'" name="user_id">
-						<input type="text" name="login_name"> 
+						<input type="text" name="login_name">
 					</td>
 				</tr>
 				<tr>
 					<td>' . _('Account password') . ': <span class="requiredfield">*</span> </td>
-					<td>  
+					<td>
 						<input type="password" name="account_password">
 					</td>
 				</tr>
 				<tr>
 					<td>' . _('Remote Forge Software') . ': <span class="requiredfield">*</span> </td>
-					<td>  
+					<td>
 						<select name="forge_software">
 							<option value="'. REMOTE_FORGE_SOFTWARE_FUSIONFORGE .'" selected="selected"> FusionForge </option>
 							<option value="'. REMOTE_FORGE_SOFTWARE_CODENDI .'"> Codendi </option>
@@ -140,7 +140,7 @@ function createNewAccountForm($user_id) {
 				</tr>
 				<tr>
 					<td>' . _('Account domain') . ': <span class="requiredfield">*</span> </td>
-					<td>  
+					<td>
 						<input type="text" size="60" name="account_domain">
 					</td>
 				</tr>
@@ -153,23 +153,23 @@ function createNewAccountForm($user_id) {
 				</tr>
 				<tr>
 					<td>' . _('OSLC Discovery URI') . ': </td>
-					<td> 
+					<td>
 						<input type="text" size="60" name="oslc_uri">
 					</td>
 				</tr>
 				<tr>
 					<td>' . _('RSS Stream URI') . ': </td>
-					<td>  
+					<td>
 						<input type="text" size="60" name="rss_uri">
 					</td>
 				</tr>
 				<tr>
 					<td>' . _('SOAP WSDL URI') . ': </td>
-					<td>  
+					<td>
 						<input type="text" size="60" name="soap_wsdl">
 					</td>
 				</tr>
-			</table>	
+			</table>
 			</fieldset>';
 	echo '
 			<fieldset>
@@ -198,7 +198,7 @@ function createNewAccountForm($user_id) {
 				</tr>
 			</table>
 			</fieldset>';
-	
+
 	echo '	<p style="text-align: center;">
 				<input type="submit" value="submit new account"/>
 			</p>

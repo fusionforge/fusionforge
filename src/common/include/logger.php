@@ -65,19 +65,19 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 						    array ($group_name,
 							   'A',
 							   'H'));
-	
+
 			// store subpage id for analyzing later
 			// This will later be used in the www/projects for instance
 			$subpage  = isset($expl_pathinfo[3]) ? $expl_pathinfo[3] : '';
 			$subpage2 = isset($expl_pathinfo[4]) ? $expl_pathinfo[4] : '';
-			
+
 
 			global $RESTPATH_PROJECTS_GROUP_ID;
 			global $RESTPATH_PROJECTS_PROJECT;
-				
+
 			//set up the group_id
 		   	$group_id=db_result($res_grp,0,'group_id');
-			
+
 			//set up a foundry object for reference all over the place
 			if ($group_id) {
 				$grp = group_get_object($group_id,$res_grp);
@@ -87,14 +87,14 @@ if (isset($group_id) && is_numeric($group_id) && $group_id) {
 					//echo "IS PROJECT: ".$group_id;
 					$log_group=$group_id;
 				}
-				
+
 				// This will later be used in the www/projects for instance
 				$RESTPATH_PROJECTS_PROJECT = $project;
 				$RESTPATH_PROJECTS_GROUP_ID = $group_id;
 
 				global $RESTPATH_PROJECTS_SUBPAGE;
 				$RESTPATH_PROJECTS_SUBPAGE = $subpage;
-				
+
 				global $RESTPATH_PROJECTS_SUBPAGE2;
 				$RESTPATH_PROJECTS_SUBPAGE2 = $subpage2;
 			}

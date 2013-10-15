@@ -447,14 +447,14 @@ class FRSPackage extends Error {
 	/**
 	 *	newFRSRelease - generates a FRSRelease (allows overloading by subclasses)
 	 *
-	 *  @param  string	FRS release identifier 
+	 *  @param  string	FRS release identifier
 	 *  @param  array	fetched data from the DB
 	 *	@return	FRSRelease	new FRSFile object.
 	 */
 	protected function newFRSRelease($release_id, $data) {
 		return new FRSRelease($this,$release_id, $data);
 	}
-	
+
 	/**
 	 *  delete - delete this package and all its related data.
 	 *

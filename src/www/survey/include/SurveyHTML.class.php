@@ -725,7 +725,7 @@ class SurveyHTML extends Error {
 
 		return $ret;
 	}
-	
+
 	function drawGraph($id, $graphType, $legend, $values) {
 		switch($graphType) {
 			case 'pie': {
@@ -771,7 +771,7 @@ class SurveyHTML extends Error {
 					$ret .= 'ticks'.$id.'.push([\''.htmlentities($legend[$i]).'\']);';
 				}
 				$ret .= 'jQuery(document).ready(function(){
-						plot'.$id.' = jQuery.jqplot (\'chart'.$id.'\', data'.$id.', 
+						plot'.$id.' = jQuery.jqplot (\'chart'.$id.'\', data'.$id.',
 						{
 							axesDefaults: {
 								tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer,

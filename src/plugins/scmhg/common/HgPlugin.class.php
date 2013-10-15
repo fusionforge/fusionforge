@@ -74,7 +74,7 @@ class HgPlugin extends SCMPlugin {
 			$b .= '</p>';
 			$b .= '<p>';
 			$b .= '<tt>hg clone '.$protocol.'://'.forge_get_config('anonhg_login', 'scmhg').'@' . $this->getBoxForProject($project) . '/'. 'hg' .'/'. $project->getUnixName() .'/'.'</tt><br />';
-			$b .= _('The password is ').forge_get_config('anonhg_password', 'scmhg').'<br/>';	
+			$b .= _('The password is ').forge_get_config('anonhg_password', 'scmhg').'<br/>';
 
 		} else {
 			$b .= '<p class="warning">'._('Please contact forge administrator, scmhg plugin is not correctly configured');
@@ -200,10 +200,10 @@ class HgPlugin extends SCMPlugin {
 			$unix_group = 'scm_' . $project->getUnixName();
 		}
 		if (forge_get_config('use_dav', 'scmhg')) {
-			$unix_group = forge_get_config('apache_group'); 
+			$unix_group = forge_get_config('apache_group');
 			$unix_user = forge_get_config('apache_user');
 		}
- 
+
 		system("mkdir -p $repo");
 		/** per project configuration for http **/
 		if (forge_get_config('use_dav', 'scmhg')) {
@@ -236,7 +236,7 @@ class HgPlugin extends SCMPlugin {
 			$conf .= "\ndescription = ".$project->getUnixName();
 			$conf .= "\nstyle = paper";
 			$conf .= "\nallow_push = *"; //every user ( see apache configuration) is allowed to push
-			$conf .= "\nallow_read = *"; // every user is allowed to clone and pull 
+			$conf .= "\nallow_read = *"; // every user is allowed to clone and pull
 			fwrite($f, $conf);
 			fclose($f);
 			system("chgrp -R $unix_group $repo");
@@ -415,7 +415,7 @@ class HgPlugin extends SCMPlugin {
 		if (! $project->usesPlugin($this->name)) {
 			return false;
 		}
- 
+
 		if ($params['mode'] == 'day') {
 			db_begin();
 			$year = $params['year'];
@@ -469,11 +469,11 @@ class HgPlugin extends SCMPlugin {
 								break;
 						}
 					} else {
-						$last_user = $this->getUser($line); 
+						$last_user = $this->getUser($line);
 					}
 				}
 				pclose($pipe);
- 
+
 				// inserting group results in stats_cvs_groups
 				if ($updates > 0 || $adds > 0) {
 					if (!db_query_params('INSERT INTO stats_cvs_group (month, day, group_id, checkouts, commits, adds) VALUES ($1, $2, $3, $4, $5, $6)',
@@ -594,9 +594,9 @@ class HgPlugin extends SCMPlugin {
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}
-		
+
 		$project_name = $project->getUnixName();
-		
+
 		$select_repo = '<select name="frontpage">' . "\n";//array($project->getPublicName());
 		$result = db_query_params('SELECT repo_name FROM plugin_scmhg_repos WHERE group_id=$1',
 						array ($params['group_id']));
@@ -611,7 +611,7 @@ class HgPlugin extends SCMPlugin {
 			$select_repo .= '<option value="'.$data['repo_name'].'">'.$data['repo_name'].'</option>' . "\n";
 		}
 		$select_repo .= '</select>' . "\n";
-		
+
 		session_require_perm('project_admin', $params['group_id']);
 
 		$adminheadertitle = sprintf(_('Create SCM repository for project %1$s'), $project_name);

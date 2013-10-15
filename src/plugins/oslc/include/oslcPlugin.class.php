@@ -161,15 +161,15 @@ class oslcPlugin extends Plugin {
 			if (! isset($params['prefixes']['oslc'])) {
 				$params['prefixes']['oslc'] = 'http://open-services.net/ns/core#';
 			}
-			
+
 			$serviceprovider = util_make_url ("/plugins/oslc/cm/oslc-cm-services/".$group_id);
 
 			$res = $params['in_Resource'];
 
 			rdfutils_setPropToUri($res, 'oslc:serviceProvider', $serviceprovider);
-            
+
 			$params['out_Resources'][] = $res;
-			
+
 		}
 		elseif ($hookname == "blahblahblah") {
 			// ...

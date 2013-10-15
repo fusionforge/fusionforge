@@ -92,7 +92,7 @@ switch ($type) {
 				// do nothing, see getGlobalAdminView() below
 				break;
 			}
-				
+
 		}
 		$pluginExtSubProj->getHeader('globaladmin');
 		$pluginExtSubProj->getGlobalAdminView();

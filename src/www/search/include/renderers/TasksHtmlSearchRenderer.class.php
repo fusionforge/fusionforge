@@ -93,7 +93,7 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$return = '';
 		$rowColor = 0;
 		$lastProjectName = null;
-		
+
 		foreach ($fd as $row) {
 			//section changed
 			$currentProjectName = $row['project_name'];

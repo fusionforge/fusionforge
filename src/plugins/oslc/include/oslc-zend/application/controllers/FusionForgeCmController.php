@@ -106,7 +106,7 @@ class FusionForgeCmController extends CmController {
                 $atomContextSpec = array(
 					 'suffix'        => 'atom',
 					 );
-                if (! $contextSwitch->hasContext('atom')) {     
+                if (! $contextSwitch->hasContext('atom')) {
 		  $contextSwitch->addContext('atom', $atomContextSpec);
 		}
 
@@ -595,23 +595,23 @@ class FusionForgeCmController extends CmController {
 
 		// do authentication.
 		if (isset($params['oauth_signature']) && isset($params['oauth_token']) && isset($params['oauth_consumer_key']) &&
-			isset($params['oauth_signature_method']) && isset($params['oauth_timestamp']) && 
+			isset($params['oauth_signature_method']) && isset($params['oauth_timestamp']) &&
 			isset($params['oauth_nonce'])){
-				
-			$oauth_auth_header = 'OAuth oauth_signature="' . rawurlencode(substr($params['oauth_signature'],1,-1)) 
+
+			$oauth_auth_header = 'OAuth oauth_signature="' . rawurlencode(substr($params['oauth_signature'],1,-1))
 			. '",oauth_token="'.$params['oauth_token']
 			. '",oauth_consumer_key="' . $params['oauth_consumer_key']
 			. '",oauth_version="' . $params['oauth_version']
 			. '",oauth_signature_method="' . $params['oauth_signature_method']
 			. '",oauth_timestamp="' . $params['oauth_timestamp']
 			. '",oauth_nonce="' . $params['oauth_nonce'].'"';
-			
+
 			$this->view->oauth_auth_header = $oauth_auth_header;
 
 			if(session_loggedin()) {
 				$auth_timestamp = time();
 			}
-		
+
 			if(isset($params['build_url'])) {
 				$this->view->build_url = $params['build_url'];
 			}

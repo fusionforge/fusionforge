@@ -144,7 +144,7 @@ if (db_numrows($res) >= 1) {
 		echo "<h3>".stripslashes ($row['label_name'])."</h3>" ;
 		echo "<br />" . _('This label currently looks like this:') ." ";
 		echo $row['label_text'] . "<br />" ;
-		
+
 		$res2 = db_query_params ('SELECT groups.unix_group_name, groups.group_name, groups.group_id FROM groups, plugin_projectlabels_group_labels
                  WHERE plugin_projectlabels_group_labels.group_id = groups.group_id
                  AND plugin_projectlabels_group_labels.label_id=$1

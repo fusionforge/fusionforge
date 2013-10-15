@@ -126,7 +126,7 @@ if ( $num_packages < 1) {
 	for ( $p = 0; $p < $num_packages; $p++ ) {
 
 		$package_id = db_result($res_package, $p, 'package_id');
-		
+
 		$frsPackage = new FRSPackage($cur_group, $package_id);
 
 		$package_name = db_result($res_package, $p, 'name');
@@ -171,7 +171,7 @@ if ( $num_packages < 1) {
                 $package_release = db_fetch_array( $res_release );
 
                 $package_release_id = $package_release['release_id'];
-                
+
                 // Switch whether release_id exists and/or release_id is current one
                 if ( ! $release_id || $release_id==$package_release_id ) {
                     // no release_id OR release_id is current one

@@ -733,7 +733,7 @@ function &addProjectMessage($session_ser,$group_id,$group_project_id,$project_ta
 //
 function addSubproject($session_ser,$group_id,$group_project_id,$project_name,$description,$_public,$send_all_posts_to) {
 	continue_session($session_ser);
-	
+
 	$g = group_get_object($group_id);
 	$pg = new ProjectGroup($g,$group_project_id);
 
@@ -749,7 +749,7 @@ function addSubproject($session_ser,$group_id,$group_project_id,$project_name,$d
 //
 function updateSubproject($session_ser,$group_id,$group_project_id,$project_name,$description,$send_all_posts_to) {
 	continue_session($session_ser);
-	
+
 	$g = group_get_object($group_id);
 	$pg = new ProjectGroup($g,$group_project_id);
 
@@ -765,7 +765,7 @@ function updateSubproject($session_ser,$group_id,$group_project_id,$project_name
 //
 function deleteSubproject($session_ser,$group_id,$group_project_id) {
 	continue_session($session_ser);
-	
+
 	$g = group_get_object($group_id);
 	$pg = new ProjectGroup($g,$group_project_id);
 

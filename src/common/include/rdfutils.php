@@ -24,9 +24,9 @@ require_once 'arc/ARC2.php';
 
 /**
  * rdfutils_setPropToUri() - Add a relation (a link to a URI) to an ARC2_Resource
- * 
+ *
  * example : rdfutils_setPropToUri($res, 'rdf:type', 'doap:Project');
- * 
+ *
  * @param	ARC2_Resource	$res
  * @param	string	$prop
  * @param	string	$value

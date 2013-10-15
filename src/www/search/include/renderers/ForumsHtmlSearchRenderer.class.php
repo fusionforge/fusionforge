@@ -87,7 +87,7 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$return = '';
 		$rowColor = 0;
 		$lastForumName = null;
-		
+
 		foreach ($fd as $row) {
 			//section changed
 			$currentForumName = $row['forum_name'];
@@ -100,7 +100,7 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 						. '<td width="5%"></td>'
 						. '<td><a href="'.util_make_url ('/forum/message.php?msg_id='. $row['msg_id']).'">'
 							. html_image('ic/msg.png', '10', '12').' '.$row['subject']
-							.'</a></td>'			
+							.'</a></td>'
 						. '<td width="15%">'.$row['realname'].'</td>'
 						. '<td width="15%">'.relative_date($row['post_date']).'</td></tr>';
 			$rowColor ++;

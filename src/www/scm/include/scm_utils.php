@@ -96,7 +96,7 @@ function commitstime_graph($group_id, $chartid) {
 		if (!$firstDateInDB)
 			$firstDateInDB = $row[0];
 	}
-	
+
 	$start = $g->getStartDate();
 	$monthsArr[] = date('Ym', $start);
 	if ( $firstDateInDB < $monthsArr[0] ) {

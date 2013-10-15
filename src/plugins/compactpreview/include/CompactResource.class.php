@@ -79,7 +79,7 @@ class UserCompactResource extends CompactResource {
 	protected function getCssClass() {
 		// TBD
 	}
-	
+
 	public function getResourceLink() {
 		$username = $this->params['username'];
 		$user_id = $this->params['user_id'];
@@ -97,7 +97,7 @@ class UserCompactResource extends CompactResource {
         //$url = '<a class="resourcePopupTrigger" href="'. $resource_url .
         //				'" rel="'. $resource_url .'">'. $username . '</a>';
 		$css_class = $this->getCssClass();
-		
+
         $url = '<a class="'. $css_class .
         		'" href="'. $resource_url .'">'. $username .'</a>';
         if ($logo_params['content']) {
@@ -130,7 +130,7 @@ class OslcUserCompactResource extends UserCompactResource {
  *
  */
 class GroupCompactResource extends CompactResource {
-	
+
 	protected function getCssClass() {
 	// TBD
 	}

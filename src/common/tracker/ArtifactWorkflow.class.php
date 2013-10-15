@@ -66,9 +66,9 @@ class ArtifactWorkflow extends Error {
 					$rids[] = $role->getID() ;
 				}
 			}
-			
-			$res = db_query_params ('SELECT event_id 
-					FROM artifact_workflow_roles 
+
+			$res = db_query_params ('SELECT event_id
+					FROM artifact_workflow_roles
 					WHERE event_id=$1
 					AND role_id=ANY($2)',
 						array ($event_id,

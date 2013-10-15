@@ -72,7 +72,7 @@ class BzrPlugin extends SCMPlugin {
 	}
 
 	function getBlurb () {
-		return '<p>' 
+		return '<p>'
 				. sprintf(_('Documentation for %1$s is available at <a href="%2$s">%2$s</a>.'),
 							'Bazaar (“bzr”)',
 							'http://bazaar-vcs.org/Documentation')
@@ -207,7 +207,7 @@ class BzrPlugin extends SCMPlugin {
 			system ("mv $tmp_repo/.bzr $repo/.bzr");
 			rmdir ($tmp_repo);
 		}
-			
+
 		if ($project->enableAnonSCM()) {
 			system ("chmod o+rX-w $repo") ;
 		} else {
@@ -219,7 +219,7 @@ class BzrPlugin extends SCMPlugin {
                 $groups = $this->getGroups () ;
 
 		$dir = forge_get_config('data_path').'/plugins/scmbzr/public-repositories' ;
-		
+
 		if (!is_dir($dir)) {
 			mkdir ($dir, 0644, true);
 		}

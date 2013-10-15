@@ -24,7 +24,7 @@ require_once '../../env.inc.php';
 require_once $gfwww.'include/pre.php';
 require_once $gfplugins.'globaldashboard/include/globalDashboard_utils.php';
 
-$user = session_get_user(); // get the user session 
+$user = session_get_user(); // get the user session
 
 if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 	exit_error("Invalid User", "Cannot Process your request for this user.");
@@ -48,10 +48,10 @@ if (!$type) {
 			// if someone else tried to access the private GlobalDashboard part of this user
 			exit_error("Access Denied", "You cannot access other user's personal $pluginname");
 		}
-		// show the header 
+		// show the header
 		globaldashboard_header(array('title'=> _('Global Dashboard Help')));
 		globaldashboard_toolbar();
-		
+
 		echo '<p> This is Help section. @TODO: include few tips on how to use and config the plugin. </p>';
 	}
 }

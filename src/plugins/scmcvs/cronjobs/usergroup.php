@@ -263,7 +263,7 @@ foreach ($groups as $g) {
 	$unix_gid = $g->getID() + 50000;	// 50000: hardcoded value (for now).
 
 	$line = "scm_".$group_name.":x:".$unix_gid.":";
-	
+
 	/* we need to get the project object to check if a project
 	 * has a private CVS repository - in which case we need to add
 	 * the apache user to the group so that ViewCVS can be used

@@ -81,7 +81,7 @@ class GitPlugin extends SCMPlugin {
 	}
 
 	function getBlurb() {
-		return '<p>' 
+		return '<p>'
 				. sprintf(_('Documentation for %1$s is available at <a href="%2$s">%2$s</a>.'),
 							'Git',
 							'http://git-scm.com/')
@@ -98,24 +98,24 @@ class GitPlugin extends SCMPlugin {
 		for ($i=0; $i<$rows; $i++) {
 			$repo_list[] = db_result($result,$i,'repo_name');
 		}
-		
+
 		$b = '<h2>' . ngettext('Anonymous Access to the Git repository',
 				       'Anonymous Access to the Git repositories',
 				       count($repo_list)) . '</h2>';
-		
+
 		$b .= '<p>';
 		$b .= ngettext('This project\'s Git repository can be checked out through anonymous access with the following command.',
 			       'This project\'s Git repositories can be checked out through anonymous access with the following commands.',
 			       count($repo_list));
-		
+
 		$b .= '</p>';
-		
+
 		foreach ($repo_list as $repo_name) {
 			$b .= '<p>' ;
 			$b .= '<tt>git clone '.util_make_url ('/anonscm/git/'.$project->getUnixName().'/'.$repo_name.'.git').'</tt><br />';
 			$b .= '</p>';
 		}
-		
+
 		$result = db_query_params('SELECT u.user_id, u.user_name, u.realname FROM scm_personal_repos p, users u WHERE p.group_id=$1 AND u.user_id=p.user_id AND u.unix_status=$2 AND plugin_id=$3',
 					   array ($project->getID(),
 						  'A',
@@ -148,7 +148,7 @@ class GitPlugin extends SCMPlugin {
 
 	function getInstructionsForRW($project) {
 		$repo_list = array($project->getUnixName());
-		
+
 		$result = db_query_params ('SELECT repo_name FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
 					   array ($project->getID(),
 						  SCM_EXTRA_REPO_ACTION_UPDATE,
@@ -157,7 +157,7 @@ class GitPlugin extends SCMPlugin {
 		for ($i=0; $i<$rows; $i++) {
 			$repo_list[] = db_result($result,$i,'repo_name');
 		}
-		
+
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid());
 			$d = $u->getUnixName();
@@ -180,7 +180,7 @@ class GitPlugin extends SCMPlugin {
 				}
 
 				$validSetup = 1;
-			} 
+			}
 			if (forge_get_config('use_dav', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 				$b .= '<h2>';
@@ -223,7 +223,7 @@ class GitPlugin extends SCMPlugin {
 					$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>' ;
 				}
 
-			} 
+			}
 			if (forge_get_config('use_dav', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 				$b = '<h2>';
@@ -569,7 +569,7 @@ class GitPlugin extends SCMPlugin {
 			system ("mkdir -p $root/users") ;
 			$user_name = db_result($result,$i,'user_name');
 			$repodir = $root . '/users/' .  $user_name . '.git' ;
-			
+
 			if (!is_dir($repodir) && mkdir ($repodir, 0700)) {
 				chown ($repodir, $user_name) ;
 
@@ -1063,11 +1063,11 @@ class GitPlugin extends SCMPlugin {
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}
-		
+
 		session_require_perm('project_admin', $params['group_id']);
 
 		$project_name = $project->getUnixName();
-		
+
 		$select_repo = '<select name="frontpage">' . "\n";
 		$result = db_query_params('SELECT repo_name, description, clone_url FROM scm_secondary_repos WHERE group_id=$1 AND next_action = $2 AND plugin_id=$3 ORDER BY repo_name',
 					  array ($params['group_id'],
@@ -1079,8 +1079,8 @@ class GitPlugin extends SCMPlugin {
 		}
 		$existing_repos = array();
 		while($data = db_fetch_array($result)) {
-			$existing_repos[] = array('repo_name' => $data['repo_name'], 
-						  'description' => $data['description'], 
+			$existing_repos[] = array('repo_name' => $data['repo_name'],
+						  'description' => $data['description'],
 						  'clone_url' => $data['clone_url']);
 		}
 		if (count($existing_repos) == 0) {
@@ -1101,14 +1101,14 @@ class GitPlugin extends SCMPlugin {
 <input type="hidden" name="repo_name" value="<?php echo $repo['repo_name']?>" />
 <input type="submit" name="submit" value="<?php echo _('Delete') ?>" />
 </form>
-<?php				
+<?php
 				print "</td></tr>\n";
 			}
 			print '</tbody></table>';
 		}
-			
+
 		printf('<h2>'._('Create new Git repository for project %1$s').'</h2>', $project_name);
-		
+
 		?>
 <form name="form_create_repo"
 	action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">

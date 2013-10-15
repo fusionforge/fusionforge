@@ -63,7 +63,7 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 
 if ($survey_id) {
     $s = new Survey($g, $survey_id);
-		
+
     /* Get questions of this survey */
     $questions = & $s->getQuestionInstances();
     foreach ($questions as $cur_question){
@@ -108,11 +108,11 @@ if ($survey_id) {
 		    header('Content-type: text/csv');
 		    list($year, $month) = explode('-', date('Y-m'));
 		    header('Content-disposition: filename="survey-'.$year.'-'.$month.'.csv"');
-	
+
 		    foreach ($header as $id=>$col){
 				echo '"'.fix4csv($col).'";';
 		    }
-	
+
 		    foreach ($s2 as $k=>$val){
 				echo "\n";
 			    	foreach ($header as $id=>$col){

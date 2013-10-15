@@ -43,12 +43,12 @@ try {
 	$req = OAuthRequest::from_request();
 	//print_r($req->get_parameters());
 	$verifier = $req->get_parameter('oauth_verifier');
-	
+
 	$request_token_key = $req->get_parameter('oauth_token');
 	$request_token = OauthAuthzRequestToken::load_by_key($request_token_key);
 	//make sure the verification code received in the request is the same as was sent when authorizing the request token
-	$request_token->check_verifier($verifier);	
-	
+	$request_token->check_verifier($verifier);
+
 	$token = $oauthprovider_server->fetch_access_token($req);
 
 	// the default print method is exactly what must be returned

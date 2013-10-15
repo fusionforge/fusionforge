@@ -47,13 +47,13 @@ if (getStringFromRequest('sig') != '') {
 
 	// First, verify that we indeed got invoked back as a callback of the IdP delegated auth
 	if ( $plugin->justBeenAuthenticatedByIdP() ) {
-		
+
 		// We can then trust the webid set by WebIDDelegatedAuth lib
 		$webid_identity = $plugin->getCurrentWebID();
 
 		// Now, if we went back to the IdP in order to confirm a pending binding, it's time to bind it
 		if ( $plugin->isStoredPendingWebID($u->getID(), $webid_identity) ) {
-			
+
 			$error_msg = $plugin->bindStoredWebID($u->getID(), $webid_identity);
 			if ($error_msg) {
 				$webid_identity = 'http://';
@@ -62,7 +62,7 @@ if (getStringFromRequest('sig') != '') {
 			}
 		}
 		else {
-			// or it's the first time we went to the IdP, and we wait until the confirmation of the binding to really use it 
+			// or it's the first time we went to the IdP, and we wait until the confirmation of the binding to really use it
 			$error_msg = $plugin->addStoredPendingWebID($u->getID(), $webid_identity);
 			if ($error_msg) {
 				$webid_identity = 'http://';
@@ -70,14 +70,14 @@ if (getStringFromRequest('sig') != '') {
 				$feedback = _('The IdP has confirmed that you own a WebID. Please confirm you want to bind it to your account.');
 			}
 		}
-	} 
+	}
 }
 
 // If called to remove an identity
 if (getStringFromRequest('delete') != '') {
-	
+
 	$error_msg = $plugin->removeStoredWebID($u->getID(), $webid_identity);
-	
+
 	if (!$error_msg) {
 		$feedback = _('Identity successfully deleted');
 		$webid_identity = 'http://';
@@ -94,13 +94,13 @@ echo $HTML->boxTop(_('My WebID identities'));
 ?>
 	<h2><?php echo _('Bind a new WebID'); ?></h2>
 
-		<p><?php 
-		
-			echo _('You can add your own WebID identities in the form below.') . '<br />'; 
+		<p><?php
+
+			echo _('You can add your own WebID identities in the form below.') . '<br />';
 			echo _('Once you have confirmed their binding to your fusionforge account, you may use them to login.') ?></p>
 
 		<?php
-		// display a table of WebIDs pending binding 
+		// display a table of WebIDs pending binding
 		$pendingwebids = $plugin->getStoredPendingWebIDs($u->getID());
 		if( count($pendingwebids) ) {
 			echo $HTML->listTableTop(array(_('Already pending WebIDs you could bind to your account'), ''));
@@ -117,23 +117,23 @@ echo $HTML->boxTop(_('My WebID identities'));
 			echo $HTML->listTableBottom();
 		}
 		?>
-		<!-- This form isn't one any more actually, but decorations is nice like this -->		
+		<!-- This form isn't one any more actually, but decorations is nice like this -->
 		<form name="new_identity" action="<?php echo util_make_uri ('/plugins/authwebid/'); ?>" method="post">
 			<fieldset>
 				<legend><?php echo _('Bind a new WebID'); ?></legend>
 				<p>
-					<?php 
+					<?php
 						echo '</p><p>';
 						// redirect link to the IdP
 						// This might as well confirm binding just as if using the Confirm link, if user has only one WebID recognized by the IdP
-						echo '<b>'. $plugin->displayAuthentifyViaIdPLink( util_make_url('/plugins/authwebid/index.php'), 
-																		sprintf( _('Click here to initiate the addition of a new WebID validated via %s'), 
+						echo '<b>'. $plugin->displayAuthentifyViaIdPLink( util_make_url('/plugins/authwebid/index.php'),
+																		sprintf( _('Click here to initiate the addition of a new WebID validated via %s'),
 																				 $plugin->delegate_webid_auth_to)) . '</b>';
 				?>
 				</p>
 			</fieldset>
 		</form>
-		
+
 		<h2><?php echo _('My WebIDs'); ?></h2>
 
 		<?php
@@ -146,7 +146,7 @@ echo $HTML->boxTop(_('My WebID identities'));
 		if(count($boundwebids)) {
 			echo $HTML->listTableTop(array(_('WebIDs already bound to your account, which you can use to login'), ''));
 			$i = 0;
-		
+
 			foreach($boundwebids as $webid_identity) {
 				echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
 				echo '<td>'. $webid_identity .'</td>';
@@ -154,14 +154,14 @@ echo $HTML->boxTop(_('My WebID identities'));
 				echo '</tr>';
 				$i++;
 			}
-		
+
 			echo $HTML->listTableBottom();
 		}
 		else {
 			echo '<p>'. _("You haven't yet bound any WebID to your account") . '</p>';
 		}
-		
-		
+
+
 		echo $HTML->boxBottom();
 
 site_user_footer(array());

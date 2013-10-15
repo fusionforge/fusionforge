@@ -33,11 +33,11 @@ require_once 'WebIDDelegatedAuth/lib/Authentication.php';
  *
  */
 class AuthWebIDPlugin extends ForgeAuthPlugin {
-	
+
 	var $delegatedAuthentifier;
-	
+
 	var $delegate_webid_auth_to;
-	
+
 	var $idp_delegation_link;
 
 	var $webid_identity;
@@ -64,7 +64,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		$this->webid_identity = FALSE;
 
 		$this->declareConfigVars();
-		
+
 		// The IdP to use is configured in the .ini file
 		$this->delegate_webid_auth_to = forge_get_config ('delegate_webid_auth_to', $this->name);
 		$this->idp_delegation_link = forge_get_config('idp_delegation_link', $this->name);
@@ -80,7 +80,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 	function displayAuthentifyViaIdPLink($callback, $message = FALSE) {
 		if (!$message) {
 			$message = sprintf( _('Click here to delegate authentication of your WebID to %s'), $this->delegate_webid_auth_to);
-		} 
+		}
 		$html = '<a href="' . $this->idp_delegation_link . '?authreqissuer='. $callback .'">';
 		$html .=  $message .'</a>';
 		return $html;
@@ -187,7 +187,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 			return FALSE;
 		}
 	}
-	
+
 	/**
 	 * Load WebIDs already bound to an account (not the pending ones)
 	 * @param string $user_id
@@ -199,7 +199,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 				array($user_id));
 		if($res) {
 			$i = 0;
-		
+
 			while ($row = db_fetch_array($res)) {
 				$webid_identity = 	$row['webid_identity'];
 				// filter out the pending ones, prefixes by 'pending:'
@@ -210,7 +210,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		}
 		return $boundwebids;
 	}
-	
+
 	/**
 	 * Check if a WebID is pending confirmation of binding for a user
 	 * @param string $user_id
@@ -234,7 +234,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 			return FALSE;
 		}
 	}
-	
+
 	/**
 	 * Load WebIDs already stored, but pending confirmation by a user
 	 * @param string $user_id
@@ -246,7 +246,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 				array($user_id));
 		if($res) {
 			$i = 0;
-		
+
 			while ($row = db_fetch_array($res)) {
 				$webid_identity = $row['webid_identity'];
 				// return them as plain WebIDs without the 'pending:' prefix
@@ -257,7 +257,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		}
 		return $pendingwebids;
 	}
-	
+
 	/**
 	 * Convert a WebID pending binding to a bound one
 	 * @param string $user_id
@@ -274,7 +274,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		}
 		return $error_msg;
 	}
-	
+
 	/**
 	 * Store a WebID as pending binding to an account
 	 * @param string $user_id
@@ -302,7 +302,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		}
 		return $error_msg;
 	}
-	
+
 	/**
 	 * Remove a WebID (possibly pending) from the table
 	 * @param string $user_id
@@ -318,13 +318,13 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		}
 		return $error_msg;
 	}
-	
+
 	/**
 	 * Check if we just got invoked back as a callback by the IdP which validated a WebID
 	 * @return boolean
 	 */
 	public function justBeenAuthenticatedByIdP() {
-		
+
 		// We should trust lib WebIDDelegatedAuth unless the admin wants to play by customizing by doing something like the commented code below
 		/*
 		// initialize the WebID lib handler which will read the posted args
@@ -339,18 +339,18 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 				aQIDAQAB
 				-----END PUBLIC KEY-----
 				");
-				
+
 		//$certRepository = new Authentication_X509CertRepo($IDPCertificates);
 		*/
-		
+
 		// We don't rely on the PHP session, as we're in FusionForge
 		$create_session = FALSE;
 		//$this->delegatedAuthentifier = new Authentication_Delegated($create_session, NULL, NULL, $certRepository);
 		$this->delegatedAuthentifier = new Authentication_Delegated($create_session);
-		
+
 		return $this->delegatedAuthentifier->isAuthenticated();
 	}
-	
+
 	/**
 	 * Return current WebID if the delegated Auth has proceeded
 	 * @return string
@@ -362,7 +362,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		}
 		return $webid;
 	}
-	
+
 	protected function declareConfigVars() {
 		parent::declareConfigVars();
 
@@ -373,14 +373,14 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		// Change vs default
 		forge_define_config_item ('sufficient', $this->name, 'no');
 		forge_set_config_item_bool ('sufficient', $this->name) ;
-		
+
 		// Default delegated WebID IdP to use
 		forge_define_config_item ('delegate_webid_auth_to', $this->name, 'auth.my-profile.eu');
-		
-		//URL of the delegated auth on the IdP which accepts a ?authreqissuer=callback invocation 
+
+		//URL of the delegated auth on the IdP which accepts a ?authreqissuer=callback invocation
 		// for ex, for : https://auth.my-profile.eu/auth/?authreqissuer=http://fusionforge.example.com/callback.php :
 		forge_define_config_item ('idp_delegation_link', $this->name, 'https://auth.my-profile.eu/auth/');
-		
+
 	}
 
 	/**

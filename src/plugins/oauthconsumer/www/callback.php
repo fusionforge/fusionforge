@@ -12,7 +12,7 @@ if(!$verifier || !$token)	{
 }
 ?>
 <form action="callback.php" method="post">
-	<?php 
+	<?php
 	echo '<input type="hidden" name="oauth_verifier" value="'.$verifier.'"/>';
 	echo '<input type="hidden" name="oauth_token" value="'.$token.'"/>';
 	echo '<input type="hidden" name="provider_id" value="'.$_COOKIE['PROVIDER'].'"/>';
@@ -20,7 +20,7 @@ if(!$verifier || !$token)	{
 	<br>
 	<input type="submit" value="<?php echo _('Go') ?>" />
 </form>
-<?php 
+<?php
 $f_provider_id = getStringFromPost('provider_id');
 
 if($f_provider_id)	{
@@ -31,24 +31,24 @@ if($f_provider_id)	{
 	$request_token_url = $provider->get_request_token_url();
 	$authorize_url = $provider->get_authorize_url();
 	$access_token_url = $provider->get_access_token_url();
-		
+
 	$parameters = array("oauth_verifier"=>$verifier, "oauth_token"=>$token);
-	
+
 	$ff_consumer = new OAuthConsumer($consumer_key, $consumer_secret);
 	$oauth_request_token = new OAuthToken($_COOKIE['OAUTH_TOKEN'], $_COOKIE['OAUTH_TOKEN_SECRET']);
 	setcookie('OAUTH_TOKEN', '', time()-3600);
 	setcookie('OAUTH_TOKEN_SECRET', '', time()-3600);
-	
+
 	$ff_request2 = OAuthRequest::from_consumer_and_token($ff_consumer, false, "GET", $access_token_url, $parameters);
 	$hmac = new OAuthSignatureMethod_HMAC_SHA1();
 	$ff_request2->sign_request($hmac, $ff_consumer, $oauth_request_token);
-	
+
 	//sending request with curl
 	$curl = curl_init();
-	
+
 	curl_setopt($curl, CURLOPT_URL, $ff_request2->to_url());
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-	
+
 	//temporary workaround for untrusted security certificates
 	$not_verify_ssl = $_COOKIE['NOT_VERIFY_SSL']?$_COOKIE['NOT_VERIFY_SSL']:0;
 	if($not_verify_ssl)	{
@@ -56,10 +56,10 @@ if($f_provider_id)	{
 		curl_setopt ($curl, CURLOPT_SSL_VERIFYPEER, 0);
 	}
 	setcookie('NOT_VERIFY_SSL', '', time()-3600);
-	
+
 	$access_token_string = curl_exec ($curl);
 	curl_close ($curl);
-	
+
 	parse_str($access_token_string, $access_token_array);
 	$userid = session_get_user()->getID();
 	if(!$access_token_array['oauth_token'] || !$access_token_array['oauth_token_secret'])	{
@@ -67,7 +67,7 @@ if($f_provider_id)	{
 	}
 	$new_access_token = new OAuthAccessToken($f_provider_id, $access_token_array['oauth_token'], $access_token_array['oauth_token_secret'], $userid);
 	$new_access_token->write_to_db();
-	
+
 	echo _("New access token received and saved!") . "<br />";
 	echo _("Access Token Key : ".$access_token_array['oauth_token']) . "<br />";
 	echo _("Access Token Secret : ".$access_token_array['oauth_token_secret']) . "<br />";

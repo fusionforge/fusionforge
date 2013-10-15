@@ -1,6 +1,6 @@
 <?php
 /**
- * FusionForge ADMS.SW plugin - RDF serializable extension of FRSFile  
+ * FusionForge ADMS.SW plugin - RDF serializable extension of FRSFile
  *
  * Copyright 2013, Olivier Berger and Institut Mines-Telecom
  *
@@ -63,7 +63,7 @@ class RDFedFRSFile extends FRSFile {
 	public function getDownloadUrl() {
 		return util_make_url('/frs/download.php/file/'.$this->getID().'/'.rawurlencode($this->getName()));
 	}
-	
+
 	/**
 	 *	getUri - constructs the resource URI
 	 *
@@ -72,47 +72,47 @@ class RDFedFRSFile extends FRSFile {
 	public function getUri() {
 		return $this->getDownloadUrl().'#package';
 	}
-	
+
 	/**
 	 *	saveToGraph - updates a Graphite graph to add the resource's triples
 	 *
 	 *  @param  Graphite	a Graphite graph to be updated
 	 */
 	public function saveToGraph(&$graph) {
-		
+
 		// Construct an ARC2_Resource containing the RDFedFRSFile RDF description
 		$ns = $graph->ns;
-			
+
 		$conf = array(
 				'ns' => $ns
 		);
-			
-			
+
+
 		$res = ARC2::getResource($conf);
-			
+
 		$frs_release = $this->getFRSRelease();
 		$frs_package = $frs_release->getFRSPackage();
 		$group = $frs_package->getGroup();
-		
+
 		$frs_file_name = $this->getName();
-		
+
 		$file_uri = $this->getUri();
 		$res->setURI($file_uri);
-		
+
 		// $res->setRel('rdf:type', 'admssw:SoftwarePackage');
 		rdfutils_setPropToUri($res, 'rdf:type', 'admssw:SoftwarePackage');
-		
+
 		$res->setProp('rdfs:label', $frs_file_name);
 		$description = $frs_file_name. _(', part of ') .$frs_package->getName(). ' ' .$frs_release->getName();
 		$res->setProp('dcterms:description', $description);
-		
+
 		rdfutils_setPropToUri($res, 'schema:downloadUrl', $this->getDownloadUrl());
 		rdfutils_setPropToXSDdateTime($res, 'dcterms:created', date('c', $this->getReleaseTime()));
 		$res->setProp('schema:fileSize', $this->getSize());
-		
+
 		$frs_filetype_id = $this->getTypeID();
 		$frs_filetype = new FRSFileType($frs_filetype_id);
-		
+
 		// This is hackish... ultimately, FusionForge should support proper mime-types
 		$mime_type = '';
 		$frs_filetype_name = $frs_filetype->getName();
@@ -157,20 +157,20 @@ class RDFedFRSFile extends FRSFile {
 				break;
 		}
 		rdfutils_setPropToUri($res, 'dcterms:format', 'http://purl.org/NET/mediatypes/'. $mime_type);
-		
+
 		rdfutils_setPropToUri($res, 'admssw:release', $frs_release->getUri());
-		
+
 		rdfutils_setPropToUri($res, 'dcterms:license', $this->getDownloadUrl().'#unspecified_license');
-		
+
 		$count = $graph->addTriples( ARC2::getTriplesFromIndex($res->index) );
-		
+
 		// Add a resource for the license, that is an explicit "unspecified license", rather than not setting it... the ADMS.SW seem to require a mandatory license
 		$res = ARC2::getResource($conf);
 		$res->setURI($this->getDownloadUrl().'#unspecified_license');
 		$res->setProp('rdfs:label', 'Unspecified license (unavailable meta-data in the FusionForge File Release System)');
-		
+
 		$count = $graph->addTriples( ARC2::getTriplesFromIndex($res->index) );
-		
+
 	}
 }
 
