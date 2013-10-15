@@ -10,4 +10,3 @@ register_plugin ($SysAuthPGSQLPluginObject) ;
 // mode: php
 // c-file-style: "bsd"
 // End:
-
