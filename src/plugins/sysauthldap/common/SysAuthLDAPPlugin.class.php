@@ -360,4 +360,3 @@ class SysAuthLDAPPlugin extends SysAuthPlugin {
 // c-file-style: "bsd"
 // End:
 
-?>

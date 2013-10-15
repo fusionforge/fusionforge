@@ -179,4 +179,3 @@ class TroveCat extends Error {
 // c-file-style: "bsd"
 // End:
 
-?>

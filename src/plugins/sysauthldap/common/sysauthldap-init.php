@@ -11,4 +11,3 @@ register_plugin ($SysAuthLDAPPluginObject) ;
 // c-file-style: "bsd"
 // End:
 
-?>

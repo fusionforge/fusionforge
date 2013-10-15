@@ -63,4 +63,3 @@ class SysAuthPGSQLPlugin extends SysAuthPlugin {
 // c-file-style: "bsd"
 // End:
 
-?>
