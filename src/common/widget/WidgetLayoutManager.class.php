@@ -570,7 +570,7 @@ class WidgetLayoutManager {
 						$widget_rows[$widget->getTitle()] = $row;
 					}
 					uksort($widget_rows, 'strnatcasecmp');
-					$additionnal_html .= '<div id="widget-categ-'. $c .'" style="display:none" class="widget-categ-class-void" ><h2 class="boxtitle">'. $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML) .'</h2>';
+					$additionnal_html .= '<div id="widget-categ-'. $c .'" style="display:none" class="widget-categ-class-void" ><h2 class="boxtitle">'. str_replace('_',' ',$hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML)) .'</h2>';
 					foreach($widget_rows as $row) {
 						$additionnal_html .= $row;
 					}
