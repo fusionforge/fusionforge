@@ -557,7 +557,7 @@ class WidgetLayoutManager {
 					foreach($ws as $widget_name => $widget) {
 						$row = '';
 						$row .= '<div class="widget-preview '. $widget->getPreviewCssClass() .'">';
-						$row .= '<strong>'. $widget->getTitle()  .'</strong>';
+						$row .= '<h3>'. $widget->getTitle()  .'</h3>';
 						$row .= '<p>'. $widget->getDescription() .'</p>';
 						$row .= $widget->getInstallPreferences();
 						$row .= '</div><div style="text-align:right; border-bottom:1px solid #ddd; padding-bottom:10px; margin-bottom:20px;">';
@@ -570,7 +570,7 @@ class WidgetLayoutManager {
 						$widget_rows[$widget->getTitle()] = $row;
 					}
 					uksort($widget_rows, 'strnatcasecmp');
-					$additionnal_html .= '<div id="widget-categ-'. $c .'" style="display:none" class="widget-categ-class-void" ><h4 class="boxtitle">'. $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML) .'</h4>';
+					$additionnal_html .= '<div id="widget-categ-'. $c .'" style="display:none" class="widget-categ-class-void" ><h2 class="boxtitle">'. $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML) .'</h2>';
 					foreach($widget_rows as $row) {
 						$additionnal_html .= $row;
 					}
