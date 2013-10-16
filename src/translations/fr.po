@@ -7433,15 +7433,15 @@ msgstr "fichiers mis à jour"
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:153
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:163
 msgid "new Directories"
-msgstr ""
+msgstr "nouveaux dossiers"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:167
 msgid "3 weeks ago"
-msgstr "il y a 3 semaines"
+msgstr "Il y a 3 semaines"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:167
 msgid "2 weeks ago"
-msgstr "il y a 2 semaines"
+msgstr "Il y a 2 semaines"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:167
 msgid "Last Week"
