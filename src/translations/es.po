@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 19:05+0200\n"
+"POT-Creation-Date: 2013-10-16 09:51+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -1175,6 +1175,7 @@ msgstr "Título"
 #: plugins/forumml/www/forumml_utils.php:63
 #: plugins/forumml/www/forumml_utils.php:188
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:138
+#: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/forum/forum.php:246 www/forum/message.php:160
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:55
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:48
@@ -1817,6 +1818,7 @@ msgstr "Usuario"
 #: plugins/contribtracker/www/project_admin.php:289
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:109
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:134
+#: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/admin/cronman.php:42 www/admin/massmail.php:137
 #: www/developer/diary.php:81 www/forum/forum.php:247
 #: www/forum/message.php:161 www/frs/admin/showreleases.php:101
@@ -7052,6 +7054,16 @@ msgstr "Añadir widgets"
 #: www/widgets/widgets.php:67
 msgid "Customize Layout"
 msgstr "Personalizar apariencia"
+
+#: common/widget/WidgetLayoutManager.class.php:331
+#, fuzzy
+msgid "Custom"
+msgstr "Nombre de caja"
+
+#: common/widget/WidgetLayoutManager.class.php:332
+#, fuzzy
+msgid "Define your own layout:"
+msgstr "Defina sus paquetes"
 
 #: common/widget/WidgetLayoutManager.class.php:372
 #, php-format
@@ -13906,6 +13918,46 @@ msgstr "Esta Activa"
 #, fuzzy
 msgid "Add a new webanalytics reference"
 msgstr "Agregar un nuevo elemento a esta carpeta"
+
+#: plugins/wiki/common/wikiconfig.class.php:39
+msgid ""
+"Check to disable automatic linking of camelcase words to pages. Internal "
+"page links must be forced with [[pagename]] then."
+msgstr ""
+
+#: plugins/wiki/common/wikiconfig.class.php:41
+msgid ""
+"Check to enable spam prevention. If a non-admin adds more than 20 external "
+"links, it will be rejected as spam."
+msgstr ""
+
+#: plugins/wiki/common/wikiconfig.class.php:43
+msgid ""
+"Check to enable page rating. Logged users will be able to rate wiki pages."
+msgstr ""
+
+#: plugins/wiki/common/WikiGroupSearchEngine.class.php:32
+msgid "Wiki"
+msgstr ""
+
+#: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
+#, fuzzy
+msgid "Page"
+msgstr "Mi Página"
+
+#: plugins/wiki/common/WikiPlugin.class.php:74
+#, fuzzy
+msgid "Wiki Admin"
+msgstr "Administración del sitio"
+
+#: plugins/wiki/common/WikiPlugin.class.php:91
+#, fuzzy
+msgid "This project's wiki"
+msgstr "Las noticias de este proyecto"
+
+#: plugins/wiki/common/WikiPlugin.class.php:209
+msgid "List of active wikis in Forge"
+msgstr ""
 
 #: utils/fixscripts/populate_template_project.php:69
 #, php-format
@@ -22880,18 +22932,6 @@ msgstr "Página personal de %s"
 #~ msgstr "Fichero Actualizado"
 
 #, fuzzy
-#~ msgid "Page"
-#~ msgstr "Mi Página"
-
-#, fuzzy
-#~ msgid "Wiki Admin"
-#~ msgstr "Administración del sitio"
-
-#, fuzzy
-#~ msgid "This project's wiki"
-#~ msgstr "Las noticias de este proyecto"
-
-#, fuzzy
 #~ msgid "Documents are also available thru webdav access"
 #~ msgstr "Procesado de Documentos también está disponible através de webdav"
 
@@ -25849,10 +25889,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Add, Delete, or Edit Licenses"
 #~ msgstr "Añadir, Borrar o Editar Licencias"
-
-#, fuzzy
-#~ msgid "Customize"
-#~ msgstr "Nombre de caja"
 
 #~ msgid "User ID:"
 #~ msgstr "User ID:"

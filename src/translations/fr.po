@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 19:34+0200\n"
+"POT-Creation-Date: 2013-10-16 09:51+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1147,6 +1147,7 @@ msgstr "Titre"
 #: plugins/forumml/www/forumml_utils.php:63
 #: plugins/forumml/www/forumml_utils.php:188
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:138
+#: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/forum/forum.php:246 www/forum/message.php:160
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:55
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:48
@@ -1782,6 +1783,7 @@ msgstr "Utilisateur"
 #: plugins/contribtracker/www/project_admin.php:289
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:109
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:134
+#: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/admin/cronman.php:42 www/admin/massmail.php:137
 #: www/developer/diary.php:81 www/forum/forum.php:247
 #: www/forum/message.php:161 www/frs/admin/showreleases.php:101
@@ -6950,6 +6952,14 @@ msgstr "Ajouter des widgets"
 #: www/widgets/widgets.php:67
 msgid "Customize Layout"
 msgstr "Personnaliser la mise en page"
+
+#: common/widget/WidgetLayoutManager.class.php:331
+msgid "Custom"
+msgstr "Personnalisé"
+
+#: common/widget/WidgetLayoutManager.class.php:332
+msgid "Define your own layout:"
+msgstr "Définissez votre propre mise en page :"
 
 #: common/widget/WidgetLayoutManager.class.php:372
 #, php-format
@@ -13750,6 +13760,49 @@ msgstr "Est actif"
 #, fuzzy
 msgid "Add a new webanalytics reference"
 msgstr "Ajouter un nouveau répertoire"
+
+#: plugins/wiki/common/wikiconfig.class.php:39
+msgid ""
+"Check to disable automatic linking of camelcase words to pages. Internal "
+"page links must be forced with [[pagename]] then."
+msgstr ""
+"Cochez la case pour désactiver les liens automatiques pour les mots en casse "
+"de chameau. Les liens doivent alors utiliser [[nom de page]]."
+
+#: plugins/wiki/common/wikiconfig.class.php:41
+msgid ""
+"Check to enable spam prevention. If a non-admin adds more than 20 external "
+"links, it will be rejected as spam."
+msgstr ""
+"Cochez la case pour activer la protection contre le spam. Si un non-"
+"administrateur ajoute plus de 20 liens externes, cela sera rejeté comme spam."
+
+#: plugins/wiki/common/wikiconfig.class.php:43
+msgid ""
+"Check to enable page rating. Logged users will be able to rate wiki pages."
+msgstr ""
+"Cochez la case pour activer l'évaluation des pages. Les utilisateurs "
+"identifiés pourront évaluer les pages wiki."
+
+#: plugins/wiki/common/WikiGroupSearchEngine.class.php:32
+msgid "Wiki"
+msgstr "Wiki"
+
+#: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
+msgid "Page"
+msgstr "Page"
+
+#: plugins/wiki/common/WikiPlugin.class.php:74
+msgid "Wiki Admin"
+msgstr "Administration du wiki"
+
+#: plugins/wiki/common/WikiPlugin.class.php:91
+msgid "This project's wiki"
+msgstr "Wiki du projet"
+
+#: plugins/wiki/common/WikiPlugin.class.php:209
+msgid "List of active wikis in Forge"
+msgstr "Liste des wikis actifs de la Forge"
 
 #: utils/fixscripts/populate_template_project.php:69
 #, php-format
@@ -22757,42 +22810,6 @@ msgstr "Page personnelle de %s"
 #~ msgid "File-Release"
 #~ msgstr "Publication-de-fichiers"
 
-#~ msgid ""
-#~ "Check to disable automatic linking of camelcase words to pages. Internal "
-#~ "page links must be forced with [[pagename]] then."
-#~ msgstr ""
-#~ "Cochez la case pour désactiver les liens automatiques pour les mots en "
-#~ "casse de chameau. Les liens doivent alors utiliser [[nom de page]]."
-
-#~ msgid ""
-#~ "Check to enable spam prevention. If a non-admin adds more than 20 "
-#~ "external links, it will be rejected as spam."
-#~ msgstr ""
-#~ "Cochez la case pour activer la protection contre le spam. Si un non-"
-#~ "administrateur ajoute plus de 20 liens externes, cela sera rejeté comme "
-#~ "spam."
-
-#~ msgid ""
-#~ "Check to enable page rating. Logged users will be able to rate wiki pages."
-#~ msgstr ""
-#~ "Cochez la case pour activer l'évaluation des pages. Les utilisateurs "
-#~ "identifiés pourront évaluer les pages wiki."
-
-#~ msgid "Wiki"
-#~ msgstr "Wiki"
-
-#~ msgid "Page"
-#~ msgstr "Page"
-
-#~ msgid "Wiki Admin"
-#~ msgstr "Administration du wiki"
-
-#~ msgid "This project's wiki"
-#~ msgstr "Wiki du projet"
-
-#~ msgid "List of active wikis in Forge"
-#~ msgstr "Liste des wikis actifs de la Forge"
-
 #~ msgid "Documents are also available thru webdav access"
 #~ msgstr "La navigation dans les documents est aussi disponible par le Webdav"
 
@@ -27458,9 +27475,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Visibility"
 #~ msgstr "Visibilité"
-
-#~ msgid "Customize"
-#~ msgstr "Personnaliser"
 
 #~ msgid "User ID:"
 #~ msgstr "Identifiant utilisateur :"

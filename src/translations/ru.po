@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 19:05+0200\n"
+"POT-Creation-Date: 2013-10-16 09:51+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1226,6 +1226,7 @@ msgstr "Заголовок"
 #: plugins/forumml/www/forumml_utils.php:63
 #: plugins/forumml/www/forumml_utils.php:188
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:138
+#: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/forum/forum.php:246 www/forum/message.php:160
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:55
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:48
@@ -1883,6 +1884,7 @@ msgstr "Пользователь"
 #: plugins/contribtracker/www/project_admin.php:289
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:109
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:134
+#: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/admin/cronman.php:42 www/admin/massmail.php:137
 #: www/developer/diary.php:81 www/forum/forum.php:247
 #: www/forum/message.php:161 www/frs/admin/showreleases.php:101
@@ -7249,6 +7251,15 @@ msgstr "Добавить дату"
 #, fuzzy
 msgid "Customize Layout"
 msgstr "Выборочное поле удалено"
+
+#: common/widget/WidgetLayoutManager.class.php:331
+#, fuzzy
+msgid "Custom"
+msgstr "Название нового поля"
+
+#: common/widget/WidgetLayoutManager.class.php:332
+msgid "Define your own layout:"
+msgstr ""
 
 #: common/widget/WidgetLayoutManager.class.php:372
 #, php-format
@@ -14479,6 +14490,46 @@ msgstr "Активен"
 #, fuzzy
 msgid "Add a new webanalytics reference"
 msgstr "Добавить новую запись о уровне"
+
+#: plugins/wiki/common/wikiconfig.class.php:39
+msgid ""
+"Check to disable automatic linking of camelcase words to pages. Internal "
+"page links must be forced with [[pagename]] then."
+msgstr ""
+
+#: plugins/wiki/common/wikiconfig.class.php:41
+msgid ""
+"Check to enable spam prevention. If a non-admin adds more than 20 external "
+"links, it will be rejected as spam."
+msgstr ""
+
+#: plugins/wiki/common/wikiconfig.class.php:43
+msgid ""
+"Check to enable page rating. Logged users will be able to rate wiki pages."
+msgstr ""
+
+#: plugins/wiki/common/WikiGroupSearchEngine.class.php:32
+msgid "Wiki"
+msgstr ""
+
+#: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
+#, fuzzy
+msgid "Page"
+msgstr "Главная страница"
+
+#: plugins/wiki/common/WikiPlugin.class.php:74
+#, fuzzy
+msgid "Wiki Admin"
+msgstr "Управление сайтом"
+
+#: plugins/wiki/common/WikiPlugin.class.php:91
+#, fuzzy
+msgid "This project's wiki"
+msgstr "В новостях проекта"
+
+#: plugins/wiki/common/WikiPlugin.class.php:209
+msgid "List of active wikis in Forge"
+msgstr ""
 
 #: utils/fixscripts/populate_template_project.php:69
 #, php-format
@@ -23632,18 +23683,6 @@ msgstr "Персональная страница для %s"
 #~ msgstr "Выпущенные файлы"
 
 #, fuzzy
-#~ msgid "Page"
-#~ msgstr "Главная страница"
-
-#, fuzzy
-#~ msgid "Wiki Admin"
-#~ msgstr "Управление сайтом"
-
-#, fuzzy
-#~ msgid "This project's wiki"
-#~ msgstr "В новостях проекта"
-
-#, fuzzy
 #~ msgid "Documents are also available thru webdav access"
 #~ msgstr "Нет описания"
 
@@ -26571,10 +26610,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "The Attachment does not exist"
 #~ msgstr "Такой прикрепленной части нет"
-
-#, fuzzy
-#~ msgid "Customize"
-#~ msgstr "Название нового поля"
 
 #~ msgid "User ID:"
 #~ msgstr "Имя участника:"

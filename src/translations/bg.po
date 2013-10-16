@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 19:05+0200\n"
+"POT-Creation-Date: 2013-10-16 09:51+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1209,6 +1209,7 @@ msgstr "Име"
 #: plugins/forumml/www/forumml_utils.php:63
 #: plugins/forumml/www/forumml_utils.php:188
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:138
+#: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/forum/forum.php:246 www/forum/message.php:160
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:55
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:48
@@ -1861,6 +1862,7 @@ msgstr ""
 #: plugins/contribtracker/www/project_admin.php:289
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:109
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:134
+#: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/admin/cronman.php:42 www/admin/massmail.php:137
 #: www/developer/diary.php:81 www/forum/forum.php:247
 #: www/forum/message.php:161 www/frs/admin/showreleases.php:101
@@ -7043,6 +7045,14 @@ msgstr "Добавяне"
 #: www/include/project_home.php:69 www/my/index.php:57
 #: www/widgets/widgets.php:67
 msgid "Customize Layout"
+msgstr ""
+
+#: common/widget/WidgetLayoutManager.class.php:331
+msgid "Custom"
+msgstr ""
+
+#: common/widget/WidgetLayoutManager.class.php:332
+msgid "Define your own layout:"
 msgstr ""
 
 #: common/widget/WidgetLayoutManager.class.php:372
@@ -13917,6 +13927,46 @@ msgstr "Флаг за активност"
 #, fuzzy
 msgid "Add a new webanalytics reference"
 msgstr "Публикуване на документ"
+
+#: plugins/wiki/common/wikiconfig.class.php:39
+msgid ""
+"Check to disable automatic linking of camelcase words to pages. Internal "
+"page links must be forced with [[pagename]] then."
+msgstr ""
+
+#: plugins/wiki/common/wikiconfig.class.php:41
+msgid ""
+"Check to enable spam prevention. If a non-admin adds more than 20 external "
+"links, it will be rejected as spam."
+msgstr ""
+
+#: plugins/wiki/common/wikiconfig.class.php:43
+msgid ""
+"Check to enable page rating. Logged users will be able to rate wiki pages."
+msgstr ""
+
+#: plugins/wiki/common/WikiGroupSearchEngine.class.php:32
+msgid "Wiki"
+msgstr ""
+
+#: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
+#, fuzzy
+msgid "Page"
+msgstr "Моята&nbsp;страница"
+
+#: plugins/wiki/common/WikiPlugin.class.php:74
+#, fuzzy
+msgid "Wiki Admin"
+msgstr "Администриране"
+
+#: plugins/wiki/common/WikiPlugin.class.php:91
+#, fuzzy
+msgid "This project's wiki"
+msgstr "Модул \"Пощенски списъци\""
+
+#: plugins/wiki/common/WikiPlugin.class.php:209
+msgid "List of active wikis in Forge"
+msgstr ""
 
 #: utils/fixscripts/populate_template_project.php:69
 #, php-format
@@ -22648,18 +22698,6 @@ msgstr "Лична Информация"
 #, fuzzy
 #~ msgid "File-Release"
 #~ msgstr "Следващи Резултати"
-
-#, fuzzy
-#~ msgid "Page"
-#~ msgstr "Моята&nbsp;страница"
-
-#, fuzzy
-#~ msgid "Wiki Admin"
-#~ msgstr "Администриране"
-
-#, fuzzy
-#~ msgid "This project's wiki"
-#~ msgstr "Модул \"Пощенски списъци\""
 
 #, fuzzy
 #~ msgid "Documents are also available thru webdav access"
