@@ -62,21 +62,16 @@ DocManListFileController.prototype =
 
 	resizableDiv: function() {
 		var splitterPosition = '30%';
-		var mainwidth = jQuery('#views').width();
+		var mainwidth = jQuery('#maindiv').width();
 		if (jQuery.Storage.get('splitterStyle') !== undefined) {
-			storedSplitterPosition = jQuery.Storage.get('splitterStyle').replace(/\D/g, '');
+			storedSplitterPosition = jQuery.Storage.get('splitterStyle').replace(/px;/g, '').replace(/left: /g, '');
 			splitterPosition = Math.round(storedSplitterPosition * 100 / mainwidth )+'%';
 		}
-		(jQuery(this.params.divLeft).height() > jQuery(this.params.divRight).height()) ? mainheight = jQuery(this.params.divLeft).height() : mainheight = jQuery('#rightdiv').height();
-		jQuery('#views')
-				.height(mainheight)
+		(jQuery(this.params.divLeft).height() > jQuery(this.params.divRight).height()) ? mainheight = jQuery(this.params.divLeft).height() : mainheight = jQuery(this.params.divRight).height();
+		jQuery('#views').height(mainheight)
 				.split({orientation:'vertical', limit:100, position: splitterPosition});
 		jQuery('.vsplitter').mouseup(function(){
 			jQuery.Storage.set('splitterStyle',''+jQuery('.vsplitter').attr('style'));
-		});
-		jQuery(window).resize(function(){
-			(jQuery(this.params.divLeft).height() > jQuery(this.params.divRight)) ? mainheight = jQuery(this.params.divLeft).height() : mainheight = jQuery('#rightdiv').height();
-			jQuery('#views').height(mainheight);
 		});
 	},
 
