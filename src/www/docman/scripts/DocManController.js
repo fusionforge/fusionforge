@@ -68,7 +68,7 @@ DocManListFileController.prototype =
 			splitterPosition = Math.round(storedSplitterPosition * 100 / mainwidth )+'%';
 		}
 		(jQuery(this.params.divLeft).height() > jQuery(this.params.divRight).height()) ? mainheight = jQuery(this.params.divLeft).height() : mainheight = jQuery('#rightdiv').height();
-		jQuery('#views'))
+		jQuery('#views')
 				.height(mainheight)
 				.split({orientation:'vertical', limit:100, position: splitterPosition});
 		jQuery('.vsplitter').mouseup(function(){
@@ -76,7 +76,7 @@ DocManListFileController.prototype =
 		});
 		jQuery(window).resize(function(){
 			(jQuery(this.params.divLeft).height() > jQuery(this.params.divRight)) ? mainheight = jQuery(this.params.divLeft).height() : mainheight = jQuery('#rightdiv').height();
-			jQuery('#views').width(jQuery(window).width() - 35).height(mainheight);
+			jQuery('#views').height(mainheight);
 		});
 	},
 
