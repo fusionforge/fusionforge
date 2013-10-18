@@ -63,7 +63,7 @@ if (sizeof($linksHeaderMenuArray)) {
 	$classth = array('', '', '', '', '', 'unsortable');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_headermenu_listlinks', 'sortable', $classth);
 	foreach ($linksHeaderMenuArray as $link) {
-		echo '<tr id="'.$link['id_headermenu'].'" ><td>'.$link['ordering'].'</td>';
+		echo '<tr id="'.$link['id_headermenu'].'" ><td class="align-center">'.$link['ordering'].'</td>';
 		if (strlen($link['url']) > 0) {
 			echo '<td>'._('URL').' ('.htmlspecialchars($link['url']).')</td>';
 		} else {
@@ -96,7 +96,7 @@ if (sizeof($linksOuterMenuArray)) {
 	$classth = array('', '', '', '', '', 'unsortable');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_outermenu_listlinks', 'sortable', $classth);
 	foreach ($linksOuterMenuArray as $link) {
-		echo '<tr id="'.$link['id_headermenu'].'" ><td>'.$link['ordering'].'</td>';
+		echo '<tr id="'.$link['id_headermenu'].'" ><td class="align-center">'.$link['ordering'].'</td>';
 		if (strlen($link['url']) > 0) {
 			echo '<td>'._('URL').' ('.htmlspecialchars($link['url']).')</td>';
 		} else {
