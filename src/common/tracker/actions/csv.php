@@ -79,7 +79,7 @@ $url_export = '/tracker/?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;f
 $format = $headers ? ' with headers' : ' without headers';
 $format .= " using '$sep' as separator.";
 ?>
-<p><?php echo _('This page allows you to export the items using a CSV (<a href="http://en.wikipedia.org/wiki/Comma-separated_values">Comma Separated Values</a>) File. This format can be used to view your entries using MS Excel.'); ?></p>
+<p><?php echo _('This page allows you to export the items using a CSV (<a href="http://en.wikipedia.org/wiki/Comma-separated_values">Comma Separated Values</a>) File. This format can be used to view your entries using Microsoft Excel.'); ?></p>
 <h2><?php echo _('Export as a CSV file'); ?></h2>
 
 <strong><?php echo _('Selected CSV Format:'); ?></strong> CSV<?php echo $format ?> <a href="<?php echo $url_set_format ?>">(Change)</a>
