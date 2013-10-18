@@ -38,7 +38,7 @@ require_once 'Widget.class.php';
 	}
 	function getTitle() {
 		$hp = Codendi_HTMLPurifier::instance();
-		return $this->rss_title ?  $hp->purify($this->rss_title, CODENDI_PURIFIER_CONVERT_HTML)  : 'RSS Reader';
+		return $this->rss_title ?  $hp->purify($this->rss_title, CODENDI_PURIFIER_CONVERT_HTML)  : _('RSS Reader');
 	}
 	function getContent() {
 		$hp = Codendi_HTMLPurifier::instance();

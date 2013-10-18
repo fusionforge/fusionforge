@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-16 09:51+0200\n"
+"POT-Creation-Date: 2013-10-18 15:23+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7803,6 +7803,10 @@ msgstr ""
 
 #: common/widget/Widget_ProjectRss.class.php:40
 msgid "Include public rss (or atom) feeds into project homepage."
+msgstr ""
+
+#: common/widget/Widget_Rss.class.php:41
+msgid "RSS Reader"
 msgstr ""
 
 #: common/widget/Widget_Rss.class.php:55

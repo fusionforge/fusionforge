@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-16 09:51+0200\n"
+"POT-Creation-Date: 2013-10-18 15:23+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -8033,6 +8033,11 @@ msgstr ""
 #: common/widget/Widget_ProjectRss.class.php:40
 msgid "Include public rss (or atom) feeds into project homepage."
 msgstr ""
+
+#: common/widget/Widget_Rss.class.php:41
+#, fuzzy
+msgid "RSS Reader"
+msgstr " Релизы "
 
 #: common/widget/Widget_Rss.class.php:55
 msgid "Cannot create backend directory. Contact forge administrator."

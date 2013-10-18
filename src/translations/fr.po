@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-16 09:51+0200\n"
+"POT-Creation-Date: 2013-10-18 15:23+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -7326,7 +7326,6 @@ msgid ""
 msgstr "Vous permet d'inclure des flux RSS ou Atom sur votre page personnelle."
 
 #: common/widget/Widget_MySurveys.class.php:63
-#, fuzzy
 msgid "There are no surveys in your projects."
 msgstr "Il n'y a pas de sondage dans vos projets."
 
@@ -7729,6 +7728,10 @@ msgstr ""
 #: common/widget/Widget_ProjectRss.class.php:40
 msgid "Include public rss (or atom) feeds into project homepage."
 msgstr "Vous permet d'inclure des flux RSS ou Atom sur votre page personnelle."
+
+#: common/widget/Widget_Rss.class.php:41
+msgid "RSS Reader"
+msgstr "Lecteur de flux RSS"
 
 #: common/widget/Widget_Rss.class.php:55
 msgid "Cannot create backend directory. Contact forge administrator."
