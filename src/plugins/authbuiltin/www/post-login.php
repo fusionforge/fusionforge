@@ -103,15 +103,23 @@ if ($login) {
 			$u = user_get_object_by_name($form_loginname) ||
 				user_get_object_by_email($form_loginname) ;
 			if (!$u) {
-				$warning_msg .= '<br /><p>'. _('Your account does not exist.').'</p>';
+				$warning_msg .= '<br />'. _('Your account does not exist.');
 			}
 		}
 	} elseif ($userstatus == "P") {
-		$warning_msg .= '<br />'. sprintf(_('<p>Your account is currently pending your email confirmation.<br/>Visiting the link sent to you in this email will activate your account.<br/>If you need this email resent, please click below and a confirmation email will be sent to the email address you provided in registration.</p><a href="%1$s">[Resend Confirmation Email]</a><br><hr>'), util_make_url ("/account/pending-resend.php?form_user=".htmlspecialchars($form_loginname)));
-	} else {
-		if ($userstatus == "D") {
-			$error_msg = '<br />'.sprintf(_('<p>Your %1$s account has been removed by %1$s staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a <a href="%2$s">support request</a>.</p><p>Thank you, <br><br>%1$s Staff</p>'), forge_get_config('forge_name'), util_make_url("/support/?group_id=1"));
-		}
+		$warning_msg .= '<br />' . _('Your account is currently pending your email confirmation.')
+					  . '<br/>' . _('Visiting the link sent to you in this email will activate your account.')
+                      . '<br/>' . _('If you need this email resent, please click below and a confirmation email will be sent to the email address you provided in registration.')
+                      . '<br/>' . sprintf('<a href="%1$s">%2$s</a>',
+											util_make_url("/account/pending-resend.php?form_user=".htmlspecialchars($form_loginname)),
+                                            _('Resend Confirmation Email'));
+	} elseif ($userstatus == "D") {
+			$error_msg = '<br />' . sprintf(_('Your %1$s account has been removed by %1$s staff.'), forge_get_config('forge_name'))
+                      . '<br/>' . _('This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons.')
+                      . '<br/>' . sprintf(_('Should you have questions or concerns regarding this matter, please log a <a href="%s">support request</a>.'), util_make_url("/support/?group_id=1"))
+                      . '<br/>' . _('Thank you')
+                      . '<br/>'
+                      . '<br/>' . sprintf(_('-- the %s staff'), forge_get_config('forge_name'));
 	}
 }
 

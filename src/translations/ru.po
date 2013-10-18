@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-18 15:28+0200\n"
+"POT-Creation-Date: 2013-10-18 15:38+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4347,6 +4347,7 @@ msgid "Enjoy the site."
 msgstr "Желаем Вам успехов в работе."
 
 #: common/include/User.class.php:493 common/mail/MailingList.class.php:205
+#: plugins/authbuiltin/www/post-login.php:122
 #: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
 #: www/account/first.php:36 www/account/lostpw.php:67
 #: www/survey/privacy.php:58 www/survey/survey_resp.php:60
@@ -8384,47 +8385,64 @@ msgid "Your account does not exist."
 msgstr "Запрос не существует"
 
 #: plugins/authbuiltin/www/post-login.php:110
-#, fuzzy, php-format
-msgid ""
-"<p>Your account is currently pending your email confirmation.<br/>Visiting "
-"the link sent to you in this email will activate your account.<br/>If you "
-"need this email resent, please click below and a confirmation email will be "
-"sent to the email address you provided in registration.</p><a href=\"%1$s\">"
-"[Resend Confirmation Email]</a><br><hr>"
+msgid "Your account is currently pending your email confirmation."
 msgstr ""
-"<P>На данном этапе вам выслано письмо на ваш е-майл для подтверждения "
-"работоспособности вашего почтового ящика.\t\t Получив в теле письма ссылку, "
-"проследуйте по ней, это необходимо для завершния процесса регистрации\t\t .\t"
-"\t <P> Если на указанный вами е-майл, письмо по какой-либо причине не пришло "
-"в течении получаса, возможно вам придется повторить процедуру указания "
-"правильного е-майл адреса.\t\t<P><A href=\"pending-resend.php?form_user=%1$s"
-"\"><b>[Отправить повторное письмо на вышеуказанный мной адрес]</b></A>\t"
-"\t<br><hr>\t\t<p>"
+">На данном этапе вам выслано письмо на ваш е-майл для подтверждения "
+"работоспособности вашего почтового ящика."
 
-#: plugins/authbuiltin/www/post-login.php:113
-#: plugins/authldap/www/post-login.php:112
-#, fuzzy, php-format
+#: plugins/authbuiltin/www/post-login.php:111
+msgid "Visiting the link sent to you in this email will activate your account."
+msgstr "Для активации учётной записи посетите ссылку, присланную в письме."
+
+#: plugins/authbuiltin/www/post-login.php:112
 msgid ""
-"<p>Your %1$s account has been removed by %1$s staff. This may occur for two "
-"reasons, either 1) you requested that your account be removed; or 2) some "
-"action has been performed using your account which has been seen as "
-"objectionable (i.e. you have breached the terms of service for use of your "
-"account) and your account has been revoked for administrative reasons. "
-"Should you have questions or concerns regarding this matter, please log a <a "
-"href=\"%2$s\">support request</a>.</p><p>Thank you, <br><br>%1$s Staff</p>"
+"If you need this email resent, please click below and a confirmation email "
+"will be sent to the email address you provided in registration."
 msgstr ""
-"<p>Регистрационные данные участника %1$s были блокированы администрацией "
-"сайта %1$s . <p> Это могло произойти по двум причинам. <u>Первая:</u> Вы "
-"подали запрос на удаление Вашего аккаунта. ; или <u>Вторая:</u> Вы нарушили "
-"условия использования предоставленных сервисов, или допустили действия "
-"расцененые администрацией как нежелательные, или приводящие к нарушению "
-"пунктов лицензионных соглашений. (например: неоговоренные в условиях вашего "
-"проекта пункты, или направления развития вашего програмного обеспечения, "
-"выходящие за рамки вашего аккаунта). Если Вы считаете важным причины "
-"удаления Вашего аккаунта, или в подробностях узнать о произошедшем, следуйте "
-"по ссылке <a href=\"/support/?group_id=1\">задать вопросы или обсудить "
-"действия администрации сайта</a>.</p><p>Будьте вежливы и учтительны."
-"<br><br>, С уважением, Администрация сайта %1$s </p>"
+"Если на указанный вами е-майл, письмо по какой-либо причине не пришло в "
+"течении получаса, возможно вам придется повторить процедуру указания "
+"правильного е-майл адреса."
+
+#: plugins/authbuiltin/www/post-login.php:115
+msgid "Resend Confirmation Email"
+msgstr "Отправить повторное письмо на вышеуказанный мной адрес"
+
+#: plugins/authbuiltin/www/post-login.php:117
+#, php-format
+msgid "Your %1$s account has been removed by %1$s staff."
+msgstr ""
+"Регистрационные данные участника %1$s были блокированы администрацией сайта "
+"%1$s."
+
+#: plugins/authbuiltin/www/post-login.php:118
+msgid ""
+"This may occur for two reasons, either 1) you requested that your account be "
+"removed; or 2) some action has been performed using your account which has "
+"been seen as objectionable (i.e. you have breached the terms of service for "
+"use of your account) and your account has been revoked for administrative "
+"reasons."
+msgstr ""
+"Это могло произойти по двум причинам. <u>Первая:</u> Вы подали запрос на "
+"удаление Вашего аккаунта. ; или <u>Вторая:</u> Вы нарушили условия "
+"использования предоставленных сервисов, или допустили действия расцененые "
+"администрацией как нежелательные, или приводящие к нарушению пунктов "
+"лицензионных соглашений. (например: неоговоренные в условиях вашего проекта "
+"пункты, или направления развития вашего програмного обеспечения, выходящие "
+"за рамки вашего аккаунта)."
+
+#: plugins/authbuiltin/www/post-login.php:119
+#, php-format
+msgid ""
+"Should you have questions or concerns regarding this matter, please log a <a "
+"href=\"%s\">support request</a>."
+msgstr ""
+"Если Вы считаете важным причины удаления Вашего аккаунта, или в подробностях "
+"узнать о произошедшем, следуйте по ссылке <a href=\"%s\">задать вопросы или "
+"обсудить действия администрации сайта</a>."
+
+#: plugins/authbuiltin/www/post-login.php:120
+msgid "Thank you"
+msgstr ""
 
 #: plugins/authcas/include/AuthCASPlugin.class.php:94
 #, fuzzy
@@ -8470,6 +8488,30 @@ msgstr ""
 "правильного е-майл адреса.\t\t<P><A href=\"pending-resend.php?form_user=%1$s"
 "\"><b>[Отправить повторное письмо на вышеуказанный мной адрес]</b></A>\t"
 "\t<br><hr>\t\t<p>"
+
+#: plugins/authldap/www/post-login.php:112
+#, fuzzy, php-format
+msgid ""
+"<p>Your %1$s account has been removed by %1$s staff. This may occur for two "
+"reasons, either 1) you requested that your account be removed; or 2) some "
+"action has been performed using your account which has been seen as "
+"objectionable (i.e. you have breached the terms of service for use of your "
+"account) and your account has been revoked for administrative reasons. "
+"Should you have questions or concerns regarding this matter, please log a <a "
+"href=\"%2$s\">support request</a>.</p><p>Thank you, <br><br>%1$s Staff</p>"
+msgstr ""
+"<p>Регистрационные данные участника %1$s были блокированы администрацией "
+"сайта %1$s . <p> Это могло произойти по двум причинам. <u>Первая:</u> Вы "
+"подали запрос на удаление Вашего аккаунта. ; или <u>Вторая:</u> Вы нарушили "
+"условия использования предоставленных сервисов, или допустили действия "
+"расцененые администрацией как нежелательные, или приводящие к нарушению "
+"пунктов лицензионных соглашений. (например: неоговоренные в условиях вашего "
+"проекта пункты, или направления развития вашего програмного обеспечения, "
+"выходящие за рамки вашего аккаунта). Если Вы считаете важным причины "
+"удаления Вашего аккаунта, или в подробностях узнать о произошедшем, следуйте "
+"по ссылке <a href=\"/support/?group_id=1\">задать вопросы или обсудить "
+"действия администрации сайта</a>.</p><p>Будьте вежливы и учтительны."
+"<br><br>, С уважением, Администрация сайта %1$s </p>"
 
 #: plugins/authopenid/include/AuthOpenIDPlugin.class.php:85
 #, fuzzy
@@ -23688,6 +23730,23 @@ msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
 
 #, fuzzy
+#~ msgid ""
+#~ "<p>Your account is currently pending your email confirmation.<br/"
+#~ ">Visiting the link sent to you in this email will activate your account."
+#~ "<br/>If you need this email resent, please click below and a confirmation "
+#~ "email will be sent to the email address you provided in registration.</"
+#~ "p><a href=\"%1$s\">[Resend Confirmation Email]</a><br><hr>"
+#~ msgstr ""
+#~ "<P>На данном этапе вам выслано письмо на ваш е-майл для подтверждения "
+#~ "работоспособности вашего почтового ящика.\t\t Получив в теле письма "
+#~ "ссылку, проследуйте по ней, это необходимо для завершния процесса "
+#~ "регистрации\t\t .\t\t <P> Если на указанный вами е-майл, письмо по какой-"
+#~ "либо причине не пришло в течении получаса, возможно вам придется "
+#~ "повторить процедуру указания правильного е-майл адреса.\t\t<P><A href="
+#~ "\"pending-resend.php?form_user=%1$s\"><b>[Отправить повторное письмо на "
+#~ "вышеуказанный мной адрес]</b></A>\t\t<br><hr>\t\t<p>"
+
+#, fuzzy
 #~ msgid "File-Release"
 #~ msgstr "Выпущенные файлы"
 
@@ -25395,54 +25454,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "There are no public subprojects available"
 #~ msgstr "Нет подпроектов"
-
-#~ msgid "Your account is currently pending your email confirmation."
-#~ msgstr ""
-#~ ">На данном этапе вам выслано письмо на ваш е-майл для подтверждения "
-#~ "работоспособности вашего почтового ящика."
-
-#~ msgid ""
-#~ "Visiting the link sent to you in this email will activate your account."
-#~ msgstr "Для активации учётной записи посетите ссылку, присланную в письме."
-
-#~ msgid ""
-#~ "If you need this email resent, please click below and a confirmation "
-#~ "email will be sent to the email address you provided in registration."
-#~ msgstr ""
-#~ "Если на указанный вами е-майл, письмо по какой-либо причине не пришло в "
-#~ "течении получаса, возможно вам придется повторить процедуру указания "
-#~ "правильного е-майл адреса."
-
-#~ msgid "Resend Confirmation Email"
-#~ msgstr "Отправить повторное письмо на вышеуказанный мной адрес"
-
-#~ msgid "Your %1$s account has been removed by %1$s staff."
-#~ msgstr ""
-#~ "Регистрационные данные участника %1$s были блокированы администрацией "
-#~ "сайта %1$s."
-
-#~ msgid ""
-#~ "This may occur for two reasons, either 1) you requested that your account "
-#~ "be removed; or 2) some action has been performed using your account which "
-#~ "has been seen as objectionable (i.e. you have breached the terms of "
-#~ "service for use of your account) and your account has been revoked for "
-#~ "administrative reasons."
-#~ msgstr ""
-#~ "Это могло произойти по двум причинам. <u>Первая:</u> Вы подали запрос на "
-#~ "удаление Вашего аккаунта. ; или <u>Вторая:</u> Вы нарушили условия "
-#~ "использования предоставленных сервисов, или допустили действия расцененые "
-#~ "администрацией как нежелательные, или приводящие к нарушению пунктов "
-#~ "лицензионных соглашений. (например: неоговоренные в условиях вашего "
-#~ "проекта пункты, или направления развития вашего програмного обеспечения, "
-#~ "выходящие за рамки вашего аккаунта)."
-
-#~ msgid ""
-#~ "Should you have questions or concerns regarding this matter, please log a "
-#~ "<a href=\"%s\">support request</a>."
-#~ msgstr ""
-#~ "Если Вы считаете важным причины удаления Вашего аккаунта, или в "
-#~ "подробностях узнать о произошедшем, следуйте по ссылке <a href=\"%s"
-#~ "\">задать вопросы или обсудить действия администрации сайта</a>."
 
 #~ msgid ""
 #~ "To avoid having to type your password every time for your CVS/SSH "

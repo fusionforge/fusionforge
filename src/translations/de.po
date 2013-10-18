@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-18 15:28+0200\n"
+"POT-Creation-Date: 2013-10-18 15:38+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -4379,6 +4379,7 @@ msgid "Enjoy the site."
 msgstr "Viel Spaß mit der Seite."
 
 #: common/include/User.class.php:493 common/mail/MailingList.class.php:205
+#: plugins/authbuiltin/www/post-login.php:122
 #: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
 #: www/account/first.php:36 www/account/lostpw.php:67
 #: www/survey/privacy.php:58 www/survey/survey_resp.php:60
@@ -8418,41 +8419,60 @@ msgid "Your account does not exist."
 msgstr "Ihr Account existiert nicht."
 
 #: plugins/authbuiltin/www/post-login.php:110
-#, fuzzy, php-format
-msgid ""
-"<p>Your account is currently pending your email confirmation.<br/>Visiting "
-"the link sent to you in this email will activate your account.<br/>If you "
-"need this email resent, please click below and a confirmation email will be "
-"sent to the email address you provided in registration.</p><a href=\"%1$s\">"
-"[Resend Confirmation Email]</a><br><hr>"
-msgstr ""
-"<p>Ihr Account erwartet momentan Ihre E-Mail-Bestätigung.\t\tWenn Sie den "
-"Link besuchen, der Ihnen mit dieser Mail zugesandt wurde, aktivieren Sie "
-"damit Ihren Account.\t\t<p>Wenn Ihnen diese Mail erneut zugesandt werden "
-"soll klicken Sie bitte unten und eine Bestätigungsmail\t\twird an die "
-"Mailadresse verschickt, die Sie in Ihrer Registrierung angegeben haben.\t"
-"\t<p><a href=\"%1$s\">[Bestätigungsmail erneut senden]</a>\t\t<br><hr>\t\t<p>"
+msgid "Your account is currently pending your email confirmation."
+msgstr "Ihr Account erwartet momentan Ihre E-Mail-Bestätigung."
 
-#: plugins/authbuiltin/www/post-login.php:113
-#: plugins/authldap/www/post-login.php:112
+#: plugins/authbuiltin/www/post-login.php:111
+msgid "Visiting the link sent to you in this email will activate your account."
+msgstr ""
+"Das Besuchen des Links, der in dieser Email steht, wird Ihren Account "
+"aktivieren."
+
+#: plugins/authbuiltin/www/post-login.php:112
+msgid ""
+"If you need this email resent, please click below and a confirmation email "
+"will be sent to the email address you provided in registration."
+msgstr ""
+"Wenn Ihnen diese Mail erneut zugesandt werden soll klicken Sie bitte unten "
+"und eine Bestätigungsmail wird an die Mailadresse verschickt, die Sie in "
+"Ihrer Registrierung angegeben haben."
+
+#: plugins/authbuiltin/www/post-login.php:115
+#, fuzzy
+msgid "Resend Confirmation Email"
+msgstr "Weitere Informationen"
+
+#: plugins/authbuiltin/www/post-login.php:117
+#, php-format
+msgid "Your %1$s account has been removed by %1$s staff."
+msgstr "Ihr %1$s Account wurde von unserem %1$s Team entfernt."
+
+#: plugins/authbuiltin/www/post-login.php:118
+msgid ""
+"This may occur for two reasons, either 1) you requested that your account be "
+"removed; or 2) some action has been performed using your account which has "
+"been seen as objectionable (i.e. you have breached the terms of service for "
+"use of your account) and your account has been revoked for administrative "
+"reasons."
+msgstr ""
+"Dies kann aus zwei Gründen geschehen sein, entweder 1) haben Sie darum "
+"gebeten, daß Ihr Account entfernt werden soll, oder 2) es wurde eine Aktion "
+"von Ihrem Account aus ausgeführt, die als unerwünscht eingestuft wurde (z.B. "
+"Sie haben die Servicebedingungen für die Nutzung Ihres Accounts gebrochen) "
+"und Ihr Account wurde daher aus administrativen Gründen entfernt."
+
+#: plugins/authbuiltin/www/post-login.php:119
 #, php-format
 msgid ""
-"<p>Your %1$s account has been removed by %1$s staff. This may occur for two "
-"reasons, either 1) you requested that your account be removed; or 2) some "
-"action has been performed using your account which has been seen as "
-"objectionable (i.e. you have breached the terms of service for use of your "
-"account) and your account has been revoked for administrative reasons. "
 "Should you have questions or concerns regarding this matter, please log a <a "
-"href=\"%2$s\">support request</a>.</p><p>Thank you, <br><br>%1$s Staff</p>"
+"href=\"%s\">support request</a>."
 msgstr ""
-"<p>Ihr %1$s Account wurde von unserem %1$s Team entfernt. Dies kann aus zwei "
-"Gründen geschehen sein, entweder 1) haben Sie darum gebeten, daß Ihr Account "
-"entfernt werden soll, oder 2) es wurde eine Aktion von Ihrem Account aus "
-"ausgeführt, die als unerwünscht eingestuft wurde (z.B. Sie haben die "
-"Servicebedingungen für die Nutzung Ihres Accounts gebrochen) und Ihr Account "
-"wurde daher aus administrativen Gründen entfernt. Sollten Sie Fragen "
-"bezüglich dieser Angelegenheit haben, stellen Sie bitte eine <a href=\"%2$s"
-"\"> Supportanfrage</a>.</p><p>Vielen Dank, <br><br>Das %1$s Team</p>"
+"Sollten Sie Fragen bezüglich dieser Angelegenheit haben, stellen Sie bitte "
+"eine <a href=\"%s\"> Supportanfrage</a>."
+
+#: plugins/authbuiltin/www/post-login.php:120
+msgid "Thank you"
+msgstr "Danke"
 
 #: plugins/authcas/include/AuthCASPlugin.class.php:94
 msgid "Login via CAS"
@@ -8495,6 +8515,26 @@ msgstr ""
 "soll klicken Sie bitte unten und eine Bestätigungsmail\t\twird an die "
 "Mailadresse verschickt, die Sie in Ihrer Registrierung angegeben haben.\t"
 "\t<p><a href=\"%1$s\">[Bestätigungsmail erneut senden]</a>\t\t<br><hr>\t\t<p>"
+
+#: plugins/authldap/www/post-login.php:112
+#, php-format
+msgid ""
+"<p>Your %1$s account has been removed by %1$s staff. This may occur for two "
+"reasons, either 1) you requested that your account be removed; or 2) some "
+"action has been performed using your account which has been seen as "
+"objectionable (i.e. you have breached the terms of service for use of your "
+"account) and your account has been revoked for administrative reasons. "
+"Should you have questions or concerns regarding this matter, please log a <a "
+"href=\"%2$s\">support request</a>.</p><p>Thank you, <br><br>%1$s Staff</p>"
+msgstr ""
+"<p>Ihr %1$s Account wurde von unserem %1$s Team entfernt. Dies kann aus zwei "
+"Gründen geschehen sein, entweder 1) haben Sie darum gebeten, daß Ihr Account "
+"entfernt werden soll, oder 2) es wurde eine Aktion von Ihrem Account aus "
+"ausgeführt, die als unerwünscht eingestuft wurde (z.B. Sie haben die "
+"Servicebedingungen für die Nutzung Ihres Accounts gebrochen) und Ihr Account "
+"wurde daher aus administrativen Gründen entfernt. Sollten Sie Fragen "
+"bezüglich dieser Angelegenheit haben, stellen Sie bitte eine <a href=\"%2$s"
+"\"> Supportanfrage</a>.</p><p>Vielen Dank, <br><br>Das %1$s Team</p>"
 
 #: plugins/authopenid/include/AuthOpenIDPlugin.class.php:85
 #, fuzzy
@@ -23621,6 +23661,22 @@ msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
 
 #, fuzzy
+#~ msgid ""
+#~ "<p>Your account is currently pending your email confirmation.<br/"
+#~ ">Visiting the link sent to you in this email will activate your account."
+#~ "<br/>If you need this email resent, please click below and a confirmation "
+#~ "email will be sent to the email address you provided in registration.</"
+#~ "p><a href=\"%1$s\">[Resend Confirmation Email]</a><br><hr>"
+#~ msgstr ""
+#~ "<p>Ihr Account erwartet momentan Ihre E-Mail-Bestätigung.\t\tWenn Sie den "
+#~ "Link besuchen, der Ihnen mit dieser Mail zugesandt wurde, aktivieren Sie "
+#~ "damit Ihren Account.\t\t<p>Wenn Ihnen diese Mail erneut zugesandt werden "
+#~ "soll klicken Sie bitte unten und eine Bestätigungsmail\t\twird an die "
+#~ "Mailadresse verschickt, die Sie in Ihrer Registrierung angegeben haben.\t"
+#~ "\t<p><a href=\"%1$s\">[Bestätigungsmail erneut senden]</a>\t\t<br><hr>\t"
+#~ "\t<p>"
+
+#, fuzzy
 #~ msgid "File-Release"
 #~ msgstr "Datei freigegeben"
 
@@ -25645,50 +25701,6 @@ msgstr "Persönliche Seite für %s"
 #~ msgstr ""
 #~ "Es tut uns Leid, doch dieses Projekt hat bisher keine eigene Website "
 #~ "hochgeladen."
-
-#~ msgid "Your account is currently pending your email confirmation."
-#~ msgstr "Ihr Account erwartet momentan Ihre E-Mail-Bestätigung."
-
-#~ msgid ""
-#~ "Visiting the link sent to you in this email will activate your account."
-#~ msgstr ""
-#~ "Das Besuchen des Links, der in dieser Email steht, wird Ihren Account "
-#~ "aktivieren."
-
-#~ msgid ""
-#~ "If you need this email resent, please click below and a confirmation "
-#~ "email will be sent to the email address you provided in registration."
-#~ msgstr ""
-#~ "Wenn Ihnen diese Mail erneut zugesandt werden soll klicken Sie bitte "
-#~ "unten und eine Bestätigungsmail wird an die Mailadresse verschickt, die "
-#~ "Sie in Ihrer Registrierung angegeben haben."
-
-#~ msgid "Your %1$s account has been removed by %1$s staff."
-#~ msgstr "Ihr %1$s Account wurde von unserem %1$s Team entfernt."
-
-#~ msgid ""
-#~ "This may occur for two reasons, either 1) you requested that your account "
-#~ "be removed; or 2) some action has been performed using your account which "
-#~ "has been seen as objectionable (i.e. you have breached the terms of "
-#~ "service for use of your account) and your account has been revoked for "
-#~ "administrative reasons."
-#~ msgstr ""
-#~ "Dies kann aus zwei Gründen geschehen sein, entweder 1) haben Sie darum "
-#~ "gebeten, daß Ihr Account entfernt werden soll, oder 2) es wurde eine "
-#~ "Aktion von Ihrem Account aus ausgeführt, die als unerwünscht eingestuft "
-#~ "wurde (z.B. Sie haben die Servicebedingungen für die Nutzung Ihres "
-#~ "Accounts gebrochen) und Ihr Account wurde daher aus administrativen "
-#~ "Gründen entfernt."
-
-#~ msgid ""
-#~ "Should you have questions or concerns regarding this matter, please log a "
-#~ "<a href=\"%s\">support request</a>."
-#~ msgstr ""
-#~ "Sollten Sie Fragen bezüglich dieser Angelegenheit haben, stellen Sie "
-#~ "bitte eine <a href=\"%s\"> Supportanfrage</a>."
-
-#~ msgid "Thank you"
-#~ msgstr "Danke"
 
 #~ msgid "Invalid user name: %s"
 #~ msgstr "Ungültiger Benutzer: %s"
