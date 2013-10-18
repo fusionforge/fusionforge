@@ -130,17 +130,15 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<hr />
 	<h2><?php echo _('Pending') . ': <i>'. $row_grp['group_name'] . '</i>'; ?></h2>
 
-	<p />
 	<h3><?php  echo _('Pre-approval modifications :'); ?></h3>
 
-	<p><?php echo util_make_link ('/admin/groupedit.php?group_id='.$row_grp['group_id'],_('[Edit Project Details]'));
+	<p><?php echo util_make_link ('/admin/groupedit.php?group_id='.$row_grp['group_id'],_('Edit Project Details'));
 	echo _(' or ');
-	echo util_make_link ('/project/admin/?group_id='.$row_grp['group_id'],_('[Project Admin]'));
+	echo util_make_link ('/project/admin/?group_id='.$row_grp['group_id'],_('Project Admin'));
 	echo _(' or ');
-	echo util_make_link ('/admin/userlist.php?group_id='.$row_grp['group_id'],_('[View/Edit Project Members]')); ?></p>
+	echo util_make_link ('/admin/userlist.php?group_id='.$row_grp['group_id'],_('View/Edit Project Members')); ?></p>
 
-	<p />
-	<h3><?php  echo _('Decision :'); ?></h3>
+	<h3><?php echo _('Decision :'); ?></h3>
 	<table><tr class="bottom"><td>
 
 	<form name="approve.<?php echo $row_grp['unix_group_name'] ?>" action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
@@ -160,12 +158,11 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<br />
 	<?php echo _('Custom response title and text'); ?><br />
 	<input type="text" name="response_title" size="30" maxlength="25" /><br />
-	<textarea name="response_text" rows="5" cols="50"></textarea><br />
-	<input type="checkbox" name="add_to_can" value="<?php echo _('yes'); ?>" /><?php echo _('Add this custom response to canned responses') ;?>
+	<textarea name="response_text" rows="10" cols="50"></textarea>
+	<input type="checkbox" name="add_to_can" value="<?php echo _('Yes'); ?>" /><?php echo _('Add this custom response to canned responses') ;?>
 	<br />
 	<input type="submit" name="submit" value="<?php echo _('Reject'); ?>" />
 	</form>
-
 	</td></tr>
 	</table>
 
