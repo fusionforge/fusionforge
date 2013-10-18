@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-18 15:38+0200\n"
+"POT-Creation-Date: 2013-10-18 17:08+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -472,7 +472,7 @@ msgstr "Projet"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:631
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/index.php:195
 #: www/account/lostlogin.php:84 www/account/register.php:211
-#: www/admin/approve-pending.php:193 www/admin/database.php:155
+#: www/admin/approve-pending.php:190 www/admin/database.php:155
 #: www/admin/globalroledelete.php:49 www/admin/responses_admin.php:42
 #: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
 #: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
@@ -3208,7 +3208,7 @@ msgid "Project Full Name"
 msgstr "Nom complet du projet"
 
 #: common/include/Group.class.php:2626 plugins/projectlabels/www/index.php:172
-#: www/admin/approve-pending.php:193 www/admin/database.php:155
+#: www/admin/approve-pending.php:190 www/admin/database.php:155
 #: www/admin/groupedit.php:170 www/admin/vhost.php:118
 #: www/register/index.php:213
 msgid "Project Unix Name"
@@ -3559,7 +3559,8 @@ msgstr "Résumé du projet, construit à partir de widgets."
 msgid "Admin"
 msgstr "Administration"
 
-#: common/include/Navigation.class.php:398 www/admin/groupedit.php:99
+#: common/include/Navigation.class.php:398 www/admin/approve-pending.php:137
+#: www/admin/groupedit.php:99
 msgid "Project Admin"
 msgstr "Administration du projet"
 
@@ -5327,7 +5328,7 @@ msgstr "Confié à"
 #: common/tracker/views/form-customizelist.php:42
 #: cronjobs/send_pending_items_mail.php:79
 #: cronjobs/send_pending_items_mail.php:120
-#: plugins/mantisbt/controler/filter.php:122 www/admin/approve-pending.php:212
+#: plugins/mantisbt/controler/filter.php:122 www/admin/approve-pending.php:209
 #: www/admin/pending-news.php:139 www/my/dashboard.php:81
 #: www/news/admin/index.php:125 www/pm/detail_task.php:42
 #: www/pm/mod_task.php:52
@@ -5386,13 +5387,14 @@ msgid "No items found"
 msgstr "Aucun élément trouvé"
 
 #: common/tracker/actions/csv.php:82
+#, fuzzy
 msgid ""
 "This page allows you to export the items using a CSV (<a href=\"http://en."
 "wikipedia.org/wiki/Comma-separated_values\">Comma Separated Values</a>) "
-"File. This format can be used to view your entries using MS Excel."
+"File. This format can be used to view your entries using Microsoft Excel."
 msgstr ""
 "Cette page permet d'exporter ou d'importer toutes les tâches au format <a "
-"href=\"http://fr.wikipedia.org/wiki/Comma-separated_values\">CSV</a>.  Ce "
+"href=\"http://fr.wikipedia.org/wiki/Comma-separated_values\">CSV</a>. Ce "
 "format peut être utilisé pour visualiser les tâches dans un tableur."
 
 #: common/tracker/actions/csv.php:83
@@ -6597,10 +6599,10 @@ msgstr "Êtes-vous sûr de vouloir supprimer la feuille de route %s ?"
 #: plugins/mailman/www/admin/index.php:183
 #: plugins/projects-hierarchy/view/admin_project_link.php:69
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
-#: www/admin/groupedit.php:161 www/admin/responses_admin.php:50
-#: www/forum/admin/index.php:222 www/mail/admin/index.php:190
-#: www/mail/admin/index.php:221 www/people/editprofile.php:244
-#: www/survey/include/SurveyHTML.class.php:195
+#: www/admin/approve-pending.php:162 www/admin/groupedit.php:161
+#: www/admin/responses_admin.php:50 www/forum/admin/index.php:222
+#: www/mail/admin/index.php:190 www/mail/admin/index.php:221
+#: www/people/editprofile.php:244 www/survey/include/SurveyHTML.class.php:195
 #: www/survey/include/SurveyHTML.class.php:418
 msgid "Yes"
 msgstr "Oui"
@@ -6936,9 +6938,9 @@ msgid "General"
 msgstr "Général"
 
 #: common/widget/WidgetLayoutManager.class.php:182
-#, fuzzy, php-format
+#, php-format
 msgid "DB Error: %s"
-msgstr "Erreur"
+msgstr "Erreur de base de données : %s"
 
 #: common/widget/WidgetLayoutManager.class.php:259
 #: common/widget/WidgetLayoutManager.class.php:264
@@ -6975,9 +6977,8 @@ msgid "Already used"
 msgstr "Déjà utilisé"
 
 #: common/widget/WidgetLayoutManager.class.php:710
-#, php-format
-msgid "Your <a href=\"%s\">dashboard</a> has been updated."
-msgstr "Votre <a href=\"%s\">tableau de bord</a> a été mis à jour."
+msgid "Your dashboard has been updated."
+msgstr "Votre tableau de bord a été mis à jour."
 
 #: common/widget/Widget_MyAdmin.class.php:35
 msgid "Pending administrative tasks"
@@ -11487,7 +11488,7 @@ msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:36
 msgid "Invalid file upload"
-msgstr ""
+msgstr "Téléchargement de fichier invalide"
 
 #: plugins/mediawiki/www/plugin_admin.php:40
 msgid "Not a valid PNG image"
@@ -11528,11 +11529,11 @@ msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:113
 msgid "File successfully removed"
-msgstr "Fichier correctement supprimé."
+msgstr "Fichier supprimé avec succès"
 
 #: plugins/mediawiki/www/plugin_admin.php:115
 msgid "File removal error"
-msgstr "Erreur lors de la suppression du fichier."
+msgstr "Erreur lors de la suppression du fichier"
 
 #: plugins/mediawiki/www/plugin_admin.php:167
 msgid "Nightly XML dump"
@@ -11770,14 +11771,12 @@ msgid "<b>Step 1: </b>Get Request Token "
 msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:133
-#, fuzzy
 msgid "New request token received!"
-msgstr "Aucune question trouvée"
+msgstr "Nouveau jeton d'accès reçu !"
 
 #: plugins/oauthconsumer/www/get_access_token.php:134
-#, fuzzy
 msgid "Request Token Key"
-msgstr "Demander à rejoindre le projet"
+msgstr "Demander un jeton"
 
 #: plugins/oauthconsumer/www/get_access_token.php:135
 #, fuzzy
@@ -11861,9 +11860,8 @@ msgid "Add provider"
 msgstr "Ajouter un fournisseur"
 
 #: plugins/oauthprovider/include/oauthprovider_plugin.php:167
-#, fuzzy
 msgid "View Personal oauthprovider"
-msgstr "Voir le MantisBT personnel"
+msgstr "Voir l'oauthprovider personnel"
 
 #: plugins/oauthprovider/include/oauthprovider_plugin.php:178
 #, fuzzy
@@ -11931,9 +11929,8 @@ msgid "Deny"
 msgstr "Interdire"
 
 #: plugins/oauthprovider/www/checks.php:45
-#, fuzzy
 msgid "OAuth"
-msgstr "Auteur"
+msgstr ""
 
 #: plugins/oauthprovider/www/checks.php:82
 #: plugins/oauthprovider/www/checks.php:153
@@ -12065,9 +12062,8 @@ msgid "Opening fileinfo database failed"
 msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:164
-#, fuzzy
 msgid "Uploaded files available"
-msgstr "Pas de types de fichiers disponibles."
+msgstr "Fichiers téléchargés disponibles"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:166
 #: plugins/quota_management/www/quota_admin.php:92
@@ -12116,7 +12112,7 @@ msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:405
 msgid "Missing a temporary folder"
-msgstr "répertoire temporaire manquant"
+msgstr "Répertoire temporaire manquant"
 
 #: plugins/projectimport/common/UploadedFiles.class.php:407
 msgid "Failed to write file to disk."
@@ -12489,9 +12485,8 @@ msgid "Failed to update configuration."
 msgstr "Incapable de mettre à jour les favoris."
 
 #: plugins/projects-hierarchy/actions/updateProjectConf.php:38
-#, fuzzy
 msgid "Projects Hierarchy configuration successfully updated."
-msgstr "Informations du projet mises à jour"
+msgstr ""
 
 #: plugins/projects-hierarchy/actions/validateRelationship.php:33
 #, fuzzy
@@ -13732,9 +13727,8 @@ msgid "Subversion Commits"
 msgstr "Envois Subversion"
 
 #: plugins/soapadmin/include/soapadminPlugin.class.php:138
-#, fuzzy
 msgid "View Personal SoapAdmin"
-msgstr "Voir le MantisBT personnel"
+msgstr "Voir le SoapAdmin personnel"
 
 #: plugins/soapadmin/include/soapadminPlugin.class.php:148
 #, fuzzy
@@ -14277,7 +14271,7 @@ msgid "Email Address"
 msgstr "Adresse électronique"
 
 #: www/account/index.php:197
-msgid "Change Email Addr"
+msgid "Change Email Address"
 msgstr "Modifier l'adresse électronique"
 
 #: www/account/index.php:202 www/account/register.php:218
@@ -14492,7 +14486,6 @@ msgstr ""
 "Vous ne pouvez pas créer de compte sans accepter les conditions "
 "d'utilisation."
 
-# :www/account/register.php:92
 #: www/account/register.php:98
 msgid "Register Confirmation"
 msgstr "Confirmation d'enregistrement"
@@ -14564,7 +14557,7 @@ msgstr "Langue :"
 
 #: www/account/register.php:201
 msgid "Theme"
-msgstr "Thème :"
+msgstr "Thème"
 
 #: www/account/register.php:212
 #, php-format
@@ -14642,7 +14635,6 @@ msgstr ""
 msgid "Error while activiting account"
 msgstr "Erreur durant l'activation du compte"
 
-# :www/account/verify.php:71
 #: www/account/verify.php:66
 msgid "Verify"
 msgstr "Vérification"
@@ -14825,97 +14817,88 @@ msgstr "Il n'y a pas de projet en attente d'approbation."
 msgid "Pending projects:"
 msgstr "Projets en attente :"
 
-#: www/admin/approve-pending.php:134
+#: www/admin/approve-pending.php:133
 msgid "Pre-approval modifications :"
 msgstr ""
 
-#: www/admin/approve-pending.php:136
-msgid "[Edit Project Details]"
-msgstr "[Éditer les informations du projet]"
+#: www/admin/approve-pending.php:135
+msgid "Edit Project Details"
+msgstr "Modifier les informations du projet"
 
-#: www/admin/approve-pending.php:137 www/admin/approve-pending.php:139
-#: www/admin/approve-pending.php:152
+#: www/admin/approve-pending.php:136 www/admin/approve-pending.php:138
+#: www/admin/approve-pending.php:150
 msgid " or "
 msgstr ""
 
-#: www/admin/approve-pending.php:138 www/admin/useredit.php:276
-#: www/admin/useredit.php:307
-msgid "[Project Admin]"
-msgstr "[Administration du projet]"
+#: www/admin/approve-pending.php:139
+msgid "View/Edit Project Members"
+msgstr "Voir/modifier les membres du projet"
 
-#: www/admin/approve-pending.php:140
-msgid "[View/Edit Project Members]"
-msgstr "[Voir/Éditer les membres du projet]"
-
-#: www/admin/approve-pending.php:143
+#: www/admin/approve-pending.php:141
 #, fuzzy
 msgid "Decision :"
 msgstr "Version :"
 
-#: www/admin/approve-pending.php:149
+#: www/admin/approve-pending.php:147
 msgid "Approve"
 msgstr "Approuver"
 
-#: www/admin/approve-pending.php:158
+#: www/admin/approve-pending.php:156
 msgid "Rejection canned responses"
 msgstr "Réponses types de refus"
 
-#: www/admin/approve-pending.php:159
+#: www/admin/approve-pending.php:157
 msgid "(manage responses)"
 msgstr "(gérer les réponses)"
 
-#: www/admin/approve-pending.php:161
+#: www/admin/approve-pending.php:159
 msgid "Custom response title and text"
 msgstr "Personnaliser le titre et le texte de la réponse"
 
-#: www/admin/approve-pending.php:164
-msgid "yes"
-msgstr "oui"
-
-#: www/admin/approve-pending.php:164
+#: www/admin/approve-pending.php:162
 msgid "Add this custom response to canned responses"
 msgstr "Ajouter cette réponse personnalisée aux réponses-types"
 
-#: www/admin/approve-pending.php:166 www/admin/pending-news.php:144
+#: www/admin/approve-pending.php:164 www/admin/pending-news.php:144
 #: www/project/admin/users.php:248
 msgid "Reject"
 msgstr "Rejeter"
 
-#: www/admin/approve-pending.php:172
+#: www/admin/approve-pending.php:169
 #, fuzzy
 msgid "Project details :"
 msgstr "Total pour le projet :"
 
-#: www/admin/approve-pending.php:180 www/admin/groupedit.php:183
+#: www/admin/approve-pending.php:177 www/admin/groupedit.php:183
 msgid "Home Box:"
 msgstr "Serveur shell :"
 
-#: www/admin/approve-pending.php:184 www/admin/groupedit.php:193
+#: www/admin/approve-pending.php:181 www/admin/groupedit.php:193
 msgid "HTTP Domain:"
 msgstr "Domaine HTTP :"
 
-#: www/admin/approve-pending.php:195
+#: www/admin/approve-pending.php:192
 msgid "Submitted Description:"
 msgstr "Description proposée :"
 
-#: www/admin/approve-pending.php:197
+#: www/admin/approve-pending.php:194
 msgid "Purpose of submission:"
 msgstr "Objectif de la demande :"
 
-#: www/admin/approve-pending.php:200
+#: www/admin/approve-pending.php:197
 msgid "License Other:"
 msgstr "Autre licence :"
 
-#: www/admin/approve-pending.php:204
+#: www/admin/approve-pending.php:201
 msgid "Pending reason:"
 msgstr "Motif de l'attente :"
 
-#: www/admin/approve-pending.php:218
+#: www/admin/approve-pending.php:215
 #, fuzzy
 msgid "Based on template project"
 msgstr "Construit en prenant le projet %s (%s) pour modèle"
 
-#: www/admin/approve-pending.php:233
+#: www/admin/approve-pending.php:230
 msgid "Approve All On This Page"
 msgstr "Tout approuver sur cette page"
 
@@ -15042,7 +15025,6 @@ msgid "Error while removing user %s from role"
 msgstr "Erreur lors de la révocation d'un rôle de l'utilisateur %s."
 
 #: www/admin/globalroleedit.php:135
-#, fuzzy
 msgid "Cannot remove user from this type of role"
 msgstr "Impossible de supprimer un utilisateur de ce type de rôle."
 
@@ -15535,9 +15517,8 @@ msgid "Plugin %1$s updated Successfully"
 msgstr "Greffon %1$s mis à jour avec succès"
 
 #: www/admin/pluginman.php:75 www/admin/pluginman.php:113
-#, fuzzy
 msgid "Couldn't get plugin object"
-msgstr "Erreur lors de la création de l'objet Forum"
+msgstr "Greffon non trouvé"
 
 #: www/admin/pluginman.php:84
 msgid ""
@@ -15678,13 +15659,11 @@ msgid "No user found."
 msgstr "Aucun utilisateur trouvé."
 
 #: www/admin/search.php:144
-#, php-format
+#, fuzzy, php-format
 msgid "Group search with criteria <em>%s</em>: %d match"
 msgid_plural "Group search with criteria <em>%s</em>: %d matches"
-msgstr[0] ""
-"Recherche de groupes selon les critères <em>%1$s</em> : %2$d résultat"
-msgstr[1] ""
-"Recherche de groupes selon les critères <em>%1$s</em> : %2$d résultats"
+msgstr[0] "Recherche de projets selon les critères <em>%s</em> : %d résultat"
+msgstr[1] "Recherche de projets selon les critères <em>%s</em> : %d résultats"
 
 #: www/admin/search.php:149 www/register/index.php:187
 msgid "Full Name"
@@ -15928,6 +15907,11 @@ msgstr "Nom Unix"
 #: www/project/admin/vhost.php:138
 msgid "Operations"
 msgstr "Opérations"
+
+#: www/admin/useredit.php:276 www/admin/useredit.php:307
+#, fuzzy
+msgid "[Project Admin]"
+msgstr "Administration du projet"
 
 #: www/admin/useredit.php:286
 msgid "This user is not a member of any project."
@@ -16865,7 +16849,7 @@ msgstr "Paquet ajouté"
 
 #: www/frs/admin/index.php:108
 msgid "Updated Package"
-msgstr "Mettre à jour le paquet"
+msgstr "Le paquet a été mis à jour"
 
 #: www/frs/admin/index.php:120
 msgid "QRS"
@@ -22850,6 +22834,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
+#~ msgid "yes"
+#~ msgstr "oui"
+
 #, fuzzy
 #~ msgid ""
 #~ "<p>Your account is currently pending your email confirmation.<br/"
@@ -25840,9 +25827,6 @@ msgstr "Page personnelle de %s"
 #~ "Votre profil d'utilisateur contient des informations personnelles. Vous "
 #~ "devez les tenir à jour."
 
-#~ msgid "Change Email Address"
-#~ msgstr "Modifier l'adresse électronique"
-
 #~ msgid "Login with SSL"
 #~ msgstr "Connexion avec SSL"
 
@@ -25866,12 +25850,6 @@ msgstr "Page personnelle de %s"
 #~ msgid "Approving Project"
 #~ msgstr "Approbation du projet"
 
-#~ msgid "Edit Project Details"
-#~ msgstr "Modifier les informations du projet"
-
-#~ msgid "View/Edit Project Members"
-#~ msgstr "Voir/modifier les membres du projet"
-
 #~ msgid "User removed successfully"
 #~ msgstr "Utilisateur supprimé avec succès"
 
@@ -25892,13 +25870,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Could not get plugin object"
 #~ msgstr "Greffon non trouvé"
-
-#~ msgid "Project search with criteria <em>%s</em>: %d match"
-#~ msgid_plural "Project search with criteria <em>%s</em>: %d matches"
-#~ msgstr[0] ""
-#~ "Recherche de projets selon les critères <em>%s</em> : %d résultat"
-#~ msgstr[1] ""
-#~ "Recherche de projets selon les critères <em>%s</em> : %d résultats"
 
 #~ msgid ""
 #~ "Unix status updated mirroring web status, unless it has value 'No Unix "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-18 15:38+0200\n"
+"POT-Creation-Date: 2013-10-18 17:08+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -486,7 +486,7 @@ msgstr "Proyecto"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:631
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/index.php:195
 #: www/account/lostlogin.php:84 www/account/register.php:211
-#: www/admin/approve-pending.php:193 www/admin/database.php:155
+#: www/admin/approve-pending.php:190 www/admin/database.php:155
 #: www/admin/globalroledelete.php:49 www/admin/responses_admin.php:42
 #: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
 #: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
@@ -3271,7 +3271,7 @@ msgid "Project Full Name"
 msgstr "Nombre completo del proyecto"
 
 #: common/include/Group.class.php:2626 plugins/projectlabels/www/index.php:172
-#: www/admin/approve-pending.php:193 www/admin/database.php:155
+#: www/admin/approve-pending.php:190 www/admin/database.php:155
 #: www/admin/groupedit.php:170 www/admin/vhost.php:118
 #: www/register/index.php:213
 msgid "Project Unix Name"
@@ -3617,9 +3617,10 @@ msgstr "Página Principal de Proyecto orientada a Widgets"
 msgid "Admin"
 msgstr "Administración"
 
-#: common/include/Navigation.class.php:398 www/admin/groupedit.php:99
+#: common/include/Navigation.class.php:398 www/admin/approve-pending.php:137
+#: www/admin/groupedit.php:99
 msgid "Project Admin"
-msgstr "Admin. de Projectos"
+msgstr "Administrador del Proyecto"
 
 #: common/include/Navigation.class.php:414 www/activity/index.php:95
 #: www/activity/index.php:179 www/activity/index.php:265
@@ -5423,7 +5424,7 @@ msgstr "Asignado a"
 #: common/tracker/views/form-customizelist.php:42
 #: cronjobs/send_pending_items_mail.php:79
 #: cronjobs/send_pending_items_mail.php:120
-#: plugins/mantisbt/controler/filter.php:122 www/admin/approve-pending.php:212
+#: plugins/mantisbt/controler/filter.php:122 www/admin/approve-pending.php:209
 #: www/admin/pending-news.php:139 www/my/dashboard.php:81
 #: www/news/admin/index.php:125 www/pm/detail_task.php:42
 #: www/pm/mod_task.php:52
@@ -5486,7 +5487,7 @@ msgstr "No se encuentran registros"
 msgid ""
 "This page allows you to export the items using a CSV (<a href=\"http://en."
 "wikipedia.org/wiki/Comma-separated_values\">Comma Separated Values</a>) "
-"File. This format can be used to view your entries using MS Excel."
+"File. This format can be used to view your entries using Microsoft Excel."
 msgstr ""
 "Esta pagina permite exportar los elementos usando un Fichero CSV (<a href="
 "\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated "
@@ -6700,10 +6701,10 @@ msgstr "¿Está seguro que desea borrar el roadmap %s ?"
 #: plugins/mailman/www/admin/index.php:183
 #: plugins/projects-hierarchy/view/admin_project_link.php:69
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
-#: www/admin/groupedit.php:161 www/admin/responses_admin.php:50
-#: www/forum/admin/index.php:222 www/mail/admin/index.php:190
-#: www/mail/admin/index.php:221 www/people/editprofile.php:244
-#: www/survey/include/SurveyHTML.class.php:195
+#: www/admin/approve-pending.php:162 www/admin/groupedit.php:161
+#: www/admin/responses_admin.php:50 www/forum/admin/index.php:222
+#: www/mail/admin/index.php:190 www/mail/admin/index.php:221
+#: www/people/editprofile.php:244 www/survey/include/SurveyHTML.class.php:195
 #: www/survey/include/SurveyHTML.class.php:418
 msgid "Yes"
 msgstr "Sí"
@@ -7079,8 +7080,8 @@ msgid "Already used"
 msgstr "Ya utilizado"
 
 #: common/widget/WidgetLayoutManager.class.php:710
-#, php-format
-msgid "Your <a href=\"%s\">dashboard</a> has been updated."
+#, fuzzy
+msgid "Your dashboard has been updated."
 msgstr "Tu <a href=\"%s\">cuadro de mando</a> ha sido actualizado."
 
 #: common/widget/Widget_MyAdmin.class.php:35
@@ -14454,7 +14455,7 @@ msgid "Email Address"
 msgstr "Dirección e-mail"
 
 #: www/account/index.php:197
-msgid "Change Email Addr"
+msgid "Change Email Address"
 msgstr "Cambiar Dirección e-mail"
 
 #: www/account/index.php:202 www/account/register.php:218
@@ -14990,98 +14991,89 @@ msgstr "No hay projectos pendientes de aprobación"
 msgid "Pending projects:"
 msgstr "Projectos Pendientes:"
 
-#: www/admin/approve-pending.php:134
+#: www/admin/approve-pending.php:133
 msgid "Pre-approval modifications :"
 msgstr ""
 
-#: www/admin/approve-pending.php:136
-msgid "[Edit Project Details]"
-msgstr "[Editar Detalles de Proyectos]"
+#: www/admin/approve-pending.php:135
+msgid "Edit Project Details"
+msgstr "Editar Detalles de Proyectos"
 
-#: www/admin/approve-pending.php:137 www/admin/approve-pending.php:139
-#: www/admin/approve-pending.php:152
+#: www/admin/approve-pending.php:136 www/admin/approve-pending.php:138
+#: www/admin/approve-pending.php:150
 msgid " or "
 msgstr ""
 
-#: www/admin/approve-pending.php:138 www/admin/useredit.php:276
-#: www/admin/useredit.php:307
-msgid "[Project Admin]"
-msgstr "[Administrador del Proyecto]"
+#: www/admin/approve-pending.php:139
+msgid "View/Edit Project Members"
+msgstr "Ver/Editar Miembros del Proyecto"
 
-#: www/admin/approve-pending.php:140
-msgid "[View/Edit Project Members]"
-msgstr "[Ver/Editar Miembros del Proyecto]"
-
-#: www/admin/approve-pending.php:143
+#: www/admin/approve-pending.php:141
 #, fuzzy
 msgid "Decision :"
 msgstr "Versión:"
 
-#: www/admin/approve-pending.php:149
+#: www/admin/approve-pending.php:147
 msgid "Approve"
 msgstr "Aprobar"
 
-#: www/admin/approve-pending.php:158
+#: www/admin/approve-pending.php:156
 #, fuzzy
 msgid "Rejection canned responses"
 msgstr "Usar plantilla de Respuesta"
 
-#: www/admin/approve-pending.php:159
+#: www/admin/approve-pending.php:157
 msgid "(manage responses)"
 msgstr "(gestionar respuestas)"
 
-#: www/admin/approve-pending.php:161
+#: www/admin/approve-pending.php:159
 msgid "Custom response title and text"
 msgstr "Título y Texto de Respuestas Habituales"
 
-#: www/admin/approve-pending.php:164
-msgid "yes"
-msgstr "Sí"
-
-#: www/admin/approve-pending.php:164
+#: www/admin/approve-pending.php:162
 msgid "Add this custom response to canned responses"
 msgstr "Agregar esta respuesta personalizada a las predefinidas"
 
-#: www/admin/approve-pending.php:166 www/admin/pending-news.php:144
+#: www/admin/approve-pending.php:164 www/admin/pending-news.php:144
 #: www/project/admin/users.php:248
 msgid "Reject"
 msgstr "Rechazar"
 
-#: www/admin/approve-pending.php:172
+#: www/admin/approve-pending.php:169
 #, fuzzy
 msgid "Project details :"
 msgstr "Total de Proyectos:"
 
-#: www/admin/approve-pending.php:180 www/admin/groupedit.php:183
+#: www/admin/approve-pending.php:177 www/admin/groupedit.php:183
 msgid "Home Box:"
 msgstr "Buzón:"
 
-#: www/admin/approve-pending.php:184 www/admin/groupedit.php:193
+#: www/admin/approve-pending.php:181 www/admin/groupedit.php:193
 msgid "HTTP Domain:"
 msgstr "Dominio HTTP:"
 
-#: www/admin/approve-pending.php:195
+#: www/admin/approve-pending.php:192
 msgid "Submitted Description:"
 msgstr "Descripción Proporcionada:"
 
-#: www/admin/approve-pending.php:197
+#: www/admin/approve-pending.php:194
 msgid "Purpose of submission:"
 msgstr "Propuesta de envio:"
 
-#: www/admin/approve-pending.php:200
+#: www/admin/approve-pending.php:197
 msgid "License Other:"
 msgstr "Otra Licencia:"
 
-#: www/admin/approve-pending.php:204
+#: www/admin/approve-pending.php:201
 msgid "Pending reason:"
 msgstr "Razón por la que está Pendiente:"
 
-#: www/admin/approve-pending.php:218
+#: www/admin/approve-pending.php:215
 #, fuzzy
 msgid "Based on template project"
 msgstr "Basado en la plantilla del proyecto: %s (%s)"
 
-#: www/admin/approve-pending.php:233
+#: www/admin/approve-pending.php:230
 msgid "Approve All On This Page"
 msgstr "Aprobar todo lo de esta página"
 
@@ -16086,6 +16078,11 @@ msgstr "Nombre Unix"
 #: www/project/admin/vhost.php:138
 msgid "Operations"
 msgstr "Operaciones"
+
+#: www/admin/useredit.php:276 www/admin/useredit.php:307
+#, fuzzy
+msgid "[Project Admin]"
+msgstr "Administrador del Proyecto"
 
 #: www/admin/useredit.php:286
 msgid "This user is not a member of any project."
@@ -19443,6 +19440,7 @@ msgid "Upload data into the tasks"
 msgstr "Subir datos en las tareas"
 
 #: www/pm/csv.php:79
+#, fuzzy
 msgid ""
 "This page allows you to export or import all the tasks using a CSV (<a href="
 "\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated "
@@ -22974,6 +22972,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
 
+#~ msgid "yes"
+#~ msgstr "Sí"
+
 #~ msgid ""
 #~ "<p>Your account is currently pending your email confirmation.<br/"
 #~ ">Visiting the link sent to you in this email will activate your account."
@@ -24841,9 +24842,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Account options"
 #~ msgstr "Informacion de la cuenta"
-
-#~ msgid "Change Email Address"
-#~ msgstr "Cambiar Dirección e-mail"
 
 #~ msgid ""
 #~ "You are now being sent a confirmation email to verify your email address. "
