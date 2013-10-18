@@ -707,7 +707,7 @@ class WidgetLayoutManager {
 		} elseif ($owner_type == self::OWNER_TYPE_USER) {
 			$link = '/my/';
 		}
-		$GLOBALS['feedback'] .= vsprintf(_('Your <a href="%s">dashboard</a> has been updated.'),  $link);
+		$GLOBALS['feedback'] .= _('Your dashboard has been updated.');
 	}
 
 	/**
