@@ -61,6 +61,7 @@ class WidgetLayout {
 							forcePlaceholderSize: true,
 							forceHelperSize: true,
 							placeholder: 'ui-state-highlight',
+							handle: '.widget_titlebar_handle',
 							update: function (event, ui) {
 								var urlparams = '/widgets/updatelayout.php?owner=$owner_type'+$owner_id+'&layout_id='+$this->id;
 								jQuery('#'+value).children('div').each(function(){
