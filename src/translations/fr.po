@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-18 15:23+0200\n"
+"POT-Creation-Date: 2013-10-18 15:28+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -10100,6 +10100,10 @@ msgstr "En attente"
 #: plugins/hudson/include/HudsonJob.class.php:170
 msgid "Unknown status"
 msgstr "État inconnu"
+
+#: plugins/hudson/include/HudsonJobWidget.class.php:40
+msgid "Cannot add empty job id"
+msgstr "Impossible d'ajouter une tâche vide"
 
 #: plugins/hudson/include/HudsonJobWidget.class.php:58
 #: plugins/hudson/include/HudsonJobWidget.class.php:82

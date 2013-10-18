@@ -37,7 +37,7 @@ abstract class HudsonJobWidget extends HudsonWidget {
 	function create(&$request) {
 		$content_id = false;
 		$vId = new Valid_Uint('job_id');
-		$vId->setErrorMessage("Can't add empty job id");
+		$vId->setErrorMessage(_("Cannot add empty job id"));
 		$vId->required();
 		if ($request->valid($vId)) {
 			$job_id = $request->get('job_id');

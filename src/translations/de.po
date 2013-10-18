@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-18 15:23+0200\n"
+"POT-Creation-Date: 2013-10-18 15:28+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -10545,6 +10545,10 @@ msgstr "(*)Anstehend"
 #, fuzzy
 msgid "Unknown status"
 msgstr "Unbekannte Status ID"
+
+#: plugins/hudson/include/HudsonJobWidget.class.php:40
+msgid "Cannot add empty job id"
+msgstr ""
 
 #: plugins/hudson/include/HudsonJobWidget.class.php:58
 #: plugins/hudson/include/HudsonJobWidget.class.php:82

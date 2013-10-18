@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-18 15:23+0200\n"
+"POT-Creation-Date: 2013-10-18 15:28+0200\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9626,6 +9626,10 @@ msgstr ""
 
 #: plugins/hudson/include/HudsonJob.class.php:170
 msgid "Unknown status"
+msgstr ""
+
+#: plugins/hudson/include/HudsonJobWidget.class.php:40
+msgid "Cannot add empty job id"
 msgstr ""
 
 #: plugins/hudson/include/HudsonJobWidget.class.php:58

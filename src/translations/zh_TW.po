@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-18 15:23+0200\n"
+"POT-Creation-Date: 2013-10-18 15:28+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -10462,6 +10462,10 @@ msgstr "(*)未指定"
 #, fuzzy
 msgid "Unknown status"
 msgstr "Unix帳號狀態"
+
+#: plugins/hudson/include/HudsonJobWidget.class.php:40
+msgid "Cannot add empty job id"
+msgstr ""
 
 #: plugins/hudson/include/HudsonJobWidget.class.php:58
 #: plugins/hudson/include/HudsonJobWidget.class.php:82
