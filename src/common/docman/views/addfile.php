@@ -82,7 +82,7 @@ if ($dgf->getNested() == NULL) {
 		session_redirect('/docman/?group_id='.$group_id.'&error_msg='.urlencode($dg->getErrorMessage()));
 
 	if ($dg->create('Uncategorized Submissions')) {
-		session_redirect('/docman/?group_id='.$group_id.'&view=addfile');
+		session_redirect('/docman/?group_id='.$group_id.'&view=additem');
 	}
 
 	echo '<div class="warning">'. _('You MUST first create at least one folder to store your document.') .'</div>';
