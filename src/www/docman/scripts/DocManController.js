@@ -31,7 +31,9 @@ DocManListFileController = function(params)
 	this.lockInterval	= [];
 	this.params		= params;
 	this.bindControls();
-	this.resizableDiv();
+	if (this.params.enableResize) {
+		this.resizableDiv();
+	}
 	this.initModalEditWindow();
 };
 
@@ -71,8 +73,8 @@ DocManListFileController.prototype =
 			storedSplitterPosition = jQuery.Storage.get('splitterStyle').replace(/px;/g, '').replace(/left: /g, '');
 			splitterPosition = Math.round(storedSplitterPosition * 100 / mainwidth )+'%';
 		}
-		(jQuery(this.params.divLeft).height() > jQuery(this.params.divRight).height()) ? mainheight = jQuery(this.params.divLeft).height() : mainheight = jQuery(this.params.divRight).height();
-		jQuery('#views').height(mainheight - fixheight)
+		(jQuery(this.params.divLeft).height() > jQuery(this.params.divRight).height() - fixheight) ? mainheight = jQuery(this.params.divLeft).height() : mainheight = jQuery(this.params.divRight).height() - fixheight;
+		jQuery('#views').height(mainheight)
 				.split({orientation:'vertical', limit:100, position: splitterPosition});
 		jQuery('.vsplitter').mouseup(function(){
 			jQuery.Storage.set('splitterStyle',''+jQuery('.vsplitter').attr('style'));

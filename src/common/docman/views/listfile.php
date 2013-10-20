@@ -155,7 +155,8 @@ jQuery(document).ready(function() {
 		divRight:		jQuery('#rightdiv'),
 		childGroupId:		<?php echo util_ifsetor($childgroup_id, 0) ?>,
 		divEditFile:		jQuery('#editFile'),
-		divEditTitle:		'<?php echo _("Edit document dialog box") ?>'
+		divEditTitle:		'<?php echo _("Edit document dialog box") ?>',
+		enableResize:		true
 	});
 });
 
