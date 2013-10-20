@@ -221,7 +221,9 @@ DocManListFileController.prototype =
 		jQuery('#stateid option[value='+this.docparams.statusId+']').attr("selected", "selected");
 		if (this.docparams.isText) {
 			jQuery.getJSON(this.docparams.docManURL + '/?group_id=' + this.docparams.groupId + '&action=getfile&fileid=' + this.docparams.id , jQuery.proxy(function(data){
-			jQuery('#defaulteditzone').text(data.body);
+				if (data) {
+					jQuery('#defaulteditzone').text(data.body);
+				}
 			}, this));
 		}
 		jQuery('#editdocdata').attr('action', this.docparams.action);
