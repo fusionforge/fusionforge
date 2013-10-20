@@ -70,14 +70,13 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
 	}
 	$rows = count($items);
 
-	echo '<form action="'. getStringFromServer('PHP_SELF') .'" method="post">';
-	echo '<input type="hidden" name="mass_reject" value="1" />';
-	echo '<input type="hidden" name="post_changes" value="y" />';
-
 	if ($rows < 1) {
 		echo '
-			<h2>'._('No Queued Items Found').'</h2>';
+			<h2>'._('No pending items found.').'</h2>';
 	} else {
+		echo '<form action="'. getStringFromServer('PHP_SELF') .'" method="post">';
+		echo '<input type="hidden" name="mass_reject" value="1" />';
+		echo '<input type="hidden" name="post_changes" value="y" />';
 		echo '<h2>'.sprintf(_('These items need to be approved (total: %1$s)'), $rows).'</h2>';
 		echo $GLOBALS['HTML']->listTableTop($title_arr);
 		for ($i=0; $i < $rows; $i++) {
@@ -85,8 +84,9 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
 		}
 		echo $GLOBALS['HTML']->listTableBottom();
 		echo '<br /><input type="submit" name="submit" value="'._('Reject Selected').'" />';
+		echo '</form>';
 	}
-	echo '</form>';
+
 
 	/*
 		Show list of rejected news items for this week
@@ -103,12 +103,12 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
 
 	if ($rows < 1) {
 		echo '
-			<h2>'._('No rejected items found for this week').'</h2>';
+			<h2>'._('No rejected items found for this week.').'</h2>';
 	} else {
 		echo '<h2>'.sprintf(_('These items were rejected this past week or were not intended for front page (total: %1$s).'), $rows).'</h2>';
 		echo $GLOBALS['HTML']->listTableTop($title_arr);
 		for ($i=0; $i<$rows; $i++) {
-			show_news_item($items[$i],$i,false,false);
+			show_news_item($items[$i], $i, false, false);
 		}
 		echo $GLOBALS['HTML']->listTableBottom();
 	}
@@ -127,7 +127,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
 	$rows = count($items);
 	if ($rows < 1) {
 		echo '
-			<h2>'._('No approved items found for this week').'</h2>';
+			<h2>'._('No approved items found for this week.').'</h2>';
 	} else {
 		echo '<h2>'.sprintf(_('These items were approved this past week (total: %1$s).'), $rows).'</h2>';
 		echo $GLOBALS['HTML']->listTableTop($title_arr);
