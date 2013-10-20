@@ -99,7 +99,7 @@ if ($dgf->getNested() == NULL) {
 					<td>
 						'. _('Document Title').utils_requiredField()
 					.'</td><td>'
-					.'<input type="text" name="title" size="40" maxlength="255" required="required" />&nbsp;'
+					.'<input pattern=".{5,}" title="'.sprintf(_('(at least %1$s characters)'), 5).'" type="text" name="title" size="40" maxlength="255" required="required" />&nbsp;'
 					.sprintf(_('(at least %1$s characters)'), 5)
 					.'</td>
 				</tr>
@@ -107,7 +107,7 @@ if ($dgf->getNested() == NULL) {
 					<td>
 						'. _('Description') .utils_requiredField()
 				 	.'</td><td>'
-						.'<input type="text" name="description" size="50" maxlength="255" required="required" />&nbsp;'
+						.'<input pattern=".{10,}" title="'.sprintf(_('(at least %1$s characters)'), 10).'" type="text" name="description" size="50" maxlength="255" required="required" />&nbsp;'
 						.sprintf(_('(at least %1$s characters)'), 10)
 					.'</td>
 				</tr>

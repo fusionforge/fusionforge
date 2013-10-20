@@ -57,7 +57,7 @@ if ($dirid) {
 } else {
 	echo _('Name of the document folder to create')._(': ');
 }
-echo '<input type="text" name="groupname" size="40" maxlength="255" />';
+echo '<input required="required" type="text" name="groupname" size="40" maxlength="255" />';
 echo '<input id="submitaddsubgroup" type="button" value="'. _('Create') .'" onclick="javascript:doItAddSubGroup()" />';
 echo '</form>';
 echo '</div>';

@@ -57,7 +57,7 @@ if ($dg->isError())
 		<table>
 			<tr>
 				<td><?php echo _('Folder Name') ?></td>
-				<td><input type="text" name="groupname" value="<?php echo $dg->getName(); ?>" /></td>
+				<td><input required="required" type="text" name="groupname" value="<?php echo $dg->getName(); ?>" /></td>
 				<td>&nbsp;</td>
 				<td><?php echo _('belongs to') ?></td>
 				<td>
