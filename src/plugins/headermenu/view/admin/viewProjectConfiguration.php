@@ -57,7 +57,7 @@ if (sizeof($linksArray)) {
 	$classth = array('', '', '', '', '', 'unsortable');
 	echo $HTML->listTableTop($tabletop, false, 'sortable_headermenu_listlinks', 'sortable', $classth);
 	foreach ($linksArray as $link) {
-		echo '<tr id="'.$link['id_headermenu'].'" ><td>'.$link['ordering']."</td>\n";
+		echo '<tr id="'.$link['id_headermenu'].'" ><td class="align-center">'.$link['ordering']."</td>\n";
 		if (strlen($link['url']) > 0) {
 			echo '<td>'._('URL');
 			if ($link['linktype'] == 'iframe') {
@@ -115,7 +115,7 @@ echo $params['content'];
 
 echo '</td></tr><tr id="urlcode" >';
 echo '<td>'._('URL').utils_requiredField()._(':').'</td><td><input name="link" type="text" maxlength="255" /></td>';
-echo '</tr><tr id="iframe" >';
+echo '</tr><tr id="iframe">';
 echo '<td colspan="2"><input name="iframeview" type="checkbox" value="1" />Display URL as iframe</td>';
 echo '</tr><tr>';
 echo '<td colspan="2">';
