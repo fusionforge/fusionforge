@@ -162,7 +162,7 @@ foreach ($users as $u)
 				<?php echo _('project'); ?>* :
 				<?php echo 'FTP, ' . _('Home'); ?>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<?php echo _('scm'); ?>* :
+				<?php echo _('SCM'); ?>* :
 				<?php echo 'CVS, Subversion'; ?>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<?php echo _('others'); ?>* :
@@ -186,7 +186,7 @@ foreach ($users as $u)
 			<?php echo _('project'); ?>*
 		</td>
 		<td style="border-top:thin solid #808080;background:#e0e0e0" align="right">
-			<?php echo _('scm'); ?>*
+			<?php echo _('SCM'); ?>*
 		</td>
 		<td style="border-top:thin solid #808080;background:#e0e0e0" align="right">
 			<?php echo _('others'); ?>*

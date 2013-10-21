@@ -105,7 +105,7 @@ class Widget_MyLatestSvnCommits extends Widget {
     }
 
     function getCategory() {
-        return _('scm');
+        return _('SCM');
     }
     function getDescription() {
         return _("List SVN commits you have done, by project.");
