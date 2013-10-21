@@ -69,8 +69,8 @@ if($f_provider_id)	{
 	$new_access_token->write_to_db();
 
 	echo _("New access token received and saved!") . "<br />";
-	echo _("Access Token Key : ".$access_token_array['oauth_token']) . "<br />";
-	echo _("Access Token Secret : ".$access_token_array['oauth_token_secret']) . "<br />";
+	echo _("Access Token Key: ".$access_token_array['oauth_token']) . "<br />";
+	echo _("Access Token Secret: ".$access_token_array['oauth_token_secret']) . "<br />";
 }
 
 echo '<br /><br />';
