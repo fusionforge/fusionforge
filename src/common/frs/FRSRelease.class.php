@@ -109,11 +109,11 @@ class FRSRelease extends Error {
 	/**
 	 *	create - create a new release in the database.
 	 *
-	 *	@param	string	$name	The name of the release.
-	 *	@param	string	$notes	The release notes for the release.
-	 *	@param	string	$changes	The change log for the release.
-	 *	@param	int	$preformatted	Whether the notes/log are preformatted with \n chars (1) true (0) false.
-	 *	@param	int	$release_date	The unix date of the release.
+	 *	@param	string	$name				The name of the release.
+	 *	@param	string	$notes				The release notes for the release.
+	 *	@param	string	$changes			The change log for the release.
+	 *	@param	int		$preformatted		Whether the notes/log are preformatted with \n chars (1) true (0) false.
+	 *	@param	int		$release_date		The unix date of the release.
 	 *	@return	boolean success.
 	 */
 	function create($name,$notes,$changes,$preformatted,$release_date=false) {
