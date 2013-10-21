@@ -430,12 +430,13 @@ function db_result_seek($qhandle,$row) {
 /**
  *  db_result_reset() - Resets cursor location in a result set.
  *
- *	@param		int		Query result set handle.
+ *	@param		int		$qhandle	Query result set handle.
+ *	@param		int		$row
  *	@return boolean True on success
  */
- //TODO : remove the second param if no one use it.
-function db_result_reset($qhandle,$row = 0) {
-	return db_result_seek($qhandle,0);
+ //TODO : remove the second param if no one uses it.
+function db_result_reset($qhandle, $row = 0) {
+	return db_result_seek($qhandle, 0);
 }
 
 /**
@@ -518,7 +519,7 @@ function db_insertid($qhandle, $table_name, $pkey_field_name, $dbserver = NULL) 
  * @param int    $dbserver    Database server (SYS_DB_PRIMARY, SYS_DB_STATS, SYS_DB_TROVE, SYS_DB_SEARCH)
  * @return string error message.
  */
-function db_error($dbserver=NULL) {
+function db_error($dbserver = NULL) {
 	$dbconn = db_switcher($dbserver);
 
 	return pg_last_error($dbconn);
