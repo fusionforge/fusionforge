@@ -56,7 +56,7 @@ function ffErrorHandler($errno, $errstr, $errfile, $errline) {
 
 	$msg = "[$errno] $errstr ($errfile at $errline)";
 
-	// display messages only once
+	// Display messages only once.
 	foreach ($ffErrors as $m) {
 		if ($m['message'] == $msg) {
 			return true;
@@ -64,30 +64,30 @@ function ffErrorHandler($errno, $errstr, $errfile, $errline) {
 	}
 
 	switch ($errno) {
-	case E_USER_ERROR:
-	case E_ERROR:
-		$type = 'error';
-		break;
+		case E_USER_ERROR:
+		case E_ERROR:
+			$type = 'error';
+			break;
 
-	case E_USER_WARNING:
-	case E_WARNING:
-		$type = 'warning';
-		break;
+		case E_USER_WARNING:
+		case E_WARNING:
+			$type = 'warning';
+			break;
 
-	case E_USER_NOTICE:
-	case E_NOTICE:
-		$type = 'notice';
-		break;
+		case E_USER_NOTICE:
+		case E_NOTICE:
+			$type = 'notice';
+			break;
 
-	case E_STRICT:
-	case E_USER_DEPRECATED:
-	case E_DEPRECATED:
-		$type = "strict";
-		break;
+		case E_STRICT:
+		case E_USER_DEPRECATED:
+		case E_DEPRECATED:
+			$type = "strict";
+			break;
 
-	default:
-		$type = 'unknown';
-		break;
+		default:
+			$type = 'unknown';
+			break;
 	}
 
 	if (forge_get_config('sysdebug_backtraces')) {
@@ -98,8 +98,8 @@ function ffErrorHandler($errno, $errstr, $errfile, $errline) {
 
 	$ffErrors[] = array(
 		'type' => $type,
-		'message' => $msg,
-	    );
+		'message' => $msg
+	);
 	/* Don't execute PHP internal error handler */
 	return true;
 }
