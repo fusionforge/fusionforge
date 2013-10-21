@@ -100,6 +100,6 @@ function twitter_get_access_token()	{
 		}
 	}else 	{
 		//error
-		exit_error(_("Couldn't find a twitter provider registered in the database. If a twitter provider exists, it needs to be named 'Twitter', else it has to be created in the OAuth Consumer plugin"));
+		exit_error(_("Could not find a twitter provider registered in the database. If a twitter provider exists, it needs to be named 'Twitter', else it has to be created in the OAuth Consumer plugin"));
 	}
 }
