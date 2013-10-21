@@ -40,7 +40,7 @@ switch ($option) {
 	case "add": {
 		if (!empty($directoryid)) {
 			$dg = new DocumentGroup($g, $directoryid);
-			$return_msg .= $dg->getName().' ';
+			$return_msg .= $dg->getName()._(': ');
 
 			if ($dg->isError())
 				session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($dg->getErrorMessage()));

@@ -41,7 +41,7 @@ switch ($option) {
 		foreach ($arr_fileid as $fileid) {
 			if (!empty($fileid)) {
 				$d = new Document($g, $fileid);
-				$return_msg .= $d->getFilename().' ';
+				$return_msg .= $d->getFilename()._(': ');
 
 				if ($d->isError())
 					session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
@@ -60,7 +60,7 @@ switch ($option) {
 		foreach ($arr_fileid as $fileid) {
 			if (!empty($fileid)) {
 				$d = new Document($g, $fileid);
-				$return_msg .= $d->getFilename().' ';
+				$return_msg .= $d->getFilename()._(': ');
 
 				if ($d->isError())
 					session_redirect('/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid.'&error_msg='.urlencode($d->getErrorMessage()));
