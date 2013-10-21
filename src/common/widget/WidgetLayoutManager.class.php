@@ -275,7 +275,7 @@ class WidgetLayoutManager {
 					controllerLayoutBuilder = new LayoutBuilderController({
 						buttonAddRow:		jQuery('.layout-manager-row-add'),
 						buttonAddColumn:	jQuery('.layout-manager-column-add'),
-						buttonRemoveColumn:	jQuery('.layout-manager-column-remove'),
+						buttonRemoveColumn:	jQuery('.layout-manager-column-remove')
 					});
 					jQuery('#save').click(function(){
 						if (jQuery('#layout_custom').is(':checked')) {
@@ -284,7 +284,7 @@ class WidgetLayoutManager {
 								jQuery('<input>', {
 									type: 'hidden',
 									name: 'new_layout[]',
-									value: jQuery(e).find('.layout-manager-column input[type=number]').map(function(){ return this.value;}).get().join(','),
+									value: jQuery(e).find('.layout-manager-column input[type=number]').map(function(){ return this.value;}).get().join(',')
 									}).appendTo(form);
 							});
 						}
