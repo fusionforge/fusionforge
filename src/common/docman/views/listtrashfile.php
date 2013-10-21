@@ -103,8 +103,8 @@ jQuery(document).ready(function() {
 		buttonEditDirectory:	jQuery('#docman-editdirectory'),
 		docManURL:		'<?php util_make_uri("docman") ?>',
 		lockIntervalDelay:	60000, //in microsecond and if you change this value, please update the check value 600
-		divLeft:		jQuery('#leftdiv'),
-		divRight:		jQuery('#rightdiv'),
+		divLeft:			jQuery('#leftdiv'),
+		divRight:			jQuery('#rightdiv'),
 		divEditFile:		jQuery('#editFile'),
 		divEditTitle:		'<?php echo _("Edit document dialog box") ?>'
 	});
