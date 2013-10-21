@@ -34,7 +34,7 @@ if (is_array($linkValues)) {
 	echo $HTML->boxTop(_('Update this link'));
 	echo '<td>'._('Informative Name').'</td><td><input name="name" type="text" maxsize="255" value="'.$linkValues['name'].'" /></td>';
 	echo '</tr><tr>';
-	echo '<td>'._('Standard JavaScript Tracking code.').'</td><td><textarea name="link" rows="15" cols="70" >'.$linkValues['url'].'</textarea></td>';
+	echo '<td>'._('Standard JavaScript Tracking code').'</td><td><textarea name="link" rows="15" cols="70" >'.$linkValues['url'].'</textarea></td>';
 	echo '</tr><tr>';
 	echo '<td>';
 	echo '<input type="hidden" name="linkid" value="'.$linkId.'" />';
