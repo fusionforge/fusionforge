@@ -6,7 +6,7 @@
     border-top: #bcbcad 1px dashed;
     border-left: #bcbcad 1px dashed;
     border-bottom: #bcbcad 1px dashed;
-    background-color: Transparent;
+    background-color: transparent;
 }
 
 .widget {
@@ -17,14 +17,14 @@
     clear:both;
 }
 .widget_preferences {
-    background: #E0DDD2;
+    background: #e0ddd2;
     border-bottom:1px solid #bcbcad;
 }
 .widget_preferences form {
     margin:0;
 }
 .widget_titlebar {
-    background: #E0DDD2 url(../images/widget-header.png) left top repeat-x;
+    background: #e0ddd2 url(../images/widget-header.png) left top repeat-x;
     font-weight: bold;
     text-align: center;
 
