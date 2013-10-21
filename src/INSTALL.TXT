@@ -277,15 +277,6 @@ When you are confident they are right, you can edit usergroup.php
 to remove the .new extension and uncomment the cronjobs.
 
 
-JPGRAPH
--------
-
-The installation was shown above. Be sure to use the 1.9.1 version
-from gforge.org and set USE_CACHE=false as shown here.
-
-DEFINE("USE_CACHE",false);
-
-
 ADDITIONAL FILES
 ----------------
 
