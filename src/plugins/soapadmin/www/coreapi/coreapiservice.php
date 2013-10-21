@@ -406,7 +406,7 @@ class CoreApiService {
 			return new SoapFault($e->getCode(),$e->getMessage());
 		}
 
-		$user =& user_get_object($user_id);
+		$user = user_get_object($user_id);
 		if (!$user) {
 			return new SoapFault('3003','Could Not Get Users Groups');
 		}
