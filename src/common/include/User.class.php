@@ -297,8 +297,10 @@ class GFUser extends Error {
 	 *
 	 */
 	function create($unix_name, $firstname, $lastname, $password1, $password2, $email,
-		$mail_site, $mail_va, $language_id, $timezone, $dummy1, $dummy2, $theme_id,
-		$unix_box = 'shell', $address = '', $address2 = '', $phone = '', $fax = '', $title = '', $ccode = 'US', $send_mail = true, $tooltips = true) {
+					$mail_site, $mail_va, $language_id, $timezone,
+					$dummy1, $dummy2, $theme_id, $unix_box = 'shell',
+					$address = '', $address2 = '', $phone = '', $fax = '', $title = '',
+					$ccode = 'US', $send_mail = true, $tooltips = true) {
 		global $SYS;
 		if (!$theme_id) {
 			$this->setError(_('You must supply a theme'));
@@ -402,34 +404,34 @@ class GFUser extends Error {
 		}
 		$shell = account_get_user_default_shell();
 		// if we got this far, it must be good
-		$confirm_hash = substr(md5($password1 . util_randbytes() . microtime()),0,16);
+		$confirm_hash = substr(md5($password1.util_randbytes().microtime()), 0, 16);
 		db_begin();
 		$result = db_query_params('INSERT INTO users (user_name,user_pw,unix_pw,realname,firstname,lastname,email,add_date,status,confirm_hash,mail_siteupdates,mail_va,language,timezone,unix_box,address,address2,phone,fax,title,ccode,theme_id,tooltips,shell)
 							VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24)',
-					   array($unix_name,
-						 md5($password1),
-						 account_genunixpw($password1),
-						 htmlspecialchars($firstname.' '.$lastname),
-						 htmlspecialchars($firstname),
-						 htmlspecialchars($lastname),
-						 $email,
-						 time(),
-						 'P',
-						 $confirm_hash,
-						 (($mail_site)?"1":"0"),
-						 (($mail_va)?"1":"0"),
-						 $language_id,
-						 $timezone,
-						 $unix_box,
-						 htmlspecialchars($address),
-						 htmlspecialchars($address2),
-						 htmlspecialchars($phone),
-						 htmlspecialchars($fax),
-						 htmlspecialchars($title),
-						 $ccode,
-						 $theme_id,
-						 $tooltips,
-						 $shell));
+			array($unix_name,
+				md5($password1),
+				account_genunixpw($password1),
+				htmlspecialchars($firstname.' '.$lastname),
+				htmlspecialchars($firstname),
+				htmlspecialchars($lastname),
+				$email,
+				time(),
+				'P',
+				$confirm_hash,
+				(($mail_site)? "1" : "0"),
+				(($mail_va)? "1" : "0"),
+				$language_id,
+				$timezone,
+				$unix_box,
+				htmlspecialchars($address),
+				htmlspecialchars($address2),
+				htmlspecialchars($phone),
+				htmlspecialchars($fax),
+				htmlspecialchars($title),
+				$ccode,
+				$theme_id,
+				$tooltips,
+				$shell));
 		if (!$result) {
 			$this->setError(_('Insert Error')._(': ').db_error());
 			db_rollback();
@@ -586,9 +588,10 @@ Use one below, but make sure it is entered as the single line.)
      * @return bool
 	 */
 	function update($firstname, $lastname, $language_id, $timezone, $mail_site, $mail_va, $use_ratings,
-			$dummy1, $dummy2, $theme_id, $address, $address2, $phone, $fax, $title, $ccode, $tooltips, $email='') {
+					$dummy1, $dummy2, $theme_id, $address, $address2, $phone, $fax, $title,
+					$ccode, $tooltips, $email = '') {
 		$mail_site = $mail_site ? 1 : 0;
-		$mail_va   = $mail_va   ? 1 : 0;
+		$mail_va = $mail_va ? 1 : 0;
 		$block_ratings = $use_ratings ? 0 : 1;
 
 		db_begin();
@@ -1753,13 +1756,9 @@ Email: %3$s
 
 		EVERYTHING BELOW HERE IS DEPRECATED
 
-
 		DO NOT USE FOR ANY NEW CODE
 
-
-
 */
-
 
 /**
  * user_ismember() - DEPRECATED; DO NOT USE! (TODO: document what should be used instead)
