@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-18 17:08+0200\n"
+"POT-Creation-Date: 2013-10-21 11:37+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -179,6 +179,155 @@ msgstr "Archive correctement insérée."
 msgid "Folder"
 msgstr "Dossier"
 
+#: common/docman/actions/monitordirectory.php:43
+#: common/docman/actions/monitorfile.php:44
+#: common/docman/actions/monitorfile.php:63
+#: common/docman/Document.class.php:940 common/docman/Document.class.php:941
+#: common/docman/Document.class.php:942 common/docman/Document.class.php:943
+#: common/docman/Document.class.php:944
+#: common/docman/DocumentGroup.class.php:67
+#: common/docman/DocumentGroup.class.php:722
+#: common/docman/DocumentGroup.class.php:723
+#: common/docman/DocumentGroup.class.php:725
+#: common/docman/DocumentGroup.class.php:727
+#: common/docman/DocumentManager.class.php:202
+#: common/docman/DocumentManager.class.php:208
+#: common/docman/include/DocumentGroupHTML.class.php:50
+#: common/docman/views/addfile.php:91 common/docman/views/addfile.php:92
+#: common/docman/views/addsubdocgroup.php:56
+#: common/docman/views/addsubdocgroup.php:58
+#: common/docman/views/editfile.php:38 common/docman/views/editfile.php:42
+#: common/docman/views/editfile.php:51 common/docman/views/editfile.php:70
+#: common/docman/views/listfile.php:169 common/docman/views/listfile.php:171
+#: common/docman/views/listfile.php:173
+#: common/docman/views/listtrashfile.php:115
+#: common/docman/views/search.php:150 common/docman/views/search.php:151
+#: common/docman/views/tree.php:64 common/forum/ForumAdmin.class.php:427
+#: common/forum/Forum.class.php:230 common/forum/Forum.class.php:525
+#: common/forum/Forum.class.php:606 common/forum/Forum.class.php:632
+#: common/forum/Forum.class.php:640 common/forum/Forum.class.php:648
+#: common/forum/Forum.class.php:656 common/forum/Forum.class.php:664
+#: common/forum/Forum.class.php:672 common/forum/ForumHTML.class.php:58
+#: common/forum/ForumHTML.class.php:68 common/forum/ForumHTML.class.php:69
+#: common/forum/ForumHTML.class.php:70 common/forum/ForumHTML.class.php:73
+#: common/forum/ForumHTML.class.php:209 common/forum/ForumHTML.class.php:267
+#: common/forum/ForumHTML.class.php:524 common/forum/ForumHTML.class.php:528
+#: common/forum/ForumHTML.class.php:588 common/forum/ForumHTML.class.php:591
+#: common/forum/ForumMessage.class.php:665 common/include/Error.class.php:206
+#: common/include/exit.php:80 common/include/Group.class.php:2625
+#: common/include/Group.class.php:2626 common/include/Group.class.php:2627
+#: common/include/User.class.php:350 common/include/User.class.php:436
+#: common/include/User.class.php:1410 common/mail/MailingList.class.php:174
+#: common/mail/MailingListFactory.class.php:103
+#: common/reporting/report_utils.php:27
+#: common/search/SearchQuery.class.php:120
+#: common/tracker/actions/browse.php:402 common/tracker/actions/browse.php:405
+#: common/tracker/actions/browse.php:749 common/tracker/actions/mod.php:147
+#: common/tracker/actions/mod.php:155 common/tracker/actions/mod.php:175
+#: common/tracker/actions/mod.php:216 common/tracker/actions/query.php:325
+#: common/tracker/actions/query.php:340 common/tracker/actions/query.php:346
+#: common/tracker/actions/query.php:347 common/tracker/actions/query.php:382
+#: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
+#: common/tracker/actions/query.php:391 common/tracker/actions/tracker.php:388
+#: common/tracker/actions/tracker.php:393
+#: common/tracker/ArtifactExtraField.class.php:187
+#: common/tracker/ArtifactExtraField.class.php:193
+#: common/tracker/views/form-adminroadmap.php:70
+#: common/tracker/views/form-adminroadmap.php:193
+#: common/widget/Widget_ProjectInfo.class.php:45
+#: cronjobs/send_pending_items_mail.php:77
+#: cronjobs/send_pending_items_mail.php:78
+#: cronjobs/send_pending_items_mail.php:79
+#: cronjobs/send_pending_items_mail.php:80
+#: cronjobs/send_pending_items_mail.php:81
+#: cronjobs/send_pending_items_mail.php:115
+#: cronjobs/send_pending_items_mail.php:116
+#: cronjobs/send_pending_items_mail.php:117
+#: cronjobs/send_pending_items_mail.php:118
+#: cronjobs/send_pending_items_mail.php:119
+#: cronjobs/send_pending_items_mail.php:120
+#: cronjobs/send_pending_items_mail.php:121
+#: plugins/forumml/www/forumml_utils.php:681 plugins/forumml/www/index.php:122
+#: plugins/hudson/include/hudsonPlugin.class.php:265
+#: plugins/hudson/include/hudsonPlugin.class.php:292
+#: plugins/hudson/include/hudsonPlugin.class.php:293
+#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:83
+#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:84
+#: plugins/mailman/include/MailmanList.class.php:149
+#: plugins/mailman/include/MailmanList.class.php:163
+#: plugins/mailman/include/MailmanList.class.php:247
+#: plugins/mailman/include/MailmanList.class.php:372
+#: plugins/mailman/include/MailmanList.class.php:389
+#: plugins/mailman/include/MailmanListFactory.class.php:112
+#: plugins/mantisbt/action/addAttachment.php:38
+#: plugins/mantisbt/action/addCategory.php:39
+#: plugins/mantisbt/action/addIssue.php:47
+#: plugins/mantisbt/action/addIssue.php:129
+#: plugins/mantisbt/action/addNote.php:59
+#: plugins/mantisbt/action/addVersion.php:67
+#: plugins/mantisbt/action/deleteAttachment.php:38
+#: plugins/mantisbt/action/deleteCategory.php:37
+#: plugins/mantisbt/action/deleteNote.php:36
+#: plugins/mantisbt/action/deleteVersion.php:41
+#: plugins/mantisbt/action/renameCategory.php:44
+#: plugins/mantisbt/action/updateIssue.php:179
+#: plugins/mantisbt/action/updateNote.php:37
+#: plugins/mantisbt/action/updateNote.php:61
+#: plugins/mantisbt/action/updateVersion.php:59
+#: plugins/mantisbt/controler/filter.php:122
+#: plugins/mantisbt/controler/filter.php:138
+#: plugins/mantisbt/view/addAttachment.php:32
+#: plugins/mantisbt/view/editIssue.php:84
+#: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
+#: plugins/oauthconsumer/www/get_access_token.php:134
+#: plugins/oauthconsumer/www/get_access_token.php:135
+#: plugins/projectlabels/www/index.php:172
+#: plugins/projects-hierarchy/view/home_project_link.php:37
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:629
+#: plugins/scmdarcs/common/DarcsPlugin.class.php:631
+#: plugins/scmhg/common/HgPlugin.class.php:625 www/account/index.php:195
+#: www/account/lostlogin.php:84 www/account/register.php:211
+#: www/admin/approve-pending.php:190 www/admin/database.php:155
+#: www/admin/globalroledelete.php:49 www/admin/responses_admin.php:42
+#: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
+#: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
+#: www/export/rssAboTask.php:146 www/export/rssAboTask.php:169
+#: www/export/rssAboTask.php:171 www/export/rssAboTask.php:173
+#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
+#: www/forum/forum.php:156 www/forum/message.php:126
+#: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:190
+#: www/frs/admin/qrs.php:197 www/include/user_profile.php:88
+#: www/include/user_profile.php:93 www/include/user_profile.php:112
+#: www/people/admin/index.php:52 www/people/admin/index.php:65
+#: www/people/editprofile.php:233 www/people/skills_utils.php:121
+#: www/people/viewprofile.php:47 www/pm/add_task.php:50 www/pm/add_task.php:63
+#: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
+#: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
+#: www/pm/add_task.php:124 www/pm/add_task.php:130 www/pm/add_task.php:149
+#: www/pm/admin/index.php:96 www/pm/admin/index.php:118
+#: www/pm/admin/index.php:258 www/pm/calendar.php:59 www/pm/detail_task.php:66
+#: www/pm/detail_task.php:71 www/pm/detail_task.php:86
+#: www/pm/detail_task.php:90 www/pm/detail_task.php:97
+#: www/pm/detail_task.php:104 www/pm/mod_task.php:52 www/pm/mod_task.php:61
+#: www/pm/mod_task.php:66 www/pm/mod_task.php:78 www/pm/mod_task.php:83
+#: www/pm/mod_task.php:97 www/pm/mod_task.php:173 www/pm/mod_task.php:183
+#: www/pm/mod_task.php:197 www/pm/mod_task.php:202 www/pm/mod_task.php:212
+#: www/pm/mod_task.php:323 www/project/admin/roledelete.php:62
+#: www/register/index.php:187
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
+#: www/softwaremap/tag_cloud.php:143 www/survey/survey.php:51
+#: www/tracker/admin/index.php:190 www/tracker/reporting/index.php:126
+#: www/tracker/reporting/index.php:128 www/tracker/reporting/index.php:130
+#: www/tracker/reporting/index.php:132 www/tracker/reporting/index.php:134
+#: www/tracker/roadmap.php:175 www/tracker/roadmap.php:201
+#: www/tracker/roadmap.php:211 www/tracker/roadmap.php:223
+#: www/tracker/roadmap.php:238 www/tracker/roadmap.php:414
+#: www/tracker/roadmap.php:422 www/tracker/roadmap.php:435
+#: www/tracker/roadmap.php:468
+msgid ": "
+msgstr " : "
+
 #: common/docman/actions/monitordirectory.php:54
 #: common/docman/actions/monitorfile.php:56
 #: common/tracker/actions/tracker.php:434
@@ -349,7 +498,7 @@ msgstr "Nouveau document"
 msgid "Updated document"
 msgstr "Document mis à jour"
 
-#: common/docman/Document.class.php:937 common/docman/views/listfile.php:284
+#: common/docman/Document.class.php:937 common/docman/views/listfile.php:285
 #: common/widget/Widget_MyLatestSvnCommits.class.php:66
 msgid "by"
 msgstr "par"
@@ -366,152 +515,6 @@ msgstr "par"
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:59
 msgid "Project"
 msgstr "Projet"
-
-#: common/docman/Document.class.php:940 common/docman/Document.class.php:941
-#: common/docman/Document.class.php:942 common/docman/Document.class.php:943
-#: common/docman/Document.class.php:944
-#: common/docman/DocumentGroup.class.php:67
-#: common/docman/DocumentGroup.class.php:722
-#: common/docman/DocumentGroup.class.php:723
-#: common/docman/DocumentGroup.class.php:725
-#: common/docman/DocumentGroup.class.php:727
-#: common/docman/DocumentManager.class.php:202
-#: common/docman/DocumentManager.class.php:208
-#: common/docman/include/DocumentGroupHTML.class.php:50
-#: common/docman/views/addfile.php:91 common/docman/views/addfile.php:92
-#: common/docman/views/addsubdocgroup.php:56
-#: common/docman/views/addsubdocgroup.php:58
-#: common/docman/views/editfile.php:38 common/docman/views/editfile.php:42
-#: common/docman/views/editfile.php:51 common/docman/views/editfile.php:70
-#: common/docman/views/listfile.php:168 common/docman/views/listfile.php:170
-#: common/docman/views/listfile.php:172
-#: common/docman/views/listtrashfile.php:115
-#: common/docman/views/search.php:150 common/docman/views/search.php:151
-#: common/docman/views/tree.php:64 common/forum/ForumAdmin.class.php:427
-#: common/forum/Forum.class.php:230 common/forum/Forum.class.php:525
-#: common/forum/Forum.class.php:606 common/forum/Forum.class.php:632
-#: common/forum/Forum.class.php:640 common/forum/Forum.class.php:648
-#: common/forum/Forum.class.php:656 common/forum/Forum.class.php:664
-#: common/forum/Forum.class.php:672 common/forum/ForumHTML.class.php:58
-#: common/forum/ForumHTML.class.php:68 common/forum/ForumHTML.class.php:69
-#: common/forum/ForumHTML.class.php:70 common/forum/ForumHTML.class.php:73
-#: common/forum/ForumHTML.class.php:209 common/forum/ForumHTML.class.php:267
-#: common/forum/ForumHTML.class.php:524 common/forum/ForumHTML.class.php:528
-#: common/forum/ForumHTML.class.php:588 common/forum/ForumHTML.class.php:591
-#: common/forum/ForumMessage.class.php:665 common/include/Error.class.php:206
-#: common/include/exit.php:80 common/include/Group.class.php:2625
-#: common/include/Group.class.php:2626 common/include/Group.class.php:2627
-#: common/include/User.class.php:348 common/include/User.class.php:434
-#: common/include/User.class.php:1407 common/mail/MailingList.class.php:174
-#: common/mail/MailingListFactory.class.php:103
-#: common/reporting/report_utils.php:27
-#: common/search/SearchQuery.class.php:120
-#: common/tracker/actions/browse.php:402 common/tracker/actions/browse.php:405
-#: common/tracker/actions/browse.php:749 common/tracker/actions/mod.php:147
-#: common/tracker/actions/mod.php:155 common/tracker/actions/mod.php:175
-#: common/tracker/actions/mod.php:216 common/tracker/actions/query.php:325
-#: common/tracker/actions/query.php:340 common/tracker/actions/query.php:346
-#: common/tracker/actions/query.php:347 common/tracker/actions/query.php:382
-#: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
-#: common/tracker/actions/query.php:391 common/tracker/actions/tracker.php:388
-#: common/tracker/actions/tracker.php:393
-#: common/tracker/ArtifactExtraField.class.php:187
-#: common/tracker/ArtifactExtraField.class.php:193
-#: common/tracker/views/form-adminroadmap.php:70
-#: common/tracker/views/form-adminroadmap.php:193
-#: common/widget/Widget_ProjectInfo.class.php:45
-#: cronjobs/send_pending_items_mail.php:77
-#: cronjobs/send_pending_items_mail.php:78
-#: cronjobs/send_pending_items_mail.php:79
-#: cronjobs/send_pending_items_mail.php:80
-#: cronjobs/send_pending_items_mail.php:81
-#: cronjobs/send_pending_items_mail.php:115
-#: cronjobs/send_pending_items_mail.php:116
-#: cronjobs/send_pending_items_mail.php:117
-#: cronjobs/send_pending_items_mail.php:118
-#: cronjobs/send_pending_items_mail.php:119
-#: cronjobs/send_pending_items_mail.php:120
-#: cronjobs/send_pending_items_mail.php:121
-#: plugins/forumml/www/forumml_utils.php:681 plugins/forumml/www/index.php:122
-#: plugins/hudson/include/hudsonPlugin.class.php:265
-#: plugins/hudson/include/hudsonPlugin.class.php:292
-#: plugins/hudson/include/hudsonPlugin.class.php:293
-#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:83
-#: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:84
-#: plugins/mailman/include/MailmanList.class.php:149
-#: plugins/mailman/include/MailmanList.class.php:163
-#: plugins/mailman/include/MailmanList.class.php:247
-#: plugins/mailman/include/MailmanList.class.php:372
-#: plugins/mailman/include/MailmanList.class.php:389
-#: plugins/mailman/include/MailmanListFactory.class.php:112
-#: plugins/mantisbt/action/addAttachment.php:38
-#: plugins/mantisbt/action/addCategory.php:39
-#: plugins/mantisbt/action/addIssue.php:47
-#: plugins/mantisbt/action/addIssue.php:129
-#: plugins/mantisbt/action/addNote.php:59
-#: plugins/mantisbt/action/addVersion.php:67
-#: plugins/mantisbt/action/deleteAttachment.php:38
-#: plugins/mantisbt/action/deleteCategory.php:37
-#: plugins/mantisbt/action/deleteNote.php:36
-#: plugins/mantisbt/action/deleteVersion.php:41
-#: plugins/mantisbt/action/renameCategory.php:44
-#: plugins/mantisbt/action/updateIssue.php:179
-#: plugins/mantisbt/action/updateNote.php:37
-#: plugins/mantisbt/action/updateNote.php:61
-#: plugins/mantisbt/action/updateVersion.php:59
-#: plugins/mantisbt/controler/filter.php:122
-#: plugins/mantisbt/controler/filter.php:138
-#: plugins/mantisbt/view/addAttachment.php:32
-#: plugins/mantisbt/view/editIssue.php:84
-#: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
-#: plugins/oauthconsumer/www/get_access_token.php:134
-#: plugins/oauthconsumer/www/get_access_token.php:135
-#: plugins/projectlabels/www/index.php:172
-#: plugins/projects-hierarchy/view/home_project_link.php:37
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:629
-#: plugins/scmdarcs/common/DarcsPlugin.class.php:631
-#: plugins/scmhg/common/HgPlugin.class.php:625 www/account/index.php:195
-#: www/account/lostlogin.php:84 www/account/register.php:211
-#: www/admin/approve-pending.php:190 www/admin/database.php:155
-#: www/admin/globalroledelete.php:49 www/admin/responses_admin.php:42
-#: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
-#: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
-#: www/export/rssAboTask.php:146 www/export/rssAboTask.php:169
-#: www/export/rssAboTask.php:171 www/export/rssAboTask.php:173
-#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
-#: www/forum/forum.php:156 www/forum/message.php:126
-#: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:190
-#: www/frs/admin/qrs.php:197 www/include/user_profile.php:88
-#: www/include/user_profile.php:93 www/include/user_profile.php:112
-#: www/people/admin/index.php:52 www/people/admin/index.php:65
-#: www/people/editprofile.php:233 www/people/skills_utils.php:121
-#: www/people/viewprofile.php:47 www/pm/add_task.php:50 www/pm/add_task.php:63
-#: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
-#: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
-#: www/pm/add_task.php:124 www/pm/add_task.php:130 www/pm/add_task.php:149
-#: www/pm/admin/index.php:96 www/pm/admin/index.php:118
-#: www/pm/admin/index.php:258 www/pm/calendar.php:59 www/pm/detail_task.php:66
-#: www/pm/detail_task.php:71 www/pm/detail_task.php:86
-#: www/pm/detail_task.php:90 www/pm/detail_task.php:97
-#: www/pm/detail_task.php:104 www/pm/mod_task.php:52 www/pm/mod_task.php:61
-#: www/pm/mod_task.php:66 www/pm/mod_task.php:78 www/pm/mod_task.php:83
-#: www/pm/mod_task.php:97 www/pm/mod_task.php:173 www/pm/mod_task.php:183
-#: www/pm/mod_task.php:197 www/pm/mod_task.php:202 www/pm/mod_task.php:212
-#: www/pm/mod_task.php:323 www/project/admin/roledelete.php:62
-#: www/register/index.php:187
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
-#: www/softwaremap/tag_cloud.php:143 www/survey/survey.php:51
-#: www/tracker/admin/index.php:190 www/tracker/reporting/index.php:126
-#: www/tracker/reporting/index.php:128 www/tracker/reporting/index.php:130
-#: www/tracker/reporting/index.php:132 www/tracker/reporting/index.php:134
-#: www/tracker/roadmap.php:175 www/tracker/roadmap.php:201
-#: www/tracker/roadmap.php:211 www/tracker/roadmap.php:223
-#: www/tracker/roadmap.php:238 www/tracker/roadmap.php:414
-#: www/tracker/roadmap.php:422 www/tracker/roadmap.php:435
-#: www/tracker/roadmap.php:468
-msgid ": "
-msgstr " : "
 
 #: common/docman/Document.class.php:942 common/docman/views/addfile.php:91
 #: common/docman/views/addfile.php:100 common/docman/views/editfile.php:38
@@ -553,7 +556,7 @@ msgid "No Documents Found"
 msgstr "Aucun document trouvé."
 
 #: common/docman/DocumentGroup.class.php:67
-#: common/docman/views/listfile.php:172
+#: common/docman/views/listfile.php:173
 #: common/docman/views/listtrashfile.php:115
 msgid "Document Folder"
 msgstr "Dossier de documents"
@@ -665,7 +668,7 @@ msgid "Last modified"
 msgstr "Dernière modification"
 
 #: common/docman/include/DocumentGroupHTML.class.php:50
-#: common/include/User.class.php:1407 common/search/SearchQuery.class.php:120
+#: common/include/User.class.php:1410 common/search/SearchQuery.class.php:120
 #: common/survey/SurveyResponse.class.php:95
 #: common/tracker/actions/tracker.php:271
 #: common/tracker/views/form-adminroadmap.php:57
@@ -728,7 +731,7 @@ msgstr ""
 "téléchargement »)."
 
 #: common/docman/views/addfile.php:92 common/docman/views/addfile.php:108
-#: common/docman/views/editfile.php:42 common/docman/views/listfile.php:217
+#: common/docman/views/editfile.php:42 common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:128
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/actions/admin-ind.php:99
@@ -793,7 +796,9 @@ msgstr "Une courte description placée sous le titre."
 msgid "Both fields are used by the document search engine."
 msgstr "Les deux champs sont utilisés lors de la recherche de documents."
 
-#: common/docman/views/addfile.php:103 common/docman/views/addfile.php:111
+#: common/docman/views/addfile.php:102 common/docman/views/addfile.php:103
+#: common/docman/views/addfile.php:110 common/docman/views/addfile.php:111
+#: common/docman/views/editfile.php:39 common/docman/views/editfile.php:43
 #, php-format
 msgid "(at least %1$s characters)"
 msgstr "(%1$s caractères minimum)"
@@ -859,7 +864,7 @@ msgstr ""
 msgid "You need first to upload file in %s"
 msgstr "Vous devez d'abord télécharger le fichier dans %s"
 
-#: common/docman/views/addfile.php:165 common/docman/views/listfile.php:217
+#: common/docman/views/addfile.php:165 common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:128
 #: common/docman/views/pendingfiles.php:63
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
@@ -1069,52 +1074,52 @@ msgstr "Dossier non valide"
 msgid "Edit document dialog box"
 msgstr "Boîte de dialogue de modification du document"
 
-#: common/docman/views/listfile.php:168 www/export/rssAboTask.php:142
+#: common/docman/views/listfile.php:169 www/export/rssAboTask.php:142
 #: www/pm/browse_task.php:384 www/pm/mod_task.php:66
 msgid "Subproject"
 msgstr "Sous-projet"
 
-#: common/docman/views/listfile.php:170 common/docman/views/search.php:151
+#: common/docman/views/listfile.php:171 common/docman/views/search.php:151
 msgid "Path"
 msgstr "Chemin"
 
-#: common/docman/views/listfile.php:174 common/docman/views/listfile.php:205
+#: common/docman/views/listfile.php:175 common/docman/views/listfile.php:206
 #: common/docman/views/listtrashfile.php:117
 #: common/docman/views/listtrashfile.php:122
 msgid "Edit this folder"
 msgstr "Modifier ce dossier"
 
-#: common/docman/views/listfile.php:175
+#: common/docman/views/listfile.php:176
 msgid "Move this folder and his content to trash"
 msgstr "Mettre ce dossier et son contenu à la corbeille"
 
-#: common/docman/views/listfile.php:177
+#: common/docman/views/listfile.php:178
 msgid "Permanently delete this folder"
 msgstr "Supprimer ce dossier de manière permanente"
 
-#: common/docman/views/listfile.php:182
+#: common/docman/views/listfile.php:183
 msgid "Add a new item in this folder"
 msgstr "Ajouter un nouvel élément à ce dossier"
 
-#: common/docman/views/listfile.php:189
+#: common/docman/views/listfile.php:190
 msgid "Download this folder as a ZIP"
 msgstr "Télécharger ce dossier au format ZIP"
 
-#: common/docman/views/listfile.php:194
+#: common/docman/views/listfile.php:195
 msgid "Stop monitoring this folder"
 msgstr "Ne plus surveiller ce dossier"
 
-#: common/docman/views/listfile.php:197
+#: common/docman/views/listfile.php:198
 msgid "Start monitoring this folder"
 msgstr "Surveiller ce dossier"
 
-#: common/docman/views/listfile.php:217
+#: common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:128
 msgid "Select / Deselect all documents for massaction"
 msgstr ""
 "Sélectionner/désélectionner tous les documents pour une action collective"
 
-#: common/docman/views/listfile.php:217
+#: common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:128
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/views/form-addcanned.php:41
@@ -1138,7 +1143,7 @@ msgstr ""
 msgid "Title"
 msgstr "Titre"
 
-#: common/docman/views/listfile.php:217
+#: common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:128
 #: common/docman/views/pendingfiles.php:63
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
@@ -1156,13 +1161,13 @@ msgstr "Titre"
 msgid "Author"
 msgstr "Auteur"
 
-#: common/docman/views/listfile.php:217
+#: common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:128
 #: common/docman/views/pendingfiles.php:63
 msgid "Last time"
 msgstr "Dernière date"
 
-#: common/docman/views/listfile.php:217
+#: common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:128
 #: common/docman/views/pendingfiles.php:63 common/docman/views/search.php:150
 #: common/include/Group.class.php:792
@@ -1195,7 +1200,7 @@ msgstr "Dernière date"
 msgid "Status"
 msgstr "État"
 
-#: common/docman/views/listfile.php:217
+#: common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:128
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/include/ArtifactTypeHtml.class.php:368 www/frs/index.php:206
@@ -1203,12 +1208,12 @@ msgstr "État"
 msgid "Size"
 msgstr "Taille"
 
-#: common/docman/views/listfile.php:217 www/project/memberlist.php:105
+#: common/docman/views/listfile.php:218 www/project/memberlist.php:105
 #: www/project/report/index.php:170
 msgid "View"
 msgstr "Voir"
 
-#: common/docman/views/listfile.php:220
+#: common/docman/views/listfile.php:221
 #: common/docman/views/listtrashfile.php:128
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/views/form-adminroadmap.php:492
@@ -1226,35 +1231,35 @@ msgstr "Voir"
 msgid "Actions"
 msgstr "Actions"
 
-#: common/docman/views/listfile.php:230 common/docman/views/listfile.php:235
+#: common/docman/views/listfile.php:231 common/docman/views/listfile.php:236
 #: common/docman/views/listtrashfile.php:136
 msgid "Select / Deselect this document for massaction"
 msgstr "Sélectionner/déselectionner ce document pour une action collective"
 
-#: common/docman/views/listfile.php:242
+#: common/docman/views/listfile.php:243
 #: common/docman/views/listtrashfile.php:141
 #: common/docman/views/pendingfiles.php:75
 msgid "Visit this link"
 msgstr "Visiter ce lien"
 
-#: common/docman/views/listfile.php:247
+#: common/docman/views/listfile.php:248
 #: common/docman/views/listtrashfile.php:146
 #: common/docman/views/pendingfiles.php:80
 msgid "View this document"
 msgstr "Voir ce document"
 
-#: common/docman/views/listfile.php:256
+#: common/docman/views/listfile.php:257
 #: common/docman/views/listtrashfile.php:155
 #: common/docman/views/pendingfiles.php:89
 msgid "new"
 msgstr "nouveau"
 
-#: common/docman/views/listfile.php:258
+#: common/docman/views/listfile.php:259
 #: common/docman/views/pendingfiles.php:91
 msgid "Created or updated since less than 7 days"
 msgstr "Créé ou mis à jour depuis moins de 7 jours"
 
-#: common/docman/views/listfile.php:268 common/docman/views/listfile.php:270
+#: common/docman/views/listfile.php:269 common/docman/views/listfile.php:271
 #: common/docman/views/listtrashfile.php:167
 #: common/docman/views/listtrashfile.php:169
 #: common/docman/views/pendingfiles.php:101
@@ -1312,45 +1317,45 @@ msgstr "Créé ou mis à jour depuis moins de 7 jours"
 msgid "Y-m-d H:i"
 msgstr "d/m/Y H:i"
 
-#: common/docman/views/listfile.php:276 common/docman/views/listfile.php:278
+#: common/docman/views/listfile.php:277 common/docman/views/listfile.php:279
 msgid "Reserved Document"
 msgstr "Document réservé"
 
-#: common/docman/views/listfile.php:324 common/docman/views/listfile.php:335
+#: common/docman/views/listfile.php:325 common/docman/views/listfile.php:336
 msgid "Move this document to trash"
 msgstr "Mettre ce document à la corbeille"
 
-#: common/docman/views/listfile.php:325 common/docman/views/listfile.php:336
+#: common/docman/views/listfile.php:326 common/docman/views/listfile.php:337
 #: common/docman/views/listtrashfile.php:191
 #: common/docman/views/pendingfiles.php:127
 msgid "Edit this document"
 msgstr "Modifier ce document"
 
-#: common/docman/views/listfile.php:327
+#: common/docman/views/listfile.php:328
 msgid "Reserve this document for later edition"
 msgstr "Réserver ce document pour modification ultérieure"
 
-#: common/docman/views/listfile.php:327
+#: common/docman/views/listfile.php:328
 msgid "Reserve this document"
 msgstr "Réserver ce document"
 
-#: common/docman/views/listfile.php:332
+#: common/docman/views/listfile.php:333
 msgid "Enforce reservation"
 msgstr "Forcer la réservation"
 
-#: common/docman/views/listfile.php:337 common/docman/views/listfile.php:364
+#: common/docman/views/listfile.php:338 common/docman/views/listfile.php:365
 msgid "Release reservation"
 msgstr "Annuler la réservation"
 
-#: common/docman/views/listfile.php:343
+#: common/docman/views/listfile.php:344
 msgid "Stop monitoring this document"
 msgstr "Ne plus surveiller ce document"
 
-#: common/docman/views/listfile.php:346
+#: common/docman/views/listfile.php:347
 msgid "Start monitoring this document"
 msgstr "Surveiller ce document"
 
-#: common/docman/views/listfile.php:357
+#: common/docman/views/listfile.php:358
 #: common/docman/views/listtrashfile.php:198
 msgid ""
 "Actions availables for selected documents, you need to check at least one "
@@ -1359,24 +1364,24 @@ msgstr ""
 "Actions disponibles pour les documents sélectionnés ; au moins un document "
 "doit être sélectionné pour que ces actions aient lieu."
 
-#: common/docman/views/listfile.php:358
+#: common/docman/views/listfile.php:359
 #: common/docman/views/listtrashfile.php:199
 msgid "Mass actions for selected documents:"
 msgstr "Actions en attente sur les documents sélectionnés :"
 
-#: common/docman/views/listfile.php:361
+#: common/docman/views/listfile.php:362
 msgid "Move to trash"
 msgstr "Mettre à la corbeille"
 
-#: common/docman/views/listfile.php:363
+#: common/docman/views/listfile.php:364
 msgid "Reserve for later edition"
 msgstr "Réserver ce document pour une édition ultérieure"
 
-#: common/docman/views/listfile.php:363
+#: common/docman/views/listfile.php:364
 msgid "Reserve"
 msgstr "Réserver"
 
-#: common/docman/views/listfile.php:365 common/tracker/actions/detail.php:53
+#: common/docman/views/listfile.php:366 common/tracker/actions/detail.php:53
 #: common/tracker/actions/mod-limited.php:62 common/tracker/actions/mod.php:60
 #: common/tracker/include/ArtifactTypeHtml.class.php:75
 #: common/tracker/include/ArtifactTypeHtml.class.php:86
@@ -1384,7 +1389,7 @@ msgstr "Réserver"
 msgid "Monitor"
 msgstr "Surveiller"
 
-#: common/docman/views/listfile.php:366 common/forum/ForumHTML.class.php:140
+#: common/docman/views/listfile.php:367 common/forum/ForumHTML.class.php:140
 #: common/tracker/actions/detail.php:49
 #: common/tracker/actions/mod-limited.php:58 common/tracker/actions/mod.php:56
 #: common/widget/Widget_MyMonitoredDocuments.class.php:90
@@ -1393,13 +1398,13 @@ msgstr "Surveiller"
 msgid "Stop Monitoring"
 msgstr "Arrêter la surveillance"
 
-#: common/docman/views/listfile.php:369
+#: common/docman/views/listfile.php:370
 #: common/docman/views/listtrashfile.php:202
 #: common/docman/views/pendingfiles.php:138
 msgid "Download as a ZIP"
 msgstr "Télécharger comme ZIP"
 
-#: common/docman/views/listfile.php:375
+#: common/docman/views/listfile.php:376
 #: common/docman/views/listtrashfile.php:208
 msgid "No documents."
 msgstr "Aucun document."
@@ -2753,7 +2758,7 @@ msgid "Name is reserved."
 msgstr "Ce nom est réservé."
 
 #: common/include/account.php:89 common/include/account.php:93
-#: common/include/User.class.php:353
+#: common/include/User.class.php:355
 msgid "That username already exists."
 msgstr "Ce nom d'utilisateur existe déjà."
 
@@ -2802,8 +2807,8 @@ msgstr "Erreur d'initialisation de la base de données :"
 msgid "Permission denied."
 msgstr "Permission refusée."
 
-#: common/include/Error.class.php:142 common/include/User.class.php:348
-#: common/include/User.class.php:928 common/include/User.class.php:980
+#: common/include/Error.class.php:142 common/include/User.class.php:350
+#: common/include/User.class.php:931 common/include/User.class.php:983
 #: common/tracker/actions/tracker.php:84
 #: plugins/forumml/www/forumml_utils.php:681 www/account/change_email.php:38
 msgid "Invalid Email Address"
@@ -2883,13 +2888,13 @@ msgstr "Groupe non trouvé"
 msgid "Group object already exists"
 msgstr "L'objet Group existe déjà"
 
-#: common/include/Group.class.php:314 common/include/User.class.php:340
-#: common/include/User.class.php:400
+#: common/include/Group.class.php:314 common/include/User.class.php:342
+#: common/include/User.class.php:402
 msgid "Invalid Unix Name."
 msgstr "Nom Unix non valide."
 
 #: common/include/Group.class.php:317 common/include/Group.class.php:321
-#: common/include/User.class.php:344
+#: common/include/User.class.php:346
 msgid "Unix name already taken"
 msgstr "Nom Unix déjà pris"
 
@@ -3629,8 +3634,12 @@ msgid "Flash head line from the project."
 msgstr "Nouvelles rapides à propos du projet."
 
 #: common/include/Navigation.class.php:533 common/include/rbac_texts.php:164
-#: plugins/blocks/www/index.php:158 www/stats/site_stats_utils.php:242
-#: www/stats/site_stats_utils.php:365 www/stats/site_stats_utils.php:420
+#: common/widget/Widget_MyLatestSvnCommits.class.php:108
+#: plugins/blocks/www/index.php:158 plugins/quota_management/www/quota.php:165
+#: plugins/quota_management/www/quota.php:189
+#: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:36
+#: www/stats/site_stats_utils.php:242 www/stats/site_stats_utils.php:365
+#: www/stats/site_stats_utils.php:420
 msgid "SCM"
 msgstr "Sources"
 
@@ -4076,39 +4085,39 @@ msgstr ""
 msgid "User Not Found"
 msgstr "Utilisateur non trouvé"
 
-#: common/include/User.class.php:304
+#: common/include/User.class.php:306
 msgid "You must supply a theme"
 msgstr "Vous devez fournir un thème"
 
-#: common/include/User.class.php:309
+#: common/include/User.class.php:311
 msgid "You must supply a username"
 msgstr "Vous devez fournir un nom d'utilisateur"
 
-#: common/include/User.class.php:314
+#: common/include/User.class.php:316
 msgid "You must supply a first name"
 msgstr "Vous devez saisir votre prénom"
 
-#: common/include/User.class.php:318
+#: common/include/User.class.php:320
 msgid "You must supply a last name"
 msgstr "Vous devez saisir votre nom de famille"
 
-#: common/include/User.class.php:322
+#: common/include/User.class.php:324
 msgid "You must supply a password"
 msgstr "Vous devez fournir un mot de passe"
 
-#: common/include/User.class.php:326
+#: common/include/User.class.php:328
 msgid "Passwords do not match"
 msgstr "Les mots de passe ne concordent pas"
 
-#: common/include/User.class.php:330
+#: common/include/User.class.php:332
 msgid "Invalid Password"
 msgstr "Mot de passe non valide"
 
-#: common/include/User.class.php:335
+#: common/include/User.class.php:337
 msgid "Invalid Unix Name (must not contain uppercase characters)"
 msgstr "Nom Unix invalide (ne pas utiliser de majuscules)"
 
-#: common/include/User.class.php:358
+#: common/include/User.class.php:360
 msgid ""
 "User with this email already exists - use people search to recover your "
 "login."
@@ -4116,7 +4125,7 @@ msgstr ""
 "Un utilisateur avec cette adresse existe déjà : utilisez la recherche des "
 "utilisateurs pour retrouver votre login."
 
-#: common/include/User.class.php:434 common/survey/Survey.class.php:129
+#: common/include/User.class.php:436 common/survey/Survey.class.php:129
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: www/people/admin/index.php:52 www/people/admin/index.php:65
@@ -4124,11 +4133,11 @@ msgstr ""
 msgid "Insert Error"
 msgstr "Erreur lors de l'insertion"
 
-#: common/include/User.class.php:441
+#: common/include/User.class.php:443
 msgid "Could Not Get User Id: "
 msgstr "Utilisateur introuvable : "
 
-#: common/include/User.class.php:475
+#: common/include/User.class.php:477
 #, fuzzy, php-format
 msgid ""
 "Thank you for registering on the %3$s web site. You have\n"
@@ -4165,11 +4174,11 @@ msgstr ""
 "\n"
 "-- L'équipe de %3$s\n"
 
-#: common/include/User.class.php:491
+#: common/include/User.class.php:493
 msgid "Enjoy the site."
 msgstr "Profitez du site."
 
-#: common/include/User.class.php:493 common/mail/MailingList.class.php:205
+#: common/include/User.class.php:495 common/mail/MailingList.class.php:205
 #: plugins/authbuiltin/www/post-login.php:122
 #: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
 #: www/account/first.php:36 www/account/lostpw.php:67
@@ -4178,76 +4187,76 @@ msgstr "Profitez du site."
 msgid "-- the %s staff"
 msgstr "L'équipe de %s"
 
-#: common/include/User.class.php:497
+#: common/include/User.class.php:499
 #, php-format
 msgid "%s Account Registration"
 msgstr "%s - Inscription"
 
-#: common/include/User.class.php:525
+#: common/include/User.class.php:527
 msgid "Could Not Delete From artifact_monitor:"
 msgstr "Impossible de supprimer la surveillance :"
 
-#: common/include/User.class.php:532
+#: common/include/User.class.php:534
 msgid "Could Not Delete From artifact_type_monitor:"
 msgstr "Impossible de supprimer le type de surveillance :"
 
-#: common/include/User.class.php:539
+#: common/include/User.class.php:541
 msgid "Could Not Delete From forum_monitored_forums:"
 msgstr "Impossible de supprimer la surveillance des forums :"
 
-#: common/include/User.class.php:546
+#: common/include/User.class.php:548
 msgid "Could Not Delete From filemodule_monitor:"
 msgstr "Impossible de supprimer la surveillance des fichiers :"
 
-#: common/include/User.class.php:636
+#: common/include/User.class.php:639
 msgid "Error: Cannot Update User Object:"
 msgstr "Erreur : impossible de supprimer l'utilisateur :"
 
-#: common/include/User.class.php:730
+#: common/include/User.class.php:733
 msgid "Error: Invalid status value"
 msgstr "Erreur : statut invalide"
 
-#: common/include/User.class.php:734
+#: common/include/User.class.php:737
 msgid "Error: You cannot set pending status if user is suspend or active"
 msgstr ""
 
-#: common/include/User.class.php:743
+#: common/include/User.class.php:746
 msgid "Error: Cannot Update User Status:"
 msgstr "Erreur : impossible de mettre à jour l'état de l'utilisateur :"
 
-#: common/include/User.class.php:936 common/include/User.class.php:988
+#: common/include/User.class.php:939 common/include/User.class.php:991
 msgid "User with this email already exists."
 msgstr "Il existe déjà un utilisateur avec cette adresse email."
 
-#: common/include/User.class.php:1096
+#: common/include/User.class.php:1099
 #, php-format
 msgid "Error: Invalid Shell %s"
 msgstr "Erreur : shell invalide %s"
 
-#: common/include/User.class.php:1104
+#: common/include/User.class.php:1107
 msgid "Error: Cannot Update User Unix Shell:"
 msgstr "Erreur lors de la mise à jour du statut Unix de l'utilisateur :"
 
-#: common/include/User.class.php:1250
+#: common/include/User.class.php:1253
 #, fuzzy
 msgid "SSH Key already in use"
 msgstr "La requête existe déjà"
 
-#: common/include/User.class.php:1258
+#: common/include/User.class.php:1261
 #, fuzzy
 msgid "Error - Could Not Add User SSH Key:"
 msgstr "Erreur lors de la mise à jour des clefs SSH de l'utilisateur :"
 
-#: common/include/User.class.php:1275
+#: common/include/User.class.php:1278
 msgid "Error: Cannot Update User SSH Keys"
 msgstr "Erreur lors de la mise à jour des clés SSH"
 
-#: common/include/User.class.php:1421 common/include/User.class.php:1457
-#: common/include/User.class.php:1481
+#: common/include/User.class.php:1424 common/include/User.class.php:1460
+#: common/include/User.class.php:1484
 msgid "Error: Cannot Change User Password:"
 msgstr "Erreur : impossible de modifier le mot de passe :"
 
-#: common/include/User.class.php:1737
+#: common/include/User.class.php:1740
 #, php-format
 msgid ""
 "New User %1$s registered and validated\n"
@@ -4255,7 +4264,7 @@ msgid ""
 "Email: %3$s\n"
 msgstr ""
 
-#: common/include/User.class.php:1742
+#: common/include/User.class.php:1745
 #, fuzzy, php-format
 msgid "New %1$s User"
 msgstr "L'équipe de %1$s"
@@ -7133,13 +7142,6 @@ msgstr "le"
 #: common/widget/Widget_MyLatestSvnCommits.class.php:88
 msgid "Maximum number of SVN commits to display per project"
 msgstr "Nombre maximal de validations Subversion à afficher par projet"
-
-#: common/widget/Widget_MyLatestSvnCommits.class.php:108
-#: plugins/quota_management/www/quota.php:165
-#: plugins/quota_management/www/quota.php:189
-#: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:36
-msgid "scm"
-msgstr "Gestion de sources"
 
 #: common/widget/Widget_MyLatestSvnCommits.class.php:111
 msgid "List SVN commits you have done, by project."
@@ -11703,12 +11705,13 @@ msgstr "Aucune annonce trouvée"
 
 #: plugins/oauthconsumer/www/callback.php:72
 #, fuzzy
-msgid "Access Token Key : "
+msgid "Access Token Key: "
 msgstr "Accès refusé : "
 
 #: plugins/oauthconsumer/www/callback.php:73
-msgid "Access Token Secret : "
-msgstr ""
+#, fuzzy
+msgid "Access Token Secret: "
+msgstr "Accès refusé : "
 
 #: plugins/oauthconsumer/www/callback.php:79
 #: plugins/oauthconsumer/www/index.php:87
@@ -13741,7 +13744,7 @@ msgstr ""
 
 #: plugins/twitter/www/checks.php:103
 msgid ""
-"Couldn't find a twitter provider registered in the database. If a twitter "
+"Could not find a twitter provider registered in the database. If a twitter "
 "provider exists, it needs to be named 'Twitter', else it has to be created "
 "in the OAuth Consumer plugin"
 msgstr ""
@@ -13777,18 +13780,15 @@ msgid "Informative Name"
 msgstr "Nom du forum"
 
 #: plugins/webanalytics/view/admin/updateLinkValue.php:37
+#: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:61
-msgid "Standard JavaScript Tracking code."
+msgid "Standard JavaScript Tracking code"
 msgstr ""
 
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:31
 #, fuzzy
 msgid "Manage available links"
 msgstr "Gestion des labels"
-
-#: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
-msgid "Standard JavaScript Tracking code"
-msgstr ""
 
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
 msgid "Is Active"
@@ -18352,42 +18352,46 @@ msgstr ""
 "Si cette annonce se trouve sur la page d'accueil de %1$s et que vous la "
 "modifiez, elle sera retirée de la page d'accueil."
 
-#: www/news/admin/index.php:162 www/news/admin/news_admin_utils.php:79
+#: www/news/admin/index.php:162
 msgid "No Queued Items Found"
 msgstr "Pas d'annonce en attente"
 
-#: www/news/admin/news_admin_utils.php:81
+#: www/news/admin/news_admin_utils.php:75
+msgid "No pending items found."
+msgstr "Aucun élément en attente."
+
+#: www/news/admin/news_admin_utils.php:80
 #, php-format
 msgid "These items need to be approved (total: %1$s)"
 msgstr ""
 "Ces annonces ont besoin d'être approuvées pour la page d'accueil (total : "
 "%1$s)"
 
-#: www/news/admin/news_admin_utils.php:87
+#: www/news/admin/news_admin_utils.php:86
 msgid "Reject Selected"
 msgstr "Rejeter les annonces sélectionnées"
 
 #: www/news/admin/news_admin_utils.php:106
-msgid "No rejected items found for this week"
-msgstr "Aucune annonce rejetée cette semaine"
+msgid "No rejected items found for this week."
+msgstr "Aucune annonce rejetée cette semaine."
 
 #: www/news/admin/news_admin_utils.php:108
 #, php-format
 msgid ""
 "These items were rejected this past week or were not intended for front page "
-"(total: %1$s)"
+"(total: %1$s)."
 msgstr ""
 "Ces annonces ont été rejetées la semaine passée ou n'étaient pas destinées à "
-"la page d'accueil (total : %1$s)"
+"la page d'accueil (total : %1$s)."
 
 #: www/news/admin/news_admin_utils.php:130
-msgid "No approved items found for this week"
-msgstr "Aucune annonce approuvée cette semaine"
+msgid "No approved items found for this week."
+msgstr "Aucune annonce approuvée cette semaine."
 
 #: www/news/admin/news_admin_utils.php:132
 #, php-format
-msgid "These items were approved this past week (total: %1$s)"
-msgstr "Ces annonces ont été approuvées la semaine passée (total : %1$s)"
+msgid "These items were approved this past week (total: %1$s)."
+msgstr "Ces annonces ont été approuvées la semaine passée (total : %1$s)."
 
 #: www/news/index.php:38
 msgid "Choose a News item and you can browse, search, and post messages."
@@ -22833,6 +22837,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "scm"
+#~ msgstr "Gestion de sources"
 
 #~ msgid "yes"
 #~ msgstr "oui"
