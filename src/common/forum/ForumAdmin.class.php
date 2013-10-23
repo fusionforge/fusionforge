@@ -52,7 +52,7 @@ class ForumAdmin extends Error {
 	 *	@param   int	$thread_id	The Thread ID : to return to the message if the user cancels (forumhtml only, not message.php)
 	 *	@param   int	$forum_id	The Forum ID : to return to the message if the user cancels (forumhtml only, not message.php)
 	 *	@param	 int	$return_to_message
-	 *	@return  The HTML output
+	 *	@return  string	The HTML output
 	 */
 
 	function PrintAdminMessageOptions($msg_id,$group_id,$thread_id=0,$forum_id=0,$return_to_message=0) {

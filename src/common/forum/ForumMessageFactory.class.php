@@ -49,7 +49,7 @@ class ForumMessageFactory extends Error {
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	object	The Forum object to which this ForumMessageFactory is associated.
+	 *	@param	object	$Forum	The Forum object to which this ForumMessageFactory is associated.
 	 *	@return	boolean	success.
 	 */
 	function ForumMessageFactory(&$Forum) {

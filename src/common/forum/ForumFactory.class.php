@@ -44,7 +44,7 @@ class ForumFactory extends Error {
 	/**
 	 * Constructor.
 	 *
-	 * @param	object	The Group object to which this forum is associated.
+	 * @param	object	$Group	The Group object to which this forum is associated.
 	 */
 	function __construct(&$Group) {
 		$this->Error();
