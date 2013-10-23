@@ -42,9 +42,9 @@ function get_frs_packages($Group) {
 /**
  * Gets a FRSPackage object from the given package id
  *
- * @param    array    the DB handle if passed in (optional)
- * @param bool $data
- * @return    object    the FRSPackage object
+ * @param	array	$package_id	the DB handle if passed in (optional)
+ * @param	bool	$data
+ * @return	object	the FRSPackage object
  */
 function frspackage_get_object($package_id, $data=false) {
 	global $FRSPACKAGE_OBJ;

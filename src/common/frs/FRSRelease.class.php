@@ -72,10 +72,10 @@ class FRSRelease extends Error {
 	/**
 	 *  Constructor.
 	 *
-	 *  @param  object  The FRSPackage object to which this release is associated.
-	 *  @param  int|bool  The release_id.
-	 *  @param  array|bool   The associative array of data.
-	 *	@return	boolean	success.
+	 *  @param  object  	$FRSPackage		The FRSPackage object to which this release is associated.
+	 *  @param  int|bool	$release_id		The release_id.
+	 *  @param  array|bool	$arr			The associative array of data.
+	 *	@return	bool	success.
 	 */
 	function FRSRelease(&$FRSPackage, $release_id = false, $arr = false) {
 		$this->Error();

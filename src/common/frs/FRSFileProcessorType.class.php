@@ -52,8 +52,8 @@ class FRSFileProcessorType extends Error {
 	/**
 	 *  fetchData - re-fetch the data for this FRSFileType from the database.
 	 *
-	 *  @param  int  The type_id
-	 *  @return boolean	success.
+	 *  @param  int  $processor_id	The type_id
+	 *  @return bool	success.
 	 */
 	function fetchData($processor_id) {
 		$res=db_query_params('SELECT * FROM frs_processor WHERE processor_id=$1', array($processor_id));

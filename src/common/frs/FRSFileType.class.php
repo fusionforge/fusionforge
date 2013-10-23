@@ -59,8 +59,8 @@ class FRSFileType extends Error {
 	/**
 	 *  fetchData - re-fetch the data for this FRSFileType from the database.
 	 *
-	 *  @param  int  The type_id
-	 *  @return boolean	success.
+	 *  @param  int  $type_id	The type_id
+	 *  @return bool	success.
 	 */
 	function fetchData($type_id) {
 		$res=db_query_params('SELECT * FROM frs_filetype WHERE type_id=$1', array($type_id));
