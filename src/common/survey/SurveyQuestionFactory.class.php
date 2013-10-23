@@ -45,7 +45,7 @@ class SurveyQuestionFactory extends Error {
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	object	The Group object to which this survey question is associated.
+	 *	@param	object	$Group	The Group object to which this survey question is associated.
 	 */
 	function __construct(&$Group) {
 		$this->Error();
@@ -81,7 +81,7 @@ class SurveyQuestionFactory extends Error {
  	 *	@return	array	The array of Survey Question objects.
 	 */
 	function &getSurveyQuestions() {
-		/* We alread have it */
+		/* We already have it */
 		if ($this->questions) {
 			return $this->questions;
 		}

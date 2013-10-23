@@ -82,15 +82,15 @@ class SurveyQuestion extends Error {
 	/**
 	 * create - use this function to create a survey question
 	 *
-	 * @param	string	The question
-	 * @param	int	The question type
+	 * @param	string	$question		The question
+	 * @param	int		$question_type	The question type
 	 *                      1: Radio Buttons 1-5
 	 *                      2: Text Area
 	 *                      3: Radio Buttons Yes/No
 	 *                      4: Comment Only
 	 *                      5: Text Field
 	 *                      6: None
-	 * @return	boolean	success.
+	 * @return	bool	success.
 	 */
 	function create($question, $question_type = 1) {
 		if (strlen($question) < 3) {
@@ -98,7 +98,7 @@ class SurveyQuestion extends Error {
 			return false;
 		} else {
 			// Current permissions check.
-			// permission should be checked in higer level to faciliate usability
+			// permission should be checked in higher level to facilitate usability
 		}
 
 		$group_id = $this->Group->GetID();
@@ -120,8 +120,8 @@ class SurveyQuestion extends Error {
 	/**
 	 * update - use this function to update a survey question
 	 *
-	 * @param	string	The question
-	 * @param	int	The question type
+	 * @param	string	$question		The question
+	 * @param	int		$question_type	The question type
 	 *                      1: Radio Buttons 1-5
 	 *                      2: Text Area
 	 *                      3: Radio Buttons Yes/No
@@ -178,8 +178,8 @@ class SurveyQuestion extends Error {
 	/**
 	 * fetchData - re-fetch the data for this survey question from the database.
 	 *
-	 * @param	int	The survey question_id.
-	 * @return	boolean	success.
+	 * @param	int	$question_id	The survey question_id.
+	 * @return	bool	success.
 	 */
 	function fetchData($question_id) {
 		$group_id = $this->Group->GetID();
