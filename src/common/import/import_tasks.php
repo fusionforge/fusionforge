@@ -44,8 +44,8 @@ class Tasks{
 
 	/**
 	 * addHistory - Add history of changes to an Artifact Object
-	 * @param $artifact the artifact object where history should be added
-	 * @param $history  array the artifact's data in json format (an array)
+	 * @param object	$artifact	the artifact object where history should be added
+	 * @param array		$history	the artifact's data in json format (an array)
 	 */
 	function addHistory($artifact, $history){
 		foreach($history as $h){
@@ -75,9 +75,7 @@ class Tasks{
 
 	/**
 	 * createTaskTracker - Create a specific tracker from data in the specified group
-	 * @param string Tracker type (bugs, support, ...)
-	 * @param Group	The group which the tracker belongs to
-	 * @param array	Tracker data from JSON
+	 * @param array	$data	Tracker data from JSON
 	 * @return ArtifactType	the tracker created
 	 */
 

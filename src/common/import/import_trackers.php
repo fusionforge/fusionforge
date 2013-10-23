@@ -56,9 +56,9 @@ function createFieldElements($aef, $vocabulary){
 
 /**
  * createFields - Create the custom fields for the specified ArtifactType
- * @param ArtifactType	The artifact type to be modified
- * @param array	Vocabulary and artifacts for the ArtifactType
- * @return false if failed
+ * @param ArtifactType	$at		The artifact type to be modified
+ * @param array			$data	Vocabulary and artifacts for the ArtifactType
+ * @return bool			false if failed
  */
 function createFields($at, $data){
 	global $NOT_EXTRA_FIELDS;
