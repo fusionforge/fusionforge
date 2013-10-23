@@ -297,12 +297,12 @@ function util_convert_body($str, $charset) {
  *	util_handle_message() - a convenience wrapper which sends messages
  *	to an email account
  *
- *	@param	array	array of user_id's from the user table
- *	@param	string	subject of the message
- *	@param	string	the message body
- *	@param	string	a comma-separated list of email address
- *	@param	ignored	(no longer used)
- *	@param	string	From header
+ *	@param	array	$id_arr			array of user_id's from the user table
+ *	@param	string	$subject		subject of the message
+ *	@param	string	$body			the message body
+ *	@param	string	$extra_emails	a comma-separated list of email address
+ *	@param	string	$dummy1			ignored	(no longer used)
+ *	@param	string	$from			From header
  */
 function util_handle_message($id_arr, $subject, $body, $extra_emails = '', $dummy1 = '', $from = '') {
 	$address = array();
