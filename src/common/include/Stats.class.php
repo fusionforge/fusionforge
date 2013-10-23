@@ -38,7 +38,7 @@ class Stats extends Error {
 	* Returns a resultset consisting of the month, day, total_users, pageviews, and sessions
 	* from the stats_site tables
 	*
-	* @return a resultset of month, day, total_users, pageviews, sessions
+	* @return resource A resultset of month, day, total_users, pageviews, sessions
 	*/
 	function getSiteStats() {
 		$res = db_query_params ("select byday.month,byday.day,byday.site_page_views as pageviews, ss.total_users, ss.sessions from stats_site_pages_by_day byday, stats_site ss where byday.month=ss.month and byday.day = ss.day order by byday.month asc, byday.day asc",
@@ -83,7 +83,7 @@ class Stats extends Error {
 	* Returns a resultset containing unix_group_name, group_name, and items - the count of
 	* the messages posted on that group's forums
 	*
-	* @return a resultset of unix_group_name, group_name, items
+	* @return resource a resultset of unix_group_name, group_name, items
 	*/
 	function getTopMessagesPosted() {
 		return db_query_params ('SELECT g.unix_group_name, g.group_name, SUM(s.msg_posted) AS items, g.group_id FROM stats_project s, groups g WHERE s.group_id=g.group_id AND g.status=$1 GROUP BY g.unix_group_name, g.group_name, g.group_id ORDER BY items DESC',
@@ -95,7 +95,7 @@ class Stats extends Error {
 	* Returns a resultset containing group_name, unix_group_name, and items - the count of
 	* the page views for that group
 	*
-	* @return a resultset of group_name, unix_group_name, items
+	* @return resource a resultset of group_name, unix_group_name, items
 	*/
 	function getTopPageViews() {
 		return db_query_params ('SELECT g.group_name, g.unix_group_name, SUM(s.page_views) AS items, g.group_id FROM stats_project_months s, groups g WHERE s.group_id=g.group_id AND g.status=$1 GROUP BY g.group_name, g.unix_group_name, g.group_id ORDER BY items DESC',
@@ -107,7 +107,7 @@ class Stats extends Error {
 	* Returns a resultset containing group_name, unix_group_name, and items - the count of
 	* the downloads for that group
 	*
-	* @return a resultset of group_name, unix_group_name, items
+	* @return resource	a resultset of group_name, unix_group_name, items
 	*/
 	function getTopDownloads() {
 		return db_query_params ('SELECT g.group_name, g.unix_group_name, SUM(frs.downloads) AS items, g.group_id FROM frs_dlstats_grouptotal_vw frs, groups g WHERE g.group_id = frs.group_id AND g.status=$1 GROUP BY g.group_name, g.unix_group_name, g.group_id ORDER BY items DESC',
