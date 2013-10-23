@@ -44,7 +44,7 @@ class WidgetLayoutManager {
 	 * Display the default layout for the "owner". It may be the home page, the project summary page or /my/ page.
 	 *
 	 * @param	int		$owner_id
-	 * @param	char	$owner_type
+	 * @param	string	$owner_type
 	 */
 	function displayLayout($owner_id, $owner_type) {
 		$sql = "SELECT * from owner_layouts where owner_id=$1 and owner_type=$2";
@@ -106,8 +106,8 @@ class WidgetLayoutManager {
 	 * _currentUserCanUpdateLayout
 	 *
 	 * @param	int		$owner_id
-	 * @param	char	$owner_type
-	 * @return boolean true if the user dan uppdate the layout (add/remove widget, collapse, set preferences, ...)
+	 * @param	string	$owner_type
+	 * @return	boolean true if the user can update the layout (add/remove widget, collapse, set preferences, ...)
 	 */
 	function _currentUserCanUpdateLayout($owner_id, $owner_type) {
 		$readonly = true;
@@ -232,7 +232,7 @@ class WidgetLayoutManager {
 	 * displayAvailableWidgets - Display all widgets that the user can add to the layout
 	 *
 	 * @param	int		$owner_id
-	 * @param	char	$owner_type
+	 * @param	string	$owner_type
 	 * @param	int		$layout_id
 	 */
 	function displayAvailableWidgets($owner_id, $owner_type, $layout_id) {
@@ -611,7 +611,7 @@ class WidgetLayoutManager {
 	 * addWidget
 	 *
 	 * @param	int		$owner_id
-	 * @param	char	$owner_type
+	 * @param	string	$owner_type
 	 * @param	int		$layout_id
 	 * @param	string	$name
 	 * @param	object	$widget
@@ -732,7 +732,7 @@ class WidgetLayoutManager {
 	 * mimizeWidget
 	 *
 	 * @param	int		$owner_id
-	 * @param	char	$owner_type
+	 * @param	string	$owner_type
 	 * @param	int		$layout_id
 	 * @param	string	$name
 	 * @param	int		$instance_id
@@ -747,7 +747,7 @@ class WidgetLayoutManager {
 	 * maximizeWidget
 	 *
 	 * @param	int		$owner_id
-	 * @param	char	$owner_type
+	 * @param	string	$owner_type
 	 * @param	int		$layout_id
 	 * @param	string	$name
 	 * @param	int		$instance_id
@@ -762,7 +762,7 @@ class WidgetLayoutManager {
 	 * displayWidgetPreferences
 	 *
 	 * @param	int		$owner_id
-	 * @param	char	$owner_type
+	 * @param	string	$owner_type
 	 * @param	int		$layout_id
 	 * @param	string	$name
 	 * @param	int		$instance_id
@@ -777,7 +777,7 @@ class WidgetLayoutManager {
 	 * hideWidgetPreferences
 	 *
 	 * @param	int		$owner_id
-	 * @param	char	$owner_type
+	 * @param	string	$owner_type
 	 * @param	int		$layout_id
 	 * @param	string	$name
 	 * @param	int		$instance_id
