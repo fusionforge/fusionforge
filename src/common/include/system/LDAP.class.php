@@ -45,8 +45,8 @@ class LDAP extends UNIX {
  	*	know which encoding 8-bit characters in database use, we
  	*	just replace them with question marks.
  	*
- 	*  @param		string	UTF-8 encoded character string.
- 	*	@return string which contains only ascii characters
+ 	*	@param		string	$str	UTF-8 encoded character string.
+ 	*	@return		string	which contains only ascii characters
  	*/
 	function asciize($str) {
 		if (!$str) {
