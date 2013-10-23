@@ -99,14 +99,14 @@ class Document extends Error {
 	/**
 	 * create - use this function to create a new entry in the database.
 	 *
-	 * @param	string	The filename of this document. Can be a URL.
-	 * @param	string	The filetype of this document. If filename is URL, this should be 'URL';
-	 * @param	string	The absolute path file itself.
-	 * @param	int	The doc_group id of the doc_groups table.
-	 * @param	string	The title of this document.
-	 * @param	string	The description of this document.
-	 * @param	int	The state id of the document. At creation, can not be deleted status.
-	 * @return	boolean	success.
+	 * @param	string	$filename		The filename of this document. Can be a URL.
+	 * @param	string	$filetype		The filetype of this document. If filename is URL, this should be 'URL';
+	 * @param	string	$data			The absolute path file itself.
+	 * @param	int		$doc_group		The doc_group id of the doc_groups table.
+	 * @param	string	$title			The title of this document.
+	 * @param	string	$description	The description of this document.
+	 * @param	int		$stateid		The state id of the document. At creation, cannot be deleted status.
+	 * @return	bool	success.
 	 */
 	function create($filename, $filetype, $data, $doc_group, $title, $description, $stateid = 0) {
 		if (strlen($title) < 5) {
@@ -242,7 +242,7 @@ class Document extends Error {
 	/**
 	 * fetchData() - re-fetch the data for this document from the database.
 	 *
-	 * @param	int	The document id.
+	 * @param	int	$docid	The document id.
 	 * @return	boolean	success
 	 */
 	function fetchData($docid) {
