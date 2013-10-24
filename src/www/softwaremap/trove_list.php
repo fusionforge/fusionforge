@@ -138,7 +138,7 @@ if ( $cat === 'c' ) {
 		for ($i = 0; $i < sizeof($expl_discrim); $i++) {
 			$discrim_desc .= '<br /> &nbsp; &nbsp; &nbsp; '
 				.trove_getfullpath($expl_discrim[$i])
-				.util_make_link('/softwaremap/trove_list.php?cat=c&form_cat='.$form_cat .$discrim_url_b[$i],' ['._('Remove This Filter').']');
+				.util_make_link('/softwaremap/trove_list.php?cat=c&amp;form_cat='.$form_cat .$discrim_url_b[$i],' ['._('Remove This Filter').']');
 		}
 		$discrim_desc .= "<hr />\n";
 	}
@@ -165,7 +165,7 @@ if ( $cat === 'c' ) {
 	for ($i = 0; $i < $folders_len; $i++) {
 		// no anchor for current cat
 		if ($folders_ids[$i] != $form_cat) {
-			print util_make_link('/softwaremap/trove_list.php?cat=c&form_cat=' .$folders_ids[$i].$discrim_url,
+			print util_make_link('/softwaremap/trove_list.php?cat=c&amp;form_cat=' .$folders_ids[$i].$discrim_url,
 					      $folders[$i]
 				);
 			print "&nbsp; &gt; &nbsp;";
@@ -192,7 +192,7 @@ if ( $cat === 'c' ) {
 	print "<ul>";
 	while ($row_sub = db_fetch_array($res_sub)) {
 		print "<li>";
-		print '<a href="trove_list.php?cat=c&form_cat=' . $row_sub['trove_cat_id'] . $discrim_url . '">';
+		print '<a href="trove_list.php?cat=c&amp;form_cat=' . $row_sub['trove_cat_id'] . $discrim_url . '">';
 		print $row_sub['fullname'];
 		print '</a>';
 		print '&nbsp;<em>(';
@@ -227,7 +227,7 @@ if ( $cat === 'c' ) {
 			print '<li class="current-cat">' . $row_rootcat['fullname'] . "</li>\n";
 		} else {
 			print "<li>";
-			print util_make_link ('/softwaremap/trove_list.php?cat=c&form_cat=' .$row_rootcat['trove_cat_id'].$discrim_url, $row_rootcat['fullname']);
+			print util_make_link ('/softwaremap/trove_list.php?cat=c&amp;form_cat=' .$row_rootcat['trove_cat_id'].$discrim_url, $row_rootcat['fullname']);
 			print "</li>\n";
 		}
 	}
@@ -237,7 +237,7 @@ if ( $cat === 'c' ) {
 ?>
 <hr />
 <?php
-// one listing for each project
+	// one listing for each project
 
 	$qpa = db_construct_qpa();
 	$qpa = db_construct_qpa($qpa, 'SELECT * FROM trove_agg');
