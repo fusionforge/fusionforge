@@ -72,7 +72,7 @@ $(RPM_TMP)/SOURCES/$(HTMLPURIFIER_TBZ): $(DEPOT)/$(HTMLPURIFIER_TBZ)
 	cp $(DEPOT)/$(HTMLPURIFIER_TBZ) $@
 
 $(DEPOT)/$(HTMLPURIFIER_TBZ): $(DEPOT) rpmprep
-	@cd $(DEPOT); [ -f $@ ] || wget -q -N http://htmlpurifier.org/releases/$(HTMLPURIFIER_TBZ)
+	@cd $(DEPOT); [ -f $@ ] || wget -q -N --post-data="" http://htmlpurifier.org/releases/$(HTMLPURIFIER_TBZ)
 
 # WEBDAV SERVER
 php-pear-HTTP_WebDAV_Server: rpmprep $(BUILDRESULT)/$(WEBDAV_SERVER_RPM)
