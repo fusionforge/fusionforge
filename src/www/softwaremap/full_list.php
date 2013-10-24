@@ -121,7 +121,7 @@ for ($i_proj=0;$i_proj<$querytotalcount;$i_proj++) {
 		print '</td>';
 		print '<td class="bottom align-right"><br />'._('Register Date:').' <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong></td>';
 		print '</tr>';
-        print '</table>';
+		print '</table>';
         print '</div>'; // /doap:Project
 		print '<hr />';
 	} // end if for row and range chacking
