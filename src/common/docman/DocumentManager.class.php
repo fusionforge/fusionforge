@@ -205,7 +205,7 @@ class DocumentManager extends Error {
 						if ($lititle) {
 							$lititle .= _('; ');
 						}
-						$lititle .= _('Last modified')._(': ').relative_date($localDg->getLastModifyDate());
+						$lititle .= _('Last Modified')._(': ').relative_date($localDg->getLastModifyDate());
 					}
 					echo '<li id="leaf-'.$subGroupIdValue.'" class="'.$liclass.'">'.util_make_link($link, $localDg->getName(), array('class'=>'tabtitle-nw', 'title'=>$lititle)).$nbDocsLabel;
 				} else {

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:33+0200\n"
+"POT-Creation-Date: 2013-10-24 18:35+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -718,9 +718,9 @@ msgid "; "
 msgstr ""
 
 #: common/docman/DocumentManager.class.php:208
-#, fuzzy
-msgid "Last modified"
-msgstr "Zerrenda Gehitua"
+#: www/project/report/index.php:137
+msgid "Last Modified"
+msgstr ""
 
 #: common/docman/include/DocumentGroupHTML.class.php:50
 #: common/include/User.class.php:1410 common/search/SearchQuery.class.php:120
@@ -21005,10 +21005,6 @@ msgstr "Esperientzia"
 msgid "Developer"
 msgstr "Garatzailea"
 
-#: www/project/report/index.php:137
-msgid "Last Modified"
-msgstr ""
-
 #: www/project/report/index.php:153
 #, fuzzy, php-format
 msgid "Contact %s"
@@ -23239,6 +23235,10 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#, fuzzy
+#~ msgid "Last modified"
+#~ msgstr "Zerrenda Gehitua"
 
 #, fuzzy
 #~ msgid "New document"

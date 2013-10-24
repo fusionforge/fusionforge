@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:33+0200\n"
+"POT-Creation-Date: 2013-10-24 18:35+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -717,7 +717,8 @@ msgid "; "
 msgstr ""
 
 #: common/docman/DocumentManager.class.php:208
-msgid "Last modified"
+#: www/project/report/index.php:137
+msgid "Last Modified"
 msgstr "Ultima modifica"
 
 #: common/docman/include/DocumentGroupHTML.class.php:50
@@ -21131,10 +21132,6 @@ msgstr "Competenze"
 msgid "Developer"
 msgstr "Sviluppatore"
 
-#: www/project/report/index.php:137
-msgid "Last Modified"
-msgstr "Ultima modifica"
-
 #: www/project/report/index.php:153
 #, fuzzy, php-format
 msgid "Contact %s"
@@ -23390,6 +23387,9 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#~ msgid "Last modified"
+#~ msgstr "Ultima modifica"
 
 #, fuzzy
 #~ msgid "New document"

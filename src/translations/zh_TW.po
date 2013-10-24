@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:33+0200\n"
+"POT-Creation-Date: 2013-10-24 18:35+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -719,9 +719,9 @@ msgid "; "
 msgstr ""
 
 #: common/docman/DocumentManager.class.php:208
-#, fuzzy
-msgid "Last modified"
-msgstr "已經新增通信論壇"
+#: www/project/report/index.php:137
+msgid "Last Modified"
+msgstr ""
 
 #: common/docman/include/DocumentGroupHTML.class.php:50
 #: common/include/User.class.php:1410 common/search/SearchQuery.class.php:120
@@ -20964,10 +20964,6 @@ msgstr "技術"
 msgid "Developer"
 msgstr "開發人員"
 
-#: www/project/report/index.php:137
-msgid "Last Modified"
-msgstr ""
-
 #: www/project/report/index.php:153
 #, fuzzy, php-format
 msgid "Contact %s"
@@ -23197,6 +23193,10 @@ msgstr "帳號"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
+
+#, fuzzy
+#~ msgid "Last modified"
+#~ msgstr "已經新增通信論壇"
 
 #, fuzzy
 #~ msgid "New document"

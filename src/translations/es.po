@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:33+0200\n"
+"POT-Creation-Date: 2013-10-24 18:35+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -688,7 +688,8 @@ msgid "; "
 msgstr ""
 
 #: common/docman/DocumentManager.class.php:208
-msgid "Last modified"
+#: www/project/report/index.php:137
+msgid "Last Modified"
 msgstr "Última modificación"
 
 #: common/docman/include/DocumentGroupHTML.class.php:50
@@ -20688,10 +20689,6 @@ msgstr "Cualidades"
 msgid "Developer"
 msgstr "Desarrollador"
 
-#: www/project/report/index.php:137
-msgid "Last Modified"
-msgstr "Última modificación"
-
 #: www/project/report/index.php:153
 #, php-format
 msgid "Contact %s"
@@ -22962,6 +22959,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Last modified"
+#~ msgstr "Última modificación"
 
 #~ msgid "New document"
 #~ msgstr "Nuevo documento"

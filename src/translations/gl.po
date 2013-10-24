@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:33+0200\n"
+"POT-Creation-Date: 2013-10-24 18:35+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -717,8 +717,8 @@ msgid "; "
 msgstr ""
 
 #: common/docman/DocumentManager.class.php:208
-#, fuzzy
-msgid "Last modified"
+#: www/project/report/index.php:137
+msgid "Last Modified"
 msgstr "Modificado por última vez"
 
 #: common/docman/include/DocumentGroupHTML.class.php:50
@@ -21316,10 +21316,6 @@ msgstr "Habelencias "
 msgid "Developer"
 msgstr "Desenvolvedor"
 
-#: www/project/report/index.php:137
-msgid "Last Modified"
-msgstr "Modificado por última vez"
-
 #: www/project/report/index.php:153
 #, fuzzy, php-format
 msgid "Contact %s"
@@ -23575,6 +23571,10 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Last modified"
+#~ msgstr "Modificado por última vez"
 
 #, fuzzy
 #~ msgid "New document"

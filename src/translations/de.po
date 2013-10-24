@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:33+0200\n"
+"POT-Creation-Date: 2013-10-24 18:35+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -718,7 +718,8 @@ msgid "; "
 msgstr ""
 
 #: common/docman/DocumentManager.class.php:208
-msgid "Last modified"
+#: www/project/report/index.php:137
+msgid "Last Modified"
 msgstr "Zuletzt bearbeitet"
 
 #: common/docman/include/DocumentGroupHTML.class.php:50
@@ -21355,10 +21356,6 @@ msgstr "Fähigkeiten"
 msgid "Developer"
 msgstr "Entwickler"
 
-#: www/project/report/index.php:137
-msgid "Last Modified"
-msgstr "Zuletzt bearbeitet"
-
 #: www/project/report/index.php:153
 #, fuzzy, php-format
 msgid "Contact %s"
@@ -23643,6 +23640,9 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "Last modified"
+#~ msgstr "Zuletzt bearbeitet"
 
 #, fuzzy
 #~ msgid "New document"

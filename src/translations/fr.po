@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:33+0200\n"
+"POT-Creation-Date: 2013-10-24 18:35+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -665,7 +665,8 @@ msgid "; "
 msgstr " ; "
 
 #: common/docman/DocumentManager.class.php:208
-msgid "Last modified"
+#: www/project/report/index.php:137
+msgid "Last Modified"
 msgstr "Dernière modification"
 
 #: common/docman/include/DocumentGroupHTML.class.php:50
@@ -20558,10 +20559,6 @@ msgstr "Compétences"
 msgid "Developer"
 msgstr "Développeur"
 
-#: www/project/report/index.php:137
-msgid "Last Modified"
-msgstr "Dernière modification"
-
 #: www/project/report/index.php:153
 #, php-format
 msgid "Contact %s"
@@ -22821,6 +22818,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Last modified"
+#~ msgstr "Dernière modification"
 
 #~ msgid "New document"
 #~ msgstr "Nouveau document"

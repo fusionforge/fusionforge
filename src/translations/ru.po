@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:33+0200\n"
+"POT-Creation-Date: 2013-10-24 18:35+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -721,7 +721,8 @@ msgid "; "
 msgstr ""
 
 #: common/docman/DocumentManager.class.php:208
-msgid "Last modified"
+#: www/project/report/index.php:137
+msgid "Last Modified"
 msgstr "Последние изменение"
 
 #: common/docman/include/DocumentGroupHTML.class.php:50
@@ -21442,10 +21443,6 @@ msgstr "Опыт"
 msgid "Developer"
 msgstr "Разработчик"
 
-#: www/project/report/index.php:137
-msgid "Last Modified"
-msgstr "Последние изменение"
-
 #: www/project/report/index.php:153
 #, fuzzy, php-format
 msgid "Contact %s"
@@ -23714,6 +23711,9 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#~ msgid "Last modified"
+#~ msgstr "Последние изменение"
 
 #, fuzzy
 #~ msgid "New document"

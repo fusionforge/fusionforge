@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:33+0200\n"
+"POT-Creation-Date: 2013-10-24 18:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -660,7 +660,8 @@ msgid "; "
 msgstr ""
 
 #: common/docman/DocumentManager.class.php:208
-msgid "Last modified"
+#: www/project/report/index.php:137
+msgid "Last Modified"
 msgstr ""
 
 #: common/docman/include/DocumentGroupHTML.class.php:50
@@ -19312,10 +19313,6 @@ msgstr ""
 
 #: www/project/report/index.php:134
 msgid "Developer"
-msgstr ""
-
-#: www/project/report/index.php:137
-msgid "Last Modified"
 msgstr ""
 
 #: www/project/report/index.php:153
