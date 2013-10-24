@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:36+0200\n"
+"POT-Creation-Date: 2013-10-24 18:38+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -1427,6 +1427,7 @@ msgstr "Descargar como ZIP"
 
 #: common/docman/views/listfile.php:376
 #: common/docman/views/listtrashfile.php:208
+#: common/widget/Widget_MyProjectsLastDocuments.class.php:88
 msgid "No documents."
 msgstr "No hay documentos."
 
@@ -7405,10 +7406,6 @@ msgstr ""
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:37
 msgid "The 5 Last Documents in My Projects"
 msgstr "Los Ultimos 5 Documentos en Mis Proyectos"
-
-#: common/widget/Widget_MyProjectsLastDocuments.class.php:88
-msgid "No documents"
-msgstr "No hay documentos"
 
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:132
 msgid ""
@@ -22954,6 +22951,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "No documents"
+#~ msgstr "No hay documentos"
 
 #, fuzzy
 #~ msgid "Mailing Lists Administration"

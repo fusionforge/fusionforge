@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:36+0200\n"
+"POT-Creation-Date: 2013-10-24 18:38+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1483,6 +1483,7 @@ msgstr "下载作为CSV"
 
 #: common/docman/views/listfile.php:376
 #: common/docman/views/listtrashfile.php:208
+#: common/widget/Widget_MyProjectsLastDocuments.class.php:88
 #, fuzzy
 msgid "No documents."
 msgstr "增加新项目"
@@ -7524,11 +7525,6 @@ msgstr ""
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:37
 msgid "The 5 Last Documents in My Projects"
 msgstr ""
-
-#: common/widget/Widget_MyProjectsLastDocuments.class.php:88
-#, fuzzy
-msgid "No documents"
-msgstr "增加新项目"
 
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:132
 msgid ""
@@ -23162,6 +23158,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "No documents"
+#~ msgstr "增加新项目"
 
 #, fuzzy
 #~ msgid "Mailing Lists Administration"

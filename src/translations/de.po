@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:36+0200\n"
+"POT-Creation-Date: 2013-10-24 18:38+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -1489,6 +1489,7 @@ msgstr "Download als CSV"
 
 #: common/docman/views/listfile.php:376
 #: common/docman/views/listtrashfile.php:208
+#: common/widget/Widget_MyProjectsLastDocuments.class.php:88
 #, fuzzy
 msgid "No documents."
 msgstr "Neues Projekt hinzufügen"
@@ -7621,11 +7622,6 @@ msgstr ""
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:37
 msgid "The 5 Last Documents in My Projects"
 msgstr ""
-
-#: common/widget/Widget_MyProjectsLastDocuments.class.php:88
-#, fuzzy
-msgid "No documents"
-msgstr "Neues Projekt hinzufügen"
 
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:132
 msgid ""
@@ -23635,6 +23631,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "No documents"
+#~ msgstr "Neues Projekt hinzufügen"
 
 #, fuzzy
 #~ msgid "Mailing Lists Administration"

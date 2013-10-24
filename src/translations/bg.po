@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:36+0200\n"
+"POT-Creation-Date: 2013-10-24 18:38+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1467,6 +1467,7 @@ msgstr ""
 
 #: common/docman/views/listfile.php:376
 #: common/docman/views/listtrashfile.php:208
+#: common/widget/Widget_MyProjectsLastDocuments.class.php:88
 #, fuzzy
 msgid "No documents."
 msgstr "Публикуване на документ"
@@ -7372,11 +7373,6 @@ msgstr ""
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:37
 msgid "The 5 Last Documents in My Projects"
 msgstr ""
-
-#: common/widget/Widget_MyProjectsLastDocuments.class.php:88
-#, fuzzy
-msgid "No documents"
-msgstr "Публикуване на документ"
 
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:132
 msgid ""
@@ -22715,6 +22711,10 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Лична Информация"
+
+#, fuzzy
+#~ msgid "No documents"
+#~ msgstr "Публикуване на документ"
 
 #, fuzzy
 #~ msgid "Mailing Lists Administration"

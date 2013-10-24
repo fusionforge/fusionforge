@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:36+0200\n"
+"POT-Creation-Date: 2013-10-24 18:38+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1400,6 +1400,7 @@ msgstr "Télécharger comme ZIP"
 
 #: common/docman/views/listfile.php:376
 #: common/docman/views/listtrashfile.php:208
+#: common/widget/Widget_MyProjectsLastDocuments.class.php:88
 msgid "No documents."
 msgstr "Aucun document."
 
@@ -7295,10 +7296,6 @@ msgstr ""
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:37
 msgid "The 5 Last Documents in My Projects"
 msgstr "Les 5 derniers documents de mes projets"
-
-#: common/widget/Widget_MyProjectsLastDocuments.class.php:88
-msgid "No documents"
-msgstr "Aucun document"
 
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:132
 msgid ""
@@ -22814,6 +22811,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "No documents"
+#~ msgstr "Aucun document"
 
 #~ msgid "Mailing Lists Administration"
 #~ msgstr "Administration des listes de diffusion"

@@ -85,7 +85,7 @@ class Widget_MyProjectsLastDocuments extends Widget {
 						$keys = array_keys($df->Documents);
 						$j = 0;
 						if (!count($keys)) {
-							$html .= '<tr><td colspan="4"><div class="warning">'._('No documents').'</div></td></tr>';
+							$html .= '<tr><td colspan="4"><div class="warning">'._('No documents.').'</div></td></tr>';
 						}
 						foreach ($keys as $key) {
 							$dg = new DocumentGroup($g, $key);
