@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:35+0200\n"
+"POT-Creation-Date: 2013-10-24 18:36+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18132,9 +18132,9 @@ msgstr "Име на списъка:"
 msgid "Update Mailing List %s"
 msgstr "Модул \"Пощенски списъци\""
 
-#: www/mail/admin/index.php:243
+#: www/mail/admin/index.php:243 www/project/admin/tools.php:324
 #, fuzzy
-msgid "Mailing Lists Administration"
+msgid "Mailing Lists Admin"
 msgstr "Пощенски списъци"
 
 #: www/mail/admin/index.php:293
@@ -20353,11 +20353,6 @@ msgstr "Име на форума"
 #, fuzzy
 msgid "Trackers Admin"
 msgstr "Тракер"
-
-#: www/project/admin/tools.php:324
-#, fuzzy
-msgid "Mailing Lists Admin"
-msgstr "Пощенски списъци"
 
 #: www/project/admin/tools.php:330
 #, fuzzy
@@ -22720,6 +22715,10 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Лична Информация"
+
+#, fuzzy
+#~ msgid "Mailing Lists Administration"
+#~ msgstr "Пощенски списъци"
 
 #, fuzzy
 #~ msgid "Last modified"

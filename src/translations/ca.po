@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:35+0200\n"
+"POT-Creation-Date: 2013-10-24 18:36+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18591,10 +18591,10 @@ msgstr "Nom de la llista de correu:"
 msgid "Update Mailing List %s"
 msgstr "Usa les llistes de correu"
 
-#: www/mail/admin/index.php:243
+#: www/mail/admin/index.php:243 www/project/admin/tools.php:324
 #, fuzzy
-msgid "Mailing Lists Administration"
-msgstr "Administració de la llista de correu"
+msgid "Mailing Lists Admin"
+msgstr "Llistes d'enviament de correus"
 
 #: www/mail/admin/index.php:293
 msgid "Reset admin password"
@@ -20907,11 +20907,6 @@ msgstr "Administració del fòrum"
 #, fuzzy
 msgid "Trackers Admin"
 msgstr "Administració del rastrejador"
-
-#: www/project/admin/tools.php:324
-#, fuzzy
-msgid "Mailing Lists Admin"
-msgstr "Llistes d'enviament de correus"
 
 #: www/project/admin/tools.php:330
 #, fuzzy
@@ -23363,6 +23358,10 @@ msgstr "Nom d'usuari"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
+
+#, fuzzy
+#~ msgid "Mailing Lists Administration"
+#~ msgstr "Administració de la llista de correu"
 
 #, fuzzy
 #~ msgid "Last modified"

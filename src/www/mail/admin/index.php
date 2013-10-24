@@ -240,7 +240,7 @@ if ($group_id) {
 		}
 
 		mail_header(array(
-			'title' => _('Mailing Lists Administration'))
+			'title' => _('Mailing Lists Admin'))
 		);
 
 		$mlArray = $mlFactory->getMailingLists();

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:35+0200\n"
+"POT-Creation-Date: 2013-10-24 18:36+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18500,10 +18500,10 @@ msgstr "Posta Zerrendaren Izena:"
 msgid "Update Mailing List %s"
 msgstr "Posta zerrendak erabili"
 
-#: www/mail/admin/index.php:243
+#: www/mail/admin/index.php:243 www/project/admin/tools.php:324
 #, fuzzy
-msgid "Mailing Lists Administration"
-msgstr "Posta Zerrenda Administrazioa"
+msgid "Mailing Lists Admin"
+msgstr "Posta zerrendak"
 
 #: www/mail/admin/index.php:293
 msgid "Reset admin password"
@@ -20797,11 +20797,6 @@ msgstr "Foroen administrazioa"
 #, fuzzy
 msgid "Trackers Admin"
 msgstr "Erregistroaren administrazioa"
-
-#: www/project/admin/tools.php:324
-#, fuzzy
-msgid "Mailing Lists Admin"
-msgstr "Posta zerrendak"
 
 #: www/project/admin/tools.php:330
 #, fuzzy
@@ -23235,6 +23230,10 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#, fuzzy
+#~ msgid "Mailing Lists Administration"
+#~ msgstr "Posta Zerrenda Administrazioa"
 
 #, fuzzy
 #~ msgid "Last modified"

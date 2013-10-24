@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:35+0200\n"
+"POT-Creation-Date: 2013-10-24 18:36+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18453,10 +18453,10 @@ msgstr "邮件列表名称："
 msgid "Update Mailing List %s"
 msgstr "使用邮件列表"
 
-#: www/mail/admin/index.php:243
+#: www/mail/admin/index.php:243 www/project/admin/tools.php:324
 #, fuzzy
-msgid "Mailing Lists Administration"
-msgstr "邮件列表管理"
+msgid "Mailing Lists Admin"
+msgstr "邮件列表"
 
 #: www/mail/admin/index.php:293
 msgid "Reset admin password"
@@ -20726,11 +20726,6 @@ msgstr "讨论区管理"
 #, fuzzy
 msgid "Trackers Admin"
 msgstr "跟踪管理"
-
-#: www/project/admin/tools.php:324
-#, fuzzy
-msgid "Mailing Lists Admin"
-msgstr "邮件列表"
 
 #: www/project/admin/tools.php:330
 #, fuzzy
@@ -23167,6 +23162,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Mailing Lists Administration"
+#~ msgstr "邮件列表管理"
 
 #, fuzzy
 #~ msgid "Last modified"

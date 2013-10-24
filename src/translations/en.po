@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:35+0200\n"
+"POT-Creation-Date: 2013-10-24 18:36+0200\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -17037,8 +17037,8 @@ msgstr ""
 msgid "Update Mailing List %s"
 msgstr ""
 
-#: www/mail/admin/index.php:243
-msgid "Mailing Lists Administration"
+#: www/mail/admin/index.php:243 www/project/admin/tools.php:324
+msgid "Mailing Lists Admin"
 msgstr ""
 
 #: www/mail/admin/index.php:293
@@ -19149,10 +19149,6 @@ msgstr ""
 
 #: www/project/admin/tools.php:321
 msgid "Trackers Admin"
-msgstr ""
-
-#: www/project/admin/tools.php:324
-msgid "Mailing Lists Admin"
 msgstr ""
 
 #: www/project/admin/tools.php:330

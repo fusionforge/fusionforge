@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:35+0200\n"
+"POT-Creation-Date: 2013-10-24 18:36+0200\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -18090,8 +18090,8 @@ msgstr "Nom de la liste de diffusion :"
 msgid "Update Mailing List %s"
 msgstr "Mettre à jour la liste de diffusion %s"
 
-#: www/mail/admin/index.php:243
-msgid "Mailing Lists Administration"
+#: www/mail/admin/index.php:243 www/project/admin/tools.php:324
+msgid "Mailing Lists Admin"
 msgstr "Administration des listes de diffusion"
 
 #: www/mail/admin/index.php:293
@@ -20365,10 +20365,6 @@ msgstr "Administration des forums"
 #: www/project/admin/tools.php:321
 msgid "Trackers Admin"
 msgstr "Administration des outils de suivi"
-
-#: www/project/admin/tools.php:324
-msgid "Mailing Lists Admin"
-msgstr "Administration des listes de diffusion"
 
 #: www/project/admin/tools.php:330
 msgid "Documents Admin"
@@ -22818,6 +22814,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Mailing Lists Administration"
+#~ msgstr "Administration des listes de diffusion"
 
 #~ msgid "Last modified"
 #~ msgstr "Dernière modification"

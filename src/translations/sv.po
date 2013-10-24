@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:35+0200\n"
+"POT-Creation-Date: 2013-10-24 18:36+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18428,9 +18428,9 @@ msgstr ""
 msgid "Update Mailing List %s"
 msgstr "Använd e-postlistor"
 
-#: www/mail/admin/index.php:243
+#: www/mail/admin/index.php:243 www/project/admin/tools.php:324
 #, fuzzy
-msgid "Mailing Lists Administration"
+msgid "Mailing Lists Admin"
 msgstr "Sändlistor"
 
 #: www/mail/admin/index.php:293
@@ -20719,11 +20719,6 @@ msgstr "Forum admin"
 #, fuzzy
 msgid "Trackers Admin"
 msgstr "Ordningslista admin"
-
-#: www/project/admin/tools.php:324
-#, fuzzy
-msgid "Mailing Lists Admin"
-msgstr "Sändlistor"
 
 #: www/project/admin/tools.php:330
 #, fuzzy
@@ -23162,6 +23157,10 @@ msgstr "Användarenamn"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
+
+#, fuzzy
+#~ msgid "Mailing Lists Administration"
+#~ msgstr "Sändlistor"
 
 #, fuzzy
 #~ msgid "Last modified"

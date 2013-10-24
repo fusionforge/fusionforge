@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:35+0200\n"
+"POT-Creation-Date: 2013-10-24 18:36+0200\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -17231,10 +17231,9 @@ msgstr ""
 msgid "Update Mailing List %s"
 msgstr "Usar Listas de Correio"
 
-#: www/mail/admin/index.php:243
-#, fuzzy
-msgid "Mailing Lists Administration"
-msgstr "Administração de Host Virtual"
+#: www/mail/admin/index.php:243 www/project/admin/tools.php:324
+msgid "Mailing Lists Admin"
+msgstr ""
 
 #: www/mail/admin/index.php:293
 msgid "Reset admin password"
@@ -19413,10 +19412,6 @@ msgstr ""
 
 #: www/project/admin/tools.php:321
 msgid "Trackers Admin"
-msgstr ""
-
-#: www/project/admin/tools.php:324
-msgid "Mailing Lists Admin"
 msgstr ""
 
 #: www/project/admin/tools.php:330
@@ -21709,6 +21704,10 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Minha Página Pessoal"
+
+#, fuzzy
+#~ msgid "Mailing Lists Administration"
+#~ msgstr "Administração de Host Virtual"
 
 #~ msgid "You can only monitor if you are logged in"
 #~ msgstr "Você Só Pode Monitorar Se Você Estiver Logado"

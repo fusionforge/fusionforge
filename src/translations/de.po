@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:35+0200\n"
+"POT-Creation-Date: 2013-10-24 18:36+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -18804,10 +18804,9 @@ msgstr "Name der Mailingliste :"
 msgid "Update Mailing List %s"
 msgstr "Benutze Mailing Listen"
 
-#: www/mail/admin/index.php:243
-#, fuzzy
-msgid "Mailing Lists Administration"
-msgstr "Administration der Mailingliste"
+#: www/mail/admin/index.php:243 www/project/admin/tools.php:324
+msgid "Mailing Lists Admin"
+msgstr "Mailinglisten Admin"
 
 #: www/mail/admin/index.php:293
 msgid "Reset admin password"
@@ -21154,10 +21153,6 @@ msgstr "Foren-Admin"
 #: www/project/admin/tools.php:321
 msgid "Trackers Admin"
 msgstr "Tracker Admin"
-
-#: www/project/admin/tools.php:324
-msgid "Mailing Lists Admin"
-msgstr "Mailinglisten Admin"
 
 #: www/project/admin/tools.php:330
 msgid "Documents Admin"
@@ -23640,6 +23635,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "Mailing Lists Administration"
+#~ msgstr "Administration der Mailingliste"
 
 #~ msgid "Last modified"
 #~ msgstr "Zuletzt bearbeitet"

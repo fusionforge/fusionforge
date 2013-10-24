@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:35+0200\n"
+"POT-Creation-Date: 2013-10-24 18:36+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18009,9 +18009,9 @@ msgstr ""
 msgid "Update Mailing List %s"
 msgstr "メーリングリスト"
 
-#: www/mail/admin/index.php:243
+#: www/mail/admin/index.php:243 www/project/admin/tools.php:324
 #, fuzzy
-msgid "Mailing Lists Administration"
+msgid "Mailing Lists Admin"
 msgstr "メーリングリスト"
 
 #: www/mail/admin/index.php:293
@@ -20204,11 +20204,6 @@ msgstr "人物"
 #, fuzzy
 msgid "Trackers Admin"
 msgstr "タスクマネージャ"
-
-#: www/project/admin/tools.php:324
-#, fuzzy
-msgid "Mailing Lists Admin"
-msgstr "メーリングリスト"
 
 #: www/project/admin/tools.php:330
 #, fuzzy
@@ -22533,6 +22528,10 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr "%sのパーソナルページ"
+
+#, fuzzy
+#~ msgid "Mailing Lists Administration"
+#~ msgstr "メーリングリスト"
 
 #, fuzzy
 #~ msgid "Last modified"

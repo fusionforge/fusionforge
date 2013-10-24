@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:35+0200\n"
+"POT-Creation-Date: 2013-10-24 18:36+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -18206,10 +18206,9 @@ msgstr "Nombre de la Lista de Correo:"
 msgid "Update Mailing List %s"
 msgstr "Activar listas de correo"
 
-#: www/mail/admin/index.php:243
-#, fuzzy
-msgid "Mailing Lists Administration"
-msgstr "Administrador de Listas de Correo"
+#: www/mail/admin/index.php:243 www/project/admin/tools.php:324
+msgid "Mailing Lists Admin"
+msgstr "Listas de correo"
 
 #: www/mail/admin/index.php:293
 msgid "Reset admin password"
@@ -20495,10 +20494,6 @@ msgstr "Administración de foros"
 #: www/project/admin/tools.php:321
 msgid "Trackers Admin"
 msgstr "Administración del repositorio de informes"
-
-#: www/project/admin/tools.php:324
-msgid "Mailing Lists Admin"
-msgstr "Listas de correo"
 
 #: www/project/admin/tools.php:330
 msgid "Documents Admin"
@@ -22959,6 +22954,10 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#, fuzzy
+#~ msgid "Mailing Lists Administration"
+#~ msgstr "Administrador de Listas de Correo"
 
 #~ msgid "Last modified"
 #~ msgstr "Última modificación"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:35+0200\n"
+"POT-Creation-Date: 2013-10-24 18:36+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18614,10 +18614,10 @@ msgstr "Nome Mailing List:"
 msgid "Update Mailing List %s"
 msgstr "Usa Mailing Lists"
 
-#: www/mail/admin/index.php:243
+#: www/mail/admin/index.php:243 www/project/admin/tools.php:324
 #, fuzzy
-msgid "Mailing Lists Administration"
-msgstr "Amministrazione di Mailing List"
+msgid "Mailing Lists Admin"
+msgstr "Mailing List"
 
 #: www/mail/admin/index.php:293
 msgid "Reset admin password"
@@ -20924,11 +20924,6 @@ msgstr "Amministrazione Forum"
 #, fuzzy
 msgid "Trackers Admin"
 msgstr "Amministrazione Tracker"
-
-#: www/project/admin/tools.php:324
-#, fuzzy
-msgid "Mailing Lists Admin"
-msgstr "Mailing List"
 
 #: www/project/admin/tools.php:330
 #, fuzzy
@@ -23387,6 +23382,10 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "Mailing Lists Administration"
+#~ msgstr "Amministrazione di Mailing List"
 
 #~ msgid "Last modified"
 #~ msgstr "Ultima modifica"
