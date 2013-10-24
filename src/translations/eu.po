@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-21 11:37+0200\n"
+"POT-Creation-Date: 2013-10-24 13:01+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14492,7 +14492,7 @@ msgstr "Pasahitza egokia eman behar duzu (gutxienez sei karakterekoa)."
 msgid "New passwords do not match."
 msgstr "Pasahitza berriak bat datoz."
 
-#: www/account/change_pw.php:63
+#: www/account/change_pw.php:63 www/admin/passedit.php:70
 #, fuzzy
 msgid "Could not change password: "
 msgstr "Hitz gakoa aldatu"
@@ -14501,10 +14501,10 @@ msgstr "Hitz gakoa aldatu"
 msgid "Successfully Changed Password"
 msgstr "Pasahitza ongi aldatu da"
 
-#: www/account/change_pw.php:71
-#, fuzzy, php-format
+#: www/account/change_pw.php:71 www/admin/passedit.php:77
+#, php-format
 msgid "%s Password Change Confirmation"
-msgstr "Posta elektronikoaren aldaketaren baieztapena"
+msgstr "%s Pasahitzaren aldaketaren baieztapena"
 
 #: www/account/change_pw.php:75
 msgid "Congratulations. You have changed your password."
@@ -14524,16 +14524,16 @@ msgid "Old Password"
 msgstr "Pasahitza zaharra"
 
 #: www/account/change_pw.php:98 www/account/lostlogin.php:95
-#: www/admin/passedit.php:86
+#: www/admin/passedit.php:91
 msgid "New Password (at least 6 chars)"
 msgstr "Pasahitza berria (gutxienez 6 karaktere)"
 
 #: www/account/change_pw.php:104 www/account/lostlogin.php:101
-#: www/admin/passedit.php:88
+#: www/admin/passedit.php:93
 msgid "New Password (repeat)"
 msgstr "Pasahitza berria (errepika ezazu)"
 
-#: www/account/change_pw.php:110 www/admin/passedit.php:90
+#: www/account/change_pw.php:110 www/admin/passedit.php:95
 msgid "Update password"
 msgstr "Pasahitza eguneratu"
 
@@ -15874,31 +15874,27 @@ msgstr ""
 msgid "Site Admin: Successfully Changed User Password"
 msgstr "Pasahitza ongi aldatu da"
 
-#: www/admin/passedit.php:76
+#: www/admin/passedit.php:80
 #, fuzzy, php-format
-msgid ""
-"<h2>%1$s Password Change Confirmation</h2><p>You have changed the password "
-"of %2$s (%3$s).</p>"
-msgstr ""
-"<h2>%1$s Pasahitzaren aldaketaren baieztapena</h2><p>Zorionak. Pasahitza "
-"aldatu duzu.</p>"
+msgid "You have changed the password of %1$s (%2$s)."
+msgstr "Pasahitza aldatu duzu."
 
-#: www/admin/passedit.php:77
+#: www/admin/passedit.php:82
 #, php-format
 msgid "Go back to %s."
 msgstr ""
 
-#: www/admin/passedit.php:77
+#: www/admin/passedit.php:82
 #, fuzzy
 msgid "the Full User List"
 msgstr ": Erabiltzaile Zerrenda"
 
-#: www/admin/passedit.php:80
+#: www/admin/passedit.php:85
 #, fuzzy
 msgid "Site Admin: Change User Password"
 msgstr "Administrariaren gunea: erabiltzailearen informazioa"
 
-#: www/admin/passedit.php:85
+#: www/admin/passedit.php:90
 #, php-format
 msgid "Changing password for user #%1$s \"%2$s\" (%3$s)…"
 msgstr ""

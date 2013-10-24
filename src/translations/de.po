@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-21 11:37+0200\n"
+"POT-Creation-Date: 2013-10-24 13:01+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -14669,7 +14669,7 @@ msgstr "Sie müssen ein gültiges Passwort eingeben (mind. 6 Buchstaben)."
 msgid "New passwords do not match."
 msgstr "Die neuen Passwörter sind nicht identisch."
 
-#: www/account/change_pw.php:63
+#: www/account/change_pw.php:63 www/admin/passedit.php:70
 #, fuzzy
 msgid "Could not change password: "
 msgstr "Ändere Passwort"
@@ -14678,10 +14678,10 @@ msgstr "Ändere Passwort"
 msgid "Successfully Changed Password"
 msgstr "Erfolgreiche Passwort-Änderung"
 
-#: www/account/change_pw.php:71
-#, fuzzy, php-format
+#: www/account/change_pw.php:71 www/admin/passedit.php:77
+#, php-format
 msgid "%s Password Change Confirmation"
-msgstr "Bestätigung der EMail-Änderung"
+msgstr "%s Passwort-Änderungsbestätigung"
 
 #: www/account/change_pw.php:75
 #, fuzzy
@@ -14702,16 +14702,16 @@ msgid "Old Password"
 msgstr "Altes Passwort"
 
 #: www/account/change_pw.php:98 www/account/lostlogin.php:95
-#: www/admin/passedit.php:86
+#: www/admin/passedit.php:91
 msgid "New Password (at least 6 chars)"
 msgstr "Neues Passwort (mind. 6 Buchstaben)"
 
 #: www/account/change_pw.php:104 www/account/lostlogin.php:101
-#: www/admin/passedit.php:88
+#: www/admin/passedit.php:93
 msgid "New Password (repeat)"
 msgstr "Neues Passwort (Wiederholung)"
 
-#: www/account/change_pw.php:110 www/admin/passedit.php:90
+#: www/account/change_pw.php:110 www/admin/passedit.php:95
 msgid "Update password"
 msgstr "Aktualisiere Passwort"
 
@@ -16091,31 +16091,27 @@ msgstr ""
 msgid "Site Admin: Successfully Changed User Password"
 msgstr "Erfolgreiche Passwort-Änderung"
 
-#: www/admin/passedit.php:76
+#: www/admin/passedit.php:80
 #, fuzzy, php-format
-msgid ""
-"<h2>%1$s Password Change Confirmation</h2><p>You have changed the password "
-"of %2$s (%3$s).</p>"
-msgstr ""
-"<h2>%1$s Passwort-Änderungsbestätigung</h2><p>Gratulation. Sie haben Ihre "
-"Passwort geändert.</p>"
+msgid "You have changed the password of %1$s (%2$s)."
+msgstr "Sie haben Ihre Passwort geändert."
 
-#: www/admin/passedit.php:77
+#: www/admin/passedit.php:82
 #, fuzzy, php-format
 msgid "Go back to %s."
 msgstr "Gehe zurück"
 
-#: www/admin/passedit.php:77
+#: www/admin/passedit.php:82
 #, fuzzy
 msgid "the Full User List"
 msgstr "Benutzer-Liste"
 
-#: www/admin/passedit.php:80
+#: www/admin/passedit.php:85
 #, fuzzy
 msgid "Site Admin: Change User Password"
-msgstr "Site \tAdministrator: Benutzer-Info"
+msgstr "Site Administrator: Benutzer-Info"
 
-#: www/admin/passedit.php:85
+#: www/admin/passedit.php:90
 #, php-format
 msgid "Changing password for user #%1$s \"%2$s\" (%3$s)…"
 msgstr ""

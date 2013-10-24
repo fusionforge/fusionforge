@@ -67,13 +67,18 @@ if (getStringFromRequest('submit')) {
 		form_release_key(getStringFromRequest('form_key'));
 		exit_error(
 			_('Error'),
-			'Could not change password: '.$u->getErrorMessage()
+			_('Could not change password: ').$u->getErrorMessage()
 		);
 	}
 
 	site_admin_header(array('title'=>_('Site Admin: Successfully Changed User Password')));
 
-	printf(_('<h2>%1$s Password Change Confirmation</h2><p>You have changed the password of %2$s (%3$s).</p>'), forge_get_config('forge_name'), $u->getUnixName(), $u->getRealName());
+	echo '<h2>';
+	printf(_('%s Password Change Confirmation'), forge_get_config('forge_name'));
+	echo '</h2>';
+	echo '<p>';
+	printf(_('You have changed the password of %1$s (%2$s).'), $u->getUnixName(), $u->getRealName());
+	echo '</p>';
 	printf('<p>'._("Go back to %s.").'</p>', '<a href="userlist.php">'._("the Full User List").'</a>');
 } else {
 	// Show change form

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-21 11:37+0200\n"
+"POT-Creation-Date: 2013-10-24 13:01+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14551,7 +14551,7 @@ msgstr "Heu de proporcionar una contrasenya vàlida (6 car. com a mínim)."
 msgid "New passwords do not match."
 msgstr "Les noves contrasenyes no coincideixen."
 
-#: www/account/change_pw.php:63
+#: www/account/change_pw.php:63 www/admin/passedit.php:70
 #, fuzzy
 msgid "Could not change password: "
 msgstr "Canvi de contrasenya"
@@ -14560,10 +14560,10 @@ msgstr "Canvi de contrasenya"
 msgid "Successfully Changed Password"
 msgstr "La contrasenya s'ha canviat amb èxit"
 
-#: www/account/change_pw.php:71
-#, fuzzy, php-format
+#: www/account/change_pw.php:71 www/admin/passedit.php:77
+#, php-format
 msgid "%s Password Change Confirmation"
-msgstr "Confirmació del canvi d'adreça"
+msgstr "%s Confirmació del canvi de contrasenya"
 
 #: www/account/change_pw.php:75
 msgid "Congratulations. You have changed your password."
@@ -14583,16 +14583,16 @@ msgid "Old Password"
 msgstr "Contrasenya vella"
 
 #: www/account/change_pw.php:98 www/account/lostlogin.php:95
-#: www/admin/passedit.php:86
+#: www/admin/passedit.php:91
 msgid "New Password (at least 6 chars)"
 msgstr "Nova contrasenya (6 caràcters com a mínim)"
 
 #: www/account/change_pw.php:104 www/account/lostlogin.php:101
-#: www/admin/passedit.php:88
+#: www/admin/passedit.php:93
 msgid "New Password (repeat)"
 msgstr "Nova contrasenya (repetició)"
 
-#: www/account/change_pw.php:110 www/admin/passedit.php:90
+#: www/account/change_pw.php:110 www/admin/passedit.php:95
 msgid "Update password"
 msgstr "Actualitza la contrasenya"
 
@@ -15956,31 +15956,27 @@ msgstr ""
 msgid "Site Admin: Successfully Changed User Password"
 msgstr "La contrasenya s'ha canviat amb èxit"
 
-#: www/admin/passedit.php:76
+#: www/admin/passedit.php:80
 #, fuzzy, php-format
-msgid ""
-"<h2>%1$s Password Change Confirmation</h2><p>You have changed the password "
-"of %2$s (%3$s).</p>"
-msgstr ""
-"<h2>%1$s Confirmació del canvi de contrasenya</h2><p>Felicitats. Heu canviat "
-"la vostra contrasenya.</p>"
+msgid "You have changed the password of %1$s (%2$s)."
+msgstr "Heu canviat la vostra contrasenya."
 
-#: www/admin/passedit.php:77
+#: www/admin/passedit.php:82
 #, php-format
 msgid "Go back to %s."
 msgstr ""
 
-#: www/admin/passedit.php:77
+#: www/admin/passedit.php:82
 #, fuzzy
 msgid "the Full User List"
 msgstr ": Llista d'usuaris"
 
-#: www/admin/passedit.php:80
+#: www/admin/passedit.php:85
 #, fuzzy
 msgid "Site Admin: Change User Password"
 msgstr "Administració del lloc: informació de l'usuari"
 
-#: www/admin/passedit.php:85
+#: www/admin/passedit.php:90
 #, php-format
 msgid "Changing password for user #%1$s \"%2$s\" (%3$s)…"
 msgstr ""

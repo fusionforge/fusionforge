@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-21 11:37+0200\n"
+"POT-Creation-Date: 2013-10-24 13:01+0200\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14511,7 +14511,7 @@ msgstr "您必須提供一個有效的密碼（至少6個字元）。"
 msgid "New passwords do not match."
 msgstr "新密碼不一致。"
 
-#: www/account/change_pw.php:63
+#: www/account/change_pw.php:63 www/admin/passedit.php:70
 #, fuzzy
 msgid "Could not change password: "
 msgstr "改變密碼"
@@ -14520,10 +14520,10 @@ msgstr "改變密碼"
 msgid "Successfully Changed Password"
 msgstr "更改密碼成功"
 
-#: www/account/change_pw.php:71
-#, fuzzy, php-format
+#: www/account/change_pw.php:71 www/admin/passedit.php:77
+#, php-format
 msgid "%s Password Change Confirmation"
-msgstr "確認email信箱改變"
+msgstr "%s 密碼更改確認"
 
 #: www/account/change_pw.php:75
 msgid "Congratulations. You have changed your password."
@@ -14543,16 +14543,16 @@ msgid "Old Password"
 msgstr "舊密碼"
 
 #: www/account/change_pw.php:98 www/account/lostlogin.php:95
-#: www/admin/passedit.php:86
+#: www/admin/passedit.php:91
 msgid "New Password (at least 6 chars)"
 msgstr "新密碼（至少6個字元）"
 
 #: www/account/change_pw.php:104 www/account/lostlogin.php:101
-#: www/admin/passedit.php:88
+#: www/admin/passedit.php:93
 msgid "New Password (repeat)"
 msgstr "新密碼（重複）"
 
-#: www/account/change_pw.php:110 www/admin/passedit.php:90
+#: www/account/change_pw.php:110 www/admin/passedit.php:95
 msgid "Update password"
 msgstr "更新密碼"
 
@@ -15891,29 +15891,27 @@ msgstr ""
 msgid "Site Admin: Successfully Changed User Password"
 msgstr "更改密碼成功"
 
-#: www/admin/passedit.php:76
+#: www/admin/passedit.php:80
 #, fuzzy, php-format
-msgid ""
-"<h2>%1$s Password Change Confirmation</h2><p>You have changed the password "
-"of %2$s (%3$s).</p>"
-msgstr "<h2>%1$s 密碼更改確認</h2><p>祝賀您。 您已經改變了密碼</p>"
+msgid "You have changed the password of %1$s (%2$s)."
+msgstr "您已經改變了密碼"
 
-#: www/admin/passedit.php:77
+#: www/admin/passedit.php:82
 #, php-format
 msgid "Go back to %s."
 msgstr ""
 
-#: www/admin/passedit.php:77
+#: www/admin/passedit.php:82
 #, fuzzy
 msgid "the Full User List"
 msgstr "：使用者清單"
 
-#: www/admin/passedit.php:80
+#: www/admin/passedit.php:85
 #, fuzzy
 msgid "Site Admin: Change User Password"
 msgstr "網站管理：使用者資訊"
 
-#: www/admin/passedit.php:85
+#: www/admin/passedit.php:90
 #, php-format
 msgid "Changing password for user #%1$s \"%2$s\" (%3$s)…"
 msgstr ""
