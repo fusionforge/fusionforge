@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 17:41+0200\n"
+"POT-Creation-Date: 2013-10-24 18:33+0200\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -522,9 +522,9 @@ msgstr "Dokumentrubrik"
 msgid "Document reservation failed"
 msgstr "Visa Dokumentation"
 
-#: common/docman/Document.class.php:935
+#: common/docman/Document.class.php:935 common/docman/views/additem.php:57
 #, fuzzy
-msgid "New document"
+msgid "New Document"
 msgstr "Lägg till ett projekt"
 
 #: common/docman/Document.class.php:937
@@ -644,8 +644,9 @@ msgid "Browse this folder"
 msgstr "Redigera en grupp"
 
 #: common/docman/DocumentGroup.class.php:717
+#: common/docman/views/additem.php:59
 #, fuzzy
-msgid "New folder"
+msgid "New Folder"
 msgstr "Nytt gruppnamn"
 
 #: common/docman/DocumentGroup.class.php:719
@@ -961,19 +962,9 @@ msgstr "Dokumentansvarig: Visa dokument"
 msgid "Submit a new document in this folder."
 msgstr "Skicka ny dokumentation"
 
-#: common/docman/views/additem.php:57
-#, fuzzy
-msgid "New Document"
-msgstr "Lägg till ett projekt"
-
 #: common/docman/views/additem.php:58
 msgid "Create a folder based on this name."
 msgstr ""
-
-#: common/docman/views/additem.php:59
-#, fuzzy
-msgid "New Folder"
-msgstr "Nytt gruppnamn"
 
 #: common/docman/views/additem.php:60
 msgid ""
@@ -23175,6 +23166,14 @@ msgstr "Användarenamn"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
+
+#, fuzzy
+#~ msgid "New document"
+#~ msgstr "Lägg till ett projekt"
+
+#, fuzzy
+#~ msgid "New folder"
+#~ msgstr "Nytt gruppnamn"
 
 #~ msgid "You can only monitor if you are logged in"
 #~ msgstr "Du kan bara bevaka om du är inloggad"

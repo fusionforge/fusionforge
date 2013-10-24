@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 17:41+0200\n"
+"POT-Creation-Date: 2013-10-24 18:33+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -522,9 +522,9 @@ msgstr "Títol del document"
 msgid "Document reservation failed"
 msgstr "Visualitza la documentació"
 
-#: common/docman/Document.class.php:935
+#: common/docman/Document.class.php:935 common/docman/views/additem.php:57
 #, fuzzy
-msgid "New document"
+msgid "New Document"
 msgstr "Afegeix un projecte"
 
 #: common/docman/Document.class.php:937
@@ -644,8 +644,9 @@ msgid "Browse this folder"
 msgstr "Edita la taula de %1$ss"
 
 #: common/docman/DocumentGroup.class.php:717
+#: common/docman/views/additem.php:59
 #, fuzzy
-msgid "New folder"
+msgid "New Folder"
 msgstr "Nou rol"
 
 #: common/docman/DocumentGroup.class.php:719
@@ -963,19 +964,9 @@ msgstr "Gestor de Documents: Mostra el document"
 msgid "Submit a new document in this folder."
 msgstr "Tramet nova documentació"
 
-#: common/docman/views/additem.php:57
-#, fuzzy
-msgid "New Document"
-msgstr "Afegeix un projecte"
-
 #: common/docman/views/additem.php:58
 msgid "Create a folder based on this name."
 msgstr ""
-
-#: common/docman/views/additem.php:59
-#, fuzzy
-msgid "New Folder"
-msgstr "Nou rol"
 
 #: common/docman/views/additem.php:60
 msgid ""
@@ -23376,6 +23367,14 @@ msgstr "Nom d'usuari"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
+
+#, fuzzy
+#~ msgid "New document"
+#~ msgstr "Afegeix un projecte"
+
+#, fuzzy
+#~ msgid "New folder"
+#~ msgstr "Nou rol"
 
 #, fuzzy
 #~ msgid "You can only monitor if you are logged in"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 17:41+0200\n"
+"POT-Creation-Date: 2013-10-24 18:33+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -525,9 +525,9 @@ msgstr "Название документа"
 msgid "Document reservation failed"
 msgstr "Управление документацией"
 
-#: common/docman/Document.class.php:935
+#: common/docman/Document.class.php:935 common/docman/views/additem.php:57
 #, fuzzy
-msgid "New document"
+msgid "New Document"
 msgstr "Добавить новый проект"
 
 #: common/docman/Document.class.php:937
@@ -647,8 +647,9 @@ msgid "Browse this folder"
 msgstr "Редактировать таблицу %1$ss"
 
 #: common/docman/DocumentGroup.class.php:717
+#: common/docman/views/additem.php:59
 #, fuzzy
-msgid "New folder"
+msgid "New Folder"
 msgstr "Новая роль"
 
 #: common/docman/DocumentGroup.class.php:719
@@ -968,19 +969,9 @@ msgstr "Document Manager: Показать документ"
 msgid "Submit a new document in this folder."
 msgstr "Разместить новую документацию"
 
-#: common/docman/views/additem.php:57
-#, fuzzy
-msgid "New Document"
-msgstr "Добавить новый проект"
-
 #: common/docman/views/additem.php:58
 msgid "Create a folder based on this name."
 msgstr ""
-
-#: common/docman/views/additem.php:59
-#, fuzzy
-msgid "New Folder"
-msgstr "Новая роль"
 
 #: common/docman/views/additem.php:60
 msgid ""
@@ -23723,6 +23714,14 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "New document"
+#~ msgstr "Добавить новый проект"
+
+#, fuzzy
+#~ msgid "New folder"
+#~ msgstr "Новая роль"
 
 #~ msgid "You can only monitor if you are logged in"
 #~ msgstr "Если вы не идентифицированы, Вы можете лишь просматривать"

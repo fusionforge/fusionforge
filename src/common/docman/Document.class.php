@@ -932,7 +932,7 @@ class Document extends Error {
 		if (strlen($BCC) > 0) {
 			$session = session_get_user();
 			if ($new) {
-				$status = _('New document');
+				$status = _('New Document');
 			} else {
 				$status = _('Updated document').' '._('by').' ' . $session->getRealName();
 			}

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 17:41+0200\n"
+"POT-Creation-Date: 2013-10-24 18:33+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -504,9 +504,10 @@ msgstr "Fallo al bloquear el documento"
 msgid "Document reservation failed"
 msgstr "Fallo al reservar el Documento"
 
-#: common/docman/Document.class.php:935
-msgid "New document"
-msgstr "Nuevo documento"
+#: common/docman/Document.class.php:935 common/docman/views/additem.php:57
+#, fuzzy
+msgid "New Document"
+msgstr "Documento nuevo"
 
 #: common/docman/Document.class.php:937
 msgid "Updated document"
@@ -615,8 +616,9 @@ msgid "Browse this folder"
 msgstr "Navegar por esta carpeta"
 
 #: common/docman/DocumentGroup.class.php:717
+#: common/docman/views/additem.php:59
 #, fuzzy
-msgid "New folder"
+msgid "New Folder"
 msgstr "Nuevo rol"
 
 #: common/docman/DocumentGroup.class.php:719
@@ -931,19 +933,9 @@ msgstr "Gestor de Documentos Acceso Denegado"
 msgid "Submit a new document in this folder."
 msgstr "Publicar Nuevo Documento en este directorio."
 
-#: common/docman/views/additem.php:57
-#, fuzzy
-msgid "New Document"
-msgstr "Documento nuevo"
-
 #: common/docman/views/additem.php:58
 msgid "Create a folder based on this name."
 msgstr "Crear una carpeta basada en este nombre."
-
-#: common/docman/views/additem.php:59
-#, fuzzy
-msgid "New Folder"
-msgstr "Nuevo rol"
 
 #: common/docman/views/additem.php:60
 msgid ""
@@ -22970,6 +22962,13 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "New document"
+#~ msgstr "Nuevo documento"
+
+#, fuzzy
+#~ msgid "New folder"
+#~ msgstr "Nuevo rol"
 
 #~ msgid "You can only monitor if you are logged in"
 #~ msgstr "Sólo puede monitorizar si está autenticado."

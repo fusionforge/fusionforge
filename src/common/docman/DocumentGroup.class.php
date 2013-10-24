@@ -714,7 +714,7 @@ class DocumentGroup extends Error {
 		if (strlen($BCC) > 0) {
 			$sess = session_get_user();
 			if ($new) {
-				$status = _('New folder');
+				$status = _('New Folder');
 			} else {
 				$status = _('Updated folder by').' '.$sess->getRealName();
 			}

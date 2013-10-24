@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 17:41+0200\n"
+"POT-Creation-Date: 2013-10-24 18:33+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -523,9 +523,9 @@ msgstr "Dokumenten-Titel"
 msgid "Document reservation failed"
 msgstr "Documentation Manager"
 
-#: common/docman/Document.class.php:935
+#: common/docman/Document.class.php:935 common/docman/views/additem.php:57
 #, fuzzy
-msgid "New document"
+msgid "New Document"
 msgstr "Neues Projekt hinzufügen"
 
 #: common/docman/Document.class.php:937
@@ -645,8 +645,9 @@ msgid "Browse this folder"
 msgstr "[Bearbeiten Sie dieses Kennzeichen]"
 
 #: common/docman/DocumentGroup.class.php:717
+#: common/docman/views/additem.php:59
 #, fuzzy
-msgid "New folder"
+msgid "New Folder"
 msgstr "Neue Rolle"
 
 #: common/docman/DocumentGroup.class.php:719
@@ -965,20 +966,10 @@ msgstr "Dokumenten-Manager: Dokument anzeigen"
 msgid "Submit a new document in this folder."
 msgstr "Neue Dokumentation übermitteln"
 
-#: common/docman/views/additem.php:57
-#, fuzzy
-msgid "New Document"
-msgstr "Neues Projekt hinzufügen"
-
 #: common/docman/views/additem.php:58
 #, fuzzy
 msgid "Create a folder based on this name."
 msgstr "Eine Kopie dieses Trackers als neuen Tracker anlegen."
-
-#: common/docman/views/additem.php:59
-#, fuzzy
-msgid "New Folder"
-msgstr "Neue Rolle"
 
 #: common/docman/views/additem.php:60
 msgid ""
@@ -23652,6 +23643,14 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "New document"
+#~ msgstr "Neues Projekt hinzufügen"
+
+#, fuzzy
+#~ msgid "New folder"
+#~ msgstr "Neue Rolle"
 
 #~ msgid "You can only monitor if you are logged in"
 #~ msgstr ""

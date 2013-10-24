@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 17:41+0200\n"
+"POT-Creation-Date: 2013-10-24 18:33+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -522,9 +522,9 @@ msgstr "ドキュメントタイトル"
 msgid "Document reservation failed"
 msgstr "ドキュメント閲覧"
 
-#: common/docman/Document.class.php:935
+#: common/docman/Document.class.php:935 common/docman/views/additem.php:57
 #, fuzzy
-msgid "New document"
+msgid "New Document"
 msgstr "タスク追加"
 
 #: common/docman/Document.class.php:937
@@ -644,8 +644,9 @@ msgid "Browse this folder"
 msgstr "グループ編集"
 
 #: common/docman/DocumentGroup.class.php:717
+#: common/docman/views/additem.php:59
 #, fuzzy
-msgid "New folder"
+msgid "New Folder"
 msgstr "新規グループ名"
 
 #: common/docman/DocumentGroup.class.php:719
@@ -960,19 +961,9 @@ msgstr "ドキュメントマネージャ: ドキュメント表示"
 msgid "Submit a new document in this folder."
 msgstr "新規ドキュメントの送信"
 
-#: common/docman/views/additem.php:57
-#, fuzzy
-msgid "New Document"
-msgstr "タスク追加"
-
 #: common/docman/views/additem.php:58
 msgid "Create a folder based on this name."
 msgstr ""
-
-#: common/docman/views/additem.php:59
-#, fuzzy
-msgid "New Folder"
-msgstr "新規グループ名"
 
 #: common/docman/views/additem.php:60
 msgid ""
@@ -22546,6 +22537,14 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr "%sのパーソナルページ"
+
+#, fuzzy
+#~ msgid "New document"
+#~ msgstr "タスク追加"
+
+#, fuzzy
+#~ msgid "New folder"
+#~ msgstr "新規グループ名"
 
 #, fuzzy
 #~ msgid "You can only monitor if you are logged in"

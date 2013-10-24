@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 17:41+0200\n"
+"POT-Creation-Date: 2013-10-24 18:33+0200\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -516,9 +516,9 @@ msgstr "Nie znaleziono żadnych dokumentów"
 msgid "Document reservation failed"
 msgstr "Nie znaleziono żadnych dokumentów"
 
-#: common/docman/Document.class.php:935
+#: common/docman/Document.class.php:935 common/docman/views/additem.php:57
 #, fuzzy
-msgid "New document"
+msgid "New Document"
 msgstr "Szukaj w dokumentach"
 
 #: common/docman/Document.class.php:937
@@ -637,8 +637,9 @@ msgid "Browse this folder"
 msgstr "Edytuj grupę"
 
 #: common/docman/DocumentGroup.class.php:717
+#: common/docman/views/additem.php:59
 #, fuzzy
-msgid "New folder"
+msgid "New Folder"
 msgstr "Dodaj Grupę Dokumentów"
 
 #: common/docman/DocumentGroup.class.php:719
@@ -950,19 +951,9 @@ msgstr "Nie znaleziono żadnych dokumentów"
 msgid "Submit a new document in this folder."
 msgstr "Zamieść nową dokumentację"
 
-#: common/docman/views/additem.php:57
-#, fuzzy
-msgid "New Document"
-msgstr "Szukaj w dokumentach"
-
 #: common/docman/views/additem.php:58
 msgid "Create a folder based on this name."
 msgstr ""
-
-#: common/docman/views/additem.php:59
-#, fuzzy
-msgid "New Folder"
-msgstr "Dodaj Grupę Dokumentów"
 
 #: common/docman/views/additem.php:60
 msgid ""
@@ -22082,6 +22073,14 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr ""
+
+#, fuzzy
+#~ msgid "New document"
+#~ msgstr "Szukaj w dokumentach"
+
+#, fuzzy
+#~ msgid "New folder"
+#~ msgstr "Dodaj Grupę Dokumentów"
 
 #, fuzzy
 #~ msgid "File-Release"
