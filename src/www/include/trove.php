@@ -274,7 +274,7 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats,$a_complete=0) {
 			.'<p />';
 	} else {
 		$return .= '<ul>';
-		$need_close_ul_tag = 1;
+		$need_close_ul_tag = true;
 	}
 
 	// first initialise the vars we're using here
