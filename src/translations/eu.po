@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 13:01+0200\n"
+"POT-Creation-Date: 2013-10-24 17:41+0200\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2276,6 +2276,8 @@ msgid "Invalid forum group identifier."
 msgstr "Foro talde identifikatzaile baliogabea."
 
 #: common/forum/Forum.class.php:439 common/forum/Forum.class.php:474
+#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
+#: common/tracker/ArtifactType.class.php:527
 msgid "You can only monitor if you are logged in."
 msgstr "Monitorizatzeko saio hasia izan behar duzu."
 
@@ -2675,11 +2677,6 @@ msgstr "Datu basea gehitzen akatsak"
 #, fuzzy
 msgid "Invalid package_id"
 msgstr "Parametro baliogabea"
-
-#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
-#: common/tracker/ArtifactType.class.php:527
-msgid "You can only monitor if you are logged in"
-msgstr "Monitorizatzeko saio hasia izan behar duzu."
 
 #: common/frs/FRSPackage.class.php:291
 #, fuzzy
@@ -23251,6 +23248,9 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#~ msgid "You can only monitor if you are logged in"
+#~ msgstr "Monitorizatzeko saio hasia izan behar duzu."
 
 #~ msgid "yes"
 #~ msgstr "Bai"

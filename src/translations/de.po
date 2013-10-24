@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 13:01+0200\n"
+"POT-Creation-Date: 2013-10-24 17:41+0200\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -2290,6 +2290,8 @@ msgid "Invalid forum group identifier."
 msgstr "Ungültige Forengruppen Kennung."
 
 #: common/forum/Forum.class.php:439 common/forum/Forum.class.php:474
+#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
+#: common/tracker/ArtifactType.class.php:527
 msgid "You can only monitor if you are logged in."
 msgstr "Sie können nur Foren beobachten/überwachen, wenn Sie angemeldet sind."
 
@@ -2709,11 +2711,6 @@ msgstr "Fehler beim Hinzufügen der Datenbank"
 #, fuzzy
 msgid "Invalid package_id"
 msgstr "Ungültiges Datum"
-
-#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
-#: common/tracker/ArtifactType.class.php:527
-msgid "You can only monitor if you are logged in"
-msgstr "Sie können nur Foren beobachten/überwachen, wenn Sie angemeldet sind."
 
 #: common/frs/FRSPackage.class.php:291
 #, fuzzy
@@ -23655,6 +23652,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "You can only monitor if you are logged in"
+#~ msgstr ""
+#~ "Sie können nur Foren beobachten/überwachen, wenn Sie angemeldet sind."
 
 #~ msgid "scm"
 #~ msgstr "scm"

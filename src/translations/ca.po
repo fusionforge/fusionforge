@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 13:01+0200\n"
+"POT-Creation-Date: 2013-10-24 17:41+0200\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2280,6 +2280,8 @@ msgid "Invalid forum group identifier."
 msgstr "Usuari no vàlid"
 
 #: common/forum/Forum.class.php:439 common/forum/Forum.class.php:474
+#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
+#: common/tracker/ArtifactType.class.php:527
 #, fuzzy
 msgid "You can only monitor if you are logged in."
 msgstr "Només podeu monitoritzar si sou dins d'una sessió"
@@ -2678,12 +2680,6 @@ msgstr "Error a l'afegir una base de dades"
 #, fuzzy
 msgid "Invalid package_id"
 msgstr "Paràmetre no vàlid"
-
-#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
-#: common/tracker/ArtifactType.class.php:527
-#, fuzzy
-msgid "You can only monitor if you are logged in"
-msgstr "Només podeu monitoritzar si sou dins d'una sessió"
 
 #: common/frs/FRSPackage.class.php:291
 #, fuzzy
@@ -23380,6 +23376,10 @@ msgstr "Nom d'usuari"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
+
+#, fuzzy
+#~ msgid "You can only monitor if you are logged in"
+#~ msgstr "Només podeu monitoritzar si sou dins d'una sessió"
 
 #~ msgid "yes"
 #~ msgstr "sí"

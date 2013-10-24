@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 13:01+0200\n"
+"POT-Creation-Date: 2013-10-24 17:41+0200\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -2208,6 +2208,8 @@ msgid "Invalid forum group identifier."
 msgstr "Identificador de grupo de foro inválido."
 
 #: common/forum/Forum.class.php:439 common/forum/Forum.class.php:474
+#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
+#: common/tracker/ArtifactType.class.php:527
 msgid "You can only monitor if you are logged in."
 msgstr "Sólo puede monitorizar si está autenticado."
 
@@ -2618,11 +2620,6 @@ msgstr "Error Agregando a Base de Datos: "
 #, fuzzy
 msgid "Invalid package_id"
 msgstr "Fecha Inválida"
-
-#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
-#: common/tracker/ArtifactType.class.php:527
-msgid "You can only monitor if you are logged in"
-msgstr "Sólo puede monitorizar si está autenticado."
 
 #: common/frs/FRSPackage.class.php:291
 #, fuzzy
@@ -22973,6 +22970,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "You can only monitor if you are logged in"
+#~ msgstr "Sólo puede monitorizar si está autenticado."
 
 #~ msgid "scm"
 #~ msgstr "scm"

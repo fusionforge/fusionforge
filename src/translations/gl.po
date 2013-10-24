@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 13:01+0200\n"
+"POT-Creation-Date: 2013-10-24 17:41+0200\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -2283,6 +2283,8 @@ msgid "Invalid forum group identifier."
 msgstr "O identificador de foro non é válido."
 
 #: common/forum/Forum.class.php:439 common/forum/Forum.class.php:474
+#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
+#: common/tracker/ArtifactType.class.php:527
 msgid "You can only monitor if you are logged in."
 msgstr "Só pode facer un seguimento se está conectado."
 
@@ -2695,11 +2697,6 @@ msgstr "Produciuse un erro ao engadir a base datos "
 #, fuzzy
 msgid "Invalid package_id"
 msgstr "A data non é válida"
-
-#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
-#: common/tracker/ArtifactType.class.php:527
-msgid "You can only monitor if you are logged in"
-msgstr "Só pode facer un seguimento se está conectado "
 
 #: common/frs/FRSPackage.class.php:291
 #, fuzzy
@@ -23587,6 +23584,9 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#~ msgid "You can only monitor if you are logged in"
+#~ msgstr "Só pode facer un seguimento se está conectado "
 
 #~ msgid "scm"
 #~ msgstr "scm"

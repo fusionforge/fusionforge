@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 13:01+0200\n"
+"POT-Creation-Date: 2013-10-24 17:41+0200\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2281,6 +2281,8 @@ msgid "Invalid forum group identifier."
 msgstr "Ongeldige gebruiker"
 
 #: common/forum/Forum.class.php:439 common/forum/Forum.class.php:474
+#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
+#: common/tracker/ArtifactType.class.php:527
 #, fuzzy
 msgid "You can only monitor if you are logged in."
 msgstr "Je kunt alleen monitoren als je bent ingelogd"
@@ -2680,12 +2682,6 @@ msgstr "Fout bij toevoegen database"
 #, fuzzy
 msgid "Invalid package_id"
 msgstr "Ongeldige parameter"
-
-#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
-#: common/tracker/ArtifactType.class.php:527
-#, fuzzy
-msgid "You can only monitor if you are logged in"
-msgstr "Je kunt alleen monitoren als je bent ingelogd"
 
 #: common/frs/FRSPackage.class.php:291
 #, fuzzy
@@ -23412,6 +23408,10 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#, fuzzy
+#~ msgid "You can only monitor if you are logged in"
+#~ msgstr "Je kunt alleen monitoren als je bent ingelogd"
 
 #~ msgid "yes"
 #~ msgstr "ja"

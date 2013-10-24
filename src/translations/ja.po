@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 13:01+0200\n"
+"POT-Creation-Date: 2013-10-24 17:41+0200\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2263,6 +2263,8 @@ msgid "Invalid forum group identifier."
 msgstr "無効なオペレーション"
 
 #: common/forum/Forum.class.php:439 common/forum/Forum.class.php:474
+#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
+#: common/tracker/ArtifactType.class.php:527
 #, fuzzy
 msgid "You can only monitor if you are logged in."
 msgstr "(未訳:forum_utils.couldpostif)You could post if you were"
@@ -2661,12 +2663,6 @@ msgstr "アカウントをアクティブにするときにエラーが発生し
 #, fuzzy
 msgid "Invalid package_id"
 msgstr "無効なパラメータ"
-
-#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
-#: common/tracker/ArtifactType.class.php:527
-#, fuzzy
-msgid "You can only monitor if you are logged in"
-msgstr "(未訳:forum_utils.couldpostif)You could post if you were"
 
 #: common/frs/FRSPackage.class.php:291
 #, fuzzy
@@ -22550,6 +22546,10 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr "%sのパーソナルページ"
+
+#, fuzzy
+#~ msgid "You can only monitor if you are logged in"
+#~ msgstr "(未訳:forum_utils.couldpostif)You could post if you were"
 
 #, fuzzy
 #~ msgid "File-Release"

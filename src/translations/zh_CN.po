@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 13:01+0200\n"
+"POT-Creation-Date: 2013-10-24 17:41+0200\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2282,6 +2282,8 @@ msgid "Invalid forum group identifier."
 msgstr "非法的论坛组ID"
 
 #: common/forum/Forum.class.php:439 common/forum/Forum.class.php:474
+#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
+#: common/tracker/ArtifactType.class.php:527
 #, fuzzy
 msgid "You can only monitor if you are logged in."
 msgstr "只有登录后才能监视"
@@ -2689,12 +2691,6 @@ msgstr "添加数据库时发生错误"
 #, fuzzy
 msgid "Invalid package_id"
 msgstr "无效参数"
-
-#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
-#: common/tracker/ArtifactType.class.php:527
-#, fuzzy
-msgid "You can only monitor if you are logged in"
-msgstr "只有登录后才能监视"
 
 #: common/frs/FRSPackage.class.php:291
 #, fuzzy
@@ -23184,6 +23180,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "You can only monitor if you are logged in"
+#~ msgstr "只有登录后才能监视"
 
 #~ msgid "yes"
 #~ msgstr "是"

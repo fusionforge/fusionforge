@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 13:01+0200\n"
+"POT-Creation-Date: 2013-10-24 17:41+0200\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2283,6 +2283,8 @@ msgid "Invalid forum group identifier."
 msgstr "Identificatore gruppo forum non valido."
 
 #: common/forum/Forum.class.php:439 common/forum/Forum.class.php:474
+#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
+#: common/tracker/ArtifactType.class.php:527
 #, fuzzy
 msgid "You can only monitor if you are logged in."
 msgstr "Puoi richiedere la notifica di un forum solo se sei collegato"
@@ -2695,12 +2697,6 @@ msgstr "Errore nell'aggiunta del database"
 #, fuzzy
 msgid "Invalid package_id"
 msgstr "Parametro non valido"
-
-#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
-#: common/tracker/ArtifactType.class.php:527
-#, fuzzy
-msgid "You can only monitor if you are logged in"
-msgstr "Puoi richiedere la notifica di un forum solo se sei collegato"
 
 #: common/frs/FRSPackage.class.php:291
 #, fuzzy
@@ -23403,6 +23399,10 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "You can only monitor if you are logged in"
+#~ msgstr "Puoi richiedere la notifica di un forum solo se sei collegato"
 
 #~ msgid "yes"
 #~ msgstr "si"

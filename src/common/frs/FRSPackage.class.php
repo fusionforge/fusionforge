@@ -271,7 +271,7 @@ class FRSPackage extends Error {
 	 */
 	function setMonitor() {
 		if (!session_loggedin()) {
-			$this->setError(_('You can only monitor if you are logged in'));
+			$this->setError(_('You can only monitor if you are logged in.'));
 			return false;
 		}
 		$result = db_query_params ('SELECT * FROM filemodule_monitor WHERE user_id=$1 AND filemodule_id=$2',
@@ -303,7 +303,7 @@ class FRSPackage extends Error {
 	 */
 	function stopMonitor() {
 		if (!session_loggedin()) {
-			$this->setError(_('You can only monitor if you are logged in'));
+			$this->setError(_('You can only monitor if you are logged in.'));
 			return false;
 		}
 		return db_query_params ('DELETE FROM filemodule_monitor WHERE user_id=$1 AND filemodule_id=$2',

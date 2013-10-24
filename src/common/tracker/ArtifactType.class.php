@@ -524,7 +524,7 @@ class ArtifactType extends Error {
 	function setMonitor ($user_id = -1) {
 		if ($user_id == -1) {
 			if (!session_loggedin()) {
-				$this->setError(_('You can only monitor if you are logged in'));
+				$this->setError(_('You can only monitor if you are logged in.'));
 				return false;
 			}
 			$user_id = user_getid() ;

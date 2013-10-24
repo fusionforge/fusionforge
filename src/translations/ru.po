@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 13:01+0200\n"
+"POT-Creation-Date: 2013-10-24 17:41+0200\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2284,6 +2284,8 @@ msgid "Invalid forum group identifier."
 msgstr "Недопустимый идентификатор форума."
 
 #: common/forum/Forum.class.php:439 common/forum/Forum.class.php:474
+#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
+#: common/tracker/ArtifactType.class.php:527
 msgid "You can only monitor if you are logged in."
 msgstr "Если вы не идентифицированы, Вы можете лишь просматривать."
 
@@ -2684,11 +2686,6 @@ msgstr "Ошибка добавления базы данных"
 #, fuzzy
 msgid "Invalid package_id"
 msgstr "Неверно указана дата"
-
-#: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
-#: common/tracker/ArtifactType.class.php:527
-msgid "You can only monitor if you are logged in"
-msgstr "Если вы не идентифицированы, Вы можете лишь просматривать"
 
 #: common/frs/FRSPackage.class.php:291
 #, fuzzy
@@ -23726,6 +23723,9 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#~ msgid "You can only monitor if you are logged in"
+#~ msgstr "Если вы не идентифицированы, Вы можете лишь просматривать"
 
 #~ msgid "scm"
 #~ msgstr "Ограничение занимаемого пространства (SCM)"
