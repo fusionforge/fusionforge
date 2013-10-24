@@ -34,6 +34,11 @@
  *
 */
 
+figcaption {
+	font-weight: bold;
+	text-align: center;
+}
+
 /* From old gforge-compat */
 .altrowstyleeven,
 .even {
@@ -291,7 +296,7 @@ table.full {
 	width: 100%;
 }
 table.centered {
-    margin-left: auto; margin-right: auto;
+	margin-left: auto; margin-right: auto;
 }
 
 .selected {background-color:pink; }
