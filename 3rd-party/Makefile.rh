@@ -56,7 +56,7 @@ $(BUILDRESULT)/$(HTMLPURIFIER_RPM): $(HTMLPURIFIER_SPEC) $(BUILDPLACE)/SOURCES/$
 	$(RPMBUILD) --quiet --clean -ba $(HTMLPURIFIER_SPEC)
 
 $(BUILDPLACE)/SOURCES/$(HTMLPURIFIER_TBZ): $(BUILDPLACE)/SOURCES
-	@cd $(BUILDPLACE)/SOURCES; [ -f $@ ] || wget -q -N http://htmlpurifier.org/releases/$(HTMLPURIFIER_TBZ)
+	@cd $(BUILDPLACE)/SOURCES; [ -f $@ ] || wget -q -N --post-data="" http://htmlpurifier.org/releases/$(HTMLPURIFIER_TBZ)
 
 # WEBDAV SERVER
 $(WEBDAV_SERVER_DIR): $(BUILDRESULT)/$(WEBDAV_SERVER_RPM)
