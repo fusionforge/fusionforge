@@ -64,7 +64,7 @@ $(BUILDRESULT)/$(HTMLPURIFIER_RPM): $(HTMLPURIFIER_SPEC) $(HTMLPURIFYER_DIR)/$(H
 	$(RPMBUILD) --define='_sourcedir $(HTMLPURIFYER_DIR)' --quiet --clean -ba $(HTMLPURIFIER_SPEC)
 
 $(HTMLPURIFYER_DIR)/$(HTMLPURIFIER_TBZ):
-	@cd $(HTMLPURIFYER_DIR); [ -f $@ ] || wget -q -N http://htmlpurifier.org/releases/$(HTMLPURIFIER_TBZ)
+	@cd $(HTMLPURIFYER_DIR); [ -f $@ ] || wget -q -N --post-data="" http://htmlpurifier.org/releases/$(HTMLPURIFIER_TBZ)
 
 # PHP JPGRAPH
 $(JPGRAPH_DIR): $(BUILDRESULT)/$(JPGRAPH_RPM)
