@@ -106,7 +106,8 @@ jQuery(document).ready(function() {
 		divLeft:		jQuery('#leftdiv'),
 		divRight:		jQuery('#rightdiv'),
 		divEditFile:		jQuery('#editFile'),
-		divEditTitle:		'<?php echo _("Edit document dialog box") ?>'
+		divEditTitle:		'<?php echo _("Edit document dialog box") ?>',
+		enableResize:		true
 	});
 });
 //]]></script>
