@@ -150,8 +150,8 @@ if ( $cat === 'c' ) {
 
 	// ######## two column table for key on right
 	// first print all parent cats and current cat (breadcrumb)
-	print '<table summary="">' . "\n";
-	print '<tr>' . "\n";
+	print '<table class="fullwidth">' . "\n";
+	print '<tr class="top">' . "\n";
 	print '<td id="project-tree-col1">' . "\n";
 
 	$folders = explode(" :: ",$row_trove_cat['fullpath']);
@@ -262,7 +262,6 @@ if ( $cat === 'c' ) {
 	// store this as a var so it can be printed later as well
 	$html_limit = '';
 	if ($querytotalcount == $TROVE_HARDQUERYLIMIT) {
-		$html_limit .= 'More than ';
 		$html_limit .= sprintf(_('More than <strong>%1$s</strong> projects in result set.'), $querytotalcount);
 
 	}
@@ -300,7 +299,7 @@ if ( $cat === 'c' ) {
 		}
 
 		if ($row_grp && $viewthisrow) {
-			print '<table border="0" cellpadding="0" width="100%"><tr valign="top"><td colspan="2">';
+			print '<table class="fullwidth"><tr class="top"><td colspan="2">';
 			print "$i_proj. " ;
 			print util_make_link_g ($row_grp['unix_group_name'],
 						$row_grp['group_id'],
@@ -311,11 +310,11 @@ if ( $cat === 'c' ) {
 
 			print '<br />&nbsp;';
 			// extra description
-			print "</td></tr>\n<tr valign=\"top\"><td>";
+			print "</td></tr>\n<tr class=\"top\"><td>";
 			// list all trove categories
 			print trove_getcatlisting($row_grp['group_id'],1,0,1);
 			print "</td>\n";
-			print '<td style="text-align:right">'; // now the right side of the display
+			print '<td class="align-right">'; // now the right side of the display
 			if (group_get_object($row_grp['group_id'])->usesStats()) {
 				print _('Activity Percentile:&nbsp;').'<strong>'. number_format($row_grp['percentile'],2) .'</strong>';
 				print '<br />';
