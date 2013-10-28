@@ -110,7 +110,7 @@ WHERE id = ANY($1)",array(db_int_array_to_any_clause($news_id)));
 	}
 }
 
-news_header(array('title'=>_('News administration')));
+news_header(array('title'=>_('News Administration')));
 
 if ($approve) {
 	/*
@@ -121,7 +121,7 @@ if ($approve) {
 FROM news_bytes,groups WHERE id=$1
 AND news_bytes.group_id=groups.group_id ", array($id));
 	if (db_numrows($result) < 1) {
-		exit_error(_('Newsbyte not found'),'news');
+		exit_error(_('Newsbyte not found'), 'news');
 	}
 	if (db_result($result,0,'is_approved') == 4) {
 		exit_error(_('Newsbyte deleted'),'news');
