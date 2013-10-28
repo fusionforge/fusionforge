@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:13+0100\n"
+"POT-Creation-Date: 2013-10-28 18:18+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1387,7 +1387,7 @@ msgstr ""
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1126 www/softwaremap/full_list.php:122
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:323
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
 msgstr "d.m.Y H:i"
@@ -7782,7 +7782,7 @@ msgid "Registered: "
 msgstr "Регистрирован"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
-#: www/softwaremap/tag_cloud.php:162
+#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:322
 #, fuzzy, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "Активных участников сайта: <strong>%1$s</strong>"
@@ -22797,12 +22797,7 @@ msgstr[2] "<strong>%1$s</strong> проект выделен."
 msgid "Activity Percentile:&nbsp;"
 msgstr "Процент активности:&nbsp;"
 
-#: www/softwaremap/trove_list.php:321
-#, fuzzy
-msgid "Activity Ranking:&nbsp;"
-msgstr "Процент активности:&nbsp;"
-
-#: www/softwaremap/trove_list.php:323
+#: www/softwaremap/trove_list.php:324
 msgid "Registered:&nbsp;"
 msgstr "Зарегистрирован:&nbsp;"
 
@@ -23691,6 +23686,10 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "Activity Ranking:&nbsp;"
+#~ msgstr "Процент активности:&nbsp;"
 
 #, fuzzy
 #~ msgid "Activity Ranking: %d"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:13+0100\n"
+"POT-Creation-Date: 2013-10-28 18:18+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -1385,7 +1385,7 @@ msgstr ""
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1126 www/softwaremap/full_list.php:122
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:323
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
 msgstr "A-m-d H:i"
@@ -7784,7 +7784,7 @@ msgid "Registered: "
 msgstr "Rexistrado "
 
 #: common/widget/Widget_ProjectInfo.class.php:83
-#: www/softwaremap/tag_cloud.php:162
+#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:322
 #, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "Clasificación por actividade: <strong>%d</strong>"
@@ -22666,11 +22666,7 @@ msgstr[1] "<strong>%1$s</strong> proxectos no conxunto de resultados."
 msgid "Activity Percentile:&nbsp;"
 msgstr "Percentil de actividade:&nbsp;"
 
-#: www/softwaremap/trove_list.php:321
-msgid "Activity Ranking:&nbsp;"
-msgstr "Clasificación por actividade:&nbsp;"
-
-#: www/softwaremap/trove_list.php:323
+#: www/softwaremap/trove_list.php:324
 msgid "Registered:&nbsp;"
 msgstr "Rexistrado:&nbsp;"
 
@@ -23552,6 +23548,9 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#~ msgid "Activity Ranking:&nbsp;"
+#~ msgstr "Clasificación por actividade:&nbsp;"
 
 #~ msgid "Activity Ranking: %d"
 #~ msgstr "Clasificación por actividade: %d"

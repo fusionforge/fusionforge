@@ -318,7 +318,8 @@ if ( $cat === 'c' ) {
 			print '<td style="text-align:right">'; // now the right side of the display
 			if (group_get_object($row_grp['group_id'])->usesStats()) {
 				print _('Activity Percentile:&nbsp;').'<strong>'. number_format($row_grp['percentile'],2) .'</strong>';
-				print '<br />'._('Activity Ranking:&nbsp;').' <strong>'. number_format($row_grp['ranking'],2) .'</strong>';
+				print '<br />';
+				sprintf(_('Activity Ranking: <strong>%d</strong>'), number_format($row_grp['ranking'],2));
 			}
 			print '<br />'._('Registered:&nbsp;').' <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong>';
 			print "</td></tr></table>\n<hr />\n";

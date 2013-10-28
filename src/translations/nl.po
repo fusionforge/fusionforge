@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:13+0100\n"
+"POT-Creation-Date: 2013-10-28 18:18+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1380,7 +1380,7 @@ msgstr ""
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1126 www/softwaremap/full_list.php:122
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:323
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
 msgstr "Y-m-d H:i"
@@ -7767,7 +7767,7 @@ msgid "Registered: "
 msgstr "Geregistreerd"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
-#: www/softwaremap/tag_cloud.php:162
+#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:322
 #, fuzzy, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "Actieve site deelnemers: <strong>%1$s</strong>"
@@ -22473,12 +22473,7 @@ msgstr[1] "<strong>%1$s</strong> projecten in resultaatset."
 msgid "Activity Percentile:&nbsp;"
 msgstr "Activiteit percentiel:"
 
-#: www/softwaremap/trove_list.php:321
-#, fuzzy
-msgid "Activity Ranking:&nbsp;"
-msgstr "Activiteit percentiel:"
-
-#: www/softwaremap/trove_list.php:323
+#: www/softwaremap/trove_list.php:324
 msgid "Registered:&nbsp;"
 msgstr "Geregistreerd:"
 
@@ -23379,6 +23374,10 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#, fuzzy
+#~ msgid "Activity Ranking:&nbsp;"
+#~ msgstr "Activiteit percentiel:"
 
 #, fuzzy
 #~ msgid "Activity Ranking: %d"

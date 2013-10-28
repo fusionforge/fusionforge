@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:13+0100\n"
+"POT-Creation-Date: 2013-10-28 18:18+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -1333,7 +1333,7 @@ msgstr "Creado o actualizado hace 7 dias"
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1126 www/softwaremap/full_list.php:122
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:323
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
 msgstr "Y-m-d H:i"
@@ -7596,7 +7596,7 @@ msgid "Registered: "
 msgstr "Registrado:"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
-#: www/softwaremap/tag_cloud.php:162
+#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:322
 #, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "Ranking de actividad: <strong>%d</strong>"
@@ -22075,11 +22075,7 @@ msgstr[1] "<strong>%1$s</strong> proyectos en esta categoría."
 msgid "Activity Percentile:&nbsp;"
 msgstr "Percentil de actividad:&nbsp;"
 
-#: www/softwaremap/trove_list.php:321
-msgid "Activity Ranking:&nbsp;"
-msgstr "Ranking de actividad:&nbsp;"
-
-#: www/softwaremap/trove_list.php:323
+#: www/softwaremap/trove_list.php:324
 msgid "Registered:&nbsp;"
 msgstr "Registrado:&nbsp;"
 
@@ -22941,6 +22937,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Activity Ranking:&nbsp;"
+#~ msgstr "Ranking de actividad:&nbsp;"
 
 #~ msgid "Activity Ranking: %d"
 #~ msgstr "Ranking de actividad: %d"

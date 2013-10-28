@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:13+0100\n"
+"POT-Creation-Date: 2013-10-28 18:18+0100\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1383,7 +1383,7 @@ msgstr ""
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1126 www/softwaremap/full_list.php:122
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:323
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
 msgstr "d/m/Y H:i"
@@ -7784,7 +7784,7 @@ msgid "Registered: "
 msgstr "Registrato"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
-#: www/softwaremap/tag_cloud.php:162
+#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:322
 #, fuzzy, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "Utenti attivi: <strong>%1$s</strong>"
@@ -22468,12 +22468,7 @@ msgstr[1] "<strong>%1$s</strong> progetti."
 msgid "Activity Percentile:&nbsp;"
 msgstr "Percentuale di attività:"
 
-#: www/softwaremap/trove_list.php:321
-#, fuzzy
-msgid "Activity Ranking:&nbsp;"
-msgstr "Percentuale di attività:"
-
-#: www/softwaremap/trove_list.php:323
+#: www/softwaremap/trove_list.php:324
 msgid "Registered:&nbsp;"
 msgstr "Registrato:"
 
@@ -23367,6 +23362,10 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "Activity Ranking:&nbsp;"
+#~ msgstr "Percentuale di attività:"
 
 #, fuzzy
 #~ msgid "Activity Ranking: %d"

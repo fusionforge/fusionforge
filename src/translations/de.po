@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:13+0100\n"
+"POT-Creation-Date: 2013-10-28 18:18+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -1387,7 +1387,7 @@ msgstr ""
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1126 www/softwaremap/full_list.php:122
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:323
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
 msgstr "d.m.Y H:i"
@@ -7812,7 +7812,7 @@ msgid "Registered: "
 msgstr "Registriert"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
-#: www/softwaremap/tag_cloud.php:162
+#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:322
 #, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "Aktivitäten-Rangliste: <strong>%d</strong>"
@@ -22727,11 +22727,7 @@ msgstr[1] "<strong>%1$s</strong> Projekte in der Ergebnisliste."
 msgid "Activity Percentile:&nbsp;"
 msgstr "durchschnittlicher Aktivitätswert: "
 
-#: www/softwaremap/trove_list.php:321
-msgid "Activity Ranking:&nbsp;"
-msgstr "Aktivitäten-Rangliste:&nbsp;"
-
-#: www/softwaremap/trove_list.php:323
+#: www/softwaremap/trove_list.php:324
 msgid "Registered:&nbsp;"
 msgstr "Registriert:&nbsp;"
 
@@ -23621,6 +23617,9 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "Activity Ranking:&nbsp;"
+#~ msgstr "Aktivitäten-Rangliste:&nbsp;"
 
 #~ msgid "Activity Ranking: %d"
 #~ msgstr "Aktivitäten Rangliste: %d"
