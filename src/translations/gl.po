@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 16:44+0100\n"
+"POT-Creation-Date: 2013-10-28 18:13+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -7784,9 +7784,10 @@ msgid "Registered: "
 msgstr "Rexistrado "
 
 #: common/widget/Widget_ProjectInfo.class.php:83
+#: www/softwaremap/tag_cloud.php:162
 #, php-format
-msgid "Activity Ranking: %d"
-msgstr "Clasificación por actividade: %d"
+msgid "Activity Ranking: <strong>%d</strong>"
+msgstr "Clasificación por actividade: <strong>%d</strong>"
 
 #: common/widget/Widget_ProjectInfo.class.php:84
 #, fuzzy, php-format
@@ -22618,11 +22619,6 @@ msgstr[1] ""
 msgid "Activity Percentile: <strong>%3.0f</strong>"
 msgstr "Percentil de actividade: <strong>%3.0f</strong>"
 
-#: www/softwaremap/tag_cloud.php:162
-#, php-format
-msgid "Activity Ranking: <strong>%d</strong>"
-msgstr "Clasificación por actividade: <strong>%d</strong>"
-
 #: www/softwaremap/tag_cloud.php:163
 #, php-format
 msgid "Registered: <strong>%s</strong>"
@@ -23556,6 +23552,9 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#~ msgid "Activity Ranking: %d"
+#~ msgstr "Clasificación por actividade: %d"
 
 #~ msgid ""
 #~ "<br />Soft link wasn't removed in www/plugins folder, please do so "

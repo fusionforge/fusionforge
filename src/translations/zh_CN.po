@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 16:44+0100\n"
+"POT-Creation-Date: 2013-10-28 18:13+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7717,9 +7717,10 @@ msgid "Registered: "
 msgstr "注册"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
+#: www/softwaremap/tag_cloud.php:162
 #, fuzzy, php-format
-msgid "Activity Ranking: %d"
-msgstr "活跃度："
+msgid "Activity Ranking: <strong>%d</strong>"
+msgstr "已激活的用户：<strong>%1$s</strong>"
 
 #: common/widget/Widget_ProjectInfo.class.php:84
 #, fuzzy, php-format
@@ -22212,11 +22213,6 @@ msgstr[1] ""
 msgid "Activity Percentile: <strong>%3.0f</strong>"
 msgstr "已激活的用户：<strong>%1$s</strong>"
 
-#: www/softwaremap/tag_cloud.php:162
-#, fuzzy, php-format
-msgid "Activity Ranking: <strong>%d</strong>"
-msgstr "已激活的用户：<strong>%1$s</strong>"
-
 #: www/softwaremap/tag_cloud.php:163
 #, fuzzy, php-format
 msgid "Registered: <strong>%s</strong>"
@@ -23153,6 +23149,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Activity Ranking: %d"
+#~ msgstr "活跃度："
 
 #, fuzzy
 #~ msgid ""

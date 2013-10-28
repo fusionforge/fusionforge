@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 16:51+0100\n"
+"POT-Creation-Date: 2013-10-28 18:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -7120,8 +7120,9 @@ msgid "Registered: "
 msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
+#: www/softwaremap/tag_cloud.php:162
 #, php-format
-msgid "Activity Ranking: %d"
+msgid "Activity Ranking: <strong>%d</strong>"
 msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:84
@@ -20499,11 +20500,6 @@ msgstr[1] ""
 #: www/softwaremap/tag_cloud.php:161
 #, php-format
 msgid "Activity Percentile: <strong>%3.0f</strong>"
-msgstr ""
-
-#: www/softwaremap/tag_cloud.php:162
-#, php-format
-msgid "Activity Ranking: <strong>%d</strong>"
 msgstr ""
 
 #: www/softwaremap/tag_cloud.php:163

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 16:44+0100\n"
+"POT-Creation-Date: 2013-10-28 18:13+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7699,8 +7699,9 @@ msgid "Registered: "
 msgstr "Registered"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
+#: www/softwaremap/tag_cloud.php:162
 #, fuzzy, php-format
-msgid "Activity Ranking: %d"
+msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "프로젝트 활동 상황:&nbsp;"
 
 #: common/widget/Widget_ProjectInfo.class.php:84
@@ -22159,11 +22160,6 @@ msgstr[0] ""
 msgid "Activity Percentile: <strong>%3.0f</strong>"
 msgstr "프로젝트 활동 상황:&nbsp;"
 
-#: www/softwaremap/tag_cloud.php:162
-#, fuzzy, php-format
-msgid "Activity Ranking: <strong>%d</strong>"
-msgstr "프로젝트 활동 상황:&nbsp;"
-
 #: www/softwaremap/tag_cloud.php:163
 #, fuzzy, php-format
 msgid "Registered: <strong>%s</strong>"
@@ -23098,6 +23094,10 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "Activity Ranking: %d"
+#~ msgstr "프로젝트 활동 상황:&nbsp;"
 
 #, fuzzy
 #~ msgid "No documents"

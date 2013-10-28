@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 16:44+0100\n"
+"POT-Creation-Date: 2013-10-28 18:14+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -7468,9 +7468,10 @@ msgid "Registered: "
 msgstr "Date d'inscription :"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
+#: www/softwaremap/tag_cloud.php:162
 #, php-format
-msgid "Activity Ranking: %d"
-msgstr "Rang d'activité : %d"
+msgid "Activity Ranking: <strong>%d</strong>"
+msgstr "Rang d'activité : <strong>%d</strong>"
 
 #: common/widget/Widget_ProjectInfo.class.php:84
 #, php-format
@@ -21867,11 +21868,6 @@ msgstr[1] ""
 msgid "Activity Percentile: <strong>%3.0f</strong>"
 msgstr "Centile d'activité : <strong>%3.0f</strong>"
 
-#: www/softwaremap/tag_cloud.php:162
-#, php-format
-msgid "Activity Ranking: <strong>%d</strong>"
-msgstr "Rang d'activité : <strong>%d</strong>"
-
 #: www/softwaremap/tag_cloud.php:163
 #, php-format
 msgid "Registered: <strong>%s</strong>"
@@ -22785,6 +22781,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Activity Ranking: %d"
+#~ msgstr "Rang d'activité : %d"
 
 #~ msgid "No documents"
 #~ msgstr "Aucun document"

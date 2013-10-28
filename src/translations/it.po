@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 16:44+0100\n"
+"POT-Creation-Date: 2013-10-28 18:13+0100\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7784,9 +7784,10 @@ msgid "Registered: "
 msgstr "Registrato"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
+#: www/softwaremap/tag_cloud.php:162
 #, fuzzy, php-format
-msgid "Activity Ranking: %d"
-msgstr "Percentuale di attività:"
+msgid "Activity Ranking: <strong>%d</strong>"
+msgstr "Utenti attivi: <strong>%1$s</strong>"
 
 #: common/widget/Widget_ProjectInfo.class.php:84
 #, fuzzy, php-format
@@ -22419,11 +22420,6 @@ msgstr[1] ""
 msgid "Activity Percentile: <strong>%3.0f</strong>"
 msgstr "Utenti attivi: <strong>%1$s</strong>"
 
-#: www/softwaremap/tag_cloud.php:162
-#, fuzzy, php-format
-msgid "Activity Ranking: <strong>%d</strong>"
-msgstr "Utenti attivi: <strong>%1$s</strong>"
-
 #: www/softwaremap/tag_cloud.php:163
 #, fuzzy, php-format
 msgid "Registered: <strong>%s</strong>"
@@ -23371,6 +23367,10 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "Activity Ranking: %d"
+#~ msgstr "Percentuale di attività:"
 
 #, fuzzy
 #~ msgid ""

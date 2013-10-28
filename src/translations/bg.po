@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 16:44+0100\n"
+"POT-Creation-Date: 2013-10-28 18:13+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7561,8 +7561,9 @@ msgid "Registered: "
 msgstr "Регистриране"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
+#: www/softwaremap/tag_cloud.php:162
 #, fuzzy, php-format
-msgid "Activity Ranking: %d"
+msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "Процент на активност:&nbsp;"
 
 #: common/widget/Widget_ProjectInfo.class.php:84
@@ -21790,11 +21791,6 @@ msgstr[1] ""
 msgid "Activity Percentile: <strong>%3.0f</strong>"
 msgstr "Процент на активност:&nbsp;"
 
-#: www/softwaremap/tag_cloud.php:162
-#, fuzzy, php-format
-msgid "Activity Ranking: <strong>%d</strong>"
-msgstr "Процент на активност:&nbsp;"
-
 #: www/softwaremap/tag_cloud.php:163
 #, php-format
 msgid "Registered: <strong>%s</strong>"
@@ -22707,6 +22703,10 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Лична Информация"
+
+#, fuzzy
+#~ msgid "Activity Ranking: %d"
+#~ msgstr "Процент на активност:&nbsp;"
 
 #, fuzzy
 #~ msgid "No documents"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 16:44+0100\n"
+"POT-Creation-Date: 2013-10-28 18:13+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -7812,9 +7812,10 @@ msgid "Registered: "
 msgstr "Registriert"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
+#: www/softwaremap/tag_cloud.php:162
 #, php-format
-msgid "Activity Ranking: %d"
-msgstr "Aktivitäten Rangliste: %d"
+msgid "Activity Ranking: <strong>%d</strong>"
+msgstr "Aktivitäten-Rangliste: <strong>%d</strong>"
 
 #: common/widget/Widget_ProjectInfo.class.php:84
 #, fuzzy, php-format
@@ -22680,11 +22681,6 @@ msgstr[1] ""
 msgid "Activity Percentile: <strong>%3.0f</strong>"
 msgstr "Aktive Seitenbenutzer: <strong>%3. Von</strong>"
 
-#: www/softwaremap/tag_cloud.php:162
-#, php-format
-msgid "Activity Ranking: <strong>%d</strong>"
-msgstr "Aktivitäten-Rangliste: <strong>%d</strong>"
-
 #: www/softwaremap/tag_cloud.php:163
 #, php-format
 msgid "Registered: <strong>%s</strong>"
@@ -23625,6 +23621,9 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "Activity Ranking: %d"
+#~ msgstr "Aktivitäten Rangliste: %d"
 
 #~ msgid ""
 #~ "<br />Soft link wasn't removed in www/plugins folder, please do so "

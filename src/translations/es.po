@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 16:44+0100\n"
+"POT-Creation-Date: 2013-10-28 18:13+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -7596,9 +7596,10 @@ msgid "Registered: "
 msgstr "Registrado:"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
+#: www/softwaremap/tag_cloud.php:162
 #, php-format
-msgid "Activity Ranking: %d"
-msgstr "Ranking de actividad: %d"
+msgid "Activity Ranking: <strong>%d</strong>"
+msgstr "Ranking de actividad: <strong>%d</strong>"
 
 #: common/widget/Widget_ProjectInfo.class.php:84
 #, fuzzy, php-format
@@ -22028,11 +22029,6 @@ msgstr[1] ""
 msgid "Activity Percentile: <strong>%3.0f</strong>"
 msgstr "Percentil de actividad: <strong>%3.0f</strong>"
 
-#: www/softwaremap/tag_cloud.php:162
-#, php-format
-msgid "Activity Ranking: <strong>%d</strong>"
-msgstr "Ranking de actividad: <strong>%d</strong>"
-
 #: www/softwaremap/tag_cloud.php:163
 #, php-format
 msgid "Registered: <strong>%s</strong>"
@@ -22945,6 +22941,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Activity Ranking: %d"
+#~ msgstr "Ranking de actividad: %d"
 
 #~ msgid ""
 #~ "<br />Soft link wasn't removed in www/plugins folder, please do so "
