@@ -48,7 +48,7 @@ class extsubproj_Widget_SubProjects extends Widget {
 
 		$html='';
 		if(is_array($subProjects)) {
-			$tablearr = array(_('Sub projects'),'');
+			$tablearr = array(_('Subprojects'),'');
 			$html .= $HTML->listTableTop($tablearr);
 
 			foreach ($subProjects as $url) {
