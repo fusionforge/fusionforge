@@ -72,7 +72,7 @@ if (getStringFromRequest('update')) {
 			// Load the plugin and now get information from it.
 			$plugin = $pm->GetPluginObject($pluginname);
 			if (!$plugin || $plugin->isError()) {
-				exit_error(_("Couldn't get plugin object"), 'admin');
+				exit_error(_("Could not get plugin object"), 'admin');
 			}
 			$installdir = $plugin->getInstallDir();
 
@@ -81,7 +81,7 @@ if (getStringFromRequest('update')) {
 				if (file_exists('../'.$installdir)) {
 					$result = unlink('../'.$installdir);
 					if (!$result) {
-						$feedback .= _('<br />Soft link wasn\'t removed in www/plugins folder, please do so manually.');
+						$feedback .= '<br />'._("Soft link wasn't removed in www/plugins folder, please do so manually.");
 					}
 				} else {
 					$result = 0;
@@ -110,7 +110,7 @@ if (getStringFromRequest('update')) {
 
 			$plugin = $pm->GetPluginObject($pluginname);
 			if (!$plugin || $plugin->isError()) {
-				exit_error(_("Couldn't get plugin object"), 'admin');
+				exit_error(_("Could not get plugin object"), 'admin');
 			} else {
 				if (method_exists($plugin, 'install')) {
 					$plugin->install();
