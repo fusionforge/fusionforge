@@ -141,7 +141,7 @@ if (getStringFromRequest('groupsearch')) {
 			}
 		}
 
-		print '<p><strong>'.sprintf(ngettext('Group search with criteria <em>%s</em>: %d match', 'Group search with criteria <em>%s</em>: %d matches', count($rows)), $crit_desc, count($rows)).'</strong></p>';
+		print '<p><strong>'.sprintf(ngettext('Project search with criteria <em>%s</em>: %d match', 'Project search with criteria <em>%s</em>: %d matches', count($rows)), $crit_desc, count($rows)).'</strong></p>';
 
 		$title=array();
 		$title[]=_('Id');
