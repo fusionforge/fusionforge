@@ -143,7 +143,7 @@ if (session_loggedin()) {
 		<p><strong>'._('For project').' '.$group->getPublicName().'</strong></p>
 		<p>
 		<strong>'._('Subject').':</strong>'.utils_requiredField().'<br />
-		<input required="required" type="text" name="summary" value="'.$summary.'" size="60" maxlength="60" /></p>
+		<input required="required" type="text" name="summary" value="'.$summary.'" size="80" /></p>
 		<p>
 		<strong>'._('Details').':</strong>'.notepad_button('document.forms.newssubmitform.details').utils_requiredField().'</p>';
 
