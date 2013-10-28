@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:31+0100\n"
+"POT-Creation-Date: 2013-10-28 18:41+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -21873,7 +21873,7 @@ msgstr ""
 "angezeigt werden."
 
 #: www/scm/admin/index.php:169
-msgid "Error - Site has SCM but no plugins registered"
+msgid "Error: Site has SCM but no plugins registered"
 msgstr ""
 "Fehler - Die Site verfügt über SCM hat aber keine registrierten Plugins."
 
@@ -23609,6 +23609,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "Error - Site has SCM but no plugins registered"
+#~ msgstr ""
+#~ "Fehler - Die Site verfügt über SCM hat aber keine registrierten Plugins."
 
 #~ msgid "Registered:&nbsp;"
 #~ msgstr "Registriert:&nbsp;"
@@ -25798,10 +25802,6 @@ msgstr "Persönliche Seite für %s"
 
 #~ msgid "URLs that start with http:// are made clickable."
 #~ msgstr "Links die mit http:// beginnen können angeklickt werden."
-
-#~ msgid "Error: Site has SCM but no plugins registered"
-#~ msgstr ""
-#~ "Fehler - Die Site verfügt über SCM hat aber keine registrierten Plugins."
 
 #~ msgid "Displaying %1$s per page. Projects sorted by alphabetical order."
 #~ msgstr "Pro Seite werden %1$s angezeigt. Projekte sortiert nach Alphabet."

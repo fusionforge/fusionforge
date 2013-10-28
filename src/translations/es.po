@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:31+0100\n"
+"POT-Creation-Date: 2013-10-28 18:41+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -21218,8 +21218,8 @@ msgstr ""
 "afectará a la información mostrada en la pestaña SCM."
 
 #: www/scm/admin/index.php:169
-msgid "Error - Site has SCM but no plugins registered"
-msgstr "Error - El sitio no tiene plugins de SCM registrados"
+msgid "Error: Site has SCM but no plugins registered"
+msgstr "Error: El sitio no tiene plugins de SCM registrados"
 
 #: www/scm/include/scm_utils.php:47
 msgid "View Source Code"
@@ -22929,6 +22929,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Error - Site has SCM but no plugins registered"
+#~ msgstr "Error - El sitio no tiene plugins de SCM registrados"
 
 #~ msgid "Registered:&nbsp;"
 #~ msgstr "Registrado:&nbsp;"
@@ -24867,9 +24870,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Read More/Comment"
 #~ msgstr "Leer más/Comentar"
-
-#~ msgid "Error: Site has SCM but no plugins registered"
-#~ msgstr "Error: El sitio no tiene plugins de SCM registrados"
 
 #~ msgid "Displaying %1$s per page. Projects sorted by alphabetical order."
 #~ msgstr " Mostrando %1$s por paǵina. Proyectos ordenados alfabéticamente."

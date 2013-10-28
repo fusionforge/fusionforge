@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:31+0100\n"
+"POT-Creation-Date: 2013-10-28 18:41+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -21948,7 +21948,7 @@ msgstr ""
 "только затрагивает информацию, показанную при счете SCM репозитория."
 
 #: www/scm/admin/index.php:169
-msgid "Error - Site has SCM but no plugins registered"
+msgid "Error: Site has SCM but no plugins registered"
 msgstr "Ошибка! SCM плагин незарегистрирован"
 
 #: www/scm/include/scm_utils.php:47
@@ -23677,6 +23677,9 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#~ msgid "Error - Site has SCM but no plugins registered"
+#~ msgstr "Ошибка! SCM плагин незарегистрирован"
 
 #~ msgid "Registered:&nbsp;"
 #~ msgstr "Зарегистрирован:&nbsp;"
@@ -25535,9 +25538,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "URLs that start with http:// are made clickable."
 #~ msgstr "Ссылки, начинающиеся с http:// будут автоматически распознаны."
-
-#~ msgid "Error: Site has SCM but no plugins registered"
-#~ msgstr "Ошибка! SCM плагин незарегистрирован"
 
 #, fuzzy
 #~ msgid ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:31+0100\n"
+"POT-Creation-Date: 2013-10-28 18:41+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -21059,7 +21059,7 @@ msgstr ""
 "que les informations affichées dans l'onglet « Sources »."
 
 #: www/scm/admin/index.php:169
-msgid "Error - Site has SCM but no plugins registered"
+msgid "Error: Site has SCM but no plugins registered"
 msgstr ""
 "Erreur : le site a activé le suivi de versions, mais aucun greffon adéquat "
 "n'est installé."
@@ -22769,6 +22769,11 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Error - Site has SCM but no plugins registered"
+#~ msgstr ""
+#~ "Erreur : le site a activé le suivi de versions, mais aucun greffon "
+#~ "adéquat n'est installé."
 
 #~ msgid "Registered:&nbsp;"
 #~ msgstr "Enregistré le&nbsp;:&nbsp;"
@@ -26270,11 +26275,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Repository %s is deleted"
 #~ msgstr "Dépôt %s supprimé"
-
-#~ msgid "Error: Site has SCM but no plugins registered"
-#~ msgstr ""
-#~ "Erreur : le site a activé le suivi de versions, mais aucun greffon "
-#~ "adéquat n'est installé."
 
 #~ msgid "This source code repository can be seen by non %s users."
 #~ msgstr "Le dépôt de sources est visible par des personnes hors %s."

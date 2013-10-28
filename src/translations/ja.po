@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:31+0100\n"
+"POT-Creation-Date: 2013-10-28 18:41+0100\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -20861,7 +20861,7 @@ msgid ""
 msgstr ""
 
 #: www/scm/admin/index.php:169
-msgid "Error - Site has SCM but no plugins registered"
+msgid "Error: Site has SCM but no plugins registered"
 msgstr ""
 
 #: www/scm/include/scm_utils.php:47
