@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:38+0200\n"
+"POT-Creation-Date: 2013-10-28 16:44+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -200,7 +200,7 @@ msgstr "Dossier"
 #: common/docman/views/editfile.php:51 common/docman/views/editfile.php:70
 #: common/docman/views/listfile.php:169 common/docman/views/listfile.php:171
 #: common/docman/views/listfile.php:173
-#: common/docman/views/listtrashfile.php:115
+#: common/docman/views/listtrashfile.php:116
 #: common/docman/views/search.php:150 common/docman/views/search.php:151
 #: common/docman/views/tree.php:64 common/forum/ForumAdmin.class.php:427
 #: common/forum/Forum.class.php:230 common/forum/Forum.class.php:525
@@ -557,7 +557,7 @@ msgstr "Aucun document trouvé."
 
 #: common/docman/DocumentGroup.class.php:67
 #: common/docman/views/listfile.php:173
-#: common/docman/views/listtrashfile.php:115
+#: common/docman/views/listtrashfile.php:116
 msgid "Document Folder"
 msgstr "Dossier de documents"
 
@@ -734,7 +734,7 @@ msgstr ""
 
 #: common/docman/views/addfile.php:92 common/docman/views/addfile.php:108
 #: common/docman/views/editfile.php:42 common/docman/views/listfile.php:218
-#: common/docman/views/listtrashfile.php:128
+#: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/actions/admin-ind.php:99
 #: common/tracker/actions/admin-ind.php:139
@@ -771,11 +771,11 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer.php:109
 #: plugins/oauthprovider/www/consumer_update_page.php:64
 #: plugins/scmhg/common/HgPlugin.class.php:627
-#: plugins/scmhook/common/scmhookPlugin.class.php:283
-#: plugins/scmhook/common/scmhookPlugin.class.php:326
-#: plugins/scmhook/common/scmhookPlugin.class.php:369
-#: plugins/scmhook/common/scmhookPlugin.class.php:430
-#: plugins/scmhook/common/scmhookPlugin.class.php:491
+#: plugins/scmhook/common/scmhookPlugin.class.php:284
+#: plugins/scmhook/common/scmhookPlugin.class.php:327
+#: plugins/scmhook/common/scmhookPlugin.class.php:370
+#: plugins/scmhook/common/scmhookPlugin.class.php:431
+#: plugins/scmhook/common/scmhookPlugin.class.php:492
 #: www/forum/admin/index.php:117 www/forum/admin/index.php:158
 #: www/forum/index.php:69 www/mail/admin/index.php:192
 #: www/mail/admin/index.php:225 www/mail/index.php:79
@@ -867,7 +867,7 @@ msgid "You need first to upload file in %s"
 msgstr "Vous devez d'abord télécharger le fichier dans %s"
 
 #: common/docman/views/addfile.php:165 common/docman/views/listfile.php:218
-#: common/docman/views/listtrashfile.php:128
+#: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:108
@@ -1078,8 +1078,8 @@ msgid "Path"
 msgstr "Chemin"
 
 #: common/docman/views/listfile.php:175 common/docman/views/listfile.php:206
-#: common/docman/views/listtrashfile.php:117
-#: common/docman/views/listtrashfile.php:122
+#: common/docman/views/listtrashfile.php:118
+#: common/docman/views/listtrashfile.php:123
 msgid "Edit this folder"
 msgstr "Modifier ce dossier"
 
@@ -1108,13 +1108,13 @@ msgid "Start monitoring this folder"
 msgstr "Surveiller ce dossier"
 
 #: common/docman/views/listfile.php:218
-#: common/docman/views/listtrashfile.php:128
+#: common/docman/views/listtrashfile.php:129
 msgid "Select / Deselect all documents for massaction"
 msgstr ""
 "Sélectionner/désélectionner tous les documents pour une action collective"
 
 #: common/docman/views/listfile.php:218
-#: common/docman/views/listtrashfile.php:128
+#: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/views/form-addcanned.php:41
 #: common/tracker/views/form-addcanned.php:69
@@ -1138,7 +1138,7 @@ msgid "Title"
 msgstr "Titre"
 
 #: common/docman/views/listfile.php:218
-#: common/docman/views/listtrashfile.php:128
+#: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:113
@@ -1156,13 +1156,13 @@ msgid "Author"
 msgstr "Auteur"
 
 #: common/docman/views/listfile.php:218
-#: common/docman/views/listtrashfile.php:128
+#: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
 msgid "Last time"
 msgstr "Dernière date"
 
 #: common/docman/views/listfile.php:218
-#: common/docman/views/listtrashfile.php:128
+#: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63 common/docman/views/search.php:150
 #: common/include/Group.class.php:792
 #: common/tracker/ArtifactExtraField.class.php:327
@@ -1195,7 +1195,7 @@ msgid "Status"
 msgstr "État"
 
 #: common/docman/views/listfile.php:218
-#: common/docman/views/listtrashfile.php:128
+#: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/include/ArtifactTypeHtml.class.php:368 www/frs/index.php:206
 #: www/project/admin/editimages.php:267
@@ -1208,7 +1208,7 @@ msgid "View"
 msgstr "Voir"
 
 #: common/docman/views/listfile.php:221
-#: common/docman/views/listtrashfile.php:128
+#: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/views/form-adminroadmap.php:492
 #: plugins/contribtracker/www/global_admin.php:245
@@ -1226,24 +1226,24 @@ msgid "Actions"
 msgstr "Actions"
 
 #: common/docman/views/listfile.php:231 common/docman/views/listfile.php:236
-#: common/docman/views/listtrashfile.php:136
+#: common/docman/views/listtrashfile.php:137
 msgid "Select / Deselect this document for massaction"
 msgstr "Sélectionner/déselectionner ce document pour une action collective"
 
 #: common/docman/views/listfile.php:243
-#: common/docman/views/listtrashfile.php:141
+#: common/docman/views/listtrashfile.php:142
 #: common/docman/views/pendingfiles.php:75
 msgid "Visit this link"
 msgstr "Visiter ce lien"
 
 #: common/docman/views/listfile.php:248
-#: common/docman/views/listtrashfile.php:146
+#: common/docman/views/listtrashfile.php:147
 #: common/docman/views/pendingfiles.php:80
 msgid "View this document"
 msgstr "Voir ce document"
 
 #: common/docman/views/listfile.php:257
-#: common/docman/views/listtrashfile.php:155
+#: common/docman/views/listtrashfile.php:156
 #: common/docman/views/pendingfiles.php:89
 msgid "new"
 msgstr "nouveau"
@@ -1254,8 +1254,8 @@ msgid "Created or updated since less than 7 days"
 msgstr "Créé ou mis à jour depuis moins de 7 jours"
 
 #: common/docman/views/listfile.php:269 common/docman/views/listfile.php:271
-#: common/docman/views/listtrashfile.php:167
-#: common/docman/views/listtrashfile.php:169
+#: common/docman/views/listtrashfile.php:168
+#: common/docman/views/listtrashfile.php:170
 #: common/docman/views/pendingfiles.php:101
 #: common/docman/views/pendingfiles.php:103
 #: common/forum/ForumHTML.class.php:219 common/pm/ProjectTask.class.php:1211
@@ -1320,7 +1320,7 @@ msgid "Move this document to trash"
 msgstr "Mettre ce document à la corbeille"
 
 #: common/docman/views/listfile.php:326 common/docman/views/listfile.php:337
-#: common/docman/views/listtrashfile.php:191
+#: common/docman/views/listtrashfile.php:192
 #: common/docman/views/pendingfiles.php:127
 msgid "Edit this document"
 msgstr "Modifier ce document"
@@ -1350,7 +1350,7 @@ msgid "Start monitoring this document"
 msgstr "Surveiller ce document"
 
 #: common/docman/views/listfile.php:358
-#: common/docman/views/listtrashfile.php:198
+#: common/docman/views/listtrashfile.php:199
 msgid ""
 "Actions availables for selected documents, you need to check at least one "
 "document to get actions"
@@ -1359,7 +1359,7 @@ msgstr ""
 "doit être sélectionné pour que ces actions aient lieu."
 
 #: common/docman/views/listfile.php:359
-#: common/docman/views/listtrashfile.php:199
+#: common/docman/views/listtrashfile.php:200
 msgid "Mass actions for selected documents:"
 msgstr "Actions en attente sur les documents sélectionnés :"
 
@@ -1393,13 +1393,13 @@ msgid "Stop Monitoring"
 msgstr "Arrêter la surveillance"
 
 #: common/docman/views/listfile.php:370
-#: common/docman/views/listtrashfile.php:202
+#: common/docman/views/listtrashfile.php:203
 #: common/docman/views/pendingfiles.php:138
 msgid "Download as a ZIP"
 msgstr "Télécharger comme ZIP"
 
 #: common/docman/views/listfile.php:376
-#: common/docman/views/listtrashfile.php:208
+#: common/docman/views/listtrashfile.php:209
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:88
 msgid "No documents."
 msgstr "Aucun document."
@@ -1408,19 +1408,19 @@ msgstr "Aucun document."
 msgid "Delete permanently all documents and folders with deleted status."
 msgstr "Supprimer définitivement les dossiers et documents de la corbeille."
 
-#: common/docman/views/listtrashfile.php:118
+#: common/docman/views/listtrashfile.php:119
 msgid "Delete permanently this folder and his content."
 msgstr "Supprimer ce dossier et tout son contenu."
 
-#: common/docman/views/listtrashfile.php:157
+#: common/docman/views/listtrashfile.php:158
 msgid "Updated since less than 7 days"
 msgstr "Mis à jour depuis moins de 7 jours"
 
-#: common/docman/views/listtrashfile.php:190
+#: common/docman/views/listtrashfile.php:191
 msgid "Delete permanently this document."
 msgstr "Supprimer définitivement ce document."
 
-#: common/docman/views/listtrashfile.php:201
+#: common/docman/views/listtrashfile.php:202
 msgid "Delete permanently."
 msgstr "Supprimer définitivement."
 
@@ -3438,9 +3438,8 @@ msgid "News"
 msgstr "Annonces"
 
 #: common/include/MailParser.class.php:35
-#, fuzzy
 msgid "Error - file too large"
-msgstr "Erreur - fonctionnalité désactivée."
+msgstr "Erreur - fichier trop volumineux"
 
 #: common/include/MailParser.class.php:86
 msgid "Error - only text/plain supported at this time"
@@ -3695,14 +3694,12 @@ msgstr ""
 "La taille des données fournies (%1$s) dépasse la limite autorisée (%2$s)."
 
 #: common/include/RBAC.php:194
-#, fuzzy
 msgid "Cannot link to home project"
-msgstr "Répertoire du thème introuvable !"
+msgstr "Impossible de se lier au projet"
 
 #: common/include/RBAC.php:229
-#, fuzzy
 msgid "Cannot unlink from home project"
-msgstr "Partir d'un projet vide"
+msgstr "Impossible de se délier du projet"
 
 #: common/include/RBAC.php:594
 msgid "UNKNOWN (internal error, report bug to FusionForge)"
@@ -4001,9 +3998,9 @@ msgid "Enable Anonymous Read Access"
 msgstr "Activer l'accès anonyme en lecture"
 
 #: common/include/SCMPlugin.class.php:309
-#, fuzzy, php-format
+#, php-format
 msgid "No repository %s exists"
-msgstr "Statistiques sur le dépôt"
+msgstr "Le dépôt %s n'existe pas"
 
 #: common/include/SCMPlugin.class.php:340
 #: plugins/scmhg/common/HgPlugin.class.php:584
@@ -4981,13 +4978,13 @@ msgid "Create/change generic response messages for the tracker."
 msgstr "Ajouter/modifier des réponses types pour l'outil de suivi."
 
 #: common/tracker/actions/admin-tracker.php:70
-#, fuzzy
 msgid "Apply Template Tracker"
-msgstr "éléments à suivre liés"
+msgstr "Appliquer le modèle de traceur"
 
 #: common/tracker/actions/admin-tracker.php:72
 msgid "Duplicate parameters and fields from a template trackers in this one."
 msgstr ""
+"Dupliquer les champs et les éléments du modèle de traceur dans ce traceur-ci."
 
 #: common/tracker/actions/admin-tracker.php:77
 msgid "Permanently delete this tracker."
@@ -5288,9 +5285,8 @@ msgstr "Navigation rapide"
 
 #: common/tracker/actions/browse.php:435
 #: common/tracker/views/form-adminroadmap.php:489
-#, fuzzy
 msgid "Default"
-msgstr "default_font"
+msgstr "Par défaut"
 
 #: common/tracker/actions/browse.php:437
 #, php-format
@@ -5388,15 +5384,14 @@ msgid "No items found"
 msgstr "Aucun élément trouvé"
 
 #: common/tracker/actions/csv.php:82
-#, fuzzy
 msgid ""
 "This page allows you to export the items using a CSV (<a href=\"http://en."
 "wikipedia.org/wiki/Comma-separated_values\">Comma Separated Values</a>) "
 "File. This format can be used to view your entries using Microsoft Excel."
 msgstr ""
-"Cette page permet d'exporter ou d'importer toutes les tâches au format <a "
-"href=\"http://fr.wikipedia.org/wiki/Comma-separated_values\">CSV</a>. Ce "
-"format peut être utilisé pour visualiser les tâches dans un tableur."
+"Cette page vous permet d'exporter les éléments au format <a href=\"http://fr."
+"wikipedia.org/wiki/Comma-separated_values\">CSV</a>. Ce format peut être "
+"utilisé pour visualiser les données dans un tableur."
 
 #: common/tracker/actions/csv.php:83
 msgid "Export as a CSV file"
@@ -5463,9 +5458,8 @@ msgstr "Ajouter un commentaire"
 #: common/tracker/actions/mod-limited.php:164
 #: common/tracker/actions/mod.php:218
 #: www/pm/include/ProjectTaskHTML.class.php:141
-#, fuzzy
 msgid "Followups: "
-msgstr "Suites"
+msgstr "Commentaires : "
 
 #: common/tracker/actions/detail.php:139
 #: common/tracker/actions/mod-limited.php:181
@@ -5964,9 +5958,8 @@ msgid "This Tracker already uses custom statuses"
 msgstr ""
 
 #: common/tracker/ArtifactExtraField.class.php:233
-#, fuzzy
 msgid "Invalid ArtifactExtraField ID"
-msgstr "Numéro d'identifiant invalide"
+msgstr "Numéro d'ArtifactExtraField invalide"
 
 #: common/tracker/ArtifactExtraField.class.php:321
 #: common/tracker/views/form-addextrafield.php:123
@@ -6199,7 +6192,7 @@ msgstr "Parcourir le traceur."
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:57
 msgid "Export CSV"
-msgstr "Exporter un fichier CSV"
+msgstr "Exporter au format CSV"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:59
 msgid "Download data from this tracker as csv file."
@@ -7895,6 +7888,7 @@ msgstr ""
 #: db/20130127-extratabToHeadermenuMigration.php:81
 #: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:99
 #: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:95
+#: www/admin/pluginman.php:84
 msgid "Soft link wasn't removed in www/plugins folder, please do so manually."
 msgstr ""
 "Le lien symbolique n'a pas été supprimé dans le répertoire www/plugins.  "
@@ -9016,7 +9010,7 @@ msgid "Failed to add subproject."
 msgstr "Échec lors de l'ajout du sous-projet."
 
 #: plugins/extsubproj/actions/addExtSubProj.php:35
-msgid "Sub project succesfully added."
+msgid "Subproject succesfully added."
 msgstr "Sous-projet ajouté avec succès."
 
 #: plugins/extsubproj/actions/delExtSubProj.php:30
@@ -9024,14 +9018,13 @@ msgid "Failed to delete subproject."
 msgstr "Échec de la suppression du sous-projet."
 
 #: plugins/extsubproj/actions/delExtSubProj.php:34
-msgid "Sub project succesfully deleted."
+msgid "Subproject succesfully deleted."
 msgstr "Sous-projet supprimé avec succès."
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:76
-#, fuzzy
 msgid "External subprojects admin"
-msgstr "Nom du sous-projet"
+msgstr "Administration des sous-projets externes"
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:76
@@ -9057,7 +9050,7 @@ msgid "Displays links to external subprojects of the project"
 msgstr "La liste des fichiers du projet est affichée en dessous."
 
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:51
-msgid "Sub projects"
+msgid "Subprojects"
 msgstr "Sous-projets"
 
 #: plugins/extsubproj/view/admin/viewGlobalConfiguration.php:30
@@ -11329,9 +11322,8 @@ msgid "Modify"
 msgstr "Modifier"
 
 #: plugins/mantisbt/view/viewNote.php:70
-#, fuzzy
 msgid "No notes for this ticket"
-msgstr "Suivre ce paquet"
+msgstr "Pas de notes pour ce ticket"
 
 #: plugins/mantisbt/www/getAttachment.php:41 plugins/mantisbt/www/index.php:63
 #: plugins/quota_management/www/index.php:33 www/developer/index.php:41
@@ -11535,9 +11527,8 @@ msgid "<a href=\"%s\">Download</a> the nightly created XML dump (backup) here."
 msgstr "<a href=\"%s\">Télécharger</a> la sauvegarde XML quotidienne."
 
 #: plugins/mediawiki/www/plugin_admin.php:173
-#, fuzzy
 msgid "This project's wiki logo : $wgLogo"
-msgstr "Les tâches de ce projet"
+msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:176
 msgid "Current logo:"
@@ -11624,9 +11615,8 @@ msgid ""
 "Edit the message as you want. If you activate the HTML editor, you will be "
 "able to use WYSIWYG formatting (bold, colors...)"
 msgstr ""
-"Éditez le message à votre convenance.  Si vous activez l'éditeur HTML, vous "
-"pourrez utiliser du formatage visuel « WYSIWYG » (texte en gras, couleurs, "
-"etc.)."
+"Modifiez le message à votre guise. Si vous activez l'éditeur HTML, vous "
+"pourrez le mettre en forme visuellement (gras, couleurs...)"
 
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:150
 msgid "MoinMoin Wiki access"
@@ -11687,9 +11677,8 @@ msgid "Go"
 msgstr "Continuer"
 
 #: plugins/oauthconsumer/www/callback.php:71
-#, fuzzy
 msgid "New access token received and saved!"
-msgstr "Aucune annonce trouvée"
+msgstr ""
 
 #: plugins/oauthconsumer/www/callback.php:72
 #, fuzzy
@@ -12102,8 +12091,9 @@ msgid ""
 msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:405
-msgid "Missing a temporary folder"
-msgstr "Répertoire temporaire manquant"
+#, fuzzy
+msgid "Missing a temporary folder."
+msgstr "Dossier temporaire manquant."
 
 #: plugins/projectimport/common/UploadedFiles.class.php:407
 msgid "Failed to write file to disk."
@@ -13435,9 +13425,8 @@ msgid ""
 msgstr ""
 
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:32
-#, fuzzy
 msgid "My Git cloned Repositories List"
-msgstr "Créer un dépôt personnel"
+msgstr ""
 
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:40
 msgid ""
@@ -13497,7 +13486,7 @@ msgstr ""
 #: plugins/scmhg/common/HgPlugin.class.php:77
 #: plugins/scmsvn/common/SVNPlugin.class.php:120
 msgid "The password is "
-msgstr "Le mot de passe à fournir est : "
+msgstr "Le mot de passe est "
 
 #: plugins/scmhg/common/HgPlugin.class.php:80
 msgid ""
@@ -13583,50 +13572,50 @@ msgstr "Cloné de :"
 msgid "Feature not implemented."
 msgstr "Pas encore implémenté."
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:138
+#: plugins/scmhook/common/scmhookPlugin.class.php:139
 msgid "Hooks management update process waiting ..."
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:140
+#: plugins/scmhook/common/scmhookPlugin.class.php:141
 #, fuzzy
 msgid "Enable Repository Hooks"
 msgstr "Navigateur de dépôt Darcs"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:155
+#: plugins/scmhook/common/scmhookPlugin.class.php:156
 msgid "SCM Type not supported yet by scmhook"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:161
+#: plugins/scmhook/common/scmhookPlugin.class.php:162
 #, fuzzy
 msgid "No hooks available"
 msgstr "Pas de statistiques disponibles"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:282
+#: plugins/scmhook/common/scmhookPlugin.class.php:283
 msgid "pre-commit Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:283
-#: plugins/scmhook/common/scmhookPlugin.class.php:326
-#: plugins/scmhook/common/scmhookPlugin.class.php:369
-#: plugins/scmhook/common/scmhookPlugin.class.php:430
-#: plugins/scmhook/common/scmhookPlugin.class.php:491
+#: plugins/scmhook/common/scmhookPlugin.class.php:284
+#: plugins/scmhook/common/scmhookPlugin.class.php:327
+#: plugins/scmhook/common/scmhookPlugin.class.php:370
+#: plugins/scmhook/common/scmhookPlugin.class.php:431
+#: plugins/scmhook/common/scmhookPlugin.class.php:492
 #, fuzzy
 msgid "Hook Name"
 msgstr "Nom du rôle"
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:325
+#: plugins/scmhook/common/scmhookPlugin.class.php:326
 msgid "pre-revprop-change Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:368
+#: plugins/scmhook/common/scmhookPlugin.class.php:369
 msgid "post-commit Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:429
+#: plugins/scmhook/common/scmhookPlugin.class.php:430
 msgid "serve-push-pull-bundle Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:490
+#: plugins/scmhook/common/scmhookPlugin.class.php:491
 msgid "post-receive Hooks"
 msgstr ""
 
@@ -13751,9 +13740,8 @@ msgid "Global WebAnalytics admin"
 msgstr "Administration de Mantis"
 
 #: plugins/webanalytics/common/webanalyticsPlugin.class.php:161
-#, fuzzy
 msgid "Site Global Webanalytics Admin"
-msgstr "Voir le MantisBT personnel"
+msgstr ""
 
 #: plugins/webanalytics/common/webanalyticsPlugin.class.php:187
 msgid ""
@@ -13763,9 +13751,8 @@ msgstr ""
 
 #: plugins/webanalytics/view/admin/updateLinkValue.php:35
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:59
-#, fuzzy
 msgid "Informative Name"
-msgstr "Nom du forum"
+msgstr ""
 
 #: plugins/webanalytics/view/admin/updateLinkValue.php:37
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
@@ -13783,9 +13770,8 @@ msgid "Is Active"
 msgstr "Est actif"
 
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:58
-#, fuzzy
 msgid "Add a new webanalytics reference"
-msgstr "Ajouter un nouveau répertoire"
+msgstr ""
 
 #: plugins/wiki/common/wikiconfig.class.php:39
 msgid ""
@@ -14679,9 +14665,8 @@ msgid "Time"
 msgstr "Temps"
 
 #: www/activity/index.php:281
-#, fuzzy
 msgid "scm commit: "
-msgstr "envoi"
+msgstr "envoi de code source : "
 
 #: www/activity/index.php:286
 msgid "Commit for Tracker Item"
@@ -14823,9 +14808,8 @@ msgid "View/Edit Project Members"
 msgstr "Voir/modifier les membres du projet"
 
 #: www/admin/approve-pending.php:141
-#, fuzzy
 msgid "Decision :"
-msgstr "Version :"
+msgstr "Décision :"
 
 #: www/admin/approve-pending.php:147
 msgid "Approve"
@@ -14853,9 +14837,8 @@ msgid "Reject"
 msgstr "Rejeter"
 
 #: www/admin/approve-pending.php:169
-#, fuzzy
 msgid "Project details :"
-msgstr "Total pour le projet :"
+msgstr "Détails du projet :"
 
 #: www/admin/approve-pending.php:177 www/admin/groupedit.php:183
 msgid "Home Box:"
@@ -14882,9 +14865,8 @@ msgid "Pending reason:"
 msgstr "Motif de l'attente :"
 
 #: www/admin/approve-pending.php:215
-#, fuzzy
 msgid "Based on template project"
-msgstr "Construit en prenant le projet %s (%s) pour modèle"
+msgstr "A partir d'un modèle de projet"
 
 #: www/admin/approve-pending.php:230
 msgid "Approve All On This Page"
@@ -15185,9 +15167,8 @@ msgid "Pending users"
 msgstr "Utilisateurs en attente"
 
 #: www/admin/index.php:83
-#, fuzzy
 msgid "Plugins User Maintenance"
-msgstr "Gestion des utilisateurs"
+msgstr ""
 
 #: www/admin/index.php:91
 msgid "Global roles and permissions"
@@ -15462,7 +15443,7 @@ msgid "Newsbytes Rejected."
 msgstr "Annonce rejetée."
 
 #: www/admin/pending-news.php:113
-msgid "News administration"
+msgid "News Administration"
 msgstr "Administration des annonces"
 
 #: www/admin/pending-news.php:127
@@ -15501,15 +15482,8 @@ msgid "Plugin %1$s updated Successfully"
 msgstr "Greffon %1$s mis à jour avec succès"
 
 #: www/admin/pluginman.php:75 www/admin/pluginman.php:113
-msgid "Couldn't get plugin object"
+msgid "Could not get plugin object"
 msgstr "Greffon non trouvé"
-
-#: www/admin/pluginman.php:84
-msgid ""
-"<br />Soft link wasn't removed in www/plugins folder, please do so manually."
-msgstr ""
-"<br />Le lien symbolique n'a pas été supprimé dans le répertoire www/"
-"plugins.  Veuillez le faire manuellement."
 
 #: www/admin/pluginman.php:95
 msgid "Success, config not deleted"
@@ -15521,9 +15495,9 @@ msgid ""
 "plugins/ folder. Then, you should activate them also per project, per user "
 "or whatever the plugin specifically applies to."
 msgstr ""
-"Cette page permet d'activer ou désactiver des greffons.  Il faudra ensuite "
-"les configurer pour chaque projet désirant les utiliser (ou pour chaque "
-"utilisateur, ou pour d'autres contextes selon les spécificités des greffons)."
+"Cette section vous permet d'activer ou désactiver globalement des greffons "
+"présents dans le répertoire plugins/.  Selon les greffons, il peut également "
+"être nécessaire de les activer pour chaque projet ou utilisateur."
 
 #: www/admin/pluginman.php:131
 msgid ""
@@ -15644,8 +15618,8 @@ msgstr "Aucun utilisateur trouvé."
 
 #: www/admin/search.php:144
 #, php-format
-msgid "Group search with criteria <em>%s</em>: %d match"
-msgid_plural "Group search with criteria <em>%s</em>: %d matches"
+msgid "Project search with criteria <em>%s</em>: %d match"
+msgid_plural "Project search with criteria <em>%s</em>: %d matches"
 msgstr[0] "Recherche de projets selon les critères <em>%s</em> : %d résultat"
 msgstr[1] "Recherche de projets selon les critères <em>%s</em> : %d résultats"
 
@@ -18816,9 +18790,10 @@ msgid ""
 "whichever comes first. (Project administrators may always re-post expired "
 "openings.)"
 msgstr ""
-"Les annonces restent actives au plus deux semaines, mais peuvent être "
-"fermées plus tôt à la convenance de leur auteur.  Les administrateurs de "
-"projet peuvent toujours réouvrir des annonces expirées."
+"Les offres restent visibles pendant deux semaines ou jusqu'à ce qu'elles "
+"soient fermées par le demandeur, suivant ce qui arrive en premier. (Les "
+"administrateurs de projets peuvent toujours soumettre une nouvelle fois les "
+"offres qui ont expiré.)"
 
 #: www/people/index.php:69
 msgid ""
@@ -18832,14 +18807,14 @@ msgid ""
 "If you're a project admin, log in and submit help wanted requests through "
 "your project administration page."
 msgstr ""
-"Si vous êtes un administrateur de projet, connectez-vous et publiez des "
-"annonces à travers la page d'administration de votre projet."
+"Si vous êtes administrateur de projet, identifiez-vous et soumettez des "
+"demandes d'aide à travers l'interface d'administration de votre projet."
 
 #: www/people/index.php:77
 msgid ""
 "To suggest new job categories, submit a request via the support manager."
 msgstr ""
-"Pour suggérer de nouvelles catégories de poste, soumettez une requête par le "
+"Pour suggérer de nouvelles catégories, soumettez votre demande via le "
 "gestionnaire de support."
 
 #: www/people/index.php:82
@@ -19364,9 +19339,8 @@ msgid "Field Name"
 msgstr "Nom du champ"
 
 #: www/pm/csv.php:109
-#, fuzzy
 msgid "this is the ID in database"
-msgstr "Échec lors de la suppression d'un label : %s"
+msgstr ""
 
 #: www/pm/csv.php:113
 msgid ""
@@ -19839,7 +19813,7 @@ msgstr ""
 
 #: www/project/admin/database.php:66
 msgid "Cannot add database entry"
-msgstr "Impossible d'ajouter une base de données"
+msgstr "Impossible d'ajouter une entrée dans la base de données"
 
 #: www/project/admin/database.php:69
 msgid "Database scheduled for creation"
@@ -25747,9 +25721,6 @@ msgstr "Page personnelle de %s"
 #~ msgid "Please login to share files."
 #~ msgstr "Vous devez vous identifier pour partager des fichiers."
 
-#~ msgid "Missing a temporary folder."
-#~ msgstr "Dossier temporaire manquant."
-
 #~ msgid "You need to select a file."
 #~ msgstr "Vous devez sélectionner un fichier."
 
@@ -25863,12 +25834,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Active site users: <strong>%1$s</strong>"
 #~ msgstr "Utilisateurs actifs : <strong>%1$s</strong>"
-
-#~ msgid "News Administration"
-#~ msgstr "Administration des annonces"
-
-#~ msgid "Could not get plugin object"
-#~ msgstr "Greffon non trouvé"
 
 #~ msgid ""
 #~ "Unix status updated mirroring web status, unless it has value 'No Unix "

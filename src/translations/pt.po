@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-24 18:38+0200\n"
+"POT-Creation-Date: 2013-10-28 16:44+0100\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -198,7 +198,7 @@ msgstr ""
 #: common/docman/views/editfile.php:51 common/docman/views/editfile.php:70
 #: common/docman/views/listfile.php:169 common/docman/views/listfile.php:171
 #: common/docman/views/listfile.php:173
-#: common/docman/views/listtrashfile.php:115
+#: common/docman/views/listtrashfile.php:116
 #: common/docman/views/search.php:150 common/docman/views/search.php:151
 #: common/docman/views/tree.php:64 common/forum/ForumAdmin.class.php:427
 #: common/forum/Forum.class.php:230 common/forum/Forum.class.php:525
@@ -553,7 +553,7 @@ msgstr "Nenhum Documento Encontrado"
 
 #: common/docman/DocumentGroup.class.php:67
 #: common/docman/views/listfile.php:173
-#: common/docman/views/listtrashfile.php:115
+#: common/docman/views/listtrashfile.php:116
 msgid "Document Folder"
 msgstr ""
 
@@ -727,7 +727,7 @@ msgstr ""
 
 #: common/docman/views/addfile.php:92 common/docman/views/addfile.php:108
 #: common/docman/views/editfile.php:42 common/docman/views/listfile.php:218
-#: common/docman/views/listtrashfile.php:128
+#: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/actions/admin-ind.php:99
 #: common/tracker/actions/admin-ind.php:139
@@ -764,11 +764,11 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer.php:109
 #: plugins/oauthprovider/www/consumer_update_page.php:64
 #: plugins/scmhg/common/HgPlugin.class.php:627
-#: plugins/scmhook/common/scmhookPlugin.class.php:283
-#: plugins/scmhook/common/scmhookPlugin.class.php:326
-#: plugins/scmhook/common/scmhookPlugin.class.php:369
-#: plugins/scmhook/common/scmhookPlugin.class.php:430
-#: plugins/scmhook/common/scmhookPlugin.class.php:491
+#: plugins/scmhook/common/scmhookPlugin.class.php:284
+#: plugins/scmhook/common/scmhookPlugin.class.php:327
+#: plugins/scmhook/common/scmhookPlugin.class.php:370
+#: plugins/scmhook/common/scmhookPlugin.class.php:431
+#: plugins/scmhook/common/scmhookPlugin.class.php:492
 #: www/forum/admin/index.php:117 www/forum/admin/index.php:158
 #: www/forum/index.php:69 www/mail/admin/index.php:192
 #: www/mail/admin/index.php:225 www/mail/index.php:79
@@ -858,7 +858,7 @@ msgid "You need first to upload file in %s"
 msgstr ""
 
 #: common/docman/views/addfile.php:165 common/docman/views/listfile.php:218
-#: common/docman/views/listtrashfile.php:128
+#: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:108
@@ -1065,8 +1065,8 @@ msgid "Path"
 msgstr ""
 
 #: common/docman/views/listfile.php:175 common/docman/views/listfile.php:206
-#: common/docman/views/listtrashfile.php:117
-#: common/docman/views/listtrashfile.php:122
+#: common/docman/views/listtrashfile.php:118
+#: common/docman/views/listtrashfile.php:123
 msgid "Edit this folder"
 msgstr ""
 
@@ -1095,12 +1095,12 @@ msgid "Start monitoring this folder"
 msgstr ""
 
 #: common/docman/views/listfile.php:218
-#: common/docman/views/listtrashfile.php:128
+#: common/docman/views/listtrashfile.php:129
 msgid "Select / Deselect all documents for massaction"
 msgstr ""
 
 #: common/docman/views/listfile.php:218
-#: common/docman/views/listtrashfile.php:128
+#: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/views/form-addcanned.php:41
 #: common/tracker/views/form-addcanned.php:69
@@ -1124,7 +1124,7 @@ msgid "Title"
 msgstr "Título"
 
 #: common/docman/views/listfile.php:218
-#: common/docman/views/listtrashfile.php:128
+#: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:113
@@ -1142,13 +1142,13 @@ msgid "Author"
 msgstr "Autor"
 
 #: common/docman/views/listfile.php:218
-#: common/docman/views/listtrashfile.php:128
+#: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
 msgid "Last time"
 msgstr ""
 
 #: common/docman/views/listfile.php:218
-#: common/docman/views/listtrashfile.php:128
+#: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63 common/docman/views/search.php:150
 #: common/include/Group.class.php:792
 #: common/tracker/ArtifactExtraField.class.php:327
@@ -1181,7 +1181,7 @@ msgid "Status"
 msgstr ""
 
 #: common/docman/views/listfile.php:218
-#: common/docman/views/listtrashfile.php:128
+#: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/include/ArtifactTypeHtml.class.php:368 www/frs/index.php:206
 #: www/project/admin/editimages.php:267
@@ -1194,7 +1194,7 @@ msgid "View"
 msgstr "Ver"
 
 #: common/docman/views/listfile.php:221
-#: common/docman/views/listtrashfile.php:128
+#: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/views/form-adminroadmap.php:492
 #: plugins/contribtracker/www/global_admin.php:245
@@ -1212,24 +1212,24 @@ msgid "Actions"
 msgstr ""
 
 #: common/docman/views/listfile.php:231 common/docman/views/listfile.php:236
-#: common/docman/views/listtrashfile.php:136
+#: common/docman/views/listtrashfile.php:137
 msgid "Select / Deselect this document for massaction"
 msgstr ""
 
 #: common/docman/views/listfile.php:243
-#: common/docman/views/listtrashfile.php:141
+#: common/docman/views/listtrashfile.php:142
 #: common/docman/views/pendingfiles.php:75
 msgid "Visit this link"
 msgstr ""
 
 #: common/docman/views/listfile.php:248
-#: common/docman/views/listtrashfile.php:146
+#: common/docman/views/listtrashfile.php:147
 #: common/docman/views/pendingfiles.php:80
 msgid "View this document"
 msgstr ""
 
 #: common/docman/views/listfile.php:257
-#: common/docman/views/listtrashfile.php:155
+#: common/docman/views/listtrashfile.php:156
 #: common/docman/views/pendingfiles.php:89
 msgid "new"
 msgstr ""
@@ -1240,8 +1240,8 @@ msgid "Created or updated since less than 7 days"
 msgstr ""
 
 #: common/docman/views/listfile.php:269 common/docman/views/listfile.php:271
-#: common/docman/views/listtrashfile.php:167
-#: common/docman/views/listtrashfile.php:169
+#: common/docman/views/listtrashfile.php:168
+#: common/docman/views/listtrashfile.php:170
 #: common/docman/views/pendingfiles.php:101
 #: common/docman/views/pendingfiles.php:103
 #: common/forum/ForumHTML.class.php:219 common/pm/ProjectTask.class.php:1211
@@ -1306,7 +1306,7 @@ msgid "Move this document to trash"
 msgstr ""
 
 #: common/docman/views/listfile.php:326 common/docman/views/listfile.php:337
-#: common/docman/views/listtrashfile.php:191
+#: common/docman/views/listtrashfile.php:192
 #: common/docman/views/pendingfiles.php:127
 msgid "Edit this document"
 msgstr ""
@@ -1336,14 +1336,14 @@ msgid "Start monitoring this document"
 msgstr ""
 
 #: common/docman/views/listfile.php:358
-#: common/docman/views/listtrashfile.php:198
+#: common/docman/views/listtrashfile.php:199
 msgid ""
 "Actions availables for selected documents, you need to check at least one "
 "document to get actions"
 msgstr ""
 
 #: common/docman/views/listfile.php:359
-#: common/docman/views/listtrashfile.php:199
+#: common/docman/views/listtrashfile.php:200
 msgid "Mass actions for selected documents:"
 msgstr ""
 
@@ -1377,13 +1377,13 @@ msgid "Stop Monitoring"
 msgstr "Parar Monitoramento"
 
 #: common/docman/views/listfile.php:370
-#: common/docman/views/listtrashfile.php:202
+#: common/docman/views/listtrashfile.php:203
 #: common/docman/views/pendingfiles.php:138
 msgid "Download as a ZIP"
 msgstr ""
 
 #: common/docman/views/listfile.php:376
-#: common/docman/views/listtrashfile.php:208
+#: common/docman/views/listtrashfile.php:209
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:88
 msgid "No documents."
 msgstr ""
@@ -1392,19 +1392,19 @@ msgstr ""
 msgid "Delete permanently all documents and folders with deleted status."
 msgstr ""
 
-#: common/docman/views/listtrashfile.php:118
+#: common/docman/views/listtrashfile.php:119
 msgid "Delete permanently this folder and his content."
 msgstr ""
 
-#: common/docman/views/listtrashfile.php:157
+#: common/docman/views/listtrashfile.php:158
 msgid "Updated since less than 7 days"
 msgstr ""
 
-#: common/docman/views/listtrashfile.php:190
+#: common/docman/views/listtrashfile.php:191
 msgid "Delete permanently this document."
 msgstr ""
 
-#: common/docman/views/listtrashfile.php:201
+#: common/docman/views/listtrashfile.php:202
 msgid "Delete permanently."
 msgstr ""
 
@@ -7597,6 +7597,7 @@ msgstr ""
 #: db/20130127-extratabToHeadermenuMigration.php:81
 #: db/20130531-svntrackerToScmhookCommitTrackerMigration.php:99
 #: db/20130602-svncommitemailToScmHookCommitEmailMigration.php:95
+#: www/admin/pluginman.php:84
 msgid "Soft link wasn't removed in www/plugins folder, please do so manually."
 msgstr ""
 
@@ -8659,7 +8660,7 @@ msgid "Failed to add subproject."
 msgstr ""
 
 #: plugins/extsubproj/actions/addExtSubProj.php:35
-msgid "Sub project succesfully added."
+msgid "Subproject succesfully added."
 msgstr ""
 
 #: plugins/extsubproj/actions/delExtSubProj.php:30
@@ -8667,7 +8668,7 @@ msgid "Failed to delete subproject."
 msgstr ""
 
 #: plugins/extsubproj/actions/delExtSubProj.php:34
-msgid "Sub project succesfully deleted."
+msgid "Subproject succesfully deleted."
 msgstr ""
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
@@ -8697,7 +8698,7 @@ msgid "Displays links to external subprojects of the project"
 msgstr ""
 
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:51
-msgid "Sub projects"
+msgid "Subprojects"
 msgstr ""
 
 #: plugins/extsubproj/view/admin/viewGlobalConfiguration.php:30
@@ -11621,7 +11622,7 @@ msgid ""
 msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:405
-msgid "Missing a temporary folder"
+msgid "Missing a temporary folder."
 msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:407
@@ -13002,47 +13003,47 @@ msgstr ""
 msgid "Feature not implemented."
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:138
+#: plugins/scmhook/common/scmhookPlugin.class.php:139
 msgid "Hooks management update process waiting ..."
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:140
+#: plugins/scmhook/common/scmhookPlugin.class.php:141
 msgid "Enable Repository Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:155
+#: plugins/scmhook/common/scmhookPlugin.class.php:156
 msgid "SCM Type not supported yet by scmhook"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:161
+#: plugins/scmhook/common/scmhookPlugin.class.php:162
 msgid "No hooks available"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:282
+#: plugins/scmhook/common/scmhookPlugin.class.php:283
 msgid "pre-commit Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:283
-#: plugins/scmhook/common/scmhookPlugin.class.php:326
-#: plugins/scmhook/common/scmhookPlugin.class.php:369
-#: plugins/scmhook/common/scmhookPlugin.class.php:430
-#: plugins/scmhook/common/scmhookPlugin.class.php:491
+#: plugins/scmhook/common/scmhookPlugin.class.php:284
+#: plugins/scmhook/common/scmhookPlugin.class.php:327
+#: plugins/scmhook/common/scmhookPlugin.class.php:370
+#: plugins/scmhook/common/scmhookPlugin.class.php:431
+#: plugins/scmhook/common/scmhookPlugin.class.php:492
 msgid "Hook Name"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:325
+#: plugins/scmhook/common/scmhookPlugin.class.php:326
 msgid "pre-revprop-change Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:368
+#: plugins/scmhook/common/scmhookPlugin.class.php:369
 msgid "post-commit Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:429
+#: plugins/scmhook/common/scmhookPlugin.class.php:430
 msgid "serve-push-pull-bundle Hooks"
 msgstr ""
 
-#: plugins/scmhook/common/scmhookPlugin.class.php:490
+#: plugins/scmhook/common/scmhookPlugin.class.php:491
 msgid "post-receive Hooks"
 msgstr ""
 
@@ -14761,7 +14762,7 @@ msgid "Newsbytes Rejected."
 msgstr ""
 
 #: www/admin/pending-news.php:113
-msgid "News administration"
+msgid "News Administration"
 msgstr ""
 
 #: www/admin/pending-news.php:127
@@ -14800,12 +14801,7 @@ msgid "Plugin %1$s updated Successfully"
 msgstr ""
 
 #: www/admin/pluginman.php:75 www/admin/pluginman.php:113
-msgid "Couldn't get plugin object"
-msgstr ""
-
-#: www/admin/pluginman.php:84
-msgid ""
-"<br />Soft link wasn't removed in www/plugins folder, please do so manually."
+msgid "Could not get plugin object"
 msgstr ""
 
 #: www/admin/pluginman.php:95
@@ -14933,8 +14929,8 @@ msgstr ""
 
 #: www/admin/search.php:144
 #, php-format
-msgid "Group search with criteria <em>%s</em>: %d match"
-msgid_plural "Group search with criteria <em>%s</em>: %d matches"
+msgid "Project search with criteria <em>%s</em>: %d match"
+msgid_plural "Project search with criteria <em>%s</em>: %d matches"
 msgstr[0] ""
 msgstr[1] ""
 
