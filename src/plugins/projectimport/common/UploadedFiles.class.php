@@ -402,7 +402,7 @@ class FileManagerPage {
 	        			/* case UPLOAD_ERR_NO_FILE:
 	            			return 'No file was uploaded';*/
 	        			case UPLOAD_ERR_NO_TMP_DIR:
-	            			$this->feedback(_('Missing a temporary folder'));
+	            			$this->feedback(_('Missing a temporary folder.'));
 	        			case UPLOAD_ERR_CANT_WRITE:
 	            			$this->feedback(_('Failed to write file to disk.'));
 	        			case UPLOAD_ERR_EXTENSION:
