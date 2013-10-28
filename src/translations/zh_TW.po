@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:18+0100\n"
+"POT-Creation-Date: 2013-10-28 18:27+0100\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1381,7 +1381,7 @@ msgstr ""
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1126 www/softwaremap/full_list.php:122
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:323
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
 msgstr "Y-m-d H:i"
@@ -7732,7 +7732,7 @@ msgid "Registered: "
 msgstr "註冊"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
-#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:322
+#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:321
 #, fuzzy, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "啟用中的使用者：<strong>%1$s</strong>"
@@ -17926,7 +17926,7 @@ msgstr ""
 msgid "Browse per tags defined by the projects."
 msgstr "該專案沒有這樣的文章"
 
-#: www/include/Layout.class.php:1399
+#: www/include/Layout.class.php:1399 www/softwaremap/trove_list.php:84
 msgid "Project Tree"
 msgstr ""
 
@@ -22203,7 +22203,7 @@ msgstr "程式碼類型"
 msgid "en_US"
 msgstr "zh_TW"
 
-#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:266
+#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:265
 #, php-format
 msgid "More than <strong>%1$s</strong> projects in result set."
 msgstr "找到超過 <strong>%1$s</strong> 個專案"
@@ -22254,11 +22254,6 @@ msgstr "軟體地圖"
 msgid "That Trove category does not exist"
 msgstr "軟體類別不存在"
 
-#: www/softwaremap/trove_list.php:84
-#, fuzzy
-msgid "Project tree"
-msgstr "新專案名稱"
-
 #: www/softwaremap/trove_list.php:136
 #, fuzzy
 msgid "Now limiting view to projects in the following categories:"
@@ -22277,18 +22272,18 @@ msgstr "%1$s 個專案"
 msgid "Browse By"
 msgstr "瀏覽者："
 
-#: www/softwaremap/trove_list.php:269
+#: www/softwaremap/trove_list.php:268
 #, fuzzy, php-format
 msgid "<strong>%1$s</strong> project in result set."
 msgid_plural "<strong>%1$s</strong> projects in result set."
 msgstr[0] "找到 <strong>%1$s</strong> 個專案"
 msgstr[1] "找到 <strong>%1$s</strong> 個專案"
 
-#: www/softwaremap/trove_list.php:320
+#: www/softwaremap/trove_list.php:319
 msgid "Activity Percentile:&nbsp;"
 msgstr "活躍度："
 
-#: www/softwaremap/trove_list.php:324
+#: www/softwaremap/trove_list.php:323
 msgid "Registered:&nbsp;"
 msgstr "已註冊："
 
@@ -23171,6 +23166,10 @@ msgstr "帳號"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
+
+#, fuzzy
+#~ msgid "Project tree"
+#~ msgstr "新專案名稱"
 
 #, fuzzy
 #~ msgid "Activity Ranking:&nbsp;"

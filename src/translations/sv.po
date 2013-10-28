@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:18+0100\n"
+"POT-Creation-Date: 2013-10-28 18:27+0100\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1373,7 +1373,7 @@ msgstr ""
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1126 www/softwaremap/full_list.php:122
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:323
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
 msgstr "Y-m-d H:i"
@@ -7712,7 +7712,7 @@ msgid "Registered: "
 msgstr "Registrerad"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
-#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:322
+#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:321
 #, fuzzy, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "Aktivitet i procent:"
@@ -17868,7 +17868,7 @@ msgstr ""
 msgid "Browse per tags defined by the projects."
 msgstr "Inga sådana poster i detta projekt"
 
-#: www/include/Layout.class.php:1399
+#: www/include/Layout.class.php:1399 www/softwaremap/trove_list.php:84
 msgid "Project Tree"
 msgstr ""
 
@@ -22163,7 +22163,7 @@ msgstr "Skript Typ"
 msgid "en_US"
 msgstr "Sv_SE"
 
-#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:266
+#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:265
 #, php-format
 msgid "More than <strong>%1$s</strong> projects in result set."
 msgstr "Mer än <strong>%1$s</strong> projekt i resultatmängden."
@@ -22214,11 +22214,6 @@ msgstr "Resurskarta"
 msgid "That Trove category does not exist"
 msgstr "Den resurskategorin existerar inte"
 
-#: www/softwaremap/trove_list.php:84
-#, fuzzy
-msgid "Project tree"
-msgstr "Nytt projektnamn"
-
 #: www/softwaremap/trove_list.php:136
 #, fuzzy
 msgid "Now limiting view to projects in the following categories:"
@@ -22237,18 +22232,18 @@ msgstr "%1$s projekt"
 msgid "Browse By"
 msgstr "Bläddra efter:"
 
-#: www/softwaremap/trove_list.php:269
+#: www/softwaremap/trove_list.php:268
 #, fuzzy, php-format
 msgid "<strong>%1$s</strong> project in result set."
 msgid_plural "<strong>%1$s</strong> projects in result set."
 msgstr[0] "<strong>%1$s</strong> projekt i resultatmängden."
 msgstr[1] "<strong>%1$s</strong> projekt i resultatmängden."
 
-#: www/softwaremap/trove_list.php:320
+#: www/softwaremap/trove_list.php:319
 msgid "Activity Percentile:&nbsp;"
 msgstr "Aktivitet i procent:"
 
-#: www/softwaremap/trove_list.php:324
+#: www/softwaremap/trove_list.php:323
 msgid "Registered:&nbsp;"
 msgstr "Registrerad:"
 
@@ -23140,6 +23135,10 @@ msgstr "Användarenamn"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
+
+#, fuzzy
+#~ msgid "Project tree"
+#~ msgstr "Nytt projektnamn"
 
 #, fuzzy
 #~ msgid "Activity Ranking:&nbsp;"

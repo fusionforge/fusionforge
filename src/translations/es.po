@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:18+0100\n"
+"POT-Creation-Date: 2013-10-28 18:27+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -1333,7 +1333,7 @@ msgstr "Creado o actualizado hace 7 dias"
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1126 www/softwaremap/full_list.php:122
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:323
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
 msgstr "Y-m-d H:i"
@@ -7596,7 +7596,7 @@ msgid "Registered: "
 msgstr "Registrado:"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
-#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:322
+#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:321
 #, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "Ranking de actividad: <strong>%d</strong>"
@@ -17623,7 +17623,7 @@ msgstr "Enlace Rapido A..."
 msgid "Browse per tags defined by the projects."
 msgstr "Navegar por las etiquetas definidas por los proyectos."
 
-#: www/include/Layout.class.php:1399
+#: www/include/Layout.class.php:1399 www/softwaremap/trove_list.php:84
 msgid "Project Tree"
 msgstr "Arbol de proyectos"
 
@@ -21988,7 +21988,7 @@ msgstr "Tipo de Script"
 msgid "en_US"
 msgstr "es_ES"
 
-#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:266
+#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:265
 #, php-format
 msgid "More than <strong>%1$s</strong> projects in result set."
 msgstr "Más <strong>%1$s</strong>proyectos en esta categoría."
@@ -22043,10 +22043,6 @@ msgstr "Mapa de Software"
 msgid "That Trove category does not exist"
 msgstr "Esta categoría no existe"
 
-#: www/softwaremap/trove_list.php:84
-msgid "Project tree"
-msgstr "Árbol de proyectos"
-
 #: www/softwaremap/trove_list.php:136
 msgid "Now limiting view to projects in the following categories:"
 msgstr "Ahora limitando la vista de proyectos en las siguientes categorías:"
@@ -22064,18 +22060,18 @@ msgstr "%1$s proyectos"
 msgid "Browse By"
 msgstr "Visualizar por"
 
-#: www/softwaremap/trove_list.php:269
+#: www/softwaremap/trove_list.php:268
 #, php-format
 msgid "<strong>%1$s</strong> project in result set."
 msgid_plural "<strong>%1$s</strong> projects in result set."
 msgstr[0] "<strong>%1$s</strong> proyecto en esta categoría."
 msgstr[1] "<strong>%1$s</strong> proyectos en esta categoría."
 
-#: www/softwaremap/trove_list.php:320
+#: www/softwaremap/trove_list.php:319
 msgid "Activity Percentile:&nbsp;"
 msgstr "Percentil de actividad:&nbsp;"
 
-#: www/softwaremap/trove_list.php:324
+#: www/softwaremap/trove_list.php:323
 msgid "Registered:&nbsp;"
 msgstr "Registrado:&nbsp;"
 
@@ -22937,6 +22933,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Project tree"
+#~ msgstr "Árbol de proyectos"
 
 #~ msgid "Activity Ranking:&nbsp;"
 #~ msgstr "Ranking de actividad:&nbsp;"

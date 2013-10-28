@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:18+0100\n"
+"POT-Creation-Date: 2013-10-28 18:27+0100\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1292,7 +1292,7 @@ msgstr ""
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1126 www/softwaremap/full_list.php:122
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:323
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
 msgstr "d-m-Y H:i"
@@ -7211,7 +7211,7 @@ msgid "Registered: "
 msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
-#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:322
+#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:321
 #, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
 msgstr ""
@@ -16684,7 +16684,7 @@ msgstr ""
 msgid "Browse per tags defined by the projects."
 msgstr ""
 
-#: www/include/Layout.class.php:1399
+#: www/include/Layout.class.php:1399 www/softwaremap/trove_list.php:84
 msgid "Project Tree"
 msgstr ""
 
@@ -20777,7 +20777,7 @@ msgstr "Tipo de Script"
 msgid "en_US"
 msgstr "pt_BR"
 
-#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:266
+#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:265
 #, php-format
 msgid "More than <strong>%1$s</strong> projects in result set."
 msgstr "Mais que <strong>%1$s</strong> projetos no conjunto de resultados."
@@ -20827,10 +20827,6 @@ msgstr "Mapa de Softwares"
 msgid "That Trove category does not exist"
 msgstr "Aquela categoria de repositório não existe"
 
-#: www/softwaremap/trove_list.php:84
-msgid "Project tree"
-msgstr ""
-
 #: www/softwaremap/trove_list.php:136
 msgid "Now limiting view to projects in the following categories:"
 msgstr ""
@@ -20848,18 +20844,18 @@ msgstr "%1$s projetos"
 msgid "Browse By"
 msgstr "Listar Por:"
 
-#: www/softwaremap/trove_list.php:269
+#: www/softwaremap/trove_list.php:268
 #, php-format
 msgid "<strong>%1$s</strong> project in result set."
 msgid_plural "<strong>%1$s</strong> projects in result set."
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/softwaremap/trove_list.php:320
+#: www/softwaremap/trove_list.php:319
 msgid "Activity Percentile:&nbsp;"
 msgstr "Percentual de Atividade:&nbsp;"
 
-#: www/softwaremap/trove_list.php:324
+#: www/softwaremap/trove_list.php:323
 msgid "Registered:&nbsp;"
 msgstr "Registrado:&nbsp;"
 

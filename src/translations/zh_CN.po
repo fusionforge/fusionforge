@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:18+0100\n"
+"POT-Creation-Date: 2013-10-28 18:27+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1381,7 +1381,7 @@ msgstr ""
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1126 www/softwaremap/full_list.php:122
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:323
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
 msgstr "Y-m-d H:i"
@@ -7717,7 +7717,7 @@ msgid "Registered: "
 msgstr "注册"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
-#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:322
+#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:321
 #, fuzzy, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "已激活的用户：<strong>%1$s</strong>"
@@ -17892,7 +17892,7 @@ msgstr ""
 msgid "Browse per tags defined by the projects."
 msgstr "该项目没有这样的文章"
 
-#: www/include/Layout.class.php:1399
+#: www/include/Layout.class.php:1399 www/softwaremap/trove_list.php:84
 msgid "Project Tree"
 msgstr ""
 
@@ -22176,7 +22176,7 @@ msgstr "代码类型"
 msgid "en_US"
 msgstr "zh_CN"
 
-#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:266
+#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:265
 #, php-format
 msgid "More than <strong>%1$s</strong> projects in result set."
 msgstr "找到超过 <strong>%1$s</strong> 个项目"
@@ -22227,11 +22227,6 @@ msgstr "软件地图"
 msgid "That Trove category does not exist"
 msgstr "软件类别不存在"
 
-#: www/softwaremap/trove_list.php:84
-#, fuzzy
-msgid "Project tree"
-msgstr "新项目名称"
-
 #: www/softwaremap/trove_list.php:136
 #, fuzzy
 msgid "Now limiting view to projects in the following categories:"
@@ -22250,18 +22245,18 @@ msgstr "%1$s 个项目"
 msgid "Browse By"
 msgstr "浏览者："
 
-#: www/softwaremap/trove_list.php:269
+#: www/softwaremap/trove_list.php:268
 #, fuzzy, php-format
 msgid "<strong>%1$s</strong> project in result set."
 msgid_plural "<strong>%1$s</strong> projects in result set."
 msgstr[0] "找到 <strong>%1$s</strong> 个项目"
 msgstr[1] "找到 <strong>%1$s</strong> 个项目"
 
-#: www/softwaremap/trove_list.php:320
+#: www/softwaremap/trove_list.php:319
 msgid "Activity Percentile:&nbsp;"
 msgstr "活跃度："
 
-#: www/softwaremap/trove_list.php:324
+#: www/softwaremap/trove_list.php:323
 msgid "Registered:&nbsp;"
 msgstr "已注册："
 
@@ -23144,6 +23139,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Project tree"
+#~ msgstr "新项目名称"
 
 #, fuzzy
 #~ msgid "Activity Ranking:&nbsp;"

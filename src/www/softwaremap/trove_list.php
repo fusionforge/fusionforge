@@ -81,7 +81,7 @@ if (db_numrows($res_trove_cat) < 1) {
 }
 
 echo '<div id="project-tree" class="underline-link">' . "\n";
-echo '<h2>' . _('Project tree') . '</h2>' . "\n";
+echo '<h2>' . _('Project Tree') . '</h2>' . "\n";
 
 plugin_hook('display_hierarchy_submenu');
 

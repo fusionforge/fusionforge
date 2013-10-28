@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:18+0100\n"
+"POT-Creation-Date: 2013-10-28 18:27+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1378,7 +1378,7 @@ msgstr ""
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1126 www/softwaremap/full_list.php:122
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:323
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
 msgstr "Y-m-d H:i"
@@ -7771,7 +7771,7 @@ msgid "Registered: "
 msgstr "Registrat"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
-#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:322
+#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:321
 #, fuzzy, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "Usuaris actius del lloc: <strong>%1$s</strong>"
@@ -18031,7 +18031,7 @@ msgstr ""
 msgid "Browse per tags defined by the projects."
 msgstr "No hi ha tal missatge per aquest projecte"
 
-#: www/include/Layout.class.php:1399
+#: www/include/Layout.class.php:1399 www/softwaremap/trove_list.php:84
 msgid "Project Tree"
 msgstr ""
 
@@ -22364,7 +22364,7 @@ msgstr "Tipus d'script"
 msgid "en_US"
 msgstr "en_US"
 
-#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:266
+#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:265
 #, php-format
 msgid "More than <strong>%1$s</strong> projects in result set."
 msgstr "Més de <strong>%1$s</strong> projectes al conjunt de resultats."
@@ -22415,11 +22415,6 @@ msgstr "Arbre de projectes"
 msgid "That Trove category does not exist"
 msgstr "Aquesta categoria no existeix"
 
-#: www/softwaremap/trove_list.php:84
-#, fuzzy
-msgid "Project tree"
-msgstr "Nom del nou projecte"
-
 #: www/softwaremap/trove_list.php:136
 #, fuzzy
 msgid "Now limiting view to projects in the following categories:"
@@ -22438,18 +22433,18 @@ msgstr "%1$s projectes"
 msgid "Browse By"
 msgstr "Navega per"
 
-#: www/softwaremap/trove_list.php:269
+#: www/softwaremap/trove_list.php:268
 #, fuzzy, php-format
 msgid "<strong>%1$s</strong> project in result set."
 msgid_plural "<strong>%1$s</strong> projects in result set."
 msgstr[0] "<strong>%1$s</strong> projectes al conjunt de resultats."
 msgstr[1] "<strong>%1$s</strong> projectes al conjunt de resultats."
 
-#: www/softwaremap/trove_list.php:320
+#: www/softwaremap/trove_list.php:319
 msgid "Activity Percentile:&nbsp;"
 msgstr "Percentil d'activitat:&nbsp;"
 
-#: www/softwaremap/trove_list.php:324
+#: www/softwaremap/trove_list.php:323
 msgid "Registered:&nbsp;"
 msgstr "Registrat:&nbsp;"
 
@@ -23341,6 +23336,10 @@ msgstr "Nom d'usuari"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
+
+#, fuzzy
+#~ msgid "Project tree"
+#~ msgstr "Nom del nou projecte"
 
 #, fuzzy
 #~ msgid "Activity Ranking:&nbsp;"

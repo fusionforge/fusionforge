@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:18+0100\n"
+"POT-Creation-Date: 2013-10-28 18:27+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1376,7 +1376,7 @@ msgstr ""
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1126 www/softwaremap/full_list.php:122
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:323
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
 msgstr "Y-m-d H:i"
@@ -7699,7 +7699,7 @@ msgid "Registered: "
 msgstr "Registered"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
-#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:322
+#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:321
 #, fuzzy, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "프로젝트 활동 상황:&nbsp;"
@@ -17840,7 +17840,7 @@ msgstr ""
 msgid "Browse per tags defined by the projects."
 msgstr "No Such posting For This Project"
 
-#: www/include/Layout.class.php:1399
+#: www/include/Layout.class.php:1399 www/softwaremap/trove_list.php:84
 msgid "Project Tree"
 msgstr ""
 
@@ -22125,7 +22125,7 @@ msgstr "Script Type"
 msgid "en_US"
 msgstr "en_US"
 
-#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:266
+#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:265
 #, php-format
 msgid "More than <strong>%1$s</strong> projects in result set."
 msgstr "<strong>%1$s</strong>개 이상의 프로젝트가 결과에 포함되었습니다."
@@ -22174,11 +22174,6 @@ msgstr "소프트웨어 맵"
 msgid "That Trove category does not exist"
 msgstr "분류 기준이 존재하지 않습니다."
 
-#: www/softwaremap/trove_list.php:84
-#, fuzzy
-msgid "Project tree"
-msgstr "새 프로젝트 이름"
-
 #: www/softwaremap/trove_list.php:136
 #, fuzzy
 msgid "Now limiting view to projects in the following categories:"
@@ -22197,17 +22192,17 @@ msgstr "%1$s개의 프로젝트"
 msgid "Browse By"
 msgstr "정렬 기준:"
 
-#: www/softwaremap/trove_list.php:269
+#: www/softwaremap/trove_list.php:268
 #, fuzzy, php-format
 msgid "<strong>%1$s</strong> project in result set."
 msgid_plural "<strong>%1$s</strong> projects in result set."
 msgstr[0] "<strong>%1$s</strong>개의 프로젝트가 결과에 포함되었습니다."
 
-#: www/softwaremap/trove_list.php:320
+#: www/softwaremap/trove_list.php:319
 msgid "Activity Percentile:&nbsp;"
 msgstr "프로젝트 활동 상황:&nbsp;"
 
-#: www/softwaremap/trove_list.php:324
+#: www/softwaremap/trove_list.php:323
 msgid "Registered:&nbsp;"
 msgstr "등록된 날짜:&nbsp;"
 
@@ -23089,6 +23084,10 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "Project tree"
+#~ msgstr "새 프로젝트 이름"
 
 #, fuzzy
 #~ msgid "Activity Ranking:&nbsp;"

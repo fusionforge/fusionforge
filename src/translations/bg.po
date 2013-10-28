@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:18+0100\n"
+"POT-Creation-Date: 2013-10-28 18:27+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1369,7 +1369,7 @@ msgstr ""
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1126 www/softwaremap/full_list.php:122
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:323
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
 msgstr ""
@@ -7561,7 +7561,7 @@ msgid "Registered: "
 msgstr "Регистриране"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
-#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:322
+#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:321
 #, fuzzy, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "Процент на активност:&nbsp;"
@@ -17572,7 +17572,7 @@ msgstr ""
 msgid "Browse per tags defined by the projects."
 msgstr "Списък на всички издадени пакети по проекта."
 
-#: www/include/Layout.class.php:1399
+#: www/include/Layout.class.php:1399 www/softwaremap/trove_list.php:84
 msgid "Project Tree"
 msgstr ""
 
@@ -21754,7 +21754,7 @@ msgstr "Тип"
 msgid "en_US"
 msgstr ""
 
-#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:266
+#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:265
 #, php-format
 msgid "More than <strong>%1$s</strong> projects in result set."
 msgstr ""
@@ -21805,11 +21805,6 @@ msgstr ""
 msgid "That Trove category does not exist"
 msgstr ""
 
-#: www/softwaremap/trove_list.php:84
-#, fuzzy
-msgid "Project tree"
-msgstr "Проекти на потребителя"
-
 #: www/softwaremap/trove_list.php:136
 msgid "Now limiting view to projects in the following categories:"
 msgstr ""
@@ -21827,18 +21822,18 @@ msgstr ""
 msgid "Browse By"
 msgstr ""
 
-#: www/softwaremap/trove_list.php:269
+#: www/softwaremap/trove_list.php:268
 #, php-format
 msgid "<strong>%1$s</strong> project in result set."
 msgid_plural "<strong>%1$s</strong> projects in result set."
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/softwaremap/trove_list.php:320
+#: www/softwaremap/trove_list.php:319
 msgid "Activity Percentile:&nbsp;"
 msgstr "Процент на активност:&nbsp;"
 
-#: www/softwaremap/trove_list.php:324
+#: www/softwaremap/trove_list.php:323
 msgid "Registered:&nbsp;"
 msgstr "Регистриран на:&nbsp;"
 
@@ -22698,6 +22693,10 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Лична Информация"
+
+#, fuzzy
+#~ msgid "Project tree"
+#~ msgstr "Проекти на потребителя"
 
 #, fuzzy
 #~ msgid "Activity Ranking:&nbsp;"

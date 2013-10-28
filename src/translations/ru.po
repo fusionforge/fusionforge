@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:18+0100\n"
+"POT-Creation-Date: 2013-10-28 18:27+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1387,7 +1387,7 @@ msgstr ""
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1126 www/softwaremap/full_list.php:122
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:323
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
 msgstr "d.m.Y H:i"
@@ -7782,7 +7782,7 @@ msgid "Registered: "
 msgstr "Регистрирован"
 
 #: common/widget/Widget_ProjectInfo.class.php:83
-#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:322
+#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:321
 #, fuzzy, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "Активных участников сайта: <strong>%1$s</strong>"
@@ -18309,7 +18309,7 @@ msgstr ""
 msgid "Browse per tags defined by the projects."
 msgstr "Для проекта нет сообщений"
 
-#: www/include/Layout.class.php:1399
+#: www/include/Layout.class.php:1399 www/softwaremap/trove_list.php:84
 msgid "Project Tree"
 msgstr "Дерево проекта"
 
@@ -22709,7 +22709,7 @@ msgstr "Тип скрипта"
 msgid "en_US"
 msgstr "Английский"
 
-#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:266
+#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:265
 #, php-format
 msgid "More than <strong>%1$s</strong> projects in result set."
 msgstr "Запросу соответствует более, чем <strong>%1$s</strong> проектов."
@@ -22762,11 +22762,6 @@ msgstr "Карта программ"
 msgid "That Trove category does not exist"
 msgstr "Категория в каталоге проектов не существует"
 
-#: www/softwaremap/trove_list.php:84
-#, fuzzy
-msgid "Project tree"
-msgstr "Дерево проекта"
-
 #: www/softwaremap/trove_list.php:136
 #, fuzzy
 msgid "Now limiting view to projects in the following categories:"
@@ -22785,7 +22780,7 @@ msgstr "%1$s проектов"
 msgid "Browse By"
 msgstr "Просмотр по"
 
-#: www/softwaremap/trove_list.php:269
+#: www/softwaremap/trove_list.php:268
 #, php-format
 msgid "<strong>%1$s</strong> project in result set."
 msgid_plural "<strong>%1$s</strong> projects in result set."
@@ -22793,11 +22788,11 @@ msgstr[0] "<strong>%1$s</strong> проектов выделено."
 msgstr[1] "<strong>%1$s</strong> проекта выделено."
 msgstr[2] "<strong>%1$s</strong> проект выделен."
 
-#: www/softwaremap/trove_list.php:320
+#: www/softwaremap/trove_list.php:319
 msgid "Activity Percentile:&nbsp;"
 msgstr "Процент активности:&nbsp;"
 
-#: www/softwaremap/trove_list.php:324
+#: www/softwaremap/trove_list.php:323
 msgid "Registered:&nbsp;"
 msgstr "Зарегистрирован:&nbsp;"
 
@@ -23686,6 +23681,10 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "Project tree"
+#~ msgstr "Дерево проекта"
 
 #, fuzzy
 #~ msgid "Activity Ranking:&nbsp;"
