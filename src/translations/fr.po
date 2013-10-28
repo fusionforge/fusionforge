@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:27+0100\n"
+"POT-Creation-Date: 2013-10-28 18:31+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -316,15 +316,15 @@ msgstr "Dossier"
 #: www/register/index.php:187
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
-#: www/softwaremap/tag_cloud.php:143 www/survey/survey.php:51
-#: www/tracker/admin/index.php:190 www/tracker/reporting/index.php:126
-#: www/tracker/reporting/index.php:128 www/tracker/reporting/index.php:130
-#: www/tracker/reporting/index.php:132 www/tracker/reporting/index.php:134
-#: www/tracker/roadmap.php:175 www/tracker/roadmap.php:201
-#: www/tracker/roadmap.php:211 www/tracker/roadmap.php:223
-#: www/tracker/roadmap.php:238 www/tracker/roadmap.php:414
-#: www/tracker/roadmap.php:422 www/tracker/roadmap.php:435
-#: www/tracker/roadmap.php:468
+#: www/softwaremap/tag_cloud.php:143 www/softwaremap/trove_list.php:323
+#: www/survey/survey.php:51 www/tracker/admin/index.php:190
+#: www/tracker/reporting/index.php:126 www/tracker/reporting/index.php:128
+#: www/tracker/reporting/index.php:130 www/tracker/reporting/index.php:132
+#: www/tracker/reporting/index.php:134 www/tracker/roadmap.php:175
+#: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
+#: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
+#: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
+#: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
 msgid ": "
 msgstr " : "
 
@@ -15628,7 +15628,7 @@ msgstr[1] "Recherche de projets selon les critères <em>%s</em> : %d résultats
 msgid "Full Name"
 msgstr "Nom complet"
 
-#: www/admin/search.php:150
+#: www/admin/search.php:150 www/softwaremap/trove_list.php:323
 msgid "Registered"
 msgstr "Inscrit"
 
@@ -21910,10 +21910,6 @@ msgstr[1] "<strong>%1$s</strong> projets trouvés."
 msgid "Activity Percentile:&nbsp;"
 msgstr "Taux d'activité&nbsp;:&nbsp;"
 
-#: www/softwaremap/trove_list.php:323
-msgid "Registered:&nbsp;"
-msgstr "Enregistré le&nbsp;:&nbsp;"
-
 #: www/source.php:36
 msgid "A file must be specified for this page."
 msgstr "Cette page requiert qu'un fichier soit spécifié."
@@ -22773,6 +22769,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Registered:&nbsp;"
+#~ msgstr "Enregistré le&nbsp;:&nbsp;"
 
 #~ msgid "Project tree"
 #~ msgstr "Arbre des projets"

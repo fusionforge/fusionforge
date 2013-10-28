@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:27+0100\n"
+"POT-Creation-Date: 2013-10-28 18:31+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -330,15 +330,15 @@ msgstr "Имя файла"
 #: www/register/index.php:187
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
-#: www/softwaremap/tag_cloud.php:143 www/survey/survey.php:51
-#: www/tracker/admin/index.php:190 www/tracker/reporting/index.php:126
-#: www/tracker/reporting/index.php:128 www/tracker/reporting/index.php:130
-#: www/tracker/reporting/index.php:132 www/tracker/reporting/index.php:134
-#: www/tracker/roadmap.php:175 www/tracker/roadmap.php:201
-#: www/tracker/roadmap.php:211 www/tracker/roadmap.php:223
-#: www/tracker/roadmap.php:238 www/tracker/roadmap.php:414
-#: www/tracker/roadmap.php:422 www/tracker/roadmap.php:435
-#: www/tracker/roadmap.php:468
+#: www/softwaremap/tag_cloud.php:143 www/softwaremap/trove_list.php:323
+#: www/survey/survey.php:51 www/tracker/admin/index.php:190
+#: www/tracker/reporting/index.php:126 www/tracker/reporting/index.php:128
+#: www/tracker/reporting/index.php:130 www/tracker/reporting/index.php:132
+#: www/tracker/reporting/index.php:134 www/tracker/roadmap.php:175
+#: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
+#: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
+#: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
+#: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
 msgid ": "
 msgstr ""
 
@@ -16445,7 +16445,7 @@ msgstr[2] "Поиск группы по параметру <em>%1$s</em>: %2$s �
 msgid "Full Name"
 msgstr "Полное имя"
 
-#: www/admin/search.php:150
+#: www/admin/search.php:150 www/softwaremap/trove_list.php:323
 msgid "Registered"
 msgstr "Регистрирован"
 
@@ -22792,10 +22792,6 @@ msgstr[2] "<strong>%1$s</strong> проект выделен."
 msgid "Activity Percentile:&nbsp;"
 msgstr "Процент активности:&nbsp;"
 
-#: www/softwaremap/trove_list.php:323
-msgid "Registered:&nbsp;"
-msgstr "Зарегистрирован:&nbsp;"
-
 #: www/source.php:36
 msgid "A file must be specified for this page."
 msgstr "Файл должен быть указан на этой странице."
@@ -23681,6 +23677,9 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#~ msgid "Registered:&nbsp;"
+#~ msgstr "Зарегистрирован:&nbsp;"
 
 #, fuzzy
 #~ msgid "Project tree"

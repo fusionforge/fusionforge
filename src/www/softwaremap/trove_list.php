@@ -320,7 +320,7 @@ if ( $cat === 'c' ) {
 				print '<br />';
 				sprintf(_('Activity Ranking: <strong>%d</strong>'), number_format($row_grp['ranking'],2));
 			}
-			print '<br />'._('Registered:&nbsp;').' <strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong>';
+			print '<br />'._('Registered'). _(': ') . '<strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong>';
 			print "</td></tr></table>\n<hr />\n";
 		} // end if for row and range chacking
 	}

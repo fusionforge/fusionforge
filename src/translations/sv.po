@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:27+0100\n"
+"POT-Creation-Date: 2013-10-28 18:31+0100\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -330,15 +330,15 @@ msgstr "Filnamn"
 #: www/register/index.php:187
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
-#: www/softwaremap/tag_cloud.php:143 www/survey/survey.php:51
-#: www/tracker/admin/index.php:190 www/tracker/reporting/index.php:126
-#: www/tracker/reporting/index.php:128 www/tracker/reporting/index.php:130
-#: www/tracker/reporting/index.php:132 www/tracker/reporting/index.php:134
-#: www/tracker/roadmap.php:175 www/tracker/roadmap.php:201
-#: www/tracker/roadmap.php:211 www/tracker/roadmap.php:223
-#: www/tracker/roadmap.php:238 www/tracker/roadmap.php:414
-#: www/tracker/roadmap.php:422 www/tracker/roadmap.php:435
-#: www/tracker/roadmap.php:468
+#: www/softwaremap/tag_cloud.php:143 www/softwaremap/trove_list.php:323
+#: www/survey/survey.php:51 www/tracker/admin/index.php:190
+#: www/tracker/reporting/index.php:126 www/tracker/reporting/index.php:128
+#: www/tracker/reporting/index.php:130 www/tracker/reporting/index.php:132
+#: www/tracker/reporting/index.php:134 www/tracker/roadmap.php:175
+#: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
+#: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
+#: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
+#: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
 msgid ": "
 msgstr ""
 
@@ -16030,7 +16030,7 @@ msgstr[1] "Användarsökning med urval"
 msgid "Full Name"
 msgstr "Fullt namn"
 
-#: www/admin/search.php:150
+#: www/admin/search.php:150 www/softwaremap/trove_list.php:323
 msgid "Registered"
 msgstr "Registrerad"
 
@@ -22243,10 +22243,6 @@ msgstr[1] "<strong>%1$s</strong> projekt i resultatmängden."
 msgid "Activity Percentile:&nbsp;"
 msgstr "Aktivitet i procent:"
 
-#: www/softwaremap/trove_list.php:323
-msgid "Registered:&nbsp;"
-msgstr "Registrerad:"
-
 #: www/source.php:36
 msgid "A file must be specified for this page."
 msgstr ""
@@ -23135,6 +23131,9 @@ msgstr "Användarenamn"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
+
+#~ msgid "Registered:&nbsp;"
+#~ msgstr "Registrerad:"
 
 #, fuzzy
 #~ msgid "Project tree"
