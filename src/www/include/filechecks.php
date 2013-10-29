@@ -61,7 +61,7 @@ function filechecks_targz($filename) {
 		for ($i=0;$i<count($output);$i++) {
 			$exitout .= "<br />" . $output[$i] . "\n";
 		}
-		exit_error(sprintf(_('Failed tar/gz integrity check. Output follows: <p>$s</p>'),$exitout),'');
+		exit_error(_('Failed tar/gz integrity check. Output follows:') . '<p>'.$exitout.'</p>','');
 	}
 }
 
@@ -77,7 +77,7 @@ function filechecks_gz($filename) {
 		for ($i=0;$i<count($output);$i++) {
 			$exitout .= "<br />" . $output[$i] . "\n";
 		}
-		exit_error(sprintf(_('Failed gzip integrity check. Output follows: <p>$s</p>'),$exitout),'');
+		exit_error(_('Failed gzip integrity check. Output follows:') . '<p>'.$exitout.'</p>','');
 	}
 }
 

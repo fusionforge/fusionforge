@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 14:21+0100\n"
+"POT-Creation-Date: 2013-10-29 14:44+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -17113,14 +17113,12 @@ msgid "All project activities"
 msgstr "Toutes les activités de projet"
 
 #: www/include/filechecks.php:64
-#, php-format
-msgid "Failed tar/gz integrity check. Output follows: <p>$s</p>"
-msgstr "Erreur lors de la vérification d'intégrité tar/gz : <p>$s</p>"
+msgid "Failed tar/gz integrity check. Output follows:"
+msgstr "Erreur lors de la vérification d'intégrité tar/gz. Sortie :"
 
 #: www/include/filechecks.php:80
-#, php-format
-msgid "Failed gzip integrity check. Output follows: <p>$s</p>"
-msgstr "Erreur lors de la vérification d'intégrité gzip : <p>$s</p>"
+msgid "Failed gzip integrity check. Output follows:"
+msgstr "Erreur lors de la vérification d'intégrité gzip. Sortie :"
 
 #: www/include/filechecks.php:174
 msgid "This file does not have a system-recognized filename type."

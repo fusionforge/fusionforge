@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 14:41+0100\n"
+"POT-Creation-Date: 2013-10-29 14:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16207,13 +16207,11 @@ msgid "All project activities"
 msgstr ""
 
 #: www/include/filechecks.php:64
-#, php-format
-msgid "Failed tar/gz integrity check. Output follows: <p>$s</p>"
+msgid "Failed tar/gz integrity check. Output follows:"
 msgstr ""
 
 #: www/include/filechecks.php:80
-#, php-format
-msgid "Failed gzip integrity check. Output follows: <p>$s</p>"
+msgid "Failed gzip integrity check. Output follows:"
 msgstr ""
 
 #: www/include/filechecks.php:174

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 14:21+0100\n"
+"POT-Creation-Date: 2013-10-29 14:44+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -17866,13 +17866,11 @@ msgid "All project activities"
 msgstr "Actividade do proxecto"
 
 #: www/include/filechecks.php:64
-#, php-format
-msgid "Failed tar/gz integrity check. Output follows: <p>$s</p>"
+msgid "Failed tar/gz integrity check. Output follows:"
 msgstr ""
 
 #: www/include/filechecks.php:80
-#, php-format
-msgid "Failed gzip integrity check. Output follows: <p>$s</p>"
+msgid "Failed gzip integrity check. Output follows:"
 msgstr ""
 
 #: www/include/filechecks.php:174
