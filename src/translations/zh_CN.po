@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 11:07+0100\n"
+"POT-Creation-Date: 2013-10-29 11:20+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16766,9 +16766,9 @@ msgstr ""
 msgid "Search in project"
 msgstr "搜索整个的项目"
 
-#: www/forum/admin/attachments.php:42
-msgid "Forums: Administration"
-msgstr "讨论区：管理"
+#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:426
+msgid "Forums Administration"
+msgstr "讨论区管理"
 
 #: www/forum/admin/index.php:121 www/forum/admin/index.php:154
 msgid "Email All Posts To:"
@@ -16863,11 +16863,6 @@ msgstr "%s 没有讨论区"
 #, php-format
 msgid "Move thread from %s forum to the following forum:"
 msgstr ""
-
-#: www/forum/admin/index.php:426
-#, fuzzy
-msgid "Forums Administration"
-msgstr "讨论区：管理"
 
 #: www/forum/admin/index.php:467 www/forum/admin/monitor.php:48
 #, fuzzy
@@ -23117,6 +23112,9 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#~ msgid "Forums: Administration"
+#~ msgstr "讨论区：管理"
 
 #, fuzzy
 #~ msgid "Change PW"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 11:12+0100\n"
+"POT-Creation-Date: 2013-10-29 11:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15430,8 +15430,8 @@ msgstr ""
 msgid "Search in project"
 msgstr ""
 
-#: www/forum/admin/attachments.php:42
-msgid "Forums: Administration"
+#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:426
+msgid "Forums Administration"
 msgstr ""
 
 #: www/forum/admin/index.php:121 www/forum/admin/index.php:154
@@ -15520,10 +15520,6 @@ msgstr ""
 #: www/forum/admin/index.php:403
 #, php-format
 msgid "Move thread from %s forum to the following forum:"
-msgstr ""
-
-#: www/forum/admin/index.php:426
-msgid "Forums Administration"
 msgstr ""
 
 #: www/forum/admin/index.php:467 www/forum/admin/monitor.php:48

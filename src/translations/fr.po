@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 11:07+0100\n"
+"POT-Creation-Date: 2013-10-29 11:20+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -15908,7 +15908,7 @@ msgstr "Date d'ajout"
 
 #: www/admin/userlist.php:117 www/include/user_home.php:35
 msgid "User Profile"
-msgstr "Profil d'utilisateur"
+msgstr "Profil de l'utilisateur"
 
 #: www/admin/userlist.php:120
 msgid "Suspend"
@@ -16292,9 +16292,9 @@ msgstr "Retour"
 msgid "Search in project"
 msgstr "Chercher dans le projet"
 
-#: www/forum/admin/attachments.php:42
-msgid "Forums: Administration"
-msgstr "Forums : Administration"
+#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:426
+msgid "Forums Administration"
+msgstr "Administration des forums"
 
 #: www/forum/admin/index.php:121 www/forum/admin/index.php:154
 msgid "Email All Posts To:"
@@ -16390,10 +16390,6 @@ msgstr "Pas de forum trouvé pour %s"
 #, php-format
 msgid "Move thread from %s forum to the following forum:"
 msgstr "Déplacer la discussion depuis le forum %s vers le forum suivant :"
-
-#: www/forum/admin/index.php:426
-msgid "Forums Administration"
-msgstr "Administration des forums"
 
 #: www/forum/admin/index.php:467 www/forum/admin/monitor.php:48
 msgid "Monitoring Users"
@@ -22744,6 +22740,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Forums: Administration"
+#~ msgstr "Forums : Administration"
 
 #~ msgid "Change PW"
 #~ msgstr "Changer le mot de passe"

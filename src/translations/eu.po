@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 11:07+0100\n"
+"POT-Creation-Date: 2013-10-29 11:20+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16786,9 +16786,9 @@ msgstr ""
 msgid "Search in project"
 msgstr "Izar proiektuak"
 
-#: www/forum/admin/attachments.php:42
-msgid "Forums: Administration"
-msgstr "Foroak: administrazioa"
+#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:426
+msgid "Forums Administration"
+msgstr "Foroak administrazioa"
 
 #: www/forum/admin/index.php:121 www/forum/admin/index.php:154
 msgid "Email All Posts To:"
@@ -16884,11 +16884,6 @@ msgstr "%s -erako ez dira fororik aurkitu"
 #, php-format
 msgid "Move thread from %s forum to the following forum:"
 msgstr ""
-
-#: www/forum/admin/index.php:426
-#, fuzzy
-msgid "Forums Administration"
-msgstr "Foroak: administrazioa"
 
 #: www/forum/admin/index.php:467 www/forum/admin/monitor.php:48
 #, fuzzy
@@ -23184,6 +23179,9 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#~ msgid "Forums: Administration"
+#~ msgstr "Foroak: administrazioa"
 
 #, fuzzy
 #~ msgid "Change PW"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 11:07+0100\n"
+"POT-Creation-Date: 2013-10-29 11:20+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -16492,9 +16492,9 @@ msgstr "Regresar"
 msgid "Search in project"
 msgstr "Buscar en proyecto"
 
-#: www/forum/admin/attachments.php:42
-msgid "Forums: Administration"
-msgstr "Foros: Administración"
+#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:426
+msgid "Forums Administration"
+msgstr "Administración Foros"
 
 #: www/forum/admin/index.php:121 www/forum/admin/index.php:154
 msgid "Email All Posts To:"
@@ -16589,10 +16589,6 @@ msgstr "No se encontraron foros para %s"
 #, php-format
 msgid "Move thread from %s forum to the following forum:"
 msgstr "Mover hilo desde %s foro a el siguiente foro:"
-
-#: www/forum/admin/index.php:426
-msgid "Forums Administration"
-msgstr "Administración Foros"
 
 #: www/forum/admin/index.php:467 www/forum/admin/monitor.php:48
 msgid "Monitoring Users"
@@ -22915,6 +22911,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Forums: Administration"
+#~ msgstr "Foros: Administración"
 
 #~ msgid "Change PW"
 #~ msgstr "Cambiar Clave"

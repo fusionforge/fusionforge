@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 11:07+0100\n"
+"POT-Creation-Date: 2013-10-29 11:20+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16697,9 +16697,9 @@ msgstr ""
 msgid "Search in project"
 msgstr "상위 프로젝트"
 
-#: www/forum/admin/attachments.php:42
-msgid "Forums: Administration"
-msgstr "게시판: 관리"
+#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:426
+msgid "Forums Administration"
+msgstr "게시판 관리"
 
 #: www/forum/admin/index.php:121 www/forum/admin/index.php:154
 msgid "Email All Posts To:"
@@ -16794,11 +16794,6 @@ msgstr "%1$s에 대한 게시판이 없습니다."
 #, php-format
 msgid "Move thread from %s forum to the following forum:"
 msgstr ""
-
-#: www/forum/admin/index.php:426
-#, fuzzy
-msgid "Forums Administration"
-msgstr "게시판: 관리"
 
 #: www/forum/admin/index.php:467 www/forum/admin/monitor.php:48
 #, fuzzy
@@ -23062,6 +23057,9 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#~ msgid "Forums: Administration"
+#~ msgstr "게시판: 관리"
 
 #, fuzzy
 #~ msgid "Change PW"

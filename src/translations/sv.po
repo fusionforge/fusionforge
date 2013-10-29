@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 11:07+0100\n"
+"POT-Creation-Date: 2013-10-29 11:20+0100\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16722,9 +16722,9 @@ msgstr ""
 msgid "Search in project"
 msgstr "Främsta projekt"
 
-#: www/forum/admin/attachments.php:42
-msgid "Forums: Administration"
-msgstr "Forum: Administration"
+#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:426
+msgid "Forums Administration"
+msgstr "Forum Administration"
 
 #: www/forum/admin/index.php:121 www/forum/admin/index.php:154
 msgid "Email All Posts To:"
@@ -16820,11 +16820,6 @@ msgstr "Hittade inga forum för %s"
 #, php-format
 msgid "Move thread from %s forum to the following forum:"
 msgstr ""
-
-#: www/forum/admin/index.php:426
-#, fuzzy
-msgid "Forums Administration"
-msgstr "Forum: Administration"
 
 #: www/forum/admin/index.php:467 www/forum/admin/monitor.php:48
 #, fuzzy
@@ -23111,6 +23106,9 @@ msgstr "Användarenamn"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
+
+#~ msgid "Forums: Administration"
+#~ msgstr "Forum: Administration"
 
 #, fuzzy
 #~ msgid "Change PW"

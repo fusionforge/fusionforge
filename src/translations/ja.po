@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 11:07+0100\n"
+"POT-Creation-Date: 2013-10-29 11:20+0100\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16372,9 +16372,9 @@ msgstr ""
 msgid "Search in project"
 msgstr "トッププロジェクト"
 
-#: www/forum/admin/attachments.php:42
-msgid "Forums: Administration"
-msgstr "フォーラム: 管理"
+#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:426
+msgid "Forums Administration"
+msgstr "フォーラム 管理"
 
 #: www/forum/admin/index.php:121 www/forum/admin/index.php:154
 msgid "Email All Posts To:"
@@ -16465,11 +16465,6 @@ msgstr "ニュースが見つかりません"
 #, php-format
 msgid "Move thread from %s forum to the following forum:"
 msgstr ""
-
-#: www/forum/admin/index.php:426
-#, fuzzy
-msgid "Forums Administration"
-msgstr "フォーラム: 管理"
 
 #: www/forum/admin/index.php:467 www/forum/admin/monitor.php:48
 #, fuzzy
@@ -22487,6 +22482,9 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr "%sのパーソナルページ"
+
+#~ msgid "Forums: Administration"
+#~ msgstr "フォーラム: 管理"
 
 #, fuzzy
 #~ msgid "Change PW"
