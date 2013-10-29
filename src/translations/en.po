@@ -17853,7 +17853,7 @@ msgid "Subproject Updated successfully"
 msgstr ""
 
 #: www/pm/admin/index.php:154
-msgid "Subproject Successfully Deleted"
+msgid "Subproject successfully deleted."
 msgstr ""
 
 #: www/pm/admin/index.php:177

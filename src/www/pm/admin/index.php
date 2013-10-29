@@ -151,7 +151,7 @@ if (getStringFromRequest('post_changes')) {
 		if (!$pg->delete(getStringFromRequest('sure'),getStringFromRequest('really_sure'))) {
 			exit_error($pg->getErrorMessage(),'pm');
 		} else {
-			$feedback .= _('Subproject Successfully Deleted');
+			$feedback .= _('Subproject successfully deleted.');
 			$group_project_id=0;
 			$delete=false;
 		}

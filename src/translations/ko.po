@@ -19271,7 +19271,7 @@ msgstr "성공적으로 갱신되었습니다."
 
 #: www/pm/admin/index.php:154
 #, fuzzy
-msgid "Subproject Successfully Deleted"
+msgid "Subproject successfully deleted."
 msgstr "JOB inserted successfully"
 
 #: www/pm/admin/index.php:177

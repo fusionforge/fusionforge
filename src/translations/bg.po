@@ -18988,7 +18988,7 @@ msgstr "Обновено успешно"
 
 #: www/pm/admin/index.php:154
 #, fuzzy
-msgid "Subproject Successfully Deleted"
+msgid "Subproject successfully deleted."
 msgstr "Създадено успешно"
 
 #: www/pm/admin/index.php:177

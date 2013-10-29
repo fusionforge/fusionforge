@@ -18949,7 +18949,7 @@ msgid "Subproject Updated successfully"
 msgstr "Sous-projet mis à jour avec succès"
 
 #: www/pm/admin/index.php:154
-msgid "Subproject Successfully Deleted"
+msgid "Subproject successfully deleted."
 msgstr "Sous-projet supprimé avec succès"
 
 #: www/pm/admin/index.php:177

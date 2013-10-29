@@ -18468,7 +18468,7 @@ msgstr "Grupa dokumentów: Nazwa jest wymagana"
 
 #: www/pm/admin/index.php:154
 #, fuzzy
-msgid "Subproject Successfully Deleted"
+msgid "Subproject successfully deleted."
 msgstr "Pomyślnie Zmieniono Hasło"
 
 #: www/pm/admin/index.php:177

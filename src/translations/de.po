@@ -19697,7 +19697,7 @@ msgstr "Aktualisierung erfolgreich"
 
 #: www/pm/admin/index.php:154
 #, fuzzy
-msgid "Subproject Successfully Deleted"
+msgid "Subproject successfully deleted."
 msgstr "%1$s erfolgreich gelöscht."
 
 #: www/pm/admin/index.php:177

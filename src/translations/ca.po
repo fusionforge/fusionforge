@@ -19467,7 +19467,7 @@ msgstr "Actualitzat amb èxit"
 
 #: www/pm/admin/index.php:154
 #, fuzzy
-msgid "Subproject Successfully Deleted"
+msgid "Subproject successfully deleted."
 msgstr "%1$s suprimit(s) amb èxit."
 
 #: www/pm/admin/index.php:177
