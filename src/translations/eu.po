@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 10:37+0100\n"
+"POT-Creation-Date: 2013-10-29 10:45+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3690,7 +3690,8 @@ msgid "Admin"
 msgstr "Admin"
 
 #: common/include/Navigation.class.php:398 www/admin/approve-pending.php:137
-#: www/admin/groupedit.php:99
+#: www/admin/groupedit.php:99 www/admin/useredit.php:276
+#: www/admin/useredit.php:307
 msgid "Project Admin"
 msgstr "Proiektuaren administraria"
 
@@ -16336,11 +16337,6 @@ msgstr "Unix izena"
 msgid "Operations"
 msgstr "Eragiketak"
 
-#: www/admin/useredit.php:276 www/admin/useredit.php:307
-#, fuzzy
-msgid "[Project Admin]"
-msgstr "Proiektuaren administraria"
-
 #: www/admin/useredit.php:286
 #, fuzzy
 msgid "This user is not a member of any project."
@@ -23209,6 +23205,10 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
+
+#, fuzzy
+#~ msgid "[Project Admin]"
+#~ msgstr "Proiektuaren administraria"
 
 #~ msgid "Registered:&nbsp;"
 #~ msgstr "Erregistratua:&amp;nbsp;"

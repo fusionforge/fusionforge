@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 10:37+0100\n"
+"POT-Creation-Date: 2013-10-29 10:45+0100\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3407,7 +3407,8 @@ msgid "Admin"
 msgstr ""
 
 #: common/include/Navigation.class.php:398 www/admin/approve-pending.php:137
-#: www/admin/groupedit.php:99
+#: www/admin/groupedit.php:99 www/admin/useredit.php:276
+#: www/admin/useredit.php:307
 msgid "Project Admin"
 msgstr ""
 
@@ -15035,10 +15036,6 @@ msgstr ""
 #: www/admin/vhost.php:173 www/project/admin/database.php:211
 #: www/project/admin/vhost.php:138
 msgid "Operations"
-msgstr ""
-
-#: www/admin/useredit.php:276 www/admin/useredit.php:307
-msgid "[Project Admin]"
 msgstr ""
 
 #: www/admin/useredit.php:286

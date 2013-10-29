@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 10:37+0100\n"
+"POT-Creation-Date: 2013-10-29 10:45+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -3728,7 +3728,8 @@ msgid "Admin"
 msgstr "Verwalten"
 
 #: common/include/Navigation.class.php:398 www/admin/approve-pending.php:137
-#: www/admin/groupedit.php:99
+#: www/admin/groupedit.php:99 www/admin/useredit.php:276
+#: www/admin/useredit.php:307
 msgid "Project Admin"
 msgstr "Projekt-Admin"
 
@@ -16562,11 +16563,6 @@ msgstr "Unix Name"
 msgid "Operations"
 msgstr "Operationen"
 
-#: www/admin/useredit.php:276 www/admin/useredit.php:307
-#, fuzzy
-msgid "[Project Admin]"
-msgstr "Projekt-Admin"
-
 #: www/admin/useredit.php:286
 #, fuzzy
 msgid "This user is not a member of any project."
@@ -23614,6 +23610,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "[Project Admin]"
+#~ msgstr "Projekt-Admin"
 
 #~ msgid "Error - Site has SCM but no plugins registered"
 #~ msgstr ""

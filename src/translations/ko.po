@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 10:37+0100\n"
+"POT-Creation-Date: 2013-10-29 10:45+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3687,7 +3687,8 @@ msgid "Admin"
 msgstr "관리"
 
 #: common/include/Navigation.class.php:398 www/admin/approve-pending.php:137
-#: www/admin/groupedit.php:99
+#: www/admin/groupedit.php:99 www/admin/useredit.php:276
+#: www/admin/useredit.php:307
 msgid "Project Admin"
 msgstr ""
 
@@ -16245,11 +16246,6 @@ msgstr "Unix 이름"
 msgid "Operations"
 msgstr "동작"
 
-#: www/admin/useredit.php:276 www/admin/useredit.php:307
-#, fuzzy
-msgid "[Project Admin]"
-msgstr "프로젝트 관리자"
-
 #: www/admin/useredit.php:286
 #, fuzzy
 msgid "This user is not a member of any project."
@@ -23085,6 +23081,10 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "[Project Admin]"
+#~ msgstr "프로젝트 관리자"
 
 #~ msgid "Registered:&nbsp;"
 #~ msgstr "등록된 날짜:&nbsp;"
