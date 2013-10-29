@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 11:37+0100\n"
+"POT-Creation-Date: 2013-10-29 11:45+0100\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -312,22 +312,22 @@ msgstr "檔案名"
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:190
 #: www/frs/admin/qrs.php:197 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
-#: www/people/admin/index.php:52 www/people/admin/index.php:65
-#: www/people/editprofile.php:233 www/people/skills_utils.php:121
-#: www/people/viewprofile.php:47 www/pm/add_task.php:50 www/pm/add_task.php:63
-#: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
-#: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
-#: www/pm/add_task.php:124 www/pm/add_task.php:130 www/pm/add_task.php:149
-#: www/pm/admin/index.php:96 www/pm/admin/index.php:118
-#: www/pm/admin/index.php:258 www/pm/calendar.php:59 www/pm/detail_task.php:66
-#: www/pm/detail_task.php:71 www/pm/detail_task.php:86
-#: www/pm/detail_task.php:90 www/pm/detail_task.php:97
-#: www/pm/detail_task.php:104 www/pm/mod_task.php:52 www/pm/mod_task.php:61
-#: www/pm/mod_task.php:66 www/pm/mod_task.php:78 www/pm/mod_task.php:83
-#: www/pm/mod_task.php:97 www/pm/mod_task.php:173 www/pm/mod_task.php:183
-#: www/pm/mod_task.php:197 www/pm/mod_task.php:202 www/pm/mod_task.php:212
-#: www/pm/mod_task.php:323 www/project/admin/roledelete.php:62
-#: www/register/index.php:187
+#: www/new/index.php:98 www/people/admin/index.php:52
+#: www/people/admin/index.php:65 www/people/editprofile.php:233
+#: www/people/skills_utils.php:121 www/people/viewprofile.php:47
+#: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
+#: www/pm/add_task.php:74 www/pm/add_task.php:81 www/pm/add_task.php:88
+#: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
+#: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/admin/index.php:96
+#: www/pm/admin/index.php:118 www/pm/admin/index.php:258
+#: www/pm/calendar.php:59 www/pm/detail_task.php:66 www/pm/detail_task.php:71
+#: www/pm/detail_task.php:86 www/pm/detail_task.php:90
+#: www/pm/detail_task.php:97 www/pm/detail_task.php:104 www/pm/mod_task.php:52
+#: www/pm/mod_task.php:61 www/pm/mod_task.php:66 www/pm/mod_task.php:78
+#: www/pm/mod_task.php:83 www/pm/mod_task.php:97 www/pm/mod_task.php:173
+#: www/pm/mod_task.php:183 www/pm/mod_task.php:197 www/pm/mod_task.php:202
+#: www/pm/mod_task.php:212 www/pm/mod_task.php:323
+#: www/project/admin/roledelete.php:62 www/register/index.php:187
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/softwaremap/tag_cloud.php:143 www/softwaremap/trove_list.php:323
@@ -2979,8 +2979,9 @@ msgstr "軟體地圖"
 #: plugins/mantisbt/view/admin/editVersion.php:61
 #: plugins/mantisbt/view/admin/viewVersion.php:49
 #: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
-#: www/snippet/addversion.php:94 www/snippet/addversion.php:217
-#: www/snippet/package.php:169 www/snippet/submit.php:136
+#: www/new/index.php:98 www/snippet/addversion.php:94
+#: www/snippet/addversion.php:217 www/snippet/package.php:169
+#: www/snippet/submit.php:136
 msgid "Version"
 msgstr "版本"
 
@@ -18649,10 +18650,6 @@ msgstr "發佈者："
 msgid "Module:"
 msgstr "模組："
 
-#: www/new/index.php:98
-msgid "Version:"
-msgstr "版本："
-
 #: www/new/index.php:108
 msgid "This project has not submitted a description"
 msgstr "這個專案還沒有填寫描述"
@@ -23135,6 +23132,9 @@ msgstr "帳號"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
+
+#~ msgid "Version:"
+#~ msgstr "版本："
 
 #~ msgid "Theme:"
 #~ msgstr "佈景："

@@ -95,7 +95,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 			<tr>
 				<td>'._('Module:').' '.$row_new['module_name'].'
 				</td>
-				<td>'._('Version:').' '.$row_new['release_version'].'
+				<td>'._('Version')._(': ').$row_new['release_version'].'
 				</td>
 				<td>'.date("M d, h:iA",$row_new['release_date']).'
 				</td>
