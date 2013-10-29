@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 11:20+0100\n"
+"POT-Creation-Date: 2013-10-29 11:37+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1626,21 +1626,21 @@ msgstr "Date de début"
 #: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
 #: www/account/index.php:141 www/account/index.php:145
 #: www/account/index.php:150 www/account/index.php:171
-#: www/account/index.php:202 www/account/index.php:209
-#: www/account/index.php:216 www/account/index.php:223
-#: www/account/index.php:230 www/account/lostpw.php:89
-#: www/account/pending-resend.php:65 www/account/pending-resend.php:67
-#: www/account/register.php:169 www/account/register.php:218
-#: www/account/register.php:224 www/account/register.php:230
-#: www/account/register.php:236 www/account/verify.php:76
-#: www/account/verify.php:78 www/account/verify.php:86
-#: www/activity/index.php:179 www/activity/index.php:180
-#: www/activity/index.php:181 www/admin/groupedit.php:107
-#: www/admin/groupedit.php:170 www/admin/massmail.php:94
-#: www/admin/massmail.php:112 www/admin/massmail.php:115
-#: www/admin/massmail.php:140 www/admin/trove/trove_cat_add.php:77
-#: www/admin/trove/trove_cat_add.php:110 www/admin/trove/trove_cat_add.php:112
-#: www/admin/trove/trove_cat_add.php:114
+#: www/account/index.php:183 www/account/index.php:202
+#: www/account/index.php:209 www/account/index.php:216
+#: www/account/index.php:223 www/account/index.php:230
+#: www/account/lostpw.php:89 www/account/pending-resend.php:65
+#: www/account/pending-resend.php:67 www/account/register.php:169
+#: www/account/register.php:218 www/account/register.php:224
+#: www/account/register.php:230 www/account/register.php:236
+#: www/account/verify.php:76 www/account/verify.php:78
+#: www/account/verify.php:86 www/activity/index.php:179
+#: www/activity/index.php:180 www/activity/index.php:181
+#: www/admin/groupedit.php:107 www/admin/groupedit.php:170
+#: www/admin/massmail.php:94 www/admin/massmail.php:112
+#: www/admin/massmail.php:115 www/admin/massmail.php:140
+#: www/admin/trove/trove_cat_add.php:77 www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:112 www/admin/trove/trove_cat_add.php:114
 #: www/admin/trove/trove_cat_edit.php:115
 #: www/admin/trove/trove_cat_edit.php:141
 #: www/admin/trove/trove_cat_edit.php:144
@@ -14229,9 +14229,9 @@ msgstr "Langue"
 msgid "Timezone:"
 msgstr "Fuseau horaire :"
 
-#: www/account/index.php:183
-msgid "Theme:"
-msgstr "Thème :"
+#: www/account/index.php:183 www/account/register.php:201
+msgid "Theme"
+msgstr "Thème"
 
 #: www/account/index.php:189 www/account/register.php:206
 msgid "Country:"
@@ -14526,10 +14526,6 @@ msgstr "Mot de passe (confirmez) :"
 #: www/account/register.php:189
 msgid "Language Choice:"
 msgstr "Langue :"
-
-#: www/account/register.php:201
-msgid "Theme"
-msgstr "Thème"
 
 #: www/account/register.php:212
 #, php-format
@@ -22740,6 +22736,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Theme:"
+#~ msgstr "Thème :"
 
 #~ msgid "Forums: Administration"
 #~ msgstr "Forums : Administration"

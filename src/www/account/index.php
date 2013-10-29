@@ -180,7 +180,7 @@ echo $HTML->boxTop(_('Account Maintenance'));
 </tr>
 
 <tr>
-<td><?php echo _('Theme:'); ?> </td>
+<td><?php echo _('Theme')._(':'); ?> </td>
 <td><?php echo html_get_theme_popup('theme_id', $u->getThemeID()); ?>
 </td>
 </tr>
