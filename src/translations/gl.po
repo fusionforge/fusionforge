@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:41+0100\n"
+"POT-Creation-Date: 2013-10-29 10:17+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -3595,10 +3595,10 @@ msgstr "Novas "
 
 #: common/include/MailParser.class.php:35
 #, fuzzy
-msgid "Error - file too large"
+msgid "Error: file too large"
 msgstr "Produciuse un erro - esa característica non está activada."
 
-#: common/include/MailParser.class.php:86
+#: common/include/MailParser.class.php:85
 msgid "Error - only text/plain supported at this time"
 msgstr ""
 

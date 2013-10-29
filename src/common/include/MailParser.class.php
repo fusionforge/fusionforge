@@ -32,8 +32,7 @@ class MailParser extends Error {
 		$this->Error();
 		$size = filesize($input_file);
 		if ($size > $this->max_file_size) {
-			$this->setError(_("Error - file too large"));
-			return false;
+			return $this->setError(_("Error: file too large"));
 		}
 		$fo = fopen($input_file, 'r');
 		$input_data = fread($fo, $size);

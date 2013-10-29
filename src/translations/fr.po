@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 10:10+0100\n"
+"POT-Creation-Date: 2013-10-29 10:17+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -2145,7 +2145,6 @@ msgid "No space allowed."
 msgstr "Espace interdit."
 
 #: common/forum/Forum.class.php:203 common/forum/Forum.class.php:589
-#, fuzzy
 msgid "Mailing List exists with same name."
 msgstr "Il existe déjà une liste de diffusion portant ce nom."
 
@@ -3438,10 +3437,10 @@ msgid "News"
 msgstr "Annonces"
 
 #: common/include/MailParser.class.php:35
-msgid "Error - file too large"
-msgstr "Erreur - fichier trop volumineux"
+msgid "Error: file too large"
+msgstr "Erreur : fichier trop volumineux"
 
-#: common/include/MailParser.class.php:86
+#: common/include/MailParser.class.php:85
 msgid "Error - only text/plain supported at this time"
 msgstr ""
 
