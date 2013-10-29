@@ -92,7 +92,8 @@ html_use_jqueryjqplotpluginhighlighter();
 html_use_jqueryjqplotplugindateAxisRenderer();
 html_use_jqueryjqplotpluginBar();
 
-project_admin_header(array('title'=>_('Project Statistics').'','group'=>$group_id));
+project_admin_header(array('title'=>sprintf(_('Project Statistics for %s'), $group->getPublicName()),
+							'group'=>$group_id));
 
 //
 // BEGIN PAGE CONTENT CODE

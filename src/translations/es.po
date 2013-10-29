@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 11:45+0100\n"
+"POT-Creation-Date: 2013-10-29 14:21+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -1565,7 +1565,7 @@ msgstr "Acciones Masivas para ficheros seleccionados pendientes:"
 #: www/people/skills_utils.php:154 www/pm/add_task.php:95
 #: www/pm/browse_task.php:125 www/pm/browse_task.php:230
 #: www/pm/detail_task.php:86 www/pm/ganttpage.php:160 www/pm/mod_task.php:146
-#: www/project/stats/index.php:106 www/reporting/groupadded.php:66
+#: www/project/stats/index.php:107 www/reporting/groupadded.php:66
 #: www/reporting/groupcum.php:66 www/reporting/projectact.php:72
 #: www/reporting/projecttime.php:81 www/reporting/siteact.php:72
 #: www/reporting/sitetimebar.php:66 www/reporting/sitetime.php:79
@@ -1698,9 +1698,9 @@ msgstr "Fecha Inicial"
 #: www/pm/admin/index.php:331 www/pm/admin/index.php:341
 #: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
 #: www/pm/format_csv.php:86 www/pm/format_csv.php:89 www/pm/format_csv.php:93
-#: www/pm/format_csv.php:97 www/project/stats/index.php:104
-#: www/project/stats/index.php:105 www/project/stats/index.php:106
-#: www/project/stats/index.php:107 www/register/index.php:235
+#: www/pm/format_csv.php:97 www/project/stats/index.php:105
+#: www/project/stats/index.php:106 www/project/stats/index.php:107
+#: www/project/stats/index.php:108 www/register/index.php:235
 #: www/reporting/groupadded.php:65 www/reporting/groupadded.php:66
 #: www/reporting/groupadded.php:67 www/reporting/groupcum.php:65
 #: www/reporting/groupcum.php:66 www/reporting/groupcum.php:67
@@ -1742,7 +1742,7 @@ msgstr ":"
 #: www/people/skills_utils.php:155 www/pm/add_task.php:110
 #: www/pm/browse_task.php:126 www/pm/browse_task.php:232
 #: www/pm/detail_task.php:90 www/pm/ganttpage.php:161 www/pm/mod_task.php:160
-#: www/project/stats/index.php:107 www/reporting/groupadded.php:67
+#: www/project/stats/index.php:108 www/reporting/groupadded.php:67
 #: www/reporting/groupcum.php:67 www/reporting/projectact.php:73
 #: www/reporting/projecttime.php:82 www/reporting/siteact.php:73
 #: www/reporting/sitetimebar.php:67 www/reporting/sitetime.php:80
@@ -1756,7 +1756,7 @@ msgid "End Date"
 msgstr "Fecha Final"
 
 #: common/docman/views/reporting.php:96 www/activity/index.php:191
-#: www/frs/reporting/downloads.php:113 www/project/stats/index.php:110
+#: www/frs/reporting/downloads.php:113 www/project/stats/index.php:111
 #: www/reporting/groupadded.php:68 www/reporting/groupcum.php:68
 #: www/reporting/projectact.php:74 www/reporting/projecttime.php:83
 #: www/reporting/siteact.php:74 www/reporting/sitetimebar.php:68
@@ -6536,7 +6536,7 @@ msgstr "Campos personalizados"
 #: www/admin/massmail.php:135 www/frs/index.php:209
 #: www/people/editprofile.php:106 www/people/editprofile.php:277
 #: www/people/skills_utils.php:48 www/people/skills_utils.php:153
-#: www/project/stats/index.php:105 www/reporting/groupadded.php:65
+#: www/project/stats/index.php:106 www/reporting/groupadded.php:65
 #: www/reporting/groupcum.php:65 www/reporting/projectact.php:71
 #: www/reporting/projecttime.php:80 www/reporting/projecttime.php:93
 #: www/reporting/siteact.php:71 www/reporting/sitetime.php:78
@@ -17214,7 +17214,7 @@ msgstr "ID Modulo Fichero"
 msgid "File Release Reporting"
 msgstr "Reporte de Release de Ficheros"
 
-#: www/frs/reporting/downloads.php:121 www/project/stats/index.php:118
+#: www/frs/reporting/downloads.php:121 www/project/stats/index.php:119
 #: www/reporting/groupadded.php:53 www/reporting/groupcum.php:53
 #: www/reporting/projectact.php:55 www/reporting/projecttime.php:54
 #: www/reporting/siteact.php:54 www/reporting/sitetimebar.php:52
@@ -20127,9 +20127,9 @@ msgid "Project information updated"
 msgstr "Información del proyecto actualizada"
 
 #: www/project/admin/index.php:112
-#, fuzzy, php-format
+#, php-format
 msgid "Project Information for %s"
-msgstr "Información del proyecto"
+msgstr "Información del proyecto %s"
 
 #: www/project/admin/index.php:119
 msgid "Misc. Project Information"
@@ -20690,16 +20690,17 @@ msgstr[0] "Debe enviar un comentario al administrador:"
 msgstr[1] "Debe enviar un comentario al equipo de administración:"
 
 #: www/project/stats/index.php:95
-msgid "Project Statistics"
-msgstr "Estadísticas de proyecto"
+#, php-format
+msgid "Project Statistics for %s"
+msgstr "Estadísticas de proyecto %s"
 
-#: www/project/stats/index.php:104 www/reporting/projectact.php:70
+#: www/project/stats/index.php:105 www/reporting/projectact.php:70
 #: www/reporting/siteact.php:70 www/reporting/useract.php:85
 #: www/tracker/reporting/index.php:128
 msgid "Area"
 msgstr "Áreas"
 
-#: www/project/stats/index.php:121 www/tracker/reporting/index.php:147
+#: www/project/stats/index.php:122 www/tracker/reporting/index.php:147
 #: www/tracker/reporting/index.php:151
 #, fuzzy
 msgid "Error during graphic computation."
