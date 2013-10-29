@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 14:44+0100\n"
+"POT-Creation-Date: 2013-10-29 14:59+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -18483,8 +18483,8 @@ msgid "Comments"
 msgstr "Comentarios"
 
 #: www/news/news_utils.php:185
-msgid "Read&nbsp;More/Comment"
-msgstr "Leer&nbsp;más/Comentar"
+msgid "Read More/Comment"
+msgstr "Leer más/Comentar"
 
 #: www/news/news_utils.php:212
 msgid "News archive"
@@ -19400,7 +19400,8 @@ msgstr "Subir datos en las tareas"
 msgid ""
 "This page allows you to export or import all the tasks using a CSV (<a href="
 "\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated "
-"Values</a>) File. This format can be used to view tasks using Microsoft Excel."
+"Values</a>) File. This format can be used to view tasks using Microsoft "
+"Excel."
 msgstr ""
 "Esta pagina permite exportar ó importar todas las tareas usando un CSV "
 "(<a·href=\"http://en.wikipedia.org/wiki/Comma-separated_values"
@@ -22904,6 +22905,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
 
+#~ msgid "Read&nbsp;More/Comment"
+#~ msgstr "Leer&nbsp;más/Comentar"
+
 #~ msgid "Version:"
 #~ msgstr "Versión:"
 
@@ -24866,9 +24870,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "File Release System for %s"
 #~ msgstr "Sistema de Publicación de Ficheros de %s"
-
-#~ msgid "Read More/Comment"
-#~ msgstr "Leer más/Comentar"
 
 #~ msgid "Displaying %1$s per page. Projects sorted by alphabetical order."
 #~ msgstr " Mostrando %1$s por paǵina. Proyectos ordenados alfabéticamente."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 14:44+0100\n"
+"POT-Creation-Date: 2013-10-29 14:59+0100\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18880,8 +18880,8 @@ msgid "Comments"
 msgstr "Commenti"
 
 #: www/news/news_utils.php:185
-msgid "Read&nbsp;More/Comment"
-msgstr "Leggi&nbsp;altro/Replica"
+msgid "Read More/Comment"
+msgstr "Leggi altro/Replica"
 
 #: www/news/news_utils.php:212
 msgid "News archive"
@@ -19804,7 +19804,8 @@ msgstr "Effettua l'upload dei dati nel Gestore Attività"
 msgid ""
 "This page allows you to export or import all the tasks using a CSV (<a href="
 "\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated "
-"Values</a>) File. This format can be used to view tasks using Microsoft Excel."
+"Values</a>) File. This format can be used to view tasks using Microsoft "
+"Excel."
 msgstr ""
 
 #: www/pm/csv.php:80
@@ -23320,6 +23321,9 @@ msgstr "Non è stato inserito alcun file"
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
 
+#~ msgid "Read&nbsp;More/Comment"
+#~ msgstr "Leggi&nbsp;altro/Replica"
+
 #~ msgid "Version:"
 #~ msgstr "Versione"
 
@@ -24987,9 +24991,6 @@ msgstr "Pagina Personale"
 
 #~ msgid "Monitored Items"
 #~ msgstr "Elementi monitorati"
-
-#~ msgid "Read More/Comment"
-#~ msgstr "Leggi altro/Replica"
 
 #, fuzzy
 #~ msgid "Bazaar Repository Browser"

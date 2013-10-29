@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 14:44+0100\n"
+"POT-Creation-Date: 2013-10-29 14:59+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -18338,7 +18338,7 @@ msgid "Comments"
 msgstr "Commentaires"
 
 #: www/news/news_utils.php:185
-msgid "Read&nbsp;More/Comment"
+msgid "Read More/Comment"
 msgstr "Lire la suite/Commenter"
 
 #: www/news/news_utils.php:212
@@ -19255,7 +19255,8 @@ msgstr "Charger des données dans le gestionnaire de tâches"
 msgid ""
 "This page allows you to export or import all the tasks using a CSV (<a href="
 "\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated "
-"Values</a>) File. This format can be used to view tasks using Microsoft Excel."
+"Values</a>) File. This format can be used to view tasks using Microsoft "
+"Excel."
 msgstr ""
 "Cette page permet d'exporter ou d'importer toutes les tâches au format <a "
 "href=\"http://fr.wikipedia.org/wiki/Comma-separated_values\">CSV</a>. Ce "
@@ -22732,6 +22733,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
+#~ msgid "Read&nbsp;More/Comment"
+#~ msgstr "Lire la suite/Commenter"
+
 #~ msgid "Project Statistics"
 #~ msgstr "Statistiques de projet"
 
@@ -26069,9 +26073,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "News monitoring started"
 #~ msgstr "Surveillance des annonces activée"
-
-#~ msgid "Read More/Comment"
-#~ msgstr "Lire la suite/Commenter"
 
 #~ msgid ""
 #~ "You can post news about your project if you are an admin on your project. "

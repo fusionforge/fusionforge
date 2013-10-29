@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 14:44+0100\n"
+"POT-Creation-Date: 2013-10-29 14:59+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18859,8 +18859,8 @@ msgid "Comments"
 msgstr "Comentaris"
 
 #: www/news/news_utils.php:185
-msgid "Read&nbsp;More/Comment"
-msgstr "Llegeix-ne&nbsp;més/Comenta"
+msgid "Read More/Comment"
+msgstr "Llegeix-ne més/Comenta"
 
 #: www/news/news_utils.php:212
 msgid "News archive"
@@ -19789,7 +19789,8 @@ msgstr "Pujar dades al gestor de tasques"
 msgid ""
 "This page allows you to export or import all the tasks using a CSV (<a href="
 "\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated "
-"Values</a>) File. This format can be used to view tasks using Microsoft Excel."
+"Values</a>) File. This format can be used to view tasks using Microsoft "
+"Excel."
 msgstr ""
 
 #: www/pm/csv.php:80
@@ -23298,6 +23299,9 @@ msgstr "Nom d'usuari"
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
 
+#~ msgid "Read&nbsp;More/Comment"
+#~ msgstr "Llegeix-ne&nbsp;més/Comenta"
+
 #~ msgid "Version:"
 #~ msgstr "Versió:"
 
@@ -24887,9 +24891,6 @@ msgstr "La meva pàgina personal"
 
 #~ msgid "Project totals"
 #~ msgstr "Totals de projecte"
-
-#~ msgid "Read More/Comment"
-#~ msgstr "Llegeix-ne més/Comenta"
 
 #~ msgid "Role/Position"
 #~ msgstr "Rol/Posició"

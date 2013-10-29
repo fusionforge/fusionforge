@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 14:44+0100\n"
+"POT-Creation-Date: 2013-10-29 14:59+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -19084,7 +19084,8 @@ msgid "Comments"
 msgstr "Kommentar"
 
 #: www/news/news_utils.php:185
-msgid "Read&nbsp;More/Comment"
+#, fuzzy
+msgid "Read More/Comment"
 msgstr "Weiterlesen/Kommentieren"
 
 #: www/news/news_utils.php:212
@@ -20022,7 +20023,8 @@ msgstr "Daten in den Auftrags-Manager hochladen"
 msgid ""
 "This page allows you to export or import all the tasks using a CSV (<a href="
 "\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated "
-"Values</a>) File. This format can be used to view tasks using Microsoft Excel."
+"Values</a>) File. This format can be used to view tasks using Microsoft "
+"Excel."
 msgstr ""
 "Diese Seite erlaubt Ihnen eine CVS-Datei zu nutzen um alle Aufgaben zu "
 "exportieren oder importieren (<a href=\"http://en.wikipedia.org/wiki/Comma-"

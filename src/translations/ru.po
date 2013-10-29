@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 14:44+0100\n"
+"POT-Creation-Date: 2013-10-29 14:59+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -19169,8 +19169,8 @@ msgid "Comments"
 msgstr "Коментарии"
 
 #: www/news/news_utils.php:185
-msgid "Read&nbsp;More/Comment"
-msgstr "Подробнее/Оставить&nbsp;комментарий"
+msgid "Read More/Comment"
+msgstr "Подробнее/Оставить комментарий"
 
 #: www/news/news_utils.php:212
 msgid "News archive"
@@ -20104,7 +20104,8 @@ msgstr "Вставить данные в управление задачами"
 msgid ""
 "This page allows you to export or import all the tasks using a CSV (<a href="
 "\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated "
-"Values</a>) File. This format can be used to view tasks using Microsoft Excel."
+"Values</a>) File. This format can be used to view tasks using Microsoft "
+"Excel."
 msgstr ""
 
 #: www/pm/csv.php:80
@@ -23645,6 +23646,9 @@ msgstr "Имя участника обязательно"
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
 
+#~ msgid "Read&nbsp;More/Comment"
+#~ msgstr "Подробнее/Оставить&nbsp;комментарий"
+
 #~ msgid "Version:"
 #~ msgstr "Версия:"
 
@@ -25505,9 +25509,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "Monitored Items"
 #~ msgstr "Наблюдаемые объекты"
-
-#~ msgid "Read More/Comment"
-#~ msgstr "Подробнее/Оставить комментарий"
 
 #~ msgid ""
 #~ "You can post news about your project if you are an admin on your project. "

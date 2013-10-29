@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 14:44+0100\n"
+"POT-Creation-Date: 2013-10-29 14:59+0100\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18692,8 +18692,8 @@ msgid "Comments"
 msgstr ""
 
 #: www/news/news_utils.php:185
-msgid "Read&nbsp;More/Comment"
-msgstr "Read&nbsp;Mer/Kommentar"
+msgid "Read More/Comment"
+msgstr "Read Mer/Kommentar"
 
 #: www/news/news_utils.php:212
 msgid "News archive"
@@ -19610,7 +19610,8 @@ msgstr ""
 msgid ""
 "This page allows you to export or import all the tasks using a CSV (<a href="
 "\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated "
-"Values</a>) File. This format can be used to view tasks using Microsoft Excel."
+"Values</a>) File. This format can be used to view tasks using Microsoft "
+"Excel."
 msgstr ""
 
 #: www/pm/csv.php:80
@@ -23098,6 +23099,9 @@ msgstr "Användarenamn"
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
 
+#~ msgid "Read&nbsp;More/Comment"
+#~ msgstr "Read&nbsp;Mer/Kommentar"
+
 #~ msgid "Version:"
 #~ msgstr "Version:"
 
@@ -24370,9 +24374,6 @@ msgstr "Min personliga sida"
 
 #~ msgid "Project totals"
 #~ msgstr "Projekttotaler"
-
-#~ msgid "Read More/Comment"
-#~ msgstr "Read Mer/Kommentar"
 
 #, fuzzy
 #~ msgid "Bazaar Repository Browser"

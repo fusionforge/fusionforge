@@ -24,7 +24,7 @@
  */
 
 function news_header($params) {
-	global $HTML,$group_id,$news_name,$news_id;
+	global $HTML, $group_id, $news_name,$news_id;
 
 	if (!forge_get_config('use_news')) {
 		exit_disabled();
@@ -88,9 +88,9 @@ function news_show_latest($group_id=0,$limit=10,$show_summaries=true,$allow_subm
 		Show a simple list of the latest news items with a link to the forum
 	*/
 	if ($tail_headlines == -1) {
-		$l = 0 ;
+		$l = 0;
 	} else {
-		$l = $limit + $tail_headlines ;
+		$l = $limit + $tail_headlines;
 	}
 	$result = db_query_params ('
 SELECT groups.group_name, groups.unix_group_name, groups.group_id,
@@ -182,7 +182,7 @@ ORDER BY post_date DESC',
 				}
 
 				if ($show_forum) {
-					$link_text =  _('Read&nbsp;More/Comment') ;
+					$link_text = _('Read More/Comment') ;
 					$extra_params = array( 'class'      => 'dot-link',
 					             		   'title'      => $link_text . ' ' . $t_thread_title);
 					$return .= "\n";

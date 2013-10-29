@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 14:44+0100\n"
+"POT-Creation-Date: 2013-10-29 14:59+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -19051,8 +19051,8 @@ msgid "Comments"
 msgstr "Comentarios "
 
 #: www/news/news_utils.php:185
-msgid "Read&nbsp;More/Comment"
-msgstr "Ler&nbsp;máis/Comentar"
+msgid "Read More/Comment"
+msgstr "Ler máis/Comentar"
 
 #: www/news/news_utils.php:212
 msgid "News archive"
@@ -19991,7 +19991,8 @@ msgstr "Subir datos ao xestor de tarefas"
 msgid ""
 "This page allows you to export or import all the tasks using a CSV (<a href="
 "\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated "
-"Values</a>) File. This format can be used to view tasks using Microsoft Excel."
+"Values</a>) File. This format can be used to view tasks using Microsoft "
+"Excel."
 msgstr ""
 
 #: www/pm/csv.php:80
@@ -23510,6 +23511,9 @@ msgstr "Non se introduciu un nome de usuario"
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
 
+#~ msgid "Read&nbsp;More/Comment"
+#~ msgstr "Ler&nbsp;máis/Comentar"
+
 #~ msgid "Version:"
 #~ msgstr "Versión:"
 
@@ -25607,9 +25611,6 @@ msgstr "Páxina persoal de %s"
 
 #~ msgid "Monitored Items"
 #~ msgstr "Elementos monitorizados"
-
-#~ msgid "Read More/Comment"
-#~ msgstr "Ler máis/Comentar"
 
 #~ msgid ""
 #~ "You can post news about your project if you are an admin on your project. "

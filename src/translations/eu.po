@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 14:44+0100\n"
+"POT-Creation-Date: 2013-10-29 14:59+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18768,8 +18768,8 @@ msgid "Comments"
 msgstr "Iruzkinak"
 
 #: www/news/news_utils.php:185
-msgid "Read&nbsp;More/Comment"
-msgstr "Gehiago&nbsp;irakurri/Azalpenak idatzi"
+msgid "Read More/Comment"
+msgstr "Gehiago irakurri/Azalpenak idatzi"
 
 #: www/news/news_utils.php:212
 msgid "News archive"
@@ -19686,7 +19686,8 @@ msgstr ""
 msgid ""
 "This page allows you to export or import all the tasks using a CSV (<a href="
 "\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated "
-"Values</a>) File. This format can be used to view tasks using Microsoft Excel."
+"Values</a>) File. This format can be used to view tasks using Microsoft "
+"Excel."
 msgstr ""
 
 #: www/pm/csv.php:80
@@ -23171,6 +23172,9 @@ msgstr "Ez da erabiltzaile-izenik eman"
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
 
+#~ msgid "Read&nbsp;More/Comment"
+#~ msgstr "Gehiago&nbsp;irakurri/Azalpenak idatzi"
+
 #~ msgid "Version:"
 #~ msgstr "Bertsioa:"
 
@@ -24632,9 +24636,6 @@ msgstr "Nere orri pertsonala"
 
 #~ msgid "Project totals"
 #~ msgstr "Proiektuaren erabatekoak"
-
-#~ msgid "Read More/Comment"
-#~ msgstr "Gehiago irakurri/Azalpenak idatzi"
 
 #, fuzzy
 #~ msgid "Bazaar Repository Browser"
