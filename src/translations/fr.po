@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-28 18:46+0100\n"
+"POT-Creation-Date: 2013-10-29 10:10+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -12092,7 +12092,6 @@ msgid ""
 msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:405
-#, fuzzy
 msgid "Missing a temporary folder."
 msgstr "Dossier temporaire manquant."
 
@@ -13535,9 +13534,8 @@ msgstr ""
 "avoir besoin de taper votre mot de passe."
 
 #: plugins/scmhg/common/HgPlugin.class.php:143
-#, fuzzy
 msgid "Hg Repository Browser"
-msgstr "Navigateur de dépôt"
+msgstr "Navigateur de dépôt Mercurial"
 
 #: plugins/scmhg/common/HgPlugin.class.php:145
 #, fuzzy
@@ -13551,9 +13549,8 @@ msgstr ""
 "fichier présent dans le dépôt."
 
 #: plugins/scmhg/common/HgPlugin.class.php:148
-#, fuzzy
 msgid "Browse Hg Repository"
-msgstr "Parcourir le dépôt CVS"
+msgstr "Parcourir le dépôt Mercurial"
 
 #: plugins/scmhg/common/HgPlugin.class.php:554
 #, php-format
@@ -14172,9 +14169,8 @@ msgstr ""
 "développeur d'un projet, et même lancer votre propre projet."
 
 #: www/account/index.php:74
-#, fuzzy
 msgid "You must supply a first name."
-msgstr "Vous devez saisir votre prénom"
+msgstr "Vous devez saisir votre prénom."
 
 #: www/account/index.php:77
 #, fuzzy
@@ -16172,24 +16168,20 @@ msgid "No Webdav interface enabled."
 msgstr "Pas d'interface Webdav active."
 
 #: www/docman/view.php:184 www/docman/view.php:226
-#, fuzzy
 msgid "Unable to open ZIP archive for download as ZIP"
-msgstr "Erreur lors de l'ouverture de l'archive ZIP pour sauvegarde."
+msgstr "Impossible d'ouvrir l'archive ZIP pour téléchargement"
 
 #: www/docman/view.php:195 www/docman/view.php:240
-#, fuzzy
 msgid "Unable to fill ZIP file."
-msgstr "Erreur lors de l'ouverture de l'archive ZIP pour sauvegarde."
+msgstr "Impossible de remplir le fichier ZIP."
 
 #: www/docman/view.php:199
-#, fuzzy
 msgid "Unable to fill ZIP archive for download as ZIP"
-msgstr "Erreur lors du remplissage de l'archive ZIP pour sauvegarde."
+msgstr "Impossible de remplir le fichier ZIP pour téléchargement"
 
 #: www/docman/view.php:202 www/docman/view.php:249
-#, fuzzy
 msgid "Unable to close ZIP archive for download as ZIP"
-msgstr "Erreur lors de la fermeture de l'archive ZIP pour sauvegarde."
+msgstr "Impossible de fermer le fichier ZIP pour téléchargement"
 
 #: www/docman/view.php:211 www/docman/view.php:258
 msgid "Unable to download ZIP archive"
@@ -16252,9 +16244,8 @@ msgid "Current values of the task’s…"
 msgstr "Valeurs actuelles de la tâche :"
 
 #: www/export/rssAboTask.php:144
-#, fuzzy
 msgid "Complete"
-msgstr "Taux d'achèvement :"
+msgstr "Terminé"
 
 #: www/export/rssAboTask.php:161 www/news/news_utils.php:179
 #: www/pm/include/ProjectTaskHTML.class.php:155
