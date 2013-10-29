@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 10:45+0100\n"
+"POT-Creation-Date: 2013-10-29 11:07+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2004,15 +2004,15 @@ msgstr "Kan parent niet aanpassen"
 #: plugins/scmgit/common/GitPlugin.class.php:1100
 #: www/admin/admin_table.php:161 www/admin/admin_table.php:325
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:150
-#: www/admin/useredit.php:231 www/forum/admin/index.php:185
-#: www/frs/admin/deletepackage.php:74 www/frs/admin/deleterelease.php:76
-#: www/frs/admin/index.php:184 www/frs/admin/showreleases.php:114
-#: www/news/admin/index.php:131 www/people/people_utils.php:178
-#: www/people/people_utils.php:322 www/people/skills_utils.php:46
-#: www/people/skills_utils.php:104 www/project/admin/vhost.php:145
-#: www/reporting/timeadd.php:163 www/snippet/detail.php:67
-#: www/survey/include/SurveyHTML.class.php:312 www/tracker/admin/index.php:103
-#: www/tracker/admin/index.php:180
+#: www/admin/useredit.php:231 www/admin/userlist.php:119
+#: www/forum/admin/index.php:185 www/frs/admin/deletepackage.php:74
+#: www/frs/admin/deleterelease.php:76 www/frs/admin/index.php:184
+#: www/frs/admin/showreleases.php:114 www/news/admin/index.php:131
+#: www/people/people_utils.php:178 www/people/people_utils.php:322
+#: www/people/skills_utils.php:46 www/people/skills_utils.php:104
+#: www/project/admin/vhost.php:145 www/reporting/timeadd.php:163
+#: www/snippet/detail.php:67 www/survey/include/SurveyHTML.class.php:312
+#: www/tracker/admin/index.php:103 www/tracker/admin/index.php:180
 msgid "Delete"
 msgstr "Wissen"
 
@@ -14568,6 +14568,7 @@ msgstr ""
 "Je dient nu %1$s terug te gaan naar \"Account voorkeursinstellingen\" %2$s."
 
 #: www/account/change_pw.php:87 www/account/index.php:152
+#: www/admin/userlist.php:121
 msgid "Change Password"
 msgstr "Wijzig wachtwoord"
 
@@ -16101,7 +16102,7 @@ msgstr "%1$s projecten"
 msgid "Inactive"
 msgstr ""
 
-#: www/admin/pluginman.php:257
+#: www/admin/pluginman.php:257 www/admin/userlist.php:118
 msgid "Activate"
 msgstr "Activeer"
 
@@ -16470,30 +16471,13 @@ msgstr ""
 msgid "Add date"
 msgstr "Datum toevoegen"
 
-#: www/admin/userlist.php:117
-#, fuzzy
-msgid "[DevProfile]"
-msgstr "Ontwikkelaarsprofiel"
-
-#: www/admin/userlist.php:118
-#, fuzzy
-msgid "[Activate]"
-msgstr "Activeer"
-
-#: www/admin/userlist.php:119
-#, fuzzy
-msgid "[Delete]"
-msgstr "Wissen"
+#: www/admin/userlist.php:117 www/include/user_home.php:35
+msgid "User Profile"
+msgstr "Gebruikersprofiel"
 
 #: www/admin/userlist.php:120
-#, fuzzy
-msgid "[Suspend]"
-msgstr "Opschorten"
-
-#: www/admin/userlist.php:121
-#, fuzzy
-msgid "[Change PW]"
-msgstr "Andere week"
+msgid "Suspend"
+msgstr "Opgeschort"
 
 #: www/admin/userlist.php:146
 msgid "User List"
@@ -18138,11 +18122,6 @@ msgstr ""
 #, fuzzy
 msgid "[Filter]"
 msgstr "Bestand"
-
-#: www/include/user_home.php:35
-#, fuzzy
-msgid "User Profile"
-msgstr "Bekijk een gebruikersprofiel"
 
 #: www/include/user_home.php:38
 msgid "Personal Information"
@@ -23368,6 +23347,26 @@ msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
 
 #, fuzzy
+#~ msgid "Change PW"
+#~ msgstr "Andere week"
+
+#, fuzzy
+#~ msgid "[DevProfile]"
+#~ msgstr "Ontwikkelaarsprofiel"
+
+#, fuzzy
+#~ msgid "[Activate]"
+#~ msgstr "Activeer"
+
+#, fuzzy
+#~ msgid "[Delete]"
+#~ msgstr "Wissen"
+
+#, fuzzy
+#~ msgid "[Suspend]"
+#~ msgstr "Opschorten"
+
+#, fuzzy
 #~ msgid "[Project Admin]"
 #~ msgstr "Projectbeheer"
 
@@ -24994,9 +24993,6 @@ msgstr "Mijn persoonlijke pagina"
 #~ msgstr ""
 #~ "Unix status aangepast conform web status, tenzij de status was 'Geen Unix "
 #~ "account (N)'"
-
-#~ msgid "Suspend"
-#~ msgstr "Opgeschort"
 
 #~ msgid "Project totals"
 #~ msgstr "Project totalen"

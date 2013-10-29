@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 10:45+0100\n"
+"POT-Creation-Date: 2013-10-29 11:07+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1906,15 +1906,15 @@ msgstr "Erreur lors de la création de l'objet Forum"
 #: plugins/scmgit/common/GitPlugin.class.php:1100
 #: www/admin/admin_table.php:161 www/admin/admin_table.php:325
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:150
-#: www/admin/useredit.php:231 www/forum/admin/index.php:185
-#: www/frs/admin/deletepackage.php:74 www/frs/admin/deleterelease.php:76
-#: www/frs/admin/index.php:184 www/frs/admin/showreleases.php:114
-#: www/news/admin/index.php:131 www/people/people_utils.php:178
-#: www/people/people_utils.php:322 www/people/skills_utils.php:46
-#: www/people/skills_utils.php:104 www/project/admin/vhost.php:145
-#: www/reporting/timeadd.php:163 www/snippet/detail.php:67
-#: www/survey/include/SurveyHTML.class.php:312 www/tracker/admin/index.php:103
-#: www/tracker/admin/index.php:180
+#: www/admin/useredit.php:231 www/admin/userlist.php:119
+#: www/forum/admin/index.php:185 www/frs/admin/deletepackage.php:74
+#: www/frs/admin/deleterelease.php:76 www/frs/admin/index.php:184
+#: www/frs/admin/showreleases.php:114 www/news/admin/index.php:131
+#: www/people/people_utils.php:178 www/people/people_utils.php:322
+#: www/people/skills_utils.php:46 www/people/skills_utils.php:104
+#: www/project/admin/vhost.php:145 www/reporting/timeadd.php:163
+#: www/snippet/detail.php:67 www/survey/include/SurveyHTML.class.php:312
+#: www/tracker/admin/index.php:103 www/tracker/admin/index.php:180
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -14042,6 +14042,7 @@ msgstr ""
 "utilisateur</a>."
 
 #: www/account/change_pw.php:87 www/account/index.php:152
+#: www/admin/userlist.php:121
 msgid "Change Password"
 msgstr "Modifier mon mot de passe"
 
@@ -15538,7 +15539,7 @@ msgstr "%d projets"
 msgid "Inactive"
 msgstr "Inactif"
 
-#: www/admin/pluginman.php:257
+#: www/admin/pluginman.php:257 www/admin/userlist.php:118
 msgid "Activate"
 msgstr "Activer"
 
@@ -15905,25 +15906,13 @@ msgstr "Pas d'utilisateur correspondant aux critères sélectionnés."
 msgid "Add date"
 msgstr "Date d'ajout"
 
-#: www/admin/userlist.php:117
-msgid "[DevProfile]"
-msgstr "[Profil du développeur]"
-
-#: www/admin/userlist.php:118
-msgid "[Activate]"
-msgstr "[Activer]"
-
-#: www/admin/userlist.php:119
-msgid "[Delete]"
-msgstr "[Supprimer]"
+#: www/admin/userlist.php:117 www/include/user_home.php:35
+msgid "User Profile"
+msgstr "Profil d'utilisateur"
 
 #: www/admin/userlist.php:120
-msgid "[Suspend]"
-msgstr "[Suspendre]"
-
-#: www/admin/userlist.php:121
-msgid "[Change PW]"
-msgstr "[Changer le mot de passe]"
+msgid "Suspend"
+msgstr "Suspendre"
 
 #: www/admin/userlist.php:146
 msgid "User List"
@@ -17526,10 +17515,6 @@ msgstr "(Filtrage activé)"
 #: www/include/trove.php:347
 msgid "[Filter]"
 msgstr "[Filtrer]"
-
-#: www/include/user_home.php:35
-msgid "User Profile"
-msgstr "Profil de développeur"
 
 #: www/include/user_home.php:38
 msgid "Personal Information"
@@ -22760,6 +22745,21 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
+#~ msgid "Change PW"
+#~ msgstr "Changer le mot de passe"
+
+#~ msgid "[DevProfile]"
+#~ msgstr "[Profil du développeur]"
+
+#~ msgid "[Activate]"
+#~ msgstr "[Activer]"
+
+#~ msgid "[Delete]"
+#~ msgstr "[Supprimer]"
+
+#~ msgid "[Suspend]"
+#~ msgstr "[Suspendre]"
+
 #, fuzzy
 #~ msgid "[Project Admin]"
 #~ msgstr "Administration du projet"
@@ -25836,9 +25836,6 @@ msgstr "Page personnelle de %s"
 #~ msgstr ""
 #~ "Statut Unix mis à jour en copiant le statut web, sauf s'il a la valeur "
 #~ "« Pas de compte Unix (N) »."
-
-#~ msgid "Suspend"
-#~ msgstr "Suspendre"
 
 #~ msgid "Do you really want to proceed?"
 #~ msgstr "Voulez-vous réellement continuer ?"

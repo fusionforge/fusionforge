@@ -114,11 +114,11 @@ function show_users_list ($users, $filter='', $sortorder='realname') {
 		echo '<td width="15%" class="align-center">';
 		echo ($u->getAddDate() ? date(_('Y-m-d H:i'), $u->getAddDate()) : '-');
 		echo '</td>';
-		echo '<td width="12%" style="text-align:center">'.util_make_link ('/developer/?form_dev='.$u->getID(),_('[DevProfile]')).'</td>';
-		echo '<td width="12%" style="text-align:center">'.util_make_link ('/admin/userlist.php?action=activate&amp;user_id='.$u->getID().$filter,_('[Activate]')).'</td>';
-		echo '<td width="12%" style="text-align:center">'.util_make_link ('/admin/userlist.php?action=delete&amp;user_id='.$u->getID().$filter,_('[Delete]')).'</td>';
-		echo '<td width="12%" style="text-align:center">'.util_make_link ('/admin/userlist.php?action=suspend&amp;user_id='.$u->getID().$filter,_('[Suspend]')).'</td>';
-		echo '<td width="12%" style="text-align:center">'.util_make_link ('/admin/passedit.php?user_id='.$u->getID().$filter,_('[Change PW]')).'</td>';
+		echo '<td width="15%" style="text-align:center">'.util_make_link ('/developer/?form_dev='.$u->getID(),_('User Profile')).'</td>';
+		echo '<td width="15%" style="text-align:center">'.util_make_link ('/admin/userlist.php?action=activate&amp;user_id='.$u->getID().$filter,_('Activate')).'</td>';
+		echo '<td width="15%" style="text-align:center">'.util_make_link ('/admin/userlist.php?action=delete&amp;user_id='.$u->getID().$filter,_('Delete')).'</td>';
+		echo '<td width="15%" style="text-align:center">'.util_make_link ('/admin/userlist.php?action=suspend&amp;user_id='.$u->getID().$filter,_('Suspend')).'</td>';
+		echo '<td width="12%" style="text-align:center">'.util_make_link ('/admin/passedit.php?user_id='.$u->getID().$filter,_('Change Password')).'</td>';
 		echo '</tr>';
 		$count ++;
 	}

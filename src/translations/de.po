@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 10:45+0100\n"
+"POT-Creation-Date: 2013-10-29 11:07+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -2013,15 +2013,15 @@ msgstr "Konnte kein Foren-Objekt einholen"
 #: plugins/scmgit/common/GitPlugin.class.php:1100
 #: www/admin/admin_table.php:161 www/admin/admin_table.php:325
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:150
-#: www/admin/useredit.php:231 www/forum/admin/index.php:185
-#: www/frs/admin/deletepackage.php:74 www/frs/admin/deleterelease.php:76
-#: www/frs/admin/index.php:184 www/frs/admin/showreleases.php:114
-#: www/news/admin/index.php:131 www/people/people_utils.php:178
-#: www/people/people_utils.php:322 www/people/skills_utils.php:46
-#: www/people/skills_utils.php:104 www/project/admin/vhost.php:145
-#: www/reporting/timeadd.php:163 www/snippet/detail.php:67
-#: www/survey/include/SurveyHTML.class.php:312 www/tracker/admin/index.php:103
-#: www/tracker/admin/index.php:180
+#: www/admin/useredit.php:231 www/admin/userlist.php:119
+#: www/forum/admin/index.php:185 www/frs/admin/deletepackage.php:74
+#: www/frs/admin/deleterelease.php:76 www/frs/admin/index.php:184
+#: www/frs/admin/showreleases.php:114 www/news/admin/index.php:131
+#: www/people/people_utils.php:178 www/people/people_utils.php:322
+#: www/people/skills_utils.php:46 www/people/skills_utils.php:104
+#: www/project/admin/vhost.php:145 www/reporting/timeadd.php:163
+#: www/snippet/detail.php:67 www/survey/include/SurveyHTML.class.php:312
+#: www/tracker/admin/index.php:103 www/tracker/admin/index.php:180
 msgid "Delete"
 msgstr "Löschen"
 
@@ -14682,6 +14682,7 @@ msgid "You should now <a href=\"%s\">Return to User Prefs</a>."
 msgstr "Sie sollten jetzt %1$s zu den Benutzereinstellungen zurückkehren %2$s."
 
 #: www/account/change_pw.php:87 www/account/index.php:152
+#: www/admin/userlist.php:121
 msgid "Change Password"
 msgstr "Ändere Passwort"
 
@@ -16225,7 +16226,7 @@ msgstr "%1$s Projekte"
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: www/admin/pluginman.php:257
+#: www/admin/pluginman.php:257 www/admin/userlist.php:118
 msgid "Activate"
 msgstr "Aktivieren"
 
@@ -16604,27 +16605,13 @@ msgstr ""
 msgid "Add date"
 msgstr "Datum hinzufügen"
 
-#: www/admin/userlist.php:117
-#, fuzzy
-msgid "[DevProfile]"
-msgstr "[Entwickler-Profil]"
-
-#: www/admin/userlist.php:118
-msgid "[Activate]"
-msgstr "[Aktivieren]"
-
-#: www/admin/userlist.php:119
-msgid "[Delete]"
-msgstr "[Löschen]"
+#: www/admin/userlist.php:117 www/include/user_home.php:35
+msgid "User Profile"
+msgstr "Benutzerprofil"
 
 #: www/admin/userlist.php:120
-msgid "[Suspend]"
-msgstr "[Sperren]"
-
-#: www/admin/userlist.php:121
-#, fuzzy
-msgid "[Change PW]"
-msgstr "Woche ändern"
+msgid "Suspend"
+msgstr "Gesperrt"
 
 #: www/admin/userlist.php:146
 msgid "User List"
@@ -18279,11 +18266,6 @@ msgstr "( Filter an)"
 #: www/include/trove.php:347
 msgid "[Filter]"
 msgstr "[Filter]"
-
-#: www/include/user_home.php:35
-#, fuzzy
-msgid "User Profile"
-msgstr "Ein Benutzerprofil anschauen"
 
 #: www/include/user_home.php:38
 msgid "Personal Information"
@@ -23612,6 +23594,23 @@ msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
 
 #, fuzzy
+#~ msgid "Change PW"
+#~ msgstr "Woche ändern"
+
+#, fuzzy
+#~ msgid "[DevProfile]"
+#~ msgstr "[Entwickler-Profil]"
+
+#~ msgid "[Activate]"
+#~ msgstr "[Aktivieren]"
+
+#~ msgid "[Delete]"
+#~ msgstr "[Löschen]"
+
+#~ msgid "[Suspend]"
+#~ msgstr "[Sperren]"
+
+#, fuzzy
 #~ msgid "[Project Admin]"
 #~ msgstr "Projekt-Admin"
 
@@ -25776,9 +25775,6 @@ msgstr "Persönliche Seite für %s"
 
 #~ msgid "Active site users: <strong>%1$s</strong>"
 #~ msgstr "Aktive Seitenbenutzer: <strong>%1$s</strong>"
-
-#~ msgid "Suspend"
-#~ msgstr "Gesperrt"
 
 #~ msgid "Project totals"
 #~ msgstr "Projektsumme"

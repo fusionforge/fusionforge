@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 10:45+0100\n"
+"POT-Creation-Date: 2013-10-29 11:07+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2005,15 +2005,15 @@ msgstr "无法更新上层文章"
 #: plugins/scmgit/common/GitPlugin.class.php:1100
 #: www/admin/admin_table.php:161 www/admin/admin_table.php:325
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:150
-#: www/admin/useredit.php:231 www/forum/admin/index.php:185
-#: www/frs/admin/deletepackage.php:74 www/frs/admin/deleterelease.php:76
-#: www/frs/admin/index.php:184 www/frs/admin/showreleases.php:114
-#: www/news/admin/index.php:131 www/people/people_utils.php:178
-#: www/people/people_utils.php:322 www/people/skills_utils.php:46
-#: www/people/skills_utils.php:104 www/project/admin/vhost.php:145
-#: www/reporting/timeadd.php:163 www/snippet/detail.php:67
-#: www/survey/include/SurveyHTML.class.php:312 www/tracker/admin/index.php:103
-#: www/tracker/admin/index.php:180
+#: www/admin/useredit.php:231 www/admin/userlist.php:119
+#: www/forum/admin/index.php:185 www/frs/admin/deletepackage.php:74
+#: www/frs/admin/deleterelease.php:76 www/frs/admin/index.php:184
+#: www/frs/admin/showreleases.php:114 www/news/admin/index.php:131
+#: www/people/people_utils.php:178 www/people/people_utils.php:322
+#: www/people/skills_utils.php:46 www/people/skills_utils.php:104
+#: www/project/admin/vhost.php:145 www/reporting/timeadd.php:163
+#: www/snippet/detail.php:67 www/survey/include/SurveyHTML.class.php:312
+#: www/tracker/admin/index.php:103 www/tracker/admin/index.php:180
 msgid "Delete"
 msgstr "删除"
 
@@ -14488,6 +14488,7 @@ msgid "You should now <a href=\"%s\">Return to User Prefs</a>."
 msgstr "您现在可以 %1$s 返回到帐号维护页面 %2$s。"
 
 #: www/account/change_pw.php:87 www/account/index.php:152
+#: www/admin/userlist.php:121
 msgid "Change Password"
 msgstr "改变密码"
 
@@ -15993,7 +15994,7 @@ msgstr "%1$s 个项目"
 msgid "Inactive"
 msgstr "不活跃"
 
-#: www/admin/pluginman.php:257
+#: www/admin/pluginman.php:257 www/admin/userlist.php:118
 msgid "Activate"
 msgstr "启用"
 
@@ -16359,30 +16360,15 @@ msgstr ""
 msgid "Add date"
 msgstr "添加日期"
 
-#: www/admin/userlist.php:117
+#: www/admin/userlist.php:117 www/include/user_home.php:35
 #, fuzzy
-msgid "[DevProfile]"
-msgstr "开发资料"
-
-#: www/admin/userlist.php:118
-#, fuzzy
-msgid "[Activate]"
-msgstr "启用"
-
-#: www/admin/userlist.php:119
-#, fuzzy
-msgid "[Delete]"
-msgstr "删除"
+msgid "User Profile"
+msgstr "查看用户个人能力"
 
 #: www/admin/userlist.php:120
 #, fuzzy
-msgid "[Suspend]"
-msgstr "暂停"
-
-#: www/admin/userlist.php:121
-#, fuzzy
-msgid "[Change PW]"
-msgstr "变更星期"
+msgid "Suspend"
+msgstr "已暂停"
 
 #: www/admin/userlist.php:146
 #, fuzzy
@@ -17983,11 +17969,6 @@ msgstr ""
 #, fuzzy
 msgid "[Filter]"
 msgstr "文件:"
-
-#: www/include/user_home.php:35
-#, fuzzy
-msgid "User Profile"
-msgstr "查看用户个人能力"
 
 #: www/include/user_home.php:38
 msgid "Personal Information"
@@ -23136,6 +23117,26 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Change PW"
+#~ msgstr "变更星期"
+
+#, fuzzy
+#~ msgid "[DevProfile]"
+#~ msgstr "开发资料"
+
+#, fuzzy
+#~ msgid "[Activate]"
+#~ msgstr "启用"
+
+#, fuzzy
+#~ msgid "[Delete]"
+#~ msgstr "删除"
+
+#, fuzzy
+#~ msgid "[Suspend]"
+#~ msgstr "暂停"
 
 #, fuzzy
 #~ msgid "[Project Admin]"

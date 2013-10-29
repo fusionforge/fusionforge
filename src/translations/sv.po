@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 10:45+0100\n"
+"POT-Creation-Date: 2013-10-29 11:07+0100\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1996,15 +1996,15 @@ msgstr "Kunde inte uppdatera förälder"
 #: plugins/scmgit/common/GitPlugin.class.php:1100
 #: www/admin/admin_table.php:161 www/admin/admin_table.php:325
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:150
-#: www/admin/useredit.php:231 www/forum/admin/index.php:185
-#: www/frs/admin/deletepackage.php:74 www/frs/admin/deleterelease.php:76
-#: www/frs/admin/index.php:184 www/frs/admin/showreleases.php:114
-#: www/news/admin/index.php:131 www/people/people_utils.php:178
-#: www/people/people_utils.php:322 www/people/skills_utils.php:46
-#: www/people/skills_utils.php:104 www/project/admin/vhost.php:145
-#: www/reporting/timeadd.php:163 www/snippet/detail.php:67
-#: www/survey/include/SurveyHTML.class.php:312 www/tracker/admin/index.php:103
-#: www/tracker/admin/index.php:180
+#: www/admin/useredit.php:231 www/admin/userlist.php:119
+#: www/forum/admin/index.php:185 www/frs/admin/deletepackage.php:74
+#: www/frs/admin/deleterelease.php:76 www/frs/admin/index.php:184
+#: www/frs/admin/showreleases.php:114 www/news/admin/index.php:131
+#: www/people/people_utils.php:178 www/people/people_utils.php:322
+#: www/people/skills_utils.php:46 www/people/skills_utils.php:104
+#: www/project/admin/vhost.php:145 www/reporting/timeadd.php:163
+#: www/snippet/detail.php:67 www/survey/include/SurveyHTML.class.php:312
+#: www/tracker/admin/index.php:103 www/tracker/admin/index.php:180
 msgid "Delete"
 msgstr "Ta bort"
 
@@ -14450,6 +14450,7 @@ msgid "You should now <a href=\"%s\">Return to User Prefs</a>."
 msgstr "Du skall nu %1$s återgå till användarinställningar %2$s."
 
 #: www/account/change_pw.php:87 www/account/index.php:152
+#: www/admin/userlist.php:121
 msgid "Change Password"
 msgstr "Ändra lösenord"
 
@@ -15946,7 +15947,7 @@ msgstr "%1$s projekt"
 msgid "Inactive"
 msgstr ""
 
-#: www/admin/pluginman.php:257
+#: www/admin/pluginman.php:257 www/admin/userlist.php:118
 msgid "Activate"
 msgstr "Aktivera"
 
@@ -16315,30 +16316,13 @@ msgstr ""
 msgid "Add date"
 msgstr ""
 
-#: www/admin/userlist.php:117
-#, fuzzy
-msgid "[DevProfile]"
-msgstr "Utvecklarprofil"
-
-#: www/admin/userlist.php:118
-#, fuzzy
-msgid "[Activate]"
-msgstr "Aktivera"
-
-#: www/admin/userlist.php:119
-#, fuzzy
-msgid "[Delete]"
-msgstr "Ta bort"
+#: www/admin/userlist.php:117 www/include/user_home.php:35
+msgid "User Profile"
+msgstr "Användarprofil"
 
 #: www/admin/userlist.php:120
-#, fuzzy
-msgid "[Suspend]"
-msgstr "Suspendera"
-
-#: www/admin/userlist.php:121
-#, fuzzy
-msgid "[Change PW]"
-msgstr "Förändring"
+msgid "Suspend"
+msgstr "Suspenderad"
 
 #: www/admin/userlist.php:146
 msgid "User List"
@@ -17959,11 +17943,6 @@ msgstr ""
 #, fuzzy
 msgid "[Filter]"
 msgstr "Fil"
-
-#: www/include/user_home.php:35
-#, fuzzy
-msgid "User Profile"
-msgstr "Visa en användarprofil"
 
 #: www/include/user_home.php:38
 msgid "Personal Information"
@@ -23134,6 +23113,26 @@ msgid "Personal Page for %s"
 msgstr "Min personliga sida"
 
 #, fuzzy
+#~ msgid "Change PW"
+#~ msgstr "Förändring"
+
+#, fuzzy
+#~ msgid "[DevProfile]"
+#~ msgstr "Utvecklarprofil"
+
+#, fuzzy
+#~ msgid "[Activate]"
+#~ msgstr "Aktivera"
+
+#, fuzzy
+#~ msgid "[Delete]"
+#~ msgstr "Ta bort"
+
+#, fuzzy
+#~ msgid "[Suspend]"
+#~ msgstr "Suspendera"
+
+#, fuzzy
 #~ msgid "[Project Admin]"
 #~ msgstr "Projekt admin"
 
@@ -24376,9 +24375,6 @@ msgstr "Min personliga sida"
 
 #~ msgid "Other Information"
 #~ msgstr "Annan information"
-
-#~ msgid "Suspend"
-#~ msgstr "Suspenderad"
 
 #~ msgid "Project totals"
 #~ msgstr "Projekttotaler"

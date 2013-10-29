@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 10:45+0100\n"
+"POT-Creation-Date: 2013-10-29 11:07+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2002,15 +2002,15 @@ msgstr "No s'ha pogut actualitzar elpare"
 #: plugins/scmgit/common/GitPlugin.class.php:1100
 #: www/admin/admin_table.php:161 www/admin/admin_table.php:325
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:150
-#: www/admin/useredit.php:231 www/forum/admin/index.php:185
-#: www/frs/admin/deletepackage.php:74 www/frs/admin/deleterelease.php:76
-#: www/frs/admin/index.php:184 www/frs/admin/showreleases.php:114
-#: www/news/admin/index.php:131 www/people/people_utils.php:178
-#: www/people/people_utils.php:322 www/people/skills_utils.php:46
-#: www/people/skills_utils.php:104 www/project/admin/vhost.php:145
-#: www/reporting/timeadd.php:163 www/snippet/detail.php:67
-#: www/survey/include/SurveyHTML.class.php:312 www/tracker/admin/index.php:103
-#: www/tracker/admin/index.php:180
+#: www/admin/useredit.php:231 www/admin/userlist.php:119
+#: www/forum/admin/index.php:185 www/frs/admin/deletepackage.php:74
+#: www/frs/admin/deleterelease.php:76 www/frs/admin/index.php:184
+#: www/frs/admin/showreleases.php:114 www/news/admin/index.php:131
+#: www/people/people_utils.php:178 www/people/people_utils.php:322
+#: www/people/skills_utils.php:46 www/people/skills_utils.php:104
+#: www/project/admin/vhost.php:145 www/reporting/timeadd.php:163
+#: www/snippet/detail.php:67 www/survey/include/SurveyHTML.class.php:312
+#: www/tracker/admin/index.php:103 www/tracker/admin/index.php:180
 msgid "Delete"
 msgstr "Suprimeix"
 
@@ -14561,6 +14561,7 @@ msgid "You should now <a href=\"%s\">Return to User Prefs</a>."
 msgstr "Ara haurieu de %1$s tornar a UserPrefs %2$s."
 
 #: www/account/change_pw.php:87 www/account/index.php:152
+#: www/admin/userlist.php:121
 msgid "Change Password"
 msgstr "Canvi de contrasenya"
 
@@ -16089,7 +16090,7 @@ msgstr "%1$s projectes"
 msgid "Inactive"
 msgstr ""
 
-#: www/admin/pluginman.php:257
+#: www/admin/pluginman.php:257 www/admin/userlist.php:118
 msgid "Activate"
 msgstr "Activa"
 
@@ -16461,30 +16462,13 @@ msgstr ""
 msgid "Add date"
 msgstr "Afegeix data"
 
-#: www/admin/userlist.php:117
-#, fuzzy
-msgid "[DevProfile]"
-msgstr "Perfil de desenvolupament"
-
-#: www/admin/userlist.php:118
-#, fuzzy
-msgid "[Activate]"
-msgstr "Activa"
-
-#: www/admin/userlist.php:119
-#, fuzzy
-msgid "[Delete]"
-msgstr "Suprimeix"
+#: www/admin/userlist.php:117 www/include/user_home.php:35
+msgid "User Profile"
+msgstr "Perfil d'usuari"
 
 #: www/admin/userlist.php:120
-#, fuzzy
-msgid "[Suspend]"
-msgstr "Suspèn"
-
-#: www/admin/userlist.php:121
-#, fuzzy
-msgid "[Change PW]"
-msgstr "Canvia la setmana"
+msgid "Suspend"
+msgstr "Suspès"
 
 #: www/admin/userlist.php:146
 msgid "User List"
@@ -18122,11 +18106,6 @@ msgstr ""
 #, fuzzy
 msgid "[Filter]"
 msgstr "Fitxer"
-
-#: www/include/user_home.php:35
-#, fuzzy
-msgid "User Profile"
-msgstr "Visualitza un perfil d'usuari"
 
 #: www/include/user_home.php:38
 msgid "Personal Information"
@@ -23335,6 +23314,26 @@ msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
 
 #, fuzzy
+#~ msgid "Change PW"
+#~ msgstr "Canvia la setmana"
+
+#, fuzzy
+#~ msgid "[DevProfile]"
+#~ msgstr "Perfil de desenvolupament"
+
+#, fuzzy
+#~ msgid "[Activate]"
+#~ msgstr "Activa"
+
+#, fuzzy
+#~ msgid "[Delete]"
+#~ msgstr "Suprimeix"
+
+#, fuzzy
+#~ msgid "[Suspend]"
+#~ msgstr "Suspèn"
+
+#, fuzzy
 #~ msgid "[Project Admin]"
 #~ msgstr "Administració del projecte"
 
@@ -24891,9 +24890,6 @@ msgstr "La meva pàgina personal"
 #~ msgstr ""
 #~ "Estat Unix actualitzat replicant l'estat de la web, excepte si té el "
 #~ "valor 'Sense compte Unix (N)'"
-
-#~ msgid "Suspend"
-#~ msgstr "Suspès"
 
 #~ msgid "Project totals"
 #~ msgstr "Totals de projecte"

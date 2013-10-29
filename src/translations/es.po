@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 10:45+0100\n"
+"POT-Creation-Date: 2013-10-29 11:07+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -1941,15 +1941,15 @@ msgstr "No se puedo obtener el objeto Forum"
 #: plugins/scmgit/common/GitPlugin.class.php:1100
 #: www/admin/admin_table.php:161 www/admin/admin_table.php:325
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:150
-#: www/admin/useredit.php:231 www/forum/admin/index.php:185
-#: www/frs/admin/deletepackage.php:74 www/frs/admin/deleterelease.php:76
-#: www/frs/admin/index.php:184 www/frs/admin/showreleases.php:114
-#: www/news/admin/index.php:131 www/people/people_utils.php:178
-#: www/people/people_utils.php:322 www/people/skills_utils.php:46
-#: www/people/skills_utils.php:104 www/project/admin/vhost.php:145
-#: www/reporting/timeadd.php:163 www/snippet/detail.php:67
-#: www/survey/include/SurveyHTML.class.php:312 www/tracker/admin/index.php:103
-#: www/tracker/admin/index.php:180
+#: www/admin/useredit.php:231 www/admin/userlist.php:119
+#: www/forum/admin/index.php:185 www/frs/admin/deletepackage.php:74
+#: www/frs/admin/deleterelease.php:76 www/frs/admin/index.php:184
+#: www/frs/admin/showreleases.php:114 www/news/admin/index.php:131
+#: www/people/people_utils.php:178 www/people/people_utils.php:322
+#: www/people/skills_utils.php:46 www/people/skills_utils.php:104
+#: www/project/admin/vhost.php:145 www/reporting/timeadd.php:163
+#: www/snippet/detail.php:67 www/survey/include/SurveyHTML.class.php:312
+#: www/tracker/admin/index.php:103 www/tracker/admin/index.php:180
 msgid "Delete"
 msgstr "Borrar"
 
@@ -14226,6 +14226,7 @@ msgid "You should now <a href=\"%s\">Return to User Prefs</a>."
 msgstr "Ahora debe <a href=\"%s\">regresar a las preferencias de usuario</a>."
 
 #: www/account/change_pw.php:87 www/account/index.php:152
+#: www/admin/userlist.php:121
 msgid "Change Password"
 msgstr "Cambiar Palabra Clave"
 
@@ -15739,7 +15740,7 @@ msgstr "%d proyectos"
 msgid "Inactive"
 msgstr "Inactivo"
 
-#: www/admin/pluginman.php:257
+#: www/admin/pluginman.php:257 www/admin/userlist.php:118
 msgid "Activate"
 msgstr "Activar"
 
@@ -16102,25 +16103,13 @@ msgstr ""
 msgid "Add date"
 msgstr "Añadir fecha"
 
-#: www/admin/userlist.php:117
-msgid "[DevProfile]"
-msgstr "Perfil de Colaborador"
-
-#: www/admin/userlist.php:118
-msgid "[Activate]"
-msgstr "Activar"
-
-#: www/admin/userlist.php:119
-msgid "[Delete]"
-msgstr "[Borrar]"
+#: www/admin/userlist.php:117 www/include/user_home.php:35
+msgid "User Profile"
+msgstr "Perfil de Usuario"
 
 #: www/admin/userlist.php:120
-msgid "[Suspend]"
-msgstr "Suspender"
-
-#: www/admin/userlist.php:121
-msgid "[Change PW]"
-msgstr "[Cambiar Clave]"
+msgid "Suspend"
+msgstr "Suspendido"
 
 #: www/admin/userlist.php:146
 msgid "User List"
@@ -17712,10 +17701,6 @@ msgstr "(Ahora Filtrando)"
 #: www/include/trove.php:347
 msgid "[Filter]"
 msgstr "[Filtro]"
-
-#: www/include/user_home.php:35
-msgid "User Profile"
-msgstr "Perfil de Usuario"
 
 #: www/include/user_home.php:38
 msgid "Personal Information"
@@ -22931,6 +22916,21 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
 
+#~ msgid "Change PW"
+#~ msgstr "Cambiar Clave"
+
+#~ msgid "[DevProfile]"
+#~ msgstr "Perfil de Colaborador"
+
+#~ msgid "[Activate]"
+#~ msgstr "Activar"
+
+#~ msgid "[Delete]"
+#~ msgstr "[Borrar]"
+
+#~ msgid "[Suspend]"
+#~ msgstr "Suspender"
+
 #, fuzzy
 #~ msgid "[Project Admin]"
 #~ msgstr "Administrador del Proyecto"
@@ -24866,9 +24866,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Active site users: <strong>%1$s</strong>"
 #~ msgstr "Usuarios del sistema activos: <strong>%1$s</strong>"
-
-#~ msgid "Suspend"
-#~ msgstr "Suspendido"
 
 #~ msgid "File Release System for %s"
 #~ msgstr "Sistema de Publicación de Ficheros de %s"
