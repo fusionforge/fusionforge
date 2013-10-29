@@ -89,8 +89,8 @@ class LDAP extends UNIX {
 	/**
 	 * gfLdapAdd() - Wrapper for ldap_add()
 	 *
-	 * @param		string	dn
-	 * @param		string	entry
+	 * @param		string	$dn		dn
+	 * @param		string	$entry	entry
 	 *
 	 * @return bool
 	 */
@@ -102,7 +102,7 @@ class LDAP extends UNIX {
 	/**
 	 * gfLdapDelete() - Wrapper for ldap_delete()
 	 *
-	 * @param		string	dn
+	 * @param		string	$dn		dn
 	 *
 	 * @return bool
 	 */
@@ -114,8 +114,8 @@ class LDAP extends UNIX {
 	/**
 	 * gfLdapModify() - Wrapper for ldap_modify()
 	 *
-	 * @param		string	dn
-	 * @param		string	entry
+	 * @param		string	$dn		dn
+	 * @param		string	$entry	entry
 	 *
 	 * @return bool
 	 */
@@ -128,8 +128,8 @@ class LDAP extends UNIX {
 	 * gfLdapModifyIfExists() - Wrapper for ldap_modify()
 	 * works like gfLdapModify, but returns true if the LDAP entry does not exist
 	 *
-	 * @param		string	dn
-	 * @param		string	entry
+	 * @param		string	$dn		dn
+	 * @param		string	$entry	entry
 	 *
 	 * @return bool
 	 */
@@ -150,8 +150,8 @@ class LDAP extends UNIX {
 	/**
 	 * gfLdapModAdd() - Wrapper for ldap_mod_add()
 	 *
-	 * @param		string	dn
-	 * @param		string	entry
+	 * @param		string	$dn		dn
+	 * @param		string	$entry	entry
 	 *
 	 * @return bool
 	 */
@@ -163,8 +163,8 @@ class LDAP extends UNIX {
 	/**
 	 * gfLdapModDel() - Wrapper for ldap_mod_del()
 	 *
-	 * @param		string	dn
-	 * @param		string	entry
+	 * @param		string	$dn		dn
+	 * @param		string	$entry	entry
 	 *
 	 * @return bool
 	 */
@@ -176,9 +176,9 @@ class LDAP extends UNIX {
 	/**
 	 * gfLdapRead() - Wrapper for ldap_read()
 	 *
-	 * @param		string	dn
-	 * @param		string	filter
-	 * @param		int		attrs
+	 * @param		string	$dn		dn
+	 * @param		string	$filter	filter
+	 * @param		int		$attrs	attrs
 	 *
 	 * @return resource
 	 */

@@ -129,7 +129,7 @@ class Valid {
      * Return true if given value is empty
      *
      * @access private
-     * @param mixed Value to test
+     * @param mixed	$value	Value to test
      * @return boolean
      */
     function isValueEmpty($value) {
@@ -137,7 +137,7 @@ class Valid {
     }
 
     /**
-     * Append feebback in the global Response object.
+     * Append feedback in the global Response object.
      * @access private
      */
     function addFeedback($level, $error) {
@@ -148,7 +148,7 @@ class Valid {
      * Generate error message according to settings.
      *
      * Takes in account user requirement 'required' and
-     * 'disableFeedback'. Empty error messages are disarded.
+     * 'disableFeedback'. Empty error messages are discarded.
      * @access private
      */
     function populateFeedback() {
@@ -176,8 +176,8 @@ class Valid {
      * If the test succeeded, the error message is cleared (either custom or
      * built-in messages).
      * @access private
-     * @param Integer Index of the Rule that was applied.
-     * @param Boolean Result of the test.
+     * @param int	$i			Index of the Rule that was applied.
+     * @param bool	$result		Result of the test.
      */
     function errorMessage($i, $result) {
         if($result === true) {
@@ -193,7 +193,7 @@ class Valid {
      * Apply each rule on the given value and prepare feedback.
      *
      * @access private
-     * @param mixed Value to test.
+     * @param mixed $value	Value to test.
      */
     function checkEachRules($value) {
         $isValid = true;
@@ -214,7 +214,7 @@ class Valid {
     /**
      * Run validation on given value.
      *
-     * @param mixed Value to test.
+     * @param mixed $value	Value to test.
 	 * @return bool
 	 */
     function validate($value) {

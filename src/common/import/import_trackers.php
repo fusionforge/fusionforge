@@ -96,10 +96,10 @@ function createFields($at, $data){
 
 /**
  * createTracker - Create a specific tracker from data in the specified group
- * @param string Tracker type (bugs, support, ...)
- * @param Group	The group which the tracker belongs to
- * @param array	Tracker data from JSON
- * @return ArtifactType	the tracker created
+ * @param string	$tracker	Tracker type (bugs, support, ...)
+ * @param Group		$group		The group which the tracker belongs to
+ * @param array		$data		Tracker data from JSON
+ * @return ArtifactType			the tracker created
  */
 
 function createTracker($tracker, $group, $data){

@@ -82,8 +82,8 @@ class pgsql extends System {
 	/**
  	* sysCheckUser() - Check for the existence of a user
  	*
- 	* @param	int	The user ID of the user to check
- 	* @return	boolean	true on success/false on error
+ 	* @param	int	$user_id	The user ID of the user to check
+ 	* @return	bool			true on success/false on error
  	*
  	*/
 	function sysCheckUser($user_id) {
@@ -97,8 +97,8 @@ class pgsql extends System {
 	/**
  	* sysCreateUser() - Create a user
  	*
- 	* @param	int	The user ID of the user to create
- 	* @return	boolean	success or not
+ 	* @param	int	$user_id	The user ID of the user to create
+ 	* @return	bool			success or not
  	*
  	*/
 	function sysCreateUser($user_id) {
@@ -164,8 +164,8 @@ class pgsql extends System {
 	/**
  	* sysCheckCreateUser() - Check that a user has been created
  	*
- 	* @param	int	The ID of the user to check
- 	* @return	boolean	true on success/false on error
+ 	* @param	int		$user_id	The ID of the user to check
+ 	* @return	bool	true on success/false on error
  	*
  	*/
 	function sysCheckCreateUser($user_id) {
@@ -175,8 +175,8 @@ class pgsql extends System {
 	/**
  	* sysCheckCreateGroup() - Check that a group has been created
  	*
- 	* @param	int	The ID of the user to check
- 	* @return	boolean	true on success/false on error
+ 	* @param	int	$user_id	The ID of the user to check
+ 	* @return	bool			true on success/false on error
  	*
  	*/
 	function sysCheckCreateGroup($user_id) {
@@ -186,8 +186,8 @@ class pgsql extends System {
 	/**
  	* sysRemoveUser() - Remove a user
  	*
- 	* @param	int	The user ID of the user to remove
- 	* @return	boolean	true on success/false on failure
+ 	* @param	int	$user_id	The user ID of the user to remove
+ 	* @return	bool			true on success/false on failure
  	*
  	*/
 	function sysRemoveUser($user_id) {
@@ -219,10 +219,10 @@ class pgsql extends System {
 	/**
  	* sysUserSetAttribute() - Set an attribute for a user
  	*
- 	* @param	int	The user ID
- 	* @param	string	The attribute to set
- 	* @param	string	The new value of the attribute
- 	* @return	boolean	true on success/false on error
+ 	* @param	int		$user_id	The user ID
+ 	* @param	string	$attr		The attribute to set
+ 	* @param	string	$value		The new value of the attribute
+ 	* @return	bool				true on success/false on error
  	*
  	*/
 	function sysUserSetAttribute($user_id,$attr,$value) {
@@ -236,8 +236,8 @@ class pgsql extends System {
 	/**
  	* sysCheckGroup() - Check for the existence of a group
  	*
- 	* @param	int	The ID of the group to check
- 	* @return	boolean	true on success/false on error
+ 	* @param	int		$group_id	The ID of the group to check
+ 	* @return	bool				true on success/false on error
  	*
  	*/
 	function sysCheckGroup($group_id) {
@@ -258,8 +258,8 @@ class pgsql extends System {
 	/**
  	* sysCreateGroup() - Create a group
  	*
- 	* @param		int		The ID of the group to create
-	* @return bool	true on success/false on error
+ 	* @param		int		$group_id	The ID of the group to create
+	* @return bool			true on success/false on error
  	*
  	*/
 	function sysCreateGroup($group_id) {
@@ -315,8 +315,8 @@ class pgsql extends System {
 	/**
  	* sysRemoveGroup() - Remove a group
  	*
- 	* @param		int		The ID of the group to remove
-	* @return bool	true on success/false on error
+ 	* @param		int		$group_id	The ID of the group to remove
+	* @return bool			true on success/false on error
  	*
  	*/
 	function sysRemoveGroup($group_id) {
@@ -338,10 +338,10 @@ class pgsql extends System {
  	/**
 	 * sysGroupAddUser() - Add a user to a group
 	 *
-	 * @param	int	The ID of the group two which the user will be added
-	 * @param	int	The ID of the user to add
-	 * @param	bool	ignored
-	 * @return	boolean	true on success/false on error
+	 * @param	int		$group_id	The ID of the group two which the user will be added
+	 * @param	int		$user_id	The ID of the user to add
+	 * @param	bool	$foo		ignored
+	 * @return	bool				true on success/false on error
 	 */
 	function sysGroupAddUser($group_id,$user_id,$foo=NULL) {
 		return $this->sysGroupCheckUser($group_id,$user_id) ;
@@ -350,9 +350,9 @@ class pgsql extends System {
 	/**
  	* sysGroupCheckUser() - Sync user's Unix permissions with their FF permissions within a group
  	*
- 	* @param	int	The ID of the group
- 	* @param	int	The ID of the user
- 	* @return	boolean	true on success/false on error
+ 	* @param	int	$group_id	The ID of the group
+ 	* @param	int	$user_id	The ID of the user
+ 	* @return	bool			true on success/false on error
  	*/
 	function sysGroupCheckUser($group_id,$user_id) {
 		db_begin () ;

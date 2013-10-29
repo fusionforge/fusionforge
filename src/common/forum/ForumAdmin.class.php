@@ -89,7 +89,7 @@ class ForumAdmin extends Error {
 	/**
 	 *  PrintAdminOptions - prints the administrator option for an individual forum, to link to the pending messages management
 	 *
-	 *	@param 	int		The Forum ID.
+	 *	@param 	int		$forum_id	The Forum ID.
 	 */
 
 	function PrintAdminPendingOption($forum_id) {
@@ -405,13 +405,13 @@ class ForumAdmin extends Error {
 						$res1 = db_query_params ('SELECT * FROM forum_pending_messages WHERE msg_id=$1',
 			array ($msgids[$i]));
 						if (!$res1) {
-							$error_msg .= "DB Error: " . db_error();
+							$error_msg .= "DB Error " . db_error() . "<br />";
 							break;
 						}
 						$res2 = db_query_params ('SELECT * FROM forum_pending_attachment WHERE msg_id=$1',
 			array ($msgids[$i]));
 						if (!$res2) {
-							$error_msg .= "DB Error " . db_error();
+							$error_msg .= "DB Error " . db_error() . "<br />";
 							break;
 						}
 						$f = new Forum($this->g,$forum_id);

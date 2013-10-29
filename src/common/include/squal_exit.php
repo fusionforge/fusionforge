@@ -68,7 +68,7 @@ function exit_missing_param($url='',$missing_params=array(),$toptab='') {
 
 /**
  * exit_disabled() - Return a 'Disabled Feature' error
- * @param   string  toptab needed for navigation
+ * @param   string  $toptab needed for navigation
  */
 function exit_disabled($toptab='') {
 	exit_error('DISABLED FEATURE');

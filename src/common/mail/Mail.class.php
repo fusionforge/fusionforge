@@ -68,7 +68,7 @@ class Mail {
      * conformant, but it does pass all the given
      * examples (in RFC2047).
      *
-     * @param string Input header value to decode
+     * @param string $input		Input header value to decode
      * @return string Decoded header value
      * @access private
      */

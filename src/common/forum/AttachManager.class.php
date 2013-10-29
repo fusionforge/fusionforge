@@ -109,9 +109,9 @@ class AttachManager extends Error {
 	 /**
 	 * Function PrintAttachLink
 	 *
-	 * @param 	object	The message.
-	 * @param 	int		The group id.
-	 * @param 	int		The forum id.
+	 * @param 	object	$msg		The message.
+	 * @param 	int		$group_id	The group id.
+	 * @param 	int		$forum_id	The forum id.
 	 *
 	 * @return 	returns link to attachment /delete if corresponding; else returns a message about no attachment found
 	 */

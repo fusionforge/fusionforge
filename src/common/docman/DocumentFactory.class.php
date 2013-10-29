@@ -113,7 +113,7 @@ class DocumentFactory extends Error {
 	/**
 	 * setStateID - call this before getDocuments() if you want to limit to a specific state.
 	 *
-	 * @param	integer	The stateid from the doc_states table.
+	 * @param	int		$stateid	The stateid from the doc_states table.
 	 * @access	public
 	 */
 	function setStateID($stateid) {
@@ -123,7 +123,7 @@ class DocumentFactory extends Error {
 	/**
 	 * setDocGroupID - call this before getDocuments() if you want to limit to a specific doc_group.
 	 *
-	 * @param	integer	The doc_group from the doc_groups table.
+	 * @param	int	$docgroupid	The doc_group from the doc_groups table.
 	 * @access	public
 	 */
 	function setDocGroupID($docgroupid) {
@@ -133,7 +133,7 @@ class DocumentFactory extends Error {
 	/**
 	 * setSort - call this before getDocuments() if you want to order the query.
 	 *
-	 * @param	string	ASC or DESC : default ASC
+	 * @param	string	$sort	ASC or DESC : default ASC
 	 * @access	public
 	 */
 	function setSort($sort) {
@@ -147,7 +147,7 @@ class DocumentFactory extends Error {
 	/**
 	 * setOrder - call this before getDocuments() if you want to sort the query.
 	 *
-	 * @param	array	Ordered Columns names: default title
+	 * @param	array	$columns	Ordered Columns names: default title
 	 * @access	public
 	 */
 	function setOrder($columns = array('title')) {

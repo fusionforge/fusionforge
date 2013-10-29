@@ -40,11 +40,11 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 
 	/**
 	 * checkAuth - implement checkAuth called by HTTP_WebDAV_Server
-	 * to ensure authentification against user and pass
+	 * to ensure authentication against user and pass
 	 *
-	 * @param	int	group id
-	 * @param	string	username
-	 * @param	string	password
+	 * @param	int		$group_id	group id
+	 * @param	string	$user		username
+	 * @param	string	$pass		password
 	 * @return	bool	success
 	 */
 	function checkAuth($group_id, $user, $pass) {

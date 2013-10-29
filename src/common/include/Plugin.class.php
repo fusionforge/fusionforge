@@ -111,8 +111,8 @@ class Plugin extends Error {
 	/**
 	 * CallHook() - call a particular hook.
 	 *
-	 * @param	string	the "handle" of the hook.
-	 * @param	array	array of parameters to pass the hook.
+	 * @param	string	$hookname	the "handle" of the hook.
+	 * @param	array	$params		array of parameters to pass the hook.
 	 * @return	bool	true only
 	 */
 	function CallHook($hookname, &$params) {

@@ -134,10 +134,10 @@ class ProjectGroup extends Error {
 	/**
 	 * create - create a new ProjectGroup in the database.
 	 *
-	 * @param	string	The project name.
-	 * @param	string	The project description.
-	 * @param	string	The email address to send new notifications to.
-	 * @return	boolean	success.
+	 * @param	string	$project_name		The project name.
+	 * @param	string	$description		The project description.	 * @param	string	The email address to send new notifications to.
+	 * @param	string	$send_all_posts_to	The email address to send new notifications to.
+	 * @return	bool	success.
 	 */
 	function create($project_name,$description,$send_all_posts_to='') {
 		if (strlen($project_name) < 3) {
