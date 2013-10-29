@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 10:17+0100\n"
+"POT-Creation-Date: 2013-10-29 10:37+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -14972,9 +14972,8 @@ msgid "Error while adding user to role"
 msgstr "Erreur durant l'ajout de l'utilisateur au rôle"
 
 #: www/admin/globalroleedit.php:110
-#, fuzzy
 msgid "Cannot add user to this type of role"
-msgstr "Impossible d'ajouter un utilisateur à un rôle de ce type."
+msgstr "Impossible d'ajouter un utilisateur à un rôle de ce type"
 
 #: www/admin/globalroleedit.php:117
 msgid "Error: You did not tick the “really remove” box!"
@@ -15638,6 +15637,11 @@ msgstr "Aucun projet trouvé."
 #, php-format
 msgid "Error in Trove Operation: %s"
 msgstr "Erreur lors d'une opération sur l'arbre : %s"
+
+#: www/admin/trove/trove_cat_add.php:68
+#, fuzzy
+msgid "Missing category short name or full name"
+msgstr "Nom du catégorie manquant"
 
 #: www/admin/trove/trove_cat_add.php:72 www/trove/admin/trove_cat_add.php:62
 msgid "Add New Trove Category"

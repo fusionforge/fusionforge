@@ -65,7 +65,7 @@ if (getStringFromRequest('submit')) {
 
 		session_redirect("/admin/trove/trove_cat_list.php");
 	} else {
-		$error_msg = 'Missing category short name or full name';
+		$error_msg = _('Missing category short name or full name');
 	}
 }
 

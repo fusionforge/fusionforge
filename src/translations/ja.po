@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 10:17+0100\n"
+"POT-Creation-Date: 2013-10-29 10:37+0100\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -15718,6 +15718,11 @@ msgstr "ニュースが見つかりません"
 #, fuzzy, php-format
 msgid "Error in Trove Operation: %s"
 msgstr "パーミッションが取得できません。"
+
+#: www/admin/trove/trove_cat_add.php:68
+#, fuzzy
+msgid "Missing category short name or full name"
+msgstr "見あたらないパラメータ"
 
 #: www/admin/trove/trove_cat_add.php:72 www/trove/admin/trove_cat_add.php:62
 msgid "Add New Trove Category"

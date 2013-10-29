@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 10:17+0100\n"
+"POT-Creation-Date: 2013-10-29 10:37+0100\n"
 "PO-Revision-Date: 2009-10-06 16:32+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -14808,6 +14808,10 @@ msgstr ""
 #: www/include/trove.php:429 www/trove/admin/trove_cat_add.php:49
 #, php-format
 msgid "Error in Trove Operation: %s"
+msgstr ""
+
+#: www/admin/trove/trove_cat_add.php:68
+msgid "Missing category short name or full name"
 msgstr ""
 
 #: www/admin/trove/trove_cat_add.php:72 www/trove/admin/trove_cat_add.php:62

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 10:17+0100\n"
+"POT-Creation-Date: 2013-10-29 10:37+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -16014,6 +16014,11 @@ msgstr "No ProjectGroups Found"
 #, fuzzy, php-format
 msgid "Error in Trove Operation: %s"
 msgstr "Error In Trove Operation"
+
+#: www/admin/trove/trove_cat_add.php:68
+#, fuzzy
+msgid "Missing category short name or full name"
+msgstr "인자가 빠졌습니다."
 
 #: www/admin/trove/trove_cat_add.php:72 www/trove/admin/trove_cat_add.php:62
 msgid "Add New Trove Category"
