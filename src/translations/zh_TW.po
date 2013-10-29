@@ -19662,7 +19662,7 @@ msgstr "上傳資料給任務管理員。"
 msgid ""
 "This page allows you to export or import all the tasks using a CSV (<a href="
 "\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated "
-"Values</a>) File. This format can be used to view tasks using MS Excel."
+"Values</a>) File. This format can be used to view tasks using Microsoft Excel."
 msgstr ""
 
 #: www/pm/csv.php:80
