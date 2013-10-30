@@ -85,8 +85,8 @@ class PluginManager extends Error {
 	/**
 	 * PluginIsInstalled() - is a plugin installed?
 	 *
-	 * @param	string	name of plugin
-	 * @return	boolean	true if installed
+	 * @param	string	$pluginname	name of plugin
+	 * @return	bool	true if installed
 	 */
 	function PluginIsInstalled($pluginname) {
 		$plugins_data = $this->getPlugins();

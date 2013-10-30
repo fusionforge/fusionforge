@@ -161,11 +161,11 @@ class Forum extends Error {
 	/**
 	 * create - use this function to create a new entry in the database.
 	 *
-	 * @param	string	The name of the forum.
-	 * @param	string	The description of the forum.
-	 * @param	string	The email address to send all new posts to.
-	 * @param	int	Pass (1) if a welcome message should be created (0) for no welcome message.
-	 * @return	boolean	success.
+	 * @param	string	$forum_name				The name of the forum.
+	 * @param	string	$description			The description of the forum.
+	 * @param	string	$send_all_posts_to		The email address to send all new posts to.
+	 * @param	int		$create_default_message	Pass (1) if a welcome message should be created (0) for no welcome message.
+	 * @return	bool	success.
 	 */
 	function create($forum_name, $description, $send_all_posts_to = '', $create_default_message = 1) {
 		if (!$this->is_news && strlen(trim($forum_name)) < 3) {

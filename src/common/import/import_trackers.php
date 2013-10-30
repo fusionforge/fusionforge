@@ -141,7 +141,7 @@ function createTracker($tracker, $group, $data){
 
 /**
  * deleteTrackers - Delete all existing default trackers from a projet
- * @param Group A Group object
+ * @param Group $group	A Group object
  */
 function deleteTrackers($group){
 	$res = db_query_params ('SELECT group_artifact_id FROM artifact_group_list
@@ -157,8 +157,8 @@ function deleteTrackers($group){
 
 /**
  * addComments - Add followup comments to an Artifact Object
- * @param Artifact	the artifact object where history should be added
- * @param array the artifact's data in json format (an array)
+ * @param Artifact	$artifact		the artifact object where history should be added
+ * @param array		$jsonArtifact	the artifact's data in json format (an array)
  */
 function addComments($artifact, $jsonArtifact){
 	foreach($jsonArtifact['comments'] as $c){
@@ -171,8 +171,8 @@ function addComments($artifact, $jsonArtifact){
 
 /**
  * addHistory - Add history of changes to an Artifact Object
- * @param Artifact	the artifact object where history should be added
- * @param array the artifact's data in json format (an array)
+ * @param Artifact	$artifact		the artifact object where history should be added
+ * @param array		$jsonArtifact	the artifact's data in json format (an array)
  */
 function addHistory($artifact, $jsonArtifact){
 	foreach($jsonArtifact['history'] as $h){

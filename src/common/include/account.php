@@ -149,7 +149,7 @@ function genchr(){
 /**
  * account_gensalt() - A random salt generator
  *
- * @returns	The random salt string
+ * @returns	string	The random salt string
  *
  */
 function account_gensalt(){
