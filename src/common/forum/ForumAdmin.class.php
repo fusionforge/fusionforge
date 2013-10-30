@@ -37,7 +37,7 @@ class ForumAdmin extends Error {
 			$this->g = group_get_object($group_id);
 			$this->p =& $this->g->getPermission();
 			if (!$this->g->usesForum()) {
-				$this->setError(sprintf(_('%s does not use the Forum tool'),
+				$this->setError(sprintf(_('%s does not use the Forum tool.'),
 				    $this->g->getPublicName()));
 				return;
 			}

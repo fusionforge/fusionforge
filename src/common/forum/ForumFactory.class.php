@@ -57,7 +57,7 @@ class ForumFactory extends Error {
 			return;
 		}
 		if (!$Group->usesForum()) {
-			$this->setError(sprintf(_('%s does not use the Forum tool'),
+			$this->setError(sprintf(_('%s does not use the Forum tool.'),
 			    $Group->getPublicName()));
 			return;
 		}
