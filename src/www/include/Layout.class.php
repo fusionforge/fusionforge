@@ -450,20 +450,20 @@ class Layout extends Error {
 		<td></td>
 	</tr>
 
-			<tr>
-			<td align="left" class="toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft.png" height="9" width="9" alt="" /></td>
-			<td class="toptab" width="30"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="30" height="1" alt="" /></td>
-			<td class="toptab"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-			<td class="toptab" width="30"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="30" height="1" alt="" /></td>
-			<td align="right" class="toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright.png" height="9" width="9" alt="" /></td>
-			</tr>
+	<tr>
+		<td align="left" class="toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft.png" height="9" width="9" alt="" /></td>
+		<td class="toptab" width="30"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="30" height="1" alt="" /></td>
+		<td class="toptab"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
+		<td class="toptab" width="30"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="30" height="1" alt="" /></td>
+		<td align="right" class="toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright.png" height="9" width="9" alt="" /></td>
+	</tr>
 
 	<tr>
 
 		<!-- Outer body row -->
 
-			<td class="toptab"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="10" height="1" alt="" /></td>
-			<td valign="top" width="99%" class="toptab" colspan="3">
+		<td class="toptab"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="10" height="1" alt="" /></td>
+		<td valign="top" width="99%" class="toptab" colspan="3">
 
 			<!-- Inner Tabs / Shell -->
 
@@ -516,19 +516,19 @@ if (isset($params['group']) && $params['group']) {
 			</tr>
 			</table>
 
-			<!-- end inner body row -->
+		<!-- end inner body row -->
 
-			</td>
-			<td width="10" class="footer2"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="2" height="1" alt="" /></td>
-			</tr>
-			<tr>
-			<td align="left" class="footer2" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomleft.png" height="9" width="9" alt="" /></td>
-			<td class="footer2" colspan="3"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-			<td align="right" class="footer2" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomright.png" height="9" width="9" alt="" /></td>
-			</tr>
-			</table>
-			<?php
-			$this->footerEnd($params);
+		</td>
+		<td width="10" class="footer2"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="2" height="1" alt="" /></td>
+	</tr>
+	<tr>
+		<td align="left" class="footer2" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomleft.png" height="9" width="9" alt="" /></td>
+		<td class="footer2" colspan="3"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
+		<td align="right" class="footer2" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomright.png" height="9" width="9" alt="" /></td>
+	</tr>
+</table>
+<?php
+		$this->footerEnd($params);
 	}
 
 	function footerEnd($params) { ?>
@@ -541,12 +541,11 @@ if (isset($params['group']) && $params['group']) {
 			<?php echo $this->navigation->getShowSource();
 
 			plugin_hook('webanalytics_url', array());
+?>
 
-			?>
-
-			</body>
-			</html>
-			<?php
+</body>
+</html>
+<?php
 
 	}
 
@@ -843,7 +842,6 @@ if (isset($params['group']) && $params['group']) {
 		}
 		$return .= '</tr>';
 
-
 		return $return.'
 			</table>
 
@@ -908,9 +906,9 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * subMenu() - Takes two array of titles and links and build a menu.
 	 *
-	 * @param	array	The array of titles.
-	 * @param	array	The array of title links.
-	 * @param	array	The array of string for title attributes.
+	 * @param	array	$title_arr	The array of titles.
+	 * @param	array	$links_arr	The array of title links.
+	 * @param	array	$attr_arr	The array of string for title attributes.
 	 * @return	string	Html to build a submenu.
 	 */
 	function subMenu($title_arr, $links_arr, $attr_arr = false) {
@@ -921,15 +919,15 @@ if (isset($params['group']) && $params['group']) {
 	}
 
 	/**
-	 * multiTableRow() - create a mutlilevel row in a table
+	 * multiTableRow() - create a multilevel row in a table
 	 *
-	 * @param	string	the row attributes
-	 * @param	array	the array of cell data, each element is an array,
+	 * @param	string	$row_attr	the row attributes
+	 * @param	array	$cell_data	the array of cell data, each element is an array,
 	 *				the first item being the text,
 	 *				the subsequent items are attributes (dont include
 	 *				the bgcolor for the title here, that will be
 	 *				handled by $istitle
-	 * @param	boolean	is this row part of the title ?
+	 * @param	bool	$istitle	is this row part of the title ?
 	 * @return	string	the html code
 	 */
 	function multiTableRow($row_attr, $cell_data, $istitle) {
@@ -964,7 +962,7 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * feedback() - returns the htmlized feedback string when an action is performed.
 	 *
-	 * @param string feedback string
+	 * @param string $feedback	feedback string
 	 * @return string htmlized feedback
 	 */
 	function feedback($feedback) {
@@ -978,7 +976,7 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * warning_msg() - returns the htmlized warning string when an action is performed.
 	 *
-	 * @param string msg string
+	 * @param string $msg	msg string
 	 * @return string htmlized warning
 	 */
 	function warning_msg($msg) {
@@ -993,7 +991,7 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * error_msg() - returns the htmlized error string when an action is performed.
 	 *
-	 * @param string msg string
+	 * @param string $msg	msg string
 	 * @return string htmlized error
 	 */
 	function error_msg($msg) {
@@ -1010,7 +1008,7 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * information() - returns the htmlized information string.
 	 *
-	 * @param string msg string
+	 * @param string $msg	msg string
 	 * @return string htmlized information
 	 */
 	function information($msg) {
@@ -1025,8 +1023,8 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * getThemeIdFromName()
 	 *
-	 * @param	string  the dirname of the theme
-	 * @return	integer the theme id
+	 * @param	string  $dirname	the dirname of the theme
+	 * @return	int		the theme id
 	 */
 	function getThemeIdFromName($dirname) {
 		$res = db_query_params ('SELECT theme_id FROM themes WHERE dirname=$1',
@@ -1306,9 +1304,9 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * toSlug() - protect a string to be used as a link or an anchor
 	 *
-	 * @param   string $string  the string used as a link or an anchor
-	 * @param   string $space   the caracter used as a replacement for a space
-	 * @return  a protected string with only alphanumeric caracters
+	 * @param   string	$string  the string used as a link or an anchor
+	 * @param   string	$space   the character used as a replacement for a space
+	 * @return  string	a protected string with only alphanumeric characters
 	 */
 	function toSlug($string, $space = "-") {
 		if (function_exists('iconv')) {

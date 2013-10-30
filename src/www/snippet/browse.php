@@ -38,8 +38,8 @@ function createSnippetQuery($clause) {
 /**
  * createPackageQuery - Creates the SQL query for loading data about packages
  *
- * @param	string	clause - the last part of the where clause
- * @return string
+ * @param	string	$clause - the last part of the where clause
+ * @return	string
  */
 function createPackageQuery($clause) {
 	return "SELECT users.realname,users.user_name,users.user_id,snippet_package.description,snippet_package.snippet_package_id,snippet_package.name FROM snippet_package,users WHERE users.user_id=snippet_package.created_by AND ".$clause;

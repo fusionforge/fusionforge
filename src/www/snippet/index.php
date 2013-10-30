@@ -28,9 +28,9 @@ require_once $gfwww.'snippet/snippet_utils.php';
 /**
  * create_snippet_hash() - A little utility function to reduce duplicated code in snippet_mainpage()
  *
- * @param	qpa	Array	A query+parameter array
- * @param	field	String	The field name - either 'language' or 'category'
- * @return An associative array filled with the results of the SQL query
+ * @param	array	$qpa	A query+parameter array
+ * @param	string	$field	The field name - either 'language' or 'category'
+ * @return	array	An associative array filled with the results of the SQL query
  */
 function create_snippet_hash($qpa, $field) {
 	$res = db_query_qpa($qpa);

@@ -26,7 +26,7 @@
 /**
  * vote_number_to_stars() - Turns vote results into *'s
  *
- * @param		int		Raw value
+ * @param		int		$raw	Raw value
  * @return string
  */
 function vote_number_to_stars($raw) {
@@ -51,10 +51,10 @@ function vote_number_to_stars($raw) {
 /**
  * vote_show_thumbs() - Show vote stars
  *
- * @param		int		The survey ID
- * @param		string	The rating type
+ * @param	int		$id		The survey ID
+ * @param	string	$flag	The rating type
  */
-function vote_show_thumbs($id,$flag) {
+function vote_show_thumbs($id, $flag) {
 	/*
 		$flag
 		project - 1
@@ -73,10 +73,10 @@ function vote_show_thumbs($id,$flag) {
 /**
  * vote_get_rating() - Get a vote rating
  *
- * @param		int		The survey ID
- * @param		string	The rating type
+ * @param		int		$id		The survey ID
+ * @param		string	$flag	The rating type
  */
-function vote_get_rating ($id,$flag) {
+function vote_get_rating ($id, $flag) {
 	$result = db_query_params ('SELECT response FROM survey_rating_aggregate WHERE type=$1 AND id=$2',
 				   array ($flag,
 					  $id));
@@ -90,10 +90,10 @@ function vote_get_rating ($id,$flag) {
 /**
  * vote_show_release_radios() - Show release radio buttons
  *
- * @param		int		Survey ID
- * @param		string	The rating type
+ * @param		int		$vote_on_id	The survey ID
+ * @param		string	$flag		The rating type
  */
-function vote_show_release_radios ($vote_on_id,$flag) {
+function vote_show_release_radios ($vote_on_id, $flag) {
 	/*
 		$flag
 		project - 1
@@ -140,10 +140,10 @@ function vote_show_release_radios ($vote_on_id,$flag) {
 /**
  * show_survey() - Select and show a specific survey from the database
  *
- * @param		int		The group ID
- * @param		int		The survey ID
+ * @param		int		$group_id	The group ID
+ * @param		int		$survey_id	The survey ID
  */
-function show_survey ($group_id,$survey_id) {
+function show_survey ($group_id, $survey_id) {
 /*
 	Select this survey from the database
 */
@@ -298,10 +298,10 @@ if (db_numrows($result) > 0) {
 /**
  * Show a single question for the new user rating system
  *
- * @param		string	The question to show
- * @param		string	The array element
+ * @param		string	$question		The question to show
+ * @param		string	$element_name	The array element
  */
-function vote_show_a_question ($question,$element_name) {
+function vote_show_a_question ($question, $element_name) {
 	echo '
 	<tr><td colspan="2" style="white-space: nowrap;">
 	<input type="radio" name="Q_'. $element_name .'" value="-3">
@@ -385,8 +385,8 @@ $USER_RATING_VALUES[]='3';
 /**
  * vote_show_user_rate_box() - Show user rating box
  *
- * @param		int		The user ID
- * @param		int		The user ID of the user who is rating $user_id
+ * @param		int		$user_id	The user ID
+ * @param		int		$by_id		The user ID of the user who is rating $user_id
  */
 function vote_show_user_rate_box ($user_id, $by_id=0) {
 	if ($by_id) {
@@ -435,7 +435,7 @@ function vote_show_user_rate_box ($user_id, $by_id=0) {
 /**
  * vote_show_user_rating() - Show a user rating
  *
- * @param		int		The user ID
+ * @param		int		$user_id	The user ID
  */
 function vote_show_user_rating($user_id) {
 	global $USER_RATING_QUESTIONS;

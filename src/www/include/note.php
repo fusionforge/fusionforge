@@ -28,11 +28,11 @@ require_once dirname(__FILE__).'/html.php';
 /**
  * editor_button_raw() - Open an Editor dialog window
  *
- * @param               str     Anchor string
- * @param		form	Form name
- * @param               int     wrap
- * @param		int     rows
- * @param               int     cols
+ * @param	string	$str    Anchor string
+ * @param	string	$form	Form name
+ * @param	int		$wrap
+ * @param	int		$rows
+ * @param	int		$cols
  */
 function notepad_button_raw($str, $form, $wrap, $rows, $cols) {
        $anchor = '<a href="javascript:notepad_window_param(\''.htmlspecialchars($form).'\',\''.

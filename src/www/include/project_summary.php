@@ -27,7 +27,7 @@ $project_agg_arr=array();
 /**
  * project_setup_agg() - Set up a project aggregate array.
  *
- * @param		int		Project ID
+ * @param		int		$group_id	Project ID
  * @access		private
  */
 function project_setup_agg($group_id) {
@@ -46,12 +46,12 @@ function project_setup_agg($group_id) {
 /**
  * project_getaggvalue() - Get a projects aggregate value for a specific type
  *
- * @param		int		The group ID
- * @param		string	The type
- * @return string
+ * @param		int		$group_id	The group ID
+ * @param		string	$type		The type
+ * @return		string
  * @access		private
  */
-function project_getaggvalue($group_id,$type) {
+function project_getaggvalue($group_id, $type) {
 	global $project_agg_arr,$project_agg_arr_is_set;
 	if (!$project_agg_arr_is_set) {
 		project_setup_agg($group_id);
@@ -67,7 +67,7 @@ function project_getaggvalue($group_id,$type) {
 /**
  * project_get_mail_list_count() - Get the number of mailing lists for a project.
  *
- * @param		int		The group ID
+ * @param	int		$group_id	The group ID
  */
 function project_get_mail_list_count($group_id) {
 	return project_getaggvalue($group_id,'mail');
@@ -76,7 +76,7 @@ function project_get_mail_list_count($group_id) {
 /**
  * project_get_survey_count() - Get the number of surveys for a project.
  *
- * @param		int		The group ID
+ * @param	int		$group_id	The group ID
  */
 function project_get_survey_count($group_id) {
 	return project_getaggvalue($group_id,'surv');
@@ -85,11 +85,11 @@ function project_get_survey_count($group_id) {
 /**
  * project_summary() - Build a project summary box that projects can insert into their project pages
  *
- * @param		int		The group ID
- * @param		string	How to return the results.
- * @param		bool	Whether to return the results within an HTML table or not
+ * @param	int		$group_id	The group ID
+ * @param	string	$mode		How to return the results.
+ * @param	bool	$no_table	Whether to return the results within an HTML table or not
  */
-function project_summary($group_id,$mode,$no_table) {
+function project_summary($group_id, $mode, $no_table) {
 	if (!$group_id) {
 		return 'Error: No Project ID';
 	}
@@ -108,7 +108,7 @@ function project_summary($group_id,$mode,$no_table) {
 	if (!$no_table) {
 		$return = '
 
-		<table border=0 width="100%"><tr><td class="tablecontent">';
+		<table border="0" width="100%"><tr><td class="tablecontent">';
 	}
 
 	// ################## ArtifactTypes

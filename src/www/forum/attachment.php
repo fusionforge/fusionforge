@@ -34,7 +34,7 @@ require_once $gfcommon.'forum/ForumHTML.class.php';
 /**
  *  goodbye - Just prints a message and a close button.
  *
- *  @param  string	 The message.
+ *  @param  string	 $msg	The message.
  */
 
 function goodbye($msg) {
