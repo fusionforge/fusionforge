@@ -149,7 +149,7 @@ class TroveCategory extends Error {
 			$this->labels = array();
 			$res = db_query_params("SELECT  trove_category_labels.*, supported_languages.name AS language_name FROM trove_category_labels, supported_languages
 																WHERE category_id=$1 AND supported_languages.language_id=trove_category_labels.language_id",
-																array($this->cathergoryId));
+																array($this->categoryId));
 
 			if (!$res) {
 				return $this->labels;
