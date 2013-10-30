@@ -115,7 +115,7 @@ if ($survey_id) {
 }
 
 /* Show list of Surveys with result link */
-/* Show list of Servey */
+/* Show list of Surveys */
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {
@@ -127,11 +127,11 @@ if (!$ss) {
 $sh->footer(array());
 
 /**
- * showResult - Get Result from Survey and Question. Pass the reuslt to Show Result HTML class
+ * showResult - Get Result from Survey and Question. Pass the result to Show Result HTML class
  *
- *  @param object a survey object
- *  @param object a qustsion object
- *  @param int    wheather print out export(csv) format
+ *  @param object $SurveyHTML	a survey object
+ *  @param object $Question	a question object
+ *  @param int    whether print out export(csv) format
  */
 function showResult(&$SurveyHTML, &$Survey, &$Question, $show_comment=0, $q_num="", $graph=0) {
 	/* Get results */

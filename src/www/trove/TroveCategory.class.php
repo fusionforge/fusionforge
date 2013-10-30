@@ -51,8 +51,8 @@ class TroveCategory extends Error {
 	/**
 	 *  Constructor.
 	 *
-	 * @param	int		The trove_cat_id.
-	 * @param	array		The associative array of data.
+	 * @param	int		$categoryId		The trove_cat_id.
+	 * @param	array	$dataArray		The associative array of data.
 	 * @return	boolean	success.
 	 */
 	function TroveCategory($categoryId = false, $dataArray = false) {
@@ -75,8 +75,8 @@ class TroveCategory extends Error {
 	/**
 	 *  fetchData - re-fetch the data for this category from the database.
 	 *
-	 *  @param  int	 The category_id.
-	 *	@return	boolean	success.
+	 *  @param  int		$categoryId	The category_id.
+	 *	@return	bool	success.
 	 */
 	function fetchData($categoryId) {
 		$res = db_query_params('SELECT * FROM trove_cat	WHERE trove_cat_id=$1',

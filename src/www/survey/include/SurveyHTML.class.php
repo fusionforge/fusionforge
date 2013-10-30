@@ -95,7 +95,7 @@ class SurveyHTML extends Error {
 
 	/**
 	 * Show Add/Modify Question Forums
-	 * @param Survey Question Question Object
+	 * @param Survey $q	Question Question Object
      * @return string
      */
 	function showAddQuestionForm( &$q ) {
@@ -142,8 +142,8 @@ class SurveyHTML extends Error {
 
 	/**
 	 * Show Add/Modify Question Forums
-	 * @param Survey Question Question Object
-	 * Return string
+	 * @param Survey $s	Question Question Object
+	 * @return string
 	 */
 	function showAddSurveyForm( &$s) {
 		global $group_id;

@@ -150,9 +150,8 @@ class Theme extends Layout {
 	/**
 	 * boxTop() - Top HTML box
 	 *
-	 * @param   string  Box title
-	 * @param   bool    Whether to echo or return the results
-	 * @param   string  The box background color
+	 * @param   string  $title	Box title
+	 * @param   string  $id
 	 * @return string
 	 */
 	function boxTop($title, $id = '') {
@@ -186,8 +185,8 @@ class Theme extends Layout {
 	/**
 	 * boxMiddle() - Middle HTML box
 	 *
-	 * @param   string  Box title
-	 * @param   string  The box background color
+	 * @param   string  $title	Box title
+	 * @param   string  $id
 	 * @return string
 	 */
 	function boxMiddle($title, $id = '') {
@@ -221,7 +220,7 @@ class Theme extends Layout {
 	/**
 	 * boxGetAltRowStyle() - Get an alternating row style for tables
 	 *
-	 * @param               int             Row number
+	 * @param	int	$i	Row number
 	 */
 	function boxGetAltRowStyle($i) {
 		if ($i % 2 == 0) {
@@ -366,9 +365,9 @@ class Theme extends Layout {
 	/**
 	 * printSubMenu() - Takes two array of titles and links and builds the contents of a menu.
 	 *
-	 * @param	array	The array of titles.
-	 * @param	array	The array of title links.
-	 * @param	array	The array of the html attributes.
+	 * @param	array	$title_arr	The array of titles.
+	 * @param	array	$links_arr	The array of title links.
+	 * @param	array	$attr_arr	The array of the html attributes.
 	 * @return	string	Html to build a submenu.
 	 */
 	function printSubMenu($title_arr, $links_arr, $attr_arr) {
@@ -395,9 +394,9 @@ class Theme extends Layout {
 	/**
 	 * subMenu() - Takes two array of titles and links and build a menu.
 	 *
-	 * @param	array	The array of titles.
-	 * @param	array	The array of title links.
-	 * @param	array	The array of the html attributes.
+	 * @param	array	$title_arr	The array of titles.
+	 * @param	array	$links_arr	The array of title links.
+	 * @param	array	$attr_arr	The array of the html attributes.
 	 * @return	string	Html to build a submenu.
 	 */
 	function subMenu($title_arr, $links_arr, $attr_arr = false) {
@@ -408,15 +407,15 @@ class Theme extends Layout {
 	}
 
 	/**
-	 * multiTableRow() - create a mutlilevel row in a table
+	 * multiTableRow() - create a multilevel row in a table
 	 *
-	 * @param	string	the row attributes
-	 * @param	array	the array of cell data, each element is an array,
+	 * @param	string	$row_attr	the row attributes
+	 * @param	array	$cell_data	the array of cell data, each element is an array,
 	 *					the first item being the text,
 	 *					the subsequent items are attributes (dont include
 	 *					the bgcolor for the title here, that will be
 	 *					handled by $istitle
-	 * @param	boolean	is this row part of the title ?
+	 * @param	bool	$istitle	is this row part of the title ?
 	 *
 	 */
 	function multiTableRow($row_attr, $cell_data, $istitle) {
@@ -451,8 +450,8 @@ class Theme extends Layout {
 	/**
 	 * getThemeIdFromName()
 	 *
-	 * @param    string  the dirname of the theme
-	 * @return    integer the theme id
+	 * @param    string  $dirname	the dirname of the theme
+	 * @return   int	 the theme id
 	 */
 	function getThemeIdFromName($dirname) {
 		$res=db_query_params ('SELECT theme_id FROM themes WHERE dirname=$1',

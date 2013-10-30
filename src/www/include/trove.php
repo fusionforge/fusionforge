@@ -177,7 +177,7 @@ function trove_setnode($group_id, $trove_cat_id, $rootnode=0) {
 /**
  * trove_getrootcat() - Get the root categegory
  *
- * @param		int		Trove category ID
+ * @param		int		$trove_cat_id	Trove category ID
  */
 function trove_getrootcat($trove_cat_id) {
 	$parent = 1;
@@ -220,9 +220,10 @@ function trove_getallroots() {
 /**
  * trove_catselectfull() - Returns full select output for a particular root
  *
- * @param	int	The node
- * @param	string	The category to pre-select
- * @param	string	THe select-box name
+ * @param	int		$node		The node
+ * @param	string	$selected	The category to pre-select
+ * @param	string	$name		The select-box name
+ * @param	string	$title
  */
 function trove_catselectfull($node, $selected, $name, $title='') {
 	print '<br /><select class="trove-nodes" name="'.$name.'" title="'.util_html_secure($title).'">';
@@ -245,13 +246,13 @@ function trove_catselectfull($node, $selected, $name, $title='') {
 /**
  * trove_getcatlisting() - Gets discriminator listing for a group
  *
- * @param		int		The group ID
- * @param		bool	Whether filters have already been applied
- * @param		bool	Whether to print category links
- * @param		bool	???
+ * @param		int		$group_id	The group ID
+ * @param		bool	$a_filter	Whether filters have already been applied
+ * @param		bool	$a_cats		Whether to print category links
+ * @param		bool	$a_complete
  * @return string
  */
-function trove_getcatlisting($group_id,$a_filter,$a_cats,$a_complete=0) {
+function trove_getcatlisting($group_id, $a_filter, $a_cats, $a_complete=0) {
 	global $discrim_url;
 	global $expl_discrim;
 	global $form_cat;
@@ -360,7 +361,7 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats,$a_complete=0) {
 /**
  * trove_getfullname() - Returns cat fullname
  *
- * @param		int		The node
+ * @param		int		$node	The node
  */
 function trove_getfullname($node) {
 	$res = db_query_params('
@@ -375,7 +376,7 @@ function trove_getfullname($node) {
 /**
  * trove_getfullpath() - Returns a full path for a trove category
  *
- * @param		int		The node
+ * @param		int		$node	The node
  * @return string
  */
 function trove_getfullpath($node) {

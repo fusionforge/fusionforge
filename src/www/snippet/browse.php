@@ -28,7 +28,7 @@ require_once $gfwww.'snippet/snippet_utils.php';
 /**
  * createSnippetQuery - Creates the SQL query for loading data about snippets
  *
- * @param	string	clause - the last part of the where clause
+ * @param	string	$clause - the last part of the where clause
  * @return string
  */
 function createSnippetQuery($clause) {
