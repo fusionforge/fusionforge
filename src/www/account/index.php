@@ -240,20 +240,20 @@ echo $HTML->boxTop(_('Preferences')); ?>
 
 <div>
 <input type="checkbox" name="mail_site" value="1"<?php
-	if ($u->getMailingsPrefs('site')) print " checked=\"checked\""; ?> />
+	if ($u->getMailingsPrefs('site')) print ' checked="checked"'; ?> />
 	<?php echo _('Receive Email about Site Updates <i>(Very low traffic and includes security notices. Highly Recommended.)</i>'); ?>
 </div>
 
 <div>
 <input type="checkbox"  name="mail_va" value="1"<?php
-	if ($u->getMailingsPrefs('va')) print " checked=\"checked\""; ?> />
+	if ($u->getMailingsPrefs('va')) print ' checked="checked"'; ?> />
 	<?php echo _('Receive additional community mailings. <i>(Low traffic.)</i>'); ?>
 </div>
 
 <?php /*
 <div>
 <input type="checkbox"  name="remember_user" value="1"<?php
-	if ($sf_user_hash) print " checked=\"checked\""; ?> />
+	if ($sf_user_hash) print ' checked="checked"'; ?> />
 <?php printf(_('"Remember me". <i>(Allows to access your <a href="%s">personal page</a> without being logged in. You will still need to login explicitly before making any changes.)</i>'),util_make_url ('/my/'));
 echo "\n</div>";
 */ ?>
