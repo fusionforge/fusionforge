@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 14:59+0100\n"
+"POT-Creation-Date: 2013-10-31 16:35+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -298,7 +298,8 @@ msgstr "Dossier"
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:190
 #: www/frs/admin/qrs.php:197 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
-#: www/new/index.php:98 www/people/admin/index.php:52
+#: www/new/index.php:98 www/news/submit.php:144 www/news/submit.php:146
+#: www/news/submit.php:149 www/people/admin/index.php:52
 #: www/people/admin/index.php:65 www/people/editprofile.php:233
 #: www/people/skills_utils.php:121 www/people/viewprofile.php:47
 #: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
@@ -1969,10 +1970,10 @@ msgstr "Un problème est survenu avec la pièce jointe envoyée sur le serveur"
 msgid "File Updated Successfully"
 msgstr "Fichier publié avec succès"
 
-#: common/forum/ForumAdmin.class.php:40 common/forum/ForumFactory.class.php:60
-#: www/forum/admin/index.php:58
+#: common/forum/ForumAdmin.class.php:40 common/forum/Forum.class.php:126
+#: common/forum/ForumFactory.class.php:60 www/forum/admin/index.php:58
 #, php-format
-msgid "%s does not use the Forum tool"
+msgid "%s does not use the Forum tool."
 msgstr ""
 
 #: common/forum/ForumAdmin.class.php:61 www/forum/admin/index.php:363
@@ -2121,11 +2122,6 @@ msgid ""
 msgstr ""
 "Le fil de discussion dans lequel le message a été publié n'existe plus.  "
 "Veuillez supprimer ce message."
-
-#: common/forum/Forum.class.php:126
-#, php-format
-msgid "%s does not use the Forum tool."
-msgstr ""
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:553
 msgid "Forum name must be at least 3 characters."
@@ -2334,7 +2330,7 @@ msgstr "Modifier un message"
 #: plugins/forumml/www/index.php:111 www/admin/massmail.php:112
 #: www/admin/massmail.php:136 www/admin/pending-news.php:145
 #: www/developer/diary.php:80 www/news/admin/index.php:133
-#: www/news/admin/news_admin_utils.php:58 www/news/submit.php:145
+#: www/news/admin/news_admin_utils.php:58 www/news/submit.php:146
 #: www/sendmessage.php:68 www/sendmessage.php:149
 msgid "Subject"
 msgstr "Sujet"
@@ -3550,7 +3546,7 @@ msgstr "Résumé du projet, construit à partir de widgets."
 #: common/tracker/actions/mod.php:196
 #: common/tracker/include/build_submission_form.php:64
 #: common/widget/Widget_MyProjects.class.php:77
-#: www/include/Layout.class.php:722 www/pm/add_task.php:53
+#: www/include/Layout.class.php:721 www/pm/add_task.php:53
 #: www/pm/mod_task.php:62
 msgid "Admin"
 msgstr "Administration"
@@ -4901,7 +4897,7 @@ msgstr "Texte libre pour la page de navigation"
 #: www/forum/admin/index.php:412 www/include/vote_function.php:284
 #: www/my/bookmark_add.php:58 www/my/diary.php:189
 #: www/news/admin/index.php:149 www/news/news_utils.php:42
-#: www/news/submit.php:160 www/pm/add_task.php:57 www/pm/add_task.php:140
+#: www/news/submit.php:161 www/pm/add_task.php:57 www/pm/add_task.php:140
 #: www/pm/add_task.php:154 www/pm/admin/index.php:217
 #: www/pm/admin/index.php:262 www/pm/admin/index.php:293 www/pm/csv.php:90
 #: www/pm/deletetask.php:51 www/pm/mod_task.php:54 www/pm/mod_task.php:254
@@ -5839,9 +5835,8 @@ msgid "Only project members can view private artifact types"
 msgstr "Seuls les membres du projet peuvent voir les éléments privés"
 
 #: common/tracker/Artifact.class.php:191 common/tracker/Artifact.class.php:779
-#, fuzzy
 msgid "You are not currently allowed to submit items to this tracker."
-msgstr "Vous n'êtes pas autorisé à voir ce calendrier."
+msgstr "Vous n'êtes pas autorisé à créer des tickets dans ce traceur."
 
 #: common/tracker/Artifact.class.php:206
 msgid "Message Summary Is Required"
@@ -6313,7 +6308,7 @@ msgid ""
 "If you <strong>cannot</strong> login, then enter your email address here"
 msgstr "Si vous ne parvenez pas à vous connecter, saisissez votre e-mail"
 
-#: common/tracker/include/build_submission_form.php:53 www/news/submit.php:143
+#: common/tracker/include/build_submission_form.php:53 www/news/submit.php:144
 #: www/people/viewjob.php:79
 msgid "For project"
 msgstr "Pour le projet"
@@ -6924,7 +6919,7 @@ msgstr "Configuration des rôles autorisés pour les transitions de %1$s à %2$s
 
 #: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:56
 #: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:239
-#: www/include/Layout.class.php:1340
+#: www/include/Layout.class.php:1338
 msgid "Preferences"
 msgstr "Préférences"
 
@@ -7873,7 +7868,7 @@ msgstr " L'élément #%s est en attente"
 
 #: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:147
 #: www/export/rssAboTask.php:146 www/my/diary.php:185
-#: www/news/admin/index.php:135 www/news/submit.php:148
+#: www/news/admin/index.php:135 www/news/submit.php:149
 msgid "Details"
 msgstr "Détails"
 
@@ -14319,9 +14314,8 @@ msgid "Edit Keys"
 msgstr "Éditer les clés"
 
 #: www/account/index.php:316
-#, fuzzy
 msgid "Shell Account deactivated"
-msgstr "Informations relatives au compte shell"
+msgstr "Compte shell désactivé"
 
 #: www/account/index.php:326 www/forum/admin/index.php:128
 #: www/forum/admin/index.php:167
@@ -14641,9 +14635,8 @@ msgid "Updated Documents"
 msgstr "Documents mis à jour"
 
 #: www/activity/index.php:128
-#, fuzzy
 msgid "New Directories"
-msgstr "Ajuster les répertoires"
+msgstr "Nouveaux répertoires"
 
 #: www/activity/index.php:169
 msgid "Invalid Data Passed to query"
@@ -15098,7 +15091,7 @@ msgid "Resend New Project Instruction Email"
 msgstr ""
 "Renvoyer le courriel contenant les instructions pour les nouveaux projets"
 
-#: www/admin/grouplist.php:27 www/include/Layout.class.php:1405
+#: www/admin/grouplist.php:27 www/include/Layout.class.php:1403
 #: www/softwaremap/full_list.php:53
 msgid "Project List"
 msgstr "Liste des projets"
@@ -15630,9 +15623,9 @@ msgid "No project found."
 msgstr "Aucun projet trouvé."
 
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
-#: www/include/trove.php:408 www/include/trove.php:417
-#: www/include/trove.php:421 www/include/trove.php:425
-#: www/include/trove.php:429 www/trove/admin/trove_cat_add.php:49
+#: www/include/trove.php:409 www/include/trove.php:418
+#: www/include/trove.php:422 www/include/trove.php:426
+#: www/include/trove.php:430 www/trove/admin/trove_cat_add.php:49
 #, php-format
 msgid "Error in Trove Operation: %s"
 msgstr "Erreur lors d'une opération sur l'arbre : %s"
@@ -17051,7 +17044,7 @@ msgstr "Nom de version :"
 msgid "Features Boxes"
 msgstr "Boîtes d'informations"
 
-#: www/include/features_boxes.php:38 www/include/Layout.class.php:1393
+#: www/include/features_boxes.php:38 www/include/Layout.class.php:1391
 #: www/softwaremap/tag_cloud.php:52
 msgid "Tag Cloud"
 msgstr "Nuage d'étiquettes"
@@ -17406,24 +17399,24 @@ msgstr "Répertoire du thème introuvable !"
 msgid "en"
 msgstr "fr"
 
-#: www/include/Layout.class.php:704
+#: www/include/Layout.class.php:703
 msgid "Quick Jump To..."
 msgstr "Saut rapide vers..."
 
-#: www/include/Layout.class.php:1395
+#: www/include/Layout.class.php:1393
 #, fuzzy
 msgid "Browse per tags defined by the projects."
 msgstr "Ce projet n'a pas défini d'étiquettes."
 
-#: www/include/Layout.class.php:1399 www/softwaremap/trove_list.php:84
+#: www/include/Layout.class.php:1397 www/softwaremap/trove_list.php:84
 msgid "Project Tree"
 msgstr "Arbre des projets"
 
-#: www/include/Layout.class.php:1401 www/snippet/index.php:81
+#: www/include/Layout.class.php:1399 www/snippet/index.php:81
 msgid "Browse by Category"
 msgstr "Affichage par Catégorie"
 
-#: www/include/Layout.class.php:1407
+#: www/include/Layout.class.php:1405
 #, fuzzy
 msgid "Complete listing of available projects."
 msgstr "Voici une liste de fonctions possibles dans ce projet."
@@ -17486,23 +17479,23 @@ msgstr "Durée de vie du projet"
 msgid "for"
 msgstr "pour"
 
-#: www/include/trove.php:229
+#: www/include/trove.php:230
 msgid "None Selected"
 msgstr "Aucune catégorie sélectionnée"
 
-#: www/include/trove.php:272
+#: www/include/trove.php:273
 msgid "This project has not yet categorized itself in the"
 msgstr "Ce projet n'a pas encore été classé dans l'"
 
-#: www/include/trove.php:273
+#: www/include/trove.php:274
 msgid "Trove Software Map"
 msgstr "Arbre des projets"
 
-#: www/include/trove.php:339
+#: www/include/trove.php:340
 msgid "(Now Filtering)"
 msgstr "(Filtrage activé)"
 
-#: www/include/trove.php:347
+#: www/include/trove.php:348
 msgid "[Filter]"
 msgstr "[Filtrer]"
 
@@ -18382,7 +18375,7 @@ msgstr "Erreur: le sujet et le corps sont obligatoires."
 msgid "Submit News for Project: "
 msgstr "Soumettre une annonce pour le projet : "
 
-#: www/news/submit.php:137
+#: www/news/submit.php:136
 #, php-format
 msgid ""
 "You can post news about your project if you are an admin on your project. "
@@ -18950,7 +18943,7 @@ msgstr "Sous-projet mis à jour avec succès"
 
 #: www/pm/admin/index.php:154
 msgid "Subproject successfully deleted."
-msgstr "Sous-projet supprimé avec succès"
+msgstr "Sous-projet supprimé avec succès."
 
 #: www/pm/admin/index.php:177
 #, php-format
@@ -19251,7 +19244,6 @@ msgid "Upload data into the tasks"
 msgstr "Charger des données dans le gestionnaire de tâches"
 
 #: www/pm/csv.php:79
-#, fuzzy
 msgid ""
 "This page allows you to export or import all the tasks using a CSV (<a href="
 "\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated "
@@ -19506,9 +19498,8 @@ msgid "assignees"
 msgstr "responsables"
 
 #: www/pm/include/ProjectGroupHTML.class.php:55
-#, fuzzy
 msgid "General Admin"
-msgstr "Discussions générales"
+msgstr "Administration générale"
 
 #: www/pm/include/ProjectGroupHTML.class.php:59
 msgid "View Subprojects"
@@ -20102,11 +20093,8 @@ msgid "Project History"
 msgstr "Historique du projet"
 
 #: www/project/admin/project_admin_utils.php:61
-#, fuzzy
 msgid "Show the significant change of your project."
-msgstr ""
-"Cet état vous montre quels changements significatifs et quand ils ont été "
-"apportés à votre projet."
+msgstr "Voir les changements significatifs de votre projet."
 
 #: www/project/admin/project_admin_utils.php:65
 msgid "Post Jobs"

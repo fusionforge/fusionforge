@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 14:59+0100\n"
+"POT-Creation-Date: 2013-10-31 16:35+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -312,7 +312,8 @@ msgstr "Nome do ficheiro "
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:190
 #: www/frs/admin/qrs.php:197 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
-#: www/new/index.php:98 www/people/admin/index.php:52
+#: www/new/index.php:98 www/news/submit.php:144 www/news/submit.php:146
+#: www/news/submit.php:149 www/people/admin/index.php:52
 #: www/people/admin/index.php:65 www/people/editprofile.php:233
 #: www/people/skills_utils.php:121 www/people/viewprofile.php:47
 #: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
@@ -2072,10 +2073,10 @@ msgstr "Produciuse un erro, houbo un problema co anexo cargado no servidor"
 msgid "File Updated Successfully"
 msgstr "O ficheiro actualizouse correctamente"
 
-#: common/forum/ForumAdmin.class.php:40 common/forum/ForumFactory.class.php:60
-#: www/forum/admin/index.php:58
+#: common/forum/ForumAdmin.class.php:40 common/forum/Forum.class.php:126
+#: common/forum/ForumFactory.class.php:60 www/forum/admin/index.php:58
 #, php-format
-msgid "%s does not use the Forum tool"
+msgid "%s does not use the Forum tool."
 msgstr ""
 
 #: common/forum/ForumAdmin.class.php:61 www/forum/admin/index.php:363
@@ -2228,11 +2229,6 @@ msgid ""
 msgstr ""
 "O fío no que foi escrita esta mensaxe xa non existe, Por favor, elimine esta "
 "mensaxe."
-
-#: common/forum/Forum.class.php:126
-#, php-format
-msgid "%s does not use the Forum tool."
-msgstr ""
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:553
 msgid "Forum name must be at least 3 characters."
@@ -2453,7 +2449,7 @@ msgstr "Editar a mensaxe "
 #: plugins/forumml/www/index.php:111 www/admin/massmail.php:112
 #: www/admin/massmail.php:136 www/admin/pending-news.php:145
 #: www/developer/diary.php:80 www/news/admin/index.php:133
-#: www/news/admin/news_admin_utils.php:58 www/news/submit.php:145
+#: www/news/admin/news_admin_utils.php:58 www/news/submit.php:146
 #: www/sendmessage.php:68 www/sendmessage.php:149
 msgid "Subject"
 msgstr "Asunto "
@@ -3703,7 +3699,7 @@ msgstr "Eliminouse a etiqueta de proxecto"
 #: common/tracker/actions/mod.php:196
 #: common/tracker/include/build_submission_form.php:64
 #: common/widget/Widget_MyProjects.class.php:77
-#: www/include/Layout.class.php:722 www/pm/add_task.php:53
+#: www/include/Layout.class.php:721 www/pm/add_task.php:53
 #: www/pm/mod_task.php:62
 msgid "Admin"
 msgstr "Administración "
@@ -5133,7 +5129,7 @@ msgstr "Texto de formulario libre para a páxina de \"navegar polos elementos\""
 #: www/forum/admin/index.php:412 www/include/vote_function.php:284
 #: www/my/bookmark_add.php:58 www/my/diary.php:189
 #: www/news/admin/index.php:149 www/news/news_utils.php:42
-#: www/news/submit.php:160 www/pm/add_task.php:57 www/pm/add_task.php:140
+#: www/news/submit.php:161 www/pm/add_task.php:57 www/pm/add_task.php:140
 #: www/pm/add_task.php:154 www/pm/admin/index.php:217
 #: www/pm/admin/index.php:262 www/pm/admin/index.php:293 www/pm/csv.php:90
 #: www/pm/deletetask.php:51 www/pm/mod_task.php:54 www/pm/mod_task.php:254
@@ -6592,7 +6588,7 @@ msgid ""
 msgstr ""
 "Se <strong>non pode</strong> iniciar sesión, introduza o seu correo aquí"
 
-#: common/tracker/include/build_submission_form.php:53 www/news/submit.php:143
+#: common/tracker/include/build_submission_form.php:53 www/news/submit.php:144
 #: www/people/viewjob.php:79
 msgid "For project"
 msgstr "Para o proxecto"
@@ -7229,7 +7225,7 @@ msgstr "Configurar os roles permitidos para as transicións de %1$s a %2$s"
 
 #: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:56
 #: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:239
-#: www/include/Layout.class.php:1340
+#: www/include/Layout.class.php:1338
 msgid "Preferences"
 msgstr "Preferencias "
 
@@ -8181,7 +8177,7 @@ msgstr "O elemento #%s está pendente"
 
 #: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:147
 #: www/export/rssAboTask.php:146 www/my/diary.php:185
-#: www/news/admin/index.php:135 www/news/submit.php:148
+#: www/news/admin/index.php:135 www/news/submit.php:149
 msgid "Details"
 msgstr "Detalles "
 
@@ -15773,7 +15769,7 @@ msgstr "Caixa de SCM:"
 msgid "Resend New Project Instruction Email"
 msgstr "Reenviar un correo con instrucións para un proxecto novo "
 
-#: www/admin/grouplist.php:27 www/include/Layout.class.php:1405
+#: www/admin/grouplist.php:27 www/include/Layout.class.php:1403
 #: www/softwaremap/full_list.php:53
 msgid "Project List"
 msgstr "Listaxe de proxectos"
@@ -16325,9 +16321,9 @@ msgid "No project found."
 msgstr "Non se achou un grupo de proxecto "
 
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
-#: www/include/trove.php:408 www/include/trove.php:417
-#: www/include/trove.php:421 www/include/trove.php:425
-#: www/include/trove.php:429 www/trove/admin/trove_cat_add.php:49
+#: www/include/trove.php:409 www/include/trove.php:418
+#: www/include/trove.php:422 www/include/trove.php:426
+#: www/include/trove.php:430 www/trove/admin/trove_cat_add.php:49
 #, fuzzy, php-format
 msgid "Error in Trove Operation: %s"
 msgstr "Produciuse un error nunha operación na árbore de proxectos "
@@ -17801,7 +17797,7 @@ msgstr "Nome da publicación:"
 msgid "Features Boxes"
 msgstr "Solicitude de funcionalidade "
 
-#: www/include/features_boxes.php:38 www/include/Layout.class.php:1393
+#: www/include/features_boxes.php:38 www/include/Layout.class.php:1391
 #: www/softwaremap/tag_cloud.php:52
 msgid "Tag Cloud"
 msgstr "Nube de etiquetas"
@@ -18145,24 +18141,24 @@ msgstr "O ficheiro non pode moverse á posición permanente"
 msgid "en"
 msgstr "gl_ES "
 
-#: www/include/Layout.class.php:704
+#: www/include/Layout.class.php:703
 msgid "Quick Jump To..."
 msgstr "Salto rápido a..."
 
-#: www/include/Layout.class.php:1395
+#: www/include/Layout.class.php:1393
 #, fuzzy
 msgid "Browse per tags defined by the projects."
 msgstr "Este proxecto non ten definida ningunha etiqueta"
 
-#: www/include/Layout.class.php:1399 www/softwaremap/trove_list.php:84
+#: www/include/Layout.class.php:1397 www/softwaremap/trove_list.php:84
 msgid "Project Tree"
 msgstr "Árbore de proxectos"
 
-#: www/include/Layout.class.php:1401 www/snippet/index.php:81
+#: www/include/Layout.class.php:1399 www/snippet/index.php:81
 msgid "Browse by Category"
 msgstr "Navegar segundo a categoría"
 
-#: www/include/Layout.class.php:1407
+#: www/include/Layout.class.php:1405
 #, fuzzy
 msgid "Complete listing of available projects."
 msgstr "Esta é unha lista de postos dispoñíbeis neste proxecto."
@@ -18225,23 +18221,23 @@ msgstr "Vida do proxecto "
 msgid "for"
 msgstr "para"
 
-#: www/include/trove.php:229
+#: www/include/trove.php:230
 msgid "None Selected"
 msgstr "Non hai ningún seleccionado"
 
-#: www/include/trove.php:272
+#: www/include/trove.php:273
 msgid "This project has not yet categorized itself in the"
 msgstr "Este proxecto aínda non foi categorizado na"
 
-#: www/include/trove.php:273
+#: www/include/trove.php:274
 msgid "Trove Software Map"
 msgstr "Árbore de proxectos"
 
-#: www/include/trove.php:339
+#: www/include/trove.php:340
 msgid "(Now Filtering)"
 msgstr "(Filtrando agora)"
 
-#: www/include/trove.php:347
+#: www/include/trove.php:348
 msgid "[Filter]"
 msgstr "[Filtro]"
 
@@ -19097,7 +19093,7 @@ msgstr "ERRO - É necesario tanto o corpo como o asunto"
 msgid "Submit News for Project: "
 msgstr "Lista de novas enviadas por proxecto"
 
-#: www/news/submit.php:137
+#: www/news/submit.php:136
 #, php-format
 msgid ""
 "You can post news about your project if you are an admin on your project. "

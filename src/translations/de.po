@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-29 14:59+0100\n"
+"POT-Creation-Date: 2013-10-31 16:35+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -312,7 +312,8 @@ msgstr "Dateiname"
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:190
 #: www/frs/admin/qrs.php:197 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
-#: www/new/index.php:98 www/people/admin/index.php:52
+#: www/new/index.php:98 www/news/submit.php:144 www/news/submit.php:146
+#: www/news/submit.php:149 www/people/admin/index.php:52
 #: www/people/admin/index.php:65 www/people/editprofile.php:233
 #: www/people/skills_utils.php:121 www/people/viewprofile.php:47
 #: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
@@ -2078,10 +2079,10 @@ msgstr ""
 msgid "File Updated Successfully"
 msgstr "Datei erfolgreich aktualisiert"
 
-#: common/forum/ForumAdmin.class.php:40 common/forum/ForumFactory.class.php:60
-#: www/forum/admin/index.php:58
+#: common/forum/ForumAdmin.class.php:40 common/forum/Forum.class.php:126
+#: common/forum/ForumFactory.class.php:60 www/forum/admin/index.php:58
 #, php-format
-msgid "%s does not use the Forum tool"
+msgid "%s does not use the Forum tool."
 msgstr ""
 
 #: common/forum/ForumAdmin.class.php:61 www/forum/admin/index.php:363
@@ -2236,11 +2237,6 @@ msgid ""
 msgstr ""
 "Der Thread zu dem die Nachricht gepostet wurde, existiert nicht mehr, bitte "
 "löschen Sie die Nachricht."
-
-#: common/forum/Forum.class.php:126
-#, php-format
-msgid "%s does not use the Forum tool."
-msgstr ""
 
 #: common/forum/Forum.class.php:172 common/forum/Forum.class.php:553
 msgid "Forum name must be at least 3 characters."
@@ -2462,7 +2458,7 @@ msgstr "Bearbeite eine Nachricht"
 #: plugins/forumml/www/index.php:111 www/admin/massmail.php:112
 #: www/admin/massmail.php:136 www/admin/pending-news.php:145
 #: www/developer/diary.php:80 www/news/admin/index.php:133
-#: www/news/admin/news_admin_utils.php:58 www/news/submit.php:145
+#: www/news/admin/news_admin_utils.php:58 www/news/submit.php:146
 #: www/sendmessage.php:68 www/sendmessage.php:149
 msgid "Subject"
 msgstr "Betreff"
@@ -3723,7 +3719,7 @@ msgstr "Projektkennzeichen gelöscht."
 #: common/tracker/actions/mod.php:196
 #: common/tracker/include/build_submission_form.php:64
 #: common/widget/Widget_MyProjects.class.php:77
-#: www/include/Layout.class.php:722 www/pm/add_task.php:53
+#: www/include/Layout.class.php:721 www/pm/add_task.php:53
 #: www/pm/mod_task.php:62
 msgid "Admin"
 msgstr "Verwalten"
@@ -5152,7 +5148,7 @@ msgstr "Freitext für die \"Durchsuche Objekte\" Seite"
 #: www/forum/admin/index.php:412 www/include/vote_function.php:284
 #: www/my/bookmark_add.php:58 www/my/diary.php:189
 #: www/news/admin/index.php:149 www/news/news_utils.php:42
-#: www/news/submit.php:160 www/pm/add_task.php:57 www/pm/add_task.php:140
+#: www/news/submit.php:161 www/pm/add_task.php:57 www/pm/add_task.php:140
 #: www/pm/add_task.php:154 www/pm/admin/index.php:217
 #: www/pm/admin/index.php:262 www/pm/admin/index.php:293 www/pm/csv.php:90
 #: www/pm/deletetask.php:51 www/pm/mod_task.php:54 www/pm/mod_task.php:254
@@ -6613,7 +6609,7 @@ msgstr ""
 "Falls Sie sich <strong>nicht</strong> einloggen können, dann tragen Sie Ihre "
 "Email-Adresse hier ein:"
 
-#: common/tracker/include/build_submission_form.php:53 www/news/submit.php:143
+#: common/tracker/include/build_submission_form.php:53 www/news/submit.php:144
 #: www/people/viewjob.php:79
 msgid "For project"
 msgstr "Für Projekt"
@@ -7256,7 +7252,7 @@ msgstr "Konfigurieren Sie erlaube Rollen für den Übergang von %1$s zu %2$s"
 
 #: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:56
 #: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:239
-#: www/include/Layout.class.php:1340
+#: www/include/Layout.class.php:1338
 msgid "Preferences"
 msgstr "Einstellungen"
 
@@ -8212,7 +8208,7 @@ msgstr "Das Element #%s ist schwebend"
 
 #: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:147
 #: www/export/rssAboTask.php:146 www/my/diary.php:185
-#: www/news/admin/index.php:135 www/news/submit.php:148
+#: www/news/admin/index.php:135 www/news/submit.php:149
 msgid "Details"
 msgstr "Details"
 
@@ -15764,7 +15760,7 @@ msgstr "SCM Box:"
 msgid "Resend New Project Instruction Email"
 msgstr "Sende erneut neue Email mit Projekt-Anweisungen"
 
-#: www/admin/grouplist.php:27 www/include/Layout.class.php:1405
+#: www/admin/grouplist.php:27 www/include/Layout.class.php:1403
 #: www/softwaremap/full_list.php:53
 msgid "Project List"
 msgstr "Projektliste"
@@ -16317,9 +16313,9 @@ msgid "No project found."
 msgstr "Keine Projektgruppen gefunden"
 
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
-#: www/include/trove.php:408 www/include/trove.php:417
-#: www/include/trove.php:421 www/include/trove.php:425
-#: www/include/trove.php:429 www/trove/admin/trove_cat_add.php:49
+#: www/include/trove.php:409 www/include/trove.php:418
+#: www/include/trove.php:422 www/include/trove.php:426
+#: www/include/trove.php:430 www/trove/admin/trove_cat_add.php:49
 #, fuzzy, php-format
 msgid "Error in Trove Operation: %s"
 msgstr "Fehler bei Katalog-Operation"
@@ -17814,7 +17810,7 @@ msgstr "Versionsname:"
 msgid "Features Boxes"
 msgstr "Feature Anfragen"
 
-#: www/include/features_boxes.php:38 www/include/Layout.class.php:1393
+#: www/include/features_boxes.php:38 www/include/Layout.class.php:1391
 #: www/softwaremap/tag_cloud.php:52
 msgid "Tag Cloud"
 msgstr "Tag Cloud"
@@ -18155,25 +18151,25 @@ msgstr "Datei kann nicht zum aktuellen Ort verschoben werden"
 msgid "en"
 msgstr "de"
 
-#: www/include/Layout.class.php:704
+#: www/include/Layout.class.php:703
 #, fuzzy
 msgid "Quick Jump To..."
 msgstr "Schnellwechsel nach..."
 
-#: www/include/Layout.class.php:1395
+#: www/include/Layout.class.php:1393
 #, fuzzy
 msgid "Browse per tags defined by the projects."
 msgstr "Kein Kennzeichen für dieses Projekt festgelegt"
 
-#: www/include/Layout.class.php:1399 www/softwaremap/trove_list.php:84
+#: www/include/Layout.class.php:1397 www/softwaremap/trove_list.php:84
 msgid "Project Tree"
 msgstr "Projektbaum"
 
-#: www/include/Layout.class.php:1401 www/snippet/index.php:81
+#: www/include/Layout.class.php:1399 www/snippet/index.php:81
 msgid "Browse by Category"
 msgstr "Nach Kategorie durchsuchen"
 
-#: www/include/Layout.class.php:1407
+#: www/include/Layout.class.php:1405
 #, fuzzy
 msgid "Complete listing of available projects."
 msgstr "Hier ist eine Liste der verfügbaren Positionen für dieses Projekt."
@@ -18236,23 +18232,23 @@ msgstr "Projekt-Lebensdauer"
 msgid "for"
 msgstr "für"
 
-#: www/include/trove.php:229
+#: www/include/trove.php:230
 msgid "None Selected"
 msgstr "Keine Auswahl getroffen"
 
-#: www/include/trove.php:272
+#: www/include/trove.php:273
 msgid "This project has not yet categorized itself in the"
 msgstr "Dieses Projekt hat sich noch nicht kategorisiert in der"
 
-#: www/include/trove.php:273
+#: www/include/trove.php:274
 msgid "Trove Software Map"
 msgstr "Softwarefundkarte"
 
-#: www/include/trove.php:339
+#: www/include/trove.php:340
 msgid "(Now Filtering)"
 msgstr "( Filter an)"
 
-#: www/include/trove.php:347
+#: www/include/trove.php:348
 msgid "[Filter]"
 msgstr "[Filter]"
 
@@ -19131,7 +19127,7 @@ msgstr "Fehler - Betreff und Hauptteil (Body) werden benötigt."
 msgid "Submit News for Project: "
 msgstr "Diese Nachrichten Elemente wurden zu diesem Projekt freigegeben"
 
-#: www/news/submit.php:137
+#: www/news/submit.php:136
 #, fuzzy, php-format
 msgid ""
 "You can post news about your project if you are an admin on your project. "
