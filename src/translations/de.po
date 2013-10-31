@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-31 16:35+0100\n"
+"POT-Creation-Date: 2013-10-31 17:31+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -189,9 +189,8 @@ msgstr "JOB erfolgreich eingefügt"
 #: common/docman/Document.class.php:941
 #: common/docman/DocumentGroup.class.php:723
 #: common/docman/views/reporting.php:169
-#, fuzzy
 msgid "Folder"
-msgstr "Dateiname"
+msgstr ""
 
 #: common/docman/actions/monitordirectory.php:43
 #: common/docman/actions/monitorfile.php:44
@@ -2428,7 +2427,7 @@ msgstr "Aktuelle Datei"
 #: common/forum/ForumHTML.class.php:319 common/forum/ForumHTML.class.php:353
 msgid "Use the “Browse” button to find the file you want to attach"
 msgstr ""
-"Nutzen Sie den \"Browse\" Knopf um die Datei zu finden, die Sie anhängen "
+"Nutzen Sie den »Browse« Knopf um die Datei zu finden, die Sie anhängen "
 "möchten."
 
 #: common/forum/ForumHTML.class.php:322 common/forum/ForumHTML.class.php:356
@@ -2516,9 +2515,9 @@ msgstr ""
 "wären."
 
 #: common/forum/ForumHTML.class.php:636
-#, fuzzy, php-format
+#, php-format
 msgid "Please <a href=\"%s\">log in</a>"
-msgstr "Bitte <a href=\"%1$s\">loggen Sie ein</a>"
+msgstr "Bitte <a href=\"%s\">loggen Sie ein</a>"
 
 #: common/forum/ForumMessage.class.php:88
 msgid "Group_forum_id in db result does not match Forum Object"
@@ -2619,9 +2618,8 @@ msgid "Message not found"
 msgstr "Nachricht nicht gefunden"
 
 #: common/forum/ForumMessageFactory.class.php:58
-#, fuzzy
 msgid "Invalid group_form_id"
-msgstr "Ungültige Operation"
+msgstr "Ungültiges group_form_id"
 
 #: common/frs/FRSFile.class.php:82 common/frs/FRSFile.class.php:398
 #, fuzzy
@@ -2637,8 +2635,8 @@ msgstr "Der Name ist zu kurz. Er muss mindestens 3 Buchstaben enthalten."
 msgid ""
 "Filename can only be alphanumeric and “-”, “_”, “+”, “.”, “~” characters."
 msgstr ""
-"Für Dateinamen können ausschließlich alphanumerische und “-”, “_”, “+”, “.”, "
-"“~” Zeichen verwendet werden."
+"Für Dateinamen können ausschließlich alphanumerische und »-«, »_«, »+«, ».«, "
+"»~« Zeichen verwendet werden."
 
 #: common/frs/FRSFile.class.php:135
 msgid "FRSFile Appears to be invalid"
@@ -2658,9 +2656,8 @@ msgid "Error Adding Release: "
 msgstr "Fehler beim Hinzufügen der Datenbank"
 
 #: common/frs/FRSFile.class.php:232
-#, fuzzy
 msgid "Invalid file_id"
-msgstr "Ungültiger Dateiname."
+msgstr "Ungültiger file_id"
 
 #: common/frs/FRSFile.class.php:416 common/frs/FRSPackage.class.php:396
 #: common/frs/FRSRelease.class.php:438 common/include/Error.class.php:167
@@ -2697,9 +2694,8 @@ msgid "Error Adding Package: "
 msgstr "Fehler beim Hinzufügen der Datenbank"
 
 #: common/frs/FRSPackage.class.php:205
-#, fuzzy
 msgid "Invalid package_id"
-msgstr "Ungültiges Datum"
+msgstr "Ungültiger package_id"
 
 #: common/frs/FRSPackage.class.php:291
 #, fuzzy
@@ -2773,7 +2769,7 @@ msgstr "[%1$s Release] %2$s"
 #, php-format
 msgid "Project %1$s (%2$s) has released a new version of package “%3$s”."
 msgstr ""
-"Das Projekt %1$s (%2$s) hat eine Neue Version des Pakets “%3$s” "
+"Das Projekt %1$s (%2$s) hat eine Neue Version des Pakets »%3$s« "
 "veröffentlicht."
 
 #: common/frs/FRSRelease.class.php:294
@@ -3123,8 +3119,8 @@ msgid ""
 "Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&'#"
 "+. and space"
 msgstr ""
-"Fehlerhafter \"tag name\", Sie dürfen nur die folgenden Zeichen verwenden: "
-"[A-Z][a-z][0-9]-_&'#+. und das Leerzeichen"
+"Fehlerhafter »tag name«, Sie dürfen nur die folgenden Zeichen verwenden: [A-"
+"Z][a-z][0-9]-_&'#+. und das Leerzeichen"
 
 #: common/include/Group.class.php:1593
 #, fuzzy
@@ -3250,9 +3246,8 @@ msgid "Error: User not removed: %s"
 msgstr "Fehler: Der Nutzer: %s wurde nicht entfernt"
 
 #: common/include/Group.class.php:2091
-#, fuzzy
 msgid "Error: artifact:"
-msgstr "Fehler beim Erstellen des Mitarbeiter-Objektes: %s"
+msgstr "Fehler: artifact:"
 
 #: common/include/Group.class.php:2112 common/include/Group.class.php:2125
 #, php-format
@@ -3465,9 +3460,9 @@ msgid "Group name already taken"
 msgstr "Der Gruppenname wird bereits verwendet"
 
 #: common/include/Group.class.php:2814
-#, fuzzy, php-format
+#, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
-msgstr "Fehler: Datenbank: Konnte den Gruppenstatus: %s nicht verändern"
+msgstr "Fehler: Konnte den Unix Gruppen Status nicht aktualisieren: %s"
 
 #: common/include/Group.class.php:2877
 #, fuzzy, php-format
@@ -4273,9 +4268,9 @@ msgid "File %1$s cannot be moved to the permanent location: %2$s."
 msgstr "Datei kann nicht zum aktuellen Ort verschoben werden"
 
 #: common/include/Storage.class.php:70
-#, fuzzy, php-format
+#, php-format
 msgid "Not a File %1$s or not a directory %2$s."
-msgstr "Datei kann nicht zum aktuellen Ort verschoben werden"
+msgstr ""
 
 #: common/include/User.class.php:246
 #, fuzzy
@@ -4644,9 +4639,8 @@ msgid "Subproject Description Must Be At Least 10 Characters"
 msgstr "Dokumentenbeschreibung muß mindestens 10 Zeichen haben"
 
 #: common/pm/ProjectGroup.class.php:195
-#, fuzzy
 msgid "Invalid group_project_id"
-msgstr "Ungültige Operation"
+msgstr "Ungültiges group_project_id"
 
 #: common/pm/ProjectGroupFactory.class.php:62
 #, php-format
@@ -5031,9 +5025,8 @@ msgid "Could Not Get ArtifactTypeFactory"
 msgstr "Konnte Factory nicht anzeigen"
 
 #: common/tracker/actions/admin-ind.php:87
-#, fuzzy
 msgid "Trackers Administration"
-msgstr "Survey \tAdministration"
+msgstr ""
 
 #: common/tracker/actions/admin-ind.php:90
 msgid "No trackers found"
@@ -5550,8 +5543,8 @@ msgstr "Standard"
 #, php-format
 msgid "Viewing only opened records by default, use “%1$s” or “%2$s” to change."
 msgstr ""
-"Standardmäßig nur geöffnete Aufzeichnungen ansehen, nutzen Sie “%1$s” oder "
-"“%2$s” um dies zu ändern."
+"Standardmäßig nur geöffnete Aufzeichnungen ansehen, nutzen Sie »%1$s« oder "
+"»%2$s« um dies zu ändern."
 
 #: common/tracker/actions/browse.php:538 www/pm/browse_task.php:207
 msgid "Check all"
@@ -5617,7 +5610,7 @@ msgid ""
 msgstr ""
 "Wenn Sie bei allen oben ausgewählten Positionen Änderungen durchführen "
 "möchten, nutzen Sie diese Bedienungselemente um ihre Eigenschaften zu ändern "
-"und klicken Sie anschliessend auf \"Massen-Update\"."
+"und klicken Sie anschliessend auf »Massen-Update«."
 
 #: common/tracker/actions/browse.php:735 common/tracker/actions/browse.php:746
 #: common/tracker/actions/browse.php:750 www/include/html.php:361
@@ -5890,7 +5883,7 @@ msgstr "Suchanfrage löschen"
 #: common/tracker/actions/query.php:317
 #, php-format
 msgid "Note: The default project query is currently “%s”."
-msgstr "Hinweis: Die Standard Projektsuche ist momentan '%s'."
+msgstr "Hinweis: Die Standard Projektsuche ist momentan »%s«."
 
 #: common/tracker/actions/query.php:320
 msgid "Note: There is no default project query defined."
@@ -6306,7 +6299,7 @@ msgstr ""
 #: common/tracker/ArtifactExtraField.class.php:500
 #, php-format
 msgid "“%s” is a reserved alias. Please provide another name."
-msgstr "'%s' ist ein reservierter Alias. Bitte wählen Sie einen anderen Namen."
+msgstr "»%s« ist ein reservierter Alias. Bitte wählen Sie einen anderen Namen."
 
 #: common/tracker/ArtifactExtraField.class.php:584
 msgid "Out of range value"
@@ -7208,7 +7201,7 @@ msgid ""
 "“Status”."
 msgstr ""
 "Um einen Workflow zu erzeugen müssen Sie zuerst ein benutzerdefiniertes Feld "
-"des 'Status'-Typs anlegen."
+"des »Status«-Typs anlegen."
 
 #: common/tracker/views/form-workflow.php:34
 msgid "Internal error: Illegal number of status fields (WKFL01)."
@@ -8388,7 +8381,7 @@ msgstr "Passwort"
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: www/account/verify.php:93 www/admin/userlist.php:79
 msgid "Login"
-msgstr "Einloggen (SSL)"
+msgstr "Einloggen"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:82
 msgid "[Lost your password?]"
@@ -10068,7 +10061,7 @@ msgstr "Keine Treffer für »%s« gefunden"
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
 #, php-format
 msgid "Search results for “%s”"
-msgstr "Suchergebnisse für <em>%s</em>"
+msgstr "Suchergebnisse für »%s«"
 
 #: plugins/globalsearch/www/index.php:166
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
@@ -11078,14 +11071,12 @@ msgstr ""
 "strong>"
 
 #: plugins/mailman/www/admin/index.php:123
-#, fuzzy
 msgid ""
 "It will take <span class=\"important\">few minutes</span> for your list to "
 "be created."
 msgstr ""
-"<p>Listen werden folgendermaßen benannt:<br /><strong> projectname-listname@"
-"%1$s</strong></p><p> Es dauert <span class=\"important\">6-24 Stunden</"
-"span>bis die Liste angelegt ist.</p>"
+"Es dauert <span class=\"important\">einige Minuten</span>bis die Liste "
+"angelegt ist."
 
 #: plugins/mailman/www/admin/index.php:134 www/mail/admin/index.php:152
 msgid "Unable to get the lists"
@@ -11275,7 +11266,7 @@ msgstr "Anhang gelöscht"
 #: plugins/mantisbt/action/deleteCategory.php:40
 #, fuzzy, php-format
 msgid "Category %s deleted successfully."
-msgstr "JOB Qualifikationen-Löschung erfolgreich"
+msgstr "Job Qualifikationen-Löschung erfolgreich"
 
 #: plugins/mantisbt/action/deleteCategory.php:43
 #, fuzzy
@@ -11653,9 +11644,8 @@ msgid "Rename"
 msgstr "Richtiger Name"
 
 #: plugins/mantisbt/view/admin/viewCategorie.php:75
-#, fuzzy
 msgid "No Categories"
-msgstr "Kategorien hinzufügen"
+msgstr "Keine Kategorien"
 
 #: plugins/mantisbt/view/admin/viewConfiguration.php:59
 #: plugins/mantisbt/view/init.php:65
@@ -11968,9 +11958,8 @@ msgid "MediaWiki Plugin admin"
 msgstr "Post-Admin"
 
 #: plugins/mediawiki/include/MediaWikiPluginDescriptor.class.php:29
-#, fuzzy
 msgid "Mediawiki"
-msgstr "Wiki"
+msgstr "Mediawiki"
 
 #: plugins/mediawiki/include/MediaWikiPluginDescriptor.class.php:29
 msgid "Mediawiki integration in the forge"
@@ -13064,7 +13053,7 @@ msgstr "Projektinformationen aktualisiert"
 #: plugins/projects-hierarchy/actions/validateRelationship.php:33
 #, fuzzy
 msgid "Task done."
-msgstr "Auftrags-ID"
+msgstr "Auftrags-ID."
 
 #: plugins/projects-hierarchy/actions/validateRelationship.php:35
 #, fuzzy
@@ -14754,17 +14743,11 @@ msgid ""
 "the server in your ~/.ssh/authorized_keys file. This is done by a cron job, "
 "so it may not happen immediately.  Please allow for a one hour delay."
 msgstr ""
-"<p>Um zu vermeiden, dass Sie jedesmal Ihr Passwort für ihren CVS/SSH "
-"Entwickler Account eingeben müssen, können Sie Ihre(n) öffentlichen "
-"Schlüssel hier hochladen und Sie werden auf dem CVS Server in Ihrer ~/.ssh/"
-"authorized_keys Datei abgelegt. Dies wird von einem Cron-Job erledigt, sodaß "
-"dies nicht sofort passieren muss. Bitte geben Sie uns bis zu einer Stunde "
-"Zeit dafür.</p><p>Um einen öffentlichen Schlüssel zu generieren, führen Sie "
-"das Programm 'ssh-keygen' aus (Sie können beide Protokolle 1 oder 2 "
-"benutzen). Der öffentliche Schlüssel wird in '~/.ssh/identity."
-"pub' (Protokoll 1) oder '~/.ssh/id_dsa.pub' oder '~/.ssh/id_rsa."
-"pub' (Protokoll 2) abgelegt. Lesen Sie die ssh Dokumentation für weitere "
-"Informationen, wie man Schlüssel teilt.</p>"
+"Um zu vermeiden, dass Sie jedesmal Ihr Passwort für ihren CVS/SSH Entwickler "
+"Account eingeben müssen, können Sie Ihre(n) öffentlichen Schlüssel hier "
+"hochladen und Sie werden auf dem CVS Server in Ihrer ~/.ssh/authorized_keys "
+"Datei abgelegt. Dies wird von einem Cron-Job erledigt, sodaß dies nicht "
+"sofort passieren muss. Bitte geben Sie uns bis zu einer Stunde Zeit dafür."
 
 #: www/account/editsshkeys.php:75
 msgid ""
@@ -15046,7 +15029,7 @@ msgid ""
 "account. Visiting the URL will allow you to change your password online and "
 "login."
 msgstr ""
-"Klicken Sie auf “Send Lost PW Hash” unten um einen Link per E-Mail an Ihre "
+"Klicken Sie auf »Send Lost PW Hash« unten um einen Link per E-Mail an Ihre "
 "gespeicherte Mailadresse zu erhalten. Dieser Link beinhaltet einen 128-bit "
 "Bestätigungs-Hash für Ihren Account. Wenn Sie den Link anklicken, erhalten "
 "Sie die Gelegenheit Ihr Passwort Online zu ändern und einzuloggen."
@@ -15084,13 +15067,13 @@ msgid ""
 "confirmation email."
 msgstr ""
 "Tragen Sie einen Benutzernamen oder eine E-Mail-Adresse ein und klicken sie "
-"auf 'Submit', um die Bestätigungsemail erneut zu versenden."
+"auf »Submit«, um die Bestätigungsemail erneut zu versenden."
 
 #: www/account/pending-resend.php:58
 msgid ""
 "Fill in a user name and click “Submit” to resend the confirmation email."
 msgstr ""
-"Tragen Sie einen Benutzernamen ein und klicken sie auf 'Submit', um die "
+"Tragen Sie einen Benutzernamen ein und klicken sie auf »Submit«, um die "
 "Bestätigungsemail erneut zu versenden."
 
 #: www/account/register.php:75
@@ -15126,8 +15109,7 @@ msgid ""
 "A confirmation email is being sent to verify the submitted email address. "
 "Visiting the link sent in this email will activate the account."
 msgstr ""
-"<p>Gratulation. Sie haben sich auf %1$s registrieren lassen.</p><p> Ihnen "
-"wurde eine Bestätigungs-EMail zugesandt, um Ihre EMail-Adresse zu "
+"Ihnen wurde eine Bestätigungs-EMail zugesandt, um Ihre EMail-Adresse zu "
 "überprüfen. Das Besuchen des Links, der in dieser Email steht, wird Ihren "
 "Account aktivieren."
 
@@ -15354,7 +15336,7 @@ msgid ""
 "You can't delete the license %s since it is currently referenced in a "
 "project."
 msgstr ""
-"Sie können die Lizenz %1$s nicht löschen, weil sie zur Zeit in einem Projekt "
+"Sie können die Lizenz %s nicht löschen, weil sie zur Zeit in einem Projekt "
 "referenziert wird."
 
 #: www/admin/admin_table.php:133
@@ -15372,7 +15354,7 @@ msgid ""
 "You cannot delete the theme %s since it is currently referenced in a user "
 "profile."
 msgstr ""
-"Sie können die Sprache %1$s nicht löschen, weil sie zur Zeit in einem "
+"Sie können die Sprache %s nicht löschen, weil sie zur Zeit in einem "
 "Benutzerprofil referenziert wird."
 
 #: www/admin/admin_table.php:153
@@ -15502,7 +15484,7 @@ msgstr ""
 
 #: www/admin/approve-pending.php:197
 msgid "License Other:"
-msgstr "andere Lizenz:"
+msgstr "Andere Lizenz:"
 
 #: www/admin/approve-pending.php:201
 msgid "Pending reason:"
@@ -15974,7 +15956,7 @@ msgstr "Projekt-Datenbank Administration"
 #: www/admin/index.php:239
 #, fuzzy
 msgid "Job / Categories Administration"
-msgstr "Foren: \tAdministration"
+msgstr "Foren: Administration"
 
 #: www/admin/massmail.php:45 www/admin/massmail.php:94
 msgid "Target Audience"
@@ -16024,11 +16006,11 @@ msgstr "(auswählen)"
 
 #: www/admin/massmail.php:98
 msgid "Subscribers to “Site Updates”"
-msgstr "Abonnenten für “Site Updates”"
+msgstr "Abonnenten für »Site Updates«"
 
 #: www/admin/massmail.php:99
 msgid "Subscribers to “Additional Community Mailings”"
-msgstr "Abonnenten für “Additional Community Mailings”"
+msgstr "Abonnenten für »Additional Community Mailings«"
 
 #: www/admin/massmail.php:100
 msgid "All Project Developers"
@@ -16121,10 +16103,9 @@ msgstr "NewsByte abgelehnt."
 #: www/admin/pending-news.php:113
 #, fuzzy
 msgid "News Administration"
-msgstr "Foren: \tAdministration"
+msgstr "Administration"
 
 #: www/admin/pending-news.php:127
-#, fuzzy
 msgid "Newsbyte deleted"
 msgstr "NewsByte gelöscht"
 
@@ -16229,7 +16210,7 @@ msgstr "Seite Administrator: Bearbeite Ablehnungs-Antworten"
 #: www/admin/responses_admin.php:36
 #, php-format
 msgid "You cannot %1$s “None”!"
-msgstr "Sie können nicht %1$s \\\"None\\\"!"
+msgstr "Sie können nicht %1$s »None«!"
 
 #: www/admin/responses_admin.php:74
 msgid "Edited Response"
@@ -16253,7 +16234,7 @@ msgstr "Gelöschte Antworten"
 
 #: www/admin/responses_admin.php:110
 msgid "If you are not sure then why did you click “Delete”?"
-msgstr "Wenn Sie nicht sicher sind, warum haben Sie dann 'Löschen' angeklickt?"
+msgstr "Wenn Sie nicht sicher sind, warum haben Sie dann »Löschen« angeklickt?"
 
 #: www/admin/responses_admin.php:111
 msgid "By the way, I didn't delete... just in case..."
@@ -16496,7 +16477,7 @@ msgstr "Kennzeichen zum projekt hinzufügen"
 
 #: www/admin/useredit.php:117
 msgid "Site Admin: User Info"
-msgstr "Site \tAdministrator: Benutzer-Info"
+msgstr "Site Administrator: Benutzer-Info"
 
 #: www/admin/useredit.php:121
 msgid "Account Information"
@@ -16821,9 +16802,8 @@ msgstr ""
 "übermitteln."
 
 #: www/docman/index.php:118
-#, fuzzy
 msgid "Documents for "
-msgstr "Dokumente"
+msgstr "Dokumente für "
 
 #: www/docman/view.php:60 www/docman/view.php:232
 #, fuzzy
@@ -17649,7 +17629,7 @@ msgstr ""
 
 #: www/frs/admin/qrs.php:148
 msgid "Package ID"
-msgstr "Paket \tID"
+msgstr "Paket ID"
 
 #: www/frs/admin/qrs.php:155
 msgid "No File Types Available"
@@ -18784,7 +18764,7 @@ msgstr "Kein Zugriff auf Liste %s möglich."
 #: www/mail/index.php:97
 #, fuzzy, php-format
 msgid "%s Archives"
-msgstr "%1$s Archive"
+msgstr "%s Archive"
 
 #: www/mail/index.php:100
 msgid "Subscribe/Unsubscribe/Preferences"
@@ -19118,7 +19098,6 @@ msgid "News Added."
 msgstr "Neuigkeit hinzugefügt."
 
 #: www/news/submit.php:115
-#, fuzzy
 msgid "Error: both subject and body are required."
 msgstr "Fehler - Betreff und Hauptteil (Body) werden benötigt."
 
@@ -19225,7 +19204,7 @@ msgstr ""
 #: www/people/editjob.php:114
 #, fuzzy, php-format
 msgid "Job skill update failed: %s"
-msgstr "JOB Qualifikationen-Aktualisierung fehlgeschlagen"
+msgstr "Job Qualifikationen-Aktualisierung fehlgeschlagen"
 
 #: www/people/editjob.php:116
 msgid "Job skill updated successfully"
@@ -19348,7 +19327,7 @@ msgstr "Fähigkeiten ändern"
 #: www/people/editprofile.php:151
 msgid "Change the required fields, and press “Done” at the bottom of the page"
 msgstr ""
-"Ändern Sie die benötigten Felder und klicken Sie “Erledigt” am Ende der "
+"Ändern Sie die benötigten Felder und klicken Sie »Erledigt« am Ende der "
 "Seite an."
 
 #: www/people/editprofile.php:156
@@ -19364,9 +19343,9 @@ msgid "No skills selected to delete."
 msgstr "Keine Qualifikationen zum Löschen ausgewählt."
 
 #: www/people/editprofile.php:186
-#, fuzzy, php-format
+#, php-format
 msgid "Failed to delete any skills: %s"
-msgstr "Löschung sämtlicher Qualifikationen fehlgeschlagen"
+msgstr "Löschung sämtlicher Qualifikationen fehlgeschlagen: %s"
 
 #: www/people/editprofile.php:188
 msgid "Skill deleted successfully"
@@ -19815,8 +19794,8 @@ msgstr "Kein solches Posting für dieses Projekt"
 #: www/pm/admin/index.php:429
 msgid "You may add new Subprojects using the “Add a Subproject” link above."
 msgstr ""
-"Sie können neue Projekte hinzufügen, indem Sie den \"Projekt hinzufügen\" "
-"Link oben nutzen."
+"Sie können neue Projekte hinzufügen, indem Sie den »Projekt hinzufügen« Link "
+"oben nutzen."
 
 #: www/pm/admin/index.php:433
 #, fuzzy
@@ -20015,7 +19994,6 @@ msgid "Upload data into the tasks"
 msgstr "Daten in den Auftrags-Manager hochladen"
 
 #: www/pm/csv.php:79
-#, fuzzy
 msgid ""
 "This page allows you to export or import all the tasks using a CSV (<a href="
 "\"http://en.wikipedia.org/wiki/Comma-separated_values\">Comma Separated "
@@ -20029,15 +20007,15 @@ msgstr ""
 
 #: www/pm/csv.php:80
 msgid "Export tasks as a CSV file"
-msgstr "Aufgaben als CVS-Datei exportieren"
+msgstr "Aufgaben als CSV-Datei exportieren"
 
 #: www/pm/csv.php:84
 msgid "Export CSV file"
-msgstr "CVS-Datei exportieren"
+msgstr "CSV-Datei exportieren"
 
 #: www/pm/csv.php:86
 msgid "Import tasks using a CSV file"
-msgstr "Aufgaben mit Hilfe einer CVS-Datei importieren "
+msgstr "Aufgaben mit Hilfe einer CSV-Datei importieren"
 
 #: www/pm/csv.php:88 www/pm/uploadcsv.php:44
 msgid "Choose a file in the proper .csv format for uploading."
@@ -20474,8 +20452,8 @@ msgid ""
 "Note that same task can be assigned to several technicians. Such task will "
 "be counted for each of them."
 msgstr ""
-"<p>\tBeachten Sie, dass derselbe Auftrag auch mehreren Technikern zugeordnet "
-"sein kann. Eine solcher Auftrag wird für jedes von ihnen gezählt.</p>"
+"Beachten Sie, dass derselbe Auftrag auch mehreren Technikern zugeordnet sein "
+"kann. Eine solcher Auftrag wird für jedes von ihnen gezählt."
 
 #: www/pm/task.php:69
 #, fuzzy
@@ -20600,7 +20578,7 @@ msgid ""
 "Clicking on “create” will schedule the creation of the database, and email "
 "the details to the project administrators"
 msgstr ""
-"Klicken Sie auf  \"create\" um die Erstellung einer Datenbank zu planen und "
+"Klicken Sie auf »create« um die Erstellung einer Datenbank zu planen und "
 "mailen Sie die Dtails an die Projektadministratoren"
 
 #: www/project/admin/database.php:168
@@ -20851,7 +20829,7 @@ msgstr ""
 "Klicken Sie in das Kästchen neben dem Namen des/der Nutzer(s) den/die Sie "
 "hinzufügen möchten. Ihre Auswahl wird gespeichert wenn Sie auf einen der "
 "untenstehenden Buchstaben klicken. Wenn Sie fertig sind, klicken Sie auf "
-"“Finish” um den hinzuzufügenden Nutzern ihre Rollen zuzuweisen."
+"»Finish« um den hinzuzufügenden Nutzern ihre Rollen zuzuweisen."
 
 #: www/project/admin/massadd.php:77
 msgid ""
@@ -20880,7 +20858,7 @@ msgstr ""
 
 #: www/project/admin/massfinish.php:66
 msgid "Choose the role for each user and then press “Add All”."
-msgstr "Wählen Sie die Rolle für jeden Benutzer und drücken Sie “Add All”."
+msgstr "Wählen Sie die Rolle für jeden Benutzer und drücken Sie »Add All«."
 
 #: www/project/admin/massfinish.php:96
 msgid "Add All"
@@ -21421,7 +21399,7 @@ msgid ""
 "limit)."
 msgstr ""
 "Sie sollten damit beginnen, den Namen Ihres Projektes zu spezifizieren. Der "
-"“Vollständige Name” ist deskriptiv und hat keine unbegründeten "
+"»Vollständige Name« ist deskriptiv und hat keine unbegründeten "
 "Einschränkungen (außer einem 40 Zeichen Limit)."
 
 #: www/register/index.php:194
@@ -21439,14 +21417,13 @@ msgid ""
 "description will not be used as a public description of your project. It "
 "must be written in English."
 msgstr ""
-"<h3>2. Zweck des Projekts und Zusammenfassung</h3><p><strong></"
-"strong><p><strong> Bitte stellen Sie detaillierte, exakte Beschreibung Ihres "
-"Projektes zur Verfügung. Welche %1$s Hilfsmittel und inwieweit Sie planen "
-"diese zu benutzen. Diese Beschreibung wird die Basis für die Bestätigung "
-"oder Ablehung Ihrer Projektverwaltung auf %1$s sein. Später soll "
-"sichergestellt sein, daß Sie die Dienste in der beabsichtigen Weise nutzen. "
-"Diese Beschreibung wird nicht als Ihre öffentliche Projektbeschreibung "
-"genutzt. Es muß auf Englisch geschrieben sein.</strong>"
+"Bitte stellen Sie detaillierte, exakte Beschreibung Ihres Projektes zur "
+"Verfügung. Welche %1$s Hilfsmittel und inwieweit Sie planen diese zu "
+"benutzen. Diese Beschreibung wird die Basis für die Bestätigung oder "
+"Ablehung Ihrer Projektverwaltung auf %1$s sein. Später soll sichergestellt "
+"sein, daß Sie die Dienste in der beabsichtigen Weise nutzen. Diese "
+"Beschreibung wird nicht als Ihre öffentliche Projektbeschreibung genutzt. Es "
+"muß auf Englisch geschrieben sein."
 
 #: www/register/index.php:204
 #, fuzzy
@@ -21779,7 +21756,7 @@ msgid ""
 msgstr ""
 "Sie können Kategorien anlegen wie Zeit verwendet werden kann um einen "
 "festgelegte Aufgabe fertigzustellen. Beispiele für solche Kategorien sind "
-"“Meeting”, “Code schreiben”, “Testen”."
+"»Meeting«, »Code schreiben«, »Testen«."
 
 #: www/reporting/useract.php:68 www/reporting/usertime.php:66
 msgid ""
@@ -22178,7 +22155,7 @@ msgid ""
 "The “Snippet Version ID” is the unique ID number that is shown next to a "
 "specific version of a snippet on the browse pages."
 msgstr ""
-"Die “Snippet Version ID” ist die einzigartige ID-Nummer die auf den "
+"Die »Snippet Version ID« ist die einzigartige ID-Nummer die auf den "
 "Suchseiten neben einer spezifischen Schnipsel-Version angegeben wird."
 
 #: www/snippet/add_snippet_to_package.php:140
@@ -22600,7 +22577,7 @@ msgstr ""
 
 #: www/snippet/submit.php:113
 msgid "Script Type"
-msgstr "Script \tTyp"
+msgstr "Script Typ"
 
 #: www/soap/index.php:160
 msgid "en_US"
@@ -22885,7 +22862,7 @@ msgstr ""
 #: www/survey/admin/index.php:35
 #, fuzzy
 msgid "Surveys Administration"
-msgstr "Survey \tAdministration"
+msgstr "Survey Administration"
 
 #: www/survey/admin/index.php:52
 #, fuzzy
