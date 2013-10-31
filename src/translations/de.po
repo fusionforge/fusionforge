@@ -2535,14 +2535,14 @@ msgstr "Das Auslesen der ID des nächsten Diskussionsfadens ist fehlgeschlagen"
 #: common/forum/ForumMessage.class.php:220
 #: common/forum/ForumMessage.class.php:315
 msgid "Posting Failed"
-msgstr "Forennachricht:\"create()\" Posting fehlgeschlagen"
+msgstr "Posting fehlgeschlagen"
 
 #: common/forum/ForumMessage.class.php:141
 #: common/forum/ForumMessage.class.php:225
 #: common/forum/ForumMessage.class.php:327
 msgid "Unable to get new message id"
 msgstr ""
-"Forennachricht:\"create()\" Konnte die neue Nachrichten-ID nicht bekommen"
+"Konnte die neue Nachrichten-ID nicht bekommen"
 
 #: common/forum/ForumMessage.class.php:193
 #: common/forum/ForumMessage.class.php:287
@@ -2558,7 +2558,7 @@ msgstr ""
 
 #: common/forum/ForumMessage.class.php:372
 msgid "Invalid ParentMessage Object"
-msgstr "Forennachricht:\"create()\" kein gültiges Vorgänger-Nachrichten-Objekt"
+msgstr "Kein gültiges Vorgänger-Nachrichten-Objekt"
 
 #: common/forum/ForumMessage.class.php:405
 #: common/forum/ForumMessage.class.php:423
@@ -2988,7 +2988,7 @@ msgstr "Der Site Administrator hat dieses Feature ausgeschaltet."
 msgid "You Attempted To Double-submit this item. Please avoid double-clicking."
 msgstr ""
 "Sie haben versucht dieses Element doppelt abzuschicken. Bitte vermeiden Sie "
-"\"double-clicking\"."
+"»double-clicking«."
 
 #: common/include/forge_events.php:26
 #, fuzzy
@@ -5065,8 +5065,8 @@ msgid ""
 "remember you need to set up categories, groups, and permission for each "
 "type, which can get time-consuming."
 msgstr ""
-"Tracker werden als \"Artefakt-Typen\", einzelne Datenelemente als \"Artefakte"
-"\" bezeichnet.  \"Bugs\" können ein Artefakt-Typ sein, während ein "
+"Tracker werden als »Artefakt-Typen«, einzelne Datenelemente als »Artefakte«"
+" bezeichnet.  »Bugs« können ein Artefakt-Typ sein, während ein "
 "Bugbericht ein Artefakt ist. Sie können so viele Artefakt Typen erzeugen wie "
 "Sie möchten, aber denken Sie daran, Sie müssen für jeden Typ Kategorien, "
 "Gruppen und Erlaubnisse einstellen; dies kann sehr Zeitaufwändig werden."
@@ -5101,12 +5101,12 @@ msgstr "Tage bis unbearbeitete Trackerelemente Timeout haben"
 #: common/tracker/actions/admin-ind.php:153
 #: common/tracker/views/form-updatetracker.php:75
 msgid "Free form text for the “Submit New” page"
-msgstr "Freitext für die \"Neues Objekt vorschlagen\" Seite"
+msgstr "Freitext für die »Neues Objekt vorschlagen« Seite"
 
 #: common/tracker/actions/admin-ind.php:156
 #: common/tracker/views/form-updatetracker.php:78
 msgid "Free form text for the Browse page"
-msgstr "Freitext für die \"Durchsuche Objekte\" Seite"
+msgstr "Freitext für die »Durchsuche Objekte« Seite"
 
 #: common/tracker/actions/admin-ind.php:159
 #: common/tracker/include/build_submission_form.php:54
@@ -17894,11 +17894,11 @@ msgid ""
 "respond with an admin-defined amount of time (default is 14 days) then the "
 "item is given a status of “Deleted”."
 msgstr ""
-"Sie können den Status auf \"Schwebend\" setzen, wenn Sie auf eine Antwort "
-"des Tracker-Element-Autors warten möchten.  Wenn der Autor antwortet, wird "
-"der Status automatisch wieder auf \"Offen\" gesetzt. Andernfalls, wenn der "
-"Autor nicht in der vom Administrator vorgegebenen Zeit antwortet (vorgegeben "
-"sind 14 Tage), dann wechselt der Status zu 'Gelöscht'."
+"Sie können den Status auf »Schwebend« setzen, wenn Sie auf eine Antwort des "
+"Tracker-Element-Autors warten möchten.  Wenn der Autor antwortet, wird der "
+"Status automatisch wieder auf »Offen« gesetzt. Andernfalls, wenn der Autor "
+"nicht in der vom Administrator vorgegebenen Zeit antwortet (vorgegeben sind "
+"14 Tage), dann wechselt der Status zu »Gelöscht«."
 
 #: www/include/html.php:387
 msgid "Tracker category"
@@ -18301,7 +18301,7 @@ msgstr ""
 "Der Peer-Rating Kasten zeigt alle Bewertungsdurchschnitte (und Rückmelde-"
 "Häufigkeit) zu jedem einzelnen Merkmal. Aufgrund der sonst nötigen "
 "Berechnungen und Verarbeitungen enthalten diese Angaben Antworten sowohl von "
-"\"trusted\" als auch \"non-trusted\" Nutzern."
+"»trusted« als auch »non-trusted« Nutzern."
 
 #: www/include/user_home.php:175
 #, php-format
@@ -18309,15 +18309,15 @@ msgid ""
 "The “Sitewide Rank” field shows the user's rank compared to all ranked %s "
 "users."
 msgstr ""
-"Das \"Sitewide Rank\" Feld zeigt den Rang des Nutzers im Vergleich zu allen "
-"anderen eingetragenen %1$s Nutzern."
+"Das »Sitewide Rank« Feld zeigt den Rang des Nutzers im Vergleich zu allen "
+"anderen eingetragenen %s Nutzern."
 
 #: www/include/user_home.php:179
 msgid ""
 "The “Aggregate Score” shows an average, weighted overall score, based on "
 "trusted-responses only."
 msgstr ""
-" Der \"Aggregate Score\" zeigt ein durchschnittlich gewichtetes "
+" Der »Aggregate Score« zeigt ein durchschnittlich gewichtetes "
 "allgemeingültiges Ergebnis, das ausschliesslich auf vertrauenswürdigen "
 "Antworten basiert."
 
@@ -18327,7 +18327,7 @@ msgid ""
 "developers will be given (between 1 and 1.5) -- higher rated user's "
 "responses are given more weight."
 msgstr ""
-"Das \"Personal Importance\" Feld zeigt das Gewicht, das Bewertungen von "
+"Das »Personal Importance« Feld zeigt das Gewicht, das Bewertungen von "
 "anderen Entwicklern gegeben wird (zwischen 1 und 1.5), den Bewertungen von "
 "höher eingestuften Nutzern wird ein größeres Gewicht eingeräumt."
 
@@ -19141,7 +19141,7 @@ msgid ""
 "Start by filling in the fields below. When you click continue, you will be "
 "shown a list of skills and experience levels that this job requires."
 msgstr ""
-"Starten Sie, indem Sie die Felder unten ausfüllen.Wenn Sie \"continue\" "
+"Starten Sie, indem Sie die Felder unten ausfüllen. Wenn Sie »continue« "
 "klicken, wird Ihnen eine Liste von Geschick und Erfahrungslevel gezeigt, die "
 "dieser Job vorraussetzt."
 
@@ -19234,7 +19234,7 @@ msgstr "Job Qualifikation-Löschung fehlgeschlagen - Falsche Projekt_ID"
 #: www/people/editjob.php:152
 #, fuzzy, php-format
 msgid "Posting fetch failed: %s"
-msgstr "Forennachricht:\"create()\" Posting fehlgeschlagen"
+msgstr "Posting fehlgeschlagen"
 
 #: www/people/editjob.php:153
 #, fuzzy
@@ -19448,7 +19448,7 @@ msgstr "Andern /löschen Ihrer Fähigkeiten"
 
 #: www/people/helpwanted-latest.php:36
 msgid "Help Wanted Latest Posts"
-msgstr "Neueste Posts zu \"Hilfe gesucht\""
+msgstr "Neueste Posts zu »Hilfe gesucht«"
 
 #: www/people/index.php:42
 msgid "Here is a list of positions available for this project."
@@ -20149,7 +20149,7 @@ msgstr "Auftragsdetails"
 #: www/pm/detail_task.php:79 www/pm/mod_task.php:107
 #, fuzzy
 msgid "Subscribe to task"
-msgstr "Abonnenten für \"Site Updates\""
+msgstr ""
 
 #: www/pm/detail_task.php:104 www/pm/mod_task.php:114
 msgid "Original Comment"
@@ -21308,11 +21308,11 @@ msgid_plural ""
 "administrators will be emailed to approve or deny your request."
 msgstr[0] ""
 "Sie können bitten einem Projekt beitreten zu dürfen, indem Sie auf den "
-"\"submit\" Knopf drücken. Der Administrator erhält eine E-mail um Ihre "
-"Anfrage zu akzeptieren oder abzulehnen."
+"»submit« Knopf drücken. Der Administrator erhält eine E-mail um Ihre Anfrage "
+"zu akzeptieren oder abzulehnen."
 msgstr[1] ""
 "Sie können bitten einem Projekt beitreten zu dürfen, indem Sie auf den "
-"\"submit\" Knopf drücken. Die Administratoren erhalten eine E-mail um Ihre "
+"»submit« Knopf drücken. Die Administratoren erhalten eine E-mail um Ihre "
 "Anfrage zu akzeptieren oder abzulehnen."
 
 #: www/project/request.php:66
@@ -22122,7 +22122,7 @@ msgstr "Fehler - Dieses Schnipsel existiert nicht"
 #: www/snippet/add_snippet_to_package.php:97
 #: www/snippet/add_snippet_to_package.php:114
 msgid "Back To Add Page"
-msgstr "Zurück zur \"Hinzufügen\"-Seite"
+msgstr "Zurück zur »Hinzufügen«-Seite"
 
 #: www/snippet/add_snippet_to_package.php:96
 msgid "Error: That snippet was already added to this package."
@@ -24981,10 +24981,6 @@ msgstr "Persönliche Seite für %s"
 #~ msgid "'%1$s' is a reserved alias. Please provide another name."
 #~ msgstr ""
 #~ "'%1$s' ist ein reservierter Alias. Bitte wählen Sie einen anderen Namen."
-
-#~ msgid "No Valid ParentMessage Object"
-#~ msgstr ""
-#~ "Forennachricht:\"create()\" kein gültiges Vorgänger-Nachrichten-Objekt"
 
 #~ msgid "Invalid Message ID"
 #~ msgstr "Ungültige Mitteilungs - Identität"
@@ -28059,9 +28055,6 @@ msgstr "Persönliche Seite für %s"
 #~ msgid "Add/Update template for %s"
 #~ msgstr "Template hinzufügen/aktualisieren für %s"
 
-#~ msgid "Invalid MessageID"
-#~ msgstr "Forennachricht:\"fetchData()\" Ungültige Nachrichten-ID"
-
 #~ msgid "DevProfile"
 #~ msgstr "Entwickler-Profil"
 
@@ -28525,9 +28518,6 @@ msgstr "Persönliche Seite für %s"
 #~ msgstr ""
 #~ "Leerer db_session_table. Schalten Sie USE_DB_SESSION aus oder definieren "
 #~ "Sie diesen Tabellennamen."
-
-#~ msgid "%s: has no box method"
-#~ msgstr "%s: Besitzt keine box() Methode"
 
 #~ msgid ""
 #~ "With external authentication all users which stored their Preferences. "
