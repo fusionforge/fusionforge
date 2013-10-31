@@ -7955,7 +7955,7 @@ msgstr "Foros públicos"
 #, php-format
 msgid "<strong>%d</strong> message"
 msgid_plural "<strong>%d</strong> messages"
-msgstr[0] "<strong>%d</strong> mensaxe\t"
+msgstr[0] "<strong>%d</strong> mensaxe"
 msgstr[1] "<strong>%d</strong> mensaxes"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:115
@@ -8459,18 +8459,18 @@ msgstr ""
 #: plugins/authldap/www/post-login.php:109
 #, php-format
 msgid ""
-"<p>Your account is currently pending your email confirmation.\t\tVisiting "
-"the link sent to you in this email will activate your account.\t\t<p>If you "
-"need this email resent, please click below and a confirmation\t\temail will "
-"be sent to the email address you provided in registration.\t\t<p><a href="
-"\"%1$s\">[Resend Confirmation Email]</a>\t\t<br><hr>\t\t<p>"
+"<p>Your account is currently pending your email confirmation. Visiting "
+"the link sent to you in this email will activate your account.<p>If you "
+"need this email resent, please click below and a confirmation email will "
+"be sent to the email address you provided in registration.<p><a href="
+"\"%1$s\">[Resend Confirmation Email]</a><br><hr><p>"
 msgstr ""
 "<p>A súa conta está pendente de confirmación mediante correo electrónico "
-"pola súa parte.\t\t Ao visitar a ligazón que se lle enviou, activarase a súa "
-"conta.\t\t<p>Se precisa que se lle reenvíe este correo electrónico, por "
-"favor, prema a ligazón inferior e enviaráselle\t\tun correo de confirmación "
-"ao enderezo que especificou no seu rexistro.\t\t<p><a href=\"%1$s\">[Volver "
-"a enviar un correo de confirmación]</a>\t\t<br><hr>\t\t<p>"
+"pola súa parte. Ao visitar a ligazón que se lle enviou, activarase a súa "
+"conta.<p>Se precisa que se lle reenvíe este correo electrónico, por "
+"favor, prema a ligazón inferior e enviaráselle un correo de confirmación "
+"ao enderezo que especificou no seu rexistro.<p><a href=\"%1$s\">[Volver "
+"a enviar un correo de confirmación]</a><br><hr><p>"
 
 #: plugins/authldap/www/post-login.php:112
 #, php-format
@@ -15089,8 +15089,8 @@ msgid ""
 "Your email confirmation has been resent. Visit the link in this email to "
 "complete the registration process."
 msgstr ""
-"envióuselle de novo a confirmación por correo electrónico. visite a ligazón\n"
-"\tque hai neste correo para completar o proceso de rexistro."
+"envióuselle de novo a confirmación por correo electrónico. visite a ligazón"
+" que hai neste correo para completar o proceso de rexistro."
 
 #: www/account/pending-resend.php:56
 msgid ""
@@ -20560,7 +20560,7 @@ msgid ""
 "the details to the project administrators"
 msgstr ""
 "Ao premer en \"crear\" programarase a creación da base de datos e "
-"enviaráselle por correo electrónico os\tdetalles á administración do proxecto"
+"enviaráselle por correo electrónico os detalles á administración do proxecto"
 
 #: www/project/admin/database.php:168
 msgid "Database Type"

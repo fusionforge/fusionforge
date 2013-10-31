@@ -3901,9 +3901,8 @@ msgid "No administrative access"
 msgstr "verwaltend"
 
 #: common/include/rbac_texts.php:46 common/include/rbac_texts.php:144
-#, fuzzy
 msgid "Forge administration"
-msgstr "Foren: \tAdministration"
+msgstr "Forge Administration"
 
 #: common/include/rbac_texts.php:47 common/include/rbac_texts.php:49
 #: common/include/rbac_texts.php:51 common/include/rbac_texts.php:67
@@ -3953,9 +3952,8 @@ msgid "Project administration"
 msgstr "Projekt-Datenbank Administration"
 
 #: common/include/rbac_texts.php:61 common/include/rbac_texts.php:152
-#, fuzzy
 msgid "Trackers administration"
-msgstr "Survey \tAdministration"
+msgstr "Trackers Administration"
 
 #: common/include/rbac_texts.php:63 common/include/rbac_texts.php:153
 #, fuzzy
@@ -3963,9 +3961,8 @@ msgid "Task managers administration"
 msgstr "Projekt/Task-Manager Administration"
 
 #: common/include/rbac_texts.php:65 common/include/rbac_texts.php:154
-#, fuzzy
 msgid "Forums administration"
-msgstr "Foren: \tAdministration"
+msgstr "Foren Administration"
 
 #: common/include/rbac_texts.php:68 common/include/rbac_texts.php:84
 #: common/include/rbac_texts.php:92 common/include/rbac_texts.php:98
@@ -8481,20 +8478,20 @@ msgid "LDAP server unreachable"
 msgstr ""
 
 #: plugins/authldap/www/post-login.php:109
-#, fuzzy, php-format
+#, php-format
 msgid ""
-"<p>Your account is currently pending your email confirmation.\t\tVisiting "
-"the link sent to you in this email will activate your account.\t\t<p>If you "
-"need this email resent, please click below and a confirmation\t\temail will "
-"be sent to the email address you provided in registration.\t\t<p><a href="
-"\"%1$s\">[Resend Confirmation Email]</a>\t\t<br><hr>\t\t<p>"
+"<p>Your account is currently pending your email confirmation. Visiting "
+"the link sent to you in this email will activate your account.<p>If you "
+"need this email resent, please click below and a confirmation email will "
+"be sent to the email address you provided in registration.<p><a href="
+"\"%1$s\">[Resend Confirmation Email]</a><br><hr><p>"
 msgstr ""
-"<p>Ihr Account erwartet momentan Ihre E-Mail-Bestätigung.\t\tWenn Sie den "
+"<p>Ihr Account erwartet momentan Ihre E-Mail-Bestätigung. Wenn Sie den "
 "Link besuchen, der Ihnen mit dieser Mail zugesandt wurde, aktivieren Sie "
-"damit Ihren Account.\t\t<p>Wenn Ihnen diese Mail erneut zugesandt werden "
-"soll klicken Sie bitte unten und eine Bestätigungsmail\t\twird an die "
-"Mailadresse verschickt, die Sie in Ihrer Registrierung angegeben haben.\t"
-"\t<p><a href=\"%1$s\">[Bestätigungsmail erneut senden]</a>\t\t<br><hr>\t\t<p>"
+"damit Ihren Account.<p>Wenn Ihnen diese Mail erneut zugesandt werden "
+"soll klicken Sie bitte unten und eine Bestätigungsmail wird an die "
+"Mailadresse verschickt, die Sie in Ihrer Registrierung angegeben haben."
+"<p><a href=\"%1$s\">[Bestätigungsmail erneut senden]</a><br><hr><p>"
 
 #: plugins/authldap/www/post-login.php:112
 #, php-format
@@ -23559,9 +23556,6 @@ msgstr "Persönliche Seite für %s"
 #~ msgid "Theme:"
 #~ msgstr "Theme-ID:"
 
-#~ msgid "Forums: Administration"
-#~ msgstr "Foren: \tAdministration"
-
 #, fuzzy
 #~ msgid "Change PW"
 #~ msgstr "Woche ändern"
@@ -24944,7 +24938,7 @@ msgstr "Persönliche Seite für %s"
 #~ msgstr "Ansichten (ROT)"
 
 #~ msgid "Survey Aggregate Results"
-#~ msgstr "Überschrift: \tGesamte Umfrageergebnisse"
+#~ msgstr "Überschrift: Gesamte Umfrageergebnisse"
 
 #~ msgid "Responses"
 #~ msgstr "Antworten"

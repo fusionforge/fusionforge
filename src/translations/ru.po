@@ -8375,7 +8375,7 @@ msgstr "Запрос не существует"
 #: plugins/authbuiltin/www/post-login.php:110
 msgid "Your account is currently pending your email confirmation."
 msgstr ""
-">На данном этапе вам выслано письмо на ваш е-майл для подтверждения "
+"На данном этапе вам выслано письмо на ваш е-майл для подтверждения "
 "работоспособности вашего почтового ящика."
 
 #: plugins/authbuiltin/www/post-login.php:111
@@ -8462,20 +8462,20 @@ msgstr ""
 #: plugins/authldap/www/post-login.php:109
 #, fuzzy, php-format
 msgid ""
-"<p>Your account is currently pending your email confirmation.\t\tVisiting "
-"the link sent to you in this email will activate your account.\t\t<p>If you "
-"need this email resent, please click below and a confirmation\t\temail will "
-"be sent to the email address you provided in registration.\t\t<p><a href="
-"\"%1$s\">[Resend Confirmation Email]</a>\t\t<br><hr>\t\t<p>"
+"<p>Your account is currently pending your email confirmation. Visiting "
+"the link sent to you in this email will activate your account.<p>If you "
+"need this email resent, please click below and a confirmation email will "
+"be sent to the email address you provided in registration.<p><a href="
+"\"%1$s\">[Resend Confirmation Email]</a><br><hr><p>"
 msgstr ""
-"<P>На данном этапе вам выслано письмо на ваш е-майл для подтверждения "
-"работоспособности вашего почтового ящика.\t\t Получив в теле письма ссылку, "
-"проследуйте по ней, это необходимо для завершния процесса регистрации\t\t .\t"
-"\t <P> Если на указанный вами е-майл, письмо по какой-либо причине не пришло "
+"<p>На данном этапе вам выслано письмо на ваш е-майл для подтверждения "
+"работоспособности вашего почтового ящика. Получив в теле письма ссылку, "
+"проследуйте по ней, это необходимо для завершния процесса регистрации."
+"<p>Если на указанный вами е-майл, письмо по какой-либо причине не пришло "
 "в течении получаса, возможно вам придется повторить процедуру указания "
-"правильного е-майл адреса.\t\t<P><A href=\"pending-resend.php?form_user=%1$s"
-"\"><b>[Отправить повторное письмо на вышеуказанный мной адрес]</b></A>\t"
-"\t<br><hr>\t\t<p>"
+"правильного е-майл адреса.<p><a href=\"pending-resend.php?form_user=%1$s"
+"\"><b>[Отправить повторное письмо на вышеуказанный мной адрес]</b></a>"
+"<br><hr><p>"
 
 #: plugins/authldap/www/post-login.php:112
 #, fuzzy, php-format
