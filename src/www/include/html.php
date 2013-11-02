@@ -161,7 +161,7 @@ function html_abs_image($url, $width, $height, $args) {
  * @param	bool	$display	DEPRECATED
  * @return	string
  */
-function html_image($src, $width = '', $height = '', $args = array(), $display = 1) {
+function html_image($src, $width = 0, $height = 0, $args = array(), $display = true) {
 	global $HTML;
 
 	if (method_exists($HTML, 'html_image')) {
@@ -534,15 +534,15 @@ function html_use_jquerysplitter() {
  * row is 100, so almost every pop-up box has 100 as the default
  * Most tables in the database should therefore have a row with an id of 100 in it so that joins are successful
  *
- * @param		array	$vals			The ID or value
- * @param		array	$texts			Text to be displayed
- * @param		string	$select_name	Name to assign to this form element
- * @param		string	$checked_val	The item that should be checked
- * @param		bool	$show_100		Whether or not to show the '100 row'
- * @param		string	$text_100		What to call the '100 row' defaults to none
- * @param		bool	$show_any		Whether or not to show the 'Any row'
- * @param		string	$text_any		What to call the 'Any row' defaults to any
- * @param		array	$allowed		Array of all allowed values from the full list.
+ * @param		array		$vals			The ID or value
+ * @param		array		$texts			Text to be displayed
+ * @param		string		$select_name	Name to assign to this form element
+ * @param		string		$checked_val	The item that should be checked
+ * @param		bool		$show_100		Whether or not to show the '100 row'
+ * @param		string		$text_100		What to call the '100 row' defaults to none
+ * @param		bool		$show_any		Whether or not to show the 'Any row'
+ * @param		string		$text_any		What to call the 'Any row' defaults to any
+ * @param		bool|array	$allowed		Array of all allowed values from the full list.
  * @return		string
  */
 function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked_val = 'xzxz',
@@ -634,6 +634,10 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked
  * @param string		$checked_val	The item that should be checked
  * @param bool			$show_100		Whether or not to show the '100 row'
  * @param string		$text_100		What to call the '100 row'.  Defaults to none.
+ * @param bool			$show_any		Whether or not to show the 'Any row'
+ * @param string		$text_any		What to call the 'Any row' defaults to any
+ * @param bool			$allowed		Unused
+
  */
 function html_build_select_box($result, $name, $checked_val = "xzxz", $show_100 = true, $text_100 = 'none',
 							   $show_any = false, $text_any = 'Select One', $allowed = false) {
@@ -643,7 +647,9 @@ function html_build_select_box($result, $name, $checked_val = "xzxz", $show_100 
 	if ($text_any == 'Select One') {
 		$text_any = _('Select One');
 	}
-	return html_build_select_box_from_arrays(util_result_column_to_array($result, 0), util_result_column_to_array($result, 1), $name, $checked_val, $show_100, $text_100, $show_any, $text_any);
+	return html_build_select_box_from_arrays(util_result_column_to_array($result, 0),
+											 util_result_column_to_array($result, 1),
+											 $name, $checked_val, $show_100, $text_100, $show_any, $text_any);
 }
 
 /**
@@ -671,14 +677,14 @@ function html_build_select_box_sorted($result, $name, $checked_val = "xzxz", $sh
  * html_build_multiple_select_box() - Takes a result set, with the first column being the "id" or value
  * and the second column being the text you want displayed.
  *
- * @param		int	The result set
- * @param		string	Text to be displayed
- * @param		string	The item that should be checked
- * @param		int		The size of this box
- * @param		bool	Whether or not to show the '100 row'
+ * @param		int		$result				The result set
+ * @param		string	$name				Text to be displayed
+ * @param		string	$checked_array		The item that should be checked
+ * @param		int		$size				The size of this box
+ * @param		bool	$show_100			Whether or not to show the '100 row'
  * @return		string
  */
-function html_build_multiple_select_box($result, $name, $checked_array, $size = '8', $show_100 = true) {
+function html_build_multiple_select_box($result, $name, $checked_array, $size = 8, $show_100 = true) {
 	$checked_count = count($checked_array);
 	$return = '
 		<select name="'.$name.'" multiple="multiple" size="'.$size.'">';
@@ -721,15 +727,16 @@ function html_build_multiple_select_box($result, $name, $checked_array, $size = 
 /**
  * html_build_multiple_select_box_from_arrays() - Takes two arrays and builds a multi-select box
  *
- * @param		array	id of the field
- * @param		array	Text to be displayed
- * @param		string	id of the items selected
- * @param		string	The item that should be checked
- * @param		int		The size of this box
- * @param		bool	Whether or not to show the '100 row'
+ * @param		array	$ids			id of the field
+ * @param		array	$texts			Text to be displayed
+ * @param		string	$name			id of the items selected
+ * @param		string	$checked_array	The item that should be checked
+ * @param		int		$size			The size of this box
+ * @param		bool	$show_100		Whether or not to show the '100 row'
+ * @param		string	$text_100		What to call the '100 row' defaults to none.
  * @return		string
  */
-function html_build_multiple_select_box_from_arrays($ids, $texts, $name, $checked_array, $size = '8', $show_100 = true, $text_100 = 'none') {
+function html_build_multiple_select_box_from_arrays($ids, $texts, $name, $checked_array, $size = 8, $show_100 = true, $text_100 = 'none') {
 	$checked_count = count($checked_array);
 	$return = '
 		<select name="'.$name.'" multiple="multiple" size="'.$size.'">';
@@ -823,9 +830,9 @@ function html_build_priority_select_box($name = 'priority', $checked_val = '3', 
 /**
  * html_buildcheckboxarray() - Build an HTML checkbox array.
  *
- * @param	array	Options array
- * @param	name	Checkbox name
- * @param	array	Array of boxes to be pre-checked
+ * @param	array	$options		Options array
+ * @param	name	$name			Checkbox name
+ * @param	array	$checked_array	Array of boxes to be pre-checked
  */
 function html_buildcheckboxarray($options, $name, $checked_array) {
 	$option_count = count($options);
@@ -944,7 +951,7 @@ function site_project_header($params) {
  * that should be on every project page,  rather than
  * a direct call to site_footer() or theme_footer()
  *
- * @param	params	array() empty
+ * @param	array	$params	array() empty
  */
 function site_project_footer($params) {
 	site_footer($params);
@@ -1008,7 +1015,7 @@ function site_user_header($params) {
  * site_user_footer() - currently a simple shim that should be on every user page,
  * rather than a direct call to site_footer() or theme_footer()
  *
- * @param	params	array() empty
+ * @param	array	$params	array() empty
  */
 function site_user_footer($params) {
 	site_footer($params);
@@ -1023,8 +1030,8 @@ function site_user_footer($params) {
  * special steps to encode it in the way which help to preserve its
  * recognition. This routine
  *
- * @param	hashstr	required hash parameter as received from browser
- * @return	pure hex string
+ * @param	string	$hashstr	required hash parameter as received from browser
+ * @return	string				pure hex string
  */
 function html_clean_hash_string($hashstr) {
 
@@ -1269,10 +1276,10 @@ function html_a_apply($scopy) {
 /**
  * html_trove_limit_navigation_box() - displays the navigation links for paging browsing
  *
- * @param		string		URL of the very same script
- * @param		int			total number of results
- * @param		int			the maximum number displayed on a single page
- * @param		int			current page number (starting at 1)
+ * @param	string	$php_self			URL of the very same script
+ * @param	int		$querytotalcount	total number of results
+ * @param	int		$trove_browselimit	the maximum number displayed on a single page
+ * @param	int		$page				current page number (starting at 1)
  */
 function html_trove_limit_navigation_box($php_self, $querytotalcount, $trove_browselimit, $page) {
 
