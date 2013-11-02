@@ -49,7 +49,7 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information'));
 		echo $HTML->boxMiddle(_('Peer Rating'), _('Peer Rating'));
         echo '<table class="my-layout-table" id="user-profile-rating">';
 		if ($user->usesRatings()) {
-			echo vote_show_user_rating($user_id);
+			vote_show_user_rating($user_id);
 		} else {
             echo '<tr><td colspan="2">';
 			echo _('User chose not to participate in peer rating');
