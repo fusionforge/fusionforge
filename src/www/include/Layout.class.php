@@ -254,7 +254,7 @@ class Layout extends Error {
 	 * headerFavIcon(), headerRSS(), headerSearch(), headerCSS(), or
 	 * headerJS() to adapt your theme.
 	 *
-	 * @param	array	Header parameters array
+	 * @param	array	$params		Header parameters array
 	 */
 	function headerStart($params) {
 		$this->headerHTMLDeclaration();
@@ -302,7 +302,7 @@ class Layout extends Error {
 	/**
 	 * headerTitle() - creates the <title> header
 	 *
-	 * @param	array	Header parameters array
+	 * @param	array	$params		Header parameters array
 	 */
 	function headerTitle($params) {
 		echo $this->navigation->getTitle($params);
@@ -556,7 +556,7 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * boxTop() - Top HTML box.
 	 *
-	 * @param	string	Box title
+	 * @param	string	$title	Box title
 	 * @return	string	the html code
 	 */
 	function boxTop($title) {
@@ -581,7 +581,7 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * boxMiddle() - Middle HTML box.
 	 *
-	 * @param	string	Box title
+	 * @param	string	$title	Box title
 	 * @return	string	The html code
 	 */
 	function boxMiddle($title) {
@@ -617,7 +617,7 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * boxGetAltRowStyle() - Get an alternating row style for tables.
 	 *
-	 * @param	int	Row number
+	 * @param	int	$i	Row number
 	 * @return	string	the class code
 	 */
 	function boxGetAltRowStyle($i) {
@@ -1267,7 +1267,7 @@ if (isset($params['group']) && $params['group']) {
 	}
 
 	function getForumPic($title = '', $alt = '') {
-		return $this->getPicto('ic/forum20g.png', $title, $alt);;
+		return $this->getPicto('ic/forum20g.png', $title, $alt);
 	}
 
 	function getDocmanPic($title = '', $alt = '') {
