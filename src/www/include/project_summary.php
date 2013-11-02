@@ -67,7 +67,8 @@ function project_getaggvalue($group_id, $type) {
 /**
  * project_get_mail_list_count() - Get the number of mailing lists for a project.
  *
- * @param	int		$group_id	The group ID
+ * @param	int $group_id The group ID
+ * @return	string
  */
 function project_get_mail_list_count($group_id) {
 	return project_getaggvalue($group_id,'mail');
@@ -76,7 +77,8 @@ function project_get_mail_list_count($group_id) {
 /**
  * project_get_survey_count() - Get the number of surveys for a project.
  *
- * @param	int		$group_id	The group ID
+ * @param	int $group_id The group ID
+ * @return	string
  */
 function project_get_survey_count($group_id) {
 	return project_getaggvalue($group_id,'surv');
@@ -85,9 +87,10 @@ function project_get_survey_count($group_id) {
 /**
  * project_summary() - Build a project summary box that projects can insert into their project pages
  *
- * @param	int		$group_id	The group ID
- * @param	string	$mode		How to return the results.
- * @param	bool	$no_table	Whether to return the results within an HTML table or not
+ * @param	int $group_id The group ID
+ * @param	string $mode How to return the results.
+ * @param	bool $no_table Whether to return the results within an HTML table or not
+ * @return	string
  */
 function project_summary($group_id, $mode, $no_table) {
 	if (!$group_id) {

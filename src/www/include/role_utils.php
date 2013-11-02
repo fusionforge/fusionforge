@@ -20,13 +20,13 @@
 
 /**
  * Displays a selection box for roles in a group (TODO : provide more details on parameters roles)
- * @param unknown_type $group_id
- * @param unknown_type $name
- * @param unknown_type $selected
- * @param unknown_type $local_only
+ * @param int		$group_id
+ * @param string	$name
+ * @param string	$selected
+ * @param bool		$local_only
  * @return string
  */
-function role_box ($group_id,$name,$selected='xzxzxz',$local_only=true) {
+function role_box ($group_id, $name, $selected='xzxzxz', $local_only=true) {
 	$group = group_get_object($group_id);
 	$roles = $group->getRoles () ;
 

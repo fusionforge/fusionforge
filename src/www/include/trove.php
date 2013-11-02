@@ -177,7 +177,8 @@ function trove_setnode($group_id, $trove_cat_id, $rootnode=0) {
 /**
  * trove_getrootcat() - Get the root categegory
  *
- * @param		int		$trove_cat_id	Trove category ID
+ * @param	int $trove_cat_id Trove category ID
+ * @return	int
  */
 function trove_getrootcat($trove_cat_id) {
 	$parent = 1;
@@ -249,7 +250,7 @@ function trove_catselectfull($node, $selected, $name, $title='') {
  * @param		int		$group_id	The group ID
  * @param		bool	$a_filter	Whether filters have already been applied
  * @param		bool	$a_cats		Whether to print category links
- * @param		bool	$a_complete
+ * @param		int		$a_complete
  * @return string
  */
 function trove_getcatlisting($group_id, $a_filter, $a_cats, $a_complete=0) {

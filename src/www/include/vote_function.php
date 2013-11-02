@@ -51,8 +51,9 @@ function vote_number_to_stars($raw) {
 /**
  * vote_show_thumbs() - Show vote stars
  *
- * @param	int		$id		The survey ID
- * @param	string	$flag	The rating type
+ * @param	int $id The survey ID
+ * @param	string $flag The rating type
+ * @return	string
  */
 function vote_show_thumbs($id, $flag) {
 	/*
@@ -73,8 +74,9 @@ function vote_show_thumbs($id, $flag) {
 /**
  * vote_get_rating() - Get a vote rating
  *
- * @param		int		$id		The survey ID
- * @param		string	$flag	The rating type
+ * @param	int $id The survey ID
+ * @param	string $flag The rating type
+ * @return	mixed|string
  */
 function vote_get_rating ($id, $flag) {
 	$result = db_query_params ('SELECT response FROM survey_rating_aggregate WHERE type=$1 AND id=$2',

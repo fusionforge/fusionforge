@@ -241,10 +241,9 @@ class Layout extends Error {
 	 * headerStart() and bodyHeader().
 	 */
 	function header($params) {
-		$this->headerStart($params); ?>
-			<body>
-			<?php
-			$this->bodyHeader($params);
+		$this->headerStart($params);
+		echo "<body>\n";
+		$this->bodyHeader($params);
 	}
 
 	/**
@@ -541,12 +540,9 @@ if (isset($params['group']) && $params['group']) {
 			<?php echo $this->navigation->getShowSource();
 
 			plugin_hook('webanalytics_url', array());
-?>
 
-</body>
-</html>
-<?php
-
+			echo "</body>\n";
+			echo "</html>\n";
 	}
 
 	function getRootIndex() {
@@ -631,14 +627,14 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * listTableTop() - Takes an array of titles and builds the first row of a new table.
 	 *
-	 * @param	array	The array of titles
-	 * @param	array	The array of title links
-	 * @param	string	The css classes to add (optional)
-	 * @param	string	The id of the table (needed by sortable for example)
-	 * @param	array	specific class for th column
+	 * @param	array	$titleArray		The array of titles
+	 * @param	array	$linksArray		The array of title links
+	 * @param	string	$class			The css classes to add (optional)
+	 * @param	string	$id				The id of the table (needed by sortable for example)
+	 * @param	array	$thClassArray	specific class for th column
 	 * @return	string	the html code
 	 */
-	function listTableTop($titleArray, $linksArray=false, $class='', $id='', $thClassArray=array()) {
+	function listTableTop($titleArray, $linksArray=array(), $class='', $id='', $thClassArray=array()) {
 		$args = '';
 		if ($class) {
 			$args .= ' class="listing '.$class.'"';
@@ -911,7 +907,7 @@ if (isset($params['group']) && $params['group']) {
 	 * @param	array	$attr_arr	The array of string for title attributes.
 	 * @return	string	Html to build a submenu.
 	 */
-	function subMenu($title_arr, $links_arr, $attr_arr = false) {
+	function subMenu($title_arr, $links_arr, $attr_arr = array()) {
 		$return  = $this->beginSubMenu();
 		$return .= $this->printSubMenu($title_arr, $links_arr, $attr_arr);
 		$return .= $this->endSubMenu();
