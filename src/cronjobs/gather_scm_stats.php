@@ -46,8 +46,8 @@ $shortopts = "v";       // enable verbose mode
 $longopts = array(
 	"all",              // consider all commits from registration date saved in db up to now
 	"allepoch",         // consider all commits from start of the epoch (1970-01-01) up to now
-	"startdate:",       // consider only commits later than given startdate (YYYY-MM-DD), overwritten by all/allsvn
-	"enddate:",         // consider only commits before given enddate (YYYY-MM-DD), overwritten by all/allsvn
+	"startdate:",       // consider only commits later than given startdate (YYYY-MM-DD), overwritten by all/allepoch
+	"enddate:",         // consider only commits before given enddate (YYYY-MM-DD), overwritten by all/allepoch
 	"group_id:",        // update data only for group with given id
 	"unix_group_name:"  // update data only for group with given unix name
 );
