@@ -369,7 +369,7 @@ function html_build_radio_buttons_from_arrays($vals, $texts, $select_name, $chec
 /**
  * html_get_tooltip_description() - Get the tooltip description of the element
  *
- * @param	string	element name
+ * @param	string	$element_name	element name
  * @return	string
  */
 
@@ -629,15 +629,15 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked
  * html_build_select_box() - Takes a result set, with the first column being the "id" or value and
  * the second column being the text you want displayed.
  *
- * @param resource		$result			The result set
- * @param string		$name			Text to be displayed
- * @param string		$checked_val	The item that should be checked
- * @param bool			$show_100		Whether or not to show the '100 row'
- * @param string		$text_100		What to call the '100 row'.  Defaults to none.
- * @param bool			$show_any		Whether or not to show the 'Any row'
- * @param string		$text_any		What to call the 'Any row' defaults to any
- * @param bool			$allowed		Unused
-
+ * @param resource $result The result set
+ * @param string $name Text to be displayed
+ * @param string $checked_val The item that should be checked
+ * @param bool $show_100 Whether or not to show the '100 row'
+ * @param string $text_100 What to call the '100 row'.  Defaults to none.
+ * @param bool $show_any Whether or not to show the 'Any row'
+ * @param string $text_any What to call the 'Any row' defaults to any
+ * @param bool $allowed Unused
+ * @return string
  */
 function html_build_select_box($result, $name, $checked_val = "xzxz", $show_100 = true, $text_100 = 'none',
 							   $show_any = false, $text_any = 'Select One', $allowed = false) {
@@ -831,7 +831,7 @@ function html_build_priority_select_box($name = 'priority', $checked_val = '3', 
  * html_buildcheckboxarray() - Build an HTML checkbox array.
  *
  * @param	array	$options		Options array
- * @param	name	$name			Checkbox name
+ * @param	string	$name			Checkbox name
  * @param	array	$checked_array	Array of boxes to be pre-checked
  */
 function html_buildcheckboxarray($options, $name, $checked_array) {
@@ -854,7 +854,7 @@ function html_buildcheckboxarray($options, $name, $checked_array) {
  * site_header() - everything required to handle security and
  * add navigation for user pages like /my/ and /account/
  *
- * @param	array	Must contain $user_id
+ * @param	array	$params	Must contain $user_id
  */
 function site_header($params) {
 	global $HTML;
@@ -868,7 +868,7 @@ function site_header($params) {
 /**
  * site_footer() - Show the HTML site footer.
  *
- * @param	array	Footer params array
+ * @param	array	$params	Footer params array
  */
 function site_footer($params) {
 	global $HTML;
@@ -1276,10 +1276,11 @@ function html_a_apply($scopy) {
 /**
  * html_trove_limit_navigation_box() - displays the navigation links for paging browsing
  *
- * @param	string	$php_self			URL of the very same script
- * @param	int		$querytotalcount	total number of results
- * @param	int		$trove_browselimit	the maximum number displayed on a single page
- * @param	int		$page				current page number (starting at 1)
+ * @param		string	$php_self			URL of the very same script
+ * @param		int		$querytotalcount	total number of results
+ * @param		int		$trove_browselimit	the maximum number displayed on a single page
+ * @param		int		$page				current page number (starting at 1)
+ * @return		string
  */
 function html_trove_limit_navigation_box($php_self, $querytotalcount, $trove_browselimit, $page) {
 
