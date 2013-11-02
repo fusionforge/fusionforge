@@ -201,7 +201,7 @@ function html_get_theme_popup($title = 'theme_id', $selected = 'xzxz') {
 			'type' => 'hidden',
 			'name' => $title,
 			'value' => db_result($res, 0, 'theme_id'),
-		    ));
+			));
 	} elseif ($nbTheme < 1) {
 		return ("");
 	} else {
@@ -265,9 +265,10 @@ function html_build_select_box_from_assoc($arr, $select_name, $checked_val = 'xz
  * html_build_select_box_from_array() - Takes one array, with the first array being the "id"
  * or value and the array being the text you want displayed.
  *
- * @param	array	An array of items to use.
- * @param	string	The name you want assigned to this form element.
- * @param	string	The value of the item that should be checked.
+ * @param	array	$vals			An array of items to use.
+ * @param	string	$select_name	The name you want assigned to this form element.
+ * @param	string	$checked_val	The value of the item that should be checked.
+ * @param   int		$samevals
  * @return	string
  */
 function html_build_select_box_from_array($vals, $select_name, $checked_val = 'xzxz', $samevals = 0) {
@@ -305,17 +306,18 @@ function html_build_select_box_from_array($vals, $select_name, $checked_val = 'x
  * row is 100, so almost every pop-up box has 100 as the default
  * Most tables in the database should therefore have a row with an id of 100 in it so that joins are successful
  *
- * @param		array	The ID or value
- * @param		array	Text to be displayed
- * @param		string	Name to assign to this form element
- * @param		string	The item that should be checked
- * @param		bool	Whether or not to show the '100 row'
- * @param		string	What to call the '100 row' defaults to none
- * @param		bool	Whether or not to show the 'Any row'
- * @param		string	What to call the 'Any row' defaults to any
+ * @param		array	$vals			The ID or value
+ * @param		array	$texts			Text to be displayed
+ * @param		string	$select_name	Name to assign to this form element
+ * @param		string	$checked_val	The item that should be checked
+ * @param		bool	$show_100		Whether or not to show the '100 row'
+ * @param		string	$text_100		What to call the '100 row' defaults to none
+ * @param		bool	$show_any		Whether or not to show the 'Any row'
+ * @param		string	$text_any		What to call the 'Any row' defaults to any
  * @return		string
  */
-function html_build_radio_buttons_from_arrays($vals, $texts, $select_name, $checked_val = 'xzxz', $show_100 = true, $text_100 = 'none', $show_any = false, $text_any = 'any') {
+function html_build_radio_buttons_from_arrays($vals, $texts, $select_name, $checked_val = 'xzxz',
+											  $show_100 = true, $text_100 = 'none', $show_any = false, $text_any = 'any') {
 	if ($text_100 == 'none') {
 		$text_100 = _('None');
 	}
@@ -532,18 +534,20 @@ function html_use_jquerysplitter() {
  * row is 100, so almost every pop-up box has 100 as the default
  * Most tables in the database should therefore have a row with an id of 100 in it so that joins are successful
  *
- * @param		array	The ID or value
- * @param		array	Text to be displayed
- * @param		string	Name to assign to this form element
- * @param		string	The item that should be checked
- * @param		bool	Whether or not to show the '100 row'
- * @param		string	What to call the '100 row' defaults to none
- * @param		bool	Whether or not to show the 'Any row'
- * @param		string	What to call the 'Any row' defaults to any
- * @param		array	Array of all allowed values from the full list.
+ * @param		array	$vals			The ID or value
+ * @param		array	$texts			Text to be displayed
+ * @param		string	$select_name	Name to assign to this form element
+ * @param		string	$checked_val	The item that should be checked
+ * @param		bool	$show_100		Whether or not to show the '100 row'
+ * @param		string	$text_100		What to call the '100 row' defaults to none
+ * @param		bool	$show_any		Whether or not to show the 'Any row'
+ * @param		string	$text_any		What to call the 'Any row' defaults to any
+ * @param		array	$allowed		Array of all allowed values from the full list.
  * @return		string
  */
-function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked_val = 'xzxz', $show_100 = true, $text_100 = 'none', $show_any = false, $text_any = 'any', $allowed = false) {
+function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked_val = 'xzxz',
+										   $show_100 = true, $text_100 = 'none',
+										   $show_any = false, $text_any = 'any', $allowed = false) {
 	$have_a_subelement = false;
 
 	if ($text_100 == 'none') {
@@ -625,13 +629,14 @@ function html_build_select_box_from_arrays($vals, $texts, $select_name, $checked
  * html_build_select_box() - Takes a result set, with the first column being the "id" or value and
  * the second column being the text you want displayed.
  *
- * @param resource      $result      The result set
- * @param string        $name        Text to be displayed
- * @param string        $checked_val The item that should be checked
- * @param bool          $show_100    Whether or not to show the '100 row'
- * @param string        $text_100    What to call the '100 row'.  Defaults to none.
+ * @param resource		$result			The result set
+ * @param string		$name			Text to be displayed
+ * @param string		$checked_val	The item that should be checked
+ * @param bool			$show_100		Whether or not to show the '100 row'
+ * @param string		$text_100		What to call the '100 row'.  Defaults to none.
  */
-function html_build_select_box($result, $name, $checked_val = "xzxz", $show_100 = true, $text_100 = 'none', $show_any = false, $text_any = 'Select One', $allowed = false) {
+function html_build_select_box($result, $name, $checked_val = "xzxz", $show_100 = true, $text_100 = 'none',
+							   $show_any = false, $text_any = 'Select One', $allowed = false) {
 	if ($text_100 == 'none') {
 		$text_100 = _('None');
 	}
@@ -645,11 +650,11 @@ function html_build_select_box($result, $name, $checked_val = "xzxz", $show_100 
  * html_build_select_box_sorted() - Takes a result set, with the first column being the "id" or value and
  * the second column being the text you want displayed.
  *
- * @param		int		The result set
- * @param		string	Text to be displayed
- * @param		string	The item that should be checked
- * @param		bool	Whether or not to show the '100 row'
- * @param		string	What to call the '100 row'.  Defaults to none.
+ * @param		int		$result			The result set
+ * @param		string	$name			Text to be displayed
+ * @param		string	$checked_val	The item that should be checked
+ * @param		bool	$show_100		Whether or not to show the '100 row'
+ * @param		string	$text_100		What to call the '100 row'.  Defaults to none.
  * @return		string
  */
 function html_build_select_box_sorted($result, $name, $checked_val = "xzxz", $show_100 = true, $text_100 = 'none') {
@@ -658,8 +663,7 @@ function html_build_select_box_sorted($result, $name, $checked_val = "xzxz", $sh
 	}
 	$vals = util_result_column_to_array($result, 0);
 	$texts = util_result_column_to_array($result, 1);
-	array_multisort($texts, SORT_ASC, SORT_STRING,
-	                $vals);
+	array_multisort($texts, SORT_ASC, SORT_STRING, $vals);
 	return html_build_select_box_from_arrays ($vals, $texts, $name, $checked_val, $show_100, $text_100);
 }
 
