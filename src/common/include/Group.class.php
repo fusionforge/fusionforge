@@ -291,13 +291,13 @@ class Group extends Error {
 	 * @param	object	$user			The User object.
 	 * @param	string	$group_name		The full name of the user.
 	 * @param	string	$unix_name		The Unix name of the user.
-	 * @param	string	$description	The new group description.
+	 * @param	string	$description		The new group description.
 	 * @param	string	$purpose		The purpose of the group.
 	 * @param	string	$unix_box
 	 * @param	string	$scm_box
 	 * @param	bool	$is_public
 	 * @param	bool	$send_mail		Whether to send an email or not
-	 * @param	int		$built_from_template	The id of the project this new project is based on
+	 * @param	int	$built_from_template	The id of the project this new project is based on
 	 * @return	boolean	success or not
 	 */
 	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box = 'shell1',
@@ -306,7 +306,7 @@ class Group extends Error {
 
 		global $SYS;
 		if ($this->getID()!=0) {
-			$this->setError(_('Group object already exists'));
+			$this->setError(_('Group object already exists.'));
 			return false;
 		} elseif (!$this->validateGroupName($group_name)) {
 			return false;
@@ -314,17 +314,17 @@ class Group extends Error {
 			$this->setError(_('Invalid Unix Name.'));
 			return false;
 		} elseif (!$SYS->sysUseUnixName($unix_name)) {
-			$this->setError(_('Unix name already taken'));
+			$this->setError(_('Unix name already taken.'));
 			return false;
 		} elseif (db_numrows(db_query_params('SELECT group_id FROM groups WHERE unix_group_name=$1',
 							array($unix_name))) > 0) {
 			$this->setError(_('Unix name already taken'));
 			return false;
 		} elseif (strlen($purpose)<10) {
-			$this->setError(_('Please describe your Registration Purpose in a more comprehensive manner'));
+			$this->setError(_('Please describe your Registration Project Purpose and Summarization in a more comprehensive manner.'));
 			return false;
 		} elseif (strlen($purpose)>1500) {
-			$this->setError(_('The Registration Purpose text is too long. Please make it smaller than 1500 bytes.'));
+			$this->setError(_('The Registration Project Purpose and Summarization text is too long. Please make it smaller than 1500 characters.'));
 			return false;
 		} elseif (strlen($description)<10) {
 			$this->setError(_('Describe in a more comprehensive manner your project.'));
@@ -2726,7 +2726,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 		if (strlen($group_name)<3) {
 			$this->setError(_('Group name is too short'));
 			return false;
-		} elseif (strlen(htmlspecialchars($group_name))>50) {
+		} elseif (strlen(htmlspecialchars($group_name))>40) {
 			$this->setError(_('Group name is too long'));
 			return false;
 		} elseif (group_get_object_by_publicname($group_name)) {

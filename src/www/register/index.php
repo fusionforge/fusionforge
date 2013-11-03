@@ -181,11 +181,11 @@ site_user_header(array('title'=>_('Register Project')));
 <input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
 <h2><?php echo $index++.'. '._('Project Full Name') ?></h2>
 <p>
-<?php echo _('You should start with specifying the name of your project. The “Full Name” is descriptive, and has no arbitrary restrictions (except a 40 character limit).') ?>
+<?php echo _('You should start with specifying the name of your project. The “Full Name” is descriptive, and has no arbitrary restrictions (except min 3 characters and max 40 characters).') ?>
 </p>
 <p>
 <?php echo _('Full Name') . _(': ') ?><br/>
-<input required="required" size="40" maxlength="40" type="text" name="full_name" value="<?php echo htmlspecialchars($full_name); ?>"/>
+<input required="required" size="40" maxlength="40" type="text" name="full_name" placeholder="<?php echo _('Project Full Name'); ?>" value="<?php echo htmlspecialchars($full_name); ?>" pattern=".{3,40}"/>
 </p>
 
 <?php
@@ -193,9 +193,9 @@ site_user_header(array('title'=>_('Register Project')));
 if ( !forge_get_config ('project_auto_approval') ) {
 	echo '<h2>'.$index++.'. '._('Project Purpose And Summarization').'</h2>';
 	echo '<p>';
-	printf(_('Please provide detailed, accurate description of your project and what %1$s resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project\'s hosting on %1$s, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English.'), forge_get_config ('forge_name'));
+	printf(_('Please provide detailed, accurate description of your project and what %1$s resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project\'s hosting on %1$s, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English. From 10 to 1500 characters.'), forge_get_config ('forge_name'));
 	echo '</p>';
-	echo '<textarea required="required" name="purpose" cols="70" rows="10">';
+	echo '<textarea required="required" name="purpose" cols="70" rows="10" placeholder="'. _('Project Purpose And Summarization').'" >';
 	echo htmlspecialchars($purpose);
 	echo '</textarea>';
 }
@@ -203,10 +203,10 @@ if ( !forge_get_config ('project_auto_approval') ) {
 
 <h2><?php echo $index++.'. '. _('Project Public Description') ?></h2>
 <p>
-<?php echo _('This is the description of your project which will be shown on the Project Summary page, in search results, etc.') ?>
+<?php echo _('This is the description of your project which will be shown on the Project Summary page, in search results, etc. (at least 10 characters)') ?>
 </p>
 
-<textarea required="required" name="description" cols="70" rows="5">
+<textarea required="required" name="description" cols="70" rows="5" placeholder="<?php echo _('Project Public Description'); ?>" >
 <?php echo htmlspecialchars($description); ?>
 </textarea>
 
@@ -234,7 +234,7 @@ if ( !forge_get_config ('project_auto_approval') ) {
 <p>
 <?php echo _('Unix Name') . _(':'); ?>
 <br />
-<input required="required" type="text" maxlength="15" size="15" name="unix_name" value="<?php echo htmlspecialchars($unix_name); ?>"/>
+<input required="required" type="text" maxlength="15" size="15" name="unix_name" value="<?php echo htmlspecialchars($unix_name); ?>" placeholder="<?php echo _('Unix Name'); ?>" pattern="[a-z0-9-]{3,15}"/>
 </p>
 
 <?php
@@ -279,7 +279,7 @@ if (count ($template_projects) > 1) {
 		$tpv_arr[] = $tp->getID() ;
 		$tpn_arr[] = $tp->getPublicName() ;
 	}
-	echo html_build_select_box_from_arrays ($tpv_arr, $tpn_arr, 'built_from_template', $template_projects[0]->getID(),
+	echo html_build_select_box_from_arrays ($tpv_arr, $tpn_arr, 'built_from_template', $built_from_template,
 						false, '', false, '') ;
 } elseif (count ($template_projects) == 1) {
 	echo '<p>';
