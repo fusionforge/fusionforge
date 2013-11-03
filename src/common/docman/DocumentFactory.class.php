@@ -113,7 +113,7 @@ class DocumentFactory extends Error {
 	/**
 	 * setStateID - call this before getDocuments() if you want to limit to a specific state.
 	 *
-	 * @param	int		$stateid	The stateid from the doc_states table.
+	 * @param	int	$stateid	The stateid from the doc_states table.
 	 * @access	public
 	 */
 	function setStateID($stateid) {
