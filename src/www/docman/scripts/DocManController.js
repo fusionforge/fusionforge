@@ -183,16 +183,18 @@ DocManListFileController.prototype =
 
 	/*! toggle add file edit view div visibility and play with lock
 	 *
-	 * @param id the docid
+	 * @param docparams array
 	 */
 	toggleEditFileView: function(docparams) {
 		this.docparams = docparams;
-		jQuery('#title').attr('value', this.docparams.title);
-		jQuery('#description').attr('value', this.docparams.description);
-		jQuery('#docid').attr('value', this.docparams.id);
+		jQuery('#title').val(this.docparams.title);
+		jQuery('#description').val(this.docparams.description);
+		jQuery('#docid').val(this.docparams.id);
 		if (this.docparams.isURL) {
 			jQuery('#uploadnewroweditfile').hide();
 			jQuery('#fileurlroweditfile').show();
+			jQuery('#fileurlroweditfile').find('input').attr("required", "required");
+			jQuery('#fileurlroweditfile').find('input').val(this.docparams.filename);
 		} else {
 			jQuery('#fileurlroweditfile').hide();
 			jQuery('#uploadnewroweditfile').show();
@@ -311,61 +313,45 @@ DocManAddFileController.prototype =
 	
 	toggleFileRowView: function() {
 		this.params.fileRow.show();
+		this.params.fileRow.find('input').attr("required", "required");
 		this.params.urlRow.hide();
-		this.params.pathRow.hide();
+		this.params.urlRow.find('input').removeAttr("required");
+		this.params.pathRow.hide()
+		this.params.pathRow.find('input').removeAttr("required");
 		this.params.editRow.hide();
 		this.params.editNameRow.hide();
-		if (typeof(jQuery('#left')) != 'undefined' && typeof(jQuery('#right')) != 'undefined') {
-			if (jQuery('#left').height() > jQuery('#right').height()) {
-				jQuery('#handle').css('height', jQuery('#left').height());
-			} else {
-				jQuery('#handle').css('height', jQuery('#right').height());
-			}
-		}
 	},
 	
 	toggleUrlRowView: function() {
 		this.params.fileRow.hide();
+		this.params.fileRow.find('input').removeAttr("required");
 		this.params.urlRow.show();
+		this.params.urlRow.find('input').attr("required", "required");
 		this.params.pathRow.hide();
+		this.params.pathRow.find('input').removeAttr("required");
 		this.params.editRow.hide();
 		this.params.editNameRow.hide();
-		if (typeof(jQuery('#left')) != 'undefined' && typeof(jQuery('#right')) != 'undefined') {
-			if (jQuery('#left').height() > jQuery('#right').height()) {
-				jQuery('#handle').css('height', jQuery('#left').height());
-			} else {
-				jQuery('#handle').css('height', jQuery('#right').height());
-			}
-		}
 	},
 	
 	toggleManualUploadView: function() {
 		this.params.fileRow.hide();
+		this.params.fileRow.find('input').removeAttr("required");
 		this.params.urlRow.hide();
+		this.params.urlRow.find('input').removeAttr("required");
 		this.params.pathRow.show();
+		this.params.pathRow.find('input').attr("required", "required");
 		this.params.editRow.hide();
 		this.params.editNameRow.hide();
-		if (typeof(jQuery('#left')) != 'undefined' && typeof(jQuery('#right')) != 'undefined') {
-			if (jQuery('#left').height() > jQuery('#right').height()) {
-				jQuery('#handle').css('height', jQuery('#left').height());
-			} else {
-				jQuery('#handle').css('height', jQuery('#right').height());
-			}
-		}
 	},
 	
 	toggleEditorView: function() {
 		this.params.fileRow.hide();
+		this.params.fileRow.find('input').removeAttr("required");
 		this.params.urlRow.hide();
+		this.params.urlRow.find('input').removeAttr("required");
 		this.params.pathRow.hide();
+		this.params.pathRow.find('input').removeAttr("required");
 		this.params.editRow.show();
 		this.params.editNameRow.show();
-		if (typeof(jQuery('#left')) != 'undefined' && typeof(jQuery('#right')) != 'undefined') {
-			if (jQuery('#left').height() > jQuery('#right').height()) {
-				jQuery('#handle').css('height', jQuery('#left').height());
-			} else {
-				jQuery('#handle').css('height', jQuery('#right').height());
-			}
-		}
 	}
 };

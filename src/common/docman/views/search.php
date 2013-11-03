@@ -7,7 +7,7 @@
  * Copyright 2005, Fabio Bertagnin
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -59,7 +59,7 @@ echo '<div class="docmanDivIncluded">';
 echo '<form method="post" action="?group_id='.$group_id.'&amp;view=search">';
 echo '<table>';
 echo '<tr><td><b>'._('Query: ').'</b>';
-echo '<input type="text" name="textsearch" id="textsearch" size="48" value="'.$searchString.'" required="required" />';
+echo '<input type="text" name="textsearch" id="textsearch" size="48" value="'.$searchString.'" required="required" placeholder="'._('Searched words').'" />';
 echo '<input type="submit" value="'._('Search').'" />';
 echo '</td></tr><tr><td>';
 echo '<input type="radio" name="search_type" required="required" value="all" '.$allchecked.' class="tabtitle-nw" title="'._('All searched words are mandatory').'" />'._('With all the words');

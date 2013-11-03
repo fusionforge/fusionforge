@@ -53,11 +53,13 @@ function doItAddSubGroup() {
 echo '<div class="docmanDivIncluded">';
 echo '<form id="addsubgroup" name="addsubgroup" method="post" action="'.$actionurl.'">';
 if ($dirid) {
-	echo _('Name of the document subfolder to create')._(': ');
+	$folderMessage = _('Name of the document subfolder to create');
+	echo $folderMessage._(': ');
 } else {
-	echo _('Name of the document folder to create')._(': ');
+	$folderMessage = _('Name of the document folder to create');
+	echo $folderMessage._(': ');
 }
-echo '<input required="required" type="text" name="groupname" size="40" maxlength="255" />';
+echo '<input required="required" type="text" name="groupname" size="40" maxlength="255" placeholder="'.$folderMessage.'" />';
 echo '<input id="submitaddsubgroup" type="button" value="'. _('Create') .'" onclick="javascript:doItAddSubGroup()" />';
 echo '</form>';
 echo '</div>';

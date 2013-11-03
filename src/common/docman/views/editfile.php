@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -73,7 +73,7 @@ echo '		</td>';
 echo '	</tr>';
 echo '	<tr id="fileurlroweditfile">';
 echo '		<td><strong>'. _('Specify an new outside URL where the file will be referenced:') .'</strong>'. utils_requiredField() .'<br />';
-echo '			<input id="fileurl" type="text" name="file_url" size="50" />';
+echo '			<input id="fileurl" type="url" name="file_url" size="50" pattern="ftp://.+|https?://.+" />';
 echo '		</td>';
 echo '	</tr>';
 echo '	<tr id="uploadnewroweditfile">';

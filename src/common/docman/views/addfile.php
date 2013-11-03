@@ -99,7 +99,7 @@ if ($dgf->getNested() == NULL) {
 					<td>
 						'. _('Document Title').utils_requiredField()
 					.'</td><td>'
-					.'<input pattern=".{5,}" title="'.sprintf(_('(at least %1$s characters)'), 5).'" type="text" name="title" size="40" maxlength="255" required="required" />&nbsp;'
+					.'<input pattern=".{5,}" placeholder="'._('Document Title').'" title="'.sprintf(_('(at least %1$s characters)'), 5).'" type="text" name="title" size="40" maxlength="255" required="required" />&nbsp;'
 					.sprintf(_('(at least %1$s characters)'), 5)
 					.'</td>
 				</tr>
@@ -107,7 +107,7 @@ if ($dgf->getNested() == NULL) {
 					<td>
 						'. _('Description') .utils_requiredField()
 				 	.'</td><td>'
-						.'<input pattern=".{10,}" title="'.sprintf(_('(at least %1$s characters)'), 10).'" type="text" name="description" size="50" maxlength="255" required="required" />&nbsp;'
+						.'<input pattern=".{10,}" placeholder="'._('Description').'" title="'.sprintf(_('(at least %1$s characters)'), 10).'" type="text" name="description" size="50" maxlength="255" required="required" />&nbsp;'
 						.sprintf(_('(at least %1$s characters)'), 10)
 					.'</td>
 				</tr>
@@ -116,7 +116,7 @@ if ($dgf->getNested() == NULL) {
 						'. _('Type of Document') .utils_requiredField()
 					.'</td><td>
 					<input type="radio" id="buttonFile" name="type" value="httpupload" checked="checked" required="required" />'. _('File') .
-					'<input type="radio" id="buttonUrl" name="type" value="pasteurl" />'. _('URL');
+					'<input type="radio" id="buttonUrl" name="type" value="pasteurl" required="required" />'. _('URL');
 	if (forge_get_config('use_manual_uploads')) {
 					echo '<input type="radio" id="buttonManualUpload" name="type" value="manualupload" required="required" />'. _('Already-uploaded file');
 	}
@@ -129,14 +129,14 @@ if ($dgf->getNested() == NULL) {
 					<td>
 						'. _('Upload File') .utils_requiredField()
 					.'</td><td>'
-						.'<input type="file" name="uploaded_data" size="30" />'.sprintf(_('(max upload size: %1$s)'),human_readable_bytes(util_get_maxuploadfilesize())).'
+						.'<input type="file" required="required" name="uploaded_data" size="30" />'.sprintf(_('(max upload size: %1$s)'),human_readable_bytes(util_get_maxuploadfilesize())).'
 					</td>
 				</tr>
 				<tr id="urlrow" style="display:none">
 					<td>
 						'. _('URL') . utils_requiredField()
 					.'</td><td>'
-						.'<input type="text" name="file_url" size="30" />
+						.'<input type="url" name="file_url" size="30" placeholder="'._('Enter a valid URL').'" pattern="ftp://.+|https?://.+" />
 					</td>
 				</tr>
 				<tr id="pathrow" style="display:none">
