@@ -316,7 +316,7 @@ DocManAddFileController.prototype =
 		this.params.fileRow.find('input').attr("required", "required");
 		this.params.urlRow.hide();
 		this.params.urlRow.find('input').removeAttr("required");
-		this.params.pathRow.hide()
+		this.params.pathRow.hide();
 		this.params.pathRow.find('input').removeAttr("required");
 		this.params.editRow.hide();
 		this.params.editNameRow.hide();
