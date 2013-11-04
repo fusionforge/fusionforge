@@ -11137,9 +11137,9 @@ msgid "Add Mailing List"
 msgstr "Mailinglisten hinzufügen"
 
 #: plugins/mailman/www/index.php:39 www/mail/index.php:53
-#, fuzzy, php-format
+#,  php-format
 msgid "Mailing Lists for %s"
-msgstr "Mailinglisten für %1$s"
+msgstr "Mailinglisten für %s"
 
 #: plugins/mailman/www/index.php:55 www/mail/index.php:68
 #, php-format
@@ -20737,16 +20737,18 @@ msgid "Trove Update Success"
 msgstr "Datei erfolgreich aktualisiert"
 
 #: www/project/admin/group_trove.php:76
-#, fuzzy
 msgid "Edit Trove Categorization"
-msgstr "Bearbeite Katalog-Kategorie"
+msgstr "Bearbeite Fundstellen Kategorisierung"
 
 #: www/project/admin/group_trove.php:79
 msgid ""
 "Select up to three locations for this project in each of the Trove root "
 "categories. If the project does not require any or all of these locations, "
 "simply select “None Selected”."
-msgstr ""
+msgstr "Wählen Sie bis zu drei "
+"Fundorte für dieses Projekt in jeder der Fundstellen Root Kategorien aus. "
+"Falls das Projekt keinen, oder alle, dieser Fundorte benötigt, wählen Sie "
+"einfach »Keine Ausgewählt« aus."
 
 #: www/project/admin/group_trove.php:80
 msgid ""
@@ -20765,18 +20767,18 @@ msgid "Update All Category Changes"
 msgstr "Alle Kategorieänderungen aktualisieren"
 
 #: www/project/admin/history.php:40
-#, fuzzy, php-format
+#,  php-format
 msgid "Project History of %s"
-msgstr "Projektverlauf"
+msgstr "Projektverlauf für %s"
 
 #: www/project/admin/index.php:108 www/project/admin/tools.php:103
 msgid "Project information updated"
 msgstr "Projektinformationen aktualisiert"
 
 #: www/project/admin/index.php:112
-#, fuzzy, php-format
+#, php-format
 msgid "Project Information for %s"
-msgstr "Projektinformation"
+msgstr "Projektinformation für %s"
 
 #: www/project/admin/index.php:119
 msgid "Misc. Project Information"
@@ -24113,10 +24115,6 @@ msgstr "Persönliche Seite für %s"
 #~ msgid "Mailing list"
 #~ msgstr "Mailingliste"
 
-#, fuzzy
-#~ msgid "Mailing Lists for"
-#~ msgstr "Mailinglisten für %1$s"
-
 #~ msgid "No Lists found for %1$s"
 #~ msgstr "Keine Listen für %1$s gefunden"
 
@@ -24167,22 +24165,6 @@ msgstr "Persönliche Seite für %s"
 #~ "Wenn Sie ein Projektadministrator sind, können Sie auf den 'Manage Canned "
 #~ "Responses' Link klicken, um Ihre eigenen vorgespeicherten Antworten zu "
 #~ "definieren."
-
-#~ msgid ""
-#~ "This drop-down box represents the current status of a tracker item.<br /"
-#~ "><br />You can set the status to 'Pending' if you are waiting for a "
-#~ "response from the tracker item author.  When the author responds the "
-#~ "status is automatically reset to that of 'Open'. Otherwise, if the author "
-#~ "doesn't respond with an admin-defined amount of time (default is 14 days) "
-#~ "then the item is given a status of 'Deleted'."
-#~ msgstr ""
-#~ "Diese Drop-Down-Box representiert den aktuellen Status eines Tracker-"
-#~ "Elementes.<br /><br />Sie können den Status auf \"Schwebend\" setzen, "
-#~ "wenn Sie auf eine Antwort des Tracker-Element-Autors warten möchten.  "
-#~ "Wenn der Autor antwortet, wird der Status automatisch wieder auf \"Offen"
-#~ "\" gesetzt. Andernfalls, wenn der Autor nicht in der vom Administrator "
-#~ "vorgegebenen Zeit antwortet (vorgegeben sind 14 Tage), dann wechselt der "
-#~ "Status zu 'Gelöscht'."
 
 #~ msgid ""
 #~ "The Sort By option allows you to determine how the browse results are "
@@ -27917,70 +27899,8 @@ msgstr "Persönliche Seite für %s"
 #~ msgid "Link to Artifact: [artifact]ArtifactID[/artifact]   (alt+h)"
 #~ msgstr "Link zu Artefakt: [artifact]ArtifactID[/artifact]   (alt+h)"
 
-#~ msgid "Font colour"
-#~ msgstr "Font-Farbe"
-
-#~ msgid "Dark Red"
-#~ msgstr "Dunkelrot"
-
-#~ msgid "Red"
-#~ msgstr "Rot"
-
-#~ msgid "Orange"
-#~ msgstr "Orange"
-
-#~ msgid "Brown"
-#~ msgstr "Braun"
-
-#~ msgid "Yellow"
-#~ msgstr "Gelb"
-
-#~ msgid "Green"
-#~ msgstr "Grün"
-
-#~ msgid "Olive"
-#~ msgstr "Olivgrün"
-
-#, fuzzy
-#~ msgid "Cyan"
-#~ msgstr "Zyan"
-
-#~ msgid "Blue"
-#~ msgstr "Blau"
-
-#~ msgid "Dark Blue"
-#~ msgstr "Dunkelblau"
-
-#~ msgid "Indigo"
-#~ msgstr "Indigo"
-
-#~ msgid "Violet"
-#~ msgstr "Violett"
-
-#~ msgid "White"
-#~ msgstr "Weiß"
-
-#~ msgid "Black"
-#~ msgstr "Schwarz"
-
-#~ msgid "Font size"
-#~ msgstr "Fontgröße"
-
-#~ msgid "Tiny"
-#~ msgstr "Winzig"
-
-#~ msgid "Small"
-#~ msgstr "Klein"
-
-#~ msgid "Huge"
-#~ msgstr "Riesig"
-
 #~ msgid "Close Tags"
 #~ msgstr "Tags schließen"
-
-#, fuzzy
-#~ msgid "Tip: Styles can be applied quickly to selected text"
-#~ msgstr "Hinweis: Stile können schnell angewandt werden um Text auszuwählen"
 
 #~ msgid "Smilies's list"
 #~ msgstr "Liste der Smilies"
@@ -27990,25 +27910,6 @@ msgstr "Persönliche Seite für %s"
 
 #~ msgid "Upload CSV"
 #~ msgstr "Upload CSV"
-
-#, fuzzy
-#~ msgid ""
-#~ "<h3>Edit Trove Categorization</h3><p>Select up to three locations for "
-#~ "this project in each of the Trove root categories. If the project does "
-#~ "not require any or all of these locations, simply select \"None Selected"
-#~ "\".</p><p> IMPORTANT: Projects should be categorized in the most specific "
-#~ "locations available in the map. Simultaneous categorization in a specific "
-#~ "category AND a parent category will result in only the more specific "
-#~ "categorization being accepted</p>."
-#~ msgstr ""
-#~ "<h3>Bearbeite Fundstellen Kategorisierung</h3><p>Wählen Sie bis zu drei "
-#~ "Fundorte für dieses Projekt in jeder der Fundstellen Root Kategorien aus. "
-#~ "Falls das Projekt keinen, oder alle, dieser Fundorte benötigt, wählen Sie "
-#~ "einfach  \"Keine Ausgewählt\" aus.</p><p>WICHTIG: Projekte sollten auf "
-#~ "der Karte in den genauest möglichen Fundorten kategorisiert werden. "
-#~ "Gleichzeitiges kategorisieren in einer spezifischen UND einer "
-#~ "übergeordneten Kategorie wird dazu führen, dass nur die spezifischere "
-#~ "Kategorisierung akzeptiert wird.</p>."
 
 #~ msgid "Short Description:&nbsp;"
 #~ msgstr "Kurze Beschreibung: "
@@ -28894,22 +28795,3 @@ msgstr "Persönliche Seite für %s"
 
 #~ msgid "Mailing List Exists with same name"
 #~ msgstr "Mailingliste mit gleichem Namen existiert bereits"
-
-#~ msgid ""
-#~ "This drop-down box represents the current status of a tracker item.<br /"
-#~ "><br />You can set the status to “Pending” if you are waiting for a "
-#~ "response from the tracker item author.  When the author responds the "
-#~ "status is automatically reset to that of “Open”. Otherwise, if the author "
-#~ "doesn't respond with an admin-defined amount of time (default is 14 days) "
-#~ "then the item is given a status of “Deleted”."
-#~ msgstr ""
-#~ "Diese Drop-Down-Box representiert den aktuellen Status eines Tracker-"
-#~ "Elementes.<br /><br />Sie können den Status auf \"Schwebend\" setzen, "
-#~ "wenn Sie auf eine Antwort des Tracker-Element-Autors warten möchten.  "
-#~ "Wenn der Autor antwortet, wird der Status automatisch wieder auf \"Offen"
-#~ "\" gesetzt. Andernfalls, wenn der Autor nicht in der vom Administrator "
-#~ "vorgegebenen Zeit antwortet (vorgegeben sind 14 Tage), dann wechselt der "
-#~ "Status zu 'Gelöscht'."
-
-#~ msgid "Mailing Lists for %1$s"
-#~ msgstr "Mailinglisten für %1$s"
