@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-04 17:08+0100\n"
+"POT-Creation-Date: 2013-11-04 17:13+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -17807,10 +17807,10 @@ msgstr "Deskribapena"
 
 #: www/include/html.php:418
 msgid ""
-"<b>Editing tips:</b><br/><strong>http,https or ftp</strong>: Hyperlinks.<br/"
-"><strong>[#NNN]</strong>: Tracker id NNN.<br/><strong>[TNNN]</strong>: Task "
-"id NNN.<br/><strong>[wiki:&lt;pagename&gt;]</strong>: Wiki page.<br/><strong>"
-"[forum:&lt;msg_id&gt;]</strong>: Forum post."
+"<strong>Editing tips:</strong><br/><strong>http,https or ftp</strong>: "
+"Hyperlinks.<br/><strong>[#NNN]</strong>: Tracker id NNN.<br/><strong>[TNNN]</"
+"strong>: Task id NNN.<br/><strong>[wiki:&lt;pagename&gt;]</strong>: Wiki "
+"page.<br/><strong>[forum:&lt;msg_id&gt;]</strong>: Forum post."
 msgstr ""
 
 #: www/include/html.php:421
