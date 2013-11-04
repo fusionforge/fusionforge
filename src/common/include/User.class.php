@@ -343,7 +343,7 @@ class GFUser extends Error {
 			return false;
 		}
 		if (!$SYS->sysUseUnixName($unix_name)) {
-			$this->setError(_('Unix name already taken'));
+			$this->setError(_('Unix name already taken.'));
 			return false;
 		}
 		if (!validate_email($email)) {
