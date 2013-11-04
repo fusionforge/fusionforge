@@ -79,7 +79,7 @@ class CVSPlugin extends SCMPlugin {
 		$cvsrootend = $this->getBoxForProject($project).':'.forge_get_config('repos_path', 'scmcvs').'/'.$project->getUnixName();
         $b = '<h2>' . _('Anonymous CVS Access') . '</h2>';
         $b .= '<p>';
-        $b .= _('This project\'s CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <i>modulename</i>. When prompted for a password for <i>anonymous</i>, simply press the Enter key.');
+        $b .= _('This project\'s CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <em>modulename</em>. When prompted for a password for <em>anonymous</em>, simply press the Enter key.');
         $b .= '</p>';
 		$b .= '<p>
 		       <tt>cvs -d :pserver:anonymous@' . $cvsrootend.' login</tt><br/>
@@ -102,7 +102,7 @@ class CVSPlugin extends SCMPlugin {
 			$b .= ' ';
 			$b .= _('SSH must be installed on your client machine.');
 			$b .= ' ';
-			$b .= _('Substitute <i>developername</i> with the proper values.');
+			$b .= _('Substitute <em>developername</em> with the proper values.');
 			$b .= ' ';
 			$b .= _('Enter your site password when prompted.');
         	$b .= '</p>';
@@ -119,7 +119,7 @@ class CVSPlugin extends SCMPlugin {
 			$b .= ' ';
 			$b .= _('SSH must be installed on your client machine.');
 			$b .= ' ';
-			$b .= _('Substitute <i>developername</i> with the proper values.');
+			$b .= _('Substitute <em>developername</em> with the proper values.');
 			$b .= ' ';
 			$b .= _('Enter your site password when prompted.');
         	$b .= '</p>';

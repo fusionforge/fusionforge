@@ -212,8 +212,8 @@ class GitPlugin extends SCMPlugin {
 
 				$b .= '</h2>';
 				$b .= '<p>';
-				$b .= ngettext('Only project developers can access the GIT repository via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.',
-					       'Only project developers can access the GIT repositories via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.',
+				$b .= ngettext('Only project developers can access the GIT repository via this method. SSH must be installed on your client machine. Substitute <em>developername</em> with the proper value. Enter your site password when prompted.',
+					       'Only project developers can access the GIT repositories via this method. SSH must be installed on your client machine. Substitute <em>developername</em> with the proper value. Enter your site password when prompted.',
 					       count($repo_list));
 
 				$b .= '</p>';

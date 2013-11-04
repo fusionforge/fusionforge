@@ -12401,7 +12401,7 @@ msgstr ""
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:151
 #: plugins/scmsvn/common/SVNPlugin.class.php:168
 #: plugins/scmsvn/common/SVNPlugin.class.php:181
-msgid "Substitute <i>developername</i> with the proper values."
+msgid "Substitute <em>developername</em> with the proper values."
 msgstr ""
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:124
@@ -12509,8 +12509,8 @@ msgstr ""
 msgid ""
 "This project's CVS repository can be checked out through anonymous (pserver) "
 "CVS with the following instruction set. The module you wish to check out "
-"must be specified as the <i>modulename</i>. When prompted for a password for "
-"<i>anonymous</i>, simply press the Enter key."
+"must be specified as the <em>modulename</em>. When prompted for a password for "
+"<em>anonymous</em>, simply press the Enter key."
 msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:86
@@ -12679,11 +12679,11 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:215
 msgid ""
 "Only project developers can access the GIT repository via this method. SSH "
-"must be installed on your client machine. Substitute <i>developername</i> "
+"must be installed on your client machine. Substitute <em>developername</em> "
 "with the proper value. Enter your site password when prompted."
 msgid_plural ""
 "Only project developers can access the GIT repositories via this method. SSH "
-"must be installed on your client machine. Substitute <i>developername</i> "
+"must be installed on your client machine. Substitute <em>developername</em> "
 "with the proper value. Enter your site password when prompted."
 msgstr[0] ""
 
@@ -12883,7 +12883,7 @@ msgstr ""
 #: plugins/scmhg/common/HgPlugin.class.php:119
 msgid ""
 "Only project developers can access the Mercurial tree via this method. SSH "
-"must be installed on your client machine. Substitute <i>developername</i> "
+"must be installed on your client machine. Substitute <em>developername</em> "
 "with the proper value. Enter your site password when prompted."
 msgstr ""
 

@@ -111,12 +111,12 @@ class HgPlugin extends SCMPlugin {
 			}
 		} else {
 			if (forge_get_config('use_ssh', 'scmhg')) {
-				$d = '<i>developername</i>';
+				$d = '<em>developername</em>';
 				$b = '<h2>';
 				$b .= _('Developer Mercurial Access via SSH');
 				$b .= '</h2>';
 				$b .= '<p>';
-				$b .= _('Only project developers can access the Mercurial tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper value. Enter your site password when prompted.');
+				$b .= _('Only project developers can access the Mercurial tree via this method. SSH must be installed on your client machine. Substitute <em>developername</em> with the proper value. Enter your site password when prompted.');
 				$b .= '</p>';
 				// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 				//            HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
