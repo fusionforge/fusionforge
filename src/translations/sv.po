@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-31 18:20+0100\n"
+"POT-Creation-Date: 2013-11-04 10:31+0100\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -208,8 +208,8 @@ msgstr "Filnamn"
 #: common/docman/DocumentManager.class.php:208
 #: common/docman/include/DocumentGroupHTML.class.php:50
 #: common/docman/views/addfile.php:91 common/docman/views/addfile.php:92
-#: common/docman/views/addsubdocgroup.php:56
-#: common/docman/views/addsubdocgroup.php:58
+#: common/docman/views/addsubdocgroup.php:57
+#: common/docman/views/addsubdocgroup.php:60
 #: common/docman/views/editfile.php:38 common/docman/views/editfile.php:42
 #: common/docman/views/editfile.php:51 common/docman/views/editfile.php:70
 #: common/docman/views/listfile.php:169 common/docman/views/listfile.php:171
@@ -487,7 +487,7 @@ msgid "Error fetching Document"
 msgstr "Fel under aktiveringen av konto"
 
 #: common/docman/Document.class.php:225 common/docman/Document.class.php:881
-#: common/docman/Document.class.php:1096
+#: common/docman/Document.class.php:1097
 #, fuzzy
 msgid "Error updating document group:"
 msgstr "Fel vid tillägg i forum"
@@ -552,7 +552,8 @@ msgid "Project"
 msgstr ""
 
 #: common/docman/Document.class.php:942 common/docman/views/addfile.php:91
-#: common/docman/views/addfile.php:100 common/docman/views/editfile.php:38
+#: common/docman/views/addfile.php:100 common/docman/views/addfile.php:102
+#: common/docman/views/editfile.php:38
 msgid "Document Title"
 msgstr "Dokumentrubrik"
 
@@ -583,7 +584,7 @@ msgstr ""
 msgid "Error Deleting Document:"
 msgstr "Fel under aktiveringen av konto"
 
-#: common/docman/Document.class.php:1091
+#: common/docman/Document.class.php:1092
 #: common/docman/DocumentGroup.class.php:873
 msgid "wrong column name"
 msgstr ""
@@ -781,7 +782,8 @@ msgid ""
 msgstr ""
 
 #: common/docman/views/addfile.php:92 common/docman/views/addfile.php:108
-#: common/docman/views/editfile.php:42 common/docman/views/listfile.php:218
+#: common/docman/views/addfile.php:110 common/docman/views/editfile.php:42
+#: common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/actions/admin-ind.php:99
@@ -903,6 +905,10 @@ msgstr "Överföra fil"
 msgid "(max upload size: %1$s)"
 msgstr ""
 
+#: common/docman/views/addfile.php:139
+msgid "Enter a valid URL"
+msgstr ""
+
 #: common/docman/views/addfile.php:151
 #, php-format
 msgid ""
@@ -988,12 +994,12 @@ msgstr "Överföra fil"
 msgid "Name of the document subfolder to create"
 msgstr "Ingen dokumentdata"
 
-#: common/docman/views/addsubdocgroup.php:58
+#: common/docman/views/addsubdocgroup.php:59
 #, fuzzy
 msgid "Name of the document folder to create"
 msgstr "Ingen dokumentdata"
 
-#: common/docman/views/addsubdocgroup.php:61 www/admin/responses_admin.php:132
+#: common/docman/views/addsubdocgroup.php:63 www/admin/responses_admin.php:132
 #: www/project/admin/database.php:184 www/project/admin/vhost.php:122
 msgid "Create"
 msgstr "Skapa"
@@ -1363,7 +1369,7 @@ msgstr ""
 #: www/export/rss20_docman.php:135 www/export/rss20_docman.php:137
 #: www/export/tracker.php:107 www/forum/index.php:90 www/forum/message.php:127
 #: www/forum/myforums.php:152 www/frs/index.php:175 www/frs/index.php:234
-#: www/include/html.php:1059 www/news/news_utils.php:149
+#: www/include/html.php:1070 www/news/news_utils.php:149
 #: www/news/news_utils.php:269 www/people/people_utils.php:422
 #: www/people/viewjob.php:77 www/pm/browse_task.php:262
 #: www/pm/browse_task.php:272 www/pm/include/ProjectTaskHTML.class.php:121
@@ -1893,6 +1899,11 @@ msgstr "Visa en användarprofil"
 #, fuzzy
 msgid "Query: "
 msgstr "Dagbok uppdaterad"
+
+#: common/docman/views/search.php:62
+#, fuzzy
+msgid "Searched words"
+msgstr "Använd forum"
 
 #: common/docman/views/search.php:65
 msgid "All searched words are mandatory"
@@ -2980,8 +2991,8 @@ msgid "Group Not Found"
 msgstr "Hittar inte grupp"
 
 #: common/include/Group.class.php:309
-msgid "Group object already exists"
-msgstr "Gruppobjekt finns redan"
+msgid "Group object already exists."
+msgstr "Gruppobjekt finns redan."
 
 #: common/include/Group.class.php:314 common/include/User.class.php:342
 #: common/include/User.class.php:402
@@ -2990,19 +3001,22 @@ msgstr "Ogiltigt unixnamn."
 
 #: common/include/Group.class.php:317 common/include/Group.class.php:321
 #: common/include/User.class.php:346
-msgid "Unix name already taken"
+#, fuzzy
+msgid "Unix name already taken."
 msgstr "Unixnamn redan upptaget"
 
 #: common/include/Group.class.php:324
+#, fuzzy
 msgid ""
-"Please describe your Registration Purpose in a more comprehensive manner"
+"Please describe your Registration Project Purpose and Summarization in a "
+"more comprehensive manner."
 msgstr ""
 "Var vänlig beskriv avsikten med din registrering på ett mer omfattande sätt"
 
 #: common/include/Group.class.php:327
 msgid ""
-"The Registration Purpose text is too long. Please make it smaller than 1500 "
-"bytes."
+"The Registration Project Purpose and Summarization text is too long. Please "
+"make it smaller than 1500 characters."
 msgstr ""
 
 #: common/include/Group.class.php:330 common/include/Group.class.php:584
@@ -3333,6 +3347,7 @@ msgid "Your project registration for %s has been denied."
 msgstr "Din projektregistrering för %s har blivit avslagen."
 
 #: common/include/Group.class.php:2625 www/register/index.php:182
+#: www/register/index.php:188
 msgid "Project Full Name"
 msgstr "Projekt, fullt namn"
 
@@ -3589,7 +3604,7 @@ msgstr ""
 msgid "Log Out"
 msgstr ""
 
-#: common/include/Navigation.class.php:194 www/include/html.php:984
+#: common/include/Navigation.class.php:194 www/include/html.php:995
 msgid "My Account"
 msgstr "Mítt&nbsp;konto"
 
@@ -3682,7 +3697,7 @@ msgstr "Projekt fillista"
 #: common/tracker/actions/mod.php:196
 #: common/tracker/include/build_submission_form.php:64
 #: common/widget/Widget_MyProjects.class.php:77
-#: www/include/Layout.class.php:721 www/pm/add_task.php:53
+#: www/include/Layout.class.php:717 www/pm/add_task.php:53
 #: www/pm/mod_task.php:62
 msgid "Admin"
 msgstr "Admin"
@@ -5085,7 +5100,7 @@ msgstr ""
 #: www/account/pending-resend.php:75 www/admin/admin_table.php:221
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:247
 #: www/admin/index.php:169 www/admin/pending-news.php:160
-#: www/forum/admin/index.php:412 www/include/vote_function.php:284
+#: www/forum/admin/index.php:412 www/include/vote_function.php:286
 #: www/my/bookmark_add.php:58 www/my/diary.php:189
 #: www/news/admin/index.php:149 www/news/news_utils.php:42
 #: www/news/submit.php:161 www/pm/add_task.php:57 www/pm/add_task.php:140
@@ -5454,7 +5469,7 @@ msgstr "Förändring"
 msgid "Advanced queries"
 msgstr "Lägg till kategorier"
 
-#: common/tracker/actions/browse.php:358 www/include/html.php:639
+#: common/tracker/actions/browse.php:358 www/include/html.php:648
 #, fuzzy
 msgid "Select One"
 msgstr "Ta bort fil"
@@ -5561,8 +5576,8 @@ msgid ""
 msgstr ""
 
 #: common/tracker/actions/browse.php:735 common/tracker/actions/browse.php:746
-#: common/tracker/actions/browse.php:750 www/include/html.php:361
-#: www/include/html.php:610 www/include/html.php:807
+#: common/tracker/actions/browse.php:750 www/include/html.php:363
+#: www/include/html.php:614 www/include/html.php:818
 #: www/pm/browse_task.php:355 www/pm/browse_task.php:370
 #: www/pm/browse_task.php:381
 msgid "No Change"
@@ -5761,7 +5776,7 @@ msgstr "Existerande filer"
 msgid "Data Type"
 msgstr "Datatyper"
 
-#: common/tracker/actions/mod.php:168 www/include/html.php:405
+#: common/tracker/actions/mod.php:168 www/include/html.php:407
 msgid ""
 "The summary text-box represents a short tracker item summary. Useful when "
 "browsing through several tracker items."
@@ -6515,9 +6530,9 @@ msgstr "Hämta"
 #: common/tracker/include/ArtifactTypeHtml.class.php:753
 #: plugins/scmhg/common/HgPlugin.class.php:608 www/admin/pluginman.php:227
 #: www/admin/pluginman.php:246 www/admin/pluginman.php:258
-#: www/admin/pluginman.php:259 www/include/html.php:320
-#: www/include/html.php:550 www/include/html.php:636 www/include/html.php:657
-#: www/include/html.php:692 www/include/html.php:734 www/pm/format_csv.php:78
+#: www/admin/pluginman.php:259 www/include/html.php:322
+#: www/include/html.php:554 www/include/html.php:645 www/include/html.php:668
+#: www/include/html.php:702 www/include/html.php:745 www/pm/format_csv.php:78
 #: www/pm/ganttpage.php:152 www/tracker/roadmap.php:440
 msgid "None"
 msgstr "Inget"
@@ -7157,7 +7172,7 @@ msgstr ""
 
 #: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:56
 #: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:239
-#: www/include/Layout.class.php:1338
+#: www/include/Layout.class.php:1334
 msgid "Preferences"
 msgstr "Inställningar"
 
@@ -7863,7 +7878,7 @@ msgid "There are no trackers available"
 msgstr "Det finns inga offentliga ordningslistor tillgängliga"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:87
-#: www/include/project_summary.php:137
+#: www/include/project_summary.php:140
 #, fuzzy, php-format
 msgid "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 msgid_plural "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
@@ -7875,7 +7890,7 @@ msgid "Public Forums"
 msgstr "Öppna forum"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:114
-#: www/include/project_summary.php:162
+#: www/include/project_summary.php:165
 #, fuzzy, php-format
 msgid "<strong>%d</strong> message"
 msgid_plural "<strong>%d</strong> messages"
@@ -7888,7 +7903,7 @@ msgid "in"
 msgstr "Inloggning"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:116
-#: www/include/project_summary.php:164
+#: www/include/project_summary.php:167
 #, fuzzy, php-format
 msgid "<strong>%d</strong> forum"
 msgid_plural "<strong>%d</strong> forums"
@@ -11574,7 +11589,7 @@ msgid "Reporter"
 msgstr "Rapport"
 
 #: plugins/mantisbt/view/editIssue.php:129
-#: plugins/mantisbt/view/viewIssue.php:86 www/include/html.php:403
+#: plugins/mantisbt/view/viewIssue.php:86 www/include/html.php:405
 msgid "Resolution"
 msgstr "Lösning"
 
@@ -15482,7 +15497,7 @@ msgstr ""
 msgid "Resend New Project Instruction Email"
 msgstr "Skicka nytt e-postbrev med instruktioner för projekt"
 
-#: www/admin/grouplist.php:27 www/include/Layout.class.php:1403
+#: www/admin/grouplist.php:27 www/include/Layout.class.php:1399
 #: www/softwaremap/full_list.php:53
 #, fuzzy
 msgid "Project List"
@@ -15504,7 +15519,7 @@ msgstr ""
 
 #: www/admin/grouplist.php:67 www/admin/search.php:148
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
-#: www/register/index.php:235
+#: www/register/index.php:235 www/register/index.php:237
 #, fuzzy
 msgid "Unix Name"
 msgstr "Unixnamn"
@@ -16035,9 +16050,9 @@ msgid "No project found."
 msgstr "Hittade inga projektgrupper"
 
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
-#: www/include/trove.php:409 www/include/trove.php:418
-#: www/include/trove.php:422 www/include/trove.php:426
-#: www/include/trove.php:430 www/trove/admin/trove_cat_add.php:49
+#: www/include/trove.php:410 www/include/trove.php:419
+#: www/include/trove.php:423 www/include/trove.php:427
+#: www/include/trove.php:431 www/trove/admin/trove_cat_add.php:49
 #, fuzzy, php-format
 msgid "Error in Trove Operation: %s"
 msgstr "Fel i resursoperation"
@@ -17496,7 +17511,7 @@ msgstr "Utgåvans namn:"
 msgid "Features Boxes"
 msgstr ""
 
-#: www/include/features_boxes.php:38 www/include/Layout.class.php:1391
+#: www/include/features_boxes.php:38 www/include/Layout.class.php:1387
 #: www/softwaremap/tag_cloud.php:52
 #, fuzzy
 msgid "Tag Cloud"
@@ -17583,18 +17598,18 @@ msgstr "Du måste ange ett användarnamn"
 msgid "File does not exist. File %s is not in incoming FTP directory."
 msgstr ""
 
-#: www/include/html.php:381
+#: www/include/html.php:383
 msgid ""
 "This drop-down box represents the person to which a tracker item is assigned."
 msgstr ""
 "Denna rullgardinslista representerar den projektadministratör som "
 "ordningsposten är tilldelad"
 
-#: www/include/html.php:383
+#: www/include/html.php:385
 msgid "This drop-down box represents the current status of a tracker item."
 msgstr "Denna rullgardinslista representerar status på en ordningspost."
 
-#: www/include/html.php:385
+#: www/include/html.php:387
 msgid ""
 "You can set the status to “Pending” if you are waiting for a response from "
 "the tracker item author.  When the author responds the status is "
@@ -17607,22 +17622,22 @@ msgstr ""
 "'Öppen'. Annars, om författaren inte svarar inom en av administratören "
 "angiven tid, (standard är 14 dagar) så får posten statusen 'Raderad'."
 
-#: www/include/html.php:387
+#: www/include/html.php:389
 #, fuzzy
 msgid "Tracker category"
 msgstr "Ordningspost"
 
-#: www/include/html.php:389
+#: www/include/html.php:391
 #, fuzzy
 msgid "Tracker group"
 msgstr "Ordningslista"
 
-#: www/include/html.php:391
+#: www/include/html.php:393
 msgid ""
 "The Sort By option allows you to determine how the browse results are sorted."
 msgstr "Sortera efter valmöjligheten låter dig välja hur lista skall visas."
 
-#: www/include/html.php:393
+#: www/include/html.php:395
 msgid ""
 "You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, or "
 "Assignee.  You can also have the results sorted in Ascending or Descending "
@@ -17632,7 +17647,7 @@ msgstr ""
 "Avslutsdatum, Inlämnare eller Tilldelad.  Du kan också få resultaten "
 "sorterade i stigande eller fallande ordning."
 
-#: www/include/html.php:395
+#: www/include/html.php:397
 msgid ""
 "The Data Type option determines the type of tracker item this is.  Since the "
 "tracker rolls into one the bug, patch, support, etc... managers you need to "
@@ -17642,7 +17657,7 @@ msgstr ""
 "ordningslistan innehåller fel, rättningar, support, etc... så behöver du "
 "kunna avgöra vilken av dessa en post tillhör."
 
-#: www/include/html.php:397
+#: www/include/html.php:399
 msgid ""
 "This has the added benefit of enabling an admin to turn a support request "
 "into a bug."
@@ -17650,19 +17665,19 @@ msgstr ""
 "Detta har fördelen att en administratör kan omvandla ett supportärende till "
 "ett felärende."
 
-#: www/include/html.php:399
+#: www/include/html.php:401
 msgid ""
 "The priority option allows a user to define a tracker item priority (ranging "
 "from 1-Lowest to 5-Highest)."
 msgstr ""
 
-#: www/include/html.php:401
+#: www/include/html.php:403
 msgid ""
 "This is especially helpful for bugs and support requests where a user might "
 "find a critical problem with a project."
 msgstr ""
 
-#: www/include/html.php:407
+#: www/include/html.php:409
 msgid ""
 "The canned response drop-down represents a list of project admin-defined "
 "canned responses to common support or bug submission."
@@ -17670,7 +17685,7 @@ msgstr ""
 "Rullgardinslistan innehåller färdiga svar till vanliga supportfrågor och "
 "felanmälningar definierade av projektadministratören."
 
-#: www/include/html.php:409
+#: www/include/html.php:411
 msgid ""
 "If you are a project admin you can click the “Manage Canned Responses” link "
 "to define your own canned responses"
@@ -17678,19 +17693,19 @@ msgstr ""
 "Om du är projektadmin kan du klicka på “Manage Canned Responses” länken för "
 "att definiera dina egna färdiga svar"
 
-#: www/include/html.php:411
+#: www/include/html.php:413
 msgid ""
 "Anyone can add here comments to give additional information, answers and "
 "solutions. Please, be as precise as possible to avoid misunderstanding. If "
 "relevant, screenshots or documents can be added as attached files."
 msgstr ""
 
-#: www/include/html.php:413
+#: www/include/html.php:415
 #, fuzzy
 msgid "Enter the complete description."
 msgstr "Detaljerad beskrivning"
 
-#: www/include/html.php:416
+#: www/include/html.php:418
 msgid ""
 "<b>Editing tips:</b><br/><strong>http,https or ftp</strong>: Hyperlinks.<br/"
 "><strong>[#NNN]</strong>: Tracker id NNN.<br/><strong>[TNNN]</strong>: Task "
@@ -17698,7 +17713,7 @@ msgid ""
 "[forum:&lt;msg_id&gt;]</strong>: Forum post."
 msgstr ""
 
-#: www/include/html.php:419
+#: www/include/html.php:421
 msgid ""
 "When you wish to attach a file to a tracker item you must check this "
 "checkbox before submitting changes."
@@ -17706,117 +17721,117 @@ msgstr ""
 "När du vill bifoga en fil med en ordningspost måste du markera denna "
 "kryssruta innan du lämnar in förändringarna."
 
-#: www/include/html.php:421
+#: www/include/html.php:423
 msgid ""
 "You can monitor or un-monitor this item by clicking the “Monitor” button."
 msgstr ""
 
-#: www/include/html.php:423
+#: www/include/html.php:425
 msgid ""
 "<strong>Note!</strong> this will send you additional email. If you add "
 "comments to this item, or submitted, or are assigned this item, you will "
 "also get emails for those reasons as well!"
 msgstr ""
 
-#: www/include/html.php:556
+#: www/include/html.php:560
 #, fuzzy
 msgid "Error: uneven row counts"
 msgstr "Fel - Hittade ingen version"
 
-#: www/include/html.php:809
+#: www/include/html.php:820
 msgid "Lowest"
 msgstr "Lägsta"
 
-#: www/include/html.php:813
+#: www/include/html.php:824
 msgid "Highest"
 msgstr "Högsta"
 
-#: www/include/html.php:897
+#: www/include/html.php:908
 #, fuzzy, php-format
 msgid "Project access problem: %s"
 msgstr "Projekt admin: %1$s"
 
-#: www/include/html.php:899
+#: www/include/html.php:910
 #, fuzzy, php-format
 msgid "Project Problem: %s"
 msgstr "Projekt admin: %1$s"
 
-#: www/include/html.php:968 www/my/bookmark_add.php:28
+#: www/include/html.php:979 www/my/bookmark_add.php:28
 msgid "My Personal Page"
 msgstr "Min personliga sida"
 
-#: www/include/html.php:970
+#: www/include/html.php:981
 msgid ""
 "View your personal page, a selection of widgets to follow the informations "
 "from projects."
 msgstr ""
 
-#: www/include/html.php:973
+#: www/include/html.php:984
 #, fuzzy
 msgid "My Trackers Dashboard"
 msgstr "Ordningslista uppdaterad"
 
-#: www/include/html.php:975
+#: www/include/html.php:986
 #, fuzzy
 msgid "View your tasks and artifacts."
 msgstr "Du har inga dagboksanteckningar"
 
-#: www/include/html.php:979 www/my/diary.php:164
+#: www/include/html.php:990 www/my/diary.php:164
 msgid "My Diary and Notes"
 msgstr "Min dagbok och anteckningar"
 
-#: www/include/html.php:981
+#: www/include/html.php:992
 msgid "Manage your diary. Add, modify or delete your notes."
 msgstr ""
 
-#: www/include/html.php:986
+#: www/include/html.php:997
 msgid "Manage your account. Change your password, select your preferences."
 msgstr ""
 
-#: www/include/html.php:990 www/register/index.php:173
+#: www/include/html.php:1001 www/register/index.php:173
 msgid "Register Project"
 msgstr "Registrera projekt"
 
-#: www/include/html.php:992
+#: www/include/html.php:1003
 msgid "Register a new project in forge, following the workflow."
 msgstr ""
 
-#: www/include/html.php:1041
+#: www/include/html.php:1052
 #, fuzzy, php-format
 msgid "%d second ago"
 msgid_plural "%d seconds ago"
 msgstr[0] "Senaste månad(er)"
 msgstr[1] "Senaste månad(er)"
 
-#: www/include/html.php:1045
+#: www/include/html.php:1056
 #, fuzzy, php-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "Senaste månad(er)"
 msgstr[1] "Senaste månad(er)"
 
-#: www/include/html.php:1049
+#: www/include/html.php:1060
 #, php-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:1053
+#: www/include/html.php:1064
 #, php-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:1057
+#: www/include/html.php:1068
 #, php-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/include/html.php:1275
+#: www/include/html.php:1287
 #, php-format
 msgid " Displaying %1$s per page. Projects sorted by alphabetical order."
 msgstr ""
@@ -17826,28 +17841,28 @@ msgstr ""
 msgid "Cannot find theme directory!"
 msgstr "Filen kan inte flyttas till den permanenta platsen"
 
-#: www/include/Layout.class.php:298
+#: www/include/Layout.class.php:297
 msgid "en"
 msgstr "sv"
 
-#: www/include/Layout.class.php:703
+#: www/include/Layout.class.php:699
 msgid "Quick Jump To..."
 msgstr ""
 
-#: www/include/Layout.class.php:1393
+#: www/include/Layout.class.php:1389
 #, fuzzy
 msgid "Browse per tags defined by the projects."
 msgstr "Inga sådana poster i detta projekt"
 
-#: www/include/Layout.class.php:1397 www/softwaremap/trove_list.php:84
+#: www/include/Layout.class.php:1393 www/softwaremap/trove_list.php:84
 msgid "Project Tree"
 msgstr ""
 
-#: www/include/Layout.class.php:1399 www/snippet/index.php:81
+#: www/include/Layout.class.php:1395 www/snippet/index.php:81
 msgid "Browse by Category"
 msgstr "Bläddra efter kategori"
 
-#: www/include/Layout.class.php:1405
+#: www/include/Layout.class.php:1401
 #, fuzzy
 msgid "Complete listing of available projects."
 msgstr "Här är en lista över tillgängliga positioner i detta projekt."
@@ -17876,7 +17891,7 @@ msgstr ""
 msgid "Project Home"
 msgstr "Nytt projektnamn"
 
-#: www/include/project_summary.php:132
+#: www/include/project_summary.php:135
 msgid "There are no public trackers available"
 msgstr "Det finns inga offentliga ordningslistor tillgängliga"
 
@@ -17908,24 +17923,24 @@ msgstr "Projektets lisvlängd"
 msgid "for"
 msgstr ""
 
-#: www/include/trove.php:230
+#: www/include/trove.php:231
 #, fuzzy
 msgid "None Selected"
 msgstr "Konto borttaget"
 
-#: www/include/trove.php:273
+#: www/include/trove.php:274
 msgid "This project has not yet categorized itself in the"
 msgstr "Detta projekt har ännu inte kategoriserat sig självt i"
 
-#: www/include/trove.php:274
+#: www/include/trove.php:275
 msgid "Trove Software Map"
 msgstr "Resurskartan"
 
-#: www/include/trove.php:340
+#: www/include/trove.php:341
 msgid "(Now Filtering)"
 msgstr ""
 
-#: www/include/trove.php:348
+#: www/include/trove.php:349
 #, fuzzy
 msgid "[Filter]"
 msgstr "Fil"
@@ -18041,22 +18056,22 @@ msgstr "Webbplatsmedlem sedan"
 msgid "URI:"
 msgstr ""
 
-#: www/include/vote_function.php:213
+#: www/include/vote_function.php:215
 #: www/survey/include/SurveyHTML.class.php:512
 msgid "Low"
 msgstr "Låg"
 
-#: www/include/vote_function.php:213
+#: www/include/vote_function.php:215
 #: www/survey/include/SurveyHTML.class.php:514
 msgid "High"
 msgstr "Hög"
 
-#: www/include/vote_function.php:286
+#: www/include/vote_function.php:288
 #: www/survey/include/SurveyHTML.class.php:556 www/survey/privacy.php:36
 msgid "Survey Privacy"
 msgstr "Undersökning privatliv"
 
-#: www/include/vote_function.php:293
+#: www/include/vote_function.php:295
 msgid "Survey not found."
 msgstr "Hittade inte undersökning"
 
@@ -20975,11 +20990,11 @@ msgstr ""
 #: www/register/index.php:184
 msgid ""
 "You should start with specifying the name of your project. The “Full Name” "
-"is descriptive, and has no arbitrary restrictions (except a 40 character "
-"limit)."
+"is descriptive, and has no arbitrary restrictions (except min 3 characters "
+"and max 40 characters)."
 msgstr ""
 
-#: www/register/index.php:194
+#: www/register/index.php:194 www/register/index.php:198
 #, fuzzy
 msgid "Project Purpose And Summarization"
 msgstr "Administration av projektdatabas"
@@ -20992,7 +21007,7 @@ msgid ""
 "basis for the approval or rejection of your project's hosting on %1$s, and "
 "later, to ensure that you are using the services in the intended way. This "
 "description will not be used as a public description of your project. It "
-"must be written in English."
+"must be written in English. From 10 to 1500 characters."
 msgstr ""
 "2. Projektets Offentliga Beskrivning</h3><p><strong></strong><p><strong> Var "
 "vänlig ge en detaljerad, korrekt beskrivning av ditt projekt och vilka %1$s "
@@ -21002,7 +21017,7 @@ msgstr ""
 "beskrivning kommer inte att användas som offentlig beskrivning av ditt "
 "projekt. Den måste vara skriven på engelska.</strong>"
 
-#: www/register/index.php:204
+#: www/register/index.php:204 www/register/index.php:209
 #, fuzzy
 msgid "Project Public Description"
 msgstr "Projektets lisvlängd"
@@ -21011,7 +21026,7 @@ msgstr "Projektets lisvlängd"
 #, fuzzy
 msgid ""
 "This is the description of your project which will be shown on the Project "
-"Summary page, in search results, etc."
+"Summary page, in search results, etc. (at least 10 characters)"
 msgstr ""
 "<h3>4. Projekt, offentlig beskrivning</h3><p>Detta är beskrivningen av ditt "
 "projekt som kommer att visas på projekts sammanfattningssida, i sökresultat, "
