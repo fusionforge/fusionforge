@@ -3333,10 +3333,6 @@ msgstr ""
 "Sledvashtoto syobshtenie e na kiriliza (izberete UTF8 encoding na browsera, "
 "za da go prochetete). Вие поискахте промяна на email адрес за GForge.\n"
 "Моля посетете следния линк, за да осъществите промяната на адреса:\n"
-"\n"
-"<http://%1$s/account/change_email-complete.php?ch=_%2$s>\n"
-"\n"
-" -- екипът на %1$s"
 
 #: common/include/Group.class.php:2698 common/include/Group.class.php:2712
 #, fuzzy, php-format
@@ -4246,10 +4242,6 @@ msgstr ""
 "Благодарим Ви, че се регистрирахте на портала на %4$s. Вашият акаунт е "
 "създаден успешно. За да завършите регистрацията посетете следната "
 "страница: \n"
-"\n"
-"<http://%2$s/account/verify.php?confirm_hash=_%3$s>\n"
-"\n"
-"http://%2$s/account/verify.php?confirm_hash=_%3$s\n"
 "\n"
 "Приятно използване на портала.\n"
 "\n"
@@ -10862,8 +10854,8 @@ msgstr ""
 #, fuzzy
 msgid "Choose a list to browse, search, and post messages."
 msgstr ""
-"<p>Изберете новина, след което ще можете да разглежате, търсите и създавате "
-"коментари.<p>"
+"Изберете новина, след което ще можете да разглежате, търсите и създавате "
+"коментари."
 
 #: plugins/mailman/www/mailman_utils.php:19
 #, php-format
@@ -14143,10 +14135,6 @@ msgstr ""
 "Sledvashtoto syobshtenie e na kiriliza (izberete UTF8 encoding na browsera, "
 "za da go prochetete). Вие поискахте промяна на email адрес за GForge.\n"
 "Моля посетете следния линк, за да осъществите промяната на адреса:\n"
-"\n"
-"<http://%1$s/account/change_email-complete.php?ch=_%2$s>\n"
-"\n"
-" -- екипът на %1$s"
 
 #: www/account/change_email.php:65 www/account/lostpw.php:70
 #, php-format
@@ -14653,9 +14641,7 @@ msgid ""
 "A confirmation email is being sent to verify the submitted email address. "
 "Visiting the link sent in this email will activate the account."
 msgstr ""
-"<p>Поздравления. Вие се регистрирахте на %1$s.  <p> You are now being sent a "
-"confirmation email to verify your email address. Visiting the link sent to "
-"you in this email will activate your account."
+""
 
 #: www/account/register.php:119
 #, php-format
@@ -18386,8 +18372,8 @@ msgstr ""
 #, fuzzy
 msgid "Choose a News item and you can browse, search, and post messages."
 msgstr ""
-"<p>Изберете новина, след което ще можете да разглежате, търсите и създавате "
-"коментари.<p>"
+"Изберете новина, след което ще можете да разглежате, търсите и създавате "
+"коментари."
 
 #: www/news/index.php:72
 #, fuzzy, php-format

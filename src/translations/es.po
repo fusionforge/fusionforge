@@ -8232,10 +8232,9 @@ msgstr "Otra Información"
 #: plugins/authbuiltin/www/post-login.php:117
 #, php-format
 msgid "Your %1$s account has been removed by %1$s staff."
-msgstr ""
+msgstr "Su %1$s cuenta ha sido borrada por %1$s del equipo técnico."
 
 #: plugins/authbuiltin/www/post-login.php:118
-#, fuzzy
 msgid ""
 "This may occur for two reasons, either 1) you requested that your account be "
 "removed; or 2) some action has been performed using your account which has "
@@ -8243,25 +8242,24 @@ msgid ""
 "use of your account) and your account has been revoked for administrative "
 "reasons."
 msgstr ""
-"<p>Su %1$s cuenta ha sido borrada por %1$s del equipo técnico. Esto puede "
+"Esto puede "
 "haber ocurrido por dos razones, 1) se ha pedido que su cuenta sea eliminada; "
 "o 2) alguna acción ha sido ejecutada usando su cuenta que ha sido sancionada "
 "(ej. ha roto los terminos del acuerdo de servicio de uso con su cuenta) y su "
-"cuenta ha sido eliminada por razones administrativas. Para cualquier "
-"consulta relativa a esta incidencia, por favor envie una <a href=\"%2$s"
-"\">petición de soporte</a>.</p><p>Muchas gracias, <br><br>%1$s Equipo "
-"Técnico</p>"
+"cuenta ha sido eliminada por razones administrativas."
 
 #: plugins/authbuiltin/www/post-login.php:119
 #, php-format
 msgid ""
 "Should you have questions or concerns regarding this matter, please log a <a "
 "href=\"%s\">support request</a>."
-msgstr ""
+msgstr "Para cualquier "
+"consulta relativa a esta incidencia, por favor envie una <a href=\"%s"
+"\">petición de soporte</a>."
 
 #: plugins/authbuiltin/www/post-login.php:120
 msgid "Thank you"
-msgstr ""
+msgstr "Muchas gracias"
 
 #: plugins/authcas/include/AuthCASPlugin.class.php:94
 msgid "Login via CAS"
@@ -10858,7 +10856,7 @@ msgstr ""
 
 #: plugins/mailman/www/index.php:71 www/mail/index.php:74
 msgid "Choose a list to browse, search, and post messages."
-msgstr "<p>Elija una lista para navegar, buscar y escribir mensajes.</p>"
+msgstr "Elija una lista para navegar, buscar y escribir mensajes."
 
 #: plugins/mailman/www/mailman_utils.php:19
 #, php-format
@@ -16278,9 +16276,9 @@ msgid ""
 "To turn off monitoring, simply click the <strong>Monitor user</strong> link "
 "again."
 msgstr ""
-"<p>Un correo se enviará cuando el usuario usa su diario.</p><p>Para parar "
+"Un correo se enviará cuando el usuario usa su diario.</p><p>Para parar "
 "monitorizarlo, haga click sobre <strong>Monitorizar Usuario</strong> otra "
-"vez.</p>"
+"vez."
 
 #: www/developer/monitor.php:75
 msgid "Monitoring has been turned off"
@@ -18678,9 +18676,9 @@ msgid ""
 "Now you can edit/change the list of skills attached to this posting. "
 "Developers will be able to match their skills with your requirements."
 msgstr ""
-"<p>Ahora puede editar/cambiar la lista de habilidades relacionadas con esta "
+"Ahora puede editar/cambiar la lista de habilidades relacionadas con esta "
 "petición. Los colaboradores podrán comparar sus habilidades con tus "
-"necesidades.</p>"
+"necesidades."
 
 #: www/people/editjob.php:159
 msgid "All postings are automatically closed after two weeks."
@@ -19174,7 +19172,7 @@ msgid ""
 msgstr ""
 "Puede modificar un Subproyecto existente usando este formulario. Note que "
 "los proyectos privados solo pueden verlos los miembros de esos proyectos "
-"pero no el público en general.<p>"
+"pero no el público en general."
 
 #: www/pm/admin/index.php:321 www/pm/index.php:99
 msgid "Subproject Name"
@@ -20892,10 +20890,9 @@ msgid ""
 "You can choose among different SCM for your project, but just one (or none "
 "at all). Please select the SCM system you want to use."
 msgstr ""
-"<h3>5. SCM</h3><p>Debe elegir un único sistema entre los diferentes SCM "
+"Debe elegir un único sistema entre los diferentes SCM "
 "(Sistemas de control de configuración) para su proyecto. Debe elegir sólo "
-"uno. Por favor, elija el sistema SCM que desea usar. </p> <p><strong>No "
-"podrá cambiar una vez registre el proyecto</strong></p>"
+"uno. Por favor, elija el sistema SCM que desea usar."
 
 #: www/register/index.php:248 www/register/index.php:250
 msgid "No SCM"
