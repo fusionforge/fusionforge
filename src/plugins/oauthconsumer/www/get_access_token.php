@@ -70,12 +70,17 @@ if(count($providers)>0)	{
 	<?php
 	if((strcasecmp(substr($f_request_token_url, 0, 5),"https")==0) ||
 		(strcasecmp(substr($f_authorization_url, 0, 5),"https")==0) ||
-		(strcasecmp(substr($f_access_token_url, 0, 5),"https")==0))	{?>
-		<input type="checkbox" name="not_verify_ssl">Do not verify SSL Certificate</input>	<br /><br />
+		(strcasecmp(substr($f_access_token_url, 0, 5),"https")==0))	{ ?>
+		<input type="checkbox" name="not_verify_ssl">
+		<?php echo _('Do not verify SSL Certificate'); ?></input><br /><br />
 	<?php
 	}
 	$url_string = $f_request_token_url?"(from ".$f_request_token_url.")":"";
-	echo _('<b>Step 1: </b>Get Request Token '.$url_string) ?>
+	echo '<b>';
+	echo _('Step 1: ');
+	echo '</b>';
+	echo _('Get Request Token').' '.$url_string;
+	?>
 	<br />
 	<input type="submit" value="<?php echo _('Go') ?>" />
 	</form>
@@ -123,7 +128,7 @@ if(count($providers)>0)	{
 
 		if($request_token_string === false)
 		{
-			trigger_error('Error in curl : '.curl_error($curl), E_USER_WARNING);
+			trigger_error(_('Error in curl : ').curl_error($curl), E_USER_WARNING);
 		}
 		curl_close ($curl);
 		//print_r($request_token_string);
@@ -150,14 +155,18 @@ if(count($providers)>0)	{
 		<form action="get_access_token.php" method="post">
 		<?php echo '<input type="hidden" name="authorization_url" value="'.$new_user_authorization_url.'"/>' ?>
 		<?php
-		echo _('<b>Step 2: </b>Authorize the Request Token (from '.$f_authorize_url.")") ?>
+		echo '<b>';
+		echo _('Step 2: ');
+		echo '</b>';
+		echo _('Authorize the Request Token (from ').$f_authorize_url.")";
+		?>
 		<br />
 		<input type="submit" value="<?php echo _('Go') ?>" />
 		</form>
 		<?php
 		//header("Location:".$new_user_authorization_url);
-		}else 	{
-			echo $HTML->error_msg(htmlspecialchars("Error in retrieving request token"));
+		} else {
+			echo $HTML->error_msg(htmlspecialchars(_('Error in retrieving request token')));
 
 		}
 	}

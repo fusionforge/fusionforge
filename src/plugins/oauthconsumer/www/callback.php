@@ -16,7 +16,11 @@ if(!$verifier || !$token)	{
 	echo '<input type="hidden" name="oauth_verifier" value="'.$verifier.'"/>';
 	echo '<input type="hidden" name="oauth_token" value="'.$token.'"/>';
 	echo '<input type="hidden" name="provider_id" value="'.$_COOKIE['PROVIDER'].'"/>';
-	echo _('<b>Step 3: </b>Exchange the authorized request token for an access token');?>
+	echo '<b>';
+	echo _('Step 3: ');
+	echo '</b>';
+	echo _('Exchange the authorized request token for an access token');
+	?>
 	<br>
 	<input type="submit" value="<?php echo _('Go') ?>" />
 </form>

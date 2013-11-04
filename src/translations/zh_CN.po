@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-04 10:31+0100\n"
+"POT-Creation-Date: 2013-11-04 17:08+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -293,8 +293,8 @@ msgstr "文件名"
 #: plugins/mantisbt/view/addAttachment.php:32
 #: plugins/mantisbt/view/editIssue.php:84
 #: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
-#: plugins/oauthconsumer/www/get_access_token.php:134
-#: plugins/oauthconsumer/www/get_access_token.php:135
+#: plugins/oauthconsumer/www/get_access_token.php:139
+#: plugins/oauthconsumer/www/get_access_token.php:140
 #: plugins/projectlabels/www/index.php:172
 #: plugins/projects-hierarchy/view/home_project_link.php:37
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:629
@@ -12096,8 +12096,8 @@ msgid "You have no OAuth Access Tokens registered in the database currently"
 msgstr ""
 
 #: plugins/oauthconsumer/www/access_tokens.php:34
-#: plugins/oauthconsumer/www/callback.php:78
-#: plugins/oauthconsumer/www/get_access_token.php:175
+#: plugins/oauthconsumer/www/callback.php:82
+#: plugins/oauthconsumer/www/get_access_token.php:184
 #: plugins/oauthconsumer/www/index.php:86
 #: plugins/oauthconsumer/www/provider_edit.php:78
 #: plugins/oauthconsumer/www/providers.php:13
@@ -12109,34 +12109,37 @@ msgstr ""
 msgid "Get more Access tokens"
 msgstr ""
 
-#: plugins/oauthconsumer/www/callback.php:19
-msgid ""
-"<b>Step 3: </b>Exchange the authorized request token for an access token"
+#: plugins/oauthconsumer/www/callback.php:20
+msgid "Step 3: "
 msgstr ""
 
-#: plugins/oauthconsumer/www/callback.php:21
-#: plugins/oauthconsumer/www/get_access_token.php:80
-#: plugins/oauthconsumer/www/get_access_token.php:155
+#: plugins/oauthconsumer/www/callback.php:22
+msgid "Exchange the authorized request token for an access token"
+msgstr ""
+
+#: plugins/oauthconsumer/www/callback.php:25
+#: plugins/oauthconsumer/www/get_access_token.php:85
+#: plugins/oauthconsumer/www/get_access_token.php:164
 #: plugins/oauthconsumer/www/index.php:67 www/admin/responses_admin.php:90
 msgid "Go"
 msgstr "Go"
 
-#: plugins/oauthconsumer/www/callback.php:71
+#: plugins/oauthconsumer/www/callback.php:75
 #, fuzzy
 msgid "New access token received and saved!"
 msgstr "没有发现"
 
-#: plugins/oauthconsumer/www/callback.php:72
+#: plugins/oauthconsumer/www/callback.php:76
 #, fuzzy
 msgid "Access Token Key: "
 msgstr "点击被拒绝"
 
-#: plugins/oauthconsumer/www/callback.php:73
+#: plugins/oauthconsumer/www/callback.php:77
 #, fuzzy
 msgid "Access Token Secret: "
 msgstr "点击被拒绝"
 
-#: plugins/oauthconsumer/www/callback.php:79
+#: plugins/oauthconsumer/www/callback.php:83
 #: plugins/oauthconsumer/www/index.php:87
 #: plugins/oauthconsumer/www/provider_edit.php:79
 #: plugins/oauthconsumer/www/providers.php:118
@@ -12145,8 +12148,8 @@ msgstr "点击被拒绝"
 msgid "Get Access tokens"
 msgstr "点击被拒绝"
 
-#: plugins/oauthconsumer/www/callback.php:80
-#: plugins/oauthconsumer/www/get_access_token.php:176
+#: plugins/oauthconsumer/www/callback.php:84
+#: plugins/oauthconsumer/www/get_access_token.php:185
 #: plugins/oauthconsumer/www/index.php:40
 #: plugins/oauthconsumer/www/index.php:88
 #: plugins/oauthconsumer/www/provider_edit.php:80
@@ -12193,30 +12196,53 @@ msgstr ""
 msgid "Access Token URL"
 msgstr "点击被拒绝"
 
-#: plugins/oauthconsumer/www/get_access_token.php:78
-msgid "<b>Step 1: </b>Get Request Token "
+#: plugins/oauthconsumer/www/get_access_token.php:75
+msgid "Do not verify SSL Certificate"
 msgstr ""
 
-#: plugins/oauthconsumer/www/get_access_token.php:133
+#: plugins/oauthconsumer/www/get_access_token.php:80
+msgid "Step 1: "
+msgstr ""
+
+#: plugins/oauthconsumer/www/get_access_token.php:82
+#, fuzzy
+msgid "Get Request Token"
+msgstr "请求参与"
+
+#: plugins/oauthconsumer/www/get_access_token.php:131
+#, fuzzy
+msgid "Error in curl : "
+msgstr "添加虚拟主机时发生错误："
+
+#: plugins/oauthconsumer/www/get_access_token.php:138
 #, fuzzy
 msgid "New request token received!"
 msgstr "找到 %1$s 个问题"
 
-#: plugins/oauthconsumer/www/get_access_token.php:134
+#: plugins/oauthconsumer/www/get_access_token.php:139
 #, fuzzy
 msgid "Request Token Key"
 msgstr "请求参与"
 
-#: plugins/oauthconsumer/www/get_access_token.php:135
+#: plugins/oauthconsumer/www/get_access_token.php:140
 #, fuzzy
 msgid "Request Token Secret"
 msgstr "请求参与项目"
 
-#: plugins/oauthconsumer/www/get_access_token.php:153
-msgid "<b>Step 2: </b>Authorize the Request Token (from "
+#: plugins/oauthconsumer/www/get_access_token.php:159
+msgid "Step 2: "
 msgstr ""
 
-#: plugins/oauthconsumer/www/get_access_token.php:170
+#: plugins/oauthconsumer/www/get_access_token.php:161
+msgid "Authorize the Request Token (from "
+msgstr ""
+
+#: plugins/oauthconsumer/www/get_access_token.php:169
+#, fuzzy
+msgid "Error in retrieving request token"
+msgstr "插入问题时发生错误"
+
+#: plugins/oauthconsumer/www/get_access_token.php:179
 #: plugins/oauthconsumer/www/index.php:81
 msgid ""
 "There are no OAuth Providers registered in the database currently. Please "
@@ -21026,10 +21052,9 @@ msgid ""
 "description will not be used as a public description of your project. It "
 "must be written in English. From 10 to 1500 characters."
 msgstr ""
-"请提供您所申请项目"
-"详细与准确的说明，以及您计划以何种方式利用 %1$s 的资源。这份说明将是您的项目"
-"在 %1$s 是否能注册的依据，进而确保您能以预期的方式使用敝站提供的服务。同时这"
-"份说明将不会作为您项目的公开说明。"
+"请提供您所申请项目详细与准确的说明，以及您计划以何种方式利用 %1$s 的资源。这"
+"份说明将是您的项目在 %1$s 是否能注册的依据，进而确保您能以预期的方式使用敝站"
+"提供的服务。同时这份说明将不会作为您项目的公开说明。"
 
 #: www/register/index.php:204 www/register/index.php:209
 #, fuzzy
@@ -21042,8 +21067,8 @@ msgid ""
 "This is the description of your project which will be shown on the Project "
 "Summary page, in search results, etc. (at least 10 characters)"
 msgstr ""
-"这个说明会出现在项目首页、搜索结果等，这不需要像是"
-"第二个步骤时提供那么详细的信息，所以用您熟悉的方式去描述即可，最多255字节。"
+"这个说明会出现在项目首页、搜索结果等，这不需要像是第二个步骤时提供那么详细的"
+"信息，所以用您熟悉的方式去描述即可，最多255字节。"
 
 #: www/register/index.php:214
 msgid ""
@@ -25658,9 +25683,6 @@ msgstr "我的个人首页"
 
 #~ msgid "Add A Question"
 #~ msgstr "添加一个问题"
-
-#~ msgid "Error inserting question"
-#~ msgstr "插入问题时发生错误"
 
 #~ msgid "Question type"
 #~ msgstr "问题类型"

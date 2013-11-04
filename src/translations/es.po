@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-04 10:31+0100\n"
+"POT-Creation-Date: 2013-11-04 17:08+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -283,8 +283,8 @@ msgstr "Nombre del Directorio"
 #: plugins/mantisbt/view/addAttachment.php:32
 #: plugins/mantisbt/view/editIssue.php:84
 #: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
-#: plugins/oauthconsumer/www/get_access_token.php:134
-#: plugins/oauthconsumer/www/get_access_token.php:135
+#: plugins/oauthconsumer/www/get_access_token.php:139
+#: plugins/oauthconsumer/www/get_access_token.php:140
 #: plugins/projectlabels/www/index.php:172
 #: plugins/projects-hierarchy/view/home_project_link.php:37
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:629
@@ -8242,20 +8242,19 @@ msgid ""
 "use of your account) and your account has been revoked for administrative "
 "reasons."
 msgstr ""
-"Esto puede "
-"haber ocurrido por dos razones, 1) se ha pedido que su cuenta sea eliminada; "
-"o 2) alguna acción ha sido ejecutada usando su cuenta que ha sido sancionada "
-"(ej. ha roto los terminos del acuerdo de servicio de uso con su cuenta) y su "
-"cuenta ha sido eliminada por razones administrativas."
+"Esto puede haber ocurrido por dos razones, 1) se ha pedido que su cuenta sea "
+"eliminada; o 2) alguna acción ha sido ejecutada usando su cuenta que ha sido "
+"sancionada (ej. ha roto los terminos del acuerdo de servicio de uso con su "
+"cuenta) y su cuenta ha sido eliminada por razones administrativas."
 
 #: plugins/authbuiltin/www/post-login.php:119
 #, php-format
 msgid ""
 "Should you have questions or concerns regarding this matter, please log a <a "
 "href=\"%s\">support request</a>."
-msgstr "Para cualquier "
-"consulta relativa a esta incidencia, por favor envie una <a href=\"%s"
-"\">petición de soporte</a>."
+msgstr ""
+"Para cualquier consulta relativa a esta incidencia, por favor envie una <a "
+"href=\"%s\">petición de soporte</a>."
 
 #: plugins/authbuiltin/www/post-login.php:120
 msgid "Thank you"
@@ -11804,8 +11803,8 @@ msgid "You have no OAuth Access Tokens registered in the database currently"
 msgstr "No tiene un Token OAUth de Acceso registrado en la base de datos"
 
 #: plugins/oauthconsumer/www/access_tokens.php:34
-#: plugins/oauthconsumer/www/callback.php:78
-#: plugins/oauthconsumer/www/get_access_token.php:175
+#: plugins/oauthconsumer/www/callback.php:82
+#: plugins/oauthconsumer/www/get_access_token.php:184
 #: plugins/oauthconsumer/www/index.php:86
 #: plugins/oauthconsumer/www/provider_edit.php:78
 #: plugins/oauthconsumer/www/providers.php:13
@@ -11817,36 +11816,40 @@ msgstr "Proveedores OAuth"
 msgid "Get more Access tokens"
 msgstr "Obtener mas tokes de Acceso"
 
-#: plugins/oauthconsumer/www/callback.php:19
-msgid ""
-"<b>Step 3: </b>Exchange the authorized request token for an access token"
+#: plugins/oauthconsumer/www/callback.php:20
+msgid "Step 3: "
+msgstr ""
+
+#: plugins/oauthconsumer/www/callback.php:22
+#, fuzzy
+msgid "Exchange the authorized request token for an access token"
 msgstr ""
 "<b>Paso 3: </b>Intercambiar la peticion de token autorizado por un token de "
 "acceso"
 
-#: plugins/oauthconsumer/www/callback.php:21
-#: plugins/oauthconsumer/www/get_access_token.php:80
-#: plugins/oauthconsumer/www/get_access_token.php:155
+#: plugins/oauthconsumer/www/callback.php:25
+#: plugins/oauthconsumer/www/get_access_token.php:85
+#: plugins/oauthconsumer/www/get_access_token.php:164
 #: plugins/oauthconsumer/www/index.php:67 www/admin/responses_admin.php:90
 msgid "Go"
 msgstr "Ir"
 
-#: plugins/oauthconsumer/www/callback.php:71
+#: plugins/oauthconsumer/www/callback.php:75
 #, fuzzy
 msgid "New access token received and saved!"
 msgstr "Nuevo token de acceso recivido y grabado!"
 
-#: plugins/oauthconsumer/www/callback.php:72
+#: plugins/oauthconsumer/www/callback.php:76
 #, fuzzy
 msgid "Access Token Key: "
 msgstr "Token Key Pedida: "
 
-#: plugins/oauthconsumer/www/callback.php:73
+#: plugins/oauthconsumer/www/callback.php:77
 #, fuzzy
 msgid "Access Token Secret: "
 msgstr "Pedir Token URL"
 
-#: plugins/oauthconsumer/www/callback.php:79
+#: plugins/oauthconsumer/www/callback.php:83
 #: plugins/oauthconsumer/www/index.php:87
 #: plugins/oauthconsumer/www/provider_edit.php:79
 #: plugins/oauthconsumer/www/providers.php:118
@@ -11854,8 +11857,8 @@ msgstr "Pedir Token URL"
 msgid "Get Access tokens"
 msgstr ""
 
-#: plugins/oauthconsumer/www/callback.php:80
-#: plugins/oauthconsumer/www/get_access_token.php:176
+#: plugins/oauthconsumer/www/callback.php:84
+#: plugins/oauthconsumer/www/get_access_token.php:185
 #: plugins/oauthconsumer/www/index.php:40
 #: plugins/oauthconsumer/www/index.php:88
 #: plugins/oauthconsumer/www/provider_edit.php:80
@@ -11899,30 +11902,54 @@ msgstr "URL de Autorización"
 msgid "Access Token URL"
 msgstr ""
 
-#: plugins/oauthconsumer/www/get_access_token.php:78
-msgid "<b>Step 1: </b>Get Request Token "
-msgstr "<b>Paso 1: </b>Obtener Token Pedido"
+#: plugins/oauthconsumer/www/get_access_token.php:75
+msgid "Do not verify SSL Certificate"
+msgstr ""
 
-#: plugins/oauthconsumer/www/get_access_token.php:133
+#: plugins/oauthconsumer/www/get_access_token.php:80
+msgid "Step 1: "
+msgstr ""
+
+#: plugins/oauthconsumer/www/get_access_token.php:82
+#, fuzzy
+msgid "Get Request Token"
+msgstr "Token Key Pedida : "
+
+#: plugins/oauthconsumer/www/get_access_token.php:131
+#, fuzzy
+msgid "Error in curl : "
+msgstr "Error en PTF:"
+
+#: plugins/oauthconsumer/www/get_access_token.php:138
 #, fuzzy
 msgid "New request token received!"
 msgstr "Nueva peticion de  token recivida!<br>"
 
-#: plugins/oauthconsumer/www/get_access_token.php:134
+#: plugins/oauthconsumer/www/get_access_token.php:139
 #, fuzzy
 msgid "Request Token Key"
 msgstr "Token Key Pedida : "
 
-#: plugins/oauthconsumer/www/get_access_token.php:135
+#: plugins/oauthconsumer/www/get_access_token.php:140
 #, fuzzy
 msgid "Request Token Secret"
 msgstr "Pedir Token URL"
 
-#: plugins/oauthconsumer/www/get_access_token.php:153
-msgid "<b>Step 2: </b>Authorize the Request Token (from "
+#: plugins/oauthconsumer/www/get_access_token.php:159
+msgid "Step 2: "
+msgstr ""
+
+#: plugins/oauthconsumer/www/get_access_token.php:161
+#, fuzzy
+msgid "Authorize the Request Token (from "
 msgstr "<b>Paso 2: </b>Autorizar el Token Pedido (desde "
 
-#: plugins/oauthconsumer/www/get_access_token.php:170
+#: plugins/oauthconsumer/www/get_access_token.php:169
+#, fuzzy
+msgid "Error in retrieving request token"
+msgstr "Error insertado la pregunta"
+
+#: plugins/oauthconsumer/www/get_access_token.php:179
 #: plugins/oauthconsumer/www/index.php:81
 msgid ""
 "There are no OAuth Providers registered in the database currently. Please "
@@ -20773,8 +20800,8 @@ msgid ""
 "and max 40 characters)."
 msgstr ""
 "Deberia comenzar con asignarle un nombre al proyecto. El “Nombre Completo” "
-"es descriptivo, y no tiene restricciones iniciales (excepto el limite de 3-40 "
-"caracteres)."
+"es descriptivo, y no tiene restricciones iniciales (excepto el limite de "
+"3-40 caracteres)."
 
 #: www/register/index.php:194 www/register/index.php:198
 msgid "Project Purpose And Summarization"
@@ -20806,9 +20833,9 @@ msgid ""
 "This is the description of your project which will be shown on the Project "
 "Summary page, in search results, etc. (at least 10 characters)"
 msgstr ""
-"Esta es la descripción de su "
-"proyecto que se muestra en la página de Sumario del Proyecto, en resultados "
-"de búsquedas, etc. La máxima longitud es 255 caracteres."
+"Esta es la descripción de su proyecto que se muestra en la página de Sumario "
+"del Proyecto, en resultados de búsquedas, etc. La máxima longitud es 255 "
+"caracteres."
 
 #: www/register/index.php:214
 #, fuzzy
@@ -20890,9 +20917,9 @@ msgid ""
 "You can choose among different SCM for your project, but just one (or none "
 "at all). Please select the SCM system you want to use."
 msgstr ""
-"Debe elegir un único sistema entre los diferentes SCM "
-"(Sistemas de control de configuración) para su proyecto. Debe elegir sólo "
-"uno. Por favor, elija el sistema SCM que desea usar."
+"Debe elegir un único sistema entre los diferentes SCM (Sistemas de control "
+"de configuración) para su proyecto. Debe elegir sólo uno. Por favor, elija "
+"el sistema SCM que desea usar."
 
 #: www/register/index.php:248 www/register/index.php:250
 msgid "No SCM"
@@ -22911,6 +22938,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "<b>Step 1: </b>Get Request Token "
+#~ msgstr "<b>Paso 1: </b>Obtener Token Pedido"
 
 #~ msgid "Read&nbsp;More/Comment"
 #~ msgstr "Leer&nbsp;más/Comentar"
@@ -26135,9 +26165,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Add A Question"
 #~ msgstr "Añadir una Cuestión"
-
-#~ msgid "Error inserting question"
-#~ msgstr "Error insertado la pregunta"
 
 #~ msgid "Question type"
 #~ msgstr "Tipo de Pregunta"

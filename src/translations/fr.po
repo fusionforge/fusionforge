@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-04 10:31+0100\n"
+"POT-Creation-Date: 2013-11-04 17:08+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -279,8 +279,8 @@ msgstr "Dossier"
 #: plugins/mantisbt/view/addAttachment.php:32
 #: plugins/mantisbt/view/editIssue.php:84
 #: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
-#: plugins/oauthconsumer/www/get_access_token.php:134
-#: plugins/oauthconsumer/www/get_access_token.php:135
+#: plugins/oauthconsumer/www/get_access_token.php:139
+#: plugins/oauthconsumer/www/get_access_token.php:140
 #: plugins/projectlabels/www/index.php:172
 #: plugins/projects-hierarchy/view/home_project_link.php:37
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:629
@@ -11661,8 +11661,8 @@ msgid "You have no OAuth Access Tokens registered in the database currently"
 msgstr ""
 
 #: plugins/oauthconsumer/www/access_tokens.php:34
-#: plugins/oauthconsumer/www/callback.php:78
-#: plugins/oauthconsumer/www/get_access_token.php:175
+#: plugins/oauthconsumer/www/callback.php:82
+#: plugins/oauthconsumer/www/get_access_token.php:184
 #: plugins/oauthconsumer/www/index.php:86
 #: plugins/oauthconsumer/www/provider_edit.php:78
 #: plugins/oauthconsumer/www/providers.php:13
@@ -11674,33 +11674,36 @@ msgstr "Fournisseurs OAuth"
 msgid "Get more Access tokens"
 msgstr ""
 
-#: plugins/oauthconsumer/www/callback.php:19
-msgid ""
-"<b>Step 3: </b>Exchange the authorized request token for an access token"
+#: plugins/oauthconsumer/www/callback.php:20
+msgid "Step 3: "
 msgstr ""
 
-#: plugins/oauthconsumer/www/callback.php:21
-#: plugins/oauthconsumer/www/get_access_token.php:80
-#: plugins/oauthconsumer/www/get_access_token.php:155
+#: plugins/oauthconsumer/www/callback.php:22
+msgid "Exchange the authorized request token for an access token"
+msgstr ""
+
+#: plugins/oauthconsumer/www/callback.php:25
+#: plugins/oauthconsumer/www/get_access_token.php:85
+#: plugins/oauthconsumer/www/get_access_token.php:164
 #: plugins/oauthconsumer/www/index.php:67 www/admin/responses_admin.php:90
 msgid "Go"
 msgstr "Continuer"
 
-#: plugins/oauthconsumer/www/callback.php:71
+#: plugins/oauthconsumer/www/callback.php:75
 msgid "New access token received and saved!"
 msgstr ""
 
-#: plugins/oauthconsumer/www/callback.php:72
+#: plugins/oauthconsumer/www/callback.php:76
 #, fuzzy
 msgid "Access Token Key: "
 msgstr "Accès refusé : "
 
-#: plugins/oauthconsumer/www/callback.php:73
+#: plugins/oauthconsumer/www/callback.php:77
 #, fuzzy
 msgid "Access Token Secret: "
 msgstr "Accès refusé : "
 
-#: plugins/oauthconsumer/www/callback.php:79
+#: plugins/oauthconsumer/www/callback.php:83
 #: plugins/oauthconsumer/www/index.php:87
 #: plugins/oauthconsumer/www/provider_edit.php:79
 #: plugins/oauthconsumer/www/providers.php:118
@@ -11708,8 +11711,8 @@ msgstr "Accès refusé : "
 msgid "Get Access tokens"
 msgstr "Récupérer les jetons d'accès"
 
-#: plugins/oauthconsumer/www/callback.php:80
-#: plugins/oauthconsumer/www/get_access_token.php:176
+#: plugins/oauthconsumer/www/callback.php:84
+#: plugins/oauthconsumer/www/get_access_token.php:185
 #: plugins/oauthconsumer/www/index.php:40
 #: plugins/oauthconsumer/www/index.php:88
 #: plugins/oauthconsumer/www/provider_edit.php:80
@@ -11756,28 +11759,51 @@ msgstr "Autoriser"
 msgid "Access Token URL"
 msgstr "Accès refusé"
 
-#: plugins/oauthconsumer/www/get_access_token.php:78
-msgid "<b>Step 1: </b>Get Request Token "
+#: plugins/oauthconsumer/www/get_access_token.php:75
+msgid "Do not verify SSL Certificate"
 msgstr ""
 
-#: plugins/oauthconsumer/www/get_access_token.php:133
+#: plugins/oauthconsumer/www/get_access_token.php:80
+msgid "Step 1: "
+msgstr ""
+
+#: plugins/oauthconsumer/www/get_access_token.php:82
+#, fuzzy
+msgid "Get Request Token"
+msgstr "Demander des jetons"
+
+#: plugins/oauthconsumer/www/get_access_token.php:131
+#, fuzzy
+msgid "Error in curl : "
+msgstr "Erreur dans le PTF : "
+
+#: plugins/oauthconsumer/www/get_access_token.php:138
 msgid "New request token received!"
 msgstr "Nouveau jeton d'accès reçu !"
 
-#: plugins/oauthconsumer/www/get_access_token.php:134
+#: plugins/oauthconsumer/www/get_access_token.php:139
 msgid "Request Token Key"
 msgstr "Demander un jeton"
 
-#: plugins/oauthconsumer/www/get_access_token.php:135
+#: plugins/oauthconsumer/www/get_access_token.php:140
 #, fuzzy
 msgid "Request Token Secret"
 msgstr "Demander à rejoindre le projet"
 
-#: plugins/oauthconsumer/www/get_access_token.php:153
-msgid "<b>Step 2: </b>Authorize the Request Token (from "
+#: plugins/oauthconsumer/www/get_access_token.php:159
+msgid "Step 2: "
 msgstr ""
 
-#: plugins/oauthconsumer/www/get_access_token.php:170
+#: plugins/oauthconsumer/www/get_access_token.php:161
+msgid "Authorize the Request Token (from "
+msgstr ""
+
+#: plugins/oauthconsumer/www/get_access_token.php:169
+#, fuzzy
+msgid "Error in retrieving request token"
+msgstr "Erreur lors de la création de la question"
+
+#: plugins/oauthconsumer/www/get_access_token.php:179
 #: plugins/oauthconsumer/www/index.php:81
 msgid ""
 "There are no OAuth Providers registered in the database currently. Please "
@@ -27718,9 +27744,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Add A Question"
 #~ msgstr "Ajouter une question"
-
-#~ msgid "Error inserting question"
-#~ msgstr "Erreur lors de la création de la question"
 
 #~ msgid "Question type"
 #~ msgstr "Type de la question"

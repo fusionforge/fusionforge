@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-04 10:31+0100\n"
+"POT-Creation-Date: 2013-11-04 17:08+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -293,8 +293,8 @@ msgstr "Имя файла"
 #: plugins/mantisbt/view/addAttachment.php:32
 #: plugins/mantisbt/view/editIssue.php:84
 #: plugins/mantisbt/view/roadmap.php:100 plugins/mantisbt/view/roadmap.php:149
-#: plugins/oauthconsumer/www/get_access_token.php:134
-#: plugins/oauthconsumer/www/get_access_token.php:135
+#: plugins/oauthconsumer/www/get_access_token.php:139
+#: plugins/oauthconsumer/www/get_access_token.php:140
 #: plugins/projectlabels/www/index.php:172
 #: plugins/projects-hierarchy/view/home_project_link.php:37
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:629
@@ -12236,8 +12236,8 @@ msgid "You have no OAuth Access Tokens registered in the database currently"
 msgstr ""
 
 #: plugins/oauthconsumer/www/access_tokens.php:34
-#: plugins/oauthconsumer/www/callback.php:78
-#: plugins/oauthconsumer/www/get_access_token.php:175
+#: plugins/oauthconsumer/www/callback.php:82
+#: plugins/oauthconsumer/www/get_access_token.php:184
 #: plugins/oauthconsumer/www/index.php:86
 #: plugins/oauthconsumer/www/provider_edit.php:78
 #: plugins/oauthconsumer/www/providers.php:13
@@ -12249,34 +12249,37 @@ msgstr ""
 msgid "Get more Access tokens"
 msgstr ""
 
-#: plugins/oauthconsumer/www/callback.php:19
-msgid ""
-"<b>Step 3: </b>Exchange the authorized request token for an access token"
+#: plugins/oauthconsumer/www/callback.php:20
+msgid "Step 3: "
 msgstr ""
 
-#: plugins/oauthconsumer/www/callback.php:21
-#: plugins/oauthconsumer/www/get_access_token.php:80
-#: plugins/oauthconsumer/www/get_access_token.php:155
+#: plugins/oauthconsumer/www/callback.php:22
+msgid "Exchange the authorized request token for an access token"
+msgstr ""
+
+#: plugins/oauthconsumer/www/callback.php:25
+#: plugins/oauthconsumer/www/get_access_token.php:85
+#: plugins/oauthconsumer/www/get_access_token.php:164
 #: plugins/oauthconsumer/www/index.php:67 www/admin/responses_admin.php:90
 msgid "Go"
 msgstr "Искать"
 
-#: plugins/oauthconsumer/www/callback.php:71
+#: plugins/oauthconsumer/www/callback.php:75
 #, fuzzy
 msgid "New access token received and saved!"
 msgstr "Нет элементов для просмотра"
 
-#: plugins/oauthconsumer/www/callback.php:72
+#: plugins/oauthconsumer/www/callback.php:76
 #, fuzzy
 msgid "Access Token Key: "
 msgstr "Доступ запрещен"
 
-#: plugins/oauthconsumer/www/callback.php:73
+#: plugins/oauthconsumer/www/callback.php:77
 #, fuzzy
 msgid "Access Token Secret: "
 msgstr "Доступ запрещен"
 
-#: plugins/oauthconsumer/www/callback.php:79
+#: plugins/oauthconsumer/www/callback.php:83
 #: plugins/oauthconsumer/www/index.php:87
 #: plugins/oauthconsumer/www/provider_edit.php:79
 #: plugins/oauthconsumer/www/providers.php:118
@@ -12285,8 +12288,8 @@ msgstr "Доступ запрещен"
 msgid "Get Access tokens"
 msgstr "Доступ запрещен"
 
-#: plugins/oauthconsumer/www/callback.php:80
-#: plugins/oauthconsumer/www/get_access_token.php:176
+#: plugins/oauthconsumer/www/callback.php:84
+#: plugins/oauthconsumer/www/get_access_token.php:185
 #: plugins/oauthconsumer/www/index.php:40
 #: plugins/oauthconsumer/www/index.php:88
 #: plugins/oauthconsumer/www/provider_edit.php:80
@@ -12334,30 +12337,53 @@ msgstr "Авторизация"
 msgid "Access Token URL"
 msgstr "Доступ запрещен"
 
-#: plugins/oauthconsumer/www/get_access_token.php:78
-msgid "<b>Step 1: </b>Get Request Token "
+#: plugins/oauthconsumer/www/get_access_token.php:75
+msgid "Do not verify SSL Certificate"
 msgstr ""
 
-#: plugins/oauthconsumer/www/get_access_token.php:133
+#: plugins/oauthconsumer/www/get_access_token.php:80
+msgid "Step 1: "
+msgstr ""
+
+#: plugins/oauthconsumer/www/get_access_token.php:82
+#, fuzzy
+msgid "Get Request Token"
+msgstr "Заявка на участие"
+
+#: plugins/oauthconsumer/www/get_access_token.php:131
+#, fuzzy
+msgid "Error in curl : "
+msgstr "Ошибка добавления VHOST:"
+
+#: plugins/oauthconsumer/www/get_access_token.php:138
 #, fuzzy
 msgid "New request token received!"
 msgstr "Вопросов нет"
 
-#: plugins/oauthconsumer/www/get_access_token.php:134
+#: plugins/oauthconsumer/www/get_access_token.php:139
 #, fuzzy
 msgid "Request Token Key"
 msgstr "Заявка на участие"
 
-#: plugins/oauthconsumer/www/get_access_token.php:135
+#: plugins/oauthconsumer/www/get_access_token.php:140
 #, fuzzy
 msgid "Request Token Secret"
 msgstr "Заявка на участие в проекте"
 
-#: plugins/oauthconsumer/www/get_access_token.php:153
-msgid "<b>Step 2: </b>Authorize the Request Token (from "
+#: plugins/oauthconsumer/www/get_access_token.php:159
+msgid "Step 2: "
 msgstr ""
 
-#: plugins/oauthconsumer/www/get_access_token.php:170
+#: plugins/oauthconsumer/www/get_access_token.php:161
+msgid "Authorize the Request Token (from "
+msgstr ""
+
+#: plugins/oauthconsumer/www/get_access_token.php:169
+#, fuzzy
+msgid "Error in retrieving request token"
+msgstr "Ошибка вставки вопроса"
+
+#: plugins/oauthconsumer/www/get_access_token.php:179
 #: plugins/oauthconsumer/www/index.php:81
 msgid ""
 "There are no OAuth Providers registered in the database currently. Please "
@@ -21553,9 +21579,8 @@ msgid ""
 "This is the description of your project which will be shown on the Project "
 "Summary page, in search results, etc. (at least 10 characters)"
 msgstr ""
-"Это описание проекта будет "
-"отображаться на странице с резюме проекта, в результатах поиска, и т.д.. "
-"Максимальная длина 255 символов."
+"Это описание проекта будет отображаться на странице с резюме проекта, в "
+"результатах поиска, и т.д.. Максимальная длина 255 символов."
 
 #: www/register/index.php:214
 msgid ""
@@ -26935,9 +26960,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "Add A Question"
 #~ msgstr "Добавить новый вопрос"
-
-#~ msgid "Error inserting question"
-#~ msgstr "Ошибка вставки вопроса"
 
 #~ msgid "Question type"
 #~ msgstr "Тип вопроса"
