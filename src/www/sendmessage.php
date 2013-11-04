@@ -128,7 +128,7 @@ $HTML->header(array('title'=>forge_get_config ('forge_name').' Staff'));
 </p>
 
 <p class="important">
-<?php echo _('<b>IF YOU ARE WRITING FOR HELP:</b> Did you read the site documentation? Did you include your <b>user_id</b> and <b>user_name?</b> If you are writing about a project, include your <b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.'); ?>
+<?php echo _('<strong>IF YOU ARE WRITING FOR HELP:</strong> Did you read the site documentation? Did you include your <strong>user_id</strong> and <strong>user_name?</strong> If you are writing about a project, include your <strong>project id</strong> (<strong>group_id</strong>) and <strong>Project Name</strong>.'); ?>
 </p>
 
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
