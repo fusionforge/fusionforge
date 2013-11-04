@@ -21512,14 +21512,13 @@ msgstr ""
 "описания и укажите требуемую информацию. Необходимо заполнить все поля."
 
 #: www/register/index.php:184
-#, fuzzy
 msgid ""
 "You should start with specifying the name of your project. The “Full Name” "
 "is descriptive, and has no arbitrary restrictions (except min 3 characters "
 "and max 40 characters)."
 msgstr ""
 "Вы должны начать с выбора имени Вашему проекту. Название проекта должно "
-"состоять не более чем из 40 букв, выражающее смысл проекта (желательно "
+"состоять не более чем из 3-40 букв, выражающее смысл проекта (желательно "
 "краткое)."
 
 #: www/register/index.php:194 www/register/index.php:198
@@ -24350,19 +24349,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "Error: both subject and body are required"
 #~ msgstr "Все параметры обязательны к заполнению"
-
-#, fuzzy
-#~ msgid ""
-#~ "You should start with specifying the name of your project. The \"Full Name"
-#~ "\" is descriptive, and has no arbitrary restrictions (except a 40 "
-#~ "character limit)."
-#~ msgstr ""
-#~ "<h3>1. Полное имя проекта</h3>Вы должны начать с выбора имени Вашему "
-#~ "проекту. Название проекта должно состоять не более чем из 30 букв, "
-#~ "выражающее смысл проекта (желательно краткое).<p/>Имя Проекта:<br/>"
-
-#~ msgid "ERROR: User not removed: %s"
-#~ msgstr "Ошибка при удалении пользователя: %s"
 
 #, fuzzy
 #~ msgid "Registation Complete"

@@ -20769,14 +20769,13 @@ msgstr ""
 "comprensibles. Todos los campos son necesarios."
 
 #: www/register/index.php:184
-#, fuzzy
 msgid ""
 "You should start with specifying the name of your project. The “Full Name” "
 "is descriptive, and has no arbitrary restrictions (except min 3 characters "
 "and max 40 characters)."
 msgstr ""
-"Deberia comenzar con asignarle un nombre al proyecto. El \"Nombre Completo\" "
-"es descriptivo, y no tiene restricciones iniciales (excepto el limite de 40 "
+"Deberia comenzar con asignarle un nombre al proyecto. El “Nombre Completo” "
+"es descriptivo, y no tiene restricciones iniciales (excepto el limite de 3-40 "
 "caracteres)."
 
 #: www/register/index.php:194 www/register/index.php:198
@@ -27089,15 +27088,6 @@ msgstr "Página personal de %s"
 #~ "Su proyecto ha sido enviado a los administradores de %1$s . Transcurridas "
 #~ "72 horas, recibira una notificación sobre la decisión e instrucciones.</"
 #~ "p><p>Gracias por elegir %1$s"
-
-#~ msgid ""
-#~ "You should start with specifying the name of your project. The \"Full Name"
-#~ "\" is descriptive, and has no arbitrary restrictions (except a 40 "
-#~ "character limit)."
-#~ msgstr ""
-#~ "Deberia comenzar con asignarle un nombre al proyecto. El \"Nombre Completo"
-#~ "\" es descriptivo, y no tiene restricciones iniciales (excepto el limite "
-#~ "de 40 caracteres)."
 
 #~ msgid ""
 #~ "Choose a Project/Subproject in the Task Manager. You will then have to "

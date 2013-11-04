@@ -21404,7 +21404,6 @@ msgstr ""
 "zwingend."
 
 #: www/register/index.php:184
-#, fuzzy
 msgid ""
 "You should start with specifying the name of your project. The “Full Name” "
 "is descriptive, and has no arbitrary restrictions (except min 3 characters "
@@ -21412,7 +21411,7 @@ msgid ""
 msgstr ""
 "Sie sollten damit beginnen, den Namen Ihres Projektes zu spezifizieren. Der "
 "»Vollständige Name« ist deskriptiv und hat keine unbegründeten "
-"Einschränkungen (außer einem 40 Zeichen Limit)."
+"Einschränkungen (außer einem 3-40 Zeichen Limit)."
 
 #: www/register/index.php:194 www/register/index.php:198
 #, fuzzy
@@ -24331,17 +24330,6 @@ msgstr "Persönliche Seite für %s"
 #, fuzzy
 #~ msgid "Error when approving Project: %1$s"
 #~ msgstr "Fehler beim Genehmigen von Gruppe: %1$s"
-
-#, fuzzy
-#~ msgid ""
-#~ "You should start with specifying the name of your project. The \"Full Name"
-#~ "\" is descriptive, and has no arbitrary restrictions (except a 40 "
-#~ "character limit)."
-#~ msgstr ""
-#~ "<h3>1.Vollständiger Projektname</h3>Sie sollten damit beginnen, den Namen "
-#~ "Ihres Projektes zu spezifizieren. Der \"Vollständige Name\" ist "
-#~ "deskriptiv und hat keine unbegründeten Einschränkungen (außer einem 40 "
-#~ "Zeichen Limit).<p/>Full Name:<br/>"
 
 #~ msgid "ERROR: User not removed: %s"
 #~ msgstr "Fehler: Der Nutzer: %s wurde nicht entfernt"

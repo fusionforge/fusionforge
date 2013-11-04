@@ -20594,7 +20594,6 @@ msgstr ""
 "les champs sont obligatoires."
 
 #: www/register/index.php:184
-#, fuzzy
 msgid ""
 "You should start with specifying the name of your project. The “Full Name” "
 "is descriptive, and has no arbitrary restrictions (except min 3 characters "
@@ -20602,7 +20601,7 @@ msgid ""
 msgstr ""
 "Vous devez commencer par donner un nom à votre projet. Ce nom complet doit "
 "être descriptif, et n'a pas de restrictions arbitraires à l'exception d'une "
-"limitation de taille (à 40 caractères)."
+"limitation de taille (entre 3 et 40 caractères)."
 
 #: www/register/index.php:194 www/register/index.php:198
 msgid "Project Purpose And Summarization"
@@ -23551,17 +23550,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Error when approving Project: %1$s"
 #~ msgstr "Erreur pendant l'approbation d'un projet : %1$s"
-
-#, fuzzy
-#~ msgid ""
-#~ "You should start with specifying the name of your project. The \"Full Name"
-#~ "\" is descriptive, and has no arbitrary restrictions (except a 40 "
-#~ "character limit)."
-#~ msgstr ""
-#~ "<p>Vous devez commencer par donner un nom à votre projet.  Ce nom complet "
-#~ "doit être descriptif, et n'a pas de restrictions arbitraires à "
-#~ "l'exception d'une limitation de taille (à 40 caractères).</p><p>Nom "
-#~ "complet :</p>"
 
 #~ msgid "ERROR: User not removed: %s"
 #~ msgstr "Erreur : utilisateur non supprimé : %s"

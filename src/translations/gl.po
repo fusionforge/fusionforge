@@ -21388,7 +21388,6 @@ msgstr ""
 "exhaustivos. Todos os campos inferiores son obrigatorios."
 
 #: www/register/index.php:184
-#, fuzzy
 msgid ""
 "You should start with specifying the name of your project. The “Full Name” "
 "is descriptive, and has no arbitrary restrictions (except min 3 characters "
@@ -21396,7 +21395,7 @@ msgid ""
 msgstr ""
 "Debería comezar especificando o nome do proxecto. O “nome completo” é "
 "descritivo, e non ten ningunha restrición arbitraria (exceptuando un límite "
-"de 40 caracteres)."
+"de 3-40 caracteres)."
 
 #: www/register/index.php:194 www/register/index.php:198
 #, fuzzy
@@ -24274,17 +24273,6 @@ msgstr "Páxina persoal de %s"
 
 #~ msgid "Error: both subject and body are required"
 #~ msgstr "ERRO - É necesario tanto o corpo como o asunto"
-
-#, fuzzy
-#~ msgid ""
-#~ "You should start with specifying the name of your project. The \"Full Name"
-#~ "\" is descriptive, and has no arbitrary restrictions (except a 40 "
-#~ "character limit)."
-#~ msgstr ""
-#~ "<h3>1. Nome completo do proxecto</h3>Debería comezar especificando o nome "
-#~ "do proxecto. O \"nome completo\" é descritivo, e non ten ningunha "
-#~ "restrición arbitraria (exceptuando un límite de 40 caracteres).<p/>Nome "
-#~ "completo:<br/>"
 
 #~ msgid "ERROR: User not removed: %s"
 #~ msgstr "ERRO: non se eliminou o usuario: %s"
