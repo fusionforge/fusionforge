@@ -5820,7 +5820,7 @@ msgstr "Tipo dato"
 msgid ""
 "The summary text-box represents a short tracker item summary. Useful when "
 "browsing through several tracker items."
-msgstr "La casella di testo \"sommario\" rappresenta un sommario breve."
+msgstr "La casella di testo “sommario” rappresenta un sommario breve."
 
 #: common/tracker/actions/mod.php:175 common/tracker/actions/query.php:384
 #: common/tracker/include/ArtifactHtml.class.php:45
@@ -17825,10 +17825,10 @@ msgid ""
 "respond with an admin-defined amount of time (default is 14 days) then the "
 "item is given a status of “Deleted”."
 msgstr ""
-"Puoi impostare lo stato a 'Pending' se sei in attesa di una risposta da chi "
+"Puoi impostare lo stato a “Pending” se sei in attesa di una risposta da chi "
 "ha inserito l'elemento. Quando l'autore risponde, lo stato viene "
-"automaticamente impostato a 'Open'. Se l'autore non risponde entro un tempo "
-"determinato (normalmente 14 giorn) viene impostato a 'Deleted'."
+"automaticamente impostato a “Open”. Se l'autore non risponde entro un tempo "
+"determinato (normalmente 14 giorn) viene impostato a “Deleted”."
 
 #: www/include/html.php:389
 #, fuzzy
@@ -17844,7 +17844,7 @@ msgstr "Tracker"
 msgid ""
 "The Sort By option allows you to determine how the browse results are sorted."
 msgstr ""
-"L'opzione \"Ordina per\" ti permette di scegliere il tipo di ordinamento."
+"L'opzione “Ordina per” ti permette di scegliere il tipo di ordinamento."
 
 #: www/include/html.php:395
 msgid ""
@@ -17877,7 +17877,7 @@ msgid ""
 "The priority option allows a user to define a tracker item priority (ranging "
 "from 1-Lowest to 5-Highest)."
 msgstr ""
-"L'opzione \"Priorità\" permette all'utente di definire una priorità da 1 "
+"L'opzione “Priorità” permette all'utente di definire una priorità da 1 "
 "(bassa) a 5 (alta)."
 
 #: www/include/html.php:403
@@ -20681,7 +20681,7 @@ msgstr ""
 
 #: www/project/admin/massfinish.php:66
 msgid "Choose the role for each user and then press “Add All”."
-msgstr "Seleziona un ruolo per ogni utente e poi premi \"Aggiungi tutti\"."
+msgstr "Seleziona un ruolo per ogni utente e poi premi “Aggiungi tutti”."
 
 #: www/project/admin/massfinish.php:96
 #, fuzzy
@@ -23644,14 +23644,6 @@ msgstr "Pagina Personale"
 #~ msgid "FRSFile Name Must Be At Least 3 Characters"
 #~ msgstr "La lunghezza minima del nome di un FRSFile è di 3 caratteri"
 
-#, fuzzy
-#~ msgid ""
-#~ "Filename can only be alphanumeric and \"-\" \"_\" \"+\" \".\" \"~\" "
-#~ "characters."
-#~ msgstr ""
-#~ "Il nome del file può contenere solo caratteri alfanumerici e \"-\" \"_\" "
-#~ "\".\"."
-
 #~ msgid "Filename"
 #~ msgstr "Nome file"
 
@@ -23814,21 +23806,6 @@ msgstr "Pagina Personale"
 #~ msgstr ""
 #~ "Se sei un amministratore di progetto puoi premere il link 'Manage Canned "
 #~ "Responses' per definire le risposte predefinite."
-
-#~ msgid ""
-#~ "This drop-down box represents the current status of a tracker item.<br /"
-#~ "><br />You can set the status to 'Pending' if you are waiting for a "
-#~ "response from the tracker item author.  When the author responds the "
-#~ "status is automatically reset to that of 'Open'. Otherwise, if the author "
-#~ "doesn't respond with an admin-defined amount of time (default is 14 days) "
-#~ "then the item is given a status of 'Deleted'."
-#~ msgstr ""
-#~ "In questa casella di selezione viene visualizzato lo stato attuale "
-#~ "dell'elemento.<br /><br />Puoi impostare lo stato a 'Pending' se sei in "
-#~ "attesa di una risposta da chi ha inserito l'elemento. Quando l'autore "
-#~ "risponde, lo stato viene automaticamente impostato a 'Open'. Se l'autore "
-#~ "non risponde entro un tempo determinato (normalmente 14 giorn) viene "
-#~ "impostato a 'Deleted'."
 
 #~ msgid ""
 #~ "The Sort By option allows you to determine how the browse results are "
@@ -26960,16 +26937,6 @@ msgstr "Pagina Personale"
 #~ msgid "Press <strong>Save</strong> again."
 #~ msgstr "Premi ancora <strong>Salva</strong>"
 
-#~ msgid ""
-#~ "PhpWiki is unable to save your changes, because another user edited and "
-#~ "saved the page while you were editing the page too. If saving proceeded "
-#~ "now changes from the previous author would be lost."
-#~ msgstr ""
-#~ "PhpWiki non è riuscito a salvare i tuoi cambiamenti perchè un altro "
-#~ "utente ha cambiato la pagina mentre la stavi modificando. Se il "
-#~ "salvataggio viene comunque fatto, i cambiamenti dell'altro utente "
-#~ "verranno persi."
-
 #~ msgid "Problem while updating %s"
 #~ msgstr "Problemi durante l'aggiornamento %s"
 
@@ -27086,18 +27053,3 @@ msgstr "Pagina Personale"
 
 #~ msgid "Followup"
 #~ msgstr "Commenti"
-
-#~ msgid ""
-#~ "This drop-down box represents the current status of a tracker item.<br /"
-#~ "><br />You can set the status to “Pending” if you are waiting for a "
-#~ "response from the tracker item author.  When the author responds the "
-#~ "status is automatically reset to that of “Open”. Otherwise, if the author "
-#~ "doesn't respond with an admin-defined amount of time (default is 14 days) "
-#~ "then the item is given a status of “Deleted”."
-#~ msgstr ""
-#~ "In questa casella di selezione viene visualizzato lo stato attuale "
-#~ "dell'elemento.<br /><br />Puoi impostare lo stato a 'Pending' se sei in "
-#~ "attesa di una risposta da chi ha inserito l'elemento. Quando l'autore "
-#~ "risponde, lo stato viene automaticamente impostato a 'Open'. Se l'autore "
-#~ "non risponde entro un tempo determinato (normalmente 14 giorn) viene "
-#~ "impostato a 'Deleted'."
