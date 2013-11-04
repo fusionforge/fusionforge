@@ -20808,7 +20808,7 @@ msgid ""
 "This is the description of your project which will be shown on the Project "
 "Summary page, in search results, etc. (at least 10 characters)"
 msgstr ""
-"<h3>4. Descripción Pública del Proyecto</h3><p>Esta es la descripción de su "
+"Esta es la descripción de su "
 "proyecto que se muestra en la página de Sumario del Proyecto, en resultados "
 "de búsquedas, etc. La máxima longitud es 255 caracteres."
 

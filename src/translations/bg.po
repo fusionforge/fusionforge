@@ -20651,7 +20651,7 @@ msgid ""
 "This is the description of your project which will be shown on the Project "
 "Summary page, in search results, etc. (at least 10 characters)"
 msgstr ""
-"<h5>4. Публично описание на проекта</h5><p>Това е описанието на Вашия "
+"Това е описанието на Вашия "
 "проект, което ще се визуализира на страницата \"Резюме\", в резултатите от "
 "търсене и т.н. Максималната допустима дължина е 255 символа."
 

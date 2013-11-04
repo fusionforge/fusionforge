@@ -21070,7 +21070,7 @@ msgid ""
 "This is the description of your project which will be shown on the Project "
 "Summary page, in search results, etc. (at least 10 characters)"
 msgstr ""
-"<h3>4. 專案公開說明</h3><p>這個說明會出現在專案首頁、搜尋結果等，這不需要像是"
+"這個說明會出現在專案首頁、搜尋結果等，這不需要像是"
 "第二個步驟時提供那麼詳細的資訊，所以用您熟悉的方式去描述即可，最多255字元。"
 
 #: www/register/index.php:214

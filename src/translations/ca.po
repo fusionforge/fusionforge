@@ -21212,7 +21212,6 @@ msgid "Project Public Description"
 msgstr "Projecte lifespan"
 
 #: www/register/index.php:206
-#, fuzzy
 msgid ""
 "This is the description of your project which will be shown on the Project "
 "Summary page, in search results, etc. (at least 10 characters)"
