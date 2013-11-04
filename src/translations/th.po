@@ -7,9 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-04 10:31+0100\n"
-"PO-Revision-Date: 2009-10-06 16:32+0200\n"
-"Last-Translator: Roland Mas <lolando@debian.org>\n"
+"POT-Creation-Date: 2013-11-04 15:16+0100\n"
+"PO-Revision-Date: 2013-06-03 17:16+0100\n"
+"Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
+"com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
 "Language: th\n"
 "MIME-Version: 1.0\n"
@@ -488,9 +489,8 @@ msgid "Document reservation failed"
 msgstr ""
 
 #: common/docman/Document.class.php:935 common/docman/views/additem.php:57
-#, fuzzy
 msgid "New Document"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/Document.class.php:937
 msgid "Updated document"
@@ -557,9 +557,8 @@ msgstr "ไม่พบเอกสาร"
 #: common/docman/DocumentGroup.class.php:67
 #: common/docman/views/listfile.php:173
 #: common/docman/views/listtrashfile.php:116
-#, fuzzy
 msgid "Document Folder"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:101
 msgid "Name is required"
@@ -1416,9 +1415,8 @@ msgid "Delete permanently."
 msgstr ""
 
 #: common/docman/views/menu.php:44
-#, fuzzy
 msgid "View Documents"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: common/docman/views/menu.php:46
 msgid ""
@@ -2369,9 +2367,9 @@ msgid "Receive followups via email"
 msgstr ""
 
 #: common/forum/ForumHTML.class.php:632
-#, fuzzy, php-format
+#, php-format
 msgid "You could post if you were <a href=\"%s\">logged in</a>."
-msgstr "จะบันทึกได้ก็ต่อเมื่อได้กรอกข้อมูลเข้าใช้งานแล้วเท่านั้น"
+msgstr ""
 
 #: common/forum/ForumHTML.class.php:636
 #, php-format
@@ -2412,9 +2410,8 @@ msgid "Error: a forum message must include a message body and a subject."
 msgstr ""
 
 #: common/forum/ForumMessage.class.php:372
-#, fuzzy
 msgid "Invalid ParentMessage Object"
-msgstr "หมายเลขกลุ่มกระทู้ไม่ถูกต้อง"
+msgstr ""
 
 #: common/forum/ForumMessage.class.php:405
 #: common/forum/ForumMessage.class.php:423
@@ -2680,7 +2677,7 @@ msgstr ""
 
 #: common/include/account.php:34
 msgid "Password must be at least 6 characters."
-msgstr ""
+msgstr "ชื่อจะต้องมีอย่างน้อย 6 ตัวอักษร"
 
 #: common/include/account.php:60
 msgid "There cannot be any spaces in the login name."
@@ -10186,9 +10183,9 @@ msgid "Mailing Lists for %s"
 msgstr ""
 
 #: plugins/mailman/www/index.php:55 www/mail/index.php:68
-#, fuzzy, php-format
+#, php-format
 msgid "No Lists found for %s"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: plugins/mailman/www/index.php:56 www/mail/index.php:69
 msgid "Project administrators use the admin link to request mailing lists."
@@ -15516,9 +15513,9 @@ msgstr ""
 
 #: www/forum/admin/index.php:373 www/forum/admin/index.php:449
 #: www/forum/index.php:58
-#, fuzzy, php-format
+#, php-format
 msgid "No Forums Found for %s"
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/forum/admin/index.php:403
 #, php-format
@@ -17242,9 +17239,8 @@ msgid ""
 msgstr ""
 
 #: www/news/admin/news_admin_utils.php:130
-#, fuzzy
 msgid "No approved items found for this week."
-msgstr "ไม่พบเอกสาร"
+msgstr ""
 
 #: www/news/admin/news_admin_utils.php:132
 #, php-format
@@ -21335,14 +21331,3 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Forum Description Must Be At Least 10 Characters."
-#~ msgstr "คำอธิบายเอกสารจะต้องมีอย่างน้อย 10 ตัวอักษร"
-
-#, fuzzy
-#~ msgid "Invalid Group Object"
-#~ msgstr "หมายเลขกลุ่มกระทู้ไม่ถูกต้อง"
-
-#~ msgid "Welcome to %1$s"
-#~ msgstr "ยินดีต้อนรับสู่ %1$s"
