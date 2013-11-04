@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-04 17:58+0100\n"
+"POT-Creation-Date: 2013-11-04 18:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13564,21 +13564,21 @@ msgstr ""
 
 #: www/account/index.php:244 www/account/register.php:245
 msgid ""
-"Receive Email about Site Updates <i>(Very low traffic and includes security "
-"notices. Highly Recommended.)</i>"
+"Receive Email about Site Updates <em>(Very low traffic and includes security "
+"notices. Highly Recommended.)</em>"
 msgstr ""
 
 #: www/account/index.php:250 www/account/register.php:251
-msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
+msgid "Receive additional community mailings. <em>(Low traffic.)</em>"
 msgstr ""
 
 #: www/account/index.php:265
 #, php-format
 msgid ""
-"Participate in peer ratings. <i>(Allows you to rate other users using "
+"Participate in peer ratings. <em>(Allows you to rate other users using "
 "several criteria as well as to be rated by others. More information is "
 "available on your <a href=\"%s\">user page</a> if you have chosen to "
-"participate in ratings.)</i>"
+"participate in ratings.)</em>"
 msgstr ""
 
 #: www/account/index.php:271

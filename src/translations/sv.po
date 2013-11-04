@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-04 17:41+0100\n"
+"POT-Creation-Date: 2013-11-04 18:05+0100\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -13567,8 +13567,8 @@ msgstr "Anonymt FTP-utrymme"
 msgid ""
 "This project's CVS repository can be checked out through anonymous (pserver) "
 "CVS with the following instruction set. The module you wish to check out "
-"must be specified as the <em>modulename</em>. When prompted for a password for "
-"<em>anonymous</em>, simply press the Enter key."
+"must be specified as the <em>modulename</em>. When prompted for a password "
+"for <em>anonymous</em>, simply press the Enter key."
 msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:86
@@ -14708,23 +14708,23 @@ msgstr ""
 
 #: www/account/index.php:244 www/account/register.php:245
 msgid ""
-"Receive Email about Site Updates <i>(Very low traffic and includes security "
-"notices. Highly Recommended.)</i>"
+"Receive Email about Site Updates <em>(Very low traffic and includes security "
+"notices. Highly Recommended.)</em>"
 msgstr ""
-"Erhåll e-post om webbplatsuppdateringar <i>(Mycket låg trafik samt "
-"inkluderar säkerhetsvarningar. Rekommenderas.)</i>"
+"Erhåll e-post om webbplatsuppdateringar <em>(Mycket låg trafik samt "
+"inkluderar säkerhetsvarningar. Rekommenderas.)</em>"
 
 #: www/account/index.php:250 www/account/register.php:251
-msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
-msgstr "Ta emot ytterligare brev från gruppen. <i>(Låg trafik.)</i>"
+msgid "Receive additional community mailings. <em>(Low traffic.)</em>"
+msgstr "Ta emot ytterligare brev från gruppen. <em>(Låg trafik.)</em>"
 
 #: www/account/index.php:265
 #, php-format
 msgid ""
-"Participate in peer ratings. <i>(Allows you to rate other users using "
+"Participate in peer ratings. <em>(Allows you to rate other users using "
 "several criteria as well as to be rated by others. More information is "
 "available on your <a href=\"%s\">user page</a> if you have chosen to "
-"participate in ratings.)</i>"
+"participate in ratings.)</em>"
 msgstr ""
 
 #: www/account/index.php:271
@@ -25888,13 +25888,15 @@ msgstr "Min personliga sida"
 #~ msgid "(version %s, saved on %s)"
 #~ msgstr "(version %s, sparade %s)"
 
-#~ msgid "Use your browser's <b>Back</b> button to go back to the edit page."
+#~ msgid ""
+#~ "Use your browser's <strong>Back</strong> button to go back to the edit "
+#~ "page."
 #~ msgstr ""
-#~ "Använd webbläsarens <b>backaknapp</b> för att gå tillbaka till "
+#~ "Använd webbläsarens <strong>backaknapp</strong> för att gå tillbaka till "
 #~ "redigeringssidan."
 
-#~ msgid "Press <b>Save</b> again."
-#~ msgstr "Klicka på <b>Spara</b> igen."
+#~ msgid "Press <strong>Save</strong> again."
+#~ msgstr "Klicka på <strong>Spara</strong> igen."
 
 #~ msgid ""
 #~ "PhpWiki is unable to save your changes, because another user edited and "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-04 17:41+0100\n"
+"POT-Creation-Date: 2013-11-04 18:05+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -7105,12 +7105,12 @@ msgstr "Tareas Administrativas Pendientes"
 #: common/widget/Widget_MyAdmin.class.php:51
 #, fuzzy, php-format
 msgid "Users in <a href=\"%s\"><strong>P</strong> (pending) Status</a>"
-msgstr "Grupos en <a href=\"%s\">Estado <b>P</b> (pendientes)</a>"
+msgstr "Grupos en <a href=\"%s\">Estado <strong>P</strong> (pendientes)</a>"
 
 #: common/widget/Widget_MyAdmin.class.php:69
 #, fuzzy, php-format
 msgid "Groups in <a href=\"%s\"><strong>P</strong> (pending) Status</A>"
-msgstr "Grupos en <a href=\"%s\">Estado <b>P</b> (pendientes)</a>"
+msgstr "Grupos en <a href=\"%s\">Estado <strong>P</strong> (pendientes)</a>"
 
 #: common/widget/Widget_MyAdmin.class.php:90
 msgid "Site News Approval"
@@ -11824,8 +11824,8 @@ msgstr ""
 #, fuzzy
 msgid "Exchange the authorized request token for an access token"
 msgstr ""
-"<b>Paso 3: </b>Intercambiar la peticion de token autorizado por un token de "
-"acceso"
+"<strong>Paso 3: </strong>Intercambiar la peticion de token autorizado por un "
+"token de acceso"
 
 #: plugins/oauthconsumer/www/callback.php:25
 #: plugins/oauthconsumer/www/get_access_token.php:85
@@ -11942,7 +11942,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/get_access_token.php:161
 #, fuzzy
 msgid "Authorize the Request Token (from "
-msgstr "<b>Paso 2: </b>Autorizar el Token Pedido (desde "
+msgstr "<strong>Paso 2: </strong>Autorizar el Token Pedido (desde "
 
 #: plugins/oauthconsumer/www/get_access_token.php:169
 #, fuzzy
@@ -12002,7 +12002,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/provider_edit.php:29
 #, fuzzy
 msgid "Edit OAuth Provider"
-msgstr "<b>Editar Proveedor OAuth</b>"
+msgstr "<strong>Editar Proveedor OAuth</strong>"
 
 #: plugins/oauthconsumer/www/provider_edit.php:49
 #: plugins/oauthconsumer/www/providers.php:14
@@ -12021,7 +12021,7 @@ msgstr "No hay actualmente Proveedores OAuth registrados en la base de datos"
 #: plugins/oauthconsumer/www/providers.php:69
 #, fuzzy
 msgid "Add a new OAuth provider"
-msgstr "<b>Agregar un nuevo proveedor OAuth</b>"
+msgstr "<strong>Agregar un nuevo proveedor OAuth</strong>"
 
 #: plugins/oauthconsumer/www/providers.php:108
 msgid "Add provider"
@@ -13154,7 +13154,7 @@ msgstr "nombre de rama"
 #: plugins/scmsvn/common/SVNPlugin.class.php:168
 #: plugins/scmsvn/common/SVNPlugin.class.php:181
 msgid "Substitute <em>developername</em> with the proper values."
-msgstr "Substituya <i>nombredemódulo</i> con los valores adecuados."
+msgstr "Substituya <em>nombredemódulo</em> con los valores adecuados."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:124
 #: plugins/scmcpold/common/CpoldPlugin.class.php:98
@@ -13271,13 +13271,13 @@ msgstr "Acceso anómimo a CVS"
 msgid ""
 "This project's CVS repository can be checked out through anonymous (pserver) "
 "CVS with the following instruction set. The module you wish to check out "
-"must be specified as the <em>modulename</em>. When prompted for a password for "
-"<em>anonymous</em>, simply press the Enter key."
+"must be specified as the <em>modulename</em>. When prompted for a password "
+"for <em>anonymous</em>, simply press the Enter key."
 msgstr ""
 "El repositorio CVS de este proyecto puede ser accedido usando una cuenta "
 "anonymous (pserver) con las siguiente instrucciones. El módulo que desea "
 "obtener con el cliente de CVS debe estar especificado como el "
-"<i>nombredemódulo</i>. Cuando se le pida password para <em>anonymous</em>, "
+"<em>nombredemódulo</em>. Cuando se le pida password para <em>anonymous</em>, "
 "simplemente presione la tecla Enter."
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:86
@@ -13502,13 +13502,13 @@ msgid_plural ""
 msgstr[0] ""
 "Sólo los desarrolladores del proyecto puede acceder al Git usando este "
 "método. SSH debe estar instalado en su máquina cliente. Substituya "
-"<i>nombredesarollador</i> con los valores adecuados. Introduzca su password "
-"cuando lo pida el cliente de SSH."
+"<em>nombredesarollador</em> con los valores adecuados. Introduzca su "
+"password cuando lo pida el cliente de SSH."
 msgstr[1] ""
 "Sólo los desarrolladores del proyecto puede acceder al Git usando este "
 "método. SSH debe estar instalado en su máquina cliente. Substituya "
-"<i>nombredesarollador</i> con los valores adecuados. Introduzca su password "
-"cuando lo pida el cliente de SSH."
+"<em>nombredesarollador</em> con los valores adecuados. Introduzca su "
+"password cuando lo pida el cliente de SSH."
 
 #: plugins/scmgit/common/GitPlugin.class.php:254
 msgid "Access to your personal repository"
@@ -14508,28 +14508,28 @@ msgstr "Fax"
 
 #: www/account/index.php:244 www/account/register.php:245
 msgid ""
-"Receive Email about Site Updates <i>(Very low traffic and includes security "
-"notices. Highly Recommended.)</i>"
+"Receive Email about Site Updates <em>(Very low traffic and includes security "
+"notices. Highly Recommended.)</em>"
 msgstr ""
-"Recibir correos sobre actualizaciones del portal <i>(Tráfico muy bajo. "
-"Altamente recomendado.)</i>"
+"Recibir correos sobre actualizaciones del portal <em>(Tráfico muy bajo. "
+"Altamente recomendado.)</em>"
 
 #: www/account/index.php:250 www/account/register.php:251
-msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
-msgstr "Recibir correos adicionales de la comunidad. <i>(Bajo tráfico.)</i>"
+msgid "Receive additional community mailings. <em>(Low traffic.)</em>"
+msgstr "Recibir correos adicionales de la comunidad. <em>(Bajo tráfico.)</em>"
 
 #: www/account/index.php:265
 #, php-format
 msgid ""
-"Participate in peer ratings. <i>(Allows you to rate other users using "
+"Participate in peer ratings. <em>(Allows you to rate other users using "
 "several criteria as well as to be rated by others. More information is "
 "available on your <a href=\"%s\">user page</a> if you have chosen to "
-"participate in ratings.)</i>"
+"participate in ratings.)</em>"
 msgstr ""
-"Participar en las evaluaciones. <i>(Permite puntuar a otros usuarios usando "
+"Participar en las evaluaciones. <em>(Permite puntuar a otros usuarios usando "
 "algunos criterios igual que puede ser puntuado. Mas información disponible "
 "en <a href=\"%s\">pagina de usuario</a>Si ha elegido participar en las "
-"calificaciones.)</i>"
+"calificaciones.)</em>"
 
 #: www/account/index.php:271
 msgid ""
@@ -18564,7 +18564,7 @@ msgid "Submit News for Project: "
 msgstr "Enviar Noticias para Proyecto: "
 
 #: www/news/submit.php:136
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "You can post news about your project if you are an admin on your project. "
 "You may also post \"help wanted\" notes if your project needs help.</"
@@ -18576,12 +18576,12 @@ msgid ""
 msgstr ""
 "Puede enviar noticias acerca de su proyecto si es el admin de su proyecto. "
 "Tambien puede enviar un mensaje de \"busqueda de ayuda\" si el proyecto "
-"necesita ayuda </p><p>Todos los envios·<b>para su proyecto</b> aparecerán "
-"instantaneamente en su pagina resumen. Envios sin especial interés para el "
-"proyecto deberán ser aprobados por un miembro del equipo de noticias de %1$s "
-"antes de que aparezcan en la página principal de ·%1$s. </p><p>Puede incluir "
-"URLS, pero no HTML en sus envios.</p><p>URLs que empiecen con http:// serán "
-"convertidas en enlaces."
+"necesita ayuda </p><p>Todos los envios·<strong>para su proyecto</strong> "
+"aparecerán instantaneamente en su pagina resumen. Envios sin especial "
+"interés para el proyecto deberán ser aprobados por un miembro del equipo de "
+"noticias de %1$s antes de que aparezcan en la página principal de ·%1$s. </"
+"p><p>Puede incluir URLS, pero no HTML en sus envios.</p><p>URLs que empiecen "
+"con http:// serán convertidas en enlaces."
 
 #: www/people/admin/index.php:55 www/pm/admin/index.php:98
 msgid "Category Inserted"
@@ -21486,10 +21486,10 @@ msgid ""
 "<strong>project id</strong> (<strong>group_id</strong>) and <strong>Project "
 "Name</strong>."
 msgstr ""
-"<strong>SI ESTA BUSCANDO AYUDA:</strong> Has leido la documentación del sitio? Has "
-"incluido tu <strong>user_id</strong> y <strong>user_name?</strong> Si estas buscando para un "
-"proyecto, incluyalo en su <strong>project id</strong> (<strong>group_id</strong>) y <strong>Nombre "
-"Proyecto</strong>."
+"<strong>SI ESTA BUSCANDO AYUDA:</strong> Has leido la documentación del "
+"sitio? Has incluido tu <strong>user_id</strong> y <strong>user_name?</"
+"strong> Si estas buscando para un proyecto, incluyalo en su <strong>project "
+"id</strong> (<strong>group_id</strong>) y <strong>Nombre Proyecto</strong>."
 
 #: www/sendmessage.php:141
 msgid "Your Name"
@@ -22939,8 +22939,8 @@ msgstr "No ha proporcionado el nombre de usuario"
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
 
-#~ msgid "<b>Step 1: </b>Get Request Token "
-#~ msgstr "<b>Paso 1: </b>Obtener Token Pedido"
+#~ msgid "<strong>Step 1: </strong>Get Request Token "
+#~ msgstr "<strong>Paso 1: </strong>Obtener Token Pedido"
 
 #~ msgid "Read&nbsp;More/Comment"
 #~ msgstr "Leer&nbsp;más/Comentar"
@@ -23231,9 +23231,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Copy choices from custom field %1$s"
 #~ msgstr "Copiar elecciones desde el campo personalizado %1$s"
-
-#~ msgid "Users in <a href=\"%s\"><b>P</b> (pending) Status</a>"
-#~ msgstr "Usuarios en  <a href=\"%s\">Estado <b>P</b> (pendientes)</a>"
 
 #~ msgid "No legal structures yet, can't define actors without them."
 #~ msgstr ""
@@ -23734,8 +23731,8 @@ msgstr "Página personal de %s"
 #~ msgid "Additional informations"
 #~ msgstr "Información adicional"
 
-#~ msgid "<b>Providers</b>"
-#~ msgstr "<b>Proveedores</b>"
+#~ msgid "<strong>Providers</strong>"
+#~ msgstr "<strong>Proveedores</strong>"
 
 #~ msgid "Include child projects:"
 #~ msgstr "Incluir proyectos hijos:"
@@ -23852,8 +23849,8 @@ msgstr "Página personal de %s"
 #~ msgid "Add file"
 #~ msgstr "Agregar ficheros"
 
-#~ msgid "<b>"
-#~ msgstr "<b>"
+#~ msgid "<strong>"
+#~ msgstr "<strong>"
 
 #~ msgid "Request Token Url"
 #~ msgstr "Pedir Token URL"
@@ -24127,9 +24124,12 @@ msgstr "Página personal de %s"
 #~ msgid "No data to display"
 #~ msgstr "No hay datos en el documento"
 
-#~ msgid "Validated users <a href=\"%s\"><b>pending email activation</b></a>"
+#~ msgid ""
+#~ "Validated users <a href=\"%s\"><strong>pending email activation</strong></"
+#~ "a>"
 #~ msgstr ""
-#~ "Usuarios Validados <a href=\"%s\"><b>pendientes activacion email</b></a>"
+#~ "Usuarios Validados <a href=\"%s\"><strong>pendientes activacion email</"
+#~ "strong></a>"
 
 #~ msgid "List the surveys you have not answered."
 #~ msgstr "Mostrar las encuentas por responder."
@@ -24940,13 +24940,13 @@ msgstr "Página personal de %s"
 #~ msgid ""
 #~ "Only project developers can access the Bazaar branches via this method. "
 #~ "SSH must be installed on your client machine. Substitute "
-#~ "<em>developername</em> with the proper value. Enter your site password when "
-#~ "prompted."
+#~ "<em>developername</em> with the proper value. Enter your site password "
+#~ "when prompted."
 #~ msgstr ""
 #~ "Solo·los·desarrolladores·del·proyecto·pueden·acceder·a·las·ramas·de·Bazaar·con·este·metodo."
 #~ "·El·SSH·debe·de·esta·instalado·en·su·ordenador·cliente.·Sustituya "
-#~ "<em>developername</em> con el valor adecuado. Entre su contraseña del sitio "
-#~ "cuando sea preguntado."
+#~ "<em>developername</em> con el valor adecuado. Entre su contraseña del "
+#~ "sitio cuando sea preguntado."
 
 #~ msgid "Bazaar Repository Browser"
 #~ msgstr "Navegador Repositorio Bazaar"
@@ -24964,26 +24964,27 @@ msgstr "Página personal de %s"
 #~ msgstr "Navegar Repositorio Bazaar"
 
 #~ msgid ""
-#~ "<p><b>Developer CPOLD Access via SSH</b></p><p>Only project developers "
-#~ "can access the CPOLD tree via this method. SSH must be installed on your "
-#~ "client machine. Enter your site password when prompted.</p>"
+#~ "<p><strong>Developer CPOLD Access via SSH</strong></p><p>Only project "
+#~ "developers can access the CPOLD tree via this method. SSH must be "
+#~ "installed on your client machine. Enter your site password when prompted."
+#~ "</p>"
 #~ msgstr ""
-#~ "<p><b>Acceso CPOLD via SSH para desarrolladores</b></p><p>Solo "
+#~ "<p><strong>Acceso CPOLD via SSH para desarrolladores</strong></p><p>Solo "
 #~ "desarrolladores del proyecto puede acceder al arbol CPOLD con este "
 #~ "metodo. SSH debe estar instalado en el cliente. Introduzca la contraseña "
 #~ "del sitio cuando sea requerida.</p>"
 
 #~ msgid ""
-#~ "<p><b>Developer CPOLD Access via SSH</b></p><p>Only project developers "
-#~ "can access the CPOLD tree via this method. SSH must be installed on your "
-#~ "client machine. Substitute <em>developername</em> with the proper value. "
-#~ "Enter your site password when prompted.</p>"
+#~ "<p><strong>Developer CPOLD Access via SSH</strong></p><p>Only project "
+#~ "developers can access the CPOLD tree via this method. SSH must be "
+#~ "installed on your client machine. Substitute <em>developername</em> with "
+#~ "the proper value. Enter your site password when prompted.</p>"
 #~ msgstr ""
-#~ "<p><b>Acceso CPOLD via SSH para Desarrolladores</b></p><p>Solamente los "
-#~ "desarrolladores puede acceder al arbol CPOLD a través de este método. El "
-#~ "cliente debe tener instalado SSH, Substituya <i>nombredesarrollador</i> "
-#~ "con el valor apropiado. Introduzca la contraseña del sitio cuando le sea "
-#~ "requerida.</p>"
+#~ "<p><strong>Acceso CPOLD via SSH para Desarrolladores</strong></"
+#~ "p><p>Solamente los desarrolladores puede acceder al arbol CPOLD a través "
+#~ "de este método. El cliente debe tener instalado SSH, Substituya "
+#~ "<em>nombredesarrollador</em> con el valor apropiado. Introduzca la "
+#~ "contraseña del sitio cuando le sea requerida.</p>"
 
 #~ msgid ""
 #~ "CVS documentation is available <a href=\"http://cvsbook.red-bean.com/"
@@ -24999,7 +25000,7 @@ msgstr "Página personal de %s"
 #~ msgstr ""
 #~ "Sólo los desarrolladores del proyecto puede acceder al CVS usando este "
 #~ "método. SSH debe estar instalado en su máquina cliente. Substituya "
-#~ "<i>nombredemódulo</i> con los valores adecuados. Introduzca su password "
+#~ "<em>nombredemódulo</em> con los valores adecuados. Introduzca su password "
 #~ "cuando lo pida el cliente de SSH."
 
 #~ msgid ""
@@ -25010,7 +25011,7 @@ msgstr "Página personal de %s"
 #~ msgstr ""
 #~ "Sólo los desarrolladores del proyecto puede acceder al CVS usando este "
 #~ "método. SSH debe estar instalado en su máquina cliente. Substituya "
-#~ "<i>nombredemódulo</i> y <i>nombrededesarrollador<i> con los valores "
+#~ "<em>nombredemódulo</em> y <em>nombrededesarrollador<em> con los valores "
 #~ "adecuados. Introduzca su password cuando lo pida el cliente de SSH."
 
 #~ msgid "CVS Repository Browser"
@@ -25045,12 +25046,12 @@ msgstr "Página personal de %s"
 
 #~ msgid ""
 #~ "Only project developers can access the SVN tree via this method. SSH must "
-#~ "be installed on your client machine. Substitute <em>developername</em> with "
-#~ "the proper values. Enter your site password when prompted."
+#~ "be installed on your client machine. Substitute <em>developername</em> "
+#~ "with the proper values. Enter your site password when prompted."
 #~ msgstr ""
 #~ "Solo·los·desarrolladores·del·proyecto·acceden·al·arbol·SVN·con·este·metodo."
-#~ "·El·SSH·debe·de·estar·instalado·en·el·cliente.·Sustituya <i> "
-#~ "developername </i> con losvalores adecuados."
+#~ "·El·SSH·debe·de·estar·instalado·en·el·cliente.·Sustituya <em> "
+#~ "developername </em> con losvalores adecuados."
 #~ "Introduzca·su·contraseña·del·sitio·cuando·sea·requerida."
 
 #~ msgid ""
@@ -26999,8 +27000,8 @@ msgstr "Página personal de %s"
 #~ msgid "\"%s\" roadmap already exists"
 #~ msgstr "\"%s\" roadmap ya existe"
 
-#~ msgid "<b>Edit OAuth Provider</b>"
-#~ msgstr "<b>Editar Proveedor OAuth</b>"
+#~ msgid "<strong>Edit OAuth Provider</strong>"
+#~ msgstr "<strong>Editar Proveedor OAuth</strong>"
 
 #~ msgid "Tracker Items Opened"
 #~ msgstr "Elementos Tracker Abiertos"

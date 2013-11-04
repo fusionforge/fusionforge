@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-04 17:41+0100\n"
+"POT-Creation-Date: 2013-11-04 18:05+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -13680,8 +13680,8 @@ msgstr "Anonieme FTP-ruimte"
 msgid ""
 "This project's CVS repository can be checked out through anonymous (pserver) "
 "CVS with the following instruction set. The module you wish to check out "
-"must be specified as the <em>modulename</em>. When prompted for a password for "
-"<em>anonymous</em>, simply press the Enter key."
+"must be specified as the <em>modulename</em>. When prompted for a password "
+"for <em>anonymous</em>, simply press the Enter key."
 msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:86
@@ -14845,23 +14845,23 @@ msgstr "Fax"
 
 #: www/account/index.php:244 www/account/register.php:245
 msgid ""
-"Receive Email about Site Updates <i>(Very low traffic and includes security "
-"notices. Highly Recommended.)</i>"
+"Receive Email about Site Updates <em>(Very low traffic and includes security "
+"notices. Highly Recommended.)</em>"
 msgstr ""
-"E-mail over site updates ontvangen <i>(Weinig mail, en inclusief "
-"beveiligings aankondigingen. Sterk aanbevolen.)</i>"
+"E-mail over site updates ontvangen <em>(Weinig mail, en inclusief "
+"beveiligings aankondigingen. Sterk aanbevolen.)</em>"
 
 #: www/account/index.php:250 www/account/register.php:251
-msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
-msgstr "Aanvullende community mailings ontvangen. <i>(Weinig mail.)</i>"
+msgid "Receive additional community mailings. <em>(Low traffic.)</em>"
+msgstr "Aanvullende community mailings ontvangen. <em>(Weinig mail.)</em>"
 
 #: www/account/index.php:265
 #, php-format
 msgid ""
-"Participate in peer ratings. <i>(Allows you to rate other users using "
+"Participate in peer ratings. <em>(Allows you to rate other users using "
 "several criteria as well as to be rated by others. More information is "
 "available on your <a href=\"%s\">user page</a> if you have chosen to "
-"participate in ratings.)</i>"
+"participate in ratings.)</em>"
 msgstr ""
 
 #: www/account/index.php:271
@@ -26687,13 +26687,15 @@ msgstr "Mijn persoonlijke pagina"
 #~ msgid "(version %s, saved on %s)"
 #~ msgstr "(versie %s, bewaard op %s)"
 
-#~ msgid "Use your browser's <b>Back</b> button to go back to the edit page."
+#~ msgid ""
+#~ "Use your browser's <strong>Back</strong> button to go back to the edit "
+#~ "page."
 #~ msgstr ""
-#~ "Gebruik de <b>Terug</b> knop van je bladeraar om terug te gaan naar de "
-#~ "verander tekst pagina."
+#~ "Gebruik de <strong>Terug</strong> knop van je bladeraar om terug te gaan "
+#~ "naar de verander tekst pagina."
 
-#~ msgid "Press <b>Save</b> again."
-#~ msgstr "Druk opnieuw op <b>Bewaar</b>."
+#~ msgid "Press <strong>Save</strong> again."
+#~ msgstr "Druk opnieuw op <strong>Bewaar</strong>."
 
 #~ msgid ""
 #~ "PhpWiki is unable to save your changes, because another user edited and "

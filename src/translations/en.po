@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-04 17:41+0100\n"
+"POT-Creation-Date: 2013-11-04 18:05+0100\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -12507,8 +12507,8 @@ msgstr ""
 msgid ""
 "This project's CVS repository can be checked out through anonymous (pserver) "
 "CVS with the following instruction set. The module you wish to check out "
-"must be specified as the <em>modulename</em>. When prompted for a password for "
-"<em>anonymous</em>, simply press the Enter key."
+"must be specified as the <em>modulename</em>. When prompted for a password "
+"for <em>anonymous</em>, simply press the Enter key."
 msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:86
@@ -13574,21 +13574,21 @@ msgstr ""
 
 #: www/account/index.php:244 www/account/register.php:245
 msgid ""
-"Receive Email about Site Updates <i>(Very low traffic and includes security "
-"notices. Highly Recommended.)</i>"
+"Receive Email about Site Updates <em>(Very low traffic and includes security "
+"notices. Highly Recommended.)</em>"
 msgstr ""
 
 #: www/account/index.php:250 www/account/register.php:251
-msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
+msgid "Receive additional community mailings. <em>(Low traffic.)</em>"
 msgstr ""
 
 #: www/account/index.php:265
 #, php-format
 msgid ""
-"Participate in peer ratings. <i>(Allows you to rate other users using "
+"Participate in peer ratings. <em>(Allows you to rate other users using "
 "several criteria as well as to be rated by others. More information is "
 "available on your <a href=\"%s\">user page</a> if you have chosen to "
-"participate in ratings.)</i>"
+"participate in ratings.)</em>"
 msgstr ""
 
 #: www/account/index.php:271

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-04 17:41+0100\n"
+"POT-Creation-Date: 2013-11-04 18:05+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -13341,8 +13341,8 @@ msgstr "Анонимно FTP пространство"
 msgid ""
 "This project's CVS repository can be checked out through anonymous (pserver) "
 "CVS with the following instruction set. The module you wish to check out "
-"must be specified as the <em>modulename</em>. When prompted for a password for "
-"<em>anonymous</em>, simply press the Enter key."
+"must be specified as the <em>modulename</em>. When prompted for a password "
+"for <em>anonymous</em>, simply press the Enter key."
 msgstr ""
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:86
@@ -14475,24 +14475,24 @@ msgstr "Факс:"
 
 #: www/account/index.php:244 www/account/register.php:245
 msgid ""
-"Receive Email about Site Updates <i>(Very low traffic and includes security "
-"notices. Highly Recommended.)</i>"
+"Receive Email about Site Updates <em>(Very low traffic and includes security "
+"notices. Highly Recommended.)</em>"
 msgstr ""
 "Абонамент за новини по електронната поща касаещи нововъведения и промени в "
-"сайта<i> (Генерира малко трафик и включва известия имащи отношение към "
-"сигурността. Силно препоръчително е да се абонирате.)</i>"
+"сайта<em> (Генерира малко трафик и включва известия имащи отношение към "
+"сигурността. Силно препоръчително е да се абонирате.)</em>"
 
 #: www/account/index.php:250 www/account/register.php:251
-msgid "Receive additional community mailings. <i>(Low traffic.)</i>"
+msgid "Receive additional community mailings. <em>(Low traffic.)</em>"
 msgstr "Получаване на допълнителни съобщения от общността."
 
 #: www/account/index.php:265
 #, php-format
 msgid ""
-"Participate in peer ratings. <i>(Allows you to rate other users using "
+"Participate in peer ratings. <em>(Allows you to rate other users using "
 "several criteria as well as to be rated by others. More information is "
 "available on your <a href=\"%s\">user page</a> if you have chosen to "
-"participate in ratings.)</i>"
+"participate in ratings.)</em>"
 msgstr ""
 
 #: www/account/index.php:271
@@ -18460,7 +18460,7 @@ msgstr "Новината е добавена."
 #: www/news/submit.php:115
 #, fuzzy
 msgid "Error: both subject and body are required."
-msgstr "Грешка - и двете полета <i>тема</i> и <i>тяло</i> са задължителни"
+msgstr "Грешка - и двете полета <em>тема</em> и <em>тяло</em> са задължителни"
 
 #: www/news/submit.php:131
 #, fuzzy
@@ -22928,7 +22928,8 @@ msgstr "Лична Информация"
 #~ msgstr "Само администраторите на проект могат да създават новини за него"
 
 #~ msgid "Error: both subject and body are required"
-#~ msgstr "Грешка - и двете полета <i>тема</i> и <i>тяло</i> са задължителни"
+#~ msgstr ""
+#~ "Грешка - и двете полета <em>тема</em> и <em>тяло</em> са задължителни"
 
 #, fuzzy
 #~ msgid "Error: "
@@ -23172,7 +23173,8 @@ msgstr "Лична Информация"
 #~ msgstr "Грешка при добавянето"
 
 #~ msgid "ERROR - both subject and body are required"
-#~ msgstr "Грешка - и двете полета <i>тема</i> и <i>тяло</i> са задължителни"
+#~ msgstr ""
+#~ "Грешка - и двете полета <em>тема</em> и <em>тяло</em> са задължителни"
 
 #, fuzzy
 #~ msgid "Survey Title: "
@@ -24009,7 +24011,7 @@ msgstr "Лична Информация"
 #~ msgstr "ДАТА"
 
 #~ msgid "Short Description:&nbsp;"
-#~ msgstr "<b>Кратко описание на проекта:</b>&nbsp;"
+#~ msgstr "<strong>Кратко описание на проекта:</strong>&nbsp;"
 
 #~ msgid "Homepage Link:&nbsp;"
 #~ msgstr "Сайт на проекта:&nbsp;"
@@ -24093,7 +24095,7 @@ msgstr "Лична Информация"
 #~ msgstr "Не е избрана папка"
 
 #~ msgid "Short Description:"
-#~ msgstr "<b>Кратко описание на проекта:</b>&nbsp;"
+#~ msgstr "<strong>Кратко описание на проекта:</strong>&nbsp;"
 
 #~ msgid "Homepage Link:"
 #~ msgstr "Сайт на проекта:"

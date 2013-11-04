@@ -242,13 +242,13 @@ if($toDisplay != "") {
     <label for="mail_site">
         <input id="mail_site" type="checkbox" name="mail_site" value="1" checked="checked"/>
     </label>
-    <?php echo _('Receive Email about Site Updates <i>(Very low traffic and includes security notices. Highly Recommended.)</i>'); ?>
+    <?php echo _('Receive Email about Site Updates <em>(Very low traffic and includes security notices. Highly Recommended.)</em>'); ?>
 </p>
 <p>
     <label for="mail_va">
         <input id="mail_va" type="checkbox" name="mail_va" value="1"/>
     </label>
-    <?php echo _('Receive additional community mailings. <i>(Low traffic.)</i>'); ?>
+    <?php echo _('Receive additional community mailings. <em>(Low traffic.)</em>'); ?>
 </p>
 <?php if (forge_get_config('user_registration_accept_conditions')) { ?>
 	<p>
