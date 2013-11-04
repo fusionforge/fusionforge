@@ -21054,15 +21054,15 @@ msgid ""
 "description will not be used as a public description of your project. It "
 "must be written in English. From 10 to 1500 characters."
 msgstr ""
-"<h3>2. 專案目的與摘要</h3><p><strong></strong><p><strong> 請提供您所申請專案"
+"請提供您所申請專案"
 "詳細與準確的說明，以及您計劃以何種方式利用 %1$s 的資源。這份說明將是您的專案"
 "在 %1$s 是否能註冊的依據，進而確保您能以預期的方式使用敝站提供的服務。同時這"
-"份說明將不會作為您專案的公開說明。</strong>"
+"份說明將不會作為您專案的公開說明。"
 
 #: www/register/index.php:204 www/register/index.php:209
 #, fuzzy
 msgid "Project Public Description"
-msgstr "專案期間"
+msgstr "專案目的與摘要"
 
 #: www/register/index.php:206
 #, fuzzy

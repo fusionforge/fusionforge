@@ -20972,16 +20972,16 @@ msgid ""
 "description will not be used as a public description of your project. It "
 "must be written in English. From 10 to 1500 characters."
 msgstr ""
-"<h3>2. 프로젝트 목적과 요약</h3><p><strong></strong><p><strong>프로젝트에 대"
+"프로젝트에 대"
 "한 자세하고 정확한 설명과 어떠한 %1$s 기능을 사용할 예정인지 적어주십시오. "
 "이 설명은 %1$s에서 프로젝트 공간의 제공 여부를 결정하는 기초 자료이며, 의도"
 "한 대로 서비스를 사용하기 위한 보증입니다. 이 설명은 프로젝트의 공개 설명이 "
-"아닙니다.</strong></p>"
+"아닙니다."
 
 #: www/register/index.php:204 www/register/index.php:209
 #, fuzzy
 msgid "Project Public Description"
-msgstr "Project lifespan"
+msgstr "프로젝트 목적과 요약"
 
 #: www/register/index.php:206
 #, fuzzy

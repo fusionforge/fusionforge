@@ -20783,7 +20783,7 @@ msgid "Project Purpose And Summarization"
 msgstr "Propósito y resumen del proyecto"
 
 #: www/register/index.php:196
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Please provide detailed, accurate description of your project and what %1$s "
 "resources and in which way you plan to use. This description will be the "
@@ -20792,12 +20792,11 @@ msgid ""
 "description will not be used as a public description of your project. It "
 "must be written in English. From 10 to 1500 characters."
 msgstr ""
-"<h3>2. Descripción Pública del Proyecto</h3><p><strong></strong><p><strong> "
 "Por favor, proporcione una descripción detallada y precisa de su proyecto y "
 "que recursos de %1$s piensa utilizar. Esta descripción es básica para "
 "aprobar o rechazar la aprobación de su proyecto en %1$s,y después, para "
 "habilitar el uso de los servicios solicitados. Esta descripción no se "
-"utiliza como descripción pública de su proyecto.</strong>"
+"utiliza como descripción pública de su proyecto."
 
 #: www/register/index.php:204 www/register/index.php:209
 msgid "Project Public Description"

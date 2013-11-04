@@ -20608,7 +20608,7 @@ msgid "Project Purpose And Summarization"
 msgstr "Résumé des buts du projet"
 
 #: www/register/index.php:196
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Please provide detailed, accurate description of your project and what %1$s "
 "resources and in which way you plan to use. This description will be the "
@@ -20623,19 +20623,19 @@ msgstr ""
 "sur cette description, comme plus tard son maintien, conditionné par l'usage "
 "approprié des services. Cette description ne sera pas utilisée comme "
 "description publique de votre projet. Elle doit être rédigée en anglais."
+"Entre 10 et 1500 caractères."
 
 #: www/register/index.php:204 www/register/index.php:209
 msgid "Project Public Description"
 msgstr "Description publique du projet"
 
 #: www/register/index.php:206
-#, fuzzy
 msgid ""
 "This is the description of your project which will be shown on the Project "
 "Summary page, in search results, etc. (at least 10 characters)"
 msgstr ""
-"C'est la description de votre projet qui apparaîtra sur la page 'résumé du "
-"projet', dans les résultats des recherches, etc."
+"C'est la description de votre projet qui apparaîtra sur la page « Résumé du "
+"projet », dans les résultats des recherches, etc. (au moins 10 caractères)."
 
 #: www/register/index.php:214
 msgid ""

@@ -20626,7 +20626,7 @@ msgid "Project Purpose And Summarization"
 msgstr ""
 
 #: www/register/index.php:196
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Please provide detailed, accurate description of your project and what %1$s "
 "resources and in which way you plan to use. This description will be the "
@@ -20635,7 +20635,7 @@ msgid ""
 "description will not be used as a public description of your project. It "
 "must be written in English. From 10 to 1500 characters."
 msgstr ""
-"<h5>2. Описание на проекта</h5><p>Тук трябва да опишете какво точно "
+"Тук трябва да опишете какво точно "
 "представлява Вашият проект (идеи, цели, задачи). Това описание ще бъде "
 "предоставено на администраторите на %1$s и няма да е достъпно за други "
 "потребители."

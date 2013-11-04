@@ -21083,7 +21083,7 @@ msgid "Project Purpose And Summarization"
 msgstr "Proiektuen datu baseen administrazioa"
 
 #: www/register/index.php:196
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Please provide detailed, accurate description of your project and what %1$s "
 "resources and in which way you plan to use. This description will be the "
@@ -21092,17 +21092,15 @@ msgid ""
 "description will not be used as a public description of your project. It "
 "must be written in English. From 10 to 1500 characters."
 msgstr ""
-"<h3>2. Proiektuaren deskribapen publikoa</h3><p><strong></strong><p><strong> "
 "Mesedez, zure proiektuaren deskribapen zehatza idatzi eta zein %1$s "
 "baliabide erabili nahi dituzun. Deskribapen hau erabakiorra da zure "
 "proiektuari ostatu emateko %1$s -ean, eta ondoren eskatutako zerbitzuak jaso "
 "ahal izateko. Deskribapen hau ez da deskripzio publikoa bezela erabiliko. "
-"Aholkatzen da inglesez idaztea.</strong>"
+"Aholkatzen da inglesez idaztea."
 
 #: www/register/index.php:204 www/register/index.php:209
-#, fuzzy
 msgid "Project Public Description"
-msgstr "Proiektuaren ibilbidea"
+msgstr "Proiektuaren deskribapen publikoa"
 
 #: www/register/index.php:206
 #, fuzzy

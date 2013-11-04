@@ -21527,7 +21527,7 @@ msgid "Project Purpose And Summarization"
 msgstr "Администрирование баз данных проекта"
 
 #: www/register/index.php:196
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Please provide detailed, accurate description of your project and what %1$s "
 "resources and in which way you plan to use. This description will be the "
@@ -21544,9 +21544,8 @@ msgstr ""
 "описание будет отображатся в списке проектов сайта."
 
 #: www/register/index.php:204 www/register/index.php:209
-#, fuzzy
 msgid "Project Public Description"
-msgstr "Диапазон проекта"
+msgstr "Публичное описание проекта"
 
 #: www/register/index.php:206
 #, fuzzy
@@ -21554,7 +21553,7 @@ msgid ""
 "This is the description of your project which will be shown on the Project "
 "Summary page, in search results, etc. (at least 10 characters)"
 msgstr ""
-"<h3>4. Публичное описание проекта</h3><p>Это описание проекта будет "
+"Это описание проекта будет "
 "отображаться на странице с резюме проекта, в результатах поиска, и т.д.. "
 "Максимальная длина 255 символов."
 

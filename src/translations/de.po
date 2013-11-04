@@ -21419,7 +21419,7 @@ msgid "Project Purpose And Summarization"
 msgstr "Projekt-Datenbank Administration"
 
 #: www/register/index.php:196
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Please provide detailed, accurate description of your project and what %1$s "
 "resources and in which way you plan to use. This description will be the "

@@ -21206,12 +21206,11 @@ msgid ""
 msgstr ""
 
 #: www/register/index.php:194 www/register/index.php:198
-#, fuzzy
 msgid "Project Purpose And Summarization"
-msgstr "Amministrazione database per i progetti"
+msgstr ""
 
 #: www/register/index.php:196
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Please provide detailed, accurate description of your project and what %1$s "
 "resources and in which way you plan to use. This description will be the "
@@ -21232,7 +21231,6 @@ msgid "Project Public Description"
 msgstr "Durata del progetto"
 
 #: www/register/index.php:206
-#, fuzzy
 msgid ""
 "This is the description of your project which will be shown on the Project "
 "Summary page, in search results, etc. (at least 10 characters)"

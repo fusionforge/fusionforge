@@ -21026,15 +21026,15 @@ msgid ""
 "description will not be used as a public description of your project. It "
 "must be written in English. From 10 to 1500 characters."
 msgstr ""
-"<h3>2. 项目目的与摘要</h3><p><strong></strong><p><strong> 请提供您所申请项目"
+"请提供您所申请项目"
 "详细与准确的说明，以及您计划以何种方式利用 %1$s 的资源。这份说明将是您的项目"
 "在 %1$s 是否能注册的依据，进而确保您能以预期的方式使用敝站提供的服务。同时这"
-"份说明将不会作为您项目的公开说明。</strong>"
+"份说明将不会作为您项目的公开说明。"
 
 #: www/register/index.php:204 www/register/index.php:209
 #, fuzzy
 msgid "Project Public Description"
-msgstr "项目期间"
+msgstr "项目目的与摘要"
 
 #: www/register/index.php:206
 #, fuzzy
@@ -21042,7 +21042,7 @@ msgid ""
 "This is the description of your project which will be shown on the Project "
 "Summary page, in search results, etc. (at least 10 characters)"
 msgstr ""
-"<h3>4. 项目公开说明</h3><p>这个说明会出现在项目首页、搜索结果等，这不需要像是"
+"这个说明会出现在项目首页、搜索结果等，这不需要像是"
 "第二个步骤时提供那么详细的信息，所以用您熟悉的方式去描述即可，最多255字节。"
 
 #: www/register/index.php:214
