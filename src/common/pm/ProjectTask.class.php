@@ -430,7 +430,7 @@ class ProjectTask extends Error {
 	/**
 	 *	getRelatedArtifacts - Return a result set of artifacts which are related to this task.
 	 *
-	 *	@return Database result set.
+	 *	@return resource	Database result set.
 	 */
 	function getRelatedArtifacts() {
 		if (!$this->relatedartifacts) {
@@ -579,7 +579,7 @@ class ProjectTask extends Error {
 	 *	getOtherTasks - Return a result set of tasks in this subproject that do not equal
 	 *	the current task_id.
 	 *
-	 *	@return Database result set.
+	 *	@return resource	Database result set.
 	 */
 	function getOtherTasks () {
 		//
@@ -605,7 +605,7 @@ class ProjectTask extends Error {
 	/**
 	 *  getHistory - returns a result set of audit trail for this ProjectTask.
 	 *
-	 *  @return database result set.
+	 *  @return resource	database result set.
 	 */
 	function getHistory() {
 		return db_query_params ('SELECT *
@@ -619,7 +619,7 @@ class ProjectTask extends Error {
 	 *  getMessages - get the list of messages attached to this ProjectTask.
 	 *
 	 * @param bool $asc
-	 * @return database result set.
+	 * @return resource	database result set.
 	 */
 	function getMessages($asc=false) {
 		return db_query_params ('SELECT *
@@ -838,7 +838,7 @@ class ProjectTask extends Error {
 				$this->dependon[db_result($res,$i,'is_dependent_on_task_id')] = db_result($res,$i,'link_type');
 			}
 		}
-		/* fix bug 319: if dependentlist is emtpy, set it to 100 (none) */
+		/* fix bug 319: if dependent list is empty, set it to 100 (none) */
 		if (!$this->dependon) {
 			$this->dependon[100]=PM_LINK_DEFAULT;
 		}

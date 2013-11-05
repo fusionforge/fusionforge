@@ -612,8 +612,8 @@ class Forum extends Error {
 	/**
 	 * delete - delete this forum and all its related data.
 	 *
-	 * @param	bool	I'm Sure.
-	 * @param	bool	I'm REALLY sure.
+	 * @param	bool	$sure		I'm Sure.
+	 * @param	bool	$really_sure	I'm REALLY sure.
 	 * @return	bool	true/false;
 	 */
 	function delete($sure, $really_sure) {

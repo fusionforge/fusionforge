@@ -695,7 +695,7 @@ class Artifact extends Error {
 	 *
 	 * @param    int    $msg_id id of the message.
 	 * @access public
-	 * @return database result set.
+	 * @return resource	database result set.
 	 */
 	function getMessage($msg_id) {
 		if (!$msg_id) {

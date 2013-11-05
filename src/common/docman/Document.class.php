@@ -1063,8 +1063,8 @@ class Document extends Error {
 	/**
 	 * setValueinDB - private function to update columns in db
 	 *
-	 * @param	string	the column to update
-	 * @param	int	the value to store
+	 * @param	string	$column	the column to update
+	 * @param	int		$value	the value to store
 	 * @return	boolean	success or not
 	 * @access	private
 	 */

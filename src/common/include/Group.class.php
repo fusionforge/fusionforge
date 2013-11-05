@@ -945,7 +945,7 @@ class Group extends Error {
 	/**
 	 * setSCMBox - the hostname of the scm box where this project is located.
 	 *
-	 * @param	string	The name of the new SCM_BOX
+	 * @param	string	$scm_box	The name of the new SCM_BOX
 	 * @return bool
 	 */
 	function setSCMBox($scm_box) {
@@ -1123,7 +1123,7 @@ class Group extends Error {
 	/**
 	 *	setUseMail - Set the mailing-list usage
 	 *
-	 *	@param	boolean	enabled/disabled
+	 *	@param	boolean	$booleanparam	enabled/disabled
 	 * @return bool
 	 */
 	function setUseMail($booleanparam) {
@@ -1183,7 +1183,7 @@ class Group extends Error {
 	/**
 	 *	setUseForum - Set the forum usage
 	 *
-	 *	@param	boolean	enabled/disabled
+	 *	@param	boolean	$booleanparam	enabled/disabled
 	 * @return bool
 	 */
 	function setUseForum($booleanparam) {
@@ -1226,7 +1226,7 @@ class Group extends Error {
 	/**
 	 *	setUseFRS - Set the FRS usage
 	 *
-	 *	@param	boolean	enabled/disabled
+	 *	@param	boolean	$booleanparam	enabled/disabled
 	 * @return bool
 	 */
 	function setUseFRS($booleanparam) {
@@ -1260,7 +1260,7 @@ class Group extends Error {
 	/**
 	 *	setUseTracker - Set the tracker usage
 	 *
-	 *	@param	boolean	enabled/disabled
+	 *	@param	boolean	$booleanparam	enabled/disabled
 	 * @return bool
 	 */
 	function setUseTracker ($booleanparam) {
@@ -1307,7 +1307,7 @@ class Group extends Error {
 	/**
 	 *	setUseDocman - Set the docman usage
 	 *
-	 *	@param	boolean	enabled/disabled
+	 *	@param	boolean	$booleanparam	enabled/disabled
 	 * @return bool
 	 */
 	function setUseDocman($booleanparam) {
@@ -1404,7 +1404,7 @@ class Group extends Error {
 	/**
 	 *	setUsePM - Set the PM usage
 	 *
-	 *	@param	boolean	enabled/disabled
+	 *	@param	boolean	$booleanparam	enabled/disabled
 	 * @return bool
 	 */
 	function setUsePM($booleanparam) {
@@ -1484,8 +1484,8 @@ class Group extends Error {
 	/**
 	 * setPluginUse - enables/disables plugins for the group
 	 *
-	 * @param	string	name of the plugin
-	 * @param	boolean	the new state
+	 * @param	string	$pluginname	name of the plugin
+	 * @param	boolean	$val		the new state
 	 * @return	string	database result
 	 */
 	function setPluginUse($pluginname, $val=true) {
@@ -1947,12 +1947,12 @@ class Group extends Error {
 	/**
 	 * addUser - controls adding a user to a group.
 	 *
-	 * @param	string	Unix name of the user to add OR integer user_id.
-	 * @param	int	The role_id this user should have.
+	 * @param	string	$user_identifier	Unix name of the user to add OR integer user_id.
+	 * @param	int		$role_id		The role_id this user should have.
 	 * @return	boolean	success.
 	 * @access	public
 	 */
-	function addUser($user_identifier,$role_id) {
+	function addUser($user_identifier, $role_id) {
 		global $SYS;
 		/*
 			Admins can add users to groups
@@ -2042,7 +2042,7 @@ class Group extends Error {
 	 *
 	 * Users can remove themselves.
 	 *
-	 * @param	int	The ID of the user to remove.
+	 * @param	int	$user_id	The ID of the user to remove.
 	 * @return	boolean	success.
 	 */
 	function removeUser($user_id) {
@@ -2152,11 +2152,11 @@ class Group extends Error {
 	/**
 	 * updateUser - controls updating a user's role in this group.
 	 *
-	 * @param	int	The ID of the user.
-	 * @param	int	The role_id to set this user to.
+	 * @param	int	$user_id	The ID of the user.
+	 * @param	int	$role_id	The role_id to set this user to.
 	 * @return	boolean	success.
 	 */
-	function updateUser($user_id,$role_id) {
+	function updateUser($user_id, $role_id) {
 
 		if (!forge_check_perm ('project_admin', $this->getID())) {
 			$this->setPermissionDeniedError();
@@ -2199,9 +2199,9 @@ class Group extends Error {
 	/**
 	 * addHistory - Makes an audit trail entry for this project.
 	 *
-	 * @param	string	The name of the field.
-	 * @param	string	The Old Value for this $field_name.
-	 * @return database result handle.
+	 * @param	string	$field_name		The name of the field.
+	 * @param	string	$old_value		The Old Value for this $field_name.
+	 * @return 	resource				database result handle.
 	 * @access public
 	 */
 	function addHistory($field_name, $old_value) {
@@ -2272,7 +2272,7 @@ class Group extends Error {
 	/**
 	 *	approve - Approve pending project.
 	 *
-	 *	@param	User	$user The User object who is doing the updating.
+	 *	@param	$user The User object who is doing the updating.
 	 *	@return bool
 	 *	@access public
 	 */
@@ -2602,9 +2602,9 @@ if there is anything we can do to help you.
 	 * This function sends out a rejection message to a user who
 	 * registered a project.
 	 *
-	 * @param	int	The id of the response to use.
-	 * @param	string	The rejection message.
-	 * @return	boolean	completion status.
+	 * @param	int		$response_id	The id of the response to use.
+	 * @param	string	$message		The rejection message.
+	 * @return	bool	completion status.
 	 * @access	public
 	 */
 	function sendRejectionEmail($response_id, $message="zxcv") {
@@ -2622,8 +2622,8 @@ if there is anything we can do to help you.
 			setup_gettext_for_user($admin);
 
 			$response = sprintf(_('Your project registration for %s has been denied.'), forge_get_config('forge_name')) . "\n\n"
-					. _('Project Full Name')._(': ').   $this->getPublicName() . "\n"
-					. _('Project Unix Name')._(': ').  $this->getUnixName() . "\n\n"
+					. _('Project Full Name')._(': '). $this->getPublicName() . "\n"
+					. _('Project Unix Name')._(': '). $this->getUnixName() . "\n\n"
 					. _('Reasons for negative decision')._(': ') . "\n\n";
 
 			// Check to see if they want to send a custom rejection response
@@ -2942,7 +2942,7 @@ The %1$s admin team will now examine your project submission.  You will be notif
 /**
  * group_getname() - get the group name
  *
- * @param	   int	 The group ID
+ * @param	   int	 $group_id	The group ID
  * @return string
  * @deprecated
  *
@@ -2959,7 +2959,7 @@ function group_getname ($group_id = 0) {
 /**
  * group_getunixname() - get the unixname for a group
  *
- * @param	   int	 The group ID
+ * @param	   int	 $group_id	The group ID
  * @return string
  * @deprecated
  *
@@ -2976,7 +2976,7 @@ function group_getunixname ($group_id) {
 /**
  * group_get_result() - Get the group object result ID.
  *
- * @param	   int	 The group ID
+ * @param	   int	 $group_id	The group ID
  * @return int
  * @deprecated
  *
