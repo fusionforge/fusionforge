@@ -848,7 +848,7 @@ class ProjectTask extends Error {
 	/**
 	 * setAssignedTo - takes an array of user_id's and builds assignments.
 	 *
-	 * @param	array	The array of user_id's.
+	 * @param	array	$arr	The array of user_id's.
 	 * @return	boolean	success.
 	 */
 	function setAssignedTo(&$arr) {
@@ -907,25 +907,25 @@ class ProjectTask extends Error {
 	/**
 	 *	update - update this ProjectTask in the database.
 	 *
-	 *	@param	string	The summary of this task.
-	 *	@param	string	The detailed description of this task.
-	 *	@param	int	The Priority of this task.
-	 *	@param	int	The Hours estimated to complete this task.
-	 *	@param	int	The (unix) start date of this task.
-	 *	@param	int	The (unix) end date of this task.
-	 *	@param	int	The status_id of this task.
-	 *	@param	int	The category_id of this task.
-	 *	@param	int	The percentage of completion in integer format of this task.
-	 *	@param	array	An array of user_id's that are assigned this task.
-	 *	@param	array	An array of project_task_id's that this task depends on.
-	 *	@param	int	The GroupProjectID of a new subproject that you want to move this Task to.
-	 *	@param	int	The duration of the task in days.
-	 *	@param	int	The id of the parent task, if any.
-	 *	@return	boolean success.
+	 *	@param	string	$summary				The summary of this task.
+	 *	@param	string	$details				The detailed description of this task.
+	 *	@param	int		$priority				The Priority of this task.
+	 *	@param	int		$hours					The Hours estimated to complete this task.
+	 *	@param	int		$start_date				The (Unix) start date of this task.
+	 *	@param	int		$end_date				The (Unix) end date of this task.
+	 *	@param	int		$status_id				The status_id of this task.
+	 *	@param	int		$category_id			The category_id of this task.
+	 *	@param	int		$percent_complete		The percentage of completion in integer format of this task.
+	 *	@param	array	$assigned_arr			An array of user_id's that are assigned this task.
+	 *	@param	array	$depend_arr				An array of project_task_id's that this task depends on.
+	 *	@param	int		$new_group_project_id	The GroupProjectID of a new subproject that you want to move this Task to.
+	 *	@param	int		$duration				The duration of the task in days.
+	 *	@param	int		$parent_id				The id of the parent task, if any.
+	 *	@return	bool	success.
 	 */
-	function update($summary,$details,$priority,$hours,$start_date,$end_date,
-		$status_id,$category_id,$percent_complete,&$assigned_arr,&$depend_arr,
-		$new_group_project_id,$duration=0,$parent_id=0) {
+	function update($summary, $details, $priority, $hours, $start_date, $end_date,
+		$status_id, $category_id, $percent_complete, &$assigned_arr, &$depend_arr,
+		$new_group_project_id, $duration=0, $parent_id=0) {
 		$has_changes = false; // if any of the values passed is different from
 
 		$arrChangedAndInNotice = array(

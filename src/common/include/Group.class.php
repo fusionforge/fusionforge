@@ -291,13 +291,13 @@ class Group extends Error {
 	 * @param	object	$user			The User object.
 	 * @param	string	$group_name		The full name of the user.
 	 * @param	string	$unix_name		The Unix name of the user.
-	 * @param	string	$description		The new group description.
+	 * @param	string	$description	The new group description.
 	 * @param	string	$purpose		The purpose of the group.
 	 * @param	string	$unix_box
 	 * @param	string	$scm_box
 	 * @param	bool	$is_public
 	 * @param	bool	$send_mail		Whether to send an email or not
-	 * @param	int	$built_from_template	The id of the project this new project is based on
+	 * @param	int		$built_from_template	The id of the project this new project is based on
 	 * @return	boolean	success or not
 	 */
 	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box = 'shell1',
@@ -713,8 +713,8 @@ class Group extends Error {
 	 *   I: Incomplete
 	 *   D: Deleted
 	 *
-	 * @param	object	User requesting operation (for access control).
-	 * @param	string	Status value.
+	 * @param	object	$user	User requesting operation (for access control).
+	 * @param	string	$status	Status value.
 	 * @return	boolean	success.
 	 * @access	public
 	 */
@@ -844,7 +844,7 @@ class Group extends Error {
 	/**
 	 *	setAsTemplate - Set the template status of a project
 	 *
-	 *	@param	boolean	is_template.
+	 *	@param	boolean	$booleanparam	is_template.
 	 * @return bool
 	 */
 	function setAsTemplate($booleanparam) {

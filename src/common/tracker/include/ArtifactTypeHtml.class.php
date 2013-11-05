@@ -156,7 +156,12 @@ class ArtifactTypeHtml extends ArtifactType {
 	 * @param bool   $status_show_100
 	 * @param string $mode
 	 */
-	function renderExtraFields($selected=array(),$show_100=false,$text_100='none',$show_any=false,$text_any='Any',$types=array(),$status_show_100=false,$mode='') {
+	function renderExtraFields($selected=array(),
+                               $show_100=false,$text_100='none',
+                               $show_any=false,$text_any='Any',
+                               $types=array(),
+                               $status_show_100=false,
+                               $mode='') {
 		$efarr = $this->getExtraFields($types);
 		//each two columns, we'll reset this and start a new row
 
@@ -257,7 +262,7 @@ class ArtifactTypeHtml extends ArtifactType {
 
 				$str = $this->renderTextArea($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2']);
 				if ($mode == 'QUERY') {
-					$post_name =  ' <i>'._('(%% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
+					$post_name =  ' <i>'._('(%% for wildcards)').'</i>';
 				}
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {

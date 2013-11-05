@@ -714,7 +714,7 @@ Use one below, but make sure it is entered as the single line.)
 	 *
 	 * Statuses include (A)ctive, (P)ending, (S)uspended ,(D)eleted.
 	 *
-	 * @return    char    This user's status flag.
+	 * @return    string    This user's status flag.
 	 */
 	function getStatus() {
 		return $this->data_array['status'];

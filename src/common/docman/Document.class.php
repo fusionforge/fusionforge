@@ -99,13 +99,13 @@ class Document extends Error {
 	/**
 	 * create - use this function to create a new entry in the database.
 	 *
-	 * @param	string	$filename	The filename of this document. Can be a URL.
-	 * @param	string	$filetype	The filetype of this document. If filename is URL, this should be 'URL';
-	 * @param	string	$data		The absolute path file itself.
-	 * @param	int	$doc_group	The doc_group id of the doc_groups table.
-	 * @param	string	$title		The title of this document.
+	 * @param	string	$filename		The filename of this document. Can be a URL.
+	 * @param	string	$filetype		The filetype of this document. If filename is URL, this should be 'URL';
+	 * @param	string	$data			The absolute path file itself.
+	 * @param	int		$doc_group		The doc_group id of the doc_groups table.
+	 * @param	string	$title			The title of this document.
 	 * @param	string	$description	The description of this document.
-	 * @param	int	$stateid	The state id of the document. At creation, cannot be deleted status.
+	 * @param	int		$stateid		The state id of the document. At creation, cannot be deleted status.
 	 * @return	bool	success.
 	 */
 	function create($filename, $filetype, $data, $doc_group, $title, $description, $stateid = 0) {
@@ -548,9 +548,9 @@ class Document extends Error {
 	/**
 	 * isMonitoredBy - get the monitored status of this document for a specific user id.
 	 *
-	 * @param	string	$userid
-	 * @internal	param	\User $int ID
-	 * @return	boolean	true if monitored by this user
+	 * @param	string $userid
+	 * @internal	param \User $int ID
+	 * @return	boolean    true if monitored by this user
 	 */
 	function isMonitoredBy($userid = 'ALL') {
 		if ( $userid == 'ALL' ) {
@@ -678,8 +678,8 @@ class Document extends Error {
 	/**
 	 * setReservedBy - set the reserved status of the document and the owner
 	 *
-	 * @param	int	The status of the reserved
-	 * @param	int	The ID of the owner : by default : noone
+	 * @param	int	$statusReserved	The status of the reserved
+	 * @param	int	$idReserver		The ID of the owner : by default : noone
 	 * @return	boolean	success
 	 */
 	function setReservedBy($statusReserved, $idReserver = NULL) {
@@ -801,13 +801,13 @@ class Document extends Error {
 	/**
 	 * update - use this function to update an existing entry in the database.
 	 *
-	 * @param	string	The filename of this document. Can be a URL.
-	 * @param	string	The filetype of this document. If filename is URL, this should be 'URL';
-	 * @param	string	The contents of this document.
-	 * @param	int	The doc_group id of the doc_groups table.
-	 * @param	string	The title of this document.
-	 * @param	string	The description of this document.
-	 * @param	int	The state id of the doc_states table.
+	 * @param	string	$filename		The filename of this document. Can be a URL.
+	 * @param	string	$filetype		The filetype of this document. If filename is URL, this should be 'URL';
+	 * @param	string	$data			The contents of this document.
+	 * @param	int		$doc_group		The doc_group id of the doc_groups table.
+	 * @param	string	$title			The title of this document.
+	 * @param	string	$description	The description of this document.
+	 * @param	int		$stateid		The state id of the doc_states table.
 	 * @return	boolean	success.
 	 */
 	function update($filename, $filetype, $data, $doc_group, $title, $description, $stateid) {

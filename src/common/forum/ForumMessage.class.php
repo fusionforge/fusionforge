@@ -154,19 +154,20 @@ class ForumMessage extends Error {
 
 	/**
 	*	insertreleasedmsg - inserts the released message into the main table (forum)
-	 *	@param 	string	The Forum id
-	 *	@param	string	The subject of the message.
-	 *	@param	string	The body of the message.
-	 *	@param	string	The post date
-	 *	@param	int	The thread_id of the message
-	 *	@param	int	The message_id of the parent message, if any.
-	 *	@param 	int	The id of the user that is posting the message
-	 *	@param 	int	has followups?
-	 *	@param 	int	most recent date
-	 *	@return	boolean success.
+	 *	@param 	string	$group_forum_id	The Forum id
+	 *	@param	string	$subject		The subject of the message.
+	 *	@param	string	$body			The body of the message.
+	 *	@param	string	$post_date		The post date
+	 *	@param	int		$thread_id		The thread_id of the message
+	 *	@param	int		$is_followup_to	The message_id of the parent message, if any.
+	 *	@param 	int		$posted_by		The id of the user that is posting the message
+	 *	@param 	int		$has_followups	has followups?
+	 *	@param 	int		$most_recent_date	most recent date
+	 *	@return	bool	success.
 	*/
 
-	function insertreleasedmsg($group_forum_id,$subject, $body,$post_date, $thread_id, $is_followup_to,$posted_by,$has_followups,$most_recent_date) {
+	function insertreleasedmsg($group_forum_id, $subject, $body, $post_date, $thread_id,
+							   $is_followup_to, $posted_by, $has_followups, $most_recent_date) {
 		if ($is_followup_to != 0) {
 
 			//was posted in reply to another thread
@@ -831,7 +832,7 @@ Or reply to this e-mail entering your response between the following markers:
 	/**
 	 *	sendAttachNotice - contains the logic to send out email attachement followups when a message is posted.
 	 *
-	 *	@param int	attach_id	- The id of the file that has been attached
+	 *	@param int	$attach_id	- The id of the file that has been attached
 	 *
 	 *	@return boolean success.
 	 */

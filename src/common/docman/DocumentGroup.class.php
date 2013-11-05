@@ -681,7 +681,7 @@ class DocumentGroup extends Error {
 	/**
 	 * setStateID - set the state id of this document group.
 	 *
-	 * @param	int	State ID.
+	 * @param	int		$stateid	State ID.
 	 * @return	boolean	success or not.
 	 * @access	public
 	 */
@@ -741,7 +741,7 @@ class DocumentGroup extends Error {
 	/**
 	 * injectZip - private method to inject a zip archive tree and files
 	 *
-	 * @param	array	uploaded zip
+	 * @param	array	$uploadedZip	uploaded zip
 	 * @return	boolean	success or not
 	 * @access	private
 	 */
@@ -782,7 +782,7 @@ class DocumentGroup extends Error {
 	/**
 	 * injectContent - private method to inject a directory tree and files
 	 *
-	 * @param	string	the directory to inject
+	 * @param	string	$directory	the directory to inject
 	 * @return	boolean	success or not
 	 * @access	private
 	 */
@@ -844,8 +844,8 @@ class DocumentGroup extends Error {
 	/**
 	 * setValueinDB - private function to update columns in db
 	 *
-	 * @param	string	the column to update
-	 * @param	int	the value to store
+	 * @param	string	$column	the column to update
+	 * @param	int		$value	the value to store
 	 * @return	boolean	success or not
 	 * @access	private
 	 */
