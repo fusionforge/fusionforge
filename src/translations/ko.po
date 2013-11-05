@@ -37,7 +37,7 @@ msgstr "유효하지 않은 프로젝트 이름입니다."
 #: common/account/actions/deletesshkey.php:30
 #, fuzzy
 msgid "SSH Key deleted successfully."
-msgstr "JOB skill deleted successfully"
+msgstr ""
 
 #: common/docman/actions/addfile.php:58 common/docman/actions/addfile.php:65
 #: common/docman/actions/addsubdocgroup.php:48
@@ -134,7 +134,7 @@ msgstr "리포트할 데이터가 없습니다."
 #: common/docman/actions/delfile.php:52
 #, fuzzy
 msgid "deleted successfully."
-msgstr "JOB skill deleted successfully"
+msgstr ""
 
 #: common/docman/actions/editdocgroup.php:101
 #, fuzzy, php-format
@@ -144,7 +144,7 @@ msgstr "문서가 성공적으로 제출되었습니다."
 #: common/docman/actions/editdocgroup.php:103
 #, fuzzy, php-format
 msgid "on project %s"
-msgstr "Projects"
+msgstr ""
 
 #: common/docman/actions/editfile.php:69
 #, fuzzy
@@ -183,7 +183,7 @@ msgstr ""
 #: common/docman/actions/injectzip.php:49
 #, fuzzy
 msgid "Archive injected successfully."
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: common/docman/actions/monitordirectory.php:38
 #: common/docman/Document.class.php:941
@@ -462,11 +462,11 @@ msgstr "데이터베이스의 그룹ID가 그룹 객체와 맞지 않습니다."
 #: common/docman/Document.class.php:113 common/docman/Document.class.php:828
 #: common/pm/ProjectGroup.class.php:144 common/pm/ProjectGroup.class.php:316
 msgid "Title Must Be At Least 5 Characters"
-msgstr "Title Must Be At Least 5 Characters"
+msgstr ""
 
 #: common/docman/Document.class.php:117 common/docman/Document.class.php:833
 msgid "Document Description Must Be At Least 10 Characters"
-msgstr "Document Description Must Be At Least 10 Characters"
+msgstr ""
 
 #: common/docman/Document.class.php:141 common/docman/Document.class.php:149
 #: common/docman/Document.class.php:842
@@ -564,7 +564,7 @@ msgstr "문서 제목"
 #: common/docman/Document.class.php:943
 #, fuzzy
 msgid "Document description"
-msgstr "Description:"
+msgstr ""
 
 #: common/docman/Document.class.php:944
 #: common/docman/DocumentGroup.class.php:725
@@ -607,7 +607,7 @@ msgstr "문서 제목"
 #: common/docman/DocumentGroup.class.php:101
 #, fuzzy
 msgid "Name is required"
-msgstr "ID가 CVS에 예약되어 있습니다."
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:110
 #: common/docman/DocumentGroup.class.php:490
@@ -642,7 +642,7 @@ msgstr "이미 존재하는 유닉스 이름입니다."
 #: common/docman/DocumentGroup.class.php:525
 #, fuzzy, php-format
 msgid "Error: %s"
-msgstr "Error"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:670
 #, fuzzy
@@ -658,12 +658,12 @@ msgstr "새로운 그룹 이름"
 #: common/docman/DocumentGroup.class.php:719
 #, fuzzy
 msgid "Updated folder by"
-msgstr "Update Record:"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:727
 #, fuzzy
 msgid "Updated by"
-msgstr "Updated"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:762
 msgid "Unable to extract ZIP file."
@@ -676,7 +676,7 @@ msgstr ""
 #: common/docman/DocumentGroup.class.php:818
 #, fuzzy
 msgid "(Title must be at least 5 characters.)"
-msgstr "Title Must Be At Least 5 Characters"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:823
 msgid "Injected by ZIP:"
@@ -685,7 +685,7 @@ msgstr ""
 #: common/docman/DocumentGroup.class.php:832
 #, fuzzy
 msgid "Unknown item."
-msgstr "Unix Account Status"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:839
 msgid "Unable to open folder for injecting into tree"
@@ -768,7 +768,7 @@ msgstr ""
 #: www/tracker/roadmap.php:238 www/trove/TroveCategory.class.php:71
 #: www/trove/TroveCategory.class.php:97 www/trove/TroveCategory.class.php:109
 msgid "Error"
-msgstr "Error"
+msgstr ""
 
 #: common/docman/include/webdav.php:222 common/docman/include/webdav.php:233
 #: common/docman/include/webdav.php:295
@@ -891,7 +891,7 @@ msgstr ""
 #: common/docman/views/addfile.php:121
 #, fuzzy
 msgid "Already-uploaded file"
-msgstr "Thread View"
+msgstr ""
 
 #: common/docman/views/addfile.php:124
 #, fuzzy
@@ -923,7 +923,7 @@ msgstr ""
 #: common/docman/views/addfile.php:158
 #, fuzzy, php-format
 msgid "You need first to upload file in %s"
-msgstr "You need to be logged in"
+msgstr ""
 
 #: common/docman/views/addfile.php:165 common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:129
@@ -1160,7 +1160,7 @@ msgstr "문서에 내용이 없습니다."
 #: common/docman/views/listfile.php:178
 #, fuzzy
 msgid "Permanently delete this folder"
-msgstr "Related Tracker Items"
+msgstr ""
 
 #: common/docman/views/listfile.php:183
 #, fuzzy
@@ -1226,14 +1226,14 @@ msgstr "제목"
 #: www/snippet/detail.php:66 www/snippet/detail.php:155
 #: www/snippet/snippet_utils.php:157
 msgid "Author"
-msgstr "Author"
+msgstr ""
 
 #: common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
 #, fuzzy
 msgid "Last time"
-msgstr "Updated"
+msgstr ""
 
 #: common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:129
@@ -1298,7 +1298,7 @@ msgstr "보기"
 #: www/account/editsshkeys.php:51
 #, fuzzy
 msgid "Actions"
-msgstr "Auctions"
+msgstr ""
 
 #: common/docman/views/listfile.php:231 common/docman/views/listfile.php:236
 #: common/docman/views/listtrashfile.php:137
@@ -1386,7 +1386,7 @@ msgstr ""
 #: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:323
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
-msgstr "Y-m-d H:i"
+msgstr ""
 
 #: common/docman/views/listfile.php:277 common/docman/views/listfile.php:279
 #, fuzzy
@@ -1840,7 +1840,7 @@ msgstr ""
 #: common/docman/views/reporting.php:144 www/frs/reporting/downloads.php:172
 #: www/stats/site_stats_utils.php:411
 msgid "Month"
-msgstr "Month"
+msgstr ""
 
 #: common/docman/views/reporting.php:150 common/reporting/report_utils.php:148
 #: common/reporting/report_utils.php:191 common/reporting/report_utils.php:671
@@ -1970,7 +1970,7 @@ msgstr ""
 #: www/forum/admin/monitor.php:41
 #, fuzzy
 msgid "Could Not Get Forum Object"
-msgstr "Could Not Update Parent"
+msgstr ""
 
 #: common/forum/AttachManager.class.php:150
 #: common/forum/ForumAdmin.class.php:69 common/forum/ForumAdmin.class.php:334
@@ -2084,7 +2084,7 @@ msgstr ""
 #: common/forum/ForumAdmin.class.php:61 www/forum/admin/index.php:363
 #, fuzzy
 msgid "Move Thread"
-msgstr "Thread View"
+msgstr ""
 
 #: common/forum/ForumAdmin.class.php:84 www/forum/admin/index.php:104
 #, fuzzy
@@ -2154,7 +2154,7 @@ msgstr "메시지"
 #: common/forum/ForumAdmin.class.php:333
 #, fuzzy
 msgid "No action"
-msgstr "Action"
+msgstr ""
 
 #: common/forum/ForumAdmin.class.php:335
 #: plugins/mantisbt/controler/filter_roadmap.php:60
@@ -2247,7 +2247,7 @@ msgstr "게시판 설명은 10글자 이상이어야 합니다."
 #: common/forum/Forum.class.php:562 common/forum/Forum.class.php:564
 #, fuzzy
 msgid "Illegal characters in Forum name."
-msgstr "ID에 사용할 수 없는 문자를 입력하셨습니다."
+msgstr ""
 
 #: common/forum/Forum.class.php:181 common/forum/Forum.class.php:562
 msgid "No space allowed."
@@ -2332,7 +2332,7 @@ msgstr "설문 조사를 찾을 수 없습니다."
 #: common/forum/ForumFactory.class.php:192
 #, fuzzy
 msgid "Thread not found"
-msgstr "Thread View"
+msgstr ""
 
 #: common/forum/ForumHTML.class.php:68 www/export/rssAboTask.php:171
 #, fuzzy
@@ -2413,7 +2413,7 @@ msgstr ""
 #: www/pm/include/ProjectTaskHTML.class.php:203
 #: www/project/admin/project_admin_utils.php:162
 msgid "By"
-msgstr "By"
+msgstr ""
 
 #: common/forum/ForumHTML.class.php:266
 #: plugins/forumml/www/forumml_utils.php:558 www/forum/message.php:123
@@ -2518,12 +2518,12 @@ msgstr "%1$s 로그인 %2$s 하시면 글을 올릴 수 있습니다."
 
 #: common/forum/ForumMessage.class.php:88
 msgid "Group_forum_id in db result does not match Forum Object"
-msgstr "Group_forum_id in db result does not match Forum Object"
+msgstr ""
 
 #: common/forum/ForumMessage.class.php:113
 #: common/forum/ForumMessage.class.php:262
 msgid "Getting next thread_id failed"
-msgstr "Getting next thread_id failed"
+msgstr ""
 
 #: common/forum/ForumMessage.class.php:130
 #: common/forum/ForumMessage.class.php:214
@@ -2543,13 +2543,13 @@ msgstr ""
 #: common/forum/ForumMessage.class.php:287
 #: common/forum/ForumMessage.class.php:299
 msgid "Could Not Update Parent"
-msgstr "Could Not Update Parent"
+msgstr ""
 
 #: common/forum/ForumMessage.class.php:356
 #: common/forum/ForumMessage.class.php:800
 #, fuzzy
 msgid "Error: a forum message must include a message body and a subject."
-msgstr "Must Include A Message Body And Subject"
+msgstr ""
 
 #: common/forum/ForumMessage.class.php:372
 #, fuzzy
@@ -2602,7 +2602,7 @@ msgstr "글이 없습니다."
 #: common/forum/ForumMessageFactory.class.php:58
 #, fuzzy
 msgid "Invalid group_form_id"
-msgstr "Unix Group Name:"
+msgstr ""
 
 #: common/frs/FRSFile.class.php:82 common/frs/FRSFile.class.php:398
 msgid "Invalid FRS Release Object"
@@ -2633,7 +2633,7 @@ msgstr "파일을 영구 저장 공간으로 옮길 수 없습니다."
 #: common/frs/FRSFile.class.php:206 common/frs/FRSRelease.class.php:158
 #, fuzzy
 msgid "Error Adding Release: "
-msgstr "Error Adding Database"
+msgstr ""
 
 #: common/frs/FRSFile.class.php:232
 #, fuzzy
@@ -2673,7 +2673,7 @@ msgstr "사용자 ID가 이미 존재합니다."
 #: common/frs/FRSPackage.class.php:165
 #, fuzzy
 msgid "Error Adding Package: "
-msgstr "Error Adding Database"
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:205
 #, fuzzy
@@ -2831,7 +2831,7 @@ msgstr "파일을 선택하셔야 합니다."
 #: www/frs/admin/editrelease.php:198
 #, fuzzy
 msgid "Could Not Get FRSFile"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: common/import/import_users.php:402
 #, fuzzy, php-format
@@ -2862,7 +2862,7 @@ msgstr "ID에 사용할 수 없는 문자를 입력하셨습니다."
 #: common/include/account.php:84
 #, fuzzy
 msgid "Name is reserved."
-msgstr "ID가 CVS에 예약되어 있습니다."
+msgstr ""
 
 #: common/include/account.php:89 common/include/account.php:93
 #: common/include/User.class.php:355
@@ -2896,7 +2896,7 @@ msgstr ""
 #: common/include/DatabaseInstaller.class.php:137
 #, fuzzy
 msgid "Database initialisation error:"
-msgstr "Database Manipulation"
+msgstr ""
 
 #: common/include/Error.class.php:125 common/include/Group.class.php:431
 #: common/include/Group.class.php:514
@@ -2911,7 +2911,7 @@ msgstr "Database Manipulation"
 #: www/survey/admin/show_results.php:66 www/survey/admin/survey.php:53
 #, fuzzy
 msgid "Permission denied."
-msgstr "Permission Denied"
+msgstr ""
 
 #: common/include/Error.class.php:142 common/include/User.class.php:350
 #: common/include/User.class.php:931 common/include/User.class.php:983
@@ -2986,12 +2986,12 @@ msgstr "소프트웨어 맵"
 #: www/snippet/addversion.php:217 www/snippet/package.php:169
 #: www/snippet/submit.php:136
 msgid "Version"
-msgstr "Version"
+msgstr ""
 
 #: common/include/Group.class.php:256
 #, fuzzy
 msgid "Group Not Found"
-msgstr "File Not Found"
+msgstr ""
 
 #: common/include/Group.class.php:309
 #, fuzzy
@@ -3034,7 +3034,7 @@ msgstr "그룹 객체 생성 오류"
 #: common/include/Group.class.php:379
 #, fuzzy, php-format
 msgid "Error: Cannot get group id: %s"
-msgstr "database 항목을 추가할 수 없습니다."
+msgstr ""
 
 #: common/include/Group.class.php:426 common/include/Group.class.php:509
 #, fuzzy
@@ -3044,7 +3044,7 @@ msgstr "권한을 가져올 수 없습니다."
 #: common/include/Group.class.php:447
 #, fuzzy, php-format
 msgid "Error: Cannot change group properties: %s"
-msgstr "database 항목을 추가할 수 없습니다."
+msgstr ""
 
 #: common/include/Group.class.php:528
 #, php-format
@@ -3115,12 +3115,12 @@ msgstr ""
 #: common/include/Group.class.php:1685
 #, fuzzy
 msgid "Could not properly delete the forum:"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: common/include/Group.class.php:1701
 #, fuzzy
 msgid "Could not properly delete the ProjectGroup:"
-msgstr "Could Not Update Parent"
+msgstr ""
 
 #: common/include/Group.class.php:1712
 #, fuzzy
@@ -3130,7 +3130,7 @@ msgstr "게시판을 추가할 때 오류가 발생하였습니다."
 #: common/include/Group.class.php:1720
 #, fuzzy
 msgid "Could not properly delete the FRSPackage:"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: common/include/Group.class.php:1731 common/include/Group.class.php:1746
 #, fuzzy
@@ -3140,7 +3140,7 @@ msgstr "게시판을 추가할 때 오류가 발생하였습니다."
 #: common/include/Group.class.php:1739
 #, fuzzy, php-format
 msgid "Could Not Delete News Forum: %d"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: common/include/Group.class.php:1757 common/include/Group.class.php:1765
 #, fuzzy
@@ -3229,7 +3229,7 @@ msgstr ""
 #: www/project/admin/roleedit.php:53
 #, fuzzy
 msgid "Could Not Get Role"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: common/include/Group.class.php:2171
 #, fuzzy, php-format
@@ -3430,12 +3430,12 @@ msgstr ""
 #: common/include/Group.class.php:2727
 #, fuzzy
 msgid "Group name is too short"
-msgstr "Group Name (click to edit)"
+msgstr ""
 
 #: common/include/Group.class.php:2730
 #, fuzzy
 msgid "Group name is too long"
-msgstr "Group Name (click to edit)"
+msgstr ""
 
 #: common/include/Group.class.php:2733
 #, fuzzy
@@ -3525,7 +3525,7 @@ msgstr ""
 #: common/include/GroupJoinRequest.class.php:298
 #, fuzzy
 msgid "Could Not Delete: "
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: common/include/group_section_texts.php:29
 #: common/include/Navigation.class.php:425
@@ -3555,7 +3555,7 @@ msgstr ""
 #: www/stats/site_stats_utils.php:239 www/stats/site_stats_utils.php:364
 #: www/stats/site_stats_utils.php:419
 msgid "Tasks"
-msgstr "Tasks"
+msgstr ""
 
 #: common/include/group_section_texts.php:32
 #: common/reporting/report_utils.php:666
@@ -3639,7 +3639,7 @@ msgstr ""
 #: www/search/include/SearchManager.class.php:165
 #: www/stats/site_stats_utils.php:472
 msgid "Projects"
-msgstr "Projects"
+msgstr ""
 
 #: common/include/Navigation.class.php:250
 msgid "Map of projects, by categories or types."
@@ -3648,7 +3648,7 @@ msgstr ""
 #: common/include/Navigation.class.php:257
 #, fuzzy
 msgid "Code Snippets"
-msgstr "Snippets"
+msgstr ""
 
 #: common/include/Navigation.class.php:259
 msgid "Tooling library. Small coding tips."
@@ -3669,7 +3669,7 @@ msgstr ""
 #: www/admin/index.php:39 www/admin/vhost.php:106
 #, fuzzy
 msgid "Site Admin"
-msgstr "Site Admin"
+msgstr ""
 
 #: common/include/Navigation.class.php:294
 msgid ""
@@ -3725,7 +3725,7 @@ msgstr ""
 #: www/pm/include/ProjectTaskHTML.class.php:108
 #: www/tracker/reporting/index.php:126
 msgid "Tracker"
-msgstr "Tracker"
+msgstr ""
 
 #: common/include/Navigation.class.php:441
 msgid "Issues, tickets, bugs."
@@ -3769,7 +3769,7 @@ msgstr ""
 #: common/include/Navigation.class.php:519
 #, fuzzy
 msgid "Flash head line from the project."
-msgstr "No Such posting For This Project"
+msgstr ""
 
 #: common/include/Navigation.class.php:533 common/include/rbac_texts.php:164
 #: common/widget/Widget_MyLatestSvnCommits.class.php:108
@@ -3779,7 +3779,7 @@ msgstr "No Such posting For This Project"
 #: www/stats/site_stats_utils.php:242 www/stats/site_stats_utils.php:365
 #: www/stats/site_stats_utils.php:420
 msgid "SCM"
-msgstr "SCM"
+msgstr ""
 
 #: common/include/Navigation.class.php:534
 msgid "Source Content Management, peer-review and source discovery."
@@ -3796,7 +3796,7 @@ msgstr ""
 
 #: common/include/Navigation.class.php:632
 msgid "Show source"
-msgstr "Show source"
+msgstr ""
 
 #: common/include/Plugin.class.php:204 common/include/Plugin.class.php:221
 #, php-format
@@ -3838,12 +3838,12 @@ msgstr ""
 #: common/include/RBAC.php:194
 #, fuzzy
 msgid "Cannot link to home project"
-msgstr "No Such posting For This Project"
+msgstr ""
 
 #: common/include/RBAC.php:229
 #, fuzzy
 msgid "Cannot unlink from home project"
-msgstr "No Such posting For This Project"
+msgstr ""
 
 #: common/include/RBAC.php:594
 msgid "UNKNOWN (internal error, report bug to FusionForge)"
@@ -3862,12 +3862,12 @@ msgstr "%1$s개의 프로젝트"
 #: common/include/RBAC.php:1118
 #, fuzzy
 msgid "Anonymous/not logged in"
-msgstr "You must be logged in first"
+msgstr ""
 
 #: common/include/RBAC.php:1166
 #, fuzzy
 msgid "Any user logged in"
-msgstr "You must be logged in first"
+msgstr ""
 
 #: common/include/rbac_texts.php:45 common/include/rbac_texts.php:57
 #: common/include/rbac_texts.php:60 common/include/rbac_texts.php:62
@@ -3896,7 +3896,7 @@ msgstr "변경 없음"
 #: common/include/rbac_texts.php:48 common/include/rbac_texts.php:145
 #, fuzzy
 msgid "Approve projects"
-msgstr "Approve/Reject"
+msgstr ""
 
 #: common/include/rbac_texts.php:50 common/include/rbac_texts.php:146
 #, fuzzy
@@ -3926,17 +3926,17 @@ msgstr ""
 #: common/include/rbac_texts.php:58 common/include/rbac_texts.php:150
 #, fuzzy
 msgid "Project administration"
-msgstr "Project Database Administration"
+msgstr ""
 
 #: common/include/rbac_texts.php:61 common/include/rbac_texts.php:152
 #, fuzzy
 msgid "Trackers administration"
-msgstr "Survey Administration"
+msgstr ""
 
 #: common/include/rbac_texts.php:63 common/include/rbac_texts.php:153
 #, fuzzy
 msgid "Task managers administration"
-msgstr "Project/Task Manager Administration"
+msgstr ""
 
 #: common/include/rbac_texts.php:65 common/include/rbac_texts.php:154
 #, fuzzy
@@ -3949,7 +3949,7 @@ msgstr "게시판: 관리"
 #: common/include/rbac_texts.php:128 common/include/rbac_texts.php:131
 #, fuzzy
 msgid "Read only"
-msgstr "Regards"
+msgstr ""
 
 #: common/include/rbac_texts.php:69 common/include/rbac_texts.php:99
 msgid "Technician (no read access, no submitting)"
@@ -3974,7 +3974,7 @@ msgstr ""
 #: common/include/rbac_texts.php:74 common/include/rbac_texts.php:104
 #, fuzzy
 msgid "Tech & manager (no submitting)"
-msgstr "Project Admin"
+msgstr ""
 
 #: common/include/rbac_texts.php:75 common/include/rbac_texts.php:105
 #, fuzzy
@@ -4015,17 +4015,17 @@ msgstr ""
 #: common/include/rbac_texts.php:112 common/include/rbac_texts.php:120
 #, fuzzy
 msgid "Tech & manager"
-msgstr "Project Admin"
+msgstr ""
 
 #: common/include/rbac_texts.php:93 common/include/rbac_texts.php:123
 #, fuzzy
 msgid "Moderated post"
-msgstr "more latest posts"
+msgstr ""
 
 #: common/include/rbac_texts.php:94 common/include/rbac_texts.php:124
 #, fuzzy
 msgid "Unmoderated post"
-msgstr "more latest posts"
+msgstr ""
 
 #: common/include/rbac_texts.php:95 common/include/rbac_texts.php:125
 #, fuzzy
@@ -4059,7 +4059,7 @@ msgstr ""
 #: common/include/rbac_texts.php:137
 #, fuzzy
 msgid "View all packages"
-msgstr "Submit A New Snippet Package"
+msgstr ""
 
 #: common/include/rbac_texts.php:138
 #, fuzzy
@@ -4074,12 +4074,12 @@ msgstr "통계 기능 사용"
 #: common/include/rbac_texts.php:149
 #, fuzzy
 msgid "Project visibility"
-msgstr "Projects"
+msgstr ""
 
 #: common/include/rbac_texts.php:160
 #, fuzzy
 msgid "Default for new trackers"
-msgstr "Create A Package"
+msgstr ""
 
 #: common/include/rbac_texts.php:161
 msgid "Default for new task managers"
@@ -4250,7 +4250,7 @@ msgstr "파일을 영구 저장 공간으로 옮길 수 없습니다."
 #: common/include/User.class.php:246
 #, fuzzy
 msgid "User Not Found"
-msgstr "File Not Found"
+msgstr ""
 
 #: common/include/User.class.php:306
 #, fuzzy
@@ -4306,7 +4306,7 @@ msgstr ""
 #: common/include/User.class.php:443
 #, fuzzy
 msgid "Could Not Get User Id: "
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: common/include/User.class.php:477
 #, fuzzy, php-format
@@ -4362,27 +4362,27 @@ msgstr "%s 사용자 등록"
 #: common/include/User.class.php:527
 #, fuzzy
 msgid "Could Not Delete From artifact_monitor:"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: common/include/User.class.php:534
 #, fuzzy
 msgid "Could Not Delete From artifact_type_monitor:"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: common/include/User.class.php:541
 #, fuzzy
 msgid "Could Not Delete From forum_monitored_forums:"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: common/include/User.class.php:548
 #, fuzzy
 msgid "Could Not Delete From filemodule_monitor:"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: common/include/User.class.php:639
 #, fuzzy
 msgid "Error: Cannot Update User Object:"
-msgstr "Could Not Update Parent"
+msgstr ""
 
 #: common/include/User.class.php:733
 #, fuzzy
@@ -4396,7 +4396,7 @@ msgstr ""
 #: common/include/User.class.php:746
 #, fuzzy
 msgid "Error: Cannot Update User Status:"
-msgstr "Could Not Update Parent"
+msgstr ""
 
 #: common/include/User.class.php:939 common/include/User.class.php:991
 #, fuzzy
@@ -4411,7 +4411,7 @@ msgstr "잘못된 인자입니다."
 #: common/include/User.class.php:1107
 #, fuzzy
 msgid "Error: Cannot Update User Unix Shell:"
-msgstr "Could Not Update Parent"
+msgstr ""
 
 #: common/include/User.class.php:1253
 msgid "SSH Key already in use"
@@ -4420,12 +4420,12 @@ msgstr ""
 #: common/include/User.class.php:1261
 #, fuzzy
 msgid "Error - Could Not Add User SSH Key:"
-msgstr "Could Not Update Parent"
+msgstr ""
 
 #: common/include/User.class.php:1278
 #, fuzzy
 msgid "Error: Cannot Update User SSH Keys"
-msgstr "Could Not Update Parent"
+msgstr ""
 
 #: common/include/User.class.php:1424 common/include/User.class.php:1460
 #: common/include/User.class.php:1484
@@ -4444,7 +4444,7 @@ msgstr ""
 #: common/include/User.class.php:1745
 #, fuzzy, php-format
 msgid "New %1$s User"
-msgstr "The %1$s Team"
+msgstr ""
 
 #: common/include/utils.php:199
 msgid "UTF-8"
@@ -4592,17 +4592,17 @@ msgstr ""
 
 #: common/pm/ProjectCategory.class.php:94
 msgid "ProjectCategory: name and assignee are Required"
-msgstr "ProjectCategory: name and assignee are Required"
+msgstr ""
 
 #: common/pm/ProjectGroup.class.php:148 common/pm/ProjectGroup.class.php:320
 #, fuzzy
 msgid "Subproject Description Must Be At Least 10 Characters"
-msgstr "Document Description Must Be At Least 10 Characters"
+msgstr ""
 
 #: common/pm/ProjectGroup.class.php:195
 #, fuzzy
 msgid "Invalid group_project_id"
-msgstr "Unix Group Name:"
+msgstr ""
 
 #: common/pm/ProjectGroupFactory.class.php:62
 #, php-format
@@ -4642,12 +4642,12 @@ msgstr "잘못된 인자입니다."
 #: www/pm/ganttpage.php:243
 #, fuzzy
 msgid "category"
-msgstr "Category"
+msgstr ""
 
 #: common/pm/ProjectTask.class.php:235
 #, fuzzy
 msgid "Invalid Task ID"
-msgstr "Invalid ID"
+msgstr ""
 
 #: common/pm/ProjectTask.class.php:946
 #, fuzzy
@@ -4727,24 +4727,24 @@ msgstr "토요일"
 #: common/reporting/report_utils.php:684 www/stats/site_stats_utils.php:228
 #: www/top/toplist.php:38
 msgid "Page Views"
-msgstr "Page Views"
+msgstr ""
 
 #: common/reporting/report_utils.php:171 common/reporting/report_utils.php:936
 #: www/stats/site_stats_utils.php:233 www/stats/site_stats_utils.php:361
 #: www/stats/site_stats_utils.php:415
 msgid "Bugs"
-msgstr "Bugs"
+msgstr ""
 
 #: common/reporting/report_utils.php:172 www/stats/site_stats_utils.php:234
 #: www/stats/site_stats_utils.php:362 www/stats/site_stats_utils.php:416
 msgid "Support"
-msgstr "Support"
+msgstr ""
 
 #: common/reporting/report_utils.php:173 common/reporting/report_utils.php:938
 #: www/stats/site_stats_utils.php:235 www/stats/site_stats_utils.php:363
 #: www/stats/site_stats_utils.php:417
 msgid "Patches"
-msgstr "Patches"
+msgstr ""
 
 #: common/reporting/report_utils.php:174 common/reporting/report_utils.php:939
 msgid "Feature Requests"
@@ -4761,7 +4761,7 @@ msgstr ""
 #: common/reporting/report_utils.php:228 www/snippet/snippet_utils.php:38
 #: www/snippet/snippet_utils.php:64
 msgid "Other"
-msgstr "Other"
+msgstr ""
 
 #: common/reporting/report_utils.php:247 common/reporting/report_utils.php:370
 #, fuzzy
@@ -4775,7 +4775,7 @@ msgstr ""
 #: common/reporting/report_utils.php:262
 #, fuzzy
 msgid "Total Opened"
-msgstr "Date Opened"
+msgstr ""
 
 #: common/reporting/report_utils.php:264
 msgid "Total Still Open"
@@ -4829,7 +4829,7 @@ msgstr "%1$s questions found"
 #: www/docman/index.php:105
 #, fuzzy
 msgid "Could Not Get User"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: common/reporting/report_utils.php:691
 #, fuzzy
@@ -4854,7 +4854,7 @@ msgstr "추적 항목"
 #: common/reporting/report_utils.php:937
 #, fuzzy
 msgid "Support Requests"
-msgstr "Support"
+msgstr ""
 
 #: common/reporting/report_utils.php:1004 www/reporting/projecttime.php:64
 #: www/reporting/sitetime.php:64 www/reporting/usertime.php:79
@@ -4903,12 +4903,12 @@ msgstr ""
 #: common/survey/Survey.class.php:109 common/survey/Survey.class.php:157
 #, fuzzy
 msgid "Update Failed: Survey Title Required"
-msgstr "UPDATE FAILED: Survey Title Required"
+msgstr ""
 
 #: common/survey/Survey.class.php:113
 #, fuzzy
 msgid "Update Failed: Survey Questions Required"
-msgstr "UPDATE FAILED: Survey Questions Required"
+msgstr ""
 
 #: common/survey/Survey.class.php:167 common/survey/Survey.class.php:200
 msgid "The Survey data is not filled"
@@ -4931,7 +4931,7 @@ msgstr ""
 #: common/survey/SurveyResponseFactory.class.php:80
 #: common/survey/SurveyResponseFactory.class.php:88
 msgid "Survey"
-msgstr "Survey"
+msgstr ""
 
 #: common/survey/SurveyFactory.class.php:63
 #: common/survey/SurveyQuestionFactory.class.php:61
@@ -4946,11 +4946,11 @@ msgstr ""
 
 #: common/survey/SurveyQuestion.class.php:111 www/survey/admin/question.php:92
 msgid "Question Added"
-msgstr "Question Added"
+msgstr ""
 
 #: common/survey/SurveyQuestion.class.php:196
 msgid "Error finding question"
-msgstr "Error finding question"
+msgstr ""
 
 #: common/survey/SurveyResponseFactory.class.php:76
 msgid "No valid Survey Object"
@@ -4973,7 +4973,7 @@ msgstr "새 항목 제출"
 #: common/tracker/actions/admin-ind.php:49
 #, fuzzy
 msgid "Tracker created successfully"
-msgstr "Task Created Successfully"
+msgstr ""
 
 #: common/tracker/actions/admin-ind.php:51 www/pm/admin/index.php:80
 msgid "Please configure also the roles (by default, it's 'No Access')"
@@ -4982,12 +4982,12 @@ msgstr ""
 #: common/tracker/actions/admin-ind.php:62 common/tracker/actions/ind.php:31
 #, fuzzy
 msgid "Could Not Get ArtifactTypeFactory"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: common/tracker/actions/admin-ind.php:87
 #, fuzzy
 msgid "Trackers Administration"
-msgstr "Survey Administration"
+msgstr ""
 
 #: common/tracker/actions/admin-ind.php:90
 #, fuzzy
@@ -5008,7 +5008,7 @@ msgstr "새 릴리즈"
 #: common/tracker/actions/admin-ind.php:129
 #, fuzzy
 msgid "Create a new tracker"
-msgstr "Create A Package"
+msgstr ""
 
 #: common/tracker/actions/admin-ind.php:130
 msgid ""
@@ -5034,22 +5034,22 @@ msgstr "<strong> 이름:</strong> (예: 회의 일정, 실험 결과, RFP 문서
 #: common/tracker/actions/admin-ind.php:142
 #: common/tracker/views/form-updatetracker.php:64
 msgid "Send email on new submission to address"
-msgstr "Send email on new submission to address"
+msgstr ""
 
 #: common/tracker/actions/admin-ind.php:145
 #: common/tracker/views/form-updatetracker.php:67
 msgid "Send email on all changes"
-msgstr "Send email on all changes"
+msgstr ""
 
 #: common/tracker/actions/admin-ind.php:147
 #: common/tracker/views/form-updatetracker.php:69
 msgid "Days till considered overdue"
-msgstr "Days till considered overdue"
+msgstr ""
 
 #: common/tracker/actions/admin-ind.php:150
 #: common/tracker/views/form-updatetracker.php:72
 msgid "Days till pending tracker items time out"
-msgstr "Days till pending tracker items time out"
+msgstr ""
 
 #: common/tracker/actions/admin-ind.php:153
 #: common/tracker/views/form-updatetracker.php:75
@@ -5120,7 +5120,7 @@ msgstr ""
 #: common/tracker/actions/admin-tracker.php:36
 #, fuzzy
 msgid "Create a new tracker."
-msgstr "Create A Package"
+msgstr ""
 
 #: common/tracker/actions/admin-tracker.php:40
 #: common/tracker/include/ArtifactTypeHtml.class.php:112
@@ -5175,7 +5175,7 @@ msgstr "문제점 추적 기능에서 사용하는 일반적인 응답 메시지
 #: common/tracker/actions/admin-tracker.php:70
 #, fuzzy
 msgid "Apply Template Tracker"
-msgstr "Related Tracker Items"
+msgstr ""
 
 #: common/tracker/actions/admin-tracker.php:72
 msgid "Duplicate parameters and fields from a template trackers in this one."
@@ -5294,7 +5294,7 @@ msgstr ""
 #: common/tracker/actions/admin-updates.php:287
 #, fuzzy
 msgid "Successfully Cloned Tracker Fields "
-msgstr "Successfully Added Tracker Relationship"
+msgstr ""
 
 #: common/tracker/actions/admin-updates.php:310
 #: common/tracker/actions/admin-updates.php:432
@@ -5338,7 +5338,7 @@ msgstr "파일이 삭제되었습니다."
 #: www/pm/index.php:46 www/pm/task.php:86 www/tracker/roadmap.php:333
 #, fuzzy
 msgid "Could Not Get Factory"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: common/tracker/actions/browse.php:183 common/tracker/actions/browse.php:305
 #: common/tracker/actions/browse.php:310 common/tracker/actions/query.php:340
@@ -5362,7 +5362,7 @@ msgstr "없음"
 #: www/project/admin/editimages.php:263
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "Id"
-msgstr "Id"
+msgstr ""
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:565
 #: common/tracker/actions/browse.php:737 common/tracker/actions/detail.php:69
@@ -5428,17 +5428,17 @@ msgstr ""
 #: common/tracker/actions/browse.php:230 common/tracker/actions/query.php:232
 #, fuzzy
 msgid "Last 7 days"
-msgstr "Last day(s)"
+msgstr ""
 
 #: common/tracker/actions/browse.php:231 common/tracker/actions/query.php:233
 #, fuzzy
 msgid "Last 2 weeks"
-msgstr "Last week(s)"
+msgstr ""
 
 #: common/tracker/actions/browse.php:232 common/tracker/actions/query.php:234
 #, fuzzy
 msgid "Last month"
-msgstr "Last month(s)"
+msgstr ""
 
 #: common/tracker/actions/browse.php:271
 #, php-format
@@ -5458,7 +5458,7 @@ msgstr "변동"
 #: common/tracker/actions/browse.php:327 common/tracker/actions/browse.php:438
 #, fuzzy
 msgid "Advanced queries"
-msgstr "Add Categories"
+msgstr ""
 
 #: common/tracker/actions/browse.php:358 www/include/html.php:648
 #, fuzzy
@@ -5578,7 +5578,7 @@ msgstr "변경 없음"
 #: common/tracker/include/ArtifactTypeHtml.class.php:687
 #: common/tracker/include/ArtifactTypeHtml.class.php:721
 msgid "Nobody"
-msgstr "Nobody"
+msgstr ""
 
 #: common/tracker/actions/browse.php:755 common/tracker/Artifact.class.php:941
 msgid "Canned Response"
@@ -5664,7 +5664,7 @@ msgstr "의견 추가"
 #: www/pm/include/ProjectTaskHTML.class.php:141
 #, fuzzy
 msgid "Followups: "
-msgstr "Followup"
+msgstr ""
 
 #: common/tracker/actions/detail.php:139
 #: common/tracker/actions/mod-limited.php:181
@@ -5742,7 +5742,7 @@ msgstr ""
 #: plugins/scmsvn/common/SVNPlugin.class.php:242 www/pm/index.php:102
 #: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:265
 msgid "Total"
-msgstr "Total"
+msgstr ""
 
 #: common/tracker/actions/mod-limited.php:73 common/tracker/actions/mod.php:71
 msgid "Build Task Relation"
@@ -5789,7 +5789,7 @@ msgstr "미리 준비한 의견 사용"
 #: common/tracker/actions/mod.php:216
 #, fuzzy
 msgid "Post Followup"
-msgstr "Followup"
+msgstr ""
 
 #: common/tracker/actions/query.php:73
 #, fuzzy
@@ -5842,7 +5842,7 @@ msgstr ""
 #: common/tracker/actions/query.php:327
 #, fuzzy
 msgid "Private query"
-msgstr "Private Groups"
+msgstr ""
 
 #: common/tracker/actions/query.php:329
 msgid "Project level query (query is public)"
@@ -5894,7 +5894,7 @@ msgstr ""
 #: www/pm/admin/index.php:363
 #, fuzzy
 msgid "Could Not Get ProjectGroup"
-msgstr "Could Not Update Parent"
+msgstr ""
 
 #: common/tracker/actions/taskmgr.php:66 www/pm/browse_task.php:43
 #: www/pm/downloadcsv.php:96 www/pm/ganttpage.php:59
@@ -5938,7 +5938,7 @@ msgstr "선택한 작업에 대해 관계 추가"
 #: common/tracker/actions/taskmgr.php:152
 #, fuzzy
 msgid "No Existing Project Groups Found"
-msgstr "No ProjectGroups Found"
+msgstr ""
 
 #: common/tracker/actions/taskmgr.php:169
 #, fuzzy
@@ -5969,7 +5969,7 @@ msgstr ""
 #: common/tracker/actions/tracker.php:388
 #, fuzzy
 msgid "Could Not Create File Object"
-msgstr "Could Not Update Parent"
+msgstr ""
 
 #: common/tracker/actions/tracker.php:134
 msgid "Could Not Attach File to Item: "
@@ -5983,13 +5983,13 @@ msgstr "성공적으로 갱신되었습니다."
 #: common/tracker/actions/tracker.php:271
 #, fuzzy, php-format
 msgid "Could not get Project Task for %d"
-msgstr "Could Not Update Parent"
+msgstr ""
 
 #: common/tracker/actions/tracker.php:297
 #: common/tracker/actions/tracker.php:316
 #, fuzzy
 msgid "Comment added"
-msgstr "Comment"
+msgstr ""
 
 #: common/tracker/actions/tracker.php:340
 #, php-format
@@ -6027,7 +6027,7 @@ msgstr "항목을 생성하였습니다."
 #: common/tracker/actions/tracker.php:453
 #, fuzzy
 msgid "Monitoring Deactivated"
-msgstr "Monitoring Deactivated"
+msgstr ""
 
 #: common/tracker/actions/tracker.php:501
 msgid "Confirmation failed. Artifact not deleted"
@@ -6050,12 +6050,12 @@ msgstr "Artifact: 메시지 본문이 필요합니다."
 #: common/tracker/ArtifactExtraField.class.php:67
 #, fuzzy
 msgid "Invalid Artifact Type"
-msgstr "Invalid ID"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:154
 #, fuzzy
 msgid "Only project members can view private artifact types"
-msgstr "Artifact: Only Group Members Can View Private ArtifactTypes"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:191 common/tracker/Artifact.class.php:779
 #, fuzzy
@@ -6080,7 +6080,7 @@ msgstr "%1$s 생성 오류 발생"
 #: common/tracker/Artifact.class.php:300
 #, fuzzy
 msgid "Invalid Artifact ID"
-msgstr "Invalid ID"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:516
 #, fuzzy
@@ -6129,7 +6129,7 @@ msgstr ""
 #: common/tracker/Artifact.class.php:975
 #, fuzzy
 msgid "Could not move to new Artifact Type"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:987
 #, php-format
@@ -6143,7 +6143,7 @@ msgstr ""
 #: common/tracker/Artifact.class.php:1169
 #, fuzzy
 msgid "Could Not Create Canned Response Object"
-msgstr "Could Not Update Parent"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:1182
 #, fuzzy
@@ -6195,7 +6195,7 @@ msgstr ""
 #: common/tracker/ArtifactExtraField.class.php:233
 #, fuzzy
 msgid "Invalid ArtifactExtraField ID"
-msgstr "Invalid ID"
+msgstr ""
 
 #: common/tracker/ArtifactExtraField.class.php:321
 #: common/tracker/views/form-addextrafield.php:123
@@ -6271,17 +6271,17 @@ msgstr "ArtifactFile: 파일 이름, 타입, 크기, 데이터가 필요합니�
 #: common/tracker/ArtifactMessage.class.php:53
 #, fuzzy
 msgid "Invalid Artifact"
-msgstr "Invalid ID"
+msgstr ""
 
 #: common/tracker/ArtifactHistory.class.php:82
 #, fuzzy
 msgid "Invalid ArtifactHistory ID"
-msgstr "Invalid ID"
+msgstr ""
 
 #: common/tracker/ArtifactMessage.class.php:89
 #, fuzzy
 msgid "Error: Logged In User Bug Could Not Get User Object"
-msgstr "Could Not Update Parent"
+msgstr ""
 
 #: common/tracker/ArtifactMessage.class.php:92
 msgid "Logged In: YES"
@@ -6294,14 +6294,14 @@ msgstr "로그인: NO"
 #: common/tracker/ArtifactMessage.class.php:139
 #, fuzzy
 msgid "Invalid ArtifactMessage ID"
-msgstr "Invalid ID"
+msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:148
 #: common/tracker/ArtifactQuery.class.php:728
 #: common/tracker/ArtifactQuery.class.php:782
 #, fuzzy
 msgid "Must Be Logged In"
-msgstr "You must be logged in first"
+msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:153
 msgid "Query already exists"
@@ -6467,7 +6467,7 @@ msgstr ""
 #: common/tracker/include/ArtifactTypeHtml.class.php:322
 #, fuzzy
 msgid "Task Id and Summary"
-msgstr "Task Summary"
+msgstr ""
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:323
 msgid "Progress"
@@ -6476,7 +6476,7 @@ msgstr ""
 #: common/tracker/include/ArtifactTypeHtml.class.php:327
 #: www/pm/include/ProjectTaskHTML.class.php:111
 msgid "Remove Relation"
-msgstr "Remove Relation"
+msgstr ""
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:353
 #, php-format
@@ -6536,7 +6536,7 @@ msgstr ""
 #: common/tracker/include/build_submission_form.php:89
 #, php-format
 msgid "Please %1$s login %2$s"
-msgstr "Please %1$s login %2$s"
+msgstr ""
 
 #: common/tracker/include/build_submission_form.php:45
 #: common/tracker/include/build_submission_form.php:90
@@ -6619,7 +6619,7 @@ msgstr ""
 #: common/tracker/views/form-customizelist.php:98
 #, fuzzy
 msgid "Current / New positions"
-msgstr "Version"
+msgstr ""
 
 #: common/tracker/views/form-addextrafieldoption.php:46
 #: common/tracker/views/form-adminroadmap.php:403
@@ -6756,7 +6756,7 @@ msgstr ""
 #: common/tracker/views/form-adminroadmap.php:57 www/tracker/roadmap.php:175
 #, fuzzy
 msgid "Could Not Get ArtifactTypeFactoryHtml"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:70
 #, fuzzy
@@ -6844,27 +6844,27 @@ msgstr ""
 #: www/people/editprofile.php:244 www/survey/include/SurveyHTML.class.php:195
 #: www/survey/include/SurveyHTML.class.php:418
 msgid "Yes"
-msgstr "Yes"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:184
 #, fuzzy
 msgid "Create a new roadmap"
-msgstr "Create A Package"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:187
 #, fuzzy
 msgid "Update roadmap"
-msgstr "Updated"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:202 www/tracker/roadmap.php:257
 #, fuzzy
 msgid "No trackers have been set up."
-msgstr "No Related Tracker Items Have Been Added"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:221
 #, fuzzy
 msgid "Not used"
-msgstr "None Found"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:252 www/tracker/roadmap.php:201
 #: www/tracker/roadmap.php:211 www/tracker/roadmap.php:223
@@ -6906,7 +6906,7 @@ msgstr ""
 #: common/tracker/views/form-adminroadmap.php:421
 #, fuzzy
 msgid "No tracker is selected for this roadmap"
-msgstr "No Such posting For This Project"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:422
 #, php-format
@@ -6938,7 +6938,7 @@ msgstr ""
 #: common/tracker/views/form-adminroadmap.php:488
 #, fuzzy
 msgid "Roadmap name"
-msgstr "Real name"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:503
 msgid "New Roadmap"
@@ -7024,7 +7024,7 @@ msgstr "확인"
 #: common/tracker/views/form-deletetracker.php:24
 #, fuzzy, php-format
 msgid "Permanently Delete Tracker %s"
-msgstr "Related Tracker Items"
+msgstr ""
 
 #: common/tracker/views/form-deletetracker.php:34
 msgid ""
@@ -7171,7 +7171,7 @@ msgstr "문제점 추적 관리"
 #: common/widget/WidgetLayoutManager.class.php:182
 #, fuzzy, php-format
 msgid "DB Error: %s"
-msgstr "Error"
+msgstr ""
 
 #: common/widget/WidgetLayoutManager.class.php:259
 #: common/widget/WidgetLayoutManager.class.php:264
@@ -7207,7 +7207,7 @@ msgstr ""
 #: plugins/hudson/include/HudsonJobWidget.class.php:89
 #, fuzzy
 msgid "Already used"
-msgstr "Thread View"
+msgstr ""
 
 #: common/widget/WidgetLayoutManager.class.php:710
 #, fuzzy
@@ -7500,7 +7500,7 @@ msgstr "프로젝트 떠나기"
 #: common/widget/Widget_MyProjects.class.php:96
 #, fuzzy
 msgid "Private project"
-msgstr "Private Groups"
+msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:109
 #, fuzzy
@@ -7571,7 +7571,7 @@ msgstr ""
 #: common/widget/Widget_MySurveys.class.php:161
 #, fuzzy
 msgid "Display surveys:"
-msgstr "Display Trove Map"
+msgstr ""
 
 #: common/widget/Widget_MyTasks.class.php:124
 msgid "No task yet"
@@ -7580,7 +7580,7 @@ msgstr ""
 #: common/widget/Widget_MyTasks.class.php:128
 #, fuzzy
 msgid "My Tasks"
-msgstr "Tasks"
+msgstr ""
 
 #: common/widget/Widget_MyTasks.class.php:147
 #, fuzzy
@@ -7590,7 +7590,7 @@ msgstr "할당된 임무가 없습니다."
 #: common/widget/Widget_ProjectDescription.class.php:34
 #, fuzzy
 msgid "Project description"
-msgstr "Description:"
+msgstr ""
 
 #: common/widget/Widget_ProjectDescription.class.php:53
 msgid "This project has not yet submitted a description."
@@ -7612,7 +7612,7 @@ msgstr ""
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:89
 #, fuzzy
 msgid "new directories [D]"
-msgstr "Tweak Directories"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:90
 #, fuzzy
@@ -7626,7 +7626,7 @@ msgstr ""
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:92
 #, fuzzy
 msgid "new files and directories [FD]"
-msgstr "Tweak Directories"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:93
 msgid "new and update files and directories [FUD]"
@@ -7657,7 +7657,7 @@ msgstr "매일 갱신됩니다."
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:163
 #, fuzzy
 msgid "new Directories"
-msgstr "Tweak Directories"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:167
 msgid "3 weeks ago"
@@ -7670,12 +7670,12 @@ msgstr ""
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:167
 #, fuzzy
 msgid "Last Week"
-msgstr "Last week(s)"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:167
 #, fuzzy
 msgid "Current Week"
-msgstr "Version"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:196
 #: common/widget/Widget_ProjectLatestDocuments.class.php:123
@@ -7704,12 +7704,12 @@ msgstr "작업"
 #: common/widget/Widget_ProjectInfo.class.php:52
 #, fuzzy
 msgid "No tag defined for this project"
-msgstr "No Such posting For This Project"
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:65
 #, fuzzy
 msgid "Registered: "
-msgstr "Registered"
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
 #: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:321
@@ -7730,7 +7730,7 @@ msgstr "%1$s 로그인 %2$s 하시면 글을 올릴 수 있습니다."
 #: common/widget/Widget_ProjectInfo.class.php:88
 #, fuzzy, php-format
 msgid "View list of <a href=\"%s\">RSS feeds</a> available for this project."
-msgstr "Here is a list of positions available for this project."
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:105
 #, fuzzy, php-format
@@ -7830,7 +7830,7 @@ msgstr "프로젝트 관리자"
 
 #: common/widget/Widget_ProjectMembers.class.php:77 www/admin/grouplist.php:71
 msgid "Members"
-msgstr "Members"
+msgstr ""
 
 #: common/widget/Widget_ProjectMembers.class.php:103
 #, fuzzy, php-format
@@ -7995,7 +7995,7 @@ msgstr ""
 #: common/widget/Widget_Rss.class.php:204
 #, fuzzy, php-format
 msgid "%s months ago"
-msgstr "Last month(s)"
+msgstr ""
 
 #: common/widget/Widget_Rss.class.php:206
 msgid "About one year"
@@ -8055,7 +8055,7 @@ msgstr ""
 #: www/pm/detail_task.php:97 www/pm/ganttpage.php:159
 #: www/pm/include/ProjectTaskHTML.class.php:73 www/pm/mod_task.php:97
 msgid "Task Summary"
-msgstr "Task Summary"
+msgstr ""
 
 #: cronjobs/send_pending_items_mail.php:81 www/pm/add_task.php:63
 #: www/pm/browse_task.php:127 www/pm/browse_task.php:234
@@ -8072,7 +8072,7 @@ msgstr ""
 #: cronjobs/send_pending_items_mail.php:113
 #, fuzzy
 msgid "Pending tracker items notification"
-msgstr "Days till pending tracker items time out"
+msgstr ""
 
 #: cronjobs/send_pending_items_mail.php:114
 msgid ""
@@ -8133,7 +8133,7 @@ msgstr ""
 #: plugins/admssw/include/admsswPlugin.class.php:150
 #, fuzzy, php-format
 msgid "Preview <a href=\"%1$s\">ADMS.SW meta-data</a> about the project"
-msgstr "Here is a list of positions available for this project."
+msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:631
 msgid ""
@@ -8186,7 +8186,7 @@ msgstr "제목:"
 #: plugins/admssw/www/index.php:46
 #, fuzzy
 msgid "short index"
-msgstr "Short Name"
+msgstr ""
 
 #: plugins/admssw/www/index.php:47
 #, fuzzy
@@ -8204,7 +8204,7 @@ msgstr ""
 #: plugins/admssw/www/index.php:53
 #, fuzzy
 msgid "Trove categories :"
-msgstr "Add Categories"
+msgstr ""
 
 #: plugins/admssw/www/index.php:56
 msgid "as Turtle"
@@ -8396,7 +8396,7 @@ msgstr "database 항목을 추가할 수 없습니다."
 #: plugins/authopenid/www/index.php:67
 #, fuzzy
 msgid "Identity successfully added"
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:81
 msgid "Error: Missing URL for the new identity"
@@ -8419,12 +8419,12 @@ msgstr "database 항목을 추가할 수 없습니다."
 #: plugins/authopenid/www/index.php:117 plugins/authwebid/www/index.php:82
 #, fuzzy
 msgid "Identity successfully deleted"
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:122
 #, fuzzy, php-format
 msgid "Manage OpenID identities for user %s"
-msgstr "Statistics for Project Databases"
+msgstr ""
 
 #: plugins/authopenid/www/index.php:125
 msgid "My OpenID identities"
@@ -8489,7 +8489,7 @@ msgstr "database 항목을 추가할 수 없습니다."
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:288
 #, fuzzy
 msgid "WebID already used"
-msgstr "Thread View"
+msgstr ""
 
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:295
 msgid "WebID already pending binding"
@@ -8510,7 +8510,7 @@ msgstr ""
 #: plugins/authwebid/www/index.php:89
 #, fuzzy, php-format
 msgid "Manage WebID identities for user %1$s"
-msgstr "Statistics for Project Databases"
+msgstr ""
 
 #: plugins/authwebid/www/index.php:92
 msgid "My WebID identities"
@@ -8643,7 +8643,7 @@ msgstr ""
 #: plugins/blocks/www/index.php:199 www/admin/pluginman.php:207
 #: www/admin/userlist.php:68
 msgid "Active"
-msgstr "Active"
+msgstr ""
 
 #: plugins/blocks/www/index.php:225
 #, fuzzy
@@ -8752,7 +8752,7 @@ msgstr "모니터링중인 게시판"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:53
 #, fuzzy
 msgid "Follow the contributions by contributors to this project"
-msgstr "No Such posting For This Project"
+msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:74
 msgid "Use the Contribution Tracker plugin"
@@ -8766,7 +8766,7 @@ msgstr "문제점 추적 관리"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:106
 #, fuzzy
 msgid "Latest Major Contributions"
-msgstr "Languages Distributions"
+msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:112
 #, fuzzy
@@ -8790,7 +8790,7 @@ msgstr ""
 #: plugins/contribtracker/www/index.php:115
 #, fuzzy
 msgid "No contributions have been recorded for this project yet."
-msgstr "No Such posting For This Project"
+msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:134
 #: plugins/contribtracker/www/index.php:43
@@ -8807,7 +8807,7 @@ msgstr ""
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:166
 #, fuzzy
 msgid "[View All Contributions]"
-msgstr "View Comments"
+msgstr ""
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:175
 #, fuzzy
@@ -8925,7 +8925,7 @@ msgstr "로그아웃"
 #: plugins/contribtracker/www/global_admin.php:337
 #, fuzzy
 msgid "Short name"
-msgstr "Short Name"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:242
 #: plugins/contribtracker/www/index.php:140
@@ -8937,7 +8937,7 @@ msgstr "Short Name"
 #: www/admin/useredit.php:211 www/forum/admin/monitor.php:61
 #: www/sendmessage.php:68
 msgid "Email"
-msgstr "Email"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:244
 #: plugins/contribtracker/www/global_admin.php:442
@@ -9003,7 +9003,7 @@ msgstr ""
 #: plugins/contribtracker/www/global_admin.php:397
 #, fuzzy
 msgid "Role description"
-msgstr "Description:"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:389
 #, fuzzy
@@ -9019,7 +9019,7 @@ msgstr "새 프로젝트 등록"
 #: plugins/contribtracker/www/global_admin.php:424
 #, fuzzy
 msgid "Structure name"
-msgstr "Short Name"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:417
 msgid "Edit a legal structure"
@@ -9034,25 +9034,25 @@ msgstr "새 프로젝트 등록"
 #: plugins/contribtracker/www/global_admin.php:465
 #, fuzzy
 msgid "Actor name"
-msgstr "User name:"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:436
 #: plugins/contribtracker/www/global_admin.php:466
 #, fuzzy
 msgid "Actor URL"
-msgstr "User name:"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:437
 #: plugins/contribtracker/www/global_admin.php:467
 #, fuzzy
 msgid "Actor email"
-msgstr "User name:"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:438
 #: plugins/contribtracker/www/global_admin.php:468
 #, fuzzy
 msgid "Actor description"
-msgstr "Short Description"
+msgstr ""
 
 #: plugins/contribtracker/www/global_admin.php:440
 #: plugins/contribtracker/www/global_admin.php:470
@@ -9083,12 +9083,12 @@ msgstr ""
 #: plugins/contribtracker/www/project_admin.php:203
 #, fuzzy
 msgid "Contribution details"
-msgstr "Instruction email sent"
+msgstr ""
 
 #: plugins/contribtracker/www/index.php:104
 #, fuzzy, php-format
 msgid "Contributions for project %s"
-msgstr "Statistics for Project Databases"
+msgstr ""
 
 #: plugins/contribtracker/www/index.php:114
 #: plugins/contribtracker/www/index.php:182
@@ -9128,7 +9128,7 @@ msgstr ""
 #: plugins/contribtracker/www/index.php:185
 #, fuzzy
 msgid "Latest contributions"
-msgstr "Languages Distributions"
+msgstr ""
 
 #: plugins/contribtracker/www/project_admin.php:21
 #, php-format
@@ -9155,12 +9155,12 @@ msgstr "계속 >>"
 #: plugins/contribtracker/www/project_admin.php:212
 #, fuzzy
 msgid "Contribution description"
-msgstr "Short Description"
+msgstr ""
 
 #: plugins/contribtracker/www/project_admin.php:199
 #, fuzzy
 msgid "Edit a contribution"
-msgstr "Edit A Question"
+msgstr ""
 
 #: plugins/contribtracker/www/project_admin.php:218
 #, fuzzy
@@ -9186,12 +9186,12 @@ msgstr ""
 #: plugins/contribtracker/www/project_admin.php:285
 #, fuzzy
 msgid "Existing contributions"
-msgstr "Show Existing Questions"
+msgstr ""
 
 #: plugins/contribtracker/www/project_admin.php:330
 #, fuzzy
 msgid "No contributions for this project yet."
-msgstr "No Such posting For This Project"
+msgstr ""
 
 #: plugins/contribtracker/www/project_admin.php:336
 #, fuzzy
@@ -9215,7 +9215,7 @@ msgstr ""
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:136
 #, fuzzy
 msgid "Current Version"
-msgstr "Version"
+msgstr ""
 
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:112
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:137
@@ -9235,7 +9235,7 @@ msgstr "프로젝트 더하기"
 #: plugins/extsubproj/actions/addExtSubProj.php:35
 #, fuzzy
 msgid "Subproject succesfully added."
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: plugins/extsubproj/actions/delExtSubProj.php:30
 #, fuzzy
@@ -9245,7 +9245,7 @@ msgstr "스킬 삭제 작업이 실패하였습니다."
 #: plugins/extsubproj/actions/delExtSubProj.php:34
 #, fuzzy
 msgid "Subproject succesfully deleted."
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:76
@@ -9304,7 +9304,7 @@ msgstr "삭제"
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:49
 #, fuzzy
 msgid "Manage project's external subprojects"
-msgstr "Statistics for Project Databases"
+msgstr ""
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:56
 #, fuzzy
@@ -9315,7 +9315,7 @@ msgstr "프로젝트 더하기"
 #: plugins/projects-hierarchy/www/index.php:70
 #, fuzzy
 msgid "Unknown action."
-msgstr "Unix Account Status"
+msgstr ""
 
 #: plugins/fckeditor/common/fckeditorPlugin.class.php:34
 msgid "HTML editor"
@@ -9364,7 +9364,7 @@ msgstr "아키텍처"
 #: plugins/forumml/www/forumml_utils.php:149
 #, fuzzy
 msgid "Previous "
-msgstr "previous 50"
+msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:153
 msgid "Next "
@@ -9373,14 +9373,14 @@ msgstr ""
 #: plugins/forumml/www/forumml_utils.php:154
 #, fuzzy
 msgid "Last messages"
-msgstr "Last week(s)"
+msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:170
 #: plugins/forumml/www/forumml_utils.php:241 www/forum/index.php:69
 #: www/forum/myforums.php:69
 #, fuzzy
 msgid "Threads"
-msgstr "Thread View"
+msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:186
 #, fuzzy
@@ -9390,7 +9390,7 @@ msgstr "대량 갱신"
 #: plugins/forumml/www/forumml_utils.php:417
 #, fuzzy
 msgid "On "
-msgstr "Opn"
+msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:419
 msgid "Toggle font family (typewriter/normal)"
@@ -9418,7 +9418,7 @@ msgstr ""
 #: plugins/forumml/www/forumml_utils.php:728
 #, fuzzy
 msgid "Mail successfully sent "
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: plugins/forumml/www/forumml_utils.php:730
 #, fuzzy
@@ -9473,7 +9473,7 @@ msgstr "뉴스 아카이브"
 #: plugins/forumml/www/index.php:104
 #, fuzzy
 msgid "Submit a new thread"
-msgstr "Submit a new version"
+msgstr ""
 
 #: plugins/forumml/www/message.php:100 plugins/forumml/www/upload.php:51
 #, fuzzy
@@ -9496,7 +9496,7 @@ msgstr "새글 올리기"
 #: plugins/forumml/www/message.php:174
 #, fuzzy
 msgid "Original Archives"
-msgstr "Original Comment"
+msgstr ""
 
 #: plugins/forumml/www/message.php:176
 msgid "Original list archives"
@@ -9510,12 +9510,12 @@ msgstr "공개 구역"
 #: plugins/forumml/www/message.php:176
 #, fuzzy
 msgid "Private Archives"
-msgstr "Private Groups"
+msgstr ""
 
 #: plugins/forumml/www/message.php:184
 #, fuzzy
 msgid "Printer version"
-msgstr "Version"
+msgstr ""
 
 #: plugins/forumml/www/message.php:205
 #, fuzzy
@@ -9530,12 +9530,12 @@ msgstr "%1$s의 게시판"
 #: plugins/forumml/www/message.php:211
 #, fuzzy
 msgid "Thread(s) found"
-msgstr "Thread View"
+msgstr ""
 
 #: plugins/forumml/www/upload.php:82
 #, fuzzy
 msgid "Error: Attachment not found"
-msgstr "Error - no versions found"
+msgstr ""
 
 #: plugins/forumml/www/upload.php:85
 #, fuzzy
@@ -9568,7 +9568,7 @@ msgstr ""
 #: plugins/globaldashboard/include/globalDashboard_Widget_MyProjects.php:34
 #, fuzzy
 msgid "Projects on remote Software Forges"
-msgstr "Projects in trove category:"
+msgstr ""
 
 #: plugins/globaldashboard/include/globalDashboard_Widget_MyProjects.php:42
 msgid "Lists user projects hosted on remote forge systems"
@@ -9577,7 +9577,7 @@ msgstr ""
 #: plugins/globaldashboard/include/globalDashboard_Widget_MyProjects.php:52
 #, fuzzy
 msgid "My remote projects"
-msgstr "Approve/Reject"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/add_account.php:41
 msgid "You can add remote accounts ONLY for yourself !!!"
@@ -9595,7 +9595,7 @@ msgstr ""
 #: plugins/globaldashboard/www/admin/delete_account.php:39
 #, fuzzy
 msgid "Remote Account successfully deleted"
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/delete_account.php:41
 #, fuzzy
@@ -9610,7 +9610,7 @@ msgstr "문서 보기"
 #: plugins/globaldashboard/www/admin/edit_account_page.php:74
 #, fuzzy
 msgid "Main account properties"
-msgstr "Account Information"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:77
 #: plugins/globaldashboard/www/admin/manage_accounts.php:80
@@ -9623,7 +9623,7 @@ msgstr "Account Information"
 #: www/stats/lastlogins.php:51 www/top/topusers.php:63
 #, fuzzy
 msgid "User Name"
-msgstr "Username"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:86
 #: plugins/globaldashboard/www/admin/manage_accounts.php:123
@@ -9641,7 +9641,7 @@ msgstr "소프트웨어 맵"
 #: plugins/globaldashboard/www/admin/manage_accounts.php:141
 #, fuzzy
 msgid "Account domain"
-msgstr "Account Information"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:131
 #: plugins/globaldashboard/www/admin/manage_accounts.php:147
@@ -9724,12 +9724,12 @@ msgstr "%1$s 사용자 등록"
 #: www/project/admin/users.php:302 www/project/admin/users.php:376
 #: www/project/admin/users.php:436 www/project/admin/users.php:460
 msgid "Action"
-msgstr "Action"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:113
 #, fuzzy
 msgid "Create a new remote account"
-msgstr "Create A Package"
+msgstr ""
 
 #: plugins/globaldashboard/www/help.php:52
 msgid "Global Dashboard Help"
@@ -9778,7 +9778,7 @@ msgstr "새로운 문서 올리기"
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:71
 #, fuzzy
 msgid "Associated forge successfully added."
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:94
 msgid "Are you sure you want to delete this associated forge?"
@@ -9797,12 +9797,12 @@ msgstr ""
 #: www/people/editprofile.php:243 www/survey/include/SurveyHTML.class.php:196
 #: www/survey/include/SurveyHTML.class.php:420
 msgid "No"
-msgstr "No"
+msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:121
 #, fuzzy
 msgid "Associated forge successfully deleted."
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:144
 msgid "Modify the associated forge below"
@@ -9812,12 +9812,12 @@ msgstr ""
 #: www/survey/include/SurveyHTML.class.php:115
 #: www/survey/include/SurveyHTML.class.php:173
 msgid "Submit Changes"
-msgstr "Submit Changes"
+msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:188
 #, fuzzy
 msgid "Associated forge successfully modified."
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:206
 msgid "Associated forge"
@@ -9854,7 +9854,7 @@ msgstr ""
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:248
 #, fuzzy
 msgid "Error fetching data"
-msgstr "Error Adding Database"
+msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:249
 #, fuzzy
@@ -10122,7 +10122,7 @@ msgstr ""
 #: plugins/webanalytics/view/admin/updateLinkValue.php:34
 #, fuzzy
 msgid "Update this link"
-msgstr "Updated"
+msgstr ""
 
 #: plugins/headermenu/view/admin/updateLinkValue.php:61
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
@@ -10173,7 +10173,7 @@ msgstr "문서가 성공적으로 제출되었습니다."
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:45
 #, fuzzy
 msgid "Headermenu Link Order successfully validated"
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:46
 msgid "Error in Outermenu Link Order validation"
@@ -10292,7 +10292,7 @@ msgstr ""
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:44
 #, fuzzy
 msgid "Link Order successfully validated"
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:45
 #, fuzzy
@@ -10438,7 +10438,7 @@ msgstr "(*)Pending"
 #: plugins/hudson/include/HudsonJob.class.php:170
 #, fuzzy
 msgid "Unknown status"
-msgstr "Unix Account Status"
+msgstr ""
 
 #: plugins/hudson/include/HudsonJobWidget.class.php:40
 msgid "Cannot add empty job id"
@@ -10453,7 +10453,7 @@ msgstr "모니터링중인 게시판"
 #: plugins/hudson/include/HudsonJobWidget.class.php:96
 #, fuzzy
 msgid "Current used"
-msgstr "Version"
+msgstr ""
 
 #: plugins/hudson/include/hudsonPlugin.class.php:33
 #, fuzzy
@@ -10485,13 +10485,13 @@ msgstr ""
 #: plugins/hudson/include/hudsonViews.class.php:195
 #, fuzzy
 msgid "Error: Hudson object not found."
-msgstr "Error - no versions found"
+msgstr ""
 
 #: plugins/hudson/include/hudsonPlugin.class.php:291
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:82
 #, fuzzy
 msgid "Last Build:"
-msgstr "Last user_id mailed"
+msgstr ""
 
 #: plugins/hudson/include/hudsonPlugin.class.php:292
 #: plugins/hudson/include/hudsonViews.class.php:297
@@ -10512,13 +10512,13 @@ msgstr "입력 실패"
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:86
 #, fuzzy
 msgid "No build found for this job."
-msgstr "No Such posting For This Project"
+msgstr ""
 
 #: plugins/hudson/include/hudsonPlugin.class.php:300
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:91
 #, fuzzy
 msgid "Weather Report:"
-msgstr "Generate Report"
+msgstr ""
 
 #: plugins/hudson/include/hudsonPlugin.class.php:348
 #, fuzzy
@@ -10571,7 +10571,7 @@ msgstr "Job 편집"
 #: plugins/hudson/include/hudsonViews.class.php:402
 #, fuzzy
 msgid "Job URL:"
-msgstr "User name:"
+msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:223
 #: plugins/hudson/include/hudsonViews.class.php:407
@@ -10581,7 +10581,7 @@ msgstr ""
 #: plugins/hudson/include/hudsonViews.class.php:226
 #, fuzzy
 msgid "Job name:"
-msgstr "Real name"
+msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:230
 #, php-format
@@ -10603,7 +10603,7 @@ msgstr ""
 #: plugins/hudson/include/hudsonViews.class.php:268
 #, fuzzy
 msgid "Update job"
-msgstr "Updated"
+msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:296 www/admin/cronman.php:43
 #: www/people/editjob.php:74 www/people/editjob.php:91
@@ -10614,7 +10614,7 @@ msgstr ""
 #: plugins/hudson/include/hudsonViews.class.php:299
 #, fuzzy
 msgid "RSS"
-msgstr "QRS"
+msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:301
 msgid "SVN trigger"
@@ -10732,7 +10732,7 @@ msgstr ""
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:46
 #, fuzzy
 msgid "Last Builds"
-msgstr "Last Logins"
+msgstr ""
 
 #: plugins/hudson/include/hudson_Widget_JobLastBuilds.class.php:52
 msgid ""
@@ -10749,12 +10749,12 @@ msgstr ""
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:50
 #, fuzzy, php-format
 msgid "%s Test Results"
-msgstr "Admin Search Results"
+msgstr ""
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:52
 #, fuzzy
 msgid "Test Results"
-msgstr "Results"
+msgstr ""
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:58
 msgid ""
@@ -10841,7 +10841,7 @@ msgstr "인자가 없습니다."
 #: plugins/mailman/include/MailmanList.class.php:445
 #, fuzzy
 msgid "Could Not Delete List: "
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: plugins/mailman/include/mailmanPlugin.class.php:136
 #, fuzzy
@@ -10851,7 +10851,7 @@ msgstr "멤버 보기"
 #: plugins/mailman/include/mailmanPlugin.class.php:146
 #, fuzzy
 msgid "View the mailman Administration"
-msgstr "Virtual Host Administration"
+msgstr ""
 
 #: plugins/mailman/include/mailmanPlugin.class.php:153
 #: www/admin/globalroleedit.php:149 www/admin/globalroleedit.php:164
@@ -10878,7 +10878,7 @@ msgstr "모니터링중인 게시판"
 #: plugins/mailman/include/mailmanPlugin.class.php:195
 #, fuzzy, php-format
 msgid "Not Object: MailmanList: %d"
-msgstr "Survey Questions"
+msgstr ""
 
 #: plugins/mailman/include/mailmanPlugin.class.php:210
 #: utils/fixscripts/populate_template_project.php:204
@@ -11067,12 +11067,12 @@ msgstr "그룹 거부 오류"
 #: plugins/mailman/www/mailman_utils.php:124 www/admin/unsubscribe.php:59
 #: www/forum/monitor.php:65
 msgid "Unsubscribe"
-msgstr "Unsubscribe"
+msgstr ""
 
 #: plugins/mailman/www/mailman_utils.php:128
 #, fuzzy
 msgid "Subscribe"
-msgstr "Unsubscribe"
+msgstr ""
 
 #: plugins/mailman/www/mailman_utils.php:169
 #, fuzzy
@@ -11122,7 +11122,7 @@ msgstr "인자가 없습니다."
 #: plugins/mantisbt/action/deleteCategory.php:40
 #, fuzzy, php-format
 msgid "Category %s deleted successfully."
-msgstr "JOB skill deleted successfully"
+msgstr ""
 
 #: plugins/mantisbt/action/deleteCategory.php:43
 #, fuzzy
@@ -11132,12 +11132,12 @@ msgstr "인자가 없습니다."
 #: plugins/mantisbt/action/deleteNote.php:39
 #, fuzzy
 msgid "Note deleted successfully"
-msgstr "JOB skill deleted successfully"
+msgstr ""
 
 #: plugins/mantisbt/action/deleteVersion.php:44
 #, fuzzy
 msgid "Version deleted successfully."
-msgstr "JOB skill deleted successfully"
+msgstr ""
 
 #: plugins/mantisbt/action/deleteVersion.php:47
 #, fuzzy
@@ -11147,7 +11147,7 @@ msgstr "인자가 없습니다."
 #: plugins/mantisbt/action/init.php:41
 #, fuzzy
 msgid "MantisBT plugin successfully initialized."
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: plugins/mantisbt/action/inituser.php:34
 msgid "Failed to initialize user."
@@ -11156,7 +11156,7 @@ msgstr ""
 #: plugins/mantisbt/action/inituser.php:38
 #, fuzzy
 msgid "MantisBT User successfully initialized."
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: plugins/mantisbt/action/renameCategory.php:37
 #, fuzzy
@@ -11201,7 +11201,7 @@ msgstr "멤버 보기"
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:68
 #, fuzzy
 msgid "Tickets Management"
-msgstr "File Management"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:91
 msgid "Manage your mantisbt account and follow your tickets"
@@ -11220,7 +11220,7 @@ msgstr "멤버 보기"
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:104
 #, fuzzy
 msgid "MantisBT administration page"
-msgstr "Survey Administration"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:188
 #, fuzzy
@@ -11236,12 +11236,12 @@ msgstr "그룹 객체 생성 오류"
 #: plugins/projectimport/www/index.php:628
 #, fuzzy
 msgid "No project found"
-msgstr "No ProjectGroups Found"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:245
 #, fuzzy
 msgid "No project found in MantisBT"
-msgstr "No Such posting For This Project"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:251
 #, fuzzy
@@ -11256,7 +11256,7 @@ msgstr "프로젝트 떠나기"
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:293
 #, fuzzy
 msgid "ID MantisBT project not found"
-msgstr "Error - no versions found"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:393
 msgid "Tickets"
@@ -11269,7 +11269,7 @@ msgstr ""
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:399
 #, fuzzy
 msgid "View all tickets."
-msgstr "Submit A New Snippet Package"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:404
 #, fuzzy
@@ -11283,7 +11283,7 @@ msgstr ""
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:407
 #, fuzzy
 msgid "View global statistics."
-msgstr "Sitewide Statistics Graphs"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:446
 #, fuzzy
@@ -11297,7 +11297,7 @@ msgstr ""
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:595
 #, fuzzy
 msgid "MantisBT project not found"
-msgstr "Error - no versions found"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:692
 #, fuzzy
@@ -11363,7 +11363,7 @@ msgstr ""
 #: plugins/mantisbt/controler/filter_roadmap.php:48
 #, fuzzy
 msgid "Versions:"
-msgstr "Version:"
+msgstr ""
 
 #: plugins/mantisbt/controler/filter_roadmap.php:62
 #: plugins/mantisbt/controler/filter_roadmap.php:94
@@ -11387,14 +11387,14 @@ msgstr ""
 #: www/reporting/timeadd.php:144 www/snippet/package.php:162
 #: www/snippet/submit.php:129
 msgid "Category"
-msgstr "Category"
+msgstr ""
 
 #: plugins/mantisbt/view/addIssue.php:71
 #: plugins/mantisbt/view/editIssue.php:90
 #: plugins/mantisbt/view/viewIssue.php:59
 #, fuzzy
 msgid "Reproducibility"
-msgstr "Projects"
+msgstr ""
 
 #: plugins/mantisbt/view/addIssue.php:72
 #: plugins/mantisbt/view/editIssue.php:89
@@ -11444,12 +11444,12 @@ msgstr "프로젝트 더하기"
 #: plugins/mantisbt/view/admin/addVersion.php:34
 #, fuzzy
 msgid "Add a new version"
-msgstr "Submit a new version"
+msgstr ""
 
 #: plugins/mantisbt/view/admin/editVersion.php:56
 #, fuzzy
 msgid "Version Detail"
-msgstr "Version"
+msgstr ""
 
 #: plugins/mantisbt/view/admin/editVersion.php:63
 #: plugins/mantisbt/view/admin/viewVersion.php:51
@@ -11498,12 +11498,12 @@ msgstr "새 릴리즈"
 #: plugins/mantisbt/view/admin/viewCategorie.php:61
 #, fuzzy
 msgid "Rename"
-msgstr "Real name"
+msgstr ""
 
 #: plugins/mantisbt/view/admin/viewCategorie.php:75
 #, fuzzy
 msgid "No Categories"
-msgstr "Add Categories"
+msgstr ""
 
 #: plugins/mantisbt/view/admin/viewConfiguration.php:59
 #: plugins/mantisbt/view/init.php:65
@@ -11537,12 +11537,12 @@ msgstr ""
 #: plugins/mantisbt/view/admin/viewVersion.php:45
 #, fuzzy
 msgid "Manage versions"
-msgstr "Package Version"
+msgstr ""
 
 #: plugins/mantisbt/view/admin/viewVersion.php:76
 #, fuzzy
 msgid "No versions"
-msgstr "Version"
+msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:84
 #: plugins/mantisbt/view/viewIssue.php:130
@@ -11560,7 +11560,7 @@ msgstr "제출자"
 #: plugins/mantisbt/view/viewIssue.php:61
 #, fuzzy
 msgid "Update Date"
-msgstr "Updated"
+msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:126
 #: plugins/mantisbt/view/viewIssue.php:83
@@ -11571,7 +11571,7 @@ msgstr "보고서"
 #: plugins/mantisbt/view/editIssue.php:129
 #: plugins/mantisbt/view/viewIssue.php:86 www/include/html.php:405
 msgid "Resolution"
-msgstr "Resolution"
+msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:177
 #: plugins/mantisbt/view/viewIssue.php:88
@@ -11646,7 +11646,7 @@ msgstr "%1$s questions found"
 #: plugins/mantisbt/view/viewAttachment.php:65
 #, fuzzy
 msgid "No attached files for this ticket"
-msgstr "No Such posting For This Project"
+msgstr ""
 
 #: plugins/mantisbt/view/viewAttachment.php:78
 #: www/project/admin/editimages.php:256
@@ -11722,7 +11722,7 @@ msgstr "항목이 없습니다"
 #: www/developer/index.php:45
 #, fuzzy
 msgid "User not active"
-msgstr "User name:"
+msgstr ""
 
 #: plugins/mantisbt/www/index.php:74 plugins/mantisbt/www/index.php:240
 msgid "The mantisbt plugin for this project is not initialized."
@@ -11736,7 +11736,7 @@ msgstr ""
 #: plugins/mantisbt/www/user/index.php:31
 #, fuzzy
 msgid "My Tickets"
-msgstr "Tasks"
+msgstr ""
 
 #: plugins/mantisbt/www/user/index.php:36
 #, fuzzy
@@ -11767,7 +11767,7 @@ msgstr ""
 #: plugins/mediawiki/include/mediawikiPlugin.class.php:205
 #, fuzzy
 msgid "No editing"
-msgstr "Voting"
+msgstr ""
 
 #: plugins/mediawiki/include/mediawikiPlugin.class.php:206
 #, fuzzy
@@ -11916,7 +11916,7 @@ msgstr "메일링 리스트 사용"
 #: plugins/mediawiki/www/plugin_admin.php:176
 #, fuzzy
 msgid "Current logo:"
-msgstr "Version"
+msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:181
 #, fuzzy
@@ -12060,7 +12060,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/get_access_token.php:164
 #: plugins/oauthconsumer/www/index.php:67 www/admin/responses_admin.php:90
 msgid "Go"
-msgstr "Go"
+msgstr ""
 
 #: plugins/oauthconsumer/www/callback.php:75
 #, fuzzy
@@ -12149,7 +12149,7 @@ msgstr "접근이 거부되었습니다."
 #: plugins/oauthconsumer/www/get_access_token.php:131
 #, fuzzy
 msgid "Error in curl : "
-msgstr "Error adding VHOST:"
+msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:138
 #, fuzzy
@@ -12177,7 +12177,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/get_access_token.php:169
 #, fuzzy
 msgid "Error in retrieving request token"
-msgstr "Error inserting question"
+msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:179
 #: plugins/oauthconsumer/www/index.php:81
@@ -12199,7 +12199,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/index.php:17
 #, fuzzy
 msgid "Providers"
-msgstr "Author"
+msgstr ""
 
 #: plugins/oauthconsumer/www/index.php:49
 msgid "Resource URL"
@@ -12216,7 +12216,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/index.php:77
 #, fuzzy
 msgid "No access tokens have been created for this provider"
-msgstr "No Such posting For This Project"
+msgstr ""
 
 #: plugins/oauthconsumer/www/index.php:84
 msgid ""
@@ -12227,7 +12227,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/provider_edit.php:29
 #, fuzzy
 msgid "Edit OAuth Provider"
-msgstr "Author"
+msgstr ""
 
 #: plugins/oauthconsumer/www/provider_edit.php:49
 #: plugins/oauthconsumer/www/providers.php:14
@@ -12238,7 +12238,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/provider_edit.php:69
 #, fuzzy
 msgid "Update Provider"
-msgstr "Updated"
+msgstr ""
 
 #: plugins/oauthconsumer/www/providers.php:49
 msgid "There are currently no OAuth Providers registered in the database"
@@ -12262,7 +12262,7 @@ msgstr "멤버 보기"
 #: plugins/oauthprovider/include/oauthprovider_plugin.php:178
 #, fuzzy
 msgid "oauthprovider Admin"
-msgstr "Source IP"
+msgstr ""
 
 #: plugins/oauthprovider/include/oauthprovider_plugin.php:184
 msgid "Manage OAuth consumers"
@@ -12276,7 +12276,7 @@ msgstr ""
 #: plugins/oauthprovider/www/request_tokens.php:54
 #, fuzzy
 msgid "Consumer name"
-msgstr "User name:"
+msgstr ""
 
 #: plugins/oauthprovider/www/access_tokens.php:55
 #: plugins/oauthprovider/www/consumer_manage.php:76
@@ -12284,7 +12284,7 @@ msgstr "User name:"
 #: plugins/oauthprovider/www/consumer_update_page.php:74
 #: plugins/oauthprovider/www/request_tokens.php:55
 msgid "Key"
-msgstr "Key"
+msgstr ""
 
 #: plugins/oauthprovider/www/access_tokens.php:56
 #: plugins/oauthprovider/www/consumer_manage.php:81
@@ -12298,7 +12298,7 @@ msgstr ""
 #: plugins/oauthprovider/www/request_tokens.php:60
 #, fuzzy
 msgid "Authorized on"
-msgstr "Author"
+msgstr ""
 
 #: plugins/oauthprovider/www/access_tokens.php:112
 #, fuzzy
@@ -12328,13 +12328,13 @@ msgstr ""
 #: plugins/oauthprovider/www/checks.php:45
 #, fuzzy
 msgid "OAuth"
-msgstr "Author"
+msgstr ""
 
 #: plugins/oauthprovider/www/checks.php:82
 #: plugins/oauthprovider/www/checks.php:153
 #, fuzzy
 msgid "OAuth Provider"
-msgstr "Author"
+msgstr ""
 
 #: plugins/oauthprovider/www/consumer_manage.php:46
 #, fuzzy
@@ -12355,7 +12355,7 @@ msgstr "프로젝트 더하기"
 #: plugins/oauthprovider/www/consumer_manage.php:100
 #, fuzzy
 msgid "Delete Consumer"
-msgstr "Deleted Response"
+msgstr ""
 
 #: plugins/oauthprovider/www/consumer.php:42
 msgid "OAuth consumers"
@@ -12396,7 +12396,7 @@ msgstr ""
 #: plugins/oauthprovider/www/request_tokens.php:57
 #, fuzzy
 msgid "Authorized"
-msgstr "Author"
+msgstr ""
 
 #: plugins/oauthprovider/www/request_tokens.php:118
 #, fuzzy
@@ -12406,7 +12406,7 @@ msgstr "%1$s questions found"
 #: plugins/oauthprovider/www/token_deny.php:57
 #, fuzzy
 msgid "Authorization Denied"
-msgstr "Permission Denied"
+msgstr ""
 
 #: plugins/oauthprovider/www/token_deny.php:59
 #, php-format
@@ -12456,7 +12456,7 @@ msgstr "프로젝트"
 #: plugins/projectimport/common/ProjectImportPlugin.class.php:183
 #, fuzzy
 msgid "Project import plugin"
-msgstr "Description:"
+msgstr ""
 
 #: plugins/projectimport/common/ProjectImportPlugin.class.php:183
 #, fuzzy
@@ -12664,7 +12664,7 @@ msgstr "스킬 추가 작업이 실패하였습니다."
 #: plugins/projectimport/www/index.php:564
 #, fuzzy
 msgid "Details of imported project: "
-msgstr "User list for group:"
+msgstr ""
 
 #: plugins/projectimport/www/index.php:578
 #, fuzzy
@@ -12674,7 +12674,7 @@ msgstr "새로운 릴리즈가 없습니다."
 #: plugins/projectimport/www/index.php:584
 #, fuzzy
 msgid "uri"
-msgstr "user_id"
+msgstr ""
 
 #: plugins/projectimport/www/index.php:586
 msgid "Import space ?"
@@ -12696,7 +12696,7 @@ msgstr ""
 #: plugins/projectimport/www/index.php:691
 #, fuzzy
 msgid "Please upload a file"
-msgstr "Thread View"
+msgstr ""
 
 #: plugins/projectimport/www/index.php:717
 #, fuzzy
@@ -12711,12 +12711,12 @@ msgstr "그룹 객체 생성 오류"
 #: plugins/projectimport/www/projectsimport.php:261
 #, fuzzy
 msgid "Created project"
-msgstr "Private Groups"
+msgstr ""
 
 #: plugins/projectimport/www/usersimport.php:72
 #, fuzzy
 msgid "Users importer"
-msgstr "User name:"
+msgstr ""
 
 #: plugins/projectimport/www/usersimport.php:220
 #, fuzzy
@@ -12796,7 +12796,7 @@ msgstr "메일이 발송되었습니다."
 #: plugins/projectlabels/www/index.php:120
 #, fuzzy
 msgid "Label name:"
-msgstr "Real name"
+msgstr ""
 
 #: plugins/projectlabels/www/index.php:122
 #: plugins/projectlabels/www/index.php:199
@@ -12888,7 +12888,7 @@ msgstr "프로젝트/임무 관리자 기능 사용"
 #: plugins/projects-hierarchy/actions/addChild.php:35
 #, fuzzy
 msgid "Successfully added child"
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: plugins/projects-hierarchy/actions/addChild.php:37
 #, fuzzy
@@ -12955,7 +12955,7 @@ msgstr "새 프로젝트 이름"
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:92
 #, fuzzy
 msgid "Hierarchy Admin"
-msgstr "Project Admin"
+msgstr ""
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:92
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:610
@@ -12967,7 +12967,7 @@ msgstr ""
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:116
 #, fuzzy
 msgid "Per Category"
-msgstr "Parent Category"
+msgstr ""
 
 #: plugins/projects-hierarchy/common/projects-hierarchyPlugin.class.php:117
 #, fuzzy
@@ -13028,7 +13028,7 @@ msgstr "%1$s 우수 프로젝트"
 #: plugins/projects-hierarchy/view/admin_project_link.php:47
 #, fuzzy
 msgid "Remove parent project"
-msgstr "Report by Subproject"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:51
 #, fuzzy
@@ -13148,7 +13148,7 @@ msgstr ""
 #: plugins/projects-hierarchy/view/home_project_link.php:37
 #, fuzzy
 msgid "Parent Project"
-msgstr "Private Groups"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/home_project_link.php:37
 #: plugins/projects-hierarchy/view/home_project_link.php:47
@@ -13182,7 +13182,7 @@ msgstr ""
 #: plugins/quota_management/www/index.php:81
 #, fuzzy
 msgid "You are not Admin of this project"
-msgstr "No Such posting For This Project"
+msgstr ""
 
 #: plugins/quota_management/www/quota_admin.php:44
 msgid "Quota Manager Admin"
@@ -13242,7 +13242,7 @@ msgstr ""
 #: plugins/quota_management/www/quota.php:301
 #: plugins/quota_management/www/quota.php:369
 msgid "total"
-msgstr "total"
+msgstr ""
 
 #: plugins/quota_management/www/quota.php:333
 msgid "Users disk use"
@@ -13387,7 +13387,7 @@ msgstr ""
 #: plugins/scmsvn/common/SVNPlugin.class.php:161
 #, fuzzy, php-format
 msgid "Developer %s Access via SSH"
-msgstr "Developers (test)"
+msgstr ""
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:104
 #: plugins/scmbzr/common/BzrPlugin.class.php:116
@@ -13510,7 +13510,7 @@ msgstr "히스토리"
 #: plugins/scmccase/common/CCasePlugin.class.php:122
 #, fuzzy
 msgid "Browse the ClearCase tree"
-msgstr "Browse Trove Tree"
+msgstr ""
 
 #: plugins/scmccase/common/CCasePlugin.class.php:146
 msgid "ClearCase server"
@@ -13574,7 +13574,7 @@ msgstr "CVS 트리 tarball 내려받기"
 #: plugins/scmsvn/common/SVNPlugin.class.php:223
 #: www/stats/site_stats_utils.php:284
 msgid "Adds"
-msgstr "Adds"
+msgstr ""
 
 #: plugins/scmcvs/cronjobs/ssh_create.php:70
 msgid "Error: homedir_prefix/username points to root directory!"
@@ -13642,7 +13642,7 @@ msgstr "SCM 저장소"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:628
 #, fuzzy
 msgid "Create new repository:"
-msgstr "Create New Response:"
+msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:629
 #: plugins/scmgit/common/GitPlugin.class.php:1091
@@ -13654,7 +13654,7 @@ msgstr "SCM 저장소"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:631
 #, fuzzy
 msgid "Clone"
-msgstr "Source of %1$s"
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:101
 msgid "Anonymous Access to the Git repository"
@@ -13786,7 +13786,7 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:340
 #, fuzzy
 msgid "Updates"
-msgstr "Updated"
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:965
 #, fuzzy
@@ -13817,12 +13817,12 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:1035
 #, fuzzy, php-format
 msgid "Clone of %s"
-msgstr "Source of %1$s"
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1085
 #, fuzzy, php-format
 msgid "No extra Git repository for project %1$s"
-msgstr "Statistics for Project Databases"
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1087
 #, fuzzy, php-format
@@ -13833,7 +13833,7 @@ msgstr[0] "Statistics for Project Databases"
 #: plugins/scmgit/common/GitPlugin.class.php:1091
 #, fuzzy
 msgid "Initial repository description"
-msgstr "Short Description"
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1091
 msgid "Initial clone URL (if any)"
@@ -13842,7 +13842,7 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:1108
 #, fuzzy, php-format
 msgid "Create new Git repository for project %1$s"
-msgstr "Statistics for Project Databases"
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1115
 #, fuzzy
@@ -13851,7 +13851,7 @@ msgstr "SCM 저장소"
 
 #: plugins/scmgit/common/GitPlugin.class.php:1117
 msgid "Description:"
-msgstr "Description:"
+msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:1119
 msgid ""
@@ -13872,7 +13872,7 @@ msgstr ""
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:57
 #, fuzzy
 msgid "No personal git repository"
-msgstr "Developers (test)"
+msgstr ""
 
 #: plugins/scmgit/www/index.php:44
 #, fuzzy, php-format
@@ -13968,17 +13968,17 @@ msgstr ""
 #: plugins/scmhg/common/HgPlugin.class.php:148
 #, fuzzy
 msgid "Browse Hg Repository"
-msgstr "SCM 저장소"
+msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:554
 #, fuzzy, php-format
 msgid "Clone of %s repository"
-msgstr "Developers (test)"
+msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:617
 #, fuzzy, php-format
 msgid "Create SCM repository for project %1$s"
-msgstr "SCM 저장소"
+msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:629
 msgid "Cloned from:"
@@ -13996,7 +13996,7 @@ msgstr ""
 #: plugins/scmhook/common/scmhookPlugin.class.php:141
 #, fuzzy
 msgid "Enable Repository Hooks"
-msgstr "SCM 저장소"
+msgstr ""
 
 #: plugins/scmhook/common/scmhookPlugin.class.php:156
 msgid "SCM Type not supported yet by scmhook"
@@ -14095,12 +14095,12 @@ msgstr ""
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:77
 #, fuzzy
 msgid "Unable to retrieve data"
-msgstr "Unable to insert already active database."
+msgstr ""
 
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:96
 #, fuzzy
 msgid "Related SVN commits"
-msgstr "Related Tracker Items"
+msgstr ""
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:108
 msgid "Anonymous Subversion Access"
@@ -14129,7 +14129,7 @@ msgstr "멤버 보기"
 #: plugins/soapadmin/include/soapadminPlugin.class.php:148
 #, fuzzy
 msgid "SoapAdmin Admin"
-msgstr "Site Admin"
+msgstr ""
 
 #: plugins/twitter/www/checks.php:99
 msgid "You have no Twitter Access Tokens registered in the database currently"
@@ -14187,7 +14187,7 @@ msgstr "새 릴리즈"
 
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
 msgid "Is Active"
-msgstr "Is Active"
+msgstr ""
 
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:58
 #, fuzzy
@@ -14223,7 +14223,7 @@ msgstr "개인 페이지"
 #: plugins/wiki/common/WikiPlugin.class.php:74
 #, fuzzy
 msgid "Wiki Admin"
-msgstr "Site Admin"
+msgstr ""
 
 #: plugins/wiki/common/WikiPlugin.class.php:91
 #, fuzzy
@@ -14273,12 +14273,12 @@ msgstr ""
 #: utils/fixscripts/populate_template_project.php:117
 #, fuzzy
 msgid "Developers-Discussion"
-msgstr "All Project Developers"
+msgstr ""
 
 #: utils/fixscripts/populate_template_project.php:117
 #, fuzzy
 msgid "Project Developer Discussion"
-msgstr "All Project Developers"
+msgstr ""
 
 #: utils/fixscripts/populate_template_project.php:127
 #, fuzzy
@@ -14485,7 +14485,7 @@ msgstr "비밀번호 갱신"
 #: www/account/editsshkeys.php:46
 #, fuzzy
 msgid "Manage Authorized Keys"
-msgstr "CVS/SSH 인증 키"
+msgstr ""
 
 #: www/account/editsshkeys.php:50
 #, fuzzy
@@ -14508,7 +14508,7 @@ msgstr "추가되었습니다."
 #: www/account/editsshkeys.php:51 www/account/index.php:292
 #, fuzzy
 msgid "Ready ?"
-msgstr "Regards"
+msgstr ""
 
 #: www/account/editsshkeys.php:61 www/account/index.php:302
 msgid "ssh key is deployed."
@@ -14590,7 +14590,7 @@ msgstr "사용자 ID를 입력하셔야 합니다."
 #: www/account/index.php:101 www/admin/groupedit.php:74
 #: www/admin/useredit.php:110
 msgid "Updated"
-msgstr "Updated"
+msgstr ""
 
 #: www/account/index.php:117 www/account/index.php:122
 msgid "Account Maintenance"
@@ -14603,7 +14603,7 @@ msgstr "환영합니다."
 #: www/account/index.php:129
 #, fuzzy
 msgid "Account options:"
-msgstr "Account Information"
+msgstr ""
 
 #: www/account/index.php:132
 #, fuzzy
@@ -14616,7 +14616,7 @@ msgstr "나의 스킬 프로필 편집"
 
 #: www/account/index.php:141 www/admin/search.php:76
 msgid "Member since"
-msgstr "Member since"
+msgstr ""
 
 #: www/account/index.php:145 www/admin/useredit.php:130
 #: www/include/user_profile.php:68
@@ -14634,7 +14634,7 @@ msgstr ""
 #: www/account/index.php:171 www/snippet/package.php:156
 #: www/snippet/submit.php:123 www/stats/i18n.php:34
 msgid "Language"
-msgstr "Language"
+msgstr ""
 
 #: www/account/index.php:177 www/account/register.php:193
 msgid "Timezone:"
@@ -14713,7 +14713,7 @@ msgstr "쉘(Shell) 서버"
 
 #: www/account/index.php:288
 msgid "SSH Shared Authorized Keys"
-msgstr "CVS/SSH 인증 키"
+msgstr ""
 
 #: www/account/index.php:314
 msgid "Edit Keys"
@@ -14812,7 +14812,7 @@ msgstr "확인에 사용되는 hash값을 다시 보냅니다."
 #: www/account/pending-resend.php:31
 #, fuzzy
 msgid "Missing Parameter. You must provide a login name or an email address."
-msgstr "Missing parameter, You must select target audience for mailing"
+msgstr ""
 
 #: www/account/pending-resend.php:42
 #, fuzzy
@@ -15017,7 +15017,7 @@ msgstr "프로젝트 더하기"
 #: www/activity/index.php:128
 #, fuzzy
 msgid "New Directories"
-msgstr "Tweak Directories"
+msgstr ""
 
 #: www/activity/index.php:169
 #, fuzzy
@@ -15037,7 +15037,7 @@ msgstr ""
 #: www/activity/index.php:281
 #, fuzzy
 msgid "scm commit: "
-msgstr "Comment"
+msgstr ""
 
 #: www/activity/index.php:286
 #, fuzzy
@@ -15049,7 +15049,7 @@ msgstr "추적 항목"
 #: www/stats/site_stats_utils.php:274 www/stats/site_stats_utils.php:278
 #, fuzzy
 msgid "Opened"
-msgstr "Date Opened"
+msgstr ""
 
 #: www/activity/index.php:306
 #, fuzzy
@@ -15066,12 +15066,12 @@ msgstr "새 프로젝트 이름"
 #: www/admin/admin_table.php:40
 #, fuzzy, php-format
 msgid "Create a new %s below:"
-msgstr "Create A Package"
+msgstr ""
 
 #: www/admin/admin_table.php:93 www/admin/admin_table.php:281
 #, fuzzy, php-format
 msgid "%s successfully added."
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: www/admin/admin_table.php:116
 #, php-format
@@ -15104,12 +15104,12 @@ msgstr ""
 #: www/admin/admin_table.php:153
 #, fuzzy, php-format
 msgid "Are you sure you want to delete this %s?"
-msgstr "Error, Could not unsubscribe user:"
+msgstr ""
 
 #: www/admin/admin_table.php:182
 #, fuzzy, php-format
 msgid "%s successfully deleted."
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: www/admin/admin_table.php:203
 #, fuzzy, php-format
@@ -15179,7 +15179,7 @@ msgstr "프로젝트 멤버 보기/고치기"
 #: www/admin/approve-pending.php:141
 #, fuzzy
 msgid "Decision :"
-msgstr "Version:"
+msgstr ""
 
 #: www/admin/approve-pending.php:147
 msgid "Approve"
@@ -15188,7 +15188,7 @@ msgstr "승인"
 #: www/admin/approve-pending.php:156
 #, fuzzy
 msgid "Rejection canned responses"
-msgstr "Deleted Response"
+msgstr ""
 
 #: www/admin/approve-pending.php:157
 msgid "(manage responses)"
@@ -15271,7 +15271,7 @@ msgstr ""
 #: www/admin/configman.php:89
 #, fuzzy, php-format
 msgid "Section %s"
-msgstr "Auctions"
+msgstr ""
 
 #: www/admin/cronman.php:30 www/admin/index.php:223
 msgid "Cron Manager"
@@ -15289,40 +15289,40 @@ msgstr ""
 #: www/admin/database.php:77
 #, fuzzy
 msgid "Error Adding Database: "
-msgstr "Error Adding Database"
+msgstr ""
 
 #: www/admin/database.php:79
 #, fuzzy
 msgid "added already active database"
-msgstr "Add an already active database"
+msgstr ""
 
 #: www/admin/database.php:82
 msgid "Unable to insert already active database."
-msgstr "Unable to insert already active database."
+msgstr ""
 
 #: www/admin/database.php:86
 msgid "Site Admin: Groups' DB Maintenance"
-msgstr "Site Admin: Groups' DB Maintenance"
+msgstr ""
 
 #: www/admin/database.php:96
 msgid "Statistics for Project Databases"
-msgstr "Statistics for Project Databases"
+msgstr ""
 
 #: www/admin/database.php:102
 msgid "Count"
-msgstr "Count"
+msgstr ""
 
 #: www/admin/database.php:114
 msgid "No databases defined"
-msgstr "No databases defined"
+msgstr ""
 
 #: www/admin/database.php:128
 msgid "Displaying Databases of Type:"
-msgstr "Displaying Databases of Type:"
+msgstr ""
 
 #: www/admin/database.php:148
 msgid "Add an already active database"
-msgstr "Add an already active database"
+msgstr ""
 
 #: www/admin/globalroledelete.php:43
 msgid "You can only delete a global role from here."
@@ -15360,7 +15360,7 @@ msgstr "계정을 활성화하는 도중 오류가 발생하였습니다."
 #: www/admin/globalroleedit.php:110
 #, fuzzy
 msgid "Cannot add user to this type of role"
-msgstr "Version"
+msgstr ""
 
 #: www/admin/globalroleedit.php:117
 msgid "Error: You did not tick the “really remove” box!"
@@ -15379,12 +15379,12 @@ msgstr "계정을 활성화하는 도중 오류가 발생하였습니다."
 #: www/admin/globalroleedit.php:135
 #, fuzzy
 msgid "Cannot remove user from this type of role"
-msgstr "database 항목을 추가할 수 없습니다."
+msgstr ""
 
 #: www/admin/globalroleedit.php:142
 #, fuzzy
 msgid "Current users with this role"
-msgstr "Version"
+msgstr ""
 
 #: www/admin/globalroleedit.php:171
 msgid "Really remove ticked users from role?"
@@ -15425,12 +15425,12 @@ msgstr "파일 삭제하기"
 #: www/admin/globalroleedit.php:255
 #, fuzzy
 msgid "Really delete this role?"
-msgstr "Related Tracker Items"
+msgstr ""
 
 #: www/admin/groupdelete.php:47
 #, fuzzy
 msgid "Project successfully deleted"
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: www/admin/groupdelete.php:52
 msgid "Permanently and irretrievably delete project"
@@ -15438,12 +15438,12 @@ msgstr ""
 
 #: www/admin/groupedit.php:91
 msgid "Instruction email sent"
-msgstr "Instruction email sent"
+msgstr ""
 
 #: www/admin/groupedit.php:95
 #, fuzzy
 msgid "Site Admin: Project Info for "
-msgstr "Site Admin: Group Info"
+msgstr ""
 
 #: www/admin/groupedit.php:100
 msgid "Permanently Delete Project"
@@ -15453,21 +15453,21 @@ msgstr ""
 #: www/admin/index.php:165 www/admin/useredit.php:163
 #: www/admin/useredit.php:169
 msgid "Pending (P)"
-msgstr "Pending (P)"
+msgstr ""
 
 #: www/admin/groupedit.php:125
 msgid "Incomplete (I)"
-msgstr "Incomplete (I)"
+msgstr ""
 
 #: www/admin/groupedit.php:126 www/admin/index.php:163
 #: www/admin/useredit.php:35 www/admin/useredit.php:164
 #: www/admin/useredit.php:170 www/admin/useredit.php:174
 msgid "Active (A)"
-msgstr "Active (A)"
+msgstr ""
 
 #: www/admin/groupedit.php:128
 msgid "Holding (H)"
-msgstr "Holding (H)"
+msgstr ""
 
 #: www/admin/groupedit.php:137
 #, php-format
@@ -15484,7 +15484,7 @@ msgstr "릴리즈 날짜"
 
 #: www/admin/groupedit.php:202
 msgid "Registration Application:"
-msgstr "Registration Application:"
+msgstr ""
 
 #: www/admin/groupedit.php:212
 msgid "SCM Box:"
@@ -15492,23 +15492,23 @@ msgstr ""
 
 #: www/admin/groupedit.php:224
 msgid "Resend New Project Instruction Email"
-msgstr "Resend New Project Instruction Email"
+msgstr ""
 
 #: www/admin/grouplist.php:27 www/include/Layout.class.php:1399
 #: www/softwaremap/full_list.php:53
 #, fuzzy
 msgid "Project List"
-msgstr "Projects"
+msgstr ""
 
 #: www/admin/grouplist.php:52
 #, fuzzy
 msgid "Projects that begin with"
-msgstr "Groups that begin with"
+msgstr ""
 
 #: www/admin/grouplist.php:65
 #, fuzzy
 msgid "Project Name (click to edit)"
-msgstr "Group Name (click to edit)"
+msgstr ""
 
 #: www/admin/grouplist.php:66
 msgid "Register Time"
@@ -15523,15 +15523,15 @@ msgstr "Unix 이름"
 
 #: www/admin/grouplist.php:69
 msgid "Public?"
-msgstr "Public?"
+msgstr ""
 
 #: www/admin/grouplist.php:70 www/snippet/submit.php:117
 msgid "License"
-msgstr "License"
+msgstr ""
 
 #: www/admin/index.php:46
 msgid "User Maintenance"
-msgstr "User Maintenance"
+msgstr ""
 
 #: www/admin/index.php:50
 #, fuzzy, php-format
@@ -15540,12 +15540,12 @@ msgstr "프로젝트 활동 상황:&nbsp;"
 
 #: www/admin/index.php:53
 msgid "Display Full User List/Edit Users"
-msgstr "Display Full User List/Edit Users"
+msgstr ""
 
 #: www/admin/index.php:55
 #, fuzzy
 msgid "Display Users Beginning with:"
-msgstr "Display Users Beginning with :"
+msgstr ""
 
 #: www/admin/index.php:62
 msgid "Search <em>(userid, username, realname, email)</em>"
@@ -15563,12 +15563,12 @@ msgstr "대기중인 제출이유:"
 #: www/admin/index.php:83
 #, fuzzy
 msgid "Plugins User Maintenance"
-msgstr "User Maintenance"
+msgstr ""
 
 #: www/admin/index.php:91
 #, fuzzy
 msgid "Global roles and permissions"
-msgstr "Error inserting question"
+msgstr ""
 
 #: www/admin/index.php:97 www/project/admin/roleedit.php:111
 msgid "Edit Role"
@@ -15582,7 +15582,7 @@ msgstr "생성"
 #: www/admin/index.php:111
 #, fuzzy
 msgid "Project Maintenance"
-msgstr "Group Maintenance"
+msgstr ""
 
 #: www/admin/index.php:120
 #, php-format
@@ -15602,12 +15602,12 @@ msgstr ""
 #: www/admin/index.php:142
 #, fuzzy
 msgid "Display Full Project List/Edit Projects"
-msgstr "Display Full Group List/Edit Groups"
+msgstr ""
 
 #: www/admin/index.php:144
 #, fuzzy
 msgid "Display Projects Beginning with:"
-msgstr "Display Groups Beginning with :"
+msgstr ""
 
 #: www/admin/index.php:151
 msgid "Search <em>(groupid, project Unix name, project full name)</em>"
@@ -15625,7 +15625,7 @@ msgstr "대기중인 프로젝트가 없습니다."
 #: www/admin/index.php:161
 #, fuzzy
 msgid "Projects with status"
-msgstr "Groups with status"
+msgstr ""
 
 #: www/admin/index.php:164
 msgid "Hold (H)"
@@ -15634,12 +15634,12 @@ msgstr ""
 #: www/admin/index.php:171
 #, fuzzy
 msgid "Private Projects"
-msgstr "Private Groups"
+msgstr ""
 
 #: www/admin/index.php:181
 #, fuzzy
 msgid "Plugins Project Maintenance"
-msgstr "Group Maintenance"
+msgstr ""
 
 #: www/admin/index.php:193
 msgid "Pending news (moderation for front-page)"
@@ -15651,48 +15651,48 @@ msgstr "상태"
 
 #: www/admin/index.php:201
 msgid "Site-Wide Stats"
-msgstr "Site-Wide Stats"
+msgstr ""
 
 #: www/admin/index.php:207
 msgid "Trove Project Tree"
-msgstr "Trove Project Tree"
+msgstr ""
 
 #: www/admin/index.php:209
 msgid "Display Trove Map"
-msgstr "Display Trove Map"
+msgstr ""
 
 #: www/admin/index.php:210
 msgid "Add to the Trove Map"
-msgstr "Add to the Trove Map"
+msgstr ""
 
 #: www/admin/index.php:215
 msgid "Site Utilities"
-msgstr "Site Utilities"
+msgstr ""
 
 #: www/admin/index.php:217 www/admin/massmail.php:79
 #, php-format
 msgid "Mail Engine for %1$s Subscribers"
-msgstr "Mail Engine for %1$s Subscribers"
+msgstr ""
 
 #: www/admin/index.php:218
 msgid "Site Mailings Maintenance"
-msgstr "Site Mailings Maintenance"
+msgstr ""
 
 #: www/admin/index.php:219
 msgid "Add, Delete, or Edit File Types"
-msgstr "Add, Delete, or Edit File Types"
+msgstr ""
 
 #: www/admin/index.php:220
 msgid "Add, Delete, or Edit Processors"
-msgstr "Add, Delete, or Edit Processors"
+msgstr ""
 
 #: www/admin/index.php:221
 msgid "Add, Delete, or Edit Themes"
-msgstr "Add, Delete, or Edit Themes"
+msgstr ""
 
 #: www/admin/index.php:222 www/stats/lastlogins.php:44
 msgid "Most Recent Opened Sessions"
-msgstr "Most Recent Opened Sessions"
+msgstr ""
 
 #: www/admin/index.php:224 www/admin/pluginman.php:123
 msgid "Plugin Manager"
@@ -15704,11 +15704,11 @@ msgstr ""
 
 #: www/admin/index.php:232
 msgid "Virtual Host Admin Tool"
-msgstr "Virtual Host Admin Tool"
+msgstr ""
 
 #: www/admin/index.php:236
 msgid "Project Database Administration"
-msgstr "Project Database Administration"
+msgstr ""
 
 #: www/admin/index.php:239
 #, fuzzy
@@ -15732,7 +15732,7 @@ msgstr "제목"
 #: www/admin/massmail.php:69
 #, fuzzy
 msgid "Scheduling Mailing, Could not schedule mailing, database error: "
-msgstr "Error Scheduling Mailing, Could not schedule mailing, database error:"
+msgstr ""
 
 #: www/admin/massmail.php:72
 #, fuzzy
@@ -15741,11 +15741,11 @@ msgstr "메일 설정"
 
 #: www/admin/massmail.php:74
 msgid "Mailing successfully scheduled for delivery"
-msgstr "Mailing successfully scheduled for delivery"
+msgstr ""
 
 #: www/admin/massmail.php:84 www/admin/massmail.php:140
 msgid "Active Deliveries"
-msgstr "Active Deliveries"
+msgstr ""
 
 #: www/admin/massmail.php:87
 msgid ""
@@ -15767,23 +15767,23 @@ msgstr ""
 
 #: www/admin/massmail.php:100
 msgid "All Project Developers"
-msgstr "All Project Developers"
+msgstr ""
 
 #: www/admin/massmail.php:101
 msgid "All Project Admins"
-msgstr "All Project Admins"
+msgstr ""
 
 #: www/admin/massmail.php:102 www/include/features_boxes.php:215
 msgid "All Users"
-msgstr "All Users"
+msgstr ""
 
 #: www/admin/massmail.php:103
 msgid "Developers (test)"
-msgstr "Developers (test)"
+msgstr ""
 
 #: www/admin/massmail.php:115
 msgid "Text of Message"
-msgstr "Text of Message"
+msgstr ""
 
 #: www/admin/massmail.php:115
 msgid "(will be appended with unsubscription information, if applicable)"
@@ -15791,11 +15791,11 @@ msgstr ""
 
 #: www/admin/massmail.php:120
 msgid "Schedule for Mailing"
-msgstr "Schedule for Mailing"
+msgstr ""
 
 #: www/admin/massmail.php:138
 msgid "Last user_id mailed"
-msgstr "Last user_id mailed"
+msgstr ""
 
 #: www/admin/massmail.php:165
 msgid "No deliveries active."
@@ -15824,7 +15824,7 @@ msgstr ": User List"
 #: www/admin/passedit.php:85
 #, fuzzy
 msgid "Site Admin: Change User Password"
-msgstr "Site Admin: User Info"
+msgstr ""
 
 #: www/admin/passedit.php:90
 #, php-format
@@ -15895,7 +15895,7 @@ msgstr ""
 #: www/admin/pluginman.php:75 www/admin/pluginman.php:113
 #, fuzzy
 msgid "Could not get plugin object"
-msgstr "Could Not Update Parent"
+msgstr ""
 
 #: www/admin/pluginman.php:95
 msgid "Success, config not deleted"
@@ -15925,7 +15925,7 @@ msgstr ""
 #: www/admin/pluginman.php:137
 #, fuzzy
 msgid "Projects Using it"
-msgstr "Projects"
+msgstr ""
 
 #: www/admin/pluginman.php:138
 #, fuzzy
@@ -15952,11 +15952,11 @@ msgstr ""
 
 #: www/admin/pluginman.php:257 www/admin/userlist.php:118
 msgid "Activate"
-msgstr "Activate"
+msgstr ""
 
 #: www/admin/responses_admin.php:32
 msgid "Site Admin: Edit Rejection Responses"
-msgstr "Site Admin: Edit Rejection Responses"
+msgstr ""
 
 #: www/admin/responses_admin.php:36
 #, php-format
@@ -15965,44 +15965,44 @@ msgstr ""
 
 #: www/admin/responses_admin.php:74
 msgid "Edited Response"
-msgstr "Edited Response"
+msgstr ""
 
 #: www/admin/responses_admin.php:84
 msgid "Edit Response:"
-msgstr "Edit Response:"
+msgstr ""
 
 #: www/admin/responses_admin.php:86 www/admin/responses_admin.php:127
 msgid "Response Title:"
-msgstr "Response Title:"
+msgstr ""
 
 #: www/admin/responses_admin.php:87 www/admin/responses_admin.php:128
 msgid "Response Text:"
-msgstr "Response Text:"
+msgstr ""
 
 #: www/admin/responses_admin.php:108
 msgid "Deleted Response"
-msgstr "Deleted Response"
+msgstr ""
 
 #: www/admin/responses_admin.php:110
 #, fuzzy
 msgid "If you are not sure then why did you click “Delete”?"
-msgstr "If you're aren't sure then why did you click 'Delete'?"
+msgstr ""
 
 #: www/admin/responses_admin.php:111
 msgid "By the way, I didn't delete... just in case..."
-msgstr "By the way, I didn't delete... just in case..."
+msgstr ""
 
 #: www/admin/responses_admin.php:120
 msgid "Added Response"
-msgstr "Added Response"
+msgstr ""
 
 #: www/admin/responses_admin.php:125
 msgid "Create New Response:"
-msgstr "Create New Response:"
+msgstr ""
 
 #: www/admin/search.php:39
 msgid "Admin Search Results"
-msgstr "Admin Search Results"
+msgstr ""
 
 #: www/admin/search.php:68
 #, fuzzy, php-format
@@ -16017,7 +16017,7 @@ msgstr[0] "User search with criteria"
 #: www/top/topusers.php:64
 #, fuzzy
 msgid "Real Name"
-msgstr "Real name"
+msgstr ""
 
 #: www/admin/search.php:96
 #, fuzzy
@@ -16032,16 +16032,16 @@ msgstr[0] "User search with criteria"
 
 #: www/admin/search.php:149 www/register/index.php:187
 msgid "Full Name"
-msgstr "Full Name"
+msgstr ""
 
 #: www/admin/search.php:150 www/softwaremap/trove_list.php:323
 msgid "Registered"
-msgstr "Registered"
+msgstr ""
 
 #: www/admin/search.php:176
 #, fuzzy
 msgid "No project found."
-msgstr "No ProjectGroups Found"
+msgstr ""
 
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
@@ -16049,7 +16049,7 @@ msgstr "No ProjectGroups Found"
 #: www/include/trove.php:431 www/trove/admin/trove_cat_add.php:49
 #, fuzzy, php-format
 msgid "Error in Trove Operation: %s"
-msgstr "Error In Trove Operation"
+msgstr ""
 
 #: www/admin/trove/trove_cat_add.php:68
 #, fuzzy
@@ -16058,26 +16058,26 @@ msgstr "인자가 빠졌습니다."
 
 #: www/admin/trove/trove_cat_add.php:72 www/trove/admin/trove_cat_add.php:62
 msgid "Add New Trove Category"
-msgstr "Add New Trove Category"
+msgstr ""
 
 #: www/admin/trove/trove_cat_add.php:77 www/admin/trove/trove_cat_edit.php:115
 msgid "Parent Category"
-msgstr "Parent Category"
+msgstr ""
 
 #: www/admin/trove/trove_cat_add.php:110
 #, fuzzy
 msgid "New category short name (no spaces, Unix-like)"
-msgstr "New category short name (no spaces, unix-like)"
+msgstr ""
 
 #: www/admin/trove/trove_cat_add.php:112
 #, fuzzy
 msgid "New category full name (Maximum length is 80 chars)"
-msgstr "New category full name (VARCHAR 80)"
+msgstr ""
 
 #: www/admin/trove/trove_cat_add.php:114
 #, fuzzy
 msgid "New category description (Maximum length is 255 chars)"
-msgstr "New category description (VARCHAR 255)"
+msgstr ""
 
 #: www/admin/trove/trove_cat_edit.php:47
 msgid "Error: a category cannot be the same as its own parent: "
@@ -16095,38 +16095,38 @@ msgstr ""
 #: www/admin/trove/trove_cat_edit.php:106
 #, fuzzy
 msgid "No such category, that trove cat does not exist"
-msgstr "No Such Category, That trove cat does not exist"
+msgstr ""
 
 #: www/admin/trove/trove_cat_edit.php:110
 msgid "Edit Trove Category"
-msgstr "Edit Trove Category"
+msgstr ""
 
 #: www/admin/trove/trove_cat_edit.php:141
 #, fuzzy
 msgid "Category short name (no spaces, Unix-like)"
-msgstr "New category short name (no spaces, unix-like)"
+msgstr ""
 
 #: www/admin/trove/trove_cat_edit.php:144
 #, fuzzy
 msgid "Category full name (Maximum length is 80 chars)"
-msgstr "New category full name (VARCHAR 80)"
+msgstr ""
 
 #: www/admin/trove/trove_cat_edit.php:147
 #, fuzzy
 msgid "Category description (Maximum length is 255 chars)"
-msgstr "New category description (VARCHAR 255)"
+msgstr ""
 
 #: www/admin/trove/trove_cat_list.php:74 www/trove/admin/trove_cat_list.php:69
 msgid "Browse Trove Tree"
-msgstr "Browse Trove Tree"
+msgstr ""
 
 #: www/admin/unsubscribe.php:45 www/admin/unsubscribe.php:86
 msgid "Site Mailings Subscription Maintenance"
-msgstr "Site Mailings Subscription Maintenance"
+msgstr ""
 
 #: www/admin/unsubscribe.php:48
 msgid "Unsubscribe user:"
-msgstr "Unsubscribe user:"
+msgstr ""
 
 #: www/admin/unsubscribe.php:50
 msgid ""
@@ -16134,23 +16134,20 @@ msgid ""
 "from all site mailings (admin-initiated and automated mailings, like forum "
 "and file release notifications)."
 msgstr ""
-"You can unsubscribe user either from admin-initiated sitewide mailings or "
-"from all site mailings (admin-initiated and automated mailings, like forum "
-"and file release notifications)."
 
 #: www/admin/unsubscribe.php:55
 msgid "MAIL"
-msgstr "MAIL"
+msgstr ""
 
 #: www/admin/unsubscribe.php:55 www/admin/userlist.php:67
 #: www/include/tool_reports.php:54 www/stats/site_stats_utils.php:142
 #: www/tracker/roadmap.php:427 www/tracker/roadmap.php:439
 msgid "All"
-msgstr "All"
+msgstr ""
 
 #: www/admin/unsubscribe.php:56
 msgid "Admin-initiated mailings"
-msgstr "Admin-initiated mailings"
+msgstr ""
 
 #: www/admin/unsubscribe.php:56
 #, fuzzy
@@ -16160,11 +16157,11 @@ msgstr "%1$s 메일"
 #: www/admin/unsubscribe.php:79
 #, fuzzy
 msgid "Could not unsubscribe user: "
-msgstr "Error, Could not unsubscribe user:"
+msgstr ""
 
 #: www/admin/unsubscribe.php:82
 msgid "User unsubscribed"
-msgstr "User unsubscribed"
+msgstr ""
 
 #: www/admin/unsubscribe.php:91
 #, php-format
@@ -16178,38 +16175,38 @@ msgstr ""
 
 #: www/admin/unsubscribe.php:96
 msgid "Show users matching pattern"
-msgstr "Show users matching pattern"
+msgstr ""
 
 #: www/admin/unsubscribe.php:111
 msgid "user_id"
-msgstr "user_id"
+msgstr ""
 
 #: www/admin/unsubscribe.php:115
 msgid "Site Mail."
-msgstr "Site Mail."
+msgstr ""
 
 #: www/admin/unsubscribe.php:116
 msgid "Comm. Mail."
-msgstr "Comm. Mail."
+msgstr ""
 
 #: www/admin/useredit.php:34
 msgid "No Unix account (N)"
-msgstr "No Unix account (N)"
+msgstr ""
 
 #: www/admin/useredit.php:36 www/admin/useredit.php:165
 #: www/admin/useredit.php:171 www/admin/useredit.php:175
 msgid "Suspended (S)"
-msgstr "Suspended (S)"
+msgstr ""
 
 #: www/admin/useredit.php:37 www/admin/useredit.php:54
 #: www/admin/useredit.php:166
 msgid "Deleted (D)"
-msgstr "Deleted (D)"
+msgstr ""
 
 #: www/admin/useredit.php:52 www/admin/useredit.php:69
 #, fuzzy
 msgid "Could Not Complete Operation: "
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: www/admin/useredit.php:57
 msgid ""
@@ -16223,27 +16220,27 @@ msgstr "프로젝트 더하기"
 
 #: www/admin/useredit.php:117
 msgid "Site Admin: User Info"
-msgstr "Site Admin: User Info"
+msgstr ""
 
 #: www/admin/useredit.php:121
 msgid "Account Information"
-msgstr "Account Information"
+msgstr ""
 
 #: www/admin/useredit.php:157
 msgid "Web account status"
-msgstr "Web account status"
+msgstr ""
 
 #: www/admin/useredit.php:188
 msgid "Unix Account Status"
-msgstr "Unix Account Status"
+msgstr ""
 
 #: www/admin/useredit.php:197
 msgid "Unix Shell:"
-msgstr "Unix Shell:"
+msgstr ""
 
 #: www/admin/useredit.php:220
 msgid "Current confirm hash:"
-msgstr "Current confirm hash:"
+msgstr ""
 
 #: www/admin/useredit.php:230
 msgid "I want to delete this user"
@@ -16299,7 +16296,7 @@ msgstr "파일 삭제하기"
 #: www/admin/userlist.php:62
 #, php-format
 msgid "User updated to %1$s status"
-msgstr "User updated to %1$s status"
+msgstr ""
 
 #: www/admin/userlist.php:69 www/frs/admin/index.php:95
 #: www/frs/admin/showreleases.php:81
@@ -16308,7 +16305,7 @@ msgstr ""
 
 #: www/admin/userlist.php:70
 msgid "Suspended"
-msgstr "Suspended"
+msgstr ""
 
 #: www/admin/userlist.php:71
 msgid "(*)Pending"
@@ -16330,7 +16327,7 @@ msgstr "개발자 프로필 보기"
 #: www/admin/userlist.php:120
 #, fuzzy
 msgid "Suspend"
-msgstr "Suspended"
+msgstr ""
 
 #: www/admin/userlist.php:146
 #, fuzzy
@@ -16344,17 +16341,17 @@ msgstr ""
 #: www/admin/userlist.php:161
 #, fuzzy, php-format
 msgid "User list beginning with “%s” for all projects"
-msgstr "User list for group:"
+msgstr ""
 
 #: www/admin/userlist.php:163
 #, fuzzy
 msgid "User list for all projects"
-msgstr "User list for group:"
+msgstr ""
 
 #: www/admin/userlist.php:195
 #, fuzzy
 msgid "User list for project: "
-msgstr "User list for group:"
+msgstr ""
 
 #: www/admin/userlist.php:208
 #, fuzzy
@@ -16364,7 +16361,7 @@ msgstr "프로젝트 떠나기"
 #: www/admin/vhost.php:72
 #, fuzzy
 msgid "Error adding VHOST: "
-msgstr "Error adding VHOST:"
+msgstr ""
 
 #: www/admin/vhost.php:74 www/admin/vhost.php:140
 #: www/project/admin/vhost.php:137
@@ -16374,12 +16371,12 @@ msgstr "버추얼 호스트"
 #: www/admin/vhost.php:74
 #, fuzzy
 msgid " scheduled for creation on group "
-msgstr "database 생성 일정이 추가되었습니다."
+msgstr ""
 
 #: www/admin/vhost.php:77
 #, fuzzy
 msgid "Vhost not valid"
-msgstr "Date Posted"
+msgstr ""
 
 #: www/admin/vhost.php:80
 #, fuzzy
@@ -16389,60 +16386,60 @@ msgstr "인자가 빠졌습니다."
 #: www/admin/vhost.php:100
 #, fuzzy
 msgid "Error updating VHOST entry: "
-msgstr "Error updating VHOST entry:"
+msgstr ""
 
 #: www/admin/vhost.php:102
 msgid "Virtual Host entry updated."
-msgstr "Virtual Host entry updated."
+msgstr ""
 
 #: www/admin/vhost.php:109
 msgid "Virtual Host Administration"
-msgstr "Virtual Host Administration"
+msgstr ""
 
 #: www/admin/vhost.php:113 www/admin/vhost.php:128
 msgid "Add Virtual Host"
-msgstr "Add Virtual Host"
+msgstr ""
 
 #: www/admin/vhost.php:123
 msgid "Virtual Host Name"
-msgstr "Virtual Host Name"
+msgstr ""
 
 #: www/admin/vhost.php:134
 msgid "Tweak Directories"
-msgstr "Tweak Directories"
+msgstr ""
 
 #: www/admin/vhost.php:141
 msgid "Get Info"
-msgstr "Get Info"
+msgstr ""
 
 #: www/admin/vhost.php:165
 msgid "Update Record:"
-msgstr "Update Record:"
+msgstr ""
 
 #: www/admin/vhost.php:168
 msgid "VHOST ID"
-msgstr "VHOST ID"
+msgstr ""
 
 #: www/admin/vhost.php:169
 msgid "VHOST Name"
-msgstr "VHOST Name"
+msgstr ""
 
 #: www/admin/vhost.php:170
 msgid "Group"
-msgstr "Group"
+msgstr ""
 
 #: www/admin/vhost.php:171
 msgid "Htdocs Dir"
-msgstr "Htdocs Dir"
+msgstr ""
 
 #: www/admin/vhost.php:172
 msgid "CGI Dir"
-msgstr "CGI Dir"
+msgstr ""
 
 #: www/admin/vhost.php:191
 #, fuzzy
 msgid "No such VHOST: "
-msgstr "No such VHOST:"
+msgstr ""
 
 #: www/developer/diary.php:39
 #, fuzzy
@@ -16628,7 +16625,7 @@ msgstr "통계 자료가 없습니다."
 #: www/export/rss20_activity.php:109 www/register/index.php:244
 #, fuzzy
 msgid "Source Code"
-msgstr "Source IP"
+msgstr ""
 
 #: www/export/rss20_docman.php:78
 msgid "Please supply a Group ID with the request."
@@ -16642,7 +16639,7 @@ msgstr "설문 조사를 찾을 수 없습니다."
 #: www/export/rss20_forum.php:264
 #, fuzzy
 msgid "Forum RSS: Forum not found: "
-msgstr "Error - no versions found"
+msgstr ""
 
 #: www/export/rss20_tracker.php:109
 #, fuzzy
@@ -16652,7 +16649,7 @@ msgstr "항목이 없습니다"
 #: www/export/rssAboTask.php:70
 #, fuzzy
 msgid "No project group was found for this task."
-msgstr "No ProjectGroups Found"
+msgstr ""
 
 #: www/export/rssAboTask.php:75
 #, fuzzy
@@ -16671,12 +16668,12 @@ msgstr ""
 #: www/export/rssAboTask.php:144
 #, fuzzy
 msgid "Complete"
-msgstr "Survey Complete"
+msgstr ""
 
 #: www/export/rssAboTask.php:161 www/news/news_utils.php:179
 #: www/pm/include/ProjectTaskHTML.class.php:155
 msgid "Comment"
-msgstr "Comment"
+msgstr ""
 
 #: www/export/rssAboTask.php:169
 #, fuzzy
@@ -16686,7 +16683,7 @@ msgstr "매일 갱신됩니다."
 #: www/export/rssAboTask.php:173
 #, fuzzy
 msgid "Update time"
-msgstr "Updated"
+msgstr ""
 
 #: www/export/rss_project.php:75 www/export/rss_project.php:77
 #, fuzzy
@@ -16762,7 +16759,7 @@ msgstr ""
 #: www/forum/admin/index.php:174
 #, fuzzy
 msgid "Permanently Delete Forum"
-msgstr "Related Tracker Items"
+msgstr ""
 
 #: www/forum/admin/index.php:176
 msgid ""
@@ -16806,7 +16803,7 @@ msgstr "게시판을 추가할 때 오류가 발생하였습니다."
 #: www/forum/admin/index.php:319
 #, fuzzy
 msgid "Thread not moved"
-msgstr "Thread View"
+msgstr ""
 
 #: www/forum/admin/index.php:342
 #, php-format
@@ -16842,7 +16839,7 @@ msgstr "사용자 모니터링하기"
 #: www/forum/admin/monitor.php:61
 #, fuzzy
 msgid "Realname"
-msgstr "Real name"
+msgstr ""
 
 #: www/forum/admin/pendingmsgdetail.php:42 www/forum/monitor.php:82
 #: www/forum/new.php:72 www/forum/save.php:58
@@ -16891,7 +16888,7 @@ msgstr "항목이 없습니다"
 #: www/forum/forum.php:55
 #, fuzzy
 msgid "Error forum not found: "
-msgstr "Error - no versions found"
+msgstr ""
 
 #: www/forum/forum.php:113
 msgid ""
@@ -16909,7 +16906,7 @@ msgstr ""
 
 #: www/forum/forum.php:172
 msgid "Nested"
-msgstr "Nested"
+msgstr ""
 
 #: www/forum/forum.php:172
 msgid "Flat"
@@ -16918,16 +16915,16 @@ msgstr ""
 #: www/forum/forum.php:172
 #, fuzzy
 msgid "Threaded"
-msgstr "Thread View"
+msgstr ""
 
 #: www/forum/forum.php:172
 #, fuzzy
 msgid "Ultimate"
-msgstr "Activate"
+msgstr ""
 
 #: www/forum/forum.php:178 www/include/tool_reports.php:101
 msgid "Show"
-msgstr "Show"
+msgstr ""
 
 #: www/forum/forum.php:192
 msgid "Change View"
@@ -16982,7 +16979,7 @@ msgstr "글이 존재하지 않습니다."
 
 #: www/forum/message.php:151
 msgid "Thread View"
-msgstr "Thread View"
+msgstr ""
 
 #: www/forum/message.php:219
 msgid "Post a followup to this message"
@@ -17001,7 +16998,7 @@ msgstr "모니터하고 있는 게시판이 없습니다."
 #: www/forum/monitor.php:63
 #, fuzzy
 msgid "Do you really want to unsubscribe ?"
-msgstr "Error, Could not unsubscribe user:"
+msgstr ""
 
 #: www/forum/monitor.php:72
 #, fuzzy
@@ -17039,12 +17036,12 @@ msgstr ""
 #: www/frs/admin/qrs.php:85 www/frs/admin/showreleases.php:58
 #, fuzzy
 msgid "Could Not Get FRS Package"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: www/frs/admin/deletepackage.php:57
 #, fuzzy
 msgid "Delete Package"
-msgstr "Related Tracker Items"
+msgstr ""
 
 #: www/frs/admin/deletepackage.php:65
 msgid ""
@@ -17056,7 +17053,7 @@ msgstr ""
 #: www/frs/admin/qrs.php:94 www/frs/admin/showreleases.php:74
 #, fuzzy
 msgid "Could Not Get FRS Release"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: www/frs/admin/deleterelease.php:66 www/frs/admin/index.php:113
 msgid "Release Edit/File Releases"
@@ -17244,7 +17241,7 @@ msgstr "갱신된 패키지"
 
 #: www/frs/admin/index.php:120
 msgid "QRS"
-msgstr "QRS"
+msgstr ""
 
 #: www/frs/admin/index.php:121
 #, php-format
@@ -17265,7 +17262,7 @@ msgstr ""
 #: www/frs/admin/index.php:128
 #, fuzzy
 msgid "An example of packages:"
-msgstr "Add Snippets to Package"
+msgstr ""
 
 #: www/frs/admin/index.php:130
 #, fuzzy
@@ -17318,7 +17315,7 @@ msgstr "릴리즈 추가"
 #: www/frs/admin/index.php:201
 #, fuzzy
 msgid "Create New Package"
-msgstr "Create A Package"
+msgstr ""
 
 #: www/frs/admin/index.php:205
 msgid "New Package Name"
@@ -17388,7 +17385,7 @@ msgstr "릴리즈 파일"
 #: www/frs/admin/showreleases.php:43
 #, fuzzy
 msgid "Choose package"
-msgstr "Choose One"
+msgstr ""
 
 #: www/frs/admin/showreleases.php:90
 msgid "No Releases Of This Package Are Available"
@@ -17576,7 +17573,7 @@ msgstr "프로젝트 더하기"
 #: www/include/features_boxes.php:246
 #, fuzzy
 msgid "All project activities"
-msgstr "All Project Admins"
+msgstr ""
 
 #: www/include/filechecks.php:64
 msgid "Failed tar/gz integrity check. Output follows:"
@@ -17630,7 +17627,7 @@ msgstr "추적 항목"
 #: www/include/html.php:391
 #, fuzzy
 msgid "Tracker group"
-msgstr "Tracker"
+msgstr ""
 
 #: www/include/html.php:393
 msgid ""
@@ -17741,7 +17738,7 @@ msgstr ""
 #: www/include/html.php:560
 #, fuzzy
 msgid "Error: uneven row counts"
-msgstr "Error - no versions found"
+msgstr ""
 
 #: www/include/html.php:820
 msgid "Lowest"
@@ -17852,7 +17849,7 @@ msgstr ""
 #: www/include/Layout.class.php:1389
 #, fuzzy
 msgid "Browse per tags defined by the projects."
-msgstr "No Such posting For This Project"
+msgstr ""
 
 #: www/include/Layout.class.php:1393 www/softwaremap/trove_list.php:84
 msgid "Project Tree"
@@ -17860,12 +17857,12 @@ msgstr ""
 
 #: www/include/Layout.class.php:1395 www/snippet/index.php:81
 msgid "Browse by Category"
-msgstr "Browse by Category"
+msgstr ""
 
 #: www/include/Layout.class.php:1401
 #, fuzzy
 msgid "Complete listing of available projects."
-msgstr "Here is a list of positions available for this project."
+msgstr ""
 
 #: www/include/login-form.php:71
 msgid ""
@@ -17901,23 +17898,23 @@ msgstr "리포트할 데이터가 없습니다."
 
 #: www/include/tool_reports.php:85
 msgid "Last day(s)"
-msgstr "Last day(s)"
+msgstr ""
 
 #: www/include/tool_reports.php:86
 msgid "Last week(s)"
-msgstr "Last week(s)"
+msgstr ""
 
 #: www/include/tool_reports.php:87
 msgid "Last month(s)"
-msgstr "Last month(s)"
+msgstr ""
 
 #: www/include/tool_reports.php:88
 msgid "Last year(s)"
-msgstr "Last year(s)"
+msgstr ""
 
 #: www/include/tool_reports.php:89
 msgid "Project lifespan"
-msgstr "Project lifespan"
+msgstr ""
 
 #: www/include/tool_reports.php:93
 msgid "for"
@@ -18059,17 +18056,17 @@ msgstr ""
 #: www/include/vote_function.php:215
 #: www/survey/include/SurveyHTML.class.php:512
 msgid "Low"
-msgstr "Low"
+msgstr ""
 
 #: www/include/vote_function.php:215
 #: www/survey/include/SurveyHTML.class.php:514
 msgid "High"
-msgstr "High"
+msgstr ""
 
 #: www/include/vote_function.php:288
 #: www/survey/include/SurveyHTML.class.php:556 www/survey/privacy.php:36
 msgid "Survey Privacy"
-msgstr "Survey Privacy"
+msgstr ""
 
 #: www/include/vote_function.php:295
 msgid "Survey not found."
@@ -18368,17 +18365,17 @@ msgstr ""
 #: www/mail/admin/deletelist.php:58
 #, fuzzy
 msgid "Mailing List Successfully deleted"
-msgstr "Mailing successfully scheduled for delivery"
+msgstr ""
 
 #: www/mail/admin/deletelist.php:63
 #, fuzzy
 msgid "Permanently Delete Mailing List "
-msgstr "Related Tracker Items"
+msgstr ""
 
 #: www/mail/admin/deletelist.php:69
 #, fuzzy, php-format
 msgid "Do you really want to delete mailing list %s?"
-msgstr "Error, Could not unsubscribe user:"
+msgstr ""
 
 #: www/mail/admin/index.php:126
 #, fuzzy
@@ -18414,7 +18411,7 @@ msgstr ""
 #: www/mail/index.php:47
 #, fuzzy
 msgid "Could Not Get MailingListFactory"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: www/mail/index.php:61
 #, php-format
@@ -18637,7 +18634,7 @@ msgstr ""
 
 #: www/news/admin/index.php:162
 msgid "No Queued Items Found"
-msgstr "No Queued Items Found For Project"
+msgstr ""
 
 #: www/news/admin/news_admin_utils.php:75
 #, fuzzy
@@ -18718,7 +18715,7 @@ msgstr "뉴스 제출하기"
 #: www/news/news_utils.php:282
 #, fuzzy
 msgid "Not Found"
-msgstr "None Found"
+msgstr ""
 
 #: www/news/submit.php:74
 #, fuzzy
@@ -18728,7 +18725,7 @@ msgstr "프로젝트의 관리자가 아니라면 뉴스를 올릴 수 없습니
 
 #: www/news/submit.php:78
 msgid "Submitting news from the news group is not allowed."
-msgstr "Submitting news from the news group is not allowed."
+msgstr ""
 
 #: www/news/submit.php:107
 #, fuzzy
@@ -18763,12 +18760,12 @@ msgstr ""
 
 #: www/people/admin/index.php:55 www/pm/admin/index.php:98
 msgid "Category Inserted"
-msgstr "Category Inserted"
+msgstr ""
 
 #: www/people/admin/index.php:68
 #, fuzzy
 msgid "Skill Inserted"
-msgstr "Survey Inserted"
+msgstr ""
 
 #: www/people/createjob.php:44
 msgid ""
@@ -18781,12 +18778,12 @@ msgstr ""
 #: www/people/createjob.php:52 www/people/editjob.php:169
 #: www/project/admin/index.php:139
 msgid "Short Description"
-msgstr "Short Description"
+msgstr ""
 
 #: www/people/createjob.php:55 www/people/editjob.php:172
 #: www/people/viewjob.php:84
 msgid "Long Description"
-msgstr "Long Description"
+msgstr ""
 
 #: www/people/createjob.php:58
 msgid "Continue >>"
@@ -18800,7 +18797,7 @@ msgstr "입력 실패"
 #: www/people/editjob.php:65
 #, fuzzy
 msgid "Job inserted successfully"
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: www/people/editjob.php:80
 #, fuzzy, php-format
@@ -18810,7 +18807,7 @@ msgstr "매일 갱신됩니다."
 #: www/people/editjob.php:82 www/people/editjob.php:96
 #, fuzzy
 msgid "Job updated successfully"
-msgstr "JOB updated successfully"
+msgstr ""
 
 #: www/people/editjob.php:91 www/people/people_utils.php:126
 #: www/people/people_utils.php:156 www/people/people_utils.php:234
@@ -18831,7 +18828,7 @@ msgstr "스킬 편집"
 #: www/people/editjob.php:98
 #, fuzzy
 msgid "Job update failed - wrong project_id"
-msgstr "JOB update failed - wrong project_id"
+msgstr ""
 
 #: www/people/editjob.php:107
 msgid "Job Inventory"
@@ -18840,17 +18837,17 @@ msgstr ""
 #: www/people/editjob.php:114
 #, fuzzy, php-format
 msgid "Job skill update failed: %s"
-msgstr "JOB skill update FAILED"
+msgstr ""
 
 #: www/people/editjob.php:116
 #, fuzzy
 msgid "Job skill updated successfully"
-msgstr "JOB skill updated successfully"
+msgstr ""
 
 #: www/people/editjob.php:119
 #, fuzzy
 msgid "Job skill update failed - wrong project_id"
-msgstr "JOB skill update failed - wrong project_id"
+msgstr ""
 
 #: www/people/editjob.php:128
 msgid "Job ID"
@@ -18859,17 +18856,17 @@ msgstr ""
 #: www/people/editjob.php:134
 #, fuzzy, php-format
 msgid "Job skill delete failed: %s"
-msgstr "JOB skill delete FAILED"
+msgstr ""
 
 #: www/people/editjob.php:136
 #, fuzzy
 msgid "Job skill deleted successfully"
-msgstr "JOB skill deleted successfully"
+msgstr ""
 
 #: www/people/editjob.php:139
 #, fuzzy
 msgid "Job skill delete failed - wrong project_id"
-msgstr "JOB skill delete failed - wrong project_id"
+msgstr ""
 
 #: www/people/editjob.php:152
 #, fuzzy, php-format
@@ -18879,7 +18876,7 @@ msgstr "존재하는 파일"
 #: www/people/editjob.php:153
 #, fuzzy
 msgid "No such posting for this project"
-msgstr "No Such posting For This Project"
+msgstr ""
 
 #: www/people/editjob.php:157
 #, fuzzy
@@ -18897,11 +18894,11 @@ msgstr ""
 
 #: www/people/editjob.php:175
 msgid "Update Descriptions"
-msgstr "Update Descriptions"
+msgstr ""
 
 #: www/people/editjob.php:180
 msgid "Finished"
-msgstr "Finished"
+msgstr ""
 
 #: www/people/editprofile.php:54
 #, fuzzy, php-format
@@ -18924,7 +18921,7 @@ msgstr "스킬을 성공적으로 추가하였습니다."
 #: www/people/editprofile.php:106
 #, fuzzy
 msgid "Start Month"
-msgstr "Month"
+msgstr ""
 
 #: www/people/editprofile.php:106
 #, fuzzy
@@ -18934,7 +18931,7 @@ msgstr "새글 올리기"
 #: www/people/editprofile.php:106
 #, fuzzy
 msgid "End Month"
-msgstr "Month"
+msgstr ""
 
 #: www/people/editprofile.php:106
 msgid "End Year"
@@ -19025,7 +19022,7 @@ msgstr "프로필 편집"
 #: www/people/editprofile.php:233 www/people/skills_utils.php:121
 #: www/people/skills_utils.php:122 www/people/viewprofile.php:47
 msgid "No Such User"
-msgstr "No Such User"
+msgstr ""
 
 #: www/people/editprofile.php:237
 msgid "Edit Public Permissions"
@@ -19084,11 +19081,11 @@ msgstr "스킬 편집/삭제"
 
 #: www/people/helpwanted-latest.php:36
 msgid "Help Wanted Latest Posts"
-msgstr "Help Wanted Latest Posts"
+msgstr ""
 
 #: www/people/index.php:42
 msgid "Here is a list of positions available for this project."
-msgstr "Here is a list of positions available for this project."
+msgstr ""
 
 #: www/people/index.php:49 www/people/index.php:58
 msgid "Help Wanted System"
@@ -19096,7 +19093,7 @@ msgstr "도움이 필요한 프로젝트"
 
 #: www/people/index.php:52
 msgid "Click job titles for more detailed descriptions."
-msgstr "Click job titles for more detailed descriptions."
+msgstr ""
 
 #: www/people/index.php:61
 #, php-format
@@ -19130,44 +19127,44 @@ msgstr ""
 
 #: www/people/index.php:82
 msgid "Last posts"
-msgstr "Last posts"
+msgstr ""
 
 #: www/people/index.php:91
 msgid "more latest posts"
-msgstr "more latest posts"
+msgstr ""
 
 #: www/people/people_utils.php:94
 msgid "Must select a skill ID"
-msgstr "Must select a skill ID"
+msgstr ""
 
 #: www/people/people_utils.php:103
 #, fuzzy
 msgid "Error inserting into skill inventory: "
-msgstr "ERROR inserting into skill inventory"
+msgstr ""
 
 #: www/people/people_utils.php:106
 msgid "Added to skill inventory"
-msgstr "Added to skill inventory"
+msgstr ""
 
 #: www/people/people_utils.php:109
 #, fuzzy
 msgid "Error: skill already in your inventory"
-msgstr "ERROR - skill already in your inventory"
+msgstr ""
 
 #: www/people/people_utils.php:127 www/people/people_utils.php:157
 #: www/people/people_utils.php:235 www/people/people_utils.php:297
 msgid "Level"
-msgstr "Level"
+msgstr ""
 
 #: www/people/people_utils.php:128 www/people/people_utils.php:158
 #: www/people/people_utils.php:236 www/people/people_utils.php:298
 msgid "Experience"
-msgstr "Experience"
+msgstr ""
 
 #: www/people/people_utils.php:136 www/people/people_utils.php:243
 #: www/people/people_utils.php:308
 msgid "No Skill Inventory Set Up"
-msgstr "No Skill Inventory Set Up"
+msgstr ""
 
 #: www/people/people_utils.php:166
 msgid "No skill setup"
@@ -19175,34 +19172,34 @@ msgstr ""
 
 #: www/people/people_utils.php:193 www/people/people_utils.php:339
 msgid "Add Skill"
-msgstr "Add Skill"
+msgstr ""
 
 #: www/people/people_utils.php:211
 #, fuzzy
 msgid "Error inserting into job inventory: "
-msgstr "ERROR inserting into skill inventory"
+msgstr ""
 
 #: www/people/people_utils.php:214
 #, fuzzy
 msgid "Added to job inventory"
-msgstr "Added to skill inventory"
+msgstr ""
 
 #: www/people/people_utils.php:217
 #, fuzzy
 msgid "Error: job already in your inventory"
-msgstr "ERROR - skill already in your inventory"
+msgstr ""
 
 #: www/people/people_utils.php:272 www/people/people_utils.php:281
 msgid "Invalid ID"
-msgstr "Invalid ID"
+msgstr ""
 
 #: www/people/people_utils.php:363
 msgid "No Categories Found"
-msgstr "No Categories Found"
+msgstr ""
 
 #: www/people/people_utils.php:407
 msgid "Date Opened"
-msgstr "Date Opened"
+msgstr ""
 
 #: www/people/people_utils.php:408
 #, php-format
@@ -19211,16 +19208,16 @@ msgstr "%1$s project"
 
 #: www/people/people_utils.php:415
 msgid "None Found"
-msgstr "None Found"
+msgstr ""
 
 #: www/people/viewjob.php:54
 #, fuzzy
 msgid "Posting fetch failed: No such posting for this project:"
-msgstr "No Such posting For This Project"
+msgstr ""
 
 #: www/people/viewjob.php:55 www/people/viewjob.php:58
 msgid "View a Job"
-msgstr "View a Job"
+msgstr ""
 
 #: www/people/viewjob.php:68
 msgid "Contact Info"
@@ -19279,12 +19276,12 @@ msgstr "달력 보기"
 #: www/pm/add_task.php:130 www/pm/detail_task.php:141 www/pm/mod_task.php:183
 #, fuzzy
 msgid "Dependent on task"
-msgstr "Dependend on Task"
+msgstr ""
 
 #: www/pm/add_task.php:134
 #, fuzzy
 msgid "Dependent note"
-msgstr "Dependend on Task"
+msgstr ""
 
 #: www/pm/admin/index.php:62 www/pm/admin/index.php:93
 #: www/pm/admin/index.php:113 www/pm/admin/index.php:170
@@ -19296,11 +19293,11 @@ msgstr "그룹 객체 생성 오류"
 #: www/pm/admin/index.php:79
 #, fuzzy
 msgid "Subproject Inserted"
-msgstr "Project Inserted"
+msgstr ""
 
 #: www/pm/admin/index.php:120
 msgid "Category Updated"
-msgstr "Category Updated"
+msgstr ""
 
 #: www/pm/admin/index.php:139
 #, fuzzy
@@ -19310,7 +19307,7 @@ msgstr "성공적으로 갱신되었습니다."
 #: www/pm/admin/index.php:154
 #, fuzzy
 msgid "Subproject successfully deleted."
-msgstr "JOB inserted successfully"
+msgstr ""
 
 #: www/pm/admin/index.php:177
 #, fuzzy, php-format
@@ -19333,7 +19330,7 @@ msgstr "분류를 한 번 만들면 지울 수 없습니다"
 #: www/pm/admin/index.php:241
 #, fuzzy, php-format
 msgid "Modify a Category in: %s"
-msgstr "Modify an Category in"
+msgstr ""
 
 #: www/pm/admin/index.php:251
 msgid ""
@@ -19366,7 +19363,7 @@ msgstr "새 프로젝트 이름"
 
 #: www/pm/admin/index.php:291 www/pm/admin/index.php:341
 msgid "Send All Updates To"
-msgstr "Send All Updates To"
+msgstr ""
 
 #: www/pm/admin/index.php:308
 #, fuzzy
@@ -19391,7 +19388,7 @@ msgstr ""
 #: www/pm/admin/index.php:370 www/pm/admin/index.php:392
 #, fuzzy
 msgid "Permanently delete this subproject and all its data"
-msgstr "Related Tracker Items"
+msgstr ""
 
 #: www/pm/admin/index.php:377
 msgid ""
@@ -19421,7 +19418,7 @@ msgstr ""
 #: www/pm/admin/index.php:428
 #, fuzzy
 msgid "No Subprojects Found in this Project"
-msgstr "No Such posting For This Project"
+msgstr ""
 
 #: www/pm/admin/index.php:429
 msgid "You may add new Subprojects using the “Add a Subproject” link above."
@@ -19464,7 +19461,7 @@ msgstr "해당하는 임무를 찾을 수 없음"
 
 #: www/pm/browse_task.php:171
 msgid "Add tasks using the link above"
-msgstr "Add tasks using the link above"
+msgstr ""
 
 #: www/pm/browse_task.php:179
 #, php-format
@@ -19474,12 +19471,12 @@ msgstr ""
 #: www/pm/browse_task.php:300
 #, fuzzy
 msgid "previous"
-msgstr "previous 50"
+msgstr ""
 
 #: www/pm/browse_task.php:307
 #, fuzzy
 msgid "next"
-msgstr "next 50"
+msgstr ""
 
 #: www/pm/browse_task.php:319
 msgid "* Denotes overdue tasks"
@@ -19557,22 +19554,22 @@ msgstr "12월"
 #: www/pm/calendar.php:101
 #, fuzzy
 msgid "Error: Could Not Get Factory"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: www/pm/calendar.php:108
 #, fuzzy
 msgid "Error: Could Not Get ProjectTaskFactory"
-msgstr "Could Not Complete Operation"
+msgstr ""
 
 #: www/pm/calendar.php:125
 #, fuzzy
 msgid "Calendar"
-msgstr "Calendars"
+msgstr ""
 
 #: www/pm/calendar.php:140
 #, fuzzy, php-format
 msgid "Task summary: %s"
-msgstr "Task Summary"
+msgstr ""
 
 #: www/pm/calendar.php:143
 #, fuzzy, php-format
@@ -19591,7 +19588,7 @@ msgstr ""
 #: www/pm/calendar.php:250
 #, fuzzy
 msgid "Period"
-msgstr "Version"
+msgstr ""
 
 #: www/pm/calendar.php:254
 msgid "One month"
@@ -19604,7 +19601,7 @@ msgstr ""
 #: www/pm/calendar.php:258
 #, fuzzy
 msgid "Current year"
-msgstr "Version"
+msgstr ""
 
 #: www/pm/calendar.php:260
 msgid "Coming year"
@@ -19712,7 +19709,7 @@ msgstr ""
 #: www/pm/csv.php:137
 #, fuzzy
 msgid "Number of hours required to complete"
-msgstr "Number of tasks still not completed"
+msgstr ""
 
 #: www/pm/csv.php:141
 msgid "The start date in MM-DD-YYYY HH:MM:SS format"
@@ -19780,7 +19777,7 @@ msgstr ""
 
 #: www/pm/detail_task.php:104 www/pm/mod_task.php:114
 msgid "Original Comment"
-msgstr "Original Comment"
+msgstr ""
 
 #: www/pm/detail_task.php:148
 msgid "Hours"
@@ -19789,17 +19786,17 @@ msgstr ""
 #: www/pm/format_csv.php:48
 #, fuzzy
 msgid "Update CSV Format"
-msgstr "Updated"
+msgstr ""
 
 #: www/pm/format_csv.php:58
 #, fuzzy
 msgid "CSV Format"
-msgstr "Updated"
+msgstr ""
 
 #: www/pm/format_csv.php:67
 #, fuzzy
 msgid "Full"
-msgstr "Full Name"
+msgstr ""
 
 #: www/pm/format_csv.php:68
 msgid "Normal"
@@ -19829,7 +19826,7 @@ msgstr ""
 #: www/pm/format_csv.php:89
 #, fuzzy
 msgid "Full/Normal"
-msgstr "Full Name"
+msgstr ""
 
 #: www/pm/format_csv.php:90
 msgid "In Full, the category is also exported."
@@ -19853,7 +19850,7 @@ msgstr ""
 
 #: www/pm/ganttpage.php:34 www/pm/include/ProjectGroupHTML.class.php:73
 msgid "Gantt Chart"
-msgstr "Gantt Chart"
+msgstr ""
 
 #: www/pm/ganttpage.php:61
 #, fuzzy
@@ -19863,12 +19860,12 @@ msgstr "게시판을 추가할 때 오류가 발생하였습니다."
 #: www/pm/ganttpage.php:66
 #, fuzzy
 msgid "Error in PTF: "
-msgstr "Error adding VHOST:"
+msgstr ""
 
 #: www/pm/ganttpage.php:244
 #, fuzzy
 msgid "task summary"
-msgstr "Task Summary"
+msgstr ""
 
 #: www/pm/ganttpage.php:245
 #, fuzzy
@@ -19918,15 +19915,15 @@ msgstr "시작되지 않음"
 
 #: www/pm/include/ProjectTaskHTML.class.php:69
 msgid "Tasks That Depend on This Task"
-msgstr "Tasks That Depend on This Task"
+msgstr ""
 
 #: www/pm/include/ProjectTaskHTML.class.php:88
 msgid "No Tasks are Dependent on This Task"
-msgstr "No Tasks are Dependent on This Task"
+msgstr ""
 
 #: www/pm/include/ProjectTaskHTML.class.php:104
 msgid "Related Tracker Items"
-msgstr "Related Tracker Items"
+msgstr ""
 
 #: www/pm/include/ProjectTaskHTML.class.php:107
 #, fuzzy
@@ -19935,7 +19932,7 @@ msgstr "프로젝트 히스토리"
 
 #: www/pm/include/ProjectTaskHTML.class.php:129
 msgid "No Related Tracker Items Have Been Added"
-msgstr "No Related Tracker Items Have Been Added"
+msgstr ""
 
 #: www/pm/include/ProjectTaskHTML.class.php:146
 msgid "Sort comments antichronologically"
@@ -19947,25 +19944,25 @@ msgstr ""
 
 #: www/pm/include/ProjectTaskHTML.class.php:182
 msgid "No Comments Have Been Added"
-msgstr "No Comments Have Been Added"
+msgstr ""
 
 #: www/pm/include/ProjectTaskHTML.class.php:197
 msgid "Task Change History"
-msgstr "Task Change History"
+msgstr ""
 
 #: www/pm/include/ProjectTaskHTML.class.php:243
 msgid "No Changes Have Been Made"
-msgstr "No Changes Have Been Made"
+msgstr ""
 
 #: www/pm/index.php:56
 #, fuzzy, php-format
 msgid "Subprojects for %1$s"
-msgstr "Source of %1$s"
+msgstr ""
 
 #: www/pm/index.php:61
 #, fuzzy
 msgid "No Subprojects Found"
-msgstr "No ProjectGroups Found"
+msgstr ""
 
 #: www/pm/index.php:62
 msgid "No subprojects have been set up, or you cannot view them."
@@ -20008,7 +20005,7 @@ msgstr ""
 
 #: www/pm/mod_task.php:266 www/stats/site_stats_utils.php:357
 msgid "Day"
-msgstr "Day"
+msgstr ""
 
 #: www/pm/postuploadcsv.php:117
 #, fuzzy
@@ -20021,51 +20018,51 @@ msgstr "임무 리포팅 시스템"
 
 #: www/pm/reporting/index.php:61 www/pm/reporting/index.php:98
 msgid "Aging Report"
-msgstr "Aging Report"
+msgstr ""
 
 #: www/pm/reporting/index.php:62
 msgid "Report by Assignee"
-msgstr "Report by Technician"
+msgstr ""
 
 #: www/pm/reporting/index.php:63
 msgid "Report by Subproject"
-msgstr "Report by Subproject"
+msgstr ""
 
 #: www/pm/reporting/index.php:115
 msgid "Average duration for closed tasks (days)"
-msgstr "Average duration for closed tasks (days)"
+msgstr ""
 
 #: www/pm/reporting/index.php:116
 msgid "Number of started tasks"
-msgstr "Number of started tasks"
+msgstr ""
 
 #: www/pm/reporting/index.php:177
 msgid "Number of tasks still not completed"
-msgstr "Number of tasks still not completed"
+msgstr ""
 
 #: www/pm/reporting/index.php:205
 msgid "Tasks By Category"
-msgstr "Tasks By Category"
+msgstr ""
 
 #: www/pm/reporting/index.php:206
 msgid "Open Tasks By Category"
-msgstr "Open Tasks By Category"
+msgstr ""
 
 #: www/pm/reporting/index.php:207
 msgid "All Tasks By Category"
-msgstr "All Tasks By Category"
+msgstr ""
 
 #: www/pm/reporting/index.php:235
 msgid "Tasks By Assignee"
-msgstr "Tasks By Technician"
+msgstr ""
 
 #: www/pm/reporting/index.php:236
 msgid "Open Tasks By Assignee"
-msgstr "Open Tasks By Technician"
+msgstr ""
 
 #: www/pm/reporting/index.php:237
 msgid "All Tasks By Assignee"
-msgstr "All Tasks By Technician"
+msgstr ""
 
 #: www/pm/reporting/index.php:238
 #, fuzzy
@@ -20079,7 +20076,7 @@ msgstr ""
 #: www/pm/task.php:69
 #, fuzzy
 msgid "Group ID"
-msgstr "Group"
+msgstr ""
 
 #: www/pm/task.php:72
 #, fuzzy
@@ -20090,12 +20087,12 @@ msgstr "상위 프로젝트"
 #: www/pm/task.php:328 www/pm/task.php:345 www/pm/task.php:377
 #, fuzzy
 msgid "Could Not Get ProjectTask"
-msgstr "Could Not Update Parent"
+msgstr ""
 
 #: www/pm/task.php:122
 #, fuzzy
 msgid "Could Not Get Empty ProjectTask"
-msgstr "Could Not Update Parent"
+msgstr ""
 
 #: www/pm/task.php:130 www/pm/task.php:179
 msgid "Illegal format for hours: must be an integer or a float number."
@@ -20103,11 +20100,11 @@ msgstr ""
 
 #: www/pm/task.php:151
 msgid "Task Created Successfully"
-msgstr "Task Created Successfully"
+msgstr ""
 
 #: www/pm/task.php:196 www/pm/task.php:290
 msgid "Task Updated Successfully"
-msgstr "Task Updated Successfully"
+msgstr ""
 
 #: www/pm/task.php:287
 #, fuzzy
@@ -20116,7 +20113,7 @@ msgstr "Account 삭제되었습니다"
 
 #: www/pm/task.php:313
 msgid "Successfully Added Tracker Relationship"
-msgstr "Successfully Added Tracker Relationship"
+msgstr ""
 
 #: www/pm/task.php:350
 msgid "Confirmation failed. Task not deleted"
@@ -20129,7 +20126,7 @@ msgstr ""
 #: www/pm/t_follow.php:36
 #, fuzzy
 msgid "TID"
-msgstr "ID"
+msgstr ""
 
 #: www/pm/t_follow.php:42
 msgid "no task with id :"
@@ -20301,7 +20298,7 @@ msgstr "로컬 파일명"
 
 #: www/project/admin/editimages.php:268
 msgid "Dims"
-msgstr "Dims"
+msgstr ""
 
 #: www/project/admin/editimages.php:290
 msgid "Del"
@@ -20310,12 +20307,12 @@ msgstr "지우기"
 #: www/project/admin/group_trove.php:70
 #, fuzzy
 msgid "Trove Update Success"
-msgstr "Task Updated Successfully"
+msgstr ""
 
 #: www/project/admin/group_trove.php:76
 #, fuzzy
 msgid "Edit Trove Categorization"
-msgstr "Edit Trove Category"
+msgstr ""
 
 #: www/project/admin/group_trove.php:79
 msgid ""
@@ -20393,7 +20390,7 @@ msgstr ""
 #: www/project/admin/index.php:192
 #, fuzzy
 msgid "Trove Categorization"
-msgstr "Edit Trove Category"
+msgstr ""
 
 #: www/project/admin/index.php:194
 #, fuzzy
@@ -20480,7 +20477,7 @@ msgstr ""
 #: www/project/admin/project_admin_utils.php:56
 #, fuzzy
 msgid "Tools"
-msgstr "Total"
+msgstr ""
 
 #: www/project/admin/project_admin_utils.php:57
 msgid "Activate / Desactivate extensions like docman, forums, plugins."
@@ -20513,7 +20510,7 @@ msgstr ""
 
 #: www/project/admin/project_admin_utils.php:80
 msgid "VHOSTs"
-msgstr "VHOSTs"
+msgstr ""
 
 #: www/project/admin/project_admin_utils.php:86
 msgid "Database Admin"
@@ -20614,12 +20611,12 @@ msgstr "%1$s의 게시판"
 #: www/project/admin/tools.php:115
 #, fuzzy
 msgid "Active Tools"
-msgstr "Active"
+msgstr ""
 
 #: www/project/admin/tools.php:152
 #, fuzzy
 msgid "Use Project Activity"
-msgstr "All Project Admins"
+msgstr ""
 
 #: www/project/admin/tools.php:165
 msgid "Use Forums"
@@ -20637,7 +20634,7 @@ msgstr "메일링 리스트 사용"
 #: www/project/admin/tools.php:204
 #, fuzzy
 msgid "Use Tasks"
-msgstr "Tasks"
+msgstr ""
 
 #: www/project/admin/tools.php:217
 #, fuzzy
@@ -20655,7 +20652,7 @@ msgstr "뉴스 기능 사용"
 #: www/project/admin/tools.php:256
 #, fuzzy
 msgid "Use Source Code"
-msgstr "Source IP"
+msgstr ""
 
 #: www/project/admin/tools.php:269
 msgid "Use File Release System"
@@ -20691,7 +20688,7 @@ msgstr "게시판 설정"
 #: www/project/admin/tools.php:333
 #, fuzzy
 msgid "Survey Admin"
-msgstr "Survey Administration"
+msgstr ""
 
 #: www/project/admin/tools.php:336
 #, fuzzy
@@ -20701,7 +20698,7 @@ msgstr "뉴스 설정"
 #: www/project/admin/tools.php:339
 #, fuzzy
 msgid "Source Code Admin"
-msgstr "Source IP"
+msgstr ""
 
 #: www/project/admin/tools.php:342
 #, fuzzy
@@ -20752,7 +20749,7 @@ msgstr "파일 삭제: 성공"
 #: www/project/admin/users.php:212
 #, fuzzy, php-format
 msgid "Members of %s"
-msgstr "Members"
+msgstr ""
 
 #: www/project/admin/users.php:224
 msgid "Pending Membership Requests"
@@ -20766,7 +20763,7 @@ msgstr ""
 #: www/project/admin/users.php:278
 #, fuzzy
 msgid "Add Member"
-msgstr "Members"
+msgstr ""
 
 #: www/project/admin/users.php:289
 #, fuzzy
@@ -20822,7 +20819,7 @@ msgstr "버추얼 호스트 관리"
 #: www/project/admin/vhost.php:105
 #, fuzzy
 msgid "Add New Virtual Host"
-msgstr "Add Virtual Host"
+msgstr ""
 
 #: www/project/admin/vhost.php:108
 #, php-format
@@ -20867,7 +20864,7 @@ msgstr ""
 #: www/project/memberlist.php:49
 #, fuzzy
 msgid "Member"
-msgstr "Members"
+msgstr ""
 
 #: www/project/memberlist.php:51
 #, fuzzy
@@ -21060,7 +21057,7 @@ msgstr ""
 #: www/register/index.php:223
 #, fuzzy
 msgid "Unix name will never change for this project;"
-msgstr "No Such posting For This Project"
+msgstr ""
 
 #: www/register/index.php:225
 msgid ""
@@ -21095,7 +21092,7 @@ msgstr ""
 #: www/register/index.php:248 www/register/index.php:250
 #, fuzzy
 msgid "No SCM"
-msgstr "SCM"
+msgstr ""
 
 #: www/register/index.php:264
 #, fuzzy
@@ -21147,7 +21144,7 @@ msgstr ""
 
 #: www/reporting/index.php:37 www/stats/i18n.php:34
 msgid "Users"
-msgstr "Users"
+msgstr ""
 
 #: www/reporting/index.php:41 www/reporting/useract.php:64
 msgid "User Activity"
@@ -21371,12 +21368,12 @@ msgstr ""
 #: www/scm/include/scm_utils.php:47
 #, fuzzy
 msgid "View Source Code"
-msgstr "Source IP"
+msgstr ""
 
 #: www/scm/include/scm_utils.php:49
 #, fuzzy
 msgid "Online Source code browsing"
-msgstr "Source IP"
+msgstr ""
 
 #: www/scm/include/scm_utils.php:52
 msgid "Global statistics on this SCM repository"
@@ -21478,37 +21475,37 @@ msgstr ""
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:132
 #, fuzzy
 msgid "Forum Search Results"
-msgstr "Admin Search Results"
+msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:122
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:128
 #, fuzzy
 msgid "Tracker Search Results"
-msgstr "Admin Search Results"
+msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:127
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:136
 #, fuzzy
 msgid "Task Search Results"
-msgstr "Admin Search Results"
+msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:132
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:140
 #, fuzzy
 msgid "Documentation Search Results"
-msgstr "Admin Search Results"
+msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:137
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:144
 #, fuzzy
 msgid "Files Search Results"
-msgstr "Admin Search Results"
+msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:142
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:148
 #, fuzzy
 msgid "News Search Results"
-msgstr "Admin Search Results"
+msgstr ""
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:190
 #, php-format
@@ -21558,7 +21555,7 @@ msgstr "대량 갱신"
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:173
 #, fuzzy, php-format
 msgid "%s Search Results"
-msgstr "Admin Search Results"
+msgstr ""
 
 #: www/search/include/renderers/HtmlGroupSearchRenderer.class.php:72
 #, php-format
@@ -21600,7 +21597,7 @@ msgstr "이메일 주소"
 #: www/sendmessage.php:33
 #, fuzzy
 msgid "touser"
-msgstr "user_id"
+msgstr ""
 
 #: www/sendmessage.php:50
 #, php-format
@@ -21652,7 +21649,7 @@ msgstr "메일 보내기"
 
 #: www/snippet/add_snippet_to_package.php:51 www/snippet/snippet_utils.php:131
 msgid "Submit A New Snippet"
-msgstr "Submit A New Snippet"
+msgstr ""
 
 #: www/snippet/add_snippet_to_package.php:56
 msgid "Error: snippet_package_version_id missing"
@@ -21684,14 +21681,14 @@ msgstr "오류 - 코드가 존재하지 않습니다."
 
 #: www/snippet/add_snippet_to_package.php:110 www/snippet/addversion.php:74
 msgid "Snippet Version Added Successfully."
-msgstr "Snippet Version Added Successfully."
+msgstr ""
 
 #: www/snippet/add_snippet_to_package.php:113 www/snippet/addversion.php:77
 #: www/snippet/addversion.php:198 www/snippet/package.php:123
 #: www/snippet/submit.php:81
 #, fuzzy
 msgid "Error: Go back and fill in all the information"
-msgstr "Error - Go back and fill in all the information"
+msgstr ""
 
 #: www/snippet/add_snippet_to_package.php:130
 msgid ""
@@ -21712,12 +21709,12 @@ msgstr "이 코드 버전 ID를 추가하기:"
 #: www/snippet/addversion.php:226 www/snippet/package.php:174
 #: www/snippet/submit.php:144
 msgid "Make sure all info is complete and accurate"
-msgstr "Make sure all info is complete and accurate"
+msgstr ""
 
 #: www/snippet/add_snippet_to_package.php:184
 #: www/snippet/snippet_utils.php:164
 msgid "No Snippets Are In This Package Yet"
-msgstr "No Snippets Are In This Package Yet"
+msgstr ""
 
 #: www/snippet/add_snippet_to_package.php:186
 #: www/snippet/snippet_utils.php:151
@@ -21727,7 +21724,7 @@ msgstr "이 패키지에 있는 코드들"
 #: www/snippet/addversion.php:81 www/snippet/addversion.php:202
 #, fuzzy
 msgid "New snippet version"
-msgstr "Latest Snippet Version:"
+msgstr ""
 
 #: www/snippet/addversion.php:84
 msgid ""
@@ -21739,12 +21736,12 @@ msgstr ""
 
 #: www/snippet/addversion.php:102 www/snippet/submit.php:140
 msgid "Paste the Code Here"
-msgstr "Paste the Code Here"
+msgstr ""
 
 #: www/snippet/addversion.php:127
 #, fuzzy
 msgid "Error: snippet_package doesn't exist"
-msgstr "Error, Error - snippet_package doesn't exist"
+msgstr ""
 
 #: www/snippet/addversion.php:154 www/snippet/package.php:75
 #, fuzzy
@@ -21754,20 +21751,20 @@ msgstr "오류 - 코드 버전 ID가 없습니다."
 #: www/snippet/addversion.php:155
 #, fuzzy
 msgid "New snippet package"
-msgstr "Submit A New Snippet Package"
+msgstr ""
 
 #: www/snippet/addversion.php:160 www/snippet/package.php:82
 msgid "Snippet Package Version Added Successfully."
-msgstr "Snippet Package Version Added Successfully."
+msgstr ""
 
 #: www/snippet/addversion.php:165
 #, fuzzy
 msgid "Add snippet to package"
-msgstr "Add Snippets to Package"
+msgstr ""
 
 #: www/snippet/addversion.php:181 www/snippet/package.php:105
 msgid "IMPORTANT!"
-msgstr "IMPORTANT!"
+msgstr ""
 
 #: www/snippet/addversion.php:183 www/snippet/package.php:107
 msgid ""
@@ -21783,7 +21780,7 @@ msgstr ""
 #: www/snippet/package.php:109
 #, fuzzy
 msgid "Add snippets to package"
-msgstr "Add Snippets to Package"
+msgstr ""
 
 #: www/snippet/addversion.php:187 www/snippet/package.php:112
 msgid ""
@@ -21804,23 +21801,23 @@ msgstr ""
 #: www/snippet/addversion.php:236
 #, fuzzy
 msgid "Error: was the URL or form mangled??"
-msgstr "Error, Error - was the URL or form mangled??"
+msgstr ""
 
 #: www/snippet/browse.php:48 www/snippet/detail.php:43
 #: www/snippet/detail.php:131 www/snippet/detail.php:213
 #: www/snippet/index.php:101
 msgid "Snippet Library"
-msgstr "Snippet Library"
+msgstr ""
 
 #: www/snippet/browse.php:61
 #, php-format
 msgid "Snippets by language: %1$s"
-msgstr "Snippets by language: %1$s"
+msgstr ""
 
 #: www/snippet/browse.php:68
 #, php-format
 msgid "Snippets by category: %1$s"
-msgstr "Snippets by category: %1$s"
+msgstr ""
 
 #: www/snippet/browse.php:70
 #, fuzzy
@@ -21829,12 +21826,12 @@ msgstr "갱신 오류:"
 
 #: www/snippet/browse.php:79
 msgid "No snippets found"
-msgstr "No snippets found"
+msgstr ""
 
 #: www/snippet/browse.php:83 www/snippet/detail.php:63
 #: www/snippet/snippet_utils.php:154
 msgid "Snippet ID"
-msgstr "Snippet ID"
+msgstr ""
 
 #: www/snippet/browse.php:85
 #, fuzzy
@@ -21843,54 +21840,50 @@ msgstr "생성"
 
 #: www/snippet/browse.php:92
 msgid "Packages Of Snippets"
-msgstr "Packages Of Snippets"
+msgstr ""
 
 #: www/snippet/browse.php:107
 msgid "Snippets"
-msgstr "Snippets"
+msgstr ""
 
 #: www/snippet/delete.php:142
 #, fuzzy
 msgid "Error: mangled URL?"
-msgstr "Error, Error - was the URL or form mangled??"
+msgstr ""
 
 #: www/snippet/detail.php:57 www/snippet/detail.php:147
 #, fuzzy
 msgid "Error: no versions found"
-msgstr "Error - no versions found"
+msgstr ""
 
 #: www/snippet/detail.php:60
 msgid "Versions Of This Snippet:"
-msgstr "Versions Of This Snippet:"
+msgstr ""
 
 #: www/snippet/detail.php:64 www/snippet/snippet_utils.php:155
 msgid "Download Version"
-msgstr "Download Version"
+msgstr ""
 
 #: www/snippet/detail.php:65 www/snippet/detail.php:154
 msgid "Date Posted"
-msgstr "Date Posted"
+msgstr ""
 
 #: www/snippet/detail.php:87
 msgid "Changes since last version:"
-msgstr "Changes since last version:"
+msgstr ""
 
 #: www/snippet/detail.php:95 www/snippet/detail.php:182
-#, fuzzy
 msgid ""
 "Download a raw-text version of this code by clicking on “Download Version”"
 msgstr ""
-"Download a raw-text version of this code by clicking on &quot;"
-"<strong>Download Version</strong>&quot;"
 
 #: www/snippet/detail.php:106
-#, fuzzy
 msgid "Latest Snippet Version: "
-msgstr "Latest Snippet Version:"
+msgstr ""
 
 #: www/snippet/detail.php:115 www/snippet/detail.php:202
 msgid "Submit a new version"
-msgstr "Submit a new version"
+msgstr ""
 
 #: www/snippet/detail.php:116
 msgid ""
@@ -21902,20 +21895,20 @@ msgstr ""
 
 #: www/snippet/detail.php:150
 msgid "Versions Of This Package:"
-msgstr "Versions Of This Package:"
+msgstr ""
 
 #: www/snippet/detail.php:153
 msgid "Package Version"
-msgstr "Package Version"
+msgstr ""
 
 #: www/snippet/detail.php:156
 msgid "Edit/Del"
-msgstr "Edit/Del"
+msgstr ""
 
 #: www/snippet/detail.php:193
 #, fuzzy
 msgid "Latest Package Version: "
-msgstr "Latest Package Version:"
+msgstr ""
 
 #: www/snippet/detail.php:203
 msgid ""
@@ -21928,7 +21921,7 @@ msgstr ""
 #: www/snippet/detail.php:223
 #, fuzzy
 msgid "Error: was the URL mangled?"
-msgstr "Error, Error - was the URL or form mangled??"
+msgstr ""
 
 #: www/snippet/index.php:50
 msgid ""
@@ -21951,7 +21944,7 @@ msgstr ""
 #: www/snippet/index.php:56
 #, fuzzy
 msgid "Browse Snippets"
-msgstr "Snippets"
+msgstr ""
 
 #: www/snippet/index.php:58
 msgid "You can browse the snippet library quickly:"
@@ -21959,21 +21952,21 @@ msgstr ""
 
 #: www/snippet/index.php:64
 msgid "Browse by Language"
-msgstr "Browse by Language"
+msgstr ""
 
 #: www/snippet/package.php:57
 #, fuzzy
 msgid "Error doing snippet package insert"
-msgstr "Error, Error - snippet_package doesn't exist"
+msgstr ""
 
 #: www/snippet/package.php:58 www/snippet/package.php:76
 #: www/snippet/package.php:127
 msgid "Submit A New Snippet Package"
-msgstr "Submit A New Snippet Package"
+msgstr ""
 
 #: www/snippet/package.php:62
 msgid "Snippet Package Added Successfully."
-msgstr "Snippet Package Added Successfully."
+msgstr ""
 
 #: www/snippet/package.php:132
 msgid ""
@@ -22002,111 +21995,111 @@ msgstr ""
 
 #: www/snippet/package.php:159 www/snippet/submit.php:125
 msgid "Suggest a Language"
-msgstr "Suggest a Language"
+msgstr ""
 
 #: www/snippet/package.php:165 www/snippet/submit.php:131
 msgid "Suggest a Category"
-msgstr "Suggest a Category"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:26 www/snippet/snippet_utils.php:41
 #: www/snippet/snippet_utils.php:67
 msgid "Choose One"
-msgstr "Choose One"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:27
 #, fuzzy
 msgid "Unix Admin"
-msgstr "Site Admin"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:28
 msgid "HTML Manipulation"
-msgstr "HTML Manipulation"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:29
 msgid "BBS Systems"
-msgstr "BBS Systems"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:30
 msgid "Auctions"
-msgstr "Auctions"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:31
 msgid "Calendars"
-msgstr "Calendars"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:32
 msgid "Database Manipulation"
-msgstr "Database Manipulation"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:33
 msgid "Searching"
-msgstr "Searching"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:34
 msgid "File Management"
-msgstr "File Management"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:35
 msgid "Games"
-msgstr "Games"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:36 www/survey/rating_resp.php:29
 msgid "Voting"
-msgstr "Voting"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:37
 msgid "Shopping Carts"
-msgstr "Shopping Carts"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:39
 msgid "Math Functions"
-msgstr "Math Functions"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:42
 msgid "Function"
-msgstr "Function"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:43
 msgid "Full Script"
-msgstr "Full Script"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:44
 msgid "Sample Code (HOWTO)"
-msgstr "Sample Code (HOWTO)"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:45
 msgid "README"
-msgstr "README"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:46
 msgid "Class"
-msgstr "Class"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:63
 msgid "WebSite Only"
-msgstr "WebSite Only"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:68
 msgid "Other Language"
-msgstr "Other Language"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:132
 msgid "Create A Package"
-msgstr "Create A Package"
+msgstr ""
 
 #: www/snippet/submit.php:59
 #, fuzzy
 msgid "Error doing snippet insert"
-msgstr "Error in insert"
+msgstr ""
 
 #: www/snippet/submit.php:61 www/snippet/submit.php:76
 msgid "Snippet Added Successfully."
-msgstr "Snippet Added Successfully."
+msgstr ""
 
 #: www/snippet/submit.php:85
 #, fuzzy
 msgid "Snippet submit"
-msgstr "Snippets"
+msgstr ""
 
 #: www/snippet/submit.php:89
 msgid ""
@@ -22125,11 +22118,11 @@ msgstr ""
 
 #: www/snippet/submit.php:113
 msgid "Script Type"
-msgstr "Script Type"
+msgstr ""
 
 #: www/soap/index.php:160
 msgid "en_US"
-msgstr "en_US"
+msgstr ""
 
 #: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:265
 #, php-format
@@ -22139,7 +22132,7 @@ msgstr "<strong>%1$s</strong>개 이상의 프로젝트가 결과에 포함되�
 #: www/softwaremap/full_list.php:122
 #, fuzzy
 msgid "Register Date:"
-msgstr "Registered"
+msgstr ""
 
 #: www/softwaremap/tag_cloud.php:86
 #, fuzzy, php-format
@@ -22223,24 +22216,24 @@ msgstr ""
 #: www/source.php:56
 #, php-format
 msgid "Source of %1$s"
-msgstr "Source of %1$s"
+msgstr ""
 
 #: www/stats/graphs.php:36
 #, fuzzy, php-format
 msgid "%1$s Sitewide Statistics Graphs"
-msgstr "Sitewide Statistics Graphs"
+msgstr ""
 
 #: www/stats/graphs.php:43 www/stats/index.php:44 www/stats/projects.php:45
 msgid "OVERVIEW STATS"
-msgstr "OVERVIEW STATS"
+msgstr ""
 
 #: www/stats/graphs.php:44 www/stats/index.php:45 www/stats/projects.php:46
 msgid "PROJECT STATS"
-msgstr "PROJECT STATS"
+msgstr ""
 
 #: www/stats/graphs.php:45 www/stats/index.php:46 www/stats/projects.php:47
 msgid "SITE GRAPHS"
-msgstr "SITE GRAPHS"
+msgstr ""
 
 #: www/stats/graphs.php:50
 msgid "Displayed data: only last 24 months."
@@ -22249,11 +22242,11 @@ msgstr ""
 #: www/stats/i18n.php:32
 #, fuzzy, php-format
 msgid "%1$s I18n Statistics: Languages Distributions"
-msgstr "Languages Distributions"
+msgstr ""
 
 #: www/stats/i18n.php:54
 msgid "Total Non-English"
-msgstr "Total Non-English"
+msgstr ""
 
 #: www/stats/i18n.php:59
 msgid ""
@@ -22268,7 +22261,7 @@ msgstr ""
 #: www/stats/index.php:32
 #, fuzzy, php-format
 msgid "%1$s Sitewide Aggregate Statistics"
-msgstr "Sitewide Statistics Graphs"
+msgstr ""
 
 #: www/stats/index.php:60
 #, fuzzy
@@ -22281,17 +22274,17 @@ msgstr ""
 
 #: www/stats/lastlogins.php:52
 msgid "Source IP"
-msgstr "Source IP"
+msgstr ""
 
 #: www/stats/projects.php:37
 #, fuzzy, php-format
 msgid "%1$s Site Project Statistical Comparisons"
-msgstr "Project Statistical Comparisons"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:71
 #, fuzzy
 msgid "All Projects"
-msgstr "All Project Admins"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:72
 #, fuzzy
@@ -22305,11 +22298,11 @@ msgstr ""
 
 #: www/stats/site_stats_utils.php:126
 msgid "Projects in trove category:"
-msgstr "Projects in trove category:"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:130
 msgid "OR enter Special Project List:"
-msgstr "OR enter Special Project List:"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:132
 msgid "<strong>comma separated</strong> group_id's)"
@@ -22317,31 +22310,31 @@ msgstr "<strong>comma separated</strong> group_id's)"
 
 #: www/stats/site_stats_utils.php:134
 msgid "Report:"
-msgstr "Report:"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:141
 msgid "last_30"
-msgstr "last_30"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:148
 msgid "View by:"
-msgstr "View by:"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:153
 msgid "Generate Report"
-msgstr "Generate Report"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:236 www/stats/site_stats_utils.php:418
 msgid "All Trkr"
-msgstr "All Trkr"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:262
 msgid "Site"
-msgstr "Site"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:263
 msgid "Subdomain"
-msgstr "Subdomain"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:282
 msgid "Checkouts"
@@ -22349,39 +22342,39 @@ msgstr ""
 
 #: www/stats/site_stats_utils.php:330
 msgid "Query returned no valid data."
-msgstr "Query returned no valid data."
+msgstr ""
 
 #: www/stats/site_stats_utils.php:354
 #, php-format
 msgid "Statistics for the past %1$s days"
-msgstr "Statistics for the past %1$s days."
+msgstr ""
 
 #: www/stats/site_stats_utils.php:358 www/stats/site_stats_utils.php:412
 #: www/stats/site_stats_utils.php:468
 msgid "Site Views"
-msgstr "Site Views"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:359 www/stats/site_stats_utils.php:413
 #: www/stats/site_stats_utils.php:469
 msgid "Subdomain Views"
-msgstr "Subdomain Views"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:390 www/stats/site_stats_utils.php:446
 msgid "No Data"
-msgstr "No Data"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:408
 #, php-format
 msgid "Statistics for the past %1$s months"
-msgstr "Statistics for the past %1$s months."
+msgstr ""
 
 #: www/stats/site_stats_utils.php:464
 msgid "Current Aggregate Statistics for All Time"
-msgstr "Current Aggregate Statistics for All Time"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:471
 msgid "Developers"
-msgstr "Developers"
+msgstr ""
 
 #: www/stats/site_stats_utils.php:570
 msgid "Page view: no graph to display."
@@ -22404,7 +22397,7 @@ msgstr ""
 #: www/survey/admin/index.php:35
 #, fuzzy
 msgid "Surveys Administration"
-msgstr "Survey Administration"
+msgstr ""
 
 #: www/survey/admin/index.php:52
 #, fuzzy
@@ -22443,17 +22436,17 @@ msgstr ""
 #: www/survey/admin/question.php:52
 #, fuzzy
 msgid "Edit a Question"
-msgstr "Edit A Question"
+msgstr ""
 
 #: www/survey/admin/question.php:52
 #, fuzzy
 msgid "Add a Question"
-msgstr "Add A Question"
+msgstr ""
 
 #: www/survey/admin/question.php:64 www/survey/admin/show_results.php:91
 #, fuzzy
 msgid "Cannot get Survey Question"
-msgstr "Survey Questions"
+msgstr ""
 
 #: www/survey/admin/question.php:78
 #, fuzzy
@@ -22471,15 +22464,15 @@ msgstr ""
 
 #: www/survey/admin/show_questions.php:32
 msgid "Survey Questions"
-msgstr "Survey Questions"
+msgstr ""
 
 #: www/survey/admin/show_questions.php:42
 msgid "You may use any of these questions on your surveys"
-msgstr "You may use any of these questions on your surveys"
+msgstr ""
 
 #: www/survey/admin/show_questions.php:44
 msgid "NOTE: use these question_id's when you create a new survey"
-msgstr "NOTE: use these question_id's when you create a new survey"
+msgstr ""
 
 #: www/survey/admin/show_questions.php:52
 #, fuzzy, php-format
@@ -22489,15 +22482,15 @@ msgstr[0] "%1$s questions found"
 
 #: www/survey/admin/show_results_individual.php:32
 msgid "Results"
-msgstr "Results"
+msgstr ""
 
 #: www/survey/admin/show_results_individual.php:171
 msgid "Yes / No"
-msgstr "Yes / No"
+msgstr ""
 
 #: www/survey/admin/show_results.php:62
 msgid "Survey Results"
-msgstr "Survey Results"
+msgstr ""
 
 #: www/survey/admin/show_results.php:76
 #, fuzzy
@@ -22516,7 +22509,7 @@ msgstr ""
 #: www/survey/admin/survey.php:72
 #, fuzzy
 msgid "Survey Added"
-msgstr "Survey Administration"
+msgstr ""
 
 #: www/survey/admin/survey.php:91
 #, fuzzy
@@ -22526,7 +22519,7 @@ msgstr "설문조사 편집하기"
 #: www/survey/admin/survey.php:91
 #, fuzzy
 msgid "Add a Survey"
-msgstr "Add A Survey"
+msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:64
 msgid "Add Survey"
@@ -22549,7 +22542,7 @@ msgstr "설문조사 기능 사용"
 #: www/survey/include/SurveyHTML.class.php:105
 #, fuzzy
 msgid "Add this Question"
-msgstr "Add This Question."
+msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:110
 msgid ""
@@ -22562,12 +22555,12 @@ msgstr ""
 #: www/survey/include/SurveyHTML.class.php:129
 #: www/survey/include/SurveyHTML.class.php:244
 msgid "Question"
-msgstr "Question"
+msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:131
 #, fuzzy
 msgid "Question Type"
-msgstr "Question type"
+msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:154
 #, php-format
@@ -22577,7 +22570,7 @@ msgstr ""
 #: www/survey/include/SurveyHTML.class.php:162
 #, fuzzy
 msgid "Add this Survey"
-msgstr "Add This Survey"
+msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:169
 msgid ""
@@ -22588,11 +22581,11 @@ msgstr ""
 #: www/survey/include/SurveyHTML.class.php:191
 #: www/survey/include/SurveyHTML.class.php:344
 msgid "Survey Title"
-msgstr "Survey Title"
+msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:194
 msgid "Is Active?"
-msgstr "Is Active?"
+msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:203
 msgid "Addable Questions"
@@ -22610,7 +22603,7 @@ msgstr ""
 #: www/survey/include/SurveyHTML.class.php:244
 #, fuzzy
 msgid "Delete from this Survey"
-msgstr "Add This Survey"
+msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:259
 msgid "Up"
@@ -22629,7 +22622,7 @@ msgstr[0] "%1$s questions found"
 
 #: www/survey/include/SurveyHTML.class.php:341
 msgid "Survey ID"
-msgstr "Survey ID"
+msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:350
 msgid "Number of Questions"
@@ -22662,7 +22655,7 @@ msgstr ""
 #: www/survey/include/SurveyHTML.class.php:448
 #, fuzzy
 msgid "CSV"
-msgstr "CVS"
+msgstr ""
 
 #: www/survey/include/SurveyHTML.class.php:468
 msgid "Error: you cannot vote for inactive survey"
@@ -22685,7 +22678,7 @@ msgstr[0] "View Comments"
 #: www/survey/index.php:46
 #, fuzzy, php-format
 msgid "Surveys for %1$s"
-msgstr "Source of %1$s"
+msgstr ""
 
 #: www/survey/index.php:58
 #, fuzzy
@@ -22729,7 +22722,7 @@ msgstr "Vote registered"
 
 #: www/survey/rating_resp.php:60
 msgid "If you vote again, your old vote will be erased."
-msgstr "If you vote again, your old vote will be erased."
+msgstr ""
 
 #: www/survey/rating_resp.php:64
 msgid "Vote ID"
@@ -22738,7 +22731,7 @@ msgstr ""
 #: www/survey/rating_resp.php:64
 #, fuzzy
 msgid "Response"
-msgstr "Responses"
+msgstr ""
 
 #: www/survey/rating_resp.php:64
 msgid "Flag"
@@ -22747,7 +22740,7 @@ msgstr ""
 #: www/survey/survey.php:51
 #, fuzzy
 msgid "Vote for Survey"
-msgstr "Name Of Survey:"
+msgstr ""
 
 #: www/survey/survey.php:55 www/survey/survey_resp.php:48
 #, fuzzy
@@ -22758,16 +22751,16 @@ msgstr ""
 
 #: www/survey/survey_resp.php:41
 msgid "Survey Complete"
-msgstr "Survey Complete"
+msgstr ""
 
 #: www/survey/survey_resp.php:57
 msgid "Thank you for taking time to complete this survey."
-msgstr "Thank you for taking time to complete this survey."
+msgstr ""
 
 #: www/survey/survey_resp.php:58
 #, fuzzy
 msgid "Regards,"
-msgstr "Regards"
+msgstr ""
 
 #: www/terms.php:31
 msgid "Terms of use"
@@ -22861,7 +22854,7 @@ msgstr "지난번 순위"
 
 #: www/top/topusers.php:86
 msgid "N/A"
-msgstr "N/A"
+msgstr ""
 
 #: www/top/topusers.php:89
 msgid "Same"
@@ -22889,7 +22882,7 @@ msgstr ""
 #: www/tracker/admin/index.php:101 www/tracker/admin/index.php:178
 #, fuzzy
 msgid "Do you really want to do that?"
-msgstr "Error, Could not unsubscribe user:"
+msgstr ""
 
 #: www/tracker/admin/index.php:111
 msgid "Layout Template Deleted"
@@ -22898,7 +22891,7 @@ msgstr ""
 #: www/tracker/admin/index.php:176
 #, fuzzy
 msgid "Delete Canned Response"
-msgstr "Deleted Response"
+msgstr ""
 
 #: www/tracker/admin/index.php:177
 #, fuzzy
@@ -22926,7 +22919,7 @@ msgstr "아직 어떤 프로젝트에도 소속되어 있지 않습니다."
 #: www/tracker/reporting/index.php:103
 #, fuzzy
 msgid "Response Time"
-msgstr "Response Title:"
+msgstr ""
 
 #: www/tracker/reporting/index.php:104
 #, fuzzy
@@ -22979,7 +22972,7 @@ msgstr ""
 #: www/tracker/roadmap.php:435
 #, fuzzy
 msgid "Display graphs"
-msgstr "Display Trove Map"
+msgstr ""
 
 #: www/tracker/roadmap.php:437
 msgid "Only last"
@@ -23003,54 +22996,54 @@ msgstr "리포트할 데이터가 없습니다."
 #: www/tracker/roadmap.php:538
 #, fuzzy
 msgid "Unknown"
-msgstr "Unix Account Status"
+msgstr ""
 
 #: www/trove/admin/trove_cat_add.php:59
 msgid "Site Admin: Trove - Add Node"
-msgstr "Site Admin: Trove - Add Node"
+msgstr ""
 
 #: www/trove/admin/trove_cat_add.php:65 www/trove/admin/trove_cat_edit.php:136
 #, fuzzy
 msgid "Parent Category: "
-msgstr "Parent Category:"
+msgstr ""
 
 #: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_edit.php:84
 #, fuzzy
 msgid "New category short name (no spaces, Unix-like): "
-msgstr "New category short name (no spaces, unix-like)"
+msgstr ""
 
 #: www/trove/admin/trove_cat_add.php:97 www/trove/admin/trove_cat_edit.php:87
 #, fuzzy
 msgid "New category full name (80 characters max): "
-msgstr "New category full name (VARCHAR 80)"
+msgstr ""
 
 #: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:90
 #, fuzzy
 msgid "New category description (255 characters max): "
-msgstr "New category description (VARCHAR 255)"
+msgstr ""
 
 #: www/trove/admin/trove_cat_edit.php:73 www/trove/admin/trove_cat_list.php:65
 msgid "Site Admin: Trove - Category List"
-msgstr "Site Admin: Trove - Category List"
+msgstr ""
 
 #: www/trove/admin/trove_cat_edit.php:79
 msgid "Site Admin: Trove - Edit Category"
-msgstr "Site Admin: Trove - Edit Category"
+msgstr ""
 
 #: www/trove/admin/trove_cat_edit.php:93
 #, fuzzy
 msgid "update"
-msgstr "Updated"
+msgstr ""
 
 #: www/trove/index.php:46
 #, fuzzy
 msgid "Trove Map"
-msgstr "Display Trove Map"
+msgstr ""
 
 #: www/trove/index.php:69
 #, fuzzy
 msgid "Limiting View"
-msgstr "Site Views"
+msgstr ""
 
 #: www/trove/index.php:76
 #, fuzzy
@@ -23087,31 +23080,12 @@ msgstr "사용자ID"
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
 
-#~ msgid "Version:"
-#~ msgstr "Version:"
-
 #~ msgid "Forums: Administration"
 #~ msgstr "게시판: 관리"
 
 #, fuzzy
 #~ msgid "Change PW"
 #~ msgstr "변동"
-
-#, fuzzy
-#~ msgid "[DevProfile]"
-#~ msgstr "DevProfile"
-
-#, fuzzy
-#~ msgid "[Activate]"
-#~ msgstr "Activate"
-
-#, fuzzy
-#~ msgid "[Delete]"
-#~ msgstr "삭제"
-
-#, fuzzy
-#~ msgid "[Suspend]"
-#~ msgstr "Suspend"
 
 #, fuzzy
 #~ msgid "[Project Admin]"
@@ -23166,10 +23140,6 @@ msgstr "개인 페이지"
 #, fuzzy
 #~ msgid "Documents are also available thru webdav access"
 #~ msgstr "정보가 없습니다."
-
-#, fuzzy
-#~ msgid "Project Administration."
-#~ msgstr "Project Database Administration"
 
 #~ msgid "Preserve my pre-formatted text."
 #~ msgstr "본문 형식을 그대로 보전합니다."
@@ -23234,10 +23204,6 @@ msgstr "개인 페이지"
 #~ msgstr "[새로운 계정 만들기(가입하기)]"
 
 #, fuzzy
-#~ msgid "Role name"
-#~ msgstr "Real name"
-
-#, fuzzy
 #~ msgid "Insert Failed: "
 #~ msgstr "입력 실패"
 
@@ -23267,22 +23233,12 @@ msgstr "개인 페이지"
 #~ "\n"
 
 #, fuzzy
-#~ msgid "Could Not Create File Object: "
-#~ msgstr "Could Not Update Parent"
-
-#, fuzzy
 #~ msgid "Content:"
 #~ msgstr "사용자 등록"
 
 #, fuzzy
 #~ msgid "Child project: "
 #~ msgstr "%1$s개의 프로젝트"
-
-#~ msgid "Couldn't Update Master Thread parent with current time"
-#~ msgstr "Couldn't Update Master Thread parent with current time"
-
-#~ msgid "By:"
-#~ msgstr "By:"
 
 #, fuzzy
 #~ msgid "Forum: "
@@ -23357,10 +23313,6 @@ msgstr "개인 페이지"
 #~ msgid "Failed to delete any skills"
 #~ msgstr "스킬 삭제 작업이 실패하였습니다."
 
-#, fuzzy
-#~ msgid "User fetch FAILED: %s"
-#~ msgstr "User fetch FAILED"
-
 #~ msgid ""
 #~ "The following option determines if others can see your skills. If they "
 #~ "can't, you can still enter your skills."
@@ -23374,22 +23326,6 @@ msgstr "개인 페이지"
 #~ "시오."
 
 #, fuzzy
-#~ msgid "User fetch FAILED : No Such User: "
-#~ msgstr "User fetch FAILED"
-
-#, fuzzy
-#~ msgid "JOB insert FAILED: %s"
-#~ msgstr "JOB insert FAILED"
-
-#, fuzzy
-#~ msgid "JOB update FAILED : %s"
-#~ msgstr "JOB update FAILED"
-
-#, fuzzy
-#~ msgid "POSTING fetch FAILED: %s"
-#~ msgstr "POSTING fetch FAILED"
-
-#, fuzzy
 #~ msgid "Error inserting value: "
 #~ msgstr "추가 에러"
 
@@ -23398,15 +23334,6 @@ msgstr "개인 페이지"
 
 #~ msgid "Existing Diary And Note Entries"
 #~ msgstr "존재하는 일기와 메모 항목들"
-
-#~ msgid ""
-#~ "This pages allows to change only direct properties of user object. To "
-#~ "edit properties pertinent to user within specific group, visit admin page "
-#~ "of that group (below)."
-#~ msgstr ""
-#~ "This pages allows to change only direct properties of user object. To "
-#~ "edit properties pertinent to user within specific group, visit admin page "
-#~ "of that group (below)."
 
 #, fuzzy
 #~ msgid "Project full name"
@@ -23472,12 +23399,6 @@ msgstr "개인 페이지"
 #~ "젝트 관리자는 '(관리)' 링크를 클릭하여 미리 준비한 의견을 작성할 수 있습니"
 #~ "다."
 
-#~ msgid "Now Monitoring Artifact"
-#~ msgstr "Now Monitoring"
-
-#~ msgid "Artifact Monitoring Deactivated"
-#~ msgstr "Monitoring Deactivated"
-
 #, fuzzy
 #~ msgid "Delete Custom Field"
 #~ msgstr "파일 삭제하기"
@@ -23485,9 +23406,6 @@ msgstr "개인 페이지"
 #, fuzzy
 #~ msgid "Delete Tracker"
 #~ msgstr "문제점 추적 기능 사용"
-
-#~ msgid "ID"
-#~ msgstr "ID"
 
 #, fuzzy
 #~ msgid "Release name"
@@ -23516,24 +23434,6 @@ msgstr "개인 페이지"
 #~ msgid "Error creating group object"
 #~ msgstr "그룹 객체 생성 오류"
 
-#, fuzzy
-#~ msgid "Virtual Host: "
-#~ msgstr "Virtual Host:"
-
-#, fuzzy
-#~ msgid "Site admin"
-#~ msgstr "Site Admin"
-
-#~ msgid "Virtual Host:"
-#~ msgstr "Virtual Host:"
-
-#~ msgid ""
-#~ "Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please "
-#~ "Login."
-#~ msgstr ""
-#~ "Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please "
-#~ "Login."
-
 #~ msgid ""
 #~ "You cannot submit news for a project unless you are an admin on that "
 #~ "project"
@@ -23556,31 +23456,8 @@ msgstr "개인 페이지"
 #~ "용 절차에 대한 내용을 통보받을 것입니다.</p><p>%1$s을 선택해 주셔서 감사합"
 #~ "니다."
 
-#~ msgid "error"
-#~ msgstr "error"
-
-#, fuzzy
-#~ msgid "Error: "
-#~ msgstr "Error"
-
-#, fuzzy
-#~ msgid "ERROR: "
-#~ msgstr "ERROR"
-
-#, fuzzy
-#~ msgid "Permission Denied"
-#~ msgstr "Permission Denied"
-
-#, fuzzy
-#~ msgid "Permission denied"
-#~ msgstr "Permission Denied"
-
 #~ msgid "Group_id in db result does not match Group Object"
 #~ msgstr "데이터베이스의 그룹ID가 그룹 객체와 맞지 않습니다."
-
-#, fuzzy
-#~ msgid "<em>Private project</em>"
-#~ msgstr "Private Groups"
 
 #~ msgid "Member since:"
 #~ msgstr "가입한 날:"
@@ -23598,13 +23475,6 @@ msgstr "개인 페이지"
 #, fuzzy
 #~ msgid "Email Address:"
 #~ msgstr "이메일 주소:"
-
-#~ msgid "Title:"
-#~ msgstr "Title:"
-
-#, fuzzy
-#~ msgid "Real Name:"
-#~ msgstr "Real name"
 
 #, fuzzy
 #~ msgid "Additional informations"
@@ -23665,10 +23535,6 @@ msgstr "개인 페이지"
 #~ msgid "Error getting new ForumMessage: "
 #~ msgstr "게시판을 추가할 때 오류가 발생하였습니다."
 
-#, fuzzy
-#~ msgid "Could not get ProjectTaskFactory"
-#~ msgstr "Could Not Complete Operation"
-
 #~ msgid "Mass update"
 #~ msgstr "대량 갱신"
 
@@ -23684,22 +23550,6 @@ msgstr "개인 페이지"
 #~ msgid "Message :"
 #~ msgstr "글:"
 
-#, fuzzy
-#~ msgid "Error in Trove operation: "
-#~ msgstr "Error In Trove Operation"
-
-#, fuzzy
-#~ msgid "Error In Trove Operation: "
-#~ msgstr "Error In Trove Operation"
-
-#, fuzzy
-#~ msgid "Error In Trove Operation"
-#~ msgstr "Error In Trove Operation"
-
-#, fuzzy
-#~ msgid "Error in Trove Operation : %s"
-#~ msgstr "Error In Trove Operation"
-
 #~ msgid "Email Addr:"
 #~ msgstr "이메일 주소:"
 
@@ -23707,20 +23557,9 @@ msgstr "개인 페이지"
 #~ msgid "Edit job"
 #~ msgstr "Job 편집"
 
-#~ msgid "CVS"
-#~ msgstr "CVS"
-
-#, fuzzy
-#~ msgid "Could Not Get FRSRelease"
-#~ msgstr "Could Not Complete Operation"
-
 #, fuzzy
 #~ msgid "Confirm Deletion"
 #~ msgstr "삭제 확인"
-
-#, fuzzy
-#~ msgid "All users"
-#~ msgstr "All Users"
 
 #, fuzzy
 #~ msgid "Add file"
@@ -23772,44 +23611,16 @@ msgstr "개인 페이지"
 #~ msgstr "오류 - 모니터링할 사용자를 먼저 선택하십시오"
 
 #, fuzzy
-#~ msgid "Could Not Get FRSPackage"
-#~ msgstr "Could Not Complete Operation"
-
-#, fuzzy
-#~ msgid "%1$s to %2$s"
-#~ msgstr "Please %1$s login %2$s"
-
-#, fuzzy
 #~ msgid ""
 #~ "If you would like to contribute to this project by becoming a developer, "
 #~ "contact one of the project admins, designated in bold text below."
 #~ msgstr ""
-#~ "<p>이 프로젝트에 개발자로서 참여하고 싶으시다면, 아래 굵은 글씨체로 보이"
-#~ "는 프로젝트 관리자들 중 한사람과 연락하시면 됩니다.<br><br>"
+#~ "이 프로젝트에 개발자로서 참여하고 싶으시다면, 아래 굵은 글씨체로 보이"
+#~ "는 프로젝트 관리자들 중 한사람과 연락하시면 됩니다."
 
 #, fuzzy
 #~ msgid "Error: That snippet doesn't exist."
 #~ msgstr "오류 - 코드가 존재하지 않습니다."
-
-#, fuzzy
-#~ msgid "Error - Could Not Update User Unix Status: "
-#~ msgstr "Could Not Update Parent"
-
-#, fuzzy
-#~ msgid "Error - Could Not Update User Email: "
-#~ msgstr "Could Not Update Parent"
-
-#, fuzzy
-#~ msgid "Error - Could Not Update User Email And Hash: "
-#~ msgstr "Could Not Update Parent"
-
-#, fuzzy
-#~ msgid "Error - Could Not Update real name of user : "
-#~ msgstr "Could Not Update Parent"
-
-#, fuzzy
-#~ msgid "Error - Could Not Delete User SSH Key:"
-#~ msgstr "Could Not Update Parent"
 
 #~ msgid "%1$s Project Denied"
 #~ msgstr "%1$s 프로젝트가 거부되었습니다."
@@ -23833,10 +23644,6 @@ msgstr "개인 페이지"
 #~ msgid "Submitted By"
 #~ msgstr "제출자"
 
-#, fuzzy
-#~ msgid "Related tasks"
-#~ msgstr "Related Tracker Items"
-
 #~ msgid ""
 #~ "Edit the Release Notes or Change Log for this release of this package. "
 #~ "These changes will apply to all files attached to this release.<br />You "
@@ -23850,16 +23657,9 @@ msgstr "개인 페이지"
 #~ msgid "You Have No Packages Defined"
 #~ msgstr "정의된 패키지가 없습니다."
 
-#~ msgid "admin"
-#~ msgstr "admin"
-
 #, fuzzy
 #~ msgid "Projects Added (graph)"
 #~ msgstr "새 프로젝트 이름"
-
-#, fuzzy
-#~ msgid "Submit changes"
-#~ msgstr "Submit Changes"
 
 #, fuzzy
 #~ msgid "Change week"
@@ -23965,14 +23765,8 @@ msgstr "개인 페이지"
 #~ msgid "Invalid Jabber Address"
 #~ msgstr "유효하지 않은  Jabber 주소"
 
-#~ msgid "Jabber Address:"
-#~ msgstr "Jabber 주소:"
-
 #~ msgid "Send auto-generated notices only to my Jabber address"
 #~ msgstr "자동생성되는 메시지는 Jabber 주소로만 보내기"
-
-#~ msgid "Jabber Address"
-#~ msgstr "Jabber 주소"
 
 #, fuzzy
 #~ msgid "Error Getting Forum"
@@ -24130,10 +23924,6 @@ msgstr "개인 페이지"
 #, fuzzy
 #~ msgid "Repository name: "
 #~ msgstr "SCM 저장소"
-
-#, fuzzy
-#~ msgid "Project:"
-#~ msgstr "Projects"
 
 #, fuzzy
 #~ msgid "Directory:"
@@ -24538,10 +24328,6 @@ msgstr "개인 페이지"
 #~ msgstr "익명 사용자가 글을 올릴 수 있도록 하시겠습니까?"
 
 #, fuzzy
-#~ msgid "To moderate ALL posts."
-#~ msgstr "more latest posts"
-
-#, fuzzy
 #~ msgid "Anonymous & Non Project Users"
 #~ msgstr "익명 FTP 공간"
 
@@ -24559,10 +24345,6 @@ msgstr "개인 페이지"
 
 #~ msgid "SUBMIT ONLY ONCE"
 #~ msgstr "한번만 클릭하세요."
-
-#, fuzzy
-#~ msgid "Could Not Get RoleObserver"
-#~ msgstr "Could Not Complete Operation"
 
 #, fuzzy
 #~ msgid "none"
@@ -24597,10 +24379,6 @@ msgstr "개인 페이지"
 
 #~ msgid "Error - this news item was not found"
 #~ msgstr "오류 - 이 뉴스 게시물은 없습니다."
-
-#, fuzzy
-#~ msgid "Update</p>"
-#~ msgstr "Updated"
 
 #~ msgid "License:"
 #~ msgstr "저작권:"
@@ -24732,14 +24510,6 @@ msgstr "개인 페이지"
 #~ msgid "Title required"
 #~ msgstr "모든 칸을 채워야 합니다!"
 
-#, fuzzy
-#~ msgid "Question inserted"
-#~ msgstr "Question type"
-
-#, fuzzy
-#~ msgid "Question insert failed"
-#~ msgstr "Question type"
-
 #~ msgid "Top Projects"
 #~ msgstr "상위 프로젝트"
 
@@ -24762,10 +24532,6 @@ msgstr "개인 페이지"
 #, fuzzy
 #~ msgid "Error getting member object"
 #~ msgstr "그룹 객체 생성 오류"
-
-#, fuzzy
-#~ msgid "Could Not Get Group"
-#~ msgstr "Could Not Update Parent"
 
 #~ msgid "PAGE NOT FOUND"
 #~ msgstr "페이지를 찾을 수 없습니다."
@@ -24799,10 +24565,6 @@ msgstr "개인 페이지"
 
 #~ msgid "Edit a group"
 #~ msgstr "그룹 편집하기"
-
-#, fuzzy
-#~ msgid "Delete Groups"
-#~ msgstr "All Groups"
 
 #, fuzzy
 #~ msgid ""
@@ -24883,14 +24645,6 @@ msgstr "개인 페이지"
 #~ msgid "Invalid year"
 #~ msgstr "유효하지 않은 사용자입니다."
 
-#, fuzzy
-#~ msgid "Invalid month"
-#~ msgstr "Invalid ID"
-
-#, fuzzy
-#~ msgid "Invalid day"
-#~ msgstr "Invalid ID"
-
 #~ msgid "Group Trove Information"
 #~ msgstr "소프트웨어 맵 분류 정보"
 
@@ -24962,10 +24716,6 @@ msgstr "개인 페이지"
 #~ msgstr "게시판 설정"
 
 #, fuzzy
-#~ msgid "FRS admin"
-#~ msgstr "Site Admin"
-
-#, fuzzy
 #~ msgid "SCM admin"
 #~ msgstr "메일 설정"
 
@@ -24983,10 +24733,6 @@ msgstr "개인 페이지"
 
 #~ msgid "Software/Group"
 #~ msgstr "소프트웨어/프로젝트"
-
-#, fuzzy
-#~ msgid "News Data"
-#~ msgstr "No Data"
 
 #~ msgid ""
 #~ "<h3>Packages</h3><p>You can use packages to group different file releases "
@@ -25034,10 +24780,6 @@ msgstr "개인 페이지"
 #~ msgstr "페이지뷰가 많은 프로젝트 - %1$s 버튼 로고를 클릭한 횟수로 측정됨"
 
 #, fuzzy
-#~ msgid "Bug Tracker"
-#~ msgstr "Tracker"
-
-#, fuzzy
 #~ msgid "Patch Submissions"
 #~ msgstr "새로운 문서 제출"
 
@@ -25077,360 +24819,6 @@ msgstr "개인 페이지"
 #~ msgid "Message Not Found"
 #~ msgstr "글이 없습니다."
 
-#~ msgid "New Additions, by Day"
-#~ msgstr "New Additions, by Day"
-
-#~ msgid "New Users (RED), New Projects (BLUE)"
-#~ msgstr "New Users (RED), New Projects (BLUE"
-
-#~ msgid "Users (RED) / Projects (BLUE)"
-#~ msgstr "Users (RED) / Projects (BLUE)"
-
-#~ msgid "Forge Page Views"
-#~ msgstr "Forge Page Views"
-
-#~ msgid "Total Page Views (RED) (%1$s days)"
-#~ msgstr "Total Page Views (RED) (%1$s days)"
-
-#~ msgid "Views (RED)"
-#~ msgstr "Views (RED)"
-
-#~ msgid "Survey Aggregate Results"
-#~ msgstr "Survey Aggregate Results"
-
-#~ msgid "Responses"
-#~ msgstr "Responses"
-
-#~ msgid "Average"
-#~ msgstr "Average"
-
-#~ msgid ""
-#~ "Download a raw-text version of this code by clicking on &quot;"
-#~ "<strong>Download Version</strong>&quot;"
-#~ msgstr ""
-#~ "Download a raw-text version of this code by clicking on &quot;"
-#~ "<strong>Download Version</strong>&quot;"
-
-#~ msgid "Error in insert"
-#~ msgstr "Error in insert"
-
-#~ msgid "Circular Dependency Detected'"
-#~ msgstr "Circular Dependency Detected'"
-
-#~ msgid "UPDATE FAILED"
-#~ msgstr "UPDATE FAILED"
-
-#~ msgid "ERROR"
-#~ msgstr "ERROR"
-
-#~ msgid "Existing Responses:"
-#~ msgstr "Existing Responses:"
-
-#~ msgid "Yes, I'm sure"
-#~ msgstr "Yes, I'm sure"
-
-#~ msgid "go"
-#~ msgstr "go"
-
-#~ msgid "If you're aren't sure then why did you click 'Delete'?"
-#~ msgstr "If you're aren't sure then why did you click 'Delete'?"
-
-#~ msgid "Real name"
-#~ msgstr "Real name"
-
-#~ msgid "New category short name (no spaces, unix-like)"
-#~ msgstr "New category short name (no spaces, unix-like)"
-
-#~ msgid "Parent Category:"
-#~ msgstr "Parent Category:"
-
-#~ msgid "User name:"
-#~ msgstr "User name:"
-
-#~ msgid "ERROR inserting into skill inventory"
-#~ msgstr "ERROR inserting into skill inventory"
-
-#~ msgid "User fetch FAILED"
-#~ msgstr "User fetch FAILED"
-
-#~ msgid "The %1$s Team"
-#~ msgstr "The %1$s Team"
-
-#~ msgid "The %1$s Crew"
-#~ msgstr "The %1$s Crew"
-
-#~ msgid "ERROR DOING SNIPPET VERSION INSERT!"
-#~ msgstr "ERROR DOING SNIPPET VERSION INSERT!"
-
-#~ msgid "SUBMIT"
-#~ msgstr "SUBMIT"
-
-#~ msgid "Changes:"
-#~ msgstr "Changes:"
-
-#~ msgid "Paste the Code Here:"
-#~ msgstr "Paste the Code Here:"
-
-#~ msgid "ERROR DOING SNIPPET PACKAGE INSERT!"
-#~ msgstr "ERROR DOING SNIPPET PACKAGE INSERT!"
-
-#~ msgid "ERROR DOING SNIPPET PACKAGE VERSION INSERT!"
-#~ msgstr "ERROR DOING SNIPPET PACKAGE VERSION INSERT!"
-
-#~ msgid "Snippet Pacakge Version Added Successfully."
-#~ msgstr "Snippet Pacakge Version Added Successfully."
-
-#~ msgid "UNIX Admin"
-#~ msgstr "UNIX Admin"
-
-#~ msgid "Snippets In This Package:"
-#~ msgstr "Snippets In This Package:"
-
-#~ msgid "ERROR DOING SNIPPET INSERT!"
-#~ msgstr "ERROR DOING SNIPPET INSERT!"
-
-#~ msgid "all"
-#~ msgstr "all"
-
-#~ msgid "get"
-#~ msgstr "get"
-
-#~ msgid "Last Logins"
-#~ msgstr "Last Logins"
-
-#~ msgid "Email:"
-#~ msgstr "Email:"
-
-#~ msgid "ArtifactCanned: name and assignee are Required"
-#~ msgstr "ArtifactCanned: name and assignee are Required"
-
-#~ msgid "Name Of Survey:"
-#~ msgstr "Name Of Survey:"
-
-#~ msgid "Approve/Reject"
-#~ msgstr "Approve/Reject"
-
-#~ msgid "User ID:"
-#~ msgstr "User ID:"
-
-#~ msgid "Sitewide Statistics Graphs"
-#~ msgstr "Sitewide Statistics Graphs"
-
-#~ msgid "Languages Distributions"
-#~ msgstr "Languages Distributions"
-
-#~ msgid "Project Statistical Comparisons"
-#~ msgstr "Project Statistical Comparisons"
-
-#~ msgid "Survey Inserted"
-#~ msgstr "Survey Inserted"
-
-#~ msgid "Edit A Question"
-#~ msgstr "Edit A Question"
-
-#~ msgid "UNKNOWN HELP REQUEST:"
-#~ msgstr "UNKNOWN HELP REQUEST:"
-
-#~ msgid "No such trove category"
-#~ msgstr "No such trove category"
-
-#~ msgid "Full Category Name"
-#~ msgstr "Full Category Name"
-
-#~ msgid "Short Name"
-#~ msgstr "Short Name"
-
-#~ msgid "You must be logged in first"
-#~ msgstr "You must be logged in first"
-
-#~ msgid "%1$s Site Statistics"
-#~ msgstr "%1$s Site Statistics"
-
-#~ msgid "%1$s I18n Statistics"
-#~ msgstr "%1$s I18n Statistics"
-
-#~ msgid "Add A Question"
-#~ msgstr "Add A Question"
-
-#~ msgid "Question type"
-#~ msgstr "Question type"
-
-#~ msgid "Add This Question."
-#~ msgstr "Add This Question."
-
-#~ msgid "Show Existing Questions."
-#~ msgstr "Show Existing Questions."
-
-#~ msgid ""
-#~ "List question numbers, in desired order, separated by commas. "
-#~ "<strong>Refer to your list of questions</strong> so you can view the "
-#~ "question id's. Do <strong>not</strong> include spaces or end your list "
-#~ "with a comma. <br />Ex: 1,2,3,4,5,6,7"
-#~ msgstr ""
-#~ "List question numbers, in desired order, separated by commas. "
-#~ "<strong>Refer to your list of questions</strong> so you can view the "
-#~ "question id's. Do <strong>not</strong> include spaces or end your list "
-#~ "with a comma. <br />Ex: 1,2,3,4,5,6,7"
-
-#~ msgid "Show Existing Questions"
-#~ msgstr "Show Existing Questions"
-
-#~ msgid "Editing Question"
-#~ msgstr "Editing Question"
-
-#~ msgid ""
-#~ "If you change a question after responses have been posted, your results "
-#~ "pages may be misleading"
-#~ msgstr ""
-#~ "If you change a question after responses have been posted, your results "
-#~ "pages may be misleading"
-
-#~ msgid ""
-#~ "If you change a survey after you already have responses, your results "
-#~ "pages could be misleading or messed up"
-#~ msgstr ""
-#~ "If you change a survey after you already have responses, your results "
-#~ "pages could be misleading or messed up"
-
-#~ msgid "Name of Survey"
-#~ msgstr "Name of Survey"
-
-#~ msgid ""
-#~ "<p>The information collected in these surveys will never be sold to third "
-#~ "parties or used to solicit you to purchase any goods or services.</"
-#~ "p><p>This information is being gathered to build a profile of the "
-#~ "projects and developers being surveyed. That profile will help visitors "
-#~ "to the site understand the quality of a given project.</p><p>The ID's of "
-#~ "those who answer surveys are suppressed and not viewable by project "
-#~ "administrators or the public or third parties.</p><p>The information "
-#~ "gathered is used only in aggregate form, not to single out specific users "
-#~ "or developers.</p><p>If any changes are made to this policy, it will "
-#~ "affect only future data that is collected and the user will of course "
-#~ "have the ability to 'opt-out'."
-#~ msgstr ""
-#~ "<p>The information collected in these surveys will never be sold to third "
-#~ "parties or used to solicit you to purchase any goods or services.</"
-#~ "p><p>This information is being gathered to build a profile of the "
-#~ "projects and developers being surveyed. That profile will help visitors "
-#~ "to the site understand the quality of a given project.</p><p>The ID's of "
-#~ "those who answer surveys are suppressed and not viewable by project "
-#~ "administrators or the public or third parties.</p><p>The information "
-#~ "gathered is used only in aggregate form, not to single out specific users "
-#~ "or developers.</p><p>If any changes are made to this policy, it will "
-#~ "affect only future data that is collected and the user will of course "
-#~ "have the ability to 'opt-out'."
-
-#~ msgid "Unix Group Name:"
-#~ msgstr "Unix Group Name:"
-
-#~ msgid "Group Unix Name:"
-#~ msgstr "Group Unix Name:"
-
-#~ msgid "Group List"
-#~ msgstr "Group List"
-
-#~ msgid "Group List for Category:"
-#~ msgstr "Group List for Category:"
-
-#~ msgid "Recent logins"
-#~ msgstr "Recent logins"
-
-#~ msgid "Missing parameter, You are trying to send empty message"
-#~ msgstr "Missing parameter, You are trying to send empty message"
-
-#~ msgid "Missing parameter, You must give proper subject to the mailing"
-#~ msgstr "Missing parameter, You must give proper subject to the mailing"
-
-#~ msgid "New category full name (VARCHAR 80)"
-#~ msgstr "New category full name (VARCHAR 80)"
-
-#~ msgid "New category description (VARCHAR 255)"
-#~ msgstr "New category description (VARCHAR 255)"
-
-#~ msgid "Groups Membership"
-#~ msgstr "Groups Membership"
-
-#~ msgid "All Groups"
-#~ msgstr "All Groups"
-
-#~ msgid "The provided group name does not exist"
-#~ msgstr "The provided group name does not exist"
-
-#~ msgid "Group Unix Name"
-#~ msgstr "Group Unix Name"
-
-#~ msgid "Group Name"
-#~ msgstr "Group Name"
-
-#~ msgid "error - missing info"
-#~ msgstr "error - missing info"
-
-#~ msgid "Change Project/Task Manager Status"
-#~ msgstr "Change Project/Task Manager Status"
-
-#~ msgid "BY"
-#~ msgstr "BY"
-
-#~ msgid "Artifact: Only Artifact Admins Can Modify Private ArtifactTypes"
-#~ msgstr "Artifact: Only Artifact Admins Can Modify Private ArtifactTypes"
-
-#~ msgid "Can't delete, That trove cat has sub categories"
-#~ msgstr "Can't delete, That trove cat has sub categories"
-
-#~ msgid "Opn"
-#~ msgstr "Opn"
-
-#~ msgid "Cls"
-#~ msgstr "Cls"
-
-#~ msgid "CO's"
-#~ msgstr "CO's"
-
-#~ msgid "Comm's"
-#~ msgstr "Comm's"
-
-#~ msgid "Username"
-#~ msgstr "Username"
-
-#~ msgid "Missing File Argument"
-#~ msgstr "Missing File Argument"
-
-#~ msgid "Invalid File Argument"
-#~ msgstr "Invalid File Argument"
-
-#~ msgid "UPDATE SUCCESSFUL"
-#~ msgstr "UPDATE SUCCESSFUL"
-
-#~ msgid ""
-#~ "<p>It's simple to create a survey.<ol><li>Create questions and comments "
-#~ "using the forms above.</li><li>Create a survey, listing the questions in "
-#~ "order (choose from <strong>your</strong> list of questions).</li><li>Link "
-#~ "to the survey using this format: %1$s where XX is the survey number"
-#~ msgstr ""
-#~ "<p>It's simple to create a survey.<ol><li>Create questions and comments "
-#~ "using the forms above.</li><li>Create a survey, listing the questions in "
-#~ "order (choose from <strong>your</strong> list of questions).</li><li>Link "
-#~ "to the survey using this format: %1$s where XX is the survey number"
-
-#~ msgid "You must be logged in to vote"
-#~ msgstr "You must be logged in to vote"
-
-#~ msgid "Click to return to previous page"
-#~ msgstr "Click to return to previous page"
-
-#~ msgid "ERROR!!! MISSING PARAMS"
-#~ msgstr "ERROR!!! MISSING PARAMS"
-
-#~ msgid "Error - For some reason group_id and/or survey_id did not make it he"
-#~ msgstr ""
-#~ "Error - For some reason group_id and/or survey_id did not make it he"
-
-#~ msgid "Unfortunately, you have to be logged in to participate in surveys."
-#~ msgstr "Unfortunately, you have to be logged in to participate in surveys."
-
-#~ msgid "Update preferences"
-#~ msgstr "Update preferences"
-
 #~ msgid ""
 #~ "This drop-down box represents the current status of a tracker item.<br /"
 #~ "><br />You can set the status to “Pending” if you are waiting for a "
@@ -25444,37 +24832,3 @@ msgstr "개인 페이지"
 #~ "에서 작성자가 응답을 하면 자동적으로 'Open' 상태로 재설정합니다. 이 상태에"
 #~ "서 관리자가 지정한 시간(기본값은 14일)동안 작성자가 응답을 하지 않으면 그 "
 #~ "항목은 'Deleted' 상태가 됩니다."
-
-#~ msgid ""
-#~ "The Data Type option determines the type of tracker item this is.  Since "
-#~ "the tracker rolls into one the bug, patch, support, etc... managers you "
-#~ "need to be able to determine which one of these an item should belong."
-#~ "<br /><br />This has the added benefit of enabling an admin to turn a "
-#~ "support request into a bug."
-#~ msgstr ""
-#~ "The Data Type option determines the type of tracker item this is.  Since "
-#~ "the tracker rolls into one the bug, patch, support, etc... managers you "
-#~ "need to be able to determine which one of these an item should belong."
-#~ "<br /><br />This has the added benefit of enabling an admin to turn a "
-#~ "support request into a bug."
-
-#~ msgid "JOB inserted successfully"
-#~ msgstr "JOB inserted successfully"
-
-#~ msgid "JOB updated successfully"
-#~ msgstr "JOB updated successfully"
-
-#~ msgid "JOB update failed - wrong project_id"
-#~ msgstr "JOB update failed - wrong project_id"
-
-#~ msgid "JOB skill updated successfully"
-#~ msgstr "JOB skill updated successfully"
-
-#~ msgid "JOB skill update failed - wrong project_id"
-#~ msgstr "JOB skill update failed - wrong project_id"
-
-#~ msgid "JOB skill deleted successfully"
-#~ msgstr "JOB skill deleted successfully"
-
-#~ msgid "JOB skill delete failed - wrong project_id"
-#~ msgstr "JOB skill delete failed - wrong project_id"

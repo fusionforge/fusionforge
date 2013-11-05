@@ -20662,13 +20662,11 @@ msgstr ""
 #: www/project/admin/massfinish.php:66
 msgid "Choose the role for each user and then press “Add All”."
 msgstr ""
-"Escolliu el rol per a cada usuari i després premeu &quot;Afegeix-los "
-"tots&quot;."
+"Escolliu el rol per a cada usuari i després premeu “Afegeix-los tots”."
 
 #: www/project/admin/massfinish.php:96
-#, fuzzy
 msgid "Add All"
-msgstr "Afegeix data"
+msgstr "Afegeix-los tots"
 
 #: www/project/admin/project_admin_utils.php:49
 msgid "General information about project. Tag, trove list, description."
@@ -22119,13 +22117,12 @@ msgstr "Canvi des de l'última versió:"
 msgid ""
 "Download a raw-text version of this code by clicking on “Download Version”"
 msgstr ""
-"Baixeu-vos una versió de text pla d'aquest codi fent clic sobre &quot;Baixa "
-"la versió&quot;"
+"Baixeu-vos una versió de text pla d'aquest codi fent clic sobre “Baixa "
+"la versió”"
 
 #: www/snippet/detail.php:106
-#, fuzzy
 msgid "Latest Snippet Version: "
-msgstr "Última versió de fragment de codi:"
+msgstr "Última versió de fragment de codi: "
 
 #: www/snippet/detail.php:115 www/snippet/detail.php:202
 msgid "Submit a new version"
@@ -24225,13 +24222,6 @@ msgstr "La meva pàgina personal"
 #~ msgid "Error: That snippet doesn't exist."
 #~ msgstr "Error - Aquest fragment de codi no existeix."
 
-#~ msgid ""
-#~ "Download a raw-text version of this code by clicking on &quot;"
-#~ "<strong>Download Version</strong>&quot;"
-#~ msgstr ""
-#~ "Baixeu-vos una versió de text pla d'aquest codi fent clic sobre &quot;"
-#~ "<strong>Baixa la versió</strong>&quot;"
-
 #, fuzzy
 #~ msgid "Error - Could Not Update User Unix Status: "
 #~ msgstr "No s'ha pogut actualitzar elpare"
@@ -24700,11 +24690,6 @@ msgstr "La meva pàgina personal"
 #, fuzzy
 #~ msgid "--the %1$s staff."
 #~ msgstr "L'equip %1$s"
-
-#~ msgid "Choose the role for each user and then press &quot;Add All&quot;."
-#~ msgstr ""
-#~ "Escolliu el rol per a cada usuari i després premeu &quot;Afegeix-los "
-#~ "tots&quot;."
 
 #, fuzzy
 #~ msgid "Add user"

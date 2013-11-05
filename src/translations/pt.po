@@ -20546,8 +20546,8 @@ msgstr "Modificações desde a última versão:"
 msgid ""
 "Download a raw-text version of this code by clicking on “Download Version”"
 msgstr ""
-"Descarregue uma versão em formato texto desse código clicando em &quot;"
-"Descarregar Versão&quot;"
+"Descarregue uma versão em formato texto desse código clicando em “"
+"Descarregar Versão”"
 
 #: www/snippet/detail.php:106
 msgid "Latest Snippet Version: "
@@ -22107,13 +22107,6 @@ msgstr "Minha Página Pessoal"
 #, fuzzy
 #~ msgid "%1$s to %2$s"
 #~ msgstr "Por favor %1$s faça login no %2$s"
-
-#~ msgid ""
-#~ "Download a raw-text version of this code by clicking on &quot;"
-#~ "<strong>Download Version</strong>&quot;"
-#~ msgstr ""
-#~ "Descarregue uma versão em formato texto desse código clicando em &quot;"
-#~ "<strong>Descarregar Versão</strong>&quot;"
 
 #, fuzzy
 #~ msgid "Error - Could Not Update User Email: "

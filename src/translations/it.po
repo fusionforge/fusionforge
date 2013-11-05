@@ -20684,9 +20684,8 @@ msgid "Choose the role for each user and then press “Add All”."
 msgstr "Seleziona un ruolo per ogni utente e poi premi “Aggiungi tutti”."
 
 #: www/project/admin/massfinish.php:96
-#, fuzzy
 msgid "Add All"
-msgstr "Data inserimento"
+msgstr "Aggiungi tutti"
 
 #: www/project/admin/project_admin_utils.php:49
 msgid "General information about project. Tag, trove list, description."
@@ -22120,7 +22119,7 @@ msgstr "Errore - nessuna versione trovata"
 
 #: www/snippet/detail.php:60
 msgid "Versions Of This Snippet:"
-msgstr "Versioni del frammento"
+msgstr "Versioni del frammento:"
 
 #: www/snippet/detail.php:64 www/snippet/snippet_utils.php:155
 msgid "Download Version"
@@ -22138,13 +22137,12 @@ msgstr "Modifiche dall'ultima versione"
 msgid ""
 "Download a raw-text version of this code by clicking on “Download Version”"
 msgstr ""
-"Scarica una versione in formato raw-text cliccando su &quot;Scarica "
-"versione&quot;"
+"Scarica una versione in formato raw-text cliccando su “Scarica "
+"versione”"
 
 #: www/snippet/detail.php:106
-#, fuzzy
 msgid "Latest Snippet Version: "
-msgstr "Ultima versione del frammento:"
+msgstr "Ultima versione del frammento: "
 
 #: www/snippet/detail.php:115 www/snippet/detail.php:202
 msgid "Submit a new version"
@@ -22160,7 +22158,7 @@ msgstr ""
 
 #: www/snippet/detail.php:150
 msgid "Versions Of This Package:"
-msgstr "Versioni del package"
+msgstr "Versioni del package:"
 
 #: www/snippet/detail.php:153
 msgid "Package Version"
@@ -24249,13 +24247,6 @@ msgstr "Pagina Personale"
 #~ msgid "Error: That snippet doesn't exist."
 #~ msgstr "Errore - Questo frammento non esiste."
 
-#~ msgid ""
-#~ "Download a raw-text version of this code by clicking on &quot;"
-#~ "<strong>Download Version</strong>&quot;"
-#~ msgstr ""
-#~ "Scarica una versione in formato raw-text cliccando su &quot;"
-#~ "<strong>Scarica versione</strong>&quot;"
-
 #, fuzzy
 #~ msgid "Error - Could Not Update User Unix Status: "
 #~ msgstr "ERRORE: DB: Impossibile cambiare stato del gruppo: %s"
@@ -24724,9 +24715,6 @@ msgstr "Pagina Personale"
 #, fuzzy
 #~ msgid "--the %1$s staff."
 #~ msgstr "Il team %1$s"
-
-#~ msgid "Choose the role for each user and then press &quot;Add All&quot;."
-#~ msgstr "Seleziona un ruolo per ogni utente e poi premi \"Aggiungi tutti\"."
 
 #, fuzzy
 #~ msgid "Add user"

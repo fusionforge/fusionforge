@@ -1382,7 +1382,7 @@ msgstr ""
 #: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:323
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
-msgstr "Y-m-d H:i"
+msgstr ""
 
 #: common/docman/views/listfile.php:277 common/docman/views/listfile.php:279
 #, fuzzy
@@ -3716,7 +3716,7 @@ msgstr "トッププロジェクト"
 #: www/stats/site_stats_utils.php:242 www/stats/site_stats_utils.php:365
 #: www/stats/site_stats_utils.php:420
 msgid "SCM"
-msgstr "SCM"
+msgstr ""
 
 #: common/include/Navigation.class.php:534
 msgid "Source Content Management, peer-review and source discovery."
@@ -11823,7 +11823,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/get_access_token.php:164
 #: plugins/oauthconsumer/www/index.php:67 www/admin/responses_admin.php:90
 msgid "Go"
-msgstr "Go"
+msgstr ""
 
 #: plugins/oauthconsumer/www/callback.php:75
 #, fuzzy
@@ -14388,7 +14388,7 @@ msgstr "メールアドレス変更"
 #: www/include/user_profile.php:126 www/mail/index.php:78
 #, fuzzy
 msgid "Address"
-msgstr "Jabberアドレス:"
+msgstr ""
 
 #: www/account/index.php:209 www/account/register.php:224
 msgid "Address (continued)"
@@ -19430,7 +19430,7 @@ msgstr "新規スレッド開始"
 #: www/pm/ganttpage.php:246
 #, fuzzy
 msgid "end"
-msgstr "ja"
+msgstr ""
 
 #: www/pm/ganttpage.php:247
 msgid "dur."
@@ -20601,7 +20601,7 @@ msgstr ""
 #: www/register/index.php:248 www/register/index.php:250
 #, fuzzy
 msgid "No SCM"
-msgstr "SCM"
+msgstr ""
 
 #: www/register/index.php:264
 #, fuzzy
@@ -21093,7 +21093,7 @@ msgstr "無効なオペレーション"
 #: www/sendmessage.php:33
 #, fuzzy
 msgid "toaddress"
-msgstr "Jabberアドレス:"
+msgstr ""
 
 #: www/sendmessage.php:33
 msgid "touser"
@@ -22660,9 +22660,6 @@ msgstr "%sのパーソナルページ"
 #, fuzzy
 #~ msgid "Child project: "
 #~ msgstr "私のプロジェクト"
-
-#~ msgid "By:"
-#~ msgstr "By:"
 
 #, fuzzy
 #~ msgid "Forum: "

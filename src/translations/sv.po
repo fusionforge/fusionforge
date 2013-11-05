@@ -21916,8 +21916,8 @@ msgstr "Förändringar sedan senaste versionen:"
 msgid ""
 "Download a raw-text version of this code by clicking on “Download Version”"
 msgstr ""
-"Hämta en råtextversion av denna kod genom att klicka på &quot;Hämta "
-"Version&quot;"
+"Hämta en råtextversion av denna kod genom att klicka på “Hämta "
+"Version”"
 
 #: www/snippet/detail.php:106
 #, fuzzy
@@ -23909,13 +23909,6 @@ msgstr "Min personliga sida"
 #, fuzzy
 #~ msgid "Error: That snippet doesn't exist."
 #~ msgstr "Fel - Det kodstycket existerar inte."
-
-#~ msgid ""
-#~ "Download a raw-text version of this code by clicking on &quot;"
-#~ "<strong>Download Version</strong>&quot;"
-#~ msgstr ""
-#~ "Hämta en råtextversion av denna kod genom att klicka på &quot;"
-#~ "<strong>Hämta Version</strong>&quot;"
 
 #, fuzzy
 #~ msgid "Error - Could Not Update User Unix Status: "

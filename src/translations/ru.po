@@ -20985,7 +20985,7 @@ msgstr ""
 #: www/project/admin/massadd.php:87 www/project/admin/users.php:98
 #, fuzzy
 msgid "No Matching Users Found"
-msgstr "<p>Соответствий не найдено</p>"
+msgstr "Соответствий не найдено"
 
 #: www/project/admin/massadd.php:116
 msgid "Finish"
@@ -21002,8 +21002,8 @@ msgstr ""
 #: www/project/admin/massfinish.php:66
 msgid "Choose the role for each user and then press “Add All”."
 msgstr ""
-"Укажите занимаемую должность для каждого участника, и нажните &quot;"
-"Назначить всех&quot;."
+"Укажите занимаемую должность для каждого участника, и нажните “"
+"Назначить всех”."
 
 #: www/project/admin/massfinish.php:96
 msgid "Add All"
@@ -22468,8 +22468,8 @@ msgstr "Изменения от последней версии:"
 msgid ""
 "Download a raw-text version of this code by clicking on “Download Version”"
 msgstr ""
-"Скачать текстовую версию сырцов, можно нажав на ссылку &quot;Скачать "
-"версию&quot;"
+"Скачать текстовую версию сырцов, можно нажав на ссылку “Скачать "
+"версию”"
 
 #: www/snippet/detail.php:106
 msgid "Latest Snippet Version: "
@@ -24673,13 +24673,6 @@ msgstr "Персональная страница для %s"
 #~ "номер которой будет отображатся как специфичная версия вырезок на "
 #~ "странице при навигации."
 
-#~ msgid ""
-#~ "Download a raw-text version of this code by clicking on &quot;"
-#~ "<strong>Download Version</strong>&quot;"
-#~ msgstr ""
-#~ "Скачать текстовую версию сырцов, можно нажав на ссылку &quot;"
-#~ "<strong>Скачать версию</strong>&quot;"
-
 #, fuzzy
 #~ msgid "Error - Could Not Update User Unix Status: "
 #~ msgstr "Ошибка, невозможно обновить статус группы (Unix): %s"
@@ -25161,11 +25154,6 @@ msgstr "Персональная страница для %s"
 #, fuzzy
 #~ msgid "--the %1$s staff."
 #~ msgstr "Кампания %1$s"
-
-#~ msgid "Choose the role for each user and then press &quot;Add All&quot;."
-#~ msgstr ""
-#~ "Укажите занимаемую должность для каждого участника, и нажните &quot;"
-#~ "Назначить всех&quot;."
 
 #~ msgid ""
 #~ "Check the box next to the name of the user(s) you want to add. Your "

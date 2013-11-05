@@ -20874,7 +20874,7 @@ msgstr ""
 
 #: www/project/admin/massfinish.php:66
 msgid "Choose the role for each user and then press “Add All”."
-msgstr "Escolla o rol de cada usuario e prema &quot;Engadir todos&quot;."
+msgstr "Escolla o rol de cada usuario e prema “Engadir todos”."
 
 #: www/project/admin/massfinish.php:96
 msgid "Add All"
@@ -22338,8 +22338,8 @@ msgstr "Cambios desde a última versión:"
 msgid ""
 "Download a raw-text version of this code by clicking on “Download Version”"
 msgstr ""
-"Descargue unha versión de texto deste código ao premer &quot;descargar "
-"versión&quot;"
+"Descargue unha versión de texto deste código ao premer ”Descargar "
+"versión”"
 
 #: www/snippet/detail.php:106
 msgid "Latest Snippet Version: "
@@ -24649,13 +24649,6 @@ msgstr "Páxina persoal de %s"
 #~ "é un ID único que se amosa xunto coas versións específicas dun fragmento "
 #~ "de código nas páxinas de navegación. "
 
-#~ msgid ""
-#~ "Download a raw-text version of this code by clicking on &quot;"
-#~ "<strong>Download Version</strong>&quot;"
-#~ msgstr ""
-#~ "Descargue unha versión de texto deste código ao premer &quot;"
-#~ "<strong>descargar versión</strong>&quot;"
-
 #, fuzzy
 #~ msgid "Error - Could Not Update User Unix Status: "
 #~ msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
@@ -25208,9 +25201,6 @@ msgstr "Páxina persoal de %s"
 #~ msgid "You should now <a href=\"%1$s\">Return to User Prefs</a>."
 #~ msgstr ""
 #~ "Agora debería <a href=\"%1$s\">volver ás preferencias de usuario</a>."
-
-#~ msgid "Choose the role for each user and then press &quot;Add All&quot;."
-#~ msgstr "Escolla o rol de cada usuario e prema &quot;Engadir todos&quot;."
 
 #~ msgid ""
 #~ "Check the box next to the name of the user(s) you want to add. Your "

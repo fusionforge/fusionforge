@@ -20881,7 +20881,7 @@ msgstr ""
 #: www/project/admin/massadd.php:87 www/project/admin/users.php:98
 #, fuzzy
 msgid "No Matching Users Found"
-msgstr "<p>Keine übereinstimmenden Benutzer gefunden</p>"
+msgstr "Keine übereinstimmenden Benutzer gefunden"
 
 #: www/project/admin/massadd.php:116
 msgid "Finish"
@@ -20897,7 +20897,7 @@ msgstr ""
 
 #: www/project/admin/massfinish.php:66
 msgid "Choose the role for each user and then press “Add All”."
-msgstr "Wählen Sie die Rolle für jeden Benutzer und drücken Sie »Add All«."
+msgstr "Wählen Sie die Rolle für jeden Benutzer und drücken Sie »Alle hinzufügen«."
 
 #: www/project/admin/massfinish.php:96
 msgid "Add All"
@@ -24673,13 +24673,6 @@ msgstr "Persönliche Seite für %s"
 #~ "Nummer die auf den Suchseiten neben einer spezifischen Schnipsel-Version "
 #~ "angegeben wird."
 
-#~ msgid ""
-#~ "Download a raw-text version of this code by clicking on &quot;"
-#~ "<strong>Download Version</strong>&quot;"
-#~ msgstr ""
-#~ "Laden Sie eine Rohtext-Version dieses Codes herunter, indem Sie auf &quot;"
-#~ "<strong>Download Version</strong>&quot; klicken"
-
 #, fuzzy
 #~ msgid "Error - Could Not Update User Unix Status: "
 #~ msgstr "Fehler - Konnte den Unix Gruppen Status nicht aktualisieren: %s"
@@ -25257,11 +25250,6 @@ msgstr "Persönliche Seite für %s"
 #, fuzzy
 #~ msgid "--the %1$s staff."
 #~ msgstr "Das %1$s Team"
-
-#~ msgid "Choose the role for each user and then press &quot;Add All&quot;."
-#~ msgstr ""
-#~ "Wählen Sie die Rolle für jeden Benutzer und drücken Sie &quot;Add "
-#~ "All&quot;."
 
 #, fuzzy
 #~ msgid ""

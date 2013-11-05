@@ -20565,12 +20565,12 @@ msgstr ""
 #: www/project/admin/massfinish.php:66
 msgid "Choose the role for each user and then press “Add All”."
 msgstr ""
-"Aukeratu erabiltzaile bakoitzaren rola eta gero sakatu &quot;Denak "
-"Gehitu&quot;."
+"Aukeratu erabiltzaile bakoitzaren rola eta gero sakatu “Denak "
+"Gehitu”."
 
 #: www/project/admin/massfinish.php:96
 msgid "Add All"
-msgstr "Data Gehitu"
+msgstr "Denak Gehitu"
 
 #: www/project/admin/project_admin_utils.php:49
 msgid "General information about project. Tag, trove list, description."
@@ -21997,13 +21997,13 @@ msgstr "Azken bertsiotik egon diren aldaketak:"
 msgid ""
 "Download a raw-text version of this code by clicking on “Download Version”"
 msgstr ""
-"Kode honen testu bertsioa deskargatzeko hemen sakatu &quot;Bertsioa "
-"deskargatu&quot;"
+"Kode honen testu bertsioa deskargatzeko hemen sakatu “Bertsioa "
+"deskargatu”"
 
 #: www/snippet/detail.php:106
 #, fuzzy
 msgid "Latest Snippet Version: "
-msgstr "Bertsioaren azken adabakia:"
+msgstr "Bertsioaren azken adabakia: "
 
 #: www/snippet/detail.php:115 www/snippet/detail.php:202
 msgid "Submit a new version"
@@ -24050,13 +24050,6 @@ msgstr "Nere orri pertsonala"
 #~ msgid "Error: That snippet doesn't exist."
 #~ msgstr "Akatsa - Ebakin hau ez da existitzen."
 
-#~ msgid ""
-#~ "Download a raw-text version of this code by clicking on &quot;"
-#~ "<strong>Download Version</strong>&quot;"
-#~ msgstr ""
-#~ "Kode honen testu bertsioa deskargatzeko hemen sakatu &quot;"
-#~ "<strong>Bertsioa deskargatu</strong>&quot;"
-
 #, fuzzy
 #~ msgid "Error - Could Not Update User Unix Status: "
 #~ msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
@@ -24441,11 +24434,6 @@ msgstr "Nere orri pertsonala"
 #, fuzzy
 #~ msgid "--the %1$s staff."
 #~ msgstr "%1$s -en lantaldea"
-
-#~ msgid "Choose the role for each user and then press &quot;Add All&quot;."
-#~ msgstr ""
-#~ "Aukeratu erabiltzaile bakoitzaren rola eta gero sakatu &quot;Denak "
-#~ "Gehitu&quot;."
 
 #, fuzzy
 #~ msgid "Add user"

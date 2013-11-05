@@ -21636,7 +21636,7 @@ msgstr "Cambios desde la última versión:"
 msgid ""
 "Download a raw-text version of this code by clicking on “Download Version”"
 msgstr ""
-"Descargar una versión texto de este código pulsando en “Descargar Versión”;"
+"Descargar una versión texto de este código pulsando en “Descargar Versión”"
 
 #: www/snippet/detail.php:106
 msgid "Latest Snippet Version: "
@@ -23873,13 +23873,6 @@ msgstr "Página personal de %s"
 #~ msgid "Error: That snippet doesn't exist."
 #~ msgstr "Error - Este recorte no existe."
 
-#~ msgid ""
-#~ "Download a raw-text version of this code by clicking on &quot;"
-#~ "<strong>Download Version</strong>&quot;"
-#~ msgstr ""
-#~ "Descargar una versión texto de este código pulsando en &quot;"
-#~ "<strong>Descargar Versión</strong>&quot;"
-
 #, fuzzy
 #~ msgid "Error - Could Not Update User Unix Status: "
 #~ msgstr "ERROR - No puedo actualizar Estado Usuario:"
@@ -24407,9 +24400,6 @@ msgstr "Página personal de %s"
 #~ msgid "You should now <a href=\"%1$s\">Return to User Prefs</a>."
 #~ msgstr ""
 #~ "Ahora debe <a href=\"%1$s\">regresar a las preferencias de usuario</a>."
-
-#~ msgid "Choose the role for each user and then press &quot;Add All&quot;."
-#~ msgstr "Elija el rol de cada usuario y presione &quot;Añadir todos&quot;."
 
 #~ msgid "Add user"
 #~ msgstr "Añadir usuario"

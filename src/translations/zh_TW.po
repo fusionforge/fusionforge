@@ -20507,12 +20507,12 @@ msgstr ""
 msgid ""
 "Choose the <strong>First Letter</strong> of the name of the person you wish "
 "to add."
-msgstr "<p> 選擇你想要增加的人擁有Unix帳號的<strong>第一個字元</strong>。</p>"
+msgstr ""
 
 #: www/project/admin/massadd.php:87 www/project/admin/users.php:98
 #, fuzzy
 msgid "No Matching Users Found"
-msgstr "<p>未發現符合的使用者</p>"
+msgstr "未發現符合的使用者"
 
 #: www/project/admin/massadd.php:116
 msgid "Finish"
@@ -20528,12 +20528,11 @@ msgstr ""
 
 #: www/project/admin/massfinish.php:66
 msgid "Choose the role for each user and then press “Add All”."
-msgstr "選擇每個使用者的角色後點擊 \"Add All\"。"
+msgstr "選擇每個使用者的角色後點擊 “Add All”。"
 
 #: www/project/admin/massfinish.php:96
-#, fuzzy
 msgid "Add All"
-msgstr "新增日期"
+msgstr ""
 
 #: www/project/admin/project_admin_utils.php:49
 msgid "General information about project. Tag, trove list, description."
@@ -21962,7 +21961,7 @@ msgstr "與上個版本的差異："
 #: www/snippet/detail.php:95 www/snippet/detail.php:182
 msgid ""
 "Download a raw-text version of this code by clicking on “Download Version”"
-msgstr "下載一個程式碼的純文字版本，藉由點擊\"下載版本\""
+msgstr "下載一個程式碼的純文字版本，藉由點擊“下載版本”"
 
 #: www/snippet/detail.php:106
 #, fuzzy
@@ -23980,11 +23979,6 @@ msgstr "我的個人首頁"
 #~ msgid "Error: That snippet doesn't exist."
 #~ msgstr "錯誤 - 程式碼不存在"
 
-#~ msgid ""
-#~ "Download a raw-text version of this code by clicking on &quot;"
-#~ "<strong>Download Version</strong>&quot;"
-#~ msgstr "下載一個程式碼的純文字版本，藉由點擊\"<strong>下載版本</strong>\""
-
 #, fuzzy
 #~ msgid "Error - Could Not Update User Unix Status: "
 #~ msgstr "無法更新上層文章"
@@ -24407,9 +24401,6 @@ msgstr "我的個人首頁"
 #, fuzzy
 #~ msgid "--the %1$s staff."
 #~ msgstr "%1$s 團隊"
-
-#~ msgid "Choose the role for each user and then press &quot;Add All&quot;."
-#~ msgstr "選擇每個使用者的角色後點擊 \"Add All\"。"
 
 #, fuzzy
 #~ msgid "Add user"

@@ -2610,7 +2610,7 @@ msgstr "Unix groepsnaam:"
 #: common/frs/FRSFile.class.php:82 common/frs/FRSFile.class.php:398
 #, fuzzy
 msgid "Invalid FRS Release Object"
-msgstr "Geen geldig Enqu&ecirc;te Object"
+msgstr "Geen geldig Enquête Object"
 
 #: common/frs/FRSFile.class.php:121 common/frs/include/frs_utils.php:246
 #: common/include/account.php:66
@@ -3771,7 +3771,7 @@ msgstr "Bekijk documentatie"
 #: common/widget/Widget_ProjectPublicAreas.class.php:171
 #: plugins/blocks/www/index.php:156
 msgid "Surveys"
-msgstr "Enqu&ecirc;tes"
+msgstr "Enquêtes"
 
 #: common/include/Navigation.class.php:504
 msgid "Online surveys, project needs your point of view."
@@ -3943,7 +3943,7 @@ msgstr "Project database beheer"
 #: common/include/rbac_texts.php:61 common/include/rbac_texts.php:152
 #, fuzzy
 msgid "Trackers administration"
-msgstr "Enqu&ecirc;te beheer"
+msgstr "Enquête beheer"
 
 #: common/include/rbac_texts.php:63 common/include/rbac_texts.php:153
 #, fuzzy
@@ -4091,7 +4091,7 @@ msgstr "Projecten"
 #: common/include/rbac_texts.php:160
 #, fuzzy
 msgid "Default for new trackers"
-msgstr "Cre&euml;er een bundel"
+msgstr "Creëer een bundel"
 
 #: common/include/rbac_texts.php:161
 #, fuzzy
@@ -4938,16 +4938,16 @@ msgstr ""
 #: common/survey/Survey.class.php:109 common/survey/Survey.class.php:157
 #, fuzzy
 msgid "Update Failed: Survey Title Required"
-msgstr "WIJZIGEN MISLUKT: Enqu&ecirc;te titel ontbreekt"
+msgstr "WIJZIGEN MISLUKT: Enquête titel ontbreekt"
 
 #: common/survey/Survey.class.php:113
 #, fuzzy
 msgid "Update Failed: Survey Questions Required"
-msgstr "WIJZIGEN MISLUKT: Enqu&ecirc;te vragen ontbreken"
+msgstr "WIJZIGEN MISLUKT: Enquête vragen ontbreken"
 
 #: common/survey/Survey.class.php:167 common/survey/Survey.class.php:200
 msgid "The Survey data is not filled"
-msgstr "De enqu&ecirc;tegegevens zijn niet ingevuld"
+msgstr "De enquêtegegevens zijn niet ingevuld"
 
 #: common/survey/Survey.class.php:240
 #: common/survey/SurveyQuestion.class.php:170 www/pm/task.php:354
@@ -4959,14 +4959,14 @@ msgstr "Verwijderen mislukt"
 #: www/survey/admin/survey.php:100 www/survey/include/SurveyHTML.class.php:455
 #: www/survey/index.php:56
 msgid "No Survey is found"
-msgstr "Geen enqu&ecirc;te gevonden"
+msgstr "Geen enquête gevonden"
 
 #: common/survey/SurveyFactory.class.php:59
 #: common/survey/SurveyQuestionFactory.class.php:57
 #: common/survey/SurveyResponseFactory.class.php:80
 #: common/survey/SurveyResponseFactory.class.php:88
 msgid "Survey"
-msgstr "Enqu&ecirc;te"
+msgstr "Enquête"
 
 #: common/survey/SurveyFactory.class.php:63
 #: common/survey/SurveyQuestionFactory.class.php:61
@@ -4989,7 +4989,7 @@ msgstr "Fout bij het vinden van de vraag"
 
 #: common/survey/SurveyResponseFactory.class.php:76
 msgid "No valid Survey Object"
-msgstr "Geen geldig Enqu&ecirc;te Object"
+msgstr "Geen geldig Enquête Object"
 
 #: common/survey/SurveyResponseFactory.class.php:84
 msgid "No valid Question Object"
@@ -4998,7 +4998,7 @@ msgstr "Geen geldig Vraag Object"
 #: common/survey/SurveyResponseFactory.class.php:148
 #: common/survey/SurveyResponseFactory.class.php:179
 msgid "No Survey Response is found"
-msgstr "Geen enqu&ecirc;teantwoorden gevonden"
+msgstr "Geen enquêteantwoorden gevonden"
 
 #: common/tracker/actions/add.php:30
 #: common/tracker/include/ArtifactTypeHtml.class.php:61
@@ -5022,7 +5022,7 @@ msgstr "Kon de gevraagde bewerking niet uitvoeren"
 #: common/tracker/actions/admin-ind.php:87
 #, fuzzy
 msgid "Trackers Administration"
-msgstr "Enqu&ecirc;te beheer"
+msgstr "Enquête beheer"
 
 #: common/tracker/actions/admin-ind.php:90
 #, fuzzy
@@ -5034,7 +5034,7 @@ msgid ""
 "Choose a data type and you can set up prefs, categories, groups, users, and "
 "permissions"
 msgstr ""
-"Als je een datatype kiest kun je voorkeuren, categorie&euml;n, groepen, "
+"Als je een datatype kiest kun je voorkeuren, categorieën, groepen, "
 "gebruikers en rechten toekennen"
 
 #: common/tracker/actions/admin-ind.php:119
@@ -5045,7 +5045,7 @@ msgstr "Nieuwe bestand versies"
 #: common/tracker/actions/admin-ind.php:129
 #, fuzzy
 msgid "Create a new tracker"
-msgstr "Cre&euml;er een bundel"
+msgstr "Creëer een bundel"
 
 #: common/tracker/actions/admin-ind.php:130
 msgid ""
@@ -5159,7 +5159,7 @@ msgstr ""
 #: common/tracker/actions/admin-tracker.php:36
 #, fuzzy
 msgid "Create a new tracker."
-msgstr "Cre&euml;er een bundel"
+msgstr "Creëer een bundel"
 
 #: common/tracker/actions/admin-tracker.php:40
 #: common/tracker/include/ArtifactTypeHtml.class.php:112
@@ -5185,7 +5185,7 @@ msgid ""
 msgstr ""
 "Voeg nieuwe boxes toe zoals fases, kwaliteitsmetrieken, componenten, etc.  "
 "Wanneer ze eenmaal zijn toegevoegd kunnen ze gebruikt worden samen met "
-"andere keuze boxes (bijvooorbeeld, categorie&euml;n of groepen) om bugs of "
+"andere keuze boxes (bijvooorbeeld, categorieën of groepen) om bugs of "
 "andere items te beschrijven of te doorzoeken"
 
 #: common/tracker/actions/admin-tracker.php:52
@@ -5214,7 +5214,7 @@ msgstr "Standaard antwoorden toevoegen / wijzigen"
 #: common/tracker/actions/admin-tracker.php:66
 #, fuzzy
 msgid "Create/change generic response messages for the tracker."
-msgstr "Cre&euml;er / wijzig generieke antwoordboodschappen voor de Tracker"
+msgstr "Creëer / wijzig generieke antwoordboodschappen voor de Tracker"
 
 #: common/tracker/actions/admin-tracker.php:70
 #, fuzzy
@@ -5789,7 +5789,7 @@ msgstr "Totaal"
 
 #: common/tracker/actions/mod-limited.php:73 common/tracker/actions/mod.php:71
 msgid "Build Task Relation"
-msgstr "Cre&euml;er taakrelatie"
+msgstr "Creëer taakrelatie"
 
 #: common/tracker/actions/mod-limited.php:96 common/tracker/actions/mod.php:97
 msgid "Date Submitted"
@@ -5992,7 +5992,7 @@ msgstr "Voeg relatie met bestaande taak toe."
 
 #: common/tracker/actions/taskmgr.php:170
 msgid "Create New Task"
-msgstr "Cre&euml;er nieuwe taak"
+msgstr "Creëer nieuwe taak"
 
 #: common/tracker/actions/tracker.php:96
 #, fuzzy, php-format
@@ -6427,7 +6427,7 @@ msgstr "Geen wijzigingen uitgevoerd"
 #: common/tracker/include/ArtifactHtml.class.php:211
 #, fuzzy
 msgid "Backward Relations"
-msgstr "Cre&euml;er taakrelatie"
+msgstr "Creëer taakrelatie"
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:43
 #, fuzzy, php-format
@@ -6853,7 +6853,7 @@ msgstr "Kan geen database element toevoegen"
 #: common/tracker/views/form-adminroadmap.php:126
 #, fuzzy
 msgid "Cannot set default value: "
-msgstr "Bewerk een enqu&ecirc;te"
+msgstr "Bewerk een enquête"
 
 #: common/tracker/views/form-adminroadmap.php:129
 #, fuzzy
@@ -6901,7 +6901,7 @@ msgstr "Ja"
 #: common/tracker/views/form-adminroadmap.php:184
 #, fuzzy
 msgid "Create a new roadmap"
-msgstr "Cre&euml;er een bundel"
+msgstr "Creëer een bundel"
 
 #: common/tracker/views/form-adminroadmap.php:187
 #, fuzzy
@@ -7616,7 +7616,7 @@ msgstr "nieuwe toevoegen"
 #: common/widget/Widget_MySurveys.class.php:140
 #, fuzzy
 msgid "Quick Survey"
-msgstr "Bewerk enqu&ecirc;te"
+msgstr "Bewerk enquête"
 
 #: common/widget/Widget_MySurveys.class.php:148
 #, fuzzy
@@ -7983,7 +7983,7 @@ msgstr "Er zijn geen openbare subprojecten beschikbaar"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:173
 msgid "surveys"
-msgstr "Enqu&ecirc;tes"
+msgstr "Enquêtes"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:182
 #: plugins/scmgit/www/index.php:57 plugins/scmgit/www/index.php:71
@@ -8281,7 +8281,7 @@ msgstr ""
 #: plugins/admssw/www/index.php:53
 #, fuzzy
 msgid "Trove categories :"
-msgstr "Voeg categorie&euml;n toe"
+msgstr "Voeg categorieën toe"
 
 #: plugins/admssw/www/index.php:56
 msgid "as Turtle"
@@ -9816,7 +9816,7 @@ msgstr "Actie"
 #: plugins/globaldashboard/www/admin/manage_accounts.php:113
 #, fuzzy
 msgid "Create a new remote account"
-msgstr "Cre&euml;er een bundel"
+msgstr "Creëer een bundel"
 
 #: plugins/globaldashboard/www/help.php:52
 msgid "Global Dashboard Help"
@@ -10497,7 +10497,7 @@ msgstr ""
 #: plugins/hudson/include/hudson.class.php:134
 #, fuzzy
 msgid "Hudson service is not enabled"
-msgstr "De enqu&ecirc;tegegevens zijn niet ingevuld"
+msgstr "De enquêtegegevens zijn niet ingevuld"
 
 #: plugins/hudson/include/hudson.class.php:137
 #, fuzzy
@@ -10977,7 +10977,7 @@ msgstr "Mijn forums"
 #: plugins/mailman/include/mailmanPlugin.class.php:195
 #, fuzzy, php-format
 msgid "Not Object: MailmanList: %d"
-msgstr "Geen enqu&ecirc;tevraag gevonden"
+msgstr "Geen enquêtevraag gevonden"
 
 #: plugins/mailman/include/mailmanPlugin.class.php:210
 #: utils/fixscripts/populate_template_project.php:204
@@ -11527,7 +11527,7 @@ msgstr ""
 #: plugins/mantisbt/view/addIssue.php:125
 #, fuzzy
 msgid "No version defined"
-msgstr "Geen categorie&euml;n bekend"
+msgstr "Geen categorieën bekend"
 
 #: plugins/mantisbt/view/addIssue.php:133
 msgid "(128 char max)"
@@ -11609,7 +11609,7 @@ msgstr "Wachtwoord aanpassen"
 #: plugins/mantisbt/view/admin/viewCategorie.php:44
 #, fuzzy
 msgid "Manage categories"
-msgstr "Tijdregistratie beheer categorie&euml;n"
+msgstr "Tijdregistratie beheer categorieën"
 
 #: plugins/mantisbt/view/admin/viewCategorie.php:61
 #, fuzzy
@@ -11619,7 +11619,7 @@ msgstr "Echte naam"
 #: plugins/mantisbt/view/admin/viewCategorie.php:75
 #, fuzzy
 msgid "No Categories"
-msgstr "Voeg categorie&euml;n toe"
+msgstr "Voeg categorieën toe"
 
 #: plugins/mantisbt/view/admin/viewConfiguration.php:59
 #: plugins/mantisbt/view/init.php:65
@@ -12370,7 +12370,7 @@ msgstr "Voeg een nieuwe vaardigheid toe"
 #: plugins/oauthconsumer/www/providers.php:108
 #, fuzzy
 msgid "Add provider"
-msgstr "Voeg enqu&ecirc;te toe"
+msgstr "Voeg enquête toe"
 
 #: plugins/oauthprovider/include/oauthprovider_plugin.php:167
 #, fuzzy
@@ -13740,7 +13740,7 @@ msgstr ""
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:121
 #, fuzzy
 msgid "No repositories defined."
-msgstr "Geen categorie&euml;n bekend"
+msgstr "Geen categorieën bekend"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:125
 #, fuzzy
@@ -13771,7 +13771,7 @@ msgstr "SCM repository"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:628
 #, fuzzy
 msgid "Create new repository:"
-msgstr "Cre&euml;er nieuw antwoord:"
+msgstr "Creëer nieuw antwoord:"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:629
 #: plugins/scmgit/common/GitPlugin.class.php:1091
@@ -14472,7 +14472,7 @@ msgstr "Bevestigen"
 #: www/account/change_email-complete.php:45 www/account/lostlogin.php:47
 #: www/account/unsubscribe.php:45
 msgid "This confirm hash exists more than once."
-msgstr "Deze bevestigingshash bestaat meer dan &eacute;&eacute;n keer."
+msgstr "Deze bevestigingshash bestaat meer dan één keer."
 
 #: www/account/change_email-complete.php:48 www/account/lostlogin.php:50
 #: www/account/unsubscribe.php:48
@@ -16183,7 +16183,7 @@ msgstr "Toegevoegd antwoord"
 
 #: www/admin/responses_admin.php:125
 msgid "Create New Response:"
-msgstr "Cre&euml;er nieuw antwoord:"
+msgstr "Creëer nieuw antwoord:"
 
 #: www/admin/search.php:39
 msgid "Admin Search Results"
@@ -17514,7 +17514,7 @@ msgstr "Release toevoegen"
 #: www/frs/admin/index.php:201
 #, fuzzy
 msgid "Create New Package"
-msgstr "Cre&euml;er een bundel"
+msgstr "Creëer een bundel"
 
 #: www/frs/admin/index.php:205
 msgid "New Package Name"
@@ -17584,7 +17584,7 @@ msgstr "Release bestand"
 #: www/frs/admin/showreleases.php:43
 #, fuzzy
 msgid "Choose package"
-msgstr "Kies er &eacute;&eacute;n"
+msgstr "Kies er één"
 
 #: www/frs/admin/showreleases.php:90
 msgid "No Releases Of This Package Are Available"
@@ -18274,7 +18274,7 @@ msgstr "Hoog"
 #: www/include/vote_function.php:288
 #: www/survey/include/SurveyHTML.class.php:556 www/survey/privacy.php:36
 msgid "Survey Privacy"
-msgstr "Enqu&ecirc;te privacy"
+msgstr "Enquête privacy"
 
 #: www/include/vote_function.php:295
 msgid "Survey not found."
@@ -18977,7 +18977,7 @@ msgstr "Categorie toegevoegd"
 #: www/people/admin/index.php:68
 #, fuzzy
 msgid "Skill Inserted"
-msgstr "Enqu&ecirc;te\ttoegevoegd"
+msgstr "Enquête\ttoegevoegd"
 
 #: www/people/createjob.php:44
 msgid ""
@@ -19403,7 +19403,7 @@ msgstr "Ongeldig ID"
 
 #: www/people/people_utils.php:363
 msgid "No Categories Found"
-msgstr "Geen categorie&euml;n gevonden"
+msgstr "Geen categorieën gevonden"
 
 #: www/people/people_utils.php:407
 msgid "Date Opened"
@@ -19445,7 +19445,7 @@ msgstr "Bekijk een gebruikersprofiel"
 
 #: www/people/viewprofile.php:56
 msgid "This User Has Set His/Her Profile to Private"
-msgstr "Deze gebruiker heeft zijn/haar profiel op priv&eacute; staan"
+msgstr "Deze gebruiker heeft zijn/haar profiel op privé staan"
 
 #: www/people/viewprofile.php:63
 msgid "Skills profile for"
@@ -19520,11 +19520,11 @@ msgstr "%1$s verwijderen gelukt."
 #: www/pm/admin/index.php:177
 #, fuzzy, php-format
 msgid "Add Categories to: %s"
-msgstr "Categori&euml;n toevoegen"
+msgstr "Categoriën toevoegen"
 
 #: www/pm/admin/index.php:203
 msgid "No categories defined"
-msgstr "Geen categorie&euml;n bekend"
+msgstr "Geen categorieën bekend"
 
 #: www/pm/admin/index.php:212 www/pm/admin/index.php:258
 #: www/reporting/timecategory.php:70 www/reporting/timecategory.php:90
@@ -19585,7 +19585,7 @@ msgid ""
 "private subprojects can still be viewed by members of your project, but not "
 "the general public."
 msgstr ""
-"Je kunt een bestaand project wijzigen met dit form. Let op: priv&eacute; "
+"Je kunt een bestaand project wijzigen met dit form. Let op: privé "
 "projecten kunnen door alle leden van een team worden ingezien, maar niet "
 "door het algemene publiek."
 
@@ -20674,8 +20674,8 @@ msgstr ""
 #: www/project/admin/massfinish.php:66
 msgid "Choose the role for each user and then press “Add All”."
 msgstr ""
-"Kies voor iedere gebruiker een rol en klik daarna op &quot;Alle "
-"toevoegen&quot;."
+"Kies voor iedere gebruiker een rol en klik daarna op “Alle "
+"toevoegen”."
 
 #: www/project/admin/massfinish.php:96
 msgid "Add All"
@@ -20876,7 +20876,7 @@ msgstr "Gebruik forums"
 
 #: www/project/admin/tools.php:230
 msgid "Use Surveys"
-msgstr "Gebruik enqu&ecirc;te"
+msgstr "Gebruik enquête"
 
 #: www/project/admin/tools.php:243
 msgid "Use News"
@@ -20921,7 +20921,7 @@ msgstr "Forumbeheer"
 #: www/project/admin/tools.php:333
 #, fuzzy
 msgid "Survey Admin"
-msgstr "Enqu&ecirc;te beheer"
+msgstr "Enquête beheer"
 
 #: www/project/admin/tools.php:336
 #, fuzzy
@@ -21337,7 +21337,7 @@ msgid ""
 "at all). Please select the SCM system you want to use."
 msgstr ""
 "<h3>5. SCM</h3><p>Je kunt uit verschillende SCM vormen voor je project "
-"kiezen, maar je mag er niet meer dan &eacute;&eacute;n selecteren. Kies dus "
+"kiezen, maar je mag er niet meer dan één selecteren. Kies dus "
 "zorgvuldig het SCM systeem dat je wilt gebruiken.</p> <p><strong>Je kunt je "
 "keuze niet meer wijzigen nadat je project is aangemeld!</strong></p>"
 
@@ -21461,7 +21461,7 @@ msgstr "Initializeer / herbouw overzicht tabellen"
 
 #: www/reporting/index.php:85 www/reporting/timecategory.php:60
 msgid "Manage Time Tracker Categories"
-msgstr "Tijdregistratie beheer categorie&euml;n"
+msgstr "Tijdregistratie beheer categorieën"
 
 #: www/reporting/projecttime.php:62
 msgid "Time Tracking By Project"
@@ -21794,7 +21794,7 @@ msgstr "met alle woorden"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:346
 msgid "with one word"
-msgstr "met &eacute;&eacute;n woord"
+msgstr "met één woord"
 
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:393
 #, fuzzy
@@ -22141,8 +22141,8 @@ msgstr "Wijzigingen sinds de laatste versie:"
 msgid ""
 "Download a raw-text version of this code by clicking on “Download Version”"
 msgstr ""
-"Download een platte tekst versie van deze code door te klikken op &quot;"
-"Download versie&quot;"
+"Download een platte tekst versie van deze code door te klikken op “"
+"Download versie”"
 
 #: www/snippet/detail.php:106
 #, fuzzy
@@ -22272,7 +22272,7 @@ msgstr "Doe een voorstel voor een categorie"
 #: www/snippet/snippet_utils.php:26 www/snippet/snippet_utils.php:41
 #: www/snippet/snippet_utils.php:67
 msgid "Choose One"
-msgstr "Kies er &eacute;&eacute;n"
+msgstr "Kies er één"
 
 #: www/snippet/snippet_utils.php:27
 msgid "Unix Admin"
@@ -22352,7 +22352,7 @@ msgstr "Andere taal"
 
 #: www/snippet/snippet_utils.php:132
 msgid "Create A Package"
-msgstr "Cre&euml;er een bundel"
+msgstr "Creëer een bundel"
 
 #: www/snippet/submit.php:59
 msgid "Error doing snippet insert"
@@ -22445,7 +22445,7 @@ msgstr "Die Trove categorie bestaat niet"
 #, fuzzy
 msgid "Now limiting view to projects in the following categories:"
 msgstr ""
-"De weergave van projecten wordt nu ingeperkt op de volgende categorie&euml;n:"
+"De weergave van projecten wordt nu ingeperkt op de volgende categorieën:"
 
 #: www/softwaremap/trove_list.php:141
 msgid "Remove This Filter"
@@ -22667,7 +22667,7 @@ msgstr ""
 #: www/survey/admin/index.php:35
 #, fuzzy
 msgid "Surveys Administration"
-msgstr "Enqu&ecirc;te beheer"
+msgstr "Enquête beheer"
 
 #: www/survey/admin/index.php:52
 #, fuzzy
@@ -22700,8 +22700,8 @@ msgid ""
 "You can now activate/deactivate surveys on the %1$s Edit Existing Surveys "
 "%2$s page"
 msgstr ""
-"Je kunt nu enqu&ecirc;tes activeren/deactiveren op de %1$s &#039;Bestaande "
-"enqu&ecirc;tes aanpassen&#039; %2$s pagina"
+"Je kunt nu enquêtes activeren/deactiveren op de %1$s &#039;Bestaande "
+"enquêtes aanpassen&#039; %2$s pagina"
 
 #: www/survey/admin/question.php:52
 #, fuzzy
@@ -22716,7 +22716,7 @@ msgstr "Voeg een vraag toe"
 #: www/survey/admin/question.php:64 www/survey/admin/show_results.php:91
 #, fuzzy
 msgid "Cannot get Survey Question"
-msgstr "Enqu&ecirc;te vragen"
+msgstr "Enquête vragen"
 
 #: www/survey/admin/question.php:78
 #, fuzzy
@@ -22731,20 +22731,20 @@ msgstr "%1$s vragen gevonden"
 #: www/survey/admin/show_csv.php:80 www/survey/admin/show_results.php:140
 #, fuzzy
 msgid "Cannot get Survey Response Factory"
-msgstr "Geen enqu&ecirc;teantwoorden gevonden"
+msgstr "Geen enquêteantwoorden gevonden"
 
 #: www/survey/admin/show_questions.php:32
 msgid "Survey Questions"
-msgstr "Enqu&ecirc;te vragen"
+msgstr "Enquête vragen"
 
 #: www/survey/admin/show_questions.php:42
 msgid "You may use any of these questions on your surveys"
-msgstr "Je mag elke van deze vragen gebruiken in je enqu&ecirc;tes"
+msgstr "Je mag elke van deze vragen gebruiken in je enquêtes"
 
 #: www/survey/admin/show_questions.php:44
 msgid "NOTE: use these question_id's when you create a new survey"
 msgstr ""
-"LET OP: gebruik deze vraag ID&#039;s als U een nieuwe enqu&ecirc;te "
+"LET OP: gebruik deze vraag ID&#039;s als U een nieuwe enquête "
 "samenstelt"
 
 #: www/survey/admin/show_questions.php:52
@@ -22764,12 +22764,12 @@ msgstr "Ja / Nee"
 
 #: www/survey/admin/show_results.php:62
 msgid "Survey Results"
-msgstr "Enqu&ecirc;te resultaten"
+msgstr "Enquête resultaten"
 
 #: www/survey/admin/show_results.php:76
 #, fuzzy
 msgid "Cannot get Survey"
-msgstr "Bewerk een enqu&ecirc;te"
+msgstr "Bewerk een enquête"
 
 #: www/survey/admin/show_results.php:99
 #, fuzzy
@@ -22778,26 +22778,26 @@ msgstr "Vote"
 
 #: www/survey/admin/show_results.php:122
 msgid "No Survey Question is found"
-msgstr "Geen enqu&ecirc;tevraag gevonden"
+msgstr "Geen enquêtevraag gevonden"
 
 #: www/survey/admin/survey.php:72
 #, fuzzy
 msgid "Survey Added"
-msgstr "Enqu&ecirc;te beheer"
+msgstr "Enquête beheer"
 
 #: www/survey/admin/survey.php:91
 #, fuzzy
 msgid "Edit a Survey"
-msgstr "Bewerk een enqu&ecirc;te"
+msgstr "Bewerk een enquête"
 
 #: www/survey/admin/survey.php:91
 #, fuzzy
 msgid "Add a Survey"
-msgstr "Voeg een enqu&ecirc;te toe"
+msgstr "Voeg een enquête toe"
 
 #: www/survey/include/SurveyHTML.class.php:64
 msgid "Add Survey"
-msgstr "Voeg enqu&ecirc;te toe"
+msgstr "Voeg enquête toe"
 
 #: www/survey/include/SurveyHTML.class.php:65
 #, fuzzy
@@ -22811,7 +22811,7 @@ msgstr "Toon resultaten"
 #: www/survey/include/SurveyHTML.class.php:77
 #, fuzzy
 msgid "Views Surveys"
-msgstr "Gebruik enqu&ecirc;te"
+msgstr "Gebruik enquête"
 
 #: www/survey/include/SurveyHTML.class.php:105
 #, fuzzy
@@ -22844,19 +22844,19 @@ msgstr ""
 #: www/survey/include/SurveyHTML.class.php:162
 #, fuzzy
 msgid "Add this Survey"
-msgstr "Voeg deze enqu&ecirc;te toe"
+msgstr "Voeg deze enquête toe"
 
 #: www/survey/include/SurveyHTML.class.php:169
 msgid ""
 "WARNING! It is a bad idea to edit a survey after responses have been posted"
 msgstr ""
-"WAARSCHUWING! Het is geen goed idee een enqu&ecirc;te te veranderen nadat al "
+"WAARSCHUWING! Het is geen goed idee een enquête te veranderen nadat al "
 "antwoorden zijn ingediend"
 
 #: www/survey/include/SurveyHTML.class.php:191
 #: www/survey/include/SurveyHTML.class.php:344
 msgid "Survey Title"
-msgstr "Enqu&ecirc;te titel"
+msgstr "Enquête titel"
 
 #: www/survey/include/SurveyHTML.class.php:194
 msgid "Is Active?"
@@ -22873,12 +22873,12 @@ msgstr "Vragen"
 
 #: www/survey/include/SurveyHTML.class.php:243
 msgid "Questions in this Survey"
-msgstr "Vragen in deze enqu&ecirc;te"
+msgstr "Vragen in deze enquête"
 
 #: www/survey/include/SurveyHTML.class.php:244
 #, fuzzy
 msgid "Delete from this Survey"
-msgstr "Vragen in deze enqu&ecirc;te"
+msgstr "Vragen in deze enquête"
 
 #: www/survey/include/SurveyHTML.class.php:259
 msgid "Up"
@@ -22898,7 +22898,7 @@ msgstr[1] "%1$s vragen gevonden"
 
 #: www/survey/include/SurveyHTML.class.php:341
 msgid "Survey ID"
-msgstr "Enqu&ecirc;te ID"
+msgstr "Enquête ID"
 
 #: www/survey/include/SurveyHTML.class.php:350
 msgid "Number of Questions"
@@ -22940,7 +22940,7 @@ msgstr ""
 #: www/survey/include/SurveyHTML.class.php:475
 msgid "Warning - you are about to vote a second time on this survey."
 msgstr ""
-"Pas op - je staat op het punt om voor de tweede keer in deze enqu&ecirc;te "
+"Pas op - je staat op het punt om voor de tweede keer in deze enquête "
 "te te stemmen."
 
 #: www/survey/include/SurveyHTML.class.php:589
@@ -23026,17 +23026,17 @@ msgstr "Naam van de enquête"
 msgid ""
 "For some reason, the Project ID or Survey ID did not make it to this page"
 msgstr ""
-"Om een of andere reden is het Groeps ID of Enqu&ecirc;te ID niet aan deze "
+"Om een of andere reden is het Groeps ID of Enquête ID niet aan deze "
 "pagina doorgegeven"
 
 #: www/survey/survey_resp.php:41
 msgid "Survey Complete"
-msgstr "Enqu&ecirc;te voltooid"
+msgstr "Enquête voltooid"
 
 #: www/survey/survey_resp.php:57
 msgid "Thank you for taking time to complete this survey."
 msgstr ""
-"Bedankt voor voor het nemen van de tijd om deze enqu&ecirc;te in te vullen."
+"Bedankt voor voor het nemen van de tijd om deze enquête in te vullen."
 
 #: www/survey/survey_resp.php:58
 #, fuzzy
@@ -23072,7 +23072,7 @@ msgid ""
 "ranked projects in several categories."
 msgstr ""
 "Wij houden project gebruikstatistieken bij op %1$s en laten hier de hoogst "
-"scorende projecten in verschillende categorie&euml;n zien."
+"scorende projecten in verschillende categorieën zien."
 
 #: www/top/index.php:35 www/top/mostactive.php:43
 msgid "Most Active All Time"
@@ -23098,7 +23098,7 @@ msgstr "Dagelijks bijgewerkt"
 
 #: www/top/mostactive.php:50 www/top/toplist.php:52 www/top/topusers.php:59
 msgid "View Other Top Categories"
-msgstr "Bekijk andere hoogste categorie&euml;n"
+msgstr "Bekijk andere hoogste categorieën"
 
 #: www/top/mostactive.php:52
 #, fuzzy
@@ -23537,7 +23537,7 @@ msgstr "Mijn persoonlijke pagina"
 #~ "You can administrate lists from here. Please note that private lists can "
 #~ "still be viewed by members of your project, but are not listed on %1$s."
 #~ msgstr ""
-#~ "Je kunt lijsten hiervandaan beheren. Denk eraan dat priv&eacute; denk "
+#~ "Je kunt lijsten hiervandaan beheren. Denk eraan dat privé denk "
 #~ "eraan dat lijsten nog steeds door leden van jouw project zichtbaar zijn, "
 #~ "maar niet zichtbaar zijn in %1$s."
 
@@ -23770,7 +23770,7 @@ msgstr "Mijn persoonlijke pagina"
 #~ msgstr "Nieuwe projectnaam"
 
 #~ msgid "Add/Edit Categories"
-#~ msgstr "Categori&euml;n toevoegen/aanpassen"
+#~ msgstr "Categoriën toevoegen/aanpassen"
 
 #~ msgid "Permanently delete this subproject and all its data."
 #~ msgstr "Dit subproject and alle bijbehorende data definitief verwijderen."
@@ -24229,13 +24229,6 @@ msgstr "Mijn persoonlijke pagina"
 #~ msgid "Error: That snippet doesn't exist."
 #~ msgstr "Fout - Dat codefragment bestaat niet."
 
-#~ msgid ""
-#~ "Download a raw-text version of this code by clicking on &quot;"
-#~ "<strong>Download Version</strong>&quot;"
-#~ msgstr ""
-#~ "Download een platte tekst versie van deze code door te klikken op &quot;"
-#~ "<strong>Download versie</strong>&quot;"
-
 #, fuzzy
 #~ msgid "Error - Could Not Update User Unix Status: "
 #~ msgstr "Kan parent niet aanpassen"
@@ -24382,7 +24375,7 @@ msgstr "Mijn persoonlijke pagina"
 
 #, fuzzy
 #~ msgid "Survey Title: "
-#~ msgstr "Enqu&ecirc;te titel"
+#~ msgstr "Enquête titel"
 
 #, fuzzy
 #~ msgid "ERROR inserting into skill inventory: %s"
@@ -24471,7 +24464,7 @@ msgstr "Mijn persoonlijke pagina"
 #~ msgstr "Bezoeken (ROOD)"
 
 #~ msgid "Survey Aggregate Results"
-#~ msgstr "Geaggregeerde enqu&ecirc;te resultaten"
+#~ msgstr "Geaggregeerde enquête resultaten"
 
 #~ msgid "Responses"
 #~ msgstr "Antwoorden"
@@ -24709,15 +24702,6 @@ msgstr "Mijn persoonlijke pagina"
 #~ msgid "--the %1$s staff."
 #~ msgstr "Het %1$s team"
 
-#~ msgid "Choose the role for each user and then press &quot;Add All&quot;."
-#~ msgstr ""
-#~ "Kies voor iedere gebruiker een rol en klik daarna op &quot;Alle "
-#~ "toevoegen&quot;."
-
-#, fuzzy
-#~ msgid "Add user"
-#~ msgstr "Gebruiker toevoegen"
-
 #~ msgid "ERROR - file must be > 20 bytes and < 256000 bytes in length"
 #~ msgstr "Fout - bestand moet > 20 bytes en < 256000 bytes in lengte zijn"
 
@@ -24781,7 +24765,7 @@ msgstr "Mijn persoonlijke pagina"
 #~ "\n"
 #~ "-- the %1$s staff\n"
 #~ msgstr ""
-#~ "In 6-24 uur zal er een mailinglijst gecre&euml;erd worden op %1$s \n"
+#~ "In 6-24 uur zal er een mailinglijst gecreëerd worden op %1$s \n"
 #~ " en jij bent de lijstbeheerder.\n"
 #~ "\n"
 #~ "Deze lijst is: %3$s@%2$s .\n"
@@ -24866,7 +24850,7 @@ msgstr "Mijn persoonlijke pagina"
 #~ "\n"
 #~ "-- the %1$s staff\n"
 #~ msgstr ""
-#~ "In 6-24 uur zal er een mailinglijst gecre&euml;erd worden op %1$s \n"
+#~ "In 6-24 uur zal er een mailinglijst gecreëerd worden op %1$s \n"
 #~ " en jij bent de lijstbeheerder.\n"
 #~ "\n"
 #~ "Deze lijst is: %3$s@%2$s .\n"
@@ -25391,7 +25375,7 @@ msgstr "Mijn persoonlijke pagina"
 
 #, fuzzy
 #~ msgid "No Storage API Found"
-#~ msgstr "Geen categorie&euml;n gevonden"
+#~ msgstr "Geen categorieën gevonden"
 
 #, fuzzy
 #~ msgid "Unable to add document from zip injection."
@@ -25465,7 +25449,7 @@ msgstr "Mijn persoonlijke pagina"
 #~ msgstr "Selecteer een processortype."
 
 #~ msgid "Must Choose One"
-#~ msgstr "Je moet er &eacute;&eacute;n kiezen"
+#~ msgstr "Je moet er één kiezen"
 
 #, fuzzy
 #~ msgid "Mediawiki plugin"
@@ -25526,8 +25510,8 @@ msgstr "Mijn persoonlijke pagina"
 #, fuzzy
 #~ msgid "Existing Survey"
 #~ msgid_plural "Existing Surveys"
-#~ msgstr[0] "Bestaande enqu&ecirc;tes"
-#~ msgstr[1] "Bestaande enqu&ecirc;tes"
+#~ msgstr[0] "Bestaande enquêtes"
+#~ msgstr[1] "Bestaande enquêtes"
 
 #, fuzzy
 #~ msgid "Error Adding Directory:"
@@ -25644,7 +25628,7 @@ msgstr "Mijn persoonlijke pagina"
 #~ msgid "Now limiting view to projects in the following categories"
 #~ msgstr ""
 #~ "De weergave van projecten wordt nu ingeperkt op de volgende "
-#~ "categorie&euml;n:"
+#~ "categorieën:"
 
 #, fuzzy
 #~ msgid "New Parent %1$s Relation Validated"
@@ -25710,7 +25694,7 @@ msgstr "Mijn persoonlijke pagina"
 #~ msgstr "Klaar"
 
 #~ msgid "Name Of Survey:"
-#~ msgstr "Naam van de enqu&ecirc;te:"
+#~ msgstr "Naam van de enquête:"
 
 #~ msgid "Publicly Available"
 #~ msgstr "Publiek beschikbaar"
@@ -25788,10 +25772,10 @@ msgstr "Mijn persoonlijke pagina"
 #~ msgstr "Statistische vergelijking van projecten"
 
 #~ msgid "Survey Inserted"
-#~ msgstr "Enqu&ecirc;te\ttoegevoegd"
+#~ msgstr "Enquête\ttoegevoegd"
 
 #~ msgid "Edit Survey"
-#~ msgstr "Bewerk enqu&ecirc;te"
+#~ msgstr "Bewerk enquête"
 
 #~ msgid "Edit Questions"
 #~ msgstr "Bewerk vragen"
@@ -25800,7 +25784,7 @@ msgstr "Mijn persoonlijke pagina"
 #~ msgstr "Bewerk een vraag"
 
 #~ msgid "Edit A Survey"
-#~ msgstr "Bewerk een enqu&ecirc;te"
+#~ msgstr "Bewerk een enquête"
 
 #~ msgid "Detail"
 #~ msgstr "Detail"
@@ -25895,14 +25879,14 @@ msgstr "Mijn persoonlijke pagina"
 #~ "job categories, submit a request via the support manager.</p>"
 #~ msgstr ""
 #~ "<p>De %1$s &#039;Projecthulp Gevraagd&#039; pagina is voor niet-"
-#~ "commerci&euml;le, vrijwillige project vacatures. Commercieel gebruik is "
+#~ "commerciële, vrijwillige project vacatures. Commercieel gebruik is "
 #~ "niet toegestaan.</p><p>Project vacatures zullen 2 weken blijven staan, "
 #~ "tenzij ze eerder worden gesloten door de indiener. (Project beheerders "
 #~ "kunnen vervallen vacatures altijd opnieuw indienen.)</p><p>Blader door "
 #~ "het categorie menu om naar projecten te zoeken die je hulp kunnen "
 #~ "gebruiken.</p><p>Als je een project beheerder bent, log dan in, en dien "
 #~ "&#039;Hulp Gevraagd&#039; verzoeken via de project beheer pagina in.</"
-#~ "p><p>Om nieuwe vacature categorie&euml;n in te dienen moet je een verzoek "
+#~ "p><p>Om nieuwe vacature categorieën in te dienen moet je een verzoek "
 #~ "aan de vacature beheerder doen.</p>"
 
 #~ msgid "You must be logged in first"
@@ -26001,17 +25985,17 @@ msgstr "Mijn persoonlijke pagina"
 #~ "If you change a survey after you already have responses, your results "
 #~ "pages could be misleading or messed up"
 #~ msgstr ""
-#~ "Als je een enqu&ecirc;te wijzigt nadat er al antwoorden zijn "
+#~ "Als je een enquête wijzigt nadat er al antwoorden zijn "
 #~ "teruggestuurd, kunnen de resultaten misleidend of onjuist zijn"
 
 #~ msgid "Name of Survey"
-#~ msgstr "Enqu&ecirc;te naam"
+#~ msgstr "Enquête naam"
 
 #, fuzzy
 #~ msgid "%1$s survey found"
 #~ msgid_plural "%1$s surveys found"
-#~ msgstr[0] "%1$s Enqu&ecirc;tes gevonden"
-#~ msgstr[1] "%1$s Enqu&ecirc;tes gevonden"
+#~ msgstr[0] "%1$s Enquêtes gevonden"
+#~ msgstr[1] "%1$s Enquêtes gevonden"
 
 #~ msgid ""
 #~ "<p>The information collected in these surveys will never be sold to third "
@@ -26026,13 +26010,13 @@ msgstr "Mijn persoonlijke pagina"
 #~ "affect only future data that is collected and the user will of course "
 #~ "have the ability to 'opt-out'."
 #~ msgstr ""
-#~ "<p>De informatie die met deze enqu&ecirc;te verzameld wordt zal nooit "
+#~ "<p>De informatie die met deze enquête verzameld wordt zal nooit "
 #~ "verkocht worden aan derde partijen, noch gebruikt om je aan te sporen "
 #~ "goederen of diensten aan te schaffen.</p><p>Deze informatie zal "
 #~ "uitsluitend gebruikt worden om een profiel op te bouwen van de projecten "
 #~ "en ontwikkelaars die ondervraagd worden. Dit profiel zal andere bezoekers "
 #~ "helpen om een beeld te vormen van de kwaliteit van een bepaald project.</"
-#~ "p><p>De ID's van degenen die een enqu&ecirc;te beantwoorden zullen niet "
+#~ "p><p>De ID's van degenen die een enquête beantwoorden zullen niet "
 #~ "worden doorgegeven aan het publiek, derde partijen, noch aan de "
 #~ "projectbeheerders.</p><p>De verzamelde informatie zal alleen in een "
 #~ "geaggregeerde vorm beschikbaar zijn en kan niet gebruikt worden om "
@@ -26212,7 +26196,7 @@ msgstr "Mijn persoonlijke pagina"
 #~ "found on this project's homepage."
 #~ msgstr ""
 #~ "LET OP: Dit project wordt geheel door de %1$s staf onderhouden. Wij zijn "
-#~ "niet de offici&euml;le site voor dit product. Op de homepage van het "
+#~ "niet de officiële site voor dit product. Op de homepage van het "
 #~ "project kan anvullende copyright informatie aanwezig zijn."
 
 #~ msgid "Task Manager"
@@ -26323,12 +26307,12 @@ msgstr "Mijn persoonlijke pagina"
 #~ "order (choose from <strong>your</strong> list of questions).</li><li>Link "
 #~ "to the survey using this format: %1$s where XX is the survey number"
 #~ msgstr ""
-#~ "<p>het is heel gemakkelijk om een enqu&ecirc;te aan te maken."
-#~ "<ol><li>Cre&euml;er vragen en commentaren m.b.v. de formulieren hierboven."
-#~ "</li><li>Maak een enqu&ecirc;te aan door de vragen in de gewenste "
+#~ "<p>het is heel gemakkelijk om een enquête aan te maken."
+#~ "<ol><li>Creëer vragen en commentaren m.b.v. de formulieren hierboven."
+#~ "</li><li>Maak een enquête aan door de vragen in de gewenste "
 #~ "volgorde in te voeren (kies uit <strong>je eigen</strong> vragenlijst).</"
-#~ "li><li>Link de enqu&ecirc;te volgens dit format: %1$s waarbij XX het "
-#~ "enqu&ecirc;tenummer is"
+#~ "li><li>Link de enquête volgens dit format: %1$s waarbij XX het "
+#~ "enquêtenummer is"
 
 #~ msgid "You must be logged in to vote"
 #~ msgstr "Je moet ingelogd zijn om te stemmen"
@@ -26341,12 +26325,12 @@ msgstr "Mijn persoonlijke pagina"
 
 #~ msgid "Error - For some reason group_id and/or survey_id did not make it he"
 #~ msgstr ""
-#~ "Om een of andere reden is het Groeps ID of Enqu&ecirc;te ID niet aan deze "
+#~ "Om een of andere reden is het Groeps ID of Enquête ID niet aan deze "
 #~ "pagina doorgegeven"
 
 #~ msgid "Unfortunately, you have to be logged in to participate in surveys."
 #~ msgstr ""
-#~ "Helaas, je moet ingelogd zijn om deel te kunnen nemen aan enqu&ecirc;tes."
+#~ "Helaas, je moet ingelogd zijn om deel te kunnen nemen aan enquêtes."
 
 #~ msgid "Project&nbsp;Tree"
 #~ msgstr "Project&nbsp;overzicht"
@@ -26472,7 +26456,7 @@ msgstr "Mijn persoonlijke pagina"
 #~ "te groeperen en gezamelijk uit te leveren. <p><h4>Een voorbeeld van "
 #~ "bundels:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</"
 #~ "strong><br /><strong>Mysql-odbc</strong><p><h4>Uw bundels:</"
-#~ "h4><p><ol><li>Definieer uw bundels</li><li>Cre&euml;er een nieuwe versie "
+#~ "h4><p><ol><li>Definieer uw bundels</li><li>Creëer een nieuwe versie "
 #~ "van een Bundel</li></ol><p><h3>Versies van Bundels</h3><p>Een versie van "
 #~ "een bundel kan meerdere bestanden bevatten.<p><h4>Voorbeelden van "
 #~ "versies</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /"
@@ -26485,7 +26469,7 @@ msgstr "Mijn persoonlijke pagina"
 #~ "As there is only one SCM system, then this will be selected "
 #~ "automatically. <strong>%1$s</strong> will be selected."
 #~ msgstr ""
-#~ "Als er maar &eacute;&eacute;n SCM beschikbaar is wordt deze automatisch "
+#~ "Als er maar één SCM beschikbaar is wordt deze automatisch "
 #~ "gekozen. De keuze is <strong>%1$s</strong>."
 
 #, fuzzy
@@ -26500,7 +26484,7 @@ msgstr "Mijn persoonlijke pagina"
 
 #~ msgid "Can't delete, That trove cat has sub categories"
 #~ msgstr ""
-#~ "Verwijderen niet mogelijk, deze Trove categorie heeft subcategorie&euml;n"
+#~ "Verwijderen niet mogelijk, deze Trove categorie heeft subcategorieën"
 
 #~ msgid "View My Developer Profile"
 #~ msgstr "Toon mijn ontwikkelaars profiel"
@@ -26537,7 +26521,7 @@ msgstr "Mijn persoonlijke pagina"
 #~ msgstr ""
 #~ "<h3>3. Licentie</h3> <p><strong><em>Als je een website-only project "
 #~ "aanvraagt, kies dan \"Alleen website\" hieronder, en ga verder.</em></"
-#~ "strong><p>%1$s is gecre&euml;erd om Open Source software development "
+#~ "strong><p>%1$s is gecreëerd om Open Source software development "
 #~ "mogelijk te maken. Om zaken simpel te houden gebruiken we het uitstekende "
 #~ "<a href=\"http://www.opensource.org\">Open Source Initiative</a> voor "
 #~ "onze licentiekeuzes. <p>We zijn ons ervan bewust dat er andere "
