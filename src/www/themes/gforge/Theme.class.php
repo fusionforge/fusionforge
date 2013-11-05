@@ -221,6 +221,7 @@ class Theme extends Layout {
 	 * boxGetAltRowStyle() - Get an alternating row style for tables
 	 *
 	 * @param	int	$i	Row number
+	 * @return	string
 	 */
 	function boxGetAltRowStyle($i) {
 		if ($i % 2 == 0) {
@@ -399,7 +400,7 @@ class Theme extends Layout {
 	 * @param	array	$attr_arr	The array of the html attributes.
 	 * @return	string	Html to build a submenu.
 	 */
-	function subMenu($title_arr, $links_arr, $attr_arr = false) {
+	function subMenu($title_arr, $links_arr, $attr_arr = array()) {
 		$return  = $this->beginSubMenu();
 		$return .= $this->printSubMenu($title_arr, $links_arr, $attr_arr);
 		$return .= $this->endSubMenu();
@@ -416,6 +417,7 @@ class Theme extends Layout {
 	 *					the bgcolor for the title here, that will be
 	 *					handled by $istitle
 	 * @param	bool	$istitle	is this row part of the title ?
+	 * @return	string	Html
 	 *
 	 */
 	function multiTableRow($row_attr, $cell_data, $istitle) {

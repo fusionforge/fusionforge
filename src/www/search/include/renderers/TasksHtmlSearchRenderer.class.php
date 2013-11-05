@@ -33,7 +33,7 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * @param int $offset offset
 	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
 	 * @param int $groupId group id
-	 * @param array $sections array of all sections to search in (array of strings)
+	 * @param array|string $sections array of all sections to search in (array of strings)
 	 *
 	 */
 	function TasksHtmlSearchRenderer($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS) {
@@ -121,6 +121,7 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	 * getSections - get the array of possible sections to search in
 	 *
+	 * @param int $groupId group id
   	 * @return array sections
 	 */
 	static function getSections($groupId) {

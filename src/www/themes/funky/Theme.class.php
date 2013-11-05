@@ -147,6 +147,7 @@ class Theme extends Layout {
 	 *
 	 * @param	string	$title	Box title
 	 * @param	string	$id
+	 * @return	string
 	 */
 	function boxTop($title, $id = '') {
 		if ($id) {
@@ -174,6 +175,7 @@ class Theme extends Layout {
 	 *
 	 * @param	string	$title	Box title
 	 * @param	string	$id
+	 * @return	string
 	 */
 	function boxMiddle($title, $id = '') {
 		if ($id) {
@@ -193,6 +195,7 @@ class Theme extends Layout {
 	 *
 	 * @param	string	$content	Box content
 	 * @param	string	$id
+	 * @return	string
 	 */
 	function boxContent($content, $id = '') {
 		if ($id) {
@@ -209,6 +212,7 @@ class Theme extends Layout {
 	/**
 	 * boxBottom() - Bottom HTML box
 	 *
+	 * @return	string
 	 */
 	function boxBottom() {
 		$t_result='</div><!-- class="box-surround" -->';
@@ -220,6 +224,7 @@ class Theme extends Layout {
 	 * boxGetAltRowStyle() - Get an alternating row style for tables
 	 *
 	 * @param	int	$i	Row number
+	 * @return	string
 	 */
 	function boxGetAltRowStyle($i) 	{
 		if ($i % 2 == 0)
@@ -351,7 +356,7 @@ class Theme extends Layout {
 	 * @param	array	$attr_arr	The array of attributes by link
 	 * @return	string	Html to build a submenu.
 	 */
-	function subMenu($title_arr, $links_arr, $attr_arr = false) {
+	function subMenu($title_arr, $links_arr, $attr_arr = array()) {
 		$return  = $this->beginSubMenu();
 		$return .= $this->printSubMenu($title_arr, $links_arr, $attr_arr);
 		$return .= $this->endSubMenu();

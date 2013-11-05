@@ -562,9 +562,13 @@ class SurveyHTML extends Error {
 	/**
 	 * Show survey Result
 	 *
-	 *    @param Object a Survey Response Factory
+	 *	@param object $sr a Survey Response Factory
+	 *	@param int $show_comment
+	 *	@param string $q_num
+	 *	@param int $show_graph
+	 *	@return string
 	 */
-	function showResult( &$sr, $show_comment=0, $q_num="", $show_graph=0) {
+	function showResult(&$sr, $show_comment=0, $q_num="", $show_graph=0) {
 		global $group_id;
 
 		$Survey = $sr->getSurvey();
@@ -710,8 +714,11 @@ class SurveyHTML extends Error {
 	/**
 	 * _makeBar - make Precentage bar as a cell in a table. Starts with <tr> and ends with </tr>
 	 *
-	 * @param String name Name
-	 * @param int percentage of the name
+	 * @param $name
+	 * @param $percent
+	 * @param $color
+	 * @internal param \name $String Name
+	 * @internal param \percentage $int of the name
 	 * @return string
 	 */
 	function _makeBar($name, $percent, $color) {

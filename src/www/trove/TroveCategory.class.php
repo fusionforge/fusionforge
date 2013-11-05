@@ -51,9 +51,9 @@ class TroveCategory extends Error {
 	/**
 	 *  Constructor.
 	 *
-	 * @param	int		$categoryId		The trove_cat_id.
-	 * @param	array	$dataArray		The associative array of data.
-	 * @return	boolean	success.
+	 * @param	bool|int			$categoryId		The trove_cat_id.
+	 * @param	bool|array	$dataArray		The associative array of data.
+	 * @return	bool	success.
 	 */
 	function TroveCategory($categoryId = false, $dataArray = false) {
 		if ($categoryId) {

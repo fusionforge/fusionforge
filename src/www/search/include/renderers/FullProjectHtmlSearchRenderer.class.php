@@ -202,6 +202,9 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	* getPartResult - returns the result of the given renderer
 	*
+	* @param object $renderer
+	* @param int $section
+	* @param string $title
   	* @return string result of the renderer
 	*/
 	function getPartResult($renderer, $section, $title='') {

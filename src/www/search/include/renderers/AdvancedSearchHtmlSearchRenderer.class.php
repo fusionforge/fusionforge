@@ -173,6 +173,9 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	/**
 	* getPartResult - returns the result of the given renderer
 	*
+	* @param object $renderer
+	* @param string $section
+	* @param string $title
   	* @return string result of the renderer
 	*/
 	function getPartResult($renderer, $section, $title='') {
