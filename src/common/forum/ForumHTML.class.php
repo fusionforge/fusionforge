@@ -612,7 +612,8 @@ class ForumHTML extends Error {
 		<p><?php
 		if (!session_loggedin()) {
 			echo '<span class="highlight">';
-			printf (_('You are posting anonymously because you are not <a href="%1$s">logged in</a>'),util_make_url ('/account/login.php?return_to='. urlencode(getStringFromServer('REQUEST_URI')))) .'</span>';
+			printf (_('You are posting anonymously because you are not <a href="%1$s">logged in</a>'),util_make_url ('/account/login.php?return_to='. urlencode(getStringFromServer('REQUEST_URI'))));
+ 			echo '</span>';
 		}
 		?> <br />
 		<input type="submit" name="submit"
