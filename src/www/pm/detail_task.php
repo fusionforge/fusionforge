@@ -159,19 +159,19 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 
 	<tr>
 		<td colspan="2">
-			<?php echo $pt->showDependentTasks(); ?>
+			<?php $pt->showDependentTasks(); ?>
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-			<?php echo $pt->showRelatedArtifacts(); ?>
+			<?php $pt->showRelatedArtifacts(); ?>
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-			<?php echo $pt->showMessages($sort_comments_chronologically, "/pm/task.php?func=detailtask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"); ?>
+			<?php $pt->showMessages($sort_comments_chronologically, "/pm/task.php?func=detailtask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"); ?>
 		</td>
 	</tr>
 	<?php
@@ -181,7 +181,7 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 	?>
 	<tr>
 		<td colspan="2">
-			<?php echo $pt->showHistory(); ?>
+			<?php $pt->showHistory(); ?>
 		</td>
 	</tr>
 

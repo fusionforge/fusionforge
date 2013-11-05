@@ -95,10 +95,10 @@ class Theme extends Layout {
 
 			<!-- outer tabs -->
 			';
-                echo $this->outerTabs($params);
+                $this->outerTabs($params);
 				echo '<!-- inner tabs -->' . "\n";
 		if (isset($params['group']) && $params['group']) {
-			echo $this->projectTabs($params['toptab'],$params['group']);
+			$this->projectTabs($params['toptab'],$params['group']);
 		}
 		echo '<div id="maindiv">
 ';

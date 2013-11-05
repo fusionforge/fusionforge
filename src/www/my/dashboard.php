@@ -187,10 +187,10 @@ if (!session_loggedin()) {
 	<!--  Bottom Row   -->
 <!--
 	<tr><td colspan="2">';
-	echo show_priority_colors_key();
+	show_priority_colors_key();
 	echo '
 	</td></tr>
 -->
 	</table>';
-	echo site_user_footer(array());
+	site_user_footer(array());
 }

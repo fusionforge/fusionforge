@@ -370,7 +370,7 @@ if ($rows < 1) {
 				_('No Change')) .'</td>
 			<td><strong>'._('Priority').
 				'</strong><br />';
-			echo build_priority_select_box ('priority', '100', true);
+			build_priority_select_box ('priority', '100', true);
 			echo '</td>
 			</tr>
 

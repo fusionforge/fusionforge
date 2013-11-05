@@ -145,11 +145,11 @@ unset($GLOBALS['editor_was_set_up']);
 		<td colspan="3">
 		<strong><?php echo _('Start Date') ?>:</strong><br />
 		<?php
-		echo $pg->showMonthBox ('start_month',date('m', $pt->getStartDate()));
-		echo $pg->showDayBox ('start_day',date('d', $pt->getStartDate()));
-		echo $pg->showYearBox ('start_year',date('Y', $pt->getStartDate()));
-		echo $pg->showHourBox ('start_hour',date('G', $pt->getStartDate()));
-		echo $pg->showMinuteBox ('start_minute',date('i',$pt->getStartDate()));
+		$pg->showMonthBox ('start_month',date('m', $pt->getStartDate()));
+		$pg->showDayBox ('start_day',date('d', $pt->getStartDate()));
+		$pg->showYearBox ('start_year',date('Y', $pt->getStartDate()));
+		$pg->showHourBox ('start_hour',date('G', $pt->getStartDate()));
+		$pg->showMinuteBox ('start_minute',date('i',$pt->getStartDate()));
 		?><br /><?php echo _('The system will modify your start/end dates if you attempt to create a start date earlier than the end date of any tasks you depend on.') ?>
 		<br /><a href="calendar.php?group_id=<?php echo $group_id; ?>&amp;group_project_id=<?php echo $group_project_id; ?>" target="_blank"><?php echo _('View Calendar') ?></a>
 		</td>
@@ -159,11 +159,11 @@ unset($GLOBALS['editor_was_set_up']);
 		<td colspan="3">
 		<strong><?php echo _('End Date') ?>:</strong><br />
 		<?php
-		echo $pg->showMonthBox ('end_month',date('m', $pt->getEndDate()));
-		echo $pg->showDayBox ('end_day',date('d', $pt->getEndDate()));
-		echo $pg->showYearBox ('end_year',date('Y', $pt->getEndDate()));
-		echo $pg->showHourBox ('end_hour',date('G', $pt->getEndDate()));
-		echo $pg->showMinuteBox ('end_minute',date('i', $pt->getEndDate()));
+		$pg->showMonthBox ('end_month',date('m', $pt->getEndDate()));
+		$pg->showDayBox ('end_day',date('d', $pt->getEndDate()));
+		$pg->showYearBox ('end_year',date('Y', $pt->getEndDate()));
+		$pg->showHourBox ('end_hour',date('G', $pt->getEndDate()));
+		$pg->showMinuteBox ('end_minute',date('i', $pt->getEndDate()));
 		?>
 		</td>
 	</tr>
@@ -223,19 +223,19 @@ unset($GLOBALS['editor_was_set_up']);
 -->
 	<tr>
 		<td colspan="3">
-			<?php echo $pt->showDependentTasks(); ?>
+			<?php $pt->showDependentTasks(); ?>
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="3">
-			<?php echo $pt->showRelatedArtifacts(); ?>
+			<?php $pt->showRelatedArtifacts(); ?>
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="3">
-			<?php echo $pt->showMessages($sort_comments_chronologically, "/pm/task.php?func=detailtask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"); ?>
+			<?php $pt->showMessages($sort_comments_chronologically, "/pm/task.php?func=detailtask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"); ?>
 		</td>
 	</tr>
 	<?php
@@ -245,7 +245,7 @@ unset($GLOBALS['editor_was_set_up']);
 	?>
 	<tr>
 		<td colspan="3">
-			<?php echo $pt->showHistory(); ?>
+			<?php $pt->showHistory(); ?>
 		</td>
 	</tr>
 

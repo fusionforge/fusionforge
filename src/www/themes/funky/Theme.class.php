@@ -101,7 +101,7 @@ class Theme extends Layout {
 		echo '<!-- inner tabs -->' . "\n";
 		echo '<div class="innertabs">' . "\n";
 		if (isset($params['group']) && $params['group']) {
-			echo $this->projectTabs($params['toptab'], $params['group']);
+			$this->projectTabs($params['toptab'], $params['group']);
 		}
 
 		echo '</div>' . "\n";
