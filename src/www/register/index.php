@@ -145,7 +145,8 @@ if (getStringFromRequest('submit')) {
 		} elseif ($group->isError()) {
 			echo '<p class="error">' . $group->getErrorMessage() . '</p>';
 		} else {
-			printf(_('Approving Project: %s'), $group->getUnixName()).'<br />';
+			printf(_('Approving Project: %s'), $group->getUnixName());
+			echo '<br />';
 
 			if (forge_get_config('project_auto_approval')) {
 				$u = user_get_object_by_name(forge_get_config('project_auto_approval_user'));
