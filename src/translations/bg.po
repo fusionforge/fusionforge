@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-04 18:05+0100\n"
+"POT-Creation-Date: 2013-11-05 18:19+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -30,9 +30,8 @@ msgstr "Обновено успешно"
 #: common/docman/DocumentGroup.class.php:828
 #: common/tracker/actions/tracker.php:131
 #: common/tracker/actions/tracker.php:365 www/project/admin/editimages.php:58
-#, fuzzy
 msgid "Invalid file name."
-msgstr "Невалиден Unix идентификатор."
+msgstr ""
 
 #: common/account/actions/deletesshkey.php:30
 #, fuzzy
@@ -115,9 +114,8 @@ msgstr "Документът е добавен успешно"
 #: common/docman/actions/reservefile.php:38
 #: common/docman/actions/trashfile.php:50
 #: common/docman/actions/validatefile.php:45
-#, fuzzy
 msgid "Document(s)"
-msgstr "Модул \"Форуми\""
+msgstr ""
 
 #: common/docman/actions/delfile.php:48
 #: common/docman/actions/monitordirectory.php:51
@@ -151,9 +149,9 @@ msgid "No document found to update"
 msgstr "Няма намерени документи"
 
 #: common/docman/actions/editfile.php:89
-#, fuzzy, php-format
+#, php-format
 msgid "Invalid file attack attempt %s."
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: common/docman/actions/editfile.php:112
 #, fuzzy, php-format
@@ -656,9 +654,8 @@ msgid "Updated folder by"
 msgstr "Публикуване на документ"
 
 #: common/docman/DocumentGroup.class.php:727
-#, fuzzy
 msgid "Updated by"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:762
 msgid "Unable to extract ZIP file."
@@ -1382,9 +1379,8 @@ msgid "Y-m-d H:i"
 msgstr ""
 
 #: common/docman/views/listfile.php:277 common/docman/views/listfile.php:279
-#, fuzzy
 msgid "Reserved Document"
-msgstr "Модул \"Форуми\""
+msgstr ""
 
 #: common/docman/views/listfile.php:325 common/docman/views/listfile.php:336
 msgid "Move this document to trash"
@@ -1404,7 +1400,7 @@ msgstr ""
 #: common/docman/views/listfile.php:328
 #, fuzzy
 msgid "Reserve this document"
-msgstr "Модул \"Форуми\""
+msgstr "Изтриване на съобщение"
 
 #: common/docman/views/listfile.php:333
 msgid "Enforce reservation"
@@ -1494,7 +1490,7 @@ msgstr ""
 #: common/docman/views/listtrashfile.php:191
 #, fuzzy
 msgid "Delete permanently this document."
-msgstr "Модул \"Форуми\""
+msgstr "Изтриване на съобщение"
 
 #: common/docman/views/listtrashfile.php:202
 #, fuzzy
@@ -1841,9 +1837,8 @@ msgid "Downloads"
 msgstr ""
 
 #: common/docman/views/reporting.php:169 www/activity/index.php:317
-#, fuzzy
 msgid "Document"
-msgstr "Модул \"Форуми\""
+msgstr ""
 
 #: common/docman/views/reporting.php:169
 #: plugins/oauthprovider/www/access_tokens.php:58
@@ -1895,7 +1890,7 @@ msgstr "Дневникът е обновен"
 #: common/docman/views/search.php:62
 #, fuzzy
 msgid "Searched words"
-msgstr "Модул \"Форуми\""
+msgstr "Търси"
 
 #: common/docman/views/search.php:65
 msgid "All searched words are mandatory"
@@ -1920,7 +1915,7 @@ msgstr ""
 #: common/docman/views/search.php:68
 #, fuzzy
 msgid "Inside documents"
-msgstr "Модул \"Форуми\""
+msgstr "Публикуване на документ"
 
 #: common/docman/views/search.php:75
 msgid "search into childs following project hierarchy"
@@ -2112,8 +2107,8 @@ msgstr "Грешка при добавянето на форум"
 #, fuzzy, php-format
 msgid "%s message deleted"
 msgid_plural "%s messages deleted"
-msgstr[0] "%1$s съобщение(я) са изтрити"
-msgstr[1] "%1$s съобщение(я) са изтрити"
+msgstr[0] "%s съобщение(я) са изтрити"
+msgstr[1] "%s съобщение(я) са изтрити"
 
 #: common/forum/ForumAdmin.class.php:261 www/reporting/timeadd.php:67
 msgid "Successfully Deleted"
@@ -2282,9 +2277,8 @@ msgstr ""
 #: plugins/mailman/include/MailmanList.class.php:372
 #: plugins/mailman/include/MailmanList.class.php:389
 #: www/pm/admin/index.php:118
-#, fuzzy
 msgid "Update failed"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: common/forum/Forum.class.php:621 common/frs/FRSPackage.class.php:466
 #: common/frs/FRSRelease.class.php:354 common/include/Group.class.php:1615
@@ -2587,9 +2581,8 @@ msgid "Message not found"
 msgstr "Съобщението не е намерено"
 
 #: common/forum/ForumMessageFactory.class.php:58
-#, fuzzy
 msgid "Invalid group_form_id"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: common/frs/FRSFile.class.php:82 common/frs/FRSFile.class.php:398
 #, fuzzy
@@ -2624,9 +2617,8 @@ msgid "Error Adding Release: "
 msgstr "Грешка при добавянето на бележка"
 
 #: common/frs/FRSFile.class.php:232
-#, fuzzy
 msgid "Invalid file_id"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: common/frs/FRSFile.class.php:416 common/frs/FRSPackage.class.php:396
 #: common/frs/FRSRelease.class.php:438 common/include/Error.class.php:167
@@ -2639,14 +2631,14 @@ msgstr "Грешка при Обновяване:"
 
 #: common/frs/FRSFileProcessorType.class.php:61
 #: common/frs/FRSFileType.class.php:68
-#, fuzzy
 msgid "Invalid type_id"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:139 common/frs/FRSPackage.class.php:371
 #: common/frs/FRSRelease.class.php:121 common/frs/FRSRelease.class.php:399
+#, fuzzy
 msgid "FRSPackage Name Must Be At Least 3 Characters"
-msgstr ""
+msgstr "Името на форума трябва да бъде поне 3 символа"
 
 #: common/frs/FRSPackage.class.php:143
 msgid "Package Name can only be alphanumeric"
@@ -2663,9 +2655,8 @@ msgid "Error Adding Package: "
 msgstr "Грешка при добавянето на бележка"
 
 #: common/frs/FRSPackage.class.php:205
-#, fuzzy
 msgid "Invalid package_id"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:291
 #, fuzzy
@@ -2707,9 +2698,8 @@ msgid "Package delete error: trying to delete root dir"
 msgstr ""
 
 #: common/frs/FRSPackage.class.php:515
-#, fuzzy
 msgid "No valid max release id"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: common/frs/FRSPackage.class.php:536
 msgid "Cannot open the file archive."
@@ -2726,9 +2716,8 @@ msgid "Error Adding Release: Name Already Exists"
 msgstr "Това потребителско име вече е заето."
 
 #: common/frs/FRSRelease.class.php:187
-#, fuzzy
 msgid "Invalid release_id"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: common/frs/FRSRelease.class.php:286
 #, php-format
@@ -2985,13 +2974,12 @@ msgstr "Това потребителско име вече е заето."
 #: common/include/Group.class.php:314 common/include/User.class.php:342
 #: common/include/User.class.php:402
 msgid "Invalid Unix Name."
-msgstr "Невалиден UNIX идентификатор."
+msgstr "Невалиден Unix идентификатор."
 
 #: common/include/Group.class.php:317 common/include/Group.class.php:321
 #: common/include/User.class.php:346
-#, fuzzy
 msgid "Unix name already taken."
-msgstr "Това потребителско име вече е заето."
+msgstr ""
 
 #: common/include/Group.class.php:324
 msgid ""
@@ -3052,9 +3040,8 @@ msgid "Error updating project information in plugin_hook group_update"
 msgstr "Информация за проекта"
 
 #: common/include/Group.class.php:742
-#, fuzzy
 msgid "Invalid Status Change From: "
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: common/include/Group.class.php:742
 msgid " To: "
@@ -3226,9 +3213,8 @@ msgid "Group already active"
 msgstr ""
 
 #: common/include/Group.class.php:2524
-#, fuzzy
 msgid "Approved"
-msgstr "Модул \"Форуми\""
+msgstr ""
 
 #: common/include/Group.class.php:2547 common/include/Group.class.php:2617
 msgid "Group does not have any administrators."
@@ -3691,7 +3677,7 @@ msgstr ""
 #: common/include/Navigation.class.php:519
 #, fuzzy
 msgid "Flash head line from the project."
-msgstr "Проект %1$s"
+msgstr "Вие не сте член на никой активен проект"
 
 #: common/include/Navigation.class.php:533 common/include/rbac_texts.php:164
 #: common/widget/Widget_MyLatestSvnCommits.class.php:108
@@ -4064,9 +4050,8 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:172
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:207
 #: plugins/scmsvn/common/SVNPlugin.class.php:219
-#, fuzzy
 msgid "Repository Statistics"
-msgstr "Модул \"Статистики\""
+msgstr ""
 
 #: common/include/SCMPlugin.class.php:187
 msgid "Not implemented for this SCM plugin yet."
@@ -4198,9 +4183,8 @@ msgid "Invalid Password"
 msgstr "Грешна парола:"
 
 #: common/include/User.class.php:337
-#, fuzzy
 msgid "Invalid Unix Name (must not contain uppercase characters)"
-msgstr "Потребителско име:"
+msgstr ""
 
 #: common/include/User.class.php:360
 msgid ""
@@ -4290,9 +4274,8 @@ msgid "Error: Cannot Update User Object:"
 msgstr "Разрешение не беше получено"
 
 #: common/include/User.class.php:733
-#, fuzzy
 msgid "Error: Invalid status value"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: common/include/User.class.php:737
 msgid "Error: You cannot set pending status if user is suspend or active"
@@ -4309,14 +4292,13 @@ msgid "User with this email already exists."
 msgstr "Това потребителско име вече е заето."
 
 #: common/include/User.class.php:1099
-#, fuzzy, php-format
+#, php-format
 msgid "Error: Invalid Shell %s"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: common/include/User.class.php:1107
-#, fuzzy
 msgid "Error: Cannot Update User Unix Shell:"
-msgstr "Разрешение не беше получено"
+msgstr ""
 
 #: common/include/User.class.php:1253
 msgid "SSH Key already in use"
@@ -4505,9 +4487,8 @@ msgid "Subproject Description Must Be At Least 10 Characters"
 msgstr "Описанието на форума трябва да бъде поне 10 символа"
 
 #: common/pm/ProjectGroup.class.php:195
-#, fuzzy
 msgid "Invalid group_project_id"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: common/pm/ProjectGroupFactory.class.php:62
 #, php-format
@@ -4538,9 +4519,8 @@ msgid "start date"
 msgstr "Дневникът е обновен"
 
 #: common/pm/ProjectTask.class.php:149 common/pm/ProjectTask.class.php:945
-#, fuzzy
 msgid "end date"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: common/pm/ProjectTask.class.php:150 common/pm/ProjectTask.class.php:947
 #: www/pm/ganttpage.php:243
@@ -5320,14 +5300,12 @@ msgid "Last 24 h"
 msgstr ""
 
 #: common/tracker/actions/browse.php:230 common/tracker/actions/query.php:232
-#, fuzzy
 msgid "Last 7 days"
-msgstr "Последен пост"
+msgstr ""
 
 #: common/tracker/actions/browse.php:231 common/tracker/actions/query.php:233
-#, fuzzy
 msgid "Last 2 weeks"
-msgstr "Фамилия:"
+msgstr ""
 
 #: common/tracker/actions/browse.php:232 common/tracker/actions/query.php:234
 #, fuzzy
@@ -6195,14 +6173,12 @@ msgid "Invalid Last Modified Date Range"
 msgstr "Дневникът е обновен"
 
 #: common/tracker/ArtifactQuery.class.php:344
-#, fuzzy
 msgid "Invalid Open Date Range"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:360
-#, fuzzy
 msgid "Invalid Close Date Range"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:732
 msgid "Query does not exist"
@@ -6260,7 +6236,7 @@ msgstr ""
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:43
 #, fuzzy, php-format
 msgid "Trackers for %s"
-msgstr "Форуми за %1$s"
+msgstr "Форуми за %s"
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:47
 #: common/tracker/include/ArtifactTypeHtml.class.php:51
@@ -6458,9 +6434,8 @@ msgid "Operation"
 msgstr "Описание"
 
 #: common/tracker/views/form-addcanned.php:60
-#, fuzzy
 msgid "No Canned Responses set up in this Project"
-msgstr "Проект %1$s"
+msgstr ""
 
 #: common/tracker/views/form-addcanned.php:63
 #, fuzzy
@@ -7002,9 +6977,8 @@ msgid "To"
 msgstr "До"
 
 #: common/tracker/views/form-workflow.php:65
-#, fuzzy
 msgid "Initial values"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: common/tracker/views/form-workflow.php:68
 #, fuzzy
@@ -9268,12 +9242,11 @@ msgstr "Създадено успешно"
 #: plugins/forumml/www/forumml_utils.php:730
 #, fuzzy
 msgid "Sending mail failed"
-msgstr "%1$s съобщение(я) са изтрити"
+msgstr "Изпращане на Съобщение"
 
 #: plugins/forumml/www/index.php:55 plugins/forumml/www/message.php:92
-#, fuzzy
 msgid "No list specified"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: plugins/forumml/www/index.php:60 plugins/forumml/www/message.php:97
 #: plugins/forumml/www/upload.php:48
@@ -11421,9 +11394,8 @@ msgid "Do you want to sync FusionForge -> MantisBT roles ?"
 msgstr ""
 
 #: plugins/mantisbt/view/init.php:92 plugins/mantisbt/view/inituser.php:74
-#, fuzzy
 msgid "Initialize"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: plugins/mantisbt/view/inituser.php:53
 #, fuzzy
@@ -11656,9 +11628,8 @@ msgid ""
 msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:36
-#, fuzzy
 msgid "Invalid file upload"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:40
 msgid "Not a valid PNG image"
@@ -12415,9 +12386,8 @@ msgid "Imported user email"
 msgstr ""
 
 #: plugins/projectimport/www/index.php:395
-#, fuzzy
 msgid "Initial role"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: plugins/projectimport/www/index.php:397
 msgid "Map to existing user (role)"
@@ -12845,9 +12815,8 @@ msgid "Pending hierarchy request"
 msgstr "%1$s съобщение(я) са изтрити"
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:68
-#, fuzzy
 msgid "Validate parent"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:70
 #: plugins/projects-hierarchy/view/admin_project_link.php:82
@@ -15295,9 +15264,8 @@ msgstr ""
 #: www/admin/grouplist.php:67 www/admin/search.php:148
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:235 www/register/index.php:237
-#, fuzzy
 msgid "Unix Name"
-msgstr "Име"
+msgstr ""
 
 #: www/admin/grouplist.php:69
 msgid "Public?"
@@ -16030,9 +15998,8 @@ msgid "Projects Membership"
 msgstr "Общо за целия проект"
 
 #: www/admin/useredit.php:263 www/admin/useredit.php:293
-#, fuzzy
 msgid "Unix name"
-msgstr "Име"
+msgstr ""
 
 #: www/admin/useredit.php:264 www/admin/useredit.php:294
 #: www/admin/vhost.php:173 www/project/admin/database.php:211
@@ -16277,9 +16244,8 @@ msgid ""
 msgstr "Потребителят избра да не участва в***"
 
 #: www/developer/rate.php:52
-#, fuzzy
 msgid "Invalid rate value"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: www/developer/rate.php:84
 msgid "You cannot rate yourself"
@@ -16432,9 +16398,8 @@ msgid "Comment"
 msgstr ""
 
 #: www/export/rssAboTask.php:169
-#, fuzzy
 msgid "Updated value"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: www/export/rssAboTask.php:173
 #, fuzzy
@@ -18521,9 +18486,9 @@ msgid "Job inserted successfully"
 msgstr "Създадено успешно"
 
 #: www/people/editjob.php:80
-#, fuzzy, php-format
+#, php-format
 msgid "Job update failed: %s"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: www/people/editjob.php:82 www/people/editjob.php:96
 #, fuzzy
@@ -18615,9 +18580,9 @@ msgid "Finished"
 msgstr ""
 
 #: www/people/editprofile.php:54
-#, fuzzy, php-format
+#, php-format
 msgid "User update failed: %s"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: www/people/editprofile.php:56
 msgid "User updated successfully"
@@ -19183,9 +19148,8 @@ msgid "Invalid day: Not between 1 and 31"
 msgstr ""
 
 #: www/pm/calendar.php:59
-#, fuzzy
 msgid "Invalid date"
-msgstr "Невалиден UNIX идентификатор."
+msgstr ""
 
 #: www/pm/calendar.php:64
 msgid "Invalid type: Type not in onemonth, threemonth, currentyear, comingyear"
@@ -20697,7 +20661,7 @@ msgstr ""
 #: www/register/index.php:221
 #, fuzzy
 msgid "must be a valid Unix username;"
-msgstr "Невалиден UNIX идентификатор."
+msgstr "Невалиден Unix идентификатор."
 
 #: www/register/index.php:222
 msgid "cannot match one of our reserved domains;"
@@ -21629,9 +21593,8 @@ msgid "Choose One"
 msgstr "Изберете..."
 
 #: www/snippet/snippet_utils.php:27
-#, fuzzy
 msgid "Unix Admin"
-msgstr "Администриране"
+msgstr ""
 
 #: www/snippet/snippet_utils.php:28
 msgid "HTML Manipulation"
@@ -23095,10 +23058,6 @@ msgstr "Лична Информация"
 #~ msgstr "Това потребителско име вече е заето."
 
 #, fuzzy
-#~ msgid "Error - Could Not Update User Unix Status: "
-#~ msgstr "Разрешение не беше получено"
-
-#, fuzzy
 #~ msgid "Error - Could Not Update User Email: "
 #~ msgstr "Разрешение не беше получено"
 
@@ -23241,14 +23200,6 @@ msgstr "Лична Информация"
 #~ msgstr "Невалиден проект"
 
 #, fuzzy
-#~ msgid "Invalid Unix name"
-#~ msgstr "Невалиден UNIX идентификатор."
-
-#, fuzzy
-#~ msgid "Invalid filename"
-#~ msgstr "Невалиден UNIX идентификатор."
-
-#, fuzzy
 #~ msgid "Invalid Email Address:"
 #~ msgstr "Невалиден Email Адрес"
 
@@ -23259,14 +23210,6 @@ msgstr "Лична Информация"
 #, fuzzy
 #~ msgid "Error In Trove Operation :"
 #~ msgstr "Информация за проекта"
-
-#, fuzzy
-#~ msgid "Unix Project Name:"
-#~ msgstr "Проекти на потребителя"
-
-#, fuzzy
-#~ msgid "Project Unix Name:"
-#~ msgstr "Проекти на потребителя"
 
 #, fuzzy
 #~ msgid "Tracker:"
