@@ -3032,12 +3032,12 @@ msgstr "Zure proiektua deskriba ezazu era ulergarriagoan."
 #: common/include/Group.class.php:372
 #, php-format
 msgid "Error: Cannot create group: %s"
-msgstr "ERROREA: Ezin da taldea sortu: %s"
+msgstr "Errorea: Ezin da taldea sortu: %s"
 
 #: common/include/Group.class.php:379
 #, php-format
 msgid "Error: Cannot get group id: %s"
-msgstr "ERROREA: Ezin da talde id-a eskuratu: %s"
+msgstr "Errorea: Ezin da talde id-a eskuratu: %s"
 
 #: common/include/Group.class.php:426 common/include/Group.class.php:509
 msgid "Could not get permission."
@@ -3046,7 +3046,7 @@ msgstr "Ezin duzu baimena lortu"
 #: common/include/Group.class.php:447
 #, php-format
 msgid "Error: Cannot change group properties: %s"
-msgstr "ERROREA: DB: Ezin dira talde baimenak aldatu: %s"
+msgstr "Errorea: Ezin dira talde baimenak aldatu: %s"
 
 #: common/include/Group.class.php:528
 #, php-format
@@ -3082,7 +3082,7 @@ msgstr ""
 #: common/include/Group.class.php:753
 #, php-format
 msgid "Error: Cannot change group status: %s"
-msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
+msgstr "Errorea: Ezin da talde egoera aldatu: %s"
 
 #: common/include/Group.class.php:966
 msgid "Could not insert SCM_BOX to database"
@@ -3215,7 +3215,7 @@ msgstr "Ez dago kategoria hau"
 #: common/include/Group.class.php:2069 common/include/Group.class.php:2188
 #, php-format
 msgid "Error: User not removed: %s"
-msgstr "ERROREA: Erabiltzailea ez da ezabatu: %s"
+msgstr "Errorea: Erabiltzailea ez da ezabatu: %s"
 
 #: common/include/Group.class.php:2091
 #, fuzzy
@@ -3450,27 +3450,27 @@ msgstr "Unix izen hau hartua dago"
 #: common/include/Group.class.php:2814
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
-msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
+msgstr "Errorea: Ezin da talde egoera aldatu: %s"
 
 #: common/include/Group.class.php:2877
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
-msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
+msgstr "Errorea: Ezin da talde egoera aldatu: %s"
 
 #: common/include/Group.class.php:2895
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
-msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
+msgstr "Errorea: Ezin da talde egoera aldatu: %s"
 
 #: common/include/Group.class.php:2913
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
-msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
+msgstr "Errorea: Ezin da talde egoera aldatu: %s"
 
 #: common/include/Group.class.php:2931
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
-msgstr "ERROREA: DB: Ezin dira talde baimenak aldatu: %s"
+msgstr "Errorea: Ezin dira talde baimenak aldatu: %s"
 
 #: common/include/GroupJoinRequest.class.php:104
 #: common/pm/ProjectTask.class.php:152 common/pm/ProjectTask.class.php:949
@@ -4405,7 +4405,7 @@ msgstr ""
 #: common/include/User.class.php:746
 #, fuzzy
 msgid "Error: Cannot Update User Status:"
-msgstr "Errorea: DB: Ezin da talde egoera aldatu: %s"
+msgstr "Errorea: Ezin da talde egoera aldatu: %s"
 
 #: common/include/User.class.php:939 common/include/User.class.php:991
 #, fuzzy
@@ -4420,7 +4420,7 @@ msgstr "Shell baliogabea %s"
 #: common/include/User.class.php:1107
 #, fuzzy
 msgid "Error: Cannot Update User Unix Shell:"
-msgstr "Errorea: DB: Ezin da talde egoera aldatu: %s"
+msgstr "Errorea: Ezin da talde egoera aldatu: %s"
 
 #: common/include/User.class.php:1253
 msgid "SSH Key already in use"
@@ -4429,12 +4429,12 @@ msgstr ""
 #: common/include/User.class.php:1261
 #, fuzzy
 msgid "Error - Could Not Add User SSH Key:"
-msgstr "ERROREA: DB: Ezin da talde egoera aldatu: %s"
+msgstr "Errorea: Ezin da talde egoera aldatu: %s"
 
 #: common/include/User.class.php:1278
 #, fuzzy
 msgid "Error: Cannot Update User SSH Keys"
-msgstr "Errorea: DB: Ezin da talde egoera aldatu: %s"
+msgstr "Errorea: Ezin da talde egoera aldatu: %s"
 
 #: common/include/User.class.php:1424 common/include/User.class.php:1460
 #: common/include/User.class.php:1484
@@ -8883,7 +8883,7 @@ msgstr "Erabiltzailea dagoeneko existitzen da"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:796
 #, fuzzy, php-format
 msgid "Could not create object in database: %s."
-msgstr "ERROREA: Ezin da taldea sortu: %s"
+msgstr "Errorea: Ezin da taldea sortu: %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:314
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:421
@@ -8892,7 +8892,7 @@ msgstr "ERROREA: Ezin da taldea sortu: %s"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:804
 #, fuzzy, php-format
 msgid "Could not get ID from object in database: %s."
-msgstr "ERROREA: Ezin da taldea sortu: %s"
+msgstr "Errorea: Ezin da taldea sortu: %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:326
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:433
@@ -8901,7 +8901,7 @@ msgstr "ERROREA: Ezin da taldea sortu: %s"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:816
 #, fuzzy
 msgid "Object does not exist"
-msgstr "ERROREA: Erabiltzailea ez da existitzen"
+msgstr "Errorea: Erabiltzailea ez da existitzen"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:338
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:444
@@ -8910,7 +8910,7 @@ msgstr "ERROREA: Erabiltzailea ez da existitzen"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:833
 #, fuzzy, php-format
 msgid "Could not update object in database: %s."
-msgstr "ERROREA: Ezin da taldea sortu: %s"
+msgstr "Errorea: Ezin da taldea sortu: %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:351
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:457
@@ -8938,7 +8938,7 @@ msgstr ""
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:870
 #, fuzzy, php-format
 msgid "Could not update indices in database: %s."
-msgstr "ERROREA: Ezin da taldea sortu: %s"
+msgstr "Errorea: Ezin da taldea sortu: %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:884
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:909
@@ -13961,7 +13961,7 @@ msgstr "Kolaboratzaileak (proban dago)"
 #: plugins/scmgit/www/index.php:44
 #, fuzzy, php-format
 msgid "Cannot locate group for func=%s"
-msgstr "ERROREA: Ezin da taldea sortu: %s"
+msgstr "Errorea: Ezin da taldea sortu: %s"
 
 #: plugins/scmgit/www/index.php:58
 msgid ""
@@ -20333,7 +20333,7 @@ msgstr ""
 #: www/project/admin/editimages.php:99
 #, fuzzy
 msgid "Error: Cannot store multimedia file: "
-msgstr "ERROREA: Ezin da taldea sortu: %s"
+msgstr "Errorea: Ezin da taldea sortu: %s"
 
 #: www/project/admin/editimages.php:101
 msgid "Multimedia File Uploaded"
@@ -20346,7 +20346,7 @@ msgstr "Derrigorrezkoak dira bai izena eta bai deskribapena"
 #: www/project/admin/editimages.php:137
 #, fuzzy
 msgid "Error: Cannot delete multimedia file: "
-msgstr "ERROREA: Ezin da talde id-a eskuratu: %s"
+msgstr "Errorea: Ezin da talde id-a eskuratu: %s"
 
 #: www/project/admin/editimages.php:139
 msgid "Multimedia File Deleted"

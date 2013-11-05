@@ -2951,7 +2951,7 @@ msgstr ""
 msgid ""
 "Permission denied. No project was chosen, project does not exist or you "
 "cannot access it."
-msgstr "ERROR - No s'ha escollit un group_id"
+msgstr "Error - No s'ha escollit un group_id"
 
 #: common/include/exit.php:104
 msgid "The Site Administrator has turned off this feature."
@@ -19338,7 +19338,7 @@ msgstr "Heu de seleccionar un ID d'habilitat"
 #: www/people/people_utils.php:103
 #, fuzzy
 msgid "Error inserting into skill inventory: "
-msgstr "ERROR a l'inserir a l'inventari d'habilitats"
+msgstr "Error a l'inserir a l'inventari d'habilitats"
 
 #: www/people/people_utils.php:106
 msgid "Added to skill inventory"
@@ -19374,7 +19374,7 @@ msgstr "Afegeix habilitat"
 #: www/people/people_utils.php:211
 #, fuzzy
 msgid "Error inserting into job inventory: "
-msgstr "ERROR a l'inserir a l'inventari d'habilitats"
+msgstr "Error a l'inserir a l'inventari d'habilitats"
 
 #: www/people/people_utils.php:214
 #, fuzzy
@@ -21920,7 +21920,7 @@ msgstr "Error: Aquest fragment de codi ja estava afegit a aquest paquet."
 #: www/snippet/add_snippet_to_package.php:108 www/snippet/addversion.php:71
 #: www/snippet/submit.php:74
 msgid "Error doing snippet version insert"
-msgstr "ERROR FENT LA INSERCIÓ D'UNA VERSIÓ DE FRAGMENT DE CODI!"
+msgstr "Error fent la inserció d'una versió de fragment de codi!"
 
 #: www/snippet/add_snippet_to_package.php:110 www/snippet/addversion.php:74
 msgid "Snippet Version Added Successfully."
@@ -21987,7 +21987,7 @@ msgstr "Error, Error - paquet_fragment_codi no existeix"
 
 #: www/snippet/addversion.php:154 www/snippet/package.php:75
 msgid "Error doing snippet package version insert"
-msgstr "ERROR FENT LA INSERCIÓ D'UNA VERSIÓ D'UN PAQUET DE FRAGMENT DE CODI!"
+msgstr "Error fent la inserció d'una versió d'un paquet de fragment de codi!"
 
 #: www/snippet/addversion.php:155
 #, fuzzy
@@ -22331,7 +22331,7 @@ msgstr "Crea un paquet a"
 
 #: www/snippet/submit.php:59
 msgid "Error doing snippet insert"
-msgstr "ERROR FENT LA INSERCIÓ D'UN FRAGMENT DE CODI!"
+msgstr "Error fent la inserció d'un fragment de codi!"
 
 #: www/snippet/submit.php:61 www/snippet/submit.php:76
 msgid "Snippet Added Successfully."

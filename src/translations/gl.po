@@ -3054,12 +3054,12 @@ msgstr "Describa o seu proxecto dun modo máis comprensivo."
 #: common/include/Group.class.php:372
 #, php-format
 msgid "Error: Cannot create group: %s"
-msgstr "ERRO: Non se puido crear o grupo: %s"
+msgstr "Erro: Non se puido crear o grupo: %s"
 
 #: common/include/Group.class.php:379
 #, php-format
 msgid "Error: Cannot get group id: %s"
-msgstr "ERRO: non se atopou o id de grupo: %s"
+msgstr "Erro: non se atopou o id de grupo: %s"
 
 #: common/include/Group.class.php:426 common/include/Group.class.php:509
 msgid "Could not get permission."
@@ -3068,7 +3068,7 @@ msgstr "Non se puido obter autorización."
 #: common/include/Group.class.php:447
 #, php-format
 msgid "Error: Cannot change group properties: %s"
-msgstr "ERRO: BD: non se puideron cambiar as propiedades de grupo: %s"
+msgstr "Erro: BD: non se puideron cambiar as propiedades de grupo: %s"
 
 #: common/include/Group.class.php:528
 #, php-format
@@ -3104,7 +3104,7 @@ msgstr ""
 #: common/include/Group.class.php:753
 #, php-format
 msgid "Error: Cannot change group status: %s"
-msgstr "ERRO: BD: Non se puido cambiar o estado de grupo: %s"
+msgstr "Erro: BD: Non se puido cambiar o estado de grupo: %s"
 
 #: common/include/Group.class.php:966
 msgid "Could not insert SCM_BOX to database"
@@ -3242,7 +3242,7 @@ msgstr "Ese usuario non existe. "
 #: common/include/Group.class.php:2069 common/include/Group.class.php:2188
 #, php-format
 msgid "Error: User not removed: %s"
-msgstr "ERRO: non se eliminou o usuario: %s"
+msgstr "Erro: non se eliminou o usuario: %s"
 
 #: common/include/Group.class.php:2091
 #, fuzzy
@@ -3252,7 +3252,7 @@ msgstr "Erro ao obter o obxecto de membro: %s"
 #: common/include/Group.class.php:2112 common/include/Group.class.php:2125
 #, php-format
 msgid "Error: project_assigned_to %d: %s"
-msgstr "ERRO: BD: project_assigned_to %d: %s"
+msgstr "Erro: BD: project_assigned_to %d: %s"
 
 #: common/include/Group.class.php:2168 www/admin/globalroledelete.php:37
 #: www/admin/globalroleedit.php:43 www/project/admin/roledelete.php:46
@@ -3468,27 +3468,27 @@ msgstr "O nome de grupo xa está en uso"
 #: common/include/Group.class.php:2814
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
-msgstr "ERRO: BD: Non se puido cambiar o estado de grupo: %s"
+msgstr "Erro: BD: Non se puido cambiar o estado de grupo: %s"
 
 #: common/include/Group.class.php:2877
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
-msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
+msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
 #: common/include/Group.class.php:2895
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
-msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
+msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
 #: common/include/Group.class.php:2913
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
-msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
+msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
 #: common/include/Group.class.php:2931
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
-msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
+msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
 #: common/include/GroupJoinRequest.class.php:104
 #: common/pm/ProjectTask.class.php:152 common/pm/ProjectTask.class.php:949
@@ -4408,7 +4408,7 @@ msgstr "Non se puido eliminar o foro de novas: %d"
 #: common/include/User.class.php:639
 #, fuzzy
 msgid "Error: Cannot Update User Object:"
-msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
+msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
 #: common/include/User.class.php:733
 #, fuzzy
@@ -4422,7 +4422,7 @@ msgstr ""
 #: common/include/User.class.php:746
 #, fuzzy
 msgid "Error: Cannot Update User Status:"
-msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
+msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
 #: common/include/User.class.php:939 common/include/User.class.php:991
 msgid "User with this email already exists."
@@ -4436,7 +4436,7 @@ msgstr "Ese non é un valor de Shell válido %s"
 #: common/include/User.class.php:1107
 #, fuzzy
 msgid "Error: Cannot Update User Unix Shell:"
-msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
+msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
 #: common/include/User.class.php:1253
 #, fuzzy
@@ -4446,12 +4446,12 @@ msgstr "A consulta xa existe "
 #: common/include/User.class.php:1261
 #, fuzzy
 msgid "Error - Could Not Add User SSH Key:"
-msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
+msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
 #: common/include/User.class.php:1278
 #, fuzzy
 msgid "Error: Cannot Update User SSH Keys"
-msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
+msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
 #: common/include/User.class.php:1424 common/include/User.class.php:1460
 #: common/include/User.class.php:1484
@@ -4945,13 +4945,13 @@ msgstr "Produciuse un erro: a consulta de busca é demasiado curta"
 #: common/survey/Survey.class.php:109 common/survey/Survey.class.php:157
 #, fuzzy
 msgid "Update Failed: Survey Title Required"
-msgstr "PRODUCIUSE UN ERRO NA ACTUALIZACIÓN: é necesario o título da enquisa"
+msgstr "Produciuse un erro na actualización: É necesario o título da enquisa"
 
 #: common/survey/Survey.class.php:113
 #, fuzzy
 msgid "Update Failed: Survey Questions Required"
 msgstr ""
-"PRODUCIUSE UN ERRO NA ACTUALIZACIÓN: as preguntas da enquisa son necesarias"
+"Produciuse un erro na actualización: as preguntas da enquisa son necesarias"
 
 #: common/survey/Survey.class.php:167 common/survey/Survey.class.php:200
 msgid "The Survey data is not filled"
@@ -6338,7 +6338,7 @@ msgstr "ID non válido"
 #: common/tracker/ArtifactMessage.class.php:89
 #, fuzzy
 msgid "Error: Logged In User Bug Could Not Get User Object"
-msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
+msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
 #: common/tracker/ArtifactMessage.class.php:92
 msgid "Logged In: YES"
@@ -8972,7 +8972,7 @@ msgstr "A consulta xa existe "
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:796
 #, fuzzy, php-format
 msgid "Could not create object in database: %s."
-msgstr "ERRO: Non se puido crear o grupo: %s"
+msgstr "Erro: Non se puido crear o grupo: %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:314
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:421
@@ -8981,7 +8981,7 @@ msgstr "ERRO: Non se puido crear o grupo: %s"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:804
 #, fuzzy, php-format
 msgid "Could not get ID from object in database: %s."
-msgstr "ERRO: Non se puido crear o grupo: %s"
+msgstr "Erro: Non se puido crear o grupo: %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:326
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:433
@@ -8999,7 +8999,7 @@ msgstr "A consulta non existe "
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:833
 #, fuzzy, php-format
 msgid "Could not update object in database: %s."
-msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
+msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:351
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:457
@@ -9027,7 +9027,7 @@ msgstr ""
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:870
 #, fuzzy, php-format
 msgid "Could not update indices in database: %s."
-msgstr "ERRO - Non foi posíbel actualizar o estado Unix de grupo: %s"
+msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:884
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:909
@@ -14114,7 +14114,7 @@ msgstr "Desenvolvedores (en proba) "
 #: plugins/scmgit/www/index.php:44
 #, fuzzy, php-format
 msgid "Cannot locate group for func=%s"
-msgstr "ERRO: Non se puido crear o grupo: %s"
+msgstr "Erro: Non se puido crear o grupo: %s"
 
 #: plugins/scmgit/www/index.php:58
 msgid ""
@@ -19128,7 +19128,7 @@ msgstr "Novas engadidas. "
 #: www/news/submit.php:115
 #, fuzzy
 msgid "Error: both subject and body are required."
-msgstr "ERRO - É necesario tanto o corpo como o asunto"
+msgstr "Erro - É necesario tanto o corpo como o asunto"
 
 #: www/news/submit.php:131
 #, fuzzy
@@ -20634,12 +20634,12 @@ msgstr "Non hai ningunha base de datos actualmente asignada a este grupo"
 
 #: www/project/admin/editimages.php:46
 msgid "Error: file must be > 20 bytes and < 256000 bytes in length"
-msgstr "ERRO - Os ficheiros deben ter entr 20 e 256000 bytes"
+msgstr "Erro - Os ficheiros deben ter entr 20 e 256000 bytes"
 
 #: www/project/admin/editimages.php:99
 #, fuzzy
 msgid "Error: Cannot store multimedia file: "
-msgstr "ERRO: Non se puido crear o grupo: %s"
+msgstr "Erro: Non se puido crear o grupo: %s"
 
 #: www/project/admin/editimages.php:101
 msgid "Multimedia File Uploaded"
@@ -20652,7 +20652,7 @@ msgstr "Son requiridos tanto o nome como a descrición do ficheiro"
 #: www/project/admin/editimages.php:137
 #, fuzzy
 msgid "Error: Cannot delete multimedia file: "
-msgstr "ERRO: non se atopou o id de grupo: %s"
+msgstr "Erro: non se atopou o id de grupo: %s"
 
 #: www/project/admin/editimages.php:139
 msgid "Multimedia File Deleted"
@@ -22144,7 +22144,7 @@ msgstr ""
 #: www/snippet/submit.php:74
 msgid "Error doing snippet version insert"
 msgstr ""
-"PRODUCIUSE UN ERRO AO FACER A INSERCIÓN DA VERSIÓN DO FRAGMENTO DE CÓDIGO! "
+"Produciuse un erro ao facer a inserción da versión do fragmento de código!"
 
 #: www/snippet/add_snippet_to_package.php:110 www/snippet/addversion.php:74
 msgid "Snippet Version Added Successfully."
@@ -22214,7 +22214,7 @@ msgstr "Erro – non existe o paquete de fragmento"
 #: www/snippet/addversion.php:154 www/snippet/package.php:75
 msgid "Error doing snippet package version insert"
 msgstr ""
-"PRODUCIUSE UN ERRO AO INSERIR A VERSIÓN DO PAQUETE DE FRAGMENTO DE CÓDIGO!"
+"Produciuse un erro ao inserir a versión do paquete de fragmento de código!"
 
 #: www/snippet/addversion.php:155
 msgid "New snippet package"

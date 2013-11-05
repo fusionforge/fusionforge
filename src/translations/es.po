@@ -4313,12 +4313,12 @@ msgstr "La Busqueda ya existe"
 #: common/include/User.class.php:1261
 #, fuzzy
 msgid "Error - Could Not Add User SSH Key:"
-msgstr "ERRO - No puedo actualizar Keys SSH de Usuario"
+msgstr "Erro - No puedo actualizar Keys SSH de Usuario"
 
 #: common/include/User.class.php:1278
 #, fuzzy
 msgid "Error: Cannot Update User SSH Keys"
-msgstr "ERRO - No puedo actualizar Keys SSH de Usuario"
+msgstr "Erro - No puedo actualizar Keys SSH de Usuario"
 
 #: common/include/User.class.php:1424 common/include/User.class.php:1460
 #: common/include/User.class.php:1484
@@ -19980,9 +19980,8 @@ msgid "File description is required"
 msgstr "La descripción del fichero es necesaria"
 
 #: www/project/admin/editimages.php:161
-#, fuzzy
 msgid "Error: Cannot update multimedia file"
-msgstr "Error: DB: No puedo actualizar fichero multimedia"
+msgstr "Error: No puedo actualizar fichero multimedia"
 
 #: www/project/admin/editimages.php:163
 msgid "Multimedia File Properties Updated"

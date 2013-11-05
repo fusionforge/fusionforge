@@ -3104,7 +3104,7 @@ msgstr ""
 #: common/include/Group.class.php:753
 #, php-format
 msgid "Error: Cannot change group status: %s"
-msgstr "Errore: DB: Impossibile cambiare stato del gruppo: %s"
+msgstr "Errore: Impossibile cambiare stato del gruppo: %s"
 
 #: common/include/Group.class.php:966
 msgid "Could not insert SCM_BOX to database"
@@ -3473,17 +3473,17 @@ msgstr "Errore: Impossibile cambiare stato del gruppo: %s"
 #: common/include/Group.class.php:2877
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
-msgstr "Errore: DB: Impossibile cambiare stato del gruppo: %s"
+msgstr "Errore: Impossibile cambiare stato del gruppo: %s"
 
 #: common/include/Group.class.php:2895
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
-msgstr "Errore: DB: Impossibile cambiare stato del gruppo: %s"
+msgstr "Errore: Impossibile cambiare stato del gruppo: %s"
 
 #: common/include/Group.class.php:2913
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
-msgstr "Errore: DB: Impossibile cambiare stato del gruppo: %s"
+msgstr "Errore: Impossibile cambiare stato del gruppo: %s"
 
 #: common/include/Group.class.php:2931
 #, fuzzy, php-format
@@ -4455,7 +4455,7 @@ msgstr "La query esiste già"
 #: common/include/User.class.php:1261
 #, fuzzy
 msgid "Error - Could Not Add User SSH Key:"
-msgstr "ERRORE: DB: Impossibile cambiare stato del gruppo: %s"
+msgstr "Errore: Impossibile cambiare stato del gruppo: %s"
 
 #: common/include/User.class.php:1278
 #, fuzzy
@@ -13993,7 +13993,7 @@ msgstr "Sviluppatori (test)"
 #: plugins/scmgit/www/index.php:44
 #, fuzzy, php-format
 msgid "Cannot locate group for func=%s"
-msgstr "ERRORE: Impossibile creare il gruppo: %s"
+msgstr "Errore: Impossibile creare il gruppo: %s"
 
 #: plugins/scmgit/www/index.php:58
 msgid ""
