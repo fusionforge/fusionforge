@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-06 12:24+0100\n"
+"POT-Creation-Date: 2013-11-06 18:23+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -857,7 +857,7 @@ msgstr "(taille maximale pour l'import : %1$s)"
 
 #: common/docman/views/addfile.php:139
 msgid "Enter a valid URL"
-msgstr ""
+msgstr "Entrez une URL valide"
 
 #: common/docman/views/addfile.php:151
 #, php-format
@@ -1815,9 +1815,8 @@ msgid "Query: "
 msgstr "Requête : "
 
 #: common/docman/views/search.php:62
-#, fuzzy
 msgid "Searched words"
-msgstr "Rechercher"
+msgstr "Mots à rechercher"
 
 #: common/docman/views/search.php:65
 msgid "All searched words are mandatory"
@@ -2902,7 +2901,7 @@ msgid ""
 "Please describe your Registration Project Purpose and Summarization in a "
 "more comprehensive manner."
 msgstr ""
-"Veuillez décrire de manière plus précise les objectifs et description du "
+"Veuillez décrire de manière plus précise les objectifs et le résumé du "
 "projet."
 
 #: common/include/Group.class.php:327
@@ -2911,7 +2910,7 @@ msgid ""
 "make it smaller than 1500 characters."
 msgstr ""
 "L'objet de votre enregistrement est trop long. Veuillez le raccourcir pour "
-"qu'il ne dépasse pas 1500 octets."
+"qu'il ne dépasse pas 1500 caractères."
 
 #: common/include/Group.class.php:330 common/include/Group.class.php:584
 msgid "Describe in a more comprehensive manner your project."
@@ -4237,14 +4236,12 @@ msgid "Error: Cannot Update User Unix Shell:"
 msgstr "Erreur lors de la mise à jour du statut Unix de l'utilisateur :"
 
 #: common/include/User.class.php:1253
-#, fuzzy
 msgid "SSH Key already in use"
-msgstr "La requête existe déjà"
+msgstr "La clef SSH est déjà utilisée"
 
 #: common/include/User.class.php:1261
-#, fuzzy
 msgid "Error - Could Not Add User SSH Key:"
-msgstr "Erreur lors de la mise à jour des clefs SSH de l'utilisateur :"
+msgstr "Erreur lors de l'ajout de la clef SSH de l'utilisateur :"
 
 #: common/include/User.class.php:1278
 msgid "Error: Cannot Update User SSH Keys"
@@ -17295,7 +17292,7 @@ msgstr ""
 "strong>: Hyperliens.<br/><strong>[#NNN]</strong> : Item n°NNN dans un outil "
 "de suivi.<br/><strong>[TNNN]</strong> : Item n°NNN dans un gestionnaire de "
 "tâches.<br/><strong>[wiki:&lt;pagename&gt;]</strong>: Page wiki.<br/><strong>"
-"[forum:&lt;msg_id&gt;]</strong>: Article de forum.</div>"
+"[forum:&lt;msg_id&gt;]</strong>: Article de forum."
 
 #: www/include/html.php:421
 msgid ""
@@ -20648,8 +20645,8 @@ msgstr ""
 "L'approbation ou le rejet de l'hébergement de votre projet sur %1$s reposera "
 "sur cette description, comme plus tard son maintien, conditionné par l'usage "
 "approprié des services. Cette description ne sera pas utilisée comme "
-"description publique de votre projet. Elle doit être rédigée en anglais."
-"Entre 10 et 1500 caractères."
+"description publique de votre projet. Elle doit être rédigée en anglais. De "
+"10 à 1500 caractères."
 
 #: www/register/index.php:205 www/register/index.php:210
 msgid "Project Public Description"
