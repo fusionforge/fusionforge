@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-06 12:24+0100\n"
+"POT-Creation-Date: 2013-11-06 14:26+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -131,9 +131,8 @@ msgid "No action to perform"
 msgstr "Keine Daten gefunden"
 
 #: common/docman/actions/delfile.php:52
-#, fuzzy
 msgid "deleted successfully."
-msgstr "Fertigkeit erfolgreich gelöscht"
+msgstr "erfolgreich gelöscht."
 
 #: common/docman/actions/editdocgroup.php:101
 #, fuzzy, php-format
@@ -146,9 +145,8 @@ msgid "on project %s"
 msgstr "Projekt %s"
 
 #: common/docman/actions/editfile.php:69
-#, fuzzy
 msgid "No document found to update"
-msgstr "Keine Dokumenten-Daten"
+msgstr "Kein Dokument gefunden zu aktualisieren"
 
 #: common/docman/actions/editfile.php:89
 #, php-format
@@ -156,9 +154,9 @@ msgid "Invalid file attack attempt %s."
 msgstr "Ungültiger Daten Angriffsversuch %s."
 
 #: common/docman/actions/editfile.php:112
-#, fuzzy, php-format
+#, php-format
 msgid "Document %s updated successfully."
-msgstr "Aktualisierung erfolgreich"
+msgstr "Dokument %s wurde erfolgreich aktualisiert."
 
 #: common/docman/actions/emptytrash.php:38
 #, fuzzy
@@ -471,14 +469,12 @@ msgid "Document already published in this folder"
 msgstr "Neue Dokumentation übermitteln"
 
 #: common/docman/Document.class.php:198 common/docman/Document.class.php:205
-#, fuzzy
 msgid "Error Adding Document:"
-msgstr "Fehler beim Anlegen eines Forums"
+msgstr "Fehler beim Hinzufügen Dokument:"
 
 #: common/docman/Document.class.php:198
-#, fuzzy
 msgid "Not a file"
-msgstr "CVS-Datei exportieren"
+msgstr "Nicht eine Datei"
 
 #: common/docman/Document.class.php:214
 #, fuzzy
@@ -487,9 +483,8 @@ msgstr "Fehler beim Löschen eines Elements"
 
 #: common/docman/Document.class.php:225 common/docman/Document.class.php:881
 #: common/docman/Document.class.php:1097
-#, fuzzy
 msgid "Error updating document group:"
-msgstr "Fehler beim Anlegen eines Forums"
+msgstr "Fehler beim Aktualisieren der Dokumenten-Gruppe:"
 
 #: common/docman/Document.class.php:252
 #, fuzzy
@@ -524,9 +519,8 @@ msgid "Document reservation failed"
 msgstr "Documentation Manager"
 
 #: common/docman/Document.class.php:935 common/docman/views/additem.php:57
-#, fuzzy
 msgid "New Document"
-msgstr "Neues Projekt hinzufügen"
+msgstr "Neues Dokument"
 
 #: common/docman/Document.class.php:937
 #, fuzzy
@@ -643,7 +637,7 @@ msgstr "Fehler"
 #: common/docman/DocumentGroup.class.php:670
 #, fuzzy
 msgid "Browse this folder"
-msgstr "[Bearbeiten Sie dieses Kennzeichen]"
+msgstr "Bearbeiten Sie dieses Kennzeichen"
 
 #: common/docman/DocumentGroup.class.php:717
 #: common/docman/views/additem.php:59
@@ -662,9 +656,8 @@ msgid "Updated by"
 msgstr "Aktualisiert"
 
 #: common/docman/DocumentGroup.class.php:762
-#, fuzzy
 msgid "Unable to extract ZIP file."
-msgstr "Kein Zugriff auf die Listen möglich"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:767
 #, fuzzy
@@ -893,9 +886,8 @@ msgid "Already-uploaded file"
 msgstr "Wählen Sie eine FTP Datei, anstatt hochzuladen:"
 
 #: common/docman/views/addfile.php:124
-#, fuzzy
 msgid "Create online"
-msgstr "Erstellen"
+msgstr "Online erstellen"
 
 #: common/docman/views/addfile.php:130
 #: plugins/mantisbt/view/addAttachment.php:34
@@ -1495,9 +1487,8 @@ msgstr "Download als ZIP"
 #: common/docman/views/listfile.php:376
 #: common/docman/views/listtrashfile.php:209
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:88
-#, fuzzy
 msgid "No documents."
-msgstr "Neues Projekt hinzufügen"
+msgstr "Keine Dokumente."
 
 #: common/docman/views/listtrashfile.php:93
 msgid "Delete permanently all documents and folders with deleted status."
@@ -1513,9 +1504,8 @@ msgid "Updated since less than 7 days"
 msgstr ""
 
 #: common/docman/views/listtrashfile.php:191
-#, fuzzy
 msgid "Delete permanently this document."
-msgstr "Suche in Dokumenten"
+msgstr "Dieses Dokument dauerhaft löschen."
 
 #: common/docman/views/listtrashfile.php:202
 #, fuzzy
@@ -1523,9 +1513,8 @@ msgid "Delete permanently."
 msgstr "Template löschen"
 
 #: common/docman/views/menu.php:44
-#, fuzzy
 msgid "View Documents"
-msgstr "Neues Projekt hinzufügen"
+msgstr "Dokumente anzeigen"
 
 #: common/docman/views/menu.php:46
 msgid ""
@@ -1914,9 +1903,8 @@ msgid "Query: "
 msgstr "Tagebuch aktualisiert"
 
 #: common/docman/views/search.php:62
-#, fuzzy
 msgid "Searched words"
-msgstr "Suche in Dokumenten"
+msgstr "Suchwörter"
 
 #: common/docman/views/search.php:65
 msgid "All searched words are mandatory"
@@ -1957,9 +1945,8 @@ msgid "Database query error"
 msgstr "Datenbank Abfragefehler"
 
 #: common/docman/views/search.php:129
-#, fuzzy
 msgid "Your search did not match any documents."
-msgstr "Ihre Suchanfrage ergab keine Dokumente"
+msgstr "Ihre Suchanfrage ergab keine Dokumente."
 
 #: common/docman/views/search.php:154 common/docman/views/tree.php:64
 #, fuzzy
@@ -1968,7 +1955,7 @@ msgstr "Sie sind bereits Mitglied dieses Projekts. "
 
 #: common/docman/views/search.php:162
 msgid "Your search is empty."
-msgstr ""
+msgstr "Ihre Suche ist leer."
 
 #: common/docman/views/tree.php:64
 #: plugins/projects-hierarchy/view/home_project_link.php:47
@@ -2424,9 +2411,8 @@ msgstr "Von"
 
 #: common/forum/ForumHTML.class.php:266
 #: plugins/forumml/www/forumml_utils.php:558 www/forum/message.php:123
-#, fuzzy
 msgid "Reply"
-msgstr "antworten"
+msgstr "Rntworten"
 
 #: common/forum/ForumHTML.class.php:311
 msgid "Current File"
@@ -4853,9 +4839,8 @@ msgstr "Gesamte Projekte"
 #: common/reporting/report_utils.php:978
 #: common/reporting/report_utils.php:1042
 #: common/reporting/report_utils.php:1145
-#, fuzzy
 msgid "No data to display."
-msgstr "Keine Fragen gefunden"
+msgstr "Keine Daten zum anzeigen."
 
 #: common/reporting/report_utils.php:600 plugins/authopenid/www/index.php:38
 #: plugins/authwebid/www/index.php:35 www/account/change_email-complete.php:52
@@ -7024,7 +7009,6 @@ msgid "Choose the template tracker to clone."
 msgstr ""
 
 #: common/tracker/views/form-clonetracker.php:57
-#, fuzzy
 msgid ""
 "WARNING!!! Cloning this tracker will duplicate all the fields and all the "
 "elements from those fields into this tracker. There is nothing to prevent "

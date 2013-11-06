@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-04 19:30+0100\n"
+"POT-Creation-Date: 2013-11-06 12:24+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -216,7 +216,7 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:209 common/forum/ForumHTML.class.php:267
 #: common/forum/ForumHTML.class.php:524 common/forum/ForumHTML.class.php:528
 #: common/forum/ForumHTML.class.php:588 common/forum/ForumHTML.class.php:591
-#: common/forum/ForumMessage.class.php:665 common/include/Error.class.php:206
+#: common/forum/ForumMessage.class.php:666 common/include/Error.class.php:206
 #: common/include/exit.php:80 common/include/Group.class.php:2625
 #: common/include/Group.class.php:2626 common/include/Group.class.php:2627
 #: common/include/User.class.php:350 common/include/User.class.php:436
@@ -317,7 +317,7 @@ msgstr ""
 #: www/pm/mod_task.php:83 www/pm/mod_task.php:97 www/pm/mod_task.php:173
 #: www/pm/mod_task.php:183 www/pm/mod_task.php:197 www/pm/mod_task.php:202
 #: www/pm/mod_task.php:212 www/pm/mod_task.php:323
-#: www/project/admin/roledelete.php:62 www/register/index.php:187
+#: www/project/admin/roledelete.php:62 www/register/index.php:188
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/softwaremap/tag_cloud.php:143 www/softwaremap/trove_list.php:323
@@ -1195,7 +1195,7 @@ msgstr "Ultima vez"
 #: common/docman/views/pendingfiles.php:63 common/docman/views/search.php:150
 #: common/include/Group.class.php:792
 #: common/tracker/ArtifactExtraField.class.php:327
-#: common/tracker/include/ArtifactTypeHtml.class.php:326
+#: common/tracker/include/ArtifactTypeHtml.class.php:331
 #: common/tracker/views/form-addextrafieldoption.php:107
 #: common/tracker/views/form-addextrafield.php:130
 #: common/tracker/views/form-updateextrafieldelement.php:63
@@ -1213,7 +1213,7 @@ msgstr "Ultima vez"
 #: www/admin/grouplist.php:68 www/admin/pluginman.php:134
 #: www/admin/search.php:77 www/admin/search.php:151 www/admin/userlist.php:66
 #: www/export/rssAboTask.php:145 www/frs/admin/editrelease.php:234
-#: www/frs/admin/index.php:155 www/my/dashboard.php:72
+#: www/frs/admin/index.php:156 www/my/dashboard.php:72
 #: www/news/admin/index.php:129 www/people/editjob.php:74
 #: www/people/editjob.php:166 www/people/viewjob.php:71
 #: www/pm/browse_task.php:158 www/pm/detail_task.php:153
@@ -1226,7 +1226,7 @@ msgstr "Estado"
 #: common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
-#: common/tracker/include/ArtifactTypeHtml.class.php:368 www/frs/index.php:206
+#: common/tracker/include/ArtifactTypeHtml.class.php:373 www/frs/index.php:206
 #: www/project/admin/editimages.php:267
 msgid "Size"
 msgstr "Tamaño"
@@ -1304,9 +1304,9 @@ msgstr "Creado o actualizado hace 7 dias"
 #: common/tracker/include/ArtifactHtml.class.php:111
 #: common/tracker/include/ArtifactHtml.class.php:169
 #: common/tracker/include/ArtifactHtml.class.php:178
-#: common/tracker/include/ArtifactTypeHtml.class.php:337
-#: common/tracker/include/ArtifactTypeHtml.class.php:338
-#: common/tracker/include/ArtifactTypeHtml.class.php:379
+#: common/tracker/include/ArtifactTypeHtml.class.php:342
+#: common/tracker/include/ArtifactTypeHtml.class.php:343
+#: common/tracker/include/ArtifactTypeHtml.class.php:384
 #: common/widget/Widget_MyLatestSvnCommits.class.php:65
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:112
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:114
@@ -1483,7 +1483,7 @@ msgstr ""
 #: common/include/Navigation.class.php:171
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:48
 #: www/admin/index.php:66 www/admin/index.php:155
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:338
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:341
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:57
 msgid "Search"
 msgstr "Buscar"
@@ -1561,7 +1561,7 @@ msgid "Mass actions for selected pending files:"
 msgstr "Acciones Masivas para ficheros seleccionados pendientes:"
 
 #: common/docman/views/reporting.php:92
-#: common/tracker/include/ArtifactTypeHtml.class.php:324
+#: common/tracker/include/ArtifactTypeHtml.class.php:329
 #: www/activity/index.php:180 www/frs/reporting/downloads.php:109
 #: www/people/editprofile.php:278 www/people/skills_utils.php:50
 #: www/people/skills_utils.php:154 www/pm/add_task.php:95
@@ -1702,7 +1702,7 @@ msgstr "Fecha Inicial"
 #: www/pm/format_csv.php:86 www/pm/format_csv.php:89 www/pm/format_csv.php:93
 #: www/pm/format_csv.php:97 www/project/stats/index.php:105
 #: www/project/stats/index.php:106 www/project/stats/index.php:107
-#: www/project/stats/index.php:108 www/register/index.php:235
+#: www/project/stats/index.php:108 www/register/index.php:236
 #: www/reporting/groupadded.php:65 www/reporting/groupadded.php:66
 #: www/reporting/groupadded.php:67 www/reporting/groupcum.php:65
 #: www/reporting/groupcum.php:66 www/reporting/groupcum.php:67
@@ -1738,7 +1738,7 @@ msgid ":"
 msgstr ":"
 
 #: common/docman/views/reporting.php:94
-#: common/tracker/include/ArtifactTypeHtml.class.php:325
+#: common/tracker/include/ArtifactTypeHtml.class.php:330
 #: www/activity/index.php:181 www/frs/reporting/downloads.php:111
 #: www/people/editprofile.php:279 www/people/skills_utils.php:51
 #: www/people/skills_utils.php:155 www/pm/add_task.php:110
@@ -1811,7 +1811,7 @@ msgstr "Usuario"
 #: common/tracker/actions/detail.php:68
 #: common/tracker/include/ArtifactHtml.class.php:110
 #: common/tracker/include/ArtifactHtml.class.php:147
-#: common/tracker/include/ArtifactTypeHtml.class.php:370
+#: common/tracker/include/ArtifactTypeHtml.class.php:375
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:88
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:111
@@ -1950,7 +1950,7 @@ msgstr "No se puedo obtener el objeto Forum"
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:150
 #: www/admin/useredit.php:231 www/admin/userlist.php:119
 #: www/forum/admin/index.php:185 www/frs/admin/deletepackage.php:74
-#: www/frs/admin/deleterelease.php:76 www/frs/admin/index.php:184
+#: www/frs/admin/deleterelease.php:76 www/frs/admin/index.php:185
 #: www/frs/admin/showreleases.php:114 www/news/admin/index.php:131
 #: www/people/people_utils.php:178 www/people/people_utils.php:322
 #: www/people/skills_utils.php:46 www/people/skills_utils.php:104
@@ -2119,7 +2119,7 @@ msgstr "Versiones"
 #: www/admin/groupedit.php:223 www/admin/trove/trove_cat_edit.php:150
 #: www/admin/useredit.php:236 www/admin/useredit.php:315
 #: www/admin/vhost.php:183 www/forum/admin/index.php:162
-#: www/frs/admin/editrelease.php:347 www/frs/admin/index.php:181
+#: www/frs/admin/editrelease.php:347 www/frs/admin/index.php:182
 #: www/mail/admin/index.php:228 www/mail/admin/index.php:281
 #: www/people/people_utils.php:177 www/people/people_utils.php:321
 #: www/pm/admin/index.php:350 www/pm/calendar.php:289
@@ -2150,8 +2150,8 @@ msgid "Pending message released"
 msgstr "Mensaje pendiente liberado"
 
 #: common/forum/ForumAdmin.class.php:461
-#: common/forum/ForumMessage.class.php:182
-#: common/forum/ForumMessage.class.php:276
+#: common/forum/ForumMessage.class.php:183
+#: common/forum/ForumMessage.class.php:277
 msgid "Could not Update Master Thread parent with current time"
 msgstr "No se pudo actualizar el hilo padre con la hora actual"
 
@@ -2278,7 +2278,7 @@ msgstr "Añadido por"
 #: www/my/dashboard.php:66 www/my/diary.php:181 www/pm/browse_task.php:143
 #: www/project/report/index.php:135
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:57
-#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:49
+#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:48
 #: www/search/include/renderers/TasksHtmlSearchRenderer.class.php:49
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:49
 msgid "Summary"
@@ -2327,9 +2327,9 @@ msgid "This is the content of the pending message"
 msgstr "Este es el contenido del mensaje pendiente"
 
 #: common/forum/ForumHTML.class.php:209 common/forum/ForumHTML.class.php:267
-#: common/forum/ForumMessage.class.php:665
+#: common/forum/ForumMessage.class.php:666
 #: common/tracker/include/ArtifactHtml.class.php:148
-#: common/tracker/include/ArtifactTypeHtml.class.php:371
+#: common/tracker/include/ArtifactTypeHtml.class.php:376
 #: www/activity/index.php:266 www/forum/message.php:126
 #: www/pm/include/ProjectTaskHTML.class.php:157
 #: www/pm/include/ProjectTaskHTML.class.php:203
@@ -2361,7 +2361,7 @@ msgstr "Aviso: El fichero reemplazará el actual"
 #: common/forum/ForumHTML.class.php:350 common/tracker/actions/detail.php:135
 #: common/tracker/actions/mod-limited.php:177
 #: common/tracker/actions/mod.php:240
-#: common/tracker/include/ArtifactTypeHtml.class.php:366
+#: common/tracker/include/ArtifactTypeHtml.class.php:371
 #: www/forum/attachment.php:41 www/forum/attachment.php:123
 #: www/forum/attachment.php:151
 msgid "Attachments"
@@ -2397,7 +2397,7 @@ msgstr "Asunto"
 #: www/admin/admin_table.php:223 www/forum/admin/index.php:413
 #: www/forum/monitor.php:65 www/my/rmproject.php:96
 #: www/people/editprofile.php:157 www/people/editprofile.php:215
-#: www/pm/mod_task.php:289 www/register/index.php:314
+#: www/pm/mod_task.php:289 www/register/index.php:315
 #: www/reporting/timeadd.php:183 www/tracker/admin/index.php:103
 #: www/tracker/admin/index.php:180
 msgid "Cancel"
@@ -2416,24 +2416,24 @@ msgstr ""
 "Está publicando anónimamente porque no ha <a href=\"%1$s\">iniciado sesión</"
 "a>"
 
-#: common/forum/ForumHTML.class.php:619
+#: common/forum/ForumHTML.class.php:620
 msgid "Post Comment"
 msgstr "Enviar comentario"
 
-#: common/forum/ForumHTML.class.php:619
+#: common/forum/ForumHTML.class.php:620
 msgid "Anonymously"
 msgstr "Anónimamente"
 
-#: common/forum/ForumHTML.class.php:620
+#: common/forum/ForumHTML.class.php:621
 msgid "Receive followups via email"
 msgstr "Recibir respuestas vía correo electrónico"
 
-#: common/forum/ForumHTML.class.php:632
+#: common/forum/ForumHTML.class.php:633
 #, php-format
 msgid "You could post if you were <a href=\"%s\">logged in</a>."
 msgstr "Podría enviar un mensaje si <a href=\"%s\">inicia sesión</a>."
 
-#: common/forum/ForumHTML.class.php:636
+#: common/forum/ForumHTML.class.php:637
 #, php-format
 msgid "Please <a href=\"%s\">log in</a>"
 msgstr "Por favor <a href=\"%s\">inicie sesión</a>"
@@ -2445,46 +2445,46 @@ msgstr ""
 "objeto Forum"
 
 #: common/forum/ForumMessage.class.php:113
-#: common/forum/ForumMessage.class.php:262
+#: common/forum/ForumMessage.class.php:263
 msgid "Getting next thread_id failed"
 msgstr "La obtención del siguiente thread_id falló"
 
 #: common/forum/ForumMessage.class.php:130
-#: common/forum/ForumMessage.class.php:214
-#: common/forum/ForumMessage.class.php:220
-#: common/forum/ForumMessage.class.php:315
+#: common/forum/ForumMessage.class.php:215
+#: common/forum/ForumMessage.class.php:221
+#: common/forum/ForumMessage.class.php:316
 msgid "Posting Failed"
 msgstr "publicación fallida"
 
 #: common/forum/ForumMessage.class.php:141
-#: common/forum/ForumMessage.class.php:225
-#: common/forum/ForumMessage.class.php:327
+#: common/forum/ForumMessage.class.php:226
+#: common/forum/ForumMessage.class.php:328
 msgid "Unable to get new message id"
 msgstr "No se pudo obtener un nuevo message id"
 
-#: common/forum/ForumMessage.class.php:193
-#: common/forum/ForumMessage.class.php:287
-#: common/forum/ForumMessage.class.php:299
+#: common/forum/ForumMessage.class.php:194
+#: common/forum/ForumMessage.class.php:288
+#: common/forum/ForumMessage.class.php:300
 msgid "Could Not Update Parent"
 msgstr "No se pudo actualizar el padre"
 
-#: common/forum/ForumMessage.class.php:356
-#: common/forum/ForumMessage.class.php:800
+#: common/forum/ForumMessage.class.php:357
+#: common/forum/ForumMessage.class.php:801
 msgid "Error: a forum message must include a message body and a subject."
 msgstr "Se deben añadir Contenido y Asunto al Mensaje."
 
-#: common/forum/ForumMessage.class.php:372
+#: common/forum/ForumMessage.class.php:373
 msgid "Invalid ParentMessage Object"
 msgstr "Objeto ParentMessage no válido"
 
-#: common/forum/ForumMessage.class.php:405
-#: common/forum/ForumMessage.class.php:423
-#: common/forum/ForumMessage.class.php:576
+#: common/forum/ForumMessage.class.php:406
+#: common/forum/ForumMessage.class.php:424
+#: common/forum/ForumMessage.class.php:577
 #, fuzzy
 msgid "Invalid Message Id"
 msgstr "Identificador de mensaje inválido"
 
-#: common/forum/ForumMessage.class.php:657
+#: common/forum/ForumMessage.class.php:658
 #, php-format
 msgid ""
 "\n"
@@ -2495,7 +2495,7 @@ msgstr ""
 "Leer y responder a este mensaje a: \n"
 "%s"
 
-#: common/forum/ForumMessage.class.php:659
+#: common/forum/ForumMessage.class.php:660
 #, php-format
 msgid ""
 "\n"
@@ -2512,11 +2512,11 @@ msgstr ""
 "(ingrese su respuesta aquí)\n"
 "%1$s"
 
-#: common/forum/ForumMessage.class.php:670
+#: common/forum/ForumMessage.class.php:671
 msgid "A file has been uploaded with this message."
 msgstr "Un archivo ha sido adjuntado con este mensaje."
 
-#: common/forum/ForumMessage.class.php:681
+#: common/forum/ForumMessage.class.php:682
 #, php-format
 msgid ""
 "You are receiving this email because you elected to monitor this forum.\n"
@@ -2527,7 +2527,7 @@ msgstr ""
 "Para dejar de monitorizarlo, ingrese a %s y visite: \n"
 "%s\n"
 
-#: common/forum/ForumMessage.class.php:824
+#: common/forum/ForumMessage.class.php:825
 #, fuzzy
 msgid "Message not found"
 msgstr "Mensaje no encontrado"
@@ -3263,15 +3263,15 @@ msgstr "Proyecto aprobado %1$s"
 msgid "Your project registration for %s has been denied."
 msgstr "El registro de su proyecto en %s ha sido denegado."
 
-#: common/include/Group.class.php:2625 www/register/index.php:182
-#: www/register/index.php:188
+#: common/include/Group.class.php:2625 www/register/index.php:183
+#: www/register/index.php:189
 msgid "Project Full Name"
 msgstr "Nombre completo del proyecto"
 
 #: common/include/Group.class.php:2626 plugins/projectlabels/www/index.php:172
 #: www/admin/approve-pending.php:190 www/admin/database.php:155
 #: www/admin/groupedit.php:170 www/admin/vhost.php:118
-#: www/register/index.php:213
+#: www/register/index.php:214
 msgid "Project Unix Name"
 msgstr "Nombre Proyecto Unix"
 
@@ -4556,7 +4556,7 @@ msgstr "estado"
 msgid "[%1$s - %2$s] [Task #%3$d] "
 msgstr "[%1$s - %2$s] [Tarea #%3$d] "
 
-#: common/reporting/ReportDownloads.class.php:77 www/frs/admin/index.php:150
+#: common/reporting/ReportDownloads.class.php:77 www/frs/admin/index.php:151
 msgid "There are no packages defined."
 msgstr "No hay paquetes definidos."
 
@@ -5004,7 +5004,7 @@ msgstr "Texto libre para la página \"navega por los elementos\""
 #: www/pm/deletetask.php:51 www/pm/mod_task.php:54 www/pm/mod_task.php:254
 #: www/project/admin/editimages.php:235 www/project/admin/roledelete.php:85
 #: www/project/admin/roleedit.php:302 www/project/request.php:70
-#: www/register/index.php:313 www/snippet/add_snippet_to_package.php:167
+#: www/register/index.php:314 www/snippet/add_snippet_to_package.php:167
 #: www/snippet/addversion.php:109 www/snippet/addversion.php:228
 #: www/snippet/package.php:176 www/snippet/submit.php:144
 #: www/survey/include/SurveyHTML.class.php:555 www/tracker/roadmap.php:444
@@ -5357,7 +5357,7 @@ msgstr "Consultas Avanzadas"
 msgid "Select One"
 msgstr "Seleccionar rol"
 
-#: common/tracker/actions/browse.php:365 www/frs/admin/index.php:209
+#: common/tracker/actions/browse.php:365 www/frs/admin/index.php:210
 #: www/my/diary.php:207
 msgid "Private"
 msgstr "Privado"
@@ -5431,13 +5431,13 @@ msgstr "Asignado a"
 #: www/pm/mod_task.php:52
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:58
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:49
-#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:50
+#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:49
 #: www/search/include/renderers/TrackersHtmlSearchRenderer.class.php:50
 msgid "Submitted by"
 msgstr "Enviado por"
 
 #: common/tracker/actions/browse.php:571 common/tracker/actions/mod.php:228
-#: common/tracker/include/ArtifactTypeHtml.class.php:320
+#: common/tracker/include/ArtifactTypeHtml.class.php:325
 #: common/tracker/views/form-customizelist.php:45
 msgid "Related Tasks"
 msgstr "Tareas relacionadas"
@@ -5470,8 +5470,8 @@ msgid "No Change"
 msgstr "No Cambiar"
 
 #: common/tracker/actions/browse.php:746
-#: common/tracker/include/ArtifactTypeHtml.class.php:687
-#: common/tracker/include/ArtifactTypeHtml.class.php:721
+#: common/tracker/include/ArtifactTypeHtml.class.php:692
+#: common/tracker/include/ArtifactTypeHtml.class.php:726
 msgid "Nobody"
 msgstr "Nadie"
 
@@ -5749,8 +5749,8 @@ msgstr ""
 "solamente)"
 
 #: common/tracker/actions/query.php:367
-#: common/tracker/include/ArtifactTypeHtml.class.php:253
-#: common/tracker/include/ArtifactTypeHtml.class.php:260
+#: common/tracker/include/ArtifactTypeHtml.class.php:258
+#: common/tracker/include/ArtifactTypeHtml.class.php:265
 #, php-format
 msgid "(%% for wildcards)"
 msgstr "(%% para comodines)"
@@ -6326,27 +6326,27 @@ msgstr "Añadir/Actualizar Respuestas Prefijadas"
 msgid "Clone Tracker"
 msgstr "Clonar sistema de peticiones"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:322
+#: common/tracker/include/ArtifactTypeHtml.class.php:327
 #, fuzzy
 msgid "Task Id and Summary"
 msgstr "Descripción de la Tarea"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:323
+#: common/tracker/include/ArtifactTypeHtml.class.php:328
 #, fuzzy
 msgid "Progress"
 msgstr "En progreso"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:327
+#: common/tracker/include/ArtifactTypeHtml.class.php:332
 #: www/pm/include/ProjectTaskHTML.class.php:111
 msgid "Remove Relation"
 msgstr "Eliminar Relación"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:353
+#: common/tracker/include/ArtifactTypeHtml.class.php:358
 #, php-format
 msgid "Average completion rate: %d%%"
 msgstr "Porcentaje medio de completado: %d%%"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:369
+#: common/tracker/include/ArtifactTypeHtml.class.php:374
 #: common/tracker/views/form-adminroadmap.php:193
 #: plugins/blocks/www/index.php:196 plugins/contribtracker/www/index.php:134
 #: plugins/mantisbt/view/admin/addCategory.php:32
@@ -6370,7 +6370,7 @@ msgstr "Porcentaje medio de completado: %d%%"
 msgid "Name"
 msgstr "Nombre"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:372
+#: common/tracker/include/ArtifactTypeHtml.class.php:377
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:97
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:146
 #: plugins/mantisbt/view/viewAttachment.php:56
@@ -6378,9 +6378,9 @@ msgstr "Nombre"
 msgid "Download"
 msgstr "Descargar"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:541
-#: common/tracker/include/ArtifactTypeHtml.class.php:586
-#: common/tracker/include/ArtifactTypeHtml.class.php:753
+#: common/tracker/include/ArtifactTypeHtml.class.php:546
+#: common/tracker/include/ArtifactTypeHtml.class.php:591
+#: common/tracker/include/ArtifactTypeHtml.class.php:758
 #: plugins/scmhg/common/HgPlugin.class.php:608 www/admin/pluginman.php:227
 #: www/admin/pluginman.php:246 www/admin/pluginman.php:258
 #: www/admin/pluginman.php:259 www/include/html.php:322
@@ -6390,7 +6390,7 @@ msgstr "Descargar"
 msgid "None"
 msgstr "Ninguno"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:665
+#: common/tracker/include/ArtifactTypeHtml.class.php:670
 msgid ""
 "Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)"
 msgstr ""
@@ -6742,7 +6742,7 @@ msgstr "Gestionar Releases"
 msgid "Set order of releases for %s roadmap:"
 msgstr "Indicar orden de publicaciones para %s roadmap:"
 
-#: common/tracker/views/form-adminroadmap.php:401 www/frs/admin/index.php:153
+#: common/tracker/views/form-adminroadmap.php:401 www/frs/admin/index.php:154
 msgid "Releases"
 msgstr "Versiones"
 
@@ -7795,7 +7795,7 @@ msgstr "encuestas"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:182
 #: plugins/scmgit/www/index.php:57 plugins/scmgit/www/index.php:71
-#: www/register/index.php:246 www/scm/admin/index.php:128
+#: www/register/index.php:247 www/scm/admin/index.php:128
 #: www/scm/admin/index.php:154 www/scm/browser.php:31 www/scm/viewvc.php:162
 msgid "SCM Repository"
 msgstr "Repositorio SCM"
@@ -9740,10 +9740,10 @@ msgid "Enter Your Search Words Above"
 msgstr "Introduzca las palabras de búsqueda arriba"
 
 #: plugins/globalsearch/www/index.php:153
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:195
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:199
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:221
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:225
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:198
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:202
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:224
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:228
 #: www/search/include/renderers/HtmlSearchRenderer.class.php:100
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:112
 #, php-format
@@ -15285,7 +15285,7 @@ msgstr "Fecha de registro"
 
 #: www/admin/grouplist.php:67 www/admin/search.php:148
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
-#: www/register/index.php:235 www/register/index.php:237
+#: www/register/index.php:236 www/register/index.php:238
 msgid "Unix Name"
 msgstr "Nombre Unix"
 
@@ -15779,7 +15779,7 @@ msgid_plural "Project search with criteria <em>%s</em>: %d matches"
 msgstr[0] "Búsqueda con patrón <em>%s</em>: %d encontrado"
 msgstr[1] "Búsqueda de proyecto con patrón <em>%s</em>: %d encontrados"
 
-#: www/admin/search.php:149 www/register/index.php:187
+#: www/admin/search.php:149 www/register/index.php:188
 msgid "Full Name"
 msgstr "Nombre completo"
 
@@ -16350,7 +16350,7 @@ msgstr "La extension PHP no se encuentra."
 msgid "Exports Available"
 msgstr "Disponibles Exportaciones"
 
-#: www/export/rss20_activity.php:109 www/register/index.php:244
+#: www/export/rss20_activity.php:109 www/register/index.php:245
 msgid "Source Code"
 msgstr "Código fuente"
 
@@ -16812,7 +16812,7 @@ msgstr "Fichero no borrado no ha marcado “Estoy Seguro”"
 msgid "File Updated"
 msgstr "Fichero Actualizado"
 
-#: www/frs/admin/editrelease.php:214 www/frs/admin/index.php:174
+#: www/frs/admin/editrelease.php:214 www/frs/admin/index.php:175
 msgid "Edit Releases"
 msgstr "Editar Versión"
 
@@ -16947,45 +16947,45 @@ msgstr "QRS"
 msgid "Click here to %1$s quick-release a file %2$s"
 msgstr "Pulse aquí para %1$s actualizar un fichero %2$s"
 
-#: www/frs/admin/index.php:126
+#: www/frs/admin/index.php:127
 msgid "Packages"
 msgstr "Paquetes"
 
-#: www/frs/admin/index.php:127
+#: www/frs/admin/index.php:128
 msgid ""
 "You can use packages to group different file releases together, or use them "
 "however you like."
 msgstr "Puede agrupar diferentes ficheros utilizando paquetes."
 
-#: www/frs/admin/index.php:128
+#: www/frs/admin/index.php:129
 msgid "An example of packages:"
 msgstr "Un ejemplo de paquetes:"
 
-#: www/frs/admin/index.php:130
+#: www/frs/admin/index.php:131
 msgid "Your Packages:"
 msgstr "Sus paquetes:"
 
-#: www/frs/admin/index.php:132
+#: www/frs/admin/index.php:133
 msgid "Define your packages"
 msgstr "Defina sus paquetes"
 
-#: www/frs/admin/index.php:133
+#: www/frs/admin/index.php:134
 msgid "Create new releases of packages"
 msgstr "Cree nuevas versiones de paquetes"
 
-#: www/frs/admin/index.php:135
+#: www/frs/admin/index.php:136
 msgid "Releases of Packages"
 msgstr "Publicaciones de paquetes"
 
-#: www/frs/admin/index.php:136
+#: www/frs/admin/index.php:137
 msgid "A release of a package can contain multiple files."
 msgstr "Una nueva versión de un paquete puede contener múltiples ficheros."
 
-#: www/frs/admin/index.php:137
+#: www/frs/admin/index.php:138
 msgid "Examples of Releases"
 msgstr "Ejemplos de versiones publicadas"
 
-#: www/frs/admin/index.php:139
+#: www/frs/admin/index.php:140
 msgid ""
 "You can create new releases of packages by clicking on <strong>Add/Edit "
 "Releases</strong> next to your package name"
@@ -16993,32 +16993,32 @@ msgstr ""
 "Usted puede crear nuevas versiones de paquetes haciendo click en "
 "<strong>Añadir/Editar versiones</strong> junto al nombre del paquete"
 
-#: www/frs/admin/index.php:154 www/frs/admin/showreleases.php:99
+#: www/frs/admin/index.php:155 www/frs/admin/showreleases.php:99
 msgid "Package name"
 msgstr "Nombre del Paquete"
 
-#: www/frs/admin/index.php:156 www/frs/admin/index.php:207
+#: www/frs/admin/index.php:157 www/frs/admin/index.php:208
 #: www/people/editprofile.php:241
 msgid "Publicly Viewable"
 msgstr "Públicamente Visible"
 
-#: www/frs/admin/index.php:169
+#: www/frs/admin/index.php:170
 msgid "Add Release"
 msgstr "Añadir Versión"
 
-#: www/frs/admin/index.php:201
+#: www/frs/admin/index.php:202
 msgid "Create New Package"
 msgstr "Crear nuevo paquete"
 
-#: www/frs/admin/index.php:205
+#: www/frs/admin/index.php:206
 msgid "New Package Name"
 msgstr "Nombre del Nuevo Paquete"
 
-#: www/frs/admin/index.php:208 www/my/diary.php:207
+#: www/frs/admin/index.php:209 www/my/diary.php:207
 msgid "Public"
 msgstr "Público"
 
-#: www/frs/admin/index.php:210
+#: www/frs/admin/index.php:211
 msgid "Create This Package"
 msgstr "Crear Paquete"
 
@@ -17493,7 +17493,7 @@ msgid "Manage your account. Change your password, select your preferences."
 msgstr ""
 "Gestionar tu cuenta. Cambiar tu contraseña, seleccionar tus preferencias."
 
-#: www/include/html.php:1001 www/register/index.php:173
+#: www/include/html.php:1001 www/register/index.php:174
 msgid "Register Project"
 msgstr "Registrar un nuevo proyecto"
 
@@ -18433,7 +18433,7 @@ msgstr "Ver noticias"
 msgid "No News Items Found"
 msgstr "Ninguna noticia nueva encontrada"
 
-#: www/news/news_utils.php:181 www/survey/include/SurveyHTML.class.php:652
+#: www/news/news_utils.php:181 www/survey/include/SurveyHTML.class.php:656
 msgid "Comments"
 msgstr "Comentarios"
 
@@ -20675,17 +20675,17 @@ msgstr ""
 "Su proyecto ha sido enviado a los administradores de %1$s . Transcurridas 72 "
 "horas, recibira una notificación sobre la decisión e instrucciones."
 
-#: www/register/index.php:143 www/register/index.php:161
+#: www/register/index.php:143 www/register/index.php:162
 #, php-format
 msgid "Thank you for choosing %1$s."
 msgstr "Gracias por elegir %1$s."
 
-#: www/register/index.php:155
+#: www/register/index.php:156
 #, fuzzy, php-format
 msgid "Approval Error: %1$s"
 msgstr "Aprobando Proyecto: %1$s"
 
-#: www/register/index.php:158
+#: www/register/index.php:159
 #, fuzzy
 msgid ""
 "Your project has been automatically approved. You should receive an email "
@@ -20695,7 +20695,7 @@ msgstr ""
 "horas, recibira una notificación sobre la decisión e instrucciones.</"
 "p><p>Gracias por elegir %1$s"
 
-#: www/register/index.php:177
+#: www/register/index.php:178
 msgid ""
 "To apply for project registration, you should fill in basic information "
 "about it. Please read descriptions below carefully and provide complete and "
@@ -20705,7 +20705,7 @@ msgstr ""
 "Por favor, lea las descripciones más abajo e introduzca datos completos y "
 "comprensibles. Todos los campos son necesarios."
 
-#: www/register/index.php:184
+#: www/register/index.php:185
 msgid ""
 "You should start with specifying the name of your project. The “Full Name” "
 "is descriptive, and has no arbitrary restrictions (except min 3 characters "
@@ -20715,11 +20715,11 @@ msgstr ""
 "es descriptivo, y no tiene restricciones iniciales (excepto el limite de "
 "3-40 caracteres)."
 
-#: www/register/index.php:194 www/register/index.php:198
+#: www/register/index.php:195 www/register/index.php:199
 msgid "Project Purpose And Summarization"
 msgstr "Propósito y resumen del proyecto"
 
-#: www/register/index.php:196
+#: www/register/index.php:197
 #, php-format
 msgid ""
 "Please provide detailed, accurate description of your project and what %1$s "
@@ -20735,11 +20735,11 @@ msgstr ""
 "habilitar el uso de los servicios solicitados. Esta descripción no se "
 "utiliza como descripción pública de su proyecto."
 
-#: www/register/index.php:204 www/register/index.php:209
+#: www/register/index.php:205 www/register/index.php:210
 msgid "Project Public Description"
 msgstr "Descripción pública del proyecto"
 
-#: www/register/index.php:206
+#: www/register/index.php:207
 #, fuzzy
 msgid ""
 "This is the description of your project which will be shown on the Project "
@@ -20749,7 +20749,7 @@ msgstr ""
 "del Proyecto, en resultados de búsquedas, etc. La máxima longitud es 255 "
 "caracteres."
 
-#: www/register/index.php:214
+#: www/register/index.php:215
 #, fuzzy
 msgid ""
 "In addition to full project name, you will need to choose short, “Unix” name "
@@ -20758,7 +20758,7 @@ msgstr ""
 "Además del nombre completo debe elegir un nombre corto, “Unix” para el "
 "proyecto."
 
-#: www/register/index.php:215
+#: www/register/index.php:216
 msgid ""
 "The “Unix Name” has several restrictions because it is used in so many "
 "places around the site. They are:"
@@ -20766,38 +20766,38 @@ msgstr ""
 "El “Nombre Unix” tiene restricciones por que se utilizará en muchas partes "
 "del sistema. Son:"
 
-#: www/register/index.php:217
+#: www/register/index.php:218
 #, fuzzy
 msgid "cannot match the Unix name of any other project;"
 msgstr "no localizo el nombre unix en ningún proyecto;"
 
-#: www/register/index.php:218
+#: www/register/index.php:219
 msgid "must be between 3 and 15 characters in length;"
 msgstr "debe tener entre 3 y 15 caracteres de logitud;"
 
-#: www/register/index.php:219
+#: www/register/index.php:220
 msgid ""
 "must be in lower case (upper case letters will be converted to lower case);"
 msgstr ""
 "debe estár en minúsculas (las mayusculas se transformarán a minusculas);"
 
-#: www/register/index.php:220
+#: www/register/index.php:221
 msgid "can only contain characters, numbers, and dashes;"
 msgstr "puede solamente contener caracteres, numeros y guiones;"
 
-#: www/register/index.php:221
+#: www/register/index.php:222
 msgid "must be a valid Unix username;"
 msgstr "debe ser un nombre usario Unix valido;"
 
-#: www/register/index.php:222
+#: www/register/index.php:223
 msgid "cannot match one of our reserved domains;"
 msgstr "no puede coincidir con otros nombres ya reservados;"
 
-#: www/register/index.php:223
+#: www/register/index.php:224
 msgid "Unix name will never change for this project;"
 msgstr "El Nombre Unix no cambiará para este proyecto;"
 
-#: www/register/index.php:225
+#: www/register/index.php:226
 msgid ""
 "Your Unix name is important, however, because it will be used for many "
 "things, including:"
@@ -20805,25 +20805,25 @@ msgstr ""
 "Tu nombre Unix es muy importante, por que se usara de muchas maneras, "
 "incluyendo:"
 
-#: www/register/index.php:227
+#: www/register/index.php:228
 #, php-format
 msgid "a web site at <tt>unixname.%1$s</tt>,"
 msgstr "una página web en <tt>nombreunix.%1$s</tt>,"
 
-#: www/register/index.php:228
+#: www/register/index.php:229
 msgid "the URL of your source code repository,"
 msgstr "la URL de tu repositorio de codigo fuente,"
 
-#: www/register/index.php:230
+#: www/register/index.php:231
 #, php-format
 msgid "shell access to <span class=\"tt\">unixname.%1$s</span>,"
 msgstr "acceso shell a <span class=\"tt\">nombreunix.%1$s</span>,"
 
-#: www/register/index.php:232
+#: www/register/index.php:233
 msgid "search engines throughout the site."
 msgstr "motores de busqueda en todo el sitio."
 
-#: www/register/index.php:245
+#: www/register/index.php:246
 msgid ""
 "You can choose among different SCM for your project, but just one (or none "
 "at all). Please select the SCM system you want to use."
@@ -20832,15 +20832,15 @@ msgstr ""
 "de configuración) para su proyecto. Debe elegir sólo uno. Por favor, elija "
 "el sistema SCM que desea usar."
 
-#: www/register/index.php:248 www/register/index.php:250
+#: www/register/index.php:249 www/register/index.php:251
 msgid "No SCM"
 msgstr "Sin SCM"
 
-#: www/register/index.php:264
+#: www/register/index.php:265
 msgid "Project template"
 msgstr "Plantilla del proyecto"
 
-#: www/register/index.php:271
+#: www/register/index.php:272
 #, php-format
 msgid ""
 "You can either start from an empty project, or pick a project that will act "
@@ -20853,11 +20853,11 @@ msgstr ""
 "(algunos roles y permisos, algunos tracks, mismo grupo de plugins "
 "habilitados, y demás)."
 
-#: www/register/index.php:273 www/register/index.php:293
+#: www/register/index.php:274 www/register/index.php:294
 msgid "Start from empty project"
 msgstr "Comenzar proyecto vacío"
 
-#: www/register/index.php:275
+#: www/register/index.php:276
 #, php-format
 msgid ""
 "Please pick a project that will act as a template for yours.  Your project "
@@ -20868,7 +20868,7 @@ msgstr ""
 "inicialmente tendrá la misma configuración que el elegido (mismos roles y "
 "permisos, mismos trackers, mismo grupo de plugins activos...)."
 
-#: www/register/index.php:287
+#: www/register/index.php:288
 #, php-format
 msgid ""
 "You can either start from an empty project, or use the %s project as a "
@@ -20880,7 +20880,7 @@ msgstr ""
 "el nuevo. Su proyecto inicialmente tendrá la misma configuración que la "
 "plantilla (mismos roles y permisos, trackers, grupo de plugins activos ...)."
 
-#: www/register/index.php:299
+#: www/register/index.php:300
 #, php-format
 msgid ""
 "Your project will initially have the same configuration as the %s project "
@@ -20890,7 +20890,7 @@ msgstr ""
 "Su proyecto tendrá la misma configuración que el proyecto %s (mismos roles y "
 "permisos, trackers, mismo grupo de plugins activos,...)."
 
-#: www/register/index.php:306
+#: www/register/index.php:307
 #, php-format
 msgid "Since no template project is available, your project will start empty."
 msgstr ""
@@ -21275,30 +21275,30 @@ msgstr "Resultado de la búsqueda en los ficheros"
 msgid "News Search Results"
 msgstr "Resultado de la búsqueda en las noticias"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:190
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:193
 #, php-format
 msgid "Note: only the first %d results for this category are displayed."
 msgstr "Nota: sólo se muestran los primeros %d resultados de esta categoría."
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:196
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:222
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:199
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:225
 msgid " - "
 msgstr ""
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:197
-#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:223
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:200
+#: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:226
 msgid "No sections available (check your permissions)"
 msgstr "No hay secciones disponibles (verifica tus permisos)"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:343
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:346
 msgid "with all words"
 msgstr "con todas las palabras"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:346
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:349
 msgid "with one word"
 msgstr "con una palabra"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:393
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:396
 msgid "Search All"
 msgstr "Buscar Todo"
 
@@ -21313,7 +21313,7 @@ msgid "#"
 msgstr "#"
 
 #: www/search/include/renderers/FrsHtmlSearchRenderer.class.php:50
-#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:51
+#: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:50
 #, fuzzy
 msgid "Post Date"
 msgstr "Fecha de publicación"
@@ -22435,11 +22435,11 @@ msgstr "Error: no puede votar en una encuesta inactiva"
 msgid "Warning - you are about to vote a second time on this survey."
 msgstr "Aviso - está apunt de votar por segunda vez en esta encuesta."
 
-#: www/survey/include/SurveyHTML.class.php:589
+#: www/survey/include/SurveyHTML.class.php:593
 msgid "No Votes"
 msgstr "Sin votos"
 
-#: www/survey/include/SurveyHTML.class.php:683
+#: www/survey/include/SurveyHTML.class.php:687
 #, php-format
 msgid "View All %1$s Comment"
 msgid_plural "View All %1$s Comments"
