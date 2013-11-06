@@ -5,7 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2002-2004, GForge, LLC
  * Copyright 2009, Roland Mas
- * Copyright 2009, Alcatel-Lucent
+ * Copyright (C) 2009-2013 Alain Peyrat, Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -1566,38 +1566,34 @@ class Artifact extends Error {
 			$changes=array();
 		}
 
-		$sess = session_get_user() ;
-		if ($type == 1) { // Initial opening
-			if ($sess) {
-				$body = $this->ArtifactType->Group->getUnixName() . '-' . $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( _('Y-m-d H:i'), $this->getOpenDate() ) . " by " . $sess->getRealName () ;
-			} else {
-				$body = $this->ArtifactType->Group->getUnixName() . '-' . $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( _('Y-m-d H:i'), $this->getOpenDate() ) ;
-			}
+		$sess = session_get_user();
+		$name = util_unconvert_htmlspecialchars($this->ArtifactType->getName());
+		$body = $this->ArtifactType->Group->getUnixName() . '-' . $name .' '. $this->getStringID();
+
+		if ($type == 1) {
+			$body .= ' was opened at '.date('Y-m-d H:i', $this->getOpenDate());
+		} elseif ($type == 3) {
+			$body .= ' was deleted at '.date('Y-m-d H:i', time());
 		} else {
-			if ($sess) {
-				$body = $this->ArtifactType->Group->getUnixName() . '-' . $this->ArtifactType->getName() .
-				    " item #" . $this->getID() .
-				    " was changed at " .
-				    date(_('Y-m-d H:i'), $tm) . " by " .
-				    $sess->getRealName();
-			} else {
-				$body = $this->ArtifactType->Group->getUnixName() . '-' . $this->ArtifactType->getName() .
-				    " item #" . $this->getID() .
-				    " was changed at " .
-				    date(_('Y-m-d H:i'), $tm);
-			}
+			$body .= ' was changed at '.date('Y-m-d H:i', $tm);
+		}
+		if ($sess) {
+			$body .= ' by ' . $sess->getRealName();
 		}
 
-		$body .= "\nYou can respond by visiting: ".
-			"\n".util_make_url ('/tracker/?func=detail&atid='. $this->ArtifactType->getID() .
+		if ($type == 1 || $type == 2) {
+			$body .= "\nYou can respond by visiting: ".
+				"\n".util_make_url ('/tracker/?atid='. $this->ArtifactType->getID() .
 					    "&aid=". $this->getID() .
 					    "&group_id=". $this->ArtifactType->Group->getID()) .
-			"\nOr by replying to this e-mail entering your response between the following markers: ".
-			"\n".ARTIFACT_MAIL_MARKER.
-			"\n(enter your response here, only in plain text format)".
-			"\n".ARTIFACT_MAIL_MARKER.
-			"\n\n".
-			$this->marker('status',$changes).
+				"\nOr by replying to this e-mail entering your response between the following markers: ".
+				"\n".ARTIFACT_MAIL_MARKER.
+				"\n(enter your response here, only in plain text format)".
+				"\n".ARTIFACT_MAIL_MARKER.
+				"\n";
+		}
+
+		$body .= "\n".$this->marker('status',$changes).
 			 "Status: ". $this->getStatusName() ."\n".
 			$this->marker('priority',$changes).
 			 "Priority: ". $this->getPriority() ."\n".
@@ -1616,7 +1612,7 @@ class Artifact extends Error {
 			$body .= $ef["name"].": ".$ef["value"]."\n";
 		}
 
-		$subject='['. $this->ArtifactType->Group->getUnixName() . '-' . $this->ArtifactType->getName() . '][' . $this->getID() .'] '. util_unconvert_htmlspecialchars( $this->getSummary() );
+		$subject='['. $this->ArtifactType->Group->getUnixName() . '-' . $name . ']' . $this->getStringID() .' '. util_unconvert_htmlspecialchars( $this->getSummary() );
 
 		if ($type > 1) {
 			// get all the email addresses that are monitoring this request or the ArtifactType
