@@ -73,17 +73,17 @@ if (count($sshKeysArray)) {
 echo '<h2>'. _('Add a new ssh key').'</h2>';
 echo '<p>'. _('To avoid having to type your password every time for your CVS/SSH developer account, you may upload your public key(s) here and they will be placed on the server in your ~/.ssh/authorized_keys file. This is done by a cron job, so it may not happen immediately.  Please allow for a one hour delay.') . '</p>';
 echo '<p>'. _('To generate a public key, run the program \'ssh-keygen\' (you can use both protocol 1 or 2). The public key will be placed at \'~/.ssh/identity.pub\' (protocol version 1) and \'~/.ssh/id_dsa.pub\' or \'~/.ssh/id_rsa.pub\' (protocol version 2). Read the ssh documentation for further information on sharing keys.') . '</p>';
-echo '<p><em>'. _('Important: Make sure there are no line breaks. After submitting, verify that the number of keys in your file is what you expected.').'</em>';
-
+echo '<p><em>'. _('Important: Make sure there are no line breaks. After submitting, verify that the number of keys in your file is what you expected.').'</em></p>';
 ?>
 <textarea rows="10" cols="80" name="authorized_key" style="width:90%;">
-</textarea></p>
+</textarea>
 <?php
 echo '<p>'. _('Or upload your \'~/.ssh/identity.pub\' (protocol version 1) or \'~/.ssh/id_dsa.pub\' or \'~/.ssh/id_rsa.pub\' (protocol version 2)') .'</p>';
 echo '<input type="file" name="uploaded_filekey" size="30" />';
 ?>
 <p><input type="submit" name="submit" value="<?php echo _('Add'); ?>" /></p>
-</form>
 
 <?php
+echo '</form>';
+
 site_user_footer(array());

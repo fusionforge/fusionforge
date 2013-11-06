@@ -104,8 +104,9 @@ if (getStringFromRequest('submit')) {
 	<p><?php echo _('New Password (repeat)') ?>:
 	<br />
 	<label for="passwd2">
-		<input id="passwd2" type="password" name="passwd2" /></p>
+		<input id="passwd2" type="password" name="passwd2" />
 	</label>
+	</p>
 	<p>
 		<input type="submit" name="submit" value="<?php echo _('Update password') ?>" />
 	</p>
