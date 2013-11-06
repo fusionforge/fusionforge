@@ -41,7 +41,7 @@ if (!session_loggedin()) {
 	?>
 
 	<table class="fullwidth">
-	<tr><td class="top" width="100%">
+	<tr><td class="top">
 	<?php
 
 	echo $HTML->boxTop(_('All trackers for my projects'), false, false);
