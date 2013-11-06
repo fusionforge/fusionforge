@@ -102,7 +102,6 @@ th, td {
 input[type="text"], input[type="password"], textarea {
 	width: auto;
 	border-radius: 6px;
-	border-radius: 6px;
 	border: 1px solid #e6e6e6;
 	padding: 3px;
 	font-family:"Lucida Grande",sans-serif;
@@ -247,7 +246,6 @@ hr {
 #searchBox span input[type=text] {
     padding-left: 20px;
     border-radius: 20px;
-    height: 15px;
     border: 1px solid white;
     background-image: url(../images/search-logo.png);
     background-repeat: no-repeat;
@@ -399,8 +397,6 @@ hr {
     line-height: 17px;
     color: black;
     text-shadow: 1px 1px white;
-    margin-left: 0;
-    margin-right: 0;
     border-left: 1px solid white;
     border-right: 1px solid white;
 }
