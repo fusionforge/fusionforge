@@ -106,11 +106,13 @@ if ($login) {
 			}
 		}
 	} elseif ($userstatus == "P") {
-		$warning_msg .= '<br />'. sprintf(_('<p>Your account is currently pending your email confirmation. Visiting the link sent to you in this email will activate your account.<p>If you need this email resent, please click below and a confirmation email will be sent to the email address you provided in registration.<p><a href="%1$s">[Resend Confirmation Email]</a><br><hr><p>'), util_make_url ("/account/pending-resend.php?form_user=".htmlspecialchars($form_loginname)));
-	} else {
-		if ($userstatus == "D") {
-			$error_msg .= '<br />'.sprintf(_('<p>Your %1$s account has been removed by %1$s staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a <a href="%2$s">support request</a>.</p><p>Thank you, <br><br>%1$s Staff</p>'), forge_get_config ('forge_name'), util_make_url ("/support/?group_id=1"));
-		}
+		$warning_msg .= '<br /><p>'._('Your account is currently pending your email confirmation. Visiting the link sent to you in this email will activate your account.').'</p>';
+		$warning_msg .= '<p>'._('If you need this email resent, please click below and a confirmation email will be sent to the email address you provided in registration.').'</p>';
+		$warning_msg .= '<p>'. sprintf(_('<a href="%1$s">[Resend Confirmation Email]</a>'), util_make_url("/account/pending-resend.php?form_user=".htmlspecialchars($form_loginname))).'</p>';
+	} elseif ($userstatus == "D") {
+		$error_msg .= '<br /><p>'.sprintf(_('Your %1$s account has been removed by %1$s staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a <a href="%2$s">support request</a>.'), forge_get_config ('forge_name'), util_make_url ("/support/?group_id=1")).'</p>';
+		$error_msg .= '<p>'._('Thank you').'</p>';
+		$error_msg .= '<p>'.sprintf(_('-- the %s staff'), forge_get_config ('forge_name')).'</p>';
 	}
 	html_error_top($error_msg);
 	html_warning_top($warning_msg);
