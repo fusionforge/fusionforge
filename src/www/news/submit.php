@@ -133,7 +133,16 @@ if (session_loggedin()) {
 	$jsfunc = notepad_func();
 
 	echo '<p>';
-	printf(_('You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.</p><p>All posts <b>for your project</b> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the %1$s news team before they will appear on the %1$s home page.</p><p>You may include URLs, but not HTML in your submissions.</p><p>URLs that start with http:// are made clickable.'), forge_get_config ('forge_name'));
+	echo _('You can post news about your project if you are an admin on your project. You may also post “help wanted” notes if your project needs help.');
+	echo '</p>';
+	echo '<p>';
+	printf(_('All posts <strong>for your project</strong> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the %1$s news team before they will appear on the %1$s home page.'), forge_get_config('forge_name'));
+	echo '</p>';
+	echo '<p>';
+	echo _('You may include URLs, but not HTML in your submissions.');
+	echo '</p>';
+	echo '<p>';
+	echo _('URLs that start with http:// are made clickable.');
 	echo '</p>';
 	echo $jsfunc .
 		'

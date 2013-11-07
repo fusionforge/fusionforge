@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-06 12:24+0100\n"
+"POT-Creation-Date: 2013-11-06 18:38+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -312,8 +312,8 @@ msgstr "文件名"
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:190
 #: www/frs/admin/qrs.php:197 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
-#: www/new/index.php:98 www/news/submit.php:144 www/news/submit.php:146
-#: www/news/submit.php:149 www/people/admin/index.php:52
+#: www/new/index.php:98 www/news/submit.php:153 www/news/submit.php:155
+#: www/news/submit.php:158 www/people/admin/index.php:52
 #: www/people/admin/index.php:65 www/people/editprofile.php:233
 #: www/people/skills_utils.php:121 www/people/viewprofile.php:47
 #: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
@@ -2459,7 +2459,7 @@ msgstr "传送 Email"
 #: plugins/forumml/www/index.php:111 www/admin/massmail.php:112
 #: www/admin/massmail.php:136 www/admin/pending-news.php:145
 #: www/developer/diary.php:80 www/news/admin/index.php:133
-#: www/news/admin/news_admin_utils.php:58 www/news/submit.php:146
+#: www/news/admin/news_admin_utils.php:58 www/news/submit.php:155
 #: www/sendmessage.php:68 www/sendmessage.php:149
 msgid "Subject"
 msgstr "主题"
@@ -5095,7 +5095,7 @@ msgstr ""
 #: www/forum/admin/index.php:412 www/include/vote_function.php:286
 #: www/my/bookmark_add.php:58 www/my/diary.php:189
 #: www/news/admin/index.php:149 www/news/news_utils.php:42
-#: www/news/submit.php:161 www/pm/add_task.php:57 www/pm/add_task.php:140
+#: www/news/submit.php:170 www/pm/add_task.php:57 www/pm/add_task.php:140
 #: www/pm/add_task.php:154 www/pm/admin/index.php:217
 #: www/pm/admin/index.php:262 www/pm/admin/index.php:293 www/pm/csv.php:90
 #: www/pm/deletetask.php:51 www/pm/mod_task.php:54 www/pm/mod_task.php:254
@@ -6552,7 +6552,7 @@ msgid ""
 "If you <strong>cannot</strong> login, then enter your email address here"
 msgstr "如果您<strong>不能</strong>登录，请在这里输入您的Email"
 
-#: common/tracker/include/build_submission_form.php:53 www/news/submit.php:144
+#: common/tracker/include/build_submission_form.php:53 www/news/submit.php:153
 #: www/people/viewjob.php:79
 msgid "For project"
 msgstr "关于项目"
@@ -8110,7 +8110,7 @@ msgstr "项目 #%s 是未决定"
 
 #: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:147
 #: www/export/rssAboTask.php:146 www/my/diary.php:185
-#: www/news/admin/index.php:135 www/news/submit.php:149
+#: www/news/admin/index.php:135 www/news/submit.php:158
 msgid "Details"
 msgstr "细节"
 
@@ -18803,15 +18803,26 @@ msgid "Submit News for Project: "
 msgstr "这些新闻项目针对项目被发布"
 
 #: www/news/submit.php:136
-#, php-format
 msgid ""
 "You can post news about your project if you are an admin on your project. "
-"You may also post \"help wanted\" notes if your project needs help.</"
-"p><p>All posts <b>for your project</b> will appear instantly on your project "
-"summary page. Posts that are of special interest to the community will have "
-"to be approved by a member of the %1$s news team before they will appear on "
-"the %1$s home page.</p><p>You may include URLs, but not HTML in your "
-"submissions.</p><p>URLs that start with http:// are made clickable."
+"You may also post “help wanted” notes if your project needs help."
+msgstr ""
+
+#: www/news/submit.php:139
+#, php-format
+msgid ""
+"All posts <strong>for your project</strong> will appear instantly on your "
+"project summary page. Posts that are of special interest to the community "
+"will have to be approved by a member of the %1$s news team before they will "
+"appear on the %1$s home page."
+msgstr ""
+
+#: www/news/submit.php:142
+msgid "You may include URLs, but not HTML in your submissions."
+msgstr ""
+
+#: www/news/submit.php:145
+msgid "URLs that start with http:// are made clickable."
 msgstr ""
 
 #: www/people/admin/index.php:55 www/pm/admin/index.php:98

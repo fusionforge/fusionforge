@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-06 12:24+0100\n"
+"POT-Creation-Date: 2013-11-06 18:38+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -312,8 +312,8 @@ msgstr "Nome do ficheiro "
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:190
 #: www/frs/admin/qrs.php:197 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
-#: www/new/index.php:98 www/news/submit.php:144 www/news/submit.php:146
-#: www/news/submit.php:149 www/people/admin/index.php:52
+#: www/new/index.php:98 www/news/submit.php:153 www/news/submit.php:155
+#: www/news/submit.php:158 www/people/admin/index.php:52
 #: www/people/admin/index.php:65 www/people/editprofile.php:233
 #: www/people/skills_utils.php:121 www/people/viewprofile.php:47
 #: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
@@ -2460,7 +2460,7 @@ msgstr "Editar a mensaxe "
 #: plugins/forumml/www/index.php:111 www/admin/massmail.php:112
 #: www/admin/massmail.php:136 www/admin/pending-news.php:145
 #: www/developer/diary.php:80 www/news/admin/index.php:133
-#: www/news/admin/news_admin_utils.php:58 www/news/submit.php:146
+#: www/news/admin/news_admin_utils.php:58 www/news/submit.php:155
 #: www/sendmessage.php:68 www/sendmessage.php:149
 msgid "Subject"
 msgstr "Asunto "
@@ -5145,7 +5145,7 @@ msgstr "Texto de formulario libre para a páxina de \"navegar polos elementos\""
 #: www/forum/admin/index.php:412 www/include/vote_function.php:286
 #: www/my/bookmark_add.php:58 www/my/diary.php:189
 #: www/news/admin/index.php:149 www/news/news_utils.php:42
-#: www/news/submit.php:161 www/pm/add_task.php:57 www/pm/add_task.php:140
+#: www/news/submit.php:170 www/pm/add_task.php:57 www/pm/add_task.php:140
 #: www/pm/add_task.php:154 www/pm/admin/index.php:217
 #: www/pm/admin/index.php:262 www/pm/admin/index.php:293 www/pm/csv.php:90
 #: www/pm/deletetask.php:51 www/pm/mod_task.php:54 www/pm/mod_task.php:254
@@ -6604,7 +6604,7 @@ msgid ""
 msgstr ""
 "Se <strong>non pode</strong> iniciar sesión, introduza o seu correo aquí"
 
-#: common/tracker/include/build_submission_form.php:53 www/news/submit.php:144
+#: common/tracker/include/build_submission_form.php:53 www/news/submit.php:153
 #: www/people/viewjob.php:79
 msgid "For project"
 msgstr "Para o proxecto"
@@ -8193,7 +8193,7 @@ msgstr "O elemento #%s está pendente"
 
 #: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:147
 #: www/export/rssAboTask.php:146 www/my/diary.php:185
-#: www/news/admin/index.php:135 www/news/submit.php:149
+#: www/news/admin/index.php:135 www/news/submit.php:158
 msgid "Details"
 msgstr "Detalles "
 
@@ -19123,12 +19123,11 @@ msgstr "Produciuse un erro ao inserir"
 
 #: www/news/submit.php:110
 msgid "News Added."
-msgstr "Novas engadidas. "
+msgstr "Novas engadidas."
 
 #: www/news/submit.php:115
-#, fuzzy
 msgid "Error: both subject and body are required."
-msgstr "Erro - É necesario tanto o corpo como o asunto"
+msgstr "Erro - É necesario tanto o corpo como o asunto."
 
 #: www/news/submit.php:131
 #, fuzzy
@@ -19136,24 +19135,34 @@ msgid "Submit News for Project: "
 msgstr "Lista de novas enviadas por proxecto"
 
 #: www/news/submit.php:136
-#, fuzzy, php-format
 msgid ""
 "You can post news about your project if you are an admin on your project. "
-"You may also post \"help wanted\" notes if your project needs help.</"
-"p><p>All posts <b>for your project</b> will appear instantly on your project "
-"summary page. Posts that are of special interest to the community will have "
-"to be approved by a member of the %1$s news team before they will appear on "
-"the %1$s home page.</p><p>You may include URLs, but not HTML in your "
-"submissions.</p><p>URLs that start with http:// are made clickable."
+"You may also post “help wanted” notes if your project needs help."
 msgstr ""
 "Pode publicar novas sobre o seu proxecto se é o administrador deste. Tamén "
-"pode publicar notas de \"búscase axuda\" se o seu proxecto precisa axuda.</"
-"p><p>Todas as mensaxes <strong>do seu proxecto</strong> aparecerán "
+"pode publicar notas de “búscase axuda” se o seu proxecto precisa axuda."
+
+#: www/news/submit.php:139
+#, php-format
+msgid ""
+"All posts <strong>for your project</strong> will appear instantly on your "
+"project summary page. Posts that are of special interest to the community "
+"will have to be approved by a member of the %1$s news team before they will "
+"appear on the %1$s home page."
+msgstr ""
+"Todas as mensaxes <strong>do seu proxecto</strong> aparecerán "
 "instantaneamente na páxina de resumo do seu proxecto. AS publicacións que "
 "sexan de especial interese para a comunidade terán que ser aprobadas por un "
-"membro do equipo de %1$s antes de poder aparecer na páxina de inicio de "
-"%1$s. </p><p>Pode incluír URL nos seus envíos, pero non HTML.</p><p>Os URL "
-"que comecen por http:// converteranse en ligazóns."
+"membro do equipo de %1$s antes de poder aparecer na páxina de inicio de %1$s."
+
+#: www/news/submit.php:142
+msgid "You may include URLs, but not HTML in your submissions."
+msgstr ""
+
+
+#: www/news/submit.php:145
+msgid "URLs that start with http:// are made clickable."
+msgstr "Os URL que comecen por http:// converteranse en ligazóns."
 
 #: www/people/admin/index.php:55 www/pm/admin/index.php:98
 msgid "Category Inserted"
@@ -23549,6 +23558,8 @@ msgstr "Non se introduciu un nome de usuario"
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
 
+
+
 #~ msgid "Read&nbsp;More/Comment"
 #~ msgstr "Ler&nbsp;máis/Comentar"
 
@@ -25628,26 +25639,6 @@ msgstr "Páxina persoal de %s"
 
 #~ msgid "Monitored Items"
 #~ msgstr "Elementos monitorizados"
-
-#~ msgid ""
-#~ "You can post news about your project if you are an admin on your project. "
-#~ "You may also post “help wanted” notes if your project needs help."
-#~ msgstr ""
-#~ "Pode publicar novas sobre o seu proxecto se é o administrador deste. "
-#~ "Tamén pode publicar notas de \"búscase axuda\" se o seu proxecto precisa "
-#~ "axuda."
-
-#~ msgid ""
-#~ "All posts <strong>for your project</strong> will appear instantly on your "
-#~ "project summary page. Posts that are of special interest to the community "
-#~ "will have to be approved by a member of the %1$s news team before they "
-#~ "will appear on the %1$s home page."
-#~ msgstr ""
-#~ "Todas as mensaxes <strong>do seu proxecto</strong> aparecerán "
-#~ "instantaneamente na páxina de resumo do seu proxecto. AS publicacións que "
-#~ "sexan de especial interese para a comunidade terán que ser aprobadas por "
-#~ "un membro do equipo de %1$s antes de poder aparecer na páxina de inicio "
-#~ "de %1$s."
 
 #~ msgid "Displaying %1$s per page. Projects sorted by alphabetical order."
 #~ msgstr "Mostrando %1$s por páxina. Proxectos ordenados alfabeticamente."

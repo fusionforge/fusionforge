@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-06 12:24+0100\n"
+"POT-Creation-Date: 2013-11-06 19:07+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -301,8 +301,8 @@ msgstr ""
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:190
 #: www/frs/admin/qrs.php:197 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
-#: www/new/index.php:98 www/news/submit.php:144 www/news/submit.php:146
-#: www/news/submit.php:149 www/people/admin/index.php:52
+#: www/new/index.php:98 www/news/submit.php:153 www/news/submit.php:155
+#: www/news/submit.php:158 www/people/admin/index.php:52
 #: www/people/admin/index.php:65 www/people/editprofile.php:233
 #: www/people/skills_utils.php:121 www/people/viewprofile.php:47
 #: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
@@ -2376,7 +2376,7 @@ msgstr "Editar un Mensaje"
 #: plugins/forumml/www/index.php:111 www/admin/massmail.php:112
 #: www/admin/massmail.php:136 www/admin/pending-news.php:145
 #: www/developer/diary.php:80 www/news/admin/index.php:133
-#: www/news/admin/news_admin_utils.php:58 www/news/submit.php:146
+#: www/news/admin/news_admin_utils.php:58 www/news/submit.php:155
 #: www/sendmessage.php:68 www/sendmessage.php:149
 msgid "Subject"
 msgstr "Asunto"
@@ -4998,7 +4998,7 @@ msgstr "Texto libre para la página \"navega por los elementos\""
 #: www/forum/admin/index.php:412 www/include/vote_function.php:286
 #: www/my/bookmark_add.php:58 www/my/diary.php:189
 #: www/news/admin/index.php:149 www/news/news_utils.php:42
-#: www/news/submit.php:161 www/pm/add_task.php:57 www/pm/add_task.php:140
+#: www/news/submit.php:170 www/pm/add_task.php:57 www/pm/add_task.php:140
 #: www/pm/add_task.php:154 www/pm/admin/index.php:217
 #: www/pm/admin/index.php:262 www/pm/admin/index.php:293 www/pm/csv.php:90
 #: www/pm/deletetask.php:51 www/pm/mod_task.php:54 www/pm/mod_task.php:254
@@ -6411,7 +6411,7 @@ msgstr ""
 "Si usted <strong>no puede</strong> iniciar sesión, introduzca su correo "
 "electrónico aquí:"
 
-#: common/tracker/include/build_submission_form.php:53 www/news/submit.php:144
+#: common/tracker/include/build_submission_form.php:53 www/news/submit.php:153
 #: www/people/viewjob.php:79
 msgid "For project"
 msgstr "Para el Proyecto"
@@ -7983,7 +7983,7 @@ msgstr "El registro #%s está pendiente"
 
 #: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:147
 #: www/export/rssAboTask.php:146 www/my/diary.php:185
-#: www/news/admin/index.php:135 www/news/submit.php:149
+#: www/news/admin/index.php:135 www/news/submit.php:158
 msgid "Details"
 msgstr "Detalles"
 
@@ -18483,24 +18483,34 @@ msgid "Submit News for Project: "
 msgstr "Enviar Noticias para Proyecto: "
 
 #: www/news/submit.php:136
-#, fuzzy, php-format
 msgid ""
 "You can post news about your project if you are an admin on your project. "
-"You may also post \"help wanted\" notes if your project needs help.</"
-"p><p>All posts <b>for your project</b> will appear instantly on your project "
-"summary page. Posts that are of special interest to the community will have "
-"to be approved by a member of the %1$s news team before they will appear on "
-"the %1$s home page.</p><p>You may include URLs, but not HTML in your "
-"submissions.</p><p>URLs that start with http:// are made clickable."
+"You may also post “help wanted” notes if your project needs help."
 msgstr ""
 "Puede enviar noticias acerca de su proyecto si es el admin de su proyecto. "
-"Tambien puede enviar un mensaje de \"busqueda de ayuda\" si el proyecto "
-"necesita ayuda </p><p>Todos los envios·<strong>para su proyecto</strong> "
-"aparecerán instantaneamente en su pagina resumen. Envios sin especial "
-"interés para el proyecto deberán ser aprobados por un miembro del equipo de "
-"noticias de %1$s antes de que aparezcan en la página principal de ·%1$s. </"
-"p><p>Puede incluir URLS, pero no HTML en sus envios.</p><p>URLs que empiecen "
-"con http:// serán convertidas en enlaces."
+"Tambien puede enviar un mensaje de “busqueda de ayuda” si el proyecto "
+"necesita ayuda."
+
+#: www/news/submit.php:139
+#, php-format
+msgid ""
+"All posts <strong>for your project</strong> will appear instantly on your "
+"project summary page. Posts that are of special interest to the community "
+"will have to be approved by a member of the %1$s news team before they will "
+"appear on the %1$s home page."
+msgstr ""
+"Todos los envios·<strong>para su proyecto</strong> aparecerán "
+"instantaneamente en su pagina resumen. Envios sin especial interés para el "
+"proyecto deberán ser aprobados por un miembro del equipo de noticias de %1$s "
+"antes de que aparezcan en la página principal de ·%1$s."
+
+#: www/news/submit.php:142
+msgid "You may include URLs, but not HTML in your submissions."
+msgstr ""
+
+#: www/news/submit.php:145
+msgid "URLs that start with http:// are made clickable."
+msgstr "URLs que empiecen con http:// serán convertidas en enlaces."
 
 #: www/people/admin/index.php:55 www/pm/admin/index.php:98
 msgid "Category Inserted"
