@@ -87,9 +87,9 @@ function project_get_survey_count($group_id) {
 /**
  * project_summary() - Build a project summary box that projects can insert into their project pages
  *
- * @param	int $group_id The group ID
- * @param	string $mode How to return the results.
- * @param	bool $no_table Whether to return the results within an HTML table or not
+ * @param	int		$group_id	The group ID
+ * @param	string	$mode		How to return the results.
+ * @param	bool	$no_table	Whether to return the results within an HTML table or not
  * @return	string
  */
 function project_summary($group_id, $mode, $no_table) {

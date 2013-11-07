@@ -699,11 +699,11 @@ class SurveyHTML extends Error {
 	/**
 	 * split_str - works as str_split of PHP5 -  Converts a string to an array.
 	 *
-	 * @param String str
-	 * @param int length of chunk
+	 * @param string $str
+	 * @param int	$split_lengt	length of chunk
 	 * @return array array of chunks of the string
 	 */
-	function split_str($str,$split_lengt=1) {
+	function split_str($str, $split_lengt=1) {
 		$cnt = strlen($str);
 		for ($i=0;$i<$cnt;$i+=$split_lengt) {
 			$rslt[]= substr($str,$i,$split_lengt);
@@ -714,11 +714,9 @@ class SurveyHTML extends Error {
 	/**
 	 * _makeBar - make Precentage bar as a cell in a table. Starts with <tr> and ends with </tr>
 	 *
-	 * @param $name
-	 * @param $percent
-	 * @param $color
-	 * @internal param \name $String Name
-	 * @internal param \percentage $int of the name
+	 * @param string	$name		Name
+	 * @param int 		$percent	Percentage of the name
+	 * @param string	$color		Color
 	 * @return string
 	 */
 	function _makeBar($name, $percent, $color) {
