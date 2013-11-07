@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-07 15:16+0100\n"
+"POT-Creation-Date: 2013-11-07 18:11+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -37,7 +37,7 @@ msgstr "Ongeldige volledige naam"
 #: common/account/actions/deletesshkey.php:30
 #, fuzzy
 msgid "SSH Key deleted successfully."
-msgstr "JOB skill Vacature-vaardigheid verwijderd"
+msgstr "Job skill Vacature-vaardigheid verwijderd"
 
 #: common/docman/actions/addfile.php:58 common/docman/actions/addfile.php:65
 #: common/docman/actions/addsubdocgroup.php:48
@@ -134,7 +134,7 @@ msgstr "Geen rapportagedata gevonden"
 #: common/docman/actions/delfile.php:52
 #, fuzzy
 msgid "deleted successfully."
-msgstr "JOB skill Vacature-vaardigheid verwijderd"
+msgstr "Wijziging doorgevoerd"
 
 #: common/docman/actions/editdocgroup.php:101
 #, fuzzy, php-format
@@ -149,7 +149,7 @@ msgstr "Projecten"
 #: common/docman/actions/editfile.php:69
 #, fuzzy
 msgid "No document found to update"
-msgstr "Geen documentgegevens"
+msgstr "Geen documenten gevonden"
 
 #: common/docman/actions/editfile.php:89
 #, fuzzy, php-format
@@ -159,7 +159,7 @@ msgstr "Ongeldige volledige naam"
 #: common/docman/actions/editfile.php:112
 #, fuzzy, php-format
 msgid "Document %s updated successfully."
-msgstr "Wijziging doorgevoerd"
+msgstr "Document gesubmit"
 
 #: common/docman/actions/emptytrash.php:38
 msgid "Unable to clean trash"
@@ -173,7 +173,7 @@ msgstr "Wijziging doorgevoerd"
 #: common/docman/actions/enforcereserve.php:47
 #, fuzzy
 msgid "reservation enforced successfully."
-msgstr "Wijziging doorgevoerd"
+msgstr "Document gesubmit"
 
 #: common/docman/actions/forcereindexenginesearch.php:36
 msgid ""
@@ -181,17 +181,15 @@ msgid ""
 msgstr ""
 
 #: common/docman/actions/injectzip.php:49
-#, fuzzy
 msgid "Archive injected successfully."
-msgstr "Vacature toegevoegd"
+msgstr ""
 
 #: common/docman/actions/monitordirectory.php:38
 #: common/docman/Document.class.php:941
 #: common/docman/DocumentGroup.class.php:723
 #: common/docman/views/reporting.php:169
-#, fuzzy
 msgid "Folder"
-msgstr "Bestandsnaam"
+msgstr ""
 
 #: common/docman/actions/monitordirectory.php:43
 #: common/docman/actions/monitorfile.php:44
@@ -367,9 +365,8 @@ msgid "Docman: monitoring action unknown."
 msgstr ""
 
 #: common/docman/actions/releasefile.php:49
-#, fuzzy
 msgid "released successfully."
-msgstr "Aangemaakt"
+msgstr ""
 
 #: common/docman/actions/reservefile.php:49
 #, fuzzy
@@ -467,19 +464,16 @@ msgstr "Documentomschrijving moet minstens 10 tekens lang zijn"
 
 #: common/docman/Document.class.php:141 common/docman/Document.class.php:149
 #: common/docman/Document.class.php:842
-#, fuzzy
 msgid "Document already published in this folder"
-msgstr "Toevoegen nieuwe documentatie"
+msgstr ""
 
 #: common/docman/Document.class.php:198 common/docman/Document.class.php:205
-#, fuzzy
 msgid "Error Adding Document:"
-msgstr "Fout bij het toevoegen van een forum"
+msgstr ""
 
 #: common/docman/Document.class.php:198
-#, fuzzy
 msgid "Not a file"
-msgstr "Geen statistieken beschikbaar"
+msgstr ""
 
 #: common/docman/Document.class.php:214
 #, fuzzy
@@ -490,7 +484,7 @@ msgstr "Fout bij het invoegen van een element"
 #: common/docman/Document.class.php:1097
 #, fuzzy
 msgid "Error updating document group:"
-msgstr "Fout bij het toevoegen van een forum"
+msgstr "Fout bij het invoegen van een element"
 
 #: common/docman/Document.class.php:252
 #, fuzzy
@@ -520,14 +514,12 @@ msgid "Document lock failed"
 msgstr "Documenttitel"
 
 #: common/docman/Document.class.php:697
-#, fuzzy
 msgid "Document reservation failed"
-msgstr "Bekijk documentatie"
+msgstr ""
 
 #: common/docman/Document.class.php:935 common/docman/views/additem.php:57
-#, fuzzy
 msgid "New Document"
-msgstr "Voeg een project toe"
+msgstr ""
 
 #: common/docman/Document.class.php:937
 #, fuzzy
@@ -644,7 +636,7 @@ msgstr "Fout"
 #: common/docman/DocumentGroup.class.php:670
 #, fuzzy
 msgid "Browse this folder"
-msgstr "Wijzig de %1$ss tabel"
+msgstr "Uit het project stappen"
 
 #: common/docman/DocumentGroup.class.php:717
 #: common/docman/views/additem.php:59
@@ -695,9 +687,8 @@ msgid "No Documents Folder Found"
 msgstr "Geen documenten gevonden"
 
 #: common/docman/DocumentManager.class.php:190
-#, fuzzy
 msgid "Number of documents in this folder"
-msgstr "Aantal vragen"
+msgstr ""
 
 #: common/docman/DocumentManager.class.php:193
 msgid ""
@@ -894,7 +885,7 @@ msgstr "Kies een FTP bestand in plaats van uploaden:"
 #: common/docman/views/addfile.php:124
 #, fuzzy
 msgid "Create online"
-msgstr "Aanmaken"
+msgstr "Creëer een bundel"
 
 #: common/docman/views/addfile.php:130
 #: plugins/mantisbt/view/addAttachment.php:34
@@ -919,9 +910,9 @@ msgid ""
 msgstr ""
 
 #: common/docman/views/addfile.php:158
-#, fuzzy, php-format
+#, php-format
 msgid "You need first to upload file in %s"
-msgstr "Je moet hiervoor ingelogd zijn"
+msgstr ""
 
 #: common/docman/views/addfile.php:165 common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:129
@@ -993,14 +984,12 @@ msgid "Upload archive:"
 msgstr "Document uploaden"
 
 #: common/docman/views/addsubdocgroup.php:56
-#, fuzzy
 msgid "Name of the document subfolder to create"
-msgstr "Geen documentgegevens"
+msgstr ""
 
 #: common/docman/views/addsubdocgroup.php:59
-#, fuzzy
 msgid "Name of the document folder to create"
-msgstr "Geen documentgegevens"
+msgstr ""
 
 #: common/docman/views/addsubdocgroup.php:63 www/admin/responses_admin.php:132
 #: www/project/admin/database.php:184 www/project/admin/vhost.php:122
@@ -1136,9 +1125,8 @@ msgstr "Ongeldige gebruiker"
 #: common/docman/views/listfile.php:158
 #: common/docman/views/listtrashfile.php:109
 #: common/docman/views/pendingfiles.php:55
-#, fuzzy
 msgid "Edit document dialog box"
-msgstr "Groep aanpassen"
+msgstr ""
 
 #: common/docman/views/listfile.php:169 www/export/rssAboTask.php:142
 #: www/pm/browse_task.php:384 www/pm/mod_task.php:66
@@ -1479,9 +1467,8 @@ msgstr "Stop met monitoren"
 #: common/docman/views/listfile.php:370
 #: common/docman/views/listtrashfile.php:203
 #: common/docman/views/pendingfiles.php:138
-#, fuzzy
 msgid "Download as a ZIP"
-msgstr "Downloaden als CSV"
+msgstr "Downloaden als ZIP"
 
 #: common/docman/views/listfile.php:376
 #: common/docman/views/listtrashfile.php:209
@@ -1908,7 +1895,7 @@ msgstr "Logboek bijgewerkt"
 #: common/docman/views/search.php:62
 #, fuzzy
 msgid "Searched words"
-msgstr "Documenten bij dit project"
+msgstr "Zoeken"
 
 #: common/docman/views/search.php:65
 msgid "All searched words are mandatory"
@@ -1916,15 +1903,16 @@ msgstr ""
 
 #: common/docman/views/search.php:65
 msgid "With all the words"
-msgstr ""
+msgstr "Met alle woorden"
 
 #: common/docman/views/search.php:66
 msgid "At least one word must be found"
 msgstr ""
 
 #: common/docman/views/search.php:66
+#, fuzzy
 msgid "With at least one of words"
-msgstr ""
+msgstr "Met één woord"
 
 #: common/docman/views/search.php:68
 msgid "Filename and contents are used to match searched words"
@@ -2125,8 +2113,8 @@ msgstr "Fout bij het toevoegen van een forum"
 #, fuzzy, php-format
 msgid "%s message deleted"
 msgid_plural "%s messages deleted"
-msgstr[0] "%1$s berichten verwijderd"
-msgstr[1] "%1$s berichten verwijderd"
+msgstr[0] "%s berichten verwijderd"
+msgstr[1] "%s berichten verwijderd"
 
 #: common/forum/ForumAdmin.class.php:261 www/reporting/timeadd.php:67
 msgid "Successfully Deleted"
@@ -2282,7 +2270,7 @@ msgstr "Ongeldige gebruiker"
 #: common/tracker/ArtifactType.class.php:527
 #, fuzzy
 msgid "You can only monitor if you are logged in."
-msgstr "Je kunt alleen monitoren als je bent ingelogd"
+msgstr "Je kunt alleen monitoren als je bent ingelogd."
 
 #: common/forum/Forum.class.php:507
 msgid "You can only save your place if you are logged in."
@@ -2637,9 +2625,8 @@ msgid "Error Adding Release: "
 msgstr "Fout bij toevoegen database"
 
 #: common/frs/FRSFile.class.php:232
-#, fuzzy
 msgid "Invalid file_id"
-msgstr "Ongeldige volledige naam"
+msgstr "Ongeldige file_id"
 
 #: common/frs/FRSFile.class.php:416 common/frs/FRSPackage.class.php:396
 #: common/frs/FRSRelease.class.php:438 common/include/Error.class.php:167
@@ -2676,9 +2663,8 @@ msgid "Error Adding Package: "
 msgstr "Fout bij toevoegen database"
 
 #: common/frs/FRSPackage.class.php:205
-#, fuzzy
 msgid "Invalid package_id"
-msgstr "Ongeldige parameter"
+msgstr "Ongeldige package_id"
 
 #: common/frs/FRSPackage.class.php:291
 #, fuzzy
@@ -3011,9 +2997,8 @@ msgstr "Ongeldige Unix naam."
 
 #: common/include/Group.class.php:317 common/include/Group.class.php:321
 #: common/include/User.class.php:346
-#, fuzzy
 msgid "Unix name already taken."
-msgstr "Unixnaam is al in gebruik"
+msgstr "Unixnaam is al in gebruik."
 
 #: common/include/Group.class.php:324
 #, fuzzy
@@ -3506,7 +3491,7 @@ msgstr "Je kunt dit verzoek afhandelen op de: %s"
 #: common/include/GroupJoinRequest.class.php:240
 #, fuzzy
 msgid "Comments by the user:"
-msgstr "Per gebruiker"
+msgstr "Commentaar"
 
 #: common/include/GroupJoinRequest.class.php:259
 #: common/include/GroupJoinRequest.class.php:273
@@ -3716,7 +3701,7 @@ msgstr "Projectbeheer"
 #: www/activity/index.php:179 www/activity/index.php:265
 #: www/export/rss_project.php:98
 msgid "Activity"
-msgstr ""
+msgstr "Activiteit"
 
 #: common/include/Navigation.class.php:415
 msgid "Last activities per category."
@@ -4351,10 +4336,6 @@ msgstr ""
 "ingevoerd als een enkele regel.)\n"
 "\n"
 "http://%2$s/account/verify.php?confirm_hash=_%3$s\n"
-"\n"
-"Veel plezier.\n"
-"\n"
-"-- de %4$s beheerders\n"
 
 #: common/include/User.class.php:493
 msgid "Enjoy the site."
@@ -5474,7 +5455,6 @@ msgid "Last 7 days"
 msgstr "Laatste 7 dagen"
 
 #: common/tracker/actions/browse.php:231 common/tracker/actions/query.php:233
-#, fuzzy
 msgid "Last 2 weeks"
 msgstr "Laatste 2 weken"
 
@@ -6430,7 +6410,7 @@ msgstr "Creëer taakrelatie"
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:43
 #, fuzzy, php-format
 msgid "Trackers for %s"
-msgstr "Forums voor %1$s"
+msgstr "Trackers voor %s"
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:47
 #: common/tracker/include/ArtifactTypeHtml.class.php:51
@@ -7060,10 +7040,13 @@ msgid "Delete a custom field for %s"
 msgstr "Type extra veld"
 
 #: common/tracker/views/form-deleteextrafield.php:39
+#, fuzzy
 msgid ""
 "You are about to permanently and irretrievably delete this custom field and "
 "all its contents!"
 msgstr ""
+"Je staat op het punt om deze tracker and alle bijbehorende onderdelen "
+"onherroepelijk te verwijderen!"
 
 #: common/tracker/views/form-deleteextrafield.php:48
 #: common/tracker/views/form-deletetracker.php:42
@@ -7734,9 +7717,8 @@ msgid "2 weeks ago"
 msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:167
-#, fuzzy
 msgid "Last Week"
-msgstr "Laatste 2 weken"
+msgstr "Laatste week"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:167
 #, fuzzy
@@ -7773,9 +7755,8 @@ msgid "No tag defined for this project"
 msgstr "Een dergelijke vacature komt in dit project niet voor"
 
 #: common/widget/Widget_ProjectInfo.class.php:65
-#, fuzzy
 msgid "Registered: "
-msgstr "Geregistreerd"
+msgstr "Geregistreerd: "
 
 #: common/widget/Widget_ProjectInfo.class.php:83
 #: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:321
@@ -7975,9 +7956,8 @@ msgstr[0] "<strong>%1$s</strong> projecten in resultaatset."
 msgstr[1] "<strong>%1$s</strong> projecten in resultaatset."
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:154
-#, fuzzy
 msgid "There are no subprojects available"
-msgstr "Er zijn geen openbare subprojecten beschikbaar"
+msgstr "Er zijn geen subprojecten beschikbaar"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:173
 msgid "surveys"
@@ -8362,8 +8342,8 @@ msgstr "Die Trove categorie bestaat niet"
 #: plugins/authldap/www/post-login.php:109
 msgid "Your account is currently pending your email confirmation."
 msgstr ""
-"Ter verificatie van het e-mail adres wordt er nu een bevestiging per e-"
-"mail opgestuurd."
+"Ter verificatie van het e-mail adres wordt er nu een bevestiging per e-mail "
+"opgestuurd."
 
 #: plugins/authbuiltin/www/post-login.php:111
 #: plugins/authldap/www/post-login.php:111

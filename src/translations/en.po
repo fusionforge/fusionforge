@@ -3781,7 +3781,6 @@ msgstr ""
 msgid "Cannot create a role with this name (already used)"
 msgstr ""
 
-# : common/include/Role.class.php : 193
 #: common/include/Role.class.php:171
 msgid "Cannot create a role with an empty name"
 msgstr ""
@@ -6636,7 +6635,6 @@ msgstr ""
 msgid "Preferences"
 msgstr ""
 
-# : common/widget/Widget.class.php:335
 #: common/widget/Widget.class.php:366
 msgid "General"
 msgstr ""
@@ -13725,7 +13723,6 @@ msgstr ""
 msgid "You can't register an account unless you accept the terms of use."
 msgstr ""
 
-# :www/account/register.php:92
 #: www/account/register.php:98
 msgid "Register Confirmation"
 msgstr ""
@@ -13848,7 +13845,6 @@ msgstr ""
 msgid "Error while activiting account"
 msgstr ""
 
-# :www/account/verify.php:71
 #: www/account/verify.php:66
 msgid "Verify"
 msgstr ""
@@ -15547,7 +15543,6 @@ msgstr ""
 msgid "Thread successfully moved from %1$s forum to %2$s forum"
 msgstr ""
 
-# : www/forum/admin/index.php : 370
 #: www/forum/admin/index.php:350
 msgid "Return to the thread"
 msgstr ""
@@ -19196,7 +19191,6 @@ msgstr ""
 msgid "Error Getting GroupJoinRequest"
 msgstr ""
 
-# : www/project/admin/users.php : 201
 #: www/project/admin/users.php:178
 msgid "Rejected"
 msgstr ""

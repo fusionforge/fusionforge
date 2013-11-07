@@ -2497,9 +2497,8 @@ msgid "Invalid group_form_id"
 msgstr "group_form_id invalide"
 
 #: common/frs/FRSFile.class.php:82 common/frs/FRSFile.class.php:398
-#, fuzzy
 msgid "Invalid FRS Release Object"
-msgstr "Pas d'objet Survey valide"
+msgstr "Objet FRS Release invalide"
 
 #: common/frs/FRSFile.class.php:121 common/frs/include/frs_utils.php:246
 #: common/include/account.php:66
@@ -2526,7 +2525,6 @@ msgid "File cannot be moved to the permanent location"
 msgstr "Le fichier ne peut pas être déplacé vers sa destination"
 
 #: common/frs/FRSFile.class.php:206 common/frs/FRSRelease.class.php:158
-#, fuzzy
 msgid "Error Adding Release: "
 msgstr "Erreur lors de l'ajout d'une version : "
 
@@ -3926,20 +3924,17 @@ msgstr "Valeur par défaut pour les nouveaux forums"
 msgid "Documentation manager"
 msgstr "Gestionnaire de documentation"
 
-# : common/include/Role.class.php : 193
 #: common/include/Role.class.php:82
 #, fuzzy
 msgid "Cannot set a role name to empty"
 msgstr "Impossible de créer un rôle avec un nom vide"
 
-# : common/include/Role.class.php : 193
 #: common/include/Role.class.php:91 common/include/Role.class.php:99
 #: common/include/Role.class.php:180 common/include/Role.class.php:188
 #, fuzzy
 msgid "Cannot create a role with this name (already used)"
 msgstr "Impossible de créer un rôle avec un nom vide"
 
-# : common/include/Role.class.php : 193
 #: common/include/Role.class.php:171
 msgid "Cannot create a role with an empty name"
 msgstr "Impossible de créer un rôle avec un nom vide"
@@ -20362,7 +20357,6 @@ msgstr "Mise à jour du membre réussie"
 msgid "Error Getting GroupJoinRequest"
 msgstr "Erreur lors de la récupération d'un objet GroupJoinRequest."
 
-# : www/project/admin/users.php : 201
 #: www/project/admin/users.php:178
 msgid "Rejected"
 msgstr "Rejeté"
@@ -27304,11 +27298,9 @@ msgstr "Page personnelle de %s"
 #~ msgid "OR Attach A Comment"
 #~ msgstr "Ou rédiger un commentaire"
 
-# :common/include/Plugin.class.php:226
 #~ msgid "Use Plugin"
 #~ msgstr "Utiliser le plugin "
 
-# : common/forum/AttachManager.class.php : 92
 #~ msgid "Proceed with deletion?"
 #~ msgstr "Procéder à la suppression?"
 
