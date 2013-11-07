@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-07 15:10+0100\n"
+"POT-Creation-Date: 2013-11-07 15:16+0100\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4038,7 +4038,7 @@ msgstr "Aproveite o site."
 
 #: common/include/User.class.php:495 common/mail/MailingList.class.php:205
 #: plugins/authbuiltin/www/post-login.php:122
-#: plugins/authldap/www/post-login.php:115
+#: plugins/authldap/www/post-login.php:117
 #: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
 #: www/account/first.php:36 www/account/lostpw.php:67
 #: www/survey/privacy.php:58 www/survey/survey_resp.php:60
@@ -7783,16 +7783,20 @@ msgid "Your account does not exist."
 msgstr ""
 
 #: plugins/authbuiltin/www/post-login.php:110
+#: plugins/authldap/www/post-login.php:109
 msgid "Your account is currently pending your email confirmation."
 msgstr ""
+"Será enviado a você um e-mail de confirmação para verificar seu endereço "
+"de e-mail."
 
 #: plugins/authbuiltin/www/post-login.php:111
+#: plugins/authldap/www/post-login.php:111
 msgid "Visiting the link sent to you in this email will activate your account."
 msgstr ""
 "Ao visitar o link enviado para você nesse e-mail você irá ativar a sua conta."
 
 #: plugins/authbuiltin/www/post-login.php:112
-#: plugins/authldap/www/post-login.php:110
+#: plugins/authldap/www/post-login.php:112
 msgid ""
 "If you need this email resent, please click below and a confirmation email "
 "will be sent to the email address you provided in registration."
@@ -7825,7 +7829,7 @@ msgid ""
 msgstr ""
 
 #: plugins/authbuiltin/www/post-login.php:120
-#: plugins/authldap/www/post-login.php:114
+#: plugins/authldap/www/post-login.php:116
 msgid "Thank you"
 msgstr ""
 
@@ -7849,21 +7853,12 @@ msgstr ""
 msgid "LDAP server unreachable"
 msgstr ""
 
-#: plugins/authldap/www/post-login.php:109
-msgid ""
-"Your account is currently pending your email confirmation. Visiting the link "
-"sent to you in this email will activate your account."
-msgstr ""
-"Será enviado a você um e-mail de confirmação para verificar seu endereço de "
-"e-mail. Ao visitar o link enviado para você nesse e-mail você irá ativar a "
-"sua conta."
-
-#: plugins/authldap/www/post-login.php:111
+#: plugins/authldap/www/post-login.php:113
 #, fuzzy, php-format
 msgid "<a href=\"%1$s\">[Resend Confirmation Email]</a>"
 msgstr "Re-enviar E-mail de Instrução de Novo Projeto"
 
-#: plugins/authldap/www/post-login.php:113
+#: plugins/authldap/www/post-login.php:115
 #, php-format
 msgid ""
 "Your %1$s account has been removed by %1$s staff. This may occur for two "
@@ -21705,15 +21700,6 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Minha Página Pessoal"
-
-#~ msgid "Password:"
-#~ msgstr "Senha:"
-
-#~ msgid "Read&nbsp;More/Comment"
-#~ msgstr "Ler&nbsp;Mais/Comentar"
-
-#~ msgid "Version:"
-#~ msgstr "Versão:"
 
 #~ msgid "Forums: Administration"
 #~ msgstr "Fóruns: Administração"

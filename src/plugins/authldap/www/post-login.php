@@ -106,7 +106,9 @@ if ($login) {
 			}
 		}
 	} elseif ($userstatus == "P") {
-		$warning_msg .= '<br /><p>'._('Your account is currently pending your email confirmation. Visiting the link sent to you in this email will activate your account.').'</p>';
+		$warning_msg .= '<br /><p>'._('Your account is currently pending your email confirmation.');
+		$warning_msg .= ' ';
+		$warning_msg .= _('Visiting the link sent to you in this email will activate your account.').'</p>';
 		$warning_msg .= '<p>'._('If you need this email resent, please click below and a confirmation email will be sent to the email address you provided in registration.').'</p>';
 		$warning_msg .= '<p>'. sprintf(_('<a href="%1$s">[Resend Confirmation Email]</a>'), util_make_url("/account/pending-resend.php?form_user=".htmlspecialchars($form_loginname))).'</p>';
 	} elseif ($userstatus == "D") {

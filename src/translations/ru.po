@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-07 15:10+0100\n"
+"POT-Creation-Date: 2013-11-07 15:16+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4359,7 +4359,7 @@ msgstr "Желаем Вам успехов в работе."
 
 #: common/include/User.class.php:495 common/mail/MailingList.class.php:205
 #: plugins/authbuiltin/www/post-login.php:122
-#: plugins/authldap/www/post-login.php:115
+#: plugins/authldap/www/post-login.php:117
 #: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
 #: www/account/first.php:36 www/account/lostpw.php:67
 #: www/survey/privacy.php:58 www/survey/survey_resp.php:60
@@ -8388,17 +8388,19 @@ msgid "Your account does not exist."
 msgstr "Запрос не существует"
 
 #: plugins/authbuiltin/www/post-login.php:110
+#: plugins/authldap/www/post-login.php:109
 msgid "Your account is currently pending your email confirmation."
 msgstr ""
 "На данном этапе вам выслано письмо на ваш е-майл для подтверждения "
 "работоспособности вашего почтового ящика."
 
 #: plugins/authbuiltin/www/post-login.php:111
+#: plugins/authldap/www/post-login.php:111
 msgid "Visiting the link sent to you in this email will activate your account."
 msgstr "Для активации учётной записи посетите ссылку, присланную в письме."
 
 #: plugins/authbuiltin/www/post-login.php:112
-#: plugins/authldap/www/post-login.php:110
+#: plugins/authldap/www/post-login.php:112
 msgid ""
 "If you need this email resent, please click below and a confirmation email "
 "will be sent to the email address you provided in registration."
@@ -8445,7 +8447,7 @@ msgstr ""
 "обсудить действия администрации сайта</a>."
 
 #: plugins/authbuiltin/www/post-login.php:120
-#: plugins/authldap/www/post-login.php:114
+#: plugins/authldap/www/post-login.php:116
 msgid "Thank you"
 msgstr ""
 
@@ -8472,21 +8474,12 @@ msgstr "Регистрационное имя:"
 msgid "LDAP server unreachable"
 msgstr ""
 
-#: plugins/authldap/www/post-login.php:109
-msgid ""
-"Your account is currently pending your email confirmation. Visiting the link "
-"sent to you in this email will activate your account."
-msgstr ""
-"Сейчас Вам будет выслано подтверждающее письмо для проверки адреса "
-"электронной почты. Для активации учётной записи посетите ссылку, присланную "
-"в письме."
-
-#: plugins/authldap/www/post-login.php:111
+#: plugins/authldap/www/post-login.php:113
 #, fuzzy, php-format
 msgid "<a href=\"%1$s\">[Resend Confirmation Email]</a>"
 msgstr "Отправить повторное письмо на вышеуказанный мной адрес"
 
-#: plugins/authldap/www/post-login.php:113
+#: plugins/authldap/www/post-login.php:115
 #, fuzzy, php-format
 msgid ""
 "Your %1$s account has been removed by %1$s staff. This may occur for two "
@@ -23694,6 +23687,14 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#~ msgid ""
+#~ "Your account is currently pending your email confirmation. Visiting the "
+#~ "link sent to you in this email will activate your account."
+#~ msgstr ""
+#~ "Сейчас Вам будет выслано подтверждающее письмо для проверки адреса "
+#~ "электронной почты. Для активации учётной записи посетите ссылку, "
+#~ "присланную в письме."
 
 #~ msgid "Password:"
 #~ msgstr "Пароль:"

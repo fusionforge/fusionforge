@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-07 15:10+0100\n"
+"POT-Creation-Date: 2013-11-07 15:16+0100\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4378,7 +4378,7 @@ msgstr "Elimina questo filtro"
 
 #: common/include/User.class.php:495 common/mail/MailingList.class.php:205
 #: plugins/authbuiltin/www/post-login.php:122
-#: plugins/authldap/www/post-login.php:115
+#: plugins/authldap/www/post-login.php:117
 #: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
 #: www/account/first.php:36 www/account/lostpw.php:67
 #: www/survey/privacy.php:58 www/survey/survey_resp.php:60
@@ -8362,9 +8362,8 @@ msgstr "[Hai dimenticato la password?]"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:87
 #: www/account/pending-resend.php:53 www/account/register.php:275
-#, fuzzy
 msgid "Resend confirmation email to a pending account"
-msgstr "[Rispedisci l'email di conferma di un nuovo account]"
+msgstr "Rispedisci l'email di conferma di un nuovo account"
 
 #: plugins/authbuiltin/www/post-login.php:106
 #: plugins/authldap/www/post-login.php:105
@@ -8373,17 +8372,21 @@ msgid "Your account does not exist."
 msgstr "La query non esiste"
 
 #: plugins/authbuiltin/www/post-login.php:110
+#: plugins/authldap/www/post-login.php:109
 msgid "Your account is currently pending your email confirmation."
 msgstr ""
+"Ti verrà inviata una email di conferma per verificare il tuo indirizzo "
+"email."
 
 #: plugins/authbuiltin/www/post-login.php:111
+#: plugins/authldap/www/post-login.php:111
 msgid "Visiting the link sent to you in this email will activate your account."
 msgstr ""
 "Ti verrà inviata una email di conferma per verificare il tuo indirizzo "
 "email. Visita il link indicato nella email per attivare il tuo account."
 
 #: plugins/authbuiltin/www/post-login.php:112
-#: plugins/authldap/www/post-login.php:110
+#: plugins/authldap/www/post-login.php:112
 msgid ""
 "If you need this email resent, please click below and a confirmation email "
 "will be sent to the email address you provided in registration."
@@ -8415,7 +8418,7 @@ msgid ""
 msgstr ""
 
 #: plugins/authbuiltin/www/post-login.php:120
-#: plugins/authldap/www/post-login.php:114
+#: plugins/authldap/www/post-login.php:116
 msgid "Thank you"
 msgstr "Grazie"
 
@@ -8441,20 +8444,12 @@ msgstr "Nome login:"
 msgid "LDAP server unreachable"
 msgstr ""
 
-#: plugins/authldap/www/post-login.php:109
-msgid ""
-"Your account is currently pending your email confirmation. Visiting the link "
-"sent to you in this email will activate your account."
-msgstr ""
-"Ti verrà inviata una email di conferma per verificare il tuo indirizzo "
-"email. Visita il link indicato nella email per attivare il tuo account."
-
-#: plugins/authldap/www/post-login.php:111
+#: plugins/authldap/www/post-login.php:113
 #, php-format
 msgid "<a href=\"%1$s\">[Resend Confirmation Email]</a>"
 msgstr ""
 
-#: plugins/authldap/www/post-login.php:113
+#: plugins/authldap/www/post-login.php:115
 #, php-format
 msgid ""
 "Your %1$s account has been removed by %1$s staff. This may occur for two "
@@ -23311,15 +23306,6 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
-
-#~ msgid "Password:"
-#~ msgstr "Password:"
-
-#~ msgid "Read&nbsp;More/Comment"
-#~ msgstr "Leggi&nbsp;altro/Replica"
-
-#~ msgid "Version:"
-#~ msgstr "Versione"
 
 #~ msgid "Theme:"
 #~ msgstr "Tema:"
