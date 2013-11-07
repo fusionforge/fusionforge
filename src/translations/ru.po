@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-06 18:38+0100\n"
+"POT-Creation-Date: 2013-11-07 12:51+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1355,11 +1355,7 @@ msgstr ""
 #: common/tracker/actions/mod-limited.php:98
 #: common/tracker/actions/mod-limited.php:103
 #: common/tracker/actions/mod.php:99 common/tracker/actions/mod.php:104
-#: common/tracker/Artifact.class.php:1572
-#: common/tracker/Artifact.class.php:1574
-#: common/tracker/Artifact.class.php:1581
-#: common/tracker/Artifact.class.php:1587
-#: common/tracker/Artifact.class.php:1686
+#: common/tracker/Artifact.class.php:1682
 #: common/tracker/include/ArtifactHtml.class.php:111
 #: common/tracker/include/ArtifactHtml.class.php:169
 #: common/tracker/include/ArtifactHtml.class.php:178
@@ -2046,7 +2042,7 @@ msgstr "Удалить"
 #: plugins/mantisbt/view/admin/addCategory.php:34
 #: plugins/mantisbt/view/admin/addVersion.php:47
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:64
-#: www/account/editsshkeys.php:85 www/admin/admin_table.php:54
+#: www/account/editsshkeys.php:84 www/admin/admin_table.php:54
 #: www/admin/database.php:165 www/admin/trove/trove_cat_add.php:116
 #: www/admin/trove/trove_cat_list.php:50 www/admin/trove/trove_cat_list.php:53
 #: www/pm/mod_task.php:289 www/reporting/timeadd.php:183
@@ -4362,6 +4358,7 @@ msgstr "Желаем Вам успехов в работе."
 
 #: common/include/User.class.php:495 common/mail/MailingList.class.php:205
 #: plugins/authbuiltin/www/post-login.php:122
+#: plugins/authldap/www/post-login.php:115
 #: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
 #: www/account/first.php:36 www/account/lostpw.php:67
 #: www/survey/privacy.php:58 www/survey/survey_resp.php:60
@@ -8399,6 +8396,7 @@ msgid "Visiting the link sent to you in this email will activate your account."
 msgstr "Для активации учётной записи посетите ссылку, присланную в письме."
 
 #: plugins/authbuiltin/www/post-login.php:112
+#: plugins/authldap/www/post-login.php:110
 msgid ""
 "If you need this email resent, please click below and a confirmation email "
 "will be sent to the email address you provided in registration."
@@ -8445,6 +8443,7 @@ msgstr ""
 "обсудить действия администрации сайта</a>."
 
 #: plugins/authbuiltin/www/post-login.php:120
+#: plugins/authldap/www/post-login.php:114
 msgid "Thank you"
 msgstr ""
 
@@ -8476,33 +8475,29 @@ msgid "LDAP server unreachable"
 msgstr ""
 
 #: plugins/authldap/www/post-login.php:109
-#, fuzzy, php-format
 msgid ""
-"<p>Your account is currently pending your email confirmation. Visiting the "
-"link sent to you in this email will activate your account.<p>If you need "
-"this email resent, please click below and a confirmation email will be sent "
-"to the email address you provided in registration.<p><a href=\"%1$s\">"
-"[Resend Confirmation Email]</a><br><hr><p>"
+"Your account is currently pending your email confirmation. Visiting the link "
+"sent to you in this email will activate your account."
 msgstr ""
-"<p>На данном этапе вам выслано письмо на ваш е-майл для подтверждения "
-"работоспособности вашего почтового ящика. Получив в теле письма ссылку, "
-"проследуйте по ней, это необходимо для завершния процесса регистрации."
-"<p>Если на указанный вами е-майл, письмо по какой-либо причине не пришло в "
-"течении получаса, возможно вам придется повторить процедуру указания "
-"правильного е-майл адреса.<p><a href=\"pending-resend.php?form_user=%1$s"
-"\"><strong>[Отправить повторное письмо на вышеуказанный мной адрес]</"
-"strong></a><br><hr><p>"
+"Сейчас Вам будет выслано подтверждающее письмо для проверки адреса "
+"электронной почты. Для активации учётной записи посетите ссылку, присланную "
+"в письме."
 
-#: plugins/authldap/www/post-login.php:112
+#: plugins/authldap/www/post-login.php:111
+#, fuzzy, php-format
+msgid "<a href=\"%1$s\">[Resend Confirmation Email]</a>"
+msgstr "Отправить повторное письмо на вышеуказанный мной адрес"
+
+#: plugins/authldap/www/post-login.php:113
 #, fuzzy, php-format
 msgid ""
-"<p>Your %1$s account has been removed by %1$s staff. This may occur for two "
+"Your %1$s account has been removed by %1$s staff. This may occur for two "
 "reasons, either 1) you requested that your account be removed; or 2) some "
 "action has been performed using your account which has been seen as "
 "objectionable (i.e. you have breached the terms of service for use of your "
 "account) and your account has been revoked for administrative reasons. "
 "Should you have questions or concerns regarding this matter, please log a <a "
-"href=\"%2$s\">support request</a>.</p><p>Thank you, <br><br>%1$s Staff</p>"
+"href=\"%2$s\">support request</a>."
 msgstr ""
 "<p>Регистрационные данные участника %1$s были блокированы администрацией "
 "сайта %1$s . <p> Это могло произойти по двум причинам. <u>Первая:</u> Вы "
@@ -14872,7 +14867,7 @@ msgstr "Новый пароль (не менее 6 символов)"
 msgid "New Password (repeat)"
 msgstr "Новый пароль (повторить)"
 
-#: www/account/change_pw.php:110 www/admin/passedit.php:95
+#: www/account/change_pw.php:111 www/admin/passedit.php:95
 msgid "Update password"
 msgstr "Обновление пароля"
 
@@ -14963,7 +14958,7 @@ msgstr ""
 "переноса строки внутри авторизационного ключа. За исключением переноса "
 "строки между ключами, проверьте еще раз количество ключей в Вашем файле.</em>"
 
-#: www/account/editsshkeys.php:82
+#: www/account/editsshkeys.php:81
 msgid ""
 "Or upload your '~/.ssh/identity.pub' (protocol version 1) or '~/.ssh/id_dsa."
 "pub' or '~/.ssh/id_rsa.pub' (protocol version 2)"
@@ -23704,6 +23699,23 @@ msgstr "Персональная страница для %s"
 
 #, fuzzy
 #~ msgid ""
+#~ "<p>Your account is currently pending your email confirmation. Visiting "
+#~ "the link sent to you in this email will activate your account.<p>If you "
+#~ "need this email resent, please click below and a confirmation email will "
+#~ "be sent to the email address you provided in registration.<p><a href="
+#~ "\"%1$s\">[Resend Confirmation Email]</a><br><hr><p>"
+#~ msgstr ""
+#~ "<p>На данном этапе вам выслано письмо на ваш е-майл для подтверждения "
+#~ "работоспособности вашего почтового ящика. Получив в теле письма ссылку, "
+#~ "проследуйте по ней, это необходимо для завершния процесса регистрации."
+#~ "<p>Если на указанный вами е-майл, письмо по какой-либо причине не пришло "
+#~ "в течении получаса, возможно вам придется повторить процедуру указания "
+#~ "правильного е-майл адреса.<p><a href=\"pending-resend.php?form_user=%1$s"
+#~ "\"><strong>[Отправить повторное письмо на вышеуказанный мной адрес]</"
+#~ "strong></a><br><hr><p>"
+
+#, fuzzy
+#~ msgid ""
 #~ "You can post news about your project if you are an admin on your project. "
 #~ "You may also post \"help wanted\" notes if your project needs help.</"
 #~ "p><p>All posts <b>for your project</b> will appear instantly on your "
@@ -25536,14 +25548,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "Login with SSL"
 #~ msgstr "Авторизация с SSL"
-
-#~ msgid ""
-#~ "You are now being sent a confirmation email to verify your email address. "
-#~ "Visiting the link sent to you in this email will activate your account."
-#~ msgstr ""
-#~ "Сейчас Вам будет выслано подтверждающее письмо для проверки адреса "
-#~ "электронной почты. Для активации учётной записи посетите ссылку, "
-#~ "присланную в письме."
 
 #~ msgid "Approving Project"
 #~ msgstr "Утверждаемая группа"

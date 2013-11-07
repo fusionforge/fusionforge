@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-06 18:38+0100\n"
+"POT-Creation-Date: 2013-11-07 12:51+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -1346,11 +1346,7 @@ msgstr ""
 #: common/tracker/actions/mod-limited.php:98
 #: common/tracker/actions/mod-limited.php:103
 #: common/tracker/actions/mod.php:99 common/tracker/actions/mod.php:104
-#: common/tracker/Artifact.class.php:1572
-#: common/tracker/Artifact.class.php:1574
-#: common/tracker/Artifact.class.php:1581
-#: common/tracker/Artifact.class.php:1587
-#: common/tracker/Artifact.class.php:1686
+#: common/tracker/Artifact.class.php:1682
 #: common/tracker/include/ArtifactHtml.class.php:111
 #: common/tracker/include/ArtifactHtml.class.php:169
 #: common/tracker/include/ArtifactHtml.class.php:178
@@ -2030,7 +2026,7 @@ msgstr "Löschen"
 #: plugins/mantisbt/view/admin/addCategory.php:34
 #: plugins/mantisbt/view/admin/addVersion.php:47
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:64
-#: www/account/editsshkeys.php:85 www/admin/admin_table.php:54
+#: www/account/editsshkeys.php:84 www/admin/admin_table.php:54
 #: www/admin/database.php:165 www/admin/trove/trove_cat_add.php:116
 #: www/admin/trove/trove_cat_list.php:50 www/admin/trove/trove_cat_list.php:53
 #: www/pm/mod_task.php:289 www/reporting/timeadd.php:183
@@ -4359,6 +4355,7 @@ msgstr "Viel Spaß mit der Seite."
 
 #: common/include/User.class.php:495 common/mail/MailingList.class.php:205
 #: plugins/authbuiltin/www/post-login.php:122
+#: plugins/authldap/www/post-login.php:115
 #: plugins/mailman/www/mailman_utils.php:35 www/account/change_email.php:63
 #: www/account/first.php:36 www/account/lostpw.php:67
 #: www/survey/privacy.php:58 www/survey/survey_resp.php:60
@@ -8389,6 +8386,7 @@ msgstr ""
 "aktivieren."
 
 #: plugins/authbuiltin/www/post-login.php:112
+#: plugins/authldap/www/post-login.php:110
 msgid ""
 "If you need this email resent, please click below and a confirmation email "
 "will be sent to the email address you provided in registration."
@@ -8398,9 +8396,8 @@ msgstr ""
 "Ihrer Registrierung angegeben haben."
 
 #: plugins/authbuiltin/www/post-login.php:115
-#, fuzzy
 msgid "Resend Confirmation Email"
-msgstr "Weitere Informationen"
+msgstr "Bestätigungsmail erneut senden"
 
 #: plugins/authbuiltin/www/post-login.php:117
 #, php-format
@@ -8431,6 +8428,7 @@ msgstr ""
 "eine <a href=\"%s\"> Supportanfrage</a>."
 
 #: plugins/authbuiltin/www/post-login.php:120
+#: plugins/authldap/www/post-login.php:114
 msgid "Thank you"
 msgstr "Danke"
 
@@ -8461,45 +8459,42 @@ msgid "LDAP server unreachable"
 msgstr ""
 
 #: plugins/authldap/www/post-login.php:109
-#, php-format
 msgid ""
-"<p>Your account is currently pending your email confirmation. Visiting the "
-"link sent to you in this email will activate your account.<p>If you need "
-"this email resent, please click below and a confirmation email will be sent "
-"to the email address you provided in registration.<p><a href=\"%1$s\">"
-"[Resend Confirmation Email]</a><br><hr><p>"
+"Your account is currently pending your email confirmation. Visiting the link "
+"sent to you in this email will activate your account."
 msgstr ""
-"<p>Ihr Account erwartet momentan Ihre E-Mail-Bestätigung. Wenn Sie den Link "
-"besuchen, der Ihnen mit dieser Mail zugesandt wurde, aktivieren Sie damit "
-"Ihren Account.<p>Wenn Ihnen diese Mail erneut zugesandt werden soll klicken "
-"Sie bitte unten und eine Bestätigungsmail wird an die Mailadresse "
-"verschickt, die Sie in Ihrer Registrierung angegeben haben.<p><a href=\"%1$s"
-"\">[Bestätigungsmail erneut senden]</a><br><hr><p>"
+"Ihnen wurde eine Bestätigungs-EMail zugesandt, um Ihre EMail-Adresse zu "
+"überprüfen. Das Besuchen des Links, der in dieser Email steht, wird Ihren "
+"Account aktivieren."
 
-#: plugins/authldap/www/post-login.php:112
+#: plugins/authldap/www/post-login.php:111
+#, php-format
+msgid "<a href=\"%1$s\">[Resend Confirmation Email]</a>"
+msgstr ""
+
+#: plugins/authldap/www/post-login.php:113
 #, php-format
 msgid ""
-"<p>Your %1$s account has been removed by %1$s staff. This may occur for two "
+"Your %1$s account has been removed by %1$s staff. This may occur for two "
 "reasons, either 1) you requested that your account be removed; or 2) some "
 "action has been performed using your account which has been seen as "
 "objectionable (i.e. you have breached the terms of service for use of your "
 "account) and your account has been revoked for administrative reasons. "
 "Should you have questions or concerns regarding this matter, please log a <a "
-"href=\"%2$s\">support request</a>.</p><p>Thank you, <br><br>%1$s Staff</p>"
+"href=\"%2$s\">support request</a>."
 msgstr ""
-"<p>Ihr %1$s Account wurde von unserem %1$s Team entfernt. Dies kann aus zwei "
+"Ihr %1$s Account wurde von unserem %1$s Team entfernt. Dies kann aus zwei "
 "Gründen geschehen sein, entweder 1) haben Sie darum gebeten, daß Ihr Account "
 "entfernt werden soll, oder 2) es wurde eine Aktion von Ihrem Account aus "
 "ausgeführt, die als unerwünscht eingestuft wurde (z.B. Sie haben die "
 "Servicebedingungen für die Nutzung Ihres Accounts gebrochen) und Ihr Account "
 "wurde daher aus administrativen Gründen entfernt. Sollten Sie Fragen "
 "bezüglich dieser Angelegenheit haben, stellen Sie bitte eine <a href=\"%2$s"
-"\"> Supportanfrage</a>.</p><p>Vielen Dank, <br><br>Das %1$s Team</p>"
+"\"> Supportanfrage</a>."
 
 #: plugins/authopenid/include/AuthOpenIDPlugin.class.php:85
-#, fuzzy
 msgid "Login via OpenID"
-msgstr "Anmelde-Name"
+msgstr ""
 
 #: plugins/authopenid/include/AuthOpenIDPlugin.class.php:178
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:395
@@ -14684,7 +14679,7 @@ msgstr "Neues Passwort (mind. 6 Buchstaben)"
 msgid "New Password (repeat)"
 msgstr "Neues Passwort (Wiederholung)"
 
-#: www/account/change_pw.php:110 www/admin/passedit.php:95
+#: www/account/change_pw.php:111 www/admin/passedit.php:95
 msgid "Update password"
 msgstr "Aktualisiere Passwort"
 
@@ -14772,7 +14767,7 @@ msgstr ""
 "Zeilenumbrüche, außer zwischen Schlüsseln, gibt. Nach Bestätigung überprüfen "
 "Sie, dass die Anzahl der Schlüssel in Ihrer Datei wie erwartet ist.</em>"
 
-#: www/account/editsshkeys.php:82
+#: www/account/editsshkeys.php:81
 msgid ""
 "Or upload your '~/.ssh/identity.pub' (protocol version 1) or '~/.ssh/id_dsa."
 "pub' or '~/.ssh/id_rsa.pub' (protocol version 2)"
@@ -19106,7 +19101,8 @@ msgstr "Diese Nachrichten Elemente wurden zu diesem Projekt freigegeben"
 msgid ""
 "You can post news about your project if you are an admin on your project. "
 "You may also post “help wanted” notes if your project needs help."
-msgstr "Sie können Neuigkeiten über Ihr Projekt veröffentlichen, wenn Sie Admin "
+msgstr ""
+"Sie können Neuigkeiten über Ihr Projekt veröffentlichen, wenn Sie Admin "
 "dieses Projektes sind. Sie können zudem »Hilfe gesucht« Notizen "
 "veröffentlichen, falls Ihr Projekt Hilfe benötigt."
 
@@ -23633,22 +23629,6 @@ msgstr "Persönliche Seite für %s"
 #~ msgstr "Ja"
 
 #, fuzzy
-#~ msgid ""
-#~ "<p>Your account is currently pending your email confirmation.<br/"
-#~ ">Visiting the link sent to you in this email will activate your account."
-#~ "<br/>If you need this email resent, please click below and a confirmation "
-#~ "email will be sent to the email address you provided in registration.</"
-#~ "p><a href=\"%1$s\">[Resend Confirmation Email]</a><br><hr>"
-#~ msgstr ""
-#~ "<p>Ihr Account erwartet momentan Ihre E-Mail-Bestätigung.\t\tWenn Sie den "
-#~ "Link besuchen, der Ihnen mit dieser Mail zugesandt wurde, aktivieren Sie "
-#~ "damit Ihren Account.\t\t<p>Wenn Ihnen diese Mail erneut zugesandt werden "
-#~ "soll klicken Sie bitte unten und eine Bestätigungsmail\t\twird an die "
-#~ "Mailadresse verschickt, die Sie in Ihrer Registrierung angegeben haben.\t"
-#~ "\t<p><a href=\"%1$s\">[Bestätigungsmail erneut senden]</a>\t\t<br><hr>\t"
-#~ "\t<p>"
-
-#, fuzzy
 #~ msgid "File-Release"
 #~ msgstr "Datei freigegeben"
 
@@ -25674,14 +25654,6 @@ msgstr "Persönliche Seite für %s"
 
 #~ msgid "Congratulations. You have registered on %1$s."
 #~ msgstr "Gratulation. Sie haben sich auf %1$s registrieren lassen."
-
-#~ msgid ""
-#~ "You are now being sent a confirmation email to verify your email address. "
-#~ "Visiting the link sent to you in this email will activate your account."
-#~ msgstr ""
-#~ "Ihnen wurde eine Bestätigungs-EMail zugesandt, um Ihre EMail-Adresse zu "
-#~ "überprüfen. Das Besuchen des Links, der in dieser Email steht, wird Ihren "
-#~ "Account aktivieren."
 
 #~ msgid "Project Activity for %s"
 #~ msgstr "Projekt Aktivität für %s"
