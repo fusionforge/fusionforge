@@ -94,5 +94,5 @@ LayoutBuilderController.prototype =
 		this.params.buttonAddRow.each(jQuery.proxy(this.loadAddRow, this));
 		this.params.buttonAddColumn.each(jQuery.proxy(this.loadAddColumn, this));
 		this.params.buttonRemoveColumn.each(jQuery.proxy(this.loadRemoveColumn, this));
-	},
+	}
 };
