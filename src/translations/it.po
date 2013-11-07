@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-07 12:51+0100\n"
+"POT-Creation-Date: 2013-11-07 15:10+0100\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1661,6 +1661,7 @@ msgstr "Data inizio"
 #: common/tracker/views/form-updatetracker.php:78
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
+#: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:55
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:57
 #: plugins/contribtracker/www/global_admin.php:379
@@ -8344,6 +8345,7 @@ msgid "Login Name"
 msgstr "Nome login"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
+#: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: www/account/verify.php:86
 msgid "Password"
 msgstr "Password"
@@ -8434,10 +8436,6 @@ msgstr ""
 #, fuzzy
 msgid "LDAP Login name:"
 msgstr "Nome login:"
-
-#: plugins/authldap/include/AuthLDAPPlugin.class.php:209
-msgid "Password:"
-msgstr "Password:"
 
 #: plugins/authldap/www/post-login.php:91
 msgid "LDAP server unreachable"
@@ -23313,6 +23311,9 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
+
+#~ msgid "Password:"
+#~ msgstr "Password:"
 
 #~ msgid "Read&nbsp;More/Comment"
 #~ msgstr "Leggi&nbsp;altro/Replica"

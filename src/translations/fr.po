@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-07 12:51+0100\n"
+"POT-Creation-Date: 2013-11-07 15:10+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1568,6 +1568,7 @@ msgstr "Date de début"
 #: common/tracker/views/form-updatetracker.php:78
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
+#: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:55
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:57
 #: plugins/contribtracker/www/global_admin.php:379
@@ -8045,6 +8046,7 @@ msgid "Login Name"
 msgstr "Nom du compte"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
+#: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: www/account/verify.php:86
 msgid "Password"
 msgstr "Mot de passe"
@@ -8140,10 +8142,6 @@ msgstr "Connexion par l'authentification HTTP"
 msgid "LDAP Login name:"
 msgstr "Nom du compte LDAP :"
 
-#: plugins/authldap/include/AuthLDAPPlugin.class.php:209
-msgid "Password:"
-msgstr "Mot de passe :"
-
 #: plugins/authldap/www/post-login.php:91
 msgid "LDAP server unreachable"
 msgstr "Serveur LDAP inaccessible"
@@ -8172,13 +8170,13 @@ msgid ""
 "Should you have questions or concerns regarding this matter, please log a <a "
 "href=\"%2$s\">support request</a>."
 msgstr ""
-"Votre compte %1$s a été supprimé par les administrateurs de %1$s. Ceci "
-"peut être dû à deux raisons : soit vous avez demandé à ce qu'il soit "
-"supprimé, soit c'est un blocage administratif.  Ce dernier n'est "
-"généralement effectué qu'en réaction à une action litigieuse faite sous "
-"l'identité de votre compte, qui contrevient aux conditions d'utilisation.  "
-"Si vous avez des questions à ce propos, veuillez soumettre une <a href=\"%2$s"
-"\">requête de support</a>."
+"Votre compte %1$s a été supprimé par les administrateurs de %1$s. Ceci peut "
+"être dû à deux raisons : soit vous avez demandé à ce qu'il soit supprimé, "
+"soit c'est un blocage administratif.  Ce dernier n'est généralement effectué "
+"qu'en réaction à une action litigieuse faite sous l'identité de votre "
+"compte, qui contrevient aux conditions d'utilisation.  Si vous avez des "
+"questions à ce propos, veuillez soumettre une <a href=\"%2$s\">requête de "
+"support</a>."
 
 #: plugins/authopenid/include/AuthOpenIDPlugin.class.php:85
 msgid "Login via OpenID"
@@ -22763,6 +22761,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Password:"
+#~ msgstr "Mot de passe :"
 
 #~ msgid "Read&nbsp;More/Comment"
 #~ msgstr "Lire la suite/Commenter"

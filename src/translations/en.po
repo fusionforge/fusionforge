@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-07 12:51+0100\n"
+"POT-Creation-Date: 2013-11-07 15:10+0100\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1545,6 +1545,7 @@ msgstr ""
 #: common/tracker/views/form-updatetracker.php:78
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
+#: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:55
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:57
 #: plugins/contribtracker/www/global_admin.php:379
@@ -7661,6 +7662,7 @@ msgid "Login Name"
 msgstr ""
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
+#: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: www/account/verify.php:86
 msgid "Password"
 msgstr ""
@@ -7744,10 +7746,6 @@ msgstr ""
 
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:208
 msgid "LDAP Login name:"
-msgstr ""
-
-#: plugins/authldap/include/AuthLDAPPlugin.class.php:209
-msgid "Password:"
 msgstr ""
 
 #: plugins/authldap/www/post-login.php:91

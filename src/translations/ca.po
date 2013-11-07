@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-07 12:51+0100\n"
+"POT-Creation-Date: 2013-11-07 15:10+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1656,6 +1656,7 @@ msgstr "Data d'inici"
 #: common/tracker/views/form-updatetracker.php:78
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
+#: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:55
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:57
 #: plugins/contribtracker/www/global_admin.php:379
@@ -8332,6 +8333,7 @@ msgid "Login Name"
 msgstr "Nom d'inici de sessió"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
+#: plugins/authldap/include/AuthLDAPPlugin.class.php:209
 #: www/account/verify.php:86
 msgid "Password"
 msgstr "Contrasenya"
@@ -8423,10 +8425,6 @@ msgstr ""
 #, fuzzy
 msgid "LDAP Login name:"
 msgstr "Nom d'inici de sessió:"
-
-#: plugins/authldap/include/AuthLDAPPlugin.class.php:209
-msgid "Password:"
-msgstr "Contrasenya:"
 
 #: plugins/authldap/www/post-login.php:91
 msgid "LDAP server unreachable"
@@ -23346,6 +23344,9 @@ msgstr "Nom d'usuari"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
+
+#~ msgid "Password:"
+#~ msgstr "Contrasenya:"
 
 #~ msgid "Read&nbsp;More/Comment"
 #~ msgstr "Llegeix-ne&nbsp;més/Comenta"
