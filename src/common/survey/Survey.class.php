@@ -187,9 +187,9 @@ class Survey extends Error {
 	/**
 	 * updateOrder - use this function to update question order
 	 *
-	 * @param	int 	Question number
-	 * @param	boolean	decide up or down. it is up if it is true
-	 * @return	boolean	success.
+	 * @param	int 	$question_number	Question number
+	 * @param	bool	$is_up				decide up or down. it is up if it is true
+	 * @return	bool	success.
 	 */
 	function updateOrder($question_number, $is_up = true) {
 		$group_id = $this->Group->GetID();

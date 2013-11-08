@@ -184,8 +184,8 @@ class ProjectGroup extends Error {
 	/**
 	 * fetchData - re-fetch the data for this ProjectGroup from the database.
 	 *
-	 * @param	int	The project group ID.
-	 * @return	boolean	success.
+	 * @param	int	$group_project_id	The project group ID.
+	 * @return	bool	success.
 	 */
 	function fetchData($group_project_id) {
 		$res = db_query_params ('SELECT * FROM project_group_list_vw WHERE group_project_id=$1 AND group_id=$2',

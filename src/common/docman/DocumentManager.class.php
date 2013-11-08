@@ -144,9 +144,9 @@ class DocumentManager extends Error {
 	/**
 	 *  getTree - display recursively the content of the doc_group. Only doc_groups within doc_groups.
 	 *
-	 * @param	int	$selecteddir	the selected directory
-	 * @param	string	$linkmenu	the type of link in the menu
-	 * @param	int	$docGroupId	the doc_group to start: default 0
+	 * @param	int		$selecteddir	the selected directory
+	 * @param	string	$linkmenu		the type of link in the menu
+	 * @param	int		$docGroupId		the doc_group to start: default 0
 	 */
 	function getTree($selecteddir, $linkmenu, $docGroupId = 0) {
 		global $g; // the master group of all the groups .... anyway.
@@ -224,8 +224,8 @@ class DocumentManager extends Error {
 	/**
 	 * getStatusNameList - get all status for documents
 	 *
-	 * @param	string	format of the return values. json returns : { name: id, }. Default is DB object.
-	 * @param	string	skipped status id
+	 * @param	string	$format		format of the return values. json returns : { name: id, }. Default is DB object.
+	 * @param	string	$removedval	skipped status id
 	 * @return resource|string
 	 */
 	function getStatusNameList($format = '', $removedval = '') {

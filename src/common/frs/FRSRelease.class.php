@@ -176,8 +176,8 @@ class FRSRelease extends Error {
 	/**
 	 *  fetchData - re-fetch the data for this Release from the database.
 	 *
-	 *  @param  int  The release_id.
-	 *  @return	boolean	success.
+	 *  @param  int  $release_id	The release_id.
+	 *  @return	bool	success.
 	 */
 	function fetchData($release_id) {
 		$res = db_query_params ('SELECT * FROM frs_release WHERE release_id=$1 AND package_id=$2',

@@ -145,11 +145,11 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	}
 
 	/**
-	 * create - create a new role in the database.
+	 *	create - create a new role in the database.
 	 *
-	 * @param	string	The name of the role.
-	 * @param	array	A multi-dimensional array of data in this format: $data['section_name']['ref_id']=$val
-	 * @return	integer	The id on success or false on failure.
+	 *	@param	string	$role_name	The name of the role.
+	 *	@param	array	$data		A multi-dimensional array of data in this format: $data['section_name']['ref_id']=$val
+	 *	@return bool|int			The id on success or false on failure.
 	 */
 	function create($role_name, $data, $newproject=false) {
 		if ($this->Group == NULL) {

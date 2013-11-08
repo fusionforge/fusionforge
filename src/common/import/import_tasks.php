@@ -9,7 +9,7 @@ require_once $gfcommon.'pm/ProjectTask.class.php';
 require_once($gfcommon.'include/User.class.php');
 //require_once($gfcommon.'import/import_arrays.php');
 
-class Tasks{
+class Tasks {
 
 	function __construct($trackers, $group_id, $users) {
 
@@ -213,8 +213,7 @@ class Tasks{
 	}
 
 	/**
-	 * deleteTrackers - Delete all existing default trackers from a projet
-	 * @param object	Group A Group object
+	 * deleteTrackers - Delete all existing default trackers from a project
 	 */
 	function deleteTrackers(){
 		$pgf = new ProjectGroupFactory($this->group);
@@ -235,9 +234,7 @@ class Tasks{
 	}
 
 	/**
-	 * tracker_fill - Create trackers from an array in a given group
-	 * @param array Trackers part of a JSON pluck, including label, artifacts, vocabulary...
-	 * @param int	Group id of the group where the trackers should be added
+	 * tasks_fill - Create trackers from an array in a given group
 	 */
 	function tasks_fill(){
 

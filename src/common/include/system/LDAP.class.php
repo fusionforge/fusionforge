@@ -232,7 +232,7 @@ class LDAP extends UNIX {
 	/**
 	 * sysCheckUser() - Check for the existence of a user
 	 *
-	 * @param		int		The user ID of the user to check
+	 * @param		int	$user_id	The user ID of the user to check
 	 * @return bool	true on success/false on error
 	 *
 	 */
@@ -247,7 +247,7 @@ class LDAP extends UNIX {
 	/**
 	 * gfLdapcheck_user_by_name() - Check for a user by the username
 	 *
-	 * @param		string	The username
+	 * @param		string	$user_name	The username
 	 * @return bool	true on success/false on error
 	 *
 	 */

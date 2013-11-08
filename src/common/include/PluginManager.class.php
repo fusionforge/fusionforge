@@ -210,7 +210,7 @@ class PluginManager extends Error {
 	/**
 	 * RegisterPlugin() - register a plugin
 	 *
-	 * @param	object	an object of a subclass of the Plugin class
+	 * @param	object	$pluginobject	an object of a subclass of the Plugin class
      * @return bool
      */
 	function RegisterPlugin(&$pluginobject) {

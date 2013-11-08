@@ -194,7 +194,7 @@ class FRSPackage extends Error {
 	/**
 	 *  fetchData - re-fetch the data for this Package from the database.
 	 *
-	 *  @param  int  The package_id.
+	 *  @param  int  $package_id	The package_id.
 	 *  @return boolean	success.
 	 */
 	function fetchData($package_id) {

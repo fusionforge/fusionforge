@@ -255,7 +255,7 @@ class Forum extends Error {
 	/**
 	 * fetchData - re-fetch the data for this forum from the database.
 	 *
-	 * @param	int	The forum_id.
+	 * @param	int	$group_forum_id	The forum_id.
 	 * @return	boolean	success.
 	 */
 	function fetchData($group_forum_id) {

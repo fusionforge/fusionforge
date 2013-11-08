@@ -232,8 +232,8 @@ function addFiles($artifact, $jsonArtifact){
 
 /**
  * createArtifacts - Create all the artifacts for an ArtifactType from an array of data.
- * @param ArtifactType The ArtifactType object which the artifacts to be added belong to.
- * @param array	The data of all the artifacts of the current Type (dictionary)
+ * @param ArtifactType $at	The ArtifactType object which the artifacts to be added belong to.
+ * @param array	$data	The data of all the artifacts of the current Type (dictionary)
  * @param $hashrn
  * @param $hashlogin
  */

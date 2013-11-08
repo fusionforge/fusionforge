@@ -205,10 +205,10 @@ class AttachManager extends Error {
 	/**
 	 * Function attach : saves the file in the DB
 	 *
-	 * @param 	int		The file to attach
-	 * @param 	int		The group.
-	 * @param 	int		Whether we are updating an existing attach (attachid to update or cero for new message (inserts using the hights msg id from forum table)
-	 * @param 	int		msg id. if update is 0 and we pass a msg_id <> 0, then we are adding an attach for an existing msg
+	 * @param 	int		$attach		The file to attach
+	 * @param 	int		$group_id	The group.
+	 * @param 	int		$update		Whether we are updating an existing attach (attachid to update or zero for new message (inserts using the hights msg id from forum table)
+	 * @param 	int		$msg_id		msg id. if update is 0 and we pass a msg_id <> 0, then we are adding an attach for an existing msg
 	 *
 	 * @return	int	    Attach id on success, false otherwise
 	 *

@@ -127,7 +127,7 @@ class ForumAdmin extends Error {
 	/**
 	 *  Authorized - authorizes and returns true if the user is authorized for the group, or false.
 	 *
-	 *  @param  string	 The group id.
+	 *  @param  string	 $group_id	The group id.
 	 *	@return bool
 	 */
 
@@ -157,7 +157,7 @@ class ForumAdmin extends Error {
 	/**
 	 *  ExecuteAction - Executes the action passed as parameter
 	 *
-	 *  @param  string	 action to execute.
+	 *  @param  string	 $action	action to execute.
 	 *	@return string
 	 */
 	function ExecuteAction ($action) {

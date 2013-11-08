@@ -212,8 +212,8 @@ class DocumentGroup extends Error {
 	/**
 	 * injectArchive - extract the attachment and create the directory tree if needed
 	 *
-	 * @param	array	uploaded data
-	 * @return	boolean	success or not
+	 * @param	array	$uploaded_data	uploaded data
+	 * @return	bool	success or not
 	 * @access	public
 	 */
 	function injectArchive($uploaded_data) {
@@ -248,8 +248,8 @@ class DocumentGroup extends Error {
 	/**
 	 * fetchData - re-fetch the data for this DocumentGroup from the database.
 	 *
-	 * @param	integer	ID of the doc_group.
-	 * @return	boolean	success
+	 * @param	int		$id	ID of the doc_group.
+	 * @return	bool	success
 	 * @access	public
 	 */
 	function fetchData($id) {

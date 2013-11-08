@@ -217,8 +217,8 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 	/**
 	 *  fetchData - re-fetch the data for this mailing list from the database.
 	 *
-	 *  @param  int	 The list_id.
-	 *	@return	boolean	success.
+	 *  @param  int		$groupListId The list_id.
+	 *	@return	bool	success.
 	 */
 	function fetchData($groupListId) {
 		$res = db_query_params ('SELECT * FROM mail_group_list WHERE group_list_id=$1 AND group_id=$2',

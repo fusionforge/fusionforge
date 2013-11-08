@@ -181,7 +181,7 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 	 * GET - use by http webdav client like your browser firefox
 	 * called by HTTP_WebDAV_Server
 	 *
-	 * @param	array	options passed by previous functions in HTTP_WebDAV_Server
+	 * @param	array	$options	options passed by previous functions in HTTP_WebDAV_Server
 	 */
 	function GET(&$options) {
 		$arr_path = explode('/', $options['path']);
