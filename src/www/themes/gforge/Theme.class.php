@@ -372,14 +372,13 @@ class Theme extends Layout {
 	 * @return	string	Html to build a submenu.
 	 */
 	function printSubMenu($title_arr, $links_arr, $attr_arr) {
-		$count = count($title_arr);
-		$count--;
-
+		$count = count($title_arr) - 1;
 		$return = '';
+
 		for ($i = 0; $i < $count; $i++) {
-			$return .= util_make_link($links_arr[$i], $title_arr[$i], $attr_arr[$i]) . $this->subMenuSeparator();
+			$return .= util_make_link($links_arr[$i], $title_arr[$i], @$attr_arr[$i]) . $this->subMenuSeparator();
 		}
-		$return .= util_make_link($links_arr[$i], $title_arr[$i], $attr_arr[$i]);
+		$return .= util_make_link($links_arr[$i], $title_arr[$i], @$attr_arr[$i]);
 		return $return;
 	}
 

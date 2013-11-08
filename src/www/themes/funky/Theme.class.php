@@ -364,7 +364,7 @@ class Theme extends Layout {
 	}
 
 	/**
-	 * multiTableRow() - create a mutlilevel row in a table
+	 * multiTableRow() - create a multilevel row in a table
 	 *
 	 * @param	string	$row_attr	the row attributes
 	 * @param	array	$cell_data	the array of cell data, each element is an array,
