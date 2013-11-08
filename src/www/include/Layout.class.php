@@ -486,14 +486,14 @@ if (isset($params['group']) && $params['group']) {
 
 ?>
 			<tr>
-			<td align="left" class="projecttab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft-inner.png" height="9" width="9" alt="" /></td>
-			<td class="projecttab" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-			<td align="right" class="projecttab"  width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright-inner.png" height="9" width="9" alt="" /></td>
+				<td align="left" class="projecttab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft-inner.png" height="9" width="9" alt="" /></td>
+				<td class="projecttab" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
+				<td align="right" class="projecttab"  width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright-inner.png" height="9" width="9" alt="" /></td>
 			</tr>
 
 			<tr>
-			<td class="projecttab" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="10" height="1" alt="" /></td>
-			<td valign="top" width="99%" class="projecttab">
+				<td class="projecttab" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="10" height="1" alt="" /></td>
+				<td valign="top" width="99%" class="projecttab">
 
 	<?php
 
@@ -505,13 +505,13 @@ if (isset($params['group']) && $params['group']) {
 
 			<!-- end main body row -->
 
-			</td>
-			<td width="10" class="footer3" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="2" height="1" alt="" /></td>
+				</td>
+				<td width="10" class="footer3" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="2" height="1" alt="" /></td>
 			</tr>
 			<tr>
-			<td align="left" class="footer1" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomleft-inner.png" height="11" width="11" alt="" /></td>
-			<td class="footer3"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-			<td align="right" class="footer1" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomright-inner.png" height="11" width="11" alt="" /></td>
+				<td align="left" class="footer1" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomleft-inner.png" height="11" width="11" alt="" /></td>
+				<td class="footer3"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
+				<td align="right" class="footer1" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomright-inner.png" height="11" width="11" alt="" /></td>
 			</tr>
 			</table>
 
@@ -533,16 +533,16 @@ if (isset($params['group']) && $params['group']) {
 	function footerEnd($params) { ?>
 
 		<!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
-			<div align="right">
-			<?php echo $this->navigation->getPoweredBy(); ?>
-			</div>
+		<div align="right">
+		<?php echo $this->navigation->getPoweredBy(); ?>
+		</div>
 
-			<?php echo $this->navigation->getShowSource();
+		<?php echo $this->navigation->getShowSource();
 
-			plugin_hook('webanalytics_url', array());
+		plugin_hook('webanalytics_url', array());
 
-			echo "</body>\n";
-			echo "</html>\n";
+		echo "</body>\n";
+		echo "</html>\n";
 	}
 
 	function getRootIndex() {
@@ -873,9 +873,9 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * printSubMenu() - Takes two array of titles and links and builds the contents of a menu.
 	 *
-	 * @param	array	The array of titles.
-	 * @param	array	The array of title links.
-	 * @param	array	The array of string for title attributes.
+	 * @param	array	$title_arr	The array of titles.
+	 * @param	array	$links_arr	The array of title links.
+	 * @param	array	$attr_arr	The array of string for title attributes.
 	 * @return	string	Html to build a submenu.
 	 */
 	function printSubMenu($title_arr, $links_arr, $attr_arr) {

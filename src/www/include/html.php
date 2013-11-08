@@ -1229,10 +1229,10 @@ function html_ac($spos) {
 /**
  * html_a_copy() - Return a copy of part of the autoclose stack
  *
- * @param	$spos	integer
+ * @param	int	$spos
  *            stack position caller will return to
  * @throws	Exception
- * @return	opaque
+ * @return	array
  *			argument suitable for html_a_apply()
  */
 function html_a_copy($spos) {
@@ -1259,7 +1259,7 @@ function html_a_copy($spos) {
 /**
  * html_a_apply() - Reopen tags based on an autoclose stack copy
  *
- * @param	opaque	$scopy
+ * @param	array	$scopy
  *			return value from html_a_copy()
  * @return	string
  *		XHTML string suitable for echo'ing
