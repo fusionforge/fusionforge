@@ -87,7 +87,7 @@ class SVNPlugin extends SCMPlugin {
 		return '<p>'
 				. sprintf(_('Documentation for %1$s is available at <a href="%2$s">%2$s</a>.'),
 							'Subversion (“SVN”)',
-							'href="http://svnbook.red-bean.com/')
+							'http://svnbook.red-bean.com/')
 				. '</p>';
 	}
 
