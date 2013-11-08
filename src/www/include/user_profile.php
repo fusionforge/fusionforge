@@ -52,7 +52,7 @@ function user_personal_information($user, $compact = false, $title = false) {
 					  </tr>';
 		}
 	} else {
-		$html = '<table width="100%" cellpadding="2" cellspacing="2" border="0">';
+		$html = '<table class="fullwidth">';
 	}
 
 	$html .= '<tr>';
