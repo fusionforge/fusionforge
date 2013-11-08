@@ -541,7 +541,7 @@ class DocumentGroup extends Error {
 	 * @internal	param		int $State of the documents
 	 * @return	boolean		success
 	 * @access	public
-	*/
+	 */
 	function hasDocuments(&$nested_groups, &$document_factory, $stateid = 0) {
 		$doc_group_id = $this->getID();
 		static $result = array();	// this function will probably be called several times so we better store results in order to speed things up
@@ -681,7 +681,7 @@ class DocumentGroup extends Error {
 	/**
 	 * setStateID - set the state id of this document group.
 	 *
-	 * @param	int		$stateid	State ID.
+	 * @param	int	$stateid	State ID.
 	 * @return	boolean	success or not.
 	 * @access	public
 	 */
@@ -845,7 +845,7 @@ class DocumentGroup extends Error {
 	 * setValueinDB - private function to update columns in db
 	 *
 	 * @param	string	$column	the column to update
-	 * @param	int		$value	the value to store
+	 * @param	int	$value	the value to store
 	 * @return	boolean	success or not
 	 * @access	private
 	 */

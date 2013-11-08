@@ -43,12 +43,12 @@ class Parsedata {
 	/**
 	 * get_parse_data - analyse content and metadata
 	 *
-	 * @param	string	$data			the path of the file to be analysed
-	 * @param	string	$title			the file title
+	 * @param	string	$data		the path of the file to be analysed
+	 * @param	string	$title		the file title
 	 * @param	string	$description	the file description
-	 * @param	string	$filetype		the file type
-	 * @param	string	$filename		the filename
-	 * @return	string					the analysed content
+	 * @param	string	$filetype	the file type
+	 * @param	string	$filename	the filename
+	 * @return	string	the analysed content
 	 */
 	function get_parse_data($data, $title, $description, $filetype, $filename) {
 		$parser = "";

@@ -56,10 +56,10 @@ class DocumentGroupHTML extends Error {
 	/**
 	 * showSelectNestedGroups - Display the tree of document groups inside a <select> tag
 	 *
-	 * @param	array	$group_arr		Array of groups.
+	 * @param	array	$group_arr	Array of groups.
 	 * @param	string	$select_name	The name that will be assigned to the input
-	 * @param	bool	$allow_none		Allow selection of "None"
-	 * @param	int		$selected_id	The ID of the group that should be selected by default (if any)
+	 * @param	bool	$allow_none	Allow selection of "None"
+	 * @param	int	$selected_id	The ID of the group that should be selected by default (if any)
 	 * @param	array	$dont_display	Array of IDs of groups that should not be displayed
 	 * @return	string	html select box code
 	 */
@@ -83,12 +83,12 @@ class DocumentGroupHTML extends Error {
 	/**
 	 * buildArrays - Build the arrays to call html_build_select_box_from_arrays()
 	 *
-	 * @param	array	$group_arr		Array of groups.
-	 * @param	array	$id_array		Reference to the array of ids that will be build
-	 * @param	array	$text_array		Reference to the array of group names
+	 * @param	array	$group_arr	Array of groups.
+	 * @param	array	$id_array	Reference to the array of ids that will be build
+	 * @param	array	$text_array	Reference to the array of group names
 	 * @param	array	$dont_display	Array of IDs of groups that should not be displayed
-	 * @param	int		$parent			The ID of the parent whose childs are being showed (0 for root groups)
-	 * @param	int		$level			The current level
+	 * @param	int	$parent		The ID of the parent whose childs are being showed (0 for root groups)
+	 * @param	int	$level		The current level
 	 */
 	function buildArrays($group_arr, &$id_array, &$text_array, &$dont_display, $parent = 0, $level = 0) {
 		if (!is_array($group_arr) || !array_key_exists("$parent", $group_arr)) return;
