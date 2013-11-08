@@ -148,7 +148,7 @@ function project_summary($group_id, $mode, $no_table) {
 	if ($project->usesForum()) {
 		$return .= '
 
-			<hr size="1" />';
+			<hr />';
 		$return .= '<a href="'.util_make_url ('/forum/?group_id='.$group_id).'">';
 		$return .= html_image("ic/forum20g.png","20","20",array("alt"=>"Forums"));
 		$return .= '&nbsp;Forums</a>';
@@ -174,7 +174,7 @@ function project_summary($group_id, $mode, $no_table) {
 	if ($project->usesDocman()) {
 		$return .= '
 
-			<hr size="1" />';
+			<hr />';
 		$return .= '<a href="'.util_make_url ('/docman/?group_id='.$group_id).'">';
 		$return .= html_image("ic/docman16b.png","20","20",array("alt"=>"Docs"));
 		$return .= '&nbsp;Doc&nbsp;Manager</a>';
@@ -185,7 +185,7 @@ function project_summary($group_id, $mode, $no_table) {
 	if ($project->usesMail()) {
 		$return .= '
 
-			<hr size="1" />';
+			<hr />';
 		$return .= '<a href="'.util_make_url ('/mail/?group_id='.$group_id).'">';
 		$return .= html_image("ic/mail16b.png","20","20",array("alt"=>"Mail Lists"));
 		$return .= '&nbsp;Mailing&nbsp;Lists</a>';
@@ -200,7 +200,7 @@ function project_summary($group_id, $mode, $no_table) {
 	if ($project->usesPm()) {
 		$return .= '
 
-			<hr size="1" />';
+			<hr />';
 		$return .= '<a href="'.util_make_url ('/pm/?group_id='.$group_id).'">';
 		$return .= html_image("ic/taskman20g.png","20","20",array("alt"=>"Tasks"));
 		$return .= '&nbsp;Task&nbsp;Manager</a>';
@@ -227,7 +227,7 @@ function project_summary($group_id, $mode, $no_table) {
 	if ($project->usesSurvey()) {
 		$return .= '
 
-			<hr size="1" />';
+			<hr />';
 		$return .= '<a href="'.util_make_url ('/survey/?group_id='.$group_id).'">';
 		$return .= html_image("ic/survey16b.png","20","20",array("alt"=>"Surveys"));
 		$return .= "&nbsp;Surveys</a>";
@@ -241,7 +241,7 @@ function project_summary($group_id, $mode, $no_table) {
 	if ($project->usesSCM()) {
 		$return .= '
 
-			<hr size="1" />';
+			<hr />';
 		$return .= '<a href="'.util_make_url ('/scm/?group_id='.$group_id).'">';
 		$return .= html_image("ic/cvs16b.png","20","20",array("alt"=>"SCM"));
 		$return .= "&nbsp;SCM&nbsp;Tree</a>";
@@ -258,7 +258,7 @@ function project_summary($group_id, $mode, $no_table) {
 	if ($project->isActive()) {
 		$return .= '
 
-			<hr size="1" />';
+			<hr />';
 		$return .= '<a href="'.util_make_url ('/project/showfiles.php?group_id='.$group_id).'">';
 		$return .= html_image("ic/ftp16b.png","20","20",array("alt"=>"FTP"));
 		$return .= "&nbsp;Released&nbsp;Files</a>";
