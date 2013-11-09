@@ -73,5 +73,3 @@ function rss_dump_project_result_set ($res,$title,$desription='',$callback=0) {
 	// end output
 	print " </channel>\n";
 }
-
-?>
