@@ -706,7 +706,7 @@ p.information {
 /* {{{ Layout Manager */
 #layout-manager {
     border:1px solid #666;
-    padding:0px 5px;
+    padding:0 5px;
     background:white;
     margin:10px;
 }
@@ -721,7 +721,7 @@ p.information {
 table.layout-manager-row {
     width:100%;
     text-align:center;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 td.layout-manager-column {
     border:1px solid #9b9;
@@ -754,7 +754,7 @@ td.layout-manager-column-add {
     width:8px;
 }
 div.layout-manager-column-remove {
-    padding:0em 0.5em 0.5em 0.5em;
+    padding:0 0.5em 0.5em 0.5em;
     font-size:0.8em;
     color:#ccc;
     float:right;

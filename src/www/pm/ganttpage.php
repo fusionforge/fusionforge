@@ -178,7 +178,7 @@ echo '	<form action="'. getStringFromServer('PHP_SELF') .'?group_id='.$group_id.
 		<td>'._('Sort On').'<br />'. $order_box .'</td>
 		<td><input type="submit" name="submit" value="'._('Browse').'" /></td>
 	</tr></table></form>';
-echo '<div id="workSpace" style="padding:0px; overflow-y:auto; overflow-x:hidden; border:1px solid #e5e5e5; position:relative; margin:0 5px;"></div>';
+echo '<div id="workSpace" style="padding:0; overflow-y:auto; overflow-x:hidden; border:1px solid #e5e5e5; position:relative; margin:0 5px;"></div>';
 ?>
 <script type="text/javascript">
 	var ge;
