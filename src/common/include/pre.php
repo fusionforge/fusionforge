@@ -5,6 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems
  * Copyright 2010, Roland Mas <lolando@debian.org>
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -73,60 +74,15 @@ function setconfigfromenv ($sec, $var, $serv, $env) {
 	return false;
 }
 
-function setconfigfromoldsources ($sec, $var, $serv, $env, $glob) {
-	if (setconfigfromenv($sec, $var, $serv, $env)) {
-		return true;
-	}
-	if (isset ($GLOBALS[$glob])) {
-		forge_define_config_item ($var, $sec,
-					  $GLOBALS[$glob]) ;
-		return true;
-	}
-	return false;
-}
+setconfigfromenv('core', 'database_host', 'GForgeDbhost', 'sys_gfdbhost');
+setconfigfromenv('core', 'database_port', 'GForgeDbport', 'sys_gfdbport');
+setconfigfromenv('core', 'database_name', 'GForgeDbname', 'sys_gfdbname');
+setconfigfromenv('core', 'database_user', 'GForgeDbuser', 'sys_gfdbuser');
+setconfigfromenv('core', 'database_password', 'GForgeDbpasswd', 'sys_gfdbpasswd');
+setconfigfromenv('core', 'ldap_password', 'GForgeLdapPasswd', 'sys_gfldap_passwd');
+setconfigfromenv('core', 'session_key', 'GForgeSessionKey', 'sys_session_key');
 
-if (isset($gfcgfile) && file_exists ($gfcgfile)) {
-	require_once $gfcgfile ;
-
-	setconfigfromoldsources ('core', 'database_host',
-				 'GForgeDbhost', 'sys_gfdbhost', 'sys_dbhost') ;
-	setconfigfromoldsources ('core', 'database_port',
-				 'GForgeDbport', 'sys_gfdbport', 'sys_dbport') ;
-	setconfigfromoldsources ('core', 'database_name',
-				 'GForgeDbname', 'sys_gfdbname', 'sys_dbname') ;
-	setconfigfromoldsources ('core', 'database_user',
-				 'GForgeDbuser', 'sys_gfdbuser', 'sys_dbuser') ;
-	setconfigfromoldsources ('core', 'database_password',
-				 'GForgeDbpasswd', 'sys_gfdbpasswd', 'sys_dbpasswd') ;
-	setconfigfromoldsources ('core', 'ldap_password',
-				 'GForgeLdapPasswd', 'sys_gfldap_passwd', NULL) ;
-	setconfigfromoldsources ('core', 'session_key',
-				 'GForgeSessionKey', 'sys_session_key', NULL) ;
-
-	forge_define_config_item ('source_path', 'core', $fusionforge_basedir) ;
-	forge_define_config_item ('data_path', 'core', '/var/lib/gforge') ;
-	forge_define_config_item ('chroot', 'core', '$core/data_path/chroot') ;
-	forge_define_config_item ('config_path', 'core', '/etc/gforge') ;
-
-	require_once $gfcommon.'include/config-vars.php';
-} else {
-	setconfigfromenv ('core', 'database_host',
-				 'GForgeDbhost', 'sys_gfdbhost') ;
-	setconfigfromenv ('core', 'database_port',
-				 'GForgeDbport', 'sys_gfdbport') ;
-	setconfigfromenv ('core', 'database_name',
-				 'GForgeDbname', 'sys_gfdbname') ;
-	setconfigfromenv ('core', 'database_user',
-				 'GForgeDbuser', 'sys_gfdbuser') ;
-	setconfigfromenv ('core', 'database_password',
-				 'GForgeDbpasswd', 'sys_gfdbpasswd') ;
-	setconfigfromenv ('core', 'ldap_password',
-				 'GForgeLdapPasswd', 'sys_gfldap_passwd') ;
-	setconfigfromenv ('core', 'session_key',
-				 'GForgeSessionKey', 'sys_session_key') ;
-}
-
-forge_read_config_file ($gfconfig.'/config.ini') ;
+forge_read_config_file($gfconfig.'/'.$gfcgfile);
 
 if (($ecf = forge_get_config ('extra_config_files')) != NULL) {
 	$ecfa = explode (',', $ecf) ;

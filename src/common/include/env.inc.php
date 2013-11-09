@@ -1,6 +1,6 @@
 <?php
 /**
- * Sets the default required environement for FusionForge
+ * Sets the default required environment for FusionForge
  *
  * Some of the settings made here can be overwrite in the
  * configuration file if needed.
@@ -8,6 +8,9 @@
  */
 
 /**
+ *
+ * Copyright 2013, Franck Villaume - TrivialDev
+ *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software
@@ -48,33 +51,31 @@ $fusionforge_basedir = dirname(dirname(dirname( __FILE__ )));
 //	$gfplugins: Directory for plugins.
 //
 
-// Easyforge config, allow several instances of gforge based on server name.
+// Easyforge config, allow several instances of fusionforge based on server name.
+// Require multiples VirtualHosts in your httpd configuration.
+// FORGE_CONFIG_PATH var is set in httpd.conf file and is default method shipped with the Fusionforge code source.
 if (getenv('FORGE_CONFIG_PATH') && file_exists(getenv('FORGE_CONFIG_PATH').'/config.ini')) {
 	$gfconfig = getenv('FORGE_CONFIG_PATH').'/';
+	$gfcgfile = 'config.ini';
 } elseif (getenv('sys_localinc')) {
 	$gfcgfile = getenv('sys_localinc');
 	$gfconfig = dirname($gfcgfile).'/';
+	$gfcgfile = basename($gfcgfile);
 } elseif (isset($_SERVER['SERVER_NAME']) &&
-	file_exists($fusionforge_basedir.'/config/'.$_SERVER['SERVER_NAME'].'/local.inc.php')) {
-	$gfcgfile = $fusionforge_basedir.'/config/'.$_SERVER['SERVER_NAME'].'/local.inc.php';
+	file_exists('/etc/fusionforge/'.$_SERVER['SERVER_NAME'].'/config.ini')) {
+	$gfcgfile = 'config.ini';
+	$gfconfig = '/etc/fusionforge/'.$_SERVER['SERVER_NAME'].'/';
+} elseif (isset($_SERVER['SERVER_NAME']) &&
+	file_exists($fusionforge_basedir.'/config/'.$_SERVER['SERVER_NAME'].'/config.ini')) {
+	$gfcgfile = '/config.ini';
 	$gfconfig = $fusionforge_basedir.'/config/'.$_SERVER['SERVER_NAME'].'/';
-} elseif (file_exists($fusionforge_basedir.'/config/local.inc.php')) {
-	$gfcgfile = $fusionforge_basedir.'/config/local.inc.php';
+} elseif (file_exists($fusionforge_basedir.'/config/config.ini')) {
+	$gfcgfile = 'config.ini';
 	$gfconfig = $fusionforge_basedir.'/config/';
-} elseif (file_exists('/etc/gforge/local.inc.php')) {
-	$gfcgfile = '/etc/gforge/local.inc.php';
-	$gfconfig = '/etc/gforge/';
-} elseif (file_exists('/etc/gforge/local.inc')) {
-	$gfcgfile = '/etc/gforge/local.inc';
-	$gfconfig = '/etc/gforge/';
-} elseif (file_exists('/etc/gforge/config.ini')) {
-	$gfconfig = '/etc/gforge/';
-} elseif (file_exists('/etc/fusionforge/config.ini')) {
-	$gfconfig = '/etc/fusionforge/';
 } else {
-	$gfcgfile = 'local.inc';
-	if (is_dir('/etc/gforge')){
-		$gfconfig = '/etc/gforge/';
+	$gfcgfile = 'config.ini';
+	if (is_dir('/etc/fusionforge')){
+		$gfconfig = '/etc/fusionforge/';
 	} else {
 		$gfconfig = '';
 	}
