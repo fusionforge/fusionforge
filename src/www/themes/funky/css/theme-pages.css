@@ -49,18 +49,18 @@
 }
 
 #Latest_News h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    font-weight: bold;
+	margin-top: 0;
+	margin-bottom: 0;
+	font-weight: bold;
 }
 
 #Latest_News em {
-    padding-left: 1em;
+	padding-left: 1em;
 }
 
 /* remove inherited background-image */
 #title_Features_Boxes {
-    display: none;
+	display: none;
 }
 
 #Features_Boxes {
@@ -68,30 +68,30 @@
 }
 
 #Features_Boxes #title_Associated_Forges {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 #Associated_Forges td {
-    padding-right: 1em;
+	padding-right: 1em;
 }
 
 #Associated_Forges .align-right {
-    text-align: right;
+	text-align: right;
 }
 
 #Recently_Registered_Projects td {
-    padding: 0.2em;
+	padding: 0.2em;
 }
 
 #search_associated_forges {
-    float: left;
-    margin-top: 5px;
-    margin-bottom: 5px;
+	float: left;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 #search_associated_forges_submit {
-    margin-top: 6px;
-    padding-left: 5px;
+	margin-top: 6px;
+	padding-left: 5px;
 }
 
 /*
@@ -103,11 +103,11 @@
 }
 
 #file-releases {
-    margin: 0 0.5em;
+	margin: 0 0.5em;
 }
 
 #latest-major-contributions {
-    margin: 1em 0.5em;
+	margin: 1em 0.5em;
 }
 
 /*
@@ -115,25 +115,25 @@
  * ========================================================
  */
 .frs-table-files {
-    width: 100%;
-    margin: 0 0 2.5em 0;
+	width: 100%;
+	margin: 0 0 2.5em 0;
 }
 
 .frs-table-files th {
-    background: #e8dfd4;
+	background: #e8dfd4;
 }
 
 .frs-table-files tr {
-    border-bottom: solid 1px #c9c9c9;
+	border-bottom: solid 1px #c9c9c9;
 }
 
 .frs-table-files th,
 .frs-table-files td {
-    vertical-align:middle;
+	vertical-align:middle;
 }
 
 .frs-table-files h3 {
-    margin:0;
+	margin:0;
 }
 
 #forge-frs .blue-box {
@@ -188,9 +188,7 @@
 }
 
 .docman_div_include {
-	border-style: solid;
-	border-color: #C2C7D1;
-	border-width: 1px;
+	border: 1px solid #C2C7D1;
 	padding: 2px;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -210,9 +208,7 @@
 }
 
 .docmanDiv table {
-	border-style: solid;
-	border-color: #C2C7D1;
-	border-width: 1px;
+	border: 1px solid #C2C7D1;
 	border-collapse: collapse;
 	text-align: left;
 	vertical-align: middle;
@@ -220,9 +216,7 @@
 }
 
 .docmanDiv td, .docmanDiv th {
-	border-style: solid;
-	border-color: #C2C7D1;
-	border-width: 1px;
+	border: 1px solid #C2C7D1;
 	border-collapse: collapse;
 	padding: 3px;
 }
@@ -242,14 +236,14 @@
 }
 
 /*
-    tracker
+	tracker
 */
 #trackermodform  table
 {
-    width: 100%;
+	width: 100%;
 }
 
 #trackermodform  input[type=submit]
 {
-    float: right;
+	float: right;
 }

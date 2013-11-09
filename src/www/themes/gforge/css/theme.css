@@ -59,8 +59,8 @@ input[type="text"], input[type="password"], textarea {
   padding:0;	
 } 
 #header-col1 h1 {
-    padding: 0;
-    margin: 0;
+	padding: 0;
+	margin: 0;
 }
 #header-col2 {
   padding:0;
@@ -309,43 +309,37 @@ ul.tabbernav li.tabberactive a:hover {
 /* error_msg, warning_msg or feedback function
 ----------------------------------------------- */
 .error {
-    font-weight: bold;
-    border-width: 2px;
-    border-style: solid;
-    background-color: #ff4940; /* red */
-    border-color: red; /* red */
-    padding: 0.5em;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
+	font-weight: bold;
+	background-color: #ff4940; /* red */
+	border: 2px solid red;
+	padding: 0.5em;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
 }
 
 .warning {
-    font-weight: bold;
-    border-width: 2px;
-    border-style: solid;
-    background-color: #ffd297; /* orange */
-    border-color: #ffa500; /* orange */
-    padding: 0.5em;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
+	font-weight: bold;
+	background-color: #ffd297; /* orange */
+	border: 2px solid #ffa500; /* orange */
+	padding: 0.5em;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
 }
 
 .feedback {
-    font-weight: bold;
-    border-width: 2px;
-    border-style: solid;
-    background-color: #aef26d; /* green */
-    border-color: green; /* green */
-    padding: 0.5em;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
+	font-weight: bold;
+	background-color: #aef26d; /* green */
+	border: 2px solid green;
+	padding: 0.5em;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
 }
 
 /* scm
 ----------------------------------------------- */
 .scm {
-    width: 99%;
+width: 99%;
 }
