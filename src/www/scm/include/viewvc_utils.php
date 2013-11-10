@@ -51,7 +51,7 @@ function viewcvs_is_html() {
 /**
  * make_arg_cmd_safe() - Make strings safe for the command line.
  *
- * @param  string  The argument that needs to be cleaned.
+ * @param  string  $arg	The argument that needs to be cleaned.
  * @return string  The argument with dangerous shell characters escaped.
  */
 function make_arg_cmd_safe($arg) {

@@ -139,7 +139,7 @@ if (isset($wsdl)) {
 /**
  * continueSession - A utility method to carry on with an already established session
  *
- * @param 	string		The session key
+ * @param 	string		$sessionKey	The session key
  */
 function continue_session($sessionKey) {
 	session_continue($sessionKey);
@@ -149,8 +149,8 @@ function continue_session($sessionKey) {
 /**
  * login - Logs in a SOAP client
  *
- * @param	string	userid	The user's unix id
- * @param	string	passwd	The user's passwd in clear text
+ * @param	string	$userid	userid	The user's unix id
+ * @param	string	$passwd	passwd	The user's passwd in clear text
  *
  * @return	string	the session key
  */
@@ -171,7 +171,7 @@ function login($userid, $passwd) {
 /**
  * logout - Logs out a SOAP client
  *
- * @param 	string	sessionkey	The session key
+ * @param 	string	$session_ser	sessionkey	The session key
  */
 function logout($session_ser) {
 	continue_session($session_ser);

@@ -729,8 +729,8 @@ if (isset($params['group']) && $params['group']) {
 	 * projectTabs() - Prints out the project tabs, contained here in case
 	 * we want to allow it to be overriden.
 	 *
-	 * @param	string	Is the tab currently selected
-	 * @param	string	Is the group we should look up get title info
+	 * @param	string	$toptab		Is the tab currently selected
+	 * @param	string	$group_id	Is the group we should look up get title info
 	 */
 	function projectTabs($toptab, $group_id) {
 		// get group info using the common result set
