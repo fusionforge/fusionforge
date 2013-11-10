@@ -102,8 +102,6 @@ if (getStringFromRequest('update')) {
 		if (!$res) {
 			exit_error(db_error(), 'admin');
 		} else {
-			$feedback = sprintf(_('Plugin %1$s updated Successfully'), $pluginname);
-
 			// Load the plugin and now get information from it.
 			$pm = plugin_manager_get_object();
 			$pm->LoadPlugin($pluginname);
@@ -115,6 +113,11 @@ if (getStringFromRequest('update')) {
 				if (method_exists($plugin, 'install')) {
 					$plugin->install();
 				}
+			}
+			if ($plugin->isError()) {
+				$error_msg = $plugin->getErrorMessage();
+			} else {
+				$feedback = sprintf(_('Plugin %1$s updated Successfully'), $pluginname);
 			}
 		}
 	}

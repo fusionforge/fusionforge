@@ -188,20 +188,20 @@ class Plugin extends Error {
 			if (!is_link($www.'/'.$installdir)) {
 				$code = symlink($path . '/www', $www.'/'.$installdir);
 				if (!$code) {
-					$this->setError('['.$www.'/'.$installdir.'->'.$path . '/www]'.
-						'<br />Soft link to www couldn\'t be created. Check the write permissions for apache in gforge www/plugins dir or create the link manually.');
+					$this->setError('['.$www.'/'.$installdir.'->'.$path . '/www]<br />'.
+						_('Soft link to www could not be created. Check the write permissions for apache in fusionforge www/plugins dir or create the link manually.'));
 				}
 			}
 		}
 
 		// Create a symbolic links to plugins/<plugin>/etc/plugins/<plugin> (if directory exists).
 		if (is_dir($path . '/etc/plugins/' . $name)) {
-			// The apache group or user should have write perms in /etc/gforge/plugins folder...
+			// The apache group or user should have write perms in /etc/fusionforge/plugins folder...
 			if (!is_link(forge_get_config('config_path'). '/plugins/'.$name) && !is_dir(forge_get_config('config_path'). '/plugins/'.$name)) {
 				$code = symlink($path . '/etc/plugins/' . $name, forge_get_config('config_path'). '/plugins/'.$name);
 				if (!$code) {
 					$this->setError('['.forge_get_config('config_path'). '/plugins/'.$name.'->'.$path . '/etc/plugins/' . $name . ']'.'<br />'.
-					_('Config file could not be linked to etc/gforge/plugins/%s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $name);
+					_('Config file could not be linked to %s. Check the write permissions for apache in /etc/fusionforge/plugins or create the link manually.'), forge_get_config('config_path').'/plugins/'.$name);
 				}
 			}
 		}
@@ -213,12 +213,12 @@ class Plugin extends Error {
 
 		// Create a symbolic links to plugins/<plugin>/etc/plugins/<plugin> (if directory exists).
 		if (is_dir($path . '/etc/plugins/' . $name)) {
-			// The apache group or user should have write perms in /etc/gforge/plugins folder...
+			// The apache group or user should have write perms in /etc/fusionforge/plugins folder...
 			if (!is_link(forge_get_config('config_path'). '/plugins/'.$name) && !is_dir(forge_get_config('config_path'). '/plugins/'.$name)) {
 				$code = symlink($path . '/etc/plugins/' . $name, forge_get_config('config_path'). '/plugins/'.$name);
 				if (!$code) {
 					$this->setError('['.forge_get_config('config_path'). '/plugins/'.$name.'->'.$path . '/etc/plugins/' . $name . ']'.'<br />'.
-					_('Config file could not be linked to etc/gforge/plugins/%s. Check the write permissions for apache in /etc/gforge/plugins or create the link manually.'), $name);
+					_('Config file could not be linked to %s. Check the write permissions for apache in /etc/fusionforge/plugins or create the link manually.'), forge_get_config('config_path').'/plugins/'.$name);
 				}
 			}
 		}
