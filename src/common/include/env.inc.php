@@ -45,9 +45,9 @@ $fusionforge_basedir = dirname(dirname(dirname( __FILE__ )));
 // If this does not work, then set defines to real path directly.
 //
 // In case of failure, the following defines are set:
-//	$gfconfig: Directory where are the configuration files (/etc/gforge).
-//	$gfcommon: Directory common of gforge (for common php classes).
-//	$gfwww: Directory www of gforge (publicly accessible files).
+//	$gfconfig: Directory where are the configuration files (/etc/fusionforgeforge).
+//	$gfcommon: Directory common of fusionforge (for common php classes).
+//	$gfwww: Directory www of fusionforge (publicly accessible files).
 //	$gfplugins: Directory for plugins.
 //
 
@@ -72,9 +72,12 @@ if (getenv('FORGE_CONFIG_PATH') && file_exists(getenv('FORGE_CONFIG_PATH').'/con
 } elseif (file_exists($fusionforge_basedir.'/config/config.ini')) {
 	$gfcgfile = 'config.ini';
 	$gfconfig = $fusionforge_basedir.'/config/';
+} elseif (is_dir('/etc/gforge')) {
+	$gfcgfile = 'config.ini';
+	$gfconfig = '/etc/gforge/';
 } else {
 	$gfcgfile = 'config.ini';
-	if (is_dir('/etc/fusionforge')){
+	if (is_dir('/etc/fusionforge')) {
 		$gfconfig = '/etc/fusionforge/';
 	} else {
 		$gfconfig = '';
