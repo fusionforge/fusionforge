@@ -45,7 +45,7 @@ $fusionforge_basedir = dirname(dirname(dirname( __FILE__ )));
 // If this does not work, then set defines to real path directly.
 //
 // In case of failure, the following defines are set:
-//	$gfconfig: Directory where are the configuration files (/etc/fusionforgeforge).
+//	$gfconfig: Directory where are the configuration files (/etc/fusionforge).
 //	$gfcommon: Directory common of fusionforge (for common php classes).
 //	$gfwww: Directory www of fusionforge (publicly accessible files).
 //	$gfplugins: Directory for plugins.
