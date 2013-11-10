@@ -309,7 +309,6 @@ hr {
 	text-align:center;
 	vertical-align: middle;
 	height: 20px;
-	margin: 0;
 	border-bottom: 0;
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
@@ -321,8 +320,7 @@ hr {
 	line-height: 17px;
 	color: black;
 	text-shadow: 1px 1px #B2BFD9;
-	margin-left: 2px;
-	margin-right: 2px;
+	margin: 0 2px;
 	-webkit-transition-property: background-color, color, height, shadow;
 	-webkit-transition-duration: 0.3s;
 	-moz-transition-property: background-color, color, height, shadow;
@@ -561,8 +559,7 @@ a.topTabSelected:hover {
 .box-content {
 	border-bottom: 1px solid #E2E3E4;
 	margin: 0;
-	padding: 8px;
-	padding-left: 18px;
+	padding: 8px 8px 8px 18px;
 }
 
 .box-content p {
@@ -705,10 +702,7 @@ a.topTabSelected:hover {
 	font-size: small;
 	font-weight: normal;
 	color: black;
-	margin-bottom: 3px;
-	margin-top: 2px;
-	margin-right: 3px;
-	margin-left: 3px;
+	margin: 2px 3px 3px;
 }
 
 .warning_msg, .warning, .tips, .important {
@@ -722,10 +716,7 @@ a.topTabSelected:hover {
 	text-align: left;
 	font-weight: normal;
 	font-size: small;
-	margin-bottom: 3px;
-	margin-top: 2px;
-	margin-right: 3px;
-	margin-left: 3px;
+	margin: 2px 3px 3px;
 }
 
 .feedback {
@@ -739,10 +730,7 @@ a.topTabSelected:hover {
 	text-align: left;
 	font-weight: normal;
 	font-size: small;
-	margin-bottom: 3px;
-	margin-top: 2px;
-	margin-right: 3px;
-	margin-left: 3px;
+	margin: 2px 3px 3px;
 }
 
 p.information {
@@ -756,10 +744,7 @@ p.information {
 	text-align: left;
 	font-weight: normal;
 	font-size: small;
-	margin-bottom: 3px;
-	margin-top: 2px;
-	margin-right: 3px;
-	margin-left: 3px;
+	margin: 2px 3px 3px;
 }
 
 #ffErrors {
@@ -771,27 +756,19 @@ p.information {
 	-moz-border-radius: 6px;
 	text-shadow: 1px 1px #ff7c73;
 	color: black;
-	margin-bottom: 3px;
-	margin-top: 2px;
-	margin-right: 3px;
-	margin-left: 3px;
+	margin: 2px 3px 3px;
 }
 
 #ffErrors .error {
-	border-width: 1px;
-	border-style: solid;
 	background-color: #ff4940; /* red */
-	border-color: red; /* red */
+	border: 1px solid red;
 	padding: 7px;
 	border-radius: 6px;
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
 	text-shadow: 1px 1px #ff7c73;
 	color: black;
-	margin-bottom: 3px;
-	margin-top: 2px;
-	margin-right: 3px;
-	margin-left: 3px;
+	margin: 2px 3px 3px;
 }
 
 
@@ -836,8 +813,7 @@ p.information {
 	border-radius: 0.5em 0.5em 0 0;
 	color: white;
 	background: #34b234;
-	padding: 3px;
-	padding-left: 10px;
+	padding: 3px 3px 3px 10px;
 }
 
 .info-box:nth-child(4n) h2 {

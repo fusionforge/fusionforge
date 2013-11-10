@@ -373,13 +373,10 @@ table.progress {
 	border: 1px solid #d7d7d7;
 	border-collapse: collapse;
 	border-spacing: 0;
-	margin: 0;
 	padding: 0;
-	margin-top: 1em;
 	empty-cells: show;
 	width: 50%;
-	margin-left: 25%;
-	margin-right: 25%;
+	margin: 1em 25% 0;
 }
 table.progress_legend {
 	width: 50%;
@@ -785,8 +782,7 @@ div.layout-manager-column-remove_hover {
 	font-weight: bold;
 	background-color: #ffc0cb; /* pink */
 	border: 2px solid red;
-	padding: 0.5em;
-	padding-left: 1.5em;
+	padding: 0.5em 0.5em 0.5em 1.5em;
 }
 
 #ffErrors .error {
@@ -908,8 +904,8 @@ fieldset {
 
 #ff-mw-wrapper {
 	position: relative;	/* so MW can position absolutely */
-		top: -1em;	/* undo div#maindiv */
-		left: -1em;	/* undo div#maindiv */
+	top: -1em;	/* undo div#maindiv */
+	left: -1em;	/* undo div#maindiv */
 	margin-right: -2em;
 	background: #f9f9f9 url(mw-headbg.jpg) 0 0 no-repeat;
 }
