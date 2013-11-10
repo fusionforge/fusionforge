@@ -24,10 +24,10 @@ DirectoryIndex index.html index.php
 </Location>
 
 <IfVersion >= 2.3>
-  IncludeOptional /etc/gforge/httpd.conf.d/plugin-*.inc
+  IncludeOptional {core/config_path}/httpd.conf.d/plugin-*.inc
 </IfVersion>
 <IfVersion < 2.3>
-  Include /etc/gforge/httpd.conf.d/plugin-*.inc
+  Include {core/config_path}/httpd.conf.d/plugin-*.inc
 </IfVersion>
 
 Alias /images/ {core/source_path}/www/images/
