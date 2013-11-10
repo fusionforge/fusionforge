@@ -60,7 +60,7 @@ class SurveyQuestionFactory extends Error {
 		if (!$Group->usesSurvey()) {
 			$this->setError(sprintf(_('%s does not use the Survey tool'),
 			    $Group->getPublicName()));
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
 	}

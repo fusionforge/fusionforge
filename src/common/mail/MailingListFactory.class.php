@@ -61,7 +61,7 @@ class MailingListFactory extends Error {
 		if (!$Group->usesMail()) {
 			$this->setError(sprintf(_('%s does not use the Mailing-list tool'),
 			    $Group->getPublicName()));
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
 	}

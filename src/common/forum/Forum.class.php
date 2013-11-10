@@ -124,7 +124,7 @@ class Forum extends Error {
 		}
 		if (!$is_news && !$Group->usesForum()) {
 			$this->setError(sprintf(_('%s does not use the Forum tool.'), $Group->getPublicName()));
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
 

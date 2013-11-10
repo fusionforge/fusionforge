@@ -61,7 +61,7 @@ class ProjectGroupFactory extends Error {
 		if (!$Group->usesPM()) {
 			$this->setError(sprintf(_('%s does not use the Project Management tool'),
 			    $Group->getPublicName()));
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
 	}

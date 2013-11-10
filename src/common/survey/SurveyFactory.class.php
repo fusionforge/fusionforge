@@ -62,7 +62,7 @@ class SurveyFactory extends Error {
 		if (!$Group->usesSurvey()) {
 			$this->setError(sprintf(_('%s does not use the Survey tool'),
 			    $Group->getPublicName()));
-			return false;
+			return;
 		}
 		$this->Group =& $Group;
 	}
@@ -83,7 +83,7 @@ class SurveyFactory extends Error {
  	 * @return	array	The array of Survey Question objects.
 	 */
 	function &getSurveys() {
-		/* We alread have it */
+		/* We already have it */
 		if ($this->surveys) {
 			return $this->surveys;
 		}
