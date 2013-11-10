@@ -1081,7 +1081,7 @@ class Group extends Error {
 	/**
 	 *	setUseSCM - Set the SCM usage
 	 *
-	 *	@param	boolean	enabled/disabled
+	 *	@param	boolean	$booleanparam	enabled/disabled
 	 * @return bool
 	 */
 	function setUseSCM($booleanparam) {

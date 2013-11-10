@@ -32,8 +32,7 @@ class TroveCat extends Error {
 	/**
 	 * TroveCat() - CONSTRUCTOR.
 	 *
-	 * @param	object	The Group object.
-	 * @param	int	The role_id.
+	 * @param	bool|int	$cat_id	The cat_id.
 	 */
 	function TroveCat($cat_id = false) {
 
@@ -50,7 +49,7 @@ class TroveCat extends Error {
 	 *
 	 * If an update occurred and you need to access the updated info.
 	 *
-	 * @return	boolean	success;
+	 * @return	bool	success;
 	 */
 	function fetchData($cat_id, &$res = false) {
 
