@@ -68,8 +68,8 @@ class PluginManager extends Error {
 	/**
 	 * GetPluginObject() - get a particular plugin object
 	 *
-	 * @param	string	$pluginname		name of plugin
-	 * @return	object					plugin object or false if not available
+	 * @param	string	$pluginname	name of plugin
+	 * @return	object	plugin object or false if not available
 	 */
 	function GetPluginObject($pluginname) {
 		if (!isset($this->plugins_objects[$pluginname])) {
@@ -82,6 +82,7 @@ class PluginManager extends Error {
 	function getPluginByName($pluginname) {
 		return @$this->plugins_objects[$pluginname];
 	}
+
 	/**
 	 * PluginIsInstalled() - is a plugin installed?
 	 *
@@ -97,6 +98,13 @@ class PluginManager extends Error {
 		}
 		return false;
 	}
+
+	/**
+	 * isPluginAvailable() - is a plugin available?
+	 *
+	 * @param	string	$pluginname	name of plugin
+	 * @return	bool	true if installed
+	 */
 	function isPluginAvailable($plugin) {
 		$pluginname = $plugin->GetName();
 		$plugins_data = $this->getPlugins();
@@ -211,8 +219,8 @@ class PluginManager extends Error {
 	 * RegisterPlugin() - register a plugin
 	 *
 	 * @param	object	$pluginobject	an object of a subclass of the Plugin class
-     * @return bool
-     */
+	 * @return	bool
+	 */
 	function RegisterPlugin(&$pluginobject) {
 		if (!$pluginobject->GetName()) {
 			exit_error(_("Some plugin did not provide a name. I'd gladly tell you which one, but obviously I cannot. Sorry."),'');
@@ -226,10 +234,10 @@ class PluginManager extends Error {
 	/**
 	 * RunHooks() - call hooks from a particular point
 	 *
-	 * @param hookname - name of the hook
-	 * @param params - array of extra parameters
+	 * @param	string	$hookname - name of the hook
+	 * @param	array	$params - array of extra parameters
 	 *
-	 * @return boolean, true if all returned true.
+	 * @return	boolean, true if all returned true.
 	 */
 	function RunHooks($hookname, & $params) {
 		$result = true;
@@ -291,7 +299,7 @@ class PluginManager extends Error {
 /**
  * plugin_manager_get_object() - get the PluginManager object
  *
- * @return PluginManager the PluginManager object
+ * @return	PluginManager the PluginManager object
  */
 function &plugin_manager_get_object() {
 	global $PLUGINMANAGER_OBJ;
@@ -304,8 +312,8 @@ function &plugin_manager_get_object() {
 /**
  * plugin_get_object() - get a particular Plugin object
  *
- * @param string $pluginname - a plugin name
- * @return Plugin The Plugin object
+ * @param	string	$pluginname - a plugin name
+ * @return	Plugin The Plugin object
  */
 function &plugin_get_object($pluginname) {
 	global $PLUGINMANAGER_OBJ;
@@ -316,8 +324,8 @@ function &plugin_get_object($pluginname) {
 /**
  * register_plugin() - register a plugin
  *
- * @param pluginobject - an object of a subclass of the Plugin class
- * @return bool
+ * @param	pluginobject - an object of a subclass of the Plugin class
+ * @return	bool
  */
 function register_plugin(&$pluginobject) {
 	$pm =& plugin_manager_get_object();
@@ -327,9 +335,9 @@ function register_plugin(&$pluginobject) {
 /**
  * plugin_hook() - run a set of hooks
  *
- * @param string	$hookname - name of the hook
- * @param array		$params - parameters for the hook
- * @return bool
+ * @param	string	$hookname - name of the hook
+ * @param	array		$params - parameters for the hook
+ * @return	bool
  */
 function plugin_hook($hookname, $params = array()) {
 	$pm =& plugin_manager_get_object();
@@ -339,9 +347,9 @@ function plugin_hook($hookname, $params = array()) {
 /**
  * plugin_hook_by_reference() - run a set of hooks with params passed by reference
  *
- * @param string	$hookname - name of the hook
- * @param array		$params - parameters for the hook
- * @return bool
+ * @param	string	$hookname - name of the hook
+ * @param	array	$params - parameters for the hook
+ * @return	bool
  */
 function plugin_hook_by_reference($hookname, &$params) {
 	$pm =& plugin_manager_get_object();
@@ -351,8 +359,8 @@ function plugin_hook_by_reference($hookname, &$params) {
 /**
  * plugin_hook_listeners() - count the number of listeners on a hook
  *
- * @param string $hookname - name of the hook
- * @return int
+ * @param	string	$hookname - name of the hook
+ * @return	int
  */
 function plugin_hook_listeners($hookname) {
 	$pm =& plugin_manager_get_object();
