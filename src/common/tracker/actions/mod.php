@@ -217,7 +217,7 @@ $nb = $count? ' ('.$count.')' : '';
 		<textarea id="tracker-comment" name="details" rows="7" cols="60" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea></p>
 		<h2><?php echo _('Followups: ') ;
 echo '</h2>';
-echo $ah->showMessages();
+$ah->showMessages();
 		?>
 	</td></tr>
 </table>

@@ -122,7 +122,7 @@ $nb = $count? ' ('.$count.')' : '';
 		</td></tr>
 		<tr><td colspan="2">
 		<h2><?php echo _('Followups: ') ; ?></h2>
-		<?php echo $ah->showMessages(); ?>
+		<?php $ah->showMessages(); ?>
 		</td></tr>
 </table>
 </div>

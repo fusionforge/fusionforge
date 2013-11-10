@@ -375,7 +375,7 @@ function session_issecure() {
  *	@param	int		$expiration	Expiration time in UNIX seconds (default 0)
  */
 function session_set_cookie($name, $value, $domain='', $expiration=0) {
-	return session_cookie($name, $value, $domain, $expiration);
+	session_cookie($name, $value, $domain, $expiration);
 }
 function session_cookie($name, $value, $domain='', $expiration=0) {
 	if (php_sapi_name() == 'cli') {

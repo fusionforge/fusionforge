@@ -147,7 +147,7 @@ if (session_loggedin()) {
 	</tr>
 	<tr><td colspan="2">
 		<br />
-		<?php echo $ah->showDetails(); ?>
+		<?php $ah->showDetails(); ?>
 	</td></tr>
 </table>
 <div id="tabber" class="tabber">
@@ -163,7 +163,7 @@ $nb = $count? ' ('.$count.')' : '';
 		<p>
 		<h2><?php echo _('Followups: ') ;
 echo '</h2>';
-echo $ah->showMessages();
+$ah->showMessages();
 		?>
 	</td></tr>
 </table>
