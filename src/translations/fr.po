@@ -5574,7 +5574,7 @@ msgid "Headers Included or not"
 msgstr "En-têtes inclus ou pas"
 
 #: common/tracker/actions/format_csv.php:92 www/pm/format_csv.php:98
-msgid "Add a line with the name of the fields at the fist line."
+msgid "Add a line with the name of the fields at the first line."
 msgstr "Ajouter une première ligne avec le nom des champs."
 
 #: common/tracker/actions/ind.php:44

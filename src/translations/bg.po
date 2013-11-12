@@ -5652,7 +5652,7 @@ msgid "Headers Included or not"
 msgstr ""
 
 #: common/tracker/actions/format_csv.php:92 www/pm/format_csv.php:98
-msgid "Add a line with the name of the fields at the fist line."
+msgid "Add a line with the name of the fields at the first line."
 msgstr ""
 
 #: common/tracker/actions/ind.php:44

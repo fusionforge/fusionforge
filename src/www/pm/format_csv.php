@@ -95,7 +95,7 @@ $sep = getStringFromRequest('sep', ',');
 </li>
 <li>
     <strong><?php echo _('Headers Included or not')._(':'); ?></strong>
-    <?php echo _('Add a line with the name of the fields at the fist line.'); ?>
+    <?php echo _('Add a line with the name of the fields at the first line.'); ?>
 </li>
 </ul>
 
