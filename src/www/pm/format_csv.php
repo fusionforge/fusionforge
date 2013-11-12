@@ -83,7 +83,7 @@ $sep = getStringFromRequest('sep', ',');
 		</td>
 	</tr>
 </table>
-<p><strong><?php echo _('Notes')._(':'); ?></strong></p>
+<h2><?php echo _('Notes'); ?></h2>
 <ul>
 <li>
     <strong><?php echo _('Full/Normal')._(':'); ?></strong>
