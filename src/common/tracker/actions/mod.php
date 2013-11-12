@@ -82,7 +82,7 @@ if (session_loggedin()) {
 </table>
 <p/>
 <?php } ?>
-<table border="0" width="80%">
+<table width="80%">
 	<tr>
 		<td>
 			<strong><?php echo _('Submitted by') ?>:</strong><br />
@@ -108,10 +108,10 @@ if (session_loggedin()) {
 	</tr>
 
 	<tr>
-		<td><strong><?php echo _('Data Type') ?>:</strong><br />
-		<?php
+		<td><strong><?php echo _('Data Type'). _(': ') ?></strong><br />
+<?php
 
-$atf = new ArtifactTypeFactory ($group) ;
+$atf = new ArtifactTypeFactory ($group);
 $tids = array () ;
 foreach ($atf->getArtifactTypes() as $at) {
 	if (forge_check_perm ('tracker', $at->getID(), 'manager')) {
@@ -126,7 +126,7 @@ $res = db_query_params ('SELECT group_artifact_id, name
 
 echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 
-		?>
+?>
 		</td>
 		<td>
 		</td>
@@ -137,7 +137,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 	?>
 
 	<tr>
-		<td><strong><?php echo _('Assigned to')?>:</strong><br />
+		<td><strong><?php echo _('Assigned to')._(': ') ?></strong><br />
 		<?php
 		echo $ath->technicianBox('assigned_to', $ah->getAssignedTo() );
 		echo " ";
@@ -270,7 +270,7 @@ $nb = $count? ' ('.$count.')' : '';
 	<h2><?php echo _('Changes') ?></h2>
 	<?php $ah->showHistory(); ?>
 </div>
-<?php $ah->showRelations(); ?>
+	<?php $ah->showRelations(); ?>
 </div>
 </form>
 <?php

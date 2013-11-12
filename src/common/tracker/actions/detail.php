@@ -65,12 +65,21 @@ echo notepad_func();
 <?php } ?>
 	<table border="0" width="80%">
 		<tr>
-			<td><strong><?php echo _('Date') ?>:</strong><br /><?php echo date( _('Y-m-d H:i'), $ah->getOpenDate() ); ?></td>
-			<td><strong><?php echo _('Priority') ?>:</strong><br /><?php echo $ah->getPriority(); ?></td>
+			<td>
+				<strong><?php echo _('Date')._(': ') ?></strong><br />
+				<?php echo date( _('Y-m-d H:i'), $ah->getOpenDate() ); ?>
+			</td>
+			<td>
+				<strong><?php echo _('Priority')._(': ') ?></strong><br />
+				<?php echo $ah->getPriority(); ?>
+			</td>
 		</tr>
 
 		<tr>
-			<td><strong><?php echo _('State') ?>:</strong><br /><?php echo $ah->getStatusName(); ?></td>
+			<td>
+				<strong><?php echo _('State')._(': ') ?></strong><br />
+				<?php echo $ah->getStatusName(); ?>
+			</td>
 			<td></td>
 		</tr>
 		<tr>
@@ -84,8 +93,10 @@ echo notepad_func();
 				(<tt><?php echo util_make_link_u ($submittedUnixName,$submittedBy,$submittedUnixName); ?></tt>)
 			<?php } ?>
 			</td>
-			<td><strong><?php echo _('Assigned to') ?>:</strong><br />
-			<?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)</td>
+			<td>
+				<strong><?php echo _('Assigned to')._(': ') ?></strong><br />
+				<?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)
+			</td>
 		</tr>
 
 		<?php
@@ -93,7 +104,12 @@ echo notepad_func();
 			$ath->renderRelatedTasks($group, $ah);
 		?>
 
-		<tr><td colspan="2"><strong><?php echo _('Summary') ?>:</strong><br /><?php echo $ah->getSummary(); ?></td></tr>
+		<tr>
+			<td colspan="2">
+				<strong><?php echo _('Summary')._(': ') ?></strong><br />
+				<?php echo $ah->getSummary(); ?>
+			</td>
+		</tr>
 
 		<tr><td colspan="2">
 			<br />
@@ -145,9 +161,9 @@ $nb = $count? ' ('.$count.')' : '';
 		<p />
 	<?php } ?>
 	<h2><?php echo _('Attached Files') ?>:</h2>
-	<?php
+<?php
 	//
-	//  print a list of files attached to this Artifact
+	// print a list of files attached to this Artifact
 	//
 		$ath->renderFiles($group_id, $ah);
 	?>
@@ -168,7 +184,7 @@ $nb = $count? ' ('.$count.')' : '';
 	<h2><?php echo _('Changes') ?></h2>
 	<?php $ah->showHistory(); ?>
 </div>
-<?php $ah->showRelations(); ?>
+	<?php $ah->showRelations(); ?>
 </div>
 </form>
 <?php
