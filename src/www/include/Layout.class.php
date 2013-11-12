@@ -450,11 +450,11 @@ class Layout extends Error {
 	</tr>
 
 	<tr>
-		<td align="left" class="toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft.png" height="9" width="9" alt="" /></td>
+		<td class="align-left toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft.png" height="9" width="9" alt="" /></td>
 		<td class="toptab" width="30"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="30" height="1" alt="" /></td>
 		<td class="toptab"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
 		<td class="toptab" width="30"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="30" height="1" alt="" /></td>
-		<td align="right" class="toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright.png" height="9" width="9" alt="" /></td>
+		<td class="align-right toptab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright.png" height="9" width="9" alt="" /></td>
 	</tr>
 
 	<tr>
@@ -462,7 +462,7 @@ class Layout extends Error {
 		<!-- Outer body row -->
 
 		<td class="toptab"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="10" height="1" alt="" /></td>
-		<td valign="top" width="99%" class="toptab" colspan="3">
+		<td class="top toptab" width="99%" colspan="3">
 
 			<!-- Inner Tabs / Shell -->
 
@@ -486,14 +486,14 @@ if (isset($params['group']) && $params['group']) {
 
 ?>
 			<tr>
-				<td align="left" class="projecttab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft-inner.png" height="9" width="9" alt="" /></td>
+				<td class="align-left projecttab" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topleft-inner.png" height="9" width="9" alt="" /></td>
 				<td class="projecttab" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-				<td align="right" class="projecttab"  width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright-inner.png" height="9" width="9" alt="" /></td>
+				<td class="align-right projecttab"  width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/topright-inner.png" height="9" width="9" alt="" /></td>
 			</tr>
 
 			<tr>
 				<td class="projecttab" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="10" height="1" alt="" /></td>
-				<td valign="top" width="99%" class="projecttab">
+				<td width="99%" class="top projecttab">
 
 	<?php
 
@@ -509,9 +509,9 @@ if (isset($params['group']) && $params['group']) {
 				<td width="10" class="footer3" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="2" height="1" alt="" /></td>
 			</tr>
 			<tr>
-				<td align="left" class="footer1" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomleft-inner.png" height="11" width="11" alt="" /></td>
+				<td class="align-left footer1" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomleft-inner.png" height="11" width="11" alt="" /></td>
 				<td class="footer3"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-				<td align="right" class="footer1" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomright-inner.png" height="11" width="11" alt="" /></td>
+				<td class="align-right footer1" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomright-inner.png" height="11" width="11" alt="" /></td>
 			</tr>
 			</table>
 
@@ -521,9 +521,9 @@ if (isset($params['group']) && $params['group']) {
 		<td width="10" class="footer2"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="2" height="1" alt="" /></td>
 	</tr>
 	<tr>
-		<td align="left" class="footer2" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomleft.png" height="9" width="9" alt="" /></td>
+		<td class="align-left footer2" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomleft.png" height="9" width="9" alt="" /></td>
 		<td class="footer2" colspan="3"><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="1" height="1" alt="" /></td>
-		<td align="right" class="footer2" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomright.png" height="9" width="9" alt="" /></td>
+		<td class="align-right footer2" width="9"><img src="<?php echo $this->imgbaseurl; ?>tabs/bottomright.png" height="9" width="9" alt="" /></td>
 	</tr>
 </table>
 <?php
@@ -561,14 +561,14 @@ if (isset($params['group']) && $params['group']) {
 
 			<table class="fullwidth" style="background:url('.$this->imgroot.'vert-grad.png)">
 			<tr class="align-center">
-			<td valign="top" align="right" width="10" style="background:url('.$this->imgbaseurl.'box-topleft.png)"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
-			<td width="100%" style="background:url('.$this->imgbaseurl.'box-grad.png)"><span class="titlebar">'.$title.'</span></td>
-			<td valign="top" width="10" style="background:url('.$this->imgbaseurl.'box-topright.png)"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
+			<td class="top align-right" width="10" style="background:url('.$this->imgbaseurl.'box-topleft.png)"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
+			<td class="fullwidth" style="background:url('.$this->imgbaseurl.'box-grad.png)"><span class="titlebar">'.$title.'</span></td>
+			<td class="top" width="10" style="background:url('.$this->imgbaseurl.'box-topright.png)"><img src="'.$this->imgbaseurl.'clear.png" width="10" height="20" alt="" /></td>
 			</tr>
 			<tr>
 			<td colspan="3">
-			<table cellspacing="2" cellpadding="2" width="100%" border="0">
-			<tr align="left">
+			<table cellspacing="2" cellpadding="2" class="fullwidth">
+			<tr class="align-left">
 			<td colspan="2">
 
 			<!-- Box Top End -->';
@@ -995,9 +995,7 @@ if (isset($params['group']) && $params['group']) {
 			return '';
 		} else {
 			return '
-				<div class="error">' .
-			    util_pwrap(strip_tags($msg, '<br>')) .
-			    "</div>\n";
+				<p class="error">'.util_pwrap(strip_tags($msg, '<br>'))."</p\n";
 		}
 	}
 
