@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-07 15:16+0100\n"
+"POT-Creation-Date: 2013-11-12 12:38+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -233,13 +233,17 @@ msgstr ""
 #: common/reporting/report_utils.php:27
 #: common/search/SearchQuery.class.php:120
 #: common/tracker/actions/browse.php:402 common/tracker/actions/browse.php:405
-#: common/tracker/actions/browse.php:749 common/tracker/actions/mod.php:147
-#: common/tracker/actions/mod.php:155 common/tracker/actions/mod.php:175
-#: common/tracker/actions/mod.php:216 common/tracker/actions/query.php:325
-#: common/tracker/actions/query.php:340 common/tracker/actions/query.php:346
-#: common/tracker/actions/query.php:347 common/tracker/actions/query.php:382
-#: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
-#: common/tracker/actions/query.php:391 common/tracker/actions/tracker.php:388
+#: common/tracker/actions/browse.php:749 common/tracker/actions/detail.php:69
+#: common/tracker/actions/detail.php:73 common/tracker/actions/detail.php:80
+#: common/tracker/actions/detail.php:97 common/tracker/actions/detail.php:109
+#: common/tracker/actions/mod.php:111 common/tracker/actions/mod.php:140
+#: common/tracker/actions/mod.php:147 common/tracker/actions/mod.php:155
+#: common/tracker/actions/mod.php:175 common/tracker/actions/mod.php:216
+#: common/tracker/actions/query.php:325 common/tracker/actions/query.php:340
+#: common/tracker/actions/query.php:346 common/tracker/actions/query.php:347
+#: common/tracker/actions/query.php:382 common/tracker/actions/query.php:384
+#: common/tracker/actions/query.php:386 common/tracker/actions/query.php:391
+#: common/tracker/actions/tracker.php:388
 #: common/tracker/actions/tracker.php:393
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
@@ -1098,7 +1102,7 @@ msgstr "Gruppiere die Dokument-Zugehörigkeit in:"
 
 #: common/docman/views/editfile.php:70 common/tracker/actions/browse.php:405
 #: common/tracker/actions/browse.php:563 common/tracker/actions/browse.php:749
-#: common/tracker/actions/detail.php:73
+#: common/tracker/actions/detail.php:80
 #: common/tracker/actions/mod-limited.php:128
 #: common/tracker/actions/mod.php:155 common/tracker/actions/query.php:340
 #: common/tracker/Artifact.class.php:937
@@ -1258,7 +1262,7 @@ msgstr "Nachname:"
 #: plugins/mantisbt/view/editIssue.php:130
 #: plugins/mantisbt/view/viewIssue.php:87
 #: plugins/mantisbt/view/viewIssues.php:305 www/admin/groupedit.php:107
-#: www/admin/grouplist.php:68 www/admin/pluginman.php:134
+#: www/admin/grouplist.php:68 www/admin/pluginman.php:137
 #: www/admin/search.php:77 www/admin/search.php:151 www/admin/userlist.php:66
 #: www/export/rssAboTask.php:145 www/frs/admin/editrelease.php:234
 #: www/frs/admin/index.php:156 www/my/dashboard.php:72
@@ -1339,7 +1343,7 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:103
 #: common/forum/ForumHTML.class.php:219 common/pm/ProjectTask.class.php:1211
 #: common/tracker/actions/browse.php:607 common/tracker/actions/browse.php:618
-#: common/tracker/actions/browse.php:638 common/tracker/actions/detail.php:68
+#: common/tracker/actions/browse.php:638 common/tracker/actions/detail.php:70
 #: common/tracker/actions/downloadcsv.php:84
 #: common/tracker/actions/downloadcsv.php:85
 #: common/tracker/actions/downloadcsv.php:86
@@ -1862,7 +1866,7 @@ msgid "User"
 msgstr "Benutzer"
 
 #: common/docman/views/reporting.php:169 common/forum/ForumHTML.class.php:69
-#: common/tracker/actions/detail.php:68
+#: common/tracker/actions/detail.php:69
 #: common/tracker/include/ArtifactHtml.class.php:110
 #: common/tracker/include/ArtifactHtml.class.php:147
 #: common/tracker/include/ArtifactTypeHtml.class.php:375
@@ -2332,7 +2336,7 @@ msgstr "Geposted von"
 
 #: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:379
 #: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:555
-#: common/tracker/actions/detail.php:96
+#: common/tracker/actions/detail.php:109
 #: common/tracker/actions/mod-limited.php:142
 #: common/tracker/actions/mod.php:167 common/tracker/actions/query.php:198
 #: common/tracker/actions/query.php:382
@@ -2430,7 +2434,7 @@ msgstr "Datei zum hochladen"
 msgid "Warning: Uploaded file will replace current file"
 msgstr "Warnung: Die ausgewählte Datei wird permanent gelöscht"
 
-#: common/forum/ForumHTML.class.php:350 common/tracker/actions/detail.php:135
+#: common/forum/ForumHTML.class.php:350 common/tracker/actions/detail.php:151
 #: common/tracker/actions/mod-limited.php:177
 #: common/tracker/actions/mod.php:240
 #: common/tracker/include/ArtifactTypeHtml.class.php:371
@@ -3809,18 +3813,27 @@ msgstr ""
 msgid "Show source"
 msgstr "Zeige Quelle"
 
+#: common/include/Plugin.class.php:192
+msgid ""
+"Soft link to www could not be created. Check the write permissions for "
+"apache in fusionforge www/plugins dir or create the link manually."
+msgstr ""
+"Ein Softlink zu www konnte nicht erstellt werden. Prüfen Sie die "
+"Schreibrechte für Apache in Gforge www/plugins dir oder erstellen Sie den "
+"Link manuell."
+
 #: common/include/Plugin.class.php:204 common/include/Plugin.class.php:221
 #, php-format
 msgid ""
-"Config file could not be linked to etc/gforge/plugins/%s. Check the write "
-"permissions for apache in /etc/gforge/plugins or create the link manually."
+"Config file could not be linked to %s. Check the write permissions for "
+"apache in /etc/fusionforge/plugins or create the link manually."
 msgstr ""
-"Die Config Datei konnte nicht mit etc/gforge/plugins/%s verbunden werden. "
-"Prüfen Sie die Schreibrechte für Apache in/etc/gforge/plugins oder erstellen "
-"Sie den Link manuell."
+"Die Config Datei konnte nicht mit %s verbunden "
+"werden. Prüfen Sie die Schreibrechte für Apache in/etc/fusionforge/plugins "
+"oder erstellen Sie den Link manuell."
 
 #: common/include/Plugin.class.php:250 common/include/Plugin.class.php:307
-#: www/admin/pluginman.php:276
+#: www/admin/pluginman.php:279
 msgid "Current plugin status is"
 msgstr ""
 
@@ -3834,7 +3847,7 @@ msgstr ""
 msgid "No description available."
 msgstr "Keine Statistiken verfügbar"
 
-#: common/include/PluginManager.class.php:218
+#: common/include/PluginManager.class.php:226
 msgid ""
 "Some plugin did not provide a name. I'd gladly tell you which one, but "
 "obviously I cannot. Sorry."
@@ -3844,7 +3857,7 @@ msgstr ""
 msgid "More than one value for the plugin + key"
 msgstr ""
 
-#: common/include/pre.php:283
+#: common/include/pre.php:239
 #, php-format
 msgid "Posted data is too large. %1$s exceeds the maximum size of %2$s"
 msgstr ""
@@ -5395,7 +5408,7 @@ msgid "Id"
 msgstr "ID"
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:565
-#: common/tracker/actions/browse.php:737 common/tracker/actions/detail.php:69
+#: common/tracker/actions/browse.php:737 common/tracker/actions/detail.php:73
 #: common/tracker/actions/mod-limited.php:119
 #: common/tracker/actions/mod.php:147 common/tracker/actions/query.php:197
 #: common/tracker/include/build_submission_form.php:66
@@ -5537,7 +5550,7 @@ msgid "Clear all"
 msgstr "Alle abwählen"
 
 #: common/tracker/actions/browse.php:567 common/tracker/actions/browse.php:745
-#: common/tracker/actions/detail.php:87
+#: common/tracker/actions/detail.php:97
 #: common/tracker/actions/mod-limited.php:114
 #: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:933
 #: common/tracker/include/build_submission_form.php:62
@@ -5553,7 +5566,7 @@ msgstr "Alle abwählen"
 msgid "Assigned to"
 msgstr "Zugewiesen an"
 
-#: common/tracker/actions/browse.php:569 common/tracker/actions/detail.php:78
+#: common/tracker/actions/browse.php:569 common/tracker/actions/detail.php:87
 #: common/tracker/actions/mod-limited.php:86 common/tracker/actions/mod.php:88
 #: common/tracker/views/form-customizelist.php:42
 #: cronjobs/send_pending_items_mail.php:79
@@ -5678,19 +5691,19 @@ msgstr "Ich bin sicher"
 msgid "Save Changes"
 msgstr "Änderungen speichern"
 
-#: common/tracker/actions/detail.php:108
+#: common/tracker/actions/detail.php:124
 #: common/tracker/actions/mod-limited.php:158
 #: common/tracker/actions/mod.php:189 common/tracker/actions/query.php:386
 #, fuzzy
 msgid "Followups"
 msgstr "Nachfassen"
 
-#: common/tracker/actions/detail.php:117
+#: common/tracker/actions/detail.php:133
 #: common/tracker/actions/mod-limited.php:161 www/pm/mod_task.php:126
 msgid "Add A Comment"
 msgstr "Kommentar hinzufügen"
 
-#: common/tracker/actions/detail.php:124
+#: common/tracker/actions/detail.php:140
 #: common/tracker/actions/mod-limited.php:164
 #: common/tracker/actions/mod.php:218
 #: www/pm/include/ProjectTaskHTML.class.php:141
@@ -5698,14 +5711,14 @@ msgstr "Kommentar hinzufügen"
 msgid "Followups: "
 msgstr "Nachfassen"
 
-#: common/tracker/actions/detail.php:139
+#: common/tracker/actions/detail.php:155
 #: common/tracker/actions/mod-limited.php:181
 #: common/tracker/actions/mod.php:244
 #: common/tracker/include/build_submission_form.php:106
 msgid "Attach Files"
 msgstr "Dateien anhängen"
 
-#: common/tracker/actions/detail.php:139
+#: common/tracker/actions/detail.php:155
 #: common/tracker/actions/mod-limited.php:181
 #: common/tracker/actions/mod.php:244
 #: common/tracker/include/build_submission_form.php:106
@@ -5714,13 +5727,13 @@ msgstr "Dateien anhängen"
 msgid "max upload size: "
 msgstr ""
 
-#: common/tracker/actions/detail.php:147
+#: common/tracker/actions/detail.php:163
 #: common/tracker/actions/mod-limited.php:188
 #: plugins/mantisbt/view/viewAttachment.php:44
 msgid "Attached Files"
 msgstr "Angehängte Dateien"
 
-#: common/tracker/actions/detail.php:157
+#: common/tracker/actions/detail.php:173
 #: common/tracker/actions/mod-limited.php:198
 #: common/tracker/actions/mod.php:259
 #: plugins/scmcvs/common/CVSPlugin.class.php:177
@@ -5731,7 +5744,7 @@ msgstr "Angehängte Dateien"
 msgid "Commits"
 msgstr "Commits"
 
-#: common/tracker/actions/detail.php:167 common/tracker/actions/detail.php:168
+#: common/tracker/actions/detail.php:183 common/tracker/actions/detail.php:184
 #: common/tracker/actions/mod-limited.php:208
 #: common/tracker/actions/mod-limited.php:209
 #: common/tracker/actions/mod.php:269 common/tracker/actions/mod.php:270
@@ -6553,9 +6566,9 @@ msgstr "Download"
 #: common/tracker/include/ArtifactTypeHtml.class.php:546
 #: common/tracker/include/ArtifactTypeHtml.class.php:591
 #: common/tracker/include/ArtifactTypeHtml.class.php:758
-#: plugins/scmhg/common/HgPlugin.class.php:608 www/admin/pluginman.php:227
-#: www/admin/pluginman.php:246 www/admin/pluginman.php:258
-#: www/admin/pluginman.php:259 www/include/html.php:322
+#: plugins/scmhg/common/HgPlugin.class.php:608 www/admin/pluginman.php:230
+#: www/admin/pluginman.php:249 www/admin/pluginman.php:261
+#: www/admin/pluginman.php:262 www/include/html.php:322
 #: www/include/html.php:554 www/include/html.php:645 www/include/html.php:668
 #: www/include/html.php:702 www/include/html.php:745 www/pm/format_csv.php:78
 #: www/pm/ganttpage.php:152 www/tracker/roadmap.php:440
@@ -7224,7 +7237,7 @@ msgstr "Konfigurieren Sie erlaube Rollen für den Übergang von %1$s zu %2$s"
 
 #: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:56
 #: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:239
-#: www/include/Layout.class.php:1334
+#: www/include/Layout.class.php:1332
 msgid "Preferences"
 msgstr "Einstellungen"
 
@@ -8755,7 +8768,7 @@ msgid ""
 "the web site. They are created manually."
 msgstr ""
 
-#: plugins/blocks/www/index.php:199 www/admin/pluginman.php:207
+#: plugins/blocks/www/index.php:199 www/admin/pluginman.php:210
 #: www/admin/userlist.php:68
 msgid "Active"
 msgstr "Aktiv"
@@ -9795,7 +9808,7 @@ msgid "User account URL"
 msgstr "%1$s Account-Registrierung"
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:80
-#: plugins/mantisbt/view/admin/viewVersion.php:53 www/admin/pluginman.php:135
+#: plugins/mantisbt/view/admin/viewVersion.php:53 www/admin/pluginman.php:138
 #: www/people/people_utils.php:159 www/people/people_utils.php:299
 #: www/project/admin/users.php:302 www/project/admin/users.php:376
 #: www/project/admin/users.php:436 www/project/admin/users.php:460
@@ -14749,14 +14762,13 @@ msgstr ""
 "Dokumentation für weitere Informationen, wie man Schlüssel teilt."
 
 #: www/account/editsshkeys.php:76
-#, fuzzy
 msgid ""
 "Important: Make sure there are no line breaks. After submitting, verify that "
 "the number of keys in your file is what you expected."
 msgstr ""
-"Authorisierte Schlüssel:<br /><em>Wichtig: Stellen Sie sicher, dass es keine "
+"Wichtig: Stellen Sie sicher, dass es keine "
 "Zeilenumbrüche, außer zwischen Schlüsseln, gibt. Nach Bestätigung überprüfen "
-"Sie, dass die Anzahl der Schlüssel in Ihrer Datei wie erwartet ist.</em>"
+"Sie, dass die Anzahl der Schlüssel in Ihrer Datei wie erwartet ist."
 
 #: www/account/editsshkeys.php:81
 msgid ""
@@ -15727,7 +15739,7 @@ msgstr "SCM Box:"
 msgid "Resend New Project Instruction Email"
 msgstr "Sende erneut neue Email mit Projekt-Anweisungen"
 
-#: www/admin/grouplist.php:27 www/include/Layout.class.php:1399
+#: www/admin/grouplist.php:27 www/include/Layout.class.php:1397
 #: www/softwaremap/full_list.php:53
 msgid "Project List"
 msgstr "Projektliste"
@@ -15921,7 +15933,7 @@ msgstr "Hinzufügen, Löschen, oder Bearbeiten von Site-Designs"
 msgid "Most Recent Opened Sessions"
 msgstr "Kürzlich geöffnete Sitzungen"
 
-#: www/admin/index.php:224 www/admin/pluginman.php:123
+#: www/admin/index.php:224 www/admin/pluginman.php:126
 msgid "Plugin Manager"
 msgstr "Plugin Manager"
 
@@ -16120,12 +16132,12 @@ msgid_plural "%d projects detached from plugin."
 msgstr[0] "%d Projekt losgelöst vom Plugin."
 msgstr[1] "%d Projekte losgelöst vom Plugin."
 
-#: www/admin/pluginman.php:70 www/admin/pluginman.php:105
+#: www/admin/pluginman.php:70 www/admin/pluginman.php:120
 #, php-format
 msgid "Plugin %1$s updated Successfully"
 msgstr "Plugin %1$s erfolgreich aktualisiert."
 
-#: www/admin/pluginman.php:75 www/admin/pluginman.php:113
+#: www/admin/pluginman.php:75 www/admin/pluginman.php:111
 #, fuzzy
 msgid "Could not get plugin object"
 msgstr "Konnte kein Foren-Objekt einholen"
@@ -16134,56 +16146,56 @@ msgstr "Konnte kein Foren-Objekt einholen"
 msgid "Success, config not deleted"
 msgstr "Erfolg, Config nicht gelöscht"
 
-#: www/admin/pluginman.php:129
+#: www/admin/pluginman.php:132
 msgid ""
 "Here you can activate / deactivate site-wide plugins which are in the "
 "plugins/ folder. Then, you should activate them also per project, per user "
 "or whatever the plugin specifically applies to."
 msgstr ""
 
-#: www/admin/pluginman.php:131
+#: www/admin/pluginman.php:134
 msgid ""
 "Be careful because some projects/users can be using the plugin. Deactivating "
 "it will remove the plugin from all users/projects."
 msgstr ""
 
-#: www/admin/pluginman.php:133
+#: www/admin/pluginman.php:136
 msgid "Plugin Name"
 msgstr "Plugin Name"
 
-#: www/admin/pluginman.php:136
+#: www/admin/pluginman.php:139
 msgid "Users Using it"
 msgstr "Nutzer die es verwenden"
 
-#: www/admin/pluginman.php:137
+#: www/admin/pluginman.php:140
 #, fuzzy
 msgid "Projects Using it"
 msgstr "Gruppen die es verwenden"
 
-#: www/admin/pluginman.php:138
+#: www/admin/pluginman.php:141
 #, fuzzy
 msgid "Global Administration View"
 msgstr "Administration"
 
-#: www/admin/pluginman.php:210
+#: www/admin/pluginman.php:213
 msgid "Deactivate"
 msgstr "Deaktivieren"
 
-#: www/admin/pluginman.php:224
+#: www/admin/pluginman.php:227
 #, fuzzy, php-format
 msgid "%d users"
 msgstr "Nutzer hinzufügen"
 
-#: www/admin/pluginman.php:243
+#: www/admin/pluginman.php:246
 #, fuzzy, php-format
 msgid "%d projects"
 msgstr "%1$s Projekte"
 
-#: www/admin/pluginman.php:254
+#: www/admin/pluginman.php:257
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: www/admin/pluginman.php:257 www/admin/userlist.php:118
+#: www/admin/pluginman.php:260 www/admin/userlist.php:118
 msgid "Activate"
 msgstr "Aktivieren"
 
@@ -17774,7 +17786,7 @@ msgstr "Versionsname:"
 msgid "Features Boxes"
 msgstr "Feature Anfragen"
 
-#: www/include/features_boxes.php:38 www/include/Layout.class.php:1387
+#: www/include/features_boxes.php:38 www/include/Layout.class.php:1385
 #: www/softwaremap/tag_cloud.php:52
 msgid "Tag Cloud"
 msgstr "Tag Cloud"
@@ -18119,20 +18131,20 @@ msgstr "de"
 msgid "Quick Jump To..."
 msgstr "Schnellwechsel nach..."
 
-#: www/include/Layout.class.php:1389
+#: www/include/Layout.class.php:1387
 #, fuzzy
 msgid "Browse per tags defined by the projects."
 msgstr "Kein Kennzeichen für dieses Projekt festgelegt"
 
-#: www/include/Layout.class.php:1393 www/softwaremap/trove_list.php:84
+#: www/include/Layout.class.php:1391 www/softwaremap/trove_list.php:84
 msgid "Project Tree"
 msgstr "Projektbaum"
 
-#: www/include/Layout.class.php:1395 www/snippet/index.php:81
+#: www/include/Layout.class.php:1393 www/snippet/index.php:81
 msgid "Browse by Category"
 msgstr "Nach Kategorie durchsuchen"
 
-#: www/include/Layout.class.php:1401
+#: www/include/Layout.class.php:1399
 #, fuzzy
 msgid "Complete listing of available projects."
 msgstr "Hier ist eine Liste der verfügbaren Positionen für dieses Projekt."
@@ -25241,13 +25253,13 @@ msgstr "Persönliche Seite für %s"
 
 #, fuzzy
 #~ msgid ""
-#~ "Config file could not be linked to etc/gforge/plugins/%1$s. Check the "
-#~ "write permissions for apache in /etc/gforge/plugins or create the link "
-#~ "manually."
+#~ "Config file could not be linked to etc/fusionforge/plugins/%1$s. Check "
+#~ "the write permissions for apache in /etc/fusionforge/plugins or create "
+#~ "the link manually."
 #~ msgstr ""
-#~ "<br />Die Config Datei konnte nicht mit etc/gforge/plugins/%1$s verbunden "
-#~ "werden. Prüfen Sie die Schreibrechte für Apache in/etc/gforge/plugins "
-#~ "oder erstellen Sie den Link manuell."
+#~ "<br />Die Config Datei konnte nicht mit etc/fusionforge/plugins/%1$s "
+#~ "verbunden werden. Prüfen Sie die Schreibrechte für Apache in/etc/"
+#~ "fusionforge/plugins oder erstellen Sie den Link manuell."
 
 #~ msgid "UPDATE FAILED"
 #~ msgstr "UPDATE FEHLGESCHLAGEN"
@@ -26942,14 +26954,6 @@ msgstr "Persönliche Seite für %s"
 
 #~ msgid "Webcalendar"
 #~ msgstr "Webkalender"
-
-#~ msgid ""
-#~ "<br />Soft link to www couldn't be created. Check the write permissions "
-#~ "for apache in gforge www/plugins dir or create the link manually."
-#~ msgstr ""
-#~ "<br />Ein Softlink zu www konnte nicht erstellt werden. Prüfen Sie die "
-#~ "Schreibrechte für Apache in Gforge www/plugins dir oder erstellen Sie den "
-#~ "Link manuell."
 
 #~ msgid "Initialisation error<br />Database said: "
 #~ msgstr "Initialisierungsfehler <br />Die Datenbank meldet:"
