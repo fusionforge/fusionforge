@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-12 12:38+0100\n"
+"POT-Creation-Date: 2013-11-12 14:06+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -3664,9 +3664,9 @@ msgid ""
 "Soft link to www could not be created. Check the write permissions for "
 "apache in fusionforge www/plugins dir or create the link manually."
 msgstr ""
-"Le lien symbolique vers www n'a pas pu être créé.  Veuillez vérifier "
-"les permissions du répertoire www/plugins pour Apache, ou créer le "
-"lien manuellement."
+"Le lien symbolique vers www n'a pas pu être créé.  Veuillez vérifier les "
+"permissions du répertoire www/plugins pour Apache, ou créer le lien "
+"manuellement."
 
 #: common/include/Plugin.class.php:204 common/include/Plugin.class.php:221
 #, php-format
@@ -3674,10 +3674,9 @@ msgid ""
 "Config file could not be linked to %s. Check the write permissions for "
 "apache in /etc/fusionforge/plugins or create the link manually."
 msgstr ""
-"Le fichier de configuration n'a pas pu être lié à %s."
-"Veuillez vérifier les permissions du "
-"répertoire /etc/fusionforge/plugins pour Apache, ou créer le lien "
-"manuellement."
+"Le fichier de configuration n'a pas pu être lié à %s.  Veuillez vérifier les "
+"permissions du répertoire /etc/fusionforge/plugins pour Apache, ou créer le "
+"lien manuellement."
 
 #: common/include/Plugin.class.php:250 common/include/Plugin.class.php:307
 #: www/admin/pluginman.php:279
@@ -4165,18 +4164,12 @@ msgstr ""
 "\n"
 "<%2$s>\n"
 "\n"
-"Vous avez une semaine pour confirmer votre compte.  Au-delà, il sera\n"
-"supprimé.\n"
+"(Si vous ne voyez rien ci-dessus, c'est probablement en raison d'un bogue de "
+"votre client de messagerie.\n"
+"Utilisez le lien ci-dessous en prenant garde qu'il soit entré sur une seule "
+"ligne)\n"
 "\n"
-"(Si vous ne voyez rien ci-dessus, c'est probablement en raison d'un\n"
-"bogue de votre client de messagerie.  Utilisez le lien ci-dessous en\n"
-"prenant garde qu'il soit entré sur une seule ligne.)\n"
-"\n"
-"%2$s\n"
-"\n"
-"Profitez du site.\n"
-"\n"
-"-- L'équipe de %3$s\n"
+"%2$s"
 
 #: common/include/User.class.php:493
 msgid "Enjoy the site."
@@ -13708,9 +13701,8 @@ msgid "Unable to retrieve data"
 msgstr "Impossible d'insérer une base de données déjà active"
 
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:96
-#, fuzzy
 msgid "Related SVN commits"
-msgstr "Liens vers les envois SVN pertinents"
+msgstr " Envois SVN liés"
 
 #: plugins/scmsvn/common/SVNPlugin.class.php:108
 msgid "Anonymous Subversion Access"
@@ -18391,9 +18383,8 @@ msgstr ""
 "Soumettre des annonces en provenance du projet 'annonces' n'est pas autorisé."
 
 #: www/news/submit.php:107
-#, fuzzy
 msgid "Error: insert failed."
-msgstr "Erreur d'insertion : "
+msgstr "Erreur d'insertion."
 
 #: www/news/submit.php:110
 msgid "News Added."
@@ -20240,18 +20231,17 @@ msgid "New Role"
 msgstr "Nouveau rôle"
 
 #: www/project/admin/roleedit.php:113
-#, fuzzy
 msgid ""
 "Use this page to edit the permissions attached to each role.  Note that each "
 "role has at least as much access as the Anonymous and LoggedIn roles.  For "
 "example, if the Anonymous role has read access to a forum, all other roles "
 "will have it too."
 msgstr ""
-"Utilisez cette page pour modifier les permissions associées aux rôles dans "
-"le projet. Notez que chaque rôle dispose au moins des permissions associées "
-"aux rôles « Anonyme » et « Connecté ».  Ainsi, si le rôle « Anonyme » a "
-"accès en lecture à un forum, tous les utilisateurs auront cet accès, quel "
-"que soit leur rôle."
+"Utilisez cette page pour modifier les permissions associées à chaque rôle."
+"Notez que chaque rôle dispose au moins des permissions associées aux rôles "
+"« Anonyme » et « Connecté ».  Ainsi, si le rôle « Anonyme » a accès en "
+"lecture à un forum, tous les utilisateurs auront cet accès, quel que soit "
+"leur rôle."
 
 #: www/project/admin/roleedit.php:131
 msgid "Shared role (can be referenced by other projects)"
