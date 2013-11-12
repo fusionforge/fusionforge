@@ -341,7 +341,6 @@ if (session_loggedin()) {
 				array ($ath->getID()));
 }
 
-
 if (db_numrows($res)>0) {
 	echo '<form action="'. getStringFromServer('PHP_SELF') .'" method="get">';
 	echo '<input type="hidden" name="group_id" value="'.$group_id.'" />';
@@ -734,7 +733,7 @@ if ($art_arr && $art_cnt > 0) {
 	}
 	$ath->renderExtraFields($sel,true,_('No Change'),false,'', array(ARTIFACT_EXTRAFIELD_FILTER_INT),true);
 		echo   '<tr>
-			<td><strong>'._('Priority').':</strong><br />';
+			<td><strong>'._('Priority')._(':').'</strong><br />';
 		build_priority_select_box ('priority', '100', true);
 		echo '</td><td>';
 
@@ -742,7 +741,7 @@ if ($art_arr && $art_cnt > 0) {
 			</tr>
 
 			<tr>
-			<td><strong>'._('Assigned to').':</strong><br />'.
+			<td><strong>'._('Assigned to')._(':').'</strong><br />'.
 				$ath->technicianBox ('assigned_to','100.1',true,_('Nobody'),'100.1',_('No Change')) .'</td>
 			<td>';
 		if (!$ath->usesCustomStatuses()) {
@@ -752,7 +751,7 @@ if ($art_arr && $art_cnt > 0) {
 		echo '</td>';
 		echo '</tr>';
 
-		echo '<tr><td colspan="2"><strong>'._('Canned Response').':</strong><br />'.
+		echo '<tr><td colspan="2"><strong>'._('Canned Response')._(':').'</strong><br />'.
 				$ath->cannedResponseBox ('canned_response') .'</td></tr>
 
 			<tr><td colspan="3" class="align-center"><input type="submit" name="submit" value="'._('Mass Update').'" /></td></tr>

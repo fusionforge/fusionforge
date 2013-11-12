@@ -66,25 +66,25 @@ echo notepad_func();
 	<table border="0" width="80%">
 		<tr>
 			<td>
-				<strong><?php echo _('Date')._(': ') ?></strong><br />
+				<strong><?php echo _('Date')._(':'); ?></strong><br />
 				<?php echo date( _('Y-m-d H:i'), $ah->getOpenDate() ); ?>
 			</td>
 			<td>
-				<strong><?php echo _('Priority')._(': ') ?></strong><br />
+				<strong><?php echo _('Priority')._(':'); ?></strong><br />
 				<?php echo $ah->getPriority(); ?>
 			</td>
 		</tr>
 
 		<tr>
 			<td>
-				<strong><?php echo _('State')._(': ') ?></strong><br />
+				<strong><?php echo _('State')._(':'); ?></strong><br />
 				<?php echo $ah->getStatusName(); ?>
 			</td>
 			<td></td>
 		</tr>
 		<tr>
 	        <td>
-			<strong><?php echo _('Submitted by') ?>:</strong><br />
+			<strong><?php echo _('Submitted by')._(':'); ?></strong><br />
 			<?php echo $ah->getSubmittedRealName();
 			if($ah->getSubmittedBy() != 100) {
 				$submittedUnixName = $ah->getSubmittedUnixName();
@@ -94,7 +94,7 @@ echo notepad_func();
 			<?php } ?>
 			</td>
 			<td>
-				<strong><?php echo _('Assigned to')._(': ') ?></strong><br />
+				<strong><?php echo _('Assigned to')._(':'); ?></strong><br />
 				<?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)
 			</td>
 		</tr>
@@ -106,7 +106,7 @@ echo notepad_func();
 
 		<tr>
 			<td colspan="2">
-				<strong><?php echo _('Summary')._(': ') ?></strong><br />
+				<strong><?php echo _('Summary')._(':'); ?></strong><br />
 				<?php echo $ah->getSummary(); ?>
 			</td>
 		</tr>
@@ -130,7 +130,7 @@ $nb = $count? ' ('.$count.')' : '';
 			<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
 			<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>" />
 			<p>
-			<strong><?php echo _('Add A Comment') ?>:</strong>
+			<strong><?php echo _('Add A Comment')._(':'); ?></strong>
 			<?php echo notepad_button('document.forms.trackerdetailform.details') ?><br />
 			<textarea name="details" rows="10" cols="60"></textarea>
 			</p>
@@ -152,7 +152,7 @@ $nb = $count? ' ('.$count.')' : '';
 <table width="80%">
 	<tr><td colspan="2">
 	<?php if (session_loggedin() && ($ah->getSubmittedBy() == user_getid())) { ?>
-		<strong><?php echo _('Attach Files'); ?>:</strong>  <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
+		<strong><?php echo _('Attach Files')._(':'); ?></strong>  <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
 		<input type="file" name="input_file0" size="30" /><br />
 		<input type="file" name="input_file1" size="30" /><br />
 		<input type="file" name="input_file2" size="30" /><br />
@@ -160,7 +160,7 @@ $nb = $count? ' ('.$count.')' : '';
 		<input type="file" name="input_file4" size="30" />
 		<p />
 	<?php } ?>
-	<h2><?php echo _('Attached Files') ?>:</h2>
+	<h2><?php echo _('Attached Files')._(':'); ?></h2>
 <?php
 	//
 	// print a list of files attached to this Artifact

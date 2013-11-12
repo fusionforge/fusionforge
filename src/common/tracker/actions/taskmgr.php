@@ -104,12 +104,12 @@ if (getStringFromRequest('add_to_task')) {
 
 	echo '
 		<form name="foo" action="'. getStringFromServer('PHP_SELF') .'?func=taskmgr&amp;group_id='.$group_id.'&amp;atid='.$atid.'&amp;aid='.$aid.'" method="post">
-		<p><strong>'._('Tracker Item').':</strong> [#'.$a->getID().'] '.$a->getSummary().'</p>
-		<p><strong>'._('Tasks Project').':</strong><br />';
+		<p><strong>'._('Tracker Item')._(':').'</strong> [#'.$a->getID().'] '.$a->getSummary().'</p>
+		<p><strong>'._('Tasks Project')._(':').'</strong><br />';
 	echo $pg->getName().'
 		<input type="hidden" name="group_project_id" value="'.$pg->getID().'" /></p>
 		<p>
-		<strong>'._('Task').':</strong></p>
+		<strong>'._('Task')._(':').'</strong></p>
 		<select name="project_task_id">';
 	foreach($tasks as $task) {
 		echo '<option value="'.$task->getID().'">'.$task->getSummary().'</option>';
@@ -158,8 +158,8 @@ if (getStringFromRequest('add_to_task')) {
 		'title'=>_('Build Relationship Between Tracker Items and Tasks')));
 
 	echo '<form name="foo" action="'. getStringFromServer('PHP_SELF') .'?func=taskmgr&amp;group_id='.$group_id.'&amp;atid='.$atid.'&amp;aid='.$aid.'" method="post">
-		<p><strong>'._('Tracker Item').':</strong> [#'.$a->getID().'] '.$a->getSummary().'</p>
-		<p><strong>'._('Tasks Project').':</strong></p>
+		<p><strong>'._('Tracker Item')._(':').'</strong> [#'.$a->getID().'] '.$a->getSummary().'</p>
+		<p><strong>'._('Tasks Project')._(':').'</strong></p>
 		<select name="group_project_id">';
 	for ($i=0; $i<count($pg_arr); $i++) {
 		echo '<option value="'.$pg_arr[$i]->getID().'">'.$pg_arr[$i]->getName().'</option>';
@@ -170,7 +170,6 @@ if (getStringFromRequest('add_to_task')) {
 		<input type="submit" name="new_task" value="'._('Create New Task').'" />
 		</p>
 		</form>';
-
 }
 
 $ath->footer(array());

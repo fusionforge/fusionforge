@@ -85,7 +85,7 @@ if (session_loggedin()) {
 <table width="80%">
 	<tr>
 		<td>
-			<strong><?php echo _('Submitted by') ?>:</strong><br />
+			<strong><?php echo _('Submitted by')._(':'); ?></strong><br />
 			<?php echo $ah->getSubmittedRealName();
 			if($ah->getSubmittedBy() != 100) {
 				$submittedUnixName = $ah->getSubmittedUnixName();
@@ -94,13 +94,13 @@ if (session_loggedin()) {
 				(<tt><?php echo util_make_link_u ($submittedUnixName,$submittedBy,$submittedUnixName); ?></tt>)
 			<?php } ?>
 		</td>
-		<td><strong><?php echo _('Date Submitted') ?>:</strong><br />
+		<td><strong><?php echo _('Date Submitted')._(':'); ?></strong><br />
 		<?php
 		echo date(_('Y-m-d H:i'), $ah->getOpenDate() );
 
 		$close_date = $ah->getCloseDate();
 		if ($ah->getStatusID()==2 && $close_date > 1) {
-			echo '<br /><strong>'._('Date Closed').':</strong><br />'
+			echo '<br /><strong>'._('Date Closed')._(':').'</strong><br />'
 				.date(_('Y-m-d H:i'), $close_date);
 		}
 		?>
@@ -164,7 +164,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 		$ath->renderFiles($group_id, $ah);
 	?>
 	<tr>
-		<td colspan="2"><strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>:</strong><br />
+		<td colspan="2"><strong><?php echo _('Summary')._(':'); ?><?php echo utils_requiredField(); ?></strong><br />
 		<input id="tracker-summary" required="required" title="<?php echo _('The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.') ?>" type="text" name="summary" size="70" value="<?php
 			echo $ah->getSummary();
 			?>" maxlength="255" />
@@ -189,7 +189,7 @@ $nb = $count? ' ('.$count.')' : '';
 <div class="tabbertab" title="<?php echo _('Followups').$nb; ?>">
 <table width="80%">
 	<tr><td colspan="2">
-		<br /><strong><?php echo _('Use Canned Response') ?>:</strong><br />
+		<br /><strong><?php echo _('Use Canned Response')._(':'); ?></strong><br />
 		<?php
 		echo $ath->cannedResponseBox('canned_response');
 		echo " ";
@@ -238,10 +238,10 @@ $count=count($file_list);
 $nb = $count? ' ('.$count.')' : '';
 ?>
 <div class="tabbertab" title="<?php echo _('Attachments').$nb; ?>">
-<h2><?php echo _('Existing Files') ?>:</h2>
+<h2><?php echo _('Existing Files')._(':'); ?></h2>
 <table width="80%">
 	<tr><td colspan="2">
-        <strong><?php echo _('Attach Files') ?>:</strong> <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
+        <strong><?php echo _('Attach Files')._(':'); ?></strong> <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
         <input type="file" name="input_file0" size="30" /><br />
         <input type="file" name="input_file1" size="30" /><br />
         <input type="file" name="input_file2" size="30" /><br />
