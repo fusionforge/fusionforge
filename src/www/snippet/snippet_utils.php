@@ -196,16 +196,16 @@ function snippet_show_package_details($id) {
 	</td></tr>
 
 	<tr>
-		<td><strong>Category:</strong><br />
+		<td><strong>'._('Category')._(':').'</strong><br />
 		'.$SCRIPT_CATEGORY[db_result($result,0,'category')].'
 		</td>
 
-		<td><strong>Language:</strong><br />
+		<td><strong>'._('Language')._(':').'</strong><br />
 		'.$SCRIPT_LANGUAGE[db_result($result,0,'language')].'
 		</td>
 	</tr>
 
-	<tr><td colspan="2"><br /><strong>Description:</strong><br />
+	<tr><td colspan="2"><br /><strong>'._('Description')._(':').'</strong><br />
 	'. util_make_links(nl2br(db_result($result,0,'description'))).'
 	</td></tr>
 
@@ -226,20 +226,20 @@ function snippet_show_snippet_details($id) {
 	<h2>'. db_result($result,0,'name').'</h2>
 	</td></tr>
 
-	<tr><td><strong>Type:</strong><br />
+	<tr><td><strong>'._('Type')._(':').'</strong><br />
 		'.$SCRIPT_TYPE[db_result($result,0,'type')].'</td>
-	<td><strong>Category:</strong><br />
+	<td><strong>'._('Category')._(':').'</strong><br />
 		'.$SCRIPT_CATEGORY[db_result($result,0,'category')].'
 	</td></tr>
 
-	<tr><td><strong>License:</strong><br />
+	<tr><td><strong>'._('License')._(':').'</strong><br />
 		'.$SCRIPT_LICENSE[db_result($result,0,'license')].'</td>
-	<td><strong>Language:</strong><br />
+	<td><strong>'._('Language')._(':').'</strong><br />
 		'.$SCRIPT_LANGUAGE[db_result($result,0,'language')].'
 	</td></tr>
 
 	<tr><td colspan="2"><br />
-	<strong>Description:</strong><br />
+	<strong>'._('Description')._(':').'</strong><br />
 	'. util_make_links(nl2br(db_result($result,0,'description'))).'
 	</td></tr>
 
