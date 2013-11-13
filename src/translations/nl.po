@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-12 18:33+0100\n"
+"POT-Creation-Date: 2013-11-13 16:45+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1647,6 +1647,10 @@ msgstr "Startdatum"
 #: common/tracker/actions/taskmgr.php:112
 #: common/tracker/actions/taskmgr.php:161
 #: common/tracker/actions/taskmgr.php:162
+#: common/tracker/include/ArtifactTypeHtml.class.php:325
+#: common/tracker/include/build_submission_form.php:66
+#: common/tracker/include/build_submission_form.php:72
+#: common/tracker/include/build_submission_form.php:79
 #: common/tracker/views/form-addcanned.php:69
 #: common/tracker/views/form-addcanned.php:74
 #: common/tracker/views/form-addextrafieldoption.php:101
@@ -1739,6 +1743,8 @@ msgstr "Startdatum"
 #: www/admin/groupedit.php:107 www/admin/groupedit.php:170
 #: www/admin/massmail.php:94 www/admin/massmail.php:112
 #: www/admin/massmail.php:115 www/admin/massmail.php:140
+#: www/admin/pending-news.php:137 www/admin/pending-news.php:139
+#: www/admin/pending-news.php:145 www/admin/pending-news.php:147
 #: www/admin/trove/trove_cat_add.php:77 www/admin/trove/trove_cat_add.php:110
 #: www/admin/trove/trove_cat_add.php:112 www/admin/trove/trove_cat_add.php:114
 #: www/admin/trove/trove_cat_edit.php:115
@@ -1761,13 +1767,20 @@ msgstr "Startdatum"
 #: www/mail/admin/index.php:225 www/my/bookmark_add.php:48
 #: www/my/bookmark_add.php:54 www/my/bookmark_edit.php:60
 #: www/my/bookmark_edit.php:66 www/my/diary.php:181 www/my/diary.php:185
-#: www/pm/admin/index.php:212 www/pm/admin/index.php:321
-#: www/pm/admin/index.php:331 www/pm/admin/index.php:341
-#: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
-#: www/pm/format_csv.php:89 www/pm/format_csv.php:93 www/pm/format_csv.php:97
-#: www/project/stats/index.php:105 www/project/stats/index.php:106
-#: www/project/stats/index.php:107 www/project/stats/index.php:108
-#: www/register/index.php:236 www/reporting/groupadded.php:65
+#: www/people/admin/index.php:99 www/people/admin/index.php:133
+#: www/people/createjob.php:52 www/people/createjob.php:55
+#: www/people/editjob.php:169 www/people/editjob.php:172
+#: www/people/editprofile.php:241 www/pm/admin/index.php:212
+#: www/pm/admin/index.php:321 www/pm/admin/index.php:331
+#: www/pm/admin/index.php:341 www/pm/format_csv.php:66
+#: www/pm/format_csv.php:71 www/pm/format_csv.php:76 www/pm/format_csv.php:89
+#: www/pm/format_csv.php:93 www/pm/format_csv.php:97
+#: www/project/admin/editimages.php:222 www/project/admin/editimages.php:226
+#: www/project/admin/editimages.php:230 www/project/admin/editimages.php:250
+#: www/project/admin/editimages.php:253 www/project/stats/index.php:105
+#: www/project/stats/index.php:106 www/project/stats/index.php:107
+#: www/project/stats/index.php:108 www/register/index.php:236
+#: www/register/index.php:247 www/reporting/groupadded.php:65
 #: www/reporting/groupadded.php:66 www/reporting/groupadded.php:67
 #: www/reporting/groupcum.php:65 www/reporting/groupcum.php:66
 #: www/reporting/groupcum.php:67 www/reporting/projectact.php:69
@@ -1792,11 +1805,14 @@ msgstr "Startdatum"
 #: www/reporting/usersummary.php:72 www/reporting/usersummary.php:73
 #: www/reporting/usertime.php:93 www/reporting/usertime.php:94
 #: www/reporting/usertime.php:95 www/reporting/usertime.php:96
-#: www/snippet/add_snippet_to_package.php:128 www/snippet/addversion.php:94
-#: www/snippet/addversion.php:98 www/snippet/addversion.php:102
-#: www/snippet/addversion.php:217 www/snippet/addversion.php:221
-#: www/snippet/package.php:147 www/snippet/package.php:151
-#: www/snippet/package.php:156 www/snippet/package.php:169
+#: www/sendmessage.php:141 www/sendmessage.php:145 www/sendmessage.php:149
+#: www/sendmessage.php:153 www/snippet/add_snippet_to_package.php:128
+#: www/snippet/addversion.php:94 www/snippet/addversion.php:98
+#: www/snippet/addversion.php:102 www/snippet/addversion.php:217
+#: www/snippet/addversion.php:221 www/snippet/package.php:147
+#: www/snippet/package.php:151 www/snippet/package.php:156
+#: www/snippet/package.php:169 www/survey/include/SurveyHTML.class.php:129
+#: www/survey/include/SurveyHTML.class.php:131
 #: www/survey/include/SurveyHTML.class.php:191
 #, php-format
 msgid ":"
@@ -19034,6 +19050,35 @@ msgstr "Categorie toegevoegd"
 msgid "Skill Inserted"
 msgstr "Enquête\ttoegevoegd"
 
+#: www/people/admin/index.php:90
+#, fuzzy
+msgid "No job categories"
+msgstr "Voeg categorieën toe"
+
+#: www/people/admin/index.php:99
+#, fuzzy
+msgid "New Category Name"
+msgstr "Categorienaam"
+
+#: www/people/admin/index.php:114
+msgid "Add/Change People Skills"
+msgstr ""
+
+#: www/people/admin/index.php:125
+#, fuzzy
+msgid "No Skills Found"
+msgstr "Geen nieuws gevonden"
+
+#: www/people/admin/index.php:133
+#, fuzzy
+msgid "New Skill Name"
+msgstr "Naam nieuwe bundel"
+
+#: www/people/admin/index.php:149
+#, fuzzy
+msgid "People Administration"
+msgstr "Project database beheer"
+
 #: www/people/createjob.php:44
 msgid ""
 "Start by filling in the fields below. When you click continue, you will be "
@@ -23455,10 +23500,6 @@ msgstr "Mijn persoonlijke pagina"
 #, fuzzy
 #~ msgid "Documents are also available thru webdav access"
 #~ msgstr "Informatie niet beschikbaar"
-
-#, fuzzy
-#~ msgid "Project Administration."
-#~ msgstr "Project database beheer"
 
 #~ msgid "Preserve my pre-formatted text."
 #~ msgstr "Laat de voorgeformatteerde tekst intact."

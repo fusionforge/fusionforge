@@ -87,7 +87,7 @@ if (forge_check_global_perm('forge_admin')) {
 		if ($result && db_numrows($result) > 0) {
 			ShowResultSet($result,'Existing Categories','people_cat');
 		} else {
-			echo '<p class="error">No job categories</p>';
+			echo '<p class="error">'._('No job categories').'</p>';
 			echo db_error();
 		}
 		?>
@@ -96,7 +96,7 @@ if (forge_check_global_perm('forge_admin')) {
 		<input type="hidden" name="people_cat" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
 		<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
-		<strong>New Category Name:</strong>
+		<strong><?php echo _('New Category Name')._(':'); ?></strong>
 		<input type="text" name="cat_name" value="" size="15" maxlength="30" />
 		</p>
 		<p class="warning">Once you add a category, it cannot be deleted</p>
@@ -111,7 +111,7 @@ if (forge_check_global_perm('forge_admin')) {
 		/*
 			Show people_groups and blank row
 		*/
-		people_header(array ('title'=>'Add/Change People Skills'));
+		people_header(array('title'=>_('Add/Change People Skills')));
 
 		/*
 			List of possible people_groups for this group
@@ -122,7 +122,7 @@ if (forge_check_global_perm('forge_admin')) {
 			ShowResultSet($result,"Existing Skills","people_skills");
 		} else {
 			echo db_error();
-			echo "\n<h2>No Skills Found</h2>";
+			echo "\n<h2>"._('No Skills Found').'</h2>';
 		}
 		?>
 		<form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
@@ -130,7 +130,7 @@ if (forge_check_global_perm('forge_admin')) {
 		<input type="hidden" name="people_skills" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
 		<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>">
-		<strong>New Skill Name:</strong>
+		<strong><?php echo _('New Skill Name')._(':'); ?></strong>
 		<input type="text" name="skill_name" value="" size="15" maxlength="30" />
 		</p>
 		<p class="warning">Once you add a skill, it cannot be deleted</p>
@@ -146,7 +146,7 @@ if (forge_check_global_perm('forge_admin')) {
 			Show main page
 		*/
 
-		people_header(array ('title'=>'People Administration'));
+		people_header(array('title'=>_('People Administration')));
 
 		echo '<p>
 			<a href="'.getStringFromServer('PHP_SELF').'?people_cat=1">Add Job Categories</a><br />';

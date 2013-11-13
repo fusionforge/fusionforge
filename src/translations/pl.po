@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-12 18:33+0100\n"
+"POT-Creation-Date: 2013-11-13 16:45+0100\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1629,6 +1629,10 @@ msgstr ""
 #: common/tracker/actions/taskmgr.php:112
 #: common/tracker/actions/taskmgr.php:161
 #: common/tracker/actions/taskmgr.php:162
+#: common/tracker/include/ArtifactTypeHtml.class.php:325
+#: common/tracker/include/build_submission_form.php:66
+#: common/tracker/include/build_submission_form.php:72
+#: common/tracker/include/build_submission_form.php:79
 #: common/tracker/views/form-addcanned.php:69
 #: common/tracker/views/form-addcanned.php:74
 #: common/tracker/views/form-addextrafieldoption.php:101
@@ -1721,6 +1725,8 @@ msgstr ""
 #: www/admin/groupedit.php:107 www/admin/groupedit.php:170
 #: www/admin/massmail.php:94 www/admin/massmail.php:112
 #: www/admin/massmail.php:115 www/admin/massmail.php:140
+#: www/admin/pending-news.php:137 www/admin/pending-news.php:139
+#: www/admin/pending-news.php:145 www/admin/pending-news.php:147
 #: www/admin/trove/trove_cat_add.php:77 www/admin/trove/trove_cat_add.php:110
 #: www/admin/trove/trove_cat_add.php:112 www/admin/trove/trove_cat_add.php:114
 #: www/admin/trove/trove_cat_edit.php:115
@@ -1743,13 +1749,20 @@ msgstr ""
 #: www/mail/admin/index.php:225 www/my/bookmark_add.php:48
 #: www/my/bookmark_add.php:54 www/my/bookmark_edit.php:60
 #: www/my/bookmark_edit.php:66 www/my/diary.php:181 www/my/diary.php:185
-#: www/pm/admin/index.php:212 www/pm/admin/index.php:321
-#: www/pm/admin/index.php:331 www/pm/admin/index.php:341
-#: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
-#: www/pm/format_csv.php:89 www/pm/format_csv.php:93 www/pm/format_csv.php:97
-#: www/project/stats/index.php:105 www/project/stats/index.php:106
-#: www/project/stats/index.php:107 www/project/stats/index.php:108
-#: www/register/index.php:236 www/reporting/groupadded.php:65
+#: www/people/admin/index.php:99 www/people/admin/index.php:133
+#: www/people/createjob.php:52 www/people/createjob.php:55
+#: www/people/editjob.php:169 www/people/editjob.php:172
+#: www/people/editprofile.php:241 www/pm/admin/index.php:212
+#: www/pm/admin/index.php:321 www/pm/admin/index.php:331
+#: www/pm/admin/index.php:341 www/pm/format_csv.php:66
+#: www/pm/format_csv.php:71 www/pm/format_csv.php:76 www/pm/format_csv.php:89
+#: www/pm/format_csv.php:93 www/pm/format_csv.php:97
+#: www/project/admin/editimages.php:222 www/project/admin/editimages.php:226
+#: www/project/admin/editimages.php:230 www/project/admin/editimages.php:250
+#: www/project/admin/editimages.php:253 www/project/stats/index.php:105
+#: www/project/stats/index.php:106 www/project/stats/index.php:107
+#: www/project/stats/index.php:108 www/register/index.php:236
+#: www/register/index.php:247 www/reporting/groupadded.php:65
 #: www/reporting/groupadded.php:66 www/reporting/groupadded.php:67
 #: www/reporting/groupcum.php:65 www/reporting/groupcum.php:66
 #: www/reporting/groupcum.php:67 www/reporting/projectact.php:69
@@ -1774,11 +1787,14 @@ msgstr ""
 #: www/reporting/usersummary.php:72 www/reporting/usersummary.php:73
 #: www/reporting/usertime.php:93 www/reporting/usertime.php:94
 #: www/reporting/usertime.php:95 www/reporting/usertime.php:96
-#: www/snippet/add_snippet_to_package.php:128 www/snippet/addversion.php:94
-#: www/snippet/addversion.php:98 www/snippet/addversion.php:102
-#: www/snippet/addversion.php:217 www/snippet/addversion.php:221
-#: www/snippet/package.php:147 www/snippet/package.php:151
-#: www/snippet/package.php:156 www/snippet/package.php:169
+#: www/sendmessage.php:141 www/sendmessage.php:145 www/sendmessage.php:149
+#: www/sendmessage.php:153 www/snippet/add_snippet_to_package.php:128
+#: www/snippet/addversion.php:94 www/snippet/addversion.php:98
+#: www/snippet/addversion.php:102 www/snippet/addversion.php:217
+#: www/snippet/addversion.php:221 www/snippet/package.php:147
+#: www/snippet/package.php:151 www/snippet/package.php:156
+#: www/snippet/package.php:169 www/survey/include/SurveyHTML.class.php:129
+#: www/survey/include/SurveyHTML.class.php:131
 #: www/survey/include/SurveyHTML.class.php:191
 #, php-format
 msgid ":"
@@ -18082,6 +18098,34 @@ msgstr ""
 msgid "Skill Inserted"
 msgstr ""
 
+#: www/people/admin/index.php:90
+msgid "No job categories"
+msgstr ""
+
+#: www/people/admin/index.php:99
+#, fuzzy
+msgid "New Category Name"
+msgstr "Imię:"
+
+#: www/people/admin/index.php:114
+msgid "Add/Change People Skills"
+msgstr ""
+
+#: www/people/admin/index.php:125
+#, fuzzy
+msgid "No Skills Found"
+msgstr "Nie znaleziono żadnych dokumentów"
+
+#: www/people/admin/index.php:133
+#, fuzzy
+msgid "New Skill Name"
+msgstr "Nazwa wydania:"
+
+#: www/people/admin/index.php:149
+#, fuzzy
+msgid "People Administration"
+msgstr "Brak wydań"
+
 #: www/people/createjob.php:44
 msgid ""
 "Start by filling in the fields below. When you click continue, you will be "
@@ -22132,10 +22176,6 @@ msgstr ""
 #~ msgstr "Brak wydań"
 
 #, fuzzy
-#~ msgid "Project Administration."
-#~ msgstr "Brak wydań"
-
-#, fuzzy
 #~ msgid "No Forums Found for %1$s"
 #~ msgstr "Nie znaleziono żadnych dokumentów"
 
@@ -22814,10 +22854,6 @@ msgstr ""
 
 #~ msgid "DocumentGroup: name is Required"
 #~ msgstr "Grupa dokumentów: Nazwa jest wymagana"
-
-#, fuzzy
-#~ msgid "Directory Name"
-#~ msgstr "Imię:"
 
 #, fuzzy
 #~ msgid ""
