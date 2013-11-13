@@ -244,7 +244,7 @@ $scm_plugins=$SCMFactory->getSCMs();
 if (forge_get_config('use_scm') && count($scm_plugins) > 0) {
 	echo '<h2>'.$index++.'. '._('Source Code').'</h2>';
 	echo '<p>' . _('You can choose among different SCM for your project, but just one (or none at all). Please select the SCM system you want to use.')."</p>\n";
-	echo '<table><tbody><tr><td><strong>'._('SCM Repository').':</strong></td>';
+	echo '<table><tbody><tr><td><strong>'._('SCM Repository')._(':').'</strong></td>';
 	if (!$scm) {
 		echo '<td><input type="radio" name="scm" value="noscm" checked="checked" />'._('No SCM').'</td>';
 	} else {

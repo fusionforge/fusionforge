@@ -219,15 +219,15 @@ if ($mode == "edit") {
 	<input type="hidden" name="group_id" value="'.$group_id.'" />
 	<input type="hidden" name="id" value="'.$id.'" />
 
-	<strong>'._('Replace with new file (optional)').':</strong><br />
+	<strong>'._('Replace with new file (optional)')._(':').'</strong><br />
 	<input type="file" name="input_file" size="30" />
 	<p>
 
-	<strong>'._('Description').':</strong><br />
+	<strong>'._('Description')._(':').'</strong><br />
 	<input type="text" name="description" size="40" maxlength="255" value="'.db_result($result,$i,'description').'" />
 	</p>
 	<p>
-	<strong>'._('MIME Type').':</strong><br />
+	<strong>'._('MIME Type')._(':').'</strong><br />
 	<input type="text" name="filetype" size="40" maxlength="255" value="'.db_result($result,$i,'filetype').'" />
 
 	<input type="hidden" name="edit" value="1" />
@@ -247,10 +247,10 @@ if ($mode == "edit") {
 	<p>
 	<form action="'. getStringFromServer('PHP_SELF') .'" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="group_id" value="'.$group_id.'" />
-	<strong>'._('Local filename').':</strong>'.utils_requiredField().'<br />
+	<strong>'._('Local filename')._(':').'</strong>'.utils_requiredField().'<br />
 	<input type="file" required="required" name="input_file" size="30" />
 	<p>
-	<strong>'._('Description').':</strong>'.utils_requiredField().'<br />
+	<strong>'._('Description')._(':').'</strong>'.utils_requiredField().'<br />
 	<input type="text" required="required" name="description" size="40" maxlength="255" /></p><p>
 	<input type="hidden" name="add" value="1" />
 	<input type="submit" value="'._('Add File').'" name="submit" /></p>
