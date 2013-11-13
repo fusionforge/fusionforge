@@ -122,7 +122,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 		$user = user_get_object(db_result($result,0,'submitted_by'));
 
 		echo '
-		<strong>'._('Submitted by').':</strong> '.$user->getRealName().'<br />
+		<strong>'._('Submitted by')._(':').'</strong> '.$user->getRealName().'<br />
 		<input type="hidden" name="approve" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
 
@@ -145,7 +145,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 
 		echo $params['content'].'<br/>';
 		echo '<p>
-		<strong>'.sprintf(_('If this item is on the %1$s home page and you edit it, it will be removed from the home page.'), forge_get_config ('forge_name')).'</strong></p>
+		<strong>'.sprintf(_('If this item is on the %1$s home page and you edit it, it will be removed from the home page.'), forge_get_config('forge_name')).'</strong></p>
 		<input type="submit" name="submit" value="'._('Submit').'" />
 		</form>';
 

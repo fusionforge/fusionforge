@@ -61,7 +61,7 @@ function snippet_mainpage() {
 	<tr><td>
 	</td></tr>
 	<tr><td>
-	<strong>'._('Browse by Language').':</strong>
+	<strong>'._('Browse by Language')._(':').'</strong>
 	<ul>';
 
 	$qpa = db_construct_qpa (false, 'SELECT language, count(*) as count from snippet group by language') ;
@@ -78,7 +78,7 @@ function snippet_mainpage() {
 
 	$return .=
 	'</ul></td><td>
-	<strong>'._('Browse by Category').':</strong>
+	<strong>'._('Browse by Category')._(':').'</strong>
 	<ul>';
 
 	$qpa = db_construct_qpa (false, 'SELECT category, count(*) as count from snippet group by category') ;
