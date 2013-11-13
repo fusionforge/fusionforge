@@ -63,21 +63,21 @@ function artifact_submission_form($ath, $group) {
 		echo $ath->technicianBox('assigned_to');
 		echo '&nbsp;'.util_make_link ('/tracker/admin/?group_id='.$group->getID().'&amp;atid='.$ath->getID().'&amp;update_users=1', '('._('Admin').')' );
 
-		echo '</td><td><strong>'._('Priority').':</strong><br />';
+		echo '</td><td><strong>'._('Priority')._(':').'</strong><br />';
 		build_priority_select_box('priority');
 		echo '</td></tr>';
 	}
 ?>
 	<tr>
-		<td colspan="2"><strong><?php echo _('Summary'); echo utils_requiredField(); ?> :</strong><br />
-			<input id="tracker-summary" type="text" name="summary" size="80" maxlength="255" title="<?php echo util_html_secure(html_get_tooltip_description('summary')); ?>" />
+		<td colspan="2"><strong><?php echo _('Summary').utils_requiredField()._(':'); ?></strong><br />
+			<input id="tracker-summary" required="required" type="text" name="summary" size="80" maxlength="255" title="<?php echo util_html_secure(html_get_tooltip_description('summary')); ?>" />
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-			<strong> <?php echo _('Detailed description'); echo utils_requiredField(); ?> :</strong><?php notepad_button('document.forms.trackeraddform.details'); ?><br />
-			<textarea id="tracker-description" name="details" rows="20" cols="79" title="<?php echo util_html_secure(html_get_tooltip_description('description')); ?> "></textarea>
+			<strong><?php echo _('Detailed description').utils_requiredField()._(':'); ?></strong><?php notepad_button('document.forms.trackeraddform.details'); ?><br />
+			<textarea id="tracker-description" required="required" name="details" rows="20" cols="79" title="<?php echo util_html_secure(html_get_tooltip_description('description')); ?> "></textarea>
 		</td>
 	</tr>
 
@@ -119,7 +119,7 @@ function artifact_submission_form($ath, $group) {
 		</td>
 	</tr>
 
-	<tr><td colspan="2"><br/><?php echo utils_requiredField(); echo _('Indicates required fields.'); ?></td></tr>
+	<tr><td colspan="2"><br/><?php echo utils_requiredField() . ' ' . _('Indicates required fields.'); ?></td></tr>
 	</table></form>
 <?php
 }

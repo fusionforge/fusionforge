@@ -312,7 +312,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		$taskcount = db_numrows($ah->getRelatedTasks());
 		db_result_reset($ah->getRelatedTasks());
 
-		if (forge_check_perm ('tracker_admin', $ah->ArtifactType->Group->getID())) {
+		if (forge_check_perm('tracker_admin', $ah->ArtifactType->Group->getID())) {
 			$is_admin=true;
 		} else {
 			$is_admin=false;
@@ -322,7 +322,7 @@ class ArtifactTypeHtml extends ArtifactType {
 
 		if ($taskcount > 0) {
 			echo '<tr><td colspan="2">';
-			echo '<b>'._("Related Tasks").':</b>'.'<br/>';
+			echo '<b>'._("Related Tasks")._(':').'</b><br/>';
 			$title_arr = array();
 			$title_arr[] = _('Task Id and Summary');
 			$title_arr[] = _('Progress');
