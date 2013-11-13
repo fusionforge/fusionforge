@@ -134,17 +134,17 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="for_group" value="'.db_result($result,0,'group_id').'" />
 		<input type="hidden" name="id" value="'.db_result($result,0,'id').'" />
-		<strong>'._('Submitted for project').':</strong> '.
+		<strong>'._('Submitted for project')._(':').'</strong> '.
 		util_make_link_g (strtolower(db_result($result,0,'unix_group_name')),db_result($result,0,'group_id'),$group->getPublicName()).'<br />
-		<strong>'._('Submitted by').':</strong> '.$user->getRealName().'<br />
+		<strong>'._('Submitted by')._(':').'</strong> '.$user->getRealName().'<br />
 		<input type="hidden" name="approve" value="y" />
 		<input type="hidden" name="post_changes" value="y" />
 		<input type="radio" name="status" value="1" /> '._('Approve For Front Page').'<br />
 		<input type="radio" name="status" value="0" /> '._('Do Nothing').'<br />
 		<input type="radio" name="status" value="2" checked="checked" /> '._('Reject').'<br />
-		<strong>'._('Subject').':</strong><br />
+		<strong>'._('Subject')._(':').'</strong><br />
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="60" maxlength="60" /><br />
-		<strong>'._('Details').':</strong><br />';
+		<strong>'._('Details')._(':').'</strong><br />';
 
 	$params = array () ;
 	$params['name'] = 'details';

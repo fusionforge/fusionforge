@@ -49,10 +49,10 @@ if ($group_id && (forge_check_perm('project_admin', $group_id))) {
 		<strong>'._('Category').'</strong>'.utils_requiredField().'</p>
 		'. people_job_category_box('category_id') .'
 		<p>
-		<strong>'._('Short Description').':</strong>'.utils_requiredField().'<br />
+		<strong>'._('Short Description')._(':').'</strong>'.utils_requiredField().'<br />
 		<input type="text" required="required" name="title" value="" size="40" maxlength="60" /></p>
 		<p>
-		<strong>'._('Long Description').':</strong>'.utils_requiredField().'<br />
+		<strong>'._('Long Description')._(':').'</strong>'.utils_requiredField().'<br />
 		<textarea required="required" name="description" rows="10" cols="60"></textarea></p>
 		<p>
 		<input type="submit" name="add_job" value="'._('Continue >>').'" />

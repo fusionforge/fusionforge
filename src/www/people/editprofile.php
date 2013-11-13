@@ -238,7 +238,7 @@ WHERE user_id=$2', array($people_view_skills, user_getid()));
 		<form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		'._('The following option determines if others can see your skills. If they cannot, you can still enter your skills.').'
 		<p>
-		<strong>'._('Publicly Viewable').':</strong><br />
+		<strong>'._('Publicly Viewable')._(':').'</strong><br />
 		<input type="hidden" name="form_key" value="'.form_generate_key().'">
 		<input type="radio" name="people_view_skills" value="0" '. ((db_result($result,0,'people_view_skills')==0)?'checked="checked"':'') .' /> <strong>'._('No').'</strong><br />
 		<input type="radio" name="people_view_skills" value="1" '. ((db_result($result,0,'people_view_skills')==1)?'checked="checked"':'') .' /> <strong>'._('Yes').'</strong></p>

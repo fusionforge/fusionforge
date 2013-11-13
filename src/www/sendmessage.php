@@ -138,19 +138,19 @@ $HTML->header(array('title'=>forge_get_config ('forge_name').' Staff'));
 <input type="hidden" name="toaddress" value="<?php echo $toaddress; ?>" />
 <input type="hidden" name="touser" value="<?php echo $touser; ?>" />
 
-<strong><?php echo _('Your Name').utils_requiredField() ?> :</strong><br />
+<strong><?php echo _('Your Name').utils_requiredField()._(':'); ?></strong><br />
 <input type="text" required="required" name="name" size="40" maxlength="40" value="<?php echo $name ?>" />
 </p>
 <p>
-<strong><?php echo _('Your Email Address').utils_requiredField() ?> :</strong><br />
+<strong><?php echo _('Your Email Address').utils_requiredField()._(':'); ?></strong><br />
 <input type="text" required="required" name="email" size="40" maxlength="255" value="<?php echo $email ?>" />
 </p>
 <p>
-<strong><?php echo _('Subject').utils_requiredField() ?> :</strong><br />
+<strong><?php echo _('Subject').utils_requiredField()._(':'); ?></strong><br />
 <input type="text" required="required" name="subject" size="60" maxlength="255" value="<?php echo $subject; ?>" />
 </p>
 <p>
-<strong><?php echo _('Message').utils_requiredField() ?> :</strong><br />
+<strong><?php echo _('Message').utils_requiredField()._(':'); ?></strong><br />
 <textarea name="body" required="required" rows="15" cols="60"></textarea>
 </p>
 <p align="center">
