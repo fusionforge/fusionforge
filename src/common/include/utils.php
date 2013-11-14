@@ -280,8 +280,8 @@ function util_encode_mimeheader($headername, $str, $charset) {
 /**
  * util_convert_body() - Convert body of the email message
  *
- * @param		string	The body of the email message
- * @param		string	The charset of the email message
+ * @param		string	$str		The body of the email message
+ * @param		string	$charset	The charset of the email message
  * @return		string	The converted body of the email message
  *
  */
@@ -367,8 +367,8 @@ function util_result_columns_to_assoc($result, $col_key = 0, $col_val = 1) {
 /**
  * util_result_column_to_array() - Takes a result set and turns the optional column into an array
  *
- * @param		int		The result set ID
- * @param		int		The column
+ * @param		int		$result	The result set ID
+ * @param		int		$col	The column
  * @return		array
  *
  */
@@ -393,11 +393,10 @@ function &util_result_column_to_array($result, $col = 0) {
 /**
  * util_line_wrap() - Automatically linewrap text
  *
- * @param		string	The text to wrap
- * @param		int		The number of characters to wrap - Default is 80
- * @param		string	The line break to use - Default is '\n'
- * @return string
- * @returns The wrapped text
+ * @param		string	$text	The text to wrap
+ * @param		int		$wrap	The number of characters to wrap - Default is 80
+ * @param		string	$break	The line break to use - Default is '\n'
+ * @return		string			The wrapped text
  *
  */
 function util_line_wrap($text, $wrap = 80, $break = "\n") {
@@ -407,7 +406,7 @@ function util_line_wrap($text, $wrap = 80, $break = "\n") {
 /**
  * util_make_links() - Turn URL's into HREF's.
  *
- * @param		string	The URL
+ * @param		string	$data	The URL
  * @return mixed|string	The HREF'ed URL
  *
  */
