@@ -159,14 +159,8 @@ if ( $cvs_binary_version == "1.12" ) {
 	}
 }
 
-// Our POSTer in Gforge
+// Our POSTer in Fusionforge
 $snoopy = new Snoopy;
-
-if ($use_ssl) {
-	$http = "https://";
-} else {
-	$http = "http://";
-}
 
 $SubmitUrl = util_make_url('/plugins/cvstracker/newcommit.php');
 
