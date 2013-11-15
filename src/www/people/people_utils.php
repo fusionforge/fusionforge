@@ -6,6 +6,7 @@
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) Franck Villaume
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -28,11 +29,11 @@ function people_header($params) {
 	global $group_id,$job_id,$HTML;
 
 	if ($group_id) {
-		$params['toptab']='people';
-		$params['group']=$group_id;
+		$params['toptab'] = 'people';
+		$params['group'] = $group_id;
 		site_project_header($params);
-	} elseif (strstr($_SERVER['HTTP_REFERER'],'account')){
-		$params['toptab']='my';
+	} elseif (isset($_SERVER['HTTP_REFERER']) && strstr($_SERVER['HTTP_REFERER'], 'account')){
+		$params['toptab'] = 'my';
 		site_user_header($params);
 	} else {
 		$HTML->header($params);
