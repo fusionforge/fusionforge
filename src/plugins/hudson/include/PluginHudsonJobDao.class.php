@@ -38,7 +38,7 @@ class PluginHudsonJobDao extends DataAccessObject {
 	 */
 	function & searchAll() {
 		$sql = "SELECT * FROM plugin_hudson_job";
-		return $this->retrieve($sql);
+		return $this->retrieve($sql, array());
 	}
 
 	/**

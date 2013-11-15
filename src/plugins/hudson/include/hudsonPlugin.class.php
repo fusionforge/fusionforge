@@ -344,7 +344,7 @@ class hudsonPlugin extends Plugin {
 	}
 
 	function role_translate_strings(&$params) {
-		$right = new PluginSpecificRoleSetting($role, 'plugin_hudson_read');
+		$right = new PluginSpecificRoleSetting($params['role'], 'plugin_hudson_read');
 		$right->setDescription(_('Hudson access'));
 		$right->setValueDescriptions(array('0' => _('No access'),
 							'1' => _('Full access')));
