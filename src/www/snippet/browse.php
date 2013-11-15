@@ -3,6 +3,7 @@
  * Code Snippets Repository
  *
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -76,7 +77,7 @@ $result2 = db_query_qpa ($qpa2) ;
 $rows2=db_numrows($result2);
 
 if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
-	echo '<h2>' ._('No snippets found').'</h2>';
+	echo '<p class="warning">' ._('No snippets found.').'</p>';
 } else {
 
 	$title_arr=array();
