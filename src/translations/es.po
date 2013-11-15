@@ -6756,7 +6756,7 @@ msgstr "No puedo asignar roadmap: "
 
 #: common/tracker/views/form-adminroadmap.php:122
 msgid "Cannot set roadmap state: "
-msgstr "No puedo establecer el estado de roadmap:"
+msgstr "No puedo establecer el estado de roadmap: "
 
 #: common/tracker/views/form-adminroadmap.php:126
 msgid "Cannot set default value: "
@@ -13393,7 +13393,7 @@ msgstr "Estadísticas del repositorio"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:624
 msgid "Repository to be created: "
-msgstr "Repositorio a crear"
+msgstr "Repositorio a crear: "
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:628
 #, fuzzy
@@ -14453,7 +14453,7 @@ msgstr "Bienvenid@s"
 
 #: www/account/index.php:129
 msgid "Account options:"
-msgstr "Informacion de la cuenta"
+msgstr "Informacion de la cuenta:"
 
 #: www/account/index.php:132
 msgid "View My Profile"
@@ -17288,7 +17288,7 @@ msgstr "Notas de publicación"
 
 #: www/frs/shownotes.php:64
 msgid "Release Name:"
-msgstr "Nombre de la Versión"
+msgstr "Nombre de la Versión:"
 
 #: www/include/features_boxes.php:35
 msgid "Features Boxes"
@@ -18379,7 +18379,7 @@ msgstr ""
 
 #: www/my/diary.php:202
 msgid "You Have No Diary Entries"
-msgstr "No hay apuntes en su diario."
+msgstr "No hay apuntes en su diario"
 
 #: www/my/rmproject.php:59
 #, php-format
@@ -18395,7 +18395,7 @@ msgstr ""
 "administrador. Si es el único admin del proyecto, por favor considere el "
 "envio de una noticia a través del <a·href=\"%s\">Foro de Busqueda de Ayuda</"
 "a> y estar preparado para traspasar el privilegio de admin a alguien "
-"interesado en gestionarlo.·"
+"interesado en gestionarlo."
 
 #: www/my/rmproject.php:76 www/my/rmproject.php:79
 msgid "Quitting Project"
@@ -18553,7 +18553,7 @@ msgstr ""
 
 #: www/news/submit.php:78
 msgid "Submitting news from the news group is not allowed."
-msgstr "Enviar noticias desde los grupos de noticias no está permitido"
+msgstr "Enviar noticias desde los grupos de noticias no está permitido."
 
 #: www/news/submit.php:107
 #, fuzzy
@@ -18756,7 +18756,7 @@ msgstr ""
 
 #: www/people/editjob.php:159
 msgid "All postings are automatically closed after two weeks."
-msgstr "Todos los envios se cerrarán despues de dos semanas"
+msgstr "Todos los envios se cerrarán despues de dos semanas."
 
 #: www/people/editjob.php:175
 msgid "Update Descriptions"
@@ -19947,7 +19947,7 @@ msgstr "No hay Tares con ID: "
 
 #: www/pm/uploadcsv.php:29
 msgid "Upload data into the tasks."
-msgstr "Subir datos en las tareas"
+msgstr "Subir datos en las tareas."
 
 #: www/pm/uploadcsv.php:34
 msgid "Warning!"
@@ -20195,7 +20195,7 @@ msgstr "Etiquetas del proyecto"
 
 #: www/project/admin/index.php:152
 msgid "Add tags (use comma as separator): "
-msgstr "Añada etiquetas (usando coma como separador):"
+msgstr "Añada etiquetas (usando coma como separador): "
 
 #: www/project/admin/index.php:159
 msgid "Or pick a tag from those used by other projects: "

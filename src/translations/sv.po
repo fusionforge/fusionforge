@@ -2947,7 +2947,7 @@ msgstr "Databasmanipulering"
 #: www/survey/admin/show_results_individual.php:35
 #: www/survey/admin/show_results.php:66 www/survey/admin/survey.php:53
 msgid "Permission denied."
-msgstr "Åtkomst nekad"
+msgstr "Åtkomst nekad."
 
 #: common/include/Error.class.php:142 common/include/User.class.php:350
 #: common/include/User.class.php:931 common/include/User.class.php:983
@@ -7540,7 +7540,7 @@ msgstr "Bevakade forum"
 
 #: common/widget/Widget_MyMonitoredForums.class.php:67
 msgid "You are not monitoring any forums."
-msgstr "Du bevakar inga forum"
+msgstr "Du bevakar inga forum."
 
 #: common/widget/Widget_MyMonitoredForums.class.php:67
 msgid ""
@@ -17722,7 +17722,7 @@ msgid ""
 "This drop-down box represents the person to which a tracker item is assigned."
 msgstr ""
 "Denna rullgardinslista representerar den projektadministratör som "
-"ordningsposten är tilldelad"
+"ordningsposten är tilldelad."
 
 #: www/include/html.php:385
 msgid "This drop-down box represents the current status of a tracker item."
@@ -18192,7 +18192,7 @@ msgstr "Undersökning privatliv"
 
 #: www/include/vote_function.php:295
 msgid "Survey not found."
-msgstr "Hittade inte undersökning"
+msgstr "Hittade inte undersökning."
 
 #: www/index_std.php:9
 msgid "FusionForge helps you manage the entire development life cycle"
@@ -18846,7 +18846,7 @@ msgstr "Du måste vara admin i projektet för att lämna in nyheter"
 
 #: www/news/submit.php:78
 msgid "Submitting news from the news group is not allowed."
-msgstr "Inlämning av nyheter från nyhetsgruppen är inte tillåtet"
+msgstr "Inlämning av nyheter från nyhetsgruppen är inte tillåtet."
 
 #: www/news/submit.php:107
 #, fuzzy
@@ -19096,7 +19096,7 @@ msgstr ""
 
 #: www/people/editprofile.php:124
 msgid "No skills selected to edit."
-msgstr "Inga kompetenser valda för redigering"
+msgstr "Inga kompetenser valda för redigering."
 
 #: www/people/editprofile.php:141
 #, fuzzy, php-format
@@ -19128,7 +19128,7 @@ msgstr "Avbruten kompetensuppdatering"
 
 #: www/people/editprofile.php:177
 msgid "No skills selected to delete."
-msgstr "Inga kompetenser valda för radering"
+msgstr "Inga kompetenser valda för radering."
 
 #: www/people/editprofile.php:186
 #, fuzzy, php-format
@@ -22977,7 +22977,7 @@ msgstr ""
 
 #: www/top/topusers.php:52
 msgid "Information about highest ranked users is not available."
-msgstr "Information om högst rankad användare är inte tillgänglig"
+msgstr "Information om högst rankad användare är inte tillgänglig."
 
 #: www/top/topusers.php:55
 msgid "Top users"

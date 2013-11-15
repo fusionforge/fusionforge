@@ -5282,7 +5282,7 @@ msgstr ""
 
 #: common/tracker/actions/admin-tracker.php:77
 msgid "Permanently delete this tracker."
-msgstr "Rimuovi in modo permanente questo tracker"
+msgstr "Rimuovi in modo permanente questo tracker."
 
 #: common/tracker/actions/admin-updates.php:46
 #: common/tracker/actions/admin-updates.php:65
@@ -14062,7 +14062,7 @@ msgstr "Repository SCM"
 
 #: plugins/scmgit/common/GitPlugin.class.php:1117
 msgid "Description:"
-msgstr "Descrizione"
+msgstr "Descrizione:"
 
 #: plugins/scmgit/common/GitPlugin.class.php:1119
 msgid ""
@@ -17585,11 +17585,11 @@ msgstr "Crea questo pacchetto"
 
 #: www/frs/admin/qrs.php:74
 msgid "Must define a release name."
-msgstr "È necessario definire un nome di rilascio"
+msgstr "È necessario definire un nome di rilascio."
 
 #: www/frs/admin/qrs.php:76
 msgid "Must select a package."
-msgstr "È necessario selezionare un package"
+msgstr "È necessario selezionare un package."
 
 #: www/frs/admin/qrs.php:113 www/frs/admin/qrs.php:140
 msgid "Quick Release System"
@@ -21081,7 +21081,7 @@ msgstr ""
 
 #: www/project/admin/vhost.php:59
 msgid "Virtual Host scheduled for creation."
-msgstr "Host virtuale schedulato per la creazione"
+msgstr "Host virtuale schedulato per la creazione."
 
 #: www/project/admin/vhost.php:65
 #, php-format
@@ -23216,7 +23216,7 @@ msgstr "Risposta predefinita inserita"
 
 #: www/tracker/admin/index.php:238
 msgid "Successfully Deleted."
-msgstr "Rimosso"
+msgstr "Rimosso."
 
 #: www/tracker/download.php:56
 #, fuzzy
