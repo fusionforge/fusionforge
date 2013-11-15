@@ -77,7 +77,7 @@ $result2 = db_query_qpa ($qpa2) ;
 $rows2=db_numrows($result2);
 
 if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
-	echo '<p class="warning">' ._('No snippets found.').'</p>';
+	echo '<p class="information">' ._('No snippets found.').'</p>';
 } else {
 
 	$title_arr=array();
