@@ -5,6 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009, Roland Mas
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -77,7 +78,7 @@ $res_trove_cat = db_query_params('
 			array($form_cat));
 
 if (db_numrows($res_trove_cat) < 1) {
-	exit_error(_('That Trove category does not exist').': '.db_error(),'trove');
+	exit_error(_('That Trove category does not exist')._(': ').db_error(),'trove');
 }
 
 echo '<div id="project-tree" class="underline-link">' . "\n";
@@ -215,7 +216,7 @@ if ( $cat === 'c' ) {
 	echo db_error();
 
 	print "<p>";
-	print _('Browse By').':';
+	print _('Browse By')._(': ');
 	print "</p> \n";
 
 	print '<ul id="project-tree-branches">';
