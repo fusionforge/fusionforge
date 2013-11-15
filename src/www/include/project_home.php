@@ -68,7 +68,9 @@ if (session_loggedin()) {
 			array(_("Add widgets"),
 				_("Customize Layout")),
 			array('/widgets/widgets.php?owner=g'. $group_id .'&amp;layout_id='. $id,
-				'/widgets/widgets.php?owner=g'. $group_id .'&amp;layout_id='. $id.'&amp;update=layout'));
+				'/widgets/widgets.php?owner=g'. $group_id .'&amp;layout_id='. $id.'&amp;update=layout'),
+			array(array('class' => 'tabtitle-nw', 'title' => _('Select new widgets to display on the project home page.')),
+				array('class' => 'tabtitle', 'title' => _('Modify the layout: one column, multiple columns or build your own layout.'))));
 	}
 }
 
