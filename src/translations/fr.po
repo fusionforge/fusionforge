@@ -954,7 +954,7 @@ msgstr "Créer"
 
 #: common/docman/views/admin.php:49
 msgid "Extract documents and directories as an archive"
-msgstr "Extraire les documents et les dossier sous forme d'une archive."
+msgstr "Extraire les documents et les dossiers sous forme d'archive"
 
 #: common/docman/views/admin.php:57
 msgid "Enable Create Online Documents"
