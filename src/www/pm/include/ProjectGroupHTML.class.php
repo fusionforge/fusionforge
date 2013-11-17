@@ -6,6 +6,7 @@
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -50,14 +51,17 @@ function pm_header($params) {
 
 	$labels = array();
 	$links = array();
+	$attr = array();
 
 	if (forge_check_perm('pm_admin', $group_id)) {
-		$labels[]=_('General Admin');
-		$links[]='/pm/admin/?group_id='.$group_id;
+		$labels[] = _('General Admin');
+		$links[] = '/pm/admin/?group_id='.$group_id;
+		$attr[] = '';
 	}
 
 	$labels[] = _('View Subprojects');
 	$links[]  = '/pm/?group_id='.$group_id;
+	$attr[] = '';
 
 	if ($group_project_id) {
 		$labels[] = (($pg) ? $pg->getName() : '');
@@ -65,6 +69,7 @@ function pm_header($params) {
 		if (session_loggedin()) {
 			$labels[] = _('Add Task');
 			$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=addtask';
+			$attr[] = '';
 		}
 		if ($group_project_id) {
 			$gantt_width = 820;
@@ -75,6 +80,7 @@ function pm_header($params) {
 			$labels[] = $gantt_title;
 			$links[]  = $gantt_url . '" onclick="window.open(this.href, \'' . preg_replace('/\s/' , '_' , $gantt_title)
 			. '\', \'' . $gantt_winopt . '\'); return false;';
+			$attr[] = '';
 		}
 		//upload/download as CSV files
 //		$labels[] = _('Download as CSV');
@@ -85,22 +91,27 @@ function pm_header($params) {
 		// Import/Export using CSV files.
 		$labels[] = _('Import/Export CSV');
 		$links[]  = '/pm/task.php?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=csv';
+		$attr[] = '';
 	}
 
 	if ($pg && is_object($pg) && forge_check_perm ('pm', $pg->getID(), 'manager')) {
 		$labels[] = _('Reporting');
 		$links[]  = '/pm/reporting/?group_id='.$group_id;
+		$attr[] = '';
 		$labels[] = _('Administration');
 		$links[]  = '/pm/admin/?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;update_pg=1';
+		$attr[] = '';
 	} elseif (forge_check_perm ('pm_admin', $group_id)) {
 		$labels[] = _('Reporting');
 		$links[]  = '/pm/reporting/?group_id='.$group_id;
+		$attr[] = '';
 		$labels[] = _('Administration');
 		$links[]  = '/pm/admin/?group_id='.$group_id;
+		$attr[] = '';
 	}
 
 	if(!empty($labels)) {
-		$params['submenu'] = $HTML->subMenu($labels,$links);
+		$params['submenu'] = $HTML->subMenu($labels, $links, $attr);
 	}
 
 	site_project_header($params);
