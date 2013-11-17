@@ -6,6 +6,7 @@
  * Copyright 2002 GForge, LLC, Tim Perdue
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -283,10 +284,10 @@ if ($add_cat && $group_project_id) {
 	<input type="hidden" name="post_changes" value="y" />
 	<strong><?php echo _('New Subproject Name').utils_requiredField()?></strong>
 	<br />
-	<input type="text" name="project_name" value="" size="15" maxlength="30" />
+	<input type="text" name="project_name" value="" size="15" maxlength="30" required="required" pattern=".{5,}"/>
 	<p />
 	<strong><?php echo _('Description').utils_requiredField() ?></strong><br />
-	<input type="text" name="description" value="" size="40" maxlength="80" />
+	<input type="text" name="description" value="" size="40" maxlength="80" required="required" pattern=".{10,}"/>
 	<p />
 	<strong><?php echo _('Send All Updates To')?>:</strong><br />
 	<input type="text" name="send_all_posts_to" value="" size="40" maxlength="80" /><p />
