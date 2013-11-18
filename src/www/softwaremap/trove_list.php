@@ -317,7 +317,7 @@ if ( $cat === 'c' ) {
 			print "</td>\n";
 			print '<td class="align-right">'; // now the right side of the display
 			if (group_get_object($row_grp['group_id'])->usesStats()) {
-				print _('Activity Percentile:&nbsp;').'<strong>'. number_format($row_grp['percentile'],2) .'</strong>';
+				print _('Activity Percentile')._(': ').'<strong>'. number_format($row_grp['percentile'],2) .'</strong>';
 				print '<br />';
 				sprintf(_('Activity Ranking: <strong>%d</strong>'), number_format($row_grp['ranking'],2));
 			}

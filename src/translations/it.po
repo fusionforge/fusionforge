@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 12:01+0100\n"
+"POT-Creation-Date: 2013-11-18 12:23+0100\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -332,15 +332,16 @@ msgstr ""
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/softwaremap/tag_cloud.php:143 www/softwaremap/trove_list.php:81
-#: www/softwaremap/trove_list.php:219 www/softwaremap/trove_list.php:324
-#: www/survey/survey.php:51 www/tracker/admin/index.php:190
-#: www/tracker/reporting/index.php:126 www/tracker/reporting/index.php:128
-#: www/tracker/reporting/index.php:130 www/tracker/reporting/index.php:132
-#: www/tracker/reporting/index.php:134 www/tracker/roadmap.php:175
-#: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
-#: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
-#: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
-#: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
+#: www/softwaremap/trove_list.php:219 www/softwaremap/trove_list.php:320
+#: www/softwaremap/trove_list.php:324 www/survey/survey.php:51
+#: www/tracker/admin/index.php:190 www/tracker/reporting/index.php:126
+#: www/tracker/reporting/index.php:128 www/tracker/reporting/index.php:130
+#: www/tracker/reporting/index.php:132 www/tracker/reporting/index.php:134
+#: www/tracker/roadmap.php:175 www/tracker/roadmap.php:201
+#: www/tracker/roadmap.php:211 www/tracker/roadmap.php:223
+#: www/tracker/roadmap.php:238 www/tracker/roadmap.php:414
+#: www/tracker/roadmap.php:422 www/tracker/roadmap.php:435
+#: www/tracker/roadmap.php:468
 msgid ": "
 msgstr ""
 
@@ -22510,8 +22511,8 @@ msgstr[0] "<strong>%1$s</strong> progetti."
 msgstr[1] "<strong>%1$s</strong> progetti."
 
 #: www/softwaremap/trove_list.php:320
-msgid "Activity Percentile:&nbsp;"
-msgstr "Percentuale di attività:"
+msgid "Activity Percentile"
+msgstr "Percentuale di attività"
 
 #: www/source.php:36
 msgid "A file must be specified for this page."
@@ -24976,9 +24977,6 @@ msgstr "Pagina Personale"
 
 #~ msgid " (examples: meeting minutes, test results, RFP Docs)"
 #~ msgstr " (esempio: verbali, risultati di test, documenti, etc.)"
-
-#~ msgid "Activity Percentile"
-#~ msgstr "Percentuale di attività"
 
 #~ msgid "There are no public subprojects available"
 #~ msgstr "Non ci sono sottoprogetti pubblici"

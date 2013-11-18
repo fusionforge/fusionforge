@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 12:01+0100\n"
+"POT-Creation-Date: 2013-11-18 12:23+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -333,15 +333,16 @@ msgstr "Nome do ficheiro "
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/softwaremap/tag_cloud.php:143 www/softwaremap/trove_list.php:81
-#: www/softwaremap/trove_list.php:219 www/softwaremap/trove_list.php:324
-#: www/survey/survey.php:51 www/tracker/admin/index.php:190
-#: www/tracker/reporting/index.php:126 www/tracker/reporting/index.php:128
-#: www/tracker/reporting/index.php:130 www/tracker/reporting/index.php:132
-#: www/tracker/reporting/index.php:134 www/tracker/roadmap.php:175
-#: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
-#: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
-#: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
-#: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
+#: www/softwaremap/trove_list.php:219 www/softwaremap/trove_list.php:320
+#: www/softwaremap/trove_list.php:324 www/survey/survey.php:51
+#: www/tracker/admin/index.php:190 www/tracker/reporting/index.php:126
+#: www/tracker/reporting/index.php:128 www/tracker/reporting/index.php:130
+#: www/tracker/reporting/index.php:132 www/tracker/reporting/index.php:134
+#: www/tracker/roadmap.php:175 www/tracker/roadmap.php:201
+#: www/tracker/roadmap.php:211 www/tracker/roadmap.php:223
+#: www/tracker/roadmap.php:238 www/tracker/roadmap.php:414
+#: www/tracker/roadmap.php:422 www/tracker/roadmap.php:435
+#: www/tracker/roadmap.php:468
 msgid ": "
 msgstr ""
 
@@ -22760,8 +22761,8 @@ msgstr[0] "<strong>%1$s</strong> proxecto no conxunto de resultados."
 msgstr[1] "<strong>%1$s</strong> proxectos no conxunto de resultados."
 
 #: www/softwaremap/trove_list.php:320
-msgid "Activity Percentile:&nbsp;"
-msgstr "Percentil de actividade:&nbsp;"
+msgid "Activity Percentile"
+msgstr "Percentil de actividade"
 
 #: www/source.php:36
 msgid "A file must be specified for this page."
@@ -25643,9 +25644,6 @@ msgstr "Páxina persoal de %s"
 #~ msgstr ""
 #~ " (exemplos: minutos de reunión, resultados do test, Documentos do RFP)"
 
-#~ msgid "Activity Percentile"
-#~ msgstr "Percentil de actividade"
-
 #~ msgid "There are no public subprojects available"
 #~ msgstr "Non hai ningún subproxecto dispoñíbel"
 
@@ -27988,9 +27986,6 @@ msgstr "Páxina persoal de %s"
 
 #~ msgid "Invalid MessageID"
 #~ msgstr "o MessageID non é válido"
-
-#~ msgid "Activity Percentile:"
-#~ msgstr "Percentil de actividade:"
 
 #~ msgid "DevProfile"
 #~ msgstr "Perfil de desenvolvedor"
