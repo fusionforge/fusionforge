@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 17:48+0100\n"
+"POT-Creation-Date: 2013-11-18 17:57+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -2435,7 +2435,7 @@ msgstr "de manière anonyme"
 
 #: common/forum/ForumHTML.class.php:621
 msgid "Receive comments via email"
-msgstr "Recevoir les réponses par courriel"
+msgstr "Recevoir les commentaires par courriel"
 
 #: common/forum/ForumHTML.class.php:633
 #, php-format
