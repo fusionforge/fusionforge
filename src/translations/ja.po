@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 17:48+0100\n"
+"POT-Creation-Date: 2013-11-18 18:04+0100\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3876,7 +3876,7 @@ msgstr "フォーラム: 管理"
 #: plugins/hudson/include/hudsonPlugin.class.php:349
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:151
 #, fuzzy
-msgid "No access"
+msgid "No Access"
 msgstr "リセット"
 
 #: common/include/rbac_texts.php:48 common/include/rbac_texts.php:145
@@ -23588,10 +23588,6 @@ msgstr "%sのパーソナルページ"
 #, fuzzy
 #~ msgid "No Anonymous Posts"
 #~ msgstr "Anonymous FTP スペース"
-
-#, fuzzy
-#~ msgid "No Access"
-#~ msgstr "リセット"
 
 #, fuzzy
 #~ msgid "Post"

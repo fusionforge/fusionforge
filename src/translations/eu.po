@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 17:48+0100\n"
+"POT-Creation-Date: 2013-11-18 18:04+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3947,7 +3947,7 @@ msgstr "Foroak: administrazioa"
 #: plugins/hudson/include/hudsonPlugin.class.php:349
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:151
 #, fuzzy
-msgid "No access"
+msgid "No Access"
 msgstr "Ez aldatu"
 
 #: common/include/rbac_texts.php:48 common/include/rbac_texts.php:145
@@ -25296,10 +25296,6 @@ msgstr "Nere orri pertsonala"
 #, fuzzy
 #~ msgid "Write"
 #~ msgstr "Pribatua"
-
-#, fuzzy
-#~ msgid "No Access"
-#~ msgstr "Ez aldatu"
 
 #, fuzzy
 #~ msgid "Post"

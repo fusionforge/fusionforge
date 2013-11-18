@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 17:48+0100\n"
+"POT-Creation-Date: 2013-11-18 18:04+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -3968,8 +3968,8 @@ msgstr "Foros: Administración"
 #: common/include/rbac_texts.php:130 common/include/rbac_texts.php:135
 #: plugins/hudson/include/hudsonPlugin.class.php:349
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:151
-msgid "No access"
-msgstr "Sen acceso "
+msgid "No Access"
+msgstr "Sen acceso"
 
 #: common/include/rbac_texts.php:48 common/include/rbac_texts.php:145
 #, fuzzy
@@ -26534,9 +26534,6 @@ msgstr "Páxina persoal de %s"
 
 #~ msgid "Write"
 #~ msgstr "Escribir "
-
-#~ msgid "No Access"
-#~ msgstr "Sen acceso"
 
 #~ msgid "Post"
 #~ msgstr "Publicar "

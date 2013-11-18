@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 17:48+0100\n"
+"POT-Creation-Date: 2013-11-18 18:04+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -3960,7 +3960,7 @@ msgstr "Forge Administration"
 #: common/include/rbac_texts.php:130 common/include/rbac_texts.php:135
 #: plugins/hudson/include/hudsonPlugin.class.php:349
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:151
-msgid "No access"
+msgid "No Access"
 msgstr "Kein Zugang"
 
 #: common/include/rbac_texts.php:48 common/include/rbac_texts.php:145
@@ -26598,9 +26598,6 @@ msgstr "Persönliche Seite für %s"
 
 #~ msgid "Write"
 #~ msgstr "Schreiben"
-
-#~ msgid "No Access"
-#~ msgstr "Kein Zugang"
 
 #~ msgid "Post"
 #~ msgstr "Beitrag"

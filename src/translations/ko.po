@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 17:48+0100\n"
+"POT-Creation-Date: 2013-11-18 18:04+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3900,7 +3900,7 @@ msgstr "게시판: 관리"
 #: plugins/hudson/include/hudsonPlugin.class.php:349
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:151
 #, fuzzy
-msgid "No access"
+msgid "No Access"
 msgstr "변경 없음"
 
 #: common/include/rbac_texts.php:48 common/include/rbac_texts.php:145
@@ -23904,10 +23904,6 @@ msgstr "개인 페이지"
 #, fuzzy
 #~ msgid "Allow Anonymous Posts"
 #~ msgstr "익명 사용자가 글을 올릴 수 있도록 하시겠습니까?"
-
-#, fuzzy
-#~ msgid "No Access"
-#~ msgstr "변경 없음"
 
 #, fuzzy
 #~ msgid "Post"

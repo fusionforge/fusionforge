@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 17:48+0100\n"
+"POT-Creation-Date: 2013-11-18 18:04+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3953,7 +3953,7 @@ msgstr "Форумы: Управление"
 #: common/include/rbac_texts.php:130 common/include/rbac_texts.php:135
 #: plugins/hudson/include/hudsonPlugin.class.php:349
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:151
-msgid "No access"
+msgid "No Access"
 msgstr "Нет доступа"
 
 #: common/include/rbac_texts.php:48 common/include/rbac_texts.php:145
@@ -26483,9 +26483,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "Write"
 #~ msgstr "запись"
-
-#~ msgid "No Access"
-#~ msgstr "Доступ блокирован"
 
 #~ msgid "Post"
 #~ msgstr "Сообщене"

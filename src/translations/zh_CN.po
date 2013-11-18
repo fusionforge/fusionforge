@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 17:48+0100\n"
+"POT-Creation-Date: 2013-11-18 18:04+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3928,7 +3928,7 @@ msgstr "讨论区：管理"
 #: common/include/rbac_texts.php:130 common/include/rbac_texts.php:135
 #: plugins/hudson/include/hudsonPlugin.class.php:349
 #: plugins/moinmoin/common/MoinMoinPlugin.class.php:151
-msgid "No access"
+msgid "No Access"
 msgstr "没有访问权限"
 
 #: common/include/rbac_texts.php:48 common/include/rbac_texts.php:145
@@ -25405,9 +25405,6 @@ msgstr "我的个人首页"
 
 #~ msgid "Write"
 #~ msgstr "写"
-
-#~ msgid "No Access"
-#~ msgstr "没有访问权限"
 
 #~ msgid "Post"
 #~ msgstr "帖子"

@@ -148,7 +148,7 @@ class MoinMoinPlugin extends Plugin {
 			$right = new PluginSpecificRoleSetting ($role,
 							       'plugin_moinmoin_access') ;
 			$right->setDescription (_('MoinMoin Wiki access')) ;
-			$right->setValueDescriptions (array ('0' => _('No access'),
+			$right->setValueDescriptions (array ('0' => _('No Access'),
 							     '1' => _('Read access'),
 							     '2' => _('Write access'),
 							     '3' => _('Admin access'))) ;
