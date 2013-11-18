@@ -5073,9 +5073,9 @@ msgid "Tracker created successfully"
 msgstr "Creouse o rexistro correctamente"
 
 #: common/tracker/actions/admin-ind.php:51 www/pm/admin/index.php:81
-msgid "Please configure also the roles (by default, it's 'No Access')"
+msgid "Please configure also the roles (by default, it's “No Access”)"
 msgstr ""
-"Por favor, configure tamén os roles (de xeito predefinido, é 'Sen acceso')"
+"Por favor, configure tamén os roles (de xeito predefinido, é “Sen acceso”)"
 
 #: common/tracker/actions/admin-ind.php:62 common/tracker/actions/ind.php:31
 #, fuzzy
@@ -28013,10 +28013,6 @@ msgstr "Páxina persoal de %s"
 
 #~ msgid "No valid Document Group was selected."
 #~ msgstr "Non se seleccionou ningún grupo de documentos válido."
-
-#~ msgid "Please configure also the roles (by default, it is 'No Access')"
-#~ msgstr ""
-#~ "Por favor, configure tamén os roles (de xeito predefinido, é 'Sen acceso')"
 
 #~ msgid "I am Really Sure."
 #~ msgstr "Estou totalmente seguro. "

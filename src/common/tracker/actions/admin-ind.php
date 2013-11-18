@@ -48,7 +48,7 @@ if (getStringFromRequest('post_changes')) {
 		} else {
 			$feedback .= _('Tracker created successfully');
 			$feedback .= '<br/>';
-			$feedback .= _('Please configure also the roles (by default, it\'s \'No Access\')');
+			$feedback .= _("Please configure also the roles (by default, it's “No Access”)");
 		}
 		$group->normalizeAllRoles () ;
 	}

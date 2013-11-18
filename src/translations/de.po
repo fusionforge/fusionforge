@@ -5054,10 +5054,10 @@ msgid "Tracker created successfully"
 msgstr "Tracker erfolgreich angelegt"
 
 #: common/tracker/actions/admin-ind.php:51 www/pm/admin/index.php:81
-msgid "Please configure also the roles (by default, it's 'No Access')"
+msgid "Please configure also the roles (by default, it's “No Access”)"
 msgstr ""
-"Bitte konfigurieren Sie auch die Rollen (standardmässig sind sie auf 'Kein "
-"Zugang' eingestellt)"
+"Bitte konfigurieren Sie auch die Rollen (standardmässig sind sie auf »Kein "
+"Zugang« eingestellt)"
 
 #: common/tracker/actions/admin-ind.php:62 common/tracker/actions/ind.php:31
 #, fuzzy
@@ -28292,11 +28292,6 @@ msgstr "Persönliche Seite für %s"
 #~ msgid ""
 #~ "I'm just doing minor edits. Please divert the usual logging to %s instead."
 #~ msgstr "Ich mache nur kleinere Änderungen. Protokolliere stattdessen in %s."
-
-#~ msgid "Please configure also the roles (by default, it is 'No Access')"
-#~ msgstr ""
-#~ "Bitte konfigurieren Sie auch die Rollen (standardmässig sind sie auf "
-#~ "'Kein Zugang' eingestellt)"
 
 #~ msgid "I am Really Sure."
 #~ msgstr "Ich bin wirklich sicher."

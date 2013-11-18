@@ -78,7 +78,7 @@ if (getStringFromRequest('post_changes')) {
 			exit_error($pg->getErrorMessage(),'pm');
 		} else {
 			$feedback .= _('Subproject Inserted');
-			$warning_msg .= _("Please configure also the roles (by default, it's 'No Access')");
+			$warning_msg .= _("Please configure also the roles (by default, it's “No Access”)");
 		}
 
 	} elseif ($add_cat) {

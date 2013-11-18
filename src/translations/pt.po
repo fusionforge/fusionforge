@@ -4697,7 +4697,7 @@ msgid "Tracker created successfully"
 msgstr ""
 
 #: common/tracker/actions/admin-ind.php:51 www/pm/admin/index.php:81
-msgid "Please configure also the roles (by default, it's 'No Access')"
+msgid "Please configure also the roles (by default, it's “No Access”)"
 msgstr ""
 
 #: common/tracker/actions/admin-ind.php:62 common/tracker/actions/ind.php:31
