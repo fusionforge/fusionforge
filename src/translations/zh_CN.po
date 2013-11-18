@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 12:23+0100\n"
+"POT-Creation-Date: 2013-11-18 16:32+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3840,17 +3840,17 @@ msgstr ""
 "配置文件无法链接到/etc/fusionforge/plugins/%s。请检查apache在/etc/"
 "fusionforge/plugins 的写权限或手工创建。"
 
-#: common/include/Plugin.class.php:250 common/include/Plugin.class.php:307
+#: common/include/Plugin.class.php:250 common/include/Plugin.class.php:309
 #: www/admin/pluginman.php:279
 msgid "Current plugin status is"
 msgstr ""
 
-#: common/include/Plugin.class.php:280 common/include/Plugin.class.php:327
+#: common/include/Plugin.class.php:281 common/include/Plugin.class.php:330
 #, php-format
-msgid "Use %s Plugin"
+msgid "Use %s"
 msgstr ""
 
-#: common/include/Plugin.class.php:345
+#: common/include/Plugin.class.php:348
 #, fuzzy
 msgid "No description available."
 msgstr "没有统计信息"

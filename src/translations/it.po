@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 12:23+0100\n"
+"POT-Creation-Date: 2013-11-18 16:32+0100\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3886,17 +3886,17 @@ msgstr ""
 "plugins/%s. Controlla i permessi di scrittura per apache in /etc/fusionforge/"
 "plugins oppure crea il link manualmente."
 
-#: common/include/Plugin.class.php:250 common/include/Plugin.class.php:307
+#: common/include/Plugin.class.php:250 common/include/Plugin.class.php:309
 #: www/admin/pluginman.php:279
 msgid "Current plugin status is"
 msgstr ""
 
-#: common/include/Plugin.class.php:280 common/include/Plugin.class.php:327
+#: common/include/Plugin.class.php:281 common/include/Plugin.class.php:330
 #, php-format
-msgid "Use %s Plugin"
+msgid "Use %s"
 msgstr ""
 
-#: common/include/Plugin.class.php:345
+#: common/include/Plugin.class.php:348
 #, fuzzy
 msgid "No description available."
 msgstr "Statistiche non disponibili"

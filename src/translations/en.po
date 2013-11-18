@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 12:23+0100\n"
+"POT-Creation-Date: 2013-11-18 16:32+0100\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3567,17 +3567,17 @@ msgid ""
 "apache in /etc/fusionforge/plugins or create the link manually."
 msgstr ""
 
-#: common/include/Plugin.class.php:250 common/include/Plugin.class.php:307
+#: common/include/Plugin.class.php:250 common/include/Plugin.class.php:309
 #: www/admin/pluginman.php:279
 msgid "Current plugin status is"
 msgstr ""
 
-#: common/include/Plugin.class.php:280 common/include/Plugin.class.php:327
+#: common/include/Plugin.class.php:281 common/include/Plugin.class.php:330
 #, php-format
-msgid "Use %s Plugin"
+msgid "Use %s"
 msgstr ""
 
-#: common/include/Plugin.class.php:345
+#: common/include/Plugin.class.php:348
 msgid "No description available."
 msgstr ""
 

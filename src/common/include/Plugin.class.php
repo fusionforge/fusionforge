@@ -262,25 +262,27 @@ class Plugin extends Error {
 
 		if ($display) {
 			$flag = strtolower('use_'.$this->name);
-			echo '<tr>';
-			echo '<td>';
+			echo "<tr>\n";
+			echo "<td>\n";
 			echo ' <input type="checkbox" name="'.$flag.'" value="1" ';
 			// checked or unchecked?
 			if ($group->usesPlugin($this->name)) {
 				echo 'checked="checked"';
 			}
 			echo ' /><br/>';
-			echo '</td>';
+			echo "</td>\n";
 			$pluginObject = plugin_get_object($this->name);
 			if (method_exists($pluginObject, 'getPluginDescription')) {
 				echo '<td class="tabtitle" title="'.$description = $pluginObject->getPluginDescription().'">';
 			} else {
-				echo '<td>';
+				echo "</td>\n";
 			}
-			echo '<strong>'. sprintf(_('Use %s Plugin'), $this->text) .'</strong>';
+			echo "<strong>";
+			printf(_("Use %s"), $this->text);
+			echo "</strong>";
 			echo html_image($imgStatus, '16', '16',array('alt'=>$title, 'title'=>$title, 'class'=>'tabtitle-sw'));
-			echo '</td>';
-			echo '</tr>';
+			echo "</td>\n";
+			echo "</tr>\n";
 		}
 	}
 
@@ -324,7 +326,8 @@ class Plugin extends Error {
 			if ($user->usesPlugin($this->name)) {
 				echo 'checked="checked"';
 			}
-			echo ' />    '. sprintf(_('Use %s Plugin'), $this->text);
+			echo " />\n";
+			printf(_("Use %s"), $this->text);
 			echo html_image($imgStatus, '16', '16',array('alt'=>$title, 'title'=>$title));
 			echo '</div>';
 		}

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 12:23+0100\n"
+"POT-Creation-Date: 2013-11-18 16:32+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -3774,17 +3774,17 @@ msgstr ""
 "permisos de escritura para apache en /etc/fusionforge/plugins o crea un "
 "enlace manual."
 
-#: common/include/Plugin.class.php:250 common/include/Plugin.class.php:307
+#: common/include/Plugin.class.php:250 common/include/Plugin.class.php:309
 #: www/admin/pluginman.php:279
 msgid "Current plugin status is"
 msgstr "Estado Actual del plugin es"
 
-#: common/include/Plugin.class.php:280 common/include/Plugin.class.php:327
+#: common/include/Plugin.class.php:281 common/include/Plugin.class.php:330
 #, php-format
-msgid "Use %s Plugin"
-msgstr "Usa Plugin %s"
+msgid "Use %s"
+msgstr "Usa %s"
 
-#: common/include/Plugin.class.php:345
+#: common/include/Plugin.class.php:348
 #, fuzzy
 msgid "No description available."
 msgstr "Estadísticas no disponibles"

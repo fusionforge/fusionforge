@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 12:23+0100\n"
+"POT-Creation-Date: 2013-11-18 16:32+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -3873,17 +3873,17 @@ msgstr ""
 "Schreibrechte für Apache in/etc/fusionforge/plugins oder erstellen Sie den "
 "Link manuell."
 
-#: common/include/Plugin.class.php:250 common/include/Plugin.class.php:307
+#: common/include/Plugin.class.php:250 common/include/Plugin.class.php:309
 #: www/admin/pluginman.php:279
 msgid "Current plugin status is"
 msgstr ""
 
-#: common/include/Plugin.class.php:280 common/include/Plugin.class.php:327
+#: common/include/Plugin.class.php:281 common/include/Plugin.class.php:330
 #, php-format
-msgid "Use %s Plugin"
+msgid "Use %s"
 msgstr ""
 
-#: common/include/Plugin.class.php:345
+#: common/include/Plugin.class.php:348
 #, fuzzy
 msgid "No description available."
 msgstr "Keine Statistiken verfügbar"
