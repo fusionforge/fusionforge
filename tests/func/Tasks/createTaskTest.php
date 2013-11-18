@@ -314,7 +314,7 @@ class CreateTask extends FForge_SeleniumTestCase
 		$this->clickAndWait("submit");
 
 		$this->switchUser('ucontrib');
-		$this->open( ROOT );
+		$this->open(ROOT);
 		$this->waitForPageToLoad("30000");
 		$this->clickAndWait("link=ProjectA");
 		$this->clickAndWait("link=My Page");
@@ -323,7 +323,7 @@ class CreateTask extends FForge_SeleniumTestCase
 		// $this->click("link=Assigned Tasks");
 		$this->assertTextPresent("Task2: Hello France");
 		$this->switchUser('uadmin');
-		$this->open( ROOT );
+		$this->open(ROOT);
 		$this->waitForPageToLoad("30000");
 	}
 
