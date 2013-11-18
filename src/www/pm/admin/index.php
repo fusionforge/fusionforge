@@ -284,12 +284,12 @@ if ($add_cat && $group_project_id) {
 	<input type="hidden" name="post_changes" value="y" />
 	<strong><?php echo _('New Subproject Name').utils_requiredField()?></strong>
 	<br />
-	<input type="text" name="project_name" value="" size="15" maxlength="30" required="required" pattern=".{5,}"/>
+	<input type="text" name="project_name" value="" size="15" maxlength="30" required="required" pattern=".{5,}" />
 	<p />
 	<strong><?php echo _('Description').utils_requiredField() ?></strong><br />
-	<input type="text" name="description" value="" size="40" maxlength="80" required="required" pattern=".{10,}"/>
+	<input type="text" name="description" value="" size="40" maxlength="80" required="required" pattern=".{10,}" />
 	<p />
-	<strong><?php echo _('Send All Updates To')?>:</strong><br />
+	<strong><?php echo _('Send All Updates To')._(':'); ?></strong><br />
 	<input type="text" name="send_all_posts_to" value="" size="40" maxlength="80" /><p />
 	<input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 	</form>
