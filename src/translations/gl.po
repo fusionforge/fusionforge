@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-13 19:08+0100\n"
+"POT-Creation-Date: 2013-11-18 12:01+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -320,8 +320,8 @@ msgstr "Nome do ficheiro "
 #: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
 #: www/pm/add_task.php:74 www/pm/add_task.php:81 www/pm/add_task.php:88
 #: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
-#: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/admin/index.php:96
-#: www/pm/admin/index.php:118 www/pm/admin/index.php:258
+#: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/admin/index.php:97
+#: www/pm/admin/index.php:119 www/pm/admin/index.php:259
 #: www/pm/calendar.php:59 www/pm/detail_task.php:66 www/pm/detail_task.php:71
 #: www/pm/detail_task.php:86 www/pm/detail_task.php:90
 #: www/pm/detail_task.php:97 www/pm/detail_task.php:104 www/pm/mod_task.php:52
@@ -332,7 +332,8 @@ msgstr "Nome do ficheiro "
 #: www/project/admin/roledelete.php:62 www/register/index.php:188
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
-#: www/softwaremap/tag_cloud.php:143 www/softwaremap/trove_list.php:323
+#: www/softwaremap/tag_cloud.php:143 www/softwaremap/trove_list.php:81
+#: www/softwaremap/trove_list.php:219 www/softwaremap/trove_list.php:324
 #: www/survey/survey.php:51 www/tracker/admin/index.php:190
 #: www/tracker/reporting/index.php:126 www/tracker/reporting/index.php:128
 #: www/tracker/reporting/index.php:130 www/tracker/reporting/index.php:132
@@ -833,7 +834,7 @@ msgstr ""
 #: www/forum/index.php:69 www/mail/admin/index.php:192
 #: www/mail/admin/index.php:225 www/mail/index.php:79
 #: www/people/editjob.php:52 www/people/editjob.php:74
-#: www/pm/admin/index.php:288 www/pm/admin/index.php:331 www/pm/csv.php:105
+#: www/pm/admin/index.php:289 www/pm/admin/index.php:332 www/pm/csv.php:105
 #: www/pm/index.php:100 www/project/admin/editimages.php:226
 #: www/project/admin/editimages.php:253 www/project/admin/editimages.php:269
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:62
@@ -1211,12 +1212,12 @@ msgstr ""
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
 #: www/account/index.php:230 www/account/register.php:169
 #: www/people/editjob.php:52 www/people/editjob.php:74
-#: www/people/editprofile.php:106 www/people/people_utils.php:405
-#: www/people/skills_utils.php:49 www/pm/admin/index.php:188
+#: www/people/editprofile.php:106 www/people/people_utils.php:406
+#: www/people/skills_utils.php:49 www/pm/admin/index.php:189
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:61
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:54
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:46
-#: www/snippet/browse.php:84 www/snippet/package.php:147
+#: www/snippet/browse.php:85 www/snippet/package.php:147
 #: www/snippet/snippet_utils.php:156 www/snippet/submit.php:104
 msgid "Title"
 msgstr "Título"
@@ -1380,7 +1381,7 @@ msgstr ""
 #: www/export/tracker.php:107 www/forum/index.php:90 www/forum/message.php:127
 #: www/forum/myforums.php:152 www/frs/index.php:175 www/frs/index.php:234
 #: www/include/html.php:1070 www/news/news_utils.php:149
-#: www/news/news_utils.php:269 www/people/people_utils.php:422
+#: www/news/news_utils.php:269 www/people/people_utils.php:423
 #: www/people/viewjob.php:77 www/pm/browse_task.php:262
 #: www/pm/browse_task.php:272 www/pm/include/ProjectTaskHTML.class.php:121
 #: www/pm/include/ProjectTaskHTML.class.php:174
@@ -1390,7 +1391,7 @@ msgstr ""
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1126 www/softwaremap/full_list.php:122
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:323
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
 msgstr "A-m-d H:i"
@@ -1567,8 +1568,8 @@ msgstr ""
 #: common/include/Navigation.class.php:300
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:54
 #: common/tracker/include/ArtifactTypeHtml.class.php:67
-#: www/pm/include/ProjectGroupHTML.class.php:91
-#: www/pm/include/ProjectGroupHTML.class.php:96
+#: www/pm/include/ProjectGroupHTML.class.php:99
+#: www/pm/include/ProjectGroupHTML.class.php:106
 #: www/scm/include/scm_utils.php:50
 msgid "Reporting"
 msgstr "Informes "
@@ -1587,8 +1588,8 @@ msgstr "Administración da xestión de documentos"
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:402
 #: plugins/mantisbt/www/user/index.php:41 www/mail/admin/index.php:288
 #: www/mail/mail_utils.php:48 www/news/news_utils.php:48
-#: www/pm/include/ProjectGroupHTML.class.php:93
-#: www/pm/include/ProjectGroupHTML.class.php:98
+#: www/pm/include/ProjectGroupHTML.class.php:102
+#: www/pm/include/ProjectGroupHTML.class.php:109
 #: www/scm/include/scm_utils.php:53 www/survey/include/SurveyHTML.class.php:67
 #: www/survey/include/SurveyHTML.class.php:80
 msgid "Administration"
@@ -1647,7 +1648,7 @@ msgstr "Data de comezo"
 #: common/docman/views/reporting.php:92 common/docman/views/reporting.php:94
 #: common/forum/ForumHTML.class.php:85 common/frs/FRSRelease.class.php:294
 #: common/frs/FRSRelease.class.php:297 common/frs/FRSRelease.class.php:301
-#: common/include/utils.php:497 common/tracker/actions/browse.php:736
+#: common/include/utils.php:496 common/tracker/actions/browse.php:736
 #: common/tracker/actions/browse.php:744 common/tracker/actions/browse.php:754
 #: common/tracker/actions/detail.php:69 common/tracker/actions/detail.php:73
 #: common/tracker/actions/detail.php:80 common/tracker/actions/detail.php:87
@@ -1790,10 +1791,11 @@ msgstr "Data de comezo"
 #: www/people/admin/index.php:133 www/people/createjob.php:52
 #: www/people/createjob.php:55 www/people/editjob.php:169
 #: www/people/editjob.php:172 www/people/editprofile.php:241
-#: www/pm/admin/index.php:212 www/pm/admin/index.php:321
-#: www/pm/admin/index.php:331 www/pm/admin/index.php:341
-#: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
-#: www/pm/format_csv.php:89 www/pm/format_csv.php:93 www/pm/format_csv.php:97
+#: www/pm/admin/index.php:213 www/pm/admin/index.php:292
+#: www/pm/admin/index.php:322 www/pm/admin/index.php:332
+#: www/pm/admin/index.php:342 www/pm/format_csv.php:66
+#: www/pm/format_csv.php:71 www/pm/format_csv.php:76 www/pm/format_csv.php:89
+#: www/pm/format_csv.php:93 www/pm/format_csv.php:97
 #: www/project/admin/editimages.php:222 www/project/admin/editimages.php:226
 #: www/project/admin/editimages.php:230 www/project/admin/editimages.php:250
 #: www/project/admin/editimages.php:253 www/project/stats/index.php:105
@@ -2064,7 +2066,7 @@ msgstr "Non se puido obter o obxecto de foro"
 #: www/forum/admin/index.php:185 www/frs/admin/deletepackage.php:74
 #: www/frs/admin/deleterelease.php:76 www/frs/admin/index.php:185
 #: www/frs/admin/showreleases.php:114 www/news/admin/index.php:131
-#: www/people/people_utils.php:178 www/people/people_utils.php:322
+#: www/people/people_utils.php:179 www/people/people_utils.php:323
 #: www/people/skills_utils.php:46 www/people/skills_utils.php:104
 #: www/project/admin/vhost.php:145 www/reporting/timeadd.php:163
 #: www/snippet/detail.php:67 www/survey/include/SurveyHTML.class.php:312
@@ -2237,8 +2239,8 @@ msgstr "Liberacións"
 #: www/admin/vhost.php:183 www/forum/admin/index.php:162
 #: www/frs/admin/editrelease.php:347 www/frs/admin/index.php:182
 #: www/mail/admin/index.php:228 www/mail/admin/index.php:281
-#: www/people/people_utils.php:177 www/people/people_utils.php:321
-#: www/pm/admin/index.php:350 www/pm/calendar.php:289
+#: www/people/people_utils.php:178 www/people/people_utils.php:322
+#: www/pm/admin/index.php:351 www/pm/calendar.php:289
 #: www/project/admin/database.php:234 www/project/admin/index.php:289
 #: www/project/admin/tools.php:305 www/reporting/timecategory.php:99
 #: www/scm/admin/index.php:176
@@ -2337,7 +2339,7 @@ msgstr "Só pode gardar o seu lugar se está conectado."
 #: plugins/mailman/include/MailmanList.class.php:247
 #: plugins/mailman/include/MailmanList.class.php:372
 #: plugins/mailman/include/MailmanList.class.php:389
-#: www/pm/admin/index.php:118
+#: www/pm/admin/index.php:119
 msgid "Update failed"
 msgstr "Produciuse un erro na actualización"
 
@@ -4373,7 +4375,7 @@ msgstr ""
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: www/people/admin/index.php:52 www/people/admin/index.php:65
-#: www/pm/admin/index.php:96 www/survey/rating_resp.php:56
+#: www/pm/admin/index.php:97 www/survey/rating_resp.php:56
 msgid "Insert Error"
 msgstr "Produciuse un erro ao inserir "
 
@@ -4525,20 +4527,20 @@ msgstr "O equipo de %1$s"
 msgid "UTF-8"
 msgstr "UTF-8 "
 
-#: common/include/utils.php:497
+#: common/include/utils.php:496
 msgid "Priority Colors"
 msgstr "Cores das prioridades "
 
-#: common/include/utils.php:896 common/include/utils.php:900
-#: common/include/utils.php:911
+#: common/include/utils.php:895 common/include/utils.php:899
+#: common/include/utils.php:910
 msgid "bytes"
 msgstr "bytes"
 
-#: common/include/utils.php:896 common/include/utils.php:911
+#: common/include/utils.php:895 common/include/utils.php:910
 msgid "kB"
 msgstr ""
 
-#: common/include/utils.php:896
+#: common/include/utils.php:895
 #: plugins/quota_management/www/quota_admin.php:120
 #: plugins/quota_management/www/quota_admin.php:127
 #: plugins/quota_management/www/quota.php:248
@@ -4566,36 +4568,36 @@ msgstr ""
 msgid "MB"
 msgstr ""
 
-#: common/include/utils.php:896
+#: common/include/utils.php:895
 msgid "GB"
 msgstr ""
 
-#: common/include/utils.php:896
+#: common/include/utils.php:895
 msgid "TB"
 msgstr ""
 
-#: common/include/utils.php:900 common/include/utils.php:911
+#: common/include/utils.php:899 common/include/utils.php:910
 msgid "KiB"
 msgstr ""
 
-#: common/include/utils.php:900
+#: common/include/utils.php:899
 msgid "MiB"
 msgstr ""
 
-#: common/include/utils.php:900
+#: common/include/utils.php:899
 msgid "GiB"
 msgstr ""
 
-#: common/include/utils.php:900
+#: common/include/utils.php:899
 msgid "TiB"
 msgstr ""
 
-#: common/include/utils.php:1292
+#: common/include/utils.php:1291
 #, fuzzy
 msgid "Error: a mailing list with the same email address already exists."
 msgstr "Xa existe un usuario con este correo electrónico."
 
-#: common/include/utils.php:1310
+#: common/include/utils.php:1309
 #, fuzzy
 msgid "Error: a forum with the same email address already exists."
 msgstr "Xa existe un usuario con este correo electrónico."
@@ -5066,7 +5068,7 @@ msgstr "Enviar novo"
 msgid "Tracker created successfully"
 msgstr "Creouse o rexistro correctamente"
 
-#: common/tracker/actions/admin-ind.php:51 www/pm/admin/index.php:80
+#: common/tracker/actions/admin-ind.php:51 www/pm/admin/index.php:81
 msgid "Please configure also the roles (by default, it's 'No Access')"
 msgstr ""
 "Por favor, configure tamén os roles (de xeito predefinido, é 'Sen acceso')"
@@ -5195,8 +5197,8 @@ msgstr "Texto de formulario libre para a páxina de \"navegar polos elementos\""
 #: www/my/bookmark_add.php:58 www/my/diary.php:189
 #: www/news/admin/index.php:149 www/news/news_utils.php:42
 #: www/news/submit.php:170 www/pm/add_task.php:57 www/pm/add_task.php:140
-#: www/pm/add_task.php:154 www/pm/admin/index.php:217
-#: www/pm/admin/index.php:262 www/pm/admin/index.php:293 www/pm/csv.php:90
+#: www/pm/add_task.php:154 www/pm/admin/index.php:218
+#: www/pm/admin/index.php:263 www/pm/admin/index.php:294 www/pm/csv.php:90
 #: www/pm/deletetask.php:51 www/pm/mod_task.php:54 www/pm/mod_task.php:254
 #: www/project/admin/editimages.php:235 www/project/admin/roledelete.php:85
 #: www/project/admin/roleedit.php:302 www/project/request.php:70
@@ -5442,7 +5444,7 @@ msgstr "Actualizouse o elemento "
 
 #: common/tracker/actions/browse.php:94
 #: common/tracker/actions/downloadcsv.php:38
-#: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:403
+#: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:404
 #: www/pm/index.php:46 www/pm/task.php:86 www/tracker/roadmap.php:333
 msgid "Could Not Get Factory"
 msgstr "Non se puido obter o Factory"
@@ -5465,7 +5467,7 @@ msgstr "Non asignadas"
 #: common/tracker/actions/query.php:196
 #: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:134
 #: www/admin/search.php:72 www/admin/search.php:147 www/my/dashboard.php:64
-#: www/pm/admin/index.php:187 www/pm/index.php:98
+#: www/pm/admin/index.php:188 www/pm/index.php:98
 #: www/project/admin/editimages.php:263
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "Id"
@@ -5741,7 +5743,7 @@ msgstr "Está seguro de querer eliminar este artefacto?"
 #: common/tracker/views/form-deletetracker.php:38
 #: www/admin/responses_admin.php:51 www/forum/admin/index.php:183
 #: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:74
-#: www/frs/admin/editrelease.php:382 www/pm/admin/index.php:382
+#: www/frs/admin/editrelease.php:382 www/pm/admin/index.php:383
 #: www/pm/deletetask.php:45 www/project/admin/roledelete.php:81
 #: www/reporting/rebuild.php:63
 msgid "I am Sure"
@@ -6060,8 +6062,8 @@ msgstr ""
 msgid "Artifact Could Not Be Created"
 msgstr "Non se puido crear o artefacto"
 
-#: common/tracker/actions/taskmgr.php:59 www/pm/admin/index.php:302
-#: www/pm/admin/index.php:363
+#: common/tracker/actions/taskmgr.php:59 www/pm/admin/index.php:303
+#: www/pm/admin/index.php:364
 msgid "Could Not Get ProjectGroup"
 msgstr "Non se puido obter o grupo do proxecto"
 
@@ -7195,7 +7197,7 @@ msgstr ""
 #: common/tracker/views/form-deleteextrafield.php:48
 #: common/tracker/views/form-deletetracker.php:42
 #: www/forum/admin/index.php:184 www/frs/admin/deletepackage.php:71
-#: www/frs/admin/deleterelease.php:75 www/pm/admin/index.php:388
+#: www/frs/admin/deleterelease.php:75 www/pm/admin/index.php:389
 msgid "I am Really Sure"
 msgstr "Estou totalmente seguro "
 
@@ -7900,7 +7902,7 @@ msgid "Registered: "
 msgstr "Rexistrado "
 
 #: common/widget/Widget_ProjectInfo.class.php:83
-#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:321
+#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:322
 #, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "Clasificación por actividade: <strong>%d</strong>"
@@ -9949,7 +9951,7 @@ msgstr "Rexistro da conta de %1$s "
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:80
 #: plugins/mantisbt/view/admin/viewVersion.php:53 www/admin/pluginman.php:138
-#: www/people/people_utils.php:159 www/people/people_utils.php:299
+#: www/people/people_utils.php:160 www/people/people_utils.php:300
 #: www/project/admin/users.php:302 www/project/admin/users.php:376
 #: www/project/admin/users.php:436 www/project/admin/users.php:460
 msgid "Action"
@@ -10790,7 +10792,7 @@ msgid "Back to jobs list"
 msgstr ""
 
 #: plugins/hudson/include/hudsonViews.class.php:216 www/people/editjob.php:147
-#: www/people/people_utils.php:42
+#: www/people/people_utils.php:43
 msgid "Edit Job"
 msgstr "Editar o traballo"
 
@@ -11625,8 +11627,8 @@ msgstr ""
 #: plugins/mantisbt/view/viewIssue.php:57
 #: plugins/mantisbt/view/viewIssues.php:218 www/people/createjob.php:49
 #: www/people/editjob.php:52 www/people/editjob.php:74
-#: www/people/editjob.php:163 www/people/people_utils.php:350
-#: www/people/people_utils.php:406 www/pm/add_task.php:50
+#: www/people/editjob.php:163 www/people/people_utils.php:351
+#: www/people/people_utils.php:407 www/pm/add_task.php:50
 #: www/pm/browse_task.php:159 www/pm/browse_task.php:236
 #: www/pm/browse_task.php:368 www/pm/detail_task.php:52
 #: www/pm/ganttpage.php:177 www/pm/mod_task.php:61 www/pm/mod_task.php:268
@@ -16441,7 +16443,7 @@ msgstr[1] "Busca do grupo cos criterios <em>%s</em>: %d coincidencias"
 msgid "Full Name"
 msgstr "Nome completo "
 
-#: www/admin/search.php:150 www/softwaremap/trove_list.php:323
+#: www/admin/search.php:150 www/softwaremap/trove_list.php:324
 msgid "Registered"
 msgstr "Rexistrado "
 
@@ -18280,7 +18282,7 @@ msgstr "Salto rápido a..."
 msgid "Browse per tags defined by the projects."
 msgstr "Este proxecto non ten definida ningunha etiqueta"
 
-#: www/include/Layout.class.php:1391 www/softwaremap/trove_list.php:84
+#: www/include/Layout.class.php:1391 www/softwaremap/trove_list.php:85
 msgid "Project Tree"
 msgstr "Árbore de proxectos"
 
@@ -18318,6 +18320,15 @@ msgstr ""
 #, fuzzy
 msgid "Project Home"
 msgstr "Nome do proxecto"
+
+#: www/include/project_home.php:72
+msgid "Select new widgets to display on the project home page."
+msgstr ""
+
+#: www/include/project_home.php:73
+msgid ""
+"Modify the layout: one column, multiple columns or build your own layout."
+msgstr ""
 
 #: www/include/project_summary.php:135
 msgid "There are no public trackers available"
@@ -19251,7 +19262,7 @@ msgstr ""
 msgid "URLs that start with http:// are made clickable."
 msgstr "Os URL que comecen por http:// converteranse en ligazóns."
 
-#: www/people/admin/index.php:55 www/pm/admin/index.php:98
+#: www/people/admin/index.php:55 www/pm/admin/index.php:99
 msgid "Category Inserted"
 msgstr "Categoría inserida"
 
@@ -19330,9 +19341,9 @@ msgstr "Produciuse un erro na actualización"
 msgid "Job updated successfully"
 msgstr "O traballo actualizouse correctamente"
 
-#: www/people/editjob.php:91 www/people/people_utils.php:126
-#: www/people/people_utils.php:156 www/people/people_utils.php:234
-#: www/people/people_utils.php:296
+#: www/people/editjob.php:91 www/people/people_utils.php:127
+#: www/people/people_utils.php:157 www/people/people_utils.php:235
+#: www/people/people_utils.php:297
 msgid "Skill"
 msgstr "Habelencia"
 
@@ -19572,8 +19583,8 @@ msgid "No skill types in database (skills_data_types table)"
 msgstr ""
 "Non hai ningún tipo de habelencia na base de datos (táboa skills_data_types)"
 
-#: www/people/editprofile.php:271 www/people/people_utils.php:187
-#: www/people/people_utils.php:331
+#: www/people/editprofile.php:271 www/people/people_utils.php:188
+#: www/people/people_utils.php:332
 msgid "Add a new skill"
 msgstr "Engadir unha nova habelencia"
 
@@ -19660,79 +19671,79 @@ msgstr "Últimas publicacións"
 msgid "more latest posts"
 msgstr "Máis publicacións anteriores"
 
-#: www/people/people_utils.php:94
+#: www/people/people_utils.php:95
 msgid "Must select a skill ID"
 msgstr "Debe seleccionar un ID de habelencia"
 
-#: www/people/people_utils.php:103
+#: www/people/people_utils.php:104
 #, fuzzy
 msgid "Error inserting into skill inventory: "
 msgstr "Produciuse un erro ao inserir no inventario de habilidades"
 
-#: www/people/people_utils.php:106
+#: www/people/people_utils.php:107
 msgid "Added to skill inventory"
 msgstr "Engadido ao inventario de habilidades"
 
-#: www/people/people_utils.php:109
+#: www/people/people_utils.php:110
 msgid "Error: skill already in your inventory"
 msgstr "Produciuse un erro - Esta habelencia xa está no seu inventario"
 
-#: www/people/people_utils.php:127 www/people/people_utils.php:157
-#: www/people/people_utils.php:235 www/people/people_utils.php:297
+#: www/people/people_utils.php:128 www/people/people_utils.php:158
+#: www/people/people_utils.php:236 www/people/people_utils.php:298
 msgid "Level"
 msgstr "Nivel"
 
-#: www/people/people_utils.php:128 www/people/people_utils.php:158
-#: www/people/people_utils.php:236 www/people/people_utils.php:298
+#: www/people/people_utils.php:129 www/people/people_utils.php:159
+#: www/people/people_utils.php:237 www/people/people_utils.php:299
 msgid "Experience"
 msgstr "Experiencia"
 
-#: www/people/people_utils.php:136 www/people/people_utils.php:243
-#: www/people/people_utils.php:308
+#: www/people/people_utils.php:137 www/people/people_utils.php:244
+#: www/people/people_utils.php:309
 msgid "No Skill Inventory Set Up"
 msgstr "Non se configurou o inventario de habilidades"
 
-#: www/people/people_utils.php:166
+#: www/people/people_utils.php:167
 msgid "No skill setup"
 msgstr "Non se configurou a habelencia"
 
-#: www/people/people_utils.php:193 www/people/people_utils.php:339
+#: www/people/people_utils.php:194 www/people/people_utils.php:340
 msgid "Add Skill"
 msgstr "Engadir habelencia"
 
-#: www/people/people_utils.php:211
+#: www/people/people_utils.php:212
 #, fuzzy
 msgid "Error inserting into job inventory: "
 msgstr "Produciuse un erro ao inserir no inventario de habilidades"
 
-#: www/people/people_utils.php:214
+#: www/people/people_utils.php:215
 #, fuzzy
 msgid "Added to job inventory"
 msgstr "Engadido ao inventario de habilidades"
 
-#: www/people/people_utils.php:217
+#: www/people/people_utils.php:218
 #, fuzzy
 msgid "Error: job already in your inventory"
 msgstr "Produciuse un erro - Esta habelencia xa está no seu inventario"
 
-#: www/people/people_utils.php:272 www/people/people_utils.php:281
+#: www/people/people_utils.php:273 www/people/people_utils.php:282
 msgid "Invalid ID"
 msgstr "ID non válido"
 
-#: www/people/people_utils.php:363
+#: www/people/people_utils.php:364
 msgid "No Categories Found"
 msgstr "Non se atoparon categorías"
 
-#: www/people/people_utils.php:407
+#: www/people/people_utils.php:408
 msgid "Date Opened"
 msgstr "Data de apertura"
 
-#: www/people/people_utils.php:408
+#: www/people/people_utils.php:409
 #, php-format
 msgid "%1$s project"
 msgstr "Proxecto %1$s"
 
-#: www/people/people_utils.php:415
+#: www/people/people_utils.php:416
 msgid "None Found"
 msgstr "Non se achou ningún "
 
@@ -19807,56 +19818,56 @@ msgstr "Dependente da tarefa"
 msgid "Dependent note"
 msgstr "Nota dependente"
 
-#: www/pm/admin/index.php:62 www/pm/admin/index.php:93
-#: www/pm/admin/index.php:113 www/pm/admin/index.php:170
-#: www/pm/admin/index.php:234 www/pm/admin/index.php:245
+#: www/pm/admin/index.php:63 www/pm/admin/index.php:94
+#: www/pm/admin/index.php:114 www/pm/admin/index.php:171
+#: www/pm/admin/index.php:235 www/pm/admin/index.php:246
 #, fuzzy
 msgid "Unable to create ProjectCategory Object"
 msgstr "Non se puido crear o obxecto ArtifactCanned"
 
-#: www/pm/admin/index.php:79
+#: www/pm/admin/index.php:80
 #, fuzzy
 msgid "Subproject Inserted"
 msgstr "Proxecto inserido"
 
-#: www/pm/admin/index.php:120
+#: www/pm/admin/index.php:121
 msgid "Category Updated"
 msgstr "Categoría actualizada"
 
-#: www/pm/admin/index.php:139
+#: www/pm/admin/index.php:140
 #, fuzzy
 msgid "Subproject Updated successfully"
 msgstr "Actualizouse correctamente "
 
-#: www/pm/admin/index.php:154
+#: www/pm/admin/index.php:155
 #, fuzzy
 msgid "Subproject successfully deleted."
 msgstr "Eliminouse %1$s correctamente."
 
-#: www/pm/admin/index.php:177
+#: www/pm/admin/index.php:178
 #, fuzzy, php-format
 msgid "Add Categories to: %s"
 msgstr "Engadir categorías a "
 
-#: www/pm/admin/index.php:203
+#: www/pm/admin/index.php:204
 msgid "No categories defined"
 msgstr "Non se definiron categorías"
 
-#: www/pm/admin/index.php:212 www/pm/admin/index.php:258
+#: www/pm/admin/index.php:213 www/pm/admin/index.php:259
 #: www/reporting/timecategory.php:70 www/reporting/timecategory.php:90
 msgid "Category Name"
 msgstr "Nome da categoría"
 
-#: www/pm/admin/index.php:216
+#: www/pm/admin/index.php:217
 msgid "Once you add a category, it cannot be deleted"
 msgstr "Unha vez engadida a categoría, non se poderá eliminar"
 
-#: www/pm/admin/index.php:241
+#: www/pm/admin/index.php:242
 #, fuzzy, php-format
 msgid "Modify a Category in: %s"
 msgstr "Modificar unha categoría en"
 
-#: www/pm/admin/index.php:251
+#: www/pm/admin/index.php:252
 msgid ""
 "It is not recommended that you change the category name because other things "
 "are dependent upon it. When you change the category name, all related items "
@@ -19866,12 +19877,12 @@ msgstr ""
 "dependen del. Cando cambie o nome da categoría, cambiaranse todos os "
 "elementos relacionados ao novo nome."
 
-#: www/pm/admin/index.php:275
+#: www/pm/admin/index.php:276
 #, fuzzy
 msgid "Add a new subproject"
 msgstr "Engadir un proxecto novo"
 
-#: www/pm/admin/index.php:278
+#: www/pm/admin/index.php:279
 #, fuzzy
 msgid ""
 "Add a new subproject to the Tasks. <strong>This is different than adding a "
@@ -19880,21 +19891,21 @@ msgstr ""
 "Engadir un proxecto ao xestor de proxectos/tarefas. <strong>Isto é diferente "
 "a engadir unha tarefa a un proxecto.</strong>"
 
-#: www/pm/admin/index.php:284
+#: www/pm/admin/index.php:285
 #, fuzzy
 msgid "New Subproject Name"
 msgstr "Nome do subproxecto"
 
-#: www/pm/admin/index.php:291 www/pm/admin/index.php:341
+#: www/pm/admin/index.php:292 www/pm/admin/index.php:342
 msgid "Send All Updates To"
 msgstr "Enviar todas as actualizacións a"
 
-#: www/pm/admin/index.php:308
+#: www/pm/admin/index.php:309
 #, fuzzy
 msgid "Change Tasks Status"
 msgstr "Estado da tarefa"
 
-#: www/pm/admin/index.php:311
+#: www/pm/admin/index.php:312
 #, fuzzy
 msgid ""
 "You can modify an existing subproject using this form. Please note that "
@@ -19905,16 +19916,16 @@ msgstr ""
 "que os membros dos proxectos poden ver os proxecto privados, pero o público "
 "xeral non."
 
-#: www/pm/admin/index.php:321 www/pm/index.php:99
+#: www/pm/admin/index.php:322 www/pm/index.php:99
 msgid "Subproject Name"
 msgstr "Nome do subproxecto"
 
-#: www/pm/admin/index.php:370 www/pm/admin/index.php:392
+#: www/pm/admin/index.php:371 www/pm/admin/index.php:393
 #, fuzzy
 msgid "Permanently delete this subproject and all its data"
 msgstr "Eliminar permanentemente este subproxecto e todos os seus datos."
 
-#: www/pm/admin/index.php:377
+#: www/pm/admin/index.php:378
 msgid ""
 "You are about to permanently and irretrievably delete this subproject and "
 "all its related data!"
@@ -19922,17 +19933,17 @@ msgstr ""
 "Vai eliminar permanente e irrecuperabelmente este subproxecto e todos os "
 "seus datos relacionados!"
 
-#: www/pm/admin/index.php:411 www/project/admin/tools.php:327
+#: www/pm/admin/index.php:412 www/project/admin/tools.php:327
 #, fuzzy
 msgid "Tasks Administration"
 msgstr "Administración"
 
-#: www/pm/admin/index.php:419
+#: www/pm/admin/index.php:420
 #, fuzzy
 msgid "Add a Subproject"
 msgstr "Engadir un proxecto novo"
 
-#: www/pm/admin/index.php:420
+#: www/pm/admin/index.php:421
 #, fuzzy
 msgid ""
 "Add a subproject, which can contain a set of tasks. This is different than "
@@ -19941,12 +19952,12 @@ msgstr ""
 "Engadir un proxecto, que pode conter un conxunto de tarefas. Isto é "
 "diferente de crear unha nova tarefa."
 
-#: www/pm/admin/index.php:428
+#: www/pm/admin/index.php:429
 #, fuzzy
 msgid "No Subprojects Found in this Project"
 msgstr "Non existe tal publicación para este proxecto."
 
-#: www/pm/admin/index.php:429
+#: www/pm/admin/index.php:430
 #, fuzzy
 msgid "You may add new Subprojects using the “Add a Subproject” link above."
 msgstr ""
@@ -19954,7 +19965,7 @@ msgstr ""
 "Pode engadir novos proxectos usando a ligazón \"Engadir un proxecto\" de "
 "arriba.</p>"
 
-#: www/pm/admin/index.php:433
+#: www/pm/admin/index.php:434
 #, fuzzy
 msgid "Edit/Update Subproject"
 msgstr "Editar/actualizar un proxecto"
@@ -20037,51 +20048,51 @@ msgid "Invalid type: Type not in onemonth, threemonth, currentyear, comingyear"
 msgstr ""
 "O tipo non é \"un-mes\", \"tres-meses\", \"este-ano\" ou \"próximo-ano\""
 
-#: www/pm/calendar.php:86 www/pm/include/ProjectGroupHTML.class.php:163
+#: www/pm/calendar.php:86 www/pm/include/ProjectGroupHTML.class.php:175
 msgid "January"
 msgstr "Xaneiro"
 
-#: www/pm/calendar.php:86 www/pm/include/ProjectGroupHTML.class.php:164
+#: www/pm/calendar.php:86 www/pm/include/ProjectGroupHTML.class.php:176
 msgid "February"
 msgstr "Febreiro"
 
-#: www/pm/calendar.php:86 www/pm/include/ProjectGroupHTML.class.php:165
+#: www/pm/calendar.php:86 www/pm/include/ProjectGroupHTML.class.php:177
 msgid "March"
 msgstr "Marzo"
 
-#: www/pm/calendar.php:86 www/pm/include/ProjectGroupHTML.class.php:166
+#: www/pm/calendar.php:86 www/pm/include/ProjectGroupHTML.class.php:178
 msgid "April"
 msgstr "Abril"
 
-#: www/pm/calendar.php:86 www/pm/include/ProjectGroupHTML.class.php:167
+#: www/pm/calendar.php:86 www/pm/include/ProjectGroupHTML.class.php:179
 msgid "May"
 msgstr "Maio"
 
-#: www/pm/calendar.php:86 www/pm/include/ProjectGroupHTML.class.php:168
+#: www/pm/calendar.php:86 www/pm/include/ProjectGroupHTML.class.php:180
 msgid "June"
 msgstr "Xuño"
 
-#: www/pm/calendar.php:87 www/pm/include/ProjectGroupHTML.class.php:169
+#: www/pm/calendar.php:87 www/pm/include/ProjectGroupHTML.class.php:181
 msgid "July"
 msgstr "Xullo"
 
-#: www/pm/calendar.php:87 www/pm/include/ProjectGroupHTML.class.php:170
+#: www/pm/calendar.php:87 www/pm/include/ProjectGroupHTML.class.php:182
 msgid "August"
 msgstr "Agosto"
 
-#: www/pm/calendar.php:87 www/pm/include/ProjectGroupHTML.class.php:171
+#: www/pm/calendar.php:87 www/pm/include/ProjectGroupHTML.class.php:183
 msgid "September"
 msgstr "Setembro"
 
-#: www/pm/calendar.php:87 www/pm/include/ProjectGroupHTML.class.php:172
+#: www/pm/calendar.php:87 www/pm/include/ProjectGroupHTML.class.php:184
 msgid "October"
 msgstr "Outubro"
 
-#: www/pm/calendar.php:87 www/pm/include/ProjectGroupHTML.class.php:173
+#: www/pm/calendar.php:87 www/pm/include/ProjectGroupHTML.class.php:185
 msgid "November"
 msgstr "Novembro"
 
-#: www/pm/calendar.php:87 www/pm/include/ProjectGroupHTML.class.php:174
+#: www/pm/calendar.php:87 www/pm/include/ProjectGroupHTML.class.php:186
 msgid "December"
 msgstr "Decembro"
 
@@ -20335,7 +20346,7 @@ msgstr ""
 msgid "Comma/Semi-colon"
 msgstr ""
 
-#: www/pm/ganttpage.php:34 www/pm/include/ProjectGroupHTML.class.php:73
+#: www/pm/ganttpage.php:34 www/pm/include/ProjectGroupHTML.class.php:79
 msgid "Gantt Chart"
 msgstr "Diagrama de Gantt"
 
@@ -20377,26 +20388,26 @@ msgstr ""
 msgid "assignees"
 msgstr "Asignado a"
 
-#: www/pm/include/ProjectGroupHTML.class.php:55
+#: www/pm/include/ProjectGroupHTML.class.php:57
 #, fuzzy
 msgid "General Admin"
 msgstr "Discusión xeral"
 
-#: www/pm/include/ProjectGroupHTML.class.php:59
+#: www/pm/include/ProjectGroupHTML.class.php:62
 #, fuzzy
 msgid "View Subprojects"
 msgstr "Subproxecto"
 
-#: www/pm/include/ProjectGroupHTML.class.php:66
+#: www/pm/include/ProjectGroupHTML.class.php:71
 #, fuzzy
 msgid "Add Task"
 msgstr "Engadir tarefa"
 
-#: www/pm/include/ProjectGroupHTML.class.php:86
+#: www/pm/include/ProjectGroupHTML.class.php:93
 msgid "Import/Export CSV"
 msgstr ""
 
-#: www/pm/include/ProjectGroupHTML.class.php:146
+#: www/pm/include/ProjectGroupHTML.class.php:158
 msgid "Not Started"
 msgstr "Non comezado"
 
@@ -22350,44 +22361,44 @@ msgstr ""
 msgid "Error: was the URL or form mangled??"
 msgstr "Erro, erro – manipulou o URL ou o formulario??"
 
-#: www/snippet/browse.php:48 www/snippet/detail.php:43
+#: www/snippet/browse.php:49 www/snippet/detail.php:43
 #: www/snippet/detail.php:131 www/snippet/detail.php:213
 #: www/snippet/index.php:101
 msgid "Snippet Library"
 msgstr "Biblioteca de fragmentos"
 
-#: www/snippet/browse.php:61
+#: www/snippet/browse.php:62
 #, php-format
 msgid "Snippets by language: %1$s"
 msgstr "Fragmentos por idioma: %1$s"
 
-#: www/snippet/browse.php:68
+#: www/snippet/browse.php:69
 #, php-format
 msgid "Snippets by category: %1$s"
 msgstr "Fragmentos por categoría: %1$s"
 
-#: www/snippet/browse.php:70
+#: www/snippet/browse.php:71
 msgid "Error: bad url?"
 msgstr "Erro – será incorrecto o url?"
 
-#: www/snippet/browse.php:79
-msgid "No snippets found"
-msgstr "Non se achou ningún fragmento"
+#: www/snippet/browse.php:80
+msgid "No snippets found."
+msgstr "Non se achou ningún fragmento."
 
-#: www/snippet/browse.php:83 www/snippet/detail.php:63
+#: www/snippet/browse.php:84 www/snippet/detail.php:63
 #: www/snippet/snippet_utils.php:154
 msgid "Snippet ID"
 msgstr "ID de fragmento"
 
-#: www/snippet/browse.php:85
+#: www/snippet/browse.php:86
 msgid "Creator"
 msgstr "Creador"
 
-#: www/snippet/browse.php:92
+#: www/snippet/browse.php:93
 msgid "Packages Of Snippets"
 msgstr "Paquetes de fragmentos"
 
-#: www/snippet/browse.php:107
+#: www/snippet/browse.php:108
 msgid "Snippets"
 msgstr "Fragmentos"
 
@@ -22671,7 +22682,7 @@ msgstr "Tipo de script"
 msgid "en_US"
 msgstr "gl_ES"
 
-#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:265
+#: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:266
 #, php-format
 msgid "More than <strong>%1$s</strong> projects in result set."
 msgstr "Hai máis de <strong>%1$s</strong> proxectos no conxunto de resultados."
@@ -22715,40 +22726,40 @@ msgstr "Percentil de actividade: <strong>%3.0f</strong>"
 msgid "Registered: <strong>%s</strong>"
 msgstr "Rexistrados: <strong>%s</strong> "
 
-#: www/softwaremap/trove_list.php:55
+#: www/softwaremap/trove_list.php:56
 msgid "Software Map"
 msgstr "Mapa de software"
 
-#: www/softwaremap/trove_list.php:80 www/trove/TroveCategory.class.php:64
+#: www/softwaremap/trove_list.php:81 www/trove/TroveCategory.class.php:64
 #: www/trove/TroveCategory.class.php:71
 msgid "That Trove category does not exist"
 msgstr "Esa categoría de proxectos non existe"
 
-#: www/softwaremap/trove_list.php:136
+#: www/softwaremap/trove_list.php:137
 msgid "Now limiting view to projects in the following categories:"
 msgstr "Estase limitando a vista a proxectos nas seguintes categorías:"
 
-#: www/softwaremap/trove_list.php:141
+#: www/softwaremap/trove_list.php:142
 msgid "Remove This Filter"
 msgstr "Eliminar este filtro "
 
-#: www/softwaremap/trove_list.php:199 www/trove/index.php:152
+#: www/softwaremap/trove_list.php:200 www/trove/index.php:152
 #, php-format
 msgid "%1$s projects"
 msgstr "Proxectos de %1$s"
 
-#: www/softwaremap/trove_list.php:218 www/trove/index.php:95
+#: www/softwaremap/trove_list.php:219 www/trove/index.php:95
 msgid "Browse By"
 msgstr "Navegar por "
 
-#: www/softwaremap/trove_list.php:268
+#: www/softwaremap/trove_list.php:269
 #, php-format
 msgid "<strong>%1$s</strong> project in result set."
 msgid_plural "<strong>%1$s</strong> projects in result set."
 msgstr[0] "<strong>%1$s</strong> proxecto no conxunto de resultados."
 msgstr[1] "<strong>%1$s</strong> proxectos no conxunto de resultados."
 
-#: www/softwaremap/trove_list.php:319
+#: www/softwaremap/trove_list.php:320
 msgid "Activity Percentile:&nbsp;"
 msgstr "Percentil de actividade:&nbsp;"
 
