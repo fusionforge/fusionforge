@@ -121,7 +121,7 @@ echo notepad_func();
 $count=db_numrows($ah->getMessages());
 $nb = $count? ' ('.$count.')' : '';
 ?>
-<div class="tabbertab" title="<?php echo _('Followups').$nb; ?>">
+<div class="tabbertab" title="<?php echo _('Comments').$nb; ?>">
 	<table width="80%">
 		<tr><td colspan="2">
 			<?php if (forge_check_perm ('tracker',$ath->getID(),'submit')) { ?>
@@ -137,7 +137,7 @@ $nb = $count? ' ('.$count.')' : '';
 			<?php } ?>
 		</td></tr>
 		<tr><td colspan="2">
-		<h2><?php echo _('Followups: ') ; ?></h2>
+		<h2><?php echo _('Comments')._(': '); ?></h2>
 		<?php $ah->showMessages(); ?>
 		</td></tr>
 </table>

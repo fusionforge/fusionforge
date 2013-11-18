@@ -214,9 +214,9 @@ if ($msg_id) {
 
 	if ($reply) {
 		/*
-			Show post followup form
+			Show post comment form
 		*/
-		echo '<h3>'._('Post a followup to this message').'</h3>';
+		echo '<h3>'._('Post a comment to this message').'</h3>';
 		$fh->showPostForm($fm->getThreadID(), $msg_id, $fm->getSubject());
 	}
 

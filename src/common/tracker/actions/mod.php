@@ -186,7 +186,7 @@ echo html_build_select_box ($res,'new_artifact_type_id',$ath->getID(),false);
 $count=db_numrows($ah->getMessages());
 $nb = $count? ' ('.$count.')' : '';
 ?>
-<div class="tabbertab" title="<?php echo _('Followups').$nb; ?>">
+<div class="tabbertab" title="<?php echo _('Comments').$nb; ?>">
 <table width="80%">
 	<tr><td colspan="2">
 		<br /><strong><?php echo _('Use Canned Response')._(':'); ?></strong><br />
@@ -213,9 +213,9 @@ $nb = $count? ' ('.$count.')' : '';
 			});
 		/* ]]> */</script>
 		<p>
-		<strong><?php echo _('Post Followup')._(': ') ?><?php echo notepad_button('document.forms.trackermodform.details') ?></strong><br />
+		<strong><?php echo _('Post Comment')._(': ') ?><?php echo notepad_button('document.forms.trackermodform.details') ?></strong><br />
 		<textarea id="tracker-comment" name="details" rows="7" cols="60" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea></p>
-		<h2><?php echo _('Followups: ') ;
+		<h2><?php echo _('Comments')._(': ');
 echo '</h2>';
 $ah->showMessages();
 		?>

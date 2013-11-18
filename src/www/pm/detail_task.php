@@ -38,14 +38,14 @@ pm_header(array('title'=>_('Task Detail'),'group_project_id'=>$group_project_id)
 
 <table class="fullwidth">
 
-        <tr>
-                <td><strong><?php echo _('Submitted by') ?>:</strong><br /><?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
+	<tr>
+		<td><strong><?php echo _('Submitted by') . _(': '); ?></strong><br /><?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
 
 		<td>
 			<strong><a href="<?php echo util_make_url("/pm/t_follow.php/" . $project_task_id); ?>">Permalink</a>:</strong><br />
 			<?php echo util_make_url("/pm/t_follow.php/" . $project_task_id); ?>
 		</td>
-        </tr>
+	</tr>
 
 	<tr>
 		<td>

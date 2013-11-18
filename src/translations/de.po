@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 16:32+0100\n"
+"POT-Creation-Date: 2013-11-18 17:48+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -233,10 +233,12 @@ msgstr ""
 #: common/reporting/report_utils.php:27
 #: common/search/SearchQuery.class.php:120
 #: common/tracker/actions/browse.php:401 common/tracker/actions/browse.php:404
-#: common/tracker/actions/browse.php:748 common/tracker/actions/mod.php:111
-#: common/tracker/actions/mod.php:140 common/tracker/actions/mod.php:147
-#: common/tracker/actions/mod.php:155 common/tracker/actions/mod.php:175
-#: common/tracker/actions/mod.php:216 common/tracker/actions/query.php:325
+#: common/tracker/actions/browse.php:748 common/tracker/actions/detail.php:140
+#: common/tracker/actions/mod-limited.php:164
+#: common/tracker/actions/mod.php:111 common/tracker/actions/mod.php:140
+#: common/tracker/actions/mod.php:147 common/tracker/actions/mod.php:155
+#: common/tracker/actions/mod.php:175 common/tracker/actions/mod.php:216
+#: common/tracker/actions/mod.php:218 common/tracker/actions/query.php:325
 #: common/tracker/actions/query.php:340 common/tracker/actions/query.php:346
 #: common/tracker/actions/query.php:347 common/tracker/actions/query.php:382
 #: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
@@ -319,13 +321,14 @@ msgstr ""
 #: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
 #: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/admin/index.php:97
 #: www/pm/admin/index.php:119 www/pm/admin/index.php:259
-#: www/pm/calendar.php:59 www/pm/detail_task.php:66 www/pm/detail_task.php:71
-#: www/pm/detail_task.php:86 www/pm/detail_task.php:90
-#: www/pm/detail_task.php:97 www/pm/detail_task.php:104 www/pm/mod_task.php:52
-#: www/pm/mod_task.php:61 www/pm/mod_task.php:66 www/pm/mod_task.php:78
-#: www/pm/mod_task.php:83 www/pm/mod_task.php:97 www/pm/mod_task.php:173
-#: www/pm/mod_task.php:183 www/pm/mod_task.php:197 www/pm/mod_task.php:202
-#: www/pm/mod_task.php:212 www/pm/mod_task.php:323
+#: www/pm/calendar.php:59 www/pm/detail_task.php:42 www/pm/detail_task.php:66
+#: www/pm/detail_task.php:71 www/pm/detail_task.php:86
+#: www/pm/detail_task.php:90 www/pm/detail_task.php:97
+#: www/pm/detail_task.php:104 www/pm/include/ProjectTaskHTML.class.php:141
+#: www/pm/mod_task.php:52 www/pm/mod_task.php:61 www/pm/mod_task.php:66
+#: www/pm/mod_task.php:78 www/pm/mod_task.php:83 www/pm/mod_task.php:97
+#: www/pm/mod_task.php:173 www/pm/mod_task.php:183 www/pm/mod_task.php:197
+#: www/pm/mod_task.php:202 www/pm/mod_task.php:212 www/pm/mod_task.php:323
 #: www/project/admin/roledelete.php:62 www/register/index.php:188
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
@@ -2531,7 +2534,7 @@ msgid ""
 "a>"
 msgstr "Sie posten anonym, da Sie nicht <a href=\"%1$s\">angemeldet</a> sind"
 
-#: common/forum/ForumHTML.class.php:620
+#: common/forum/ForumHTML.class.php:620 common/tracker/actions/mod.php:216
 msgid "Post Comment"
 msgstr "Poste Kommentar"
 
@@ -2540,7 +2543,7 @@ msgid "Anonymously"
 msgstr "Anonym"
 
 #: common/forum/ForumHTML.class.php:621
-msgid "Receive followups via email"
+msgid "Receive comments via email"
 msgstr "Erhalten der Antworten per Email"
 
 #: common/forum/ForumHTML.class.php:633
@@ -5732,25 +5735,20 @@ msgstr "Ich bin sicher"
 msgid "Save Changes"
 msgstr "Änderungen speichern"
 
-#: common/tracker/actions/detail.php:124
+#: common/tracker/actions/detail.php:124 common/tracker/actions/detail.php:140
 #: common/tracker/actions/mod-limited.php:158
-#: common/tracker/actions/mod.php:189 common/tracker/actions/query.php:386
-#, fuzzy
-msgid "Followups"
-msgstr "Nachfassen"
+#: common/tracker/actions/mod-limited.php:164
+#: common/tracker/actions/mod.php:189 common/tracker/actions/mod.php:218
+#: common/tracker/actions/query.php:386 www/news/news_utils.php:181
+#: www/pm/include/ProjectTaskHTML.class.php:141
+#: www/survey/include/SurveyHTML.class.php:656
+msgid "Comments"
+msgstr "Kommentar"
 
 #: common/tracker/actions/detail.php:133
 #: common/tracker/actions/mod-limited.php:161 www/pm/mod_task.php:126
 msgid "Add A Comment"
 msgstr "Kommentar hinzufügen"
-
-#: common/tracker/actions/detail.php:140
-#: common/tracker/actions/mod-limited.php:164
-#: common/tracker/actions/mod.php:218
-#: www/pm/include/ProjectTaskHTML.class.php:141
-#, fuzzy
-msgid "Followups: "
-msgstr "Nachfassen"
 
 #: common/tracker/actions/detail.php:155
 #: common/tracker/actions/mod-limited.php:181
@@ -5939,11 +5937,6 @@ msgstr "Genaue Beschreibung"
 #: common/tracker/actions/mod.php:192
 msgid "Use Canned Response"
 msgstr "Benutze vorgespeicherte Antwort"
-
-#: common/tracker/actions/mod.php:216
-#, fuzzy
-msgid "Post Followup"
-msgstr "Nachfolgender"
 
 #: common/tracker/actions/query.php:73
 #, fuzzy
@@ -6509,12 +6502,17 @@ msgstr "Gruppenname bereits verwendet"
 msgid "%s does not use the Tracker tool"
 msgstr ""
 
+#: common/tracker/include/ArtifactHtml.class.php:46
+#, fuzzy
+msgid "Edit this message"
+msgstr "Bearbeite eine Nachricht"
+
 #: common/tracker/include/ArtifactHtml.class.php:112
 msgid "Sender"
 msgstr "Sender"
 
 #: common/tracker/include/ArtifactHtml.class.php:134
-msgid "No Followups Have Been Posted"
+msgid "No Comments Have Been Posted"
 msgstr "keine Folgeaktivität (gepostet)"
 
 #: common/tracker/include/ArtifactHtml.class.php:145
@@ -17133,7 +17131,7 @@ msgstr "Zurück zum Forum"
 #: www/forum/admin/index.php:220
 msgid ""
 "WARNING! You are about to permanently delete a message and all of its "
-"followups!!"
+"comments!!"
 msgstr ""
 "WARNUNG! Sie sind dabei, eine Nachricht und ihre Antworten für immer zu "
 "löschen!!"
@@ -17337,7 +17335,7 @@ msgid "Thread View"
 msgstr "Diskussionsansicht"
 
 #: www/forum/message.php:219
-msgid "Post a followup to this message"
+msgid "Post a comment to this message"
 msgstr "Schreiben Sie eine Antwort auf diese Nachricht"
 
 #: www/forum/message.php:224 www/forum/message.php:225
@@ -19150,10 +19148,6 @@ msgstr "Benutze Neuigkeiten"
 #: www/news/news_utils.php:117 www/news/news_utils.php:248
 msgid "No News Items Found"
 msgstr "Keine Nachrichten gefunden"
-
-#: www/news/news_utils.php:181 www/survey/include/SurveyHTML.class.php:656
-msgid "Comments"
-msgstr "Kommentar"
 
 #: www/news/news_utils.php:185
 #, fuzzy
@@ -23637,6 +23631,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "Comments: "
+#~ msgstr "Nachfassen"
 
 #~ msgid "Version:"
 #~ msgstr "Version:"
@@ -28759,9 +28757,6 @@ msgstr "Persönliche Seite für %s"
 
 #~ msgid "Error inserting into skill inventory"
 #~ msgstr "FEHLER beim Einfügen in den Bestand der Qualifikationen"
-
-#~ msgid "Followup"
-#~ msgstr "Nachfolgender"
 
 #~ msgid ""
 #~ "In total there are %d user sessions online. : Unique %d Registered and %d "

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 16:32+0100\n"
+"POT-Creation-Date: 2013-11-18 17:48+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -236,10 +236,12 @@ msgstr "Nome do ficheiro "
 #: common/reporting/report_utils.php:27
 #: common/search/SearchQuery.class.php:120
 #: common/tracker/actions/browse.php:401 common/tracker/actions/browse.php:404
-#: common/tracker/actions/browse.php:748 common/tracker/actions/mod.php:111
-#: common/tracker/actions/mod.php:140 common/tracker/actions/mod.php:147
-#: common/tracker/actions/mod.php:155 common/tracker/actions/mod.php:175
-#: common/tracker/actions/mod.php:216 common/tracker/actions/query.php:325
+#: common/tracker/actions/browse.php:748 common/tracker/actions/detail.php:140
+#: common/tracker/actions/mod-limited.php:164
+#: common/tracker/actions/mod.php:111 common/tracker/actions/mod.php:140
+#: common/tracker/actions/mod.php:147 common/tracker/actions/mod.php:155
+#: common/tracker/actions/mod.php:175 common/tracker/actions/mod.php:216
+#: common/tracker/actions/mod.php:218 common/tracker/actions/query.php:325
 #: common/tracker/actions/query.php:340 common/tracker/actions/query.php:346
 #: common/tracker/actions/query.php:347 common/tracker/actions/query.php:382
 #: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
@@ -322,13 +324,14 @@ msgstr "Nome do ficheiro "
 #: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
 #: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/admin/index.php:97
 #: www/pm/admin/index.php:119 www/pm/admin/index.php:259
-#: www/pm/calendar.php:59 www/pm/detail_task.php:66 www/pm/detail_task.php:71
-#: www/pm/detail_task.php:86 www/pm/detail_task.php:90
-#: www/pm/detail_task.php:97 www/pm/detail_task.php:104 www/pm/mod_task.php:52
-#: www/pm/mod_task.php:61 www/pm/mod_task.php:66 www/pm/mod_task.php:78
-#: www/pm/mod_task.php:83 www/pm/mod_task.php:97 www/pm/mod_task.php:173
-#: www/pm/mod_task.php:183 www/pm/mod_task.php:197 www/pm/mod_task.php:202
-#: www/pm/mod_task.php:212 www/pm/mod_task.php:323
+#: www/pm/calendar.php:59 www/pm/detail_task.php:42 www/pm/detail_task.php:66
+#: www/pm/detail_task.php:71 www/pm/detail_task.php:86
+#: www/pm/detail_task.php:90 www/pm/detail_task.php:97
+#: www/pm/detail_task.php:104 www/pm/include/ProjectTaskHTML.class.php:141
+#: www/pm/mod_task.php:52 www/pm/mod_task.php:61 www/pm/mod_task.php:66
+#: www/pm/mod_task.php:78 www/pm/mod_task.php:83 www/pm/mod_task.php:97
+#: www/pm/mod_task.php:173 www/pm/mod_task.php:183 www/pm/mod_task.php:197
+#: www/pm/mod_task.php:202 www/pm/mod_task.php:212 www/pm/mod_task.php:323
 #: www/project/admin/roledelete.php:62 www/register/index.php:188
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
@@ -2542,16 +2545,16 @@ msgstr ""
 "Está a publicar de xeito anónimo porque non está <a href=\"%1$s\">conectado</"
 "a>"
 
-#: common/forum/ForumHTML.class.php:620
+#: common/forum/ForumHTML.class.php:620 common/tracker/actions/mod.php:216
 msgid "Post Comment"
-msgstr "Enviar comentario "
+msgstr "Enviar comentario"
 
 #: common/forum/ForumHTML.class.php:620
 msgid "Anonymously"
 msgstr "De xeito anónimo"
 
 #: common/forum/ForumHTML.class.php:621
-msgid "Receive followups via email"
+msgid "Receive comments via email"
 msgstr "Recibir respostas por correo electrónico "
 
 #: common/forum/ForumHTML.class.php:633
@@ -5756,24 +5759,20 @@ msgstr "Estou seguro "
 msgid "Save Changes"
 msgstr "Gardar os cambios"
 
-#: common/tracker/actions/detail.php:124
+#: common/tracker/actions/detail.php:124 common/tracker/actions/detail.php:140
 #: common/tracker/actions/mod-limited.php:158
-#: common/tracker/actions/mod.php:189 common/tracker/actions/query.php:386
-msgid "Followups"
-msgstr "Respostas"
+#: common/tracker/actions/mod-limited.php:164
+#: common/tracker/actions/mod.php:189 common/tracker/actions/mod.php:218
+#: common/tracker/actions/query.php:386 www/news/news_utils.php:181
+#: www/pm/include/ProjectTaskHTML.class.php:141
+#: www/survey/include/SurveyHTML.class.php:656
+msgid "Comments"
+msgstr "Comentarios"
 
 #: common/tracker/actions/detail.php:133
 #: common/tracker/actions/mod-limited.php:161 www/pm/mod_task.php:126
 msgid "Add A Comment"
 msgstr "Engadir un comentario"
-
-#: common/tracker/actions/detail.php:140
-#: common/tracker/actions/mod-limited.php:164
-#: common/tracker/actions/mod.php:218
-#: www/pm/include/ProjectTaskHTML.class.php:141
-#, fuzzy
-msgid "Followups: "
-msgstr "Respostas"
 
 #: common/tracker/actions/detail.php:155
 #: common/tracker/actions/mod-limited.php:181
@@ -5958,11 +5957,6 @@ msgstr "Descrición detallada"
 #: common/tracker/actions/mod.php:192
 msgid "Use Canned Response"
 msgstr "Utilizar unha resposta prefixada"
-
-#: common/tracker/actions/mod.php:216
-#, fuzzy
-msgid "Post Followup"
-msgstr "Resposta"
 
 #: common/tracker/actions/query.php:73
 #, fuzzy
@@ -6528,12 +6522,17 @@ msgstr "O nome de grupo xa está en uso"
 msgid "%s does not use the Tracker tool"
 msgstr ""
 
+#: common/tracker/include/ArtifactHtml.class.php:46
+#, fuzzy
+msgid "Edit this message"
+msgstr "Editar a mensaxe "
+
 #: common/tracker/include/ArtifactHtml.class.php:112
 msgid "Sender"
 msgstr "Remitente"
 
 #: common/tracker/include/ArtifactHtml.class.php:134
-msgid "No Followups Have Been Posted"
+msgid "No Comments Have Been Posted"
 msgstr "Non se publicou ningunha resposta"
 
 #: common/tracker/include/ArtifactHtml.class.php:145
@@ -17086,7 +17085,7 @@ msgstr "Completo"
 #: www/export/rssAboTask.php:161 www/news/news_utils.php:179
 #: www/pm/include/ProjectTaskHTML.class.php:155
 msgid "Comment"
-msgstr "Comentario "
+msgstr "Comentario"
 
 #: www/export/rssAboTask.php:169
 #, fuzzy
@@ -17195,7 +17194,7 @@ msgstr "Volver ao foro"
 #: www/forum/admin/index.php:220
 msgid ""
 "WARNING! You are about to permanently delete a message and all of its "
-"followups!!"
+"comments!!"
 msgstr ""
 "AVISO! Vai eliminar permanentemente unha mensaxe e todas as súas respostas!! "
 
@@ -17396,7 +17395,7 @@ msgid "Thread View"
 msgstr "Vista de fío"
 
 #: www/forum/message.php:219
-msgid "Post a followup to this message"
+msgid "Post a comment to this message"
 msgstr "Enviar unha resposta a esta mensaxe "
 
 #: www/forum/message.php:224 www/forum/message.php:225
@@ -19183,10 +19182,6 @@ msgstr "Usar as novas"
 #: www/news/news_utils.php:117 www/news/news_utils.php:248
 msgid "No News Items Found"
 msgstr "Non se atoparon elementos novos"
-
-#: www/news/news_utils.php:181 www/survey/include/SurveyHTML.class.php:656
-msgid "Comments"
-msgstr "Comentarios "
 
 #: www/news/news_utils.php:185
 msgid "Read More/Comment"
@@ -23642,6 +23637,10 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "Comments: "
+#~ msgstr "Respostas"
 
 #~ msgid "Theme:"
 #~ msgstr "Tema: "
@@ -28127,9 +28126,6 @@ msgstr "Páxina persoal de %s"
 
 #~ msgid "Error inserting into skill inventory"
 #~ msgstr "Produciuse un erro ao inserir no inventario de habilidades"
-
-#~ msgid "Followup"
-#~ msgstr "Resposta"
 
 #~ msgid "Mailing List Exists with same name"
 #~ msgstr "Xa existe unha lista de correo co mesmo nome"

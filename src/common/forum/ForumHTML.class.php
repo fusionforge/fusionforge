@@ -618,7 +618,7 @@ class ForumHTML extends Error {
 		?> <br />
 		<input type="submit" name="submit"
 			value="<?php echo _('Post Comment'); echo ((!session_loggedin())?' '._('Anonymously'):''); ?>" /><?php
-			echo ((session_loggedin()) ? '&nbsp;&nbsp;&nbsp;<input type="checkbox" value="1" name="monitor" />&nbsp;'._('Receive followups via email').'.' : ''); ?>
+			echo ((session_loggedin()) ? '&nbsp;&nbsp;&nbsp;<input type="checkbox" value="1" name="monitor" />&nbsp;'._('Receive comments via email').'.' : ''); ?>
 		</p>
 		</td>
 	</tr>

@@ -43,7 +43,7 @@ class ArtifactHtml extends Artifact {
 		if ($editable === true) {
 			$title_arr[] = '<div style="width:100%;">' .
 				'<div style="float:left">' . _('Detailed description') . '</div>' .
-				'<div style="float:right">' . html_image('ic/forum_edit.gif','37','15',array('title'=>"Click to edit", 'alt'=>"Click to edit", 'onclick'=>"switch2edit(this, 'show', 'edit')")) . '</div>' .
+				'<div style="float:right">' . html_image('ic/forum_edit.gif','37','15',array('title'=>_('Edit this message'), 'alt'=>_('Edit this message'), 'class' => 'mini_buttons tip-ne', 'onclick'=>"switch2edit(this, 'show', 'edit')")) . '</div>' .
 				'</div>';
 		}
 		else {
@@ -131,7 +131,7 @@ function hide_edit_button(id) {
 
 		} else {
 			echo '
-				<p>'._('No Followups Have Been Posted').'</p>';
+				<p>'._('No Comments Have Been Posted').'</p>';
 		}
 	}
 

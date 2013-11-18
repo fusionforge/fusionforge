@@ -383,7 +383,7 @@ echo '
 		<input type="text" name="_summary" size="40" value="'. htmlspecialchars($_summary) .'" /><p/>
 		<strong>'._('Detailed description')._(': ').'</strong> '.$tips.'<br />
 		<input type="text" name="_description" size="40" value="'. htmlspecialchars($_description) .'" /><p/>
-		<strong>'._('Followups')._(': ').'</strong> '.$tips.'<br />
+		<strong>'._('Comments')._(': ').'</strong> '.$tips.'<br />
 		<input type="text" name="_followups" size="40" value="'. htmlspecialchars($_followups) .'" />
 		</td>
 	</tr>

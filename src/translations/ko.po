@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 16:32+0100\n"
+"POT-Creation-Date: 2013-11-18 17:48+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -233,10 +233,12 @@ msgstr "파일 이름"
 #: common/reporting/report_utils.php:27
 #: common/search/SearchQuery.class.php:120
 #: common/tracker/actions/browse.php:401 common/tracker/actions/browse.php:404
-#: common/tracker/actions/browse.php:748 common/tracker/actions/mod.php:111
-#: common/tracker/actions/mod.php:140 common/tracker/actions/mod.php:147
-#: common/tracker/actions/mod.php:155 common/tracker/actions/mod.php:175
-#: common/tracker/actions/mod.php:216 common/tracker/actions/query.php:325
+#: common/tracker/actions/browse.php:748 common/tracker/actions/detail.php:140
+#: common/tracker/actions/mod-limited.php:164
+#: common/tracker/actions/mod.php:111 common/tracker/actions/mod.php:140
+#: common/tracker/actions/mod.php:147 common/tracker/actions/mod.php:155
+#: common/tracker/actions/mod.php:175 common/tracker/actions/mod.php:216
+#: common/tracker/actions/mod.php:218 common/tracker/actions/query.php:325
 #: common/tracker/actions/query.php:340 common/tracker/actions/query.php:346
 #: common/tracker/actions/query.php:347 common/tracker/actions/query.php:382
 #: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
@@ -319,13 +321,14 @@ msgstr "파일 이름"
 #: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
 #: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/admin/index.php:97
 #: www/pm/admin/index.php:119 www/pm/admin/index.php:259
-#: www/pm/calendar.php:59 www/pm/detail_task.php:66 www/pm/detail_task.php:71
-#: www/pm/detail_task.php:86 www/pm/detail_task.php:90
-#: www/pm/detail_task.php:97 www/pm/detail_task.php:104 www/pm/mod_task.php:52
-#: www/pm/mod_task.php:61 www/pm/mod_task.php:66 www/pm/mod_task.php:78
-#: www/pm/mod_task.php:83 www/pm/mod_task.php:97 www/pm/mod_task.php:173
-#: www/pm/mod_task.php:183 www/pm/mod_task.php:197 www/pm/mod_task.php:202
-#: www/pm/mod_task.php:212 www/pm/mod_task.php:323
+#: www/pm/calendar.php:59 www/pm/detail_task.php:42 www/pm/detail_task.php:66
+#: www/pm/detail_task.php:71 www/pm/detail_task.php:86
+#: www/pm/detail_task.php:90 www/pm/detail_task.php:97
+#: www/pm/detail_task.php:104 www/pm/include/ProjectTaskHTML.class.php:141
+#: www/pm/mod_task.php:52 www/pm/mod_task.php:61 www/pm/mod_task.php:66
+#: www/pm/mod_task.php:78 www/pm/mod_task.php:83 www/pm/mod_task.php:97
+#: www/pm/mod_task.php:173 www/pm/mod_task.php:183 www/pm/mod_task.php:197
+#: www/pm/mod_task.php:202 www/pm/mod_task.php:212 www/pm/mod_task.php:323
 #: www/project/admin/roledelete.php:62 www/register/index.php:188
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
@@ -2517,7 +2520,7 @@ msgid ""
 "a>"
 msgstr "익명으로 글을 올립니다."
 
-#: common/forum/ForumHTML.class.php:620
+#: common/forum/ForumHTML.class.php:620 common/tracker/actions/mod.php:216
 msgid "Post Comment"
 msgstr "답글 올리기"
 
@@ -2527,7 +2530,7 @@ msgid "Anonymously"
 msgstr "익명 FTP 공간"
 
 #: common/forum/ForumHTML.class.php:621
-msgid "Receive followups via email"
+msgid "Receive comments via email"
 msgstr "이 글에 대한 답글을 이메일로 받아보기"
 
 #: common/forum/ForumHTML.class.php:633
@@ -5611,23 +5614,20 @@ msgstr "확인"
 msgid "Save Changes"
 msgstr ""
 
-#: common/tracker/actions/detail.php:124
+#: common/tracker/actions/detail.php:124 common/tracker/actions/detail.php:140
 #: common/tracker/actions/mod-limited.php:158
-#: common/tracker/actions/mod.php:189 common/tracker/actions/query.php:386
-msgid "Followups"
+#: common/tracker/actions/mod-limited.php:164
+#: common/tracker/actions/mod.php:189 common/tracker/actions/mod.php:218
+#: common/tracker/actions/query.php:386 www/news/news_utils.php:181
+#: www/pm/include/ProjectTaskHTML.class.php:141
+#: www/survey/include/SurveyHTML.class.php:656
+msgid "Comments"
 msgstr ""
 
 #: common/tracker/actions/detail.php:133
 #: common/tracker/actions/mod-limited.php:161 www/pm/mod_task.php:126
 msgid "Add A Comment"
 msgstr "의견 추가"
-
-#: common/tracker/actions/detail.php:140
-#: common/tracker/actions/mod-limited.php:164
-#: common/tracker/actions/mod.php:218
-#: www/pm/include/ProjectTaskHTML.class.php:141
-msgid "Followups: "
-msgstr ""
 
 #: common/tracker/actions/detail.php:155
 #: common/tracker/actions/mod-limited.php:181
@@ -5810,10 +5810,6 @@ msgstr "자세한 설명"
 #: common/tracker/actions/mod.php:192
 msgid "Use Canned Response"
 msgstr "미리 준비한 의견 사용"
-
-#: common/tracker/actions/mod.php:216
-msgid "Post Followup"
-msgstr ""
 
 #: common/tracker/actions/query.php:73
 #, fuzzy
@@ -6361,12 +6357,17 @@ msgstr "이미 존재하는 유닉스 이름입니다."
 msgid "%s does not use the Tracker tool"
 msgstr ""
 
+#: common/tracker/include/ArtifactHtml.class.php:46
+#, fuzzy
+msgid "Edit this message"
+msgstr "메일 보내기"
+
 #: common/tracker/include/ArtifactHtml.class.php:112
 msgid "Sender"
 msgstr "전송자"
 
 #: common/tracker/include/ArtifactHtml.class.php:134
-msgid "No Followups Have Been Posted"
+msgid "No Comments Have Been Posted"
 msgstr "뒤따르는 글이 없습니다."
 
 #: common/tracker/include/ArtifactHtml.class.php:145
@@ -13361,10 +13362,10 @@ msgid "ClearCase server"
 msgstr ""
 
 #: plugins/scmccase/common/CCasePlugin.class.php:168
-#, fuzzy, php-format
+#, php-format
 msgid "commit"
 msgid_plural "commits"
-msgstr[0] "Comment"
+msgstr[0] ""
 
 #: plugins/scmccase/common/CCasePlugin.class.php:170
 #, php-format
@@ -16553,7 +16554,7 @@ msgstr ""
 #: www/forum/admin/index.php:220
 msgid ""
 "WARNING! You are about to permanently delete a message and all of its "
-"followups!!"
+"comments!!"
 msgstr "경고! 지워진 글은 복구할 수 없으며 답글까지 함께 지워집니다!"
 
 #: www/forum/admin/index.php:252
@@ -16751,7 +16752,7 @@ msgid "Thread View"
 msgstr ""
 
 #: www/forum/message.php:219
-msgid "Post a followup to this message"
+msgid "Post a comment to this message"
 msgstr "이 글에 답글 올리기"
 
 #: www/forum/message.php:224 www/forum/message.php:225
@@ -18451,10 +18452,6 @@ msgstr "뉴스 기능 사용"
 #: www/news/news_utils.php:117 www/news/news_utils.php:248
 msgid "No News Items Found"
 msgstr "뉴스 항목이 없습니다."
-
-#: www/news/news_utils.php:181 www/survey/include/SurveyHTML.class.php:656
-msgid "Comments"
-msgstr ""
 
 #: www/news/news_utils.php:185
 #, fuzzy
@@ -23942,10 +23939,6 @@ msgstr "개인 페이지"
 
 #~ msgid "Insert Failed"
 #~ msgstr "입력 실패"
-
-#, fuzzy
-#~ msgid "Commentary:"
-#~ msgstr "Comment"
 
 #, fuzzy
 #~ msgid "New Parent %1$s Relation Submitted"

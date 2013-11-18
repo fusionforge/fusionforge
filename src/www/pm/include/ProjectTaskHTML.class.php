@@ -138,7 +138,7 @@ class ProjectTaskHTML extends ProjectTask {
 		$rows=db_numrows($result);
 
 		if ($rows > 0) {
-			echo '<h3>'._('Followups: ');
+			echo '<h3>'._('Comments')._(': ');
 
 			if ($asc) {
 				echo '<a href="' .
