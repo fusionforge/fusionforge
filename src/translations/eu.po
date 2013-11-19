@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 18:04+0100\n"
+"POT-Creation-Date: 2013-11-19 13:29+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -322,8 +322,8 @@ msgstr "Fitxeroaren izena"
 #: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
 #: www/pm/add_task.php:74 www/pm/add_task.php:81 www/pm/add_task.php:88
 #: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
-#: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/admin/index.php:97
-#: www/pm/admin/index.php:119 www/pm/admin/index.php:259
+#: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/admin/index.php:98
+#: www/pm/admin/index.php:120 www/pm/admin/index.php:260
 #: www/pm/calendar.php:59 www/pm/detail_task.php:42 www/pm/detail_task.php:66
 #: www/pm/detail_task.php:71 www/pm/detail_task.php:86
 #: www/pm/detail_task.php:90 www/pm/detail_task.php:97
@@ -839,7 +839,7 @@ msgstr ""
 #: www/forum/index.php:69 www/mail/admin/index.php:192
 #: www/mail/admin/index.php:225 www/mail/index.php:79
 #: www/people/editjob.php:52 www/people/editjob.php:74
-#: www/pm/admin/index.php:289 www/pm/admin/index.php:332 www/pm/csv.php:105
+#: www/pm/admin/index.php:290 www/pm/admin/index.php:333 www/pm/csv.php:105
 #: www/pm/index.php:100 www/project/admin/editimages.php:226
 #: www/project/admin/editimages.php:253 www/project/admin/editimages.php:269
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:62
@@ -1208,7 +1208,7 @@ msgstr ""
 #: www/account/index.php:230 www/account/register.php:169
 #: www/people/editjob.php:52 www/people/editjob.php:74
 #: www/people/editprofile.php:106 www/people/people_utils.php:406
-#: www/people/skills_utils.php:49 www/pm/admin/index.php:189
+#: www/people/skills_utils.php:49 www/pm/admin/index.php:190
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:61
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:54
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:46
@@ -1785,9 +1785,9 @@ msgstr ""
 #: www/people/admin/index.php:133 www/people/createjob.php:52
 #: www/people/createjob.php:55 www/people/editjob.php:169
 #: www/people/editjob.php:172 www/people/editprofile.php:241
-#: www/pm/admin/index.php:213 www/pm/admin/index.php:292
-#: www/pm/admin/index.php:322 www/pm/admin/index.php:332
-#: www/pm/admin/index.php:342 www/pm/format_csv.php:66
+#: www/pm/admin/index.php:214 www/pm/admin/index.php:293
+#: www/pm/admin/index.php:323 www/pm/admin/index.php:333
+#: www/pm/admin/index.php:343 www/pm/format_csv.php:66
 #: www/pm/format_csv.php:71 www/pm/format_csv.php:76 www/pm/format_csv.php:89
 #: www/pm/format_csv.php:93 www/pm/format_csv.php:97
 #: www/project/admin/editimages.php:222 www/project/admin/editimages.php:226
@@ -2237,7 +2237,7 @@ msgstr "Bertsioak"
 #: www/frs/admin/editrelease.php:347 www/frs/admin/index.php:182
 #: www/mail/admin/index.php:228 www/mail/admin/index.php:281
 #: www/people/people_utils.php:178 www/people/people_utils.php:322
-#: www/pm/admin/index.php:351 www/pm/calendar.php:289
+#: www/pm/admin/index.php:352 www/pm/calendar.php:289
 #: www/project/admin/database.php:234 www/project/admin/index.php:289
 #: www/project/admin/tools.php:305 www/reporting/timecategory.php:99
 #: www/scm/admin/index.php:176
@@ -2336,7 +2336,7 @@ msgstr "Zure gunea mantentzeko izenpetua egon behar duzu."
 #: plugins/mailman/include/MailmanList.class.php:247
 #: plugins/mailman/include/MailmanList.class.php:372
 #: plugins/mailman/include/MailmanList.class.php:389
-#: www/pm/admin/index.php:119
+#: www/pm/admin/index.php:120
 msgid "Update failed"
 msgstr "Akatsa eguneratzean"
 
@@ -4357,7 +4357,7 @@ msgstr ""
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: www/people/admin/index.php:52 www/people/admin/index.php:65
-#: www/pm/admin/index.php:97 www/survey/rating_resp.php:56
+#: www/pm/admin/index.php:98 www/survey/rating_resp.php:56
 msgid "Insert Error"
 msgstr ""
 
@@ -5051,7 +5051,7 @@ msgstr "Artikulu berria sortu"
 msgid "Tracker created successfully"
 msgstr "Ongi sortutako ataza"
 
-#: common/tracker/actions/admin-ind.php:51 www/pm/admin/index.php:81
+#: common/tracker/actions/admin-ind.php:51 www/pm/admin/index.php:82
 msgid "Please configure also the roles (by default, it's “No Access”)"
 msgstr ""
 
@@ -5175,8 +5175,8 @@ msgstr ""
 #: www/my/bookmark_add.php:58 www/my/diary.php:189
 #: www/news/admin/index.php:149 www/news/news_utils.php:42
 #: www/news/submit.php:170 www/pm/add_task.php:57 www/pm/add_task.php:140
-#: www/pm/add_task.php:154 www/pm/admin/index.php:218
-#: www/pm/admin/index.php:263 www/pm/admin/index.php:294 www/pm/csv.php:90
+#: www/pm/add_task.php:154 www/pm/admin/index.php:219
+#: www/pm/admin/index.php:264 www/pm/admin/index.php:295 www/pm/csv.php:90
 #: www/pm/deletetask.php:51 www/pm/mod_task.php:54 www/pm/mod_task.php:254
 #: www/project/admin/editimages.php:235 www/project/admin/roledelete.php:85
 #: www/project/admin/roleedit.php:302 www/project/request.php:70
@@ -5417,7 +5417,7 @@ msgstr "Elementua txertatua"
 
 #: common/tracker/actions/browse.php:94
 #: common/tracker/actions/downloadcsv.php:38
-#: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:404
+#: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:405
 #: www/pm/index.php:46 www/pm/task.php:86 www/tracker/roadmap.php:333
 #, fuzzy
 msgid "Could Not Get Factory"
@@ -5441,7 +5441,7 @@ msgstr "Esleitu gabea"
 #: common/tracker/actions/query.php:196
 #: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:134
 #: www/admin/search.php:72 www/admin/search.php:147 www/my/dashboard.php:64
-#: www/pm/admin/index.php:188 www/pm/index.php:98
+#: www/pm/admin/index.php:189 www/pm/index.php:98
 #: www/project/admin/editimages.php:263
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "Id"
@@ -5718,7 +5718,7 @@ msgstr "Ziur zaude artefaktu hau ezabatu nahi duzula?"
 #: common/tracker/views/form-deletetracker.php:38
 #: www/admin/responses_admin.php:51 www/forum/admin/index.php:183
 #: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:74
-#: www/frs/admin/editrelease.php:382 www/pm/admin/index.php:383
+#: www/frs/admin/editrelease.php:382 www/pm/admin/index.php:384
 #: www/pm/deletetask.php:45 www/project/admin/roledelete.php:81
 #: www/reporting/rebuild.php:63
 msgid "I am Sure"
@@ -6029,8 +6029,8 @@ msgstr ""
 msgid "Artifact Could Not Be Created"
 msgstr ""
 
-#: common/tracker/actions/taskmgr.php:59 www/pm/admin/index.php:303
-#: www/pm/admin/index.php:364
+#: common/tracker/actions/taskmgr.php:59 www/pm/admin/index.php:304
+#: www/pm/admin/index.php:365
 #, fuzzy
 msgid "Could Not Get ProjectGroup"
 msgstr "Ezin dut mezu nagusia eguneratu"
@@ -7155,7 +7155,7 @@ msgstr ""
 #: common/tracker/views/form-deleteextrafield.php:48
 #: common/tracker/views/form-deletetracker.php:42
 #: www/forum/admin/index.php:184 www/frs/admin/deletepackage.php:71
-#: www/frs/admin/deleterelease.php:75 www/pm/admin/index.php:389
+#: www/frs/admin/deleterelease.php:75 www/pm/admin/index.php:390
 #, fuzzy
 msgid "I am Really Sure"
 msgstr "Ziur nago"
@@ -18975,7 +18975,7 @@ msgstr ""
 msgid "URLs that start with http:// are made clickable."
 msgstr ""
 
-#: www/people/admin/index.php:55 www/pm/admin/index.php:99
+#: www/people/admin/index.php:55 www/pm/admin/index.php:100
 msgid "Category Inserted"
 msgstr "Sartutako kategoria"
 
@@ -19523,9 +19523,9 @@ msgstr "Atazaren menpe dago"
 msgid "Dependent note"
 msgstr "Atazaren menpe dago"
 
-#: www/pm/admin/index.php:63 www/pm/admin/index.php:94
-#: www/pm/admin/index.php:114 www/pm/admin/index.php:171
-#: www/pm/admin/index.php:235 www/pm/admin/index.php:246
+#: www/pm/admin/index.php:63 www/pm/admin/index.php:95
+#: www/pm/admin/index.php:115 www/pm/admin/index.php:172
+#: www/pm/admin/index.php:236 www/pm/admin/index.php:247
 #, fuzzy
 msgid "Unable to create ProjectCategory Object"
 msgstr "Akatsa taldea sortzen"
@@ -19535,44 +19535,44 @@ msgstr "Akatsa taldea sortzen"
 msgid "Subproject Inserted"
 msgstr "Sustatutako proiektua"
 
-#: www/pm/admin/index.php:121
+#: www/pm/admin/index.php:122
 msgid "Category Updated"
 msgstr "Kategoria eguneratua"
 
-#: www/pm/admin/index.php:140
+#: www/pm/admin/index.php:141
 #, fuzzy
 msgid "Subproject Updated successfully"
 msgstr "Arrakastaz eguneratua"
 
-#: www/pm/admin/index.php:155
+#: www/pm/admin/index.php:156
 #, fuzzy
 msgid "Subproject successfully deleted."
 msgstr "Arrakastaz sartutako lana"
 
-#: www/pm/admin/index.php:178
+#: www/pm/admin/index.php:179
 #, fuzzy, php-format
 msgid "Add Categories to: %s"
 msgstr "Kategoriak gehitu honi"
 
-#: www/pm/admin/index.php:204
+#: www/pm/admin/index.php:205
 msgid "No categories defined"
 msgstr "Zehaztugabeko kategoriak"
 
-#: www/pm/admin/index.php:213 www/pm/admin/index.php:259
+#: www/pm/admin/index.php:214 www/pm/admin/index.php:260
 #: www/reporting/timecategory.php:70 www/reporting/timecategory.php:90
 msgid "Category Name"
 msgstr "Kategoriaren izena"
 
-#: www/pm/admin/index.php:217
+#: www/pm/admin/index.php:218
 msgid "Once you add a category, it cannot be deleted"
 msgstr "Kategoria bat sortzen baduzu ezin izango duzu ezabatu"
 
-#: www/pm/admin/index.php:242
+#: www/pm/admin/index.php:243
 #, fuzzy, php-format
 msgid "Modify a Category in: %s"
 msgstr "Kategoria bat aldatu hemen"
 
-#: www/pm/admin/index.php:252
+#: www/pm/admin/index.php:253
 msgid ""
 "It is not recommended that you change the category name because other things "
 "are dependent upon it. When you change the category name, all related items "
@@ -19582,12 +19582,12 @@ msgstr ""
 "other things are dependent upon it. When you change the category name, all "
 "related items will be changed to the new name."
 
-#: www/pm/admin/index.php:276
+#: www/pm/admin/index.php:277
 #, fuzzy
 msgid "Add a new subproject"
 msgstr "Azpi proiektu bat gehitu"
 
-#: www/pm/admin/index.php:279
+#: www/pm/admin/index.php:280
 #, fuzzy
 msgid ""
 "Add a new subproject to the Tasks. <strong>This is different than adding a "
@@ -19596,21 +19596,21 @@ msgstr ""
 "Azpiproiektu berria gehitu Azpiproiektu/Atazen kudeatzaileari. "
 "<strong>Azpiproiektu bati ataza gehitzea beste gauza bat da.</strong>"
 
-#: www/pm/admin/index.php:285
+#: www/pm/admin/index.php:286
 #, fuzzy
 msgid "New Subproject Name"
 msgstr "Azpiproiektuaren izen berria"
 
-#: www/pm/admin/index.php:292 www/pm/admin/index.php:342
+#: www/pm/admin/index.php:293 www/pm/admin/index.php:343
 msgid "Send All Updates To"
 msgstr "Eguneratze guztiak hona bidali"
 
-#: www/pm/admin/index.php:309
+#: www/pm/admin/index.php:310
 #, fuzzy
 msgid "Change Tasks Status"
 msgstr "Foroaren egoera aldatu."
 
-#: www/pm/admin/index.php:312
+#: www/pm/admin/index.php:313
 msgid ""
 "You can modify an existing subproject using this form. Please note that "
 "private subprojects can still be viewed by members of your project, but not "
@@ -19620,32 +19620,32 @@ msgstr ""
 "proiektu pribatuak egitasmo horien kideak bakarrik ikusi dezaketela, eta ez "
 "publiko arruntak."
 
-#: www/pm/admin/index.php:322 www/pm/index.php:99
+#: www/pm/admin/index.php:323 www/pm/index.php:99
 msgid "Subproject Name"
 msgstr ""
 
-#: www/pm/admin/index.php:371 www/pm/admin/index.php:393
+#: www/pm/admin/index.php:372 www/pm/admin/index.php:394
 #, fuzzy
 msgid "Permanently delete this subproject and all its data"
 msgstr "Erlazionatuak dauden erregistroko elementuak"
 
-#: www/pm/admin/index.php:378
+#: www/pm/admin/index.php:379
 msgid ""
 "You are about to permanently and irretrievably delete this subproject and "
 "all its related data!"
 msgstr ""
 
-#: www/pm/admin/index.php:412 www/project/admin/tools.php:327
+#: www/pm/admin/index.php:413 www/project/admin/tools.php:327
 #, fuzzy
 msgid "Tasks Administration"
 msgstr "Administrazioa"
 
-#: www/pm/admin/index.php:420
+#: www/pm/admin/index.php:421
 #, fuzzy
 msgid "Add a Subproject"
 msgstr "Azpi proiektu bat gehitu"
 
-#: www/pm/admin/index.php:421
+#: www/pm/admin/index.php:422
 #, fuzzy
 msgid ""
 "Add a subproject, which can contain a set of tasks. This is different than "
@@ -19654,16 +19654,16 @@ msgstr ""
 "Azpi proiektu bat gehitzean ataza ugari esleitu daitezke egitasmo "
 "horrentzat. Ataza  berri bat esleitzea desberdina da."
 
-#: www/pm/admin/index.php:429
+#: www/pm/admin/index.php:430
 #, fuzzy
 msgid "No Subprojects Found in this Project"
 msgstr "Proiektu honetan ez dago horrelako argitalpenik"
 
-#: www/pm/admin/index.php:430
+#: www/pm/admin/index.php:431
 msgid "You may add new Subprojects using the “Add a Subproject” link above."
 msgstr ""
 
-#: www/pm/admin/index.php:434
+#: www/pm/admin/index.php:435
 #, fuzzy
 msgid "Edit/Update Subproject"
 msgstr "Argitaratu/Eguneratu azpiproiektua"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 18:04+0100\n"
+"POT-Creation-Date: 2013-11-19 13:29+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -308,8 +308,8 @@ msgstr "Dossier"
 #: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
 #: www/pm/add_task.php:74 www/pm/add_task.php:81 www/pm/add_task.php:88
 #: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
-#: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/admin/index.php:97
-#: www/pm/admin/index.php:119 www/pm/admin/index.php:259
+#: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/admin/index.php:98
+#: www/pm/admin/index.php:120 www/pm/admin/index.php:260
 #: www/pm/calendar.php:59 www/pm/detail_task.php:42 www/pm/detail_task.php:66
 #: www/pm/detail_task.php:71 www/pm/detail_task.php:86
 #: www/pm/detail_task.php:90 www/pm/detail_task.php:97
@@ -789,7 +789,7 @@ msgstr ""
 #: www/forum/index.php:69 www/mail/admin/index.php:192
 #: www/mail/admin/index.php:225 www/mail/index.php:79
 #: www/people/editjob.php:52 www/people/editjob.php:74
-#: www/pm/admin/index.php:289 www/pm/admin/index.php:332 www/pm/csv.php:105
+#: www/pm/admin/index.php:290 www/pm/admin/index.php:333 www/pm/csv.php:105
 #: www/pm/index.php:100 www/project/admin/editimages.php:226
 #: www/project/admin/editimages.php:253 www/project/admin/editimages.php:269
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:62
@@ -1142,7 +1142,7 @@ msgstr ""
 #: www/account/index.php:230 www/account/register.php:169
 #: www/people/editjob.php:52 www/people/editjob.php:74
 #: www/people/editprofile.php:106 www/people/people_utils.php:406
-#: www/people/skills_utils.php:49 www/pm/admin/index.php:189
+#: www/people/skills_utils.php:49 www/pm/admin/index.php:190
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:61
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:54
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:46
@@ -1700,9 +1700,9 @@ msgstr "Date de début"
 #: www/people/admin/index.php:133 www/people/createjob.php:52
 #: www/people/createjob.php:55 www/people/editjob.php:169
 #: www/people/editjob.php:172 www/people/editprofile.php:241
-#: www/pm/admin/index.php:213 www/pm/admin/index.php:292
-#: www/pm/admin/index.php:322 www/pm/admin/index.php:332
-#: www/pm/admin/index.php:342 www/pm/format_csv.php:66
+#: www/pm/admin/index.php:214 www/pm/admin/index.php:293
+#: www/pm/admin/index.php:323 www/pm/admin/index.php:333
+#: www/pm/admin/index.php:343 www/pm/format_csv.php:66
 #: www/pm/format_csv.php:71 www/pm/format_csv.php:76 www/pm/format_csv.php:89
 #: www/pm/format_csv.php:93 www/pm/format_csv.php:97
 #: www/project/admin/editimages.php:222 www/project/admin/editimages.php:226
@@ -2135,7 +2135,7 @@ msgstr "Publier"
 #: www/frs/admin/editrelease.php:347 www/frs/admin/index.php:182
 #: www/mail/admin/index.php:228 www/mail/admin/index.php:281
 #: www/people/people_utils.php:178 www/people/people_utils.php:322
-#: www/pm/admin/index.php:351 www/pm/calendar.php:289
+#: www/pm/admin/index.php:352 www/pm/calendar.php:289
 #: www/project/admin/database.php:234 www/project/admin/index.php:289
 #: www/project/admin/tools.php:305 www/reporting/timecategory.php:99
 #: www/scm/admin/index.php:176
@@ -2230,7 +2230,7 @@ msgstr "Vous ne pouvez pas enregistrer cette position sans être identifié."
 #: plugins/mailman/include/MailmanList.class.php:247
 #: plugins/mailman/include/MailmanList.class.php:372
 #: plugins/mailman/include/MailmanList.class.php:389
-#: www/pm/admin/index.php:119
+#: www/pm/admin/index.php:120
 msgid "Update failed"
 msgstr "La mise à jour a échoué"
 
@@ -3025,8 +3025,8 @@ msgid ""
 "Bad tag name, you only can use the following characters: [A-Z][a-z][0-9]-_&'#"
 "+. and space"
 msgstr ""
-"Nom d'étiquette invalide.  Seuls les caractères suivants sont autorisés : [A-"
-"Z][a-z][0-9]-_&'#+. et l'espace."
+"Mot-clef invalide.  Seuls les caractères suivants sont autorisés : [A-Z][a-z]"
+"[0-9]-_&'#+. et l'espace."
 
 #: common/include/Group.class.php:1593
 msgid "Setting tags:"
@@ -3075,7 +3075,7 @@ msgstr "Erreur lors de la suppression des documents : "
 
 #: common/include/Group.class.php:1775
 msgid "Error Deleting Tags: "
-msgstr "Erreur lors de la suppression d'étiquettes : "
+msgstr "Erreur lors de la suppression des mots-clefs : "
 
 #: common/include/Group.class.php:1786
 msgid "Error Deleting Project History: "
@@ -4176,7 +4176,7 @@ msgstr ""
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: www/people/admin/index.php:52 www/people/admin/index.php:65
-#: www/pm/admin/index.php:97 www/survey/rating_resp.php:56
+#: www/pm/admin/index.php:98 www/survey/rating_resp.php:56
 msgid "Insert Error"
 msgstr "Erreur lors de l'insertion"
 
@@ -4289,7 +4289,7 @@ msgstr "Erreur lors de l'ajout de la clef SSH de l'utilisateur :"
 
 #: common/include/User.class.php:1278
 msgid "Error: Cannot Update User SSH Keys"
-msgstr "Erreur lors de la mise à jour des clés SSH"
+msgstr "Erreur lors de la mise à jour des clefs SSH"
 
 #: common/include/User.class.php:1424 common/include/User.class.php:1460
 #: common/include/User.class.php:1484
@@ -4822,7 +4822,7 @@ msgstr "Nouveau"
 msgid "Tracker created successfully"
 msgstr "Outil de suivi créé avec succès"
 
-#: common/tracker/actions/admin-ind.php:51 www/pm/admin/index.php:81
+#: common/tracker/actions/admin-ind.php:51 www/pm/admin/index.php:82
 msgid "Please configure also the roles (by default, it's “No Access”)"
 msgstr "Veuillez aussi configurer les rôles (aucun accès par défaut)"
 
@@ -4952,8 +4952,8 @@ msgstr "Texte libre pour la page de navigation"
 #: www/my/bookmark_add.php:58 www/my/diary.php:189
 #: www/news/admin/index.php:149 www/news/news_utils.php:42
 #: www/news/submit.php:170 www/pm/add_task.php:57 www/pm/add_task.php:140
-#: www/pm/add_task.php:154 www/pm/admin/index.php:218
-#: www/pm/admin/index.php:263 www/pm/admin/index.php:294 www/pm/csv.php:90
+#: www/pm/add_task.php:154 www/pm/admin/index.php:219
+#: www/pm/admin/index.php:264 www/pm/admin/index.php:295 www/pm/csv.php:90
 #: www/pm/deletetask.php:51 www/pm/mod_task.php:54 www/pm/mod_task.php:254
 #: www/project/admin/editimages.php:235 www/project/admin/roledelete.php:85
 #: www/project/admin/roleedit.php:302 www/project/request.php:70
@@ -5185,7 +5185,7 @@ msgstr "Elément supprimé"
 
 #: common/tracker/actions/browse.php:94
 #: common/tracker/actions/downloadcsv.php:38
-#: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:404
+#: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:405
 #: www/pm/index.php:46 www/pm/task.php:86 www/tracker/roadmap.php:333
 msgid "Could Not Get Factory"
 msgstr "Erreur lors de la création de l'objet Factory"
@@ -5208,7 +5208,7 @@ msgstr "Personne"
 #: common/tracker/actions/query.php:196
 #: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:134
 #: www/admin/search.php:72 www/admin/search.php:147 www/my/dashboard.php:64
-#: www/pm/admin/index.php:188 www/pm/index.php:98
+#: www/pm/admin/index.php:189 www/pm/index.php:98
 #: www/project/admin/editimages.php:263
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "Id"
@@ -5482,7 +5482,7 @@ msgstr "Êtes-vous sûr de vouloir supprimer cet élément ?"
 #: common/tracker/views/form-deletetracker.php:38
 #: www/admin/responses_admin.php:51 www/forum/admin/index.php:183
 #: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:74
-#: www/frs/admin/editrelease.php:382 www/pm/admin/index.php:383
+#: www/frs/admin/editrelease.php:382 www/pm/admin/index.php:384
 #: www/pm/deletetask.php:45 www/project/admin/roledelete.php:81
 #: www/reporting/rebuild.php:63
 msgid "I am Sure"
@@ -5791,8 +5791,8 @@ msgstr "Afficher une barre d'état au-dessus de la liste."
 msgid "Artifact Could Not Be Created"
 msgstr "Erreur lors de la création de l'élément"
 
-#: common/tracker/actions/taskmgr.php:59 www/pm/admin/index.php:303
-#: www/pm/admin/index.php:364
+#: common/tracker/actions/taskmgr.php:59 www/pm/admin/index.php:304
+#: www/pm/admin/index.php:365
 msgid "Could Not Get ProjectGroup"
 msgstr "Erreur lors de la création de l'objet ProjectGroup"
 
@@ -6873,7 +6873,7 @@ msgstr ""
 #: common/tracker/views/form-deleteextrafield.php:48
 #: common/tracker/views/form-deletetracker.php:42
 #: www/forum/admin/index.php:184 www/frs/admin/deletepackage.php:71
-#: www/frs/admin/deleterelease.php:75 www/pm/admin/index.php:389
+#: www/frs/admin/deleterelease.php:75 www/pm/admin/index.php:390
 msgid "I am Really Sure"
 msgstr "Je confirme vraiment"
 
@@ -7555,12 +7555,12 @@ msgstr "Information du projet"
 #: common/widget/Widget_ProjectInfo.class.php:45
 #: www/project/admin/index.php:162 www/softwaremap/tag_cloud.php:143
 msgid "Tags"
-msgstr "Étiquettes"
+msgstr "Mots-clefs"
 
 #: common/widget/Widget_ProjectInfo.class.php:49
 #: common/widget/Widget_ProjectInfo.class.php:52
 msgid "No tag defined for this project"
-msgstr "Ce projet n'a pas défini d'étiquettes"
+msgstr "Ce projet n'a pas défini de mots-clefs"
 
 #: common/widget/Widget_ProjectInfo.class.php:65
 msgid "Registered: "
@@ -11367,9 +11367,8 @@ msgid "No versions to display"
 msgstr ""
 
 #: plugins/mantisbt/view/viewAttachment.php:65
-#, fuzzy
 msgid "No attached files for this ticket"
-msgstr "Ce projet n'a pas défini d'étiquettes."
+msgstr "Ce ticket n'a pas de fichiers joints"
 
 #: plugins/mantisbt/view/viewAttachment.php:78
 #: www/project/admin/editimages.php:256
@@ -14223,7 +14222,7 @@ msgid ""
 "so it may not happen immediately.  Please allow for a one hour delay."
 msgstr ""
 "Pour éviter d'avoir à saisir votre mot de passe à chaque fois que vous "
-"utilisez votre compte CVS/SSH, vous pouvez déposer votre clé publique ici et "
+"utilisez votre compte CVS/SSH, vous pouvez déposer votre clef publique ici et "
 "elles seront placées sur le serveur dans votre fichier ~/.ssh/"
 "authorized_keys. Cette opération s'effectue à l'aide d'une tâche programmée "
 "et n'est donc pas instantanée. Attendez-vous à un délai d'une heure."
@@ -14236,10 +14235,10 @@ msgid ""
 "pub' (protocol version 2). Read the ssh documentation for further "
 "information on sharing keys."
 msgstr ""
-"Pour générer une clé publique, utilisez le programme \"ssh-keygen\". La clé "
+"Pour générer une clef publique, utilisez le programme \"ssh-keygen\". La clef "
 "publique sera placée dans \"~/.ssh/identity.pub\" (protocole 1) et dans \"~/."
 "ssh/id_dsa.pub\" ou \"~/.ssh/id_rsa.pub\" (protocole 2). Consultez la "
-"documentation de SSH pour plus d'informations sur le partage de clés."
+"documentation de SSH pour plus d'informations sur le partage de clefs."
 
 #: www/account/editsshkeys.php:76
 msgid ""
@@ -14247,7 +14246,7 @@ msgid ""
 "the number of keys in your file is what you expected."
 msgstr ""
 "Important : vérifiez qu'il n'y a pas de retour à la ligne. Après avoir "
-"validé, vérifiez que le nombre de clés dans le fichier correspond bien à ce "
+"validé, vérifiez que le nombre de clefs dans le fichier correspond bien à ce "
 "que vous attendiez."
 
 #: www/account/editsshkeys.php:81
@@ -14425,7 +14424,7 @@ msgstr "Clés publiques SSH autorisées"
 
 #: www/account/index.php:314
 msgid "Edit Keys"
-msgstr "Éditer les clés"
+msgstr "Éditer les clefs"
 
 #: www/account/index.php:316
 msgid "Shell Account deactivated"
@@ -14514,15 +14513,15 @@ msgid ""
 "account. Visiting the URL will allow you to change your password online and "
 "login."
 msgstr ""
-"Si vous cliquez sur « Envoyer une clé de hachage pour mot de passe perdu » "
+"Si vous cliquez sur « Envoyer une clef de hachage pour mot de passe perdu » "
 "ci-dessous, vous recevrez un courriel (à l'adresse que nous avons "
-"enregistrée pour votre compte).  Ce message contiendra une URL avec une clé "
+"enregistrée pour votre compte).  Ce message contiendra une URL avec une clef "
 "de hachage de 128 bits qui vous permettra de débloquer votre compte et de "
 "changer votre mot de passe."
 
 #: www/account/lostpw.php:95
 msgid "Send Lost PW Hash"
-msgstr "Envoyer une clé de hachage pour mot de passe perdu"
+msgstr "Envoyer une clef de hachage pour mot de passe perdu"
 
 #: www/account/pending-resend.php:31
 msgid "Missing Parameter. You must provide a login name or an email address."
@@ -14700,7 +14699,7 @@ msgstr "Le compte est déjà activé."
 msgid ""
 "Cannot confirm account identity - invalid confirmation hash (or login name)"
 msgstr ""
-"Ne peut confirmer l'identité du compte - clé de hachage erronée ou nom du "
+"Ne peut confirmer l'identité du compte - clef de hachage erronée ou nom du "
 "compte non valide"
 
 #: www/account/verify.php:55
@@ -17162,7 +17161,7 @@ msgstr "Boîtes d'informations"
 #: www/include/features_boxes.php:38 www/include/Layout.class.php:1385
 #: www/softwaremap/tag_cloud.php:52
 msgid "Tag Cloud"
-msgstr "Nuage d'étiquettes"
+msgstr "Nuage de mots-clefs"
 
 #: www/include/features_boxes.php:40 www/include/features_boxes.php:42
 #, php-format
@@ -17518,9 +17517,8 @@ msgid "Quick Jump To..."
 msgstr "Saut rapide vers..."
 
 #: www/include/Layout.class.php:1387
-#, fuzzy
 msgid "Browse per tags defined by the projects."
-msgstr "Ce projet n'a pas défini d'étiquettes."
+msgstr "Naviguer à l'aide des mots-clefs définis par les projets."
 
 #: www/include/Layout.class.php:1391 www/softwaremap/trove_list.php:85
 msgid "Project Tree"
@@ -18036,8 +18034,8 @@ msgstr "Les nouveautés de FusionForge 4.8"
 #: www/index_std.php:78
 msgid "New project classification by tags (tag cloud)."
 msgstr ""
-"Classification des projets par étiquettes (et affichage sous forme de nuage "
-"d'étiquettes)."
+"Classification des projets par mots-clefs (et affichage sous forme de nuage "
+"de mots-clefs)."
 
 #: www/index_std.php:79
 msgid "New reporting item for the File Release System: downloads per package."
@@ -18523,7 +18521,7 @@ msgstr ""
 msgid "URLs that start with http:// are made clickable."
 msgstr "Les URL commençant par http:// sont rendues cliquables."
 
-#: www/people/admin/index.php:55 www/pm/admin/index.php:99
+#: www/people/admin/index.php:55 www/pm/admin/index.php:100
 msgid "Category Inserted"
 msgstr "Catégorie ajoutée"
 
@@ -18725,7 +18723,7 @@ msgstr "Année de fin"
 #: www/people/editprofile.php:106 www/people/skills_utils.php:52
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:47
 msgid "Keywords"
-msgstr "Mots-clés"
+msgstr "Mots-clefs"
 
 #: www/people/editprofile.php:124
 msgid "No skills selected to edit."
@@ -18857,11 +18855,11 @@ msgstr "Tous les champs doivent être remplis !"
 
 #: www/people/editprofile.php:295 www/people/skills_utils.php:170
 msgid "Title (max 100 characters)"
-msgstr "Titre (255 caractères maximum)"
+msgstr "Titre (100 caractères maximum)"
 
 #: www/people/editprofile.php:302 www/people/skills_utils.php:177
 msgid "Keywords (max 255 characters)"
-msgstr "Mots-clés (max 255 caractères)"
+msgstr "Mots-clefs (max 255 caractères)"
 
 #: www/people/editprofile.php:308
 msgid "Add This Skill"
@@ -19080,9 +19078,9 @@ msgstr "Dépendant de la tâche"
 msgid "Dependent note"
 msgstr "Détails sur la dépendance"
 
-#: www/pm/admin/index.php:63 www/pm/admin/index.php:94
-#: www/pm/admin/index.php:114 www/pm/admin/index.php:171
-#: www/pm/admin/index.php:235 www/pm/admin/index.php:246
+#: www/pm/admin/index.php:63 www/pm/admin/index.php:95
+#: www/pm/admin/index.php:115 www/pm/admin/index.php:172
+#: www/pm/admin/index.php:236 www/pm/admin/index.php:247
 msgid "Unable to create ProjectCategory Object"
 msgstr "Erreur lors de la création d'un objet ProjectCategory"
 
@@ -19090,43 +19088,43 @@ msgstr "Erreur lors de la création d'un objet ProjectCategory"
 msgid "Subproject Inserted"
 msgstr "Sous-projet ajouté."
 
-#: www/pm/admin/index.php:121
+#: www/pm/admin/index.php:122
 msgid "Category Updated"
 msgstr "Catégorie mise à jour"
 
-#: www/pm/admin/index.php:140
+#: www/pm/admin/index.php:141
 msgid "Subproject Updated successfully"
 msgstr "Sous-projet mis à jour avec succès"
 
-#: www/pm/admin/index.php:155
+#: www/pm/admin/index.php:156
 msgid "Subproject successfully deleted."
 msgstr "Sous-projet supprimé avec succès."
 
-#: www/pm/admin/index.php:178
+#: www/pm/admin/index.php:179
 #, php-format
 msgid "Add Categories to: %s"
 msgstr "Ajouter des catégories à : %s"
 
-#: www/pm/admin/index.php:204
+#: www/pm/admin/index.php:205
 msgid "No categories defined"
 msgstr "Aucune catégorie définie"
 
-#: www/pm/admin/index.php:213 www/pm/admin/index.php:259
+#: www/pm/admin/index.php:214 www/pm/admin/index.php:260
 #: www/reporting/timecategory.php:70 www/reporting/timecategory.php:90
 msgid "Category Name"
 msgstr "Nom de catégorie"
 
-#: www/pm/admin/index.php:217
+#: www/pm/admin/index.php:218
 msgid "Once you add a category, it cannot be deleted"
 msgstr ""
 "Dès lors que vous aurez ajouté une catégorie, vous ne pourrez la supprimer."
 
-#: www/pm/admin/index.php:242
+#: www/pm/admin/index.php:243
 #, php-format
 msgid "Modify a Category in: %s"
 msgstr "Modifier une catégorie de : %s"
 
-#: www/pm/admin/index.php:252
+#: www/pm/admin/index.php:253
 msgid ""
 "It is not recommended that you change the category name because other things "
 "are dependent upon it. When you change the category name, all related items "
@@ -19136,11 +19134,11 @@ msgstr ""
 "d'autres choses en dépendent. Quand vous changez le nom de la catégorie, "
 "tous les items prendront le nouveau nom."
 
-#: www/pm/admin/index.php:276
+#: www/pm/admin/index.php:277
 msgid "Add a new subproject"
 msgstr "Ajouter un sous-projet"
 
-#: www/pm/admin/index.php:279
+#: www/pm/admin/index.php:280
 msgid ""
 "Add a new subproject to the Tasks. <strong>This is different than adding a "
 "task to a subproject.</strong>"
@@ -19148,19 +19146,19 @@ msgstr ""
 "Ajouter un nouveau sous-projet au gestionnaire de tâches. <strong>Ce n'est "
 "pas la même chose que l'ajout d'une tâche à un sous-projet.</strong>"
 
-#: www/pm/admin/index.php:285
+#: www/pm/admin/index.php:286
 msgid "New Subproject Name"
 msgstr "Nom du sous-projet"
 
-#: www/pm/admin/index.php:292 www/pm/admin/index.php:342
+#: www/pm/admin/index.php:293 www/pm/admin/index.php:343
 msgid "Send All Updates To"
 msgstr "Envoyer toutes les mises à jour à"
 
-#: www/pm/admin/index.php:309
+#: www/pm/admin/index.php:310
 msgid "Change Tasks Status"
 msgstr "Changer l'état de la tâche"
 
-#: www/pm/admin/index.php:312
+#: www/pm/admin/index.php:313
 msgid ""
 "You can modify an existing subproject using this form. Please note that "
 "private subprojects can still be viewed by members of your project, but not "
@@ -19170,15 +19168,15 @@ msgstr ""
 "Notez que les sous-projets privés ne peuvent être vus que par les membres, "
 "et pas par les visiteurs."
 
-#: www/pm/admin/index.php:322 www/pm/index.php:99
+#: www/pm/admin/index.php:323 www/pm/index.php:99
 msgid "Subproject Name"
 msgstr "Nom du sous-projet"
 
-#: www/pm/admin/index.php:371 www/pm/admin/index.php:393
+#: www/pm/admin/index.php:372 www/pm/admin/index.php:394
 msgid "Permanently delete this subproject and all its data"
 msgstr "Supprimer irrémédiablement ce sous-projet et toutes ses données"
 
-#: www/pm/admin/index.php:378
+#: www/pm/admin/index.php:379
 msgid ""
 "You are about to permanently and irretrievably delete this subproject and "
 "all its related data!"
@@ -19186,15 +19184,15 @@ msgstr ""
 "Vous êtes sur le point de supprimer irrémédiablement ce sous-projet et "
 "toutes ses données !"
 
-#: www/pm/admin/index.php:412 www/project/admin/tools.php:327
+#: www/pm/admin/index.php:413 www/project/admin/tools.php:327
 msgid "Tasks Administration"
 msgstr "Administration des gestionnaires de tâches"
 
-#: www/pm/admin/index.php:420
+#: www/pm/admin/index.php:421
 msgid "Add a Subproject"
 msgstr "Ajouter un sous-projet"
 
-#: www/pm/admin/index.php:421
+#: www/pm/admin/index.php:422
 msgid ""
 "Add a subproject, which can contain a set of tasks. This is different than "
 "creating a new task."
@@ -19202,17 +19200,17 @@ msgstr ""
 "Il s'agit ici d'ajouter un sous-projet, qui peut contenir un ensemble de "
 "tâches. Ce n'est pas la même chose que la création d'une tâche."
 
-#: www/pm/admin/index.php:429
+#: www/pm/admin/index.php:430
 msgid "No Subprojects Found in this Project"
 msgstr "Aucun sous-projet trouvé dans ce projet"
 
-#: www/pm/admin/index.php:430
+#: www/pm/admin/index.php:431
 msgid "You may add new Subprojects using the “Add a Subproject” link above."
 msgstr ""
 "Vous pouvez ajouter des sous-projets en utilisant le lien « Ajouter un sous-"
 "projet » ci-dessus."
 
-#: www/pm/admin/index.php:434
+#: www/pm/admin/index.php:435
 msgid "Edit/Update Subproject"
 msgstr "Éditer/Mettre à jour le sous-projet"
 
@@ -20095,16 +20093,16 @@ msgstr "255 caractères maximum, sans HTML"
 
 #: www/project/admin/index.php:150
 msgid "Project tags"
-msgstr "Étiquettes de projet"
+msgstr "Mots-clefs du projet"
 
 #: www/project/admin/index.php:152
 msgid "Add tags (use comma as separator): "
-msgstr "Ajouter des étiquettes (séparées par des virgules) : "
+msgstr "Ajouter des mots-clefs (séparées par des virgules) : "
 
 #: www/project/admin/index.php:159
 msgid "Or pick a tag from those used by other projects: "
 msgstr ""
-"Vous pouvez aussi choisir parmi les étiquettes déjà utilisées par d'autres "
+"Vous pouvez aussi choisir parmi les mots-clefs déjà utilisés par d'autres "
 "projets : "
 
 #: www/project/admin/index.php:192
@@ -21910,7 +21908,7 @@ msgstr "Date d'enregistrement :"
 msgid ""
 "More than <strong>%1$s</strong> projects have <strong>%2$s</strong> as tag."
 msgstr ""
-"L'étiquette <strong>%2$s</strong> est utilisée sur plus de <strong>%1$s</"
+"Le mot-clef <strong>%2$s</strong> est utilisé sur plus de <strong>%1$s</"
 "strong> projets."
 
 #: www/softwaremap/tag_cloud.php:89 www/trove/index.php:171
@@ -24186,7 +24184,7 @@ msgstr "Page personnelle de %s"
 #~ msgstr "ERREUR en insérant dans la liste des compétences."
 
 #~ msgid "Tag cloud"
-#~ msgstr "Nuage d'étiquettes"
+#~ msgstr "Nuage de mots-clefs"
 
 #, fuzzy
 #~ msgid "Browse per category."

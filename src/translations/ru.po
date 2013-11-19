@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-18 18:04+0100\n"
+"POT-Creation-Date: 2013-11-19 13:29+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -322,8 +322,8 @@ msgstr "Имя файла"
 #: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
 #: www/pm/add_task.php:74 www/pm/add_task.php:81 www/pm/add_task.php:88
 #: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
-#: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/admin/index.php:97
-#: www/pm/admin/index.php:119 www/pm/admin/index.php:259
+#: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/admin/index.php:98
+#: www/pm/admin/index.php:120 www/pm/admin/index.php:260
 #: www/pm/calendar.php:59 www/pm/detail_task.php:42 www/pm/detail_task.php:66
 #: www/pm/detail_task.php:71 www/pm/detail_task.php:86
 #: www/pm/detail_task.php:90 www/pm/detail_task.php:97
@@ -842,7 +842,7 @@ msgstr ""
 #: www/forum/index.php:69 www/mail/admin/index.php:192
 #: www/mail/admin/index.php:225 www/mail/index.php:79
 #: www/people/editjob.php:52 www/people/editjob.php:74
-#: www/pm/admin/index.php:289 www/pm/admin/index.php:332 www/pm/csv.php:105
+#: www/pm/admin/index.php:290 www/pm/admin/index.php:333 www/pm/csv.php:105
 #: www/pm/index.php:100 www/project/admin/editimages.php:226
 #: www/project/admin/editimages.php:253 www/project/admin/editimages.php:269
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:62
@@ -1219,7 +1219,7 @@ msgstr ""
 #: www/account/index.php:230 www/account/register.php:169
 #: www/people/editjob.php:52 www/people/editjob.php:74
 #: www/people/editprofile.php:106 www/people/people_utils.php:406
-#: www/people/skills_utils.php:49 www/pm/admin/index.php:189
+#: www/people/skills_utils.php:49 www/pm/admin/index.php:190
 #: www/search/include/renderers/DocsAllHtmlSearchRenderer.class.php:61
 #: www/search/include/renderers/DocsHtmlSearchRenderer.class.php:54
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:46
@@ -1797,9 +1797,9 @@ msgstr "Начальная дата"
 #: www/people/admin/index.php:133 www/people/createjob.php:52
 #: www/people/createjob.php:55 www/people/editjob.php:169
 #: www/people/editjob.php:172 www/people/editprofile.php:241
-#: www/pm/admin/index.php:213 www/pm/admin/index.php:292
-#: www/pm/admin/index.php:322 www/pm/admin/index.php:332
-#: www/pm/admin/index.php:342 www/pm/format_csv.php:66
+#: www/pm/admin/index.php:214 www/pm/admin/index.php:293
+#: www/pm/admin/index.php:323 www/pm/admin/index.php:333
+#: www/pm/admin/index.php:343 www/pm/format_csv.php:66
 #: www/pm/format_csv.php:71 www/pm/format_csv.php:76 www/pm/format_csv.php:89
 #: www/pm/format_csv.php:93 www/pm/format_csv.php:97
 #: www/project/admin/editimages.php:222 www/project/admin/editimages.php:226
@@ -2248,7 +2248,7 @@ msgstr "Релизы"
 #: www/frs/admin/editrelease.php:347 www/frs/admin/index.php:182
 #: www/mail/admin/index.php:228 www/mail/admin/index.php:281
 #: www/people/people_utils.php:178 www/people/people_utils.php:322
-#: www/pm/admin/index.php:351 www/pm/calendar.php:289
+#: www/pm/admin/index.php:352 www/pm/calendar.php:289
 #: www/project/admin/database.php:234 www/project/admin/index.php:289
 #: www/project/admin/tools.php:305 www/reporting/timecategory.php:99
 #: www/scm/admin/index.php:176
@@ -2345,7 +2345,7 @@ msgstr "Сохранять позиции Вы можете лишь автор�
 #: plugins/mailman/include/MailmanList.class.php:247
 #: plugins/mailman/include/MailmanList.class.php:372
 #: plugins/mailman/include/MailmanList.class.php:389
-#: www/pm/admin/index.php:119
+#: www/pm/admin/index.php:120
 msgid "Update failed"
 msgstr "Ошибка обновления"
 
@@ -4366,7 +4366,7 @@ msgstr ""
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: www/people/admin/index.php:52 www/people/admin/index.php:65
-#: www/pm/admin/index.php:97 www/survey/rating_resp.php:56
+#: www/pm/admin/index.php:98 www/survey/rating_resp.php:56
 msgid "Insert Error"
 msgstr "Ошибка вставки"
 
@@ -5063,7 +5063,7 @@ msgstr "Представить новый"
 msgid "Tracker created successfully"
 msgstr "Задача успешно создана"
 
-#: common/tracker/actions/admin-ind.php:51 www/pm/admin/index.php:81
+#: common/tracker/actions/admin-ind.php:51 www/pm/admin/index.php:82
 msgid "Please configure also the roles (by default, it's “No Access”)"
 msgstr ""
 
@@ -5197,8 +5197,8 @@ msgstr ""
 #: www/my/bookmark_add.php:58 www/my/diary.php:189
 #: www/news/admin/index.php:149 www/news/news_utils.php:42
 #: www/news/submit.php:170 www/pm/add_task.php:57 www/pm/add_task.php:140
-#: www/pm/add_task.php:154 www/pm/admin/index.php:218
-#: www/pm/admin/index.php:263 www/pm/admin/index.php:294 www/pm/csv.php:90
+#: www/pm/add_task.php:154 www/pm/admin/index.php:219
+#: www/pm/admin/index.php:264 www/pm/admin/index.php:295 www/pm/csv.php:90
 #: www/pm/deletetask.php:51 www/pm/mod_task.php:54 www/pm/mod_task.php:254
 #: www/project/admin/editimages.php:235 www/project/admin/roledelete.php:85
 #: www/project/admin/roleedit.php:302 www/project/request.php:70
@@ -5443,7 +5443,7 @@ msgstr "Элемент обновлен"
 
 #: common/tracker/actions/browse.php:94
 #: common/tracker/actions/downloadcsv.php:38
-#: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:404
+#: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:405
 #: www/pm/index.php:46 www/pm/task.php:86 www/tracker/roadmap.php:333
 msgid "Could Not Get Factory"
 msgstr "Производство неполучно"
@@ -5466,7 +5466,7 @@ msgstr "Неназначено"
 #: common/tracker/actions/query.php:196
 #: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:134
 #: www/admin/search.php:72 www/admin/search.php:147 www/my/dashboard.php:64
-#: www/pm/admin/index.php:188 www/pm/index.php:98
+#: www/pm/admin/index.php:189 www/pm/index.php:98
 #: www/project/admin/editimages.php:263
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:56
 msgid "Id"
@@ -5741,7 +5741,7 @@ msgstr "Подтвердите удаление образца?"
 #: common/tracker/views/form-deletetracker.php:38
 #: www/admin/responses_admin.php:51 www/forum/admin/index.php:183
 #: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:74
-#: www/frs/admin/editrelease.php:382 www/pm/admin/index.php:383
+#: www/frs/admin/editrelease.php:382 www/pm/admin/index.php:384
 #: www/pm/deletetask.php:45 www/project/admin/roledelete.php:81
 #: www/reporting/rebuild.php:63
 msgid "I am Sure"
@@ -6054,8 +6054,8 @@ msgstr ""
 msgid "Artifact Could Not Be Created"
 msgstr "Невозможно создать образец"
 
-#: common/tracker/actions/taskmgr.php:59 www/pm/admin/index.php:303
-#: www/pm/admin/index.php:364
+#: common/tracker/actions/taskmgr.php:59 www/pm/admin/index.php:304
+#: www/pm/admin/index.php:365
 msgid "Could Not Get ProjectGroup"
 msgstr "Невозможно получение группы проекта"
 
@@ -7191,7 +7191,7 @@ msgstr "Вы желаете полностью удалить это поле и
 #: common/tracker/views/form-deleteextrafield.php:48
 #: common/tracker/views/form-deletetracker.php:42
 #: www/forum/admin/index.php:184 www/frs/admin/deletepackage.php:71
-#: www/frs/admin/deleterelease.php:75 www/pm/admin/index.php:389
+#: www/frs/admin/deleterelease.php:75 www/pm/admin/index.php:390
 msgid "I am Really Sure"
 msgstr "Я абсолютно уверен"
 
@@ -19385,7 +19385,7 @@ msgstr ""
 msgid "URLs that start with http:// are made clickable."
 msgstr "Ссылки, начинающиеся с http:// будут автоматически распознаны."
 
-#: www/people/admin/index.php:55 www/pm/admin/index.php:99
+#: www/people/admin/index.php:55 www/pm/admin/index.php:100
 msgid "Category Inserted"
 msgstr "Категория вставлена"
 
@@ -19938,9 +19938,9 @@ msgstr "Зависит от задачи"
 msgid "Dependent note"
 msgstr "Зависимая запись"
 
-#: www/pm/admin/index.php:63 www/pm/admin/index.php:94
-#: www/pm/admin/index.php:114 www/pm/admin/index.php:171
-#: www/pm/admin/index.php:235 www/pm/admin/index.php:246
+#: www/pm/admin/index.php:63 www/pm/admin/index.php:95
+#: www/pm/admin/index.php:115 www/pm/admin/index.php:172
+#: www/pm/admin/index.php:236 www/pm/admin/index.php:247
 #, fuzzy
 msgid "Unable to create ProjectCategory Object"
 msgstr "Ошибка создания объекта типа образца"
@@ -19950,44 +19950,44 @@ msgstr "Ошибка создания объекта типа образца"
 msgid "Subproject Inserted"
 msgstr "Проект вставлен"
 
-#: www/pm/admin/index.php:121
+#: www/pm/admin/index.php:122
 msgid "Category Updated"
 msgstr "Категория обновлена"
 
-#: www/pm/admin/index.php:140
+#: www/pm/admin/index.php:141
 #, fuzzy
 msgid "Subproject Updated successfully"
 msgstr "Обновление завершено"
 
-#: www/pm/admin/index.php:155
+#: www/pm/admin/index.php:156
 #, fuzzy
 msgid "Subproject successfully deleted."
 msgstr "%1$s удалено."
 
-#: www/pm/admin/index.php:178
+#: www/pm/admin/index.php:179
 #, fuzzy, php-format
 msgid "Add Categories to: %s"
 msgstr "Добавить категории в"
 
-#: www/pm/admin/index.php:204
+#: www/pm/admin/index.php:205
 msgid "No categories defined"
 msgstr "Категории неуказаны"
 
-#: www/pm/admin/index.php:213 www/pm/admin/index.php:259
+#: www/pm/admin/index.php:214 www/pm/admin/index.php:260
 #: www/reporting/timecategory.php:70 www/reporting/timecategory.php:90
 msgid "Category Name"
 msgstr "Имя категории"
 
-#: www/pm/admin/index.php:217
+#: www/pm/admin/index.php:218
 msgid "Once you add a category, it cannot be deleted"
 msgstr "Добавленная категория неможет быть удалена в последствии"
 
-#: www/pm/admin/index.php:242
+#: www/pm/admin/index.php:243
 #, fuzzy, php-format
 msgid "Modify a Category in: %s"
 msgstr "Изменить категорию в"
 
-#: www/pm/admin/index.php:252
+#: www/pm/admin/index.php:253
 msgid ""
 "It is not recommended that you change the category name because other things "
 "are dependent upon it. When you change the category name, all related items "
@@ -19997,12 +19997,12 @@ msgstr ""
 "от этой категории. При измении имени категории, все последующие части будут "
 "изменены в соответствии с новым именем."
 
-#: www/pm/admin/index.php:276
+#: www/pm/admin/index.php:277
 #, fuzzy
 msgid "Add a new subproject"
 msgstr "Добавить новый проект"
 
-#: www/pm/admin/index.php:279
+#: www/pm/admin/index.php:280
 #, fuzzy
 msgid ""
 "Add a new subproject to the Tasks. <strong>This is different than adding a "
@@ -20011,21 +20011,21 @@ msgstr ""
 "Добавить новый проект в управление проектами. <strong>Отличается от "
 "добавления задачи в проект.</strong>"
 
-#: www/pm/admin/index.php:285
+#: www/pm/admin/index.php:286
 #, fuzzy
 msgid "New Subproject Name"
 msgstr "Название подпроекта"
 
-#: www/pm/admin/index.php:292 www/pm/admin/index.php:342
+#: www/pm/admin/index.php:293 www/pm/admin/index.php:343
 msgid "Send All Updates To"
 msgstr "Отправлять все обновления на"
 
-#: www/pm/admin/index.php:309
+#: www/pm/admin/index.php:310
 #, fuzzy
 msgid "Change Tasks Status"
 msgstr "Состояние задачи"
 
-#: www/pm/admin/index.php:312
+#: www/pm/admin/index.php:313
 #, fuzzy
 msgid ""
 "You can modify an existing subproject using this form. Please note that "
@@ -20036,33 +20036,33 @@ msgstr ""
 "ввиду, изменение частных проектов будет видимым всем учстникам проекта, но "
 "не остальным пользователям."
 
-#: www/pm/admin/index.php:322 www/pm/index.php:99
+#: www/pm/admin/index.php:323 www/pm/index.php:99
 msgid "Subproject Name"
 msgstr "Название подпроекта"
 
-#: www/pm/admin/index.php:371 www/pm/admin/index.php:393
+#: www/pm/admin/index.php:372 www/pm/admin/index.php:394
 #, fuzzy
 msgid "Permanently delete this subproject and all its data"
 msgstr "Полностью удалить этот подпроект и все его данные"
 
-#: www/pm/admin/index.php:378
+#: www/pm/admin/index.php:379
 msgid ""
 "You are about to permanently and irretrievably delete this subproject and "
 "all its related data!"
 msgstr ""
 "Вы запрашиваете полное и безвозвратное удаление подпроекта и всех его данных!"
 
-#: www/pm/admin/index.php:412 www/project/admin/tools.php:327
+#: www/pm/admin/index.php:413 www/project/admin/tools.php:327
 #, fuzzy
 msgid "Tasks Administration"
 msgstr "Администрирование"
 
-#: www/pm/admin/index.php:420
+#: www/pm/admin/index.php:421
 #, fuzzy
 msgid "Add a Subproject"
 msgstr "Добавить новый проект"
 
-#: www/pm/admin/index.php:421
+#: www/pm/admin/index.php:422
 #, fuzzy
 msgid ""
 "Add a subproject, which can contain a set of tasks. This is different than "
@@ -20071,12 +20071,12 @@ msgstr ""
 "Добавление проекта который может содержать задачи, отличается от добавления "
 "новой задачи."
 
-#: www/pm/admin/index.php:429
+#: www/pm/admin/index.php:430
 #, fuzzy
 msgid "No Subprojects Found in this Project"
 msgstr "Для проекта нет сообщений"
 
-#: www/pm/admin/index.php:430
+#: www/pm/admin/index.php:431
 #, fuzzy
 msgid "You may add new Subprojects using the “Add a Subproject” link above."
 msgstr ""
@@ -20084,7 +20084,7 @@ msgstr ""
 "добавить новый проект воспользовавшись \"Добавить проект\" в выделенной выше "
 "ссылке.</p>"
 
-#: www/pm/admin/index.php:434
+#: www/pm/admin/index.php:435
 #, fuzzy
 msgid "Edit/Update Subproject"
 msgstr "Изменить/обновить проект"
