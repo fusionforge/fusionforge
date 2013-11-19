@@ -76,15 +76,27 @@ project_admin_header(array('title'=>$title,'group'=>$group_id));
 
 printf(_('You are about to permanently delete role %s'), $role->getName()); ?>
 
+<table class="centered">
+<tr>
+<td>
+<fieldset>
+<legend><?php echo _('Confirm Delete') ?></legend>
 <form action="<?php echo getStringFromServer('PHP_SELF') ?>?group_id=<?php echo $group_id ?>&amp;role_id=<?php echo $role_id ?>" method="post">
 <p>
-<input name="sure" value="1" type="checkbox" /><?php echo _("I am Sure") ?><br />
+<input id="sure" type="checkbox" value="1" name="sure" />
+<label for="sure">
+<?php echo _('I am Sure'); ?>
+</label>
 </p>
 
 <p>
 <input type="submit" name="submit" value="<?php echo _('Submit') ?>" />
 </p>
 </form>
+</fieldset>
+</td>
+</tr>
+</table>
 
 <?php
 project_admin_footer(array());
