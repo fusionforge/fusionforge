@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-19 13:29+0100\n"
+"POT-Creation-Date: 2013-11-20 14:54+0100\n"
 "PO-Revision-Date: 2009-01-13 16:27+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -4752,7 +4752,7 @@ msgstr ""
 #: www/pm/add_task.php:154 www/pm/admin/index.php:219
 #: www/pm/admin/index.php:264 www/pm/admin/index.php:295 www/pm/csv.php:90
 #: www/pm/deletetask.php:51 www/pm/mod_task.php:54 www/pm/mod_task.php:254
-#: www/project/admin/editimages.php:235 www/project/admin/roledelete.php:85
+#: www/project/admin/editimages.php:235 www/project/admin/roledelete.php:93
 #: www/project/admin/roleedit.php:302 www/project/request.php:70
 #: www/register/index.php:314 www/snippet/add_snippet_to_package.php:167
 #: www/snippet/addversion.php:109 www/snippet/addversion.php:228
@@ -5251,7 +5251,7 @@ msgstr ""
 #: plugins/mailman/www/admin/deletelist.php:59 www/admin/groupdelete.php:57
 #: www/admin/groupdelete.php:58 www/admin/groupdelete.php:59
 #: www/mail/admin/deletelist.php:67 www/mail/admin/deletelist.php:73
-#: www/people/editprofile.php:199
+#: www/people/editprofile.php:199 www/project/admin/roledelete.php:83
 msgid "Confirm Delete"
 msgstr ""
 
@@ -5266,7 +5266,7 @@ msgstr ""
 #: www/admin/responses_admin.php:51 www/forum/admin/index.php:183
 #: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:74
 #: www/frs/admin/editrelease.php:382 www/pm/admin/index.php:384
-#: www/pm/deletetask.php:45 www/project/admin/roledelete.php:81
+#: www/pm/deletetask.php:45 www/project/admin/roledelete.php:88
 #: www/reporting/rebuild.php:63
 msgid "I am Sure"
 msgstr ""
@@ -17404,16 +17404,13 @@ msgstr ""
 msgid "No News Found for %s"
 msgstr ""
 
-#: www/news/index.php:74
+#: www/news/index.php:74 www/news/news_utils.php:117
+#: www/news/news_utils.php:248
 msgid "No News Found"
 msgstr ""
 
 #: www/news/news_utils.php:40
 msgid "View News"
-msgstr ""
-
-#: www/news/news_utils.php:117 www/news/news_utils.php:248
-msgid "No News Items Found"
 msgstr ""
 
 #: www/news/news_utils.php:185

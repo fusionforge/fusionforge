@@ -114,7 +114,7 @@ ORDER BY post_date DESC',
 	$return = '';
 
 	if (!$result || $rows < 1) {
-		$return .= _('No News Items Found');
+		$return .= _('No News Found');
 		$return .= db_error();
 //		$return .= "</div>";
 	} else {
@@ -245,7 +245,7 @@ function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
 	$rows=db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		$return .= '<h3>' . _('No News Items Found') . '</h3>';
+		$return .= '<h3>' . _('No News Found') . '</h3>';
 		$return .= db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
