@@ -36,7 +36,7 @@ class Widget_MyAdmin extends Widget {
 	}
 	function getContent() {
 		$i = 0;
-		$html_my_admin = '<table width="100%">';
+		$html_my_admin = '<table class="fullwidth">';
 
 		if (forge_check_global_perm ('forge_admin')) {
 			$res = db_query_params("SELECT count(*) AS count FROM users WHERE status='P' OR status='V' OR status='W'",array());
@@ -66,7 +66,7 @@ class Widget_MyAdmin extends Widget {
 
 			$html_my_admin .= $this->_get_admin_row(
 				$i++,
-				vsprintf(_('Groups in <a href="%s"><strong>P</strong> (pending) Status</A>'), array("/admin/approve-pending.php")),
+				vsprintf(_('Groups in <a href="%s"><strong>P</strong> (pending) Status</a>'), array("/admin/approve-pending.php")),
 				$pending_projects,
 				$this->_get_color($pending_projects)
 			);

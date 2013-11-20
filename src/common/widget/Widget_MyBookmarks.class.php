@@ -45,14 +45,14 @@ class Widget_MyBookmarks extends Widget {
 			$html_my_bookmarks .= '<div class="warning">'. _("You currently do not have any bookmarks saved") .'</div>';
 			$html_my_bookmarks .= db_error();
 		} else {
-			$html_my_bookmarks .= '<table style="width:100%">';
+			$html_my_bookmarks .= '<table class="fullwidth">';
 			for ($i=0; $i<$rows; $i++) {
 				$html_my_bookmarks .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>';
 				$html_my_bookmarks .= '<a href="'. db_result($result,$i,'bookmark_url') .'">'. db_result($result,$i,'bookmark_title') .'</a> ';
 				$html_my_bookmarks .= '<small><a href="/my/bookmark_edit.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">['._("Edit").']</a></small></td>';
 				$html_my_bookmarks .= '<td style="text-align:right"><a href="/my/bookmark_delete.php?bookmark_id='. db_result($result,$i,'bookmark_id');
 				$html_my_bookmarks .= '" onClick="return confirm(\''._("Delete this bookmark?").'\')">';
-				$html_my_bookmarks .= '<img src="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" height="16" width="16" border="0" alt="DELETE" /></a></td></tr>';
+				$html_my_bookmarks .= '<img src="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" height="16" width="16" alt="Delete" /></a></td></tr>';
 			}
 			$html_my_bookmarks .= '</table>';
 		}
