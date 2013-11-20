@@ -20,12 +20,11 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'include/bookmarks.php';
 
-site_user_header(array("title"=>_('My Personal Page')));
+site_user_header(array("title"=>_('Add a new Bookmark')));
 
 $bookmark_url = trim(getStringFromRequest('bookmark_url'));
 $bookmark_title = trim(getStringFromRequest('bookmark_title'));
@@ -47,13 +46,13 @@ if (getStringFromRequest('submit') && $bookmark_url && $bookmark_title) {
 		<label for="bookmark_url">
 			<?php echo _('Bookmark URL')._(':'); ?><br />
 		</label>
-		<input id="bookmark_url" type="text" name="bookmark_url" value="http://" />
+		<input id="bookmark_url" required="required" type="url" name="bookmark_url" value="http://" />
 	</p>
 	<p>
 		<label for="bookmark_title">
 			<?php echo _('Bookmark Title')._(':'); ?><br />
 		</label>
-		<input id="bookmark_title" type="text" name="bookmark_title" value="" />
+		<input id="bookmark_title" required="required" type="text" name="bookmark_title" value="" />
 	</p>
 	<p><input type="submit" name="submit" value="<?php echo _('Submit') ?>" /></p>
 	</form>
