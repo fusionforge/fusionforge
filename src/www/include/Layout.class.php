@@ -1322,11 +1322,11 @@ if (isset($params['group']) && $params['group']) {
 		echo '<div class="widget_titlebar '. ($readonly?'':'widget_titlebar_handle') . "\">\n";
 		echo '<div class="widget_titlebar_title">'. $widget->getTitle() . "</div>\n";
 		if (!$readonly) {
-			echo '<div class="widget_titlebar_close"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=widget&amp;name['. $widget->id .'][remove]='. $widget->getInstanceId() .'&amp;column_id='. $column_id .'&amp;layout_id='. $layout_id .'">'. $this->getPicto('ic/close.png', 'Close','Close') . "</a></div>\n";
+			echo '<div class="widget_titlebar_close"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=widget&amp;name['. $widget->id .'][remove]='. $widget->getInstanceId() .'&amp;column_id='. $column_id .'&amp;layout_id='. $layout_id .'">'. $this->getPicto('ic/close.png', _('Close'), _('Close')) . "</a></div>\n";
 			if ($is_minimized) {
-				echo '<div class="widget_titlebar_maximize"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=maximize&amp;name['. $widget->id .']='. $widget->getInstanceId() .'&amp;column_id='. $column_id .'&amp;layout_id='. $layout_id .'">'. $this->getPicto($this->_getTogglePlusForWidgets(),  'Maximize', 'Maximize') . "</a></div>\n";
+				echo '<div class="widget_titlebar_maximize"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=maximize&amp;name['. $widget->id .']='. $widget->getInstanceId() .'&amp;column_id='. $column_id .'&amp;layout_id='. $layout_id .'">'. $this->getPicto($this->_getTogglePlusForWidgets(), _('Maximize'), _('Maximize')) . "</a></div>\n";
 			} else {
-				echo '<div class="widget_titlebar_minimize"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=minimize&amp;name['. $widget->id .']='. $widget->getInstanceId() .'&amp;column_id='. $column_id .'&amp;layout_id='. $layout_id .'">'. $this->getPicto($this->_getToggleMinusForWidgets(),  'Minimize', 'Minimize') . "</a></div>\n";
+				echo '<div class="widget_titlebar_minimize"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=minimize&amp;name['. $widget->id .']='. $widget->getInstanceId() .'&amp;column_id='. $column_id .'&amp;layout_id='. $layout_id .'">'. $this->getPicto($this->_getToggleMinusForWidgets(), _('Minimize'), _('Minimize')) . "</a></div>\n";
 			}
 			if (strlen($widget->hasPreferences())) {
 				echo '<div class="widget_titlebar_prefs"><a href="/widgets/updatelayout.php?owner='. $owner_type.$owner_id .'&amp;action=preferences&amp;name['. $widget->id .']='. $widget->getInstanceId() .'&amp;layout_id='. $layout_id .'">'. _('Preferences') . "</a></div>\n";
@@ -1355,7 +1355,7 @@ if (isset($params['group']) && $params['group']) {
 		if ($widget->isAjax()) {
 			echo '<script type="text/javascript">/* <![CDATA[ */'."
 				jQuery(document).ready(function() {
-						jQuery('#$element_id-ajax').html('<div style=\"text-align:center\">". $this->getPicto('ic/spinner.gif','spinner','spinner', 10, 10) ."</div>');
+						jQuery('#$element_id-ajax').html('<div style=\"text-align:center\">". $this->getPicto('ic/spinner.gif',_('Spinner'), _('Spinner'), 10, 10) ."</div>');
 						jQuery.ajax({url:'". $widget->getAjaxUrl($owner_id, $owner_type) ."',
 							success: function(result){jQuery('#$element_id-ajax').html(result)},
 							});

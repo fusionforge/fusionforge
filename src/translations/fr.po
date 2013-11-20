@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-20 16:56+0100\n"
+"POT-Creation-Date: 2013-11-20 17:39+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -11666,6 +11666,7 @@ msgid "Configure Message"
 msgstr "Configuration du message"
 
 #: plugins/message/common/messagePlugin.class.php:58
+#: www/include/Layout.class.php:1325
 msgid "Close"
 msgstr "Fermer"
 
@@ -17493,6 +17494,18 @@ msgstr "fr"
 #: www/include/Layout.class.php:699
 msgid "Quick Jump To..."
 msgstr "Saut rapide vers..."
+
+#: www/include/Layout.class.php:1327
+msgid "Maximize"
+msgstr ""
+
+#: www/include/Layout.class.php:1329
+msgid "Minimize"
+msgstr ""
+
+#: www/include/Layout.class.php:1358
+msgid "Spinner"
+msgstr ""
 
 #: www/include/Layout.class.php:1387
 msgid "Browse per tags defined by the projects."

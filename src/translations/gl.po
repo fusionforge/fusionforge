@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-20 14:54+0100\n"
+"POT-Creation-Date: 2013-11-20 17:39+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -12242,6 +12242,7 @@ msgid "Configure Message"
 msgstr "Configurar os roles permitidos"
 
 #: plugins/message/common/messagePlugin.class.php:58
+#: www/include/Layout.class.php:1325
 #, fuzzy
 msgid "Close"
 msgstr "Pechado "
@@ -18276,6 +18277,18 @@ msgstr "gl_ES "
 #: www/include/Layout.class.php:699
 msgid "Quick Jump To..."
 msgstr "Salto rápido a..."
+
+#: www/include/Layout.class.php:1327
+msgid "Maximize"
+msgstr ""
+
+#: www/include/Layout.class.php:1329
+msgid "Minimize"
+msgstr ""
+
+#: www/include/Layout.class.php:1358
+msgid "Spinner"
+msgstr ""
 
 #: www/include/Layout.class.php:1387
 #, fuzzy

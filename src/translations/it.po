@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-20 14:54+0100\n"
+"POT-Creation-Date: 2013-11-20 17:39+0100\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -12182,6 +12182,7 @@ msgid "Configure Message"
 msgstr "Gestione configurazioni"
 
 #: plugins/message/common/messagePlugin.class.php:58
+#: www/include/Layout.class.php:1325
 #, fuzzy
 msgid "Close"
 msgstr "chiuso"
@@ -18105,6 +18106,18 @@ msgstr "it"
 
 #: www/include/Layout.class.php:699
 msgid "Quick Jump To..."
+msgstr ""
+
+#: www/include/Layout.class.php:1327
+msgid "Maximize"
+msgstr ""
+
+#: www/include/Layout.class.php:1329
+msgid "Minimize"
+msgstr ""
+
+#: www/include/Layout.class.php:1358
+msgid "Spinner"
 msgstr ""
 
 #: www/include/Layout.class.php:1387
