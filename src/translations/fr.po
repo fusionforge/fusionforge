@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-20 17:39+0100\n"
+"POT-Creation-Date: 2013-11-20 18:41+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1693,9 +1693,9 @@ msgstr "Date de début"
 #: www/include/user_profile.php:68 www/include/user_profile.php:126
 #: www/include/user_profile.php:133 www/include/user_profile.php:144
 #: www/include/user_profile.php:152 www/mail/admin/index.php:192
-#: www/mail/admin/index.php:225 www/my/bookmark_add.php:48
-#: www/my/bookmark_add.php:54 www/my/bookmark_edit.php:60
-#: www/my/bookmark_edit.php:66 www/my/diary.php:181 www/my/diary.php:185
+#: www/mail/admin/index.php:225 www/my/bookmark_add.php:47
+#: www/my/bookmark_add.php:53 www/my/bookmark_edit.php:59
+#: www/my/bookmark_edit.php:65 www/my/diary.php:181 www/my/diary.php:185
 #: www/news/admin/index.php:125 www/people/admin/index.php:99
 #: www/people/admin/index.php:133 www/people/createjob.php:52
 #: www/people/createjob.php:55 www/people/editjob.php:169
@@ -4949,7 +4949,7 @@ msgstr "Texte libre pour la page de navigation"
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:247
 #: www/admin/index.php:169 www/admin/pending-news.php:160
 #: www/forum/admin/index.php:412 www/include/vote_function.php:286
-#: www/my/bookmark_add.php:58 www/my/diary.php:189
+#: www/my/bookmark_add.php:57 www/my/bookmark_edit.php:69 www/my/diary.php:189
 #: www/news/admin/index.php:149 www/news/news_utils.php:42
 #: www/news/submit.php:170 www/pm/add_task.php:57 www/pm/add_task.php:140
 #: www/pm/add_task.php:154 www/pm/admin/index.php:219
@@ -14017,7 +14017,7 @@ msgstr ""
 
 #: www/account/change_email-complete.php:69 www/account/change_email.php:94
 #: www/account/lostpw.php:99 www/account/unsubscribe.php:76
-#: www/my/bookmark_edit.php:74
+#: www/my/bookmark_edit.php:73
 msgid "Return"
 msgstr "Retour"
 
@@ -17398,7 +17398,7 @@ msgstr "Problème d'accès au projet : %s"
 msgid "Project Problem: %s"
 msgstr "Problème dans le projet : %s"
 
-#: www/include/html.php:979 www/my/bookmark_add.php:28
+#: www/include/html.php:979
 msgid "My Personal Page"
 msgstr "Ma page personnelle"
 
@@ -18162,7 +18162,11 @@ msgstr "S'abonner/Se désabonner/Préférences"
 msgid "View Lists"
 msgstr "Voir les listes"
 
-#: www/my/bookmark_add.php:35
+#: www/my/bookmark_add.php:27
+msgid "Add a new Bookmark"
+msgstr "Ajouter un favori"
+
+#: www/my/bookmark_add.php:34
 #, php-format
 msgid ""
 "Added bookmark for <strong>%1$s</strong> with title <strong>%2$s</strong>"
@@ -18170,35 +18174,35 @@ msgstr ""
 "Ajouter <strong>%1$s</strong> aux favoris, avec pour titre <strong>%2$s</"
 "strong>"
 
-#: www/my/bookmark_add.php:40
+#: www/my/bookmark_add.php:39
 msgid "Visit the bookmarked page"
 msgstr "Visiter la page favorite"
 
-#: www/my/bookmark_add.php:41
+#: www/my/bookmark_add.php:40
 msgid "Back to your homepage"
 msgstr "Retour à votre page personnelle"
 
-#: www/my/bookmark_add.php:48 www/my/bookmark_edit.php:60
+#: www/my/bookmark_add.php:47 www/my/bookmark_edit.php:59
 msgid "Bookmark URL"
 msgstr "Adresse du favori"
 
-#: www/my/bookmark_add.php:54 www/my/bookmark_edit.php:66
+#: www/my/bookmark_add.php:53 www/my/bookmark_edit.php:65
 msgid "Bookmark Title"
 msgstr "Titre du favori"
 
-#: www/my/bookmark_edit.php:30
+#: www/my/bookmark_edit.php:29
 msgid "Bookmark ID"
 msgstr "Identifiant du favori"
 
-#: www/my/bookmark_edit.php:38
+#: www/my/bookmark_edit.php:37
 msgid "Bookmark Updated"
 msgstr "Favori mis à jour"
 
-#: www/my/bookmark_edit.php:40
+#: www/my/bookmark_edit.php:39
 msgid "Failed to update bookmark."
 msgstr "Impossible de mettre à jour le favori."
 
-#: www/my/bookmark_edit.php:44
+#: www/my/bookmark_edit.php:43
 msgid "Edit Bookmark"
 msgstr "Édition d'un favori"
 
