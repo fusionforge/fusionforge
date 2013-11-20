@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-20 14:54+0100\n"
+"POT-Creation-Date: 2013-11-20 16:56+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -7105,28 +7105,24 @@ msgid "submitted by me [S]"
 msgstr "soumis par moi [S]"
 
 #: common/widget/Widget_MyArtifacts.class.php:102
-#, fuzzy
 msgid "monitored by me [M]"
-msgstr "soumis par moi [S]"
+msgstr "surveillés par moi [M]"
 
 #: common/widget/Widget_MyArtifacts.class.php:103
 msgid "assigned to or submitted by me [AS]"
 msgstr "soumis par moi, ou affectés à moi [AS]"
 
 #: common/widget/Widget_MyArtifacts.class.php:104
-#, fuzzy
 msgid "assigned to or monitored by me [AM]"
-msgstr "soumis par moi, ou affectés à moi [AS]"
+msgstr "soumis par moi, ou affectés à moi [AM]"
 
 #: common/widget/Widget_MyArtifacts.class.php:105
-#, fuzzy
 msgid "submitted by or monitored by me [SM]"
-msgstr "soumis par moi [S]"
+msgstr "soumis ou surveillés par moi [SM]"
 
 #: common/widget/Widget_MyArtifacts.class.php:106
-#, fuzzy
 msgid "assigned to or submitted by or monitored by me [ASM]"
-msgstr "soumis par moi, ou affectés à moi [AS]"
+msgstr "soumis ou surveillés par moi, ou affectés à moi [ASM]"
 
 #: common/widget/Widget_MyArtifacts.class.php:107
 msgid "Display artifacts:"
@@ -7138,15 +7134,13 @@ msgstr "Vous n'avez pas d'éléments"
 
 #: common/widget/Widget_MyArtifacts.class.php:201
 #: common/widget/Widget_MyArtifacts.class.php:278
-#, fuzzy
 msgid "Browse Trackers List for this project"
-msgstr "Quitter ce projet ?"
+msgstr "Naviguer dans la liste des traceurs de ce projet"
 
 #: common/widget/Widget_MyArtifacts.class.php:203
 #: common/widget/Widget_MyArtifacts.class.php:280
-#, fuzzy
 msgid "Browse this tracker for this project"
-msgstr "Vous n'êtes pas membre de ce projet."
+msgstr "Naviguer dans ce traceur du projet"
 
 #: common/widget/Widget_MyArtifacts.class.php:241
 msgid "Assigned"
@@ -7161,18 +7155,16 @@ msgid "Monitored"
 msgstr "Surveillé"
 
 #: common/widget/Widget_MyArtifacts.class.php:263
-#, fuzzy
 msgid "Browse this artefact"
-msgstr "Quitter ce projet ?"
+msgstr "Naviguer dans cet artifact"
 
 #: common/widget/Widget_MyArtifacts.class.php:295
-#, fuzzy
 msgid ""
 "List artifacts you have submitted or assigned to you or you are monitoring, "
 "by project."
 msgstr ""
-"Liste des artefacts que vous avez soumis ou qui vous sont affectés, par "
-"projet."
+"Liste des artefacts que vous avez soumis, que vous surveillez ou qui vous "
+"sont affectés, par projet."
 
 #: common/widget/Widget_MyBookmarks.class.php:36
 msgid "My Bookmarks"
@@ -7368,12 +7360,10 @@ msgid "Private project"
 msgstr "Projet privé"
 
 #: common/widget/Widget_MyProjects.class.php:109
-#, fuzzy
 msgid "MyProjects"
 msgstr "Mes projets"
 
 #: common/widget/Widget_MyProjects.class.php:110
-#, fuzzy
 msgid "My projects"
 msgstr "Mes projets"
 
@@ -7414,9 +7404,9 @@ msgid "There are no surveys in your projects."
 msgstr "Il n'y a pas de sondage dans vos projets."
 
 #: common/widget/Widget_MySurveys.class.php:131
-#, fuzzy, php-format
+#, php-format
 msgid "%d new"
-msgstr "%s nouveaux"
+msgstr "%d nouveaux"
 
 #: common/widget/Widget_MySurveys.class.php:140
 msgid "Quick Survey"
@@ -7424,24 +7414,23 @@ msgstr "Sondage rapide"
 
 #: common/widget/Widget_MySurveys.class.php:148
 msgid "List the surveys in your projects."
-msgstr "Il n'y a pas de sondages dans vos projets."
+msgstr "Liste des sondages dans vos projets."
 
 #: common/widget/Widget_MySurveys.class.php:158
 msgid "answered [A]"
-msgstr ""
+msgstr "répondu [A]"
 
 #: common/widget/Widget_MySurveys.class.php:159
 msgid "not yet answered [N]"
-msgstr ""
+msgstr "pas encore répondu [N]"
 
 #: common/widget/Widget_MySurveys.class.php:160
 msgid "any status [AN]"
-msgstr ""
+msgstr "pas d'état [AN]"
 
 #: common/widget/Widget_MySurveys.class.php:161
-#, fuzzy
 msgid "Display surveys:"
-msgstr "Afficher l'arbre des projets"
+msgstr "Afficher les sondages :"
 
 #: common/widget/Widget_MyTasks.class.php:124
 msgid "No task yet"
@@ -7481,19 +7470,19 @@ msgstr "nouveaux dossiers [D]"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:90
 msgid "updated files [U]"
-msgstr ""
+msgstr "fichiers mis à jour [U]"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:91
 msgid "new and update Files [FU]"
-msgstr ""
+msgstr "nouveaux fichiers et fichiers mis à jour [FU]"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:92
 msgid "new files and directories [FD]"
-msgstr ""
+msgstr "nouveaux fichiers et dossiers [FD]"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:93
 msgid "new and update files and directories [FUD]"
-msgstr ""
+msgstr "nouveaux fichiers et dossiers et fichiers et dossiers mis à jour [FUD]"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:94
 msgid "Display statistics:"
@@ -8705,9 +8694,8 @@ msgid "[View All Contributions]"
 msgstr "[Voir toutes les contributions]"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:175
-#, fuzzy
 msgid "Edit actors and roles"
-msgstr "Modifier le rôle"
+msgstr "Modifier les acteurs et les rôles"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:175
 #, fuzzy
@@ -9360,9 +9348,8 @@ msgid "Error: Attachment not found"
 msgstr "Erreur : pièce jointe introuvable"
 
 #: plugins/forumml/www/upload.php:85
-#, fuzzy
 msgid "Error: Missing parameter"
-msgstr "Erreur : paramètre manquant "
+msgstr "Erreur : paramètre manquant"
 
 #: plugins/globaldashboard/include/globalDashboard_utils.php:42
 msgid "Manage Remote Accounts"
@@ -9405,18 +9392,16 @@ msgid "You can add remote accounts ONLY for yourself !!!"
 msgstr ""
 
 #: plugins/globaldashboard/www/admin/add_account.php:70
-#, fuzzy
 msgid "Remote Account successfully created"
-msgstr "Élément %s créé avec succès"
+msgstr "Compte distant créé avec succès"
 
 #: plugins/globaldashboard/www/admin/delete_account.php:31
 msgid "You can remove only YOUR remote accounts !!!"
 msgstr ""
 
 #: plugins/globaldashboard/www/admin/delete_account.php:39
-#, fuzzy
 msgid "Remote Account successfully deleted"
-msgstr "Projet supprimé avec succès"
+msgstr "Compte distant supprimé avec succès"
 
 #: plugins/globaldashboard/www/admin/delete_account.php:41
 msgid "Unable to delete remote account: "
@@ -9521,9 +9506,8 @@ msgid "Stored remote accounts"
 msgstr ""
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:80
-#, fuzzy
 msgid "Remote site"
-msgstr "Supprimer ce filtre"
+msgstr "Site distant"
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:80
 msgid "User account URL"
@@ -9671,9 +9655,8 @@ msgid "Admin Associated Forges"
 msgstr "Gérer les forges partenaires"
 
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:38
-#, fuzzy
 msgid "Global Search plugin"
-msgstr "Recherche globale"
+msgstr "Greffon de recherche globale"
 
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:40
 msgid "Associated Forges"
@@ -10279,14 +10262,12 @@ msgid "Weather Report:"
 msgstr "Bulletin météo :"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:348
-#, fuzzy
 msgid "Hudson access"
-msgstr "Aucun accès"
+msgstr "Accès Hudson"
 
 #: plugins/hudson/include/hudsonPlugin.class.php:350
-#, fuzzy
 msgid "Full access"
-msgstr "Aucun accès"
+msgstr "Accès total"
 
 #: plugins/hudson/include/hudsonPluginDescriptor.class.php:26
 msgid "Continuous Integration"
@@ -10503,7 +10484,7 @@ msgid "%1$s Test Results (%2$s / %3$s)"
 msgstr "Résultats des tests de %1$s (%2$s / %3$s)"
 
 #: plugins/hudson/include/hudson_Widget_JobTestResults.class.php:50
-#, fuzzy, php-format
+#, php-format
 msgid "%s Test Results"
 msgstr "Résultats des tests de %s"
 
@@ -10599,7 +10580,6 @@ msgid "Error On Query:"
 msgstr "Erreur lors de la mise à jour :"
 
 #: plugins/mailman/include/MailmanList.class.php:435
-#, fuzzy
 msgid "Missing params"
 msgstr "Il manque des paramètres"
 
@@ -10612,9 +10592,8 @@ msgid "View Personal mailman"
 msgstr "Voir le mailman personnel"
 
 #: plugins/mailman/include/mailmanPlugin.class.php:146
-#, fuzzy
 msgid "View the mailman Administration"
-msgstr "Voir l'administration du calendrier"
+msgstr "Voir l'administration de mailman"
 
 #: plugins/mailman/include/mailmanPlugin.class.php:153
 #: www/admin/globalroleedit.php:149 www/admin/globalroleedit.php:164
@@ -11566,9 +11545,9 @@ msgid "Image size is %dx%d pixels, expected %dx%d instead"
 msgstr "La taille de l'image est de %dx%d pixels, au lieu des %dx%d attendus."
 
 #: plugins/mediawiki/www/plugin_admin.php:46
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot copy file to target directory %s"
-msgstr "Le fichier ne peut pas être copié vers sa destination"
+msgstr "Le fichier ne peut pas être copié vers sa destination %s"
 
 #: plugins/mediawiki/www/plugin_admin.php:49
 msgid "Cannot overwrite existing file"
@@ -15906,9 +15885,8 @@ msgid ""
 msgstr ""
 
 #: www/admin/useredit.php:93
-#, fuzzy
 msgid "Added Successfully to project "
-msgstr "Ajouter un label au projet"
+msgstr "Ajouté au projet avec succès "
 
 #: www/admin/useredit.php:117
 msgid "Site Admin: User Info"
@@ -18656,7 +18634,7 @@ msgstr ""
 #: www/people/editjob.php:152
 #, fuzzy, php-format
 msgid "Posting fetch failed: %s"
-msgstr "L'insertion du poste a échoué : %s"
+msgstr "La récupération de l'affectation a échoué : %s"
 
 #: www/people/editjob.php:153
 msgid "No such posting for this project"
@@ -19083,7 +19061,7 @@ msgstr "Erreur lors de la création d'un objet ProjectCategory"
 
 #: www/pm/admin/index.php:80
 msgid "Subproject Inserted"
-msgstr "Sous-projet ajouté."
+msgstr "Sous-projet ajouté"
 
 #: www/pm/admin/index.php:122
 msgid "Category Updated"
