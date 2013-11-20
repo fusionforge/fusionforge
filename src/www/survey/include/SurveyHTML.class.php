@@ -452,7 +452,7 @@ class SurveyHTML extends Error {
 
 		$ret.= $GLOBALS['HTML']->listTableBottom();
 		if ($displaycount == 0) {
-			return '<p class="information">' . (_('No Survey is found')) . '</p>';
+			return '<p class="information">'._('No Survey is found').'</p>';
 		}
 		return $ret;
 	}
@@ -460,12 +460,12 @@ class SurveyHTML extends Error {
 	/**
 	 * Show survey form - Show all forums of Survey
 	 */
-	function showSurveyForm( &$s ) {
+	function showSurveyForm(&$s) {
 		global $group_id;
 		global $survey_id;
 
 		if (!$s->isActive()) {
-			return '<div class="error">'. _('Error: you cannot vote for inactive survey').'</div>';
+			return '<p class="error">'. _('Error: you cannot vote for inactive survey').'</p>';
 		}
 		/* Get questions of this survey */
 		$questions = & $s->getQuestionInstances();
