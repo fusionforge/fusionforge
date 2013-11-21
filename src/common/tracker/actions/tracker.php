@@ -46,7 +46,7 @@ if ($ath->isError()) {
 switch (getStringFromRequest('func')) {
 
 	case 'add' : {
-		if (!forge_check_perm ('tracker',$ath->getID(),'submit')) {
+		if (!forge_check_perm ('tracker', $ath->getID(), 'submit')) {
 			exit_permission_denied('tracker');
 		}
 		include $gfcommon.'tracker/actions/add.php';
@@ -502,7 +502,7 @@ switch (getStringFromRequest('func')) {
 			}
 			else {
 				if (!$ah->delete(true)) {
-					$error_msg .= _('Delete Failed')._(': ').$ah->getErrorMessage();
+					$error_msg .= _('Delete failed')._(': ').$ah->getErrorMessage();
 				} else {
 					$feedback .= _('Artifact Deleted Successfully');
 				}

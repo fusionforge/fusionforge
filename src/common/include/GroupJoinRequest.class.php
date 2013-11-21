@@ -295,7 +295,7 @@ class GroupJoinRequest extends Error {
 				array($this->Group->getID(),
 					$this->getUserId()));
 			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError(_('Could Not Delete: ').db_error());
+				$this->setError(_('Delete failed')._(': ').db_error());
                 return false;
 			} else {
 				return true;

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 17:54+0100\n"
+"POT-Creation-Date: 2013-11-21 18:16+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -230,6 +230,7 @@ msgstr "Имя файла"
 #: common/forum/ForumMessage.class.php:666 common/include/Error.class.php:206
 #: common/include/exit.php:80 common/include/Group.class.php:2625
 #: common/include/Group.class.php:2626 common/include/Group.class.php:2627
+#: common/include/GroupJoinRequest.class.php:298
 #: common/include/User.class.php:350 common/include/User.class.php:436
 #: common/include/User.class.php:1410 common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:103
@@ -334,6 +335,7 @@ msgstr "Имя файла"
 #: www/pm/mod_task.php:173 www/pm/mod_task.php:183 www/pm/mod_task.php:197
 #: www/pm/mod_task.php:202 www/pm/mod_task.php:212 www/pm/mod_task.php:323
 #: www/project/admin/roledelete.php:62 www/register/index.php:188
+#: www/reporting/timeadd.php:70
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:101
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
@@ -2190,8 +2192,9 @@ msgstr[1] "%s удалено сообщений"
 msgstr[2] "%s удаленных сообщений"
 
 #: common/forum/ForumAdmin.class.php:261 www/reporting/timeadd.php:67
-msgid "Successfully Deleted"
-msgstr "Сообщение удалено"
+#: www/tracker/admin/index.php:238
+msgid "Successfully Deleted."
+msgstr "Успешно удалено."
 
 #: common/forum/ForumAdmin.class.php:286
 msgid "No forums are moderated for this group"
@@ -3582,9 +3585,12 @@ msgid "Must be sure before deleting"
 msgstr ""
 
 #: common/include/GroupJoinRequest.class.php:298
-#, fuzzy
-msgid "Could Not Delete: "
-msgstr "Невозможно удаление новостей форма: %d"
+#: common/survey/Survey.class.php:240
+#: common/survey/SurveyQuestion.class.php:170
+#: common/tracker/actions/tracker.php:505 www/pm/task.php:354
+#: www/reporting/timeadd.php:70 www/survey/admin/question.php:75
+msgid "Delete failed"
+msgstr "Ошибка удаления"
 
 #: common/include/group_section_texts.php:29
 #: common/include/Navigation.class.php:425
@@ -5009,12 +5015,6 @@ msgstr "Требуется указать вопросы"
 msgid "The Survey data is not filled"
 msgstr "Данные об опросе не заполнены"
 
-#: common/survey/Survey.class.php:240
-#: common/survey/SurveyQuestion.class.php:170 www/pm/task.php:354
-#: www/survey/admin/question.php:75
-msgid "Delete failed"
-msgstr "Ошибка удаления"
-
 #: common/survey/Survey.class.php:262 common/survey/SurveyFactory.class.php:94
 #: www/survey/admin/survey.php:100 www/survey/include/SurveyHTML.class.php:455
 #: www/survey/index.php:56
@@ -6199,11 +6199,6 @@ msgstr "Оповещение о изменениях в этом трекере 
 #: common/tracker/actions/tracker.php:501
 msgid "Confirmation failed. Artifact not deleted"
 msgstr "Ошибка при подтверждении удаления образца"
-
-#: common/tracker/actions/tracker.php:505
-#, fuzzy
-msgid "Delete Failed"
-msgstr "Удаление образца блокировано"
 
 #: common/tracker/actions/tracker.php:507
 msgid "Artifact Deleted Successfully"
@@ -20767,9 +20762,8 @@ msgid "Task Successfully Deleted"
 msgstr "Задача успешно удалена"
 
 #: www/pm/t_follow.php:36
-#, fuzzy
 msgid "TID"
-msgstr "<small><u>категория</u> :</small>"
+msgstr ""
 
 #: www/pm/t_follow.php:42
 msgid "no task with id :"
@@ -21946,11 +21940,6 @@ msgstr "Нажимать ТОЛЬКО ОДИН РАЗ"
 #: www/reporting/sitetimebar.php:60 www/reporting/sitetime.php:62
 msgid "Site-Wide Time Tracking"
 msgstr "Прослеживание времени всего сайта"
-
-#: www/reporting/timeadd.php:70
-#, fuzzy
-msgid "Internal error: delete: "
-msgstr "Ошибка вставки"
 
 #: www/reporting/timeadd.php:121
 #, php-format
@@ -23627,10 +23616,6 @@ msgstr "Сейчас вы удалите этот документ безвоз�
 #, fuzzy
 msgid "Canned Response Deleted"
 msgstr "Полученый ответ вставлен"
-
-#: www/tracker/admin/index.php:238
-msgid "Successfully Deleted."
-msgstr "Успешно удалено."
 
 #: www/tracker/download.php:56
 #, fuzzy

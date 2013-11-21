@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 17:54+0100\n"
+"POT-Creation-Date: 2013-11-21 18:16+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -219,6 +219,7 @@ msgstr ""
 #: common/forum/ForumMessage.class.php:666 common/include/Error.class.php:206
 #: common/include/exit.php:80 common/include/Group.class.php:2625
 #: common/include/Group.class.php:2626 common/include/Group.class.php:2627
+#: common/include/GroupJoinRequest.class.php:298
 #: common/include/User.class.php:350 common/include/User.class.php:436
 #: common/include/User.class.php:1410 common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:103
@@ -323,6 +324,7 @@ msgstr ""
 #: www/pm/mod_task.php:173 www/pm/mod_task.php:183 www/pm/mod_task.php:197
 #: www/pm/mod_task.php:202 www/pm/mod_task.php:212 www/pm/mod_task.php:323
 #: www/project/admin/roledelete.php:62 www/register/index.php:188
+#: www/reporting/timeadd.php:70
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:101
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
@@ -2111,8 +2113,9 @@ msgstr[0] "%s mensaje borrado"
 msgstr[1] "%s mensajes borrados"
 
 #: common/forum/ForumAdmin.class.php:261 www/reporting/timeadd.php:67
-msgid "Successfully Deleted"
-msgstr "Eliminado con éxito"
+#: www/tracker/admin/index.php:238
+msgid "Successfully Deleted."
+msgstr "Eliminado con éxito."
 
 #: common/forum/ForumAdmin.class.php:286
 msgid "No forums are moderated for this group"
@@ -3493,9 +3496,12 @@ msgid "Must be sure before deleting"
 msgstr ""
 
 #: common/include/GroupJoinRequest.class.php:298
-#, fuzzy
-msgid "Could Not Delete: "
-msgstr "No se pudo borrar el foro de noticias: %d"
+#: common/survey/Survey.class.php:240
+#: common/survey/SurveyQuestion.class.php:170
+#: common/tracker/actions/tracker.php:505 www/pm/task.php:354
+#: www/reporting/timeadd.php:70 www/survey/admin/question.php:75
+msgid "Delete failed"
+msgstr "Falló el borrado de la tarea."
 
 #: common/include/group_section_texts.php:29
 #: common/include/Navigation.class.php:425
@@ -4871,12 +4877,6 @@ msgstr "Falló Actualización: Preguntas Encuesta Necesarias"
 msgid "The Survey data is not filled"
 msgstr "No se rellenaron los datos de la encuesta"
 
-#: common/survey/Survey.class.php:240
-#: common/survey/SurveyQuestion.class.php:170 www/pm/task.php:354
-#: www/survey/admin/question.php:75
-msgid "Delete failed"
-msgstr "Falló el borrado de la tarea."
-
 #: common/survey/Survey.class.php:262 common/survey/SurveyFactory.class.php:94
 #: www/survey/admin/survey.php:100 www/survey/include/SurveyHTML.class.php:455
 #: www/survey/index.php:56
@@ -6035,10 +6035,6 @@ msgstr "Monitorización Desactivada"
 #: common/tracker/actions/tracker.php:501
 msgid "Confirmation failed. Artifact not deleted"
 msgstr "Falló la confirmación. Registro no borrado."
-
-#: common/tracker/actions/tracker.php:505
-msgid "Delete Failed"
-msgstr "Falló el borrado"
 
 #: common/tracker/actions/tracker.php:507
 msgid "Artifact Deleted Successfully"
@@ -21127,11 +21123,6 @@ msgstr "Haga click una ÚNICA VEZ"
 msgid "Site-Wide Time Tracking"
 msgstr "Seguimiento temportal del todo el sistema"
 
-#: www/reporting/timeadd.php:70
-#, fuzzy
-msgid "Internal error: delete: "
-msgstr "Enlaza rol externo"
-
 #: www/reporting/timeadd.php:121
 #, php-format
 msgid "Time Entries For The Week Starting %s"
@@ -22798,10 +22789,6 @@ msgstr "Está a punto de borrar la respuesta"
 msgid "Canned Response Deleted"
 msgstr "Respueta Borrada"
 
-#: www/tracker/admin/index.php:238
-msgid "Successfully Deleted."
-msgstr "Eliminado con éxito."
-
 #: www/tracker/download.php:56
 msgid "ArtifactFile Could Not Be Created"
 msgstr "Fichero Artifact no pudo ser creado"
@@ -22958,9 +22945,6 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
-
-#~ msgid "%s new items"
-#~ msgstr "%s nuevos elementos"
 
 #~ msgid "Comments: "
 #~ msgstr "Seguimientos: "

@@ -258,7 +258,7 @@ class ForumAdmin extends Error {
 			if (!$f->delete(getStringFromRequest('sure'),getStringFromRequest('really_sure'))) {
 				exit_error($f->getErrorMessage(),'forums');
 			} else {
-				$feedback = _('Successfully Deleted');
+				$feedback = _('Successfully Deleted.');
 			}
 			return $feedback;
 		}

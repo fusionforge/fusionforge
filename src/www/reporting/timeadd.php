@@ -64,10 +64,10 @@ if (getStringFromRequest('submit')) {
 			if (!$res || db_affected_rows($res) < 1) {
 				exit_error(db_error());
 			} else {
-				$feedback=_('Successfully Deleted');
+				$feedback=_('Successfully Deleted.');
 			}
 		} else {
-			$error_msg = _('Internal error: delete: ').$project_task_id.' && '.$report_date.' && '.$old_time_code;
+			$error_msg = _('Delete failed')._(': ').$project_task_id.' && '.$report_date.' && '.$old_time_code;
 		}
 
 	} elseif (getStringFromRequest('add')) {

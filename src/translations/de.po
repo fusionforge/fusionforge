@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 17:54+0100\n"
+"POT-Creation-Date: 2013-11-21 18:16+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -227,6 +227,7 @@ msgstr ""
 #: common/forum/ForumMessage.class.php:666 common/include/Error.class.php:206
 #: common/include/exit.php:80 common/include/Group.class.php:2625
 #: common/include/Group.class.php:2626 common/include/Group.class.php:2627
+#: common/include/GroupJoinRequest.class.php:298
 #: common/include/User.class.php:350 common/include/User.class.php:436
 #: common/include/User.class.php:1410 common/mail/MailingList.class.php:174
 #: common/mail/MailingListFactory.class.php:103
@@ -331,6 +332,7 @@ msgstr ""
 #: www/pm/mod_task.php:173 www/pm/mod_task.php:183 www/pm/mod_task.php:197
 #: www/pm/mod_task.php:202 www/pm/mod_task.php:212 www/pm/mod_task.php:323
 #: www/project/admin/roledelete.php:62 www/register/index.php:188
+#: www/reporting/timeadd.php:70
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:101
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
@@ -2177,8 +2179,9 @@ msgstr[0] "%s Nachricht gelöscht"
 msgstr[1] "%s Nachrichten gelöscht"
 
 #: common/forum/ForumAdmin.class.php:261 www/reporting/timeadd.php:67
-msgid "Successfully Deleted"
-msgstr "Erfolgreich gelöscht"
+#: www/tracker/admin/index.php:238
+msgid "Successfully Deleted."
+msgstr "Erfolgreich gelöscht."
 
 #: common/forum/ForumAdmin.class.php:286
 msgid "No forums are moderated for this group"
@@ -3592,9 +3595,12 @@ msgid "Must be sure before deleting"
 msgstr ""
 
 #: common/include/GroupJoinRequest.class.php:298
-#, fuzzy
-msgid "Could Not Delete: "
-msgstr "Konnte News Forum: %d nicht löschen"
+#: common/survey/Survey.class.php:240
+#: common/survey/SurveyQuestion.class.php:170
+#: common/tracker/actions/tracker.php:505 www/pm/task.php:354
+#: www/reporting/timeadd.php:70 www/survey/admin/question.php:75
+msgid "Delete failed"
+msgstr "Löschen fehlgeschlagen"
 
 #: common/include/group_section_texts.php:29
 #: common/include/Navigation.class.php:425
@@ -5000,12 +5006,6 @@ msgstr "UPDATE FEHLGESCHLAGEN: Umfragefragen werden benötigt"
 msgid "The Survey data is not filled"
 msgstr "Die Umfrageangaben sind nicht ausgefüllt"
 
-#: common/survey/Survey.class.php:240
-#: common/survey/SurveyQuestion.class.php:170 www/pm/task.php:354
-#: www/survey/admin/question.php:75
-msgid "Delete failed"
-msgstr "Löschen fehlgeschlagen"
-
 #: common/survey/Survey.class.php:262 common/survey/SurveyFactory.class.php:94
 #: www/survey/admin/survey.php:100 www/survey/include/SurveyHTML.class.php:455
 #: www/survey/index.php:56
@@ -6185,10 +6185,6 @@ msgstr "Überwachung deaktiviert"
 #: common/tracker/actions/tracker.php:501
 msgid "Confirmation failed. Artifact not deleted"
 msgstr "Bestätigung fehlgeschlagen. Produkt wurde nicht gelöscht"
-
-#: common/tracker/actions/tracker.php:505
-msgid "Delete Failed"
-msgstr "Löschen fehlgeschlagen"
 
 #: common/tracker/actions/tracker.php:507
 msgid "Artifact Deleted Successfully"
@@ -21789,11 +21785,6 @@ msgstr "NUR EINMAL DRÜCKEN"
 msgid "Site-Wide Time Tracking"
 msgstr "Seitenübergreifende Zeitverfolgung"
 
-#: www/reporting/timeadd.php:70
-#, fuzzy
-msgid "Internal error: delete: "
-msgstr "Fehler einfügen"
-
 #: www/reporting/timeadd.php:121
 #, php-format
 msgid "Time Entries For The Week Starting %s"
@@ -23480,10 +23471,6 @@ msgstr "Sie sind dabei dieses Dokument permanent zu löschen."
 #, fuzzy
 msgid "Canned Response Deleted"
 msgstr "Vorgespeicherte Antwort eingefügt"
-
-#: www/tracker/admin/index.php:238
-msgid "Successfully Deleted."
-msgstr "Erfolgreich gelöscht."
 
 #: www/tracker/download.php:56
 #, fuzzy
