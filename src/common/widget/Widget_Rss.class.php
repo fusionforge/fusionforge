@@ -89,16 +89,32 @@ require_once 'Widget.class.php';
 	}
 	function getPreferences() {
 		$hp = Codendi_HTMLPurifier::instance();
-		$prefs  = '';
-		$prefs .= '<table><tr><td>Title:</td><td><input type="text" class="textfield_medium" name="rss[title]" value="'. $hp->purify($this->rss_title, CODENDI_PURIFIER_CONVERT_HTML) .'" /></td></tr>';
-		$prefs .= '<tr><td>Url:</td><td><input type="text" class="textfield_medium" name="rss[url]" value="'. $hp->purify($this->rss_url, CODENDI_PURIFIER_CONVERT_HTML) .'" /></td></tr>';
+		$prefs = '<table>';
+		$prefs .= '<tr>';
+		$prefs .= '<td>';
+		$prefs .= _('Title')._(':');
+		$prefs .= '</td>';
+		$prefs .= '<td>';
+		$prefs .= '<input type="text" class="textfield_medium" name="rss[title]" value="'. $hp->purify($this->rss_title, CODENDI_PURIFIER_CONVERT_HTML) .'" /></td></tr>';
+		$prefs .= '<tr>';
+		$prefs .= '<td>';
+		$prefs .= 'URL'._(':');
+		$prefs .= '</td>';
+		$prefs .= '<td>';
+		$prefs .= '<input type="url" class="textfield_medium" name="rss[url]" value="'. $hp->purify($this->rss_url, CODENDI_PURIFIER_CONVERT_HTML) .'" /></td></tr>';
 		$prefs .= '</table>';
 		return $prefs;
 	}
 	function getInstallPreferences() {
-		$prefs  = '';
-		$prefs .= '<table>';
-		$prefs .= '<tr><td>URL:</td><td><input type="text" class="textfield_medium" name="rss[url]" value="'. _("http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1") .'" /></td></tr>';
+		$prefs = '<table>';
+		$prefs .= '<tr>';
+		$prefs .= '<td>';
+		$prefs .= 'URL'._(':');
+		$prefs .= '</td>';
+		$prefs .= '<td>';
+		$prefs .= '<input type="url" class="textfield_medium" name="rss[url]" value="http://search.twitter.com/search.atom?q=alcatel-lucent&amp;show_user=1" />';
+		$prefs .= '</td>';
+		$prefs .= '</tr>';
 		$prefs .= '</table>';
 		return $prefs;
 	}
