@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:51+0100\n"
+"POT-Creation-Date: 2013-11-21 19:03+0100\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9414,6 +9414,7 @@ msgid "Subproject URL"
 msgstr "Rubrik:"
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:41
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:227
 #: www/trove/admin/trove_cat_edit.php:93
 #, fuzzy
 msgid "delete"
@@ -9953,13 +9954,8 @@ msgid "Forge ID"
 msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:226
-msgid "[edit]"
+msgid "edit"
 msgstr ""
-
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:227
-#, fuzzy
-msgid "[delete]"
-msgstr "Ta bort"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:246
 #, fuzzy
@@ -23228,6 +23224,10 @@ msgstr "Användarenamn"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
+
+#, fuzzy
+#~ msgid "[delete]"
+#~ msgstr "Ta bort"
 
 #, fuzzy
 #~ msgid "Comments: "

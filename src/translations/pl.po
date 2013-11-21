@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:51+0100\n"
+"POT-Creation-Date: 2013-11-21 19:03+0100\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9020,6 +9020,7 @@ msgid "Subproject URL"
 msgstr "Nazwa nowej grupy"
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:41
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:227
 #: www/trove/admin/trove_cat_edit.php:93
 msgid "delete"
 msgstr ""
@@ -9520,11 +9521,7 @@ msgid "Forge ID"
 msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:226
-msgid "[edit]"
-msgstr ""
-
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:227
-msgid "[delete]"
+msgid "edit"
 msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:246

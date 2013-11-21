@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:51+0100\n"
+"POT-Creation-Date: 2013-11-21 19:03+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -9477,6 +9477,7 @@ msgid "Subproject URL"
 msgstr "Unterprojekt"
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:41
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:227
 #: www/trove/admin/trove_cat_edit.php:93
 #, fuzzy
 msgid "delete"
@@ -10018,12 +10019,9 @@ msgid "Forge ID"
 msgstr "Forge ID"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:226
-msgid "[edit]"
+#, fuzzy
+msgid "edit"
 msgstr "[Bearbeiten]"
-
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:227
-msgid "[delete]"
-msgstr "[Löschen]"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:246
 msgid "New"
@@ -23631,6 +23629,9 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "[delete]"
+#~ msgstr "[Löschen]"
 
 #, fuzzy
 #~ msgid "Delete permanently."

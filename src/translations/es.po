@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:51+0100\n"
+"POT-Creation-Date: 2013-11-21 19:03+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -9259,6 +9259,7 @@ msgid "Subproject URL"
 msgstr "URL Subproyecto"
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:41
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:227
 #: www/trove/admin/trove_cat_edit.php:93
 msgid "delete"
 msgstr "Borrar"
@@ -9745,12 +9746,9 @@ msgid "Forge ID"
 msgstr "ID forja"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:226
-msgid "[edit]"
+#, fuzzy
+msgid "edit"
 msgstr "[editar]"
-
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:227
-msgid "[delete]"
-msgstr "[borrar]"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:246
 msgid "New"
@@ -22938,6 +22936,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "[delete]"
+#~ msgstr "[borrar]"
 
 #~ msgid "Comments: "
 #~ msgstr "Seguimientos: "

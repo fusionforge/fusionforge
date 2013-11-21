@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:51+0100\n"
+"POT-Creation-Date: 2013-11-21 19:03+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -9143,6 +9143,7 @@ msgid "Subproject URL"
 msgstr "URL du sous-projet"
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:41
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:227
 #: www/trove/admin/trove_cat_edit.php:93
 msgid "delete"
 msgstr "effacer"
@@ -9629,12 +9630,9 @@ msgid "Forge ID"
 msgstr "Identifiant de la forge"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:226
-msgid "[edit]"
-msgstr "[modifier]"
-
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:227
-msgid "[delete]"
-msgstr "[supprimer]"
+#, fuzzy
+msgid "edit"
+msgstr "modifications"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:246
 msgid "New"
@@ -22815,6 +22813,12 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
+#~ msgid "[edit]"
+#~ msgstr "[modifier]"
+
+#~ msgid "[delete]"
+#~ msgstr "[supprimer]"
+
 #~ msgid "Comments: "
 #~ msgstr "Commentaires : "
 
@@ -29445,9 +29449,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "new pages"
 #~ msgstr "nouvelles pages"
-
-#~ msgid "edits"
-#~ msgstr "modifications"
 
 #~ msgid "major edits"
 #~ msgstr "modifications majeures"

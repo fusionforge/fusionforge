@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:51+0100\n"
+"POT-Creation-Date: 2013-11-21 19:03+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9543,6 +9543,7 @@ msgid "Subproject URL"
 msgstr "Подпроект"
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:41
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:227
 #: www/trove/admin/trove_cat_edit.php:93
 #, fuzzy
 msgid "delete"
@@ -10089,13 +10090,8 @@ msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:226
 #, fuzzy
-msgid "[edit]"
+msgid "edit"
 msgstr "Изменить"
-
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:227
-#, fuzzy
-msgid "[delete]"
-msgstr "Удалить"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:246
 #, fuzzy
@@ -23781,6 +23777,10 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
+
+#, fuzzy
+#~ msgid "[delete]"
+#~ msgstr "Удалить"
 
 #, fuzzy
 #~ msgid "Comments: "

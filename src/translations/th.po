@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:51+0100\n"
+"POT-Creation-Date: 2013-11-21 19:03+0100\n"
 "PO-Revision-Date: 2013-06-03 17:16+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -8726,6 +8726,7 @@ msgid "Subproject URL"
 msgstr ""
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:41
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:227
 #: www/trove/admin/trove_cat_edit.php:93
 msgid "delete"
 msgstr ""
@@ -9207,11 +9208,7 @@ msgid "Forge ID"
 msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:226
-msgid "[edit]"
-msgstr ""
-
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:227
-msgid "[delete]"
+msgid "edit"
 msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:246

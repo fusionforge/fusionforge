@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:51+0100\n"
+"POT-Creation-Date: 2013-11-21 19:03+0100\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9438,6 +9438,7 @@ msgid "Subproject URL"
 msgstr "子專案"
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:41
+#: plugins/globalsearch/common/globalsearch_edit_utils.php:227
 #: www/trove/admin/trove_cat_edit.php:93
 #, fuzzy
 msgid "delete"
@@ -9983,13 +9984,8 @@ msgstr ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:226
 #, fuzzy
-msgid "[edit]"
+msgid "edit"
 msgstr "編輯"
-
-#: plugins/globalsearch/common/globalsearch_edit_utils.php:227
-#, fuzzy
-msgid "[delete]"
-msgstr "刪除"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:246
 #, fuzzy
@@ -23262,6 +23258,10 @@ msgstr "帳號"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
+
+#, fuzzy
+#~ msgid "[delete]"
+#~ msgstr "刪除"
 
 #, fuzzy
 #~ msgid "Comments: "
