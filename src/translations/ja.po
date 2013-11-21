@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:42+0100\n"
+"POT-Creation-Date: 2013-11-21 18:51+0100\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9169,7 +9169,7 @@ msgstr "タスク追加"
 
 #: plugins/extsubproj/actions/addExtSubProj.php:35
 #, fuzzy
-msgid "Subproject succesfully added."
+msgid "Subproject successfully added."
 msgstr "作成に成功しました。"
 
 #: plugins/extsubproj/actions/delExtSubProj.php:30
@@ -9177,9 +9177,9 @@ msgstr "作成に成功しました。"
 msgid "Failed to delete subproject."
 msgstr "タスク追加"
 
-#: plugins/extsubproj/actions/delExtSubProj.php:34
+#: plugins/extsubproj/actions/delExtSubProj.php:34 www/pm/admin/index.php:156
 #, fuzzy
-msgid "Subproject succesfully deleted."
+msgid "Subproject successfully deleted."
 msgstr "作成に成功しました。"
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
@@ -19045,11 +19045,6 @@ msgstr ""
 msgid "Subproject Updated successfully"
 msgstr "更新に成功しました。"
 
-#: www/pm/admin/index.php:156
-#, fuzzy
-msgid "Subproject successfully deleted."
-msgstr "作成に成功しました。"
-
 #: www/pm/admin/index.php:179
 #, php-format
 msgid "Add Categories to: %s"
@@ -22611,18 +22606,6 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr "%sのパーソナルページ"
-
-#, fuzzy
-#~ msgid "Delete permanently."
-#~ msgstr "ファイル"
-
-#, fuzzy
-#~ msgid "Could Not Delete: "
-#~ msgstr "パーミッションが取得できません。"
-
-#, fuzzy
-#~ msgid "Delete Failed"
-#~ msgstr "ファイル"
 
 #~ msgid "Forums: Administration"
 #~ msgstr "フォーラム: 管理"

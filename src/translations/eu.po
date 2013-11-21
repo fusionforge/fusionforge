@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:42+0100\n"
+"POT-Creation-Date: 2013-11-21 18:51+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9383,7 +9383,7 @@ msgstr "Azpi proiektu bat gehitu"
 
 #: plugins/extsubproj/actions/addExtSubProj.php:35
 #, fuzzy
-msgid "Subproject succesfully added."
+msgid "Subproject successfully added."
 msgstr "Arrakastaz sartutako lana"
 
 #: plugins/extsubproj/actions/delExtSubProj.php:30
@@ -9391,9 +9391,9 @@ msgstr "Arrakastaz sartutako lana"
 msgid "Failed to delete subproject."
 msgstr "Akatsa trebeziak ezabatzen"
 
-#: plugins/extsubproj/actions/delExtSubProj.php:34
+#: plugins/extsubproj/actions/delExtSubProj.php:34 www/pm/admin/index.php:156
 #, fuzzy
-msgid "Subproject succesfully deleted."
+msgid "Subproject successfully deleted."
 msgstr "Arrakastaz sartutako lana"
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
@@ -19562,11 +19562,6 @@ msgstr "Kategoria eguneratua"
 msgid "Subproject Updated successfully"
 msgstr "Arrakastaz eguneratua"
 
-#: www/pm/admin/index.php:156
-#, fuzzy
-msgid "Subproject successfully deleted."
-msgstr "Arrakastaz sartutako lana"
-
 #: www/pm/admin/index.php:179
 #, fuzzy, php-format
 msgid "Add Categories to: %s"
@@ -23309,22 +23304,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
-
-#, fuzzy
-#~ msgid "Delete permanently."
-#~ msgstr "Ezabatu txantiloia"
-
-#, fuzzy
-#~ msgid "Could Not Delete: "
-#~ msgstr "Ezin da berri foroa ezabatu: %d"
-
-#, fuzzy
-#~ msgid "Delete Failed"
-#~ msgstr "Huts artefaktua ezabatzean"
-
-#, fuzzy
-#~ msgid "Error: Under min length search"
-#~ msgstr "Akatsa - Bilaketa ez du balio"
 
 #, fuzzy
 #~ msgid "Comments: "

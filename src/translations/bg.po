@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:42+0100\n"
+"POT-Creation-Date: 2013-11-21 18:51+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9154,7 +9154,7 @@ msgstr "Моите Проекти"
 
 #: plugins/extsubproj/actions/addExtSubProj.php:35
 #, fuzzy
-msgid "Subproject succesfully added."
+msgid "Subproject successfully added."
 msgstr "Създадено успешно"
 
 #: plugins/extsubproj/actions/delExtSubProj.php:30
@@ -9162,9 +9162,9 @@ msgstr "Създадено успешно"
 msgid "Failed to delete subproject."
 msgstr "Моите Проекти"
 
-#: plugins/extsubproj/actions/delExtSubProj.php:34
+#: plugins/extsubproj/actions/delExtSubProj.php:34 www/pm/admin/index.php:156
 #, fuzzy
-msgid "Subproject succesfully deleted."
+msgid "Subproject successfully deleted."
 msgstr "Създадено успешно"
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
@@ -19129,11 +19129,6 @@ msgstr ""
 msgid "Subproject Updated successfully"
 msgstr "Обновено успешно"
 
-#: www/pm/admin/index.php:156
-#, fuzzy
-msgid "Subproject successfully deleted."
-msgstr "Създадено успешно"
-
 #: www/pm/admin/index.php:179
 #, fuzzy, php-format
 msgid "Add Categories to: %s"
@@ -22744,22 +22739,6 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Лична Информация"
-
-#, fuzzy
-#~ msgid "Delete permanently."
-#~ msgstr "Файл"
-
-#, fuzzy
-#~ msgid "Could Not Delete: "
-#~ msgstr "Разрешение не беше получено"
-
-#, fuzzy
-#~ msgid "Delete Failed"
-#~ msgstr "Файл"
-
-#, fuzzy
-#~ msgid "Error: Under min length search"
-#~ msgstr "Грешка - Невалидно търсене"
 
 #~ msgid "Theme:"
 #~ msgstr "Тема:"

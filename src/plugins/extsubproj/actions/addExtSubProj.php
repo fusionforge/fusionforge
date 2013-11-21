@@ -32,5 +32,5 @@ if (!$pluginExtSubProj->addExtSubProj($group_id, $confArr['newsubprojecturl'])) 
 	session_redirect('/plugins/'.$pluginExtSubProj->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$pluginExtSubProj->name.'&error_msg='.urlencode($error_msg));
 }
 
-$feedback = _('Subproject succesfully added.');
+$feedback = _('Subproject successfully added.');
 session_redirect('/plugins/'.$pluginExtSubProj->name.'/?type=admin&group_id='.$group_id.'&pluginname='.$pluginExtSubProj->name.'&feedback='.urlencode($feedback));

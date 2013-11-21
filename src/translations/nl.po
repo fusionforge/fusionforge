@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:42+0100\n"
+"POT-Creation-Date: 2013-11-21 18:51+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9398,7 +9398,7 @@ msgstr "Voeg een project toe"
 
 #: plugins/extsubproj/actions/addExtSubProj.php:35
 #, fuzzy
-msgid "Subproject succesfully added."
+msgid "Subproject successfully added."
 msgstr "%1$s verwijderen gelukt."
 
 #: plugins/extsubproj/actions/delExtSubProj.php:30
@@ -9406,9 +9406,9 @@ msgstr "%1$s verwijderen gelukt."
 msgid "Failed to delete subproject."
 msgstr "Verwijderen van vaardigheden niet gelukt."
 
-#: plugins/extsubproj/actions/delExtSubProj.php:34
+#: plugins/extsubproj/actions/delExtSubProj.php:34 www/pm/admin/index.php:156
 #, fuzzy
-msgid "Subproject succesfully deleted."
+msgid "Subproject successfully deleted."
 msgstr "%1$s verwijderen gelukt."
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
@@ -19648,11 +19648,6 @@ msgstr "Categorie gewijzigd"
 msgid "Subproject Updated successfully"
 msgstr "Wijziging doorgevoerd"
 
-#: www/pm/admin/index.php:156
-#, fuzzy
-msgid "Subproject successfully deleted."
-msgstr "%1$s verwijderen gelukt."
-
 #: www/pm/admin/index.php:179
 #, fuzzy, php-format
 msgid "Add Categories to: %s"
@@ -23444,10 +23439,6 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
-
-#, fuzzy
-#~ msgid "Delete permanently."
-#~ msgstr "Bestand wissen"
 
 #, fuzzy
 #~ msgid "Comments: "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:42+0100\n"
+"POT-Creation-Date: 2013-11-21 18:51+0100\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -8772,15 +8772,16 @@ msgid "Failed to add subproject."
 msgstr ""
 
 #: plugins/extsubproj/actions/addExtSubProj.php:35
-msgid "Subproject succesfully added."
-msgstr ""
+#, fuzzy
+msgid "Subproject successfully added."
+msgstr "%s inserida com sucesso."
 
 #: plugins/extsubproj/actions/delExtSubProj.php:30
 msgid "Failed to delete subproject."
 msgstr ""
 
-#: plugins/extsubproj/actions/delExtSubProj.php:34
-msgid "Subproject succesfully deleted."
+#: plugins/extsubproj/actions/delExtSubProj.php:34 www/pm/admin/index.php:156
+msgid "Subproject successfully deleted."
 msgstr ""
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
@@ -18270,10 +18271,6 @@ msgstr "Categoria Atualizada"
 
 #: www/pm/admin/index.php:141
 msgid "Subproject Updated successfully"
-msgstr ""
-
-#: www/pm/admin/index.php:156
-msgid "Subproject successfully deleted."
 msgstr ""
 
 #: www/pm/admin/index.php:179

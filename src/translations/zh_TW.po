@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:42+0100\n"
+"POT-Creation-Date: 2013-11-21 18:51+0100\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9376,7 +9376,7 @@ msgstr "增加新專案"
 
 #: plugins/extsubproj/actions/addExtSubProj.php:35
 #, fuzzy
-msgid "Subproject succesfully added."
+msgid "Subproject successfully added."
 msgstr "%1$s 刪除成功"
 
 #: plugins/extsubproj/actions/delExtSubProj.php:30
@@ -9384,9 +9384,9 @@ msgstr "%1$s 刪除成功"
 msgid "Failed to delete subproject."
 msgstr "刪除技能失敗"
 
-#: plugins/extsubproj/actions/delExtSubProj.php:34
+#: plugins/extsubproj/actions/delExtSubProj.php:34 www/pm/admin/index.php:156
 #, fuzzy
-msgid "Subproject succesfully deleted."
+msgid "Subproject successfully deleted."
 msgstr "%1$s 刪除成功"
 
 #: plugins/extsubproj/include/extsubprojPlugin.class.php:67
@@ -19538,11 +19538,6 @@ msgstr "分類已更新"
 msgid "Subproject Updated successfully"
 msgstr "更新成功"
 
-#: www/pm/admin/index.php:156
-#, fuzzy
-msgid "Subproject successfully deleted."
-msgstr "%1$s 刪除成功"
-
 #: www/pm/admin/index.php:179
 #, fuzzy, php-format
 msgid "Add Categories to: %s"
@@ -23267,21 +23262,6 @@ msgstr "帳號"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
-
-#, fuzzy
-#~ msgid "Delete permanently."
-#~ msgstr "刪除樣板"
-
-#~ msgid "Successfully Deleted"
-#~ msgstr "成功刪除"
-
-#, fuzzy
-#~ msgid "Could Not Delete: "
-#~ msgstr "無法完成執行"
-
-#, fuzzy
-#~ msgid "Delete Failed"
-#~ msgstr "自訂類型刪除失敗"
 
 #, fuzzy
 #~ msgid "Comments: "
