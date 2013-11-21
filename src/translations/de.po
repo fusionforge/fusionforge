@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 14:39+0100\n"
+"POT-Creation-Date: 2013-11-21 15:27+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -18274,9 +18274,11 @@ msgid "Collapse"
 msgstr "Alle Verstecken"
 
 #: www/include/my_utils.php:149
-#, php-format
-msgid "%s new items"
-msgstr ""
+#, fuzzy, php-format
+msgid "%d new item"
+msgid_plural "%d new items"
+msgstr[0] "Neue Tabs hinzufügen"
+msgstr[1] "Neue Tabs hinzufügen"
 
 #: www/include/project_home.php:36
 #, fuzzy

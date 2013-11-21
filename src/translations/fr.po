@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 14:39+0100\n"
+"POT-Creation-Date: 2013-11-21 15:27+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -17546,9 +17546,11 @@ msgid "Collapse"
 msgstr "Réduire"
 
 #: www/include/my_utils.php:149
-#, php-format
-msgid "%s new items"
-msgstr "%s nouveaux éléments"
+#, fuzzy, php-format
+msgid "%d new item"
+msgid_plural "%d new items"
+msgstr[0] "Ajouter un nouvel élément"
+msgstr[1] "Ajouter un nouvel élément"
 
 #: www/include/project_home.php:36
 msgid "Project Home"
@@ -22831,6 +22833,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "%s new items"
+#~ msgstr "%s nouveaux éléments"
 
 #~ msgid "Comments: "
 #~ msgstr "Commentaires : "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 14:39+0100\n"
+"POT-Creation-Date: 2013-11-21 15:27+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -17700,9 +17700,11 @@ msgid "Collapse"
 msgstr "Colapsar"
 
 #: www/include/my_utils.php:149
-#, php-format
-msgid "%s new items"
-msgstr "%s nuevos elementos"
+#, fuzzy, php-format
+msgid "%d new item"
+msgid_plural "%d new items"
+msgstr[0] "Agregar nuevo elemento"
+msgstr[1] "Agregar nuevo elemento"
 
 #: www/include/project_home.php:36
 msgid "Project Home"
@@ -22956,6 +22958,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "%s new items"
+#~ msgstr "%s nuevos elementos"
 
 #~ msgid "Comments: "
 #~ msgstr "Seguimientos: "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 14:39+0100\n"
+"POT-Creation-Date: 2013-11-21 15:27+0100\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -18080,9 +18080,10 @@ msgid "Collapse"
 msgstr ""
 
 #: www/include/my_utils.php:149
-#, php-format
-msgid "%s new items"
-msgstr ""
+#, fuzzy, php-format
+msgid "%d new item"
+msgid_plural "%d new items"
+msgstr[0] "增加新資料庫"
 
 #: www/include/project_home.php:36
 #, fuzzy
