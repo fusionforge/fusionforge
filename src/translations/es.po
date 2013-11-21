@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 17:42+0100\n"
+"POT-Creation-Date: 2013-11-21 17:54+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -236,6 +236,7 @@ msgstr ""
 #: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
 #: common/tracker/actions/query.php:391 common/tracker/actions/tracker.php:388
 #: common/tracker/actions/tracker.php:393
+#: common/tracker/actions/tracker.php:505
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -6036,8 +6037,8 @@ msgid "Confirmation failed. Artifact not deleted"
 msgstr "Falló la confirmación. Registro no borrado."
 
 #: common/tracker/actions/tracker.php:505
-msgid "Artifact Delete Failed"
-msgstr "Falló el borrado del registro"
+msgid "Delete Failed"
+msgstr "Falló el borrado"
 
 #: common/tracker/actions/tracker.php:507
 msgid "Artifact Deleted Successfully"
@@ -22957,12 +22958,6 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
-
-#~ msgid "Error: Under min length search"
-#~ msgstr "Error - Por debajo de la mínima longitud de búsqueda"
-
-#~ msgid "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
-#~ msgstr "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
 
 #~ msgid "%s new items"
 #~ msgstr "%s nuevos elementos"

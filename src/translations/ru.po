@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 17:42+0100\n"
+"POT-Creation-Date: 2013-11-21 17:54+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -247,6 +247,7 @@ msgstr "Имя файла"
 #: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
 #: common/tracker/actions/query.php:391 common/tracker/actions/tracker.php:388
 #: common/tracker/actions/tracker.php:393
+#: common/tracker/actions/tracker.php:505
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -6200,7 +6201,8 @@ msgid "Confirmation failed. Artifact not deleted"
 msgstr "Ошибка при подтверждении удаления образца"
 
 #: common/tracker/actions/tracker.php:505
-msgid "Artifact Delete Failed"
+#, fuzzy
+msgid "Delete Failed"
 msgstr "Удаление образца блокировано"
 
 #: common/tracker/actions/tracker.php:507
@@ -23803,9 +23805,6 @@ msgstr "Имя участника обязательно"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
-
-#~ msgid "Error: Under min length search"
-#~ msgstr "Меньше минимальной строки для поиска"
 
 #, fuzzy
 #~ msgid "Comments: "

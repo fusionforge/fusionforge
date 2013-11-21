@@ -502,7 +502,7 @@ switch (getStringFromRequest('func')) {
 			}
 			else {
 				if (!$ah->delete(true)) {
-					$error_msg .= _('Artifact Delete Failed') . ': '.$ah->getErrorMessage();
+					$error_msg .= _('Delete Failed')._(': ').$ah->getErrorMessage();
 				} else {
 					$feedback .= _('Artifact Deleted Successfully');
 				}

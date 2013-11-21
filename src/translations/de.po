@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 17:42+0100\n"
+"POT-Creation-Date: 2013-11-21 17:54+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -244,6 +244,7 @@ msgstr ""
 #: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
 #: common/tracker/actions/query.php:391 common/tracker/actions/tracker.php:388
 #: common/tracker/actions/tracker.php:393
+#: common/tracker/actions/tracker.php:505
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -6186,8 +6187,8 @@ msgid "Confirmation failed. Artifact not deleted"
 msgstr "Bestätigung fehlgeschlagen. Produkt wurde nicht gelöscht"
 
 #: common/tracker/actions/tracker.php:505
-msgid "Artifact Delete Failed"
-msgstr "Löschen des Produktes fehlgeschlagen."
+msgid "Delete Failed"
+msgstr "Löschen fehlgeschlagen"
 
 #: common/tracker/actions/tracker.php:507
 msgid "Artifact Deleted Successfully"
@@ -23652,9 +23653,6 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
-
-#~ msgid "Error: Under min length search"
-#~ msgstr "Fehler -Mindestlänge des Suchbegriffs unterschritten"
 
 #, fuzzy
 #~ msgid "Comments: "

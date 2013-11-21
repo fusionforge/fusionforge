@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 17:42+0100\n"
+"POT-Creation-Date: 2013-11-21 17:54+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -247,6 +247,7 @@ msgstr "Nome do ficheiro "
 #: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
 #: common/tracker/actions/query.php:391 common/tracker/actions/tracker.php:388
 #: common/tracker/actions/tracker.php:393
+#: common/tracker/actions/tracker.php:505
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -6204,8 +6205,8 @@ msgid "Confirmation failed. Artifact not deleted"
 msgstr "Fallou a conformación. Non se eliminou o artefacto"
 
 #: common/tracker/actions/tracker.php:505
-msgid "Artifact Delete Failed"
-msgstr "Fallou a eliminación do artefacto"
+msgid "Delete Failed"
+msgstr "Produciuse un erro ao eliminar"
 
 #: common/tracker/actions/tracker.php:507
 msgid "Artifact Deleted Successfully"
@@ -23658,9 +23659,6 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
-
-#~ msgid "Error: Under min length search"
-#~ msgstr "Erro: busca máis curta que a lonxitude mínima"
 
 #, fuzzy
 #~ msgid "Comments: "

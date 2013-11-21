@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 17:42+0100\n"
+"POT-Creation-Date: 2013-11-21 18:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -231,6 +231,7 @@ msgstr ""
 #: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
 #: common/tracker/actions/query.php:391 common/tracker/actions/tracker.php:388
 #: common/tracker/actions/tracker.php:393
+#: common/tracker/actions/tracker.php:505
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -5699,7 +5700,7 @@ msgid "Confirmation failed. Artifact not deleted"
 msgstr ""
 
 #: common/tracker/actions/tracker.php:505
-msgid "Artifact Delete Failed"
+msgid "Delete Failed"
 msgstr ""
 
 #: common/tracker/actions/tracker.php:507

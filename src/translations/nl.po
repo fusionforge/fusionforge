@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 17:42+0100\n"
+"POT-Creation-Date: 2013-11-21 17:54+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -245,6 +245,7 @@ msgstr ""
 #: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
 #: common/tracker/actions/query.php:391 common/tracker/actions/tracker.php:388
 #: common/tracker/actions/tracker.php:393
+#: common/tracker/actions/tracker.php:505
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -6172,8 +6173,8 @@ msgid "Confirmation failed. Artifact not deleted"
 msgstr "Confirmation failed. Item niet verwijderd"
 
 #: common/tracker/actions/tracker.php:505
-msgid "Artifact Delete Failed"
-msgstr "Verwijderen van item niet gelukt"
+msgid "Delete Failed"
+msgstr "Verwijderen mislukt"
 
 #: common/tracker/actions/tracker.php:507
 msgid "Artifact Deleted Successfully"
@@ -23459,10 +23460,6 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
-
-#, fuzzy
-#~ msgid "Error: Under min length search"
-#~ msgstr "Fout - ongeldige zoekterm"
 
 #, fuzzy
 #~ msgid "Comments: "

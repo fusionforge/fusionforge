@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 17:42+0100\n"
+"POT-Creation-Date: 2013-11-21 17:54+0100\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -247,6 +247,7 @@ msgstr "檔案名"
 #: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
 #: common/tracker/actions/query.php:391 common/tracker/actions/tracker.php:388
 #: common/tracker/actions/tracker.php:393
+#: common/tracker/actions/tracker.php:505
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -6169,7 +6170,8 @@ msgid "Confirmation failed. Artifact not deleted"
 msgstr "確認失敗，自訂類型不能刪除"
 
 #: common/tracker/actions/tracker.php:505
-msgid "Artifact Delete Failed"
+#, fuzzy
+msgid "Delete Failed"
 msgstr "自訂類型刪除失敗"
 
 #: common/tracker/actions/tracker.php:507
@@ -23282,10 +23284,6 @@ msgstr "帳號"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
-
-#, fuzzy
-#~ msgid "Error: Under min length search"
-#~ msgstr "錯誤 - 無法搜尋"
 
 #, fuzzy
 #~ msgid "Comments: "
