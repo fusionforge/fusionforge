@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-20 18:41+0100\n"
+"POT-Creation-Date: 2013-11-21 14:25+0100\n"
 "PO-Revision-Date: 2013-06-03 17:16+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -6800,7 +6800,7 @@ msgstr ""
 
 #: common/widget/Widget_MyAdmin.class.php:69
 #, php-format
-msgid "Groups in <a href=\"%s\"><strong>P</strong> (pending) Status</A>"
+msgid "Groups in <a href=\"%s\"><strong>P</strong> (pending) Status</a>"
 msgstr ""
 
 #: common/widget/Widget_MyAdmin.class.php:90
@@ -7045,6 +7045,10 @@ msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:87
 msgid "Quit this project?"
+msgstr ""
+
+#: common/widget/Widget_MyProjects.class.php:88
+msgid "Leave project"
 msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:96

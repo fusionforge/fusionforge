@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-20 18:41+0100\n"
+"POT-Creation-Date: 2013-11-21 14:25+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7368,7 +7368,7 @@ msgstr ""
 
 #: common/widget/Widget_MyAdmin.class.php:69
 #, php-format
-msgid "Groups in <a href=\"%s\"><strong>P</strong> (pending) Status</A>"
+msgid "Groups in <a href=\"%s\"><strong>P</strong> (pending) Status</a>"
 msgstr ""
 
 #: common/widget/Widget_MyAdmin.class.php:90
@@ -7639,6 +7639,11 @@ msgstr "Ez zara aktiboa dagoen inungo proiektukoa"
 #, fuzzy
 msgid "Quit this project?"
 msgstr "Proiektutik irtetzen"
+
+#: common/widget/Widget_MyProjects.class.php:88
+#, fuzzy
+msgid "Leave project"
+msgstr "Talde pribatua"
 
 #: common/widget/Widget_MyProjects.class.php:96
 #, fuzzy

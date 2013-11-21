@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-20 18:41+0100\n"
+"POT-Creation-Date: 2013-11-21 14:25+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -7085,7 +7085,7 @@ msgstr ""
 
 #: common/widget/Widget_MyAdmin.class.php:69
 #, php-format
-msgid "Groups in <a href=\"%s\"><strong>P</strong> (pending) Status</A>"
+msgid "Groups in <a href=\"%s\"><strong>P</strong> (pending) Status</a>"
 msgstr "Projets à l'état <a href=\"%s\"><strong>P</strong> (en attente)</a>"
 
 #: common/widget/Widget_MyAdmin.class.php:90
@@ -7354,6 +7354,10 @@ msgstr "Vous ne faites partie d'aucun projet."
 #: common/widget/Widget_MyProjects.class.php:87
 msgid "Quit this project?"
 msgstr "Quitter ce projet ?"
+
+#: common/widget/Widget_MyProjects.class.php:88
+msgid "Leave project"
+msgstr "Quitter le projet"
 
 #: common/widget/Widget_MyProjects.class.php:96
 msgid "Private project"
@@ -26047,9 +26051,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Monitored File Releases"
 #~ msgstr "Paquets de fichiers surveillés"
-
-#~ msgid "Leave project"
-#~ msgstr "Quitter le projet"
 
 #~ msgid ""
 #~ "You cannot remove yourself from this project, because you are admin of "

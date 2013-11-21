@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-20 18:41+0100\n"
+"POT-Creation-Date: 2013-11-21 14:25+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -7414,7 +7414,7 @@ msgstr ""
 
 #: common/widget/Widget_MyAdmin.class.php:69
 #, php-format
-msgid "Groups in <a href=\"%s\"><strong>P</strong> (pending) Status</A>"
+msgid "Groups in <a href=\"%s\"><strong>P</strong> (pending) Status</a>"
 msgstr ""
 
 #: common/widget/Widget_MyAdmin.class.php:90
@@ -7687,6 +7687,11 @@ msgstr "Non é membro de ningún proxecto activo "
 #, fuzzy
 msgid "Quit this project?"
 msgstr "Abandonando o proxecto"
+
+#: common/widget/Widget_MyProjects.class.php:88
+#, fuzzy
+msgid "Leave project"
+msgstr "Proxectos privados "
 
 #: common/widget/Widget_MyProjects.class.php:96
 #, fuzzy

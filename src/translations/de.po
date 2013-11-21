@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-20 18:41+0100\n"
+"POT-Creation-Date: 2013-11-21 14:25+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -7400,7 +7400,7 @@ msgstr ""
 
 #: common/widget/Widget_MyAdmin.class.php:69
 #, php-format
-msgid "Groups in <a href=\"%s\"><strong>P</strong> (pending) Status</A>"
+msgid "Groups in <a href=\"%s\"><strong>P</strong> (pending) Status</a>"
 msgstr ""
 
 #: common/widget/Widget_MyAdmin.class.php:90
@@ -7673,6 +7673,11 @@ msgstr "Sie sind kein Mitglied eines aktiven Projekts."
 #, fuzzy
 msgid "Quit this project?"
 msgstr "Projekt verlassen"
+
+#: common/widget/Widget_MyProjects.class.php:88
+#, fuzzy
+msgid "Leave project"
+msgstr "Private Projekte"
 
 #: common/widget/Widget_MyProjects.class.php:96
 #, fuzzy
