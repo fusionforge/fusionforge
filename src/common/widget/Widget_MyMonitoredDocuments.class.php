@@ -85,9 +85,9 @@ class Widget_MyMonitoredDocuments extends Widget {
 							<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td style="width:99%">'.
 							'&nbsp;&nbsp;&nbsp;-&nbsp;<a href="/docman/?group_id='.$group_id.'&amp;view=listfile&amp;dirid='.$doc_group.'">'.
 							stripslashes(db_result($result2,$i,'filename')).'</a></td>'.
-							'<td align="center"><a href="/docman/?group_id='.$group_id.'&amp;action=monitorfile&amp;option=remove&amp;view=listfile&amp;dirid='.$doc_group.'&amp;fileid='.$docid.'">'.
+							'<td class="align-center"><a href="/docman/?group_id='.$group_id.'&amp;action=monitorfile&amp;option=remove&amp;view=listfile&amp;dirid='.$doc_group.'&amp;fileid='.$docid.'">'.
 							'<img src="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" height="16" width="16" '.
-							'border="0" alt="'._("Stop Monitoring").'" /></a></td></tr>';
+							'alt="'._("Stop Monitoring").'" /></a></td></tr>';
 					}
 				}
 
