@@ -98,7 +98,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function writeBody() {
 		if (strlen($this->words) < 3) {
-			echo '<p class="error">'._('Error: Under min length search').'</p>';
+			echo '<p class="error">'._('Error') . _(': ') . _('Search must be at least three characters').'</p>';
 		} else {
 			echo $this->getResult();
 		}
@@ -171,13 +171,13 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	}
 
 	/**
-	* getPartResult - returns the result of the given renderer
-	*
-	* @param object $renderer
-	* @param string $section
-	* @param string $title
-  	* @return string result of the renderer
-	*/
+	 * getPartResult - returns the result of the given renderer
+	 *
+	 * @param object $renderer
+	 * @param string $section
+	 * @param string $title
+	 * @return string result of the renderer
+	 */
 	function getPartResult($renderer, $section, $title='') {
 		$result = '';
 		$renderer->searchQuery->executeQuery();
@@ -351,7 +351,8 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
                 </tr>
             </table><br />'
 			. $this->createSubSections($sectionsArray) .'
-        </div></form>
+        </div>
+		</form>
 ';
 
 		// Add jquery javascript method for select none/all

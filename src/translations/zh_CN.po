@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 17:37+0100\n"
+"POT-Creation-Date: 2013-11-21 17:42+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -333,6 +333,7 @@ msgstr "文件名"
 #: www/pm/mod_task.php:173 www/pm/mod_task.php:183 www/pm/mod_task.php:197
 #: www/pm/mod_task.php:202 www/pm/mod_task.php:212 www/pm/mod_task.php:323
 #: www/project/admin/roledelete.php:62 www/register/index.php:188
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:101
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/softwaremap/tag_cloud.php:143 www/softwaremap/trove_list.php:81
@@ -761,6 +762,7 @@ msgstr ""
 #: www/export/rss20_docman.php:151 www/forum/admin/pendingmsgdetail.php:51
 #: www/forum/admin/pendingmsgdetail.php:53 www/mail/admin/index.php:152
 #: www/mail/admin/index.php:249 www/project/admin/roledelete.php:62
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:101
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #: www/snippet/download.php:45 www/survey/admin/question.php:64
@@ -10063,6 +10065,7 @@ msgid "Site Admin Home"
 msgstr "网站管理员的家"
 
 #: plugins/globalsearch/www/index.php:83
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:101
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
 #, fuzzy
 msgid "Search must be at least three characters"
@@ -21650,11 +21653,6 @@ msgstr "这个项目的任务"
 msgid "This project's trackers"
 msgstr "这个项目的跟踪者"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:101
-#, fuzzy
-msgid "Error: Under min length search"
-msgstr "错误 - 无法搜索"
-
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:117
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:132
 #, fuzzy
@@ -21715,7 +21713,7 @@ msgstr "以所有字"
 msgid "with one word"
 msgstr "以一个字"
 
-#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:396
+#: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:397
 #, fuzzy
 msgid "Search All"
 msgstr "搜索"
@@ -23261,6 +23259,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Error: Under min length search"
+#~ msgstr "错误 - 无法搜索"
 
 #, fuzzy
 #~ msgid "Comments: "
