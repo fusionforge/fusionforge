@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 15:27+0100\n"
+"POT-Creation-Date: 2013-11-21 17:37+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -1156,6 +1156,7 @@ msgstr "Seleccionar/Deselecionar todas las acciones masivas de documentos"
 #: common/tracker/views/form-addcanned.php:69
 #: common/tracker/views/form-updatecanned.php:43
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
+#: common/widget/Widget_Rss.class.php:95
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:55
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:36
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
@@ -1623,6 +1624,9 @@ msgstr "Fecha Inicial"
 #: common/tracker/views/form-updatetracker.php:72
 #: common/tracker/views/form-updatetracker.php:75
 #: common/tracker/views/form-updatetracker.php:78
+#: common/widget/Widget_Rss.class.php:95
+#: common/widget/Widget_Rss.class.php:101
+#: common/widget/Widget_Rss.class.php:112
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
@@ -7941,59 +7945,55 @@ msgstr "Publicación de una versión"
 msgid "Cannot create backend directory. Contact forge administrator."
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:101
-msgid "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
-msgstr "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
-
-#: common/widget/Widget_Rss.class.php:126
+#: common/widget/Widget_Rss.class.php:142
 msgid "Cannot add empty RSS URL"
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:190
+#: common/widget/Widget_Rss.class.php:206
 msgid "less than 1 minute"
 msgstr "menos de un minuto"
 
-#: common/widget/Widget_Rss.class.php:190
+#: common/widget/Widget_Rss.class.php:206
 msgid "1 minute"
 msgstr "1 minuto"
 
-#: common/widget/Widget_Rss.class.php:192
+#: common/widget/Widget_Rss.class.php:208
 #, php-format
 msgid "%s minutes ago"
 msgstr "Hace %s minuto(s)"
 
-#: common/widget/Widget_Rss.class.php:194
+#: common/widget/Widget_Rss.class.php:210
 msgid "About one hour"
 msgstr "Hace una hora"
 
-#: common/widget/Widget_Rss.class.php:196
+#: common/widget/Widget_Rss.class.php:212
 #, php-format
 msgid "about %s hours"
 msgstr "Hace %s hora(s)"
 
-#: common/widget/Widget_Rss.class.php:198
+#: common/widget/Widget_Rss.class.php:214
 msgid "About one day"
 msgstr "Hace un día"
 
-#: common/widget/Widget_Rss.class.php:200
+#: common/widget/Widget_Rss.class.php:216
 #, php-format
 msgid "%s days ago"
 msgstr "Hace %s día(s)"
 
-#: common/widget/Widget_Rss.class.php:202
+#: common/widget/Widget_Rss.class.php:218
 msgid "About one month"
 msgstr "Último mes"
 
-#: common/widget/Widget_Rss.class.php:204
+#: common/widget/Widget_Rss.class.php:220
 #, php-format
 msgid "%s months ago"
 msgstr "%s Último mes(es) "
 
-#: common/widget/Widget_Rss.class.php:206
+#: common/widget/Widget_Rss.class.php:222
 msgid "About one year"
 msgstr "Alrededor de un año"
 
-#: common/widget/Widget_Rss.class.php:208
+#: common/widget/Widget_Rss.class.php:224
 #, php-format
 msgid "over %s years"
 msgstr "alrededor de %s años"
@@ -22958,6 +22958,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
+#~ msgstr "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
 
 #~ msgid "%s new items"
 #~ msgstr "%s nuevos elementos"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 15:27+0100\n"
+"POT-Creation-Date: 2013-11-21 17:37+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1134,6 +1134,7 @@ msgstr ""
 #: common/tracker/views/form-addcanned.php:69
 #: common/tracker/views/form-updatecanned.php:43
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
+#: common/widget/Widget_Rss.class.php:95
 #: plugins/blocks/common/blocks_Widget_ProjectSummary.class.php:55
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:36
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
@@ -1595,6 +1596,9 @@ msgstr "Date de début"
 #: common/tracker/views/form-updatetracker.php:72
 #: common/tracker/views/form-updatetracker.php:75
 #: common/tracker/views/form-updatetracker.php:78
+#: common/widget/Widget_Rss.class.php:95
+#: common/widget/Widget_Rss.class.php:101
+#: common/widget/Widget_Rss.class.php:112
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:78
 #: plugins/authldap/include/AuthLDAPPlugin.class.php:209
@@ -7809,59 +7813,55 @@ msgstr "Lecteur de flux RSS"
 msgid "Cannot create backend directory. Contact forge administrator."
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:101
-msgid "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
-msgstr "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
-
-#: common/widget/Widget_Rss.class.php:126
+#: common/widget/Widget_Rss.class.php:142
 msgid "Cannot add empty RSS URL"
 msgstr ""
 
-#: common/widget/Widget_Rss.class.php:190
+#: common/widget/Widget_Rss.class.php:206
 msgid "less than 1 minute"
 msgstr "il y a moins d'une minute"
 
-#: common/widget/Widget_Rss.class.php:190
+#: common/widget/Widget_Rss.class.php:206
 msgid "1 minute"
 msgstr "1 minute"
 
-#: common/widget/Widget_Rss.class.php:192
+#: common/widget/Widget_Rss.class.php:208
 #, php-format
 msgid "%s minutes ago"
 msgstr "il y a %s minutes"
 
-#: common/widget/Widget_Rss.class.php:194
+#: common/widget/Widget_Rss.class.php:210
 msgid "About one hour"
 msgstr "Environ une heure"
 
-#: common/widget/Widget_Rss.class.php:196
+#: common/widget/Widget_Rss.class.php:212
 #, php-format
 msgid "about %s hours"
 msgstr "environ %s heures"
 
-#: common/widget/Widget_Rss.class.php:198
+#: common/widget/Widget_Rss.class.php:214
 msgid "About one day"
 msgstr "Environ un jour"
 
-#: common/widget/Widget_Rss.class.php:200
+#: common/widget/Widget_Rss.class.php:216
 #, php-format
 msgid "%s days ago"
 msgstr "il y a %s jours"
 
-#: common/widget/Widget_Rss.class.php:202
+#: common/widget/Widget_Rss.class.php:218
 msgid "About one month"
 msgstr "Environ un mois"
 
-#: common/widget/Widget_Rss.class.php:204
+#: common/widget/Widget_Rss.class.php:220
 #, php-format
 msgid "%s months ago"
 msgstr "Il y a %s mois"
 
-#: common/widget/Widget_Rss.class.php:206
+#: common/widget/Widget_Rss.class.php:222
 msgid "About one year"
 msgstr "Environ un an"
 
-#: common/widget/Widget_Rss.class.php:208
+#: common/widget/Widget_Rss.class.php:224
 #, php-format
 msgid "over %s years"
 msgstr "Il y a plus de %s ans"
@@ -17546,11 +17546,11 @@ msgid "Collapse"
 msgstr "Réduire"
 
 #: www/include/my_utils.php:149
-#, fuzzy, php-format
+#, php-format
 msgid "%d new item"
 msgid_plural "%d new items"
-msgstr[0] "Ajouter un nouvel élément"
-msgstr[1] "Ajouter un nouvel élément"
+msgstr[0] "%d nouvel élément"
+msgstr[1] "%d nouveaux éléments"
 
 #: www/include/project_home.php:36
 msgid "Project Home"
@@ -18177,8 +18177,8 @@ msgstr "Ajouter un favori"
 msgid ""
 "Added bookmark for <strong>%1$s</strong> with title <strong>%2$s</strong>"
 msgstr ""
-"Ajouter <strong>%1$s</strong> aux favoris, avec pour titre <strong>%2$s</"
-"strong>"
+"<strong>%1$s</strong> a été ajouté aux favoris, avec pour titre <strong>"
+"%2$s</strong>"
 
 #: www/my/bookmark_add.php:42
 msgid "Visit the bookmarked page"
@@ -18210,7 +18210,7 @@ msgstr "Impossible de mettre à jour le favori."
 
 #: www/my/bookmark_edit.php:43
 msgid "Edit Bookmark"
-msgstr "Édition d'un favori"
+msgstr "Modification d'un favori"
 
 #: www/my/dashboard.php:40 www/my/index.php:42
 #, php-format
@@ -18223,7 +18223,7 @@ msgstr "Tous les outils de suivi de mes projets"
 
 #: www/my/dashboard.php:52
 msgid "You're not a member of any active projects"
-msgstr "Vous ne faites partie d'aucun projet."
+msgstr "Vous ne faites partie d'aucun projet actif"
 
 #: www/my/dashboard.php:69
 msgid "Changed"
@@ -18462,11 +18462,10 @@ msgid "Not Found"
 msgstr "Aucune nouvelle trouvée"
 
 #: www/news/submit.php:74
-#, fuzzy
 msgid ""
 "You cannot submit news for a project unless you are an admin on that project."
 msgstr ""
-"Vous ne pouvez soumettre une annonce sans être administrateur de ce projet"
+"Vous ne pouvez soumettre une annonce sans être administrateur de ce projet."
 
 #: www/news/submit.php:78
 msgid "Submitting news from the news group is not allowed."
@@ -20423,7 +20422,7 @@ msgstr "Administration du système de publication de fichiers"
 #: www/project/admin/users.php:102 www/project/admin/users.php:139
 #: www/project/admin/users.php:152
 msgid "Role not selected"
-msgstr "Aucun rôle choisi."
+msgstr "Aucun rôle choisi"
 
 #: www/project/admin/users.php:108 www/project/admin/users.php:165
 msgid "Member Added Successfully"
@@ -20447,11 +20446,11 @@ msgstr "Rejeté"
 
 #: www/project/admin/users.php:189
 msgid "Role linked successfully"
-msgstr "Le rôle a été référencé."
+msgstr "Le rôle a été référencé"
 
 #: www/project/admin/users.php:202
 msgid "Role unlinked successfully"
-msgstr "Le rôle a été déréférencé."
+msgstr "Le rôle a été déréférencé"
 
 #: www/project/admin/users.php:212
 #, php-format
@@ -22833,6 +22832,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
+#~ msgstr "http://search.twitter.com/search.atom?q=fusionforge&amp;show_user=1"
 
 #~ msgid "%s new items"
 #~ msgstr "%s nouveaux éléments"
