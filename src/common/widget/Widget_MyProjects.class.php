@@ -85,7 +85,7 @@ class Widget_MyProjects extends Widget {
 					$html_my_projects .= '</td>'.
 						'<td><a href="rmproject.php?group_id='. $g->getID().
 						'" onClick="return confirm(\''._("Quit this project?").'\')">'.
-						'<img src="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" height="16" width="16" border="0" /></a></td></tr>';
+						'<img src="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" alt="'._('Leave project').'" height="16" width="16" /></a></td></tr>';
 				} else {
 					$html_my_projects .= '</td><td>&nbsp;</td></tr>';
 				}
