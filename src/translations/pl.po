@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:16+0100\n"
+"POT-Creation-Date: 2013-11-21 18:42+0100\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1495,9 +1495,10 @@ msgid "Delete permanently this document."
 msgstr "Szukaj w dokumentach"
 
 #: common/docman/views/listtrashfile.php:202
-#, fuzzy
-msgid "Delete permanently."
-msgstr "Dodaj Grupę Dokumentów"
+#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
+#: www/mail/admin/deletelist.php:77
+msgid "Permanently Delete"
+msgstr ""
 
 #: common/docman/views/menu.php:44
 #, fuzzy
@@ -10524,11 +10525,6 @@ msgstr ""
 
 #: plugins/mailman/www/admin/deletelist.php:51 www/mail/admin/index.php:230
 msgid "Permanently Delete List"
-msgstr ""
-
-#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
-#: www/mail/admin/deletelist.php:77
-msgid "Permanently Delete"
 msgstr ""
 
 #: plugins/mailman/www/admin/index.php:49
@@ -22168,6 +22164,10 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Delete permanently."
+#~ msgstr "Dodaj Grupę Dokumentów"
 
 #, fuzzy
 #~ msgid "Could Not Delete: "

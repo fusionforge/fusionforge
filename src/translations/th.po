@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:16+0100\n"
+"POT-Creation-Date: 2013-11-21 18:42+0100\n"
 "PO-Revision-Date: 2013-06-03 17:16+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1420,7 +1420,9 @@ msgid "Delete permanently this document."
 msgstr ""
 
 #: common/docman/views/listtrashfile.php:202
-msgid "Delete permanently."
+#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
+#: www/mail/admin/deletelist.php:77
+msgid "Permanently Delete"
 msgstr ""
 
 #: common/docman/views/menu.php:44
@@ -10184,11 +10186,6 @@ msgstr ""
 
 #: plugins/mailman/www/admin/deletelist.php:51 www/mail/admin/index.php:230
 msgid "Permanently Delete List"
-msgstr ""
-
-#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
-#: www/mail/admin/deletelist.php:77
-msgid "Permanently Delete"
 msgstr ""
 
 #: plugins/mailman/www/admin/index.php:49

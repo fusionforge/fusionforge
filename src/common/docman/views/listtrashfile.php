@@ -199,7 +199,7 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
     echo '<span class="tabtitle" id="docman-massactionmessage" title="'. _('Actions availables for selected documents, you need to check at least one document to get actions') . '" >';
     echo _('Mass actions for selected documents:');
     echo '</span>';
-	echo '<a class="tabtitle" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&amp;action=delfile&amp;view=listtrashfile&amp;dirid='.$dirid.'&amp;fileid=\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Delete permanently.') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Delete permanently.'))). '</a>';
+	echo '<a class="tabtitle" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&amp;action=delfile&amp;view=listtrashfile&amp;dirid='.$dirid.'&amp;fileid=\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Permanently Delete') .'" >'.html_image('docman/delete-directory.png',22,22,array('alt'=>_('Permanently Delete'))). '</a>';
 	echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/\'+controllerListTrash.buildUrlByCheckbox()" title="'. _('Download as a ZIP') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>_('Download as a ZIP'))). '</a>';
 	echo '</span>';
 	echo '</p>';

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:20+0100\n"
+"POT-Creation-Date: 2013-11-21 18:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1418,7 +1418,9 @@ msgid "Delete permanently this document."
 msgstr ""
 
 #: common/docman/views/listtrashfile.php:202
-msgid "Delete permanently."
+#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
+#: www/mail/admin/deletelist.php:77
+msgid "Permanently Delete"
 msgstr ""
 
 #: common/docman/views/menu.php:44
@@ -10178,11 +10180,6 @@ msgstr ""
 
 #: plugins/mailman/www/admin/deletelist.php:51 www/mail/admin/index.php:230
 msgid "Permanently Delete List"
-msgstr ""
-
-#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
-#: www/mail/admin/deletelist.php:77
-msgid "Permanently Delete"
 msgstr ""
 
 #: plugins/mailman/www/admin/index.php:49

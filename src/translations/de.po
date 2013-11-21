@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:16+0100\n"
+"POT-Creation-Date: 2013-11-21 18:42+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -1517,9 +1517,10 @@ msgid "Delete permanently this document."
 msgstr "Dieses Dokument dauerhaft löschen."
 
 #: common/docman/views/listtrashfile.php:202
-#, fuzzy
-msgid "Delete permanently."
-msgstr "Template löschen"
+#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
+#: www/mail/admin/deletelist.php:77
+msgid "Permanently Delete"
+msgstr "Dauerhaft Löschen"
 
 #: common/docman/views/menu.php:44
 msgid "View Documents"
@@ -11099,11 +11100,6 @@ msgstr ""
 #: plugins/mailman/www/admin/deletelist.php:51 www/mail/admin/index.php:230
 msgid "Permanently Delete List"
 msgstr "Liste dauerhaft Löschen"
-
-#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
-#: www/mail/admin/deletelist.php:77
-msgid "Permanently Delete"
-msgstr "Dauerhaft Löschen"
 
 #: plugins/mailman/www/admin/index.php:49
 #: plugins/mailman/www/admin/index.php:72
@@ -23640,6 +23636,10 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#, fuzzy
+#~ msgid "Delete permanently."
+#~ msgstr "Template löschen"
 
 #, fuzzy
 #~ msgid "Comments: "

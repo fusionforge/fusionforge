@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:16+0100\n"
+"POT-Creation-Date: 2013-11-21 18:42+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1437,8 +1437,10 @@ msgid "Delete permanently this document."
 msgstr "Supprimer définitivement ce document."
 
 #: common/docman/views/listtrashfile.php:202
-msgid "Delete permanently."
-msgstr "Supprimer définitivement."
+#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
+#: www/mail/admin/deletelist.php:77
+msgid "Permanently Delete"
+msgstr "Supprimer définitivement"
 
 #: common/docman/views/menu.php:44
 msgid "View Documents"
@@ -10645,11 +10647,6 @@ msgstr ""
 #: plugins/mailman/www/admin/deletelist.php:51 www/mail/admin/index.php:230
 msgid "Permanently Delete List"
 msgstr "Supprimer définitivement la liste"
-
-#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
-#: www/mail/admin/deletelist.php:77
-msgid "Permanently Delete"
-msgstr "Supprimer définitivement"
 
 #: plugins/mailman/www/admin/index.php:49
 #: plugins/mailman/www/admin/index.php:72
@@ -22821,6 +22818,9 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
+
+#~ msgid "Delete permanently."
+#~ msgstr "Supprimer définitivement."
 
 #~ msgid "Comments: "
 #~ msgstr "Commentaires : "

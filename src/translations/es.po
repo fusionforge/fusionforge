@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:16+0100\n"
+"POT-Creation-Date: 2013-11-21 18:42+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -1461,8 +1461,10 @@ msgid "Delete permanently this document."
 msgstr "Borrado permanentemente este documento."
 
 #: common/docman/views/listtrashfile.php:202
-msgid "Delete permanently."
-msgstr "Borrado permanentemente."
+#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
+#: www/mail/admin/deletelist.php:77
+msgid "Permanently Delete"
+msgstr "Borrado Permanentemente"
 
 #: common/docman/views/menu.php:44
 #, fuzzy
@@ -10788,11 +10790,6 @@ msgstr "Ofrece una mejor integración de Mailman en la forja"
 #: plugins/mailman/www/admin/deletelist.php:51 www/mail/admin/index.php:230
 msgid "Permanently Delete List"
 msgstr "Lista Permanentemente Borrados"
-
-#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
-#: www/mail/admin/deletelist.php:77
-msgid "Permanently Delete"
-msgstr "Borrado Permanentemente"
 
 #: plugins/mailman/www/admin/index.php:49
 #: plugins/mailman/www/admin/index.php:72
@@ -22945,6 +22942,9 @@ msgstr "No ha proporcionado el nombre de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Página personal de %s"
+
+#~ msgid "Delete permanently."
+#~ msgstr "Borrado permanentemente."
 
 #~ msgid "Comments: "
 #~ msgstr "Seguimientos: "

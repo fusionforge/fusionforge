@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:16+0100\n"
+"POT-Creation-Date: 2013-11-21 18:42+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1509,9 +1509,10 @@ msgid "Delete permanently this document."
 msgstr "Documenten bij dit project"
 
 #: common/docman/views/listtrashfile.php:202
-#, fuzzy
-msgid "Delete permanently."
-msgstr "Bestand wissen"
+#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
+#: www/mail/admin/deletelist.php:77
+msgid "Permanently Delete"
+msgstr ""
 
 #: common/docman/views/menu.php:44
 #, fuzzy
@@ -11079,11 +11080,6 @@ msgstr ""
 
 #: plugins/mailman/www/admin/deletelist.php:51 www/mail/admin/index.php:230
 msgid "Permanently Delete List"
-msgstr ""
-
-#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
-#: www/mail/admin/deletelist.php:77
-msgid "Permanently Delete"
 msgstr ""
 
 #: plugins/mailman/www/admin/index.php:49
@@ -23448,6 +23444,10 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#, fuzzy
+#~ msgid "Delete permanently."
+#~ msgstr "Bestand wissen"
 
 #, fuzzy
 #~ msgid "Comments: "

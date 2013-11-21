@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 18:16+0100\n"
+"POT-Creation-Date: 2013-11-21 18:42+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1523,9 +1523,10 @@ msgid "Delete permanently this document."
 msgstr "永久的删除这份文件"
 
 #: common/docman/views/listtrashfile.php:202
-#, fuzzy
-msgid "Delete permanently."
-msgstr "删除样板"
+#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
+#: www/mail/admin/deletelist.php:77
+msgid "Permanently Delete"
+msgstr "永久的删除"
 
 #: common/docman/views/menu.php:44
 #, fuzzy
@@ -11047,11 +11048,6 @@ msgstr ""
 #: plugins/mailman/www/admin/deletelist.php:51 www/mail/admin/index.php:230
 msgid "Permanently Delete List"
 msgstr "永久的删除邮件列表"
-
-#: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
-#: www/mail/admin/deletelist.php:77
-msgid "Permanently Delete"
-msgstr "永久的删除"
 
 #: plugins/mailman/www/admin/index.php:49
 #: plugins/mailman/www/admin/index.php:72
@@ -23247,6 +23243,10 @@ msgstr "帐号"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的个人首页"
+
+#, fuzzy
+#~ msgid "Delete permanently."
+#~ msgstr "删除样板"
 
 #, fuzzy
 #~ msgid "Comments: "
