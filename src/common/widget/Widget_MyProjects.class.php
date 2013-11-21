@@ -57,7 +57,7 @@ class Widget_MyProjects extends Widget {
 			foreach ($groups as $g) {
 				$i++;
 				$html_my_projects .= '
-				<tr '. $HTML->boxGetAltRowStyle($i) .'"><td width="99%">'.
+				<tr '. $HTML->boxGetAltRowStyle($i) .'"><td style="width:99%">'.
 					'<a href="/projects/'. $g->getUnixName() .'/">'.
 					$g->getPublicName().'</a>';
 

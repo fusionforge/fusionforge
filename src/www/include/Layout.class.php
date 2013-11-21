@@ -493,7 +493,7 @@ if (isset($params['group']) && $params['group']) {
 
 			<tr>
 				<td class="projecttab" ><img src="<?php echo $this->imgbaseurl; ?>clear.png" width="10" height="1" alt="" /></td>
-				<td width="99%" class="top projecttab">
+				<td style="width:99%" class="top projecttab">
 
 	<?php
 

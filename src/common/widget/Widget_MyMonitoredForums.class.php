@@ -116,7 +116,7 @@ class Widget_MyMonitoredForums extends Widget {
 					if (!$hide_now) {
 						$group_forum_id = $flist[$i]['group_forum_id'];
 						$html .= '
-					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'"><td width="99%">'.
+					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'"><td style="width:99%">'.
 					'&nbsp;&nbsp;&nbsp;-&nbsp;<a href="/forum/forum.php?forum_id='.$group_forum_id.'">'.
 						$flist[$i]['forum_name'].'</a></td>'.
 					'<td class="align-center"><a href="/forum/monitor.php?forum_id='.$group_forum_id.'&group_id='.$group_id.'&stop=1'.

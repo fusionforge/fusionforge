@@ -97,7 +97,7 @@ class Widget_MyMonitoredFp extends Widget {
                     if (!$hide_now) {
                         $html .='
                         <tr class="'. util_get_alt_row_color($i) .'">'.
-                            '<td width="99%">    - <a href="/file/showfiles.php?group_id='.$group_id.'">'.
+                            '<td style="width:99%">    - <a href="/file/showfiles.php?group_id='.$group_id.'">'.
                             db_result($result2,$i,'name').'</a></td>'.
                             '<td><a href="/file/filemodule_monitor.php?filemodule_id='.
                             db_result($result2,$i,'filemodule_id').

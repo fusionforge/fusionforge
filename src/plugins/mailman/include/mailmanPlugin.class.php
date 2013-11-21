@@ -176,8 +176,8 @@ class mailmanPlugin extends Plugin {
 					echo '
 						<tr '.$HTML->boxGetAltRowStyle(0).'><td class="align-center"><a href="/plugins/mailman/index.php?group_id='.$group->getID().
 						'&amp;action=unsubscribe&amp;id='.$l->getID().'">' .
-						'<img src="'.$HTML->imgroot.'/ic/trash.png" height="16" width="16" '.'border="0" alt="" /></a>' .
-						'</td><td width="99%"><a href="/plugins/mailman/index.php?group_id='.$group->getID().'&amp;action=options&amp;id='.$l->getID().'">'.
+						'<img src="'.$HTML->imgroot.'/ic/trash.png" height="16" width="16" '.'alt="" /></a>' .
+						'</td><td style="width:99%"><a href="/plugins/mailman/index.php?group_id='.$group->getID().'&amp;action=options&amp;id='.$l->getID().'">'.
 						$l->getName().'"</a></td></tr>';
 					$last_group= $group->getID();
 				}
