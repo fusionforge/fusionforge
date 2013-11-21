@@ -175,7 +175,7 @@ function people_edit_skill_inventory($user_id) {
 				<td>'. people_get_skill_name(db_result($result,$i,'skill_id')) .'</td>
 				<td>'. people_skill_level_box('skill_level_id',db_result($result,$i,'skill_level_id')). '</td>
 				<td>'. people_skill_year_box('skill_year_id',db_result($result,$i,'skill_year_id')). '</td>
-				<td nowrap="nowrap"><input type="submit" name="update_skill_inventory" value="'._('Update').'" /> &nbsp;
+				<td style="white-space:nowrap"><input type="submit" name="update_skill_inventory" value="'._('Update').'" /> &nbsp;
 					<input type="submit" name="delete_from_skill_inventory" value="'._('Delete').'" /></td>
 				</tr></form>';
 		}

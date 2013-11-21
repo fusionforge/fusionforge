@@ -101,6 +101,6 @@ class Widget_MyAdmin extends Widget {
 	}
 	function _get_admin_row($i, $text, $value, $bgcolor, $textcolor = 'white') {
 		$i=$i++;
-		return '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'. $text .'</td><td nowrap="nowrap" style="width:20%; background:'. $bgcolor .'; color:'. $textcolor .'; padding: 2px 8px; font-weight:bold; text-align:center;">'. $value .'</td></tr>';
+		return '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'. $text .'</td><td style="white-space:nowrap; width:20%; background:'. $bgcolor .'; color:'. $textcolor .'; padding: 2px 8px; font-weight:bold; text-align:center;">'. $value .'</td></tr>';
 	}
 }
