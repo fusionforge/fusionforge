@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 14:25+0100\n"
+"POT-Creation-Date: 2013-11-21 14:39+0100\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1769,8 +1769,8 @@ msgstr ""
 #: www/include/user_profile.php:68 www/include/user_profile.php:126
 #: www/include/user_profile.php:133 www/include/user_profile.php:144
 #: www/include/user_profile.php:152 www/mail/admin/index.php:192
-#: www/mail/admin/index.php:225 www/my/bookmark_add.php:47
-#: www/my/bookmark_add.php:53 www/my/bookmark_edit.php:59
+#: www/mail/admin/index.php:225 www/my/bookmark_add.php:53
+#: www/my/bookmark_add.php:59 www/my/bookmark_edit.php:59
 #: www/my/bookmark_edit.php:65 www/my/diary.php:181 www/my/diary.php:185
 #: www/news/admin/index.php:125 www/people/admin/index.php:99
 #: www/people/admin/index.php:133 www/people/createjob.php:52
@@ -5056,7 +5056,7 @@ msgstr ""
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:247
 #: www/admin/index.php:169 www/admin/pending-news.php:160
 #: www/forum/admin/index.php:412 www/include/vote_function.php:286
-#: www/my/bookmark_add.php:57 www/my/bookmark_edit.php:69 www/my/diary.php:189
+#: www/my/bookmark_add.php:63 www/my/bookmark_edit.php:69 www/my/diary.php:189
 #: www/news/admin/index.php:149 www/news/news_utils.php:42
 #: www/news/submit.php:170 www/pm/add_task.php:57 www/pm/add_task.php:140
 #: www/pm/add_task.php:154 www/pm/admin/index.php:219
@@ -18173,25 +18173,25 @@ msgstr "リスト"
 msgid "Add a new Bookmark"
 msgstr "ブックマーク編集"
 
-#: www/my/bookmark_add.php:34
+#: www/my/bookmark_add.php:35
 #, php-format
 msgid ""
 "Added bookmark for <strong>%1$s</strong> with title <strong>%2$s</strong>"
 msgstr ""
 
-#: www/my/bookmark_add.php:39
+#: www/my/bookmark_add.php:42
 msgid "Visit the bookmarked page"
 msgstr ""
 
-#: www/my/bookmark_add.php:40
+#: www/my/bookmark_add.php:45
 msgid "Back to your homepage"
 msgstr ""
 
-#: www/my/bookmark_add.php:47 www/my/bookmark_edit.php:59
+#: www/my/bookmark_add.php:53 www/my/bookmark_edit.php:59
 msgid "Bookmark URL"
 msgstr ""
 
-#: www/my/bookmark_add.php:53 www/my/bookmark_edit.php:65
+#: www/my/bookmark_add.php:59 www/my/bookmark_edit.php:65
 msgid "Bookmark Title"
 msgstr ""
 

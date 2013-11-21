@@ -31,13 +31,19 @@ $bookmark_title = trim(getStringFromRequest('bookmark_title'));
 
 if (getStringFromRequest('submit') && $bookmark_url && $bookmark_title) {
 
+	echo "<p>\n";
 	printf(_('Added bookmark for <strong>%1$s</strong> with title <strong>%2$s</strong>'),
 		htmlspecialchars($bookmark_url),
 		htmlspecialchars($bookmark_title));
+	echo "</p>\n";
 
 	bookmark_add ($bookmark_url, $bookmark_title);
-	print "<a href=\"$bookmark_url\">"._('Visit the bookmarked page')."</a> - ";
+	echo "<p>\n";
+	print "<a href=\"$bookmark_url\">"._('Visit the bookmarked page')."</a>";
+	echo "</p>\n";
+	echo "<p>\n";
 	print "<a href=\"/my/\">"._('Back to your homepage')."</a>";
+	echo "</p>\n";
 
 } else {
 	?>
