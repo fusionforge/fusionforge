@@ -111,7 +111,7 @@ echo notepad_func();
 
 	<tr>
 		<td colspan="3">
-		<strong><?php echo _('Original Comment') ?>:</strong><br />
+		<strong><?php echo _('Original Comment') . _(': '); ?></strong><br />
 		<?php
 			$sanitizer = new TextSanitizer();
 			$body = $sanitizer->SanitizeHtml($pt->getDetails());
@@ -123,7 +123,7 @@ echo notepad_func();
 			}
 		?>
 		<p />
-		<strong><?php echo _('Add A Comment') ?>:</strong><?php echo notepad_button('document.forms.modtaskform.details') ?><br />
+		<strong><?php echo _('Add A Comment') . _(': '); ?></strong><?php echo notepad_button('document.forms.modtaskform.details') ?><br />
 <?php
 $GLOBALS['editor_was_set_up']=false;
 $params = array() ;
@@ -143,7 +143,7 @@ unset($GLOBALS['editor_was_set_up']);
 
 	<tr>
 		<td colspan="3">
-		<strong><?php echo _('Start Date') ?>:</strong><br />
+		<strong><?php echo _('Start Date') . _(': '); ?></strong><br />
 		<?php
 		$pg->showMonthBox ('start_month',date('m', $pt->getStartDate()));
 		$pg->showDayBox ('start_day',date('d', $pt->getStartDate()));
@@ -157,7 +157,7 @@ unset($GLOBALS['editor_was_set_up']);
 
 	<tr>
 		<td colspan="3">
-		<strong><?php echo _('End Date') ?>:</strong><br />
+		<strong><?php echo _('End Date') . _(': '); ?></strong><br />
 		<?php
 		$pg->showMonthBox ('end_month',date('m', $pt->getEndDate()));
 		$pg->showDayBox ('end_day',date('d', $pt->getEndDate()));
