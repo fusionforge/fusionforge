@@ -23,8 +23,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-pm_header(array('title'=>_('Delete a Task'),'group_project_id'=>$group_project_id));
-
+pm_header(array('title'=>sprintf(_("Delete Task [T%s]"), $project_task_id),
+                'group_project_id'=>$group_project_id));
 ?>
 
 <form action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;group_project_id=$group_project_id"; ?>" method="post">

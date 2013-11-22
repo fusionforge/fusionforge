@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 19:03+0100\n"
+"POT-Creation-Date: 2013-11-22 15:24+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -321,10 +321,11 @@ msgstr ""
 #: www/pm/detail_task.php:104 www/pm/include/ProjectTaskHTML.class.php:141
 #: www/pm/mod_task.php:52 www/pm/mod_task.php:61 www/pm/mod_task.php:66
 #: www/pm/mod_task.php:78 www/pm/mod_task.php:83 www/pm/mod_task.php:97
-#: www/pm/mod_task.php:173 www/pm/mod_task.php:183 www/pm/mod_task.php:197
-#: www/pm/mod_task.php:202 www/pm/mod_task.php:212 www/pm/mod_task.php:323
-#: www/project/admin/roledelete.php:62 www/register/index.php:188
-#: www/reporting/timeadd.php:70
+#: www/pm/mod_task.php:114 www/pm/mod_task.php:126 www/pm/mod_task.php:146
+#: www/pm/mod_task.php:160 www/pm/mod_task.php:173 www/pm/mod_task.php:183
+#: www/pm/mod_task.php:197 www/pm/mod_task.php:202 www/pm/mod_task.php:212
+#: www/pm/mod_task.php:323 www/project/admin/roledelete.php:62
+#: www/register/index.php:188 www/reporting/timeadd.php:70
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:101
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
@@ -19641,8 +19642,9 @@ msgid "repetition of dependenton1"
 msgstr ""
 
 #: www/pm/deletetask.php:26
-msgid "Delete a Task"
-msgstr "Borrar Tarea"
+#, php-format
+msgid "Delete Task [T%s]"
+msgstr "Borrar Tarea [T%s]"
 
 #: www/pm/deletetask.php:37
 msgid "Are you sure you want to delete this task?"
