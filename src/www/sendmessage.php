@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
- * Copyright 2010 (c) Franck Villaume
+ * Copyright 2010-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,7 +30,7 @@ $toaddress = getStringFromRequest('toaddress');
 $touser = getStringFromRequest('touser');
 
 if (!$toaddress && !$touser) {
-	exit_missing_param('',array(_('toaddress'),_('touser')),'home');
+	exit_missing_param('', array(_('toaddress'), _('touser')), 'home');
 }
 
 if ($touser) {
@@ -38,11 +38,11 @@ if ($touser) {
 		check to see if that user even exists
 		Get their name and email if it does
 	*/
-	$result=db_query_params ('SELECT email,user_name FROM users WHERE user_id=$1',
-			array($touser)) ;
+	$result = db_query_params('SELECT email,user_name FROM users WHERE user_id=$1',
+			array($touser));
 
 	if (!$result || db_numrows($result) < 1) {
-		exit_error(_('That user does not exist.'),'home');
+		exit_error(_('That user does not exist.'), 'home');
 	}
 }
 
@@ -65,7 +65,7 @@ if (getStringFromRequest('send_mail')) {
 			force them to enter all vars
 		*/
 		form_release_key(getStringFromRequest('form_key'));
-		exit_missing_param('',array(_('Subject'),_('Body'),_('Name'),_('Email')),'home');
+		exit_missing_param('', array(_('Subject'), _('Body'), _('Name'), _('Email')), 'home');
 	}
 
 	// we remove the CRLF in all thoses vars. This is to make sure that there will be no CRLF Injection
@@ -78,10 +78,10 @@ if (getStringFromRequest('send_mail')) {
 		/*
 			send it to the toaddress
 		*/
-		$to=preg_replace('/_maillink_/i','@',$toaddress);
+		$to = preg_replace('/_maillink_/i', '@', $toaddress);
 		$to = util_remove_CRLF($to);
-		util_send_message($to,$subject,$body,$email,'',$name);
-		$HTML->header(array('title'=>forge_get_config ('forge_name').' ' ._('Contact')   ));
+		util_send_message($to, $subject, $body, $email, '', $name);
+		$HTML->header(array('title' => forge_get_config('forge_name').' ' ._('Contact')));
 		echo '<p>'._('Message has been sent').'.</p>';
 		$HTML->footer(array());
 		exit;
@@ -89,10 +89,10 @@ if (getStringFromRequest('send_mail')) {
 		/*
 			figure out the user's email and send it there
 		*/
-		$to=db_result($result,0,'email');
+		$to = db_result($result,0,'email');
 		$to = util_remove_CRLF($to);
-		util_send_message($to,$subject,$body,$email,'',$name);
-		$HTML->header(array('title'=>forge_get_config ('forge_name').' '._('Contact')));
+		util_send_message($to, $subject, $body, $email, '', $name);
+		$HTML->header(array('title' => forge_get_config('forge_name').' '._('Contact')));
 		echo '<p>'._('Message has been sent').'</p>';
 		$HTML->footer(array());
 		exit;
@@ -109,9 +109,11 @@ if (session_loggedin()) {
 	$user  =& session_get_user();
 	$name  = $user->getRealName();
 	$email = $user->getEmail();
+	$is_logged = true;
 } else {
 	$name  = '';
 	$email = '';
+	$is_logged = false;
 }
 $subject = getStringFromRequest('subject');
 
@@ -143,7 +145,7 @@ $HTML->header(array('title'=>forge_get_config ('forge_name').' Staff'));
 </p>
 <p>
 <strong><?php echo _('Your Email Address').utils_requiredField()._(':'); ?></strong><br />
-<input type="text" required="required" name="email" size="40" maxlength="255" value="<?php echo $email ?>" />
+<input type="email" required="required" name="email" size="40" maxlength="255" value="<?php echo $email ?>" />
 </p>
 <p>
 <strong><?php echo _('Subject').utils_requiredField()._(':'); ?></strong><br />
@@ -153,6 +155,11 @@ $HTML->header(array('title'=>forge_get_config ('forge_name').' Staff'));
 <strong><?php echo _('Message').utils_requiredField()._(':'); ?></strong><br />
 <textarea name="body" required="required" rows="15" cols="60"></textarea>
 </p>
+<?php
+if (!$is_logged) {
+	plugin_hook('captcha_form');
+}
+?>
 <p align="center">
 <input type="submit" name="send_mail" value="<?php echo _('Send Message') ?>" />
 </p>
