@@ -995,7 +995,7 @@ if (isset($params['group']) && $params['group']) {
 			return '';
 		} else {
 			return '
-				<p class="error">'.util_pwrap(strip_tags($msg, '<br>'))."</p\n";
+			<p class="error">'.strip_tags($msg, '<br>')."</p>\n";
 		}
 	}
 
