@@ -55,47 +55,56 @@ if (getStringFromRequest('send_mail')) {
 		exit_form_double_submit('home');
 	}
 
+	$valide = 1;
+	if (!session_loggedin()) {
+		$params['valide'] =& $valide;
+		$params['warning_msg'] =& $warning_msg;
+		plugin_hook('captcha_check', $params);
+	}
+
 	$subject = getStringFromRequest('subject');
 	$body = getStringFromRequest('body');
 	$name = getStringFromRequest('name');
 	$email = getStringFromRequest('email');
 
-	if (!$subject || !$body || !$name || !$email) {
-		/*
-			force them to enter all vars
-		*/
-		form_release_key(getStringFromRequest('form_key'));
-		exit_missing_param('', array(_('Subject'), _('Body'), _('Name'), _('Email')), 'home');
-	}
+	if ($valide) {
+		if (!$subject || !$body || !$name || !$email) {
+			/*
+				force them to enter all vars
+			*/
+			form_release_key(getStringFromRequest('form_key'));
+			exit_missing_param('', array(_('Subject'), _('Body'), _('Name'), _('Email')), 'home');
+		}
 
-	// we remove the CRLF in all thoses vars. This is to make sure that there will be no CRLF Injection
-	$name = util_remove_CRLF($name);
-	// Really don't see what wrong could happen with CRLF in message body
-	//$email = util_remove_CRLF($email);
-	$subject = util_remove_CRLF($subject);
+		// we remove the CRLF in all thoses vars. This is to make sure that there will be no CRLF Injection
+		$name = util_remove_CRLF($name);
+		// Really don't see what wrong could happen with CRLF in message body
+		//$email = util_remove_CRLF($email);
+		$subject = util_remove_CRLF($subject);
 
-	if ($toaddress) {
-		/*
-			send it to the toaddress
-		*/
-		$to = preg_replace('/_maillink_/i', '@', $toaddress);
-		$to = util_remove_CRLF($to);
-		util_send_message($to, $subject, $body, $email, '', $name);
-		$HTML->header(array('title' => forge_get_config('forge_name').' ' ._('Contact')));
-		echo '<p>'._('Message has been sent').'.</p>';
-		$HTML->footer(array());
-		exit;
-	} elseif ($touser) {
-		/*
-			figure out the user's email and send it there
-		*/
-		$to = db_result($result,0,'email');
-		$to = util_remove_CRLF($to);
-		util_send_message($to, $subject, $body, $email, '', $name);
-		$HTML->header(array('title' => forge_get_config('forge_name').' '._('Contact')));
-		echo '<p>'._('Message has been sent').'</p>';
-		$HTML->footer(array());
-		exit;
+		if ($toaddress) {
+			/*
+				send it to the toaddress
+			*/
+			$to = preg_replace('/_maillink_/i', '@', $toaddress);
+			$to = util_remove_CRLF($to);
+			util_send_message($to, $subject, $body, $email, '', $name);
+			$HTML->header(array('title' => forge_get_config('forge_name').' ' ._('Contact')));
+			echo '<p>'._('Message has been sent').'.</p>';
+			$HTML->footer(array());
+			exit;
+		} elseif ($touser) {
+			/*
+				figure out the user's email and send it there
+			*/
+			$to = db_result($result,0,'email');
+			$to = util_remove_CRLF($to);
+			util_send_message($to, $subject, $body, $email, '', $name);
+			$HTML->header(array('title' => forge_get_config('forge_name').' '._('Contact')));
+			echo '<p>'._('Message has been sent').'</p>';
+			$HTML->footer(array());
+			exit;
+		}
 	}
 }
 
@@ -111,13 +120,15 @@ if (session_loggedin()) {
 	$email = $user->getEmail();
 	$is_logged = true;
 } else {
-	$name  = '';
-	$email = '';
 	$is_logged = false;
+	if (!isset($valide)) {
+		$name  = '';
+		$email = '';
+	}
 }
-$subject = getStringFromRequest('subject');
 
-$HTML->header(array('title'=>forge_get_config ('forge_name').' Staff'));
+$subject = getStringFromRequest('subject');
+$HTML->header(array('title' => forge_get_config('forge_name').' '._('Contact')));
 
 ?>
 
@@ -141,11 +152,25 @@ $HTML->header(array('title'=>forge_get_config ('forge_name').' Staff'));
 <input type="hidden" name="touser" value="<?php echo $touser; ?>" />
 
 <strong><?php echo _('Your Name').utils_requiredField()._(':'); ?></strong><br />
-<input type="text" required="required" name="name" size="40" maxlength="40" value="<?php echo $name ?>" />
+<?php
+if ($is_logged) {
+	echo '<input type="hidden" name="name" value="'.$name.'" />';
+	echo '<input type="text" disabled="disabled" size="'.strlen($name).'" value="'.$name.'" />';
+} else {
+	echo '<input type="text" required="required" name="name" size="40" maxlength="40" value="'.$name.'" />';
+}
+?>
 </p>
 <p>
 <strong><?php echo _('Your Email Address').utils_requiredField()._(':'); ?></strong><br />
-<input type="email" required="required" name="email" size="40" maxlength="255" value="<?php echo $email ?>" />
+<?php
+if ($is_logged) {
+	echo '<input type="hidden" name="email" value="'.$email.'" />';
+	echo '<input type="text" disabled="disabled" size="'.strlen($email).'" value="'.$email.'" />';
+} else {
+	echo '<input type="email" required="required" name="email" size="40" maxlength="255" value="'.$email.'" />';
+}
+?>
 </p>
 <p>
 <strong><?php echo _('Subject').utils_requiredField()._(':'); ?></strong><br />
@@ -153,7 +178,13 @@ $HTML->header(array('title'=>forge_get_config ('forge_name').' Staff'));
 </p>
 <p>
 <strong><?php echo _('Message').utils_requiredField()._(':'); ?></strong><br />
-<textarea name="body" required="required" rows="15" cols="60"></textarea>
+<textarea name="body" required="required" rows="15" cols="60" >
+<?php
+if (isset($body)) {
+	echo $body;
+}
+?>
+</textarea>
 </p>
 <?php
 if (!$is_logged) {
