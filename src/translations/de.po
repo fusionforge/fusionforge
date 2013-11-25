@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 18:10+0100\n"
+"POT-Creation-Date: 2013-11-25 18:30+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -3408,8 +3408,8 @@ msgstr ""
 
 #: common/include/Group.class.php:2591
 #, php-format
-msgid "%1$s Project Approved"
-msgstr "%1$s Projekt genehmigt"
+msgid "%s Project Approved"
+msgstr "%s Projekt genehmigt"
 
 #: common/include/Group.class.php:2624
 #, php-format
@@ -23592,10 +23592,6 @@ msgstr "Kein Benutzername angegeben"
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
 
-#, fuzzy
-#~ msgid "Comments: "
-#~ msgstr "Nachfassen"
-
 #~ msgid "Version:"
 #~ msgstr "Version:"
 
@@ -24605,9 +24601,6 @@ msgstr "Persönliche Seite für %s"
 #~ msgstr ""
 #~ "Genießen Sie das System und erzählen Sie anderen über %s. Lassen Sie es "
 #~ "uns wissen, wenn dort irgend etwas ist, wobei wir Ihnen helfen können."
-
-#~ msgid "%s Project Approved"
-#~ msgstr "%s Projekt genehmigt"
 
 #~ msgid "Error - Choose a User To Monitor First"
 #~ msgstr "Fehler - Wählen Sie zuerst einen Benutzer zum Überwachen aus"

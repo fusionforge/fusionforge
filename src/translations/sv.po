@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 18:10+0100\n"
+"POT-Creation-Date: 2013-11-25 18:30+0100\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3398,8 +3398,8 @@ msgstr ""
 
 #: common/include/Group.class.php:2591
 #, php-format
-msgid "%1$s Project Approved"
-msgstr "%1$s projekt godkänt"
+msgid "%s Project Approved"
+msgstr "%s projekt godkänt"
 
 #: common/include/Group.class.php:2624
 #, php-format
@@ -8374,7 +8374,8 @@ msgstr "Den resurskategorin existerar inte"
 #: plugins/authbuiltin/www/post-login.php:110
 #: plugins/authldap/www/post-login.php:109
 msgid "Your account is currently pending your email confirmation."
-msgstr "Du får nu ett bekräftelsebrev för att säkerställa att din e-postadress är "
+msgstr ""
+"Du får nu ett bekräftelsebrev för att säkerställa att din e-postadress är "
 "riktig."
 
 #: plugins/authbuiltin/www/post-login.php:111
@@ -23195,10 +23196,6 @@ msgstr "Användarenamn"
 msgid "Personal Page for %s"
 msgstr "Min personliga sida"
 
-#, fuzzy
-#~ msgid "Comments: "
-#~ msgstr "Uppföljning"
-
 #~ msgid "Password:"
 #~ msgstr "Lösenord:"
 
@@ -23932,9 +23929,6 @@ msgstr "Min personliga sida"
 #~ msgstr ""
 #~ "Dra nytta av systemet, och snälla berätta för andra om %s. Låt oss få "
 #~ "veta om det finns något vi kan göra för att hjälpa dig."
-
-#~ msgid "%s Project Approved"
-#~ msgstr "%s projekt godkänt"
 
 #~ msgid "Error - Choose a User To Monitor First"
 #~ msgstr "Fel - Välj först en användare att bevaka"

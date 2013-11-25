@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 18:10+0100\n"
+"POT-Creation-Date: 2013-11-25 18:30+0100\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3335,8 +3335,8 @@ msgstr ""
 
 #: common/include/Group.class.php:2591
 #, php-format
-msgid "%1$s Project Approved"
-msgstr "%1$s プロジェクト 承認"
+msgid "%s Project Approved"
+msgstr "%s プロジェクト 承認"
 
 #: common/include/Group.class.php:2624
 #, php-format
@@ -22933,9 +22933,6 @@ msgstr "%sのパーソナルページ"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "%s へのプロジェクト登録が承認されました。"
-
-#~ msgid "%s Project Approved"
-#~ msgstr "%s プロジェクト 承認"
 
 #, fuzzy
 #~ msgid "Could Not Get FRSPackage"

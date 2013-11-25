@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 18:10+0100\n"
+"POT-Creation-Date: 2013-11-25 18:30+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -3316,8 +3316,8 @@ msgstr ""
 
 #: common/include/Group.class.php:2591
 #, php-format
-msgid "%1$s Project Approved"
-msgstr "Proyecto aprobado %1$s"
+msgid "%s Project Approved"
+msgstr "Proyecto aprobado %s"
 
 #: common/include/Group.class.php:2624
 #, php-format
@@ -23888,9 +23888,6 @@ msgstr "Página personal de %s"
 #~ msgstr ""
 #~ "Disfrute del sistema, y por favor, cuente a sus contactos sobre la "
 #~ "existencia de %s. Coméntenos también si podemos hacer algo para ayudarle."
-
-#~ msgid "%s Project Approved"
-#~ msgstr "Proyecto aprobado %s"
 
 #~ msgid "Error - Choose a User To Monitor First"
 #~ msgstr "Error - no hay usuario seleccionado."

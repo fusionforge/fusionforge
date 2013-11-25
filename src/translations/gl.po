@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 18:10+0100\n"
+"POT-Creation-Date: 2013-11-25 18:30+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -3419,8 +3419,8 @@ msgstr ""
 
 #: common/include/Group.class.php:2591
 #, php-format
-msgid "%1$s Project Approved"
-msgstr "O proxecto %1$s foi aprobado "
+msgid "%s Project Approved"
+msgstr "O proxecto %s foi aprobado "
 
 #: common/include/Group.class.php:2624
 #, php-format
@@ -23601,10 +23601,6 @@ msgstr "Non se introduciu un nome de usuario"
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
 
-#, fuzzy
-#~ msgid "Comments: "
-#~ msgstr "Respostas"
-
 #~ msgid "Theme:"
 #~ msgstr "Tema: "
 
@@ -24621,9 +24617,6 @@ msgstr "Páxina persoal de %s"
 #~ msgstr ""
 #~ "Goce do sistema, e fálelle á xente sobre %s. Se hai algo que poidamos "
 #~ "facer para axudalo, fáganolo saber."
-
-#~ msgid "%s Project Approved"
-#~ msgstr "O proxecto %s foi aprobado "
 
 #~ msgid "Error - Choose a User To Monitor First"
 #~ msgstr "Erro - elixa, primeiro, un usuario para monitorizar "

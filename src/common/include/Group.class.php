@@ -2588,7 +2588,7 @@ if there is anything we can do to help you.
 							util_make_url ('/project/admin/?group_id='.$this->getID()),
 							forge_get_config ('forge_name'));
 
-			util_send_message($admin->getEmail(), sprintf(_('%1$s Project Approved'), forge_get_config ('forge_name')), $message);
+			util_send_message($admin->getEmail(), sprintf(_('%s Project Approved'), forge_get_config ('forge_name')), $message);
 
 			setup_gettext_from_context();
 		}

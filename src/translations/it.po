@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 18:10+0100\n"
+"POT-Creation-Date: 2013-11-25 18:30+0100\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3419,8 +3419,8 @@ msgstr ""
 
 #: common/include/Group.class.php:2591
 #, php-format
-msgid "%1$s Project Approved"
-msgstr "Progetto %1$s approvato"
+msgid "%s Project Approved"
+msgstr "Progetto %s approvato"
 
 #: common/include/Group.class.php:2624
 #, php-format
@@ -23368,10 +23368,6 @@ msgstr "Non è stato inserito alcun file"
 msgid "Personal Page for %s"
 msgstr "Pagina Personale"
 
-#, fuzzy
-#~ msgid "Comments: "
-#~ msgstr "Risposte"
-
 #~ msgid "Theme:"
 #~ msgstr "Tema:"
 
@@ -24212,9 +24208,6 @@ msgstr "Pagina Personale"
 #~ "fare in modo che le persone possano trovare il tuo progetto, dovresti "
 #~ "farlo subito. Visita il tuo progetto mentre sei loggato e seleziona "
 #~ "'Amministrazione Progetto' dal menu."
-
-#~ msgid "%s Project Approved"
-#~ msgstr "Progetto %s approvato"
 
 #~ msgid "Error - Choose a User To Monitor First"
 #~ msgstr "Errore - Prima devi selezionare un utente da monitorare"

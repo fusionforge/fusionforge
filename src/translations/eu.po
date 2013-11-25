@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 18:10+0100\n"
+"POT-Creation-Date: 2013-11-25 18:30+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3400,8 +3400,8 @@ msgstr ""
 
 #: common/include/Group.class.php:2591
 #, php-format
-msgid "%1$s Project Approved"
-msgstr "%1$s -ek onartutako proiektua"
+msgid "%s Project Approved"
+msgstr "%s -ek onartutako proiektua"
 
 #: common/include/Group.class.php:2624
 #, php-format
@@ -24061,9 +24061,6 @@ msgstr "Nere orri pertsonala"
 #~ msgstr ""
 #~ "Goza ezazu sistemaz eta mesedez %s -koei abisatu iezaiezu. Esaiguzu ere "
 #~ "zu laguntzeko zer egin genezake."
-
-#~ msgid "%s Project Approved"
-#~ msgstr "%s -ek onartutako proiektua"
 
 #~ msgid "Error - Choose a User To Monitor First"
 #~ msgstr "Akatsa - ez dago hautatutako erabiltzailerik."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 18:10+0100\n"
+"POT-Creation-Date: 2013-11-25 18:30+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3388,8 +3388,8 @@ msgstr ""
 
 #: common/include/Group.class.php:2591
 #, php-format
-msgid "%1$s Project Approved"
-msgstr "%1$s project goedgekeurd"
+msgid "%s Project Approved"
+msgstr "%s project goedgekeurd"
 
 #: common/include/Group.class.php:2624
 #, php-format
@@ -24222,9 +24222,6 @@ msgstr "Mijn persoonlijke pagina"
 #~ msgstr ""
 #~ "Veel plezier met dit systeem en vertel ook anderen over %s. Laat het ons "
 #~ "weten als we ergens mee kunnen helpen."
-
-#~ msgid "%s Project Approved"
-#~ msgstr "%s project goedgekeurd"
 
 #~ msgid "Error - Choose a User To Monitor First"
 #~ msgstr "Fout - kies eerst een gebruiker om te monitoren"

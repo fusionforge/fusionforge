@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 18:10+0100\n"
+"POT-Creation-Date: 2013-11-25 18:30+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -3258,8 +3258,8 @@ msgstr ""
 
 #: common/include/Group.class.php:2591
 #, php-format
-msgid "%1$s Project Approved"
-msgstr "%1$s - Projet approuvé"
+msgid "%s Project Approved"
+msgstr "Projet %s approuvé"
 
 #: common/include/Group.class.php:2624
 #, php-format
@@ -23866,9 +23866,6 @@ msgstr "Page personnelle de %s"
 #~ "Profitez du site et n'hésitez pas à parler de %s autour de vous. "
 #~ "N'hésitez pas à nous contacter : nous sommes à votre disposition pour "
 #~ "vous aider."
-
-#~ msgid "%s Project Approved"
-#~ msgstr "Projet %s approuvé"
 
 #~ msgid "Error - Choose a User To Monitor First"
 #~ msgstr "Erreur - Choisissez d'abord un utilisateur à suivre"

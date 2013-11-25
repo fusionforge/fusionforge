@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 18:10+0100\n"
+"POT-Creation-Date: 2013-11-25 18:30+0100\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3178,8 +3178,8 @@ msgstr ""
 
 #: common/include/Group.class.php:2591
 #, php-format
-msgid "%1$s Project Approved"
-msgstr "Projeto %1$s Aprovado"
+msgid "%s Project Approved"
+msgstr "Projeto %s Aprovado"
 
 #: common/include/Group.class.php:2624
 #, php-format
@@ -22163,9 +22163,6 @@ msgstr "Minha Página Pessoal"
 #~ msgstr ""
 #~ "Aproveite o sistema, e por favor informe os outros sobre o %s. Deixe-nos "
 #~ "saber se há alguma coisa que podemos fazer para ajudá-lo."
-
-#~ msgid "%s Project Approved"
-#~ msgstr "Projeto %s Aprovado"
 
 #~ msgid "Error - Choose a User To Monitor First"
 #~ msgstr "Erro - Escolha um Usuário para Monitrar Primeiro"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 18:10+0100\n"
+"POT-Creation-Date: 2013-11-25 18:30+0100\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3393,8 +3393,8 @@ msgstr ""
 
 #: common/include/Group.class.php:2591
 #, php-format
-msgid "%1$s Project Approved"
-msgstr "%1$s 專案通過審核了"
+msgid "%s Project Approved"
+msgstr "%s 專案通過審核了"
 
 #: common/include/Group.class.php:2624
 #, php-format
@@ -23230,10 +23230,6 @@ msgstr "帳號"
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
 
-#, fuzzy
-#~ msgid "Comments: "
-#~ msgstr "回覆"
-
 #~ msgid "Theme:"
 #~ msgstr "佈景："
 
@@ -24002,9 +23998,6 @@ msgstr "我的個人首頁"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "您在 %s 註冊的專案通過審核了"
-
-#~ msgid "%s Project Approved"
-#~ msgstr "%s 專案通過審核了"
 
 #~ msgid "Error - Choose a User To Monitor First"
 #~ msgstr "錯誤 － 先選擇某個會員"

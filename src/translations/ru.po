@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 18:10+0100\n"
+"POT-Creation-Date: 2013-11-25 18:30+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3396,8 +3396,8 @@ msgstr ""
 
 #: common/include/Group.class.php:2591
 #, php-format
-msgid "%1$s Project Approved"
-msgstr "Проект %1$s утвержден."
+msgid "%s Project Approved"
+msgstr "Проект %s утвержден"
 
 #: common/include/Group.class.php:2624
 #, php-format
@@ -23748,10 +23748,6 @@ msgstr "Имя участника обязательно"
 msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
 
-#, fuzzy
-#~ msgid "Comments: "
-#~ msgstr "Следовать"
-
 #~ msgid "Password:"
 #~ msgstr "Пароль:"
 
@@ -24682,9 +24678,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "Your project registration for %s has been approved."
 #~ msgstr "Регистрация вашего проекта %s одобрена."
-
-#~ msgid "%s Project Approved"
-#~ msgstr "Проект %s утвержден"
 
 #~ msgid "Error - Choose a User To Monitor First"
 #~ msgstr "Выберите сначала пользователя для наблюдения"
