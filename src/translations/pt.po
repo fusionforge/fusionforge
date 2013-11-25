@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-22 15:24+0100\n"
+"POT-Creation-Date: 2013-11-25 17:19+0100\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -214,6 +214,7 @@ msgstr ""
 #: common/forum/ForumMessage.class.php:666 common/include/Error.class.php:206
 #: common/include/exit.php:80 common/include/Group.class.php:2625
 #: common/include/Group.class.php:2626 common/include/Group.class.php:2627
+#: common/include/Group.class.php:2695
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/User.class.php:350 common/include/User.class.php:436
 #: common/include/User.class.php:1410 common/mail/MailingList.class.php:174
@@ -3213,33 +3214,32 @@ msgid "There is no administrator to send the mail to."
 msgstr ""
 
 #: common/include/Group.class.php:2678
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
 "\n"
 "Project Full Name:  %2$s\n"
 "Submitted Description: %3$s\n"
 msgstr ""
+"O time de administradores do %s irá examinar agora o projeto que você "
+"enviou.  Você será notificado sobre a decisão deles."
 
 #: common/include/Group.class.php:2688
 #, php-format
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr ""
 
-#: common/include/Group.class.php:2694
-#, fuzzy, php-format
-msgid ""
-"\n"
-"Please visit the following URL to approve or reject this project:\n"
-"%1$s"
+#: common/include/Group.class.php:2695
+#, fuzzy
+msgid "Please visit the following URL to approve or reject this project"
 msgstr "Por favor visite a seguinte URL para completar a mudança do e-mail:"
 
-#: common/include/Group.class.php:2698 common/include/Group.class.php:2712
+#: common/include/Group.class.php:2697 common/include/Group.class.php:2711
 #, php-format
-msgid "New %1$s Project Submitted"
-msgstr "Novo Projeto %1$s Enviado"
+msgid "New %s Project Submitted"
+msgstr "Novo Projeto %s Enviado"
 
-#: common/include/Group.class.php:2705
+#: common/include/Group.class.php:2704
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3253,39 +3253,39 @@ msgstr ""
 "O time de administradores do %s irá examinar agora o projeto que você "
 "enviou.  Você será notificado sobre a decisão deles."
 
-#: common/include/Group.class.php:2727
+#: common/include/Group.class.php:2726
 msgid "Group name is too short"
 msgstr ""
 
-#: common/include/Group.class.php:2730
+#: common/include/Group.class.php:2729
 msgid "Group name is too long"
 msgstr ""
 
-#: common/include/Group.class.php:2733
+#: common/include/Group.class.php:2732
 msgid "Group name already taken"
 msgstr ""
 
-#: common/include/Group.class.php:2814
+#: common/include/Group.class.php:2813
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2877
+#: common/include/Group.class.php:2876
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2895
+#: common/include/Group.class.php:2894
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2913
+#: common/include/Group.class.php:2912
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2931
+#: common/include/Group.class.php:2930
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
@@ -21799,6 +21799,10 @@ msgid "Personal Page for %s"
 msgstr "Minha Página Pessoal"
 
 #, fuzzy
+#~ msgid "New %1$s Project Submitted"
+#~ msgstr "Novo Projeto %s Enviado"
+
+#, fuzzy
 #~ msgid "Could Not Delete: "
 #~ msgstr "Não Posso Completar a Operação: "
 
@@ -22197,9 +22201,6 @@ msgstr "Minha Página Pessoal"
 
 #~ msgid "%s Project Approved"
 #~ msgstr "Projeto %s Aprovado"
-
-#~ msgid "New %s Project Submitted"
-#~ msgstr "Novo Projeto %s Enviado"
 
 #~ msgid "Submitted Description"
 #~ msgstr "Descrição Enviada"

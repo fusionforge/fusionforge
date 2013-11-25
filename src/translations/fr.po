@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-22 15:24+0100\n"
+"POT-Creation-Date: 2013-11-25 17:19+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -216,6 +216,7 @@ msgstr "Dossier"
 #: common/forum/ForumMessage.class.php:666 common/include/Error.class.php:206
 #: common/include/exit.php:80 common/include/Group.class.php:2625
 #: common/include/Group.class.php:2626 common/include/Group.class.php:2627
+#: common/include/Group.class.php:2695
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/User.class.php:350 common/include/User.class.php:436
 #: common/include/User.class.php:1410 common/mail/MailingList.class.php:174
@@ -3293,7 +3294,7 @@ msgid "There is no administrator to send the mail to."
 msgstr "Il n'y a pas d'administrateur à qui envoyer le courriel."
 
 #: common/include/Group.class.php:2678
-#, php-format
+#, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
 "\n"
@@ -3310,24 +3311,17 @@ msgstr ""
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "Proposé par %1$s (%2$s)\n"
 
-#: common/include/Group.class.php:2694
-#, php-format
-msgid ""
-"\n"
-"Please visit the following URL to approve or reject this project:\n"
-"%1$s"
-msgstr ""
-"\n"
-"Veuillez visiter l'URL suivante pour approuver ou rejeter ce projet :\n"
-"%1$s"
+#: common/include/Group.class.php:2695
+msgid "Please visit the following URL to approve or reject this project"
+msgstr "Veuillez visiter l'URL suivante pour approuver ou rejeter ce projet"
 
-#: common/include/Group.class.php:2698 common/include/Group.class.php:2712
+#: common/include/Group.class.php:2697 common/include/Group.class.php:2711
 #, php-format
-msgid "New %1$s Project Submitted"
-msgstr "%1$s - Nouveau projet soumis"
+msgid "New %s Project Submitted"
+msgstr "%s - Nouveau projet soumis"
 
-#: common/include/Group.class.php:2705
-#, php-format
+#: common/include/Group.class.php:2704
+#, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
 "\n"
@@ -3345,41 +3339,41 @@ msgstr ""
 "L'équipe d'administration de %1$s va maintenant examiner votre\n"
 "candidature. Vous serez tenu informé de sa décision."
 
-#: common/include/Group.class.php:2727
+#: common/include/Group.class.php:2726
 msgid "Group name is too short"
 msgstr "Le nom du projet est trop court"
 
-#: common/include/Group.class.php:2730
+#: common/include/Group.class.php:2729
 msgid "Group name is too long"
 msgstr "Le nom du projet est trop long"
 
-#: common/include/Group.class.php:2733
+#: common/include/Group.class.php:2732
 msgid "Group name already taken"
 msgstr "Le nom du projet est déjà pris"
 
-#: common/include/Group.class.php:2814
+#: common/include/Group.class.php:2813
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr "Erreur lors de la mise à jour de l'état Unix du projet : %s"
 
-#: common/include/Group.class.php:2877
+#: common/include/Group.class.php:2876
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 "Erreur lors de la mise à jour de l'état du système de création de documents "
 "en ligne : %s"
 
-#: common/include/Group.class.php:2895
+#: common/include/Group.class.php:2894
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "Erreur lors de la mise à jour de l'état Webdab du projet : %s"
 
-#: common/include/Group.class.php:2913
+#: common/include/Group.class.php:2912
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "Erreur lors de la mise à jour du statut Unix du projet : %s"
 
-#: common/include/Group.class.php:2931
+#: common/include/Group.class.php:2930
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "Erreur lors de la réindexation du moteur de recherche : %s"
@@ -22815,6 +22809,10 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
+#, fuzzy
+#~ msgid "New %1$s Project Submitted"
+#~ msgstr "%s - Nouveau projet soumis"
+
 #~ msgid "Delete a Task"
 #~ msgstr "Supprimer une tâche"
 
@@ -23911,14 +23909,8 @@ msgstr "Page personnelle de %s"
 #~ msgid "%s Project Approved"
 #~ msgstr "Projet %s approuvé"
 
-#~ msgid "New %s Project Submitted"
-#~ msgstr "Un nouveau projet a été soumis sur %s"
-
 #~ msgid "Submitted Description"
 #~ msgstr "Description proposée"
-
-#~ msgid "Please visit the following URL to approve or reject this project"
-#~ msgstr "Visitez l'URL suivante pour approuver ou refuser ce projet"
 
 #~ msgid ""
 #~ "The %s admin team will now examine your project submission. You will be "

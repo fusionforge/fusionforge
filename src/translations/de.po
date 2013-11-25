@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 16:42+0100\n"
+"POT-Creation-Date: 2013-11-25 17:19+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -227,6 +227,7 @@ msgstr ""
 #: common/forum/ForumMessage.class.php:666 common/include/Error.class.php:206
 #: common/include/exit.php:80 common/include/Group.class.php:2625
 #: common/include/Group.class.php:2626 common/include/Group.class.php:2627
+#: common/include/Group.class.php:2695
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/User.class.php:350 common/include/User.class.php:436
 #: common/include/User.class.php:1410 common/mail/MailingList.class.php:174
@@ -3466,22 +3467,19 @@ msgstr ""
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "Gepostet von %1$s (%2$s)"
 
-#: common/include/Group.class.php:2694
-#, fuzzy, php-format
-msgid ""
-"\n"
-"Please visit the following URL to approve or reject this project:\n"
-"%1$s"
+#: common/include/Group.class.php:2695
+#, fuzzy
+msgid "Please visit the following URL to approve or reject this project"
 msgstr ""
 "Bitte besuchen Sie den folgenden Link, um die Änderung zu vervollständigen:"
 
-#: common/include/Group.class.php:2698 common/include/Group.class.php:2712
+#: common/include/Group.class.php:2697 common/include/Group.class.php:2711
 #, php-format
-msgid "New %1$s Project Submitted"
-msgstr "Neues %1$s Projekt vorgeschlagen"
+msgid "New %s Project Submitted"
+msgstr "Neues %s Projekt vorgeschlagen"
 
-#: common/include/Group.class.php:2705
-#, php-format
+#: common/include/Group.class.php:2704
+#, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
 "\n"
@@ -3499,39 +3497,39 @@ msgstr ""
 "Das %1$s-Admin-Team wird jetzt Ihre Projekt-Anmeldung überprüfen. Sie werden "
 "über deren Entscheidung benachrichtigt."
 
-#: common/include/Group.class.php:2727
+#: common/include/Group.class.php:2726
 msgid "Group name is too short"
 msgstr "Der Gruppenname ist zu kurz"
 
-#: common/include/Group.class.php:2730
+#: common/include/Group.class.php:2729
 msgid "Group name is too long"
 msgstr "Der Gruppenname ist zu lang"
 
-#: common/include/Group.class.php:2733
+#: common/include/Group.class.php:2732
 msgid "Group name already taken"
 msgstr "Der Gruppenname wird bereits verwendet"
 
-#: common/include/Group.class.php:2814
+#: common/include/Group.class.php:2813
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr "Fehler: Konnte den Unix Gruppen Status nicht aktualisieren: %s"
 
-#: common/include/Group.class.php:2877
+#: common/include/Group.class.php:2876
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr "Fehler - Konnte den Unix Gruppen Status nicht aktualisieren: %s"
 
-#: common/include/Group.class.php:2895
+#: common/include/Group.class.php:2894
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "Fehler - Konnte den Unix Gruppen Status nicht aktualisieren: %s"
 
-#: common/include/Group.class.php:2913
+#: common/include/Group.class.php:2912
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "Fehler - Konnte den Unix Gruppen Status nicht aktualisieren: %s"
 
-#: common/include/Group.class.php:2931
+#: common/include/Group.class.php:2930
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "Fehler - Konnte den Unix Gruppen Status nicht aktualisieren: %s"
@@ -23622,6 +23620,10 @@ msgstr "Kein Benutzername angegeben"
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
 
+#, fuzzy
+#~ msgid "New %1$s Project Submitted"
+#~ msgstr "Neues %s Projekt vorgeschlagen"
+
 #~ msgid "[delete]"
 #~ msgstr "[Löschen]"
 
@@ -24645,9 +24647,6 @@ msgstr "Persönliche Seite für %s"
 
 #~ msgid "%s Project Approved"
 #~ msgstr "%s Projekt genehmigt"
-
-#~ msgid "New %s Project Submitted"
-#~ msgstr "Neues %s Projekt vorgeschlagen"
 
 #~ msgid "Submitted Description"
 #~ msgstr "Eingegebene Beschreibung"

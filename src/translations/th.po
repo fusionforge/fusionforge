@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-22 15:24+0100\n"
+"POT-Creation-Date: 2013-11-25 17:19+0100\n"
 "PO-Revision-Date: 2013-06-03 17:16+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -215,6 +215,7 @@ msgstr ""
 #: common/forum/ForumMessage.class.php:666 common/include/Error.class.php:206
 #: common/include/exit.php:80 common/include/Group.class.php:2625
 #: common/include/Group.class.php:2626 common/include/Group.class.php:2627
+#: common/include/Group.class.php:2695
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/User.class.php:350 common/include/User.class.php:436
 #: common/include/User.class.php:1410 common/mail/MailingList.class.php:174
@@ -3197,20 +3198,16 @@ msgstr ""
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr ""
 
-#: common/include/Group.class.php:2694
-#, php-format
-msgid ""
-"\n"
-"Please visit the following URL to approve or reject this project:\n"
-"%1$s"
+#: common/include/Group.class.php:2695
+msgid "Please visit the following URL to approve or reject this project"
 msgstr ""
 
-#: common/include/Group.class.php:2698 common/include/Group.class.php:2712
+#: common/include/Group.class.php:2697 common/include/Group.class.php:2711
 #, php-format
-msgid "New %1$s Project Submitted"
+msgid "New %s Project Submitted"
 msgstr ""
 
-#: common/include/Group.class.php:2705
+#: common/include/Group.class.php:2704
 #, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3222,39 +3219,39 @@ msgid ""
 "notified of their decision."
 msgstr ""
 
-#: common/include/Group.class.php:2727
+#: common/include/Group.class.php:2726
 msgid "Group name is too short"
 msgstr ""
 
-#: common/include/Group.class.php:2730
+#: common/include/Group.class.php:2729
 msgid "Group name is too long"
 msgstr ""
 
-#: common/include/Group.class.php:2733
+#: common/include/Group.class.php:2732
 msgid "Group name already taken"
 msgstr ""
 
-#: common/include/Group.class.php:2814
+#: common/include/Group.class.php:2813
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2877
+#: common/include/Group.class.php:2876
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2895
+#: common/include/Group.class.php:2894
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2913
+#: common/include/Group.class.php:2912
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2931
+#: common/include/Group.class.php:2930
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""

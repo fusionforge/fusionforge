@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-22 15:24+0100\n"
+"POT-Creation-Date: 2013-11-25 17:19+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -230,6 +230,7 @@ msgstr "Nome do ficheiro "
 #: common/forum/ForumMessage.class.php:666 common/include/Error.class.php:206
 #: common/include/exit.php:80 common/include/Group.class.php:2625
 #: common/include/Group.class.php:2626 common/include/Group.class.php:2627
+#: common/include/Group.class.php:2695
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/User.class.php:350 common/include/User.class.php:436
 #: common/include/User.class.php:1410 common/mail/MailingList.class.php:174
@@ -3476,23 +3477,20 @@ msgstr ""
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "Enviados por %1$s (%2$s)"
 
-#: common/include/Group.class.php:2694
-#, fuzzy, php-format
-msgid ""
-"\n"
-"Please visit the following URL to approve or reject this project:\n"
-"%1$s"
+#: common/include/Group.class.php:2695
+#, fuzzy
+msgid "Please visit the following URL to approve or reject this project"
 msgstr ""
 "Por favor, visite o seguinte URL para completar o cambio de correo "
 "electrónico:"
 
-#: common/include/Group.class.php:2698 common/include/Group.class.php:2712
+#: common/include/Group.class.php:2697 common/include/Group.class.php:2711
 #, php-format
-msgid "New %1$s Project Submitted"
+msgid "New %s Project Submitted"
 msgstr "Novo proxecto %1$s enviado"
 
-#: common/include/Group.class.php:2705
-#, php-format
+#: common/include/Group.class.php:2704
+#, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
 "\n"
@@ -3510,39 +3508,39 @@ msgstr ""
 "O equipo de administración de %1$s examinará o seu envío, e notificaráselle "
 "a súa decisión."
 
-#: common/include/Group.class.php:2727
+#: common/include/Group.class.php:2726
 msgid "Group name is too short"
 msgstr "O nome de grupo é demasiado corto"
 
-#: common/include/Group.class.php:2730
+#: common/include/Group.class.php:2729
 msgid "Group name is too long"
 msgstr "O nome de grupo é demasiado longo"
 
-#: common/include/Group.class.php:2733
+#: common/include/Group.class.php:2732
 msgid "Group name already taken"
 msgstr "O nome de grupo xa está en uso"
 
-#: common/include/Group.class.php:2814
+#: common/include/Group.class.php:2813
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr "Erro: BD: Non se puido cambiar o estado de grupo: %s"
 
-#: common/include/Group.class.php:2877
+#: common/include/Group.class.php:2876
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#: common/include/Group.class.php:2895
+#: common/include/Group.class.php:2894
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#: common/include/Group.class.php:2913
+#: common/include/Group.class.php:2912
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
 
-#: common/include/Group.class.php:2931
+#: common/include/Group.class.php:2930
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "Erro - Non foi posíbel actualizar o estado Unix de grupo: %s"
@@ -5578,7 +5576,6 @@ msgid "Advanced queries"
 msgstr "Consultas avanzadas"
 
 #: common/tracker/actions/browse.php:357 www/include/html.php:648
-#, fuzzy
 msgid "Select One"
 msgstr ""
 
@@ -7466,7 +7463,6 @@ msgid "assigned to or submitted by or monitored by me [ASM]"
 msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:107
-#, fuzzy
 msgid "Display artifacts:"
 msgstr ""
 
@@ -7835,7 +7831,6 @@ msgid "new and update files and directories [FUD]"
 msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:94
-#, fuzzy
 msgid "Display statistics:"
 msgstr ""
 
@@ -9947,7 +9942,6 @@ msgid "Stored remote accounts"
 msgstr ""
 
 #: plugins/globaldashboard/www/admin/manage_accounts.php:80
-#, fuzzy
 msgid "Remote site"
 msgstr ""
 
@@ -16701,7 +16695,6 @@ msgid "Add membership to new projects"
 msgstr "Engadir etiqueta ao proxecto"
 
 #: www/admin/useredit.php:295
-#, fuzzy
 msgid "Select role"
 msgstr ""
 
@@ -23546,7 +23539,6 @@ msgid "No release available"
 msgstr "Non hai estatísticas dispoñibles"
 
 #: www/tracker/roadmap.php:471
-#, fuzzy
 msgid "Display as text"
 msgstr ""
 
@@ -23635,6 +23627,10 @@ msgstr "Non se introduciu un nome de usuario"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Páxina persoal de %s"
+
+#, fuzzy
+#~ msgid "New %1$s Project Submitted"
+#~ msgstr "Novo proxecto %1$s enviado"
 
 #~ msgid "[delete]"
 #~ msgstr "[eliminar]"
@@ -24662,9 +24658,6 @@ msgstr "Páxina persoal de %s"
 
 #~ msgid "%s Project Approved"
 #~ msgstr "O proxecto %s foi aprobado "
-
-#~ msgid "New %s Project Submitted"
-#~ msgstr "Novo proxecto %s enviado"
 
 #~ msgid "Submitted Description"
 #~ msgstr "Descrición proporcionada"

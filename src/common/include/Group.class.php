@@ -2691,11 +2691,10 @@ Submitted Description: %3$s
 							$submitter->getUnixName());
 			}
 
-			$message .= sprintf (_('
-Please visit the following URL to approve or reject this project:
-%1$s'),
-						util_make_url ('/admin/approve-pending.php'));
-			util_send_message($admin_email, sprintf(_('New %1$s Project Submitted'), forge_get_config ('forge_name')), $message);
+			$message .= "\n"
+					. _('Please visit the following URL to approve or reject this project')._(': '). "\n"
+					. util_make_url('/admin/approve-pending.php');
+			util_send_message($admin_email, sprintf(_('New %s Project Submitted'), forge_get_config('forge_name')), $message);
 			setup_gettext_from_context();
 		}
 
@@ -2709,7 +2708,7 @@ Submitted Description: %3$s
 
 The %1$s admin team will now examine your project submission.  You will be notified of their decision.'), forge_get_config ('forge_name'), $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), forge_get_config('web_host'));
 
-		util_send_message($email, sprintf(_('New %1$s Project Submitted'), forge_get_config ('forge_name')), $message);
+		util_send_message($email, sprintf(_('New %s Project Submitted'), forge_get_config ('forge_name')), $message);
 		setup_gettext_from_context();
 
 		return true;

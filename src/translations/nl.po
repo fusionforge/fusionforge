@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-22 15:24+0100\n"
+"POT-Creation-Date: 2013-11-25 17:19+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -228,6 +228,7 @@ msgstr ""
 #: common/forum/ForumMessage.class.php:666 common/include/Error.class.php:206
 #: common/include/exit.php:80 common/include/Group.class.php:2625
 #: common/include/Group.class.php:2626 common/include/Group.class.php:2627
+#: common/include/Group.class.php:2695
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/User.class.php:350 common/include/User.class.php:436
 #: common/include/User.class.php:1410 common/mail/MailingList.class.php:174
@@ -3444,20 +3445,17 @@ msgstr ""
 msgid "Submitter: %1$s (%2$s)\n"
 msgstr "Ingediend door"
 
-#: common/include/Group.class.php:2694
-#, fuzzy, php-format
-msgid ""
-"\n"
-"Please visit the following URL to approve or reject this project:\n"
-"%1$s"
+#: common/include/Group.class.php:2695
+#, fuzzy
+msgid "Please visit the following URL to approve or reject this project"
 msgstr "Kies het volgende URL om de wijzging van je e-mail adres te voltooien:"
 
-#: common/include/Group.class.php:2698 common/include/Group.class.php:2712
+#: common/include/Group.class.php:2697 common/include/Group.class.php:2711
 #, php-format
-msgid "New %1$s Project Submitted"
-msgstr "Nieuw %1$s project ingediend"
+msgid "New %s Project Submitted"
+msgstr "Nieuw %s project ingediend"
 
-#: common/include/Group.class.php:2705
+#: common/include/Group.class.php:2704
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3477,42 +3475,42 @@ msgstr ""
 "De %1$s beheerder zal de projectaanvraag nu beoordelen. Je ontvangt bericht "
 "krijgen over de beslissing."
 
-#: common/include/Group.class.php:2727
+#: common/include/Group.class.php:2726
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Vraag is te kort"
 
-#: common/include/Group.class.php:2730
+#: common/include/Group.class.php:2729
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Groepsnaam (klik om te wijzigen)"
 
-#: common/include/Group.class.php:2733
+#: common/include/Group.class.php:2732
 #, fuzzy
 msgid "Group name already taken"
 msgstr "Unixnaam is al in gebruik"
 
-#: common/include/Group.class.php:2814
+#: common/include/Group.class.php:2813
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2877
+#: common/include/Group.class.php:2876
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2895
+#: common/include/Group.class.php:2894
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2913
+#: common/include/Group.class.php:2912
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2931
+#: common/include/Group.class.php:2930
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
@@ -23439,6 +23437,10 @@ msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
 
 #, fuzzy
+#~ msgid "New %1$s Project Submitted"
+#~ msgstr "Nieuw %s project ingediend"
+
+#, fuzzy
 #~ msgid "[delete]"
 #~ msgstr "Wissen"
 
@@ -24259,9 +24261,6 @@ msgstr "Mijn persoonlijke pagina"
 
 #~ msgid "%s Project Approved"
 #~ msgstr "%s project goedgekeurd"
-
-#~ msgid "New %s Project Submitted"
-#~ msgstr "Nieuw %s project ingediend"
 
 #~ msgid "Submitted Description"
 #~ msgstr "Ingediende beschrijving"
