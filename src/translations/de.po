@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-22 15:24+0100\n"
+"POT-Creation-Date: 2013-11-25 16:42+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -1166,7 +1166,7 @@ msgstr ""
 #: common/docman/views/listtrashfile.php:123
 #, fuzzy
 msgid "Edit this folder"
-msgstr "[Bearbeiten Sie dieses Kennzeichen]"
+msgstr "Bearbeiten Sie dieses Kennzeichen"
 
 #: common/docman/views/listfile.php:176
 #, fuzzy
@@ -2007,7 +2007,7 @@ msgstr "Ihre Suchanfrage ergab keine Dokumente."
 #: common/docman/views/search.php:154 common/docman/views/tree.php:64
 #, fuzzy
 msgid "Browse document manager for this project."
-msgstr "Sie sind bereits Mitglied dieses Projekts. "
+msgstr "Sie sind bereits Mitglied dieses Projekts."
 
 #: common/docman/views/search.php:162
 msgid "Your search is empty."
@@ -2469,7 +2469,7 @@ msgstr "Von"
 #: common/forum/ForumHTML.class.php:266
 #: plugins/forumml/www/forumml_utils.php:558 www/forum/message.php:123
 msgid "Reply"
-msgstr "Rntworten"
+msgstr "Antworten"
 
 #: common/forum/ForumHTML.class.php:311
 msgid "Current File"
@@ -3899,7 +3899,7 @@ msgstr ""
 #: common/include/Plugin.class.php:281 common/include/Plugin.class.php:330
 #, php-format
 msgid "Use %s"
-msgstr ""
+msgstr "Benutze %s"
 
 #: common/include/Plugin.class.php:348
 #, fuzzy
@@ -5554,7 +5554,7 @@ msgstr "Erweiterte Suche"
 #: common/tracker/actions/browse.php:357 www/include/html.php:648
 #, fuzzy
 msgid "Select One"
-msgstr "Datei löschen"
+msgstr "Auswählen"
 
 #: common/tracker/actions/browse.php:364 www/frs/admin/index.php:210
 #: www/my/diary.php:207
@@ -6266,7 +6266,7 @@ msgstr "Fehler beim Erstellen des Mitarbeiter-Objektes: %s"
 #: common/tracker/Artifact.class.php:570 common/tracker/Artifact.class.php:580
 #, fuzzy
 msgid "Error updating artifact counts: "
-msgstr "Fehler bei der Aktualisierung der Projekt- Informationen: %s"
+msgstr "Fehler beim Aktualisieren"
 
 #: common/tracker/Artifact.class.php:601
 msgid "Valid Email Address Required"
@@ -6282,9 +6282,9 @@ msgid "Could not move to new Artifact Type"
 msgstr "Konnte Factory nicht anzeigen"
 
 #: common/tracker/Artifact.class.php:987
-#, php-format
+#, fuzzy, php-format
 msgid "Moved from %1$s to %2$s"
-msgstr ""
+msgstr "Kopieren von [%s] nach [%s]"
 
 #: common/tracker/Artifact.class.php:1061
 msgid "Removal of old artifact_extra_field_data failed: "
@@ -6636,9 +6636,9 @@ msgid "Remove Relation"
 msgstr "Entferne Beziehung"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:358
-#, php-format
+#, fuzzy, php-format
 msgid "Average completion rate: %d%%"
-msgstr ""
+msgstr "Prozent fertig: %d%%"
 
 #: common/tracker/include/ArtifactTypeHtml.class.php:374
 #: common/tracker/views/form-adminroadmap.php:193
@@ -7340,9 +7340,8 @@ msgid "Preferences"
 msgstr "Einstellungen"
 
 #: common/widget/Widget.class.php:366
-#, fuzzy
 msgid "General"
-msgstr "Allgemeine Diskussion"
+msgstr ""
 
 #: common/widget/WidgetLayoutManager.class.php:182
 #, fuzzy, php-format
@@ -7389,9 +7388,8 @@ msgid "Already used"
 msgstr "Nutzer hinzufügen"
 
 #: common/widget/WidgetLayoutManager.class.php:710
-#, fuzzy
 msgid "Your dashboard has been updated."
-msgstr "Ihre Anfrage wurde abgeschickt."
+msgstr ""
 
 #: common/widget/Widget_MyAdmin.class.php:35
 #, fuzzy
@@ -7438,9 +7436,8 @@ msgid "assigned to or submitted by me [AS]"
 msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:104
-#, fuzzy
 msgid "assigned to or monitored by me [AM]"
-msgstr "Zugewiesen an"
+msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:105
 #, fuzzy
@@ -7680,9 +7677,8 @@ msgid "Quit this project?"
 msgstr "Projekt verlassen"
 
 #: common/widget/Widget_MyProjects.class.php:88
-#, fuzzy
 msgid "Leave project"
-msgstr "Private Projekte"
+msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:96
 #, fuzzy
@@ -7812,9 +7808,8 @@ msgid "new and update Files [FU]"
 msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:92
-#, fuzzy
 msgid "new files and directories [FD]"
-msgstr "Ändere Verzeichnisse"
+msgstr ""
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:93
 msgid "new and update files and directories [FUD]"
@@ -7838,7 +7833,7 @@ msgstr "Dateien"
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:162
 #, fuzzy
 msgid "updated Files"
-msgstr "Täglich aktualisiert"
+msgstr "Aktualisierung"
 
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:137
 #: common/widget/Widget_ProjectDocumentsActivity.class.php:153
@@ -7893,9 +7888,8 @@ msgid "No tag defined for this project"
 msgstr "Kein Kennzeichen für dieses Projekt festgelegt"
 
 #: common/widget/Widget_ProjectInfo.class.php:65
-#, fuzzy
 msgid "Registered: "
-msgstr "Registriert"
+msgstr "Registriert: "
 
 #: common/widget/Widget_ProjectInfo.class.php:83
 #: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:322
@@ -7904,7 +7898,7 @@ msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "Aktivitäten-Rangliste: <strong>%d</strong>"
 
 #: common/widget/Widget_ProjectInfo.class.php:84
-#, fuzzy, php-format
+#, php-format
 msgid "View project <a href=\"%s\">Statistics</a>"
 msgstr "Betrachte Projekt <a href=\"%s\" >Statistics</a>"
 
@@ -8093,9 +8087,8 @@ msgstr[0] "(<strong>%1$s</strong> öffentliche Mailingliste)"
 msgstr[1] "(<strong>%1$s</strong> öffentliche Mailinglisten)"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:154
-#, fuzzy
 msgid "There are no subprojects available"
-msgstr "Keine öffentlichen Unterprojekte vorhanden"
+msgstr "Keine Unterprojekte vorhanden"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:173
 msgid "surveys"
@@ -8407,9 +8400,8 @@ msgid " (as Turtle)"
 msgstr ""
 
 #: plugins/admssw/www/index.php:53
-#, fuzzy
 msgid "Trove categories :"
-msgstr "Kategorien hinzufügen"
+msgstr ""
 
 #: plugins/admssw/www/index.php:56
 msgid "as Turtle"
@@ -9026,7 +9018,7 @@ msgstr "[Zeige alle Beiträge]"
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:175
 #, fuzzy
 msgid "Edit actors and roles"
-msgstr "Eine Rolle bearbeiten"
+msgstr "Rolle bearbeiten"
 
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:175
 #, fuzzy
@@ -9557,7 +9549,7 @@ msgstr "Nächste"
 #: plugins/forumml/www/forumml_utils.php:154
 #, fuzzy
 msgid "Last messages"
-msgstr "Nachricht protokollieren"
+msgstr "Nachricht"
 
 #: plugins/forumml/www/forumml_utils.php:170
 #: plugins/forumml/www/forumml_utils.php:241 www/forum/index.php:69
@@ -9606,7 +9598,7 @@ msgstr "Auftrag erfolgreich gelöscht"
 #: plugins/forumml/www/forumml_utils.php:730
 #, fuzzy
 msgid "Sending mail failed"
-msgstr "Forum aus Warteliste Freigegeben "
+msgstr "Anmeldung fehlgeschlagen"
 
 #: plugins/forumml/www/index.php:55 plugins/forumml/www/message.php:92
 #, fuzzy
@@ -10315,9 +10307,8 @@ msgstr "Angezeigt"
 
 #: plugins/headermenu/view/admin/updateLinkValue.php:66
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:134
-#, fuzzy
 msgid "Menu Location"
-msgstr "Keine Moderation"
+msgstr ""
 
 #: plugins/headermenu/view/admin/updateLinkValue.php:76
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
@@ -10425,7 +10416,7 @@ msgstr "FTP Projektverzeichnis"
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:46
 #, fuzzy
 msgid "Edit this link"
-msgstr "[Bearbeiten Sie dieses Kennzeichen]"
+msgstr "Bearbeiten Sie dieses Kennzeichen"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:82
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:115
@@ -10480,7 +10471,7 @@ msgstr ""
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:44
 #, fuzzy
 msgid "Link Order successfully validated"
-msgstr "%1$s erfolgreich hinzugefügt."
+msgstr "Element erfolgreich angelegt"
 
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:45
 #, fuzzy
@@ -10592,9 +10583,8 @@ msgid "Missing Hudson job ID"
 msgstr ""
 
 #: plugins/hudson/include/hudson.class.php:134
-#, fuzzy
 msgid "Hudson service is not enabled"
-msgstr "Die Tagebuchfunktion ist nicht angeschaltet."
+msgstr ""
 
 #: plugins/hudson/include/hudson.class.php:137
 #, fuzzy
@@ -10851,7 +10841,7 @@ msgstr ""
 #: plugins/hudson/include/hudsonViews.class.php:366
 #, fuzzy
 msgid "Edit this job"
-msgstr "[Bearbeiten Sie dieses Kennzeichen]"
+msgstr "Bearbeiten Sie dieses Kennzeichen"
 
 #: plugins/hudson/include/hudsonViews.class.php:372
 #, fuzzy, php-format
