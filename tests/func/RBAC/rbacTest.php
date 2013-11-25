@@ -76,15 +76,15 @@ class RBAC extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 
 		$this->assertSelected("//select[@name='data[approve_projects][-1]']", "Approve projects");
-		$this->assertNotSelected("//select[@name='data[approve_projects][-1]']", "No access");
+		$this->assertNotSelected("//select[@name='data[approve_projects][-1]']", "No Access");
 		$this->assertSelected("//select[@name='data[approve_news][-1]']", "Approve news");
 
 		// Whoops, we don't actually want the news moderation bit, unset it
-		$this->select("//select[@name='data[approve_news][-1]']", "label=No access");
+		$this->select("//select[@name='data[approve_news][-1]']", "label=No Access");
 		$this->click ("//input[@value='Submit']") ;
 		$this->waitForPageToLoad("30000");
 		$this->assertSelected("//select[@name='data[approve_projects][-1]']", "Approve projects");
-		$this->assertSelected("//select[@name='data[approve_news][-1]']", "No access");
+		$this->assertSelected("//select[@name='data[approve_news][-1]']", "No Access");
 
 		// Create users for "Project approvers" and "News moderators" roles
 		$this->createUser ("projapp") ;
