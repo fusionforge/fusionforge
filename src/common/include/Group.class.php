@@ -2675,14 +2675,9 @@ if there is anything we can do to help you.
 			$admin_email = $admin->getEmail();
 			setup_gettext_for_user ($admin);
 
-			$message = sprintf(_('New %1$s Project Submitted
-
-Project Full Name:  %2$s
-Submitted Description: %3$s
-'),
-					   forge_get_config ('forge_name'),
-					   htmlspecialchars_decode($this->getPublicName()),
-					   htmlspecialchars_decode($this->getRegistrationPurpose()));
+			$message = sprintf(_('New %s Project Submitted'), forge_get_config ('forge_name')) . "\n\n"
+					. _('Project Full Name')._(': ').htmlspecialchars_decode($this->getPublicName()) . "\n"
+					. _('Submitted Description')._(': ').htmlspecialchars_decode($this->getRegistrationPurpose()) . "\n";
 
 			foreach ($submitters as $submitter) {
 				$message .= sprintf(_('Submitter: %1$s (%2$s)

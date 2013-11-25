@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 17:19+0100\n"
+"POT-Creation-Date: 2013-11-25 17:28+0100\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -230,7 +230,8 @@ msgstr "Filnamn"
 #: common/forum/ForumMessage.class.php:666 common/include/Error.class.php:206
 #: common/include/exit.php:80 common/include/Group.class.php:2625
 #: common/include/Group.class.php:2626 common/include/Group.class.php:2627
-#: common/include/Group.class.php:2695
+#: common/include/Group.class.php:2679 common/include/Group.class.php:2680
+#: common/include/Group.class.php:2690
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/User.class.php:350 common/include/User.class.php:436
 #: common/include/User.class.php:1410 common/mail/MailingList.class.php:174
@@ -3404,8 +3405,8 @@ msgstr "%1$s projekt godkänt"
 msgid "Your project registration for %s has been denied."
 msgstr "Din projektregistrering för %s har blivit avslagen."
 
-#: common/include/Group.class.php:2625 www/register/index.php:183
-#: www/register/index.php:189
+#: common/include/Group.class.php:2625 common/include/Group.class.php:2679
+#: www/register/index.php:183 www/register/index.php:189
 msgid "Project Full Name"
 msgstr "Projekt, fullt namn"
 
@@ -3433,39 +3434,27 @@ msgstr ""
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2678
-#, fuzzy, php-format
-msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-msgstr ""
-"Nytt %1$s projekt Inlämnat\n"
-"\n"
-"Projekt, fullständigt namn:  %2$s\n"
-"Inlämnad beskrivning: %3$s\n"
-"Lisence: %4$s\n"
-"\n"
-"Var vänlig besök följande URL för att godkänna eller avslå detta projekt:\n"
-"%5$s"
-
-#: common/include/Group.class.php:2688
-#, fuzzy, php-format
-msgid "Submitter: %1$s (%2$s)\n"
-msgstr "Inlämnad av"
-
-#: common/include/Group.class.php:2695
-msgid "Please visit the following URL to approve or reject this project"
-msgstr ""
-"Var vänlig besök följande URL för att godkänna eller avslå detta projekt"
-
-#: common/include/Group.class.php:2697 common/include/Group.class.php:2711
+#: common/include/Group.class.php:2678 common/include/Group.class.php:2692
+#: common/include/Group.class.php:2706
 #, php-format
 msgid "New %s Project Submitted"
 msgstr "Nytt %s projekt inlämnat"
 
-#: common/include/Group.class.php:2704
+#: common/include/Group.class.php:2680
+msgid "Submitted Description"
+msgstr "Inlämnad beskrivning"
+
+#: common/include/Group.class.php:2683
+#, fuzzy, php-format
+msgid "Submitter: %1$s (%2$s)\n"
+msgstr "Inlämnad av"
+
+#: common/include/Group.class.php:2690
+msgid "Please visit the following URL to approve or reject this project"
+msgstr ""
+"Var vänlig besök följande URL för att godkänna eller avslå detta projekt"
+
+#: common/include/Group.class.php:2699
 #, fuzzy, php-format
 msgid ""
 "New %1$s Project Submitted\n"
@@ -3485,42 +3474,42 @@ msgstr ""
 "Var vänlig besök följande URL för att godkänna eller avslå detta projekt:\n"
 "%5$s"
 
-#: common/include/Group.class.php:2726
+#: common/include/Group.class.php:2721
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Gruppnamn (klicka för redigering)"
 
-#: common/include/Group.class.php:2729
+#: common/include/Group.class.php:2724
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Gruppnamn (klicka för redigering)"
 
-#: common/include/Group.class.php:2732
+#: common/include/Group.class.php:2727
 #, fuzzy
 msgid "Group name already taken"
 msgstr "Unixnamn redan upptaget"
 
-#: common/include/Group.class.php:2813
+#: common/include/Group.class.php:2808
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2876
+#: common/include/Group.class.php:2871
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2894
+#: common/include/Group.class.php:2889
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2912
+#: common/include/Group.class.php:2907
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2930
+#: common/include/Group.class.php:2925
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
@@ -23225,6 +23214,23 @@ msgid "Personal Page for %s"
 msgstr "Min personliga sida"
 
 #, fuzzy
+#~ msgid ""
+#~ "New %1$s Project Submitted\n"
+#~ "\n"
+#~ "Project Full Name:  %2$s\n"
+#~ "Submitted Description: %3$s\n"
+#~ msgstr ""
+#~ "Nytt %1$s projekt Inlämnat\n"
+#~ "\n"
+#~ "Projekt, fullständigt namn:  %2$s\n"
+#~ "Inlämnad beskrivning: %3$s\n"
+#~ "Lisence: %4$s\n"
+#~ "\n"
+#~ "Var vänlig besök följande URL för att godkänna eller avslå detta "
+#~ "projekt:\n"
+#~ "%5$s"
+
+#, fuzzy
 #~ msgid "New %1$s Project Submitted"
 #~ msgstr "Nytt %s projekt inlämnat"
 
@@ -23987,9 +23993,6 @@ msgstr "Min personliga sida"
 
 #~ msgid "%s Project Approved"
 #~ msgstr "%s projekt godkänt"
-
-#~ msgid "Submitted Description"
-#~ msgstr "Inlämnad beskrivning"
 
 #~ msgid "Error - Choose a User To Monitor First"
 #~ msgstr "Fel - Välj först en användare att bevaka"
