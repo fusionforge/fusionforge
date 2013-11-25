@@ -2680,10 +2680,7 @@ if there is anything we can do to help you.
 					. _('Submitted Description')._(': ').htmlspecialchars_decode($this->getRegistrationPurpose()) . "\n";
 
 			foreach ($submitters as $submitter) {
-				$message .= sprintf(_('Submitter: %1$s (%2$s)
-'),
-							$submitter->getRealName(),
-							$submitter->getUnixName());
+				$message .= _('Submitter')._(': ').$submitter->getRealName().' ('.$submitter->getUnixName().')' . "\n\n";
 			}
 
 			$message .= "\n"
