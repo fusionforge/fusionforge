@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 17:28+0100\n"
+"POT-Creation-Date: 2013-11-25 17:49+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -231,7 +231,8 @@ msgstr "Fitxeroaren izena"
 #: common/include/exit.php:80 common/include/Group.class.php:2625
 #: common/include/Group.class.php:2626 common/include/Group.class.php:2627
 #: common/include/Group.class.php:2679 common/include/Group.class.php:2680
-#: common/include/Group.class.php:2690
+#: common/include/Group.class.php:2683 common/include/Group.class.php:2687
+#: common/include/Group.class.php:2697 common/include/Group.class.php:2698
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/User.class.php:350 common/include/User.class.php:436
 #: common/include/User.class.php:1410 common/mail/MailingList.class.php:174
@@ -579,8 +580,8 @@ msgstr "Deskribapena:"
 
 #: common/docman/Document.class.php:944
 #: common/docman/DocumentGroup.class.php:725
-#: common/tracker/actions/browse.php:200 common/tracker/actions/query.php:202
-#: common/tracker/actions/query.php:346
+#: common/include/Group.class.php:2683 common/tracker/actions/browse.php:200
+#: common/tracker/actions/query.php:202 common/tracker/actions/query.php:346
 msgid "Submitter"
 msgstr "Nork bidalia"
 
@@ -3408,7 +3409,8 @@ msgid "Your project registration for %s has been denied."
 msgstr "Zure egitasmoa %s -n erregistratzeko egin duzun eskaera ukatu da."
 
 #: common/include/Group.class.php:2625 common/include/Group.class.php:2679
-#: www/register/index.php:183 www/register/index.php:189
+#: common/include/Group.class.php:2697 www/register/index.php:183
+#: www/register/index.php:189
 msgid "Project Full Name"
 msgstr "Egitasmoaren izen osoa"
 
@@ -3436,82 +3438,66 @@ msgstr ""
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2678 common/include/Group.class.php:2692
-#: common/include/Group.class.php:2706
+#: common/include/Group.class.php:2678 common/include/Group.class.php:2689
+#: common/include/Group.class.php:2696 common/include/Group.class.php:2702
 #, php-format
 msgid "New %s Project Submitted"
 msgstr "%s -en egitasmoa onartzeke dago."
 
-#: common/include/Group.class.php:2680
+#: common/include/Group.class.php:2680 common/include/Group.class.php:2698
 msgid "Submitted Description"
 msgstr "Emandako deskribapena"
 
-#: common/include/Group.class.php:2683
-#, fuzzy, php-format
-msgid "Submitter: %1$s (%2$s)\n"
-msgstr "Nork bidalia"
-
-#: common/include/Group.class.php:2690
+#: common/include/Group.class.php:2687
 #, fuzzy
 msgid "Please visit the following URL to approve or reject this project"
 msgstr "Mesedez, posta aldaketa egiteko bisita ezazu ondorengo helbidea"
 
 #: common/include/Group.class.php:2699
-#, fuzzy, php-format
+#, php-format
 msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-"\n"
-"The %1$s admin team will now examine your project submission.  You will be "
+"The %s admin team will now examine your project submission. You will be "
 "notified of their decision."
 msgstr ""
-"%1$s -en egitasmo berri baten eskaera\n"
-"\n"
-"Egitasmoaren izen osoa: %2$s\n"
-"Bidalitako deskribapena: %3$s\n"
-"Lizentzia: %4$s\n"
-"\n"
-"%1$s administratzeko taldeak zure proposamena aztertuko du orain. "
-"Erabakiaren berri emango zaizu."
+"%s administratzeko taldeak zure proposamena aztertuko du orain. Erabakiaren "
+"berri emango zaizu."
 
-#: common/include/Group.class.php:2721
+#: common/include/Group.class.php:2717
 #, fuzzy
 msgid "Group name is too short"
 msgstr "Galdera motzegia da"
 
-#: common/include/Group.class.php:2724
+#: common/include/Group.class.php:2720
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Taldearen izena (editatzeko sakatu)"
 
-#: common/include/Group.class.php:2727
+#: common/include/Group.class.php:2723
 #, fuzzy
 msgid "Group name already taken"
 msgstr "Unix izen hau hartua dago"
 
-#: common/include/Group.class.php:2808
+#: common/include/Group.class.php:2804
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr "Errorea: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:2871
+#: common/include/Group.class.php:2867
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr "Errorea: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:2889
+#: common/include/Group.class.php:2885
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr "Errorea: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:2907
+#: common/include/Group.class.php:2903
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr "Errorea: Ezin da talde egoera aldatu: %s"
 
-#: common/include/Group.class.php:2925
+#: common/include/Group.class.php:2921
 #, fuzzy, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr "Errorea: Ezin dira talde baimenak aldatu: %s"
@@ -24105,13 +24091,6 @@ msgstr "Nere orri pertsonala"
 
 #~ msgid "%s Project Approved"
 #~ msgstr "%s -ek onartutako proiektua"
-
-#~ msgid ""
-#~ "The %s admin team will now examine your project submission. You will be "
-#~ "notified of their decision."
-#~ msgstr ""
-#~ "%s administratzeko taldeak zure proposamena aztertuko du orain. "
-#~ "Erabakiaren berri emango zaizu."
 
 #~ msgid "Error - Choose a User To Monitor First"
 #~ msgstr "Akatsa - ez dago hautatutako erabiltzailerik."

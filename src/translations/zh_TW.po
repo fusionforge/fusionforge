@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 17:28+0100\n"
+"POT-Creation-Date: 2013-11-25 17:49+0100\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -231,7 +231,8 @@ msgstr "檔案名"
 #: common/include/exit.php:80 common/include/Group.class.php:2625
 #: common/include/Group.class.php:2626 common/include/Group.class.php:2627
 #: common/include/Group.class.php:2679 common/include/Group.class.php:2680
-#: common/include/Group.class.php:2690
+#: common/include/Group.class.php:2683 common/include/Group.class.php:2687
+#: common/include/Group.class.php:2697 common/include/Group.class.php:2698
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/User.class.php:350 common/include/User.class.php:436
 #: common/include/User.class.php:1410 common/mail/MailingList.class.php:174
@@ -580,8 +581,8 @@ msgstr "說明："
 
 #: common/docman/Document.class.php:944
 #: common/docman/DocumentGroup.class.php:725
-#: common/tracker/actions/browse.php:200 common/tracker/actions/query.php:202
-#: common/tracker/actions/query.php:346
+#: common/include/Group.class.php:2683 common/tracker/actions/browse.php:200
+#: common/tracker/actions/query.php:202 common/tracker/actions/query.php:346
 msgid "Submitter"
 msgstr "發表人"
 
@@ -3401,7 +3402,8 @@ msgid "Your project registration for %s has been denied."
 msgstr "您在 %s 的專案註冊被取消了"
 
 #: common/include/Group.class.php:2625 common/include/Group.class.php:2679
-#: www/register/index.php:183 www/register/index.php:189
+#: common/include/Group.class.php:2697 www/register/index.php:183
+#: www/register/index.php:189
 msgid "Project Full Name"
 msgstr "專案全名"
 
@@ -3429,81 +3431,64 @@ msgstr ""
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2678 common/include/Group.class.php:2692
-#: common/include/Group.class.php:2706
+#: common/include/Group.class.php:2678 common/include/Group.class.php:2689
+#: common/include/Group.class.php:2696 common/include/Group.class.php:2702
 #, php-format
 msgid "New %s Project Submitted"
 msgstr "新專案 %1$s 完成註冊了"
 
-#: common/include/Group.class.php:2680
+#: common/include/Group.class.php:2680 common/include/Group.class.php:2698
 msgid "Submitted Description"
 msgstr "已送出的說明"
 
-#: common/include/Group.class.php:2683
-#, fuzzy, php-format
-msgid "Submitter: %1$s (%2$s)\n"
-msgstr "發表人"
-
-#: common/include/Group.class.php:2690
+#: common/include/Group.class.php:2687
 #, fuzzy
 msgid "Please visit the following URL to approve or reject this project"
 msgstr " 請點擊這個網址來完成email信箱的改變："
 
 #: common/include/Group.class.php:2699
-#, fuzzy, php-format
+#, php-format
 msgid ""
-"New %1$s Project Submitted\n"
-"\n"
-"Project Full Name:  %2$s\n"
-"Submitted Description: %3$s\n"
-"\n"
-"The %1$s admin team will now examine your project submission.  You will be "
+"The %s admin team will now examine your project submission. You will be "
 "notified of their decision."
-msgstr ""
-"新專案 %1$s 註冊了\n"
-"\n"
-"專案全名：  %2$s\n"
-"註冊說明： %3$s\n"
-"授權方式： %4$s\n"
-"\n"
-" %1$s 的管理團隊會盡快審核您註冊的專案，通過審核與否您都會收到通知。"
+msgstr " %s 的管理團隊會盡快審核您註冊的專案，通過審核與否您都會收到通知。"
 
-#: common/include/Group.class.php:2721
+#: common/include/Group.class.php:2717
 #, fuzzy
 msgid "Group name is too short"
 msgstr "問題太簡略"
 
-#: common/include/Group.class.php:2724
+#: common/include/Group.class.php:2720
 #, fuzzy
 msgid "Group name is too long"
 msgstr "群組名稱 (編輯)"
 
-#: common/include/Group.class.php:2727
+#: common/include/Group.class.php:2723
 #, fuzzy
 msgid "Group name already taken"
 msgstr "Unix名稱重複"
 
-#: common/include/Group.class.php:2808
+#: common/include/Group.class.php:2804
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2871
+#: common/include/Group.class.php:2867
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2889
+#: common/include/Group.class.php:2885
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2907
+#: common/include/Group.class.php:2903
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2925
+#: common/include/Group.class.php:2921
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
@@ -24047,11 +24032,6 @@ msgstr "我的個人首頁"
 
 #~ msgid "%s Project Approved"
 #~ msgstr "%s 專案通過審核了"
-
-#~ msgid ""
-#~ "The %s admin team will now examine your project submission. You will be "
-#~ "notified of their decision."
-#~ msgstr " %s 的管理團隊會盡快審核您註冊的專案，通過審核與否您都會收到通知。"
 
 #~ msgid "Error - Choose a User To Monitor First"
 #~ msgstr "錯誤 － 先選擇某個會員"

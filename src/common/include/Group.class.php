@@ -2693,12 +2693,11 @@ if there is anything we can do to help you.
 		$email = $submitter->getEmail();
 		setup_gettext_for_user ($submitter);
 
-		$message = sprintf(_('New %1$s Project Submitted
-
-Project Full Name:  %2$s
-Submitted Description: %3$s
-
-The %1$s admin team will now examine your project submission.  You will be notified of their decision.'), forge_get_config ('forge_name'), $this->getPublicName(), util_unconvert_htmlspecialchars($this->getRegistrationPurpose()), forge_get_config('web_host'));
+		$message = sprintf(_('New %s Project Submitted'), forge_get_config ('forge_name')) . "\n\n"
+				. _('Project Full Name')._(': ') . $this->getPublicName() . "\n"
+				. _('Submitted Description')._(': ') . util_unconvert_htmlspecialchars($this->getRegistrationPurpose()) . "\n\n"
+				. sprintf(_('The %s admin team will now examine your project submission. You will be notified of their decision.'),
+						  forge_get_config ('web_host'));
 
 		util_send_message($email, sprintf(_('New %s Project Submitted'), forge_get_config ('forge_name')), $message);
 		setup_gettext_from_context();
