@@ -26,7 +26,7 @@
 /**
  *
  *  This is the script called by svn. It takes some params, and prepare some
- *  HTTP POSTs to svntracker/newcommit.php.
+ *  HTTP POSTs to scmhook/www/newcommitgit.php.
  *
  */
 
@@ -105,7 +105,7 @@ function getLog($Input)
 
 $files = array();
 
-if (count($argv) != 3) {
+if (count($argv) != 5) {
     echo <<<USAGE
 Usage: $0 <repository> <revision>
        This program should be automatically called by SVN
@@ -114,35 +114,55 @@ USAGE;
     exit;
 }
 
-$repository = $argv[1];
-$revision   = $argv[2];
-$git_tracker_debug = 0;
+$oldrev = $argv[1];
+$newrev = $argv[2];
+$refname = $argv[3];
+$hook_path=$argv[4];
+//$repository = $argv[1];
+//$revision   = $argv[2];
+$git_tracker_debug = 1;
+//cd /var/opt/fusionforge/chroot/scmrepos/git/projet02/projet02.git
+$repos_path=forge_get_config('repos_path','scmgit');
+//var_dump($repos_path);
+//var_dump($refname);
+//echo "hook path ::::: ";
+//var_dump($hook_path);
+chdir($hook_path.'/..');
+//git show --pretty=short bed85a02ce30d35e44bd2f6b1020aabe53b16ce5
+$UserName = trim(`git log -n 1 --format=%an $newrev`);
 
-$UserName = trim(`svnlook author -r $revision $repository`); //username of author
-$date    = trim(`svnlook date -r $revision $repository`); //date
-$log     = trim(`svnlook log -r $revision $repository`); // the log
-$changed = trim(`svnlook changed -r $revision $repository | sed 's/[A-Z]*   //'`); // the filenames
+//$UserName = trim(`svnlook author -r $revision $repository`); //username of author
+//$date    = trim(`svnlook date -r $revision $repository`); //date
+$date    = trim(`git log -n 1 --format=%ai $newrev`); //date
+$log     = trim(`git log -n 1 --format=%s $newrev`); // the log
+//echo $log;
+//var_dump($log);
+$changed = trim(`git log -n 1 --format=%b --name-only -p $newrev`); // the filenames
 
 if (isset($git_tracker_debug) && $git_tracker_debug == 1) {
+$file=fopen("/tmp/debug.000","r+");
 	fwrite($file,"Vars filled:\n");
+	//fwrite($file,"arg :  " . var_dump($argv) . " \n");
+	fwrite($file,"rev :  " . $newrev . " \n");
 	fwrite($file,"username :  " . $UserName . " \n");
 	fwrite($file,"date :  " . $date . " \n");
 	fwrite($file,"log  :  " . $log . " \n");
 	fwrite($file,"changed :  " . $changed . " \n");
+fclose($file);
 }
 
 $changed = explode("\n", $changed);
-
 foreach ($changed as $onefile) {
 	//we must see when it was last changed, and that's previous revision
 	$exit=0;
-	$actrev = $revision - 1;
-	if ($revision==0) {
+	$actrev = $newrev - 1;
+	if ($newrev==0) {
 		$exit = 1;
 		$prev = 1;
 	}
 	while ( (!$exit) && ($actrev != 0 ) ) {
-		$changed2 = trim(`svnlook changed -r $actrev $repository | sed 's/[A-Z]*   //'`);
+//		$changed2 = trim(`svnlook changed -r $actrev $repository | sed 's/[A-Z]*   //'`);
+		$changed2 = trim(`git log -n 1 --format=%b --name-only -p $newrev`);
 		$changed2 = explode("\n", $changed2);
 		if ( in_array($onefile,$changed2) ) {
 			$prev = $actrev;
@@ -155,9 +175,12 @@ foreach ($changed as $onefile) {
 	}
 
 	$files[] = array(
-			'name' => $repository . "/" . $onefile,
-			'previous' => $prev,
-			'actual' => $revision
+			//'name' => $repository . "/" . $onefile,
+			'name' => $hook_path . "/" . $onefile,
+			//'previous' => $prev,
+			'previous' => $oldrev,
+			//'actual' => $revision
+			'actual' => $newrev
 		);
 }
 
@@ -165,7 +188,7 @@ foreach ($changed as $onefile) {
 // Our POSTer in Fusionforge
 $snoopy = new Snoopy;
 
-$SubmitUrl = util_make_url('/plugins/scmhook/committracker/newcommit.php');
+$SubmitUrl = util_make_url('/plugins/scmhook/committracker/newcommitgit.php');
 
 $tasks_involved= getInvolvedTasks($log);
 $artifacts_involved= getInvolvedArtifacts($log);
@@ -179,17 +202,18 @@ $i = 0;
 foreach ( $files as $onefile )
 {
 	$SubmitVars[$i]["UserName"]        = $UserName;
-	$SubmitVars[$i]["Repository"]      = $repository;
+	$SubmitVars[$i]["Repository"]      = $hook_path;
 	$SubmitVars[$i]["FileName"]        = $onefile['name'];
 	$SubmitVars[$i]["PrevVersion"]     = $onefile['previous'];
 	$SubmitVars[$i]["ActualVersion"]   = $onefile['actual'];
 	$SubmitVars[$i]["Log"]             = $log;
 	$SubmitVars[$i]["TaskNumbers"]     = getInvolvedTasks($log);
 	$SubmitVars[$i]["ArtifactNumbers"] = getInvolvedArtifacts($log);
-	$SubmitVars[$i]["SvnDate"]         = time();
+	$SubmitVars[$i]["GitDate"]         = time();
 	$i++;
 }
-
 $vars['data'] = urlencode(serialize($SubmitVars));
+//var_dump($SubmitUrl);
+//var_dump($vars['data']);
 $snoopy->submit($SubmitUrl, $vars);
 ?>
