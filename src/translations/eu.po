@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 17:49+0100\n"
+"POT-Creation-Date: 2013-11-25 18:10+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -309,14 +309,14 @@ msgstr "Fitxeroaren izena"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:631
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/index.php:195
 #: www/account/lostlogin.php:84 www/account/register.php:211
-#: www/admin/approve-pending.php:190 www/admin/database.php:155
-#: www/admin/globalroledelete.php:49 www/admin/responses_admin.php:42
-#: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
-#: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
-#: www/export/rssAboTask.php:146 www/export/rssAboTask.php:169
-#: www/export/rssAboTask.php:171 www/export/rssAboTask.php:173
-#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
-#: www/forum/forum.php:156 www/forum/message.php:126
+#: www/admin/approve-pending.php:190 www/admin/approve-pending.php:192
+#: www/admin/database.php:155 www/admin/globalroledelete.php:49
+#: www/admin/responses_admin.php:42 www/export/rssAboTask.php:142
+#: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
+#: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
+#: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
+#: www/export/rssAboTask.php:173 www/forum/admin/pendingmsgdetail.php:59
+#: www/forum/forum.php:92 www/forum/forum.php:156 www/forum/message.php:126
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:190
 #: www/frs/admin/qrs.php:197 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
@@ -3445,6 +3445,7 @@ msgid "New %s Project Submitted"
 msgstr "%s -en egitasmoa onartzeke dago."
 
 #: common/include/Group.class.php:2680 common/include/Group.class.php:2698
+#: www/admin/approve-pending.php:192
 msgid "Submitted Description"
 msgstr "Emandako deskribapena"
 
@@ -15377,10 +15378,6 @@ msgstr "Postontzia:"
 msgid "HTTP Domain:"
 msgstr "HTTP domeinua:"
 
-#: www/admin/approve-pending.php:192
-msgid "Submitted Description:"
-msgstr "Emandako deskribapena:"
-
 #: www/admin/approve-pending.php:194
 msgid "Purpose of submission:"
 msgstr ""
@@ -23275,30 +23272,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Nere orri pertsonala"
-
-#, fuzzy
-#~ msgid ""
-#~ "New %1$s Project Submitted\n"
-#~ "\n"
-#~ "Project Full Name:  %2$s\n"
-#~ "Submitted Description: %3$s\n"
-#~ msgstr ""
-#~ "%1$s -erako egitasmo berria erregistratu da\n"
-#~ "\n"
-#~ "Egitasmoaren izen osoa:  %2$s\n"
-#~ "Jasotako deskribapena: %3$s\n"
-#~ "Lizentzia: %4$s\n"
-#~ "\n"
-#~ "Mesedez, bisita ezazu helbide hau egitasmoa onartzeko ala baztertzeko:\n"
-#~ "%5$s"
-
-#, fuzzy
-#~ msgid "New %1$s Project Submitted"
-#~ msgstr "%s -en egitasmoa onartzeke dago."
-
-#, fuzzy
-#~ msgid "[delete]"
-#~ msgstr "Ezabatu"
 
 #, fuzzy
 #~ msgid "Comments: "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 17:49+0100\n"
+"POT-Creation-Date: 2013-11-25 18:10+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -309,14 +309,14 @@ msgstr "Nom de fitxer"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:631
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/index.php:195
 #: www/account/lostlogin.php:84 www/account/register.php:211
-#: www/admin/approve-pending.php:190 www/admin/database.php:155
-#: www/admin/globalroledelete.php:49 www/admin/responses_admin.php:42
-#: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
-#: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
-#: www/export/rssAboTask.php:146 www/export/rssAboTask.php:169
-#: www/export/rssAboTask.php:171 www/export/rssAboTask.php:173
-#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
-#: www/forum/forum.php:156 www/forum/message.php:126
+#: www/admin/approve-pending.php:190 www/admin/approve-pending.php:192
+#: www/admin/database.php:155 www/admin/globalroledelete.php:49
+#: www/admin/responses_admin.php:42 www/export/rssAboTask.php:142
+#: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
+#: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
+#: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
+#: www/export/rssAboTask.php:173 www/forum/admin/pendingmsgdetail.php:59
+#: www/forum/forum.php:92 www/forum/forum.php:156 www/forum/message.php:126
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:190
 #: www/frs/admin/qrs.php:197 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
@@ -3457,6 +3457,7 @@ msgid "New %s Project Submitted"
 msgstr "Tramès nou projecte %s"
 
 #: common/include/Group.class.php:2680 common/include/Group.class.php:2698
+#: www/admin/approve-pending.php:192
 msgid "Submitted Description"
 msgstr "Descripció tramesa"
 
@@ -15455,10 +15456,6 @@ msgstr "Caixa d'Inici:"
 msgid "HTTP Domain:"
 msgstr "Domini HTTP:"
 
-#: www/admin/approve-pending.php:192
-msgid "Submitted Description:"
-msgstr "Descripció tramesa:"
-
 #: www/admin/approve-pending.php:194
 msgid "Purpose of submission:"
 msgstr ""
@@ -23401,31 +23398,6 @@ msgid "Personal Page for %s"
 msgstr "La meva pàgina personal"
 
 #, fuzzy
-#~ msgid ""
-#~ "New %1$s Project Submitted\n"
-#~ "\n"
-#~ "Project Full Name:  %2$s\n"
-#~ "Submitted Description: %3$s\n"
-#~ msgstr ""
-#~ "Nou projecte %1$s enviat\n"
-#~ "\n"
-#~ "Nom complet del projecte:  %2$s\n"
-#~ "Descripció enviada: %3$s\n"
-#~ "Llicència: %4$s\n"
-#~ "\n"
-#~ "Si us plau visiteu la següent URL per a aprovar o rebutjar aquest "
-#~ "projecte:\n"
-#~ "%5$s"
-
-#, fuzzy
-#~ msgid "New %1$s Project Submitted"
-#~ msgstr "Tramès nou projecte %s"
-
-#, fuzzy
-#~ msgid "[delete]"
-#~ msgstr "Suprimeix"
-
-#, fuzzy
 #~ msgid "Comments: "
 #~ msgstr "Comment"
 
@@ -25705,9 +25677,6 @@ msgstr "La meva pàgina personal"
 #~ msgid "<p>Choose a list to browse, search, and post messages.</p>"
 #~ msgstr "<p>Trieu una llista per navegar, cercar i enviar missatges.</p>"
 
-#~ msgid "License:"
-#~ msgstr "Llicència:"
-
 #~ msgid "Approve/Reject"
 #~ msgstr "Aprova/Rebutja"
 
@@ -26475,9 +26444,6 @@ msgstr "La meva pàgina personal"
 
 #~ msgid "Older headlines"
 #~ msgstr "Titulars anteriors"
-
-#~ msgid "<h3>3. License</h3>"
-#~ msgstr "<h3>3. Llicència</h3>"
 
 #~ msgid "Opn"
 #~ msgstr "Opn"

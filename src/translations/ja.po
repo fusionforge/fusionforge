@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 17:49+0100\n"
+"POT-Creation-Date: 2013-11-25 18:10+0100\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -309,14 +309,14 @@ msgstr "プロジェクト管理"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:631
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/index.php:195
 #: www/account/lostlogin.php:84 www/account/register.php:211
-#: www/admin/approve-pending.php:190 www/admin/database.php:155
-#: www/admin/globalroledelete.php:49 www/admin/responses_admin.php:42
-#: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
-#: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
-#: www/export/rssAboTask.php:146 www/export/rssAboTask.php:169
-#: www/export/rssAboTask.php:171 www/export/rssAboTask.php:173
-#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
-#: www/forum/forum.php:156 www/forum/message.php:126
+#: www/admin/approve-pending.php:190 www/admin/approve-pending.php:192
+#: www/admin/database.php:155 www/admin/globalroledelete.php:49
+#: www/admin/responses_admin.php:42 www/export/rssAboTask.php:142
+#: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
+#: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
+#: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
+#: www/export/rssAboTask.php:173 www/forum/admin/pendingmsgdetail.php:59
+#: www/forum/forum.php:92 www/forum/forum.php:156 www/forum/message.php:126
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:190
 #: www/frs/admin/qrs.php:197 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
@@ -3380,6 +3380,7 @@ msgid "New %s Project Submitted"
 msgstr "新しいプロジェクト %s が提出されました"
 
 #: common/include/Group.class.php:2680 common/include/Group.class.php:2698
+#: www/admin/approve-pending.php:192
 msgid "Submitted Description"
 msgstr "提出された記述"
 
@@ -3388,7 +3389,7 @@ msgid "Please visit the following URL to approve or reject this project"
 msgstr "以下のURLにてこのプロジェクトを許可、もしくは断って下さい。"
 
 #: common/include/Group.class.php:2699
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "The %s admin team will now examine your project submission. You will be "
 "notified of their decision."
@@ -15004,10 +15005,6 @@ msgstr ""
 msgid "HTTP Domain:"
 msgstr ""
 
-#: www/admin/approve-pending.php:192
-msgid "Submitted Description:"
-msgstr "提出された記述"
-
 #: www/admin/approve-pending.php:194
 msgid "Purpose of submission:"
 msgstr ""
@@ -22574,37 +22571,6 @@ msgstr ""
 #, php-format
 msgid "Personal Page for %s"
 msgstr "%sのパーソナルページ"
-
-#, fuzzy
-#~ msgid ""
-#~ "New %1$s Project Submitted\n"
-#~ "\n"
-#~ "Project Full Name:  %2$s\n"
-#~ "Submitted Description: %3$s\n"
-#~ msgstr ""
-#~ "新しいプロジェクト %1$s が提出されました\n"
-#~ "\n"
-#~ "プロジェクト名: %2$s\n"
-#~ "提出された記述: %3$s\n"
-#~ "ライセンス: %4$s\n"
-#~ "\n"
-#~ "以下のURLにてこのプロジェクトを許可、もしくは断って下さい。 \n"
-#~ "%5$s"
-
-#, fuzzy
-#~ msgid "New %1$s Project Submitted"
-#~ msgstr "新しいプロジェクト %s が提出されました"
-
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Please visit the following URL to approve or reject this project:\n"
-#~ "%1$s"
-#~ msgstr "以下のURLにてこのプロジェクトを許可、もしくは断って下さい。"
-
-#, fuzzy
-#~ msgid "[delete]"
-#~ msgstr "ファイル"
 
 #~ msgid "Forums: Administration"
 #~ msgstr "フォーラム: 管理"

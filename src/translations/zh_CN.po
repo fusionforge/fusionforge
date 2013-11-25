@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 17:49+0100\n"
+"POT-Creation-Date: 2013-11-25 18:10+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -309,14 +309,14 @@ msgstr "文件名"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:631
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/index.php:195
 #: www/account/lostlogin.php:84 www/account/register.php:211
-#: www/admin/approve-pending.php:190 www/admin/database.php:155
-#: www/admin/globalroledelete.php:49 www/admin/responses_admin.php:42
-#: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
-#: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
-#: www/export/rssAboTask.php:146 www/export/rssAboTask.php:169
-#: www/export/rssAboTask.php:171 www/export/rssAboTask.php:173
-#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
-#: www/forum/forum.php:156 www/forum/message.php:126
+#: www/admin/approve-pending.php:190 www/admin/approve-pending.php:192
+#: www/admin/database.php:155 www/admin/globalroledelete.php:49
+#: www/admin/responses_admin.php:42 www/export/rssAboTask.php:142
+#: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
+#: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
+#: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
+#: www/export/rssAboTask.php:173 www/forum/admin/pendingmsgdetail.php:59
+#: www/forum/forum.php:92 www/forum/forum.php:156 www/forum/message.php:126
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:190
 #: www/frs/admin/qrs.php:197 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
@@ -3429,6 +3429,7 @@ msgid "New %s Project Submitted"
 msgstr "新项目 %s 已提交"
 
 #: common/include/Group.class.php:2680 common/include/Group.class.php:2698
+#: www/admin/approve-pending.php:192
 msgid "Submitted Description"
 msgstr "已提交的说明"
 
@@ -15362,10 +15363,6 @@ msgstr "Home Box:"
 msgid "HTTP Domain:"
 msgstr "HTTP域名："
 
-#: www/admin/approve-pending.php:192
-msgid "Submitted Description:"
-msgstr "已提交的说明："
-
 #: www/admin/approve-pending.php:194
 msgid "Purpose of submission:"
 msgstr ""
@@ -23211,39 +23208,8 @@ msgid "Personal Page for %s"
 msgstr "我的个人首页"
 
 #, fuzzy
-#~ msgid ""
-#~ "New %1$s Project Submitted\n"
-#~ "\n"
-#~ "Project Full Name:  %2$s\n"
-#~ "Submitted Description: %3$s\n"
-#~ msgstr ""
-#~ "有人注册了新项目 %1$s \n"
-#~ "\n"
-#~ "项目全名：%2$s\n"
-#~ "注册说明：%3$s\n"
-#~ "注册人：%5$s (%6$s)\n"
-#~ "\n"
-#~ "请浏览下面网址审核这个项目：\n"
-#~ "%4$s"
-
-#, fuzzy
-#~ msgid "New %1$s Project Submitted"
-#~ msgstr "新项目 %s 已提交"
-
-#, fuzzy
-#~ msgid "[delete]"
-#~ msgstr "删除"
-
-#, fuzzy
 #~ msgid "Comments: "
 #~ msgstr "回覆"
-
-#~ msgid ""
-#~ "Your account is currently pending your email confirmation. Visiting the "
-#~ "link sent to you in this email will activate your account."
-#~ msgstr ""
-#~ "一封确认email已经发送到您的email信箱，以确保您email信箱的正确性。点击email"
-#~ "中的链接就可以启动您的帐号。"
 
 #~ msgid "Password:"
 #~ msgstr "密码："

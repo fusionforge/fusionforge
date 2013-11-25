@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 17:49+0100\n"
+"POT-Creation-Date: 2013-11-25 18:10+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -309,14 +309,14 @@ msgstr "Имя файла"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:631
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/index.php:195
 #: www/account/lostlogin.php:84 www/account/register.php:211
-#: www/admin/approve-pending.php:190 www/admin/database.php:155
-#: www/admin/globalroledelete.php:49 www/admin/responses_admin.php:42
-#: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
-#: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
-#: www/export/rssAboTask.php:146 www/export/rssAboTask.php:169
-#: www/export/rssAboTask.php:171 www/export/rssAboTask.php:173
-#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
-#: www/forum/forum.php:156 www/forum/message.php:126
+#: www/admin/approve-pending.php:190 www/admin/approve-pending.php:192
+#: www/admin/database.php:155 www/admin/globalroledelete.php:49
+#: www/admin/responses_admin.php:42 www/export/rssAboTask.php:142
+#: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
+#: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
+#: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
+#: www/export/rssAboTask.php:173 www/forum/admin/pendingmsgdetail.php:59
+#: www/forum/forum.php:92 www/forum/forum.php:156 www/forum/message.php:126
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:190
 #: www/frs/admin/qrs.php:197 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
@@ -3444,6 +3444,7 @@ msgid "New %s Project Submitted"
 msgstr "Подана заявка о создании нового проекта %s"
 
 #: common/include/Group.class.php:2680 common/include/Group.class.php:2698
+#: www/admin/approve-pending.php:192
 msgid "Submitted Description"
 msgstr "Присланное описание"
 
@@ -15721,10 +15722,6 @@ msgstr "Домашняя область:"
 msgid "HTTP Domain:"
 msgstr "Домен HTTP:"
 
-#: www/admin/approve-pending.php:192
-msgid "Submitted Description:"
-msgstr "Присланное описание:"
-
 #: www/admin/approve-pending.php:194
 msgid "Purpose of submission:"
 msgstr ""
@@ -23752,62 +23749,11 @@ msgid "Personal Page for %s"
 msgstr "Персональная страница для %s"
 
 #, fuzzy
-#~ msgid ""
-#~ "New %1$s Project Submitted\n"
-#~ "\n"
-#~ "Project Full Name:  %2$s\n"
-#~ "Submitted Description: %3$s\n"
-#~ msgstr ""
-#~ "Заявка на новый проект %1$s\n"
-#~ "\n"
-#~ "Полное название проекта:  %2$s\n"
-#~ "Представленное описание: %3$s\n"
-#~ "Тип лицензии: %4$s\n"
-#~ "Проект представил: %6$s (%7$s)\n"
-#~ "\n"
-#~ "Для ознакомления и выбора решения утведить или отвергнуть проект "
-#~ "проследуйте по ссылке:\n"
-#~ "http://%5$s/admin/approve-pending.php"
-
-#, fuzzy
-#~ msgid "New %1$s Project Submitted"
-#~ msgstr "Подана заявка о создании нового проекта %s"
-
-#, fuzzy
-#~ msgid "[delete]"
-#~ msgstr "Удалить"
-
-#, fuzzy
 #~ msgid "Comments: "
 #~ msgstr "Следовать"
 
-#~ msgid ""
-#~ "Your account is currently pending your email confirmation. Visiting the "
-#~ "link sent to you in this email will activate your account."
-#~ msgstr ""
-#~ "Сейчас Вам будет выслано подтверждающее письмо для проверки адреса "
-#~ "электронной почты. Для активации учётной записи посетите ссылку, "
-#~ "присланную в письме."
-
 #~ msgid "Password:"
 #~ msgstr "Пароль:"
-
-#, fuzzy
-#~ msgid ""
-#~ "<p>Your account is currently pending your email confirmation. Visiting "
-#~ "the link sent to you in this email will activate your account.<p>If you "
-#~ "need this email resent, please click below and a confirmation email will "
-#~ "be sent to the email address you provided in registration.<p><a href="
-#~ "\"%1$s\">[Resend Confirmation Email]</a><br><hr><p>"
-#~ msgstr ""
-#~ "<p>На данном этапе вам выслано письмо на ваш е-майл для подтверждения "
-#~ "работоспособности вашего почтового ящика. Получив в теле письма ссылку, "
-#~ "проследуйте по ней, это необходимо для завершния процесса регистрации."
-#~ "<p>Если на указанный вами е-майл, письмо по какой-либо причине не пришло "
-#~ "в течении получаса, возможно вам придется повторить процедуру указания "
-#~ "правильного е-майл адреса.<p><a href=\"pending-resend.php?form_user=%1$s"
-#~ "\"><strong>[Отправить повторное письмо на вышеуказанный мной адрес]</"
-#~ "strong></a><br><hr><p>"
 
 #, fuzzy
 #~ msgid ""
@@ -23917,23 +23863,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "yes"
 #~ msgstr "да"
-
-#, fuzzy
-#~ msgid ""
-#~ "<p>Your account is currently pending your email confirmation.<br/"
-#~ ">Visiting the link sent to you in this email will activate your account."
-#~ "<br/>If you need this email resent, please click below and a confirmation "
-#~ "email will be sent to the email address you provided in registration.</"
-#~ "p><a href=\"%1$s\">[Resend Confirmation Email]</a><br><hr>"
-#~ msgstr ""
-#~ "<P>На данном этапе вам выслано письмо на ваш е-майл для подтверждения "
-#~ "работоспособности вашего почтового ящика.\t\t Получив в теле письма "
-#~ "ссылку, проследуйте по ней, это необходимо для завершния процесса "
-#~ "регистрации\t\t .\t\t <P> Если на указанный вами е-майл, письмо по какой-"
-#~ "либо причине не пришло в течении получаса, возможно вам придется "
-#~ "повторить процедуру указания правильного е-майл адреса.\t\t<P><A href="
-#~ "\"pending-resend.php?form_user=%1$s\"><strong>[Отправить повторное письмо "
-#~ "на вышеуказанный мной адрес]</strong></A>\t\t<br><hr>\t\t<p>"
 
 #, fuzzy
 #~ msgid "File-Release"

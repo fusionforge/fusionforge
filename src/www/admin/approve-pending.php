@@ -189,7 +189,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 //	print "<p><strong>" ._('Other Information')."</strong></p>";
 	print "<tr><td>" ._('Project Unix Name') . _(': '). "</td><td>".$row_grp['unix_group_name']."</td></tr>";
 
-	print "<tr><td>" ._('Submitted Description:'). "</td><td><blockquote>".$row_grp['short_description']."</blockquote></td></tr>";
+	print "<tr><td>" ._('Submitted Description')._(': '). "</td><td><blockquote>".$row_grp['short_description']."</blockquote></td></tr>";
 
 	print "<tr><td>" ._('Purpose of submission:'). "</td><td><blockquote>".$row_grp['register_purpose']."</blockquote></td></tr>";
 

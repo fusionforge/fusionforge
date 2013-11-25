@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 17:49+0100\n"
+"POT-Creation-Date: 2013-11-25 18:10+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -306,14 +306,14 @@ msgstr "파일 이름"
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:631
 #: plugins/scmhg/common/HgPlugin.class.php:625 www/account/index.php:195
 #: www/account/lostlogin.php:84 www/account/register.php:211
-#: www/admin/approve-pending.php:190 www/admin/database.php:155
-#: www/admin/globalroledelete.php:49 www/admin/responses_admin.php:42
-#: www/export/rssAboTask.php:142 www/export/rssAboTask.php:143
-#: www/export/rssAboTask.php:144 www/export/rssAboTask.php:145
-#: www/export/rssAboTask.php:146 www/export/rssAboTask.php:169
-#: www/export/rssAboTask.php:171 www/export/rssAboTask.php:173
-#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
-#: www/forum/forum.php:156 www/forum/message.php:126
+#: www/admin/approve-pending.php:190 www/admin/approve-pending.php:192
+#: www/admin/database.php:155 www/admin/globalroledelete.php:49
+#: www/admin/responses_admin.php:42 www/export/rssAboTask.php:142
+#: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
+#: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
+#: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
+#: www/export/rssAboTask.php:173 www/forum/admin/pendingmsgdetail.php:59
+#: www/forum/forum.php:92 www/forum/forum.php:156 www/forum/message.php:126
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:190
 #: www/frs/admin/qrs.php:197 www/include/user_profile.php:88
 #: www/include/user_profile.php:93 www/include/user_profile.php:112
@@ -3409,6 +3409,7 @@ msgid "New %s Project Submitted"
 msgstr "%s 프로젝트가 제출되었습니다."
 
 #: common/include/Group.class.php:2680 common/include/Group.class.php:2698
+#: www/admin/approve-pending.php:192
 msgid "Submitted Description"
 msgstr "제출된 설명"
 
@@ -15018,10 +15019,6 @@ msgstr "Home 박스:"
 msgid "HTTP Domain:"
 msgstr "HTTP 도메인:"
 
-#: www/admin/approve-pending.php:192
-msgid "Submitted Description:"
-msgstr "제출된 설명:"
-
 #: www/admin/approve-pending.php:194
 msgid "Purpose of submission:"
 msgstr ""
@@ -22695,38 +22692,6 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
-
-#, fuzzy
-#~ msgid ""
-#~ "New %1$s Project Submitted\n"
-#~ "\n"
-#~ "Project Full Name:  %2$s\n"
-#~ "Submitted Description: %3$s\n"
-#~ msgstr ""
-#~ "%1$s 프로젝트가 승인을 기다리고 있습니다.\n"
-#~ "\n"
-#~ "프로젝트 이름:  %2$s\n"
-#~ "설명: %3$s\n"
-#~ "저작권: %4$s\n"
-#~ "\n"
-#~ "다음 URL을 방문하여 이 프로젝트를 승인하거나 거부하십시오.\n"
-#~ "%5$s"
-
-#, fuzzy
-#~ msgid "New %1$s Project Submitted"
-#~ msgstr "%s 프로젝트가 제출되었습니다."
-
-#, fuzzy
-#~ msgid "[delete]"
-#~ msgstr "삭제"
-
-#, fuzzy
-#~ msgid "Delete permanently."
-#~ msgstr "파일 삭제하기"
-
-#, fuzzy
-#~ msgid "Delete Failed"
-#~ msgstr "파일 삭제하기"
 
 #~ msgid "Forums: Administration"
 #~ msgstr "게시판: 관리"
