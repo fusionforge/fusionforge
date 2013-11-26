@@ -6,6 +6,7 @@
  * Copyright 2010 Roland Mas
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2011, Iñigo Martinez
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -583,7 +584,7 @@ if ($art_arr && $art_cnt > 0) {
 	for ($i=$start; $i<$max; $i++) {
  		$extra_data = $art_arr[$i]->getExtraFieldDataText();
 		echo '
-		<tr '. $HTML->boxGetAltRowStyle($i) . '>';
+		<tr class=priority'. $art_arr[$i]->getPriority().'>';
  		foreach ($browse_fields as $f) {
 			if ($f == 'id') {
 				echo '<td style="white-space: nowrap;">'.

@@ -3,6 +3,7 @@
  *
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010, Franck Villaume - Capgemini
+ * Copyright 2011, Iñigo Martinez
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -835,3 +836,9 @@ p.information {
 	padding: 1px 4px 4px 4px;
 	margin-bottom: 8px;
 }
+
+.priority1 { background-color: #f3f4db}
+.priority2 { background-color: #fcecc2}
+.priority3 { background-color: #fde4aa}
+.priority4 { background-color: #fcd986}
+.priority5 { background-color: #fac955}
