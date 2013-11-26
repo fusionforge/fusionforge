@@ -30,35 +30,35 @@ class MailingList extends Error {
 	/**
 	 * Associative array of data from db.
 	 *
-	 * @var	 array   $dataArray.
+	 * @var	 array	$dataArray.
 	 */
 	var $dataArray;
 
 	/**
 	 * The Group object.
 	 *
-	 * @var	 object  $Group.
+	 * @var	 object	$Group.
 	 */
 	var $Group;
 
 	/**
 	 * The mailing list id
 	 *
-	 * @var int $groupMailingListId
+	 * @var	int	$groupMailingListId
 	 */
 	var $groupMailingListId;
 
-    /**
-     *  Constructor.
-     *
-     * @param $Group
-     * @param bool $groupListId
-     * @param bool $dataArray
-     * @internal param \The $object Group object to which this mailing list is associated.
-     * @internal param \The $int group_list_id.
-     * @internal param \The $array associative array of data.
-     * @return \MailingList
-     */
+	/**
+	 *  Constructor.
+	 *
+	 * @param	$Group
+	 * @param	bool	$groupListId
+	 * @param	bool	$dataArray
+	 * @internal	param	\The $object Group object to which this mailing list is associated.
+	 * @internal	param	\The $int group_list_id.
+	 * @internal	param	\The $array associative array of data.
+	 * @return	\MailingList
+	 */
 	function __construct(&$Group, $groupListId = false, $dataArray = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
@@ -97,19 +97,19 @@ class MailingList extends Error {
 		}
 	}
 
-    /**
-     *    create - use this function to create a new entry in the database.
-     *
-     * @param $listName
-     * @param $description
-     * @param string $isPublic
-     * @param bool $creator_id
-     * @param int $is_external Pass (1) if it should be public (0) for private.
-     *
-     * @internal param \The $string name of the mailing list
-     * @internal param \The $string description of the mailing list
-     * @return    boolean    success.
-     */
+	/**
+	 *    create - use this function to create a new entry in the database.
+	 *
+	 * @param	$listName
+	 * @param	$description
+	 * @param	string		$isPublic
+	 * @param	bool		$creator_id
+	 * @param	int		$is_external Pass (1) if it should be public (0) for private.
+	 *
+	 * @internal	param		\The $string name of the mailing list
+	 * @internal	param		\The $string description of the mailing list
+	 * @return	boolean		success.
+	 */
 	function create($listName, $description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC,$creator_id=false, $is_external=0) {
 		//
 		//	During the group creation, the current user_id will not match the admin's id
@@ -215,10 +215,10 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 	}
 
 	/**
-	 *  fetchData - re-fetch the data for this mailing list from the database.
+	 * fetchData - re-fetch the data for this mailing list from the database.
 	 *
-	 *  @param  int		$groupListId The list_id.
-	 *	@return	bool	success.
+	 * @param	int	$groupListId The list_id.
+	 * @return	bool	success.
 	 */
 	function fetchData($groupListId) {
 		$res = db_query_params ('SELECT * FROM mail_group_list WHERE group_list_id=$1 AND group_id=$2',
@@ -233,15 +233,15 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 		return true;
 	}
 
-    /**
-     *    update - use this function to update an entry in the database.
-     *
-     * @param $description
-     * @param string $isPublic
-     * @param string $status The description of the mailing list
-     * @param int $is_external Pass (1) if it should be public (0) for private
-     * @return    boolean    success.
-     */
+	/**
+	 * update - use this function to update an entry in the database.
+	 *
+	 * @param	$description
+	 * @param	string		$isPublic
+	 * @param	string		$status The description of the mailing list
+	 * @param	int		$is_external Pass (1) if it should be public (0) for private
+	 * @return	boolean		success.
+	 */
 	function update($description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC, $status = 'xyzzy', $is_external=0) {
 		if(! forge_check_perm('project_admin', $this->Group->getID())) {
 			$this->setPermissionDeniedError();
@@ -269,18 +269,18 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 	}
 
 	/**
-	 *	getGroup - get the Group object this mailing list is associated with.
+	 * getGroup - get the Group object this mailing list is associated with.
 	 *
-	 *	@return	object	The Group object.
+	 * @return	object	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
 	/**
-	 *	getID - The id of this mailing list
+	 * getID - The id of this mailing list
 	 *
-	 *	@return	int	The group_list_id #.
+	 * @return	int	The group_list_id #.
 	 */
 	function getID() {
 		return $this->dataArray['group_list_id'];
@@ -288,18 +288,18 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 
 
 	/**
-	 *	isPublic - Is this mailing list open to the general public.
+	 * isPublic - Is this mailing list open to the general public.
 	 *
-	 *	@return boolean	is_public.
+	 * @return	boolean	is_public.
 	 */
 	function isPublic() {
 		return $this->dataArray['is_public'];
 	}
 
 	/**
-	 *	getName - get the name of this mailing list
+	 * getName - get the name of this mailing list
 	 *
-	 *	@return string	The name of this mailing list
+	 * @return	string	The name of this mailing list
 	 */
 	function getName() {
 		return $this->dataArray['list_name'];
@@ -307,9 +307,9 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 
 
 	/**
-	 *	getDescription - get the description of this mailing list
+	 * getDescription - get the description of this mailing list
 	 *
-	 *	@return string	The description.
+	 * @return	string	The description.
 	 */
 	function getDescription() {
 		return $this->dataArray['description'];
@@ -318,7 +318,7 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 	/**
 	 * getPassword - get the password to administrate the mailing list
 	 *
-	 * @return string The password
+	 * @return	string	The password
 	 */
 	function getPassword() {
 		return $this->dataArray['password'];
@@ -327,7 +327,7 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 	/**
 	 * getListAdmin - get the user who is the admin of this mailing list
 	 *
-	 * @return User The admin user
+	 * @return	User	The admin user
 	 */
 	function getListAdmin() {
 		return user_get_object($this->dataArray['list_admin']);
@@ -342,6 +342,11 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 		return $this->dataArray['status'];
 	}
 
+	/**
+	 * getListEmail - get the email of this mailing list
+	 *
+	 * @return	string	The email
+	 */
 	function getListEmail() {
 		return $this->getName().'@'.forge_get_config('lists_host');
 	}
@@ -349,7 +354,7 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 	/**
 	 * getArchivesUrl - get the url to see the archives of the list
 	 *
-	 * @return string url of the archives
+	 * @return	string	url of the archives
 	 */
 	function getArchivesUrl() {
 		$host = util_url_prefix() . forge_get_config('lists_host');
@@ -363,7 +368,7 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 	/**
 	 * getExternalInfoUrl - get the url to subscribe/unsubscribe
 	 *
-	 * @return string url of the info page
+	 * @return	string	url of the info page
 	 */
 	function getExternalInfoUrl() {
 		return util_url_prefix() . forge_get_config('lists_host') .
@@ -373,7 +378,7 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 	/**
 	 * getExternalAdminUrl - get the url to admin the list with the external tools used
 	 *
-	 * @return string url of the admin
+	 * @return	string	url of the admin
 	 */
 	function getExternalAdminUrl() {
 		return util_url_prefix() . forge_get_config('lists_host') .
@@ -381,11 +386,11 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 	}
 
 	/**
-	 *	delete - permanently delete this mailing list
+	 * delete - permanently delete this mailing list
 	 *
-	 *	@param	boolean	$sure I'm Sure.
-	 *	@param	boolean	$really_sure I'm Really Sure.
-	 *	@return	boolean success;
+	 * @param	boolean	$sure I'm Sure.
+	 * @param	boolean	$really_sure I'm Really Sure.
+	 * @return	boolean success;
 	 */
 	function delete($sure,$really_sure) {
 
@@ -416,7 +421,6 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 			return false;
 		}
 		return true;
-
 	}
 }
 
