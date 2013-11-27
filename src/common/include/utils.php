@@ -176,19 +176,18 @@ function util_check_url($url) {
  * util_send_message() - Send email
  * This function should be used in place of the PHP mail() function
  *
- * @param string      $to            The email recipients address
- * @param string      $subject       The email subject
- * @param string      $body          The body of the email message
- * @param string      $from          The optional email sender address.  Defaults to 'noreply@'
- * @param string      $BCC           The addresses to blind-carbon-copy this message
- * @param string      $sendername    The optional email sender name. Defaults to ''
- * @param bool|string $extra_headers Whether to send plain text or html email
- * @param bool        $send_html_email
+ * @param	string		$to			The email recipients address
+ * @param	string		$subject		The email subject
+ * @param	string		$body			The body of the email message
+ * @param	string		$from			The optional email sender address.  Defaults to 'noreply@'
+ * @param	string		$BCC			The addresses to blind-carbon-copy this message (comma-separated)
+ * @param	string		$sendername		The optional email sender name. Defaults to ''
+ * @param	bool|string	$extra_headers
+ * @param	bool		$send_html_email	Whether to send plain text or html email
+ * @param	string		$CC			The addresses to carbon-copy this message (comma-separated)
  */
 function util_send_message($to, $subject, $body, $from = '', $BCC = '', $sendername = '', $extra_headers = '',
-						   $send_html_email = false) {
-
-
+						   $send_html_email = false, $CC = '') {
 	if (!$to) {
 		$to = 'noreply@'.forge_get_config('web_host');
 	}
@@ -212,6 +211,9 @@ function util_send_message($to, $subject, $body, $from = '', $BCC = '', $sendern
 	}
 	if (!empty($BCC)) {
 		$body2 .= "\nBCC: $BCC";
+	}
+	if (!empty($CC)) {
+		$body2 .= "\nCC: $CC";
 	}
 	$send_html_email? $type = "html" : $type = "plain";
 	$body2 .= "\n".util_encode_mimeheader("Subject", $subject, $charset).
