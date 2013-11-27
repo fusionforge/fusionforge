@@ -1,27 +1,25 @@
 <?php
-#
-# Copyright (c) STMicroelectronics, 2005. All Rights Reserved.
-
- # Originally written by Jean-Philippe Giola, 2005
- #
- # This file is a part of codendi.
- #
- # codendi is free software; you can redistribute it and/or modify
- # it under the terms of the GNU General Public License as published by
- # the Free Software Foundation; either version 2 of the License, or
- # (at your option) any later version.
- #
- # codendi is distributed in the hope that it will be useful,
- # but WITHOUT ANY WARRANTY; without even the implied warranty of
- # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- # GNU General Public License for more details.
- #
- # You should have received a copy of the GNU General Public License along
- # with this program; if not, write to the Free Software Foundation, Inc.,
- # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
- #
- # $Id$
- #
+/**
+ * Copyright (c) STMicroelectronics, 2005. All Rights Reserved.
+ *
+ * Originally written by Jean-Philippe Giola, 2005
+ *
+ * This file is a part of Fusionforge.
+ *
+ * Fusionforge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * Fusionforge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
 define('FORUMML_MESSAGE_ID', 1);
 define('FORUMML_DATE', 2);
@@ -124,7 +122,7 @@ function plugin_forumml_show_all_threads($p,$list_id,$list_name,$offset) {
 
 	// Total number of threads
 	$nbThreads = 0;
-$res = getForumMLDao()->countAllThreadsFromList($list_id);
+	$res = getForumMLDao()->countAllThreadsFromList($list_id);
 	if ($res && !db_error()) {
 		$row = $res->getRow();
 		$nbThreads = $row['nb'];
