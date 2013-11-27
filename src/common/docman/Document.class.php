@@ -437,7 +437,16 @@ class Document extends Error {
 		if ($download)
 			$this->downloadUp();
 
-		return file_get_contents(DocumentStorage::instance()->get($this->getID()));
+		return file_get_contents($this->getFilePath());
+	}
+
+	/**
+	 * getFilePath - the filepath of this document.
+	 *
+	 * @return	string	The file where the file is stored.
+	 */
+	function getFilePath() {
+		return DocumentStorage::instance()->get($this->getID());
 	}
 
 	/**

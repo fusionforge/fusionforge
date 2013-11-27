@@ -89,7 +89,12 @@ if (is_numeric($docid)) {
 	header("Content-type: ".$d->getFileType());
 	header("Content-Transfer-Encoding: binary");
 	ob_end_clean();
-	echo $d->getFileData();
+
+	$file_path = $d->getFilePath();
+	$length = filesize($file_path);
+	header("Content-length: $length");
+
+	readfile_chunked($file_path);
 
 } elseif ($docid === 'backup') {
 	if (extension_loaded('zip')) {
