@@ -31,7 +31,7 @@ class MailingListFactory extends Error {
 	/**
 	 * The Group object.
 	 *
-	 * @var	 object  $Group.
+	 * @var	 object	$Group.
 	 */
 	var $Group;
 
@@ -67,9 +67,9 @@ class MailingListFactory extends Error {
 	}
 
 	/**
-	 *	getGroup - get the Group object this MailingListFactory is associated with.
+	 * getGroup - get the Group object this MailingListFactory is associated with.
 	 *
-	 *	@return object	The Group object.
+	 * @return	object	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;

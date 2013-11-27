@@ -390,7 +390,7 @@ Thank you for registering your project with %1$s.'), forge_get_config ('forge_na
 	 *
 	 * @param	boolean	$sure I'm Sure.
 	 * @param	boolean	$really_sure I'm Really Sure.
-	 * @return	boolean success;
+	 * @return	boolean	success;
 	 */
 	function delete($sure,$really_sure) {
 
