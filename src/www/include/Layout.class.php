@@ -627,10 +627,10 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * listTableTop() - Takes an array of titles and builds the first row of a new table.
 	 *
-	 * @param	array	$titleArray		The array of titles
-	 * @param	array	$linksArray		The array of title links
-	 * @param	string	$class			The css classes to add (optional)
-	 * @param	string	$id				The id of the table (needed by sortable for example)
+	 * @param	array	$titleArray	The array of titles
+	 * @param	array	$linksArray	The array of title links
+	 * @param	string	$class		The css classes to add (optional)
+	 * @param	string	$id		The id of the table (needed by sortable for example)
 	 * @param	array	$thClassArray	specific class for th column
 	 * @return	string	the html code
 	 */
@@ -919,10 +919,10 @@ if (isset($params['group']) && $params['group']) {
 	 *
 	 * @param	string	$row_attr	the row attributes
 	 * @param	array	$cell_data	the array of cell data, each element is an array,
-	 *				the first item being the text,
-	 *				the subsequent items are attributes (dont include
-	 *				the bgcolor for the title here, that will be
-	 *				handled by $istitle
+	 *					the first item being the text,
+	 *					the subsequent items are attributes (dont include
+	 *					the bgcolor for the title here, that will be
+	 *					handled by $istitle
 	 * @param	bool	$istitle	is this row part of the title ?
 	 * @return	string	the html code
 	 */
@@ -958,8 +958,8 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * feedback() - returns the htmlized feedback string when an action is performed.
 	 *
-	 * @param string $feedback	feedback string
-	 * @return string htmlized feedback
+	 * @param	string	$feedback	feedback string
+	 * @return	string	htmlized feedback
 	 */
 	function feedback($feedback) {
 		if (!$feedback) {
@@ -972,8 +972,8 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * warning_msg() - returns the htmlized warning string when an action is performed.
 	 *
-	 * @param string $msg	msg string
-	 * @return string htmlized warning
+	 * @param	string	$msg	msg string
+	 * @return	string	htmlized warning
 	 */
 	function warning_msg($msg) {
 		if (!$msg) {
@@ -987,8 +987,8 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * error_msg() - returns the htmlized error string when an action is performed.
 	 *
-	 * @param string $msg	msg string
-	 * @return string htmlized error
+	 * @param	string	$msg	msg string
+	 * @return	string	htmlized error
 	 */
 	function error_msg($msg) {
 		if (!$msg) {
@@ -1002,8 +1002,8 @@ if (isset($params['group']) && $params['group']) {
 	/**
 	 * information() - returns the htmlized information string.
 	 *
-	 * @param string $msg	msg string
-	 * @return string htmlized information
+	 * @param	string	$msg	msg string
+	 * @return	string	htmlized information
 	 */
 	function information($msg) {
 		if (!$msg) {
@@ -1018,7 +1018,7 @@ if (isset($params['group']) && $params['group']) {
 	 * getThemeIdFromName()
 	 *
 	 * @param	string  $dirname	the dirname of the theme
-	 * @return	int		the theme id
+	 * @return	int	the theme id
 	 */
 	function getThemeIdFromName($dirname) {
 		$res = db_query_params ('SELECT theme_id FROM themes WHERE dirname=$1',
