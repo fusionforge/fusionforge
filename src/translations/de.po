@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-28 18:18+0100\n"
+"POT-Creation-Date: 2013-11-28 18:37+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -2980,6 +2980,10 @@ msgstr ""
 #, fuzzy
 msgid "Database initialisation error:"
 msgstr "Datenbankmanipulation"
+
+#: common/include/Error.class.php:106
+msgid "No Error"
+msgstr "Kein Fehler"
 
 #: common/include/Error.class.php:125 common/include/Group.class.php:431
 #: common/include/Group.class.php:514

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-28 18:18+0100\n"
+"POT-Creation-Date: 2013-11-28 18:37+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -2851,6 +2851,10 @@ msgstr "Scripts d'initialisation de la base de données introuvables."
 #: common/include/DatabaseInstaller.class.php:137
 msgid "Database initialisation error:"
 msgstr "Erreur d'initialisation de la base de données :"
+
+#: common/include/Error.class.php:106
+msgid "No Error"
+msgstr "Pas d'erreur"
 
 #: common/include/Error.class.php:125 common/include/Group.class.php:431
 #: common/include/Group.class.php:514

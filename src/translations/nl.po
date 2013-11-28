@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-28 18:18+0100\n"
+"POT-Creation-Date: 2013-11-28 18:37+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2952,6 +2952,11 @@ msgstr ""
 #, fuzzy
 msgid "Database initialisation error:"
 msgstr "Databasebewerking"
+
+#: common/include/Error.class.php:106
+#, fuzzy
+msgid "No Error"
+msgstr "Fout"
 
 #: common/include/Error.class.php:125 common/include/Group.class.php:431
 #: common/include/Group.class.php:514

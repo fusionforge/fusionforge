@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-28 18:18+0100\n"
+"POT-Creation-Date: 2013-11-28 18:37+0100\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2942,6 +2942,11 @@ msgstr ""
 #, fuzzy
 msgid "Database initialisation error:"
 msgstr "データベース情報"
+
+#: common/include/Error.class.php:106
+#, fuzzy
+msgid "No Error"
+msgstr "アカウントをアクティブにするときにエラーが発生しました"
 
 #: common/include/Error.class.php:125 common/include/Group.class.php:431
 #: common/include/Group.class.php:514
@@ -22808,10 +22813,6 @@ msgstr "%sのパーソナルページ"
 
 #~ msgid "Error: both subject and body are required"
 #~ msgstr "エラー - 件名と本文は必須項目です。"
-
-#, fuzzy
-#~ msgid "Error: "
-#~ msgstr "アカウントをアクティブにするときにエラーが発生しました"
 
 #, fuzzy
 #~ msgid "Permission Denied"

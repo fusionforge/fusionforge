@@ -103,7 +103,7 @@ class Error {
 		if ($this->error_state)	{
 			return $this->error_message;
 		} else {
-			return 'No Error';
+			return _('No Error');
 		}
 	}
 
