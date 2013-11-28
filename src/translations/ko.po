@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 18:30+0100\n"
+"POT-Creation-Date: 2013-11-28 18:18+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -125,7 +125,7 @@ msgstr "게시판 사용"
 #: common/docman/actions/monitorfile.php:52
 #: common/docman/actions/monitorfile.php:72
 #: common/docman/actions/trashfile.php:62
-#: common/docman/actions/validatefile.php:57 www/docman/view.php:244
+#: common/docman/actions/validatefile.php:57 www/docman/view.php:249
 #, fuzzy
 msgid "No action to perform"
 msgstr "리포트할 데이터가 없습니다."
@@ -183,7 +183,7 @@ msgid "Archive injected successfully."
 msgstr ""
 
 #: common/docman/actions/monitordirectory.php:38
-#: common/docman/Document.class.php:941
+#: common/docman/Document.class.php:950
 #: common/docman/DocumentGroup.class.php:723
 #: common/docman/views/reporting.php:169
 #, fuzzy
@@ -193,9 +193,9 @@ msgstr "파일 이름"
 #: common/docman/actions/monitordirectory.php:43
 #: common/docman/actions/monitorfile.php:44
 #: common/docman/actions/monitorfile.php:63
-#: common/docman/Document.class.php:940 common/docman/Document.class.php:941
-#: common/docman/Document.class.php:942 common/docman/Document.class.php:943
-#: common/docman/Document.class.php:944
+#: common/docman/Document.class.php:949 common/docman/Document.class.php:950
+#: common/docman/Document.class.php:951 common/docman/Document.class.php:952
+#: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:67
 #: common/docman/DocumentGroup.class.php:722
 #: common/docman/DocumentGroup.class.php:723
@@ -236,8 +236,8 @@ msgstr "파일 이름"
 #: common/mail/MailingListFactory.class.php:103
 #: common/reporting/report_utils.php:27
 #: common/search/SearchQuery.class.php:120
-#: common/tracker/actions/browse.php:401 common/tracker/actions/browse.php:404
-#: common/tracker/actions/browse.php:748 common/tracker/actions/detail.php:140
+#: common/tracker/actions/browse.php:402 common/tracker/actions/browse.php:405
+#: common/tracker/actions/browse.php:749 common/tracker/actions/detail.php:140
 #: common/tracker/actions/mod-limited.php:164
 #: common/tracker/actions/mod.php:111 common/tracker/actions/mod.php:140
 #: common/tracker/actions/mod.php:147 common/tracker/actions/mod.php:155
@@ -246,7 +246,10 @@ msgstr "파일 이름"
 #: common/tracker/actions/query.php:340 common/tracker/actions/query.php:346
 #: common/tracker/actions/query.php:347 common/tracker/actions/query.php:382
 #: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
-#: common/tracker/actions/query.php:391 common/tracker/actions/tracker.php:388
+#: common/tracker/actions/query.php:391 common/tracker/actions/tracker.php:166
+#: common/tracker/actions/tracker.php:168
+#: common/tracker/actions/tracker.php:217
+#: common/tracker/actions/tracker.php:388
 #: common/tracker/actions/tracker.php:393
 #: common/tracker/actions/tracker.php:505
 #: common/tracker/ArtifactExtraField.class.php:187
@@ -266,7 +269,7 @@ msgstr "파일 이름"
 #: cronjobs/send_pending_items_mail.php:119
 #: cronjobs/send_pending_items_mail.php:120
 #: cronjobs/send_pending_items_mail.php:121
-#: plugins/forumml/www/forumml_utils.php:681 plugins/forumml/www/index.php:122
+#: plugins/forumml/www/forumml_utils.php:679 plugins/forumml/www/index.php:121
 #: plugins/hudson/include/hudsonPlugin.class.php:265
 #: plugins/hudson/include/hudsonPlugin.class.php:292
 #: plugins/hudson/include/hudsonPlugin.class.php:293
@@ -470,17 +473,17 @@ msgstr "유효한 그룹 객체가 없습니다."
 msgid "group_id in db result does not match Group Object"
 msgstr "데이터베이스의 그룹ID가 그룹 객체와 맞지 않습니다."
 
-#: common/docman/Document.class.php:113 common/docman/Document.class.php:828
+#: common/docman/Document.class.php:113 common/docman/Document.class.php:837
 #: common/pm/ProjectGroup.class.php:144 common/pm/ProjectGroup.class.php:316
 msgid "Title Must Be At Least 5 Characters"
 msgstr ""
 
-#: common/docman/Document.class.php:117 common/docman/Document.class.php:833
+#: common/docman/Document.class.php:117 common/docman/Document.class.php:842
 msgid "Document Description Must Be At Least 10 Characters"
 msgstr ""
 
 #: common/docman/Document.class.php:141 common/docman/Document.class.php:149
-#: common/docman/Document.class.php:842
+#: common/docman/Document.class.php:851
 #, fuzzy
 msgid "Document already published in this folder"
 msgstr "새로운 문서 올리기"
@@ -500,8 +503,8 @@ msgstr "통계 자료가 없습니다."
 msgid "Error fetching Document"
 msgstr "계정을 활성화하는 도중 오류가 발생하였습니다."
 
-#: common/docman/Document.class.php:225 common/docman/Document.class.php:881
-#: common/docman/Document.class.php:1097
+#: common/docman/Document.class.php:225 common/docman/Document.class.php:890
+#: common/docman/Document.class.php:1106
 #, fuzzy
 msgid "Error updating document group:"
 msgstr "게시판을 추가할 때 오류가 발생하였습니다."
@@ -511,51 +514,51 @@ msgstr "게시판을 추가할 때 오류가 발생하였습니다."
 msgid "Document: Invalid docid"
 msgstr "잘못된 문서 id 입니다."
 
-#: common/docman/Document.class.php:581
+#: common/docman/Document.class.php:590
 #: common/docman/DocumentGroup.class.php:410
 #, fuzzy
 msgid "Unable To Remove Monitor"
 msgstr "모니터링 기능을 사용하실 수 없습니다."
 
-#: common/docman/Document.class.php:602
+#: common/docman/Document.class.php:611
 #: common/docman/DocumentGroup.class.php:431 common/forum/Forum.class.php:457
 msgid "Unable To Add Monitor"
 msgstr "모니터링 기능을 사용하실 수 없습니다."
 
-#: common/docman/Document.class.php:618
+#: common/docman/Document.class.php:627
 #: common/docman/DocumentGroup.class.php:447
 #, fuzzy
 msgid "Unable To Clear Monitor"
 msgstr "모니터링 기능을 사용하실 수 없습니다."
 
-#: common/docman/Document.class.php:669
+#: common/docman/Document.class.php:678
 #, fuzzy
 msgid "Document lock failed"
 msgstr "문서 제목"
 
-#: common/docman/Document.class.php:697
+#: common/docman/Document.class.php:706
 #, fuzzy
 msgid "Document reservation failed"
 msgstr "문서 보기"
 
-#: common/docman/Document.class.php:935 common/docman/views/additem.php:57
+#: common/docman/Document.class.php:944 common/docman/views/additem.php:57
 #, fuzzy
 msgid "New Document"
 msgstr "프로젝트 더하기"
 
-#: common/docman/Document.class.php:937
+#: common/docman/Document.class.php:946
 #, fuzzy
 msgid "Updated document"
 msgstr "프로젝트 더하기"
 
-#: common/docman/Document.class.php:937 common/docman/views/listfile.php:285
+#: common/docman/Document.class.php:946 common/docman/views/listfile.php:285
 #: common/widget/Widget_MyLatestSvnCommits.class.php:66
 msgid "by"
 msgstr ""
 
-#: common/docman/Document.class.php:940
+#: common/docman/Document.class.php:949
 #: common/docman/DocumentGroup.class.php:722
-#: common/forum/ForumHTML.class.php:73 common/tracker/actions/browse.php:364
+#: common/forum/ForumHTML.class.php:73 common/tracker/actions/browse.php:365
 #: plugins/contribtracker/www/index.php:35
 #: plugins/contribtracker/www/index.php:167
 #: plugins/mantisbt/view/admin/StatPerStatus.php:47
@@ -566,39 +569,39 @@ msgstr ""
 msgid "Project"
 msgstr ""
 
-#: common/docman/Document.class.php:942 common/docman/views/addfile.php:91
+#: common/docman/Document.class.php:951 common/docman/views/addfile.php:91
 #: common/docman/views/addfile.php:100 common/docman/views/addfile.php:102
 #: common/docman/views/editfile.php:38
 msgid "Document Title"
 msgstr "문서 제목"
 
-#: common/docman/Document.class.php:943
+#: common/docman/Document.class.php:952
 msgid "Document description"
 msgstr ""
 
-#: common/docman/Document.class.php:944
+#: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:725
-#: common/include/Group.class.php:2683 common/tracker/actions/browse.php:200
+#: common/include/Group.class.php:2683 common/tracker/actions/browse.php:201
 #: common/tracker/actions/query.php:202 common/tracker/actions/query.php:346
 msgid "Submitter"
 msgstr "제출자"
 
-#: common/docman/Document.class.php:946
+#: common/docman/Document.class.php:955
 #: common/docman/DocumentGroup.class.php:730
 msgid "For more info, visit:"
 msgstr ""
 
-#: common/docman/Document.class.php:951
+#: common/docman/Document.class.php:960
 #: common/docman/DocumentGroup.class.php:735
 msgid "Docman"
 msgstr ""
 
-#: common/docman/Document.class.php:1016
+#: common/docman/Document.class.php:1025
 #, fuzzy
 msgid "Error Deleting Document:"
 msgstr "계정을 활성화하는 도중 오류가 발생하였습니다."
 
-#: common/docman/Document.class.php:1092
+#: common/docman/Document.class.php:1101
 #: common/docman/DocumentGroup.class.php:873
 msgid "wrong column name"
 msgstr ""
@@ -735,9 +738,9 @@ msgstr ""
 #: common/survey/SurveyResponse.class.php:95
 #: common/tracker/actions/tracker.php:271
 #: common/tracker/views/form-adminroadmap.php:57
-#: plugins/forumml/www/index.php:55 plugins/forumml/www/index.php:60
-#: plugins/forumml/www/index.php:63 plugins/forumml/www/message.php:92
-#: plugins/forumml/www/message.php:97 plugins/forumml/www/message.php:100
+#: plugins/forumml/www/index.php:54 plugins/forumml/www/index.php:59
+#: plugins/forumml/www/index.php:62 plugins/forumml/www/message.php:90
+#: plugins/forumml/www/message.php:95 plugins/forumml/www/message.php:98
 #: plugins/forumml/www/upload.php:48 plugins/forumml/www/upload.php:51
 #: plugins/mailman/www/admin/index.php:49
 #: plugins/mailman/www/admin/index.php:52
@@ -798,7 +801,7 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/actions/admin-ind.php:99
 #: common/tracker/actions/admin-ind.php:139
-#: common/tracker/actions/browse.php:556 common/tracker/actions/ind.php:57
+#: common/tracker/actions/browse.php:557 common/tracker/actions/ind.php:57
 #: common/tracker/views/form-updatetracker.php:53
 #: plugins/blocks/www/index.php:202
 #: plugins/contribtracker/www/global_admin.php:243
@@ -1100,8 +1103,8 @@ msgstr ""
 msgid "Folder that document belongs to:"
 msgstr "문서가 속하는 그룹:"
 
-#: common/docman/views/editfile.php:70 common/tracker/actions/browse.php:404
-#: common/tracker/actions/browse.php:562 common/tracker/actions/browse.php:748
+#: common/docman/views/editfile.php:70 common/tracker/actions/browse.php:405
+#: common/tracker/actions/browse.php:563 common/tracker/actions/browse.php:749
 #: common/tracker/actions/detail.php:80
 #: common/tracker/actions/mod-limited.php:128
 #: common/tracker/actions/mod.php:155 common/tracker/actions/query.php:340
@@ -1222,8 +1225,8 @@ msgstr "제목"
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:113
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:68
-#: plugins/forumml/www/forumml_utils.php:63
-#: plugins/forumml/www/forumml_utils.php:188
+#: plugins/forumml/www/forumml_utils.php:61
+#: plugins/forumml/www/forumml_utils.php:186
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:138
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/forum/forum.php:246 www/forum/message.php:160
@@ -1340,8 +1343,8 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:101
 #: common/docman/views/pendingfiles.php:103
 #: common/forum/ForumHTML.class.php:219 common/pm/ProjectTask.class.php:1211
-#: common/tracker/actions/browse.php:606 common/tracker/actions/browse.php:617
-#: common/tracker/actions/browse.php:637 common/tracker/actions/detail.php:70
+#: common/tracker/actions/browse.php:607 common/tracker/actions/browse.php:618
+#: common/tracker/actions/browse.php:638 common/tracker/actions/detail.php:70
 #: common/tracker/actions/downloadcsv.php:84
 #: common/tracker/actions/downloadcsv.php:85
 #: common/tracker/actions/downloadcsv.php:86
@@ -1640,8 +1643,8 @@ msgstr ""
 #: common/docman/views/reporting.php:92 common/docman/views/reporting.php:94
 #: common/forum/ForumHTML.class.php:85 common/frs/FRSRelease.class.php:294
 #: common/frs/FRSRelease.class.php:297 common/frs/FRSRelease.class.php:301
-#: common/include/utils.php:496 common/tracker/actions/browse.php:736
-#: common/tracker/actions/browse.php:744 common/tracker/actions/browse.php:754
+#: common/include/utils.php:498 common/tracker/actions/browse.php:737
+#: common/tracker/actions/browse.php:745 common/tracker/actions/browse.php:755
 #: common/tracker/actions/detail.php:69 common/tracker/actions/detail.php:73
 #: common/tracker/actions/detail.php:80 common/tracker/actions/detail.php:87
 #: common/tracker/actions/detail.php:97 common/tracker/actions/detail.php:109
@@ -1821,8 +1824,8 @@ msgstr ""
 #: www/reporting/usersummary.php:72 www/reporting/usersummary.php:73
 #: www/reporting/usertime.php:93 www/reporting/usertime.php:94
 #: www/reporting/usertime.php:95 www/reporting/usertime.php:96
-#: www/sendmessage.php:141 www/sendmessage.php:145 www/sendmessage.php:149
-#: www/sendmessage.php:153 www/snippet/add_snippet_to_package.php:128
+#: www/sendmessage.php:154 www/sendmessage.php:165 www/sendmessage.php:176
+#: www/sendmessage.php:180 www/snippet/add_snippet_to_package.php:128
 #: www/snippet/addversion.php:94 www/snippet/addversion.php:98
 #: www/snippet/addversion.php:102 www/snippet/addversion.php:217
 #: www/snippet/addversion.php:221 www/snippet/index.php:64
@@ -2190,9 +2193,9 @@ msgstr "게시판 이름"
 #: common/forum/ForumAdmin.class.php:321 common/forum/ForumHTML.class.php:528
 #: common/forum/ForumHTML.class.php:591
 #: common/tracker/include/ArtifactHtml.class.php:72
-#: plugins/forumml/www/index.php:122
+#: plugins/forumml/www/index.php:121
 #: plugins/message/common/messagePlugin.class.php:35 www/admin/cronman.php:44
-#: www/sendmessage.php:153
+#: www/sendmessage.php:180
 msgid "Message"
 msgstr "메시지"
 
@@ -2342,7 +2345,7 @@ msgstr "매일 갱신됩니다."
 
 #: common/forum/Forum.class.php:621 common/frs/FRSPackage.class.php:466
 #: common/frs/FRSRelease.class.php:354 common/include/Group.class.php:1615
-#: common/mail/MailingList.class.php:393 common/pm/ProjectGroup.class.php:362
+#: common/mail/MailingList.class.php:398 common/pm/ProjectGroup.class.php:362
 #: common/pm/ProjectTask.class.php:515 common/tracker/Artifact.class.php:505
 #: common/tracker/ArtifactExtraField.class.php:430
 #: common/tracker/ArtifactType.class.php:795
@@ -2382,7 +2385,7 @@ msgid "Posted by"
 msgstr "멤버 구함 공지 올리기"
 
 #: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:379
-#: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:554
+#: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:555
 #: common/tracker/actions/detail.php:109
 #: common/tracker/actions/mod-limited.php:142
 #: common/tracker/actions/mod.php:167 common/tracker/actions/query.php:198
@@ -2458,7 +2461,7 @@ msgid "By"
 msgstr ""
 
 #: common/forum/ForumHTML.class.php:266
-#: plugins/forumml/www/forumml_utils.php:558 www/forum/message.php:123
+#: plugins/forumml/www/forumml_utils.php:556 www/forum/message.php:123
 #, fuzzy
 msgid "Reply"
 msgstr "답글"
@@ -2494,11 +2497,11 @@ msgid "Edit Message"
 msgstr "메일 보내기"
 
 #: common/forum/ForumHTML.class.php:524 common/forum/ForumHTML.class.php:588
-#: plugins/forumml/www/index.php:111 www/admin/massmail.php:112
+#: plugins/forumml/www/index.php:110 www/admin/massmail.php:112
 #: www/admin/massmail.php:136 www/admin/pending-news.php:145
 #: www/developer/diary.php:80 www/news/admin/index.php:133
 #: www/news/admin/news_admin_utils.php:58 www/news/submit.php:155
-#: www/sendmessage.php:68 www/sendmessage.php:149
+#: www/sendmessage.php:76 www/sendmessage.php:176
 msgid "Subject"
 msgstr "제목"
 
@@ -2950,7 +2953,7 @@ msgstr ""
 #: common/include/Error.class.php:142 common/include/User.class.php:350
 #: common/include/User.class.php:931 common/include/User.class.php:983
 #: common/tracker/actions/tracker.php:84
-#: plugins/forumml/www/forumml_utils.php:681 www/account/change_email.php:38
+#: plugins/forumml/www/forumml_utils.php:679 www/account/change_email.php:38
 msgid "Invalid Email Address"
 msgstr "유효하지 않은 이메일 주소"
 
@@ -4424,25 +4427,25 @@ msgstr ""
 msgid "New %1$s User"
 msgstr ""
 
-#: common/include/utils.php:199
+#: common/include/utils.php:198
 msgid "UTF-8"
 msgstr ""
 
-#: common/include/utils.php:496
+#: common/include/utils.php:498
 msgid "Priority Colors"
 msgstr "우선순위"
 
-#: common/include/utils.php:895 common/include/utils.php:899
-#: common/include/utils.php:910
+#: common/include/utils.php:897 common/include/utils.php:901
+#: common/include/utils.php:912
 #, fuzzy
 msgid "bytes"
 msgstr "예"
 
-#: common/include/utils.php:895 common/include/utils.php:910
+#: common/include/utils.php:897 common/include/utils.php:912
 msgid "kB"
 msgstr ""
 
-#: common/include/utils.php:895
+#: common/include/utils.php:897
 #: plugins/quota_management/www/quota_admin.php:120
 #: plugins/quota_management/www/quota_admin.php:127
 #: plugins/quota_management/www/quota.php:248
@@ -4470,36 +4473,36 @@ msgstr ""
 msgid "MB"
 msgstr ""
 
-#: common/include/utils.php:895
+#: common/include/utils.php:897
 msgid "GB"
 msgstr ""
 
-#: common/include/utils.php:895
+#: common/include/utils.php:897
 msgid "TB"
 msgstr ""
 
-#: common/include/utils.php:899 common/include/utils.php:910
+#: common/include/utils.php:901 common/include/utils.php:912
 msgid "KiB"
 msgstr ""
 
-#: common/include/utils.php:899
+#: common/include/utils.php:901
 msgid "MiB"
 msgstr ""
 
-#: common/include/utils.php:899
+#: common/include/utils.php:901
 msgid "GiB"
 msgstr ""
 
-#: common/include/utils.php:899
+#: common/include/utils.php:901
 msgid "TiB"
 msgstr ""
 
-#: common/include/utils.php:1291
+#: common/include/utils.php:1293
 #, fuzzy
 msgid "Error: a mailing list with the same email address already exists."
 msgstr "사용자 ID가 이미 존재합니다."
 
-#: common/include/utils.php:1309
+#: common/include/utils.php:1311
 #, fuzzy
 msgid "Error: a forum with the same email address already exists."
 msgstr "사용자 ID가 이미 존재합니다."
@@ -5042,7 +5045,7 @@ msgstr ""
 #: plugins/contribtracker/www/global_admin.php:410
 #: plugins/contribtracker/www/global_admin.php:451
 #: plugins/contribtracker/www/project_admin.php:193
-#: plugins/forumml/www/forumml_utils.php:598 plugins/forumml/www/index.php:127
+#: plugins/forumml/www/forumml_utils.php:596 plugins/forumml/www/index.php:126
 #: plugins/mantisbt/view/addIssue.php:146
 #: plugins/mantisbt/view/addOrEditNote.php:58
 #: plugins/scmgit/common/GitPlugin.class.php:1122
@@ -5288,15 +5291,15 @@ msgstr "계정을 활성화하는 도중 오류가 발생하였습니다."
 msgid "Element deleted"
 msgstr "파일이 삭제되었습니다."
 
-#: common/tracker/actions/browse.php:94
+#: common/tracker/actions/browse.php:95
 #: common/tracker/actions/downloadcsv.php:38
 #: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:405
 #: www/pm/index.php:46 www/pm/task.php:86 www/tracker/roadmap.php:333
 msgid "Could Not Get Factory"
 msgstr ""
 
-#: common/tracker/actions/browse.php:183 common/tracker/actions/browse.php:305
-#: common/tracker/actions/browse.php:310 common/tracker/actions/query.php:340
+#: common/tracker/actions/browse.php:184 common/tracker/actions/browse.php:306
+#: common/tracker/actions/browse.php:311 common/tracker/actions/query.php:340
 #: www/pm/browse_task.php:105 www/pm/browse_task.php:116
 #: www/pm/browse_task.php:158 www/pm/ganttpage.php:146
 #: www/pm/ganttpage.php:148 www/pm/ganttpage.php:150 www/pm/ganttpage.php:152
@@ -5304,13 +5307,15 @@ msgstr ""
 msgid "Any"
 msgstr "전부"
 
-#: common/tracker/actions/browse.php:188 www/pm/browse_task.php:107
+#: common/tracker/actions/browse.php:189 www/pm/browse_task.php:107
 #: www/pm/browse_task.php:352 www/pm/ganttpage.php:148
 msgid "Unassigned"
 msgstr "없음"
 
-#: common/tracker/actions/browse.php:194 common/tracker/actions/browse.php:552
-#: common/tracker/actions/query.php:196
+#: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:553
+#: common/tracker/actions/query.php:196 common/tracker/actions/tracker.php:166
+#: common/tracker/actions/tracker.php:168
+#: common/tracker/actions/tracker.php:217
 #: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:134
 #: www/admin/search.php:72 www/admin/search.php:147 www/my/dashboard.php:64
 #: www/pm/admin/index.php:189 www/pm/index.php:98
@@ -5319,8 +5324,8 @@ msgstr "없음"
 msgid "Id"
 msgstr ""
 
-#: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:564
-#: common/tracker/actions/browse.php:736 common/tracker/actions/detail.php:73
+#: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:565
+#: common/tracker/actions/browse.php:737 common/tracker/actions/detail.php:73
 #: common/tracker/actions/mod-limited.php:119
 #: common/tracker/actions/mod.php:147 common/tracker/actions/query.php:197
 #: common/tracker/include/build_submission_form.php:66
@@ -5334,7 +5339,7 @@ msgstr ""
 msgid "Priority"
 msgstr "중요도"
 
-#: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:558
+#: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:559
 #: common/tracker/actions/query.php:199
 #: common/tracker/views/form-customizelist.php:38
 #: cronjobs/send_pending_items_mail.php:118 www/people/viewjob.php:76
@@ -5344,123 +5349,123 @@ msgstr "중요도"
 msgid "Open Date"
 msgstr "제출한 날"
 
-#: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:572
+#: common/tracker/actions/browse.php:199 common/tracker/actions/browse.php:573
 #: common/tracker/actions/query.php:200
 #: common/tracker/views/form-customizelist.php:46
 #, fuzzy
 msgid "Last Modified Date"
 msgstr "대량 갱신"
 
-#: common/tracker/actions/browse.php:199 common/tracker/actions/browse.php:560
+#: common/tracker/actions/browse.php:200 common/tracker/actions/browse.php:561
 #: common/tracker/actions/query.php:201
 #: common/tracker/views/form-customizelist.php:43
 msgid "Close Date"
 msgstr "해결한 날"
 
-#: common/tracker/actions/browse.php:201 common/tracker/actions/browse.php:401
+#: common/tracker/actions/browse.php:202 common/tracker/actions/browse.php:402
 #: common/tracker/actions/query.php:203 common/tracker/actions/query.php:347
 #: www/pm/browse_task.php:157 www/pm/ganttpage.php:175
 msgid "Assignee"
 msgstr "담당자"
 
-#: common/tracker/actions/browse.php:217 common/tracker/actions/query.php:219
+#: common/tracker/actions/browse.php:218 common/tracker/actions/query.php:219
 msgid "Ascending"
 msgstr "오름차순"
 
-#: common/tracker/actions/browse.php:218 common/tracker/actions/query.php:220
+#: common/tracker/actions/browse.php:219 common/tracker/actions/query.php:220
 msgid "Descending"
 msgstr "내림차순"
 
-#: common/tracker/actions/browse.php:228 common/tracker/actions/query.php:230
+#: common/tracker/actions/browse.php:229 common/tracker/actions/query.php:230
 #, fuzzy
 msgid "Any changes"
 msgstr "변경점"
 
-#: common/tracker/actions/browse.php:229 common/tracker/actions/query.php:231
+#: common/tracker/actions/browse.php:230 common/tracker/actions/query.php:231
 msgid "Last 24 h"
 msgstr ""
 
-#: common/tracker/actions/browse.php:230 common/tracker/actions/query.php:232
+#: common/tracker/actions/browse.php:231 common/tracker/actions/query.php:232
 msgid "Last 7 days"
 msgstr ""
 
-#: common/tracker/actions/browse.php:231 common/tracker/actions/query.php:233
+#: common/tracker/actions/browse.php:232 common/tracker/actions/query.php:233
 msgid "Last 2 weeks"
 msgstr ""
 
-#: common/tracker/actions/browse.php:232 common/tracker/actions/query.php:234
+#: common/tracker/actions/browse.php:233 common/tracker/actions/query.php:234
 msgid "Last month"
 msgstr ""
 
-#: common/tracker/actions/browse.php:271
+#: common/tracker/actions/browse.php:272
 #, php-format
 msgid "Displaying results %1$d‒%2$d out of %3$d total."
 msgstr ""
 
-#: common/tracker/actions/browse.php:274 www/pm/browse_task.php:182
+#: common/tracker/actions/browse.php:275 www/pm/browse_task.php:182
 #, php-format
 msgid "Displaying %2$s results."
 msgstr ""
 
-#: common/tracker/actions/browse.php:276 www/pm/browse_task.php:184
+#: common/tracker/actions/browse.php:277 www/pm/browse_task.php:184
 #: www/top/topusers.php:67
 msgid "Change"
 msgstr "변동"
 
-#: common/tracker/actions/browse.php:327 common/tracker/actions/browse.php:437
+#: common/tracker/actions/browse.php:328 common/tracker/actions/browse.php:438
 msgid "Advanced queries"
 msgstr ""
 
-#: common/tracker/actions/browse.php:357 www/include/html.php:648
+#: common/tracker/actions/browse.php:358 www/include/html.php:648
 #, fuzzy
 msgid "Select One"
 msgstr "파일 삭제하기"
 
-#: common/tracker/actions/browse.php:364 www/frs/admin/index.php:210
+#: common/tracker/actions/browse.php:365 www/frs/admin/index.php:210
 #: www/my/diary.php:207
 msgid "Private"
 msgstr ""
 
-#: common/tracker/actions/browse.php:376
+#: common/tracker/actions/browse.php:377
 msgid "Power Query"
 msgstr ""
 
-#: common/tracker/actions/browse.php:378 common/tracker/actions/browse.php:390
+#: common/tracker/actions/browse.php:379 common/tracker/actions/browse.php:391
 #: common/tracker/actions/query.php:252 common/tracker/actions/query.php:256
 msgid "Build Query"
 msgstr ""
 
-#: common/tracker/actions/browse.php:394 common/tracker/actions/browse.php:438
+#: common/tracker/actions/browse.php:395 common/tracker/actions/browse.php:439
 msgid "Simple Filtering and Sorting"
 msgstr ""
 
-#: common/tracker/actions/browse.php:422 common/tracker/actions/query.php:391
+#: common/tracker/actions/browse.php:423 common/tracker/actions/query.php:391
 msgid "Order by"
 msgstr "정렬"
 
-#: common/tracker/actions/browse.php:425
+#: common/tracker/actions/browse.php:426
 msgid "Quick Browse"
 msgstr ""
 
-#: common/tracker/actions/browse.php:434
+#: common/tracker/actions/browse.php:435
 #: common/tracker/views/form-adminroadmap.php:489
 msgid "Default"
 msgstr ""
 
-#: common/tracker/actions/browse.php:436
+#: common/tracker/actions/browse.php:437
 #, php-format
 msgid "Viewing only opened records by default, use “%1$s” or “%2$s” to change."
 msgstr ""
 
-#: common/tracker/actions/browse.php:537 www/pm/browse_task.php:207
+#: common/tracker/actions/browse.php:538 www/pm/browse_task.php:207
 msgid "Check all"
 msgstr "전부 선택"
 
-#: common/tracker/actions/browse.php:539 www/pm/browse_task.php:209
+#: common/tracker/actions/browse.php:540 www/pm/browse_task.php:209
 msgid "Clear all"
 msgstr "전부 해제"
 
-#: common/tracker/actions/browse.php:566 common/tracker/actions/browse.php:744
+#: common/tracker/actions/browse.php:567 common/tracker/actions/browse.php:745
 #: common/tracker/actions/detail.php:97
 #: common/tracker/actions/mod-limited.php:114
 #: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:933
@@ -5478,7 +5483,7 @@ msgstr "전부 해제"
 msgid "Assigned to"
 msgstr "담당자"
 
-#: common/tracker/actions/browse.php:568 common/tracker/actions/detail.php:87
+#: common/tracker/actions/browse.php:569 common/tracker/actions/detail.php:87
 #: common/tracker/actions/mod-limited.php:86 common/tracker/actions/mod.php:88
 #: common/tracker/views/form-customizelist.php:42
 #: cronjobs/send_pending_items_mail.php:79
@@ -5494,48 +5499,48 @@ msgstr "담당자"
 msgid "Submitted by"
 msgstr ""
 
-#: common/tracker/actions/browse.php:570 common/tracker/actions/mod.php:228
+#: common/tracker/actions/browse.php:571 common/tracker/actions/mod.php:228
 #: common/tracker/include/ArtifactTypeHtml.class.php:325
 #: common/tracker/views/form-customizelist.php:45
 msgid "Related Tasks"
 msgstr ""
 
-#: common/tracker/actions/browse.php:690
+#: common/tracker/actions/browse.php:691
 #, php-format
 msgid "* Denotes requests > %s Days Old"
 msgstr "* 요청 표시 > %s일 지났습니다."
 
-#: common/tracker/actions/browse.php:713 common/tracker/actions/browse.php:757
+#: common/tracker/actions/browse.php:714 common/tracker/actions/browse.php:758
 #: www/pm/browse_task.php:358 www/pm/browse_task.php:387
 #, fuzzy
 msgid "Mass Update"
 msgstr "대량 갱신"
 
-#: common/tracker/actions/browse.php:717 www/pm/browse_task.php:363
+#: common/tracker/actions/browse.php:718 www/pm/browse_task.php:363
 msgid ""
 "If you wish to apply changes to all items selected above, use these controls "
 "to change their properties and click once on “Mass Update”."
 msgstr ""
 
-#: common/tracker/actions/browse.php:734 common/tracker/actions/browse.php:745
-#: common/tracker/actions/browse.php:749 www/include/html.php:363
+#: common/tracker/actions/browse.php:735 common/tracker/actions/browse.php:746
+#: common/tracker/actions/browse.php:750 www/include/html.php:363
 #: www/include/html.php:614 www/include/html.php:818
 #: www/pm/browse_task.php:355 www/pm/browse_task.php:370
 #: www/pm/browse_task.php:381
 msgid "No Change"
 msgstr "변경 없음"
 
-#: common/tracker/actions/browse.php:745
+#: common/tracker/actions/browse.php:746
 #: common/tracker/include/ArtifactTypeHtml.class.php:692
 #: common/tracker/include/ArtifactTypeHtml.class.php:726
 msgid "Nobody"
 msgstr ""
 
-#: common/tracker/actions/browse.php:754 common/tracker/Artifact.class.php:941
+#: common/tracker/actions/browse.php:755 common/tracker/Artifact.class.php:941
 msgid "Canned Response"
 msgstr "미리 준비한 의견"
 
-#: common/tracker/actions/browse.php:766
+#: common/tracker/actions/browse.php:767
 msgid "No items found"
 msgstr "항목이 없습니다"
 
@@ -5884,6 +5889,7 @@ msgid "Display a short summary box on top of the list (roadmap status)."
 msgstr ""
 
 #: common/tracker/actions/taskmgr.php:40 common/tracker/actions/tracker.php:74
+#: common/tracker/actions/tracker.php:166
 #: common/tracker/actions/tracker.php:258
 #: common/tracker/actions/tracker.php:429
 #: common/tracker/actions/tracker.php:446
@@ -6114,7 +6120,7 @@ msgid "Valid Email Address Required"
 msgstr "유효한 이메일 주소가 필요합니다."
 
 #: common/tracker/Artifact.class.php:952
-msgid "Invalid assigned_to (assigned person is not a technician)"
+msgid "Invalid assigned person: must be a technician"
 msgstr ""
 
 #: common/tracker/Artifact.class.php:975
@@ -6490,7 +6496,7 @@ msgstr ""
 #: www/admin/useredit.php:262 www/admin/useredit.php:292
 #: www/project/admin/editimages.php:265 www/reporting/usersummary.php:103
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:44
-#: www/sendmessage.php:68
+#: www/sendmessage.php:76
 msgid "Name"
 msgstr "이름"
 
@@ -8871,7 +8877,7 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer_update_page.php:69
 #: www/admin/search.php:75 www/admin/unsubscribe.php:114
 #: www/admin/useredit.php:211 www/forum/admin/monitor.php:61
-#: www/sendmessage.php:68
+#: www/sendmessage.php:76
 msgid "Email"
 msgstr ""
 
@@ -9248,8 +9254,8 @@ msgid "ForumML"
 msgstr "게시판"
 
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:62
-#: plugins/forumml/www/forumml_utils.php:57
-#: plugins/forumml/www/forumml_utils.php:138 www/forum/forum.php:245
+#: plugins/forumml/www/forumml_utils.php:55
+#: plugins/forumml/www/forumml_utils.php:136 www/forum/forum.php:245
 #: www/forum/message.php:159
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:54
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:47
@@ -9257,8 +9263,8 @@ msgid "Thread"
 msgstr ""
 
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:65
-#: plugins/forumml/www/forumml_utils.php:60
-#: plugins/forumml/www/forumml_utils.php:187
+#: plugins/forumml/www/forumml_utils.php:58
+#: plugins/forumml/www/forumml_utils.php:185
 #, fuzzy
 msgid "Submitted on"
 msgstr "제출자"
@@ -9274,101 +9280,101 @@ msgid "This List"
 msgstr ": User List"
 
 #: plugins/forumml/include/forummlPlugin.class.php:171
-#: plugins/forumml/www/message.php:158
+#: plugins/forumml/www/message.php:156
 #: plugins/mailman/www/mailman_utils.php:53
 #: plugins/mailman/www/mailman_utils.php:117
 #, fuzzy
 msgid "Archives"
 msgstr "아키텍처"
 
-#: plugins/forumml/www/forumml_utils.php:145
-#: plugins/forumml/www/forumml_utils.php:149
+#: plugins/forumml/www/forumml_utils.php:143
+#: plugins/forumml/www/forumml_utils.php:147
 msgid "Previous "
 msgstr ""
 
-#: plugins/forumml/www/forumml_utils.php:153
+#: plugins/forumml/www/forumml_utils.php:151
 msgid "Next "
 msgstr ""
 
-#: plugins/forumml/www/forumml_utils.php:154
+#: plugins/forumml/www/forumml_utils.php:152
 msgid "Last messages"
 msgstr ""
 
-#: plugins/forumml/www/forumml_utils.php:170
-#: plugins/forumml/www/forumml_utils.php:241 www/forum/index.php:69
+#: plugins/forumml/www/forumml_utils.php:168
+#: plugins/forumml/www/forumml_utils.php:239 www/forum/index.php:69
 #: www/forum/myforums.php:69
 msgid "Threads"
 msgstr ""
 
-#: plugins/forumml/www/forumml_utils.php:186
+#: plugins/forumml/www/forumml_utils.php:184
 #, fuzzy
 msgid "Last updated"
 msgstr "대량 갱신"
 
-#: plugins/forumml/www/forumml_utils.php:417
+#: plugins/forumml/www/forumml_utils.php:415
 msgid "On "
 msgstr ""
 
-#: plugins/forumml/www/forumml_utils.php:419
+#: plugins/forumml/www/forumml_utils.php:417
 msgid "Toggle font family (typewriter/normal)"
 msgstr ""
 
-#: plugins/forumml/www/forumml_utils.php:437
+#: plugins/forumml/www/forumml_utils.php:435
 #: plugins/forumml/www/scripts/cc_attach_js.php:42
 msgid "Cc:"
 msgstr ""
 
-#: plugins/forumml/www/forumml_utils.php:580
+#: plugins/forumml/www/forumml_utils.php:578
 msgid "Add cc:"
 msgstr ""
 
-#: plugins/forumml/www/forumml_utils.php:581 plugins/forumml/www/index.php:118
+#: plugins/forumml/www/forumml_utils.php:579 plugins/forumml/www/index.php:117
 #: plugins/forumml/www/scripts/cc_attach_js.php:50
 #, fuzzy
 msgid "Attach:"
 msgstr "첨부 파일"
 
-#: plugins/forumml/www/forumml_utils.php:599 plugins/forumml/www/index.php:128
+#: plugins/forumml/www/forumml_utils.php:597 plugins/forumml/www/index.php:127
 msgid "Erase"
 msgstr ""
 
-#: plugins/forumml/www/forumml_utils.php:728
+#: plugins/forumml/www/forumml_utils.php:726
 msgid "Mail successfully sent "
 msgstr ""
 
-#: plugins/forumml/www/forumml_utils.php:730
+#: plugins/forumml/www/forumml_utils.php:728
 #, fuzzy
 msgid "Sending mail failed"
 msgstr "대기중인 제출이유:"
 
-#: plugins/forumml/www/index.php:55 plugins/forumml/www/message.php:92
+#: plugins/forumml/www/index.php:54 plugins/forumml/www/message.php:90
 #, fuzzy
 msgid "No list specified"
 msgstr "잘못된 인자입니다."
 
-#: plugins/forumml/www/index.php:60 plugins/forumml/www/message.php:97
+#: plugins/forumml/www/index.php:59 plugins/forumml/www/message.php:95
 #: plugins/forumml/www/upload.php:48
 #, fuzzy
 msgid "You are not allowed to access this page"
 msgstr "아직 어떤 프로젝트에도 소속되어 있지 않습니다."
 
-#: plugins/forumml/www/index.php:63
+#: plugins/forumml/www/index.php:62
 msgid "The mailing  list does not exist or is inactive"
 msgstr ""
 
-#: plugins/forumml/www/index.php:73
+#: plugins/forumml/www/index.php:72
 msgid "Submit failed you must specify the mail subject."
 msgstr ""
 
-#: plugins/forumml/www/index.php:78
+#: plugins/forumml/www/index.php:77
 msgid "There can be some delay before to see the message in the archives."
 msgstr ""
 
-#: plugins/forumml/www/index.php:78
+#: plugins/forumml/www/index.php:77
 msgid " Redirecting to archive page, please wait ..."
 msgstr ""
 
-#: plugins/forumml/www/index.php:102 plugins/forumml/www/message.php:150
+#: plugins/forumml/www/index.php:101 plugins/forumml/www/message.php:148
 #: plugins/mailman/www/mailman_utils.php:51
 #: plugins/mailman/www/mailman_utils.php:66 www/mail/admin/index.php:263
 #: www/mail/index.php:77
@@ -9376,70 +9382,70 @@ msgstr ""
 msgid "Mailing List"
 msgstr "메일링 리스트"
 
-#: plugins/forumml/www/index.php:102
+#: plugins/forumml/www/index.php:101
 #, fuzzy
 msgid "New Thread"
 msgstr "새글 올리기"
 
-#: plugins/forumml/www/index.php:103
+#: plugins/forumml/www/index.php:102
 #, fuzzy
 msgid "Browse Archives"
 msgstr "뉴스 아카이브"
 
-#: plugins/forumml/www/index.php:104
+#: plugins/forumml/www/index.php:103
 msgid "Submit a new thread"
 msgstr ""
 
-#: plugins/forumml/www/message.php:100 plugins/forumml/www/upload.php:51
+#: plugins/forumml/www/message.php:98 plugins/forumml/www/upload.php:51
 #, fuzzy
 msgid "This list is not active"
 msgstr "유효하지 않은 사용자입니다."
 
-#: plugins/forumml/www/message.php:119
+#: plugins/forumml/www/message.php:117
 msgid "Email succefully sent. It can take some time before being displayed"
 msgstr ""
 
-#: plugins/forumml/www/message.php:168
+#: plugins/forumml/www/message.php:166
 msgid "Back to the list"
 msgstr ""
 
-#: plugins/forumml/www/message.php:171
+#: plugins/forumml/www/message.php:169
 #, fuzzy
 msgid "Post a new thread"
 msgstr "새글 올리기"
 
-#: plugins/forumml/www/message.php:174
+#: plugins/forumml/www/message.php:172
 msgid "Original Archives"
 msgstr ""
 
-#: plugins/forumml/www/message.php:176
+#: plugins/forumml/www/message.php:174
 msgid "Original list archives"
 msgstr ""
 
-#: plugins/forumml/www/message.php:176
+#: plugins/forumml/www/message.php:174
 #, fuzzy
 msgid "Public archives"
 msgstr "공개 구역"
 
-#: plugins/forumml/www/message.php:176
+#: plugins/forumml/www/message.php:174
 msgid "Private Archives"
 msgstr ""
 
-#: plugins/forumml/www/message.php:184
+#: plugins/forumml/www/message.php:182
 msgid "Printer version"
 msgstr ""
 
-#: plugins/forumml/www/message.php:205
+#: plugins/forumml/www/message.php:203
 #, fuzzy
 msgid "Empty archives"
 msgstr "뉴스 아카이브"
 
-#: plugins/forumml/www/message.php:211
+#: plugins/forumml/www/message.php:209
 #, fuzzy
 msgid "Search result for "
 msgstr "%1$s의 게시판"
 
-#: plugins/forumml/www/message.php:211
+#: plugins/forumml/www/message.php:209
 msgid "Thread(s) found"
 msgstr ""
 
@@ -16299,73 +16305,73 @@ msgstr ""
 msgid "Documents for "
 msgstr "게시판 설정"
 
-#: www/docman/view.php:60 www/docman/view.php:232
+#: www/docman/view.php:60 www/docman/view.php:237
 #, fuzzy
 msgid "Document is not available."
 msgstr "정보가 없습니다."
 
-#: www/docman/view.php:113
+#: www/docman/view.php:118
 msgid "Unable to open ZIP archive for backup"
 msgstr ""
 
-#: www/docman/view.php:117
+#: www/docman/view.php:122
 msgid "Unable to fill ZIP archive for backup"
 msgstr ""
 
-#: www/docman/view.php:120
+#: www/docman/view.php:125
 msgid "Unable to close ZIP archive for backup"
 msgstr ""
 
-#: www/docman/view.php:129
+#: www/docman/view.php:134
 msgid "Unable to download backup file"
 msgstr ""
 
-#: www/docman/view.php:134
+#: www/docman/view.php:139
 #, fuzzy
 msgid "No documents to backup."
 msgstr "문서에 내용이 없습니다."
 
-#: www/docman/view.php:138
+#: www/docman/view.php:143
 msgid "ZIP extension is missing: no backup function"
 msgstr ""
 
-#: www/docman/view.php:150
+#: www/docman/view.php:155
 msgid "Webdav Access Canceled by user"
 msgstr ""
 
-#: www/docman/view.php:156
+#: www/docman/view.php:161
 msgid "No Webdav interface enabled."
 msgstr ""
 
-#: www/docman/view.php:184 www/docman/view.php:226
+#: www/docman/view.php:189 www/docman/view.php:231
 msgid "Unable to open ZIP archive for download as ZIP"
 msgstr ""
 
-#: www/docman/view.php:195 www/docman/view.php:240
+#: www/docman/view.php:200 www/docman/view.php:245
 msgid "Unable to fill ZIP file."
 msgstr ""
 
-#: www/docman/view.php:199
+#: www/docman/view.php:204
 msgid "Unable to fill ZIP archive for download as ZIP"
 msgstr ""
 
-#: www/docman/view.php:202 www/docman/view.php:249
+#: www/docman/view.php:207 www/docman/view.php:254
 msgid "Unable to close ZIP archive for download as ZIP"
 msgstr ""
 
-#: www/docman/view.php:211 www/docman/view.php:258
+#: www/docman/view.php:216 www/docman/view.php:263
 msgid "Unable to download ZIP archive"
 msgstr ""
 
-#: www/docman/view.php:216
+#: www/docman/view.php:221
 msgid "This documents folder is empty."
 msgstr ""
 
-#: www/docman/view.php:263 www/docman/view.php:269
+#: www/docman/view.php:268 www/docman/view.php:274
 msgid "No document to display - invalid or inactive document number."
 msgstr ""
 
-#: www/docman/view.php:266
+#: www/docman/view.php:271
 msgid "PHP extension is missing."
 msgstr ""
 
@@ -21265,29 +21271,29 @@ msgstr ""
 msgid "You can only send to addresses @<em>%1$s</em>."
 msgstr ""
 
-#: www/sendmessage.php:68
+#: www/sendmessage.php:76
 msgid "Body"
 msgstr "본문"
 
-#: www/sendmessage.php:84 www/sendmessage.php:95
+#: www/sendmessage.php:92 www/sendmessage.php:103 www/sendmessage.php:131
 msgid "Contact"
 msgstr "연락처"
 
-#: www/sendmessage.php:85 www/sendmessage.php:96
+#: www/sendmessage.php:93 www/sendmessage.php:104
 msgid "Message has been sent"
 msgstr "메일이 발송되었습니다."
 
-#: www/sendmessage.php:123
+#: www/sendmessage.php:136
 msgid "In an attempt to reduce spam, we are using this form to send email."
 msgstr ""
 
-#: www/sendmessage.php:127
+#: www/sendmessage.php:140
 msgid ""
 "Fill it out accurately and completely or the receiver may not be able to "
 "respond."
 msgstr ""
 
-#: www/sendmessage.php:131
+#: www/sendmessage.php:144
 msgid ""
 "<strong>IF YOU ARE WRITING FOR HELP:</strong> Did you read the site "
 "documentation? Did you include your <strong>user_id</strong> and "
@@ -21296,15 +21302,15 @@ msgid ""
 "Name</strong>."
 msgstr ""
 
-#: www/sendmessage.php:141
+#: www/sendmessage.php:154
 msgid "Your Name"
 msgstr "보내는 사람 이름"
 
-#: www/sendmessage.php:145
+#: www/sendmessage.php:165
 msgid "Your Email Address"
 msgstr "이메일 주소"
 
-#: www/sendmessage.php:157
+#: www/sendmessage.php:195
 msgid "Send Message"
 msgstr "메일 보내기"
 

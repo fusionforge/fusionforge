@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 18:30+0100\n"
+"POT-Creation-Date: 2013-11-28 18:18+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -119,7 +119,7 @@ msgstr "Document(s)"
 #: common/docman/actions/monitorfile.php:52
 #: common/docman/actions/monitorfile.php:72
 #: common/docman/actions/trashfile.php:62
-#: common/docman/actions/validatefile.php:57 www/docman/view.php:244
+#: common/docman/actions/validatefile.php:57 www/docman/view.php:249
 msgid "No action to perform"
 msgstr "Aucune action à effectuer"
 
@@ -173,7 +173,7 @@ msgid "Archive injected successfully."
 msgstr "Archive correctement insérée."
 
 #: common/docman/actions/monitordirectory.php:38
-#: common/docman/Document.class.php:941
+#: common/docman/Document.class.php:950
 #: common/docman/DocumentGroup.class.php:723
 #: common/docman/views/reporting.php:169
 msgid "Folder"
@@ -182,9 +182,9 @@ msgstr "Dossier"
 #: common/docman/actions/monitordirectory.php:43
 #: common/docman/actions/monitorfile.php:44
 #: common/docman/actions/monitorfile.php:63
-#: common/docman/Document.class.php:940 common/docman/Document.class.php:941
-#: common/docman/Document.class.php:942 common/docman/Document.class.php:943
-#: common/docman/Document.class.php:944
+#: common/docman/Document.class.php:949 common/docman/Document.class.php:950
+#: common/docman/Document.class.php:951 common/docman/Document.class.php:952
+#: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:67
 #: common/docman/DocumentGroup.class.php:722
 #: common/docman/DocumentGroup.class.php:723
@@ -225,8 +225,8 @@ msgstr "Dossier"
 #: common/mail/MailingListFactory.class.php:103
 #: common/reporting/report_utils.php:27
 #: common/search/SearchQuery.class.php:120
-#: common/tracker/actions/browse.php:401 common/tracker/actions/browse.php:404
-#: common/tracker/actions/browse.php:748 common/tracker/actions/detail.php:140
+#: common/tracker/actions/browse.php:402 common/tracker/actions/browse.php:405
+#: common/tracker/actions/browse.php:749 common/tracker/actions/detail.php:140
 #: common/tracker/actions/mod-limited.php:164
 #: common/tracker/actions/mod.php:111 common/tracker/actions/mod.php:140
 #: common/tracker/actions/mod.php:147 common/tracker/actions/mod.php:155
@@ -235,7 +235,10 @@ msgstr "Dossier"
 #: common/tracker/actions/query.php:340 common/tracker/actions/query.php:346
 #: common/tracker/actions/query.php:347 common/tracker/actions/query.php:382
 #: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
-#: common/tracker/actions/query.php:391 common/tracker/actions/tracker.php:388
+#: common/tracker/actions/query.php:391 common/tracker/actions/tracker.php:166
+#: common/tracker/actions/tracker.php:168
+#: common/tracker/actions/tracker.php:217
+#: common/tracker/actions/tracker.php:388
 #: common/tracker/actions/tracker.php:393
 #: common/tracker/actions/tracker.php:505
 #: common/tracker/ArtifactExtraField.class.php:187
@@ -255,7 +258,7 @@ msgstr "Dossier"
 #: cronjobs/send_pending_items_mail.php:119
 #: cronjobs/send_pending_items_mail.php:120
 #: cronjobs/send_pending_items_mail.php:121
-#: plugins/forumml/www/forumml_utils.php:681 plugins/forumml/www/index.php:122
+#: plugins/forumml/www/forumml_utils.php:679 plugins/forumml/www/index.php:121
 #: plugins/hudson/include/hudsonPlugin.class.php:265
 #: plugins/hudson/include/hudsonPlugin.class.php:292
 #: plugins/hudson/include/hudsonPlugin.class.php:293
@@ -447,17 +450,17 @@ msgstr ""
 "L'identifiant du groupe dans la base de données ne correspond pas à l'objet "
 "groupe"
 
-#: common/docman/Document.class.php:113 common/docman/Document.class.php:828
+#: common/docman/Document.class.php:113 common/docman/Document.class.php:837
 #: common/pm/ProjectGroup.class.php:144 common/pm/ProjectGroup.class.php:316
 msgid "Title Must Be At Least 5 Characters"
 msgstr "Le titre doit avoir au moins 5 caractères"
 
-#: common/docman/Document.class.php:117 common/docman/Document.class.php:833
+#: common/docman/Document.class.php:117 common/docman/Document.class.php:842
 msgid "Document Description Must Be At Least 10 Characters"
 msgstr "La description du document doit avoir au moins 10 caractères"
 
 #: common/docman/Document.class.php:141 common/docman/Document.class.php:149
-#: common/docman/Document.class.php:842
+#: common/docman/Document.class.php:851
 msgid "Document already published in this folder"
 msgstr "Document déjà publié dans ce dossier"
 
@@ -473,8 +476,8 @@ msgstr "Pas un fichier"
 msgid "Error fetching Document"
 msgstr "Erreur lors de la récupération du document"
 
-#: common/docman/Document.class.php:225 common/docman/Document.class.php:881
-#: common/docman/Document.class.php:1097
+#: common/docman/Document.class.php:225 common/docman/Document.class.php:890
+#: common/docman/Document.class.php:1106
 msgid "Error updating document group:"
 msgstr "Erreur lors de la mise à jour du groupe de documents :"
 
@@ -482,45 +485,45 @@ msgstr "Erreur lors de la mise à jour du groupe de documents :"
 msgid "Document: Invalid docid"
 msgstr "Document : n° de document invalide"
 
-#: common/docman/Document.class.php:581
+#: common/docman/Document.class.php:590
 #: common/docman/DocumentGroup.class.php:410
 msgid "Unable To Remove Monitor"
 msgstr "Impossible de désactiver la surveillance"
 
-#: common/docman/Document.class.php:602
+#: common/docman/Document.class.php:611
 #: common/docman/DocumentGroup.class.php:431 common/forum/Forum.class.php:457
 msgid "Unable To Add Monitor"
 msgstr "Impossible d'ajouter la surveillance"
 
-#: common/docman/Document.class.php:618
+#: common/docman/Document.class.php:627
 #: common/docman/DocumentGroup.class.php:447
 msgid "Unable To Clear Monitor"
 msgstr "Impossible de supprimer la surveillance"
 
-#: common/docman/Document.class.php:669
+#: common/docman/Document.class.php:678
 msgid "Document lock failed"
 msgstr "Impossible de verrouiller le document"
 
-#: common/docman/Document.class.php:697
+#: common/docman/Document.class.php:706
 msgid "Document reservation failed"
 msgstr "Impossible de réserver le document"
 
-#: common/docman/Document.class.php:935 common/docman/views/additem.php:57
+#: common/docman/Document.class.php:944 common/docman/views/additem.php:57
 msgid "New Document"
 msgstr "Nouveau document"
 
-#: common/docman/Document.class.php:937
+#: common/docman/Document.class.php:946
 msgid "Updated document"
 msgstr "Document mis à jour"
 
-#: common/docman/Document.class.php:937 common/docman/views/listfile.php:285
+#: common/docman/Document.class.php:946 common/docman/views/listfile.php:285
 #: common/widget/Widget_MyLatestSvnCommits.class.php:66
 msgid "by"
 msgstr "par"
 
-#: common/docman/Document.class.php:940
+#: common/docman/Document.class.php:949
 #: common/docman/DocumentGroup.class.php:722
-#: common/forum/ForumHTML.class.php:73 common/tracker/actions/browse.php:364
+#: common/forum/ForumHTML.class.php:73 common/tracker/actions/browse.php:365
 #: plugins/contribtracker/www/index.php:35
 #: plugins/contribtracker/www/index.php:167
 #: plugins/mantisbt/view/admin/StatPerStatus.php:47
@@ -531,38 +534,38 @@ msgstr "par"
 msgid "Project"
 msgstr "Projet"
 
-#: common/docman/Document.class.php:942 common/docman/views/addfile.php:91
+#: common/docman/Document.class.php:951 common/docman/views/addfile.php:91
 #: common/docman/views/addfile.php:100 common/docman/views/addfile.php:102
 #: common/docman/views/editfile.php:38
 msgid "Document Title"
 msgstr "Titre du document"
 
-#: common/docman/Document.class.php:943
+#: common/docman/Document.class.php:952
 msgid "Document description"
 msgstr "Description du document"
 
-#: common/docman/Document.class.php:944
+#: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:725
-#: common/include/Group.class.php:2683 common/tracker/actions/browse.php:200
+#: common/include/Group.class.php:2683 common/tracker/actions/browse.php:201
 #: common/tracker/actions/query.php:202 common/tracker/actions/query.php:346
 msgid "Submitter"
 msgstr "Soumis par"
 
-#: common/docman/Document.class.php:946
+#: common/docman/Document.class.php:955
 #: common/docman/DocumentGroup.class.php:730
 msgid "For more info, visit:"
 msgstr "Pour plus d'informations, visitez :"
 
-#: common/docman/Document.class.php:951
+#: common/docman/Document.class.php:960
 #: common/docman/DocumentGroup.class.php:735
 msgid "Docman"
 msgstr ""
 
-#: common/docman/Document.class.php:1016
+#: common/docman/Document.class.php:1025
 msgid "Error Deleting Document:"
 msgstr "Erreur lors de la suppression du document :"
 
-#: common/docman/Document.class.php:1092
+#: common/docman/Document.class.php:1101
 #: common/docman/DocumentGroup.class.php:873
 msgid "wrong column name"
 msgstr "Nom de colonne invalide"
@@ -690,9 +693,9 @@ msgstr "Dernière modification"
 #: common/survey/SurveyResponse.class.php:95
 #: common/tracker/actions/tracker.php:271
 #: common/tracker/views/form-adminroadmap.php:57
-#: plugins/forumml/www/index.php:55 plugins/forumml/www/index.php:60
-#: plugins/forumml/www/index.php:63 plugins/forumml/www/message.php:92
-#: plugins/forumml/www/message.php:97 plugins/forumml/www/message.php:100
+#: plugins/forumml/www/index.php:54 plugins/forumml/www/index.php:59
+#: plugins/forumml/www/index.php:62 plugins/forumml/www/message.php:90
+#: plugins/forumml/www/message.php:95 plugins/forumml/www/message.php:98
 #: plugins/forumml/www/upload.php:48 plugins/forumml/www/upload.php:51
 #: plugins/mailman/www/admin/index.php:49
 #: plugins/mailman/www/admin/index.php:52
@@ -756,7 +759,7 @@ msgstr ""
 #: common/docman/views/pendingfiles.php:63
 #: common/tracker/actions/admin-ind.php:99
 #: common/tracker/actions/admin-ind.php:139
-#: common/tracker/actions/browse.php:556 common/tracker/actions/ind.php:57
+#: common/tracker/actions/browse.php:557 common/tracker/actions/ind.php:57
 #: common/tracker/views/form-updatetracker.php:53
 #: plugins/blocks/www/index.php:202
 #: plugins/contribtracker/www/global_admin.php:243
@@ -1053,8 +1056,8 @@ msgstr ""
 msgid "Folder that document belongs to:"
 msgstr "Dossier auquel le document appartient :"
 
-#: common/docman/views/editfile.php:70 common/tracker/actions/browse.php:404
-#: common/tracker/actions/browse.php:562 common/tracker/actions/browse.php:748
+#: common/docman/views/editfile.php:70 common/tracker/actions/browse.php:405
+#: common/tracker/actions/browse.php:563 common/tracker/actions/browse.php:749
 #: common/tracker/actions/detail.php:80
 #: common/tracker/actions/mod-limited.php:128
 #: common/tracker/actions/mod.php:155 common/tracker/actions/query.php:340
@@ -1167,8 +1170,8 @@ msgstr "Titre"
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:113
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:68
-#: plugins/forumml/www/forumml_utils.php:63
-#: plugins/forumml/www/forumml_utils.php:188
+#: plugins/forumml/www/forumml_utils.php:61
+#: plugins/forumml/www/forumml_utils.php:186
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:138
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
 #: www/forum/forum.php:246 www/forum/message.php:160
@@ -1283,8 +1286,8 @@ msgstr "Créé ou mis à jour depuis moins de 7 jours"
 #: common/docman/views/pendingfiles.php:101
 #: common/docman/views/pendingfiles.php:103
 #: common/forum/ForumHTML.class.php:219 common/pm/ProjectTask.class.php:1211
-#: common/tracker/actions/browse.php:606 common/tracker/actions/browse.php:617
-#: common/tracker/actions/browse.php:637 common/tracker/actions/detail.php:70
+#: common/tracker/actions/browse.php:607 common/tracker/actions/browse.php:618
+#: common/tracker/actions/browse.php:638 common/tracker/actions/detail.php:70
 #: common/tracker/actions/downloadcsv.php:84
 #: common/tracker/actions/downloadcsv.php:85
 #: common/tracker/actions/downloadcsv.php:86
@@ -1569,8 +1572,8 @@ msgstr "Date de début"
 #: common/docman/views/reporting.php:92 common/docman/views/reporting.php:94
 #: common/forum/ForumHTML.class.php:85 common/frs/FRSRelease.class.php:294
 #: common/frs/FRSRelease.class.php:297 common/frs/FRSRelease.class.php:301
-#: common/include/utils.php:496 common/tracker/actions/browse.php:736
-#: common/tracker/actions/browse.php:744 common/tracker/actions/browse.php:754
+#: common/include/utils.php:498 common/tracker/actions/browse.php:737
+#: common/tracker/actions/browse.php:745 common/tracker/actions/browse.php:755
 #: common/tracker/actions/detail.php:69 common/tracker/actions/detail.php:73
 #: common/tracker/actions/detail.php:80 common/tracker/actions/detail.php:87
 #: common/tracker/actions/detail.php:97 common/tracker/actions/detail.php:109
@@ -1750,8 +1753,8 @@ msgstr "Date de début"
 #: www/reporting/usersummary.php:72 www/reporting/usersummary.php:73
 #: www/reporting/usertime.php:93 www/reporting/usertime.php:94
 #: www/reporting/usertime.php:95 www/reporting/usertime.php:96
-#: www/sendmessage.php:141 www/sendmessage.php:145 www/sendmessage.php:149
-#: www/sendmessage.php:153 www/snippet/add_snippet_to_package.php:128
+#: www/sendmessage.php:154 www/sendmessage.php:165 www/sendmessage.php:176
+#: www/sendmessage.php:180 www/snippet/add_snippet_to_package.php:128
 #: www/snippet/addversion.php:94 www/snippet/addversion.php:98
 #: www/snippet/addversion.php:102 www/snippet/addversion.php:217
 #: www/snippet/addversion.php:221 www/snippet/index.php:64
@@ -2107,9 +2110,9 @@ msgstr "Nom du forum"
 #: common/forum/ForumAdmin.class.php:321 common/forum/ForumHTML.class.php:528
 #: common/forum/ForumHTML.class.php:591
 #: common/tracker/include/ArtifactHtml.class.php:72
-#: plugins/forumml/www/index.php:122
+#: plugins/forumml/www/index.php:121
 #: plugins/message/common/messagePlugin.class.php:35 www/admin/cronman.php:44
-#: www/sendmessage.php:153
+#: www/sendmessage.php:180
 msgid "Message"
 msgstr "Message"
 
@@ -2252,7 +2255,7 @@ msgstr "La mise à jour a échoué"
 
 #: common/forum/Forum.class.php:621 common/frs/FRSPackage.class.php:466
 #: common/frs/FRSRelease.class.php:354 common/include/Group.class.php:1615
-#: common/mail/MailingList.class.php:393 common/pm/ProjectGroup.class.php:362
+#: common/mail/MailingList.class.php:398 common/pm/ProjectGroup.class.php:362
 #: common/pm/ProjectTask.class.php:515 common/tracker/Artifact.class.php:505
 #: common/tracker/ArtifactExtraField.class.php:430
 #: common/tracker/ArtifactType.class.php:795
@@ -2289,7 +2292,7 @@ msgid "Posted by"
 msgstr "Publié par"
 
 #: common/forum/ForumHTML.class.php:70 common/include/Navigation.class.php:379
-#: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:554
+#: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:555
 #: common/tracker/actions/detail.php:109
 #: common/tracker/actions/mod-limited.php:142
 #: common/tracker/actions/mod.php:167 common/tracker/actions/query.php:198
@@ -2362,7 +2365,7 @@ msgid "By"
 msgstr "Par"
 
 #: common/forum/ForumHTML.class.php:266
-#: plugins/forumml/www/forumml_utils.php:558 www/forum/message.php:123
+#: plugins/forumml/www/forumml_utils.php:556 www/forum/message.php:123
 msgid "Reply"
 msgstr "Répondre"
 
@@ -2398,11 +2401,11 @@ msgid "Edit Message"
 msgstr "Modifier un message"
 
 #: common/forum/ForumHTML.class.php:524 common/forum/ForumHTML.class.php:588
-#: plugins/forumml/www/index.php:111 www/admin/massmail.php:112
+#: plugins/forumml/www/index.php:110 www/admin/massmail.php:112
 #: www/admin/massmail.php:136 www/admin/pending-news.php:145
 #: www/developer/diary.php:80 www/news/admin/index.php:133
 #: www/news/admin/news_admin_utils.php:58 www/news/submit.php:155
-#: www/sendmessage.php:68 www/sendmessage.php:149
+#: www/sendmessage.php:76 www/sendmessage.php:176
 msgid "Subject"
 msgstr "Sujet"
 
@@ -2866,7 +2869,7 @@ msgstr "Permission refusée."
 #: common/include/Error.class.php:142 common/include/User.class.php:350
 #: common/include/User.class.php:931 common/include/User.class.php:983
 #: common/tracker/actions/tracker.php:84
-#: plugins/forumml/www/forumml_utils.php:681 www/account/change_email.php:38
+#: plugins/forumml/www/forumml_utils.php:679 www/account/change_email.php:38
 msgid "Invalid Email Address"
 msgstr "Adresse de messagerie non valide"
 
@@ -4301,24 +4304,24 @@ msgstr ""
 msgid "New %1$s User"
 msgstr "L'équipe de %1$s"
 
-#: common/include/utils.php:199
+#: common/include/utils.php:198
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: common/include/utils.php:496
+#: common/include/utils.php:498
 msgid "Priority Colors"
 msgstr "Échelle de priorité"
 
-#: common/include/utils.php:895 common/include/utils.php:899
-#: common/include/utils.php:910
+#: common/include/utils.php:897 common/include/utils.php:901
+#: common/include/utils.php:912
 msgid "bytes"
 msgstr "octets"
 
-#: common/include/utils.php:895 common/include/utils.php:910
+#: common/include/utils.php:897 common/include/utils.php:912
 msgid "kB"
 msgstr "ko"
 
-#: common/include/utils.php:895
+#: common/include/utils.php:897
 #: plugins/quota_management/www/quota_admin.php:120
 #: plugins/quota_management/www/quota_admin.php:127
 #: plugins/quota_management/www/quota.php:248
@@ -4346,35 +4349,35 @@ msgstr "ko"
 msgid "MB"
 msgstr "Mo"
 
-#: common/include/utils.php:895
+#: common/include/utils.php:897
 msgid "GB"
 msgstr "Go"
 
-#: common/include/utils.php:895
+#: common/include/utils.php:897
 msgid "TB"
 msgstr "To"
 
-#: common/include/utils.php:899 common/include/utils.php:910
+#: common/include/utils.php:901 common/include/utils.php:912
 msgid "KiB"
 msgstr "Kio"
 
-#: common/include/utils.php:899
+#: common/include/utils.php:901
 msgid "MiB"
 msgstr "Mio"
 
-#: common/include/utils.php:899
+#: common/include/utils.php:901
 msgid "GiB"
 msgstr "Gio"
 
-#: common/include/utils.php:899
+#: common/include/utils.php:901
 msgid "TiB"
 msgstr "Tio"
 
-#: common/include/utils.php:1291
+#: common/include/utils.php:1293
 msgid "Error: a mailing list with the same email address already exists."
 msgstr "Erreur : il existe déjà une liste avec cette adresse."
 
-#: common/include/utils.php:1309
+#: common/include/utils.php:1311
 msgid "Error: a forum with the same email address already exists."
 msgstr "Erreur : il existe déjà un forum avec cette adresse."
 
@@ -4926,7 +4929,7 @@ msgstr "Texte libre pour la page de navigation"
 #: plugins/contribtracker/www/global_admin.php:410
 #: plugins/contribtracker/www/global_admin.php:451
 #: plugins/contribtracker/www/project_admin.php:193
-#: plugins/forumml/www/forumml_utils.php:598 plugins/forumml/www/index.php:127
+#: plugins/forumml/www/forumml_utils.php:596 plugins/forumml/www/index.php:126
 #: plugins/mantisbt/view/addIssue.php:146
 #: plugins/mantisbt/view/addOrEditNote.php:58
 #: plugins/scmgit/common/GitPlugin.class.php:1122
@@ -5169,15 +5172,15 @@ msgstr "Erreur lors de la suppression d'un élément"
 msgid "Element deleted"
 msgstr "Elément supprimé"
 
-#: common/tracker/actions/browse.php:94
+#: common/tracker/actions/browse.php:95
 #: common/tracker/actions/downloadcsv.php:38
 #: common/tracker/actions/taskmgr.php:142 www/pm/admin/index.php:405
 #: www/pm/index.php:46 www/pm/task.php:86 www/tracker/roadmap.php:333
 msgid "Could Not Get Factory"
 msgstr "Erreur lors de la création de l'objet Factory"
 
-#: common/tracker/actions/browse.php:183 common/tracker/actions/browse.php:305
-#: common/tracker/actions/browse.php:310 common/tracker/actions/query.php:340
+#: common/tracker/actions/browse.php:184 common/tracker/actions/browse.php:306
+#: common/tracker/actions/browse.php:311 common/tracker/actions/query.php:340
 #: www/pm/browse_task.php:105 www/pm/browse_task.php:116
 #: www/pm/browse_task.php:158 www/pm/ganttpage.php:146
 #: www/pm/ganttpage.php:148 www/pm/ganttpage.php:150 www/pm/ganttpage.php:152
@@ -5185,13 +5188,15 @@ msgstr "Erreur lors de la création de l'objet Factory"
 msgid "Any"
 msgstr "Tous"
 
-#: common/tracker/actions/browse.php:188 www/pm/browse_task.php:107
+#: common/tracker/actions/browse.php:189 www/pm/browse_task.php:107
 #: www/pm/browse_task.php:352 www/pm/ganttpage.php:148
 msgid "Unassigned"
 msgstr "Personne"
 
-#: common/tracker/actions/browse.php:194 common/tracker/actions/browse.php:552
-#: common/tracker/actions/query.php:196
+#: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:553
+#: common/tracker/actions/query.php:196 common/tracker/actions/tracker.php:166
+#: common/tracker/actions/tracker.php:168
+#: common/tracker/actions/tracker.php:217
 #: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:134
 #: www/admin/search.php:72 www/admin/search.php:147 www/my/dashboard.php:64
 #: www/pm/admin/index.php:189 www/pm/index.php:98
@@ -5200,8 +5205,8 @@ msgstr "Personne"
 msgid "Id"
 msgstr "Identifiant"
 
-#: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:564
-#: common/tracker/actions/browse.php:736 common/tracker/actions/detail.php:73
+#: common/tracker/actions/browse.php:196 common/tracker/actions/browse.php:565
+#: common/tracker/actions/browse.php:737 common/tracker/actions/detail.php:73
 #: common/tracker/actions/mod-limited.php:119
 #: common/tracker/actions/mod.php:147 common/tracker/actions/query.php:197
 #: common/tracker/include/build_submission_form.php:66
@@ -5215,7 +5220,7 @@ msgstr "Identifiant"
 msgid "Priority"
 msgstr "Priorité"
 
-#: common/tracker/actions/browse.php:197 common/tracker/actions/browse.php:558
+#: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:559
 #: common/tracker/actions/query.php:199
 #: common/tracker/views/form-customizelist.php:38
 #: cronjobs/send_pending_items_mail.php:118 www/people/viewjob.php:76
@@ -5225,122 +5230,122 @@ msgstr "Priorité"
 msgid "Open Date"
 msgstr "Date d'ouverture"
 
-#: common/tracker/actions/browse.php:198 common/tracker/actions/browse.php:572
+#: common/tracker/actions/browse.php:199 common/tracker/actions/browse.php:573
 #: common/tracker/actions/query.php:200
 #: common/tracker/views/form-customizelist.php:46
 msgid "Last Modified Date"
 msgstr "Date de la dernière modification"
 
-#: common/tracker/actions/browse.php:199 common/tracker/actions/browse.php:560
+#: common/tracker/actions/browse.php:200 common/tracker/actions/browse.php:561
 #: common/tracker/actions/query.php:201
 #: common/tracker/views/form-customizelist.php:43
 msgid "Close Date"
 msgstr "Date de fermeture"
 
-#: common/tracker/actions/browse.php:201 common/tracker/actions/browse.php:401
+#: common/tracker/actions/browse.php:202 common/tracker/actions/browse.php:402
 #: common/tracker/actions/query.php:203 common/tracker/actions/query.php:347
 #: www/pm/browse_task.php:157 www/pm/ganttpage.php:175
 msgid "Assignee"
 msgstr "Responsable"
 
-#: common/tracker/actions/browse.php:217 common/tracker/actions/query.php:219
+#: common/tracker/actions/browse.php:218 common/tracker/actions/query.php:219
 msgid "Ascending"
 msgstr "Croissant"
 
-#: common/tracker/actions/browse.php:218 common/tracker/actions/query.php:220
+#: common/tracker/actions/browse.php:219 common/tracker/actions/query.php:220
 msgid "Descending"
 msgstr "Décroissant"
 
-#: common/tracker/actions/browse.php:228 common/tracker/actions/query.php:230
+#: common/tracker/actions/browse.php:229 common/tracker/actions/query.php:230
 msgid "Any changes"
 msgstr "Tous les changements"
 
-#: common/tracker/actions/browse.php:229 common/tracker/actions/query.php:231
+#: common/tracker/actions/browse.php:230 common/tracker/actions/query.php:231
 msgid "Last 24 h"
 msgstr "Les dernières 24 h"
 
-#: common/tracker/actions/browse.php:230 common/tracker/actions/query.php:232
+#: common/tracker/actions/browse.php:231 common/tracker/actions/query.php:232
 msgid "Last 7 days"
 msgstr "La dernière semaine"
 
-#: common/tracker/actions/browse.php:231 common/tracker/actions/query.php:233
+#: common/tracker/actions/browse.php:232 common/tracker/actions/query.php:233
 msgid "Last 2 weeks"
 msgstr "La dernière quinzaine"
 
-#: common/tracker/actions/browse.php:232 common/tracker/actions/query.php:234
+#: common/tracker/actions/browse.php:233 common/tracker/actions/query.php:234
 msgid "Last month"
 msgstr "Le mois dernier"
 
-#: common/tracker/actions/browse.php:271
+#: common/tracker/actions/browse.php:272
 #, php-format
 msgid "Displaying results %1$d‒%2$d out of %3$d total."
 msgstr "Affichage des résultats %1$d‒%2$d (sur un total de %3$d)."
 
-#: common/tracker/actions/browse.php:274 www/pm/browse_task.php:182
+#: common/tracker/actions/browse.php:275 www/pm/browse_task.php:182
 #, php-format
 msgid "Displaying %2$s results."
 msgstr "Affichage de %2$s résultats."
 
-#: common/tracker/actions/browse.php:276 www/pm/browse_task.php:184
+#: common/tracker/actions/browse.php:277 www/pm/browse_task.php:184
 #: www/top/topusers.php:67
 msgid "Change"
 msgstr "Changement"
 
-#: common/tracker/actions/browse.php:327 common/tracker/actions/browse.php:437
+#: common/tracker/actions/browse.php:328 common/tracker/actions/browse.php:438
 msgid "Advanced queries"
 msgstr "Requêtes avancées"
 
-#: common/tracker/actions/browse.php:357 www/include/html.php:648
+#: common/tracker/actions/browse.php:358 www/include/html.php:648
 msgid "Select One"
 msgstr "Sélectionner"
 
-#: common/tracker/actions/browse.php:364 www/frs/admin/index.php:210
+#: common/tracker/actions/browse.php:365 www/frs/admin/index.php:210
 #: www/my/diary.php:207
 msgid "Private"
 msgstr "Privé"
 
-#: common/tracker/actions/browse.php:376
+#: common/tracker/actions/browse.php:377
 msgid "Power Query"
 msgstr "Exécuter"
 
-#: common/tracker/actions/browse.php:378 common/tracker/actions/browse.php:390
+#: common/tracker/actions/browse.php:379 common/tracker/actions/browse.php:391
 #: common/tracker/actions/query.php:252 common/tracker/actions/query.php:256
 msgid "Build Query"
 msgstr "Construire une requête"
 
-#: common/tracker/actions/browse.php:394 common/tracker/actions/browse.php:438
+#: common/tracker/actions/browse.php:395 common/tracker/actions/browse.php:439
 msgid "Simple Filtering and Sorting"
 msgstr "Filtrage et tri simples"
 
-#: common/tracker/actions/browse.php:422 common/tracker/actions/query.php:391
+#: common/tracker/actions/browse.php:423 common/tracker/actions/query.php:391
 msgid "Order by"
 msgstr "Trier par"
 
-#: common/tracker/actions/browse.php:425
+#: common/tracker/actions/browse.php:426
 msgid "Quick Browse"
 msgstr "Navigation rapide"
 
-#: common/tracker/actions/browse.php:434
+#: common/tracker/actions/browse.php:435
 #: common/tracker/views/form-adminroadmap.php:489
 msgid "Default"
 msgstr "Par défaut"
 
-#: common/tracker/actions/browse.php:436
+#: common/tracker/actions/browse.php:437
 #, php-format
 msgid "Viewing only opened records by default, use “%1$s” or “%2$s” to change."
 msgstr ""
 "Seuls les enregistrements ouverts sont affichés par défaut.  Pour voir les "
 "autres, utilisez les fonctions de « %1$s » ou de « %2$s »."
 
-#: common/tracker/actions/browse.php:537 www/pm/browse_task.php:207
+#: common/tracker/actions/browse.php:538 www/pm/browse_task.php:207
 msgid "Check all"
 msgstr "Cocher tout"
 
-#: common/tracker/actions/browse.php:539 www/pm/browse_task.php:209
+#: common/tracker/actions/browse.php:540 www/pm/browse_task.php:209
 msgid "Clear all"
 msgstr "Décocher tout"
 
-#: common/tracker/actions/browse.php:566 common/tracker/actions/browse.php:744
+#: common/tracker/actions/browse.php:567 common/tracker/actions/browse.php:745
 #: common/tracker/actions/detail.php:97
 #: common/tracker/actions/mod-limited.php:114
 #: common/tracker/actions/mod.php:140 common/tracker/Artifact.class.php:933
@@ -5357,7 +5362,7 @@ msgstr "Décocher tout"
 msgid "Assigned to"
 msgstr "Confié à"
 
-#: common/tracker/actions/browse.php:568 common/tracker/actions/detail.php:87
+#: common/tracker/actions/browse.php:569 common/tracker/actions/detail.php:87
 #: common/tracker/actions/mod-limited.php:86 common/tracker/actions/mod.php:88
 #: common/tracker/views/form-customizelist.php:42
 #: cronjobs/send_pending_items_mail.php:79
@@ -5373,23 +5378,23 @@ msgstr "Confié à"
 msgid "Submitted by"
 msgstr "Proposé par"
 
-#: common/tracker/actions/browse.php:570 common/tracker/actions/mod.php:228
+#: common/tracker/actions/browse.php:571 common/tracker/actions/mod.php:228
 #: common/tracker/include/ArtifactTypeHtml.class.php:325
 #: common/tracker/views/form-customizelist.php:45
 msgid "Related Tasks"
 msgstr "Tâches liées"
 
-#: common/tracker/actions/browse.php:690
+#: common/tracker/actions/browse.php:691
 #, php-format
 msgid "* Denotes requests > %s Days Old"
 msgstr "* indique les requêtes datant de plus de %s jours"
 
-#: common/tracker/actions/browse.php:713 common/tracker/actions/browse.php:757
+#: common/tracker/actions/browse.php:714 common/tracker/actions/browse.php:758
 #: www/pm/browse_task.php:358 www/pm/browse_task.php:387
 msgid "Mass Update"
 msgstr "Mise à jour massive"
 
-#: common/tracker/actions/browse.php:717 www/pm/browse_task.php:363
+#: common/tracker/actions/browse.php:718 www/pm/browse_task.php:363
 msgid ""
 "If you wish to apply changes to all items selected above, use these controls "
 "to change their properties and click once on “Mass Update”."
@@ -5398,25 +5403,25 @@ msgstr ""
 "ci-dessus, utilisez ces contrôles pour changer les propriétés, et cliquez "
 "(une seule fois) sur « Mise à jour massive »."
 
-#: common/tracker/actions/browse.php:734 common/tracker/actions/browse.php:745
-#: common/tracker/actions/browse.php:749 www/include/html.php:363
+#: common/tracker/actions/browse.php:735 common/tracker/actions/browse.php:746
+#: common/tracker/actions/browse.php:750 www/include/html.php:363
 #: www/include/html.php:614 www/include/html.php:818
 #: www/pm/browse_task.php:355 www/pm/browse_task.php:370
 #: www/pm/browse_task.php:381
 msgid "No Change"
 msgstr "Aucun changement"
 
-#: common/tracker/actions/browse.php:745
+#: common/tracker/actions/browse.php:746
 #: common/tracker/include/ArtifactTypeHtml.class.php:692
 #: common/tracker/include/ArtifactTypeHtml.class.php:726
 msgid "Nobody"
 msgstr "Personne"
 
-#: common/tracker/actions/browse.php:754 common/tracker/Artifact.class.php:941
+#: common/tracker/actions/browse.php:755 common/tracker/Artifact.class.php:941
 msgid "Canned Response"
 msgstr "Réponse type"
 
-#: common/tracker/actions/browse.php:766
+#: common/tracker/actions/browse.php:767
 msgid "No items found"
 msgstr "Aucun élément trouvé"
 
@@ -5768,6 +5773,7 @@ msgid "Display a short summary box on top of the list (roadmap status)."
 msgstr "Afficher une barre d'état au-dessus de la liste."
 
 #: common/tracker/actions/taskmgr.php:40 common/tracker/actions/tracker.php:74
+#: common/tracker/actions/tracker.php:166
 #: common/tracker/actions/tracker.php:258
 #: common/tracker/actions/tracker.php:429
 #: common/tracker/actions/tracker.php:446
@@ -5979,7 +5985,7 @@ msgid "Valid Email Address Required"
 msgstr "Une adresse électronique valide est requise."
 
 #: common/tracker/Artifact.class.php:952
-msgid "Invalid assigned_to (assigned person is not a technician)"
+msgid "Invalid assigned person: must be a technician"
 msgstr ""
 
 #: common/tracker/Artifact.class.php:975
@@ -6361,7 +6367,7 @@ msgstr "Taux de complétion moyen : %d%%"
 #: www/admin/useredit.php:262 www/admin/useredit.php:292
 #: www/project/admin/editimages.php:265 www/reporting/usersummary.php:103
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:44
-#: www/sendmessage.php:68
+#: www/sendmessage.php:76
 msgid "Name"
 msgstr "Nom"
 
@@ -8793,7 +8799,7 @@ msgstr "Nom court"
 #: plugins/oauthprovider/www/consumer_update_page.php:69
 #: www/admin/search.php:75 www/admin/unsubscribe.php:114
 #: www/admin/useredit.php:211 www/forum/admin/monitor.php:61
-#: www/sendmessage.php:68
+#: www/sendmessage.php:76
 msgid "Email"
 msgstr "E-mail"
 
@@ -9147,8 +9153,8 @@ msgid "ForumML"
 msgstr "ForumML"
 
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:62
-#: plugins/forumml/www/forumml_utils.php:57
-#: plugins/forumml/www/forumml_utils.php:138 www/forum/forum.php:245
+#: plugins/forumml/www/forumml_utils.php:55
+#: plugins/forumml/www/forumml_utils.php:136 www/forum/forum.php:245
 #: www/forum/message.php:159
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:54
 #: www/search/include/renderers/ForumsHtmlSearchRenderer.class.php:47
@@ -9156,8 +9162,8 @@ msgid "Thread"
 msgstr "Discussion"
 
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:65
-#: plugins/forumml/www/forumml_utils.php:60
-#: plugins/forumml/www/forumml_utils.php:187
+#: plugins/forumml/www/forumml_utils.php:58
+#: plugins/forumml/www/forumml_utils.php:185
 msgid "Submitted on"
 msgstr "Proposée le"
 
@@ -9170,158 +9176,158 @@ msgid "This List"
 msgstr "Cette liste"
 
 #: plugins/forumml/include/forummlPlugin.class.php:171
-#: plugins/forumml/www/message.php:158
+#: plugins/forumml/www/message.php:156
 #: plugins/mailman/www/mailman_utils.php:53
 #: plugins/mailman/www/mailman_utils.php:117
 msgid "Archives"
 msgstr "Archives"
 
-#: plugins/forumml/www/forumml_utils.php:145
-#: plugins/forumml/www/forumml_utils.php:149
+#: plugins/forumml/www/forumml_utils.php:143
+#: plugins/forumml/www/forumml_utils.php:147
 msgid "Previous "
 msgstr "Précédent "
 
-#: plugins/forumml/www/forumml_utils.php:153
+#: plugins/forumml/www/forumml_utils.php:151
 msgid "Next "
 msgstr "Suivant "
 
-#: plugins/forumml/www/forumml_utils.php:154
+#: plugins/forumml/www/forumml_utils.php:152
 msgid "Last messages"
 msgstr "Derniers messages"
 
-#: plugins/forumml/www/forumml_utils.php:170
-#: plugins/forumml/www/forumml_utils.php:241 www/forum/index.php:69
+#: plugins/forumml/www/forumml_utils.php:168
+#: plugins/forumml/www/forumml_utils.php:239 www/forum/index.php:69
 #: www/forum/myforums.php:69
 msgid "Threads"
 msgstr "Fils de discussion"
 
-#: plugins/forumml/www/forumml_utils.php:186
+#: plugins/forumml/www/forumml_utils.php:184
 msgid "Last updated"
 msgstr "Dernière mise à jour"
 
-#: plugins/forumml/www/forumml_utils.php:417
+#: plugins/forumml/www/forumml_utils.php:415
 msgid "On "
 msgstr "Marche "
 
-#: plugins/forumml/www/forumml_utils.php:419
+#: plugins/forumml/www/forumml_utils.php:417
 msgid "Toggle font family (typewriter/normal)"
 msgstr ""
 
-#: plugins/forumml/www/forumml_utils.php:437
+#: plugins/forumml/www/forumml_utils.php:435
 #: plugins/forumml/www/scripts/cc_attach_js.php:42
 msgid "Cc:"
 msgstr ""
 
-#: plugins/forumml/www/forumml_utils.php:580
+#: plugins/forumml/www/forumml_utils.php:578
 msgid "Add cc:"
 msgstr "Ajouter cc :"
 
-#: plugins/forumml/www/forumml_utils.php:581 plugins/forumml/www/index.php:118
+#: plugins/forumml/www/forumml_utils.php:579 plugins/forumml/www/index.php:117
 #: plugins/forumml/www/scripts/cc_attach_js.php:50
 msgid "Attach:"
 msgstr "Joindre :"
 
-#: plugins/forumml/www/forumml_utils.php:599 plugins/forumml/www/index.php:128
+#: plugins/forumml/www/forumml_utils.php:597 plugins/forumml/www/index.php:127
 msgid "Erase"
 msgstr "Supprimer"
 
-#: plugins/forumml/www/forumml_utils.php:728
+#: plugins/forumml/www/forumml_utils.php:726
 msgid "Mail successfully sent "
 msgstr "Courriel envoyé avec succès"
 
-#: plugins/forumml/www/forumml_utils.php:730
+#: plugins/forumml/www/forumml_utils.php:728
 msgid "Sending mail failed"
 msgstr "L'envoi du courriel a échoué"
 
-#: plugins/forumml/www/index.php:55 plugins/forumml/www/message.php:92
+#: plugins/forumml/www/index.php:54 plugins/forumml/www/message.php:90
 msgid "No list specified"
 msgstr "Pas de liste spécifiée"
 
-#: plugins/forumml/www/index.php:60 plugins/forumml/www/message.php:97
+#: plugins/forumml/www/index.php:59 plugins/forumml/www/message.php:95
 #: plugins/forumml/www/upload.php:48
 msgid "You are not allowed to access this page"
 msgstr "Vous n'êtes pas autorisé à voir cette page"
 
-#: plugins/forumml/www/index.php:63
+#: plugins/forumml/www/index.php:62
 msgid "The mailing  list does not exist or is inactive"
 msgstr "Cette liste n'existe pas ou est inactive"
 
-#: plugins/forumml/www/index.php:73
+#: plugins/forumml/www/index.php:72
 msgid "Submit failed you must specify the mail subject."
 msgstr ""
 
-#: plugins/forumml/www/index.php:78
+#: plugins/forumml/www/index.php:77
 msgid "There can be some delay before to see the message in the archives."
 msgstr ""
 
-#: plugins/forumml/www/index.php:78
+#: plugins/forumml/www/index.php:77
 msgid " Redirecting to archive page, please wait ..."
 msgstr ""
 
-#: plugins/forumml/www/index.php:102 plugins/forumml/www/message.php:150
+#: plugins/forumml/www/index.php:101 plugins/forumml/www/message.php:148
 #: plugins/mailman/www/mailman_utils.php:51
 #: plugins/mailman/www/mailman_utils.php:66 www/mail/admin/index.php:263
 #: www/mail/index.php:77
 msgid "Mailing List"
 msgstr "Liste de diffusion"
 
-#: plugins/forumml/www/index.php:102
+#: plugins/forumml/www/index.php:101
 msgid "New Thread"
 msgstr "Nouvelle discussion"
 
-#: plugins/forumml/www/index.php:103
+#: plugins/forumml/www/index.php:102
 msgid "Browse Archives"
 msgstr "Naviguer dans les archives"
 
-#: plugins/forumml/www/index.php:104
+#: plugins/forumml/www/index.php:103
 msgid "Submit a new thread"
 msgstr "Proposer une nouvelle discussion"
 
-#: plugins/forumml/www/message.php:100 plugins/forumml/www/upload.php:51
+#: plugins/forumml/www/message.php:98 plugins/forumml/www/upload.php:51
 msgid "This list is not active"
 msgstr "Cette liste est inactive"
 
-#: plugins/forumml/www/message.php:119
+#: plugins/forumml/www/message.php:117
 msgid "Email succefully sent. It can take some time before being displayed"
 msgstr ""
 
-#: plugins/forumml/www/message.php:168
+#: plugins/forumml/www/message.php:166
 msgid "Back to the list"
 msgstr "Revenir à la liste"
 
-#: plugins/forumml/www/message.php:171
+#: plugins/forumml/www/message.php:169
 msgid "Post a new thread"
 msgstr "Commencer une nouvelle discussion"
 
-#: plugins/forumml/www/message.php:174
+#: plugins/forumml/www/message.php:172
 msgid "Original Archives"
 msgstr "Archives d'origine"
 
-#: plugins/forumml/www/message.php:176
+#: plugins/forumml/www/message.php:174
 msgid "Original list archives"
 msgstr "Archives d'origine de la liste"
 
-#: plugins/forumml/www/message.php:176
+#: plugins/forumml/www/message.php:174
 msgid "Public archives"
 msgstr "Archives publiques"
 
-#: plugins/forumml/www/message.php:176
+#: plugins/forumml/www/message.php:174
 msgid "Private Archives"
 msgstr "Archives privées"
 
-#: plugins/forumml/www/message.php:184
+#: plugins/forumml/www/message.php:182
 msgid "Printer version"
 msgstr "Version imprimable"
 
-#: plugins/forumml/www/message.php:205
+#: plugins/forumml/www/message.php:203
 msgid "Empty archives"
 msgstr "Archives vides"
 
-#: plugins/forumml/www/message.php:211
+#: plugins/forumml/www/message.php:209
 msgid "Search result for "
 msgstr "Résultats de la recherche de "
 
-#: plugins/forumml/www/message.php:211
+#: plugins/forumml/www/message.php:209
 #, fuzzy
 msgid "Thread(s) found"
 msgstr "Fils de discussion"
@@ -16174,73 +16180,73 @@ msgstr ""
 msgid "Documents for "
 msgstr "Documents de "
 
-#: www/docman/view.php:60 www/docman/view.php:232
+#: www/docman/view.php:60 www/docman/view.php:237
 msgid "Document is not available."
 msgstr "Ce document n'est pas disponible."
 
-#: www/docman/view.php:113
+#: www/docman/view.php:118
 msgid "Unable to open ZIP archive for backup"
 msgstr "Erreur lors de l'ouverture de l'archive ZIP pour sauvegarde"
 
-#: www/docman/view.php:117
+#: www/docman/view.php:122
 msgid "Unable to fill ZIP archive for backup"
 msgstr "Erreur lors du remplissage de l'archive ZIP pour sauvegarde"
 
-#: www/docman/view.php:120
+#: www/docman/view.php:125
 msgid "Unable to close ZIP archive for backup"
 msgstr "Erreur lors de la fermeture de l'archive ZIP pour sauvegarde"
 
-#: www/docman/view.php:129
+#: www/docman/view.php:134
 msgid "Unable to download backup file"
 msgstr ""
 
-#: www/docman/view.php:134
+#: www/docman/view.php:139
 msgid "No documents to backup."
 msgstr "Aucun document à archiver."
 
-#: www/docman/view.php:138
+#: www/docman/view.php:143
 msgid "ZIP extension is missing: no backup function"
 msgstr ""
 
-#: www/docman/view.php:150
+#: www/docman/view.php:155
 msgid "Webdav Access Canceled by user"
 msgstr "Accès au Webdav annulé par l'utilisateur"
 
-#: www/docman/view.php:156
+#: www/docman/view.php:161
 msgid "No Webdav interface enabled."
 msgstr "Pas d'interface Webdav active."
 
-#: www/docman/view.php:184 www/docman/view.php:226
+#: www/docman/view.php:189 www/docman/view.php:231
 msgid "Unable to open ZIP archive for download as ZIP"
 msgstr "Impossible d'ouvrir l'archive ZIP pour téléchargement"
 
-#: www/docman/view.php:195 www/docman/view.php:240
+#: www/docman/view.php:200 www/docman/view.php:245
 msgid "Unable to fill ZIP file."
 msgstr "Impossible de remplir le fichier ZIP."
 
-#: www/docman/view.php:199
+#: www/docman/view.php:204
 msgid "Unable to fill ZIP archive for download as ZIP"
 msgstr "Impossible de remplir le fichier ZIP pour téléchargement"
 
-#: www/docman/view.php:202 www/docman/view.php:249
+#: www/docman/view.php:207 www/docman/view.php:254
 msgid "Unable to close ZIP archive for download as ZIP"
 msgstr "Impossible de fermer le fichier ZIP pour téléchargement"
 
-#: www/docman/view.php:211 www/docman/view.php:258
+#: www/docman/view.php:216 www/docman/view.php:263
 msgid "Unable to download ZIP archive"
 msgstr "Impossible de télécharger l'archive ZIP"
 
-#: www/docman/view.php:216
+#: www/docman/view.php:221
 msgid "This documents folder is empty."
 msgstr "Ce dossier de documents est vide."
 
-#: www/docman/view.php:263 www/docman/view.php:269
+#: www/docman/view.php:268 www/docman/view.php:274
 msgid "No document to display - invalid or inactive document number."
 msgstr ""
 "Aucun document à afficher : le numéro de document est invalide, ou "
 "correspond à un document inactif."
 
-#: www/docman/view.php:266
+#: www/docman/view.php:271
 msgid "PHP extension is missing."
 msgstr "L'extension PHP est manquante."
 
@@ -21304,25 +21310,25 @@ msgid "You can only send to addresses @<em>%1$s</em>."
 msgstr ""
 "Nous ne pouvez envoyer qu'à des adresses dans le domaine <em>%1$s</em>."
 
-#: www/sendmessage.php:68
+#: www/sendmessage.php:76
 msgid "Body"
 msgstr "Corps"
 
-#: www/sendmessage.php:84 www/sendmessage.php:95
+#: www/sendmessage.php:92 www/sendmessage.php:103 www/sendmessage.php:131
 msgid "Contact"
 msgstr "Contact"
 
-#: www/sendmessage.php:85 www/sendmessage.php:96
+#: www/sendmessage.php:93 www/sendmessage.php:104
 msgid "Message has been sent"
 msgstr "Le message a été envoyé"
 
-#: www/sendmessage.php:123
+#: www/sendmessage.php:136
 msgid "In an attempt to reduce spam, we are using this form to send email."
 msgstr ""
 "Pour réduire le spam, nous utilisons ce formulaire pour envoyer les "
 "courriels."
 
-#: www/sendmessage.php:127
+#: www/sendmessage.php:140
 msgid ""
 "Fill it out accurately and completely or the receiver may not be able to "
 "respond."
@@ -21330,7 +21336,7 @@ msgstr ""
 "Remplissez-le soigneusement et complètement, sinon le destinataire ne sera "
 "pas en mesure de répondre."
 
-#: www/sendmessage.php:131
+#: www/sendmessage.php:144
 msgid ""
 "<strong>IF YOU ARE WRITING FOR HELP:</strong> Did you read the site "
 "documentation? Did you include your <strong>user_id</strong> and "
@@ -21344,15 +21350,15 @@ msgstr ""
 "propos d'un projet, pensez à inclure également le nom du projet et son "
 "identifiant (<strong>group_id</strong>)."
 
-#: www/sendmessage.php:141
+#: www/sendmessage.php:154
 msgid "Your Name"
 msgstr "Votre nom"
 
-#: www/sendmessage.php:145
+#: www/sendmessage.php:165
 msgid "Your Email Address"
 msgstr "Votre adresse électronique"
 
-#: www/sendmessage.php:157
+#: www/sendmessage.php:195
 msgid "Send Message"
 msgstr "Envoyer message"
 
