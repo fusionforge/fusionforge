@@ -185,7 +185,7 @@ if ($dgf->getNested() == NULL) {
 					</td>
 				</tr>';
 	if ($dirid) {
-		echo '		<input type="hidden" name="doc_group" value="'.$dirid.'">';
+		echo '		<tr><td colspan="2"><input type="hidden" name="doc_group" value="'.$dirid.'"></td></tr>';
 	} else {
 		echo '
 				<tr>
