@@ -163,9 +163,9 @@ switch (getStringFromRequest('func')) {
 		for ($i=0; $i < $count; $i++) {
 			$ah=new Artifact($ath,$artifact_id_list[$i]);
 			if (!$ah || !is_object($ah)) {
-				$feedback .= ' ID: '.$artifact_id_list[$i].'::Artifact Could Not Be Created';
+				$feedback .= _('Id')._(': ').$artifact_id_list[$i]._(': ')._('Artifact Could Not Be Created').'<br />';
 			} elseif ($ah->isError()) {
-				$feedback .= ' ID: '.$artifact_id_list[$i].'::'.$ah->getErrorMessage();
+				$feedback .= _('Id')._(': ').$artifact_id_list[$i]._(': ').$ah->getErrorMessage().'<br />';
 			} else {
 				$_summary = '';
 				$_priority=(($priority != 100) ? $priority : $ah->getPriority());
@@ -214,8 +214,8 @@ switch (getStringFromRequest('func')) {
 				}
 
 				if ($was_error) {
-					$error_msg .= ' ID: '.$artifact_id_list[$i].'::'.$ah->getErrorMessage();
-				}else {
+					$error_msg .= _('Id')._(': ').$artifact_id_list[$i]._(': ').$ah->getErrorMessage().'<br />';
+				} else {
 					$was_error=false;
 				}
 			}
