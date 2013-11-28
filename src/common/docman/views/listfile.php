@@ -57,7 +57,7 @@ if ($childgroup_id) {
 		session_redirect($baseredirecturl.'&warning_msg='.urlencode($return_msg));
 	}
 	$redirecturl .= '&childgroup_id='.$childgroup_id;
-	$actionlistfileurl .= '&childgroup_id='.$childgroup_id;
+	$actionlistfileurl .= '&amp;childgroup_id='.$childgroup_id;
 	$g = group_get_object($childgroup_id);
 }
 
@@ -359,12 +359,12 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	echo _('Mass actions for selected documents:');
 	echo '</span>';
 	if (forge_check_perm('docman', $ndg->Group->getID(), 'approve')) {
-		echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&action=trashfile&view=listfile&dirid='.$dirid.'&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Move to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash'))). '</a>';
+		echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\'?group_id='.$group_id.'&amp;action=trashfile&amp;view=listfile&amp;dirid='.$dirid.'&amp;fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Move to trash') .'" >'.html_image('docman/trash-empty.png',22,22,array('alt'=>_('Move to trash'))). '</a>';
 		if (session_loggedin()) {
-			echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&action=reservefile&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Reserve for later edition') .'" >'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve'))). '</a>';
-			echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&action=releasefile&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Release reservation') .'">'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release reservation'))). '</a>';
-			echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&action=monitorfile&option=add&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Monitor') .'" >'.html_image('docman/monitor-adddocument.png',22,22,array('alt'=>_('Monitor'))). '</a>';
-			echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&action=monitorfile&option=remove&fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Stop Monitoring') .'" >'.html_image('docman/monitor-removedocument.png',22,22,array('alt'=>_('Stop Monitoring'))). '</a>';
+			echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&amp;action=reservefile&amp;fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Reserve for later edition') .'" >'.html_image('docman/reserve-document.png',22,22,array('alt'=>_('Reserve'))). '</a>';
+			echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&amp;action=releasefile&amp;fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Release reservation') .'">'.html_image('docman/release-document.png',22,22,array('alt'=>_('Release reservation'))). '</a>';
+			echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&amp;action=monitorfile&amp;option=add&amp;fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Monitor') .'" >'.html_image('docman/monitor-adddocument.png',22,22,array('alt'=>_('Monitor'))). '</a>';
+			echo '<a class="tabtitle-ne" href="#" onclick="window.location.href=\''.$actionlistfileurl.'&amp;action=monitorfile&amp;option=remove&amp;fileid=\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Stop Monitoring') .'" >'.html_image('docman/monitor-removedocument.png',22,22,array('alt'=>_('Stop Monitoring'))). '</a>';
 		}
 	}
 	echo '<a class="tabtitle" href="#" onclick="window.location.href=\'/docman/view.php/'.$group_id.'/zip/selected/'.$dirid.'/\'+controllerListFile.buildUrlByCheckbox(\'active\')" title="'. _('Download as a ZIP') . '" >' . html_image('docman/download-directory-zip.png',22,22,array('alt'=>'Download as Zip')). '</a>';
