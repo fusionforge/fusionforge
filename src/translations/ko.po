@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-02 11:11+0100\n"
+"POT-Creation-Date: 2013-12-02 17:23+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -28,8 +28,8 @@ msgstr "사용자가 성공적으로 추가되었습니다."
 #: common/docman/actions/addfile.php:124 common/docman/actions/addfile.php:160
 #: common/docman/DocumentGroup.class.php:221
 #: common/docman/DocumentGroup.class.php:828
-#: common/tracker/actions/tracker.php:131
-#: common/tracker/actions/tracker.php:365 www/project/admin/editimages.php:58
+#: common/tracker/actions/tracker.php:132
+#: common/tracker/actions/tracker.php:360 www/project/admin/editimages.php:58
 #, fuzzy
 msgid "Invalid file name."
 msgstr "유효하지 않은 프로젝트 이름입니다."
@@ -261,10 +261,10 @@ msgstr "파일 이름"
 #: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
 #: common/tracker/actions/query.php:391 common/tracker/actions/tracker.php:166
 #: common/tracker/actions/tracker.php:168
-#: common/tracker/actions/tracker.php:217
+#: common/tracker/actions/tracker.php:213
+#: common/tracker/actions/tracker.php:383
 #: common/tracker/actions/tracker.php:388
-#: common/tracker/actions/tracker.php:393
-#: common/tracker/actions/tracker.php:505
+#: common/tracker/actions/tracker.php:500
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -372,8 +372,8 @@ msgstr ""
 
 #: common/docman/actions/monitordirectory.php:54
 #: common/docman/actions/monitorfile.php:56
-#: common/tracker/actions/tracker.php:434
-#: common/tracker/actions/tracker.php:451
+#: common/tracker/actions/tracker.php:429
+#: common/tracker/actions/tracker.php:446
 #: common/tracker/Artifact.class.php:618
 #: common/tracker/ArtifactType.class.php:545 www/frs/monitor.php:65
 #: www/frs/monitor.php:66
@@ -749,7 +749,7 @@ msgstr ""
 #: common/docman/include/DocumentGroupHTML.class.php:50
 #: common/include/User.class.php:1410 common/search/SearchQuery.class.php:120
 #: common/survey/SurveyResponse.class.php:95
-#: common/tracker/actions/tracker.php:271
+#: common/tracker/actions/tracker.php:266
 #: common/tracker/views/form-adminroadmap.php:57
 #: plugins/forumml/www/index.php:54 plugins/forumml/www/index.php:59
 #: plugins/forumml/www/index.php:62 plugins/forumml/www/message.php:90
@@ -2068,8 +2068,8 @@ msgstr ""
 #: plugins/oauthprovider/www/request_tokens.php:100
 #: plugins/oauthprovider/www/request_tokens.php:103
 #: plugins/oauthprovider/www/request_tokens.php:108
-#: plugins/scmgit/common/GitPlugin.class.php:1091
-#: plugins/scmgit/common/GitPlugin.class.php:1100
+#: plugins/scmgit/common/GitPlugin.class.php:1092
+#: plugins/scmgit/common/GitPlugin.class.php:1101
 #: www/admin/admin_table.php:161 www/admin/admin_table.php:325
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:150
 #: www/admin/useredit.php:231 www/admin/userlist.php:119
@@ -2186,7 +2186,7 @@ msgid_plural "%s messages deleted"
 msgstr[0] "%1$s 개의 글이 삭제되었습니다."
 
 #: common/forum/ForumAdmin.class.php:261 www/reporting/timeadd.php:67
-#: www/tracker/admin/index.php:238
+#: www/survey/admin/question.php:78 www/tracker/admin/index.php:238
 msgid "Successfully Deleted."
 msgstr ""
 
@@ -2536,7 +2536,7 @@ msgstr "제목"
 #: plugins/headermenu/view/admin/updateLinkValue.php:103
 #: plugins/oauthconsumer/www/provider_edit.php:30
 #: plugins/oauthprovider/www/consumer_update_page.php:50
-#: plugins/scmgit/common/GitPlugin.class.php:1121
+#: plugins/scmgit/common/GitPlugin.class.php:1122
 #: plugins/scmhg/common/HgPlugin.class.php:631
 #: plugins/webanalytics/view/admin/updateLinkValue.php:42
 #: www/admin/admin_table.php:58 www/admin/admin_table.php:164
@@ -2978,7 +2978,7 @@ msgstr ""
 
 #: common/include/Error.class.php:142 common/include/User.class.php:350
 #: common/include/User.class.php:931 common/include/User.class.php:983
-#: common/tracker/actions/tracker.php:84
+#: common/tracker/actions/tracker.php:85
 #: plugins/forumml/www/forumml_utils.php:679 www/account/change_email.php:38
 msgid "Invalid Email Address"
 msgstr "유효하지 않은 이메일 주소"
@@ -3552,7 +3552,7 @@ msgstr ""
 #: common/include/GroupJoinRequest.class.php:298
 #: common/survey/Survey.class.php:240
 #: common/survey/SurveyQuestion.class.php:170
-#: common/tracker/actions/tracker.php:505 www/pm/task.php:354
+#: common/tracker/actions/tracker.php:500 www/pm/task.php:354
 #: www/reporting/timeadd.php:70 www/survey/admin/question.php:75
 msgid "Delete failed"
 msgstr ""
@@ -5077,7 +5077,7 @@ msgstr ""
 #: plugins/forumml/www/forumml_utils.php:596 plugins/forumml/www/index.php:126
 #: plugins/mantisbt/view/addIssue.php:146
 #: plugins/mantisbt/view/addOrEditNote.php:58
-#: plugins/scmgit/common/GitPlugin.class.php:1122
+#: plugins/scmgit/common/GitPlugin.class.php:1123
 #: plugins/scmhg/common/HgPlugin.class.php:632
 #: www/account/pending-resend.php:75 www/admin/admin_table.php:221
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:247
@@ -5891,14 +5891,14 @@ msgstr "동작"
 msgid "Display a short summary box on top of the list (roadmap status)."
 msgstr ""
 
-#: common/tracker/actions/taskmgr.php:40 common/tracker/actions/tracker.php:74
+#: common/tracker/actions/taskmgr.php:40 common/tracker/actions/tracker.php:75
 #: common/tracker/actions/tracker.php:166
-#: common/tracker/actions/tracker.php:258
-#: common/tracker/actions/tracker.php:429
-#: common/tracker/actions/tracker.php:446
-#: common/tracker/actions/tracker.php:475
-#: common/tracker/actions/tracker.php:496
-#: common/tracker/actions/tracker.php:553 www/tracker/download.php:50
+#: common/tracker/actions/tracker.php:253
+#: common/tracker/actions/tracker.php:424
+#: common/tracker/actions/tracker.php:441
+#: common/tracker/actions/tracker.php:470
+#: common/tracker/actions/tracker.php:491
+#: common/tracker/actions/tracker.php:548 www/tracker/download.php:50
 msgid "Artifact Could Not Be Created"
 msgstr ""
 
@@ -5925,7 +5925,7 @@ msgstr "문제점 추적과 임무 관리자 연계하기"
 
 #: common/tracker/actions/taskmgr.php:107
 #: common/tracker/actions/taskmgr.php:161
-#: common/tracker/actions/tracker.php:287 www/activity/index.php:291
+#: common/tracker/actions/tracker.php:282 www/activity/index.php:291
 #: www/activity/index.php:296
 msgid "Tracker Item"
 msgstr "추적 항목"
@@ -5959,88 +5959,88 @@ msgstr "이미 존재하는 작업과 연계하기"
 msgid "Create New Task"
 msgstr "새 작업 생성하기"
 
-#: common/tracker/actions/tracker.php:96
+#: common/tracker/actions/tracker.php:97
 #, fuzzy, php-format
 msgid "Item %s successfully created"
 msgstr "항목을 생성하였습니다."
 
-#: common/tracker/actions/tracker.php:108
+#: common/tracker/actions/tracker.php:109
 #, php-format
 msgid "Error on attached file %1$d, file is too large (maximum: %2$s)."
 msgstr ""
 
-#: common/tracker/actions/tracker.php:112
+#: common/tracker/actions/tracker.php:113
 #, php-format
 msgid "Error on attached file %d, transfer interrupted."
 msgstr ""
 
-#: common/tracker/actions/tracker.php:126
-#: common/tracker/actions/tracker.php:359
-#: common/tracker/actions/tracker.php:388
+#: common/tracker/actions/tracker.php:127
+#: common/tracker/actions/tracker.php:354
+#: common/tracker/actions/tracker.php:383
 msgid "Could Not Create File Object"
 msgstr ""
 
-#: common/tracker/actions/tracker.php:134
+#: common/tracker/actions/tracker.php:135
 msgid "Could Not Attach File to Item: "
 msgstr ""
 
-#: common/tracker/actions/tracker.php:225
+#: common/tracker/actions/tracker.php:219
 #, fuzzy
 msgid "Updated Successfully"
 msgstr "성공적으로 갱신되었습니다."
 
-#: common/tracker/actions/tracker.php:271
+#: common/tracker/actions/tracker.php:266
 #, php-format
 msgid "Could not get Project Task for %d"
 msgstr ""
 
-#: common/tracker/actions/tracker.php:297
-#: common/tracker/actions/tracker.php:316
+#: common/tracker/actions/tracker.php:292
+#: common/tracker/actions/tracker.php:311
 msgid "Comment added"
 msgstr ""
 
-#: common/tracker/actions/tracker.php:340
+#: common/tracker/actions/tracker.php:335
 #, php-format
 msgid "Error: Skipping attachment %d: file is too large."
 msgstr ""
 
-#: common/tracker/actions/tracker.php:344
+#: common/tracker/actions/tracker.php:339
 #, php-format
 msgid "Error: Skipping attachment %d: transfer interrupted."
 msgstr ""
 
-#: common/tracker/actions/tracker.php:368
+#: common/tracker/actions/tracker.php:363
 #, fuzzy
 msgid "File Upload: Error"
 msgstr "파일 업로드: 성공"
 
-#: common/tracker/actions/tracker.php:371
+#: common/tracker/actions/tracker.php:366
 msgid "File Upload: Successful"
 msgstr "파일 업로드: 성공"
 
-#: common/tracker/actions/tracker.php:393
+#: common/tracker/actions/tracker.php:388
 msgid "File Delete"
 msgstr "파일 삭제"
 
-#: common/tracker/actions/tracker.php:396
+#: common/tracker/actions/tracker.php:391
 msgid "File Delete: Successful"
 msgstr "파일 삭제: 성공"
 
-#: common/tracker/actions/tracker.php:407
+#: common/tracker/actions/tracker.php:402
 #, fuzzy, php-format
 msgid "Item %s successfully updated"
 msgstr "항목을 생성하였습니다."
 
-#: common/tracker/actions/tracker.php:436
-#: common/tracker/actions/tracker.php:453
+#: common/tracker/actions/tracker.php:431
+#: common/tracker/actions/tracker.php:448
 msgid "Monitoring Deactivated"
 msgstr ""
 
-#: common/tracker/actions/tracker.php:501
+#: common/tracker/actions/tracker.php:496
 msgid "Confirmation failed. Artifact not deleted"
 msgstr ""
 
-#: common/tracker/actions/tracker.php:507
+#: common/tracker/actions/tracker.php:502
 msgid "Artifact Deleted Successfully"
 msgstr ""
 
@@ -13473,7 +13473,7 @@ msgid "Create new repository:"
 msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:629
-#: plugins/scmgit/common/GitPlugin.class.php:1091
+#: plugins/scmgit/common/GitPlugin.class.php:1092
 #: plugins/scmhg/common/HgPlugin.class.php:625
 #, fuzzy
 msgid "Repository name"
@@ -13614,71 +13614,71 @@ msgstr ""
 msgid "Updates"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:965
+#: plugins/scmgit/common/GitPlugin.class.php:966
 #, fuzzy
 msgid "Git Commits"
 msgstr "답글 올리기"
 
-#: plugins/scmgit/common/GitPlugin.class.php:983
+#: plugins/scmgit/common/GitPlugin.class.php:984
 msgid "Cannot create a secondary repository with the same name as the primary"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:988
+#: plugins/scmgit/common/GitPlugin.class.php:989
 #: plugins/scmhg/common/HgPlugin.class.php:534
 #, fuzzy
 msgid "This repository name is not valid"
 msgstr "유효하지 않은 사용자입니다."
 
-#: plugins/scmgit/common/GitPlugin.class.php:1001
+#: plugins/scmgit/common/GitPlugin.class.php:1002
 #: plugins/scmhg/common/HgPlugin.class.php:529
 #: plugins/scmhg/common/HgPlugin.class.php:545
 #, fuzzy, php-format
 msgid "A repository %s already exists"
 msgstr "사용자 ID가 이미 존재합니다."
 
-#: plugins/scmgit/common/GitPlugin.class.php:1026
+#: plugins/scmgit/common/GitPlugin.class.php:1027
 msgid "Invalid URL from which to clone"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1035
+#: plugins/scmgit/common/GitPlugin.class.php:1036
 #, php-format
 msgid "Clone of %s"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1085
+#: plugins/scmgit/common/GitPlugin.class.php:1086
 #, php-format
 msgid "No extra Git repository for project %1$s"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1087
+#: plugins/scmgit/common/GitPlugin.class.php:1088
 #, fuzzy, php-format
 msgid "Extra Git repository for project %1$s"
 msgid_plural "Extra Git repositories for project %1$s"
 msgstr[0] "Statistics for Project Databases"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1091
+#: plugins/scmgit/common/GitPlugin.class.php:1092
 msgid "Initial repository description"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1091
+#: plugins/scmgit/common/GitPlugin.class.php:1092
 msgid "Initial clone URL (if any)"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1108
+#: plugins/scmgit/common/GitPlugin.class.php:1109
 #, php-format
 msgid "Create new Git repository for project %1$s"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1115
+#: plugins/scmgit/common/GitPlugin.class.php:1116
 #, fuzzy
 msgid "Repository name:"
 msgstr "SCM 저장소"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1117
+#: plugins/scmgit/common/GitPlugin.class.php:1118
 msgid "Description:"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1119
+#: plugins/scmgit/common/GitPlugin.class.php:1120
 msgid ""
 "Initial clone URL (or name of an existing repository in this project; leave "
 "empty to start with an empty repository):"
@@ -22096,11 +22096,6 @@ msgstr ""
 msgid "Cannot get Survey Question"
 msgstr ""
 
-#: www/survey/admin/question.php:78
-#, fuzzy
-msgid "Delete successful"
-msgstr "파일 삭제: 성공"
-
 #: www/survey/admin/question.php:119
 #, fuzzy
 msgid "No questions found"
@@ -22701,6 +22696,10 @@ msgstr "사용자ID"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "Delete successful"
+#~ msgstr "파일 삭제: 성공"
 
 #~ msgid "Error inserting"
 #~ msgstr "추가 에러"

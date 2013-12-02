@@ -38,12 +38,12 @@ $question_type = getStringFromRequest('question_type');
 
 /* We need a group_id */
 if (!$group_id) {
-    exit_no_group();
+	exit_no_group();
 }
 
 $g = group_get_object($group_id);
 if (!$g || !is_object($g) || $g->isError()) {
-    exit_no_group();
+	exit_no_group();
 }
 
 $is_admin_page='y';
@@ -53,56 +53,56 @@ $title = $question_id ? _('Edit a Question') : _('Add a Question');
 $sh->header(array('title'=>$title, 'modal'=>1));
 
 if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
-    echo '<div class="error">'._('Permission denied.').'</div>';
-    $sh->footer(array());
-    exit;
+	echo '<div class="error">'._('Permission denied.').'</div>';
+	$sh->footer(array());
+	exit;
 }
 
 /* Create a Survey Question for general purpose */
 $sq = new SurveyQuestion($g, $question_id);
 if (!$sq || !is_object($sq)) {
-    echo '<div class="error">'._('Error'). ' ' . _('Cannot get Survey Question') ."</div>";
-} elseif ( $sq->isError()) {
-    echo '<div class="error">'._('Error'). $sq->getErrorMessage() ."</div>";
+	echo '<div class="error">'._('Error'). ' ' . _('Cannot get Survey Question') ."</div>";
+} elseif ($sq->isError()) {
+	echo '<div class="error">'._('Error'). $sq->getErrorMessage() ."</div>";
 }
 
 /* Delete a question */
 if (getStringFromRequest('delete')=="Y" && $question_id) {
-     $sq->delete();
+	$sq->delete();
 
-    /* Error */
-    if ( $sq->isError()) {
-	$msg = _('Delete failed').' '.$sq->getErrorMessage();
-        echo '<p class="error">' .$msg ."</p>";
-    } else {
-	$msg = _('Delete successful');
-        echo '<p class="feedback">' .$msg ."</p>";
-    }
-} elseif (getStringFromRequest('post')=="Y") {
-    /* Modification */
-    if ($question_id) {
-	$sq->update($question, $question_type);
-	$msg = _('Update Successful');
-    } else { /* adding new question */
-	$question = getStringFromRequest('question');
-	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
-		exit_form_double_submit();
+	/* Error */
+	if ($sq->isError()) {
+		$msg = _('Delete failed').' '.$sq->getErrorMessage();
+		echo '<p class="error">' .$msg ."</p>";
+	} else {
+		$msg = _('Successfully Deleted.');
+		echo '<p class="feedback">' .$msg ."</p>";
 	}
-    $sq->create($question, $question_type);
-	$msg = _('Question Added');
-    }
+} elseif (getStringFromRequest('post')=="Y") {
+	/* Modification */
+	if ($question_id) {
+		$sq->update($question, $question_type);
+		$msg = _('Update Successful');
+	} else { /* adding new question */
+		$question = getStringFromRequest('question');
+		if (!form_key_is_valid(getStringFromRequest('form_key'))) {
+			exit_form_double_submit();
+		}
+		$sq->create($question, $question_type);
+		$msg = _('Question Added');
+	}
 
-    /* Error */
-    if ( $sq->isError()) {
+	/* Error */
+	if ($sq->isError()) {
 		$msg = $sq->getErrorMessage();
 		form_release_key(getStringFromRequest("form_key"));
-        echo '<p class="error">' .$msg ."</p>";
-    } else {
-        echo '<p class="feedback">' .$msg ."</p>";
-    }
+		echo '<p class="error">' .$msg ."</p>";
+	} else {
+		echo '<p class="feedback">' .$msg ."</p>";
+	}
 
-    /* Add now Question */
-    $sq = false;
+	/* Add now Question */
+	$sq = false;
 }
 
 /* Show Add/Modify form

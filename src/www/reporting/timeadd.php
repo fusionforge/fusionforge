@@ -120,7 +120,7 @@ if ($week) {
 	?>
 <h2><?php printf(_('Time Entries For The Week Starting %s'), date(_('Y-m-d'),$week)) ?></h2>
 <?php
-	$res = db_query_params ('SELECT pt.project_task_id, pgl.project_name || $1 || pt.summary AS name,
+	$res = db_query_params('SELECT pt.project_task_id, pgl.project_name || $1 || pt.summary AS name,
 	rtt.hours, rtt.report_date, rtc.category_name, rtt.time_code
 	FROM groups g, project_group_list pgl, project_task pt, rep_time_tracking rtt,
 	rep_time_category rtc

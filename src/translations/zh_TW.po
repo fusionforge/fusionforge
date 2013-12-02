@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-02 11:11+0100\n"
+"POT-Creation-Date: 2013-12-02 17:23+0100\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -28,8 +28,8 @@ msgstr "會員新增成功"
 #: common/docman/actions/addfile.php:124 common/docman/actions/addfile.php:160
 #: common/docman/DocumentGroup.class.php:221
 #: common/docman/DocumentGroup.class.php:828
-#: common/tracker/actions/tracker.php:131
-#: common/tracker/actions/tracker.php:365 www/project/admin/editimages.php:58
+#: common/tracker/actions/tracker.php:132
+#: common/tracker/actions/tracker.php:360 www/project/admin/editimages.php:58
 #, fuzzy
 msgid "Invalid file name."
 msgstr "全名錯誤"
@@ -264,10 +264,10 @@ msgstr "檔案名"
 #: common/tracker/actions/query.php:384 common/tracker/actions/query.php:386
 #: common/tracker/actions/query.php:391 common/tracker/actions/tracker.php:166
 #: common/tracker/actions/tracker.php:168
-#: common/tracker/actions/tracker.php:217
+#: common/tracker/actions/tracker.php:213
+#: common/tracker/actions/tracker.php:383
 #: common/tracker/actions/tracker.php:388
-#: common/tracker/actions/tracker.php:393
-#: common/tracker/actions/tracker.php:505
+#: common/tracker/actions/tracker.php:500
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
@@ -375,8 +375,8 @@ msgstr ""
 
 #: common/docman/actions/monitordirectory.php:54
 #: common/docman/actions/monitorfile.php:56
-#: common/tracker/actions/tracker.php:434
-#: common/tracker/actions/tracker.php:451
+#: common/tracker/actions/tracker.php:429
+#: common/tracker/actions/tracker.php:446
 #: common/tracker/Artifact.class.php:618
 #: common/tracker/ArtifactType.class.php:545 www/frs/monitor.php:65
 #: www/frs/monitor.php:66
@@ -758,7 +758,7 @@ msgstr ""
 #: common/docman/include/DocumentGroupHTML.class.php:50
 #: common/include/User.class.php:1410 common/search/SearchQuery.class.php:120
 #: common/survey/SurveyResponse.class.php:95
-#: common/tracker/actions/tracker.php:271
+#: common/tracker/actions/tracker.php:266
 #: common/tracker/views/form-adminroadmap.php:57
 #: plugins/forumml/www/index.php:54 plugins/forumml/www/index.php:59
 #: plugins/forumml/www/index.php:62 plugins/forumml/www/message.php:90
@@ -2088,8 +2088,8 @@ msgstr "無法更新上層文章"
 #: plugins/oauthprovider/www/request_tokens.php:100
 #: plugins/oauthprovider/www/request_tokens.php:103
 #: plugins/oauthprovider/www/request_tokens.php:108
-#: plugins/scmgit/common/GitPlugin.class.php:1091
-#: plugins/scmgit/common/GitPlugin.class.php:1100
+#: plugins/scmgit/common/GitPlugin.class.php:1092
+#: plugins/scmgit/common/GitPlugin.class.php:1101
 #: www/admin/admin_table.php:161 www/admin/admin_table.php:325
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:150
 #: www/admin/useredit.php:231 www/admin/userlist.php:119
@@ -2208,7 +2208,7 @@ msgstr[0] "%1$s 文章已刪除"
 msgstr[1] "%1$s 文章已刪除"
 
 #: common/forum/ForumAdmin.class.php:261 www/reporting/timeadd.php:67
-#: www/tracker/admin/index.php:238
+#: www/survey/admin/question.php:78 www/tracker/admin/index.php:238
 msgid "Successfully Deleted."
 msgstr "已成功刪除"
 
@@ -2560,7 +2560,7 @@ msgstr "主題"
 #: plugins/headermenu/view/admin/updateLinkValue.php:103
 #: plugins/oauthconsumer/www/provider_edit.php:30
 #: plugins/oauthprovider/www/consumer_update_page.php:50
-#: plugins/scmgit/common/GitPlugin.class.php:1121
+#: plugins/scmgit/common/GitPlugin.class.php:1122
 #: plugins/scmhg/common/HgPlugin.class.php:631
 #: plugins/webanalytics/view/admin/updateLinkValue.php:42
 #: www/admin/admin_table.php:58 www/admin/admin_table.php:164
@@ -3010,7 +3010,7 @@ msgstr "權限不足"
 
 #: common/include/Error.class.php:142 common/include/User.class.php:350
 #: common/include/User.class.php:931 common/include/User.class.php:983
-#: common/tracker/actions/tracker.php:84
+#: common/tracker/actions/tracker.php:85
 #: plugins/forumml/www/forumml_utils.php:679 www/account/change_email.php:38
 msgid "Invalid Email Address"
 msgstr "無效的Email"
@@ -3582,7 +3582,7 @@ msgstr ""
 #: common/include/GroupJoinRequest.class.php:298
 #: common/survey/Survey.class.php:240
 #: common/survey/SurveyQuestion.class.php:170
-#: common/tracker/actions/tracker.php:505 www/pm/task.php:354
+#: common/tracker/actions/tracker.php:500 www/pm/task.php:354
 #: www/reporting/timeadd.php:70 www/survey/admin/question.php:75
 msgid "Delete failed"
 msgstr "刪除失敗"
@@ -5168,7 +5168,7 @@ msgstr ""
 #: plugins/forumml/www/forumml_utils.php:596 plugins/forumml/www/index.php:126
 #: plugins/mantisbt/view/addIssue.php:146
 #: plugins/mantisbt/view/addOrEditNote.php:58
-#: plugins/scmgit/common/GitPlugin.class.php:1122
+#: plugins/scmgit/common/GitPlugin.class.php:1123
 #: plugins/scmhg/common/HgPlugin.class.php:632
 #: www/account/pending-resend.php:75 www/admin/admin_table.php:221
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:247
@@ -5999,14 +5999,14 @@ msgstr "動作"
 msgid "Display a short summary box on top of the list (roadmap status)."
 msgstr ""
 
-#: common/tracker/actions/taskmgr.php:40 common/tracker/actions/tracker.php:74
+#: common/tracker/actions/taskmgr.php:40 common/tracker/actions/tracker.php:75
 #: common/tracker/actions/tracker.php:166
-#: common/tracker/actions/tracker.php:258
-#: common/tracker/actions/tracker.php:429
-#: common/tracker/actions/tracker.php:446
-#: common/tracker/actions/tracker.php:475
-#: common/tracker/actions/tracker.php:496
-#: common/tracker/actions/tracker.php:553 www/tracker/download.php:50
+#: common/tracker/actions/tracker.php:253
+#: common/tracker/actions/tracker.php:424
+#: common/tracker/actions/tracker.php:441
+#: common/tracker/actions/tracker.php:470
+#: common/tracker/actions/tracker.php:491
+#: common/tracker/actions/tracker.php:548 www/tracker/download.php:50
 #, fuzzy
 msgid "Artifact Could Not Be Created"
 msgstr "自訂類型刪除失敗"
@@ -6035,7 +6035,7 @@ msgstr "建立追蹤項目與任務管理員的關係"
 
 #: common/tracker/actions/taskmgr.php:107
 #: common/tracker/actions/taskmgr.php:161
-#: common/tracker/actions/tracker.php:287 www/activity/index.php:291
+#: common/tracker/actions/tracker.php:282 www/activity/index.php:291
 #: www/activity/index.php:296
 msgid "Tracker Item"
 msgstr "追蹤項目"
@@ -6070,91 +6070,91 @@ msgstr "新增既有任務的關係"
 msgid "Create New Task"
 msgstr "建立新的任務"
 
-#: common/tracker/actions/tracker.php:96
+#: common/tracker/actions/tracker.php:97
 #, fuzzy, php-format
 msgid "Item %s successfully created"
 msgstr "項目成功創造"
 
-#: common/tracker/actions/tracker.php:108
+#: common/tracker/actions/tracker.php:109
 #, php-format
 msgid "Error on attached file %1$d, file is too large (maximum: %2$s)."
 msgstr ""
 
-#: common/tracker/actions/tracker.php:112
+#: common/tracker/actions/tracker.php:113
 #, php-format
 msgid "Error on attached file %d, transfer interrupted."
 msgstr ""
 
-#: common/tracker/actions/tracker.php:126
-#: common/tracker/actions/tracker.php:359
-#: common/tracker/actions/tracker.php:388
+#: common/tracker/actions/tracker.php:127
+#: common/tracker/actions/tracker.php:354
+#: common/tracker/actions/tracker.php:383
 #, fuzzy
 msgid "Could Not Create File Object"
 msgstr "無法更新上層文章"
 
-#: common/tracker/actions/tracker.php:134
+#: common/tracker/actions/tracker.php:135
 msgid "Could Not Attach File to Item: "
 msgstr ""
 
-#: common/tracker/actions/tracker.php:225
+#: common/tracker/actions/tracker.php:219
 #, fuzzy
 msgid "Updated Successfully"
 msgstr "更新成功"
 
-#: common/tracker/actions/tracker.php:271
+#: common/tracker/actions/tracker.php:266
 #, fuzzy, php-format
 msgid "Could not get Project Task for %d"
 msgstr "無法更新上層文章"
 
-#: common/tracker/actions/tracker.php:297
-#: common/tracker/actions/tracker.php:316
+#: common/tracker/actions/tracker.php:292
+#: common/tracker/actions/tracker.php:311
 #, fuzzy
 msgid "Comment added"
 msgstr "評論"
 
-#: common/tracker/actions/tracker.php:340
+#: common/tracker/actions/tracker.php:335
 #, php-format
 msgid "Error: Skipping attachment %d: file is too large."
 msgstr ""
 
-#: common/tracker/actions/tracker.php:344
+#: common/tracker/actions/tracker.php:339
 #, php-format
 msgid "Error: Skipping attachment %d: transfer interrupted."
 msgstr ""
 
-#: common/tracker/actions/tracker.php:368
+#: common/tracker/actions/tracker.php:363
 #, fuzzy
 msgid "File Upload: Error"
 msgstr "檔案上傳錯誤"
 
-#: common/tracker/actions/tracker.php:371
+#: common/tracker/actions/tracker.php:366
 msgid "File Upload: Successful"
 msgstr "檔案上傳：成功"
 
-#: common/tracker/actions/tracker.php:393
+#: common/tracker/actions/tracker.php:388
 msgid "File Delete"
 msgstr "檔案移除"
 
-#: common/tracker/actions/tracker.php:396
+#: common/tracker/actions/tracker.php:391
 msgid "File Delete: Successful"
 msgstr "檔案移除：成功"
 
-#: common/tracker/actions/tracker.php:407
+#: common/tracker/actions/tracker.php:402
 #, fuzzy, php-format
 msgid "Item %s successfully updated"
 msgstr "項目成功創造"
 
-#: common/tracker/actions/tracker.php:436
-#: common/tracker/actions/tracker.php:453
+#: common/tracker/actions/tracker.php:431
+#: common/tracker/actions/tracker.php:448
 #, fuzzy
 msgid "Monitoring Deactivated"
 msgstr "監視已取消"
 
-#: common/tracker/actions/tracker.php:501
+#: common/tracker/actions/tracker.php:496
 msgid "Confirmation failed. Artifact not deleted"
 msgstr "確認失敗，自訂類型不能刪除"
 
-#: common/tracker/actions/tracker.php:507
+#: common/tracker/actions/tracker.php:502
 msgid "Artifact Deleted Successfully"
 msgstr "自訂類型成功刪除"
 
@@ -13804,7 +13804,7 @@ msgid "Create new repository:"
 msgstr "建立新的回應："
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:629
-#: plugins/scmgit/common/GitPlugin.class.php:1091
+#: plugins/scmgit/common/GitPlugin.class.php:1092
 #: plugins/scmhg/common/HgPlugin.class.php:625
 #, fuzzy
 msgid "Repository name"
@@ -13956,73 +13956,73 @@ msgstr ""
 msgid "Updates"
 msgstr "更新"
 
-#: plugins/scmgit/common/GitPlugin.class.php:965
+#: plugins/scmgit/common/GitPlugin.class.php:966
 #, fuzzy
 msgid "Git Commits"
 msgstr "評論"
 
-#: plugins/scmgit/common/GitPlugin.class.php:983
+#: plugins/scmgit/common/GitPlugin.class.php:984
 msgid "Cannot create a secondary repository with the same name as the primary"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:988
+#: plugins/scmgit/common/GitPlugin.class.php:989
 #: plugins/scmhg/common/HgPlugin.class.php:534
 #, fuzzy
 msgid "This repository name is not valid"
 msgstr "不正確會員"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1001
+#: plugins/scmgit/common/GitPlugin.class.php:1002
 #: plugins/scmhg/common/HgPlugin.class.php:529
 #: plugins/scmhg/common/HgPlugin.class.php:545
 #, fuzzy, php-format
 msgid "A repository %s already exists"
 msgstr "查詢已經存在"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1026
+#: plugins/scmgit/common/GitPlugin.class.php:1027
 msgid "Invalid URL from which to clone"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1035
+#: plugins/scmgit/common/GitPlugin.class.php:1036
 #, fuzzy, php-format
 msgid "Clone of %s"
 msgstr "電話："
 
-#: plugins/scmgit/common/GitPlugin.class.php:1085
+#: plugins/scmgit/common/GitPlugin.class.php:1086
 #, fuzzy, php-format
 msgid "No extra Git repository for project %1$s"
 msgstr "專案資料庫統計"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1087
+#: plugins/scmgit/common/GitPlugin.class.php:1088
 #, fuzzy, php-format
 msgid "Extra Git repository for project %1$s"
 msgid_plural "Extra Git repositories for project %1$s"
 msgstr[0] "專案資料庫統計"
 msgstr[1] "專案資料庫統計"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1091
+#: plugins/scmgit/common/GitPlugin.class.php:1092
 #, fuzzy
 msgid "Initial repository description"
 msgstr "簡短說明"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1091
+#: plugins/scmgit/common/GitPlugin.class.php:1092
 msgid "Initial clone URL (if any)"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1108
+#: plugins/scmgit/common/GitPlugin.class.php:1109
 #, fuzzy, php-format
 msgid "Create new Git repository for project %1$s"
 msgstr "專案資料庫統計"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1115
+#: plugins/scmgit/common/GitPlugin.class.php:1116
 #, fuzzy
 msgid "Repository name:"
 msgstr "原始碼版本控制系統資料庫"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1117
+#: plugins/scmgit/common/GitPlugin.class.php:1118
 msgid "Description:"
 msgstr "說明："
 
-#: plugins/scmgit/common/GitPlugin.class.php:1119
+#: plugins/scmgit/common/GitPlugin.class.php:1120
 msgid ""
 "Initial clone URL (or name of an existing repository in this project; leave "
 "empty to start with an empty repository):"
@@ -22609,11 +22609,6 @@ msgstr "新增一個問題"
 msgid "Cannot get Survey Question"
 msgstr "問卷問題"
 
-#: www/survey/admin/question.php:78
-#, fuzzy
-msgid "Delete successful"
-msgstr "檔案移除：成功"
-
 #: www/survey/admin/question.php:119
 #, fuzzy
 msgid "No questions found"
@@ -23239,6 +23234,10 @@ msgstr "帳號"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "我的個人首頁"
+
+#, fuzzy
+#~ msgid "Delete successful"
+#~ msgstr "檔案移除：成功"
 
 #~ msgid "Error inserting an element"
 #~ msgstr "錯誤插入一個組成元件"
