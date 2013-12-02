@@ -55,8 +55,8 @@ class Survey extends Error {
      * @param $Group
      * @param bool $survey_id
      * @param bool $arr
-     * @internal param \The $object Group object to which this servey is associated.
-     * @internal param \The $int servey_id.
+     * @internal param \The $object Group object to which this survey is associated.
+     * @internal param \The $int survey_id.
      * @internal param \The $array associative array of data.
      * @return \Survey
      */
@@ -249,7 +249,7 @@ class Survey extends Error {
 	/**
 	 * fetchData - re-fetch the data for this survey from the database.
 	 *
-	 * @param	int	The survey_id.
+	 * @param	int	$survey_id The survey_id.
 	 * @return	boolean	success.
 	 */
 	function fetchData($survey_id) {
@@ -286,7 +286,7 @@ class Survey extends Error {
 	}
 
 	/**
-	 *	isActriv - return if it is active
+	 *	isActive - return if it is active
 	 *
 	 *	@return	int	is active
 	 */
@@ -342,7 +342,7 @@ class Survey extends Error {
 	/**
 	 *	isUserVote - Figure out the user voted or not
 	 *
-	 *	@param  int user_id
+	 *	@param  int $user_id
 	 *	@return true of false
 	 */
 	function isUserVote($user_id) {
@@ -454,11 +454,10 @@ class Survey extends Error {
 		$this->all_question_array = & $sqf->getSurveyQuestions();
 	}
 
-
 	/**
 	 * _isValidQuestionID - Check it is correct question id
 	 *
-	 * @param	int	questioin id
+	 * @param	int	$question_id question id
 	 * @return	boolean	true if it is valid question id
 	 */
 	function _isValidQuestionID($question_id) {
@@ -474,11 +473,10 @@ class Survey extends Error {
 		return false;
 	}
 
-
 	/**
 	 * _makeQuestionString - Make comma separated question number string
 	 *
-	 * @param	int array	Array of question number
+	 * @param	int $arr array	Array of question number
 	 * @return	string		question_strong (example: 1, 2, 3, 7);
 	 */
 	function _makeQuestionString($arr) {
@@ -491,7 +489,7 @@ class Survey extends Error {
 	}
 
 	/**
-	 * _updateQuestionString - Update comma saparated question number string
+	 * _updateQuestionString - Update comma separated question number string
 	 *
 	 * @param	int array	Array of questions to add
 	 * @param	int array	Array of questions to delete
@@ -528,22 +526,22 @@ class Survey extends Error {
 			$arr = $new_arr;
 		}
 
-		/* converty array to String */
+		/* convert array to String */
 		return $this->_makeQuestionString($arr);
 	}
 
 	/**
 	 * _updateArrayOrder - Update array order
 	 *
-	 * @param	int	question number
-	 * @param	int	increment or decrement (must be 1 or -1)
+	 * @param	int	$question_number
+	 * @param	int	$delta increment or decrement (must be 1 or -1)
 	 * @return	string	question_strong (example: 1, 2, 3, 7);
 	 */
 	function _updateQuestionStringOrder($question_number, $delta) {
 		/* Get array of current question string */
 		$arr = & $this->getQuestionArray();
 
-		/* We are expectiong array */
+		/* We are expecting array */
 		if (!$arr || !is_array($arr)) {
 			return $this->getQuestionString();
 		}
@@ -569,7 +567,7 @@ class Survey extends Error {
 		$arr[$index] = $arr[$new_index];
 		$arr[$new_index] = $tmp;
 
-		/* converty array to String */
+		/* convert array to String */
 		return $this->_makeQuestionString($arr);
 	}
 }
