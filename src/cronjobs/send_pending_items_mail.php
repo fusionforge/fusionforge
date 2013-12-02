@@ -73,13 +73,13 @@ function send_pending_pm_items_mail(){
 			$language=db_result($userres,$usercount,"language");
 			setup_gettext_from_language_id($language);
 			$subject=_('Pending task manager items notification');
-			$messagebody = stripcslashes(_('This mail is sent to you to remind you of pending/overdue tasks.') . ' '
+			$messagebody = _('This mail is sent to you to remind you of pending/overdue tasks.') . ' '
 										. sprintf(_('The task manager item #%s is pending'), $project_task_id)._(': ') . "\n"
 										. _('Task Summary')._(': ') . $summary . "\n"
 										. _('Submitted by')._(': ') . $user_name . "\n"
 										. _('Status')._(': ') . $status_name . "\n"
 										. _('Percent Complete')._(': ') . db_result($res, $i,'percent_complete') . "\n\n"
-										. sprintf(_('Click here to visit the item %s'), $hyperlink));
+										. sprintf(_('Click here to visit the item %s'), $hyperlink);
 			util_send_message($mailto,$subject,$messagebody);
 		}
 	}
@@ -111,7 +111,7 @@ function send_pending_tracker_items_mail(){
 			$language=db_result($userres,$usercount,"language");
 			setup_gettext_from_language_id($language);
 			$subject=_('Pending tracker items notification');
-            $messagebody = stripcslashes(_('This mail is sent to you to remind you of pending/overdue tracker items.') . ' '
+            $messagebody = _('This mail is sent to you to remind you of pending/overdue tracker items.') . ' '
                                         . sprintf(_('The item #%s is pending'), $artifact)._(': ') . "\n"
                                         . _('Summary')._(': ') . $summary . "\n"
                                         . _('Status')._(': ') . $status_name . "\n"
@@ -119,7 +119,7 @@ function send_pending_tracker_items_mail(){
                                         . _('Assigned to')._(': ') . db_result($res,$tmp,'submitted_realname') . "\n"
                                         . _('Submitted by')._(': ') . db_result($res,$tmp,'submitted_realname') . "\n"
                                         . _('Details')._(': ') . $detail . "\n\n"
-                                        . sprintf(_('Click here to visit the item %s'), $hyperlink));
+                                        . sprintf(_('Click here to visit the item %s'), $hyperlink);
 			/* and finally send the email */
 			util_send_message($mailto,$subject,$messagebody);
 		}
