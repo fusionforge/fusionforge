@@ -48,7 +48,7 @@ if (getStringFromRequest('add_extrafield')) {
 //		$error_msg .= $ab->getErrorMessage();
 	} else {
 		if (!$ab->create($name,$field_type,$attribute1,$attribute2,$is_required,$alias)) {
-			$error_msg .= _('Error inserting a custom field').': '.$ab->getErrorMessage();
+			$error_msg .= _('Error inserting a custom field')._(': ').$ab->getErrorMessage();
 			$ab->clearError();
 		} else {
 			$feedback .= _('Extra field inserted');
@@ -104,7 +104,7 @@ if (getStringFromRequest('add_extrafield')) {
 			$name = getStringFromRequest('name');
 			$status_id = getIntFromRequest('status_id');
 			if (!$ao->create($name,$status_id)) {
-				$error_msg .= _('Error inserting an element').': '.$ao->getErrorMessage();
+				$error_msg .= _('Insert Error')._(': ').$ao->getErrorMessage();
 				$ao->clearError();
 			} else {
 				$feedback .= _('Element inserted');
@@ -126,7 +126,7 @@ if (getStringFromRequest('add_extrafield')) {
 //		$error_msg .= $acr->getErrorMessage();
 	} else {
 		if (!$acr->create($title,$body)) {
-			$error_msg .= _('Error inserting').' : '.$acr->getErrorMessage();
+			$error_msg .= _('Insert Error')._(': ').$acr->getErrorMessage();
 			$acr->clearError();
 		} else {
 			$feedback .= _('Canned Response Inserted');
@@ -148,7 +148,7 @@ if (getStringFromRequest('add_extrafield')) {
 		$error_msg .= $acr->getErrorMessage();
 	} else {
 		if (!$acr->update($title,$body)) {
-			$error_msg .= _('Error updating').' : '.$acr->getErrorMessage();
+			$error_msg .= _('Update failed')._(': ').$acr->getErrorMessage();
 			$acr->clearError();
 		} else {
 			$feedback .= _('Canned Response Updated');
@@ -203,7 +203,7 @@ if (getStringFromRequest('add_extrafield')) {
 					$name=$ath->getElementName($copyid[$k]);
 					$status=$ath->getElementStatusID($copyid[$k]);
 					if (!$aefe->create($name,$status)) {
-						$error_msg .= _('Error inserting an element').': '.$aefe->getErrorMessage();
+						$error_msg .= _('Insert Error')._(': ').$aefe->getErrorMessage();
 						$aefe->clearError();
 					} else {
 						$feedback .= '- Copied choice:'. $name;
@@ -232,7 +232,7 @@ if (getStringFromRequest('add_extrafield')) {
 		$error_msg .= $ac->getErrorMessage();
 	} else {
 		if (!$ac->update($name,$attribute1,$attribute2,$is_required,$alias)) {
-			$error_msg .= _('Error updating a custom field').' : '.$ac->getErrorMessage();
+			$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
 			$ac->clearError();
 		} else {
 			$feedback .= _('Custom Field updated');
@@ -263,7 +263,7 @@ if (getStringFromRequest('add_extrafield')) {
 			$name = getStringFromRequest('name');
 			$status_id = getIntFromRequest('status_id');
 			if (!$ao->update($name,$status_id)) {
-				$error_msg .= _('Error updating a custom field').' : '.$ao->getErrorMessage();
+				$error_msg .= _('Update failed')._(': ').$ao->getErrorMessage();
 				$ao->clearError();
 			} else {
 				$feedback .= _('Element updated');
@@ -304,7 +304,7 @@ if (getStringFromRequest('add_extrafield')) {
 
 	if (!$ath->update($name,$description,$email_all,$email_address,
 		$due_period,$status_timeout,$use_resolution,$submit_instructions,$browse_instructions)) {
-		$error_msg .= _('Error updating').' : '.$ath->getErrorMessage();
+		$error_msg .= _('Update failed')._(': ').$ath->getErrorMessage();
 		$ath->clearError();
 	} else {
 		$feedback .= _('Tracker Updated');
@@ -432,7 +432,7 @@ if (getStringFromRequest('add_extrafield')) {
 		$feedback .= _('Tracker Updated');
 	}
 	else {
-		$error_msg .= _('Error updating').' : '.$ath->getErrorMessage();
+		$error_msg .= _('Update failed')._(': ').$ath->getErrorMessage();
 		$ath->clearError();
 	}
 
@@ -444,7 +444,7 @@ if (getStringFromRequest('add_extrafield')) {
 	$really_sure = getStringFromRequest('really_sure');
 
 	if (!$ath->delete($sure,$really_sure)) {
-		$error_msg .= _('Error updating').' : '.$ath->getErrorMessage();
+		$error_msg .= _('Update failed')._(': ').$ath->getErrorMessage();
 	} else {
 		session_redirect('/tracker/admin/?group_id='.$group_id.'&tracker_deleted=1');
 	}
@@ -475,7 +475,7 @@ if (getStringFromRequest('add_extrafield')) {
 		$error_msg .= $ac->getErrorMessage();
 	} else {
 		if (!$ac->reorderValues($id, $new_pos)) {
-			$error_msg .= _('Error updating a custom field').' : '.$ac->getErrorMessage();
+			$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
 			$ac->clearError();
 		} else {
 			$feedback .= _('Tracker Updated');
@@ -498,7 +498,7 @@ if (getStringFromRequest('add_extrafield')) {
 		foreach ($order as $id => $new_pos) {
 			if ($new_pos == '') continue;
 			if (!$ac->reorderValues($id, $new_pos)) {
-				$error_msg .= _('Error updating a custom field').' : '.$ac->getErrorMessage();
+				$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
 				$ac->clearError();
 				continue;
 			}
@@ -519,7 +519,7 @@ if (getStringFromRequest('add_extrafield')) {
 		$error_msg .= $ac->getErrorMessage();
 	} else {
 		if (!$ac->alphaorderValues()) {
-			$error_msg .= _('Error updating a custom field').' : '.$ac->getErrorMessage();
+			$error_msg .= _('Update failed')._(': ').$ac->getErrorMessage();
 			$ac->clearError();
 		} else {
 			$feedback .= _('Tracker Updated');

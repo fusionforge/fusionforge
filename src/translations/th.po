@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-28 18:37+0100\n"
+"POT-Creation-Date: 2013-12-02 11:11+0100\n"
 "PO-Revision-Date: 2013-06-03 17:16+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -224,6 +224,19 @@ msgstr ""
 #: common/mail/MailingListFactory.class.php:103
 #: common/reporting/report_utils.php:27
 #: common/search/SearchQuery.class.php:120
+#: common/tracker/actions/admin-updates.php:51
+#: common/tracker/actions/admin-updates.php:107
+#: common/tracker/actions/admin-updates.php:129
+#: common/tracker/actions/admin-updates.php:151
+#: common/tracker/actions/admin-updates.php:206
+#: common/tracker/actions/admin-updates.php:235
+#: common/tracker/actions/admin-updates.php:266
+#: common/tracker/actions/admin-updates.php:307
+#: common/tracker/actions/admin-updates.php:435
+#: common/tracker/actions/admin-updates.php:447
+#: common/tracker/actions/admin-updates.php:478
+#: common/tracker/actions/admin-updates.php:501
+#: common/tracker/actions/admin-updates.php:522
 #: common/tracker/actions/browse.php:402 common/tracker/actions/browse.php:405
 #: common/tracker/actions/browse.php:749 common/tracker/actions/detail.php:140
 #: common/tracker/actions/mod-limited.php:164
@@ -2221,6 +2234,15 @@ msgstr "จะบันทึกได้ก็ต่อเมื่อได้
 #: common/forum/Forum.class.php:606 common/survey/Survey.class.php:180
 #: common/survey/Survey.class.php:218
 #: common/survey/SurveyQuestion.class.php:151
+#: common/tracker/actions/admin-updates.php:151
+#: common/tracker/actions/admin-updates.php:235
+#: common/tracker/actions/admin-updates.php:266
+#: common/tracker/actions/admin-updates.php:307
+#: common/tracker/actions/admin-updates.php:435
+#: common/tracker/actions/admin-updates.php:447
+#: common/tracker/actions/admin-updates.php:478
+#: common/tracker/actions/admin-updates.php:501
+#: common/tracker/actions/admin-updates.php:522
 #: common/tracker/Artifact.class.php:1141
 #: plugins/mailman/include/MailmanList.class.php:247
 #: plugins/mailman/include/MailmanList.class.php:372
@@ -4029,6 +4051,9 @@ msgid ""
 msgstr ""
 
 #: common/include/User.class.php:436 common/survey/Survey.class.php:129
+#: common/tracker/actions/admin-updates.php:107
+#: common/tracker/actions/admin-updates.php:129
+#: common/tracker/actions/admin-updates.php:206
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: www/people/admin/index.php:52 www/people/admin/index.php:65
@@ -4873,11 +4898,6 @@ msgstr ""
 msgid "Custom Field Deleted"
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:107
-#: common/tracker/actions/admin-updates.php:206
-msgid "Error inserting an element"
-msgstr ""
-
 #: common/tracker/actions/admin-updates.php:110
 msgid "Element inserted"
 msgstr ""
@@ -4888,19 +4908,8 @@ msgstr ""
 msgid "Unable to create ArtifactCanned Object"
 msgstr ""
 
-#: common/tracker/actions/admin-updates.php:129
-msgid "Error inserting"
-msgstr ""
-
 #: common/tracker/actions/admin-updates.php:132
 msgid "Canned Response Inserted"
-msgstr ""
-
-#: common/tracker/actions/admin-updates.php:151
-#: common/tracker/actions/admin-updates.php:307
-#: common/tracker/actions/admin-updates.php:435
-#: common/tracker/actions/admin-updates.php:447
-msgid "Error updating"
 msgstr ""
 
 #: common/tracker/actions/admin-updates.php:154
@@ -4915,14 +4924,6 @@ msgstr ""
 
 #: common/tracker/actions/admin-updates.php:184
 msgid "Copy into Tracker: "
-msgstr ""
-
-#: common/tracker/actions/admin-updates.php:235
-#: common/tracker/actions/admin-updates.php:266
-#: common/tracker/actions/admin-updates.php:478
-#: common/tracker/actions/admin-updates.php:501
-#: common/tracker/actions/admin-updates.php:522
-msgid "Error updating a custom field"
 msgstr ""
 
 #: common/tracker/actions/admin-updates.php:238
@@ -5007,9 +5008,7 @@ msgid "Unassigned"
 msgstr ""
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:553
-#: common/tracker/actions/query.php:196 common/tracker/actions/tracker.php:166
-#: common/tracker/actions/tracker.php:168
-#: common/tracker/actions/tracker.php:217
+#: common/tracker/actions/query.php:196
 #: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:134
 #: www/admin/search.php:72 www/admin/search.php:147 www/my/dashboard.php:64
 #: www/pm/admin/index.php:189 www/pm/index.php:98

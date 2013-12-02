@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-28 18:37+0100\n"
+"POT-Creation-Date: 2013-12-02 11:11+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -236,6 +236,19 @@ msgstr ""
 #: common/mail/MailingListFactory.class.php:103
 #: common/reporting/report_utils.php:27
 #: common/search/SearchQuery.class.php:120
+#: common/tracker/actions/admin-updates.php:51
+#: common/tracker/actions/admin-updates.php:107
+#: common/tracker/actions/admin-updates.php:129
+#: common/tracker/actions/admin-updates.php:151
+#: common/tracker/actions/admin-updates.php:206
+#: common/tracker/actions/admin-updates.php:235
+#: common/tracker/actions/admin-updates.php:266
+#: common/tracker/actions/admin-updates.php:307
+#: common/tracker/actions/admin-updates.php:435
+#: common/tracker/actions/admin-updates.php:447
+#: common/tracker/actions/admin-updates.php:478
+#: common/tracker/actions/admin-updates.php:501
+#: common/tracker/actions/admin-updates.php:522
 #: common/tracker/actions/browse.php:402 common/tracker/actions/browse.php:405
 #: common/tracker/actions/browse.php:749 common/tracker/actions/detail.php:140
 #: common/tracker/actions/mod-limited.php:164
@@ -2348,6 +2361,15 @@ msgstr "Sie können nur speichern, wenn Sie auch angemeldet sind."
 #: common/forum/Forum.class.php:606 common/survey/Survey.class.php:180
 #: common/survey/Survey.class.php:218
 #: common/survey/SurveyQuestion.class.php:151
+#: common/tracker/actions/admin-updates.php:151
+#: common/tracker/actions/admin-updates.php:235
+#: common/tracker/actions/admin-updates.php:266
+#: common/tracker/actions/admin-updates.php:307
+#: common/tracker/actions/admin-updates.php:435
+#: common/tracker/actions/admin-updates.php:447
+#: common/tracker/actions/admin-updates.php:478
+#: common/tracker/actions/admin-updates.php:501
+#: common/tracker/actions/admin-updates.php:522
 #: common/tracker/Artifact.class.php:1141
 #: plugins/mailman/include/MailmanList.class.php:247
 #: plugins/mailman/include/MailmanList.class.php:372
@@ -3639,9 +3661,8 @@ msgid "News"
 msgstr "Neuigkeiten"
 
 #: common/include/MailParser.class.php:35
-#, fuzzy
 msgid "Error: file too large"
-msgstr "Fehler - abgeschaltetes Feature."
+msgstr "Fehler: Datei zu groß"
 
 #: common/include/MailParser.class.php:85
 msgid "Error - only text/plain supported at this time"
@@ -4299,9 +4320,8 @@ msgid "No admin users ?"
 msgstr ""
 
 #: common/include/Storage.class.php:56
-#, fuzzy
 msgid "Cannot create directory:"
-msgstr "Datei kann nicht zum aktuellen Ort verschoben werden"
+msgstr ""
 
 #: common/include/Storage.class.php:66
 #, fuzzy, php-format
@@ -4360,6 +4380,9 @@ msgstr ""
 "Personen-Suche,um Ihren Anmeldenamen wiederzufinden."
 
 #: common/include/User.class.php:436 common/survey/Survey.class.php:129
+#: common/tracker/actions/admin-updates.php:107
+#: common/tracker/actions/admin-updates.php:129
+#: common/tracker/actions/admin-updates.php:206
 #: common/tracker/ArtifactExtraField.class.php:187
 #: common/tracker/ArtifactExtraField.class.php:193
 #: www/people/admin/index.php:52 www/people/admin/index.php:65
@@ -5243,7 +5266,7 @@ msgstr "Anzeige für den Tracker Anpassen."
 #: common/tracker/actions/admin-tracker.php:64
 #, fuzzy
 msgid "Manage Canned Responses"
-msgstr "Vorgefertigte Antworten an %s hinzufügen/aktualisieren"
+msgstr "Benutze vorgespeicherte Antwort"
 
 #: common/tracker/actions/admin-tracker.php:66
 msgid "Create/change generic response messages for the tracker."
@@ -5292,11 +5315,6 @@ msgstr "Extrafeld eingefügt"
 msgid "Custom Field Deleted"
 msgstr "Anpassbares Feld Gelöscht"
 
-#: common/tracker/actions/admin-updates.php:107
-#: common/tracker/actions/admin-updates.php:206
-msgid "Error inserting an element"
-msgstr "Fehler beim Einfügen eines Elementes"
-
 #: common/tracker/actions/admin-updates.php:110
 msgid "Element inserted"
 msgstr "Element eingefügt"
@@ -5307,20 +5325,9 @@ msgstr "Element eingefügt"
 msgid "Unable to create ArtifactCanned Object"
 msgstr "Außerstande ein ArtifactCanned Objekt anzulegen"
 
-#: common/tracker/actions/admin-updates.php:129
-msgid "Error inserting"
-msgstr "Fehler beim Einfügen"
-
 #: common/tracker/actions/admin-updates.php:132
 msgid "Canned Response Inserted"
 msgstr "Vorgespeicherte Antwort eingefügt"
-
-#: common/tracker/actions/admin-updates.php:151
-#: common/tracker/actions/admin-updates.php:307
-#: common/tracker/actions/admin-updates.php:435
-#: common/tracker/actions/admin-updates.php:447
-msgid "Error updating"
-msgstr "Fehler beim Aktualisieren"
 
 #: common/tracker/actions/admin-updates.php:154
 msgid "Canned Response Updated"
@@ -5335,14 +5342,6 @@ msgstr "ArtifactType konnte nicht angelegt werden"
 #: common/tracker/actions/admin-updates.php:184
 msgid "Copy into Tracker: "
 msgstr "In den Tracker hinein kopieren: "
-
-#: common/tracker/actions/admin-updates.php:235
-#: common/tracker/actions/admin-updates.php:266
-#: common/tracker/actions/admin-updates.php:478
-#: common/tracker/actions/admin-updates.php:501
-#: common/tracker/actions/admin-updates.php:522
-msgid "Error updating a custom field"
-msgstr "Fehler beim Aktualisieren eines Extrafeldnamens"
 
 #: common/tracker/actions/admin-updates.php:238
 msgid "Custom Field updated"
@@ -5432,9 +5431,7 @@ msgid "Unassigned"
 msgstr "Nicht zugeordnet"
 
 #: common/tracker/actions/browse.php:195 common/tracker/actions/browse.php:553
-#: common/tracker/actions/query.php:196 common/tracker/actions/tracker.php:166
-#: common/tracker/actions/tracker.php:168
-#: common/tracker/actions/tracker.php:217
+#: common/tracker/actions/query.php:196
 #: common/tracker/views/form-addcanned.php:40 www/admin/massmail.php:134
 #: www/admin/search.php:72 www/admin/search.php:147 www/my/dashboard.php:64
 #: www/pm/admin/index.php:189 www/pm/index.php:98
@@ -6484,7 +6481,7 @@ msgstr "Die E-Mail-Adresse(n) erscheint ungültig"
 #: common/tracker/ArtifactType.class.php:978
 #, fuzzy
 msgid "Tracker name already used"
-msgstr "Gruppenname bereits verwendet"
+msgstr "Trackername bereits verwendet"
 
 #: common/tracker/ArtifactTypeFactory.class.php:67
 #, php-format
@@ -10398,9 +10395,8 @@ msgstr "FTP Projektverzeichnis"
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:114
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:79
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:46
-#, fuzzy
 msgid "Edit this link"
-msgstr "Bearbeiten Sie dieses Kennzeichen"
+msgstr ""
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:82
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:115
@@ -11426,14 +11422,12 @@ msgid "No project found in MantisBT"
 msgstr "Kein solches Posting für dieses Projekt"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:251
-#, fuzzy
 msgid "Cannot delete in database"
-msgstr "Kann Kennzeichen nicht löschen: %s"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:289
-#, fuzzy
 msgid "Update MantisBT project"
-msgstr "Vorgängerprojekt"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:293
 #, fuzzy
@@ -11449,9 +11443,8 @@ msgid "View the roadmap, per version tickets"
 msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:399
-#, fuzzy
 msgid "View all tickets."
-msgstr "Definieren Sie Ihre Pakete"
+msgstr ""
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:404
 msgid "Statistics"
@@ -11677,9 +11670,8 @@ msgid "Manage categories"
 msgstr "Verwalte Zeitverfolgungskategorien"
 
 #: plugins/mantisbt/view/admin/viewCategorie.php:61
-#, fuzzy
 msgid "Rename"
-msgstr "Richtiger Name"
+msgstr ""
 
 #: plugins/mantisbt/view/admin/viewCategorie.php:75
 msgid "No Categories"
@@ -11726,9 +11718,8 @@ msgstr "Version"
 
 #: plugins/mantisbt/view/editIssue.php:84
 #: plugins/mantisbt/view/viewIssue.php:130
-#, fuzzy
 msgid "Edit ticket"
-msgstr "FTP Projektverzeichnis"
+msgstr ""
 
 #: plugins/mantisbt/view/editIssue.php:91
 #: plugins/mantisbt/view/viewIssue.php:60
@@ -12338,9 +12329,8 @@ msgid "Error in curl : "
 msgstr "Fehler beim Hinzufügen des VHOST:"
 
 #: plugins/oauthconsumer/www/get_access_token.php:138
-#, fuzzy
 msgid "New request token received!"
-msgstr "Keine Fragen gefunden"
+msgstr ""
 
 #: plugins/oauthconsumer/www/get_access_token.php:139
 #, fuzzy
@@ -12524,9 +12514,8 @@ msgid "OAuth Provider"
 msgstr "Genehmigen"
 
 #: plugins/oauthprovider/www/consumer_manage.php:46
-#, fuzzy
 msgid "Manage Consumer"
-msgstr "Cron-Manager"
+msgstr ""
 
 #: plugins/oauthprovider/www/consumer_manage.php:49
 msgid "Back"
@@ -12563,9 +12552,8 @@ msgstr ""
 
 #: plugins/oauthprovider/www/consumer.php:95
 #: plugins/oauthprovider/www/consumer.php:119
-#, fuzzy
 msgid "Create Consumer"
-msgstr "Erstellen"
+msgstr ""
 
 #: plugins/oauthprovider/www/consumer_update_page.php:85
 msgid "Regenerate keys & Update Consumer"
@@ -12661,9 +12649,8 @@ msgid "Opening fileinfo database failed"
 msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:164
-#, fuzzy
 msgid "Uploaded files available"
-msgstr "Keine Dateitypen verfügbar"
+msgstr ""
 
 #: plugins/projectimport/common/UploadedFiles.class.php:166
 #: plugins/quota_management/www/quota_admin.php:92
@@ -13098,9 +13085,8 @@ msgid "Successfully removed parent"
 msgstr "Element erfolgreich angelegt"
 
 #: plugins/projects-hierarchy/actions/removeParent.php:34
-#, fuzzy
 msgid "Failed to remove parent"
-msgstr "Außerstande ein ArtifactCanned Objekt anzulegen"
+msgstr ""
 
 #: plugins/projects-hierarchy/actions/updateGlobalConf.php:37
 msgid "Projects Hierarchy global configuration successfully updated."
@@ -13205,9 +13191,8 @@ msgid "Remove child project"
 msgstr "Kindprojekt"
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:47
-#, fuzzy
 msgid "Remove parent project"
-msgstr "Vorgängerprojekt"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:51
 #, fuzzy
@@ -13235,9 +13220,8 @@ msgid "Pending hierarchy request"
 msgstr "Anstehende Anfragen"
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:68
-#, fuzzy
 msgid "Validate parent"
-msgstr "Ungültiger Parameter"
+msgstr ""
 
 #: plugins/projects-hierarchy/view/admin_project_link.php:70
 #: plugins/projects-hierarchy/view/admin_project_link.php:82
@@ -13335,9 +13319,8 @@ msgstr "Vorgängerprojekt"
 
 #: plugins/projects-hierarchy/view/home_project_link.php:37
 #: plugins/projects-hierarchy/view/home_project_link.php:47
-#, fuzzy
 msgid "Direct link to project"
-msgstr "Vorgängerprojekt"
+msgstr ""
 
 #: plugins/quota_management/common/quota_managementPlugin.class.php:50
 #: plugins/quota_management/common/quota_managementPlugin.class.php:66
@@ -13849,9 +13832,8 @@ msgstr ""
 "dem folgenden Kommando ausgecheckt werden."
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:194
-#, fuzzy
 msgid "No repositories to browse"
-msgstr "Quellcode Statistiken"
+msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:624
 #, fuzzy
@@ -14174,9 +14156,8 @@ msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:77
 #: plugins/scmsvn/common/SVNPlugin.class.php:120
-#, fuzzy
 msgid "The password is "
-msgstr "Das Passwort lautet 'anonsvn'"
+msgstr "Das Passwort lautet "
 
 #: plugins/scmhg/common/HgPlugin.class.php:80
 msgid ""
@@ -14439,9 +14420,8 @@ msgstr ""
 
 #: plugins/webanalytics/view/admin/updateLinkValue.php:35
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:59
-#, fuzzy
 msgid "Informative Name"
-msgstr "Name des Forums"
+msgstr ""
 
 #: plugins/webanalytics/view/admin/updateLinkValue.php:37
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
@@ -14723,9 +14703,11 @@ msgid "Congratulations. You have changed your password."
 msgstr "Willkommen %s. Sie können nun Ihr Passwort ändern."
 
 #: www/account/change_pw.php:80
-#, fuzzy, php-format
+#, php-format
 msgid "You should now <a href=\"%s\">Return to User Prefs</a>."
-msgstr "Sie sollten jetzt %1$s zu den Benutzereinstellungen zurückkehren %2$s."
+msgstr ""
+"Sie sollten jetzt <a href=\"%s\">zu den Benutzereinstellungen zurückkehren </"
+"a>."
 
 #: www/account/change_pw.php:87 www/account/index.php:152
 #: www/admin/userlist.php:121
@@ -14756,9 +14738,8 @@ msgid "Manage Authorized Keys"
 msgstr "gemeinsam benutzte, authorisierte CVS/SSH Schlüssel"
 
 #: www/account/editsshkeys.php:50
-#, fuzzy
 msgid "Available keys"
-msgstr "keine ansprechbaren Tracker gefunden"
+msgstr ""
 
 #: www/account/editsshkeys.php:51 www/account/index.php:292
 msgid "Algorithm"
@@ -15036,7 +15017,7 @@ msgstr ""
 
 #: www/account/lostlogin.php:87
 msgid "Lost Password Login"
-msgstr "[Passwort vergessen?]"
+msgstr "Passwort vergessen"
 
 #: www/account/lostlogin.php:90
 #, php-format
@@ -15144,9 +15125,8 @@ msgstr ""
 "nicht akzeptiert haben."
 
 #: www/account/register.php:98
-#, fuzzy
 msgid "Register Confirmation"
-msgstr "Weitere Informationen"
+msgstr ""
 
 #: www/account/register.php:103
 msgid ""
@@ -15317,9 +15297,8 @@ msgid "FRS Release"
 msgstr "FRS Version"
 
 #: www/activity/index.php:124
-#, fuzzy
 msgid "New Documents"
-msgstr "Neues Projekt hinzufügen"
+msgstr "Neue Dokumente"
 
 #: www/activity/index.php:126
 #, fuzzy
@@ -16243,14 +16222,14 @@ msgid "Deactivate"
 msgstr "Deaktivieren"
 
 #: www/admin/pluginman.php:227
-#, fuzzy, php-format
+#, php-format
 msgid "%d users"
-msgstr "Nutzer hinzufügen"
+msgstr "%d Benutzer"
 
 #: www/admin/pluginman.php:246
-#, fuzzy, php-format
+#, php-format
 msgid "%d projects"
-msgstr "%1$s Projekte"
+msgstr "%d Projekte"
 
 #: www/admin/pluginman.php:257
 msgid "Inactive"
@@ -16905,9 +16884,8 @@ msgid "Unable to open ZIP archive for download as ZIP"
 msgstr ""
 
 #: www/docman/view.php:200 www/docman/view.php:245
-#, fuzzy
 msgid "Unable to fill ZIP file."
-msgstr "Kein Zugriff auf Liste %s möglich."
+msgstr ""
 
 #: www/docman/view.php:204
 msgid "Unable to fill ZIP archive for download as ZIP"
@@ -19167,7 +19145,7 @@ msgstr "Nachrichten aus der Nachrichtengruppe abzuschicken ist nicht erlaubt."
 #: www/news/submit.php:107
 #, fuzzy
 msgid "Error: insert failed."
-msgstr "Fehler beim Einfügen"
+msgstr "Fehler beim Einfügen."
 
 #: www/news/submit.php:110
 msgid "News Added."
@@ -21444,7 +21422,7 @@ msgid ""
 msgstr ""
 "Ihr Projekt wurde den %1$s Administratoren vorgeschlagen. Innerhalb von 72 "
 "Stunden werden Sie eine Benachrichtigung mit der Entscheidung und weiteren "
-"Instruktionen erhalten.</p><p>Danke, daß Sie %1$s gewählt haben."
+"Instruktionen erhalten."
 
 #: www/register/index.php:178
 msgid ""
@@ -22458,9 +22436,8 @@ msgid "Browse by Language"
 msgstr "Nach Sprache durchsuchen"
 
 #: www/snippet/package.php:57
-#, fuzzy
 msgid "Error doing snippet package insert"
-msgstr "Fehler - Schnipsel Paket existiert nicht"
+msgstr "Fehler beim einfügen von Schnipsel Paket Version"
 
 #: www/snippet/package.php:58 www/snippet/package.php:76
 #: www/snippet/package.php:127
@@ -22900,9 +22877,8 @@ msgid "Page view: no graph to display."
 msgstr ""
 
 #: www/stats/site_stats_utils.php:587
-#, fuzzy
 msgid "New users"
-msgstr "Nutzer hinzufügen"
+msgstr "Neue Benutzer"
 
 #: www/stats/site_stats_utils.php:588
 #, fuzzy
@@ -23601,6 +23577,18 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
+
+#~ msgid "Error inserting an element"
+#~ msgstr "Fehler beim Einfügen eines Elementes"
+
+#~ msgid "Error inserting"
+#~ msgstr "Fehler beim Einfügen"
+
+#~ msgid "Error updating"
+#~ msgstr "Fehler beim Aktualisieren"
+
+#~ msgid "Error updating a custom field"
+#~ msgstr "Fehler beim Aktualisieren eines Extrafeldnamens"
 
 #~ msgid "Version:"
 #~ msgstr "Version:"
