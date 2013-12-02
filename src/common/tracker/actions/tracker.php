@@ -152,7 +152,6 @@ switch (getStringFromRequest('func')) {
 		$assigned_to = getStringFromRequest('assigned_to');
 		$canned_response = getIntFromRequest("canned_response");
 		$extra_fields = getArrayFromRequest('extra_fields');
-		$was_error=false;
 
 		$count=count($artifact_id_list);
 
@@ -210,19 +209,14 @@ switch (getStringFromRequest('func')) {
 				}
 
 				if (!$ah->update($_priority,$_status_id,$_assigned_to,$_summary,$canned_response,'',$artifact_type_id,$ef)) {
-					$was_error=true;
-				}
-
-				if ($was_error) {
-					$error_msg .= '[#'.$artifact_id_list[$i].']'._(': ').$ah->getErrorMessage().'<br />';
-				} else {
-					$was_error=false;
+					$error_msg .= $ah->getStringID()._(': ').$ah->getErrorMessage().'<br />';
 				}
 			}
 			unset($ah);
 
-		if (!$was_error) {
-			$feedback = _('Updated Successfully');			}
+			if (!$error_msg) {
+				$feedback = _('Updated Successfully');
+			}
 		}
 		unset ($extra_fields_choice);
 		include $gfcommon.'tracker/actions/browse.php';
