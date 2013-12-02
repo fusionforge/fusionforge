@@ -43,6 +43,7 @@ if ($ath->isError()) {
 		exit_error($ath->getErrorMessage(),'tracker');
 	}
 }
+$error_msg = '';
 switch (getStringFromRequest('func')) {
 
 	case 'add' : {
