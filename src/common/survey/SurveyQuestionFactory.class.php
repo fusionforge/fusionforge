@@ -38,7 +38,7 @@ class SurveyQuestionFactory extends Error {
 	/**
 	 * The question array.
 	 *
-	 * @var	 array	questionss.
+	 * @var	 array	questions
 	 */
 	var $questions;
 

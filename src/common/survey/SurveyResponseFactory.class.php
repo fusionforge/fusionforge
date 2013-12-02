@@ -128,7 +128,7 @@ class SurveyResponseFactory extends Error {
  	 *	@return	array	The array of Survey Response objects.
 	 */
 	function getSurveyResponses() {
-		/* We alread have it */
+		/* We already have it */
 		if ($this->Responses) {
 			return $this->Responses;
 		}
@@ -163,7 +163,7 @@ class SurveyResponseFactory extends Error {
 	 *	@return	array	The array of Survey Response objects.
 	 */
 	function getSurveyAllResponses() {
-		/* We alread have it */
+		/* We already have it */
 		if ($this->Responses) {
 			return $this->Responses;
 		}

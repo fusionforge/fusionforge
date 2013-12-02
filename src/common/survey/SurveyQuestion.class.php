@@ -136,7 +136,7 @@ class SurveyQuestion extends Error {
 			return false;
 		} else {
 			// Current permissions check.
-			// permission should be checked in higer level to faciliate usability
+			// permission should be checked in higher level to facilitate usability
 		}
 
 		$group_id = $this->Group->GetID();
