@@ -102,7 +102,7 @@ class PluginManager extends Error {
 	/**
 	 * isPluginAvailable() - is a plugin available?
 	 *
-	 * @param	string	$pluginname	name of plugin
+	 * @param	string	$plugin	name of plugin
 	 * @return	bool	true if installed
 	 */
 	function isPluginAvailable($plugin) {
