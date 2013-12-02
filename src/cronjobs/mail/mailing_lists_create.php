@@ -304,17 +304,17 @@ for($k = 0; $k < $rows; $k++) {
 	}
 
 	$rm_cmd = forge_get_config('mailman_path')."/bin/rmlist -a $deleted_mail_list";
-    $err .= "Command to be executed is $rm_cmd";
-		passthru($rm_cmd, $failed);
-    if($failed) {
+	$err .= "Command to be executed is $rm_cmd";
+	passthru($rm_cmd, $failed);
+	if($failed) {
 		$err .= 'Failed to remove '.$listname.", skipping\n";
 		echo $err;
 		continue;
-    }
-    $success = false;
-    if (!file_exists(forge_get_config('mailman_data_path')."/lists/$deleted_mail_list")) {
-		 $success = true;
-    }
+	}
+	$success = false;
+	if (!file_exists(forge_get_config('mailman_data_path')."/lists/$deleted_mail_list")) {
+		$success = true;
+	}
 
 	if($success) {
 		$res1 = db_query_params('UPDATE deleted_mailing_lists SET isdeleted = 1 WHERE mailing_list_name = $1',
