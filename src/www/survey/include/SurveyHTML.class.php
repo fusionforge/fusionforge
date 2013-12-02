@@ -127,11 +127,10 @@ class SurveyHTML extends Error {
 		$ret.='<input type="hidden" name="question_id" value="'.$question_id.'" />';
 		$ret.='<input type="hidden" name="form_key" value="' . form_generate_key() . '" />';
 		$ret.=_('Question')._(':').'<br />';
-		$ret.='<input type="text" name="question" value="'.$question.'" size="60" maxlength="150" /></p>';
+		$ret.='<input required="required" type="text" name="question" value="'.$question.'" size="60" maxlength="150" /></p>';
 		$ret.='<p>'. _('Question Type')._(':').'<br />';
 
-		$result = db_query_params ('SELECT * FROM survey_question_types',
-					   array());
+		$result = db_query_params ('SELECT * FROM survey_question_types', array());
 		$ret.= html_build_select_box($result,'question_type',$question_type,false);
 
 		$ret.='</p><p><input type="submit" name="submit" value="'.$question_button.'" /></p>' . "\n";
@@ -609,7 +608,7 @@ class SurveyHTML extends Error {
 				}
 				$ret.= $this->drawGraph($Question->getID(), 'hbar', $legendArr, $valuesArr);
 			} else {
-				$ret.= '<table style="padding-left: 3em" width="100%">';
+				$ret.= '<table style="padding-left: 3em; width: 100%">';
 
 				for ($j=5; $j>=0; $j--) {
 					$percent = (float)$results[$j]*100/$votes;
@@ -636,7 +635,7 @@ class SurveyHTML extends Error {
 				}
 				$ret.= $this->drawGraph($Question->getID(), 'pie', $legendArr, $valuesArr);
 			} else {
-				$ret.= '<table style="padding-left: 3em" width="100%">';
+				$ret.= '<table style="padding-left: 3em; width: 100%">';
 				for ($j=1; $j<=3; $j++) {
 					$result_per[$j] = (float)$res[$j]*100/$votes;
 					$ret.= $this->_makeBar($arr_name[$j].' ('.$res[$j].')', $result_per[$j], $arr_color[$j]);
