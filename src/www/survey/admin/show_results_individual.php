@@ -39,7 +39,7 @@ if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
 
 ?>
 
-<form action="none">
+<form action="">
 <?php
 
 /*
