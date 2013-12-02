@@ -548,7 +548,8 @@ class GitPlugin extends SCMPlugin {
 						$user2email[$last_user] = strtolower($matches['mail']);
 					} else {
 						// Short-commit stats line
-						preg_match("/^(?P<mode>[AM])\s+(?P<file>.+)$/", $line, $matches);
+						$result = preg_match("/^(?P<mode>[AMD])\s+(?P<file>.+)$/", $line, $matches);
+						if (!$result) continue;
 						if ($last_user == "") continue;
 						if (!isset ($usr_adds[$last_user])) $usr_adds[$last_user] = 0;
 						if (!isset ($usr_updates[$last_user])) $usr_updates[$last_user] = 0;
