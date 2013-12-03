@@ -111,6 +111,8 @@ if (! isset($group_id) || ! isset($project)) {
 
     define('WIKI_NAME', $group_name);
 
+    define('ALLOWED_PROTOCOLS', "http|https|mailto|ftp|ftps|news|nntp|ssh|gopher");
+
     define('DISABLE_MARKUP_WIKIWORD', $wc->getWikiConfig('DISABLE_MARKUP_WIKIWORD'));
 
     define('NUM_SPAM_LINKS', 20 * ($wc->getWikiConfig('NUM_SPAM_LINKS')));
