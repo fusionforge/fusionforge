@@ -543,7 +543,7 @@ class SVNPlugin extends SCMPlugin {
 		$dir = $project->getUnixName ()."-$today" ;
 		system ("mkdir -p $tmp") ;
 		$code = 0 ;
-		system ("svn ls file://$repo/trunk > /dev/null", $code) ;
+		system ("svn ls file://$repo/trunk > /dev/null 2> /dev/null", $code) ;
 		if ($code == 0) {
 			system ("cd $tmp ; svn export file://$repo/trunk $dir > /dev/null 2>&1") ;
 			system ("tar cCf $tmp - $dir |".forge_get_config('compression_method')."> $tmp/snapshot") ;
