@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-02 17:23+0100\n"
+"POT-Creation-Date: 2013-12-03 18:28+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1091,9 +1091,9 @@ msgstr ""
 #: www/admin/trove/trove_cat_list.php:52 www/frs/admin/showreleases.php:111
 #: www/people/skills_utils.php:45 www/people/skills_utils.php:103
 #: www/project/admin/editimages.php:262 www/project/admin/editimages.php:293
-#: www/survey/include/SurveyHTML.class.php:310
-#: www/survey/include/SurveyHTML.class.php:359
-#: www/survey/include/SurveyHTML.class.php:425
+#: www/survey/include/SurveyHTML.class.php:309
+#: www/survey/include/SurveyHTML.class.php:358
+#: www/survey/include/SurveyHTML.class.php:424
 #: www/trove/admin/trove_cat_list.php:46
 msgid "Edit"
 msgstr "Wijzigen"
@@ -1856,7 +1856,7 @@ msgstr "Startdatum"
 #: www/snippet/snippet_utils.php:242
 #: www/survey/include/SurveyHTML.class.php:129
 #: www/survey/include/SurveyHTML.class.php:131
-#: www/survey/include/SurveyHTML.class.php:191
+#: www/survey/include/SurveyHTML.class.php:190
 #, php-format
 msgid ":"
 msgstr ""
@@ -2086,7 +2086,7 @@ msgstr "Kan parent niet aanpassen"
 #: www/people/people_utils.php:179 www/people/people_utils.php:323
 #: www/people/skills_utils.php:46 www/people/skills_utils.php:104
 #: www/project/admin/vhost.php:145 www/reporting/timeadd.php:163
-#: www/snippet/detail.php:67 www/survey/include/SurveyHTML.class.php:312
+#: www/snippet/detail.php:67 www/survey/include/SurveyHTML.class.php:311
 #: www/tracker/admin/index.php:103 www/tracker/admin/index.php:180
 msgid "Delete"
 msgstr "Wissen"
@@ -3398,11 +3398,11 @@ msgstr ""
 "Neem ook wat tijd om de site documentatie m.b.t. project beheer te lezen "
 "(http://%3$s/docs/site/). Als je je eigen project pagina bezoekt in %7$s "
 "terwijl je ingelogd bent, vind je links aanvullende menu functies onder "
-"&#039;Project beheer&#039;.\n"
+"'Project beheer'.\n"
 "\n"
 "We adviseren dringend om %7$s te bezoeken en een algemene "
 "projectbeschrijving te geven. Dit kan ofwel door je project pagina te "
-"bezoeken terwijl je ingelogd bent, en &#039;Project beheer&#039; te keizen "
+"bezoeken terwijl je ingelogd bent, en 'Project beheer' te keizen "
 "in het menu aan de linkerkant, ofwel door naar http://%3$s/project/admin/?"
 "group_id=%6$s , na login.\n"
 "\n"
@@ -5005,7 +5005,7 @@ msgid "The Survey data is not filled"
 msgstr "De enquêtegegevens zijn niet ingevuld"
 
 #: common/survey/Survey.class.php:262 common/survey/SurveyFactory.class.php:94
-#: www/survey/admin/survey.php:100 www/survey/include/SurveyHTML.class.php:455
+#: www/survey/admin/survey.php:100 www/survey/include/SurveyHTML.class.php:454
 #: www/survey/index.php:56
 msgid "No Survey is found"
 msgstr "Geen enquête gevonden"
@@ -5191,7 +5191,7 @@ msgstr ""
 #: www/register/index.php:314 www/snippet/add_snippet_to_package.php:167
 #: www/snippet/addversion.php:109 www/snippet/addversion.php:228
 #: www/snippet/package.php:176 www/snippet/submit.php:144
-#: www/survey/include/SurveyHTML.class.php:555 www/tracker/roadmap.php:444
+#: www/survey/include/SurveyHTML.class.php:554 www/tracker/roadmap.php:444
 msgid "Submit"
 msgstr "Submit"
 
@@ -5722,7 +5722,7 @@ msgstr ""
 #: common/tracker/actions/mod.php:189 common/tracker/actions/mod.php:218
 #: common/tracker/actions/query.php:386 www/news/news_utils.php:181
 #: www/pm/include/ProjectTaskHTML.class.php:141
-#: www/survey/include/SurveyHTML.class.php:656
+#: www/survey/include/SurveyHTML.class.php:655
 msgid "Comments"
 msgstr "Commentaar"
 
@@ -6796,7 +6796,7 @@ msgstr "Gedefinieerde extra velden"
 #: www/reporting/usertime.php:94 www/reporting/usertime.php:106
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:45
 #: www/snippet/snippet_utils.php:229
-#: www/survey/include/SurveyHTML.class.php:244
+#: www/survey/include/SurveyHTML.class.php:243
 #: www/tracker/reporting/index.php:130
 msgid "Type"
 msgstr ""
@@ -6963,8 +6963,8 @@ msgstr "Weet je zeker dat je deze taak wilt verwijderen?"
 #: www/admin/approve-pending.php:162 www/admin/groupedit.php:161
 #: www/admin/responses_admin.php:50 www/forum/admin/index.php:222
 #: www/mail/admin/index.php:190 www/mail/admin/index.php:221
-#: www/people/editprofile.php:244 www/survey/include/SurveyHTML.class.php:195
-#: www/survey/include/SurveyHTML.class.php:418
+#: www/people/editprofile.php:244 www/survey/include/SurveyHTML.class.php:194
+#: www/survey/include/SurveyHTML.class.php:417
 msgid "Yes"
 msgstr "Ja"
 
@@ -9948,8 +9948,8 @@ msgstr "Weet je zeker dat je dit item wilt verwijderen?"
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
 #: www/admin/groupedit.php:160 www/forum/admin/index.php:223
 #: www/mail/admin/index.php:191 www/mail/admin/index.php:222
-#: www/people/editprofile.php:243 www/survey/include/SurveyHTML.class.php:196
-#: www/survey/include/SurveyHTML.class.php:420
+#: www/people/editprofile.php:243 www/survey/include/SurveyHTML.class.php:195
+#: www/survey/include/SurveyHTML.class.php:419
 msgid "No"
 msgstr "Nee"
 
@@ -9965,7 +9965,7 @@ msgstr "Wijzig de %1$s hieronder:"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:154
 #: www/survey/include/SurveyHTML.class.php:115
-#: www/survey/include/SurveyHTML.class.php:173
+#: www/survey/include/SurveyHTML.class.php:172
 msgid "Submit Changes"
 msgstr "Submit wijzigingen"
 
@@ -10353,7 +10353,7 @@ msgstr "Nieuwe bestand versies"
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:95
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:56
-#: www/survey/include/SurveyHTML.class.php:244
+#: www/survey/include/SurveyHTML.class.php:243
 #, fuzzy
 msgid "Order"
 msgstr "Sorteren per"
@@ -16423,7 +16423,7 @@ msgstr "Site mail."
 
 #: www/admin/unsubscribe.php:116
 msgid "Comm. Mail."
-msgstr "Community mail"
+msgstr "Community mail."
 
 #: www/admin/useredit.php:34
 msgid "No Unix account (N)"
@@ -18232,11 +18232,11 @@ msgstr "Persoonlijke informatie"
 
 #: www/include/user_home.php:49
 msgid "Peer Rating"
-msgstr "Beoordeling door collega&#039;s"
+msgstr "Beoordeling door collega's"
 
 #: www/include/user_home.php:55
 msgid "User chose not to participate in peer rating"
-msgstr "De gebruiker heeft beoordeling door collega&#039;s uitgeschakeld"
+msgstr "De gebruiker heeft beoordeling door collega's uitgeschakeld"
 
 #: www/include/user_home.php:62
 msgid "Diary and Notes"
@@ -18338,17 +18338,17 @@ msgid "URI:"
 msgstr ""
 
 #: www/include/vote_function.php:215
-#: www/survey/include/SurveyHTML.class.php:512
+#: www/survey/include/SurveyHTML.class.php:511
 msgid "Low"
 msgstr "Laag"
 
 #: www/include/vote_function.php:215
-#: www/survey/include/SurveyHTML.class.php:514
+#: www/survey/include/SurveyHTML.class.php:513
 msgid "High"
 msgstr "Hoog"
 
 #: www/include/vote_function.php:288
-#: www/survey/include/SurveyHTML.class.php:556 www/survey/privacy.php:36
+#: www/survey/include/SurveyHTML.class.php:555 www/survey/privacy.php:36
 msgid "Survey Privacy"
 msgstr "Enquête privacy"
 
@@ -19097,8 +19097,8 @@ msgid ""
 "Start by filling in the fields below. When you click continue, you will be "
 "shown a list of skills and experience levels that this job requires."
 msgstr ""
-"Begin met invullen van de onderstaande velden. Wanneer je op &#039;Ga "
-"door&#039; klikt wordt er een lijst getoond van vaardigheden en "
+"Begin met invullen van de onderstaande velden. Wanneer je op 'Ga "
+"door' klikt wordt er een lijst getoond van vaardigheden en "
 "ervaringniveaus die vereist zijn voor deze vacature."
 
 #: www/people/createjob.php:52 www/people/editjob.php:169
@@ -22631,7 +22631,7 @@ msgstr "OF geef een speciale projectlijst op:"
 
 #: www/stats/site_stats_utils.php:132
 msgid "<strong>comma separated</strong> group_id's)"
-msgstr "<strong>komma gescheiden</strong> groep ID&#039;s)"
+msgstr "<strong>komma gescheiden</strong> groep ID's)"
 
 #: www/stats/site_stats_utils.php:134
 msgid "Report:"
@@ -22755,8 +22755,8 @@ msgid ""
 "You can now activate/deactivate surveys on the %1$s Edit Existing Surveys "
 "%2$s page"
 msgstr ""
-"Je kunt nu enquêtes activeren/deactiveren op de %1$s &#039;Bestaande "
-"enquêtes aanpassen&#039; %2$s pagina"
+"Je kunt nu enquêtes activeren/deactiveren op de %1$s 'Bestaande "
+"enquêtes aanpassen' %2$s pagina"
 
 #: www/survey/admin/question.php:52
 #, fuzzy
@@ -22794,7 +22794,7 @@ msgstr "Je mag elke van deze vragen gebruiken in je enquêtes"
 #: www/survey/admin/show_questions.php:44
 msgid "NOTE: use these question_id's when you create a new survey"
 msgstr ""
-"LET OP: gebruik deze vraag ID&#039;s als U een nieuwe enquête samenstelt"
+"LET OP: gebruik deze vraag ID's als U een nieuwe enquête samenstelt"
 
 #: www/survey/admin/show_questions.php:52
 #, fuzzy, php-format
@@ -22876,7 +22876,7 @@ msgstr ""
 "zijn ingediend"
 
 #: www/survey/include/SurveyHTML.class.php:129
-#: www/survey/include/SurveyHTML.class.php:244
+#: www/survey/include/SurveyHTML.class.php:243
 msgid "Question"
 msgstr "Vraag"
 
@@ -22885,118 +22885,118 @@ msgstr "Vraag"
 msgid "Question Type"
 msgstr "Type vraag"
 
-#: www/survey/include/SurveyHTML.class.php:154
+#: www/survey/include/SurveyHTML.class.php:153
 #, php-format
 msgid "Please %1$s create a question %2$s before creating a survey"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:162
+#: www/survey/include/SurveyHTML.class.php:161
 #, fuzzy
 msgid "Add this Survey"
 msgstr "Voeg deze enquête toe"
 
-#: www/survey/include/SurveyHTML.class.php:169
+#: www/survey/include/SurveyHTML.class.php:168
 msgid ""
 "WARNING! It is a bad idea to edit a survey after responses have been posted"
 msgstr ""
 "WAARSCHUWING! Het is geen goed idee een enquête te veranderen nadat al "
 "antwoorden zijn ingediend"
 
-#: www/survey/include/SurveyHTML.class.php:191
-#: www/survey/include/SurveyHTML.class.php:344
+#: www/survey/include/SurveyHTML.class.php:190
+#: www/survey/include/SurveyHTML.class.php:343
 msgid "Survey Title"
 msgstr "Enquête titel"
 
-#: www/survey/include/SurveyHTML.class.php:194
+#: www/survey/include/SurveyHTML.class.php:193
 msgid "Is Active?"
 msgstr "Actief?"
 
-#: www/survey/include/SurveyHTML.class.php:203
+#: www/survey/include/SurveyHTML.class.php:202
 msgid "Addable Questions"
 msgstr "Toe te voegen vragen"
 
-#: www/survey/include/SurveyHTML.class.php:205
-#: www/survey/include/SurveyHTML.class.php:347
+#: www/survey/include/SurveyHTML.class.php:204
+#: www/survey/include/SurveyHTML.class.php:346
 msgid "Questions"
 msgstr "Vragen"
 
-#: www/survey/include/SurveyHTML.class.php:243
+#: www/survey/include/SurveyHTML.class.php:242
 msgid "Questions in this Survey"
 msgstr "Vragen in deze enquête"
 
-#: www/survey/include/SurveyHTML.class.php:244
+#: www/survey/include/SurveyHTML.class.php:243
 #, fuzzy
 msgid "Delete from this Survey"
 msgstr "Vragen in deze enquête"
 
-#: www/survey/include/SurveyHTML.class.php:259
+#: www/survey/include/SurveyHTML.class.php:258
 msgid "Up"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:260
+#: www/survey/include/SurveyHTML.class.php:259
 #, fuzzy
 msgid "Down"
 msgstr "Klaar"
 
-#: www/survey/include/SurveyHTML.class.php:289
+#: www/survey/include/SurveyHTML.class.php:288
 #, fuzzy, php-format
 msgid "%d question found"
 msgid_plural "%d questions found"
 msgstr[0] "%1$s vragen gevonden"
 msgstr[1] "%1$s vragen gevonden"
 
-#: www/survey/include/SurveyHTML.class.php:341
+#: www/survey/include/SurveyHTML.class.php:340
 msgid "Survey ID"
 msgstr "Enquête ID"
 
-#: www/survey/include/SurveyHTML.class.php:350
+#: www/survey/include/SurveyHTML.class.php:349
 msgid "Number of Questions"
 msgstr "Aantal vragen"
 
-#: www/survey/include/SurveyHTML.class.php:353
+#: www/survey/include/SurveyHTML.class.php:352
 msgid "Number of Votes"
 msgstr "Aantal vragen"
 
-#: www/survey/include/SurveyHTML.class.php:356
+#: www/survey/include/SurveyHTML.class.php:355
 msgid "Did I Vote?"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:362
-#: www/survey/include/SurveyHTML.class.php:435
+#: www/survey/include/SurveyHTML.class.php:361
+#: www/survey/include/SurveyHTML.class.php:434
 msgid "Result"
 msgstr "Resultaat"
 
-#: www/survey/include/SurveyHTML.class.php:365
-#: www/survey/include/SurveyHTML.class.php:439
+#: www/survey/include/SurveyHTML.class.php:364
+#: www/survey/include/SurveyHTML.class.php:438
 msgid "Result with Graph"
 msgstr "Resultaat met grafiek"
 
-#: www/survey/include/SurveyHTML.class.php:368
-#: www/survey/include/SurveyHTML.class.php:443
+#: www/survey/include/SurveyHTML.class.php:367
+#: www/survey/include/SurveyHTML.class.php:442
 msgid "Result with Graph and Comments"
 msgstr "Resultaten met grafieken en toelichting"
 
-#: www/survey/include/SurveyHTML.class.php:371
-#: www/survey/include/SurveyHTML.class.php:448
+#: www/survey/include/SurveyHTML.class.php:370
+#: www/survey/include/SurveyHTML.class.php:447
 #, fuzzy
 msgid "CSV"
 msgstr "CVS"
 
-#: www/survey/include/SurveyHTML.class.php:468
+#: www/survey/include/SurveyHTML.class.php:467
 msgid "Error: you cannot vote for inactive survey"
 msgstr ""
 
-#: www/survey/include/SurveyHTML.class.php:475
+#: www/survey/include/SurveyHTML.class.php:474
 msgid "Warning - you are about to vote a second time on this survey."
 msgstr ""
 "Pas op - je staat op het punt om voor de tweede keer in deze enquête te te "
 "stemmen."
 
-#: www/survey/include/SurveyHTML.class.php:593
+#: www/survey/include/SurveyHTML.class.php:592
 msgid "No Votes"
 msgstr "Geen stemmen"
 
-#: www/survey/include/SurveyHTML.class.php:687
+#: www/survey/include/SurveyHTML.class.php:686
 #, fuzzy, php-format
 msgid "View All %1$s Comment"
 msgid_plural "View All %1$s Comments"
@@ -25901,14 +25901,14 @@ msgstr "Mijn persoonlijke pagina"
 #~ "requests through your project administration page.</p><p>To suggest new "
 #~ "job categories, submit a request via the support manager.</p>"
 #~ msgstr ""
-#~ "<p>De %1$s &#039;Projecthulp Gevraagd&#039; pagina is voor niet-"
+#~ "<p>De %1$s 'Projecthulp Gevraagd' pagina is voor niet-"
 #~ "commerciële, vrijwillige project vacatures. Commercieel gebruik is niet "
 #~ "toegestaan.</p><p>Project vacatures zullen 2 weken blijven staan, tenzij "
 #~ "ze eerder worden gesloten door de indiener. (Project beheerders kunnen "
 #~ "vervallen vacatures altijd opnieuw indienen.)</p><p>Blader door het "
 #~ "categorie menu om naar projecten te zoeken die je hulp kunnen gebruiken.</"
-#~ "p><p>Als je een project beheerder bent, log dan in, en dien &#039;Hulp "
-#~ "Gevraagd&#039; verzoeken via de project beheer pagina in.</p><p>Om nieuwe "
+#~ "p><p>Als je een project beheerder bent, log dan in, en dien 'Hulp "
+#~ "Gevraagd' verzoeken via de project beheer pagina in.</p><p>Om nieuwe "
 #~ "vacature categorieën in te dienen moet je een verzoek aan de vacature "
 #~ "beheerder doen.</p>"
 
@@ -26566,7 +26566,7 @@ msgstr "Mijn persoonlijke pagina"
 #~ msgstr "Cls"
 
 #~ msgid "CO's"
-#~ msgstr "CO&#039;s"
+#~ msgstr "CO's"
 
 #~ msgid "Comm's"
 #~ msgstr "Commits"

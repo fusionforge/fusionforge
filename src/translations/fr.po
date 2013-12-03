@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-02 17:23+0100\n"
+"POT-Creation-Date: 2013-12-03 18:28+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -1042,9 +1042,9 @@ msgstr "Restaurer"
 #: www/admin/trove/trove_cat_list.php:52 www/frs/admin/showreleases.php:111
 #: www/people/skills_utils.php:45 www/people/skills_utils.php:103
 #: www/project/admin/editimages.php:262 www/project/admin/editimages.php:293
-#: www/survey/include/SurveyHTML.class.php:310
-#: www/survey/include/SurveyHTML.class.php:359
-#: www/survey/include/SurveyHTML.class.php:425
+#: www/survey/include/SurveyHTML.class.php:309
+#: www/survey/include/SurveyHTML.class.php:358
+#: www/survey/include/SurveyHTML.class.php:424
 #: www/trove/admin/trove_cat_list.php:46
 msgid "Edit"
 msgstr "Modifier"
@@ -1780,7 +1780,7 @@ msgstr "Date de début"
 #: www/snippet/snippet_utils.php:242
 #: www/survey/include/SurveyHTML.class.php:129
 #: www/survey/include/SurveyHTML.class.php:131
-#: www/survey/include/SurveyHTML.class.php:191
+#: www/survey/include/SurveyHTML.class.php:190
 #, php-format
 msgid ":"
 msgstr " :"
@@ -2000,7 +2000,7 @@ msgstr "Erreur lors de la création de l'objet Forum"
 #: www/people/people_utils.php:179 www/people/people_utils.php:323
 #: www/people/skills_utils.php:46 www/people/skills_utils.php:104
 #: www/project/admin/vhost.php:145 www/reporting/timeadd.php:163
-#: www/snippet/detail.php:67 www/survey/include/SurveyHTML.class.php:312
+#: www/snippet/detail.php:67 www/survey/include/SurveyHTML.class.php:311
 #: www/tracker/admin/index.php:103 www/tracker/admin/index.php:180
 msgid "Delete"
 msgstr "Supprimer"
@@ -3201,7 +3201,7 @@ msgstr "Rôle : %s"
 
 #: common/include/Group.class.php:2175
 msgid "Wrong destination role"
-msgstr "Rôle de destination incorrect."
+msgstr "Rôle de destination incorrect"
 
 #: common/include/Group.class.php:2284
 msgid "Group already active"
@@ -3213,7 +3213,7 @@ msgstr "Approuvé"
 
 #: common/include/Group.class.php:2547 common/include/Group.class.php:2617
 msgid "Group does not have any administrators."
-msgstr "Le groupe n'a pas d'administrateurs."
+msgstr "Le projet n'a pas d'administrateurs."
 
 #: common/include/Group.class.php:2555
 #, php-format
@@ -3329,7 +3329,7 @@ msgstr "Il n'y a pas d'administrateur à qui envoyer le courriel."
 #: common/include/Group.class.php:2696 common/include/Group.class.php:2702
 #, php-format
 msgid "New %s Project Submitted"
-msgstr "%s - Nouveau projet soumis"
+msgstr "Un nouveau projet a été soumis sur %s"
 
 #: common/include/Group.class.php:2680 common/include/Group.class.php:2698
 #: www/admin/approve-pending.php:192
@@ -3338,7 +3338,7 @@ msgstr "Description proposée"
 
 #: common/include/Group.class.php:2687
 msgid "Please visit the following URL to approve or reject this project"
-msgstr "Veuillez visiter l'URL suivante pour approuver ou rejeter ce projet"
+msgstr "Visitez l'URL suivante pour approuver ou refuser ce projet"
 
 #: common/include/Group.class.php:2699
 #, php-format
@@ -4209,7 +4209,7 @@ msgid "Could Not Get User Id: "
 msgstr "Utilisateur introuvable : "
 
 #: common/include/User.class.php:477
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Thank you for registering on the %3$s web site. You have\n"
 "account with username %1$s created for you. In order\n"
@@ -4231,6 +4231,9 @@ msgstr ""
 "Pour terminer votre inscription, suivez le lien : \n"
 "\n"
 "<%2$s>\n"
+"\n"
+"Vous avez une semaine pour confirmer votre compte. Passé ce délai, votre "
+"compte sera supprimé.\n"
 "\n"
 "(Si vous ne voyez rien ci-dessus, c'est probablement en raison d'un bogue de "
 "votre client de messagerie.\n"
@@ -4787,7 +4790,7 @@ msgid "The Survey data is not filled"
 msgstr "Les données du sondage ne sont pas remplies"
 
 #: common/survey/Survey.class.php:262 common/survey/SurveyFactory.class.php:94
-#: www/survey/admin/survey.php:100 www/survey/include/SurveyHTML.class.php:455
+#: www/survey/admin/survey.php:100 www/survey/include/SurveyHTML.class.php:454
 #: www/survey/index.php:56
 msgid "No Survey is found"
 msgstr "Aucun sondage trouvé"
@@ -4978,7 +4981,7 @@ msgstr "Texte libre pour la page de navigation"
 #: www/register/index.php:314 www/snippet/add_snippet_to_package.php:167
 #: www/snippet/addversion.php:109 www/snippet/addversion.php:228
 #: www/snippet/package.php:176 www/snippet/submit.php:144
-#: www/survey/include/SurveyHTML.class.php:555 www/tracker/roadmap.php:444
+#: www/survey/include/SurveyHTML.class.php:554 www/tracker/roadmap.php:444
 msgid "Submit"
 msgstr "Soumettre"
 
@@ -5494,7 +5497,7 @@ msgstr "Enregistrer les modifications"
 #: common/tracker/actions/mod.php:189 common/tracker/actions/mod.php:218
 #: common/tracker/actions/query.php:386 www/news/news_utils.php:181
 #: www/pm/include/ProjectTaskHTML.class.php:141
-#: www/survey/include/SurveyHTML.class.php:656
+#: www/survey/include/SurveyHTML.class.php:655
 msgid "Comments"
 msgstr "Commentaires"
 
@@ -5973,7 +5976,7 @@ msgstr "Erreur lors de la suppression de l'historique : "
 
 #: common/tracker/Artifact.class.php:551
 msgid "Error deleting monitor: "
-msgstr "Erreur lors de l'arrêt de la surveillance des annonces : "
+msgstr "Erreur lors de l'arrêt de la surveillance : "
 
 #: common/tracker/Artifact.class.php:559
 msgid "Error deleting artifact: "
@@ -5985,11 +5988,11 @@ msgstr "Erreur de mise à jour : "
 
 #: common/tracker/Artifact.class.php:601
 msgid "Valid Email Address Required"
-msgstr "Une adresse électronique valide est requise."
+msgstr "Une adresse électronique valide est requise"
 
 #: common/tracker/Artifact.class.php:952
 msgid "Invalid assigned person: must be a technician"
-msgstr ""
+msgstr "Impossible d'affecter à cette personne : ce doit être un technicien"
 
 #: common/tracker/Artifact.class.php:975
 msgid "Could not move to new Artifact Type"
@@ -6421,9 +6424,8 @@ msgstr "Indique les champs requis."
 
 #: common/tracker/Roadmap.class.php:75
 #: common/tracker/RoadmapFactory.class.php:68
-#, fuzzy
 msgid "Invalid Group"
-msgstr "Utilisateur non valide"
+msgstr "Projet invalide"
 
 #: common/tracker/Roadmap.class.php:103
 #, php-format
@@ -6533,7 +6535,7 @@ msgstr "Champs supplémentaires définis"
 #: www/reporting/usertime.php:94 www/reporting/usertime.php:106
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:45
 #: www/snippet/snippet_utils.php:229
-#: www/survey/include/SurveyHTML.class.php:244
+#: www/survey/include/SurveyHTML.class.php:243
 #: www/tracker/reporting/index.php:130
 msgid "Type"
 msgstr "Type"
@@ -6686,8 +6688,8 @@ msgstr "Êtes-vous sûr de vouloir supprimer la feuille de route %s ?"
 #: www/admin/approve-pending.php:162 www/admin/groupedit.php:161
 #: www/admin/responses_admin.php:50 www/forum/admin/index.php:222
 #: www/mail/admin/index.php:190 www/mail/admin/index.php:221
-#: www/people/editprofile.php:244 www/survey/include/SurveyHTML.class.php:195
-#: www/survey/include/SurveyHTML.class.php:418
+#: www/people/editprofile.php:244 www/survey/include/SurveyHTML.class.php:194
+#: www/survey/include/SurveyHTML.class.php:417
 msgid "Yes"
 msgstr "Oui"
 
@@ -9576,8 +9578,8 @@ msgstr "Êtes-vous sûr de vouloir supprimer cette forge partenaire ?"
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
 #: www/admin/groupedit.php:160 www/forum/admin/index.php:223
 #: www/mail/admin/index.php:191 www/mail/admin/index.php:222
-#: www/people/editprofile.php:243 www/survey/include/SurveyHTML.class.php:196
-#: www/survey/include/SurveyHTML.class.php:420
+#: www/people/editprofile.php:243 www/survey/include/SurveyHTML.class.php:195
+#: www/survey/include/SurveyHTML.class.php:419
 msgid "No"
 msgstr "Non"
 
@@ -9591,7 +9593,7 @@ msgstr "Modifier la forge partenaire ci-dessous"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:154
 #: www/survey/include/SurveyHTML.class.php:115
-#: www/survey/include/SurveyHTML.class.php:173
+#: www/survey/include/SurveyHTML.class.php:172
 msgid "Submit Changes"
 msgstr "Valider les changements"
 
@@ -9615,9 +9617,8 @@ msgid "Forge ID"
 msgstr "Identifiant de la forge"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:226
-#, fuzzy
 msgid "edit"
-msgstr "modifications"
+msgstr "modifier"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:246
 msgid "New"
@@ -9842,7 +9843,7 @@ msgstr ""
 #: plugins/headermenu/common/headermenuPlugin.class.php:67
 #: plugins/headermenu/common/headermenuPlugin.class.php:427
 msgid "Menu Tabs Manager Admin"
-msgstr "Administration gestionnaire d'onglets"
+msgstr "Administration du gestionnaire d'onglets"
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:67
 msgid "Add/Remove/Activate/Desactivate tabs"
@@ -9950,7 +9951,7 @@ msgstr "Gestion des onglets du menu principal"
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:95
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:56
-#: www/survey/include/SurveyHTML.class.php:244
+#: www/survey/include/SurveyHTML.class.php:243
 msgid "Order"
 msgstr "Ordre"
 
@@ -10797,9 +10798,8 @@ msgstr "En cours de création"
 
 #: plugins/mailman/www/mailman_utils.php:109
 #: plugins/mailman/www/mailman_utils.php:169
-#, fuzzy
 msgid "Error during creation"
-msgstr "Erreur lors du refus d'un projet"
+msgstr "Erreur lors de la création"
 
 #: plugins/mailman/www/mailman_utils.php:124 www/admin/unsubscribe.php:59
 #: www/forum/monitor.php:65
@@ -11113,9 +11113,8 @@ msgid "Found in"
 msgstr ""
 
 #: plugins/mantisbt/view/addIssue.php:125
-#, fuzzy
 msgid "No version defined"
-msgstr "Aucune catégorie définie"
+msgstr "Aucune version définie"
 
 #: plugins/mantisbt/view/addIssue.php:133
 msgid "(128 char max)"
@@ -11129,15 +11128,13 @@ msgid "Additional Informations"
 msgstr "Informations personnelles"
 
 #: plugins/mantisbt/view/addOrEditNote.php:52
-#, fuzzy
 msgid "Modify note"
-msgstr "Modifier l'onglet"
+msgstr "Modifier la note"
 
 #: plugins/mantisbt/view/addOrEditNote.php:56
 #: plugins/mantisbt/view/viewNote.php:82
-#, fuzzy
 msgid "Add note"
-msgstr "Date d'ajout"
+msgstr "Ajouter la note"
 
 #: plugins/mantisbt/view/admin/addCategory.php:31
 msgid "Add a new category"
@@ -11229,9 +11226,8 @@ msgid ""
 msgstr ""
 
 #: plugins/mantisbt/view/admin/viewVersion.php:45
-#, fuzzy
 msgid "Manage versions"
-msgstr "Version du paquet"
+msgstr "Gérer les versions"
 
 #: plugins/mantisbt/view/admin/viewVersion.php:76
 msgid "No versions"
@@ -13782,9 +13778,8 @@ msgid "View Personal SoapAdmin"
 msgstr "Voir le SoapAdmin personnel"
 
 #: plugins/soapadmin/include/soapadminPlugin.class.php:148
-#, fuzzy
 msgid "SoapAdmin Admin"
-msgstr "Administration du site"
+msgstr "Administration de SoapAdmin"
 
 #: plugins/twitter/www/checks.php:99
 msgid "You have no Twitter Access Tokens registered in the database currently"
@@ -17501,9 +17496,8 @@ msgid "Browse by Category"
 msgstr "Affichage par Catégorie"
 
 #: www/include/Layout.class.php:1399
-#, fuzzy
 msgid "Complete listing of available projects."
-msgstr "Voici une liste de fonctions possibles dans ce projet."
+msgstr "Liste complète des projets disponibles."
 
 #: www/include/login-form.php:71
 msgid ""
@@ -17727,17 +17721,17 @@ msgid "URI:"
 msgstr ""
 
 #: www/include/vote_function.php:215
-#: www/survey/include/SurveyHTML.class.php:512
+#: www/survey/include/SurveyHTML.class.php:511
 msgid "Low"
 msgstr "Bas"
 
 #: www/include/vote_function.php:215
-#: www/survey/include/SurveyHTML.class.php:514
+#: www/survey/include/SurveyHTML.class.php:513
 msgid "High"
 msgstr "Haut"
 
 #: www/include/vote_function.php:288
-#: www/survey/include/SurveyHTML.class.php:556 www/survey/privacy.php:36
+#: www/survey/include/SurveyHTML.class.php:555 www/survey/privacy.php:36
 msgid "Survey Privacy"
 msgstr "Confidentialité des informations liées aux sondages"
 
@@ -19793,7 +19787,7 @@ msgstr "Tâche mise à jour avec succès"
 
 #: www/pm/task.php:287
 msgid "No task selected"
-msgstr "Aucune tâche sélectionnée."
+msgstr "Aucune tâche sélectionnée"
 
 #: www/pm/task.php:313
 msgid "Successfully Added Tracker Relationship"
@@ -22272,7 +22266,7 @@ msgstr ""
 "des réponses"
 
 #: www/survey/include/SurveyHTML.class.php:129
-#: www/survey/include/SurveyHTML.class.php:244
+#: www/survey/include/SurveyHTML.class.php:243
 msgid "Question"
 msgstr "Question"
 
@@ -22280,114 +22274,114 @@ msgstr "Question"
 msgid "Question Type"
 msgstr "Type de la question"
 
-#: www/survey/include/SurveyHTML.class.php:154
+#: www/survey/include/SurveyHTML.class.php:153
 #, php-format
 msgid "Please %1$s create a question %2$s before creating a survey"
 msgstr "Veuillez %1$scréer une question%2$s avant de créer un sondage."
 
-#: www/survey/include/SurveyHTML.class.php:162
+#: www/survey/include/SurveyHTML.class.php:161
 msgid "Add this Survey"
 msgstr "Ajouter ce sondage"
 
-#: www/survey/include/SurveyHTML.class.php:169
+#: www/survey/include/SurveyHTML.class.php:168
 msgid ""
 "WARNING! It is a bad idea to edit a survey after responses have been posted"
 msgstr ""
 "Attention ! C'est une mauvaise idée que de modifier un sondage qui a déjà "
 "des questions"
 
-#: www/survey/include/SurveyHTML.class.php:191
-#: www/survey/include/SurveyHTML.class.php:344
+#: www/survey/include/SurveyHTML.class.php:190
+#: www/survey/include/SurveyHTML.class.php:343
 msgid "Survey Title"
 msgstr "Titre du sondage"
 
-#: www/survey/include/SurveyHTML.class.php:194
+#: www/survey/include/SurveyHTML.class.php:193
 msgid "Is Active?"
 msgstr "Actif ?"
 
-#: www/survey/include/SurveyHTML.class.php:203
+#: www/survey/include/SurveyHTML.class.php:202
 msgid "Addable Questions"
 msgstr "Questions possibles"
 
-#: www/survey/include/SurveyHTML.class.php:205
-#: www/survey/include/SurveyHTML.class.php:347
+#: www/survey/include/SurveyHTML.class.php:204
+#: www/survey/include/SurveyHTML.class.php:346
 msgid "Questions"
 msgstr "Questions"
 
-#: www/survey/include/SurveyHTML.class.php:243
+#: www/survey/include/SurveyHTML.class.php:242
 msgid "Questions in this Survey"
 msgstr "Questions de ce sondage"
 
-#: www/survey/include/SurveyHTML.class.php:244
+#: www/survey/include/SurveyHTML.class.php:243
 msgid "Delete from this Survey"
 msgstr "Supprimer de ce sondage"
 
-#: www/survey/include/SurveyHTML.class.php:259
+#: www/survey/include/SurveyHTML.class.php:258
 msgid "Up"
 msgstr "Monter"
 
-#: www/survey/include/SurveyHTML.class.php:260
+#: www/survey/include/SurveyHTML.class.php:259
 msgid "Down"
 msgstr "Descendre"
 
-#: www/survey/include/SurveyHTML.class.php:289
+#: www/survey/include/SurveyHTML.class.php:288
 #, php-format
 msgid "%d question found"
 msgid_plural "%d questions found"
 msgstr[0] "%d question trouvée"
 msgstr[1] "%d questions trouvées"
 
-#: www/survey/include/SurveyHTML.class.php:341
+#: www/survey/include/SurveyHTML.class.php:340
 msgid "Survey ID"
 msgstr "ID du sondage"
 
-#: www/survey/include/SurveyHTML.class.php:350
+#: www/survey/include/SurveyHTML.class.php:349
 msgid "Number of Questions"
 msgstr "Nombre de questions"
 
-#: www/survey/include/SurveyHTML.class.php:353
+#: www/survey/include/SurveyHTML.class.php:352
 msgid "Number of Votes"
 msgstr "Nombre de votes"
 
-#: www/survey/include/SurveyHTML.class.php:356
+#: www/survey/include/SurveyHTML.class.php:355
 msgid "Did I Vote?"
 msgstr "Ai-je voté ?"
 
-#: www/survey/include/SurveyHTML.class.php:362
-#: www/survey/include/SurveyHTML.class.php:435
+#: www/survey/include/SurveyHTML.class.php:361
+#: www/survey/include/SurveyHTML.class.php:434
 msgid "Result"
 msgstr "Résultats"
 
-#: www/survey/include/SurveyHTML.class.php:365
-#: www/survey/include/SurveyHTML.class.php:439
+#: www/survey/include/SurveyHTML.class.php:364
+#: www/survey/include/SurveyHTML.class.php:438
 msgid "Result with Graph"
 msgstr "Résultats avec graphique"
 
-#: www/survey/include/SurveyHTML.class.php:368
-#: www/survey/include/SurveyHTML.class.php:443
+#: www/survey/include/SurveyHTML.class.php:367
+#: www/survey/include/SurveyHTML.class.php:442
 msgid "Result with Graph and Comments"
 msgstr "Résultats avec graphique et commentaires"
 
-#: www/survey/include/SurveyHTML.class.php:371
-#: www/survey/include/SurveyHTML.class.php:448
+#: www/survey/include/SurveyHTML.class.php:370
+#: www/survey/include/SurveyHTML.class.php:447
 msgid "CSV"
 msgstr "CSV"
 
-#: www/survey/include/SurveyHTML.class.php:468
+#: www/survey/include/SurveyHTML.class.php:467
 msgid "Error: you cannot vote for inactive survey"
 msgstr "Erreur: vous ne pouvez pas participer à un sondage inactif."
 
-#: www/survey/include/SurveyHTML.class.php:475
+#: www/survey/include/SurveyHTML.class.php:474
 msgid "Warning - you are about to vote a second time on this survey."
 msgstr ""
 "Attention - vous êtes sur le point de participer à ce sondage pour la "
 "deuxième fois."
 
-#: www/survey/include/SurveyHTML.class.php:593
+#: www/survey/include/SurveyHTML.class.php:592
 msgid "No Votes"
 msgstr "Aucun vote"
 
-#: www/survey/include/SurveyHTML.class.php:687
+#: www/survey/include/SurveyHTML.class.php:686
 #, php-format
 msgid "View All %1$s Comment"
 msgid_plural "View All %1$s Comments"

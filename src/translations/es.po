@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-02 17:23+0100\n"
+"POT-Creation-Date: 2013-12-03 18:28+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -1064,9 +1064,9 @@ msgstr "Restaurar"
 #: www/admin/trove/trove_cat_list.php:52 www/frs/admin/showreleases.php:111
 #: www/people/skills_utils.php:45 www/people/skills_utils.php:103
 #: www/project/admin/editimages.php:262 www/project/admin/editimages.php:293
-#: www/survey/include/SurveyHTML.class.php:310
-#: www/survey/include/SurveyHTML.class.php:359
-#: www/survey/include/SurveyHTML.class.php:425
+#: www/survey/include/SurveyHTML.class.php:309
+#: www/survey/include/SurveyHTML.class.php:358
+#: www/survey/include/SurveyHTML.class.php:424
 #: www/trove/admin/trove_cat_list.php:46
 msgid "Edit"
 msgstr "Editar"
@@ -1808,7 +1808,7 @@ msgstr "Fecha Inicial"
 #: www/snippet/snippet_utils.php:242
 #: www/survey/include/SurveyHTML.class.php:129
 #: www/survey/include/SurveyHTML.class.php:131
-#: www/survey/include/SurveyHTML.class.php:191
+#: www/survey/include/SurveyHTML.class.php:190
 #, php-format
 msgid ":"
 msgstr ":"
@@ -2031,7 +2031,7 @@ msgstr "No se puedo obtener el objeto Forum"
 #: www/people/people_utils.php:179 www/people/people_utils.php:323
 #: www/people/skills_utils.php:46 www/people/skills_utils.php:104
 #: www/project/admin/vhost.php:145 www/reporting/timeadd.php:163
-#: www/snippet/detail.php:67 www/survey/include/SurveyHTML.class.php:312
+#: www/snippet/detail.php:67 www/survey/include/SurveyHTML.class.php:311
 #: www/tracker/admin/index.php:103 www/tracker/admin/index.php:180
 msgid "Delete"
 msgstr "Borrar"
@@ -4889,7 +4889,7 @@ msgid "The Survey data is not filled"
 msgstr "No se rellenaron los datos de la encuesta"
 
 #: common/survey/Survey.class.php:262 common/survey/SurveyFactory.class.php:94
-#: www/survey/admin/survey.php:100 www/survey/include/SurveyHTML.class.php:455
+#: www/survey/admin/survey.php:100 www/survey/include/SurveyHTML.class.php:454
 #: www/survey/index.php:56
 msgid "No Survey is found"
 msgstr "No se encontró encuestas"
@@ -5081,7 +5081,7 @@ msgstr "Texto libre para la página \"navega por los elementos\""
 #: www/register/index.php:314 www/snippet/add_snippet_to_package.php:167
 #: www/snippet/addversion.php:109 www/snippet/addversion.php:228
 #: www/snippet/package.php:176 www/snippet/submit.php:144
-#: www/survey/include/SurveyHTML.class.php:555 www/tracker/roadmap.php:444
+#: www/survey/include/SurveyHTML.class.php:554 www/tracker/roadmap.php:444
 msgid "Submit"
 msgstr "Enviar"
 
@@ -5600,7 +5600,7 @@ msgstr "Salvar cambios"
 #: common/tracker/actions/mod.php:189 common/tracker/actions/mod.php:218
 #: common/tracker/actions/query.php:386 www/news/news_utils.php:181
 #: www/pm/include/ProjectTaskHTML.class.php:141
-#: www/survey/include/SurveyHTML.class.php:656
+#: www/survey/include/SurveyHTML.class.php:655
 msgid "Comments"
 msgstr "Comentarios"
 
@@ -6637,7 +6637,7 @@ msgstr "Campos personalizados"
 #: www/reporting/usertime.php:94 www/reporting/usertime.php:106
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:45
 #: www/snippet/snippet_utils.php:229
-#: www/survey/include/SurveyHTML.class.php:244
+#: www/survey/include/SurveyHTML.class.php:243
 #: www/tracker/reporting/index.php:130
 msgid "Type"
 msgstr "Tipo"
@@ -6791,8 +6791,8 @@ msgstr "¿Está seguro que desea borrar el roadmap %s ?"
 #: www/admin/approve-pending.php:162 www/admin/groupedit.php:161
 #: www/admin/responses_admin.php:50 www/forum/admin/index.php:222
 #: www/mail/admin/index.php:190 www/mail/admin/index.php:221
-#: www/people/editprofile.php:244 www/survey/include/SurveyHTML.class.php:195
-#: www/survey/include/SurveyHTML.class.php:418
+#: www/people/editprofile.php:244 www/survey/include/SurveyHTML.class.php:194
+#: www/survey/include/SurveyHTML.class.php:417
 msgid "Yes"
 msgstr "Sí"
 
@@ -9693,8 +9693,8 @@ msgstr "¿Está seguro que desea borrar esta forja asociada?"
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
 #: www/admin/groupedit.php:160 www/forum/admin/index.php:223
 #: www/mail/admin/index.php:191 www/mail/admin/index.php:222
-#: www/people/editprofile.php:243 www/survey/include/SurveyHTML.class.php:196
-#: www/survey/include/SurveyHTML.class.php:420
+#: www/people/editprofile.php:243 www/survey/include/SurveyHTML.class.php:195
+#: www/survey/include/SurveyHTML.class.php:419
 msgid "No"
 msgstr "No"
 
@@ -9708,7 +9708,7 @@ msgstr "Modificar la forja asociada abajo"
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:154
 #: www/survey/include/SurveyHTML.class.php:115
-#: www/survey/include/SurveyHTML.class.php:173
+#: www/survey/include/SurveyHTML.class.php:172
 msgid "Submit Changes"
 msgstr "Enviar cambios"
 
@@ -10082,7 +10082,7 @@ msgstr "Gestionar etiquetas"
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:62
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:95
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:56
-#: www/survey/include/SurveyHTML.class.php:244
+#: www/survey/include/SurveyHTML.class.php:243
 msgid "Order"
 msgstr "Ordenado según"
 
@@ -17882,17 +17882,17 @@ msgid "URI:"
 msgstr ""
 
 #: www/include/vote_function.php:215
-#: www/survey/include/SurveyHTML.class.php:512
+#: www/survey/include/SurveyHTML.class.php:511
 msgid "Low"
 msgstr "Bajo"
 
 #: www/include/vote_function.php:215
-#: www/survey/include/SurveyHTML.class.php:514
+#: www/survey/include/SurveyHTML.class.php:513
 msgid "High"
 msgstr "Alto"
 
 #: www/include/vote_function.php:288
-#: www/survey/include/SurveyHTML.class.php:556 www/survey/privacy.php:36
+#: www/survey/include/SurveyHTML.class.php:555 www/survey/privacy.php:36
 msgid "Survey Privacy"
 msgstr "Privacidad de la Encuesta"
 
@@ -22404,7 +22404,7 @@ msgstr ""
 "respuestas a esa pregunta"
 
 #: www/survey/include/SurveyHTML.class.php:129
-#: www/survey/include/SurveyHTML.class.php:244
+#: www/survey/include/SurveyHTML.class.php:243
 msgid "Question"
 msgstr "Pregunta"
 
@@ -22412,112 +22412,112 @@ msgstr "Pregunta"
 msgid "Question Type"
 msgstr "Tipo de pregunta"
 
-#: www/survey/include/SurveyHTML.class.php:154
+#: www/survey/include/SurveyHTML.class.php:153
 #, php-format
 msgid "Please %1$s create a question %2$s before creating a survey"
 msgstr "Por favor %1$s cree una pregunta %2$s antes de crear una encuesta"
 
-#: www/survey/include/SurveyHTML.class.php:162
+#: www/survey/include/SurveyHTML.class.php:161
 msgid "Add this Survey"
 msgstr "Añadir esta encuesta"
 
-#: www/survey/include/SurveyHTML.class.php:169
+#: www/survey/include/SurveyHTML.class.php:168
 msgid ""
 "WARNING! It is a bad idea to edit a survey after responses have been posted"
 msgstr ""
 "¡CUIDADO! Es una mala idea cambiar una pregunta cuando se han enviado "
 "respuestas a esa misma pregunta"
 
-#: www/survey/include/SurveyHTML.class.php:191
-#: www/survey/include/SurveyHTML.class.php:344
+#: www/survey/include/SurveyHTML.class.php:190
+#: www/survey/include/SurveyHTML.class.php:343
 msgid "Survey Title"
 msgstr "Título de encuesta"
 
-#: www/survey/include/SurveyHTML.class.php:194
+#: www/survey/include/SurveyHTML.class.php:193
 msgid "Is Active?"
 msgstr "¿Está activa?"
 
-#: www/survey/include/SurveyHTML.class.php:203
+#: www/survey/include/SurveyHTML.class.php:202
 msgid "Addable Questions"
 msgstr "Pregunta para añadir"
 
-#: www/survey/include/SurveyHTML.class.php:205
-#: www/survey/include/SurveyHTML.class.php:347
+#: www/survey/include/SurveyHTML.class.php:204
+#: www/survey/include/SurveyHTML.class.php:346
 msgid "Questions"
 msgstr "Preguntas"
 
-#: www/survey/include/SurveyHTML.class.php:243
+#: www/survey/include/SurveyHTML.class.php:242
 msgid "Questions in this Survey"
 msgstr "Preguntas de esta encuesta"
 
-#: www/survey/include/SurveyHTML.class.php:244
+#: www/survey/include/SurveyHTML.class.php:243
 msgid "Delete from this Survey"
 msgstr "Borrar de la Encuesta"
 
-#: www/survey/include/SurveyHTML.class.php:259
+#: www/survey/include/SurveyHTML.class.php:258
 msgid "Up"
 msgstr "Arriba"
 
-#: www/survey/include/SurveyHTML.class.php:260
+#: www/survey/include/SurveyHTML.class.php:259
 msgid "Down"
 msgstr "Abajo"
 
-#: www/survey/include/SurveyHTML.class.php:289
+#: www/survey/include/SurveyHTML.class.php:288
 #, php-format
 msgid "%d question found"
 msgid_plural "%d questions found"
 msgstr[0] "%d pregunta encontrada"
 msgstr[1] "%d preguntas encontradas"
 
-#: www/survey/include/SurveyHTML.class.php:341
+#: www/survey/include/SurveyHTML.class.php:340
 msgid "Survey ID"
 msgstr "ID de la encuesta"
 
-#: www/survey/include/SurveyHTML.class.php:350
+#: www/survey/include/SurveyHTML.class.php:349
 msgid "Number of Questions"
 msgstr "Número de preguntas"
 
-#: www/survey/include/SurveyHTML.class.php:353
+#: www/survey/include/SurveyHTML.class.php:352
 msgid "Number of Votes"
 msgstr "Número de votos"
 
-#: www/survey/include/SurveyHTML.class.php:356
+#: www/survey/include/SurveyHTML.class.php:355
 msgid "Did I Vote?"
 msgstr "¿Voté?"
 
-#: www/survey/include/SurveyHTML.class.php:362
-#: www/survey/include/SurveyHTML.class.php:435
+#: www/survey/include/SurveyHTML.class.php:361
+#: www/survey/include/SurveyHTML.class.php:434
 msgid "Result"
 msgstr "Resultado"
 
-#: www/survey/include/SurveyHTML.class.php:365
-#: www/survey/include/SurveyHTML.class.php:439
+#: www/survey/include/SurveyHTML.class.php:364
+#: www/survey/include/SurveyHTML.class.php:438
 msgid "Result with Graph"
 msgstr "Resultado con gráficas"
 
-#: www/survey/include/SurveyHTML.class.php:368
-#: www/survey/include/SurveyHTML.class.php:443
+#: www/survey/include/SurveyHTML.class.php:367
+#: www/survey/include/SurveyHTML.class.php:442
 msgid "Result with Graph and Comments"
 msgstr "Resultado con gráficas y comentarios"
 
-#: www/survey/include/SurveyHTML.class.php:371
-#: www/survey/include/SurveyHTML.class.php:448
+#: www/survey/include/SurveyHTML.class.php:370
+#: www/survey/include/SurveyHTML.class.php:447
 msgid "CSV"
 msgstr "CVS"
 
-#: www/survey/include/SurveyHTML.class.php:468
+#: www/survey/include/SurveyHTML.class.php:467
 msgid "Error: you cannot vote for inactive survey"
 msgstr "Error: no puede votar en una encuesta inactiva"
 
-#: www/survey/include/SurveyHTML.class.php:475
+#: www/survey/include/SurveyHTML.class.php:474
 msgid "Warning - you are about to vote a second time on this survey."
 msgstr "Aviso - está apunt de votar por segunda vez en esta encuesta."
 
-#: www/survey/include/SurveyHTML.class.php:593
+#: www/survey/include/SurveyHTML.class.php:592
 msgid "No Votes"
 msgstr "Sin votos"
 
-#: www/survey/include/SurveyHTML.class.php:687
+#: www/survey/include/SurveyHTML.class.php:686
 #, php-format
 msgid "View All %1$s Comment"
 msgid_plural "View All %1$s Comments"
