@@ -49,7 +49,7 @@ class blocksPlugin extends Plugin {
 	function __construct() {
 		$this->Plugin() ;
 		$this->name = "blocks" ;
-		$this->text = "Blocks" ; // To show in the tabs, use...
+		$this->text = _("Blocks"); // To show in the tabs, use...
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
 		$this->hooks[] = "groupisactivecheckboxpost" ; //
 		$this->hooks[] = "project_admin_plugins"; // to show up in the admin page fro group
