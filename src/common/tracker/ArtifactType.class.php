@@ -521,13 +521,13 @@ class ArtifactType extends Error {
 	 *
 	 * @return bool false - always false - always use the getErrorMessage() for feedback
 	 */
-	function setMonitor ($user_id = -1) {
+	function setMonitor($user_id = -1) {
 		if ($user_id == -1) {
 			if (!session_loggedin()) {
 				$this->setError(_('You can only monitor if you are logged in.'));
 				return false;
 			}
-			$user_id = user_getid() ;
+			$user_id = user_getid();
 		}
 
 		$res = db_query_params('SELECT * FROM artifact_type_monitor WHERE group_artifact_id=$1 AND user_id=$2',
@@ -570,9 +570,9 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *  getMonitorIds - array of email addresses monitoring this Artifact.
+	 *  getMonitorIds - array of id of users monitoring this Artifact.
 	 *
-	 *	@return array of email addresses monitoring this Artifact.
+	 *	@return array of id of users monitoring this Artifact.
 	 */
 	function &getMonitorIds() {
 		$res = db_query_params('SELECT user_id	FROM artifact_type_monitor WHERE group_artifact_id=$1',
@@ -581,10 +581,11 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	getExtraFields - List of possible user built extra fields
-	 *	set up for this artifact type.
+	 *    getExtraFields - List of possible user built extra fields
+	 *    set up for this artifact type.
 	 *
-	 *	@return arrays of data;
+	 * @param array $types
+	 * @return array arrays of data;
 	 */
 	function getExtraFields($types = array()) {
 		if (count($types)) {
@@ -593,10 +594,10 @@ class ArtifactType extends Error {
 		} else {
 			$filter = '';
 		}
-		if (!isset($this->extra_fields["$filter"])) {
-			$this->extra_fields["$filter"] = array();
+		if (!isset($this->extra_fields[$filter])) {
+			$this->extra_fields[$filter] = array();
 			if (count($types)) {
-				$res = db_query_params ('SELECT *
+				$res = db_query_params('SELECT *
 				FROM artifact_extra_field_list
 				WHERE group_artifact_id=$1
 				AND field_type = ANY ($2)
@@ -611,11 +612,11 @@ class ArtifactType extends Error {
 					array($this->getID()));
 			}
 			while ($arr = db_fetch_array($res)) {
-				$this->extra_fields["$filter"][$arr['extra_field_id']] = $arr;
+				$this->extra_fields[$filter][$arr['extra_field_id']] = $arr;
 			}
 		}
 
-		return $this->extra_fields["$filter"];
+		return $this->extra_fields[$filter];
 	}
 
 	/**
@@ -659,8 +660,8 @@ class ArtifactType extends Error {
 			//
 			//	Iterate the elements
 			//
-			$resel = db_query_params ('SELECT * FROM artifact_extra_field_elements WHERE extra_field_id=$1',
-						  array ($ef['extra_field_id'])) ;
+			$resel = db_query_params('SELECT * FROM artifact_extra_field_elements WHERE extra_field_id=$1',
+						array($ef['extra_field_id']));
 			while ($el = db_fetch_array($resel)) {
 				//new element
 				$nel = new ArtifactExtraFieldElement($nef);
@@ -741,15 +742,15 @@ class ArtifactType extends Error {
 			$res = db_query_params('SELECT element_id,extra_field_id,element_name
 				FROM artifact_extra_field_elements
 				WHERE element_id = ANY ($1)',
-						array(db_int_array_to_any_clause(explode (',', $choiceid)))) ;
+						array(db_int_array_to_any_clause(explode(',', $choiceid))));
 			if (db_numrows($res) > 1) {
-				$arr = util_result_column_to_array($res,2);
-				$this->element_name["$choiceid"] = implode(',',$arr);
+				$arr = util_result_column_to_array($res, 2);
+				$this->element_name[$choiceid] = implode(',', $arr);
 			} else {
-				$this->element_name["$choiceid"]=db_result($res,0,'element_name');
+				$this->element_name[$choiceid] = db_result($res, 0, 'element_name');
 			}
 		}
-		return $this->element_name["$choiceid"];
+		return $this->element_name[$choiceid];
 	}
 
 	/**
@@ -758,29 +759,29 @@ class ArtifactType extends Error {
 	 * @param int|array $choice_id
 	 * @return int The status
 	 */
-	function getElementStatusID($choiceid) {
-		if (!$choiceid) {
+	function getElementStatusID($choice_id) {
+		if (!$choice_id) {
 			return 0;
 		}
 		if (is_array($choiceid)) {
-			$choiceid=implode(',',$choiceid);
+			$choiceid = implode(',',$choiceid);
 		}
 		if ($choiceid == 100) {
 			return 0;
 		}
-		if (!$this->element_status["$choiceid"]) {
-			$res = db_query_params ('SELECT element_id,extra_field_id,status_id
+		if (!$this->element_status[$choice_id]) {
+			$res = db_query_params('SELECT element_id,extra_field_id,status_id
 				FROM artifact_extra_field_elements
 				WHERE element_id = ANY ($1)',
-						array (db_int_array_to_any_clause (explode (',', $choiceid)))) ;
+						array(db_int_array_to_any_clause(explode(',', $choice_id))));
 			if (db_numrows($res) > 1) {
-				$arr=util_result_column_to_array($res,2);
-				$this->element_status["$choiceid"]=implode(',',$arr);
+				$arr = util_result_column_to_array($res, 2);
+				$this->element_status[$choice_id] = implode(',', $arr);
 			} else {
-				$this->element_status["$choiceid"]=db_result($res,0,'status_id');
+				$this->element_status[$choice_id] = db_result($res, 0, 'status_id');
 			}
 		}
-		return $this->element_status["$choiceid"];
+		return $this->element_status[$choice_id];
 	}
 
 	/**
@@ -875,7 +876,7 @@ class ArtifactType extends Error {
 	/**
 	 *	getSubmitters - returns a result set of submitters.
 	 *
-	 *	@return database result set.
+	 *	@return resource database result set.
 	 */
 	function getSubmitters() {
 		if (!isset($this->submitters_res)) {
@@ -895,10 +896,10 @@ class ArtifactType extends Error {
 	 */
 	function getCannedResponses() {
 		if (!isset($this->cannedresponses_res)) {
-			$this->cannedresponses_res = db_query_params ('SELECT id,title
+			$this->cannedresponses_res = db_query_params('SELECT id,title
 				FROM artifact_canned_responses
 				WHERE group_artifact_id=$1',
-								      array ($this->getID()));
+								      array($this->getID()));
 		}
 		return $this->cannedresponses_res;
 	}
@@ -932,7 +933,7 @@ class ArtifactType extends Error {
 		if ($result && db_numrows($result) > 0) {
 			return db_result($result, 0, 'status_name');
 		} else {
-			return 'Error - Not Found';
+			return 'Error: Not Found';
 		}
 	}
 
@@ -982,7 +983,7 @@ class ArtifactType extends Error {
 		if ($email_address) {
 			$invalid_emails = validate_emails($email_address);
 			if (count($invalid_emails) > 0) {
-				$this->SetError(_('E-mail address(es) appeared invalid').': '.implode(',',$invalid_emails));
+				$this->SetError(_('E-mail address(es) appeared invalid').': '.implode(',', $invalid_emails));
 				return false;
 			}
 		}
