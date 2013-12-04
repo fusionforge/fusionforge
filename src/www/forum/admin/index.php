@@ -110,11 +110,11 @@ if (getStringFromRequest('add_forum')) {
 			<input type="hidden" name="add_forum" value="y" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
 			<input type="hidden" name="form_key" value="' . form_generate_key() . '" />
-			<strong>'._('Forum Name').':'.utils_requiredField().'</strong><br />
+			<strong>'._('Forum Name')._(':').utils_requiredField().'</strong><br />
 			<input type="text" name="forum_name" required="required" value="" size="20" maxlength="30" />
 			</p>
 			<p>
-			<strong>'._('Description').':'.utils_requiredField().'</strong><br />
+			<strong>'._('Description')._(':').utils_requiredField().'</strong><br />
 			<input type="text" name="description" required="required" value="" size="40" maxlength="80" />
 			</p>
 			<p>
@@ -147,7 +147,7 @@ if (getStringFromRequest('add_forum')) {
 				<input type="hidden" name="change_status" value="y" />
 				<input type="hidden" name="group_forum_id" value="'. $f->getID() .'" />
 				<input type="hidden" name="group_id" value="'.$group_id.'" />
-				<strong>'._('Forum Name').':'.utils_requiredField().'</strong><br />
+				<strong>'._('Forum Name')._(':').utils_requiredField().'</strong><br />
 				<input type="text" name="forum_name" required="required" value="'. $f->getName() .'" size="20" maxlength="30" />
 				</p>
 				<p>
@@ -155,13 +155,14 @@ if (getStringFromRequest('add_forum')) {
 				<input type="email" name="send_all_posts_to" value="'. $f->getSendAllPostsTo() .'" size="60" />
 				</p>
 				<p>
-				<strong>'._('Description').':'.utils_requiredField().'</strong><br />
+				<strong>'._('Description')._(': ').utils_requiredField().'</strong><br />
 				<input type="text" name="description" required="required" value="'. $f->getDescription() .'" size="60" maxlength="80" /><br />
 				</p>
 				<p>
 				<input type="submit" name="submit" value="'._('Update').'" />
 				</p>
-			</form><p>';
+			</form>
+			<p>';
 	//echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;delete=1">'._('Delete Message').'</a><br />';
 	echo '<a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_forum_id='.$group_forum_id.'&amp;deleteforum=1">'._('Delete entire forum and all content').'</a></p>';
 	echo '<span>'.sprintf(_('%s Mandatory fields'), utils_requiredField()).'</span>';
@@ -360,7 +361,7 @@ if (getStringFromRequest('add_forum')) {
 	} else {
 		// Display select box to select new forum
 
-					forum_header(array('title'=>_('Move Thread')));
+		forum_header(array('title'=>_('Move Thread')));
 
 		$ff = new ForumFactory($g);
 		if (!$ff || !is_object($ff) || $ff->isError()) {
