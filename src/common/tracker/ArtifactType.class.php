@@ -723,34 +723,34 @@ class ArtifactType extends Error {
 	/**
 	 * getElementName - get the name of a particular element.
 	 *
-	 * @param $choiceid
+	 * @param $choice_id
 	 * @return string    The name.
 	 */
-	function getElementName($choiceid) {
-		if (!$choiceid) {
+	function getElementName($choice_id) {
+		if (!$choice_id) {
 			return '';
 		}
-		if (is_array($choiceid)) {
-			$choiceid = implode(',', array_map('intval', $choiceid));
+		if (is_array($choice_id)) {
+			$choice_id = implode(',', array_map('intval', $choice_id));
 		} else {
-			$choiceid = intval($choiceid);
+			$choice_id = intval($choice_id);
 		}
-		if ($choiceid == 100) {
+		if ($choice_id == 100) {
 			return 'None';
 		}
-		if (!isset($this->element_name["$choiceid"])) {
+		if (!isset($this->element_name[$choice_id])) {
 			$res = db_query_params('SELECT element_id,extra_field_id,element_name
 				FROM artifact_extra_field_elements
 				WHERE element_id = ANY ($1)',
-						array(db_int_array_to_any_clause(explode(',', $choiceid))));
+						array(db_int_array_to_any_clause(explode(',', $choice_id))));
 			if (db_numrows($res) > 1) {
 				$arr = util_result_column_to_array($res, 2);
-				$this->element_name[$choiceid] = implode(',', $arr);
+				$this->element_name[$choice_id] = implode(',', $arr);
 			} else {
-				$this->element_name[$choiceid] = db_result($res, 0, 'element_name');
+				$this->element_name[$choice_id] = db_result($res, 0, 'element_name');
 			}
 		}
-		return $this->element_name[$choiceid];
+		return $this->element_name[$choice_id];
 	}
 
 	/**
@@ -763,10 +763,10 @@ class ArtifactType extends Error {
 		if (!$choice_id) {
 			return 0;
 		}
-		if (is_array($choiceid)) {
-			$choiceid = implode(',',$choiceid);
+		if (is_array($choice_id)) {
+			$choice_id = implode(',',$choice_id);
 		}
-		if ($choiceid == 100) {
+		if ($choice_id == 100) {
 			return 0;
 		}
 		if (!$this->element_status[$choice_id]) {
