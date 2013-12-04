@@ -114,13 +114,12 @@ if (getStringFromRequest('submit')) {//if this is set, then the user has issued 
 }
 
 use_javascript('/js/sortable.js');
-$title = _('Account Maintenance');
+$title = _('My Account');
 site_user_header(array('title'=>$title));
 
 echo '<form action="'.util_make_url('/account/').'" method="post">';
 echo '<input type="hidden" name="form_key" value="'.form_generate_key().'"/>';
-echo $HTML->boxTop(_('Account Maintenance'));
-
+echo $HTML->boxTop(_('Account options'));
 ?>
 
 <p> <?php echo _('Welcome'); ?> <strong><?php print $u->getRealName(); ?></strong>. </p>
@@ -149,21 +148,25 @@ echo $HTML->boxTop(_('Account Maintenance'));
 <tr class="top">
 <td><?php echo _('Login Name')._(':'); ?> </td>
 <td><?php print $u->getUnixName(); ?>
-<br /><a href="change_pw.php">[<?php echo _('Change Password'); ?>]</a>
+<br /><a href="change_pw.php"><?php echo _('Change Password'); ?></a>
 </td>
 </tr>
 
 <tr>
 <td><?php echo _('First Name:').utils_requiredField(); ?></td>
 <td>
-<input required="required" type="text" name="firstname" value="<?php print $u->getFirstName(); ?>" />
+    <label for="firstname">
+        <input id="firstname" required="required" type="text" name="firstname" value="<?php print $u->getFirstName(); ?>"/>
+    </label>
 </td>
 </tr>
 
 <tr>
 <td><?php echo _('Last Name:').utils_requiredField(); ?></td>
 <td>
-<input required="required" type="text" name="lastname" value="<?php print $u->getLastName(); ?>" />
+    <label for="lastname">
+        <input id="lastname" required="required" type="text" name="lastname" value="<?php print $u->getLastName(); ?>"/>
+    </label>
 </td>
 </tr>
 
@@ -201,81 +204,93 @@ echo $HTML->boxTop(_('Account Maintenance'));
 <tr>
 <td><?php echo _('Address') . _(':'); ?></td>
 <td>
-<input type="text" name="address" value="<?php echo $u->getAddress(); ?>" size="80"/>
+    <label for="address">
+        <input id="address" type="text" name="address" value="<?php echo $u->getAddress(); ?>" size="80"/>
+    </label>
 </td>
 </tr>
 
 <tr>
 <td><?php echo _('Address (continued)') . _(':'); ?></td>
 <td>
-<input type="text" name="address2" value="<?php echo $u->getAddress2(); ?>" size="80"/>
+    <label for="address2">
+        <input id="address2" type="text" name="address2" value="<?php echo $u->getAddress2(); ?>" size="80"/>
+    </label>
+
 </td>
 </tr>
 
 <tr>
 <td><?php echo _('Phone')._(':'); ?></td>
 <td>
-<input type="text" name="phone" value="<?php echo $u->getPhone(); ?>" size="20"/>
+    <label for="phone">
+        <input id="phone" type="text" name="phone" value="<?php echo $u->getPhone(); ?>" size="20"/>
+    </label>
 </td>
 </tr>
 
 <tr>
 <td><?php echo _('Fax')._(':'); ?></td>
 <td>
-<input type="text" name="fax" value="<?php echo $u->getFax(); ?>" size="20"/>
+    <label for="fax">
+        <input id="fax" type="text" name="fax" value="<?php echo $u->getFax(); ?>" size="20"/>
+    </label>
 </td>
 </tr>
 
 <tr>
 <td><?php echo _('Title')._(':'); ?></td>
 <td>
-<input type="text" name="title" value="<?php echo $u->getTitle(); ?>" size="10"/>
+    <label for="title">
+        <input id="title" type="text" name="title" value="<?php echo $u->getTitle(); ?>" size="10"/>
+    </label>
 </td>
 </tr>
 </table>
 <?php
 echo $HTML->boxBottom();
 // ############################# Preferences
-echo $HTML->boxTop(_('Preferences')); ?>
-
-<div>
-<input type="checkbox" name="mail_site" value="1"<?php
-	if ($u->getMailingsPrefs('site')) print ' checked="checked"'; ?> />
-	<?php echo _('Receive Email about Site Updates <em>(Very low traffic and includes security notices. Highly Recommended.)</em>'); ?>
-</div>
-
-<div>
-<input type="checkbox"  name="mail_va" value="1"<?php
-	if ($u->getMailingsPrefs('va')) print ' checked="checked"'; ?> />
-	<?php echo _('Receive additional community mailings. <em>(Low traffic.)</em>'); ?>
-</div>
-
-<?php /*
-<div>
-<input type="checkbox"  name="remember_user" value="1"<?php
-	if ($sf_user_hash) print ' checked="checked"'; ?> />
-<?php printf(_('"Remember me". <em>(Allows to access your <a href="%s">personal page</a> without being logged in. You will still need to login explicitly before making any changes.)</em>'),util_make_url ('/my/'));
-echo "\n</div>";
-*/ ?>
-
-<?php if (forge_get_config('use_ratings')) { ?>
-<div>
-<input type="checkbox" name="use_ratings" value="1"<?php
-	if ($u->usesRatings()) print ' checked="checked"'; ?> />
-		<?php printf(_('Participate in peer ratings. <em>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</em>'),util_make_url_u ($u->getUnixName(),$u->getId()));
-echo "\n</div>";
-} ?>
-<div>
-<input type="checkbox" name="use_tooltips" value="1"<?php
-	if ($u->usesTooltips()) print ' checked="checked"'; ?> />
-		<?php echo _('Enable tooltips. Small help texts displayed on mouse over links, images.');
+echo $HTML->boxTop(_('Preferences'));
 ?>
-</div>
+
+<p>
+    <label for="mail_site">
+        <input id="mail_site" type="checkbox" name="mail_site" value="1"<?php
+	if ($u->getMailingsPrefs('site')) print ' checked="checked"'; ?> />
+    </label>
+    <?php echo _('Receive Email about Site Updates <em>(Very low traffic and includes security notices. Highly Recommended.)</em>'); ?>
+</p>
+
+<p>
+    <label for="mail_va">
+        <input id="mail_va" type="checkbox" name="mail_va" value="1"<?php
+    if ($u->getMailingsPrefs('va')) print ' checked="checked"'; ?> />
+    </label>
+    <?php echo _('Receive additional community mailings. <em>(Low traffic.)</em>'); ?>
+</p>
+
+<p>
+<?php if (forge_get_config('use_ratings')) { ?>
+    <label for="use_ratings">
+        <input id="use_ratings" type="checkbox" name="use_ratings" value="1"<?php
+        if ($u->usesRatings()) print ' checked="checked"'; ?> />
+    </label>
+    <?php printf(_('Participate in peer ratings. <em>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</em>'),util_make_url_u ($u->getUnixName(),$u->getId()));
+} ?>
+</p>
+<p>
+    <label for="use_tooltips">
+        <input id="use_tooltips" type="checkbox" name="use_tooltips" value="1"<?php
+    if ($u->usesTooltips()) print ' checked="checked"'; ?> />
+    </label>
+    <?php echo _('Enable tooltips. Small help texts displayed on mouse over links, images.');
+?>
+</p>
+
 <?php
 // displays a "Use xxxx Plugin" checkbox
 plugin_hook("userisactivecheckbox", $hookParams);
-?>
-<?php
+
 echo $HTML->boxBottom();
 
 // ############################### Shell Account
