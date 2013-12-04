@@ -145,7 +145,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 	<table>
 	<tr>
 		<td>
-			<strong><?php echo _('Package ID') ?>:</strong>
+			<strong><?php echo _('Package ID')._(':'); ?></strong>
 		</td>
 		<td>
 <?php
@@ -187,7 +187,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 	</tr>
 	<tr>
 		<td>
-			<h4><?php echo _('File Name')._(': '); ?><?php echo utils_requiredField();?></h4>
+			<h4><?php echo _('File Name')._(':'); ?><?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
 		<div class="important">
@@ -196,7 +196,6 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 		</div>
 		<?php echo _('Upload a new file')._(': '); ?><input type="file" name="userfile"  size="30" />
 		<?php if (forge_get_config('use_ftp_uploads')) {
-
 			echo '<p>';
 			printf(_('Alternatively, you can use FTP to upload a new file at %1$s.'), forge_get_config('ftp_upload_host'));
 			echo '<br />';
