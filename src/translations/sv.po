@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-04 11:08+0100\n"
+"POT-Creation-Date: 2013-12-04 12:57+0100\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -272,6 +272,7 @@ msgstr "Filnamn"
 #: common/tracker/ArtifactExtraField.class.php:193
 #: common/tracker/views/form-adminroadmap.php:70
 #: common/tracker/views/form-adminroadmap.php:193
+#: common/tracker/views/form-updateextrafield.php:42
 #: common/widget/Widget_ProjectInfo.class.php:45
 #: cronjobs/send_pending_items_mail.php:77
 #: cronjobs/send_pending_items_mail.php:78
@@ -331,31 +332,32 @@ msgstr "Filnamn"
 #: www/export/rssAboTask.php:143 www/export/rssAboTask.php:144
 #: www/export/rssAboTask.php:145 www/export/rssAboTask.php:146
 #: www/export/rssAboTask.php:169 www/export/rssAboTask.php:171
-#: www/export/rssAboTask.php:173 www/forum/admin/pendingmsgdetail.php:59
-#: www/forum/forum.php:92 www/forum/forum.php:156 www/forum/message.php:126
-#: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:190
-#: www/frs/admin/qrs.php:197 www/include/user_profile.php:88
-#: www/include/user_profile.php:93 www/include/user_profile.php:112
-#: www/new/index.php:98 www/news/submit.php:153 www/news/submit.php:155
-#: www/news/submit.php:158 www/people/admin/index.php:52
-#: www/people/admin/index.php:65 www/people/editprofile.php:233
-#: www/people/skills_utils.php:121 www/people/viewprofile.php:47
-#: www/pm/add_task.php:50 www/pm/add_task.php:63 www/pm/add_task.php:67
-#: www/pm/add_task.php:74 www/pm/add_task.php:81 www/pm/add_task.php:88
-#: www/pm/add_task.php:95 www/pm/add_task.php:110 www/pm/add_task.php:124
-#: www/pm/add_task.php:130 www/pm/add_task.php:149 www/pm/admin/index.php:98
-#: www/pm/admin/index.php:120 www/pm/admin/index.php:260
-#: www/pm/calendar.php:59 www/pm/detail_task.php:42 www/pm/detail_task.php:66
-#: www/pm/detail_task.php:71 www/pm/detail_task.php:86
-#: www/pm/detail_task.php:90 www/pm/detail_task.php:97
-#: www/pm/detail_task.php:104 www/pm/include/ProjectTaskHTML.class.php:141
-#: www/pm/mod_task.php:52 www/pm/mod_task.php:61 www/pm/mod_task.php:66
-#: www/pm/mod_task.php:78 www/pm/mod_task.php:83 www/pm/mod_task.php:97
-#: www/pm/mod_task.php:114 www/pm/mod_task.php:126 www/pm/mod_task.php:146
-#: www/pm/mod_task.php:160 www/pm/mod_task.php:173 www/pm/mod_task.php:183
-#: www/pm/mod_task.php:197 www/pm/mod_task.php:202 www/pm/mod_task.php:212
-#: www/pm/mod_task.php:323 www/project/admin/roledelete.php:62
-#: www/register/index.php:188 www/reporting/timeadd.php:70
+#: www/export/rssAboTask.php:173 www/forum/admin/index.php:158
+#: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
+#: www/forum/forum.php:156 www/forum/message.php:126
+#: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:197
+#: www/include/user_profile.php:88 www/include/user_profile.php:93
+#: www/include/user_profile.php:112 www/new/index.php:98
+#: www/news/submit.php:153 www/news/submit.php:155 www/news/submit.php:158
+#: www/people/admin/index.php:52 www/people/admin/index.php:65
+#: www/people/editprofile.php:233 www/people/skills_utils.php:121
+#: www/people/viewprofile.php:47 www/pm/add_task.php:50 www/pm/add_task.php:63
+#: www/pm/add_task.php:67 www/pm/add_task.php:74 www/pm/add_task.php:81
+#: www/pm/add_task.php:88 www/pm/add_task.php:95 www/pm/add_task.php:110
+#: www/pm/add_task.php:124 www/pm/add_task.php:130 www/pm/add_task.php:149
+#: www/pm/admin/index.php:98 www/pm/admin/index.php:120
+#: www/pm/admin/index.php:260 www/pm/calendar.php:59 www/pm/detail_task.php:42
+#: www/pm/detail_task.php:66 www/pm/detail_task.php:71
+#: www/pm/detail_task.php:86 www/pm/detail_task.php:90
+#: www/pm/detail_task.php:97 www/pm/detail_task.php:104
+#: www/pm/include/ProjectTaskHTML.class.php:141 www/pm/mod_task.php:52
+#: www/pm/mod_task.php:61 www/pm/mod_task.php:66 www/pm/mod_task.php:78
+#: www/pm/mod_task.php:83 www/pm/mod_task.php:97 www/pm/mod_task.php:114
+#: www/pm/mod_task.php:126 www/pm/mod_task.php:146 www/pm/mod_task.php:160
+#: www/pm/mod_task.php:173 www/pm/mod_task.php:183 www/pm/mod_task.php:197
+#: www/pm/mod_task.php:202 www/pm/mod_task.php:212 www/pm/mod_task.php:323
+#: www/project/admin/roledelete.php:62 www/register/index.php:188
+#: www/reporting/timeadd.php:70
 #: www/search/include/renderers/AdvancedSearchHtmlSearchRenderer.class.php:101
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:88
 #: www/search/include/renderers/FullProjectHtmlSearchRenderer.class.php:90
@@ -1697,7 +1699,8 @@ msgstr ""
 #: common/tracker/views/form-updatecanned.php:43
 #: common/tracker/views/form-updatecanned.php:48
 #: common/tracker/views/form-updateextrafieldelement.php:55
-#: common/tracker/views/form-updateextrafield.php:48
+#: common/tracker/views/form-updateextrafield.php:49
+#: common/tracker/views/form-updateextrafield.php:83
 #: common/tracker/views/form-updatetracker.php:53
 #: common/tracker/views/form-updatetracker.php:64
 #: common/tracker/views/form-updatetracker.php:69
@@ -1795,29 +1798,31 @@ msgstr ""
 #: www/admin/trove/trove_cat_edit.php:147 www/admin/useredit.php:130
 #: www/admin/useredit.php:139 www/admin/useredit.php:148
 #: www/admin/useredit.php:157 www/admin/useredit.php:211
-#: www/admin/vhost.php:140 www/frs/admin/editrelease.php:226
-#: www/frs/admin/editrelease.php:230 www/frs/admin/editrelease.php:263
-#: www/frs/admin/editrelease.php:269 www/frs/admin/editrelease.php:319
-#: www/frs/admin/editrelease.php:325 www/frs/admin/qrs.php:174
-#: www/frs/admin/qrs.php:182 www/frs/admin/qrs.php:226
-#: www/frs/admin/qrs.php:236 www/frs/admin/qrs.php:246
-#: www/frs/admin/qrs.php:254 www/frs/reporting/downloads.php:107
-#: www/frs/reporting/downloads.php:109 www/frs/reporting/downloads.php:111
-#: www/include/user_profile.php:68 www/include/user_profile.php:126
-#: www/include/user_profile.php:133 www/include/user_profile.php:144
-#: www/include/user_profile.php:152 www/mail/admin/index.php:192
-#: www/mail/admin/index.php:225 www/my/bookmark_add.php:53
-#: www/my/bookmark_add.php:59 www/my/bookmark_edit.php:59
-#: www/my/bookmark_edit.php:65 www/my/diary.php:181 www/my/diary.php:185
-#: www/news/admin/index.php:125 www/people/admin/index.php:99
-#: www/people/admin/index.php:133 www/people/createjob.php:52
-#: www/people/createjob.php:55 www/people/editjob.php:169
-#: www/people/editjob.php:172 www/people/editprofile.php:241
-#: www/pm/admin/index.php:214 www/pm/admin/index.php:293
-#: www/pm/admin/index.php:323 www/pm/admin/index.php:333
-#: www/pm/admin/index.php:343 www/pm/format_csv.php:66
-#: www/pm/format_csv.php:71 www/pm/format_csv.php:76 www/pm/format_csv.php:89
-#: www/pm/format_csv.php:93 www/pm/format_csv.php:97
+#: www/admin/vhost.php:140 www/forum/admin/index.php:113
+#: www/forum/admin/index.php:117 www/forum/admin/index.php:150
+#: www/frs/admin/editrelease.php:226 www/frs/admin/editrelease.php:230
+#: www/frs/admin/editrelease.php:263 www/frs/admin/editrelease.php:269
+#: www/frs/admin/editrelease.php:319 www/frs/admin/editrelease.php:325
+#: www/frs/admin/qrs.php:148 www/frs/admin/qrs.php:174
+#: www/frs/admin/qrs.php:182 www/frs/admin/qrs.php:190
+#: www/frs/admin/qrs.php:225 www/frs/admin/qrs.php:235
+#: www/frs/admin/qrs.php:245 www/frs/admin/qrs.php:253
+#: www/frs/reporting/downloads.php:107 www/frs/reporting/downloads.php:109
+#: www/frs/reporting/downloads.php:111 www/include/user_profile.php:68
+#: www/include/user_profile.php:126 www/include/user_profile.php:133
+#: www/include/user_profile.php:144 www/include/user_profile.php:152
+#: www/mail/admin/index.php:192 www/mail/admin/index.php:225
+#: www/my/bookmark_add.php:53 www/my/bookmark_add.php:59
+#: www/my/bookmark_edit.php:59 www/my/bookmark_edit.php:65
+#: www/my/diary.php:181 www/my/diary.php:185 www/news/admin/index.php:125
+#: www/people/admin/index.php:99 www/people/admin/index.php:133
+#: www/people/createjob.php:52 www/people/createjob.php:55
+#: www/people/editjob.php:169 www/people/editjob.php:172
+#: www/people/editprofile.php:241 www/pm/admin/index.php:214
+#: www/pm/admin/index.php:293 www/pm/admin/index.php:323
+#: www/pm/admin/index.php:333 www/pm/admin/index.php:343
+#: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
+#: www/pm/format_csv.php:89 www/pm/format_csv.php:93 www/pm/format_csv.php:97
 #: www/project/admin/editimages.php:222 www/project/admin/editimages.php:226
 #: www/project/admin/editimages.php:230 www/project/admin/editimages.php:250
 #: www/project/admin/editimages.php:253 www/project/stats/index.php:105
@@ -2038,8 +2043,8 @@ msgstr ""
 msgid "Child project"
 msgstr ""
 
-#: common/forum/AttachManager.class.php:144 www/forum/admin/index.php:325
-#: www/forum/admin/index.php:331 www/forum/admin/index.php:396
+#: common/forum/AttachManager.class.php:144 www/forum/admin/index.php:326
+#: www/forum/admin/index.php:332 www/forum/admin/index.php:397
 #: www/forum/admin/monitor.php:41
 #, fuzzy
 msgid "Could Not Get Forum Object"
@@ -2085,7 +2090,7 @@ msgstr "Kunde inte uppdatera förälder"
 #: www/admin/admin_table.php:161 www/admin/admin_table.php:325
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:150
 #: www/admin/useredit.php:231 www/admin/userlist.php:119
-#: www/forum/admin/index.php:185 www/frs/admin/deletepackage.php:74
+#: www/forum/admin/index.php:186 www/frs/admin/deletepackage.php:74
 #: www/frs/admin/deleterelease.php:76 www/frs/admin/index.php:185
 #: www/frs/admin/showreleases.php:114 www/news/admin/index.php:131
 #: www/people/people_utils.php:179 www/people/people_utils.php:323
@@ -2154,7 +2159,7 @@ msgstr ""
 msgid "%s does not use the Forum tool."
 msgstr ""
 
-#: common/forum/ForumAdmin.class.php:61 www/forum/admin/index.php:363
+#: common/forum/ForumAdmin.class.php:61 www/forum/admin/index.php:364
 #, fuzzy
 msgid "Move Thread"
 msgstr "Trådvy"
@@ -2171,7 +2176,7 @@ msgstr ""
 
 #: common/forum/ForumAdmin.class.php:177 common/forum/ForumAdmin.class.php:205
 #: common/forum/ForumAdmin.class.php:223 common/forum/ForumAdmin.class.php:251
-#: www/forum/admin/index.php:246 www/forum/admin/index.php:285
+#: www/forum/admin/index.php:247 www/forum/admin/index.php:286
 #: www/forum/attachment.php:70 www/forum/monitor.php:47 www/forum/new.php:48
 #: www/forum/save.php:47
 #, fuzzy
@@ -2187,7 +2192,7 @@ msgstr "Uppdatering av foruminfo lyckades"
 msgid "Forum added successfully"
 msgstr "Skapande av forum lyckades"
 
-#: common/forum/ForumAdmin.class.php:232 www/forum/admin/index.php:292
+#: common/forum/ForumAdmin.class.php:232 www/forum/admin/index.php:293
 #, fuzzy
 msgid "Error Getting ForumMessage"
 msgstr "Fel vid tillägg i forum"
@@ -2383,7 +2388,7 @@ msgstr "Uppdatering misslyckades"
 #: common/mail/MailingList.class.php:398 common/pm/ProjectGroup.class.php:362
 #: common/pm/ProjectTask.class.php:515 common/tracker/Artifact.class.php:505
 #: common/tracker/ArtifactExtraField.class.php:430
-#: common/tracker/ArtifactType.class.php:795
+#: common/tracker/ArtifactType.class.php:796
 msgid "Please tick all checkboxes."
 msgstr ""
 
@@ -2552,7 +2557,7 @@ msgstr "Ämne"
 #: plugins/scmhg/common/HgPlugin.class.php:631
 #: plugins/webanalytics/view/admin/updateLinkValue.php:42
 #: www/admin/admin_table.php:58 www/admin/admin_table.php:164
-#: www/admin/admin_table.php:223 www/forum/admin/index.php:413
+#: www/admin/admin_table.php:223 www/forum/admin/index.php:414
 #: www/forum/monitor.php:65 www/my/rmproject.php:96
 #: www/people/editprofile.php:157 www/people/editprofile.php:215
 #: www/pm/mod_task.php:289 www/register/index.php:315
@@ -2840,11 +2845,11 @@ msgstr ""
 
 #: common/frs/FRSRelease.class.php:294
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:130
-#: www/frs/admin/qrs.php:246 www/frs/shownotes.php:78
+#: www/frs/admin/qrs.php:245 www/frs/shownotes.php:78
 msgid "Release Notes"
 msgstr "Utgåvonoteringar"
 
-#: common/frs/FRSRelease.class.php:297 www/frs/admin/qrs.php:254
+#: common/frs/FRSRelease.class.php:297 www/frs/admin/qrs.php:253
 #: www/frs/shownotes.php:84
 msgid "Change Log"
 msgstr "Ändringslogg"
@@ -5149,7 +5154,7 @@ msgstr ""
 #: common/tracker/views/form-extrafieldcopy.php:94
 #: common/tracker/views/form-updatecanned.php:52
 #: common/tracker/views/form-updateextrafieldelement.php:70
-#: common/tracker/views/form-updateextrafield.php:79
+#: common/tracker/views/form-updateextrafield.php:94
 #: common/tracker/views/form-updatetracker.php:81
 #: common/tracker/views/form-workflow.php:123
 #: common/tracker/views/form-workflow_roles.php:77
@@ -5167,7 +5172,7 @@ msgstr ""
 #: www/account/pending-resend.php:75 www/admin/admin_table.php:221
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:247
 #: www/admin/index.php:169 www/admin/pending-news.php:160
-#: www/forum/admin/index.php:412 www/include/vote_function.php:286
+#: www/forum/admin/index.php:413 www/include/vote_function.php:286
 #: www/my/bookmark_add.php:63 www/my/bookmark_edit.php:69 www/my/diary.php:189
 #: www/news/admin/index.php:149 www/news/news_utils.php:42
 #: www/news/submit.php:170 www/pm/add_task.php:57 www/pm/add_task.php:140
@@ -5687,7 +5692,7 @@ msgstr ""
 #: common/tracker/views/form-deleteextrafieldelement.php:68
 #: common/tracker/views/form-deleteextrafield.php:44
 #: common/tracker/views/form-deletetracker.php:38
-#: www/admin/responses_admin.php:51 www/forum/admin/index.php:183
+#: www/admin/responses_admin.php:51 www/forum/admin/index.php:184
 #: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:74
 #: www/frs/admin/editrelease.php:382 www/pm/admin/index.php:384
 #: www/pm/deletetask.php:45 www/project/admin/roledelete.php:88
@@ -6438,7 +6443,7 @@ msgid "Query does not exist"
 msgstr ""
 
 #: common/tracker/ArtifactType.class.php:209
-#: common/tracker/ArtifactType.class.php:967
+#: common/tracker/ArtifactType.class.php:968
 msgid ""
 "ArtifactType: Name, Description, Due Period, and Status Timeout are required"
 msgstr ""
@@ -6446,11 +6451,11 @@ msgstr ""
 "är obligatoriska"
 
 #: common/tracker/ArtifactType.class.php:216
-#: common/tracker/ArtifactType.class.php:985
+#: common/tracker/ArtifactType.class.php:986
 msgid "E-mail address(es) appeared invalid"
 msgstr ""
 
-#: common/tracker/ArtifactType.class.php:978
+#: common/tracker/ArtifactType.class.php:979
 #, fuzzy
 msgid "Tracker name already used"
 msgstr "Unixnamn redan upptaget"
@@ -6805,12 +6810,12 @@ msgid "Add New Custom Field"
 msgstr ""
 
 #: common/tracker/views/form-addextrafield.php:113
-#: common/tracker/views/form-updateextrafield.php:48
+#: common/tracker/views/form-updateextrafield.php:49
 msgid "Custom Field Name"
 msgstr ""
 
 #: common/tracker/views/form-addextrafield.php:117
-#: common/tracker/views/form-updateextrafield.php:72
+#: common/tracker/views/form-updateextrafield.php:83
 msgid "Field alias"
 msgstr ""
 
@@ -6940,7 +6945,7 @@ msgstr ""
 #: plugins/projects-hierarchy/view/admin_project_link.php:69
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
 #: www/admin/approve-pending.php:162 www/admin/groupedit.php:161
-#: www/admin/responses_admin.php:50 www/forum/admin/index.php:222
+#: www/admin/responses_admin.php:50 www/forum/admin/index.php:223
 #: www/mail/admin/index.php:190 www/mail/admin/index.php:221
 #: www/people/editprofile.php:244 www/survey/include/SurveyHTML.class.php:194
 #: www/survey/include/SurveyHTML.class.php:417
@@ -7116,7 +7121,7 @@ msgstr ""
 
 #: common/tracker/views/form-deleteextrafield.php:48
 #: common/tracker/views/form-deletetracker.php:42
-#: www/forum/admin/index.php:184 www/frs/admin/deletepackage.php:71
+#: www/forum/admin/index.php:185 www/frs/admin/deletepackage.php:71
 #: www/frs/admin/deleterelease.php:75 www/pm/admin/index.php:390
 #, fuzzy
 msgid "I am Really Sure"
@@ -7167,7 +7172,7 @@ msgid "Update a custom field element in %s"
 msgstr "Konto borttaget"
 
 #: common/tracker/views/form-updateextrafieldelement.php:67
-#: common/tracker/views/form-updateextrafield.php:76
+#: common/tracker/views/form-updateextrafield.php:90
 msgid ""
 "It is not recommended that you change the custom field name because other "
 "things are dependent upon it. When you change the custom field name, all "
@@ -7179,23 +7184,23 @@ msgstr ""
 msgid "Modify a custom field in %s"
 msgstr ""
 
-#: common/tracker/views/form-updateextrafield.php:53
+#: common/tracker/views/form-updateextrafield.php:56
 msgid "Text Area Rows"
 msgstr ""
 
-#: common/tracker/views/form-updateextrafield.php:57
+#: common/tracker/views/form-updateextrafield.php:62
 msgid "Text Area Columns"
 msgstr ""
 
-#: common/tracker/views/form-updateextrafield.php:60
+#: common/tracker/views/form-updateextrafield.php:68
 msgid "Text Field Size"
 msgstr ""
 
-#: common/tracker/views/form-updateextrafield.php:64
+#: common/tracker/views/form-updateextrafield.php:74
 msgid "Text Field Maxlength"
 msgstr ""
 
-#: common/tracker/views/form-updateextrafield.php:75
+#: common/tracker/views/form-updateextrafield.php:88
 msgid "Field is mandatory"
 msgstr ""
 
@@ -9902,7 +9907,7 @@ msgstr ""
 #: plugins/mailman/www/admin/index.php:184
 #: plugins/projects-hierarchy/view/admin_project_link.php:69
 #: plugins/projects-hierarchy/view/admin_project_link.php:81
-#: www/admin/groupedit.php:160 www/forum/admin/index.php:223
+#: www/admin/groupedit.php:160 www/forum/admin/index.php:224
 #: www/mail/admin/index.php:191 www/mail/admin/index.php:222
 #: www/people/editprofile.php:243 www/survey/include/SurveyHTML.class.php:195
 #: www/survey/include/SurveyHTML.class.php:419
@@ -12045,7 +12050,7 @@ msgid "Upload a new file"
 msgstr "Överför en ny fil"
 
 #: plugins/mediawiki/www/plugin_admin.php:198
-#: www/frs/admin/editrelease.php:307 www/frs/admin/qrs.php:213
+#: www/frs/admin/editrelease.php:307 www/frs/admin/qrs.php:212
 #, php-format
 msgid ""
 "Alternatively, you can use a file you already uploaded (by SFTP or SCP) to "
@@ -12053,7 +12058,7 @@ msgid ""
 msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:200
-#: www/frs/admin/editrelease.php:309 www/frs/admin/qrs.php:215
+#: www/frs/admin/editrelease.php:309 www/frs/admin/qrs.php:214
 msgid ""
 "This direct <tt>sftp://</tt> link only works with some browsers, such as "
 "Konqueror."
@@ -12061,7 +12066,7 @@ msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:203
 #: www/frs/admin/editrelease.php:297 www/frs/admin/editrelease.php:310
-#: www/frs/admin/qrs.php:216
+#: www/frs/admin/qrs.php:215
 msgid "Choose an already uploaded file:"
 msgstr ""
 
@@ -13804,11 +13809,11 @@ msgstr[1] "Utvecklare (test)"
 
 #: plugins/scmgit/common/GitPlugin.class.php:172
 msgid ""
-"Only project developers can access the GIT repository via this method. SSH "
+"Only project developers can access the Git repository via this method. SSH "
 "must be installed on your client machine. Enter your site password when "
 "prompted."
 msgid_plural ""
-"Only project developers can access the GIT repositories via this method. SSH "
+"Only project developers can access the Git repositories via this method. SSH "
 "must be installed on your client machine. Enter your site password when "
 "prompted."
 msgstr[0] ""
@@ -13825,10 +13830,10 @@ msgstr[1] "Utvecklare (test)"
 #: plugins/scmgit/common/GitPlugin.class.php:192
 #: plugins/scmgit/common/GitPlugin.class.php:233
 msgid ""
-"Only project developers can access the GIT repository via this method. Enter "
+"Only project developers can access the Git repository via this method. Enter "
 "your site password when prompted."
 msgid_plural ""
-"Only project developers can access the GIT repositories via this method. "
+"Only project developers can access the Git repositories via this method. "
 "Enter your site password when prompted."
 msgstr[0] ""
 msgstr[1] ""
@@ -13840,11 +13845,11 @@ msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:215
 msgid ""
-"Only project developers can access the GIT repository via this method. SSH "
+"Only project developers can access the Git repository via this method. SSH "
 "must be installed on your client machine. Substitute <em>developername</em> "
 "with the proper value. Enter your site password when prompted."
 msgid_plural ""
-"Only project developers can access the GIT repositories via this method. SSH "
+"Only project developers can access the Git repositories via this method. SSH "
 "must be installed on your client machine. Substitute <em>developername</em> "
 "with the proper value. Enter your site password when prompted."
 msgstr[0] ""
@@ -14838,7 +14843,7 @@ msgid "Shell Account deactivated"
 msgstr "Skalkontoinformation"
 
 #: www/account/index.php:341 www/forum/admin/index.php:128
-#: www/forum/admin/index.php:167
+#: www/forum/admin/index.php:168
 #, php-format
 msgid "%s Mandatory fields"
 msgstr ""
@@ -16832,7 +16837,7 @@ msgstr ""
 msgid "Search in project"
 msgstr "Främsta projekt"
 
-#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:426
+#: www/forum/admin/attachments.php:42 www/forum/admin/index.php:427
 msgid "Forums Administration"
 msgstr "Forum Administration"
 
@@ -16856,82 +16861,82 @@ msgstr ""
 "Du kan justera forum finesser här. Var vänlig notera att privata forum "
 "fortfarande kan ses av projektmedlemmar, men inte den allmäna besökaren."
 
-#: www/forum/admin/index.php:166
+#: www/forum/admin/index.php:167
 msgid "Delete entire forum and all content"
 msgstr ""
 
-#: www/forum/admin/index.php:174
+#: www/forum/admin/index.php:175
 #, fuzzy
 msgid "Permanently Delete Forum"
 msgstr "Relaterade poster i ordningslista"
 
-#: www/forum/admin/index.php:176
+#: www/forum/admin/index.php:177
 msgid ""
 "You are about to permanently and irretrievably delete this entire forum and "
 "all its contents!"
 msgstr ""
 
-#: www/forum/admin/index.php:203 www/forum/admin/index.php:217
+#: www/forum/admin/index.php:204 www/forum/admin/index.php:218
 msgid "Delete a Message"
 msgstr "Ta bort ett inlägg"
 
-#: www/forum/admin/index.php:204 www/forum/admin/index.php:275
-#: www/forum/admin/index.php:349
+#: www/forum/admin/index.php:205 www/forum/admin/index.php:276
+#: www/forum/admin/index.php:350
 msgid "Return to the forum"
 msgstr ""
 
-#: www/forum/admin/index.php:220
+#: www/forum/admin/index.php:221
 msgid ""
 "WARNING! You are about to permanently delete a message and all of its "
 "comments!!"
 msgstr ""
 "VARNING! Du är på väg att radera ett meddelande och alla dess uppföljare!!"
 
-#: www/forum/admin/index.php:252
+#: www/forum/admin/index.php:253
 msgid "Error getting new forum message"
 msgstr ""
 
-#: www/forum/admin/index.php:270
+#: www/forum/admin/index.php:271
 msgid "Message Edited Successfully"
 msgstr ""
 
-#: www/forum/admin/index.php:274 www/forum/admin/index.php:304
-#: www/forum/admin/index.php:348
+#: www/forum/admin/index.php:275 www/forum/admin/index.php:305
+#: www/forum/admin/index.php:349
 msgid "Edit a Message"
 msgstr ""
 
-#: www/forum/admin/index.php:299 www/forum/new.php:55
+#: www/forum/admin/index.php:300 www/forum/new.php:55
 #, fuzzy
 msgid "Error Getting ForumHTML"
 msgstr "Fel vid tillägg i forum"
 
-#: www/forum/admin/index.php:319
+#: www/forum/admin/index.php:320
 #, fuzzy
 msgid "Thread not moved"
 msgstr "Trådvy"
 
-#: www/forum/admin/index.php:342
+#: www/forum/admin/index.php:343
 #, php-format
 msgid "Thread successfully moved from %1$s forum to %2$s forum"
 msgstr ""
 
-#: www/forum/admin/index.php:350
+#: www/forum/admin/index.php:351
 #, fuzzy
 msgid "Return to the thread"
 msgstr "Starta ny tråd"
 
-#: www/forum/admin/index.php:373 www/forum/admin/index.php:449
+#: www/forum/admin/index.php:374 www/forum/admin/index.php:450
 #: www/forum/index.php:58
 #, php-format
 msgid "No Forums Found for %s"
 msgstr "Hittade inga forum för %s"
 
-#: www/forum/admin/index.php:403
+#: www/forum/admin/index.php:404
 #, php-format
 msgid "Move thread from %s forum to the following forum:"
 msgstr ""
 
-#: www/forum/admin/index.php:467 www/forum/admin/monitor.php:48
+#: www/forum/admin/index.php:468 www/forum/admin/monitor.php:48
 #, fuzzy
 msgid "Monitoring Users"
 msgstr "Bevaka en användare"
@@ -17264,7 +17269,7 @@ msgstr "Klistra in noteringar"
 msgid "Paste The Change Log In"
 msgstr "Klistra in ändringsloggen"
 
-#: www/frs/admin/editrelease.php:276 www/frs/admin/qrs.php:262
+#: www/frs/admin/editrelease.php:276 www/frs/admin/qrs.php:261
 msgid "Preserve my pre-formatted text"
 msgstr "Bevara min förformaterade text"
 
@@ -17281,17 +17286,17 @@ msgstr "Steg 3: Redigera filer i denna utgåva"
 msgid "Now, choose a file to upload into the system."
 msgstr ""
 
-#: www/frs/admin/editrelease.php:295 www/frs/admin/qrs.php:201
+#: www/frs/admin/editrelease.php:295 www/frs/admin/qrs.php:200
 #, php-format
 msgid "Alternatively, you can use FTP to upload a new file at %1$s."
 msgstr ""
 
 #: www/frs/admin/editrelease.php:319 www/frs/admin/editrelease.php:347
-#: www/frs/admin/qrs.php:226
+#: www/frs/admin/qrs.php:225
 msgid "File Type"
 msgstr "Filtyp"
 
-#: www/frs/admin/editrelease.php:325 www/frs/admin/qrs.php:236
+#: www/frs/admin/editrelease.php:325 www/frs/admin/qrs.php:235
 msgid "Processor Type"
 msgstr "Processortyp"
 
@@ -17477,11 +17482,11 @@ msgstr ""
 msgid "You can probably not upload files larger than about %.2f MiB in size."
 msgstr ""
 
-#: www/frs/admin/qrs.php:203
+#: www/frs/admin/qrs.php:202
 msgid "Choose an FTP file instead of uploading:"
 msgstr ""
 
-#: www/frs/admin/qrs.php:263
+#: www/frs/admin/qrs.php:262
 msgid "Release File"
 msgstr "Utgåvans fil"
 
