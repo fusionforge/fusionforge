@@ -147,7 +147,7 @@ printf(_('With PFO-RBAC, the “is_public” property is gone. Instead, to make 
 
 <tr>
 <td>
-<?php echo _('Template?') ?>:
+<?php echo _('Template?')._(':'); ?>
 </td>
 <td>
 <?php
