@@ -103,8 +103,8 @@ class GitPlugin extends SCMPlugin {
 				       count($repo_list)) . '</h2>';
 
 		$b .= '<p>';
-		$b .= ngettext('This project\'s Git repository can be checked out through anonymous access with the following command.',
-			       'This project\'s Git repositories can be checked out through anonymous access with the following commands.',
+		$b .= ngettext("This project's Git repository can be checked out through anonymous access with the following command.",
+			       "This project's Git repositories can be checked out through anonymous access with the following commands.",
 			       count($repo_list));
 
 		$b .= '</p>';
@@ -123,13 +123,13 @@ class GitPlugin extends SCMPlugin {
 
 		if ($rows > 0) {
 			$b .= '<h2>';
-			$b .= ngettext('Developer\'s repository',
-				       'Developer\'s repositories',
+			$b .= ngettext("Developer's repository",
+				       "Developer's repositories",
 				       $rows);
 			$b .= '</h2>'."\n";
 			$b .= '<p>';
-			$b .= ngettext('One of this project\'s members also has a personal Git repository that can be checked out anonymously.',
-					'Some of this project\'s members also have personal Git repositories that can be checked out anonymously.',
+			$b .= ngettext("One of this project's members also has a personal Git repository that can be checked out anonymously.",
+					"Some of this project's members also have personal Git repositories that can be checked out anonymously.",
 				$rows);
 			$b .= '</p>';
 			$b .= '<p>';
@@ -265,7 +265,7 @@ class GitPlugin extends SCMPlugin {
 							$b .= _('Request a personal repository');
 							$b .= '</h2>';
 							$b .= '<p>';
-							$b .= _('You can clone the project repository into a personal one into which you alone will be able to write.  Other members of the project will only have read access.  Access for non-members will follow the same rules as for the project\'s main repository.  Note that the personal repository may take some time before it is created (less than an hour in most situations).');
+							$b .= _("You can clone the project repository into a personal one into which you alone will be able to write.  Other members of the project will only have read access.  Access for non-members will follow the same rules as for the project's main repository.  Note that the personal repository may take some time before it is created (less than an hour in most situations).");
 							$b .= '</p>';
 							$b .= '<p>';
 							$b .= sprintf(_('<a href="%s">Request a personal repository</a>.'),
@@ -314,7 +314,7 @@ class GitPlugin extends SCMPlugin {
 		global $HTML;
 		$b = $HTML->boxMiddle(_('Git Repository Browser'));
 		$b .= '<p>';
-		$b .= _('Browsing the Git tree gives you a view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.');
+		$b .= _("Browsing the Git tree gives you a view into the current status of this project's code. You may also view the complete histories of any file in the repository.");
 		$b .= '</p>';
 		$b .= '<p>[';
 		$b .= util_make_link("/scm/browser.php?group_id=".$project->getID(),
