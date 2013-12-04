@@ -102,7 +102,7 @@ class CVSPlugin extends SCMPlugin {
 			$b .= ' ';
 			$b .= _('SSH must be installed on your client machine.');
 			$b .= ' ';
-			$b .= _('Substitute <em>developername</em> with the proper values.');
+			$b .= _('Substitute <em>developername</em> with the proper value.');
 			$b .= ' ';
 			$b .= _('Enter your site password when prompted.');
         	$b .= '</p>';
@@ -119,7 +119,7 @@ class CVSPlugin extends SCMPlugin {
 			$b .= ' ';
 			$b .= _('SSH must be installed on your client machine.');
 			$b .= ' ';
-			$b .= _('Substitute <em>developername</em> with the proper values.');
+			$b .= _('Substitute <em>developername</em> with the proper value.');
 			$b .= ' ';
 			$b .= _('Enter your site password when prompted.');
         	$b .= '</p>';

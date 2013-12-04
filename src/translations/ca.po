@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-04 16:14+0100\n"
+"POT-Creation-Date: 2013-12-04 17:02+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -13661,9 +13661,10 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:105
 #: plugins/scmcvs/common/CVSPlugin.class.php:122
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:151
+#: plugins/scmgit/common/GitPlugin.class.php:224
 #: plugins/scmsvn/common/SVNPlugin.class.php:168
 #: plugins/scmsvn/common/SVNPlugin.class.php:181
-msgid "Substitute <em>developername</em> with the proper values."
+msgid "Substitute <em>developername</em> with the proper value."
 msgstr ""
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:124
@@ -13948,10 +13949,6 @@ msgstr[1] "Desenvolupadors (prova)"
 #: plugins/scmgit/common/GitPlugin.class.php:208
 msgid ""
 "Missing configuration for access in scmgit.ini : use_ssh and use_dav disabled"
-msgstr ""
-
-#: plugins/scmgit/common/GitPlugin.class.php:224
-msgid "Substitute <em>developername</em> with the proper value."
 msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:264

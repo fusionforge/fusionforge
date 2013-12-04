@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-04 16:14+0100\n"
+"POT-Creation-Date: 2013-12-04 17:02+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -13046,9 +13046,10 @@ msgstr "nomdebranche"
 #: plugins/scmcvs/common/CVSPlugin.class.php:105
 #: plugins/scmcvs/common/CVSPlugin.class.php:122
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:151
+#: plugins/scmgit/common/GitPlugin.class.php:224
 #: plugins/scmsvn/common/SVNPlugin.class.php:168
 #: plugins/scmsvn/common/SVNPlugin.class.php:181
-msgid "Substitute <em>developername</em> with the proper values."
+msgid "Substitute <em>developername</em> with the proper value."
 msgstr "Remplacez <em>nom-du-développeur</em> par la valeur idoine."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:124
@@ -13346,10 +13347,6 @@ msgid ""
 msgstr ""
 "La méthode d'accès est manquante dans le fichier de configuration scmgit."
 "ini : use_ssh et use_dav sont tous les deux désactivés."
-
-#: plugins/scmgit/common/GitPlugin.class.php:224
-msgid "Substitute <em>developername</em> with the proper value."
-msgstr "Remplacez <em>nom-du-développeur</em> par la valeur idoine."
 
 #: plugins/scmgit/common/GitPlugin.class.php:264
 msgid "Access to your personal repository"
@@ -26259,8 +26256,7 @@ msgstr "Page personnelle de %s"
 
 #~ msgid ""
 #~ "Only project developers can access the Bazaar branches via this method. "
-#~ "Enter your site password "
-#~ "when prompted."
+#~ "Enter your site password when prompted."
 #~ msgstr ""
 #~ "Cette méthode d'accès au dépôt est réservée aux développeurs du projet. "
 #~ "SSH doit être installé sur votre poste client. Vous pourrez avoir besoin "

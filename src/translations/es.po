@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-04 16:14+0100\n"
+"POT-Creation-Date: 2013-12-04 17:02+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -13195,9 +13195,10 @@ msgstr "nombre de rama"
 #: plugins/scmcvs/common/CVSPlugin.class.php:105
 #: plugins/scmcvs/common/CVSPlugin.class.php:122
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:151
+#: plugins/scmgit/common/GitPlugin.class.php:224
 #: plugins/scmsvn/common/SVNPlugin.class.php:168
 #: plugins/scmsvn/common/SVNPlugin.class.php:181
-msgid "Substitute <em>developername</em> with the proper values."
+msgid "Substitute <em>developername</em> with the proper value."
 msgstr "Substituya <em>nombre desarollador</em> con los valores adecuados."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:124
@@ -13511,10 +13512,6 @@ msgid ""
 msgstr ""
 "Configuración no localizada para el acceso en scmgit.ini : use_ssh y use_dav "
 "desactivado"
-
-#: plugins/scmgit/common/GitPlugin.class.php:224
-msgid "Substitute <em>developername</em> with the proper value."
-msgstr "Substituya <em>nombre desarollador</em> con los valores adecuados."
 
 #: plugins/scmgit/common/GitPlugin.class.php:264
 msgid "Access to your personal repository"
@@ -24852,8 +24849,7 @@ msgstr "Página personal de %s"
 
 #~ msgid ""
 #~ "Only project developers can access the Bazaar branches via this method. "
-#~ "Enter your site password "
-#~ "when prompted."
+#~ "Enter your site password when prompted."
 #~ msgstr ""
 #~ "Solo los desarrolladores del proyecto pueden acceder a las ramas de "
 #~ "Bazaar con este metodo. El SSH debe de esta instalado en su ordenador "
@@ -24971,8 +24967,8 @@ msgstr "Página personal de %s"
 #~ "Introduzca·su·contraseña·del·sitio·cuando·sea·requerida."
 
 #~ msgid ""
-#~ "Only project developers can access the SVN tree via this method. "
-#~ "password when prompted."
+#~ "Only project developers can access the SVN tree via this method. password "
+#~ "when prompted."
 #~ msgstr ""
 #~ "Solo·los·desarrolladores·del·proyecto·acceden·al·arbol·SVN·con·este·metodo."
 #~ "·Sustituya<em>developername</em> con sus valores adecuados."

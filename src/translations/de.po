@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-04 16:14+0100\n"
+"POT-Creation-Date: 2013-12-04 17:02+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -13644,9 +13644,10 @@ msgstr "Branch-Name"
 #: plugins/scmcvs/common/CVSPlugin.class.php:105
 #: plugins/scmcvs/common/CVSPlugin.class.php:122
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:151
+#: plugins/scmgit/common/GitPlugin.class.php:224
 #: plugins/scmsvn/common/SVNPlugin.class.php:168
 #: plugins/scmsvn/common/SVNPlugin.class.php:181
-msgid "Substitute <em>developername</em> with the proper values."
+msgid "Substitute <em>developername</em> with the proper value."
 msgstr "Ersetzen Sie <em>developername</em> durch den korrekten Wert."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:124
@@ -13952,10 +13953,6 @@ msgstr[1] "Entwickler (test)"
 msgid ""
 "Missing configuration for access in scmgit.ini : use_ssh and use_dav disabled"
 msgstr ""
-
-#: plugins/scmgit/common/GitPlugin.class.php:224
-msgid "Substitute <em>developername</em> with the proper value."
-msgstr "Ersetzen Sie <em>developername</em> durch den korrekten Wert."
 
 #: plugins/scmgit/common/GitPlugin.class.php:264
 msgid "Access to your personal repository"
@@ -25701,8 +25698,7 @@ msgstr "Persönliche Seite für %s"
 #, fuzzy
 #~ msgid ""
 #~ "Only project developers can access the Bazaar branches via this method. "
-#~ "Enter your site password "
-#~ "when prompted."
+#~ "Enter your site password when prompted."
 #~ msgstr ""
 #~ "<p><strong>Bazaar Entwicklerzugang über SSH</strong></"
 #~ "p><p>Ausschliesslich Projektentwickler können mit dieser Methode auf die "
@@ -25864,8 +25860,7 @@ msgstr "Persönliche Seite für %s"
 #~ "Passwort ein.</p>"
 
 #, fuzzy
-#~ msgid ""
-#~ "Only project developers can access the SVN tree via this method. "
+#~ msgid "Only project developers can access the SVN tree via this method. "
 #~ msgstr ""
 #~ "<p><strong>Subversion Entwicklerzugang über DAV</strong></"
 #~ "p><p>Ausschliesslich Projektentwickler können mit dieser Methode auf den "

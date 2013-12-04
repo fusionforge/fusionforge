@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-04 16:14+0100\n"
+"POT-Creation-Date: 2013-12-04 17:02+0100\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -12926,9 +12926,10 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:105
 #: plugins/scmcvs/common/CVSPlugin.class.php:122
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:151
+#: plugins/scmgit/common/GitPlugin.class.php:224
 #: plugins/scmsvn/common/SVNPlugin.class.php:168
 #: plugins/scmsvn/common/SVNPlugin.class.php:181
-msgid "Substitute <em>developername</em> with the proper values."
+msgid "Substitute <em>developername</em> with the proper value."
 msgstr "Zastąp <em>developername</em> swoim loginem."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:124
@@ -13236,10 +13237,6 @@ msgstr[2] ""
 msgid ""
 "Missing configuration for access in scmgit.ini : use_ssh and use_dav disabled"
 msgstr ""
-
-#: plugins/scmgit/common/GitPlugin.class.php:224
-msgid "Substitute <em>developername</em> with the proper value."
-msgstr "Zastąp <em>developername</em> swoim loginem."
 
 #: plugins/scmgit/common/GitPlugin.class.php:264
 msgid "Access to your personal repository"
@@ -22457,8 +22454,7 @@ msgstr ""
 #, fuzzy
 #~ msgid ""
 #~ "Only project developers can access the Bazaar branches via this method. "
-#~ "Enter your site password "
-#~ "when prompted."
+#~ "Enter your site password when prompted."
 #~ msgstr ""
 #~ "<p><strong>Dostęp deweloperów do repozytorium Subversion poprzez SSH</"
 #~ "strong></p><p>Ta metoda dostępu do repozytorium zarezerwowana jest "
@@ -22469,9 +22465,8 @@ msgstr ""
 #, fuzzy
 #~ msgid ""
 #~ "Only project developers can access the Bazaar branches via this method. "
-#~ "Substitute "
-#~ "<em>developername</em> with the proper value. Enter your site password "
-#~ "when prompted."
+#~ "Substitute <em>developername</em> with the proper value. Enter your site "
+#~ "password when prompted."
 #~ msgstr ""
 #~ "<p><strong>Dostęp deweloperów do repozytorium Bazzar poprzez SSH</"
 #~ "strong></p><p>Ta metoda dostępu do repozytorium zarezerwowana jest "
