@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-04 17:02+0100\n"
+"POT-Creation-Date: 2013-12-04 17:24+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -324,7 +324,7 @@ msgstr "Имя файла"
 #: plugins/projects-hierarchy/view/home_project_link.php:37
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:629
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:631
-#: plugins/scmhg/common/HgPlugin.class.php:625 www/account/index.php:198
+#: plugins/scmhg/common/HgPlugin.class.php:633 www/account/index.php:198
 #: www/account/lostlogin.php:84 www/account/register.php:211
 #: www/admin/approve-pending.php:190 www/admin/approve-pending.php:192
 #: www/admin/database.php:155 www/admin/globalroledelete.php:49
@@ -859,7 +859,7 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer.php:44
 #: plugins/oauthprovider/www/consumer.php:109
 #: plugins/oauthprovider/www/consumer_update_page.php:64
-#: plugins/scmhg/common/HgPlugin.class.php:627
+#: plugins/scmhg/common/HgPlugin.class.php:635
 #: plugins/scmhook/common/scmhookPlugin.class.php:284
 #: plugins/scmhook/common/scmhookPlugin.class.php:327
 #: plugins/scmhook/common/scmhookPlugin.class.php:370
@@ -1786,7 +1786,7 @@ msgstr "Начальная дата"
 #: plugins/mailman/www/admin/index.php:147
 #: plugins/mailman/www/admin/index.php:153
 #: plugins/mailman/www/admin/index.php:186
-#: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
+#: plugins/scmhg/common/HgPlugin.class.php:635 www/account/change_email.php:86
 #: www/account/index.php:140 www/account/index.php:144
 #: www/account/index.php:149 www/account/index.php:174
 #: www/account/index.php:186 www/account/index.php:205
@@ -2569,7 +2569,7 @@ msgstr "Тема"
 #: plugins/oauthconsumer/www/provider_edit.php:30
 #: plugins/oauthprovider/www/consumer_update_page.php:50
 #: plugins/scmgit/common/GitPlugin.class.php:1132
-#: plugins/scmhg/common/HgPlugin.class.php:631
+#: plugins/scmhg/common/HgPlugin.class.php:639
 #: plugins/webanalytics/view/admin/updateLinkValue.php:42
 #: www/admin/admin_table.php:58 www/admin/admin_table.php:164
 #: www/admin/admin_table.php:223 www/forum/admin/index.php:414
@@ -4268,7 +4268,7 @@ msgid "No repository %s exists"
 msgstr "История репозитория"
 
 #: common/include/SCMPlugin.class.php:340
-#: plugins/scmhg/common/HgPlugin.class.php:584
+#: plugins/scmhg/common/HgPlugin.class.php:592
 #, fuzzy
 msgid "Add Repository"
 msgstr "SCM репозиторий"
@@ -5210,7 +5210,7 @@ msgstr ""
 #: plugins/mantisbt/view/addIssue.php:146
 #: plugins/mantisbt/view/addOrEditNote.php:58
 #: plugins/scmgit/common/GitPlugin.class.php:1133
-#: plugins/scmhg/common/HgPlugin.class.php:632
+#: plugins/scmhg/common/HgPlugin.class.php:640
 #: www/account/pending-resend.php:75 www/admin/admin_table.php:221
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:247
 #: www/admin/index.php:169 www/admin/pending-news.php:160
@@ -5843,7 +5843,7 @@ msgstr ""
 #: common/tracker/include/ArtifactTypeHtml.class.php:546
 #: common/tracker/include/ArtifactTypeHtml.class.php:591
 #: common/tracker/include/ArtifactTypeHtml.class.php:758
-#: plugins/scmhg/common/HgPlugin.class.php:608 www/admin/pluginman.php:230
+#: plugins/scmhg/common/HgPlugin.class.php:616 www/admin/pluginman.php:230
 #: www/admin/pluginman.php:249 www/admin/pluginman.php:261
 #: www/admin/pluginman.php:262 www/include/html.php:322
 #: www/include/html.php:554 www/include/html.php:645 www/include/html.php:668
@@ -13657,7 +13657,7 @@ msgstr "Документация по устройству репозитори�
 #: plugins/scmcvs/common/CVSPlugin.class.php:66
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:84
 #: plugins/scmgit/common/GitPlugin.class.php:78
-#: plugins/scmhg/common/HgPlugin.class.php:173
+#: plugins/scmhg/common/HgPlugin.class.php:179
 #: plugins/scmsvn/common/SVNPlugin.class.php:82
 #, php-format
 msgid "<strong>%1$s</strong> commits, <strong>%2$s</strong> adds"
@@ -13686,6 +13686,7 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:115
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:144
 #: plugins/scmhg/common/HgPlugin.class.php:94
+#: plugins/scmhg/common/HgPlugin.class.php:116
 #: plugins/scmsvn/common/SVNPlugin.class.php:136
 #: plugins/scmsvn/common/SVNPlugin.class.php:161
 #, php-format
@@ -13699,6 +13700,7 @@ msgstr "Доступ разработчика к репозиторию %s по 
 #: plugins/scmcvs/common/CVSPlugin.class.php:101
 #: plugins/scmcvs/common/CVSPlugin.class.php:118
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:147
+#: plugins/scmhg/common/HgPlugin.class.php:119
 #: plugins/scmsvn/common/SVNPlugin.class.php:139
 #: plugins/scmsvn/common/SVNPlugin.class.php:152
 #: plugins/scmsvn/common/SVNPlugin.class.php:164
@@ -13716,6 +13718,7 @@ msgstr ""
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:149
 #: plugins/scmgit/common/GitPlugin.class.php:176
 #: plugins/scmgit/common/GitPlugin.class.php:222
+#: plugins/scmhg/common/HgPlugin.class.php:121
 #: plugins/scmsvn/common/SVNPlugin.class.php:141
 #: plugins/scmsvn/common/SVNPlugin.class.php:166
 msgid "SSH must be installed on your client machine."
@@ -13732,6 +13735,7 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:199
 #: plugins/scmgit/common/GitPlugin.class.php:226
 #: plugins/scmgit/common/GitPlugin.class.php:245
+#: plugins/scmhg/common/HgPlugin.class.php:125
 #: plugins/scmsvn/common/SVNPlugin.class.php:143
 #: plugins/scmsvn/common/SVNPlugin.class.php:154
 #: plugins/scmsvn/common/SVNPlugin.class.php:170
@@ -13750,6 +13754,7 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:122
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:151
 #: plugins/scmgit/common/GitPlugin.class.php:224
+#: plugins/scmhg/common/HgPlugin.class.php:123
 #: plugins/scmsvn/common/SVNPlugin.class.php:168
 #: plugins/scmsvn/common/SVNPlugin.class.php:181
 msgid "Substitute <em>developername</em> with the proper value."
@@ -13760,7 +13765,7 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:128
 #: plugins/scmgit/common/GitPlugin.class.php:229
 #: plugins/scmgit/common/GitPlugin.class.php:249
-#: plugins/scmhg/common/HgPlugin.class.php:131
+#: plugins/scmhg/common/HgPlugin.class.php:137
 #: plugins/scmsvn/common/SVNPlugin.class.php:172
 #: plugins/scmsvn/common/SVNPlugin.class.php:185
 msgid "developername"
@@ -13980,7 +13985,7 @@ msgstr "Создать новый отзыв"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:629
 #: plugins/scmgit/common/GitPlugin.class.php:1102
-#: plugins/scmhg/common/HgPlugin.class.php:625
+#: plugins/scmhg/common/HgPlugin.class.php:633
 #, fuzzy
 msgid "Repository name"
 msgstr "История репозитория"
@@ -14139,14 +14144,14 @@ msgid "Cannot create a secondary repository with the same name as the primary"
 msgstr ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:999
-#: plugins/scmhg/common/HgPlugin.class.php:534
+#: plugins/scmhg/common/HgPlugin.class.php:542
 #, fuzzy
 msgid "This repository name is not valid"
 msgstr "Неверное имя участника"
 
 #: plugins/scmgit/common/GitPlugin.class.php:1012
-#: plugins/scmhg/common/HgPlugin.class.php:529
-#: plugins/scmhg/common/HgPlugin.class.php:545
+#: plugins/scmhg/common/HgPlugin.class.php:537
+#: plugins/scmhg/common/HgPlugin.class.php:553
 #, fuzzy, php-format
 msgid "A repository %s already exists"
 msgstr "Запрос уже существует"
@@ -14289,34 +14294,23 @@ msgstr ""
 "Ваш пароль доступа к сайту.</p>"
 
 #: plugins/scmhg/common/HgPlugin.class.php:105
-#: plugins/scmhg/common/HgPlugin.class.php:126
+#: plugins/scmhg/common/HgPlugin.class.php:132
 msgid "Developer Mercurial Access via HTTP"
 msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:108
-#: plugins/scmhg/common/HgPlugin.class.php:129
+#: plugins/scmhg/common/HgPlugin.class.php:135
 msgid ""
 "Only project developers can access the Mercurial tree via this method. Enter "
 "your site password when prompted."
 msgstr ""
 
-#: plugins/scmhg/common/HgPlugin.class.php:116
-msgid "Developer Mercurial Access via SSH"
-msgstr ""
-
-#: plugins/scmhg/common/HgPlugin.class.php:119
-msgid ""
-"Only project developers can access the Mercurial tree via this method. SSH "
-"must be installed on your client machine. Substitute <em>developername</em> "
-"with the proper value. Enter your site password when prompted."
-msgstr ""
-
-#: plugins/scmhg/common/HgPlugin.class.php:143
+#: plugins/scmhg/common/HgPlugin.class.php:149
 #, fuzzy
 msgid "Hg Repository Browser"
 msgstr "История репозитория"
 
-#: plugins/scmhg/common/HgPlugin.class.php:145
+#: plugins/scmhg/common/HgPlugin.class.php:151
 #, fuzzy
 msgid ""
 "Browsing the Mercurial tree gives you a view into the current status of this "
@@ -14327,22 +14321,22 @@ msgstr ""
 "состояние кода проекта. Также Вы можете полностью просмотреть истории "
 "изменений любого файла в репозитории."
 
-#: plugins/scmhg/common/HgPlugin.class.php:148
+#: plugins/scmhg/common/HgPlugin.class.php:154
 #, fuzzy
 msgid "Browse Hg Repository"
 msgstr "Обзор CVS-репозитория"
 
-#: plugins/scmhg/common/HgPlugin.class.php:554
+#: plugins/scmhg/common/HgPlugin.class.php:562
 #, fuzzy, php-format
 msgid "Clone of %s repository"
 msgstr "Разработчики (тест)"
 
-#: plugins/scmhg/common/HgPlugin.class.php:617
+#: plugins/scmhg/common/HgPlugin.class.php:625
 #, fuzzy, php-format
 msgid "Create SCM repository for project %1$s"
 msgstr "SCM репозиторий"
 
-#: plugins/scmhg/common/HgPlugin.class.php:629
+#: plugins/scmhg/common/HgPlugin.class.php:637
 #, fuzzy
 msgid "Cloned from:"
 msgstr "Телефон:"

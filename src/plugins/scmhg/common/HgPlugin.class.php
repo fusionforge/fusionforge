@@ -113,10 +113,16 @@ class HgPlugin extends SCMPlugin {
 			if (forge_get_config('use_ssh', 'scmhg')) {
 				$d = '<em>developername</em>';
 				$b = '<h2>';
-				$b .= _('Developer Mercurial Access via SSH');
+				$b .= sprintf(_('Developer %s Access via SSH'), 'Mercurial');
 				$b .= '</h2>';
 				$b .= '<p>';
-				$b .= _('Only project developers can access the Mercurial tree via this method. SSH must be installed on your client machine. Substitute <em>developername</em> with the proper value. Enter your site password when prompted.');
+				$b .= sprintf(_('Only project developers can access the %s tree via this method.'), 'Mercurial');
+				$b .= ' ';
+				$b .= _('SSH must be installed on your client machine.');
+				$b .= ' ';
+				$b .= _('Substitute <em>developername</em> with the proper value.');
+				$b .= ' ';
+				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
 				// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 				//            HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
@@ -135,7 +141,7 @@ class HgPlugin extends SCMPlugin {
 	}
 
 	function getSnapshotPara($project) {
-		return ;
+		return;
 	}
 
 	function getBrowserLinkBlock($project) {
@@ -191,6 +197,7 @@ class HgPlugin extends SCMPlugin {
 		if (!$project) {
 			return false;
 		}
+
 		if (!$project->usesPlugin($this->name)) {
 			return false;
 		}
@@ -370,6 +377,7 @@ class HgPlugin extends SCMPlugin {
 		if (!$project) {
 			return false;
 		}
+
 		if (! $project->usesPlugin ($this->name)) {
 			return false;
 		}
@@ -536,7 +544,7 @@ class HgPlugin extends SCMPlugin {
 		}
 
 		$result = db_query_params('SELECT count(*) AS count FROM plugin_scmhg_repos WHERE group_id=$1 AND repo_name = $2',
-						array ($params['group_id'], $params['repo_name']));
+						array($params['group_id'], $params['repo_name']));
 		if (! $result) {
 			$params['error_msg'] = db_error();
 			return false;
@@ -557,14 +565,14 @@ class HgPlugin extends SCMPlugin {
 			$description = $params['description'];
 		}
 
-		$result = db_query_params ('INSERT INTO plugin_scmhg_repos (group_id, repo_name, description, clone) VALUES ($1, $2, $3, $4)',
-						array ($params['group_id'], $params['repo_name'], $description, $clone));
+		$result = db_query_params('INSERT INTO plugin_scmhg_repos (group_id, repo_name, description, clone) VALUES ($1, $2, $3, $4)',
+						array($params['group_id'], $params['repo_name'], $description, $clone));
 		if (! $result) {
 			$params['error_msg'] = db_error();
 			return false;
 		}
 
-		plugin_hook ("scm_admin_update", $params);
+		plugin_hook("scm_admin_update", $params);
 		return true;
 	}
 
