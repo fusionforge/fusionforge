@@ -69,7 +69,7 @@ case 'request-personal-repo':
 							  $plugin_id));
 
 			scm_header(array('title' => _('SCM Repository'), 'group' => $group_id));
-			echo _('You have now requested a personal Git repository for this project.  If will be created shortly.');
+			echo _('You have now requested a personal Git repository for this project.  It will be created shortly.');
 			scm_footer();
 			exit;
 		}

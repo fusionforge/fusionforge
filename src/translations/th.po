@@ -12921,7 +12921,7 @@ msgstr ""
 
 #: plugins/scmgit/www/index.php:72
 msgid ""
-"You have now requested a personal Git repository for this project.  If will "
+"You have now requested a personal Git repository for this project.  It will "
 "be created shortly."
 msgstr ""
 
