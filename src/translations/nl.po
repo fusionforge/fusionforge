@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-03 18:28+0100\n"
+"POT-Creation-Date: 2013-12-04 11:08+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -321,7 +321,7 @@ msgstr ""
 #: plugins/projects-hierarchy/view/home_project_link.php:37
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:629
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:631
-#: plugins/scmhg/common/HgPlugin.class.php:625 www/account/index.php:195
+#: plugins/scmhg/common/HgPlugin.class.php:625 www/account/index.php:198
 #: www/account/lostlogin.php:84 www/account/register.php:211
 #: www/admin/approve-pending.php:190 www/admin/approve-pending.php:192
 #: www/admin/database.php:155 www/admin/globalroledelete.php:49
@@ -1223,7 +1223,7 @@ msgstr ""
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:96
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:148
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:214
-#: www/account/index.php:230 www/account/register.php:169
+#: www/account/index.php:242 www/account/register.php:169
 #: www/people/editjob.php:52 www/people/editjob.php:74
 #: www/people/editprofile.php:106 www/people/people_utils.php:406
 #: www/people/skills_utils.php:49 www/pm/admin/index.php:190
@@ -1385,8 +1385,8 @@ msgstr ""
 #: plugins/compactpreview/include/CompactPreviewPlugin.class.php:182
 #: plugins/forumml/include/ForumMLHtmlSearchRenderer.class.php:52
 #: plugins/hudson/include/HudsonBuild.class.php:115
-#: www/account/editsshkeys.php:59 www/account/index.php:142
-#: www/account/index.php:300 www/admin/cronman.php:78
+#: www/account/editsshkeys.php:59 www/account/index.php:141
+#: www/account/index.php:315 www/admin/cronman.php:78
 #: www/admin/grouplist.php:118 www/admin/massmail.php:156
 #: www/admin/search.php:88 www/admin/search.php:167 www/admin/userlist.php:115
 #: www/developer/diary.php:56 www/developer/diary.php:87
@@ -1764,11 +1764,11 @@ msgstr "Startdatum"
 #: plugins/mailman/www/admin/index.php:153
 #: plugins/mailman/www/admin/index.php:186
 #: plugins/scmhg/common/HgPlugin.class.php:627 www/account/change_email.php:86
-#: www/account/index.php:141 www/account/index.php:145
-#: www/account/index.php:150 www/account/index.php:171
-#: www/account/index.php:183 www/account/index.php:202
-#: www/account/index.php:209 www/account/index.php:216
-#: www/account/index.php:223 www/account/index.php:230
+#: www/account/index.php:140 www/account/index.php:144
+#: www/account/index.php:149 www/account/index.php:174
+#: www/account/index.php:186 www/account/index.php:205
+#: www/account/index.php:214 www/account/index.php:224
+#: www/account/index.php:233 www/account/index.php:242
 #: www/account/lostpw.php:89 www/account/pending-resend.php:65
 #: www/account/pending-resend.php:67 www/account/register.php:169
 #: www/account/register.php:218 www/account/register.php:224
@@ -1776,13 +1776,14 @@ msgstr "Startdatum"
 #: www/account/verify.php:76 www/account/verify.php:78
 #: www/account/verify.php:86 www/activity/index.php:179
 #: www/activity/index.php:180 www/activity/index.php:181
-#: www/admin/groupedit.php:107 www/admin/groupedit.php:170
-#: www/admin/massmail.php:94 www/admin/massmail.php:112
-#: www/admin/massmail.php:115 www/admin/massmail.php:140
-#: www/admin/pending-news.php:137 www/admin/pending-news.php:139
-#: www/admin/pending-news.php:145 www/admin/pending-news.php:147
-#: www/admin/trove/trove_cat_add.php:77 www/admin/trove/trove_cat_add.php:110
-#: www/admin/trove/trove_cat_add.php:112 www/admin/trove/trove_cat_add.php:114
+#: www/admin/groupedit.php:107 www/admin/groupedit.php:150
+#: www/admin/groupedit.php:170 www/admin/massmail.php:94
+#: www/admin/massmail.php:112 www/admin/massmail.php:115
+#: www/admin/massmail.php:140 www/admin/pending-news.php:137
+#: www/admin/pending-news.php:139 www/admin/pending-news.php:145
+#: www/admin/pending-news.php:147 www/admin/trove/trove_cat_add.php:77
+#: www/admin/trove/trove_cat_add.php:110 www/admin/trove/trove_cat_add.php:112
+#: www/admin/trove/trove_cat_add.php:114
 #: www/admin/trove/trove_cat_edit.php:115
 #: www/admin/trove/trove_cat_edit.php:141
 #: www/admin/trove/trove_cat_edit.php:144
@@ -2254,7 +2255,7 @@ msgstr "Release"
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:53
 #: plugins/projects-hierarchy/view/admin/viewProjectConfiguration.php:73
 #: plugins/webanalytics/view/admin/updateLinkValue.php:41
-#: www/account/index.php:329 www/account/lostlogin.php:107
+#: www/account/index.php:344 www/account/lostlogin.php:107
 #: www/admin/groupedit.php:223 www/admin/trove/trove_cat_edit.php:150
 #: www/admin/useredit.php:236 www/admin/useredit.php:315
 #: www/admin/vhost.php:183 www/forum/admin/index.php:162
@@ -3402,9 +3403,9 @@ msgstr ""
 "\n"
 "We adviseren dringend om %7$s te bezoeken en een algemene "
 "projectbeschrijving te geven. Dit kan ofwel door je project pagina te "
-"bezoeken terwijl je ingelogd bent, en 'Project beheer' te keizen "
-"in het menu aan de linkerkant, ofwel door naar http://%3$s/project/admin/?"
-"group_id=%6$s , na login.\n"
+"bezoeken terwijl je ingelogd bent, en 'Project beheer' te keizen in het menu "
+"aan de linkerkant, ofwel door naar http://%3$s/project/admin/?group_id="
+"%6$s , na login.\n"
 "\n"
 "Je project zal niet in het Trove overzicht verschijnen (een lijst van "
 "projecten op %7$s om makkelijk rond te kijken en te zoeken) zolang je het "
@@ -3663,7 +3664,8 @@ msgstr "Uitgebreid zoeken"
 msgid "Log Out"
 msgstr "Uitloggen"
 
-#: common/include/Navigation.class.php:194 www/include/html.php:995
+#: common/include/Navigation.class.php:194 www/account/index.php:117
+#: www/include/html.php:995
 msgid "My Account"
 msgstr "Mijn account"
 
@@ -6626,7 +6628,7 @@ msgstr ""
 #: plugins/scmgit/common/GitPlugin.class.php:338
 #: plugins/scmsvn/common/SVNPlugin.class.php:222
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
-#: www/account/editsshkeys.php:51 www/account/index.php:292
+#: www/account/editsshkeys.php:51 www/account/index.php:307
 #: www/admin/useredit.php:262 www/admin/useredit.php:292
 #: www/project/admin/editimages.php:265 www/reporting/usersummary.php:103
 #: www/search/include/renderers/SkillHtmlSearchRenderer.class.php:44
@@ -7295,7 +7297,7 @@ msgid "Configuring allowed roles for the transitions from %1$s to %2$s"
 msgstr ""
 
 #: common/widget/Widget.class.php:100 plugins/mailman/www/mailman_utils.php:56
-#: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:239
+#: plugins/mailman/www/mailman_utils.php:126 www/account/index.php:253
 #: www/include/Layout.class.php:1332
 msgid "Preferences"
 msgstr "Voorkeursinstellingen"
@@ -8390,7 +8392,7 @@ msgid "Login name or email address"
 msgstr "Ongeldig e-mail adres"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
-#: www/account/index.php:150 www/account/lostpw.php:89
+#: www/account/index.php:149 www/account/lostpw.php:89
 #: www/account/pending-resend.php:67 www/account/verify.php:78
 #: www/include/user_profile.php:88
 #, fuzzy
@@ -8712,6 +8714,11 @@ msgstr ""
 msgid ""
 "The IdP has confirmed that you own this WebID bound to your account. Welcome."
 msgstr ""
+
+#: plugins/blocks/common/blocksPlugin.class.php:52
+#, fuzzy
+msgid "Blocks"
+msgstr "Sla positie op"
 
 #: plugins/blocks/common/blocksPlugin.class.php:65
 #, fuzzy
@@ -14662,7 +14669,7 @@ msgid "You should now <a href=\"%s\">Return to User Prefs</a>."
 msgstr ""
 "Je dient nu %1$s terug te gaan naar \"Account voorkeursinstellingen\" %2$s."
 
-#: www/account/change_pw.php:87 www/account/index.php:152
+#: www/account/change_pw.php:87 www/account/index.php:151
 #: www/admin/userlist.php:121
 msgid "Change Password"
 msgstr "Wijzig wachtwoord"
@@ -14695,29 +14702,29 @@ msgstr "CVS/SSH gedeelde autorisatie sleutels"
 msgid "Available keys"
 msgstr "Geen toegankelijke Trackers gevonden"
 
-#: www/account/editsshkeys.php:51 www/account/index.php:292
+#: www/account/editsshkeys.php:51 www/account/index.php:307
 msgid "Algorithm"
 msgstr ""
 
-#: www/account/editsshkeys.php:51 www/account/index.php:292
+#: www/account/editsshkeys.php:51 www/account/index.php:307
 msgid "Fingerprint"
 msgstr ""
 
-#: www/account/editsshkeys.php:51 www/account/index.php:292
+#: www/account/editsshkeys.php:51 www/account/index.php:307
 #: www/project/admin/editimages.php:264
 msgid "Uploaded"
 msgstr "Toegevoegd"
 
-#: www/account/editsshkeys.php:51 www/account/index.php:292
+#: www/account/editsshkeys.php:51 www/account/index.php:307
 #, fuzzy
 msgid "Ready ?"
 msgstr "Betreft"
 
-#: www/account/editsshkeys.php:61 www/account/index.php:302
+#: www/account/editsshkeys.php:61 www/account/index.php:317
 msgid "ssh key is deployed."
 msgstr ""
 
-#: www/account/editsshkeys.php:63 www/account/index.php:304
+#: www/account/editsshkeys.php:63 www/account/index.php:319
 msgid "ssh key is not deployed yet."
 msgstr ""
 
@@ -14814,92 +14821,93 @@ msgstr "Je moet een achternaam invullen"
 msgid "Updated"
 msgstr "Aangepast"
 
-#: www/account/index.php:117 www/account/index.php:122
-msgid "Account Maintenance"
-msgstr "Account onderhouden"
+#: www/account/index.php:122
+#, fuzzy
+msgid "Account options"
+msgstr "Account informatie"
 
-#: www/account/index.php:126 www/index.php:33
+#: www/account/index.php:125 www/index.php:33
 msgid "Welcome"
 msgstr "Welkom"
 
-#: www/account/index.php:129
+#: www/account/index.php:128
 #, fuzzy
 msgid "Account options:"
 msgstr "Account informatie"
 
-#: www/account/index.php:132
+#: www/account/index.php:131
 #, fuzzy
 msgid "View My Profile"
 msgstr "Bekijk een gebruikersprofiel"
 
-#: www/account/index.php:134
+#: www/account/index.php:133
 msgid "Edit My Skills Profile"
 msgstr "Pas mijn vaardigheden profiel aan"
 
-#: www/account/index.php:141 www/admin/search.php:76
+#: www/account/index.php:140 www/admin/search.php:76
 msgid "Member since"
 msgstr "Lid sinds"
 
-#: www/account/index.php:145 www/admin/useredit.php:130
+#: www/account/index.php:144 www/admin/useredit.php:130
 #: www/include/user_profile.php:68
 msgid "User Id"
 msgstr "Gebruikers ID"
 
-#: www/account/index.php:157 www/account/register.php:175
+#: www/account/index.php:156 www/account/register.php:175
 msgid "First Name:"
 msgstr "Voornaam:"
 
-#: www/account/index.php:164 www/account/register.php:182
+#: www/account/index.php:165 www/account/register.php:182
 msgid "Last Name:"
 msgstr "Achternaam:"
 
-#: www/account/index.php:171 www/snippet/package.php:156
+#: www/account/index.php:174 www/snippet/package.php:156
 #: www/snippet/snippet_utils.php:203 www/snippet/snippet_utils.php:237
 #: www/snippet/submit.php:123 www/stats/i18n.php:34
 msgid "Language"
 msgstr "Taal"
 
-#: www/account/index.php:177 www/account/register.php:193
+#: www/account/index.php:180 www/account/register.php:193
 msgid "Timezone:"
 msgstr "Tijdzone:"
 
-#: www/account/index.php:183 www/account/register.php:201
+#: www/account/index.php:186 www/account/register.php:201
 msgid "Theme"
 msgstr "Thema"
 
-#: www/account/index.php:189 www/account/register.php:206
+#: www/account/index.php:192 www/account/register.php:206
 msgid "Country:"
 msgstr "Land:"
 
-#: www/account/index.php:195 www/account/register.php:211
+#: www/account/index.php:198 www/account/register.php:211
 #: www/include/user_profile.php:112
 msgid "Email Address"
 msgstr "E-mail adres"
 
-#: www/account/index.php:197
+#: www/account/index.php:200
 msgid "Change Email Address"
 msgstr "Wijzig e-mail adres"
 
-#: www/account/index.php:202 www/account/register.php:218
+#: www/account/index.php:205 www/account/register.php:218
 #: www/include/user_profile.php:126 www/mail/index.php:78
 msgid "Address"
 msgstr "Adres"
 
-#: www/account/index.php:209 www/account/register.php:224
+#: www/account/index.php:214 www/account/register.php:224
 msgid "Address (continued)"
 msgstr ""
 
-#: www/account/index.php:216 www/account/register.php:230
+#: www/account/index.php:224 www/account/register.php:230
 #: www/include/user_profile.php:133
 msgid "Phone"
 msgstr "Telefoon:"
 
-#: www/account/index.php:223 www/account/register.php:236
+#: www/account/index.php:233 www/account/register.php:236
 #: www/include/user_profile.php:144
 msgid "Fax"
 msgstr "Fax"
 
-#: www/account/index.php:244 www/account/register.php:245
+#: www/account/index.php:261 www/account/register.php:245
 msgid ""
 "Receive Email about Site Updates <em>(Very low traffic and includes security "
 "notices. Highly Recommended.)</em>"
@@ -14907,11 +14915,11 @@ msgstr ""
 "E-mail over site updates ontvangen <em>(Weinig mail, en inclusief "
 "beveiligings aankondigingen. Sterk aanbevolen.)</em>"
 
-#: www/account/index.php:250 www/account/register.php:251
+#: www/account/index.php:269 www/account/register.php:251
 msgid "Receive additional community mailings. <em>(Low traffic.)</em>"
 msgstr "Aanvullende community mailings ontvangen. <em>(Weinig mail.)</em>"
 
-#: www/account/index.php:265
+#: www/account/index.php:278
 #, php-format
 msgid ""
 "Participate in peer ratings. <em>(Allows you to rate other users using "
@@ -14920,39 +14928,39 @@ msgid ""
 "participate in ratings.)</em>"
 msgstr ""
 
-#: www/account/index.php:271
+#: www/account/index.php:286
 msgid ""
 "Enable tooltips. Small help texts displayed on mouse over links, images."
 msgstr ""
 
-#: www/account/index.php:284
+#: www/account/index.php:299
 msgid "Shell Account Information"
 msgstr "Shell account informatie"
 
-#: www/account/index.php:287
+#: www/account/index.php:302
 msgid "Shell box"
 msgstr "Shell Box"
 
-#: www/account/index.php:288
+#: www/account/index.php:303
 msgid "SSH Shared Authorized Keys"
 msgstr "CVS/SSH gedeelde autorisatie sleutels"
 
-#: www/account/index.php:314
+#: www/account/index.php:329
 msgid "Edit Keys"
 msgstr "Bewerk sleutels"
 
-#: www/account/index.php:316
+#: www/account/index.php:331
 #, fuzzy
 msgid "Shell Account deactivated"
 msgstr "Shell account informatie"
 
-#: www/account/index.php:326 www/forum/admin/index.php:128
+#: www/account/index.php:341 www/forum/admin/index.php:128
 #: www/forum/admin/index.php:167
 #, fuzzy, php-format
 msgid "%s Mandatory fields"
 msgstr "Extra velden toevoegen/aanpassen"
 
-#: www/account/index.php:330
+#: www/account/index.php:345
 msgid "Reset Changes"
 msgstr "Wijzigingen ongedaan maken"
 
@@ -16078,7 +16086,7 @@ msgstr "Geen."
 msgid "Newsbyte Updated."
 msgstr "Nieuwsitem gewijzigd."
 
-#: www/admin/pending-news.php:88
+#: www/admin/pending-news.php:88 www/admin/pending-news.php:127
 #, fuzzy
 msgid "Newsbyte Deleted."
 msgstr "Nieuwsitem verwijderd."
@@ -16092,11 +16100,6 @@ msgstr "Nieuwsitems afgewezen."
 #, fuzzy
 msgid "News Administration"
 msgstr "Forums: beheer"
-
-#: www/admin/pending-news.php:127
-#, fuzzy
-msgid "Newsbyte deleted"
-msgstr "Nieuwsitem verwijderd."
 
 #: www/admin/pending-news.php:137
 #, fuzzy
@@ -19097,9 +19100,9 @@ msgid ""
 "Start by filling in the fields below. When you click continue, you will be "
 "shown a list of skills and experience levels that this job requires."
 msgstr ""
-"Begin met invullen van de onderstaande velden. Wanneer je op 'Ga "
-"door' klikt wordt er een lijst getoond van vaardigheden en "
-"ervaringniveaus die vereist zijn voor deze vacature."
+"Begin met invullen van de onderstaande velden. Wanneer je op 'Ga door' klikt "
+"wordt er een lijst getoond van vaardigheden en ervaringniveaus die vereist "
+"zijn voor deze vacature."
 
 #: www/people/createjob.php:52 www/people/editjob.php:169
 #: www/project/admin/index.php:139
@@ -22755,8 +22758,8 @@ msgid ""
 "You can now activate/deactivate surveys on the %1$s Edit Existing Surveys "
 "%2$s page"
 msgstr ""
-"Je kunt nu enquêtes activeren/deactiveren op de %1$s 'Bestaande "
-"enquêtes aanpassen' %2$s pagina"
+"Je kunt nu enquêtes activeren/deactiveren op de %1$s 'Bestaande enquêtes "
+"aanpassen' %2$s pagina"
 
 #: www/survey/admin/question.php:52
 #, fuzzy
@@ -22793,8 +22796,7 @@ msgstr "Je mag elke van deze vragen gebruiken in je enquêtes"
 
 #: www/survey/admin/show_questions.php:44
 msgid "NOTE: use these question_id's when you create a new survey"
-msgstr ""
-"LET OP: gebruik deze vraag ID's als U een nieuwe enquête samenstelt"
+msgstr "LET OP: gebruik deze vraag ID's als U een nieuwe enquête samenstelt"
 
 #: www/survey/admin/show_questions.php:52
 #, fuzzy, php-format
@@ -23412,6 +23414,13 @@ msgstr "Gebruikersnaam"
 #, fuzzy, php-format
 msgid "Personal Page for %s"
 msgstr "Mijn persoonlijke pagina"
+
+#~ msgid "Account Maintenance"
+#~ msgstr "Account onderhouden"
+
+#, fuzzy
+#~ msgid "Newsbyte deleted"
+#~ msgstr "Nieuwsitem verwijderd."
 
 #, fuzzy
 #~ msgid "Delete successful"
@@ -25901,16 +25910,15 @@ msgstr "Mijn persoonlijke pagina"
 #~ "requests through your project administration page.</p><p>To suggest new "
 #~ "job categories, submit a request via the support manager.</p>"
 #~ msgstr ""
-#~ "<p>De %1$s 'Projecthulp Gevraagd' pagina is voor niet-"
-#~ "commerciële, vrijwillige project vacatures. Commercieel gebruik is niet "
-#~ "toegestaan.</p><p>Project vacatures zullen 2 weken blijven staan, tenzij "
-#~ "ze eerder worden gesloten door de indiener. (Project beheerders kunnen "
-#~ "vervallen vacatures altijd opnieuw indienen.)</p><p>Blader door het "
-#~ "categorie menu om naar projecten te zoeken die je hulp kunnen gebruiken.</"
-#~ "p><p>Als je een project beheerder bent, log dan in, en dien 'Hulp "
-#~ "Gevraagd' verzoeken via de project beheer pagina in.</p><p>Om nieuwe "
-#~ "vacature categorieën in te dienen moet je een verzoek aan de vacature "
-#~ "beheerder doen.</p>"
+#~ "<p>De %1$s 'Projecthulp Gevraagd' pagina is voor niet-commerciële, "
+#~ "vrijwillige project vacatures. Commercieel gebruik is niet toegestaan.</"
+#~ "p><p>Project vacatures zullen 2 weken blijven staan, tenzij ze eerder "
+#~ "worden gesloten door de indiener. (Project beheerders kunnen vervallen "
+#~ "vacatures altijd opnieuw indienen.)</p><p>Blader door het categorie menu "
+#~ "om naar projecten te zoeken die je hulp kunnen gebruiken.</p><p>Als je "
+#~ "een project beheerder bent, log dan in, en dien 'Hulp Gevraagd' verzoeken "
+#~ "via de project beheer pagina in.</p><p>Om nieuwe vacature categorieën in "
+#~ "te dienen moet je een verzoek aan de vacature beheerder doen.</p>"
 
 #~ msgid "You must be logged in first"
 #~ msgstr "Je moet eerst ingelogd zijn"

@@ -124,7 +124,7 @@ AND news_bytes.group_id=groups.group_id ", array($id));
 		exit_error(_('Newsbyte not found'), 'news');
 	}
 	if (db_result($result,0,'is_approved') == 4) {
-		exit_error(_('Newsbyte deleted'),'news');
+		exit_error(_('Newsbyte Deleted.'), 'news');
 	}
 
 	$group = group_get_object(db_result($result,0,'group_id'));
