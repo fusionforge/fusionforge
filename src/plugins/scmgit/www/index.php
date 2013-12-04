@@ -30,7 +30,7 @@ require_once $gfwww.'scm/include/scm_utils.php';
 $plugin = plugin_get_object('scmgit');
 $plugin_id = $plugin->getID();
 
-$func = getStringFromRequest ('func') ;
+$func = getStringFromRequest('func');
 
 $matches = array();
 if (preg_match('!^grouppage/([a-z][-a-z0-9_]+)(/.*)$!', $func, $matches)) {
@@ -46,38 +46,38 @@ if (preg_match('!^grouppage/([a-z][-a-z0-9_]+)(/.*)$!', $func, $matches)) {
 
 switch ($func) {
 case 'request-personal-repo':
-	$group_id = getIntFromRequest ('group_id') ;
-	session_require_perm ('scm', $group_id, 'write') ;
+	$group_id = getIntFromRequest('group_id');
+	session_require_perm('scm', $group_id, 'write');
 	$user = session_get_user(); // get the session user
-	$result = db_query_params ('SELECT * FROM scm_personal_repos WHERE group_id=$1 AND user_id=$2 AND plugin_id=$3',
-				   array ($group_id,
+	$result = db_query_params('SELECT * FROM scm_personal_repos WHERE group_id=$1 AND user_id=$2 AND plugin_id=$3',
+				   array($group_id,
 					  $user->getID(),
-					  $plugin_id)) ;
-	if ($result && db_numrows ($result) == 1) {
-		scm_header (array ('title' => _('SCM Repository'), 'group' => $group_id)) ;
-		echo _('You have already requested a personal Git repository for this project.  If it does not exist yet, it will be created shortly.') ;
+					  $plugin_id));
+	if ($result && db_numrows($result) == 1) {
+		scm_header(array('title' => _('SCM Repository'), 'group' => $group_id));
+		echo _('You have already requested a personal Git repository for this project.  If it does not exist yet, it will be created shortly.');
 		scm_footer();
 		exit;
 	}
 
-	$glist = $user->getGroups() ;
+	$glist = $user->getGroups();
 	foreach ($glist as $g) {
 		if ($g->getID() == $group_id) {
-			$result = db_query_params ('INSERT INTO scm_personal_repos (group_id, user_id, plugin_id) VALUES ($1,$2,$3)',
+			$result = db_query_params('INSERT INTO scm_personal_repos (group_id, user_id, plugin_id) VALUES ($1,$2,$3)',
 						   array ($group_id,
 							  $user->getID(),
-							  $plugin_id)) ;
+							  $plugin_id));
 
-			scm_header (array ('title' => _('SCM Repository'), 'group' => $group_id)) ;
-			echo _('You have now requested a personal Git repository for this project.  If will be created shortly.') ;
-			scm_footer() ;
-			exit ;
+			scm_header(array('title' => _('SCM Repository'), 'group' => $group_id));
+			echo _('You have now requested a personal Git repository for this project.  If will be created shortly.');
+			scm_footer();
+			exit;
 		}
 	}
-	exit_no_group () ;
+	exit_no_group();
 	break;
 default:
-	exit_missing_param () ;
+	exit_missing_param();
 }
 
 // Local Variables:
