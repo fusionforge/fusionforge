@@ -522,7 +522,7 @@ class GitPlugin extends SCMPlugin {
 					fwrite($f, "exec git-update-server-info\n");
 					fclose($f);
 				}
-				if (is_file ("$repodir/hooks/post-update")) {
+				if (is_file("$repodir/hooks/post-update")) {
 					system("chmod +x $repodir/hooks/post-update");
 				}
 				$f = fopen("$repodir/description", "w");
@@ -673,13 +673,13 @@ class GitPlugin extends SCMPlugin {
 		return $list;
 	}
 
-	function gatherStats ($params) {
-		$project = $this->checkParams ($params);
+	function gatherStats($params) {
+		$project = $this->checkParams($params);
 		if (!$project) {
 			return false;
 		}
 
-		if (!$project->usesPlugin ($this->name)) {
+		if (!$project->usesPlugin($this->name)) {
 			return false;
 		}
 
@@ -699,28 +699,28 @@ class GitPlugin extends SCMPlugin {
 			$updates = 0;
 
 			$repo = forge_get_config('repos_path', 'scmgit') . '/' . $project->getUnixName() . '/' . $project->getUnixName() . '.git';
-			if (!is_dir ($repo) || !is_dir ("$repo/refs")) {
+			if (!is_dir($repo) || !is_dir("$repo/refs")) {
 				// echo "No repository $repo\n";
 				return false;
 			}
 
-			$pipe = popen ("GIT_DIR=\"$repo\" git log --since=@$start_time --until=@$end_time --all --pretty='format:%n%an <%ae>' --name-status 2>/dev/null", 'r' );
+			$pipe = popen("GIT_DIR=\"$repo\" git log --since=@$start_time --until=@$end_time --all --pretty='format:%n%an <%ae>' --name-status 2>/dev/null", 'r' );
 
 			db_begin();
 
 			// cleaning stats_cvs_* table for the current day
-			$res = db_query_params ('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
+			$res = db_query_params('DELETE FROM stats_cvs_group WHERE month=$1 AND day=$2 AND group_id=$3',
 						array($month_string,
 						       $day,
 						       $project->getID()));
 			if(!$res) {
 				echo "Error while cleaning stats_cvs_group\n";
-				db_rollback ();
+				db_rollback();
 				return false;
 			}
 
 			$last_user    = "";
-			while (!feof($pipe) && $data = fgets ($pipe)) {
+			while (!feof($pipe) && $data = fgets($pipe)) {
 				$line = trim($data);
 				if (strlen($line) > 0) {
 					$result = preg_match("/^(?P<name>.+) <(?P<mail>.+)>/", $line, $matches);
@@ -738,9 +738,9 @@ class GitPlugin extends SCMPlugin {
 						$result = preg_match("/^(?P<mode>[AMD])\s+(?P<file>.+)$/", $line, $matches);
 						if (!$result) continue;
 						if ($last_user == "") continue;
-						if (!isset ($usr_adds[$last_user])) $usr_adds[$last_user] = 0;
-						if (!isset ($usr_updates[$last_user])) $usr_updates[$last_user] = 0;
-						if (!isset ($usr_deletes[$last_user])) $usr_deletes[$last_user] = 0;
+						if (!isset($usr_adds[$last_user])) $usr_adds[$last_user] = 0;
+						if (!isset($usr_updates[$last_user])) $usr_updates[$last_user] = 0;
+						if (!isset($usr_deletes[$last_user])) $usr_deletes[$last_user] = 0;
 						if ($matches['mode'] == 'A') {
 							$usr_adds[$last_user]++;
 							$adds++;
@@ -756,7 +756,7 @@ class GitPlugin extends SCMPlugin {
 
 			// inserting group results in stats_cvs_groups
 			if ($updates > 0 || $adds > 0) {
-				if (!db_query_params ('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+				if (!db_query_params('INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
 						      array($month_string,
 							     $day,
 							     $project->getID(),
@@ -764,7 +764,7 @@ class GitPlugin extends SCMPlugin {
 							     $updates,
 							     $adds))) {
 					echo "Error while inserting into stats_cvs_group\n";
-					db_rollback ();
+					db_rollback();
 					return false;
 				}
 			}
@@ -772,9 +772,9 @@ class GitPlugin extends SCMPlugin {
 			// building the user list
 			$user_list = array_unique( array_merge( array_keys( $usr_adds ), array_keys( $usr_updates ) ) );
 
-			foreach ( $user_list as $user ) {
+			foreach ($user_list as $user) {
 				// Trying to get user id from user name or email
-				$u = &user_get_object_by_name ($user);
+				$u = user_get_object_by_name($user);
 				if ($u) {
 					$user_id = $u->getID();
 				} else {
@@ -787,10 +787,10 @@ class GitPlugin extends SCMPlugin {
 					}
 				}
 
-				$uu = isset ($usr_updates[$user]) ? $usr_updates[$user] : 0;
-				$ua = isset ($usr_adds[$user]) ? $usr_adds[$user] : 0;
+				$uu = isset($usr_updates[$user]) ? $usr_updates[$user] : 0;
+				$ua = isset($usr_adds[$user]) ? $usr_adds[$user] : 0;
 				if ($uu > 0 || $ua > 0) {
-					if (!db_query_params ('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
+					if (!db_query_params('INSERT INTO stats_cvs_user (month,day,group_id,user_id,commits,adds) VALUES ($1,$2,$3,$4,$5,$6)',
 							      array($month_string,
 								     $day,
 								     $project->getID(),
@@ -798,7 +798,7 @@ class GitPlugin extends SCMPlugin {
 								     $uu,
 								     $ua))) {
 						echo "Error while inserting into stats_cvs_user\n";
-						db_rollback ();
+						db_rollback();
 						return false;
 					}
 				}
@@ -807,9 +807,9 @@ class GitPlugin extends SCMPlugin {
 		db_commit();
 	}
 
-	function generateSnapshots ($params) {
+	function generateSnapshots($params) {
 
-		$project = $this->checkParams ($params);
+		$project = $this->checkParams($params);
 		if (!$project) {
 			return false;
 		}
@@ -819,16 +819,16 @@ class GitPlugin extends SCMPlugin {
 		$snapshot = forge_get_config('scm_snapshots_path').'/'.$group_name.'-scm-latest.tar'.util_get_compressed_file_extension();
 		$tarball = forge_get_config('scm_tarballs_path').'/'.$group_name.'-scmroot.tar'.util_get_compressed_file_extension();
 
-		if (!$project->usesPlugin ($this->name)) {
+		if (!$project->usesPlugin($this->name)) {
 			return false;
 		}
 
 		if (!$project->enableAnonSCM()) {
 			if (is_file($snapshot)) {
-				unlink ($snapshot);
+				unlink($snapshot);
 			}
 			if (is_file($tarball)) {
-				unlink ($tarball);
+				unlink($tarball);
 			}
 			return false;
 		}
@@ -837,12 +837,12 @@ class GitPlugin extends SCMPlugin {
 		$toprepo = forge_get_config('repos_path', 'scmgit');
 		$repo = $toprepo . '/' . $project->getUnixName() . '/' .  $project->getUnixName() . '.git';
 
-		if (!is_dir ($repo)) {
+		if (!is_dir($repo)) {
 			if (is_file($snapshot)) {
-				unlink ($snapshot);
+				unlink($snapshot);
 			}
 			if (is_file($tarball)) {
-				unlink ($tarball);
+				unlink($tarball);
 			}
 			return false;
 		}
@@ -853,20 +853,20 @@ class GitPlugin extends SCMPlugin {
 			return false;
 		}
 
-		$tmp = trim (`mktemp -d`);
+		$tmp = trim(`mktemp -d`);
 		if ($tmp == '') {
 			return false;
 		}
-		$today = date ('Y-m-d');
+		$today = date('Y-m-d');
 		system("GIT_DIR=\"$repo\" git archive --format=tar --prefix=$group_name-scm-$today/ HEAD |".forge_get_config('compression_method')." > $tmp/snapshot");
-		chmod ("$tmp/snapshot", 0644);
-		copy ("$tmp/snapshot", $snapshot);
-		unlink ("$tmp/snapshot");
+		chmod("$tmp/snapshot", 0644);
+		copy("$tmp/snapshot", $snapshot);
+		unlink("$tmp/snapshot");
 
 		system("tar cCf $toprepo - ".$project->getUnixName() ."|".forge_get_config('compression_method')."> $tmp/tarball");
-		chmod ("$tmp/tarball", 0644);
-		copy ("$tmp/tarball", $tarball);
-		unlink ("$tmp/tarball");
+		chmod("$tmp/tarball", 0644);
+		copy("$tmp/tarball", $tarball);
+		unlink("$tmp/tarball");
 		system("rm -rf $tmp");
 	}
 
