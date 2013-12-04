@@ -169,10 +169,13 @@ class GitPlugin extends SCMPlugin {
 						       count($repo_list)) . '</h2>';
 				$b .= '</h2>';
 				$b .= '<p>';
-				$b .= ngettext('Only project developers can access the Git repository via this method. SSH must be installed on your client machine. Enter your site password when prompted.',
-					       'Only project developers can access the Git repositories via this method. SSH must be installed on your client machine. Enter your site password when prompted.',
+				$b .= ngettext('Only project developers can access the Git repository via this method.',
+					       'Only project developers can access the Git repositories via this method.',
 					       count($repo_list));
-
+				$b .= ' ';
+				$b .= _('SSH must be installed on your client machine.');
+				$b .= ' ';
+				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
 				foreach ($repo_list as $repo_name) {
 					$b .= '<p><tt>git clone git+ssh://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
@@ -189,10 +192,11 @@ class GitPlugin extends SCMPlugin {
 
 				$b .= '</h2>';
 				$b .= '<p>';
-				$b .= ngettext('Only project developers can access the Git repository via this method. Enter your site password when prompted.',
-					       'Only project developers can access the Git repositories via this method. Enter your site password when prompted.',
+				$b .= ngettext('Only project developers can access the Git repository via this method.',
+					       'Only project developers can access the Git repositories via this method.',
 					       count($repo_list));
-
+				$b .= ' ';
+				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
 				foreach ($repo_list as $repo_name) {
 					$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
@@ -212,10 +216,14 @@ class GitPlugin extends SCMPlugin {
 
 				$b .= '</h2>';
 				$b .= '<p>';
-				$b .= ngettext('Only project developers can access the Git repository via this method. SSH must be installed on your client machine. Substitute <em>developername</em> with the proper value. Enter your site password when prompted.',
-					       'Only project developers can access the Git repositories via this method. SSH must be installed on your client machine. Substitute <em>developername</em> with the proper value. Enter your site password when prompted.',
+				$b .= ngettext('Only project developers can access the Git repository via this method.',
+					       'Only project developers can access the Git repositories via this method.',
 					       count($repo_list));
-
+				$b .= _('SSH must be installed on your client machine.');
+				$b .= ' ';
+				$b .= _('Substitute <em>developername</em> with the proper value.');
+				$b .= ' ';
+				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
 				foreach ($repo_list as $repo_name) {
 					$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
@@ -230,9 +238,11 @@ class GitPlugin extends SCMPlugin {
 						       count($repo_list)) . '</h2>';
 				$b .= '</h2>';
 				$b .= '<p>';
-				$b .= ngettext('Only project developers can access the Git repository via this method. Enter your site password when prompted.',
-					       'Only project developers can access the Git repositories via this method. Enter your site password when prompted.',
+				$b .= ngettext('Only project developers can access the Git repository via this method.',
+					       'Only project developers can access the Git repositories via this method.',
 					       count($repo_list));
+				$b .= ' ';
+				$b .= _('Enter your site password when prompted.');
 
 				$b .= '</p>';
 				foreach ($repo_list as $repo_name) {

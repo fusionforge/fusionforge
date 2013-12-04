@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-04 12:57+0100\n"
+"POT-Creation-Date: 2013-12-04 16:14+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -2098,8 +2098,8 @@ msgstr "Non se puido obter o obxecto de foro"
 #: plugins/oauthprovider/www/request_tokens.php:100
 #: plugins/oauthprovider/www/request_tokens.php:103
 #: plugins/oauthprovider/www/request_tokens.php:108
-#: plugins/scmgit/common/GitPlugin.class.php:1092
-#: plugins/scmgit/common/GitPlugin.class.php:1101
+#: plugins/scmgit/common/GitPlugin.class.php:1102
+#: plugins/scmgit/common/GitPlugin.class.php:1111
 #: www/admin/admin_table.php:161 www/admin/admin_table.php:325
 #: www/admin/responses_admin.php:46 www/admin/trove/trove_cat_edit.php:150
 #: www/admin/useredit.php:231 www/admin/userlist.php:119
@@ -2565,7 +2565,7 @@ msgstr "Asunto "
 #: plugins/headermenu/view/admin/updateLinkValue.php:103
 #: plugins/oauthconsumer/www/provider_edit.php:30
 #: plugins/oauthprovider/www/consumer_update_page.php:50
-#: plugins/scmgit/common/GitPlugin.class.php:1122
+#: plugins/scmgit/common/GitPlugin.class.php:1132
 #: plugins/scmhg/common/HgPlugin.class.php:631
 #: plugins/webanalytics/view/admin/updateLinkValue.php:42
 #: www/admin/admin_table.php:58 www/admin/admin_table.php:164
@@ -5216,7 +5216,7 @@ msgstr "Texto de formulario libre para a páxina de \"navegar polos elementos\""
 #: plugins/forumml/www/forumml_utils.php:596 plugins/forumml/www/index.php:126
 #: plugins/mantisbt/view/addIssue.php:146
 #: plugins/mantisbt/view/addOrEditNote.php:58
-#: plugins/scmgit/common/GitPlugin.class.php:1123
+#: plugins/scmgit/common/GitPlugin.class.php:1133
 #: plugins/scmhg/common/HgPlugin.class.php:632
 #: www/account/pending-resend.php:75 www/admin/admin_table.php:221
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:247
@@ -5909,7 +5909,7 @@ msgstr "Aberto"
 #: plugins/quota_management/www/quota_project.php:230
 #: plugins/scmcvs/common/CVSPlugin.class.php:195
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:230
-#: plugins/scmgit/common/GitPlugin.class.php:358
+#: plugins/scmgit/common/GitPlugin.class.php:368
 #: plugins/scmsvn/common/SVNPlugin.class.php:242 www/pm/index.php:102
 #: www/pm/mod_task.php:323 www/stats/site_stats_utils.php:265
 msgid "Total"
@@ -6664,7 +6664,7 @@ msgstr ""
 #: plugins/oauthprovider/www/consumer_update_page.php:54
 #: plugins/scmcvs/common/CVSPlugin.class.php:175
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:210
-#: plugins/scmgit/common/GitPlugin.class.php:338
+#: plugins/scmgit/common/GitPlugin.class.php:348
 #: plugins/scmsvn/common/SVNPlugin.class.php:222
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:32
 #: www/account/editsshkeys.php:51 www/account/index.php:307
@@ -13663,10 +13663,12 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:103
 #: plugins/scmcvs/common/CVSPlugin.class.php:120
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:149
+#: plugins/scmgit/common/GitPlugin.class.php:176
+#: plugins/scmgit/common/GitPlugin.class.php:222
 #: plugins/scmsvn/common/SVNPlugin.class.php:141
 #: plugins/scmsvn/common/SVNPlugin.class.php:166
 msgid "SSH must be installed on your client machine."
-msgstr ""
+msgstr "Ten que ter instalado SSH na máquina cliente."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:108
 #: plugins/scmbzr/common/BzrPlugin.class.php:122
@@ -13675,6 +13677,10 @@ msgstr ""
 #: plugins/scmcvs/common/CVSPlugin.class.php:107
 #: plugins/scmcvs/common/CVSPlugin.class.php:124
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:153
+#: plugins/scmgit/common/GitPlugin.class.php:178
+#: plugins/scmgit/common/GitPlugin.class.php:199
+#: plugins/scmgit/common/GitPlugin.class.php:226
+#: plugins/scmgit/common/GitPlugin.class.php:245
 #: plugins/scmsvn/common/SVNPlugin.class.php:143
 #: plugins/scmsvn/common/SVNPlugin.class.php:154
 #: plugins/scmsvn/common/SVNPlugin.class.php:170
@@ -13695,13 +13701,13 @@ msgstr "Nome da rama"
 #: plugins/scmsvn/common/SVNPlugin.class.php:168
 #: plugins/scmsvn/common/SVNPlugin.class.php:181
 msgid "Substitute <em>developername</em> with the proper values."
-msgstr ""
+msgstr "Substitúa <em>nome_do_desenvolvedor</em> co valor axeitado."
 
 #: plugins/scmbzr/common/BzrPlugin.class.php:124
 #: plugins/scmcpold/common/CpoldPlugin.class.php:98
 #: plugins/scmcvs/common/CVSPlugin.class.php:128
-#: plugins/scmgit/common/GitPlugin.class.php:221
-#: plugins/scmgit/common/GitPlugin.class.php:239
+#: plugins/scmgit/common/GitPlugin.class.php:229
+#: plugins/scmgit/common/GitPlugin.class.php:249
 #: plugins/scmhg/common/HgPlugin.class.php:131
 #: plugins/scmsvn/common/SVNPlugin.class.php:172
 #: plugins/scmsvn/common/SVNPlugin.class.php:185
@@ -13827,14 +13833,14 @@ msgstr "nome_do_módulo"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:141
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:166
-#: plugins/scmgit/common/GitPlugin.class.php:289
+#: plugins/scmgit/common/GitPlugin.class.php:299
 #, fuzzy
 msgid "Download the nightly snapshot"
 msgstr "Descargar a instantánea nocturna da árbore CVS"
 
 #: plugins/scmcvs/common/CVSPlugin.class.php:176
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:211
-#: plugins/scmgit/common/GitPlugin.class.php:339
+#: plugins/scmgit/common/GitPlugin.class.php:349
 #: plugins/scmsvn/common/SVNPlugin.class.php:223
 #: www/stats/site_stats_utils.php:284
 msgid "Adds"
@@ -13914,7 +13920,7 @@ msgid "Create new repository:"
 msgstr "Crear unha resposta nova: "
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:629
-#: plugins/scmgit/common/GitPlugin.class.php:1092
+#: plugins/scmgit/common/GitPlugin.class.php:1102
 #: plugins/scmhg/common/HgPlugin.class.php:625
 #, fuzzy
 msgid "Repository name"
@@ -13966,14 +13972,14 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: plugins/scmgit/common/GitPlugin.class.php:140
-#: plugins/scmgit/common/GitPlugin.class.php:321
+#: plugins/scmgit/common/GitPlugin.class.php:331
 #: plugins/scmgit/common/scmgit_Widget_MyRepositories.class.php:52
 #, fuzzy
 msgid "Browse Git Repository"
 msgstr "Navegar polo repositorio CVS"
 
 #: plugins/scmgit/common/GitPlugin.class.php:167
-#: plugins/scmgit/common/GitPlugin.class.php:209
+#: plugins/scmgit/common/GitPlugin.class.php:213
 #, fuzzy
 msgid "Developer Access to the Git repository via SSH"
 msgid_plural "Developer Access to the Git repositories via SSH"
@@ -13981,85 +13987,39 @@ msgstr[0] "Desenvolvedores (en proba) "
 msgstr[1] "Desenvolvedores (en proba) "
 
 #: plugins/scmgit/common/GitPlugin.class.php:172
-#, fuzzy
-msgid ""
-"Only project developers can access the Git repository via this method. SSH "
-"must be installed on your client machine. Enter your site password when "
-"prompted."
+#: plugins/scmgit/common/GitPlugin.class.php:195
+#: plugins/scmgit/common/GitPlugin.class.php:219
+#: plugins/scmgit/common/GitPlugin.class.php:241
+msgid "Only project developers can access the Git repository via this method."
 msgid_plural ""
-"Only project developers can access the Git repositories via this method. SSH "
-"must be installed on your client machine. Enter your site password when "
-"prompted."
+"Only project developers can access the Git repositories via this method."
 msgstr[0] ""
-"<p><strong>Acceso para desenvolvedores ao Subversion mediante SSH</strong></"
-"p><p> Só os desenvolvedores do proxecto poden acceder á árbore SVN por este "
-"método. Ten que ter instalado SSH na máquina cliente. Introduza o seu "
-"contrasinal cando se lle solicite.</p>"
+"Só os desenvolvedores do proxecto poden acceder á árbore Git por este método."
 msgstr[1] ""
-"<p><strong>Acceso para desenvolvedores ao Subversion mediante SSH</strong></"
-"p><p> Só os desenvolvedores do proxecto poden acceder á árbore SVN por este "
-"método. Ten que ter instalado SSH na máquina cliente. Introduza o seu "
-"contrasinal cando se lle solicite.</p>"
+"Só os desenvolvedores do proxecto poden acceder á árbore Git por este método."
 
-#: plugins/scmgit/common/GitPlugin.class.php:186
-#: plugins/scmgit/common/GitPlugin.class.php:228
+#: plugins/scmgit/common/GitPlugin.class.php:189
+#: plugins/scmgit/common/GitPlugin.class.php:236
 #, fuzzy
 msgid "Developer Access to the Git repository via HTTP"
 msgid_plural "Developer Access to the Git repositories via HTTP"
 msgstr[0] "Desenvolvedores (en proba) "
 msgstr[1] "Desenvolvedores (en proba) "
 
-#: plugins/scmgit/common/GitPlugin.class.php:192
-#: plugins/scmgit/common/GitPlugin.class.php:233
-#, fuzzy
-msgid ""
-"Only project developers can access the Git repository via this method. Enter "
-"your site password when prompted."
-msgid_plural ""
-"Only project developers can access the Git repositories via this method. "
-"Enter your site password when prompted."
-msgstr[0] ""
-"<p><strong>Acceso para desenvolvedores ao Subversion mediante DAV</strong></"
-"p><p> Só os desenvolvedores do proxecto poden acceder á árbore SVN por este "
-"método. Introduza o seu contrasinal cando se lle solicite.</p>"
-msgstr[1] ""
-"<p><strong>Acceso para desenvolvedores ao Subversion mediante DAV</strong></"
-"p><p> Só os desenvolvedores do proxecto poden acceder á árbore SVN por este "
-"método. Introduza o seu contrasinal cando se lle solicite.</p>"
-
-#: plugins/scmgit/common/GitPlugin.class.php:204
+#: plugins/scmgit/common/GitPlugin.class.php:208
 msgid ""
 "Missing configuration for access in scmgit.ini : use_ssh and use_dav disabled"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:215
-#, fuzzy
-msgid ""
-"Only project developers can access the Git repository via this method. SSH "
-"must be installed on your client machine. Substitute <em>developername</em> "
-"with the proper value. Enter your site password when prompted."
-msgid_plural ""
-"Only project developers can access the Git repositories via this method. SSH "
-"must be installed on your client machine. Substitute <em>developername</em> "
-"with the proper value. Enter your site password when prompted."
-msgstr[0] ""
-"<p><strong>Acceso para desenvolvedores ao Subversion mediante SSH</strong></"
-"p><p> Só os desenvolvedores do proxecto poden acceder á árbore SVN por este "
-"método. Ten que ter instalado SSH na máquina cliente. Substitúa "
-"<em>nome_do_desenvolvedor</em> co valor axeitado. Introduza o seu "
-"contrasinal cando se lle solicite.</p>"
-msgstr[1] ""
-"<p><strong>Acceso para desenvolvedores ao Subversion mediante SSH</strong></"
-"p><p> Só os desenvolvedores do proxecto poden acceder á árbore SVN por este "
-"método. Ten que ter instalado SSH na máquina cliente. Substitúa "
-"<em>nome_do_desenvolvedor</em> co valor axeitado. Introduza o seu "
-"contrasinal cando se lle solicite.</p>"
+#: plugins/scmgit/common/GitPlugin.class.php:224
+msgid "Substitute <em>developername</em> with the proper value."
+msgstr "Substitúa <em>nome_do_desenvolvedor</em> co valor axeitado."
 
-#: plugins/scmgit/common/GitPlugin.class.php:254
+#: plugins/scmgit/common/GitPlugin.class.php:264
 msgid "Access to your personal repository"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:257
+#: plugins/scmgit/common/GitPlugin.class.php:267
 #, fuzzy
 msgid ""
 "You have a personal repository for this project, accessible through SSH with "
@@ -14069,11 +14029,11 @@ msgstr ""
 "p><p> Só os desenvolvedores do proxecto poden acceder á árbore SVN por este "
 "método. Introduza o seu contrasinal cando se lle solicite.</p>"
 
-#: plugins/scmgit/common/GitPlugin.class.php:265
+#: plugins/scmgit/common/GitPlugin.class.php:275
 msgid "Request a personal repository"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:268
+#: plugins/scmgit/common/GitPlugin.class.php:278
 msgid ""
 "You can clone the project repository into a personal one into which you "
 "alone will be able to write.  Other members of the project will only have "
@@ -14082,17 +14042,17 @@ msgid ""
 "time before it is created (less than an hour in most situations)."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:271
+#: plugins/scmgit/common/GitPlugin.class.php:281
 #, php-format
 msgid "<a href=\"%s\">Request a personal repository</a>."
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:315
+#: plugins/scmgit/common/GitPlugin.class.php:325
 #, fuzzy
 msgid "Git Repository Browser"
 msgstr "Historial do repositorio"
 
-#: plugins/scmgit/common/GitPlugin.class.php:317
+#: plugins/scmgit/common/GitPlugin.class.php:327
 #, fuzzy
 msgid ""
 "Browsing the Git tree gives you a view into the current status of this "
@@ -14103,77 +14063,77 @@ msgstr ""
 "estado actual do código do proxecto. Tamén pode ver o historial completo de "
 "calquera ficheiro do repositorio."
 
-#: plugins/scmgit/common/GitPlugin.class.php:340
+#: plugins/scmgit/common/GitPlugin.class.php:350
 msgid "Updates"
 msgstr "Actualizacións"
 
-#: plugins/scmgit/common/GitPlugin.class.php:966
+#: plugins/scmgit/common/GitPlugin.class.php:976
 #, fuzzy
 msgid "Git Commits"
 msgstr "Ligazóns a actualizacións do SVN relacionadas"
 
-#: plugins/scmgit/common/GitPlugin.class.php:984
+#: plugins/scmgit/common/GitPlugin.class.php:994
 msgid "Cannot create a secondary repository with the same name as the primary"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:989
+#: plugins/scmgit/common/GitPlugin.class.php:999
 #: plugins/scmhg/common/HgPlugin.class.php:534
 #, fuzzy
 msgid "This repository name is not valid"
 msgstr "Usuario non válido "
 
-#: plugins/scmgit/common/GitPlugin.class.php:1002
+#: plugins/scmgit/common/GitPlugin.class.php:1012
 #: plugins/scmhg/common/HgPlugin.class.php:529
 #: plugins/scmhg/common/HgPlugin.class.php:545
 #, fuzzy, php-format
 msgid "A repository %s already exists"
 msgstr "A consulta xa existe "
 
-#: plugins/scmgit/common/GitPlugin.class.php:1027
+#: plugins/scmgit/common/GitPlugin.class.php:1037
 msgid "Invalid URL from which to clone"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1036
+#: plugins/scmgit/common/GitPlugin.class.php:1046
 #, fuzzy, php-format
 msgid "Clone of %s"
 msgstr "ID da forxa"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1086
+#: plugins/scmgit/common/GitPlugin.class.php:1096
 #, fuzzy, php-format
 msgid "No extra Git repository for project %1$s"
 msgstr "Xestionar separadores adicionais"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1088
+#: plugins/scmgit/common/GitPlugin.class.php:1098
 #, fuzzy, php-format
 msgid "Extra Git repository for project %1$s"
 msgid_plural "Extra Git repositories for project %1$s"
 msgstr[0] "Xestionar separadores adicionais"
 msgstr[1] "Xestionar separadores adicionais"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1092
+#: plugins/scmgit/common/GitPlugin.class.php:1102
 #, fuzzy
 msgid "Initial repository description"
 msgstr "Descrición curta "
 
-#: plugins/scmgit/common/GitPlugin.class.php:1092
+#: plugins/scmgit/common/GitPlugin.class.php:1102
 msgid "Initial clone URL (if any)"
 msgstr ""
 
-#: plugins/scmgit/common/GitPlugin.class.php:1109
+#: plugins/scmgit/common/GitPlugin.class.php:1119
 #, fuzzy, php-format
 msgid "Create new Git repository for project %1$s"
 msgstr "Xestionar separadores adicionais"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1116
+#: plugins/scmgit/common/GitPlugin.class.php:1126
 #, fuzzy
 msgid "Repository name:"
 msgstr "Historial do repositorio"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1118
+#: plugins/scmgit/common/GitPlugin.class.php:1128
 msgid "Description:"
 msgstr "Descrición:"
 
-#: plugins/scmgit/common/GitPlugin.class.php:1120
+#: plugins/scmgit/common/GitPlugin.class.php:1130
 msgid ""
 "Initial clone URL (or name of an existing repository in this project; leave "
 "empty to start with an empty repository):"
@@ -25680,7 +25640,7 @@ msgstr "Páxina persoal de %s"
 #, fuzzy
 #~ msgid ""
 #~ "Only project developers can access the Bazaar branches via this method. "
-#~ "SSH must be installed on your client machine. Enter your site password "
+#~ "Enter your site password "
 #~ "when prompted."
 #~ msgstr ""
 #~ "<p><strong>Acceso para desenvolvedores ao Subversion mediante SSH</"
@@ -25691,9 +25651,7 @@ msgstr "Páxina persoal de %s"
 #, fuzzy
 #~ msgid ""
 #~ "Only project developers can access the Bazaar branches via this method. "
-#~ "SSH must be installed on your client machine. Substitute "
-#~ "<em>developername</em> with the proper value. Enter your site password "
-#~ "when prompted."
+#~ "Substitute "
 #~ msgstr ""
 #~ "<p><strong>Acceso por SSH a Bazaar para desenvolvedores</strong></p><p>Só "
 #~ "os desenvolvedores do proxecto poden acceder ás ramas de Bazaar por este "
@@ -25780,8 +25738,6 @@ msgstr "Páxina persoal de %s"
 #~ msgid ""
 #~ "Only project developers can access the CVS tree via this method. SSH must "
 #~ "be installed on your client machine. Substitute <em>modulename</em> and "
-#~ "<em>developername</em> with the proper values. Enter your site password "
-#~ "when prompted."
 #~ msgstr ""
 #~ "<p><strong>Acceso ao CVS mediante SSH</strong></p><p> Só os "
 #~ "desenvolvedores do proxecto poden acceder á árbore CVS por este método. "
@@ -25847,7 +25803,6 @@ msgstr "Páxina persoal de %s"
 #~ msgid ""
 #~ "Only project developers can access the SVN tree via this method. SSH must "
 #~ "be installed on your client machine. Substitute <em>developername</em> "
-#~ "with the proper values. Enter your site password when prompted."
 #~ msgstr ""
 #~ "<p><strong>Acceso para desenvolvedores ao Subversion mediante SSH</"
 #~ "strong></p><p> Só os desenvolvedores do proxecto poden acceder á árbore "
@@ -25858,8 +25813,6 @@ msgstr "Páxina persoal de %s"
 #, fuzzy
 #~ msgid ""
 #~ "Only project developers can access the SVN tree via this method. "
-#~ "Substitute <em>developername</em> with the proper values. Enter your site "
-#~ "password when prompted."
 #~ msgstr ""
 #~ "<p><strong>Acceso para desenvolvedores ao Subversion mediante DAV</"
 #~ "strong></p><p> Só os desenvolvedores do proxecto poden acceder á árbore "
