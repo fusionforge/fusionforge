@@ -118,5 +118,6 @@ class Widget_MyMonitoredDocuments extends Widget {
 				return true;
 			}
 		}
+		return false;
 	}
 }

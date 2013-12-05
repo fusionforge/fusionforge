@@ -166,5 +166,6 @@ class Widget_MyMonitoredForums extends Widget {
 				return true;
 			}
 		}
+		return false;
 	}
 }

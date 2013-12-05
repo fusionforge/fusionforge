@@ -145,6 +145,7 @@ class Widget_MyProjectsLastDocuments extends Widget {
 				return true;
 			}
 		}
+		return false;
 	}
 }
 

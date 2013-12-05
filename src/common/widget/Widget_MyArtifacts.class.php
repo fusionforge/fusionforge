@@ -304,5 +304,6 @@ class Widget_MyArtifacts extends Widget {
 				return true;
 			}
 		}
+		return false;
 	}
 }
