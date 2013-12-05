@@ -25,7 +25,6 @@ require_once $gfcommon.'pm/ProjectTaskFactory.class.php';
 
 function &pm_import_tasks($group_project_id,&$tasks) {
 	$was_error = false;
-	$foo = "";
 
 	$pg = projectgroup_get_object($group_project_id);
 	if (!$pg || !is_object($pg)) {
