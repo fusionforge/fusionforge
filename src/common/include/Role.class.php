@@ -74,7 +74,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	/**
 	 * setName - set the name of this role.
 	 *
-	 * @param	string	The new name of this role.
+	 * @param	string	$role_name	The new name of this role.
 	 * @return	boolean	True if updated OK
 	 */
 	function setName($role_name) { // From the PFO spec
@@ -126,7 +126,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	/**
 	 * setPublic - set the public flag for this role.
 	 *
-	 * @param	boolean	The new value of the flag.
+	 * @param	boolean	$flag	The new value of the flag.
 	 * @return	boolean	True if updated OK
 	 */
 	function setPublic($flag) { // From the PFO spec
