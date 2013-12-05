@@ -94,7 +94,11 @@ class HgPlugin extends SCMPlugin {
 				$b .= sprintf(_('Developer %s Access via SSH'), 'Mercurial');
 				$b .= '</h2>';
 				$b .= '<p>';
-				$b .= _('Read/write access to Mercurial tree is allowed for authenticated users. SSH must be installed on your client machine. Enter your site password when prompted.');
+				$b .= _('Read/write access to Mercurial tree is allowed for authenticated users.');
+				$b .= ' ';
+				$b .= _('SSH must be installed on your client machine.');
+				$b .= ' ';
+				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
 				// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 				//            HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
@@ -105,7 +109,9 @@ class HgPlugin extends SCMPlugin {
 				$b .= _('Developer Mercurial Access via HTTP');
 				$b .= '</h2>';
 				$b .= '<p>';
-				$b .= _('Only project developers can access the Mercurial tree via this method. Enter your site password when prompted.');
+				$b .= _('Only project developers can access the Mercurial tree via this method.');
+				$b .= ' ';
+				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
 				$b .= '<p><tt>hg clone '.$protocol.'://<i>'. $d .'</i>@' . $this->getBoxForProject($project) .'/hg/'. $project->getUnixName() . '</tt></p>';
 			}
@@ -132,7 +138,9 @@ class HgPlugin extends SCMPlugin {
 				$b .= _('Developer Mercurial Access via HTTP');
 				$b .= '</h2>';
 				$b .= '<p>';
-				$b .= _('Only project developers can access the Mercurial tree via this method. Enter your site password when prompted.');
+				$b .= _('Only project developers can access the Mercurial tree via this method.');
+				$b .= ' ';
+				$b .= _('Enter your site password when prompted.');
 				$b .= '</p>';
 				$b .= '<p><tt>hg clone '.$protocol.'://<i>'. _('developername') .'</i>@' . $this->getBoxForProject($project) .'/hg/'. $project->getUnixName() . '</tt></p>';
 			}
