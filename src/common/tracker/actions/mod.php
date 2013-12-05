@@ -80,7 +80,7 @@ if (session_loggedin()) {
 			</td>
 		</tr>
 </table>
-<p/>
+<br />
 <?php } ?>
 <table width="80%">
 	<tr>

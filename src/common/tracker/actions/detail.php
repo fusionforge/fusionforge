@@ -39,7 +39,7 @@ echo notepad_func();
 	<form id="trackerdetailform" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id; ?>&amp;atid=<?php echo $ath->getID(); ?>" method="post" enctype="multipart/form-data">
 
 <?php if (session_loggedin()) { ?>
-	<table cellpadding="0" width="100%">
+	<table class="fullwidth">
 		<tr>
 			<td>
 				<?php
@@ -63,7 +63,7 @@ echo notepad_func();
 		</tr>
 	</table>
 <?php } ?>
-	<table border="0" width="80%">
+	<table width="80%">
 		<tr>
 			<td>
 				<strong><?php echo _('Date')._(':'); ?></strong><br />
@@ -157,8 +157,7 @@ $nb = $count? ' ('.$count.')' : '';
 		<input type="file" name="input_file1" size="30" /><br />
 		<input type="file" name="input_file2" size="30" /><br />
 		<input type="file" name="input_file3" size="30" /><br />
-		<input type="file" name="input_file4" size="30" />
-		<p />
+		<input type="file" name="input_file4" size="30" /><br />
 	<?php } ?>
 	<h2><?php echo _('Attached Files')._(':'); ?></h2>
 <?php

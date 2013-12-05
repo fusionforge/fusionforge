@@ -79,9 +79,9 @@ if (session_loggedin()) {
 			</td>
 		</tr>
 </table>
-<p/>
+<br />
 <?php } ?>
-<table border="0" width="80%">
+<table width="80%">
 	<tr>
 		<td><strong><?php echo _('Submitted by') ?>:</strong><br />
 			<?php
