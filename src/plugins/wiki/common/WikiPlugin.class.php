@@ -29,7 +29,7 @@ class FusionForgeWikiPlugin extends Plugin {
 	function __construct() {
 		$this->Plugin() ;
 		$this->name = "wiki" ;
-		$this->text = "Wiki" ; // To show in the tabs, use...
+		$this->text = _("Wiki"); // To show in the tabs, use...
 		$this->installdir = 'wiki';
 		$this->hooks[] = "groupmenu";
 		$this->hooks[] = "groupisactivecheckbox" ; // The "use ..." checkbox in editgroupinfo
@@ -54,7 +54,7 @@ class FusionForgeWikiPlugin extends Plugin {
 				return;
 			if (!$project->isProject())
 				return;
-			if ( $project->usesPlugin ( $this->name ) ) {
+			if ($project->usesPlugin($this->name)) {
 				$params['TITLES'][]=$this->text;
 				$params['DIRS'][]='/wiki/g/'.$project->getUnixName().'/HomePage';
 			} else {
