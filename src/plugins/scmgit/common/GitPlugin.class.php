@@ -207,6 +207,7 @@ class GitPlugin extends SCMPlugin {
 				$b .= ngettext('Only project developers can access the Git repository via this method.',
 					       'Only project developers can access the Git repositories via this method.',
 					       count($repo_list));
+				$b .= ' ';
 				$b .= _('SSH must be installed on your client machine.');
 				$b .= ' ';
 				$b .= _('Substitute <em>developername</em> with the proper value.');
@@ -219,7 +220,7 @@ class GitPlugin extends SCMPlugin {
 			} elseif (forge_get_config('use_dav', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 				$b = '<h2>';
-				$b = ngettext('Developer Access to the Git repository via HTTP',
+				$b .= ngettext('Developer Access to the Git repository via HTTP',
 						       'Developer Access to the Git repositories via HTTP',
 						       count($repo_list));
 				$b .= '</h2>';
