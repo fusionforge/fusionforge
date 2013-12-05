@@ -82,7 +82,7 @@ class AttachManager extends Error {
 	* Function PrintHelperFunctions
 	*
 	*
-	* @return 	returns the javascript helper functions
+	* @return 	string	returns the javascript helper functions
 	*/
 
 	function PrintHelperFunctions() {

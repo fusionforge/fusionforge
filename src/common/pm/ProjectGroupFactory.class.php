@@ -91,7 +91,7 @@ class ProjectGroupFactory extends Error {
 	/**
 	 *	getProjectGroups - get an array of ProjectGroup objects.
 	 *
-	 *	@return	ProjectGroups[]	The array of ProjectGroups.
+	 *	@return	array	ProjectGroups[]	The array of ProjectGroups.
 	 */
 	function getProjectGroups() {
 		if ($this->projectGroups) {

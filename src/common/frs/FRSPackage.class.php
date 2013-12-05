@@ -361,9 +361,9 @@ class FRSPackage extends Error {
 	/**
 	 *	update - update an FRSPackage in the database.
 	 *
-	 *	@param	string	The name of this package.
-	 *	@param	int	The status_id of this package from frs_status table.
-	 *	@param	int	public or private : 1 or 0
+	 *	@param	string	$name		The name of this package.
+	 *	@param	int		$status		The status_id of this package from frs_status table.
+	 *	@param	int		$is_public	public or private : 1 or 0
 	 *	@return	boolean success.
 	 */
 	function update($name, $status, $is_public = 1) {

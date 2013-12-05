@@ -345,8 +345,8 @@ class FRSRelease extends Error {
 	/**
 	 *  delete - delete this release and all its related data.
 	 *
-	 *  @param  bool	I'm Sure.
-	 *  @param  bool	I'm REALLY sure.
+	 *  @param  bool	$sure			I'm Sure.
+	 *  @param  bool	$really_sure	I'm REALLY sure.
 	 *  @return   bool true/false;
 	 */
 	function delete($sure, $really_sure) {

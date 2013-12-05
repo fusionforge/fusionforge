@@ -44,7 +44,7 @@ $session_ser = getStringFromCookie('session_ser');
 /**
  *	session_build_session_token() - Construct session token for the user
  *
- *	@param		int		User_id of the logged in user
+ *	@param		int		$user_id	User_id of the logged in user
  *	@return string token value
  */
 function session_build_session_token($user_id) {
@@ -82,8 +82,8 @@ function session_build_session_cookie($user_id) {
  *
  *	This hash can be used as a key to identify session, e.g. in DB.
  *
- *	@param		string	Value of the session token
- *	@return hash
+ *	@param		string	$session_token	Value of the session token
+ *	@return string	hash
  */
 function session_get_hash_from_token($session_token) {
 	return session_get_session_cookie_hash($session_token);
@@ -100,7 +100,7 @@ function session_get_session_cookie_hash($session_cookie) {
 /**
  *	session_check_session_token() - Check that session token passed from user is ok
  *
- *	@param		string	Value of the session token
+ *	@param		string	$session_token	Value of the session token
  *	@return user_id if token is ok, false otherwise
  */
 function session_check_session_token($session_token) {
