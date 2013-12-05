@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-05 15:37+0100\n"
+"POT-Creation-Date: 2013-12-05 18:31+0100\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -9988,6 +9988,11 @@ msgstr ""
 msgid "No link to update or name missing."
 msgstr ""
 
+#: plugins/headermenu/common/headermenuPlugin.class.php:32
+#, fuzzy
+msgid "Menu Tabs Manager"
+msgstr "タスクマネージャ"
+
 #: plugins/headermenu/common/headermenuPlugin.class.php:67
 #: plugins/headermenu/common/headermenuPlugin.class.php:427
 #, fuzzy
@@ -13997,6 +14002,7 @@ msgid ""
 msgstr ""
 
 #: plugins/wiki/common/WikiGroupSearchEngine.class.php:32
+#: plugins/wiki/common/WikiPlugin.class.php:32
 msgid "Wiki"
 msgstr ""
 

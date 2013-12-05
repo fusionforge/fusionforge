@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-05 15:37+0100\n"
+"POT-Creation-Date: 2013-12-05 18:31+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -9852,6 +9852,11 @@ msgstr ""
 msgid "No link to update or name missing."
 msgstr ""
 
+#: plugins/headermenu/common/headermenuPlugin.class.php:32
+#, fuzzy
+msgid "Menu Tabs Manager"
+msgstr "Administration du gestionnaire d'onglets"
+
 #: plugins/headermenu/common/headermenuPlugin.class.php:67
 #: plugins/headermenu/common/headermenuPlugin.class.php:427
 msgid "Menu Tabs Manager Admin"
@@ -13830,6 +13835,7 @@ msgstr ""
 "identifiés pourront évaluer les pages wiki."
 
 #: plugins/wiki/common/WikiGroupSearchEngine.class.php:32
+#: plugins/wiki/common/WikiPlugin.class.php:32
 msgid "Wiki"
 msgstr "Wiki"
 

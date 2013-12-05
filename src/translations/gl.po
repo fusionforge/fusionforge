@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-05 15:37+0100\n"
+"POT-Creation-Date: 2013-12-05 18:31+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -10294,6 +10294,11 @@ msgstr ""
 msgid "No link to update or name missing."
 msgstr ""
 
+#: plugins/headermenu/common/headermenuPlugin.class.php:32
+#, fuzzy
+msgid "Menu Tabs Manager"
+msgstr "Administración do xestor de tarefas"
+
 #: plugins/headermenu/common/headermenuPlugin.class.php:67
 #: plugins/headermenu/common/headermenuPlugin.class.php:427
 #, fuzzy
@@ -14503,6 +14508,7 @@ msgid ""
 msgstr ""
 
 #: plugins/wiki/common/WikiGroupSearchEngine.class.php:32
+#: plugins/wiki/common/WikiPlugin.class.php:32
 msgid "Wiki"
 msgstr ""
 

@@ -29,7 +29,7 @@ class headermenuPlugin extends Plugin {
 	function __construct() {
 		$this->Plugin();
 		$this->name = 'headermenu';
-		$this->text = 'Menu Tabs Manager';
+		$this->text = _('Menu Tabs Manager');
 		$this->_addHook('headermenu');
 		$this->_addHook('site_admin_option_hook');
 		$this->_addHook('outermenu');

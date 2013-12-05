@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-05 15:37+0100\n"
+"POT-Creation-Date: 2013-12-05 18:31+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -9974,6 +9974,11 @@ msgstr ""
 msgid "No link to update or name missing."
 msgstr ""
 
+#: plugins/headermenu/common/headermenuPlugin.class.php:32
+#, fuzzy
+msgid "Menu Tabs Manager"
+msgstr "Gestión de Tareas"
+
 #: plugins/headermenu/common/headermenuPlugin.class.php:67
 #: plugins/headermenu/common/headermenuPlugin.class.php:427
 msgid "Menu Tabs Manager Admin"
@@ -14006,6 +14011,7 @@ msgid ""
 msgstr ""
 
 #: plugins/wiki/common/WikiGroupSearchEngine.class.php:32
+#: plugins/wiki/common/WikiPlugin.class.php:32
 msgid "Wiki"
 msgstr ""
 
@@ -26407,10 +26413,6 @@ msgstr "Página personal de %s"
 #, fuzzy
 #~ msgid "Edit Project Info"
 #~ msgstr "Información del Proyecto"
-
-#, fuzzy
-#~ msgid "Use Task Manager"
-#~ msgstr "Gestión de Tareas"
 
 #~ msgid "Add Role"
 #~ msgstr "Añadir rol"
