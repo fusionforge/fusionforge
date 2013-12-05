@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-24 18:23+0200\n"
+"POT-Creation-Date: 2013-12-05 12:18+0100\n"
 "PO-Revision-Date: 2003-06-07 09:01+0900\n"
 "Last-Translator: Tadashi Jokagi <webmaster@elf.no-ip.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -276,16 +276,32 @@ msgstr ""
 msgid "Preview"
 msgstr "プレビューする"
 
+#, fuzzy
+msgid "Preview the current content [alt-p]"
+msgstr "現在のバージョンを表示する"
+
 msgid "Save"
 msgstr "保存する"
 
+msgid "Save the current content as wikipage [alt-s]"
+msgstr ""
+
 msgid "Changes"
+msgstr ""
+
+msgid "Preview the current changes as diff [alt-c]"
 msgstr ""
 
 msgid "Upload"
 msgstr "アップロード"
 
+msgid "Select a local file and press Upload to attach into this page"
+msgstr ""
+
 msgid "Spell Check"
+msgstr ""
+
+msgid "Check the spelling"
 msgstr ""
 
 #, php-format
@@ -6173,9 +6189,6 @@ msgstr "ページを編集しています。"
 #, fuzzy
 #~ msgid "%s is empty"
 #~ msgstr "%s が空です。"
-
-#~ msgid "View the current version"
-#~ msgstr "現在のバージョンを表示する"
 
 #~ msgid "Dump pages as XHTML"
 #~ msgstr "XHTMLで出力"

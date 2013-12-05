@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-24 18:23+0200\n"
+"POT-Creation-Date: 2013-12-05 12:18+0100\n"
 "PO-Revision-Date: 2001-01-27 01:58+0200\n"
 "Last-Translator: Jon Åslund <jooon@hem.passagen.se>\n"
 "Language-Team: \n"
@@ -277,16 +277,31 @@ msgstr ""
 msgid "Preview"
 msgstr "Översikt"
 
+msgid "Preview the current content [alt-p]"
+msgstr ""
+
 msgid "Save"
 msgstr "Spara"
+
+msgid "Save the current content as wikipage [alt-s]"
+msgstr ""
 
 msgid "Changes"
 msgstr "Ändringar"
 
+msgid "Preview the current changes as diff [alt-c]"
+msgstr ""
+
 msgid "Upload"
 msgstr ""
 
+msgid "Select a local file and press Upload to attach into this page"
+msgstr ""
+
 msgid "Spell Check"
+msgstr ""
+
+msgid "Check the spelling"
 msgstr ""
 
 #, php-format

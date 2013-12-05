@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PhpWiki 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-24 18:23+0200\n"
+"POT-Creation-Date: 2013-12-05 12:18+0100\n"
 "PO-Revision-Date: 2000-10-31 02:23+0200\n"
 "Last-Translator: Reini Urban <rurban@x-ray.at>, Carsten Klapp "
 "<carstenklapp@users.sourceforge.net>, Helmer Pardun <pardunpress@t-online."
@@ -302,16 +302,32 @@ msgstr ""
 msgid "Preview"
 msgstr "Vorschau"
 
+#, fuzzy
+msgid "Preview the current content [alt-p]"
+msgstr "Die aktuelle Version ansehen"
+
 msgid "Save"
 msgstr "Speichern"
+
+msgid "Save the current content as wikipage [alt-s]"
+msgstr ""
 
 msgid "Changes"
 msgstr "Änderungen"
 
+msgid "Preview the current changes as diff [alt-c]"
+msgstr ""
+
 msgid "Upload"
 msgstr "Hochladen"
 
+msgid "Select a local file and press Upload to attach into this page"
+msgstr ""
+
 msgid "Spell Check"
+msgstr ""
+
+msgid "Check the spelling"
 msgstr ""
 
 #, php-format
@@ -6162,9 +6178,6 @@ msgstr "Diese Seite bearbeiten"
 
 #~ msgid "Who Is Online"
 #~ msgstr "Wer ist Online"
-
-#~ msgid "View the current version"
-#~ msgstr "Die aktuelle Version ansehen"
 
 #~ msgid "Dump pages as XHTML"
 #~ msgstr "Seiten als XHTML Dateien speichern"

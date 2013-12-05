@@ -689,23 +689,23 @@ class PageEditor
         $el['PREVIEW_B'] = Button('submit:edit[preview]', _("Preview"),
             'wikiaction',
             array('accesskey' => 'p',
-                'title' => 'Preview the current content [alt-p]'));
+                'title' => _('Preview the current content [alt-p]')));
 
         //if (!$this->isConcurrentUpdate() && $this->canEdit())
         $el['SAVE_B'] = Button('submit:edit[save]',
             _("Save"), 'wikiaction',
             array('accesskey' => 's',
-                'title' => 'Save the current content as wikipage [alt-s]'));
+                'title' => _('Save the current content as wikipage [alt-s]')));
         $el['CHANGES_B'] = Button('submit:edit[diff]',
             _("Changes"), 'wikiaction',
             array('accesskey' => 'c',
-                'title' => 'Preview the current changes as diff [alt-c]'));
+                'title' => _('Preview the current changes as diff [alt-c]')));
         $el['UPLOAD_B'] = Button('submit:edit[upload]',
             _("Upload"), 'wikiaction',
-            array('title' => 'Select a local file and press Upload to attach into this page'));
+            array('title' => _('Select a local file and press Upload to attach into this page')));
         $el['SPELLCHECK_B'] = Button('submit:edit[SpellCheck]',
             _("Spell Check"), 'wikiaction',
-            array('title' => 'Check the spelling'));
+            array('title' => _('Check the spelling')));
         $el['IS_CURRENT'] = $this->version == $this->current->getVersion();
 
         $el['WIDTH_PREF']
