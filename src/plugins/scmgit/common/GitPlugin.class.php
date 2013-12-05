@@ -160,13 +160,11 @@ class GitPlugin extends SCMPlugin {
 		if (session_loggedin()) {
 			$u = user_get_object(user_getid());
 			$d = $u->getUnixName();
-			$validSetup = 0;
-			$b = '';
 			if (forge_get_config('use_ssh', 'scmgit')) {
-				$b .= '<h2>';
-				$b = '<h2>' . ngettext('Developer Access to the Git repository via SSH',
+				$b = '<h2>';
+				$b = ngettext('Developer Access to the Git repository via SSH',
 						       'Developer Access to the Git repositories via SSH',
-						       count($repo_list)) . '</h2>';
+						       count($repo_list));
 				$b .= '</h2>';
 				$b .= '<p>';
 				$b .= ngettext('Only project developers can access the Git repository via this method.',
@@ -180,16 +178,12 @@ class GitPlugin extends SCMPlugin {
 				foreach ($repo_list as $repo_name) {
 					$b .= '<p><tt>git clone git+ssh://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
 				}
-
-				$validSetup = 1;
-			}
-			if (forge_get_config('use_dav', 'scmgit')) {
+			} elseif (forge_get_config('use_dav', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
-				$b .= '<h2>';
-				$b = '<h2>' . ngettext('Developer Access to the Git repository via HTTP',
+				$b = '<h2>';
+				$b = ngettext('Developer Access to the Git repository via HTTP',
 						       'Developer Access to the Git repositories via HTTP',
-						       count($repo_list)) . '</h2>';
-
+						       count($repo_list));
 				$b .= '</h2>';
 				$b .= '<p>';
 				$b .= ngettext('Only project developers can access the Git repository via this method.',
@@ -201,19 +195,13 @@ class GitPlugin extends SCMPlugin {
 				foreach ($repo_list as $repo_name) {
 					$b .= '<p><tt>git clone '.$protocol.'://'.$d.'@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
 				}
-
-				$validSetup = 1;
-			}
-			if ($validSetup == 0) {
-				$b = '<p class="warning">'._('Missing configuration for access in scmgit.ini : use_ssh and use_dav disabled').'</p>';
 			}
 		} else {
 			if (forge_get_config('use_ssh', 'scmgit')) {
 				$b = '<h2>';
-				$b = '<h2>' . ngettext('Developer Access to the Git repository via SSH',
+				$b = ngettext('Developer Access to the Git repository via SSH',
 						       'Developer Access to the Git repositories via SSH',
-						       count($repo_list)) . '</h2>';
-
+						       count($repo_list));
 				$b .= '</h2>';
 				$b .= '<p>';
 				$b .= ngettext('Only project developers can access the Git repository via this method.',
@@ -228,14 +216,12 @@ class GitPlugin extends SCMPlugin {
 				foreach ($repo_list as $repo_name) {
 					$b .= '<p><tt>git clone git+ssh://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
 				}
-
-			}
-			if (forge_get_config('use_dav', 'scmgit')) {
+			} elseif (forge_get_config('use_dav', 'scmgit')) {
 				$protocol = forge_get_config('use_ssl', 'scmgit')? 'https' : 'http';
 				$b = '<h2>';
-				$b = '<h2>' . ngettext('Developer Access to the Git repository via HTTP',
+				$b = ngettext('Developer Access to the Git repository via HTTP',
 						       'Developer Access to the Git repositories via HTTP',
-						       count($repo_list)) . '</h2>';
+						       count($repo_list));
 				$b .= '</h2>';
 				$b .= '<p>';
 				$b .= ngettext('Only project developers can access the Git repository via this method.',
@@ -243,17 +229,20 @@ class GitPlugin extends SCMPlugin {
 					       count($repo_list));
 				$b .= ' ';
 				$b .= _('Enter your site password when prompted.');
-
 				$b .= '</p>';
 				foreach ($repo_list as $repo_name) {
 					$b .= '<p><tt>git clone '.$protocol.'://<i>'._('developername').'</i>@' . $project->getSCMBox() . '/'. forge_get_config('scm_root', 'scmgit') .'/'. $project->getUnixName() .'/'. $repo_name .'.git</tt></p>';
 				}
-
 			}
 		}
 
+		if (!isset($b)) {
+			$b = '<h2>'._('Developer Git Access').'</h2>';
+			$b .= '<p class="error">Error: No access protocol has been allowed for the Git plugin in scmgit.ini: : use_ssh and use_dav are disabled</p>';
+		}
+
 		if (session_loggedin()) {
-                        $u =& user_get_object(user_getid());
+			$u = user_get_object(user_getid());
 			if ($u->getUnixStatus() == 'A') {
 				$result = db_query_params('SELECT * FROM scm_personal_repos p WHERE p.group_id=$1 AND p.user_id=$2 AND plugin_id=$3',
 							  array($project->getID(),
@@ -528,7 +517,7 @@ class GitPlugin extends SCMPlugin {
 						"$repodir/hooks/post-update");
 				}
 				if (!is_file("$repodir/hooks/post-update")) {
-					$f = fopen("$repodir/hooks/post-update");
+					$f = fopen("$repodir/hooks/post-update", 'w');
 					fwrite($f, "exec git-update-server-info\n");
 					fclose($f);
 				}
