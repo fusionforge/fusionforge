@@ -116,7 +116,7 @@ class Permission extends Error {
 	 *  @return	boolean	is_super_user.
 	 */
 	function isSuperUser() {
-		return forge_check_global_perm ('forge_admin') ;
+		return forge_check_global_perm ('forge_admin');
 	}
 
 	/**
@@ -125,7 +125,7 @@ class Permission extends Error {
 	 *  @return	boolean	is_forum_admin.
 	 */
 	function isForumAdmin() {
-		return forge_check_perm ('forum_admin', $this->group_id) ;
+		return forge_check_perm ('forum_admin', $this->group_id);
 	}
 
 	/**
@@ -152,7 +152,7 @@ class Permission extends Error {
 	 *  @return	boolean	is_release_technician.
 	 */
 	function isReleaseTechnician() {
-		return forge_check_perm ('frs', $this->group_id, 'write') ;
+		return forge_check_perm ('frs', $this->group_id, 'write');
 	}
 
 	/**
@@ -161,7 +161,7 @@ class Permission extends Error {
 	 *  @return	boolean	is_artifact_admin.
 	 */
 	function isArtifactAdmin() {
-		return forge_check_perm ('tracker_admin', $this->group_id) ;
+		return forge_check_perm ('tracker_admin', $this->group_id);
 	}
 
 	/**
@@ -170,7 +170,7 @@ class Permission extends Error {
 	 *  @return	boolean	is_projman_admin.
 	 */
 	function isPMAdmin() {
-		return forge_check_perm ('pm_admin', $this->group_id) ;
+		return forge_check_perm ('pm_admin', $this->group_id);
 	}
 
 	/**
@@ -179,7 +179,7 @@ class Permission extends Error {
 	 *  @return	boolean	is_admin.
 	 */
 	function isAdmin() {
-		return forge_check_perm ('project_admin', $this->group_id) ;
+		return forge_check_perm ('project_admin', $this->group_id);
 	}
 
 	/**
@@ -188,7 +188,7 @@ class Permission extends Error {
 	 *	@return	boolean	cvs_flags
 	 */
 	function isCVSReader() {
-		return forge_check_perm ('scm', $this->group_id, 'read') ;
+		return forge_check_perm ('scm', $this->group_id, 'read');
 	}
 
 	/**
@@ -197,7 +197,7 @@ class Permission extends Error {
 	 *      @return boolean cvs_flags
 	 */
 	function isCVSWriter() {
-		return forge_check_perm ('scm', $this->group_id, 'write') ;
+		return forge_check_perm ('scm', $this->group_id, 'write');
 	}
 
 	/**
@@ -211,18 +211,18 @@ class Permission extends Error {
 			//and admins of a project should always have full privileges
 			//on their project
 			return true;
-		} else {
-			$engine = RBACEngine::getInstance() ;
+		}
+		$engine = RBACEngine::getInstance();
 
-			$roles = $engine->getAvailableRoles () ;
-			foreach ($roles as $role) {
-				$hp = $role->getHomeProject () ;
-				if ($hp != NULL
-				    && $hp->getID() == $this->group_id) {
-					return true ;
-				}
+		$roles = $engine->getAvailableRoles();
+		foreach ($roles as $role) {
+			$hp = $role->getHomeProject();
+			if ($hp != NULL
+			    && $hp->getID() == $this->group_id) {
+				return true;
 			}
 		}
+		return false;
 	}
 }
 
