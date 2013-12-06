@@ -82,10 +82,6 @@ class ArtifactTypeHtml extends ArtifactType {
 				$links[]  = '/tracker/admin/?group_id='.$group_id.'&amp;atid='.$this->getID();
 				$attr[]   = array('title' => _('Global administration for trackers. Create, clone, workflow, fields ...'), 'class' => 'tabtitle');
 			}
-		} else {
-			$labels[] = _('Monitor');
-			$links[]  = '/tracker/?group_id='.$group_id.'&amp;atid='. $this->getID().'&amp;func=monitor&amp;start=1';
-			$attr[]   = array('title' => _('Add this tracker from your monitoring.'), 'class' => 'tabtitle');
 		}
 
 		$params['submenu'] = $HTML->subMenu($labels, $links, $attr);
