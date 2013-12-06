@@ -4,6 +4,7 @@
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010, Franck Villaume - Capgemini
  * Copyright 2011, Iñigo Martinez
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -814,6 +815,7 @@ p.information {
 	color: white;
 	background: #34b234;
 	padding: 3px 3px 3px 10px;
+	margin: 0px -4px 0px -4px;
 }
 
 .info-box:nth-child(4n) h2 {
@@ -834,6 +836,9 @@ p.information {
 	color: #565c5e;
 	padding: 1px 4px 4px 4px;
 	margin-bottom: 8px;
+	-moz-border-radius: 0.5em 0.5em 0 0;
+	-webkit-border-radius: 0.5em 0.5em 0 0;
+	border-radius: 0.5em 0.5em 0 0;
 }
 
 .priority1 { background-color: #f3f4db}
