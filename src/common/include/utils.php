@@ -252,10 +252,10 @@ function util_encode_mailaddr($email, $name, $charset) {
 /**
  * util_encode_mimeheader() - Encode mimeheader
  *
- * @param        string    $headername The name of the header (e.g. "Subject")
- * @param        string    $str The email subject
- * @param        string    $charset The converting charset (like ISO-2022-JP)
- * @return       string    The MIME encoded subject
+ * @param	string	$headername The name of the header (e.g. "Subject")
+ * @param	string	$str The email subject
+ * @param	string	$charset The converting charset (like ISO-2022-JP)
+ * @return	string	The MIME encoded subject
  *
  */
 function util_encode_mimeheader($headername, $str, $charset) {
@@ -282,9 +282,9 @@ function util_encode_mimeheader($headername, $str, $charset) {
 /**
  * util_convert_body() - Convert body of the email message
  *
- * @param		string	$str		The body of the email message
- * @param		string	$charset	The charset of the email message
- * @return		string	The converted body of the email message
+ * @param	string	$str		The body of the email message
+ * @param	string	$charset	The charset of the email message
+ * @return	string	The converted body of the email message
  *
  */
 function util_convert_body($str, $charset) {
@@ -299,12 +299,12 @@ function util_convert_body($str, $charset) {
  *	util_handle_message() - a convenience wrapper which sends messages
  *	to an email account
  *
- *	@param	array	$id_arr			array of user_id's from the user table
- *	@param	string	$subject		subject of the message
- *	@param	string	$body			the message body
+ *	@param	array	$id_arr		array of user_id's from the user table
+ *	@param	string	$subject	subject of the message
+ *	@param	string	$body		the message body
  *	@param	string	$extra_emails	a comma-separated list of email address
- *	@param	string	$dummy1			ignored	(no longer used)
- *	@param	string	$from			From header
+ *	@param	string	$dummy1		ignored	(no longer used)
+ *	@param	string	$from		From header
  */
 function util_handle_message($id_arr, $subject, $body, $extra_emails = '', $dummy1 = '', $from = '') {
 	$address = array();
