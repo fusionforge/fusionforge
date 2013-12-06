@@ -4,6 +4,7 @@
  *
  * Copyright 2011 (c) Alcatel-Lucent
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge-plugin-ckeditor
  *
@@ -40,6 +41,7 @@ class ckeditorPlugin extends Plugin {
 		$this->hooks[] = "userisactivecheckbox";
 		$this->hooks[] = "userisactivecheckboxpost";
 		$this->hooks[] = "text_editor";
+		$this->ckeditor_path = forge_get_config('ckeditor_path', 'ckeditor');
 
 		// Toolbar
 		$this->toolBar['complete'] = array(
@@ -93,9 +95,13 @@ class ckeditorPlugin extends Plugin {
 
 	private function displayCKeditorArea(&$params) {
 		$name = isset($params['name'])? $params['name'] : 'body';
-		if (file_exists ("/usr/share/ckeditor/ckeditor.php")) {
+		if (file_exists("/usr/share/ckeditor/ckeditor.php")) {
 			require_once '/usr/share/ckeditor/ckeditor.php';
-			$editor = new CKeditor($name) ;
+			$editor = new CKeditor($name);
+			$editor->basePath = util_make_uri('/ckeditor/');
+		} else if (is_file($this->ckeditor_path.'/ckeditor.php') {
+			require_once $this->ckeditor_path.'/ckeditor.php';
+			$editor = new CKeditor($name);
 			$editor->basePath = util_make_uri('/ckeditor/');
 		} else {
 			include_once $GLOBALS['gfplugins'].'ckeditor/www/ckeditor.php';
