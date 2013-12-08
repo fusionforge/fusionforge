@@ -3,6 +3,7 @@
  * List of all groups in the system.
  *
  * Copyright 1999-2000 (c) The SourceForge Crew
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -30,7 +31,7 @@ $sortorder = getStringFromRequest('sortorder');
 $group_name_search = getStringFromRequest('group_name_search');
 $status = getStringFromRequest('status');
 
-$sortorder = util_ensure_value_in_set ($sortorder,
+$sortorder = util_ensure_value_in_set($sortorder,
 				       array ('group_name',
 					      'register_time',
 					      'unix_group_name',
@@ -40,25 +41,26 @@ $sortorder = util_ensure_value_in_set ($sortorder,
 					      'members',
 					      'is_template')) ;
 
-$sqlsortorder = $sortorder;
-
 if ($sortorder == 'is_public') {
-	$sortorder = 'group_name' ;
-} elseif ($sortorder == 'is_template') {
-	$sortorder = 'is_template DESC' ;
+	$sortorder = 'group_name';
+} elseif ($sortorder == 'is_template' || $sortorder == 'members') {
+	$sortorder .= ' DESC';
 }
+
+
+$sqlsortorder = $sortorder;
 
 if ($group_name_search != '') {
 	echo "<p>"._('Projects that begin with'). " <strong>".$group_name_search."</strong></p>\n";
-	$res = db_query_params ('SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license AND lower(group_name) LIKE $1 GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name ORDER BY '.$sqlsortorder,
-				array (strtolower ("$group_name_search%"))) ;
+	$res = db_query_params('SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license AND lower(group_name) LIKE $1 GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name ORDER BY '.$sqlsortorder,
+				array(strtolower ("$group_name_search%")));
 } else {
-	$qpa = db_construct_qpa (false, 'SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license') ;
+	$qpa = db_construct_qpa(false, 'SELECT group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name,COUNT(DISTINCT(pfo_user_role.user_id)) AS members FROM groups LEFT OUTER JOIN pfo_role ON pfo_role.home_group_id=groups.group_id LEFT OUTER JOIN pfo_user_role ON pfo_user_role.role_id=pfo_role.role_id, licenses WHERE license_id=license') ;
 	if ($status) {
-		$qpa = db_construct_qpa ($qpa, ' AND status=$1', array ($status)) ;
+		$qpa = db_construct_qpa($qpa, ' AND status=$1', array($status));
 	}
-	$qpa = db_construct_qpa ($qpa, ' GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name ORDER BY '.$sqlsortorder) ;
-	$res = db_query_qpa ($qpa) ;
+	$qpa = db_construct_qpa($qpa, ' GROUP BY group_name,register_time,unix_group_name,groups.group_id,groups.is_template,status,license_name ORDER BY '.$sqlsortorder);
+	$res = db_query_qpa($qpa);
 }
 
 $headers = array(
@@ -85,20 +87,30 @@ $headerLinks = array(
 
 echo $HTML->listTableTop($headers, $headerLinks);
 
-$public_rows = array();
+$rows = array();
 $private_rows = array();
-$ra = RoleAnonymous::getInstance() ;
+$public_rows = array();
+$ra = RoleAnonymous::getInstance();
 while ($grp = db_fetch_array($res)) {
 	if ($ra->hasPermission('project_read', $grp['group_id'])) {
 		$grp['is_public'] = 1;
-		$public_rows[] = $grp;
+		if (getStringFromRequest('sortorder') == 'is_public') {
+			$public_rows[] = $grp;
+		}
 	} else {
 		$grp['is_public'] = 0;
-		$private_rows[] = $grp;
+		if (getStringFromRequest('sortorder') == 'is_public') {
+			$private_rows[] = $grp;
+		}
+	}
+	if (getStringFromRequest('sortorder') != 'is_public') {
+		$rows[] = $grp;
 	}
 }
-$rows = $private_rows;
-$rows = array_merge($rows, $public_rows);
+
+if (getStringFromRequest('sortorder') == 'is_public') {
+	$rows = array_merge($public_rows, $private_rows);
+}
 
 $i = 0;
 foreach ($rows as $grp) {
