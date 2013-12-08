@@ -77,16 +77,15 @@ class ckeditorPlugin extends Plugin {
 	 * @param string  $params    The params of the Hook
 	 * @return bool
 	 */
-	function CallHook ($hookname, &$params) {
-
+	function CallHook($hookname, &$params) {
 		if ($hookname == "user_create") {
 			// Activate the plugin by default for new user.
-			$params['user']->setPluginUse ( $this->name );
+			$params['user']->setPluginUse($this->name);
 		} elseif ($hookname == "text_editor") {
 			// Check if activated as user side.
 			if (session_loggedin()) {
 				$user = session_get_user();
-				if ($user->usesPlugin ( $this->name )) {
+				if ($user->usesPlugin($this->name)) {
 					return $this->displayCKeditorArea($params);
 				}
 			}
@@ -103,7 +102,7 @@ class ckeditorPlugin extends Plugin {
 			require_once $this->ckeditor_path.'/ckeditor.php';
 			$editor = new CKeditor($name);
 			$editor->basePath = util_make_uri('/ckeditor/');
-		} else {
+		} else if (is_file($GLOBALS['gfplugins'].'ckeditor/www/ckeditor.php')) {
 			include_once $GLOBALS['gfplugins'].'ckeditor/www/ckeditor.php';
 			if (class_exists('CKeditor')) {
 				$editor = new CKeditor($name) ;
@@ -112,6 +111,9 @@ class ckeditorPlugin extends Plugin {
 				$this->setError(_("Unable to activate ckeditor plugin, package ckeditor not found."));
 				return false;
 			}
+		} else {
+			$this->setError(_("Unable to activate ckeditor plugin, package ckeditor not found."));
+			return false;
 		}
 		if (isset($params['width'])) $editor->config['width'] = $params['width'];
 		if (isset($params['height'])) $editor->config['height'] = $params['height'];
