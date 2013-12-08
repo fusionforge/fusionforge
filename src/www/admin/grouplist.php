@@ -64,7 +64,7 @@ if ($group_name_search != '') {
 }
 
 $headers = array(
-	_('Project Name (click to edit)'),
+	_('Project Name'),
 	_('Register Time'),
 	_('Unix Name'),
 	_('Status'),
@@ -85,7 +85,29 @@ $headerLinks = array(
 	'/admin/grouplist.php?sortorder=is_template'
 );
 
-echo $HTML->listTableTop($headers, $headerLinks);
+$headerClass = array(
+	'tabtitle',
+	'tabtitle',
+	'tabtitle',
+	'tabtitle',
+	'tabtitle',
+	'tabtitle',
+	'tabtitle',
+	'tabtitle',
+);
+
+$headerTitle = array(
+	_('Order by project name.'),
+	_('Order by register time.'),
+	_('Order by unix name.'),
+	_('Order by status.'),
+	_('Order by public visibility.'),
+	_('Order by licence type.'),
+	_('Order by number of members.'),
+	_('Order by is the project a template.')
+);
+
+echo $HTML->listTableTop($headers, $headerLinks, '', '', $headerClass, $headerTitle);
 
 $rows = array();
 $private_rows = array();
@@ -130,7 +152,7 @@ foreach ($rows as $grp) {
 		$time_display = date(_('Y-m-d H:i'),$grp['register_time']);
 	}
 	echo '<tr '.$HTML->boxGetAltRowStyle($i).'>';
-	echo '<td><a href="groupedit.php?group_id='.$grp['group_id'].'">'.$grp['group_name'].'</a></td>';
+	echo '<td><a class="tabtitle-w" title="'._('Click to edit this project.').'" href="groupedit.php?group_id='.$grp['group_id'].'">'.$grp['group_name'].'</a></td>';
 	echo '<td>'.$time_display.'</td>';
 	echo '<td>'.$grp['unix_group_name'].'</td>';
 	echo '<td class="'.$status.'">'.$grp['status'].'</td>';
