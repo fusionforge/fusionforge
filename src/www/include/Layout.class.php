@@ -9,7 +9,6 @@
  * Copyright © 2011 Thorsten Glaser – tarent GmbH
  * Copyright 2011 - Marc-Etienne Vargenau, Alcatel-Lucent
  * Copyright 2012-2013, Franck Villaume - TrivialDev
- * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -632,9 +631,10 @@ if (isset($params['group']) && $params['group']) {
 	 * @param	string	$class		The css classes to add (optional)
 	 * @param	string	$id		The id of the table (needed by sortable for example)
 	 * @param	array	$thClassArray	specific class for th column
+	 * @param	array	$thTitleArray	specific title for th column
 	 * @return	string	the html code
 	 */
-	function listTableTop($titleArray, $linksArray=array(), $class='', $id='', $thClassArray=array()) {
+	function listTableTop($titleArray, $linksArray = array(), $class = '', $id = '', $thClassArray = array(), $thTitleArray = array()) {
 		$args = '';
 		if ($class) {
 			$args .= ' class="listing '.$class.'"';
@@ -650,15 +650,18 @@ if (isset($params['group']) && $params['group']) {
 		if (count($titleArray)) {
 			$return .= '<thead><tr>';
 
-			$count=count($titleArray);
-			for ($i=0; $i<$count; $i++) {
+			$count = count($titleArray);
+			for ($i = 0; $i < $count; $i++) {
 				$th = '';
 				if ($thClassArray && $thClassArray[$i]) {
 					$th .= ' class="'.$thClassArray[$i].'"';
 				}
+				if ($thTitleArray && $thTitleArray[$i]) {
+					$th .= ' title="'.$thTitleArray[$i].'"';
+				}
 				$cell = $titleArray[$i];
 				if ($linksArray) {
-					$cell = util_make_link($linksArray[$i],$titleArray[$i]);
+					$cell = util_make_link($linksArray[$i], $titleArray[$i]);
 				}
 				$return .= "\n".' <th'.$th.'>'.$cell.'</th>';
 			}
