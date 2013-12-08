@@ -190,6 +190,12 @@ DocManListFileController.prototype =
 		jQuery('#title').val(this.docparams.title);
 		jQuery('#description').val(this.docparams.description);
 		jQuery('#docid').val(this.docparams.id);
+		if (this.docparams.isHtml) {
+			jQuery('#defaulteditfiletype').val('text/html');
+		}
+		if (this.docparams.isText && ! this.docparams.isHtml) {
+			jQuery('#defaulteditfiletype').val('text/plain');
+		}
 		if (this.docparams.isURL) {
 			jQuery('#uploadnewroweditfile').hide();
 			jQuery('#fileurlroweditfile').show();
