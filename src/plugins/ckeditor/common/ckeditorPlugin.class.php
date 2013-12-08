@@ -99,7 +99,7 @@ class ckeditorPlugin extends Plugin {
 			require_once '/usr/share/ckeditor/ckeditor.php';
 			$editor = new CKeditor($name);
 			$editor->basePath = util_make_uri('/ckeditor/');
-		} else if (is_file($this->ckeditor_path.'/ckeditor.php') {
+		} else if (is_file($this->ckeditor_path.'/ckeditor.php')) {
 			require_once $this->ckeditor_path.'/ckeditor.php';
 			$editor = new CKeditor($name);
 			$editor->basePath = util_make_uri('/ckeditor/');
