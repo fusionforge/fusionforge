@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-09 15:44+0100\n"
+"POT-Creation-Date: 2013-12-09 17:26+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -890,7 +890,7 @@ msgstr ""
 #: common/docman/views/editfile.php:39 common/docman/views/editfile.php:43
 #, fuzzy, php-format
 msgid "(at least %1$s characters)"
-msgstr "Pasahitza egokia eman behar duzu (gutxienez 6 karakterekoa)."
+msgstr "(gutxienez %1$s karakterekoa)"
 
 #: common/docman/views/addfile.php:116
 #, fuzzy
@@ -2204,8 +2204,8 @@ msgstr "Foroa sortzean gertatutako akatsa"
 #, fuzzy, php-format
 msgid "%s message deleted"
 msgid_plural "%s messages deleted"
-msgstr[0] "%1$s mezu ezabatu dira"
-msgstr[1] "%1$s mezu ezabatu dira"
+msgstr[0] "%s mezu ezabatu dira"
+msgstr[1] "%s mezu ezabatu dira"
 
 #: common/forum/ForumAdmin.class.php:261 www/reporting/timeadd.php:67
 #: www/survey/admin/question.php:78 www/tracker/admin/index.php:238
@@ -3101,16 +3101,14 @@ msgstr "Unix erabiltzailearen izena baliogabea da."
 
 #: common/include/Group.class.php:317 common/include/Group.class.php:321
 #: common/include/User.class.php:346
-#, fuzzy
 msgid "Unix name already taken."
-msgstr "Unix izen hau hartua dago"
+msgstr "Unix izen hau hartua dago."
 
 #: common/include/Group.class.php:324
-#, fuzzy
 msgid ""
 "Please describe your Registration Project Purpose and Summarization in a "
 "more comprehensive manner."
-msgstr "Mesedez, erregistro proposamena deskriba ezazu modu ulergarriagoan"
+msgstr "Mesedez, erregistro proposamena deskriba ezazu modu ulergarriagoan."
 
 #: common/include/Group.class.php:327
 #, fuzzy
@@ -3314,9 +3312,8 @@ msgid "Error: User not removed: %s"
 msgstr "Errorea: Erabiltzailea ez da ezabatu: %s"
 
 #: common/include/Group.class.php:2091
-#, fuzzy
 msgid "Error: artifact:"
-msgstr "Errorea partaide objektua eskuratzean: %s"
+msgstr "Errorea: Artefaktua:"
 
 #: common/include/Group.class.php:2112 common/include/Group.class.php:2125
 #, php-format
@@ -3486,9 +3483,8 @@ msgid "Submitted Description"
 msgstr "Emandako deskribapena"
 
 #: common/include/Group.class.php:2687
-#, fuzzy
 msgid "Please visit the following URL to approve or reject this project"
-msgstr "Mesedez, posta aldaketa egiteko bisita ezazu ondorengo helbidea"
+msgstr ""
 
 #: common/include/Group.class.php:2699
 #, php-format
@@ -4216,9 +4212,8 @@ msgstr ""
 
 #: common/include/SCMPlugin.class.php:162
 #: common/include/SCMPlugin.class.php:176
-#, fuzzy
 msgid "Repository Browser"
-msgstr "SCM errepositorioa"
+msgstr ""
 
 #: common/include/SCMPlugin.class.php:164
 #: common/include/SCMPlugin.class.php:178
@@ -4327,9 +4322,9 @@ msgid "File %1$s cannot be moved to the permanent location: %2$s."
 msgstr "Fitxeroa ezin da mugitu betiko egoerara"
 
 #: common/include/Storage.class.php:70
-#, fuzzy, php-format
+#, php-format
 msgid "Not a File %1$s or not a directory %2$s."
-msgstr "Fitxeroa ezin da mugitu betiko egoerara"
+msgstr ""
 
 #: common/include/User.class.php:246
 #, fuzzy
@@ -4424,10 +4419,6 @@ msgstr ""
 "da eta.)\n"
 "\n"
 "http://%2$s/account/verify.php?confirm_hash=_%3$s\n"
-"\n"
-"Webgune honetaz goza ezazu.\n"
-"\n"
-"-- %4$s taldea\n"
 
 #: common/include/User.class.php:493
 #, fuzzy
@@ -4922,7 +4913,7 @@ msgstr ""
 #: common/reporting/report_utils.php:1145
 #, fuzzy
 msgid "No data to display."
-msgstr "%1$s -en aurktitutako galderak"
+msgstr "Galdera kopurua"
 
 #: common/reporting/report_utils.php:600 plugins/authopenid/www/index.php:38
 #: plugins/authwebid/www/index.php:35 www/account/change_email-complete.php:52

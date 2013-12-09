@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-09 15:44+0100\n"
+"POT-Creation-Date: 2013-12-09 17:26+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -8454,9 +8454,8 @@ msgid ""
 msgstr ""
 
 #: plugins/blocks/common/blocksPlugin.class.php:52
-#, fuzzy
 msgid "Blocks"
-msgstr "Enregistrer les blocs"
+msgstr "les blocs"
 
 #: plugins/blocks/common/blocksPlugin.class.php:65
 msgid "Blocks Admin"
@@ -9853,9 +9852,8 @@ msgid "No link to update or name missing."
 msgstr ""
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:32
-#, fuzzy
 msgid "Menu Tabs Manager"
-msgstr "Administration du gestionnaire d'onglets"
+msgstr "le gestionnaire d'onglets"
 
 #: plugins/headermenu/common/headermenuPlugin.class.php:67
 #: plugins/headermenu/common/headermenuPlugin.class.php:427
@@ -13555,12 +13553,10 @@ msgid ""
 msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:97
-#, fuzzy
 msgid "Read/write access to Mercurial tree is allowed for authenticated users."
 msgstr ""
 "L'accès au dépôt Mercurial en lecture et en écriture est autorisé pour les "
-"utilisateurs identifiés. Vous devez ajouter les lignes suivantes dans votre "
-"fichier ~/.hgrc :"
+"utilisateurs identifiés."
 
 #: plugins/scmhg/common/HgPlugin.class.php:109
 #: plugins/scmhg/common/HgPlugin.class.php:138
@@ -13569,11 +13565,10 @@ msgstr "Accès à Mercurial par HTTP pour les développeurs"
 
 #: plugins/scmhg/common/HgPlugin.class.php:112
 #: plugins/scmhg/common/HgPlugin.class.php:141
-#, fuzzy
 msgid "Only project developers can access the Mercurial tree via this method."
 msgstr ""
-"Seuls les développeurs du projet peuvent accéder à l'arbre %s par cette "
-"méthode."
+"Seuls les développeurs du projet peuvent accéder à l'arbre Mercurial par "
+"cette méthode."
 
 #: plugins/scmhg/common/HgPlugin.class.php:157
 msgid "Hg Repository Browser"
