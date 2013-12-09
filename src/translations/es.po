@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-09 15:39+0100\n"
+"POT-Creation-Date: 2013-12-09 15:44+0100\n"
 "PO-Revision-Date: 2013-02-11 13:42+0100\n"
 "Last-Translator: skymix <skymix.es@gmail.com>\n"
 "Language-Team: Spanish/Spain\n"
@@ -2987,15 +2987,15 @@ msgstr ""
 "Permiso denegado. Ningún proyecto elegido, el proyecto no existe o no puede "
 "acceder a el."
 
-#: common/include/exit.php:105
+#: common/include/exit.php:104
 msgid "The Site Administrator has turned off this feature."
 msgstr "El Administrador del sitio ha desactivado esta funcionalidad."
 
-#: common/include/exit.php:114
+#: common/include/exit.php:113
 msgid "The Project Administrator has turned off this feature."
 msgstr "El Administrador del proyecto ha desactivado esta funcionalidad."
 
-#: common/include/exit.php:123
+#: common/include/exit.php:122
 msgid "You Attempted To Double-submit this item. Please avoid double-clicking."
 msgstr ""
 "Está intentando enviar dos veces este registro. Por favor, evite pulsar dos "
@@ -15354,7 +15354,7 @@ msgid "Order by register time."
 msgstr "Fecha de registro"
 
 #: www/admin/grouplist.php:102
-msgid "Order by unix name."
+msgid "Order by Unix name."
 msgstr ""
 
 #: www/admin/grouplist.php:103

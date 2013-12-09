@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-09 15:39+0100\n"
+"POT-Creation-Date: 2013-12-09 15:44+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -2935,15 +2935,15 @@ msgstr ""
 "Permission refusée. Aucun projet n'a été choisi, le projet n'existe pas ou "
 "vous n'avez pas les droits d'accès."
 
-#: common/include/exit.php:105
+#: common/include/exit.php:104
 msgid "The Site Administrator has turned off this feature."
 msgstr "L'administrateur du site a désactivé cette fonctionnalité."
 
-#: common/include/exit.php:114
+#: common/include/exit.php:113
 msgid "The Project Administrator has turned off this feature."
 msgstr "L'administrateur du projet a désactivé cette fonctionnalité."
 
-#: common/include/exit.php:123
+#: common/include/exit.php:122
 msgid "You Attempted To Double-submit this item. Please avoid double-clicking."
 msgstr ""
 "Vous avez tenté de soumettre deux fois un formulaire. Merci d'éviter de "
@@ -15162,46 +15162,40 @@ msgid "License"
 msgstr "Licence"
 
 #: www/admin/grouplist.php:100
-#, fuzzy
 msgid "Order by project name."
-msgstr "Nom du sous-projet"
+msgstr "Trier par nom de projet."
 
 #: www/admin/grouplist.php:101
-#, fuzzy
 msgid "Order by register time."
-msgstr "Date d'enregistrement du projet"
+msgstr "Trier par date d'enregistrement du projet."
 
 #: www/admin/grouplist.php:102
-msgid "Order by unix name."
-msgstr ""
+msgid "Order by Unix name."
+msgstr "Trier par nom Unix."
 
 #: www/admin/grouplist.php:103
-#, fuzzy
 msgid "Order by status."
-msgstr "Trier par"
+msgstr "Trier par état."
 
 #: www/admin/grouplist.php:104
-#, fuzzy
 msgid "Order by public visibility."
-msgstr "Visibilité sur le projet"
+msgstr "Trier par visibilité du projet."
 
 #: www/admin/grouplist.php:105
 msgid "Order by licence type."
-msgstr ""
+msgstr "Trier par type de license."
 
 #: www/admin/grouplist.php:106
 msgid "Order by number of members."
-msgstr ""
+msgstr "Trier par nombre de memebres."
 
 #: www/admin/grouplist.php:107
-#, fuzzy
 msgid "Order by is the project a template."
-msgstr "Liste des membres du projet."
+msgstr "Trier par le fait que ce projet soit un modèle ou pas."
 
 #: www/admin/grouplist.php:155
-#, fuzzy
 msgid "Click to edit this project."
-msgstr "Pas d'utilisateur dans ce projet"
+msgstr "Cliquez pour modifier ce projet."
 
 #: www/admin/index.php:46
 msgid "User Maintenance"

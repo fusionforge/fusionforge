@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-09 15:39+0100\n"
+"POT-Creation-Date: 2013-12-09 15:44+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3044,16 +3044,16 @@ msgid ""
 "cannot access it."
 msgstr "Akatsa - Ez da group_id aukeratu"
 
-#: common/include/exit.php:105
+#: common/include/exit.php:104
 msgid "The Site Administrator has turned off this feature."
 msgstr ""
 
-#: common/include/exit.php:114
+#: common/include/exit.php:113
 #, fuzzy
 msgid "The Project Administrator has turned off this feature."
 msgstr "Akatsa, proiektu honek desaktibatua du CVS-a"
 
-#: common/include/exit.php:123
+#: common/include/exit.php:122
 msgid "You Attempted To Double-submit this item. Please avoid double-clicking."
 msgstr ""
 "Erregistro hau bi aldiz bidaltzen ari zara. Mesedez, saia zaitez behin "
@@ -15690,7 +15690,7 @@ msgid "Order by register time."
 msgstr ""
 
 #: www/admin/grouplist.php:102
-msgid "Order by unix name."
+msgid "Order by Unix name."
 msgstr ""
 
 #: www/admin/grouplist.php:103
@@ -16161,7 +16161,7 @@ msgstr "Aldatutako erantzuna"
 
 #: www/admin/responses_admin.php:84
 msgid "Edit Response:"
-msgstr "Erantzuna aldatu"
+msgstr "Erantzuna aldatu:"
 
 #: www/admin/responses_admin.php:86 www/admin/responses_admin.php:127
 msgid "Response Title:"
@@ -16375,11 +16375,11 @@ msgstr "erabiltzailearen_id-a"
 
 #: www/admin/unsubscribe.php:115
 msgid "Site Mail."
-msgstr "Web atariko posta"
+msgstr "Web atariko posta."
 
 #: www/admin/unsubscribe.php:116
 msgid "Comm. Mail."
-msgstr "Comm. posta"
+msgstr "Comm. posta."
 
 #: www/admin/useredit.php:34
 msgid "No Unix account (N)"
@@ -16582,7 +16582,7 @@ msgstr "Akatsa VHOST sarbidea eguneratzen:"
 
 #: www/admin/vhost.php:102
 msgid "Virtual Host entry updated."
-msgstr "VHOST sarbidea eguneratu da"
+msgstr "VHOST sarbidea eguneratu da."
 
 #: www/admin/vhost.php:109
 msgid "Virtual Host Administration"
@@ -17524,11 +17524,11 @@ msgstr "Paketea sortu"
 
 #: www/frs/admin/qrs.php:74
 msgid "Must define a release name."
-msgstr "Bertsioaren izena definitu"
+msgstr "Bertsioaren izena definitu."
 
 #: www/frs/admin/qrs.php:76
 msgid "Must select a package."
-msgstr "Pakete bat aukeratu"
+msgstr "Pakete bat aukeratu."
 
 #: www/frs/admin/qrs.php:113 www/frs/admin/qrs.php:140
 msgid "Quick Release System"
@@ -17697,7 +17697,7 @@ msgstr "Argitaratze oharrak"
 
 #: www/frs/shownotes.php:64
 msgid "Release Name:"
-msgstr "Bertsioaren izena"
+msgstr "Bertsioaren izena:"
 
 #: www/include/features_boxes.php:35
 msgid "Features Boxes"
@@ -18295,7 +18295,7 @@ msgstr "Inkestaren pribatutasuna"
 
 #: www/include/vote_function.php:295
 msgid "Survey not found."
-msgstr "Inkesta ez da ageri"
+msgstr "Inkesta ez da ageri."
 
 #: www/index_std.php:9
 msgid "FusionForge helps you manage the entire development life cycle"
@@ -18697,7 +18697,7 @@ msgstr "Marka eguneratua"
 
 #: www/my/bookmark_edit.php:39
 msgid "Failed to update bookmark."
-msgstr "Akatsa marka eguneratzean"
+msgstr "Akatsa marka eguneratzean."
 
 #: www/my/bookmark_edit.php:43
 msgid "Edit Bookmark"
@@ -18951,7 +18951,7 @@ msgstr "Proiektu baten berriak ezin dira bidali administraria ez bazara"
 
 #: www/news/submit.php:78
 msgid "Submitting news from the news group is not allowed."
-msgstr "Albisteen taldetik berriak bidaltzea galerazita dago"
+msgstr "Albisteen taldetik berriak bidaltzea galerazita dago."
 
 #: www/news/submit.php:107
 #, fuzzy
@@ -19201,7 +19201,7 @@ msgstr "Gako hitzak"
 
 #: www/people/editprofile.php:124
 msgid "No skills selected to edit."
-msgstr "Ez da inungo trebeziarik aukeratu argitalpenerako"
+msgstr "Ez da inungo trebeziarik aukeratu argitalpenerako."
 
 #: www/people/editprofile.php:141
 #, fuzzy, php-format
@@ -19233,7 +19233,7 @@ msgstr "Trebezien eguneratzea bertan behera gelditu da"
 
 #: www/people/editprofile.php:177
 msgid "No skills selected to delete."
-msgstr "Ez da trebeziarik aukeratu ezabatzeko"
+msgstr "Ez da trebeziarik aukeratu ezabatzeko."
 
 #: www/people/editprofile.php:186
 #, fuzzy, php-format
@@ -19344,7 +19344,7 @@ msgstr "Laguntza eskaeren azken argitalpenak"
 
 #: www/people/index.php:42
 msgid "Here is a list of positions available for this project."
-msgstr "Hemen proiektu honetan eskuragarri dauden posizioen zerrenda dago"
+msgstr "Hemen proiektu honetan eskuragarri dauden posizioen zerrenda dago."
 
 #: www/people/index.php:49 www/people/index.php:58
 msgid "Help Wanted System"
@@ -19352,7 +19352,7 @@ msgstr "Laguntza behar duten proiektuak"
 
 #: www/people/index.php:52
 msgid "Click job titles for more detailed descriptions."
-msgstr "Lanen izenburuan sakatu deskribapen zehatzagoak irakurtzeko"
+msgstr "Lanen izenburuan sakatu deskribapen zehatzagoak irakurtzeko."
 
 #: www/people/index.php:61
 #, php-format
@@ -20190,7 +20190,7 @@ msgstr ""
 msgid "Choose a Subproject and you can browse/edit/add tasks to it."
 msgstr ""
 "Azpiproiektu bat aukeratu eta bertan atazak ikusi/argitaratu/gehitu ahal "
-"izango dituzu"
+"izango dituzu."
 
 #: www/pm/mod_task.php:37
 msgid "Modify Task"
@@ -23235,15 +23235,15 @@ msgstr "Goi kategoria:"
 #: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_edit.php:84
 #, fuzzy
 msgid "New category short name (no spaces, Unix-like): "
-msgstr "Kategoria berriaren izen motza (espaziorik gabe, unix erara)"
+msgstr "Kategoria berriaren izen motza (espaziorik gabe, Unix erara): "
 
 #: www/trove/admin/trove_cat_add.php:97 www/trove/admin/trove_cat_edit.php:87
 msgid "New category full name (80 characters max): "
-msgstr "Kategoria berriaren izen osoa (muga 80 karaktere):"
+msgstr "Kategoria berriaren izen osoa (muga 80 karaktere): "
 
 #: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:90
 msgid "New category description (255 characters max): "
-msgstr "Kategoria berriaren azalpena (muga 255 karaktere):"
+msgstr "Kategoria berriaren azalpena (muga 255 karaktere): "
 
 #: www/trove/admin/trove_cat_edit.php:73 www/trove/admin/trove_cat_list.php:65
 msgid "Site Admin: Trove - Category List"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-09 15:39+0100\n"
+"POT-Creation-Date: 2013-12-09 15:44+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3061,16 +3061,16 @@ msgid ""
 "cannot access it."
 msgstr "错误 - 没有选择分组编号"
 
-#: common/include/exit.php:105
+#: common/include/exit.php:104
 msgid "The Site Administrator has turned off this feature."
 msgstr ""
 
-#: common/include/exit.php:114
+#: common/include/exit.php:113
 #, fuzzy
 msgid "The Project Administrator has turned off this feature."
 msgstr "错误，这个项目已经关闭CVS"
 
-#: common/include/exit.php:123
+#: common/include/exit.php:122
 msgid "You Attempted To Double-submit this item. Please avoid double-clicking."
 msgstr "您尝试重复发表这个项目，请避免连续点击滑鼠。"
 
@@ -15679,7 +15679,7 @@ msgid "Order by register time."
 msgstr "注册时间"
 
 #: www/admin/grouplist.php:102
-msgid "Order by unix name."
+msgid "Order by Unix name."
 msgstr ""
 
 #: www/admin/grouplist.php:103

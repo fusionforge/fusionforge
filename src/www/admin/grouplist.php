@@ -99,7 +99,7 @@ $headerClass = array(
 $headerTitle = array(
 	_('Order by project name.'),
 	_('Order by register time.'),
-	_('Order by unix name.'),
+	_('Order by Unix name.'),
 	_('Order by status.'),
 	_('Order by public visibility.'),
 	_('Order by licence type.'),

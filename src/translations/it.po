@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-09 15:39+0100\n"
+"POT-Creation-Date: 2013-12-09 15:44+0100\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3072,16 +3072,16 @@ msgid ""
 "cannot access it."
 msgstr "Non è stato scelto nessun Id gruppo"
 
-#: common/include/exit.php:105
+#: common/include/exit.php:104
 msgid "The Site Administrator has turned off this feature."
 msgstr ""
 
-#: common/include/exit.php:114
+#: common/include/exit.php:113
 #, fuzzy
 msgid "The Project Administrator has turned off this feature."
 msgstr "Errore, questo progetto ha disabilitato il CVS"
 
-#: common/include/exit.php:123
+#: common/include/exit.php:122
 msgid "You Attempted To Double-submit this item. Please avoid double-clicking."
 msgstr ""
 "Hai cercato di inserire due volte lo stesso messaggio. Cerca di evitare il "
@@ -15745,7 +15745,7 @@ msgid "Order by register time."
 msgstr "Ora di registrazione"
 
 #: www/admin/grouplist.php:102
-msgid "Order by unix name."
+msgid "Order by Unix name."
 msgstr ""
 
 #: www/admin/grouplist.php:103

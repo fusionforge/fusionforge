@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-09 15:39+0100\n"
+"POT-Creation-Date: 2013-12-09 15:44+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -3063,16 +3063,15 @@ msgid ""
 "cannot access it."
 msgstr "Keine Gruppe wurde ausgewählt oder Sie können ihr nicht beitreten."
 
-#: common/include/exit.php:105
+#: common/include/exit.php:104
 msgid "The Site Administrator has turned off this feature."
 msgstr "Der Site Administrator hat dieses Feature ausgeschaltet."
 
-#: common/include/exit.php:114
-#, fuzzy
+#: common/include/exit.php:113
 msgid "The Project Administrator has turned off this feature."
-msgstr "Der Site Administrator hat dieses Feature ausgeschaltet."
+msgstr "Der Projekt Administrator hat dieses Feature ausgeschaltet."
 
-#: common/include/exit.php:123
+#: common/include/exit.php:122
 msgid "You Attempted To Double-submit this item. Please avoid double-clicking."
 msgstr ""
 "Sie haben versucht dieses Element doppelt abzuschicken. Bitte vermeiden Sie "
@@ -15770,7 +15769,6 @@ msgstr "Registrierungszeit"
 #: www/admin/grouplist.php:69 www/admin/search.php:148
 #: www/project/admin/massadd.php:91 www/project/admin/massfinish.php:75
 #: www/register/index.php:236 www/register/index.php:238
-#, fuzzy
 msgid "Unix Name"
 msgstr "Unix Name"
 
@@ -15784,23 +15782,20 @@ msgid "License"
 msgstr "Lizenz"
 
 #: www/admin/grouplist.php:100
-#, fuzzy
 msgid "Order by project name."
-msgstr "Name des Unterprojektes"
+msgstr "Sortieren nach Projektname."
 
 #: www/admin/grouplist.php:101
-#, fuzzy
 msgid "Order by register time."
-msgstr "Registrierungszeit"
+msgstr "Sortieren nach Registrierungszeit."
 
 #: www/admin/grouplist.php:102
-msgid "Order by unix name."
-msgstr ""
+msgid "Order by Unix name."
+msgstr "Sortieren nach Unix Name."
 
 #: www/admin/grouplist.php:103
-#, fuzzy
 msgid "Order by status."
-msgstr "Sortieren nach"
+msgstr "Sortieren nach Status."
 
 #: www/admin/grouplist.php:104
 #, fuzzy
@@ -15851,9 +15846,8 @@ msgid "Register a New User"
 msgstr "Einen neuen Nutzer registrieren"
 
 #: www/admin/index.php:73
-#, fuzzy
 msgid "Pending users"
-msgstr "Anstehende Anfragen"
+msgstr "Anstehende Nutzer"
 
 #: www/admin/index.php:83
 #, fuzzy
@@ -15902,9 +15896,8 @@ msgid "Display Projects Beginning with:"
 msgstr "Zeige Projekte, die anfangen mit :"
 
 #: www/admin/index.php:151
-#, fuzzy
 msgid "Search <em>(groupid, project Unix name, project full name)</em>"
-msgstr "Suchen <em>(Gruppen-ID, Unix-Gruppen-Name, vollständiger Name)</em>"
+msgstr "Suchen <em>(Gruppen-ID, Unix-Projekt-Name, vollständiger Name)</em>"
 
 #: www/admin/index.php:158
 msgid "Register New Project"
