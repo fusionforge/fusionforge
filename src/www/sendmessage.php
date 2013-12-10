@@ -133,10 +133,6 @@ $HTML->header(array('title' => forge_get_config('forge_name').' '._('Contact')))
 ?>
 
 <p>
-<?php echo _('In an attempt to reduce spam, we are using this form to send email.'); ?>
-</p>
-
-<p>
 <?php echo _('Fill it out accurately and completely or the receiver may not be able to respond.'); ?>
 </p>
 
