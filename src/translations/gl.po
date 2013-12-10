@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-09 17:26+0100\n"
+"POT-Creation-Date: 2013-12-10 18:38+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -335,6 +335,7 @@ msgstr ""
 #: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
 #: www/forum/forum.php:156 www/forum/message.php:126
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:197
+#: www/include/features_boxes.php:150 www/include/features_boxes.php:159
 #: www/include/user_profile.php:88 www/include/user_profile.php:93
 #: www/include/user_profile.php:112 www/new/index.php:98
 #: www/news/submit.php:153 www/news/submit.php:155 www/news/submit.php:158
@@ -10107,8 +10108,8 @@ msgstr "Requirir todas as palabras"
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:128
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:73
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:103
-#: www/include/features_boxes.php:105 www/include/features_boxes.php:186
-#: www/include/features_boxes.php:206 www/include/features_boxes.php:241
+#: www/include/features_boxes.php:105 www/include/features_boxes.php:187
+#: www/include/features_boxes.php:207 www/include/features_boxes.php:242
 msgid "No stats available"
 msgstr "Non hai estatísticas dispoñibles"
 
@@ -16133,7 +16134,7 @@ msgstr "Todos os desenvolvedores de proxectos"
 msgid "All Project Admins"
 msgstr "Todos os administradores de proxectos"
 
-#: www/admin/massmail.php:102 www/include/features_boxes.php:215
+#: www/admin/massmail.php:102 www/include/features_boxes.php:216
 msgid "All Users"
 msgstr "Todos os usuarios"
 
@@ -17887,8 +17888,8 @@ msgstr "Nube de etiquetas"
 
 #: www/include/features_boxes.php:40 www/include/features_boxes.php:42
 #, php-format
-msgid "%1$s Statistics"
-msgstr "Estatísticas de %1$s"
+msgid "%s Statistics"
+msgstr "Estatísticas de %s"
 
 #: www/include/features_boxes.php:46
 msgid "Top Project Downloads"
@@ -17930,16 +17931,16 @@ msgstr "Proxectos rexistrados "
 msgid "Registered Users"
 msgstr "Usuarios rexistrados "
 
-#: www/include/features_boxes.php:176
+#: www/include/features_boxes.php:177
 msgid "m/d"
 msgstr "m/d "
 
-#: www/include/features_boxes.php:192
+#: www/include/features_boxes.php:193
 #, fuzzy
 msgid "All newest projects"
 msgstr "Engadir un proxecto novo"
 
-#: www/include/features_boxes.php:246
+#: www/include/features_boxes.php:247
 #, fuzzy
 msgid "All project activities"
 msgstr "Actividade do proxecto"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-09 15:44+0100\n"
+"POT-Creation-Date: 2013-12-10 18:38+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -336,6 +336,7 @@ msgstr "文件名"
 #: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
 #: www/forum/forum.php:156 www/forum/message.php:126
 #: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:197
+#: www/include/features_boxes.php:150 www/include/features_boxes.php:159
 #: www/include/user_profile.php:88 www/include/user_profile.php:93
 #: www/include/user_profile.php:112 www/new/index.php:98
 #: www/news/submit.php:153 www/news/submit.php:155 www/news/submit.php:158
@@ -10040,8 +10041,8 @@ msgstr "以所有字"
 #: plugins/globalsearch/common/GlobalsearchPlugin.class.php:128
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:73
 #: plugins/globalsearch/common/globalsearch_stats_boxes.php:103
-#: www/include/features_boxes.php:105 www/include/features_boxes.php:186
-#: www/include/features_boxes.php:206 www/include/features_boxes.php:241
+#: www/include/features_boxes.php:105 www/include/features_boxes.php:187
+#: www/include/features_boxes.php:207 www/include/features_boxes.php:242
 #, fuzzy
 msgid "No stats available"
 msgstr "没有统计信息"
@@ -15955,7 +15956,7 @@ msgstr "所有项目开发者"
 msgid "All Project Admins"
 msgstr "所有项目管理员"
 
-#: www/admin/massmail.php:102 www/include/features_boxes.php:215
+#: www/admin/massmail.php:102 www/include/features_boxes.php:216
 msgid "All Users"
 msgstr "所有用户"
 
@@ -17690,8 +17691,8 @@ msgstr "关闭日期"
 
 #: www/include/features_boxes.php:40 www/include/features_boxes.php:42
 #, php-format
-msgid "%1$s Statistics"
-msgstr "%1$s 统计资料"
+msgid "%s Statistics"
+msgstr "%s 统计资料"
 
 #: www/include/features_boxes.php:46
 msgid "Top Project Downloads"
@@ -17733,16 +17734,16 @@ msgstr "登录项目"
 msgid "Registered Users"
 msgstr "注册用户"
 
-#: www/include/features_boxes.php:176
+#: www/include/features_boxes.php:177
 msgid "m/d"
 msgstr "m/d"
 
-#: www/include/features_boxes.php:192
+#: www/include/features_boxes.php:193
 #, fuzzy
 msgid "All newest projects"
 msgstr "增加新项目"
 
-#: www/include/features_boxes.php:246
+#: www/include/features_boxes.php:247
 #, fuzzy
 msgid "All project activities"
 msgstr "项目活动"
