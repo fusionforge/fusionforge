@@ -147,7 +147,7 @@ function show_sitestats() {
 
 	$gforge = new FusionForge();
 	$return = '<p>';
-	$return .= _('Hosted Projects').': ';
+	$return .= _('Hosted Projects')._(': ');
 	if (forge_get_config('use_project_full_list')) {
 		$return .= '<a href="softwaremap/full_list.php">';
 	}
@@ -156,7 +156,8 @@ function show_sitestats() {
 		$return .= '</a>';
 	}
 	$return .= "</p><p>";
-	$return .= _('Registered Users').': <strong>'.number_format($gforge->getNumberOfActiveUsers()).'</strong>';
+	$return .= _('Registered Users')._(': ').'<strong>'.
+		number_format($gforge->getNumberOfActiveUsers()).'</strong>';
 	$return .= "</p>\n";
 	return $return;
 }
