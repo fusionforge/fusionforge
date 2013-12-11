@@ -8070,10 +8070,10 @@ msgstr "Dokumenten-Manager: Projekt-Dokumentation"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:139
 #, php-format
-msgid "(<strong>%1$s</strong> public mailing list)"
-msgid_plural "(<strong>%1$s</strong> public mailing lists)"
-msgstr[0] "(<strong>%1$s</strong> öffentliche Mailingliste)"
-msgstr[1] "(<strong>%1$s</strong> öffentliche Mailinglisten)"
+msgid "(<strong>%s</strong> public mailing list)"
+msgid_plural "(<strong>%s</strong> public mailing lists)"
+msgstr[0] "(<strong>%s</strong> öffentliche Mailingliste)"
+msgstr[1] "(<strong>%s</strong> öffentliche Mailinglisten)"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:154
 msgid "There are no subprojects available"

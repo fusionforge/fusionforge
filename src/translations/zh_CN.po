@@ -8012,8 +8012,8 @@ msgstr "登录"
 #, fuzzy, php-format
 msgid "<strong>%d</strong> forum"
 msgid_plural "<strong>%d</strong> forums"
-msgstr[0] "找到 <strong>%1$s</strong> 个项目"
-msgstr[1] "找到 <strong>%1$s</strong> 个项目"
+msgstr[0] "找到 <strong>%d</strong> 个项目"
+msgstr[1] "找到 <strong>%d</strong> 个项目"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:125
 msgid "DocManager: Project Documentation"
@@ -8021,10 +8021,10 @@ msgstr "文件管理：项目文件"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:139
 #, fuzzy, php-format
-msgid "(<strong>%1$s</strong> public mailing list)"
-msgid_plural "(<strong>%1$s</strong> public mailing lists)"
-msgstr[0] "找到 <strong>%1$s</strong> 个项目"
-msgstr[1] "找到 <strong>%1$s</strong> 个项目"
+msgid "(<strong>%s</strong> public mailing list)"
+msgid_plural "(<strong>%s</strong> public mailing lists)"
+msgstr[0] "找到 <strong>%s</strong> 个项目"
+msgstr[1] "找到 <strong>%s</strong> 个项目"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:154
 #, fuzzy

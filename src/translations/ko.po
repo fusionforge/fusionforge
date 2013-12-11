@@ -7864,7 +7864,7 @@ msgstr "로그인"
 #, fuzzy, php-format
 msgid "<strong>%d</strong> forum"
 msgid_plural "<strong>%d</strong> forums"
-msgstr[0] "<strong>%1$s</strong>개의 프로젝트가 결과에 포함되었습니다."
+msgstr[0] "<strong>%d</strong>개의 프로젝트가 결과에 포함되었습니다."
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:125
 msgid "DocManager: Project Documentation"
@@ -7872,9 +7872,9 @@ msgstr "문서 관리자: 프로젝트 문서화"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:139
 #, fuzzy, php-format
-msgid "(<strong>%1$s</strong> public mailing list)"
-msgid_plural "(<strong>%1$s</strong> public mailing lists)"
-msgstr[0] "<strong>%1$s</strong>개의 프로젝트가 결과에 포함되었습니다."
+msgid "(<strong>%s</strong> public mailing list)"
+msgid_plural "(<strong>%s</strong> public mailing lists)"
+msgstr[0] "<strong>%s</strong>개의 프로젝트가 결과에 포함되었습니다."
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:154
 #, fuzzy

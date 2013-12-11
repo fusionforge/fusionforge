@@ -7755,10 +7755,10 @@ msgstr "Gestion de documents : Documentation du projet"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:139
 #, php-format
-msgid "(<strong>%1$s</strong> public mailing list)"
-msgid_plural "(<strong>%1$s</strong> public mailing lists)"
-msgstr[0] "(<strong>%1$s</strong> liste de diffusion publique)"
-msgstr[1] "(<strong>%1$s</strong> listes de diffusion publiques)"
+msgid "(<strong>%s</strong> public mailing list)"
+msgid_plural "(<strong>%s</strong> public mailing lists)"
+msgstr[0] "(<strong>%s</strong> liste de diffusion publique)"
+msgstr[1] "(<strong>%s</strong> listes de diffusion publiques)"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:154
 msgid "There are no subprojects available"

@@ -8075,10 +8075,10 @@ msgstr "DocManager: documentación do proxecto"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:139
 #, php-format
-msgid "(<strong>%1$s</strong> public mailing list)"
-msgid_plural "(<strong>%1$s</strong> public mailing lists)"
-msgstr[0] "(<strong>%1$s</strong> lista de correo pública)"
-msgstr[1] "(<strong>%1$s</strong> listas de correo públicas)"
+msgid "(<strong>%s</strong> public mailing list)"
+msgid_plural "(<strong>%s</strong> public mailing lists)"
+msgstr[0] "(<strong>%s</strong> lista de correo pública)"
+msgstr[1] "(<strong>%s</strong> listas de correo públicas)"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:154
 #, fuzzy

@@ -8063,8 +8063,8 @@ msgstr "Inici de sessió"
 #, fuzzy, php-format
 msgid "<strong>%d</strong> forum"
 msgid_plural "<strong>%d</strong> forums"
-msgstr[0] "<strong>%1$s</strong> projectes al conjunt de resultats."
-msgstr[1] "<strong>%1$s</strong> projectes al conjunt de resultats."
+msgstr[0] "<strong>%d</strong> projectes al conjunt de resultats."
+msgstr[1] "<strong>%d</strong> projectes al conjunt de resultats."
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:125
 msgid "DocManager: Project Documentation"
@@ -8072,10 +8072,10 @@ msgstr "DocManager: Gestor de documentació"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:139
 #, fuzzy, php-format
-msgid "(<strong>%1$s</strong> public mailing list)"
-msgid_plural "(<strong>%1$s</strong> public mailing lists)"
-msgstr[0] "<strong>%1$s</strong> projectes al conjunt de resultats."
-msgstr[1] "<strong>%1$s</strong> projectes al conjunt de resultats."
+msgid "(<strong>%s</strong> public mailing list)"
+msgid_plural "(<strong>%s</strong> public mailing lists)"
+msgstr[0] "<strong>%s</strong> projectes al conjunt de resultats."
+msgstr[1] "<strong>%s</strong> projectes al conjunt de resultats."
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:154
 #, fuzzy

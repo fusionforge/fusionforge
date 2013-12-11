@@ -8094,11 +8094,11 @@ msgstr "Менеджер документации"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:139
 #, php-format
-msgid "(<strong>%1$s</strong> public mailing list)"
-msgid_plural "(<strong>%1$s</strong> public mailing lists)"
-msgstr[0] "(<strong>%1$s</strong> общедоступный список рассылок)"
-msgstr[1] "(<strong>%1$s</strong> общедоступных списка рассылки)"
-msgstr[2] "(<strong>%1$s</strong> общедоступных списков рассылок)"
+msgid "(<strong>%s</strong> public mailing list)"
+msgid_plural "(<strong>%s</strong> public mailing lists)"
+msgstr[0] "(<strong>%s</strong> общедоступный список рассылок)"
+msgstr[1] "(<strong>%s</strong> общедоступных списка рассылки)"
+msgstr[2] "(<strong>%s</strong> общедоступных списков рассылок)"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:154
 #, fuzzy

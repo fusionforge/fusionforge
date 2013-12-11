@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 18:48+0100\n"
+"POT-Creation-Date: 2013-12-11 19:02+0100\n"
 "PO-Revision-Date: 2013-06-03 17:16+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -7430,10 +7430,9 @@ msgstr ""
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:139
 #, php-format
-msgid "(<strong>%1$s</strong> public mailing list)"
-msgid_plural "(<strong>%1$s</strong> public mailing lists)"
+msgid "(<strong>%s</strong> public mailing list)"
+msgid_plural "(<strong>%s</strong> public mailing lists)"
 msgstr[0] ""
-msgstr[1] ""
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:154
 msgid "There are no subprojects available"

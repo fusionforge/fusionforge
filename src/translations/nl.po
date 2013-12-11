@@ -8040,8 +8040,8 @@ msgstr "Inloggen"
 #, fuzzy, php-format
 msgid "<strong>%d</strong> forum"
 msgid_plural "<strong>%d</strong> forums"
-msgstr[0] "<strong>%1$s</strong> projecten in resultaatset."
-msgstr[1] "<strong>%1$s</strong> projecten in resultaatset."
+msgstr[0] "<strong>%d</strong> projecten in resultaatset."
+msgstr[1] "<strong>%d</strong> projecten in resultaatset."
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:125
 msgid "DocManager: Project Documentation"
@@ -8049,10 +8049,10 @@ msgstr "Documentmanager: documentatie van project"
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:139
 #, fuzzy, php-format
-msgid "(<strong>%1$s</strong> public mailing list)"
-msgid_plural "(<strong>%1$s</strong> public mailing lists)"
-msgstr[0] "<strong>%1$s</strong> projecten in resultaatset."
-msgstr[1] "<strong>%1$s</strong> projecten in resultaatset."
+msgid "(<strong>%s</strong> public mailing list)"
+msgid_plural "(<strong>%s</strong> public mailing lists)"
+msgstr[0] "<strong>%s</strong> projecten in resultaatset."
+msgstr[1] "<strong>%s</strong> projecten in resultaatset."
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:154
 msgid "There are no subprojects available"

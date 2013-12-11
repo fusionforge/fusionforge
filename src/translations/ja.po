@@ -7848,8 +7848,8 @@ msgstr "ドキュメントマネージャ：プロジェクトドキュメント
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:139
 #, php-format
-msgid "(<strong>%1$s</strong> public mailing list)"
-msgid_plural "(<strong>%1$s</strong> public mailing lists)"
+msgid "(<strong>%s</strong> public mailing list)"
+msgid_plural "(<strong>%s</strong> public mailing lists)"
 msgstr[0] ""
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:154

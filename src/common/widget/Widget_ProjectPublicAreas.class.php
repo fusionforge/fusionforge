@@ -136,7 +136,7 @@ class Widget_ProjectPublicAreas extends Widget {
 			print util_make_link( '/mail/?group_id='.$group_id, $link_content);
 			$n = project_get_mail_list_count($group_id);
 			echo ' ';
-			printf(ngettext('(<strong>%1$s</strong> public mailing list)', '(<strong>%1$s</strong> public mailing lists)', $n), $n);
+			printf(ngettext('(<strong>%s</strong> public mailing list)', '(<strong>%s</strong> public mailing lists)', $n), $n);
 			echo "\n</div>\n";
 		}
 
