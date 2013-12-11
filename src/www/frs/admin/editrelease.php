@@ -221,9 +221,9 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 
 <form enctype="multipart/form-data" method="post" action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$group_id&amp;release_id=$release_id&amp;package_id=$package_id"; ?>">
 <input type="hidden" name="step1" value="1" />
-<table cellpadding="1" cellspacing="1">
+<table>
 <tr>
-	<td width="10%"><strong><?php echo _('Release Date')._(':'); ?></strong></td>
+	<td><strong><?php echo _('Release Date')._(':'); ?></strong></td>
 	<td><input type="text" name="release_date" value="<?php echo date('Y-m-d H:i',$frsr->getReleaseDate()) ?>" size="16" maxlength="16" /></td>
 </tr>
 <tr>
@@ -231,7 +231,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 	<td><input type="text" name="release_name" value="<?php echo htmlspecialchars($frsr->getName()); ?>" /></td>
 </tr>
 <tr>
-	<td><strong><?php echo _('Status') ?></strong></td>
+	<td><strong><?php echo _('Status')._(':'); ?></strong></td>
 	<td>
 		<?php
 			echo frs_show_status_popup('status_id',$frsr->getStatus());
@@ -247,13 +247,15 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 	</td>
 </tr>
 <tr>
-	<td  colspan="2"><strong><?php echo _('Upload Release Notes') ?>:</strong> <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?></td>
+	<td colspan="2"><strong><?php echo _('Upload Release Notes')._(':'); ?></strong>
+	<?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?></td>
 </tr>
 <tr>
 	<td><input type="file" name="uploaded_notes" size="30" /></td>
 </tr>
 <tr>
-	<td colspan="2"><strong><?php echo _('Upload Change Log') ?>:</strong> <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?></td>
+	<td colspan="2"><strong><?php echo _('Upload Change Log')._(':'); ?></strong>
+	<?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?></td>
 </tr>
 <tr>
 	<td><input type="file" name="uploaded_changes" size="30" /></td>
