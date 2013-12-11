@@ -123,7 +123,7 @@ echo '<div id="menu" >';
 include ($gfcommon.'docman/views/menu.php');
 echo '</div>';
 
-echo '<div id="views" >';
+echo '<div id="views">';
 include ($gfcommon.'docman/views/views.php');
 echo '</div>';
 

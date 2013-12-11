@@ -70,7 +70,7 @@ DocManListFileController.prototype =
 			fixheight = this.params.divEditFile.height() - 40;
 		}
 		if (jQuery.Storage.get('splitterStyle') !== undefined) {
-			storedSplitterPosition = jQuery.Storage.get('splitterStyle').replace(/px;/g, '').replace(/left: /g, '');
+			var storedSplitterPosition = jQuery.Storage.get('splitterStyle').replace(/px;?/g, '').replace(/left: /g, '');
 			splitterPosition = Math.round(storedSplitterPosition * 100 / mainwidth )+'%';
 		}
 		(jQuery(this.params.divLeft).height() > jQuery(this.params.divRight).height() - fixheight) ? mainheight = jQuery(this.params.divLeft).height() : mainheight = jQuery(this.params.divRight).height() - fixheight;
