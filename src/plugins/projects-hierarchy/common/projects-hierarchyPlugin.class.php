@@ -528,16 +528,16 @@ class projects_hierarchyPlugin extends Plugin {
 		if ($this->exists($project_id) && $this->exists($sub_project_id)) {
 			if ($this->hasRelation($project_id, $sub_project_id)) {
 				if ($status) {
-					$qpa = db_construct_qpa(false, 'UPDATE plugin_projects_hierarchy_relationship SET status = $1
-								WHERE ', array($status));
+					$qpa = db_construct_qpa(false, 'UPDATE plugin_projects_hierarchy_relationship SET status = $1',
+						array($status));
 					switch ($relation) {
 						case "parent": {
-							$qpa = db_construct_qpa($qpa, 'project_id = $1 AND sub_project_id = $2',
+							$qpa = db_construct_qpa($qpa, ' WHERE project_id = $1 AND sub_project_id = $2',
 										array($sub_project_id, $project_id));
 							break;
 						}
 						case "child": {
-							$qpa = db_construct_qpa($qpa, 'project_id = $1 AND sub_project_id = $2',
+							$qpa = db_construct_qpa($qpa, ' WHERE project_id = $1 AND sub_project_id = $2',
 										array($project_id, $sub_project_id));
 							break;
 						}
@@ -553,15 +553,15 @@ class projects_hierarchyPlugin extends Plugin {
 					if (db_affected_rows($res))
 						return true;
 				} else {
-					$qpa = db_construct_qpa(false, 'DELETE FROM plugin_projects_hierarchy_relationship WHERE ');
+					$qpa = db_construct_qpa(false, 'DELETE FROM plugin_projects_hierarchy_relationship');
 					switch ($relation) {
 						case "parent": {
-							$qpa = db_construct_qpa($qpa, 'project_id = $1 AND sub_project_id = $2',
+							$qpa = db_construct_qpa($qpa, ' WHERE project_id = $1 AND sub_project_id = $2',
 										array($sub_project_id, $project_id));
 							break;
 						}
 						case "child": {
-							$qpa = db_construct_qpa($qpa, 'project_id = $1 AND sub_project_id = $2',
+							$qpa = db_construct_qpa($qpa, ' WHERE project_id = $1 AND sub_project_id = $2',
 										array($project_id, $sub_project_id));
 							break;
 						}
