@@ -907,7 +907,7 @@ msgstr "Enviar Fichero"
 #: common/docman/views/addfile.php:132 common/docman/views/additem.php:84
 #: common/docman/views/editfile.php:81
 #, php-format
-msgid "(max upload size: %1$s)"
+msgid "(max upload size: %s)"
 msgstr ""
 
 #: common/docman/views/addfile.php:139
