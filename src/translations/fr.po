@@ -840,8 +840,8 @@ msgstr "Les deux champs sont utilisés lors de la recherche de documents."
 #: common/docman/views/addfile.php:110 common/docman/views/addfile.php:111
 #: common/docman/views/editfile.php:39 common/docman/views/editfile.php:43
 #, php-format
-msgid "(at least %1$s characters)"
-msgstr "(%1$s caractères minimum)"
+msgid "(at least %s characters)"
+msgstr "(%s caractères minimum)"
 
 #: common/docman/views/addfile.php:116
 msgid "Type of Document"

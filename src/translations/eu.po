@@ -890,8 +890,8 @@ msgstr ""
 #: common/docman/views/addfile.php:110 common/docman/views/addfile.php:111
 #: common/docman/views/editfile.php:39 common/docman/views/editfile.php:43
 #, fuzzy, php-format
-msgid "(at least %1$s characters)"
-msgstr "(gutxienez %1$s karakterekoa)"
+msgid "(at least %s characters)"
+msgstr "(gutxienez %s karakterekoa)"
 
 #: common/docman/views/addfile.php:116
 #, fuzzy

@@ -886,8 +886,8 @@ msgstr "Motor de busca nos documentos"
 #: common/docman/views/addfile.php:110 common/docman/views/addfile.php:111
 #: common/docman/views/editfile.php:39 common/docman/views/editfile.php:43
 #, php-format
-msgid "(at least %1$s characters)"
-msgstr "(como mínimo %1$s caracteres)"
+msgid "(at least %s characters)"
+msgstr "(como mínimo %s caracteres)"
 
 #: common/docman/views/addfile.php:116
 #, fuzzy

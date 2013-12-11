@@ -860,8 +860,8 @@ msgstr "Ambos campos son usados por el motor de busqueda del documento."
 #: common/docman/views/addfile.php:110 common/docman/views/addfile.php:111
 #: common/docman/views/editfile.php:39 common/docman/views/editfile.php:43
 #, php-format
-msgid "(at least %1$s characters)"
-msgstr "(por lo menos %1$s carácteres)."
+msgid "(at least %s characters)"
+msgstr "(por lo menos %s carácteres)."
 
 #: common/docman/views/addfile.php:116
 msgid "Type of Document"

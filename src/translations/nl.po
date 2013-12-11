@@ -880,7 +880,7 @@ msgstr ""
 #: common/docman/views/addfile.php:110 common/docman/views/addfile.php:111
 #: common/docman/views/editfile.php:39 common/docman/views/editfile.php:43
 #, fuzzy, php-format
-msgid "(at least %1$s characters)"
+msgid "(at least %s characters)"
 msgstr "Het wachtwoord moet minstens uit 6 karakters bestaan."
 
 #: common/docman/views/addfile.php:116
