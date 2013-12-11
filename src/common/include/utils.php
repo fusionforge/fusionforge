@@ -1437,12 +1437,7 @@ function util_get_maxuploadfilesize() {
 	$postmax = util_ini_get_bytes('post_max_size');
 	$maxfile = util_ini_get_bytes('upload_max_filesize');
 
-	$postfile = (int)(($postmax * 3) / 4);
-
-	if ($postfile > $maxfile)
-		$postfile = $maxfile;
-
-	return $postfile;
+	return min($postmax, $maxfile);
 }
 
 function util_get_compressed_file_extension() {
