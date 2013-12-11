@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 18:27+0100\n"
+"POT-Creation-Date: 2013-12-11 18:48+0100\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2449,11 +2449,10 @@ msgid "HTML tags will display in your post as text"
 msgstr "Tags HTML serão mostradas na sua postagem como texto"
 
 #: common/forum/ForumHTML.class.php:615
-#, php-format
+#, fuzzy, php-format
 msgid ""
-"You are posting anonymously because you are not <a href=\"%1$s\">logged in</"
-"a>"
-msgstr ""
+"You are posting anonymously because you are not <a href=\"%s\">logged in</a>"
+msgstr "Você está postando anonimamente porque você não está"
 
 #: common/forum/ForumHTML.class.php:620 common/tracker/actions/mod.php:216
 msgid "Post Comment"
@@ -22448,9 +22447,6 @@ msgstr "Minha Página Pessoal"
 
 #~ msgid "Reply to this message"
 #~ msgstr "Postar uma resposta para essa mensagem"
-
-#~ msgid "You are posting anonymously because you are not"
-#~ msgstr "Você está postando anonimamente porque você não está"
 
 #~ msgid "Must Include A Message Body And Subject"
 #~ msgstr "Precisa Incluir Um Corpo de Mensagem e um Assunto"

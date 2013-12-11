@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 18:27+0100\n"
+"POT-Creation-Date: 2013-12-11 18:48+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2576,8 +2576,7 @@ msgstr "HTML tags in je bericht zullen als tekst zichtbaar zijn"
 #: common/forum/ForumHTML.class.php:615
 #, fuzzy, php-format
 msgid ""
-"You are posting anonymously because you are not <a href=\"%1$s\">logged in</"
-"a>"
+"You are posting anonymously because you are not <a href=\"%s\">logged in</a>"
 msgstr "Je bent anoniem berichten aan het plaatsen omdat je niet bent"
 
 #: common/forum/ForumHTML.class.php:620 common/tracker/actions/mod.php:216

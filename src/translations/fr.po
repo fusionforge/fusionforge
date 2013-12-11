@@ -2469,10 +2469,10 @@ msgstr "Les balises HTML de votre message seront affichées comme du texte."
 #: common/forum/ForumHTML.class.php:615
 #, php-format
 msgid ""
-"You are posting anonymously because you are not <a href=\"%1$s\">logged in</"
+"You are posting anonymously because you are not <a href=\"%s\">logged in</"
 "a>"
 msgstr ""
-"Vous ajoutez un message anonyme car vous n'êtes pas <a href=\"%1$s"
+"Vous ajoutez un message anonyme car vous n'êtes pas <a href=\"%s"
 "\">identifié</a>"
 
 #: common/forum/ForumHTML.class.php:620 common/tracker/actions/mod.php:216
@@ -25167,12 +25167,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Reply to this message"
 #~ msgstr "Répondre à ce message"
-
-#~ msgid "You are posting anonymously because you are not"
-#~ msgstr "Vous ajoutez un message anonyme car vous n'êtes pas"
-
-#~ msgid "logged in"
-#~ msgstr "identifié"
 
 #~ msgid "Post Comment Anonymously"
 #~ msgstr "Publier le commentaire de manière anonyme"

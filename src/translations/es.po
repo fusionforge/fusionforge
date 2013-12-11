@@ -2505,10 +2505,10 @@ msgstr "Las etiquetas HTML se verán en su mensaje como texto"
 #: common/forum/ForumHTML.class.php:615
 #, php-format
 msgid ""
-"You are posting anonymously because you are not <a href=\"%1$s\">logged in</"
+"You are posting anonymously because you are not <a href=\"%s\">logged in</"
 "a>"
 msgstr ""
-"Está publicando anónimamente porque no ha <a href=\"%1$s\">iniciado sesión</"
+"Está publicando anónimamente porque no ha <a href=\"%s\">iniciado sesión</"
 "a>"
 
 #: common/forum/ForumHTML.class.php:620 common/tracker/actions/mod.php:216

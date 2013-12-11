@@ -2580,15 +2580,15 @@ msgstr "Cancelar"
 
 #: common/forum/ForumHTML.class.php:608
 msgid "HTML tags will display in your post as text"
-msgstr "As etiquetas de HTML amosaranse na súa mensaxe como texto "
+msgstr "As etiquetas de HTML amosaranse na súa mensaxe como texto"
 
 #: common/forum/ForumHTML.class.php:615
 #, php-format
 msgid ""
-"You are posting anonymously because you are not <a href=\"%1$s\">logged in</"
+"You are posting anonymously because you are not <a href=\"%s\">logged in</"
 "a>"
 msgstr ""
-"Está a publicar de xeito anónimo porque non está <a href=\"%1$s\">conectado</"
+"Está a publicar de xeito anónimo porque non está <a href=\"%s\">conectado</"
 "a>"
 
 #: common/forum/ForumHTML.class.php:620 common/tracker/actions/mod.php:216

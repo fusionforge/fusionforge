@@ -2579,9 +2579,9 @@ msgstr "HTML-Tags werden in Ihrer Nachricht als Text angezeigt"
 #: common/forum/ForumHTML.class.php:615
 #, php-format
 msgid ""
-"You are posting anonymously because you are not <a href=\"%1$s\">logged in</"
+"You are posting anonymously because you are not <a href=\"%s\">logged in</"
 "a>"
-msgstr "Sie posten anonym, da Sie nicht <a href=\"%1$s\">angemeldet</a> sind"
+msgstr "Sie posten anonym, da Sie nicht <a href=\"%s\">angemeldet</a> sind"
 
 #: common/forum/ForumHTML.class.php:620 common/tracker/actions/mod.php:216
 msgid "Post Comment"

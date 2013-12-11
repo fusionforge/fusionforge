@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 18:27+0100\n"
+"POT-Creation-Date: 2013-12-11 18:48+0100\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -2576,8 +2576,7 @@ msgstr "HTML-kod kommer att visas som text i ditt inlägg"
 #: common/forum/ForumHTML.class.php:615
 #, fuzzy, php-format
 msgid ""
-"You are posting anonymously because you are not <a href=\"%1$s\">logged in</"
-"a>"
+"You are posting anonymously because you are not <a href=\"%s\">logged in</a>"
 msgstr "Du skapar inlägg anonymnt eftersom du inte är"
 
 #: common/forum/ForumHTML.class.php:620 common/tracker/actions/mod.php:216
