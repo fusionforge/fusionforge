@@ -819,16 +819,16 @@ p.information {
 }
 
 .info-box:nth-child(4n) h2 {
-	background: #402c5d;
+	background: #b4355e;
 }
 .info-box:nth-child(4n+1) h2 {
-	background: #34b234;
+	background: #402c5d;
 }
 .info-box:nth-child(4n+2) h2 {
-	background: #00539f;
+	background: #34b234;
 }
 .info-box:nth-child(4n+3) h2 {
-	background: #b4355e;
+	background: #00539f;
 }
 
 .info-box {
