@@ -103,7 +103,7 @@ class Widget_MyMonitoredFp extends Widget {
                             db_result($result2,$i,'filemodule_id').
                             '" onClick="return confirm(\''._("Stop Monitoring this Package?").'\')">'.
                             '<img src="'.util_get_image_theme("ic/trash.png").'" height="16" width="16" '.
-                            'border="0" alt="'._("Stop Monitoring").'" /></a></td></tr>';
+                            'alt="'._("Stop Monitoring").'" /></a></td></tr>';
                     }
                 }
 

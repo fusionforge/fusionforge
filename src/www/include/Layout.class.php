@@ -415,7 +415,7 @@ class Layout extends Error {
 	function bodyHeader($params){
 		?>
 			<div class="header">
-			<table border="0" width="100%" cellspacing="0" cellpadding="0" id="headertable">
+			<table width="100%" id="headertable">
 			<tr>
 			<td><a href="<?php echo util_make_url ('/'); ?>"><?php echo html_image('logo.png',198,52,array('border'=>'0')); ?></a></td>
 			<td><?php $this->searchBox(); ?></td>

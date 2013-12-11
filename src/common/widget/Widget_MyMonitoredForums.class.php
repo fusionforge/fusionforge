@@ -122,7 +122,7 @@ class Widget_MyMonitoredForums extends Widget {
 					'<td class="align-center"><a href="/forum/monitor.php?forum_id='.$group_forum_id.'&group_id='.$group_id.'&stop=1'.
 					'" onClick="return confirm(\''._("Stop monitoring this Forum?").'\')">'.
 					'<img src="'.$GLOBALS['HTML']->imgroot.'ic/trash.png" height="16" width="16" '.
-					'border="0" alt="'._("Stop Monitoring").'" /></a></td></tr>';
+					'alt="'._("Stop Monitoring").'" /></a></td></tr>';
 					}
 				}
 
