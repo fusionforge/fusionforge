@@ -312,7 +312,7 @@ echo $HTML->boxBottom();
 echo '</td>';
 
 echo '<td>';
-echo $HTML->boxTop(_('Tool Admin').'');
+echo $HTML->boxTop(_('Tool Admin'));
 
 if($group->usesForum()) { ?>
 	<p><a href="/forum/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Forums Admin') ?></a></p>
