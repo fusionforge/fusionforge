@@ -101,12 +101,14 @@ WHERE user_id=$4 AND id=$5',
 							$body = strip_tags($body);
 							$body = $sanitizer->convertExtendedCharsForEmail($body);
 
-							$body .= _('
+							$body .= "\n\n";
+							$body .= '______________________________________________________________________';
+							$body .= "\n";
+							$body .= _('You are receiving this email because you elected to monitor this user.');
+							$body .= "\n";
+							$body .= _('To stop monitoring this user, visit the following link:');
+							$body .= "\n";
 
-______________________________________________________________________
-You are receiving this email because you elected to monitor this user.
-To stop monitoring this user, visit the following link:
-');
 							$body .= util_make_url("/developer/monitor.php?diary_user=".user_getid());
 
 							util_send_message($to, $subject, $body, $to, $tolist);

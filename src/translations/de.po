@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 18:27+0100\n"
+"POT-Creation-Date: 2013-12-12 14:37+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -1817,7 +1817,7 @@ msgstr "Startdatum"
 #: www/include/user_profile.php:152 www/mail/admin/index.php:192
 #: www/mail/admin/index.php:225 www/my/bookmark_add.php:53
 #: www/my/bookmark_add.php:59 www/my/bookmark_edit.php:59
-#: www/my/bookmark_edit.php:65 www/my/diary.php:181 www/my/diary.php:185
+#: www/my/bookmark_edit.php:65 www/my/diary.php:183 www/my/diary.php:187
 #: www/news/admin/index.php:125 www/people/admin/index.php:99
 #: www/people/admin/index.php:133 www/people/createjob.php:52
 #: www/people/createjob.php:55 www/people/editjob.php:169
@@ -2440,7 +2440,7 @@ msgstr "Geposted von"
 #: plugins/mantisbt/view/editIssue.php:213
 #: plugins/mantisbt/view/viewIssue.php:108
 #: plugins/mantisbt/view/viewIssues.php:363 www/export/rssAboTask.php:143
-#: www/my/dashboard.php:66 www/my/diary.php:181 www/pm/browse_task.php:143
+#: www/my/dashboard.php:66 www/my/diary.php:183 www/pm/browse_task.php:143
 #: www/project/report/index.php:135
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:57
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:48
@@ -2579,8 +2579,7 @@ msgstr "HTML-Tags werden in Ihrer Nachricht als Text angezeigt"
 #: common/forum/ForumHTML.class.php:615
 #, php-format
 msgid ""
-"You are posting anonymously because you are not <a href=\"%s\">logged in</"
-"a>"
+"You are posting anonymously because you are not <a href=\"%s\">logged in</a>"
 msgstr "Sie posten anonym, da Sie nicht <a href=\"%s\">angemeldet</a> sind"
 
 #: common/forum/ForumHTML.class.php:620 common/tracker/actions/mod.php:216
@@ -5200,7 +5199,7 @@ msgstr "Freitext für die »Durchsuche Objekte« Seite"
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:247
 #: www/admin/index.php:169 www/admin/pending-news.php:160
 #: www/forum/admin/index.php:413 www/include/vote_function.php:286
-#: www/my/bookmark_add.php:63 www/my/bookmark_edit.php:69 www/my/diary.php:189
+#: www/my/bookmark_add.php:63 www/my/bookmark_edit.php:69 www/my/diary.php:191
 #: www/news/admin/index.php:149 www/news/news_utils.php:42
 #: www/news/submit.php:170 www/pm/add_task.php:57 www/pm/add_task.php:140
 #: www/pm/add_task.php:154 www/pm/admin/index.php:219
@@ -5546,7 +5545,7 @@ msgid "Select One"
 msgstr "Auswählen"
 
 #: common/tracker/actions/browse.php:365 www/frs/admin/index.php:210
-#: www/my/diary.php:207
+#: www/my/diary.php:209
 msgid "Private"
 msgstr "Privat"
 
@@ -8266,7 +8265,7 @@ msgid "The item #%s is pending"
 msgstr "Das Element #%s ist schwebend"
 
 #: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:147
-#: www/export/rssAboTask.php:146 www/my/diary.php:185
+#: www/export/rssAboTask.php:146 www/my/diary.php:187
 #: www/news/admin/index.php:135 www/news/submit.php:158
 msgid "Details"
 msgstr "Details"
@@ -16758,7 +16757,7 @@ msgstr "Kein Eintrag für diesen Benutzer gefunden"
 msgid "Posted on "
 msgstr "Geposted von"
 
-#: www/developer/diary.php:62 www/my/diary.php:197
+#: www/developer/diary.php:62 www/my/diary.php:199
 msgid "Existing Diary and Notes Entries"
 msgstr "Existierender Terminkalender und Notizeinträge"
 
@@ -17635,7 +17634,7 @@ msgstr "Ein neues Paket erstellen"
 msgid "New Package Name"
 msgstr "Neuer Paketname"
 
-#: www/frs/admin/index.php:209 www/my/diary.php:207
+#: www/frs/admin/index.php:209 www/my/diary.php:209
 msgid "Public"
 msgstr "öffentlich"
 
@@ -18103,7 +18102,7 @@ msgstr "Tracker Einstellungen"
 msgid "View your tasks and artifacts."
 msgstr "Sie haben keine Terminkalendereinträge"
 
-#: www/include/html.php:990 www/my/diary.php:164
+#: www/include/html.php:990 www/my/diary.php:166
 msgid "My Diary and Notes"
 msgstr "Mein Terminkalender und Notizen"
 
@@ -18919,57 +18918,51 @@ msgstr "Element hinzugefügt"
 msgid "[%s User Notes: %s] %s"
 msgstr "[%s User Notes: %s] %s"
 
-#: www/my/diary.php:104
-#, fuzzy
-msgid ""
-"\n"
-"\n"
-"______________________________________________________________________\n"
-"You are receiving this email because you elected to monitor this user.\n"
-"To stop monitoring this user, visit the following link:\n"
+#: www/my/diary.php:107
+msgid "You are receiving this email because you elected to monitor this user."
 msgstr ""
-"\n"
-"\n"
-"______________________________________________________________________\n"
-"Sie erhalten diese E-Mail da Sie ausgewählt haben diesen Nutzer zu "
-"beobachten. Um die Beobachtung wieder zu beenden, loggen Sie sich unter %s "
-"ein und besuchen Sie den nachfolgenden Link: \n"
-"%s\n"
+"Sie erhalten diese E-Mail, da Sie für dieser Nutzer beobachten ausgewählt "
+"haben."
 
-#: www/my/diary.php:114
+#: www/my/diary.php:109
+msgid "To stop monitoring this user, visit the following link:"
+msgstr ""
+"Um die Beobachtung der Nutzer wieder zu beenden, "
+"besuchen Sie:"
+
+#: www/my/diary.php:116
 #, fuzzy, php-format
 msgid "email sent to %s monitoring user"
 msgid_plural "email sent to %s monitoring users"
 msgstr[0] "E-Mail gesandt an %s der Nutzer beobachtet"
 msgstr[1] "E-Mail gesandt an %s der Nutzer beobachtet"
 
-#: www/my/diary.php:119
-#, fuzzy
+#: www/my/diary.php:121
 msgid "email not sent - no one monitoring"
 msgstr "E-Mail nicht versandt - kein Beobachter"
 
-#: www/my/diary.php:131
+#: www/my/diary.php:133
 #, fuzzy
 msgid "Error Adding Item: "
 msgstr "Fehler beim Hinzufügen eines Elementes"
 
-#: www/my/diary.php:147
+#: www/my/diary.php:149
 msgid "Entry not found or does not belong to you"
 msgstr "Eintrag nicht gefunden oder er gehört Ihnen nicht"
 
-#: www/my/diary.php:149 www/my/diary.php:160
+#: www/my/diary.php:151 www/my/diary.php:162
 msgid "Add A New Entry"
 msgstr "Einen neuen Eintrag hinzufügen"
 
-#: www/my/diary.php:152
+#: www/my/diary.php:154
 msgid "Update An Entry"
 msgstr "Einen Eintrag aktualisieren"
 
-#: www/my/diary.php:190
+#: www/my/diary.php:192
 msgid "Is Public"
 msgstr "Ist öffentlich"
 
-#: www/my/diary.php:192
+#: www/my/diary.php:194
 msgid ""
 "If marked as public, your entry will be mailed to any monitoring users when "
 "it is first submitted."
@@ -18977,7 +18970,7 @@ msgstr ""
 "Wenn als öffentlich markiert, wird Ihr Eintrag an alle beobachtenden "
 "Benutzer gemailt, wenn es zuerst freigegeben wird."
 
-#: www/my/diary.php:202
+#: www/my/diary.php:204
 msgid "You Have No Diary Entries"
 msgstr "Sie haben keine Terminkalendereinträge"
 
@@ -23576,10 +23569,6 @@ msgstr "Kein Benutzername angegeben"
 #, php-format
 msgid "Personal Page for %s"
 msgstr "Persönliche Seite für %s"
-
-#, fuzzy
-#~ msgid "Project Name (click to edit)"
-#~ msgstr "Gruppen-Name (anklicken zum Bearbeiten)"
 
 #~ msgid ""
 #~ "Read/write access to Mercurial tree is allowed for authenticated users. "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-11 18:48+0100\n"
+"POT-Creation-Date: 2013-12-12 14:37+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -1810,7 +1810,7 @@ msgstr "Startdatum"
 #: www/include/user_profile.php:152 www/mail/admin/index.php:192
 #: www/mail/admin/index.php:225 www/my/bookmark_add.php:53
 #: www/my/bookmark_add.php:59 www/my/bookmark_edit.php:59
-#: www/my/bookmark_edit.php:65 www/my/diary.php:181 www/my/diary.php:185
+#: www/my/bookmark_edit.php:65 www/my/diary.php:183 www/my/diary.php:187
 #: www/news/admin/index.php:125 www/people/admin/index.php:99
 #: www/people/admin/index.php:133 www/people/createjob.php:52
 #: www/people/createjob.php:55 www/people/editjob.php:169
@@ -2439,7 +2439,7 @@ msgstr "Gepost door"
 #: plugins/mantisbt/view/editIssue.php:213
 #: plugins/mantisbt/view/viewIssue.php:108
 #: plugins/mantisbt/view/viewIssues.php:363 www/export/rssAboTask.php:143
-#: www/my/dashboard.php:66 www/my/diary.php:181 www/pm/browse_task.php:143
+#: www/my/dashboard.php:66 www/my/diary.php:183 www/pm/browse_task.php:143
 #: www/project/report/index.php:135
 #: www/search/include/renderers/ArtifactHtmlSearchRenderer.class.php:57
 #: www/search/include/renderers/NewsHtmlSearchRenderer.class.php:48
@@ -5189,7 +5189,7 @@ msgstr ""
 #: www/admin/cronman.php:37 www/admin/globalroleedit.php:247
 #: www/admin/index.php:169 www/admin/pending-news.php:160
 #: www/forum/admin/index.php:413 www/include/vote_function.php:286
-#: www/my/bookmark_add.php:63 www/my/bookmark_edit.php:69 www/my/diary.php:189
+#: www/my/bookmark_add.php:63 www/my/bookmark_edit.php:69 www/my/diary.php:191
 #: www/news/admin/index.php:149 www/news/news_utils.php:42
 #: www/news/submit.php:170 www/pm/add_task.php:57 www/pm/add_task.php:140
 #: www/pm/add_task.php:154 www/pm/admin/index.php:219
@@ -5543,7 +5543,7 @@ msgid "Select One"
 msgstr "Bestand wissen"
 
 #: common/tracker/actions/browse.php:365 www/frs/admin/index.php:210
-#: www/my/diary.php:207
+#: www/my/diary.php:209
 msgid "Private"
 msgstr "Besloten"
 
@@ -8235,7 +8235,7 @@ msgid "The item #%s is pending"
 msgstr "Item #%s staat open"
 
 #: cronjobs/send_pending_items_mail.php:121 www/admin/pending-news.php:147
-#: www/export/rssAboTask.php:146 www/my/diary.php:185
+#: www/export/rssAboTask.php:146 www/my/diary.php:187
 #: www/news/admin/index.php:135 www/news/submit.php:158
 msgid "Details"
 msgstr "Details"
@@ -16723,7 +16723,7 @@ msgstr "Gebruiker niet gevonden"
 msgid "Posted on "
 msgstr "Gepost door"
 
-#: www/developer/diary.php:62 www/my/diary.php:197
+#: www/developer/diary.php:62 www/my/diary.php:199
 msgid "Existing Diary and Notes Entries"
 msgstr "Bestaand logboek en aantekeningen"
 
@@ -17601,7 +17601,7 @@ msgstr "Creëer een bundel"
 msgid "New Package Name"
 msgstr "Naam nieuwe bundel"
 
-#: www/frs/admin/index.php:209 www/my/diary.php:207
+#: www/frs/admin/index.php:209 www/my/diary.php:209
 msgid "Public"
 msgstr "Openbaar"
 
@@ -18062,7 +18062,7 @@ msgstr "Tracker aangepast"
 msgid "View your tasks and artifacts."
 msgstr "Je hebt geen logboek of aantekeningen"
 
-#: www/include/html.php:990 www/my/diary.php:164
+#: www/include/html.php:990 www/my/diary.php:166
 msgid "My Diary and Notes"
 msgstr "Mijn logboek en aantekeningen"
 
@@ -18825,48 +18825,47 @@ msgstr "Item toegevoegd"
 msgid "[%s User Notes: %s] %s"
 msgstr ""
 
-#: www/my/diary.php:104
-msgid ""
-"\n"
-"\n"
-"______________________________________________________________________\n"
-"You are receiving this email because you elected to monitor this user.\n"
-"To stop monitoring this user, visit the following link:\n"
+#: www/my/diary.php:107
+msgid "You are receiving this email because you elected to monitor this user."
 msgstr ""
 
-#: www/my/diary.php:114
+#: www/my/diary.php:109
+msgid "To stop monitoring this user, visit the following link:"
+msgstr ""
+
+#: www/my/diary.php:116
 #, php-format
 msgid "email sent to %s monitoring user"
 msgid_plural "email sent to %s monitoring users"
 msgstr[0] ""
 msgstr[1] ""
 
-#: www/my/diary.php:119
+#: www/my/diary.php:121
 msgid "email not sent - no one monitoring"
 msgstr ""
 
-#: www/my/diary.php:131
+#: www/my/diary.php:133
 #, fuzzy
 msgid "Error Adding Item: "
 msgstr "Fout bij toevoegen item"
 
-#: www/my/diary.php:147
+#: www/my/diary.php:149
 msgid "Entry not found or does not belong to you"
 msgstr "Item niet gevonden of niet jouw eigendom"
 
-#: www/my/diary.php:149 www/my/diary.php:160
+#: www/my/diary.php:151 www/my/diary.php:162
 msgid "Add A New Entry"
 msgstr "Voeg een nieuw item toe"
 
-#: www/my/diary.php:152
+#: www/my/diary.php:154
 msgid "Update An Entry"
 msgstr "Item bewerken"
 
-#: www/my/diary.php:190
+#: www/my/diary.php:192
 msgid "Is Public"
 msgstr "Openbaar"
 
-#: www/my/diary.php:192
+#: www/my/diary.php:194
 msgid ""
 "If marked as public, your entry will be mailed to any monitoring users when "
 "it is first submitted."
@@ -18874,7 +18873,7 @@ msgstr ""
 "Als je \"Openbaar\" aanvinkt zullen nieuw toegevoegde items aan alle "
 "monitoring gebruikers worden gemaild."
 
-#: www/my/diary.php:202
+#: www/my/diary.php:204
 msgid "You Have No Diary Entries"
 msgstr "Je hebt geen logboek of aantekeningen"
 
