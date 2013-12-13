@@ -4,7 +4,7 @@
 # Guess where lxc data is and default to /usr/share/lxc
 LXC_DATA:=$(shell [ -d /usr/share/lxc ] && echo /usr/share/lxc || ([ -d /usr/lib/lxc ] && echo /usr/lib/lxc))
 LXC_DATA:=$(shell [ -z "$(LXC_DATA)" ] && echo /usr/share/lxc || echo "$(LXC_DATA)")
-TEMPLATELIST:=$(LXC_DATA)/templates/lxc-debian7 $(LXC_DATA)/templates/lxc-debian6 $(LXC_DATA)/templates/lxc-centos5 $(LXC_DATA)/templates/lxc-centos6
+TEMPLATELIST:=$(LXC_DATA)/templates/lxc-debian6 $(LXC_DATA)/templates/lxc-debian7 $(LXC_DATA)/templates/lxc-debian8 $(LXC_DATA)/templates/lxc-centos5 $(LXC_DATA)/templates/lxc-centos6
 
 default: checkdepends installtemplate
 
@@ -69,14 +69,15 @@ $(LXC_DATA)/templates/lxc-debian7: lxc-debian7 $(LXC_DATA) Makefile
 	cat lxc-debian7 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > $(LXC_DATA)/templates/lxc-debian7
 	chmod 755 $(LXC_DATA)/templates/lxc-debian7
 
+$(LXC_DATA)/templates/lxc-debian8: lxc-debian8 $(LXC_DATA) Makefile
+	cat lxc-debian7 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > $(LXC_DATA)/templates/lxc-debian7
+	chmod 755 $(LXC_DATA)/templates/lxc-debian7
+
 $(LXC_DATA)/templates/lxc-centos5: lxc-centos5 $(LXC_DATA) Makefile
 	cp lxc-centos5 $(LXC_DATA)/templates/
 
 $(LXC_DATA)/templates/lxc-centos6: lxc-centos6 $(LXC_DATA) Makefile
 	cp lxc-centos6 $(LXC_DATA)/templates/
-
-/usr/share/lxc/templates/lxc-centos5: lxc-centos5 /usr/share/lxc
-	cp lxc-centos5 /usr/share/lxc/templates/
 
 createdeb:
 	sudo /usr/bin/lxc-create -n dhdebian6.local -f config.debian6 -t debian6
