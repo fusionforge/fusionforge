@@ -188,9 +188,6 @@ echo "</div>\n\n";
  action="<?php echo getStringFromServer('PHP_SELF')."?group_id=$gid"; ?>">
 <h4><?php echo _("Upload a new logo") ?></h4>
 <p><?php echo _('The logo must be in PNG format and precisely 135x135 pixels in size.'); ?></p>
-<span class="important">
- <?php echo _('NOTE: In some browsers you must select the file in the file-upload dialog and click "OK".  Double-clicking doesn\'t register the file.')?>)
-</span>
 <p><?php echo _('Upload a new file') ?>: <input type="file" name="userfile"
  size="30" /></p>
 	  <?php if (forge_get_config('use_manual_uploads')) {

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-12 14:37+0100\n"
+"POT-Creation-Date: 2013-12-13 11:02+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -335,7 +335,7 @@ msgstr "Fitxeroaren izena"
 #: www/export/rssAboTask.php:173 www/forum/admin/index.php:158
 #: www/forum/admin/pendingmsgdetail.php:59 www/forum/forum.php:92
 #: www/forum/forum.php:156 www/forum/message.php:126
-#: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:197
+#: www/frs/admin/deletepackage.php:57 www/frs/admin/qrs.php:196
 #: www/include/features_boxes.php:150 www/include/features_boxes.php:159
 #: www/include/user_profile.php:88 www/include/user_profile.php:93
 #: www/include/user_profile.php:112 www/new/index.php:98
@@ -1809,9 +1809,9 @@ msgstr ""
 #: www/frs/admin/editrelease.php:271 www/frs/admin/editrelease.php:321
 #: www/frs/admin/editrelease.php:327 www/frs/admin/qrs.php:148
 #: www/frs/admin/qrs.php:174 www/frs/admin/qrs.php:182
-#: www/frs/admin/qrs.php:190 www/frs/admin/qrs.php:225
-#: www/frs/admin/qrs.php:235 www/frs/admin/qrs.php:245
-#: www/frs/admin/qrs.php:253 www/frs/reporting/downloads.php:107
+#: www/frs/admin/qrs.php:190 www/frs/admin/qrs.php:224
+#: www/frs/admin/qrs.php:234 www/frs/admin/qrs.php:244
+#: www/frs/admin/qrs.php:252 www/frs/reporting/downloads.php:107
 #: www/frs/reporting/downloads.php:109 www/frs/reporting/downloads.php:111
 #: www/include/user_profile.php:68 www/include/user_profile.php:126
 #: www/include/user_profile.php:133 www/include/user_profile.php:144
@@ -2845,11 +2845,11 @@ msgstr ""
 
 #: common/frs/FRSRelease.class.php:294
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:130
-#: www/frs/admin/qrs.php:245 www/frs/shownotes.php:78
+#: www/frs/admin/qrs.php:244 www/frs/shownotes.php:78
 msgid "Release Notes"
 msgstr "Bertsioaren oharrak"
 
-#: common/frs/FRSRelease.class.php:297 www/frs/admin/qrs.php:253
+#: common/frs/FRSRelease.class.php:297 www/frs/admin/qrs.php:252
 #: www/frs/shownotes.php:84
 msgid "Change Log"
 msgstr "Aldaketen historia"
@@ -12087,43 +12087,37 @@ msgstr "Fitxero berria kargatu"
 msgid "The logo must be in PNG format and precisely 135x135 pixels in size."
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:192
-msgid ""
-"NOTE: In some browsers you must select the file in the file-upload dialog "
-"and click \"OK\".  Double-clicking doesn't register the file."
-msgstr ""
-
-#: plugins/mediawiki/www/plugin_admin.php:194
-#: www/frs/admin/editrelease.php:294 www/frs/admin/qrs.php:197
+#: plugins/mediawiki/www/plugin_admin.php:191
+#: www/frs/admin/editrelease.php:294 www/frs/admin/qrs.php:196
 msgid "Upload a new file"
 msgstr "Fitxero berria kargatu"
 
-#: plugins/mediawiki/www/plugin_admin.php:198
-#: www/frs/admin/editrelease.php:309 www/frs/admin/qrs.php:212
+#: plugins/mediawiki/www/plugin_admin.php:195
+#: www/frs/admin/editrelease.php:309 www/frs/admin/qrs.php:211
 #, php-format
 msgid ""
 "Alternatively, you can use a file you already uploaded (by SFTP or SCP) to "
 "the <a href=\"%2$s\">project's incoming directory</a> (%1$s)."
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:200
-#: www/frs/admin/editrelease.php:311 www/frs/admin/qrs.php:214
+#: plugins/mediawiki/www/plugin_admin.php:197
+#: www/frs/admin/editrelease.php:311 www/frs/admin/qrs.php:213
 msgid ""
 "This direct <tt>sftp://</tt> link only works with some browsers, such as "
 "Konqueror."
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:203
+#: plugins/mediawiki/www/plugin_admin.php:200
 #: www/frs/admin/editrelease.php:299 www/frs/admin/editrelease.php:312
-#: www/frs/admin/qrs.php:215
+#: www/frs/admin/qrs.php:214
 msgid "Choose an already uploaded file:"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:211
+#: plugins/mediawiki/www/plugin_admin.php:208
 msgid "… or delete the currently uploaded logo and revert to the site default"
 msgstr ""
 
-#: plugins/mediawiki/www/plugin_admin.php:212
+#: plugins/mediawiki/www/plugin_admin.php:209
 #, fuzzy
 msgid "Upload new logo"
 msgstr "Fitxero berria kargatu"
@@ -17347,7 +17341,7 @@ msgstr "Oharrak hemen kopiatu"
 msgid "Paste The Change Log In"
 msgstr "Aldaketen zerrenda hemen kopiatu"
 
-#: www/frs/admin/editrelease.php:278 www/frs/admin/qrs.php:261
+#: www/frs/admin/editrelease.php:278 www/frs/admin/qrs.php:260
 msgid "Preserve my pre-formatted text"
 msgstr "Nere testua aurreformateatua mantendu"
 
@@ -17364,17 +17358,17 @@ msgstr "3º urratsa: Bertsio honetan fitxeroak aldatu"
 msgid "Now, choose a file to upload into the system."
 msgstr ""
 
-#: www/frs/admin/editrelease.php:297 www/frs/admin/qrs.php:200
+#: www/frs/admin/editrelease.php:297 www/frs/admin/qrs.php:199
 #, php-format
 msgid "Alternatively, you can use FTP to upload a new file at %1$s."
 msgstr ""
 
 #: www/frs/admin/editrelease.php:321 www/frs/admin/editrelease.php:349
-#: www/frs/admin/qrs.php:225
+#: www/frs/admin/qrs.php:224
 msgid "File Type"
 msgstr "Fitxero mota"
 
-#: www/frs/admin/editrelease.php:327 www/frs/admin/qrs.php:235
+#: www/frs/admin/editrelease.php:327 www/frs/admin/qrs.php:234
 msgid "Processor Type"
 msgstr "Prozesadore mota"
 
@@ -17550,21 +17544,15 @@ msgid "Or %1$s create a new package %2$s"
 msgstr "%1$s -ek %2$s paketea sortzeko"
 
 #: www/frs/admin/qrs.php:194
-msgid ""
-"NOTE: In some browsers you must select the file in the file-upload dialog "
-"and click \"OK\". Double-clicking doesn't register the file."
-msgstr ""
-
-#: www/frs/admin/qrs.php:195
 #, php-format
 msgid "You can probably not upload files larger than about %.2f MiB in size."
 msgstr ""
 
-#: www/frs/admin/qrs.php:202
+#: www/frs/admin/qrs.php:201
 msgid "Choose an FTP file instead of uploading:"
 msgstr ""
 
-#: www/frs/admin/qrs.php:262
+#: www/frs/admin/qrs.php:261
 msgid "Release File"
 msgstr "Fitxeroa argitaratu"
 
