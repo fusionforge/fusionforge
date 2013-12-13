@@ -215,13 +215,13 @@ debconf-utils,\
 avahi-utils,\
 openssh-server,\
 xbase-clients,\
-pear-channels,\
-phpunit,\
-phpunit-selenium,\
 openjdk-6-jre,\
 iceweasel,\
 xfonts-base,\
 vnc4server
+#pear-channels,\
+#phpunit,\
+#phpunit-selenium,\
 
     cache=$1
     arch=$2
