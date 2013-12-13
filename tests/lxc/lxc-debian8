@@ -215,6 +215,7 @@ debconf-utils,\
 avahi-utils,\
 openssh-server,\
 xbase-clients,\
+pear-channels,\
 phpunit,\
 phpunit-selenium,\
 openjdk-6-jre,\
