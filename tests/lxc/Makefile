@@ -70,8 +70,8 @@ $(LXC_DATA)/templates/lxc-debian7: lxc-debian7 $(LXC_DATA) Makefile
 	chmod 755 $(LXC_DATA)/templates/lxc-debian7
 
 $(LXC_DATA)/templates/lxc-debian8: lxc-debian8 $(LXC_DATA) Makefile
-	cat lxc-debian7 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > $(LXC_DATA)/templates/lxc-debian7
-	chmod 755 $(LXC_DATA)/templates/lxc-debian7
+	cat lxc-debian8 | sed 's!http://cdn.debian.net/debian/!$(DEBMIRROR)!' > $(LXC_DATA)/templates/lxc-debian8
+	chmod 755 $(LXC_DATA)/templates/lxc-debian8
 
 $(LXC_DATA)/templates/lxc-centos5: lxc-centos5 $(LXC_DATA) Makefile
 	cp lxc-centos5 $(LXC_DATA)/templates/
