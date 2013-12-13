@@ -23,4 +23,4 @@ dist:
 	reprepro -Vb $(REPOPATH)/debian --ignore=wrongdistribution --ignore=missingfile include $(DIST) $(BUILDRESULT)/$(CHANGEFILE)
 
 $(BUILDPLACE)/$(DSCFILE): $(BUILDPLACE)
-	cd $(BUILDPLACE) ; dget -d $(DSCURL)
+	cd $(BUILDPLACE) ; dget --allow-unauthenticated --download-only $(DSCURL)
