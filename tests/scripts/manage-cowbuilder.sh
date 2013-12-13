@@ -25,8 +25,8 @@ PBUILDERROOTCMD="sudo HOME=${HOME}"
 EOF
    
     if [ -d $BUILDERDIR/cow/base-$DIST-amd64.cow ] ; then
-	sudo cowbuilder --update --configfile $COWBUILDERCONFIG --debootstrapopts --variant=buildd
+	sudo cowbuilder --update --configfile $COWBUILDERCONFIG
     else
-	sudo cowbuilder --create --distribution $DIST --configfile $COWBUILDERCONFIG --mirror $DEBMIRROR --debootstrapopts --variant=buildd
+	sudo cowbuilder --create --distribution $DIST --configfile $COWBUILDERCONFIG --mirror $DEBMIRROR
     fi
 done
