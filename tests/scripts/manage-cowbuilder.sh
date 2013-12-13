@@ -7,7 +7,7 @@ cd $absolutetestspath
 BUILDERDIR=$(./scripts/builder_get_config.sh BUILDERDIR)
 
 # Prepare and/or update cowbuilder caches
-DISTROLIST=${DISTROLIST:-"squeeze wheezy"}
+DISTROLIST=${DISTROLIST:-"squeeze wheezy jessie"}
 
 [ -d $BUILDERDIR/config ] || mkdir $BUILDERDIR/config
 
