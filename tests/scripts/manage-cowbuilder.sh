@@ -25,7 +25,7 @@ PBUILDERROOTCMD="sudo HOME=${HOME}"
 EOF
    
     if [ -d $BUILDERDIR/cow/base-$DIST-amd64.cow ] ; then
-	sudo cowbuilder --update --configfile $COWBUILDERCONFIG
+	sudo cowbuilder --update --configfile $COWBUILDERCONFIG --mirror $DEBMIRROR
     else
 	sudo cowbuilder --create --distribution $DIST --configfile $COWBUILDERCONFIG --mirror $DEBMIRROR
     fi
