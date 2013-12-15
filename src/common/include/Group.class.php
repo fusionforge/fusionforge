@@ -57,9 +57,9 @@ $GROUP_OBJ=array();
  * IMPORTANT! That db result must contain all fields
  * from groups table or you will have problems
  *
- * @param int		$group_id	Required
- * @param int|bool	$res		Result set handle ("SELECT * FROM groups WHERE group_id=xx")
- * @return Group|bool A group object or false on failure
+ * @param	int		$group_id	Required
+ * @param	int|bool	$res		Result set handle ("SELECT * FROM groups WHERE group_id=xx")
+ * @return	Group|bool	A group object or false on failure
  */
 function &group_get_object($group_id, $res = false) {
 	//create a common set of group objects
@@ -102,7 +102,7 @@ function &group_get_objects($id_arr) {
 
 	foreach ($id_arr as $id) {
 		//
-		//	See if this ID already has been fetched in the cache
+		// See if this ID already has been fetched in the cache
 		//
 		if (!isset($GROUP_OBJ["_".$id."_"])) {
 			$fetch[] = $id;
@@ -160,7 +160,7 @@ function group_get_object_by_publicname($groupname) {
 /**
  * get_public_active_projects_asc() - Get a list of rows for public active projects (initially in trove/full_list)
  *
- * @param	   int	 Opional Maximum number of rows to limit query length
+ * @param	int	 Opional Maximum number of rows to limit query length
  */
 function get_public_active_projects_asc($max_query_limit = -1) {
 
@@ -230,8 +230,8 @@ class Group extends Error {
 	/**
 	 * Group - Group object constructor - use group_get_object() to instantiate.
 	 *
-	 * @param int|bool $id  Required - Id of the group you want to instantiate.
-	 * @param int|bool $res Database result from select query OR associative array of all columns.
+	 * @param	int|bool	$id	Required - Id of the group you want to instantiate.
+	 * @param	int|bool	$res	Database result from select query OR associative array of all columns.
 	 */
 	function __construct($id = false, $res = false) {
 		$this->Error();
@@ -268,8 +268,8 @@ class Group extends Error {
 	/**
 	 * fetchData - May need to refresh database fields if an update occurred.
 	 *
-	 * @param int	$group_id The group_id.
-	 * @return boolean	success or not
+	 * @param	int	$group_id The group_id.
+	 * @return	boolean	success or not
 	 */
 	function fetchData($group_id) {
 		$res = db_query_params ('SELECT * FROM groups WHERE group_id=$1',
@@ -291,13 +291,13 @@ class Group extends Error {
 	 * @param	object	$user			The User object.
 	 * @param	string	$group_name		The full name of the user.
 	 * @param	string	$unix_name		The Unix name of the user.
-	 * @param	string	$description	The new group description.
+	 * @param	string	$description		The new group description.
 	 * @param	string	$purpose		The purpose of the group.
 	 * @param	string	$unix_box
 	 * @param	string	$scm_box
 	 * @param	bool	$is_public
 	 * @param	bool	$send_mail		Whether to send an email or not
-	 * @param	int		$built_from_template	The id of the project this new project is based on
+	 * @param	int	$built_from_template	The id of the project this new project is based on
 	 * @return	boolean	success or not
 	 */
 	function create(&$user, $group_name, $unix_name, $description, $purpose, $unix_box = 'shell1',
@@ -412,11 +412,11 @@ class Group extends Error {
 	 *
 	 * This function require site admin privilege.
 	 *
-	 * @param	object	$user			User requesting operation (for access control).
-	 * @param	int		$type_id		Group type (1-project, 2-foundry).
-	 * @param	string	$unix_box		Machine on which group's home directory located.
+	 * @param	object	$user		User requesting operation (for access control).
+	 * @param	int	$type_id	Group type (1-project, 2-foundry).
+	 * @param	string	$unix_box	Machine on which group's home directory located.
 	 * @param	string	$http_domain	Domain which serves group's WWW.
-	 * @return	bool					status.
+	 * @return	bool			status.
 	 * @access	public
 	 */
 	function updateAdmin(&$user, $type_id, $unix_box, $http_domain) {
@@ -473,7 +473,7 @@ class Group extends Error {
 	 *
 	 * Unlike updateAdmin(), this function accessible to project admin.
 	 *
-	 * @param object	$user    User requesting operation (for access control).
+	 * @param object	$user			User requesting operation (for access control).
 	 * @param string	$group_name
 	 * @param string	$homepage
 	 * @param string	$short_description
@@ -494,7 +494,7 @@ class Group extends Error {
 	 * @param bool		$use_stats
 	 * @param $tags
 	 * @param bool		$use_activity
-	 * @param bool		$is_public			group is publicly accessible
+	 * @param bool		$is_public		group is publicly accessible
 	 * @return    int    status.
 	 * @access    public
 	 */
@@ -1948,7 +1948,7 @@ class Group extends Error {
 	 * addUser - controls adding a user to a group.
 	 *
 	 * @param	string	$user_identifier	Unix name of the user to add OR integer user_id.
-	 * @param	int		$role_id		The role_id this user should have.
+	 * @param	int	$role_id		The role_id this user should have.
 	 * @return	boolean	success.
 	 * @access	public
 	 */
@@ -2199,9 +2199,9 @@ class Group extends Error {
 	/**
 	 * addHistory - Makes an audit trail entry for this project.
 	 *
-	 * @param	string	$field_name		The name of the field.
-	 * @param	string	$old_value		The Old Value for this $field_name.
-	 * @return 	resource				database result handle.
+	 * @param	string	$field_name	The name of the field.
+	 * @param	string	$old_value	The Old Value for this $field_name.
+	 * @return 	resource		database result handle.
 	 * @access public
 	 */
 	function addHistory($field_name, $old_value) {
@@ -2248,19 +2248,19 @@ class Group extends Error {
 	}
 
 	/**
-	 *	getMembers - returns array of User objects for this project
+	 * getMembers - returns array of User objects for this project
 	 *
-	 *	@return array of User objects for this group.
+	 * @return array of User objects for this group.
 	 */
 	function getMembers() {
 		return $this->getUsers (true);
 	}
 
 	/**
-	 *	replaceTemplateStrings - fill-in some blanks with project name
+	 * replaceTemplateStrings - fill-in some blanks with project name
 	 *
-	 *	@param	string	Template string
-	 *	@return	string	String after replacements
+	 * @param	string	Template string
+	 * @return	string	String after replacements
 	 */
 	function replaceTemplateStrings($string) {
 		$string = str_replace ('UNIXNAME', $this->getUnixName(), $string);
@@ -2270,11 +2270,11 @@ class Group extends Error {
 	}
 
 	/**
-	 *	approve - Approve pending project.
+	 * approve - Approve pending project.
 	 *
-	 *	@param	$user The User object who is doing the updating.
-	 *	@return bool
-	 *	@access public
+	 * @param	$user	The User object who is doing the updating.
+	 * @return	bool
+	 * @access	public
 	 */
 	function approve(&$user) {
 		global $gfcommon,$gfwww;
@@ -2602,7 +2602,7 @@ if there is anything we can do to help you.
 	 * This function sends out a rejection message to a user who
 	 * registered a project.
 	 *
-	 * @param	int		$response_id	The id of the response to use.
+	 * @param	int	$response_id		The id of the response to use.
 	 * @param	string	$message		The rejection message.
 	 * @return	bool	completion status.
 	 * @access	public
@@ -2786,10 +2786,10 @@ if there is anything we can do to help you.
 	 * setUnixStatus - Sets status of activation of unix account.
 	 *
 	 * @param	string	$status The unix status.
-	 * 	N	no_unix_account
-	 *	A	active
-	 *	S	suspended
-	 *	D	deleted
+	 *				N	no_unix_account
+	 *				A	active
+	 *				S	suspended
+	 *				D	deleted
 	 *
 	 * @return	boolean success.
 	 */
@@ -2932,8 +2932,8 @@ if there is anything we can do to help you.
 /**
  * group_getname() - get the group name
  *
- * @param	   int	 $group_id	The group ID
- * @return string
+ * @param	int	 $group_id	The group ID
+ * @return	string
  * @deprecated
  *
  */
@@ -2949,8 +2949,8 @@ function group_getname ($group_id = 0) {
 /**
  * group_getunixname() - get the unixname for a group
  *
- * @param	   int	 $group_id	The group ID
- * @return string
+ * @param	int	 $group_id	The group ID
+ * @return	string
  * @deprecated
  *
  */
@@ -2966,8 +2966,8 @@ function group_getunixname ($group_id) {
 /**
  * group_get_result() - Get the group object result ID.
  *
- * @param	   int	 $group_id	The group ID
- * @return int
+ * @param	int	 $group_id	The group ID
+ * @return	int
  * @deprecated
  *
  */
