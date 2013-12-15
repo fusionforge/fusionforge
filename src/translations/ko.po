@@ -23088,16 +23088,6 @@ msgstr "개인 페이지"
 #~ msgid "Registation Complete"
 #~ msgstr "등록 완료"
 
-#, fuzzy
-#~ msgid ""
-#~ "<p>Your project has been submitted to the %1$s administrators. Within 72 "
-#~ "hours, you will receive notification of their decision and further "
-#~ "instructions.</p><p>Thank you for choosing %1$s</p>"
-#~ msgstr ""
-#~ "프로젝트를 %1$s 관리자에게 제출했습니다. 72 시간 이내에 결정 및 자세한 이"
-#~ "용 절차에 대한 내용을 통보받을 것입니다.</p><p>%1$s을 선택해 주셔서 감사합"
-#~ "니다."
-
 #~ msgid "Group_id in db result does not match Group Object"
 #~ msgstr "데이터베이스의 그룹ID가 그룹 객체와 맞지 않습니다."
 

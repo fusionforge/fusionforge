@@ -11166,9 +11166,8 @@ msgid ""
 msgstr ""
 
 #: plugins/mailman/www/index.php:71 www/mail/index.php:74
-#, fuzzy
 msgid "Choose a list to browse, search, and post messages."
-msgstr "<p>選一個清單來瀏覽、搜尋與發表訊息</p>"
+msgstr "選一個清單來瀏覽、搜尋與發表訊息"
 
 #: plugins/mailman/www/mailman_utils.php:19
 #, php-format
@@ -23848,10 +23847,6 @@ msgstr "我的個人首頁"
 #~ msgid "Group_id in db result does not match Group Object"
 #~ msgstr "資料庫中的群組編號與群組物件不一致"
 
-#, fuzzy
-#~ msgid "<em>Private project</em>"
-#~ msgstr "私人群組"
-
 #~ msgid "Member since:"
 #~ msgstr "帳號建立日期"
 
@@ -25488,13 +25483,6 @@ msgstr "我的個人首頁"
 
 #~ msgid "Error - this news item was not found"
 #~ msgstr "錯誤 - 沒發現新聞"
-
-#, fuzzy
-#~ msgid "Update</p>"
-#~ msgstr "更新"
-
-#~ msgid "<p>Choose a list to browse, search, and post messages.</p>"
-#~ msgstr "<p>選一個清單來瀏覽、搜尋與發表訊息</p>"
 
 #~ msgid "License:"
 #~ msgstr "授權方式："

@@ -23004,10 +23004,6 @@ msgstr "Лична Информация"
 #~ msgid "Permission denied"
 #~ msgstr "Разрешението е отказано."
 
-#, fuzzy
-#~ msgid "<em>Private project</em>"
-#~ msgstr "Регистрирани проекти"
-
 #~ msgid "Member since:"
 #~ msgstr "Член от:"
 
@@ -23811,10 +23807,6 @@ msgstr "Лична Информация"
 
 #~ msgid "Error - this news item was not found"
 #~ msgstr "Грешка - тази новина не е намерена"
-
-#, fuzzy
-#~ msgid "Update</p>"
-#~ msgstr "Дневникът е обновен"
 
 #~ msgid "License:"
 #~ msgstr "Лизенз:"

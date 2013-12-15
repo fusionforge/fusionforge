@@ -24329,28 +24329,6 @@ msgstr "Persönliche Seite für %s"
 #~ msgid "Registation Complete"
 #~ msgstr "Registrierung abgeschlossen"
 
-#, fuzzy
-#~ msgid ""
-#~ "<p>Your project has been submitted to the %1$s administrators. Within 72 "
-#~ "hours, you will receive notification of their decision and further "
-#~ "instructions.</p><p>Thank you for choosing %1$s</p>"
-#~ msgstr ""
-#~ "Ihr Projekt wurde den %1$s Administratoren vorgeschlagen. Innerhalb von "
-#~ "72 Stunden werden Sie eine Benachrichtigung mit der Entscheidung und "
-#~ "weiteren Instruktionen erhalten.</p><p>Danke, daß Sie %1$s gewählt haben."
-
-#~ msgid "error"
-#~ msgstr "Fehler"
-
-#, fuzzy
-#~ msgid "Error: "
-#~ msgstr "Fehler"
-
-#, fuzzy
-#~ msgid "ERROR: "
-#~ msgstr "Fehler"
-
-#, fuzzy
 #~ msgid "Permission Denied"
 #~ msgstr "Erlaubnis verweigert"
 
@@ -24359,10 +24337,6 @@ msgstr "Persönliche Seite für %s"
 
 #~ msgid "Group_id in db result does not match Group Object"
 #~ msgstr "Group_id Datenbank-Ergebnis stimmt nicht mit Gruppen-Objekt überein"
-
-#, fuzzy
-#~ msgid "<em>Private project</em>"
-#~ msgstr "Private Projekte"
 
 #~ msgid "Member since:"
 #~ msgstr "Mitglied seit:"
@@ -25701,22 +25675,6 @@ msgstr "Persönliche Seite für %s"
 
 #, fuzzy
 #~ msgid ""
-#~ "<p>Documentation for GNU Arch (sometimes referred to as \"tla\") is "
-#~ "available <a href=\"http://www.gnu.org/software/gnu-arch/\">here</a>.</p>"
-#~ msgstr ""
-#~ "<p>Eine Dokumentation für GNU Arch (manchmal auch  \"tla\" genannt) ist "
-#~ "verfügbar <a href=\"http://www.gnu.org/software/gnu-arch/\">here</a>.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Documentation for Bazaar (sometimes referred to as \"bzr\") is available "
-#~ "<a href=\"http://bazaar-vcs.org/Documentation\">here</a>."
-#~ msgstr ""
-#~ "<p>Eine Dokumentation für Bazaar (manchmal auch  \"bzr\" genannt) ist "
-#~ "verfügbar <a href=\"http://bazaar-vcs.org/Documentation\">here</a>.</p>"
-
-#, fuzzy
-#~ msgid ""
 #~ "Only project developers can access the Bazaar branches via this method. "
 #~ "Enter your site password when prompted."
 #~ msgstr ""
@@ -25791,14 +25749,6 @@ msgstr "Persönliche Seite für %s"
 
 #, fuzzy
 #~ msgid ""
-#~ "CVS documentation is available <a href=\"http://cvsbook.red-bean.com/"
-#~ "\">here</a>."
-#~ msgstr ""
-#~ "<Eine CVS Dokumentation ist verfügbar<a href=\"http://cvsbook.red-bean."
-#~ "com/\">here</a>.</p>"
-
-#, fuzzy
-#~ msgid ""
 #~ "Only project developers can access the CVS tree via this method. SSH must "
 #~ "be installed on your client machine. Substitute <em>modulename</em> with "
 #~ "the proper values. Enter your site password when prompted."
@@ -25832,30 +25782,6 @@ msgstr "Persönliche Seite für %s"
 #, fuzzy
 #~ msgid "Browse Darcs Repository "
 #~ msgstr "Durchsuche Darcs Repository "
-
-#, fuzzy
-#~ msgid ""
-#~ "Documentation for Git is available at <a href=\"http://git-scm.com/"
-#~ "\">http://git-scm.com/</a>."
-#~ msgstr ""
-#~ "<p>Eine Dokumentation für Git ist verfügbar<a href=\"http://git-scm.com/"
-#~ "\">here</a>.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Documentation for Mercurial is available at <a href=\"http://hgbook.red-"
-#~ "bean.com/\">http://hgbook.red-bean.com/</a> . "
-#~ msgstr ""
-#~ "<p>Eine Dokumentation für Git ist verfügbar<a href=\"http://git-scm.com/"
-#~ "\">here</a>.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Documentation for Subversion (sometimes referred to as \"SVN\") is "
-#~ "available <a href=\"http://svnbook.red-bean.com/\">here</a>."
-#~ msgstr ""
-#~ "<p>Eine Dokumentation für Subversion (manchmal auch \"SVN\" benannt) ist "
-#~ "verfügbar <a href=\"http://svnbook.red-bean.com/\">here</a>.</p>"
 
 #, fuzzy
 #~ msgid ""
@@ -26786,15 +26712,6 @@ msgstr "Persönliche Seite für %s"
 
 #~ msgid "Error - this news item was not found"
 #~ msgstr "Fehler - diese Nachricht wurde nicht gefunden"
-
-#, fuzzy
-#~ msgid "Update</p>"
-#~ msgstr "Aktualisierung"
-
-#~ msgid "<p>Choose a list to browse, search, and post messages.</p>"
-#~ msgstr ""
-#~ "<p>Wählen Sie eine Liste zum Durchsuchen, suchen und um Nachrichten "
-#~ "posten.</p>"
 
 #~ msgid "License:"
 #~ msgstr "Lizenz:"

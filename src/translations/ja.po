@@ -10905,7 +10905,7 @@ msgstr ""
 #, fuzzy
 msgid "Choose a list to browse, search, and post messages."
 msgstr ""
-"<p>ニュースアイテムを選択するとニュースの 閲覧、検索、投稿ができます。<p>"
+"ニュースアイテムを選択するとニュースの 閲覧、検索、投稿ができます。"
 
 #: plugins/mailman/www/mailman_utils.php:19
 #, php-format
@@ -22843,10 +22843,6 @@ msgstr "%sのパーソナルページ"
 #, fuzzy
 #~ msgid "Permission denied"
 #~ msgstr "許可がありません"
-
-#, fuzzy
-#~ msgid "<em>Private project</em>"
-#~ msgstr "新規プロジェクト登録"
 
 #~ msgid "Member since:"
 #~ msgstr "メンバー登録日"

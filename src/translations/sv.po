@@ -21099,8 +21099,7 @@ msgid ""
 "containing further information shortly."
 msgstr ""
 "Ditt projekt har inlämnats till %1$s administratörerna. Inom 72 timmar, "
-"kommer du att få ett besked om deras beslut och ytterligare instruktioner.</"
-"p><p>Tack för att du valde %1$s"
+"kommer du att få ett besked om deras beslut och ytterligare instruktioner."
 
 #: www/register/index.php:178
 msgid ""
@@ -23747,33 +23746,8 @@ msgstr "Min personliga sida"
 #~ msgid "Registation Complete"
 #~ msgstr "Registrering färdig"
 
-#, fuzzy
-#~ msgid ""
-#~ "<p>Your project has been submitted to the %1$s administrators. Within 72 "
-#~ "hours, you will receive notification of their decision and further "
-#~ "instructions.</p><p>Thank you for choosing %1$s</p>"
-#~ msgstr ""
-#~ "Ditt projekt har inlämnats till %1$s administratörerna. Inom 72 timmar, "
-#~ "kommer du att få ett besked om deras beslut och ytterligare instruktioner."
-#~ "</p><p>Tack för att du valde %1$s"
-
-#~ msgid "error"
-#~ msgstr "fel"
-
-#, fuzzy
-#~ msgid "Error: "
-#~ msgstr "Fel"
-
-#, fuzzy
-#~ msgid "ERROR: "
-#~ msgstr "FEL"
-
 #~ msgid "Group_id in db result does not match Group Object"
 #~ msgstr "Grupp-ID i db-resultatet motsvarar inte gruppobjektet"
-
-#, fuzzy
-#~ msgid "<em>Private project</em>"
-#~ msgstr "Privata grupper"
 
 #~ msgid "Member since:"
 #~ msgstr "Medlem sedan"
@@ -25119,10 +25093,6 @@ msgstr "Min personliga sida"
 
 #~ msgid "Error - this news item was not found"
 #~ msgstr "Fel - hittade inte denna nyhetspost"
-
-#, fuzzy
-#~ msgid "Update</p>"
-#~ msgstr "Uppdaterad"
 
 #~ msgid "License:"
 #~ msgstr "Licens:"

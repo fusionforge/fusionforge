@@ -22249,10 +22249,6 @@ msgstr ""
 #~ msgid "No matches found for <em>%1$s</em>"
 #~ msgstr "Nie znaleziono żadnych dokumentów"
 
-#, fuzzy
-#~ msgid "<em>Private project</em>"
-#~ msgstr "Nazwa nowej grupy"
-
 #~ msgid "Member since:"
 #~ msgstr "Użytkownik od:"
 
@@ -22477,23 +22473,6 @@ msgstr ""
 
 #, fuzzy
 #~ msgid ""
-#~ "<p>Documentation for GNU Arch (sometimes referred to as \"tla\") is "
-#~ "available <a href=\"http://www.gnu.org/software/gnu-arch/\">here</a>.</p>"
-#~ msgstr ""
-#~ "<p>Dokumentacja Subversion (czasem określanego jako \"SVN\") dostępna "
-#~ "jest <a href=\"http://svnbook.red-bean.com/\">tutaj</a>.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Documentation for Bazaar (sometimes referred to as \"bzr\") is available "
-#~ "<a href=\"http://bazaar-vcs.org/Documentation\">here</a>."
-#~ msgstr ""
-#~ "<p>Dokumentacja Bazaar (czasem określanego jako \"bzr\") dostępna jest <a "
-#~ "href=\"http://doc.bazaar-vcs.org/latest/en/user-guide/index.html\">tutaj</"
-#~ "a>.</p>"
-
-#, fuzzy
-#~ msgid ""
 #~ "Only project developers can access the Bazaar branches via this method. "
 #~ "Enter your site password when prompted."
 #~ msgstr ""
@@ -22562,14 +22541,6 @@ msgstr ""
 
 #, fuzzy
 #~ msgid ""
-#~ "CVS documentation is available <a href=\"http://cvsbook.red-bean.com/"
-#~ "\">here</a>."
-#~ msgstr ""
-#~ "<p>Dokumentacja Subversion (czasem określanego jako \"SVN\") dostępna "
-#~ "jest <a href=\"http://svnbook.red-bean.com/\">tutaj</a>.</p>"
-
-#, fuzzy
-#~ msgid ""
 #~ "Only project developers can access the CVS tree via this method. SSH must "
 #~ "be installed on your client machine. Substitute <em>modulename</em> with "
 #~ "the proper values. Enter your site password when prompted."
@@ -22601,30 +22572,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Repository name: "
 #~ msgstr "Login:"
-
-#, fuzzy
-#~ msgid ""
-#~ "Documentation for Git is available at <a href=\"http://git-scm.com/"
-#~ "\">http://git-scm.com/</a>."
-#~ msgstr ""
-#~ "<p>Dokumentacja Subversion (czasem określanego jako \"SVN\") dostępna "
-#~ "jest <a href=\"http://svnbook.red-bean.com/\">tutaj</a>.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Documentation for Mercurial is available at <a href=\"http://hgbook.red-"
-#~ "bean.com/\">http://hgbook.red-bean.com/</a> . "
-#~ msgstr ""
-#~ "<p>Dokumentacja Subversion (czasem określanego jako \"SVN\") dostępna "
-#~ "jest <a href=\"http://svnbook.red-bean.com/\">tutaj</a>.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Documentation for Subversion (sometimes referred to as \"SVN\") is "
-#~ "available <a href=\"http://svnbook.red-bean.com/\">here</a>."
-#~ msgstr ""
-#~ "<p>Dokumentacja Subversion (czasem określanego jako \"SVN\") dostępna "
-#~ "jest <a href=\"http://svnbook.red-bean.com/\">tutaj</a>.</p>"
 
 #, fuzzy
 #~ msgid ""

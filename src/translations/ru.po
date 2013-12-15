@@ -11280,9 +11280,8 @@ msgid ""
 msgstr ""
 
 #: plugins/mailman/www/index.php:71 www/mail/index.php:74
-#, fuzzy
 msgid "Choose a list to browse, search, and post messages."
-msgstr "<p>Выберите список для просмотра, поиска и добавления сообщений.</p>"
+msgstr "Выберите список для просмотра, поиска и добавления сообщений."
 
 #: plugins/mailman/www/mailman_utils.php:19
 #, php-format
@@ -21546,8 +21545,7 @@ msgid ""
 "containing further information shortly."
 msgstr ""
 "Ваш запрос на регистрацию проекта отправлен администратору %1$s. В течении "
-"72 часов вы получите уведомление о его решении и дальнейшие инструкции.</"
-"p><p>Спасибо за использование %1$s"
+"72 часов вы получите уведомление о его решении и дальнейшие инструкции."
 
 #: www/register/index.php:178
 msgid ""
@@ -24402,28 +24400,6 @@ msgstr "Персональная страница для %s"
 #~ msgid "Registation Complete"
 #~ msgstr "Регистрация завершена"
 
-#, fuzzy
-#~ msgid ""
-#~ "<p>Your project has been submitted to the %1$s administrators. Within 72 "
-#~ "hours, you will receive notification of their decision and further "
-#~ "instructions.</p><p>Thank you for choosing %1$s</p>"
-#~ msgstr ""
-#~ "Ваш запрос на регистрацию проекта отправлен администратору %1$s. В "
-#~ "течении 72 часов вы получите уведомление о его решении и дальнейшие "
-#~ "инструкции.</p><p>Спасибо за использование %1$s"
-
-#~ msgid "error"
-#~ msgstr "ошибка"
-
-#, fuzzy
-#~ msgid "Error: "
-#~ msgstr "Ошибка"
-
-#, fuzzy
-#~ msgid "ERROR: "
-#~ msgstr "ОШИБКА"
-
-#, fuzzy
 #~ msgid "Permission Denied"
 #~ msgstr "Доступ запрещен"
 
@@ -24432,10 +24408,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "Group_id in db result does not match Group Object"
 #~ msgstr "Идентификатор группы в базе не соответствует объекту"
-
-#, fuzzy
-#~ msgid "<em>Private project</em>"
-#~ msgstr "Закрытые группы"
 
 #~ msgid "Member since:"
 #~ msgstr "Дата регистрации участника:"
@@ -25529,22 +25501,6 @@ msgstr "Персональная страница для %s"
 #~ "тексте."
 
 #, fuzzy
-#~ msgid ""
-#~ "<p>Documentation for GNU Arch (sometimes referred to as \"tla\") is "
-#~ "available <a href=\"http://www.gnu.org/software/gnu-arch/\">here</a>.</p>"
-#~ msgstr ""
-#~ "<p>Документация по устройству репозитория (чаще называется \"SVN\") <a "
-#~ "href=\"http://svnbook.red-bean.com/\"> доступна тут </a></p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Documentation for Bazaar (sometimes referred to as \"bzr\") is available "
-#~ "<a href=\"http://bazaar-vcs.org/Documentation\">here</a>."
-#~ msgstr ""
-#~ "<p>Документация по устройству репозитория (чаще называется \"SVN\") <a "
-#~ "href=\"http://svnbook.red-bean.com/\"> доступна тут </a></p>"
-
-#, fuzzy
 #~ msgid "Bazaar Repository Browser"
 #~ msgstr "История репозитория"
 
@@ -25603,14 +25559,6 @@ msgstr "Персональная страница для %s"
 #~ "пароля, введите Ваш пароль доступа к сайту.</p>"
 
 #, fuzzy
-#~ msgid ""
-#~ "CVS documentation is available <a href=\"http://cvsbook.red-bean.com/"
-#~ "\">here</a>."
-#~ msgstr ""
-#~ "<p>Документация по устройству репозитория (чаще называется \"SVN\") <a "
-#~ "href=\"http://svnbook.red-bean.com/\"> доступна тут </a></p>"
-
-#, fuzzy
 #~ msgid "CVS Repository Browser"
 #~ msgstr "SCM репозиторий"
 
@@ -25628,30 +25576,6 @@ msgstr "Персональная страница для %s"
 #, fuzzy
 #~ msgid "Repository name: "
 #~ msgstr "История репозитория"
-
-#, fuzzy
-#~ msgid ""
-#~ "Documentation for Git is available at <a href=\"http://git-scm.com/"
-#~ "\">http://git-scm.com/</a>."
-#~ msgstr ""
-#~ "<p>Документация по устройству репозитория (чаще называется \"SVN\") <a "
-#~ "href=\"http://svnbook.red-bean.com/\"> доступна тут </a></p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Documentation for Mercurial is available at <a href=\"http://hgbook.red-"
-#~ "bean.com/\">http://hgbook.red-bean.com/</a> . "
-#~ msgstr ""
-#~ "<p>Документация по устройству репозитория (чаще называется \"SVN\") <a "
-#~ "href=\"http://svnbook.red-bean.com/\"> доступна тут </a></p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Documentation for Subversion (sometimes referred to as \"SVN\") is "
-#~ "available <a href=\"http://svnbook.red-bean.com/\">here</a>."
-#~ msgstr ""
-#~ "<p>Документация по устройству репозитория (чаще называется \"SVN\") <a "
-#~ "href=\"http://svnbook.red-bean.com/\"> доступна тут </a></p>"
 
 #, fuzzy
 #~ msgid "Subversion Repository Browser"
@@ -26495,14 +26419,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "Error - this news item was not found"
 #~ msgstr "Таких новостей не найдено"
-
-#, fuzzy
-#~ msgid "Update</p>"
-#~ msgstr "Обновить"
-
-#~ msgid "<p>Choose a list to browse, search, and post messages.</p>"
-#~ msgstr ""
-#~ "<p>Выберите список для просмотра, поиска и добавления сообщений.</p>"
 
 #~ msgid "License:"
 #~ msgstr "Лицензия:"
@@ -27623,13 +27539,6 @@ msgstr "Персональная страница для %s"
 
 #~ msgid "<strong>%1$s</strong> updates, <strong>%2$s</strong> adds"
 #~ msgstr "<strong>%1$s</strong> измений, <strong>%2$s</strong> дополнений"
-
-#~ msgid ""
-#~ "Some CVS documentation is available <a href=\"http://www.nongnu.org/cvs/"
-#~ "\">Here</a>"
-#~ msgstr ""
-#~ "Подробная документация о репозиториях <a href=\"http://www.nongnu.org/cvs/"
-#~ "\">На www.nongnu.org/cvs</a>"
 
 #~ msgid ""
 #~ "<strong>Browse the CVS Tree</strong><p>Browsing the CVS tree gives you a "

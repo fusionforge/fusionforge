@@ -11156,9 +11156,8 @@ msgid ""
 msgstr ""
 
 #: plugins/mailman/www/index.php:71 www/mail/index.php:74
-#, fuzzy
 msgid "Choose a list to browse, search, and post messages."
-msgstr "<p>选一个邮件列表来浏览、搜索与发布消息</p>"
+msgstr "选一个邮件列表来浏览、搜索与发布消息"
 
 #: plugins/mailman/www/mailman_utils.php:19
 #, php-format
@@ -21123,7 +21122,7 @@ msgid ""
 "containing further information shortly."
 msgstr ""
 "您的项目计划已经被提交给 %1$s 的管理员，在72小时之内，您将收到管理员的决定与"
-"更进一步指示的通知。</p><p>感谢您选择 %1$s"
+"更进一步指示的通知。"
 
 #: www/register/index.php:178
 msgid ""
@@ -23834,10 +23833,6 @@ msgstr "我的个人首页"
 #~ msgid "Group_id in db result does not match Group Object"
 #~ msgstr "数据库中的群组编号与群组对象不一致"
 
-#, fuzzy
-#~ msgid "<em>Private project</em>"
-#~ msgstr "私人群组"
-
 #~ msgid "Member since:"
 #~ msgstr "帐号创建日期"
 
@@ -25544,13 +25539,6 @@ msgstr "我的个人首页"
 
 #~ msgid "Error - this news item was not found"
 #~ msgstr "错误 - 没发现新闻"
-
-#, fuzzy
-#~ msgid "Update</p>"
-#~ msgstr "更新"
-
-#~ msgid "<p>Choose a list to browse, search, and post messages.</p>"
-#~ msgstr "<p>选一个邮件列表来浏览、搜索与发布消息</p>"
 
 #~ msgid "License:"
 #~ msgstr "授权方式："

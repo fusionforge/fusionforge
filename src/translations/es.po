@@ -7478,7 +7478,7 @@ msgstr "Proyecto Creado"
 #: common/widget/Widget_MyProjects.class.php:96
 #, fuzzy
 msgid "Private project"
-msgstr "Grupos Privados"
+msgstr "Proyecto Privado"
 
 #: common/widget/Widget_MyProjects.class.php:109
 #, fuzzy
@@ -20769,8 +20769,7 @@ msgid ""
 "containing further information shortly."
 msgstr ""
 "Su proyecto ha sido enviado a los administradores de %1$s . Transcurridas 72 "
-"horas, recibira una notificación sobre la decisión e instrucciones.</"
-"p><p>Gracias por elegir %1$s"
+"horas, recibira una notificación sobre la decisión e instrucciones."
 
 #: www/register/index.php:178
 msgid ""
@@ -23645,32 +23644,6 @@ msgstr "Página personal de %s"
 #~ msgid "Registation Complete"
 #~ msgstr "Registro completo"
 
-#~ msgid ""
-#~ "<p>Your project has been submitted to the %1$s administrators. Within 72 "
-#~ "hours, you will receive notification of their decision and further "
-#~ "instructions.</p><p>Thank you for choosing %1$s</p>"
-#~ msgstr ""
-#~ "<p>Su proyecto ha sido enviado a los administradores de %1$s . "
-#~ "Transcurridas 72 horas, recibira una notificación sobre la decisión e "
-#~ "instrucciones.</p><p>Gracias por elegir %1$s</p>"
-
-#~ msgid "<div class=\"error\">ERROR: %1$s</div>"
-#~ msgstr "<div class=\"error\">ERROR: %1$s</div>"
-
-#~ msgid "<div class=\"error\">Approval ERROR: %1$s</div>"
-#~ msgstr ""
-#~ "<div class=\"error\">Hubo un error en la aprobación ERROR: %1$s</div>"
-
-#~ msgid "error"
-#~ msgstr "error"
-
-#, fuzzy
-#~ msgid "Error: "
-#~ msgstr "Error"
-
-#~ msgid "ERROR: "
-#~ msgstr "ERROR: "
-
 #~ msgid "Permission Denied"
 #~ msgstr "Permiso denegado"
 
@@ -23681,9 +23654,6 @@ msgstr "Página personal de %s"
 #~ msgstr ""
 #~ "Group_id en Grupo los resultados de la Base de Datos no coincide con el "
 #~ "Objeto de"
-
-#~ msgid "<em>Private project</em>"
-#~ msgstr "<em>Proyecto Privado</em>"
 
 #~ msgid "Cannot Process your request : No TYPE specified"
 #~ msgstr ""
@@ -24867,20 +24837,6 @@ msgstr "Página personal de %s"
 #~ msgid "Displaying %1$s per page. Projects sorted by alphabetical order."
 #~ msgstr " Mostrando %1$s por paǵina. Proyectos ordenados alfabéticamente."
 
-#~ msgid ""
-#~ "<p>Documentation for GNU Arch (sometimes referred to as \"tla\") is "
-#~ "available <a href=\"http://www.gnu.org/software/gnu-arch/\">here</a>.</p>"
-#~ msgstr ""
-#~ "<p>Documentacion para GNU Arch (conocido como \"tla\") esta disponible <a "
-#~ "href=\"http://www.gnu.org/software/gnu-arch/\">aqui</a>. </p>"
-
-#~ msgid ""
-#~ "Documentation for Bazaar (sometimes referred to as \"bzr\") is available "
-#~ "<a href=\"http://bazaar-vcs.org/Documentation\">here</a>."
-#~ msgstr ""
-#~ "Documentacion para Bazaar (conocido como \"bzr\") esta disponible <a href="
-#~ "\"http://bazaar-vcs.org/Documentation\">aqui</a>."
-
 #~ msgid "Developer Bazaar Access via SSH"
 #~ msgstr "Desarrolladores Bazaar Accesos via SSH"
 
@@ -24939,13 +24895,6 @@ msgstr "Página personal de %s"
 #~ "contraseña del sitio cuando le sea requerida.</p>"
 
 #~ msgid ""
-#~ "CVS documentation is available <a href=\"http://cvsbook.red-bean.com/"
-#~ "\">here</a>."
-#~ msgstr ""
-#~ "Documentación de CVS disponible <a href=\"http://cvsbook.red-bean.com/"
-#~ "\">aquí</a>."
-
-#~ msgid ""
 #~ "Only project developers can access the CVS tree via this method. SSH must "
 #~ "be installed on your client machine. Substitute <em>modulename</em> with "
 #~ "the proper values. Enter your site password when prompted."
@@ -24975,21 +24924,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Repository name: "
 #~ msgstr "Nombre repositorio: "
-
-#, fuzzy
-#~ msgid ""
-#~ "Documentation for Mercurial is available at <a href=\"http://hgbook.red-"
-#~ "bean.com/\">http://hgbook.red-bean.com/</a> . "
-#~ msgstr ""
-#~ "Documentación para Git disponible en <a·href=\"http://git-scm.com/"
-#~ "\">http://git-scm.com/</a>."
-
-#~ msgid ""
-#~ "Documentation for Subversion (sometimes referred to as \"SVN\") is "
-#~ "available <a href=\"http://svnbook.red-bean.com/\">here</a>."
-#~ msgstr ""
-#~ "Documentación para Subversion (conocido como \"SVN\") está disponible <a "
-#~ "href=\"http://svnbook.red-bean.com/\">aqui</a>."
 
 #~ msgid "Developer Subversion Access via SSH"
 #~ msgstr "Acceso Desarrolladores Subversion via SSH"
@@ -25890,13 +25824,6 @@ msgstr "Página personal de %s"
 #, fuzzy
 #~ msgid "ERROR: User not removed:"
 #~ msgstr "ERROR: Usuario no eliminado: %s"
-
-#, fuzzy
-#~ msgid "Update</p>"
-#~ msgstr "Actualizar"
-
-#~ msgid "<p>Choose a list to browse, search, and post messages.</p>"
-#~ msgstr "<p>Elija una lista para navegar, buscar y escribir mensajes.</p>"
 
 #, fuzzy
 #~ msgid "Error : Could not open connection"
@@ -27040,15 +26967,6 @@ msgstr "Página personal de %s"
 
 #~ msgid "Can't find theme directory!"
 #~ msgstr "No puedo encontrar el directorio del tema!"
-
-#~ msgid ""
-#~ "<p>Your project has been automatically approved.  You should receive an "
-#~ "email containing further information shortly.</p><p>Thank you for "
-#~ "choosing %1$s</p>"
-#~ msgstr ""
-#~ "Su proyecto ha sido enviado a los administradores de %1$s . Transcurridas "
-#~ "72 horas, recibira una notificación sobre la decisión e instrucciones.</"
-#~ "p><p>Gracias por elegir %1$s"
 
 #~ msgid ""
 #~ "Choose a Project/Subproject in the Task Manager. You will then have to "

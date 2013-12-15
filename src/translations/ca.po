@@ -21292,7 +21292,7 @@ msgid ""
 msgstr ""
 "El vostre projecte ha estat tramès als administradors de %1$s. Dins d'un "
 "termini de 72 hores, rebreu una notificació de la seva decisió i més "
-"instruccions.</p><p>Gràcies per escollir %1$s"
+"instruccions."
 
 #: www/register/index.php:178
 msgid ""
@@ -24017,27 +24017,6 @@ msgstr "La meva pàgina personal"
 #~ msgstr "Registre complet"
 
 #, fuzzy
-#~ msgid ""
-#~ "<p>Your project has been submitted to the %1$s administrators. Within 72 "
-#~ "hours, you will receive notification of their decision and further "
-#~ "instructions.</p><p>Thank you for choosing %1$s</p>"
-#~ msgstr ""
-#~ "El vostre projecte ha estat tramès als administradors de %1$s. Dins d'un "
-#~ "termini de 72 hores, rebreu una notificació de la seva decisió i més "
-#~ "instruccions.</p><p>Gràcies per escollir %1$s"
-
-#~ msgid "error"
-#~ msgstr "error"
-
-#, fuzzy
-#~ msgid "Error: "
-#~ msgstr "Error"
-
-#, fuzzy
-#~ msgid "ERROR: "
-#~ msgstr "ERROR"
-
-#, fuzzy
 #~ msgid "Permission Denied"
 #~ msgstr "Permís denegat"
 
@@ -24047,10 +24026,6 @@ msgstr "La meva pàgina personal"
 
 #~ msgid "Group_id in db result does not match Group Object"
 #~ msgstr "El Group_id al resultat db no coincideix amb l'objecte del grup"
-
-#, fuzzy
-#~ msgid "<em>Private project</em>"
-#~ msgstr "Grups privats"
 
 #~ msgid "Member since:"
 #~ msgstr "Membre des de:"
@@ -25704,13 +25679,6 @@ msgstr "La meva pàgina personal"
 
 #~ msgid "Error - this news item was not found"
 #~ msgstr "Error - no s'ha trobat aquest nou element"
-
-#, fuzzy
-#~ msgid "Update</p>"
-#~ msgstr "Actualitza"
-
-#~ msgid "<p>Choose a list to browse, search, and post messages.</p>"
-#~ msgstr "<p>Trieu una llista per navegar, cercar i enviar missatges.</p>"
 
 #~ msgid "Approve/Reject"
 #~ msgstr "Aprova/Rebutja"

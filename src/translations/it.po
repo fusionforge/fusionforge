@@ -21259,8 +21259,7 @@ msgid ""
 "containing further information shortly."
 msgstr ""
 "Il progetto è stato sottoposto agli amministratori di %1$s. Entro 72 ore "
-"riceverai notifica della loro decisione e ulteriori istruzioni.</p><p>Grazie "
-"per aver scelto %1$s"
+"riceverai notifica della loro decisione e ulteriori istruzioni."
 
 #: www/register/index.php:178
 msgid ""
@@ -23988,28 +23987,6 @@ msgstr "Pagina Personale"
 #~ msgid "Registation Complete"
 #~ msgstr "Registrazione completata"
 
-#, fuzzy
-#~ msgid ""
-#~ "<p>Your project has been submitted to the %1$s administrators. Within 72 "
-#~ "hours, you will receive notification of their decision and further "
-#~ "instructions.</p><p>Thank you for choosing %1$s</p>"
-#~ msgstr ""
-#~ "Il progetto è stato sottoposto agli amministratori di %1$s. Entro 72 ore "
-#~ "riceverai notifica della loro decisione e ulteriori istruzioni.</"
-#~ "p><p>Grazie per aver scelto %1$s"
-
-#~ msgid "error"
-#~ msgstr "errore"
-
-#, fuzzy
-#~ msgid "Error: "
-#~ msgstr "Errore"
-
-#, fuzzy
-#~ msgid "ERROR: "
-#~ msgstr "ERRORE"
-
-#, fuzzy
 #~ msgid "Permission Denied"
 #~ msgstr "Autorizzazione negata"
 
@@ -24018,10 +23995,6 @@ msgstr "Pagina Personale"
 
 #~ msgid "Group_id in db result does not match Group Object"
 #~ msgstr "Group_id in in risultato db non corrisponde a oggetto gruppo"
-
-#, fuzzy
-#~ msgid "<em>Private project</em>"
-#~ msgstr "Progetti privati"
 
 #~ msgid "Member since:"
 #~ msgstr "Data registrazione:"
@@ -25774,14 +25747,6 @@ msgstr "Pagina Personale"
 
 #~ msgid "Error - this news item was not found"
 #~ msgstr "Errore - questa notizia non è stata trovata"
-
-#, fuzzy
-#~ msgid "Update</p>"
-#~ msgstr "Aggiorna"
-
-#~ msgid "<p>Choose a list to browse, search, and post messages.</p>"
-#~ msgstr ""
-#~ "<p>Seleziona una lista per scorrere, cercare e inserire messaggi.</p>"
 
 #~ msgid "License:"
 #~ msgstr "Licenza:"

@@ -7669,12 +7669,12 @@ msgstr "Abandonando o proxecto"
 #: common/widget/Widget_MyProjects.class.php:88
 #, fuzzy
 msgid "Leave project"
-msgstr "Proxectos privados "
+msgstr ""
 
 #: common/widget/Widget_MyProjects.class.php:96
 #, fuzzy
 msgid "Private project"
-msgstr "Proxectos privados "
+msgstr "Proxectos privados"
 
 #: common/widget/Widget_MyProjects.class.php:109
 #, fuzzy
@@ -21422,8 +21422,7 @@ msgid ""
 "containing further information shortly."
 msgstr ""
 "O seu proxecto envióuselle aos administradores de %1$s. En 72 horas, deberá "
-"recibir unha notificación da súa decisión e con instrucións para o futuro.<p/"
-">Grazas por elixir %1$s"
+"recibir unha notificación da súa decisión e con instrucións para o futuro."
 
 #: www/register/index.php:178
 msgid ""
@@ -24327,28 +24326,6 @@ msgstr "Páxina persoal de %s"
 #~ msgid "Registation Complete"
 #~ msgstr "Completouse o rexistro"
 
-#, fuzzy
-#~ msgid ""
-#~ "<p>Your project has been submitted to the %1$s administrators. Within 72 "
-#~ "hours, you will receive notification of their decision and further "
-#~ "instructions.</p><p>Thank you for choosing %1$s</p>"
-#~ msgstr ""
-#~ "O seu proxecto envióuselle aos administradores de %1$s. En 72 horas, "
-#~ "deberá recibir unha notificación da súa decisión e con instrucións para o "
-#~ "futuro.<p/>Grazas por elixir %1$s"
-
-#~ msgid "error"
-#~ msgstr "Erro "
-
-#, fuzzy
-#~ msgid "Error: "
-#~ msgstr "Erro "
-
-#, fuzzy
-#~ msgid "ERROR: "
-#~ msgstr "Erro "
-
-#, fuzzy
 #~ msgid "Permission Denied"
 #~ msgstr "Permiso denegado"
 
@@ -24357,10 +24334,6 @@ msgstr "Páxina persoal de %s"
 
 #~ msgid "Group_id in db result does not match Group Object"
 #~ msgstr "O group_id na base de datos non coincide co obxecto do grupo"
-
-#, fuzzy
-#~ msgid "<em>Private project</em>"
-#~ msgstr "Proxectos privados "
 
 #~ msgid "Member since:"
 #~ msgstr "Membro desde: "
@@ -25623,23 +25596,6 @@ msgstr "Páxina persoal de %s"
 
 #, fuzzy
 #~ msgid ""
-#~ "<p>Documentation for GNU Arch (sometimes referred to as \"tla\") is "
-#~ "available <a href=\"http://www.gnu.org/software/gnu-arch/\">here</a>.</p>"
-#~ msgstr ""
-#~ "<p>Hai dispoñíbel documentación de Subversion (ás veces chámaselle \"SVN"
-#~ "\") <a href=\"http://svnbook.red-bean.com/\">aquí</a>.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Documentation for Bazaar (sometimes referred to as \"bzr\") is available "
-#~ "<a href=\"http://bazaar-vcs.org/Documentation\">here</a>."
-#~ msgstr ""
-#~ "<p>Hai dispoñíbel documentación de Bazaar (ás veces chámaselle \"bzr\") "
-#~ "<a href=\"http://doc.bazaar-vcs.org/latest/en/user-guide/index.html"
-#~ "\">aquí</a>.</p>"
-
-#, fuzzy
-#~ msgid ""
 #~ "Only project developers can access the Bazaar branches via this method. "
 #~ "Enter your site password when prompted."
 #~ msgstr ""
@@ -25716,14 +25672,6 @@ msgstr "Páxina persoal de %s"
 
 #, fuzzy
 #~ msgid ""
-#~ "CVS documentation is available <a href=\"http://cvsbook.red-bean.com/"
-#~ "\">here</a>."
-#~ msgstr ""
-#~ "<p>Hai dispoñíbel documentación de Subversion (ás veces chámaselle \"SVN"
-#~ "\") <a href=\"http://svnbook.red-bean.com/\">aquí</a>.</p>"
-
-#, fuzzy
-#~ msgid ""
 #~ "Only project developers can access the CVS tree via this method. SSH must "
 #~ "be installed on your client machine. Substitute <em>modulename</em> with "
 #~ "the proper values. Enter your site password when prompted."
@@ -25763,30 +25711,6 @@ msgstr "Páxina persoal de %s"
 #, fuzzy
 #~ msgid "Repository name: "
 #~ msgstr "Historial do repositorio"
-
-#, fuzzy
-#~ msgid ""
-#~ "Documentation for Git is available at <a href=\"http://git-scm.com/"
-#~ "\">http://git-scm.com/</a>."
-#~ msgstr ""
-#~ "<p>Hai dispoñíbel documentación de Subversion (ás veces chámaselle \"SVN"
-#~ "\") <a href=\"http://svnbook.red-bean.com/\">aquí</a>.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Documentation for Mercurial is available at <a href=\"http://hgbook.red-"
-#~ "bean.com/\">http://hgbook.red-bean.com/</a> . "
-#~ msgstr ""
-#~ "<p>Hai dispoñíbel documentación de Subversion (ás veces chámaselle \"SVN"
-#~ "\") <a href=\"http://svnbook.red-bean.com/\">aquí</a>.</p>"
-
-#, fuzzy
-#~ msgid ""
-#~ "Documentation for Subversion (sometimes referred to as \"SVN\") is "
-#~ "available <a href=\"http://svnbook.red-bean.com/\">here</a>."
-#~ msgstr ""
-#~ "<p>Hai dispoñíbel documentación de Subversion (ás veces chámaselle \"SVN"
-#~ "\") <a href=\"http://svnbook.red-bean.com/\">aquí</a>.</p>"
 
 #, fuzzy
 #~ msgid ""
@@ -26709,13 +26633,6 @@ msgstr "Páxina persoal de %s"
 
 #~ msgid "Error - this news item was not found"
 #~ msgstr "Produciuse un erro - non se atopou o elemento de novas"
-
-#, fuzzy
-#~ msgid "Update</p>"
-#~ msgstr "Actualizar "
-
-#~ msgid "<p>Choose a list to browse, search, and post messages.</p>"
-#~ msgstr "<p>Escolla unha lista para navegar, buscar e publicar mensaxes.</p>"
 
 #~ msgid "License:"
 #~ msgstr "Licenza:"
@@ -27814,13 +27731,6 @@ msgstr "Páxina persoal de %s"
 #~ msgid "<strong>%1$s</strong> updates, <strong>%2$s</strong> adds"
 #~ msgstr ""
 #~ "<strong>%1$s</strong> actualizacións, <strong>%2$s</strong> adicións"
-
-#~ msgid ""
-#~ "Some CVS documentation is available <a href=\"http://www.nongnu.org/cvs/"
-#~ "\">Here</a>"
-#~ msgstr ""
-#~ "Hai dispoñíbel algunha documentación sobre CVS <a href=\"http://www."
-#~ "nongnu.org/cvs/\">aquí</a>"
 
 #~ msgid ""
 #~ "<strong>Browse the CVS Tree</strong><p>Browsing the CVS tree gives you a "

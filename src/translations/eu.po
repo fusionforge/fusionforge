@@ -21172,8 +21172,7 @@ msgid ""
 "containing further information shortly."
 msgstr ""
 "Zure proiektua %1$s administrariei bidali zaie. 72 ordu igaro ostean oharra "
-"jasoko dezu erabakiaren eta argibideen inguruan.</p><p>Eskerrak %1$s "
-"aukeratzeagatik"
+"jasoko dezu erabakiaren eta argibideen inguruan."
 
 #: www/register/index.php:178
 msgid ""
@@ -23859,28 +23858,6 @@ msgstr "Nere orri pertsonala"
 #~ msgid "Registation Complete"
 #~ msgstr "Erregistro osoa"
 
-#, fuzzy
-#~ msgid ""
-#~ "<p>Your project has been submitted to the %1$s administrators. Within 72 "
-#~ "hours, you will receive notification of their decision and further "
-#~ "instructions.</p><p>Thank you for choosing %1$s</p>"
-#~ msgstr ""
-#~ "Zure proiektua %1$s administrariei bidali zaie. 72 ordu igaro ostean "
-#~ "oharra jasoko dezu erabakiaren eta argibideen inguruan.</p><p>Eskerrak "
-#~ "%1$s aukeratzeagatik"
-
-#~ msgid "error"
-#~ msgstr "Akatsa"
-
-#, fuzzy
-#~ msgid "Error: "
-#~ msgstr "Akatsa"
-
-#, fuzzy
-#~ msgid "ERROR: "
-#~ msgstr "Akatsa"
-
-#, fuzzy
 #~ msgid "Permission Denied"
 #~ msgstr "Baimena ukatu da"
 
@@ -23890,10 +23867,6 @@ msgstr "Nere orri pertsonala"
 #~ msgid "Group_id in db result does not match Group Object"
 #~ msgstr ""
 #~ "Group_id -ko datu basearen erantzunak ez datoz taldearen objektuarekin bat"
-
-#, fuzzy
-#~ msgid "<em>Private project</em>"
-#~ msgstr "Talde pribatua"
 
 #~ msgid "Member since:"
 #~ msgstr "Noiztik bazkide"
@@ -25421,14 +25394,6 @@ msgstr "Nere orri pertsonala"
 
 #~ msgid "Error - this news item was not found"
 #~ msgstr "Akatsa - ez da albisteetan elementu hori aurkitu"
-
-#, fuzzy
-#~ msgid "Update</p>"
-#~ msgstr "Eguneratua"
-
-#~ msgid "<p>Choose a list to browse, search, and post messages.</p>"
-#~ msgstr ""
-#~ "<p>Aukeratu zerrenda bat, aztertu, biltau eta mezuak bidaltzeko.</p>"
 
 #~ msgid "License:"
 #~ msgstr "Lizentzia:"

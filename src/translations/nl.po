@@ -21284,7 +21284,7 @@ msgid ""
 "containing further information shortly."
 msgstr ""
 "Je projectaanvraag is ingediend bij de  %1$s beheerder. Binnen 72 uur "
-"ontvang je een beslissing over de aanvraag, en verdere instructies.</p>"
+"ontvang je een beslissing over de aanvraag, en verdere instructies."
 
 #: www/register/index.php:178
 msgid ""
@@ -24010,27 +24010,6 @@ msgstr "Mijn persoonlijke pagina"
 #~ msgid "Registation Complete"
 #~ msgstr "Registratie compleet"
 
-#, fuzzy
-#~ msgid ""
-#~ "<p>Your project has been submitted to the %1$s administrators. Within 72 "
-#~ "hours, you will receive notification of their decision and further "
-#~ "instructions.</p><p>Thank you for choosing %1$s</p>"
-#~ msgstr ""
-#~ "Je projectaanvraag is ingediend bij de  %1$s beheerder. Binnen 72 uur "
-#~ "ontvang je een beslissing over de aanvraag, en verdere instructies.</p>"
-
-#~ msgid "error"
-#~ msgstr "Fout"
-
-#, fuzzy
-#~ msgid "Error: "
-#~ msgstr "Fout"
-
-#, fuzzy
-#~ msgid "ERROR: "
-#~ msgstr "Fout"
-
-#, fuzzy
 #~ msgid "Permission Denied"
 #~ msgstr "Toegang geweigerd"
 
@@ -24040,10 +24019,6 @@ msgstr "Mijn persoonlijke pagina"
 
 #~ msgid "Group_id in db result does not match Group Object"
 #~ msgstr "Groep ID in database resultaat komt niet overeen met groep object"
-
-#, fuzzy
-#~ msgid "<em>Private project</em>"
-#~ msgstr "Besloten groepen"
 
 #~ msgid "Member since:"
 #~ msgstr "Lid sinds"
@@ -25769,14 +25744,6 @@ msgstr "Mijn persoonlijke pagina"
 
 #~ msgid "Error - this news item was not found"
 #~ msgstr "Fout - nieuws onderwerp niet gevonden"
-
-#, fuzzy
-#~ msgid "Update</p>"
-#~ msgstr "Aanpassen"
-
-#~ msgid "<p>Choose a list to browse, search, and post messages.</p>"
-#~ msgstr ""
-#~ "<p>Kies een lijst als je berichten wilt zoeken, lezen of plaatsen.</p>"
 
 #~ msgid "License:"
 #~ msgstr "Licentie:"
