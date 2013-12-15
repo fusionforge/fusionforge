@@ -74,7 +74,7 @@ scriptdir=`cd \`dirname $0\`; pwd`
 . $scriptdir/install/detect_os
 
 FUSIONFORGE_DEFAULT_SRC_DIR=$(cd $(dirname $0); pwd)
-FUSIONFORGE_DEFAULT_DIR=$FORGE_HOME
+FUSIONFORGE_DEFAULT_DIR=$FUSIONFORGE_DEFAULT_SRC_DIR
 fusionforge_src_dir=${FUSIONFORGE_SRC_DIR:-$FUSIONFORGE_DEFAULT_SRC_DIR}
 fusionforge_dir=${FUSIONFORGE_DIR:-$FUSIONFORGE_DEFAULT_DIR}
 fusionforge_data_dir=${FUSIONFORGE_DATA_DIR:-/var/lib/gforge}
