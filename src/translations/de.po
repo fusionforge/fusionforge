@@ -20358,9 +20358,8 @@ msgid "Subprojects for %1$s"
 msgstr "Quelle von %1$s"
 
 #: www/pm/index.php:61
-#, fuzzy
 msgid "No Subprojects Found"
-msgstr "Keine Projektgruppen gefunden"
+msgstr "Keine Unterprojekte gefunden"
 
 #: www/pm/index.php:62
 msgid "No subprojects have been set up, or you cannot view them."
@@ -20372,7 +20371,8 @@ msgid ""
 "The Admin for this project will have to set up subprojects using the admin "
 "page."
 msgstr ""
-">Der Projekt-Admin muss Datentypen aufsetzen, indem er die Admin-Seite nutzt."
+"Der Administrator dieses Projektes kann Unterprojekte "
+"einrichten indem er die Admin-Seite nutzt."
 
 #: www/pm/index.php:66
 msgid "Choose a Subproject and you can browse/edit/add tasks to it."
@@ -27468,17 +27468,6 @@ msgstr "Persönliche Seite für %s"
 #~ msgid "Project/Task Manager: Subprojects And Tasks"
 #~ msgstr "Projekt/Auftrags-Manager: Unterprojekte und Aufträge"
 
-#, fuzzy
-#~ msgid ""
-#~ "<h1>No Subprojects Found</h1><p><strong>No subprojects have been set up, "
-#~ "or you cannot view them.<p><span class=\"important\">The Admin for this "
-#~ "project will have to set up projects using the admin page</span></strong>"
-#~ msgstr ""
-#~ "<h1>Keine Unterprojekte gefunden</h1><p><strong>Es wurden entweder keine "
-#~ "Unterprojekte aufgesetzt oder Sie können sie nicht betrachten.<p><span "
-#~ "class=\"important\">Der Administrator dieses Projektes kann Projekte "
-#~ "einrichten indem er die Admin-Seite nutzt.</span></strong>"
-
 #~ msgid "Group Trove Information"
 #~ msgstr "Gruppen-Fund-Informationen"
 
@@ -27490,13 +27479,6 @@ msgstr "Persönliche Seite für %s"
 
 #~ msgid "Add Role"
 #~ msgstr "Rolle hinzufügen"
-
-#~ msgid ""
-#~ "Choose the <strong>First Letter</strong> of the name of the person you "
-#~ "wish to report on.<p>"
-#~ msgstr ""
-#~ "Wählen Sie den <strong>ersten Buchstaben</strong> des Namens der Person, "
-#~ "über die Sie berichten möchten.<p>"
 
 #~ msgid "closed"
 #~ msgstr "geschlossen"

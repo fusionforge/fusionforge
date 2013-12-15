@@ -27169,13 +27169,6 @@ msgstr "Персональная страница для %s"
 #~ msgid "Add Role"
 #~ msgstr "Добавить роль"
 
-#~ msgid ""
-#~ "Choose the <strong>First Letter</strong> of the name of the person you "
-#~ "wish to report on.<p>"
-#~ msgstr ""
-#~ "Выберите <strong>Первую букву</strong> имени пользователя для составления "
-#~ "отчета.<p>"
-
 #~ msgid "closed"
 #~ msgstr "закрыто"
 

@@ -26334,13 +26334,6 @@ msgstr "Pagina Personale"
 #~ msgid "Add Role"
 #~ msgstr "Aggiungi ruolo"
 
-#~ msgid ""
-#~ "Choose the <strong>First Letter</strong> of the name of the person you "
-#~ "wish to report on.<p>"
-#~ msgstr ""
-#~ "Seleziona la <strong>prima lettera</strong> deel nome della persona per "
-#~ "la quale creare la reportistica.<p>"
-
 #~ msgid "closed"
 #~ msgstr "chiuso"
 

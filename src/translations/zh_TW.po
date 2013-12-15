@@ -25998,11 +25998,6 @@ msgstr "我的個人首頁"
 #~ msgid "Add Role"
 #~ msgstr "新增角色"
 
-#~ msgid ""
-#~ "Choose the <strong>First Letter</strong> of the name of the person you "
-#~ "wish to report on.<p>"
-#~ msgstr "選擇你希望被報告人姓名的<strong>第一個字元</strong>。<p>"
-
 #~ msgid "closed"
 #~ msgstr "關閉"
 

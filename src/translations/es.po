@@ -26363,13 +26363,6 @@ msgstr "Página personal de %s"
 #~ msgid "Add Role"
 #~ msgstr "Añadir rol"
 
-#~ msgid ""
-#~ "Choose the <strong>First Letter</strong> of the name of the person you "
-#~ "wish to report on.<p>"
-#~ msgstr ""
-#~ "Elija la <strong>Primera Letra</strong> del apellido de la persona que "
-#~ "desea conocer el informe.<p>"
-
 #~ msgid "closed"
 #~ msgstr "Cerrado"
 

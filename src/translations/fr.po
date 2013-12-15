@@ -27866,16 +27866,6 @@ msgstr "Page personnelle de %s"
 #~ msgid "Project/Task Manager: Subprojects And Tasks"
 #~ msgstr "Gestion de projet : sous-projets et tâches"
 
-#~ msgid ""
-#~ "<h1>No Subprojects Found</h1><p><strong>No subprojects have been set up, "
-#~ "or you cannot view them.<p><span class=\"important\">The Admin for this "
-#~ "project will have to set up projects using the admin page</span></strong>"
-#~ msgstr ""
-#~ "<h1>Aucun sous-projet</h1><strong><p>Aucun sous-projet n'a été créé, ou "
-#~ "vous n'avez pas les permissions requises pour les voir.</p><p><span class="
-#~ "\"important\">L'administrateur de ce projet doit mettre en place les sous-"
-#~ "projets en utilisant son interface d'administration.</span></p></strong>"
-
 #~ msgid "Group Trove Information"
 #~ msgstr "Information sur le groupe"
 
@@ -27887,13 +27877,6 @@ msgstr "Page personnelle de %s"
 
 #~ msgid "Add Role"
 #~ msgstr "Ajouter un rôle"
-
-#~ msgid ""
-#~ "Choose the <strong>First Letter</strong> of the name of the person you "
-#~ "wish to report on.<p>"
-#~ msgstr ""
-#~ "Choisissez la <strong>première lettre</strong> du nom de la personne sur "
-#~ "laquelle vous souhaitez obtenir des statistiques.</p>"
 
 #~ msgid "closed"
 #~ msgstr "fermé"

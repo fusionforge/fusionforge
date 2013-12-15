@@ -26210,13 +26210,6 @@ msgstr "La meva pàgina personal"
 #~ msgid "Add Role"
 #~ msgstr "Afegeix Rol"
 
-#~ msgid ""
-#~ "Choose the <strong>First Letter</strong> of the name of the person you "
-#~ "wish to report on.<p>"
-#~ msgstr ""
-#~ "Escolliu la <strong>Primera lletra</strong> del nom de la persona sobre "
-#~ "la qual voleu informar.<p>"
-
 #~ msgid "closed"
 #~ msgstr "tancat"
 

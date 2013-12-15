@@ -26284,13 +26284,6 @@ msgstr "Mijn persoonlijke pagina"
 #~ msgid "Add Role"
 #~ msgstr "Rol toevoegen"
 
-#~ msgid ""
-#~ "Choose the <strong>First Letter</strong> of the name of the person you "
-#~ "wish to report on.<p>"
-#~ msgstr ""
-#~ "Kies de <strong>eerste letter</strong> van de naam van de persoon "
-#~ "waarover je gegevens wilt vastleggen.<p>"
-
 #~ msgid "closed"
 #~ msgstr "Gesloten"
 

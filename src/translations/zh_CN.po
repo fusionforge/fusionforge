@@ -20581,12 +20581,12 @@ msgstr ""
 msgid ""
 "Choose the <strong>First Letter</strong> of the name of the person you wish "
 "to add."
-msgstr "<p> 选择你想要增加的人拥有Unix帐号的<strong>第一个字节</strong>。</p>"
+msgstr "选择你想要增加的人拥有Unix帐号的<strong>第一个字节</strong>。"
 
 #: www/project/admin/massadd.php:87 www/project/admin/users.php:98
 #, fuzzy
 msgid "No Matching Users Found"
-msgstr "<p>未发现符合的用户</p>"
+msgstr "未发现符合的用户"
 
 #: www/project/admin/massadd.php:116
 msgid "Finish"
@@ -21475,11 +21475,10 @@ msgid ""
 msgstr ""
 
 #: www/reporting/useract.php:68 www/reporting/usertime.php:66
-#, fuzzy
 msgid ""
 "Choose the <strong>First Letter</strong> of the name of the person you wish "
 "to report on."
-msgstr "选择你希望被报告人姓名的<strong>第一个字节</strong>。<p>"
+msgstr "选择你希望被报告人姓名的<strong>第一个字节</strong>。"
 
 #: www/reporting/usersummary.php:66
 msgid ""
@@ -26086,11 +26085,6 @@ msgstr "我的个人首页"
 
 #~ msgid "Add Role"
 #~ msgstr "添加角色"
-
-#~ msgid ""
-#~ "Choose the <strong>First Letter</strong> of the name of the person you "
-#~ "wish to report on.<p>"
-#~ msgstr "选择你希望被报告人姓名的<strong>第一个字节</strong>。<p>"
 
 #~ msgid "closed"
 #~ msgstr "关闭"
