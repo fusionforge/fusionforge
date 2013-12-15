@@ -22804,12 +22804,6 @@ msgstr "Minha Página Pessoal"
 #~ "Faltando parâmetro, Você precisa informar o assunto apropriado para a "
 #~ "postagem"
 
-#~ msgid "New category full name (VARCHAR 80)"
-#~ msgstr "Novo nome completo de categoria (VARCHAR 80)"
-
-#~ msgid "New category description (VARCHAR 255)"
-#~ msgstr "Nova descrição de categoria (VARCHAR 255)"
-
 #~ msgid "Groups Membership"
 #~ msgstr "Participação em Grupos"
 

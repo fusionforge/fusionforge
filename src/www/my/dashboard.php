@@ -37,7 +37,7 @@ if (!session_loggedin()) {
 	exit_not_logged_in();
 } else {
 	$u = session_get_user();
-	site_user_header(array('title'=>sprintf(_('Personal Page For %s'), $u->getRealName())));
+	site_user_header(array('title'=>sprintf(_('Personal Page for %s'), $u->getRealName())));
 	?>
 
 	<table class="fullwidth">

@@ -25733,12 +25733,6 @@ msgstr "Nere orri pertsonala"
 #~ msgid "Missing parameter, You must give proper subject to the mailing"
 #~ msgstr "Parametro bat falta zaizu, postari dagokion gaia jarri behar duzu"
 
-#~ msgid "New category full name (VARCHAR 80)"
-#~ msgstr "Kategoria berriaren izen osoa (80 karaktere)"
-
-#~ msgid "New category description (VARCHAR 255)"
-#~ msgstr "Kategoria berriaren deskripzioa (255 karaktere)"
-
 #~ msgid "Groups Membership"
 #~ msgstr "Taldeetan parte hartzea"
 

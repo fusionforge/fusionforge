@@ -27685,12 +27685,6 @@ msgstr "Page personnelle de %s"
 #~ "vous souhaitez réactiver, car certains de ces scripts contiennent des\n"
 #~ "requêtes DROP TABLE.</span><br /><br />"
 
-#~ msgid "New category full name (VARCHAR 80)"
-#~ msgstr "Nom complet de la nouvelle catégorie (VARCHAR 255)"
-
-#~ msgid "New category description (VARCHAR 255)"
-#~ msgstr "Description de la nouvelle catégorie (VARCHAR 255)"
-
 #~ msgid "Groups Membership"
 #~ msgstr "Participation aux groupes"
 

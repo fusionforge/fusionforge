@@ -96,7 +96,7 @@ sortRoleList ($roles) ;
 echo '<div>'."\n";
 if (count ($projects) < 1) {
 	?>
-	<p><?php echo _('This user is not a member of any projects.') ?></p>
+	<p><?php echo _('This user is not a member of any project.') ?></p>
 	<?php
 } else { // endif no groups
 	print "<p>"._('This user is a member of the following projects:')."</p>\n";

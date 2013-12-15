@@ -27282,12 +27282,6 @@ msgstr "Persönliche Seite für %s"
 #~ "aktivieren möchten), da manche Skripts über DROP Table Statements "
 #~ "verfügen.</span><br /><br />"
 
-#~ msgid "New category full name (VARCHAR 80)"
-#~ msgstr "Vollständiger Name der neuen Kategorie (VARCHAR 80)"
-
-#~ msgid "New category description (VARCHAR 255)"
-#~ msgstr "Beschreibung der neuen Kategorie (VARCHAR 255)"
-
 #~ msgid "Groups Membership"
 #~ msgstr "Gruppen-Mitgliedschaften"
 

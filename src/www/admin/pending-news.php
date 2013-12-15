@@ -110,7 +110,7 @@ WHERE id = ANY($1)",array(db_int_array_to_any_clause($news_id)));
 	}
 }
 
-news_header(array('title'=>_('News Administration')));
+news_header(array('title'=>_('News Admin')));
 
 if ($approve) {
 	/*

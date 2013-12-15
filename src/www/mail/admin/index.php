@@ -183,7 +183,7 @@ if ($group_id) {
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="add_list" value="y" />
 			<input type="hidden" name="form_key" value="<?php echo form_generate_key();?>" />
-			<p><strong><?php echo _('Mailing List Name:'); ?></strong><br />
+			<p><strong><?php echo _('Mailing List Name')._(':'); ?></strong><br />
 			<strong><?php echo $group->getUnixName(); ?>-<input type="text" name="list_name" value="" size="10" maxlength="12" />@<?php echo forge_get_config('lists_host'); ?></strong></p>
 			<p>
 			<strong><?php echo _('Is Public?'); ?></strong><br />

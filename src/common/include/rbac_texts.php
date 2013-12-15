@@ -58,7 +58,7 @@ function setup_rbac_strings () {
 								  'project_admin1' => _('Project administration'),
 
 								  'tracker_admin0' => _('No administrative access'),
-								  'tracker_admin1' => _('Trackers administration'),
+								  'tracker_admin1' => _('Trackers Administration'),
 								  'pm_admin0' => _('No administrative access'),
 								  'pm_admin1' => _('Task managers administration'),
 								  'forum_admin0' => _('No administrative access'),

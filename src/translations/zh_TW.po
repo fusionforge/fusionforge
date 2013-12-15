@@ -25821,12 +25821,6 @@ msgstr "我的個人首頁"
 #~ msgid "Missing parameter, You must give proper subject to the mailing"
 #~ msgstr "參數未填，您必須輸入電子報的標題"
 
-#~ msgid "New category full name (VARCHAR 80)"
-#~ msgstr "新類別完整名稱 (80字元)"
-
-#~ msgid "New category description (VARCHAR 255)"
-#~ msgstr "新類別說明 (255字元)"
-
 #~ msgid "Groups Membership"
 #~ msgstr "群組會員身分"
 

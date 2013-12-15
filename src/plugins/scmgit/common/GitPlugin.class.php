@@ -1113,7 +1113,7 @@ class GitPlugin extends SCMPlugin {
 	action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $params['group_id'] ?>" />
 <input type="hidden" name="create_repository" value="1" />
-<p><strong><?php echo _('Repository name:') ?></strong><?php echo utils_requiredField(); ?><br />
+<p><strong><?php echo _('Repository name')._(':'); ?></strong><?php echo utils_requiredField(); ?><br />
 <input type="text" required="required" size="20" name="repo_name" value="" /></p>
 <p><strong><?php echo _('Description:'); ?></strong><br />
 <input type="text" size="60" name="description" value="" /></p>

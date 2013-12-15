@@ -318,7 +318,7 @@ if($group->usesForum()) { ?>
 	<p><a href="/forum/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Forums Admin') ?></a></p>
 <?php }
 if($group->usesTracker()) { ?>
-	<p><a href="/tracker/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Trackers Admin') ?></a></p>
+	<p><a href="/tracker/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Trackers Administration') ?></a></p>
 <?php }
 if($group->usesMail()) { ?>
 	<p><a href="/mail/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo _('Mailing Lists Admin') ?></a></p>

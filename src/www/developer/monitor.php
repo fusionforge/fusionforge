@@ -72,7 +72,7 @@ if (!session_loggedin()) {
 			$result = db_query_params ('DELETE FROM user_diary_monitor WHERE user_id=$1 AND monitored_user=$2',
 						   array (user_getid(),
 							  $diary_user));
-			echo '<p class="feedback">' . _('Monitoring has been turned off') . "</p>";
+			echo '<p class="feedback">' . _('Monitoring Stopped') . "</p>";
 			echo _('You will not receive any more emails from this user');
 
 		}

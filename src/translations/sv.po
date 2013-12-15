@@ -25427,12 +25427,6 @@ msgstr "Min personliga sida"
 #~ msgid "Missing parameter, You must give proper subject to the mailing"
 #~ msgstr "Parameter saknas, du måste ange en riktig rubrik för e-posten"
 
-#~ msgid "New category full name (VARCHAR 80)"
-#~ msgstr "Nytt kategorinamn (VARCHAR 80)"
-
-#~ msgid "New category description (VARCHAR 255)"
-#~ msgstr "Ny kategoribeskrivning (VARCHAR 255)"
-
 #~ msgid "Groups Membership"
 #~ msgstr "Gruppmedlem"
 

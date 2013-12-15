@@ -173,7 +173,7 @@ if (getStringFromRequest('groupsearch')) {
 
 		echo $GLOBALS['HTML']->listTableBottom();
 	} else {
-		echo '<p class="information">'._('No project found.').'</p>';
+		echo '<p class="information">'._('No project found').'</p>';
 	}
 } //end if($groupsearch)
 

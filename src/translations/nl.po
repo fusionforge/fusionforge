@@ -26106,12 +26106,6 @@ msgstr "Mijn persoonlijke pagina"
 #~ "Ontbrekende parameter, je dient een geschikt onderwerp voor de mailing op "
 #~ "te geven"
 
-#~ msgid "New category full name (VARCHAR 80)"
-#~ msgstr "Nieuwe categorie - volledige naam (VARCHAR 80)"
-
-#~ msgid "New category description (VARCHAR 255)"
-#~ msgstr "Nieuwe categorie - beschrijving (VARCHAR 255)"
-
 #~ msgid "Groups Membership"
 #~ msgstr "Groepen lidmaatschap"
 

@@ -27183,12 +27183,6 @@ msgstr "Páxina persoal de %s"
 #~ "volvelo activar) xa que algúns scripts teñen unha sentenza DROP TABLE "
 #~ "(eliminar táboa)</span><br /><br />"
 
-#~ msgid "New category full name (VARCHAR 80)"
-#~ msgstr "Novo nome completo da nova categoría (80 caracteres) "
-
-#~ msgid "New category description (VARCHAR 255)"
-#~ msgstr "Descrición nova da categoría (255 caracteres) "
-
 #~ msgid "Groups Membership"
 #~ msgstr "Participación en grupos "
 

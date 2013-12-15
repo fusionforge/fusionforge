@@ -71,10 +71,10 @@ if (getStringFromRequest('submit')) {
 
 	$check = true;
 	if (!strlen(trim($firstname))) {
-		$error_msg = _('You must supply a first name.');
+		$error_msg = _('You must supply a first name');
 		$check = false;
 	} elseif (!strlen(trim($lastname))) {
-		$error_msg = _('You must supply a last name.');
+		$error_msg = _('You must supply a last name');
 		$check = false;
 	}
 
@@ -125,7 +125,7 @@ echo $HTML->boxTop(_('Account options'));
 <p> <?php echo _('Welcome'); ?> <strong><?php print $u->getRealName(); ?></strong>. </p>
 <p>
 
-<?php echo _('Account options:'); ?>
+<?php echo _('Account options')._(':'); ?>
 </p>
 <ul>
 	<li><?php echo util_make_link_u ($u->getUnixName(),$u->getId(),'<strong>'._('View My Profile').'</strong>'); ?></li>

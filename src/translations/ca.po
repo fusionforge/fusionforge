@@ -16381,11 +16381,11 @@ msgstr "Nou nom complet de categoria (VARCHAR 80)"
 #: www/admin/trove/trove_cat_edit.php:147
 #, fuzzy
 msgid "Category description (Maximum length is 255 chars)"
-msgstr "Nova descripció de categoria (VARCHAR 255)"
+msgstr "Descripció de categoria (VARCHAR 255)"
 
 #: www/admin/trove/trove_cat_list.php:74 www/trove/admin/trove_cat_list.php:69
 msgid "Browse Trove Tree"
-msgstr "navega l'arbre de projectes"
+msgstr "Navega l'arbre de projectes"
 
 #: www/admin/unsubscribe.php:45 www/admin/unsubscribe.php:86
 msgid "Site Mailings Subscription Maintenance"
@@ -23347,12 +23347,10 @@ msgid "New category short name (no spaces, Unix-like): "
 msgstr "Nou nom abreujat de categoria (sense espais, estil unix)"
 
 #: www/trove/admin/trove_cat_add.php:97 www/trove/admin/trove_cat_edit.php:87
-#, fuzzy
 msgid "New category full name (80 characters max): "
 msgstr "Nou nom complet de categoria (VARCHAR 80)"
 
 #: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:90
-#, fuzzy
 msgid "New category description (255 characters max): "
 msgstr "Nova descripció de categoria (VARCHAR 255)"
 
@@ -26031,12 +26029,6 @@ msgstr "La meva pàgina personal"
 #~ msgstr ""
 #~ "Paràmetre faltant, Heu de posar un assumpte adequat per a l'enviament de "
 #~ "correu"
-
-#~ msgid "New category full name (VARCHAR 80)"
-#~ msgstr "Nou nom complet de categoria (VARCHAR 80)"
-
-#~ msgid "New category description (VARCHAR 255)"
-#~ msgstr "Nova descripció de categoria (VARCHAR 255)"
 
 #~ msgid "Groups Membership"
 #~ msgstr "Pertanyença a grups"

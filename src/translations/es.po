@@ -26195,12 +26195,6 @@ msgstr "Página personal de %s"
 #~ msgid "Missing parameter, You must give proper subject to the mailing"
 #~ msgstr "Falta un parámetro, debe poner un asunto adecuado al correo"
 
-#~ msgid "New category full name (VARCHAR 80)"
-#~ msgstr "Nombre completo de la nueva categoría (80 carácteres)"
-
-#~ msgid "New category description (VARCHAR 255)"
-#~ msgstr "Descripción de la Nueva Categoría (255 carácteres)"
-
 #~ msgid "Groups Membership"
 #~ msgstr "Participación en Grupos"
 

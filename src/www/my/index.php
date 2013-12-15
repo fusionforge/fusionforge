@@ -39,7 +39,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 $user = session_get_user();
 use_javascript('/tabber/tabber.js');
 html_use_jqueryui();
-site_user_header(array('title'=>sprintf(_('Personal Page For %s'), $user->getRealName())));
+site_user_header(array('title'=>sprintf(_('Personal Page for %s'), $user->getRealName())));
 
 $sql = "SELECT l.*
 		FROM layouts AS l INNER JOIN owner_layouts AS o ON(l.id = o.layout_id)

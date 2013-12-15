@@ -25909,12 +25909,6 @@ msgstr "我的个人首页"
 #~ msgid "Missing parameter, You must give proper subject to the mailing"
 #~ msgstr "参数未填，您必须输入群发邮件的标题"
 
-#~ msgid "New category full name (VARCHAR 80)"
-#~ msgstr "新类别完整名称 (80字节)"
-
-#~ msgid "New category description (VARCHAR 255)"
-#~ msgstr "新类别说明 (255字节)"
-
 #~ msgid "Groups Membership"
 #~ msgstr "群组用户身分"
 

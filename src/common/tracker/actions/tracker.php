@@ -428,7 +428,7 @@ switch (getStringFromRequest('func')) {
 					if ($start && $ah->isMonitoring())
 						$feedback = _('Monitoring Started');
 					elseif ($stop && !$ah->isMonitoring())
-						$feedback = _('Monitoring Deactivated');
+						$feedback = _('Monitoring Stopped');
 					else {
 						$ah->setMonitor();
 						$error_msg = $ah->getErrorMessage();
