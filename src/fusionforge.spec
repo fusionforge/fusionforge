@@ -259,14 +259,14 @@ This is a online_help plugin within FusionForge.
 # This package provides an OSLC-CM V2 compatible plugin for FusionForge
 # tracker system.
 
-%package plugin-projectimport
-Summary: Project Import plugin for FusionForge
-Group: Development/Tools
-Requires: %{name} >= %{version}, php
-%description plugin-projectimport
-Project import plugin for FusionForge
-This plugin allows the import of a project data previously exported
-with ForgePlucker, or a compatible tool.
+# %package plugin-projectimport
+# Summary: Project Import plugin for FusionForge
+# Group: Development/Tools
+# Requires: %{name} >= %{version}, php
+# %description plugin-projectimport
+# Project import plugin for FusionForge
+# This plugin allows the import of a project data previously exported
+# with ForgePlucker, or a compatible tool.
 
 # %package plugin-projects-hierarchy
 # Summary: projects-hierarchy plugin for FusionForge
@@ -645,7 +645,7 @@ done
 #%{__ln_s} ../../plugins/oslc/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/oslc
 
 # plugin : projectimport
-%{__ln_s} ../../plugins/projectimport/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projectimport
+# %{__ln_s} ../../plugins/projectimport/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projectimport
 
 # plugin: projectlabels
 %{__ln_s} ../../plugins/projectlabels/www $RPM_BUILD_ROOT%{FORGE_DIR}/www/plugins/projectlabels
@@ -1019,11 +1019,11 @@ fi
 # %{FORGE_DIR}/plugins/oslc
 # %{FORGE_DIR}/www/plugins/oslc
 
-%files plugin-projectimport
-%config(noreplace) %{FORGE_CONF_DIR}/plugins/projectimport/
-%config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projectimport.ini
-%{FORGE_DIR}/plugins/projectimport
-%{FORGE_DIR}/www/plugins/projectimport
+# %files plugin-projectimport
+# %config(noreplace) %{FORGE_CONF_DIR}/plugins/projectimport/
+# %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projectimport.ini
+# %{FORGE_DIR}/plugins/projectimport
+# %{FORGE_DIR}/www/plugins/projectimport
 
 # %files plugin-projects-hierarchy
 # %config(noreplace) %{FORGE_CONF_DIR}/config.ini.d/projects-hierarchy.ini
