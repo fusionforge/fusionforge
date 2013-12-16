@@ -25,10 +25,10 @@ echo "Create $FORGE_HOME if necessary"
 ssh root@$HOST "[ -d $FORGE_HOME ] || mkdir -p $FORGE_HOME"
 
 echo "Sync code on root@$HOST:$FORGE_HOME"
-rsync -a --delete src/ root@$HOST:$FORGE_HOME/src/
+rsync -a --delete src/ root@$HOST:$FORGE_HOME/
 
 echo "Run Install on $HOST"
-ssh root@$HOST "$FORGE_HOME/src/install-ng --auto --reinit"
+ssh root@$HOST "$FORGE_HOME/install-ng --auto --reinit"
 
 echo "Dump freshly installed database"
 ssh root@$HOST "su - postgres -c \"pg_dumpall\" > /root/dump"

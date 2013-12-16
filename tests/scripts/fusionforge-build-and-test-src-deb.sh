@@ -19,11 +19,11 @@ ssh root@$HOST "apt-get update"
 
 echo "Sync code on root@$HOST:$FORGE_HOME"
 ssh root@$HOST "[ -d $FORGE_HOME ] || mkdir -p $FORGE_HOME"
-rsync -a --delete src/ root@$HOST:$FORGE_HOME/src/
+rsync -a --delete src/ root@$HOST:$FORGE_HOME/
 rsync -a --delete tests/ root@$HOST:$FORGE_HOME/tests/
 
 echo "Run Install on $HOST"
-ssh root@$HOST "$FORGE_HOME/src/install-ng --auto --reinit"
+ssh root@$HOST "$FORGE_HOME/install-ng --auto --reinit"
 
 # Dump database
 echo "Dump freshly installed database"

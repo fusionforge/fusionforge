@@ -1,9 +1,9 @@
 [core]
 forge_name = FusionForge
 
-source_path = /opt/gforge/src
-binary_path = /opt/gforge/src/utils
-plugins_path = /opt/gforge/src/plugins
+source_path = /opt/gforge
+binary_path = /opt/gforge/utils
+plugins_path = /opt/gforge/plugins
 data_path = /var/lib/gforge
 config_path = /etc/gforge
 log_path = /var/log/gforge
