@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-13 11:02+0100\n"
+"POT-Creation-Date: 2013-12-16 09:58+0100\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -387,9 +387,10 @@ msgstr "Notifica attivata"
 
 #: common/docman/actions/monitordirectory.php:72
 #: common/docman/actions/monitorfile.php:76
+#: common/tracker/actions/tracker.php:431
 #: common/tracker/Artifact.class.php:628
-#: common/tracker/ArtifactType.class.php:555 www/frs/monitor.php:57
-#: www/frs/monitor.php:58
+#: common/tracker/ArtifactType.class.php:555 www/developer/monitor.php:75
+#: www/frs/monitor.php:57 www/frs/monitor.php:58
 msgid "Monitoring Stopped"
 msgstr "Notifica disattivata"
 
@@ -1782,27 +1783,27 @@ msgstr "Data inizio"
 #: plugins/mailman/www/admin/index.php:147
 #: plugins/mailman/www/admin/index.php:153
 #: plugins/mailman/www/admin/index.php:186
+#: plugins/scmgit/common/GitPlugin.class.php:1116
 #: plugins/scmhg/common/HgPlugin.class.php:643 www/account/change_email.php:86
-#: www/account/index.php:140 www/account/index.php:144
-#: www/account/index.php:149 www/account/index.php:174
-#: www/account/index.php:186 www/account/index.php:205
-#: www/account/index.php:214 www/account/index.php:224
-#: www/account/index.php:233 www/account/index.php:242
-#: www/account/lostpw.php:89 www/account/pending-resend.php:65
-#: www/account/pending-resend.php:67 www/account/register.php:169
-#: www/account/register.php:218 www/account/register.php:224
-#: www/account/register.php:230 www/account/register.php:236
-#: www/account/verify.php:76 www/account/verify.php:78
-#: www/account/verify.php:86 www/activity/index.php:179
-#: www/activity/index.php:180 www/activity/index.php:181
-#: www/admin/groupedit.php:107 www/admin/groupedit.php:150
-#: www/admin/groupedit.php:170 www/admin/massmail.php:94
-#: www/admin/massmail.php:112 www/admin/massmail.php:115
-#: www/admin/massmail.php:140 www/admin/pending-news.php:137
-#: www/admin/pending-news.php:139 www/admin/pending-news.php:145
-#: www/admin/pending-news.php:147 www/admin/trove/trove_cat_add.php:77
-#: www/admin/trove/trove_cat_add.php:110 www/admin/trove/trove_cat_add.php:112
-#: www/admin/trove/trove_cat_add.php:114
+#: www/account/index.php:128 www/account/index.php:140
+#: www/account/index.php:144 www/account/index.php:149
+#: www/account/index.php:174 www/account/index.php:186
+#: www/account/index.php:205 www/account/index.php:214
+#: www/account/index.php:224 www/account/index.php:233
+#: www/account/index.php:242 www/account/lostpw.php:89
+#: www/account/pending-resend.php:65 www/account/pending-resend.php:67
+#: www/account/register.php:169 www/account/register.php:218
+#: www/account/register.php:224 www/account/register.php:230
+#: www/account/register.php:236 www/account/verify.php:76
+#: www/account/verify.php:78 www/account/verify.php:86
+#: www/activity/index.php:179 www/activity/index.php:180
+#: www/activity/index.php:181 www/admin/groupedit.php:107
+#: www/admin/groupedit.php:150 www/admin/groupedit.php:170
+#: www/admin/massmail.php:94 www/admin/massmail.php:112
+#: www/admin/massmail.php:115 www/admin/massmail.php:140
+#: www/admin/pending-news.php:137 www/admin/pending-news.php:139
+#: www/admin/pending-news.php:145 www/admin/pending-news.php:147
+#: www/admin/trove/trove_cat_add.php:77 www/admin/trove/trove_cat_add.php:110
 #: www/admin/trove/trove_cat_edit.php:115
 #: www/admin/trove/trove_cat_edit.php:141
 #: www/admin/trove/trove_cat_edit.php:144
@@ -1823,19 +1824,19 @@ msgstr "Data inizio"
 #: www/frs/reporting/downloads.php:109 www/frs/reporting/downloads.php:111
 #: www/include/user_profile.php:68 www/include/user_profile.php:126
 #: www/include/user_profile.php:133 www/include/user_profile.php:144
-#: www/include/user_profile.php:152 www/mail/admin/index.php:192
-#: www/mail/admin/index.php:225 www/my/bookmark_add.php:53
-#: www/my/bookmark_add.php:59 www/my/bookmark_edit.php:59
-#: www/my/bookmark_edit.php:65 www/my/diary.php:183 www/my/diary.php:187
-#: www/news/admin/index.php:125 www/people/admin/index.php:99
-#: www/people/admin/index.php:133 www/people/createjob.php:52
-#: www/people/createjob.php:55 www/people/editjob.php:169
-#: www/people/editjob.php:172 www/people/editprofile.php:241
-#: www/pm/admin/index.php:214 www/pm/admin/index.php:293
-#: www/pm/admin/index.php:323 www/pm/admin/index.php:333
-#: www/pm/admin/index.php:343 www/pm/format_csv.php:66
-#: www/pm/format_csv.php:71 www/pm/format_csv.php:76 www/pm/format_csv.php:89
-#: www/pm/format_csv.php:93 www/pm/format_csv.php:97
+#: www/include/user_profile.php:152 www/mail/admin/index.php:186
+#: www/mail/admin/index.php:192 www/mail/admin/index.php:225
+#: www/my/bookmark_add.php:53 www/my/bookmark_add.php:59
+#: www/my/bookmark_edit.php:59 www/my/bookmark_edit.php:65
+#: www/my/diary.php:183 www/my/diary.php:187 www/news/admin/index.php:125
+#: www/people/admin/index.php:99 www/people/admin/index.php:133
+#: www/people/createjob.php:52 www/people/createjob.php:55
+#: www/people/editjob.php:169 www/people/editjob.php:172
+#: www/people/editprofile.php:241 www/pm/admin/index.php:214
+#: www/pm/admin/index.php:293 www/pm/admin/index.php:323
+#: www/pm/admin/index.php:333 www/pm/admin/index.php:343
+#: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
+#: www/pm/format_csv.php:89 www/pm/format_csv.php:93 www/pm/format_csv.php:97
 #: www/project/admin/editimages.php:222 www/project/admin/editimages.php:226
 #: www/project/admin/editimages.php:230 www/project/admin/editimages.php:250
 #: www/project/admin/editimages.php:253 www/project/stats/index.php:105
@@ -4041,9 +4042,10 @@ msgstr ""
 msgid "Project administration"
 msgstr "Amministrazione database per i progetti"
 
-#: common/include/rbac_texts.php:61 common/include/rbac_texts.php:152
+#: common/include/rbac_texts.php:61 common/tracker/actions/admin-ind.php:87
+#: www/project/admin/tools.php:321
 #, fuzzy
-msgid "Trackers administration"
+msgid "Trackers Administration"
 msgstr "Amministrazione sondaggi"
 
 #: common/include/rbac_texts.php:63 common/include/rbac_texts.php:153
@@ -4188,6 +4190,11 @@ msgstr "Usa Statistiche"
 #, fuzzy
 msgid "Project visibility"
 msgstr "Progetti"
+
+#: common/include/rbac_texts.php:152
+#, fuzzy
+msgid "Trackers administration"
+msgstr "Amministrazione sondaggi"
 
 #: common/include/rbac_texts.php:160
 #, fuzzy
@@ -4377,11 +4384,11 @@ msgstr "Devi specificare un nome utente"
 msgid "You must supply a username"
 msgstr "Devi specificare un nome utente"
 
-#: common/include/User.class.php:316
+#: common/include/User.class.php:316 www/account/index.php:74
 msgid "You must supply a first name"
 msgstr "Nome è un parametro obbligatorio"
 
-#: common/include/User.class.php:320
+#: common/include/User.class.php:320 www/account/index.php:77
 msgid "You must supply a last name"
 msgstr "Cognome è un parametro obbligatorio"
 
@@ -5106,11 +5113,6 @@ msgstr ""
 #, fuzzy
 msgid "Could Not Get ArtifactTypeFactory"
 msgstr "Impossibile completare l'operazione"
-
-#: common/tracker/actions/admin-ind.php:87
-#, fuzzy
-msgid "Trackers Administration"
-msgstr "Amministrazione sondaggi"
 
 #: common/tracker/actions/admin-ind.php:90
 #, fuzzy
@@ -6183,7 +6185,6 @@ msgstr "Rimozione file eseguita"
 msgid "Item %s successfully updated"
 msgstr "Elemento creato con successo"
 
-#: common/tracker/actions/tracker.php:431
 #: common/tracker/actions/tracker.php:448
 #, fuzzy
 msgid "Monitoring Deactivated"
@@ -11148,7 +11149,7 @@ msgstr ""
 msgid "Unable to get the lists"
 msgstr ""
 
-#: plugins/mailman/www/admin/index.php:147
+#: plugins/mailman/www/admin/index.php:147 www/mail/admin/index.php:186
 msgid "Mailing List Name"
 msgstr "Nome Mailing List"
 
@@ -11432,7 +11433,7 @@ msgid "Unable to create project in Mantisbt"
 msgstr "Errore nella creazione  del progetto"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:234
-#: plugins/projectimport/www/index.php:628
+#: plugins/projectimport/www/index.php:628 www/admin/search.php:176
 #, fuzzy
 msgid "No project found"
 msgstr "Nessun sottoprogetto trovato"
@@ -13862,6 +13863,7 @@ msgstr "Crea nuova risposta:"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:629
 #: plugins/scmgit/common/GitPlugin.class.php:1092
+#: plugins/scmgit/common/GitPlugin.class.php:1116
 #: plugins/scmhg/common/HgPlugin.class.php:641
 #, fuzzy
 msgid "Repository name"
@@ -14041,11 +14043,6 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Create new Git repository for project %1$s"
 msgstr "Statistiche dei database dei progetti"
-
-#: plugins/scmgit/common/GitPlugin.class.php:1116
-#, fuzzy
-msgid "Repository name:"
-msgstr "Repository SCM"
 
 #: plugins/scmgit/common/GitPlugin.class.php:1118
 msgid "Description:"
@@ -14774,22 +14771,12 @@ msgstr ""
 "software ospitato da %1$s, farti registrare come sviluppatore oppure aprire "
 "un tuo progetto personale."
 
-#: www/account/index.php:74
-#, fuzzy
-msgid "You must supply a first name."
-msgstr "Nome è un parametro obbligatorio"
-
-#: www/account/index.php:77
-#, fuzzy
-msgid "You must supply a last name."
-msgstr "Cognome è un parametro obbligatorio"
-
 #: www/account/index.php:101 www/admin/groupedit.php:74
 #: www/admin/useredit.php:110
 msgid "Updated"
 msgstr "Aggiornato"
 
-#: www/account/index.php:122
+#: www/account/index.php:122 www/account/index.php:128
 #, fuzzy
 msgid "Account options"
 msgstr "Informazione account"
@@ -14797,11 +14784,6 @@ msgstr "Informazione account"
 #: www/account/index.php:125 www/index.php:33
 msgid "Welcome"
 msgstr "Benvenuto"
-
-#: www/account/index.php:128
-#, fuzzy
-msgid "Account options:"
-msgstr "Informazione account"
 
 #: www/account/index.php:131
 #, fuzzy
@@ -16097,10 +16079,10 @@ msgstr "News rimossa."
 msgid "Newsbytes Rejected."
 msgstr "News rifiutata."
 
-#: www/admin/pending-news.php:113
+#: www/admin/pending-news.php:113 www/project/admin/tools.php:336
 #, fuzzy
-msgid "News Administration"
-msgstr "Amministrazione forum"
+msgid "News Admin"
+msgstr "Amministrazione News"
 
 #: www/admin/pending-news.php:137
 #, fuzzy
@@ -16283,11 +16265,6 @@ msgstr "Nome completo"
 msgid "Registered"
 msgstr "Registrato"
 
-#: www/admin/search.php:176
-#, fuzzy
-msgid "No project found."
-msgstr "Nessun sottoprogetto trovato"
-
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
 #: www/include/trove.php:423 www/include/trove.php:427
@@ -16313,12 +16290,15 @@ msgstr "Categoria superiore"
 msgid "New category short name (no spaces, Unix-like)"
 msgstr "Nome breve (no spazi, tipo Unix)"
 
-#: www/admin/trove/trove_cat_add.php:112
-msgid "New category full name (Maximum length is 80 chars)"
+#: www/admin/trove/trove_cat_add.php:112 www/trove/admin/trove_cat_add.php:97
+#: www/trove/admin/trove_cat_edit.php:87
+#, fuzzy
+msgid "New category full name (80 characters max): "
 msgstr "Nome completo (VARCHAR 80)"
 
 #: www/admin/trove/trove_cat_add.php:114
-msgid "New category description (Maximum length is 255 chars)"
+#, fuzzy
+msgid "New category description (255 characters max: )"
 msgstr "Descrizione nuova categoria (VARCHAR 255)"
 
 #: www/admin/trove/trove_cat_edit.php:47
@@ -16523,7 +16503,7 @@ msgstr "Nome unix"
 msgid "Operations"
 msgstr "Operazioni"
 
-#: www/admin/useredit.php:286
+#: www/admin/useredit.php:286 www/include/user_home.php:99
 #, fuzzy
 msgid "This user is not a member of any project."
 msgstr "Questo utente non è membro di nessun progetto."
@@ -16742,10 +16722,6 @@ msgid ""
 msgstr ""
 "Per disabilitare la notifica, è sufficiente cliccare di nuovo su "
 "<strong>Notifica utente</strong>."
-
-#: www/developer/monitor.php:75
-msgid "Monitoring has been turned off"
-msgstr "Notifica utente disabilitata"
 
 #: www/developer/monitor.php:76
 msgid "You will not receive any more emails from this user"
@@ -18250,11 +18226,6 @@ msgstr "Visualizza Diario e Note"
 msgid "Monitor this Diary"
 msgstr "Notifica le modifiche a questo diario"
 
-#: www/include/user_home.php:99
-#, fuzzy
-msgid "This user is not a member of any projects."
-msgstr "Questo utente non è membro di nessun progetto."
-
 #: www/include/user_home.php:102
 #, fuzzy
 msgid "This user is a member of the following projects:"
@@ -18670,10 +18641,6 @@ msgstr ""
 msgid "Existing mailing lists"
 msgstr "Mailing List esistenti"
 
-#: www/mail/admin/index.php:186
-msgid "Mailing List Name:"
-msgstr "Nome Mailing List:"
-
 #: www/mail/admin/index.php:213
 #, fuzzy, php-format
 msgid "Update Mailing List %s"
@@ -18758,9 +18725,9 @@ msgstr "L'aggiornamento del bookmark è fallito."
 msgid "Edit Bookmark"
 msgstr "Modifica segnalibro"
 
-#: www/my/dashboard.php:40 www/my/index.php:42
+#: www/my/dashboard.php:40 www/my/index.php:42 www/widgets/widgets.php:54
 #, fuzzy, php-format
-msgid "Personal Page For %s"
+msgid "Personal Page for %s"
 msgstr "Pagina Personale"
 
 #: www/my/dashboard.php:47
@@ -19928,7 +19895,7 @@ msgstr "Aggiornamento multiplo"
 msgid "selected date"
 msgstr "Rimuovi template"
 
-#: www/pm/csv.php:48
+#: www/pm/csv.php:48 www/pm/uploadcsv.php:29
 msgid "Upload data into the tasks"
 msgstr "Effettua l'upload dei dati nel Gestore Attività"
 
@@ -20411,11 +20378,6 @@ msgstr "Id attività"
 #: www/pm/t_lookup.php:41
 msgid "No Task with ID: "
 msgstr ""
-
-#: www/pm/uploadcsv.php:29
-#, fuzzy
-msgid "Upload data into the tasks."
-msgstr "Effettua l'upload dei dati nel Gestore Attività."
 
 #: www/pm/uploadcsv.php:34
 msgid "Warning!"
@@ -20963,11 +20925,6 @@ msgstr "Amministrazione tool"
 msgid "Forums Admin"
 msgstr "Amministrazione Forum"
 
-#: www/project/admin/tools.php:321
-#, fuzzy
-msgid "Trackers Admin"
-msgstr "Amministrazione Tracker"
-
 #: www/project/admin/tools.php:330
 #, fuzzy
 msgid "Documents Admin"
@@ -20977,11 +20934,6 @@ msgstr "Amministrazione Forum"
 #, fuzzy
 msgid "Survey Admin"
 msgstr "Amministrazione sondaggi"
-
-#: www/project/admin/tools.php:336
-#, fuzzy
-msgid "News Admin"
-msgstr "Amministrazione News"
 
 #: www/project/admin/tools.php:339
 #, fuzzy
@@ -23311,11 +23263,6 @@ msgstr "Categoria superiore:"
 msgid "New category short name (no spaces, Unix-like): "
 msgstr "Nome breve (no spazi, tipo unix)"
 
-#: www/trove/admin/trove_cat_add.php:97 www/trove/admin/trove_cat_edit.php:87
-#, fuzzy
-msgid "New category full name (80 characters max): "
-msgstr "Nome completo (VARCHAR 80)"
-
 #: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:90
 #, fuzzy
 msgid "New category description (255 characters max): "
@@ -23375,10 +23322,57 @@ msgstr "Aggiornamento multiplo"
 msgid "No User Name Provided"
 msgstr "Non è stato inserito alcun file"
 
-#: www/widgets/widgets.php:54
-#, fuzzy, php-format
-msgid "Personal Page for %s"
-msgstr "Pagina Personale"
+#, fuzzy
+#~ msgid "Repository name:"
+#~ msgstr "Repository SCM"
+
+#, fuzzy
+#~ msgid "You must supply a first name."
+#~ msgstr "Nome è un parametro obbligatorio"
+
+#, fuzzy
+#~ msgid "You must supply a last name."
+#~ msgstr "Cognome è un parametro obbligatorio"
+
+#, fuzzy
+#~ msgid "Account options:"
+#~ msgstr "Informazione account"
+
+#, fuzzy
+#~ msgid "News Administration"
+#~ msgstr "Amministrazione forum"
+
+#, fuzzy
+#~ msgid "No project found."
+#~ msgstr "Nessun sottoprogetto trovato"
+
+#~ msgid "New category full name (Maximum length is 80 chars)"
+#~ msgstr "Nome completo (VARCHAR 80)"
+
+#~ msgid "New category description (Maximum length is 255 chars)"
+#~ msgstr "Descrizione nuova categoria (VARCHAR 255)"
+
+#~ msgid "Monitoring has been turned off"
+#~ msgstr "Notifica utente disabilitata"
+
+#, fuzzy
+#~ msgid "This user is not a member of any projects."
+#~ msgstr "Questo utente non è membro di nessun progetto."
+
+#~ msgid "Mailing List Name:"
+#~ msgstr "Nome Mailing List:"
+
+#, fuzzy
+#~ msgid "Personal Page For %s"
+#~ msgstr "Pagina Personale"
+
+#, fuzzy
+#~ msgid "Upload data into the tasks."
+#~ msgstr "Effettua l'upload dei dati nel Gestore Attività."
+
+#, fuzzy
+#~ msgid "Trackers Admin"
+#~ msgstr "Amministrazione Tracker"
 
 #~ msgid "Account Maintenance"
 #~ msgstr "Manutenzione account"

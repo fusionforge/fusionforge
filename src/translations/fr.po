@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-13 11:02+0100\n"
+"POT-Creation-Date: 2013-12-16 09:58+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -374,9 +374,10 @@ msgstr "Surveillance démarrée"
 
 #: common/docman/actions/monitordirectory.php:72
 #: common/docman/actions/monitorfile.php:76
+#: common/tracker/actions/tracker.php:431
 #: common/tracker/Artifact.class.php:628
-#: common/tracker/ArtifactType.class.php:555 www/frs/monitor.php:57
-#: www/frs/monitor.php:58
+#: common/tracker/ArtifactType.class.php:555 www/developer/monitor.php:75
+#: www/frs/monitor.php:57 www/frs/monitor.php:58
 msgid "Monitoring Stopped"
 msgstr "Surveillance arrêtée"
 
@@ -1690,27 +1691,27 @@ msgstr "Date de début"
 #: plugins/mailman/www/admin/index.php:147
 #: plugins/mailman/www/admin/index.php:153
 #: plugins/mailman/www/admin/index.php:186
+#: plugins/scmgit/common/GitPlugin.class.php:1116
 #: plugins/scmhg/common/HgPlugin.class.php:643 www/account/change_email.php:86
-#: www/account/index.php:140 www/account/index.php:144
-#: www/account/index.php:149 www/account/index.php:174
-#: www/account/index.php:186 www/account/index.php:205
-#: www/account/index.php:214 www/account/index.php:224
-#: www/account/index.php:233 www/account/index.php:242
-#: www/account/lostpw.php:89 www/account/pending-resend.php:65
-#: www/account/pending-resend.php:67 www/account/register.php:169
-#: www/account/register.php:218 www/account/register.php:224
-#: www/account/register.php:230 www/account/register.php:236
-#: www/account/verify.php:76 www/account/verify.php:78
-#: www/account/verify.php:86 www/activity/index.php:179
-#: www/activity/index.php:180 www/activity/index.php:181
-#: www/admin/groupedit.php:107 www/admin/groupedit.php:150
-#: www/admin/groupedit.php:170 www/admin/massmail.php:94
-#: www/admin/massmail.php:112 www/admin/massmail.php:115
-#: www/admin/massmail.php:140 www/admin/pending-news.php:137
-#: www/admin/pending-news.php:139 www/admin/pending-news.php:145
-#: www/admin/pending-news.php:147 www/admin/trove/trove_cat_add.php:77
-#: www/admin/trove/trove_cat_add.php:110 www/admin/trove/trove_cat_add.php:112
-#: www/admin/trove/trove_cat_add.php:114
+#: www/account/index.php:128 www/account/index.php:140
+#: www/account/index.php:144 www/account/index.php:149
+#: www/account/index.php:174 www/account/index.php:186
+#: www/account/index.php:205 www/account/index.php:214
+#: www/account/index.php:224 www/account/index.php:233
+#: www/account/index.php:242 www/account/lostpw.php:89
+#: www/account/pending-resend.php:65 www/account/pending-resend.php:67
+#: www/account/register.php:169 www/account/register.php:218
+#: www/account/register.php:224 www/account/register.php:230
+#: www/account/register.php:236 www/account/verify.php:76
+#: www/account/verify.php:78 www/account/verify.php:86
+#: www/activity/index.php:179 www/activity/index.php:180
+#: www/activity/index.php:181 www/admin/groupedit.php:107
+#: www/admin/groupedit.php:150 www/admin/groupedit.php:170
+#: www/admin/massmail.php:94 www/admin/massmail.php:112
+#: www/admin/massmail.php:115 www/admin/massmail.php:140
+#: www/admin/pending-news.php:137 www/admin/pending-news.php:139
+#: www/admin/pending-news.php:145 www/admin/pending-news.php:147
+#: www/admin/trove/trove_cat_add.php:77 www/admin/trove/trove_cat_add.php:110
 #: www/admin/trove/trove_cat_edit.php:115
 #: www/admin/trove/trove_cat_edit.php:141
 #: www/admin/trove/trove_cat_edit.php:144
@@ -1731,19 +1732,19 @@ msgstr "Date de début"
 #: www/frs/reporting/downloads.php:109 www/frs/reporting/downloads.php:111
 #: www/include/user_profile.php:68 www/include/user_profile.php:126
 #: www/include/user_profile.php:133 www/include/user_profile.php:144
-#: www/include/user_profile.php:152 www/mail/admin/index.php:192
-#: www/mail/admin/index.php:225 www/my/bookmark_add.php:53
-#: www/my/bookmark_add.php:59 www/my/bookmark_edit.php:59
-#: www/my/bookmark_edit.php:65 www/my/diary.php:183 www/my/diary.php:187
-#: www/news/admin/index.php:125 www/people/admin/index.php:99
-#: www/people/admin/index.php:133 www/people/createjob.php:52
-#: www/people/createjob.php:55 www/people/editjob.php:169
-#: www/people/editjob.php:172 www/people/editprofile.php:241
-#: www/pm/admin/index.php:214 www/pm/admin/index.php:293
-#: www/pm/admin/index.php:323 www/pm/admin/index.php:333
-#: www/pm/admin/index.php:343 www/pm/format_csv.php:66
-#: www/pm/format_csv.php:71 www/pm/format_csv.php:76 www/pm/format_csv.php:89
-#: www/pm/format_csv.php:93 www/pm/format_csv.php:97
+#: www/include/user_profile.php:152 www/mail/admin/index.php:186
+#: www/mail/admin/index.php:192 www/mail/admin/index.php:225
+#: www/my/bookmark_add.php:53 www/my/bookmark_add.php:59
+#: www/my/bookmark_edit.php:59 www/my/bookmark_edit.php:65
+#: www/my/diary.php:183 www/my/diary.php:187 www/news/admin/index.php:125
+#: www/people/admin/index.php:99 www/people/admin/index.php:133
+#: www/people/createjob.php:52 www/people/createjob.php:55
+#: www/people/editjob.php:169 www/people/editjob.php:172
+#: www/people/editprofile.php:241 www/pm/admin/index.php:214
+#: www/pm/admin/index.php:293 www/pm/admin/index.php:323
+#: www/pm/admin/index.php:333 www/pm/admin/index.php:343
+#: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
+#: www/pm/format_csv.php:89 www/pm/format_csv.php:93 www/pm/format_csv.php:97
 #: www/project/admin/editimages.php:222 www/project/admin/editimages.php:226
 #: www/project/admin/editimages.php:230 www/project/admin/editimages.php:250
 #: www/project/admin/editimages.php:253 www/project/stats/index.php:105
@@ -3866,9 +3867,10 @@ msgstr "Visible"
 msgid "Project administration"
 msgstr "Administration du projet"
 
-#: common/include/rbac_texts.php:61 common/include/rbac_texts.php:152
-msgid "Trackers administration"
-msgstr "Administration des outils de suivi"
+#: common/include/rbac_texts.php:61 common/tracker/actions/admin-ind.php:87
+#: www/project/admin/tools.php:321
+msgid "Trackers Administration"
+msgstr "Administration des traceurs"
 
 #: common/include/rbac_texts.php:63 common/include/rbac_texts.php:153
 msgid "Task managers administration"
@@ -3994,6 +3996,10 @@ msgstr "Statistiques de la forge"
 #: common/include/rbac_texts.php:149
 msgid "Project visibility"
 msgstr "Visibilité sur le projet"
+
+#: common/include/rbac_texts.php:152
+msgid "Trackers administration"
+msgstr "Administration des outils de suivi"
 
 #: common/include/rbac_texts.php:160
 msgid "Default for new trackers"
@@ -4170,11 +4176,11 @@ msgstr "Vous devez fournir un thème"
 msgid "You must supply a username"
 msgstr "Vous devez fournir un nom d'utilisateur"
 
-#: common/include/User.class.php:316
+#: common/include/User.class.php:316 www/account/index.php:74
 msgid "You must supply a first name"
 msgstr "Vous devez saisir votre prénom"
 
-#: common/include/User.class.php:320
+#: common/include/User.class.php:320 www/account/index.php:77
 msgid "You must supply a last name"
 msgstr "Vous devez saisir votre nom de famille"
 
@@ -4859,10 +4865,6 @@ msgstr "Veuillez aussi configurer les rôles (aucun accès par défaut)"
 #: common/tracker/actions/admin-ind.php:62 common/tracker/actions/ind.php:31
 msgid "Could Not Get ArtifactTypeFactory"
 msgstr "Erreur lors de la création de l'objet ArtifactTypeFactory."
-
-#: common/tracker/actions/admin-ind.php:87
-msgid "Trackers Administration"
-msgstr "Administration des traceurs"
 
 #: common/tracker/actions/admin-ind.php:90
 msgid "No trackers found"
@@ -5920,7 +5922,6 @@ msgstr "Fichier détruit avec succès"
 msgid "Item %s successfully updated"
 msgstr "Élément %s correctement mis à jour."
 
-#: common/tracker/actions/tracker.php:431
 #: common/tracker/actions/tracker.php:448
 msgid "Monitoring Deactivated"
 msgstr "Surveillance arrêtée"
@@ -10694,7 +10695,7 @@ msgstr ""
 msgid "Unable to get the lists"
 msgstr "Erreur lors de la récupération des listes"
 
-#: plugins/mailman/www/admin/index.php:147
+#: plugins/mailman/www/admin/index.php:147 www/mail/admin/index.php:186
 msgid "Mailing List Name"
 msgstr "Nom de la liste de diffusion"
 
@@ -10966,7 +10967,7 @@ msgid "Unable to create project in Mantisbt"
 msgstr "Erreur lors de la création d'un objet ProjectCategory"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:234
-#: plugins/projectimport/www/index.php:628
+#: plugins/projectimport/www/index.php:628 www/admin/search.php:176
 msgid "No project found"
 msgstr "Aucun projet trouvé"
 
@@ -13262,6 +13263,7 @@ msgstr "Créer un nouveau dépôt :"
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:629
 #: plugins/scmgit/common/GitPlugin.class.php:1092
+#: plugins/scmgit/common/GitPlugin.class.php:1116
 #: plugins/scmhg/common/HgPlugin.class.php:641
 msgid "Repository name"
 msgstr "Nom du dépôt"
@@ -13460,11 +13462,6 @@ msgstr ""
 #, fuzzy, php-format
 msgid "Create new Git repository for project %1$s"
 msgstr "Gestion des onglets supplémentaires pour le projet %1$s"
-
-#: plugins/scmgit/common/GitPlugin.class.php:1116
-#, fuzzy
-msgid "Repository name:"
-msgstr "Nom de dépôt :"
 
 #: plugins/scmgit/common/GitPlugin.class.php:1118
 msgid "Description:"
@@ -14198,31 +14195,18 @@ msgstr ""
 "forums des projets, faire remonter des bogues dans %1$s, vous proposer comme "
 "développeur d'un projet, et même lancer votre propre projet."
 
-#: www/account/index.php:74
-msgid "You must supply a first name."
-msgstr "Vous devez saisir votre prénom."
-
-#: www/account/index.php:77
-#, fuzzy
-msgid "You must supply a last name."
-msgstr "Vous devez saisir votre nom de famille"
-
 #: www/account/index.php:101 www/admin/groupedit.php:74
 #: www/admin/useredit.php:110
 msgid "Updated"
 msgstr "Mis à jour"
 
-#: www/account/index.php:122
+#: www/account/index.php:122 www/account/index.php:128
 msgid "Account options"
 msgstr "Options du compte"
 
 #: www/account/index.php:125 www/index.php:33
 msgid "Welcome"
 msgstr "Bienvenue"
-
-#: www/account/index.php:128
-msgid "Account options:"
-msgstr "Options du compte:"
 
 #: www/account/index.php:131
 msgid "View My Profile"
@@ -15492,8 +15476,8 @@ msgstr "Annonce supprimée."
 msgid "Newsbytes Rejected."
 msgstr "Annonce rejetée."
 
-#: www/admin/pending-news.php:113
-msgid "News Administration"
+#: www/admin/pending-news.php:113 www/project/admin/tools.php:336
+msgid "News Admin"
 msgstr "Administration des annonces"
 
 #: www/admin/pending-news.php:137
@@ -15678,10 +15662,6 @@ msgstr "Nom complet"
 msgid "Registered"
 msgstr "Inscrit"
 
-#: www/admin/search.php:176
-msgid "No project found."
-msgstr "Aucun projet trouvé."
-
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
 #: www/include/trove.php:423 www/include/trove.php:427
@@ -15707,13 +15687,15 @@ msgstr "Catégorie mère"
 msgid "New category short name (no spaces, Unix-like)"
 msgstr "Nom court de la nouvelle catégorie (pas d'espace, à la Unix)"
 
-#: www/admin/trove/trove_cat_add.php:112
-msgid "New category full name (Maximum length is 80 chars)"
-msgstr "Nom complet de la nouvelle catégorie (80 caractères maxi)"
+#: www/admin/trove/trove_cat_add.php:112 www/trove/admin/trove_cat_add.php:97
+#: www/trove/admin/trove_cat_edit.php:87
+msgid "New category full name (80 characters max): "
+msgstr "Nom complet de la nouvelle catégorie (80 caractères maxi) : "
 
 #: www/admin/trove/trove_cat_add.php:114
-msgid "New category description (Maximum length is 255 chars)"
-msgstr "Description de la nouvelle catégorie (255 caractères maxi)"
+#, fuzzy
+msgid "New category description (255 characters max: )"
+msgstr "Description de la nouvelle catégorie (255 caractères maxi) : "
 
 #: www/admin/trove/trove_cat_edit.php:47
 msgid "Error: a category cannot be the same as its own parent: "
@@ -15916,7 +15898,7 @@ msgstr "Nom Unix"
 msgid "Operations"
 msgstr "Opérations"
 
-#: www/admin/useredit.php:286
+#: www/admin/useredit.php:286 www/include/user_home.php:99
 msgid "This user is not a member of any project."
 msgstr "Ce développeur ne fait partie d'aucun projet."
 
@@ -16123,10 +16105,6 @@ msgid ""
 msgstr ""
 "Pour arrêter le suivi, cliquez à nouveau sur le lien « Suivre cet "
 "utilisateur »."
-
-#: www/developer/monitor.php:75
-msgid "Monitoring has been turned off"
-msgstr "Le suivi a été arrêté"
 
 #: www/developer/monitor.php:76
 msgid "You will not receive any more emails from this user"
@@ -17598,10 +17576,6 @@ msgstr "Voir le journal et les notes"
 msgid "Monitor this Diary"
 msgstr "Surveiller ce journal"
 
-#: www/include/user_home.php:99
-msgid "This user is not a member of any projects."
-msgstr "Cet utilisateur ne fait partie d'aucun projet."
-
 #: www/include/user_home.php:102
 msgid "This user is a member of the following projects:"
 msgstr "Cet utilisateur fait partie des projets suivants :"
@@ -18082,10 +18056,6 @@ msgstr "La création de la liste peut prendre jusqu'à une heure."
 msgid "Existing mailing lists"
 msgstr "Listes de diffusion existantes"
 
-#: www/mail/admin/index.php:186
-msgid "Mailing List Name:"
-msgstr "Nom de la liste de diffusion :"
-
 #: www/mail/admin/index.php:213
 #, php-format
 msgid "Update Mailing List %s"
@@ -18165,9 +18135,9 @@ msgstr "Impossible de mettre à jour le favori."
 msgid "Edit Bookmark"
 msgstr "Modification d'un favori"
 
-#: www/my/dashboard.php:40 www/my/index.php:42
+#: www/my/dashboard.php:40 www/my/index.php:42 www/widgets/widgets.php:54
 #, php-format
-msgid "Personal Page For %s"
+msgid "Personal Page for %s"
 msgstr "Page personnelle de %s"
 
 #: www/my/dashboard.php:47
@@ -19334,7 +19304,7 @@ msgstr "date du jour"
 msgid "selected date"
 msgstr "date sélectionnée"
 
-#: www/pm/csv.php:48
+#: www/pm/csv.php:48 www/pm/uploadcsv.php:29
 msgid "Upload data into the tasks"
 msgstr "Charger des données dans le gestionnaire de tâches"
 
@@ -19792,10 +19762,6 @@ msgstr "Identifiant de tâche"
 #: www/pm/t_lookup.php:41
 msgid "No Task with ID: "
 msgstr "Aucune tâche d'identifiant : "
-
-#: www/pm/uploadcsv.php:29
-msgid "Upload data into the tasks."
-msgstr "Chargement de données dans le gestionnaire de tâches."
 
 #: www/pm/uploadcsv.php:34
 msgid "Warning!"
@@ -20339,10 +20305,6 @@ msgstr "La boîte à outils de l'administrateur"
 msgid "Forums Admin"
 msgstr "Administration des forums"
 
-#: www/project/admin/tools.php:321
-msgid "Trackers Admin"
-msgstr "Administration des outils de suivi"
-
 #: www/project/admin/tools.php:330
 msgid "Documents Admin"
 msgstr "Administration du gestionnaire de documents"
@@ -20350,10 +20312,6 @@ msgstr "Administration du gestionnaire de documents"
 #: www/project/admin/tools.php:333
 msgid "Survey Admin"
 msgstr "Administration des sondages"
-
-#: www/project/admin/tools.php:336
-msgid "News Admin"
-msgstr "Administration des annonces"
 
 #: www/project/admin/tools.php:339
 msgid "Source Code Admin"
@@ -22692,10 +22650,6 @@ msgstr "Catégorie mère : "
 msgid "New category short name (no spaces, Unix-like): "
 msgstr "Nom court de la nouvelle catégorie (pas d'espace, à la Unix) : "
 
-#: www/trove/admin/trove_cat_add.php:97 www/trove/admin/trove_cat_edit.php:87
-msgid "New category full name (80 characters max): "
-msgstr "Nom complet de la nouvelle catégorie (80 caractères maxi) : "
-
 #: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:90
 msgid "New category description (255 characters max): "
 msgstr "Description de la nouvelle catégorie (255 caractères maxi) : "
@@ -22750,10 +22704,49 @@ msgstr "Erreur de mise à jour"
 msgid "No User Name Provided"
 msgstr "Aucun nom d'utilisateur n'a été fourni"
 
-#: www/widgets/widgets.php:54
-#, php-format
-msgid "Personal Page for %s"
-msgstr "Page personnelle de %s"
+#, fuzzy
+#~ msgid "Repository name:"
+#~ msgstr "Nom de dépôt :"
+
+#~ msgid "You must supply a first name."
+#~ msgstr "Vous devez saisir votre prénom."
+
+#, fuzzy
+#~ msgid "You must supply a last name."
+#~ msgstr "Vous devez saisir votre nom de famille"
+
+#~ msgid "Account options:"
+#~ msgstr "Options du compte:"
+
+#~ msgid "News Administration"
+#~ msgstr "Administration des annonces"
+
+#~ msgid "No project found."
+#~ msgstr "Aucun projet trouvé."
+
+#~ msgid "New category full name (Maximum length is 80 chars)"
+#~ msgstr "Nom complet de la nouvelle catégorie (80 caractères maxi)"
+
+#~ msgid "New category description (Maximum length is 255 chars)"
+#~ msgstr "Description de la nouvelle catégorie (255 caractères maxi)"
+
+#~ msgid "Monitoring has been turned off"
+#~ msgstr "Le suivi a été arrêté"
+
+#~ msgid "This user is not a member of any projects."
+#~ msgstr "Cet utilisateur ne fait partie d'aucun projet."
+
+#~ msgid "Mailing List Name:"
+#~ msgstr "Nom de la liste de diffusion :"
+
+#~ msgid "Personal Page For %s"
+#~ msgstr "Page personnelle de %s"
+
+#~ msgid "Upload data into the tasks."
+#~ msgstr "Chargement de données dans le gestionnaire de tâches."
+
+#~ msgid "Trackers Admin"
+#~ msgstr "Administration des outils de suivi"
 
 #~ msgid "In an attempt to reduce spam, we are using this form to send email."
 #~ msgstr ""

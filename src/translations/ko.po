@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-13 11:02+0100\n"
+"POT-Creation-Date: 2013-12-16 09:58+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -386,9 +386,10 @@ msgstr "모니터링이 시작되었습니다."
 
 #: common/docman/actions/monitordirectory.php:72
 #: common/docman/actions/monitorfile.php:76
+#: common/tracker/actions/tracker.php:431
 #: common/tracker/Artifact.class.php:628
-#: common/tracker/ArtifactType.class.php:555 www/frs/monitor.php:57
-#: www/frs/monitor.php:58
+#: common/tracker/ArtifactType.class.php:555 www/developer/monitor.php:75
+#: www/frs/monitor.php:57 www/frs/monitor.php:58
 #, fuzzy
 msgid "Monitoring Stopped"
 msgstr "모니터링이 중단되었습니다."
@@ -1761,27 +1762,27 @@ msgstr ""
 #: plugins/mailman/www/admin/index.php:147
 #: plugins/mailman/www/admin/index.php:153
 #: plugins/mailman/www/admin/index.php:186
+#: plugins/scmgit/common/GitPlugin.class.php:1116
 #: plugins/scmhg/common/HgPlugin.class.php:643 www/account/change_email.php:86
-#: www/account/index.php:140 www/account/index.php:144
-#: www/account/index.php:149 www/account/index.php:174
-#: www/account/index.php:186 www/account/index.php:205
-#: www/account/index.php:214 www/account/index.php:224
-#: www/account/index.php:233 www/account/index.php:242
-#: www/account/lostpw.php:89 www/account/pending-resend.php:65
-#: www/account/pending-resend.php:67 www/account/register.php:169
-#: www/account/register.php:218 www/account/register.php:224
-#: www/account/register.php:230 www/account/register.php:236
-#: www/account/verify.php:76 www/account/verify.php:78
-#: www/account/verify.php:86 www/activity/index.php:179
-#: www/activity/index.php:180 www/activity/index.php:181
-#: www/admin/groupedit.php:107 www/admin/groupedit.php:150
-#: www/admin/groupedit.php:170 www/admin/massmail.php:94
-#: www/admin/massmail.php:112 www/admin/massmail.php:115
-#: www/admin/massmail.php:140 www/admin/pending-news.php:137
-#: www/admin/pending-news.php:139 www/admin/pending-news.php:145
-#: www/admin/pending-news.php:147 www/admin/trove/trove_cat_add.php:77
-#: www/admin/trove/trove_cat_add.php:110 www/admin/trove/trove_cat_add.php:112
-#: www/admin/trove/trove_cat_add.php:114
+#: www/account/index.php:128 www/account/index.php:140
+#: www/account/index.php:144 www/account/index.php:149
+#: www/account/index.php:174 www/account/index.php:186
+#: www/account/index.php:205 www/account/index.php:214
+#: www/account/index.php:224 www/account/index.php:233
+#: www/account/index.php:242 www/account/lostpw.php:89
+#: www/account/pending-resend.php:65 www/account/pending-resend.php:67
+#: www/account/register.php:169 www/account/register.php:218
+#: www/account/register.php:224 www/account/register.php:230
+#: www/account/register.php:236 www/account/verify.php:76
+#: www/account/verify.php:78 www/account/verify.php:86
+#: www/activity/index.php:179 www/activity/index.php:180
+#: www/activity/index.php:181 www/admin/groupedit.php:107
+#: www/admin/groupedit.php:150 www/admin/groupedit.php:170
+#: www/admin/massmail.php:94 www/admin/massmail.php:112
+#: www/admin/massmail.php:115 www/admin/massmail.php:140
+#: www/admin/pending-news.php:137 www/admin/pending-news.php:139
+#: www/admin/pending-news.php:145 www/admin/pending-news.php:147
+#: www/admin/trove/trove_cat_add.php:77 www/admin/trove/trove_cat_add.php:110
 #: www/admin/trove/trove_cat_edit.php:115
 #: www/admin/trove/trove_cat_edit.php:141
 #: www/admin/trove/trove_cat_edit.php:144
@@ -1802,19 +1803,19 @@ msgstr ""
 #: www/frs/reporting/downloads.php:109 www/frs/reporting/downloads.php:111
 #: www/include/user_profile.php:68 www/include/user_profile.php:126
 #: www/include/user_profile.php:133 www/include/user_profile.php:144
-#: www/include/user_profile.php:152 www/mail/admin/index.php:192
-#: www/mail/admin/index.php:225 www/my/bookmark_add.php:53
-#: www/my/bookmark_add.php:59 www/my/bookmark_edit.php:59
-#: www/my/bookmark_edit.php:65 www/my/diary.php:183 www/my/diary.php:187
-#: www/news/admin/index.php:125 www/people/admin/index.php:99
-#: www/people/admin/index.php:133 www/people/createjob.php:52
-#: www/people/createjob.php:55 www/people/editjob.php:169
-#: www/people/editjob.php:172 www/people/editprofile.php:241
-#: www/pm/admin/index.php:214 www/pm/admin/index.php:293
-#: www/pm/admin/index.php:323 www/pm/admin/index.php:333
-#: www/pm/admin/index.php:343 www/pm/format_csv.php:66
-#: www/pm/format_csv.php:71 www/pm/format_csv.php:76 www/pm/format_csv.php:89
-#: www/pm/format_csv.php:93 www/pm/format_csv.php:97
+#: www/include/user_profile.php:152 www/mail/admin/index.php:186
+#: www/mail/admin/index.php:192 www/mail/admin/index.php:225
+#: www/my/bookmark_add.php:53 www/my/bookmark_add.php:59
+#: www/my/bookmark_edit.php:59 www/my/bookmark_edit.php:65
+#: www/my/diary.php:183 www/my/diary.php:187 www/news/admin/index.php:125
+#: www/people/admin/index.php:99 www/people/admin/index.php:133
+#: www/people/createjob.php:52 www/people/createjob.php:55
+#: www/people/editjob.php:169 www/people/editjob.php:172
+#: www/people/editprofile.php:241 www/pm/admin/index.php:214
+#: www/pm/admin/index.php:293 www/pm/admin/index.php:323
+#: www/pm/admin/index.php:333 www/pm/admin/index.php:343
+#: www/pm/format_csv.php:66 www/pm/format_csv.php:71 www/pm/format_csv.php:76
+#: www/pm/format_csv.php:89 www/pm/format_csv.php:93 www/pm/format_csv.php:97
 #: www/project/admin/editimages.php:222 www/project/admin/editimages.php:226
 #: www/project/admin/editimages.php:230 www/project/admin/editimages.php:250
 #: www/project/admin/editimages.php:253 www/project/stats/index.php:105
@@ -3964,8 +3965,9 @@ msgstr ""
 msgid "Project administration"
 msgstr ""
 
-#: common/include/rbac_texts.php:61 common/include/rbac_texts.php:152
-msgid "Trackers administration"
+#: common/include/rbac_texts.php:61 common/tracker/actions/admin-ind.php:87
+#: www/project/admin/tools.php:321
+msgid "Trackers Administration"
 msgstr ""
 
 #: common/include/rbac_texts.php:63 common/include/rbac_texts.php:153
@@ -4101,6 +4103,10 @@ msgstr "통계 기능 사용"
 
 #: common/include/rbac_texts.php:149
 msgid "Project visibility"
+msgstr ""
+
+#: common/include/rbac_texts.php:152
+msgid "Trackers administration"
 msgstr ""
 
 #: common/include/rbac_texts.php:160
@@ -4286,11 +4292,11 @@ msgstr "사용자 ID를 입력하셔야 합니다."
 msgid "You must supply a username"
 msgstr "사용자 ID를 입력하셔야 합니다."
 
-#: common/include/User.class.php:316
+#: common/include/User.class.php:316 www/account/index.php:74
 msgid "You must supply a first name"
 msgstr ""
 
-#: common/include/User.class.php:320
+#: common/include/User.class.php:320 www/account/index.php:77
 msgid "You must supply a last name"
 msgstr ""
 
@@ -4984,10 +4990,6 @@ msgstr ""
 
 #: common/tracker/actions/admin-ind.php:62 common/tracker/actions/ind.php:31
 msgid "Could Not Get ArtifactTypeFactory"
-msgstr ""
-
-#: common/tracker/actions/admin-ind.php:87
-msgid "Trackers Administration"
 msgstr ""
 
 #: common/tracker/actions/admin-ind.php:90
@@ -6040,7 +6042,6 @@ msgstr "파일 삭제: 성공"
 msgid "Item %s successfully updated"
 msgstr "항목을 생성하였습니다."
 
-#: common/tracker/actions/tracker.php:431
 #: common/tracker/actions/tracker.php:448
 msgid "Monitoring Deactivated"
 msgstr ""
@@ -10854,7 +10855,7 @@ msgstr ""
 msgid "Unable to get the lists"
 msgstr ""
 
-#: plugins/mailman/www/admin/index.php:147
+#: plugins/mailman/www/admin/index.php:147 www/mail/admin/index.php:186
 #, fuzzy
 msgid "Mailing List Name"
 msgstr "메일링 리스트"
@@ -11127,7 +11128,7 @@ msgid "Unable to create project in Mantisbt"
 msgstr "그룹 객체 생성 오류"
 
 #: plugins/mantisbt/common/MantisBTPlugin.class.php:234
-#: plugins/projectimport/www/index.php:628
+#: plugins/projectimport/www/index.php:628 www/admin/search.php:176
 msgid "No project found"
 msgstr ""
 
@@ -13503,6 +13504,7 @@ msgstr ""
 
 #: plugins/scmdarcs/common/DarcsPlugin.class.php:629
 #: plugins/scmgit/common/GitPlugin.class.php:1092
+#: plugins/scmgit/common/GitPlugin.class.php:1116
 #: plugins/scmhg/common/HgPlugin.class.php:641
 #, fuzzy
 msgid "Repository name"
@@ -13672,11 +13674,6 @@ msgstr ""
 #, php-format
 msgid "Create new Git repository for project %1$s"
 msgstr ""
-
-#: plugins/scmgit/common/GitPlugin.class.php:1116
-#, fuzzy
-msgid "Repository name:"
-msgstr "SCM 저장소"
 
 #: plugins/scmgit/common/GitPlugin.class.php:1118
 msgid "Description:"
@@ -14380,22 +14377,12 @@ msgstr ""
 "을 할 수도 있고, 프로젝트의 개발자로 등록하실 수도 있고, 여러분만의 프로젝트"
 "를 개설하시는 것도 가능합니다."
 
-#: www/account/index.php:74
-#, fuzzy
-msgid "You must supply a first name."
-msgstr "사용자 ID를 입력하셔야 합니다."
-
-#: www/account/index.php:77
-#, fuzzy
-msgid "You must supply a last name."
-msgstr "사용자 ID를 입력하셔야 합니다."
-
 #: www/account/index.php:101 www/admin/groupedit.php:74
 #: www/admin/useredit.php:110
 msgid "Updated"
 msgstr ""
 
-#: www/account/index.php:122
+#: www/account/index.php:122 www/account/index.php:128
 #, fuzzy
 msgid "Account options"
 msgstr "유보되어 있는 계정입니다"
@@ -14403,10 +14390,6 @@ msgstr "유보되어 있는 계정입니다"
 #: www/account/index.php:125 www/index.php:33
 msgid "Welcome"
 msgstr "환영합니다."
-
-#: www/account/index.php:128
-msgid "Account options:"
-msgstr ""
 
 #: www/account/index.php:131
 #, fuzzy
@@ -15661,10 +15644,10 @@ msgstr "설문 조사를 찾을 수 없습니다."
 msgid "Newsbytes Rejected."
 msgstr "설문 조사를 찾을 수 없습니다."
 
-#: www/admin/pending-news.php:113
+#: www/admin/pending-news.php:113 www/project/admin/tools.php:336
 #, fuzzy
-msgid "News Administration"
-msgstr "게시판: 관리"
+msgid "News Admin"
+msgstr "뉴스 설정"
 
 #: www/admin/pending-news.php:137
 #, fuzzy
@@ -15839,10 +15822,6 @@ msgstr ""
 msgid "Registered"
 msgstr ""
 
-#: www/admin/search.php:176
-msgid "No project found."
-msgstr ""
-
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
 #: www/include/trove.php:423 www/include/trove.php:427
@@ -15868,13 +15847,15 @@ msgstr ""
 msgid "New category short name (no spaces, Unix-like)"
 msgstr ""
 
-#: www/admin/trove/trove_cat_add.php:112
-msgid "New category full name (Maximum length is 80 chars)"
+#: www/admin/trove/trove_cat_add.php:112 www/trove/admin/trove_cat_add.php:97
+#: www/trove/admin/trove_cat_edit.php:87
+msgid "New category full name (80 characters max): "
 msgstr ""
 
 #: www/admin/trove/trove_cat_add.php:114
-msgid "New category description (Maximum length is 255 chars)"
-msgstr ""
+#, fuzzy
+msgid "New category description (255 characters max: )"
+msgstr "검색어 (최대 255글자)"
 
 #: www/admin/trove/trove_cat_edit.php:47
 msgid "Error: a category cannot be the same as its own parent: "
@@ -16069,7 +16050,7 @@ msgstr "Unix 이름"
 msgid "Operations"
 msgstr "동작"
 
-#: www/admin/useredit.php:286
+#: www/admin/useredit.php:286 www/include/user_home.php:99
 #, fuzzy
 msgid "This user is not a member of any project."
 msgstr "본 개발자는 아직 프로젝트에 가입하지 않았습니다."
@@ -16282,10 +16263,6 @@ msgid ""
 msgstr ""
 "모니터링을 중지하시려면 <strong>이 사용자를 모니터링합니다.</strong> 링크를 "
 "다시 클릭하시면 됩니다."
-
-#: www/developer/monitor.php:75
-msgid "Monitoring has been turned off"
-msgstr "모니터링이 중단되었습니다."
 
 #: www/developer/monitor.php:76
 msgid "You will not receive any more emails from this user"
@@ -17741,11 +17718,6 @@ msgstr "일기/메모 보기"
 msgid "Monitor this Diary"
 msgstr "일기/메모 모니터링하기"
 
-#: www/include/user_home.php:99
-#, fuzzy
-msgid "This user is not a member of any projects."
-msgstr "본 개발자는 아직 프로젝트에 가입하지 않았습니다."
-
 #: www/include/user_home.php:102
 #, fuzzy
 msgid "This user is a member of the following projects:"
@@ -18159,10 +18131,6 @@ msgstr ""
 msgid "Existing mailing lists"
 msgstr ""
 
-#: www/mail/admin/index.php:186
-msgid "Mailing List Name:"
-msgstr ""
-
 #: www/mail/admin/index.php:213
 #, fuzzy, php-format
 msgid "Update Mailing List %s"
@@ -18246,9 +18214,9 @@ msgstr "즐겨찾기를 갱신하지 못했습니다."
 msgid "Edit Bookmark"
 msgstr "즐겨찾기 편집"
 
-#: www/my/dashboard.php:40 www/my/index.php:42
+#: www/my/dashboard.php:40 www/my/index.php:42 www/widgets/widgets.php:54
 #, fuzzy, php-format
-msgid "Personal Page For %s"
+msgid "Personal Page for %s"
 msgstr "개인 페이지"
 
 #: www/my/dashboard.php:47
@@ -19387,7 +19355,7 @@ msgstr "대량 갱신"
 msgid "selected date"
 msgstr "릴리즈 날짜"
 
-#: www/pm/csv.php:48
+#: www/pm/csv.php:48 www/pm/uploadcsv.php:29
 msgid "Upload data into the tasks"
 msgstr ""
 
@@ -19857,10 +19825,6 @@ msgstr "임무 번호"
 
 #: www/pm/t_lookup.php:41
 msgid "No Task with ID: "
-msgstr ""
-
-#: www/pm/uploadcsv.php:29
-msgid "Upload data into the tasks."
 msgstr ""
 
 #: www/pm/uploadcsv.php:34
@@ -20385,11 +20349,6 @@ msgstr "툴 관리자"
 msgid "Forums Admin"
 msgstr "게시판 설정"
 
-#: www/project/admin/tools.php:321
-#, fuzzy
-msgid "Trackers Admin"
-msgstr "문제점 추적 관리"
-
 #: www/project/admin/tools.php:330
 #, fuzzy
 msgid "Documents Admin"
@@ -20398,11 +20357,6 @@ msgstr "게시판 설정"
 #: www/project/admin/tools.php:333
 msgid "Survey Admin"
 msgstr ""
-
-#: www/project/admin/tools.php:336
-#, fuzzy
-msgid "News Admin"
-msgstr "뉴스 설정"
 
 #: www/project/admin/tools.php:339
 msgid "Source Code Admin"
@@ -22646,10 +22600,6 @@ msgstr ""
 msgid "New category short name (no spaces, Unix-like): "
 msgstr ""
 
-#: www/trove/admin/trove_cat_add.php:97 www/trove/admin/trove_cat_edit.php:87
-msgid "New category full name (80 characters max): "
-msgstr ""
-
 #: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:90
 msgid "New category description (255 characters max): "
 msgstr ""
@@ -22704,10 +22654,36 @@ msgstr "대량 갱신"
 msgid "No User Name Provided"
 msgstr "사용자ID"
 
-#: www/widgets/widgets.php:54
-#, fuzzy, php-format
-msgid "Personal Page for %s"
-msgstr "개인 페이지"
+#, fuzzy
+#~ msgid "Repository name:"
+#~ msgstr "SCM 저장소"
+
+#, fuzzy
+#~ msgid "You must supply a first name."
+#~ msgstr "사용자 ID를 입력하셔야 합니다."
+
+#, fuzzy
+#~ msgid "You must supply a last name."
+#~ msgstr "사용자 ID를 입력하셔야 합니다."
+
+#, fuzzy
+#~ msgid "News Administration"
+#~ msgstr "게시판: 관리"
+
+#~ msgid "Monitoring has been turned off"
+#~ msgstr "모니터링이 중단되었습니다."
+
+#, fuzzy
+#~ msgid "This user is not a member of any projects."
+#~ msgstr "본 개발자는 아직 프로젝트에 가입하지 않았습니다."
+
+#, fuzzy
+#~ msgid "Personal Page For %s"
+#~ msgstr "개인 페이지"
+
+#, fuzzy
+#~ msgid "Trackers Admin"
+#~ msgstr "문제점 추적 관리"
 
 #~ msgid "Account Maintenance"
 #~ msgstr "사용자 등록 정보"
