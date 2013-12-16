@@ -140,7 +140,7 @@ class CreateProject extends FForge_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Tools");
 		$this->waitForPageToLoad("30000");
-		$this->click("link=Trackers Admin");
+		$this->click("link=Trackers Administration");
 		$this->waitForPageToLoad("30000");
 		$this->type("name", "Local tracker for UNIXNAME");
 		$this->type("//input[@name='description']", "Tracker for PUBLICNAME (UNIXNAME)");

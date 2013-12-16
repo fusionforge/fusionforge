@@ -165,7 +165,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 
 		if (in_array ('trackers', $what)) {
-			$this->click("link=Trackers Admin");
+			$this->click("link=Trackers Administration");
 			$this->waitForPageToLoad("30000");
 			$this->type("name", "Bugs");
 			$this->type("//input[@name='description']", "Tracker for bug reports");
@@ -186,7 +186,7 @@ class FForge_SeleniumTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->waitForPageToLoad("30000");
 			$this->click("link=Tools");
 			$this->waitForPageToLoad("30000");
-			$this->click("link=Trackers Admin");
+			$this->click("link=Trackers Administration");
 			$this->waitForPageToLoad("30000");
 			$this->type("name", "Support Requests");
 			$this->type("//input[@name='description']", "Tracker for support requests");
