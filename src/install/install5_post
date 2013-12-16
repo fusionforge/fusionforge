@@ -63,11 +63,11 @@ install5_post_debian()
 
         for i in secrets.inc vhost-list.inc vhost-main.inc vhost-projects.inc ; do
             if [ ! -e /etc/gforge/httpd.conf.d/$i ] ; then
-                cp /opt/gforge/etc/httpd.conf.d-opt/$i /etc/gforge/httpd.conf.d/$i
+                cp /opt/gforge/src/etc/httpd.conf.d-opt/$i /etc/gforge/httpd.conf.d/$i
                 if [ $i = "secrets.inc" ] ; then
                     chmod 700 /etc/gforge/httpd.conf.d/$i
                 fi
-                PATH=/opt/gforge/utils:$PATH manage-apache-config.sh install
+                PATH=/opt/gforge/src/utils:$PATH manage-apache-config.sh install
                 mv /etc/gforge/httpd.conf.d/$i.generated /etc/gforge/httpd.conf.d/$i
             fi
         done
