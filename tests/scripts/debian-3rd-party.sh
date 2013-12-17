@@ -9,13 +9,16 @@ cd $absolutesourcepath
 BUILDERDIR=$(./tests/scripts/builder_get_config.sh BUILDERDIR)
 REPOPATH=$(./tests/scripts/builder_get_config.sh REPOPATH)
 
-DIST=wheezy
+DISTS="wheezy jessie"
 
 [ ! -d $REPOPATH/debian ] || rm -r $REPOPATH/debian
 mkdir -p $REPOPATH/debian/conf
 DEFAULTKEY=buildbot@$(hostname -f)
 SIGNKEY=${DEBEMAIL:-$DEFAULTKEY}
-cat > $REPOPATH/debian/conf/distributions <<EOF
+
+:> $REPOPATH/debian/conf/distributions
+for DIST in $DISTS ; do
+    cat >> $REPOPATH/debian/conf/distributions <<EOF
 Codename: $DIST
 Suite: $DIST
 Components: main
@@ -24,12 +27,18 @@ Architectures: amd64 i386 source
 Origin: buildbot.fusionforge.org
 Description: FusionForge 3rd-party autobuilt repository
 SignWith: $SIGNKEY
-EOF
 
-# Build mediawiki
-make -C 3rd-party/mediawiki
-# Build selenium
-make -C 3rd-party/selenium
+EOF
+done
+
+# Backport mediawiki from Jessie to Wheezy
+make -C 3rd-party/mediawiki DIST=wheezy
+
+# Build selenium packages for Wheezy+Jessie
+for DIST in $DISTS ; do
+    make -C 3rd-party/selenium DIST=$DIST
+done
+
 # Write key
 gpg --export --armor > ${REPOPATH}/debian/key
 
