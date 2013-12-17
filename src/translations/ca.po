@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-16 09:58+0100\n"
+"POT-Creation-Date: 2013-12-17 09:12+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -132,9 +132,8 @@ msgid "No action to perform"
 msgstr "No s'han trobat dades per fer l'informe"
 
 #: common/docman/actions/delfile.php:52
-#, fuzzy
 msgid "deleted successfully."
-msgstr "Habilitat de FEINA esborrada amb èxit"
+msgstr ""
 
 #: common/docman/actions/editdocgroup.php:101
 #, fuzzy, php-format
@@ -149,7 +148,7 @@ msgstr "Projectes"
 #: common/docman/actions/editfile.php:69
 #, fuzzy
 msgid "No document found to update"
-msgstr "No hi ha dades del document"
+msgstr "No s'han trobat documents"
 
 #: common/docman/actions/editfile.php:89
 #, fuzzy, php-format
@@ -157,9 +156,9 @@ msgid "Invalid file attack attempt %s."
 msgstr "Nom complet no vàlid"
 
 #: common/docman/actions/editfile.php:112
-#, fuzzy, php-format
+#, php-format
 msgid "Document %s updated successfully."
-msgstr "Actualitzat amb èxit"
+msgstr ""
 
 #: common/docman/actions/emptytrash.php:38
 msgid "Unable to clean trash"
@@ -171,9 +170,8 @@ msgid "Emptied Trash successfully."
 msgstr "Actualitzat amb èxit"
 
 #: common/docman/actions/enforcereserve.php:47
-#, fuzzy
 msgid "reservation enforced successfully."
-msgstr "Actualitzat amb èxit"
+msgstr ""
 
 #: common/docman/actions/forcereindexenginesearch.php:36
 msgid ""
@@ -181,17 +179,15 @@ msgid ""
 msgstr ""
 
 #: common/docman/actions/injectzip.php:49
-#, fuzzy
 msgid "Archive injected successfully."
-msgstr "FEINA inserida amb èxit"
+msgstr ""
 
 #: common/docman/actions/monitordirectory.php:38
 #: common/docman/Document.class.php:950
 #: common/docman/DocumentGroup.class.php:723
 #: common/docman/views/reporting.php:169
-#, fuzzy
 msgid "Folder"
-msgstr "Nom de fitxer"
+msgstr ""
 
 #: common/docman/actions/monitordirectory.php:43
 #: common/docman/actions/monitorfile.php:44
@@ -501,19 +497,16 @@ msgstr "La descripció del document ha de ser de 10 caràcters com a mínim"
 
 #: common/docman/Document.class.php:141 common/docman/Document.class.php:149
 #: common/docman/Document.class.php:851
-#, fuzzy
 msgid "Document already published in this folder"
-msgstr "Tramet nova documentació"
+msgstr ""
 
 #: common/docman/Document.class.php:198 common/docman/Document.class.php:205
-#, fuzzy
 msgid "Error Adding Document:"
-msgstr "Error afegint un fòrum"
+msgstr ""
 
 #: common/docman/Document.class.php:198
-#, fuzzy
 msgid "Not a file"
-msgstr "No hi ha estadístiques disponibles"
+msgstr ""
 
 #: common/docman/Document.class.php:214
 #, fuzzy
@@ -522,9 +515,8 @@ msgstr "Error a l'inserir un element"
 
 #: common/docman/Document.class.php:225 common/docman/Document.class.php:890
 #: common/docman/Document.class.php:1106
-#, fuzzy
 msgid "Error updating document group:"
-msgstr "Error afegint un fòrum"
+msgstr ""
 
 #: common/docman/Document.class.php:252
 msgid "Document: Invalid docid"
@@ -553,14 +545,12 @@ msgid "Document lock failed"
 msgstr "Títol del document"
 
 #: common/docman/Document.class.php:706
-#, fuzzy
 msgid "Document reservation failed"
-msgstr "Visualitza la documentació"
+msgstr ""
 
 #: common/docman/Document.class.php:944 common/docman/views/additem.php:57
-#, fuzzy
 msgid "New Document"
-msgstr "Afegeix un projecte"
+msgstr ""
 
 #: common/docman/Document.class.php:946
 #, fuzzy
@@ -592,9 +582,8 @@ msgid "Document Title"
 msgstr "Títol del document"
 
 #: common/docman/Document.class.php:952
-#, fuzzy
 msgid "Document description"
-msgstr "Descripció:"
+msgstr ""
 
 #: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:725
@@ -630,9 +619,8 @@ msgstr "No s'han trobat documents"
 #: common/docman/DocumentGroup.class.php:67
 #: common/docman/views/listfile.php:173
 #: common/docman/views/listtrashfile.php:116
-#, fuzzy
 msgid "Document Folder"
-msgstr "Títol del document"
+msgstr ""
 
 #: common/docman/DocumentGroup.class.php:101
 #, fuzzy
@@ -672,7 +660,7 @@ msgstr "El nom Unix ja està agafat"
 #: common/docman/DocumentGroup.class.php:525
 #, fuzzy, php-format
 msgid "Error: %s"
-msgstr "Error"
+msgstr "Error: %s"
 
 #: common/docman/DocumentGroup.class.php:670
 #, fuzzy
@@ -922,14 +910,12 @@ msgid "URL"
 msgstr ""
 
 #: common/docman/views/addfile.php:121
-#, fuzzy
 msgid "Already-uploaded file"
-msgstr "Fil"
+msgstr ""
 
 #: common/docman/views/addfile.php:124
-#, fuzzy
 msgid "Create online"
-msgstr "Crea"
+msgstr ""
 
 #: common/docman/views/addfile.php:130
 #: plugins/mantisbt/view/addAttachment.php:34
@@ -954,9 +940,9 @@ msgid ""
 msgstr ""
 
 #: common/docman/views/addfile.php:158
-#, fuzzy, php-format
+#, php-format
 msgid "You need first to upload file in %s"
-msgstr "Heu de tenir una sessió iniciada"
+msgstr ""
 
 #: common/docman/views/addfile.php:165 common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:129
@@ -998,9 +984,8 @@ msgstr "Tramet informació"
 #: common/docman/views/pendingfiles.php:37
 #: common/docman/views/reporting.php:53 common/docman/views/search.php:34
 #: common/docman/views/tree.php:36 common/docman/views/views.php:25
-#, fuzzy
 msgid "Document Manager Access Denied"
-msgstr "Gestor de Documents: Mostra el document"
+msgstr ""
 
 #: common/docman/views/additem.php:56
 #, fuzzy
@@ -1018,9 +1003,8 @@ msgid ""
 msgstr ""
 
 #: common/docman/views/additem.php:61 common/docman/views/additem.php:85
-#, fuzzy
 msgid "Inject Tree"
-msgstr "Nom del nou projecte"
+msgstr ""
 
 #: common/docman/views/additem.php:84
 #, fuzzy
@@ -1028,14 +1012,12 @@ msgid "Upload archive:"
 msgstr "Puja un fitxer"
 
 #: common/docman/views/addsubdocgroup.php:56
-#, fuzzy
 msgid "Name of the document subfolder to create"
-msgstr "No hi ha dades del document"
+msgstr ""
 
 #: common/docman/views/addsubdocgroup.php:59
-#, fuzzy
 msgid "Name of the document folder to create"
-msgstr "No hi ha dades del document"
+msgstr ""
 
 #: common/docman/views/addsubdocgroup.php:63 www/admin/responses_admin.php:132
 #: www/project/admin/database.php:184 www/project/admin/vhost.php:122
@@ -1438,16 +1420,15 @@ msgstr "No hi ha dades del document"
 #: common/docman/views/pendingfiles.php:127
 #, fuzzy
 msgid "Edit this document"
-msgstr "Edita un grup"
+msgstr "Edita un document"
 
 #: common/docman/views/listfile.php:328
 msgid "Reserve this document for later edition"
 msgstr ""
 
 #: common/docman/views/listfile.php:328
-#, fuzzy
 msgid "Reserve this document"
-msgstr "Documents d'aquest projecte"
+msgstr ""
 
 #: common/docman/views/listfile.php:333
 msgid "Enforce reservation"
@@ -1481,9 +1462,8 @@ msgid "Mass actions for selected documents:"
 msgstr ""
 
 #: common/docman/views/listfile.php:362
-#, fuzzy
 msgid "Move to trash"
-msgstr "No hi ha dades del document"
+msgstr ""
 
 #: common/docman/views/listfile.php:364
 msgid "Reserve for later edition"
@@ -1492,7 +1472,7 @@ msgstr ""
 #: common/docman/views/listfile.php:364
 #, fuzzy
 msgid "Reserve"
-msgstr "Observador"
+msgstr "Reinicia"
 
 #: common/docman/views/listfile.php:366 common/tracker/actions/detail.php:53
 #: common/tracker/actions/mod-limited.php:62 common/tracker/actions/mod.php:60
@@ -1520,9 +1500,8 @@ msgstr "Baixa com CSV"
 #: common/docman/views/listfile.php:376
 #: common/docman/views/listtrashfile.php:209
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:88
-#, fuzzy
 msgid "No documents."
-msgstr "Afegeix un projecte"
+msgstr ""
 
 #: common/docman/views/listtrashfile.php:93
 msgid "Delete permanently all documents and folders with deleted status."
@@ -1540,7 +1519,7 @@ msgstr ""
 #: common/docman/views/listtrashfile.php:191
 #, fuzzy
 msgid "Delete permanently this document."
-msgstr "Documents d'aquest projecte"
+msgstr "Suprimeix aquest rastrejador permanentment."
 
 #: common/docman/views/listtrashfile.php:202
 #: plugins/mailman/www/admin/deletelist.php:60 www/admin/groupdelete.php:61
@@ -1549,9 +1528,8 @@ msgid "Permanently Delete"
 msgstr ""
 
 #: common/docman/views/menu.php:44
-#, fuzzy
 msgid "View Documents"
-msgstr "Afegeix un projecte"
+msgstr ""
 
 #: common/docman/views/menu.php:46
 msgid ""
@@ -1635,7 +1613,7 @@ msgstr "Nou compte"
 #: common/docman/views/pendingfiles.php:62
 #, fuzzy
 msgid "Pending files"
-msgstr "Raó per la què estan pendents:"
+msgstr "Raó per la què estan pendents"
 
 #: common/docman/views/pendingfiles.php:128
 #: common/docman/views/pendingfiles.php:139
@@ -1993,23 +1971,25 @@ msgstr "Diari actualitzat"
 #: common/docman/views/search.php:62
 #, fuzzy
 msgid "Searched words"
-msgstr "Documents d'aquest projecte"
+msgstr "Cerca"
 
 #: common/docman/views/search.php:65
 msgid "All searched words are mandatory"
 msgstr ""
 
 #: common/docman/views/search.php:65
+#, fuzzy
 msgid "With all the words"
-msgstr ""
+msgstr "amb totes les paraules"
 
 #: common/docman/views/search.php:66
 msgid "At least one word must be found"
 msgstr ""
 
 #: common/docman/views/search.php:66
+#, fuzzy
 msgid "With at least one of words"
-msgstr ""
+msgstr "amb una paraula"
 
 #: common/docman/views/search.php:68
 msgid "Filename and contents are used to match searched words"
@@ -2025,9 +2005,8 @@ msgid "search into childs following project hierarchy"
 msgstr ""
 
 #: common/docman/views/search.php:75 plugins/mantisbt/controler/filter.php:91
-#, fuzzy
 msgid "Include child projects"
-msgstr "Projectes pendents:"
+msgstr ""
 
 #: common/docman/views/search.php:126
 msgid "Database query error"
@@ -2039,9 +2018,8 @@ msgid "Your search did not match any documents."
 msgstr "No esteu monitoritzant cap fòrum."
 
 #: common/docman/views/search.php:154 common/docman/views/tree.php:64
-#, fuzzy
 msgid "Browse document manager for this project."
-msgstr "No sou membre de cap projecte actiu"
+msgstr ""
 
 #: common/docman/views/search.php:162
 msgid "Your search is empty."
@@ -2211,8 +2189,8 @@ msgstr "Error afegint un fòrum"
 #, fuzzy, php-format
 msgid "%s message deleted"
 msgid_plural "%s messages deleted"
-msgstr[0] "Suprimits %1$s missatges"
-msgstr[1] "Suprimits %1$s missatges"
+msgstr[0] "Suprimits %s missatges"
+msgstr[1] "Suprimits %s missatges"
 
 #: common/forum/ForumAdmin.class.php:261 www/reporting/timeadd.php:67
 #: www/survey/admin/question.php:78 www/tracker/admin/index.php:238
@@ -2253,9 +2231,8 @@ msgstr "Acció"
 #: plugins/mantisbt/view/admin/editVersion.php:79
 #: plugins/mantisbt/view/roadmap.php:98 plugins/mantisbt/view/roadmap.php:147
 #: www/frs/admin/editrelease.php:347 www/frs/reporting/downloads.php:197
-#, fuzzy
 msgid "Release"
-msgstr "Publicacions"
+msgstr "Publicació"
 
 #: common/forum/ForumAdmin.class.php:360 common/forum/ForumHTML.class.php:328
 #: common/forum/ForumHTML.class.php:546
@@ -2337,7 +2314,7 @@ msgstr "La descripció del fòrum ha de tenir 10 caràcters com a mínim"
 #: common/forum/Forum.class.php:562 common/forum/Forum.class.php:564
 #, fuzzy
 msgid "Illegal characters in Forum name."
-msgstr "Caràcters il·legals al nom del fòrum"
+msgstr "Caràcters il·legals al nom del fòrum."
 
 #: common/forum/Forum.class.php:181 common/forum/Forum.class.php:562
 msgid "No space allowed."
@@ -2360,16 +2337,15 @@ msgid "Welcome to %s"
 msgstr "Benvingut a %s"
 
 #: common/forum/Forum.class.php:265
-#, fuzzy
 msgid "Invalid forum group identifier."
-msgstr "Usuari no vàlid"
+msgstr ""
 
 #: common/forum/Forum.class.php:439 common/forum/Forum.class.php:474
 #: common/frs/FRSPackage.class.php:274 common/frs/FRSPackage.class.php:306
 #: common/tracker/ArtifactType.class.php:527
 #, fuzzy
 msgid "You can only monitor if you are logged in."
-msgstr "Només podeu monitoritzar si sou dins d'una sessió"
+msgstr "Només podeu monitoritzar si sou dins d'una sessió."
 
 #: common/forum/Forum.class.php:507
 msgid "You can only save your place if you are logged in."
@@ -2425,7 +2401,7 @@ msgstr "No teniu permís per accedir a aquesta pàgina"
 #: common/forum/ForumFactory.class.php:158
 #, fuzzy
 msgid "Forum not found"
-msgstr "Enquesta no trobada."
+msgstr "Enquesta no trobada"
 
 #: common/forum/ForumFactory.class.php:192
 #, fuzzy
@@ -2731,9 +2707,8 @@ msgid "Error Adding Release: "
 msgstr "Error a l'afegir una base de dades"
 
 #: common/frs/FRSFile.class.php:232
-#, fuzzy
 msgid "Invalid file_id"
-msgstr "Nom complet no vàlid"
+msgstr "file_id no vàlid"
 
 #: common/frs/FRSFile.class.php:416 common/frs/FRSPackage.class.php:396
 #: common/frs/FRSRelease.class.php:438 common/include/Error.class.php:167
@@ -2770,9 +2745,8 @@ msgid "Error Adding Package: "
 msgstr "Error a l'afegir una base de dades"
 
 #: common/frs/FRSPackage.class.php:205
-#, fuzzy
 msgid "Invalid package_id"
-msgstr "Paràmetre no vàlid"
+msgstr "package_id no vàlid"
 
 #: common/frs/FRSPackage.class.php:291
 #, fuzzy
@@ -3011,9 +2985,8 @@ msgstr "Error"
 #: www/survey/admin/show_questions.php:35
 #: www/survey/admin/show_results_individual.php:35
 #: www/survey/admin/show_results.php:66 www/survey/admin/survey.php:53
-#, fuzzy
 msgid "Permission denied."
-msgstr "Permís denegat"
+msgstr "Permís denegat."
 
 #: common/include/Error.class.php:142 common/include/User.class.php:350
 #: common/include/User.class.php:931 common/include/User.class.php:983
@@ -3037,20 +3010,18 @@ msgid "Exiting with error"
 msgstr "Sortint amb error"
 
 #: common/include/exit.php:50
-#, fuzzy
 msgid ""
 "Permission denied. This project's administrator will have to grant you "
 "permission to view this page."
 msgstr ""
-"L'administrador d'aquest projecte us ha de donar permís per veure aquesta "
-"pàgina."
+"Permís denegat. L'administrador d'aquest projecte us ha de donar permís per "
+"veure aquesta pàgina."
 
 #: common/include/exit.php:68
-#, fuzzy
 msgid ""
 "Permission denied. No project was chosen, project does not exist or you "
 "cannot access it."
-msgstr "Error - No s'ha escollit un group_id"
+msgstr ""
 
 #: common/include/exit.php:104
 msgid "The Site Administrator has turned off this feature."
@@ -3109,18 +3080,16 @@ msgstr "Nom Unix no vàlid."
 
 #: common/include/Group.class.php:317 common/include/Group.class.php:321
 #: common/include/User.class.php:346
-#, fuzzy
 msgid "Unix name already taken."
-msgstr "El nom Unix ja està agafat"
+msgstr "El nom Unix ja està agafat."
 
 #: common/include/Group.class.php:324
-#, fuzzy
 msgid ""
 "Please describe your Registration Project Purpose and Summarization in a "
 "more comprehensive manner."
 msgstr ""
 "Si us plau, descriviu el vostre propòsit de registre d'una manera més "
-"comprensible"
+"comprensible."
 
 #: common/include/Group.class.php:327
 msgid ""
@@ -3658,9 +3627,8 @@ msgstr ""
 #: common/widget/Widget_MyMonitoredFp.class.php:119
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:168
 #: www/export/rss20_activity.php:142
-#, fuzzy
 msgid "File Release System"
-msgstr "Usa el sistema de publicació de fitxers"
+msgstr "Sistema de publicació de fitxers"
 
 #: common/include/group_section_texts.php:34
 #: common/include/Navigation.class.php:518 plugins/blocks/www/index.php:157
@@ -3717,9 +3685,8 @@ msgid "Main Page"
 msgstr "Pàgina principal"
 
 #: common/include/Navigation.class.php:235
-#, fuzzy
 msgid "My Page"
-msgstr "Pàgina principal"
+msgstr ""
 
 #: common/include/Navigation.class.php:237
 msgid "Your Page, widgets selected by you to follow your items."
@@ -3907,7 +3874,7 @@ msgstr ""
 #: common/include/Plugin.class.php:281 common/include/Plugin.class.php:330
 #, php-format
 msgid "Use %s"
-msgstr ""
+msgstr "Usa %s"
 
 #: common/include/Plugin.class.php:348
 #, fuzzy
@@ -4235,9 +4202,8 @@ msgstr ""
 
 #: common/include/SCMPlugin.class.php:162
 #: common/include/SCMPlugin.class.php:176
-#, fuzzy
 msgid "Repository Browser"
-msgstr "Repositori SCM"
+msgstr ""
 
 #: common/include/SCMPlugin.class.php:164
 #: common/include/SCMPlugin.class.php:178
@@ -4943,9 +4909,8 @@ msgstr "Projectes acumulats"
 #: common/reporting/report_utils.php:978
 #: common/reporting/report_utils.php:1042
 #: common/reporting/report_utils.php:1145
-#, fuzzy
 msgid "No data to display."
-msgstr "S'han trobat %1$s preguntes"
+msgstr ""
 
 #: common/reporting/report_utils.php:600 plugins/authopenid/www/index.php:38
 #: plugins/authwebid/www/index.php:35 www/account/change_email-complete.php:52
@@ -5262,7 +5227,6 @@ msgid "Manage Custom Fields"
 msgstr "Afegeix/actualitza els camps extra"
 
 #: common/tracker/actions/admin-tracker.php:48
-#, fuzzy
 msgid ""
 "Add new boxes like Phases, Quality Metrics, Components, etc.  Once added "
 "they can be used with other selection boxes (for example, Categories or "
@@ -5271,7 +5235,7 @@ msgstr ""
 "Afegeix noves caixes com Fases, Mètrica de qualitat, Components, etc.  Un "
 "cop afegides, poden usar-se amb altres caixes de selecció (per exemple, "
 "Categories o Grups) per a descriure i navegar errors o altres tipus "
-"d'artefactes"
+"d'artefactes."
 
 #: common/tracker/actions/admin-tracker.php:52
 #: common/tracker/include/ArtifactTypeHtml.class.php:114
@@ -5702,9 +5666,8 @@ msgid "Export as a CSV file"
 msgstr "No hi ha estadístiques disponibles"
 
 #: common/tracker/actions/csv.php:85 www/pm/csv.php:82
-#, fuzzy
 msgid "Selected CSV Format:"
-msgstr "Actualitza"
+msgstr ""
 
 #: common/tracker/actions/csv.php:87
 #, fuzzy
@@ -6228,9 +6191,8 @@ msgid "Message Body Is Required"
 msgstr "Artefacte: Es requereix el cos del missatge"
 
 #: common/tracker/Artifact.class.php:229
-#, fuzzy
 msgid "Error remapping status"
-msgstr "Error al crear %1$s"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:300
 #, fuzzy
@@ -6238,9 +6200,8 @@ msgid "Invalid Artifact ID"
 msgstr "ID no vàlid"
 
 #: common/tracker/Artifact.class.php:516
-#, fuzzy
 msgid "Error deleting extra field data: "
-msgstr "Error a l'inserir un element"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:527
 #, fuzzy
@@ -6258,9 +6219,8 @@ msgid "Error deleting history: "
 msgstr "Agrupa la informació de l'arbre de projectes"
 
 #: common/tracker/Artifact.class.php:551
-#, fuzzy
 msgid "Error deleting monitor: "
-msgstr "Error al crear un objecte de grup"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:559
 #, fuzzy
@@ -6268,9 +6228,8 @@ msgid "Error deleting artifact: "
 msgstr "Error al crear un objecte de grup"
 
 #: common/tracker/Artifact.class.php:570 common/tracker/Artifact.class.php:580
-#, fuzzy
 msgid "Error updating artifact counts: "
-msgstr "Agrupa la informació de l'arbre de projectes"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:601
 msgid "Valid Email Address Required"
@@ -6435,9 +6394,8 @@ msgid "Invalid ArtifactHistory ID"
 msgstr "ID no vàlid"
 
 #: common/tracker/ArtifactMessage.class.php:89
-#, fuzzy
 msgid "Error: Logged In User Bug Could Not Get User Object"
-msgstr "No s'ha pogut actualitzar elpare"
+msgstr ""
 
 #: common/tracker/ArtifactMessage.class.php:92
 msgid "Logged In: YES"
@@ -6470,9 +6428,8 @@ msgid ""
 msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:328
-#, fuzzy
 msgid "Invalid Last Modified Date Range"
-msgstr "Llista Afegida"
+msgstr ""
 
 #: common/tracker/ArtifactQuery.class.php:344
 #, fuzzy
@@ -6548,7 +6505,7 @@ msgstr "Crea una relació de tasca"
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:43
 #, fuzzy, php-format
 msgid "Trackers for %s"
-msgstr "Fòrums per %1$s"
+msgstr "Fòrums per %s"
 
 #: common/tracker/include/ArtifactTypeFactoryHtml.class.php:47
 #: common/tracker/include/ArtifactTypeHtml.class.php:51
@@ -6955,9 +6912,8 @@ msgid "Cannot set roadmap state: "
 msgstr "No es pot afegir una entrada de la base de dades"
 
 #: common/tracker/views/form-adminroadmap.php:126
-#, fuzzy
 msgid "Cannot set default value: "
-msgstr "Edita una enquesta"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:129
 #, fuzzy
@@ -7030,9 +6986,8 @@ msgstr "Informació no disponible"
 
 #: common/tracker/views/form-adminroadmap.php:280
 #: common/tracker/views/form-adminroadmap.php:367
-#, fuzzy
 msgid "Release(s) order updated"
-msgstr "Data de publicació"
+msgstr ""
 
 #: common/tracker/views/form-adminroadmap.php:283
 #: common/tracker/views/form-adminroadmap.php:370
@@ -7332,9 +7287,8 @@ msgid "Preferences"
 msgstr "Preferències"
 
 #: common/widget/Widget.class.php:366
-#, fuzzy
 msgid "General"
-msgstr "Administració del rastrejador"
+msgstr ""
 
 #: common/widget/WidgetLayoutManager.class.php:182
 #, fuzzy, php-format
@@ -7428,9 +7382,8 @@ msgid "assigned to or submitted by me [AS]"
 msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:104
-#, fuzzy
 msgid "assigned to or monitored by me [AM]"
-msgstr "Assignat a"
+msgstr ""
 
 #: common/widget/Widget_MyArtifacts.class.php:105
 #, fuzzy
@@ -8293,9 +8246,9 @@ msgid ", part of "
 msgstr ""
 
 #: plugins/admssw/common/RDFedFRSPackage.class.php:94
-#, fuzzy, php-format
+#, php-format
 msgid "%1$s release series of project %2$s"
-msgstr "Repositori SCM"
+msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:138
 msgid "ADMS.SW meta-data"
@@ -8476,9 +8429,8 @@ msgid ""
 msgstr ""
 
 #: plugins/authbuiltin/www/post-login.php:115
-#, fuzzy
 msgid "Resend Confirmation Email"
-msgstr "Altres informacions"
+msgstr ""
 
 #: plugins/authbuiltin/www/post-login.php:117
 #, php-format
@@ -8639,9 +8591,9 @@ msgstr ""
 
 #: plugins/authopenid/www/post-login.php:105
 #: plugins/authwebid/www/post-login.php:85
-#, fuzzy, php-format
+#, php-format
 msgid "Unknown user with identity “%s”"
-msgstr "No es pot afegir una entrada de la base de dades"
+msgstr ""
 
 #: plugins/authwebid/include/AuthWebIDPlugin.class.php:82
 #, php-format
@@ -9452,9 +9404,8 @@ msgid "Project external subprojects"
 msgstr "Llista de fitxers del projecte"
 
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:35
-#, fuzzy
 msgid "Plugin (project)"
-msgstr "Projectes pendents:"
+msgstr ""
 
 #: plugins/extsubproj/include/extsubproj_Widget_SubProjects.class.php:39
 #, fuzzy
@@ -9470,9 +9421,8 @@ msgstr "Subprojecte"
 #: plugins/mantisbt/view/admin/viewConfiguration.php:54
 #: plugins/mantisbt/view/admin/viewGlobalConfiguration.php:30
 #: plugins/projects-hierarchy/view/admin/viewGlobalConfiguration.php:31
-#, fuzzy
 msgid "Manage configuration"
-msgstr "Confirmació del canvi d'adreça"
+msgstr ""
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:32
 #, fuzzy
@@ -9704,9 +9654,8 @@ msgid "Printer version"
 msgstr "Versió"
 
 #: plugins/forumml/www/message.php:203
-#, fuzzy
 msgid "Empty archives"
-msgstr "Arxiu de notícies"
+msgstr ""
 
 #: plugins/forumml/www/message.php:209
 #, fuzzy
@@ -9721,12 +9670,12 @@ msgstr "Fil"
 #: plugins/forumml/www/upload.php:82
 #, fuzzy
 msgid "Error: Attachment not found"
-msgstr "Error - no s'han trobat versions"
+msgstr "Error: no s'han trobat versions"
 
 #: plugins/forumml/www/upload.php:85
 #, fuzzy
 msgid "Error: Missing parameter"
-msgstr "Error - falten parametres"
+msgstr "Error: falten parametres"
 
 #: plugins/globaldashboard/include/globalDashboard_utils.php:42
 msgid "Manage Remote Accounts"
@@ -10139,7 +10088,7 @@ msgstr "No s'han trobat coincidències per “%s”"
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:111
 #, fuzzy, php-format
 msgid "Search results for “%s”"
-msgstr "Resultats de cerca per <em>%1$s</em>"
+msgstr "Resultats de cerca per <em>%s</em>"
 
 #: plugins/globalsearch/www/index.php:166 www/admin/grouplist.php:67
 #: www/search/include/renderers/ProjectHtmlSearchRenderer.class.php:45
@@ -10424,7 +10373,7 @@ msgstr ""
 #: plugins/webanalytics/view/admin/viewGlobalConfiguration.php:44
 #, fuzzy
 msgid "Activate this link"
-msgstr "Edita un grup"
+msgstr "Activa"
 
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:81
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:114
