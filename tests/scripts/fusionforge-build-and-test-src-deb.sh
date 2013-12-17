@@ -3,11 +3,26 @@
 . tests/scripts/common-vm
 
 export FORGE_HOME=/opt/gforge
-export DIST=wheezy
+export HOST=$1
+case $HOST in
+    debian7.local)
+	export DIST=wheezy
+	VMTEMPLATE=debian7
+	;;
+    debian8.local)
+	export DIST=jessie
+	VMTEMPLATE=debian8
+	;;
+    *)
+	export DIST=jessie
+	VMTEMPLATE=debian8
+	;;
+esac	
+
 get_config $@
 prepare_workspace
-destroy_vm -t debian7 $@
-start_vm_if_not_keeped -t debian7 $@
+destroy_vm -t $VMTEMPLATE $@
+start_vm_if_not_keeped -t $VMTEMPLATE $@
 
 # Build 3rd-party 
 # make -C 3rd-party -f Makefile.deb BUILDRESULT=$BUILDRESULT LOCALREPODEB=$WORKSPACE/build/debian BUILDDIST=$DIST DEBMIRROR=$DEBMIRROR botclean botbuild
@@ -77,5 +92,5 @@ retcode=$(ssh root@$HOST cat /root/phpunit.exitcode)
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 ssh root@$HOST "vncserver -kill :1" || retcode=$?
 
-stop_vm_if_not_keeped -t debian7 $@
+stop_vm_if_not_keeped -t $VMTEMPLATE $@
 return $retcode
