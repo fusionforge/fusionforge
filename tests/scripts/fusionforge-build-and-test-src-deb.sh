@@ -7,15 +7,15 @@ export HOST=$1
 case $HOST in
     debian7.local)
 	export DIST=wheezy
-	VMTEMPLATE=debian7
+	VM=debian7
 	;;
     debian8.local)
 	export DIST=jessie
-	VMTEMPLATE=debian8
+	VM=debian8
 	;;
     *)
 	export DIST=jessie
-	VMTEMPLATE=debian8
+	VM=debian8
 	;;
 esac	
 
@@ -23,8 +23,8 @@ export FILTER="DEBDebian70TestsSRC.php"
 
 get_config $@
 prepare_workspace
-destroy_vm -t $VMTEMPLATE $@
-start_vm_if_not_keeped -t $VMTEMPLATE $@
+destroy_vm -t $VM $@
+start_vm_if_not_keeped -t $VM $@
 
 setup_debian_3rdparty_repo
 
@@ -67,5 +67,5 @@ ssh root@$HOST "$FORGE_HOME/tests/func/vncxstartsuite.sh $FILTER"
 retcode=$?
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 
-stop_vm_if_not_keeped -t $VMTEMPLATE $@
+stop_vm_if_not_keeped -t $VM $@
 exit $retcode
