@@ -9,8 +9,21 @@ set -x
 get_config
 
 export FORGE_HOME=/usr/share/gforge
-export DIST=wheezy
 export HOST=$1
+case $HOST in
+    debian7.local)
+	export DIST=wheezy
+	VMTEMPLATE=debian7
+	;;
+    debian8.local)
+	export DIST=jessie
+	VMTEMPLATE=debian8
+	;;
+    *)
+	export DIST=jessie
+	VMTEMPLATE=debian8
+	;;
+esac	
 
 prepare_workspace
 
@@ -63,14 +76,8 @@ reprepro -Vb $REPOPATH include $DIST $CHANGEFILE
 
 cd $CHECKOUTPATH
 
-destroy_vm -t debian7 $HOST
-start_vm_if_not_keeped -t debian7 $HOST
-
-# Build 3rd-party 
-# make -C 3rd-party -f Makefile.deb BUILDRESULT=$BUILDRESULT LOCALREPODEB=$WORKSPACE/build/debian BUILDDIST=$DIST DEBMIRROR=$DEBMIRROR botclean botbuild
-
-# Build fusionforge
-# make -f Makefile.debian BUILDRESULT=$WORKSPACE/build/packages LOCALREPODEB=$WORKSPACE/build/debian rwheezy
+destroy_vm -t $VMTEMPLATE $HOST
+start_vm_if_not_keeped -t $VMTEMPLATE $HOST
 
 cd $CHECKOUTPATH
 # Transfer preseeding
@@ -165,5 +172,5 @@ retcode=$(ssh root@$HOST cat /root/phpunit.exitcode)
 rsync -av root@$HOST:/var/log/ $WORKSPACE/reports/
 ssh root@$HOST "vncserver -kill :1" || retcode=$?
 
-stop_vm_if_not_keeped -t debian7 $@
+stop_vm_if_not_keeped -t $VMTEMPLATE $@
 exit $retcode
