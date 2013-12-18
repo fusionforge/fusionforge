@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002 (c) Silicon and Software Systems (S3)
- * Copyright 2010 (c) Franck Villaume
+ * Copyright 2010-2013, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -42,30 +42,25 @@ if ($user_id && is_numeric($user_id)) {
 		Fill in the info to create a job
 	*/
 	//for security, include group_id
-	$result=db_query_params('SELECT * FROM users WHERE user_id=$1', array($user_id));
+	$result = db_query_params('SELECT * FROM users WHERE user_id=$1', array($user_id));
 	if (!$result || db_numrows($result) < 1) {
 		$error_msg .= _('No Such User')._(': ').db_error();
-	    people_header(array('title'=>_('View a User Profile')));
+		people_header(array('title' => _('View a User Profile')));
 	} else {
-
-	    people_header(array('title'=>_('View a User Profile')));
+		people_header(array('title' => _('View a User Profile')));
 		/*
 			profile set private
 		*/
-		if (db_result($result,0,'people_view_skills') != 1) {
-			echo '<h2>'._('This User Has Set His/Her Profile to Private').'</h2>';
+		if (db_result($result, 0, 'people_view_skills') != 1) {
+			echo '<p class="warning">'._('This user has set his/her profile to private.').'</p>';
 			people_footer(array());
 			exit;
 		}
-
-		echo '
-        <p>
-		<strong>'._('Skills profile for').' : </strong>'. db_result($result,0,'realname') .
-        ' ('.db_result($result, 0, 'user_name') .
-        ')</p> <table class="fullwidth">';
-
-        displayUserSkills($user_id, 0);
-
+		echo '<p>
+			<strong>'._('Skills profile for').' : </strong>'. db_result($result, 0, 'realname') .
+			' ('.db_result($result, 0, 'user_name') .
+			')</p> <table class="fullwidth">';
+		displayUserSkills($user_id, 0);
 		echo '</table>';
 	}
 
