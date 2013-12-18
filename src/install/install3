@@ -300,7 +300,7 @@ EOF
 	esac
 
 	msg green " * Loading FusionForge DB"
-	su $susufix $gforge_user -c "psql $gforge_db < $fusionforge_src_dir/db/gforge.sql" >> /tmp/gforge-import.log 2>&1
+	su $susufix $gforge_user -c "psql $gforge_db < $fusionforge_dir/db/gforge.sql" >> /tmp/gforge-import.log 2>&1
 
 	msg green " * Running php db/upgrade-db.php"
         if ! php $fusionforge_src_dir/db/upgrade-db.php >> /tmp/gforge-upgrade.log ; then
