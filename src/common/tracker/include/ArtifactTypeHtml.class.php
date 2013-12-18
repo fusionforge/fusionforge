@@ -143,21 +143,23 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 
 	/**
-	 * @param array  $selected
-	 * @param bool   $show_100
-	 * @param string $text_100
-	 * @param bool   $show_any
-	 * @param string $text_any
-	 * @param array  $types
-	 * @param bool   $status_show_100
-	 * @param string $mode
+	 * renderExtraFields - ???
+	 *
+	 * @param	array	$selected
+	 * @param	bool	$show_100
+	 * @param	string	$text_100
+	 * @param	bool	$show_any
+	 * @param	string	$text_any
+	 * @param	array	$types
+	 * @param	bool	$status_show_100
+	 * @param	string	$mode
 	 */
-	function renderExtraFields($selected=array(),
-                               $show_100=false,$text_100='none',
-                               $show_any=false,$text_any='Any',
-                               $types=array(),
-                               $status_show_100=false,
-                               $mode='') {
+	function renderExtraFields($selected = array(),
+                               $show_100 = false, $text_100 = 'none',
+                               $show_any = false, $text_any = 'Any',
+                               $types = array(),
+                               $status_show_100 = false,
+                               $mode = '') {
 		$efarr = $this->getExtraFields($types);
 		//each two columns, we'll reset this and start a new row
 
@@ -183,6 +185,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		if ($mode === 'DISPLAY') {
 			$keys=array_keys($efarr);
 			for ($k=0; $k<count($keys); $k++) {
+				$post_name = '';
 				$i=$keys[$k];
 
 				if (!isset($selected[$efarr[$i]['extra_field_id']]))
@@ -220,16 +223,16 @@ class ArtifactTypeHtml extends ArtifactType {
 					// Convert artifact id to links.
 					$value = preg_replace('/\b(\d+)\b/e', "_artifactid2url('\\1')", $value);
 				}
-				$template = str_replace('{$PostName:'.$efarr[$i]['field_name'].'}',$post_name,$template);
-				$template = str_replace('{$'.$efarr[$i]['field_name'].'}',$value,$template);
+				$template = str_replace('{$PostName:'.$efarr[$i]['field_name'].'}', $post_name, $template);
+				$template = str_replace('{$'.$efarr[$i]['field_name'].'}', $value, $template);
 			}
 			echo $template;
 			return ;
 		}
 
-		$keys=array_keys($efarr);
-		for ($k=0; $k<count($keys); $k++) {
-			$i=$keys[$k];
+		$keys = array_keys($efarr);
+		for ($k = 0; $k < count($keys); $k++) {
+			$i = $keys[$k];
 			$post_name = '';
 
 			if (!isset($selected[$efarr[$i]['extra_field_id']]))
