@@ -44,14 +44,14 @@ class SurveyHTML extends Error {
 	 * Show survey header
 	 */
 	function header($params) {
-		global $group_id,$is_admin_page,$HTML;
+		global $group_id, $is_admin_page, $HTML;
 
 		if (!forge_get_config('use_survey')) {
 			exit_disabled();
 		}
 
-		$params['toptab']='surveys';
-		$params['group']=$group_id;
+		$params['toptab'] = 'surveys';
+		$params['group'] = $group_id;
 
 		if ($project = group_get_object($group_id)){
 			if (!$project->usesSurvey()) {
@@ -71,16 +71,24 @@ class SurveyHTML extends Error {
 						'/survey/admin/question.php?group_id='.$group_id,
 						'/survey/admin/show_results.php?group_id='.$group_id,
 						'/survey/admin/?group_id='.$group_id
+					),
+					array(
+						null,
+						null,
+						null,
+						null
 					)
 				);
 			} else {
 				$labels[] = _('Views Surveys');
 				$links[]  = '/survey/?group_id='.$group_id;
+				$arr[] = null;
 				if (forge_check_perm ('project_admin', $group_id)) {
 						$labels[] = _('Administration');
 						$links[]  = '/survey/admin/?group_id='.$group_id;
+						$arr[] = null;
 				}
-				$params['submenu'] = $HTML->subMenu($labels,$links);
+				$params['submenu'] = $HTML->subMenu($labels, $links, $arr);
 			}
 			site_project_header($params);
 		}// end if (valid group id)
