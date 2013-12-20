@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-16 09:58+0100\n"
+"POT-Creation-Date: 2013-12-20 10:28+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -1280,7 +1280,7 @@ msgstr "Nachname:"
 #: common/docman/views/pendingfiles.php:63 common/docman/views/search.php:150
 #: common/include/Group.class.php:792
 #: common/tracker/ArtifactExtraField.class.php:327
-#: common/tracker/include/ArtifactTypeHtml.class.php:327
+#: common/tracker/include/ArtifactTypeHtml.class.php:330
 #: common/tracker/views/form-addextrafieldoption.php:107
 #: common/tracker/views/form-addextrafield.php:130
 #: common/tracker/views/form-updateextrafieldelement.php:63
@@ -1311,7 +1311,7 @@ msgstr "Status"
 #: common/docman/views/listfile.php:218
 #: common/docman/views/listtrashfile.php:129
 #: common/docman/views/pendingfiles.php:63
-#: common/tracker/include/ArtifactTypeHtml.class.php:369 www/frs/index.php:206
+#: common/tracker/include/ArtifactTypeHtml.class.php:372 www/frs/index.php:206
 #: www/project/admin/editimages.php:267
 msgid "Size"
 msgstr "Größe"
@@ -1387,9 +1387,9 @@ msgstr ""
 #: common/tracker/include/ArtifactHtml.class.php:111
 #: common/tracker/include/ArtifactHtml.class.php:169
 #: common/tracker/include/ArtifactHtml.class.php:178
-#: common/tracker/include/ArtifactTypeHtml.class.php:338
-#: common/tracker/include/ArtifactTypeHtml.class.php:339
-#: common/tracker/include/ArtifactTypeHtml.class.php:380
+#: common/tracker/include/ArtifactTypeHtml.class.php:341
+#: common/tracker/include/ArtifactTypeHtml.class.php:342
+#: common/tracker/include/ArtifactTypeHtml.class.php:383
 #: common/widget/Widget_MyLatestSvnCommits.class.php:65
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:112
 #: common/widget/Widget_MyProjectsLastDocuments.class.php:114
@@ -1650,7 +1650,7 @@ msgid "Mass actions for selected pending files:"
 msgstr ""
 
 #: common/docman/views/reporting.php:92
-#: common/tracker/include/ArtifactTypeHtml.class.php:325
+#: common/tracker/include/ArtifactTypeHtml.class.php:328
 #: www/activity/index.php:180 www/frs/reporting/downloads.php:109
 #: www/people/editprofile.php:278 www/people/skills_utils.php:50
 #: www/people/skills_utils.php:154 www/pm/add_task.php:95
@@ -1690,7 +1690,7 @@ msgstr "Startdatum"
 #: common/tracker/actions/taskmgr.php:112
 #: common/tracker/actions/taskmgr.php:161
 #: common/tracker/actions/taskmgr.php:162
-#: common/tracker/include/ArtifactTypeHtml.class.php:321
+#: common/tracker/include/ArtifactTypeHtml.class.php:324
 #: common/tracker/include/build_submission_form.php:66
 #: common/tracker/include/build_submission_form.php:72
 #: common/tracker/include/build_submission_form.php:79
@@ -1878,7 +1878,7 @@ msgid ":"
 msgstr ""
 
 #: common/docman/views/reporting.php:94
-#: common/tracker/include/ArtifactTypeHtml.class.php:326
+#: common/tracker/include/ArtifactTypeHtml.class.php:329
 #: www/activity/index.php:181 www/frs/reporting/downloads.php:111
 #: www/people/editprofile.php:279 www/people/skills_utils.php:51
 #: www/people/skills_utils.php:155 www/pm/add_task.php:110
@@ -1952,7 +1952,7 @@ msgstr "Benutzer"
 #: common/tracker/actions/detail.php:69
 #: common/tracker/include/ArtifactHtml.class.php:110
 #: common/tracker/include/ArtifactHtml.class.php:147
-#: common/tracker/include/ArtifactTypeHtml.class.php:371
+#: common/tracker/include/ArtifactTypeHtml.class.php:374
 #: common/widget/Widget_ProjectLatestDocuments.class.php:73
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:88
 #: plugins/contribtracker/common/ContribTrackerPlugin.class.php:111
@@ -2496,7 +2496,7 @@ msgstr "Dies ist der Inhalt der wartenden Nachricht"
 #: common/forum/ForumHTML.class.php:209 common/forum/ForumHTML.class.php:267
 #: common/forum/ForumMessage.class.php:666
 #: common/tracker/include/ArtifactHtml.class.php:148
-#: common/tracker/include/ArtifactTypeHtml.class.php:372
+#: common/tracker/include/ArtifactTypeHtml.class.php:375
 #: www/activity/index.php:266 www/forum/message.php:126
 #: www/pm/include/ProjectTaskHTML.class.php:157
 #: www/pm/include/ProjectTaskHTML.class.php:203
@@ -2531,7 +2531,7 @@ msgstr "Warnung: Die ausgewählte Datei wird permanent gelöscht"
 #: common/forum/ForumHTML.class.php:350 common/tracker/actions/detail.php:151
 #: common/tracker/actions/mod-limited.php:177
 #: common/tracker/actions/mod.php:240
-#: common/tracker/include/ArtifactTypeHtml.class.php:367
+#: common/tracker/include/ArtifactTypeHtml.class.php:370
 #: www/forum/attachment.php:41 www/forum/attachment.php:123
 #: www/forum/attachment.php:151
 msgid "Attachments"
@@ -5626,7 +5626,7 @@ msgid "Submitted by"
 msgstr "Gepostet von"
 
 #: common/tracker/actions/browse.php:571 common/tracker/actions/mod.php:228
-#: common/tracker/include/ArtifactTypeHtml.class.php:321
+#: common/tracker/include/ArtifactTypeHtml.class.php:324
 #: common/tracker/views/form-customizelist.php:45
 msgid "Related Tasks"
 msgstr "Verwandte Aufgaben"
@@ -5659,8 +5659,8 @@ msgid "No Change"
 msgstr "Keine Änderung"
 
 #: common/tracker/actions/browse.php:746
-#: common/tracker/include/ArtifactTypeHtml.class.php:688
-#: common/tracker/include/ArtifactTypeHtml.class.php:722
+#: common/tracker/include/ArtifactTypeHtml.class.php:691
+#: common/tracker/include/ArtifactTypeHtml.class.php:725
 msgid "Nobody"
 msgstr "Niemanden"
 
@@ -5825,9 +5825,9 @@ msgid "Included"
 msgstr "Eingefügter Text von %s"
 
 #: common/tracker/actions/format_csv.php:76
-#: common/tracker/include/ArtifactTypeHtml.class.php:542
-#: common/tracker/include/ArtifactTypeHtml.class.php:587
-#: common/tracker/include/ArtifactTypeHtml.class.php:754
+#: common/tracker/include/ArtifactTypeHtml.class.php:545
+#: common/tracker/include/ArtifactTypeHtml.class.php:590
+#: common/tracker/include/ArtifactTypeHtml.class.php:757
 #: plugins/scmhg/common/HgPlugin.class.php:624 www/admin/pluginman.php:230
 #: www/admin/pluginman.php:249 www/admin/pluginman.php:261
 #: www/admin/pluginman.php:262 www/include/html.php:322
@@ -6001,8 +6001,8 @@ msgid "Default project query (for project level query only)"
 msgstr "Standard Projektsuche (nur für Projektlevel-Suche)"
 
 #: common/tracker/actions/query.php:367
-#: common/tracker/include/ArtifactTypeHtml.class.php:254
-#: common/tracker/include/ArtifactTypeHtml.class.php:261
+#: common/tracker/include/ArtifactTypeHtml.class.php:257
+#: common/tracker/include/ArtifactTypeHtml.class.php:264
 #, php-format
 msgid "(%% for wildcards)"
 msgstr "(%% als Joker)"
@@ -6610,26 +6610,26 @@ msgstr "Vorgefertigte Antworten hinzufügen/aktualisieren"
 msgid "Clone Tracker"
 msgstr "Klon Tracker"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:323
+#: common/tracker/include/ArtifactTypeHtml.class.php:326
 #, fuzzy
 msgid "Task Id and Summary"
 msgstr "Zusammenfassung des Auftrags"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:324
+#: common/tracker/include/ArtifactTypeHtml.class.php:327
 msgid "Progress"
 msgstr ""
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:328
+#: common/tracker/include/ArtifactTypeHtml.class.php:331
 #: www/pm/include/ProjectTaskHTML.class.php:111
 msgid "Remove Relation"
 msgstr "Entferne Beziehung"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:354
+#: common/tracker/include/ArtifactTypeHtml.class.php:357
 #, fuzzy, php-format
 msgid "Average completion rate: %d%%"
 msgstr "Prozent fertig: %d%%"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:370
+#: common/tracker/include/ArtifactTypeHtml.class.php:373
 #: common/tracker/views/form-adminroadmap.php:193
 #: plugins/blocks/www/index.php:196 plugins/contribtracker/www/index.php:134
 #: plugins/mantisbt/view/admin/addCategory.php:32
@@ -6653,7 +6653,7 @@ msgstr "Prozent fertig: %d%%"
 msgid "Name"
 msgstr "Name"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:373
+#: common/tracker/include/ArtifactTypeHtml.class.php:376
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:97
 #: common/widget/Widget_ProjectLatestFileReleases.class.php:146
 #: plugins/mantisbt/view/viewAttachment.php:56
@@ -6661,7 +6661,7 @@ msgstr "Name"
 msgid "Download"
 msgstr "Download"
 
-#: common/tracker/include/ArtifactTypeHtml.class.php:666
+#: common/tracker/include/ArtifactTypeHtml.class.php:669
 msgid ""
 "Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)"
 msgstr ""
@@ -19635,19 +19635,19 @@ msgstr "Erforderliche Fähigkeiten"
 msgid "Posting ID not found"
 msgstr "ID des Eintragenden nicht gefunden"
 
-#: www/people/viewprofile.php:48 www/people/viewprofile.php:51
+#: www/people/viewprofile.php:48 www/people/viewprofile.php:50
 msgid "View a User Profile"
 msgstr "Ein Benutzerprofil anschauen"
 
-#: www/people/viewprofile.php:56
-msgid "This User Has Set His/Her Profile to Private"
+#: www/people/viewprofile.php:55
+msgid "This user has set his/her profile to private."
 msgstr "Dieser Benutzer hat sein/ihr Profil als privat eingestellt"
 
-#: www/people/viewprofile.php:63
+#: www/people/viewprofile.php:60
 msgid "Skills profile for"
 msgstr "Qualifikationsprofil für"
 
-#: www/people/viewprofile.php:78
+#: www/people/viewprofile.php:73
 #, fuzzy
 msgid "User_id not found."
 msgstr "Umfrage nicht gefunden."
