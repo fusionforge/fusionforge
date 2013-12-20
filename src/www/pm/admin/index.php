@@ -285,10 +285,10 @@ if ($add_cat && $group_project_id) {
 	<input type="hidden" name="post_changes" value="y" />
 	<strong><?php echo _('New Subproject Name').utils_requiredField()?></strong>
 	<br />
-	<input type="text" name="project_name" value="" size="15" maxlength="30" required="required" pattern=".{5,}" />
+	<input type="text" name="project_name" value="" size="15" maxlength="30" required="required" pattern=".{5,}" title="<?php echo _('At least 5 characters') ?>" />
 	<p />
 	<strong><?php echo _('Description').utils_requiredField() ?></strong><br />
-	<input type="text" name="description" value="" size="40" maxlength="80" required="required" pattern=".{10,}" />
+	<input type="text" name="description" value="" size="40" maxlength="80" required="required" pattern=".{10,}" title="<?php echo _('At least 10 characters') ?>" />
 	<p />
 	<strong><?php echo _('Send All Updates To')._(':'); ?></strong><br />
 	<input type="text" name="send_all_posts_to" value="" size="40" maxlength="80" /><p />
@@ -324,7 +324,7 @@ if ($add_cat && $group_project_id) {
 		</label>
 		</td>
 		<td>
-			<input id="project_name" type="text" name="project_name" value="<?php echo $pg->getName() ?>" />
+			<input id="project_name" type="text" name="project_name" value="<?php echo $pg->getName() ?>" required="required" pattern=".{5,}" title="<?php echo _('At least 5 characters') ?>" />
 		</td>
 	</tr>
 	<tr>
@@ -334,7 +334,7 @@ if ($add_cat && $group_project_id) {
 		</label>
 		</td>
 		<td>
-			<input id="description" type="text" name="description" value="<?php echo $pg->getDescription(); ?>" size="40" maxlength="80" />
+			<input id="description" type="text" name="description" value="<?php echo $pg->getDescription(); ?>" size="40" maxlength="80" required="required" pattern=".{10,}" title="<?php echo _('At least 10 characters') ?>" />
 		</td>
 	</tr>
 	<tr>
