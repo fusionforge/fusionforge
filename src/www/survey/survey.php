@@ -52,10 +52,10 @@ $title = _('Vote for Survey') . _(': ') . $s->getTitle();
 $sh->header(array('title'=>$title));
 
 if (!$survey_id) {
-    echo '<p class="error">'._('For some reason, the Project ID or Survey ID did not make it to this page').'</p>';
+	echo '<p class="error">'._('For some reason, the Project ID or Survey ID did not make it to this page').'</p>';
 } else {
 	plugin_hook ("blocks", "survey_".$s->getTitle());
-    echo($sh->showSurveyForm($s));
+	echo($sh->showSurveyForm($s));
 }
 
 $sh->footer(array());
