@@ -75,9 +75,11 @@ if (getStringFromRequest('submit')) {
 		$warning_msg = _("You can't register an account unless you accept the terms of use.");
 		$valide = 0;
 	}
-	$params['valide'] =& $valide;
-	$params['warning_msg'] =& $warning_msg;
-	plugin_hook('captcha_check', $params);
+	if (!forge_check_global_perm('forge_admin')) {
+		$params['valide'] =& $valide;
+		$params['warning_msg'] =& $warning_msg;
+		plugin_hook('captcha_check', $params);
+	}
 
 	if ($valide) {
 		$activate_immediately = getIntFromRequest('activate_immediately');
@@ -211,7 +213,7 @@ if($toDisplay != "") {
 	echo _('Email Address') . _(': ') . utils_requiredField() . "<br />\n<em>";
 	printf(_('This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@%1$s&gt; that will forward to this address.'), forge_get_config('users_host')); ?></em>
 <br /><label for="email">
-    <input id="email" size="40" type="text" name="email" value="<?php print(htmlspecialchars($email)); ?>"/>
+    <input id="email" size="40" type="text" name="email" required="required" value="<?php print(htmlspecialchars($email)); ?>"/>
 </label>
 </p>
 <p>
@@ -261,8 +263,9 @@ if($toDisplay != "") {
 	<p><input type="checkbox" name="activate_immediately" value="1" />
 <?php print _('Activate this user immediately') ; ?>
 	</p>
-<?php }
-plugin_hook('captcha_form');
+<?php } else {
+		plugin_hook('captcha_form');
+	}
 ?>
 
 <p>
