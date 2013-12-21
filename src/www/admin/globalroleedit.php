@@ -4,6 +4,7 @@
  *
  * Copyright 2010-2011, Roland Mas
  * Copyright (c) 2011 Thorsten Glaser <t.glaser@tarent.de>
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -25,8 +26,6 @@ require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfwww.'admin/admin_utils.php';
 require_once $gfwww.'include/role_utils.php';
-
-site_admin_header(array('title'=>_('Site Admin')));
 
 $role_id = getIntFromRequest('role_id');
 $data = getStringFromRequest('data');
@@ -105,6 +104,8 @@ if (getStringFromRequest('adduser')) {
 			} else {
 				$error_msg .= _("Error while adding user to role") ;
 			}
+		} else {
+			$error_msg .= _('Wrong user name.');
 		}
 	} else {
 		$error_msg .= _("Cannot add user to this type of role") ;
@@ -135,6 +136,8 @@ if (getStringFromRequest('dormusers')) {
 		$error_msg .= _("Cannot remove user from this type of role") ;
 	}
 }
+
+site_admin_header(array('title'=>_('Site Admin')));
 
 if ($role instanceof RoleExplicit) {
 	$users = $role->getUsers () ;
