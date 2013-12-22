@@ -8,6 +8,7 @@
  * Copyright 2009-2010, Roland Mas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * Copyright (C) 2012-2013 Marc-Etienne Vargenau - Alcatel-Lucent
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -91,88 +92,100 @@ if (!session_loggedin()) {
 
 			//  get the Project object
 			//
-			$atf = new ArtifactTypeFactory($p);
-			$at_arr = $atf->getArtifactTypes();
-
-			$art_found = 0;
-
-			if(count($at_arr) > 0) {
+			if (!$p->usesTracker()) {
 				echo '
 				<tr>
 				<td colspan="' . (array_sum($display_col)+1) . '" align="left" style="background-color: #CADACA; padding-top: 4px; border-top: 1px dotted darkgreen; border-bottom: 1px solid darkgreen; font-size: larger; color: darkgreen;"><strong> • ' .
-					util_make_link('/tracker/?group_id='.$p->getID(),
-							$p->getPublicName())
-					. '</strong></td></tr>';
-				foreach($at_arr as $at) {
-					$art_found = 1;
-					//
-					//      Create the ArtifactType object
-					//
-					$ath = new ArtifactTypeHtml($p,$at->getID());
-					// create artifact object, setup object
-					$af = new ArtifactFactory($ath);
-					$af->setup(0,"priority","DESC",0,"",0,1,null);
-					// get artifacts from object
-					$art_arr = $af->getArtifacts();
-					if (count($art_arr) > 0) {
-						echo '<tr><td colspan="' . (array_sum($display_col)+1) . '" align="left" style="color: darkred; border-bottom: 1px solid #A0A0C0; border-top: 1px dotted #A0A0C0; background-color: #CACADA;"><strong> · '.
-							util_make_link ('/tracker/?group_id='.$at->Group->getID().'&amp;atid='.$at->getID(),
-									$at->getName()) . '</strong></td></tr>';
-						$toggle=0;
-						foreach($art_arr as $art) {
-							echo '<tr '. $HTML->boxGetAltRowStyle($toggle++) . ' class="top"><td class="align-center">'. $art->getID() .'</td>';
-							if ($display_col['summary'])
-							echo '<td class="align-left"><a href="/tracker/?func=detail&aid='.
-								$art->getID() .
-								'&amp;group_id='. $p->getID() .'&amp;atid='.
-								$ath->getID().'">'.
-								$art->getSummary().
-								'</a></td>';
-							if ($display_col['changed'])
-								echo '<td width="150">'
-									.date(_('Y-m-d'),$art->getLastModifiedDate()) .'</td>';
-							if ($display_col['status'])
-								echo '<td>'. $art->getStatusName() .'</td>';
-							if ($display_col['priority'])
-								echo '<td class="priority'.$art->getPriority() .'" align="center">'. $art->getPriority() .'</td>';
-							if ($display_col['assigned_to'])
-								echo '<td>'. $art->getAssignedRealName() .'</td>';
-							if ($display_col['submitted_by'])
-								echo '<td>'. $art->getSubmittedRealName() .'</td>';
-							if ($display_col['related_tasks']) {
-								$result_tasks = $art->getRelatedTasks();
-								if($result_tasks) {
-									$taskcount = db_numrows($art->relatedtasks);
-									echo '<td>';
-								        if ($taskcount > 0) {
-										for ($itask = 0; $itask < $taskcount; $itask++) {
-											if($itask>0)
-												echo '<br/>';
+						util_make_link('/tracker/?group_id='.$p->getID(),
+								$p->getPublicName())
+						. '</strong></td></tr>';
+				echo '
+				<tr>
+				<td colspan="' . (array_sum($display_col)+1) . '" align="left"><strong>'.('This project is not using the tracker feature.').'</strong></td></tr>';
+			} else {
+				$atf = new ArtifactTypeFactory($p);
+				$at_arr = $atf->getArtifactTypes();
 
-											$taskinfo = db_fetch_array($art->relatedtasks, $itask);
-											$taskid = $taskinfo['project_task_id'];
-											$projectid = $taskinfo['group_project_id'];
-											$groupid   = $taskinfo['group_id'];
-											$g = group_get_object($groupid);
-											$pg = new ProjectGroup($g, $projectid);
-											echo $pg->getName().'<br/>';
-											$summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
-											echo '<a href="../pm/task.php?func=detailtask&amp;project_task_id='.$taskid.'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid.'">';
-											echo $summary;
-											echo '</a>';
-										}
-									}
-									echo '</td>';
-								}
-							}
-							echo '</tr>';
-						}
-					}
-				}
-				if (!$art_found) {
+				$art_found = 0;
+
+				if(count($at_arr) > 0) {
 					echo '
 					<tr>
-					<td colspan="' . (array_sum($display_col)+1) . '" align="left"><strong> --</strong></td></tr>';
+					<td colspan="' . (array_sum($display_col)+1) . '" align="left" style="background-color: #CADACA; padding-top: 4px; border-top: 1px dotted darkgreen; border-bottom: 1px solid darkgreen; font-size: larger; color: darkgreen;"><strong> • ' .
+						util_make_link('/tracker/?group_id='.$p->getID(),
+								$p->getPublicName())
+						. '</strong></td></tr>';
+					foreach($at_arr as $at) {
+						$art_found = 1;
+						//
+						//      Create the ArtifactType object
+						//
+						$ath = new ArtifactTypeHtml($p,$at->getID());
+						// create artifact object, setup object
+						$af = new ArtifactFactory($ath);
+						$af->setup(0,"priority","DESC",0,"",0,1,null);
+						// get artifacts from object
+						$art_arr = $af->getArtifacts();
+						if (count($art_arr) > 0) {
+							echo '<tr><td colspan="' . (array_sum($display_col)+1) . '" align="left" style="color: darkred; border-bottom: 1px solid #A0A0C0; border-top: 1px dotted #A0A0C0; background-color: #CACADA;"><strong> · '.
+								util_make_link ('/tracker/?group_id='.$at->Group->getID().'&amp;atid='.$at->getID(),
+										$at->getName()) . '</strong></td></tr>';
+							$toggle=0;
+							foreach($art_arr as $art) {
+								echo '<tr '. $HTML->boxGetAltRowStyle($toggle++) . ' class="top"><td class="align-center">'. $art->getID() .'</td>';
+								if ($display_col['summary'])
+								echo '<td class="align-left"><a href="/tracker/?func=detail&aid='.
+									$art->getID() .
+									'&amp;group_id='. $p->getID() .'&amp;atid='.
+									$ath->getID().'">'.
+									$art->getSummary().
+									'</a></td>';
+								if ($display_col['changed'])
+									echo '<td width="150">'
+										.date(_('Y-m-d'),$art->getLastModifiedDate()) .'</td>';
+								if ($display_col['status'])
+									echo '<td>'. $art->getStatusName() .'</td>';
+								if ($display_col['priority'])
+									echo '<td class="priority'.$art->getPriority() .'" align="center">'. $art->getPriority() .'</td>';
+								if ($display_col['assigned_to'])
+									echo '<td>'. $art->getAssignedRealName() .'</td>';
+								if ($display_col['submitted_by'])
+									echo '<td>'. $art->getSubmittedRealName() .'</td>';
+								if ($display_col['related_tasks']) {
+									$result_tasks = $art->getRelatedTasks();
+									if($result_tasks) {
+										$taskcount = db_numrows($art->relatedtasks);
+										echo '<td>';
+										if ($taskcount > 0) {
+											for ($itask = 0; $itask < $taskcount; $itask++) {
+												if($itask>0)
+													echo '<br/>';
+
+												$taskinfo = db_fetch_array($art->relatedtasks, $itask);
+												$taskid = $taskinfo['project_task_id'];
+												$projectid = $taskinfo['group_project_id'];
+												$groupid   = $taskinfo['group_id'];
+												$g = group_get_object($groupid);
+												$pg = new ProjectGroup($g, $projectid);
+												echo $pg->getName().'<br/>';
+												$summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
+												echo '<a href="../pm/task.php?func=detailtask&amp;project_task_id='.$taskid.'&amp;group_id='.$groupid.'&amp;group_project_id='.$projectid.'">';
+												echo $summary;
+												echo '</a>';
+											}
+										}
+										echo '</td>';
+									}
+								}
+								echo '</tr>';
+							}
+						}
+					}
+					if (!$art_found) {
+						echo '
+						<tr>
+						<td colspan="' . (array_sum($display_col)+1) . '" align="left"><strong> --</strong></td></tr>';
+					}
 				}
 			}
 		}
