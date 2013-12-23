@@ -400,7 +400,7 @@ class hudsonViews extends Views {
 		echo '<div id="hudson_add_job" style="display:none" >';
 		echo ' <form action="">'."\n";
 		echo '   <label for="hudson_job_url">'._("Job URL:").'</label>'."\n";
-		echo '   <input id="hudson_job_url" name="hudson_job_url" type="text" size="64" />'."\n";
+		echo '   <input id="hudson_job_url" name="hudson_job_url" type="url" size="64" placeholder="http://myCIserver/hudson/job/myJob" required="required" pattern="https?://.+" title="http[s]://myCIserver/hudson/job/myjob" />'."\n";
 		echo '   <input type="hidden" name="group_id" value="'.$group_id.'" />'."\n";
 		echo '   <input type="hidden" name="action" value="add_job" />'."\n";
 		echo '   <br />'."\n";
