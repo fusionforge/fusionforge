@@ -101,43 +101,43 @@ if (session_loggedin()) {
 	<table>
 
 	<tr><td colspan="2">
-	    <?php echo $HTML->html_input('name', '', _('Title') . ' :' . utils_requiredField(), 'text', '', array('size' => '45', 'maxlength' => '60')); ?>
+	    <?php echo $HTML->html_input('name', '', _('Title')._(': ') . utils_requiredField(), 'text', '', array('size' => '45', 'maxlength' => '60')); ?>
 	</td></tr>
 
 	<tr><td colspan="2">
-        <?php echo $HTML->html_textarea('description', '', _('Description') . ' :' . utils_requiredField(), '', array('rows' => '5', 'cols' => '45')); ?>
+        <?php echo $HTML->html_textarea('description', '', _('Description')._(': ') . utils_requiredField(), '', array('rows' => '5', 'cols' => '45')); ?>
 	</td></tr>
 
 	<tr>
 	<td>
-		<?php echo $HTML->html_select ($SCRIPT_TYPE, 'type', _('Script Type') . ' :' . utils_requiredField() ); ?>
+		<?php echo $HTML->html_select ($SCRIPT_TYPE, 'type', _('Script Type') ._(': '). utils_requiredField() ); ?>
 	</td>
 
 	<td>
-		<?php echo $HTML->html_select ($SCRIPT_LICENSE, 'license', _('License') . ' :'); ?>
+		<?php echo $HTML->html_select ($SCRIPT_LICENSE, 'license', _('License')._(': ')); ?>
 	</td>
 	</tr>
 
 	<tr>
 	<td>
-		<?php echo $HTML->html_select ($SCRIPT_LANGUAGE, 'language', _('Language') . ' :' . utils_requiredField()); ?>
+		<?php echo $HTML->html_select ($SCRIPT_LANGUAGE, 'language', _('Language')._(': ') . utils_requiredField()); ?>
 		<br />
 		<!-- FIXME: Where should this link go to? <?php echo util_make_link ('/support/?func=addsupport&amp;group_id=1',_('Suggest a Language')); ?> -->
 	</td>
 
 	<td>
-		<?php echo $HTML->html_select ($SCRIPT_CATEGORY, 'category', _('Category') . ' :' . utils_requiredField()); ?>
+		<?php echo $HTML->html_select ($SCRIPT_CATEGORY, 'category', _('Category')._(': ') . utils_requiredField()); ?>
                 <br />
                 <!-- FIXME: Where should this link go to? <?php echo util_make_link ('/support/?func=addsupport&amp;group_id=1',_('Suggest a Category')); ?> -->
 	</td>
 	</tr>
 
 	<tr><td colspan="2">
-        <?php echo $HTML->html_input('version', '', _('Version') . ' :' . utils_requiredField(), 'text', '', array('size' => '10', 'maxlength' => '15')); ?>
+        <?php echo $HTML->html_input('version', '', _('Version')._(': ') . utils_requiredField(), 'text', '', array('size' => '10', 'maxlength' => '15')); ?>
 	</td></tr>
 
 	<tr><td colspan="2">
-	    <?php echo $HTML->html_textarea('code', '', _('Paste the Code Here') . ' :' . utils_requiredField(), '', array('rows' => '30', 'cols' => '85')); ?>
+	    <?php echo $HTML->html_textarea('code', '', _('Paste the Code Here')._(': ') . utils_requiredField(), '', array('rows' => '30', 'cols' => '85')); ?>
 	</td></tr>
 
 	<tr><td colspan="2" class="align-center">
