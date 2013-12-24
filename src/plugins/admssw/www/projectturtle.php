@@ -49,7 +49,8 @@ echo '<p>'. sprintf( _('The following is a preview of the (machine-readable) RDF
 
 echo $plugin->htmlPreviewProjectAsTurtle($group_id);
 
-echo _('To access this RDF document, you may use, for instance :<br />');
+echo _('To access this RDF document, you may use, for instance:');
+echo '<br />';
 echo '<tt>$ curl -H "Accept: text/turtle" '. util_make_url_g($projectname, $group_id) .'</tt><br />';
 
 $HTML->footer(array());

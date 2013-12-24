@@ -8277,19 +8277,19 @@ msgstr "<strong>%1$s</strong> projectes al conjunt de resultats."
 
 #: plugins/admssw/include/admsswPlugin.class.php:645
 #: plugins/admssw/www/projectturtle.php:52 plugins/admssw/www/trove.php:46
-msgid "To access this RDF document, you may use, for instance :<br />"
+msgid "To access this RDF document, you may use, for instance:"
 msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:648
 msgid ""
 "This may redirect to several pages documents in case of too big number of "
-"results (observing the LDP paging specifications).<br /><br />"
+"results (observing the LDP paging specifications)."
 msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:650
 msgid ""
 "Alternatively, if you are sure you want the full dump in one single "
-"document, use :<br />"
+"document, use:"
 msgstr ""
 
 #: plugins/admssw/www/full.php:59
