@@ -95,8 +95,8 @@ if ($selected_tag) {
 	// only display pages stuff if there is more to display
 	if ($querytotalcount > $TROVE_BROWSELIMIT) {
 		$html_limit .= ' ' ;
-		$html_limit .= sprintf (ngettext ('Displaying %d project per page. Projects sorted by alphabetical order.<br />',
-						  'Displaying %d projects per page. Projects sorted by alphabetical order.<br />',
+		$html_limit .= sprintf (ngettext ('Displaying %d project per page. Projects sorted by alphabetical order.',
+						  'Displaying %d projects per page. Projects sorted by alphabetical order.',
 						  $TROVE_BROWSELIMIT),
 						$TROVE_BROWSELIMIT);
 

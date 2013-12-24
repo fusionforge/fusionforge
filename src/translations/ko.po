@@ -21768,9 +21768,9 @@ msgstr[0] "<strong>%1$s</strong>개의 프로젝트가 결과에 포함되었습
 #: www/softwaremap/tag_cloud.php:98
 #, php-format
 msgid ""
-"Displaying %d project per page. Projects sorted by alphabetical order.<br />"
+"Displaying %d project per page. Projects sorted by alphabetical order."
 msgid_plural ""
-"Displaying %d projects per page. Projects sorted by alphabetical order.<br />"
+"Displaying %d projects per page. Projects sorted by alphabetical order."
 msgstr[0] ""
 
 #: www/softwaremap/tag_cloud.php:161

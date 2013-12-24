@@ -22574,13 +22574,13 @@ msgstr[1] "<strong>%d</strong> proxectos no conxunto de resultados."
 #: www/softwaremap/tag_cloud.php:98
 #, php-format
 msgid ""
-"Displaying %d project per page. Projects sorted by alphabetical order.<br />"
+"Displaying %d project per page. Projects sorted by alphabetical order."
 msgid_plural ""
-"Displaying %d projects per page. Projects sorted by alphabetical order.<br />"
+"Displaying %d projects per page. Projects sorted by alphabetical order."
 msgstr[0] ""
-"Mostrando %d proxecto por páxina. Proxectos ordenados alfabeticamente.<br />"
+"Mostrando %d proxecto por páxina. Proxectos ordenados alfabeticamente."
 msgstr[1] ""
-"Mostrando %d proxectos por páxina. Proxectos ordenados alfabeticamente.<br />"
+"Mostrando %d proxectos por páxina. Proxectos ordenados alfabeticamente."
 
 #: www/softwaremap/tag_cloud.php:161
 #, php-format

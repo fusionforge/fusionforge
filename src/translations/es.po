@@ -11964,7 +11964,7 @@ msgstr "Error en PTF:"
 #: plugins/oauthconsumer/www/get_access_token.php:138
 #, fuzzy
 msgid "New request token received!"
-msgstr "Nueva peticion de  token recivida!<br>"
+msgstr "Nueva peticion de  token recivida!"
 
 #: plugins/oauthconsumer/www/get_access_token.php:139
 #, fuzzy
@@ -21945,14 +21945,13 @@ msgstr[1] "<strong>%d</strong> proyectos en esta categoría."
 #: www/softwaremap/tag_cloud.php:98
 #, php-format
 msgid ""
-"Displaying %d project per page. Projects sorted by alphabetical order.<br />"
+"Displaying %d project per page. Projects sorted by alphabetical order."
 msgid_plural ""
-"Displaying %d projects per page. Projects sorted by alphabetical order.<br />"
+"Displaying %d projects per page. Projects sorted by alphabetical order."
 msgstr[0] ""
-"Mostrando %d proyectos por página. Proyectos ordenados alfabéticamente.<br />"
+"Mostrando %d proyectos por página. Proyectos ordenados alfabéticamente."
 msgstr[1] ""
-"Mostrando %d proyectos por página. Proyectos ordenados alfabéticamente .<br /"
-">"
+"Mostrando %d proyectos por página. Proyectos ordenados alfabéticamente."
 
 #: www/softwaremap/tag_cloud.php:161
 #, php-format

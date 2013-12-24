@@ -22298,9 +22298,9 @@ msgstr[1] "<strong>%d</strong> proiektu kategoria honetan."
 #: www/softwaremap/tag_cloud.php:98
 #, fuzzy, php-format
 msgid ""
-"Displaying %d project per page. Projects sorted by alphabetical order.<br />"
+"Displaying %d project per page. Projects sorted by alphabetical order."
 msgid_plural ""
-"Displaying %d projects per page. Projects sorted by alphabetical order.<br />"
+"Displaying %d projects per page. Projects sorted by alphabetical order."
 msgstr[0] ""
 "Orrialdeko proiektu %d bistaratzen. Proiektuak aktibitate mailaz ordenaturik."
 msgstr[1] ""
