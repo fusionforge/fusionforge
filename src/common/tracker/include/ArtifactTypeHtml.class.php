@@ -367,7 +367,7 @@ class ArtifactTypeHtml extends ArtifactType {
 
 		if ($count > 0) {
 			echo '<tr><td colspan="2">';
-			echo '<b>'._("Attachments").':</b>'.'<br/>';
+			echo '<b>'._("Attachments")._(':').'</b>'.'<br/>';
 			$title_arr=array();
 			$title_arr[] = _('Size');
 			$title_arr[] = _('Name');

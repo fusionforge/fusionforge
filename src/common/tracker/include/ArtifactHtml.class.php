@@ -212,7 +212,7 @@ function hide_edit_button(id) {
 <table class="fullwidth">
 	<tr>
 		<td colspan="2">
-		<h2><?php echo _('Changes') ?>:</h2>
+		<h2><?php echo _('Changes')._(':'); ?></h2>
 		<?php
 		$current = '';
 		$end = '';

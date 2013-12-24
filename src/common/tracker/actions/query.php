@@ -369,11 +369,11 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 echo '
 	<tr>
 		<td colspan="2" style="white-space: nowrap;">'.
-		'<strong>'._('Last Modified Date range').':</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
+		'<strong>'._('Last Modified Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
 		<input type="text" name="_moddaterange" size="21" maxlength="21" value="'. htmlspecialchars($_moddaterange) .'" /><p/>
-		<strong>'._('Open Date range').':</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
+		<strong>'._('Open Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
 		<input type="text" name="_opendaterange" size="21" maxlength="21" value="'. htmlspecialchars($_opendaterange) .'" /><p/>
-		<strong>'._('Close Date range').':</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
+		<strong>'._('Close Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
 		<input type="text" name="_closedaterange" size="21" maxlength="21" value="'. htmlspecialchars($_closedaterange) .'" />
 		</td>
 	</tr>

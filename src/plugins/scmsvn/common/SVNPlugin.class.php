@@ -239,7 +239,7 @@ class SVNPlugin extends SCMPlugin {
 				$i++;
 			}
 			$b .= '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
-			$b .= '<td width="50%"><strong>'._('Total').':</strong></td>'.
+			$b .= '<td width="50%"><strong>'._('Total')._(':').'</strong></td>'.
 				'<td width="25%" align="right"><strong>'.$total['adds']. '</strong></td>'.
 				'<td width="25%" align="right"><strong>'.$total['commits'].'</strong></td>';
 			$b .= '</tr>';

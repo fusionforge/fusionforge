@@ -74,7 +74,7 @@ class Widget_ProjectMembers extends Widget {
 					continue ;
 				}
 				if (!$seen_member) {
-					echo '<span class="develtitle">'. _('Members').':</span><br />';
+					echo '<span class="develtitle">'. _('Members')._(':').'</span><br />';
 					$seen_member = true ;
 				}
 				echo '<div rel="doap:developer">'."\n";

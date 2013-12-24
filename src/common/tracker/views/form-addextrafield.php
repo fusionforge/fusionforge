@@ -110,16 +110,16 @@ $ath->adminHeader(array('title'=>$title));
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<p>
 		<input type="hidden" name="add_extrafield" value="y" />
-		<strong><?php echo _('Custom Field Name') ?>:</strong><br />
+		<strong><?php echo _('Custom Field Name')._(':'); ?></strong><br />
 		<input type="text" name="name" value="" size="15" maxlength="30" />
 		</p>
 		<p>
-		<strong><?php echo _('Field alias') ?>:</strong><br />
+		<strong><?php echo _('Field alias')._(':'); ?></strong><br />
 		<input type="text" name="alias" value="" size="15" maxlength="30" />
 		</p>
 
 		<p>
-		<strong><?php  echo _('Type of custom field') ?>:</strong><br />
+		<strong><?php  echo _('Type of custom field')._(':'); ?></strong><br />
 		<input type="radio" name="field_type" value="1" /> <?php echo _('Select Box'); ?><br />
 		<input type="radio" name="field_type" value="2" /> <?php echo _('Check Box'); ?><br />
 		<input type="radio" name="field_type" value="3" /> <?php echo _('Radio Buttons'); ?><br />

@@ -203,9 +203,9 @@ if (!$res || $rows < 1) {
 <form action="<?php echo getStringFromServer('PHP_SELF'); ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <input type="hidden" name="func" value="add_package" />
-<p><strong><?php echo _('New Package Name') ?>:</strong>
+<p><strong><?php echo _('New Package Name')._(':'); ?></strong>
 <input type="text" name="package_name" value="" size="20" maxlength="30" /></p>
-<p><strong><?php echo _('Publicly Viewable'); ?>:</strong>
+<p><strong><?php echo _('Publicly Viewable')._(':'); ?></strong>
 <input type="radio" name="is_public" value="1" checked="checked" /> <?php echo _('Public'); ?>
 <input type="radio" name="is_public" value="0" /> <?php echo _('Private'); ?></p>
 <p><input type="submit" name="submit" value="<?php echo _('Create This Package') ?>" /></p>

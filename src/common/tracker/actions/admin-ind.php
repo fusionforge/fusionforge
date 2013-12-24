@@ -136,24 +136,24 @@ if (forge_check_perm ('tracker_admin', $group->getID())) { ?>
 	<?php echo _('<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)') ?><br />
 	<input type="text" name="name" value="" /></p>
 	<p>
-	<strong><?php echo _('Description') ?>:</strong><br />
+	<strong><?php echo _('Description')._(':'); ?></strong><br />
 	<input type="text" name="description" value="" size="50" /></p>
 	<p>
-	<strong><?php echo _('Send email on new submission to address') ?>:</strong><br />
+	<strong><?php echo _('Send email on new submission to address')._(':'); ?></strong><br />
 	<input type="text" name="email_address" value="" /></p>
 	<p>
 	<input type="checkbox" name="email_all" value="1" /> <strong><?php echo _('Send email on all changes') ?></strong></p>
 	<p>
-	<strong><?php echo _('Days till considered overdue') ?>:</strong><br />
+	<strong><?php echo _('Days till considered overdue')._(':'); ?></strong><br />
 	<input type="text" name="due_period" value="30" /></p>
 	<p>
-	<strong><?php echo _('Days till pending tracker items time out') ?>:</strong><br />
+	<strong><?php echo _('Days till pending tracker items time out')._(':'); ?></strong><br />
 	<input type="text" name="status_timeout" value="14" /></p>
 	<p>
-	<strong><?php echo _('Free form text for the “Submit New” page') ?>:</strong><br />
+	<strong><?php echo _('Free form text for the “Submit New” page')._(':'); ?></strong><br />
 	<textarea name="submit_instructions" rows="10" cols="55"></textarea></p>
 	<p>
-	<strong><?php echo _('Free form text for the Browse page') ?>:</strong><br />
+	<strong><?php echo _('Free form text for the Browse page')._(':'); ?></strong><br />
 	<textarea name="browse_instructions" rows="10" cols="55"></textarea></p>
 	<p>
 	<input type="submit" name="post_changes" value="<?php echo _('Submit') ?>" /></p>

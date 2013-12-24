@@ -157,7 +157,7 @@ if ($displaydb) {
 </tr>
 
 <tr>
-<td>Database Name:<?php echo utils_requiredField(); ?></td>
+<td><?php echo _('Database Name')._(': '); ?><?php echo utils_requiredField(); ?></td>
 <td><input type="text" required="required" name="dbname" /></td>
 </tr>
 

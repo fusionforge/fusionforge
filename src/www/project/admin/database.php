@@ -165,7 +165,7 @@ if (db_numrows($res_db) > 0) {
 		<p><strong><span style="text-decoration:underline">'._('Add New Database').'</span></strong></p>
 		<p><em>'._('Clicking on “create” will schedule the creation of the database, and email the details to the project administrators').'</em></p>
 
-		<p><strong>'._('Database Type').':</strong></p>
+		<p><strong>'._('Database Type')._(':').'</strong></p>
 		<p><form action="'.getStringFromServer('PHP_SELF').'" method="post">
 		<input type="hidden" name="createdb" value="1" />
 		<input type="hidden" name="group_id" value="'.$group_id.'" />

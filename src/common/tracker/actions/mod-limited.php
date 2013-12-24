@@ -83,7 +83,7 @@ if (session_loggedin()) {
 <?php } ?>
 <table width="80%">
 	<tr>
-		<td><strong><?php echo _('Submitted by') ?>:</strong><br />
+		<td><strong><?php echo _('Submitted by')._(':'); ?></strong><br />
 			<?php
 			echo $ah->getSubmittedRealName();
 			if($ah->getSubmittedBy() != 100) {
@@ -93,13 +93,13 @@ if (session_loggedin()) {
 				(<tt><?php echo util_make_link_u ($submittedUnixName,$submittedBy,$submittedUnixName); ?></tt>)
 			<?php } ?>
 		</td>
-		<td><strong><?php echo _('Date Submitted') ?>:</strong><br />
+		<td><strong><?php echo _('Date Submitted')._(':'); ?></strong><br />
 		<?php
 		echo date(_('Y-m-d H:i'), $ah->getOpenDate() );
 
 		$close_date = $ah->getCloseDate();
 		if ($ah->getStatusID()==2 && $close_date > 1) {
-			echo '<br /><strong>'._('Date Closed').':</strong><br />'
+			echo '<br /><strong>'._('Date Closed')._(':').'</strong><br />'
 				 .date(_('Y-m-d H:i'), $close_date);
 		}
 		?>
@@ -111,12 +111,12 @@ if (session_loggedin()) {
 	?>
 
 	<tr>
-		<td><strong><?php echo _('Assigned to')?>:</strong><br />
+		<td><strong><?php echo _('Assigned to')._(':'); ?></strong><br />
 		<span id="tracker-assigned_to" title="<?php echo html_get_tooltip_description('assigned_to') ?>">
 		<?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)
 		</span></td>
 		<td>
-		<strong><?php echo _('Priority') ?>:</strong><br />
+		<strong><?php echo _('Priority')._(':'); ?></strong><br />
 		<span id="tracker-priority" title="<?php echo html_get_tooltip_description('priority') ?>">
 		<?php echo $ah->getPriority(); ?>
 		</span></td>
@@ -125,7 +125,7 @@ if (session_loggedin()) {
 	<?php if (!$ath->usesCustomStatuses()) { ?>
 	<tr>
 		<td>
-			<strong><?php echo _('State') ?>:</strong><br />
+			<strong><?php echo _('State')._(':'); ?></strong><br />
 			<span id="tracker-status_id" title="<?php echo util_html_secure(html_get_tooltip_description('status_id')) ?>">
 			<?php echo $ath->statusBox ('status_id', $ah->getStatusID() ); ?>
 			<span>
@@ -139,7 +139,7 @@ if (session_loggedin()) {
 		$ath->renderFiles($group_id, $ah);
 	?>
 	<tr>
-		<td colspan="2"><strong><?php echo _('Summary')?><?php echo utils_requiredField(); ?>:</strong><br />
+		<td colspan="2"><strong><?php echo _('Summary')._(':'); ?><?php echo utils_requiredField(); ?></strong><br />
 			<span id="tracker-summary" title="<?php echo html_get_tooltip_description('summary') ?>">
 			<?php echo $ah->getSummary(); ?>
 			</span>
@@ -175,17 +175,17 @@ $count=count($file_list);
 $nb = $count? ' ('.$count.')' : '';
 ?>
 <div class="tabbertab" title="<?php echo _('Attachments').$nb; ?>">
-<h2><?php echo _('Existing Files') ?>:</h2>
+<h2><?php echo _('Existing Files')._(':'); ?></h2>
 <table width="80%">
 	<tr><td colspan="2">
-		<?php echo _('Attach Files') ?>: <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
+		<?php echo _('Attach Files')._(':'); ?> <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
 		<input type="file" name="input_file0" size="30" /><br />
 		<input type="file" name="input_file1" size="30" /><br />
 		<input type="file" name="input_file2" size="30" /><br />
 		<input type="file" name="input_file3" size="30" /><br />
 		<input type="file" name="input_file4" size="30" />
 		<p>
-		<h2><?php echo _('Attached Files') ?>:</h2>
+		<h2><?php echo _('Attached Files')._(':'); ?></h2>
 		<?php
 		//
 		// print a list of files attached to this Artifact

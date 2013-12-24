@@ -42,7 +42,7 @@ function artifact_submission_form($ath, $group) {
 	if (!session_loggedin()) {
 		echo '<div class="login_warning_msg">
 		<span class="warning_msg">'.sprintf(_('Please %1$s login %2$s'), '<a href="'.util_make_url ('/account/login.php?return_to='.urlencode(getStringFromServer('REQUEST_URI'))).'">', '</a>').'</span><br />
-		'._('If you <strong>cannot</strong> login, then enter your email address here').':<p>
+		'._('If you <strong>cannot</strong> login, then enter your email address here')._(':').'<p>
 		<input type="text" name="user_email" size="50" maxlength="255" /></p>
 		</div>';
 	}
@@ -59,7 +59,7 @@ function artifact_submission_form($ath, $group) {
 
 	if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 		echo '<tr>
-		<td><strong>'._('Assigned to').':</strong><br />';
+		<td><strong>'._('Assigned to')._(':').'</strong><br />';
 		echo $ath->technicianBox('assigned_to');
 		echo '&nbsp;'.util_make_link ('/tracker/admin/?group_id='.$group->getID().'&amp;atid='.$ath->getID().'&amp;update_users=1', '('._('Admin').')' );
 
@@ -103,7 +103,7 @@ function artifact_submission_form($ath, $group) {
 		<div class="file_attachments">
 		<a href="javascript:help_window(\''. util_make_url ('/help/tracker.php?helpname=attach_file') .'\')"><strong>(?)</strong></a>
 		<p>
-		<strong><?php echo _('Attach Files'); ?> :</strong> <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
+		<strong><?php echo _('Attach Files')._(':'); ?> </strong> <?php echo('('._('max upload size: '.human_readable_bytes(util_get_maxuploadfilesize())).')') ?><br />
 		<input type="file" name="input_file0" size="30" /><br />
 		<input type="file" name="input_file1" size="30" /><br />
 		<input type="file" name="input_file2" size="30" /><br />
