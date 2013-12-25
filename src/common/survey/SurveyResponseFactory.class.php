@@ -66,8 +66,8 @@ class SurveyResponseFactory extends Error {
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	object	$survey		The Survey object
-	 *	@param	object	$question	The Question object to which this survey Response is associated.
+	 * @param	object	$survey		The Survey object
+	 * @param	object	$question	The Question object to which this survey Response is associated.
 	 */
 	function __construct(&$survey, &$question ) {
 		$this->Error();
@@ -94,9 +94,9 @@ class SurveyResponseFactory extends Error {
 	}
 
 	/**
-	 *	getGroup - get the Group object this SurveyResponse is associated with.
+	 * getGroup - get the Group object this SurveyResponse is associated with.
 	 *
-	 *	@return object	The Group object.
+	 * @return	object	The Group object.
 	 */
 	function &getGroup() {
 		$Survey = $this->getSurvey();
@@ -104,28 +104,28 @@ class SurveyResponseFactory extends Error {
 	}
 
 	/**
-	 *	getSurvey - get the Survey object this SurveyResponse is associated with.
+	 * getSurvey - get the Survey object this SurveyResponse is associated with.
 	 *
-	 *	@return object	The Survey object.
+	 * @return	object	The Survey object.
 	 */
 	function &getSurvey() {
 		return $this->Survey;
 	}
 
 	/**
-	 *	getQuestion - get the Question object this SurveyResponse is associated with.
+	 * getQuestion - get the Question object this SurveyResponse is associated with.
 	 *
-	 *	@return object	The Question object.
+	 * @return	object	The Question object.
 	 */
 	function &getQuestion() {
 		return $this->Question;
 	}
 
 	/**
-	 *	getSurveyResponses - get an array of Survey Response objects
-	 *                           for the Survey and Question
+	 * getSurveyResponses - get an array of Survey Response objects
+	 *                      for the Survey and Question
 	 *
- 	 *	@return	array	The array of Survey Response objects.
+ 	 * @return	array	The array of Survey Response objects.
 	 */
 	function getSurveyResponses() {
 		/* We already have it */
@@ -157,10 +157,10 @@ class SurveyResponseFactory extends Error {
 	}
 
 	/**
-	 *	getSurveyAllResponses - get an array of Survey Response objects
-	 *		for the Survey and Question
+	 * getSurveyAllResponses - get an array of Survey Response objects
+	 *			for the Survey and Question
 	 *
-	 *	@return	array	The array of Survey Response objects.
+	 * @return	array	The array of Survey Response objects.
 	 */
 	function getSurveyAllResponses() {
 		/* We already have it */
@@ -188,23 +188,22 @@ class SurveyResponseFactory extends Error {
 	}
 
 	/**
-	 *	getNumberOfSurveyResponses - get the number of Survey Responses
+	 * getNumberOfSurveyResponses - get the number of Survey Responses
 	 *
- 	 *	@return	int      the number of survey responses
+ 	 * @return	int      the number of survey responses
 	 */
 	function getNumberOfSurveyResponses() {
 		$arr = $this->getSurveyResponses();
 		if (!$arr || !is_array($arr)) {
 			return 0;
 		}
-
 		return count($arr);
 	}
 
 	/**
-	 *	getResults - get the array of result for yes/no and 1-5 question
+	 * getResults - get the array of result for yes/no and 1-5 question
 	 *
-	 *	@return	int      the array of result
+	 * @return	int      the array of result
 	 *              for the yes/no question, it returns counts in arr[1] and arr[5];
 	 *              for the 1-5 question, it returns counts in arr[1], arr[1], ..., arr[5];
 	 *              for comments, we return arr[1], ...arr[n] with comments
@@ -255,9 +254,9 @@ class SurveyResponseFactory extends Error {
 	}
 
 	/**
-	 *	getDetailResults - get the array of result
+	 * getDetailResults - get the array of result
 	 *
-	 *	@return	int      the array of result
+	 * @return	int      the array of result
 	 *		return all responses for one survey
 	 */
 	function getDetailResults() {

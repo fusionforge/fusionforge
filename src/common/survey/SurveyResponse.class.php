@@ -39,16 +39,16 @@ class SurveyResponse extends Error {
 	 */
 	var $Group;
 
-    /**
-     *  Constructor.
-     *
-     * @param $Group
-     * @param bool $arr
-     * @internal param \The $object Group object to which this Survey Response is associated.
-     * @internal param \The $int question_id.
-     * @internal param \The $array associative array of data.
-     * @return \SurveyResponse
-     */
+	/**
+	* Constructor.
+	*
+	* @param	$Group
+	* @param	bool	$arr
+	* @internal	param	\The $object Group object to which this Survey Response is associated.
+	* @internal	param	\The $int question_id.
+	* @internal	param	\The $array associative array of data.
+	* @return	\SurveyResponse
+	*/
 	function __construct(&$Group, $arr=false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
@@ -66,23 +66,23 @@ class SurveyResponse extends Error {
 		}
 	}
 
-    /**
-     *    create - use this function to create a survey response
-     *
-     * @param $user_id
-     * @param $survey_id
-     * @param $question_id
-     * @param $response
-     * @internal param \The $string question
-     * @internal param \The $int question type
-     *                      1: Radio Buttons 1-5
-     *                      2: Text Area
-     *                      3: Radio Buttons Yes/No
-     *                      4: Comment Only
-     *                      5: Text Field
-     *                      6: None
-     * @return    boolean    success.
-     */
+	/**
+	* create - use this function to create a survey response
+	*
+	* @param	$user_id
+	* @param	$survey_id
+	* @param	$question_id
+	* @param	$response
+	* @internal	param		\The $string question
+	* @internal	param		\The $int question type
+	*				1: Radio Buttons 1-5
+	*				2: Text Area
+	*				3: Radio Buttons Yes/No
+	*				4: Comment Only
+	*				5: Text Field
+	*				6: None
+	* @return	boolean		success.
+	*/
 	function create($user_id, $survey_id, $question_id, $response) {
 		$res = db_query_params ('INSERT INTO survey_responses (user_id,group_id,survey_id,question_id,response,post_date) VALUES ($1,$2,$3,$4,$5,$6)',
 					array ($user_id,
@@ -99,63 +99,63 @@ class SurveyResponse extends Error {
 	}
 
 	/**
-	 *	getGroup - get the Group object this SurveyResponse is associated with.
+	 * getGroup - get the Group object this SurveyResponse is associated with.
 	 *
-	 *	@return	object	The Group object.
+	 * @return	object	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
 	/**
-	 *	getUserID - Get the user id of this Survey response
+	 * getUserID - Get the user id of this Survey response
 	 *
-	 *	@return	int	The user_id
+	 * @return	int	The user_id
 	 */
 	function getUserID() {
 		return $this->data_array['user_id'];
 	}
 
 	/**
-	 *	getGroup - Get the group id of this Survey response
+	 * getGroup - Get the group id of this Survey response
 	 *
-	 *	@return	int	The group_id
+	 * @return	int	The group_id
 	 */
 	function getGroupID() {
 		return $this->data_array['group_id'];
 	}
 
 	/**
-	 *	getSurveyID - Get the survey id of this Survey response
+	 * getSurveyID - Get the survey id of this Survey response
 	 *
-	 *	@return	int	The survey_id
+	 * @return	int	The survey_id
 	 */
 	function getSurveyID() {
 		return $this->data_array['survey_id'];
 	}
 
 	/**
-	 *	getQuestionID - Get the question id of this Survey response
+	 * getQuestionID - Get the question id of this Survey response
 	 *
-	 *	@return	int	The question_id
+	 * @return	int	The question_id
 	 */
 	function getQuestionID() {
 		return $this->data_array['question_id'];
 	}
 
 	/**
-	 *	getUserID - Get the response of this Survey response
+	 * getUserID - Get the response of this Survey response
 	 *
-	 *	@return	int	The response
+	 * @return	int	The response
 	 */
 	function getResponse() {
 		return $this->data_array['response'];
 	}
 
 	/**
-	 *	getPostDate - Get the post date of this Survey response
+	 * getPostDate - Get the post date of this Survey response
 	 *
-	 *	@return	int	The post date
+	 * @return	int	The post date
 	 */
 	function getPostDate() {
 		return $this->data_array['post_date'];

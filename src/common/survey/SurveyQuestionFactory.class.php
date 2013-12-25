@@ -43,9 +43,9 @@ class SurveyQuestionFactory extends Error {
 	var $questions;
 
 	/**
-	 *  Constructor.
+	 * Constructor.
 	 *
-	 *	@param	object	$Group	The Group object to which this survey question is associated.
+	 * @param	object	$Group	The Group object to which this survey question is associated.
 	 */
 	function __construct(&$Group) {
 		$this->Error();
@@ -66,19 +66,19 @@ class SurveyQuestionFactory extends Error {
 	}
 
 	/**
-	 *	getGroup - get the Group object this SurveyQuestionFactory is associated with.
+	 * getGroup - get the Group object this SurveyQuestionFactory is associated with.
 	 *
-	 *	@return object	The Group object.
+	 * @return	object	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
 	/**
-	 *	getSurveyQuestion - get an array of Survey Question objects
-	 *                      for this Group and Survey id if survey_id is given.
+	 * getSurveyQuestion - get an array of Survey Question objects
+	 *                     for this Group and Survey id if survey_id is given.
 	 *
- 	 *	@return	array	The array of Survey Question objects.
+ 	 * @return	array	The array of Survey Question objects.
 	 */
 	function &getSurveyQuestions() {
 		/* We already have it */
