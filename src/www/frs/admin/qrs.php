@@ -111,15 +111,15 @@ if (getStringFromRequest('submit')) {
 				$frsr->sendNotice();
 
 				frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
-				echo '<p>' ;
+				echo '<p>';
 				printf (_('You can now <a href="%1$s"><strong>add files to this release</strong></a> if you wish, or edit the release. Please note that file(s) may not appear immediately on the <a href="%2$s">download page</a>. Allow several hours for propagation.'),
 					util_make_url ('/frs/admin/editrelease.php?release_id='.$frsr->getID().'&amp;group_id='.$group_id.'&amp;package_id='.$package_id),
 					util_make_url ('/frs/?group_id='.$group_id)
 					) ;
-				echo '</p>' ;
+				echo '</p>';
 				db_commit();
 				frs_admin_footer(array());
-				exit () ;
+				exit();
 			}
 		}
 	}
@@ -200,22 +200,21 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 			echo '<br />';
 			echo _('Choose an FTP file instead of uploading:').'<br />';
 			$ftp_files_arr=frs_filterfiles(ls($upload_dir,true));
-			echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename',''); ?>
-
-		</p>
-		<?php } ?>
-<?php if (forge_get_config('use_manual_uploads')) {
-	$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming" ;
-
-	echo '<p>';
-	printf(_('Alternatively, you can use a file you already uploaded (by SFTP or SCP) to the <a href="%2$s">project\'s incoming directory</a> (%1$s).'),
-	       $incoming, "sftp://" . forge_get_config ('web_host') . $incoming . "/");
-	echo ' ' . _('This direct <tt>sftp://</tt> link only works with some browsers, such as Konqueror.') . '<br />';
-	echo _('Choose an already uploaded file:').'<br />';
-	$manual_files_arr=frs_filterfiles(ls($incoming,true));
-	echo html_build_select_box_from_arrays($manual_files_arr,$manual_files_arr,'manual_filename',''); ?>
-	</p>
-<?php } ?>
+			echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','');
+			echo '</p>';
+		}
+		if (forge_get_config('use_manual_uploads')) {
+			$incoming = forge_get_config('groupdir_prefix')."/".$g->getUnixName()."/incoming" ;
+			echo '<p>';
+			printf(_('Alternatively, you can use a file you already uploaded (by SFTP or SCP) to the <a href="%2$s">project\'s incoming directory</a> (%1$s).'),
+				$incoming, "sftp://" . forge_get_config ('web_host') . $incoming . "/");
+			echo ' ' . _('This direct <tt>sftp://</tt> link only works with some browsers, such as Konqueror.') . '<br />';
+			echo _('Choose an already uploaded file:').'<br />';
+			$manual_files_arr=frs_filterfiles(ls($incoming,true));
+			echo html_build_select_box_from_arrays($manual_files_arr,$manual_files_arr,'manual_filename','');
+			echo '</p>';
+		}
+?>
 
 		</td>
 	</tr>
