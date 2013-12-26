@@ -67,7 +67,6 @@ function admin_table_add($table, $unit, $primary_key) {
  *
  *	@param $table - the table to act on
  *	@param $unit - the name of the "units" described by the table's records
- *	@param $primary_key - the primary key of the table
  */
 function admin_table_postadd($table, $unit) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {

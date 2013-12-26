@@ -149,16 +149,17 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 	 *
 	 *	@param	string	$role_name	The name of the role.
 	 *	@param	array	$data		A multi-dimensional array of data in this format: $data['section_name']['ref_id']=$val
+	 *	@param  bool    $new_project
 	 *	@return bool|int			The id on success or false on failure.
 	 */
-	function create($role_name, $data, $newproject=false) {
+	function create($role_name, $data, $new_project=false) {
 		if ($this->Group == NULL) {
 			if (!forge_check_global_perm('forge_admin')) {
 				$this->setPermissionDeniedError();
 				return false;
 			}
 		}
-		if ($newproject) {
+		if ($new_project) {
 			if (!forge_check_global_perm('approve_projects')) {
 				$this->setPermissionDeniedError();
 				return false;
@@ -227,7 +228,7 @@ class Role extends RoleExplicit implements PFO_RoleExplicit {
 
 	/**
 	 * TODO: Enter description here ...
-	 * @param unknown_type $name
+	 * @param string $name
 	 * @return Ambiguous <number, boolean, contents>|boolean
 	 */
 	function createDefault($name) {
