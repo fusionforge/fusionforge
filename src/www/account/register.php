@@ -209,10 +209,12 @@ if($toDisplay != "") {
 <?php echo html_get_ccode_popup('ccode', $ccode); ?>
 </p>
 <p>
-@<?php
-	echo _('Email Address') . _(': ') . utils_requiredField() . "<br />\n<em>";
-	printf(_('This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@%1$s&gt; that will forward to this address.'), forge_get_config('users_host')); ?></em>
-<br /><label for="email">
+<?php echo _('Email Address') . _(': ') . utils_requiredField(); ?><br />
+<em>
+<?php printf(_('This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@%1$s&gt; that will forward to this address.'), forge_get_config('users_host')); ?>
+</em>
+<br />
+<label for="email">
     <input id="email" size="40" type="text" name="email" required="required" value="<?php print(htmlspecialchars($email)); ?>"/>
 </label>
 </p>
