@@ -44,6 +44,7 @@ if ($role->getHomeProject() != NULL) {
 }
 
 if (getStringFromRequest('submit')) {
+	$error_msg = '';
 	if (getIntFromRequest('sure')) {
 		if (!$role->delete()) {
 			$error_msg = _('Error')._(': ').$role->getErrorMessage();
