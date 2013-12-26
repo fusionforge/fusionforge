@@ -2,7 +2,7 @@
 /**
  * Welcome page
  *
- * This is the page user is redirerected to after first site login
+ * This is the page user is redirected to after first site login
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
