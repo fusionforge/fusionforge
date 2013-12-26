@@ -31,7 +31,7 @@ require_once $gfwww.'project/admin/project_admin_utils.php';
 
 site_admin_header(array('title'=>_('Site Admin: Edit Rejection Responses')));
 
-function check_select_value($value, $type) {
+function check_select_value($value) {
 	if( $value == "100" ) {
 		print('<span class="important">'.sprintf(_('You cannot %1$s “None”!'), $GLOBALS['type'])."</span><br />\n");
 	}
@@ -64,7 +64,7 @@ if( $action == "Edit" ) {
 	$response_text = getStringFromRequest('response_text');
 
 	// Edit Response
-	check_select_value($response_id, $action);
+	check_select_value($response_id);
 	if( $action2 ) {
 		db_query_params ('UPDATE canned_responses SET response_title=$1, response_text=$2 WHERE response_id=$3',
 			array($response_title,
@@ -100,7 +100,7 @@ if( $action == "Edit" ) {
 	$sure = getStringFromRequest('sure');
 
 	// Delete Response
-	check_select_value($response_id, $action);
+	check_select_value($response_id);
 	if( $sure == "yes" ) {
 		db_query_params ('DELETE FROM canned_responses WHERE response_id=$1',
 			array($response_id)) ;
