@@ -5,6 +5,7 @@
  * Copyright © 2010
  *	Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
  * All rights reserved.
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * Based on other FusionForge code.
  *
@@ -71,13 +72,13 @@ if (getStringFromRequest('submit')) {
 		);
 	}
 
-	site_admin_header(array('title'=>_('Site Admin: Successfully Changed User Password')));
+	site_admin_header(array('title'=>_('Site Admin: Change User Password')));
 
 	echo '<h2>';
 	printf(_('%s Password Change Confirmation'), forge_get_config('forge_name'));
 	echo '</h2>';
-	echo '<p>';
-	printf(_('You have changed the password of %1$s (%2$s).'), $u->getUnixName(), $u->getRealName());
+	echo '<p class="feedback">';
+	printf(_('You have changed successfully the password of %1$s (%2$s).'), $u->getUnixName(), $u->getRealName());
 	echo '</p>';
 	printf('<p>'._("Go back to %s.").'</p>', '<a href="userlist.php">'._("the Full User List").'</a>');
 } else {
@@ -87,11 +88,11 @@ if (getStringFromRequest('submit')) {
 
 	<form action="<?php echo util_make_url('/admin/passedit.php?user_id='.$user_id); ?>" method="post">
 	<input type="hidden" name="form_key" value="<?php echo form_generate_key(); ?>"/>
-	<p><?php printf(_('Changing password for user #%1$s "%2$s" (%3$s)…'), $user_id, $u->getUnixName(), $u->getRealName()); ?></p>
+	<p><?php printf(_('Changing password for user #%1$s "%2$s" (%3$s).'), $user_id, $u->getUnixName(), $u->getRealName()); ?></p>
 	<p><?php echo _('New Password (at least 6 chars)') ?>:
-	<br /><input type="password" name="passwd" /></p>
+	<br /><input type="password" name="passwd" required="required" title="<?php echo _('At least 6 chars'); ?>" pattern=".{6,}"/></p>
 	<p><?php echo _('New Password (repeat)') ?>:
-	<br /><input type="password" name="passwd2" /></p>
+	<br /><input type="password" name="passwd2" required="required" title="<?php echo _('At least 6 chars'); ?>" pattern=".{6,}" /></p>
 	<p><input type="submit" name="submit" value="<?php echo _('Update password') ?>" /></p>
 	</form>
 	<?php
