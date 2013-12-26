@@ -85,9 +85,6 @@ function external_role_box ($group_id,$name) {
 
 		$names[] = $role->getDisplayableName($group) ;
 	}
-
-	$selected = $ids[0] ;
-
 	return html_build_select_box_from_arrays($ids,$names,$name);
 }
 

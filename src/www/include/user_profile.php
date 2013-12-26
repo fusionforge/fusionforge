@@ -71,7 +71,6 @@ function user_personal_information($user, $compact = false, $title = false) {
 	//echo '</div>';
 	// description as a FusionForge Community member
 	//print '<div property ="dc:Identifier" content="'.$user_id.'">';
-	$user_id_html = '';
 	if (session_loggedin() && forge_check_global_perm('forge_admin')) {
 		$user_id_html = util_make_link('/admin/useredit.php?user_id='.$user_id, $user_id);
 	} else {
