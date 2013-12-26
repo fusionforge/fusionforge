@@ -815,7 +815,7 @@ p.information {
 	color: white;
 	background: #34b234;
 	padding: 3px 3px 3px 10px;
-	margin: 0px -4px 0px -4px;
+	margin: 0 -4px 0 -4px;
 }
 
 .info-box:nth-child(4n) h2 {
