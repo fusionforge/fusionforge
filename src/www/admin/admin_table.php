@@ -69,7 +69,7 @@ function admin_table_add($table, $unit, $primary_key) {
  *	@param $unit - the name of the "units" described by the table's records
  *	@param $primary_key - the primary key of the table
  */
-function admin_table_postadd($table, $unit, $primary_key) {
+function admin_table_postadd($table, $unit) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
 		exit_form_double_submit('home');
 	}
@@ -360,7 +360,7 @@ switch (getStringFromRequest('function')) {
 		break;
 	}
 	case 'postadd' : {
-		admin_table_postadd($table, $unit, $primary_key);
+		admin_table_postadd($table, $unit);
 		break;
 	}
 	case 'confirmdelete' : {
