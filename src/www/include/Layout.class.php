@@ -526,10 +526,10 @@ if (isset($params['group']) && $params['group']) {
 	</tr>
 </table>
 <?php
-		$this->footerEnd($params);
+		$this->footerEnd();
 	}
 
-	function footerEnd($params) { ?>
+	function footerEnd() { ?>
 
 		<!-- PLEASE LEAVE "Powered By FusionForge" on your site -->
 		<div align="right">
