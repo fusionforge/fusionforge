@@ -220,9 +220,9 @@ setup_rbac_strings () ;
 echo $HTML->listTableTop($titles);
 
 //
-//	Get the keys for this role and interate to build page
+//	Get the keys for this role and iterate to build page
 //
-//	Everything is built on the multi-dimensial arrays in the Role object
+//	Everything is built on the multi-dimensional arrays in the Role object
 //
 $j = 0;
 

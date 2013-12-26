@@ -107,7 +107,7 @@ site_admin_header(array('title'=>$title));
 <?php echo _('Status')._(':'); ?>
 </td>
 <td>
-<?php	// PLEASE DONT TRANSLATE THIS, THIS IS DATABASE INFO THAT CANT BE DIFFERENT AMONG LANGUAGES
+<?php	// PLEASE DO NOT TRANSLATE THIS, THIS IS DATABASE INFO THAT CAN BE DIFFERENT AMONG LANGUAGES
 $status = $group->getStatus();
 if($status == 'P') {
 	// we cannot update the status of a pending project
