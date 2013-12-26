@@ -52,7 +52,7 @@ if (!$f || !is_object($f)) {
 } elseif ($f->isError()) {
 	exit_error(_('Error'),$f->getErrorMessage());
 }
-$fm = new ForumMessage($f,$msg_id,false,true); //create the pending message
+$fm = new ForumMessage($f, $msg_id, array(), true); //create the pending message
 if (!$fm || !is_object($fm)) {
 	exit_error(_('Error getting new ForumMessage'),'forums');
 } elseif ($fm->isError()) {
