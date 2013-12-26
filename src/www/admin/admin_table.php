@@ -23,11 +23,12 @@
  */
 
 /**
- *	admin_table_add() - present a form for adding a record to the specified table
+ * admin_table_add() - present a form for adding a record to the specified table
  *
- *	@param $table - the table to act on
- *	@param $unit - the name of the "units" described by the table's records
- *	@param $primary_key - the primary key of the table
+ * @param	$table		the table to act on
+ * @param	$unit		the name of the "units" described by the table's records
+ * @param	$primary_key	the primary key of the table
+ * @return	string
  */
 function admin_table_add($table, $unit, $primary_key) {
 	// This query may return no rows, but the field names are needed.
@@ -63,10 +64,11 @@ function admin_table_add($table, $unit, $primary_key) {
 }
 
 /**
- *	admin_table_postadd() - update the database based on a submitted change
+ * admin_table_postadd() - update the database based on a submitted change
  *
- *	@param $table - the table to act on
- *	@param $unit - the name of the "units" described by the table's records
+ * @param	$table	the table to act on
+ * @param	$unit	the name of the "units" described by the table's records
+ * @return	string
  */
 function admin_table_postadd($table, $unit) {
 	if (!form_key_is_valid(getStringFromRequest('form_key'))) {
@@ -100,12 +102,13 @@ function admin_table_postadd($table, $unit) {
 }
 
 /**
- *	admin_table_confirmdelete() - present a form to confirm requested record deletion
+ * admin_table_confirmdelete() - present a form to confirm requested record deletion
  *
- *	@param $table - the table to act on
- *	@param $unit - the name of the "units" described by the table's records
- *	@param $primary_key - the primary key of the table
- *	@param $id - the id of the record to act on
+ * @param	$table		the table to act on
+ * @param	$unit		the name of the "units" described by the table's records
+ * @param	$primary_key	the primary key of the table
+ * @param	$id		the id of the record to act on
+ * @return	string
  */
 function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 	if ($unit == "processor") {
@@ -168,12 +171,13 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 }
 
 /**
- *	admin_table_delete() - delete a record from the database after confirmation
+ * admin_table_delete() - delete a record from the database after confirmation
  *
- *	@param $table - the table to act on
- *	@param $unit - the name of the "units" described by the table's records
- *	@param $primary_key - the primary key of the table
- *	@param $id - the id of the record to act on
+ * @param	$table		the table to act on
+ * @param	$unit		the name of the "units" described by the table's records
+ * @param	$primary_key	the primary key of the table
+ * @param	$id		the id of the record to act on
+ * @return	string
  */
 function admin_table_delete($table, $unit, $primary_key, $id) {
 	if (db_query_params("DELETE FROM $table WHERE $primary_key=$1", array($id))) {
@@ -186,12 +190,13 @@ function admin_table_delete($table, $unit, $primary_key, $id) {
 }
 
 /**
- *	admin_table_edit() - present a form for editing a record in the specified table
+ * admin_table_edit() - present a form for editing a record in the specified table
  *
- *	@param $table - the table to act on
- *	@param $unit - the name of the "units" described by the table's records
- *	@param $primary_key - the primary key of the table
- *	@param $id - the id of the record to act on
+ * @param	$table		the table to act on
+ * @param	$unit		the name of the "units" described by the table's records
+ * @param	$primary_key	the primary key of the table
+ * @param	$id		the id of the record to act on
+ * @return	string
  */
 function admin_table_edit($table, $unit, $primary_key, $id) {
 	$result = db_query_params("SELECT * FROM $table WHERE $primary_key=$1", array($id));
@@ -227,12 +232,13 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
 }
 
 /**
- *	admin_table_postedit() - update the database to reflect submitted modifications to a record
+ * admin_table_postedit() - update the database to reflect submitted modifications to a record
  *
- *	@param $table - the table to act on
- *	@param $unit - the name of the "units" described by the table's records
- *	@param $primary_key - the primary key of the table
- *	@param $id - the id of the record to act on
+ * @param	$table		the table to act on
+ * @param	$unit		the name of the "units" described by the table's records
+ * @param	$primary_key	the primary key of the table
+ * @param	$id		the id of the record to act on
+ * @return	string
  */
 function admin_table_postedit($table, $unit, $primary_key, $id) {
 	global $_POST;
@@ -287,11 +293,12 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
 }
 
 /**
- *	admin_table_show() - display the specified table, sorted by the primary key, with links to add, edit, and delete
+ * admin_table_show() - display the specified table, sorted by the primary key, with links to add, edit, and delete
  *
- *	@param $table - the table to act on
- *	@param $unit - the name of the "units" described by the table's records
- *	@param $primary_key - the primary key of the table
+ * @param	$table		the table to act on
+ * @param	$unit		the name of the "units" described by the table's records
+ * @param	$primary_key	the primary key of the table
+ * @return	string
  */
 function admin_table_show($table, $unit, $primary_key) {
         global $HTML;
@@ -336,8 +343,8 @@ function admin_table_show($table, $unit, $primary_key) {
 /**
  * getUnitLabel - returns the localized label of a unit
  *
- * @param	string $unit	unit name
- * @return	string	name localized label
+ * @param	string	$unit	unit name
+ * @return	string		name localized label
  */
 function getUnitLabel($unit) {
 	return $unit;
