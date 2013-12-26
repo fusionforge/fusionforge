@@ -31,7 +31,7 @@ require_once $gfcommon.'forum/ForumHTML.class.php';
 require_once $gfcommon.'forum/ForumAdmin.class.php';
 require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';
-require_once $gfcommon.'forum/AttachManager.class.php'; //attachent manager
+require_once $gfcommon.'forum/AttachManager.class.php'; //attachment manager
 
 $action = getStringFromRequest('action');
 $group_id = getIntFromRequest('group_id');

@@ -32,7 +32,7 @@ require_once $gfcommon.'forum/Forum.class.php';
 require_once $gfcommon.'forum/ForumFactory.class.php';
 require_once $gfcommon.'forum/ForumMessageFactory.class.php';
 require_once $gfcommon.'forum/ForumMessage.class.php';
-require_once $gfcommon.'forum/AttachManager.class.php'; //attachent manager
+require_once $gfcommon.'forum/AttachManager.class.php'; //attachment manager
 require_once $gfcommon.'include/TextSanitizer.class.php'; // to make the HTML input by the user safe to store
 
 $group_id = getIntFromRequest('group_id');
