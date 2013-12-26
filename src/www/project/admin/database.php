@@ -63,12 +63,10 @@ if (getStringFromRequest('createdb')) {
 			VALUES($1, $2, $2, $3, $4, $5, $6 ,2)", array($group_id, $dbname, $randompw, time(), $newdbtypeid, $LUSER->getID()));
 
 	if (!$res || db_affected_rows($res) < 1) {
-		$error_msg .= _('Cannot add database entry').': '.db_error();
+		$error_msg .= _('Cannot add database entry')._(': ').db_error();
 	} else {
-
 		$feedback .= _('Database scheduled for creation');
 		group_add_history('Created database '.$dbname.' type '.$row_db['dbsoftware'].' ','',$group_id);
-
 	}
 }
 
@@ -107,9 +105,7 @@ if (getStringFromRequest('updatedbrec')) {
 			group_add_history('Updated database - (type: '.$row_db['dbsoftware'].')','',$group_id);
 		}
 	} else {
-
-		$error_msg .= "Operation failed.  Password and Password Confirm are not the same";
-
+		$error_msg .= _("Operation failed. Password and Password Confirm are not the same");
 	}
 
 }
@@ -131,7 +127,7 @@ if (getStringFromRequest('deletedbconfirm')) {
 	if (!$res || db_affected_rows($res) < 1) {
 		$error_msg .= 'Cannot delete database: '.db_error();
 	} else {
-		$feedback .= "Database scheduled for deletion";
+		$feedback .= _('Database scheduled for deletion');
 	}
 
 }

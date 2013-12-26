@@ -64,7 +64,7 @@ function performAction($newStatus, $statusString, $user_id) {
 }
 
 function show_users_list($users, $filter = '', $sortorder = 'realname') {
-	echo '<p>' ._('Status') .': '.
+	echo '<p>' ._('Status')._(': ').
 		util_make_link('/admin/userlist.php', _('All')). '
 		<span class="active">'.util_make_link('/admin/userlist.php?status=A'.'&amp;sortorder='.$sortorder,_('Active')). '</span>
 		<span class="deleted">'.util_make_link('/admin/userlist.php?status=D'.'&amp;sortorder='.$sortorder,_('Deleted')).'</span>

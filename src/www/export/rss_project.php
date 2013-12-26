@@ -85,7 +85,7 @@ $string_rss_20 = '';
 // RSS for project news
 if ($project->usesNews() && forge_get_config('use_news')) {
 	$string_rss_20 .= get_rss_feed_20 ("rss20_news.php?group_id=" . $group_id,
-										$name.': ' . _('Project News'));
+										$name._(': ') . _('Project News'));
 }
 
 // RSS for project Activity
@@ -95,19 +95,19 @@ if ( ($project->usesNews() && forge_get_config('use_news')) ||
 	($project->usesForum() && forge_get_config('use_forum')) ||
 	($project->usesSCM() && forge_get_config('use_scm')) ){
 	$string_rss_20 .= get_rss_feed_20 ("rss20_activity.php?group_id=" . $group_id,
-										$name.': ' . _('Activity'));
+										$name._(': ') . _('Activity'));
 }
 
 // RSS for project Releases
 if ($project->usesFRS() && forge_get_config('use_frs')) {
 	$string_rss_20 .= get_rss_feed_20 ("rss20_newreleases.php?group_id=" . $group_id,
-										$name.': ' . _('Project Releases'));
+										$name._(': ') . _('Project Releases'));
 }
 
 // RSS for project documents
 if ($project->usesDocman() && forge_get_config('use_docman')) {
 	$string_rss_20 .= get_rss_feed_20 ("rss20_docman.php?group_id=" . $group_id,
-										$name.': ' . _('Project Document Manager'));
+										$name._(': ') . _('Project Document Manager'));
 }
 
 ?>

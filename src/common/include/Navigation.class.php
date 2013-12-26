@@ -57,7 +57,7 @@ class Navigation extends Error {
 			if (!isset($params['title'])) {
 				return forge_get_config('forge_name');
 			} else {
-				return forge_get_config('forge_name') . ': ' . $params['title'];
+				return forge_get_config('forge_name') . _(': ') . $params['title'];
 			}
 		} else {
 			// return HTML code otherwise

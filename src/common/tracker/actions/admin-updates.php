@@ -578,7 +578,7 @@ if (getStringFromRequest('add_extrafield')) {
 			$error_msg .= _('Unable to create ArtifactExtraFieldElement Object');
 		} else {
 			if (!$sure || !$really_sure || !$ao->delete()) {
-				$error_msg .= _('Error deleting an element').': '.$ao->getErrorMessage();
+				$error_msg .= _('Error deleting an element')._(': ').$ao->getErrorMessage();
 				$ao->clearError();
 			} else {
 				$feedback .= _('Element deleted');

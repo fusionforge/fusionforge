@@ -44,7 +44,7 @@ if (sizeof($parent) || sizeof($childs)) {
 		echo '<ul>';
 		foreach ($childs as $child) {
 			$childGroup = group_get_object($child);
-			echo '<li>'._('Child project').': '.util_make_link('/projects/'.$childGroup->getUnixName(), $childGroup->getPublicName(), array('class' => 'tabtitle', 'title' => _('Direct link to project'))).'</li>';
+			echo '<li>'._('Child project')._(': ').util_make_link('/projects/'.$childGroup->getUnixName(), $childGroup->getPublicName(), array('class' => 'tabtitle', 'title' => _('Direct link to project'))).'</li>';
 		}
 		echo '</ul>';
 	}

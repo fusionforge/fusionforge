@@ -54,7 +54,7 @@ if (getStringFromRequest('submit')) {
 	} elseif (!session_login_valid($loginname, $passwd, 1)) {
 		$warning_msg = _('Credentials you entered do not correspond to valid account.');
 	} elseif (!$u->setStatus('A')) {
-		$error_msg = _('Error while activiting account').': '.$u->getErrorMessage();
+		$error_msg = _('Error while activating account')._(': ').$u->getErrorMessage();
 	} else {
 		if (forge_get_config('user_notification_on_activation')) {
 			$u->setAdminNotification();

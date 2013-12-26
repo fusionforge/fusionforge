@@ -434,7 +434,7 @@ class ArtifactTypeHtml extends ArtifactType {
 
 			// Do not show the required star in query mode (creating/updating a query).
 			$is_required = ($mode == 'QUERY' || $mode == 'DISPLAY') ?	0 : $efarr[$i]['is_required'];
-			$name = $efarr[$i]['field_name'].($is_required ? utils_requiredField() : '').': ';
+			$name = $efarr[$i]['field_name'].($is_required ? utils_requiredField() : '')._(': ');
 			$name = '<strong>'.$name.'</strong>';
 
 			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT) {

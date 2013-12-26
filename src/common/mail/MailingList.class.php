@@ -129,14 +129,14 @@ class MailingList extends Error {
 
 		$realListName = strtolower($this->Group->getUnixName().'-'.$listName);
 		if (!preg_match('/^[a-z0-9\-_\.]*$/', $realListName)) {
-			$this->setError(_('Invalid List Name') . ': ' .$realListName);
+			$this->setError(_('Invalid List Name')._(': ').$realListName);
 			return false;
 		}
 
 		// '|' or '/' are valid chars in emails but are not allowed by mailman.
 		if( preg_match('/[|\/]/', $realListName) ||
 			!validate_email($realListName.'@'.forge_get_config('lists_host'))) {
-			$this->setError(_('Invalid List Name') . ': ' .
+			$this->setError(_('Invalid List Name')._(': ').
 			$realListName.'@'.forge_get_config('lists_host'));
 			return false;
 		}

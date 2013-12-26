@@ -213,7 +213,7 @@ class ArtifactType extends Error {
 		if ($email_address) {
 			$invalid_emails = validate_emails($email_address);
 			if (count($invalid_emails) > 0) {
-				$this->SetError(_('E-mail address(es) appeared invalid').': '.implode(',', $invalid_emails));
+				$this->SetError(_('E-mail address(es) appeared invalid')._(': ').implode(',', $invalid_emails));
 				return false;
 			}
 		}
@@ -983,7 +983,7 @@ class ArtifactType extends Error {
 		if ($email_address) {
 			$invalid_emails = validate_emails($email_address);
 			if (count($invalid_emails) > 0) {
-				$this->SetError(_('E-mail address(es) appeared invalid').': '.implode(',', $invalid_emails));
+				$this->SetError(_('E-mail address(es) appeared invalid')._(': ').implode(',', $invalid_emails));
 				return false;
 			}
 		}

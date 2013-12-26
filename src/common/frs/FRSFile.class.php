@@ -184,7 +184,7 @@ class FRSFile extends Error {
 
 		$ret = rename($file_location, $newfilelocation.$name);
 		if (!$ret) {
-			$this->setError(_('File cannot be moved to the permanent location').': '.$newfilelocation.$name);
+			$this->setError(_('File cannot be moved to the permanent location')._(': ').$newfilelocation.$name);
 			return false;
 		}
 
@@ -437,7 +437,7 @@ class FRSFile extends Error {
 			}
 			$ret = rename($old_file_location, $new_file_location);
 			if (!$ret) {
-				$this->setError(_('File cannot be moved to the permanent location').': '.$new_file_location);
+				$this->setError(_('File cannot be moved to the permanent location')._(': ').$new_file_location);
 				db_rollback();
 				return false;
 			}

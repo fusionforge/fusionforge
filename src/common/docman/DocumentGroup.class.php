@@ -821,15 +821,15 @@ class DocumentGroup extends Error {
 							}
 							if (!$d->create($dir_arr[$i], $dir_arr_type, $directory.'/'.$dir_arr[$i], $this->getID(),
 								$filename, _('Injected by ZIP:').date(DATE_ATOM))) {
-								$this->setError($dir_arr[$i].': '.$d->getErrorMessage());
+								$this->setError($dir_arr[$i]._(': ').$d->getErrorMessage());
 								return false;
 							}
 						} else {
-							$this->setError($dir_arr[$i].': '._('Invalid file name.'));
+							$this->setError($dir_arr[$i]._(': ')._('Invalid file name.'));
 							return false;
 						}
 					} else {
-						$this->setError($dir_arr[$i].': '._('Unknown item.'));
+						$this->setError($dir_arr[$i]._(': ')._('Unknown item.'));
 						return false;
 					}
 				}

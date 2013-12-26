@@ -107,9 +107,9 @@ function hide_edit_button(id) {
 				plugin_hook("user_logo", $params);
 
 				echo '<span style="float:left">';
-				echo _('Date').': '.
+				echo _('Date')._(': ').
 					date(_('Y-m-d H:i'),db_result($result, $i, 'adddate')) .'<br />'.
-					_('Sender').': ';
+					_('Sender')._(': ');
 				if(db_result($result,$i,'user_id') == 100) {
 					echo db_result($result,$i,'realname');
 				} else {
@@ -217,7 +217,7 @@ function hide_edit_button(id) {
 		$current = '';
 		$end = '';
 		while ($arr = db_fetch_array($res)) {
-			$title = $arr['group_name'].': '.$arr['name'];
+			$title = $arr['group_name']._(': ').$arr['name'];
 			if ($title != $current) {
 				echo $end.'<strong>'.$title.'</strong>';
 				$current = $title;

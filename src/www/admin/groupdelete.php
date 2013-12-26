@@ -49,7 +49,7 @@ if (getStringFromPost('submit')) {
 	}
 }
 
-$title = _('Permanently and irretrievably delete project').': '.$group->getPublicName();
+$title = _('Permanently and irretrievably delete project')._(': ').$group->getPublicName();
 site_admin_header(array('title'=>$title));
 ?>
 

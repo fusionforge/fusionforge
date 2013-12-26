@@ -351,7 +351,7 @@ switch (getStringFromRequest('func')) {
 		} else {
 			$deletion = $pt->delete(true);
 			if (!$deletion) {
-				$error_msg .= _('Delete failed') . ': '.$pt->getErrorMessage();
+				$error_msg .= _('Delete failed')._(': ').$pt->getErrorMessage();
 			} else {
 				$feedback .= _('Task Successfully Deleted');
 			}

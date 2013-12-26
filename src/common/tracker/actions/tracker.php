@@ -279,7 +279,7 @@ switch (getStringFromRequest('func')) {
 				if (!$ah->update($priority,$status_id,
 					$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,$extra_fields, $description)) {
 					form_release_key(getStringFromRequest('form_key'));
-					$error_msg .= _('Tracker Item'). ': '.$ah->getErrorMessage();
+					$error_msg .= _('Tracker Item')._(': ').$ah->getErrorMessage();
 					$ah->clearError();
 					$was_error=true;
 				}

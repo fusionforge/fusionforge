@@ -920,7 +920,7 @@ function site_project_header($params) {
 
 	if (isset($params['title'])) {
 		$h1 = $params['title'];
-		$params['title'] = $project->getPublicName().': '.$params['title'];
+		$params['title'] = $project->getPublicName()._(': ').$params['title'];
 	} else {
 		$h1 = $project->getPublicName();
 		$params['title'] = $project->getPublicName();
