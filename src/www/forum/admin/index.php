@@ -248,7 +248,7 @@ if (getStringFromRequest('add_forum')) {
 		} elseif ($f->isError()) {
 			exit_error($f->getErrorMessage(),'forums');
 		}
-		$fm=new ForumMessage($f,$msg_id,false,false);
+		$fm=new ForumMessage($f, $msg_id, array(), false);
 		if (!$fm || !is_object($fm)) {
 			exit_error(_('Error getting new forum message'),'forums');
 		} elseif ($fm->isError()) {
@@ -288,7 +288,7 @@ if (getStringFromRequest('add_forum')) {
 			exit_error($f->getErrorMessage(),'forums');
 		}
 
-		$fm=new ForumMessage($f,$msg_id,false,false);
+		$fm = new ForumMessage($f, $msg_id, array(), false);
 		if (!$fm || !is_object($fm)) {
 			exit_error(_('Error Getting ForumMessage'),'forums');
 		} elseif ($fm->isError()) {

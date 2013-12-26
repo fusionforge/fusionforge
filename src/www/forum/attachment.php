@@ -122,7 +122,7 @@ if ($edit=="yes") {
 			//actually edit the attach and save the info
 			forum_header(array('title'=>_('Attachments')));
 			$am = new AttachManager();
-			$fm = new ForumMessage($f,$msg_id,false,false);
+			$fm = new ForumMessage($f, $msg_id, array(), false);
 			$am->SetForumMsg($fm);
 			$attach = getUploadedFile("attachment1");
 			if ($attachid) {
