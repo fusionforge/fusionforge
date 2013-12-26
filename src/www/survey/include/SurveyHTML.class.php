@@ -103,9 +103,9 @@ class SurveyHTML extends Error {
 
 	/**
 	 * Show Add/Modify Question Forums
-	 * @param Survey $q	Question Question Object
-     * @return string
-     */
+	 * @param	Survey	$q	Question Question Object
+	 * @return	string
+	 */
 	function showAddQuestionForm( &$q ) {
 		global $group_id;
 
@@ -149,8 +149,8 @@ class SurveyHTML extends Error {
 
 	/**
 	 * Show Add/Modify Question Forums
-	 * @param Survey $s	Question Question Object
-	 * @return string
+	 * @param	Survey	$s	Question Question Object
+	 * @return	string
 	 */
 	function showAddSurveyForm( &$s) {
 		global $group_id;
@@ -288,6 +288,8 @@ class SurveyHTML extends Error {
 
 	/**
 	 * Show list of questions
+	 *
+	 * @return	string
 	 */
 	function showQuestions(&$questions) {
 		global $group_id;
@@ -466,6 +468,8 @@ class SurveyHTML extends Error {
 
 	/**
 	 * Show survey form - Show all forums of Survey
+	 *
+	 * @return	string
 	 */
 	function showSurveyForm(&$s) {
 		global $group_id;
@@ -569,11 +573,11 @@ class SurveyHTML extends Error {
 	/**
 	 * Show survey Result
 	 *
-	 *	@param object $sr a Survey Response Factory
-	 *	@param int $show_comment
-	 *	@param string $q_num
-	 *	@param int $show_graph
-	 *	@return string
+	 * @param	object	$sr a Survey Response Factory
+	 * @param	int	$show_comment
+	 * @param	string	$q_num
+	 * @param	int	$show_graph
+	 * @return	string
 	 */
 	function showResult(&$sr, $show_comment=0, $q_num="", $show_graph=0) {
 		global $group_id;
@@ -706,9 +710,9 @@ class SurveyHTML extends Error {
 	/**
 	 * split_str - works as str_split of PHP5 -  Converts a string to an array.
 	 *
-	 * @param string $str
-	 * @param int	$split_lengt	length of chunk
-	 * @return array array of chunks of the string
+	 * @param	string	$str
+	 * @param	int	$split_lengt	length of chunk
+	 * @return	array	array of chunks of the string
 	 */
 	function split_str($str, $split_lengt=1) {
 		$cnt = strlen($str);
@@ -721,10 +725,10 @@ class SurveyHTML extends Error {
 	/**
 	 * _makeBar - make Precentage bar as a cell in a table. Starts with <tr> and ends with </tr>
 	 *
-	 * @param string	$name		Name
-	 * @param int 		$percent	Percentage of the name
-	 * @param string	$color		Color
-	 * @return string
+	 * @param	string	$name		Name
+	 * @param	int	$percent	Percentage of the name
+	 * @param	string	$color		Color
+	 * @return	string
 	 */
 	function _makeBar($name, $percent, $color) {
 		$ret = '<tr><td width="30%">'.$name.'</td><td>';

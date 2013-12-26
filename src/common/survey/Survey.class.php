@@ -49,17 +49,17 @@ class Survey extends Error {
 	 */
 	var $Group;
 
-    /**
-     * Constructor.
-     *
-     * @param $Group
-     * @param bool $survey_id
-     * @param bool $arr
-     * @internal param \The $object Group object to which this survey is associated.
-     * @internal param \The $int survey_id.
-     * @internal param \The $array associative array of data.
-     * @return \Survey
-     */
+	/**
+	* Constructor.
+	*
+	* @param	$Group
+	* @param	bool	$survey_id
+	* @param	bool	$arr
+	* @internal	param	\The $object Group object to which this survey is associated.
+	* @internal	param	\The $int survey_id.
+	* @internal	param	\The $array associative array of data.
+	* @return	\Survey
+	*/
 	function __construct(&$Group, $survey_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
@@ -88,22 +88,22 @@ class Survey extends Error {
 		}
 	}
 
-    /**
-     * create - use this function to create a survey
-     *
-     * @param $survey_title
-     * @param $add_questions
-     * @param int $is_active
-     * @param int $is_result_public
-     * @param Allow|int $double_vote
-     * @internal param \The $string survey title
-     * @internal param array $int The question numbers to be added
-     * @internal param $is_active 1: Active, 0: Inactive
-     * For future options
-     * @internal param $is_result_public 0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
-     * @internal param \Allow $double_vote double vote if it is 1
-     * @return    boolean    success.
-     */
+	/**
+	* create - use this function to create a survey
+	*
+	* @param	$survey_title
+	* @param	$add_questions
+	* @param	int		$is_active
+	* @param	int		$is_result_public
+	* @param	Allow|int	$double_vote
+	* @internal	param		\The $string survey title
+	* @internal	param		array	$int The question numbers to be added
+	* @internal	param		$is_active 1: Active, 0: Inactive
+	* For future options
+	* @internal	param		$is_result_public 0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
+	* @internal	param		\Allow $double_vote double vote if it is 1
+	* @return	boolean		success.
+	*/
 	function create($survey_title, $add_questions, $is_active = 0, $is_public = 1, $is_result_public = 0, $double_vote = 0) {
 		if (!$survey_title) {
 			$this->setError(_('Update Failed: Survey Title Required'));
@@ -135,23 +135,23 @@ class Survey extends Error {
 		return $this->fetchData($survey_id);
 	}
 
-    /**
-     * update - use this function to update a survey
-     *
-     * @param $survey_title
-     * @param $add_questions
-     * @param $del_questions
-     * @param int $is_active
-     * @param int $is_result_public
-     * @param Allow|int $double_vote
-     * @internal param \The $string survey title
-     * @internal param array $int The question numbers to be added
-     * @internal param array $int The question numbers to be deleted
-     * @internal param $is_active 1: Active, 0: Inactive
-     * @internal param $is_result_public 0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
-     * @internal param \Allow $double_vote double vote if it is 1
-     * @return    boolean    success.
-     */
+	/**
+	* update - use this function to update a survey
+	*
+	* @param	$survey_title
+	* @param	$add_questions
+	* @param	$del_questions
+	* @param	int		$is_active
+	* @param	int		$is_result_public
+	* @param	Allow|int	$double_vote
+	* @internal	param		\The $string survey title
+	* @internal	param		array $int The question numbers to be added
+	* @internal	param		array $int The question numbers to be deleted
+	* @internal	param		$is_active 1: Active, 0: Inactive
+	* @internal	param		$is_result_public 0: Admins Only, 1: Group Members, 2: FusionForge user, 3:voted user 4:Every body
+	* @internal	param		\Allow $double_vote double vote if it is 1
+	* @return	boolean		success.
+	*/
 	function update($survey_title, &$add_questions, &$del_questions, $is_active = 0, $is_public = 1, $is_result_public = 0, $double_vote = 0) {
 		if (!$survey_title) {
 			$this->setError(_('Update Failed: Survey Title Required'));
@@ -188,7 +188,7 @@ class Survey extends Error {
 	 * updateOrder - use this function to update question order
 	 *
 	 * @param	int 	$question_number	Question number
-	 * @param	bool	$is_up				decide up or down. it is up if it is true
+	 * @param	bool	$is_up			decide up or down. it is up if it is true
 	 * @return	bool	success.
 	 */
 	function updateOrder($question_number, $is_up = true) {
@@ -227,7 +227,7 @@ class Survey extends Error {
 	 * delete - use this function to delete this survey
 	 * (We don't support delete yet)
 	 *
-	 *	@return	boolean	success.
+	 * @return	boolean	success.
 	 */
 	function delete() {
 		$group_id = $this->Group->GetID();
@@ -270,61 +270,61 @@ class Survey extends Error {
 	/**
 	 * getGroup - get the Group object this Survey is associated with.
 	 *
-	 *	@return	object	The Group object.
+	 * @return	object	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
 	/**
-	 *	getID - Get the id of this Survey
+	 * getID - Get the id of this Survey
 	 *
-	 *	@return	int	The question_id
+	 * @return	int	The question_id
 	 */
 	function getID() {
 		return $this->data_array['survey_id'];
 	}
 
 	/**
-	 *	isActive - return if it is active
+	 * isActive - return if it is active
 	 *
-	 *	@return	int	is active
+	 * @return	int	is active
 	 */
 	function isActive() {
 		return $this->data_array['is_active'];
 	}
 
 	/**
-	 *	getTitle - Get the Survey title
+	 * getTitle - Get the Survey title
 	 *
-	 *	@return string the survey title
+	 * @return	string	the survey title
 	 */
 	function getTitle() {
 		return $this->data_array['survey_title'];
 	}
 
         /**
-	 *	getQuestionString - Get the question string
+	 * getQuestionString - Get the question string
 	 *
-	 *	@return string the question
+	 * @return	string	the question
 	 */
 	function getQuestionString() {
 		return $this->data_array['survey_questions'];
 	}
 
         /**
-	 *	getNumberOfQuestion - Get the number of questions
+	 * getNumberOfQuestion - Get the number of questions
 	 *
-	 *	@return int the number questions
+	 * @return	int	the number questions
 	 */
 	function getNumberOfQuestions() {
 		return count($this->getQuestionArray());
 	}
 
         /**
-	 *	getNumberOfVotes - Get the number of votes
+	 * getNumberOfVotes - Get the number of votes
 	 *
-	 *	@return int the number votes
+	 * @return	int	the number votes
 	 */
 	function getNumberOfVotes() {
 		$group_id = $this->Group->GetID();
@@ -340,10 +340,10 @@ class Survey extends Error {
 	}
 
 	/**
-	 *	isUserVote - Figure out the user voted or not
+	 * isUserVote - Figure out the user voted or not
 	 *
-	 *	@param  int $user_id
-	 *	@return true of false
+	 * @param	int	$user_id
+	 * @return	true or false
 	 */
 	function isUserVote($user_id) {
 		$group_id = $this->Group->GetID();
@@ -360,9 +360,9 @@ class Survey extends Error {
 	}
 
 	/**
-	 *	getQuestionArray - Get the question string numbers in array
+	 * getQuestionArray - Get the question string numbers in array
 	 *
-	 *	@return string the question
+	 * @return	string	the question
 	 */
 	function &getQuestionArray() {
 		$ret_arr = array();
@@ -386,7 +386,7 @@ class Survey extends Error {
 	/**
 	 * getQuestionInstances - Get the SurveyQuestion array belongs to this Survey by order
 	 *
-	 * @return	string	the question
+	 * @return 	string	the question
 	 */
 	function &getQuestionInstances() {
 		$ret = array();

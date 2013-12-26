@@ -46,7 +46,7 @@ class SurveyFactory extends Error {
 	/**
 	 * Constructor.
 	 *
-	 * @param	object	$Group  	The Group object to which this survey is associated.
+	 * @param	object	$Group	The Group object to which this survey is associated.
 	 */
 	function __construct(&$Group) {
 		$this->Error();
