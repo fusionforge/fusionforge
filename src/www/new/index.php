@@ -109,7 +109,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 		}
 		print '
 				</td>
-				<td style="text-align:center" nowrap="nowrap">&nbsp;</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td colspan="3">';
