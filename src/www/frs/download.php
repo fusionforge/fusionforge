@@ -55,7 +55,7 @@ function send_file($filename, $filepath, $file_id = NULL, $mode = NULL) {
 	readfile_chunked($filepath);
 
 	if (!$file_id) {
-		return true;
+		return;
 	}
 
 	if (session_loggedin()) {
@@ -67,14 +67,14 @@ function send_file($filename, $filepath, $file_id = NULL, $mode = NULL) {
 
 	$ip = getStringFromServer('REMOTE_ADDR');
 	if ($mode != 'latestzip') {
-		$res = db_query_params("INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)", array($ip,$file_id,date('Ym'),date('d'),$us));
+		db_query_params("INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)", array($ip,$file_id,date('Ym'),date('d'),$us));
 	} else {
 		// here $file_id is a package_id
 		$Package = frspackage_get_object($file_id);
 		$release = $Package->getNewestRelease();
 		$files = $release->getFiles();
 		foreach ($files as $fileObject) {
-			$res = db_query_params("INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)", array($ip, $fileObject->getID(), date('Ym'), date('d'), $us));
+			db_query_params("INSERT INTO frs_dlstats_file (ip_address,file_id,month,day,user_id) VALUES ($1, $2, $3, $4, $5)", array($ip, $fileObject->getID(), date('Ym'), date('d'), $us));
 		}
 	}
 }
