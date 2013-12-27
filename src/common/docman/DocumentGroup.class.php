@@ -248,7 +248,7 @@ class DocumentGroup extends Error {
 	/**
 	 * fetchData - re-fetch the data for this DocumentGroup from the database.
 	 *
-	 * @param	int		$id	ID of the doc_group.
+	 * @param	int	$id	ID of the doc_group.
 	 * @return	bool	success
 	 * @access	public
 	 */
@@ -268,7 +268,7 @@ class DocumentGroup extends Error {
 	/**
 	 * getGroup - get the Group Object this DocumentGroup is associated with.
 	 *
-	 * @return	Object Group.
+	 * @return	Object	Group.
 	 * @access	public
 	 */
 	function &getGroup() {
@@ -581,6 +581,12 @@ class DocumentGroup extends Error {
 		}
 	}
 
+	/**
+	 * getNumberOfDocuments - get the number of files in this doc_group, group_id and for a document state
+	 *
+	 * @param	int	the state id
+	 * @return	int	the number of found documents
+	 */
 	function getNumberOfDocuments($stateId = 1) {
 		if (isset($this->data_array['numberFiles'][$stateId]))
 			return $this->data_array['numberFiles'][$stateId];
