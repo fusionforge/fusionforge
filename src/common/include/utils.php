@@ -27,7 +27,10 @@
  */
 
 /**
- * htpasswd_apr1_md5($plainpasswd) - generate htpasswd md5 format password
+ * htpasswd_apr1_md5 - generate htpasswd md5 format password
+ *
+ * @param	string	the plain string password
+ * @return	string	the apr1 string passwords
  *
  * From http://www.php.net/manual/en/function.crypt.php#73619
  */
@@ -65,7 +68,9 @@ function htpasswd_apr1_md5($plainpasswd) {
 }
 
 /**
- * is_utf8($string) - utf-8 detection
+ * is_utf8 - utf-8 detection
+ *
+ * @param	string	the string to analyze
  *
  * From http://www.php.net/manual/en/function.mb-detect-encoding.php#85294
  */
@@ -96,8 +101,10 @@ function is_utf8($str) {
 }
 
 /**
- * @param $data
- * @return mixed
+ * util_strip_unprintable - ???
+ *
+ * @param	$data
+ * @return	mixed
  */
 function util_strip_unprintable(&$data) {
 	if (is_array($data)) {
@@ -111,22 +118,22 @@ function util_strip_unprintable(&$data) {
 }
 
 /**
- * removeCRLF() - remove any Carriage Return-Line Feed from a string.
+ * removeCRLF - remove any Carriage Return-Line Feed from a string.
  * That function is useful to remove the possibility of a CRLF Injection when sending mail
  * All the data that we will send should be passed through that function
  *
- * @param  string  $str The string that we want to empty from any CRLF
- * @return string
+ * @param	string	$str	The string that we want to empty from any CRLF
+ * @return	string
  */
 function util_remove_CRLF($str) {
 	return strtr($str, "\015\012", '  ');
 }
 
 /**
- * util_check_fileupload() - determines if a filename is appropriate for upload
+ * util_check_fileupload - determines if a filename is appropriate for upload
  *
- * @param  array  $filename The uploaded file as returned by getUploadedFile()
- * @return bool
+ * @param	array	$filename	The uploaded file as returned by getUploadedFile()
+ * @return	bool
  */
 function util_check_fileupload($filename) {
 
@@ -160,20 +167,20 @@ function util_check_fileupload($filename) {
 }
 
 /**
- * util_check_url() - determines if given URL is valid.
+ * util_check_url - determines if given URL is valid.
  *
  * Currently, test is very basic, only the protocol is
  * checked, allowed values are: http, https, ftp.
  *
- * @param		string  $url The URL
- * @return		bool    true if valid, false if not valid.
+ * @param	string	$url	The URL
+ * @return	bool	true if valid, false if not valid.
  */
 function util_check_url($url) {
 	return (preg_match('/^(http|https|ftp):\/\//', $url) > 0);
 }
 
 /**
- * util_send_message() - Send email
+ * util_send_message - Send email
  * This function should be used in place of the PHP mail() function
  *
  * @param	string		$to			The email recipients address
@@ -231,12 +238,12 @@ function util_send_message($to, $subject, $body, $from = '', $BCC = '', $sendern
 }
 
 /**
- * util_encode_mailaddr() - Encode email address to MIME format
+ * util_encode_mailaddr - Encode email address to MIME format
  *
- * @param        string    $email The email address
- * @param        string    $name The email's owner name
- * @param        string    $charset The converting charset
- * @return string
+ * @param	string	$email		The email address
+ * @param	string	$name		The email's owner name
+ * @param	string	$charset	The converting charset
+ * @return	string
  */
 function util_encode_mailaddr($email, $name, $charset) {
 	if (function_exists('mb_convert_encoding') && trim($name) != "") {
@@ -250,11 +257,11 @@ function util_encode_mailaddr($email, $name, $charset) {
 }
 
 /**
- * util_encode_mimeheader() - Encode mimeheader
+ * util_encode_mimeheader - Encode mimeheader
  *
- * @param	string	$headername The name of the header (e.g. "Subject")
- * @param	string	$str The email subject
- * @param	string	$charset The converting charset (like ISO-2022-JP)
+ * @param	string	$headername	The name of the header (e.g. "Subject")
+ * @param	string	$str		The email subject
+ * @param	string	$charset	The converting charset (like ISO-2022-JP)
  * @return	string	The MIME encoded subject
  *
  */
@@ -280,7 +287,7 @@ function util_encode_mimeheader($headername, $str, $charset) {
 }
 
 /**
- * util_convert_body() - Convert body of the email message
+ * util_convert_body - Convert body of the email message
  *
  * @param	string	$str		The body of the email message
  * @param	string	$charset	The charset of the email message
@@ -296,15 +303,15 @@ function util_convert_body($str, $charset) {
 }
 
 /**
- *	util_handle_message() - a convenience wrapper which sends messages
- *	to an email account
+ * util_handle_message - a convenience wrapper which sends messages
+ * to an email account
  *
- *	@param	array	$id_arr		array of user_id's from the user table
- *	@param	string	$subject	subject of the message
- *	@param	string	$body		the message body
- *	@param	string	$extra_emails	a comma-separated list of email address
- *	@param	string	$dummy1		ignored	(no longer used)
- *	@param	string	$from		From header
+ * @param	array	$id_arr		array of user_id's from the user table
+ * @param	string	$subject	subject of the message
+ * @param	string	$body		the message body
+ * @param	string	$extra_emails	a comma-separated list of email address
+ * @param	string	$dummy1		ignored	(no longer used)
+ * @param	string	$from		From header
  */
 function util_handle_message($id_arr, $subject, $body, $extra_emails = '', $dummy1 = '', $from = '') {
 	$address = array();
@@ -333,10 +340,10 @@ function util_handle_message($id_arr, $subject, $body, $extra_emails = '', $dumm
 }
 
 /**
- * util_unconvert_htmlspecialchars() - Unconverts a string converted with htmlspecialchars()
+ * util_unconvert_htmlspecialchars - Unconverts a string converted with htmlspecialchars()
  *
- * @param	string		$string		The string to unconvert
- * @return	string		The unconverted string
+ * @param	string	$string	The string to unconvert
+ * @return	string	The unconverted string
  *
  */
 function util_unconvert_htmlspecialchars($string) {
@@ -344,12 +351,12 @@ function util_unconvert_htmlspecialchars($string) {
 }
 
 /**
- * util_result_columns_to_assoc() - Takes a result set and turns the column pair into an associative array
+ * util_result_columns_to_assoc - Takes a result set and turns the column pair into an associative array
  *
- * @param        string     $result		The result set ID
- * @param        int        $col_key	The column key
- * @param        int        $col_val	The optional column value
- * @return array			An associative array
+ * @param	string	$result		The result set ID
+ * @param	int	$col_key	The column key
+ * @param	int	$col_val	The optional column value
+ * @return	array			An associative array
  *
  */
 function util_result_columns_to_assoc($result, $col_key = 0, $col_val = 1) {
@@ -367,11 +374,11 @@ function util_result_columns_to_assoc($result, $col_key = 0, $col_val = 1) {
 }
 
 /**
- * util_result_column_to_array() - Takes a result set and turns the optional column into an array
+ * util_result_column_to_array - Takes a result set and turns the optional column into an array
  *
- * @param		int		$result	The result set ID
- * @param		int		$col	The column
- * @return		array
+ * @param	int	$result	The result set ID
+ * @param	int	$col	The column
+ * @return	array
  *
  */
 function &util_result_column_to_array($result, $col = 0) {
@@ -393,12 +400,12 @@ function &util_result_column_to_array($result, $col = 0) {
 }
 
 /**
- * util_line_wrap() - Automatically linewrap text
+ * util_line_wrap - Automatically linewrap text
  *
- * @param		string	$text	The text to wrap
- * @param		int		$wrap	The number of characters to wrap - Default is 80
- * @param		string	$break	The line break to use - Default is '\n'
- * @return		string			The wrapped text
+ * @param	string	$text	The text to wrap
+ * @param	int	$wrap	The number of characters to wrap - Default is 80
+ * @param	string	$break	The line break to use - Default is '\n'
+ * @return	string	The wrapped text
  *
  */
 function util_line_wrap($text, $wrap = 80, $break = "\n") {
@@ -406,10 +413,10 @@ function util_line_wrap($text, $wrap = 80, $break = "\n") {
 }
 
 /**
- * util_make_links() - Turn URL's into HREF's.
+ * util_make_links - Turn URL's into HREF's.
  *
- * @param		string	$data	The URL
- * @return mixed|string	The HREF'ed URL
+ * @param	string	$data	The URL
+ * @return	mixed|string	The HREF'ed URL
  *
  */
 function util_make_links($data = '') {
@@ -491,7 +498,9 @@ function util_make_links($data = '') {
 }
 
 /**
- * show_priority_colors_key() - Show the priority colors legend
+ * show_priority_colors_key - Show the priority colors legend
+ *
+ * @return	string	html code
  *
  */
 function show_priority_colors_key() {
@@ -503,11 +512,11 @@ function show_priority_colors_key() {
 }
 
 /**
- * utils_buildcheckboxarray() - Build a checkbox array
+ * utils_buildcheckboxarray - Build a checkbox array
  *
- * @param        int      $options        Number of options to be in the array
- * @param        string   $name           The name of the checkboxes
- * @param        array    $checked_array  An array of boxes to be pre-checked
+ * @param	int	$options	Number of options to be in the array
+ * @param	string	$name		The name of the checkboxes
+ * @param	array	$checked_array	An array of boxes to be pre-checked
  *
  */
 function utils_buildcheckboxarray($options, $name, $checked_array) {
@@ -527,21 +536,21 @@ function utils_buildcheckboxarray($options, $name, $checked_array) {
 }
 
 /**
- * utils_requiredField() - Adds the required field marker
+ * utils_requiredField - Adds the required field marker
  *
- * @return string A string holding the HTML to mark a required field
+ * @return	string	A string holding the HTML to mark a required field
  */
 function utils_requiredField() {
 	return '<span class="requiredfield">*</span>';
 }
 
 /**
- * GraphResult() - Takes a database result set and builds a graph.
+ * GraphResult - Takes a database result set and builds a graph.
  * The first column should be the name, and the second column should be the values
  * Be sure to include HTL_Graphs.php before using this function
  *
- * @author Tim Perdue tperdue@valinux.com
- * @param	int		$result	The databse result set ID
+ * @author	Tim Perdue tperdue@valinux.com
+ * @param	int	$result	The databse result set ID
  * @param	string	$title	The title of the graph
  *
  */
@@ -571,10 +580,11 @@ function GraphResult($result, $title) {
 /**
  * GraphIt() - Build a graph
  *
- * @author Tim Perdue tperdue@valinux.com
+ * @author	Tim Perdue tperdue@valinux.com
  * @param	array	$name_string	An array of names
  * @param	array	$value_string	An array of values
- * @param	string	$title			The title of the graph
+ * @param	string	$title		The title of the graph
+ * @return	string	html code
  *
  */
 function GraphIt($name_string, $value_string, $title) {
@@ -666,12 +676,12 @@ function GraphIt($name_string, $value_string, $title) {
 }
 
 /**
- * ShowResultSet() - Show a generic result set
+ * ShowResultSet - Show a generic result set
  * Very simple, plain way to show a generic result set
  *
- * @param	int		$result				The result set ID
- * @param	string	$title				The title of the result set
- * @param	bool	$linkify			The option to turn URL's into links
+ * @param	int	$result			The result set ID
+ * @param	string	$title			The title of the result set
+ * @param	bool	$linkify		The option to turn URL's into links
  * @param	bool	$displayHeaders		The option to display headers
  * @param	array	$headerMapping		The db field name -> label mapping
  * @param	array	$excludedCols		Don't display these cols
@@ -753,7 +763,7 @@ function ShowResultSet($result, $title = '', $linkify = false, $displayHeaders =
 }
 
 /**
- * validate_email() - Validate an email address
+ * validate_email - Validate an email address
  *
  * @param	string	$address	The address string to validate
  * @return	bool	true on success/false on error
@@ -776,10 +786,10 @@ function validate_email($address) {
 }
 
 /**
- * validate_emails() - Validate a list of e-mail addresses
+ * validate_emails - Validate a list of e-mail addresses
  *
- * @param	string	$addresses  E-mail list
- * @param	string	$separator  Separator
+ * @param	string	$addresses	E-mail list
+ * @param	string	$separator	Separator
  * @return	array	Array of invalid e-mail addresses (if empty, all addresses are OK)
  */
 function validate_emails($addresses, $separator = ',') {
@@ -798,10 +808,10 @@ function validate_emails($addresses, $separator = ',') {
 }
 
 /**
- * util_is_valid_filename() - Verifies whether a file has a valid filename
+ * util_is_valid_filename - Verifies whether a file has a valid filename
  *
- * @param  string $file The file to verify
- * @return bool true on success/false on error
+ * @param	string	$file	The file to verify
+ * @return	bool	true on success/false on error
  *
  */
 function util_is_valid_filename($file) {
@@ -820,9 +830,9 @@ function util_is_valid_filename($file) {
 }
 
 /**
- * util_is_valid_repository_name() - Verifies whether a repository name is valid
+ * util_is_valid_repository_name - Verifies whether a repository name is valid
  *
- * @param	string	$file name to verify
+ * @param	string	$file	name to verify
  * @return	bool	true on success/false on error
  *
  */
@@ -840,7 +850,7 @@ function util_is_valid_repository_name ($file) {
 }
 
 /**
- * valid_hostname() - Validates a hostname string to make sure it doesn't contain invalid characters
+ * valid_hostname - Validates a hostname string to make sure it doesn't contain invalid characters
  *
  * @param	string	$hostname The optional hostname string
  * @return	bool	true on success/false on failure
@@ -872,19 +882,19 @@ function valid_hostname($hostname = "xyz") {
 
 
 /**
- * human_readable_bytes() - Translates an integer representing bytes to a human-readable format.
+ * human_readable_bytes - Translates an integer representing bytes to a human-readable format.
  *
  * Format file size in a human-readable way
  * such as "xx Megabytes" or "xx Mo"
  *
- * @author           Andrea Paleni <andreaSPAMLESS_AT_SPAMLESScriticalbit.com>
- * @version          1.0
+ * @author	Andrea Paleni <andreaSPAMLESS_AT_SPAMLESScriticalbit.com>
+ * @version	1.0
  *
- * @param int       $bytes   is the size
- * @param bool      $base10  enable base 10 representation, otherwise default base 2  is used
- * @param int       $round   number of fractional digits
- * @param array     $labels  strings associated to each 2^10 or 10^3(base10==true) multiple of base units
- * @return string
+ * @param	int	$bytes	is the size
+ * @param	bool	$base10	enable base 10 representation, otherwise default base 2  is used
+ * @param	int	$round	number of fractional digits
+ * @param	array	$labels	strings associated to each 2^10 or 10^3(base10==true) multiple of base units
+ * @return	string
  */
 function human_readable_bytes($bytes, $base10 = false, $round = 0, $labels = array()) {
 	if ($bytes == 0) {
@@ -919,10 +929,10 @@ function human_readable_bytes($bytes, $base10 = false, $round = 0, $labels = arr
 }
 
 /**
- *	ls - lists a specified directory and returns an array of files
- *	@param  string	$dir	the path of the directory to list
- *	@param  bool	$filter	whether to filter out directories and illegal filenames
- *	@return	array	array of file names.
+ * ls - lists a specified directory and returns an array of files
+ * @param	string	$dir	the path of the directory to list
+ * @param	bool	$filter	whether to filter out directories and illegal filenames
+ * @return	array	array of file names.
  */
 function &ls($dir, $filter = false) {
 	$out = array();
@@ -945,11 +955,11 @@ function &ls($dir, $filter = false) {
 }
 
 /**
- * readfile_chunked() - replacement for readfile
+ * readfile_chunked - replacement for readfile
  *
- * @param  string    $filename    The file path
- * @param  bool      $returnBytes Whether to return bytes served or just a bool
- * @return bool|int
+ * @param	string	$filename	The file path
+ * @param	bool	$returnBytes	Whether to return bytes served or just a bool
+ * @return	bool|int
  */
 function readfile_chunked($filename, $returnBytes = true) {
 	$chunksize = 1*(1024*1024); // 1MB chunks
@@ -980,30 +990,30 @@ function readfile_chunked($filename, $returnBytes = true) {
 }
 
 /**
- * util_is_root_dir() - Checks if a directory points to the root dir
+ * util_is_root_dir - Checks if a directory points to the root dir
  *
- * @param  string  $dir   Directory
- * @return bool
+ * @param	string	$dir	Directory
+ * @return	bool
  */
 function util_is_root_dir($dir) {
 	return !preg_match('/[^\\/]/', $dir);
 }
 
 /**
- * util_is_dot_or_dotdot() - Checks if a directory points to . or ..
+ * util_is_dot_or_dotdot - Checks if a directory points to . or ..
  *
- * @param  string $dir    Directory
- * @return bool
+ * @param	string	$dir	Directory
+ * @return	bool
  */
 function util_is_dot_or_dotdot($dir) {
 	return preg_match('/^\.\.?$/', trim($dir, '/'));
 }
 
 /**
- * util_containts_dot_or_dotdot() - Checks if a directory containts . or ..
+ * util_containts_dot_or_dotdot - Checks if a directory containts . or ..
  *
- * @param  string $dir Directory
- * @return bool
+ * @param	string	$dir	Directory
+ * @return	bool
  */
 function util_containts_dot_or_dotdot($dir) {
 	foreach (explode('/', $dir) as $sub_dir) {
@@ -1015,10 +1025,10 @@ function util_containts_dot_or_dotdot($dir) {
 }
 
 /**
- * util_secure_filename() - Returns a secured file name
+ * util_secure_filename - Returns a secured file name
  *
- * @param  string $file    Filename
- * @return string  Filename
+ * @param	string	$file	Filename
+ * @return	string	Filename
  */
 function util_secure_filename($file) {
 	$f = preg_replace("/[^-A-Z0-9_\.]/i", '', $file);
@@ -1030,9 +1040,9 @@ function util_secure_filename($file) {
 }
 
 /**
- * util_strip_accents() - Remove accents from given text.
+ * util_strip_accents - Remove accents from given text.
  *
- * @param	string $text Text
+ * @param	string	$text Text
  * @return	string
  */
 function util_strip_accents($text) {
@@ -1044,9 +1054,9 @@ function util_strip_accents($text) {
 }
 
 /**
- * Constructs the forge's URL prefix out of forge_get_config('url_prefix')
+ * normalized_urlprefix - Constructs the forge's URL prefix out of forge_get_config('url_prefix')
  *
- * @return string
+ * @return	string
  */
 function normalized_urlprefix() {
 	$prefix = forge_get_config('url_prefix');
@@ -1059,9 +1069,9 @@ function normalized_urlprefix() {
 }
 
 /**
- * Return URL prefix (http:// or https://)
+ * util_url_prefix - Return URL prefix (http:// or https://)
  *
- * @param       string  $prefix (optional) : 'http' or 'https' to force it
+ * @param	string	$prefix (optional) : 'http' or 'https' to force it
  * @return	string	URL prefix
  */
 function util_url_prefix($prefix = '') {
@@ -1078,10 +1088,10 @@ function util_url_prefix($prefix = '') {
 }
 
 /**
- * Construct the base URL http[s]://forge_name[:port]
+ * util_make_base_url - Construct the base URL http[s]://forge_name[:port]
  *
- * @param       string  $prefix (optional) : 'http' or 'https' to force it
- * @return	string base URL
+ * @param	string	$prefix (optional) : 'http' or 'https' to force it
+ * @return	string	base URL
  */
 function util_make_base_url($prefix = '') {
 	$url = util_url_prefix($prefix);
@@ -1093,7 +1103,7 @@ function util_make_base_url($prefix = '') {
 }
 
 /**
- * Construct full URL from a relative path
+ * util_make_url - Construct full URL from a relative path
  *
  * @param	string	$path (optional)
  * @param       string  $prefix (optional) : 'http' or 'https' to force it
@@ -1105,10 +1115,10 @@ function util_make_url($path = '', $prefix = '') {
 }
 
 /**
- * Find the relative URL from full URL, removing http[s]://forge_name[:port]
+ * util_find_relative_referer - Find the relative URL from full URL, removing http[s]://forge_name[:port]
  *
- * @param  string $url URL
- * @return string
+ * @param	string	$url	URL
+ * @return	string
  */
 function util_find_relative_referer($url) {
 	$relative_url = str_replace(util_make_base_url(), '', $url);
@@ -1123,10 +1133,10 @@ function util_find_relative_referer($url) {
 }
 
 /**
- * Construct proper (relative) URI (prepending prefix)
+ * util_make_uri - Construct proper (relative) URI (prepending prefix)
  *
- * @param string $path
- * @return string URI
+ * @param	string	$path
+ * @return	string URI
  */
 function util_make_uri($path) {
 	$path = preg_replace('/^\//', '', $path);
@@ -1136,13 +1146,13 @@ function util_make_uri($path) {
 }
 
 /**
- * Construct proper (relative) URI from path & text
+ * util_make_link - Construct proper (relative) URI from path & text
  *
- * @param string     $path
- * @param string     $text
- * @param array|bool $extra_params
- * @param bool       $absolute
- * @return string URI
+ * @param	string		$path
+ * @param	string		$text
+ * @param	array|bool	$extra_params
+ * @param	bool		$absolute
+ * @return	string URI
  */
 function util_make_link($path, $text, $extra_params = false, $absolute = false) {
 	global $use_tooltips;
@@ -1165,26 +1175,26 @@ function util_make_link($path, $text, $extra_params = false, $absolute = false) 
 }
 
 /**
- * Create an HTML link to a user's profile page
+ * util_make_link_u - Create an HTML link to a user's profile page
  *
- * @param string	$username
- * @param int		$user_id
- * @param string	$text
- * @return string
+ * @param	string	$username
+ * @param	int	$user_id
+ * @param	string	$text
+ * @return	string
  */
 function util_make_link_u($username, $user_id, $text) {
 	return '<a href="'.util_make_url_u($username, $user_id).'">'.$text.'</a>';
 }
 
 /**
- * Display username with link to a user's profile page
- * and icon face if possible.
+ * util_display_user - Display username with link to a user's profile page
+ * 			and icon face if possible.
  *
- * @param string	$username
- * @param int		$user_id
- * @param string	$text
- * @param string	$size
- * @return string
+ * @param	string	$username
+ * @param	int	$user_id
+ * @param	string	$text
+ * @param	string	$size
+ * @return	string
  */
 function util_display_user($username, $user_id, $text, $size = 'xs') {
 	// Invoke user_link_with_tooltip plugin
@@ -1208,11 +1218,11 @@ function util_display_user($username, $user_id, $text, $size = 'xs') {
 }
 
 /**
- * Create URL for user's profile page
+ * util_make_url_u - Create URL for user's profile page
  *
- * @param string	$username
- * @param int		$user_id
- * @return string URL
+ * @param	string	$username
+ * @param	int	$user_id
+ * @return	string URL
  */
 function util_make_url_u($username, $user_id) {
 	if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
@@ -1223,12 +1233,12 @@ function util_make_url_u($username, $user_id) {
 }
 
 /**
- * Create a HTML link to a project's page
+ * util_make_link_g - Create a HTML link to a project's page
  *
- * @param string $group_name
- * @param int    $group_id
- * @param string $text
- * @return string
+ * @param	string	$group_name
+ * @param	int	$group_id
+ * @param	string	$text
+ * @return	string
  */
 function util_make_link_g($group_name, $group_id, $text) {
 	$hook_params = array();
@@ -1246,11 +1256,11 @@ function util_make_link_g($group_name, $group_id, $text) {
 }
 
 /**
- * Create URL for a project's page
+ * util_make_url_g - Create URL for a project's page
  *
- * @param string $group_name
- * @param int    $group_id
- * @return string
+ * @param	string	$group_name
+ * @param	int	$group_id
+ * @return	string
  */
 function util_make_url_g($group_name, $group_id) {
 	if (isset ($GLOBALS['sys_noforcetype']) && $GLOBALS['sys_noforcetype']) {
@@ -1269,10 +1279,12 @@ function util_ensure_value_in_set($value, $set) {
 }
 
 /**
- * @param Group  $group
- * @param string $email
- * @param string $response
- * @return bool
+ * check_email_available - ???
+ *
+ * @param	Group	$group
+ * @param	string	$email
+ * @param	string	$response
+ * @return	bool
  */
 function check_email_available($group, $email, &$response) {
 	// Check if a mailing list with same name already exists
@@ -1730,9 +1742,9 @@ function util_create_file_with_contents($path, $contents) {
 /**
  * Create a directory in the system temp directory with a hard-to-predict name.
  * Does not have the guarantees of the actual BSD libc function or Python tempfile function.
- * @param string $suffix Append to the new directory's name
- * @param string $prefix Prepend to the new directory's name
- * @return string The path of the new directory.
+ * @param	string	$suffix	Append to the new directory's name
+ * @param	string	$prefix	Prepend to the new directory's name
+ * @return	string	The path of the new directory.
  *
  * Mostly taken from https://gist.github.com/1407245 as a "temporary"
  * workaround to https://bugs.php.net/bug.php?id=49211
@@ -1753,9 +1765,9 @@ function util_mkdtemp($suffix = '', $prefix = 'tmp') {
  * Run a function with only the permissions of a given Unix user
  * Function can be an anonymous
  * Optional arguments in an array
- * @param	string	$username   Unix user name
- * @param	function	$function   function to run (possibly anonymous)
- * @param	array	$params parameters
+ * @param	string		$username	Unix user name
+ * @param	function	$function	function to run (possibly anonymous)
+ * @param	array		$params		parameters
  * @return	boolean	true on success, false on error
  */
 function util_sudo_effective_user($username, $function, $params=array()) {
