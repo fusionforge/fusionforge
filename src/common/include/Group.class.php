@@ -160,7 +160,8 @@ function group_get_object_by_publicname($groupname) {
 /**
  * get_public_active_projects_asc() - Get a list of rows for public active projects (initially in trove/full_list)
  *
- * @param	int	 Opional Maximum number of rows to limit query length
+ * @param	int	$max_query_limit Optional Maximum number of rows to limit query length
+ * @return  array List of public active projects
  */
 function get_public_active_projects_asc($max_query_limit = -1) {
 
@@ -1059,6 +1060,7 @@ class Group extends Error {
 		if ($res) {
 			$this->data_array['enable_pserver'] = $booleanparam;
 			db_commit();
+			return true;
 		} else {
 			db_rollback();
 			return false;
@@ -1464,7 +1466,7 @@ class Group extends Error {
 	 * added for Codendi compatibility
 	 * usesServices - returns true if the group uses a particular plugin or feature
 	 *
-	 * @param	string	name of the plugin
+	 * @param	string	$feature    name of the plugin
 	 * @return	boolean	whether plugin is being used or not
 	 */
 	function usesService($feature) {
@@ -1926,13 +1928,13 @@ class Group extends Error {
 		//
 		//	Delete reporting
 		//
-		$res = db_query_params('DELETE FROM rep_group_act_monthly WHERE group_id=$1',
+		db_query_params('DELETE FROM rep_group_act_monthly WHERE group_id=$1',
 		array($this->getID()));
 		//echo 'rep_group_act_monthly'.db_error();
-		$res = db_query_params('DELETE FROM rep_group_act_weekly WHERE group_id=$1',
+		db_query_params('DELETE FROM rep_group_act_weekly WHERE group_id=$1',
 		array($this->getID()));
 		//echo 'rep_group_act_weekly'.db_error();
-		$res = db_query_params('DELETE FROM rep_group_act_daily WHERE group_id=$1',
+		db_query_params('DELETE FROM rep_group_act_daily WHERE group_id=$1',
 		array($this->getID()));
 		//echo 'rep_group_act_daily'.db_error();
 		unset($this->data_array);
@@ -2259,7 +2261,7 @@ class Group extends Error {
 	/**
 	 * replaceTemplateStrings - fill-in some blanks with project name
 	 *
-	 * @param	string	Template string
+	 * @param	string	$string Template string
 	 * @return	string	String after replacements
 	 */
 	function replaceTemplateStrings($string) {
@@ -2272,7 +2274,7 @@ class Group extends Error {
 	/**
 	 * approve - Approve pending project.
 	 *
-	 * @param	$user	The User object who is doing the updating.
+	 * @param	object  $user	The User object who is doing the updating.
 	 * @return	bool
 	 * @access	public
 	 */
@@ -2830,6 +2832,7 @@ if there is anything we can do to help you.
 	/**
 	 * getUsers - Get the users of a group
 	 *
+	 * @param bool $onlylocal
 	 * @return array of user's objects.
 	 */
 	function getUsers($onlylocal = true) {

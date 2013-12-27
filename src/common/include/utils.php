@@ -142,7 +142,7 @@ function util_check_fileupload($filename) {
 	if (!is_uploaded_file($filename)) {
 		return false;
 	}
-	/* ... but we'd rather be paranoic */
+	/* ... but we'd rather be paranoid */
 	if (strstr($filename, '..')) {
 		return false;
 	}
@@ -1753,9 +1753,9 @@ function util_mkdtemp($suffix = '', $prefix = 'tmp') {
  * Run a function with only the permissions of a given Unix user
  * Function can be an anonymous
  * Optional arguments in an array
- * @param	string	Unix user name
- * @param	function	function to run (possibly anonymous)
- * @param	array	parameters
+ * @param	string	$username   Unix user name
+ * @param	function	$function   function to run (possibly anonymous)
+ * @param	array	$params parameters
  * @return	boolean	true on success, false on error
  */
 function util_sudo_effective_user($username, $function, $params=array()) {
@@ -1763,8 +1763,8 @@ function util_sudo_effective_user($username, $function, $params=array()) {
 	$saved_euid = posix_geteuid();
 
 	$userinfo = posix_getpwnam($username);
-	if ($userinfo === False) {
-		return False;
+	if ($userinfo === false) {
+		return false;
 	}
 	if (posix_setegid($userinfo['gid']) &&
 	    ($saved_euid != 0 || posix_initgroups($username, $userinfo['gid'])) &&
@@ -1776,6 +1776,7 @@ function util_sudo_effective_user($username, $function, $params=array()) {
 	posix_seteuid($saved_euid);
 	if ($saved_euid == 0)
 		posix_initgroups("root", 0);
+	return true;
 }
 
 // Local Variables:

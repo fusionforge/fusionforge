@@ -89,8 +89,9 @@ class NewsSearchQuery extends SearchQuery {
 	/**
 	 * getSections - returns the list of available forums
 	 *
-	 * @param $groupId int group id
-	 * @param $showNonPublic boolean if we should consider non public sections
+	 * @param int $groupId group id
+	 * @param bool $showNonPublic if we should consider non public sections
+	 * @return array
 	 */
 	static function getSections($groupId, $showNonPublic=false) {
 
