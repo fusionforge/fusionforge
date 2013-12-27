@@ -966,7 +966,7 @@ class Document extends Error {
 	/**
 	 * SendApprovalNotice - send email to project admin for pending documents.
 	 *
-	 * @return	boolean success.
+	 * @return	boolean	success.
 	 */
 	function SendApprovalNotice() {
 		if ($this->getStateID() != 3)
