@@ -414,7 +414,7 @@ function html_get_tooltip_description($element_name) {
 		case 'description':
 			return _('Enter the complete description.')
 				.'<br/><br/>'
-				.'<div align="left">'
+				."<div align='left' >"
 				._("<strong>Editing tips:</strong><br/><strong>http,https or ftp</strong>: Hyperlinks.<br/><strong>[#NNN]</strong>: Tracker id NNN.<br/><strong>[TNNN]</strong>: Task id NNN.<br/><strong>[wiki:&lt;pagename&gt;]</strong>: Wiki page.<br/><strong>[forum:&lt;msg_id&gt;]</strong>: Forum post.")
 				.'</div>';
 		case 'attach_file':
