@@ -37,7 +37,8 @@ echo $HTML->getStylesheets();
 echo '</head><body>';
 
 /* define global vars */
-global $pg, $g;
+global $pg;
+$gid = $pg->Group->getID();
 
 $offset = getIntFromRequest('offset');
 $_assigned_to = getIntFromRequest('_assigned_to', 0);
@@ -76,7 +77,7 @@ foreach ($techs as $tech) {
 	$tech_id_arr[] = $tech->getID();
 	$tech_name_arr[] = $tech->getRealName();
 	$transformedTechsArr[] = array('id' => $tech->getID(), 'name' => $tech->getRealName());
-	$role = $tech->getRole($g);
+	$role = $tech->getRole($gid);
 	$transformedRolesArr[] = array('id' => $role->getID(), 'name' => $role->getName());
 }
 $transformedTasksArr = array();
@@ -96,11 +97,16 @@ foreach ($pt_arr as $task) {
 	$assigneesIdArr = $task->getAssignedTo();
 	foreach ($assigneesIdArr as $assigneeId) {
 		$assigneeOjbject = user_get_object($assigneeId);
-		$assigneeRole = $assigneeOjbject->getRole($g);
+		$assigneeRole = $assigneeOjbject->getRole($gid);
+		if ($assigneeRole) {
+			$roleId = $assigneeRole->getID();
+		} else {
+			$roleId = false;
+		}
 		$assignees[] = array(
 					'resourceId' => $assigneeOjbject->getID(),
 					'id' => $assigneeOjbject->getID(),
-					'roleId' => $assigneeRole->getID(),
+					'roleId' => $roleId,
 					'effort' => 0
 				);
 	}
