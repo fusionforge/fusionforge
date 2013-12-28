@@ -1,7 +1,8 @@
 <?php
-
 /**
  * ProjectImporter Class
+ *
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -22,6 +23,9 @@
 // Include standard ARC library
 include_once 'arc/ARC2.php';
 // Include the JSON RDF parser ala OSLC developped in COCLICO
+if (!stream_resolve_include_path('ARC2_OSLCCoreRDFJSONParserPlugin.php')) {
+	exit_error(_('Missing require to use this plugin. You need ARC2_OSLCCoreRDFJSONParserPlugin.php'),'home');
+}
 include_once 'ARC2_OSLCCoreRDFJSONParserPlugin.php';
 
 #require_once $gfcommon.'import/import_users.php';

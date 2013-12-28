@@ -4,6 +4,7 @@
  * Project importing script for site admin
  *
  * Copyright (c) 2011 Olivier Berger & Institut Telecom
+ * Copyright 2013, Franck Villaume - TrivialDev
  *
  * This program was developped in the frame of the COCLICO project
  * (http://www.coclico-project.org/) with financial support of the Paris
@@ -33,15 +34,23 @@
 // TODO : ask for confirmation on projects to be created, instead of creating directly without confirmation
 
 require_once '../../../www/env.inc.php';
-require_once 'OpenDocument.php';
-
 require_once $gfwww.'include/pre.php';
-require_once $gfwww.'admin/admin_utils.php';
+
+// The user should be forge admin
+session_require_global_perm('forge_admin');
+
+if (!stream_resolve_include_path('arc/ARC2.php')) {
+	exit_error(_('Missing require to use this plugin. You need OpenDocument.php'),'home');
+}
+include_once 'arc/ARC2.php';
+if (!stream_resolve_include_path('OpenDocument.php')) {
+	exit_error(_('Missing require to use this plugin. You need arc/ARC2.php'),'home');
+}
+require_once 'OpenDocument.php';
 
 require_once $gfplugins.'projectimport/common/ProjectImporter.class.php';
 require_once $gfplugins.'projectimport/common/UploadedFiles.class.php';
-
-include_once 'arc/ARC2.php';
+require_once $gfwww.'admin/admin_utils.php';
 
 /**
  * Manages the display of the page : HTML + forms
@@ -282,9 +291,6 @@ class ProjectsImportPage extends FileManagerPage {
 
 
 }
-
-// The user should be forge admin
-session_require_global_perm ('forge_admin');
 
 global $group_id, $feedback;
 
