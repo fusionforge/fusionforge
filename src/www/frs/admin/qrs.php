@@ -6,6 +6,7 @@
  * Copyright 2002 (c) GForge, LLC
  * Copyright 2010 (c), FusionForge Team
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -174,7 +175,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 			<strong><?php echo _('Release Name')._(':'); ?><?php echo utils_requiredField();?></strong>
 		</td>
 		<td>
-			<input type="text" required="required" name="release_name" value="<?php echo htmlspecialchars($release_name) ?>" />
+			<input type="text" required="required" name="release_name" value="<?php echo htmlspecialchars($release_name) ?>" pattern=".{3,}" title="<?php echo  _('At least 3 characters') ?>" />
 		</td>
 	</tr>
 	<tr>

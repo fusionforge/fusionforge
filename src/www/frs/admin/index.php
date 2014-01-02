@@ -7,7 +7,7 @@
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -176,7 +176,7 @@ if (!$res || $rows < 1) {
 					</a>';
 		}
 		echo '	</td>
-			<td><input type="text" name="package_name" value="'.db_result($res, $i, 'package_name') .'" size="20" maxlength="60" /></td>
+			<td><input type="text" name="package_name" value="'.db_result($res, $i, 'package_name') .'" size="20" maxlength="60" required="required" pattern=".{3,}" title="'. _('At least 3 characters') .'" /></td>
 			<td>'.frs_show_status_popup('status_id', db_result($res, $i, 'status_id')).'</td>
 			<td>'.frs_show_public_popup('is_public', db_result($res, $i, 'is_public')).'</td>
 			<td><input type="submit" name="submit" value="'._('Update').'" />
@@ -204,7 +204,7 @@ if (!$res || $rows < 1) {
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <input type="hidden" name="func" value="add_package" />
 <p><strong><?php echo _('New Package Name')._(':'); ?></strong>
-<input type="text" name="package_name" value="" size="20" maxlength="30" /></p>
+<input type="text" name="package_name" value="" size="20" maxlength="30" required="required" pattern=".{3,}" title="<?php echo _('At least 3 characters') ?>" /></p>
 <p><strong><?php echo _('Publicly Viewable')._(':'); ?></strong>
 <input type="radio" name="is_public" value="1" checked="checked" /> <?php echo _('Public'); ?>
 <input type="radio" name="is_public" value="0" /> <?php echo _('Private'); ?></p>

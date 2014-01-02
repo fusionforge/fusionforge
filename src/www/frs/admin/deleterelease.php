@@ -74,7 +74,7 @@ frs_admin_header(array('title'=>_('Release Edit/File Releases'),'group'=>$group_
 	<input type="checkbox" name="sure" value="1" />'._('I am Sure').'<br />
 	<input type="checkbox" name="really_sure" value="1" />'._('I am Really Sure').'<br />
 	<input type="submit" name="submit" value="'._('Delete').'" />
-    </p>
+	</p>
 	</form>';
 
 frs_admin_footer();
