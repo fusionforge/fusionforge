@@ -82,17 +82,17 @@ class FRSPackage extends Error {
 	 */
 	var $Group;
 
-    /**
-     * Constructor.
-     *
-     * @param $Group
-     * @param bool $package_id
-     * @param bool $arr
-     * @internal param \The $object Group object to which this FRSPackage is associated.
-     * @internal param \The $int package_id.
-     * @internal param \The $array associative array of data.
-     * @return \FRSPackage
-     */
+	/**
+	* Constructor.
+	*
+	* @param	$Group
+	* @param	bool	$package_id
+	* @param	bool	$arr
+	* @internal	param	\The $object Group object to which this FRSPackage is associated.
+	* @internal	param	\The $int package_id.
+	* @internal	param	\The $array associative array of data.
+	* @return	\FRSPackage
+	*/
 	function __construct(&$Group, $package_id = false, $arr = false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
@@ -124,15 +124,15 @@ class FRSPackage extends Error {
 		}
 	}
 
-    /**
-     *    create - create a new FRSPackage in the database.
-     *
-     * @param $name
-     * @param int $is_public
-     * @internal param \The $string name of this package.
-     * @internal param \Whether $boolean it's public or not. 1=public 0=private.
-     * @return    boolean success.
-     */
+	/**
+	* create - create a new FRSPackage in the database.
+	*
+	* @param	$name
+	* @param	int	$is_public
+	* @internal	param	\The $string name of this package.
+	* @internal	param	\Whether $boolean it's public or not. 1=public 0=private.
+	* @return	boolean	success.
+	*/
 	function create($name, $is_public = 1) {
 
 		if (strlen($name) < 3) {
@@ -192,10 +192,10 @@ class FRSPackage extends Error {
 	}
 
 	/**
-	 *  fetchData - re-fetch the data for this Package from the database.
+	 * fetchData - re-fetch the data for this Package from the database.
 	 *
-	 *  @param  int  $package_id	The package_id.
-	 *  @return boolean	success.
+	 * @param	int	$package_id	The package_id.
+	 * @return	boolean	success.
 	 */
 	function fetchData($package_id) {
 		$res = db_query_params ('SELECT * FROM frs_package WHERE package_id=$1 AND group_id=$2',
@@ -211,63 +211,63 @@ class FRSPackage extends Error {
 	}
 
 	/**
-	 *  getGroup - get the Group object this FRSPackage is associated with.
+	 * getGroup - get the Group object this FRSPackage is associated with.
 	 *
-	 *  @return	object	The Group object.
+	 * @return	object	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
 	/**
-	 *  getID - get this package_id.
+	 * getID - get this package_id.
 	 *
-	 *  @return	int	The id of this package.
+	 * @return	int	The id of this package.
 	 */
 	function getID() {
 		return $this->data_array['package_id'];
 	}
 
 	/**
-	 *  getName - get the name of this package.
+	 * getName - get the name of this package.
 	 *
-	 *  @return string  The name of this package.
+	 * @return	string	The name of this package.
 	 */
 	function getName() {
 		return $this->data_array['name'];
 	}
 
 	/**
-	 *  getFileName - get the filename of this package.
+	 * getFileName - get the filename of this package.
 	 *
-	 *  @return string  The name of this package.
+	 * @return	string	The name of this package.
 	 */
 	function getFileName() {
 		return util_secure_filename($this->data_array['name']);
 	}
 
 	/**
-	 *  getStatus - get the status of this package.
+	 * getStatus - get the status of this package.
 	 *
-	 *  @return int	The status.
+	 * @return	int	The status.
 	 */
 	function getStatus() {
 		return $this->data_array['status_id'];
 	}
 
 	/**
-	 *	isPublic - whether non-group-members can view.
+	 * isPublic - whether non-group-members can view.
 	 *
-	 *	@return boolean   is_public.
+	 * @return	boolean	is_public.
 	 */
 	function isPublic() {
 		return $this->data_array['is_public'];
 	}
 
 	/**
-	 *  setMonitor - Add the current user to the list of people monitoring this package.
+	 * setMonitor - Add the current user to the list of people monitoring this package.
 	 *
-	 *  @return	boolean	success.
+	 * @return	boolean	success.
 	 */
 	function setMonitor() {
 		if (!session_loggedin()) {
@@ -297,9 +297,9 @@ class FRSPackage extends Error {
 	}
 
 	/**
-	 *  stopMonitor - Remove the current user from the list of people monitoring this package.
+	 * stopMonitor - Remove the current user from the list of people monitoring this package.
 	 *
-	 *  @return	boolean	success.
+	 * @return	boolean	success.
 	 */
 	function stopMonitor() {
 		if (!session_loggedin()) {
@@ -312,9 +312,9 @@ class FRSPackage extends Error {
 	}
 
 	/**
-	 *	getMonitorCount - Get the count of people monitoring this package
+	 * getMonitorCount - Get the count of people monitoring this package
 	 *
-	 *	@return int the count
+	 * @return	int	the count
 	 */
 	function getMonitorCount() {
 		$res = db_result(db_query_params ('select count(*) as count from filemodule_monitor where filemodule_id=$1',
@@ -327,9 +327,9 @@ class FRSPackage extends Error {
 	}
 
 	/**
-	 *  isMonitoring - Is the current user in the list of people monitoring this package.
+	 * isMonitoring - Is the current user in the list of people monitoring this package.
 	 *
-	 *  @return	boolean	is_monitoring.
+	 * @return	boolean	is_monitoring.
 	 */
 	function isMonitoring() {
 		if (!session_loggedin()) {
@@ -348,9 +348,9 @@ class FRSPackage extends Error {
 	}
 
 	/**
-	 *  getMonitorIDs - Return an array of user_id's of the list of people monitoring this package.
+	 * getMonitorIDs - Return an array of user_id's of the list of people monitoring this package.
 	 *
-	 *  @return	array	The array of user_id's.
+	 * @return	array	The array of user_id's.
 	 */
 	function &getMonitorIDs() {
 		$res = db_query_params ('SELECT user_id FROM filemodule_monitor WHERE filemodule_id=$1',
@@ -359,12 +359,12 @@ class FRSPackage extends Error {
 	}
 
 	/**
-	 *	update - update an FRSPackage in the database.
+	 * update - update an FRSPackage in the database.
 	 *
-	 *	@param	string	$name		The name of this package.
-	 *	@param	int		$status		The status_id of this package from frs_status table.
-	 *	@param	int		$is_public	public or private : 1 or 0
-	 *	@return	boolean success.
+	 * @param	string	$name		The name of this package.
+	 * @param	int	$status		The status_id of this package from frs_status table.
+	 * @param	int	$is_public	public or private : 1 or 0
+	 * @return	boolean success.
 	 */
 	function update($name, $status, $is_public = 1) {
 		if (strlen($name) < 3) {
@@ -427,9 +427,9 @@ class FRSPackage extends Error {
 	}
 
 	/**
-	 *	getReleases - gets Release objects for all the releases in this package.
+	 * getReleases - gets Release objects for all the releases in this package.
 	 *
-	 *  return  array   Array of FRSRelease Objects.
+	 * @return	array	Array of FRSRelease Objects.
 	 */
 	function &getReleases() {
 		if (!is_array($this->package_releases) || count($this->package_releases) < 1) {
@@ -444,22 +444,22 @@ class FRSPackage extends Error {
 	}
 
 	/**
-	 *	newFRSRelease - generates a FRSRelease (allows overloading by subclasses)
+	 * newFRSRelease - generates a FRSRelease (allows overloading by subclasses)
 	 *
-	 *  @param  string	FRS release identifier
-	 *  @param  array	fetched data from the DB
-	 *	@return	FRSRelease	new FRSFile object.
+	 * @param	string		FRS release identifier
+	 * @param	array		fetched data from the DB
+	 * @return	FRSRelease	new FRSFile object.
 	 */
 	protected function newFRSRelease($release_id, $data) {
 		return new FRSRelease($this,$release_id, $data);
 	}
 
 	/**
-	 *  delete - delete this package and all its related data.
+	 * delete - delete this package and all its related data.
 	 *
-	 *  @param  bool	I'm Sure.
-	 *  @param  bool	I'm REALLY sure.
-	 *  @return   bool true/false;
+	 * @param	bool	I'm Sure.
+	 * @param	bool	I'm REALLY sure.
+	 * @return	bool	true/false;
 	 */
 	function delete($sure, $really_sure) {
 		if (!$sure || !$really_sure) {
@@ -498,10 +498,10 @@ class FRSPackage extends Error {
 	}
 
 	/**
-	 *  Function that selects the newest release.
-	 *  The newest release is the release with the highest ID
+	 * Function that selects the newest release.
+	 * The newest release is the release with the highest ID
 	 *
-	 *  @return object FRSRelease
+	 * @return	object	FRSRelease
 	 */
 
 	function getNewestRelease() {
