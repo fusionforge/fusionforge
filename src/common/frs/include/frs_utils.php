@@ -6,6 +6,7 @@
  * Copyright 2002-2004 (c) GForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
+ * Copyright 2013, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -81,6 +82,11 @@ function frs_header($params) {
 				'/frs/?group_id='.$group_id,
 				'/frs/reporting/downloads.php?group_id='.$group_id,
 				'/frs/admin/?group_id='.$group_id
+				),
+			array(
+				NULL,
+				NULL,
+				NULL
 				)
 			);
 	}
@@ -166,7 +172,7 @@ function frs_show_release_popup ($group_id, $name='release_id', $checked_val="xz
 	global $FRS_RELEASE_RES;
 
 	if (!$group_id) {
-		return 'Error: GROUP ID REQUIRED';
+		return _('Error: GROUP ID REQUIRED');
 	} else {
 		if (!isset($FRS_RELEASE_RES)) {
 			$FRS_RELEASE_RES = db_query_params("SELECT frs_release.release_id,(frs_package.name || ' : ' || frs_release.name) FROM frs_release,frs_package
@@ -189,7 +195,7 @@ function frs_show_package_popup ($group_id, $name='package_id', $checked_val="xz
 	*/
 	global $FRS_PACKAGE_RES;
 	if (!$group_id) {
-		return 'Error: GROUP ID REQUIRED';
+		return _('Error: GROUP ID REQUIRED');
 	} else {
 		if (!isset($FRS_PACKAGE_RES)) {
 			$FRS_PACKAGE_RES=db_query_params ('SELECT package_id,name
