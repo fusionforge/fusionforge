@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -227,8 +227,8 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 	<td><input type="text" name="release_date" value="<?php echo date('Y-m-d H:i',$frsr->getReleaseDate()) ?>" size="16" maxlength="16" /></td>
 </tr>
 <tr>
-	<td><strong><?php echo _('Release Name')._(':'); ?></strong></td>
-	<td><input type="text" name="release_name" value="<?php echo htmlspecialchars($frsr->getName()); ?>" /></td>
+	<td><strong><?php echo _('Release Name')._(':').utils_requiredField(); ?></strong></td>
+	<td><input type="text" name="release_name" value="<?php echo $frsr->getName(); ?>" required="required" pattern=".{3,}" title="<?php echo _('At least 3 characters') ?>"/></td>
 </tr>
 <tr>
 	<td><strong><?php echo _('Status')._(':'); ?></strong></td>
