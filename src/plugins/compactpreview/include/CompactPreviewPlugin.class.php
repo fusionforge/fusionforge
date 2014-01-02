@@ -63,7 +63,7 @@ class CompactPreviewPlugin extends Plugin {
 	
 	function javascript_file (&$params) {
 		// The userTooltip.js script is used by the compact preview feature (see content_negociated_user_home)
-		use_javascript('/scripts/jquery/jquery.js');
+		html_use_jquery();
 		// provides support for the popup for compact preview
 		use_javascript('/plugins/'.$this->name.'/scripts/oslcTooltip.js');
 	}
