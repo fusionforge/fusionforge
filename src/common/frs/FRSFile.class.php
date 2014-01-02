@@ -26,11 +26,11 @@
 require_once $gfcommon.'include/Error.class.php';
 
 /**
- *	  Factory method which creates a FRSFile from an file id
+ * Factory method which creates a FRSFile from an file id
  *
- *	  @param int	    $file_id The file id
- *	  @param array|bool $data    The result array, if it's passed in
- *	  @return object FRSFile object
+ * @param	int		$file_id	The file id
+ * @param	array|bool	$data		The result array, if it's passed in
+ * @return	object		FRSFile object
  */
 function &frsfile_get_object($file_id, $data=false) {
 	global $FRSFILE_OBJ;
@@ -57,25 +57,25 @@ class FRSFile extends Error {
 	/**
 	 * Associative array of data from db.
 	 *
-	 * @var  array   $data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
 	/**
 	 * The FRSRelease.
 	 *
-	 * @var  object  FRSRelease.
+	 * @var	object	FRSRelease.
 	 */
 	var $FRSRelease;
 
-    /**
-     *  Constructor.
-     *
-     * @param    object $FRSRelease The FRSRelease object to which this file is associated.
-     * @param    int|bool $file_id    The file_id.
-     * @param    array|bool $arr        The associative array of data.
-     * @return \FRSFile
-     */
+	/**
+	* Constructor.
+	*
+	* @param	object		$FRSRelease	The FRSRelease object to which this file is associated.
+	* @param	int|bool	$file_id	The file_id.
+	* @param	array|bool	$arr		The associative array of data.
+	* @return	\FRSFile
+	*/
 	function __construct(&$FRSRelease, $file_id=false, $arr=false) {
 		$this->Error();
 		if (!$FRSRelease || !is_object($FRSRelease)) {
@@ -105,16 +105,16 @@ class FRSFile extends Error {
 	}
 
 	/**
-	 *    create - create a new file in this FRSFileRelease/FRSPackage.
+	 * create - create a new file in this FRSFileRelease/FRSPackage.
 	 *
-	 * @param  string     $name          The name of this file.
-	 * @param  string     $file_location The location of this file in the local file system.
-	 * @param  int        $type_id       The type_id of this file from the frs-file-types table.
-	 * @param  int        $processor_id  The processor_id of this file from the frs-processor-types table.
-	 * @param  int|bool   $release_time  The release_date of this file in unix time (seconds).
-	 * @param  string     $mime_type     The mime type of the file (default: application/octet-stream)
-	 * @param  bool       $is_remote     True if file is an URL and not an uploaded file (default: false)
-	 * @return bool success.
+	 * @param	string		$name		The name of this file.
+	 * @param	string		$file_location	The location of this file in the local file system.
+	 * @param	int		$type_id	The type_id of this file from the frs-file-types table.
+	 * @param	int		$processor_id	The processor_id of this file from the frs-processor-types table.
+	 * @param	int|bool	$release_time	The release_date of this file in unix time (seconds).
+	 * @param	string		$mime_type	The mime type of the file (default: application/octet-stream)
+	 * @param	bool		$is_remote	True if file is an URL and not an uploaded file (default: false)
+	 * @return	bool		success.
 	 */
 	function create($name,$file_location,$type_id,$processor_id,$release_time=false) {
 		if (strlen($name) < 3) {
@@ -219,10 +219,10 @@ class FRSFile extends Error {
 	}
 
 	/**
-	 *  fetchData - re-fetch the data for this FRSFile from the database.
+	 * fetchData - re-fetch the data for this FRSFile from the database.
 	 *
-	 *  @param  int  $file_id The file_id.
-	 *  @return boolean	success.
+	 * @param	int	$file_id	The file_id.
+	 * @return	boolean	success.
 	 */
 	function fetchData($file_id) {
 		$res = db_query_params ('SELECT * FROM frs_file_vw WHERE file_id=$1 AND release_id=$2',
@@ -238,54 +238,54 @@ class FRSFile extends Error {
 	}
 
 	/**
-	 *  getFRSRelease - get the FRSRelease object this file is associated with.
+	 * getFRSRelease - get the FRSRelease object this file is associated with.
 	 *
-	 *  @return	object	The FRSRelease object.
+	 * @return	object	The FRSRelease object.
 	 */
 	function &getFRSRelease() {
 		return $this->FRSRelease;
 	}
 
 	/**
-	 *  getID - get this file_id.
+	 * getID - get this file_id.
 	 *
-	 *  @return	int	The id of this file.
+	 * @return	int	The id of this file.
 	 */
 	function getID() {
 		return $this->data_array['file_id'];
 	}
 
 	/**
-	 *  getName - get the name of this file.
+	 * getName - get the name of this file.
 	 *
-	 *  @return string  The name of this file.
+	 * @return	string	The name of this file.
 	 */
 	function getName() {
 		return $this->data_array['filename'];
 	}
 
 	/**
-	 *  getSize - get the size of this file.
+	 * getSize - get the size of this file.
 	 *
-	 *  @return int	The size.
+	 * @return	int	The size.
 	 */
 	function getSize() {
 		return $this->data_array['file_size'];
 	}
 
 	/**
-	 *  getTypeID - the filetype id.
+	 * getTypeID - the filetype id.
 	 *
-	 *  @return int the filetype id.
+	 * @return	int	the filetype id.
 	 */
 	function getTypeID() {
 		return $this->data_array['type_id'];
 	}
 
 	/**
-	 *  getTypeName - the filetype name.
+	 * getTypeName - the filetype name.
 	 *
-	 *  @return string	The filetype name.
+	 * @return	string	The filetype name.
 	 */
 	// FIXME : Undefined index: filetype in /usr/share/gforge/common/frs/FRSFile.class.php on line 293
 	function getFileType() {
@@ -293,54 +293,54 @@ class FRSFile extends Error {
 	}
 
 	/**
-	 *  getProcessorID - the processor id.
+	 * getProcessorID - the processor id.
 	 *
-	 *  @return int the processor id.
+	 * @return	int	the processor id.
 	 */
 	function getProcessorID() {
 		return $this->data_array['processor_id'];
 	}
 
 	/**
-	 *  getProcessor - the processor name.
+	 * getProcessor - the processor name.
 	 *
-	 *  @return string	The processor name.
+	 * @return	string	The processor name.
 	 */
 	function getProcessor() {
 		return $this->data_array['processor'];
 	}
 
 	/**
-	 *  getDownloads - the number of downloads.
+	 * getDownloads - the number of downloads.
 	 *
-	 *  @return int  The number of downloads.
+	 * @return	int	The number of downloads.
 	 */
 	function getDownloads() {
 		return $this->data_array['downloads'];
 	}
 
 	/**
-	 *  getReleaseTime - get the releasetime of this file.
+	 * getReleaseTime - get the releasetime of this file.
 	 *
-	 *  @return int	The release time in unix time.
+	 * @return	int	The release time in unix time.
 	 */
 	function getReleaseTime() {
 		return $this->data_array['release_time'];
 	}
 
 	/**
-	 *  getPostDate - get the post date of this file.
+	 * getPostDate - get the post date of this file.
 	 *
-	 *  @return int	The post date in unix time.
+	 * @return	int	The post date in unix time.
 	 */
 	function getPostDate() {
 		return $this->data_array['post_date'];
 	}
 
 	/**
-	 *  delete - Delete this file from the database and file system.
+	 * delete - Delete this file from the database and file system.
 	 *
-	 *  @return	boolean	success.
+	 * @return	boolean	success.
 	 */
 	function delete() {
 		if (!forge_check_perm ('frs', $this->FRSRelease->FRSPackage->Group->getID(), 'write')) {
@@ -373,11 +373,11 @@ class FRSFile extends Error {
 	/**
 	 * update - update an existing file in this FRSFileRelease/FRSPackage.
 	 *
-	 * @param	int	     $type_id      The type_id of this file from the frs-file-types table.
-	 * @param	int	     $processor_id The processor_id of this file from the frs-processor-types table.
-	 * @param	int	     $release_time The release_date of this file in unix time (seconds).
-	 * @param	int|bool $release_id   The release_id of the release this file belongs to (if not set, defaults to the release id of this file).
-	 * @return	boolean success.
+	 * @param	int		$type_id	The type_id of this file from the frs-file-types table.
+	 * @param	int		$processor_id	The processor_id of this file from the frs-processor-types table.
+	 * @param	int		$release_time	The release_date of this file in unix time (seconds).
+	 * @param	int|bool	$release_id	The release_id of the release this file belongs to (if not set, defaults to the release id of this file).
+	 * @return	boolean		success.
 	 */
 	function update($type_id,$processor_id,$release_time,$release_id=false) {
 		if (!forge_check_perm ('frs', $this->FRSRelease->FRSPackage->Group->getID(), 'write')) {

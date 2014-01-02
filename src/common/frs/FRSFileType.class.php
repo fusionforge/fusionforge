@@ -40,7 +40,7 @@ class FRSFileType extends Error {
 	/**
 	 * Associative array of data from db.
 	 *
-	 * @var  array   $data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
@@ -57,10 +57,10 @@ class FRSFileType extends Error {
 	}
 
 	/**
-	 *  fetchData - re-fetch the data for this FRSFileType from the database.
+	 * fetchData - re-fetch the data for this FRSFileType from the database.
 	 *
-	 *  @param  int  $type_id	The type_id
-	 *  @return bool	success.
+	 * @param	int	$type_id	The type_id
+	 * @return	bool	success.
 	 */
 	function fetchData($type_id) {
 		$res=db_query_params('SELECT * FROM frs_filetype WHERE type_id=$1', array($type_id));
@@ -74,18 +74,18 @@ class FRSFileType extends Error {
 	}
 
 	/**
-	 *  getID - get this file_id.
+	 * getID - get this file_id.
 	 *
-	 *  @return	int	The id of this file.
+	 * @return	int	The id of this file.
 	 */
 	function getID() {
 		return $this->data_array['type_id'];
 	}
 
 	/**
-	 *  getName - get the name of this file.
+	 * getName - get the name of this file.
 	 *
-	 *  @return string  The name of this file.
+	 * @return	string	The name of this file.
 	 */
 	function getName() {
 		return $this->data_array['name'];

@@ -26,11 +26,11 @@ require_once $gfcommon.'include/Error.class.php';
 require_once $gfcommon.'frs/FRSFile.class.php';
 
 /**
- *	  Factory method which creates a FRSRelease from an release id
+ * Factory method which creates a FRSRelease from an release id
  *
- *	  @param int	$release_id	The release id
- *	  @param array	$data		  The result array, if it's passed in
- *	  @return object  FRSRelease object
+ * @param	int	$release_id	The release id
+ * @param	array	$data		The result array, if it's passed in
+ * @return	object	FRSRelease object
  */
 function frsrelease_get_object($release_id, $data = array()) {
 	global $FRSRELEASE_OBJ;
@@ -70,12 +70,12 @@ class FRSRelease extends Error {
 	var $release_files;
 
 	/**
-	 *  Constructor.
+	 * Constructor.
 	 *
-	 *  @param  object  	$FRSPackage		The FRSPackage object to which this release is associated.
-	 *  @param  int|bool	$release_id		The release_id.
-	 *  @param  array|bool	$arr			The associative array of data.
-	 *	@return	bool	success.
+	 * @param	object  	$FRSPackage	The FRSPackage object to which this release is associated.
+	 * @param	int|bool	$release_id	The release_id.
+	 * @param	array|bool	$arr		The associative array of data.
+	 * @return	bool	success.
 	 */
 	function FRSRelease(&$FRSPackage, $release_id = false, $arr = false) {
 		$this->Error();
@@ -107,14 +107,14 @@ class FRSRelease extends Error {
 	}
 
 	/**
-	 *	create - create a new release in the database.
+	 * create - create a new release in the database.
 	 *
-	 *	@param	string	$name				The name of the release.
-	 *	@param	string	$notes				The release notes for the release.
-	 *	@param	string	$changes			The change log for the release.
-	 *	@param	int		$preformatted		Whether the notes/log are preformatted with \n chars (1) true (0) false.
-	 *	@param	int		$release_date		The unix date of the release.
-	 *	@return	boolean success.
+	 * @param	string	$name		The name of the release.
+	 * @param	string	$notes		The release notes for the release.
+	 * @param	string	$changes	The change log for the release.
+	 * @param	int	$preformatted	Whether the notes/log are preformatted with \n chars (1) true (0) false.
+	 * @param	int	$release_date	The unix date of the release.
+	 * @return	boolean	success.
 	 */
 	function create($name,$notes,$changes,$preformatted,$release_date=false) {
 		if (strlen($name) < 3) {
@@ -174,10 +174,10 @@ class FRSRelease extends Error {
 	}
 
 	/**
-	 *  fetchData - re-fetch the data for this Release from the database.
+	 * fetchData - re-fetch the data for this Release from the database.
 	 *
-	 *  @param  int  $release_id	The release_id.
-	 *  @return	bool	success.
+	 * @param	int	$release_id	The release_id.
+	 * @return	bool	success.
 	 */
 	function fetchData($release_id) {
 		$res = db_query_params ('SELECT * FROM frs_release WHERE release_id=$1 AND package_id=$2',
@@ -193,90 +193,90 @@ class FRSRelease extends Error {
 	}
 
 	/**
-	 *  getFRSPackage - get the FRSPackage object this release is associated with.
+	 * getFRSPackage - get the FRSPackage object this release is associated with.
 	 *
-	 *  @return	object	The FRSPackage object.
+	 * @return	object	The FRSPackage object.
 	 */
 	function &getFRSPackage() {
 		return $this->FRSPackage;
 	}
 
 	/**
-	 *  getID - get this release_id.
+	 * getID - get this release_id.
 	 *
-	 *  @return	int	The id of this release.
+	 * @return	int	The id of this release.
 	 */
 	function getID() {
 		return $this->data_array['release_id'];
 	}
 
 	/**
-	 *  getName - get the name of this release.
+	 * getName - get the name of this release.
 	 *
-	 *  @return string  The name of this release.
+	 * @return	string	The name of this release.
 	 */
 	function getName() {
 		return $this->data_array['name'];
 	}
 
 	/**
-	 *  getFileName - get the filename of this release.
+	 * getFileName - get the filename of this release.
 	 *
-	 *  @return string  The filename of this release.
+	 * @return	string	The filename of this release.
 	 */
 	function getFileName() {
 		return util_secure_filename($this->data_array['name']);
 	}
 
 	/**
-	 *  getStatus - get the status of this release.
+	 * getStatus - get the status of this release.
 	 *
-	 *  @return int	The status.
+	 * @return	int	The status.
 	 */
 	function getStatus() {
 		return $this->data_array['status_id'];
 	}
 
 	/**
-	 *  getNotes - get the release notes of this release.
+	 * getNotes - get the release notes of this release.
 	 *
-	 *  @return string	The release notes.
+	 * @return	string	The release notes.
 	 */
 	function getNotes() {
 		return $this->data_array['notes'];
 	}
 
 	/**
-	 *  getChanges - get the changelog of this release.
+	 * getChanges - get the changelog of this release.
 	 *
-	 *  @return string	The changelog.
+	 * @return	string	The changelog.
 	 */
 	function getChanges() {
 		return $this->data_array['changes'];
 	}
 
 	/**
-	 *  getPreformatted - get the preformatted option of this release.
+	 * getPreformatted - get the preformatted option of this release.
 	 *
-	 *  @return	boolean	preserve_formatting.
+	 * @return	boolean	preserve_formatting.
 	 */
 	function getPreformatted() {
 		return $this->data_array['preformatted'];
 	}
 
 	/**
-	 *  getReleaseDate - get the releasedate of this release.
+	 * getReleaseDate - get the releasedate of this release.
 	 *
-	 *  @return int	The release date in unix time.
+	 * @return	int	The release date in unix time.
 	 */
 	function getReleaseDate() {
 		return $this->data_array['release_date'];
 	}
 
 	/**
-	 *  sendNotice - the logic to send an email notice for a release.
+	 * sendNotice - the logic to send an email notice for a release.
 	 *
-	 *  @return	boolean	success.
+	 * @return	boolean	success.
 	 */
 	function sendNotice() {
 		$arr =& $this->FRSPackage->getMonitorIDs();
@@ -315,20 +315,20 @@ class FRSRelease extends Error {
 	}
 
 	/**
-	 *	newFRSFile - generates a FRSFile (allows overloading by subclasses)
+	 * newFRSFile - generates a FRSFile (allows overloading by subclasses)
 	 *
-	 *  @param  string	FRS file identifier
-	 *  @param  array	fetched data from the DB
-	 *	@return	FRSFile	new FRSFile object.
+	 * @param	string	FRS file identifier
+	 * @param	array	fetched data from the DB
+	 * @return	FRSFile	new FRSFile object.
 	 */
 	protected function newFRSFile($file_id, $data) {
 		return new FRSFile($this,$file_id, $data);
 	}
 
 	/**
-	 *	getFiles - gets all the file objects for files in this release.
+	 * getFiles - gets all the file objects for files in this release.
 	 *
-	 *	return	array	Array of FRSFile Objects.
+	 * @return	array	Array of FRSFile Objects.
 	 */
 	function &getFiles() {
 		if (!is_array($this->release_files) || count($this->release_files) < 1) {
@@ -343,11 +343,11 @@ class FRSRelease extends Error {
 	}
 
 	/**
-	 *  delete - delete this release and all its related data.
+	 * delete - delete this release and all its related data.
 	 *
-	 *  @param  bool	$sure			I'm Sure.
-	 *  @param  bool	$really_sure	I'm REALLY sure.
-	 *  @return   bool true/false;
+	 * @param	bool	$sure		I'm Sure.
+	 * @param	bool	$really_sure	I'm REALLY sure.
+	 * @return	bool	true/false;
 	 */
 	function delete($sure, $really_sure) {
 		if (!$sure || !$really_sure) {
@@ -384,15 +384,15 @@ class FRSRelease extends Error {
 	}
 
 	/**
-	 *	update - update a new release in the database.
+	 * update - update a new release in the database.
 	 *
-	 *	@param	int	The status of this release from the frs_status table.
-	 *	@param	string	The name of the release.
-	 *	@param	string	The release notes for the release.
-	 *	@param	string	The change log for the release.
-	 *	@param	int	Whether the notes/log are preformatted with \n chars (1) true (0) false.
-	 *	@param	int	The unix date of the release.
-	 *	@return	boolean success.
+	 * @param	int	The status of this release from the frs_status table.
+	 * @param	string	The name of the release.
+	 * @param	string	The release notes for the release.
+	 * @param	string	The change log for the release.
+	 * @param	int	Whether the notes/log are preformatted with \n chars (1) true (0) false.
+	 * @param	int	The unix date of the release.
+	 * @return	boolean success.
 	 */
 	function update($status, $name, $notes, $changes, $preformatted, $release_date) {
 		if (strlen($name) < 3) {
