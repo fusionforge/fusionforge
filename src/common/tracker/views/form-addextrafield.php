@@ -28,82 +28,82 @@
 $title = sprintf(_('Manage Custom Fields for %s'), $ath->getName());
 $ath->adminHeader(array('title'=>$title));
 
+/*
+	List of possible user built Selection Boxes for an ArtifactType
+*/
+$efarr = $ath->getExtraFields();
+$eftypes=ArtifactExtraField::getAvailableTypes();
+$keys=array_keys($efarr);
+$rows=count($keys);
+if ($rows > 0) {
+
+	$title_arr=array();
+	$title_arr[]=_('Custom Fields Defined');
+	$title_arr[]=_('Type');
+	$title_arr[]=_('Elements Defined');
+	$title_arr[]=_('Add Options');
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
+
+	for ($k=0; $k < $rows; $k++) {
+		$i=$keys[$k];
+		$id=str_replace('@','',$efarr[$i]['alias']);
+		echo '<tr id="field-'.$id.'" '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .">\n".
+			'<td>'.$efarr[$i]['field_name'].(($efarr[$i]['is_required']) ? utils_requiredField() : '').'<a href="'.getStringFromServer('PHP_SELF').'?update_box=1&amp;id='.
+				$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
+				' ['._('Edit').']</a>'.
+			'<a href="'.getStringFromServer('PHP_SELF').'?deleteextrafield=1&amp;id='.
+	$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
+	' ['._('Delete').']</a>'.
+			'<a href="'.getStringFromServer('PHP_SELF').'?copy_opt=1&amp;id='.
+	$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
+	' ['._('Copy').']</a>'.
+			"</td>\n";
+		echo '<td>'.$eftypes[$efarr[$i]['field_type']]."</td>\n";
 		/*
-			List of possible user built Selection Boxes for an ArtifactType
+			List of possible options for a user built Selection Box
 		*/
-		$efarr = $ath->getExtraFields();
-		$eftypes=ArtifactExtraField::getAvailableTypes();
-		$keys=array_keys($efarr);
-		$rows=count($keys);
-		if ($rows > 0) {
+		$elearray = $ath->getExtraFieldElements($efarr[$i]['extra_field_id']);
 
-			$title_arr=array();
-			$title_arr[]=_('Custom Fields Defined');
-			$title_arr[]=_('Type');
-			$title_arr[]=_('Elements Defined');
-			$title_arr[]=_('Add Options');
-			echo $GLOBALS['HTML']->listTableTop ($title_arr);
+		if (!empty($elearray)) {
+			$optrows=count($elearray);
 
-			for ($k=0; $k < $rows; $k++) {
-				$i=$keys[$k];
-				$id=str_replace('@','',$efarr[$i]['alias']);
-				echo '<tr id="field-'.$id.'" '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .">\n".
-					'<td>'.$efarr[$i]['field_name'].(($efarr[$i]['is_required']) ? utils_requiredField() : '').'<a href="'.getStringFromServer('PHP_SELF').'?update_box=1&amp;id='.
-						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
-						' ['._('Edit').']</a>'.
-					'<a href="'.getStringFromServer('PHP_SELF').'?deleteextrafield=1&amp;id='.
-                        $efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
-                        ' ['._('Delete').']</a>'.
-					'<a href="'.getStringFromServer('PHP_SELF').'?copy_opt=1&amp;id='.
-                        $efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
-                        ' ['._('Copy').']</a>'.
-					"</td>\n";
-				echo '<td>'.$eftypes[$efarr[$i]['field_type']]."</td>\n";
-				/*
-		  			List of possible options for a user built Selection Box
-		  		*/
-				$elearray = $ath->getExtraFieldElements($efarr[$i]['extra_field_id']);
-
-				if (!empty($elearray)) {
-					$optrows=count($elearray);
-
-					echo '<td>';
-					for ($j=0; $j <$optrows; $j++) {
-						echo $elearray[$j]['element_name'];
-						echo ' <a href="'.getStringFromServer('PHP_SELF').'?update_opt=1&amp;id='.
-						$elearray[$j]['element_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;boxid='.
-						$efarr[$i]['extra_field_id'].'">'.
-						'['._('Edit').']</a>';
-						echo ' <a href="'.getStringFromServer('PHP_SELF').'?delete_opt=1&amp;id='.
-						$elearray[$j]['element_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;boxid='.
-						$efarr[$i]['extra_field_id'].'">'.
-						'['._('Delete').']</a>';
-						echo '<br />';
-					}
-				} else {
-					echo '<td>';
-				}
-
-				echo "</td>\n";
-				echo "<td>\n";
-				if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT
-					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO
-					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX
-					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT
-					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
-					echo '<a href="'.getStringFromServer('PHP_SELF').'?add_opt=1&amp;boxid='.
-						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">['.
-						_('Add/Reorder choices').']</a>';
-				}
-				echo "</td>\n";
-				echo "</tr>\n";
+			echo '<td>';
+			for ($j=0; $j <$optrows; $j++) {
+				echo $elearray[$j]['element_name'];
+				echo ' <a href="'.getStringFromServer('PHP_SELF').'?update_opt=1&amp;id='.
+				$elearray[$j]['element_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;boxid='.
+				$efarr[$i]['extra_field_id'].'">'.
+				'['._('Edit').']</a>';
+				echo ' <a href="'.getStringFromServer('PHP_SELF').'?delete_opt=1&amp;id='.
+				$elearray[$j]['element_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;boxid='.
+				$efarr[$i]['extra_field_id'].'">'.
+				'['._('Delete').']</a>';
+				echo '<br />';
 			}
-			echo $GLOBALS['HTML']->listTableBottom();
-
-			echo utils_requiredField().' '._('Indicates required fields.');
 		} else {
-			echo "\n<p class=\"warning_msg\">"._('You have not defined any custom fields')."</p>";
+			echo '<td>';
 		}
+
+		echo "</td>\n";
+		echo "<td>\n";
+		if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT
+			|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO
+			|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX
+			|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT
+			|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+			echo '<a href="'.getStringFromServer('PHP_SELF').'?add_opt=1&amp;boxid='.
+				$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">['.
+				_('Add/Reorder choices').']</a>';
+		}
+		echo "</td>\n";
+		echo "</tr>\n";
+	}
+	echo $GLOBALS['HTML']->listTableBottom();
+
+	echo utils_requiredField().' '._('Indicates required fields.');
+} else {
+	echo "\n<p class=\"warning_msg\">"._('You have not defined any custom fields')."</p>";
+}
 
 		echo "<h2>"._('Add New Custom Field')."</h2>";
 		?>
@@ -111,7 +111,7 @@ $ath->adminHeader(array('title'=>$title));
 		<p>
 		<input type="hidden" name="add_extrafield" value="y" />
 		<strong><?php echo _('Custom Field Name')._(':'); ?></strong><br />
-		<input type="text" name="name" value="" size="15" maxlength="30" />
+		<input type="text" name="name" value="" size="15" maxlength="30" required="required" />
 		</p>
 		<p>
 		<strong><?php echo _('Field alias')._(':'); ?></strong><br />
@@ -147,14 +147,14 @@ $ath->adminHeader(array('title'=>$title));
 		</form>
 		<?php
 
-		echo "<h2>"._('Custom Field Rendering Template')."</h2>";
+echo "<h2>"._('Custom Field Rendering Template')."</h2>";
 
-		echo "<p>";
-		echo '<a href="'.getStringFromServer('PHP_SELF').'?edittemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Edit template').'</a><br />';
-		echo '<a href="'.getStringFromServer('PHP_SELF').'?deletetemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Delete template').'</a><br />';
-		echo "</p>";
+echo "<p>";
+echo '<a href="'.getStringFromServer('PHP_SELF').'?edittemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Edit template').'</a><br />';
+echo '<a href="'.getStringFromServer('PHP_SELF').'?deletetemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Delete template').'</a><br />';
+echo "</p>";
 
-		$ath->footer(array());
+$ath->footer(array());
 
 // Local Variables:
 // mode: php

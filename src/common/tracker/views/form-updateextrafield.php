@@ -48,7 +48,7 @@ if (!$ac || !is_object($ac)) {
 		<label for="name">
 		<strong><?php echo _('Custom Field Name')._(':'); ?></strong><br />
 		</label>
-		<input id="name" type="text" name="name" value="<?php echo $ac->getName(); ?>" />
+		<input id="name" type="text" name="name" value="<?php echo $ac->getName(); ?>" required="required" />
 	</p>
 	<p>
 		<?php if ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) { ?>
