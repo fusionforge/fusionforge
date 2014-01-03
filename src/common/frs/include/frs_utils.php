@@ -172,17 +172,16 @@ function frs_show_release_popup ($group_id, $name='release_id', $checked_val="xz
 	global $FRS_RELEASE_RES;
 
 	if (!$group_id) {
-		return _('Error: GROUP ID REQUIRED');
-	} else {
-		if (!isset($FRS_RELEASE_RES)) {
-			$FRS_RELEASE_RES = db_query_params("SELECT frs_release.release_id,(frs_package.name || ' : ' || frs_release.name) FROM frs_release,frs_package
+		return _('Error: group id required');
+	}
+	if (!isset($FRS_RELEASE_RES)) {
+		$FRS_RELEASE_RES = db_query_params("SELECT frs_release.release_id,(frs_package.name || ' : ' || frs_release.name) FROM frs_release,frs_package
 WHERE frs_package.group_id=$1
 AND frs_release.package_id=frs_package.package_id",
-							   array($group_id));
-			echo db_error();
-		}
-		return html_build_select_box($FRS_RELEASE_RES,$name,$checked_val,false);
+						   array($group_id));
+		echo db_error();
 	}
+	return html_build_select_box($FRS_RELEASE_RES,$name,$checked_val,false);
 }
 
 /*
@@ -195,16 +194,15 @@ function frs_show_package_popup ($group_id, $name='package_id', $checked_val="xz
 	*/
 	global $FRS_PACKAGE_RES;
 	if (!$group_id) {
-		return _('Error: GROUP ID REQUIRED');
-	} else {
-		if (!isset($FRS_PACKAGE_RES)) {
-			$FRS_PACKAGE_RES=db_query_params ('SELECT package_id,name
-				FROM frs_package WHERE group_id=$1',
-			array($group_id));
-			echo db_error();
-		}
-		return html_build_select_box ($FRS_PACKAGE_RES,$name,$checked_val,false);
+		return _('Error: group id required');
+	} 
+	if (!isset($FRS_PACKAGE_RES)) {
+		$FRS_PACKAGE_RES=db_query_params ('SELECT package_id,name
+			FROM frs_package WHERE group_id=$1',
+		array($group_id));
+		echo db_error();
 	}
+	return html_build_select_box ($FRS_PACKAGE_RES,$name,$checked_val,false);
 }
 
 function frs_add_file_from_form ($release, $type_id, $processor_id, $release_date,
