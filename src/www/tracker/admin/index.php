@@ -5,7 +5,7 @@
  * Copyright 1999-2000 (c) The SourceForge Crew
  * Copyright 2010, FusionForge Team
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -238,11 +238,7 @@ if ($group_id && $atid) {
 		$feedback .= _('Successfully Deleted.');
 	}
 
-	if (getIntFromRequest('new_tracker')) {
-
-		include $gfcommon.'tracker/views/form-newtracker.php';
-
-	} elseif (getStringFromRequest('clone_tracker')) {
+	if (getStringFromRequest('clone_tracker')) {
 		$ath = new ArtifactTypeFactoryHtml($group);
 		include $gfcommon.'tracker/views/form-clonetracker.php';
 
