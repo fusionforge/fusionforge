@@ -30,9 +30,9 @@ require_once $gfcommon.'tracker/ArtifactStorage.class.php';
 /**
  * Gets an ArtifactType object from the artifact type id
  *
- * @param int           $artType_id The ArtifactType id
- * @param resource|bool $res        The DB handle if passed in (optional)
- * @return ArtifactType             The ArtifactType object
+ * @param	int		$artType_id	The ArtifactType id
+ * @param	resource|bool	$res		The DB handle if passed in (optional)
+ * @return	ArtifactType	The ArtifactType object
  */
 function &artifactType_get_object($artType_id, $res = false) {
 	global $ARTIFACTTYPE_OBJ;
@@ -74,79 +74,79 @@ class ArtifactType extends Error {
 	/**
 	 * The Group object.
 	 *
-	 * @var        object    $Group.
+	 * @var	object	$Group.
 	 */
 	var $Group;
 
 	/**
 	 * extra_fields 3d array - the IDs and Names of the extra fields
 	 *
-	 * @var        array extra_fields;
+	 * @var	array	extra_fields;
 	 */
 	var $extra_fields = array();
 
 	/**
 	 * extra_field[extra_field_id] array - the IDs and Names of elements on the extra fields
 	 *
-	 * @var        array    extra_field
+	 * @var	array	extra_field
 	 */
 	var $extra_field;
 
 	/**
 	 * Technicians db resource ID.
 	 *
-	 * @var        int        $technicians_res.
+	 * @var	int	$technicians_res.
 	 */
 	var $technicians_res;
 
 	/**
 	 * Submitters db resource ID.
 	 *
-	 * @var        int        $submitters_res.
+	 * @var	int	$submitters_res.
 	 */
 	var $submitters_res;
 
 	/**
 	 * Status db resource ID.
 	 *
-	 * @var        int        $status_res.
+	 * @var	int	$status_res.
 	 */
 	var $status_res;
 
 	/**
 	 * Canned responses resource ID.
 	 *
-	 * @var        int        $canned_responses_res.
+	 * @var	int	$canned_responses_res.
 	 */
 	var $canned_responses_res;
 
 	/**
 	 * Array of artifact data.
 	 *
-	 * @var        array    $data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
 	/**
 	 * Array of element names so they only have to be fetched once from db.
 	 *
-	 * @var        array    $data_array.
+	 * @var	array	 $data_array.
 	 */
 	var $element_name;
 
 	/**
 	 * Array of element status so they only have to be fetched once from db.
 	 *
-	 * @var        array    $data_array.
+	 * @var	array	$data_array.
 	 */
 	var $element_status;
 
 	/**
 	 * ArtifactType - constructor.
 	 *
-	 * @param Group      $Group            The Group object.
-	 * @param int|bool   $artifact_type_id The id # assigned to this artifact type in the db.
-	 * @param array|bool $arr              The associative array of data.
+	 * @param	Group		$Group			The Group object.
+	 * @param	int|bool	$artifact_type_id	The id # assigned to this artifact type in the db.
+	 * @param	array|bool	$arr			The associative array of data.
 	 */
 	function __construct($Group, $artifact_type_id = false, $arr = false) {
 		$this->Error();
@@ -186,16 +186,16 @@ class ArtifactType extends Error {
 	/**
 	 * create - use this to create a new ArtifactType in the database.
 	 *
-	 * @param    string     $name                The type name.
-	 * @param    string     $description         The type description.
-	 * @param    bool       $email_all           (1) true (0) false - whether to email on all updates.
-	 * @param    string     $email_address       The address to send new entries and updates to.
-	 * @param    int        $due_period          Days before this item is considered overdue.
-	 * @param    bool       $use_resolution      (1) true (0) false - whether the resolution box should be shown.
-	 * @param    string     $submit_instructions Free-form string that project admins can place on the submit page.
-	 * @param    string     $browse_instructions Free-form string that project admins can place on the browse page.
-	 * @param    int        $datatype            (1) bug tracker, (2) Support Tracker, (3) Patch Tracker, (4) features (0) other.
-	 * @return int id on success, false on failure.
+	 * @param	string	$name			The type name.
+	 * @param	string	$description		The type description.
+	 * @param	bool	$email_all		(1) true (0) false - whether to email on all updates.
+	 * @param	string	$email_address		The address to send new entries and updates to.
+	 * @param	int	$due_period		Days before this item is considered overdue.
+	 * @param	bool	$use_resolution		(1) true (0) false - whether the resolution box should be shown.
+	 * @param	string	$submit_instructions	Free-form string that project admins can place on the submit page.
+	 * @param	string	$browse_instructions	Free-form string that project admins can place on the browse page.
+	 * @param	int	$datatype		(1) bug tracker, (2) Support Tracker, (3) Patch Tracker, (4) features (0) other.
+	 * @return	int	id on success, false on failure.
 	 */
 	function create($name, $description, $email_all, $email_address,
 					$due_period, $use_resolution, $submit_instructions, $browse_instructions, $datatype = 0) {
@@ -267,10 +267,10 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *  fetchData - re-fetch the data for this ArtifactType from the database.
+	 * fetchData - re-fetch the data for this ArtifactType from the database.
 	 *
-	 * @param    int        $artifact_type_id The artifact type ID.
-	 * @return boolean    success.
+	 * @param	int	$artifact_type_id	The artifact type ID.
+	 * @return	boolean	success.
 	 */
 	function fetchData($artifact_type_id) {
 		$res = db_query_params('SELECT * FROM artifact_group_list_vw
@@ -290,7 +290,7 @@ class ArtifactType extends Error {
 	/**
 	 * getGroup - get the Group object this ArtifactType is associated with.
 	 *
-	 * @return    Object    The Group object.
+	 * @return	Object	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
@@ -299,7 +299,7 @@ class ArtifactType extends Error {
 	/**
 	 * getID - get this ArtifactTypeID.
 	 *
-	 * @return    int    The group_artifact_id #.
+	 * @return	int	The group_artifact_id #.
 	 */
 	function getID() {
 		return $this->data_array['group_artifact_id'];
@@ -308,7 +308,7 @@ class ArtifactType extends Error {
 	/**
 	 * getOpenCount - get the count of open tracker items in this tracker type.
 	 *
-	 * @return    int    The count.
+	 * @return	int	The count.
 	 */
 	function getOpenCount() {
 		return $this->data_array['open_count'];
@@ -317,16 +317,16 @@ class ArtifactType extends Error {
 	/**
 	 * getTotalCount - get the total number of tracker items in this tracker type.
 	 *
-	 * @return    int    The total count.
+	 * @return	int	The total count.
 	 */
 	function getTotalCount() {
 		return $this->data_array['count'];
 	}
 
 	/**
-	 *	getSubmitInstructions - get the free-form string strings.
+	 * getSubmitInstructions - get the free-form string strings.
 	 *
-	 *	@return	string	instructions.
+	 * @return	string	instructions.
 	 */
 	function getSubmitInstructions() {
 		return $this->data_array['submit_instructions'];
@@ -335,7 +335,7 @@ class ArtifactType extends Error {
 	/**
 	 * getBrowseInstructions - get the free-form string strings.
 	 *
-	 * @return string instructions.
+	 * @return	string	instructions.
 	 */
 	function getBrowseInstructions() {
 		return $this->data_array['browse_instructions'];
@@ -344,25 +344,25 @@ class ArtifactType extends Error {
 	/**
 	 * emailAll - determine if we're supposed to email on every event.
 	 *
-	 * @return    boolean    email_all.
+	 * @return	boolean	email_all.
 	 */
 	function emailAll() {
 		return $this->data_array['email_all_updates'];
 	}
 
 	/**
-	 *      emailAddress - defined email address to send events to.
+	 * emailAddress - defined email address to send events to.
 	 *
-	 * @return    string    email.
+	 * @return	string	email.
 	 */
 	function getEmailAddress() {
 		return $this->data_array['email_address'];
 	}
 
 	/**
-	 *	getName - the name of this ArtifactType.
+	 * getName - the name of this ArtifactType.
 	 *
-	 *	@return	string	name.
+	 * @return	string	name.
 	 */
 	function getName() {
 		return $this->data_array['name'];
@@ -371,7 +371,7 @@ class ArtifactType extends Error {
 	/**
 	 * getFormattedName - formatted name of this ArtifactType
 	 *
-	 * @return string formatted name
+	 * @return	string	formatted name
 	 */
 	function getFormattedName() {
 		$name = preg_replace('/[^[:alnum:]]/', '', $this->getName());
@@ -382,7 +382,7 @@ class ArtifactType extends Error {
 	/**
 	 * getUnixName - returns the name used by email gateway
 	 *
-	 * @return string unix name
+	 * @return	string	unix name
 	 */
 	function getUnixName() {
 		return strtolower($this->Group->getUnixName()).'-'.$this->getFormattedName();
@@ -391,7 +391,7 @@ class ArtifactType extends Error {
 	/**
 	 * getReturnEmailAddress() - return the return email address for notification emails
 	 *
-	 * @return string return email address
+	 * @return	string	return email address
 	 */
 	function getReturnEmailAddress() {
 
@@ -406,46 +406,46 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *      getDescription - the description of this ArtifactType.
+	 * getDescription - the description of this ArtifactType.
 	 *
-	 * @return    string    description.
+	 * @return	string	description.
 	 */
 	function getDescription() {
 		return $this->data_array['description'];
 	}
 
 	/**
-	 *      getDuePeriod - how many seconds until it's considered overdue.
+	 * getDuePeriod - how many seconds until it's considered overdue.
 	 *
-	 * @return int seconds.
+	 * @return	int	seconds.
 	 */
 	function getDuePeriod() {
 		return $this->data_array['due_period'];
 	}
 
 	/**
-	 *    getStatusTimeout - how many seconds until an item is stale.
+	 * getStatusTimeout - how many seconds until an item is stale.
 	 *
-	 * @return int seconds.
+	 * @return	int	seconds.
 	 */
 	function getStatusTimeout() {
 		return $this->data_array['status_timeout'];
 	}
 
 	/**
-	 *      getCustomStatusField - return the extra_field_id of the field containing the custom status.
+	 * getCustomStatusField - return the extra_field_id of the field containing the custom status.
 	 *
-	 * @return    int    extra_field_id.
+	 * @return	int	extra_field_id.
 	 */
 	function getCustomStatusField() {
 		return $this->data_array['custom_status_field'];
 	}
 
 	/**
-	 *    setCustomStatusField - set the extra_field_id of the field containing the custom status.
+	 * setCustomStatusField - set the extra_field_id of the field containing the custom status.
 	 *
-	 * @param    int    $extra_field_id The extra field id.
-	 * @return    boolean    success.
+	 * @param	int	$extra_field_id	The extra field id.
+	 * @return	boolean	success.
 	 */
 	function setCustomStatusField($extra_field_id) {
 		$res = db_query_params('UPDATE artifact_group_list SET custom_status_field=$1
@@ -456,20 +456,20 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *      usesCustomStatuses - boolean
+	 * usesCustomStatuses - boolean
 	 *
-	 * @return    boolean    use_custom_statues.
+	 * @return	boolean	use_custom_statues.
 	 */
 	function usesCustomStatuses() {
 		return $this->getCustomStatusField();
 	}
 
 	/**
-	 *    remapStatus    - pass the extra_fields array and return the status_id, either open/closed
+	 * remapStatus    - pass the extra_fields array and return the status_id, either open/closed
 	 *
-	 * @param    int      $status_id    The status_id
-	 * @param    array    $extra_fields Complex array of extra_field_data
-	 * @return    int    status_id.
+	 * @param	int	$status_id	The status_id
+	 * @param	array	$extra_fields	Complex array of extra_field_data
+	 * @return	int	status_id.
 	 */
 	function remapStatus($status_id, $extra_fields) {
 		if ($this->usesCustomStatuses()) {
@@ -508,18 +508,18 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *      getDataType - flag that is generally unused but can mark the difference between bugs, patches, etc.
+	 * getDataType - flag that is generally unused but can mark the difference between bugs, patches, etc.
 	 *
-	 * @return    int    The type (1) bug (2) support (3) patch (4) feature (0) other.
+	 * @return	int	The type (1) bug (2) support (3) patch (4) feature (0) other.
 	 */
 	function getDataType() {
 		return $this->data_array['datatype'];
 	}
 
 	/**
-	 *  setMonitor - user can monitor this artifact.
+	 * setMonitor - user can monitor this artifact.
 	 *
-	 * @return bool false - always false - always use the getErrorMessage() for feedback
+	 * @return	bool	false - always false - always use the getErrorMessage() for feedback
 	 */
 	function setMonitor($user_id = -1) {
 		if ($user_id == -1) {
@@ -570,9 +570,9 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *  getMonitorIds - array of id of users monitoring this Artifact.
+	 * getMonitorIds - array of id of users monitoring this Artifact.
 	 *
-	 *	@return array of id of users monitoring this Artifact.
+	 * @return	array of id of users monitoring this Artifact.
 	 */
 	function &getMonitorIds() {
 		$res = db_query_params('SELECT user_id	FROM artifact_type_monitor WHERE group_artifact_id=$1',
@@ -581,11 +581,11 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *    getExtraFields - List of possible user built extra fields
-	 *    set up for this artifact type.
+	 * getExtraFields - List of possible user built extra fields
+	 * set up for this artifact type.
 	 *
-	 * @param array $types
-	 * @return array arrays of data;
+	 * @param	array	$types
+	 * @return	array	arrays of data;
 	 */
 	function getExtraFields($types = array()) {
 		if (count($types)) {
@@ -620,10 +620,10 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	cloneFieldsFrom - clone all the fields and elements from another tracker
+	 * cloneFieldsFrom - clone all the fields and elements from another tracker
 	 *
-	 * @param int $clone_tracker_id
-	 * @return    boolean    true/false on success
+	 * @param	int	$clone_tracker_id
+	 * @return	boolean	true/false on success
 	 */
 	function cloneFieldsFrom($clone_tracker_id) {
 
@@ -678,10 +678,10 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *    getExtraFieldName - Get a box name using the box ID
+	 * getExtraFieldName - Get a box name using the box ID
 	 *
-	 * @param  int     $extra_field_id id of an extra field.
-	 * @return string    name of extra field.
+	 * @param	int	$extra_field_id id of an extra field.
+	 * @return	string	name of extra field.
 	 */
 	function getExtraFieldName($extra_field_id) {
 		$arr = $this->getExtraFields();
@@ -689,12 +689,12 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *    getExtraFieldElements - List of possible admin configured
-	 *    extra field elements. This function is used to
-	 *    present the boxes and choices on the main Add/Update page.
+	 * getExtraFieldElements - List of possible admin configured
+	 * extra field elements. This function is used to
+	 * present the boxes and choices on the main Add/Update page.
 	 *
-	 * @param    int    $id id of the extra field
-	 * @return array of elements for this extra field.
+	 * @param	int	$id id of the extra field
+	 * @return	array of elements for this extra field.
 	 */
 	function getExtraFieldElements($id) {
 //TODO validate $id
@@ -723,8 +723,8 @@ class ArtifactType extends Error {
 	/**
 	 * getElementName - get the name of a particular element.
 	 *
-	 * @param $choice_id
-	 * @return string    The name.
+	 * @param	$choice_id
+	 * @return	string		The name.
 	 */
 	function getElementName($choice_id) {
 		if (!$choice_id) {
@@ -756,8 +756,8 @@ class ArtifactType extends Error {
 	/**
 	 * getElementStatusID - get the status of a particular element.
 	 *
-	 * @param int|array $choice_id
-	 * @return int The status
+	 * @param	int|array	$choice_id
+	 * @return	int		The status
 	 */
 	function getElementStatusID($choice_id) {
 		if (!$choice_id) {
@@ -787,9 +787,9 @@ class ArtifactType extends Error {
 	/**
 	 * delete - delete this tracker and all its related data.
 	 *
-	 * @param bool $sure        I'm Sure.
-	 * @param bool $really_sure I'm REALLY sure.
-	 * @return bool true/false;
+	 * @param	bool	$sure		I'm Sure.
+	 * @param	bool	$really_sure	I'm REALLY sure.
+	 * @return	bool	true/false;
 	 */
 	function delete($sure, $really_sure) {
 		if (!$sure || !$really_sure) {
@@ -874,9 +874,9 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	getSubmitters - returns a result set of submitters.
+	 * getSubmitters - returns a result set of submitters.
 	 *
-	 *	@return resource database result set.
+	 * @return	resource	database result set.
 	 */
 	function getSubmitters() {
 		if (!isset($this->submitters_res)) {
@@ -890,9 +890,9 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	getCannedResponses - returns a result set of canned responses.
+	 * getCannedResponses - returns a result set of canned responses.
 	 *
-	 *	@return resource database result set.
+	 * @return	resource	database result set.
 	 */
 	function getCannedResponses() {
 		if (!isset($this->cannedresponses_res)) {
@@ -905,14 +905,14 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	getStatuses - returns a result set of statuses.
+	 * getStatuses - returns a result set of statuses.
 	 *
-	 *	These statuses are either the default open/closed or any number of
-	 *	custom statuses that are stored in the extra fields. On insert/update
-	 *	to an artifact the status_id is remapped from the extra_field_element_id to
-	 *	the standard open/closed id.
+	 * These statuses are either the default open/closed or any number of
+	 * custom statuses that are stored in the extra fields. On insert/update
+	 * to an artifact the status_id is remapped from the extra_field_element_id to
+	 * the standard open/closed id.
 	 *
-	 * @return resource database result set.
+	 * @return	resource	database result set.
 	 */
 	function getStatuses() {
 		if (!isset($this->status_res)) {
@@ -924,8 +924,8 @@ class ArtifactType extends Error {
 	/**
 	 * getStatusName - returns the name of this status.
 	 *
-	 * @param	int			$id The status ID.
-	 * @return	string		name.
+	 * @param	int	$id	The status ID.
+	 * @return	string	name.
 	 */
 	function getStatusName($id) {
 		$result = db_query_params('select status_name from artifact_status WHERE id=$1',
@@ -938,18 +938,18 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *  update - use this to update this ArtifactType in the database.
+	 * update - use this to update this ArtifactType in the database.
 	 *
-	 * @param    string     $name                The item name.
-	 * @param    string     $description         The item description.
-	 * @param    bool       $email_all           (1) true (0) false - whether to email on all updates.
-	 * @param    string     $email_address       The address to send new entries and updates to.
-	 * @param    int        $due_period          Days before this item is considered overdue.
-	 * @param    int        $status_timeout      Days before stale items time out.
-	 * @param    bool       $use_resolution      (1) true (0) false - whether the resolution box should be shown.
-	 * @param    string     $submit_instructions Free-form string that project admins can place on the submit page.
-	 * @param    string     $browse_instructions Free-form string that project admins can place on the browse page.
-	 * @return bool true on success, false on failure.
+	 * @param	string	$name			The item name.
+	 * @param	string	$description		The item description.
+	 * @param	bool	$email_all		(1) true (0) false - whether to email on all updates.
+	 * @param	string	$email_address		The address to send new entries and updates to.
+	 * @param	int	$due_period		Days before this item is considered overdue.
+	 * @param	int	$status_timeout		 Days before stale items time out.
+	 * @param	bool	$use_resolution		(1) true (0) false - whether the resolution box should be shown.
+	 * @param	string	$submit_instructions	Free-form string that project admins can place on the submit page.
+	 * @param	string	$browse_instructions	Free-form string that project admins can place on the browse page.
+	 * @return	bool	true on success, false on failure.
 	 */
 	function update($name, $description, $email_all, $email_address,
 					$due_period, $status_timeout, $use_resolution, $submit_instructions, $browse_instructions) {
@@ -1023,9 +1023,9 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	  getBrowseList - get the free-form string strings.
+	 * getBrowseList - get the free-form string strings.
 	 *
-	 *	  @return string instructions.
+	 * @return	string	instructions.
 	 */
 	function getBrowseList() {
 		$list = $this->data_array['browse_list'];
@@ -1044,10 +1044,10 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *    setCustomStatusField - set the extra_field_id of the field containing the custom status.
+	 * setCustomStatusField - set the extra_field_id of the field containing the custom status.
 	 *
-	 * @param    int    $list The extra field id.
-	 * @return   boolean    success.
+	 * @param	int	$list	The extra field id.
+	 * @return	boolean	success.
 	 */
 	function setBrowseList($list) {
 		$res = db_query_params('UPDATE artifact_group_list
