@@ -40,9 +40,9 @@ class ArtifactQueryFactory extends Error {
 	var $ArtifactQueries = null;
 
 	/**
-	 *  Constructor.
+	 * Constructor.
 	 *
-	 *	@param	object	$ArtifactType The Group object to which this ArtifactQueryFactory is associated
+	 * @param	object	$ArtifactType	The Group object to which this ArtifactQueryFactory is associated
 	 */
 	function __construct(&$ArtifactType) {
 		$this->Error();

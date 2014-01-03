@@ -30,21 +30,21 @@ class Artifacts extends Error {
 	/**
 	 * Status db resource ID.
 	 *
-	 * @var		int		$status_res.
+	 * @var	int	$status_res.
 	 */
 	var $status_res;
 
 	/**
 	 * Artifact Type object.
 	 *
-	 * @var		object	$ArtifactType.
+	 * @var	object	$ArtifactType.
 	 */
 	var $ArtifactType;
 
 	/**
 	 * Array of Artifact objects.
 	 *
-	 * @var		array	$artifacts_array.
+	 * @var	array	$artifacts_array.
 	 */
 	var $artifacts_array;
 
@@ -53,7 +53,7 @@ class Artifacts extends Error {
 	 *
 	 * Use this constructor if you are modifying an existing artifact.
 	 *
-	 * @param ArtifactType $ArtifactType Artifact Type object.
+	 * @param	ArtifactType	$ArtifactType	Artifact Type object.
 	 */
 	function __construct(&$ArtifactType) {
 		$this->Error();
@@ -73,12 +73,12 @@ class Artifacts extends Error {
 	}
 
 	/**
-	 *  getArtifacts - get an array of artifacts.
+	 * getArtifacts - get an array of artifacts.
 	 *
-	 *  Retrieves an array of artifact objects.
+	 * Retrieves an array of artifact objects.
 	 *
-	 *  @param	boolean	$offset Database query offset.
-	 *  @return array|bool An array of artifact objects on success / false on failure.
+	 * @param	boolean		$offset	Database query offset.
+	 * @return	array|bool	An array of artifact objects on success / false on failure.
 	 */
 	function getArtifacts($offset=false) {
 		if (!$offset) {

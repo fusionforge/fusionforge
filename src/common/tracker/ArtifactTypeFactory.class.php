@@ -51,7 +51,7 @@ class ArtifactTypeFactory extends Error {
 	/**
 	 * __construct - ArtifactTypeFactory constructor.
 	 *
-	 *	@param	Group	$Group The Group object to which this ArtifactTypeFactory is associated
+	 * @param	Group	$Group The Group object to which this ArtifactTypeFactory is associated
 	 */
 	function __construct(&$Group) {
 		$this->Error();
@@ -72,18 +72,18 @@ class ArtifactTypeFactory extends Error {
 	}
 
 	/**
-	 *	getGroup - get the Group object this ArtifactType is associated with.
+	 * getGroup - get the Group object this ArtifactType is associated with.
 	 *
-	 *	@return	object	The Group object.
+	 * @return	object	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
 	/**
-	 *	getAllArtifactTypeIds - return a list of tracker ids.
+	 * getAllArtifactTypeIds - return a list of tracker ids.
 	 *
-	 *	@return	array	The array of ArtifactType objects.
+	 * @return	array	The array of ArtifactType objects.
 	 */
 	function &getAllArtifactTypeIds() {
 		$result = array () ;
@@ -101,9 +101,9 @@ class ArtifactTypeFactory extends Error {
 	}
 
 	/**
-	 *	getArtifactTypes - return an array of ArtifactType objects.
+	 * getArtifactTypes - return an array of ArtifactType objects.
 	 *
-	 *	@return	array	The array of ArtifactType objects.
+	 * @return	array	The array of ArtifactType objects.
 	 */
 	function getArtifactTypes() {
 		if ($this->ArtifactTypes) {

@@ -44,20 +44,21 @@ class ArtifactExtraField extends Error {
 	/**
 	 * The artifact type object.
 	 *
-	 * @var		object	$ArtifactType.
+	 * @var	object	$ArtifactType.
 	 */
 	var $ArtifactType; //object
 
 	/**
 	 * Array of artifact data.
 	 *
-	 * @var		array	$data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
 	/**
-	 * @param $ArtifactType
-	 * @param bool $data
+	 * __construct - Constructor
+	 * @param	$ArtifactType
+	 * @param	bool		$data
 	 */
 	function __construct(&$ArtifactType, $data=false) {
 		$this->Error();
@@ -84,17 +85,17 @@ class ArtifactExtraField extends Error {
 	}
 
 	/**
-	 *	create - create a row in the table that stores box names for a
-	 *	a tracker.  This function is only used to create rows for boxes
-	 *	configured by the admin.
+	 * create - create a row in the table that stores box names for a
+	 * a tracker.  This function is only used to create rows for boxes
+	 * configured by the admin.
 	 *
-	 *	@param	string	$name        Name of the extra field.
-	 *	@param	int	    $field_type  The type of field - radio, select, text, textarea
-	 *	@param	int	    $attribute1  For text (size) and textarea (rows)
-	 *	@param	int     $attribute2  For text (maxlength) and textarea (cols)
-	 *	@param	int     $is_required True or false whether this is a required field or not.
-	 *	@param	string	$alias       Alias for this extra field (optional)
-	 *  @return bool	true on success / false on failure.
+	 * @param	string	$name		Name of the extra field.
+	 * @param	int	$field_type	The type of field - radio, select, text, textarea
+	 * @param	int	$attribute1	For text (size) and textarea (rows)
+	 * @param	int	$attribute2	For text (maxlength) and textarea (cols)
+	 * @param	int	$is_required	True or false whether this is a required field or not.
+	 * @param	string	$alias		Alias for this extra field (optional)
+	 * @return	bool	true on success / false on failure.
 	 */
 	function create($name,$field_type,$attribute1,$attribute2,$is_required=0,$alias='') {
 		//
@@ -219,10 +220,10 @@ class ArtifactExtraField extends Error {
 	}
 
 	/**
-	 *	fetchData - re-fetch the data for this ArtifactExtraField from the database.
+	 * fetchData - re-fetch the data for this ArtifactExtraField from the database.
 	 *
-	 *	@param	int		$id ID of the Box.
-	 *	@return	boolean	success.
+	 * @param	int	$id ID of the Box.
+	 * @return	boolean	success.
 	 */
 	function fetchData($id) {
 		$this->id=$id;
@@ -239,63 +240,63 @@ class ArtifactExtraField extends Error {
 	}
 
 	/**
-	 *	getArtifactType - get the ArtifactType Object this ArtifactExtraField is associated with.
+	 * getArtifactType - get the ArtifactType Object this ArtifactExtraField is associated with.
 	 *
-	 *	@return object	ArtifactType.
+	 * @return	object	ArtifactType.
 	 */
 	function &getArtifactType() {
 		return $this->ArtifactType;
 	}
 
 	/**
-	 *	getID - get this ArtifactExtraField ID.
+	 * getID - get this ArtifactExtraField ID.
 	 *
-	 *	@return	int	The id #.
+	 * @return	int	The id #.
 	 */
 	function getID() {
 		return $this->data_array['extra_field_id'];
 	}
 
 	/**
-	 *	getName - get the name.
+	 * getName - get the name.
 	 *
-	 *	@return	string	The name.
+	 * @return	string	The name.
 	 */
 	function getName() {
 		return $this->data_array['field_name'];
 	}
 
 	/**
-	 *	getAttribute1 - get the attribute1 field.
+	 * getAttribute1 - get the attribute1 field.
 	 *
-	 *	@return int	The first attribute.
+	 * @return	int	The first attribute.
 	 */
 	function getAttribute1() {
 		return $this->data_array['attribute1'];
 	}
 
 	/**
-	 *	getAttribute2 - get the attribute2 field.
+	 * getAttribute2 - get the attribute2 field.
 	 *
-	 *	@return int	The second attribute.
+	 * @return	int	The second attribute.
 	 */
 	function getAttribute2() {
 		return $this->data_array['attribute2'];
 	}
 
 	/**
-	 *	getType - the type of field.
+	 * getType - the type of field.
 	 *
-	 *	@return	int	type.
+	 * @return	int	type.
 	 */
 	function getType() {
 		return $this->data_array['field_type'];
 	}
 
 	/**
-	 *	getTypeName - the name of type of field.
+	 * getTypeName - the name of type of field.
 	 *
-	 *	@return	string	type.
+	 * @return	string	type.
 	 */
 	function getTypeName() {
 		$arr = $this->getAvailableTypes();
@@ -303,18 +304,18 @@ class ArtifactExtraField extends Error {
 	}
 
 	/**
-	 *	isRequired - whether this field is required or not.
+	 * isRequired - whether this field is required or not.
 	 *
-	 *	@return	boolean required.
+	 * @return	boolean	required.
 	 */
 	function isRequired() {
 		return $this->data_array['is_required'];
 	}
 
 	/**
-	 *	getAvailableTypes - the types of text fields and their names available.
+	 * getAvailableTypes - the types of text fields and their names available.
 	 *
-	 *	@return	array	types.
+	 * @return	array	types.
 	 */
 	static function getAvailableTypes() {
 		return array(
@@ -331,18 +332,18 @@ class ArtifactExtraField extends Error {
 	}
 
 	/**
-	 *	getAlias - the alias that is used for this field
+	 * getAlias - the alias that is used for this field
 	 *
-	 *	@return	string	alias
+	 * @return	string	alias
 	 */
 	function getAlias() {
 		return $this->data_array['alias'];
 	}
 
 	/**
-	 *	getAvailableValues - Get the list of available values for this extra field
+	 * getAvailableValues - Get the list of available values for this extra field
 	 *
-	 *	@return array
+	 * @return	array
 	 */
 	function getAvailableValues() {
 		$res = db_query_params ('SELECT * FROM artifact_extra_field_elements WHERE extra_field_id=$1',
@@ -355,17 +356,17 @@ class ArtifactExtraField extends Error {
 	}
 
 	/**
-	 *  update - update a row in the table used to store box names
-	 *  for a tracker.  This function is only to update rowsf
-	 *  for boxes configured by
-	 *  the admin.
+	 * update - update a row in the table used to store box names
+	 * for a tracker.  This function is only to update rowsf
+	 * for boxes configured by
+	 * the admin.
 	 *
-	 *  @param	string $name        Name of the field.
-	 *	@param	int	   $attribute1  For text (size) and textarea (rows)
-	 *	@param	int	   $attribute2  For text (maxlength) and textarea (cols)
-	 *	@param	int	   $is_required True or false whether this is a required field or not.
-	 *	@param	string $alias       Alias for this field
-	 *  @return	bool success.
+	 * @param	string	$name		Name of the field.
+	 * @param	int	$attribute1	For text (size) and textarea (rows)
+	 * @param	int	$attribute2	For text (maxlength) and textarea (cols)
+	 * @param	int	$is_required	True or false whether this is a required field or not.
+	 * @param	string	$alias		Alias for this field
+	 * @return	bool	success.
 	 */
 	function update($name,$attribute1,$attribute2,$is_required=0,$alias="") {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {
@@ -471,10 +472,11 @@ class ArtifactExtraField extends Error {
 	}
 
 	/**
-	 * 	Validate an alias.
-	 *	Note that this function does not check for conflicts.
-	 *	@param	string	alias - alias to validate
-	 *	@return	bool	true if alias is valid, false otherwise and it sets the corresponding error
+	 * Validate an alias.
+	 * Note that this function does not check for conflicts.
+	 *
+	 * @param	string	alias - alias to validate
+	 * @return	bool	true if alias is valid, false otherwise and it sets the corresponding error
 	 */
 	function validateAlias($alias) {
 		// these are reserved alias names
@@ -505,11 +507,12 @@ class ArtifactExtraField extends Error {
 	}
 
 	/**
-	 *	Generate an alias for this field. The alias can be entered by the user or
-	 *	be generated automatically from the name of the field.
-	 *	@param	string	$alias Alias entered by the user
-	 *	@param	string	$name  Name of the field entered by the user (it'll be used when $alias is empty)
-	 *	@return	string
+	 * Generate an alias for this field. The alias can be entered by the user or
+	 * be generated automatically from the name of the field.
+	 *
+	 * @param	string	$alias	Alias entered by the user
+	 * @param	string	$name	Name of the field entered by the user (it'll be used when $alias is empty)
+	 * @return	string
 	 */
 	function generateAlias($alias, $name) {
 		$alias = strtolower(trim($alias));

@@ -465,7 +465,7 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 * remapStatus    - pass the extra_fields array and return the status_id, either open/closed
+	 * remapStatus - pass the extra_fields array and return the status_id, either open/closed
 	 *
 	 * @param	int	$status_id	The status_id
 	 * @param	array	$extra_fields	Complex array of extra_field_data
@@ -572,7 +572,7 @@ class ArtifactType extends Error {
 	/**
 	 * getMonitorIds - array of id of users monitoring this Artifact.
 	 *
-	 * @return	array of id of users monitoring this Artifact.
+	 * @return	array	array of id of users monitoring this Artifact.
 	 */
 	function &getMonitorIds() {
 		$res = db_query_params('SELECT user_id	FROM artifact_type_monitor WHERE group_artifact_id=$1',
@@ -680,7 +680,7 @@ class ArtifactType extends Error {
 	/**
 	 * getExtraFieldName - Get a box name using the box ID
 	 *
-	 * @param	int	$extra_field_id id of an extra field.
+	 * @param	int	$extra_field_id	id of an extra field.
 	 * @return	string	name of extra field.
 	 */
 	function getExtraFieldName($extra_field_id) {
@@ -693,7 +693,7 @@ class ArtifactType extends Error {
 	 * extra field elements. This function is used to
 	 * present the boxes and choices on the main Add/Update page.
 	 *
-	 * @param	int	$id id of the extra field
+	 * @param	int	$id	id of the extra field
 	 * @return	array of elements for this extra field.
 	 */
 	function getExtraFieldElements($id) {

@@ -28,22 +28,22 @@ class ArtifactMessage extends Error {
 	/**
 	 * The artifact object.
 	 *
-	 * @var		object	$Artifact.
+	 * @var	object	$Artifact.
 	 */
 	var $Artifact; //object
 
 	/**
 	 * Array of artifact data.
 	 *
-	 * @var		array	$data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
 	/**
-	 *  __construct - ArtifactMessage constructor.
+	 * __construct - ArtifactMessage constructor.
 	 *
-	 * @param object    $Artifact    Artifact object.
-	 * @param array|bool $data (all fields from artifact_history_user_vw) OR id from database.
+	 * @param	object		$Artifact	Artifact object.
+	 * @param	array|bool	$data		(all fields from artifact_history_user_vw) OR id from database.
 	 */
 	function __construct(&$Artifact, $data=false) {
 		$this->Error();
@@ -70,11 +70,11 @@ class ArtifactMessage extends Error {
 	}
 
 	/**
-	 *	create - create a new item in the database.
+	 * create - create a new item in the database.
 	 *
-	 * @param string	   $body Body.
-	 * @param string|bool $by   Email of submitter (obsolete?).
-	 * @return int|bool id on success / false on failure.
+	 * @param	string		$body	Body.
+	 * @param	string|bool	$by	Email of submitter (obsolete?).
+	 * @return	int|bool	id on success / false on failure.
 	 */
 	function create($body,$by=false) {
 		if (!$body) {
@@ -127,10 +127,10 @@ class ArtifactMessage extends Error {
 	}
 
 	/**
-	 *	fetchData - re-fetch the data for this ArtifactMessage from the database.
+	 * fetchData - re-fetch the data for this ArtifactMessage from the database.
 	 *
-	 *	@param int $id ID of the category.
-	 *	@return	boolean	success.
+	 * @param	int	$id	ID of the category.
+	 * @return	boolean	success.
 	 */
 	function fetchData($id) {
 		$res = db_query_params ('SELECT * FROM artifact_message_user_vw WHERE id=$1',
@@ -145,45 +145,45 @@ class ArtifactMessage extends Error {
 	}
 
 	/**
-	 *	getArtifact - get the Artifact Object this ArtifactMessage is associated with.
+	 * getArtifact - get the Artifact Object this ArtifactMessage is associated with.
 	 *
-	 *	@return object	Artifact.
+	 * @return	object	Artifact.
 	 */
 	function &getArtifact() {
 		return $this->Artifact;
 	}
 
 	/**
-	 *	getID - get this ArtifactMessage's ID.
+	 * getID - get this ArtifactMessage's ID.
 	 *
-	 *	@return	int	The id #.
+	 * @return	int	The id #.
 	 */
 	function getID() {
 		return $this->data_array['id'];
 	}
 
 	/**
-	 *	getBody - get the message body.
+	 * getBody - get the message body.
 	 *
-	 *	@return	string	The message body.
+	 * @return	string	The message body.
 	 */
 	function getBody() {
 		return $this->data_array['body'];
 	}
 
 	/**
-	 *	getAddDate - get the date this message was added.
+	 * getAddDate - get the date this message was added.
 	 *
-	 *	@return int adddate.
+	 * @return	int	adddate.
 	 */
 	function getAddDate() {
 		return $this->data_array['addate'];
 	}
 
 	/**
-	 *	getUserID - get the ID of the person who posted this.
+	 * getUserID - get the ID of the person who posted this.
 	 *
-	 *	@return int user_id.
+	 * @return	int	user_id.
 	 */
 	function getUserID() {
 		return $this->data_array['user_id'];

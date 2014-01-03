@@ -31,14 +31,14 @@ class ArtifactFactory extends Error {
 	/**
 	 * The ArtifactType object.
 	 *
-	 * @var	 object  $ArtifactType.
+	 * @var	 object	$ArtifactType.
 	 */
 	var $ArtifactType;
 
 	/**
 	 * The artifacts array.
 	 *
-	 * @var  array  artifacts.
+	 * @var	array	artifacts.
 	 */
 	var $artifacts = array();
 	var $order_col;
@@ -64,9 +64,9 @@ class ArtifactFactory extends Error {
 	var $query_id;			// id of the query (when query_type=query)
 
 	/**
-	 *  Constructor.
+	 * __construct - Constructor.
 	 *
-	 *	@param	object	$ArtifactType The ArtifactType object to which this ArtifactFactory is associated.
+	 * @param	object	$ArtifactType	The ArtifactType object to which this ArtifactFactory is associated.
 	 */
 	function __construct(&$ArtifactType) {
 		$this->Error();
@@ -83,16 +83,16 @@ class ArtifactFactory extends Error {
 	}
 
 	/**
-	 *	setup - sets up limits and sorts before you call getTasks().
+	 * setup - sets up limits and sorts before you call getTasks().
 	 *
-	 *	@param	int	   $offset       The offset - number of rows to skip.
-	 *	@param	string $order_col    The column to sort on.
-	 *	@param	string $sort         The way to order - ASC or DESC.
-	 *	@param	int    $max_rows     The max number of rows to return.
-	 *	@param	string $set          Whether to set these prefs into the user_prefs table - use "custom".
-	 *	@param	int    $_assigned_to Include this param if you want to limit to a certain assignee.
-	 *	@param	int    $_status      Include this param if you want to limit to a particular status.
-	 *	@param	array	Array of extra fields & elements to limit the query to.
+	 * @param	int	$offset		The offset - number of rows to skip.
+	 * @param	string	$order_col	The column to sort on.
+	 * @param	string	$sort		The way to order - ASC or DESC.
+	 * @param	int	$max_rows	The max number of rows to return.
+	 * @param	string	$set		Whether to set these prefs into the user_prefs table - use "custom".
+	 * @param	int	$_assigned_to	Include this param if you want to limit to a certain assignee.
+	 * @param	int	$_status	Include this param if you want to limit to a particular status.
+	 * @param	array	$_extra_fields	Array of extra fields & elements to limit the query to.
 	 */
 	function setup($offset,$order_col,$sort,$max_rows,$set,$_assigned_to,$_status,$_extra_fields=array()) {
 
@@ -262,9 +262,9 @@ class ArtifactFactory extends Error {
 	}
 
 	/**
-	 *	setChangedFrom - sets up changed-from and last-changed before you call getTasks().
+	 * setChangedFrom - sets up changed-from and last-changed before you call getTasks().
 	 *
-	 *	@param	int	$changed_from The changed_from - offset time(sec) from now
+	 * @param	int	$changed_from	The changed_from - offset time(sec) from now
 	 */
 	function setChangedFrom($changed_from) {
 		$this->changed_from = ($changed_from <= 0) ? 0x7fffffff : $changed_from;
@@ -272,9 +272,9 @@ class ArtifactFactory extends Error {
 	}
 
 	/**
-	 *	getDefaultQuery - get the default query
+	 * getDefaultQuery - get the default query
 	 *
-	 *	@return	int
+	 * @return	int
 	 */
 	function getDefaultQuery() {
 		if ($this->query_type == 'query')
@@ -284,9 +284,9 @@ class ArtifactFactory extends Error {
 	}
 
 	/**
-	 *	getArtifacts - get an array of Artifact objects.
+	 * getArtifacts - get an array of Artifact objects.
 	 *
-	 *	@return	Artifact[] Array of Artifact objects.
+	 * @return	Artifact[]	Array of Artifact objects.
 	 */
 	function getArtifacts() {
 		if (!empty($this->artifacts)) {
@@ -459,9 +459,9 @@ class ArtifactFactory extends Error {
 	/**
 	 * getArtifactsByReleases - get an array of Artifact objects.
 	 *
-	 * @param $extra_field_id
-	 * @param $releases
-	 * @return array    The array of Artifact objects.
+	 * @param	$extra_field_id
+	 * @param	$releases
+	 * @return	array		The array of Artifact objects.
 	 */
 	function getArtifactsByReleases($extra_field_id, $releases) {
 		$artifacts = array();

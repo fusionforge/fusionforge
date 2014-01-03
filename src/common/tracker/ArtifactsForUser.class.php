@@ -36,7 +36,7 @@ class ArtifactsForUser extends Error {
 	/**
 	* __construct - Creates a new ArtifactsForUser object
 	*
-	* @param object	$user	the User object for which to collect artifacts
+	* @param	object	$user	the User object for which to collect artifacts
 	*/
 	function __construct(&$user) {
 		$this->User =& $user;
@@ -45,9 +45,9 @@ class ArtifactsForUser extends Error {
 	/**
 	 * getArtifactsFromSQLwithParams - Gets an array of Artifacts
 	 *
-	 * @param    string   $sql     The sql that returns artifact_id
-	 * @param    array    $params  Array of values associated to sql query
-	 * @return    Artifact[]    The array of Artifacts
+	 * @param	string		$sql	The sql that returns artifact_id
+	 * @param	array		$params	Array of values associated to sql query
+	 * @return	Artifact[]	The array of Artifacts
 	 */
 	function &getArtifactsFromSQLwithParams ($sql, $params) {
 		$artifacts = array();
@@ -70,7 +70,7 @@ class ArtifactsForUser extends Error {
 	}
 
 	/**
-	* getAssignedArtifactsByGroup	- Get the users's assigned artifacts
+	* getAssignedArtifactsByGroup - Get the users's assigned artifacts
 	* @return	Artifact[]	The array of Artifacts
 	*/
 	function &getAssignedArtifactsByGroup() {
@@ -80,9 +80,9 @@ class ArtifactsForUser extends Error {
 	}
 
 	/**
-	*	getSubmittedArtifactsByGroup
+	* getSubmittedArtifactsByGroup
 	*
-	*	@return Artifact[] The array of Artifacts
+	* @return	Artifact[]	The array of Artifacts
 	*/
 	function &getSubmittedArtifactsByGroup() {
 		return $this->getArtifactsFromSQLwithParams('SELECT * FROM artifact_vw av WHERE av.submitted_by=$1 AND av.status_id=1 ORDER BY av.group_artifact_id, av.artifact_id DESC',
@@ -90,9 +90,9 @@ class ArtifactsForUser extends Error {
 	}
 
 	/**
-	*	getMonitoredArtifacts
+	* getMonitoredArtifacts
 	*
-	*	@return Artifact[] The array of Artifacts
+	* @return	Artifact[]	The array of Artifacts
 	*/
 	function & getMonitoredArtifacts() {
 		$artifacts = array();

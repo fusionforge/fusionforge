@@ -29,23 +29,23 @@ class ArtifactCanned extends Error {
 	/**
 	 * The artifact type object.
 	 *
-	 * @var		object	$ArtifactType.
+	 * @var	object	$ArtifactType.
 	 */
 	var $ArtifactType;
 
 	/**
 	 * Array of artifact data.
 	 *
-	 * @var		array	$data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
 	/**
 	 * __construct - constructor.
 	 *
-	 * @param ArtifactType $ArtifactType The Artifact Type object.
-	 * @param array|bool   $data         (all fields from artifact_file_user_vw) OR id from database.
-	 * @return ArtifactCanned success.
+	 * @param	ArtifactType	$ArtifactType	The Artifact Type object.
+	 * @param	array|bool	$data		(all fields from artifact_file_user_vw) OR id from database.
+	 * @return	ArtifactCanned	success.
 	 */
 	function __construct(&$ArtifactType, $data=false) {
 		$this->Error();
@@ -74,9 +74,9 @@ class ArtifactCanned extends Error {
 	/**
 	 * create - create a new item in the database.
 	 *
-	 * @param string	$title The item title.
-	 * @param string	$body  The item body.
-	 * @return int id on success / false on failure.
+	 * @param	string	$title	The item title.
+	 * @param	string	$body	The item body.
+	 * @return	int	id on success / false on failure.
 	 */
 	function create($title, $body) {
 		//
@@ -116,8 +116,8 @@ class ArtifactCanned extends Error {
 	/**
 	 * fetchData - re-fetch the data for this ArtifactCanned from the database.
 	 *
-	 * @param int $id The ID number.
-	 * @return boolean success.
+	 * @param	int	$id The ID number.
+	 * @return	boolean	success.
 	 */
 	function fetchData($id) {
 		$res = db_query_params ('SELECT * FROM artifact_canned_responses WHERE id=$1',
@@ -134,41 +134,41 @@ class ArtifactCanned extends Error {
 	/**
 	 * getArtifactType - get the ArtifactType Object this ArtifactCanned message is associated with.
 	 *
-	 * @return ArtifactType.
+	 * @return	ArtifactType.
 	 */
 	function &getArtifactType() {
 		return $this->ArtifactType;
 	}
 
 	/**
-	 *	getID - get this ArtifactCanned message's ID.
+	 * getID - get this ArtifactCanned message's ID.
 	 *
-	 *	@return	int	The id #.
+	 * @return	int	The id #.
 	 */
 	function getID() {
 		return $this->data_array['id'];
 	}
 
 	/**
-	 *	getTitle - get the title.
+	 * getTitle - get the title.
 	 *
-	 *	@return	string	The title.
+	 * @return	string	The title.
 	 */
 	function getTitle() {
 		return $this->data_array['title'];
 	}
 
 	/**
-	 *	getBody - get the body of this message.
+	 * getBody - get the body of this message.
 	 *
-	 *	@return	string	The message body.
+	 * @return	string	The message body.
 	 */
 	function getBody() {
 		return $this->data_array['body'];
 	}
 
 	/**
-	 *  update - update an ArtifactCanned message.
+	 * update - update an ArtifactCanned message.
 	 *
 	 * @param	string	$title	Title of the message.
 	 * @param	string	$body	Body of the message.
@@ -201,9 +201,9 @@ class ArtifactCanned extends Error {
 	}
 
 	/**
-	 *  delete - delete an ArtifactCanned message.
+	 * delete - delete an ArtifactCanned message.
 	 *
-	 *  @return	boolean	success.
+	 * @return	boolean	success.
 	 */
 	function delete() {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactType->Group->getID())) {

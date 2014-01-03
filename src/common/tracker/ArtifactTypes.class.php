@@ -31,22 +31,22 @@ class ArtifactTypes extends Error {
 	/**
 	 * The Group object.
 	 *
-	 * @var		object	$Group.
+	 * @var	object	$Group.
 	 */
 	var $Group;
 
 	/**
 	 * Array of artifactTypes data.
 	 *
-	 * @var		array	$data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
 	/**
 	 * ArtifactTypes - constructor.
 	 *
-	 * @param Group $Group The Group object.
-	 * @return ArtifactTypes success.
+	 * @param	Group		$Group The Group object.
+	 * @return	ArtifactTypes	success.
 	 */
 	function __construct(&$Group) {
 		$this->Error();
@@ -62,9 +62,9 @@ class ArtifactTypes extends Error {
 	}
 
 	/**
-	 *	createTrackers - creates all the standard trackers for a given Group.
+	 * createTrackers - creates all the standard trackers for a given Group.
 	 *
-	 *	@return	boolean	success.
+	 * @return	boolean	success.
 	 */
 	function createTrackers() {
 

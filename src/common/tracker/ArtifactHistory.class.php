@@ -28,22 +28,22 @@ class ArtifactHistory extends Error {
 	/**
 	 * The artifact object.
 	 *
-	 * @var		object	$Artifact.
+	 * @var	object	$Artifact.
 	 */
 	var $Artifact; //object
 
 	/**
 	 * Array of artifact data.
 	 *
-	 * @var		array	$data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
 	/**
-	 *  ArtifactHistory - constructor.
+	 * ArtifactHistory - constructor.
 	 *
-	 *	@param Artifact   $Artifact Artifact object.
-	 *  @param array|bool $data     (all fields from artifact_history_user_vw) OR id from database.
+	 * @param	Artifact	$Artifact	Artifact object.
+	 * @param	array|bool	$data		(all fields from artifact_history_user_vw) OR id from database.
 	 */
 	function __construct(&$Artifact, $data=false) {
 		$this->Error();
@@ -70,10 +70,10 @@ class ArtifactHistory extends Error {
 	}
 
 	/**
-	 *	fetchData - re-fetch the data for this ArtifactHistory from the database.
+	 * fetchData - re-fetch the data for this ArtifactHistory from the database.
 	 *
-	 *	@param	int		$id ID of the category.
-	 *	@return	boolean	success.
+	 * @param	int	$id ID of the category.
+	 * @return	boolean	success.
 	 */
 	function fetchData($id) {
 		$res = db_query_params ('SELECT * FROM artifact_category WHERE id=$1',
@@ -88,36 +88,36 @@ class ArtifactHistory extends Error {
 	}
 
 	/**
-	 *	getArtifact - get the Artifact Object this ArtifactHistory is associated with.
+	 * getArtifact - get the Artifact Object this ArtifactHistory is associated with.
 	 *
-	 *	@return object	Artifact.
+	 * @return	object	Artifact.
 	 */
 	function &getArtifact() {
 		return $this->Artifact;
 	}
 
 	/**
-	 *	getID - get this ArtifactHistory's ID.
+	 * getID - get this ArtifactHistory's ID.
 	 *
-	 *	@return	int	The id #.
+	 * @return	int	The id #.
 	 */
 	function getID() {
 		return $this->data_array['id'];
 	}
 
 	/**
-	 *	getName - get the name.
+	 * getName - get the name.
 	 *
-	 *	@return	string	The name.
+	 * @return	string	The name.
 	 */
 	function getName() {
 		return $this->data_array['category_name'];
 	}
 
 	/**
-	 *	getAssignee - get the user_id of the person to assign this category to.
+	 * getAssignee - get the user_id of the person to assign this category to.
 	 *
-	 *	@return int user_id.
+	 * @return int user_id.
 	 */
 	function getAssignee() {
 		return $this->data_array['auto_assign_to'];

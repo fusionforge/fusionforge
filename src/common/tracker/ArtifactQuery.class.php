@@ -66,29 +66,29 @@ class ArtifactQuery extends Error {
 	/**
 	 * The artifact type object.
 	 *
-	 * @var		object	$ArtifactType.
+	 * @var	object	$ArtifactType.
 	 */
 	var $ArtifactType; //object
 
 	/**
 	 * Array of artifact data.
 	 *
-	 * @var		array	$data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
 	/**
 	 * Array of query conditions
 	 *
-	 * @var		array	$element_array.
+	 * @var	array	$element_array.
 	 */
 	var $element_array;
 
 	/**
-	 *	__construct - Constructor
+	 * __construct - Constructor
 	 *
-	 *	@param $ArtifactType $ArtifactType c object.
-	 *	@param array|bool    $data
+	 * @param	$ArtifactType	$ArtifactType	c object.
+	 * @param	array|bool	$data
 	 */
 	function __construct(&$ArtifactType, $data = false) {
 		$this->Error();
@@ -116,24 +116,24 @@ class ArtifactQuery extends Error {
 
 	/**
 	 * create - create a row in the table that stores a saved query for
-	 *  a tracker.
+	 * a tracker.
 	 *
-	 * @param        $name
-	 * @param        $status
-	 * @param        $assignee
-	 * @param        $moddaterange
-	 * @param        $sort_col
-	 * @param        $sort_ord
-	 * @param        $extra_fields
-	 * @param int    $opendaterange
-	 * @param int    $closedaterange
-	 * @param        $summary
-	 * @param        $description
-	 * @param        $followups
-	 * @param int    $query_type
-	 * @param array  $query_options
-	 * @param string $submitter Name of the saved query.
-	 * @return bool true on success / false on failure.
+	 * @param	$name
+	 * @param	$status
+	 * @param	$assignee
+	 * @param	$moddaterange
+	 * @param	$sort_col
+	 * @param	$sort_ord
+	 * @param	$extra_fields
+	 * @param	int		$opendaterange
+	 * @param	int		$closedaterange
+	 * @param	$summary
+	 * @param	$description
+	 * @param	$followups
+	 * @param	int		$query_type
+	 * @param	array		$query_options
+	 * @param	string		$submitter	Name of the saved query.
+	 * @return	bool		true on success / false on failure.
 	 */
 	function create($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange=0,$closedaterange=0,
 		$summary,$description,$followups,$query_type=0,$query_options=array(),$submitter='') {
@@ -206,10 +206,10 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *	fetchData - re-fetch the data for this ArtifactQuery from the database.
+	 * fetchData - re-fetch the data for this ArtifactQuery from the database.
 	 *
-	 *	@param	int		$id ID of saved query.
-	 *	@return	boolean	success.
+	 * @param	int	$id ID of saved query.
+	 * @return	boolean	success.
 	 */
 	function fetchData($id) {
 			$res = db_query_params ('SELECT * FROM artifact_query WHERE artifact_query_id=$1',
@@ -237,9 +237,9 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *	getArtifactType - get the ArtifactType Object this ArtifactExtraField is associated with.
+	 * getArtifactType - get the ArtifactType Object this ArtifactExtraField is associated with.
 	 *
-	 *	@return object	ArtifactType.
+	 * @return	object	ArtifactType.
 	 */
 	function &getArtifactType() {
 		return $this->ArtifactType;
@@ -477,45 +477,45 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *	getID - get this ArtifactQuery ID.
+	 * getID - get this ArtifactQuery ID.
 	 *
-	 *	@return	int	The id #.
+	 * @return	int	The id #.
 	 */
 	function getID() {
 		return $this->data_array['artifact_query_id'];
 	}
 
 	/**
-	 *	getName - get the name.
+	 * getName - get the name.
 	 *
-	 *	@return	string	The name.
+	 * @return	string	The name.
 	 */
 	function getName() {
 		return $this->data_array['query_name'];
 	}
 
 	/**
-	 *	getUserId - get the user_id.
+	 * getUserId - get the user_id.
 	 *
-	 *	@return	string	The user_id.
+	 * @return	string	The user_id.
 	 */
 	function getUserId() {
 		return $this->data_array['user_id'];
 	}
 
 	/**
-	 *	getQueryType - get the type of the query
+	 * getQueryType - get the type of the query
 	 *
-	 *	@return	string	type of query (0: private, 1: project, 2: project&default)
+	 * @return	string	type of query (0: private, 1: project, 2: project&default)
 	 */
 	function getQueryType() {
 		return $this->data_array['query_type'];
 	}
 
 	/**
-	 *	getQueryOptions - get the options of the query
+	 * getQueryOptions - get the options of the query
 	 *
-	 *	@return	array	array of all activated options
+	 * @return	array	array of all activated options
 	 */
 	function getQueryOptions() {
         if (isset($this->data_array['query_options'])) {
@@ -526,9 +526,9 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *	getSortCol - the column that you're sorting on
+	 * getSortCol - the column that you're sorting on
 	 *
-	 *	@return	string	The column name.
+	 * @return	string	The column name.
 	 */
 	function getSortCol() {
 		if (!isset($this->element_array))
@@ -537,9 +537,9 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *	getSortOrd - ASC or DESC
+	 * getSortOrd - ASC or DESC
 	 *
-	 *	@return	string	ASC or DESC
+	 * @return	string	ASC or DESC
 	 */
 	function getSortOrd() {
 		if (!isset($this->element_array))
@@ -548,9 +548,9 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *	getModDateRange - get the range of dates to include in a query
+	 * getModDateRange - get the range of dates to include in a query
 	 *
-	 *	@return	string	mod date range.
+	 * @return	string	mod date range.
 	 */
 	function getModDateRange() {
 		if (!isset($this->element_array))
@@ -563,9 +563,9 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *	getOpenDateRange - get the range of dates to include in a query
+	 * getOpenDateRange - get the range of dates to include in a query
 	 *
-	 *	@return	string	Open date range.
+	 * @return	string	Open date range.
 	 */
 	function getOpenDateRange() {
 		if (!isset($this->element_array))
@@ -578,9 +578,9 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *	getCloseDateRange - get the range of dates to include in a query
+	 * getCloseDateRange - get the range of dates to include in a query
 	 *
-	 *	@return	string	Close date range.
+	 * @return	string	Close date range.
 	 */
 	function getCloseDateRange() {
 		if (!isset($this->element_array))
@@ -593,9 +593,9 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *	getSummary - get the summary string to include in a query
+	 * getSummary - get the summary string to include in a query
 	 *
-	 *	@return	string	Summary string.
+	 * @return	string	Summary string.
 	 */
 	function getSummary() {
 		if (!isset($this->element_array[ARTIFACT_QUERY_SUMMARY][0])) {
@@ -605,9 +605,9 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *	getDescription - get the description string to include in a query
+	 * getDescription - get the description string to include in a query
 	 *
-	 *	@return	string	Description string.
+	 * @return	string	Description string.
 	 */
 	function getDescription() {
 		if (!isset($this->element_array[ARTIFACT_QUERY_DESCRIPTION][0])) {
@@ -617,9 +617,9 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *	getFollowups - get the followups string to include in a query
+	 * getFollowups - get the followups string to include in a query
 	 *
-	 *	@return	string	Folowups string.
+	 * @return	string	Folowups string.
 	 */
 	function getFollowups() {
 		if (!isset($this->element_array[ARTIFACT_QUERY_FOLLOWUPS][0])) {
@@ -629,9 +629,9 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *	getAssignee
+	 * getAssignee
 	 *
-	 *	@return	string	Assignee ID
+	 * @return	string	Assignee ID
 	 */
 	function getAssignee() {
 		if (!isset($this->element_array[ARTIFACT_QUERY_ASSIGNEE]))
@@ -640,9 +640,9 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *	getSubmitter
+	 * getSubmitter
 	 *
-	 *	@return	string	Submitter ID
+	 * @return	string	Submitter ID
 	 */
 	function getSubmitter() {
 		if (!isset($this->element_array[ARTIFACT_QUERY_SUBMITTER]))
@@ -651,9 +651,9 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *	getStatus
+	 * getStatus
 	 *
-	 *	@return	string	Status ID
+	 * @return	string	Status ID
 	 */
 	function getStatus() {
 		if (!isset($this->element_array))
@@ -662,9 +662,9 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *	getExtraFields - complex multi-dimensional array of extra field IDs/Vals
+	 * getExtraFields - complex multi-dimensional array of extra field IDs/Vals
 	 *
-	 *	@return	array	Complex Array
+	 * @return	array	Complex Array
 	 */
 	function getExtraFields() {
 		if (!isset($this->element_array))
@@ -678,8 +678,8 @@ class ArtifactQuery extends Error {
 	/**
 	 * validateDateRange - validate a date range in this format '1999-05-01 1999-06-01'.
 	 *
-	 * @param string $daterange A range of two dates (1999-05-01 1999-06-01)
-	 * @return bool true/false.
+	 * @param	string	$daterange A range of two dates (1999-05-01 1999-06-01)
+	 * @return	bool	true/false.
 	 */
 	function validateDateRange(&$daterange) {
 		if(! preg_match('/([0-9]{4})-[0-9]{2}-[0-9]{2} ([0-9]{4})-[0-9]{2}-[0-9]{2}/', $daterange, $matches)) {
@@ -698,25 +698,25 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *  update - update a row in the table used to query names
-	 *  for a tracker.
+	 * update - update a row in the table used to query names
+	 * for a tracker.
 	 *
-	 * @param        $name
-	 * @param        $status
-	 * @param        $assignee
-	 * @param        $moddaterange
-	 * @param        $sort_col
-	 * @param        $sort_ord
-	 * @param        $extra_fields
-	 * @param string $opendaterange
-	 * @param string $closedaterange
-	 * @param        $summary
-	 * @param        $description
-	 * @param        $followups
-	 * @param int    $query_type      Id of the saved query
-	 * @param array  $query_options
-	 * @param string $submitter
-	 * @return bool success.
+	 * @param	$name
+	 * @param	$status
+	 * @param	$assignee
+	 * @param	$moddaterange
+	 * @param	$sort_col
+	 * @param	$sort_ord
+	 * @param	$extra_fields
+	 * @param	string		$opendaterange
+	 * @param	string		$closedaterange
+	 * @param	$summary
+	 * @param	 $description
+	 * @param	$followups
+	 * @param	int		$query_type	Id of the saved query
+	 * @param	array		$query_options
+	 * @param	string	$submitter
+	 * @return	bool		success.
 	 */
 	function update($name,$status,$assignee,$moddaterange,$sort_col,$sort_ord,$extra_fields,$opendaterange='',$closedaterange='',
 		$summary,$description,$followups,$query_type=0,$query_options=array(),$submitter='') {
@@ -773,9 +773,9 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *  makeDefault - set this as the default query
+	 * makeDefault - set this as the default query
 	 *
-	 *  @return	boolean	success.
+	 * @return	boolean	success.
 	 */
 	function makeDefault() {
 		if (!session_loggedin()) {
@@ -787,9 +787,9 @@ class ArtifactQuery extends Error {
 	}
 
 	/**
-	 *  delete - delete query
+	 * delete - delete query
 	 *
-	 *  @return	boolean	success.
+	 * @return	boolean	success.
 	 */
 	function delete() {
 		if (forge_check_perm ('tracker', $this->ArtifactType->getID(), 'manager')) {
@@ -818,8 +818,8 @@ class ArtifactQuery extends Error {
 	/**
 	 * Exist - check if already exist a query with the same name , user_id and artifact_id
 	 *
-	 * @param string $name Name of query
-	 * @return bool true if query already exists
+	 * @param	string	$name	Name of query
+	 * @return	bool	true if query already exists
 	 */
 	function Exist($name) {
 		$user_id = user_getid();

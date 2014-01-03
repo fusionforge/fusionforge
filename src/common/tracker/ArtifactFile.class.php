@@ -27,9 +27,9 @@ require_once $gfcommon.'include/Error.class.php';
 /**
 * Factory method which creates an ArtifactFile from an artifactFile ID
 *
-* @param int        $artifact_file_id The artifactFile ID
-* @param array|bool $data             The result array, if it's passed in
-* @return Artifact object
+* @param	int		$artifact_file_id	The artifactFile ID
+* @param	array|bool	$data			The result array, if it's passed in
+* @return	Artifact	object
 */
 function &artifactfile_get_object($artifact_file_id,$data=false) {
 	global $ARTIFACTFILE_OBJ;
@@ -57,22 +57,22 @@ class ArtifactFile extends Error {
 	/**
 	 * The artifact object.
 	 *
-	 * @var		object	$Artifact.
+	 * @var	object	$Artifact.
 	 */
 	var $Artifact; //object
 
 	/**
 	 * Array of file data
 	 *
-	 * @var		array	$data_array
+	 * @var	array	$data_array
 	 */
 	var $data_array;
 
 	/**
 	 *  __construct - ArtifactFile constructor.
 	 *
-	 * @param Artifact   $Artifact The Artifact object.
-	 * @param array|bool $data     (all fields from artifact_file_user_vw) OR id from database.
+	 * @param	Artifact	$Artifact	The Artifact object.
+	 * @param	array|bool	$data		(all fields from artifact_file_user_vw) OR id from database.
 	 */
 	function __construct(&$Artifact, $data=false) {
 		$this->Error();
@@ -99,16 +99,16 @@ class ArtifactFile extends Error {
 	}
 
 	/**
-	 *	create - create a new item in the database.
+	 * create - create a new item in the database.
 	 *
-	 *	@param	string	$filename Filename of the item.
-	 *	@param	string	$filetype filetype.
-	 *	@param	string	$filesize filesize.
-	 *	@param	string	$file file to store.
-	 *	@param	string	$description Description.
-	 *	@param	array	$importData Array of data to change submitter and time of submit like:
-	 *                  array('user' => 127, 'time' => 1234556789)
-	 *	@return int|bool Identifier on success / false on failure.
+	 * @param	string	$filename	Filename of the item.
+	 * @param	string	$filetype	filetype.
+	 * @param	string	$filesize	filesize.
+	 * @param	string	$file		file to store.
+	 * @param	string	$description	Description.
+	 * @param	array	$importData	Array of data to change submitter and time of submit like:
+	 *						array('user' => 127, 'time' => 1234556789)
+	 * @return	int|bool		Identifier on success / false on failure.
 	 */
 	function create($filename, $filetype, $filesize, $file, $description='None', $importData = array()) {
 		// Some browsers don't supply mime type if they don't know it
@@ -195,9 +195,9 @@ class ArtifactFile extends Error {
 	}
 
 	/**
-	 *	delete - delete this artifact file from the db.
+	 * delete - delete this artifact file from the db.
 	 *
-	 *	@return	boolean	success.
+	 * @return	boolean	success.
 	 */
 	function delete() {
 		if (!forge_check_perm ('tracker', $this->Artifact->ArtifactType->getID(), 'tech')) {
@@ -218,10 +218,10 @@ class ArtifactFile extends Error {
 	}
 
 	/**
-	 *	fetchData - re-fetch the data for this ArtifactFile from the database.
+	 * fetchData - re-fetch the data for this ArtifactFile from the database.
 	 *
-	 *	@param	int	$id The file_id.
-	 *	@return	boolean	success.
+	 * @param	int	$id	The file_id.
+	 * @return	boolean	success.
 	 */
 	function fetchData($id) {
 		$res = db_query_params ('SELECT * FROM artifact_file_user_vw WHERE id=$1',
@@ -236,108 +236,108 @@ class ArtifactFile extends Error {
 	}
 
 	/**
-	 *	getArtifact - get the Artifact Object this ArtifactFile is associated with.
+	 * getArtifact - get the Artifact Object this ArtifactFile is associated with.
 	 *
-	 *	@return object	Artifact.
+	 * @return	object	Artifact.
 	 */
 	function &getArtifact() {
 		return $this->Artifact;
 	}
 
 	/**
-	 *	getID - get this ArtifactFile's ID.
+	 * getID - get this ArtifactFile's ID.
 	 *
-	 *	@return	int	The id #.
+	 * @return	int	The id #.
 	 */
 	function getID() {
 		return $this->data_array['id'];
 	}
 
 	/**
-	 *	getName - get the filename.
+	 * getName - get the filename.
 	 *
-	 *	@return string filename.
+	 * @return	string	filename.
 	 */
 	function getName() {
 		return $this->data_array['filename'];
 	}
 
 	/**
-	 *	getType - get the type.
+	 * getType - get the type.
 	 *
-	 *	@return string type.
+	 * @return	string	type.
 	 */
 	function getType() {
 		return $this->data_array['filetype'];
 	}
 
 	/**
-	 *	getData - return the content of the attached file.
+	 * getData - return the content of the attached file.
 	 *
-	 *	@return string content of file.
+	 * @return	string	content of file.
 	 */
 	function getData() {
 		return file_get_contents($this->getFile());
 	}
 
 	/**
-	 *	getFile - get the file.
+	 * getFile - get the file.
 	 *
-	 *	@return string full pathname of file in storage.
+	 * @return	string	full pathname of file in storage.
 	 */
 	function getFile() {
 		return ArtifactStorage::instance()->get($this->getID());
 	}
 
 	/**
-	 *	getSize - get the size.
+	 * getSize - get the size.
 	 *
-	 *	@return int size.
+	 * @return	int	size.
 	 */
 	function getSize() {
 		return $this->data_array['filesize'];
 	}
 
 	/**
-	 *	getDescription - get the description.
+	 * getDescription - get the description.
 	 *
-	 *	@return string description.
+	 * @return	string	description.
 	 */
 	function getDescription() {
 		return $this->data_array['description'];
 	}
 
 	/**
-	 *	getDate - get the date file was added.
+	 * getDate - get the date file was added.
 	 *
-	 *	@return int unix time.
+	 * @return	int	unix time.
 	 */
 	function getDate() {
 		return $this->data_array['adddate'];
 	}
 
 	/**
-	 *	getSubmittedBy - get the user_id of the submitter.
+	 * getSubmittedBy - get the user_id of the submitter.
 	 *
-	 *	@return int user_id.
+	 * @return	int	user_id.
 	 */
 	function getSubmittedBy() {
 		return $this->data_array['submitted_by'];
 	}
 
 	/**
-	 *	getSubmittedRealName - get the real name of the submitter.
+	 * getSubmittedRealName - get the real name of the submitter.
 	 *
-	 *	@return	string	name.
+	 * @return	string	name.
 	 */
 	function getSubmittedRealName() {
 		return $this->data_array['realname'];
 	}
 
 	/**
-	 *	getSubmittedUnixName - get the unix name of the submitter.
+	 * getSubmittedUnixName - get the unix name of the submitter.
 	 *
-	 *	@return	string	unixname.
+	 * @return	string	unixname.
 	 */
 	function getSubmittedUnixName() {
 		return $this->data_array['user_name'];

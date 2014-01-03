@@ -54,83 +54,83 @@ require_once $gfcommon.'tracker/ArtifactStorage.class.php';
 // user response
 define('ARTIFACT_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');
 
-	/**
-	*	Factory method which creates an Artifact from an artifact ID
-	*
-	*	@param int        $artifact_id The artifact ID
-	*	@param array|bool $data        The result array, if it's passed in
-	*	@return	Artifact	Artifact object
-	*/
-	function &artifact_get_object($artifact_id,$data=false) {
-		global $ARTIFACT_OBJ;
-		if (!isset($ARTIFACT_OBJ["_".$artifact_id."_"])) {
-			if ($data) {
-				//the db result handle was passed in
-			} else {
-				$res = db_query_params ('SELECT * FROM artifact_vw WHERE artifact_id=$1',
-							array ($artifact_id)) ;
-				if (db_numrows($res) <1 ) {
-					$ARTIFACT_OBJ["_".$artifact_id."_"]=false;
-					return false;
-				}
-				$data = db_fetch_array($res);
+/**
+* Factory method which creates an Artifact from an artifact ID
+*
+* @param	int		$artifact_id	The artifact ID
+* @param	array|bool	$data		The result array, if it's passed in
+* @return	Artifact	Artifact object
+*/
+function &artifact_get_object($artifact_id,$data=false) {
+	global $ARTIFACT_OBJ;
+	if (!isset($ARTIFACT_OBJ["_".$artifact_id."_"])) {
+		if ($data) {
+			//the db result handle was passed in
+		} else {
+			$res = db_query_params ('SELECT * FROM artifact_vw WHERE artifact_id=$1',
+						array ($artifact_id)) ;
+			if (db_numrows($res) <1 ) {
+				$ARTIFACT_OBJ["_".$artifact_id."_"]=false;
+				return false;
 			}
-			$ArtifactType =& artifactType_get_object($data["group_artifact_id"]);
-			$ARTIFACT_OBJ["_".$artifact_id."_"]= new Artifact($ArtifactType,$data);
+			$data = db_fetch_array($res);
 		}
-		return $ARTIFACT_OBJ["_".$artifact_id."_"];
+		$ArtifactType =& artifactType_get_object($data["group_artifact_id"]);
+		$ARTIFACT_OBJ["_".$artifact_id."_"]= new Artifact($ArtifactType,$data);
 	}
+	return $ARTIFACT_OBJ["_".$artifact_id."_"];
+}
 
 class Artifact extends Error {
 
 	/**
 	 * Resource ID.
 	 *
-	 * @var		int		$status_res.
+	 * @var	int	$status_res.
 	 */
 	var $status_res;
 
 	/**
 	 * Artifact Type object.
 	 *
-	 * @var		object	$ArtifactType.
+	 * @var	object	$ArtifactType.
 	 */
 	var $ArtifactType;
 
 	/**
 	 * Array of artifact data.
 	 *
-	 * @var		array	$data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
 	/**
 	 * Array of artifact data for extra fields defined by Admin.
 	 *
-	 * @var		array	$extra_field_data.
+	 * @var	array	$extra_field_data.
 	 */
 	var $extra_field_data;
 
 	/**
 	 * Array of ArtifactFile objects.
 	 *
-	 * @var		array	$files
+	 * @var	array	$files
 	 */
 	var $files;
 
 	/**
 	 * Database result set of related tasks
 	 *
-	 * @var     result $relatedtasks
+	 * @var	result	$relatedtasks
 	 */
 	var $relatedtasks;
 
 	/**
-	 *  Artifact - constructor.
+	 * Artifact - constructor.
 	 *
-	 * @param ArtifactType $ArtifactType The ArtifactType object.
-	 * @param int|bool     $data         (primary key from database OR complete assoc array)
-	 *                                   ONLY OPTIONAL WHEN YOU PLAN TO IMMEDIATELY CALL ->create()
+	 * @param	ArtifactType	$ArtifactType	The ArtifactType object.
+	 * @param	int|bool	$data		(primary key from database OR complete assoc array)
+	 *						ONLY OPTIONAL WHEN YOU PLAN TO IMMEDIATELY CALL ->create()
 	 */
 	function __construct(&$ArtifactType, $data=false) {
 		$this->Error();
@@ -165,16 +165,16 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	create - construct a new Artifact in the database.
+	 * create - construct a new Artifact in the database.
 	 *
-	 *	@param	string	$summary      The artifact summary.
-	 *	@param	string	$details      Details of the artifact.
-	 *	@param	int		$assigned_to  The ID of the user to which this artifact is to be assigned.
-	 *	@param	int		$priority     The artifacts priority.
-	 *	@param	array	$extra_fields Array of extra fields like: array(15=>'foobar',22=>'1');
-	 *	@param	array	$importData   Array of data to change submitter and time of submit like:
-	 *                                array('user' => 127, 'time' => 1234556789)
-	 *  @return bool id on success / false on failure.
+	 * @param	string	$summary	The artifact summary.
+	 * @param	string	$details	Details of the artifact.
+	 * @param	int	$assigned_to	The ID of the user to which this artifact is to be assigned.
+	 * @param	int	$priority	The artifacts priority.
+	 * @param	array	$extra_fields	Array of extra fields like: array(15=>'foobar',22=>'1');
+	 * @param	array	$importData	Array of data to change submitter and time of submit like:
+	 *						array('user' => 127, 'time' => 1234556789)
+	 * @return	bool	id on success / false on failure.
 	 */
 	function create( $summary, $details, $assigned_to=100, $priority=3, $extra_fields=array(), $importData = array()) {
 		//
@@ -287,10 +287,10 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	fetchData - re-fetch the data for this Artifact from the database.
+	 * fetchData - re-fetch the data for this Artifact from the database.
 	 *
-	 *	@param	int		$artifact_id The artifact ID.
-	 *	@return	boolean	success.
+	 * @param	int	$artifact_id	The artifact ID.
+	 * @return	boolean	success.
 	 */
 	function fetchData($artifact_id) {
 		$res = db_query_params ('SELECT * FROM artifact_vw WHERE artifact_id=$1 AND group_artifact_id=$2',
@@ -306,54 +306,54 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	getArtifactType - get the ArtifactType Object this Artifact is associated with.
+	 * getArtifactType - get the ArtifactType Object this Artifact is associated with.
 	 *
-	 *	@return object	ArtifactType.
+	 * @return	object	ArtifactType.
 	 */
 	function &getArtifactType() {
 		return $this->ArtifactType;
 	}
 
 	/**
-	 *	getID - get this ArtifactID.
+	 * getID - get this ArtifactID.
 	 *
-	 *	@return	int	The artifact_id #.
+	 * @return	int	The artifact_id #.
 	 */
 	function getID() {
 		return $this->data_array['artifact_id'];
 	}
 
 	/**
-	 *	getStringID - get a string display for this ArtifactID.
+	 * getStringID - get a string display for this ArtifactID.
 	 *
-	 *	@return	string	The artifact_id #.
+	 * @return	string	The artifact_id #.
 	 */
 	function getStringID() {
 		return '[#'.$this->data_array['artifact_id'].']';
 	}
 
 	/**
-	 *	getStatusID - get open/closed/deleted flag.
+	 * getStatusID - get open/closed/deleted flag.
 	 *
-	 *	@return	int	Status: (1) Open, (2) Closed, (3) Deleted.
+	 * @return	int	Status: (1) Open, (2) Closed, (3) Deleted.
 	 */
 	function getStatusID() {
 		return $this->data_array['status_id'];
 	}
 
 	/**
-	 *	getStatusName - get open/closed/deleted text.
+	 * getStatusName - get open/closed/deleted text.
 	 *
-	 *	@return	string	The status name.
+	 * @return	string	The status name.
 	 */
 	function getStatusName() {
 		return $this->data_array['status_name'];
 	}
 
 	/**
-	 *	getCustomStatusName - get custom status value text.
+	 * getCustomStatusName - get custom status value text.
 	 *
-	 *	@return	string	The custom status name.
+	 * @return	string	The custom status name.
 	 */
 	function getCustomStatusName() {
 		$custom_status_id = $this->ArtifactType->getCustomStatusField();
@@ -369,136 +369,136 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	getPriority - get priority flag.
+	 * getPriority - get priority flag.
 	 *
-	 *	@return int priority.
+	 * @return	int	priority.
 	 */
 	function getPriority() {
 		return $this->data_array['priority'];
 	}
 
 	/**
-	 *	getSubmittedBy - get ID of submitter.
+	 * getSubmittedBy - get ID of submitter.
 	 *
-	 *	@return int user_id of submitter.
+	 * @return	int	user_id of submitter.
 	 */
 	function getSubmittedBy() {
 		return $this->data_array['submitted_by'];
 	}
 
 	/**
-	 *	getSubmittedEmail - get email of submitter.
+	 * getSubmittedEmail - get email of submitter.
 	 *
-	 *	@return	string	The email of submitter.
+	 * @return	string	The email of submitter.
 	 */
 	function getSubmittedEmail() {
 		return $this->data_array['submitted_email'];
 	}
 
 	/**
-	 *	getSubmittedRealName - get real name of submitter.
+	 * getSubmittedRealName - get real name of submitter.
 	 *
-	 *	@return	string	The real name of submitter.
+	 * @return	string	The real name of submitter.
 	 */
 	function getSubmittedRealName() {
 		return $this->data_array['submitted_realname'];
 	}
 
 	/**
-	 *	getSubmittedUnixName - get login name of submitter.
+	 * getSubmittedUnixName - get login name of submitter.
 	 *
-	 *	@return	string	The unix name of submitter.
+	 * @return	string	The unix name of submitter.
 	 */
 	function getSubmittedUnixName() {
 		return $this->data_array['submitted_unixname'];
 	}
 
 	/**
-	 *	getAssignedTo - get ID of assignee.
+	 * getAssignedTo - get ID of assignee.
 	 *
-	 *	@return int user_id of assignee.
+	 * @return	int	user_id of assignee.
 	 */
 	function getAssignedTo() {
 		return $this->data_array['assigned_to'];
 	}
 
 	/**
-	 *	getAssignedEmail - get email of assignee.
+	 * getAssignedEmail - get email of assignee.
 	 *
-	 *	@return	string	The email of assignee.
+	 * @return	string	The email of assignee.
 	 */
 	function getAssignedEmail() {
 		return $this->data_array['assigned_email'];
 	}
 
 	/**
-	 *	getAssignedRealName - get real name of assignee.
+	 * getAssignedRealName - get real name of assignee.
 	 *
-	 *	@return	string	The real name of assignee.
+	 * @return	string	The real name of assignee.
 	 */
 	function getAssignedRealName() {
 		return $this->data_array['assigned_realname'];
 	}
 
 	/**
-	 *	getAssignedUnixName - get login name of assignee.
+	 * getAssignedUnixName - get login name of assignee.
 	 *
-	 *	@return	string	The unix name of assignee.
+	 * @return	string	The unix name of assignee.
 	 */
 	function getAssignedUnixName() {
 		return $this->data_array['assigned_unixname'];
 	}
 
 	/**
-	 *	getOpenDate - get unix time of creation.
+	 * getOpenDate - get unix time of creation.
 	 *
-	 *	@return int unix time.
+	 * @return	int	unix time.
 	 */
 	function getOpenDate() {
 		return $this->data_array['open_date'];
 	}
 
 	/**
-	 *	getCloseDate - get unix time of closure.
+	 * getCloseDate - get unix time of closure.
 	 *
-	 *	@return int unix time.
+	 * @return	int	unix time.
 	 */
 	function getCloseDate() {
 		return $this->data_array['close_date'];
 	}
 
 	/**
-	 *	  getLastModifiedDate - the last_modified_date of this task.
+	 * getLastModifiedDate - the last_modified_date of this task.
 	 *
-	 *	  @return int	 the last_modified_date.
+	 * @return	int	 the last_modified_date.
 	 */
 	function getLastModifiedDate() {
 		return $this->data_array['last_modified_date'];
 	}
 
 	/**
-	 *	getSummary - get text summary of artifact.
+	 * getSummary - get text summary of artifact.
 	 *
-	 *	@return	string The summary (subject).
+	 * @return	string	The summary (subject).
 	 */
 	function getSummary() {
 		return $this->data_array['summary'];
 	}
 
 	/**
-	 *	getDetails - get text body (message) of artifact.
+	 * getDetails - get text body (message) of artifact.
 	 *
-	 *	@return	string	The body (message).
+	 * @return	string	The body (message).
 	 */
 	function getDetails() {
 		return $this->data_array['details'];
 	}
 
 	/**
-	 *  delete - delete this tracker and all its related data.
+	 * delete - delete this tracker and all its related data.
 	 *
-	 *  @param  bool $sure I'm Sure.
-	 *  @return bool true/false;
+	 * @param	bool	$sure I'm Sure.
+	 * @return	bool	true/false;
 	 */
 	function delete($sure) {
 		if (!$sure) {
@@ -590,9 +590,9 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *  setMonitor - user can monitor this artifact.
+	 * setMonitor - user can monitor this artifact.
 	 *
-	 *  @return bool Always false - always use the getErrorMessage() for feedback
+	 * @return	bool	Always false - always use the getErrorMessage() for feedback
 	 */
 	function setMonitor() {
 		if (session_loggedin()) {
@@ -642,9 +642,9 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *  getMonitorIds - array of email addresses monitoring this Artifact.
+	 * getMonitorIds - array of email addresses monitoring this Artifact.
 	 *
-	 *  @return array of email addresses monitoring this Artifact.
+	 * @return	array of email addresses monitoring this Artifact.
 	 */
 	function getMonitorIds() {
 		$res = db_query_params ('SELECT user_id	FROM artifact_monitor WHERE artifact_id=$1',
@@ -653,9 +653,9 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	getHistory - returns a result set of audit trail for this support request.
+	 * getHistory - returns a result set of audit trail for this support request.
 	 *
-	 *	@return resource result set.
+	 * @return	resource result set.
 	 */
 	function getHistory() {
 		return db_query_params ('SELECT * FROM artifact_history_user_vw WHERE artifact_id=$1 ORDER BY entrydate DESC, id ASC',
@@ -663,10 +663,10 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *    getMessages - get the list of messages attached to this artifact.
+	 * getMessages - get the list of messages attached to this artifact.
 	 *
-	 * @param string $order
-	 * @return resource result set.
+	 * @param	string		$order
+	 * @return	resource	result set.
 	 */
 	function getMessages($ascending='up') {
 		/*
@@ -691,11 +691,11 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	getMessage - get a message attached to this artifact.
+	 * getMessage - get a message attached to this artifact.
 	 *
-	 * @param    int    $msg_id id of the message.
-	 * @access public
-	 * @return resource	database result set.
+	 * @param	int		$msg_id id of the message.
+	 * @access	public
+	 * @return	resource	database result set.
 	 */
 	function getMessage($msg_id) {
 		if (!$msg_id) {
@@ -706,9 +706,9 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	getMessageObjects - get an array of message objects.
+	 * getMessageObjects - get an array of message objects.
 	 *
-	 *	@return array Of ArtifactMessage objects.
+	 * @return	array Of ArtifactMessage objects.
 	 */
 	function &getMessageObjects() {
 		$res=$this->getMessages();
@@ -721,9 +721,9 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	getFiles - get array of ArtifactFile's.
+	 * getFiles - get array of ArtifactFile's.
 	 *
-	 *	@return array of ArtifactFile's.
+	 * @return	array of ArtifactFile's.
 	 */
 	function &getFiles() {
 		if (!isset($this->files)) {
@@ -746,7 +746,7 @@ class Artifact extends Error {
 	/**
 	 * getRelatedTasks - get array of related tasks
 	 *
-	 * @return resource Database result set
+	 * @return	resource	Database result set
 	 */
 	function getRelatedTasks() {
 		if (!$this->relatedtasks) {
@@ -763,12 +763,12 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *  addMessage - attach a text message to this Artifact.
+	 * addMessage - attach a text message to this Artifact.
 	 *
-	 * @param string $body          The $string message being attached.
-	 * @param bool   $by            Email $string address of message creator.
-	 * @param bool   $send_followup Whether $bool to email out a followup.
-	 * @return bool success.
+	 * @param	string	$body		The $string message being attached.
+	 * @param	bool	$by		Email $string address of message creator.
+	 * @param	bool	$send_followup	Whether $bool to email out a followup.
+	 * @return	bool	success.
 	 */
 	function addMessage($body,$by=false,$send_followup=false) {
 		if (!$body) {
@@ -814,14 +814,14 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *  addHistory - add an entry to audit trail.
+	 * addHistory - add an entry to audit trail.
 	 *
-	 *  @param	string	$field_name The name of the field in the database being modified.
-	 *  @param	string	$old_value  The former value of this field.
-	 *  @param  array   $importData Array of data to change submitter and time of submit like:
-	 *                              array('user' => 127, 'time' => 1234556789)
-	 *  @access private
-	 *  @return	boolean	success.
+	 * @param	string	$field_name	The name of the field in the database being modified.
+	 * @param	string	$old_value	The former value of this field.
+	 * @param	array	$importData	Array of data to change submitter and time of submit like:
+	 *						array('user' => 127, 'time' => 1234556789)
+	 * @access	private
+	 * @return	boolean	success.
 	 */
 	function addHistory($field_name,$old_value, $importData = array()) {
 		if (array_key_exists('user', $importData)){
@@ -847,12 +847,12 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *      setStatus - set the status of this artifact.
+	 * setStatus - set the status of this artifact.
 	 *
-	 *      @param  int             The artifact status ID.
-	 *      @param  int             Closing date if status = 1
+	 * @param	int	The artifact status ID.
+	 * @param	int	Closing date if status = 1
 	 *
-	 *      @return boolean success.
+	 * @return	boolean	success.
 	 */
 	function setStatus($status_id, $closingTime=False) {
 		db_begin();
@@ -883,18 +883,18 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	update - update the fields in this artifact.
+	 * update - update the fields in this artifact.
 	 *
-	 *	@param	int		$priority             The artifact priority.
-	 *	@param	int		$status_id            The artifact status ID.
-	 *	@param	int		$assigned_to          The person to which this artifact is to be assigned.
-	 *	@param	string	$summary              The artifact summary.
-	 *	@param	int		$canned_response      The canned response.
-	 *	@param	string	$details              Attaching another comment.
-	 *	@param	int		$new_artifact_type_id Allows you to move an artifact to another type.
-	 *	@param	array	$extra_fields         Array of extra fields like: array(15=>'foobar',22=>'1');
-	 *  @param  string  $description          The description.
-	 *	@return	boolean	success.
+	 * @param	int	$priority		The artifact priority.
+	 * @param	int	$status_id		The artifact status ID.
+	 * @param	int	$assigned_to		The person to which this artifact is to be assigned.
+	 * @param	string	$summary		The artifact summary.
+	 * @param	int	$canned_response	The canned response.
+	 * @param	string	$details		Attaching another comment.
+	 * @param	int	$new_artifact_type_id	Allows you to move an artifact to another type.
+	 * @param	array	$extra_fields		Array of extra fields like: array(15=>'foobar',22=>'1');
+	 * @param	string  $description		The description.
+	 * @return	boolean	success.
 	 */
 	function update($priority,$status_id,
 		$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,
@@ -1202,9 +1202,9 @@ class Artifact extends Error {
 	}
 
 	/**
-	 * 	updateLastModifiedDate - update the last_modified_date attribute of this artifact.
+	 * updateLastModifiedDate - update the last_modified_date attribute of this artifact.
 	 *
-	 *	@return bool true on success / false on failure
+	 * @return	bool	true on success / false on failure
 	 */
 	function updateLastModifiedDate() {
 		$res = db_query_params ('UPDATE artifact SET last_modified_date=EXTRACT(EPOCH FROM now())::integer WHERE artifact_id=$1',
@@ -1213,9 +1213,9 @@ class Artifact extends Error {
 	}
 
 	/**
-	 * 	assignToMe - assigns this artifact to current user
+	 * assignToMe - assigns this artifact to current user
 	 *
-	 *	@return bool true on success / false on failure
+	 * @return	bool	true on success / false on failure
 	 */
 	function assignToMe() {
 		if (!session_loggedin() || !($this->ArtifactType->userIsAdmin() || $this->ArtifactType->userIsTechnician())) {
@@ -1236,12 +1236,12 @@ class Artifact extends Error {
 	}
 
 	/**
-	 * 	updateExtraFields - updates the extra data elements for this artifact
-	 *	e.g. the extra fields created and defined by the admin.
+	 * updateExtraFields - updates the extra data elements for this artifact
+	 * e.g. the extra fields created and defined by the admin.
 	 *
-	 *	@param	array	Array of extra fields like: array(15=>'foobar',22=>'1');
-	 *	@param	array	Array where changes to the extra fields should be logged
-	 *	@return bool true on success / false on failure
+	 * @param	array	Array of extra fields like: array(15=>'foobar',22=>'1');
+	 * @param	array	Array where changes to the extra fields should be logged
+	 * @return	bool	true on success / false on failure
 	 */
 	function updateExtraFields($extra_fields,&$changes){
 /*
@@ -1507,9 +1507,9 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	getExtraFieldData - get an array of data for the extra fields associated with this artifact
+	 * getExtraFieldData - get an array of data for the extra fields associated with this artifact
 	 *
-	 *	@return	array	array of data
+	 * @return	array	array of data
 	 */
 	function &getExtraFieldData() {
 		if (!isset($this->extra_field_data)) {
@@ -1534,7 +1534,7 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	marker - adds the > symbol to fields that have been modified for the email message
+	 * marker - adds the > symbol to fields that have been modified for the email message
 	 *
 	 *
 	 */
@@ -1549,14 +1549,14 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	mailFollowupEx - send out an email update for this artifact.
+	 * mailFollowupEx - send out an email update for this artifact.
 	 *
-	 *	@param	time_t	Time of the change
-	 *	@param	int		(1) initial/creation (2) update.
-	 *	@param	array	Array of additional addresses to mail to.
-	 *	@param	array	Array of fields changed in this update .
-	 *	@access private
-	 *	@return	boolean	success.
+	 * @param	time_t	Time of the change
+	 * @param	int	(1) initial/creation (2) update.
+	 * @param	array	Array of additional addresses to mail to.
+	 * @param	array	Array of fields changed in this update .
+	 * @access	private
+	 * @return	boolean	success.
 	 */
 	function mailFollowupEx($tm, $type, $more_addresses = false, $changes='') {
 
@@ -1734,8 +1734,8 @@ class Artifact extends Error {
 	/**
 	* getExtraFieldDataText - Return the extra fields' data in a human-readable form.
 	*
-	* @return array Array containing field ID => field name and value associated to it for
-	*	this artifact
+	* @return	array	Array containing field ID => field name and value associated to it for
+	*			this artifact
 	*/
 	function getExtraFieldDataText() {
 		// First we get the list of extra fields and the data

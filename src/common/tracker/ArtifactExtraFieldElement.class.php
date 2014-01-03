@@ -52,22 +52,22 @@ class ArtifactExtraFieldElement extends Error {
 	/**
 	 * The artifact type object.
 	 *
-	 * @var		object	$ArtifactExtraField.
+	 * @var	object	$ArtifactExtraField.
 	 */
 	var $ArtifactExtraField; //object
 
 	/**
 	 * Array of artifact data.
 	 *
-	 * @var		array	$data_array.
+	 * @var	array	$data_array.
 	 */
 	var $data_array;
 
 	/**
-	 *	__construct - Constructor
+	 * __construct - Constructor
 	 *
-	 *	@param	object	   $ArtifactExtraField ArtifactExtraField object.
-	 *  @param	array|bool $data               (all fields from artifact_file_user_vw) OR id from database.
+	 * @param	object		$ArtifactExtraField	ArtifactExtraField object.
+	 * @param	array|bool	$data			(all fields from artifact_file_user_vw) OR id from database.
 	 */
 	function __construct(&$ArtifactExtraField,$data=false) {
 		$this->Error();
@@ -94,15 +94,14 @@ class ArtifactExtraFieldElement extends Error {
 	}
 
 	/**
-	 *	create - create a new row in the table used to store the
-	 *	choices for selection boxes.  This function is only used for
-	 *	extra fields and boxes configured by the admin
+	 * create - create a new row in the table used to store the
+	 * choices for selection boxes.  This function is only used for
+	 * extra fields and boxes configured by the admin
 	 *
-	 *	@param	string	$name      Name of the choice
-	 *	@param	int	    $status_id Id the box that contains the choice (optional).
-	 *  @return bool	true on success / false on failure.
+	 * @param	string	$name		Name of the choice
+	 * @param	int	$status_id	Id the box that contains the choice (optional).
+	 * @return	bool	true on success / false on failure.
 	 */
-
 	function create($name,$status_id=0) {
 		//
 		//	data validation
@@ -162,10 +161,10 @@ class ArtifactExtraFieldElement extends Error {
 	}
 
 	/**
-	 *	fetchData - re-fetch the data for this ArtifactExtraFieldElement from the database.
+	 * fetchData - re-fetch the data for this ArtifactExtraFieldElement from the database.
 	 *
-	 *	@param	int		$id ID of the Box.
-	 *	@return	boolean	success.
+	 * @param	int	$id	ID of the Box.
+	 * @return	boolean	success.
 	 */
 	function fetchData($id) {
 		$res = db_query_params ('SELECT * FROM artifact_extra_field_elements WHERE element_id=$1',
@@ -180,58 +179,58 @@ class ArtifactExtraFieldElement extends Error {
 	}
 
 	/**
-	 *	getArtifactExtraField - get the ArtifactExtraField Object this ArtifactExtraField is associated with.
+	 * getArtifactExtraField - get the ArtifactExtraField Object this ArtifactExtraField is associated with.
 	 *
-	 *	@return object	ArtifactExtraField.
+	 * @return	object	ArtifactExtraField.
 	 */
 	function &getArtifactExtraField() {
 		return $this->ArtifactExtraField;
 	}
 
 	/**
-	 *	getID - get this ArtifactExtraField ID.
+	 * getID - get this ArtifactExtraField ID.
 	 *
-	 *	@return	int	The id #.
+	 * @return	int	The id #.
 	 */
 	function getID() {
 		return $this->data_array['element_id'];
 	}
 
 	/**
-	 *	getBoxID - get this  artifact box id.
+	 * getBoxID - get this  artifact box id.
 	 *
-	 *	@return	int	The id #.
+	 * @return	int	The id #.
 	 */
 	function getBoxID() {
 		return $this->data_array['extra_field_id'];
 	}
 
 	/**
-	 *	getName - get the name.
+	 * getName - get the name.
 	 *
-	 *	@return	string	The name.
+	 * @return	string	The name.
 	 */
 	function getName() {
 		return $this->data_array['element_name'];
 	}
 
 	/**
-	 *  getStatus - the status equivalent of this field (open or closed).
+	 * getStatus - the status equivalent of this field (open or closed).
 	 *
-	 *  @return int status.
+	 * @return	int	status.
 	 */
 	function getStatusID() {
 		return $this->data_array['status_id'];
 	}
 
 	/**
-	 *  update - update rows in the table used to store the choices
-	 *  for a selection box. This function is used only for extra
-	 *  boxes and fields configured by the admin
+	 * update - update rows in the table used to store the choices
+	 * for a selection box. This function is used only for extra
+	 * boxes and fields configured by the admin
 	 *
-	 *  @param	string	$name      Name of the choice in a box.
-	 *  @param  int     $status_id optional for status box - maps to either open/closed.
-	 *  @return	bool	success.
+	 * @param	string	$name		Name of the choice in a box.
+	 * @param	int	$status_id	optional for status box - maps to either open/closed.
+	 * @return	bool	success.
 	 */
 	function update($name,$status_id=0) {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactExtraField->ArtifactType->Group->getID())) {
@@ -273,9 +272,9 @@ class ArtifactExtraFieldElement extends Error {
 	}
 
 	/**
-	 *  delete - delete the current value.
+	 * delete - delete the current value.
 	 *
-	 *  @return	boolean	success.
+	 * @return	boolean	success.
 	 */
 	function delete() {
 		if (!forge_check_perm ('tracker_admin', $this->ArtifactExtraField->ArtifactType->Group->getID())) {
