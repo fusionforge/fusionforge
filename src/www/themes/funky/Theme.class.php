@@ -5,7 +5,7 @@
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010, Marc-Etienne Vargenau, Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2011-2013, Franck Villaume - TrivialDev
+ * Copyright 2011-2014, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -341,6 +341,11 @@ class Theme extends Layout {
 		$count  = count($title_arr) - 1;
 		$return = '';
 
+		if (!count($attr_arr)) {
+			for ($i=0; $i<count($title_arr); $i++) {
+				$attr_arr[] = NULL;
+			}
+		}
 		for ($i=0; $i<$count; $i++)
 			$return .= "<li><span>" . util_make_link($links_arr[$i], $title_arr[$i], $attr_arr[$i]) . "</span></li>";
 
