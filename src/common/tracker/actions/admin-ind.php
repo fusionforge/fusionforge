@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010, FusionForge Team
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012-2013, Franck Villaume - TrivialDev
+ * Copyright 2012-2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -134,10 +134,10 @@ if (forge_check_perm ('tracker_admin', $group->getID())) { ?>
 	<input type="hidden" name="add_at" value="y" />
 	<p>
 	<?php echo _('<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)') ?><br />
-	<input type="text" name="name" value="" /></p>
+	<input type="text" name="name" value="" required="required" /></p>
 	<p>
 	<strong><?php echo _('Description')._(':'); ?></strong><br />
-	<input type="text" name="description" value="" size="50" /></p>
+	<input type="text" name="description" value="" size="50" required="required" /></p>
 	<p>
 	<strong><?php echo _('Send email on new submission to address')._(':'); ?></strong><br />
 	<input type="text" name="email_address" value="" /></p>
