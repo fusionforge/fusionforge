@@ -6,6 +6,7 @@
  * Copyright 2010 (c) Fusionforge Team
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -395,9 +396,9 @@ class ArtifactTypeHtml extends ArtifactType {
 	/**
 	 * getRenderHTML
 	 *
-	 * @param array  $types
-	 * @param string $mode
-	 * @return string    HTML template.
+	 * @param	array	$types
+	 * @param	string	$mode
+	 * @return	string	HTML template.
 	 */
 	function getRenderHTML($types=array(), $mode='') {
 		// Use template only for the browse (not for query or mass update)
@@ -412,9 +413,9 @@ class ArtifactTypeHtml extends ArtifactType {
 	/**
 	 * generateRenderHTML
 	 *
-	 * @param array $types
-	 * @param string $mode Display mode (QUERY OR DISPLAY)
-	 * @return string HTML template.
+	 * @param	array	$types
+	 * @param	string	$mode	Display mode (QUERY OR DISPLAY)
+	 * @return	string	HTML template.
 	 */
 	function generateRenderHTML($types=array(), $mode) {
 		$efarr = $this->getExtraFields($types);
@@ -531,13 +532,13 @@ class ArtifactTypeHtml extends ArtifactType {
 	/**
 	 * renderSelect - this function builds pop up box with choices.
 	 *
-	 * @param int         $extra_field_id The ID of this field.
-	 * @param string      $checked        The item that should be checked
-	 * @param bool|string $show_100       Whether to show the '100 row'
-	 * @param string      $text_100       What to call the '100 row'
-	 * @param bool        $show_any
-	 * @param string      $text_any
-	 * @param bool        $allowed
+	 * @param	int		$extra_field_id	The ID of this field.
+	 * @param	string		$checked	The item that should be checked
+	 * @param	bool|string	$show_100	Whether to show the '100 row'
+	 * @param	string		$text_100	What to call the '100 row'
+	 * @param	bool		$show_any
+	 * @param	string		$text_any
+	 * @param	bool		$allowed
 	 * @return string HTML code for the box and choices
 	 */
 	function renderSelect ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any', $allowed=false) {
@@ -557,13 +558,13 @@ class ArtifactTypeHtml extends ArtifactType {
 	/**
 	 * renderRadio - this function builds radio buttons.
 	 *
-	 * @param int    $extra_field_id The $int ID of this field.
-	 * @param string $checked        The $string item that should be checked
-	 * @param bool   $show_100       Whether $string to show the '100 row'
-	 * @param string $text_100       What $string to call the '100 row'
-	 * @param bool   $show_any
-	 * @param string $text_any
-	 * @return string HTML code using radio buttons
+	 * @param	int	$extra_field_id	The $int ID of this field.
+	 * @param	string	$checked	The $string item that should be checked
+	 * @param	bool	$show_100	Whether $string to show the '100 row'
+	 * @param	string	$text_100	What $string to call the '100 row'
+	 * @param	bool	$show_any
+	 * @param	string	$text_any
+	 * @return	string	HTML code using radio buttons
 	 */
 	function renderRadio ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none',$show_any=false,$text_any='Any') {
 		$arr = $this->getExtraFieldElements($extra_field_id);
@@ -579,10 +580,10 @@ class ArtifactTypeHtml extends ArtifactType {
 	/**
 	 * renderCheckbox - this function builds checkboxes.
 	 *
-	 * @param int         $extra_field_id The ID of this field.
-	 * @param array       $checked        The items that should be checked
-	 * @param bool|string $show_100       Whether to show the '100 row'
-	 * @param string      $text_100       What to call the '100 row'
+	 * @param	int		$extra_field_id	The ID of this field.
+	 * @param	array		$checked	The items that should be checked
+	 * @param	bool|string	$show_100	Whether to show the '100 row'
+	 * @param	string		$text_100	What to call the '100 row'
 	 * @return string radio buttons
 	 */
 	function renderCheckbox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none') {
@@ -610,11 +611,11 @@ class ArtifactTypeHtml extends ArtifactType {
 	/**
 	 * renderMultiSelectBox - this function builds checkboxes.
 	 *
-	 * @param int         $extra_field_id The ID of this field.
-	 * @param array       $checked        The items that should be checked
-	 * @param bool|string $show_100       Whether to show the '100 row'
-	 * @param string      $text_100       What to call the '100 row'
-	 * @return string radio multiselectbox
+	 * @param	int		$extra_field_id	The ID of this field.
+	 * @param	array		$checked	The items that should be checked
+	 * @param	bool|string	$show_100	Whether to show the '100 row'
+	 * @param	string		$text_100	What to call the '100 row'
+	 * @return	string		radio multiselectbox
 	 */
 	function renderMultiSelectBox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none') {
 		if (!$checked) {
@@ -637,11 +638,11 @@ class ArtifactTypeHtml extends ArtifactType {
 	/**
 	 * renderTextField - this function builds a text field.
 	 *
-	 * @param int    $extra_field_id The ID of this field.
-	 * @param string $contents       The data for this field.
-	 * @param string $size
-	 * @param string $maxlength
-	 * @return string HTML code of corresponding input tag.
+	 * @param	int	$extra_field_id	The ID of this field.
+	 * @param	string	$contents	The data for this field.
+	 * @param	string	$size
+	 * @param	string	$maxlength
+	 * @return	string	HTML code of corresponding input tag.
 	 */
 	function renderTextField ($extra_field_id, $contents, $size, $maxlength) {
 		return '
@@ -651,11 +652,11 @@ class ArtifactTypeHtml extends ArtifactType {
 	/**
 	 * renderRelationField - this function builds a relation field.
 	 *
-	 * @param int    $extra_field_id The ID of this field.
-	 * @param string $contents       The data for this field.
-	 * @param string $size
-	 * @param string $maxlength
-	 * @return string text area and data.
+	 * @param	int	$extra_field_id	The ID of this field.
+	 * @param	string	$contents	The data for this field.
+	 * @param	string	$size
+	 * @param	string	$maxlength
+	 * @return	string	text area and data.
 	 */
 	function renderRelationField ($extra_field_id,$contents,$size,$maxlength) {
 		$arr = $this->getExtraFieldElements($extra_field_id);
@@ -675,11 +676,11 @@ class ArtifactTypeHtml extends ArtifactType {
 	/**
 	 * renderTextArea - this function builds a text area.
 	 *
-	 * @param int    $extra_field_id The ID of this field.
-	 * @param string $contents       The data for this field.
-	 * @param string $rows
-	 * @param string $cols
-	 * @return string text area and data.
+	 * @param	int	$extra_field_id	The ID of this field.
+	 * @param	string	$contents	The data for this field.
+	 * @param	string	$rows
+	 * @param	string	$cols
+	 * @return	string	text area and data.
 	 */
 	function renderTextArea ($extra_field_id,$contents,$rows,$cols) {
 		return '
@@ -748,7 +749,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 
 	/**
-	 *	statusBox - show the statuses - automatically shows the "custom statuses" if they exist
+	 * statusBox - show the statuses - automatically shows the "custom statuses" if they exist
 	 *
 	 *
 	 */
