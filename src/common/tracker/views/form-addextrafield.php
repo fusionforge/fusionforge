@@ -3,6 +3,7 @@
  * Tracker Facility
  *
  * Copyright 2010 (c) FusionForge Team
+ * Copyright 2014, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -110,7 +111,7 @@ if ($rows > 0) {
 		<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;atid='.$ath->getID(); ?>" method="post">
 		<p>
 		<input type="hidden" name="add_extrafield" value="y" />
-		<strong><?php echo _('Custom Field Name')._(':'); ?></strong><br />
+		<strong><?php echo _('Custom Field Name')._(':').utils_requiredField(); ?></strong><br />
 		<input type="text" name="name" value="" size="15" maxlength="30" required="required" />
 		</p>
 		<p>

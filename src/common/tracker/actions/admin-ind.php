@@ -133,10 +133,10 @@ if (forge_check_perm ('tracker_admin', $group->getID())) { ?>
 	<form action="<?php echo getStringFromServer('PHP_SELF').'?group_id='.$group_id; ?>" method="post">
 	<input type="hidden" name="add_at" value="y" />
 	<p>
-	<?php echo _('<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)') ?><br />
+	<?php echo _('<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)').utils_requiredField() ?><br />
 	<input type="text" name="name" value="" required="required" /></p>
 	<p>
-	<strong><?php echo _('Description')._(':'); ?></strong><br />
+	<strong><?php echo _('Description')._(':').utils_requiredField(); ?></strong><br />
 	<input type="text" name="description" value="" size="50" required="required" /></p>
 	<p>
 	<strong><?php echo _('Send email on new submission to address')._(':'); ?></strong><br />
