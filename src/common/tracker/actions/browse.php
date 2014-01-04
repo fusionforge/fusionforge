@@ -537,7 +537,7 @@ if ($art_arr && $art_cnt > 0) {
 		$check_all = '
 		<a href="javascript:checkAllArtifacts(1)">'._('Check all').'</a>
 		-
-  		<a href="javascript:checkAllArtifacts(0)">'._('Clear all').'</a>';
+		<a href="javascript:checkAllArtifacts(0)">'._('Clear all').'</a>';
 	}
 
 	$pager = '';
@@ -582,10 +582,10 @@ if ($art_arr && $art_cnt > 0) {
 	$then=(time()-$ath->getDuePeriod());
 
 	for ($i=$start; $i<$max; $i++) {
- 		$extra_data = $art_arr[$i]->getExtraFieldDataText();
+		$extra_data = $art_arr[$i]->getExtraFieldDataText();
 		echo '
 		<tr class=priority'. $art_arr[$i]->getPriority().'>';
- 		foreach ($browse_fields as $f) {
+		foreach ($browse_fields as $f) {
 			if ($f == 'id') {
 				echo '<td style="white-space: nowrap;">'.
 				($IS_ADMIN?'<input type="checkbox" name="artifact_id_list[]" value="'.
@@ -652,7 +652,7 @@ if ($art_arr && $art_cnt > 0) {
 				// Display ? for unknown values.
 				echo '<td>?</td>';
 			}
- 		}
+		}
 		echo '</tr>';
 	}
 
@@ -721,18 +721,18 @@ if ($art_arr && $art_cnt > 0) {
 		//
 		//	build custom fields
 		//
-	$ef = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELD_FILTER_INT));
-	$keys=array_keys($ef);
+		$ef = $ath->getExtraFields(array(ARTIFACT_EXTRAFIELD_FILTER_INT));
+		$keys=array_keys($ef);
 
-	$sel=array();
-	for ($i=0; $i<count($keys); $i++) {
-		if (($ef[$keys[$i]]['field_type']==ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) || ($ef[$keys[$i]]['field_type']==ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)) {
-			$sel[$keys[$i]]=array('100');
-		} else {
-			$sel[$keys[$i]]='100';
+		$sel=array();
+		for ($i=0; $i<count($keys); $i++) {
+			if (($ef[$keys[$i]]['field_type']==ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) || ($ef[$keys[$i]]['field_type']==ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)) {
+				$sel[$keys[$i]]=array('100');
+			} else {
+				$sel[$keys[$i]]='100';
+			}
 		}
-	}
-	$ath->renderExtraFields($sel,true,_('No Change'),false,'', array(ARTIFACT_EXTRAFIELD_FILTER_INT),true);
+		$ath->renderExtraFields($sel,true,_('No Change'),false,'', array(ARTIFACT_EXTRAFIELD_FILTER_INT),true);
 		echo   '<tr>
 			<td><strong>'._('Priority')._(':').'</strong><br />';
 		build_priority_select_box ('priority', '100', true);
