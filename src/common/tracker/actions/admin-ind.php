@@ -87,7 +87,7 @@ if(isset($page_title)){
 $atf->header( array('title' => _('Trackers Administration')));
 
 if (!isset($at_arr) || !$at_arr || count($at_arr) < 1) {
-	echo '<div class="warning">'._('No trackers found').'</div>';
+	echo '<p class="warning">'._('No trackers found').'</p>';
 } else {
 
 	echo '
