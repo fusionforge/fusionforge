@@ -148,14 +148,14 @@ if ($rows > 0) {
 		</form>
 		<?php
 
-echo "<h2>"._('Custom Field Rendering Template')."</h2>";
+		echo "<h2>"._('Custom Field Rendering Template')."</h2>";
 
-echo "<p>";
-echo '<a href="'.getStringFromServer('PHP_SELF').'?edittemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Edit template').'</a><br />';
-echo '<a href="'.getStringFromServer('PHP_SELF').'?deletetemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Delete template').'</a><br />';
-echo "</p>";
+		echo "<p>";
+		echo '<a href="'.getStringFromServer('PHP_SELF').'?edittemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Edit template').'</a><br />';
+		echo '<a href="'.getStringFromServer('PHP_SELF').'?deletetemplate=1&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'._('Delete template').'</a><br />';
+		echo "</p>";
 
-$ath->footer(array());
+		$ath->footer(array());
 
 // Local Variables:
 // mode: php
