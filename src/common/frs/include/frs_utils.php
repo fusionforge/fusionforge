@@ -195,7 +195,7 @@ function frs_show_package_popup ($group_id, $name='package_id', $checked_val="xz
 	global $FRS_PACKAGE_RES;
 	if (!$group_id) {
 		return _('Error: group id required');
-	} 
+	}
 	if (!isset($FRS_PACKAGE_RES)) {
 		$FRS_PACKAGE_RES=db_query_params ('SELECT package_id,name
 			FROM frs_package WHERE group_id=$1',
