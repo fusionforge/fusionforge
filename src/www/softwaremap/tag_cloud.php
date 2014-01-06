@@ -94,11 +94,12 @@ if ($selected_tag) {
 
 	// only display pages stuff if there is more to display
 	if ($querytotalcount > $TROVE_BROWSELIMIT) {
-		$html_limit .= ' ' ;
-		$html_limit .= sprintf (ngettext ('Displaying %d project per page. Projects sorted by alphabetical order.',
+		$html_limit .= ' ';
+		$html_limit .= sprintf(ngettext('Displaying %d project per page. Projects sorted by alphabetical order.',
 						  'Displaying %d projects per page. Projects sorted by alphabetical order.',
 						  $TROVE_BROWSELIMIT),
 						$TROVE_BROWSELIMIT);
+		$html_limit .= '.<br />';
 
 		// display all the numbers
 		for ($i=1 ;$i <= ceil($querytotalcount/$TROVE_BROWSELIMIT); $i++) {
@@ -160,8 +161,8 @@ if ($selected_tag) {
 			}
 			printf ('<br />'._('Activity Percentile: <strong>%3.0f</strong>'), $percentile);
 			printf ('<br />'._('Activity Ranking: <strong>%d</strong>'), $ranking);
-			printf ('<br />'._('Registered: <strong>%s</strong>'),
-				date(_('Y-m-d H:i'),$row_grp['register_time']));
+			printf ('<br />'._('Registered') . _(': '));
+            printf ('<strong>%s</strong>', date(_('Y-m-d H:i'),$row_grp['register_time']));
 			print '</td></tr>';
 			/*
 			 if ($row_grp['jobs_count']) {
