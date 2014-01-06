@@ -474,7 +474,7 @@ class Group extends Error {
 	 *
 	 * Unlike updateAdmin(), this function accessible to project admin.
 	 *
-	 * @param object	$user			User requesting operation (for access control).
+	 * @param object	$user		User requesting operation (for access control).
 	 * @param string	$group_name
 	 * @param string	$homepage
 	 * @param string	$short_description

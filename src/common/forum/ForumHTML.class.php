@@ -341,7 +341,6 @@ class ForumHTML extends Error {
 	/**
 	 *  LinkAttachForm - echoes the link to the attach form
 	 */
-
 	function LinkAttachForm() {
 		$poststarttime = time();
 		$posthash = md5($poststarttime . user_getid() );
