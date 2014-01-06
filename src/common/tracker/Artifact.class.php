@@ -55,12 +55,12 @@ require_once $gfcommon.'tracker/ArtifactStorage.class.php';
 define('ARTIFACT_MAIL_MARKER', '#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+');
 
 /**
-* Factory method which creates an Artifact from an artifact ID
-*
-* @param	int		$artifact_id	The artifact ID
-* @param	array|bool	$data		The result array, if it's passed in
-* @return	Artifact	Artifact object
-*/
+ * Factory method which creates an Artifact from an artifact ID
+ *
+ * @param	int		$artifact_id	The artifact ID
+ * @param	array|bool	$data		The result array, if it's passed in
+ * @return	Artifact	Artifact object
+ */
 function &artifact_get_object($artifact_id,$data=false) {
 	global $ARTIFACT_OBJ;
 	if (!isset($ARTIFACT_OBJ["_".$artifact_id."_"])) {
@@ -1672,7 +1672,6 @@ class Artifact extends Error {
 					} else {
 						$monitor_ids[] = db_result($result2,$i,'user_id');
 					}
-
 
 					$body .= "\n\n";
 					if ($i == 0) {
