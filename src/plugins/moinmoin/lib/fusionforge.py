@@ -45,13 +45,7 @@ class FusionForgeLink():
                 stdout=subprocess.PIPE).communicate()[0].rstrip('\n')
         return self.cachedconfig[secname][varname]
 
-    def __init__(self, cookies=['session_ser'], autocreate=True):
-        self.cachedconfig = {}
-        self.database_host = self.get_config('database_host')
-        self.database_name = self.get_config('database_name')
-        self.database_user = self.get_config('database_user')
-        self.database_port = self.get_config('database_port')
-        self.database_password = self.get_config('database_password')
+    def db_connect(self):
         if (self.database_host != ''):
             self._conn = psycopg2.connect(database=self.database_name,
                                           user=self.database_user,
@@ -68,6 +62,38 @@ class FusionForgeLink():
         # anyway.
         self._conn.set_isolation_level \
           (psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
+        logging.debug ("FusionForgeLink: DB connection established")
+
+    def db_reconnect_if_needed(self):
+        try:
+            cur = self._conn.cursor()
+            cur.execute("SELECT 1")
+        except (psycopg2.OperationalError, psycopg2.InterfaceError):
+            logging.debug ("FusionForgeLink: DB connection dropped, trying to reconnect")
+        else:
+            return
+        try:
+            self.db_connect()
+            cur = self._conn.cursor()
+            cur.execute("SELECT count(*) FROM plugins")
+        except psycopg2.OperationalError:
+            logging.debug ("FusionForgeLink: can't seem to reestablish DB connection, dying")
+            import sys
+            sys.exit(1)
+        else:
+            logging.debug ("FusionForgeLink: DB connection reestablished")
+            return
+
+    def __init__(self, cookies=['session_ser'], autocreate=True):
+        self.cachedconfig = {}
+        self.database_host = self.get_config('database_host')
+        self.database_name = self.get_config('database_name')
+        self.database_user = self.get_config('database_user')
+        self.database_port = self.get_config('database_port')
+        self.database_password = self.get_config('database_password')
+        
+        self.db_connect()
+
         logging.debug ("FusionForgeLink: __init__ done")
 
     def __del__(self):
@@ -121,6 +147,7 @@ class FusionForgeSessionAuth(BaseAuth):
         logging.debug ("FusionForgeSessionAuth: projects=%s", (self.projects,))
 
     def get_moinmoin_acl_string(self, project_name):
+        self.fflink.db_reconnect_if_needed()
         conn = self.fflink._conn
         cur = conn.cursor()
 
@@ -162,6 +189,7 @@ class FusionForgeSessionAuth(BaseAuth):
         return string.join (rights)
 
     def get_permission_entries (self, project_name, perm, user_name = None):
+        self.fflink.db_reconnect_if_needed()
         conn = self.fflink._conn
         cur = conn.cursor()
 
@@ -203,6 +231,9 @@ class FusionForgeSessionAuth(BaseAuth):
         if cookies is None or cookies == {}:
             return None, False
 
+        self.fflink.db_reconnect_if_needed()
+        conn = self.fflink._conn
+
         for cookiename in cookies:
             if cookiename not in self.cookies:
                 continue
@@ -225,7 +256,6 @@ class FusionForgeSessionAuth(BaseAuth):
                 continue
             (time, user_id, ip, nonce, user_agent) = m.group(1, 2, 3, 4, 5)
 
-            conn = self.fflink._conn
             cur = conn.cursor()
             cur.execute("""SELECT user_name, realname
                            FROM users WHERE user_id=%s""", [user_id])
