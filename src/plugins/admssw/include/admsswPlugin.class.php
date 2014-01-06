@@ -147,7 +147,7 @@ class admsswPlugin extends Plugin {
 	 */
 	public function project_after_description (&$params) {
 		$group_id = $params['group_id'];
-		print '<br />'. sprintf( _('Preview <a href="%1$s">ADMS.SW meta-data</a> about the project'), util_make_url ('/plugins/'. $this->name .'/projectturtle.php?group_id='.$group_id));
+		print '<br />'. sprintf( _('Preview <a href="%s">ADMS.SW meta-data</a> about the project'), util_make_url ('/plugins/'. $this->name .'/projectturtle.php?group_id='.$group_id));
 	}
 
 	//
@@ -631,7 +631,7 @@ class admsswPlugin extends Plugin {
 			$doc = '<p>'. _('The following is a preview of (machine-readable) RDF meta-data, in Turtle format (see at the bottom for more details)') .'<br />';
 
 			$html_limit = '<span style="text-align:center;font-size:smaller">';
-			$html_limit .= sprintf(_('<strong>%1$s</strong> projects in result set.'), $projectsnum);
+			$html_limit .= sprintf(_('<strong>%d</strong> projects in result set.'), $projectsnum);
 			// only display pages stuff if there is more to display
 			if ($projectsnum > $pl) {
 				$html_limit .= html_trove_limit_navigation_box($scripturl, $projectsnum, $pl, $p);

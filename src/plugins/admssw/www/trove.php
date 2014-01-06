@@ -39,7 +39,7 @@ $HTML->printSoftwareMapLinks();
 
 $plugin = plugin_get_object ($pluginname);
 
-echo '<p>'. sprintf( _('The following is a preview of the (machine-readable) RDF meta-data which can be obtained at <tt>%1$s</tt> as Turtle'), util_make_url('/softwaremap/trove_list.php')) .'</p>';
+echo '<p>'. sprintf( _('The following is a preview of the (machine-readable) RDF meta-data which can be obtained at <tt>%s</tt> as Turtle'), util_make_url('/softwaremap/trove_list.php')) .'</p>';
 
 echo $plugin->htmlPreviewTroveCatsAsTurtle();
 
