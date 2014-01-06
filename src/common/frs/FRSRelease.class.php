@@ -286,7 +286,7 @@ class FRSRelease extends Error {
 		$subject = sprintf (_('[%1$s Release] %2$s'),
 					$this->FRSPackage->Group->getUnixName(),
 					$this->FRSPackage->getName());
-		$text = stripcslashes(sprintf(_('Project %1$s (%2$s) has released a new version of package “%3$s”.'),
+		$text = sprintf(_('Project %1$s (%2$s) has released a new version of package “%3$s”.'),
 										$this->FRSPackage->Group->getPublicName(),
 										$this->FRSPackage->Group->getUnixName(),
 										$this->FRSPackage->getName())
@@ -307,7 +307,7 @@ class FRSRelease extends Error {
 										. 'notified in the future, please login to %s and click this link:'),
 										forge_get_config('forge_name'))
 							. "\n\n"
-							. util_make_url ("/frs/monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1"));
+							. util_make_url ("/frs/monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1");
 //		$text = util_line_wrap($text);
 		if (count($arr)) {
 			util_handle_message(array_unique($arr),$subject,$text);
