@@ -630,7 +630,7 @@ class HgPlugin extends SCMPlugin {
 
 		session_require_perm('project_admin', $params['group_id']);
 
-		$adminheadertitle = sprintf(_('Create SCM repository for project %1$s'), $project_name);
+		$adminheadertitle = sprintf(_('Create SCM repository for project %s'), $project_name);
 		project_admin_header(array('title'=>$adminheadertitle, 'group'=>$params['group_id']));
 
 		?>
