@@ -88,6 +88,8 @@ pgsql_gforge_users_dbname = $sys_dbname
 pgsql_gforge_users_domain = users.$domain_name
 pgsql_gforge_users_query = SELECT email FROM mta_users WHERE login = '\''%u'\''
 
+mailman_destination_recipient_limit = 1
+
 ### END GFORGE BLOCK ###
 };
 $seen_gf_block = 0;
