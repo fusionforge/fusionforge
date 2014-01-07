@@ -4,7 +4,7 @@ then
 	echo "You must be root to run this, please enter passwd"
 	su -c $0
 else
-    LOCK=/var/lock/gforge-update-user-group-cvs
+    LOCK=/var/lock/gforge-update-user-group-ssh
     if ! lockfile-create --retry 2 $LOCK ; then
 	echo "$0 locked, please try again later."
 	exit 1
