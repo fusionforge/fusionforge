@@ -224,7 +224,7 @@ abstract class SCMPlugin extends Plugin {
 
 			// Browsing
 			echo $HTML->boxTop(_('Repository History'));
-			echo _('Data about current and past states of the repository');
+			echo _('Data about current and past states of the repository.');
 			if ($this->browserDisplayable($project)) {
 				echo $this->getStatsBlock($project);
 			}
