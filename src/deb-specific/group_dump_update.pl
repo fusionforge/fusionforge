@@ -156,15 +156,11 @@ sub add_group {
         if ($is_public) {
             $default_perms = 02775 ;
             $file_default_perms = 0664;
-	    $default_page = "/usr/share/gforge/lib/default_page.php" ;
         } else {
             $default_perms = 02770 ;
             $file_default_perms = 0660;
-	    $default_page = "/usr/share/gforge/lib/private_default_page.php" ;
-	    if (! -e $default_page) {
-		$default_page = "/usr/share/gforge/lib/default_page.php";
-	    }
         }
+	$default_page  = &forge_get_config ('custom_path') . "/project_default_page.html";
 	$incdir_perms = 02775;
 
 	if ($verbose) {print("Making a Group for : $gname\n")};
@@ -177,7 +173,29 @@ sub add_group {
 		mkdir $cgi_dir, $default_perms ;
 		mkdir $ht_dir, $default_perms ;
 		mkdir $inc_dir, $default_perms ;
-		system("cp $default_page $ht_dir/index.php");
+		if (-e $default_page) {
+		    my $projurl = '';
+		    if (&forge_get_config ('use_ssl')) {
+			$projurl .= 'https://';
+		    } else {
+			$projurl .= 'http://';
+		    }
+		    $projurl .= &forge_get_config ('web_host');
+		    $projurl .= &forge_get_config ('url_prefix');
+		    $projurl .= 'projects/';
+		    $projurl .= $gname;
+		    
+		    open DPT, $default_page;
+		    open DP, "> $ht_dir/index.html";
+		    while (my $l = <DPT>) {
+			chomp $l;
+			$l =~ s/PROJECTNAME/$gname/;
+			$l =~ s/PROJECTURL/$projurl/;
+			print DP "$l\n";
+		    }
+		    close DP;
+		    close DPT;
+		}
 		# perl is sometime fucked to create with right permission
 		chmod $default_perms, $group_dir;
 		chmod $default_perms, $log_dir;

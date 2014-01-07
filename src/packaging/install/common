@@ -2,6 +2,7 @@ etc/config.ini-fhs                     etc/@PACKAGE@
 etc/config.ini.d/defaults.ini          etc/@PACKAGE@/config.ini.d/
 etc/config.ini.d/debug.ini             etc/@PACKAGE@/config.ini.d/
 etc/config.ini.d/zzzz-local.ini        etc/@PACKAGE@/config.ini.d/
+etc/custom                     	       etc/@PACKAGE@/
 deb-specific/cvssh                     bin/
 #
 deb-specific/install-chroot.sh         @BINARY_PATH@/
