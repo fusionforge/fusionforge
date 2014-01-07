@@ -58,7 +58,7 @@ if ($group_id) {
 	people_header(array('title'=>_('Help Wanted System')));
 
 	print '<p>';
-	printf(_('The %1$s Project Help Wanted board is for non-commercial, project volunteer openings. Commercial use is prohibited.'), forge_get_config ('forge_name'));
+	printf(_('The %s Project Help Wanted board is for non-commercial, project volunteer openings. Commercial use is prohibited.'), forge_get_config ('forge_name'));
 	print '</p>';
 
 	print '<p>';

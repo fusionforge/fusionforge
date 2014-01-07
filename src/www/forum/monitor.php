@@ -58,7 +58,7 @@ if ($forum_id && $group_id) {
 		if (!$confirm) {
 			forum_header(array('title'=>_('Stop Monitoring'), 'modal' => 1));
 			echo $HTML->confirmBox(
-				sprintf(_('You are about to stop monitoring the %1$s forum.'),$f->getName()).
+				sprintf(_('You are about to stop monitoring the %s forum.'),$f->getName()).
 					'<br/><br/>'.
 					_('Do you really want to unsubscribe ?'),
 				array('group_id' => $group_id, 'forum_id' => $forum_id, 'stop' => 1),

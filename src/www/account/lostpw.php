@@ -67,11 +67,11 @@ if (getStringFromRequest('submit')) {
 		$message .= sprintf(_('-- the %s staff'), forge_get_config ('forge_name'));
 		$message .= "\n";
 
-		util_send_message($u->getEmail(),sprintf(_('%1$s Verification'), forge_get_config ('forge_name')),$message);
+		util_send_message($u->getEmail(),sprintf(_('%s Verification'), forge_get_config ('forge_name')),$message);
 
 		$HTML->header(array('title'=>_('Lost Password Confirmation')));
 
-		echo '<p>'.printf(_('An email has been sent to the address you have on file. Follow the instructions in the email to change your account password.').'</p><p><a href="%1$s">'._("Home").'</a>', util_make_url ('/')).'</p>';
+		echo '<p>'.printf(_('An email has been sent to the address you have on file. Follow the instructions in the email to change your account password.').'</p><p><a href="%s">'._("Home").'</a>', util_make_url ('/')).'</p>';
 
 		$HTML->footer(array());
 		exit();

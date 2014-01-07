@@ -145,7 +145,7 @@ details=$3 WHERE id=$4 AND group_id=$5", array($status, htmlspecialchars($summar
 
 		echo $params['content'].'<br/>';
 		echo '<p>
-		<strong>'.sprintf(_('If this item is on the %1$s home page and you edit it, it will be removed from the home page.'), forge_get_config('forge_name')).'</strong></p>
+		<strong>'.sprintf(_('If this item is on the %s home page and you edit it, it will be removed from the home page.'), forge_get_config('forge_name')).'</strong></p>
 		<input type="submit" name="submit" value="'._('Submit').'" />
 		</form>';
 

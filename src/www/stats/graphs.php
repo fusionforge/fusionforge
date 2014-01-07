@@ -33,7 +33,7 @@ session_require_global_perm ('forge_stats', 'read') ;
 html_use_jqueryjqplotpluginCanvas();
 html_use_jqueryjqplotpluginhighlighter();
 
-$HTML->header(array('title'=>sprintf(_('%1$s Sitewide Statistics Graphs'), forge_get_config ('forge_name'))));
+$HTML->header(array('title'=>sprintf(_('%s Sitewide Statistics Graphs'), forge_get_config ('forge_name'))));
 ?>
 
 <hr />
