@@ -60,7 +60,7 @@ function performAction($newStatus, $statusString, $user_id) {
 			exit_error($u->getErrorMessage(), 'home');
 		}
 	}
-	$feedback = sprintf(_('User updated to %1$s status'), $statusString);
+	$feedback = sprintf(_('User updated to %s status'), $statusString);
 }
 
 function show_users_list($users, $filter = '', $sortorder = 'realname') {

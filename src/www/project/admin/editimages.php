@@ -194,7 +194,7 @@ if (getStringFromRequest('submit')) {
 project_admin_header(array('title'=>_('Edit Multimedia Data')));
 
 echo '
-	<p>'.sprintf(_('You can store up to %1$s MB of multimedia data (bitmap and vector graphics, sound clips, 3D models) in the database. Use this page to add/delete your project multimedia data.'), sprintf("%.2f", $QUOTA/(1024*1024))).'</p>
+	<p>'.sprintf(_('You can store up to %s MB of multimedia data (bitmap and vector graphics, sound clips, 3D models) in the database. Use this page to add/delete your project multimedia data.'), sprintf("%.2f", $QUOTA/(1024*1024))).'</p>
 	<p>
 ';
 

@@ -76,7 +76,7 @@ if (getStringFromRequest('submit')) {
 	exit();
 }
 
-$title = sprintf(_('Mail Engine for %1$s Subscribers'), forge_get_config ('forge_name'));
+$title = sprintf(_('Mail Engine for %s Subscribers'), forge_get_config ('forge_name'));
 site_admin_header(array('title'=>$title));
 
 print '

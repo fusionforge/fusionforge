@@ -62,12 +62,12 @@ if (getStringFromRequest('submit')) {
 			. "\n\n"
  			. sprintf(_('-- the %s staff'), forge_get_config('forge_name'));
 
-	util_send_message($newemail,sprintf(_('%1$s Verification'), forge_get_config ('forge_name')),$message);
+	util_send_message($newemail,sprintf(_('%s Verification'), forge_get_config ('forge_name')),$message);
 
 	site_user_header(array('title'=>_('Email Change Confirmation')));
 
 	print '<p>' . _('An email has been sent to the new address. Follow the instructions in the email to complete the email change.') . '</p>';
-    printf ('<a href="%1$s">[ Home ]</a>', util_make_url ('/'));
+    printf ('<a href="%s">[ Home ]</a>', util_make_url ('/'));
 
 	site_user_footer(array());
 	exit();

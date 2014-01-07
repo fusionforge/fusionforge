@@ -197,7 +197,7 @@ frs_admin_header(array('title'=>_('Quick Release System'),'group'=>$group_id));
 		<?php echo _('Upload a new file')._(': '); ?><input type="file" name="userfile"  size="30" />
 		<?php if (forge_get_config('use_ftp_uploads')) {
 			echo '<p>';
-			printf(_('Alternatively, you can use FTP to upload a new file at %1$s.'), forge_get_config('ftp_upload_host'));
+			printf(_('Alternatively, you can use FTP to upload a new file at %s.'), forge_get_config('ftp_upload_host'));
 			echo '<br />';
 			echo _('Choose an FTP file instead of uploading:').'<br />';
 			$ftp_files_arr=frs_filterfiles(ls($upload_dir,true));

@@ -43,13 +43,13 @@ if (!$g || !is_object($g) || $g->isError()) {
 $user_id = user_getid();
 
 /* Show header */
-$title = sprintf(_('Surveys for %1$s'), $g->getPublicName());
+$title = sprintf(_('Surveys for %s'), $g->getPublicName());
 $sh = new SurveyHtml();
 $sh->header(array('title'=>$title));
 
 plugin_hook ("blocks", "survey index");
 
-/* Show list of Servey */
+/* Show list of Survey */
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {

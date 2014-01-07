@@ -59,14 +59,14 @@ if ($by=='lang') {
 	$qpa = db_construct_qpa ($qpa, ' AND snippet.language=$1', array ($lang)) ;
 	$qpa2 = db_construct_qpa ($qpa2, ' AND snippet_package.language=$1', array ($lang)) ;
 
-	echo '<h2>' .sprintf(_('Snippets by language: %1$s'), $SCRIPT_LANGUAGE[$lang]).'</h2>';
+	echo '<h2>' .sprintf(_('Snippets by language: %s'), $SCRIPT_LANGUAGE[$lang]).'</h2>';
 } elseif ($by=='cat') {
 	$cat = getStringFromRequest('cat');
 
 	$qpa = db_construct_qpa ($qpa, ' AND snippet.category=$1', array ($cat)) ;
 	$qpa2 = db_construct_qpa ($qpa2, ' AND snippet_package.category=$1', array ($cat)) ;
 
-	echo '<h2>' .sprintf(_('Snippets by category: %1$s'), $SCRIPT_CATEGORY[$cat]).'</h2>';
+	echo '<h2>' .sprintf(_('Snippets by category: %s'), $SCRIPT_CATEGORY[$cat]).'</h2>';
 } else {
 	exit_error(_('Error: bad url?'));
 }

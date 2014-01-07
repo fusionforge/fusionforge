@@ -33,7 +33,7 @@ site_admin_header(array('title'=>_('Site Admin: Edit Rejection Responses')));
 
 function check_select_value($value) {
 	if( $value == "100" ) {
-		print('<span class="important">'.sprintf(_('You cannot %1$s “None”!'), $GLOBALS['type'])."</span><br />\n");
+		print('<span class="important">'.sprintf(_('You cannot %s “None”!'), $GLOBALS['type'])."</span><br />\n");
 	}
 }
 ?>

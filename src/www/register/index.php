@@ -137,10 +137,10 @@ if (getStringFromRequest('submit')) {
 
 		if ( !forge_get_config('project_auto_approval') && !forge_check_global_perm('approve_projects')) {
 			echo '<p>';
-			printf(_('Your project has been submitted to the %1$s administrators. Within 72 hours, you will receive notification of their decision and further instructions.'), forge_get_config ('forge_name'));
+			printf(_('Your project has been submitted to the %s administrators. Within 72 hours, you will receive notification of their decision and further instructions.'), forge_get_config ('forge_name'));
 			echo '</p>';
 			echo '<p>';
-			printf(_('Thank you for choosing %1$s.'), forge_get_config ('forge_name'));
+			printf(_('Thank you for choosing %s.'), forge_get_config ('forge_name'));
 			echo '</p>';
 		} elseif ($group->isError()) {
 			echo '<p class="error">' . $group->getErrorMessage() . '</p>';
@@ -153,13 +153,13 @@ if (getStringFromRequest('submit')) {
 			}
 
 			if (!$group->approve($u)) {
-				printf('<p class="error">' . _('Approval Error: %1$s'), $group->getErrorMessage() . '</p>');
+				printf('<p class="error">' . _('Approval Error: %s'), $group->getErrorMessage() . '</p>');
 			} else {
 				echo '<p>';
 				echo _('Your project has been automatically approved. You should receive an email containing further information shortly.');
 				echo '</p>';
 				echo '<p>';
-				printf(_('Thank you for choosing %1$s.'), forge_get_config ('forge_name'));
+				printf(_('Thank you for choosing %s.'), forge_get_config ('forge_name'));
 				echo '</p>';
 			}
 		}
@@ -225,10 +225,10 @@ if ( !forge_get_config ('project_auto_approval') ) {
 </ul>
 <p><?php echo _('Your Unix name is important, however, because it will be used for many things, including:') ?></p>
 <ul>
-<li><?php printf(_('a web site at <tt>unixname.%1$s</tt>,'), forge_get_config('web_host')) ?></li>
+<li><?php printf(_('a web site at <tt>unixname.%s</tt>,'), forge_get_config('web_host')) ?></li>
 <li><?php echo _('the URL of your source code repository,') ?></li>
 <?php if (forge_get_config('use_shell')) { ?>
-<li><?php printf(_('shell access to <span class="tt">unixname.%1$s</span>,'), forge_get_config('web_host')) ?></li>
+<li><?php printf(_('shell access to <span class="tt">unixname.%s</span>,'), forge_get_config('web_host')) ?></li>
 <?php } ?>
 <li><?php echo _('search engines throughout the site.') ?></li>
 </ul>

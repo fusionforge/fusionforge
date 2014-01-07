@@ -209,9 +209,10 @@ if($toDisplay != "") {
 <?php echo html_get_ccode_popup('ccode', $ccode); ?>
 </p>
 <p>
-<?php echo _('Email Address') . _(': ') . utils_requiredField(); ?><br />
+<?php echo _('Email Address') . _(': ') . utils_requiredField(); ?>
+<br />
 <em>
-<?php printf(_('This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@%1$s&gt; that will forward to this address.'), forge_get_config('users_host')); ?>
+<?php printf(_('This email address will be verified before account activation. You will receive a mail forward account at &lt;loginname@%s&gt; that will forward to this address.'), forge_get_config('users_host')); ?>
 </em>
 <br />
 <label for="email">
@@ -257,7 +258,7 @@ if($toDisplay != "") {
 <?php if (forge_get_config('user_registration_accept_conditions')) { ?>
 	<p>
 	<input type="checkbox" name="accept_conditions" value="1" />
-	<?php printf (_('Do you accept the <a href="%1$s">terms of use</a> for this site?'),
+	<?php printf (_('Do you accept the <a href="%s">terms of use</a> for this site?'),
 		      util_make_url ('/terms.php')); ?>
 	</p>
 <?php } ?>

@@ -406,7 +406,7 @@ function people_show_job_list($result) {
 	$title_arr[]=_('Title');
 	$title_arr[]=_('Category');
 	$title_arr[]=_('Date Opened');
-	$title_arr[]= sprintf(_('%1$s project'), forge_get_config ('forge_name'));
+	$title_arr[]= sprintf(_('%s project'), forge_get_config ('forge_name'));
 
 	$return = $GLOBALS['HTML']->listTableTop ($title_arr);
 

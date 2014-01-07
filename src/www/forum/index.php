@@ -48,14 +48,14 @@ if ($group_id) {
 		session_redirect('/forum/forum.php?forum_id='.$farr[0]->getID());
 	}
 
-	forum_header(array('title'=>sprintf(_('Forums for %1$s'), $g->getPublicName()) ));
+	forum_header(array('title'=>sprintf(_('Forums for %s'), $g->getPublicName()) ));
 
 	if ($ff->isError()) {
-		echo '<div class="error">'. $ff->getErrorMessage().'</div>';
+		echo '<p class="error">'. $ff->getErrorMessage().'</p>';
 		forum_footer(array());
 		exit;
 	} elseif ( count($farr) < 1) {
-		echo '<div class="warning_msg">'.sprintf(_('No Forums Found for %s'), $g->getPublicName()) .'</div>';
+		echo '<p class="information">'.sprintf(_('No Forums Found for %s'), $g->getPublicName()) .'</p>';
 		forum_footer(array());
 		exit;
 	}

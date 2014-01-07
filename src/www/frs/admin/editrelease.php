@@ -390,7 +390,7 @@ frs_admin_header(array('title'=>_('Edit Releases'),'group'=>$group_id));
 		echo $GLOBALS['HTML']->listTableBottom();
 	}
 
-echo '<p>' . sprintf(ngettext('There is %1$s user monitoring this package.', 'There are %1$s users monitoring this package.', $frsp->getMonitorCount()), $frsp->getMonitorCount()) . '</p>';
+echo '<p>' . sprintf(ngettext('There is %s user monitoring this package.', 'There are %s users monitoring this package.', $frsp->getMonitorCount()), $frsp->getMonitorCount()) . '</p>';
 
 frs_admin_footer();
 

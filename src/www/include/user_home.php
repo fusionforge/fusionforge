@@ -59,15 +59,15 @@ echo $HTML->boxTop(_('Personal Information'), _('Personal Information'));
 	}
 
 if (forge_get_config('use_diary')) {
-		echo $HTML->boxMiddle(_('Diary and Notes'), _('Diary and Notes'));
+	echo $HTML->boxMiddle(_('Diary and Notes'), _('Diary and Notes'));
 
-		/*
-			Get their diary information
-		*/
+	/*
+		Get their diary information
+	*/
 
-		$res = db_query_params('SELECT count(*) from user_diary WHERE user_id=$1 AND is_public=1',
-					array($user_id));
-		echo _('Diary/Note entries:').' '.db_result($res, 0, 0).'
+	$res = db_query_params('SELECT count(*) from user_diary WHERE user_id=$1 AND is_public=1',
+				array($user_id));
+	echo _('Diary/Note entries:').' '.db_result($res, 0, 0).'
 		<p>';
 		//.'<span rel="foaf:weblog">'
 		echo util_make_link('/developer/diary.php?diary_user='.$user_id,htmlentities(_('View Diary and Notes')));
@@ -193,7 +193,7 @@ if (forge_get_config('use_ratings')) {
 } elseif ($me && !$me->usesRatings()) {
 		print "<p>";
 		print "<em>";
-		printf (_('You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="%1$s">your account maintenance page</a> for more information.'),
+		printf (_('You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="%s">your account maintenance page</a> for more information.'),
 				  util_make_url ("/account"));
 		print "</em>";
 		print "</p>";

@@ -117,7 +117,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 			    AND is_template = 0',
 		    array());
 		$row = db_fetch_array($res);
-		printf(_('Registered projects: <strong>%1$s</strong>'), $row['count']);
+		printf(_('Registered projects: <strong>%d</strong>'), $row['count']);
 	?></li>
 	<li><?php
 		$res = db_query_params('SELECT count(*) AS count FROM groups
@@ -127,7 +127,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 			    AND is_template = 0',
 		    array('A'));
 		$row = db_fetch_array($res);
-		printf(_('Active projects: <strong>%1$s</strong>'), $row['count']);
+		printf(_('Active projects: <strong>%d</strong>'), $row['count']);
 	?></li>
 	<li><?php
 		$res = db_query_params('SELECT count(*) AS count FROM groups
@@ -137,7 +137,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 			    AND is_template = 0',
 		    array('P'));
 		$row = db_fetch_array($res);
-		printf(_('Pending projects: <strong>%1$s</strong>'), $row['count']);
+		printf(_('Pending projects: <strong>%d</strong>'), $row['count']);
 	?></li>
 	<li><a href="grouplist.php"><?php echo _('Display Full Project List/Edit Projects'); ?></a></li>
 
@@ -214,7 +214,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <div class="info-box">
 <h2><?php echo _('Site Utilities'); ?></h2>
 <ul>
-	<li><a href="massmail.php"><?php printf(_('Mail Engine for %1$s Subscribers'), forge_get_config ('forge_name')); ?></a></li>
+	<li><a href="massmail.php"><?php printf(_('Mail Engine for %s Subscribers'), forge_get_config ('forge_name')); ?></a></li>
 	<li><a href="unsubscribe.php"><?php echo forge_get_config ('forge_name'); ?> <?php echo _('Site Mailings Maintenance'); ?></a></li>
 	<li><a href="edit_frs_filetype.php"><?php echo _('Add, Delete, or Edit File Types'); ?></a></li>
 	<li><a href="edit_frs_processor.php"><?php echo _('Add, Delete, or Edit Processors'); ?></a></li>

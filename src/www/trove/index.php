@@ -149,7 +149,7 @@ if($filter) {
 				echo html_image('ic/cfolder15.png', '15', '13', array());
 				echo '&nbsp; '.$childCategory->getLocalizedLabel().'</a>';
 				echo ' <em>('
-					.sprintf(_('%1$s projects'), $childCategory->getSubProjectsCount())
+					.sprintf(_('%s projects'), $childCategory->getSubProjectsCount())
 					.')</em><br />';
 			}
 		?>

@@ -35,7 +35,7 @@ session_require_global_perm('forge_admin');
 // Skip non compatible plugins.
 $plugins_disabled = array('scmccase');
 
-// Skip non activable plugins due to general configuration
+// Skip non actionable plugins due to general configuration
 if (!forge_get_config('use_scm')) {
 	array_push($plugins_disabled, 'scmarch', 'scmbzr', 'scmcpold', 'scmcvs', 'scmdarcs', 'scmgit', 'scmhg', 'scmsvn');
 }
@@ -67,7 +67,7 @@ if (getStringFromRequest('update')) {
 		if (!$res) {
 			exit_error(db_error(), 'admin');
 		} else {
-			$feedback = sprintf(_('Plugin %1$s updated Successfully'), $pluginname);
+			$feedback = sprintf(_('Plugin %s updated Successfully'), $pluginname);
 
 			// Load the plugin and now get information from it.
 			$plugin = $pm->GetPluginObject($pluginname);

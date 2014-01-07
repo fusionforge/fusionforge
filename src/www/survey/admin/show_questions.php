@@ -49,10 +49,10 @@ function showResultsEditQuestion($result) {
 	global $group_id;
 	$rows  =  db_numrows($result);
 	$cols  =  db_numfields($result);
-	echo "<h3>" .sprintf(ngettext('%1$s question found', '%1$s questions found', $rows), $rows)."</h3>";
+	echo "<h3>" .sprintf(ngettext('%s question found', '%s questions found', $rows), $rows)."</h3>";
 
-	echo  "<table border=\"0\">\n";
-	/*  Create  the  headers  */
+	echo  "<table>\n";
+	/*  Create the headers  */
 	echo "<tr class=\"tableheading\">\n";
 	for($i=0; $i<$cols; $i++)  {
 		echo "<th>".db_fieldname($result,$i)."</th>\n";

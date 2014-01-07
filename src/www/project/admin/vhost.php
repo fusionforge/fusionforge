@@ -62,7 +62,7 @@ if (getStringFromRequest('createvhost')) {
 
 	} else {
 
-		$feedback .= sprintf(_('Not a valid hostname - %1$s'), $vhost_name);
+		$feedback .= sprintf(_('Not a valid hostname - %s'), $vhost_name);
 
 	}
 }

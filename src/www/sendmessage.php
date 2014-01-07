@@ -47,7 +47,7 @@ if ($touser) {
 }
 
 if ($toaddress && !preg_match('/'.forge_get_config('web_host').'/i',$toaddress)) {
-	exit_error(sprintf(_('You can only send to addresses @<em>%1$s</em>.'),forge_get_config('web_host')),'home');
+	exit_error(sprintf(_('You can only send to addresses @<em>%s</em>.'),forge_get_config('web_host')),'home');
 }
 
 if (getStringFromRequest('send_mail')) {

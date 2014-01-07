@@ -44,7 +44,7 @@ class SurveyHTML extends Error {
 	 * Show survey header
 	 */
 	function header($params) {
-		global $group_id, $is_admin_page, $HTML;
+		global $group_id,$is_admin_page,$HTML;
 
 		if (!forge_get_config('use_survey')) {
 			exit_disabled();
@@ -695,7 +695,7 @@ class SurveyHTML extends Error {
 				$ret.='<ul><li><a href="show_results.php?survey_id='.$Survey->getID().
 					'&amp;question_id='.$Question->getID().
 					'&amp;group_id='.$group_id.'">'.
-					sprintf(ngettext('View All %1$s Comment', 'View All %1$s Comments', $totalCount), $totalCount).
+					sprintf(ngettext('View All %s Comment', 'View All %s Comments', $totalCount), $totalCount).
 					'</a></li></ul>';
 			}
 

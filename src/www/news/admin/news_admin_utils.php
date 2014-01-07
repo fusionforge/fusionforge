@@ -77,7 +77,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
 		echo '<form action="'. getStringFromServer('PHP_SELF') .'" method="post">';
 		echo '<input type="hidden" name="mass_reject" value="1" />';
 		echo '<input type="hidden" name="post_changes" value="y" />';
-		echo '<h2>'.sprintf(_('These items need to be approved (total: %1$s)'), $rows).'</h2>';
+		echo '<h2>'.sprintf(_('These items need to be approved (total: %d)'), $rows).'</h2>';
 		echo $GLOBALS['HTML']->listTableTop($title_arr);
 		for ($i=0; $i < $rows; $i++) {
 			show_news_item($items[$i], $i, false,true);
@@ -105,7 +105,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
 		echo '
 			<h2>'._('No rejected items found for this week.').'</h2>';
 	} else {
-		echo '<h2>'.sprintf(_('These items were rejected this past week or were not intended for front page (total: %1$s).'), $rows).'</h2>';
+		echo '<h2>'.sprintf(_('These items were rejected this past week or were not intended for front page (total: %d).'), $rows).'</h2>';
 		echo $GLOBALS['HTML']->listTableTop($title_arr);
 		for ($i=0; $i<$rows; $i++) {
 			show_news_item($items[$i], $i, false, false);
@@ -129,7 +129,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved) {
 		echo '
 			<h2>'._('No approved items found for this week.').'</h2>';
 	} else {
-		echo '<h2>'.sprintf(_('These items were approved this past week (total: %1$s).'), $rows).'</h2>';
+		echo '<h2>'.sprintf(_('These items were approved this past week (total: %d).'), $rows).'</h2>';
 		echo $GLOBALS['HTML']->listTableTop($title_arr);
 		for ($i=0; $i < $rows; $i++) {
 			show_news_item($items[$i], $i, false, false);

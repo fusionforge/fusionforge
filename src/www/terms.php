@@ -33,10 +33,10 @@ $HTML->header(array('title'=> _('Terms of use')));
 
 <table class="fullwidth" cellpadding="5">
 <tr><td class="twothirdswidth top">
-	<h3><?php printf (_('%1$s Terms of Use'), forge_get_config ('forge_name')); ?></h3>
+	<h3><?php printf (_('%s Terms of Use'), forge_get_config ('forge_name')); ?></h3>
 <p>
 
-	<?php printf (_('These are the terms and conditions under which you are allowed to use the %1$s service.  They are empty by default, but the administrator(s) of the service can use this page to publish their local requirements if needed.'),
+	<?php printf (_('These are the terms and conditions under which you are allowed to use the %s service.  They are empty by default, but the administrator(s) of the service can use this page to publish their local requirements if needed.'),
 		      forge_get_config ('forge_name')) ;
 ; ?>
 

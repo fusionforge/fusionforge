@@ -34,7 +34,7 @@ $trovecatid=getIntFromRequest('trovecatid');
 
 session_require_global_perm ('forge_stats', 'read') ;
 
-$HTML->header(array('title'=>sprintf(_('%1$s Site Project Statistical Comparisons'), forge_get_config ('forge_name'))));
+$HTML->header(array('title'=>sprintf(_('%s Site Project Statistical Comparisons'), forge_get_config ('forge_name'))));
 
 ?>
 
@@ -55,4 +55,4 @@ $HTML->header(array('title'=>sprintf(_('%1$s Site Project Statistical Comparison
 	<br /><br />
 </div>
 <?php
-$HTML->footer( array() );
+$HTML->footer(array());

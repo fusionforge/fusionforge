@@ -197,7 +197,7 @@ if ( $cat === 'c' ) {
 		print $row_sub['fullname'];
 		print '</a>';
 		print '&nbsp;<em>(';
-		print sprintf(_('%1$s projects'), $row_sub['subprojects']?$row_sub['subprojects']:'0');
+		print sprintf(_('%s projects'), $row_sub['subprojects']?$row_sub['subprojects']:'0');
 		print ')</em>';
 		print "</li>\n";
 	}
@@ -263,10 +263,10 @@ if ( $cat === 'c' ) {
 	// store this as a var so it can be printed later as well
 	$html_limit = '';
 	if ($querytotalcount == $TROVE_HARDQUERYLIMIT) {
-		$html_limit .= sprintf(_('More than <strong>%1$s</strong> projects in result set.'), $querytotalcount);
+		$html_limit .= sprintf(_('More than <strong>%d</strong> projects in result set.'), $querytotalcount);
 
 	}
-	$html_limit .= sprintf(ngettext('<strong>%1$s</strong> project in result set.', '<strong>%1$s</strong> projects in result set.', $querytotalcount), $querytotalcount);
+	$html_limit .= sprintf(ngettext('<strong>%d</strong> project in result set.', '<strong>%d</strong> projects in result set.', $querytotalcount), $querytotalcount);
 
 	// only display pages stuff if there is more to display
 	if ($querytotalcount > $TROVE_BROWSELIMIT) {

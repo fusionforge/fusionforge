@@ -65,7 +65,7 @@ if ( !forge_check_perm('project_admin', $group_id)) {
     <?php print(_('Create a survey, listing the questions in order (choose from <strong>your</strong> list of questions).')); ?>
     </li>
     <li>
-    <?php printf(_('Link to the survey using this format: %1$s where XX is the survey number'),
+    <?php printf(_('Link to the survey using this format: %s where XX is the survey number'),
                  '<br /><strong>'.util_make_url('/survey/survey.php?group_id='.$group_id.'&amp;survey_id=XX').'</strong>'); ?>
     </li>
 </ol>

@@ -53,7 +53,7 @@ if (!file_exists($fname) || @is_dir($fname)) {
 	exit_error(_('Cannot find specified file to display.'),'home');
 }
 
-$HTML->header(array('title'=>sprintf(_('Source of %1$s'), $file)));
+$HTML->header(array('title'=>sprintf(_('Source of %s'), $file)));
 
 show_source($fname);
 

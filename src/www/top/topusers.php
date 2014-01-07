@@ -89,10 +89,10 @@ while ($row_top = db_fetch_array($res_top)) {
 		print _('Same');
 	}
 	else if ($diff > 0) {
-		print "<span class=\"up\"".sprintf(_('Up %1$s'), $diff)."</span>";
+		print "<span class=\"up\"".sprintf(_('Up %s'), $diff)."</span>";
 	}
 	else if ($diff < 0) {
-		print "<span class=\"down\">".sprintf(_('Down %1$s'), (0-$diff))."</span>";
+		print "<span class=\"down\">".sprintf(_('Down %s'), (0-$diff))."</span>";
 	}
 
 	print '&nbsp;&nbsp;&nbsp;</td></tr>
