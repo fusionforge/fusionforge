@@ -1,5 +1,5 @@
 www                                 usr/share/@OLDPACKAGE@/
-www/index_std.php                   etc/@OLDPACKAGE@/custom/
+www/index_std.php                   etc/@PACKAGE@/custom/
 utils/install-apache.sh             usr/share/@OLDPACKAGE@/bin/
 utils/manage-apache-config.sh	    usr/share/@OLDPACKAGE@/bin/
 etc/httpd.conf.d-fhs		    usr/share/@OLDPACKAGE@/etc/
