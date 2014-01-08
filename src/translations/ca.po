@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 15:50+0100\n"
+"POT-Creation-Date: 2014-01-08 17:16+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -395,6 +395,9 @@ msgstr ""
 #: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
 #: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
 #: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
+#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_add.php:97
+#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:84
+#: www/trove/admin/trove_cat_edit.php:87 www/trove/admin/trove_cat_edit.php:90
 #, php-format
 msgid ": "
 msgstr ""
@@ -1831,7 +1834,8 @@ msgstr "Data d'inici"
 #: www/admin/massmail.php:140 www/admin/pending-news.php:137
 #: www/admin/pending-news.php:139 www/admin/pending-news.php:145
 #: www/admin/pending-news.php:147 www/admin/trove/trove_cat_add.php:77
-#: www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:110 www/admin/trove/trove_cat_add.php:112
+#: www/admin/trove/trove_cat_add.php:114
 #: www/admin/trove/trove_cat_edit.php:115
 #: www/admin/trove/trove_cat_edit.php:141
 #: www/admin/trove/trove_cat_edit.php:144
@@ -16348,17 +16352,19 @@ msgstr "Afegeix una nova categoria a l'arbre de projectes"
 msgid "Parent Category"
 msgstr "Categoria del node superior"
 
-#: www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:110 www/trove/admin/trove_cat_add.php:95
+#: www/trove/admin/trove_cat_edit.php:84
 msgid "New category short name (no spaces, Unix-like)"
 msgstr "Nou nom abreujat de categoria (sense espais, estil Unix)"
 
 #: www/admin/trove/trove_cat_add.php:112 www/trove/admin/trove_cat_add.php:97
 #: www/trove/admin/trove_cat_edit.php:87
-msgid "New category full name (80 characters max): "
-msgstr "Nou nom complet de categoria (VARCHAR 80): "
+msgid "New category full name (maximum length is 80 chars)"
+msgstr "Nou nom complet de categoria (VARCHAR 80)"
 
-#: www/admin/trove/trove_cat_add.php:114
-msgid "New category description (255 characters max: )"
+#: www/admin/trove/trove_cat_add.php:114 www/trove/admin/trove_cat_add.php:99
+#: www/trove/admin/trove_cat_edit.php:90
+msgid "New category description (maximum length is 255 chars)"
 msgstr "Nova descripció de categoria (VARCHAR 255)"
 
 #: www/admin/trove/trove_cat_edit.php:47
@@ -16389,12 +16395,12 @@ msgstr "Nou nom abreujat de categoria (sense espais, estil Unix)"
 
 #: www/admin/trove/trove_cat_edit.php:144
 #, fuzzy
-msgid "Category full name (Maximum length is 80 chars)"
+msgid "Category full name (maximum length is 80 chars)"
 msgstr "Nou nom complet de categoria (VARCHAR 80)"
 
 #: www/admin/trove/trove_cat_edit.php:147
 #, fuzzy
-msgid "Category description (Maximum length is 255 chars)"
+msgid "Category description (maximum length is 255 chars)"
 msgstr "Descripció de categoria (VARCHAR 255)"
 
 #: www/admin/trove/trove_cat_list.php:74 www/trove/admin/trove_cat_list.php:69
@@ -23335,15 +23341,6 @@ msgstr "Administració del lloc: Arbre de projectes - Afegeix node"
 msgid "Parent Category: "
 msgstr "Categoria pare:"
 
-#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_edit.php:84
-#, fuzzy
-msgid "New category short name (no spaces, Unix-like): "
-msgstr "Nou nom abreujat de categoria (sense espais, estil unix)"
-
-#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:90
-msgid "New category description (255 characters max): "
-msgstr "Nova descripció de categoria (VARCHAR 255): "
-
 #: www/trove/admin/trove_cat_edit.php:73 www/trove/admin/trove_cat_list.php:65
 msgid "Site Admin: Trove - Category List"
 msgstr "Administració del lloc: Arbre de projectes - Llistat de categories"
@@ -23397,9 +23394,6 @@ msgstr "Actualització en massa"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "Nom d'usuari"
-
-#~ msgid "%1$s Verification"
-#~ msgstr "%1$s Verificació"
 
 #~ msgid "Monitoring has been turned off"
 #~ msgstr "S'ha desconnectat la monitorització"
@@ -24531,18 +24525,6 @@ msgstr "Nom d'usuari"
 #~ msgid "Invalid Email Address:"
 #~ msgstr "Adreça de correu no vàlida"
 
-#~ msgid "Invalid Jabber Address"
-#~ msgstr "Adreça Jabber no vàlida"
-
-#~ msgid "Jabber Address:"
-#~ msgstr "Adreça Jabber:"
-
-#~ msgid "Send auto-generated notices only to my Jabber address"
-#~ msgstr "Envieu notícies auto-generades només a la meva adreça de Jabber"
-
-#~ msgid "Jabber Address"
-#~ msgstr "Adreça de Jabber"
-
 #, fuzzy
 #~ msgid "Error Getting Forum"
 #~ msgstr "Error afegint un fòrum"
@@ -24558,13 +24540,6 @@ msgstr "Nom d'usuari"
 
 #~ msgid "If you're aren't sure then why did you click 'Delete'?"
 #~ msgstr "Si no n'esteu segur, aleshores per què heu fet clic a 'Suprimeix'?"
-
-#~ msgid "New category short name (no spaces, unix-like)"
-#~ msgstr "Nou nom abreujat de categoria (sense espais, estil unix)"
-
-#, fuzzy
-#~ msgid "Error In Trove Operation :"
-#~ msgstr "Error en l'operació"
 
 #~ msgid "Parent Category:"
 #~ msgstr "Categoria pare:"

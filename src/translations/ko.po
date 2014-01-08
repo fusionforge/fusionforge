@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 15:50+0100\n"
+"POT-Creation-Date: 2014-01-08 17:16+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -396,6 +396,9 @@ msgstr "파일 이름"
 #: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
 #: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
 #: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
+#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_add.php:97
+#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:84
+#: www/trove/admin/trove_cat_edit.php:87 www/trove/admin/trove_cat_edit.php:90
 #, php-format
 msgid ": "
 msgstr ""
@@ -1837,7 +1840,8 @@ msgstr ""
 #: www/admin/massmail.php:140 www/admin/pending-news.php:137
 #: www/admin/pending-news.php:139 www/admin/pending-news.php:145
 #: www/admin/pending-news.php:147 www/admin/trove/trove_cat_add.php:77
-#: www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:110 www/admin/trove/trove_cat_add.php:112
+#: www/admin/trove/trove_cat_add.php:114
 #: www/admin/trove/trove_cat_edit.php:115
 #: www/admin/trove/trove_cat_edit.php:141
 #: www/admin/trove/trove_cat_edit.php:144
@@ -15934,18 +15938,20 @@ msgstr ""
 msgid "Parent Category"
 msgstr ""
 
-#: www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:110 www/trove/admin/trove_cat_add.php:95
+#: www/trove/admin/trove_cat_edit.php:84
 msgid "New category short name (no spaces, Unix-like)"
 msgstr ""
 
 #: www/admin/trove/trove_cat_add.php:112 www/trove/admin/trove_cat_add.php:97
 #: www/trove/admin/trove_cat_edit.php:87
-msgid "New category full name (80 characters max): "
+msgid "New category full name (maximum length is 80 chars)"
 msgstr ""
 
-#: www/admin/trove/trove_cat_add.php:114
+#: www/admin/trove/trove_cat_add.php:114 www/trove/admin/trove_cat_add.php:99
+#: www/trove/admin/trove_cat_edit.php:90
 #, fuzzy
-msgid "New category description (255 characters max: )"
+msgid "New category description (maximum length is 255 chars)"
 msgstr "검색어 (최대 255글자)"
 
 #: www/admin/trove/trove_cat_edit.php:47
@@ -15953,13 +15959,10 @@ msgid "Error: a category cannot be the same as its own parent: "
 msgstr ""
 
 #: www/admin/trove/trove_cat_edit.php:90
-#, fuzzy
 msgid ""
 "Error in trove operation, cannot delete trove category defined as default in "
 "configuration."
 msgstr ""
-"Error In Trove Operation , Can t delete trove category define as default in "
-"local.inc"
 
 #: www/admin/trove/trove_cat_edit.php:106
 msgid "No such category, that trove cat does not exist"
@@ -15974,11 +15977,11 @@ msgid "Category short name (no spaces, Unix-like)"
 msgstr ""
 
 #: www/admin/trove/trove_cat_edit.php:144
-msgid "Category full name (Maximum length is 80 chars)"
+msgid "Category full name (maximum length is 80 chars)"
 msgstr ""
 
 #: www/admin/trove/trove_cat_edit.php:147
-msgid "Category description (Maximum length is 255 chars)"
+msgid "Category description (maximum length is 255 chars)"
 msgstr ""
 
 #: www/admin/trove/trove_cat_list.php:74 www/trove/admin/trove_cat_list.php:69
@@ -22700,14 +22703,6 @@ msgstr ""
 msgid "Parent Category: "
 msgstr ""
 
-#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_edit.php:84
-msgid "New category short name (no spaces, Unix-like): "
-msgstr ""
-
-#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:90
-msgid "New category description (255 characters max): "
-msgstr ""
-
 #: www/trove/admin/trove_cat_edit.php:73 www/trove/admin/trove_cat_list.php:65
 msgid "Site Admin: Trove - Category List"
 msgstr ""
@@ -22757,6 +22752,10 @@ msgstr "대량 갱신"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "사용자ID"
+
+#, fuzzy
+#~ msgid "New category description (255 characters max)"
+#~ msgstr "검색어 (최대 255글자)"
 
 #, fuzzy
 #~ msgid "You must supply a first name."
@@ -23442,12 +23441,6 @@ msgstr "사용자ID"
 #, fuzzy
 #~ msgid "Invalid Email Address:"
 #~ msgstr "유효하지 않은 이메일 주소"
-
-#~ msgid "Invalid Jabber Address"
-#~ msgstr "유효하지 않은  Jabber 주소"
-
-#~ msgid "Send auto-generated notices only to my Jabber address"
-#~ msgstr "자동생성되는 메시지는 Jabber 주소로만 보내기"
 
 #, fuzzy
 #~ msgid "Error Getting Forum"

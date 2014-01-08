@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 15:50+0100\n"
+"POT-Creation-Date: 2014-01-08 17:16+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -399,6 +399,9 @@ msgstr "Fitxeroaren izena"
 #: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
 #: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
 #: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
+#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_add.php:97
+#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:84
+#: www/trove/admin/trove_cat_edit.php:87 www/trove/admin/trove_cat_edit.php:90
 #, php-format
 msgid ": "
 msgstr ""
@@ -1850,7 +1853,8 @@ msgstr ""
 #: www/admin/massmail.php:140 www/admin/pending-news.php:137
 #: www/admin/pending-news.php:139 www/admin/pending-news.php:145
 #: www/admin/pending-news.php:147 www/admin/trove/trove_cat_add.php:77
-#: www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:110 www/admin/trove/trove_cat_add.php:112
+#: www/admin/trove/trove_cat_add.php:114
 #: www/admin/trove/trove_cat_edit.php:115
 #: www/admin/trove/trove_cat_edit.php:141
 #: www/admin/trove/trove_cat_edit.php:144
@@ -16310,19 +16314,21 @@ msgstr "Proiektuen mapara kategori berria gehitu"
 msgid "Parent Category"
 msgstr "Goi kategoria"
 
-#: www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:110 www/trove/admin/trove_cat_add.php:95
+#: www/trove/admin/trove_cat_edit.php:84
 msgid "New category short name (no spaces, Unix-like)"
 msgstr "Kategoria berriaren izen motza (espaziorik gabe, Unix erara)"
 
 #: www/admin/trove/trove_cat_add.php:112 www/trove/admin/trove_cat_add.php:97
 #: www/trove/admin/trove_cat_edit.php:87
-msgid "New category full name (80 characters max): "
-msgstr "Kategoria berriaren izen osoa (muga 80 karaktere): "
+msgid "New category full name (maximum length is 80 chars)"
+msgstr "Kategoria berriaren izen osoa (muga 80 karaktere)"
 
-#: www/admin/trove/trove_cat_add.php:114
+#: www/admin/trove/trove_cat_add.php:114 www/trove/admin/trove_cat_add.php:99
+#: www/trove/admin/trove_cat_edit.php:90
 #, fuzzy
-msgid "New category description (255 characters max: )"
-msgstr "Kategoria berriaren azalpena (muga 255 karaktere): "
+msgid "New category description (maximum length is 255 chars)"
+msgstr "Kategoria berriaren azalpena (muga 255 karaktere)"
 
 #: www/admin/trove/trove_cat_edit.php:47
 msgid "Error: a category cannot be the same as its own parent: "
@@ -16351,14 +16357,12 @@ msgid "Category short name (no spaces, Unix-like)"
 msgstr "Kategoria berriaren izen motza (espaziorik gabe, Unix erara)"
 
 #: www/admin/trove/trove_cat_edit.php:144
-#, fuzzy
-msgid "Category full name (Maximum length is 80 chars)"
-msgstr "Kategoria berriaren izen osoa (muga 80 karaktere):"
+msgid "Category full name (maximum length is 80 chars)"
+msgstr "Kategoria berriaren izen osoa (muga 80 karaktere)"
 
 #: www/admin/trove/trove_cat_edit.php:147
-#, fuzzy
-msgid "Category description (Maximum length is 255 chars)"
-msgstr "Kategoria berriaren azalpena (muga 255 karaktere):"
+msgid "Category description (maximum length is 255 chars)"
+msgstr "Kategoria berriaren azalpena (muga 255 karaktere)"
 
 #: www/admin/trove/trove_cat_list.php:74 www/trove/admin/trove_cat_list.php:69
 msgid "Browse Trove Tree"
@@ -23258,15 +23262,6 @@ msgstr "Webgunearen administrazioa: Proiektuen mapa - Nodoa gehitu"
 msgid "Parent Category: "
 msgstr "Goi kategoria:"
 
-#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_edit.php:84
-#, fuzzy
-msgid "New category short name (no spaces, Unix-like): "
-msgstr "Kategoria berriaren izen motza (espaziorik gabe, Unix erara): "
-
-#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:90
-msgid "New category description (255 characters max): "
-msgstr "Kategoria berriaren azalpena (muga 255 karaktere): "
-
 #: www/trove/admin/trove_cat_edit.php:73 www/trove/admin/trove_cat_list.php:65
 msgid "Site Admin: Trove - Category List"
 msgstr "Webgunearen administrazioa: Proiektuen mapa - Kategorien zerrenda"
@@ -23318,15 +23313,6 @@ msgstr "Ezin da eguneratu"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Ez da erabiltzaile-izenik eman"
-
-#~ msgid "New category full name (Maximum length is 80 chars)"
-#~ msgstr "Kategoria berriaren izen osoa (muga 80 karaktere)"
-
-#~ msgid "New category description (Maximum length is 255 chars)"
-#~ msgstr "Kategoria berriaren azalpena (muga 255 karaktere)"
-
-#~ msgid "Monitoring has been turned off"
-#~ msgstr "Orain ez dago erabiltzailea monitorizatzen."
 
 #, fuzzy
 #~ msgid "This user is not a member of any projects."
@@ -23709,10 +23695,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #~ msgstr ""
 #~ "Unix egoera eguneratua webgunea isladatzen (\"mirroring\") zen bitartean, "
 #~ "bestela ondorengo balio du 'Ez du unix (N) konturik'"
-
-#, fuzzy
-#~ msgid "Project full name"
-#~ msgstr "Azpiproiektuaren izen berria"
 
 #~ msgid "Add/Edit Categories"
 #~ msgstr "Kategoriak gehitu/argitaratu"
@@ -24369,19 +24351,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #~ msgid "Invalid Email Address:"
 #~ msgstr "Posta elektronikoaren helbidea baliogabea da"
 
-#~ msgid "Invalid Jabber Address"
-#~ msgstr "Jabber helbide baliogabea"
-
-#~ msgid "Jabber Address:"
-#~ msgstr "Jabber helbidea:"
-
-#~ msgid "Send auto-generated notices only to my Jabber address"
-#~ msgstr "Berri automatikoak bakarrik bidali nere Jabber helbidera"
-
-#~ msgid "Jabber Address"
-#~ msgstr ""
-#~ "Helbidea <a href=\"http://www.jabber.org/\" _target=\"blank\">Jabber</a>"
-
 #, fuzzy
 #~ msgid "Error Getting Forum"
 #~ msgstr "Foroa sortzean gertatutako akatsa"
@@ -24394,9 +24363,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 
 #~ msgid "If you're aren't sure then why did you click 'Delete'?"
 #~ msgstr "Ziur ez bazenden, zergatik sakatu zenuen ezabatzeko?"
-
-#~ msgid "New category short name (no spaces, unix-like)"
-#~ msgstr "Kategoria berriaren izen motza (espaziorik gabe, unix erara)"
 
 #, fuzzy
 #~ msgid "Error In Trove Operation :"

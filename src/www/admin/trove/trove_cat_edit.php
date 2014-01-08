@@ -141,10 +141,10 @@ while ($row_parent = db_fetch_array($res_parent)) {
 <p><?php echo _('Category short name (no spaces, Unix-like)')._(':'); ?>
 <br /><input type="text" name="form_shortname" value="<?php print $row_cat["shortname"]; ?>" /></p>
 
-<p><?php echo _('Category full name (Maximum length is 80 chars)')._(':'); ?>
+<p><?php echo _('Category full name (maximum length is 80 chars)')._(':'); ?>
 <br /><input type="text" name="form_fullname" value="<?php print $row_cat["fullname"]; ?>" /></p>
 
-<p><?php echo _('Category description (Maximum length is 255 chars)')._(':'); ?>
+<p><?php echo _('Category description (maximum length is 255 chars)')._(':'); ?>
 <br /><input type="text" name="form_description" size="80" value="<?php print $row_cat["description"]; ?>" /></p>
 
 <br /><input type="submit" name="submit" value="<?php echo _('Update'); ?>" /><input type="submit" name="delete" value="<?php echo _('Delete'); ?>" />

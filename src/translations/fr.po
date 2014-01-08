@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 15:50+0100\n"
+"POT-Creation-Date: 2014-01-08 17:16+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -385,6 +385,9 @@ msgstr "Dossier"
 #: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
 #: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
 #: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
+#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_add.php:97
+#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:84
+#: www/trove/admin/trove_cat_edit.php:87 www/trove/admin/trove_cat_edit.php:90
 #, php-format
 msgid ": "
 msgstr " : "
@@ -1766,7 +1769,8 @@ msgstr "Date de début"
 #: www/admin/massmail.php:140 www/admin/pending-news.php:137
 #: www/admin/pending-news.php:139 www/admin/pending-news.php:145
 #: www/admin/pending-news.php:147 www/admin/trove/trove_cat_add.php:77
-#: www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:110 www/admin/trove/trove_cat_add.php:112
+#: www/admin/trove/trove_cat_add.php:114
 #: www/admin/trove/trove_cat_edit.php:115
 #: www/admin/trove/trove_cat_edit.php:141
 #: www/admin/trove/trove_cat_edit.php:144
@@ -15771,19 +15775,20 @@ msgstr "Ajouter une nouvelle branche"
 msgid "Parent Category"
 msgstr "Catégorie mère"
 
-#: www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:110 www/trove/admin/trove_cat_add.php:95
+#: www/trove/admin/trove_cat_edit.php:84
 msgid "New category short name (no spaces, Unix-like)"
 msgstr "Nom court de la nouvelle catégorie (pas d'espace, à la Unix)"
 
 #: www/admin/trove/trove_cat_add.php:112 www/trove/admin/trove_cat_add.php:97
 #: www/trove/admin/trove_cat_edit.php:87
-msgid "New category full name (80 characters max): "
-msgstr "Nom complet de la nouvelle catégorie (80 caractères maxi) : "
+msgid "New category full name (maximum length is 80 chars)"
+msgstr "Nom complet de la nouvelle catégorie (80 caractères maxi)"
 
-#: www/admin/trove/trove_cat_add.php:114
-#, fuzzy
-msgid "New category description (255 characters max: )"
-msgstr "Description de la nouvelle catégorie (255 caractères maxi) : "
+#: www/admin/trove/trove_cat_add.php:114 www/trove/admin/trove_cat_add.php:99
+#: www/trove/admin/trove_cat_edit.php:90
+msgid "New category description (maximum length is 255 chars)"
+msgstr "Description de la nouvelle catégorie (255 caractères maxi)"
 
 #: www/admin/trove/trove_cat_edit.php:47
 msgid "Error: a category cannot be the same as its own parent: "
@@ -15807,15 +15812,15 @@ msgstr "Modifier une catégorie de l'arbre"
 
 #: www/admin/trove/trove_cat_edit.php:141
 msgid "Category short name (no spaces, Unix-like)"
-msgstr "Nom court de la nouvelle catégorie (pas d'espace, à la Unix)"
+msgstr "Nom court de la catégorie (pas d'espace, à la Unix)"
 
 #: www/admin/trove/trove_cat_edit.php:144
-msgid "Category full name (Maximum length is 80 chars)"
-msgstr "Nom complet de la nouvelle catégorie (80 caractères maxi)"
+msgid "Category full name (maximum length is 80 chars)"
+msgstr "Nom complet de la catégorie (80 caractères maxi)"
 
 #: www/admin/trove/trove_cat_edit.php:147
-msgid "Category description (Maximum length is 255 chars)"
-msgstr "Description de la nouvelle catégorie (255 caractères maxi)"
+msgid "Category description (maximum length is 255 chars)"
+msgstr "Description de la catégorie (255 caractères maxi)"
 
 #: www/admin/trove/trove_cat_list.php:74 www/trove/admin/trove_cat_list.php:69
 msgid "Browse Trove Tree"
@@ -22738,14 +22743,6 @@ msgstr "Administration du site : Ajouter un noeud à l'arbre"
 msgid "Parent Category: "
 msgstr "Catégorie mère : "
 
-#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_edit.php:84
-msgid "New category short name (no spaces, Unix-like): "
-msgstr "Nom court de la nouvelle catégorie (pas d'espace, à la Unix) : "
-
-#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:90
-msgid "New category description (255 characters max): "
-msgstr "Description de la nouvelle catégorie (255 caractères maxi) : "
-
 #: www/trove/admin/trove_cat_edit.php:73 www/trove/admin/trove_cat_list.php:65
 msgid "Site Admin: Trove - Category List"
 msgstr "Administration du site : Liste des catégories de l'arbre"
@@ -22810,12 +22807,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "No project found."
 #~ msgstr "Aucun projet trouvé."
-
-#~ msgid "New category full name (Maximum length is 80 chars)"
-#~ msgstr "Nom complet de la nouvelle catégorie (80 caractères maxi)"
-
-#~ msgid "New category description (Maximum length is 255 chars)"
-#~ msgstr "Description de la nouvelle catégorie (255 caractères maxi)"
 
 #~ msgid "Monitoring has been turned off"
 #~ msgstr "Le suivi a été arrêté"
@@ -23318,9 +23309,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgstr ""
 #~ "Statut Unix mis à jour en copiant le statut web, sauf s'il a la valeur "
 #~ "'Pas de compte Unix (N)'."
-
-#~ msgid "Project full name"
-#~ msgstr "Nom complet du projet"
 
 #~ msgid ""
 #~ "In addition to full project name, you will need to choose short, \"Unix\" "
@@ -24357,24 +24345,12 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgid "Invalid Email Address:"
 #~ msgstr "Adresse de messagerie non valide"
 
-#~ msgid "Invalid Jabber Address"
-#~ msgstr "Adresse Jabber non valide"
-
 #~ msgid "ERROR: Invalid status value"
 #~ msgstr "Erreur : valeur invalide pour le statut"
 
 #, fuzzy
 #~ msgid "ERROR: Invalid Shell %s"
 #~ msgstr "Erreur : shell invalide"
-
-#~ msgid "Jabber Address:"
-#~ msgstr "Adresse Jabber :"
-
-#~ msgid "Send auto-generated notices only to my Jabber address"
-#~ msgstr "N'envoyer les notifications automatiques qu'à mon adresse Jabber"
-
-#~ msgid "Jabber Address"
-#~ msgstr "Addresse Jabber"
 
 #~ msgid "Changed Public Info"
 #~ msgstr "Info publique modifiée"
@@ -24494,9 +24470,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "If you're aren't sure then why did you click 'Delete'?"
 #~ msgstr "Si vous n'êtes pas sûr, pourquoi avoir cliqué sur « Supprimer » ?"
-
-#~ msgid "New category short name (no spaces, unix-like)"
-#~ msgstr "Nom court de la nouvelle catégorie (pas d'espace, à la Unix)"
 
 #~ msgid "Error: a category can't be the same as its own parent: "
 #~ msgstr "Erreur : une catégorie ne peut être son propre parent : "
@@ -28138,12 +28111,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "Document Manager Access Denied."
 #~ msgstr "Accès refusé au gestionnaire de documents"
-
-#~ msgid "Invalid full name"
-#~ msgstr "Nom complet invalide."
-
-#~ msgid "?"
-#~ msgstr "?"
 
 #~ msgid "No item selected"
 #~ msgstr "Aucun élément sélectionné"

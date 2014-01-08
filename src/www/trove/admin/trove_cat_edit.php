@@ -81,13 +81,13 @@ site_admin_header(array('title'=>_('Site Admin: Trove - Category List'))) ;
 <form action="trove_cat_edit.php?trove_cat_id=<?php echo $category->getId(); ?>" method="post">
 <input type="hidden" name="do" value="updateCategory" />
 
-		  <p><?php echo _('New category short name (no spaces, Unix-like): '); ?>
+		  <p><?php echo _('New category short name (no spaces, Unix-like)')._(': '); ?>
 <br /><input type="text" name="shortName" value="<?php echo $category->getShortName(); ?>" /></p>
 
-		  <p><?php echo _('New category full name (80 characters max): '); ?>
+		  <p><?php echo _('New category full name (maximum length is 80 chars)')._(': '); ?>
 <br /><input type="text" name="fullName" value="<?php echo $category->getFullName(); ?>" /></p>
 
-		  <p><?php echo _('New category description (255 characters max): '); ?>
+		  <p><?php echo _('New category description (maximum length is 255 chars)')._(': '); ?>
 <br /><input type="text" name="description" size="80" value="<?php echo $category->getDescription(); ?>" /></p>
 
 <br /><input type="submit" name="submit" value="<?php echo _('update'); ?>" /><input type="submit" name="delete" value="<?php echo _('delete'); ?>" />

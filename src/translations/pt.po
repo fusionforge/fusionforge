@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 15:50+0100\n"
+"POT-Creation-Date: 2014-01-08 17:16+0100\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -383,6 +383,9 @@ msgstr ""
 #: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
 #: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
 #: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
+#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_add.php:97
+#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:84
+#: www/trove/admin/trove_cat_edit.php:87 www/trove/admin/trove_cat_edit.php:90
 #, php-format
 msgid ": "
 msgstr ""
@@ -1746,7 +1749,8 @@ msgstr ""
 #: www/admin/massmail.php:140 www/admin/pending-news.php:137
 #: www/admin/pending-news.php:139 www/admin/pending-news.php:145
 #: www/admin/pending-news.php:147 www/admin/trove/trove_cat_add.php:77
-#: www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:110 www/admin/trove/trove_cat_add.php:112
+#: www/admin/trove/trove_cat_add.php:114
 #: www/admin/trove/trove_cat_edit.php:115
 #: www/admin/trove/trove_cat_edit.php:141
 #: www/admin/trove/trove_cat_edit.php:144
@@ -15191,18 +15195,20 @@ msgstr "Adicionar Nova Categoria ao Repositório"
 msgid "Parent Category"
 msgstr "Categoria de Origem"
 
-#: www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:110 www/trove/admin/trove_cat_add.php:95
+#: www/trove/admin/trove_cat_edit.php:84
 msgid "New category short name (no spaces, Unix-like)"
 msgstr "Novo nome curto de categoria (sem espaços, Unix-like)"
 
 #: www/admin/trove/trove_cat_add.php:112 www/trove/admin/trove_cat_add.php:97
 #: www/trove/admin/trove_cat_edit.php:87
-msgid "New category full name (80 characters max): "
+msgid "New category full name (maximum length is 80 chars)"
 msgstr ""
 
-#: www/admin/trove/trove_cat_add.php:114
+#: www/admin/trove/trove_cat_add.php:114 www/trove/admin/trove_cat_add.php:99
+#: www/trove/admin/trove_cat_edit.php:90
 #, fuzzy
-msgid "New category description (255 characters max: )"
+msgid "New category description (maximum length is 255 chars)"
 msgstr "Nova descrição de categoria (VARCHAR 255)"
 
 #: www/admin/trove/trove_cat_edit.php:47
@@ -15229,11 +15235,11 @@ msgid "Category short name (no spaces, Unix-like)"
 msgstr "Novo nome curto de categoria (sem espaços, Unix-like)"
 
 #: www/admin/trove/trove_cat_edit.php:144
-msgid "Category full name (Maximum length is 80 chars)"
+msgid "Category full name (maximum length is 80 chars)"
 msgstr ""
 
 #: www/admin/trove/trove_cat_edit.php:147
-msgid "Category description (Maximum length is 255 chars)"
+msgid "Category description (maximum length is 255 chars)"
 msgstr ""
 
 #: www/admin/trove/trove_cat_list.php:74 www/trove/admin/trove_cat_list.php:69
@@ -21798,14 +21804,6 @@ msgstr "Administrador do Site: Repositório - Adicionar Nó"
 msgid "Parent Category: "
 msgstr ""
 
-#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_edit.php:84
-msgid "New category short name (no spaces, Unix-like): "
-msgstr ""
-
-#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:90
-msgid "New category description (255 characters max): "
-msgstr ""
-
 #: www/trove/admin/trove_cat_edit.php:73 www/trove/admin/trove_cat_list.php:65
 msgid "Site Admin: Trove - Category List"
 msgstr "Administração do Site: Repositório - Lista de Categorias"
@@ -22374,20 +22372,6 @@ msgstr ""
 #~ msgid "No Valid Forum Object"
 #~ msgstr "Nenhum Objeto de Fórum Válido"
 
-#~ msgid "Invalid Jabber Address"
-#~ msgstr "Endereço do Jabber Inválido"
-
-#~ msgid "Jabber Address:"
-#~ msgstr "Endereço do Jabber:"
-
-#~ msgid "Send auto-generated notices only to my Jabber address"
-#~ msgstr ""
-#~ "Enviar notícias geradas automáticamente apenas para o meu endereço do "
-#~ "Jabber"
-
-#~ msgid "Jabber Address"
-#~ msgstr "Endereço do Jabber"
-
 #~ msgid "Existing Responses:"
 #~ msgstr "Repostas Existentes:"
 
@@ -22399,9 +22383,6 @@ msgstr ""
 
 #~ msgid "If you're aren't sure then why did you click 'Delete'?"
 #~ msgstr "Se você não tem certeza por que você clicou em 'Deletar'?"
-
-#~ msgid "New category short name (no spaces, unix-like)"
-#~ msgstr "Novo nome curto de categoria (sem espaços, unix-like)"
 
 #~ msgid "Parent Category:"
 #~ msgstr "Categoria de Origem:"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 15:50+0100\n"
+"POT-Creation-Date: 2014-01-08 17:16+0100\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -399,6 +399,9 @@ msgstr "Filnamn"
 #: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
 #: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
 #: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
+#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_add.php:97
+#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:84
+#: www/trove/admin/trove_cat_edit.php:87 www/trove/admin/trove_cat_edit.php:90
 #, php-format
 msgid ": "
 msgstr ""
@@ -1847,7 +1850,8 @@ msgstr ""
 #: www/admin/massmail.php:140 www/admin/pending-news.php:137
 #: www/admin/pending-news.php:139 www/admin/pending-news.php:145
 #: www/admin/pending-news.php:147 www/admin/trove/trove_cat_add.php:77
-#: www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:110 www/admin/trove/trove_cat_add.php:112
+#: www/admin/trove/trove_cat_add.php:114
 #: www/admin/trove/trove_cat_edit.php:115
 #: www/admin/trove/trove_cat_edit.php:141
 #: www/admin/trove/trove_cat_edit.php:144
@@ -9829,7 +9833,6 @@ msgstr "Kontoinformation"
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:131
 #: plugins/globaldashboard/www/admin/manage_accounts.php:147
-#, fuzzy
 msgid "Account URI"
 msgstr ""
 
@@ -10342,7 +10345,6 @@ msgstr "Datatyper"
 #: plugins/headermenu/view/admin/viewGlobalConfiguration.php:148
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:68
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:106
-#, fuzzy
 msgid "HTML Page"
 msgstr ""
 
@@ -11654,7 +11656,6 @@ msgid "Closed"
 msgstr "Datum stängd"
 
 #: plugins/mantisbt/view/adminuser.php:31
-#, fuzzy
 msgid "Manage your account"
 msgstr ""
 
@@ -16253,19 +16254,21 @@ msgstr "Lägg till ny resurskategori"
 msgid "Parent Category"
 msgstr "Förälderkategori"
 
-#: www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:110 www/trove/admin/trove_cat_add.php:95
+#: www/trove/admin/trove_cat_edit.php:84
 msgid "New category short name (no spaces, Unix-like)"
 msgstr "Ny kategoriförkortning (inga mellanslag, Unix-liknande)"
 
 #: www/admin/trove/trove_cat_add.php:112 www/trove/admin/trove_cat_add.php:97
 #: www/trove/admin/trove_cat_edit.php:87
 #, fuzzy
-msgid "New category full name (80 characters max): "
+msgid "New category full name (maximum length is 80 chars)"
 msgstr "Nytt kategorinamn (VARCHAR 80)"
 
-#: www/admin/trove/trove_cat_add.php:114
+#: www/admin/trove/trove_cat_add.php:114 www/trove/admin/trove_cat_add.php:99
+#: www/trove/admin/trove_cat_edit.php:90
 #, fuzzy
-msgid "New category description (255 characters max: )"
+msgid "New category description (maximum length is 255 chars)"
 msgstr "Ny kategoribeskrivning (VARCHAR 255)"
 
 #: www/admin/trove/trove_cat_edit.php:47
@@ -16295,11 +16298,11 @@ msgid "Category short name (no spaces, Unix-like)"
 msgstr "Ny kategoriförkortning (inga mellanslag, Unix-liknande)"
 
 #: www/admin/trove/trove_cat_edit.php:144
-msgid "Category full name (Maximum length is 80 chars)"
+msgid "Category full name (maximum length is 80 chars)"
 msgstr "Nytt kategorinamn (VARCHAR 80)"
 
 #: www/admin/trove/trove_cat_edit.php:147
-msgid "Category description (Maximum length is 255 chars)"
+msgid "Category description (maximum length is 255 chars)"
 msgstr "Ny kategoribeskrivning (VARCHAR 255)"
 
 #: www/admin/trove/trove_cat_list.php:74 www/trove/admin/trove_cat_list.php:69
@@ -23185,16 +23188,6 @@ msgstr "Webbplats admin: Resurs - lägg till led"
 msgid "Parent Category: "
 msgstr "Förälderkategori:"
 
-#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_edit.php:84
-#, fuzzy
-msgid "New category short name (no spaces, Unix-like): "
-msgstr "Ny kategoriförkortning (inga mellanslag, unix-liknande)"
-
-#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:90
-#, fuzzy
-msgid "New category description (255 characters max): "
-msgstr "Ny kategoribeskrivning (VARCHAR 255)"
-
 #: www/trove/admin/trove_cat_edit.php:73 www/trove/admin/trove_cat_list.php:65
 msgid "Site Admin: Trove - Category List"
 msgstr "Webbplats admin: Resurskategorilista"
@@ -23249,6 +23242,7 @@ msgstr "Mass uppdatering"
 msgid "No User Name Provided"
 msgstr "Användarenamn"
 
+
 #, fuzzy
 #~ msgid "You must supply a first name."
 #~ msgstr "Du måste ange ett användarnamn"
@@ -23268,12 +23262,6 @@ msgstr "Användarenamn"
 #, fuzzy
 #~ msgid "No project found."
 #~ msgstr "Hittade inga projektgrupper"
-
-#~ msgid "New category full name (Maximum length is 80 chars)"
-#~ msgstr "Nytt kategorinamn (VARCHAR 80)"
-
-#~ msgid "New category description (Maximum length is 255 chars)"
-#~ msgstr "Ny kategoribeskrivning (VARCHAR 255)"
 
 #~ msgid "Monitoring has been turned off"
 #~ msgstr "Bevakning har stängts av"
@@ -23669,10 +23657,6 @@ msgstr "Användarenamn"
 #~ msgstr ""
 #~ "Unixstatus uppdaterad, speglar webbstatus om det inte har värdet 'Inget "
 #~ "unixkonto (N)'"
-
-#, fuzzy
-#~ msgid "Project full name"
-#~ msgstr "Nytt projektnamn"
 
 #~ msgid "Add/Edit Categories"
 #~ msgstr "Lägg till/Redigera kategorier"
@@ -24285,19 +24269,6 @@ msgstr "Användarenamn"
 #~ msgid "Invalid Email Address:"
 #~ msgstr "Ogiltig e-postadress"
 
-#~ msgid "Invalid Jabber Address"
-#~ msgstr "Ogiltig jabberadress"
-
-#~ msgid "Jabber Address:"
-#~ msgstr "Jabberadress:"
-
-#~ msgid "Send auto-generated notices only to my Jabber address"
-#~ msgstr ""
-#~ "Skicka automatiskt genererade meddelanden endast till min Jabber adress"
-
-#~ msgid "Jabber Address"
-#~ msgstr "Jabberadress"
-
 #, fuzzy
 #~ msgid "Error Getting Forum"
 #~ msgstr "Fel vid tillägg i forum"
@@ -24313,9 +24284,6 @@ msgstr "Användarenamn"
 
 #~ msgid "If you're aren't sure then why did you click 'Delete'?"
 #~ msgstr "Om du inte är säker, varför klickade du då på 'Ta bort'?"
-
-#~ msgid "New category short name (no spaces, unix-like)"
-#~ msgstr "Ny kategoriförkortning (inga mellanslag, unix-liknande)"
 
 #, fuzzy
 #~ msgid "Error In Trove Operation :"

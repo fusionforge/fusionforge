@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 15:50+0100\n"
+"POT-Creation-Date: 2014-01-08 17:16+0100\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -399,6 +399,9 @@ msgstr "プロジェクト管理"
 #: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
 #: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
 #: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
+#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_add.php:97
+#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:84
+#: www/trove/admin/trove_cat_edit.php:87 www/trove/admin/trove_cat_edit.php:90
 #, php-format
 msgid ": "
 msgstr ""
@@ -1841,7 +1844,8 @@ msgstr ""
 #: www/admin/massmail.php:140 www/admin/pending-news.php:137
 #: www/admin/pending-news.php:139 www/admin/pending-news.php:145
 #: www/admin/pending-news.php:147 www/admin/trove/trove_cat_add.php:77
-#: www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:110 www/admin/trove/trove_cat_add.php:112
+#: www/admin/trove/trove_cat_add.php:114
 #: www/admin/trove/trove_cat_edit.php:115
 #: www/admin/trove/trove_cat_edit.php:141
 #: www/admin/trove/trove_cat_edit.php:144
@@ -2694,9 +2698,8 @@ msgstr "無効なオペレーション"
 #: common/forum/ForumMessage.class.php:406
 #: common/forum/ForumMessage.class.php:424
 #: common/forum/ForumMessage.class.php:577
-#, fuzzy
 msgid "Invalid Message Id"
-msgstr "無効なJabberアドレス"
+msgstr ""
 
 #: common/forum/ForumMessage.class.php:658
 #, php-format
@@ -6170,9 +6173,8 @@ msgid "Error updating artifact counts: "
 msgstr "パーミッションが取得できません。"
 
 #: common/tracker/Artifact.class.php:601
-#, fuzzy
 msgid "Valid Email Address Required"
-msgstr "無効なJabberアドレス"
+msgstr ""
 
 #: common/tracker/Artifact.class.php:952
 msgid "Invalid assigned person: must be a technician"
@@ -8254,9 +8256,8 @@ msgstr "ここから先はクッキーを有効にしてください"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:74
 #: www/account/pending-resend.php:65 www/account/verify.php:76
-#, fuzzy
 msgid "Login name or email address"
-msgstr "無効なJabberアドレス"
+msgstr ""
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:76
 #: www/account/index.php:149 www/account/lostpw.php:89
@@ -15927,17 +15928,19 @@ msgstr ""
 msgid "Parent Category"
 msgstr ""
 
-#: www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:110 www/trove/admin/trove_cat_add.php:95
+#: www/trove/admin/trove_cat_edit.php:84
 msgid "New category short name (no spaces, Unix-like)"
 msgstr ""
 
 #: www/admin/trove/trove_cat_add.php:112 www/trove/admin/trove_cat_add.php:97
 #: www/trove/admin/trove_cat_edit.php:87
-msgid "New category full name (80 characters max): "
+msgid "New category full name (maximum length is 80 chars)"
 msgstr ""
 
-#: www/admin/trove/trove_cat_add.php:114
-msgid "New category description (255 characters max: )"
+#: www/admin/trove/trove_cat_add.php:114 www/trove/admin/trove_cat_add.php:99
+#: www/trove/admin/trove_cat_edit.php:90
+msgid "New category description (maximum length is 255 chars)"
 msgstr ""
 
 #: www/admin/trove/trove_cat_edit.php:47
@@ -15964,11 +15967,11 @@ msgid "Category short name (no spaces, Unix-like)"
 msgstr ""
 
 #: www/admin/trove/trove_cat_edit.php:144
-msgid "Category full name (Maximum length is 80 chars)"
+msgid "Category full name (maximum length is 80 chars)"
 msgstr ""
 
 #: www/admin/trove/trove_cat_edit.php:147
-msgid "Category description (Maximum length is 255 chars)"
+msgid "Category description (maximum length is 255 chars)"
 msgstr ""
 
 #: www/admin/trove/trove_cat_list.php:74 www/trove/admin/trove_cat_list.php:69
@@ -22579,14 +22582,6 @@ msgstr ""
 msgid "Parent Category: "
 msgstr ""
 
-#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_edit.php:84
-msgid "New category short name (no spaces, Unix-like): "
-msgstr ""
-
-#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:90
-msgid "New category description (255 characters max): "
-msgstr ""
-
 #: www/trove/admin/trove_cat_edit.php:73 www/trove/admin/trove_cat_list.php:65
 msgid "Site Admin: Trove - Category List"
 msgstr ""
@@ -23140,10 +23135,6 @@ msgstr ""
 #~ msgstr "無効なパスワード:"
 
 #, fuzzy
-#~ msgid "Invalid email "
-#~ msgstr "無効なJabberアドレス"
-
-#, fuzzy
 #~ msgid "Invalid ArtifactType"
 #~ msgstr "無効なオペレーション"
 
@@ -23161,24 +23152,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Invalid filename"
 #~ msgstr "無効なUnixネーム"
-
-#, fuzzy
-#~ msgid "Invalid Email Address:"
-#~ msgstr "無効なJabberアドレス"
-
-#~ msgid "Invalid Jabber Address"
-#~ msgstr "無効なJabberアドレス"
-
-#~ msgid "Jabber Address:"
-#~ msgstr "Jabberアドレス:"
-
-#~ msgid "Send auto-generated notices only to my Jabber address"
-#~ msgstr ""
-#~ "(未訳：account_register.jabberonly)Send auto-generated notices only to my "
-#~ "Jabber address"
-
-#~ msgid "Jabber Address"
-#~ msgstr "Jabberアドレス"
 
 #, fuzzy
 #~ msgid "Error Getting Forum"
@@ -23215,10 +23188,6 @@ msgstr ""
 #~ msgstr "見あたらないパラメータ"
 
 #, fuzzy
-#~ msgid "Login name or email address:"
-#~ msgstr "無効なJabberアドレス"
-
-#, fuzzy
 #~ msgid "Add user"
 #~ msgstr "タスク追加"
 
@@ -23233,9 +23202,6 @@ msgstr ""
 
 #~ msgid "Last 1month"
 #~ msgstr "1ヶ月"
-
-#~ msgid "Invalid email address."
-#~ msgstr "無効なJabberアドレス"
 
 #, fuzzy
 #~ msgid ""

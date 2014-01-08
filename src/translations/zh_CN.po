@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 15:50+0100\n"
+"POT-Creation-Date: 2014-01-08 17:16+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -399,6 +399,9 @@ msgstr "文件名"
 #: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
 #: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
 #: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
+#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_add.php:97
+#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:84
+#: www/trove/admin/trove_cat_edit.php:87 www/trove/admin/trove_cat_edit.php:90
 #, php-format
 msgid ": "
 msgstr ""
@@ -1856,7 +1859,8 @@ msgstr "开启日期"
 #: www/admin/massmail.php:140 www/admin/pending-news.php:137
 #: www/admin/pending-news.php:139 www/admin/pending-news.php:145
 #: www/admin/pending-news.php:147 www/admin/trove/trove_cat_add.php:77
-#: www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:110 www/admin/trove/trove_cat_add.php:112
+#: www/admin/trove/trove_cat_add.php:114
 #: www/admin/trove/trove_cat_edit.php:115
 #: www/admin/trove/trove_cat_edit.php:141
 #: www/admin/trove/trove_cat_edit.php:144
@@ -16308,19 +16312,21 @@ msgstr "添加软件类别"
 msgid "Parent Category"
 msgstr "上层类别"
 
-#: www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:110 www/trove/admin/trove_cat_add.php:95
+#: www/trove/admin/trove_cat_edit.php:84
 msgid "New category short name (no spaces, Unix-like)"
 msgstr "新类别缩写 (没有空白，像是Unix)"
 
 #: www/admin/trove/trove_cat_add.php:112 www/trove/admin/trove_cat_add.php:97
 #: www/trove/admin/trove_cat_edit.php:87
 #, fuzzy
-msgid "New category full name (80 characters max): "
+msgid "New category full name (maximum length is 80 chars)"
 msgstr "新类别完整名称 (80字节)"
 
-#: www/admin/trove/trove_cat_add.php:114
+#: www/admin/trove/trove_cat_add.php:114 www/trove/admin/trove_cat_add.php:99
+#: www/trove/admin/trove_cat_edit.php:90
 #, fuzzy
-msgid "New category description (255 characters max: )"
+msgid "New category description (maximum length is 255 chars)"
 msgstr "新类别说明 (255字节)"
 
 #: www/admin/trove/trove_cat_edit.php:47
@@ -16350,12 +16356,12 @@ msgstr "新类别缩写 (没有空白，像是Unix)"
 
 #: www/admin/trove/trove_cat_edit.php:144
 #, fuzzy
-msgid "Category full name (Maximum length is 80 chars)"
+msgid "Category full name (maximum length is 80 chars)"
 msgstr "新类别完整名称 (80字节)"
 
 #: www/admin/trove/trove_cat_edit.php:147
 #, fuzzy
-msgid "Category description (Maximum length is 255 chars)"
+msgid "Category description (maximum length is 255 chars)"
 msgstr "新类别说明 (255字节)"
 
 #: www/admin/trove/trove_cat_list.php:74 www/trove/admin/trove_cat_list.php:69
@@ -23203,16 +23209,6 @@ msgstr "网站管理：软件 - 添加节点"
 msgid "Parent Category: "
 msgstr "上层类别："
 
-#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_edit.php:84
-#, fuzzy
-msgid "New category short name (no spaces, Unix-like): "
-msgstr "新类别缩写 (没有空白，像是Unix)"
-
-#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:90
-#, fuzzy
-msgid "New category description (255 characters max): "
-msgstr "新类别说明 (255字节)"
-
 #: www/trove/admin/trove_cat_edit.php:73 www/trove/admin/trove_cat_list.php:65
 msgid "Site Admin: Trove - Category List"
 msgstr "网站管理：软件 - 类别清单"
@@ -23266,12 +23262,6 @@ msgstr "大量更新"
 #, fuzzy
 msgid "No User Name Provided"
 msgstr "帐号"
-
-#~ msgid "New category full name (Maximum length is 80 chars)"
-#~ msgstr "新类别完整名称 (80字节)"
-
-#~ msgid "New category description (Maximum length is 255 chars)"
-#~ msgstr "新类别说明 (255字节)"
 
 #~ msgid "Monitoring has been turned off"
 #~ msgstr "监视行为已被关闭"
@@ -23665,10 +23655,6 @@ msgstr "帐号"
 #~ "account (N)'"
 #~ msgstr ""
 #~ "Unix帐号状态更新反映自网站的状态，除非它的设置值是'没有Unix帐号 (N)'。"
-
-#, fuzzy
-#~ msgid "Project full name"
-#~ msgstr "新项目名称"
 
 #~ msgid "Add/Edit Categories"
 #~ msgstr "增加/编辑分类"
@@ -24361,18 +24347,6 @@ msgstr "帐号"
 #~ msgid "Invalid Email Address:"
 #~ msgstr "无效的Email"
 
-#~ msgid "Invalid Jabber Address"
-#~ msgstr "无效的Jabber信箱"
-
-#~ msgid "Jabber Address:"
-#~ msgstr "Jabber 信箱："
-
-#~ msgid "Send auto-generated notices only to my Jabber address"
-#~ msgstr "自动产生的通知只发送到我的Jabber信箱"
-
-#~ msgid "Jabber Address"
-#~ msgstr "Jabber位址"
-
 #, fuzzy
 #~ msgid "Error Getting Forum"
 #~ msgstr "添加讨论区错误"
@@ -24388,9 +24362,6 @@ msgstr "帐号"
 
 #~ msgid "If you're aren't sure then why did you click 'Delete'?"
 #~ msgstr "如果您无法确定，为何要点击 '删除'？"
-
-#~ msgid "New category short name (no spaces, unix-like)"
-#~ msgstr "新类别缩写 (没有空白，像是Unix)"
 
 #, fuzzy
 #~ msgid "Error In Trove Operation :"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 15:50+0100\n"
+"POT-Creation-Date: 2014-01-08 17:16+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -398,6 +398,9 @@ msgstr ""
 #: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
 #: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
 #: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
+#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_add.php:97
+#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:84
+#: www/trove/admin/trove_cat_edit.php:87 www/trove/admin/trove_cat_edit.php:90
 #, php-format
 msgid ": "
 msgstr ""
@@ -1856,7 +1859,8 @@ msgstr "Data de comezo"
 #: www/admin/massmail.php:140 www/admin/pending-news.php:137
 #: www/admin/pending-news.php:139 www/admin/pending-news.php:145
 #: www/admin/pending-news.php:147 www/admin/trove/trove_cat_add.php:77
-#: www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:110 www/admin/trove/trove_cat_add.php:112
+#: www/admin/trove/trove_cat_add.php:114
 #: www/admin/trove/trove_cat_edit.php:115
 #: www/admin/trove/trove_cat_edit.php:141
 #: www/admin/trove/trove_cat_edit.php:144
@@ -16481,19 +16485,20 @@ msgstr "Engadir unha categoría nova á árbore de proxectos"
 msgid "Parent Category"
 msgstr "Categoría superior"
 
-#: www/admin/trove/trove_cat_add.php:110
+#: www/admin/trove/trove_cat_add.php:110 www/trove/admin/trove_cat_add.php:95
+#: www/trove/admin/trove_cat_edit.php:84
 msgid "New category short name (no spaces, Unix-like)"
 msgstr "Nome corto da nova categoría (sen espazos, estilo Unix)"
 
 #: www/admin/trove/trove_cat_add.php:112 www/trove/admin/trove_cat_add.php:97
 #: www/trove/admin/trove_cat_edit.php:87
-msgid "New category full name (80 characters max): "
-msgstr "Nome completo da nova categoría (máximo 80 caracteres): "
+msgid "New category full name (maximum length is 80 chars)"
+msgstr "Nome completo da nova categoría (máximo 80 caracteres)"
 
-#: www/admin/trove/trove_cat_add.php:114
-#, fuzzy
-msgid "New category description (255 characters max: )"
-msgstr "Descrición da nova categoría (máximo 255 caracteres): "
+#: www/admin/trove/trove_cat_add.php:114 www/trove/admin/trove_cat_add.php:99
+#: www/trove/admin/trove_cat_edit.php:90
+msgid "New category description (maximum length is 255 chars)"
+msgstr "Descrición da nova categoría (máximo 255 caracteres)"
 
 #: www/admin/trove/trove_cat_edit.php:47
 msgid "Error: a category cannot be the same as its own parent: "
@@ -16521,14 +16526,12 @@ msgid "Category short name (no spaces, Unix-like)"
 msgstr "Novo nome curto da nova categoría (sen espazos, ao estilo Unix)"
 
 #: www/admin/trove/trove_cat_edit.php:144
-#, fuzzy
-msgid "Category full name (Maximum length is 80 chars)"
-msgstr "Nome completo da nova categoría (máximo 80 caracteres):"
+msgid "Category full name (maximum length is 80 chars)"
+msgstr "Nome completo da nova categoría (máximo 80 caracteres)"
 
 #: www/admin/trove/trove_cat_edit.php:147
-#, fuzzy
-msgid "Category description (Maximum length is 255 chars)"
-msgstr "Descrición da nova categoría (máximo 255 caracteres):"
+msgid "Category description (maximum length is 255 chars)"
+msgstr "Descrición da nova categoría (máximo 255 caracteres)"
 
 #: www/admin/trove/trove_cat_list.php:74 www/trove/admin/trove_cat_list.php:69
 msgid "Browse Trove Tree"
@@ -20874,8 +20877,7 @@ msgstr "Directorio do grupo no servidor do intérprete de ordes:"
 #: www/project/admin/index.php:125
 #, fuzzy
 msgid "Project WWW directory on shell server:"
-msgstr ""
-"Directorio da web do proxecto no servidor de intérprete de ordes:"
+msgstr "Directorio da web do proxecto no servidor de intérprete de ordes:"
 
 #: www/project/admin/index.php:134
 #, fuzzy
@@ -23531,14 +23533,6 @@ msgstr "Administración do sitio: árbore proxectos - engadir un nodo"
 msgid "Parent Category: "
 msgstr "Categoría superior: "
 
-#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_edit.php:84
-msgid "New category short name (no spaces, Unix-like): "
-msgstr "Nome corto da nova categoría (sen espazos, estilo unix): "
-
-#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:90
-msgid "New category description (255 characters max): "
-msgstr "Descrición da nova categoría (máximo 255 caracteres): "
-
 #: www/trove/admin/trove_cat_edit.php:73 www/trove/admin/trove_cat_list.php:65
 msgid "Site Admin: Trove - Category List"
 msgstr "Administración do sitio: mapa de proxectos - Listaxe de categorías"
@@ -23609,12 +23603,6 @@ msgstr "Non se introduciu un nome de usuario"
 #, fuzzy
 #~ msgid "No project found."
 #~ msgstr "Non se achou un grupo de proxecto."
-
-#~ msgid "New category full name (Maximum length is 80 chars)"
-#~ msgstr "Nome completo da nova categoría (máximo 80 caracteres)"
-
-#~ msgid "New category description (Maximum length is 255 chars)"
-#~ msgstr "Descrición da nova categoría (máximo 255 caracteres)"
 
 #~ msgid "Monitoring has been turned off"
 #~ msgstr "Desactivouse a monitorización"
@@ -24196,10 +24184,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgstr ""
 #~ "Actualizouse o estado de Unix mentres se facía réplica do estado do web; "
 #~ "a non ser que teña o valor 'Non ten conta de unix (N)' "
-
-#, fuzzy
-#~ msgid "Project full name"
-#~ msgstr "Nome do proxecto"
 
 #~ msgid "Add/Edit Categories"
 #~ msgstr "Engadir/editar categorías"
@@ -25045,24 +25029,9 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "Invalid Email Address:"
 #~ msgstr "O enderezo de correo non é válido"
 
-#~ msgid "Invalid Jabber Address"
-#~ msgstr "O enderezo de Jabber non é válido"
-
-#~ msgid "Jabber Address:"
-#~ msgstr "Enderezo de Jabber: "
-
-#~ msgid "Send auto-generated notices only to my Jabber address"
-#~ msgstr "Enviar as novas autoxeradas só á miña conta de Jabber "
-
-#~ msgid "Jabber Address"
-#~ msgstr "Enderezo de Jabber "
-
 #, fuzzy
 #~ msgid "Error Getting Forum"
 #~ msgstr "Produciuse un erro ao obter o foro "
-
-#~ msgid "You can't %1$s \\\"None\\\"!"
-#~ msgstr "Non pode %1$s \\\"Nada\\\"! "
 
 #~ msgid "Existing Responses:"
 #~ msgstr "Respostas existentes: "
@@ -25075,9 +25044,6 @@ msgstr "Non se introduciu un nome de usuario"
 
 #~ msgid "If you're aren't sure then why did you click 'Delete'?"
 #~ msgstr "Se non estaba seguro, daquela por que premeu 'Eliminar'? "
-
-#~ msgid "New category short name (no spaces, unix-like)"
-#~ msgstr "Novo nome curto da nova categoría (sen espazos, ao estilo unix) "
 
 #, fuzzy
 #~ msgid "Error: a category can't be the same as its own parent: "

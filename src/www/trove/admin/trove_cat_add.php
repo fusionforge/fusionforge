@@ -92,11 +92,11 @@ if (isset($parent_trove_cat_id)) {
 ?>
 
 </select></p>
-<p><?php echo _('New category short name (no spaces, Unix-like): '); ?> <?php echo utils_requiredField(); ?>
+<p><?php echo _('New category short name (no spaces, Unix-like)')._(': '); ?> <?php echo utils_requiredField(); ?>
 <br /><input required="required" type="text" name="form_shortname" /></p>
-	<p><?php echo _('New category full name (80 characters max): '); ?> <?php echo utils_requiredField(); ?>
+	<p><?php echo _('New category full name (maximum length is 80 chars)')._(': '); ?> <?php echo utils_requiredField(); ?>
 <br /><input required="required" type="text" name="form_fullname" /></p>
-<p><?php echo _('New category description (255 characters max): '); ?> <?php echo utils_requiredField(); ?>
+<p><?php echo _('New category description (maximum length is 255 chars)')._(': '); ?> <?php echo utils_requiredField(); ?>
 <br /><input required="required" type="text" size="80" name="form_description" />
 <br /><input type="submit" name="submit" value="<?php echo _('Add'); ?>" /></p>
 </form>
