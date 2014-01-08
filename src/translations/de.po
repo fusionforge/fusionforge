@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-06 12:12+0100\n"
+"POT-Creation-Date: 2014-01-08 14:22+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -225,8 +225,8 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:68 common/forum/ForumHTML.class.php:69
 #: common/forum/ForumHTML.class.php:70 common/forum/ForumHTML.class.php:73
 #: common/forum/ForumHTML.class.php:209 common/forum/ForumHTML.class.php:267
-#: common/forum/ForumHTML.class.php:524 common/forum/ForumHTML.class.php:528
-#: common/forum/ForumHTML.class.php:588 common/forum/ForumHTML.class.php:591
+#: common/forum/ForumHTML.class.php:523 common/forum/ForumHTML.class.php:527
+#: common/forum/ForumHTML.class.php:587 common/forum/ForumHTML.class.php:590
 #: common/forum/ForumMessage.class.php:666 common/frs/FRSFile.class.php:187
 #: common/frs/FRSFile.class.php:440 common/include/Error.class.php:206
 #: common/include/exit.php:80 common/include/Group.class.php:2627
@@ -385,17 +385,18 @@ msgstr ""
 #: www/snippet/submit.php:113 www/snippet/submit.php:117
 #: www/snippet/submit.php:123 www/snippet/submit.php:129
 #: www/snippet/submit.php:136 www/snippet/submit.php:140
-#: www/softwaremap/tag_cloud.php:143 www/softwaremap/trove_list.php:81
-#: www/softwaremap/trove_list.php:219 www/softwaremap/trove_list.php:320
-#: www/softwaremap/trove_list.php:324 www/survey/survey.php:51
-#: www/tracker/admin/index.php:190 www/tracker/reporting/index.php:126
-#: www/tracker/reporting/index.php:128 www/tracker/reporting/index.php:130
-#: www/tracker/reporting/index.php:132 www/tracker/reporting/index.php:134
-#: www/tracker/roadmap.php:175 www/tracker/roadmap.php:201
-#: www/tracker/roadmap.php:211 www/tracker/roadmap.php:223
-#: www/tracker/roadmap.php:238 www/tracker/roadmap.php:414
-#: www/tracker/roadmap.php:422 www/tracker/roadmap.php:435
-#: www/tracker/roadmap.php:468
+#: www/softwaremap/tag_cloud.php:144 www/softwaremap/tag_cloud.php:164
+#: www/softwaremap/trove_list.php:81 www/softwaremap/trove_list.php:219
+#: www/softwaremap/trove_list.php:320 www/softwaremap/trove_list.php:324
+#: www/survey/survey.php:51 www/tracker/admin/index.php:190
+#: www/tracker/reporting/index.php:126 www/tracker/reporting/index.php:128
+#: www/tracker/reporting/index.php:130 www/tracker/reporting/index.php:132
+#: www/tracker/reporting/index.php:134 www/tracker/roadmap.php:175
+#: www/tracker/roadmap.php:201 www/tracker/roadmap.php:211
+#: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
+#: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
+#: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
+#, php-format
 msgid ": "
 msgstr ""
 
@@ -985,7 +986,7 @@ msgstr "Sie müssen eingeloggt sein"
 #: plugins/cvstracker/common/cvstrackerPlugin.class.php:108
 #: plugins/mantisbt/view/viewAttachment.php:49
 #: plugins/scmhook/library/scmsvn/commitTracker.class.php:133
-#: www/frs/admin/editrelease.php:293 www/frs/admin/editrelease.php:347
+#: www/frs/admin/editrelease.php:293 www/frs/admin/editrelease.php:348
 #: www/frs/admin/qrs.php:191 www/frs/index.php:204
 msgid "File Name"
 msgstr "Dateiname"
@@ -1409,7 +1410,7 @@ msgstr ""
 #: common/tracker/actions/mod-limited.php:98
 #: common/tracker/actions/mod-limited.php:103
 #: common/tracker/actions/mod.php:99 common/tracker/actions/mod.php:104
-#: common/tracker/Artifact.class.php:1682
+#: common/tracker/Artifact.class.php:1681
 #: common/tracker/include/ArtifactHtml.class.php:111
 #: common/tracker/include/ArtifactHtml.class.php:169
 #: common/tracker/include/ArtifactHtml.class.php:178
@@ -1444,7 +1445,7 @@ msgstr ""
 #: www/search/include/renderers/ForumHtmlSearchRenderer.class.php:93
 #: www/snippet/detail.php:81 www/snippet/detail.php:170
 #: www/soap/tracker/tracker.php:1126 www/softwaremap/full_list.php:122
-#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#: www/softwaremap/tag_cloud.php:165 www/softwaremap/trove_list.php:324
 #: www/stats/lastlogins.php:61
 msgid "Y-m-d H:i"
 msgstr "d.m.Y H:i"
@@ -1837,8 +1838,8 @@ msgstr "Startdatum"
 #: www/account/index.php:233 www/account/index.php:242
 #: www/account/lostpw.php:89 www/account/pending-resend.php:65
 #: www/account/pending-resend.php:67 www/account/register.php:171
-#: www/account/register.php:222 www/account/register.php:228
-#: www/account/register.php:234 www/account/register.php:240
+#: www/account/register.php:223 www/account/register.php:229
+#: www/account/register.php:235 www/account/register.php:241
 #: www/account/verify.php:76 www/account/verify.php:78
 #: www/account/verify.php:86 www/activity/index.php:179
 #: www/activity/index.php:180 www/activity/index.php:181
@@ -1860,8 +1861,8 @@ msgstr "Startdatum"
 #: www/frs/admin/editrelease.php:226 www/frs/admin/editrelease.php:230
 #: www/frs/admin/editrelease.php:234 www/frs/admin/editrelease.php:250
 #: www/frs/admin/editrelease.php:257 www/frs/admin/editrelease.php:265
-#: www/frs/admin/editrelease.php:271 www/frs/admin/editrelease.php:321
-#: www/frs/admin/editrelease.php:327 www/frs/admin/index.php:206
+#: www/frs/admin/editrelease.php:271 www/frs/admin/editrelease.php:322
+#: www/frs/admin/editrelease.php:328 www/frs/admin/index.php:206
 #: www/frs/admin/index.php:208 www/frs/admin/qrs.php:149
 #: www/frs/admin/qrs.php:175 www/frs/admin/qrs.php:183
 #: www/frs/admin/qrs.php:191 www/frs/admin/qrs.php:224
@@ -2283,8 +2284,8 @@ msgstr ""
 msgid "Forum Name"
 msgstr "Name des Forums"
 
-#: common/forum/ForumAdmin.class.php:321 common/forum/ForumHTML.class.php:528
-#: common/forum/ForumHTML.class.php:591
+#: common/forum/ForumAdmin.class.php:321 common/forum/ForumHTML.class.php:527
+#: common/forum/ForumHTML.class.php:590
 #: common/tracker/include/ArtifactHtml.class.php:72
 #: plugins/forumml/www/index.php:121
 #: plugins/message/common/messagePlugin.class.php:35 www/admin/cronman.php:44
@@ -2302,12 +2303,12 @@ msgstr "Keine Aktion"
 #: plugins/mantisbt/view/admin/editVersion.php:76
 #: plugins/mantisbt/view/admin/editVersion.php:79
 #: plugins/mantisbt/view/roadmap.php:98 plugins/mantisbt/view/roadmap.php:147
-#: www/frs/admin/editrelease.php:347 www/frs/reporting/downloads.php:197
+#: www/frs/admin/editrelease.php:348 www/frs/reporting/downloads.php:197
 msgid "Release"
 msgstr "Version"
 
 #: common/forum/ForumAdmin.class.php:360 common/forum/ForumHTML.class.php:328
-#: common/forum/ForumHTML.class.php:546
+#: common/forum/ForumHTML.class.php:545
 #: common/tracker/views/form-adminroadmap.php:501
 #: plugins/headermenu/view/admin/updateLinkValue.php:102
 #: plugins/mailman/www/admin/index.php:189 plugins/mailman/www/index.php:65
@@ -2327,7 +2328,7 @@ msgstr "Version"
 #: www/admin/groupedit.php:223 www/admin/trove/trove_cat_edit.php:150
 #: www/admin/useredit.php:236 www/admin/useredit.php:315
 #: www/admin/vhost.php:183 www/forum/admin/index.php:162
-#: www/frs/admin/editrelease.php:349 www/frs/admin/index.php:182
+#: www/frs/admin/editrelease.php:350 www/frs/admin/index.php:182
 #: www/mail/admin/index.php:228 www/mail/admin/index.php:281
 #: www/people/people_utils.php:178 www/people/people_utils.php:322
 #: www/pm/admin/index.php:352 www/pm/calendar.php:289
@@ -2569,13 +2570,13 @@ msgstr "Antworten"
 msgid "Current File"
 msgstr "Aktuelle Datei"
 
-#: common/forum/ForumHTML.class.php:319 common/forum/ForumHTML.class.php:353
+#: common/forum/ForumHTML.class.php:319 common/forum/ForumHTML.class.php:352
 msgid "Use the “Browse” button to find the file you want to attach"
 msgstr ""
 "Nutzen Sie den »Browse« Knopf um die Datei zu finden, die Sie anhängen "
 "möchten."
 
-#: common/forum/ForumHTML.class.php:322 common/forum/ForumHTML.class.php:356
+#: common/forum/ForumHTML.class.php:322 common/forum/ForumHTML.class.php:355
 msgid "File to upload"
 msgstr "Datei zum hochladen"
 
@@ -2584,7 +2585,7 @@ msgstr "Datei zum hochladen"
 msgid "Warning: Uploaded file will replace current file"
 msgstr "Warnung: Die ausgewählte Datei wird permanent gelöscht"
 
-#: common/forum/ForumHTML.class.php:350 common/tracker/actions/detail.php:151
+#: common/forum/ForumHTML.class.php:349 common/tracker/actions/detail.php:151
 #: common/tracker/actions/mod-limited.php:177
 #: common/tracker/actions/mod.php:240
 #: common/tracker/include/ArtifactTypeHtml.class.php:371
@@ -2593,12 +2594,12 @@ msgstr "Warnung: Die ausgewählte Datei wird permanent gelöscht"
 msgid "Attachments"
 msgstr "Anhänge"
 
-#: common/forum/ForumHTML.class.php:520
+#: common/forum/ForumHTML.class.php:519
 #, fuzzy
 msgid "Edit Message"
 msgstr "Bearbeite eine Nachricht"
 
-#: common/forum/ForumHTML.class.php:524 common/forum/ForumHTML.class.php:588
+#: common/forum/ForumHTML.class.php:523 common/forum/ForumHTML.class.php:587
 #: plugins/forumml/www/index.php:110 www/admin/massmail.php:112
 #: www/admin/massmail.php:136 www/admin/pending-news.php:145
 #: www/developer/diary.php:80 www/news/admin/index.php:133
@@ -2607,7 +2608,7 @@ msgstr "Bearbeite eine Nachricht"
 msgid "Subject"
 msgstr "Betreff"
 
-#: common/forum/ForumHTML.class.php:547
+#: common/forum/ForumHTML.class.php:546
 #: common/tracker/views/form-adminroadmap.php:167
 #: common/tracker/views/form-adminroadmap.php:235
 #: common/widget/Widget.class.php:103
@@ -2629,36 +2630,36 @@ msgstr "Betreff"
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: common/forum/ForumHTML.class.php:608
+#: common/forum/ForumHTML.class.php:607
 msgid "HTML tags will display in your post as text"
 msgstr "HTML-Tags werden in Ihrer Nachricht als Text angezeigt"
 
-#: common/forum/ForumHTML.class.php:615
+#: common/forum/ForumHTML.class.php:614
 #, php-format
 msgid ""
 "You are posting anonymously because you are not <a href=\"%s\">logged in</a>"
 msgstr "Sie posten anonym, da Sie nicht <a href=\"%s\">angemeldet</a> sind"
 
-#: common/forum/ForumHTML.class.php:620 common/tracker/actions/mod.php:216
+#: common/forum/ForumHTML.class.php:619 common/tracker/actions/mod.php:216
 msgid "Post Comment"
 msgstr "Poste Kommentar"
 
-#: common/forum/ForumHTML.class.php:620
+#: common/forum/ForumHTML.class.php:619
 msgid "Anonymously"
 msgstr "Anonym"
 
-#: common/forum/ForumHTML.class.php:621
+#: common/forum/ForumHTML.class.php:620
 msgid "Receive comments via email"
 msgstr "Erhalten der Antworten per Email"
 
-#: common/forum/ForumHTML.class.php:633
+#: common/forum/ForumHTML.class.php:632
 #, php-format
 msgid "You could post if you were <a href=\"%s\">logged in</a>."
 msgstr ""
 "Sie könnten einen Beitrag posten, wenn Sie <a href=\"%s\">angemeldet</a> "
 "wären."
 
-#: common/forum/ForumHTML.class.php:637
+#: common/forum/ForumHTML.class.php:636
 #, php-format
 msgid "Please <a href=\"%s\">log in</a>"
 msgstr "Bitte <a href=\"%s\">loggen Sie ein</a>"
@@ -2972,7 +2973,6 @@ msgid "View File Releases"
 msgstr "Neue Dateiversionen"
 
 #: common/frs/include/frs_utils.php:175 common/frs/include/frs_utils.php:197
-#, fuzzy
 msgid "Error: group id required"
 msgstr ""
 
@@ -4327,17 +4327,17 @@ msgid "Repository History"
 msgstr "Quellcode Historie"
 
 #: common/include/SCMPlugin.class.php:227
-msgid "Data about current and past states of the repository"
-msgstr "Angaben zu aktuellen und früheren Ständen des Quellcodes"
+msgid "Data about current and past states of the repository."
+msgstr "Angaben zu aktuellen und früheren Ständen des Quellcodes."
 
 #: common/include/SCMPlugin.class.php:255
 msgid "Enable Anonymous Read Access"
 msgstr "Ermögliche anonymen Zugang"
 
 #: common/include/SCMPlugin.class.php:309
-#, fuzzy, php-format
+#, php-format
 msgid "No repository %s exists"
-msgstr "Quellcode Statistiken"
+msgstr ""
 
 #: common/include/SCMPlugin.class.php:340
 #: plugins/scmhg/common/HgPlugin.class.php:600
@@ -5783,7 +5783,7 @@ msgstr "Wollen Sie das Produkt wirklich löschen?"
 #: common/tracker/views/form-deletetracker.php:38
 #: www/admin/responses_admin.php:51 www/forum/admin/index.php:184
 #: www/frs/admin/deletepackage.php:68 www/frs/admin/deleterelease.php:74
-#: www/frs/admin/editrelease.php:384 www/pm/admin/index.php:384
+#: www/frs/admin/editrelease.php:385 www/pm/admin/index.php:384
 #: www/pm/deletetask.php:45 www/project/admin/roledelete.php:88
 #: www/reporting/rebuild.php:63
 msgid "I am Sure"
@@ -7928,7 +7928,7 @@ msgid "Project Information"
 msgstr "Projektinformation"
 
 #: common/widget/Widget_ProjectInfo.class.php:45
-#: www/project/admin/index.php:162 www/softwaremap/tag_cloud.php:143
+#: www/project/admin/index.php:162 www/softwaremap/tag_cloud.php:144
 msgid "Tags"
 msgstr "Kennzeichen"
 
@@ -7942,7 +7942,7 @@ msgid "Registered: "
 msgstr "Registriert: "
 
 #: common/widget/Widget_ProjectInfo.class.php:83
-#: www/softwaremap/tag_cloud.php:162 www/softwaremap/trove_list.php:322
+#: www/softwaremap/tag_cloud.php:163 www/softwaremap/trove_list.php:322
 #, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
 msgstr "Aktivitäten-Rangliste: <strong>%d</strong>"
@@ -8378,7 +8378,7 @@ msgstr ""
 
 #: plugins/admssw/include/admsswPlugin.class.php:150
 #, fuzzy, php-format
-msgid "Preview <a href=\"%1$s\">ADMS.SW meta-data</a> about the project"
+msgid "Preview <a href=\"%s\">ADMS.SW meta-data</a> about the project"
 msgstr ""
 "Betrachte Liste der <a href=\"%1$s\">RSS feeds</a> die für dieses Projekt "
 "verfügbar sind."
@@ -8392,8 +8392,8 @@ msgstr ""
 #: plugins/admssw/include/admsswPlugin.class.php:634
 #: www/softwaremap/full_list.php:70
 #, fuzzy, php-format
-msgid "<strong>%1$s</strong> projects in result set."
-msgstr "<strong>%1$s</strong> Projekte in der Ergebnisliste."
+msgid "<strong>%d</strong> projects in result set."
+msgstr "<strong>%d</strong> Projekt in der Ergebnisliste."
 
 #: plugins/admssw/include/admsswPlugin.class.php:645
 #: plugins/admssw/www/projectturtle.php:52 plugins/admssw/www/trove.php:46
@@ -8470,7 +8470,7 @@ msgstr "Top-Projekte-Seitenzugriffe"
 #, php-format
 msgid ""
 "The following is a preview of the (machine-readable) RDF meta-data which can "
-"be obtained at <tt>%1$s</tt> as Turtle"
+"be obtained at <tt>%s</tt> as Turtle"
 msgstr ""
 
 #: plugins/admssw/www/trove.php:37
@@ -8515,7 +8515,7 @@ msgid "[Lost your password?]"
 msgstr "[Passwort vergessen?]"
 
 #: plugins/authbuiltin/common/AuthBuiltinPlugin.class.php:87
-#: www/account/pending-resend.php:53 www/account/register.php:280
+#: www/account/pending-resend.php:53 www/account/register.php:281
 #, fuzzy
 msgid "Resend confirmation email to a pending account"
 msgstr "[Sende Bestätigungs-Email zu einem anstehenden Account nochmal]"
@@ -12188,7 +12188,7 @@ msgid "Upload a new file"
 msgstr "Eine neue Datei hochladen"
 
 #: plugins/mediawiki/www/plugin_admin.php:195
-#: www/frs/admin/editrelease.php:308 www/frs/admin/qrs.php:210
+#: www/frs/admin/editrelease.php:309 www/frs/admin/qrs.php:210
 #, php-format
 msgid ""
 "Alternatively, you can use a file you already uploaded (by SFTP or SCP) to "
@@ -12196,14 +12196,14 @@ msgid ""
 msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:197
-#: www/frs/admin/editrelease.php:310 www/frs/admin/qrs.php:212
+#: www/frs/admin/editrelease.php:311 www/frs/admin/qrs.php:212
 msgid ""
 "This direct <tt>sftp://</tt> link only works with some browsers, such as "
 "Konqueror."
 msgstr ""
 
 #: plugins/mediawiki/www/plugin_admin.php:200
-#: www/frs/admin/editrelease.php:299 www/frs/admin/editrelease.php:311
+#: www/frs/admin/editrelease.php:300 www/frs/admin/editrelease.php:312
 #: www/frs/admin/qrs.php:213
 #, fuzzy
 msgid "Choose an already uploaded file:"
@@ -14260,24 +14260,22 @@ msgid "Browse Hg Repository"
 msgstr "Durchsuche Hg Repository"
 
 #: plugins/scmhg/common/HgPlugin.class.php:570
-#, fuzzy, php-format
+#, php-format
 msgid "Clone of %s repository"
-msgstr "Entwickler (test)"
+msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:633
-#, fuzzy, php-format
-msgid "Create SCM repository for project %1$s"
-msgstr "SCM Repository"
+#, php-format
+msgid "Create SCM repository for project %s"
+msgstr ""
 
 #: plugins/scmhg/common/HgPlugin.class.php:645
-#, fuzzy
 msgid "Cloned from:"
-msgstr "Forge ID"
+msgstr ""
 
 #: plugins/scmhook/common/scmhook.class.php:75
-#, fuzzy
 msgid "Feature not implemented."
-msgstr "Noch nicht implementiert"
+msgstr "Noch nicht implementiert."
 
 #: plugins/scmhook/common/scmhookPlugin.class.php:139
 msgid "Hooks management update process waiting ..."
@@ -14658,8 +14656,8 @@ msgstr ""
 
 #: www/account/change_email.php:65 www/account/lostpw.php:70
 #, php-format
-msgid "%1$s Verification"
-msgstr "%1$s Überprüfung"
+msgid "%s Verification"
+msgstr "%s Überprüfung"
 
 #: www/account/change_email.php:67
 msgid "Email Change Confirmation"
@@ -14866,8 +14864,8 @@ msgstr ""
 #: www/account/first.php:31
 #, php-format
 msgid ""
-"You are now a registered user on %1$s, the online development environment "
-"for Open Source projects."
+"You are now a registered user on %s, the online development environment for "
+"Open Source projects."
 msgstr ""
 
 #: www/account/first.php:33
@@ -14875,13 +14873,13 @@ msgstr ""
 msgid ""
 "As a registered user, you can participate fully in the activities on the "
 "site. You may now post messages to the project message forums, post bugs for "
-"software in %1$s, sign on as a project developer, or even start your own "
+"software in %s, sign on as a project developer, or even start your own "
 "project."
 msgstr ""
 "Als registrierter Benutzer können Sie sich an allen Aktivitäten auf der Site "
 "beteiligen. Sie können jetzt Nachrichten an Projekt-Foren abschicken, "
-"Software-Fehler in %1$s melden, sich als Projekt-Entwickler anmelden oder "
-"Ihr eigenes Projekt starten."
+"Software-Fehler in %s melden, sich als Projekt-Entwickler anmelden oder Ihr "
+"eigenes Projekt starten."
 
 #: www/account/index.php:101 www/admin/groupedit.php:74
 #: www/admin/useredit.php:110
@@ -14948,26 +14946,26 @@ msgstr "Email-Adresse"
 msgid "Change Email Address"
 msgstr "Ändere Email-Adresse"
 
-#: www/account/index.php:205 www/account/register.php:222
+#: www/account/index.php:205 www/account/register.php:223
 #: www/include/user_profile.php:125 www/mail/index.php:78
 msgid "Address"
 msgstr "Adresse"
 
-#: www/account/index.php:214 www/account/register.php:228
+#: www/account/index.php:214 www/account/register.php:229
 msgid "Address (continued)"
 msgstr ""
 
-#: www/account/index.php:224 www/account/register.php:234
+#: www/account/index.php:224 www/account/register.php:235
 #: www/include/user_profile.php:132
 msgid "Phone"
 msgstr "Telefon:"
 
-#: www/account/index.php:233 www/account/register.php:240
+#: www/account/index.php:233 www/account/register.php:241
 #: www/include/user_profile.php:143
 msgid "Fax"
 msgstr "Fax"
 
-#: www/account/index.php:261 www/account/register.php:249
+#: www/account/index.php:261 www/account/register.php:250
 msgid ""
 "Receive Email about Site Updates <em>(Very low traffic and includes security "
 "notices. Highly Recommended.)</em>"
@@ -14975,7 +14973,7 @@ msgstr ""
 "Erhalte Emails über Seiten-Updates <em>(Sehr sehr wenige und sie enthalten "
 "Sicherheitshinweise. Diese Option wird sehr empfohlen.)</em>"
 
-#: www/account/index.php:269 www/account/register.php:255
+#: www/account/index.php:269 www/account/register.php:256
 msgid "Receive additional community mailings. <em>(Low traffic.)</em>"
 msgstr "Erhalte außerplanmäßige Community-Mailings. <em>(Sehr wenige.)</em>"
 
@@ -15218,34 +15216,33 @@ msgstr "Passwort (Wiederholung):"
 msgid "Language Choice:"
 msgstr "Auswahl der Sprache:"
 
-#: www/account/register.php:214
+#: www/account/register.php:215
 #, php-format
 msgid ""
 "This email address will be verified before account activation. You will "
-"receive a mail forward account at &lt;loginname@%1$s&gt; that will forward "
-"to this address."
+"receive a mail forward account at &lt;loginname@%s&gt; that will forward to "
+"this address."
 msgstr ""
 "Diese E-Mailadresse wird überprüft vor der Aktivierung des Accounts. Sie "
-"werden eine Mail-Weiterleitungs-Account unter &lt;loginname@%1$s&gt; "
-"erhalten, welcher Mails zu der angegebenen Adresse weiterleitet."
+"werden eine Mail-Weiterleitungs-Account unter &lt;loginname@%s&gt; erhalten, "
+"welcher Mails zu der angegebenen Adresse weiterleitet."
 
-#: www/account/register.php:260
+#: www/account/register.php:261
 #, php-format
-msgid "Do you accept the <a href=\"%1$s\">terms of use</a> for this site?"
+msgid "Do you accept the <a href=\"%s\">terms of use</a> for this site?"
 msgstr ""
-"Akzeptieren Sie Sie die <a href=\"%1$s\">Nutzungsbedingungen</a>für diese "
-"Site?"
+"Akzeptieren Sie Sie die <a href=\"%s\">Nutzungsbedingungen</a>für diese Site?"
 
-#: www/account/register.php:266
+#: www/account/register.php:267
 msgid "Activate this user immediately"
 msgstr ""
 
-#: www/account/register.php:274
+#: www/account/register.php:275
 #, php-format
 msgid "Fields marked with %s are mandatory."
 msgstr "Felder, die mit %s markiert sind, sind Pflichtfelder."
 
-#: www/account/register.php:277
+#: www/account/register.php:278
 msgid "Register"
 msgstr "Registrieren"
 
@@ -15256,22 +15253,22 @@ msgstr "Abmeldung abgeschlossen"
 #: www/account/unsubscribe.php:65
 #, php-format
 msgid ""
-"You have been unsubscribed from all %1$s mailings and notifications. In case "
+"You have been unsubscribed from all %s mailings and notifications. In case "
 "you will want to re-activate your subscriptions in the future, login and "
 "visit your Account Maintenance page."
 msgstr ""
-"Sie wurden von allen %1$s Mailings und Benachrichtigungen abgemeldet. Für "
-"den Fall dass Sie Ihre Subskription zukünftig wieder reaktivieren möchten, "
+"Sie wurden von allen %s Mailings und Benachrichtigungen abgemeldet. Für den "
+"Fall dass Sie Ihre Subskription zukünftig wieder reaktivieren möchten, "
 "loggen Sie ein und besuchen Sie Ihre Account Pflege Seite."
 
 #: www/account/unsubscribe.php:67
 #, php-format
 msgid ""
-"You have been unsubscribed from %1$s site mailings. In case you will want to "
+"You have been unsubscribed from %s site mailings. In case you will want to "
 "re-activate your subscriptions in the future, login and visit your Account "
 "Maintenance page."
 msgstr ""
-"Sie wurden von den %1$s Mailings abgemeldet. Für den Fall dass Sie Ihre "
+"Sie wurden von den %s Mailings abgemeldet. Für den Fall dass Sie Ihre "
 "Subskription zukünftig wieder reaktivieren möchten, loggen Sie ein und "
 "besuchen Sie Ihre Account Einstellungen Seite."
 
@@ -15937,18 +15934,18 @@ msgstr "Projekt-Verwaltung"
 
 #: www/admin/index.php:120
 #, php-format
-msgid "Registered projects: <strong>%1$s</strong>"
-msgstr "Registrierte Projekte: <strong>%1$s</strong>"
+msgid "Registered projects: <strong>%d</strong>"
+msgstr "Registrierte Projekte: <strong>%d</strong>"
 
 #: www/admin/index.php:130
 #, php-format
-msgid "Active projects: <strong>%1$s</strong>"
-msgstr "Aktive Projekte: <strong>%1$s</strong>"
+msgid "Active projects: <strong>%d</strong>"
+msgstr "Aktive Projekte: <strong>%d</strong>"
 
 #: www/admin/index.php:140
 #, php-format
-msgid "Pending projects: <strong>%1$s</strong>"
-msgstr "Anstehende Projekte: <strong>%1$s</strong>"
+msgid "Pending projects: <strong>%d</strong>"
+msgstr "Anstehende Projekte: <strong>%d</strong>"
 
 #: www/admin/index.php:142
 msgid "Display Full Project List/Edit Projects"
@@ -16019,8 +16016,8 @@ msgstr "Seiten-Hilfsprogramme"
 
 #: www/admin/index.php:217 www/admin/massmail.php:79
 #, php-format
-msgid "Mail Engine for %1$s Subscribers"
-msgstr "Mailserver-Formular (Engine) für %1$s Abonnenten"
+msgid "Mail Engine for %s Subscribers"
+msgstr "Mailserver-Formular (Engine) für %s Abonnenten"
 
 #: www/admin/index.php:218
 msgid "Site Mailings Maintenance"
@@ -16239,8 +16236,8 @@ msgstr[1] "%d Projekte losgelöst vom Plugin."
 
 #: www/admin/pluginman.php:70 www/admin/pluginman.php:120
 #, php-format
-msgid "Plugin %1$s updated Successfully"
-msgstr "Plugin %1$s erfolgreich aktualisiert."
+msgid "Plugin %s updated Successfully"
+msgstr "Plugin %s erfolgreich aktualisiert"
 
 #: www/admin/pluginman.php:75 www/admin/pluginman.php:111
 #, fuzzy
@@ -16311,8 +16308,8 @@ msgstr "Seite Administrator: Bearbeite Ablehnungs-Antworten"
 
 #: www/admin/responses_admin.php:36
 #, php-format
-msgid "You cannot %1$s “None”!"
-msgstr "Sie können nicht %1$s »None«!"
+msgid "You cannot %s “None”!"
+msgstr "Sie können nicht %s »None«!"
 
 #: www/admin/responses_admin.php:74
 msgid "Edited Response"
@@ -16386,7 +16383,9 @@ msgstr[1] "Gruppen-Suche mit Merkmalen <em>%s</em>: %d Übereinstimmungen"
 msgid "Full Name"
 msgstr "Voller Name"
 
-#: www/admin/search.php:150 www/softwaremap/trove_list.php:324
+#: www/admin/search.php:150 www/softwaremap/tag_cloud.php:164
+#: www/softwaremap/trove_list.php:324
+#, php-format
 msgid "Registered"
 msgstr "Registriert"
 
@@ -16514,16 +16513,16 @@ msgid "User unsubscribed"
 msgstr "Benutzer ausgetragen"
 
 #: www/admin/unsubscribe.php:91
-#, fuzzy, php-format
+#, php-format
 msgid ""
-"Use field below to find users which match given pattern with the %1$s "
+"Use field below to find users which match given pattern with the %s "
 "username, real name, or email address (substring match is preformed, use "
 "'%%' in the middle of pattern to specify 0 or more arbitrary characters). "
 "Click on the username to unsubscribe user from site mailings (new form will "
 "appear)."
 msgstr ""
 "Verwenden Sie das Feld unten, um Nutzer zu finden, auf die das angegebene "
-"Profil bezüglich %1$s Nutzername, Echtname oder E-Mailadresse (eine passende "
+"Profil bezüglich %s Nutzername, Echtname oder E-Mailadresse (eine passende "
 "Zeichenkette ist vorgegeben, nutzen Sie '%%' in der Mitte des Profils um 0 "
 "oder mehr beliebige Zeichen festzulegen) zutrifft. Klicken Sie auf den "
 "Nutzernamen um Nutzer von den Site-Mailings abzumelden (ein neues Formular "
@@ -16653,8 +16652,8 @@ msgstr "Datei löschen"
 
 #: www/admin/userlist.php:63
 #, php-format
-msgid "User updated to %1$s status"
-msgstr "Benutzer-Status geändert auf: %1$s"
+msgid "User updated to %s status"
+msgstr "Benutzer-Status geändert auf: %s"
 
 #: www/admin/userlist.php:70 www/frs/admin/index.php:95
 #: www/frs/admin/showreleases.php:81
@@ -17046,13 +17045,13 @@ msgid "RSS Exports"
 msgstr "RSS Exporte"
 
 #: www/export/rss_project.php:79
-#, fuzzy, php-format
+#, php-format
 msgid ""
-"%1$s data is exported in RSS 2.0 format. Many of the export URLs can also "
+"%s data is exported in RSS 2.0 format. Many of the export URLs can also "
 "accept form/get data to customize the output. All data generated by these "
 "pages is realtime."
 msgstr ""
-"%1$s Daten wurden im RSS 2.0 Format exportiert. Viele der exportierten URLs "
+"%s Daten wurden im RSS 2.0 Format exportiert. Viele der exportierten URLs "
 "beherrschen auch accept form/get data um die Ausgabe individuell anzupassen. "
 "Alle Informationen, die von diesen Seiten stammen, werden in Echtzeit "
 "generiert. "
@@ -17324,8 +17323,8 @@ msgstr "Kein Forum ausgewählt"
 
 #: www/forum/index.php:51
 #, php-format
-msgid "Forums for %1$s"
-msgstr "Foren für %1$s"
+msgid "Forums for %s"
+msgstr "Foren für %s"
 
 #: www/forum/index.php:65 www/forum/myforums.php:44 www/forum/myforums.php:46
 msgid "My Monitored Forums"
@@ -17348,14 +17347,13 @@ msgid "Post a comment to this message"
 msgstr "Schreiben Sie eine Antwort auf diese Nachricht"
 
 #: www/forum/message.php:224 www/forum/message.php:225
-#, fuzzy
 msgid "You Must Choose a Message First"
 msgstr "Sie müssen zuerst eine Nachricht auswählen"
 
 #: www/forum/monitor.php:61
-#, fuzzy, php-format
-msgid "You are about to stop monitoring the %1$s forum."
-msgstr "Sie beobachten keine Foren."
+#, php-format
+msgid "You are about to stop monitoring the %s forum."
+msgstr ""
 
 #: www/forum/monitor.php:63
 #, fuzzy
@@ -17481,7 +17479,7 @@ msgstr "Versionen editieren"
 msgid "Edit Release"
 msgstr "Versionen editieren"
 
-#: www/frs/admin/editrelease.php:226 www/frs/admin/editrelease.php:348
+#: www/frs/admin/editrelease.php:226 www/frs/admin/editrelease.php:349
 #: www/frs/admin/qrs.php:183
 #, fuzzy
 msgid "Release Date"
@@ -17549,30 +17547,30 @@ msgstr "Schritt 3: Ändere Dateien in dieser Version"
 msgid "Now, choose a file to upload into the system."
 msgstr ""
 
-#: www/frs/admin/editrelease.php:297 www/frs/admin/qrs.php:200
-#, fuzzy, php-format
-msgid "Alternatively, you can use FTP to upload a new file at %1$s."
-msgstr "Alternativkönnen Sie FTP benutzen, um eine Datei auf %1$s hochzuladen"
+#: www/frs/admin/editrelease.php:298 www/frs/admin/qrs.php:200
+#, php-format
+msgid "Alternatively, you can use FTP to upload a new file at %s."
+msgstr "Alternativkönnen Sie FTP benutzen, um eine Datei auf %s hochzuladen"
 
-#: www/frs/admin/editrelease.php:321 www/frs/admin/editrelease.php:349
+#: www/frs/admin/editrelease.php:322 www/frs/admin/editrelease.php:350
 #: www/frs/admin/qrs.php:224
 msgid "File Type"
 msgstr "Dateityp"
 
-#: www/frs/admin/editrelease.php:327 www/frs/admin/qrs.php:234
+#: www/frs/admin/editrelease.php:328 www/frs/admin/qrs.php:234
 msgid "Processor Type"
 msgstr "Prozessor Typ"
 
-#: www/frs/admin/editrelease.php:335
+#: www/frs/admin/editrelease.php:336
 msgid "Add This File"
 msgstr "Diese Datei hinzufügen"
 
-#: www/frs/admin/editrelease.php:345
+#: www/frs/admin/editrelease.php:346
 #, fuzzy
 msgid "Edit Files In This Release"
 msgstr "Keine Dateien in dieser Version"
 
-#: www/frs/admin/editrelease.php:346
+#: www/frs/admin/editrelease.php:347
 msgid ""
 "Once you have added files to this release you <strong>must</strong> update "
 "each of these files with the correct information or they will not appear on "
@@ -17583,25 +17581,25 @@ msgstr ""
 "aktualisieren oder sie werden auf der Download-Zusammenfassungsseite nicht "
 "erscheinen."
 
-#: www/frs/admin/editrelease.php:348
+#: www/frs/admin/editrelease.php:349
 #, fuzzy
 msgid "Processor"
 msgstr "Prozessor Typ"
 
-#: www/frs/admin/editrelease.php:370
+#: www/frs/admin/editrelease.php:371
 msgid "Update/Refresh"
 msgstr "Aktualisieren"
 
-#: www/frs/admin/editrelease.php:384
+#: www/frs/admin/editrelease.php:385
 msgid "Delete File"
 msgstr "Datei löschen"
 
-#: www/frs/admin/editrelease.php:393
+#: www/frs/admin/editrelease.php:394
 #, php-format
-msgid "There is %1$s user monitoring this package."
-msgid_plural "There are %1$s users monitoring this package."
-msgstr[0] "Es gibt %1$s Benutzer, der dieses Paket beobachtet."
-msgstr[1] "Es gibt %1$s Benutzer, die dieses Paket beobachten."
+msgid "There is %s user monitoring this package."
+msgid_plural "There are %s users monitoring this package."
+msgstr[0] "Es gibt %s Benutzer, der dieses Paket beobachtet."
+msgstr[1] "Es gibt %s Benutzer, die dieses Paket beobachten."
 
 #: www/frs/admin/index.php:77
 msgid "Added Package"
@@ -18458,11 +18456,11 @@ msgstr ""
 #, php-format
 msgid ""
 "You opted-out from peer rating system, otherwise you would have a chance to "
-"rate the user. Refer to <a href=\"%1$s\">your account maintenance page</a> "
-"for more information."
+"rate the user. Refer to <a href=\"%s\">your account maintenance page</a> for "
+"more information."
 msgstr ""
 "Sie haben sich vom Peer-Rating-System abgemeldet, ansonsten hätte Sie die "
-"Möglichkeit den Nutzer zu bewerten. Gehen Sie auf <a href=\"%1$s\">Ihre "
+"Möglichkeit den Nutzer zu bewerten. Gehen Sie auf <a href=\"%s\">Ihre "
 "Account Einstellungen-Seite</a> für mehr Informationen."
 
 #: www/include/user_profile.php:82
@@ -19089,11 +19087,11 @@ msgstr "Angezeigt"
 #: www/news/admin/index.php:148
 #, php-format
 msgid ""
-"If this item is on the %1$s home page and you edit it, it will be removed "
-"from the home page."
+"If this item is on the %s home page and you edit it, it will be removed from "
+"the home page."
 msgstr ""
-"Falls dieses Element auf der %1$s Homepage ist und Sie es ändern, wird es "
-"von der Homepage entfernt."
+"Falls dieses Element auf der %s Homepage ist und Sie es ändern, wird es von "
+"der Homepage entfernt."
 
 #: www/news/admin/index.php:162
 msgid "No Queued Items Found"
@@ -19105,8 +19103,8 @@ msgstr "Keine Beiträge gefunden."
 
 #: www/news/admin/news_admin_utils.php:80
 #, php-format
-msgid "These items need to be approved (total: %1$s)"
-msgstr "Diese Elemente müssen bewilligt werden (Total: %1$s)"
+msgid "These items need to be approved (total: %d)"
+msgstr "Diese Elemente müssen bewilligt werden (Total: %d)"
 
 #: www/news/admin/news_admin_utils.php:86
 msgid "Reject Selected"
@@ -19120,8 +19118,8 @@ msgstr "Es wurden keine abgelehnten Elemente für diese Woche gefunden."
 #, fuzzy, php-format
 msgid ""
 "These items were rejected this past week or were not intended for front page "
-"(total: %1$s)."
-msgstr "Diese Elemente wurden vergangene Woche abgelehnt(Total: %1$s)"
+"(total: %d)."
+msgstr "Diese Elemente wurden vergangene Woche abgelehnt(Total: %d)"
 
 #: www/news/admin/news_admin_utils.php:130
 msgid "No approved items found for this week."
@@ -19129,8 +19127,8 @@ msgstr "Es wurden keine bewilligten Elemente für diese Woche gefunden."
 
 #: www/news/admin/news_admin_utils.php:132
 #, php-format
-msgid "These items were approved this past week (total: %1$s)."
-msgstr "Diese Elemente wurden vergangene Woche bewilligt (Total: %1$s)."
+msgid "These items were approved this past week (total: %d)."
+msgstr "Diese Elemente wurden vergangene Woche bewilligt (Total: %d)."
 
 #: www/news/index.php:38
 msgid "Choose a News item and you can browse, search, and post messages."
@@ -19596,7 +19594,7 @@ msgstr "Klicke Jobtitel für eine detailiertere Beschreibung."
 #: www/people/index.php:61
 #, php-format
 msgid ""
-"The %1$s Project Help Wanted board is for non-commercial, project volunteer "
+"The %s Project Help Wanted board is for non-commercial, project volunteer "
 "openings. Commercial use is prohibited."
 msgstr ""
 
@@ -19701,8 +19699,8 @@ msgstr "Datum eröffnet"
 
 #: www/people/people_utils.php:409
 #, php-format
-msgid "%1$s project"
-msgstr "%1$s Projekt"
+msgid "%s project"
+msgstr "%s Projekt"
 
 #: www/people/people_utils.php:416
 msgid "None Found"
@@ -20425,7 +20423,7 @@ msgstr "Es wurden keine Änderungen gemacht"
 
 #: www/pm/index.php:56
 #, fuzzy, php-format
-msgid "Subprojects for %1$s"
+msgid "Subprojects for %s"
 msgstr "Quelle von %1$s"
 
 #: www/pm/index.php:61
@@ -20750,11 +20748,11 @@ msgstr "Öndere Multimediadaten"
 #: www/project/admin/editimages.php:197
 #, php-format
 msgid ""
-"You can store up to %1$s MB of multimedia data (bitmap and vector graphics, "
+"You can store up to %s MB of multimedia data (bitmap and vector graphics, "
 "sound clips, 3D models) in the database. Use this page to add/delete your "
 "project multimedia data."
 msgstr ""
-"Sie können bis zu %1$s MB Multimediadaten (Bitmap- und Vektorgraphiken, "
+"Sie können bis zu %s MB Multimediadaten (Bitmap- und Vektorgraphiken, "
 "Soundclips, 3D Modelle) in der Datenbank speichern. Benutzen Sie diese "
 "Seite, um Projekt-Multimediadatein hinzuzufügen oder zu löschen."
 
@@ -21298,8 +21296,8 @@ msgstr "virtueller Host zur Erstellung geplant."
 
 #: www/project/admin/vhost.php:65
 #, php-format
-msgid "Not a valid hostname - %1$s"
-msgstr "Kein gültiger Hostname - %1$s"
+msgid "Not a valid hostname - %s"
+msgstr "Kein gültiger Hostname - %s"
 
 #: www/project/admin/vhost.php:96
 msgid "VHOST deleted"
@@ -21441,22 +21439,22 @@ msgstr "Registrierung abgeschlossen"
 #: www/register/index.php:140
 #, php-format
 msgid ""
-"Your project has been submitted to the %1$s administrators. Within 72 hours, "
+"Your project has been submitted to the %s administrators. Within 72 hours, "
 "you will receive notification of their decision and further instructions."
 msgstr ""
-"Ihr Projekt wurde den %1$s Administratoren vorgeschlagen. Innerhalb von 72 "
+"Ihr Projekt wurde den %s Administratoren vorgeschlagen. Innerhalb von 72 "
 "Stunden werden Sie eine Benachrichtigung mit der Entscheidung und weiteren "
 "Instruktionen erhalten."
 
 #: www/register/index.php:143 www/register/index.php:162
 #, php-format
-msgid "Thank you for choosing %1$s."
-msgstr "Danke, daß Sie %1$s gewählt haben."
+msgid "Thank you for choosing %s."
+msgstr "Danke, daß Sie %s gewählt haben."
 
 #: www/register/index.php:156
 #, fuzzy, php-format
-msgid "Approval Error: %1$s"
-msgstr "Genehmige Gruppe: %1$s"
+msgid "Approval Error: %s"
+msgstr "Genehmige Gruppe: %s"
 
 #: www/register/index.php:159
 #, fuzzy
@@ -21576,7 +21574,7 @@ msgstr ""
 
 #: www/register/index.php:228
 #, php-format
-msgid "a web site at <tt>unixname.%1$s</tt>,"
+msgid "a web site at <tt>unixname.%s</tt>,"
 msgstr ""
 
 #: www/register/index.php:229
@@ -21585,7 +21583,7 @@ msgstr ""
 
 #: www/register/index.php:231
 #, php-format
-msgid "shell access to <span class=\"tt\">unixname.%1$s</span>,"
+msgid "shell access to <span class=\"tt\">unixname.%s</span>,"
 msgstr ""
 
 #: www/register/index.php:233
@@ -22125,8 +22123,8 @@ msgstr "Top-Nutzer"
 
 #: www/sendmessage.php:50
 #, php-format
-msgid "You can only send to addresses @<em>%1$s</em>."
-msgstr "Sie können nur an Adressen @<em>%1$s</em> senden."
+msgid "You can only send to addresses @<em>%s</em>."
+msgstr "Sie können nur an Adressen @<em>%s</em> senden."
 
 #: www/sendmessage.php:76
 msgid "Body"
@@ -22334,13 +22332,13 @@ msgstr "Schnipsel-Bibliothek"
 
 #: www/snippet/browse.php:62
 #, php-format
-msgid "Snippets by language: %1$s"
-msgstr "Schnipsel nach Sprache: %1$s"
+msgid "Snippets by language: %s"
+msgstr "Schnipsel nach Sprache: %s"
 
 #: www/snippet/browse.php:69
 #, php-format
-msgid "Snippets by category: %1$s"
-msgstr "Schnipsel nach Kategorie: %1$s"
+msgid "Snippets by category: %s"
+msgstr "Schnipsel nach Kategorie: %s"
 
 #: www/snippet/browse.php:71
 msgid "Error: bad url?"
@@ -22656,8 +22654,8 @@ msgstr "de_DE"
 
 #: www/softwaremap/full_list.php:68 www/softwaremap/trove_list.php:266
 #, php-format
-msgid "More than <strong>%1$s</strong> projects in result set."
-msgstr "Mehr als <strong>%1$s</strong> Projekte in der Ergebnisliste."
+msgid "More than <strong>%d</strong> projects in result set."
+msgstr "Mehr als <strong>%d</strong> Projekte in der Ergebnisliste."
 
 #: www/softwaremap/full_list.php:122
 msgid "Register Date:"
@@ -22671,7 +22669,8 @@ msgstr ""
 "Mehr als <strong>%1$s</strong> Projekte haben folgenden Tag <strong>%2$s</"
 "strong>."
 
-#: www/softwaremap/tag_cloud.php:89 www/trove/index.php:171
+#: www/softwaremap/tag_cloud.php:89 www/softwaremap/trove_list.php:269
+#: www/trove/index.php:171
 #, php-format
 msgid "<strong>%d</strong> project in result set."
 msgid_plural "<strong>%d</strong> projects in result set."
@@ -22688,15 +22687,10 @@ msgstr[0] ""
 msgstr[1] ""
 "Pro Seite werden %d Projekte angezeigt. Projekte sortiert nach Alphabet."
 
-#: www/softwaremap/tag_cloud.php:161
+#: www/softwaremap/tag_cloud.php:162
 #, fuzzy, php-format
 msgid "Activity Percentile: <strong>%3.0f</strong>"
 msgstr "Aktive Seitenbenutzer: <strong>%3. Von</strong>"
-
-#: www/softwaremap/tag_cloud.php:163
-#, php-format
-msgid "Registered: <strong>%s</strong>"
-msgstr "Registriert: <strong>%s</strong>"
 
 #: www/softwaremap/trove_list.php:56
 msgid "Software Map"
@@ -22717,19 +22711,12 @@ msgstr "Entferne diesen Filter"
 
 #: www/softwaremap/trove_list.php:200 www/trove/index.php:152
 #, php-format
-msgid "%1$s projects"
-msgstr "%1$s Projekte"
+msgid "%s projects"
+msgstr "%s Projekte"
 
 #: www/softwaremap/trove_list.php:219 www/trove/index.php:95
 msgid "Browse By"
 msgstr "durchsuchen nach"
-
-#: www/softwaremap/trove_list.php:269
-#, php-format
-msgid "<strong>%1$s</strong> project in result set."
-msgid_plural "<strong>%1$s</strong> projects in result set."
-msgstr[0] "<strong>%1$s</strong> Projekt in der Ergebnisliste."
-msgstr[1] "<strong>%1$s</strong> Projekte in der Ergebnisliste."
 
 #: www/softwaremap/trove_list.php:320
 msgid "Activity Percentile"
@@ -22750,12 +22737,12 @@ msgstr "Kann die angegebene Datei nicht finden um sie anzuzeigen."
 
 #: www/source.php:56
 #, php-format
-msgid "Source of %1$s"
-msgstr "Quelle von %1$s"
+msgid "Source of %s"
+msgstr "Quelle von %s"
 
 #: www/stats/graphs.php:36
 #, fuzzy, php-format
-msgid "%1$s Sitewide Statistics Graphs"
+msgid "%s Sitewide Statistics Graphs"
 msgstr "Seitenweite Graphenstatistiken"
 
 #: www/stats/graphs.php:43 www/stats/index.php:44 www/stats/projects.php:45
@@ -22776,7 +22763,7 @@ msgstr ""
 
 #: www/stats/i18n.php:32
 #, fuzzy, php-format
-msgid "%1$s I18n Statistics: Languages Distributions"
+msgid "%s I18n Statistics: Languages Distributions"
 msgstr "Sprachdistributionen"
 
 #: www/stats/i18n.php:54
@@ -22795,7 +22782,7 @@ msgstr ""
 
 #: www/stats/index.php:32
 #, fuzzy, php-format
-msgid "%1$s Sitewide Aggregate Statistics"
+msgid "%s Sitewide Aggregate Statistics"
 msgstr "Seitenweite Graphenstatistiken"
 
 #: www/stats/index.php:60
@@ -22813,7 +22800,7 @@ msgstr "Quell-IP"
 
 #: www/stats/projects.php:37
 #, fuzzy, php-format
-msgid "%1$s Site Project Statistical Comparisons"
+msgid "%s Site Project Statistical Comparisons"
 msgstr "statistische Projektvergleiche"
 
 #: www/stats/site_stats_utils.php:71
@@ -22880,8 +22867,8 @@ msgstr "Abfrage gab keine gültigen Daten zurück."
 
 #: www/stats/site_stats_utils.php:354
 #, php-format
-msgid "Statistics for the past %1$s days"
-msgstr "Statistiken für die letzten %1$s Tage"
+msgid "Statistics for the past %d days"
+msgstr "Statistiken für die letzten %d Tage"
 
 #: www/stats/site_stats_utils.php:358 www/stats/site_stats_utils.php:412
 #: www/stats/site_stats_utils.php:468
@@ -22899,8 +22886,8 @@ msgstr "Keine Daten"
 
 #: www/stats/site_stats_utils.php:408
 #, php-format
-msgid "Statistics for the past %1$s months"
-msgstr "Statistiken für die letzten %1$s Monate"
+msgid "Statistics for the past %d months"
+msgstr "Statistiken für die letzten %d Monate"
 
 #: www/stats/site_stats_utils.php:464
 msgid "Current Aggregate Statistics for All Time"
@@ -22953,8 +22940,7 @@ msgstr ""
 
 #: www/survey/admin/index.php:68
 #, php-format
-msgid ""
-"Link to the survey using this format: %1$s where XX is the survey number"
+msgid "Link to the survey using this format: %s where XX is the survey number"
 msgstr ""
 
 #: www/survey/admin/index.php:73
@@ -23005,10 +22991,10 @@ msgstr ""
 
 #: www/survey/admin/show_questions.php:52
 #, php-format
-msgid "%1$s question found"
-msgid_plural "%1$s questions found"
-msgstr[0] "%1$s Frage gefunden"
-msgstr[1] "%1$s Fragen gefunden"
+msgid "%s question found"
+msgid_plural "%s questions found"
+msgstr[0] "%s Frage gefunden"
+msgstr[1] "%s Fragen gefunden"
 
 #: www/survey/admin/show_results_individual.php:32
 msgid "Results"
@@ -23202,15 +23188,15 @@ msgstr "Keine Stimmen"
 
 #: www/survey/include/SurveyHTML.class.php:698
 #, php-format
-msgid "View All %1$s Comment"
-msgid_plural "View All %1$s Comments"
-msgstr[0] "Zeige den %1$s Kommentar"
-msgstr[1] "Zeige alle %1$s Kommentare"
+msgid "View All %s Comment"
+msgid_plural "View All %s Comments"
+msgstr[0] "Zeige den %s Kommentar"
+msgstr[1] "Zeige alle %s Kommentare"
 
 #: www/survey/index.php:46
-#, fuzzy, php-format
-msgid "Surveys for %1$s"
-msgstr "Quelle von %1$s"
+#, php-format
+msgid "Surveys for %s"
+msgstr ""
 
 #: www/survey/index.php:58
 #, fuzzy
@@ -23301,34 +23287,34 @@ msgstr "Nutzungsbedingungen"
 
 #: www/terms.php:36
 #, php-format
-msgid "%1$s Terms of Use"
-msgstr "%1$s Nutzungsbedingungen"
+msgid "%s Terms of Use"
+msgstr "%s Nutzungsbedingungen"
 
 #: www/terms.php:39
-#, fuzzy, php-format
+#, php-format
 msgid ""
-"These are the terms and conditions under which you are allowed to use the "
-"%1$s service.  They are empty by default, but the administrator(s) of the "
-"service can use this page to publish their local requirements if needed."
+"These are the terms and conditions under which you are allowed to use the %s "
+"service.  They are empty by default, but the administrator(s) of the service "
+"can use this page to publish their local requirements if needed."
 msgstr ""
-"Dies sind die Bedingungen und Einschränkungen unter denen Sie diesen %1$s "
+"Dies sind die Bedingungen und Einschränkungen unter denen Sie diesen %s "
 "Service nutzen dürfen. Standardmässig sind diese leer, die Administratoren "
 "des Dienstes können diese Seite jedoch nutzen um bei Bedarf ihre speziellen "
 "Bedürfnisse zu veröffentlichen."
 
 #: www/top/index.php:29
 #, fuzzy, php-format
-msgid "Top %1$s Projects"
-msgstr "Top %1$s Projekt"
+msgid "Top %s Projects"
+msgstr "Top %s Projekt"
 
 #: www/top/index.php:32
 #, php-format
 msgid ""
-"We track many project usage statistics on %1$s, and display here the top "
+"We track many project usage statistics on %s, and display here the top "
 "ranked projects in several categories."
 msgstr ""
-"Wir verfolgen viele Projekt-Nutzerstatistiken auf %1$s und zeigen hier die "
-"Top-Projekte in verschiedenen Kategorien."
+"Wir verfolgen viele Projekt-Nutzerstatistiken auf %s und zeigen hier die Top-"
+"Projekte in verschiedenen Kategorien."
 
 #: www/top/index.php:35 www/top/mostactive.php:43
 msgid "Most Active All Time"
@@ -23401,13 +23387,13 @@ msgstr "Dasselbe"
 
 #: www/top/topusers.php:92
 #, php-format
-msgid "Up %1$s"
-msgstr "Hoch %1$s"
+msgid "Up %s"
+msgstr "Hoch %s"
 
 #: www/top/topusers.php:95
 #, php-format
-msgid "Down %1$s"
-msgstr "Runter %1$s"
+msgid "Down %s"
+msgstr "Runter %s"
 
 #: www/tracker/admin/index.php:99
 #, fuzzy
@@ -23602,6 +23588,17 @@ msgstr "Aktualisierung nicht möglich"
 #: www/users:35
 msgid "No User Name Provided"
 msgstr "Kein Benutzername angegeben"
+
+#~ msgid "%1$s Verification"
+#~ msgstr "%1$s Überprüfung"
+
+#~ msgid "Registered: <strong>%s</strong>"
+#~ msgstr "Registriert: <strong>%s</strong>"
+
+#~ msgid "<strong>%1$s</strong> project in result set."
+#~ msgid_plural "<strong>%1$s</strong> projects in result set."
+#~ msgstr[0] "<strong>%1$s</strong> Projekt in der Ergebnisliste."
+#~ msgstr[1] "<strong>%1$s</strong> Projekte in der Ergebnisliste."
 
 #, fuzzy
 #~ msgid "Site Admin: Successfully Changed User Password"
@@ -26433,9 +26430,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "Project did not exist on this date."
 #~ msgstr "Projekt existierte zu diesem Zeitpunkt nicht."
-
-#~ msgid "Statistics for the past %1$s months."
-#~ msgstr "Statistiken für die letzten %1$s Monate"
 
 #~ msgid "Lifespan"
 #~ msgstr "Lebensdauer"
