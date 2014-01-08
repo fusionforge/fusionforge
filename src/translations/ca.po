@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 17:16+0100\n"
+"POT-Creation-Date: 2014-01-08 17:37+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -228,11 +228,11 @@ msgstr ""
 #: common/forum/ForumHTML.class.php:587 common/forum/ForumHTML.class.php:590
 #: common/forum/ForumMessage.class.php:666 common/frs/FRSFile.class.php:187
 #: common/frs/FRSFile.class.php:440 common/include/Error.class.php:206
-#: common/include/exit.php:80 common/include/Group.class.php:2627
-#: common/include/Group.class.php:2628 common/include/Group.class.php:2629
-#: common/include/Group.class.php:2681 common/include/Group.class.php:2682
-#: common/include/Group.class.php:2685 common/include/Group.class.php:2689
-#: common/include/Group.class.php:2699 common/include/Group.class.php:2700
+#: common/include/exit.php:80 common/include/Group.class.php:2632
+#: common/include/Group.class.php:2633 common/include/Group.class.php:2634
+#: common/include/Group.class.php:2686 common/include/Group.class.php:2687
+#: common/include/Group.class.php:2690 common/include/Group.class.php:2694
+#: common/include/Group.class.php:2704 common/include/Group.class.php:2705
 #: common/include/GroupJoinRequest.class.php:298
 #: common/include/Navigation.class.php:60 common/include/User.class.php:350
 #: common/include/User.class.php:436 common/include/User.class.php:1410
@@ -395,9 +395,6 @@ msgstr ""
 #: www/tracker/roadmap.php:223 www/tracker/roadmap.php:238
 #: www/tracker/roadmap.php:414 www/tracker/roadmap.php:422
 #: www/tracker/roadmap.php:435 www/tracker/roadmap.php:468
-#: www/trove/admin/trove_cat_add.php:95 www/trove/admin/trove_cat_add.php:97
-#: www/trove/admin/trove_cat_add.php:99 www/trove/admin/trove_cat_edit.php:84
-#: www/trove/admin/trove_cat_edit.php:87 www/trove/admin/trove_cat_edit.php:90
 #, php-format
 msgid ": "
 msgstr ""
@@ -617,7 +614,7 @@ msgstr ""
 
 #: common/docman/Document.class.php:953
 #: common/docman/DocumentGroup.class.php:731
-#: common/include/Group.class.php:2685 common/tracker/actions/browse.php:201
+#: common/include/Group.class.php:2690 common/tracker/actions/browse.php:201
 #: common/tracker/actions/query.php:202 common/tracker/actions/query.php:346
 msgid "Submitter"
 msgstr "Remitent"
@@ -1120,7 +1117,6 @@ msgstr ""
 #: www/survey/include/SurveyHTML.class.php:319
 #: www/survey/include/SurveyHTML.class.php:368
 #: www/survey/include/SurveyHTML.class.php:434
-#: www/trove/admin/trove_cat_list.php:46
 msgid "Edit"
 msgstr "Edita"
 
@@ -2164,8 +2160,7 @@ msgstr "Suprimeix"
 #: www/admin/database.php:165 www/admin/trove/trove_cat_add.php:116
 #: www/admin/trove/trove_cat_list.php:50 www/admin/trove/trove_cat_list.php:53
 #: www/pm/mod_task.php:289 www/reporting/timeadd.php:183
-#: www/reporting/timecategory.php:101 www/trove/admin/trove_cat_add.php:101
-#: www/trove/admin/trove_cat_list.php:43
+#: www/reporting/timecategory.php:101
 msgid "Add"
 msgstr "Afegeix"
 
@@ -3381,21 +3376,21 @@ msgstr "Rol"
 msgid "Wrong destination role"
 msgstr ""
 
-#: common/include/Group.class.php:2286
+#: common/include/Group.class.php:2291
 #, fuzzy
 msgid "Group already active"
 msgstr "El compte ja està actiu."
 
-#: common/include/Group.class.php:2526
+#: common/include/Group.class.php:2531
 #, fuzzy
 msgid "Approved"
 msgstr "Aprova"
 
-#: common/include/Group.class.php:2549 common/include/Group.class.php:2619
+#: common/include/Group.class.php:2554 common/include/Group.class.php:2624
 msgid "Group does not have any administrators."
 msgstr ""
 
-#: common/include/Group.class.php:2557
+#: common/include/Group.class.php:2562
 #, fuzzy, php-format
 msgid ""
 "Your project registration for %4$s has been approved.\n"
@@ -3483,63 +3478,63 @@ msgstr ""
 "\n"
 "-- la tripulació %7$s"
 
-#: common/include/Group.class.php:2593
+#: common/include/Group.class.php:2598
 #, php-format
 msgid "%s Project Approved"
 msgstr "Projecte %s aprovat"
 
-#: common/include/Group.class.php:2626
+#: common/include/Group.class.php:2631
 #, php-format
 msgid "Your project registration for %s has been denied."
 msgstr "El vostre registre de projecte per %s ha estat denegat."
 
-#: common/include/Group.class.php:2627 common/include/Group.class.php:2681
-#: common/include/Group.class.php:2699 www/register/index.php:183
+#: common/include/Group.class.php:2632 common/include/Group.class.php:2686
+#: common/include/Group.class.php:2704 www/register/index.php:183
 #: www/register/index.php:189
 msgid "Project Full Name"
 msgstr "Nom complet del projecte"
 
-#: common/include/Group.class.php:2628 plugins/projectlabels/www/index.php:172
+#: common/include/Group.class.php:2633 plugins/projectlabels/www/index.php:172
 #: www/admin/approve-pending.php:190 www/admin/database.php:155
 #: www/admin/groupedit.php:170 www/admin/vhost.php:118
 #: www/register/index.php:214
 msgid "Project Unix Name"
 msgstr "Nom Unix del projecte"
 
-#: common/include/Group.class.php:2629
+#: common/include/Group.class.php:2634
 msgid "Reasons for negative decision"
 msgstr "Raons de la decisió negativa"
 
-#: common/include/Group.class.php:2641
+#: common/include/Group.class.php:2646
 #, php-format
 msgid "%s Project Denied"
 msgstr "Projecte %s denegat"
 
-#: common/include/Group.class.php:2665
+#: common/include/Group.class.php:2670
 msgid "Could not find user who has submitted the project."
 msgstr ""
 
-#: common/include/Group.class.php:2672
+#: common/include/Group.class.php:2677
 msgid "There is no administrator to send the mail to."
 msgstr ""
 
-#: common/include/Group.class.php:2680 common/include/Group.class.php:2691
-#: common/include/Group.class.php:2698 common/include/Group.class.php:2704
+#: common/include/Group.class.php:2685 common/include/Group.class.php:2696
+#: common/include/Group.class.php:2703 common/include/Group.class.php:2709
 #, php-format
 msgid "New %s Project Submitted"
 msgstr "Tramès nou projecte %s"
 
-#: common/include/Group.class.php:2682 common/include/Group.class.php:2700
+#: common/include/Group.class.php:2687 common/include/Group.class.php:2705
 #: www/admin/approve-pending.php:192
 msgid "Submitted Description"
 msgstr "Descripció tramesa"
 
-#: common/include/Group.class.php:2689
+#: common/include/Group.class.php:2694
 #, fuzzy
 msgid "Please visit the following URL to approve or reject this project"
 msgstr "Si us plau, visiteu la següent URL per a completar el canvi d'adreça:"
 
-#: common/include/Group.class.php:2701
+#: common/include/Group.class.php:2706
 #, php-format
 msgid ""
 "The %s admin team will now examine your project submission. You will be "
@@ -3548,42 +3543,42 @@ msgstr ""
 "L'equip d'admistració %s examinarà ara el vostre enviament de projecte. Se "
 "us notificarà la seva decisió."
 
-#: common/include/Group.class.php:2719
+#: common/include/Group.class.php:2724
 #, fuzzy
 msgid "Group name is too short"
 msgstr "La pregunta és massa curta"
 
-#: common/include/Group.class.php:2722
+#: common/include/Group.class.php:2727
 #, fuzzy
 msgid "Group name is too long"
 msgstr "Nom de Grup (feu clic per a editar)"
 
-#: common/include/Group.class.php:2725
+#: common/include/Group.class.php:2730
 #, fuzzy
 msgid "Group name already taken"
 msgstr "El nom Unix ja està agafat"
 
-#: common/include/Group.class.php:2806
+#: common/include/Group.class.php:2811
 #, php-format
 msgid "Error: Cannot Update Group Unix Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2870
+#: common/include/Group.class.php:2875
 #, php-format
 msgid "Error: Cannot Update Group DocmanCreateOnline Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2888
+#: common/include/Group.class.php:2893
 #, php-format
 msgid "Error: Cannot Update Group UseWebdab Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2906
+#: common/include/Group.class.php:2911
 #, php-format
 msgid "Error: Cannot Update Group UseDocmanSearch Status: %s"
 msgstr ""
 
-#: common/include/Group.class.php:2924
+#: common/include/Group.class.php:2929
 #, php-format
 msgid "Error: Cannot Update Group force_docman_reindex %s"
 msgstr ""
@@ -3975,22 +3970,22 @@ msgstr "No hi ha tal missatge per aquest projecte"
 msgid "UNKNOWN (internal error, report bug to FusionForge)"
 msgstr ""
 
-#: common/include/RBAC.php:795
+#: common/include/RBAC.php:809
 #, php-format
 msgid "%s (global role)"
 msgstr ""
 
-#: common/include/RBAC.php:799
+#: common/include/RBAC.php:813
 #, fuzzy, php-format
 msgid "%s (in project %s)"
 msgstr "%1$s projectes"
 
-#: common/include/RBAC.php:1118
+#: common/include/RBAC.php:1115
 #, fuzzy
 msgid "Anonymous/not logged in"
 msgstr "Primer heu d'entrar a la sessió"
 
-#: common/include/RBAC.php:1166
+#: common/include/RBAC.php:1163
 #, fuzzy
 msgid "Any user logged in"
 msgstr "Primer heu d'entrar a la sessió"
@@ -3998,7 +3993,7 @@ msgstr "Primer heu d'entrar a la sessió"
 #: common/include/rbac_texts.php:45 common/include/rbac_texts.php:57
 #: common/include/rbac_texts.php:60 common/include/rbac_texts.php:62
 #: common/include/rbac_texts.php:64
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:220
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:219
 #, fuzzy
 msgid "No administrative access"
 msgstr "Administratiu"
@@ -4014,8 +4009,8 @@ msgstr "Forums: Administració"
 #: common/include/rbac_texts.php:97 common/include/rbac_texts.php:113
 #: common/include/rbac_texts.php:121 common/include/rbac_texts.php:127
 #: common/include/rbac_texts.php:130 common/include/rbac_texts.php:135
-#: plugins/hudson/include/hudsonPlugin.class.php:349
-#: plugins/moinmoin/common/MoinMoinPlugin.class.php:151
+#: plugins/hudson/include/hudsonPlugin.class.php:348
+#: plugins/moinmoin/common/MoinMoinPlugin.class.php:150
 #, fuzzy
 msgid "No Access"
 msgstr "No hi ha canvis"
@@ -4031,8 +4026,8 @@ msgid "Approve news"
 msgstr "Aprova"
 
 #: common/include/rbac_texts.php:52
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:200
-#: plugins/moinmoin/common/MoinMoinPlugin.class.php:152
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:199
+#: plugins/moinmoin/common/MoinMoinPlugin.class.php:151
 #, fuzzy
 msgid "Read access"
 msgstr "No hi ha canvis"
@@ -9501,7 +9496,6 @@ msgstr "Subprojecte"
 
 #: plugins/extsubproj/view/admin/viewProjectConfiguration.php:41
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:227
-#: www/trove/admin/trove_cat_edit.php:93
 #, fuzzy
 msgid "delete"
 msgstr "Suprimeix"
@@ -10736,12 +10730,12 @@ msgstr "No s'han trobat llistes per %1$s"
 msgid "Weather Report:"
 msgstr "Genera un informe"
 
-#: plugins/hudson/include/hudsonPlugin.class.php:348
+#: plugins/hudson/include/hudsonPlugin.class.php:347
 #, fuzzy
 msgid "Hudson access"
 msgstr "No hi ha canvis"
 
-#: plugins/hudson/include/hudsonPlugin.class.php:350
+#: plugins/hudson/include/hudsonPlugin.class.php:349
 #, fuzzy
 msgid "Full access"
 msgstr "No hi ha canvis"
@@ -11984,63 +11978,63 @@ msgstr ""
 msgid "Mediawiki Space"
 msgstr "S'ha pujat el fitxer multimèdia"
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:198
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:197
 msgid "Mediawiki read access"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:199
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:198
 msgid "No reading"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:204
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:203
 msgid "Mediawiki write access"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:205
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:204
 #, fuzzy
 msgid "No editing"
 msgstr "Votant"
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:206
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:205
 #, fuzzy
 msgid "Edit existing pages only"
 msgstr "Respostes existents"
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:207
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:206
 msgid "Edit and create pages"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:208
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:207
 msgid "Edit, create, move, delete pages"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:212
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:211
 #, fuzzy
 msgid "Mediawiki file upload"
 msgstr "S'ha pujat el fitxer multimèdia"
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:213
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:212
 msgid "No uploading"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:214
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:213
 #, fuzzy
 msgid "Upload permitted"
 msgstr "Puja un fitxer"
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:215
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:214
 msgid "Upload and re-upload"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:219
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:218
 msgid "Mediawiki administrative tasks"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:221
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:220
 msgid "Edit interface, import XML dumps"
 msgstr ""
 
-#: plugins/mediawiki/include/mediawikiPlugin.class.php:348
+#: plugins/mediawiki/include/mediawikiPlugin.class.php:347
 #, fuzzy
 msgid "MediaWiki Plugin admin"
 msgstr "Administració de les llistes de correu"
@@ -12226,16 +12220,16 @@ msgid ""
 "able to use WYSIWYG formatting (bold, colors...)"
 msgstr ""
 
-#: plugins/moinmoin/common/MoinMoinPlugin.class.php:150
+#: plugins/moinmoin/common/MoinMoinPlugin.class.php:149
 msgid "MoinMoin Wiki access"
 msgstr ""
 
-#: plugins/moinmoin/common/MoinMoinPlugin.class.php:153
+#: plugins/moinmoin/common/MoinMoinPlugin.class.php:152
 #, fuzzy
 msgid "Write access"
 msgstr "No hi ha canvis"
 
-#: plugins/moinmoin/common/MoinMoinPlugin.class.php:154
+#: plugins/moinmoin/common/MoinMoinPlugin.class.php:153
 #, fuzzy
 msgid "Admin access"
 msgstr "No hi ha canvis"
@@ -16334,7 +16328,7 @@ msgstr "Nom complet"
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
 #: www/include/trove.php:423 www/include/trove.php:427
-#: www/include/trove.php:431 www/trove/admin/trove_cat_add.php:49
+#: www/include/trove.php:431
 #, fuzzy, php-format
 msgid "Error in Trove Operation: %s"
 msgstr "Error en l'operació"
@@ -16344,7 +16338,7 @@ msgstr "Error en l'operació"
 msgid "Missing category short name or full name"
 msgstr "Paràmetre perdut"
 
-#: www/admin/trove/trove_cat_add.php:72 www/trove/admin/trove_cat_add.php:62
+#: www/admin/trove/trove_cat_add.php:72
 msgid "Add New Trove Category"
 msgstr "Afegeix una nova categoria a l'arbre de projectes"
 
@@ -16352,18 +16346,15 @@ msgstr "Afegeix una nova categoria a l'arbre de projectes"
 msgid "Parent Category"
 msgstr "Categoria del node superior"
 
-#: www/admin/trove/trove_cat_add.php:110 www/trove/admin/trove_cat_add.php:95
-#: www/trove/admin/trove_cat_edit.php:84
+#: www/admin/trove/trove_cat_add.php:110
 msgid "New category short name (no spaces, Unix-like)"
 msgstr "Nou nom abreujat de categoria (sense espais, estil Unix)"
 
-#: www/admin/trove/trove_cat_add.php:112 www/trove/admin/trove_cat_add.php:97
-#: www/trove/admin/trove_cat_edit.php:87
+#: www/admin/trove/trove_cat_add.php:112
 msgid "New category full name (maximum length is 80 chars)"
 msgstr "Nou nom complet de categoria (VARCHAR 80)"
 
-#: www/admin/trove/trove_cat_add.php:114 www/trove/admin/trove_cat_add.php:99
-#: www/trove/admin/trove_cat_edit.php:90
+#: www/admin/trove/trove_cat_add.php:114
 msgid "New category description (maximum length is 255 chars)"
 msgstr "Nova descripció de categoria (VARCHAR 255)"
 
@@ -16403,7 +16394,7 @@ msgstr "Nou nom complet de categoria (VARCHAR 80)"
 msgid "Category description (maximum length is 255 chars)"
 msgstr "Descripció de categoria (VARCHAR 255)"
 
-#: www/admin/trove/trove_cat_list.php:74 www/trove/admin/trove_cat_list.php:69
+#: www/admin/trove/trove_cat_list.php:74
 msgid "Browse Trove Tree"
 msgstr "Navega l'arbre de projectes"
 
@@ -23332,28 +23323,6 @@ msgstr "No s'han trobat dades per fer l'informe"
 msgid "Unknown"
 msgstr "Estat del compte Unix"
 
-#: www/trove/admin/trove_cat_add.php:59
-msgid "Site Admin: Trove - Add Node"
-msgstr "Administració del lloc: Arbre de projectes - Afegeix node"
-
-#: www/trove/admin/trove_cat_add.php:65 www/trove/admin/trove_cat_edit.php:136
-#, fuzzy
-msgid "Parent Category: "
-msgstr "Categoria pare:"
-
-#: www/trove/admin/trove_cat_edit.php:73 www/trove/admin/trove_cat_list.php:65
-msgid "Site Admin: Trove - Category List"
-msgstr "Administració del lloc: Arbre de projectes - Llistat de categories"
-
-#: www/trove/admin/trove_cat_edit.php:79
-msgid "Site Admin: Trove - Edit Category"
-msgstr "Site Admin: Arbre de projectes - Edita la categoria"
-
-#: www/trove/admin/trove_cat_edit.php:93
-#, fuzzy
-msgid "update"
-msgstr "Actualitza"
-
 #: www/trove/index.php:46
 #, fuzzy
 msgid "Trove Map"
@@ -24540,13 +24509,6 @@ msgstr "Nom d'usuari"
 
 #~ msgid "If you're aren't sure then why did you click 'Delete'?"
 #~ msgstr "Si no n'esteu segur, aleshores per què heu fet clic a 'Suprimeix'?"
-
-#~ msgid "Parent Category:"
-#~ msgstr "Categoria pare:"
-
-#, fuzzy
-#~ msgid "Category short name (no spaces, unix-like)"
-#~ msgstr "Nou nom abreujat de categoria (sense espais, estil unix)"
 
 #~ msgid "Forum monitoring deactivated"
 #~ msgstr "Desactivada la monitorització del fòrum"
