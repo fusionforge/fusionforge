@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 14:22+0100\n"
+"POT-Creation-Date: 2014-01-08 15:04+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -34,9 +34,8 @@ msgid "Invalid file name."
 msgstr "Ungültiger Dateiname."
 
 #: common/account/actions/deletesshkey.php:30
-#, fuzzy
 msgid "SSH Key deleted successfully."
-msgstr "Fertigkeit erfolgreich gelöscht"
+msgstr "SSH-Schlüssel erfolgreich gelöscht."
 
 #: common/docman/actions/addfile.php:58 common/docman/actions/addfile.php:65
 #: common/docman/actions/addsubdocgroup.php:48
@@ -62,7 +61,7 @@ msgstr "Fertigkeit erfolgreich gelöscht"
 #: common/docman/views/addfile.php:53
 #, fuzzy
 msgid "Document Manager Action Denied."
-msgstr "Documentation Manager"
+msgstr "Documentation Manager."
 
 #: common/docman/actions/addfile.php:75
 #, fuzzy
@@ -85,28 +84,29 @@ msgstr ""
 #: common/docman/actions/addfile.php:193
 #, fuzzy, php-format
 msgid "Document %s submitted successfully."
-msgstr "Dokument erfolgreich übermittelt"
+msgstr "Dokument %s erfolgreich übermittelt."
 
 #: common/docman/actions/addfile.php:196
 #, fuzzy, php-format
 msgid ""
 "Document %s has been successfully uploaded and is waiting to be approved."
-msgstr "Dokument erfolgreich eingereicht: Status offen (benötigt Validierung)"
+msgstr ""
+"Dokument %s erfolgreich eingereicht: Status offen (benötigt Validierung)."
 
 #: common/docman/actions/addsubdocgroup.php:63
 #, fuzzy
 msgid "Document subfolder successfully created."
-msgstr "Dokument erfolgreich übermittelt"
+msgstr "Dokument erfolgreich übermittelt."
 
 #: common/docman/actions/addsubdocgroup.php:67
 #, fuzzy
 msgid "Document folder successfully created."
-msgstr "Dokument erfolgreich übermittelt"
+msgstr "Dokument erfolgreich übermittelt."
 
 #: common/docman/actions/deldir.php:63
 #, fuzzy, php-format
 msgid "Document folder %s deleted successfully."
-msgstr "Dokument erfolgreich übermittelt"
+msgstr "Dokument erfolgreich übermittelt."
 
 #: common/docman/actions/delfile.php:36
 #: common/docman/actions/enforcereserve.php:36
@@ -166,12 +166,12 @@ msgstr "Kein Zugriff auf die Listen möglich"
 #: common/docman/actions/emptytrash.php:42
 #, fuzzy
 msgid "Emptied Trash successfully."
-msgstr "Aktualisierung erfolgreich"
+msgstr "Aktualisierung erfolgreich."
 
 #: common/docman/actions/enforcereserve.php:47
 #, fuzzy
 msgid "reservation enforced successfully."
-msgstr "Aktualisierung erfolgreich"
+msgstr "Aktualisierung erfolgreich."
 
 #: common/docman/actions/forcereindexenginesearch.php:36
 msgid ""
@@ -181,7 +181,7 @@ msgstr ""
 #: common/docman/actions/injectzip.php:49
 #, fuzzy
 msgid "Archive injected successfully."
-msgstr "JOB erfolgreich eingefügt"
+msgstr "JOB erfolgreich eingefügt."
 
 #: common/docman/actions/monitordirectory.php:38
 #: common/docman/Document.class.php:950
@@ -427,57 +427,57 @@ msgstr ""
 #: common/docman/actions/releasefile.php:49
 #, fuzzy
 msgid "released successfully."
-msgstr "Erfolgreich erstellt"
+msgstr "Erfolgreich erstellt."
 
 #: common/docman/actions/reservefile.php:49
 #, fuzzy
 msgid "reserved successfully."
-msgstr "Dokument erfolgreich übermittelt"
+msgstr "Dokument erfolgreich übermittelt."
 
 #: common/docman/actions/trashdir.php:99
 #, fuzzy, php-format
 msgid "Documents folder %s moved to trash successfully."
-msgstr "Dokument erfolgreich übermittelt"
+msgstr "Dokument erfolgreich übermittelt."
 
 #: common/docman/actions/trashfile.php:66
 #, fuzzy
 msgid "moved to trash successfully."
-msgstr "Dokument erfolgreich übermittelt"
+msgstr "Dokument erfolgreich übermittelt."
 
 #: common/docman/actions/updatecreateonline.php:33
 #, fuzzy
 msgid "Create Online Documents Status updated successfully: Active."
-msgstr "Benutzer erfolgreich aktualisiert"
+msgstr "Benutzer erfolgreich aktualisiert."
 
 #: common/docman/actions/updatecreateonline.php:36
 #, fuzzy
 msgid "Create Online Documents Status updated successfully: Off."
-msgstr "Benutzer erfolgreich aktualisiert"
+msgstr "Benutzer erfolgreich aktualisiert."
 
 #: common/docman/actions/updateenginesearch.php:33
 #, fuzzy
 msgid "Search Engine Status updated successfully: Active."
-msgstr "Benutzer erfolgreich aktualisiert"
+msgstr "Benutzer erfolgreich aktualisiert."
 
 #: common/docman/actions/updateenginesearch.php:36
 #, fuzzy
 msgid "Search Engine Status updated successfully: Off."
-msgstr "Benutzer erfolgreich aktualisiert"
+msgstr "Benutzer erfolgreich aktualisiert."
 
 #: common/docman/actions/updatewebdavinterface.php:33
 #, fuzzy
 msgid "Webdav Interface updated successfully: Active."
-msgstr "Benutzer erfolgreich aktualisiert"
+msgstr "Benutzer erfolgreich aktualisiert."
 
 #: common/docman/actions/updatewebdavinterface.php:36
 #, fuzzy
 msgid "Webdav Interface updated successfully: Off."
-msgstr "Benutzer erfolgreich aktualisiert"
+msgstr "Benutzer erfolgreich aktualisiert."
 
 #: common/docman/actions/validatefile.php:61
 #, fuzzy
 msgid "activated successfully."
-msgstr "Aktualisierung erfolgreich"
+msgstr "Aktualisierung erfolgreich."
 
 #: common/docman/Document.class.php:65
 #: common/docman/DocumentFactory.class.php:92
@@ -637,7 +637,7 @@ msgstr ""
 #: common/docman/Document.class.php:1025
 #, fuzzy
 msgid "Error Deleting Document:"
-msgstr "Fehler beim Löschen eines Elements"
+msgstr "Fehler beim Löschen eines Elements:"
 
 #: common/docman/Document.class.php:1101
 #: common/docman/DocumentGroup.class.php:879
@@ -658,7 +658,7 @@ msgstr "Dokumenten-Titel"
 #: common/docman/DocumentGroup.class.php:101
 #, fuzzy
 msgid "Name is required"
-msgstr "Der Name ist reserviert."
+msgstr "Der Name ist reserviert"
 
 #: common/docman/DocumentGroup.class.php:110
 #: common/docman/DocumentGroup.class.php:490
@@ -669,12 +669,12 @@ msgstr "Dokumenten-Gruppe: ungültige parent-ID für die Gruppe"
 #: common/docman/DocumentGroup.class.php:131
 #, fuzzy
 msgid "Folder name already exists"
-msgstr "Dieser Feldname existiert bereits."
+msgstr "Dieser Feldname existiert bereits"
 
 #: common/docman/DocumentGroup.class.php:147
 #, fuzzy
 msgid "Error Adding Folder:"
-msgstr "Fehler beim Anlegen eines Forums"
+msgstr "Fehler beim Anlegen eines Forums:"
 
 #: common/docman/DocumentGroup.class.php:241
 msgid "Unsupported injected file:"
@@ -726,9 +726,8 @@ msgid "Unable to open ZIP file."
 msgstr "Kein Zugriff auf Liste %s möglich."
 
 #: common/docman/DocumentGroup.class.php:824
-#, fuzzy
 msgid "(Title must be at least 5 characters.)"
-msgstr "Titel muß mindestens 5 Zeichen haben"
+msgstr "(Titel muß mindestens 5 Zeichen haben.)"
 
 #: common/docman/DocumentGroup.class.php:829
 msgid "Injected by ZIP:"
@@ -737,7 +736,7 @@ msgstr ""
 #: common/docman/DocumentGroup.class.php:838
 #, fuzzy
 msgid "Unknown item."
-msgstr "Unbekannte Status ID"
+msgstr "Unbekannte Status ID."
 
 #: common/docman/DocumentGroup.class.php:845
 msgid "Unable to open folder for injecting into tree"
@@ -900,12 +899,11 @@ msgstr "Beschreibung"
 
 #: common/docman/views/addfile.php:92
 msgid "A brief description to be placed just under the title."
-msgstr ""
+msgstr "Eine kurze Zusammenfassung, die unter dem Titel platziert wird."
 
 #: common/docman/views/addfile.php:94 common/docman/views/editfile.php:47
-#, fuzzy
 msgid "Both fields are used by the document search engine."
-msgstr "Dokumenten Suchmaschine"
+msgstr ""
 
 #: common/docman/views/addfile.php:102 common/docman/views/addfile.php:103
 #: common/docman/views/addfile.php:110 common/docman/views/addfile.php:111
@@ -1026,7 +1024,7 @@ msgstr "Dokumenten-Manager: Dokument anzeigen"
 #: common/docman/views/additem.php:56
 #, fuzzy
 msgid "Submit a new document in this folder."
-msgstr "Neue Dokumentation übermitteln"
+msgstr "Neue Dokumentation übermitteln."
 
 #: common/docman/views/additem.php:58
 #, fuzzy
@@ -1047,7 +1045,7 @@ msgstr "Projektbaum"
 #: common/docman/views/additem.php:84
 #, fuzzy
 msgid "Upload archive:"
-msgstr "Datei hochladen"
+msgstr "Datei hochladen:"
 
 #: common/docman/views/addsubdocgroup.php:56
 #, fuzzy
@@ -1105,9 +1103,8 @@ msgid "Folder Name"
 msgstr "Dateiname"
 
 #: common/docman/views/editdocgroup.php:62
-#, fuzzy
 msgid "belongs to"
-msgstr "Gehört"
+msgstr "gehört zu"
 
 #: common/docman/views/editdocgroup.php:68
 msgid "Restore"
@@ -1146,13 +1143,12 @@ msgstr ""
 "sein sollte."
 
 #: common/docman/views/editfile.php:57
-#, fuzzy
 msgid ""
 "Edit the contents to your desire or leave them as they are to remain "
 "unmodified."
 msgstr ""
 "Verändern Sie die Inhalte zu Ihrer Zufriedenheit oder lassen Sie sie wie sie "
-"sind. "
+"sind."
 
 #: common/docman/views/editfile.php:65
 #, fuzzy
@@ -1171,14 +1167,12 @@ msgid "State"
 msgstr "Status"
 
 #: common/docman/views/editfile.php:75
-#, fuzzy
 msgid "Specify an new outside URL where the file will be referenced:"
-msgstr "ODER spezifizieren Sie eine URL, wo die Datei referenziert werden soll"
+msgstr "Spezifizieren Sie eine URL, wo die Datei referenziert werden soll:"
 
 #: common/docman/views/editfile.php:80
-#, fuzzy
 msgid "OPTIONAL: Upload new file:"
-msgstr "OPTIONAL: Hochladen einer neuen Datei"
+msgstr "OPTIONAL: Hochladen einer neuen Datei:"
 
 #: common/docman/views/help.php:38
 #, fuzzy
@@ -1556,7 +1550,7 @@ msgstr ""
 #: common/docman/views/listtrashfile.php:119
 #, fuzzy
 msgid "Delete permanently this folder and his content."
-msgstr "Lösche das ganze Forum und all seinen Inhalt"
+msgstr "Lösche das ganze Forum und all seinen Inhalt."
 
 #: common/docman/views/listtrashfile.php:158
 msgid "Updated since less than 7 days"
@@ -1627,7 +1621,7 @@ msgstr "Auswertung"
 #: common/docman/views/menu.php:72
 #, fuzzy
 msgid "Docman module reporting."
-msgstr "Dokumenten-Manager Administration"
+msgstr "Dokumenten-Manager Administration."
 
 #: common/docman/views/menu.php:73 common/forum/ForumHTML.class.php:115
 #: common/forum/ForumHTML.class.php:121 common/frs/include/frs_utils.php:79
@@ -1648,7 +1642,7 @@ msgstr "Administration"
 #: common/docman/views/menu.php:75
 #, fuzzy
 msgid "Docman module administration."
-msgstr "Dokumenten-Manager Administration"
+msgstr "Dokumenten-Manager Administration."
 
 #: common/docman/views/pendingfiles.php:42
 #, fuzzy
@@ -2039,9 +2033,8 @@ msgid "View user profile"
 msgstr "Ein Benutzerprofil anschauen"
 
 #: common/docman/views/search.php:61
-#, fuzzy
 msgid "Query: "
-msgstr "Tagebuch aktualisiert"
+msgstr ""
 
 #: common/docman/views/search.php:62
 msgid "Searched words"
@@ -2380,15 +2373,13 @@ msgid "Forum name must be at least 3 characters."
 msgstr "Der Forenname muss mindestens 3 Buchstaben lang sein."
 
 #: common/forum/Forum.class.php:176 common/forum/Forum.class.php:557
-#, fuzzy
 msgid "Forum description must be at least 10 characters."
-msgstr "Die Foren-Beschreibung muss mindestens 10 Buchstaben lang sein"
+msgstr "Die Foren-Beschreibung muss mindestens 10 Buchstaben lang sein."
 
 #: common/forum/Forum.class.php:181 common/forum/Forum.class.php:183
 #: common/forum/Forum.class.php:562 common/forum/Forum.class.php:564
-#, fuzzy
 msgid "Illegal characters in Forum name."
-msgstr "Illegale Zeichen im Forenname"
+msgstr "Illegale Zeichen im Forenname."
 
 #: common/forum/Forum.class.php:181 common/forum/Forum.class.php:562
 #, fuzzy
@@ -2844,12 +2835,12 @@ msgstr "Ungültiger package_id"
 #: common/frs/FRSPackage.class.php:291
 #, fuzzy
 msgid "Unable to add monitor: "
-msgstr "Konnte Überwachung nicht hinzufügen"
+msgstr "Konnte Überwachung nicht hinzufügen: "
 
 #: common/frs/FRSPackage.class.php:323
 #, fuzzy
 msgid "Error On querying monitor count: "
-msgstr "Fehler beim Erstellen einer Forennachricht:"
+msgstr "Fehler beim Erstellen einer Forennachricht: "
 
 #: common/frs/FRSPackage.class.php:384
 #, fuzzy
@@ -2874,7 +2865,7 @@ msgstr "Ein solches Element existiert bereits"
 #: common/frs/FRSPackage.class.php:476
 #, fuzzy
 msgid "Release Error: "
-msgstr "Herausgegeben von:"
+msgstr "Herausgegeben von: "
 
 #: common/frs/FRSPackage.class.php:486
 msgid "Package delete error: trying to delete root dir"
@@ -3648,20 +3639,20 @@ msgstr "Kommentare des Nutzers:"
 #: common/include/GroupJoinRequest.class.php:273
 #, php-format
 msgid "Request to Join Project %s"
-msgstr "Anfrage dem Projekt %1$s beizutreten"
+msgstr "Anfrage dem Projekt %s beizutreten"
 
 #: common/include/GroupJoinRequest.class.php:260
 #, php-format
 msgid "Your request to join the %s project was denied by an administrator."
 msgstr ""
-"Ihre Anfrage dem Projekt %1$s beizutreten wurde von einem Administrator "
+"Ihre Anfrage dem Projekt %s beizutreten wurde von einem Administrator "
 "abgelehnt."
 
 #: common/include/GroupJoinRequest.class.php:274
 #, php-format
 msgid "Your request to join the %s project was granted by an administrator."
 msgstr ""
-"Ihrer Anfrage dem Projekt %1$s beizutreten wurde von einem Administrator "
+"Ihrer Anfrage dem Projekt %s beizutreten wurde von einem Administrator "
 "stattgegeben."
 
 #: common/include/GroupJoinRequest.class.php:287
@@ -3976,7 +3967,7 @@ msgstr "Benutze %s"
 #: common/include/Plugin.class.php:348
 #, fuzzy
 msgid "No description available."
-msgstr "Keine Statistiken verfügbar"
+msgstr "Keine Statistiken verfügbar."
 
 #: common/include/PluginManager.class.php:226
 msgid ""
