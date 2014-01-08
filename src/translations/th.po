@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 14:22+0100\n"
+"POT-Creation-Date: 2014-01-08 15:42+0100\n"
 "PO-Revision-Date: 2013-06-03 17:16+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -3027,7 +3027,6 @@ msgstr ""
 msgid "New Doc Address Appeared Invalid: %s"
 msgid_plural "New Doc Addresses Appeared Invalid: %s"
 msgstr[0] ""
-msgstr[1] ""
 
 #: common/include/Group.class.php:631
 #, php-format
@@ -7460,7 +7459,6 @@ msgstr ""
 msgid "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 msgid_plural "(<strong>%1$s</strong> open / <strong>%2$s</strong> total)"
 msgstr[0] ""
-msgstr[1] ""
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:111
 msgid "Public Forums"
@@ -7472,7 +7470,6 @@ msgstr ""
 msgid "<strong>%d</strong> message"
 msgid_plural "<strong>%d</strong> messages"
 msgstr[0] ""
-msgstr[1] ""
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:115
 msgid "in"
@@ -7484,7 +7481,6 @@ msgstr ""
 msgid "<strong>%d</strong> forum"
 msgid_plural "<strong>%d</strong> forums"
 msgstr[0] ""
-msgstr[1] ""
 
 #: common/widget/Widget_ProjectPublicAreas.class.php:125
 msgid "DocManager: Project Documentation"
@@ -9267,7 +9263,6 @@ msgstr ""
 msgid "Associated forge"
 msgid_plural "Associated forges"
 msgstr[0] ""
-msgstr[1] ""
 
 #: plugins/globalsearch/common/globalsearch_edit_utils.php:206
 #: www/admin/admin_table.php:313
@@ -12005,7 +12000,6 @@ msgstr ""
 msgid "This label is used on the following group:"
 msgid_plural "This label is used on the following groups:"
 msgstr[0] ""
-msgstr[1] ""
 
 #: plugins/projectlabels/www/index.php:165
 msgid "[Remove this label]"
@@ -12673,14 +12667,12 @@ msgstr ""
 msgid "commit"
 msgid_plural "commits"
 msgstr[0] ""
-msgstr[1] ""
 
 #: plugins/scmccase/common/CCasePlugin.class.php:170
 #, php-format
 msgid "add"
 msgid_plural "adds"
 msgstr[0] ""
-msgstr[1] ""
 
 #: plugins/scmcpold/common/CpoldPlugin.class.php:55
 msgid "This CPOLD plugin is only intended as a proof of concept."
@@ -14844,7 +14836,6 @@ msgstr ""
 msgid "%d user detached from plugin."
 msgid_plural "%d users detached from plugin."
 msgstr[0] ""
-msgstr[1] ""
 
 #: www/admin/pluginman.php:63
 #, php-format
@@ -14971,7 +14962,6 @@ msgstr ""
 msgid "User search with criteria <em>%1$s</em>: %2$s match"
 msgid_plural "User search with criteria <em>%1$s</em>: %2$s matches"
 msgstr[0] ""
-msgstr[1] ""
 
 #: www/admin/search.php:74 www/admin/unsubscribe.php:113
 #: www/admin/useredit.php:148 www/include/user_profile.php:92
@@ -14990,7 +14980,6 @@ msgstr ""
 msgid "Project search with criteria <em>%s</em>: %d match"
 msgid_plural "Project search with criteria <em>%s</em>: %d matches"
 msgstr[0] ""
-msgstr[1] ""
 
 #: www/admin/search.php:149 www/register/index.php:188
 msgid "Full Name"
@@ -17313,7 +17302,6 @@ msgstr ""
 msgid "email sent to %s monitoring user"
 msgid_plural "email sent to %s monitoring users"
 msgstr[0] ""
-msgstr[1] ""
 
 #: www/my/diary.php:121
 msgid "email not sent - no one monitoring"
@@ -17741,7 +17729,6 @@ msgstr ""
 msgid "Skill updated"
 msgid_plural "Skills updated"
 msgstr[0] ""
-msgstr[1] ""
 
 #: www/people/editprofile.php:149 www/people/editprofile.php:150
 msgid "Edit Skills"
@@ -17772,7 +17759,6 @@ msgstr ""
 msgid "Skill deleted successfully"
 msgid_plural "Skills deleted successfully"
 msgstr[0] ""
-msgstr[1] ""
 
 #: www/people/editprofile.php:197
 msgid "Confirm skill delete"
@@ -17783,7 +17769,6 @@ msgid "You are about to delete the following skill from the skills database:"
 msgid_plural ""
 "You are about to delete the following skills from the skills database:"
 msgstr[0] ""
-msgstr[1] ""
 
 #: www/people/editprofile.php:205
 msgid "This action cannot be undone."
@@ -19501,13 +19486,11 @@ msgid_plural ""
 "You can request to join a project by clicking the submit button. The "
 "administrators will be emailed to approve or deny your request."
 msgstr[0] ""
-msgstr[1] ""
 
 #: www/project/request.php:66
 msgid "You must send a comment to the administrator:"
 msgid_plural "You must send a comment to the administrators:"
 msgstr[0] ""
-msgstr[1] ""
 
 #: www/project/stats/index.php:95
 #, php-format
@@ -20652,7 +20635,6 @@ msgstr ""
 msgid "<strong>%d</strong> project in result set."
 msgid_plural "<strong>%d</strong> projects in result set."
 msgstr[0] ""
-msgstr[1] ""
 
 #: www/softwaremap/tag_cloud.php:98
 #, php-format
@@ -20660,7 +20642,6 @@ msgid "Displaying %d project per page. Projects sorted by alphabetical order."
 msgid_plural ""
 "Displaying %d projects per page. Projects sorted by alphabetical order."
 msgstr[0] ""
-msgstr[1] ""
 
 #: www/softwaremap/tag_cloud.php:162
 #, php-format
@@ -21078,7 +21059,6 @@ msgstr ""
 msgid "%d question found"
 msgid_plural "%d questions found"
 msgstr[0] ""
-msgstr[1] ""
 
 #: www/survey/include/SurveyHTML.class.php:350
 msgid "Survey ID"
@@ -21473,7 +21453,6 @@ msgid "Displaying %d project per page. Projects sorted by activity ranking."
 msgid_plural ""
 "Displaying %d projects per page. Projects sorted by activity ranking."
 msgstr[0] ""
-msgstr[1] ""
 
 #: www/trove/TroveCategory.class.php:63
 msgid "Invalid Trove Category"
