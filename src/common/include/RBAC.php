@@ -843,18 +843,6 @@ abstract class BaseRole extends Error {
 		return true ;
 	}
 
-	function normalizeDataForSection (&$new_sa, $section) {
-		if (array_key_exists ($section, $this->setting_array)) {
-			$new_sa[$section][0] = $this->setting_array[$section][0] ;
-		} elseif (array_key_exists ($this->data_array['role_name'], $this->defaults)
-			  && array_key_exists ($section, $this->defaults[$this->data_array['role_name']])) {
-			$new_sa[$section][0] = $this->defaults[$this->data_array['role_name']][$section] ;
-		} else {
-			$new_sa[$section][0] = 0 ;
-		}
-		return $new_sa ;
-	}
-
 	function normalizePermsForSection (&$new_pa, $section, $refid) {
 		if (array_key_exists ($section, $this->perms_array)
 		    && array_key_exists ($refid, $this->perms_array[$section])) {
@@ -874,7 +862,6 @@ abstract class BaseRole extends Error {
 		$this->fetchData ($this->getID()) ;
 
 		$projects = $this->getLinkedProjects() ;
-		$new_sa = array () ;
 		$new_pa = array () ;
 
 		// Add missing settings
@@ -892,12 +879,10 @@ abstract class BaseRole extends Error {
 
 		$hook_params = array ();
 		$hook_params['role'] =& $this;
-		$hook_params['new_sa'] =& $new_sa ;
 		$hook_params['new_pa'] =& $new_pa ;
 		plugin_hook ("role_normalize", $hook_params);
 
 		// ...tracker-related settings
-		$new_sa['tracker'] = array () ;
 		$new_pa['tracker'] = array () ;
 		foreach ($projects as $p) {
 			if (!$p->usesTracker()) {
@@ -919,7 +904,6 @@ abstract class BaseRole extends Error {
 		}
 
 		// ...forum-related settings
-		$new_sa['forum'] = array () ;
 		$new_pa['forum'] = array () ;
 		foreach ($projects as $p) {
 			if (!$p->usesForum()) {
@@ -941,7 +925,6 @@ abstract class BaseRole extends Error {
 		}
 
 		// ...pm-related settings
-		$new_sa['pm'] = array () ;
 		$new_pa['pm'] = array () ;
 		foreach ($projects as $p) {
 			if (!$p->usesPM()) {

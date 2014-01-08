@@ -333,7 +333,6 @@ class hudsonPlugin extends Plugin {
 
 	function role_normalize(&$params) {
 		$role =& $params['role'];
-		$new_sa =& $params['new_sa'];
 		$new_pa =& $params['new_pa'];
 
 		$projects = $role->getLinkedProjects();

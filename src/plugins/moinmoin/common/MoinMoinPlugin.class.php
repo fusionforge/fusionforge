@@ -137,7 +137,6 @@ class MoinMoinPlugin extends Plugin {
 
 		} elseif ($hookname == "role_normalize") {
 			$role =& $params['role'] ;
-			$new_sa =& $params['new_sa'] ;
 			$new_pa =& $params['new_pa'] ;
 
 			$projects = $role->getLinkedProjects() ;
