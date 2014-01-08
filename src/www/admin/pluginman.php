@@ -117,7 +117,7 @@ if (getStringFromRequest('update')) {
 			if ($plugin->isError()) {
 				$error_msg = $plugin->getErrorMessage();
 			} else {
-				$feedback = sprintf(_('Plugin %1$s updated Successfully'), $pluginname);
+				$feedback = sprintf(_('Plugin %s updated Successfully'), $pluginname);
 			}
 		}
 	}
