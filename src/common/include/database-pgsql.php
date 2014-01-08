@@ -260,6 +260,111 @@ function db_query_params($qstring, $params, $limit = -1, $offset = 0, $dbserver 
 }
 
 /**
+ *  db_prepare() - Prepare an SQL query
+ *
+ *  @param text SQL statement.
+ *  @param text name of the prepared query
+ *  @return int result set handle.
+ */
+function db_prepare($qstring, $qname, $dbserver = NULL) {
+	global $sysdebug_dbquery, $sysdebug_dberrors;
+
+	db_connect_if_needed();
+	$dbconn = db_switcher($dbserver) ;
+
+	$res = @pg_prepare($dbconn, $qname, $qstring);
+	if ($res) {
+		if ($sysdebug_dbquery) {
+			ffDebug("trace",
+			    "successful call of db_prepare():",
+			    debug_string_backtrace());
+		}
+	} else if ($sysdebug_dbquery) {
+		ffDebug("database", "failed call of db_prepare():",
+		    db_error($dbserver) . "\n\n" . debug_string_backtrace());
+	} else if ($sysdebug_dberrors) {
+		ffDebug("database", "db_prepare() failed (" .
+		    db_error($dbserver) . "), SQL: " . $qstring,
+		    print_r(array("params" => $params), 1));
+	} else {
+		error_log('SQL: ' . preg_replace('/\n\t+/', ' ', $qstring));
+		error_log('SQL> ' . db_error($dbserver));
+	}
+	return $res;
+}
+
+/**
+ *  db_execute() - Execute a prepared statement, with parameters
+ *
+ *  @param text name of the prepared query
+ *  @param array parameters
+ *  @param int ability to spread load to multiple db servers.
+ *  @return int result set handle.
+ */
+function db_execute($qname, $params, $dbserver = NULL) {
+	global $sysdebug_dbquery, $sysdebug_dberrors;
+
+	db_connect_if_needed();
+	$dbconn = db_switcher($dbserver) ;
+
+	global $QUERY_COUNT;
+	$QUERY_COUNT++;
+
+	$res = @pg_execute($dbconn, $qname, $params);
+	if ($res) {
+		if ($sysdebug_dbquery) {
+			ffDebug("trace",
+			    "successful call of db_execute():",
+			    debug_string_backtrace());
+		}
+	} else if ($sysdebug_dbquery) {
+		ffDebug("database", "failed call of db_execute():",
+		    db_error($dbserver) . "\n\n" . debug_string_backtrace());
+	} else if ($sysdebug_dberrors) {
+		ffDebug("database", "db_execute() failed (" .
+		    db_error($dbserver) . "), SQL: " . $qname,
+		    print_r(array("params" => $params), 1));
+	} else {
+		error_log('SQL: ' . preg_replace('/\n\t+/', ' ', $qname));
+		error_log('SQL> ' . db_error($dbserver));
+	}
+	return $res;
+}
+
+/**
+ *  db_unprepare() - Deallocate a prepared SQL query
+ *
+ *  @param text name of the prepared query
+ *  @return int result set handle.
+ */
+function db_unprepare($name, $dbserver = NULL) {
+	global $sysdebug_dbquery, $sysdebug_dberrors;
+
+	db_connect_if_needed();
+	$dbconn = db_switcher($dbserver) ;
+
+	$res = @pg_query($dbconn, "DEALLOCATE $name");
+	if ($res) {
+		if ($sysdebug_dbquery) {
+			ffDebug("trace",
+			    "successful call of db_unprepare():",
+			    debug_string_backtrace());
+		}
+	} else if ($sysdebug_dbquery) {
+		ffDebug("database", "failed call of db_unprepare():",
+		    db_error($dbserver) . "\n\n" . debug_string_backtrace());
+	} else if ($sysdebug_dberrors) {
+		ffDebug("database", "db_unprepare() failed (" .
+		    db_error($dbserver) . "), SQL: " . $qname,
+		    print_r(array("params" => $params), 1));
+	} else {
+		error_log('SQL: ' . preg_replace('/\n\t+/', ' ', $qname));
+		error_log('SQL> ' . db_error($dbserver));
+	}
+	return $res;
+}
+
+/**
  *  db_query_qpa() - Query the database, with a query+params array
  *
  * @param array $qpa      array(query, array(parameters...))
