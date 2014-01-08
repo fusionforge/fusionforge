@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 14:22+0100\n"
+"POT-Creation-Date: 2014-01-08 15:50+0100\n"
 "PO-Revision-Date: 2009-10-06 16:20+0200\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7553,10 +7553,15 @@ msgstr ""
 msgid "No tag defined for this project"
 msgstr ""
 
+#: common/widget/Widget_ProjectInfo.class.php:65 www/admin/search.php:150
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#, php-format
+msgid "Registered"
+msgstr ""
+
 #: common/widget/Widget_ProjectInfo.class.php:65
-#, fuzzy
-msgid "Registered: "
-msgstr "Zarejestruj"
+msgid ": "
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
 #: www/softwaremap/tag_cloud.php:163 www/softwaremap/trove_list.php:322
@@ -15553,12 +15558,6 @@ msgstr[1] ""
 
 #: www/admin/search.php:149 www/register/index.php:188
 msgid "Full Name"
-msgstr ""
-
-#: www/admin/search.php:150 www/softwaremap/tag_cloud.php:164
-#: www/softwaremap/trove_list.php:324
-#, php-format
-msgid "Registered"
 msgstr ""
 
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 14:22+0100\n"
+"POT-Creation-Date: 2014-01-08 15:50+0100\n"
 "PO-Revision-Date: 2009-02-01 14:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7903,10 +7903,15 @@ msgstr "任務"
 msgid "No tag defined for this project"
 msgstr "該專案沒有這樣的文章"
 
-#: common/widget/Widget_ProjectInfo.class.php:65
-#, fuzzy
-msgid "Registered: "
+#: common/widget/Widget_ProjectInfo.class.php:65 www/admin/search.php:150
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#, php-format
+msgid "Registered"
 msgstr "註冊"
+
+#: common/widget/Widget_ProjectInfo.class.php:65
+msgid ": "
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
 #: www/softwaremap/tag_cloud.php:163 www/softwaremap/trove_list.php:322
@@ -16308,12 +16313,6 @@ msgstr[1] "依照條件搜尋會員"
 msgid "Full Name"
 msgstr "全名"
 
-#: www/admin/search.php:150 www/softwaremap/tag_cloud.php:164
-#: www/softwaremap/trove_list.php:324
-#, php-format
-msgid "Registered"
-msgstr "註冊"
-
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
 #: www/include/trove.php:423 www/include/trove.php:427
@@ -23385,23 +23384,8 @@ msgstr "帳號"
 #~ msgstr "刪除"
 
 #, fuzzy
-#~ msgid "[Suspend]"
-#~ msgstr "暫停"
-
-#, fuzzy
-#~ msgid "[Project Admin]"
-#~ msgstr "專案管理"
-
-#~ msgid "Registered:&nbsp;"
-#~ msgstr "已註冊："
-
-#, fuzzy
 #~ msgid "Project tree"
 #~ msgstr "新專案名稱"
-
-#, fuzzy
-#~ msgid "Activity Ranking:&nbsp;"
-#~ msgstr "活躍度："
 
 #, fuzzy
 #~ msgid "Activity Ranking: %d"
@@ -25391,12 +25375,6 @@ msgstr "帳號"
 #~ msgid "Add new documentation directory"
 #~ msgstr "送出新的文件"
 
-#~ msgid "My&nbsp;Page"
-#~ msgstr "我的首頁"
-
-#~ msgid "Code&nbsp;Snippets"
-#~ msgstr "分享程式碼"
-
 #, fuzzy
 #~ msgid "Public (PServer)"
 #~ msgstr "公共區域"
@@ -25676,12 +25654,6 @@ msgstr "帳號"
 #~ msgid "Project: %1$s"
 #~ msgstr "專案管理：%1$s"
 
-#~ msgid "Step 1:&nbsp;&nbsp; Edit Release"
-#~ msgstr "第一步：編輯發佈"
-
-#~ msgid "Step 3: Edit Files In This Release"
-#~ msgstr "第三步：編輯這個發佈中的文件"
-
 #~ msgid "Page Information"
 #~ msgstr "頁面資訊"
 
@@ -25743,9 +25715,6 @@ msgstr "帳號"
 
 #~ msgid "Use Tracker"
 #~ msgstr "使用追蹤"
-
-#~ msgid "Trove Categorization:&nbsp;"
-#~ msgstr "軟體地圖分類："
 
 #~ msgid "%1$s Site Statistics"
 #~ msgstr "%1$s 網站統計"
@@ -26119,9 +26088,6 @@ msgstr "帳號"
 #~ msgid "Unfortunately, you have to be logged in to participate in surveys."
 #~ msgstr "不幸地，參與問卷調查您必須登入"
 
-#~ msgid "Project&nbsp;Tree"
-#~ msgstr "軟體地圖"
-
 #, fuzzy
 #~ msgid "Show Source"
 #~ msgstr "顯示程式碼"
@@ -26166,12 +26132,6 @@ msgstr "帳號"
 
 #~ msgid "Upload CSV"
 #~ msgstr "上傳CSV"
-
-#~ msgid "Short Description:&nbsp;"
-#~ msgstr "簡短說明："
-
-#~ msgid "Homepage Link:&nbsp;"
-#~ msgstr "網頁鏈結："
 
 #~ msgid "Download Your Nightly SCM Tree Tarball"
 #~ msgstr "下載您的每夜CVS Tree Tarball"
@@ -26333,15 +26293,6 @@ msgstr "帳號"
 
 #~ msgid "Error Getting %s"
 #~ msgstr "取得 %s 時錯誤"
-
-#~ msgid "Check &nbsp;all"
-#~ msgstr "全選"
-
-#~ msgid "Clear &nbsp;all"
-#~ msgstr "全部清除"
-
-#~ msgid "Project&nbsp;Openings"
-#~ msgstr "尋求協助"
 
 #~ msgid ""
 #~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "

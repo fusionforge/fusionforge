@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 14:22+0100\n"
+"POT-Creation-Date: 2014-01-08 15:50+0100\n"
 "PO-Revision-Date: 2009-02-18 16:52+0100\n"
 "Last-Translator: Aleksey Bragin <aleksey@reactos.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7957,10 +7957,15 @@ msgstr "Задача"
 msgid "No tag defined for this project"
 msgstr "Для проекта нет сообщений"
 
-#: common/widget/Widget_ProjectInfo.class.php:65
-#, fuzzy
-msgid "Registered: "
+#: common/widget/Widget_ProjectInfo.class.php:65 www/admin/search.php:150
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#, php-format
+msgid "Registered"
 msgstr "Регистрирован"
+
+#: common/widget/Widget_ProjectInfo.class.php:65
+msgid ": "
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
 #: www/softwaremap/tag_cloud.php:163 www/softwaremap/trove_list.php:322
@@ -16569,12 +16574,6 @@ msgstr[2] "Поиск группы по параметру <em>%1$s</em>: %2$s �
 msgid "Full Name"
 msgstr "Полное имя"
 
-#: www/admin/search.php:150 www/softwaremap/tag_cloud.php:164
-#: www/softwaremap/trove_list.php:324
-#, php-format
-msgid "Registered"
-msgstr "Регистрирован"
-
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
 #: www/include/trove.php:423 www/include/trove.php:427
@@ -23722,36 +23721,6 @@ msgstr "Глобальное изменение"
 msgid "No User Name Provided"
 msgstr "Имя участника обязательно"
 
-#~ msgid "%1$s Verification"
-#~ msgstr "%1$s Проверка"
-
-#, fuzzy
-#~ msgid "Site Admin: Successfully Changed User Password"
-#~ msgstr "Пароль успешно изменен"
-
-#, fuzzy
-#~ msgid "Repository name:"
-#~ msgstr "История репозитория"
-
-#, fuzzy
-#~ msgid "You must supply a first name."
-#~ msgstr " Вы должны указать имя"
-
-#, fuzzy
-#~ msgid "You must supply a last name."
-#~ msgstr "Вы должны указать фамилию"
-
-#~ msgid "Account options:"
-#~ msgstr "Опции учётной записи:"
-
-#, fuzzy
-#~ msgid "News Administration"
-#~ msgstr "Форумы: Управление"
-
-#, fuzzy
-#~ msgid "No project found."
-#~ msgstr "Не найдены группы проекта"
-
 #~ msgid "New category full name (Maximum length is 80 chars)"
 #~ msgstr "Название новой категории (не более 80 символов)"
 
@@ -23823,9 +23792,6 @@ msgstr "Имя участника обязательно"
 #~ "допустимы, но не должны содержать HTML в тексте.</p><p>Ссылки, "
 #~ "начинающиеся с http:// будут автоматически распознаны."
 
-#~ msgid "Read&nbsp;More/Comment"
-#~ msgstr "Подробнее/Оставить&nbsp;комментарий"
-
 #~ msgid "Version:"
 #~ msgstr "Версия:"
 
@@ -23862,20 +23828,9 @@ msgstr "Имя участника обязательно"
 #~ msgid "Error - Site has SCM but no plugins registered"
 #~ msgstr "Ошибка! SCM плагин незарегистрирован"
 
-#~ msgid "Registered:&nbsp;"
-#~ msgstr "Зарегистрирован:&nbsp;"
-
 #, fuzzy
 #~ msgid "Project tree"
 #~ msgstr "Дерево проекта"
-
-#, fuzzy
-#~ msgid "Activity Ranking:&nbsp;"
-#~ msgstr "Процент активности:&nbsp;"
-
-#, fuzzy
-#~ msgid "Activity Ranking: %d"
-#~ msgstr "Процент активности:&nbsp;"
 
 #, fuzzy
 #~ msgid ""
@@ -26246,12 +26201,6 @@ msgstr "Имя участника обязательно"
 #~ msgid "ERROR: Could Not Add User To Group: %s"
 #~ msgstr "Участник в группу: %s не добавлен"
 
-#~ msgid "My&nbsp;Page"
-#~ msgstr "Моя&nbsp;страница"
-
-#~ msgid "Code&nbsp;Snippets"
-#~ msgstr "Библиотека"
-
 #~ msgid "Public (PServer)"
 #~ msgstr "Открытые Сервисы"
 
@@ -26676,12 +26625,6 @@ msgstr "Имя участника обязательно"
 #~ msgid "Project: %1$s"
 #~ msgstr "Проект: %1$s"
 
-#~ msgid "Step 1:&nbsp;&nbsp; Edit Release"
-#~ msgstr "Шаг 1:&nbsp;&nbsp; Редактировать релиз"
-
-#~ msgid "Step 3: Edit Files In This Release"
-#~ msgstr "Шаг 3: Управление файлами релиза"
-
 #~ msgid "Page Information"
 #~ msgstr "Информация о странице"
 
@@ -26757,9 +26700,6 @@ msgstr "Имя участника обязательно"
 
 #~ msgid "Use Tracker"
 #~ msgstr "Использовать трекер"
-
-#~ msgid "Trove Categorization:&nbsp;"
-#~ msgstr "Указать категории в каталоге проектов:&nbsp;"
 
 #~ msgid ""
 #~ "<strong><span style=\"text-decoration:underline\">Add New Virtual Host</"
@@ -27313,9 +27253,6 @@ msgstr "Имя участника обязательно"
 #~ msgstr ""
 #~ "Вы должны быть авторизованы в вашу учетную запись для участия в опросах."
 
-#~ msgid "Project&nbsp;Tree"
-#~ msgstr "Каталог проектов"
-
 #, fuzzy
 #~ msgid "Show Source"
 #~ msgstr "Показать источник"
@@ -27490,12 +27427,6 @@ msgstr "Имя участника обязательно"
 
 #~ msgid "Upload CSV"
 #~ msgstr "Загрузить базу данных CSV"
-
-#~ msgid "Short Description:&nbsp;"
-#~ msgstr "Краткое описание:&nbsp;"
-
-#~ msgid "Homepage Link:&nbsp;"
-#~ msgstr "Домашняя страницы:&nbsp;"
 
 #~ msgid "Download Your Nightly SCM Tree Tarball"
 #~ msgstr "Скачать архив ночного среза SCM"
@@ -27778,18 +27709,6 @@ msgstr "Имя участника обязательно"
 
 #~ msgid "DevProfile"
 #~ msgstr "Профиль Разработчика"
-
-#~ msgid "Registered:"
-#~ msgstr "Регистрирован:"
-
-#~ msgid "Check &nbsp;all"
-#~ msgstr "Проверить &nbsp;все"
-
-#~ msgid "Clear &nbsp;all"
-#~ msgstr "Очистить &nbsp;все"
-
-#~ msgid "Project&nbsp;Openings"
-#~ msgstr "Вакансии"
 
 #~ msgid ""
 #~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "

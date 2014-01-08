@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 15:04+0100\n"
+"POT-Creation-Date: 2014-01-08 15:50+0100\n"
 "PO-Revision-Date: 2010-07-16 10:07+0200\n"
 "Last-Translator: Thorsten Glaser <t.glaser@tarent.de>\n"
 "Language-Team: german\n"
@@ -7928,9 +7928,15 @@ msgstr "Kennzeichen"
 msgid "No tag defined for this project"
 msgstr "Kein Kennzeichen für dieses Projekt festgelegt"
 
+#: common/widget/Widget_ProjectInfo.class.php:65 www/admin/search.php:150
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#, php-format
+msgid "Registered"
+msgstr "Registriert"
+
 #: common/widget/Widget_ProjectInfo.class.php:65
-msgid "Registered: "
-msgstr "Registriert: "
+msgid ": "
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
 #: www/softwaremap/tag_cloud.php:163 www/softwaremap/trove_list.php:322
@@ -16374,12 +16380,6 @@ msgstr[1] "Gruppen-Suche mit Merkmalen <em>%s</em>: %d Übereinstimmungen"
 msgid "Full Name"
 msgstr "Voller Name"
 
-#: www/admin/search.php:150 www/softwaremap/tag_cloud.php:164
-#: www/softwaremap/trove_list.php:324
-#, php-format
-msgid "Registered"
-msgstr "Registriert"
-
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
 #: www/include/trove.php:423 www/include/trove.php:427
@@ -23583,22 +23583,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "%1$s Verification"
 #~ msgstr "%1$s Überprüfung"
 
-#~ msgid "Registered: <strong>%s</strong>"
-#~ msgstr "Registriert: <strong>%s</strong>"
-
-#~ msgid "<strong>%1$s</strong> project in result set."
-#~ msgid_plural "<strong>%1$s</strong> projects in result set."
-#~ msgstr[0] "<strong>%1$s</strong> Projekt in der Ergebnisliste."
-#~ msgstr[1] "<strong>%1$s</strong> Projekte in der Ergebnisliste."
-
-#, fuzzy
-#~ msgid "Site Admin: Successfully Changed User Password"
-#~ msgstr "Erfolgreiche Passwort-Änderung"
-
-#, fuzzy
-#~ msgid "Repository name:"
-#~ msgstr "Quellcode Ansicht"
-
 #, fuzzy
 #~ msgid "You must supply a first name."
 #~ msgstr "Sie müssen einen Vornamen angeben"
@@ -23716,32 +23700,12 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "[Suspend]"
 #~ msgstr "[Sperren]"
 
-#, fuzzy
-#~ msgid "[Project Admin]"
-#~ msgstr "Projekt-Admin"
-
 #~ msgid "Error - Site has SCM but no plugins registered"
 #~ msgstr ""
 #~ "Fehler - Die Site verfügt über SCM hat aber keine registrierten Plugins."
 
-#~ msgid "Registered:&nbsp;"
-#~ msgstr "Registriert:&nbsp;"
-
 #~ msgid "Project tree"
 #~ msgstr "Projektbaum"
-
-#~ msgid "Activity Ranking:&nbsp;"
-#~ msgstr "Aktivitäten-Rangliste:&nbsp;"
-
-#~ msgid "Activity Ranking: %d"
-#~ msgstr "Aktivitäten Rangliste: %d"
-
-#~ msgid ""
-#~ "<br />Soft link wasn't removed in www/plugins folder, please do so "
-#~ "manually."
-#~ msgstr ""
-#~ "<br /> Der Softlink wurde nicht aus dem www/plugins Ordner entfernt, "
-#~ "bitte tuen Sie das manuell."
 
 #, fuzzy
 #~ msgid "No documents"
@@ -26519,12 +26483,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "ERROR: Could Not Add User To Group: %s"
 #~ msgstr "Fehler: Konnte Nutzer nicht zur Gruppe: %s hinzufügen"
 
-#~ msgid "My&nbsp;Page"
-#~ msgstr "Persönliche Seite"
-
-#~ msgid "Code&nbsp;Snippets"
-#~ msgstr "Quellcodestücke"
-
 #~ msgid "Public (PServer)"
 #~ msgstr "Öffentlicher (PServer)"
 
@@ -26989,12 +26947,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "Project: %1$s"
 #~ msgstr "Projekt: %1$s"
 
-#~ msgid "Step 1:&nbsp;&nbsp; Edit Release"
-#~ msgstr "Schritt 1:   Version editieren"
-
-#~ msgid "Step 3: Edit Files In This Release"
-#~ msgstr "Schritt 3: Ändere Dateien in dieser Version"
-
 #~ msgid "Page Information"
 #~ msgstr "Seiteninformation"
 
@@ -27067,9 +27019,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "Use Tracker"
 #~ msgstr "Benutze Tracker"
-
-#~ msgid "Trove Categorization:&nbsp;"
-#~ msgstr "Suchkriterien: "
 
 #, fuzzy
 #~ msgid ""
@@ -27626,9 +27575,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgstr ""
 #~ "Um an der Umfrage teilzunehmen, müssen Sie sich leider zuerst einloggen."
 
-#~ msgid "Project&nbsp;Tree"
-#~ msgstr "Projektbaum"
-
 #~ msgid "Show Source"
 #~ msgstr "Zeige Quelle"
 
@@ -27788,12 +27734,6 @@ msgstr "Kein Benutzername angegeben"
 #~ msgid "Upload CSV"
 #~ msgstr "Upload CSV"
 
-#~ msgid "Short Description:&nbsp;"
-#~ msgstr "Kurze Beschreibung: "
-
-#~ msgid "Homepage Link:&nbsp;"
-#~ msgstr "Homepage Link: "
-
 #~ msgid "Download Your Nightly SCM Tree Tarball"
 #~ msgstr "Laden Sie Ihren nächtlichen SCM Tarball"
 
@@ -27869,15 +27809,6 @@ msgstr "Kein Benutzername angegeben"
 
 #~ msgid "here"
 #~ msgstr "hier"
-
-#~ msgid "Check &nbsp;all"
-#~ msgstr "Alle auswählen"
-
-#~ msgid "Clear &nbsp;all"
-#~ msgstr "Alle abwählen"
-
-#~ msgid "Project&nbsp;Openings"
-#~ msgstr "Projekthilfe gesucht"
 
 #~ msgid ""
 #~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "

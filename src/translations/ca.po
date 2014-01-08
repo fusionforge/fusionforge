@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 14:22+0100\n"
+"POT-Creation-Date: 2014-01-08 15:50+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7896,10 +7896,15 @@ msgstr "Tasca"
 msgid "No tag defined for this project"
 msgstr "No hi ha tal missatge per aquest projecte"
 
-#: common/widget/Widget_ProjectInfo.class.php:65
-#, fuzzy
-msgid "Registered: "
+#: common/widget/Widget_ProjectInfo.class.php:65 www/admin/search.php:150
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#, php-format
+msgid "Registered"
 msgstr "Registrat"
+
+#: common/widget/Widget_ProjectInfo.class.php:65
+msgid ": "
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
 #: www/softwaremap/tag_cloud.php:163 www/softwaremap/trove_list.php:322
@@ -16322,12 +16327,6 @@ msgstr[1] "Cerca d'usuari amb criteris"
 msgid "Full Name"
 msgstr "Nom complet"
 
-#: www/admin/search.php:150 www/softwaremap/tag_cloud.php:164
-#: www/softwaremap/trove_list.php:324
-#, php-format
-msgid "Registered"
-msgstr "Registrat"
-
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
 #: www/include/trove.php:423 www/include/trove.php:427
@@ -23399,13 +23398,6 @@ msgstr "Actualització en massa"
 msgid "No User Name Provided"
 msgstr "Nom d'usuari"
 
-#~ msgid "More than <strong>%1$s</strong> projects in result set."
-#~ msgstr "Més de <strong>%1$s</strong> projectes al conjunt de resultats."
-
-#, fuzzy
-#~ msgid "<strong>%1$s</strong> projects in result set."
-#~ msgstr "<strong>%1$s</strong> projectes al conjunt de resultats."
-
 #~ msgid "%1$s Verification"
 #~ msgstr "%1$s Verificació"
 
@@ -23490,56 +23482,6 @@ msgstr "Nom d'usuari"
 #, fuzzy
 #~ msgid "[Project Admin]"
 #~ msgstr "Administració del projecte"
-
-#~ msgid "Registered:&nbsp;"
-#~ msgstr "Registrat:&nbsp;"
-
-#, fuzzy
-#~ msgid "Project tree"
-#~ msgstr "Nom del nou projecte"
-
-#, fuzzy
-#~ msgid "Activity Ranking:&nbsp;"
-#~ msgstr "Percentil d'activitat:&nbsp;"
-
-#, fuzzy
-#~ msgid "Activity Ranking: %d"
-#~ msgstr "Percentil d'activitat:&nbsp;"
-
-#, fuzzy
-#~ msgid "No documents"
-#~ msgstr "Afegeix un projecte"
-
-#, fuzzy
-#~ msgid "Mailing Lists Administration"
-#~ msgstr "Administració de la llista de correu"
-
-#, fuzzy
-#~ msgid "Last modified"
-#~ msgstr "Llista Afegida"
-
-#, fuzzy
-#~ msgid "New document"
-#~ msgstr "Afegeix un projecte"
-
-#, fuzzy
-#~ msgid "New folder"
-#~ msgstr "Nou rol"
-
-#, fuzzy
-#~ msgid "You can only monitor if you are logged in"
-#~ msgstr "Només podeu monitoritzar si sou dins d'una sessió"
-
-#~ msgid "yes"
-#~ msgstr "sí"
-
-#, fuzzy
-#~ msgid "File-Release"
-#~ msgstr "Fitxer publicat"
-
-#, fuzzy
-#~ msgid "Documents are also available thru webdav access"
-#~ msgstr "Informació no disponible"
 
 #~ msgid "Preserve my pre-formatted text."
 #~ msgstr "Preserva el meu text preformatat."
@@ -25526,12 +25468,6 @@ msgstr "Nom d'usuari"
 #~ msgid "Add new documentation directory"
 #~ msgstr "Tramet nova documentació"
 
-#~ msgid "My&nbsp;Page"
-#~ msgstr "La&nbsp;meva&nbsp;pàgina"
-
-#~ msgid "Code&nbsp;Snippets"
-#~ msgstr "Fragments&nbsp;de&nbsp;Codi"
-
 #, fuzzy
 #~ msgid "Public (PServer)"
 #~ msgstr "Àrees públiques"
@@ -25799,12 +25735,6 @@ msgstr "Nom d'usuari"
 #~ msgid "Project: %1$s"
 #~ msgstr "Administració del projecte: %1$s"
 
-#~ msgid "Step 1:&nbsp;&nbsp; Edit Release"
-#~ msgstr "Pas 1:&nbsp;&nbsp; Edita publicació"
-
-#~ msgid "Step 3: Edit Files In This Release"
-#~ msgstr "Pas 3: Edita els fitxers en aquesta publicació"
-
 #~ msgid "Page Information"
 #~ msgstr "Informació de la pàgina"
 
@@ -25868,9 +25798,6 @@ msgstr "Nom d'usuari"
 
 #~ msgid "Use Doc Mgr"
 #~ msgstr "Usa el gestor de documents"
-
-#~ msgid "Trove Categorization:&nbsp;"
-#~ msgstr "Categorització en l'arbre de projectes:&nbsp;"
 
 #~ msgid "%1$s Site Statistics"
 #~ msgstr "Estadístiques del lloc %1$s"
@@ -26261,9 +26188,6 @@ msgstr "Nom d'usuari"
 #~ "Malauradament, heu de tenir una sessió iniciada per participar en les "
 #~ "enquestes."
 
-#~ msgid "Project&nbsp;Tree"
-#~ msgstr "Arbre&nbsp;de&nbsp;projectes"
-
 #, fuzzy
 #~ msgid "Show Source"
 #~ msgstr "Mostra el codi font"
@@ -26308,12 +26232,6 @@ msgstr "Nom d'usuari"
 
 #~ msgid "Upload CSV"
 #~ msgstr "Puja CSV"
-
-#~ msgid "Short Description:&nbsp;"
-#~ msgstr "Descripció breu:&nbsp;"
-
-#~ msgid "Homepage Link:&nbsp;"
-#~ msgstr "Enllaç de la pàgina d'inici:&nbsp;"
 
 #~ msgid "Download Your Nightly SCM Tree Tarball"
 #~ msgstr "Baixeu el vostre tarball de l'arbre SCM de cada nit"
@@ -26467,18 +26385,6 @@ msgstr "Nom d'usuari"
 
 #~ msgid "DevProfile"
 #~ msgstr "Perfil de desenvolupament"
-
-#~ msgid "Registered:"
-#~ msgstr "Registrat:"
-
-#~ msgid "Check &nbsp;all"
-#~ msgstr "Marca-ho &nbsp;tot"
-
-#~ msgid "Clear &nbsp;all"
-#~ msgstr "Suprimeix-ho &nbsp;tot"
-
-#~ msgid "Project&nbsp;Openings"
-#~ msgstr "Ofertes&nbsp;de&nbsp;feina"
 
 #~ msgid ""
 #~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "

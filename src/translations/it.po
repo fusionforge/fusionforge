@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 14:22+0100\n"
+"POT-Creation-Date: 2014-01-08 15:50+0100\n"
 "PO-Revision-Date: 2010-10-06 15:06+0200\n"
 "Last-Translator: Reinhard Spisser <reinhard.spisser@fiditalia.it>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7955,10 +7955,15 @@ msgstr "Attività"
 msgid "No tag defined for this project"
 msgstr "Nessuna posizione disponibile per il progetto"
 
-#: common/widget/Widget_ProjectInfo.class.php:65
-#, fuzzy
-msgid "Registered: "
+#: common/widget/Widget_ProjectInfo.class.php:65 www/admin/search.php:150
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#, php-format
+msgid "Registered"
 msgstr "Registrato"
+
+#: common/widget/Widget_ProjectInfo.class.php:65
+msgid ": "
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
 #: www/softwaremap/tag_cloud.php:163 www/softwaremap/trove_list.php:322
@@ -16349,12 +16354,6 @@ msgstr[1] "Ricerca utente con criterio"
 msgid "Full Name"
 msgstr "Nome completo"
 
-#: www/admin/search.php:150 www/softwaremap/tag_cloud.php:164
-#: www/softwaremap/trove_list.php:324
-#, php-format
-msgid "Registered"
-msgstr "Registrato"
-
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
 #: www/include/trove.php:423 www/include/trove.php:427
@@ -23421,12 +23420,6 @@ msgstr "Aggiornamento multiplo"
 msgid "No User Name Provided"
 msgstr "Non è stato inserito alcun file"
 
-#~ msgid "More than <strong>%1$s</strong> projects in result set."
-#~ msgstr "Più di <strong>%1$s</strong> progetti."
-
-#~ msgid "%1$s Verification"
-#~ msgstr "Verifica da %1$s"
-
 #~ msgid "Monitoring has been turned off"
 #~ msgstr "Notifica utente disabilitata"
 
@@ -23493,45 +23486,6 @@ msgstr "Non è stato inserito alcun file"
 #, fuzzy
 #~ msgid "[Delete]"
 #~ msgstr "Rimuovi"
-
-#, fuzzy
-#~ msgid "[Suspend]"
-#~ msgstr "Sospendi"
-
-#, fuzzy
-#~ msgid "[Project Admin]"
-#~ msgstr "Amministrazione progetto"
-
-#~ msgid "Registered:&nbsp;"
-#~ msgstr "Registrato:"
-
-#, fuzzy
-#~ msgid "Project tree"
-#~ msgstr "Nome progetto"
-
-#, fuzzy
-#~ msgid "Activity Ranking:&nbsp;"
-#~ msgstr "Percentuale di attività:"
-
-#, fuzzy
-#~ msgid "Activity Ranking: %d"
-#~ msgstr "Percentuale di attività:"
-
-#, fuzzy
-#~ msgid ""
-#~ "<br />Soft link wasn't removed in www/plugins folder, please do so "
-#~ "manually."
-#~ msgstr ""
-#~ "<br>Il softlink nella cartella www/plugins non è stato rimosso, cancella "
-#~ "il link manualmente."
-
-#, fuzzy
-#~ msgid "No documents"
-#~ msgstr "Aggiungi un progetto"
-
-#, fuzzy
-#~ msgid "Mailing Lists Administration"
-#~ msgstr "Amministrazione di Mailing List"
 
 #~ msgid "Last modified"
 #~ msgstr "Ultima modifica"
@@ -25610,12 +25564,6 @@ msgstr "Non è stato inserito alcun file"
 #~ msgid "ERROR: Could not add admin to newly created group: %s"
 #~ msgstr "ERRORE: Impossibile aggiungere l'amministratore al nuovo gruppo: %s"
 
-#~ msgid "My&nbsp;Page"
-#~ msgstr "Pagina&nbsp;Personale"
-
-#~ msgid "Code&nbsp;Snippets"
-#~ msgstr "Frammenti di codice"
-
 #, fuzzy
 #~ msgid "Public (PServer)"
 #~ msgstr "Aree pubbliche"
@@ -25932,9 +25880,6 @@ msgstr "Non è stato inserito alcun file"
 #~ msgid "Project: %1$s"
 #~ msgstr "Amministrazione progetto: %1$s"
 
-#~ msgid "Step 1:&nbsp;&nbsp; Edit Release"
-#~ msgstr "Fase 1: Modifica rilascio"
-
 #~ msgid "Step 3: Edit Files In This Release"
 #~ msgstr "Fase 3: Modifica i file in questo rilascio"
 
@@ -26003,9 +25948,6 @@ msgstr "Non è stato inserito alcun file"
 
 #~ msgid "Use Tracker"
 #~ msgstr "Usa Tracker"
-
-#~ msgid "Trove Categorization:&nbsp;"
-#~ msgstr "Categoria Trove:&nbsp;"
 
 #~ msgid "%1$s Site Statistics"
 #~ msgstr "Statistiche del sito %1$s"
@@ -26445,9 +26387,6 @@ msgstr "Non è stato inserito alcun file"
 #~ msgstr ""
 #~ "Sfortunatamente, devi essere collegato per poter partecipare ai sondaggi."
 
-#~ msgid "Project&nbsp;Tree"
-#~ msgstr "Struttura del progetto"
-
 #, fuzzy
 #~ msgid "Show Source"
 #~ msgstr "Visualizza sorgente"
@@ -26625,12 +26564,6 @@ msgstr "Non è stato inserito alcun file"
 
 #~ msgid "Upload CSV"
 #~ msgstr "Upload CSV"
-
-#~ msgid "Short Description:&nbsp;"
-#~ msgstr "Descrizione breve:&nbsp;"
-
-#~ msgid "Homepage Link:&nbsp;"
-#~ msgstr "Homepage:&nbsp;"
 
 #~ msgid "Download Your Nightly SCM Tree Tarball"
 #~ msgstr "Scarica l'archivio CVS creato ogni notte"
@@ -26825,9 +26758,6 @@ msgstr "Non è stato inserito alcun file"
 
 #~ msgid "DevProfile"
 #~ msgstr "Profilo sviluppatore"
-
-#~ msgid "Registered: "
-#~ msgstr "Registrato:"
 
 #~ msgid "Check  all"
 #~ msgstr "Seleziona tutti"

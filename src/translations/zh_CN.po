@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 14:22+0100\n"
+"POT-Creation-Date: 2014-01-08 15:50+0100\n"
 "PO-Revision-Date: 2010-10-06 15:07+0200\n"
 "Last-Translator: 邱承 <qiucheng1@sina.com>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7892,10 +7892,15 @@ msgstr "任务"
 msgid "No tag defined for this project"
 msgstr "该项目没有这样的文章"
 
-#: common/widget/Widget_ProjectInfo.class.php:65
-#, fuzzy
-msgid "Registered: "
+#: common/widget/Widget_ProjectInfo.class.php:65 www/admin/search.php:150
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#, php-format
+msgid "Registered"
 msgstr "注册"
+
+#: common/widget/Widget_ProjectInfo.class.php:65
+msgid ": "
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
 #: www/softwaremap/tag_cloud.php:163 www/softwaremap/trove_list.php:322
@@ -16282,12 +16287,6 @@ msgstr[1] "依照条件搜索用户"
 msgid "Full Name"
 msgstr "全名"
 
-#: www/admin/search.php:150 www/softwaremap/tag_cloud.php:164
-#: www/softwaremap/trove_list.php:324
-#, php-format
-msgid "Registered"
-msgstr "注册"
-
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
 #: www/include/trove.php:423 www/include/trove.php:427
@@ -23351,70 +23350,6 @@ msgstr "帐号"
 #~ msgid "[Delete]"
 #~ msgstr "删除"
 
-#, fuzzy
-#~ msgid "[Suspend]"
-#~ msgstr "暂停"
-
-#, fuzzy
-#~ msgid "[Project Admin]"
-#~ msgstr "项目管理"
-
-#~ msgid "Registered:&nbsp;"
-#~ msgstr "已注册："
-
-#, fuzzy
-#~ msgid "Project tree"
-#~ msgstr "新项目名称"
-
-#, fuzzy
-#~ msgid "Activity Ranking:&nbsp;"
-#~ msgstr "活跃度："
-
-#, fuzzy
-#~ msgid "Activity Ranking: %d"
-#~ msgstr "活跃度："
-
-#, fuzzy
-#~ msgid ""
-#~ "<br />Soft link wasn't removed in www/plugins folder, please do so "
-#~ "manually."
-#~ msgstr "<br>www/plugins目录下的符号链接未删除，请手工删除。"
-
-#, fuzzy
-#~ msgid "No documents"
-#~ msgstr "增加新项目"
-
-#, fuzzy
-#~ msgid "Mailing Lists Administration"
-#~ msgstr "邮件列表管理"
-
-#, fuzzy
-#~ msgid "Last modified"
-#~ msgstr "最后修改日期"
-
-#, fuzzy
-#~ msgid "New document"
-#~ msgstr "增加新项目"
-
-#, fuzzy
-#~ msgid "New folder"
-#~ msgstr "新角色"
-
-#, fuzzy
-#~ msgid "You can only monitor if you are logged in"
-#~ msgstr "只有登录后才能监视"
-
-#~ msgid "yes"
-#~ msgstr "是"
-
-#, fuzzy
-#~ msgid "File-Release"
-#~ msgstr "文件已发布"
-
-#, fuzzy
-#~ msgid "Documents are also available thru webdav access"
-#~ msgstr "信息未提供"
-
 #~ msgid "Preserve my pre-formatted text."
 #~ msgstr "保存我预设格式化的文字"
 
@@ -25434,12 +25369,6 @@ msgstr "帐号"
 #~ msgid "ERROR: Could Not Add User To Group: %s"
 #~ msgstr "错误:不能将用户加到组：%s"
 
-#~ msgid "My&nbsp;Page"
-#~ msgstr "我的首页"
-
-#~ msgid "Code&nbsp;Snippets"
-#~ msgstr "分享代码"
-
 #~ msgid "Public (PServer)"
 #~ msgstr "公共区域"
 
@@ -25726,12 +25655,6 @@ msgstr "帐号"
 #~ msgid "Project: %1$s"
 #~ msgstr "项目管理：%1$s"
 
-#~ msgid "Step 1:&nbsp;&nbsp; Edit Release"
-#~ msgstr "第一步：编辑发布"
-
-#~ msgid "Step 3: Edit Files In This Release"
-#~ msgstr "第三步：编辑这个发布中的文件"
-
 #~ msgid "Page Information"
 #~ msgstr "页面信息"
 
@@ -25793,9 +25716,6 @@ msgstr "帐号"
 
 #~ msgid "Use Tracker"
 #~ msgstr "使用跟踪"
-
-#~ msgid "Trove Categorization:&nbsp;"
-#~ msgstr "软件地图分类："
 
 #~ msgid "%1$s Site Statistics"
 #~ msgstr "%1$s 网站统计"
@@ -26190,9 +26110,6 @@ msgstr "帐号"
 #~ msgid "Unfortunately, you have to be logged in to participate in surveys."
 #~ msgstr "不幸地，参与问卷调查您必须登录"
 
-#~ msgid "Project&nbsp;Tree"
-#~ msgstr "软件地图"
-
 #, fuzzy
 #~ msgid "Show Source"
 #~ msgstr "显示代码"
@@ -26237,12 +26154,6 @@ msgstr "帐号"
 
 #~ msgid "Upload CSV"
 #~ msgstr "上传CSV"
-
-#~ msgid "Short Description:&nbsp;"
-#~ msgstr "简短说明："
-
-#~ msgid "Homepage Link:&nbsp;"
-#~ msgstr "网页链结："
 
 #~ msgid "Download Your Nightly SCM Tree Tarball"
 #~ msgstr "下载您的每夜CVS Tree Tarball"
@@ -26417,15 +26328,6 @@ msgstr "帐号"
 
 #~ msgid "Invalid MessageID"
 #~ msgstr "无效的文章编号"
-
-#~ msgid "Check &nbsp;all"
-#~ msgstr "全选"
-
-#~ msgid "Clear &nbsp;all"
-#~ msgstr "全部清除"
-
-#~ msgid "Project&nbsp;Openings"
-#~ msgstr "寻求协助"
 
 #~ msgid ""
 #~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "

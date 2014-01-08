@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 14:22+0100\n"
+"POT-Creation-Date: 2014-01-08 15:50+0100\n"
 "PO-Revision-Date: 2009-07-19 01:41+0200\n"
 "Last-Translator: Martin Bagge <brother@bsnet.se>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3738,7 +3738,7 @@ msgstr ""
 #: common/include/Navigation.class.php:194 www/account/index.php:117
 #: www/include/html.php:995
 msgid "My Account"
-msgstr "Mítt&nbsp;konto"
+msgstr "Mítt konto"
 
 #: common/include/Navigation.class.php:202
 #: plugins/mediawiki/mediawiki-skin/FusionForge.php:210
@@ -3764,7 +3764,7 @@ msgstr "Användarbedömningssida"
 #: common/include/Navigation.class.php:235
 #, fuzzy
 msgid "My Page"
-msgstr "Min&nbsp;sida"
+msgstr "Min sida"
 
 #: common/include/Navigation.class.php:237
 msgid "Your Page, widgets selected by you to follow your items."
@@ -7882,10 +7882,15 @@ msgstr "Uppgift"
 msgid "No tag defined for this project"
 msgstr "Inga sådana poster i detta projekt"
 
-#: common/widget/Widget_ProjectInfo.class.php:65
-#, fuzzy
-msgid "Registered: "
+#: common/widget/Widget_ProjectInfo.class.php:65 www/admin/search.php:150
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#, php-format
+msgid "Registered"
 msgstr "Registrerad"
+
+#: common/widget/Widget_ProjectInfo.class.php:65
+msgid ": "
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
 #: www/softwaremap/tag_cloud.php:163 www/softwaremap/trove_list.php:322
@@ -9826,7 +9831,7 @@ msgstr "Kontoinformation"
 #: plugins/globaldashboard/www/admin/manage_accounts.php:147
 #, fuzzy
 msgid "Account URI"
-msgstr "Mítt&nbsp;konto"
+msgstr ""
 
 #: plugins/globaldashboard/www/admin/edit_account_page.php:139
 #: plugins/globaldashboard/www/admin/manage_accounts.php:150
@@ -10339,7 +10344,7 @@ msgstr "Datatyper"
 #: plugins/headermenu/view/admin/viewProjectConfiguration.php:106
 #, fuzzy
 msgid "HTML Page"
-msgstr "Min&nbsp;sida"
+msgstr ""
 
 #: plugins/headermenu/view/admin/updateLinkValue.php:108
 #: plugins/webanalytics/view/admin/updateLinkValue.php:48
@@ -11651,7 +11656,7 @@ msgstr "Datum stängd"
 #: plugins/mantisbt/view/adminuser.php:31
 #, fuzzy
 msgid "Manage your account"
-msgstr "Mítt&nbsp;konto"
+msgstr ""
 
 #: plugins/mantisbt/view/adminuser.php:36
 msgid "Specify your mantisbt user."
@@ -14379,9 +14384,8 @@ msgid "Wiki"
 msgstr ""
 
 #: plugins/wiki/common/WikiHtmlSearchRenderer.class.php:50
-#, fuzzy
 msgid "Page"
-msgstr "Min&nbsp;sida"
+msgstr "Sida"
 
 #: plugins/wiki/common/WikiPlugin.class.php:74
 #, fuzzy
@@ -16227,12 +16231,6 @@ msgstr[1] "Användarsökning med urval"
 #: www/admin/search.php:149 www/register/index.php:188
 msgid "Full Name"
 msgstr "Fullt namn"
-
-#: www/admin/search.php:150 www/softwaremap/tag_cloud.php:164
-#: www/softwaremap/trove_list.php:324
-#, php-format
-msgid "Registered"
-msgstr "Registrerad"
 
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
@@ -23316,9 +23314,6 @@ msgstr "Användarenamn"
 #~ msgid "Password:"
 #~ msgstr "Lösenord:"
 
-#~ msgid "Read&nbsp;More/Comment"
-#~ msgstr "Read&nbsp;Mer/Kommentar"
-
 #~ msgid "Version:"
 #~ msgstr "Version:"
 
@@ -23349,16 +23344,9 @@ msgstr "Användarenamn"
 #~ msgid "[Project Admin]"
 #~ msgstr "Projekt admin"
 
-#~ msgid "Registered:&nbsp;"
-#~ msgstr "Registrerad:"
-
 #, fuzzy
 #~ msgid "Project tree"
 #~ msgstr "Nytt projektnamn"
-
-#, fuzzy
-#~ msgid "Activity Ranking:&nbsp;"
-#~ msgstr "Aktivitet i procent:"
 
 #, fuzzy
 #~ msgid "Activity Ranking: %d"
@@ -25030,9 +25018,6 @@ msgstr "Användarenamn"
 #~ msgid "Add new documentation directory"
 #~ msgstr "Skicka ny dokumentation"
 
-#~ msgid "Code&nbsp;Snippets"
-#~ msgstr "Kodstycken"
-
 #, fuzzy
 #~ msgid "Public (PServer)"
 #~ msgstr "Öppet utrymme"
@@ -25269,12 +25254,6 @@ msgstr "Användarenamn"
 #~ msgid "Project: %1$s"
 #~ msgstr "Projekt admin: %1$s"
 
-#~ msgid "Step 1:&nbsp;&nbsp; Edit Release"
-#~ msgstr "Steg 1:&nbsp;&nbsp; Redigera utgåva"
-
-#~ msgid "Step 3: Edit Files In This Release"
-#~ msgstr "Steg 3: Redigera filer i denna utgåva"
-
 #~ msgid "Page Information"
 #~ msgstr "Sidinformation"
 
@@ -25337,9 +25316,6 @@ msgstr "Användarenamn"
 
 #~ msgid "Use Doc Mgr"
 #~ msgstr "Använd dokumentation"
-
-#~ msgid "Trove Categorization:&nbsp;"
-#~ msgstr "Resurser kategorisering:"
 
 #~ msgid "%1$s Site Statistics"
 #~ msgstr "%1$s Webbplats Statistik"
@@ -25695,9 +25671,6 @@ msgstr "Användarenamn"
 #~ msgid "Unfortunately, you have to be logged in to participate in surveys."
 #~ msgstr "Tyvärr, du måste vara inloggad för att delta i undersökningar."
 
-#~ msgid "Project&nbsp;Tree"
-#~ msgstr "Projektträd"
-
 #, fuzzy
 #~ msgid "Show Source"
 #~ msgstr "Visa källkod"
@@ -25739,12 +25712,6 @@ msgstr "Användarenamn"
 
 #~ msgid "Release &amp; Notes"
 #~ msgstr "Utgåva &amp; noteringar"
-
-#~ msgid "Short Description:&nbsp;"
-#~ msgstr "Kort beskrivning"
-
-#~ msgid "Homepage Link:&nbsp;"
-#~ msgstr "Hemsida Länk"
 
 #~ msgid "Download Your Nightly SCM Tree Tarball"
 #~ msgstr "Hämta ditt nattliga CVS-träds tarboll"
@@ -25912,18 +25879,6 @@ msgstr "Användarenamn"
 
 #~ msgid "DevProfile"
 #~ msgstr "Utvecklarprofil"
-
-#~ msgid "Check &nbsp;all"
-#~ msgstr "Markera &nbsp;alla"
-
-#~ msgid "Clear &nbsp;all"
-#~ msgstr "Avmarkera &nbsp;alla"
-
-#~ msgid "Project&nbsp;Openings"
-#~ msgstr "Hjälp Önskas"
-
-#~ msgid "My&nbsp;Page"
-#~ msgstr "Min&nbsp;sida"
 
 #~ msgid ""
 #~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "

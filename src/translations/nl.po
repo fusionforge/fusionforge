@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 14:22+0100\n"
+"POT-Creation-Date: 2014-01-08 15:50+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7921,9 +7921,15 @@ msgstr "Taak"
 msgid "No tag defined for this project"
 msgstr "Een dergelijke vacature komt in dit project niet voor"
 
+#: common/widget/Widget_ProjectInfo.class.php:65 www/admin/search.php:150
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#, php-format
+msgid "Registered"
+msgstr "Geregistreerd"
+
 #: common/widget/Widget_ProjectInfo.class.php:65
-msgid "Registered: "
-msgstr "Geregistreerd: "
+msgid ": "
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
 #: www/softwaremap/tag_cloud.php:163 www/softwaremap/trove_list.php:322
@@ -16363,12 +16369,6 @@ msgstr[1] "Gebruiker zoeken met criteria"
 msgid "Full Name"
 msgstr "Volledige naam"
 
-#: www/admin/search.php:150 www/softwaremap/tag_cloud.php:164
-#: www/softwaremap/trove_list.php:324
-#, php-format
-msgid "Registered"
-msgstr "Geregistreerd"
-
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
 #: www/include/trove.php:423 www/include/trove.php:427
@@ -23574,16 +23574,9 @@ msgstr "Gebruikersnaam"
 #~ msgid "[Project Admin]"
 #~ msgstr "Projectbeheer"
 
-#~ msgid "Registered:&nbsp;"
-#~ msgstr "Geregistreerd:"
-
 #, fuzzy
 #~ msgid "Project tree"
 #~ msgstr "Nieuwe projectnaam"
-
-#, fuzzy
-#~ msgid "Activity Ranking:&nbsp;"
-#~ msgstr "Activiteit percentiel:"
 
 #, fuzzy
 #~ msgid "Activity Ranking: %d"
@@ -25660,12 +25653,6 @@ msgstr "Gebruikersnaam"
 #~ msgid "Add new documentation directory"
 #~ msgstr "Toevoegen nieuwe documentatie"
 
-#~ msgid "My&nbsp;Page"
-#~ msgstr "Mijn pagina"
-
-#~ msgid "Code&nbsp;Snippets"
-#~ msgstr "Codefragmenten"
-
 #, fuzzy
 #~ msgid "Public (PServer)"
 #~ msgstr "Publiek domein"
@@ -25941,12 +25928,6 @@ msgstr "Gebruikersnaam"
 #~ msgid "Project: %1$s"
 #~ msgstr "Projectbeheer: %1$s"
 
-#~ msgid "Step 1:&nbsp;&nbsp; Edit Release"
-#~ msgstr "Stap 1:&nbsp;&nbsp; Release bewerken"
-
-#~ msgid "Step 3: Edit Files In This Release"
-#~ msgstr "Step 3: Bestanden aanpassen in deze release"
-
 #~ msgid "Page Information"
 #~ msgstr "Pagina informatie"
 
@@ -26012,9 +25993,6 @@ msgstr "Gebruikersnaam"
 
 #~ msgid "Use Tracker"
 #~ msgstr "Gebruik Tracker"
-
-#~ msgid "Trove Categorization:&nbsp;"
-#~ msgstr "Trove classificatie:"
 
 #~ msgid "%1$s Site Statistics"
 #~ msgstr "%1$s site statistieken"
@@ -26409,9 +26387,6 @@ msgstr "Gebruikersnaam"
 #~ msgid "Unfortunately, you have to be logged in to participate in surveys."
 #~ msgstr "Helaas, je moet ingelogd zijn om deel te kunnen nemen aan enquêtes."
 
-#~ msgid "Project&nbsp;Tree"
-#~ msgstr "Project&nbsp;overzicht"
-
 #, fuzzy
 #~ msgid "Show Source"
 #~ msgstr "Toon broncode"
@@ -26456,12 +26431,6 @@ msgstr "Gebruikersnaam"
 
 #~ msgid "Upload CSV"
 #~ msgstr "Uploaden CSV"
-
-#~ msgid "Short Description:&nbsp;"
-#~ msgstr "Korte omschrijving"
-
-#~ msgid "Homepage Link:&nbsp;"
-#~ msgstr "Link naar startpagina"
 
 #~ msgid "Download Your Nightly SCM Tree Tarball"
 #~ msgstr "Nachtelijke CVS tarball downloaden"
@@ -26639,9 +26608,6 @@ msgstr "Gebruikersnaam"
 
 #~ msgid "DevProfile"
 #~ msgstr "Ontwikkelaarsprofiel"
-
-#~ msgid "Registered: "
-#~ msgstr "Geregistreerd:"
 
 #~ msgid "Check  all"
 #~ msgstr "Alles  controleren"

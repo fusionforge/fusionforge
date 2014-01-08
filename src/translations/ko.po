@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 14:22+0100\n"
+"POT-Creation-Date: 2014-01-08 15:50+0100\n"
 "PO-Revision-Date: 2009-02-01 14:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7747,15 +7747,21 @@ msgstr "작업"
 msgid "No tag defined for this project"
 msgstr ""
 
+#: common/widget/Widget_ProjectInfo.class.php:65 www/admin/search.php:150
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#, php-format
+msgid "Registered"
+msgstr ""
+
 #: common/widget/Widget_ProjectInfo.class.php:65
-msgid "Registered: "
+msgid ": "
 msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
 #: www/softwaremap/tag_cloud.php:163 www/softwaremap/trove_list.php:322
 #, fuzzy, php-format
 msgid "Activity Ranking: <strong>%d</strong>"
-msgstr "프로젝트 활동 상황:&nbsp;"
+msgstr "프로젝트 활동 상황:"
 
 #: common/widget/Widget_ProjectInfo.class.php:84
 #, fuzzy, php-format
@@ -15428,7 +15434,7 @@ msgstr ""
 #: www/admin/index.php:50
 #, fuzzy, php-format
 msgid "Active site users: <strong>%d</strong>"
-msgstr "프로젝트 활동 상황:&nbsp;"
+msgstr "프로젝트 활동 상황:"
 
 #: www/admin/index.php:53
 msgid "Display Full User List/Edit Users"
@@ -15905,12 +15911,6 @@ msgstr[0] "User search with criteria"
 
 #: www/admin/search.php:149 www/register/index.php:188
 msgid "Full Name"
-msgstr ""
-
-#: www/admin/search.php:150 www/softwaremap/tag_cloud.php:164
-#: www/softwaremap/trove_list.php:324
-#, php-format
-msgid "Registered"
 msgstr ""
 
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
@@ -21892,7 +21892,7 @@ msgstr[0] ""
 #: www/softwaremap/tag_cloud.php:162
 #, fuzzy, php-format
 msgid "Activity Percentile: <strong>%3.0f</strong>"
-msgstr "프로젝트 활동 상황:&nbsp;"
+msgstr "프로젝트 활동 상황:"
 
 #: www/softwaremap/trove_list.php:56
 msgid "Software Map"
@@ -22813,20 +22813,9 @@ msgstr "사용자ID"
 #~ msgid "[Project Admin]"
 #~ msgstr "프로젝트 관리자"
 
-#~ msgid "Registered:&nbsp;"
-#~ msgstr "등록된 날짜:&nbsp;"
-
 #, fuzzy
 #~ msgid "Project tree"
 #~ msgstr "새 프로젝트 이름"
-
-#, fuzzy
-#~ msgid "Activity Ranking:&nbsp;"
-#~ msgstr "프로젝트 활동 상황:&nbsp;"
-
-#, fuzzy
-#~ msgid "Activity Ranking: %d"
-#~ msgstr "프로젝트 활동 상황:&nbsp;"
 
 #, fuzzy
 #~ msgid "No documents"
@@ -23933,9 +23922,6 @@ msgstr "사용자ID"
 #~ msgid "Add new documentation directory"
 #~ msgstr "새로운 문서 올리기"
 
-#~ msgid "Code&nbsp;Snippets"
-#~ msgstr "코드 라이브러리"
-
 #, fuzzy
 #~ msgid "Public (PServer)"
 #~ msgstr "공개 구역"
@@ -24119,12 +24105,6 @@ msgstr "사용자ID"
 #~ msgid "Project: %1$s"
 #~ msgstr "프로젝트 관리: %1$s"
 
-#~ msgid "Step 1:&nbsp;&nbsp; Edit Release"
-#~ msgstr "1단계: &nbsp;&nbsp; 릴리즈 편집"
-
-#~ msgid "Step 3: Edit Files In This Release"
-#~ msgstr "3단계: 이 릴리즈의 파일 편집하기"
-
 #~ msgid "Page Information"
 #~ msgstr "페이지 정보"
 
@@ -24172,9 +24152,6 @@ msgstr "사용자ID"
 
 #~ msgid "Use Doc Mgr"
 #~ msgstr "문서 관리자 사용"
-
-#~ msgid "Trove Categorization:&nbsp;"
-#~ msgstr "소프트웨어 맵 분류:&nbsp;"
 
 #, fuzzy
 #~ msgid "Title required"
@@ -24330,9 +24307,6 @@ msgstr "사용자ID"
 #~ msgid "Error - That user does not exist"
 #~ msgstr "오류 - 코드가 존재하지 않습니다."
 
-#~ msgid "Project&nbsp;Tree"
-#~ msgstr "프로젝트 트리"
-
 #~ msgid "No Files Currently Attached"
 #~ msgstr "현재 첨부 파일 없음"
 
@@ -24356,12 +24330,6 @@ msgstr "사용자ID"
 
 #~ msgid "Release &amp; Notes"
 #~ msgstr "릴리즈 &amp; 노트"
-
-#~ msgid "Short Description:&nbsp;"
-#~ msgstr "짧은 설명:&nbsp;"
-
-#~ msgid "Homepage Link:&nbsp;"
-#~ msgstr "홈페이지 링크:&nbsp;"
 
 #~ msgid "Download Your Nightly SCM Tree Tarball"
 #~ msgstr "CVS 트리 tarball 내려받기"

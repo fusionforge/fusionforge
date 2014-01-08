@@ -62,7 +62,7 @@ class Widget_ProjectInfo extends Widget {
 
 		// registration date
 		$project_start_date = $project->getStartDate();
-		print(_('Registered: ') .
+		print(_('Registered')._(': ').
 				'<span property="doap:created" content="'.date('Y-m-d', $project_start_date).'">'.
 				date(_('Y-m-d H:i'), $project_start_date).
 				"</span>\n");

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 14:22+0100\n"
+"POT-Creation-Date: 2014-01-08 15:50+0100\n"
 "PO-Revision-Date: 2009-02-19 23:28+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7904,10 +7904,15 @@ msgstr "Ataza"
 msgid "No tag defined for this project"
 msgstr "Proiektu honetan ez dago horrelako argitalpenik"
 
-#: common/widget/Widget_ProjectInfo.class.php:65
-#, fuzzy
-msgid "Registered: "
+#: common/widget/Widget_ProjectInfo.class.php:65 www/admin/search.php:150
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#, php-format
+msgid "Registered"
 msgstr "Erregistratua"
+
+#: common/widget/Widget_ProjectInfo.class.php:65
+msgid ": "
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
 #: www/softwaremap/tag_cloud.php:163 www/softwaremap/trove_list.php:322
@@ -12272,7 +12277,7 @@ msgstr ""
 #: plugins/oauthconsumer/www/get_access_token.php:164
 #: plugins/oauthconsumer/www/index.php:67 www/admin/responses_admin.php:90
 msgid "Go"
-msgstr "&amp;nbsp;Joan&amp;nbsp;"
+msgstr "Joan"
 
 #: plugins/oauthconsumer/www/callback.php:75
 #, fuzzy
@@ -16283,12 +16288,6 @@ msgstr[1] "Erabiltzaileak bilatu hirizpide hauen arabera"
 #: www/admin/search.php:149 www/register/index.php:188
 msgid "Full Name"
 msgstr "Izen osoa"
-
-#: www/admin/search.php:150 www/softwaremap/tag_cloud.php:164
-#: www/softwaremap/trove_list.php:324
-#, php-format
-msgid "Registered"
-msgstr "Erregistratua"
 
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
@@ -23320,12 +23319,6 @@ msgstr "Ezin da eguneratu"
 msgid "No User Name Provided"
 msgstr "Ez da erabiltzaile-izenik eman"
 
-#~ msgid "More than <strong>%1$s</strong> projects in result set."
-#~ msgstr "<strong>%1$s</strong> proiektu gehiago kategoria honetan."
-
-#~ msgid "%1$s Verification"
-#~ msgstr "%1$s -en baieztapena"
-
 #~ msgid "New category full name (Maximum length is 80 chars)"
 #~ msgstr "Kategoria berriaren izen osoa (muga 80 karaktere)"
 
@@ -23399,49 +23392,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #, fuzzy
 #~ msgid "[Delete]"
 #~ msgstr "Ezabatu"
-
-#, fuzzy
-#~ msgid "[Suspend]"
-#~ msgstr "Suspenditu"
-
-#, fuzzy
-#~ msgid "[Project Admin]"
-#~ msgstr "Proiektuaren administraria"
-
-#~ msgid "Registered:&nbsp;"
-#~ msgstr "Erregistratua:&amp;nbsp;"
-
-#, fuzzy
-#~ msgid "Project tree"
-#~ msgstr "Azpiproiektuaren izen berria"
-
-#, fuzzy
-#~ msgid "Activity Ranking:&nbsp;"
-#~ msgstr "Jarduera portzentajea:&amp;nbsp;"
-
-#, fuzzy
-#~ msgid "Activity Ranking: %d"
-#~ msgstr "Jarduera portzentajea:&amp;nbsp;"
-
-#, fuzzy
-#~ msgid "No documents"
-#~ msgstr "Azpi proiektu bat gehitu"
-
-#, fuzzy
-#~ msgid "Mailing Lists Administration"
-#~ msgstr "Posta Zerrenda Administrazioa"
-
-#, fuzzy
-#~ msgid "Last modified"
-#~ msgstr "Zerrenda Gehitua"
-
-#, fuzzy
-#~ msgid "New document"
-#~ msgstr "Azpi proiektu bat gehitu"
-
-#, fuzzy
-#~ msgid "New folder"
-#~ msgstr "Rol Berria"
 
 #~ msgid "You can only monitor if you are logged in"
 #~ msgstr "Monitorizatzeko saio hasia izan behar duzu."
@@ -24442,9 +24392,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #~ msgid "Yes, I'm sure"
 #~ msgstr "Bai, ziur nago"
 
-#~ msgid "go"
-#~ msgstr "&amp;nbsp;Joan&amp;nbsp;"
-
 #~ msgid "If you're aren't sure then why did you click 'Delete'?"
 #~ msgstr "Ziur ez bazenden, zergatik sakatu zenuen ezabatzeko?"
 
@@ -25294,9 +25241,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #~ msgid "ERROR: Could not add admin to newly created group: %s"
 #~ msgstr "ERROREA: Ezin da administratzailea gehitu talde sortu berrira: %s"
 
-#~ msgid "Code&nbsp;Snippets"
-#~ msgstr "Kode adabakiak"
-
 #, fuzzy
 #~ msgid "Public (PServer)"
 #~ msgstr "Gune publikoa"
@@ -25566,12 +25510,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #~ msgid "Project: %1$s"
 #~ msgstr "Administrazioaren laburpena"
 
-#~ msgid "Step 1:&nbsp;&nbsp; Edit Release"
-#~ msgstr "1º urratsa:&nbsp;&nbsp; Bertsioa aldatu"
-
-#~ msgid "Step 3: Edit Files In This Release"
-#~ msgstr "3º urratsa: Bertsio honetan fitxeroak aldatu"
-
 #~ msgid "Page Information"
 #~ msgstr "Informazio orria"
 
@@ -25635,9 +25573,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 
 #~ msgid "Use Doc Mgr"
 #~ msgstr "Dokumentazio kudeatzailea erabili"
-
-#~ msgid "Trove Categorization:&nbsp;"
-#~ msgstr "Proiektu kategorizazioa:"
 
 #~ msgid "%1$s Site Statistics"
 #~ msgstr "%1$s -en estatistikak"
@@ -26008,9 +25943,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 #~ msgstr ""
 #~ "Zoritxarrez, sesio bat hasi behar duzu inkesta baten parte hartzeko."
 
-#~ msgid "Project&nbsp;Tree"
-#~ msgstr "Proiektuaren zuhaitza"
-
 #, fuzzy
 #~ msgid "Show Source"
 #~ msgstr "Iturburua erakutsi"
@@ -26052,12 +25984,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 
 #~ msgid "Release &amp; Notes"
 #~ msgstr "Bertsioaren oharrak"
-
-#~ msgid "Short Description:&nbsp;"
-#~ msgstr "Deskribapen laburra"
-
-#~ msgid "Homepage Link:&nbsp;"
-#~ msgstr "Lotura hasierako orrira"
 
 #~ msgid "Download Your Nightly SCM Tree Tarball"
 #~ msgstr "Deskargatu zure gaueko tar-a CVS zuhaitzetik"
@@ -26225,21 +26151,6 @@ msgstr "Ez da erabiltzaile-izenik eman"
 
 #~ msgid "DevProfile"
 #~ msgstr "Kolaboratzailearen profila"
-
-#~ msgid "Registered:"
-#~ msgstr "Erregistratua:"
-
-#~ msgid "Check &nbsp;all"
-#~ msgstr "Denak aukeratu"
-
-#~ msgid "Clear &nbsp;all"
-#~ msgstr "Denak ezabatu"
-
-#~ msgid "Project&nbsp;Openings"
-#~ msgstr "Laguntza eskaerak"
-
-#~ msgid "My&nbsp;Page"
-#~ msgstr "Nere orria"
 
 #~ msgid ""
 #~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 14:22+0100\n"
+"POT-Creation-Date: 2014-01-08 15:50+0100\n"
 "PO-Revision-Date: 2009-01-15 14:05+0100\n"
 "Last-Translator: Roland Mas <lolando@debian.org>\n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7724,10 +7724,15 @@ msgstr ""
 msgid "No tag defined for this project"
 msgstr ""
 
+#: common/widget/Widget_ProjectInfo.class.php:65 www/admin/search.php:150
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#, php-format
+msgid "Registered"
+msgstr ""
+
 #: common/widget/Widget_ProjectInfo.class.php:65
-#, fuzzy
-msgid "Registered: "
-msgstr "登録"
+msgid ": "
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
 #: www/softwaremap/tag_cloud.php:163 www/softwaremap/trove_list.php:322
@@ -15901,12 +15906,6 @@ msgstr[0] ""
 msgid "Full Name"
 msgstr ""
 
-#: www/admin/search.php:150 www/softwaremap/tag_cloud.php:164
-#: www/softwaremap/trove_list.php:324
-#, php-format
-msgid "Registered"
-msgstr ""
-
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
 #: www/include/trove.php:423 www/include/trove.php:427
@@ -22635,41 +22634,6 @@ msgstr ""
 msgid "No User Name Provided"
 msgstr ""
 
-#~ msgid "%1$s Verification"
-#~ msgstr "%1$s 認証"
-
-#, fuzzy
-#~ msgid "Site Admin: Successfully Changed User Password"
-#~ msgstr "パスワード変更"
-
-#, fuzzy
-#~ msgid "Repository name:"
-#~ msgstr "ログイン名:"
-
-#, fuzzy
-#~ msgid "You must supply a first name."
-#~ msgstr "ユーザー名を入力して下さい。(必須)"
-
-#, fuzzy
-#~ msgid "You must supply a last name."
-#~ msgstr "ユーザー名を入力して下さい。(必須)"
-
-#, fuzzy
-#~ msgid "Account options:"
-#~ msgstr "アカウントがアクティブではありません。"
-
-#, fuzzy
-#~ msgid "News Administration"
-#~ msgstr "フォーラム: 管理"
-
-#, fuzzy
-#~ msgid "No project found."
-#~ msgstr "ニュースが見つかりません"
-
-#, fuzzy
-#~ msgid "This user is not a member of any projects."
-#~ msgstr "あなたはアクティブプロジェクトのメンバーではありません。"
-
 #~ msgid "Personal Page For %s"
 #~ msgstr "%sのパーソナルページ"
 
@@ -22703,16 +22667,9 @@ msgstr ""
 #~ msgid "[Delete]"
 #~ msgstr "ファイル"
 
-#~ msgid "Registered:&nbsp;"
-#~ msgstr "登録:"
-
 #, fuzzy
 #~ msgid "Project tree"
 #~ msgstr "プロジェクト管理"
-
-#, fuzzy
-#~ msgid "Activity Ranking:&nbsp;"
-#~ msgstr "活動率:"
 
 #, fuzzy
 #~ msgid "Activity Ranking: %d"
@@ -23636,9 +23593,6 @@ msgstr ""
 #~ msgid "Add new documentation directory"
 #~ msgstr "新規ドキュメントの送信"
 
-#~ msgid "Code&nbsp;Snippets"
-#~ msgstr "サンプルコード"
-
 #, fuzzy
 #~ msgid "Public (PServer)"
 #~ msgstr "パブリックエリア"
@@ -23878,9 +23832,6 @@ msgstr ""
 #~ msgid "Use Task Manager"
 #~ msgstr "タスクマネージャ"
 
-#~ msgid "Project&nbsp;Tree"
-#~ msgstr "プロジェクト&nbsp;ツリー"
-
 #, fuzzy
 #~ msgid "Group name is already exists"
 #~ msgstr "そのアカウントはすでにアクティブです。"
@@ -23915,12 +23866,6 @@ msgstr ""
 
 #~ msgid "Error doing insert"
 #~ msgstr "インサート中にエラーがありました。"
-
-#~ msgid "Project&nbsp;Openings"
-#~ msgstr "プロジェクト協力者募集"
-
-#~ msgid "My&nbsp;Page"
-#~ msgstr "マイページ"
 
 #~ msgid ""
 #~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 14:22+0100\n"
+"POT-Creation-Date: 2014-01-08 15:50+0100\n"
 "PO-Revision-Date: 2009-02-01 14:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -3685,7 +3685,7 @@ msgstr "Оценка на уменията на потребителя"
 #: common/include/Navigation.class.php:235
 #, fuzzy
 msgid "My Page"
-msgstr "Моята&nbsp;страница"
+msgstr "Моята страница"
 
 #: common/include/Navigation.class.php:237
 msgid "Your Page, widgets selected by you to follow your items."
@@ -7711,10 +7711,15 @@ msgstr ""
 msgid "No tag defined for this project"
 msgstr ""
 
+#: common/widget/Widget_ProjectInfo.class.php:65 www/admin/search.php:150
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#, php-format
+msgid "Registered"
+msgstr ""
+
 #: common/widget/Widget_ProjectInfo.class.php:65
-#, fuzzy
-msgid "Registered: "
-msgstr "Регистриране"
+msgid ": "
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
 #: www/softwaremap/tag_cloud.php:163 www/softwaremap/trove_list.php:322
@@ -15943,12 +15948,6 @@ msgstr[1] ""
 msgid "Full Name"
 msgstr "Пълно наименование"
 
-#: www/admin/search.php:150 www/softwaremap/tag_cloud.php:164
-#: www/softwaremap/trove_list.php:324
-#, php-format
-msgid "Registered"
-msgstr ""
-
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
 #: www/include/trove.php:423 www/include/trove.php:427
@@ -20569,7 +20568,7 @@ msgstr "Редактиране на въпроси"
 
 #: www/project/admin/users.php:429
 msgid "Edit Observer"
-msgstr "Права&nbsp;&nbsp;&nbsp;"
+msgstr "Права"
 
 #: www/project/admin/users.php:433
 msgid "Currently used external roles"
@@ -22764,14 +22763,6 @@ msgid "No User Name Provided"
 msgstr ""
 
 #, fuzzy
-#~ msgid "Site Admin: Successfully Changed User Password"
-#~ msgstr "Паролата сменена успешно"
-
-#, fuzzy
-#~ msgid "Repository name:"
-#~ msgstr "Проекти на потребителя"
-
-#, fuzzy
 #~ msgid "You must supply a first name."
 #~ msgstr "Името е задължително поле"
 
@@ -22822,65 +22813,6 @@ msgstr ""
 
 #~ msgid "Forums: Administration"
 #~ msgstr "Форуми: Администрация"
-
-#, fuzzy
-#~ msgid "Change PW"
-#~ msgstr "Промяна на изгледа"
-
-#, fuzzy
-#~ msgid "[DevProfile]"
-#~ msgstr "Профил на Разработчик"
-
-#, fuzzy
-#~ msgid "[Activate]"
-#~ msgstr "Активни инструменти"
-
-#, fuzzy
-#~ msgid "[Delete]"
-#~ msgstr "Файл"
-
-#~ msgid "Registered:&nbsp;"
-#~ msgstr "Регистриран на:&nbsp;"
-
-#, fuzzy
-#~ msgid "Project tree"
-#~ msgstr "Проекти на потребителя"
-
-#, fuzzy
-#~ msgid "Activity Ranking:&nbsp;"
-#~ msgstr "Процент на активност:&nbsp;"
-
-#, fuzzy
-#~ msgid "Activity Ranking: %d"
-#~ msgstr "Процент на активност:&nbsp;"
-
-#, fuzzy
-#~ msgid "No documents"
-#~ msgstr "Публикуване на документ"
-
-#, fuzzy
-#~ msgid "Mailing Lists Administration"
-#~ msgstr "Пощенски списъци"
-
-#, fuzzy
-#~ msgid "Last modified"
-#~ msgstr "Дневникът е обновен"
-
-#, fuzzy
-#~ msgid "New document"
-#~ msgstr "Публикуване на документ"
-
-#, fuzzy
-#~ msgid "New folder"
-#~ msgstr "Име"
-
-#, fuzzy
-#~ msgid "File-Release"
-#~ msgstr "Следващи Резултати"
-
-#, fuzzy
-#~ msgid "Documents are also available thru webdav access"
-#~ msgstr "Име на документа"
 
 #~ msgid "Missing Password Or Users Name"
 #~ msgstr "Липсващо име или парола"
@@ -23701,9 +23633,6 @@ msgstr ""
 #~ msgid "Add new documentation directory"
 #~ msgstr "Публикуване на документ"
 
-#~ msgid "Code&nbsp;Snippets"
-#~ msgstr "Фрагменти"
-
 #, fuzzy
 #~ msgid "Public (PServer)"
 #~ msgstr "Общодостъпни места"
@@ -23990,9 +23919,6 @@ msgstr ""
 #~ "><p>Проучването ще може да се достъпи чрез следния URL: %1$s, където XX е "
 #~ "идентификатора на проучването"
 
-#~ msgid "Project&nbsp;Tree"
-#~ msgstr "Каталог"
-
 #, fuzzy
 #~ msgid "Group name is already exists"
 #~ msgstr "Това потребителско име вече е заето."
@@ -24018,12 +23944,6 @@ msgstr ""
 
 #~ msgid "DATE"
 #~ msgstr "ДАТА"
-
-#~ msgid "Short Description:&nbsp;"
-#~ msgstr "<strong>Кратко описание на проекта:</strong>&nbsp;"
-
-#~ msgid "Homepage Link:&nbsp;"
-#~ msgstr "Сайт на проекта:&nbsp;"
 
 #, fuzzy
 #~ msgid "Tracker admin"
@@ -24080,15 +24000,6 @@ msgstr ""
 
 #~ msgid "DevProfile"
 #~ msgstr "Профил на Разработчик"
-
-#~ msgid "Registered:"
-#~ msgstr "Регистриране:"
-
-#~ msgid "Project&nbsp;Openings"
-#~ msgstr "Помощ"
-
-#~ msgid "My&nbsp;Page"
-#~ msgstr "Моята&nbsp;страница"
 
 #~ msgid ""
 #~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "

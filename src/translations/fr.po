@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 14:22+0100\n"
+"POT-Creation-Date: 2014-01-08 15:50+0100\n"
 "PO-Revision-Date: 2013-06-03 17:17+0100\n"
 "Last-Translator: Marc-Etienne Vargenau <Marc-Etienne.Vargenau@alcatel-lucent."
 "com>\n"
@@ -7618,9 +7618,15 @@ msgstr "Mots-clefs"
 msgid "No tag defined for this project"
 msgstr "Ce projet n'a pas défini de mots-clefs"
 
+#: common/widget/Widget_ProjectInfo.class.php:65 www/admin/search.php:150
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#, php-format
+msgid "Registered"
+msgstr "Inscrit"
+
 #: common/widget/Widget_ProjectInfo.class.php:65
-msgid "Registered: "
-msgstr "Date d'inscription :"
+msgid ": "
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
 #: www/softwaremap/tag_cloud.php:163 www/softwaremap/trove_list.php:322
@@ -15744,12 +15750,6 @@ msgstr[1] "Recherche de projets selon les critères <em>%s</em> : %d résultats
 msgid "Full Name"
 msgstr "Nom complet"
 
-#: www/admin/search.php:150 www/softwaremap/tag_cloud.php:164
-#: www/softwaremap/trove_list.php:324
-#, php-format
-msgid "Registered"
-msgstr "Inscrit"
-
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
 #: www/include/trove.php:423 www/include/trove.php:427
@@ -22936,14 +22936,8 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ "Erreur : le site a activé le suivi de versions, mais aucun greffon "
 #~ "adéquat n'est installé."
 
-#~ msgid "Registered:&nbsp;"
-#~ msgstr "Enregistré le&nbsp;:&nbsp;"
-
 #~ msgid "Project tree"
 #~ msgstr "Arbre des projets"
-
-#~ msgid "Activity Ranking:&nbsp;"
-#~ msgstr "Rang d'activité&nbsp;:&nbsp;"
 
 #~ msgid "Activity Ranking: %d"
 #~ msgstr "Rang d'activité : %d"
@@ -24187,9 +24181,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "Site-Wide Task &amp; Hours (report)"
 #~ msgstr "Liste globale des tâches et des heures (rapport)"
-
-#~ msgid "Release date"
-#~ msgstr "Date de la version&nbsp;"
 
 #~ msgid "Trackers dashboard"
 #~ msgstr "Tableau de bord des outils de suivi"
@@ -26970,12 +26961,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgid "Error: Enable to get users from group"
 #~ msgstr "Erreur lors de la récupération des membres d'un groupe."
 
-#~ msgid "My&nbsp;Page"
-#~ msgstr "Ma page"
-
-#~ msgid "Code&nbsp;Snippets"
-#~ msgstr "Boite à outils"
-
 #~ msgid "Public (PServer)"
 #~ msgstr "Accès public (PServer)"
 
@@ -27409,12 +27394,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgid "Project: %1$s"
 #~ msgstr "Projet %1$s"
 
-#~ msgid "Step 1:&nbsp;&nbsp; Edit Release"
-#~ msgstr "Etape 1&nbsp;:&nbsp;Éditer la version"
-
-#~ msgid "Step 3: Edit Files In This Release"
-#~ msgstr "Etape 3&nbsp;:&nbsp;Éditer les fichiers dans cette version"
-
 #~ msgid "Page Information"
 #~ msgstr "Page d'information"
 
@@ -27471,12 +27450,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgid "Edit Group Info"
 #~ msgstr "Édition des infos publiques"
 
-#~ msgid "Descriptive Group Name"
-#~ msgstr "Nom précis du projet&nbsp;"
-
-#~ msgid "Active Features"
-#~ msgstr "Services actifs&nbsp;"
-
 #~ msgid "Use Project/Task Manager"
 #~ msgstr "Gestionnaire de tâches"
 
@@ -27488,9 +27461,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "Use Tracker"
 #~ msgstr "Suivi"
-
-#~ msgid "Trove Categorization:&nbsp;"
-#~ msgstr "Classement du projet dans l'arbre&nbsp;:&nbsp;"
 
 #~ msgid ""
 #~ "<strong><span style=\"text-decoration:underline\">Add New Virtual Host</"
@@ -27783,12 +27753,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgid "No Document Groups defined"
 #~ msgstr "Aucun groupe de document défini"
 
-#~ msgid "Add a group"
-#~ msgstr "Ajouter un groupe&nbsp;"
-
-#~ msgid "New Group Name"
-#~ msgstr "Nouveau nom du groupe&nbsp;"
-
 #~ msgid "Edit Groups"
 #~ msgstr "Modifier les groupes"
 
@@ -28001,9 +27965,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgid "Unfortunately, you have to be logged in to participate in surveys."
 #~ msgstr "Malheuresement (Voir contexte)"
 
-#~ msgid "Project&nbsp;Tree"
-#~ msgstr "Arbre des projets"
-
 #~ msgid "Show Source"
 #~ msgstr "Montrer le source"
 
@@ -28175,9 +28136,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 #~ msgid "Error: Please enter a term to search for"
 #~ msgstr "Erreur : vous devez entrer un terme à rechercher"
 
-#~ msgid "Registered:"
-#~ msgstr "Inscrit:"
-
 #~ msgid "Document Manager Access Denied."
 #~ msgstr "Accès refusé au gestionnaire de documents"
 
@@ -28231,15 +28189,6 @@ msgstr "Aucun nom d'utilisateur n'a été fourni"
 
 #~ msgid "Alcatel-Lucent INTERNAL USE ONLY"
 #~ msgstr "UTILISATION INTERNE À Alcatel-Lucent UNIQUEMENT"
-
-#~ msgid "Check &nbsp;all"
-#~ msgstr "Cocher tout"
-
-#~ msgid "Clear &nbsp;all"
-#~ msgstr "Décocher tout"
-
-#~ msgid "Project&nbsp;Openings"
-#~ msgstr "Demande d'aide"
 
 #~ msgid "Missing Document Group"
 #~ msgstr "Groupe de documents manquant"

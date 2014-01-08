@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 14:22+0100\n"
+"POT-Creation-Date: 2014-01-08 15:50+0100\n"
 "PO-Revision-Date: 2009-02-01 14:35+0100\n"
 "Last-Translator: \n"
 "Language-Team: FusionForge team <fusionforge-general@lists.fusionforge.org>\n"
@@ -7398,8 +7398,14 @@ msgstr ""
 msgid "No tag defined for this project"
 msgstr ""
 
+#: common/widget/Widget_ProjectInfo.class.php:65 www/admin/search.php:150
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#, php-format
+msgid "Registered"
+msgstr "Registrado"
+
 #: common/widget/Widget_ProjectInfo.class.php:65
-msgid "Registered: "
+msgid ": "
 msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
@@ -15164,12 +15170,6 @@ msgstr[1] ""
 msgid "Full Name"
 msgstr "Nome Completo"
 
-#: www/admin/search.php:150 www/softwaremap/tag_cloud.php:164
-#: www/softwaremap/trove_list.php:324
-#, php-format
-msgid "Registered"
-msgstr "Registrado"
-
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
 #: www/include/trove.php:423 www/include/trove.php:427
@@ -21873,21 +21873,6 @@ msgstr ""
 #~ msgid "Forums: Administration"
 #~ msgstr "Fóruns: Administração"
 
-#, fuzzy
-#~ msgid "Change PW"
-#~ msgstr "Mudar"
-
-#, fuzzy
-#~ msgid "[Project Admin]"
-#~ msgstr "Administrador de Projeto"
-
-#~ msgid "Registered:&nbsp;"
-#~ msgstr "Registrado:&nbsp;"
-
-#, fuzzy
-#~ msgid "Mailing Lists Administration"
-#~ msgstr "Administração de Host Virtual"
-
 #~ msgid "You can only monitor if you are logged in"
 #~ msgstr "Você Só Pode Monitorar Se Você Estiver Logado"
 
@@ -22596,9 +22581,6 @@ msgstr ""
 #~ msgid "Submit Edit"
 #~ msgstr "Enviar Edição"
 
-#~ msgid "Code&nbsp;Snippets"
-#~ msgstr "Trechos&nbsp;de&nbsp;Código"
-
 #~ msgid "ArtifactCanned: name and assignee are Required"
 #~ msgstr "Artefato Pré-definido: nome e inscrito são Requeridos"
 
@@ -22674,12 +22656,6 @@ msgstr ""
 #~ msgid "Document Manager: Submit New Documentation"
 #~ msgstr "Gerenciador de Documentos: Enviar Nova Documentação"
 
-#~ msgid "Step 1:&nbsp;&nbsp; Edit Release"
-#~ msgstr "Passo 1:&nbsp;&nbsp; Editar Liberação"
-
-#~ msgid "Step 3: Edit Files In This Release"
-#~ msgstr "Passo 3: Editar Arquivo Dessa Liberação"
-
 #~ msgid "Page Information"
 #~ msgstr "Informações da Página"
 
@@ -22736,9 +22712,6 @@ msgstr ""
 
 #~ msgid "Use Doc Mgr"
 #~ msgstr "Usar Ger. de Doc."
-
-#~ msgid "Trove Categorization:&nbsp;"
-#~ msgstr "Categorização do Repositório&nbsp;"
 
 #~ msgid "%1$s I18n Statistics"
 #~ msgstr "Estatísticas de I18n do %1$s"
@@ -22969,9 +22942,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Infelizmente, você precisa estar logado para participar de pesquisas."
 
-#~ msgid "Project&nbsp;Tree"
-#~ msgstr "Árvore&nbsp;de&nbsp;Projetos"
-
 #~ msgid "No Files Currently Attached"
 #~ msgstr "Nenhum Arquivo Anexado Atualmente"
 
@@ -22989,12 +22959,6 @@ msgstr ""
 
 #~ msgid "Release &amp; Notes"
 #~ msgstr "Notas de &amp; Liberação"
-
-#~ msgid "Short Description:&nbsp;"
-#~ msgstr "Descrição Curta:&nbsp;"
-
-#~ msgid "Homepage Link:&nbsp;"
-#~ msgstr "Link da Homepage:&nbsp;"
 
 #~ msgid "Download Your Nightly SCM Tree Tarball"
 #~ msgstr "Descarregue Seu Tarball Noturno da Árvore CVS"

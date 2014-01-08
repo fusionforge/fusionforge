@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FusionForge 5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 14:22+0100\n"
+"POT-Creation-Date: 2014-01-08 15:50+0100\n"
 "PO-Revision-Date: 2009-09-21 10:21+0100\n"
 "Last-Translator: José Manuel Castroagudín Silva <chavescesures@gmail.com>\n"
 "Language-Team: Galician <g11n@mancomun.org>\n"
@@ -7939,10 +7939,15 @@ msgstr "Etiquetas"
 msgid "No tag defined for this project"
 msgstr "Este proxecto non ten definida ningunha etiqueta"
 
+#: common/widget/Widget_ProjectInfo.class.php:65 www/admin/search.php:150
+#: www/softwaremap/tag_cloud.php:164 www/softwaremap/trove_list.php:324
+#, php-format
+msgid "Registered"
+msgstr "Rexistrado"
+
 #: common/widget/Widget_ProjectInfo.class.php:65
-#, fuzzy
-msgid "Registered: "
-msgstr "Rexistrado "
+msgid ": "
+msgstr ""
 
 #: common/widget/Widget_ProjectInfo.class.php:83
 #: www/softwaremap/tag_cloud.php:163 www/softwaremap/trove_list.php:322
@@ -16455,12 +16460,6 @@ msgstr[1] "Busca do grupo cos criterios <em>%s</em>: %d coincidencias"
 msgid "Full Name"
 msgstr "Nome completo"
 
-#: www/admin/search.php:150 www/softwaremap/tag_cloud.php:164
-#: www/softwaremap/trove_list.php:324
-#, php-format
-msgid "Registered"
-msgstr "Rexistrado"
-
 #: www/admin/trove/trove_cat_add.php:60 www/admin/trove/trove_cat_edit.php:69
 #: www/include/trove.php:410 www/include/trove.php:419
 #: www/include/trove.php:423 www/include/trove.php:427
@@ -20876,7 +20875,7 @@ msgstr "Directorio do grupo no servidor do intérprete de ordes:"
 #, fuzzy
 msgid "Project WWW directory on shell server:"
 msgstr ""
-"Directorio da web do proxecto no servidor de intérprete de ordes:&nbsp;"
+"Directorio da web do proxecto no servidor de intérprete de ordes:"
 
 #: www/project/admin/index.php:134
 #, fuzzy
@@ -23592,9 +23591,6 @@ msgstr "Non se puido actualizar"
 msgid "No User Name Provided"
 msgstr "Non se introduciu un nome de usuario"
 
-#~ msgid "Registered: <strong>%s</strong>"
-#~ msgstr "Rexistrados: <strong>%s</strong> "
-
 #, fuzzy
 #~ msgid "You must supply a first name."
 #~ msgstr "Debe proporcionar o seu nome."
@@ -23718,15 +23714,9 @@ msgstr "Non se introduciu un nome de usuario"
 #~ "Erro - o sitio ten sistema de xestión de código pero non ten ningún "
 #~ "plugin rexistrado"
 
-#~ msgid "Registered:&nbsp;"
-#~ msgstr "Rexistrado:&nbsp;"
-
 #, fuzzy
 #~ msgid "Project tree"
 #~ msgstr "Árbore de proxectos"
-
-#~ msgid "Activity Ranking:&nbsp;"
-#~ msgstr "Clasificación por actividade:&nbsp;"
 
 #~ msgid "Activity Ranking: %d"
 #~ msgstr "Clasificación por actividade: %d"
@@ -26450,16 +26440,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "ERROR: Could Not Add User To Group: %s"
 #~ msgstr "ERRO: Non se puido engadir o usuario ao grupo: %s"
 
-# por que emprega &nbsp; ??
-# habería que poñer 2 &nbsp; , un en cada espazo??
-#~ msgid "My&nbsp;Page"
-#~ msgstr "A miña&nbsp;páxina"
-
-# por que emprega &nbsp; ??
-# habería que poñer 2 &nbsp; , un en cada espazo??
-#~ msgid "Code&nbsp;Snippets"
-#~ msgstr "Fragmentos&nbsp;de código"
-
 #~ msgid "Public (PServer)"
 #~ msgstr "Público (Pserver) "
 
@@ -26898,12 +26878,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "Project: %1$s"
 #~ msgstr "Proxecto: %1$s"
 
-#~ msgid "Step 1:&nbsp;&nbsp; Edit Release"
-#~ msgstr "1.º paso:&nbsp;&nbsp; edite a versión"
-
-#~ msgid "Step 3: Edit Files In This Release"
-#~ msgstr "3.º paso: edite os ficheiros nesta versión"
-
 #~ msgid "Page Information"
 #~ msgstr "Información de páxina"
 
@@ -26978,9 +26952,6 @@ msgstr "Non se introduciu un nome de usuario"
 
 #~ msgid "Use Tracker"
 #~ msgstr "Usar o rexistro"
-
-#~ msgid "Trove Categorization:&nbsp;"
-#~ msgstr "Categorización do proxecto:&nbsp;"
 
 #~ msgid ""
 #~ "<strong><span style=\"text-decoration:underline\">Add New Virtual Host</"
@@ -27532,9 +27503,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "Unfortunately, you have to be logged in to participate in surveys."
 #~ msgstr "Debe comezar a sesión para participar nunha enquisa"
 
-#~ msgid "Project&nbsp;Tree"
-#~ msgstr "Árbore de proxectos"
-
 #~ msgid "Show Source"
 #~ msgstr "Amosar fonte "
 
@@ -27714,12 +27682,6 @@ msgstr "Non se introduciu un nome de usuario"
 #~ msgid "Upload CSV"
 #~ msgstr "Subir un CSV"
 
-#~ msgid "Short Description:&nbsp;"
-#~ msgstr "Descrición curta:&nbsp;"
-
-#~ msgid "Homepage Link:&nbsp;"
-#~ msgstr "Ligazón da páxina de inicio:&nbsp;"
-
 #~ msgid "Download Your Nightly SCM Tree Tarball"
 #~ msgstr "Descargar o seu .tar nocturno da árbore SCM"
 
@@ -27895,20 +27857,6 @@ msgstr "Non se introduciu un nome de usuario"
 
 #~ msgid "DevProfile"
 #~ msgstr "Perfil de desenvolvedor"
-
-#~ msgid "Registered:"
-#~ msgstr "Rexistrado:"
-
-#~ msgid "Check &nbsp;all"
-#~ msgstr "Comprobar &nbsp;todo"
-
-#~ msgid "Clear &nbsp;all"
-#~ msgstr "Limpar &nbsp;todo"
-
-# por que emprega &nbsp; ??
-# habería que poñer 2 &nbsp; , un en cada espazo??
-#~ msgid "Project&nbsp;Openings"
-#~ msgstr "Aperturas&nbsp;de proxectos"
 
 #~ msgid ""
 #~ "<strong>Document Title</strong>:  Refers to the relatively brief title of "
